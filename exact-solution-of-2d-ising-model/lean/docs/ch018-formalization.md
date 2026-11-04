@@ -94,6 +94,10 @@
 | **`CheckFermi.exists_eta_with_generator` / `exists_eta` / `eta` / `eta_mem` / `epsilon_mul_Qproj` / `exists_generator_of_eta`** | **`∃ η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε`**（`η_ε` を定めた `q` と `εq = η_ε q` を組で持つ） | **(1)** |
 | `CheckFermi.smul_generator_eq_eta_smul` / **`eta_unique`** | 一意性の 6 行の鎖 `η'q = … = εq = ηq` と、`q ≠ 0` による `η' = η_ε` | **(1) の一意性** |
 | `CheckFermi.nOp_mulVec_generator_eq_zero` / `ann_mulVec_cre_mulVec_generator` / `cre_mulVec_generator_ne_zero` | `ň_μ q = 0`（6 行）、`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行。Lean の `ann μ` が人手の `ψ̌_{M+1−μ}`）、背理法の 3 行で `ψ̌_μ^† q ≠ 0` | (2) Step 1 |
+| `CheckFermi.nOp_mul_cre` | `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行） | (2) Step 2 冒頭 |
+| `CheckFermi.defFactor_of_notMem` / `defFactor_of_mem` / `defFactor_insert_of_ne` | `A_μ^ε = I − ň_μ`（`ε_μ = 0`、8 行）、`A_μ^{ε'} = ň_μ`（`ε'_μ = 1`、8 行）、`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`（Lean の `ε'` は `insert μ T`） | (2) Step 2 |
+| `CheckFermi.commute_defFactor_of_commute` / `nOp_mul_defFactor` / `defFactor_mul_defFactor` / `cre_mul_defFactor_of_ne` | `Xň_ν = ň_νX` ⇒ `XA_ν^δ = A_ν^δX`（3 式と 5 行）と、`X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†`（`ν ≠ μ`） | (2) Step 2 |
+| `CheckFermi.nOp_mul_cre_of_necSuf` / `commute_defFactor_of_commute_of_necSuf` | 同じ主張を必要十分版 `NecSuf.num_mul_cre'` / `NecSuf.commute_defFactor_of_commute'` の特殊化として | (2) Step 2 |
 | `CheckFermi.epsilon_mulVec_cre_mulVec_generator` | `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | (2) Step 3 の前半 |
 | **`CheckFermi.eta_insert`** | **反転則 `η_{ε[μ→1]} = −η_ε`**（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じている。上の数ベクトルの鎖へ組み替えるのは Step 2 を置いた後） | **(2)** |
 | `CheckFermi.eta_univ_eq_aux` | `|ε|` に関する帰納法の補助 | (3) |
@@ -254,7 +258,8 @@
 | `NecSuf.commute_defFactor_of_commute'` | `en = ne` ⇒ `e(cn + d(1 − n)) = (cn + d(1 − n))e`（`c`・`d` は無関係な二つのスカラー） | `MulOneClass A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `SMul 𝕜 A` + `SMulCommClass` + `IsScalarTower`（`𝕜` に構造なし。`d = 1 − c`・`c ∈ {0,1}`・`n` の冪等性は不要） | `epsilon_anticommutes_with_check_Z_Y` (4) の `A_ν` の鎖 |
 | **`NecSuf.commute_parity_finProdLeft_defFactor`** | **`e` が `c_ν`, `a_ν` と反交換 ⇒ `e` は `∏_ν (c'_ν n_ν + d'_ν(1 − n_ν))` と可換**（具体版と同じ並び） | 同上で `MulOneClass A` を `Monoid A` に（有限積に積の結合則が効く） | 同 (4) 後半 |
 | **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換**（添字を `Finset` で取る `projOn` の形。`M = 0` の埋め合わせに使う） | **`Ring A` だけ**（`projOn` の定義が要する） | 同 (4) 後半 |
-| `NecSuf.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
+| `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合則・可換性・逆元則、右分配則、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
+| `NecSuf.num_mul_cre` | `n_i c_i = c_i`（反交換関係から `ann_mul_cre` で `a_ic_i = 1 − n_i` を出し、`num_mul_cre'` を使う） | `Ring A` | 同 |
 | **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
 | **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
 | `NecSuf.num_mulVec_eq_zero_of_fixed`（`NecSuf/SignReversalOnGeneratorVector.lean`） | `Qq = q`, `nQ = sQ`, `s = 0` ⇒ `nq = 0`（具体版と同じ 6 行） | 係数は `NonUnitalSemiring`（行列 `Matrix ι ι R` と数ベクトル `ι → R`）。スカラー `s` は別の集合 `S` の元で、`0 • x = 0` だけを使う | 同 (2) Step 1 |

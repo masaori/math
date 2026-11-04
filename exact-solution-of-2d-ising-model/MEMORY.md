@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百四十個目として、`epsilon_eigenvalue_on_check_Q` の (2b) を (2b1)・(2b2) に割り (2b1) を行った。Step 2 の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行（`CheckFermi.nOp_mul_cre`。必要十分版 `NecSuf.num_mul_cre'` を同じ 13 行で置き、既存の `num_mul_cre` をその系にした）、`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ` の 8 行ずつ（`defFactor_of_notMem`・`defFactor_of_mem`）、`ν ≠ μ` の `A_ν^{ε'} = A_ν^ε`、可換性 `XA_ν^δ = A_ν^δX`（`commute_defFactor_of_commute`）と `X → ň_κ`・`A_κ^δ`・`ψ̌_μ^†` の 3 つの使い方を、人手と同じ行の calc で置いた。本文と SageMath は不変。次は (2b2)（`Π'` と 3 本の鎖）。
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十九個目として、`epsilon_eigenvalue_on_check_Q` の (2) を (2a)〜(2c) に割り (2a) を行った。Step 1 の 3 本の鎖（`ň_μ q = 0`・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`・背理法）と Step 3 の前半の 9 行の鎖を、人手と同じ行の calc の具体版と必要十分版（`NecSuf/SignReversalOnGeneratorVector.lean`。Step 3 はスカラー環を係数と分け、効くのは `SMulCommClass` だけ）で置いた。`eta_insert` は未組み替え。本文と SageMath は不変。次は (2b) の Step 2。
 
 2026-11-04: 全証明の SageMath 検算として、`rayleigh_bounds_operator_norm`（‖Wx‖ ≤ c(M_col)‖x‖ と冪の版）に検算 `sagemath/check/rayleigh_bounds_operator_norm/` を付けた（未検算 15 件）。一般の半正定値有理行列 157 組と本文の W（M_col = 2, 3）で、c(M_col) を AA の最大固有値として作り上限であることを確かめたうえで、全ての行を QQ・AA で厳密に確かめた。人手証明の飛びを直した（y^⊤(Wx) と y^⊤Wx をつなぐ行が無かった、帰納法で本文に無い W^kW = WW^k を使っていた。主張は不変、Lean は不変）。上流の W の ℂ/ℝ の同一視は状態台帳に記録。次は `trace_power_upper_bound`。

@@ -17,6 +17,8 @@
 | (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（4 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
 | (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | **まだ人手どおりの鎖が無い**（Step 1・Step 3 の補題は `Q̌_ε q = q`・`εq = ηq` を仮定で受ける。`exists_generator_of_eta` の `q` は (1) が選んだ生成元で、人手の「任意の `0` でない元」と違う。`eta_insert` を組み替えるときに置く） |
 | (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
+| (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ`（8 行ずつ）・`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`・`XA_ν^δ = A_ν^δX`（3 式と 5 行）と、その `X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†` | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
+| (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν` と `A_μ^ε q = q`・`Π'q = q`・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q` の 3 本の鎖 | **まだ無い**（次に置く） |
 | (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
 | (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じる。人手の数ベクトルの鎖へは Step 2 を置いてから組み替える） |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
@@ -33,6 +35,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.NecSuf.SignReversalOnGeneratorVector
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 
 namespace Ising2D
 
@@ -382,6 +385,145 @@ theorem epsilon_mulVec_cre_mulVec_generator_of_necSuf {μ : Fin M} {q : Conf M �
     (hεq : epsilon M *ᵥ q = η • q) :
     epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
   NecSuf.mulVec_cre_mulVec_eq_neg_smul_of_anticomm (F.epsilon_anticomm_cre μ) hεq
+
+/-! 人手の (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）、`Q̌_δ` の因子 `A_ν^δ := δ_νň_ν + (1 − δ_ν)(I − ň_ν)`
+（Lean の `defFactor`。`δ ∈ {ε, ε'}` の `ε` は Lean の `T`、`ε' := ε[μ→1]` は `insert μ T`）の値 `A_μ^ε = I − ň_μ`・
+`A_μ^{ε'} = ň_μ`（8 行ずつ）と `ν ≠ μ` での `A_ν^{ε'} = A_ν^ε`、可換性 `XA_ν^δ = A_ν^δX`（5 行）とその 3 つの使い方である。
+`mat_mult_associative` の行は (1) と同じく mathlib で受ける（(1) の数ベクトルの行は `Matrix.mulVec_mulVec`、ここは行列どうしの積なので `mul_assoc`）。 -/
+
+/-- **原文 (2) Step 2 冒頭**の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行の鎖。 -/
+theorem nOp_mul_cre (μ : Fin M) : F.nOp μ * F.cre μ = F.cre μ :=
+  calc F.nOp μ * F.cre μ
+      = (F.cre μ * F.ann μ) * F.cre μ := rfl            -- `def_check_number_operator`
+    _ = F.cre μ * (F.ann μ * F.cre μ) := mul_assoc _ _ _
+                                                        -- `mat_mult_associative`
+    _ = F.cre μ * (1 - F.nOp μ) := by rw [F.ann_mul_cre μ]
+                                                        -- `check_number_operator_idempotent` (2)
+    _ = F.cre μ * (1 + -F.nOp μ) := by rw [sub_eq_add_neg_tensorPow (1 : TensorPow M) (F.nOp μ)]
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.cre μ * 1 + F.cre μ * (-F.nOp μ) := mul_add_matrix_tensorPow _ _ _
+                                                        -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = F.cre μ * 1 + -(F.cre μ * F.nOp μ) := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = F.cre μ * 1 - F.cre μ * F.nOp μ := (sub_eq_add_neg_tensorPow _ _).symm
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.cre μ - F.cre μ * F.nOp μ := by rw [mul_identity_matrix_tensorPow]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = F.cre μ - F.cre μ * (F.cre μ * F.ann μ) := rfl  -- `def_check_number_operator`
+    _ = F.cre μ - (F.cre μ * F.cre μ) * F.ann μ := by rw [mul_assoc]
+                                                        -- `mat_mult_associative`
+    _ = F.cre μ - 0 * F.ann μ := by rw [F.cre_sq μ]     -- `check_number_operator_idempotent` (1) の `(ψ̌_μ^†)^2 = O`
+    _ = F.cre μ - 0 := by rw [zero_matrix_mul_tensorPow]
+                                                        -- `zero_matrix_is_left_zero_of_mat_mult`
+    _ = F.cre μ := matrix_sub_zero_matrix_tensorPow _   -- `matrix_minus_zero_matrix`
+
+/-- 上の 13 行の鎖が、同じ行の必要十分版 `NecSuf.num_mul_cre'` の特殊化として得られること。 -/
+theorem nOp_mul_cre_of_necSuf (μ : Fin M) : F.nOp μ * F.cre μ = F.cre μ :=
+  NecSuf.num_mul_cre' (fun x y => sub_eq_add_neg x y) (fun x => zero_mul x) (fun x => sub_zero x) F.cre F.ann μ
+    (F.ann_mul_cre μ) (F.cre_sq μ)
+
+/-- **原文 (2) Step 2** の `A_μ^ε = I − ň_μ` の 8 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`）。 -/
+theorem defFactor_of_notMem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
+    F.defFactor T μ = 1 - F.nOp μ :=
+  calc F.defFactor T μ
+      = (0 : ℂ) • F.nOp μ + ((1 : ℂ) - 0) • (1 - F.nOp μ) := by
+        rw [defFactor, if_neg hμ]                       -- `ε_μ = 0`
+    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + -0) • (1 - F.nOp μ) := by
+        rw [sub_eq_add_neg (1 : ℂ) 0]                   -- `def_complex_difference`
+    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + (-1) * 0) • (1 - F.nOp μ) :=
+        congrArg (fun c : ℂ => (0 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (0 : ℂ)).symm
+                                                        -- `multiply_by_minus_one`
+    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + 0) • (1 - F.nOp μ) := by
+        rw [mul_zero (-1 : ℂ)]                          -- `complex_times_zero_is_zero`
+    _ = (0 : ℂ) • F.nOp μ + (1 : ℂ) • (1 - F.nOp μ) := by
+        rw [add_zero (1 : ℂ)]                           -- `complex_numbers_form_a_field` の加法の単位元
+    _ = 0 + (1 : ℂ) • (1 - F.nOp μ) := by
+        rw [zero_smul_tensorPow]                        -- `zero_scalar_multiple_is_zero_matrix`
+    _ = 0 + (1 - F.nOp μ) := by
+        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
+    _ = 1 - F.nOp μ := zero_matrix_add_matrix_tensorPow _
+                                                        -- `zero_matrix_plus_matrix`
+
+/-- **原文 (2) Step 2** の `A_μ^{ε'} = ň_μ` の 8 行の鎖（`ε'_μ = 1`、すなわち `μ ∈ T'`。使うのは `T' = insert μ T`）。 -/
+theorem defFactor_of_mem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∈ T) :
+    F.defFactor T μ = F.nOp μ :=
+  calc F.defFactor T μ
+      = (1 : ℂ) • F.nOp μ + ((1 : ℂ) - 1) • (1 - F.nOp μ) := by
+        rw [defFactor, if_pos hμ]                       -- `ε'_μ = 1`
+    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
+        rw [sub_eq_add_neg (1 : ℂ) 1]                   -- `def_complex_difference`
+                                                        -- （人手の `−(1_ℂ)`。Lean では定数 `−1_ℂ` と同じ項 `-1` で、次の 2 段で同じ項 `-1` へ戻る）
+    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + (-1) * 1) • (1 - F.nOp μ) :=
+        congrArg (fun c : ℂ => (1 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (1 : ℂ)).symm
+                                                        -- `multiply_by_minus_one`
+    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
+        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の乗法の単位元
+    _ = (1 : ℂ) • F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
+        rw [add_neg_cancel (1 : ℂ)]                     -- `complex_numbers_form_a_field` の加法の逆元
+    _ = F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
+        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
+    _ = F.nOp μ + 0 := by
+        rw [zero_smul_tensorPow]                        -- `zero_scalar_multiple_is_zero_matrix`
+    _ = F.nOp μ := matrix_add_zero_matrix_tensorPow _  -- `matrix_plus_zero_matrix`
+
+/-- **原文 (2) Step 2** の「`ν ≠ μ` では `ε'_ν = ε_ν` なので `A_ν^{ε'} = A_ν^ε`」（`ε' = ε[μ→1]` は `insert μ T`）。 -/
+theorem defFactor_insert_of_ne (T : Finset (Fin M)) {μ ν : Fin M} (hν : ν ≠ μ) :
+    F.defFactor (insert μ T) ν = F.defFactor T ν := by
+  have h : (ν ∈ insert μ T) = (ν ∈ T) := propext (by rw [Finset.mem_insert]; exact or_iff_right hν)
+                                                        -- `ε'_ν = ε_ν`（`ε[μ→1]` の定義）
+  simp only [defFactor, h]
+
+/-- **原文 (2) Step 2** の可換性: `Xň_ν = ň_νX` なら `XA_ν^δ = A_ν^δX`。前半の 3 式（`have` の `h1`・`h2`・`h3`。
+`XI = X = IX` は `hI`）と 5 行の鎖である。 -/
+theorem commute_defFactor_of_commute (T : Finset (Fin M)) (ν : Fin M) {X : TensorPow M}
+    (hn : X * F.nOp ν = F.nOp ν * X) : X * F.defFactor T ν = F.defFactor T ν * X := by
+  have hI : X * 1 = 1 * X :=
+    calc X * 1 = X := mul_identity_matrix_tensorPow _   -- `identity_matrix_is_right_unit_of_mat_mult`
+      _ = 1 * X := (identity_matrix_mul_tensorPow _).symm
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+  have h1 : X * (1 - F.nOp ν) = (1 - F.nOp ν) * X :=
+    mul_sub_eq_sub_mul_of_commute_tensorPow _ _ _ hI hn
+                                                        -- `commuting_with_difference`
+  have h2 : X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
+      = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * X :=
+    mul_smul_comm_of_commute_tensorPow _ _ _ hn         -- `commuting_with_scalar_multiple`（`c → δ_ν`）
+  have h3 : X * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν))
+      = ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X :=
+    mul_smul_comm_of_commute_tensorPow _ _ _ h1         -- `commuting_with_scalar_multiple`（`c → 1 − δ_ν`）
+  calc X * F.defFactor T ν
+      = X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
+          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) := rfl
+                                                        -- `A_ν^δ` の置き方
+    _ = X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
+          + X * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) :=
+        mul_add_matrix_tensorPow _ _ _                  -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * X
+          + ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X := by
+        rw [h2, h3]                                     -- 上の 2 式
+    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
+          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X :=
+        (add_mul_matrix_tensorPow _ _ _).symm           -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = F.defFactor T ν * X := rfl                      -- `A_ν^δ` の置き方
+
+/-- 上の可換性が、同じ並びの必要十分版 `NecSuf.commute_defFactor_of_commute'` の特殊化として得られること。 -/
+theorem commute_defFactor_of_commute_of_necSuf (T : Finset (Fin M)) (ν : Fin M) {X : TensorPow M}
+    (hn : X * F.nOp ν = F.nOp ν * X) : X * F.defFactor T ν = F.defFactor T ν * X :=
+  NecSuf.commute_defFactor_of_commute' (fun x y => sub_eq_add_neg x y) hn _ _
+
+/-- **原文 (2) Step 2**: 可換性を `X → ň_κ` に使う（`check_number_operators_commute` (2)。`κ = ν` では両辺が同じ積 `ň_νň_ν`）。 -/
+theorem nOp_mul_defFactor (T : Finset (Fin M)) (κ ν : Fin M) :
+    F.nOp κ * F.defFactor T ν = F.defFactor T ν * F.nOp κ :=
+  F.commute_defFactor_of_commute T ν (F.commute_nOp_nOp κ ν).eq
+
+/-- **原文 (2) Step 2** の因子の可換性: 可換性を `X → A_κ^δ` に使う（仮定 `A_κ^δň_ν = ň_νA_κ^δ` は上の式の左右を入れ替えたもの）。 -/
+theorem defFactor_mul_defFactor (T : Finset (Fin M)) (κ ν : Fin M) :
+    F.defFactor T κ * F.defFactor T ν = F.defFactor T ν * F.defFactor T κ :=
+  F.commute_defFactor_of_commute T ν (F.nOp_mul_defFactor T ν κ).symm
+
+/-- **原文 (2) Step 2**: `ν ≠ μ` なら可換性を `X → ψ̌_μ^†` に使う（`check_number_operators_commute` (1) の `ψ̌_μ^†ň_ν = ň_νψ̌_μ^†`）。 -/
+theorem cre_mul_defFactor_of_ne (T : Finset (Fin M)) {μ ν : Fin M} (hν : ν ≠ μ) :
+    F.cre μ * F.defFactor T ν = F.defFactor T ν * F.cre μ :=
+  F.commute_defFactor_of_commute T ν (F.commute_cre_nOp (Ne.symm hν)).eq
 
 /-- **原文 (2)**: `μ ∉ T` なら `η_{T∪{μ}} = -η_T`。
 

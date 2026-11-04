@@ -9,7 +9,7 @@
   `NecSuf.commute_sub_of_commute'`・`NecSuf.commute_defFactor_of_commute'`（`A_ν` の鎖）/
   `NecSuf.commute_parity_finProdLeft_defFactor`（`Q̌_ε` の 3 行）。添字を `Finset` で取る `Q_ε` の形は `NecSuf.commute_parity_projOn`
 - `epsilon_eigenvalue_on_check_Q` (2) → `Ising2D.NecSuf.projOn_insert_mul_cre` /
-  `NecSuf.cre_mul_projOn_ne_zero`
+  `NecSuf.cre_mul_projOn_ne_zero`。(2) Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行 → `NecSuf.num_mul_cre'`
 - `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 →
   `Ising2D.NecSuf.sum_powerset_signed_exp`
 
@@ -27,7 +27,8 @@
 2. **符号の反転則**（人手証明 (2)）に効いているのは、次の 3 つだけである。
    - `Q_{T∪{μ}} (c_μ Q_T) = c_μ Q_T`（人手証明 Step 2）— これは
      **`n_μ c_μ = c_μ`** と **`n_ν`（`ν ≠ μ`）が `c_μ` と可換**なことから、
-     環の計算だけで出る。
+     環の計算だけで出る。`n_μ c_μ = c_μ` そのもの（`num_mul_cre'`）には、`a_μc_μ = 1 − n_μ` と `c_μc_μ = 0` に加えて、
+     積の結合則と右単位元、左分配則、`HasDistribNeg`、`x − y = x + (−y)`、`0x = 0`、`x − 0 = x` だけが効く。
    - `c_μ Q_T ≠ 0`（人手証明 Step 1）— これは **`a_μ c_μ = 1 - n_μ`** と
      `n_μ Q_T = 0`（`μ ∉ T`）から出る。**1 次元性は要らない。**
    - `ε (c_μ Q_T) = -η_T (c_μ Q_T)`（人手証明 Step 3）— 反交換関係だけ。
@@ -247,18 +248,47 @@ theorem commute_parity_finProdLeft_defFactor (hsub : ∀ x y : A, x - y = x + -y
 
 end ParityFactorProduct
 
+section NumMulCre
+
+variable {A : Type*} [Monoid A] [Add A] [Zero A] [LeftDistribClass A] [HasDistribNeg A] [Sub A] {ι : Type*}
+
+/-- **`n_i c_i = c_i` の必要十分版**（人手 `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭の 13 行の鎖。
+具体版 `Ising2D.CheckFermi.nOp_mul_cre` と同じ行である）。
+
+効いているのは、`a_i c_i = 1 − n_i`（`check_number_operator_idempotent` (2)）と `c_i c_i = 0`（同 (1)）、積の結合則と単位元、
+左分配則、符号反転が右の因子から外へ出ること、差が和と符号反転で書けること（`hsub`）、`0x = 0`（`hz`）、`x − 0 = x`（`hs0`）だけである。
+加法の結合則・可換性・逆元則、右分配則、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
+（`a_i c_i = 1 − n_i` を導くのにだけ使う）は効いていない。 -/
+theorem num_mul_cre' (hsub : ∀ x y : A, x - y = x + -y) (hz : ∀ x : A, 0 * x = 0) (hs0 : ∀ x : A, x - 0 = x)
+    (c a : ι → A) (i : ι) (hac : a i * c i = 1 - num c a i) (hsq : c i * c i = 0) :
+    num c a i * c i = c i :=
+  calc num c a i * c i
+      = (c i * a i) * c i := rfl                       -- `def_check_number_operator` にあたる
+    _ = c i * (a i * c i) := mul_assoc _ _ _            -- `mat_mult_associative` にあたる
+    _ = c i * (1 - num c a i) := by rw [hac]            -- `check_number_operator_idempotent` (2) にあたる
+    _ = c i * (1 + -num c a i) := by rw [hsub]          -- `matrix_difference_is_sum_with_negation` にあたる
+    _ = c i * 1 + c i * (-num c a i) := mul_add _ _ _   -- `mat_mult_distributes_over_sum_in_right_factor` にあたる
+    _ = c i * 1 + -(c i * num c a i) := by rw [mul_neg] -- `negation_factors_out_of_right_factor` にあたる
+    _ = c i * 1 - c i * num c a i := (hsub _ _).symm    -- `matrix_difference_is_sum_with_negation` にあたる
+    _ = c i - c i * num c a i := by rw [mul_one]        -- `identity_matrix_is_right_unit_of_mat_mult` にあたる
+    _ = c i - c i * (c i * a i) := rfl                  -- `def_check_number_operator` にあたる
+    _ = c i - (c i * c i) * a i := by rw [mul_assoc]    -- `mat_mult_associative` にあたる
+    _ = c i - 0 * a i := by rw [hsq]                    -- `check_number_operator_idempotent` (1) にあたる
+    _ = c i - 0 := by rw [hz]                           -- `zero_matrix_is_left_zero_of_mat_mult` にあたる
+    _ = c i := hs0 _                                    -- `matrix_minus_zero_matrix` にあたる
+
+end NumMulCre
+
 section Parity
 
 variable {A : Type*} [Ring A] {ι : Type*} [DecidableEq ι]
 
-/-- `n_i c_i = c_i`（人手証明 `epsilon_eigenvalue_on_check_Q` Step 2 冒頭）。 -/
+/-- `n_i c_i = c_i`（人手証明 `epsilon_eigenvalue_on_check_Q` Step 2 冒頭）。上の 13 行の鎖 `num_mul_cre'` を環で使う
+（`a_i c_i = 1 − n_i` は反交換関係から `ann_mul_cre` で出す）。 -/
 theorem num_mul_cre (c a : ι → A) (i : ι) (hsq : c i * c i = 0)
-    (hca : c i * a i + a i * c i = 1) : num c a i * c i = c i := by
-  have h1 : a i * c i = 1 - num c a i := ann_mul_cre c a i hca
-  calc num c a i * c i = c i * (a i * c i) := by rw [num, mul_assoc]
-    _ = c i * (1 - num c a i) := by rw [h1]
-    _ = c i - (c i * c i) * a i := by rw [num]; noncomm_ring
-    _ = c i := by rw [hsq]; simp
+    (hca : c i * a i + a i * c i = 1) : num c a i * c i = c i :=
+  num_mul_cre' (fun x y => sub_eq_add_neg x y) (fun x => zero_mul x) (fun x => sub_zero x) c a i
+    (ann_mul_cre c a i hca) hsq
 
 end Parity
 
