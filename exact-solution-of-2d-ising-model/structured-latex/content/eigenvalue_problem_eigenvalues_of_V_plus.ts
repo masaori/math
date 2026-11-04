@@ -5930,9 +5930,19 @@ V^{(+)}
 \exp\!\left(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right)`,
       ),
       paragraph([
-        "（したがって ",
-        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = (2\sinh 2K_2)^{M_{\mathrm{col}}} = c^2`),
-        "。）",
+        "したがって ",
+        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = (2\sinh 2K_2)^{M_{\mathrm{col}}}`),
+        " であり、",
+        ref("constant_c_value_even_sector"),
+        " の ",
+        math(String.raw`c \in \mathbb{C}`),
+        " について ",
+        math(String.raw`\bigl(\check\Lambda_{\max}\check\Lambda_{\min}\bigr)_{\mathbb{C}} = c^{2}`),
+        " である（",
+        math(String.raw`c^{2}`),
+        " は ",
+        ref("def_power_of_complex_number"),
+        " の冪）。",
       ]),
     ],
     proof: [
@@ -6551,17 +6561,93 @@ x &= Ix
       paragraph([
         "であり、statement の ",
         math(String.raw`\check\Lambda_{\max}, \check\Lambda_{\min}`),
-        " の式を得る。さらに",
+        " の式を得る。積を求める。",
+        math(String.raw`b := \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        " と書く（",
+        math(String.raw`a`),
+        " は (1) の置き方、",
+        math(String.raw`2\sinh 2K_2 \in \mathbb{R}_{>0}`),
+        " は ",
+        ref("def_second_transfer_matrix_prefactor"),
+        "）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_{\max}\check\Lambda_{\min}
-&= (2s_2)^{M_{\mathrm{col}}}
-   \quad (\because \text{指数部分が互いに打ち消し合う}) \\
-&= c^2
-   \quad (\because \text{定数 }c\text{ の決定。}\blkref{constant_c_value_even_sector})
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)\check\Lambda_{\min}
+   &&(\because\ \text{上の}\ \check\Lambda_{\max}\ \text{の鎖}) \\
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)
+   &&(\because\ \text{上の}\ \check\Lambda_{\min}\ \text{の鎖}) \\
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(b)\Bigr)\Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(-b)\Bigr)
+   &&(\because\ b\ \text{の置き方を右辺から左辺へ、2 か所へ同時に}) \\
+&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(b)\Bigr)\Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(-b)\Bigr)
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\ \text{を右辺から左辺へ、2 か所へ同時に}) \\
+&= \bigl(a\exp(b)\bigr)\bigl(a\exp(-b)\bigr)
+   &&(\because\ a\ \text{の置き方を右辺から左辺へ、2 か所へ同時に}) \\
+&= a\Bigl(\exp(b)\bigl(a\exp(-b)\bigr)\Bigr)
+   &&(\because\ \mathbb{R}\ \text{の乗法の結合律}) \\
+&= a\Bigl(\bigl(\exp(b)\,a\bigr)\exp(-b)\Bigr)
+   &&(\because\ \mathbb{R}\ \text{の乗法の結合律}) \\
+&= a\Bigl(\bigl(a\exp(b)\bigr)\exp(-b)\Bigr)
+   &&(\because\ \mathbb{R}\ \text{の乗法の交換律}) \\
+&= a\Bigl(a\bigl(\exp(b)\exp(-b)\bigr)\Bigr)
+   &&(\because\ \mathbb{R}\ \text{の乗法の結合律}) \\
+&= (aa)\bigl(\exp(b)\exp(-b)\bigr)
+   &&(\because\ \mathbb{R}\ \text{の乗法の結合律}) \\
+&= (aa)\exp\bigl(b + (-b)\bigr)
+   &&(\because\ \blkref{scalar_exp_product}\ (K \to \mathbb{R},\ x \to b,\ y \to -b)) \\
+&= (aa)\exp(0)
+   &&(\because\ \mathbb{R}\ \text{で}\ b + (-b) = 0) \\
+&= (aa)\cdot 1
+   &&(\because\ \blkref{scalar_exp_zero}\ (K \to \mathbb{R})) \\
+&= aa
+   &&(\because\ \mathbb{R}\ \text{で}\ u \cdot 1 = u\ (u \to aa)) \\
+&= (2s_2)^{M_{\mathrm{col}}/2}\,(2s_2)^{M_{\mathrm{col}}/2}
+   &&(\because\ a\ \text{の置き方、2 か所へ同時に}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\text{、2 か所へ同時に}) \\
+&= \Bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\Bigr)^{M_{\mathrm{col}}}\Bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\Bigr)^{M_{\mathrm{col}}}
+   &&(\because\ \blkref{def_second_transfer_matrix_prefactor}\text{、2 か所へ同時に}) \\
+&= \Bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\,\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\Bigr)^{M_{\mathrm{col}}}
+   &&(\because\ \mathbb{R}\ \text{の冪で}\ (uv)^{m} = u^{m}v^{m}\ \bigl(u, v \to \sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})},\ m \to M_{\mathrm{col}}\bigr)\ \text{を右辺から左辺へ}) \\
+&= \Bigl(\bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\bigr)^{2}\Bigr)^{M_{\mathrm{col}}}
+   &&(\because\ \mathbb{R}\ \text{の冪で}\ y^{2} = yy\ \text{を右辺から左辺へ}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}}
+   &&(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 2\sinh 2K_2)\ \text{の}\ y^{2} = x)
 \end{aligned}`,
       ),
+      paragraph([
+        "であり、statement の積の式を得る。",
+        ref("constant_c_value_even_sector"),
+        " の ",
+        math(String.raw`c = \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}} \in \mathbb{C}`),
+        " について、上の鎖の ",
+        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = aa`),
+        " から",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(\check\Lambda_{\max}\check\Lambda_{\min}\bigr)_{\mathbb{C}}
+&= (aa)_{\mathbb{C}}
+   &&(\because\ \text{上の鎖の}\ \check\Lambda_{\max}\check\Lambda_{\min} = aa) \\
+&= a_{\mathbb{C}}\,a_{\mathbb{C}}
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a)\ \text{を右辺から左辺へ}) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}
+   &&(\because\ a\ \text{の置き方、2 か所へ同時に}) \\
+&= cc
+   &&(\because\ \blkref{constant_c_value_even_sector}\ \text{を右辺から左辺へ、2 か所へ同時に}) \\
+&= (1_{\mathbb{C}}\,c)\,c
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\ 1_{\mathbb{C}}z = z\ (z \to c)\ \text{を右辺から左辺へ}) \\
+&= (c^{0}c)\,c
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)\ \text{を右辺から左辺へ}) \\
+&= c^{1}c
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 0)\ \text{を右辺から左辺へ}) \\
+&= c^{2}
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 1)\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -6574,6 +6660,7 @@ x &= Ix
         "2026-11-04: (2) の「(2s_2)^{M_col/2} > 0 と exp(ǧ(ε)) > 0 より Λ̌_ε > 0」は二つの不等号の根拠と積の正値性を名前だけで済ませていたので、a > 0（所属は def_second_transfer_matrix_prefactor）、exp(ǧ(ε)) > 0（real_exp_positive（x → ǧ(ε))）の前置きと、Λ̌_ε の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・ǧ(ε) の定義・a の置き方・ℝ で u > 0, v > 0 なら uv > 0 の 5 行の鎖にし、(1) と合わせて固有値が正の実数を ℂ へ移した元であることを書いた。主張の Λ̌_ε の定義に書いていた所属 ℝ_{>0} は (2) で示す内容なので ℝ にし、(2) の主張文の「固有値はすべて正の実数」を「各 ε で Λ̌_ε > 0。固有値はどれも正の実数 Λ̌_ε を ℂ へ移した (Λ̌_ε)_ℂ」と書き直した（内容は不変。(1) より固有値の集合は {(Λ̌_ε)_ℂ} なので、「固有値の最大のもの」を、順序のある ℝ の元 Λ̌_ε の最大のものと読み替えた）。同じ回に、Λ̌_ε ∈ ℝ_{>0} を定義の所属として引いていた c_value_eigenvalues_and_strict_maximum の前置きと eigenvector_of_max_eigenvalue の章の 1 か所を Λ̌_ε ∈ ℝ に直した（どちらも ℝ の所属しか使わない）。Lean の Ising2D.checkBigLambda_pos は同じ行の calc、固有値の主張は Ising2D.eigenvalue_VPlus_eq_positive_real。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_positivity_chain.sage。",
         "2026-11-04: (2) の大小の比較の散文（「(2s_2)^{M_col/2} は ε に依らない正の定数、exp は狭義単調増加なので大小は ǧ(ε) の大小と一致」「各項は独立に選べるので和が最大になるのは全ての ε_μ = 1」）を、r_μ := γ(θ~_μ)(1−ε_μ)・w_μ := γ(θ~_μ)ε_μ ≥ 0 の前置き（gamma_theta_tilde_mu_positive）と、ǧ(1,…,1) − ǧ(ε) ≥ 0・ǧ(ε) − ǧ(0,…,0) ≥ 0 の 7 行の鎖二本（ǧ の定義・finite_sum_of_real_differences・分配法則・r_μ / w_μ の置き方・finite_sum_of_nonnegative_reals_is_at_least_each_term（k → 1））、x ≤ y なら exp(x) ≤ exp(y)（real_exp_strictly_increasing と等号の場合分け）、Λ̌_ε ≤ Λ̌_{(1,…,1)}・Λ̌_{(0,…,0)} ≤ Λ̌_ε の 9 行の鎖二本（正値性の鎖の 1〜4 行目と、両辺に正の実数 a を掛ける行）にした（内容は不変）。ǧ(1,…,1)・ǧ(0,…,0) の値と Λ̌_maxΛ̌_min の鎖は扱っていない。Lean の Ising2D.gval_le_gval_univ・Ising2D.gval_empty_le_gval・Ising2D.real_exp_le_exp_of_le・Ising2D.checkBigLambda_le_checkBigLambda_univ・Ising2D.checkBigLambda_empty_le_checkBigLambda は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_comparison_chains.sage。",
         "2026-11-04: (2) の「ǧ(1,…,1) = ½Σγ(θ~_μ)、ǧ(0,…,0) = −½Σγ(θ~_μ) を代入して statement の Λ̌_max, Λ̌_min を得る」は二つの値を根拠なしに書いていたので、Λ̌_max := Λ̌_{(1,…,1)}・Λ̌_min := Λ̌_{(0,…,0)} の置き方と、ǧ(1,…,1) の 4 行・ǧ(0,…,0) の 5 行の鎖（ǧ の定義・ℝ の数の計算・積の交換法則・新しく足した finite_sum_of_real_scalar_multiples・(−a)b = −(ab)）、Λ̌_max・Λ̌_min の 4 行の鎖二本（置き方・Λ̌_ε の定義・ǧ の定義を右辺から左辺へ・上の鎖）にした（内容は不変）。Λ̌_maxΛ̌_min の鎖は扱っていない。Lean の Ising2D.gval_univ_eq_half_sum・Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_max_eq・Ising2D.checkBigLambda_min_eq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_extreme_values_chains.sage。",
+        "2026-11-04: (2) の最後の「Λ̌_maxΛ̌_min = (2s_2)^{M_col}（指数部分が互いに打ち消し合う）= c^2（定数 c の決定）」は二つの等号を名前だけで済ませ、ℝ の元と ℂ の元 c^2 を等号で結んでいたので、b := ½Σγ(θ~_μ) の置き方と、Λ̌_max・Λ̌_min の鎖・b / s_2 / a の置き方・ℝ の乗法の結合律と交換律・scalar_exp_product（K → ℝ）・b + (−b) = 0・scalar_exp_zero・a の置き方・def_second_transfer_matrix_prefactor・ℝ の冪の (uv)^m = u^m v^m と y^2 = yy・definition_of_sqrt_r_positive の 20 行の鎖と、(Λ̌_maxΛ̌_min)_ℂ = c^2 の 8 行の鎖（real_inclusion_preserves_product・a の置き方・constant_c_value_even_sector・1_ℂz = z・def_power_of_complex_number）にした。主張文の括弧書きを「Λ̌_maxΛ̌_min = (2 sinh 2K_2)^{M_col}、(Λ̌_maxΛ̌_min)_ℂ = c^2」に直した（内容は不変）。Lean の Ising2D.checkBigLambda_max_mul_min・Ising2D.checkBigLambda_max_mul_min_eq_c_sq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_product_chains.sage。",
       ],
     },
   },

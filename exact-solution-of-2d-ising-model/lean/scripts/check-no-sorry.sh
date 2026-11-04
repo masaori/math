@@ -2049,6 +2049,8 @@ targets=(
   Ising2D.checkBigLambda_min_le
   Ising2D.checkBigLambda_lt_max
   Ising2D.checkBigLambda_max_mul_min
+  Ising2D.checkBigLambda_max_mul_min_eq_sq_prefactor
+  Ising2D.checkBigLambda_max_mul_min_eq_c_sq
   Ising2D.cos_thetaTilde_lt_one
   Ising2D.one_lt_gamma1R_thetaTilde_checkIndex
   Ising2D.gammaFn_thetaTilde_pos

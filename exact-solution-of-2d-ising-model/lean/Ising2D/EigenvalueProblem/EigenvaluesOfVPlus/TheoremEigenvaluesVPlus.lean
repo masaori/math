@@ -376,26 +376,107 @@ theorem checkBigLambda_lt_max (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
   refine mul_lt_mul_of_pos_left ?_ (Real.rpow_pos_of_pos (by linarith) _)
   exact Real.exp_lt_exp.2 (NecSuf.sum_weight_lt_of_ne_univ g hg hT)
 
-/-- **原文 `eigenvalues_of_V_plus` の最後**: `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2`。 -/
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の積の鎖の 1〜14 行目**: `Λ̌_max Λ̌_min = aa`（`a := (2 s2)^{M/2}`）。人手の 1〜14 行目と 1 対 1 の calc。
+積の鎖の残り（`checkBigLambda_max_mul_min`）と `(Λ̌_maxΛ̌_min)_ℂ = c^2` の鎖の 1 行目（`checkBigLambda_max_mul_min_eq_c_sq`）がこれを引く。
+
+人手の 3〜5 行目（`b`・`s_2`・`a` の置き方を右辺から左辺へ）に当たる段は無い。Lean は `a`・`b` に名前を置かず式のまま書き、
+`s2` を `K_2` から独立な引数に取るからである（`VPlus_mul_Qproj` の 8 行目と同じ）。 -/
+theorem checkBigLambda_max_mul_min_eq_sq_prefactor (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+    (s2 : ℝ) :
+    checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
+      = (2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2) :=
+  calc checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
+      = ((2 * s2) ^ ((M : ℝ) / 2) * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))
+          * checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) := by
+        rw [checkBigLambda_max_eq]                      -- 1 行目: 上の `Λ̌_max` の鎖
+    _ = ((2 * s2) ^ ((M : ℝ) / 2) * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))
+          * ((2 * s2) ^ ((M : ℝ) / 2) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))) := by
+        rw [checkBigLambda_min_eq]                      -- 2 行目: 上の `Λ̌_min` の鎖
+                                                        -- 3〜5 行目（`b`・`s_2`・`a` の置き方）は段が無い
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * (Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))
+          * ((2 * s2) ^ ((M : ℝ) / 2) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))))) :=
+        mul_assoc _ _ _                                 -- 6 行目: ℝ の乗法の結合律
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * ((Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))
+          * (2 * s2) ^ ((M : ℝ) / 2)) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))) := by
+        rw [← mul_assoc (Real.exp _)]                   -- 7 行目: ℝ の乗法の結合律
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * (((2 * s2) ^ ((M : ℝ) / 2)
+          * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))
+          * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))) := by
+        rw [mul_comm (Real.exp _) ((2 * s2) ^ ((M : ℝ) / 2))]   -- 8 行目: ℝ の乗法の交換律
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * ((2 * s2) ^ ((M : ℝ) / 2)
+          * (Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))
+            * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))))) := by
+        rw [mul_assoc ((2 * s2) ^ ((M : ℝ) / 2)) (Real.exp _)]  -- 9 行目: ℝ の乗法の結合律
+    _ = ((2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2))
+          * (Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))
+            * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)))) :=
+        (mul_assoc _ _ _).symm                          -- 10 行目: ℝ の乗法の結合律
+    _ = ((2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2))
+          * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)
+            + -((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))) := by
+        rw [Real.exp_add]                               -- 11 行目: `scalar_exp_product`（`K → ℝ`。Lean は mathlib の `Real.exp_add`）
+    _ = ((2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2)) * Real.exp 0 := by
+        rw [add_neg_cancel]                             -- 12 行目: ℝ で `b + (−b) = 0`
+    _ = ((2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2)) * 1 := by
+        rw [Real.exp_zero]                              -- 13 行目: `scalar_exp_zero`（`K → ℝ`。Lean は mathlib の `Real.exp_zero`）
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2) :=
+        mul_one _                                       -- 14 行目: ℝ で `u · 1 = u`
+
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の積の鎖**: `Λ̌_max Λ̌_min = (2 sinh 2K_2)^{M_col}`。人手の 20 行と 1 対 1 の calc。
+
+人手の 1〜14 行目は `checkBigLambda_max_mul_min_eq_sq_prefactor` の 1 段が受け持つ。15・16 行目（`a` の置き方、`s_2 = sinh 2K_2`）に当たる段は無い
+（Lean は `a` に名前を置かず、`s2` を引数に取る）。人手の 17 行目（`def_second_transfer_matrix_prefactor` の `(2 sinh 2K_2)^{M_col/2} := (√(2 sinh 2K_2))^{M_col}`）は、
+Lean の前係数が実冪 `(2 s2)^{(M:ℝ)/2}` なので、その定義との一致 `rpow_half_pow`（`ClaimSecondTransferMatrixPauliForm.lean`）が受け持つ。
+`0 < s2` は `√` の 2 乗が元の数に戻ること（人手の `2 sinh 2K_2 ∈ ℝ_{>0}`）にだけ使う。 -/
 theorem checkBigLambda_max_mul_min (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {s2 : ℝ} (hs2 : 0 < s2) :
     checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
-      = ((2 * s2) ^ ((M : ℝ)) : ℝ) := by
-  have hsum : F.gval g Finset.univ + F.gval g (∅ : Finset (CheckIdx M)) = 0 := by
-    rw [CheckFermiSetup.gval, CheckFermiSetup.gval, ← Finset.sum_add_distrib]
-    refine Finset.sum_eq_zero fun i _ => ?_
-    simp
-    ring
-  rw [checkBigLambda, checkBigLambda]
-  calc ((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * Real.exp (F.gval g Finset.univ)
-        * (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * Real.exp (F.gval g (∅ : Finset (CheckIdx M))))
-      = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * ((2 * s2) ^ ((M : ℝ) / 2) : ℝ))
-          * Real.exp (F.gval g Finset.univ + F.gval g (∅ : Finset (CheckIdx M))) := by
-        rw [Real.exp_add]; ring
-    _ = ((2 * s2) ^ ((M : ℝ)) : ℝ) := by
-        rw [hsum, Real.exp_zero, mul_one, ← Real.rpow_add (by linarith)]
-        congr 1
-        ring
+      = (2 * s2) ^ M := by
+  have h2s2 : (0 : ℝ) ≤ 2 * s2 := by linarith
+  calc checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
+      = (2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2) :=
+        checkBigLambda_max_mul_min_eq_sq_prefactor F g s2   -- 1〜14 行目
+                                                        -- 15・16 行目（`a` の置き方、`s_2 = sinh 2K_2`）は段が無い
+    _ = Real.sqrt (2 * s2) ^ M * Real.sqrt (2 * s2) ^ M := by
+        rw [rpow_half_pow _ h2s2]                       -- 17 行目: `def_second_transfer_matrix_prefactor`（2 か所へ同時に）
+    _ = (Real.sqrt (2 * s2) * Real.sqrt (2 * s2)) ^ M :=
+        (mul_pow _ _ _).symm                            -- 18 行目: ℝ の冪の `(uv)^m = u^m v^m` を右辺から左辺へ
+    _ = (Real.sqrt (2 * s2) ^ 2) ^ M := by
+        rw [sq]                                         -- 19 行目: ℝ の冪の `y^2 = yy` を右辺から左辺へ
+    _ = (2 * s2) ^ M := by
+        rw [Real.sq_sqrt h2s2]                          -- 20 行目: `definition_of_sqrt_r_positive`（`x → 2 sinh 2K_2`）の `y^2 = x`
+
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の `(Λ̌_max Λ̌_min)_ℂ = c^2` の鎖**。人手の 8 行と 1 対 1 の calc。
+
+1 行目の `Λ̌_max Λ̌_min = aa` は、積の鎖の 1〜14 行目 `checkBigLambda_max_mul_min_eq_sq_prefactor` を引く。
+`c` は `constant_c_value_even_sector` の主張 `c = ((2 s2)^{M/2})_ℂ` で与え、その仮定（`hVeq` と `c ≠ 0`）は `VPlus_mul_Qproj` と同じく
+`c_ne_zero_of_VPlus_eq_smul` で作る。人手の 3 行目（`a` の置き方）に当たる段は無い（Lean は `a` に名前を置かない）。 -/
+theorem checkBigLambda_max_mul_min_eq_c_sq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+    {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) :
+    ((checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) : ℝ) : ℂ)
+      = c ^ 2 := by
+  have hc := constant_c_value_even_sector F g hK1 hK2 hs2 (c_ne_zero_of_VPlus_eq_smul F g hs2 hVeq) hVeq
+  calc ((checkBigLambda F g s2 Finset.univ * checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) : ℝ) : ℂ)
+      = (((2 * s2) ^ ((M : ℝ) / 2) * (2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) := by
+        rw [checkBigLambda_max_mul_min_eq_sq_prefactor F g s2]   -- 1 行目: 上の鎖の `Λ̌_max Λ̌_min = aa`
+    _ = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) * (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) :=
+        (real_inclusion_mul _ _).symm                   -- 2 行目: `real_inclusion_preserves_product` を右辺から左辺へ
+                                                        -- 3 行目（`a` の置き方）は段が無い
+    _ = c * c := by
+        rw [← hc]                                       -- 4 行目: `constant_c_value_even_sector` を右辺から左辺へ（2 か所へ同時に）
+    _ = (1 * c) * c := by
+        rw [one_mul]                                    -- 5 行目: `complex_numbers_form_a_field` の `1_ℂ z = z` を右辺から左辺へ
+    _ = (c ^ 0 * c) * c := by
+        rw [pow_zero]                                   -- 6 行目: `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+    _ = c ^ 1 * c := by
+        rw [← pow_succ]                                 -- 7 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+    _ = c ^ 2 := by
+        rw [← pow_succ]                                 -- 8 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
 
 end EigenVPlus
 
