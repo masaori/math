@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: 全証明の SageMath 検算として、`trace_of_check_number_operator_product`（ň_μ と I − ň_μ の積のトレースは 2^{M_col−k}）に検算 `sagemath/check/trace_of_check_number_operator_product/` を付けた（未検算 39 件）。050 の check_47 を移して鎖の組み立てを `_chains.sage` へ出し（33321 段で元と一致）、本文の ψ̌ を一つの数体 K := E_1 に置いて同じ鎖と主張を厳密に確かめる `check_with_check_psi.sage` を足した（M_col = 2, 3、12354 件）。人手証明の計算の誤りは無し。二回のレビューで必須の指摘 2 件と任意の指摘 4 件を直した。次は `check_joint_eigenspace_decomposition`。
+
 2026-11-04: 全証明の SageMath 検算として、`check_number_operator_idempotent`（ň_μ^2 = ň_μ）と `check_number_operators_commute`（ň_μň_ν = ň_νň_μ）に検算 `sagemath/check/check_number_operator_idempotent/`・`sagemath/check/check_number_operators_commute/` を付けた（未検算 40 件）。050 の check_28・check_29・check_23（二つに分けた）を移し、本文の ψ̌ を数体の行列として作って同じ鎖を厳密に確かめる検算を足した（M_col = 2, 3）。人手証明の計算の誤りは無かった。次は `trace_of_check_number_operator_product`（050 の check_47 を移す）。詳細は docs/tasks/sagemath-every-proof-state.md。
 
 2026-11-04: 全証明の SageMath 検算として、`sign_flip_conjugation`（符号反転共役 U）に検算 `sagemath/check/sign_flip_conjugation/` を付けた（未検算 42 件）。050 に番号付きで在った各行の検算 12 本（check_09・check_11〜21）を内容の名前で移し（中身は不変、旧い名前との対応は overview の「由来」）、主張そのものと Step 4 の最後の段落の検算（`M_col = 2..6`、`QQ(i)` の厳密等号 218 段）を足した。人手証明の計算の誤りは無し。最後の段落が文章だけの推論である件を状態台帳の「本文の誤り」に記録した。次は `check_number_operator_idempotent`。
