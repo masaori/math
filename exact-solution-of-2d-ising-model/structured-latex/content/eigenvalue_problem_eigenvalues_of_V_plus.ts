@@ -4201,7 +4201,7 @@ E_K \check{Q}_\epsilon
     conversion: {
       status: "added",
       notes: [
-        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 は「(V̌')^{-1} = exp(−X̌) であり −X̌ = Σ(−γ(θ̃_μ))(ň_μ − ½I) だから、Step 1〜2 をそのまま γ(θ̃_μ) → −γ(θ̃_μ) として適用でき（eigenvalues_of_check_Vprime の Step 1〜4 も符号を替えるだけで通る）」と書いていた。本文の V̌'・X̌・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無いので、γ → −γ の代入は引ける主張を持たない。Step 1 の鎖が使う V̌' の固有関係を (V̌')^{-1} について述べ直したのがこの主張で、eigenvalues_of_check_Vprime と (V̌')^{-1}V̌' = I から導く（eigenvalues_of_check_Vprime の証明を符号を替えて繰り返さない）。Lean は Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj（EigenvalueProblem/EigenvaluesOfVPlus/ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_inverse_of_check_Vprime.sage。",
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 は「(V̌')^{-1} = exp(−X̌) であり −X̌ = Σ(−γ(θ̃_μ))(ň_μ − ½I) だから、Step 1〜2 をそのまま γ(θ̃_μ) → −γ(θ̃_μ) として適用でき（eigenvalues_of_check_Vprime の Step 1〜4 も符号を替えるだけで通る）」と書いていた。本文の V̌'・X̌・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無いので、γ → −γ の代入は引ける主張を持たない。Step 1 の鎖が使う V̌' の固有関係を (V̌')^{-1} について述べ直したのがこの主張で、eigenvalues_of_check_Vprime と (V̌')^{-1}V̌' = I から導く（eigenvalues_of_check_Vprime の証明を符号を替えて繰り返さない）。Lean は Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj（EigenvalueProblem/EigenvaluesOfVPlus/ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/eigenvalues_of_inverse_of_check_Vprime/。",
       ],
     },
   },
