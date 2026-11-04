@@ -41,7 +41,7 @@ theorem VPlus_mul_Qproj (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
     VPlus M s2 K1 K2star * F.Qproj T
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
-  have hc := constant_c_value_even_sector F g hK1 hK2 hs2 hVeq
+  have hc := constant_c_value_even_sector F g hK1 hK2 hs2 (c_ne_zero_of_VPlus_eq_smul F g hs2 hVeq) hVeq
   rw [hVeq, hc, smul_mul_assoc, F.Vprime_mul_Qproj g T, smul_smul, checkBigLambda]
   norm_cast
 
@@ -52,7 +52,7 @@ theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M)) :
     F.Qproj T * VPlus M s2 K1 K2star
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
-  have hc := constant_c_value_even_sector F g hK1 hK2 hs2 hVeq
+  have hc := constant_c_value_even_sector F g hK1 hK2 hs2 (c_ne_zero_of_VPlus_eq_smul F g hs2 hVeq) hVeq
   rw [hVeq, hc, mul_smul_comm, F.Qproj_mul_Vprime g T, smul_smul, checkBigLambda]
   norm_cast
 

@@ -31,7 +31,7 @@
 - (4): `max_eigenvalue_of_V_plus_simple` (2)（`checkBigLambda_lt_max_of_gammaFn`）
 
 人手の主張は既存の主張を並べて定義を代入するだけなので、必要十分版は置かない
-（各行の必要十分版は `Ising2D.NecSuf.const_eq_of_trace_ratio`・`Ising2D.NecSuf.sum_weight_lt_of_ne_univ`
+（各行の必要十分版は `Ising2D.NecSuf.const_eq_of_trace_chains`・`Ising2D.NecSuf.sum_weight_lt_of_ne_univ`
 が持つ）。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus

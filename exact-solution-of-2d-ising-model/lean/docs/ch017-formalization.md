@@ -61,7 +61,8 @@
 | `NecSuf.acomm_cre_ann_comp` | `δ_{ν,σ μ}` 型の CAR は付け替えで Kronecker の `δ_{μν}` になる（`σ` の単射性だけ） | `check_number_operator_idempotent` (2)、`check_number_operators_commute` Step 1 |
 | `NecSuf.two_pow_smul_tau_noncommProd` | `2^{|s|} τ(∏_{i∈s} n_i) = τ(1)` | `trace_of_check_number_operator_product` |
 | `NecSuf.tau_finProdLeft_projFactor`（`TraceOfNumberOperatorProductByLastFactor.lean`） | 具体版 `trace_projFactor_finProdLeft` と同じ手順（最後の因子を分ける帰納法）の必要十分版。`A` は `K` 加群の環、`τ` は線型（`hlin`）・巡回的（`hcyc`）で `τ(1) = 2^{|ι|}`、`a_ic_i = 1 - n_i`、`i ≠ j` で `a_in_j = n_ja_i`、`K` は `half · 2 = 1` の元を持つ環（体・可換性は不要。`half` は標数 2 の反例で削れない）。手順の各段は `mul_one_eq_one_mul`・`ann_mul_projFactor`・`tau_mul_one_sub_num`・`tau_mul_num_chain`・`tau_mul_num_eq_half`・`tau_mul_projFactor_eq_half`。特殊化は `trace_projFactor_finProdLeft_of_necSuf`（`ClaimTraceCheckNumberOperatorProductFromNecSuf.lean`） | `trace_of_check_number_operator_product` |
-| `NecSuf.const_eq_of_trace_ratio`（`ConstantC.lean`） | `T = cp = aτ`, `T' = c⁻¹p = a⁻¹τ`, `a,p>0`, `T>0` ⇒ `c = a` | `constant_c_value_even_sector` |
+| `NecSuf.const_eq_of_trace_chains`（`ConstantC.lean`） | 具体版 `constant_c_steps_four_five` と同じ Step 4・Step 5 の鎖。`K` は零を持つ群（積の可換律・加法は効かない）、包含 `φ : k →*₀ K` は単射、`k` は順序体。`T = φ(a)τ`, `T' = φ(a⁻¹)τ'`, `τ' = τ`, `T = cφ(t)`, `T' = c⁻¹φ(t)`, `T = φ(r)`, `c ≠ 0`, `a,r,t>0` ⇒ `c = φ(a)`。特殊化は `constant_c_steps_four_five_of_necSuf`（`ClaimConstantCEvenSectorFromNecSuf.lean`） | `constant_c_value_even_sector` Step 4・Step 5 |
+| `NecSuf.positive_square_injective'`（`PositiveSquareInjective.lean`） | 零因子の無い可換環で前順序と `AddLeftStrictMono` だけを持つ係数で、`0<a`, `0<b` なら `a^2 = b^2 ↔ a = b`（積の可換律は因数分解の段に効く）。特殊化は `positive_real_square_injective_of_necSuf` | `positive_real_square_injective` |
 | `NecSuf.sum_weight_lt_of_ne_univ` | 重みが狭義正なら `∑ w_i(χ_T(i)-h)` は `T = univ` でのみ最大（係数は順序環、`h` は任意。具体版は `ℝ`・`h = 1/2`） | `max_eigenvalue_of_V_plus_simple` (2) |
 | `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le`（`SimpleEigenvalue.lean`） | 重みが非負のときの最大・最小（非狭義） | `eigenvalues_of_V_plus` (2) |
 | `NecSuf.eq_proj_of_eigen` | 単位の分解 `∑ Q_ε = 1` と `Q_ε V = Λ_ε Q_ε` と `Λ_ε ≠ Λ_{ε_0}` だけから固有空間を同定 | `max_eigenvalue_of_V_plus_simple` (3) |
@@ -142,10 +143,13 @@
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある（`VPlus_posDef` と `trace_of_positive_definite_is_positive_tensorPow`、`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf.lean`） | `trace_V_plus_is_positive` |
 | `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
-| `tauPlus` / `matExp_half_mul_matExp_half` / `trace_VPlus`（`ClaimConstantCEvenSector.lean`） | `τ := tr(exp(S_1^{(+)})exp(S_2))`、`exp(X/2)^2 = exp(X)`、`tr(V^{(+)}) = (2s_2)^{M/2}τ` | `constant_c_value_even_sector` Step 1 |
-| `trace_expNegS1plus_expNegS2_eq_tauPlus` / `trace_VPlusInv` | `tr(exp(-S_1^{(+)})exp(-S_2)) = τ`、`tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
-| `VPlusInv_eq` | `V^{(+)} = cV̌' ⇒ (V^{(+)})^{-1} = c⁻¹(V̌')^{-1}` | 同 Step 3（逆元の一意性） |
-| `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value_even_sector` |
+| `half_smul_add_half_smul` / `matExp_half_mul_matExp_half` / `matExp_neg_half_mul_matExp_neg_half` / `tauPlus` / `tauPlusPrime`（`ClaimConstantCEvenSector.lean`） | `H + H = S_1`（成分の鎖 8 行）、`exp(H)exp(H) = exp(S_1)`、`exp(-H)exp(-H) = exp(-S_1)`、`τ`、`τ'` | `constant_c_value_even_sector` の準備 |
+| `trace_VPlus_eq_tauPlus` / `trace_VPlusInv_eq_tauPlusPrime` | `tr(V^{(+)}) = a_ℂτ`、`tr((V^{(+)})^{-1}) = (a^{-1})_ℂτ'` | 同 Step 1 |
+| `tauPlusPrime_eq_tauPlus` | `τ' = τ`（`trace_similarity_invariant` は `trace_basic_properties` (4) の人手の形） | 同 Step 2 |
+| `constantCW` / `VPlus_mul_W` / `W_mul_VPlus` / `VPlusInv_eq_W` / `trace_VPlus_eq_c_mul` / `trace_VPlusInv_eq_cinv_mul` | `W := c^{-1}(V̌')^{-1}`、`V^{(+)}W = I`、`WV^{(+)} = I`、逆元の一意性で `(V^{(+)})^{-1} = W`、`tr(V^{(+)}) = ct_ℂ`、`tr((V^{(+)})^{-1}) = c^{-1}t_ℂ` | 同 Step 3 |
+| `constant_c_steps_four_five` | Step 4 の `w`・`c^2w`・`c^2` の鎖、Step 5 の `c = ρ_ℂ`・`(ρρ, 0)` の鎖と `ρ = a`（`positive_real_square_injective`） | 同 Step 4・Step 5 |
+| `c_ne_zero_of_VPlus_eq_smul` | `V^{(+)} = cV̌'` と `V^{(+)}` の可逆性から `c ≠ 0`（人手の行は無い。仮定に `c ∈ ℂ^×` を持たない使う側の橋渡し） | — |
+| `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`**（仮定 `c ≠ 0` は人手の `c ∈ ℂ^×`） | `constant_c_value_even_sector` |
 | `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus`（`TheoremEigenvaluesVPlus.lean`） | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |
 | `VPlus_mulVec_of_mem_range` | `im Q̌_ε` の元は `V^{(+)}` の固有ベクトル | 同 (1) |
 | `checkBigLambda_pos` / `checkBigLambda_le_max` / `checkBigLambda_min_le` | 正値性・最大・最小 | 同 (2) |
@@ -180,7 +184,7 @@
 | `trace_of_check_number_operator_product` | `CheckFermiSetup.trace_projFactorProd` / `trace_nOpProd` | `NecSuf.two_pow_smul_tau_projOn`（混在の因子）/ `NecSuf.two_pow_smul_tau_noncommProd`（`ň` だけの積） |
 | `check_joint_eigenspace_decomposition` (1)(2)(3)(4) | `CheckFermiSetup.Qproj_*` / `sum_Qproj` / `nOp_mul_Qproj` / `trace_Qproj` | `NecSuf.projOn_*` / `sum_projOn` / `num_mul_projOn` / `two_pow_smul_tau_projOn`（**章 009 と同一**） |
 | `eigenvalues_of_check_Vprime` | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime`（Step 3・Step 3' の極限の鎖と 1 対 1 の calc。特殊化は `ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Vprime_mul_Qproj_of_necSuf` / `Qproj_mul_Vprime_of_necSuf`） | `NecSuf.exp_mul_eq_of_mul_eq_smul`（章 009 と同一）／その左右反転 `NecSuf.mul_exp_eq_of_mul_eq_smul` |
-| `constant_c_value_even_sector` | `Ising2D.constant_c_value_even_sector` | `NecSuf.const_eq_of_trace_ratio` |
+| `constant_c_value_even_sector` Step 4・Step 5 | `Ising2D.constant_c_steps_four_five`（特殊化は `constant_c_steps_four_five_of_necSuf`） | `NecSuf.const_eq_of_trace_chains` |
 | `eigenvalues_of_V_plus` (2) | `checkBigLambda_le_max` / `checkBigLambda_min_le` | `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le` |
 | `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_checkBigLambda_univ`（必要十分版の特殊化は `checkBigLambda_lt_max`） / `eq_Qproj_univ_mulVec_of_eigen`（特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） / `VPlus_mulVec_of_mem_range_Qproj_univ`（特殊化は `VPlus_mulVec_of_mem_range_Qproj_univ_of_necSuf`） | `NecSuf.sum_weight_lt_of_ne_univ` / `NecSuf.eq_proj_of_eigen` / `NecSuf.act_eq_smul_of_proj_fixed` |
 | `check_joint_eigenspace_decomposition` (5) | `CheckFermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | `NecSuf.isInternal_range_proj`（**章 009 と同一**） |
@@ -208,11 +212,11 @@
   （`NecSuf.acomm_cre_ann_comp`）。`M+1-μ` という具体形も、
   `{1,…,M}` に閉じていることも効いていない。
 
-- **`c` の決定（`constant_c_value_even_sector`）に、行列もトレースも指数関数も効いていない。**
-  効いているのは体 ℂ の中の 4 つの等式 `T = cp`, `T' = c⁻¹p`, `T = aτ`, `T' = a⁻¹τ` と
-  `a > 0`, `p > 0`, `T > 0` だけである（`NecSuf.const_eq_of_trace_ratio`）。
+- **`c` の決定（`constant_c_value_even_sector`）の Step 4・Step 5 に、行列もトレースも指数関数も効いていない。**
+  効いているのは 6 つの等式 `T = a_ℂτ`, `T' = (a⁻¹)_ℂτ'`, `τ' = τ`, `T = ct_ℂ`, `T' = c⁻¹t_ℂ`, `T = r_ℂ` と
+  `c ≠ 0`, `a, r, t > 0` だけで、しかも ℂ は零を持つ群として（積の可換律も加法も使わずに）、
+  包含は積を保つ単射としてしか使われていない（`NecSuf.const_eq_of_trace_chains`）。
   正定値性も「`tr(V^{(+)})` が正の実数である」という**数**としてしか使われていない。
-  **章 009 の `constant_c_value` も同じ補題の特殊化である。**
 
 - **最大固有値の単純性 (3) に、直和分解 (5) は要らない。**
   人手証明は「`x = ∑_ε Q̌_ε x` と (5) の直和性から各項が `0`」と書いているが、

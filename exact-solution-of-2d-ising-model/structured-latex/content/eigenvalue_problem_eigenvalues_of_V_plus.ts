@@ -5831,6 +5831,7 @@ V^{(+)}
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-01: Step 2 の「共役は行列の積とスカラー倍を保ち」を「積・和・スカラー倍を保ち」に直した。部分和の共役には和を保つこと（分配法則）も使うため（Lean の Uflip_conj_expPartialSum で判明）。",
         "2026-11-04（全証明の SageMath 検算）: 主張と計算は変えずに書き方を直した。共役と exp の交換を conjugation_commutes_with_matrix_exp へ切り出し、各段を (∵) とラベル参照付きの鎖にした。ℂ の商（本文に定義が無い）を使わず、逆元 c^{-1}・w^{-1} の積で書いた。(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示した。主張の c を ((2s_2)^{M_col/2})_ℂ と像の記号で書いた。Lean の ClaimConstantCEvenSector.lean・NecSuf/ConstantC.lean はまだ旧い道筋（c^2 = a^2 から (c−a)(c+a) = 0 を割る）と旧い Step 番号のままで、新しい Step 3〜5 と一般の正則な B についての conjugation_commutes_with_matrix_exp とは 1 対 1 でない（Lean の連続実行の受け持ち）。符号の確定は零因子を持たないことを使わず、c が正の実数の像であることと positive_real_square_injective で示した（旧い Step 3 の分数の段と Step 4 の因数分解の段を置き換えた）。",
+        "2026-11-04（Lean の通しの証明の連続実行）: Lean を新しい準備・Step 1〜5 と 1 対 1 にした。具体版は lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean（Step 4・Step 5 は constant_c_steps_four_five）、必要十分版は lean/Ising2D/NecSuf/ConstantC.lean にある。positive_real_square_injective と trace_basic_properties (4) の人手の形の具体版も足した。本文は変えていない。",
       ],
     },
   },

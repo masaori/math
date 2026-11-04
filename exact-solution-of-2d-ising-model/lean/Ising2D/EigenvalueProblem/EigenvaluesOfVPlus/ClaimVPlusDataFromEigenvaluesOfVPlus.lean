@@ -103,13 +103,13 @@ theorem VPlus_eq_smul_checkVprime_const (P : IsingParam) (hM : M ≠ 0)
     VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)
       = ((((2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2) : ℝ) : ℂ))
         • checkVprime P.const M (gammaTildeC P M) := by
-  obtain ⟨c, _, hc⟩ := VPlus_eq_smul_checkVprime_of_dual P hM hdual
+  obtain ⟨c, hcne, hc⟩ := VPlus_eq_smul_checkVprime_of_dual P hM hdual
   have hVeq : VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)
       = c • (checkFermiSetupOf P hM).Vprime (fun i => gammaTilde P M i.1) := by
     rw [hc, checkFermiSetupOf_Vprime]
   have hcval := constant_c_value_even_sector (checkFermiSetupOf P hM)
     (fun i => gammaTilde P M i.1) (star_ofReal_self P.K1) (star_ofReal_self P.K2star)
-    (sinh_two_K2_pos P) hVeq
+    (sinh_two_K2_pos P) hcne hVeq
   rw [hc, hcval]
 
 /-! ## `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` -/

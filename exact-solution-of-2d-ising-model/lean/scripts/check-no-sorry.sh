@@ -452,6 +452,7 @@ targets=(
   Ising2D.trace_cyclic
   Ising2D.trace_one_eq_card
   Ising2D.trace_conj
+  Ising2D.trace_similarity_invariant
   Ising2D.trace_of_idempotent
   Ising2D.isCompl_range_ker_of_idempotent
   Ising2D.trace_one_tensorPow
@@ -1869,7 +1870,7 @@ targets=(
   Ising2D.onsager_exact_solution
   Ising2D.NecSuf.acomm_cre_ann_comp
   Ising2D.NecSuf.two_pow_smul_tau_noncommProd
-  Ising2D.NecSuf.const_eq_of_trace_ratio
+  Ising2D.NecSuf.const_eq_of_trace_chains
   Ising2D.NecSuf.sum_weight_lt_of_ne_univ
   Ising2D.NecSuf.sum_weight_le_univ
   Ising2D.NecSuf.sum_weight_empty_le
@@ -2000,6 +2001,9 @@ targets=(
   Ising2D.cosh_is_even
   "Ising2D.NecSuf.symmetrized_sum_is_even'"
   Ising2D.cosh_is_even_of_necSuf
+  Ising2D.positive_real_square_injective
+  "Ising2D.NecSuf.positive_square_injective'"
+  Ising2D.positive_real_square_injective_of_necSuf
   Ising2D.cosh_at_least_one
   "Ising2D.NecSuf.one_add_two_mul_sq_ge_one'"
   Ising2D.cosh_at_least_one_of_necSuf
@@ -2022,11 +2026,20 @@ targets=(
   Ising2D.VPlusInv_posDef
   Ising2D.trace_VPlus_pos
   Ising2D.trace_VPlusInv_pos
+  Ising2D.half_smul_add_half_smul
   Ising2D.matExp_half_mul_matExp_half
-  Ising2D.trace_VPlus
-  Ising2D.trace_expNegS1plus_expNegS2_eq_tauPlus
-  Ising2D.trace_VPlusInv
-  Ising2D.VPlusInv_eq
+  Ising2D.matExp_neg_half_mul_matExp_neg_half
+  Ising2D.trace_VPlus_eq_tauPlus
+  Ising2D.trace_VPlusInv_eq_tauPlusPrime
+  Ising2D.tauPlusPrime_eq_tauPlus
+  Ising2D.VPlus_mul_W
+  Ising2D.W_mul_VPlus
+  Ising2D.VPlusInv_eq_W
+  Ising2D.trace_VPlus_eq_c_mul
+  Ising2D.trace_VPlusInv_eq_cinv_mul
+  Ising2D.constant_c_steps_four_five
+  Ising2D.constant_c_steps_four_five_of_necSuf
+  Ising2D.c_ne_zero_of_VPlus_eq_smul
   Ising2D.constant_c_value_even_sector
   Ising2D.VPlus_mul_Qproj
   Ising2D.Qproj_mul_VPlus

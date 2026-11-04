@@ -24,6 +24,7 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.LinearAlgebra.Projection
 import Mathlib.Data.Complex.Basic
 import Ising2D.Basic
+import Ising2D.NecSuf.MatrixProductIdentityAndScalar
 
 namespace Ising2D
 
@@ -59,6 +60,20 @@ theorem trace_conj (P Q A : Matrix n n ℂ) (h : Q * P = 1) :
   calc (P * A * Q).trace = (Q * (P * A)).trace := Matrix.trace_mul_comm _ _
     _ = ((Q * P) * A).trace := by rw [mul_assoc]
     _ = A.trace := by rw [h, one_mul]
+
+/-- **原文 `trace_basic_properties` (4)** の人手の形: `P'P = I` なら `tr(P(AP')) = tr(A)`。
+
+人手の 5 行と 1 対 1（`mat_mult_associative` は Lean の具体版が無く、mathlib の `Matrix.mul_assoc` を引く。
+`identity_matrix_is_left_unit_of_mat_mult` は具体版の添字が `Fin m` に限るので、必要十分版
+`NecSuf.one_mul_matrix` の係数 `ℂ`・添字 `n` の特殊化を引く）。上の `trace_conj` は左辺を `(PA)P'` で受け取る旧い形である。 -/
+theorem trace_similarity_invariant (P P' A : Matrix n n ℂ) (h : P' * P = 1) :
+    (P * (A * P')).trace = A.trace :=
+  calc (P * (A * P')).trace
+      = ((P * A) * P').trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
+    _ = (P' * (P * A)).trace := trace_cyclic _ _           -- (2) を `A → PA`、`B → P'` に適用
+    _ = ((P' * P) * A).trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
+    _ = ((1 : Matrix n n ℂ) * A).trace := by rw [h]        -- `P'P = I`
+    _ = A.trace := by rw [NecSuf.one_mul_matrix]           -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 単元による共役版（原文の `P` が可逆な場合そのもの）。 -/
 theorem trace_units_conj (P : (Matrix n n ℂ)ˣ) (A : Matrix n n ℂ) :
