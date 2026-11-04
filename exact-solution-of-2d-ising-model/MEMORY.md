@@ -4,6 +4,8 @@
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十二個目として、人手 `eigenvalues_of_V_plus` の (e)（`Λ̌_maxΛ̌_min`）を書き下した。「指数部分が互いに打ち消し合う」「定数 c の決定」を、積の 20 行の鎖（`scalar_exp_product`・`scalar_exp_zero`・`def_second_transfer_matrix_prefactor`・`definition_of_sqrt_r_positive` ほか）と `(Λ̌_maxΛ̌_min)_ℂ = c^2` の 8 行の鎖（`real_inclusion_preserves_product`・`constant_c_value_even_sector`・`def_power_of_complex_number`）にし、ℝ の元と ℂ の元を等号で結んでいた主張文の括弧書きを直した（内容は不変）。Lean は `checkBigLambda_max_mul_min_eq_sq_prefactor`・`checkBigLambda_max_mul_min`（結論を自然数冪に）・`checkBigLambda_max_mul_min_eq_c_sq`（同じ行の calc）。SageMath は `sagemath/check/eigenvalues_of_V_plus/check_part2_product_chains.sage`。レビューの必須の指摘を直した。未解決: 本文に ℝ の自然数冪の定義のブロックが無い。lake build・check-no-sorry・check-end-to-end・check-docs-references・npm run check・verify-check-linkage 通過。次は同じファイルの `max_eigenvalue_of_V_plus_simple`・`c_value_eigenvalues_and_strict_maximum` の名前だけの根拠。
 
+2026-11-04: 全証明の SageMath 検算として、`V1_plus_square_root_property`（((V_1^{(+)})^{1/2})^2 = V_1^{(+)}）に検算 `sagemath/check/V1_plus_square_root_property/` を付けた（未検算 20 件）。人手証明の計算の誤りは無し。「X の定義と同類項の加法」の一行を、c := (i2_ℂ^{-1})(K_1)_ℂ を二つ足すと i(K_1)_ℂ になる準備の鎖（記号は κ := (K_1)_ℂ。theorem_exp_product の係数の体 K と分けた）と、def_finite_sum_of_matrices・finite_sum_of_scalar_multiples_of_one_matrix（r = 2）・def_finite_sum_of_complex_numbers の行に分け、主張文に M_col ∈ ℤ_{≥2} と A^2 := AA を書いた（主張は不変）。Lean の `DefinitionV1PlusSquareRoot.lean` は変えていない（新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。次は `trace_of_epsilon_V_plus`。
+
 2026-11-04: 全証明の SageMath 検算として、`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`（1 次元開鎖の二つのスピン和とその正値性）に検算 `sagemath/check/<ラベル>/` を付けた（未検算 21 件）。値の誤りは無し。exp(KE(s)) = Π exp(Kt_m) の根拠が theorem_exp_product（行列の主張）を指していた誤りを real_exp_of_finite_sum に、M_col = 2 で定義の無い空の積を使っていた段を場合分けに直し、積の展開を ς(e) := 2e − 1 による付け替えと expansion_of_finite_product_of_two_term_sums_of_real_numbers の行にした（主張は不変）。Lean は `ClaimOpenChainSpinSums.lean` の注記の根拠名だけを直した（新しい行との 1 対 1 は Lean の連続実行の受け持ち）。次は `V1_plus_square_root_property`。
 
 2026-11-04: 全証明の SageMath 検算として、`epsilon_D0_G_pairwise_commute`（εD_0 = D_0ε、εG = Gε、D_0G = GD_0）と `epsilon_G_is_involution`（(εG)^2 = I）に検算 `sagemath/check/epsilon_D0_G_pairwise_commute/`・`sagemath/check/epsilon_G_is_involution/` を付けた（未検算 24 件）。人手証明の計算の誤りは無し。符号の括り出し・結合律・二重の符号反転・因子の並べ替えを一行にまとめていた段をラベル参照の行の鎖に分け、準備を内容の名前で置き、(εG)^2 = I の ε^2 = I の根拠が epsilon_projector_properties (1) を指していた誤りを epsilon_square_and_eigenvalues に直した（主張は不変）。Lean の `ClaimEpsilonD0GCommuteAndDiagonalAction.lean` は変えていない（新しい行との 1 対 1 は Lean の連続実行の受け持ち）。次は `open_chain_partition_sum`。
@@ -232,7 +234,6 @@
 
 2026-11-02: 行列から線型写像への対応の証明で、Kronecker のデルタの積の等号に行末根拠を付けた。数学的内容は変えていない。
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十七個目として、`check_number_operator_idempotent` の名前だけの根拠（反交換子の定義・同じ項の和・行列に当てた ℂ の四則・零元との積）を、新しい定義 `def_matrix_anticommutator` と主張 `zero_matrix_is_left_zero_of_mat_mult`・`matrix_sum_with_itself_zero_implies_zero`・`matrix_summand_from_sum_equation`（`002_linear_space_general.ts`）の参照にした。(3) の鎖の先頭に冪を積へ運ぶ 4 行を足した。Lean は `cre_sq`・`ann_sq`・`ann_mul_cre`・`nOp_sq`・`nOp_mul_self` を人手と 1 対 1 の calc にし、新しい主張の具体版・必要十分版・`TensorPow M` の系を置いた。SageMath は新しい 3 ディレクトリと `050` の `check_23`・`check_28`。次は状態台帳の「次の一歩」の `check_number_operators_commute` Step 1 の「すなわち `XW = -(WX)`」。
-
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十六個目として、`V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` を `ℝ_{>0}` の元として宣言し、スカラー倍の係数を包含 `a_ℂ`・`(a^{-1})_ℂ` で書いた（`aa^{-1} = 1_ℂ` は `real_inclusion_preserves_product`・`ℝ` の `aa^{-1} = 1`・略記 `1_ℂ = (1)_ℂ` の 3 行）。`V_plus_is_positive_definite` の係数も `((2s_2)^{M_col/2})_ℂ` にした。Lean の `VPlus_mul_VPlusInv`・`VPlusInv_mul_VPlus` は `a : ℝ` の同じ行の calc、SageMath は `050` の `check_27`。次は状態台帳の「次の一歩」の「(k) の後に扱う」残り（`check_number_operator_idempotent`・`check_number_operators_commute` から）。
 
@@ -758,7 +759,6 @@ SageMath対応129件、章 C′ の4検査407種類と添字集合の2検査、L
 ## 全六研究監督: check Z周期性の独立化を確認（2026-09-22 21:02 JST）
 
 実行識別子 `7058aadb-fd8e-41f1-adef-9056db75e90b`。LLMによる検証では、check Zの添字周期性が位相移動・Euler公式・三角関数の周期性・有限和だけへ分離され、check Y周期性と共役添字恒等式を先取りしない依存が本文で読めるようになった。次はcheck Y周期性だけを独立化する。
-
 
 ## 2026-09-22: 半整数運動量 Fourier Z 行列の添字周期性を独立主張へ分離
 
@@ -3982,7 +3982,6 @@ Perron–Frobenius の「最大固有ベクトルは符号をそろえて取れ�
   - `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md`
     — `c_±(M)` の `sup` が定義できること（`F^{(±)}` に単位ベクトルがあること）の根拠が本文に無い。
 
-
 ## 完了（2026-07-27）: **2 次元 Ising 模型の厳密解が本文で閉じた**（018 章、章 C′-16）
 
 `structured-latex/content/018_even_sector_closing.ts`（11 ブロック）で `c_+(M) = Λ^{(1/2)}_M` を
@@ -4430,7 +4429,6 @@ hatZ,hatY の反交換関係（`FourierClifford`）/ **Z,Y の反交換関係**�
 
 本文217ブロック・ラベル183・参照1019件すべて解決、抽象テンソル積記法0件、
 参照用ノート38件、数値検証との対応103件、負テスト18件・実行時検証10件すべて期待どおり。
-
 
 ## 完了（2026-07-26・追補6）: Lean の 2 本立てを 3 主張ぶん追加（線型独立・指数和・hat の反交換関係）
 
@@ -5953,7 +5951,6 @@ README 5 節「なぜこの計算を思いついたのかを説明する材料�
 `kind` に `note` / `remark` が残っているが content では**使用0件**（heading 10 / theorem 14 /
 definition 50 / claim 72）。出版物の Remark 環境として将来使う余地はあるが、
 「不要な構造を持ち込まない」方針からは削除候補。判断待ち。
-
 
 ## 完了（2026-07-25）: Phase 3 継続 — 線型独立性・離散フーリエ変換（hatZ/hatY）・その反交換関係を形式化
 

@@ -3036,6 +3036,8 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
     labels: ["V1_plus_square_root_property"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        " とする。",
         ref("def_V1_plus_square_root"),
         " の ",
         math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
@@ -3046,24 +3048,121 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         " について、",
       ]),
       displayMath(String.raw`\left(\left(V_1^{(+)}\right)^{1/2}\right)^2=V_1^{(+)}`),
-      paragraph(["が成り立つ。"]),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`A\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " に対して ",
+        math(String.raw`A^2:=AA`),
+        " である。",
+      ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`X := \tfrac{i}{2}K_1H_1^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " とおく。",
+        "準備。",
+        math(String.raw`\kappa := (K_1)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        " の略記）、",
+        math(String.raw`c := \tfrac{i}{2}\kappa = \bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\kappa \in \mathbb{C}`),
+        "、",
+        math(String.raw`X := cH_1^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " とおく（",
+        ref("def_V1_plus_square_root"),
+        " の ",
+        math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}`),
+        " の読み方）。",
         math(String.raw`X`),
         " は自分自身と可換である。",
+      ]),
+      displayMath(String.raw`XX=XX\qquad\left(\because\ \text{等号の反射律}\right)`),
+      paragraph([
+        math(String.raw`1_{\mathbb{C}}`),
+        " を二つ足すと、",
+        ref("def_V1_plus_square_root"),
+        " の ",
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}`),
+        " になる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}+1_{\mathbb{C}}
+&=(1_{\mathbb{R}})_{\mathbb{C}}+(1_{\mathbb{R}})_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}=(1,0)\ \text{（}\blkref{complex_numbers_form_a_field}\text{）と}\ (1,0)=\iota_{\mathbb{R}\to\mathbb{C}}(1_{\mathbb{R}})\ \text{（}\blkref{inclusion_rr_to_cc}\text{）を 2 箇所へ}\right)\\
+&=(1_{\mathbb{R}}+1_{\mathbb{R}})_{\mathbb{C}}
+&&\left(\because\ \blkref{real_inclusion_preserves_sum}\ (a,b\to 1_{\mathbb{R}})\right)\\
+&=(2_{\mathbb{R}})_{\mathbb{C}}
+&&\left(\because\ \mathbb{R}\ \text{で}\ 1+1=2\right)\\
+&=2_{\mathbb{C}}
+&&\left(\because\ \blkref{def_V1_plus_square_root}\ \text{の}\ 2_{\mathbb{C}}\ \text{の定め方}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`c`),
+        " を二つ足すと ",
+        math(String.raw`i\kappa`),
+        " になる（以下の結合律・可換律・分配律・単位元・逆元は ",
+        ref("complex_numbers_form_a_field"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の体の公理である）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c+c
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\kappa+\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\kappa 
+&&\left(\because\ c\ \text{の定義を 2 箇所へ}\right)\\
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(\kappa+\kappa)
+&&\left(\because\ \text{分配律}\right)\\
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\bigl(\kappa 1_{\mathbb{C}}+\kappa 1_{\mathbb{C}}\bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。2 箇所へ}\right)\\
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\bigl(\kappa (1_{\mathbb{C}}+1_{\mathbb{C}})\bigr)
+&&\left(\because\ \text{分配律}\right)\\
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\bigl(\kappa 2_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{上の}\ 1_{\mathbb{C}}+1_{\mathbb{C}}=2_{\mathbb{C}}\right)\\
+&=\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\bigl(2_{\mathbb{C}}\kappa\bigr)
+&&\left(\because\ \text{積の可換律}\right)\\
+&=i\bigl(2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\kappa\bigr)\bigr)
+&&\left(\because\ \text{積の結合律}\right)\\
+&=i\bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\kappa\bigr)
+&&\left(\because\ \text{積の結合律}\right)\\
+&=i\bigl(1_{\mathbb{C}}\kappa\bigr)
+&&\left(\because\ 2_{\mathbb{C}}^{-1}\ \text{は}\ 2_{\mathbb{C}}\neq 0_{\mathbb{C}}\ \text{の逆元}\right)\\
+&=i\kappa
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は積の単位元}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        "主張について。",
+        math(String.raw`c_1 := c`),
+        "、",
+        math(String.raw`c_2 := c`),
+        " とおく。",
+        ref("V1_plus_exponential_representation"),
+        " の右辺の ",
+        math(String.raw`iK_1H_1^{(+)}`),
+        " は ",
+        math(String.raw`(i\kappa)H_1^{(+)}`),
+        " と読む。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left(\left(V_1^{(+)}\right)^{1/2}\right)^2
+&=\left(V_1^{(+)}\right)^{1/2}\left(V_1^{(+)}\right)^{1/2}
+&&\left(\because\ A^2:=AA\right)\\
 &=\exp\!\left(X\right)\exp\!\left(X\right)
-&&\left(\because\ \blkref{def_V1_plus_square_root}\ \text{と}\ X\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_V1_plus_square_root}\ \text{と}\ X\ \text{の定義を 2 箇所へ}\right)\\
 &=\exp\!\left(X+X\right)
-&&\left(\because\ \blkref{theorem_exp_product}\ \text{を可換な}\ X,\ X\ \text{に適用}\right)\\
-&=\exp\!\left(iK_1H_1^{(+)}\right)
-&&\left(\because\ X\ \text{の定義と同類項}\ \tfrac{i}{2}K_1H_1^{(+)}\ \text{の加法}\right)\\
+&&\left(\because\ \blkref{theorem_exp_product}\ (n\to 2^{M_{\mathrm{col}}},\ K\to\mathbb{C},\ A,B\to X)\ \text{と準備の}\ XX=XX\right)\\
+&=\exp\!\left(cH_1^{(+)}+cH_1^{(+)}\right)
+&&\left(\because\ X\ \text{の定義を 2 箇所へ}\right)\\
+&=\exp\!\left(\sum_{j=1}^{2}\left(c_jH_1^{(+)}\right)\right)
+&&\left(\because\ c_1=c_2=c\ \text{と}\ \blkref{def_finite_sum_of_matrices}\ (r\to 1,\ X_j\to c_jH_1^{(+)})\ \text{の}\ r=1\ \text{と}\ r+1=2\ \text{の段}\right)\\
+&=\exp\!\left(\left(\sum_{j=1}^{2}c_j\right)H_1^{(+)}\right)
+&&\left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n\to 2^{M_{\mathrm{col}}},\ r\to 2,\ A\to H_1^{(+)})\right)\\
+&=\exp\!\left((c+c)H_1^{(+)}\right)
+&&\left(\because\ \blkref{def_finite_sum_of_complex_numbers}\ (m\to 1,\ z_j\to c_j)\ \text{の}\ m=1\ \text{と}\ m+1=2\ \text{の段と}\ c_1=c_2=c\right)\\
+&=\exp\!\left((i\kappa)H_1^{(+)}\right)
+&&\left(\because\ \text{準備の}\ c+c=i\kappa\right)\\
 &=V_1^{(+)}
 &&\left(\because\ \blkref{V1_plus_exponential_representation}\right).
 \end{aligned}`,
@@ -3075,6 +3174,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         "平方根として用いる半指数行列の定義と、その二乗が V_1^{(\pm)} になる主張を 1 ブロック 1 主張に従って分離した。",
         "式変形の書き方の統一（2026-09-03）: 計算前の参照一覧を削り、既に各式変形行の行末にある \\blkref だけを残した。内容・式変形・根拠・参照は不変である。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ主張の重複ブロック（旧ラベル <V1_plus_square_root_property>）と統合し、ラベルを <V1_plus_square_root_property> に一本化した（旧ラベル <V1_pm_square_root_squares_to_V1_pm> は廃止）。",
+        "2026-11-04（全証明の SageMath 検算）: 主張文に M_col ∈ ℤ_{≥2} と A^2 := AA を書いた。証明の「X の定義と同類項の加法」の一行を、c := (i 2_ℂ^{-1})(K_1)_ℂ を二つ足すと i(K_1)_ℂ になる準備の鎖（1_ℂ + 1_ℂ = 2_ℂ を含む）と、def_finite_sum_of_matrices・finite_sum_of_scalar_multiples_of_one_matrix（r = 2）・def_finite_sum_of_complex_numbers の行に分け、冪の定義の行を足した（主張は不変）。数値検証: sagemath/check/V1_plus_square_root_property/。",
       ],
     },
   },
