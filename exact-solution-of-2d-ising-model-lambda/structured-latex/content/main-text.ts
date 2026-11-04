@@ -37561,9 +37561,17 @@ H_L
                         paragraph([
                           "となり、準備の ",
                           math(String.raw`1\ne0`),
-                          " と矛盾する。ゆえに ",
-                          math(String.raw`1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\ne0`),
-                          " である。全過程は体 ",
+                          " と矛盾する。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+1+\mathrm{KW}(\xi)
+&=2\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \text{上の計算}\bigr)\\
+&\ne0
+&&\bigl(\because\ 2\ne0\text{ と零因子の不在}\blkref{claim_qbar_no_zero_divisors}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。全過程は体 ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
                         ]),
@@ -78517,6 +78525,10 @@ t&<_R a&&(\because\ t\in C_a\text{ と }C_a\text{ の定義})\\
                 labels: ["def_real_algebraic_cut_realization"],
                 habitat: "R",
                 realEscape: "実数の完備性。有理下切断の実数像の上限を取って、実閉部分体の元を実数へ送る。",
+                lean: [
+                  "Ising2DLambda.RealEscape.realAlgebraicCutRealization",
+                  "Ising2DLambda.NecSuf.RealEscape.cutRealization",
+                ],
                 statement: [
                   paragraph([
                     "各 ", math(String.raw`a\in R`), " について ",
