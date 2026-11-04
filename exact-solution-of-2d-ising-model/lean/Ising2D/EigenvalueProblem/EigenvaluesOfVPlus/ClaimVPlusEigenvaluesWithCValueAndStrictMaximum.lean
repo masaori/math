@@ -25,9 +25,10 @@
   `IsingParam.c2_mul_s2star_eq_c2star` で与える）、`def_check_Vprime` の `V̌' := exp(X̌)` と `X̌`
   （`checkVprime`・`checkX` の展開）、`def_check_number_operator`（`checkFermiOf_nOp`）
 - (2): `eigenvalues_of_V_plus` (1)（`VPlus_mul_Qproj`）
-- (3) 1・2 行: `max_eigenvalue_of_V_plus_simple` (1) と `eigenvalues_of_V_plus` (2)
-  （`checkBigLambda_univ_eq_LambdaM`。Lean の `Λ̌_max` は `checkBigLambda … Finset.univ` そのものなので
-  2 行目は定義どおり）。3〜5 行: `Λ̌_ε` の定義に `ε_μ = 1` を代入し、`1 - ½ = ½` と分配法則
+- (3) 前の鎖 2 行: `max_eigenvalue_of_V_plus_simple` (1) を右辺から左辺へ（`checkBigLambda_univ_eq_LambdaM`）、
+  `eigenvalues_of_V_plus` (2) の `Λ̌_max := Λ̌_{(1,…,1)}`（Lean の `Λ̌_max` は `checkBigLambda … Finset.univ`
+  そのものなので `rfl`）。後の鎖 2 行: 同じ置き方を右辺から左辺へ（`rfl`）、`eigenvalues_of_V_plus` (2) の
+  `Λ̌_max` の値（`checkBigLambda_max_eq`。人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和で、`μ = j + 1` は `checkIdxOfFin`）
 - (4): `max_eigenvalue_of_V_plus_simple` (2)（`checkBigLambda_lt_max_of_gammaFn`）
 
 人手の主張は既存の主張を並べて定義を代入するだけなので、必要十分版は置かない
@@ -57,7 +58,7 @@ theorem V_plus_eigenvalues_with_c_value_and_strict_maximum (P : IsingParam) (hM 
       ∧ checkBigLambda (checkFermiSetupOf P hM) (fun i => gammaTilde P M i.1)
             (Real.sinh (2 * P.K2)) Finset.univ
           = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
-            * Real.exp (1 / 2 * ∑ i : CheckIdx M, gammaTilde P M i.1)
+            * Real.exp (1 / 2 * ∑ j : Fin M, gammaTilde P M (CheckFermiSetup.checkIdxOfFin j).1)
       ∧ (∀ T : Finset (CheckIdx M), T ≠ Finset.univ →
           checkBigLambda (checkFermiSetupOf P hM) (fun i => gammaTilde P M i.1)
               (Real.sinh (2 * P.K2)) T
@@ -78,15 +79,21 @@ theorem V_plus_eigenvalues_with_c_value_and_strict_maximum (P : IsingParam) (hM 
     intro T
     exact VPlus_mul_Qproj F g (star_ofReal_self P.K1) (star_ofReal_self P.K2star)
       (sinh_two_K2_pos P) hVeq T
-  · -- (3) 1・2 行目
-    exact (checkBigLambda_univ_eq_LambdaM F P g (fun _ => rfl)).symm
-  · -- (3) 3〜5 行目
-    have hgval : F.gval g Finset.univ = 1 / 2 * ∑ i : CheckIdx M, g i := by
-      rw [CheckFermiSetup.gval, Finset.mul_sum]
-      refine Finset.sum_congr rfl fun i _ => ?_
-      simp only [Finset.mem_univ, if_true]
-      ring
-    rw [checkBigLambda, hgval]
+  · -- (3) 前の鎖
+    calc LambdaM P (1 / 2) M
+        = checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ :=
+          (checkBigLambda_univ_eq_LambdaM F P g (fun _ => rfl)).symm
+                                                        -- `max_eigenvalue_of_V_plus_simple` (1) を右辺から左辺へ
+      _ = checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ := rfl
+                                                        -- `eigenvalues_of_V_plus` (2) の `Λ̌_max := Λ̌_{(1,…,1)}`
+  · -- (3) 後の鎖
+    calc checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ
+        = checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ := rfl
+                                                        -- `Λ̌_max := Λ̌_{(1,…,1)}` を右辺から左辺へ
+      _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
+            * Real.exp (1 / 2 * ∑ j : Fin M, g (CheckFermiSetup.checkIdxOfFin j)) :=
+          checkBigLambda_max_eq F g _
+                                                        -- `eigenvalues_of_V_plus` (2) の `Λ̌_max` の値
   · -- (4)
     intro T hT
     exact checkBigLambda_lt_max_of_gammaFn F P g (fun _ => rfl) hT

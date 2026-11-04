@@ -7,9 +7,12 @@
 #       3 行目: (2 sinh 2K_2)^{M/2} exp( sum gamma(t~_mu)(psi^dagger_mu psi_{M+1-mu} - I/2) )（def_check_Vprime の X^）
 #       4 行目: (2 sinh 2K_2)^{M/2} exp( sum gamma(t~_mu)(n^_mu - I/2) )               （def_check_number_operator）
 #   (2) V^{(+)} Q^_eps = Lambda^_eps Q^_eps（全 eps）                                  （eigenvalues_of_V_plus (1)）
-#   (3) Lambda^{(1/2)}_M（def_Theta_delta_M・def_Lambda_delta_M の定義どおり、族 theta^{(1/2)}_{M,mu} の添字の和で作る）
-#       = Lambda^_{(1,...,1)} = (2 sinh 2K_2)^{M/2} exp(sum gamma(t~_mu)(1 - 1/2))
-#       = (2 sinh 2K_2)^{M/2} exp(sum gamma(t~_mu) * 1/2) = (2 sinh 2K_2)^{M/2} exp((1/2) sum gamma(t~_mu))
+#   (3) 前の鎖: Lambda^{(1/2)}_M（def_Theta_delta_M・def_Lambda_delta_M の定義どおり、族 theta^{(1/2)}_{M,mu} の添字の和で作る）
+#         = Lambda^_max（max_eigenvalue_of_V_plus_simple (1)。eigenvalues_of_V_plus (2) の「最大のもの」として、
+#           全 eps の Lambda^_eps の最大値を取って作る）
+#         = Lambda^_{(1,...,1)}（eigenvalues_of_V_plus (2) の Lambda^_max := Lambda^_{(1,...,1)}。Lambda^_eps の定義から作る）
+#       後の鎖: Lambda^_{(1,...,1)} = Lambda^_max（同じ置き方を右辺から左辺へ）
+#         = (2 sinh 2K_2)^{M/2} exp((1/2) sum gamma(t~_mu))（eigenvalues_of_V_plus (2) の Lambda^_max の値）
 #   (4) eps != (1,...,1) なら Lambda^_eps < Lambda^_{(1,...,1)}、max_eps Lambda^_eps = Lambda^_{(1,...,1)}。
 #       あわせて、V^{(+)} を数値対角化した最大固有値が Lambda^_{(1,...,1)} と一致することを独立に見る。
 #   否定コントロール: (1) の前因子を (2 sinh 2K_2)^{M} にしたもの、(3) の delta を 0 にした Lambda^{(0)}_M は一致しない。
@@ -97,11 +100,11 @@ for M in EIG_M:
         # (3)
         ones = tuple([1] * M)
         L_half, nTheta = Lambda_delta_from_definition(M, RDF(1) / 2, P)
-        a1 = Lams[ones]
-        a2 = RDF(pref * exp(sum(gam[mu] * (1 - RDF(1) / 2) for mu in range(1, M + 1))))
-        a3 = RDF(pref * exp(sum(gam[mu] * (RDF(1) / 2) for mu in range(1, M + 1))))
-        a4 = RDF(pref * exp(RDF(1) / 2 * sum(gam[mu] for mu in range(1, M + 1))))
-        r3 = max(rrel(L_half, a1), rrel(a1, a2), rrel(a2, a3), rrel(a3, a4))
+        a_max = max(Lams.values())          # Lambda^_max（全 eps の最大のもの）
+        a1 = Lams[ones]                     # Lambda^_{(1,...,1)}（Lambda^_eps の定義）
+        a_val = RDF(pref * exp(RDF(1) / 2 * sum(gam[mu] for mu in range(1, M + 1))))   # Lambda^_max の値
+        # 前の鎖の 2 行と、後の鎖の 2 行（後の鎖の 1 行目は前の鎖の 2 行目と同じ等号を逆に読む）
+        r3 = max(rrel(L_half, a_max), rrel(a_max, a1), rrel(a1, a_max), rrel(a_max, a_val))
         L_zero, _ = Lambda_delta_from_definition(M, RDF(0), P)
         neg3 = rrel(a1, L_zero)
         # (4)
