@@ -6446,7 +6446,7 @@ a+2b&=(a+b)+b
 &=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}
 \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
 \prod_{i\in\mathcal J}B_{i,\sigma(i)}
-&&\bigl(\because\ \text{保たない置換の項は上の等式により零}\bigr).
+&&\bigl(\because\ \text{保たない置換の項は上の等式により零}\bigr)
 \end{aligned}`),
                 paragraph(["空の添字集合でも保たない置換が存在しないので同じ等式が成り立つ。"]),
               ],
@@ -62408,6 +62408,112 @@ s(j')-s(j)
 &&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\bigr)\\
 &=0&&\bigl(\because\ \mathbb Z\text{ の有限和}\bigr)
 \end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_dual_cell_component",
+              labels: [],
+              title: { text: "閉歩道を避ける双対辺の到達セル集合" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_dual_cell_component_boundary",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_dual_cell_step_avoiding_walk",
+                      kind: "definition",
+                      title: { text: "閉歩道を避けるセル間の双対一歩" },
+                      labels: ["def_dual_cell_step_avoiding_walk"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.KacWard.dualCellStep"],
+                      statement: [
+                        paragraph([
+                          "任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ",
+                          math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る。セルの添字集合を ",
+                          math(String.raw`\mathcal Q_L:=(\mathbb Z/L\mathbb Z)^2`), " とし、任意のセル ",
+                          math(String.raw`p,q\in\mathcal Q_L`),
+                          " について、辺を横断する双対一歩 ", math(String.raw`p\mathrel{D_\gamma}q`),
+                          " を次で定める。辺の名前は ", ref("claim_edge_row_partition"),
+                          "、基底辺は ", ref("def_oriented_edges"), " による。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+p\mathrel{D_\gamma}q\quad\Longleftrightarrow\quad
+&\exists i,j\in\mathbb Z/L\mathbb Z:\
+  (\forall t\in I_m\ \operatorname{base}(\vec e_t)\ne n_{\mathrm h}(i,j))\ \land\
+  \{p,q\}=\{(i,j),(i-1,j)\}\\
+&\quad\lor\ \exists i,j\in\mathbb Z/L\mathbb Z:\
+  (\forall t\in I_m\ \operatorname{base}(\vec e_t)\ne n_{\mathrm v}(i,j))\ \land\
+  \{p,q\}=\{(i,j-1),(i,j)\}.
+\end{aligned}`),
+                        paragraph([
+                          "ここで両端の集合の等号は両順序を許すという意味である。",
+                          math(String.raw`L=1`), " で両側のセルが一致しても、横辺と縦辺は別々に判定する。",
+                        ]),
+                      ],
+                    },
+                  }, {
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_dual_cell_component",
+                      kind: "definition",
+                      title: { text: "閉歩道を避けて到達できるセル集合" },
+                      labels: ["def_dual_cell_component"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.KacWard.dualCellComponent"],
+                      statement: [
+                        paragraph([
+                          "セル ", math(String.raw`p_0\in\mathcal Q_L`), " を選ぶ。",
+                          ref("def_dual_cell_step_avoiding_walk"),
+                          " の双対一歩を有限回つなぎ、零歩も許して ",
+                          math(String.raw`p_0`), " から到達できるセルの集合を",
+                        ]),
+                        displayMath(String.raw`S_\gamma(p_0):=\{q\in\mathcal Q_L\mid
+\exists k\in\mathbb N\ \exists c:\{0,\ldots,k\}\to\mathcal Q_L:\
+c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma}c(t+1))\}`),
+                        paragraph(["と定める。添字 ", math(String.raw`p_0`), " は選んだ始点を表す。", math(String.raw`\mathcal Q_L`), " は有限なので ", math(String.raw`S_\gamma(p_0)`), " も有限である。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_dual_cell_component_boundary",
+                    kind: "claim",
+                    title: { text: "双対一歩で到達できるセル集合は一歩で閉じる" },
+                    labels: ["claim_dual_cell_component_boundary"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/dual-cell-component-boundary"],
+                    lean: [
+                      "Ising2DLambda.KacWard.dualCellComponent_closed",
+                      "Ising2DLambda.KacWard.dualCellComponent_boundary_blocks_step",
+                      "Ising2DLambda.NecSuf.KacWard.reachableComponent_closed",
+                      "Ising2DLambda.KacWard.dualCellComponent_closed_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`p_0\in\mathcal Q_L`), "、",
+                        math(String.raw`p\in S_\gamma(p_0)`), "、",
+                        math(String.raw`q\in\mathcal Q_L`), " について、",
+                        math(String.raw`p\mathrel{D_\gamma}q`), " ならば ",
+                        math(String.raw`q\in S_\gamma(p_0)`), " である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`p\in S_\gamma(p_0)`), " と ",
+                        math(String.raw`p\mathrel{D_\gamma}q`), " を仮定する。",
+                        "到達路の末尾にこの一歩を足せば ",
+                        math(String.raw`q\in S_\gamma(p_0)`), " である（", ref("def_dual_cell_component"), "）。",
+                        "対偶として、集合の外への双対一歩は存在しない。",
+                        "有限セルと有限路の操作だけを用い、実数体と複素数体は現れない。",
+                      ]),
                     ],
                   },
                 },
