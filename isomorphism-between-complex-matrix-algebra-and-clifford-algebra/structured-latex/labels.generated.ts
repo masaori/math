@@ -46,6 +46,7 @@ export const ALL_LABELS = [
   "def_ordered_sum_in_complex_numbers",
   "def_ring_homomorphism",
   "def_spanning_family",
+  "def_sum_over_finite_set",
   "def_unital_ring",
 ] as const
 
