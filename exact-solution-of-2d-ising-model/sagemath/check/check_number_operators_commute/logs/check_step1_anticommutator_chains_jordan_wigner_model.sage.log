@@ -1,0 +1,2 @@
+PASS check_number_operators_commute Step 1: (M, μ, ν) 20 組、厳密等号 520 個、否定コントロール 6 行
+RESULT: PASS

@@ -1,0 +1,2 @@
+PASS check_number_operator_idempotent (1)・(2) の反交換子の鎖: 95 段、否定コントロール 3 行
+RESULT: PASS

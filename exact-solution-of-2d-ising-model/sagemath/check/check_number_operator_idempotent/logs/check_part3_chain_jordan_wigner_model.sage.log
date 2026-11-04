@@ -1,0 +1,2 @@
+PASS check_number_operator_idempotent (3) の鎖: 228 段、否定コントロール 2 行
+RESULT: PASS

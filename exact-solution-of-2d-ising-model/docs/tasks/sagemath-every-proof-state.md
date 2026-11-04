@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 399 件のうち、SageMath の検算が無いもの 42 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 399 件のうち、SageMath の検算が無いもの 40 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -302,13 +302,19 @@
   証明の各行の検算 12 本は、Lean の通しの証明の連続実行が 2026-11-02 に `050_claim_even_sector_eigenvalues/` の `check_09`・`check_11`〜`check_21` として足していたが、そのディレクトリの対象ラベルは `eigenvalues_of_V_plus` だけなので未検算に数えられていた。12 本を内容の名前でこのディレクトリへ移し（検算の中身は不変。コメントの旧い名前 4 か所だけ直した。旧い名前との対応は overview.md の「由来」）、050 の overview から行を外して移し先を書いた。
   主張そのもの（`det U ≠ 0`、Sage の逆行列が `FE` と一致、4 つの共役の式）と Step 4 の最後の段落（`i(K)_ℂ ≠ 0` なので S の等式から H の等式が従う）の検算 `check_claim_statement_and_step4_equivalence.sage` を足した（`M_col = 2..6`、`QQ(i)` と `QQ(i)[K_1, K_2^*]` の厳密等号 218 段、否定コントロール 15 件。`M_col = 7` は 128 次の行列の逆行列が重く、他の連続実行と CPU を分け合うと run-all-checks の 10 分に収まらなかったので外した）。全て厳密計算で、人手証明の計算の誤りは無かった。レビューの必須の指摘 2 件（overview の段数の欄、ログ）を直した。
 
+- `check_number_operator_idempotent`・`check_number_operators_commute`（ň_μ^2 = ň_μ と、μ ≠ ν の ň_μň_ν = ň_νň_μ）: `sagemath/check/check_number_operator_idempotent/`・`sagemath/check/check_number_operators_commute/`。
+  証明の各行の検算は `050_claim_even_sector_eigenvalues/` の `check_28`・`check_29`・`check_23`（二つの主張で共有）にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。`check_28`・`check_29` を移し、`check_23` は前半（冪等性 (3) の鎖）と後半（可換性 Step 2・Step 3 の鎖）に分けて二つのディレクトリへ移した（段数は 228 + 553 = 781 で元と一致。鎖の組み立ては各ディレクトリの `_chains.sage`。旧い名前との対応は overview.md の「由来」）。
+  移した検算は ψ̌ を Jordan–Wigner のフェルミ演算子の模型で代えていたので、本文の ψ̌（`def_check_fermi` の式どおり、数体 E_μ := F(r_μ) の行列）で同じ鎖の全ての等号と主張を確かめる `check_with_check_psi.sage` を両方に足した（結合定数 3 組 × M_col = 2, 3。冪等性 549 件、可換性 1068 件。可換性は μ と ν の行列を E_μ か E_μ[S]/(S^2 − r_ν^2) に移して判定）。M_col = 4 は ψ̌ を作るだけで 250 秒、16 次の積一つが 5 秒かかるので外し、M_col = 4 の鎖は模型の検算が受け持つ。全て厳密計算で、人手証明の計算の誤りは無かった。レビューの必須の指摘 3 件（overview の結果欄、ログ、作り方で一致する比較の書き漏れ）と任意の指摘 2 件（剰余環が体になる場合の判定、段数の内訳）を直した。
+
 ## 次の一歩
 
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `check_number_operator_idempotent`（`--list` の先頭）から、文書順に検算を足す。この章のブロックの多くは `050_claim_even_sector_eigenvalues/` に番号付きの検算を持つが対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`iH_is_real_symmetric`・`sign_flip_conjugation` と同じく、該当する検算を内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめてから足りない行を足す（`check_number_operator_idempotent` は 050 の overview の併せて検証の行が check_28・check_23 を挙げている。check_23 は `check_number_operators_commute` と共有なので、移すなら両方の対象ラベルを持つ先を決める）。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_of_check_number_operator_product`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の全ての鎖は `050_claim_even_sector_eigenvalues/check_47` にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`check_number_operator_idempotent` と同じく、内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ、ψ̌ を Jordan–Wigner の模型で代えている行を本文の ψ̌ でも確かめる（本物の ψ̌ の作り方は `check_number_operators_commute/check_with_check_psi.sage` の `common_ring`。M_col = 4 は重い）。続く `check_joint_eigenspace_decomposition` などの章のブロックも、050 の overview の「併せて検証」の行が挙げる番号付きの検算を移す形で進める。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`check_number_operator_idempotent`・`check_number_operators_commute` のレビューで見つかった（根拠の欠けと表記。今回の差分より前から）: 可換性の Step 1 の δ の計算の 1 行目の根拠「M+1−ν = M+1−μ ⟺ μ = ν」がブロック参照でない。冪等性の (1) は `anticommutator_of_check_psi` の右辺の 0 を零行列 O と読むことを書いていない（可換性の証明には同じ注記がある）。両ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_23（check_28・check_29・check_01）」は、移した後の場所を指していない（`iH_is_real_symmetric`・`sign_flip_conjugation` も同じ）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`sign_flip_conjugation` のレビューで見つかった（文章だけの推論。今回の差分より前から）: 証明の最後の段落「`K_1, K_2^* > 0` より `i(K_1)_ℂ, i(K_2^*)_ℂ ≠ 0` なので、逆に S についての等式から H についての等式も従い、両者は同値である」は鎖もラベル参照も無い。主張の「すなわち」の H の等式は Step 3 で直接示しているので、主張の正しさには影響しない。直すには段落を `a^{-1}` を掛ける鎖にするか、主張の H の等式の出典を Step 3 と書いて段落を削る。検算の付いたブロックの見直しで扱う。
 

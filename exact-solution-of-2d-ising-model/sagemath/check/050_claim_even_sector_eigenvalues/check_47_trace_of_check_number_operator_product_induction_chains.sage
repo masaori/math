@@ -5,7 +5,7 @@
 # 移項の 2 行、二場合の鎖、最後の 6 行。
 #   D_μ := ψ̌_μ^†、A_μ := ψ̌_{M_col+1-μ}、n_μ := D_μ A_μ（def_check_number_operator）。
 # 鎖が使う仮定は check_number_operator_idempotent (2)（A_μD_μ = I - n_μ）と check_number_operators_commute (1) の第 2 式
-# （μ ≠ ν で A_μ n_ν = n_ν A_μ）だけなので、check_23 と同じく Jordan–Wigner のフェルミ演算子 c_μ を取り、D_μ := c_μ^T、A_μ := c_μ とする。
+# （μ ≠ ν で A_μ n_ν = n_ν A_μ）だけなので、check_number_operator_idempotent の Jordan–Wigner の模型の検算と同じく Jordan–Wigner のフェルミ演算子 c_μ を取り、D_μ := c_μ^T、A_μ := c_μ とする。
 # 否定コントロール: 添字が重なる列（μ_k = μ_j）では準備 2 の可換性と主張の値 2^{M_col-k} が外れることを確かめる。
 # 帰属: 成分とトレースは QQ（厳密計算）。
 from itertools import permutations, product
