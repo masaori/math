@@ -386,7 +386,7 @@ v_p(a)-v_p(b)
 &=v_p(a')+v_p(b)-v_p(b)-v_p(b')
 &&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
 &=v_p(a')-v_p(b')
-&&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr)
 \end{aligned}`),
                         paragraph([
                           "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
@@ -61980,6 +61980,11 @@ w_{\mathrm v}(\gamma)\bmod2
                         labels: ["claim_representative_increment"],
                         habitat: "Z",
                         verification: ["sagemath/check/closed-walk-plane-displacement"],
+                        lean: [
+                          "Ising2DLambda.KacWard.residueRepresentative_increment",
+                          "Ising2DLambda.NecSuf.KacWard.cyclicRepresentative_increment",
+                          "Ising2DLambda.KacWard.residueRepresentative_increment_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "任意の ", math(String.raw`y\in\mathbb Z/L\mathbb Z`), " について",
