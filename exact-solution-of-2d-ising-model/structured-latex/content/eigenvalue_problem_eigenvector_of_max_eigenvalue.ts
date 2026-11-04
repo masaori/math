@@ -3205,7 +3205,34 @@ c+c
 \ \in\ \mathbb{R}_{>0}`,
       ),
       paragraph([
-        "が成り立つ。**この計算には ",
+        "が成り立つ。ここで左辺は ",
+        math(String.raw`\mathbb{C}`),
+        " の元、右辺は ",
+        math(String.raw`\mathbb{R}`),
+        " の元であり、等号は左辺が右辺の像 ",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）に等しいことを、",
+        math(String.raw`\in \mathbb{R}_{>0}`),
+        " は右辺の実数が正であることを表す。右辺の ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の実数の exp、",
+        math(String.raw`\cosh, \sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        "、",
+        math(String.raw`x^{n}`),
+        " は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の ",
+        math(String.raw`\prod_{j=1}^{n}x`),
+        " である。",
+      ]),
+      paragraph([
+        "**この計算には ",
         math(String.raw`\check{Z},\check{Y},\check\psi`),
         " も ",
         math(String.raw`\tilde\theta_\mu`),
@@ -3220,11 +3247,17 @@ c+c
     ],
     proof: [
       paragraph([
-        "以下 ",
-        math(String.raw`B := \left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)`),
+        "準備。記号を置く。",
+        math(String.raw`\kappa := (K_1)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）、",
+        math(String.raw`B := \left(V_1^{(+)}\right)^{1/2}`),
         "（",
         ref("def_V1_plus_square_root"),
-        "）と略記し、",
+        "）、",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        " とし、",
         ref("def_D0_open_chain_operator"),
         " の ",
         math(String.raw`D_0`),
@@ -3232,195 +3265,452 @@ c+c
         ref("def_G_boundary_operator"),
         " の ",
         math(String.raw`G`),
-        " を用い、両者と ",
-        ref("H1_plus_in_sigma_z_form"),
-        " の等式で ",
-        math(String.raw`iH_1^{(+)}=D_0+\varepsilon G`),
-        " へ書き換える。",
+        " を用いる。",
+        math(String.raw`s \in \mathfrak{M}`),
+        " に対し ",
+        math(String.raw`-s \in \mathfrak{M}`),
+        " を ",
+        math(String.raw`(-s)(m) := -s(m)`),
+        " で定める。",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`\mathrm{ord} : \mathfrak{M} \to \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " は全単射なので、",
+        math(String.raw`a : \mathfrak{M} \to \mathbb{C}`),
+        " について ",
+        math(String.raw`\sum_{s\in\mathfrak{M}} a(s) := \sum_{k=1}^{2^{M_{\mathrm{col}}}} a\bigl(\mathrm{ord}^{-1}(k)\bigr)`),
+        "（",
+        ref("def_finite_sum_of_complex_numbers"),
+        "）と定め、",
+        math(String.raw`a : \mathfrak{M} \to \mathbb{R}`),
+        " についても同じ式で ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の和を定める（",
+        ref("open_chain_partition_sum"),
+        "・",
+        ref("open_chain_endpoint_product_sum"),
+        " の左辺の和もこの和である）。",
+        ref("V1_plus_exponential_representation"),
+        " の右辺の ",
+        math(String.raw`iK_1H_1^{(+)}`),
+        " は ",
+        math(String.raw`(i\kappa)H_1^{(+)}`),
+        " と読む。",
       ]),
+      paragraph(["(P1) exp の中身の分解。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(i\kappa)H_1^{(+)}
+&= (\kappa i)H_1^{(+)}
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= \kappa\bigl(iH_1^{(+)}\bigr)
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= \kappa\bigl(D_0 + \varepsilon G\bigr)
+&&(\because \blkref{H1_plus_in_sigma_z_form}) \\
+&= \kappa D_0 + \kappa(\varepsilon G)
+&&(\because \blkref{scalar_multiple_distributes_over_matrix_sum})
+\end{aligned}`,
+      ),
+      paragraph(["(P2) 二つの可換性。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_0(\varepsilon G)
+&= (D_0\varepsilon)G
+&&(\because \blkref{mat_mult_associative}) \\
+&= (\varepsilon D_0)G
+&&(\because \blkref{epsilon_D0_G_pairwise_commute}\ \text{の}\ \varepsilon D_0 = D_0\varepsilon) \\
+&= \varepsilon(D_0G)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \varepsilon(GD_0)
+&&(\because \blkref{epsilon_D0_G_pairwise_commute}\ \text{の}\ D_0G = GD_0) \\
+&= (\varepsilon G)D_0
+&&(\because \blkref{mat_mult_associative})
+\end{aligned}`,
+      ),
+      paragraph([
+        "これに ",
+        ref("commuting_with_scalar_multiple"),
+        " を ",
+        math(String.raw`(G, X, c) = (D_0, \varepsilon G, \kappa)`),
+        " で当てて ",
+        math(String.raw`D_0\bigl(\kappa(\varepsilon G)\bigr) = \bigl(\kappa(\varepsilon G)\bigr)D_0`),
+        "、さらに ",
+        math(String.raw`(G, X, c) = (\kappa(\varepsilon G), D_0, \kappa)`),
+        " で当てて ",
+        math(String.raw`\bigl(\kappa(\varepsilon G)\bigr)(\kappa D_0) = (\kappa D_0)\bigl(\kappa(\varepsilon G)\bigr)`),
+        " を得る。また ",
+        ref("epsilon_D0_G_pairwise_commute"),
+        " の ",
+        math(String.raw`\varepsilon D_0 = D_0\varepsilon`),
+        " に ",
+        ref("commuting_with_scalar_multiple"),
+        " を ",
+        math(String.raw`(G, X, c) = (\varepsilon, D_0, \kappa)`),
+        " で当てて ",
+        math(String.raw`\varepsilon(\kappa D_0) = (\kappa D_0)\varepsilon`),
+        " を得る。",
+      ]),
+      paragraph([
+        "(P3) ",
+        math(String.raw`\varepsilon G`),
+        " の冪。",
+        ref("def_exp"),
+        " の冪 ",
+        math(String.raw`A^0 := I`),
+        "、",
+        math(String.raw`A^{n+1} := A^nA`),
+        " について、",
+        math(String.raw`j \in \mathbb{Z}_{\geq 0}`),
+        " に関する帰納法で ",
+        math(String.raw`(\varepsilon G)^{2j} = I`),
+        " かつ ",
+        math(String.raw`(\varepsilon G)^{2j+1} = \varepsilon G`),
+        " を示す。",
+        math(String.raw`j = 0`),
+        " では ",
+        math(String.raw`(\varepsilon G)^{0} = I`),
+        "（冪の定義）であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\varepsilon G)^{2j+1}
+&= (\varepsilon G)^{2j}(\varepsilon G)
+&&(\because \text{冪の定義}) \\
+&= I(\varepsilon G)
+&&(\because \text{帰納法の仮定}\ (\varepsilon G)^{2j} = I) \\
+&= \varepsilon G
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}) \\[4pt]
+(\varepsilon G)^{2j+2}
+&= (\varepsilon G)^{2j+1}(\varepsilon G)
+&&(\because \text{冪の定義}) \\
+&= (\varepsilon G)(\varepsilon G)
+&&(\because \text{直前の}\ (\varepsilon G)^{2j+1} = \varepsilon G) \\
+&= (\varepsilon G)^2
+&&(\because \blkref{epsilon_G_is_involution}\ \text{の}\ X^2 := XX) \\
+&= I
+&&(\because \blkref{epsilon_G_is_involution})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(P4) スカラー倍の冪。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " に関する帰納法で ",
+        math(String.raw`\bigl(\kappa(\varepsilon G)\bigr)^{n} = \kappa^{n}(\varepsilon G)^{n}`),
+        "（",
+        math(String.raw`\kappa^n`),
+        " は ",
+        ref("def_power_of_complex_number"),
+        "）を示す。",
+        math(String.raw`n = 0`),
+        " では両辺とも ",
+        math(String.raw`I`),
+        " である（",
+        math(String.raw`\kappa^0 = 1_{\mathbb{C}}`),
+        "、",
+        ref("scalar_multiple_by_one"),
+        "）。",
+        math(String.raw`X := \varepsilon G`),
+        " と書くと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\kappa X)^{n+1}
+&= (\kappa X)^{n}(\kappa X)
+&&(\because \text{冪の定義}) \\
+&= \bigl(\kappa^{n}X^{n}\bigr)(\kappa X)
+&&(\because \text{帰納法の仮定}) \\
+&= \kappa^{n}\bigl(X^{n}(\kappa X)\bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= \kappa^{n}\bigl(\kappa(X^{n}X)\bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= (\kappa^{n}\kappa)(X^{n}X)
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= \kappa^{n+1}X^{n+1}
+&&(\because \blkref{def_power_of_complex_number}\ \text{と冪の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(P5) 基底ベクトルの成分。",
+        math(String.raw`s, s' \in \mathfrak{M}`),
+        " について、",
+        math(String.raw`\delta_{s=s'} \in \{0_{\mathbb{C}},1_{\mathbb{C}}\}`),
+        " を ",
+        math(String.raw`s = s'`),
+        " のとき ",
+        math(String.raw`1_{\mathbb{C}}`),
+        "、そうでないとき ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " とすると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(f_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
+&= \bigl(f_{\iota(s)}\bigr)_{\nu(\iota(s'))}
+&&(\because \blkref{config_numbering_equals_kronecker_numbering}) \\
+&= \prod_{m=1}^{M_{\mathrm{col}}}\bigl(e_{\iota(s)_m}\bigr)_{\iota(s')_m}
+&&(\because \blkref{def_end_iso}\ \text{の}\ f_I \text{ と } \blkref{def_kronecker}\ \text{(1) の成分の式}) \\
+&= \delta_{s=s'}
+&&(\because \text{下の場合分け})
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の行の場合分け: ",
+        math(String.raw`s = s'`),
+        " なら全ての因子が ",
+        math(String.raw`(e_i)_i = 1_{\mathbb{C}}`),
+        "（",
+        math(String.raw`e_1 = (1,0),\ e_2 = (0,1)`),
+        "）なので、積は ",
+        ref("finite_product_of_complex_ones"),
+        " より ",
+        math(String.raw`1_{\mathbb{C}}`),
+        "。",
+        math(String.raw`s \neq s'`),
+        " なら ",
+        ref("def_config_basis_iso"),
+        " の ",
+        math(String.raw`\iota`),
+        " は単射（",
+        math(String.raw`i_m`),
+        " から ",
+        math(String.raw`s(m)`),
+        " が読み戻せる）なので、ある ",
+        math(String.raw`m`),
+        " で ",
+        math(String.raw`\iota(s)_m \neq \iota(s')_m`),
+        " となり、その因子は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "。積は ",
+        ref("finite_product_with_zero_factor_is_zero"),
+        " より ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "。",
+      ]),
+      paragraph([
+        "列の読み取り: ",
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について、",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`l \neq \mathrm{ord}(s)`),
+        " の番号は ",
+        math(String.raw`t \neq s`),
+        " なる ",
+        math(String.raw`l = \mathrm{ord}(t)`),
+        " と書けるので、上の式から ",
+        math(String.raw`(f_{\iota(s)})_l = 0_{\mathbb{C}}`),
+        "、",
+        ref("complex_times_zero_is_zero"),
+        " より ",
+        math(String.raw`X_{\mathrm{ord}(s'),l}(f_{\iota(s)})_l = 0_{\mathbb{C}}`),
+        " である。ゆえに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(Xf_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
+&= \sum_{l=1}^{2^{M_{\mathrm{col}}}} X_{\mathrm{ord}(s'),l}\bigl(f_{\iota(s)}\bigr)_{l}
+&&(\because \blkref{mat_mult}) \\
+&= X_{\mathrm{ord}(s'),\mathrm{ord}(s)}\bigl(f_{\iota(s)}\bigr)_{\mathrm{ord}(s)}
+&&(\because \blkref{finite_sum_with_single_nonzero_term}) \\
+&= X_{\mathrm{ord}(s'),\mathrm{ord}(s)}\,1_{\mathbb{C}}
+&&(\because \text{(P5) の}\ s' = s) \\
+&= X_{\mathrm{ord}(s'),\mathrm{ord}(s)}
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 1（",
         math(String.raw`\varepsilon`),
-        " を外へ出す）。",
-        ref("epsilon_commutes_with_V1_plus_square_root"),
-        "・",
-        ref("epsilon_commutes_with_V1_plus"),
-        "・",
-        ref("epsilon_commutes_with_V2"),
-        " より ",
-        math(String.raw`\varepsilon`),
-        " は ",
-        math(String.raw`B = (V_1^{(+)})^{1/2}`),
-        " とも ",
-        math(String.raw`V_1^{(+)}`),
-        " とも ",
-        math(String.raw`V_2`),
-        " とも可換である。",
-        ref("trace_basic_properties"),
-        " (2) の巡回性と合わせて",
+        " を ",
+        math(String.raw`V_1^{(+)}V_2`),
+        " の前へ移す）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
 &= \mathrm{tr}\!\left(\varepsilon\,B\,V_2\,B\right)
-   \quad (\because \blkref{def_V_plus}) \\
+&&(\because \blkref{def_V_plus}) \\
 &= \mathrm{tr}\!\left(B\,\varepsilon\,V_2\,B\right)
-   \quad (\because \blkref{epsilon_commutes_with_V1_plus_square_root}\ \text{の}\ 
-   \varepsilon B = B\varepsilon) \\
+&&(\because \blkref{epsilon_commutes_with_V1_plus_square_root}\ \text{の}\ \varepsilon B = B\varepsilon) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_2\,B\,B\right)
-   \quad (\because \blkref{trace_basic_properties}\ \text{(2) の巡回性を }
-   A = B,\ B' = \varepsilon V_2B \text{ に適用}) \\
+&&(\because \blkref{trace_basic_properties}\ \text{(2) を}\ A = B,\ B' = \varepsilon V_2B \text{ に}) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_2\,V_1^{(+)}\right)
-   \quad \left(\because \blkref{V1_plus_square_root_property}\ \text{の}\ BB = V_1^{(+)}\right) \\
+&&\left(\because \blkref{V1_plus_square_root_property}\ \text{の}\ BB = V_1^{(+)}\right) \\
 &= \mathrm{tr}\!\left(V_1^{(+)}\,\varepsilon\,V_2\right)
-   \quad (\because \blkref{trace_basic_properties}\ \text{(2) の巡回性}) \\
+&&(\because \blkref{trace_basic_properties}\ \text{(2) を}\ A = \varepsilon V_2,\ B' = V_1^{(+)} \text{ に}) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_1^{(+)}\,V_2\right)
-   \quad (\because \blkref{epsilon_commutes_with_V1_plus}\ \text{より}\ 
-   V_1^{(+)}\varepsilon=\varepsilon V_1^{(+)})
+&&(\because \blkref{epsilon_commutes_with_V1_plus}\ \text{の}\ V_1^{(+)}\varepsilon=\varepsilon V_1^{(+)})
 \end{aligned}`,
       ),
+      paragraph([
+        "（積の括弧は ",
+        ref("mat_mult_associative"),
+        " により省いている。）",
+      ]),
       paragraph([
         "Step 2（",
         math(String.raw`\varepsilon V_1^{(+)}`),
         " を対角行列と ",
         math(String.raw`\varepsilon`),
+        "・",
+        math(String.raw`G`),
         " で書く）。",
-        ref("V1_plus_exponential_representation"),
-        " より ",
-        math(String.raw`V_1^{(+)} = \exp\!\left(iK_1H_1^{(+)}\right)`),
-        " であり、",
-        ref("H1_plus_in_sigma_z_form"),
-        " より ",
-        math(String.raw`iK_1H_1^{(+)} = K_1D_0 + K_1\varepsilon G`),
-        " である。",
-        ref("epsilon_D0_G_pairwise_commute"),
-        " より ",
-        math(String.raw`K_1D_0`),
-        " と ",
-        math(String.raw`K_1\varepsilon G`),
-        " は可換なので ",
-        ref("theorem_exp_product"),
-        " が使えて",
-      ]),
-      displayMath(
-        String.raw`V_1^{(+)} = \exp\!\left(K_1D_0\right)\exp\!\left(K_1\varepsilon G\right)
-\quad (\because \text{theorem\_exp\_product})`,
-      ),
-      paragraph([
-        ref("epsilon_G_is_involution"),
-        " の ",
-        math(String.raw`(\varepsilon G)^2 = I`),
-        " より、",
-        ref("def_exp"),
-        " の級数を偶数次と奇数次に分けると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp\!\left(K_1\varepsilon G\right)
-&= \sum_{k=0}^{\infty}\frac{K_1^{k}}{k!}\left(\varepsilon G\right)^{k}
-   \quad (\because \text{def\_exp}) \\
-&= \left(\sum_{k \text{ 偶}}\frac{K_1^{k}}{k!}\right)I
-   + \left(\sum_{k \text{ 奇}}\frac{K_1^{k}}{k!}\right)\varepsilon G
-   \quad \left(\because \left(\varepsilon G\right)^{2}=I \text{ より }
-   \left(\varepsilon G\right)^{k} = I \text{ または } \varepsilon G\right) \\
-&= \cosh(K_1)\,I + \sinh(K_1)\,\varepsilon G
-   \quad \left(\because \cosh K_1 = \sum_{k\text{ 偶}}\frac{K_1^k}{k!},\
-   \sinh K_1 = \sum_{k\text{ 奇}}\frac{K_1^k}{k!}\right)
+V_1^{(+)}
+&= \exp\!\left((i\kappa)H_1^{(+)}\right)
+&&(\because \blkref{V1_plus_exponential_representation}) \\
+&= \exp\!\left(\kappa D_0 + \kappa(\varepsilon G)\right)
+&&(\because \text{(P1)}) \\
+&= \exp\!\left(\kappa D_0\right)\exp\!\left(\kappa(\varepsilon G)\right)
+&&(\because \blkref{theorem_exp_product}\ \text{を}\ A = \kappa D_0,\ B = \kappa(\varepsilon G) \text{ に。可換性は (P2)})
 \end{aligned}`,
       ),
       paragraph([
-        "（級数を偶奇に分けて足し直せることは、実数の絶対収束級数の項の並べ替えによる。",
-        ref("real_exp_series_converges"),
-        " より ",
-        math(String.raw`\sum K_1^k/k!`),
-        " は絶対収束する。）左から ",
-        math(String.raw`\varepsilon`),
-        " を掛け、",
-        math(String.raw`\varepsilon`),
-        " が ",
-        math(String.raw`\exp(K_1D_0)`),
-        " と可換（",
-        ref("epsilon_D0_G_pairwise_commute"),
-        " より ",
-        math(String.raw`\varepsilon D_0 = D_0\varepsilon`),
-        "、よって級数の部分和とも可換、極限とも可換）であることを使うと",
+        math(String.raw`T_n := \bigl(\kappa(\varepsilon G)\bigr)^{n}`),
+        "（",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        "）は、(P4)・(P3) より ",
+        math(String.raw`n`),
+        " が偶数のとき ",
+        math(String.raw`\kappa^{n}I`),
+        "、奇数のとき ",
+        math(String.raw`\kappa^{n}(\varepsilon G) = (1_{\mathbb{C}}\kappa^{n})(\varepsilon G)`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の積の単位元）である。ゆえに ",
+        ref("exponential_series_of_even_odd_power_terms"),
+        " の仮定を ",
+        math(String.raw`d = 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`x = K_1`),
+        "、",
+        math(String.raw`A = I`),
+        "、",
+        math(String.raw`B = \varepsilon G`),
+        "、",
+        math(String.raw`c = 1_{\mathbb{C}}`),
+        " で満たし、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,V_1^{(+)}
-&= \varepsilon\,\exp\!\left(K_1D_0\right)\exp\!\left(K_1\varepsilon G\right)
-   \quad (\because \text{この Step の最初の式 }
-   V_1^{(+)} = \exp(K_1D_0)\exp(K_1\varepsilon G)) \\
-&= \exp\!\left(K_1D_0\right)\varepsilon\,\exp\!\left(K_1\varepsilon G\right)
-   \quad (\because \text{直前の可換性 }
-   \varepsilon\exp(K_1D_0) = \exp(K_1D_0)\varepsilon) \\
-&= \exp\!\left(K_1D_0\right)\varepsilon
-   \left(\cosh(K_1)\,I + \sinh(K_1)\,\varepsilon G\right)
-   \quad (\because \text{直前の } \exp(K_1\varepsilon G) \text{ の表示}) \\
-&= \exp\!\left(K_1D_0\right)
-   \left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,\varepsilon^2 G\right)
-   \quad (\because \text{行列の積の分配則}) \\
-&= \exp\!\left(K_1D_0\right)
-   \left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,G\right)
-   \quad \left(\because \varepsilon^2 = I\right)
+\exp\!\left(\kappa(\varepsilon G)\right)
+&= \sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\bigl(\kappa(\varepsilon G)\bigr)^{n}
+&&(\because \blkref{def_exp}\ \text{(1)}) \\
+&= (\cosh K_1)_{\mathbb{C}}\,I + \bigl(1_{\mathbb{C}}(\sinh K_1)_{\mathbb{C}}\bigr)(\varepsilon G)
+&&(\because \blkref{exponential_series_of_even_odd_power_terms}) \\
+&= (\cosh K_1)_{\mathbb{C}}\,I + (\sinh K_1)_{\mathbb{C}}(\varepsilon G)
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon V_1^{(+)}
+&= \varepsilon\Bigl(\exp(\kappa D_0)\exp\!\bigl(\kappa(\varepsilon G)\bigr)\Bigr)
+&&(\because \text{この Step の最初の鎖}) \\
+&= \bigl(\varepsilon\exp(\kappa D_0)\bigr)\exp\!\bigl(\kappa(\varepsilon G)\bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \bigl(\exp(\kappa D_0)\varepsilon\bigr)\exp\!\bigl(\kappa(\varepsilon G)\bigr)
+&&(\because \blkref{commuting_matrix_commutes_with_exp}\ \text{を}\ A = \varepsilon,\ B = \kappa D_0 \text{ に。可換性は (P2)}) \\
+&= \exp(\kappa D_0)\Bigl(\varepsilon\exp\!\bigl(\kappa(\varepsilon G)\bigr)\Bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \exp(\kappa D_0)\Bigl(\varepsilon\bigl((\cosh K_1)_{\mathbb{C}}I + (\sinh K_1)_{\mathbb{C}}(\varepsilon G)\bigr)\Bigr)
+&&(\because \text{直前の}\ \exp(\kappa(\varepsilon G)) \text{ の鎖}) \\
+&= \exp(\kappa D_0)\Bigl(\varepsilon\bigl((\cosh K_1)_{\mathbb{C}}I\bigr) + \varepsilon\bigl((\sinh K_1)_{\mathbb{C}}(\varepsilon G)\bigr)\Bigr)
+&&(\because \blkref{mat_mult_distributes_over_sum_in_right_factor}) \\
+&= \exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}(\varepsilon I) + (\sinh K_1)_{\mathbb{C}}\bigl(\varepsilon(\varepsilon G)\bigr)\Bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= \exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}\bigl(\varepsilon(\varepsilon G)\bigr)\Bigr)
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
+&= \exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}\bigl((\varepsilon\varepsilon)G\bigr)\Bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}(IG)\Bigr)
+&&(\because \blkref{epsilon_square_and_eigenvalues}\ \text{の}\ \varepsilon^2 = I) \\
+&= \exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}\,G\Bigr)
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
       paragraph([
         "Step 3（成分の読み取り）。",
-        ref("def_config_basis_iso"),
-        " の ",
-        math(String.raw`\iota`),
-        " による番号付け（",
-        ref("config_numbering_equals_kronecker_numbering"),
-        "）のもとで基底を ",
-        math(String.raw`f_{\iota(s)}`),
-        "（",
-        math(String.raw`s \in \mathfrak{M}`),
-        "）とする。次の 3 つを読み取る。",
-      ]),
-      list([
-        [
-          "(a) ",
-          ref("D0_G_diagonal_action"),
-          " と ",
-          ref("exp_of_diagonal_matrix"),
-          " より ",
-          math(String.raw`\exp(K_1D_0)`),
-          " は対角行列で ",
-          math(String.raw`\left(\exp(K_1D_0)\right)_{\iota(s),\iota(s)} = \exp(K_1E(s))`),
-          "（",
-          math(String.raw`E(s) = \sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)`),
-          " は ",
-          ref("def_open_chain_spin_energy"),
-          " のもの）。同じく ",
-          math(String.raw`G`),
-          " は対角行列で ",
-          math(String.raw`G_{\iota(s),\iota(s)} = s(M_{\mathrm{col}})s(1)`),
-          "。",
-        ],
-        [
-          "(b) ",
-          math(String.raw`\varepsilon f_{\iota(s)} = f_{\iota(-s)}`),
-          "。ここで ",
-          math(String.raw`(-s)(m) := -s(m)`),
-          "。",
-        ],
-        [
-          "(c) ",
-          ref("def_transfer_matrix"),
-          " と ",
-          ref("config_numbering_equals_kronecker_numbering"),
-          " より ",
-          math(String.raw`(V_2)_{\iota(s),\iota(s')} = \exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}}s(m)s'(m)\right)`),
-          "。とくに ",
-          math(String.raw`(V_2)_{\iota(s),\iota(s)} = \exp(M_{\mathrm{col}}K_2)`),
-          "、",
-          math(String.raw`(V_2)_{\iota(-s),\iota(s)} = \exp(-M_{\mathrm{col}}K_2)`),
-          "。",
-        ],
+        math(String.raw`s, s' \in \mathfrak{M}`),
+        " とする。",
       ]),
       paragraph([
-        "(b) の理由：",
+        "(a) ",
+        math(String.raw`D_0`),
+        " と ",
+        math(String.raw`G`),
+        " の成分は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(D_0)_{\mathrm{ord}(s'),\mathrm{ord}(s)}
+&= \bigl(D_0f_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
+&&(\because \text{(P5) の列の読み取り}) \\
+&= \Bigl(\bigl(E(s)\bigr)_{\mathbb{C}}f_{\iota(s)}\Bigr)_{\mathrm{ord}(s')}
+&&(\because \blkref{D0_G_diagonal_action}\ \text{と}\ \blkref{def_open_chain_spin_energy}) \\
+&= \bigl(E(s)\bigr)_{\mathbb{C}}\bigl(f_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \bigl(E(s)\bigr)_{\mathbb{C}}\,\delta_{s=s'}
+&&(\because \text{(P5)})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、同じ 4 行で ",
+        math(String.raw`G_{\mathrm{ord}(s'),\mathrm{ord}(s)} = \bigl(s(M_{\mathrm{col}})s(1)\bigr)_{\mathbb{C}}\,\delta_{s=s'}`),
+        "（",
+        ref("D0_G_diagonal_action"),
+        " の ",
+        math(String.raw`G`),
+        " の式）である。",
+        ref("row_configuration_numbering_bijective"),
+        " より全ての番号は ",
+        math(String.raw`\mathrm{ord}(s)`),
+        " の形なので、",
+        math(String.raw`D_0`),
+        " も ",
+        math(String.raw`G`),
+        " も対角行列（",
+        ref("def_diagonal_matrix"),
+        "）であり、",
+        math(String.raw`\kappa D_0`),
+        " も対角行列で（",
+        ref("def_matrix_scalar_multiple"),
+        "・",
+        ref("complex_times_zero_is_zero"),
+        "）、その対角成分は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\kappa D_0)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&= \kappa\,\bigl(E(s)\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_matrix_scalar_multiple}\ \text{と (a)}) \\
+&= \bigl(K_1E(s)\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。ゆえに ",
+        ref("exp_of_diagonal_matrix"),
+        " より ",
+        math(String.raw`\exp(\kappa D_0)`),
+        " は対角行列で、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&= \exp\!\Bigl(\bigl(K_1E(s)\bigr)_{\mathbb{C}}\Bigr)
+&&(\because \blkref{exp_of_diagonal_matrix}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \blkref{complex_exp_of_real_argument})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(b) ",
+        math(String.raw`\varepsilon f_{\iota(s)} = f_{\iota(-s)}`),
+        "。理由：",
         ref("def_end_iso"),
         " の基底は ",
         math(String.raw`f_I = e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}`),
@@ -3442,7 +3732,9 @@ c+c
         math(String.raw`m`),
         " 成分だけを入れ替える。",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
-        " はすべての成分を入れ替えるので、",
+        "（",
+        ref("def_global_spin_flip_matrix"),
+        "）はすべての成分を入れ替えるので、",
         ref("def_config_basis_iso"),
         " の ",
         math(String.raw`\iota`),
@@ -3452,101 +3744,235 @@ c+c
         math(String.raw`-1\mapsto2`),
         "）のもとで ",
         math(String.raw`\varepsilon f_{\iota(s)} = f_{\iota(-s)}`),
-        " である。(c) の 2 つの特別な場合は ",
-        math(String.raw`\sum_m s(m)s(m) = M_{\mathrm{col}}`),
-        " と ",
-        math(String.raw`\sum_m(-s(m))s(m) = -M_{\mathrm{col}}`),
-        " による。",
+        " である。これと (P5) より",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon_{\mathrm{ord}(s'),\mathrm{ord}(s)}
+&= \bigl(\varepsilon f_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
+&&(\because \text{(P5) の列の読み取り}) \\
+&= \bigl(f_{\iota(-s)}\bigr)_{\mathrm{ord}(s')}
+&&(\because \text{(b)}) \\
+&= \delta_{-s=s'}
+&&(\because \text{(P5)})
+\end{aligned}`,
+      ),
       paragraph([
-        "Step 4（トレースの計算）。",
-        ref("def_trace"),
+        "(c) ",
+        ref("def_transfer_matrix"),
         " より ",
-        math(String.raw`\mathrm{tr}(X) = \sum_{s\in\mathfrak{M}}X_{\iota(s),\iota(s)}`),
-        " である。Step 2 の表示を Step 1 に代入し、",
-        ref("trace_basic_properties"),
-        " (1) の線型性で 2 項に分ける。",
-      ]),
-      displayMath(
-        String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \cosh(K_1)\,\mathrm{tr}\!\left(\exp(K_1D_0)\,\varepsilon\,V_2\right)
-+ \sinh(K_1)\,\mathrm{tr}\!\left(\exp(K_1D_0)\,G\,V_2\right)`,
-      ),
-      paragraph([
-        "第 1 項の対角成分は、(a) の対角性と (b)(c) より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\exp(K_1D_0)\,\varepsilon\,V_2\right)_{\iota(s),\iota(s)}
-&= \exp(K_1E(s))\left(\varepsilon V_2\right)_{\iota(s),\iota(s)}
-   \quad (\because \text{(a) の対角性}) \\
-&= \exp(K_1E(s))\left(V_2\right)_{\iota(-s),\iota(s)}
-   \quad (\because \text{(b), } \varepsilon \text{ は行番号 } \iota(s)
-   \text{ を } \iota(-s) \text{ に移す置換行列}) \\
-&= \exp(K_1E(s))\,\exp(-M_{\mathrm{col}}K_2)
-   \quad (\because \text{(c)})
-\end{aligned}`,
-      ),
-      paragraph(["第 2 項の対角成分は同様に"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\exp(K_1D_0)\,G\,V_2\right)_{\iota(s),\iota(s)}
-&= \exp(K_1E(s))\left(G\,V_2\right)_{\iota(s),\iota(s)}
-   \quad (\because \text{(a) の } \exp(K_1D_0) \text{ の対角性}) \\
-&= \exp(K_1E(s))\,s(M_{\mathrm{col}})s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
-   \quad (\because \text{(a) の } G \text{ の対角性}) \\
-&= \exp(K_1E(s))\,s(M_{\mathrm{col}})s(1)\,\exp(M_{\mathrm{col}}K_2)
-   \quad (\because \text{(c)})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`s \in \mathfrak{M}`),
-        " について足し、",
-        ref("open_chain_partition_sum"),
-        " と ",
-        ref("open_chain_endpoint_product_sum"),
+        math(String.raw`(V_2)_{\mathrm{ord}(s),\mathrm{ord}(s')} = \Bigl(\exp\!\Bigl(K_2\sum_{m=1}^{M_{\mathrm{col}}}s(m)s'(m)\Bigr)\Bigr)_{\mathbb{C}}`),
+        "（右辺の内側は ",
+        ref("def_scalar_exp"),
+        " の実数の exp）。",
+        math(String.raw`s(m)s(m) = 1`),
+        "、",
+        math(String.raw`(-s(m))s(m) = -1`),
         " を ",
-        math(String.raw`K = K_1`),
-        " として適用すると",
+        math(String.raw`m = 1,\dots,M_{\mathrm{col}}`),
+        " について足すと ",
+        math(String.raw`(V_2)_{\mathrm{ord}(s),\mathrm{ord}(s)} = \bigl(\exp(K_2M_{\mathrm{col}})\bigr)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`(V_2)_{\mathrm{ord}(-s),\mathrm{ord}(s)} = \bigl(\exp(-K_2M_{\mathrm{col}})\bigr)_{\mathbb{C}}`),
+        " である。",
       ]),
+      paragraph([
+        "Step 4（対角成分）。",
+        math(String.raw`s \in \mathfrak{M}`),
+        " とする。",
+        ref("mat_mult"),
+        " の和 ",
+        math(String.raw`\sum_{k=1}^{2^{M_{\mathrm{col}}}}`),
+        " で、(a) の対角性・(b) の ",
+        math(String.raw`\varepsilon_{\mathrm{ord}(s),k}`),
+        " が ",
+        math(String.raw`k \neq \mathrm{ord}(-s)`),
+        " で ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " であることから、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " を掛けた項は ",
+        ref("complex_zero_times_is_zero"),
+        " で ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " になり、",
+        ref("finite_sum_with_single_nonzero_term"),
+        " により一つの項だけが残る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(\exp(\kappa D_0)(\varepsilon V_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,(\varepsilon V_2)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&&(\because \blkref{mat_mult}\ \text{と (a) の}\ \exp(\kappa D_0) \text{ の対角性、} \blkref{finite_sum_with_single_nonzero_term}) \\
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,\bigl(\varepsilon_{\mathrm{ord}(s),\mathrm{ord}(-s)}(V_2)_{\mathrm{ord}(-s),\mathrm{ord}(s)}\bigr)
+&&(\because \blkref{mat_mult}\ \text{と (b)、} \blkref{finite_sum_with_single_nonzero_term}) \\
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,\bigl(1_{\mathbb{C}}(V_2)_{\mathrm{ord}(-s),\mathrm{ord}(s)}\bigr)
+&&(\because \text{(b) の}\ \delta_{-(-s)=s} = 1_{\mathbb{C}}) \\
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,(V_2)_{\mathrm{ord}(-s),\mathrm{ord}(s)}
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}\,(V_2)_{\mathrm{ord}(-s),\mathrm{ord}(s)}
+&&(\because \text{(a)}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}\,\bigl(\exp(-K_2M_{\mathrm{col}})\bigr)_{\mathbb{C}}
+&&(\because \text{(c)}) \\
+&= \Bigl(\exp(-K_2M_{\mathrm{col}})\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}\ \text{と}\ \mathbb{R}\ \text{の積の可換律})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(\exp(\kappa D_0)(GV_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,(GV_2)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&&(\because \blkref{mat_mult}\ \text{と (a) の}\ \exp(\kappa D_0) \text{ の対角性、} \blkref{finite_sum_with_single_nonzero_term}) \\
+&= \bigl(\exp(\kappa D_0)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}\,\bigl(G_{\mathrm{ord}(s),\mathrm{ord}(s)}(V_2)_{\mathrm{ord}(s),\mathrm{ord}(s)}\bigr)
+&&(\because \blkref{mat_mult}\ \text{と (a) の}\ G \text{ の対角性、} \blkref{finite_sum_with_single_nonzero_term}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}\Bigl(\bigl(s(M_{\mathrm{col}})s(1)\bigr)_{\mathbb{C}}(V_2)_{\mathrm{ord}(s),\mathrm{ord}(s)}\Bigr)
+&&(\because \text{(a)}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}\Bigl(\bigl(s(M_{\mathrm{col}})s(1)\bigr)_{\mathbb{C}}\bigl(\exp(K_2M_{\mathrm{col}})\bigr)_{\mathbb{C}}\Bigr)
+&&(\because \text{(c)}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}\Bigl(s(M_{\mathrm{col}})s(1)\exp(K_2M_{\mathrm{col}})\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \Bigl(\exp\bigl(K_1E(s)\bigr)\,s(M_{\mathrm{col}})s(1)\exp(K_2M_{\mathrm{col}})\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \Bigl(\exp(K_2M_{\mathrm{col}})\bigl(s(M_{\mathrm{col}})s(1)\exp(K_1E(s))\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \mathbb{R}\ \text{の積の可換律・結合律})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 5（トレースの計算）。",
+        math(String.raw`S_{\cosh} := \sum_{s\in\mathfrak{M}}\exp\bigl(K_1E(s)\bigr) \in \mathbb{R}`),
+        "、",
+        math(String.raw`S_{\sinh} := \sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp\bigl(K_1E(s)\bigr) \in \mathbb{R}`),
+        " とおく。",
+        ref("def_trace"),
+        " と準備の和の定め方より ",
+        math(String.raw`\mathrm{tr}(X) = \sum_{s\in\mathfrak{M}}X_{\mathrm{ord}(s),\mathrm{ord}(s)}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\exp(\kappa D_0)(\varepsilon V_2)\right)
+&= \sum_{s\in\mathfrak{M}}\bigl(\exp(\kappa D_0)(\varepsilon V_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&&(\because \blkref{def_trace}\ \text{と準備の和の定め方}) \\
+&= \sum_{s\in\mathfrak{M}}\Bigl(\exp(-K_2M_{\mathrm{col}})\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \text{Step 4}) \\
+&= \Bigl(\sum_{s\in\mathfrak{M}}\exp(-K_2M_{\mathrm{col}})\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \bigl(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh}\bigr)_{\mathbb{C}}
+&&(\because \blkref{finite_sum_of_real_scalar_multiples}) \\[4pt]
+\mathrm{tr}\!\left(\exp(\kappa D_0)(GV_2)\right)
+&= \sum_{s\in\mathfrak{M}}\bigl(\exp(\kappa D_0)(GV_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
+&&(\because \blkref{def_trace}\ \text{と準備の和の定め方}) \\
+&= \sum_{s\in\mathfrak{M}}\Bigl(\exp(K_2M_{\mathrm{col}})\bigl(s(M_{\mathrm{col}})s(1)\exp(K_1E(s))\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \text{Step 4}) \\
+&= \Bigl(\sum_{s\in\mathfrak{M}}\exp(K_2M_{\mathrm{col}})\bigl(s(M_{\mathrm{col}})s(1)\exp(K_1E(s))\bigr)\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \bigl(\exp(K_2M_{\mathrm{col}})\,S_{\sinh}\bigr)_{\mathbb{C}}
+&&(\because \blkref{finite_sum_of_real_scalar_multiples})
+\end{aligned}`,
+      ),
+      paragraph(["これらを使って"]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-&= \cosh(K_1)\,\exp(-M_{\mathrm{col}}K_2)\sum_{s\in\mathfrak{M}}\exp(K_1E(s))
- + \sinh(K_1)\,\exp(M_{\mathrm{col}}K_2)\sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp(K_1E(s))
-   \quad (\because \text{def\_trace と直前の 2 式}) \\
-&= \cosh(K_1)\,\exp(-M_{\mathrm{col}}K_2)\cdot 2\left(2\cosh K_1\right)^{M_{\mathrm{col}}-1}
- + \sinh(K_1)\,\exp(M_{\mathrm{col}}K_2)\cdot 2\left(2\sinh K_1\right)^{M_{\mathrm{col}}-1}
-   \quad (\because \text{二つの1次元開鎖のスピン和公式}) \\
-&= 2^{M_{\mathrm{col}}}\exp(-M_{\mathrm{col}}K_2)\left(\cosh K_1\right)^{M_{\mathrm{col}}}
- + 2^{M_{\mathrm{col}}}\exp(M_{\mathrm{col}}K_2)\left(\sinh K_1\right)^{M_{\mathrm{col}}}
-   \quad \left(\because 2\cdot 2^{M_{\mathrm{col}}-1} = 2^{M_{\mathrm{col}}}\right) \\
-&= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}}
- + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}}
+&= \mathrm{tr}\!\left(\varepsilon V_1^{(+)}V_2\right)
+&&(\because \text{Step 1}) \\
+&= \mathrm{tr}\!\Bigl(\Bigl(\exp(\kappa D_0)\bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}\,G\bigr)\Bigr)V_2\Bigr)
+&&(\because \text{Step 2}) \\
+&= \mathrm{tr}\!\Bigl(\exp(\kappa D_0)\Bigl(\bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon + (\sinh K_1)_{\mathbb{C}}\,G\bigr)V_2\Bigr)\Bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \mathrm{tr}\!\Bigl(\exp(\kappa D_0)\Bigl(\bigl((\cosh K_1)_{\mathbb{C}}\,\varepsilon\bigr)V_2 + \bigl((\sinh K_1)_{\mathbb{C}}\,G\bigr)V_2\Bigr)\Bigr)
+&&(\because \blkref{mat_mult_distributes_over_sum_in_left_factor}) \\
+&= \mathrm{tr}\!\Bigl(\exp(\kappa D_0)\Bigl((\cosh K_1)_{\mathbb{C}}(\varepsilon V_2) + (\sinh K_1)_{\mathbb{C}}(GV_2)\Bigr)\Bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= \mathrm{tr}\!\Bigl(\exp(\kappa D_0)\bigl((\cosh K_1)_{\mathbb{C}}(\varepsilon V_2)\bigr) + \exp(\kappa D_0)\bigl((\sinh K_1)_{\mathbb{C}}(GV_2)\bigr)\Bigr)
+&&(\because \blkref{mat_mult_distributes_over_sum_in_right_factor}) \\
+&= \mathrm{tr}\!\Bigl((\cosh K_1)_{\mathbb{C}}\bigl(\exp(\kappa D_0)(\varepsilon V_2)\bigr) + (\sinh K_1)_{\mathbb{C}}\bigl(\exp(\kappa D_0)(GV_2)\bigr)\Bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= (\cosh K_1)_{\mathbb{C}}\,\mathrm{tr}\!\bigl(\exp(\kappa D_0)(\varepsilon V_2)\bigr) + (\sinh K_1)_{\mathbb{C}}\,\mathrm{tr}\!\bigl(\exp(\kappa D_0)(GV_2)\bigr)
+&&(\because \blkref{trace_basic_properties}\ \text{(1)}) \\
+&= (\cosh K_1)_{\mathbb{C}}\bigl(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh}\bigr)_{\mathbb{C}} + (\sinh K_1)_{\mathbb{C}}\bigl(\exp(K_2M_{\mathrm{col}})\,S_{\sinh}\bigr)_{\mathbb{C}}
+&&(\because \text{直前の二つの鎖}) \\
+&= \bigl(\cosh K_1\,(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh})\bigr)_{\mathbb{C}} + \bigl(\sinh K_1\,(\exp(K_2M_{\mathrm{col}})\,S_{\sinh})\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \bigl(\cosh K_1\,(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh}) + \sinh K_1\,(\exp(K_2M_{\mathrm{col}})\,S_{\sinh})\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_sum})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 5（正値性）。",
+        "であり、括弧の中の実数は、",
+        math(String.raw`x^{n} := \prod_{j=1}^{n}x`),
+        "（",
+        ref("def_finite_product_of_real_numbers"),
+        "。",
+        math(String.raw`M_{\mathrm{col}}-1 \geq 1`),
+        "）と ",
+        math(String.raw`\sum_{j=1}^{M_{\mathrm{col}}}(\mp K_2) = \mp K_2M_{\mathrm{col}}`),
+        " を使って",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\cosh K_1\,(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh}) + \sinh K_1\,(\exp(K_2M_{\mathrm{col}})\,S_{\sinh}) \\
+&= \cosh K_1\,\Bigl(\exp(-K_2M_{\mathrm{col}})\cdot 2\left(2\cosh K_1\right)^{M_{\mathrm{col}}-1}\Bigr)
+ + \sinh K_1\,\Bigl(\exp(K_2M_{\mathrm{col}})\cdot 2\left(2\sinh K_1\right)^{M_{\mathrm{col}}-1}\Bigr)
+&&(\because \blkref{open_chain_partition_sum}\ \text{と}\ \blkref{open_chain_endpoint_product_sum}\ \text{を}\ K = K_1 \text{ に}) \\
+&= \exp(-K_2M_{\mathrm{col}})\Bigl(\left(2\cosh K_1\right)^{M_{\mathrm{col}}-1}\left(2\cosh K_1\right)\Bigr)
+ + \exp(K_2M_{\mathrm{col}})\Bigl(\left(2\sinh K_1\right)^{M_{\mathrm{col}}-1}\left(2\sinh K_1\right)\Bigr)
+&&(\because \mathbb{R}\ \text{の積の可換律・結合律}) \\
+&= \exp(-K_2M_{\mathrm{col}})\left(2\cosh K_1\right)^{M_{\mathrm{col}}}
+ + \exp(K_2M_{\mathrm{col}})\left(2\sinh K_1\right)^{M_{\mathrm{col}}}
+&&(\because \blkref{def_finite_product_of_real_numbers}\ \text{の帰納的定義}) \\
+&= \exp\Bigl(\sum_{j=1}^{M_{\mathrm{col}}}(-K_2)\Bigr)\left(2\cosh K_1\right)^{M_{\mathrm{col}}}
+ + \exp\Bigl(\sum_{j=1}^{M_{\mathrm{col}}}K_2\Bigr)\left(2\sinh K_1\right)^{M_{\mathrm{col}}}
+&&(\because \mathbb{R}\ \text{の有限和: 同じ実数}\ \mp K_2 \text{ を}\ M_{\mathrm{col}} \text{ 個足すと}\ \mp K_2M_{\mathrm{col}}) \\
+&= \Bigl(\prod_{j=1}^{M_{\mathrm{col}}}\exp(-K_2)\Bigr)\left(2\cosh K_1\right)^{M_{\mathrm{col}}}
+ + \Bigl(\prod_{j=1}^{M_{\mathrm{col}}}\exp(K_2)\Bigr)\left(2\sinh K_1\right)^{M_{\mathrm{col}}}
+&&(\because \blkref{real_exp_of_finite_sum}) \\
+&= \Bigl(\prod_{j=1}^{M_{\mathrm{col}}}\exp(-K_2)\Bigr)\Bigl(\prod_{j=1}^{M_{\mathrm{col}}}2\cosh K_1\Bigr)
+ + \Bigl(\prod_{j=1}^{M_{\mathrm{col}}}\exp(K_2)\Bigr)\Bigl(\prod_{j=1}^{M_{\mathrm{col}}}2\sinh K_1\Bigr)
+&&(\because \text{冪の定義}\ x^{n} := \textstyle\prod_{j=1}^{n}x) \\
+&= \prod_{j=1}^{M_{\mathrm{col}}}\bigl(\exp(-K_2)\cdot 2\cosh K_1\bigr)
+ + \prod_{j=1}^{M_{\mathrm{col}}}\bigl(\exp(K_2)\cdot 2\sinh K_1\bigr)
+&&(\because \blkref{finite_product_of_real_products}) \\
+&= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}}
+&&(\because \mathbb{R}\ \text{の積の可換律・結合律と冪の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "に等しい。ゆえに主張の等号が成り立つ。",
+      ]),
+      paragraph([
+        "Step 6（正値性）。",
         ref("open_chain_spin_sums_positive"),
         " を ",
-        math(String.raw`K=K_1`),
-        " として適用すると、Step 4 の最初の等号に現れる二つのスピン和はともに正である。また ",
+        math(String.raw`K = K_1`),
+        " として ",
+        math(String.raw`S_{\cosh} > 0`),
+        "、",
+        math(String.raw`S_{\sinh} > 0`),
+        "。",
         ref("cosh_sinh_basic_properties"),
+        " (3) と ",
+        math(String.raw`K_1 > 0`),
         " から ",
         math(String.raw`\cosh K_1 > 0`),
         "、",
         math(String.raw`\sinh K_1 > 0`),
-        "。また ",
-        math(String.raw`\exp(\pm K_2) > 0`),
-        "。したがって、その等号の二項はともに正であり、和も正である。",
+        "。",
+        ref("real_exp_positive"),
+        " から ",
+        math(String.raw`\exp(\mp K_2M_{\mathrm{col}}) > 0`),
+        "。正の実数の積は正なので、Step 5 の最後の鎖の左辺の二項はともに正であり、正の実数の和は正なので、左辺は正である。それが右辺に等しいので ",
+        math(String.raw`\left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} \in \mathbb{R}_{>0}`),
+        " である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（全証明の SageMath 検算。sagemath/check/trace_of_epsilon_V_plus/）: 名前だけの根拠と散文の推論を (∵) 付きの鎖にした。準備に κ := (K_1)_ℂ・-s・𝔐 の上の和（ord による）を置き、(P1) (iκ)H_1^{(+)} = κD_0 + κ(εG)、(P2) 可換性、(P3) (εG)^{2j} = I・(εG)^{2j+1} = εG の帰納法、(P4) (κ(εG))^n = κ^n(εG)^n、(P5) f_{ι(s)} の成分を足した。exp(K_1εG) の偶奇の分割は exponential_series_of_even_odd_power_terms（A = I、B = εG、c = 1_ℂ）に、εV_1^{(+)} の分配則の一行を分配・スカラーの括り出し・単位元・結合律の行に分けた。Step 3 の成分は行列の番号を ord(s)（= ν(ι(s))）で書き、G_{ord(s),ord(s)} = (s(M_col)s(1))_ℂ・exp(κD_0) の対角成分 = (exp(K_1E(s)))_ℂ と包含を書いた（complex_exp_of_real_argument）。Step 4・5 は対角成分と和を包含の形で書き、2·2^{M−1} = 2^M の一行を (2cosh K_1)^{M−1}(2cosh K_1) = (2cosh K_1)^M・real_exp_of_finite_sum・finite_product_of_real_products の行に分けた。主張文に、左辺 ∈ ℂ と右辺 ∈ ℝ の等号を包含で読むことを書いた。値は変えていない。Lean（ClaimTraceEpsilonVPlusReduction.lean・ClaimTraceEpsilonVPlusClosedForm.lean）は旧い Step の分け方のままで、新しい鎖との 1 対 1 は Lean の連続実行が受け持つ。",
         "2026-11-04（Lean の通しの証明のゴールラインの確認）: 証明の冒頭の B の右辺 exp((1/2)iK_1H_1^{(+)}) を、def_V1_plus_square_root の式どおり exp((i/2)K_1H_1^{(+)}) に書いた（i/2 := i·2_C^{-1} の読みと食い違わないように。値は不変）。",
         "この主張が章 C′ の最後の欠けていた入力である。ε の固有値 η がどちらになるかは固有値 Λ̌_ε の値からは読めないが、tr(εV^{(+)}) は転送行列の側で完全に初等的に計算でき、しかも正であることが分かる。",
-        "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5・6 組の (K_1,K_2) で、行列指数関数から直接構成した V^{(+)} のトレースと閉じた式の相対差 ≤ 6e-15）。",
+        "数値検証: sagemath/check/trace_of_epsilon_V_plus/（旧い記録は sagemath/check/053_claim_even_sector_closing/check_03）。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],

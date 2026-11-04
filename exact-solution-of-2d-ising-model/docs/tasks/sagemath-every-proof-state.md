@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 20 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 411 件のうち、SageMath の検算が無いもの 19 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -371,19 +371,20 @@
 - `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`（1 次元開鎖のスピン和 2(2cosh K)^{M_col−1}・2(2sinh K)^{M_col−1} と、K > 0 での正値性）: `sagemath/check/<ラベル>/`。共通の準備は `sagemath/_shared/open_chain_spin_sums.sage`。和の付け替え・積の展開・二元集合の和・cosh/sinh の定義・冪の行は、exp(K)・exp(−K) を関係の無い不定元に置いた `QQ[x,y]` で M_col = 2..8 の全ての配置について厳密に、exp の値を含む行は `RealBallField(200)` で確かめた。人手証明の値の誤りは無し。根拠の誤りを直した: exp(KE(s)) = Π exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）を指していたのを real_exp_of_finite_sum にし、endpoint の Step 2 の Π_{m=2}^{M_col−1} が M_col = 2 で定義の無い空の積だったのを場合分けにした。名前だけの「有限個の因子の積の展開」を、写像 ς(e) := 2e − 1 で {0,1}^{M_col−1} の和へ付け替えて expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にし、因子の組替えに finite_product_of_real_products、正値性に finite_product_of_positive_reals_is_positive を引いた。主張は不変。
 
 - `V1_plus_square_root_property`（((V_1^{(+)})^{1/2})^2 = V_1^{(+)}）: `sagemath/check/V1_plus_square_root_property/`。準備（XX = XX、1_ℂ + 1_ℂ = 2_ℂ の 4 行、c + c = iκ の 10 行）と、exp の中身の行列の行は κ := (K_1)_ℂ を不定元にした QQ(i)[κ] で M_col = 2..5 で厳密に、exp を含む行は K_1 = 1/3, 1, 7/4 の複素数のボールで M_col = 2..4 で確かめた。theorem_exp_product を X, X に当てた行は、exp(tX)exp(tX) と exp(t(X+X)) の t^n の係数の一致を n ≤ 8 まで厳密に見た（等号・主張 165 件、否定コントロール 41 件）。人手証明の計算の誤りは無し。「X の定義と同類項の加法」の一行を、c := (i2_ℂ^{-1})(K_1)_ℂ を二つ足すと i(K_1)_ℂ になる準備の鎖と、def_finite_sum_of_matrices・finite_sum_of_scalar_multiples_of_one_matrix（r = 2）・def_finite_sum_of_complex_numbers の行に分け、主張文に M_col ∈ ℤ_{≥2} と A^2 := AA を書いた（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は変えていない（新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
+- `trace_of_epsilon_V_plus`（tr(εV^{(+)}) = (2exp(−K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}）: `sagemath/check/trace_of_epsilon_V_plus/`。K_1 = 2 log p、K_2 = log q（p, q ∈ QQ）と置き、行列の exp を整数の固有値のスペクトル射影で QQ(i) に組んで、M_col = 2..5・3 組で全ての鎖の行を厳密に確かめた。(P1)〜(P4) と κD_0 の成分は κ を不定元にした QQ(i)[κ] で、主張はスペクトル射影を通らないボールでも確かめた（等号・主張 3732 件と 408 件、否定コントロール 84 件と 36 件）。人手証明の値の誤りは無し。名前だけの根拠と散文の推論を (∵) 付きの鎖にした: 準備 (P1)〜(P5)（κ := (K_1)_ℂ、𝔐 の上の和を ord で定義、(εG)^n の帰納法、(κX)^n = κ^nX^n、f_{ι(s)} の成分と列の読み取り）、偶奇の分割は exponential_series_of_even_odd_power_terms に、成分は ord(s) の番号と包含 (·)_ℂ で書き（台帳にあった Step 3 (a) の包含と ν の件を解消）、0 の項は finite_sum_with_single_nonzero_term、2·2^{M−1} = 2^M の一行は real_exp_of_finite_sum・finite_product_of_real_products の行に分けた。主張文に、左辺 ∈ ℂ と右辺 ∈ ℝ の等号を包含で読むことを書いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は変えていない（新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `trace_of_epsilon_V_plus`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `max_eigenvector_in_even_sector`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
 
+- 2026-11-04、`trace_of_epsilon_V_plus` のレビューで見つかった（上流の住処。今回の差分より前から）: `def_open_chain_spin_energy` は E(s) ∈ ℤ とし、`D0_G_diagonal_action` は同じ和を ℝ の有限和として (·)_ℂ を当てる。ℤ の値と ℝ の値を写像に名前を付けずに使い回しており、K_1E(s) も ℝ と ℤ の積になる（`open_chain_partition_sum` なども同じ）。直すには E(s) の住処を ℝ に揃えるか、ℤ → ℝ の包含を名前付きで書く。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。同じレビューで、実数の鎖の「同じ実数 ∓K_2 を M_col 個足すと ∓K_2M_col」の行は根拠がラベルの無い言葉である（ℝ の有限和の定数倍の主張が本文に無い）。
+
 - 2026-11-04、`V1_plus_square_root_property` のレビューで見つかった（上流の主張文の読み方。今回の差分より前から）: `V1_plus_exponential_representation` の主張文は `K_1 ∈ ℝ_{>0} ⊂ ℂ` と書くだけで、iK_1H_1^{(+)} を (i(K_1)_ℂ)H_1^{(+)} と読むことを定めていない（`def_V1_plus_square_root` は読み方を書いている）。この単位では使う側の証明に読み方を書いた。直すには `def_V1_plus`・`V1_plus_exponential_representation` の主張文に同じ形の読み方を足す。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`open_chain_partition_sum` などのレビューで見つかった（残したもの）: (a) `open_chain_endpoint_product_sum` の証明は Φ と ς を「open_chain_partition_sum の証明の Step 1」から引いており、引いた先の主張文には Φ も ς も無い。直すには Φ・ς の全単射を独立の主張のブロックにする。(b) 実数の冪 x^n := Π x を二つの主張文の中で定め、`open_chain_spin_sums_positive` がそれを引いている。実数の冪の定義のブロックが本文に無い。(c) 「1 の有限積は 1」・有限集合の上の和の全単射による付け替え・ℝ の分配則の有限和への適用は、ラベルのある主張が無く名前だけで引いている（複素数の版は `finite_product_of_complex_ones` がある）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。Lean の `ClaimOpenChainSpinSums.lean` は根拠の名前だけを直し、新しい行の分け方（ς の付け替え・展開・a·1 = a など）との 1 対 1 は Lean の連続実行の受け持ち。
-
-- 2026-11-04、`D0_G_diagonal_action` のレビューで見つかった（下流の書き方。今回の差分より前から）: `trace_of_epsilon_V_plus` の Step 3 (a) は G_{ι(s),ι(s)} = s(M_col)s(1) と ℝ→ℂ の包含を書かずに読み取り、多重添字 ι(s) を ν を通さずに行列の番号に使っている。値は食い違わない。`trace_of_epsilon_V_plus` の検算の回に揃える。
 
 - 2026-11-04、`trace_of_epsilon_V_plus_via_check_eigenvalues` のレビューで見つかった（下流の「> 0」の橋。今回の差分より前から）: この主張は ℂ の元の z > 0 を「z = r_ℂ なる r ∈ ℝ_{>0} がある」と主張文で定めたが、下流の `max_eigenvector_in_even_sector` (1) と `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` (2) が「tr(εV^{(+)}) > 0」を得る `trace_of_epsilon_V_plus` は「tr(εV^{(+)}) = … ∈ ℝ_{>0}」と包含を書かずに述べている。読めば同じ意味だが、二つの「> 0」をつなぐ行が無い。直すには z > 0 の定義を独立の定義のブロックへ出し、`trace_of_epsilon_V_plus` を包含の形で述べる。主張文に K_1, K_2 ∈ ℝ_{>0}・M_col ∈ ℤ_{≥2} の前提を書いていないのも姉妹の主張と同じ既存の書き方である。検算の付いたブロックの見直しで扱う。
 
