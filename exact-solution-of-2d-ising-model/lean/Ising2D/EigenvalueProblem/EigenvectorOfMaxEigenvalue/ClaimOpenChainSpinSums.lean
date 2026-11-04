@@ -11,7 +11,7 @@
 | 同 Step 1 の「`s(m+1) = s(m)t_m` で順に一意に定まる」 | `openChainChange_injective` |
 | 同 Step 1 の「両側の集合はともに `2^{M_col}` 個の元をもつ」 | `card_spinConf`（`PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean`）・`card_openChainChange_target` |
 | 同 Step 1 の「`Φ` は全単射」 | `openChainChange_bijective` |
-| 同 Step 2 の `E(s) = ∑_m t_m` と `exp(KE(s)) = ∏_m exp(Kt_m)`（`theorem_exp_product`） | `openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy` |
+| 同 Step 2 の `E(s) = ∑_m t_m` と `exp(KE(s)) = ∏_m exp(Kt_m)`（準備の鎖。`real_exp_of_finite_sum`） | `openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy` |
 | 同 Step 2 の式変形と `open_chain_partition_sum` | `open_chain_partition_sum` |
 | `open_chain_endpoint_product_sum` の Step 2 の `∏_m t_m = s(1)s(M_col)` | `prod_openChainBondSpin` |
 | 同 Step 2 の式変形と `open_chain_endpoint_product_sum` | `open_chain_endpoint_product_sum` |
@@ -178,7 +178,7 @@ theorem openChainEnergy_eq_sum_bondSpin (s : SpinConf M) :
     Finset.sum_subtype (p := fun m : Fin M => (m : ℕ) + 1 ≠ M) _ (fun m => by simp)]
   rfl
 
-/-- 人手の `exp(KE(s)) = ∏_{m=1}^{M_col-1} exp(Kt_m)`（`theorem_exp_product`、実数の指数法則）。 -/
+/-- 人手の `exp(KE(s)) = ∏_{m=1}^{M_col-1} exp(Kt_m)`（準備の鎖の `real_exp_of_finite_sum`、実数の有限和の指数法則）。 -/
 theorem exp_openChainEnergy (K : ℝ) (s : SpinConf M) :
     Real.exp (K * openChainEnergy s)
       = ∏ b : OpenChainBond M, Real.exp (K * (openChainBondSpin s b : ℝ)) := by

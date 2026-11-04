@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 24 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 21 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -368,12 +368,16 @@
 
 - `epsilon_D0_G_pairwise_commute`（εD_0 = D_0ε、εG = Gε、D_0G = GD_0）と `epsilon_G_is_involution`（(εG)^2 = I）: `sagemath/check/epsilon_D0_G_pairwise_commute/`・`sagemath/check/epsilon_G_is_involution/`。二つの証明の全ての行を、σ_k^z・ε を def_kronecker (2) の成分の式と mat_mult の成分の式で、符号反転・有限和・単位行列を本文の定め方で組み、行の鎖は M_col = 2..5・全ての j, k, m で、主張は Sage の tensor_product と `*` だけの独立な経路で M_col = 2..7 まで、QQ(i) で厳密に確かめた（等号・主張 710 件と 163 件、否定コントロール 16 件と 12 件）。人手証明の計算の誤りは無し。旧い証明は符号の括り出しと結合律、符号の括り出しと二重の符号反転をそれぞれ一行にまとめ、D_0G の四つの因子の並べ替えと G^2 = (σ_{M_col}^z)^2(σ_1^z)^2 を名前だけの根拠で一度に行っていたので、negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_double_negation・mat_mult_associative・distinct_site_pauli_matrices_commute の行の鎖にし、準備を内容の名前（「ε と σ^z の対の可換」「σ^z どうしの可換」「σ^z の対と G の可換」）で置いた。(εG)^2 = I の証明が ε^2 = I の根拠に epsilon_projector_properties (1)（(P^{(+)})^2 = P^{(+)}）を引いていた誤りを epsilon_square_and_eigenvalues に直した。主張文に M_col ∈ ℤ_{≥2}・ε の定義・右辺の単位行列の次数・X^2 := XX を書いた（主張は不変）。一回のレビューで必須の指摘は無し。Lean の `ClaimEpsilonD0GCommuteAndDiagonalAction.lean` は変えていない（冒頭の対応表は旧い行の分け方のままで、新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`（1 次元開鎖のスピン和 2(2cosh K)^{M_col−1}・2(2sinh K)^{M_col−1} と、K > 0 での正値性）: `sagemath/check/<ラベル>/`。共通の準備は `sagemath/_shared/open_chain_spin_sums.sage`。和の付け替え・積の展開・二元集合の和・cosh/sinh の定義・冪の行は、exp(K)・exp(−K) を関係の無い不定元に置いた `QQ[x,y]` で M_col = 2..8 の全ての配置について厳密に、exp の値を含む行は `RealBallField(200)` で確かめた。人手証明の値の誤りは無し。根拠の誤りを直した: exp(KE(s)) = Π exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）を指していたのを real_exp_of_finite_sum にし、endpoint の Step 2 の Π_{m=2}^{M_col−1} が M_col = 2 で定義の無い空の積だったのを場合分けにした。名前だけの「有限個の因子の積の展開」を、写像 ς(e) := 2e − 1 で {0,1}^{M_col−1} の和へ付け替えて expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にし、因子の組替えに finite_product_of_real_products、正値性に finite_product_of_positive_reals_is_positive を引いた。主張は不変。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `open_chain_partition_sum`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `V1_plus_square_root_property`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`open_chain_partition_sum` などのレビューで見つかった（残したもの）: (a) `open_chain_endpoint_product_sum` の証明は Φ と ς を「open_chain_partition_sum の証明の Step 1」から引いており、引いた先の主張文には Φ も ς も無い。直すには Φ・ς の全単射を独立の主張のブロックにする。(b) 実数の冪 x^n := Π x を二つの主張文の中で定め、`open_chain_spin_sums_positive` がそれを引いている。実数の冪の定義のブロックが本文に無い。(c) 「1 の有限積は 1」・有限集合の上の和の全単射による付け替え・ℝ の分配則の有限和への適用は、ラベルのある主張が無く名前だけで引いている（複素数の版は `finite_product_of_complex_ones` がある）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。Lean の `ClaimOpenChainSpinSums.lean` は根拠の名前だけを直し、新しい行の分け方（ς の付け替え・展開・a·1 = a など）との 1 対 1 は Lean の連続実行の受け持ち。
 
 - 2026-11-04、`D0_G_diagonal_action` のレビューで見つかった（下流の書き方。今回の差分より前から）: `trace_of_epsilon_V_plus` の Step 3 (a) は G_{ι(s),ι(s)} = s(M_col)s(1) と ℝ→ℂ の包含を書かずに読み取り、多重添字 ι(s) を ν を通さずに行列の番号に使っている。値は食い違わない。`trace_of_epsilon_V_plus` の検算の回に揃える。
 

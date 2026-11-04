@@ -2620,9 +2620,33 @@ D_0G
     statement: [
       paragraph([
         ref("def_open_chain_spin_energy"),
-        " の記号を用い、",
+        " の記号（",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq 2}`),
+        "、",
+        math(String.raw`\mathfrak M`),
+        "、",
+        math(String.raw`E`),
+        "）を用い、",
         math(String.raw`K\in\mathbb R`),
-        " とする。このとき",
+        " とする。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の実数の exp、",
+        math(String.raw`\cosh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        "、",
+        math(String.raw`x^{n}`),
+        "（",
+        math(String.raw`x\in\mathbb R`),
+        "、",
+        math(String.raw`n\in\mathbb Z_{\geq1}`),
+        "）は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の ",
+        math(String.raw`\prod_{j=1}^{n}x`),
+        " である。このとき",
       ]),
       displayMath(String.raw`\sum_{s\in\mathfrak M}\exp(K E(s))
 =2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}`),
@@ -2639,19 +2663,23 @@ D_0G
       displayMath(
         String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M_{\mathrm{col}}-1},
 \qquad
-\Phi(s) := \left(s(1);\ t_1,\dots,t_{M_{\mathrm{col}}-1}\right), \quad t_m := s(m)s(m+1)`,
+\Phi(s) := \left(s(1);\ t_1(s),\dots,t_{M_{\mathrm{col}}-1}(s)\right), \quad t_m(s) := s(m)s(m+1)\in\{-1,1\}`,
       ),
       paragraph([
         "は全単射である。実際、",
-        math(String.raw`(s(1); t_1,\dots,t_{M_{\mathrm{col}}-1})`),
+        math(String.raw`(u; \tau_1,\dots,\tau_{M_{\mathrm{col}}-1})\in\{-1,1\}\times\{-1,1\}^{M_{\mathrm{col}}-1}`),
         " が与えられれば ",
-        math(String.raw`s(m+1) = s(m)t_m`),
+        math(String.raw`s(1) := u`),
+        "、",
+        math(String.raw`s(m+1) := s(m)\tau_m`),
         " により ",
         math(String.raw`s(2),\dots,s(M_{\mathrm{col}})`),
         " が順に一意に定まり（",
         math(String.raw`s(m)s(m) = 1`),
         " なので ",
-        math(String.raw`t_m = s(m)s(m+1)`),
+        math(String.raw`s(m+1) = s(m)\tau_m`),
+        " は ",
+        math(String.raw`\tau_m = s(m)s(m+1)`),
         " と同値）、逆にこの手続きで作った ",
         math(String.raw`s`),
         " は ",
@@ -2661,38 +2689,81 @@ D_0G
         " 個の元をもつ。",
       ]),
       paragraph([
-        "Step 2（スピン和の計算）。",
-        math(String.raw`E(s) = \sum_{m=1}^{M_{\mathrm{col}}-1}t_m`),
-        " なので、",
-        ref("theorem_exp_product"),
+        "さらに写像 ",
+        math(String.raw`\varsigma : \{0,1\} \to \{-1,1\}`),
+        " を ",
+        math(String.raw`\varsigma(e) := 2e - 1`),
         "（",
-        math(String.raw`n=1`),
-        "、実数の指数法則）より ",
-        math(String.raw`\exp(KE(s)) = \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)`),
-        " である。Step 1 の全単射で和を書き換えると",
+        math(String.raw`\varsigma(1) = 1`),
+        "、",
+        math(String.raw`\varsigma(0) = -1`),
+        "）で定める。",
+        math(String.raw`\varsigma`),
+        " は全単射なので、",
+        ref("def_sum_over_binary_words"),
+        " の ",
+        math(String.raw`\{0,1\}^{M_{\mathrm{col}}-1}`),
+        " から ",
+        math(String.raw`\{-1,1\}^{M_{\mathrm{col}}-1}`),
+        " への写像 ",
+        math(String.raw`\epsilon \mapsto (\varsigma(\epsilon_1),\dots,\varsigma(\epsilon_{M_{\mathrm{col}}-1}))`),
+        " も全単射である（成分ごとに ",
+        math(String.raw`\varsigma`),
+        " の逆写像 ",
+        math(String.raw`\tau \mapsto (\tau+1)/2`),
+        " を当てたものが逆写像）。",
       ]),
-      paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
+      paragraph([
+        "Step 2（スピン和の計算）。準備として、各 ",
+        math(String.raw`s\in\mathfrak M`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(KE(s))
+&= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
+   \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
+&= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
+   \quad (\because \mathbb R\text{ の分配則を有限和の各項へ}) \\
+&= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
+   \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
+\end{aligned}`,
+      ),
+      paragraph(["である。これを使うと"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak{M}}\exp(KE(s))
-&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M_{\mathrm{col}}-1}\in\{-1,1\}}
-   \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)
-   \quad (\because \text{Step 1 の全単射}) \\
-&= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\sum_{t_m\in\{-1,1\}}\exp(Kt_m)\right)
-   \quad (\because \text{有限個の因子の積の展開（各 } t_m \text{ は独立に走る）}) \\
+&= \sum_{s\in\mathfrak{M}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
+   \quad (\because \text{準備の等式を各項へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \sum_{\tau_1,\dots,\tau_{M_{\mathrm{col}}-1}\in\{-1,1\}}
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(K\tau_m)
+   \quad (\because \text{Step 1 の全単射 }\Phi\text{ で和の添字を }s\text{ から }(u;\tau_1,\dots,\tau_{M_{\mathrm{col}}-1})=\Phi(s)\text{ へ付け替える}) \\
+&= \sum_{u\in\{-1,1\}}\ \sum_{\epsilon\in\{0,1\}^{M_{\mathrm{col}}-1}}
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(K\varsigma(\epsilon_m))
+   \quad (\because \text{Step 1 の全単射 }\epsilon \mapsto (\varsigma(\epsilon_1),\dots,\varsigma(\epsilon_{M_{\mathrm{col}}-1}))\text{ で内側の和の添字を付け替える}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K\varsigma(1))+\exp(K\varsigma(0))\right)
+   \quad (\because \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}}-1,\ j \to m,\ a_j^{(e)} \to \exp(K\varsigma(e)))\text{ を右辺から左辺へ、各 }u\text{ の項へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K\cdot 1)+\exp(K\cdot(-1))\right)
+   \quad (\because \varsigma(1)=1,\ \varsigma(0)=-1\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(K\cdot(-1))\right)
+   \quad (\because \mathbb R\text{ で }a\cdot 1 = a\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
+   \quad (\because \mathbb R\text{ で }a\cdot(-1) = -a\text{ を各因子へ}) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
-   \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
+   \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c = 2c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
-   \quad \left(\because \text{双曲線余弦の定義}\right) \\
+   \quad \left(\because \blkref{def_cosh_sinh}\ (x \to K)\text{ を各因子へ}\right) \\
 &= 2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}
-   \quad (\because \text{同じ因子 }2\cosh K\text{ の }M_{\mathrm{col}}-1\text{ 個の積})
+   \quad (\because \text{主張の } x^{n} := \textstyle\prod_{j=1}^{n}x\ (x \to 2\cosh K,\ n \to M_{\mathrm{col}}-1))
 \end{aligned}`,
       ),
     ],
     conversion: {
       status: "added",
-      notes: ["数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。"],
+      notes: [
+        "数値検証: sagemath/check/open_chain_partition_sum/（旧: sagemath/check/053_claim_even_sector_closing/check_03 の M=2,…,8 の全配置の直接列挙）。",
+        "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを real_exp_of_finite_sum に直し、E(s) の書き替え・分配則・指数法則を準備の鎖に分けた。和の付け替えの行が準備の等式の適用も兼ねていたので二行に分けた。付け替えた後の和の添字を s(1)・t_m と同じ記号で書いていたのを u・τ_m にし、Step 1 の t_m を s の関数 t_m(s) と書いた。名前だけだった「有限個の因子の積の展開」は、写像 ς(e) := 2e − 1 で {0,1}^{M_col−1} の和へ付け替えて expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にし、「二元集合上の二つの有限和」を ς の値・a·1 = a・a(−1) = −a・c + c = 2c の行に分けた。cosh の定義の行の前に置いていた文を行末のラベル参照にし、主張文に M_col ∈ ℤ_{≥2}・exp・cosh・冪の定義を書いた。主張は変えていない。",
+      ],
     },
   },
   {
@@ -2704,9 +2775,35 @@ D_0G
     statement: [
       paragraph([
         ref("def_open_chain_spin_energy"),
-        " の記号を用い、",
+        " の記号（",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq 2}`),
+        "、",
+        math(String.raw`\mathfrak M`),
+        "、",
+        math(String.raw`E`),
+        "）を用い、",
         math(String.raw`K\in\mathbb R`),
-        " とする。このとき",
+        " とする。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の実数の exp、",
+        math(String.raw`\sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        "、",
+        math(String.raw`x^{n}`),
+        "（",
+        math(String.raw`x\in\mathbb R`),
+        "、",
+        math(String.raw`n\in\mathbb Z_{\geq1}`),
+        "）は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の ",
+        math(String.raw`\prod_{j=1}^{n}x`),
+        "、",
+        math(String.raw`s(M_{\mathrm{col}})s(1)\in\{-1,1\}\subset\mathbb R`),
+        " である。このとき",
       ]),
       displayMath(String.raw`\sum_{s\in\mathfrak M}s(M_{\mathrm{col}})s(1)\exp(K E(s))
 =2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}`),
@@ -2718,75 +2815,145 @@ D_0G
     ],
     proof: [
       paragraph([
-        "Step 1（変数変換）。写像",
+        "Step 1（変数変換）。",
+        ref("open_chain_partition_sum"),
+        " の証明の Step 1 の全単射",
       ]),
       displayMath(
         String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M_{\mathrm{col}}-1},
 \qquad
-\Phi(s) := \left(s(1);\ t_1,\dots,t_{M_{\mathrm{col}}-1}\right), \quad t_m := s(m)s(m+1)`,
+\Phi(s) := \left(s(1);\ t_1(s),\dots,t_{M_{\mathrm{col}}-1}(s)\right), \quad t_m(s) := s(m)s(m+1)\in\{-1,1\}`,
       ),
       paragraph([
-        "は全単射である。実際、",
-        math(String.raw`(s(1);t_1,\dots,t_{M_{\mathrm{col}}-1})`),
-        " から漸化式 ",
-        math(String.raw`s(m+1)=s(m)t_m`),
+        "を使う。",
+        math(String.raw`(u;\tau_1,\dots,\tau_{M_{\mathrm{col}}-1})`),
+        " から ",
+        math(String.raw`s(1):=u`),
+        "、漸化式 ",
+        math(String.raw`s(m+1):=s(m)\tau_m`),
         " によって ",
         math(String.raw`s(2),\dots,s(M_{\mathrm{col}})`),
         " が一意に復元され、この復元は ",
-        math(String.raw`t_m=s(m)s(m+1)`),
-        " の逆写像になる。",
+        math(String.raw`\Phi`),
+        " の逆写像になる。同じ証明の Step 1 の ",
+        math(String.raw`\varsigma(e) := 2e-1`),
+        " と全単射 ",
+        math(String.raw`\epsilon \mapsto (\varsigma(\epsilon_1),\dots,\varsigma(\epsilon_{M_{\mathrm{col}}-1}))`),
+        "（",
+        math(String.raw`\{0,1\}^{M_{\mathrm{col}}-1}\to\{-1,1\}^{M_{\mathrm{col}}-1}`),
+        "）も使う。",
       ]),
       paragraph([
-        "Step 2（端点因子の書き替え）。",
-        math(String.raw`s(m)s(m) = 1`),
-        " を繰り返し使うと",
+        "Step 2（端点因子の書き替え）。各 ",
+        math(String.raw`s\in\mathfrak M`),
+        " について、",
+        math(String.raw`M_{\mathrm{col}} = 2`),
+        " のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\prod_{m=1}^{M_{\mathrm{col}}-1}t_m
+\prod_{m=1}^{1}t_m(s)
+&= t_1(s)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (m \to 1)\bigr)\\
+&= s(1)s(2)
+&&\bigl(\because\ t_1(s):=s(1)s(2)\bigr)\\
+&= s(1)s(M_{\mathrm{col}})
+&&\bigl(\because\ M_{\mathrm{col}} = 2\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`M_{\mathrm{col}} \geq 3`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)
-&&\bigl(\because\ t_m:=s(m)s(m+1)\bigr)\\
+&&\bigl(\because\ t_m(s):=s(m)s(m+1)\bigr)\\
 &= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}s(m)s(m)\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ \mathbb R\text{ の乗法の可換性と結合性}\bigr)\\
 &= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}1\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ s(m)s(m)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
 &= s(1)s(M_{\mathrm{col}})
-&&\bigl(\because\ \text{有限積の単位元}\bigr)
+&&\bigl(\because\ 1\text{ の有限積は }1\bigr)
 \end{aligned}`,
       ),
       paragraph([
         "である（隣接する因子が対になって ",
         math(String.raw`1`),
-        " になる）。また ",
-        ref("theorem_exp_product"),
-        "（",
-        math(String.raw`n=1`),
-        "、実数の指数法則）より ",
-        math(String.raw`\exp(KE(s))=\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)`),
-        " である。したがって",
+        " になる。",
+        math(String.raw`\prod_{m=2}^{M_{\mathrm{col}}-1}`),
+        " は ",
+        math(String.raw`M_{\mathrm{col}}-2\geq1`),
+        " 個の因子の ",
+        ref("def_finite_product_of_real_numbers"),
+        " の積）。また",
       ]),
-      paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(KE(s))
+&= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
+   \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
+&= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
+   \quad (\because \mathbb R\text{ の分配則を有限和の各項へ}) \\
+&= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
+   \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
+\end{aligned}`,
+      ),
+      paragraph(["である。これらから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+s(M_{\mathrm{col}})s(1)\exp(KE(s))
+&= s(1)s(M_{\mathrm{col}})\exp(KE(s))
+&&\bigl(\because\ \mathbb R\text{ の乗法の可換性}\bigr)\\
+&= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\exp(KE(s))
+&&\bigl(\because\ \text{上の等式を右辺から左辺へ}\bigr)\\
+&= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
+&&\bigl(\because\ \text{上の }\exp(KE(s))\text{ の鎖}\bigr)\\
+&= \prod_{m=1}^{M_{\mathrm{col}}-1}\bigl(t_m(s)\exp(Kt_m(s))\bigr)
+&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to t_m(s),\ y_j \to \exp(Kt_m(s)))\text{ を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp(KE(s))
-&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M_{\mathrm{col}}-1}\in\{-1,1\}}
-   \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m\right)\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)
-   \quad (\because \text{Step 1 の全単射と直前の等式}) \\
-&= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,\exp(Kt_m)\right)
-   \quad (\because \text{有限個の因子の積の展開}) \\
+&= \sum_{s\in\mathfrak{M}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\bigl(t_m(s)\exp(Kt_m(s))\bigr)
+   \quad (\because \text{直前の等式を各項へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \sum_{\tau_1,\dots,\tau_{M_{\mathrm{col}}-1}\in\{-1,1\}}
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\bigl(\tau_m\exp(K\tau_m)\bigr)
+   \quad (\because \text{Step 1 の全単射 }\Phi\text{ で和の添字を }s\text{ から }(u;\tau_1,\dots,\tau_{M_{\mathrm{col}}-1})=\Phi(s)\text{ へ付け替える}) \\
+&= \sum_{u\in\{-1,1\}}\ \sum_{\epsilon\in\{0,1\}^{M_{\mathrm{col}}-1}}
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\bigl(\varsigma(\epsilon_m)\exp(K\varsigma(\epsilon_m))\bigr)
+   \quad (\because \text{Step 1 の全単射 }\epsilon \mapsto (\varsigma(\epsilon_1),\dots,\varsigma(\epsilon_{M_{\mathrm{col}}-1}))\text{ で内側の和の添字を付け替える}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\varsigma(1)\exp(K\varsigma(1))+\varsigma(0)\exp(K\varsigma(0))\right)
+   \quad (\because \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}}-1,\ j \to m,\ a_j^{(e)} \to \varsigma(e)\exp(K\varsigma(e)))\text{ を右辺から左辺へ、各 }u\text{ の項へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(1\cdot\exp(K\cdot 1)+(-1)\exp(K\cdot(-1))\right)
+   \quad (\because \varsigma(1)=1,\ \varsigma(0)=-1\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K\cdot 1)+(-1)\exp(K\cdot(-1))\right)
+   \quad (\because \mathbb R\text{ で }1\cdot b = b\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(K\cdot(-1))\right)
+   \quad (\because \mathbb R\text{ で }a\cdot 1 = a\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(-K)\right)
+   \quad (\because \mathbb R\text{ で }a\cdot(-1) = -a\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
+   \quad (\because \mathbb R\text{ で }a + (-1)b = a - b\text{ を各因子へ}) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
-   \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
+   \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c = 2c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
-   \quad \left(\because \text{双曲線正弦の定義}\right) \\
+   \quad \left(\because \blkref{def_cosh_sinh}\ (x \to K)\text{ を各因子へ}\right) \\
 &= 2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}
-   \quad (\because \text{同じ因子 }2\sinh K\text{ の }M_{\mathrm{col}}-1\text{ 個の積})
+   \quad (\because \text{主張の } x^{n} := \textstyle\prod_{j=1}^{n}x\ (x \to 2\sinh K,\ n \to M_{\mathrm{col}}-1))
 \end{aligned}`,
       ),
     ],
     conversion: {
       status: "added",
-      notes: ["数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。"],
+      notes: [
+        "数値検証: sagemath/check/open_chain_endpoint_product_sum/（旧: sagemath/check/053_claim_even_sector_closing/check_03 の M=2,…,8 の全配置の直接列挙）。",
+        "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを、open_chain_partition_sum の準備の等式（real_exp_of_finite_sum）に直した。Step 2 の Π_{m=2}^{M_col−1} は M_col = 2 で因子が無く def_finite_product_of_real_numbers が定めない積だったので、M_col = 2 を別の鎖にした。主張の左辺の因子 s(M_col)s(1) を Step 2 の s(1)s(M_col) へ移す可換性の行と、二つの有限積の因子を対にする行（finite_product_of_real_products）を、名前だけの「Step 1 の全単射と直前の等式」から分けた。別のブロックの証明の途中の等式を引かないよう、exp(KE(s)) の鎖をこの証明にも置いた。付け替えた後の和の添字を u・τ_m にし、積の展開を open_chain_partition_sum と同じく ς で expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にした。主張文に M_col ∈ ℤ_{≥2}・exp・sinh・冪の定義を書いた。主張は変えていない。",
+      ],
     },
   },
   {
@@ -2810,14 +2977,33 @@ D_0G
       ]),
     ],
     proof: [
+      paragraph(["準備として"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh K &> 0
+   \quad (\because \blkref{cosh_sinh_basic_properties}\ (1)\ (x \to K)) \\
+2\cosh K &> 0
+   \quad (\because 2>0\text{ と直前の行、正の実数どうしの積は正}) \\
+\sinh K &> 0
+   \quad (\because \blkref{cosh_sinh_basic_properties}\ (3)\ (x \to K>0)) \\
+2\sinh K &> 0
+   \quad (\because 2>0\text{ と直前の行、正の実数どうしの積は正}) \\
+\prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K) &> 0
+   \quad (\because \blkref{finite_product_of_positive_reals_is_positive}\ (m \to M_{\mathrm{col}}-1\in\mathbb Z_{\geq1},\ r_j \to 2\cosh K)) \\
+\prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K) &> 0
+   \quad (\because \blkref{finite_product_of_positive_reals_is_positive}\ (m \to M_{\mathrm{col}}-1\in\mathbb Z_{\geq1},\ r_j \to 2\sinh K))
+\end{aligned}`,
+      ),
+      paragraph(["である。これらから"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak M}\exp(K E(s))
 &=2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \blkref{open_chain_partition_sum}) \\
+&=2\prod_{j=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
+   \quad (\because \blkref{open_chain_partition_sum}\text{ の主張の冪の定義}) \\
 &>0
-   \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
-   \cosh K>0\text{、}M_{\mathrm{col}}-1\in\mathbb Z_{>0})
+   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K)>0\text{ と }2>0\text{、正の実数どうしの積は正})
 \end{aligned}`,
       ),
       displayMath(
@@ -2825,9 +3011,10 @@ D_0G
 \sum_{s\in\mathfrak M}s(M_{\mathrm{col}})s(1)\exp(K E(s))
 &=2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \blkref{open_chain_endpoint_product_sum}) \\
+&=2\prod_{j=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
+   \quad (\because \blkref{open_chain_endpoint_product_sum}\text{ の主張の冪の定義}) \\
 &>0
-   \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
-   \sinh K>0\text{、}M_{\mathrm{col}}-1\in\mathbb Z_{>0})
+   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K)>0\text{ と }2>0\text{、正の実数どうしの積は正})
 \end{aligned}`,
       ),
     ],
@@ -2835,8 +3022,9 @@ D_0G
       status: "added",
       notes: [
         "1次元 Ising 開鎖の分配関数と両端相関を挿入した和の正値性であり、trace_of_epsilon_V_plus の符号を決める。",
-        "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。",
+        "数値検証: sagemath/check/open_chain_spin_sums_positive/（旧: sagemath/check/053_claim_even_sector_closing/check_03）。",
         "式変形の書き方の統一（2026-09-04）。二つの正値性を、それぞれ主張の左辺から既証明の公式を経て正値へ至る一続きの式変形にし、使用した公式と双曲線関数の正値性を各行末から参照した。内容と根拠は変えていない。",
+        "2026-11-04: SageMath の検算を付けるときに、名前だけで引いていた cosh_sinh_basic_properties の項を (1)（cosh K > 0）と (3)（K > 0 で sinh K > 0）と書き、冪を有限積に開く行を足し、「> 0」の根拠を一行ずつの準備の鎖（cosh K > 0・2cosh K > 0・sinh K > 0・2sinh K > 0・finite_product_of_positive_reals_is_positive の二行）に分けた。主張は変えていない。",
       ],
     },
   },
