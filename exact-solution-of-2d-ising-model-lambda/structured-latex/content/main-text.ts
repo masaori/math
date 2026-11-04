@@ -35596,6 +35596,7 @@ S_L(A)
                       title: { text: "高温展開の整数多項式" },
                       labels: ["def_high_temperature_polynomial"],
                       habitat: "Z",
+                      lean: ["Ising2DLambda.FisherZero.highTemperaturePolynomial"],
                       verification: ["sagemath/check/high-temperature-polynomial-identity"],
                       statement: [
                         paragraph([
