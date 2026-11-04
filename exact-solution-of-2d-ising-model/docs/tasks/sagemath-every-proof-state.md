@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 35 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 34 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -335,8 +335,13 @@
   K_1 := 2 log y、K_2 := log x と選んで exp((1/2)S_1^{(+)}) を QQ に、exp(S_2) と係数を AA に、V_2 を成分の定義で QQ に作り、Step 1〜3 の全ての行と主張を AA で厳密に確かめた（ℝ への脱出は結合定数の選び方の一点。M_col = 2..4、等号 130 個、否定コントロール 70 件）。肩の書き換えとエルミート性は K_1・K_2^* を実の不定元にして M_col = 2..5 で。正定値性は首座小行列式と特性多項式の符号交代の二つの判定で、一致も確かめた。同じ行を def_exp の部分和のボールでも確かめた（重なり 90 行、否定コントロール 42 件）。
   人手証明の計算の誤りは無かったが、レビューの指摘で根拠を三か所直した（Step 1 の最後の段落を、`scalar_identity_commutes` では出ない B(cA) = c(BA)・(cX)B = c(XB) を `scalar_multiple_factors_out_of_right_factor`・`..._left_factor` で引く鎖に、Step 2 の S_2 のエルミート性を `iH_is_real_symmetric` と `real_symmetric_matrix_is_hermitian` に、Step 3 の係数の正値性に `def_second_transfer_matrix_prefactor`）。Lean はコメントの根拠名だけ合わせた。二回のレビューで必須の指摘が無くなるまで直した。
 
+- `V_plus_is_invertible`（R^{(+)} := ((2s_2)^{-M_col/2})_ℂ exp(−(1/2)S_1^{(+)})exp(−S_2)exp(−(1/2)S_1^{(+)}) が V^{(+)} の左右逆）: `sagemath/check/V_plus_is_invertible/`。
+  050 の厳密な check_10・check_27 を内容の名前で移し（件数は元と同じ）、実際の指数行列を K_1 := 2 log y、K_2 := log x と選んで射影から QQ・AA に作り Step 1〜3 の全ての行・最後の行・主張を QQbar で厳密に確かめる `check_exact_factors.sage`（等号 540、否定コントロール 68）と、同じ行を def_exp の部分和のボールで確かめる `check_balls_by_partial_sums.sage`（426 行、否定 42）を足した。
+  人手証明の計算の誤りは無かったが、レビューの指摘で根拠を直した: Step 1 の散文の前提「各指数の行列とその反数は可換」と肩の行 X − X = O を、`V1_plus_half_invertible` と同じ `matrix_double_negation`・`exp_of_negative_is_left_inverse` を引く鎖に。本文で定義されていなかった (2s_2)^{-M_col/2} を主張の中で (2s_2)^{M_col/2} の ℝ の逆数と定め、Step 2 の「正の実数の冪の指数法則」を `def_second_transfer_matrix_prefactor` とその置き方に。最後の段落を `def_invertible_elements_of_R` の可逆の定義と逆元の一意性を引く二行にし、主張にその R・R^×・g^{-1} を置いた。
+  Lean は Step 1 の calc を `neg_neg_tensorPow`（`matrix_double_negation`）と `matExp_neg_mul_matExp_eq_one`（`exp_of_negative_is_left_inverse`）の 2 行にし、最後の行に当たる `VPlus_isUnit_and_inv_eq` を足した（lake build・check-no-sorry 通過）。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `V_plus_is_invertible`（`--list` の先頭）から、文書順に検算を足す。050 の overview の「併せて検証」の行に、この主張の各行の検算がほかに無いかを先に確かめる。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_V_plus_is_positive`（`--list` の先頭）から、文書順に検算を足す。050 の overview の「併せて検証」の行に、この主張の各行の検算がほかに無いかを先に確かめる。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

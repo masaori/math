@@ -25,6 +25,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 
 namespace Ising2D
 
@@ -107,14 +108,15 @@ noncomputable def VPlusInv (M : ℕ) (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) : Tens
       * matExp (-((Complex.I * K2star) • H2 M))
       * matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))))
 
-/-- **原文 `V_plus_is_invertible` Step 2 の `a^{-1} = (2s_2)^{-M/2}`**（`a := (2s_2)^{M/2}`、正の実数の冪の指数法則）。 -/
+/-- **原文 `V_plus_is_invertible` Step 2 の `a^{-1} = (2s_2)^{-M/2}`**（`a := (2s_2)^{M/2}`。人手は主張の中で
+`(2s_2)^{-M/2}` を `ℝ` の逆数 `a^{-1}` と置く。Lean の `VPlusInv` は実数冪で書くので `Real.rpow_neg` で一致させる）。 -/
 theorem rpow_neg_half_M_eq_inv {s2 : ℝ} (hs2 : 0 < s2) :
     ((((2 * s2) ^ (-((M : ℝ) / 2)) : ℝ) : ℂ))
       = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ))⁻¹ := by
   rw [Real.rpow_neg (by linarith), Complex.ofReal_inv]
 
-/-- **原文 `V_plus_is_invertible` Step 2 の `a^{-1} = (2s_2)^{-M/2} ∈ ℝ`**（`a := (2s_2)^{M/2} ∈ ℝ`、
-正の実数の冪の指数法則）。`ℝ` の中の等式で、包含 `(·)_ℂ` を通す前の形。 -/
+/-- **原文 `V_plus_is_invertible` Step 2 の `a^{-1} = (2s_2)^{-M/2} ∈ ℝ`**（`a := (2s_2)^{M/2} ∈ ℝ`。
+人手の主張の `(2s_2)^{-M/2}` の置き方に、Lean の実数冪を `Real.rpow_neg` で合わせる）。`ℝ` の中の等式で、包含 `(·)_ℂ` を通す前の形。 -/
 theorem real_rpow_neg_half_M_eq_inv {s2 : ℝ} (hs2 : 0 < s2) :
     (2 * s2) ^ (-((M : ℝ) / 2)) = ((2 * s2) ^ ((M : ℝ) / 2))⁻¹ :=
   Real.rpow_neg (by linarith) _
@@ -126,21 +128,13 @@ theorem real_rpow_two_s2_ne_zero {s2 : ℝ} (hs2 : 0 < s2) :
 
 /-! ### 原文 `V_plus_is_invertible` Step 1（指数行列どうしの左右逆）
 
-人手の 4 つの鎖は、どれも `theorem_exp_product`（`X` と `-X` は可換）・`X - X = O`・`theorem_exp_zero` の
-3 行である。同じ 3 行を `X` と `-X` の順の 2 通りについて書き、4 つの左右逆はその代入として得る。 -/
+人手の 4 つの鎖は、`E_-E_+`・`A_-A_+` が `exp_of_negative_is_left_inverse` の 1 行、`E_+E_-`・`A_+A_-` が
+`matrix_double_negation` で `exp(X) = exp(-(-X))` と書き直してから `exp_of_negative_is_left_inverse`（`A → -X`）を引く 2 行である。
+同じ形を一般の `X` について書き、4 つの左右逆はその代入として得る（人手の各鎖の 1 行目「`E_±`・`A_±` の置き方」は、
+下の `expHalfS1plus_mul_expNegHalfS1plus` などの代入が担う）。 -/
 
-/-- `exp(X) exp(-X) = I`（人手 Step 1 の第一・第三の鎖の型）。 -/
-theorem matExp_mul_matExp_neg_eq_one (X : TensorPow M) : matExp X * matExp (-X) = 1 := by
-  calc matExp X * matExp (-X)
-      = matExp (X + -X) := by
-        -- `theorem_exp_product`（`X` と `-X` は可換）
-        rw [matExp, matExp, matExp, Matrix.exp_add_of_commute X (-X) (Commute.refl X).neg_right]
-    _ = matExp 0 := by rw [add_neg_cancel]
-    _ = 1 := by
-        -- `theorem_exp_zero`
-        rw [matExp]; exact NormedSpace.exp_zero
-
-/-- `exp(-X) exp(X) = I`（人手 Step 1 の第二・第四の鎖の型）。 -/
+/-- `exp(-X) exp(X) = I`（人手 `exp_of_negative_is_left_inverse`。人手 Step 1 の第二・第四の鎖）。
+人手 `exp_of_negative_is_left_inverse` の証明と同じく、`-X` と `X` の可換性・`theorem_exp_product`・`(-X) + X = O`・`theorem_exp_zero` による。 -/
 theorem matExp_neg_mul_matExp_eq_one (X : TensorPow M) : matExp (-X) * matExp X = 1 := by
   calc matExp (-X) * matExp X
       = matExp (-X + X) := by
@@ -150,6 +144,16 @@ theorem matExp_neg_mul_matExp_eq_one (X : TensorPow M) : matExp (-X) * matExp X 
     _ = 1 := by
         -- `theorem_exp_zero`
         rw [matExp]; exact NormedSpace.exp_zero
+
+/-- `exp(X) exp(-X) = I`（人手 Step 1 の第一・第三の鎖）。 -/
+theorem matExp_mul_matExp_neg_eq_one (X : TensorPow M) : matExp X * matExp (-X) = 1 := by
+  calc matExp X * matExp (-X)
+      = matExp (-(-X)) * matExp (-X) := by
+        -- `matrix_double_negation`（`A → X`）
+        rw [neg_neg_tensorPow]
+    _ = 1 := by
+        -- `exp_of_negative_is_left_inverse`（`A → -X`）
+        exact matExp_neg_mul_matExp_eq_one (-X)
 
 /-- 人手 Step 1 の第一の左右逆 `E_+E_- = I`。 -/
 theorem expHalfS1plus_mul_expNegHalfS1plus (K1 : ℂ) :
@@ -290,6 +294,15 @@ theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
         -- `identity_matrix_is_right_unit_of_mat_mult` を `E_-` へ適用
         rw [mul_identity_matrix_tensorPow]
     _ = 1 := hEmEp
+
+
+/-- **原文 `V_plus_is_invertible` の最後の行**: Step 2・Step 3 の二つの積と `def_invertible_elements_of_R`
+（`g → V^{(+)}`、`h → R^{(+)}`）から、`V^{(+)} ∈ R^×` かつ `(V^{(+)})^{-1} = R^{(+)}`。 -/
+theorem VPlus_isUnit_and_inv_eq {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
+    ∃ u : (TensorPow M)ˣ, (u : TensorPow M) = VPlus M s2 K1 K2star
+      ∧ ((u⁻¹ : (TensorPow M)ˣ) : TensorPow M) = VPlusInv M K1 s2 K2star :=
+  ⟨⟨VPlus M s2 K1 K2star, VPlusInv M K1 s2 K2star, VPlus_mul_VPlusInv hs2, VPlusInv_mul_VPlus hs2⟩,
+    rfl, rfl⟩
 
 /-- **原文 `V_plus_inverse_is_positive_definite`**:
 `(V^{(+)})^{-1}` も正定値。

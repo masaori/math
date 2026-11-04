@@ -4689,6 +4689,22 @@ V^{(+)}
     labels: ["V_plus_is_invertible"],
     statement: [
       paragraph([
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と、その可逆元の集合 ",
+        math(String.raw`R^\times`),
+        "・逆元 ",
+        math(String.raw`g^{-1}`),
+        " を用いる（下の ",
+        math(String.raw`R^{(+)}`),
+        " はこの ",
+        math(String.raw`R`),
+        " とは別の記号である）。",
         ref("V_plus_is_positive_definite"),
         " の表示に対して、次の行列を",
       ]),
@@ -4700,19 +4716,31 @@ V^{(+)}
       ),
       paragraph([
         "と置く（",
-        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2} \in \mathbb{R}`),
-        "、",
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2} := \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)^{-1} \in \mathbb{R}`),
+        " は ",
+        ref("def_second_transfer_matrix_prefactor"),
+        " の正の実数 ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の逆数、",
         math(String.raw`r_{\mathbb{C}}`),
         " は ",
         ref("inclusion_rr_to_cc"),
-        " の略記）。このとき左右の積はそれぞれ",
+        " の略記、",
+        math(String.raw`-\tfrac12 S_1^{(+)} := -\bigl(\tfrac12 S_1^{(+)}\bigr)`),
+        "・",
+        math(String.raw`-S_2`),
+        " は ",
+        ref("def_matrix_negation"),
+        " の符号反転）。このとき左右の積はそれぞれ",
       ]),
       displayMath(
         String.raw`V^{(+)}R^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})},
 \qquad
 R^{(+)}V^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`,
       ),
-      paragraph(["である。したがって ", math(String.raw`V^{(+)}`), " は可逆であり、"]),
+      paragraph(["である。したがって ", math(String.raw`V^{(+)}\in R^\times`), " であり、"]),
       displayMath(
         String.raw`\left(V^{(+)}\right)^{-1}=R^{(+)}
 =\bigl((2s_2)^{-M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,
@@ -4723,63 +4751,81 @@ R^{(+)}V^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`,
     proof: [
       paragraph([
         "Step 1（指数行列どうしの左右逆）。",
-        math(String.raw`E_+:=\exp(\tfrac12S_1^{(+)})`),
+        math(String.raw`X_1:=\tfrac12S_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "）、",
+        math(String.raw`E_+:=\exp(X_1)`),
         "、",
-        math(String.raw`E_-:=\exp(-\tfrac12S_1^{(+)})`),
+        math(String.raw`E_-:=\exp(-X_1)`),
         "、",
         math(String.raw`A_+:=\exp(S_2)`),
         "、",
         math(String.raw`A_-:=\exp(-S_2)`),
-        " と置く。各指数の行列とその反数は可換するので、",
-        ref("theorem_exp_product"),
-        " と ",
-        ref("theorem_exp_zero"),
-        " を一行ずつ使うと、",
+        " と置く（",
+        math(String.raw`-X_1`),
+        "・",
+        math(String.raw`-S_2`),
+        " は ",
+        ref("def_matrix_negation"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        "。",
+        math(String.raw`E_-`),
+        " は主張の ",
+        math(String.raw`\exp(-\tfrac12S_1^{(+)})`),
+        " である）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E_+E_-
-&=\exp\!\left(\tfrac12S_1^{(+)}-\tfrac12S_1^{(+)}\right)
-&&\left(\because\ \blkref{theorem_exp_product}\right)\\
-&=\exp(O)
-&&\left(\because\ \tfrac12S_1^{(+)}-\tfrac12S_1^{(+)}=O\right)\\
+&=\exp(X_1)\exp(-X_1)
+&&(\because\ E_\pm\ \text{の置き方})\\
+&=\exp(-(-X_1))\exp(-X_1)
+&&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to X_1)\bigr)\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -X_1)\bigr),\\[2mm]
 E_-E_+
-&=\exp\!\left(-\tfrac12S_1^{(+)}+\tfrac12S_1^{(+)}\right)
-&&\left(\because\ \blkref{theorem_exp_product}\right)\\
-&=\exp(O)
-&&\left(\because\ -\tfrac12S_1^{(+)}+\tfrac12S_1^{(+)}=O\right)\\
+&=\exp(-X_1)\exp(X_1)
+&&(\because\ E_\pm\ \text{の置き方})\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to X_1)\bigr),\\[2mm]
 A_+A_-
-&=\exp(S_2-S_2)
-&&\left(\because\ \blkref{theorem_exp_product}\right)\\
-&=\exp(O)
-&&(\because\ S_2-S_2=O)\\
+&=\exp(S_2)\exp(-S_2)
+&&(\because\ A_\pm\ \text{の置き方})\\
+&=\exp(-(-S_2))\exp(-S_2)
+&&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to S_2)\bigr)\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -S_2)\bigr),\\[2mm]
 A_-A_+
-&=\exp(-S_2+S_2)
-&&\left(\because\ \blkref{theorem_exp_product}\right)\\
-&=\exp(O)
-&&(\because\ -S_2+S_2=O)\\
+&=\exp(-S_2)\exp(S_2)
+&&(\because\ A_\pm\ \text{の置き方})\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&\left(\because\ \blkref{theorem_exp_zero}\right).
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to S_2)\bigr).
 \end{aligned}`,
       ),
       paragraph([
         "Step 2（右側の候補を掛ける）。",
         math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}`),
         " と置く。",
-        math(String.raw`s_2 \in \mathbb{R}_{>0}`),
-        "（",
-        ref("V_plus_is_positive_definite"),
-        "）なので ",
         math(String.raw`a \in \mathbb{R}_{>0}`),
-        " であり、正の実数の冪の指数法則から ",
+        "（",
+        ref("def_second_transfer_matrix_prefactor"),
+        "。",
+        math(String.raw`s_2=\sinh 2K_2`),
+        " は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）なので ",
+        math(String.raw`a \neq 0`),
+        " であり、",
+        math(String.raw`\mathbb{R}`),
+        " の逆数 ",
         math(String.raw`a^{-1}=(2s_2)^{-M_{\mathrm{col}}/2} \in \mathbb{R}`),
-        " である。",
+        " がある（等号は主張の ",
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2}`),
+        " の置き方）。",
         ref("def_matrix_scalar_multiple"),
         " のスカラー倍は係数を ",
         math(String.raw`\mathbb{C}`),
@@ -4888,17 +4934,19 @@ R^{(+)}V^{(+)}
 &&(\because\ \text{Step 1 の第二の左右逆}).
 \end{aligned}`,
       ),
-      paragraph([
-        "したがって ",
-        math(String.raw`R^{(+)}`),
-        " は ",
-        math(String.raw`V^{(+)}`),
-        " の右逆かつ左逆であり、statement の逆行列の明示式を得る。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&V^{(+)}\in R^\times
+&&\bigl(\because\ \text{Step 2・Step 3 の二つの積},\ \blkref{def_invertible_elements_of_R}\ \text{の可逆の定義}\ (M\to M_{\mathrm{col}},\ g\to V^{(+)},\ h\to R^{(+)})\bigr)\\
+&\left(V^{(+)}\right)^{-1}=R^{(+)}
+&&\bigl(\because\ \text{Step 2・Step 3 の二つの積},\ \blkref{def_invertible_elements_of_R}\ \text{の逆元の一意性と記号}\ g^{-1}\bigr)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（全証明の SageMath 検算）: 数値検証の場所は sagemath/check/V_plus_is_invertible/（旧い 050 の check_10・check_27 を移し、実際の指数行列を K_1 = 2 log y・K_2 = log x と選んで厳密に作る検算と def_exp の部分和のボールの検算を足した）。レビューの指摘で、Step 1 の散文の前提「各指数の行列とその反数は可換」と肩の行 X − X = O を、V1_plus_half_invertible と同じ matrix_double_negation と exp_of_negative_is_left_inverse を引く鎖にした（E_- を exp(−X_1)、−X_1 を def_matrix_negation の符号反転と明記）。本文で定義されていなかった (2s_2)^{-M_col/2} を主張の中で (2s_2)^{M_col/2} の ℝ の逆数として定め、Step 2 の「正の実数の冪の指数法則」をその置き方と def_second_transfer_matrix_prefactor（a ∈ ℝ_{>0}）に替えた。最後の段落を def_invertible_elements_of_R の可逆の定義と逆元の一意性を引く二行にし（V2_invertible と同じ形）、主張にその R・R^×・g^{-1} を置いた。計算の誤りは無く、主張の値は変えていない。",
         "2026-11-02: Step 2 の a を実数として置き、スカラー倍の係数を包含 a_C・(a^{-1})_C で書いた。Step 2・Step 3 の aa^{-1} = 1_C の行を real_inclusion_preserves_product、ℝ の aa^{-1} = 1、略記 1_C = (1)_C の 3 行に分けた（主張の R^{(+)} の係数も ((2s_2)^{-M_col/2})_C と書いた。主張は不変）。数値検証: check_27_V_plus_inverse_real_inclusion_chains.sage。",
         "2026-11-02: Step 2・Step 3 の鎖の積に括弧を全て書き、スカラー倍・結合律・単位行列の段をそれぞれ 1 行 1 主張のラベル参照にした。Lean の Ising2D.VPlus_mul_VPlusInv・Ising2D.VPlusInv_mul_VPlus は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_10_V_plus_inverse_chains.sage（QQ の厳密計算）。",
         "旧 V_plus_is_positive_definite の Step 4 前半を、左右の積をそれぞれ省略せず計算する独立した主張へ分けた。Lean の対応定理は Ising2D.VPlus_mul_VPlusInv と Ising2D.VPlusInv_mul_VPlus。",
