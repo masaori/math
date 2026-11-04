@@ -62418,6 +62418,118 @@ s(j')-s(j)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_walk_equals_cell_boundary",
+              labels: [],
+              title: { text: "閉歩道とセル集合の境界鎖の係数一致" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_walk_equals_cell_boundary_winding_zero",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_signed_edge_coefficient",
+                      kind: "definition",
+                      title: { text: "向き付き辺列の各辺の符号付き係数" },
+                      labels: ["def_signed_edge_coefficient"],
+                      habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.orientedEdgeCoefficient",
+                        "Ising2DLambda.KacWard.walkEdgeCoefficient",
+                        "Ising2DLambda.KacWard.cellSetEdgeCoefficient",
+                        "Ising2DLambda.NecSuf.KacWard.coefficient",
+                      ],
+                      statement: [
+                        paragraph([
+                          "向き付き辺列 ", math(String.raw`T=(\vec f_1,\ldots,\vec f_n)`),
+                          " と辺 ", math(String.raw`e\in E_L`), " に対し、その辺の符号付き係数を",
+                        ]),
+                        displayMath(String.raw`[T]_e:=\sum_{t=1}^{n}\mathbf1_{\operatorname{base}(\vec f_t)=e}\bigl(1-2d(\vec f_t)\bigr)\in\mathbb Z`),
+                        paragraph([
+                          "と定める。", math(String.raw`\vec f_t=(\operatorname{base}(\vec f_t),d(\vec f_t))\in\vec E_L`),
+                          " は ", ref("def_oriented_edges"), " による。有限セル集合 ",
+                          math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), " の境界鎖についても、",
+                          ref("claim_finite_cell_set_boundary_winding_zero"),
+                          " の四項列を重複を保って連結し、同じ式で ",
+                          math(String.raw`[\partial_\square S]_e`), " を定める。",
+                        ]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_walk_equals_cell_boundary_winding_zero",
+                    kind: "claim",
+                    title: { text: "境界鎖と係数が一致する閉歩道の巻き付きは零である" },
+                    labels: ["claim_walk_equals_cell_boundary_winding_zero"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/walk-equals-cell-boundary-winding-zero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.walk_boundary_winding_zero",
+                      "Ising2DLambda.NecSuf.KacWard.equal_coefficients_equal_weighted_evaluations",
+                      "Ising2DLambda.KacWard.walk_boundary_winding_zero_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（",
+                        ref("def_closed_nonbacktracking_walk"), "）、有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), " について、",
+                        "すべての ", math(String.raw`e\in E_L`), " で ",
+                        math(String.raw`[\gamma]_e=[\partial_\square S]_e`), " ならば、",
+                      ]),
+                      displayMath(String.raw`w_{\mathrm h}(\gamma)=0,\qquad w_{\mathrm v}(\gamma)=0\quad\text{in }\mathbb Z`),
+                      paragraph([
+                        "が成り立つ。係数は ", ref("def_signed_edge_coefficient"),
+                        "、巻き付き数は ", ref("def_directed_winding_numbers"), " による。",
+                        "閉路が実際にあるセル集合の境界と一致することは、この主張の仮定である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "任意の辺 ", math(String.raw`e\in E_L`), " と向き付き辺 ",
+                        math(String.raw`\vec f\in\vec E_L`), " について、",
+                        "横・縦切断線指示値は向きに依存せず基底辺だけで決まる（",
+                        ref("def_seam_parities"), "）。有限和を辺ごとに集めると、横方向は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+w_{\mathrm h}(\gamma)
+&=\sum_{t=1}^{m}c_{\mathrm h}(\vec e_t)(1-2d(\vec e_t))
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=\sum_{e\in E_L}[\gamma]_e\,c_{\mathrm h}(e,0)
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)\\
+&=\sum_{e\in E_L}[\partial_\square S]_e\,c_{\mathrm h}(e,0)
+&&\bigl(\because\ [\gamma]_e=[\partial_\square S]_e\text{ を各辺へ適用}\bigr)\\
+&=\sum_{\vec f\in\partial_\square S}c_{\mathrm h}(\vec f)(1-2d(\vec f))
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_finite_cell_set_boundary_winding_zero}\bigr)
+\end{aligned}`),
+                      paragraph(["である。縦方向は同じ有限和を縦切断線指示値で評価する。"]),
+                      displayMath(String.raw`\begin{aligned}
+w_{\mathrm v}(\gamma)
+&=\sum_{t=1}^{m}c_{\mathrm v}(\vec e_t)(1-2d(\vec e_t))
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=\sum_{e\in E_L}[\gamma]_e\,c_{\mathrm v}(e,0)
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)\\
+&=\sum_{e\in E_L}[\partial_\square S]_e\,c_{\mathrm v}(e,0)
+&&\bigl(\because\ [\gamma]_e=[\partial_\square S]_e\text{ を各辺へ適用}\bigr)\\
+&=\sum_{\vec f\in\partial_\square S}c_{\mathrm v}(\vec f)(1-2d(\vec f))
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_finite_cell_set_boundary_winding_zero}\bigr)
+\end{aligned}`),
+                      paragraph(["有限集合の整数係数と有限和だけを用い、実数体も複素数体も現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_vertex_simple_winding_primitive",
               labels: [],
               title: { text: "頂点単純閉路の巻き付きベクトル" },

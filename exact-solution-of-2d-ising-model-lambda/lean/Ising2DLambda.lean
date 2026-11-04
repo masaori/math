@@ -1222,6 +1222,9 @@ import Ising2DLambda.KacWard.ClosedWalkRotationNumber
 import Ising2DLambda.KacWard.DirectedWindingNumbers
 import Ising2DLambda.NecSuf.KacWard.CellBoundaryWinding
 import Ising2DLambda.KacWard.CellBoundaryWinding
+import Ising2DLambda.KacWard.WalkEqualsCellBoundary
+import Ising2DLambda.NecSuf.KacWard.WalkEqualsCellBoundary
+import Ising2DLambda.KacWard.WalkEqualsCellBoundaryFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.DirectedWindingParity
 import Ising2DLambda.KacWard.DirectedWindingParity
 import Ising2DLambda.KacWard.RepresentativeIncrement
