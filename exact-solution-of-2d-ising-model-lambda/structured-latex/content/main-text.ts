@@ -5951,7 +5951,7 @@ g_c(a_n)-g_c(a_1)
 &=[j]_m
 &&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr)\\
 &=j
-&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr),\\
+&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr)\\
 \rho_k(\rho_{-k}(j))
 &=\bigl[[j-k]_m+k\bigr]_m
 &&\bigl(\because\ \rho_{-k},\rho_k\text{ の定義}\bigr)\\
@@ -5960,7 +5960,7 @@ g_c(a_n)-g_c(a_1)
 &=[j]_m
 &&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr)\\
 &=j
-&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr).
+&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr)
 \end{aligned}`),
                   paragraph([
                     "従って ", math(String.raw`\rho_k`), " は ", math(String.raw`I_m`),
@@ -5981,7 +5981,7 @@ g_c(a_n)-g_c(a_1)
 &=\bigl[[j+k]_m+1\bigr]_m
 &&\bigl(\because\ \text{合同な整数の余りの一意性}\bigr)\\
 &=\rho_1(\rho_k(j))
-&&\bigl(\because\ \rho_k,\rho_1\text{ の定義}\bigr).
+&&\bigl(\because\ \rho_k,\rho_1\text{ の定義}\bigr)
 \end{aligned}`),
                   paragraph(["以上を有限和へ順に適用すると、"]),
                   displayMath(String.raw`\begin{aligned}
@@ -5989,7 +5989,7 @@ g_c(a_n)-g_c(a_1)
 &=\sum_{j\in I_m}a\bigl(\rho_k(j),\rho_1(\rho_k(j))\bigr)
 &&\bigl(\because\ \text{上で示した可換性を各項へ代入}\bigr)\\
 &=\sum_{i\in I_m}a\bigl(i,\rho_1(i)\bigr)
-&&\bigl(\because\ \text{全単射 }i=\rho_k(j)\text{ による有限和の添字変更}\bigr).
+&&\bigl(\because\ \text{全単射 }i=\rho_k(j)\text{ による有限和の添字変更}\bigr)
 \end{aligned}`),
                   paragraph(["全過程は有限集合・整数の余り・整数の有限和で閉じ、実数体も複素数体も現れない。"]),
                 ],
