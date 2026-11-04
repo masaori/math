@@ -1220,6 +1220,8 @@ import Ising2DLambda.KacWard.CyclicTotalTurning
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationNumber
 import Ising2DLambda.KacWard.ClosedWalkRotationNumber
 import Ising2DLambda.KacWard.DirectedWindingNumbers
+import Ising2DLambda.NecSuf.KacWard.DirectedWindingParity
+import Ising2DLambda.KacWard.DirectedWindingParity
 import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.TerminalMatrixFromNecSuf

@@ -61867,6 +61867,12 @@ w_{\mathrm v}(\gamma):=\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)(1-2d_k)\quad\text{i
                     labels: ["claim_directed_winding_parity"],
                     habitat: "Z",
                     verification: ["sagemath/check/directed-winding-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.horizontalDirectedWindingNumber_parity",
+                      "Ising2DLambda.KacWard.verticalDirectedWindingNumber_parity",
+                      "Ising2DLambda.NecSuf.KacWard.directedWindingParity_necSuf",
+                      "Ising2DLambda.KacWard.directedWindingNumber_parity_from_necSuf",
+                    ],
                     statement: [
                       displayMath(String.raw`w_{\mathrm h}(\gamma)\bmod2=h(\gamma),
 \qquad
@@ -61888,7 +61894,7 @@ w_{\mathrm h}(\gamma)\bmod2
 &=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2
 &&\bigl(\because\ 1-2d_k\equiv1\pmod2\text{ と法 }2\text{ の有限和}\bigr)\\
 &=h(\gamma)
-&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr).
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
 \end{aligned}`),
                       paragraph([
                         "縦向きについても",
@@ -61900,7 +61906,7 @@ w_{\mathrm v}(\gamma)\bmod2
 &=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2
 &&\bigl(\because\ 1-2d_k\equiv1\pmod2\text{ と法 }2\text{ の有限和}\bigr)\\
 &=v(\gamma)
-&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr).
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
 \end{aligned}`),
                       paragraph([
                         "これは整数の合同と有限和だけの主張であり、実数体も複素数体も現れない。",
