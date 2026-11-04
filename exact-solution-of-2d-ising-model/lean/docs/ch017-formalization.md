@@ -136,8 +136,9 @@
 | `S2_isHermitian_of_real_symmetric` / `S1plus_isHermitian_of_real_symmetric` と、使う側が引く `S2_isHermitian` / `S2_transpose` / `S1plus_isHermitian` / `S1plus_transpose`（`ClaimIHPauliForm.lean`） | 実対称なのでエルミート（`real_symmetric_isHermitian`）。4 定理は `M_col ≥ 2` では Step 3 の鎖そのもので、係数の `star K = K` は `real_coefficient_of_star_eq`（人手の対応ブロックは無い。仮定の形の読み替え）で `(K.re)_ℂ` に読む | `iH_is_real_symmetric` Step 3 の最後の文と主張 |
 | `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_smul` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。`V^{(+)} = (2s_2)^{M/2}exp(S_1^{(+)}/2)exp(S_2)exp(S_1^{(+)}/2)` | `def_V_plus`、`V_plus_is_positive_definite` Step 1 |
 | `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` Step 2〜3 |
-| `matExp_mul_matExp_neg_eq_one` / `matExp_neg_mul_matExp_eq_one` / `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2`（`ClaimVPlusPositiveDefinite.lean`） | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
-| `VPlusInv` / `rpow_neg_half_M_eq_inv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`、`a^{-1} = (2s_2)^{-M/2}`、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
+| `matExp_mul_matExp_neg_eq_one`（`exp_of_negative_is_left_inverse` は `matExp_neg_mul_matExp_tensorPow`、`MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfNegativeIsLeftInverseFromNecSuf.lean`）/ `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2`（`ClaimVPlusPositiveDefinite.lean`） | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
+| `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`（係数は `(2s_2)^{-M/2} := ((2s_2)^{M/2})^{-1}`）、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
+| `real_rpow_two_s2_ne_zero` / `VPlus_isUnit_and_inv_eq` | `a := (2s_2)^{M/2} ≠ 0`、`V^{(+)} ∈ R^×` かつ `(V^{(+)})^{-1} = R^{(+)}` | `V_plus_is_invertible` Step 2 の `a ∈ ℝ_{>0}`、最後の 2 行 |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)})` の正値性 | `trace_V_plus_is_positive` |
 | `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |

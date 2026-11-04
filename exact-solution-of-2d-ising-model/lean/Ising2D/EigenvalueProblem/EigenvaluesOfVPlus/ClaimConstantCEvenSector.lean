@@ -107,8 +107,8 @@ theorem trace_expNegS1plus_expNegS2_eq_tauPlus (K1 K2star : ℂ) :
 `tr((V^{(+)})^{-1}) = (2s_2)^{-M/2} τ`（符号反転共役で `τ` に戻る）。 -/
 theorem trace_VPlusInv (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
     (VPlusInv M K1 s2 K2star).trace
-      = ((((2 * s2) ^ (-((M : ℝ) / 2)) : ℝ) : ℂ)) * tauPlus M K1 K2star := by
-  set b : ℂ := (((2 * s2) ^ (-((M : ℝ) / 2)) : ℝ) : ℂ) with hb
+      = (((((2 * s2) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ)) * tauPlus M K1 K2star := by
+  set b : ℂ := ((((2 * s2) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ) with hb
   set E := matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) with hE
   set B := matExp (-((Complex.I * K2star) • H2 M)) with hB
   calc (VPlusInv M K1 s2 K2star).trace
@@ -169,7 +169,7 @@ theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M →
     rw [VPlusInv_eq F g hs2 hcne hVeq, Matrix.trace_smul, smul_eq_mul, F.trace_Vprime_inv g, hP]
   exact NecSuf.const_eq_of_trace_ratio hapos hppos h1 h2
     (trace_VPlus K1 s2 K2star)
-    (by rw [trace_VPlusInv, rpow_neg_half_M_eq_inv hs2]) hVpos
+    (by rw [trace_VPlusInv, Complex.ofReal_inv]) hVpos
 
 end ConstantCEven
 

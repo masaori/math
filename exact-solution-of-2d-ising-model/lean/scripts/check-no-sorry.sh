@@ -354,7 +354,7 @@ targets=(
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
-  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean）---
+  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean・NecSuf/ExpNegMulExp.lean）---
   Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
@@ -368,6 +368,19 @@ targets=(
   Ising2D.NecSuf.map_ne_zero
   Ising2D.NecSuf.map_nonneg
   Ising2D.NecSuf.map_pos
+  Ising2D.neg_matrix_mul_self_apply
+  Ising2D.neg_matrix_mul_self_comm
+  Ising2D.neg_matrix_add_self_apply
+  Ising2D.neg_matrix_add_self
+  Ising2D.matrixExp_neg_mul_matrixExp
+  "Ising2D.NecSuf.neg_one_mul_comm'"
+  "Ising2D.NecSuf.neg_matrix_mul_self_apply'"
+  "Ising2D.NecSuf.neg_matrix_mul_self_comm'"
+  "Ising2D.NecSuf.neg_matrix_add_self_apply'"
+  "Ising2D.NecSuf.neg_matrix_add_self'"
+  "Ising2D.NecSuf.matrixExp_neg_mul_matrixExp'"
+  Ising2D.matrixExp_neg_mul_matrixExp_of_necSuf
+  Ising2D.matExp_neg_mul_matExp_tensorPow
   Ising2D.real_exp_positive_of_necSuf
   Ising2D.real_exp_of_finite_sum
   Ising2D.NecSuf.map_finSumLeft
@@ -1980,15 +1993,15 @@ targets=(
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul
   Ising2D.VPlus_posDef
-  Ising2D.rpow_neg_half_M_eq_inv
   Ising2D.matExp_mul_matExp_neg_eq_one
-  Ising2D.matExp_neg_mul_matExp_eq_one
   Ising2D.expHalfS1plus_mul_expNegHalfS1plus
   Ising2D.expNegHalfS1plus_mul_expHalfS1plus
   Ising2D.expS2_mul_expNegS2
   Ising2D.expNegS2_mul_expS2
   Ising2D.VPlus_mul_VPlusInv
   Ising2D.VPlusInv_mul_VPlus
+  Ising2D.real_rpow_two_s2_ne_zero
+  Ising2D.VPlus_isUnit_and_inv_eq
   Ising2D.VPlusInv_posDef
   Ising2D.trace_VPlus_pos
   Ising2D.trace_VPlusInv_pos
