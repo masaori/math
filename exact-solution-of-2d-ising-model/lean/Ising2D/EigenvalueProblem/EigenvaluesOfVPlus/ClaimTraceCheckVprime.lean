@@ -1,5 +1,5 @@
 /-
-# `tr(V̌') = tr((V̌')^{-1}) > 0`（**具体版**）
+# `tr(V̌') = tr((V̌')^{-1}) = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ`、`Π_μ 2cosh(γ(θ̃_μ)/2) > 0`（**具体版**）
 
 対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `trace_of_check_Vprime`（`evenEigen_007_claim_...`）。
@@ -16,11 +16,13 @@
 人手の `Q̌_ε` が `F.Qproj (finsetOfBinWord ε)` である。Step 1 の 8 行の鎖は `trace_Vprime_step1` の `calc` と 1 対 1 である。
 4 行目の `trace_of_sum_over_binary_words` は、`TensorPow M` の系 `trace_binWordSum_tensorPow`（必要十分版 `NecSuf.binWordSum_map` の
 特殊化。3 行目の `mul_binWordSum_tensorPow` と同じ作り）で受ける。人手の帰納法と 1 対 1 の `calc` は添字 `Fin n` の `trace_binaryWordMatrixSum` にある。
-`trace_Vprime` は、`M = r + 1` では `trace_Vprime_step1` の ℂ の和を、Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`。
-`NecSuf.binWordSum` の系 `binWordSum_ofReal`）で ℝ の和（`def_sum_over_binary_words_of_real_numbers`）の包含へ移し、
-Step 2 の指数法則の 2 行と展開の 2 行（`sum_exp_gval_step2_expansion`。各項に `exp_gval_step2_product`、展開は
-`expansion_of_finite_product_of_two_term_sums_of_real`）で積へ移し、続く 6 行（`prod_step2_cosh`。ℝ の計算規則を 1 行に 1 つと、
-`def_cosh_sinh` の `cosh` を右辺から左辺へ）で各因子を `2cosh(γ/2)` に書き換え、積の添字を `𝓜̌` へ戻す（運ぶ段）。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
+Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `NecSuf.binWordSum` の系 `binWordSum_ofReal`、
+指数法則の 2 行と展開の 2 行は `sum_exp_gval_step2_expansion`（各項に `exp_gval_step2_product`、展開は
+`expansion_of_finite_product_of_two_term_sums_of_real`）、続く 6 行は `prod_step2_cosh`（ℝ の計算規則を 1 行に 1 つと、
+`def_cosh_sinh` の `cosh` を右辺から左辺へ）である。
+`trace_Vprime`（積の添字が `𝓜̌`）は、`M = r + 1` では Step 5 の鎖 `trace_Vprime_step5` に積の添字を `𝓜̌` へ戻す運ぶ段を足したもので、
+人手に対応する行は無い。このファイルで `trace_Vprime` を使うのは人手の範囲外の `M = 0` の枝（`trace_Vprime_inv`・`trace_Vprime_pos`）だけで、
+人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
 
 ## 原文 Step 3 との対応
 
@@ -37,8 +39,14 @@ Step 1 の鎖 `trace_Vprime_step1` を右辺から左辺へ）は、`trace_Vprim
 ## 原文 Step 4 との対応
 
 各 `μ` の 3 行の鎖 `2cosh(γ(θ̃_μ)/2) ≥ 2·1 = 2 > 0` は `two_cosh_half_step4` の `calc` と 1 対 1 である（`cosh_at_least_one` は
-具体版 `Ising2D.cosh_at_least_one`）。最後の鎖の 2 行目（`finite_product_of_positive_reals_is_positive`）は、`trace_Vprime_pos` の `M = r + 1` の最後の段と
-1 対 1 である（具体版 `Ising2D.finite_product_of_positive_reals_is_positive`）。1 行目（`tr(V̌') = Π 2cosh`）はまだ `trace_Vprime` である。
+具体版 `Ising2D.cosh_at_least_one`）。最後の不等号 `Π_μ 2cosh(γ(θ̃_μ)/2) > 0`（`finite_product_of_positive_reals_is_positive`。具体版
+`Ising2D.finite_product_of_positive_reals_is_positive`）は `prod_two_cosh_half_pos_step4` の 1 段と 1 対 1 である。
+
+## 原文 Step 5 との対応
+
+`tr(V̌') = Σ_ε(exp ǧ(ε))_ℂ = (Σ_ε exp ǧ(ε))_ℂ = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ` の 3 行は `trace_Vprime_step5` の `calc` と 1 対 1 である。
+主張の `∃ r ∈ ℝ_{>0}, tr(V̌') = (r)_ℂ` の形の `trace_Vprime_pos` は、人手の範囲 `M = r + 1` で `r` に人手の積（添字 `{1, …, M_col}`）を取り、
+`prod_two_cosh_half_pos_step4` と `trace_Vprime_step5` を組むだけで、`trace_Vprime`（積の添字が `𝓜̌`）を通らない。
 
 ## 章 009 との違い
 
@@ -341,10 +349,11 @@ theorem trace_Vprime_eq_finset_sum_of_mathlib (g : CheckIdx M → ℝ) :
         rw [F.Vprime_mul_Qproj g T, Matrix.trace_smul, F.trace_Qproj T, smul_eq_mul, mul_one]
     _ = ((∑ T : Finset (CheckIdx M), Real.exp (F.gval g T) : ℝ) : ℂ) := by push_cast; ring
 
-/-- **原文 `trace_of_check_Vprime` Step 1〜2**:
-`tr(V̌') = ∏_μ 2 cosh(γ(θ~_μ)/2)`（**前因子 `2^{M-m}` は無い**）。
-人手の範囲 `M = r + 1` では、Step 1 の鎖 `trace_Vprime_step1`、Step 2 の 1 行目 `binWordSum_ofReal`、展開の 2 行
-`sum_exp_gval_step2_expansion`、続く 6 行 `prod_step2_cosh` を順に通し、最後の段で積の添字を `𝓜̌` へ戻す（運ぶ段）。人手の範囲外の `M = 0` は `trace_Vprime_eq_finset_sum_of_mathlib` と `sum_exp_gval` で閉じる。 -/
+/-- `tr(V̌') = (∏_{μ∈𝓜̌} 2 cosh(γ(θ~_μ)/2))_ℂ`（積の添字が `𝓜̌`。**前因子 `2^{M-m}` は無い**）。
+人手の主張は積の添字を `{1, …, M_col}` に取る Step 5 の鎖（`trace_Vprime_step5`）で、この定理に対応する人手の行は無い。
+`M = r + 1` では Step 1 の鎖 `trace_Vprime_step1`、`binWordSum_ofReal`、`sum_exp_gval_step2_expansion`、`prod_step2_cosh` を順に通し、
+最後の段で積の添字を `𝓜̌` へ戻す（運ぶ段）。このファイルで使うのは人手の範囲外の `M = 0` の枝（`trace_Vprime_eq_finset_sum_of_mathlib` と
+`sum_exp_gval` で閉じる）だけである。 -/
 theorem trace_Vprime (g : CheckIdx M → ℝ) :
     (F.Vprime g).trace = ((∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) := by
   match M, F, g with
@@ -511,27 +520,46 @@ theorem two_cosh_half_step4 (x : ℝ) : 2 * Real.cosh (x / 2) > 0 :=
     _ = 2 := mul_one 2                                  -- `2·1 = 2`
     _ > 0 := two_pos                                    -- `2 > 0`
 
-/-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') = (r)_ℂ`、`r ∈ ℝ_{>0}`。
-`M = r + 1` の正値性は、人手の最後の鎖の 2 行目と 1 対 1 で、`finite_product_of_positive_reals_is_positive`
-（`m → M_col`、`r_μ → 2cosh(γ(θ̃_μ)/2)`。具体版 `Ising2D.finite_product_of_positive_reals_is_positive`）の仮定に、
-各 `μ` の鎖と 1 対 1 の `two_cosh_half_step4` を当てる。その前の段は、積の添字を `𝓜̌` から `μ = j + 1` の全単射で
-人手の `{1, …, M_col}` へ付け替える段（運ぶ段。人手の行は無い）である。
-`tr(V̌') = Π 2cosh` はまだ `trace_Vprime` で、人手の最後の鎖の 1 行目（∵ Step 1--2）を書き直すときに 1 対 1 にする。
-人手の範囲外の `M = 0`（空の積）は mathlib の `Finset.prod_pos` で閉じる。 -/
-theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :
-    ∃ r : ℝ, 0 < r ∧ (F.Vprime g).trace = (r : ℂ) := by
-  refine ⟨∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)), ?_, F.trace_Vprime g⟩
-  match M, g with
-  | 0, g => exact Finset.prod_pos fun i _ => two_cosh_half_step4 (g i)
-  | r + 1, g =>
-    calc ∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2))
-        = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) :=
-          (Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
-            fun _ => rfl).symm                          -- 積の添字を `μ = j + 1` の全単射で `{1, …, M_col}` へ付け替える（運ぶ段。人手の行は無い）
-      _ > 0 :=
-          finite_product_of_positive_reals_is_positive r _ fun j => two_cosh_half_step4 (g (checkIdxOfFin j))
+/-- **原文 `trace_of_check_Vprime` Step 5** の 3 行の鎖:
+`tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ = (Σ_ε exp(ǧ(ε)))_ℂ = (Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2))_ℂ`
+（人手の `M_col` が Lean の `r + 1`、人手の `Π_{μ=1}^{M_col}` が `∏ j : Fin (r + 1)`、人手の `γ(θ̃_μ)` が `g (checkIdxOfFin j)`）。
+3 段は人手の 3 行と 1 対 1 である。3 段目の「Step 2 の鎖」は、Step 2 の展開までの `sum_exp_gval_step2_expansion` と続く 6 行の
+`prod_step2_cosh` を続けて当てる（Step 3 の 20 行目と同じ当て方で、向きが逆）。 -/
+theorem trace_Vprime_step5 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
+    (F.Vprime g).trace = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) :=
+  calc (F.Vprime g).trace
+      = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+        trace_Vprime_step1 F g                          -- Step 1 の `tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ` の鎖
+    _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
+        binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`r → M_col`、`x_ε → exp(ǧ(ε))`）
+    _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) := by
+        rw [sum_exp_gval_step2_expansion F g, prod_step2_cosh g]
+                                                        -- Step 2 の `Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2)` の鎖
+
+/-- **原文 `trace_of_check_Vprime` Step 4 の最後の不等号**:
+`Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2) > 0`（ℝ）。`finite_product_of_positive_reals_is_positive`
+（`m → M_col`、`j → μ`、`r_μ → 2cosh(γ(θ̃_μ)/2)`。具体版 `Ising2D.finite_product_of_positive_reals_is_positive`）の仮定に、
+各 `μ` の鎖と 1 対 1 の `two_cosh_half_step4` を当てる 1 段で、人手の 1 行と 1 対 1 である。 -/
+theorem prod_two_cosh_half_pos_step4 {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
+    ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) > 0 :=
+  finite_product_of_positive_reals_is_positive r _ fun j => two_cosh_half_step4 (g (checkIdxOfFin j))
                                                         -- `finite_product_of_positive_reals_is_positive`（`m → M_col`、`j → μ`、
                                                         -- `r_μ → 2cosh(γ(θ̃_μ)/2)`）に、各 `μ` の鎖 `r_μ > 0` を当てる
+
+/-- **原文 `trace_of_check_Vprime` の主張のうち `tr(V̌') = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ`、`Π_μ 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}`**
+を `∃ r ∈ ℝ_{>0}, tr(V̌') = (r)_ℂ` の形で述べたもの。人手の範囲 `M = r + 1` では、`r` に人手の積 `Π_{μ=1}^{M_col}`
+（`∏ j : Fin (r + 1)`）を取り、正値性は Step 4 の最後の不等号 `prod_two_cosh_half_pos_step4`、等号は Step 5 の鎖
+`trace_Vprime_step5` で、どちらも人手の行と 1 対 1 である。人手の範囲外の `M = 0`（空の積）は `trace_Vprime` と mathlib の `Finset.prod_pos` で閉じる。 -/
+theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :
+    ∃ r : ℝ, 0 < r ∧ (F.Vprime g).trace = (r : ℂ) := by
+  match M, F, g with
+  | 0, F, g =>
+    exact ⟨∏ i : CheckIdx 0, (2 * Real.cosh (g i / 2)),
+      Finset.prod_pos fun i _ => two_cosh_half_step4 (g i), F.trace_Vprime g⟩
+  | r + 1, F, g =>
+    exact ⟨∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2),
+      prod_two_cosh_half_pos_step4 g,                   -- Step 4 の最後の不等号
+      trace_Vprime_step5 F g⟩                           -- Step 5 の鎖
 
 end CheckFermiSetup
 

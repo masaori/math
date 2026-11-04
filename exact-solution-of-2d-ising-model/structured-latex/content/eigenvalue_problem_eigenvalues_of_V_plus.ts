@@ -4211,7 +4211,9 @@ E_K \check{Q}_\epsilon
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 9 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\check{V}'\right)
-= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right) > 0`,
+= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
+= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}},
+\quad \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) > 0`,
     },
     labels: ["trace_of_check_Vprime"],
     statement: [
@@ -4226,11 +4228,20 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\mathrm{tr}\!\left(\check{V}'\right)
 = \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
-= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-\ \in\ \mathbb{R}_{>0}`,
+= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}},
+\qquad
+\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) \in \mathbb{R}_{>0}`,
       ),
       paragraph([
-        "が成り立つ。",
+        "が成り立つ。積は ",
+        ref("def_finite_product_of_real_numbers"),
+        "（",
+        math(String.raw`m \to M_{\mathrm{col}}`),
+        "）の実数の有限積、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の包含である。",
       ]),
     ],
     proof: [
@@ -4459,14 +4470,38 @@ E_K \check{Q}_\epsilon
    \quad (\because 2>0)
 \end{aligned}`,
       ),
-      paragraph(["したがって Step 1--2 のトレース表示により"]),
+      displayMath(
+        String.raw`\prod_{\mu=1}^{M_{\mathrm{col}}}2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) > 0
+\qquad \bigl(\because\ \blkref{finite_product_of_positive_reals_is_positive}\ \bigl(m \to M_{\mathrm{col}},\ j \to \mu,\ r_\mu \to 2\cosh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{に、上の各}\ \mu\ \text{の鎖}\ r_\mu > 0\ \text{を当てる}\bigr)`,
+      ),
+      paragraph([
+        "Step 5（",
+        math(String.raw`\mathrm{tr}(\check{V}')`),
+        " を積の包含で表す）。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{V}'\right)
-&=\prod_{\mu=1}^{M_{\mathrm{col}}}2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad (\because \text{Step 1--2}) \\
-&>0
-   \quad \bigl(\because\ \blkref{finite_product_of_positive_reals_is_positive}\ \bigl(m \to M_{\mathrm{col}},\ j \to \mu,\ r_\mu \to 2\cosh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{に、上の各}\ \mu\ \text{の鎖}\ r_\mu > 0\ \text{を当てる}\bigr)
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 1 の}\ \mathrm{tr}(\check{V}') = \textstyle\sum_{\epsilon} (\exp(\check{g}(\epsilon)))_{\mathbb{C}}\ \text{の鎖}\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(\check{g}(\epsilon)))\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 2 の}\ \textstyle\sum_{\epsilon} \exp(\check{g}(\epsilon)) = \prod_{\mu} 2\cosh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{の鎖}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "主張の等号の鎖は次のとおりで、",
+        math(String.raw`\prod_{\mu} 2\cosh(\tfrac{\gamma(\tilde\theta_\mu)}{2}) \in \mathbb{R}_{>0}`),
+        " は Step 4 の最後の不等号である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\check{V}'\right)
+&= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
+&&\bigl(\because\ \text{Step 3 の}\ \mathrm{tr}((\check{V}')^{-1}) = \mathrm{tr}(\check{V}')\ \text{の鎖を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 3 の鎖と Step 5 の鎖}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -4486,6 +4521,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: Step 3 の (Σ_ε exp(−ǧ(ε)))_ℂ = (Π_μ 2cosh((−γ(θ̃_μ))/2))_ℂ は「Step 2 を γ → −γ として適用」と名前だけで根拠にしていた。Step 3 の冒頭に exp(−ǧ(ε)) = Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2)) の 4 行の鎖（ǧ の定義、新しく足した finite_sum_of_negated_real_numbers を右辺から左辺へ、ℝ の −(ab) = (−a)b、real_exp_of_finite_sum）を置き、トレースの鎖の続きに、それを各項へ入れる行と、Step 2 の展開の行と続く 6 行を γ(θ̃_μ) → −γ(θ̃_μ) で書き下した 7 行を足した（引く主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers・def_cosh_sinh と ℝ の計算規則は任意の実数について述べるので、代入した形をそのまま引ける）。トレースの鎖と続く式の間にあった日本語の段落は無くなり、Step 3 は 1 つの鎖になった。主張は変えていない。最後の行「Step 1--2 の V̌' のトレース表示」はまだ名前だけの根拠である。Lean は Ising2D.CheckFermiSetup.exp_neg_gval_step3_product・sum_exp_neg_gval_step3_expansion と、prod_step2_cosh を −γ で使う段（ClaimTraceCheckVprime.lean の trace_Vprime_inv）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_exp_product.sage と check_step3_expansion_and_cosh.sage。",
         "2026-11-04: Step 3 の最後の行 = tr(V̌') は「Step 1--2 の V̌' のトレース表示」と名前だけで根拠にしていた。Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2) の鎖を右辺から左辺へ当てる行、real_inclusion_preserves_sum_over_binary_words を右辺から左辺へ引く行、Step 1 の鎖を右辺から左辺へ当てる行の 3 行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_inv の M = r + 1 の最後の 5 段（ClaimTraceCheckVprime.lean。cosh_is_even は具体版 Ising2D.cosh_is_even）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_final_lines.sage。",
         "2026-11-04: Step 4 の最後の行 > 0 は「正数の有限積は正」と名前だけで根拠にしていた。新しく足した finite_product_of_positive_reals_is_positive（m → M_col、r_μ → 2cosh(γ(θ̃_μ)/2)）を引き、その仮定に各 μ の鎖を当てることを行末に書いた。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_pos の M = r + 1 の段（ClaimTraceCheckVprime.lean。Finset.prod_pos を外した）。数値検証: sagemath/check/finite_product_of_positive_reals_is_positive/。",
+        "2026-11-04: 主張文・表題と Step 4 の最後の鎖は、ℂ の値 tr(V̌') と ℝ の値 Π_μ 2cosh(γ(θ̃_μ)/2) を包含 (·)_ℂ を書かずに等号で結び、ℂ の値に > 0 を書いていた（「Step 1--2」と名前だけの根拠）。主張文と表題を tr(V̌') = tr((V̌')^{-1}) = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ と Π_μ 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}（> 0）の二つにし、Step 4 の最後の鎖を ℝ の不等号 Π_μ 2cosh(γ(θ̃_μ)/2) > 0 だけにして、Step 5 に Step 1 の鎖・real_inclusion_preserves_sum_over_binary_words・Step 2 の鎖の 3 行の鎖 tr(V̌') = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ を置いた。値は変えていない（ℂ の > 0 を、ℝ の > 0 と包含に書き分けた）。下流の constant_c_value_even_sector は tr(V̌') = tr((V̌')^{-1}) > 0 と書いたまま引いている。Lean は Ising2D.CheckFermiSetup.trace_Vprime_pos（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step5_chain.sage。",
       ],
     },
   },

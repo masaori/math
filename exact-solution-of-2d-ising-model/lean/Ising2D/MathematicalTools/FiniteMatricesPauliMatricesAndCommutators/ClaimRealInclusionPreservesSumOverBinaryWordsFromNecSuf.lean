@@ -7,7 +7,7 @@
 効いているのは包含が二項の和を保つことだけで、包含の単射性・積との両立・零元は効いていない。
 
 `binWordSum_ofReal` は、`TensorPow M` の鎖が `ℂ` と `ℝ` の和をどちらも `NecSuf.binWordSum` で持つ箇所
-（`CheckFermiSetup.trace_Vprime`）で使う系で、具体版 `binaryWordComplexSum_ofReal` から運んで得る。
+（`CheckFermiSetup.trace_Vprime_step5`・`trace_Vprime`・`trace_Vprime_inv`）で使う系で、具体版 `binaryWordComplexSum_ofReal` から運んで得る。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWords
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf

@@ -6,8 +6,8 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 - ブロック: `evenEigen_007_claim_trace_of_check_Vprime`（V̌' は可逆で (V̌')^{-1} = exp(−X̌)（`def_check_Vprime` (2)）であり、
-  tr(V̌') = tr((V̌')^{-1}) = Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}）
-- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 2 行、展開と続く 7 行）、Step 3（冒頭の exp(−ǧ(ε)) の 4 行と、トレースの 22 行の鎖）、Step 4（正値性の不等号）の全ての行と、主張そのもの。
+  tr(V̌') = tr((V̌')^{-1}) = (Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2))_ℂ、Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}）
+- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 2 行、展開と続く 7 行）、Step 3（冒頭の exp(−ǧ(ε)) の 4 行と、トレースの 22 行の鎖）、Step 4（正値性の不等号）、Step 5（tr(V̌') を積の包含で表す 3 行）の全ての行と、主張そのもの。
 - 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)、Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ）、
   ǧ(ε) := Σ_μ γ(θ̃_μ)(ε_μ − 1/2)。
 
@@ -43,6 +43,7 @@ Step 2 と Step 3・4 の実数の値の検算は ň_μ を使わず、γ(θ̃_�
 | Step 3 のトレースの鎖の 19 行目 `cosh_is_even`（x → γ/2） | `check_step3_and_step4_real_lines.sage`・`check_step3_expansion_and_cosh.sage` | 球（各因子の cosh(−x) = cosh(x) と積） |
 | Step 3 のトレースの鎖の 20〜22 行目（Step 2 の Σ_ε exp ǧ(ε) = Π_μ 2cosh(γ/2) の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words` を右辺から左辺へ、Step 1 の鎖を右辺から左辺へ = tr(V̌')） | `check_step3_final_lines.sage`（3 行を値で。最後の右辺は行列の exp のトレース）。`check_step3_chain.sage`（a の形で厳密）と `check_step3_and_step4_real_lines.sage`（Σ_ε exp ǧ(ε) との値の比較）も両端を確かめる | 球と厳密 |
 | Step 4 の γ(θ̃_μ) > 0（`gamma_theta_tilde_mu_positive`）、2cosh(γ/2) ≥ 2·1（`cosh_at_least_one`、x → γ/2 の両辺に 2 を掛ける）、2·1 = 2、2 > 0、正数の有限積は正 | `check_step3_and_step4_real_lines.sage` | 球の全体が不等式を満たすこと。有限積は左から畳み込み、各段の積が正であることを見る |
+| Step 4 の最後の不等号 Π_μ 2cosh(γ/2) > 0（`finite_product_of_positive_reals_is_positive`）と、Step 5 の 3 行（Step 1 の鎖、`real_inclusion_preserves_sum_over_binary_words`、Step 2 の鎖。tr(V̌') = (Π_μ 2cosh(γ/2))_ℂ） | `check_step5_chain.sage`（模型の ň_μ と有理数 γ_μ。左端は行列の exp のトレース） | 球（等号は重なりと半径 < 10^{-80}、不等号は実数の球の全体が正） |
 | 主張そのもの（V̌' = exp(X̌) の実際の値で） | `check_claim_statement.sage` | 球（下の「主張の検算」） |
 
 置き方（`check_step1_chain.sage`・`check_step3_chain.sage`）: exp(γ(θ̃_μ)/2) をローラン多項式環 F[a_1^{±1}, …, a_M^{±1}] の不定元 a_μ に置き、
@@ -60,6 +61,7 @@ Step 3 の 2 行目 (−a)/2 = −(a/2) は a の形では同じ元で、3 行�
   tr((V̌')^{-1}) と外れる。−X̌ ≠ X̌（X̌ ≠ O と同じで、写し間違いはほとんど捉えない弱い対照）。
 - `check_step3_real_inclusion.sage`: 左辺で ε = (1, …, 1) の項を落とすと右辺と外れる。
 - `check_step3_final_lines.sage`: 20 行目の右辺を Σ_ε exp(2ǧ(ε)) に壊すと左辺と重ならない。21 行目の右辺で ε = (1, …, 1) の項を落とすと左辺と重ならない。22 行目の左辺を Σ_ε (exp(ǧ(ε)/2))_ℂ に壊すと tr(V̌') と重ならない。
+- `check_step5_chain.sage`: 2 行目の左辺で ε = (1, …, 1) の項を落とす、3 行目の右辺を (Π_μ 2sinh(γ/2))_ℂ に壊す、1 行目の右辺を Σ_ε (exp(2ǧ(ε)))_ℂ に壊すと、どれも重ならない。M_col が奇数なら Π_μ 2sinh(−γ/2) は 0 より大きくない。
 - `check_step3_and_step4_real_lines.sage`: Σ_ε exp(−2ǧ(ε)) は Π_μ 2cosh(−γ/2) と重ならない。2sinh(−γ/2) は 2 以上でなく、M_col が奇数なら
   Π_μ 2sinh(−γ/2) は負。下界を 3 に上げた 2cosh(γ/2) ≥ 3 は成り立たない μ がある（球の全体が 3 より小さい。球の不等号が下界の違いを見分ける）。(−γ)/2 ≠ γ/2（何も捉えない弱い対照）。
 - Step 2 の 4 本はそれぞれの冒頭に書いた否定コントロールを持つ（移す前と同じ）。
@@ -88,6 +90,7 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
 | `check_step3_exp_product.sage` | Step 3 の冒頭の 4 行（球: M_col = 2..6、4 組、全ての ε。厳密: M_col = 1..6、全ての ε） | **PASS** | 球の行 1984 個、厳密な引数の行 252 個、否定コントロール 496 件 |
 | `check_step3_expansion_and_cosh.sage` | Step 3 のトレースの鎖の 10〜19 行目（厳密: 書き換え 7 段と展開 6 通り。球: M_col = 2..6、4 組） | **PASS** | 厳密 13 件、球の行 200 個、否定コントロール 9 + 80 件 |
 | `check_step3_final_lines.sage` | Step 3 のトレースの鎖の 20〜22 行目（模型の ň_μ と有理数 γ_μ、M_col = 2, 3, 4） | **PASS** | 等号 9 個（半径 < 10^{-80}）、否定コントロール 9 件 |
+| `check_step5_chain.sage` | Step 5 の 3 行と Step 4 の最後の不等号（模型の ň_μ と有理数 γ_μ、M_col = 2, 3, 4） | **PASS** | 等号 9 個（半径 < 10^{-80}）、不等号 3 個（各段の部分積も正）、否定コントロール 10 件 |
 | `check_claim_statement.sage` | 模型の ň_μ と有理数 γ_μ（M_col = 2, 3, 4）で主張 | **PASS** | 主張 15 件、否定コントロール 6 件 |
 | `check_with_check_psi.sage` | 本物の ψ̌ の ň_μ（数体 F、結合定数 3 組 × M_col = 2, 3）で `check_step1_chain.sage`・`check_step3_chain.sage`・`check_claim_statement.sage` | **PASS** | Step 1 の鎖 48 段・否定コントロール 6 件、Step 3 の鎖 48 段・Step 3 の行 24 個・否定コントロール 48 件、主張 30 件・否定コントロール 12 件。この VM で約 4 分 |
 
@@ -115,8 +118,9 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
   `cosh_at_least_one`（x → γ(θ̃_μ)/2）を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。計算の誤りではない。
 - Step 3 の旧い 2 行目の根拠「cosh は偶関数」はラベル参照が無かった（二回目のレビューで見つかった）。ℝ で (−a)/2 = −(a/2) の行と
   `cosh_is_even`（x → γ(θ̃_μ)/2。`cosh_at_least_one` と同じ `020_critical_point.ts` にあり、文書順で前）を引く行に分けた。計算の誤りではない。
-- Step 4 の「正数の有限積は正」は、ラベル参照の無い一般論である（引けるブロックが本文に無い）。
-  主張文と Step 4 は ℂ の値（トレース）と ℝ の値（Π 2cosh）を包含 (·)_ℂ を書かずに等号で結んでいる（Step 1〜3 は包含を書いて区別している）。計算の誤りではない。
+- Step 4 の「正数の有限積は正」は、ラベル参照の無い一般論だった。2026-11-04 に `finite_product_of_positive_reals_is_positive` を引く形にした。
+- 主張文と Step 4 は ℂ の値（トレース）と ℝ の値（Π 2cosh）を包含 (·)_ℂ を書かずに等号で結んでいた。2026-11-04 に、主張を tr(V̌') = (Π 2cosh)_ℂ と Π 2cosh ∈ ℝ_{>0} に書き分け、
+  Step 5 に包含の 3 行の鎖を置いた（`check_step5_chain.sage`）。計算の誤りではない。
 - 検算で計算の誤りは見つからなかった。
 
 ## 由来
@@ -131,7 +135,7 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
 | `check_step2_exp_product.sage` | `check_trace_of_check_Vprime_step2_exp_product.sage`（中身は不変） |
 | `check_step2_expansion.sage` | `check_trace_of_check_Vprime_step2_expansion.sage`（中身は不変） |
 | `check_step2_cosh.sage` | `check_trace_of_check_Vprime_step2_cosh.sage`（中身は不変） |
-| `check_step3_chain.sage`、`check_step3_and_step4_real_lines.sage`、`check_claim_statement.sage`、`check_with_check_psi.sage`、`check_step3_real_inclusion.sage`、`check_step3_exp_product.sage`、`check_step3_expansion_and_cosh.sage`、`check_step3_final_lines.sage` | 新しく足した |
+| `check_step3_chain.sage`、`check_step3_and_step4_real_lines.sage`、`check_claim_statement.sage`、`check_with_check_psi.sage`、`check_step3_real_inclusion.sage`、`check_step3_exp_product.sage`、`check_step3_expansion_and_cosh.sage`、`check_step3_final_lines.sage`、`check_step5_chain.sage` | 新しく足した |
 
 ## 実行
 

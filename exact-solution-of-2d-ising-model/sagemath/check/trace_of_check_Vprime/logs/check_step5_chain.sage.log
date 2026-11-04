@@ -1,0 +1,5 @@
+  Jordan–Wigner の模型 M=2: 等号 3 個まで、不等号 1 個まで、否定コントロール 3 件まで
+  Jordan–Wigner の模型 M=3: 等号 6 個まで、不等号 2 個まで、否定コントロール 7 件まで
+  Jordan–Wigner の模型 M=4: 等号 9 個まで、不等号 3 個まで、否定コントロール 10 件まで
+checked 9 equalities (the Step 5 chain), 3 inequalities (Step 4 の最後の不等号) and 10 negative controls
+RESULT: PASS
