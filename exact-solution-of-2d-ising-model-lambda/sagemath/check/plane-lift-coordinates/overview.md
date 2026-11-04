@@ -11,5 +11,5 @@ $$P_k(\gamma)=\Bigl(s(i'_k)+L\sum_{t\le k}c_{\mathrm v}(\vec e_t)(1-2d_t),\ s(j'
 $L=1,2$ の自己ループ・多重辺も辺番号と向きを保ったまま列挙する。
 
 - 実行: `sage sagemath/check/plane-lift-coordinates/check.sage`
-- 状態: PASS（2026-08-31。件数は実行出力に記録）
+- 状態: PASS（2026-11-04。非後退辺列 20,384 件、持ち上げ点 112,280 件）
 - 計算: 有限集合の全列挙と `ZZ` の等式比較だけ。浮動小数点は使わない。

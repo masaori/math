@@ -63197,6 +63197,11 @@ P_k(\gamma):=P_{k-1}(\gamma)+\bigl(\delta_{\mathrm{row}}(\vec e_k),\,\delta_{\ma
                     labels: ["claim_plane_lift_coordinates"],
                     habitat: "Z",
                     verification: ["sagemath/check/plane-lift-coordinates"],
+                    lean: [
+                      "Ising2DLambda.KacWard.planeLift_coordinates",
+                      "Ising2DLambda.NecSuf.KacWard.lift_coordinates_necSuf",
+                      "Ising2DLambda.KacWard.planeLift_coordinates_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         "任意の非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -82449,12 +82454,12 @@ e^{-2K_q}
 &=e^{\log_{\mathbb R}r}
 &&\bigl(\because\ K_q\text{ の定義}\bigr)\\
 &=r
-&&\bigl(\because\ r>0\text{ と指数・実対数の逆写像の関係}\bigr),\\
+&&\bigl(\because\ r>0\text{ と指数・実対数の逆写像の関係}\bigr)\\
 e^{2K_q}
 &=(e^{-2K_q})^{-1}
 &&\bigl(\because\ \mathbb R\text{ 上の指数法則}\bigr)\\
 &=r^{-1}
-&&\bigl(\because\ \text{直前の等式}\bigr).
+&&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
                   paragraph(["双曲線関数の定義から、二つの式鎖を得る。"]),
                   displayMath(String.raw`\begin{aligned}
@@ -82464,14 +82469,14 @@ e^{2K_q}
 &=(r^{-1}+r)/2
 &&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
 &=c_q
-&&\bigl(\because\ c_q\text{ の定義}\bigr),\\
+&&\bigl(\because\ c_q\text{ の定義}\bigr)\\
 \sinh(2K_q)
 &=(e^{2K_q}-e^{-2K_q})/2
 &&\bigl(\because\ \sinh\text{ の定義}\bigr)\\
 &=(r^{-1}-r)/2
 &&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
 &=s_q
-&&\bigl(\because\ s_q\text{ の定義}\bigr).
+&&\bigl(\because\ s_q\text{ の定義}\bigr)
 \end{aligned}`),
                   paragraph([
                     "以下、", math(String.raw`B_q(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
@@ -82485,7 +82490,7 @@ B_q(\theta_1,\theta_2)
 &=4r^2\left(\frac{(1+r^2)^2}{4r^2}-\frac{1-r^2}{2r}(\cos\theta_1+\cos\theta_2)\right)
 &&\bigl(\because\ r>0\text{ と実数の四則}\bigr)\\
 &=4r^2H_q(\theta_1,\theta_2)
-&&\bigl(\because\ c_q,s_q,H_q\text{ の定義}\bigr).
+&&\bigl(\because\ c_q,s_q,H_q\text{ の定義}\bigr)
 \end{aligned}`),
                   displayMath(String.raw`\begin{aligned}
 \log_{\mathbb R}(4r^2)
@@ -82496,7 +82501,7 @@ B_q(\theta_1,\theta_2)
 &=2\log_{\mathbb R}2+\log_{\mathbb R}(r^2)
 &&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則}\bigr)\\
 &=2\log_{\mathbb R}2+2\log_{\mathbb R}r
-&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則}\bigr).
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則}\bigr)
 \end{aligned}`),
                   displayMath(String.raw`\begin{aligned}
 f^{\mathrm{per}}(q)
@@ -82513,7 +82518,7 @@ f^{\mathrm{per}}(q)
 &=\tfrac12\bigl(2\log_{\mathbb R}2+2\log_{\mathbb R}r\bigr)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
 &&\bigl(\because\ \text{直前の実対数の式鎖}\bigr)\\
 &=\log_{\mathbb R}2+\log_{\mathbb R}r+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
-&&\bigl(\because\ \mathbb R\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
 \end{aligned}`),
                 ],
               },
