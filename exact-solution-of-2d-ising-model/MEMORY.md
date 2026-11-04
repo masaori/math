@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百四十一個目として、`epsilon_eigenvalue_on_check_Q` の (2b2) を行った。Step 2 の後半の `Π' := ∏_{ν≠μ}A_ν`（`NecSuf.finProdLeftOmitting`）と `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）を人手と同じ行の calc の具体版（`ClaimEpsilonEigenvalueOnCheckQ.lean`）と必要十分版（`NecSuf/SignReversalOnGeneratorVector.lean`、`NonAssocRing`・`NonUnitalSemiring`）で置いた。本文と SageMath は不変。次は (2c)（(2) の冒頭の鎖、Step 3 の後半、約分、`eta_insert` の組み替え）。
 2026-11-04: Lean の通しの証明のゴールラインの確認の百四十個目として、`epsilon_eigenvalue_on_check_Q` の (2b) を (2b1)・(2b2) に割り (2b1) を行った。Step 2 の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行（`CheckFermi.nOp_mul_cre`。必要十分版 `NecSuf.num_mul_cre'` を同じ 13 行で置き、既存の `num_mul_cre` をその系にした）、`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ` の 8 行ずつ（`defFactor_of_notMem`・`defFactor_of_mem`）、`ν ≠ μ` の `A_ν^{ε'} = A_ν^ε`、可換性 `XA_ν^δ = A_ν^δX`（`commute_defFactor_of_commute`）と `X → ň_κ`・`A_κ^δ`・`ψ̌_μ^†` の 3 つの使い方を、人手と同じ行の calc で置いた。本文と SageMath は不変。次は (2b2)（`Π'` と 3 本の鎖）。
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十九個目として、`epsilon_eigenvalue_on_check_Q` の (2) を (2a)〜(2c) に割り (2a) を行った。Step 1 の 3 本の鎖（`ň_μ q = 0`・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`・背理法）と Step 3 の前半の 9 行の鎖を、人手と同じ行の calc の具体版と必要十分版（`NecSuf/SignReversalOnGeneratorVector.lean`。Step 3 はスカラー環を係数と分け、効くのは `SMulCommClass` だけ）で置いた。`eta_insert` は未組み替え。本文と SageMath は不変。次は (2b) の Step 2。
 

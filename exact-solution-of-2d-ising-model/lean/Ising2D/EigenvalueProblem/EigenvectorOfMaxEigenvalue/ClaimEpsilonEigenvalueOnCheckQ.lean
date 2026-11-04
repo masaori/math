@@ -4,7 +4,7 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
-必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の Step 1 と Step 3 の前半の数ベクトルの鎖は
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の Step 1・Step 2 の後半・Step 3 の前半の数ベクトルの鎖は
 `Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`）の
 `Ising2D.NecSuf.projOn_insert_mul_cre` / `NecSuf.cre_mul_projOn_ne_zero`。
 **符号の反転則 (2) はその 2 つの系である。**
@@ -18,7 +18,7 @@
 | (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | **まだ人手どおりの鎖が無い**（Step 1・Step 3 の補題は `Q̌_ε q = q`・`εq = ηq` を仮定で受ける。`exists_generator_of_eta` の `q` は (1) が選んだ生成元で、人手の「任意の `0` でない元」と違う。`eta_insert` を組み替えるときに置く） |
 | (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
 | (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ`（8 行ずつ）・`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`・`XA_ν^δ = A_ν^δX`（3 式と 5 行）と、その `X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†` | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
-| (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν` と `A_μ^ε q = q`・`Π'q = q`・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q` の 3 本の鎖 | **まだ無い**（次に置く） |
+| (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν` と `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）の 3 本の鎖 | `cre_mul_omittingDefFactor`・`defFactor_mulVec_generator_of_notMem`・`omittingDefFactor_mulVec_generator`・`omittingDefFactor_insert`・`Qproj_insert_mulVec_cre_mulVec_generator`（`Π'` は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`、人手の `M_col` が Lean の `r + 2`。必要十分版の特殊化は `*_of_necSuf`） |
 | (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
 | (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じる。人手の数ベクトルの鎖へは Step 2 を置いてから組み替える） |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
@@ -36,6 +36,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.NecSuf.SignReversalOnGeneratorVector
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
 
 namespace Ising2D
 
@@ -524,6 +526,110 @@ theorem defFactor_mul_defFactor (T : Finset (Fin M)) (κ ν : Fin M) :
 theorem cre_mul_defFactor_of_ne (T : Finset (Fin M)) {μ ν : Fin M} (hν : ν ≠ μ) :
     F.cre μ * F.defFactor T ν = F.defFactor T ν * F.cre μ :=
   F.commute_defFactor_of_commute T ν (F.commute_cre_nOp (Ne.symm hν)).eq
+
+/-! 人手の (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν`（`def_finite_product_of_matrices_omitting_one_index`（`r → M_col`、`ν → μ`）。
+Lean は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`。人手の `M_col ∈ ℤ_{≥2}` が Lean の `r + 2` で、人手の添字は 1 始まり、Lean の `Fin` は 0 始まりである。
+Lean の `μ` は人手の `μ` から 1 を引いた値である。人手の `A_j` は Lean の `A (j − 1)` である。人手の `s(j)` は Lean の `μ.succAbove (j − 1)` に 1 を足した値である）と、
+`ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）である。
+人手の `Q̌_δ = ∏_{ν=1}^{M_col}A_ν^δ`（`Q̌_δ` の定義）は、Lean の `Qproj` の定義とつなぐ等式 `Qproj_eq_finProdLeft_defFactor` で受ける。
+`Π'` は `δ = ε` の因子で作る（人手の `A_ν` は `ν ≠ μ` での `A_ν^{ε'} = A_ν^ε` の共通の値）。 -/
+
+/-- **原文 (2) Step 2**: `ψ̌_μ^†Π' = Π'ψ̌_μ^†`。`matrix_commuting_with_each_factor_commutes_with_finite_product`
+（`X → ψ̌_μ^†`、`A_j → A_{s(j)}`。`s(j) ≠ μ` なので仮定は上の `ψ̌_μ^†A_ν = A_νψ̌_μ^†`（`ν → s(j)`））。 -/
+theorem cre_mul_omittingDefFactor {r : ℕ} (F : CheckFermi (r + 2)) (T : Finset (Fin (r + 2))) (μ : Fin (r + 2)) :
+    F.cre μ * NecSuf.finProdLeftOmitting r μ (F.defFactor T)
+      = NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.cre μ :=
+  commute_finProdLeft_tensorPow r (F.cre μ) (fun j => F.defFactor T (μ.succAbove j))
+    (fun j => F.cre_mul_defFactor_of_ne T (Fin.succAbove_ne μ j))
+
+/-- **原文 (2) Step 2** の `A_μ^ε q = q` の 5 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`。`ň_μ q = 0` は Step 1 の鎖）。 -/
+theorem defFactor_mulVec_generator_of_notMem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
+    {q : Conf M → ℂ} (hn : F.nOp μ *ᵥ q = 0) : F.defFactor T μ *ᵥ q = q :=
+  calc F.defFactor T μ *ᵥ q
+      = (1 - F.nOp μ) *ᵥ q := by rw [F.defFactor_of_notMem hμ]
+                                                        -- 上の `A_μ^ε = I − ň_μ`
+    _ = (1 : TensorPow M) *ᵥ q - F.nOp μ *ᵥ q := (sub_mulVec_tensorPow _ _ _).symm
+                                                        -- `matrix_difference_mul_vector`
+    _ = q - F.nOp μ *ᵥ q := by rw [identity_matrix_mulVec_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = q - 0 := by rw [hn]                             -- Step 1 の `ň_μ q = 0`
+    _ = q := sub_zero q                                 -- `matrix_minus_zero_matrix`
+
+/-- **原文 (2) Step 2** の `Π'q = q` の 5 行の鎖。 -/
+theorem omittingDefFactor_mulVec_generator {r : ℕ} (F : CheckFermi (r + 2)) {T : Finset (Fin (r + 2))}
+    {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ} (hA : F.defFactor T μ *ᵥ q = q)
+    (hqfix : F.Qproj T *ᵥ q = q) : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q :=
+  calc NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q
+      = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ (F.defFactor T μ *ᵥ q) := by rw [hA]
+                                                        -- 上の `A_μ^ε q = q`
+    _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.defFactor T μ) *ᵥ q :=
+        Matrix.mulVec_mulVec _ _ _                      -- `mat_mult_associative`
+    _ = NecSuf.finProdLeft (r + 1) (F.defFactor T) *ᵥ q := by
+        rw [finProdLeft_eq_omitting_mul_tensorPow r μ (F.defFactor T)
+          (fun j _ => F.defFactor_mul_defFactor T μ j)]
+                                                        -- `moving_one_factor_of_finite_product_to_the_end` と因子の可換性
+    _ = F.Qproj T *ᵥ q := by rw [Qproj_eq_finProdLeft_defFactor F T]
+                                                        -- `Q̌_ε` の定義
+    _ = q := hqfix                                      -- `Q̌_ε q = q`
+
+/-- 人手の「`ν ≠ μ` で `A_ν^{ε'} = A_ν`」を `Π'` の全ての因子へ同時に使ったもの: `∏_{ν≠μ}A_ν^{ε'} = Π'`。 -/
+theorem omittingDefFactor_insert {r : ℕ} (F : CheckFermi (r + 2)) (T : Finset (Fin (r + 2))) (μ : Fin (r + 2)) :
+    NecSuf.finProdLeftOmitting r μ (F.defFactor (insert μ T))
+      = NecSuf.finProdLeftOmitting r μ (F.defFactor T) :=
+  congrArg (NecSuf.finProdLeft r) (funext fun j => F.defFactor_insert_of_ne T (Fin.succAbove_ne μ j))
+
+/-- **原文 (2) Step 2** の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q` の 10 行の鎖（`ε' := ε[μ→1]` は `insert μ T`）。 -/
+theorem Qproj_insert_mulVec_cre_mulVec_generator {r : ℕ} (F : CheckFermi (r + 2)) {T : Finset (Fin (r + 2))}
+    {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ}
+    (hP : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q) :
+    F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q :=
+  calc F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)
+      = NecSuf.finProdLeft (r + 1) (F.defFactor (insert μ T)) *ᵥ (F.cre μ *ᵥ q) := by
+        rw [Qproj_eq_finProdLeft_defFactor F (insert μ T)]
+                                                        -- `Q̌_{ε'}` の定義
+    _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.defFactor (insert μ T) μ) *ᵥ (F.cre μ *ᵥ q) := by
+        rw [finProdLeft_eq_omitting_mul_tensorPow r μ (F.defFactor (insert μ T))
+          (fun j _ => F.defFactor_mul_defFactor (insert μ T) μ j), F.omittingDefFactor_insert T μ]
+                                                        -- `moving_one_factor_of_finite_product_to_the_end` と因子の可換性、
+                                                        -- `ν ≠ μ` で `A_ν^{ε'} = A_ν`
+    _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.nOp μ) *ᵥ (F.cre μ *ᵥ q) := by
+        rw [F.defFactor_of_mem (Finset.mem_insert_self μ T)]
+                                                        -- 上の `A_μ^{ε'} = ň_μ`
+    _ = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ (F.nOp μ *ᵥ (F.cre μ *ᵥ q)) :=
+        (Matrix.mulVec_mulVec _ _ _).symm               -- `mat_mult_associative`
+    _ = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ ((F.nOp μ * F.cre μ) *ᵥ q) := by
+        rw [Matrix.mulVec_mulVec q (F.nOp μ) (F.cre μ)]                       -- `mat_mult_associative`
+    _ = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ (F.cre μ *ᵥ q) := by
+        rw [F.nOp_mul_cre μ]                            -- Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†`
+    _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.cre μ) *ᵥ q :=
+        Matrix.mulVec_mulVec _ _ _                      -- `mat_mult_associative`
+    _ = (F.cre μ * NecSuf.finProdLeftOmitting r μ (F.defFactor T)) *ᵥ q := by
+        rw [F.cre_mul_omittingDefFactor T μ]            -- 上の `ψ̌_μ^†Π' = Π'ψ̌_μ^†`
+    _ = F.cre μ *ᵥ (NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q) :=
+        (Matrix.mulVec_mulVec _ _ _).symm               -- `mat_mult_associative`
+    _ = F.cre μ *ᵥ q := by rw [hP]                      -- 上の `Π'q = q`
+
+/-! 上の 3 本の鎖を必要十分版 `Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`（係数 `ℂ`、添字 `Conf M`）の特殊化として得る。 -/
+
+theorem defFactor_mulVec_generator_of_notMem_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
+    {q : Conf M → ℂ} (hn : F.nOp μ *ᵥ q = 0) : F.defFactor T μ *ᵥ q = q :=
+  NecSuf.mulVec_eq_of_eq_one_sub_of_mulVec_eq_zero (F.defFactor_of_notMem hμ) hn
+
+theorem omittingDefFactor_mulVec_generator_of_necSuf {r : ℕ} (F : CheckFermi (r + 2)) {T : Finset (Fin (r + 2))}
+    {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ} (hA : F.defFactor T μ *ᵥ q = q)
+    (hqfix : F.Qproj T *ᵥ q = q) : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q :=
+  NecSuf.finProdLeftOmitting_mulVec_eq_of_fixed r μ (F.defFactor T)
+    (fun j _ => F.defFactor_mul_defFactor T μ j) hA (by rw [← Qproj_eq_finProdLeft_defFactor F T]; exact hqfix)
+
+theorem Qproj_insert_mulVec_cre_mulVec_generator_of_necSuf {r : ℕ} (F : CheckFermi (r + 2))
+    {T : Finset (Fin (r + 2))} {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ}
+    (hP : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q) :
+    F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q := by
+  rw [Qproj_eq_finProdLeft_defFactor F (insert μ T)]
+  exact NecSuf.finProdLeft_mulVec_cre_mulVec_eq_of_omitting_mulVec_eq r μ (F.defFactor (insert μ T))
+    (F.defFactor T) (fun j _ => F.defFactor_mul_defFactor (insert μ T) μ j)
+    (fun j => F.defFactor_insert_of_ne T (Fin.succAbove_ne μ j))
+    (F.defFactor_of_mem (Finset.mem_insert_self μ T)) (F.nOp_mul_cre μ) (F.cre_mul_omittingDefFactor T μ) hP
 
 /-- **原文 (2)**: `μ ∉ T` なら `η_{T∪{μ}} = -η_T`。
 
