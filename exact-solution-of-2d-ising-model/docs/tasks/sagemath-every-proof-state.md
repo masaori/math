@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 26 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 24 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -366,8 +366,10 @@
 
 - `D0_G_diagonal_action`（D_0f_{ι(s)} = (Σ_{m=1}^{M_col−1} s(m)s(m+1))_ℂ f_{ι(s)}、Gf_{ι(s)} = (s(M_col)s(1))_ℂ f_{ι(s)}）: `sagemath/check/D0_G_diagonal_action/`。準備（各 m の 8 行）・開鎖項（6 行）・周期境界項（9 行）の鎖の全ての行を、σ_m^z と f_{ι(s)} を def_kronecker (2) の成分の式で、積・スカラー倍・有限和・ℂ の積・ℝ→ℂ の包含を本文の定め方で組み、M_col = 2..6・全ての s で QQ(i) で厳密に確かめた（等号・主張 6757 件、否定コントロール 20 件）。主張は Sage の tensor_product と `*` だけの独立な経路でも確かめた。人手証明の計算の誤りは無し。名前だけの根拠をラベル参照にし、積の結合律と σ^z の作用を一行にまとめていた段を分け、係数に ℝ→ℂ の包含を書いた（値は不変）。一回のレビューで必須の指摘は無し。Lean は変えていない（新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `epsilon_D0_G_pairwise_commute`（εD_0 = D_0ε、εG = Gε、D_0G = GD_0）と `epsilon_G_is_involution`（(εG)^2 = I）: `sagemath/check/epsilon_D0_G_pairwise_commute/`・`sagemath/check/epsilon_G_is_involution/`。二つの証明の全ての行を、σ_k^z・ε を def_kronecker (2) の成分の式と mat_mult の成分の式で、符号反転・有限和・単位行列を本文の定め方で組み、行の鎖は M_col = 2..5・全ての j, k, m で、主張は Sage の tensor_product と `*` だけの独立な経路で M_col = 2..7 まで、QQ(i) で厳密に確かめた（等号・主張 710 件と 163 件、否定コントロール 16 件と 12 件）。人手証明の計算の誤りは無し。旧い証明は符号の括り出しと結合律、符号の括り出しと二重の符号反転をそれぞれ一行にまとめ、D_0G の四つの因子の並べ替えと G^2 = (σ_{M_col}^z)^2(σ_1^z)^2 を名前だけの根拠で一度に行っていたので、negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_double_negation・mat_mult_associative・distinct_site_pauli_matrices_commute の行の鎖にし、準備を内容の名前（「ε と σ^z の対の可換」「σ^z どうしの可換」「σ^z の対と G の可換」）で置いた。(εG)^2 = I の証明が ε^2 = I の根拠に epsilon_projector_properties (1)（(P^{(+)})^2 = P^{(+)}）を引いていた誤りを epsilon_square_and_eigenvalues に直した。主張文に M_col ∈ ℤ_{≥2}・ε の定義・右辺の単位行列の次数・X^2 := XX を書いた（主張は不変）。一回のレビューで必須の指摘は無し。Lean の `ClaimEpsilonD0GCommuteAndDiagonalAction.lean` は変えていない（冒頭の対応表は旧い行の分け方のままで、新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_D0_G_pairwise_commute`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `open_chain_partition_sum`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

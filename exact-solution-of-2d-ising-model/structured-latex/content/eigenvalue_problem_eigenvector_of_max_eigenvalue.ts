@@ -2332,6 +2332,8 @@ Gf_{\iota(s)}
     labels: ["epsilon_D0_G_pairwise_commute"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とする。",
         ref("def_D0_open_chain_operator"),
         " の ",
         math(String.raw`D_0`),
@@ -2339,104 +2341,145 @@ Gf_{\iota(s)}
         ref("def_G_boundary_operator"),
         " の ",
         math(String.raw`G`),
-        " は ",
+        " と ",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
         math(String.raw`\varepsilon`),
-        " と二つずつ可換である。すなわち",
+        " は、",
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " の中で二つずつ可換である。すなわち",
       ]),
       displayMath(String.raw`\varepsilon D_0 = D_0\varepsilon, \qquad
 \varepsilon G = G\varepsilon, \qquad D_0G = GD_0`),
     ],
     proof: [
       paragraph([
-        ref("epsilon_anticommutes_with_site_sigma_z"),
-        " より、各 ",
-        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        "準備（", math(String.raw`\varepsilon`), " と ", math(String.raw`\sigma^z`), " の対の可換）。各 ",
+        math(String.raw`k\in\{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
-        math(String.raw`\varepsilon\sigma_k^z=-\sigma_k^z\varepsilon`),
-        " である。各 ",
-        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
-        " に対して二回の反可換移動を一回ずつ行うと",
+        math(String.raw`\varepsilon\sigma_k^z=-(\sigma_k^z\varepsilon)`),
+        "（",
+        ref("epsilon_anticommutes_with_site_sigma_z"),
+        "）である。各 ",
+        math(String.raw`j,k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\varepsilon(\sigma_m^z\sigma_{m+1}^z)
-&=(\varepsilon\sigma_m^z)\sigma_{m+1}^z
-&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=(-\sigma_m^z\varepsilon)\sigma_{m+1}^z
-&&\bigl(\because\ \varepsilon\sigma_m^z=-\sigma_m^z\varepsilon\bigr)\\
-&=-\sigma_m^z(\varepsilon\sigma_{m+1}^z)
-&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=-\sigma_m^z(-\sigma_{m+1}^z\varepsilon)
-&&\bigl(\because\ \varepsilon\sigma_{m+1}^z=-\sigma_{m+1}^z\varepsilon\bigr)\\
-&=\sigma_m^z(\sigma_{m+1}^z\varepsilon)
-&&\bigl(\because\ (-1)(-1)=1\bigr)\\
-&=(\sigma_m^z\sigma_{m+1}^z)\varepsilon
-&&\bigl(\because\ \text{行列の積の結合律}\bigr).
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\varepsilon D_0
-&=\varepsilon\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
-&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
-&=\sum_{m=1}^{M_{\mathrm{col}}-1}\varepsilon(\sigma_m^z\sigma_{m+1}^z)
-&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
-&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)\varepsilon
-&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
-&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)\varepsilon
-&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
-&=D_0\varepsilon
-&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
-\end{aligned}`),
-      paragraph(["境界の二サイトについても同じ二回の反可換移動を行う。"]),
-      displayMath(String.raw`\begin{aligned}
-\varepsilon G
-&=\varepsilon(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
-&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
-&=(\varepsilon\sigma_{M_{\mathrm{col}}}^z)\sigma_1^z
-&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=(-\sigma_{M_{\mathrm{col}}}^z\varepsilon)\sigma_1^z
-&&\bigl(\because\ \varepsilon\sigma_{M_{\mathrm{col}}}^z=-\sigma_{M_{\mathrm{col}}}^z\varepsilon\bigr)\\
-&=-\sigma_{M_{\mathrm{col}}}^z(\varepsilon\sigma_1^z)
-&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=-\sigma_{M_{\mathrm{col}}}^z(-\sigma_1^z\varepsilon)
-&&\bigl(\because\ \varepsilon\sigma_1^z=-\sigma_1^z\varepsilon\bigr)\\
-&=\sigma_{M_{\mathrm{col}}}^z(\sigma_1^z\varepsilon)
-&&\bigl(\because\ (-1)(-1)=1\bigr)\\
-&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\varepsilon
-&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=G\varepsilon
-&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
+\varepsilon(\sigma_j^z\sigma_k^z)
+&=(\varepsilon\sigma_j^z)\sigma_k^z
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\bigl(-(\sigma_j^z\varepsilon)\bigr)\sigma_k^z
+&&\bigl(\because\ \blkref{epsilon_anticommutes_with_site_sigma_z}\ (k\to j)\bigr)\\
+&=-\bigl((\sigma_j^z\varepsilon)\sigma_k^z\bigr)
+&&\bigl(\because\ \blkref{negation_factors_out_of_left_factor}\bigr)\\
+&=-\bigl(\sigma_j^z(\varepsilon\sigma_k^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=-\Bigl(\sigma_j^z\bigl(-(\sigma_k^z\varepsilon)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{epsilon_anticommutes_with_site_sigma_z}\ (k\to k)\bigr)\\
+&=-\Bigl(-\bigl(\sigma_j^z(\sigma_k^z\varepsilon)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{negation_factors_out_of_right_factor}\bigr)\\
+&=\sigma_j^z(\sigma_k^z\varepsilon)
+&&\bigl(\because\ \blkref{matrix_double_negation}\bigr)\\
+&=(\sigma_j^z\sigma_k^z)\varepsilon
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr).
 \end{aligned}`),
       paragraph([
-        ref("kronecker_product_rule"),
-        " (1) より、相異なるサイトの因子は可換し、同じサイトに現れる因子はいずれも ",
-        math(String.raw`\sigma^z`),
-        " なので、各サイトの因子を並べ替えると、各 ",
+        "準備（", math(String.raw`\sigma^z`), " どうしの可換）。各 ",
+        math(String.raw`j,k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`\sigma_j^z\sigma_k^z=\sigma_k^z\sigma_j^z`),
+        " である。",
+        math(String.raw`j\neq k`),
+        " なら ",
+        ref("distinct_site_pauli_matrices_commute"),
+        "（",
+        math(String.raw`a=b=z`),
+        "）により、",
+        math(String.raw`j=k`),
+        " なら両辺は同じ行列である。",
+      ]),
+      paragraph([
+        "準備（", math(String.raw`\sigma^z`), " の対と ", math(String.raw`G`), " の可換）。各 ",
         math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (\sigma_m^z\sigma_{m+1}^z)G
 &=(\sigma_m^z\sigma_{m+1}^z)(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
-&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr)\\
+&=\sigma_m^z\bigl(\sigma_{m+1}^z(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_m^z\bigl((\sigma_{m+1}^z\sigma_{M_{\mathrm{col}}}^z)\sigma_1^z\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_m^z\bigl((\sigma_{M_{\mathrm{col}}}^z\sigma_{m+1}^z)\sigma_1^z\bigr)
+&&\bigl(\because\ \text{準備（}\sigma^z\text{ どうしの可換）}\ (j\to m+1,\ k\to M_{\mathrm{col}})\bigr)\\
+&=\sigma_m^z\bigl(\sigma_{M_{\mathrm{col}}}^z(\sigma_{m+1}^z\sigma_1^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_m^z\bigl(\sigma_{M_{\mathrm{col}}}^z(\sigma_1^z\sigma_{m+1}^z)\bigr)
+&&\bigl(\because\ \text{準備（}\sigma^z\text{ どうしの可換）}\ (j\to m+1,\ k\to 1)\bigr)\\
+&=(\sigma_m^z\sigma_{M_{\mathrm{col}}}^z)(\sigma_1^z\sigma_{m+1}^z)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_m^z)(\sigma_1^z\sigma_{m+1}^z)
+&&\bigl(\because\ \text{準備（}\sigma^z\text{ どうしの可換）}\ (j\to m,\ k\to M_{\mathrm{col}})\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(\sigma_m^z(\sigma_1^z\sigma_{m+1}^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl((\sigma_m^z\sigma_1^z)\sigma_{m+1}^z\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl((\sigma_1^z\sigma_m^z)\sigma_{m+1}^z\bigr)
+&&\bigl(\because\ \text{準備（}\sigma^z\text{ どうしの可換）}\ (j\to m,\ k\to 1)\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(\sigma_1^z(\sigma_m^z\sigma_{m+1}^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
 &=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)(\sigma_m^z\sigma_{m+1}^z)
-&&\bigl(\because\ \text{kronecker\_product\_rule (1) を各サイトへ適用}\bigr)\\
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
 &=G(\sigma_m^z\sigma_{m+1}^z)
-&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr).
 \end{aligned}`),
+      paragraph([math(String.raw`\varepsilon D_0 = D_0\varepsilon`), " について。"]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon D_0
+&=\varepsilon\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
+&&\bigl(\because\ \blkref{def_D0_open_chain_operator}\bigr)\\
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}\varepsilon(\sigma_m^z\sigma_{m+1}^z)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (r\to M_{\mathrm{col}}-1)\bigr)\\
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)\varepsilon
+&&\bigl(\because\ \text{準備（}\varepsilon\text{ と }\sigma^z\text{ の対の可換）}\ (j\to m,\ k\to m+1)\bigr)\\
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)\varepsilon
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\ (r\to M_{\mathrm{col}}-1)\bigr)\\
+&=D_0\varepsilon
+&&\bigl(\because\ \blkref{def_D0_open_chain_operator}\bigr).
+\end{aligned}`),
+      paragraph([math(String.raw`\varepsilon G = G\varepsilon`), " について。"]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon G
+&=\varepsilon(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr)\\
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\varepsilon
+&&\bigl(\because\ \text{準備（}\varepsilon\text{ と }\sigma^z\text{ の対の可換）}\ (j\to M_{\mathrm{col}},\ k\to 1)\bigr)\\
+&=G\varepsilon
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr).
+\end{aligned}`),
+      paragraph([math(String.raw`D_0G = GD_0`), " について。"]),
       displayMath(String.raw`\begin{aligned}
 D_0G
 &=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)G
-&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
+&&\bigl(\because\ \blkref{def_D0_open_chain_operator}\bigr)\\
 &=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)G
-&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\ (r\to M_{\mathrm{col}}-1)\bigr)\\
 &=\sum_{m=1}^{M_{\mathrm{col}}-1}G(\sigma_m^z\sigma_{m+1}^z)
-&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
+&&\bigl(\because\ \text{準備（}\sigma^z\text{ の対と }G\text{ の可換）}\bigr)\\
 &=G\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
-&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (r\to M_{\mathrm{col}}-1)\bigr)\\
 &=GD_0
-&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
+&&\bigl(\because\ \blkref{def_D0_open_chain_operator}\bigr).
 \end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "数値検証: sagemath/check/epsilon_D0_G_pairwise_commute/。",
+        "2026-11-04: SageMath の検算を付けるときに、名前だけの根拠をラベル参照にした。旧い証明は「(−σ_m^zε)σ_{m+1}^z = −σ_m^z(εσ_{m+1}^z)」で符号の括り出しと結合律を一行にまとめ、「(−1)(−1) = 1」で符号の括り出しと二重の符号反転をまとめ、D_0G の段で「kronecker_product_rule (1) を各サイトへ適用」して四つの因子を一度に並べ替えていた。符号の行を negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_double_negation の行に分け、ε と二つの σ^z の積の可換を準備（ε と σ^z の対の可換）として一度だけ示して ε D_0・εG の両方で引き、並べ替えを distinct_site_pauli_matrices_commute（準備「σ^z どうしの可換」）と mat_mult_associative の行の鎖（準備「σ^z の対と G の可換」）にした。主張文に M_col ∈ ℤ_{≥2} と ε の定義を書いた。主張は変えていない。",
+      ],
+    },
   },
   {
     id: "closing_claim_epsilon_G_is_involution",
@@ -2446,50 +2489,95 @@ D_0G
     labels: ["epsilon_G_is_involution"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とする。",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
         ref("def_G_boundary_operator"),
-        " で定めた ",
+        " の ",
         math(String.raw`G`),
         " について",
       ]),
-      displayMath(String.raw`(\varepsilon G)^2=I`),
+      displayMath(String.raw`(\varepsilon G)^2=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`X\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " に対して ",
+        math(String.raw`X^2:=XX`),
+        " である。",
+      ]),
     ],
     proof: [
       paragraph([
-        ref("epsilon_D0_G_pairwise_commute"),
-        " の ",
-        math(String.raw`\varepsilon G=G\varepsilon`),
-        "、",
-        ref("epsilon_square_and_eigenvalues"),
-        " の ",
-        math(String.raw`\varepsilon^2=I`),
-        "、および ",
-        ref("pauli_matrix_products"),
-        " と ",
-        ref("kronecker_product_rule"),
-        " による ",
-        math(String.raw`(\sigma_k^z)^2=I`),
-        " を一行ずつ用いる。",
+        "準備。",
+        math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " とおく。各 ",
+        math(String.raw`k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_k^z\sigma_k^z
+&=\bigl(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\bigr)
+  \bigl(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\bigr)
+&&\bigl(\because\ \blkref{def_site_pauli_matrices}\bigr)\\
+&=(II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
+&&\bigl(\because\ \blkref{kronecker_product_rule}\ (1)\bigr)\\
+&=I\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を }k\text{ 以外の各サイトで}\bigr)\\
+&=I\boxtimes\cdots\boxtimes\overbrace{I}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の }\sigma^z\sigma^z=I\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{kronecker_product_rule}\ (2)\bigr).
+\end{aligned}`),
+      paragraph([
+        "主張について。",
+        math(String.raw`M_{\mathrm{col}}\geq 2`),
+        " より ",
+        math(String.raw`M_{\mathrm{col}}\neq 1`),
+        " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 (\varepsilon G)^2
-&= \varepsilon G\varepsilon G
-&&\bigl(\because\ \text{二乗の定義}\bigr)\\
-&= \varepsilon^2G^2
-&&\bigl(\because\ \text{epsilon\_D0\_G\_pairwise\_commute の }\varepsilon G=G\varepsilon\bigr)\\
-&= I\,G^2
-&&\bigl(\because\ \text{epsilon\_projector\_properties (1) の }\varepsilon^2=I\bigr)\\
-&= I(\sigma_{M_{\mathrm{col}}}^z)^2(\sigma_1^z)^2
-&&\bigl(\because\ G=\sigma_{M_{\mathrm{col}}}^z\sigma_1^z\text{ と相異なるサイトの因子の可換性}\bigr)\\
-&= I\cdot I\cdot I
-&&\bigl(\because\ \text{pauli\_matrix\_products の }(\sigma^z)^2=I\bigr)\\
-&= I
-&&\bigl(\because\ \text{単位行列の積}\bigr)
+&=(\varepsilon G)(\varepsilon G)
+&&\bigl(\because\ X^2:=XX\bigr)\\
+&=\bigl((\varepsilon G)\varepsilon\bigr)G
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\bigl(\varepsilon(G\varepsilon)\bigr)G
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\bigl(\varepsilon(\varepsilon G)\bigr)G
+&&\bigl(\because\ \blkref{epsilon_D0_G_pairwise_commute}\ \text{の }\varepsilon G=G\varepsilon\bigr)\\
+&=\bigl((\varepsilon\varepsilon)G\bigr)G
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\bigl(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}G\bigr)G
+&&\bigl(\because\ \blkref{epsilon_square_and_eigenvalues}\ \text{の }\varepsilon^2=\varepsilon\varepsilon=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\bigr)\\
+&=GG
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(\sigma_1^z(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl((\sigma_1^z\sigma_{M_{\mathrm{col}}}^z)\sigma_1^z\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl((\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\sigma_1^z\bigr)
+&&\bigl(\because\ \blkref{distinct_site_pauli_matrices_commute}\ (j\to 1,\ k\to M_{\mathrm{col}},\ a=b=z)\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(\sigma_{M_{\mathrm{col}}}^z(\sigma_1^z\sigma_1^z)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_{M_{\mathrm{col}}}^z)(\sigma_1^z\sigma_1^z)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \text{準備を }k=M_{\mathrm{col}}\text{ と }k=1\text{ で}\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr).
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "数値検証: sagemath/check/epsilon_G_is_involution/。",
+        "2026-11-04: SageMath の検算を付けるときに、旧い証明の「(εG)(εG) = ε^2G^2」（可換と結合律を一行にまとめた段）と「G^2 = (σ_{M_col}^z)^2(σ_1^z)^2」（相異なるサイトの因子の並べ替えを名前だけで行った段）を mat_mult_associative・epsilon_D0_G_pairwise_commute・distinct_site_pauli_matrices_commute の行の鎖に分け、(σ_k^z)^2 = I を準備の鎖にした。ε^2 = I の根拠が epsilon_projector_properties (1)（(P^{(+)})^2 = P^{(+)}）を指していた誤りを epsilon_square_and_eigenvalues に直した。主張文に M_col ∈ ℤ_{≥2}、ε の定義、右辺の単位行列の次数、X^2 := XX を書いた。主張は変えていない。",
       ],
     },
   },
