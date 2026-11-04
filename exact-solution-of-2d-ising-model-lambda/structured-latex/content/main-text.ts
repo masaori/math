@@ -63082,6 +63082,10 @@ u(\pi_4(3)):=(-1,0)`),
                     labels: ["claim_lifted_steps_do_not_reverse"],
                     habitat: "Z",
                     verification: ["sagemath/check/lifted-nonbacktracking"],
+                    lean: [
+                      "Ising2DLambda.KacWard.liftedAdjacentSteps_not_opposite",
+                      "Ising2DLambda.NecSuf.KacWard.adjacentSteps_not_opposite",
+                    ],
                     statement: [
                       paragraph([
                         "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " と、その直ちに引き返さない後続辺 ",
@@ -82955,7 +82959,7 @@ const chapter_fisher_zero_density = defineSection({
                     displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}
-&&\bigl(\because\ \blkref{claim_coefficient_representation}\text{ と }\blkref{def_integer_polynomial_qbar_lift}\bigr).
+&&\bigl(\because\ \blkref{claim_coefficient_representation}\text{ と }\blkref{def_integer_polynomial_qbar_lift}\bigr)
 \end{aligned}`),
                     paragraph([
                       "である（", math(String.raw`\Omega_L(k)\in\mathbb{N}`), " は ", ref("def_multiplicity"), "。",
