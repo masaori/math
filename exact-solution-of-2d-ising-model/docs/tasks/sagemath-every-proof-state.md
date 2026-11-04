@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 411 件のうち、SageMath の検算が無いもの 19 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 18 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -373,8 +373,10 @@
 - `V1_plus_square_root_property`（((V_1^{(+)})^{1/2})^2 = V_1^{(+)}）: `sagemath/check/V1_plus_square_root_property/`。準備（XX = XX、1_ℂ + 1_ℂ = 2_ℂ の 4 行、c + c = iκ の 10 行）と、exp の中身の行列の行は κ := (K_1)_ℂ を不定元にした QQ(i)[κ] で M_col = 2..5 で厳密に、exp を含む行は K_1 = 1/3, 1, 7/4 の複素数のボールで M_col = 2..4 で確かめた。theorem_exp_product を X, X に当てた行は、exp(tX)exp(tX) と exp(t(X+X)) の t^n の係数の一致を n ≤ 8 まで厳密に見た（等号・主張 165 件、否定コントロール 41 件）。人手証明の計算の誤りは無し。「X の定義と同類項の加法」の一行を、c := (i2_ℂ^{-1})(K_1)_ℂ を二つ足すと i(K_1)_ℂ になる準備の鎖と、def_finite_sum_of_matrices・finite_sum_of_scalar_multiples_of_one_matrix（r = 2）・def_finite_sum_of_complex_numbers の行に分け、主張文に M_col ∈ ℤ_{≥2} と A^2 := AA を書いた（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は変えていない（新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
 - `trace_of_epsilon_V_plus`（tr(εV^{(+)}) = (2exp(−K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}）: `sagemath/check/trace_of_epsilon_V_plus/`。K_1 = 2 log p、K_2 = log q（p, q ∈ QQ）と置き、行列の exp を整数の固有値のスペクトル射影で QQ(i) に組んで、M_col = 2..5・3 組で全ての鎖の行を厳密に確かめた。(P1)〜(P4) と κD_0 の成分は κ を不定元にした QQ(i)[κ] で、主張はスペクトル射影を通らないボールでも確かめた（等号・主張 3732 件と 408 件、否定コントロール 84 件と 36 件）。人手証明の値の誤りは無し。名前だけの根拠と散文の推論を (∵) 付きの鎖にした: 準備 (P1)〜(P5)（κ := (K_1)_ℂ、𝔐 の上の和を ord で定義、(εG)^n の帰納法、(κX)^n = κ^nX^n、f_{ι(s)} の成分と列の読み取り）、偶奇の分割は exponential_series_of_even_odd_power_terms に、成分は ord(s) の番号と包含 (·)_ℂ で書き（台帳にあった Step 3 (a) の包含と ν の件を解消）、0 の項は finite_sum_with_single_nonzero_term、2·2^{M−1} = 2^M の一行は real_exp_of_finite_sum・finite_product_of_real_products の行に分けた。主張文に、左辺 ∈ ℂ と右辺 ∈ ℝ の等号を包含で読むことを書いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は変えていない（新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `max_eigenvector_in_even_sector`（η_{(1,…,1)} = +1、η_ϵ = (−1)^{M_col+|ϵ|}、ε = (−1)^{M_col}Π(I − 2ň_μ)、im Q̌_{(1,…,1)} ⊆ F^{(+)}）: `sagemath/check/max_eigenvector_in_even_sector/`。本文の ψ̌ の ε・ň_μ・Q̌_ϵ・η_ϵ（数体 E_1）と実際の V^{(+)}（QQ）で、K_1 = 2 log y・K_2 = log x の 3 組 × M_col = 2, 3 で全ての鎖の行と主張を厳密に確かめた（等号・主張 42・528・420 件、否定コントロール 18・105・18 件。浮動小数点なし）。言い換えは、Λ̌_{(1,…,1)} が V^{(+)} の固有多項式の最大の根で重複度 1、V^{(+)} − Λ̌_max I の核が im Q̌_{(1,…,1)} に一致することと、ψ̌ を使わない最大固有ベクトルの εv = v で見た。人手証明の計算の誤りは無し。散文の推論を (∵) 付きの鎖にした: (1) は trace_of_epsilon_V_plus の読み方と z > 0 の定め方をつなぐ 3 行の含意、(2) は定義の無い負の冪をやめ準備 (P1)(P2) と非負の冪の 8 行、(3) は 3 行、(4) は Lean の `epsilon_mul_Qproj_univ` と同じ εQ̌ = ηQ̌ = 1_ℂQ̌ = Q̌ と y = Q̌x からの 4 行・4 行、言い換えは max_eigenvalue_of_V_plus_simple (3) の 2 行（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（(2) の (−1)^{M+|ϵ|} の鎖と y = Q̌x からの鎖との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `max_eigenvector_in_even_sector`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `Z_equals_trace_of_W`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

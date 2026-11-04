@@ -4031,86 +4031,231 @@ V_1^{(+)}
     ],
     proof: [
       paragraph([
-        "(1) ",
-        ref("trace_of_epsilon_V_plus"),
-        " より ",
-        math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`),
-        " である。",
+        "準備。",
+        math(String.raw`\eta_\epsilon \in \{+1,-1\}`),
+        " の ",
+        math(String.raw`+1, -1`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        "（",
+        ref("epsilon_eigenvalue_on_check_Q"),
+        " (1) の ",
+        math(String.raw`\eta_\epsilon`),
+        " は行列のスカラー倍の係数なので ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
         ref("trace_of_epsilon_V_plus_via_check_eigenvalues"),
-        " (3) の同値",
+        " も ",
+        math(String.raw`\eta_{(1,\dots,1)}`),
+        " をこう読む）であり、",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(-1)_{\mathbb{C}}`),
+        " の略記（",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-z`),
+        " とは別の記号）、",
+        math(String.raw`(-1)^{k}`),
+        "（",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        "）は ",
+        ref("def_power_of_complex_number"),
+        " の ",
+        math(String.raw`(-1_{\mathbb{C}})^{k}`),
+        " である。(P1) ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について",
       ]),
       displayMath(
-        String.raw`\eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`,
+        String.raw`\begin{aligned}
+(-1)^{k}(-1)^{k}
+&= \left((-1_{\mathbb{C}})(-1_{\mathbb{C}})\right)^{k}
+&&(\because\ \text{可換な二数の冪の積 } z^{k}w^{k} = (zw)^{k}\text{（}\blkref{def_power_of_complex_number}\text{ から } k \text{ の帰納法と、}\blkref{complex_numbers_form_a_field}\text{ の乗法の結合則・交換則）}) \\
+&= \left(\left((-1)(-1)\right)_{\mathbb{C}}\right)^{k}
+&&(\because\ \blkref{real_inclusion_preserves_product}) \\
+&= 1_{\mathbb{C}}^{\,k}
+&&(\because\ \mathbb{R}\ \text{の四則}\ (-1)(-1) = 1) \\
+&= 1_{\mathbb{C}}
+&&(\because\ 1_{\mathbb{C}}^{\,k+1} = 1_{\mathbb{C}}^{\,k}1_{\mathbb{C}}\text{（}\blkref{def_power_of_complex_number}\text{）と } 1_{\mathbb{C}}\text{ が乗法の単位元であること（}\blkref{complex_numbers_form_a_field}\text{）から } k \text{ の帰納法})
+\end{aligned}`,
       ),
       paragraph([
-        "により ",
-        math(String.raw`\eta_{(1,\dots,1)} = +1`),
-        "。",
+        "(P2) ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について ",
+        math(String.raw`\{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\} \subseteq \check{\mathcal{M}}`),
+        " なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|\epsilon|
+&= \#\{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\}
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\text{ の } |\epsilon| \text{ の置き方}) \\
+&\leq \#\check{\mathcal{M}}
+&&(\because\ \text{有限集合の部分集合の元の個数は全体の元の個数以下}) \\
+&= M_{\mathrm{col}}
+&&(\because\ \blkref{def_check_index_set}\text{ の } \check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`M_{\mathrm{col}} - |\epsilon| \in \mathbb{Z}_{\geq 0}`),
+        " である。",
+      ]),
+      paragraph([
+        "(1) ",
+        math(String.raw`r := \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} \in \mathbb{R}`),
+        " とおく。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+& \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) = r_{\mathbb{C}}\ \text{かつ}\ r \in \mathbb{R}_{>0}
+&&(\because\ \blkref{trace_of_epsilon_V_plus}\text{ とその等号と } \in \mathbb{R}_{>0} \text{ の読み方}) \\
+\Longrightarrow\ & \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0
+&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\text{ の } \mathbb{C} \text{ の元の } z > 0 \text{ の定め方}\ (z \to \mathrm{tr}(\varepsilon V^{(+)})\text{、存在する実数として } r \text{ を取る})) \\
+\Longrightarrow\ & \eta_{(1,\dots,1)} = +1
+&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\ \text{(3) の同値の}\ \Longleftarrow)
+\end{aligned}`,
+      ),
       paragraph([
         "(2) ",
-        ref("epsilon_eigenvalue_on_check_Q"),
-        " (3) に (1) を代入して ",
-        math(String.raw`\eta_\epsilon = (-1)^{M_{\mathrm{col}}-|\epsilon|}`),
-        "。",
-        math(String.raw`(-1)^{-|\epsilon|} = (-1)^{|\epsilon|}`),
-        "（",
-        math(String.raw`(-1)^{|\epsilon|}(-1)^{|\epsilon|} = 1`),
-        " より）なので ",
-        math(String.raw`(-1)^{M_{\mathrm{col}}-|\epsilon|} = (-1)^{M_{\mathrm{col}}+|\epsilon|}`),
-        "。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " を取る。指数はすべて (P2) により ",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " の元である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\eta_\epsilon
+&= \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(3)}) \\
+&= 1_{\mathbb{C}}(-1)^{M_{\mathrm{col}}-|\epsilon|}
+&&(\because\ \text{(1)}) \\
+&= (-1)^{M_{\mathrm{col}}-|\epsilon|}
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1)^{M_{\mathrm{col}}-|\epsilon|}\,1_{\mathbb{C}}
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1)^{M_{\mathrm{col}}-|\epsilon|}\left((-1)^{|\epsilon|}(-1)^{|\epsilon|}\right)
+&&(\because\ \text{(P1)}\ (k \to |\epsilon|)\ \text{を右辺から左辺へ}) \\
+&= \left((-1)^{M_{\mathrm{col}}-|\epsilon|}(-1)^{|\epsilon|}\right)(-1)^{|\epsilon|}
+&&(\because\ \blkref{complex_numbers_form_a_field}\text{ の乗法の結合則}) \\
+&= (-1)^{M_{\mathrm{col}}}(-1)^{|\epsilon|}
+&&(\because\ \text{非負の指数の指数法則 } z^{a}z^{b} = z^{a+b}\text{（}\blkref{def_power_of_complex_number}\text{ から } b \text{ の帰納法）}\ (a \to M_{\mathrm{col}}-|\epsilon|,\ b \to |\epsilon|)) \\
+&= (-1)^{M_{\mathrm{col}}+|\epsilon|}
+&&(\because\ \text{同じ指数法則}\ (a \to M_{\mathrm{col}},\ b \to |\epsilon|))
+\end{aligned}`,
+      ),
       paragraph([
-        "(3) ",
-        ref("epsilon_eigenvalue_on_check_Q"),
-        " (4) に (1) を代入する。",
+        "これで ",
+        math(String.raw`\eta_\epsilon = (-1)^{M_{\mathrm{col}}-|\epsilon|} = (-1)^{M_{\mathrm{col}}+|\epsilon|}`),
+        " を得た（三行目と最後の行）。行列の式は",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\check{Q}_\epsilon
+&= \eta_\epsilon\check{Q}_\epsilon
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1)}) \\
+&= (-1)^{M_{\mathrm{col}}+|\epsilon|}\check{Q}_\epsilon
+&&(\because\ \text{上の鎖の } \eta_\epsilon = (-1)^{M_{\mathrm{col}}+|\epsilon|})
+\end{aligned}`,
+      ),
+      paragraph(["(3)"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon
+&= \left(\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}}\right)\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(4)}) \\
+&= \left(1_{\mathbb{C}}(-1)^{M_{\mathrm{col}}}\right)\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)
+&&(\because\ \text{(1)}) \\
+&= (-1)^{M_{\mathrm{col}}}\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`,
+      ),
       paragraph([
-        "(4) ",
-        math(String.raw`|(1,\dots,1)| = M_{\mathrm{col}}`),
-        " なので (2) を一段ずつ適用すると",
+        "(4) まず ",
+        math(String.raw`\varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}`),
+        " を示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\check{Q}_{(1,\dots,1)}
-&= (-1)^{M_{\mathrm{col}}+|(1,\dots,1)|}\check{Q}_{(1,\dots,1)}
-   \quad (\because \text{(2)}) \\
-&= (-1)^{2M_{\mathrm{col}}}\check{Q}_{(1,\dots,1)}
-   \quad (\because |(1,\dots,1)|=M_{\mathrm{col}}) \\
+&= \eta_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1)}\ (\epsilon \to (1,\dots,1))) \\
+&= 1_{\mathbb{C}}\check{Q}_{(1,\dots,1)}
+&&(\because\ \text{(1)}) \\
 &= \check{Q}_{(1,\dots,1)}
-   \quad (\because (-1)^{2M_{\mathrm{col}}}=1)
+&&(\because\ \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`y \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " を取ると、",
-        ref("check_joint_eigenspace_decomposition"),
-        " (1) の冪等性より ",
-        math(String.raw`y = \check{Q}_{(1,\dots,1)}y`),
-        " であり",
+        math(String.raw`y = \check{Q}_{(1,\dots,1)}x`),
+        " なる ",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " が取れる（数ベクトルは ",
+        ref("mat_mult"),
+        " の ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon y
-&= \varepsilon\check{Q}_{(1,\dots,1)}y
-   \quad (\because y=\check{Q}_{(1,\dots,1)}y) \\
-&= \check{Q}_{(1,\dots,1)}y
-   \quad (\because \text{直前の }\varepsilon\check{Q}_{(1,\dots,1)}=\check{Q}_{(1,\dots,1)}) \\
+\check{Q}_{(1,\dots,1)}y
+&= \check{Q}_{(1,\dots,1)}\left(\check{Q}_{(1,\dots,1)}x\right)
+&&(\because\ y = \check{Q}_{(1,\dots,1)}x \text{ の取り方}) \\
+&= \left(\check{Q}_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}\right)x
+&&(\because\ \blkref{mat_mult_associative}) \\
+&= \check{Q}_{(1,\dots,1)}x
+&&(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(1) の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\ (\epsilon \to (1,\dots,1))) \\
 &= y
-   \quad (\because y=\check{Q}_{(1,\dots,1)}y)
+&&(\because\ y = \check{Q}_{(1,\dots,1)}x \text{ の取り方})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon y
+&= \varepsilon\left(\check{Q}_{(1,\dots,1)}y\right)
+&&(\because\ \text{直前の鎖の } \check{Q}_{(1,\dots,1)}y = y) \\
+&= \left(\varepsilon\check{Q}_{(1,\dots,1)}\right)y
+&&(\because\ \blkref{mat_mult_associative}) \\
+&= \check{Q}_{(1,\dots,1)}y
+&&(\because\ \text{上の鎖の } \varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}) \\
+&= y
+&&(\because\ \text{直前の鎖の } \check{Q}_{(1,\dots,1)}y = y)
 \end{aligned}`,
       ),
       paragraph([
-        "したがって ",
+        "なので、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " より ",
         math(String.raw`y \in \mathcal{F}^{(+)}`),
         "。",
-        ref("max_eigenvalue_of_V_plus_simple"),
-        " (3) より ",
-        math(String.raw`\check\Lambda_{\max}`),
-        " の固有空間はちょうど ",
+        math(String.raw`y`),
+        " は ",
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
-        " なので、主張の言い換えが成り立つ。",
+        " の任意の元なので ",
+        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)} \subseteq \mathcal{F}^{(+)}`),
+        " である。言い換えの部分は",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\{x \in \mathbb{C}^{2^{M_{\mathrm{col}}}} \;\middle|\; V^{(+)}x = \check\Lambda_{\max}x\right\}
+&= \mathrm{im}\,\check{Q}_{(1,\dots,1)}
+&&(\because\ \blkref{max_eigenvalue_of_V_plus_simple}\ \text{(3)}) \\
+&\subseteq \mathcal{F}^{(+)}
+&&(\because\ \text{上で示した包含})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -4119,6 +4264,8 @@ V_1^{(+)}
         "符号 (−1)^M が付くのは ň_μ = ψ̌_μ^† ψ̌_{M+1−μ} が「同じモードの ψ^†ψ」ではなく共役なモードの対で定義されているためで、真空 ε = (0,…,0) の側のパリティが (−1)^M になる。M の偶奇によらず最大固有ベクトル（ε = (1,…,1)）のパリティが +1 になる点が重要である。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_02（η_ε = (−1)^{M+|ε|} と ε = (−1)^M Π(I − 2ň_μ) を M=2,3,4,5・6 組の (K_1,K_2) で確認。残差 ≤ 2e-14）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-04（全証明の SageMath 検算）: 散文の推論を (∵) 付きの鎖にした。主張は変えていない。(1) は trace_of_epsilon_V_plus の読み方（左辺が右辺の像 r_ℂ、r ∈ ℝ_{>0}）と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方をつなぐ行を足した 3 行の含意の鎖に、(2) の「(1) を代入して」と定義の無い負の冪 (−1)^{−|ϵ|} を、準備 (P1) (−1)^k(−1)^k = 1_ℂ・(P2) |ϵ| ≤ M_col と非負の冪だけの 8 行の鎖に、(3) を 3 行の鎖に、(4) の εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を、Lean の具体版の epsilon_mul_Qproj_univ と同じ η_{(1,…,1)} = +1 を代入する 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、言い換えを max_eigenvalue_of_V_plus_simple (3) を引く 2 行の鎖にした。計算の誤りは無かった。",
+        "数値検証: sagemath/check/max_eigenvector_in_even_sector/（厳密計算。本文の ψ̌ と実際の V^{(+)} で M_col = 2, 3、結合定数 3 組）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_02 も残っている。",
       ],
     },
   },
