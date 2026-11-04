@@ -23,6 +23,7 @@ export const ALL_LABELS = [
   "claim_block_preserving_permutation_sign",
   "claim_boundary_vertex_diagonal_contact_excluded",
   "claim_broken_bond_row_decomposition",
+  "claim_cell_boundary_winding_zero",
   "claim_closed_walk_bijection",
   "claim_closed_walk_plane_displacement",
   "claim_closed_walk_rotation_phase",

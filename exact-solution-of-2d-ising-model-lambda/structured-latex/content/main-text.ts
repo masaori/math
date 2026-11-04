@@ -62267,6 +62267,81 @@ s(j')-s(j)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_single_cell_boundary_winding",
+              labels: [],
+              title: { text: "単一セルの境界と切断線横断" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_cell_boundary_winding_zero",
+                  beforeFocus: [],
+                  focus: {
+                    id: "kac_ward_claim_cell_boundary_winding_zero",
+                    kind: "claim",
+                    title: { text: "単一セルの境界の向き付き切断線横断数は零である" },
+                    labels: ["claim_cell_boundary_winding_zero"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cell-boundary-winding-zero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellBoundaryEdges",
+                      "Ising2DLambda.KacWard.cellBoundaryEdges_connected",
+                      "Ising2DLambda.KacWard.cellBoundary_horizontalSeam_sum_zero",
+                      "Ising2DLambda.KacWard.cellBoundary_verticalSeam_sum_zero",
+                      "Ising2DLambda.NecSuf.KacWard.fourSideBoundaryEvaluation_zero",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), " と ",
+                        math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について、セル ",
+                        math(String.raw`(i,j)`), " の境界を、横辺 ",
+                        math(String.raw`n_{\mathrm h}(i,j)`), "、縦辺 ",
+                        math(String.raw`n_{\mathrm v}(i,j+1)`), "、横辺 ",
+                        math(String.raw`n_{\mathrm h}(i+1,j)`), " の反転、縦辺 ",
+                        math(String.raw`n_{\mathrm v}(i,j)`), " の反転の順にたどる。",
+                        "この四項の列を ", math(String.raw`B_L(i,j)`), " とする（",
+                        ref("def_lattice"), "、", ref("def_oriented_edges"), "）。",
+                      ]),
+                      displayMath(String.raw`\sum_{t=1}^{4}c_{\mathrm h}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))=0,
+\qquad
+\sum_{t=1}^{4}c_{\mathrm v}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))=0\quad\text{in }\mathbb Z`),
+                      paragraph([
+                        "ここで和は四項を重複を保って足すものであり、", math(String.raw`L=1`),
+                        " でも辺を集合として重複除去しない（", ref("def_directed_winding_numbers"), "）。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "横切断線の指示値は横辺の列座標だけで決まり、二つの横辺は同じ ",
+                        math(String.raw`j`), " を持つ。縦辺の横切断線指示値は零である（",
+                        ref("def_seam_parities"), "、", ref("claim_edge_row_partition"), "）。したがって",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{4}c_{\mathrm h}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))
+&=\mathbf1_{s(j)=L-1}+0-\mathbf1_{s(j)=L-1}-0
+&&\bigl(\because\ \blkref{def_seam_parities}\text{ と四辺の向き}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "同様に縦切断線の指示値は縦辺の行座標だけで決まり、二つの縦辺は同じ ",
+                        math(String.raw`i`), " を持つ。横辺の縦切断線指示値は零である。ゆえに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{4}c_{\mathrm v}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))
+&=0+\mathbf1_{s(i)=L-1}-0-\mathbf1_{s(i)=L-1}
+&&\bigl(\because\ \blkref{def_seam_parities}\text{ と四辺の向き}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_vertex_simple_winding_primitive",
               labels: [],
               title: { text: "頂点単純閉路の巻き付きベクトル" },
@@ -71423,7 +71498,7 @@ q_{\vec e,\vec f}
                     ],
                     proof: [
                       paragraph([ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
-                      displayMath(String.raw`r\in T_P\iff p(\vec e)\in P\qquad\bigl(\because\ \blkref{claim_local_pairing_matching_label_support}\bigr).`),
+                      displayMath(String.raw`r\in T_P\iff p(\vec e)\in P\qquad\bigl(\because\ \blkref{claim_local_pairing_matching_label_support}\bigr)`),
                       paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。異なる二対が ", math(String.raw`\vec e`), " を共有するのは完全マッチングに反するので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
                       paragraph(["逆に ", math(String.raw`r\in T_P`), " とする。もし ", math(String.raw`r\notin T`), " なら ", math(String.raw`r\in E_D\setminus T`), " であり、", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_edge_reversal"), " より両者の台は ", math(String.raw`p(\vec e)`), " であり、", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`p(\vec e)\notin P`), " となる。これは ", math(String.raw`r\in T_P`), " に矛盾する。従って ", math(String.raw`r\in T`), " である。"]),
                       paragraph(["二つの包含から ", math(String.raw`T_P=T`), " を得る。共通の ", math(String.raw`E_D`), " から同じ集合を除けば長い標識の集合も等しい。辺長一で同じ二元対に二種類の寄与があっても、短い標識への所属は ", math(String.raw`T`), " で判定しており、二元対の形から推測していない。"]),
