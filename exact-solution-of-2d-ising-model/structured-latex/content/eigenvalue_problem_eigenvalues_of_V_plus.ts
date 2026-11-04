@@ -5871,13 +5871,31 @@ V^{(+)}
           math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
           " にして掛けた行列である）。とくに ",
           math(String.raw`V^{(+)}`),
-          " は対角化可能で、その固有値は重複度を込めて ",
-          math(String.raw`\left\{\check\Lambda_\epsilon\right\}_{\epsilon}`),
-          "（各 ",
+          " は対角化可能である：各 ",
           math(String.raw`\epsilon`),
-          " が 1 つずつ、総個数 ",
+          " について ",
+          math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+          " の 0 でない元を 1 本ずつ取った ",
           math(String.raw`2^{M_{\mathrm{col}}}`),
-          "）で尽くされる。",
+          " 本のベクトルは、",
+          math(String.raw`V^{(+)}`),
+          " の固有ベクトル（",
+          ref("def_eigenvector"),
+          "。",
+          math(String.raw`\epsilon`),
+          " の 1 本は ",
+          math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+          " に属する）からなる ",
+          math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+          " の基底である。また ",
+          math(String.raw`V^{(+)}`),
+          " の固有値（",
+          ref("def_eigenvalue"),
+          "）はどれも、ある ",
+          math(String.raw`\epsilon`),
+          " の ",
+          math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+          " に等しい。",
         ],
         [
           math(String.raw`\text{(2)}`),
@@ -5968,11 +5986,234 @@ V^{(+)}\check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        "対角化可能性・重複度・総個数は ",
-        ref("eigenvalues_of_check_Vprime"),
-        " の Step 4 と同じ議論（",
+        "対角化可能性と本数。数ベクトル ",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " は ",
+        ref("mat_mult"),
+        " のとおり ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列として扱う。",
+        math(String.raw`y \in \mathrm{im}\,\check{Q}_\epsilon`),
+        "（",
+        math(String.raw`\mathrm{im}`),
+        " は ",
+        ref("trace_of_idempotent"),
+        " の定義。",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ Q \to \check{Q}_\epsilon`),
+        "）なら ",
+        math(String.raw`y = \check{Q}_\epsilon x`),
+        " と書けて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon y
+&= \check{Q}_\epsilon\left(\check{Q}_\epsilon x\right)
+   \quad (\because y = \check{Q}_\epsilon x \text{ と書いた}) \\
+&= \left(\check{Q}_\epsilon\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{Q}_\epsilon,\ B \to \check{Q}_\epsilon,\ C \to x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(I\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(\check{Q}_\epsilon^0\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check{Q}_\epsilon^1\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_\epsilon^2 x
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_\epsilon x
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\right) \\
+&= y
+   \quad (\because y = \check{Q}_\epsilon x \text{ と書いた})
+\end{aligned}`,
+      ),
+      paragraph(["である。だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{(+)} y
+&= V^{(+)}\left(\check{Q}_\epsilon y\right)
+   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y\ \text{を右辺から左辺へ}) \\
+&= \left(V^{(+)}\check{Q}_\epsilon\right)y
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to V^{(+)},\ B \to \check{Q}_\epsilon,\ C \to y)\ \text{を右辺から左辺へ}\right) \\
+&= \left((\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon\right)y
+   \quad (\because \text{(1) の第一の鎖}) \\
+&= (\check\Lambda_\epsilon)_{\mathbb{C}}\left(\check{Q}_\epsilon y\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to (\check\Lambda_\epsilon)_{\mathbb{C}},\ A \to \check{Q}_\epsilon,\ B \to y)\right) \\
+&= (\check\Lambda_\epsilon)_{\mathbb{C}}y
+   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y)
+\end{aligned}`,
+      ),
+      paragraph([
         ref("check_joint_eigenspace_decomposition"),
-        " (5) による直和分解）で得られる。スカラー倍は固有ベクトルを変えない。",
+        " (5) より ",
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " は ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " たちの直和である。各 ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " の 0 でない元 ",
+        math(String.raw`q_\epsilon`),
+        " を任意に取ると、",
+        ref("check_joint_eigenspace_decomposition"),
+        " (4) より ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " は 1 次元なので ",
+        math(String.raw`q_\epsilon`),
+        " 1 本が ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " の基底であり、",
+        math(String.raw`q_\epsilon`),
+        " は上の等式（",
+        math(String.raw`y \to q_\epsilon`),
+        "）から ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+        " に属する固有ベクトル（",
+        ref("def_eigenvector"),
+        "）である。直和なので、これらを合わせた ",
+        math(String.raw`\{q_\epsilon\}_\epsilon`),
+        " は ",
+        math(String.raw`V^{(+)}`),
+        " の固有ベクトルからなる ",
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " の基底である。本数は ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " の個数 ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " である。これが主張の基底である。",
+      ]),
+      paragraph([
+        "固有値がどれもある ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+        " に等しいこと。",
+        math(String.raw`\lambda \in \mathbb{C}`),
+        " を ",
+        math(String.raw`V^{(+)}`),
+        " の固有値（",
+        ref("def_eigenvalue"),
+        "）とし、",
+        math(String.raw`x`),
+        " を ",
+        math(String.raw`\lambda`),
+        " に属する固有ベクトル（",
+        ref("def_eigenvector"),
+        "。",
+        math(String.raw`x \neq O`),
+        " かつ ",
+        math(String.raw`V^{(+)}x = \lambda x`),
+        "）とする。",
+        math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},1,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列（零ベクトル）である。各 ",
+        math(String.raw`\epsilon`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\check\Lambda_\epsilon)_{\mathbb{C}}\left(\check{Q}_\epsilon x\right)
+&= \left((\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to (\check\Lambda_\epsilon)_{\mathbb{C}},\ A \to \check{Q}_\epsilon,\ B \to x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check{Q}_\epsilon V^{(+)}\right)x
+   \quad (\because \text{(1) の第二の鎖を右辺から左辺へ}) \\
+&= \check{Q}_\epsilon\left(V^{(+)}x\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{Q}_\epsilon,\ B \to V^{(+)},\ C \to x)\right) \\
+&= \check{Q}_\epsilon\left(\lambda x\right)
+   \quad (\because V^{(+)}x = \lambda x) \\
+&= \lambda\left(\check{Q}_\epsilon x\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to \lambda,\ A \to \check{Q}_\epsilon,\ B \to x)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。全ての ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}} \neq \lambda`),
+        " と仮定して矛盾を導く。",
+        math(String.raw`\epsilon`),
+        " を任意に取り、",
+        math(String.raw`d_\epsilon := (\check\Lambda_\epsilon)_{\mathbb{C}} - \lambda \in \mathbb{C}`),
+        "（",
+        ref("def_complex_difference"),
+        "）とおく。",
+        ref("complex_numbers_form_a_field"),
+        " の加法の群構造より ",
+        math(String.raw`d_\epsilon = 0`),
+        " なら ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}} = d_\epsilon + \lambda = \lambda`),
+        " となるので ",
+        math(String.raw`d_\epsilon \neq 0`),
+        " であり、同じ主張の逆元の存在より ",
+        math(String.raw`d_\epsilon^{-1}d_\epsilon = 1_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`d_\epsilon^{-1} \in \mathbb{C}`),
+        " がある。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+d_\epsilon\left(\check{Q}_\epsilon x\right)
+&= \left((\check\Lambda_\epsilon)_{\mathbb{C}} - \lambda\right)\left(\check{Q}_\epsilon x\right)
+   \quad (\because d_\epsilon\text{ の置き方}) \\
+&= (\check\Lambda_\epsilon)_{\mathbb{C}}\left(\check{Q}_\epsilon x\right) - \lambda\left(\check{Q}_\epsilon x\right)
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to (\check\Lambda_\epsilon)_{\mathbb{C}},\ b \to \lambda,\ A \to \check{Q}_\epsilon x)\ \text{を右辺から左辺へ}\right) \\
+&= \lambda\left(\check{Q}_\epsilon x\right) - \lambda\left(\check{Q}_\epsilon x\right)
+   \quad (\because \text{上の鎖の両端の等式}\ (\check\Lambda_\epsilon)_{\mathbb{C}}(\check{Q}_\epsilon x) = \lambda(\check{Q}_\epsilon x)) \\
+&= O
+   \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m \to 2^{M_{\mathrm{col}}},\ p \to 1,\ A, B \to \lambda(\check{Q}_\epsilon x))\right)
+\end{aligned}`,
+      ),
+      paragraph(["である。だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon x
+&= 1_{\mathbb{C}}\left(\check{Q}_\epsilon x\right)
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ A \to \check{Q}_\epsilon x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(d_\epsilon^{-1}d_\epsilon\right)\left(\check{Q}_\epsilon x\right)
+   \quad (\because d_\epsilon^{-1}d_\epsilon = 1_{\mathbb{C}}\ \text{を右辺から左辺へ}) \\
+&= d_\epsilon^{-1}\left(d_\epsilon\left(\check{Q}_\epsilon x\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to d_\epsilon^{-1},\ b \to d_\epsilon,\ A \to \check{Q}_\epsilon x)\ \text{を右辺から左辺へ}\right) \\
+&= d_\epsilon^{-1}O
+   \quad (\because \text{上の鎖}\ d_\epsilon(\check{Q}_\epsilon x) = O) \\
+&= O
+   \quad \left(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to d_\epsilon^{-1})\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon`),
+        " は任意だったので、全ての ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`\check{Q}_\epsilon x = O`),
+        " である。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " で添字付けられた和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}}`),
+        "）による。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x &= Ix
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ A \to x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\sum_{\epsilon}\check{Q}_\epsilon\right)x
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (2) を右辺から左辺へ}) \\
+&= \sum_{\epsilon}\check{Q}_\epsilon x
+   \quad \left(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ r \to M_{\mathrm{col}},\ X_\epsilon \to \check{Q}_\epsilon,\ C \to x)\right) \\
+&= \check{Q}_{(1,\dots,1)}x
+   \quad \left(\because\ \blkref{sum_over_binary_words_with_one_nonzero_term}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}},\ \epsilon' \to (1,\dots,1),\ B_\epsilon \to \check{Q}_\epsilon x)\text{。前提は上で示した }\check{Q}_\epsilon x = O\right) \\
+&= O
+   \quad (\because \text{上で示した}\ \check{Q}_\epsilon x = O\ (\epsilon \to (1,\dots,1)))
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり、",
+        math(String.raw`x \neq O`),
+        " に反する。よって ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}} = \lambda`),
+        " を満たす ",
+        math(String.raw`\epsilon`),
+        " がある。",
       ]),
       paragraph([
         "(2) ",
@@ -6044,6 +6285,7 @@ V^{(+)}\check{Q}_\epsilon
         "式変形の書き方の統一（2026-09-04）。式変形の直後に置いていた「第 2 行で用いた」の参照を、定数 c の決定を使う行末の (∵ …) の blkref へ移した。内容・式変形・根拠・参照は変えていない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（M=2,3,4,5・6 組の (K_1,K_2) で、V^{(+)} の 2^M 個の固有値全体が {Λ̌_ε} と相対誤差 9.0e-12 以下で一致。V^{(+)} は行列指数関数から直接構成しており、証明の経路とは独立）。",
         "2026-11-04: (1) の固有関係の名前だけの根拠（「定数 c の決定」「V̌' の固有値」「Λ̌_ε の定義」と、Q̌_εV^{(+)} を「同じ式変形を Step 3' に対して行い」で済ませた段落）を、a := (2s_2)^{M_col/2} の置き方と、constant_c_value_even_sector・scalar_multiple_factors_out_of_left_factor（右から掛ける形は right_factor）・eigenvalues_of_check_Vprime・scalar_multiple_is_associative・real_inclusion_preserves_product・a の置き方・ǧ の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・Λ̌_ε の定義の 9 行の鎖二本にした。同じ回に constant_c_value_even_sector の主張文と最後の鎖が s_2 = sinh 2K_2 の根拠に def_transfer_matrix_symbols（式を持たない）を引いていたのを def_indexed_hyperbolic_abbreviations に直した。主張文に、右辺の Λ̌_ε は inclusion_rr_to_cc で ℂ へ移して掛けることを書いた（値は不変）。Lean の Ising2D.VPlus_mul_Qproj・Ising2D.Qproj_mul_VPlus は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_eigen_relation_chains.sage。",
+        "2026-11-04: (1) の対角化可能性・重複度・総個数の段落が「eigenvalues_of_check_Vprime の Step 4 と同じ議論」「スカラー倍は固有ベクトルを変えない」と名前だけで済ませていたので、V^{(+)} について書き下した。y ∈ im Q̌_ε から Q̌_εy = y の 8 行の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・def_exp (1)・check_joint_eigenspace_decomposition (1)）、V^{(+)}y = (Λ̌_ε)_ℂy の 5 行の鎖（上の等式・mat_mult_associative・(1) の第一の鎖・scalar_multiple_factors_out_of_left_factor）、check_joint_eigenspace_decomposition (4)・(5) から、各 im Q̌_ε の 0 でない元 q_ε を任意に取ると {q_ε} が固有ベクトルの基底になることを示す段落（見出しは「対角化可能性と本数」）と、固有値がどれもある (Λ̌_ε)_ℂ に等しいことの鎖（左から Q̌_ε を掛ける 5 行、全ての ε で (Λ̌_ε)_ℂ ≠ λ と仮定したときの d_ε(Q̌_εx) = O の 4 行と Q̌_εx = O の 5 行、x = O の 5 行。max_eigenvalue_of_V_plus_simple (3) と同じ行）である。主張文の「重複度を込めて {Λ̌_ε}_ε で尽くされる」は重複度が本文で定まっていないので、「各 ε の im Q̌_ε の 0 でない元を 1 本ずつ取ると固有ベクトルの基底」「固有値はどれもある (Λ̌_ε)_ℂ に等しい」と書き直した（内容は不変）。Lean の Ising2D.VPlus_mulVec_of_mem_range は後の鎖と同じ行の calc（前の鎖は Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec）、基底は Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces、固有値の鎖は Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigenvalue・Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue・Ising2D.exists_checkBigLambda_eq_of_eigenvalue。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_diagonalizability_chains.sage。",
       ],
     },
   },

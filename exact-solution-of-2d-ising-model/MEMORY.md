@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百二十八個目として、人手 `eigenvalues_of_V_plus` の (b)（対角化可能性の段落）を書き下した。`Q̌_εy = y` の 8 行・`V^{(+)}y = (Λ̌_ε)_ℂy` の 5 行・任意の 0 でない `q_ε` の族が基底になる段落・固有値がどれもある `(Λ̌_ε)_ℂ` に等しいことの背理法を足し、主張文の未定義の「重複度」を外した（内容は不変）。Lean は `VPlus_mulVec_of_mem_range`・`exists_eigenBasis_VPlus_of_joint_eigenspaces`・`exists_checkBigLambda_eq_of_eigenvalue` ほか。SageMath は `check_part1_diagonalizability_chains.sage`。三回のレビューで必須の指摘が無くなるまで直した。次は (c)（状態台帳）。
+
 2026-11-04: 全証明の SageMath 検算として、`H1_plus_in_sigma_z_form`（iH_1^{(+)} = D_0 + εG）に検算 `sagemath/check/H1_plus_in_sigma_z_form/` を付けた（未検算 27 件）。人手証明の計算の誤りは無し。他のブロックの証明の途中（V1_in_Z_Y_epsilon の Step 0）とラベルの無い「相異なるサイトの因子は可換」を根拠にしていたので、新しい主張 `pauli_y_times_pauli_x`・`pauli_x_times_pauli_z`（検算付き）を足し、証明をクロネッカー積表示の (∵) 付きの鎖に書き直した（主張は不変）。Lean の `ClaimH1PlusInSigmaZForm.lean` は不変で、新しい鎖と新しい二つの主張との 1 対 1 は Lean の連続実行の受け持ち。次は `D0_G_diagonal_action`。
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百二十七個目として、人手 `eigenvalues_of_V_plus` を (a) (1) の固有関係・(b) 対角化可能性・重複度・総個数・(c) 正値性・(d) 大小の比較・(e) `Λ̌_maxΛ̌_min` に割り、(a) を行った。(1) を名前だけの根拠から 9 行の鎖二本にし、Lean の `VPlus_mul_Qproj`・`Qproj_mul_VPlus` を同じ行の calc にした。SageMath は `sagemath/check/eigenvalues_of_V_plus/`。`constant_c_value_even_sector` の `s_2 = sinh 2K_2` の根拠を `def_indexed_hyperbolic_abbreviations` に直した。次は (b)（状態台帳）。

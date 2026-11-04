@@ -151,7 +151,7 @@
 | `c_ne_zero_of_VPlus_eq_smul` | `V^{(+)} = cV̌'` と `V^{(+)}` の可逆性から `c ≠ 0`（人手の行は無い。仮定に `c ∈ ℂ^×` を持たない使う側の橋渡し） | — |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`**（仮定 `c ≠ 0` は人手の `c ∈ ℂ^×`） | `constant_c_value_even_sector` |
 | `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus`（`TheoremEigenvaluesVPlus.lean`） | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |
-| `VPlus_mulVec_of_mem_range` | `im Q̌_ε` の元は `V^{(+)}` の固有ベクトル | 同 (1) |
+| `VPlus_mulVec_of_mem_range`（人手の対角化可能性の段落の後の 5 行と 1 対 1 の calc。前の 8 行は `CheckFermiSetup.Qproj_mulVec_Qproj_mulVec`） | `im Q̌_ε` の元は `V^{(+)}` の固有ベクトル | 同 (1) |
 | `checkBigLambda_pos` / `checkBigLambda_le_max` / `checkBigLambda_min_le` | 正値性・最大・最小 | 同 (2) |
 | `checkBigLambda_max_mul_min` | `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2` | 同 |
 | `cos_thetaTilde_lt_one` / `one_lt_gamma1R_thetaTilde_checkIndex` | `cos θ~_μ < 1`, `γ_1(θ~_μ) > 1` | 章 015 `gamma1_gt_1_theta_tilde` |
@@ -169,7 +169,9 @@
 | `CheckFermiSetup.isInternal_range_Qproj` | **`ℂ^{2^M} = ⊕_ε im Q̌_ε`（内部直和。各成分は 1 次元）** | `check_joint_eigenspace_decomposition` (5) |
 | `CheckFermiSetup.iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | 同 (5) を `Submodule` の言葉で分けて述べた版 | 同 (5) |
 | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` | **`V̌'` は対角化可能** | `eigenvalues_of_check_Vprime` |
-| `exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | **`V^{(+)}` は対角化可能（固有値は `Λ̌_ε`）** | `eigenvalues_of_V_plus` |
+| `exists_eigenBasis_VPlus_of_joint_eigenspaces`（人手の対角化可能性の段落と 1 対 1 の具体版。基底の添字は `ε` の集合で、個数は `card_eps_index`） | **`V^{(+)}` は対角化可能（各 `ε` の `im Q̌_ε` の 0 でない元をどう 1 本ずつ取っても、`(Λ̌_ε)_ℂ` に属する固有ベクトルの基底）** | `eigenvalues_of_V_plus` (1) |
+| `checkBigLambda_smul_Qproj_mulVec_of_eigenvalue` / `Qproj_mulVec_eq_zero_of_ne_eigenvalue` / `exists_checkBigLambda_eq_of_eigenvalue`（人手の固有値の段落の 5 行・4 行と 5 行・背理法と 1 対 1。`x = Q̌_{(1,…,1)}x` の 4 行は `colVec_eq_Qproj_mul_of_zero` を使う） | **`V^{(+)}` の固有値はどれもある `(Λ̌_ε)_ℂ` に等しい** | `eigenvalues_of_V_plus` (1) |
+| `exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus`（必要十分版 `NecSuf.exists_eigenBasis_of_matrix_proj` の特殊化） | **`V^{(+)}` は対角化可能（固有値は `Λ̌_ε`）** | `eigenvalues_of_V_plus` |
 | `Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum`（`ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`） | 章末の主張: `V^{(+)} = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ň_μ - ½I))`、`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、`Λ^{(1/2)}_M = Λ̌_{(1,…,1)} = (2 sinh 2K_2)^{M/2} exp(½Σ_μ γ(θ~_μ))`、`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_{(1,…,1)}`（既存の主張を並べたもの） | `V_plus_eigenvalues_with_c_value_and_strict_maximum` |
 
 ---

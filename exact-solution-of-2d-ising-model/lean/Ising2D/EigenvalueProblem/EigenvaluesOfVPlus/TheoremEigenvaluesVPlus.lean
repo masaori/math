@@ -85,15 +85,34 @@ theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
         rw [real_inclusion_mul]                                       -- `real_inclusion_preserves_product`
     _ = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := rfl         -- 人手の 6・7・9 行目（`checkBigLambda` の定義。8 行目は `s2` が引数なので無い）
 
-/-- **原文 `eigenvalues_of_V_plus` (1)**: `im Q̌_ε` の元は固有値 `Λ̌_ε` の固有ベクトル。 -/
-theorem VPlus_mulVec_of_mem_range (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+/-- **原文 `eigenvalues_of_V_plus` (1) の対角化可能性の段落の後の鎖**: `im Q̌_ε` の元は固有値 `Λ̌_ε` の固有ベクトル。
+`y = Q̌_ε x` について、人手の 5 行 `V^{(+)}y = V^{(+)}(Q̌_εy) = (V^{(+)}Q̌_ε)y = ((Λ̌_ε)_ℂ Q̌_ε)y = (Λ̌_ε)_ℂ(Q̌_εy) = (Λ̌_ε)_ℂ y`
+と 1 対 1 の calc。`Q̌_εy = y` は同じ段落の前の 8 行の鎖で、`eigenvalues_of_check_Vprime` Step 4 の同じ 8 行の具体版
+`CheckFermiSetup.Qproj_mulVec_Qproj_mulVec` が受け持つ（範囲もそれに合わせて `M_col = r + 1` とする）。 -/
+theorem VPlus_mulVec_of_mem_range {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
-    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx M))
-    (x : Conf M → ℂ) :
-    (VPlus M s2 K1 K2star).mulVec ((F.Qproj T).mulVec x)
+    (hVeq : VPlus (r + 1) s2 K1 K2star = c • F.Vprime g) (T : Finset (CheckIdx (r + 1)))
+    (x : Conf (r + 1) → ℂ) :
+    (VPlus (r + 1) s2 K1 K2star).mulVec ((F.Qproj T).mulVec x)
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • ((F.Qproj T).mulVec x) := by
-  rw [Matrix.mulVec_mulVec, VPlus_mul_Qproj F g hK1 hK2 hs2 hVeq T, Matrix.smul_mulVec]
+  set y := (F.Qproj T).mulVec x
+  have hQy : (F.Qproj T).mulVec y = y := CheckFermiSetup.Qproj_mulVec_Qproj_mulVec F T x
+                                                        -- 前の 8 行の鎖 `Q̌_εy = y`
+  calc (VPlus (r + 1) s2 K1 K2star).mulVec y
+      = (VPlus (r + 1) s2 K1 K2star).mulVec ((F.Qproj T).mulVec y) := by rw [hQy]
+                                                        -- 上の等式 `Q̌_εy = y` を右辺から左辺へ
+    _ = (VPlus (r + 1) s2 K1 K2star * F.Qproj T).mulVec y := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`（`m,n,p → 2^{M_col}`、`q → 1`、`A → V^{(+)}`、`B → Q̌_ε`、`C → y`）
+                                                        -- を右辺から左辺へ。Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので、
+                                                        -- mathlib の `Matrix.mulVec_mulVec`（`Qproj_mulVec_Qproj_mulVec` の 1 行目と同じ）
+    _ = (((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T).mulVec y := by
+          rw [VPlus_mul_Qproj F g hK1 hK2 hs2 hVeq T]  -- (1) の第一の鎖
+    _ = ((checkBigLambda F g s2 T : ℝ) : ℂ) • (F.Qproj T).mulVec y := smul_mulVec_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_left_factor`（`m,n → 2^{M_col}`、`p → 1`、
+                                                        -- `a → (Λ̌_ε)_ℂ`、`A → Q̌_ε`、`B → y`）
+    _ = ((checkBigLambda F g s2 T : ℝ) : ℂ) • y := by rw [hQy]
+                                                        -- 上の等式 `Q̌_εy = y`
 
 /-- **原文 `eigenvalues_of_V_plus` (2)**: 固有値はすべて正の実数。 -/
 theorem checkBigLambda_pos (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) {s2 : ℝ} (hs2 : 0 < s2)
