@@ -59013,6 +59013,10 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           labels: ["claim_step_advances_direction"],
                           habitat: "Z",
                           verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
+                          lean: [
+                            "Ising2DLambda.KacWard.step_advances_direction",
+                            "Ising2DLambda.NecSuf.KacWard.step_advances_direction_necSuf",
+                          ],
                           statement: [
                             paragraph([
                               "任意の ", math(String.raw`\vec e\in\vec E_L`), " と任意の ",
@@ -59042,9 +59046,9 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e)+0
 &&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(0)
-&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元}\blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
-&&\bigl(\because\ \text{直進の場合 }\tau(\vec e,\vec f)=0\text{。}\blkref{def_step_turning}\bigr)
+&&\bigl(\because\ \text{直進の場合 }\tau(\vec e,\vec f)=0\blkref{def_step_turning}\bigr)
 \end{aligned}`),
                             paragraph([
                               "である。左回転の場合（",
@@ -59056,9 +59060,9 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e)+1
 &&\bigl(\because\ \blkref{def_step_turning}\text{ の左回転の場合の条件}\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(1)
-&&\bigl(\because\ \pi_4(1)=1+4\mathbb Z\text{ は剰余類 }1\text{。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4(1)=1+4\mathbb Z\text{ は剰余類 }1\blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
-&&\bigl(\because\ \text{左回転の場合 }\tau(\vec e,\vec f)=1\text{。}\blkref{def_step_turning}\bigr)
+&&\bigl(\because\ \text{左回転の場合 }\tau(\vec e,\vec f)=1\blkref{def_step_turning}\bigr)
 \end{aligned}`),
                             paragraph([
                               "である。右回転の場合（",
@@ -59072,9 +59076,9 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e)+(-\pi_4(1))
 &&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の減法の定義と }\pi_4(1)=1+4\mathbb Z\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(-1)
-&&\bigl(\because\ \pi_4(-1)+\pi_4(1)=\pi_4(0)=0\text{。}\pi_4\text{ の加法性、}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4(-1)+\pi_4(1)=\pi_4(0)=0\text{、}\pi_4\text{ の加法性、}\blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
-&&\bigl(\because\ \text{右回転の場合 }\tau(\vec e,\vec f)=-1\text{。}\blkref{def_step_turning}\bigr)
+&&\bigl(\because\ \text{右回転の場合 }\tau(\vec e,\vec f)=-1\blkref{def_step_turning}\bigr)
 \end{aligned}`),
                             paragraph([
                               "である。三つの場合は後続辺を尽くす（", ref("def_step_turning"),

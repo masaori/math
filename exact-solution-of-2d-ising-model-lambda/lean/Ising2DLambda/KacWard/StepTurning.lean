@@ -1,4 +1,6 @@
-import Ising2DLambda.KacWard.TerminalMatrix
+import Ising2DLambda.KacWard.SuccessorDirectionSelection
+import Ising2DLambda.KacWard.CyclicTurningVanishes
+import Ising2DLambda.NecSuf.KacWard.StepAdvancesDirection
 
 namespace Ising2DLambda.KacWard
 
@@ -11,5 +13,26 @@ def stepTurning {L : ℕ} (e f : OrientedEdge L) : ℤ :=
     else if directionNumber f = directionNumber e - 1 then -1
     else 0
   else 0
+
+/-- `claim_step_advances_direction` for actual nonbacktracking edges. -/
+theorem step_advances_direction {L : ℕ} [NeZero L]
+    (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e) :
+    directionNumber f = directionNumber e + directionResidueProjection (stepTurning e f) := by
+  have hreverse : directionNumber f ≠ directionNumber e + 2 := by
+    intro h
+    have hs : orientedSource f = orientedTarget e := (Finset.mem_filter.mp hf).2.1.symm
+    have hr : orientedSource (reversal e) = orientedTarget e := by
+      rcases e with ⟨edge, false | true⟩ <;> rfl
+    have heq : f = reversal e := sourceDirection_bijective.1
+      (Prod.ext (hs.trans hr.symm) (h.trans (directionNumber_reversal e).symm))
+    exact (Finset.mem_filter.mp hf).2.2 heq
+  have htable : ∀ a b : ZMod 4,
+      b = a ∨ b = a + 1 ∨ b = a - 1 ∨ b = a + 2 := by decide
+  have hcases := htable (directionNumber e) (directionNumber f)
+  rcases hcases with h | h | h | h
+  · simp [stepTurning, hf, directionResidueProjection, h]
+  · simp [stepTurning, hf, directionResidueProjection, h]
+  · simp [stepTurning, hf, directionResidueProjection, h, sub_eq_add_neg] <;> decide
+  · exact (hreverse h).elim
 
 end Ising2DLambda.KacWard
