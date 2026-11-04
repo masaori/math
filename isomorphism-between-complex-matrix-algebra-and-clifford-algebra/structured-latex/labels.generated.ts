@@ -23,6 +23,7 @@ export const ALL_LABELS = [
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_reindexing_linear_combination_by_bijection",
   "claim_scalar_multiple_of_linear_combination",
+  "claim_scalar_multiple_of_sum_over_finite_set",
   "claim_scalar_multiple_of_zero_vector_is_zero_vector",
   "claim_sum_of_linear_combinations_of_same_family",
   "claim_sum_of_sums_over_finite_set_with_same_family",

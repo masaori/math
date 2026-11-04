@@ -5153,4 +5153,108 @@ L_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_scalar_multiple_of_sum_over_finite_set",
+    kind: "claim",
+    title: { text: "有限集合の上の和のスカラー倍は、係数のスカラー倍による有限集合の上の和である" },
+    labels: ["claim_scalar_multiple_of_sum_over_finite_set"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`v_x`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_x`),
+        " が一つずつ与えられているとし、",
+        math(String.raw`\rho\in\mathbb{C}`),
+        " とする。このとき、有限集合の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\rho\cdot_V\left(\sum_{x\in X}\lambda_x\cdot_V v_x\right)=\sum_{x\in X}(\rho\cdot_{\mathbb{C}}\lambda_x)\cdot_V v_x`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`X`),
+        " は有限集合なので、番号付け ",
+        math(String.raw`(n,e)`),
+        "（",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`e:\{1,\dots,n\}\to X`),
+        "）が少なくとも一つある（",
+        ref("def_numbering_of_finite_set"),
+        "）。それを一つ選び、以下の二つの和はどちらもこの ",
+        math(String.raw`(n,e)`),
+        " で定義を開く。有限集合の上の和は番号付けの取り方によらないので（",
+        ref("def_sum_over_finite_set"),
+        "）、二つの和に同じ番号付けを使ってよい。",
+      ]),
+      paragraph([
+        "準備として、",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に ",
+        math(String.raw`\nu_x:=\rho\cdot_{\mathbb{C}}\lambda_x\in\mathbb{C}`),
+        " を与える。また ",
+        math(String.raw`\{1,\dots,n\}`),
+        " で添字づけた族を、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        "、",
+        math(String.raw`b_k:=b(k):=v_{e(k)}`),
+        " と、",
+        math(String.raw`\alpha_k:=\lambda_{e(k)}\in\mathbb{C}`),
+        " で定める。",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について、",
+        math(String.raw`\nu`),
+        " の定義から ",
+        math(String.raw`\nu_{e(k)}=\rho\cdot_{\mathbb{C}}\lambda_{e(k)}=\rho\cdot_{\mathbb{C}}\alpha_k`),
+        " である。",
+      ]),
+      paragraph(["主張の左辺から始める。"]),
+      displayMath(String.raw`\begin{aligned}
+\rho\cdot_V\left(\sum_{x\in X}\lambda_x\cdot_V v_x\right)
+&=\rho\cdot_V\left(\sum_{k=1}^{n}\lambda_{e(k)}\cdot_V v_{e(k)}\right)
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n,e)\ \text{で}\right)\\
+&=\rho\cdot_V\left(\sum_{k=1}^{n}\alpha_k\cdot_V b_k\right)
+&&\left(\because\ \alpha_k,\ b_k\ \text{の定義}\right)\\
+&=\sum_{k=1}^{n}(\rho\cdot_{\mathbb{C}}\alpha_k)\cdot_V b_k
+&&\left(\because\ \blkref{claim_scalar_multiple_of_linear_combination}\ \text{を}\ b,\ \alpha,\ \mu=\rho\ \text{で}\right)\\
+&=\sum_{k=1}^{n}\nu_{e(k)}\cdot_V v_{e(k)}
+&&\left(\because\ \nu_{e(k)}=\rho\cdot_{\mathbb{C}}\alpha_k,\ b_k\ \text{の定義}\right)\\
+&=\sum_{x\in X}\nu_x\cdot_V v_x
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n,e)\ \text{で}\right)\\
+&=\sum_{x\in X}(\rho\cdot_{\mathbb{C}}\lambda_x)\cdot_V v_x
+&&\left(\because\ \nu_x\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`X`),
+        " が空集合のときは ",
+        math(String.raw`n=0`),
+        " であり、上の式変形はそのまま成り立つ（",
+        ref("def_linear_combination"),
+        " と ",
+        ref("claim_scalar_multiple_of_linear_combination"),
+        " は ",
+        math(String.raw`n=0`),
+        " を含む）。",
+      ]),
+    ],
+  },
 ]);
