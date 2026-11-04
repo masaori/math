@@ -106,6 +106,7 @@ export const ALL_LABELS = [
   "congruence_preserves_positive_definite",
   "conjugate_bilinear_value_of_congruence",
   "conjugate_index_of_check_Z_Y",
+  "conjugation_commutes_with_matrix_exp",
   "conjugation_is_ring_homomorphism",
   "constant_c_value_even_sector",
   "cos_arctan_sin_arctan",

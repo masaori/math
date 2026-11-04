@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 405 件のうち、SageMath の検算が無いもの 33 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 406 件のうち、SageMath の検算が無いもの 32 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -345,8 +345,14 @@
   人手証明の計算の誤りは無かった。散文の「〜と〜より」を二つの主張を順に当てる (∵) 付きの二行にし、主張に V^{(+)} の住処と ℝ_{>0} の略記の出典（`def_hermitian_positive_definite`・`inclusion_rr_to_cc`）を、準備に M_col ∈ ℤ_{≥1} の出典（`def_jordan_wigner_Z_matrices`）を書いた（主張の値は不変）。
   Lean の `trace_VPlus_pos` は mathlib の `PosDef.trace_pos` へ委ねており、人手の 2 行目が当てる `trace_of_positive_definite_is_positive` に当たる Ising2D の定理が無い（1 対 1 でない。Lean の連続実行の受け持ち）。二回のレビューで必須の指摘が無くなるまで直した。
 
+
+- `constant_c_value_even_sector`（c = ((2s_2)^{M_col/2})_ℂ）と、そのために足した `conjugation_commutes_with_matrix_exp`（正則な B について T_B(exp(X)) = exp(T_B(X))）: `sagemath/check/constant_c_value_even_sector/`・`sagemath/check/conjugation_commutes_with_matrix_exp/`。
+  本体は、準備・Step 1・Step 2 を K_1 = 2 log y・K_2 = log x の実際の行列で QQbar で厳密に確かめる `check_steps1_2_exact.sage` と、本文の ψ̌ から作った ň_μ で V̌' を作り、c を V^{(+)} = cV̌' の成分の比から作って Step 3〜5 と主張 c = a を QQbar で厳密に確かめる `check_steps3_to_5_with_check_Vprime.sage`。新しい主張は帰納法の鎖を KG 上の不定元で、主張を射影と冪零の X で厳密に、極限の段をボールで確かめた。
+  人手証明の計算の誤りは無かったが、書き方を直した: Step 2 の散文の U exp(S)U^{-1} = exp(USU^{-1}) を新しい主張へ切り出し、各段を (∵) とラベル参照付きの鎖に、本文に定義の無い ℂ の商を逆元の積に、(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示す形に、零因子を持たないことに頼っていた符号の確定を c = ρ_ℂ（ρ ∈ ℝ_{>0}）と `positive_real_square_injective` に、主張とタイトルの c を像の記号に（値は不変）。
+  Lean の `ClaimConstantCEvenSector.lean`・`NecSuf/ConstantC.lean` は旧い道筋（(c−a)(c+a) = 0 を割る）と旧い Step 番号のままで、一般の B の新しい主張には U に固定した `Uflip_conj_matExp` しか無い（1 対 1 でない。Lean の連続実行の受け持ち）。一回のレビューの必須の指摘（ログ、overview の構成上一致する比較の書き方、Lean の未対応の記録）を直した。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `constant_c_value_even_sector`（`--list` の先頭。c = (2 sinh 2K_2)^{M_col/2}。Step 1〜4 と符号反転共役を含む大きな証明なので一件だけ扱う）から、文書順に検算を足す。050 の check_05 が浮動小数点で見ている行がある。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `max_eigenvalue_of_V_plus_simple`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

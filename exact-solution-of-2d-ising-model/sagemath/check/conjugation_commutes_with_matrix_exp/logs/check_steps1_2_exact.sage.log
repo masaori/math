@@ -1,0 +1,5 @@
+n = 2: Step 1・Step 2 の鎖を厳密に確かめた
+n = 3: Step 1・Step 2 の鎖を厳密に確かめた
+n = 4: Step 1・Step 2 の鎖を厳密に確かめた
+等号 144 個、否定コントロール 9 件
+RESULT: PASS

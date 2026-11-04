@@ -5056,249 +5056,746 @@ R^{(+)}V^{(+)}
     },
   },
   {
+    id: "evenEigen_claim_conjugation_commutes_with_matrix_exp",
+    kind: "claim",
+    title: { text: "共役は行列の exp と交換する" },
+    labels: ["conjugation_commutes_with_matrix_exp"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,\mathbb{C})`),
+        " は正則とし、",
+        math(String.raw`T_B(A) := (BA)B^{-1}`),
+        " は ",
+        ref("mat_conj"),
+        " の共役写像とする（",
+        math(String.raw`B^{-1}`),
+        " は ",
+        ref("conjugation_is_ring_homomorphism"),
+        " の正則の意味の逆行列）。冪 ",
+        math(String.raw`A^p`),
+        "（",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "）と ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " (1) による。",
+        math(String.raw`X \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`T_B\bigl(\exp(X)\bigr) = \exp\bigl(T_B(X)\bigr)`),
+      paragraph([
+        "が成り立つ。証明の極限の段だけが ",
+        math(String.raw`\mathbb{R}`),
+        " を使う（",
+        ref("def_matrix_norm"),
+        " の収束が実数列 ",
+        math(String.raw`\|\cdot\|`),
+        " の ",
+        math(String.raw`0`),
+        " への収束だからである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`c_p := \left(\tfrac{1}{p!}\right)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        " の略記）と書き、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について部分和を",
+      ]),
+      displayMath(String.raw`P_N(A) := \sum_{p=0}^{N} c_p A^p \in \mathrm{Mat}(n,\mathbb{C})`),
+      paragraph([
+        "と置く（和は ",
+        ref("def_finite_sum_of_matrices"),
+        " を添字 ",
+        math(String.raw`p = j-1`),
+        " で書いたもの）。",
+        ref("def_finite_sum_of_matrices"),
+        " より ",
+        math(String.raw`P_0(A) = c_0A^0`),
+        "、",
+        math(String.raw`P_{N+1}(A) = P_N(A) + c_{N+1}A^{N+1}`),
+        " である。",
+        ref("def_exp"),
+        " (1) と ",
+        ref("matrix_exp_series_converges"),
+        " (1) より、",
+        math(String.raw`A = X`),
+        " と ",
+        math(String.raw`A = T_B(X)`),
+        " について ",
+        math(String.raw`P_N(X) \to \exp(X)`),
+        "、",
+        math(String.raw`P_N\bigl(T_B(X)\bigr) \to \exp\bigl(T_B(X)\bigr)`),
+        " である（",
+        ref("def_matrix_norm"),
+        " の収束）。",
+      ]),
+      paragraph([
+        "Step 1（冪の共役）。すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`T_B(X^p) = \bigl(T_B(X)\bigr)^p`),
+        " を ",
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_B(X^0)
+&= T_B\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ X^0 := I)\\
+&= I_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because\ \blkref{conjugation_is_ring_homomorphism}\ \text{の単位的})\\
+&= \bigl(T_B(X)\bigr)^0
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ \bigl(T_B(X)\bigr)^0 := I)
+\end{aligned}`),
+      paragraph([math(String.raw`p`), " で成り立つとすると、"]),
+      displayMath(String.raw`\begin{aligned}
+T_B(X^{p+1})
+&= T_B(X^pX)
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ X^{p+1} := X^pX)\\
+&= T_B(X^p)\,T_B(X)
+&&(\because\ \blkref{conjugation_is_ring_homomorphism}\ \text{の乗法的}\ (A \to X^p,\ C \to X))\\
+&= \bigl(T_B(X)\bigr)^p\,T_B(X)
+&&(\because\ \text{帰納法の仮定}\ T_B(X^p) = \bigl(T_B(X)\bigr)^p)\\
+&= \bigl(T_B(X)\bigr)^{p+1}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ \bigl(T_B(X)\bigr)^{p+1} := \bigl(T_B(X)\bigr)^p\,T_B(X))
+\end{aligned}`),
+      paragraph([
+        "Step 2（部分和の共役）。すべての ",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`T_B\bigl(P_N(X)\bigr) = P_N\bigl(T_B(X)\bigr)`),
+        " を ",
+        math(String.raw`N`),
+        " についての帰納法で示す。",
+        math(String.raw`N = 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_B\bigl(P_0(X)\bigr)
+&= T_B(c_0X^0)
+&&(\because\ \text{準備の}\ P_0(X) = c_0X^0)\\
+&= c_0\,T_B(X^0)
+&&(\because\ \blkref{mat_conj}\ \text{のスカラー倍を保つこと}\ (\alpha \to c_0,\ A \to X^0))\\
+&= c_0\bigl(T_B(X)\bigr)^0
+&&(\because\ \text{Step 1 の}\ p = 0)\\
+&= P_0\bigl(T_B(X)\bigr)
+&&(\because\ \text{準備の}\ P_0\bigl(T_B(X)\bigr) = c_0\bigl(T_B(X)\bigr)^0)
+\end{aligned}`),
+      paragraph([math(String.raw`N`), " で成り立つとすると、"]),
+      displayMath(String.raw`\begin{aligned}
+T_B\bigl(P_{N+1}(X)\bigr)
+&= T_B\bigl(P_N(X) + c_{N+1}X^{N+1}\bigr)
+&&(\because\ \text{準備の}\ P_{N+1}(X) = P_N(X) + c_{N+1}X^{N+1})\\
+&= T_B\bigl(P_N(X)\bigr) + T_B\bigl(c_{N+1}X^{N+1}\bigr)
+&&(\because\ \blkref{mat_conj}\ \text{の和を保つこと}\ (A \to P_N(X),\ C \to c_{N+1}X^{N+1}))\\
+&= P_N\bigl(T_B(X)\bigr) + T_B\bigl(c_{N+1}X^{N+1}\bigr)
+&&(\because\ \text{帰納法の仮定}\ T_B\bigl(P_N(X)\bigr) = P_N\bigl(T_B(X)\bigr))\\
+&= P_N\bigl(T_B(X)\bigr) + c_{N+1}\,T_B\bigl(X^{N+1}\bigr)
+&&(\because\ \blkref{mat_conj}\ \text{のスカラー倍を保つこと}\ (\alpha \to c_{N+1},\ A \to X^{N+1}))\\
+&= P_N\bigl(T_B(X)\bigr) + c_{N+1}\bigl(T_B(X)\bigr)^{N+1}
+&&(\because\ \text{Step 1 の}\ p = N+1)\\
+&= P_{N+1}\bigl(T_B(X)\bigr)
+&&(\because\ \text{準備の}\ P_{N+1}\bigl(T_B(X)\bigr) = P_N\bigl(T_B(X)\bigr) + c_{N+1}\bigl(T_B(X)\bigr)^{N+1})
+\end{aligned}`),
+      paragraph([
+        "Step 3（部分和の共役の極限）。準備の ",
+        math(String.raw`P_N(X) \to \exp(X)`),
+        " に ",
+        ref("matrix_multiplication_continuity_in_right_factor"),
+        "（",
+        math(String.raw`(A_N)_N \to (P_N(X))_N,\ A \to \exp(X),\ B \to B`),
+        "）を当てて ",
+        math(String.raw`BP_N(X) \to B\exp(X)`),
+        "、これに ",
+        ref("matrix_multiplication_continuity"),
+        "（",
+        math(String.raw`K \to \mathbb{C},\ (A_N)_N \to (BP_N(X))_N,\ A \to B\exp(X),\ B \to B^{-1}`),
+        "）を当てて ",
+        math(String.raw`\bigl(BP_N(X)\bigr)B^{-1} \to \bigl(B\exp(X)\bigr)B^{-1}`),
+        " である。",
+        ref("mat_conj"),
+        " の ",
+        math(String.raw`T_B`),
+        " の定義より、これは ",
+        math(String.raw`T_B\bigl(P_N(X)\bigr) \to T_B\bigl(\exp(X)\bigr)`),
+        " である。",
+      ]),
+      paragraph([
+        "結論。行列の列 ",
+        math(String.raw`C_N := T_B\bigl(P_N(X)\bigr)`),
+        " は、Step 3 より ",
+        math(String.raw`T_B\bigl(\exp(X)\bigr)`),
+        " に収束し、Step 2 より ",
+        math(String.raw`C_N = P_N\bigl(T_B(X)\bigr)`),
+        " なので準備より ",
+        math(String.raw`\exp\bigl(T_B(X)\bigr)`),
+        " にも収束する。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_B\bigl(\exp(X)\bigr)
+&= \exp\bigl(T_B(X)\bigr)
+&&(\because\ (C_N)\ \text{の二つの極限に}\ \blkref{matrix_norm_triangle_inequality}\ (4)\ \text{の極限の一意性})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04（全証明の SageMath 検算 constant_c_value_even_sector）: 原文（Typst）に対応ブロックは無い。constant_c_value_even_sector の Step 2 が、共役は積・和・スカラー倍を保ち極限とも交換するので U exp(S)U^{-1} = exp(USU^{-1}) である、と散文で示していたので、一つの主張として切り出した。極限の段は commuting_matrix_commutes_with_exp と同じく行列の積の連続性の二つの主張で書いた。数値検証: sagemath/check/conjugation_commutes_with_matrix_exp/。Lean の対応は Ising2D.Uflip_conj_pow・Uflip_conj_expPartialSum・Uflip_conj_matExp（B を U に固定した形）。",
+      ],
+    },
+  },
+  {
     id: "evenEigen_009_claim_constant_c_value_even_sector",
     kind: "claim",
     standing: "mainTheorem",
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 11 },
-    title: { tex: String.raw`c = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}` },
+    title: { tex: String.raw`c = \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}` },
     labels: ["constant_c_value_even_sector"],
     statement: [
       paragraph([
         ref("V_plus_eq_c_check_Vprime"),
-        " の定数 ",
+        " の ",
+        math(String.raw`V^{(+)} = c\,\check{V}'`),
+        " を満たす ",
         math(String.raw`c \in \mathbb{C}^\times`),
         " は",
       ]),
       displayMath(
-        String.raw`c = (2\sinh 2K_2)^{M_{\mathrm{col}}/2} = (2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`,
+        String.raw`c = \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}} = \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`,
       ),
-      paragraph(["である。すなわち"]),
-      displayMath(String.raw`V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`),
+      paragraph([
+        "である（",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
+        " は ",
+        ref("def_second_transfer_matrix_prefactor"),
+        "、",
+        math(String.raw`s_2 = \sinh 2K_2`),
+        " は ",
+        ref("def_transfer_matrix_symbols"),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。すなわち",
+      ]),
+      displayMath(String.raw`V^{(+)} = \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,\check{V}'`),
     ],
     proof: [
       paragraph([
-        "以下 ",
-        math(String.raw`S_1 := S_1^{(+)} = iK_1H_1^{(+)}`),
+        "準備。",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`),
         "、",
-        math(String.raw`S_2 = iK_2^*H_2`),
-        "（",
-        ref("iH_is_real_symmetric"),
-        "）、",
-        math(String.raw`\tau := \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)`),
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
         " と書く。",
+        ref("iH_is_real_symmetric"),
+        " の ",
+        math(String.raw`S_1 := S_1^{(+)}`),
+        "、",
+        math(String.raw`S_2`),
+        " を用い、",
+        ref("V_plus_is_positive_definite"),
+        " の表示の ",
+        math(String.raw`\tfrac12 S_1^{(+)}`),
+        " を ",
+        math(String.raw`H := \left(\tfrac12\right)_{\mathbb{C}}S_1`),
+        "（",
+        ref("def_matrix_scalar_multiple"),
+        "）と書く。",
+        ref("V_plus_is_invertible"),
+        " の ",
+        math(String.raw`-\tfrac12 S_1^{(+)} := -\bigl(\tfrac12 S_1^{(+)}\bigr)`),
+        " はこの ",
+        math(String.raw`H`),
+        " の符号反転 ",
+        math(String.raw`-H`),
+        "（",
+        ref("def_matrix_negation"),
+        "）である。",
+        math(String.raw`a := (2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
+        "（",
+        ref("def_second_transfer_matrix_prefactor"),
+        "）、",
+        math(String.raw`a^{-1} \in \mathbb{R}_{>0}`),
+        " をその ",
+        math(String.raw`\mathbb{R}`),
+        " の逆数（",
+        ref("V_plus_is_invertible"),
+        " の ",
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2}`),
+        "）、",
+        math(String.raw`a^2 := aa \in \mathbb{R}_{>0}`),
+        " と書き、",
+      ]),
+      displayMath(String.raw`\tau := \mathrm{tr}\bigl(\exp(S_1)\exp(S_2)\bigr) \in \mathbb{C},
+\qquad
+\tau' := \mathrm{tr}\bigl(\exp(-S_1)\exp(-S_2)\bigr) \in \mathbb{C}`),
+      paragraph([
+        "と置く（",
+        math(String.raw`\mathrm{tr}`),
+        " は ",
+        ref("def_trace"),
+        "）。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(H+H)_{kl}
+&= H_{kl} + H_{kl}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= \left(\tfrac12\right)_{\mathbb{C}}(S_1)_{kl} + \left(\tfrac12\right)_{\mathbb{C}}(S_1)_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple})\\
+&= \left(\left(\tfrac12\right)_{\mathbb{C}} + \left(\tfrac12\right)_{\mathbb{C}}\right)(S_1)_{kl}
+&&(\because\ \text{分配律。}\blkref{complex_numbers_form_a_field})\\
+&= \left(\left(\tfrac12, 0\right) + \left(\tfrac12, 0\right)\right)(S_1)_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= \left(\tfrac12 + \tfrac12,\ 0 + 0\right)(S_1)_{kl}
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (1, 0)\,(S_1)_{kl}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 1_{\mathbb{C}}(S_1)_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (S_1)_{kl}
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`H + H = S_1`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\exp(H)\exp(H)
+&= \exp(H + H)
+&&(\because\ \blkref{theorem_exp_product}\ (K \to \mathbb{C},\ A \to H,\ B \to H)\ \text{と}\ HH = HH)\\
+&= \exp(S_1)
+&&(\because\ H + H = S_1)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp(-H)\exp(-H)
+&= \exp\bigl((-H) + (-H)\bigr)
+&&(\because\ \blkref{theorem_exp_product}\ (K \to \mathbb{C},\ A \to -H,\ B \to -H)\ \text{と}\ (-H)(-H) = (-H)(-H))\\
+&= \exp\bigl(-(H + H)\bigr)
+&&(\because\ \blkref{negation_distributes_over_matrix_sum}\ (A \to H,\ B \to H)\ \text{を右辺から左辺へ})\\
+&= \exp(-S_1)
+&&(\because\ H + H = S_1)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("V_plus_eq_c_check_Vprime"),
+        " の ",
+        math(String.raw`c \in \mathbb{C}^\times`),
+        " は ",
+        math(String.raw`c \neq 0`),
+        " なので、",
+        ref("complex_numbers_form_a_field"),
+        " の逆元 ",
+        math(String.raw`c^{-1} \in \mathbb{C}`),
+        " を持つ。",
+        math(String.raw`c^2 := cc`),
+        " と書く。",
+        ref("def_check_Vprime"),
+        " (2) より ",
+        math(String.raw`\check{V}' \in R^\times`),
+        "（",
+        math(String.raw`R := \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M \to M_{\mathrm{col}}`),
+        "）であり、",
+        ref("V_plus_is_invertible"),
+        " より ",
+        math(String.raw`V^{(+)} \in R^\times`),
+        " である。",
+        ref("trace_of_check_Vprime"),
+        " の右辺の正の実数を ",
+        math(String.raw`t := \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\gamma(\tilde\theta_\mu)/2\right) \in \mathbb{R}_{>0}`),
+        "、",
+        ref("trace_V_plus_is_positive"),
+        " の ",
+        math(String.raw`\mathrm{tr}\bigl(V^{(+)}\bigr)`),
+        " を ",
+        math(String.raw`\mathrm{tr}\bigl(V^{(+)}\bigr) = r_{\mathbb{C}}`),
+        "（",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        "）と書く。",
       ]),
       paragraph([
         "Step 1（",
-        math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right)`),
+        math(String.raw`\mathrm{tr}\bigl(V^{(+)}\bigr)`),
         " と ",
-        math(String.raw`\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)`),
+        math(String.raw`\mathrm{tr}\bigl((V^{(+)})^{-1}\bigr)`),
         " を ",
         math(String.raw`\tau`),
+        "・",
+        math(String.raw`\tau'`),
         " で表す）。",
-        ref("V_plus_is_positive_definite"),
-        " の表示と ",
-        ref("trace_basic_properties"),
-        " (1)(2) より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{tr}\!\left(V^{(+)}\right)
-&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(
-   \exp\!\left(\tfrac12 S_1\right)\exp(S_2)\exp\!\left(\tfrac12 S_1\right)\right)
-   \quad (\because \text{トレースの線型性}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(
-   \exp\!\left(\tfrac12 S_1\right)\exp\!\left(\tfrac12 S_1\right)\exp(S_2)\right)
-   \quad \left(\because \text{巡回性を } A = \exp\!\left(\tfrac12 S_1\right)\exp(S_2),\
-   B = \exp\!\left(\tfrac12 S_1\right) \text{ に適用}\right) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
-   \quad \left(\because \text{可換なので } \exp\!\left(\tfrac12 S_1\right)^2 = \exp(S_1)\right) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\,\tau
-   \quad (\because \tau := \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right))
+\mathrm{tr}\bigl(V^{(+)}\bigr)
+&= \mathrm{tr}\Bigl(a_{\mathbb{C}}\bigl((\exp(H)\exp(S_2))\exp(H)\bigr)\Bigr)
+   &&(\because\ \blkref{V_plus_is_positive_definite}\ \text{の表示}) \\
+&= a_{\mathbb{C}}\,\mathrm{tr}\bigl((\exp(H)\exp(S_2))\exp(H)\bigr)
+   &&(\because\ \blkref{trace_of_scalar_multiple}\ (\alpha \to a_{\mathbb{C}})) \\
+&= a_{\mathbb{C}}\,\mathrm{tr}\bigl(\exp(H)(\exp(H)\exp(S_2))\bigr)
+   &&(\because\ \blkref{trace_basic_properties}\ (2)\ (A \to \exp(H)\exp(S_2),\ B \to \exp(H))) \\
+&= a_{\mathbb{C}}\,\mathrm{tr}\bigl((\exp(H)\exp(H))\exp(S_2)\bigr)
+   &&(\because\ \blkref{mat_mult_associative}) \\
+&= a_{\mathbb{C}}\,\mathrm{tr}\bigl(\exp(S_1)\exp(S_2)\bigr)
+   &&(\because\ \text{準備の}\ \exp(H)\exp(H) = \exp(S_1)) \\
+&= a_{\mathbb{C}}\,\tau
+   &&(\because\ \tau\ \text{の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\bigl((V^{(+)})^{-1}\bigr)
+&= \mathrm{tr}\Bigl((a^{-1})_{\mathbb{C}}\bigl((\exp(-H)\exp(-S_2))\exp(-H)\bigr)\Bigr)
+   &&(\because\ \blkref{V_plus_is_invertible}\ \text{の}\ (V^{(+)})^{-1} = R^{(+)}) \\
+&= (a^{-1})_{\mathbb{C}}\,\mathrm{tr}\bigl((\exp(-H)\exp(-S_2))\exp(-H)\bigr)
+   &&(\because\ \blkref{trace_of_scalar_multiple}\ (\alpha \to (a^{-1})_{\mathbb{C}})) \\
+&= (a^{-1})_{\mathbb{C}}\,\mathrm{tr}\bigl(\exp(-H)(\exp(-H)\exp(-S_2))\bigr)
+   &&(\because\ \blkref{trace_basic_properties}\ (2)\ (A \to \exp(-H)\exp(-S_2),\ B \to \exp(-H))) \\
+&= (a^{-1})_{\mathbb{C}}\,\mathrm{tr}\bigl((\exp(-H)\exp(-H))\exp(-S_2)\bigr)
+   &&(\because\ \blkref{mat_mult_associative}) \\
+&= (a^{-1})_{\mathbb{C}}\,\mathrm{tr}\bigl(\exp(-S_1)\exp(-S_2)\bigr)
+   &&(\because\ \text{準備の}\ \exp(-H)\exp(-H) = \exp(-S_1)) \\
+&= (a^{-1})_{\mathbb{C}}\,\tau'
+   &&(\because\ \tau'\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "同じ計算を ",
-        ref("V_plus_is_invertible"),
-        " の ",
-        math(String.raw`\left(V^{(+)}\right)^{-1}`),
-        " の表示に適用して",
-      ]),
-      displayMath(
-        String.raw`\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)
-= (2s_2)^{-M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)`,
-      ),
-      paragraph([
         "Step 2（",
-        math(String.raw`\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right) = \tau`),
+        math(String.raw`\tau' = \tau`),
         "）。",
         ref("sign_flip_conjugation"),
-        " の ",
-        math(String.raw`U`),
-        " は ",
-        math(String.raw`US_1^{(+)}U^{-1} = -S_1^{(+)}`),
-        "、",
-        math(String.raw`US_2U^{-1} = -S_2`),
-        " を与えるので、",
-        math(String.raw`US_1U^{-1} = -S_1`),
-        " が使える。共役は行列の積・和・スカラー倍を保ち、有限部分和の極限とも交換する（",
-        math(String.raw`\left\|UXU^{-1} - UWU^{-1}\right\|
-= \left\|U(X-W)U^{-1}\right\| \leq \|U\|\,\|U^{-1}\|\,\|X-W\|`),
-        "：",
-        ref("matrix_norm_submultiplicativity"),
-        "）から、",
-        math(String.raw`US^kU^{-1} = \left(USU^{-1}\right)^k`),
-        " と ",
-        ref("def_exp"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`U\exp(S)U^{-1} = \exp\!\left(USU^{-1}\right)
-\qquad \left(S \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\right)`,
-      ),
-      paragraph([
-        "これを ",
-        math(String.raw`S = S_1, S_2`),
-        " に適用し、",
-        ref("trace_basic_properties"),
-        " (4) を使って",
+        " の可逆な ",
+        math(String.raw`U \in \mathrm{Mat}(n,\mathbb{C})`),
+        " と、",
+        ref("mat_conj"),
+        " の共役写像 ",
+        math(String.raw`T_U(A) := (UA)U^{-1}`),
+        " を用いる。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\tau
-&= \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right) \\
-&= \mathrm{tr}\!\left(U\exp(S_1)\exp(S_2)U^{-1}\right)
-   \quad (\because \text{トレースは共役で不変}) \\
-&= \mathrm{tr}\!\left(\left(U\exp(S_1)U^{-1}\right)
-   \left(U\exp(S_2)U^{-1}\right)\right)
-   \quad (\because U^{-1}U = I) \\
-&= \mathrm{tr}\!\left(\exp\!\left(US_1U^{-1}\right)\exp\!\left(US_2U^{-1}\right)\right) \\
-&= \mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)
-   \quad (\because \text{符号反転共役})
+\tau'
+&= \mathrm{tr}\bigl(\exp(-S_1)\exp(-S_2)\bigr)
+   &&(\because\ \tau'\ \text{の定義}) \\
+&= \mathrm{tr}\Bigl(\exp\bigl(T_U(S_1)\bigr)\exp\bigl(T_U(S_2)\bigr)\Bigr)
+   &&(\because\ \blkref{sign_flip_conjugation}\ \text{の}\ US_1^{(+)}U^{-1} = -S_1^{(+)},\ US_2U^{-1} = -S_2\ \text{を右辺から左辺へ}) \\
+&= \mathrm{tr}\Bigl(T_U\bigl(\exp(S_1)\bigr)\,T_U\bigl(\exp(S_2)\bigr)\Bigr)
+   &&(\because\ \blkref{conjugation_commutes_with_matrix_exp}\ (B \to U,\ X \to S_1,\ S_2)\ \text{を右辺から左辺へ}) \\
+&= \mathrm{tr}\Bigl(T_U\bigl(\exp(S_1)\exp(S_2)\bigr)\Bigr)
+   &&(\because\ \blkref{conjugation_is_ring_homomorphism}\ \text{の乗法的}\ (B \to U,\ A \to \exp(S_1),\ C \to \exp(S_2))\ \text{を右辺から左辺へ}) \\
+&= \mathrm{tr}\Bigl(\bigl(U(\exp(S_1)\exp(S_2))\bigr)U^{-1}\Bigr)
+   &&(\because\ \blkref{mat_conj}\ \text{の}\ T_U\ \text{の定義}) \\
+&= \mathrm{tr}\Bigl(U\bigl((\exp(S_1)\exp(S_2))U^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{mat_mult_associative}) \\
+&= \mathrm{tr}\bigl(\exp(S_1)\exp(S_2)\bigr)
+   &&(\because\ \blkref{trace_basic_properties}\ (4)\ (P \to U,\ P' \to U^{-1},\ A \to \exp(S_1)\exp(S_2))\ \text{と}\ U^{-1}U = I) \\
+&= \tau
+   &&(\because\ \tau\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
         "Step 3（",
-        math(String.raw`c^2`),
-        " の決定）。",
-        ref("V_plus_eq_c_check_Vprime"),
-        " の ",
-        math(String.raw`V^{(+)} = c\check{V}'`),
-        " から ",
-        math(String.raw`\left(V^{(+)}\right)^{-1} = c^{-1}\left(\check{V}'\right)^{-1}`),
-        " であり、",
-        ref("trace_basic_properties"),
-        " (1) より",
-      ]),
-      displayMath(
-        String.raw`\mathrm{tr}\!\left(V^{(+)}\right) = c\,\mathrm{tr}\!\left(\check{V}'\right),
-\qquad
-\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)
-= c^{-1}\,\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)`,
-      ),
-      paragraph([
-        ref("trace_of_check_Vprime"),
-        " より ",
-        math(String.raw`\mathrm{tr}\!\left(\check{V}'\right)
-= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right) > 0`),
-        " なので、これらは ",
-        math(String.raw`0`),
-        " でなく、辺々割ることができて",
+        math(String.raw`\mathrm{tr}\bigl(V^{(+)}\bigr)`),
+        " と ",
+        math(String.raw`\mathrm{tr}\bigl((V^{(+)})^{-1}\bigr)`),
+        " を ",
+        math(String.raw`c`),
+        " と ",
+        math(String.raw`t`),
+        " で表す）。",
+        math(String.raw`W := c^{-1}(\check{V}')^{-1} \in R`),
+        " と置くと、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
-{\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)}
-&= \frac{c\,\mathrm{tr}\!\left(\check{V}'\right)}
-{c^{-1}\,\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)}
-   \quad (\because \text{Step 3 の二つのトレース表示}) \\
-&= c^2\,\frac{\mathrm{tr}\!\left(\check{V}'\right)}
-{\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)}
-   \quad (\because \mathbb{C}\text{ の四則}) \\
-&= c^2
-   \quad \left(\because
-   \mathrm{tr}\!\left(\check{V}'\right)
-   = \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right) > 0\right)
+V^{(+)}W
+&= (c\check{V}')\bigl(c^{-1}(\check{V}')^{-1}\bigr)
+   &&(\because\ \blkref{V_plus_eq_c_check_Vprime}\ \text{と}\ W\ \text{の定義}) \\
+&= c\Bigl(\check{V}'\bigl(c^{-1}(\check{V}')^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= c\Bigl(c^{-1}\bigl(\check{V}'(\check{V}')^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= (cc^{-1})\bigl(\check{V}'(\check{V}')^{-1}\bigr)
+   &&(\because\ \blkref{scalar_multiple_is_associative}) \\
+&= 1_{\mathbb{C}}\bigl(\check{V}'(\check{V}')^{-1}\bigr)
+   &&(\because\ c^{-1}\ \text{は}\ c\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
+&= 1_{\mathbb{C}}I
+   &&(\because\ \blkref{def_invertible_elements_of_R}\ \text{の}\ (\check{V}')^{-1}) \\
+&= I
+   &&(\because\ \blkref{scalar_multiple_by_one})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+WV^{(+)}
+&= \bigl(c^{-1}(\check{V}')^{-1}\bigr)(c\check{V}')
+   &&(\because\ W\ \text{の定義と}\ \blkref{V_plus_eq_c_check_Vprime}) \\
+&= c^{-1}\Bigl((\check{V}')^{-1}(c\check{V}')\Bigr)
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= c^{-1}\Bigl(c\bigl((\check{V}')^{-1}\check{V}'\bigr)\Bigr)
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= (c^{-1}c)\bigl((\check{V}')^{-1}\check{V}'\bigr)
+   &&(\because\ \blkref{scalar_multiple_is_associative}) \\
+&= 1_{\mathbb{C}}\bigl((\check{V}')^{-1}\check{V}'\bigr)
+   &&(\because\ c^{-1}\ \text{は}\ c\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
+&= 1_{\mathbb{C}}I
+   &&(\because\ \blkref{def_invertible_elements_of_R}\ \text{の}\ (\check{V}')^{-1}) \\
+&= I
+   &&(\because\ \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       paragraph([
-        "一方 Step 1・Step 2 より（",
-        ref("trace_V_plus_is_positive"),
-        " より ",
-        math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) > 0`),
-        " なので ",
-        math(String.raw`\tau = (2s_2)^{-M_{\mathrm{col}}/2}\mathrm{tr}\!\left(V^{(+)}\right) \neq 0`),
-        "）",
+        "なので、",
+        ref("def_invertible_elements_of_R"),
+        " の逆元の一意性より ",
+        math(String.raw`(V^{(+)})^{-1} = W`),
+        " である。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
-{\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)}
-&= \frac{(2s_2)^{M_{\mathrm{col}}/2}\,\tau}{(2s_2)^{-M_{\mathrm{col}}/2}\,\tau}
-   \quad (\because \text{Step 1・Step 2}) \\
-&= (2s_2)^{M_{\mathrm{col}}}
-   \quad (\because \tau\neq0\text{ と }\mathbb{C}\text{ の四則})
+\mathrm{tr}\bigl(V^{(+)}\bigr)
+&= \mathrm{tr}\bigl(c\check{V}'\bigr)
+   &&(\because\ \blkref{V_plus_eq_c_check_Vprime}) \\
+&= c\,\mathrm{tr}\bigl(\check{V}'\bigr)
+   &&(\because\ \blkref{trace_of_scalar_multiple}\ (\alpha \to c)) \\
+&= c\,t_{\mathbb{C}}
+   &&(\because\ \blkref{trace_of_check_Vprime}\ \text{と}\ t\ \text{の置き方})
 \end{aligned}`,
       ),
-      paragraph(["よって ", math(String.raw`c^2 = (2s_2)^{M_{\mathrm{col}}}`), "。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\bigl((V^{(+)})^{-1}\bigr)
+&= \mathrm{tr}\bigl(c^{-1}(\check{V}')^{-1}\bigr)
+   &&(\because\ (V^{(+)})^{-1} = W\ \text{と}\ W\ \text{の定義}) \\
+&= c^{-1}\,\mathrm{tr}\bigl((\check{V}')^{-1}\bigr)
+   &&(\because\ \blkref{trace_of_scalar_multiple}\ (\alpha \to c^{-1})) \\
+&= c^{-1}\,t_{\mathbb{C}}
+   &&(\because\ \blkref{trace_of_check_Vprime}\ \text{と}\ t\ \text{の置き方})
+\end{aligned}`,
+      ),
       paragraph([
-        "Step 4（符号の確定）。Step 3 の第 1 式より ",
-        math(String.raw`c = \mathrm{tr}\!\left(V^{(+)}\right)/\mathrm{tr}\!\left(\check{V}'\right)`),
-        " であり、",
-        ref("trace_V_plus_is_positive"),
-        " より ",
-        math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}`),
+        "Step 4（",
+        math(String.raw`c^2 = (a^2)_{\mathbb{C}}`),
+        "）。",
+        math(String.raw`w := \mathrm{tr}\bigl((V^{(+)})^{-1}\bigr) \in \mathbb{C}`),
+        " と置く。まず ",
+        math(String.raw`w`),
+        " を実数の像で表す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+w
+&= (a^{-1})_{\mathbb{C}}\,\tau'
+   &&(\because\ \text{Step 1 の第二の鎖}) \\
+&= (a^{-1})_{\mathbb{C}}\,\tau
+   &&(\because\ \text{Step 2}) \\
+&= (a^{-1})_{\mathbb{C}}\bigl(1_{\mathbb{C}}\tau\bigr)
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= (a^{-1})_{\mathbb{C}}\bigl((a^{-1}a)_{\mathbb{C}}\tau\bigr)
+   &&(\because\ \mathbb{R}\ \text{で}\ a^{-1}a = 1) \\
+&= (a^{-1})_{\mathbb{C}}\bigl(((a^{-1})_{\mathbb{C}}a_{\mathbb{C}})\tau\bigr)
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a^{-1},\ b \to a)\ \text{を右辺から左辺へ}) \\
+&= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}(a_{\mathbb{C}}\tau)\bigr)
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}\,\mathrm{tr}(V^{(+)})\bigr)
+   &&(\because\ \text{Step 1 の第一の鎖を右辺から左辺へ}) \\
+&= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}r_{\mathbb{C}}\bigr)
+   &&(\because\ \text{準備の}\ \mathrm{tr}(V^{(+)}) = r_{\mathbb{C}}) \\
+&= (a^{-1})_{\mathbb{C}}(a^{-1}r)_{\mathbb{C}}
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a^{-1},\ b \to r)) \\
+&= \bigl(a^{-1}(a^{-1}r)\bigr)_{\mathbb{C}}
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a^{-1},\ b \to a^{-1}r))
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`q := a^{-1}(a^{-1}r)`),
+        " は正の実数 ",
+        math(String.raw`a^{-1}, r`),
+        " の積なので ",
+        math(String.raw`q \in \mathbb{R}_{>0}`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序）であり、",
+        math(String.raw`w = q_{\mathbb{C}} = (q, 0) \neq (0, 0)`),
+        "（",
+        ref("inclusion_rr_to_cc"),
         "、",
-        ref("trace_of_check_Vprime"),
-        " より ",
-        math(String.raw`\mathrm{tr}\!\left(\check{V}'\right) \in \mathbb{R}_{>0}`),
-        " なので ",
-        math(String.raw`c \in \mathbb{R}_{>0}`),
-        " である。",
-      ]),
-      paragraph([
-        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
-        " より ",
-        math(String.raw`s_2 = \sinh 2K_2 > 0`),
-        " なので ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
-        " である。",
+        ref("definition_of_cc"),
+        " の元の等号は成分ごと）である。よって ",
+        ref("complex_numbers_form_a_field"),
+        " の逆元 ",
+        math(String.raw`w^{-1} \in \mathbb{C}`),
+        " がある。次に",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-c^2 &= (2s_2)^{M_{\mathrm{col}}}
-   \quad (\because \text{Step 3}) \\
-&= \left((2s_2)^{M_{\mathrm{col}}/2}\right)^2
-   \quad (\because \text{正の実数の冪の指数法則 } \left(a^{M_{\mathrm{col}}/2}\right)^2 = a^{M_{\mathrm{col}}})
+c^2w
+&= (cc)\bigl(c^{-1}t_{\mathbb{C}}\bigr)
+   &&(\because\ c^2\ \text{の定義と Step 3 の第二の鎖}) \\
+&= c\bigl(c(c^{-1}t_{\mathbb{C}})\bigr)
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= c\bigl((cc^{-1})t_{\mathbb{C}}\bigr)
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= c\bigl(1_{\mathbb{C}}t_{\mathbb{C}}\bigr)
+   &&(\because\ c^{-1}\ \text{は}\ c\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
+&= c\,t_{\mathbb{C}}
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \mathrm{tr}\bigl(V^{(+)}\bigr)
+   &&(\because\ \text{Step 3 の第一の鎖を右辺から左辺へ}) \\
+&= a_{\mathbb{C}}\,\tau
+   &&(\because\ \text{Step 1 の第一の鎖}) \\
+&= a_{\mathbb{C}}\bigl(1_{\mathbb{C}}\tau\bigr)
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= a_{\mathbb{C}}\bigl((aa^{-1})_{\mathbb{C}}\tau\bigr)
+   &&(\because\ \mathbb{R}\ \text{で}\ aa^{-1} = 1) \\
+&= a_{\mathbb{C}}\bigl((a_{\mathbb{C}}(a^{-1})_{\mathbb{C}})\tau\bigr)
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a^{-1})\ \text{を右辺から左辺へ}) \\
+&= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}((a^{-1})_{\mathbb{C}}\tau)\bigr)
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}((a^{-1})_{\mathbb{C}}\tau')\bigr)
+   &&(\because\ \text{Step 2 を右辺から左辺へ}) \\
+&= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}w\bigr)
+   &&(\because\ \text{Step 1 の第二の鎖を右辺から左辺へ}) \\
+&= (a_{\mathbb{C}}a_{\mathbb{C}})w
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (a^2)_{\mathbb{C}}\,w
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a)\ \text{と}\ a^2\ \text{の定義})
 \end{aligned}`,
       ),
-      paragraph(["と合わせると"]),
+      paragraph(["であるから、"]),
       displayMath(
-        String.raw`\left(c - (2s_2)^{M_{\mathrm{col}}/2}\right)\left(c + (2s_2)^{M_{\mathrm{col}}/2}\right) = 0`,
+        String.raw`\begin{aligned}
+c^2
+&= c^2\,1_{\mathbb{C}}
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= c^2\bigl(ww^{-1}\bigr)
+   &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
+&= (c^2w)\,w^{-1}
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \bigl((a^2)_{\mathbb{C}}w\bigr)w^{-1}
+   &&(\because\ \text{上の鎖}) \\
+&= (a^2)_{\mathbb{C}}\bigl(ww^{-1}\bigr)
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (a^2)_{\mathbb{C}}\,1_{\mathbb{C}}
+   &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
+&= (a^2)_{\mathbb{C}}
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`,
       ),
       paragraph([
-        math(String.raw`c > 0`),
-        " かつ ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
-        " より第 2 因子は正で ",
-        math(String.raw`0`),
-        " でない。",
-        math(String.raw`\mathbb{C}`),
-        " は体（",
-        ref("complex_numbers_form_a_field"),
-        "）ゆえ零因子を持たないから第 1 因子が ",
-        math(String.raw`0`),
-        " であり、",
-        math(String.raw`c = (2s_2)^{M_{\mathrm{col}}/2}`),
-        "。",
+        "Step 5（符号の確定）。",
+        math(String.raw`t \in \mathbb{R}_{>0}`),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の逆数を ",
+        math(String.raw`t^{-1} \in \mathbb{R}_{>0}`),
+        " と書き、",
+        math(String.raw`\rho := rt^{-1} \in \mathbb{R}_{>0}`),
+        "（正の実数の積。",
+        math(String.raw`\mathbb{R}`),
+        " の順序）と置く。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c
+&= c\,1_{\mathbb{C}}
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= c\,(tt^{-1})_{\mathbb{C}}
+   &&(\because\ \mathbb{R}\ \text{で}\ tt^{-1} = 1) \\
+&= c\bigl(t_{\mathbb{C}}(t^{-1})_{\mathbb{C}}\bigr)
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to t,\ b \to t^{-1})\ \text{を右辺から左辺へ}) \\
+&= \bigl(c\,t_{\mathbb{C}}\bigr)(t^{-1})_{\mathbb{C}}
+   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \mathrm{tr}\bigl(V^{(+)}\bigr)(t^{-1})_{\mathbb{C}}
+   &&(\because\ \text{Step 3 の第一の鎖を右辺から左辺へ}) \\
+&= r_{\mathbb{C}}(t^{-1})_{\mathbb{C}}
+   &&(\because\ \text{準備の}\ \mathrm{tr}(V^{(+)}) = r_{\mathbb{C}}) \\
+&= (rt^{-1})_{\mathbb{C}}
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to r,\ b \to t^{-1})) \\
+&= \rho_{\mathbb{C}}
+   &&(\because\ \rho\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\rho\rho, 0)
+&= (\rho\rho)_{\mathbb{C}}
+   &&(\because\ \blkref{inclusion_rr_to_cc}) \\
+&= \rho_{\mathbb{C}}\,\rho_{\mathbb{C}}
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \rho,\ b \to \rho)\ \text{を右辺から左辺へ}) \\
+&= cc
+   &&(\because\ \text{上の鎖の}\ c = \rho_{\mathbb{C}}) \\
+&= c^2
+   &&(\because\ c^2\ \text{の定義}) \\
+&= (a^2)_{\mathbb{C}}
+   &&(\because\ \text{Step 4}) \\
+&= (aa, 0)
+   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{と}\ a^2\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、",
+        ref("definition_of_cc"),
+        " の元の等号は成分ごとであることから ",
+        math(String.raw`\rho\rho = aa`),
+        "、すなわち ",
+        math(String.raw`\rho^2 = a^2`),
+        " である。",
+        math(String.raw`\rho, a \in \mathbb{R}_{>0}`),
+        " なので ",
+        ref("positive_real_square_injective"),
+        "（",
+        math(String.raw`a \to \rho,\ b \to a`),
+        "）より ",
+        math(String.raw`\rho = a`),
+        " である。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c
+&= \rho_{\mathbb{C}}
+   &&(\because\ \text{上の鎖}) \\
+&= a_{\mathbb{C}}
+   &&(\because\ \rho = a) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}
+   &&(\because\ a\ \text{の定義}) \\
+&= \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}
+   &&(\because\ \blkref{def_transfer_matrix_symbols}\ \text{の}\ s_2 = \sinh 2K_2)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{(+)}
+&= c\,\check{V}'
+   &&(\because\ \blkref{V_plus_eq_c_check_Vprime}) \\
+&= \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,\check{V}'
+   &&(\because\ \text{上の鎖})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
         "009 章の constant_c_value の (+) セクター版。行列式は使わず、tr(V)/tr(V^{-1}) = c^2 と符号反転共役 U、および正定値性からの符号確定という同じ筋で通る。009 章の証明は S_1^{(-)} で書かれているが、iH_is_real_symmetric と sign_flip_conjugation はどちらも S_1^{(±)} について複号同順で述べられているので、上の符号を取るだけで (+) 側に使える。",
-        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05（U S_1^{(+)} U^{-1} = −S_1^{(+)} の残差 0.0、tr(exp(−S_1)exp(−S_2)) = τ の相対差 ≤ 6.1e-16、tr(V^{(+)})/tr((V^{(+)})^{-1}) = (2s_2)^M の相対差 ≤ 6.6e-16、c = (2 sinh 2K_2)^{M/2} の相対差 ≤ 4.3e-15）。",
+        "数値検証: sagemath/check/constant_c_value_even_sector/（旧い浮動小数点の検算は sagemath/check/050_claim_even_sector_eigenvalues/check_05）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-01: Step 2 の「共役は行列の積とスカラー倍を保ち」を「積・和・スカラー倍を保ち」に直した。部分和の共役には和を保つこと（分配法則）も使うため（Lean の Uflip_conj_expPartialSum で判明）。",
+        "2026-11-04（全証明の SageMath 検算）: 主張と計算は変えずに書き方を直した。共役と exp の交換を conjugation_commutes_with_matrix_exp へ切り出し、各段を (∵) とラベル参照付きの鎖にした。ℂ の商（本文に定義が無い）を使わず、逆元 c^{-1}・w^{-1} の積で書いた。(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示した。主張の c を ((2s_2)^{M_col/2})_ℂ と像の記号で書いた。Lean の ClaimConstantCEvenSector.lean・NecSuf/ConstantC.lean はまだ旧い道筋（c^2 = a^2 から (c−a)(c+a) = 0 を割る）と旧い Step 番号のままで、新しい Step 3〜5 と一般の正則な B についての conjugation_commutes_with_matrix_exp とは 1 対 1 でない（Lean の連続実行の受け持ち）。符号の確定は零因子を持たないことを使わず、c が正の実数の像であることと positive_real_square_injective で示した（旧い Step 3 の分数の段と Step 4 の因数分解の段を置き換えた）。",
       ],
     },
   },
