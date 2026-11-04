@@ -37,6 +37,7 @@ export const ALL_LABELS = [
   "claim_zero_scalar_multiple_is_zero_vector",
   "def_basis",
   "def_complex_algebra",
+  "def_complex_algebra_homomorphism",
   "def_complex_numbers_as_complex_vector_space",
   "def_complex_vector_space",
   "def_direct_sum_of_two_vector_spaces",
