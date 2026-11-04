@@ -1957,6 +1957,7 @@ targets=(
   Ising2D.CheckFermiSetup.Vprime_mul_Qproj_of_necSuf
   Ising2D.CheckFermiSetup.Qproj_mul_Vprime_of_necSuf
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
+  Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj
   Ising2D.CheckFermiSetup.exp_gval_step2_product
   Ising2D.CheckFermiSetup.exp_gval_eq_prod
   Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion

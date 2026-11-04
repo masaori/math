@@ -37,6 +37,8 @@ import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 
 namespace Ising2D
 
@@ -68,6 +70,58 @@ theorem Vprime_neg_mul_Vprime (g : CheckIdx M → ℝ) :
     F.Vprime (fun i => -(g i)) * F.Vprime g = 1 := by
   rw [← F.VprimeUnits_val g, ← F.VprimeUnits_inv g]
   exact_mod_cast (F.VprimeUnits g).inv_mul
+
+/-- **原文 `eigenvalues_of_inverse_of_check_Vprime`** の 11 行の鎖:
+`(V̌')^{-1}Q̌_ε = (V̌')^{-1}(1_ℂQ̌_ε) = (V̌')^{-1}((exp 0)_ℂQ̌_ε) = (V̌')^{-1}((exp(−ǧ+ǧ))_ℂQ̌_ε)
+= (V̌')^{-1}((exp(−ǧ)exp(ǧ))_ℂQ̌_ε) = (V̌')^{-1}(((exp(−ǧ))_ℂ(exp ǧ)_ℂ)Q̌_ε) = (V̌')^{-1}((exp(−ǧ))_ℂ((exp ǧ)_ℂQ̌_ε))
+= (exp(−ǧ))_ℂ((V̌')^{-1}((exp ǧ)_ℂQ̌_ε)) = (exp(−ǧ))_ℂ((V̌')^{-1}(V̌'Q̌_ε)) = (exp(−ǧ))_ℂ(((V̌')^{-1}V̌')Q̌_ε)
+= (exp(−ǧ))_ℂ(IQ̌_ε) = (exp(−ǧ))_ℂQ̌_ε`。
+人手の `(V̌')^{-1}`（`def_check_Vprime` (2) の `V̌' ∈ R^×` の逆元）が Lean の `↑(F.VprimeUnits g)⁻¹`、人手の `Q̌_ε` が `F.Qproj T`
+（`ε` と `T` は `finsetOfBinWord` で対応する）、人手の `ǧ(ε)` が `F.gval g T` である。
+人手が引く `scalar_exp_product`・`scalar_exp_zero` は、`real_exp_positive` の具体版と同じく mathlib の `Real.exp_add`・`Real.exp_zero` で表す
+（`def_scalar_exp` の Lean の具体版は無い）。`scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので、
+mathlib の `smul_smul`・`Matrix.mul_assoc` を 1 回ずつ使う。 -/
+theorem Vprime_inv_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
+    (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M) * F.Qproj T
+      = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ) • F.Qproj T :=
+  calc (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M) * F.Qproj T
+      = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M) * ((1 : ℂ) • F.Qproj T) := by
+        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`（`A → Q̌_ε`）を右辺から左辺へ
+    _ = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          * (((Real.exp 0 : ℝ) : ℂ) • F.Qproj T) := by
+        rw [Real.exp_zero, Complex.ofReal_one]          -- `scalar_exp_zero`（`K → ℝ`）を右辺から左辺へ
+                                                        -- （`1_ℂ = (1)_ℂ` は `inclusion_rr_to_cc` の略記。Lean では `Complex.ofReal_one`）
+    _ = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          * (((Real.exp (-(F.gval g T) + F.gval g T) : ℝ) : ℂ) • F.Qproj T) := by
+        rw [neg_add_cancel]                             -- ℝ で `−a + a = 0`（`a → ǧ(ε)`）を右辺から左辺へ
+    _ = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          * (((Real.exp (-(F.gval g T)) * Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T) := by
+        rw [Real.exp_add]                               -- `scalar_exp_product`（`K → ℝ`、`x → −ǧ(ε)`、`y → ǧ(ε)`）を右辺から左辺へ
+    _ = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          * ((((Real.exp (-(F.gval g T)) : ℝ) : ℂ) * ((Real.exp (F.gval g T) : ℝ) : ℂ)) • F.Qproj T) := by
+        rw [real_inclusion_mul]                         -- `real_inclusion_preserves_product`
+                                                        -- （`a → exp(−ǧ(ε))`、`b → exp(ǧ(ε))`）を右辺から左辺へ
+    _ = (((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          * (((Real.exp (-(F.gval g T)) : ℝ) : ℂ) • (((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T)) := by
+        rw [smul_smul]                                  -- `scalar_multiple_is_associative`
+                                                        -- （`a → (exp(−ǧ(ε)))_ℂ`、`b → (exp(ǧ(ε)))_ℂ`、`A → Q̌_ε`）を右辺から左辺へ
+    _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ)
+          • ((((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+              * (((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T)) :=
+        mul_smul_matrix_tensorPow _ _ _                 -- `scalar_multiple_factors_out_of_right_factor`
+                                                        -- （`a → (exp(−ǧ(ε)))_ℂ`、`A → (V̌')^{-1}`、`B → (exp(ǧ(ε)))_ℂQ̌_ε`）
+    _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ)
+          • ((((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M) * (F.Vprime g * F.Qproj T)) := by
+        rw [F.Vprime_mul_Qproj g T]                     -- `eigenvalues_of_check_Vprime` の `V̌'Q̌_ε = (exp(ǧ(ε)))_ℂQ̌_ε` を右辺から左辺へ
+    _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ)
+          • (((((F.VprimeUnits g)⁻¹ : (TensorPow M)ˣ) : TensorPow M) * F.Vprime g) * F.Qproj T) := by
+        rw [Matrix.mul_assoc]                           -- `mat_mult_associative`
+                                                        -- （`A → (V̌')^{-1}`、`B → V̌'`、`C → Q̌_ε`）を右辺から左辺へ
+    _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ) • ((1 : TensorPow M) * F.Qproj T) := by
+        rw [← F.VprimeUnits_val g, (F.VprimeUnits g).inv_mul]
+                                                        -- `def_invertible_elements_of_R`（`g → V̌'`）の `g^{-1}g = I`
+    _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ) • F.Qproj T := by
+        rw [identity_matrix_mul_tensorPow]              -- `identity_matrix_is_left_unit_of_mat_mult`（`A → Q̌_ε`）
 
 /-- **原文 `trace_of_check_Vprime` Step 2 の指数法則の 2 行の鎖**:
 `exp(ǧ(ε)) = exp(Σ_{μ=1}^{M_col} γ(θ̃_μ)(ε_μ − 1/2)) = Π_{μ=1}^{M_col} exp(γ(θ̃_μ)(ε_μ − 1/2))`

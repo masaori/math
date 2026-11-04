@@ -300,3 +300,10 @@ checked 80 lines (M_col = 2..6, 4 coupling pairs)
 checked the expansion line exactly in 6 cases (M_col = 1..6)
 negative controls (broken lines detected): 20
 RESULT: PASS
+
+##### 2026-11-04 に check_eigenvalues_of_inverse_of_check_Vprime を足した（eigenvalues_of_inverse_of_check_Vprime の証明の 11 行の鎖: (V̌')^{-1}Q̌_ε = (exp(−ǧ(ε)))_C Q̌_ε）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_eigenvalues_of_inverse_of_check_Vprime.sage
+checked 308 matrix lines (M_col = 2..4, all ε)
+checked 1488 real lines with balls (M_col = 2..6, 4 coupling pairs)
+negative controls: 84
+RESULT: PASS

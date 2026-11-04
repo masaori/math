@@ -250,6 +250,7 @@ export const ALL_LABELS = [
   "duality_c2_star_eq_s2_star_c2",
   "eigenvalues_of_V_plus",
   "eigenvalues_of_check_Vprime",
+  "eigenvalues_of_inverse_of_check_Vprime",
   "eigenvector_of_A_theta_tilde",
   "elementary_sine_bounds",
   "end_acts_on_kronecker_products",

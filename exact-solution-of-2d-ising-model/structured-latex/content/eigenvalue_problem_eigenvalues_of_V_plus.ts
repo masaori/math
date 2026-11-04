@@ -4107,6 +4107,102 @@ E_K \check{Q}_\epsilon
     },
   },
   {
+    id: "evenEigen_claim_eigenvalues_of_inverse_of_check_Vprime",
+    kind: "claim",
+    title: { tex: String.raw`\left(\check{V}'\right)^{-1} \text{ と } \check{Q}_\epsilon \text{ の積}` },
+    labels: ["eigenvalues_of_inverse_of_check_Vprime"],
+    statement: [
+      paragraph([
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " とし、",
+        math(String.raw`\check{g}(\epsilon) \in \mathbb{R}`),
+        " を ",
+        ref("eigenvalues_of_check_Vprime"),
+        " のもの、",
+        math(String.raw`\check{Q}_\epsilon`),
+        " を ",
+        ref("check_joint_eigenspace_decomposition"),
+        " のもの、",
+        math(String.raw`\left(\check{V}'\right)^{-1}`),
+        " を ",
+        ref("def_check_Vprime"),
+        " (2) の ",
+        math(String.raw`\check{V}' \in R^\times`),
+        " の逆元（",
+        ref("def_invertible_elements_of_R"),
+        "、",
+        math(String.raw`M \to M_{\mathrm{col}}`),
+        "）とする。このとき",
+      ]),
+      displayMath(
+        String.raw`\left(\check{V}'\right)^{-1}\check{Q}_\epsilon
+= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の ",
+        math(String.raw`\exp : \mathbb{R} \to \mathbb{R}`),
+        "（級数の極限なので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する）、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書く。",
+        math(String.raw`1_{\mathbb{C}} = (1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check{V}'\right)^{-1}\check{Q}_\epsilon
+&= \left(\check{V}'\right)^{-1}\bigl(1_{\mathbb{C}}\,\check{Q}_\epsilon\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{V}'\right)^{-1}\Bigl(\bigl(\exp(0)\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\Bigr)
+&&\bigl(\because\ \blkref{scalar_exp_zero}\ (K \to \mathbb{R})\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{V}'\right)^{-1}\Bigl(\bigl(\exp(-\check{g}(\epsilon) + \check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ (a \to \check{g}(\epsilon))\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{V}'\right)^{-1}\Bigl(\bigl(\exp(-\check{g}(\epsilon))\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\Bigr)
+&&\bigl(\because\ \blkref{scalar_exp_product}\ (K \to \mathbb{R},\ x \to -\check{g}(\epsilon),\ y \to \check{g}(\epsilon))\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{V}'\right)^{-1}\Bigl(\Bigl(\bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\Bigr)\check{Q}_\epsilon\Bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \exp(-\check{g}(\epsilon)),\ b \to \exp(\check{g}(\epsilon)))\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{V}'\right)^{-1}\Bigl(\bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\Bigl(\bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (m, n \to 2^{M_{\mathrm{col}}},\ a \to (\exp(-\check{g}(\epsilon)))_{\mathbb{C}},\ b \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\Bigl(\left(\check{V}'\right)^{-1}\Bigl(\bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m, n, p \to 2^{M_{\mathrm{col}}},\ a \to (\exp(-\check{g}(\epsilon)))_{\mathbb{C}},\ A \to (\check{V}')^{-1},\ B \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon)\bigr)\\
+&= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\Bigl(\left(\check{V}'\right)^{-1}\bigl(\check{V}'\,\check{Q}_\epsilon\bigr)\Bigr)
+&&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{V}'\check{Q}_\epsilon = (\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\Bigl(\Bigl(\left(\check{V}'\right)^{-1}\check{V}'\Bigr)\check{Q}_\epsilon\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m, n, p, q \to 2^{M_{\mathrm{col}}},\ A \to (\check{V}')^{-1},\ B \to \check{V}',\ C \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\bigl(I\,\check{Q}_\epsilon\bigr)
+&&\bigl(\because\ \blkref{def_invertible_elements_of_R}\ (M \to M_{\mathrm{col}},\ g \to \check{V}')\ \text{の}\ g^{-1}g = I\bigr)\\
+&= \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\bigr)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 は「(V̌')^{-1} = exp(−X̌) であり −X̌ = Σ(−γ(θ̃_μ))(ň_μ − ½I) だから、Step 1〜2 をそのまま γ(θ̃_μ) → −γ(θ̃_μ) として適用でき（eigenvalues_of_check_Vprime の Step 1〜4 も符号を替えるだけで通る）」と書いていた。本文の V̌'・X̌・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無いので、γ → −γ の代入は引ける主張を持たない。Step 1 の鎖が使う V̌' の固有関係を (V̌')^{-1} について述べ直したのがこの主張で、eigenvalues_of_check_Vprime と (V̌')^{-1}V̌' = I から導く（eigenvalues_of_check_Vprime の証明を符号を替えて繰り返さない）。Lean は Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj（EigenvalueProblem/EigenvaluesOfVPlus/ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_inverse_of_check_Vprime.sage。",
+      ],
+    },
+  },
+  {
     id: "evenEigen_007_claim_trace_of_check_Vprime",
     kind: "claim",
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 9 },
