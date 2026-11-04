@@ -3265,11 +3265,44 @@ P^{(+)} f
 := \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
-      paragraph(["と定める。"]),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\tfrac{i}{2}`),
+        " は ",
+        math(String.raw`i\,2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        "（",
+        math(String.raw`i`),
+        " は虚数単位、",
+        math(String.raw`2_{\mathbb{C}}^{-1}`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
+        " の ",
+        ref("complex_numbers_form_a_field"),
+        " の逆元。",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " の ",
+        math(String.raw`\tfrac{i}{2}`),
+        " と同じ）を表し、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " の略記として、",
+        math(String.raw`\tfrac{i}{2} K_1 H_1^{(+)}`),
+        " は、",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\tfrac{i}{2}(K_1)_{\mathbb{C}}`),
+        " による ",
+        math(String.raw`H_1^{(+)}`),
+        " のスカラー倍 ",
+        math(String.raw`\bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\bigr)H_1^{(+)}`),
+        " と読む。",
+      ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: i/2 の読み（i·2_C^{-1}。cosh_sinh_coefficient_conversion_for_check と同じ）と、(i/2)K_1H_1^{(+)} を ℂ の元 (i/2)(K_1)_C によるスカラー倍と読むことを書いた（V_plus_is_positive_definite の鎖が引く）。定めた行列は変えていない。",
         "もとの可換性の主張で未定義のまま使われていた (V_1^{(\pm)})^{1/2} を、1 ブロック 1 定義に従って独立させた。二乗が V_1^{(\pm)} に等しいことは後続の平方根の主張で証明する。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ行列の重複定義（exp((i/2)K_1H_1^{(+)}) の形）を削除してこのブロックを唯一の定義とし、式をその形にそろえた。ラベルを <def_V1_pm_square_root> から <def_V1_plus_square_root> に改めた。",
       ],
@@ -4047,7 +4080,7 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
         " のもので、",
         "実数 ", math(String.raw`\tfrac12,\ K_1,\ \tfrac12K_1`), " は、行列のスカラー倍に入るときは ",
         ref("inclusion_rr_to_cc"), " の包含で写した ", math(String.raw`\mathbb{C}`),
-        " の元を同じ記号で書き、", math(String.raw`\tfrac{i}{2} := i\cdot\tfrac12\in\mathbb{C}`), " とおく。",
+        " の元を同じ記号で書く（下の第一の鎖の後ろから 3〜6 行目の 4 行だけは、包含を ", math(String.raw`(\tfrac12)_{\mathbb{C}},\ (K_1)_{\mathbb{C}}`), " と書く）。",
         "任意の ", math(String.raw`f\in\mathcal F^{(+)}`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -4064,10 +4097,16 @@ Bf
   &&(\because\ \blkref{def_H1_plus})\\
 &=\exp\!\left(i\left(\tfrac12K_1\right)H_1^{(+)}\right)f
   &&(\because\ \blkref{end_agrees_with_matrix_vector_product})\\
-&=\exp\!\left(i\left(\tfrac12\cdot K_1\right)H_1^{(+)}\right)f
-  &&(\because\ \blkref{real_inclusion_preserves_product}\text{。実数の積 }\tfrac12K_1\text{ の像は像どうしの }\mathbb{C}\text{ の積})\\
-&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)f
+&=\exp\!\left(\Bigl(i\bigl(\bigl(\tfrac12\bigr)_{\mathbb{C}}(K_1)_{\mathbb{C}}\bigr)\Bigr)H_1^{(+)}\right)f
+  &&(\because\ \blkref{real_inclusion_preserves_product}\ (a\to\tfrac12,\ b\to K_1\text{。右辺から左辺へ})\text{。実数の積 }\tfrac12K_1\text{ の像は像どうしの }\mathbb{C}\text{ の積})\\
+&=\exp\!\left(\Bigl(\bigl(i\bigl(\tfrac12\bigr)_{\mathbb{C}}\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)f
   &&(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field})\\
+&=\exp\!\left(\Bigl(\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)f
+  &&(\because\ \blkref{real_inclusion_of_one_half_is_inverse_of_two})\\
+&=\exp\!\left(\Bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)f
+  &&(\because\ \blkref{def_V1_plus_square_root}\ \text{の読み}\ \tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1})\\
+&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)f
+  &&(\because\ \blkref{def_V1_plus_square_root}\ \text{の読み（}\mathbb{C}\ \text{の元}\ \tfrac{i}{2}(K_1)_{\mathbb{C}}\ \text{によるスカラー倍）})\\
 &=Cf
   &&(\because\ \blkref{def_V1_plus_square_root}).
 \end{aligned}`),
@@ -4123,6 +4162,7 @@ WP
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: 第一の鎖の局所の置き方 i/2 := i·(1/2) をやめ、def_V1_plus_square_root の i/2 = i·2_C^{-1} の読みへ、real_inclusion_preserves_product・ℂ の積の結合律・real_inclusion_of_one_half_is_inverse_of_two・def_V1_plus_square_root の 2 つの読みの 5 行でつないだ（後ろから 3〜6 行目は包含を (·)_C で書く）。主張は変えていない。",
         "セクター射影子による表示を上限の最大値分解から分離した。Lean の具体版は PhysicalSymTransferBridge.lean の Ising2D.symmetrized_transfer_matrix_on_sectors で、2026-11-02 に書き直す前の人手証明（九段）の形のままであり、新しい鎖と 1 対 1 ではない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。V^{(+)} の定義の参照先を <def_V_plus> にし、射影子の像の参照を <epsilon_projector_properties> (2) に直した。",
         "2026-11-02（全証明の SageMath 検算 symmetrized_transfer_matrix_on_sectors）: 主張に M_col ≥ 2・K_1, K_2 > 0 の帰属を書いた。散文で「K_1/2 を代入すると Bf = Cf」としていた段を、def_transfer_matrix_square_root・first_transfer_matrix_pauli_form（結合定数 K_1/2 の V_1'）・end_agrees_with_matrix_vector_product・V1_restriction_to_eigenspaces・def_H1_plus・real_inclusion_preserves_product・ℂ の結合律・def_V1_plus_square_root の一行一操作の鎖に、「すべての数ベクトルへの作用が等しいため BP = CP」を end の単射性（end_is_algebra_isomorphism (1)）から示す形に、ラベルの無かった「行列積の結合則」を mat_mult_associative の参照にした。W と V^{(+)} の定義に積の括弧を明示し、WP の鎖を括弧どおりの十六等号にして、括弧の付け替えを mat_mult_associative の一行ずつにした。044 の九本の浮動小数点の行単位検査は厳密な検算 sagemath/check/symmetrized_transfer_matrix_on_sectors/ に置き換えた。計算の誤りは無かった。",

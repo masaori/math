@@ -1,6 +1,6 @@
 # 対象ラベル: V_plus_is_positive_definite
 # 証明の Step 1〜3 の全ての行と主張そのものを厳密に確かめる。
-# (a) 指数の肩の行（S_1^(+) := iK_1H_1^(+)、S_2 := iK_2^*H_2 の書き換え）と Step 2 のエルミート性は、K_1・K_2^* を
+# (a) 指数の肩の行（S_1^(+) := i(K_1)_ℂH_1^(+)、S_2 := i(K_2^*)_ℂH_2 の書き換え）と Step 2 のエルミート性は、K_1・K_2^* を
 #     KG = QQ(i) 上の実の不定元にした多項式環で（任意の実数の K_1・K_2^* について成り立つ形で）確かめる。
 # (b) exp を含む行は K_1 := 2 log y、K_2 := log x（x, y ∈ {2, 3}）と選んで厳密に作る（共有の準備
 #     transfer_matrix_factor_inverses.sage）。このとき B := exp((1/2)S_1^(+)) = Σ_λ y^λ P_λ は QQ、
@@ -35,9 +35,27 @@ for M in range(2, 6):
     n = 2**M
     H1 = H1_plus(M).change_ring(P)
     H2m = H2(M).change_ring(P)
-    # Step 1 の (V_1^(+))^{1/2} の鎖: 肩 (i/2)K_1H_1^(+)（def_V1_plus_square_root）= (1/2)S_1^(+)（S_1^(+) = iK_1H_1^(+)）
+    # Step 1 の (V_1^(+))^{1/2} の鎖の肩: (i/2)K_1H_1^(+)（def_V1_plus_square_root。定義を書くだけの行で比べない）
+    #   = ((i/2)(K_1)_ℂ)H_1^(+)（定義の読みと包含。K_1 は実の不定元なので比べる中身が無い）
+    #   = ((i·2^{-1})(K_1)_ℂ)H_1^(+)（i/2 の読み）= ((i(1/2))(K_1)_ℂ)H_1^(+)（real_inclusion_of_one_half_is_inverse_of_two）
+    #   = (((1/2)i)(K_1)_ℂ)H_1^(+)（交換律）
+    #   = ((1/2)(i(K_1)_ℂ))H_1^(+)（結合律）= (1/2)((i(K_1)_ℂ)H_1^(+))（scalar_multiple_is_associative）
+    #   = (1/2)S_1^(+)（S_1^(+) の置き方と主張の略記。S1 は同じ式そのものなので比べない）
+    # 多項式環の正規形どうしの比較なので、係数の書き間違いを捕まえる検算である。
     S1 = body_scalar(iP * K1, H1)
-    eq(body_scalar(iP / 2 * K1, H1), body_scalar(P(1) / 2, S1), f"M={M}: (i/2)K_1H_1 = (1/2)S_1")
+    sh_def = body_scalar(iP / 2 * K1, H1)
+    sh_read = body_scalar((iP * P(KG(2)**(-1))) * K1, H1)
+    sh_half = body_scalar((iP * (P(1) / 2)) * K1, H1)
+    sh_comm = body_scalar(((P(1) / 2) * iP) * K1, H1)
+    sh_assoc = body_scalar((P(1) / 2) * (iP * K1), H1)
+    sh_smul = body_scalar(P(1) / 2, body_scalar(iP * K1, H1))
+    eq(sh_def, sh_read, f"M={M}: i/2 の読み")
+    eq(sh_read, sh_half, f"M={M}: 2^{{-1}} = (1/2)（右辺から左辺へ）")
+    eq(sh_half, sh_comm, f"M={M}: ℂ の積の交換律")
+    eq(sh_comm, sh_assoc, f"M={M}: ℂ の積の結合律")
+    eq(sh_assoc, sh_smul, f"M={M}: scalar_multiple_is_associative")
+    # 否定コントロール: (i/2) の 1/2 を落とした (iK_1)H_1 は (1/2)S_1 と外れる
+    neq(body_scalar(iP * K1, H1), body_scalar(P(1) / 2, S1), f"M={M}: 1/2 を落とすと外れる")
     # Step 1 の V_2 の鎖の 2 行目（S_2 = iK_2^*H_2）は S_2 の定義を書くだけの行で、確かめる中身が無い（比べない）
     S2 = body_scalar(iP * K2s, H2m)
     # Step 2: S_1^(+)・S_2 は実対称（成分の係数の虚部が 0、転置で不変）、よってエルミート。(1/2)S_1^(+) もエルミート。
@@ -86,16 +104,17 @@ for M in range(2, 5):
             eq(Vp, line1, f"M={M}: def_V_plus → 代入")
             eq(line1, line2, f"M={M}: B(cA) = c(BA)")
             eq(line2, line3, f"M={M}: (c(BA))B = c((BA)B)")
-            # Step 3 の鎖: exp(S_1/2)exp(S_2)exp(S_1/2) = BAB = B^*AB
+            # Step 3 の鎖: V^(+) = c((BA)B)（Step 1 の最後の鎖）= c(B(AB))（mat_mult_associative）= c(B^*(AB))（B^* = B）
             BAB = body_product(body_product(B, A), B)
-            BsAB = body_product(body_product(conj_transpose_exact(B), A), B)
-            eq(BAB, BsAB, f"M={M}: BAB = B^*AB")
-            # congruence_preserves_positive_definite の B^*(AB)（mat_mult_associative）と正定値性
+            step3_assoc = body_scalar(c, body_product(B, body_product(A, B)))
             BsAB2 = body_product(conj_transpose_exact(B), body_product(A, B))
-            eq(BsAB, BsAB2, f"M={M}: (B^*A)B = B^*(AB)")
+            step3_herm = body_scalar(c, BsAB2)
+            eq(Vp, line3, f"M={M}: V^(+) = c((BA)B)")
+            eq(line3, step3_assoc, f"M={M}: c((BA)B) = c(B(AB))")
+            eq(step3_assoc, step3_herm, f"M={M}: c(B(AB)) = c(B^*(AB))")
+            # congruence_preserves_positive_definite: B^*(AB) は正定値
             assert is_positive_definite_exact(BsAB2), (M, x, y)
-            # positive_real_multiple_preserves_positive_definite: V^(+) = c B^*AB は正定値（主張）
-            eq(Vp, body_scalar(c, BsAB2), f"M={M}: V^(+) = c B^*AB")
+            # positive_real_multiple_preserves_positive_definite: V^(+) = c(B^*(AB)) は正定値（主張）
             assert is_positive_definite_exact(Vp), (M, x, y)
             # 主張そのものを具体の x で: x^*V^(+)x ∈ ℝ_{>0}
             for xv in [vector(QQbar, [QQbar(k + 1) + QQbar(I) * (k % 3 - 1) for k in range(n)]),

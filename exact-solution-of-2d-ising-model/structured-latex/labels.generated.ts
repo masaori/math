@@ -441,6 +441,7 @@ export const ALL_LABELS = [
   "real_exp_series_converges",
   "real_exp_strictly_increasing",
   "real_factor_of_pauli_y_has_real_entries",
+  "real_inclusion_of_one_half_is_inverse_of_two",
   "real_inclusion_preserves_finite_sum",
   "real_inclusion_preserves_product",
   "real_inclusion_preserves_sum",

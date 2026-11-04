@@ -33,6 +33,7 @@ fi
 
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 targets=(
+  Ising2D.real_inclusion_half_eq_inv_two
   Ising2D.card_spinVal
   Ising2D.spinBit_eq
   Ising2D.rowConfigOrd

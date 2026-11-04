@@ -29,7 +29,10 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-- **人手本文 `def_V1_plus_square_root`**: `(V_1^{(+)})^{1/2} := exp((i/2) K_1 H_1^{(+)})`。 -/
+/-- **人手本文 `def_V1_plus_square_root`**: `(V_1^{(+)})^{1/2} := exp((i/2) K_1 H_1^{(+)})`。
+人手は `i/2 := i·2_ℂ^{-1}` とし、`(i/2)K_1H_1^{(+)}` を `ℂ` の元 `(i/2)(K_1)_ℂ` によるスカラー倍と読む。
+Lean は係数を `(1 / 2 : ℂ) * Complex.I * K1` と書き、`K1 : ℂ` なので包含は書かない。Lean の `(1 / 2 : ℂ)` は人手の
+`(1/2)_ℂ = 2_ℂ^{-1}`（`real_inclusion_of_one_half_is_inverse_of_two`）に当たり、並びは `((1/2)_ℂ i)K_1` で人手と交換律の分だけ違う。 -/
 noncomputable def V1plusHalf (M : ℕ) (K1 : ℂ) : TensorPow M :=
   matExp (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
 

@@ -1381,6 +1381,61 @@ b
     },
   },
   {
+    id: "calc_formulae_claim_real_inclusion_of_one_half_is_inverse_of_two",
+    kind: "claim",
+    title: { tex: String.raw`\bigl(\tfrac12\bigr)_{\mathbb{C}} = 2_{\mathbb{C}}^{-1}` },
+    labels: ["real_inclusion_of_one_half_is_inverse_of_two"],
+    statement: [
+      paragraph([
+        math(String.raw`r_{\mathbb{C}}`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " の略記とし、",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} = (2, 0) \in \mathbb{C}`),
+        " とする。",
+        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}} = (0, 0)`),
+        "（実部が ",
+        math(String.raw`2 \neq 0`),
+        "）なので、",
+        math(String.raw`2_{\mathbb{C}}`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の逆元 ",
+        math(String.raw`2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        "（",
+        math(String.raw`2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1} = 1_{\mathbb{C}}`),
+        "）をもつ。このとき",
+      ]),
+      displayMath(String.raw`\bigl(\tfrac12\bigr)_{\mathbb{C}} = 2_{\mathbb{C}}^{-1}`),
+      paragraph(["が成り立つ（", math(String.raw`\tfrac12 \in \mathbb{R}`), " は ", math(String.raw`2`), " の ", math(String.raw`\mathbb{R}`), " の逆数）。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\bigl(\tfrac12\bigr)_{\mathbb{C}}
+&= \bigl(\tfrac12\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \bigl(\tfrac12\bigr)_{\mathbb{C}}\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ 2_{\mathbb{C}}^{-1}\ \text{は}\ 2_{\mathbb{C}}\ \text{の}\ \blkref{complex_numbers_form_a_field}\ \text{の逆元（主張の前置き）})\\
+&= \Bigl(\bigl(\tfrac12\bigr)_{\mathbb{C}}\,2_{\mathbb{C}}\Bigr)2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\tfrac12\cdot 2\bigr)_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \tfrac12,\ b \to 2)\text{。}2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}})\\
+&= (1)_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&(\because\ \mathbb{R}\ \text{で}\ \tfrac12\cdot 2 = 1)\\
+&= 1_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = (1)_{\mathbb{C}})\\
+&= 2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_V1_plus_square_root の i/2 := i·2_C^{-1}（cosh_sinh_coefficient_conversion_for_check と同じ読み）から、real_multiple_of_hermitian_is_hermitian などが使う (1/2)_C の形へ移るために足した（V_plus_is_positive_definite の (V_1^{(+)})^{1/2} の鎖が右辺から左辺へ引く）。complex_numbers_form_a_field を引くので、その後ろに置いた。Lean の具体版は Ising2D.real_inclusion_half_eq_inv_two。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

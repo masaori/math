@@ -1773,7 +1773,7 @@ D_0G
     proof: [
       paragraph([
         "以下 ",
-        math(String.raw`B := \left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac12 iK_1H_1^{(+)}\right)`),
+        math(String.raw`B := \left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)`),
         "（",
         ref("def_V1_plus_square_root"),
         "）と略記し、",
@@ -2096,6 +2096,7 @@ D_0G
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: 証明の冒頭の B の右辺 exp((1/2)iK_1H_1^{(+)}) を、def_V1_plus_square_root の式どおり exp((i/2)K_1H_1^{(+)}) に書いた（i/2 := i·2_C^{-1} の読みと食い違わないように。値は不変）。",
         "この主張が章 C′ の最後の欠けていた入力である。ε の固有値 η がどちらになるかは固有値 Λ̌_ε の値からは読めないが、tr(εV^{(+)}) は転送行列の側で完全に初等的に計算でき、しかも正であることが分かる。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5・6 組の (K_1,K_2) で、行列指数関数から直接構成した V^{(+)} のトレースと閉じた式の相対差 ≤ 6e-15）。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",

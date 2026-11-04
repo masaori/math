@@ -4537,9 +4537,9 @@ E_K \check{Q}_\epsilon
       paragraph([
         ref("iH_is_real_symmetric"),
         " の ",
-        math(String.raw`S_1^{(+)} := iK_1H_1^{(+)}`),
+        math(String.raw`S_1^{(+)} := i(K_1)_{\mathbb{C}}H_1^{(+)}`),
         "、",
-        math(String.raw`S_2 := iK_2^*H_2`),
+        math(String.raw`S_2 := i(K_2^*)_{\mathbb{C}}H_2`),
         " について、",
         ref("def_V_plus"),
         " の ",
@@ -4560,6 +4560,10 @@ E_K \check{Q}_\epsilon
         math(String.raw`r_{\mathbb{C}}`),
         " は ",
         ref("inclusion_rr_to_cc"),
+        " の略記、",
+        math(String.raw`\tfrac12 S_1^{(+)}`),
+        " は ",
+        math(String.raw`\bigl(\tfrac12\bigr)_{\mathbb{C}}S_1^{(+)}`),
         " の略記）。このとき ",
         math(String.raw`V^{(+)}`),
         " は正定値（",
@@ -4585,18 +4589,36 @@ E_K \check{Q}_\epsilon
         String.raw`\begin{aligned}
 \left(V_1^{(+)}\right)^{1/2}
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad (\because \left(V_1^{(+)}\right)^{1/2} \text{ の定義}) \\
+   \quad (\because \blkref{def_V1_plus_square_root}) \\
+&= \exp\!\left(\Bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)
+   \quad (\because \blkref{def_V1_plus_square_root}\text{ の読み（}\mathbb{C}\text{ の元 }\tfrac{i}{2}(K_1)_{\mathbb{C}}\text{ によるスカラー倍）}) \\
+&= \exp\!\left(\Bigl(\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)
+   \quad (\because \blkref{def_V1_plus_square_root}\text{ の }\tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1}) \\
+&= \exp\!\left(\Bigl(\bigl(i\bigl(\tfrac12\bigr)_{\mathbb{C}}\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)
+   \quad (\because \blkref{real_inclusion_of_one_half_is_inverse_of_two}\text{（右辺から左辺へ）}) \\
+&= \exp\!\left(\Bigl(\bigl(\bigl(\tfrac12\bigr)_{\mathbb{C}}i\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)
+   \quad (\because \mathbb{C}\text{ の積の交換律 }\blkref{complex_numbers_form_a_field}) \\
+&= \exp\!\left(\Bigl(\bigl(\tfrac12\bigr)_{\mathbb{C}}\bigl(i(K_1)_{\mathbb{C}}\bigr)\Bigr)H_1^{(+)}\right)
+   \quad (\because \mathbb{C}\text{ の積の結合律 }\blkref{complex_numbers_form_a_field}) \\
+&= \exp\!\left(\bigl(\tfrac12\bigr)_{\mathbb{C}}\Bigl(\bigl(i(K_1)_{\mathbb{C}}\bigr)H_1^{(+)}\Bigr)\right)
+   \quad (\because \blkref{scalar_multiple_is_associative}\text{（}m,n \to 2^{M_{\mathrm{col}}},\ a \to \bigl(\tfrac12\bigr)_{\mathbb{C}},\ b \to i(K_1)_{\mathbb{C}},\ A \to H_1^{(+)}\text{。右辺から左辺へ）}) \\
+&= \exp\!\left(\bigl(\tfrac12\bigr)_{\mathbb{C}}S_1^{(+)}\right)
+   \quad (\because S_1^{(+)} = i(K_1)_{\mathbb{C}}H_1^{(+)}) \\
 &= \exp\!\left(\tfrac12 S_1^{(+)}\right)
-   \quad (\because S_1^{(+)} = iK_1H_1^{(+)})
+   \quad (\because \text{主張の略記 }\tfrac12 S_1^{(+)} = \bigl(\tfrac12\bigr)_{\mathbb{C}}S_1^{(+)})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 V_2
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)
+   \quad (\because \blkref{V2_exponential_representation}) \\
 &= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)
-   \quad (\because \blkref{V2_exponential_representation}\text{。係数の }\mathbb{R}_{>0}\subset\mathbb{C}\text{ は }\blkref{inclusion_rr_to_cc}\text{ の包含}) \\
+   \quad (\because \text{係数の }(2s_2)^{M_{\mathrm{col}}/2}\in\mathbb{R}_{>0}\subset\mathbb{C}\text{ は }\blkref{inclusion_rr_to_cc}\text{ の包含}) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\exp\!\left(i(K_2^*)_{\mathbb{C}}H_2\right)
+   \quad (\because \blkref{V2_exponential_representation}\text{ の }K_2^*\in\mathbb{R}_{>0}\subset\mathbb{C}\text{ は }\blkref{inclusion_rr_to_cc}\text{ の包含}) \\
 &= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\exp(S_2)
-   \quad (\because S_2 = iK_2^*H_2)
+   \quad (\because S_2 = i(K_2^*)_{\mathbb{C}}H_2)
 \end{aligned}`,
       ),
       paragraph([
@@ -4649,17 +4671,27 @@ V^{(+)}
         " もエルミート（実係数倍、",
         ref("real_multiple_of_hermitian_is_hermitian"),
         "（",
-        math(String.raw`\alpha \to \tfrac12,\ A \to S_1^{(+)}`),
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ \alpha \to \tfrac12,\ A \to S_1^{(+)}`),
         "））であり、",
         ref("exp_hermitian_is_positive_definite"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`S \to \tfrac12 S_1^{(+)}`),
         " と ",
+        math(String.raw`S \to S_2`),
+        "）と ",
         ref("exp_of_negative_is_left_inverse"),
-        " より",
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to \tfrac12 S_1^{(+)}`),
+        "）より",
       ]),
       list([
         [
           math(String.raw`B`),
-          " は正定値（とくにエルミート）で、",
+          " は正定値（",
+          ref("def_hermitian_positive_definite"),
+          " の正定値はエルミートな行列について定めるので、とくにエルミート）で、",
           math(String.raw`B' := \exp\!\left(-\tfrac12 S_1^{(+)}\right)`),
           " は ",
           math(String.raw`B'B = I`),
@@ -4667,46 +4699,49 @@ V^{(+)}
         ],
         [math(String.raw`A`), " は正定値"],
       ]),
-      paragraph([
-        "Step 3（正定値性）。",
-        math(String.raw`B`),
-        " がエルミートなので ",
-        math(String.raw`B^* = B`),
-        " であり、",
-      ]),
+      paragraph(["Step 3（正定値性）。Step 1 の記号のもとで"]),
       displayMath(
         String.raw`\begin{aligned}
-\exp\!\left(\tfrac12 S_1^{(+)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(+)}\right)
-&= BAB
-   \quad (\because B,\ A \text{ の定義（Step 1）}) \\
-&= B^*AB
-   \quad (\because B^* = B)
+V^{(+)}
+&= c\bigl((BA)B\bigr)
+   \quad (\because \text{Step 1 の最後の鎖}) \\
+&= c\bigl(B(AB)\bigr)
+   \quad (\because \blkref{mat_mult_associative}) \\
+&= c\bigl(B^*(AB)\bigr)
+   \quad (\because B \text{ はエルミート（Step 2）なので }B^* = B\text{。}\blkref{def_hermitian_positive_definite}\text{ のエルミートの定義})
 \end{aligned}`,
       ),
       paragraph([
+        "である。",
         ref("congruence_preserves_positive_definite"),
-        " より ",
-        math(String.raw`B^*AB = B^*(AB)`),
         "（",
-        ref("mat_mult_associative"),
-        "）は正定値。",
-        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
-        " より ",
-        math(String.raw`s_2 = \sinh 2K_2 > 0`),
-        " なので ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
-        "（",
-        ref("def_second_transfer_matrix_prefactor"),
-        "）であり、",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to A,\ B \to B,\ B' \to B'`),
+        "。",
+        math(String.raw`A`),
+        " は正定値、",
+        math(String.raw`B'B = I`),
+        " は Step 2）より ",
+        math(String.raw`B^*(AB)`),
+        " は正定値である。また",
+      ]),
+      displayMath(
+        String.raw`(2s_2)^{M_{\mathrm{col}}/2} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}
+   \quad (\because \text{等号は }\blkref{def_indexed_hyperbolic_abbreviations}\text{（添字 }i \to 2\text{）の }s_2 = \sinh 2K_2\text{、所属は }\blkref{def_second_transfer_matrix_prefactor})`,
+      ),
+      paragraph([
+        "なので、",
         ref("positive_real_multiple_preserves_positive_definite"),
-        " より ",
-        math(String.raw`V^{(+)} = cB^*AB`),
-        "（Step 1 と上の鎖）も正定値である。",
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ \alpha \to (2s_2)^{M_{\mathrm{col}}/2},\ A \to B^*(AB)`),
+        "）より ",
+        math(String.raw`V^{(+)} = c\bigl(B^*(AB)\bigr)`),
+        " は正定値である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: 名前だけの根拠を参照にした。Step 1 の (V_1^{(+)})^{1/2} の鎖の「(V_1^{(+)})^{1/2} の定義」を def_V1_plus_square_root に替え、「S_1^{(+)} = iK_1H_1^{(+)}」の 1 行が包含・ℂ の積の組み替え・スカラー倍の結合を同時にしていたのを、一つずつの行に分けた（def_V1_plus_square_root のスカラー倍の読み（K_1 の包含）、同じブロックに書いた i/2 = i·2_C^{-1} の読み、新しい主張 real_inclusion_of_one_half_is_inverse_of_two（2_C^{-1} = (1/2)_C）、ℂ の積の交換律、結合律、scalar_multiple_is_associative、S_1^{(+)} の置き方、主張の略記の 8 行。主張に (1/2)S_1^{(+)} = (1/2)_C S_1^{(+)} の略記を書いた）。S_1^{(+)}・S_2 を iH_is_real_symmetric の書き方 i(K_1)_C H_1^{(+)}・i(K_2^*)_C H_2 に揃え、V_2 の鎖の係数の包含と K_2^* の包含をそれぞれ 1 行にした。Step 2 の「正定値（とくにエルミート）」に def_hermitian_positive_definite を引き、引く主張に代入を書いた。Step 3 を、V^{(+)} = c((BA)B) = c(B(AB)) = c(B^*(AB))（mat_mult_associative、def_hermitian_positive_definite のエルミートの定義）の鎖と、congruence_preserves_positive_definite・(2s_2)^{M_col/2} = (2 sinh 2K_2)^{M_col/2} ∈ ℝ_{>0}（def_indexed_hyperbolic_abbreviations、def_second_transfer_matrix_prefactor）・positive_real_multiple_preserves_positive_definite に書き直した（結論に使っていなかった s_2 > 0 の文を外した）。主張の値は変えていない。",
         "2026-11-02: 主張・Step 1 の V_2 の鎖・Step 3 の係数を ((2s_2)^{M_col/2})_C（inclusion_rr_to_cc の包含）と書いた。主張は不変。",
         "009 章の V_is_positive_definite の (+) セクター版。009 章の主張は V_eq_Vprime の V（why_008_applies_only_to_minus_sector で確定したとおり実質 (−) 専用）に結びついているので、V^{(+)} について改めて述べた。証明で使う iH_is_real_symmetric と exp_hermitian_is_positive_definite はどちらも複号によらない形で述べられているので、内容は旧複合ブロックの Step 1〜3 と同一である。Lean の対応定理は Ising2D.VPlus_posDef。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05（S_1^{(+)}, S_2 の実対称性の残差 0.0、V^{(+)} のエルミート性の残差 ≤ 2.0e-12、固有値の全体最小 3.2e-4 > 0、M=2,3,4,5・6 組の (K_1,K_2)）。",

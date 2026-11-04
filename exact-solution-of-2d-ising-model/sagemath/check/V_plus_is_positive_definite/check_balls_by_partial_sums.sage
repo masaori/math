@@ -66,7 +66,7 @@ for M in range(2, 5):
             assert balls_overlap(Bp * B, Id); n_lines += 1
             Vp = (B * V2) * B                          # def_V_plus
             rows = [Vp, (B * (CB(c) * A)) * B, (CB(c) * (B * A)) * B, CB(c) * ((B * A) * B),
-                    CB(c) * ((ball_conj_transpose(B) * A) * B), CB(c) * (ball_conj_transpose(B) * (A * B))]
+                    CB(c) * (B * (A * B)), CB(c) * (ball_conj_transpose(B) * (A * B))]   # Step 3 の鎖: 結合、B^* = B
             for q in range(len(rows) - 1):
                 assert balls_overlap(rows[q], rows[q + 1]), (M, K1, K2s, q)
                 n_lines += 1
