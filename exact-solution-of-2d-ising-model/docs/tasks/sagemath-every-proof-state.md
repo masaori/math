@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 408 件のうち、SageMath の検算が無いもの 28 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 410 件のうち、SageMath の検算が無いもの 26 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -364,12 +364,16 @@
 
 - `H1_plus_in_sigma_z_form`（iH_1^{(+)} = D_0 + εG）と、そのために足した `pauli_y_times_pauli_x`（σ^yσ^x = (−i)σ^z）・`pauli_x_times_pauli_z`（σ^xσ^z = (−i)σ^y）: `sagemath/check/H1_plus_in_sigma_z_form/`・`sagemath/check/pauli_y_times_pauli_x/`・`sagemath/check/pauli_x_times_pauli_z/`。準備 1〜4 と最後の鎖の全ての行を、サイトの積・クロネッカー積・因子の積・スカラー倍を本文の定め方の成分の式で組んで QQ(i) で厳密に確かめた（M_col = 2..5、等号・主張 330 件、否定コントロール 16 件）。主張は Sage の tensor_product だけの独立な経路でも確かめた。人手証明の計算の誤りは無し。証明が「V1_in_Z_Y_epsilon の Step 0」（他のブロックの証明の途中）と、ラベルの無い「相異なるサイトの因子は可換」で並べ替えと同じサイトの積を一度に行う段を根拠にしていたので、1 サイトの積を新しい二つの主張にし、証明を Y_m・Z_{m+1}・ε・σ^zσ^z のクロネッカー積表示（準備 1・2）と内部の辺・境界の辺の (∵) 付きの鎖（準備 3・4）と主張の左辺から始まる鎖に書き直した（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean の `ClaimH1PlusInSigmaZForm.lean` は変えていない（新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `D0_G_diagonal_action`（D_0f_{ι(s)} = (Σ_{m=1}^{M_col−1} s(m)s(m+1))_ℂ f_{ι(s)}、Gf_{ι(s)} = (s(M_col)s(1))_ℂ f_{ι(s)}）: `sagemath/check/D0_G_diagonal_action/`。準備（各 m の 8 行）・開鎖項（6 行）・周期境界項（9 行）の鎖の全ての行を、σ_m^z と f_{ι(s)} を def_kronecker (2) の成分の式で、積・スカラー倍・有限和・ℂ の積・ℝ→ℂ の包含を本文の定め方で組み、M_col = 2..6・全ての s で QQ(i) で厳密に確かめた（等号・主張 6757 件、否定コントロール 20 件）。主張は Sage の tensor_product と `*` だけの独立な経路でも確かめた。人手証明の計算の誤りは無し。名前だけの根拠をラベル参照にし、積の結合律と σ^z の作用を一行にまとめていた段を分け、係数に ℝ→ℂ の包含を書いた（値は不変）。一回のレビューで必須の指摘は無し。Lean は変えていない（新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `D0_G_diagonal_action`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_D0_G_pairwise_commute`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`D0_G_diagonal_action` のレビューで見つかった（下流の書き方。今回の差分より前から）: `trace_of_epsilon_V_plus` の Step 3 (a) は G_{ι(s),ι(s)} = s(M_col)s(1) と ℝ→ℂ の包含を書かずに読み取り、多重添字 ι(s) を ν を通さずに行列の番号に使っている。値は食い違わない。`trace_of_epsilon_V_plus` の検算の回に揃える。
 
 - 2026-11-04、`trace_of_epsilon_V_plus_via_check_eigenvalues` のレビューで見つかった（下流の「> 0」の橋。今回の差分より前から）: この主張は ℂ の元の z > 0 を「z = r_ℂ なる r ∈ ℝ_{>0} がある」と主張文で定めたが、下流の `max_eigenvector_in_even_sector` (1) と `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` (2) が「tr(εV^{(+)}) > 0」を得る `trace_of_epsilon_V_plus` は「tr(εV^{(+)}) = … ∈ ℝ_{>0}」と包含を書かずに述べている。読めば同じ意味だが、二つの「> 0」をつなぐ行が無い。直すには z > 0 の定義を独立の定義のブロックへ出し、`trace_of_epsilon_V_plus` を包含の形で述べる。主張文に K_1, K_2 ∈ ℝ_{>0}・M_col ∈ ℤ_{≥2} の前提を書いていないのも姉妹の主張と同じ既存の書き方である。検算の付いたブロックの見直しで扱う。
 

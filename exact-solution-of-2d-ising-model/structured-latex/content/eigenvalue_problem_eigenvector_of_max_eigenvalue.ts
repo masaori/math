@@ -2213,9 +2213,11 @@ i\,H_1^{(+)}
     labels: ["D0_G_diagonal_action"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とする。",
         ref("def_config_basis_iso"),
         " の基底 ",
-        math(String.raw`f_{\iota(s)}`),
+        math(String.raw`f_{\iota(s)} \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         "（",
         math(String.raw`s\in\mathfrak M`),
         "）に対し、",
@@ -2229,11 +2231,25 @@ i\,H_1^{(+)}
         " は次のように作用する。",
       ]),
       displayMath(String.raw`D_0 f_{\iota(s)}
-=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)f_{\iota(s)},
+=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)_{\mathbb{C}}f_{\iota(s)},
 \qquad
-G f_{\iota(s)}=s(M_{\mathrm{col}})s(1)f_{\iota(s)}`),
+G f_{\iota(s)}=\bigl(s(M_{\mathrm{col}})s(1)\bigr)_{\mathbb{C}}f_{\iota(s)}`),
       paragraph([
-        "ここでスピン配置を ",
+        "ここで ",
+        math(String.raw`s(m)\in\{-1,1\}\subset\mathbb{R}`),
+        "、括弧の中の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積、和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍、左辺の積は ",
+        ref("mat_mult"),
+        " の数ベクトルへの作用である。スピン配置を ",
         math(String.raw`s`),
         " と書くのは、",
         math(String.raw`\mu`),
@@ -2244,53 +2260,69 @@ G f_{\iota(s)}=s(M_{\mathrm{col}})s(1)f_{\iota(s)}`),
     ],
     proof: [
       paragraph([
-        ref("sigma_z_diagonal_action"),
-        " より、各 ",
+        "準備。各 ",
         math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
-        " について一サイトずつ作用させると",
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
-&=\sigma_m^z\bigl(s(m+1)f_{\iota(s)}\bigr)
-&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }m+1\text{ に適用}\bigr)\\
-&=s(m+1)\sigma_m^zf_{\iota(s)}
-&&\bigl(\because\ \text{行列作用の複素線型性}\bigr)\\
-&=s(m+1)\bigl(s(m)f_{\iota(s)}\bigr)
-&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }m\text{ に適用}\bigr)\\
-&=\bigl(s(m+1)s(m)\bigr)f_{\iota(s)}
-&&\bigl(\because\ \text{スカラー倍の結合律}\bigr)\\
-&=s(m)s(m+1)f_{\iota(s)}
-&&\bigl(\because\ \text{実数の積の交換律}\bigr).
+&=\sigma_m^z\bigl(\sigma_{m+1}^zf_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_m^z\bigl(s(m+1)_{\mathbb{C}}f_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{sigma_z_diagonal_action}\ (\mu\to s,\ m\to m+1)\bigr)\\
+&=s(m+1)_{\mathbb{C}}\bigl(\sigma_m^zf_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&=s(m+1)_{\mathbb{C}}\bigl(s(m)_{\mathbb{C}}f_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{sigma_z_diagonal_action}\ (\mu\to s,\ m\to m)\bigr)\\
+&=\bigl(s(m+1)_{\mathbb{C}}\,s(m)_{\mathbb{C}}\bigr)f_{\iota(s)}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&=\bigl(s(m+1)s(m)\bigr)_{\mathbb{C}}f_{\iota(s)}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr)\\
+&=\bigl(s(m)s(m+1)\bigr)_{\mathbb{C}}f_{\iota(s)}
+&&\bigl(\because\ \mathbb{R}\text{ の積の交換律}\bigr).
 \end{aligned}`),
+      paragraph(["開鎖項について。"]),
       displayMath(String.raw`\begin{aligned}
 D_0f_{\iota(s)}
 &=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)f_{\iota(s)}
-&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
-&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
-&&\bigl(\because\ \text{行列作用の有限和への分配法則}\bigr)\\
-&=\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)f_{\iota(s)}
-&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
-&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)f_{\iota(s)}
-&&\bigl(\because\ \text{ベクトルの有限和の分配法則}\bigr).
+&&\bigl(\because\ \blkref{def_D0_open_chain_operator}\bigr)\\
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}\Bigl((\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\ (r\to M_{\mathrm{col}}-1)\bigr)\\
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}\Bigl(\bigl(s(m)s(m+1)\bigr)_{\mathbb{C}}f_{\iota(s)}\Bigr)
+&&\bigl(\because\ \text{準備の等式を各 }m\text{ へ同時に適用}\bigr)\\
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\bigl(s(m)s(m+1)\bigr)_{\mathbb{C}}\right)f_{\iota(s)}
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (r\to M_{\mathrm{col}}-1,\ c_j\to(s(j)s(j+1))_{\mathbb{C}})\bigr)\\
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)_{\mathbb{C}}f_{\iota(s)}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m\to M_{\mathrm{col}}-1,\ r_j\to s(j)s(j+1))\bigr).
 \end{aligned}`),
-      paragraph(["境界項にも同じ一サイト作用を二回適用する。"]),
+      paragraph(["周期境界項について。"]),
       displayMath(String.raw`\begin{aligned}
 Gf_{\iota(s)}
 &=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)f_{\iota(s)}
-&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
-&=\sigma_{M_{\mathrm{col}}}^z\bigl(s(1)f_{\iota(s)}\bigr)
-&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }1\text{ に適用}\bigr)\\
-&=s(1)\sigma_{M_{\mathrm{col}}}^zf_{\iota(s)}
-&&\bigl(\because\ \text{行列作用の複素線型性}\bigr)\\
-&=s(1)\bigl(s(M_{\mathrm{col}})f_{\iota(s)}\bigr)
-&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }M_{\mathrm{col}}\text{ に適用}\bigr)\\
-&=\bigl(s(1)s(M_{\mathrm{col}})\bigr)f_{\iota(s)}
-&&\bigl(\because\ \text{スカラー倍の結合律}\bigr)\\
-&=s(M_{\mathrm{col}})s(1)f_{\iota(s)}
-&&\bigl(\because\ \text{実数の積の交換律}\bigr).
+&&\bigl(\because\ \blkref{def_G_boundary_operator}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(\sigma_1^zf_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(s(1)_{\mathbb{C}}f_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{sigma_z_diagonal_action}\ (\mu\to s,\ m\to 1)\bigr)\\
+&=s(1)_{\mathbb{C}}\bigl(\sigma_{M_{\mathrm{col}}}^zf_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&=s(1)_{\mathbb{C}}\bigl(s(M_{\mathrm{col}})_{\mathbb{C}}f_{\iota(s)}\bigr)
+&&\bigl(\because\ \blkref{sigma_z_diagonal_action}\ (\mu\to s,\ m\to M_{\mathrm{col}})\bigr)\\
+&=\bigl(s(1)_{\mathbb{C}}\,s(M_{\mathrm{col}})_{\mathbb{C}}\bigr)f_{\iota(s)}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&=\bigl(s(1)s(M_{\mathrm{col}})\bigr)_{\mathbb{C}}f_{\iota(s)}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr)\\
+&=\bigl(s(M_{\mathrm{col}})s(1)\bigr)_{\mathbb{C}}f_{\iota(s)}
+&&\bigl(\because\ \mathbb{R}\text{ の積の交換律}\bigr).
 \end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "数値検証: sagemath/check/D0_G_diagonal_action/。",
+        "2026-11-04: SageMath の検算を付けるときに、証明の名前だけの根拠をラベル参照にした。旧い証明は (σ_m^zσ_{m+1}^z)f = σ_m^z(s(m+1)f) の一行で積の結合律と sigma_z_diagonal_action の二つを使っていたので、mat_mult_associative の行を分けた。「行列作用の複素線型性」を scalar_multiple_factors_out_of_right_factor、「スカラー倍の結合律」を scalar_multiple_is_associative、「行列作用の有限和への分配法則」を finite_sum_of_matrices_distributes_in_left_factor、「ベクトルの有限和の分配法則」を finite_sum_of_scalar_multiples_of_one_matrix で引いた。sigma_z_diagonal_action の係数は実数の包含 μ(m)_ℂ なので、主張と証明の係数に ℝ→ℂ の包含を書き、包含と積・有限和の入れ替えを real_inclusion_preserves_product・real_inclusion_preserves_finite_sum で引いた。主張文に M_col ∈ ℤ_{≥2}（有限和の項数 M_col − 1 ≥ 1）を書いた。値は変えていない。",
+      ],
+    },
   },
   {
     id: "closing_claim_epsilon_D0_G_pairwise_commute",
