@@ -34,6 +34,12 @@ Step 3 の冒頭の `exp(−ǧ(ε))` の 4 行の鎖は `exp_neg_gval_step3_prod
 （具体版 `Ising2D.cosh_is_even`）、Step 2 の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words`（`binWordSum_ofReal`）を右辺から左辺へ、
 Step 1 の鎖 `trace_Vprime_step1` を右辺から左辺へ）は、`trace_Vprime_inv` の `M = r + 1` の最後の 5 段と 1 対 1 である。
 
+## 原文 Step 4 との対応
+
+各 `μ` の 3 行の鎖 `2cosh(γ(θ̃_μ)/2) ≥ 2·1 = 2 > 0` は `two_cosh_half_step4` の `calc` と 1 対 1 である（`cosh_at_least_one` は
+具体版 `Ising2D.cosh_at_least_one`）。最後の鎖（`tr(V̌') = Π 2cosh` と「正数の有限積は正」）は、`trace_Vprime_pos` ではまだ
+`trace_Vprime` と mathlib の `Finset.prod_pos` である。
+
 ## 章 009 との違い
 
 章 009 の `trace_of_Vprime` は `tr(V') = 2^{M-m} ∏_μ 2cosh(γ_μ/2)` だった。
@@ -53,6 +59,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
 namespace Ising2D
 
@@ -493,13 +500,23 @@ theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
       _ = (F.Vprime g).trace :=
           (trace_Vprime_step1 F g).symm                 -- Step 1 の `tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ` の鎖を右辺から左辺へ
 
-/-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') > 0`（`cosh ≥ 1`）。 -/
+/-- **原文 `trace_of_check_Vprime` Step 4 の各 `μ` の 3 行の鎖**:
+`2cosh(γ(θ̃_μ)/2) ≥ 2·1 = 2 > 0`（人手の `γ(θ̃_μ)` が Lean の `x`）。3 段は人手の 3 行と 1 対 1 である。
+人手は鎖の前に `gamma_theta_tilde_mu_positive` で `γ(θ̃_μ) ∈ ℝ_{>0}` を述べるが、鎖はその正値性を使わない（`x` は任意の実数でよい）。 -/
+theorem two_cosh_half_step4 (x : ℝ) : 2 * Real.cosh (x / 2) > 0 :=
+  calc 2 * Real.cosh (x / 2)
+      ≥ 2 * 1 := mul_le_mul_of_nonneg_left (cosh_at_least_one (x / 2)) two_pos.le
+                                                        -- `cosh_at_least_one`（`x → γ(θ̃_μ)/2`）の両辺に `2 > 0` を掛ける
+    _ = 2 := mul_one 2                                  -- `2·1 = 2`
+    _ > 0 := two_pos                                    -- `2 > 0`
+
+/-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') = (r)_ℂ`、`r ∈ ℝ_{>0}`。
+各因子の正値性は人手の各 `μ` の鎖と 1 対 1 の `two_cosh_half_step4`。「正数の有限積は正」はまだ mathlib の `Finset.prod_pos` で、
+`tr(V̌') = Π 2cosh` は `trace_Vprime` である（どちらも人手の最後の鎖を書き直すときに 1 対 1 にする）。 -/
 theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :
     ∃ r : ℝ, 0 < r ∧ (F.Vprime g).trace = (r : ℂ) := by
   refine ⟨∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)), ?_, F.trace_Vprime g⟩
-  refine Finset.prod_pos fun i _ => ?_
-  have : (0 : ℝ) < Real.cosh (g i / 2) := Real.cosh_pos _
-  linarith
+  exact Finset.prod_pos fun i _ => two_cosh_half_step4 (g i)
 
 end CheckFermiSetup
 

@@ -1969,6 +1969,10 @@ targets=(
   Ising2D.cosh_is_even
   "Ising2D.NecSuf.symmetrized_sum_is_even'"
   Ising2D.cosh_is_even_of_necSuf
+  Ising2D.cosh_at_least_one
+  "Ising2D.NecSuf.one_add_two_mul_sq_ge_one'"
+  Ising2D.cosh_at_least_one_of_necSuf
+  Ising2D.CheckFermiSetup.two_cosh_half_step4
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul
   Ising2D.VPlus_posDef
