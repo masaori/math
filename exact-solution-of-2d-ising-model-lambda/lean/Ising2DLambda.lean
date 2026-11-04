@@ -1225,6 +1225,9 @@ import Ising2DLambda.KacWard.CellBoundaryWinding
 import Ising2DLambda.KacWard.WalkEqualsCellBoundary
 import Ising2DLambda.NecSuf.KacWard.WalkEqualsCellBoundary
 import Ising2DLambda.KacWard.WalkEqualsCellBoundaryFromNecSuf
+import Ising2DLambda.KacWard.CellSetBoundaryCoefficients
+import Ising2DLambda.NecSuf.KacWard.CellSetBoundaryCoefficients
+import Ising2DLambda.KacWard.CellSetBoundaryCoefficientsFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.DirectedWindingParity
 import Ising2DLambda.KacWard.DirectedWindingParity
 import Ising2DLambda.KacWard.RepresentativeIncrement

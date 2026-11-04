@@ -6038,7 +6038,7 @@ b&=(a+2b)-(a+b)
 &\in\{4-4,\ 4-(-4),\ (-4)-4,\ (-4)-(-4)\}
 &&\bigl(\because\ a+2b\in\{4,-4\},\ a+b\in\{4,-4\}\text{ の有限な全列挙}\bigr)\\
 &=\{0,\ 8,\ -8\}
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                   paragraph([
                     "残る二候補 ", math(String.raw`b=8`), " と ", math(String.raw`b=-8`),
@@ -62407,6 +62407,94 @@ s(j')-s(j)
 &=\sum_{(i,j)\in S}0
 &&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\bigr)\\
 &=0&&\bigl(\because\ \mathbb Z\text{ の有限和}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_cell_set_boundary_coefficients",
+              labels: [],
+              title: { text: "有限セル集合の境界の各辺の係数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_cell_set_boundary_coefficients",
+                  beforeFocus: [],
+                  focus: {
+                    id: "kac_ward_claim_cell_set_boundary_coefficients",
+                    kind: "claim",
+                    title: { text: "セル集合の境界係数は両側セルの所属差である" },
+                    labels: ["claim_cell_set_boundary_coefficients"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cell-set-boundary-coefficients"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellContribution_horizontal",
+                      "Ising2DLambda.KacWard.cellContribution_vertical",
+                      "Ising2DLambda.KacWard.cellSetEdgeCoefficient_horizontal",
+                      "Ising2DLambda.KacWard.cellSetEdgeCoefficient_vertical",
+                      "Ising2DLambda.NecSuf.KacWard.finiteBoundaryIndicatorDifference",
+                      "Ising2DLambda.KacWard.cellSetEdgeCoefficient_horizontal_from_necSuf",
+                      "Ising2DLambda.KacWard.cellSetEdgeCoefficient_vertical_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), "、有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), "、",
+                        math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について、",
+                        "境界鎖の辺係数（", ref("def_signed_edge_coefficient"), "）は",
+                      ]),
+                      displayMath(String.raw`[\partial_\square S]_{n_{\mathrm h}(i,j)}
+=\mathbf1_{(i,j)\in S}-\mathbf1_{(i-1,j)\in S},\qquad
+[\partial_\square S]_{n_{\mathrm v}(i,j)}
+=\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}\quad\text{in }\mathbb Z`),
+                      paragraph([
+                        "となる。辺の名前は ", ref("claim_edge_row_partition"),
+                        " による。", math(String.raw`L=1`),
+                        " で両側が同じセルでも、二つの項を重複を保って数える。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "任意の ", math(String.raw`r,c\in\mathbb Z/L\mathbb Z`),
+                        " を取る。四辺列 ", math(String.raw`B_L(r,c)`),
+                        " で横辺 ", math(String.raw`n_{\mathrm h}(i,j)`),
+                        " に寄与するのは ", math(String.raw`(r,c)=(i,j)`),
+                        " の正向きの辺と ", math(String.raw`(r,c)=(i-1,j)`),
+                        " の逆向きの辺だけである（", ref("claim_cell_boundary_winding_zero"),
+                        "、", ref("claim_edge_row_partition"), "）。よって",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S]_{n_{\mathrm h}(i,j)}
+&=\sum_{(r,c)\in S}[B_L(r,c)]_{n_{\mathrm h}(i,j)}
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と境界鎖の定義}\bigr)\\
+&=\sum_{(r,c)\in S}
+  \bigl(\mathbf1_{(r,c)=(i,j)}-\mathbf1_{(r,c)=(i-1,j)}\bigr)
+&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
+&=\mathbf1_{(i,j)\in S}-\mathbf1_{(i-1,j)\in S}
+&&\bigl(\because\ \text{有限集合における指示値の和}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "縦辺 ", math(String.raw`n_{\mathrm v}(i,j)`),
+                        " への寄与は ", math(String.raw`(r,c)=(i,j-1)`),
+                        " の正向きの辺と ", math(String.raw`(r,c)=(i,j)`),
+                        " の逆向きの辺だけである。同じ有限和により",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S]_{n_{\mathrm v}(i,j)}
+&=\sum_{(r,c)\in S}[B_L(r,c)]_{n_{\mathrm v}(i,j)}
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と境界鎖の定義}\bigr)\\
+&=\sum_{(r,c)\in S}
+  \bigl(\mathbf1_{(r,c)=(i,j-1)}-\mathbf1_{(r,c)=(i,j)}\bigr)
+&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
+&=\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}
+&&\bigl(\because\ \text{有限集合における指示値の和}\bigr)
 \end{aligned}`),
                     ],
                   },
