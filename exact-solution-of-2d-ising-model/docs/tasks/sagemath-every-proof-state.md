@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 16 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 15 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -377,14 +377,17 @@
 
 - `Z_equals_trace_of_W`（tr((V_1V_2)^n) = tr(W^n)、Z = tr(W^{N_row})）: `sagemath/check/Z_equals_trace_of_W/`。準備の二つの帰納法と本体の鎖の各行を、成分を不定元に置いた 1・2 次の行列と QQ(i) の乱数の 3・4 次の行列で厳密に（等号 140・216・144 件）、主張を本文の V_1・V_2・B（exp(K_1/2)・exp(K_2) を QQ(q,r) の不定元に置き、B は D のスペクトル射影、V_1・V_2 は成分の式）で確かめ、Z は分配関数の定義の全配位の和と 8 組の (N_row, M_col) で比べた。人手証明の計算の誤りは無し。散文の「結合法則で括り直す」「冪の定義」「n−1 個の積」を、def_exp (1) の冪による二つの帰納法（(X(YX)^k)Y = (XY)^{k+1}、W^{k+1} = ((B(V_2V_1)^k)V_2)B）と結合律・単位律の行に分けた（本体の順と主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`DefinitionSymmetrizedTransferMatrix.lean` の `symTransfer_pow_succ`・`mul_pow_mul_eq`・`trace_symTransfer_pow` は同じ二つの補題と本体の形で、行ごとの 1 対 1 の対応づけは Lean の連続実行の受け持ち）。
 - `W_is_real_symmetric_positive_definite`（W = V_1^{1/2}V_2V_1^{1/2} は実対称正定値で可逆）: `sagemath/check/W_is_real_symmetric_positive_definite/`。Step 1・Step 2 の肩の行（σ_m^zσ_{m+1}^z・K_1D・S_2 の実対称性、S_2 = iK_2^*H_2 = K_2^*Σσ^x、エルミート性、冪と def_exp の部分和の実対称性）を K_1・K_2^* を実の不定元にした QQ(i) 上の多項式環で M_col = 2..5 で、exp を含む行（B・A の実対称正定値性、B'B = I、BB = V_1、V_2 = cA、W の鎖 4 行・転置の鎖 4 行・合同による正定値性、可逆性の鎖）と主張を K_1 = 2 log y・K_2 = log x（x, y ∈ {2, 3}）の √t・√(2s_2) を含む実の数体で M_col = 2..4 で厳密に確かめた（等号 126・216 件、否定コントロール 12・62 件。浮動小数点なし）。**人手証明の誤りを直した**: 旧い可逆性の段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性は x ∈ ℂ^n の x^*Wx の条件で、複素の x では従わない（検算で x^⊤Wx = 0 となる x ≠ 0 を作った）。核が {0} から可逆を導く主張も本文に無かった。BB' = I の 3 行の鎖と V2_invertible・def_invertible_elements_of_R (ii) で W ∈ R^× を示す形にした（主張の内容は不変）。一回のレビューで必須の指摘は無く、任意の指摘（構成上一致する比較の明記、近い取り違えの対照、根拠の補足）を反映した。
+- `rayleigh_bounds_operator_norm`（‖Wx‖ ≤ c(M_col)‖x‖ と ‖W^kx‖ ≤ c(M_col)^k‖x‖）: `sagemath/check/rayleigh_bounds_operator_norm/`。証明の一つ目の鎖 6 行・二つ目の鎖 6 行とその側の条件・場合分け・割り算と平方根・k = 0 の 3 行・帰納法の鎖 5 行を、P = A^⊤A（A は整数の行列、n = 2..5、特異なものを含む）157 組と、本文の W（K_1 = 2 log y・K_2 = log x、x, y ∈ {2, 3}、M_col = 2, 3。W は QQ の行列）で、QQ・AA の厳密計算で確かめた（等号 4986・716 件、不等号 3586・504 件、否定コントロール 6 件。浮動小数点なし）。c(M_col) は特性多項式の最大の実根として AA で作り、cI − W の半正定値性（実根だけの多項式の係数の符号）と固有ベクトルでの到達で上限であることをその場で確かめた。**人手証明を直した**: (1) 一つ目の鎖が y^⊤(Wx) で止まり、続く鎖の y^⊤Wx（def_real_bilinear_value）との等号が無かった。mat_mult・def_matrix_norm・分配則で y^⊤Wx まで一続きにした。(2) 帰納法の段の ‖W^{k+1}x‖ = ‖W(W^kx)‖ は def_exp (1) の W^{k+1} := W^kW から W^kW = WW^k を要するが、その主張は本文に無い。W^{k+1}x = (W^kW)x = W^k(Wx) とし、帰納法の仮定を Wx に当てる順にした。k = 0 の行に根拠の鎖を置いた（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（ClaimOperatorBound.lean と新しい鎖の 1 対 1 は Lean の連続実行の受け持ち）。
   申し送り（Lean の連続実行の受け持ち。Lean は不変）: Lean の具体版は実行列で可逆性を IsUnit から作っており、人手の新しい可逆性の段（BB' の鎖、V2_invertible、可逆元の積）と 1 対 1 でない。Step 1・Step 2 の散文（「同じ議論」「極限も実対称」、転置の積の法則）は名前だけの根拠のまま残る（転置の積の法則と実成分の行列の積の主張は本文に無い）。
 
 ## 次の一歩
-`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `rayleigh_bounds_operator_norm`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `trace_power_upper_bound`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`rayleigh_bounds_operator_norm` のレビューで見つかった（上流の同一視。今回の差分より前から）: W は Mat(2^{M_col}, ℂ) の元だが、`def_rayleigh_sup` は「W は実行列とみなせる」と写像に名前を付けずに同一視し、`def_real_bilinear_value`・`psd_cauchy_schwarz` は Mat(n, ℝ) と ℝ^n、`mat_mult`・`mat_mult_associative` は ℂ の行列と ℂ^n（n×1 行列とみなす）について述べる。また `W_is_real_symmetric_positive_definite` の正定値は複素の x の x^*Wx > 0 で、`psd_cauchy_schwarz` が要る実の x の x^⊤Wx ≥ 0 へ移る主張（実の x で x^*Wx が x^⊤Wx の (·)_ℂ であること）が本文に無い（`def_rayleigh_sup` の 𝓡 ⊆ ℝ_{>0} も同じ）。直すには、成分が実数の複素行列から Mat(n, ℝ) への写像と ℝ^n → ℂ^n の包含に名前を付け、正定値から実の半正定値への主張を足して、`def_rayleigh_sup` と下流を付け替える。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`W_is_real_symmetric_positive_definite` の検算で見つかった（直した）: 可逆性の段が複素ベクトル x に x^⊤Wx を使って正定値性を当てはめていた（W = I、x = (1, i) で x^⊤Wx = 0）。核が {0} から可逆を導く主張も本文に無かった。既存の主張だけで W ∈ R^× を示す形にした。下流の `trace_power_upper_bound` 付近は「W が可逆なので W^ax ≠ 0」と可逆性から核の自明性を使っており、その一行の根拠は下流のブロックの検算で扱う。
 

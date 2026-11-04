@@ -2,6 +2,8 @@
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十九個目として、`epsilon_eigenvalue_on_check_Q` の (2) を (2a)〜(2c) に割り (2a) を行った。Step 1 の 3 本の鎖（`ň_μ q = 0`・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`・背理法）と Step 3 の前半の 9 行の鎖を、人手と同じ行の calc の具体版と必要十分版（`NecSuf/SignReversalOnGeneratorVector.lean`。Step 3 はスカラー環を係数と分け、効くのは `SMulCommClass` だけ）で置いた。`eta_insert` は未組み替え。本文と SageMath は不変。次は (2b) の Step 2。
 
+2026-11-04: 全証明の SageMath 検算として、`rayleigh_bounds_operator_norm`（‖Wx‖ ≤ c(M_col)‖x‖ と冪の版）に検算 `sagemath/check/rayleigh_bounds_operator_norm/` を付けた（未検算 15 件）。一般の半正定値有理行列 157 組と本文の W（M_col = 2, 3）で、c(M_col) を AA の最大固有値として作り上限であることを確かめたうえで、全ての行を QQ・AA で厳密に確かめた。人手証明の飛びを直した（y^⊤(Wx) と y^⊤Wx をつなぐ行が無かった、帰納法で本文に無い W^kW = WW^k を使っていた。主張は不変、Lean は不変）。上流の W の ℂ/ℝ の同一視は状態台帳に記録。次は `trace_power_upper_bound`。
+
 2026-11-04: 全証明の SageMath 検算として、`W_is_real_symmetric_positive_definite`（W は実対称正定値で可逆）に検算 `sagemath/check/W_is_real_symmetric_positive_definite/` を付けた（未検算 16 件）。肩の行は実の不定元の多項式環、exp を含む行は √t・√(2s_2) を含む実の数体で厳密計算。人手証明の可逆性の段が複素の x に x^⊤Wx を使っていた誤りを、BB' = I・V2_invertible・可逆元の積による W ∈ R^× の証明に直した（主張の内容は不変、Lean は不変で 1 対 1 は Lean の連続実行の受け持ち）。次は `rayleigh_bounds_operator_norm`。
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十八個目として、`epsilon_eigenvalue_on_check_Q` を (1)〜(4) に割り (1) を行った。具体版を人手の鎖（`Q̌q = q`・`Q̌(εq) = εq`・`q = (ηη)q`・`(ηη−1)q = O`・成分による `η ∈ {±1}`・`(εQ̌)x = (ηQ̌)x`・列ごとの行列の等式・一意性の 6 行）と同じ行の calc にし、`eta` を `exists_eta_with_generator` の選択にした（型は不変）。本文の `mat_columnwise` に Lean の具体版・必要十分版・`TensorPow M` の系を置いた。本文と SageMath は不変。二回のレビューで必須の指摘が無くなるまで直した。次は同じ主張の (2)。

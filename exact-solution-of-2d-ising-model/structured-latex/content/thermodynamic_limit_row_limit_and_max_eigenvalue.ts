@@ -617,14 +617,32 @@ W
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " を取り、",
         math(String.raw`y := Wx`),
-        " とおく。まず",
+        "（成分は ",
+        math(String.raw`y_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} W_{kl}\,x_l`),
+        "（",
+        ref("mat_mult"),
+        "）。",
+        math(String.raw`W`),
+        " の成分と ",
+        math(String.raw`x`),
+        " の成分は実数なので ",
+        math(String.raw`y \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "）とおく。まず",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|Wx\|^2
-&=(Wx)^\top(Wx)
-&&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\ \text{と実成分なので}\ \|v\|^2=v^\top v\bigr)\\
-&=y^\top(Wx)
-&&\bigl(\because\ y=Wx\ \text{の置き換え（左因子）}\bigr)
+&=\|y\|^2
+&&\bigl(\because\ y:=Wx\bigr)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}|y_k|^2
+&&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{a}\bigr)^2=a\bigr)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\,y_k
+&&\bigl(\because\ y_k\in\mathbb{R}\ \text{なので}\ |y_k|^2=y_ky_k\bigr)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\sum_{l=1}^{2^{M_{\mathrm{col}}}}W_{kl}\,x_l
+&&\bigl(\because\ y=Wx\ \text{の成分 }\blkref{mat_mult}\ \text{（右因子）}\bigr)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}y_k\,W_{kl}\,x_l
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\ y_k(W_{kl}x_l)=(y_kW_{kl})x_l\bigr)\\
+&=y^\top Wx
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -666,29 +684,70 @@ W
   &&\bigl(\because\ \|Wx\| \geq 0,\ c\|x\| \geq 0\ \text{と平方の単調性}\bigr)
 \end{aligned}`),
       paragraph([
+        math(String.raw`x`),
+        " は任意に取ったので、すべての ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " について ",
+        math(String.raw`\|Wx\| \leq c\|x\|`),
+        " である。",
+      ]),
+      paragraph([
         "冪についての主張は ",
         math(String.raw`k`),
         " に関する帰納法で示す。",
         math(String.raw`k=0`),
-        " のときは ",
-        math(String.raw`\|W^0x\| = \|x\| = c^0\|x\|`),
-        " である。",
+        " のときは、",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|W^0x\|
+&=\|Ix\|
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0:=I\bigr)\\
+&=\|x\|
+  &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&=c^0\|x\|
+  &&\bigl(\because\ c^0=1\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
         math(String.raw`k`),
-        " で成り立つとすると",
+        " で成り立つ（すべての ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " について ",
+        math(String.raw`\|W^kx\| \leq c^k\|x\|`),
+        "）とし、",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " を取ると",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|W^{k+1}x\|
-&=\|W(W^kx)\|
-  &&\bigl(\because\ \text{行列の冪の定義と結合則}\bigr)\\
-&\leq c\|W^kx\|
-  &&\bigl(\because\ \text{いま示した評価を}\ W^kx\ \text{に適用}\bigr)\\
-&\leq c\cdot c^k\|x\|
-  &&\bigl(\because\ \text{帰納法の仮定と}\ c>0\bigr)\\
+&=\|(W^kW)x\|
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1}:=A^mA\bigr)\\
+&=\|W^k(Wx)\|
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&\leq c^k\|Wx\|
+  &&\bigl(\because\ \text{帰納法の仮定を}\ Wx\in\mathbb{R}^{2^{M_{\mathrm{col}}}}\ \text{に適用}\bigr)\\
+&\leq c^k\bigl(c\|x\|\bigr)
+  &&\bigl(\because\ \text{いま示した評価}\ \|Wx\|\leq c\|x\|\ \text{と}\ c^k\geq 0\ \text{（}c>0\text{）}\bigr)\\
 &=c^{k+1}\|x\|
-  &&\bigl(\because\ \text{冪の指数法則}\bigr)
+  &&\bigl(\because\ \text{冪の指数法則と}\ \mathbb{R}\ \text{の乗法の結合則}\bigr)
 \end{aligned}`),
+      paragraph([
+        math(String.raw`x`),
+        " は任意に取ったので、",
+        math(String.raw`k+1`),
+        " のときもすべての ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " について成り立つ。",
+      ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: SageMath の検算（sagemath/check/rayleigh_bounds_operator_norm/）を付けるにあたり、二か所を直した（主張は不変）。(1) 一つ目の鎖は ‖Wx‖^2 = (Wx)^⊤(Wx) = y^⊤(Wx) で止まり、続く鎖が使う y^⊤Wx（def_real_bilinear_value の二重和）との等号が書かれていなかった。def_matrix_norm・definition_of_sqrt_r_positive・y の成分・分配則・def_real_bilinear_value の 5 行（‖Wx‖^2 = ‖y‖^2 の置き換えと合わせて 6 行）で ‖Wx‖^2 = y^⊤Wx まで一続きにし、y ∈ ℝ^n であることを置き方に書いた（y の成分と鎖の 4 行目に mat_mult を引き、‖Wx‖^2 = ‖y‖^2 の置き換えを独立の行にした）。k = 0 の行に def_exp (1) の A^0 := I・identity_matrix_is_left_unit_of_mat_mult・c^0 = 1 の 3 行の鎖を置いた。(2) 帰納法の段の 1 行目 ‖W^{k+1}x‖ = ‖W(W^kx)‖ は「行列の冪の定義と結合則」としていたが、def_exp (1) の冪は W^{k+1} := W^kW で、W(W^kx) にするには W^kW = WW^k が要り、その主張は本文に無い。W^{k+1}x = (W^kW)x = W^k(Wx) とし、帰納法の仮定（すべての x について）を Wx に当て、前半の評価を後に使う順にした。",
+      ],
+    },
   },
   {
     id: "maxeig_008a_claim_trace_power_upper_bound",
