@@ -26,8 +26,13 @@
 | 同じ等式の実行列での表示 | `physicalV1halfR_mul_self_map` |
 | `Z_equals_trace_of_W` の「とくに」: 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
 | 同じ等式を実行列 `W` で読む | `partitionFunction_eq_trace_physicalSymTransferR_pow` |
-| Step 1: `K_1D` の成分は実（Lean は `D` の対角表示 `sum_sigmaZ_sigmaZ_eq_diagonal` から示す） | `K1D_hasRealEntries` |
-| Step 1: `K_1D` は転置不変（`σ^z_mσ^z_{m+1}` が転置不変で、実係数の有限和） | `sigmaZ_mul_sigmaZ_transpose`、`K1D_transpose` |
+| Step 1 の準備: `m^+`、`σ^z_{m+1} = σ^z_{m^+}`（Lean の `D` は `nextSite` で書いてあるので定義どおり） | `nextSite`（`rfl`） |
+| Step 1 の準備: `σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`（`distinct_site_pauli_matrices_commute`。`M_col = 1` は同じ行列） | `sigmaZ_nextSite_mul_comm`（`siteOp_mul_comm`） |
+| Step 1: `(σ^z_k)^⊤ = σ^z_k` の 5 行 | `sigmaZ_transpose` の `calc` の 5 段 |
+| Step 1: `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行（`transpose_of_matrix_product`） | `sigmaZ_mul_sigmaZ_nextSite_transpose` の `calc` の 5 段（`transpose_mul_tensorPow`） |
+| Step 1: `(K_1D)^⊤ = K_1D` の 5 行（`transpose_of_matrix_scalar_multiple`・`transpose_of_finite_sum_of_matrices`） | `K1D_transpose_succ` の `calc` の 5 段（`transpose_smul_tensorPow`・`finite_sum_transpose_tensorPow`）、一般の `M` の `K1D_transpose` |
+| Step 1: `σ^z_k` の成分は実（`kronecker_of_real_entry_matrices_has_real_entries`） | `sigmaZ_hasRealEntries` |
+| Step 1: `σ^z_mσ^z_{m+1}`・`D`・`K_1D` の成分は実（`product_of_real_entry_matrices_has_real_entries`・`finite_sum_of_real_entry_matrices_has_real_entries`・`real_scalar_multiple_of_real_entry_matrix_has_real_entries`） | `K1D_hasRealEntries_succ`（`matrix_mul_hasRealEntries`・`finite_sum_hasRealEntries`・`real_smul_hasRealEntries`）、一般の `M` の `K1D_hasRealEntries` |
 | Step 1 の結論「`K_1D` は実対称」 | `K1D_isRealSymmetric` |
 | Step 2: `real_symmetric_matrix_is_hermitian`（`A → K_1D`）で `K_1D` はエルミート | `K1D_isHermitian` |
 | Step 2: `real_multiple_of_hermitian_is_hermitian`（`α → ½`, `A → K_1D`）で `½K_1D` はエルミート | `halfK1D_isHermitian`（`physicalV1halfC` の指数 `(K_1/2)_ℂD` を `½(K_1D)` へ書き直すのは `halfK1D_eq_half_smul_K1D`・`physicalV1halfC_eq_matExp_half`） |
@@ -38,7 +43,7 @@
 | Step 3 の 4 行の鎖 `W = BV_2B = B((2s_2)^{M_col/2}A)B = (2s_2)^{M_col/2}BAB = (2s_2)^{M_col/2}B^*AB` | `physicalSymTransferC_eq_smul_congruence` の `calc` の 4 段（係数 `(2s_2)^{M_col/2}` は `twoS2Pow`） |
 | Step 3: `congruence_preserves_positive_definite`（Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite` で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
 | 正定値性を実ベクトルで読む（`partition_function_sandwich` が使う形） | `realQuadForm_pos_of_map_posDef`、`physicalSymTransferR_posDef` |
-| Step 1: `½K_1D` は転置不変、Step 2: `B = exp(½K_1D)` は転置不変、Step 2–3: `V_2^⊤ = V_2` | `halfK1D_transpose`、`physicalV1halfC_transpose`・`physicalV1halfR_isSymm`、`V2_transpose`・`physicalV2R_isSymm` |
+| `½K_1D` は転置不変（人手に対応する行の無い補助。Step 2・Step 3 が使う `B^⊤ = B` の前提で、`½K_1D = ½(K_1D)`・`transpose_of_matrix_scalar_multiple`・`(K_1D)^⊤ = K_1D` から）、Step 2: `B = exp(½K_1D)` は転置不変、Step 2–3: `V_2^⊤ = V_2` | `halfK1D_transpose`、`physicalV1halfC_transpose`・`physicalV1halfR_isSymm`、`V2_transpose`・`physicalV2R_isSymm` |
 | Step 3 の結論「`W = BV_2B` は実対称」（具体的な `B = V_1^{1/2}`, `V_2` について） | `physicalSymTransferR_isSymm` |
 | `partition_function_sandwich`（`Z = tr(W^{N_row})` → `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
@@ -47,9 +52,12 @@
   （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` は、添字が `Conf M` の行列なので
   `positive_real_multiple_preserves_positive_definite_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` で、人手の 13 行の鎖と
   1 対 1。`ClaimPositiveRealMultiplePreservesPositiveDefinite.lean`）を引く。
-- Step 1 の「`K_1D` の成分は実」は、人手（`σ^z` 2 個と単位行列のクロネッカー積なので成分が実、実係数の有限和なので実）と論法が違い、
-  `D` の対角表示から示している。
-- 実対称性の段（`halfK1D_transpose`・`physicalV1halfC_transpose`・`V2_transpose` と、実行列の `symTransfer_isSymm`）は、
+- Step 1 の `transpose_of_matrix_product`・`transpose_of_matrix_scalar_multiple`・`transpose_of_finite_sum_of_matrices` は、添字が `Conf M` の行列なので、
+  `TensorPow M` の系 `transpose_mul_tensorPow`・`transpose_smul_tensorPow`・`finite_sum_transpose_tensorPow`（必要十分版を添字 `Conf M` へ特殊化したもの。
+  具体版（添字 `Fin m`）と手順は同じ。`ClaimIHPauliForm.lean` の Step 3 の節と同じ扱い）を引く。
+- 人手の Step 1 は `M_col ≥ 1` で述べる。Lean の鎖は `M = n + 1` で述べ（`K1D_transpose_succ`・`K1D_hasRealEntries_succ`）、
+  人手の範囲外の `M = 0` は、添字が空で `D` が零行列であることによる補助の場合分けで一般の `M` の形（`K1D_transpose`・`K1D_hasRealEntries`）へ広げる。
+- 実対称性の段のうち Step 2・Step 3（`physicalV1halfC_transpose`・`V2_transpose` と、実行列の `symTransfer_isSymm`）は、
   人手の転置の 4 行の鎖と 1 対 1 でなく、mathlib の `Matrix.exp_transpose` に委ねている。可逆性（人手の `BB' = I` の鎖と
   `def_invertible_elements_of_R` (ii) の 2 回の適用）はまだ置いていない。どちらも状態台帳の次の単位で扱う。
 
@@ -74,6 +82,8 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealMultipleOfHermitianIsHermitian
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
 
 namespace Ising2D
 
@@ -98,28 +108,6 @@ theorem physicalV1halfC_mul_self (K1 : ℝ) :
 theorem physicalV1halfR_mul_self_map (K1 : ℝ) :
     (physicalV1halfR M K1 * physicalV1halfR M K1).map Complex.ofRealHom = V1 M K1 := by
   rw [Matrix.map_mul, ← physicalV1halfC_eq_map, physicalV1halfC_mul_self]
-
-/-- 人手 Step 1: `σ^z_mσ^z_{m'}` は転置不変（`sigma_z_diagonal_action` による対角表示から）。 -/
-theorem sigmaZ_mul_sigmaZ_transpose (m m' : Fin M) :
-    (sigmaZ m * sigmaZ m')ᵀ = sigmaZ m * sigmaZ m' := by
-  rw [sigmaZ_mul_sigmaZ_eq_diagonal, Matrix.diagonal_transpose]
-
-/-- 人手 Step 1: 実係数の有限和 `½K_1D` は転置不変。 -/
-theorem halfK1D_transpose (K1 : ℝ) :
-    ((((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))ᵀ
-      = (((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m) := by
-  rw [Matrix.transpose_smul, Matrix.transpose_sum]
-  simp only [sigmaZ_mul_sigmaZ_transpose]
-
-/-- 人手 Step 2: `B = exp(½K_1D)` は転置不変（転置不変な行列の指数関数は転置不変）。 -/
-theorem physicalV1halfC_transpose (K1 : ℝ) : (physicalV1halfC M K1)ᵀ = physicalV1halfC M K1 := by
-  rw [physicalV1halfC, V1PauliForm, matExp, ← Matrix.exp_transpose, halfK1D_transpose]
-
-/-- 人手 Step 2: `V_1^{1/2}` は実対称（実行列で）。 -/
-theorem physicalV1halfR_isSymm (K1 : ℝ) : (physicalV1halfR M K1).IsSymm := by
-  apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
-  show (physicalV1halfR M K1)ᵀ.map Complex.ofRealHom = (physicalV1halfR M K1).map Complex.ofRealHom
-  rw [Matrix.transpose_map, ← physicalV1halfC_eq_map, physicalV1halfC_transpose]
 
 /-! ## `Z(K_1,K_2)` を `W` のトレースとして -/
 
@@ -149,35 +137,127 @@ theorem physicalV2R_isSymm {K2 : ℝ} (hK2 : 0 < K2) : (physicalV2R M K2).IsSymm
   show (physicalV2R M K2)ᵀ.map Complex.ofRealHom = (physicalV2R M K2).map Complex.ofRealHom
   rw [Matrix.transpose_map, ← physicalV2C_eq_map, V2_transpose hK2]
 
-/-! ## 具体的な `W` は実対称 -/
+/-! ## Step 1: `K_1D` は実対称
 
-/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の「`W` は実対称」を具体的な `W` について**:
-`B = V_1^{1/2}`（Step 2、`physicalV1halfR_isSymm`）と `V_2`（`physicalV2R_isSymm`）が実対称なので
-`W = BV_2B` も実対称（`symTransfer_isSymm`）。 -/
-theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
-    (physicalSymTransferR M K1 K2).IsSymm :=
-  symTransfer_isSymm (physicalV1halfR_isSymm K1) (physicalV2R_isSymm hK2)
+人手 Step 1 の準備・`(σ^z_k)^⊤` の 5 行・`(σ^z_mσ^z_{m+1})^⊤` の 5 行・`(K_1D)^⊤` の 5 行・成分の実性の 2 段落と 1 対 1 に対応する。
+人手の `m^+`（`m ≤ M_col−1` なら `m+1`、`m = M_col` なら `1`）は Lean の `nextSite m` である。Lean の `D` ははじめから
+`∑ σ^z_m σ^z_{nextSite m}` と書いてあるので、準備の `σ^z_{m+1} = σ^z_{m^+}` の段は定義どおりの等式（`rfl`）になる。
+人手の `M_col ≥ 1` は Lean では `M = n + 1` と書く。`M = 0`（人手の範囲外）は、添字が空で `D` が零行列なので、補助の場合分けで埋める。 -/
 
-/-! ## Step 1・Step 2: `B = exp(½K_1D)` と `A = exp(S_2)` は正定値、`B' = exp(-½K_1D)` は `B'B = I` -/
+/-- **人手 Step 1 の `(σ^z_k)^⊤ = σ^z_k` の 5 行の鎖**（`k ∈ {1, …, M_col}`。`sigmaX_transpose` と同じ形）。 -/
+theorem sigmaZ_transpose {M : ℕ} (k : Fin M) : (sigmaZ k)ᵀ = sigmaZ k := by
+  have hform : ∀ A : Matrix (Fin 2) (Fin 2) ℂ,
+      Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A = fun j => if j = k then A else 1 := by
+    intro A
+    funext j
+    by_cases h : j = k
+    · rw [h, Function.update_self, if_pos rfl]
+    · rw [Function.update_of_ne h, if_neg h]; rfl
+  calc
+    (sigmaZ k)ᵀ
+        = (siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k pauliZ))ᵀ := rfl
+                                                        -- `def_site_pauli_matrices`（`k → k`, `a → z`）
+    _ = siteProd M (fun j => if j = k then pauliZᵀ else (1 : Matrix (Fin 2) (Fin 2) ℂ)ᵀ) := by
+      rw [siteProd_transpose, hform]                    -- `kronecker_transpose`（`M → M_col`, `A_k → σ^z`, `A_j → I`（`j ≠ k`））
+      congr 1
+      funext j
+      dsimp only
+      by_cases h : j = k
+      · rw [if_pos h, if_pos h]
+      · rw [if_neg h, if_neg h]
+    _ = siteProd M (fun j => if j = k then pauliZᵀ else 1) := by
+      rw [identity_matrix_two_transpose]                -- `transpose_of_identity_matrix_of_order_two`（第 `k` 因子以外の因子へ同時に適用）
+    _ = siteProd M (fun j => if j = k then pauliZ else 1) := by
+      rw [pauliZ_transpose]                             -- `transpose_of_pauli_z`（第 `k` 因子へ）
+    _ = sigmaZ k := by
+      rw [← hform]; rfl                                 -- `def_site_pauli_matrices`（`k → k`, `a → z`）
 
-/-- 人手 Step 1: `K_1D` の成分は実（`D` は対角行列で、対角成分は `∑_m μ(m)μ(m+1)`。`sum_sigmaZ_sigmaZ_eq_diagonal`）。 -/
-theorem K1D_hasRealEntries (K1 : ℝ) :
-    MatrixHasRealEntries ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) := by
-  intro I J
-  rw [sum_sigmaZ_sigmaZ_eq_diagonal, Matrix.smul_apply, smul_eq_mul]
-  by_cases h : I = J
-  · subst h
-    refine ⟨K1 * ∑ m : Fin M, sgn (I m) * sgn (I (nextSite m)), ?_⟩
-    rw [Matrix.diagonal_apply_eq]
-    simp only [sgnC, Complex.ofReal_mul, Complex.ofReal_sum]
-  · exact ⟨0, by rw [Matrix.diagonal_apply_ne _ h, mul_zero, Complex.ofReal_zero]⟩
+/-- **人手 Step 1 の準備の `σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`**: `m^+ ≠ m` なら `distinct_site_pauli_matrices_commute`
+（`j → m^+`, `k → m`, `a, b → z`。Lean は `siteOp_mul_comm`）、`m^+ = m`（`M_col = 1` のときに限る）なら両辺は同じ行列。
+Lean の場合分けは「`M_col = 1` のときに限る」を使わない（どちらの枝も閉じる）。 -/
+theorem sigmaZ_nextSite_mul_comm {M : ℕ} (m : Fin M) :
+    sigmaZ (nextSite m) * sigmaZ m = sigmaZ m * sigmaZ (nextSite m) := by
+  by_cases h : nextSite m = m
+  · rw [h]                                              -- `m^+ = m`: 両辺は同じ行列 `σ^z_mσ^z_m`
+  · exact siteOp_mul_comm h pauliZ pauliZ               -- `distinct_site_pauli_matrices_commute`（`j → m^+`, `k → m`, `a, b → z`）
 
-/-- 人手 Step 1: `K_1D` は転置不変（`σ^z_mσ^z_{m+1}` が転置不変で、実係数 `K_1` の有限和）。 -/
+/-- **人手 Step 1 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行の鎖**（`m ∈ {1, …, M_col}`。周期端 `m = M_col` を含む）。 -/
+theorem sigmaZ_mul_sigmaZ_nextSite_transpose {M : ℕ} (m : Fin M) :
+    (sigmaZ m * sigmaZ (nextSite m))ᵀ = sigmaZ m * sigmaZ (nextSite m) :=
+  calc (sigmaZ m * sigmaZ (nextSite m))ᵀ
+      = (sigmaZ m * sigmaZ (nextSite m))ᵀ := rfl                            -- 準備の `σ^z_{m+1} = σ^z_{m^+}`（Lean の `D` は `nextSite` で書いてある）
+    _ = (sigmaZ (nextSite m))ᵀ * (sigmaZ m)ᵀ :=
+        transpose_mul_tensorPow _ _                                         -- `transpose_of_matrix_product`（必要十分版の `Conf M` への特殊化。`m, n, p → 2^{M_col}`, `A → σ^z_m`, `B → σ^z_{m^+}`）
+    _ = sigmaZ (nextSite m) * sigmaZ m := by
+        rw [sigmaZ_transpose, sigmaZ_transpose]                             -- 上で得た `(σ^z_k)^⊤ = σ^z_k` を `k → m^+` と `k → m` へ同時に適用
+    _ = sigmaZ m * sigmaZ (nextSite m) :=
+        sigmaZ_nextSite_mul_comm m                                          -- 準備の `σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`
+    _ = sigmaZ m * sigmaZ (nextSite m) := rfl                               -- 準備の `σ^z_{m+1} = σ^z_{m^+}`
+
+/-- **人手 Step 1 の `(K_1D)^⊤ = K_1D` の 5 行の鎖**（`M = n + 1`）。 -/
+theorem K1D_transpose_succ (K1 : ℝ) (n : ℕ) :
+    ((K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m))ᵀ
+      = (K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m) :=
+  calc ((K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m))ᵀ
+      = ((K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m))ᵀ := rfl
+                                                                            -- `def_transfer_matrix_square_root` の `D` の定義
+    _ = (K1 : ℂ) • (∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m))ᵀ :=
+        transpose_smul_tensorPow _ _                                        -- `transpose_of_matrix_scalar_multiple`（必要十分版の `Conf M` への特殊化。`m, n → 2^{M_col}`, `c → (K_1)_ℂ`, `A → Σσ^z_ℓσ^z_{ℓ+1}`）
+    _ = (K1 : ℂ) • ∑ m : Fin (n + 1), (sigmaZ m * sigmaZ (nextSite m))ᵀ := by
+        rw [finite_sum_transpose_tensorPow n]                               -- `transpose_of_finite_sum_of_matrices`（必要十分版の `Conf M` への特殊化。主張の行数・列数 `m, n → 2^{M_col}`, `r → M_col`, `X_ℓ → σ^z_ℓσ^z_{ℓ+1}`（`1 ≤ ℓ ≤ M_col`））
+    _ = (K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m) := by
+        rw [Finset.sum_congr rfl fun m _ => sigmaZ_mul_sigmaZ_nextSite_transpose m]
+                                                                            -- 上で得た `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` を各項へ
+    _ = (K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m) := rfl
+                                                                            -- `def_transfer_matrix_square_root` の `D` の定義
+
+/-- `K_1D` は転置不変（使う側が引く、一般の `M` の形）。`M = n + 1` は人手の鎖 `K1D_transpose_succ`、
+`M = 0`（人手の範囲外）は添字が空で `D` が零行列なので転置しても零行列（補助）。 -/
 theorem K1D_transpose (K1 : ℝ) :
     ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))ᵀ
       = (K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m) := by
-  rw [Matrix.transpose_smul, Matrix.transpose_sum]
-  simp only [sigmaZ_mul_sigmaZ_transpose]
+  cases M with
+  | zero => rw [Finset.univ_eq_empty, Finset.sum_empty, smul_zero, Matrix.transpose_zero]
+  | succ n => exact K1D_transpose_succ K1 n
+
+/-- **人手 Step 1 の `σ^z_k` の成分の実性**（`k ∈ {1, …, M_col}`、`M = n + 1`。`sigmaX_hasRealEntries` と同じ形）:
+`σ^z_k = I⊠⋯⊠σ^z⊠⋯⊠I`（`def_site_pauli_matrices`）の因子 `I`・`σ^z` の成分はすべて実数なので、
+`kronecker_of_real_entry_matrices_has_real_entries` より `σ^z_k` の成分はすべて実数。 -/
+theorem sigmaZ_hasRealEntries {n : ℕ} (k : Fin (n + 1)) : MatrixHasRealEntries (sigmaZ k) := by
+  have hform : sigmaZ k
+      = siteProd (n + 1) (Function.update (1 : Fin (n + 1) → Matrix (Fin 2) (Fin 2) ℂ) k pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices`（`k → k`, `a → z`）
+  rw [hform]
+  refine siteProd_hasRealEntries _ fun j => ?_          -- `kronecker_of_real_entry_matrices_has_real_entries`（`M → M_col`, `A_k → σ^z`, `A_j → I`（`j ≠ k`））
+  by_cases h : j = k
+  · rw [h, Function.update_self]
+    exact pauliZ_hasRealEntries                         -- `pauli_z_has_real_entries`
+  · rw [Function.update_of_ne h]
+    exact identity_matrix_two_hasRealEntries            -- `identity_matrix_of_order_two_has_real_entries`
+
+/-- **人手 Step 1 の `K_1D` の成分の実性の 2 段落**（`M = n + 1`）:
+`σ^z_m`・`σ^z_{m^+}` の成分は実数なので `product_of_real_entry_matrices_has_real_entries` より `σ^z_mσ^z_{m^+}`（準備により `σ^z_mσ^z_{m+1}`）の成分は実数、
+`finite_sum_of_real_entry_matrices_has_real_entries` より `D` の成分は実数、
+`real_scalar_multiple_of_real_entry_matrix_has_real_entries` より `K_1D = (K_1)_ℂD` の成分は実数。 -/
+theorem K1D_hasRealEntries_succ (K1 : ℝ) (n : ℕ) :
+    MatrixHasRealEntries ((K1 : ℂ) • ∑ m : Fin (n + 1), sigmaZ m * sigmaZ (nextSite m)) := by
+  have hterm : ∀ m : Fin (n + 1), MatrixHasRealEntries (sigmaZ m * sigmaZ (nextSite m)) := fun m =>
+    matrix_mul_hasRealEntries _ _ (sigmaZ_hasRealEntries m) (sigmaZ_hasRealEntries (nextSite m))
+                                                        -- `product_of_real_entry_matrices_has_real_entries`（`m, n, p → 2^{M_col}`, `A → σ^z_m`, `B → σ^z_{m^+}`）。準備の `σ^z_{m+1} = σ^z_{m^+}` は定義どおり
+  have hD := finite_sum_hasRealEntries n (fun m : Fin (n + 1) => sigmaZ m * sigmaZ (nextSite m)) hterm
+                                                        -- `finite_sum_of_real_entry_matrices_has_real_entries`（`m, n → 2^{M_col}`, `r → M_col`, `X_ℓ → σ^z_ℓσ^z_{ℓ+1}`）
+  exact real_smul_hasRealEntries K1 _ hD                -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → K_1`, `B → D`）
+
+/-- `K_1D` の成分は実（使う側が引く、一般の `M` の形）。`M = n + 1` は人手の 2 段落 `K1D_hasRealEntries_succ`、
+`M = 0`（人手の範囲外）は `D` が零行列なので成分は `0 = (0)_ℂ`（補助）。 -/
+theorem K1D_hasRealEntries (K1 : ℝ) :
+    MatrixHasRealEntries ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) := by
+  cases M with
+  | zero =>
+    intro I J
+    exact ⟨0, by rw [Finset.univ_eq_empty, Finset.sum_empty, smul_zero, Matrix.zero_apply,
+      Complex.ofReal_zero]⟩
+  | succ n => exact K1D_hasRealEntries_succ K1 n
 
 /-- 人手 Step 1 の結論: `K_1D` は実対称（`def_real_symmetric_complex_matrix`）。 -/
 theorem K1D_isRealSymmetric (K1 : ℝ) :
@@ -202,6 +282,24 @@ theorem halfK1D_eq_half_smul_K1D (K1 : ℝ) :
   congr 1
   push_cast
   ring
+
+/-- 人手に対応する行の無い補助（Step 2・Step 3 が使う `B^⊤ = B` の前提）: `½K_1D` は転置不変（`½K_1D = ½(K_1D)`（`halfK1D_eq_half_smul_K1D`）、`transpose_of_matrix_scalar_multiple`、`(K_1D)^⊤ = K_1D`）。 -/
+theorem halfK1D_transpose (K1 : ℝ) :
+    ((((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))ᵀ
+      = (((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m) := by
+  rw [halfK1D_eq_half_smul_K1D, transpose_smul_tensorPow, K1D_transpose]
+
+/-- 人手 Step 2: `B = exp(½K_1D)` は転置不変（転置不変な行列の指数関数は転置不変）。 -/
+theorem physicalV1halfC_transpose (K1 : ℝ) : (physicalV1halfC M K1)ᵀ = physicalV1halfC M K1 := by
+  rw [physicalV1halfC, V1PauliForm, matExp, ← Matrix.exp_transpose, halfK1D_transpose]
+
+/-- 人手 Step 2: `V_1^{1/2}` は実対称（実行列で）。 -/
+theorem physicalV1halfR_isSymm (K1 : ℝ) : (physicalV1halfR M K1).IsSymm := by
+  apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
+  show (physicalV1halfR M K1)ᵀ.map Complex.ofRealHom = (physicalV1halfR M K1).map Complex.ofRealHom
+  rw [Matrix.transpose_map, ← physicalV1halfC_eq_map, physicalV1halfC_transpose]
+
+/-! ## Step 1・Step 2: `B = exp(½K_1D)` と `A = exp(S_2)` は正定値、`B' = exp(-½K_1D)` は `B'B = I` -/
 
 /-- 人手 `def_transfer_matrix_square_root` の `B = V_1^{1/2} = exp(½K_1D)` を、`½K_1D` の形で書いたもの。 -/
 theorem physicalV1halfC_eq_matExp_half (K1 : ℝ) :
@@ -242,6 +340,15 @@ noncomputable def twoS2Pow (M : ℕ) (K2 : ℝ) : ℝ := (2 * Real.sinh (2 * K2)
 /-- 人手 Step 3: `K_2 > 0` なら `(2s_2)^{M_col/2} > 0`。 -/
 theorem twoS2Pow_pos {K2 : ℝ} (hK2 : 0 < K2) : 0 < twoS2Pow M K2 :=
   Real.rpow_pos_of_pos (by linarith [sinh_two_mul_pos hK2]) _
+
+/-! ## 具体的な `W` は実対称 -/
+
+/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の「`W` は実対称」を具体的な `W` について**:
+`B = V_1^{1/2}`（Step 2、`physicalV1halfR_isSymm`）と `V_2`（`physicalV2R_isSymm`）が実対称なので
+`W = BV_2B` も実対称（`symTransfer_isSymm`）。 -/
+theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    (physicalSymTransferR M K1 K2).IsSymm :=
+  symTransfer_isSymm (physicalV1halfR_isSymm K1) (physicalV2R_isSymm hK2)
 
 /-! ## Step 3: 具体的な `W` は正定値 -/
 
