@@ -62438,8 +62438,19 @@ s(j')-s(j)
 \end{aligned}`),
                       paragraph([ref("claim_closed_walk_incidence_even"), " により最後の和は偶数である。",
                         ref("def_walk_base_edge_parity"), " により ",
-                        math(String.raw`N_\gamma(e)=T_\gamma(e)\bmod2`), " なので、",
-                        "四位置の和を二で割った余りは零である。"]),
+                        math(String.raw`N_\gamma(e)=T_\gamma(e)\bmod2`), " なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+&\bigl(N_\gamma(n_{\mathrm h}(i,j))+N_\gamma(n_{\mathrm h}(i,j-1))
++N_\gamma(n_{\mathrm v}(i,j))+N_\gamma(n_{\mathrm v}(i-1,j))\bigr)\bmod2\\
+&=\bigl(T_\gamma(n_{\mathrm h}(i,j))+T_\gamma(n_{\mathrm h}(i,j-1))
++T_\gamma(n_{\mathrm v}(i,j))+T_\gamma(n_{\mathrm v}(i-1,j))\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と剰余の加法則}\bigr)\\
+&=\left(\sum_{k=1}^{m}\bigl(\mathbf1_{\operatorname{src}(\vec e_k)=(i,j)}+
+\mathbf1_{\operatorname{tgt}(\vec e_k)=(i,j)}\bigr)\right)\bmod2
+&&\bigl(\because\ \text{上の四位置の等式}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_closed_walk_incidence_even}\bigr)
+\end{aligned}`),
                     ],
                   },
                 },
@@ -62622,6 +62633,59 @@ f_\gamma(i+1,j)
                         " に属する（", ref("def_standard_dual_height"), "、",
                         ref("def_walk_base_edge_parity"),
                         "）。二を法とした加法では、一を足したとき、かつそのときに限り値が変わる。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_standard_dual_height_horizontal_seam_conditional",
+                  focus: {
+                    id: "kac_ward_claim_standard_dual_height_horizontal_seam_conditional",
+                    kind: "claim",
+                    title: { text: "全周偶奇を仮定した標準双対路の横方向の切断線一歩" },
+                    labels: ["claim_standard_dual_height_horizontal_seam_conditional"],
+                    habitat: "N",
+                    verification: ["sagemath/check/standard-dual-height-horizontal-seam-conditional"],
+                    lean: [
+                      "Ising2DLambda.KacWard.standardDualHeight_horizontal_seam_of_line_parity",
+                      "Ising2DLambda.KacWard.standardDualHeight_horizontal_seam_changes_of_line_parity",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_seam_of_line_parity",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_seam_changes_of_line_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、代表 ", math(String.raw`0\le j<L`), " を取る（", ref("def_closed_nonbacktracking_walk"),
+                        "）。", ref("def_walk_base_edge_parity"), " の通過偶奇が横方向の全周で"]),
+                      displayMath(String.raw`\left(\sum_{r=1}^{L-1}N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm h}(0,j))\right)\bmod2=0`),
+                      paragraph(["を満たすなら、", ref("def_standard_dual_height"), " の高さについて"]),
+                      displayMath(String.raw`f_\gamma(0,j)=\bigl(f_\gamma(L-1,j)+N_\gamma(n_{\mathrm h}(0,j))\bigr)\bmod2`),
+                      paragraph(["である。従って切断線を越える一歩で高さが変わることと ",
+                        math(String.raw`N_\gamma(n_{\mathrm h}(0,j))=1`), " は同値である。"]),
+                    ],
+                    proof: [
+                      paragraph(["列方向の和を ", math(String.raw`C_j:=\sum_{c=1}^{j}N_\gamma(n_{\mathrm v}(0,c))\in\mathbb N`),
+                        "、行方向の和を ", math(String.raw`R_j:=\sum_{r=1}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\in\mathbb N`),
+                        " と置く。", ref("def_standard_dual_height"), " から"]),
+                      displayMath(String.raw`\begin{aligned}
+f_\gamma(0,j)&=C_j\bmod2&&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と空和}\bigr)\\
+f_\gamma(L-1,j)&=(C_j+R_j)\bmod2&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr)
+\end{aligned}`),
+                      paragraph(["全周偶奇の仮定より ", math(String.raw`(R_j+N_\gamma(n_{\mathrm h}(0,j)))\bmod2=0`),
+                        " である。よって"]),
+                      displayMath(String.raw`\begin{aligned}
+\bigl(f_\gamma(L-1,j)+N_\gamma(n_{\mathrm h}(0,j))\bigr)\bmod2
+&=\bigl(C_j+R_j+N_\gamma(n_{\mathrm h}(0,j))\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と剰余の加法則}\bigr)\\
+&=C_j\bmod2
+&&\bigl(\because\ \text{全周偶奇の仮定}\bigr)\\
+&=f_\gamma(0,j)
+&&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と空和}\bigr)
+\end{aligned}`),
+                      paragraph(["高さと通過偶奇は ", math(String.raw`\{0,1\}`), " に属する（",
+                        ref("def_standard_dual_height"), "、", ref("def_walk_base_edge_parity"),
+                        "）。二を法とした加法で一を足す場合に限り、高さが変わる。"]),
                     ],
                   },
                 },

@@ -211,4 +211,35 @@ theorem closedWalk_standardDualHeight_vertical_internal_changes
   unfold standardDualHeight walkBaseEdgeParity
   omega
 
+/-- 横方向の全周通過偶奇が零なら、切断線でも末項の辺だけ高さが変わる。 -/
+theorem standardDualHeight_horizontal_seam_of_line_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (j : ℕ)
+    (hL : 2 ≤ L) (hj : j < L)
+    (hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1),
+          walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L))) +
+        walkBaseEdgeParity γ (edgeOfRow L false 0 (j : ZMod L))) % 2 = 0) :
+    standardDualHeight L m γ (0, (j : ZMod L)) =
+      (standardDualHeight L m γ (((L - 1 : ℕ) : ZMod L), (j : ZMod L)) +
+        walkBaseEdgeParity γ (edgeOfRow L false 0 (j : ZMod L))) % 2 := by
+  have hlast : L - 1 < L := by omega
+  simp only [standardDualHeight, ZMod.val_zero,
+    ZMod.val_cast_of_lt hlast, ZMod.val_cast_of_lt hj]
+  simp only [Finset.Icc_eq_empty_of_lt (by omega : 0 < 1), Finset.sum_empty, Nat.add_zero]
+  omega
+
+theorem standardDualHeight_horizontal_seam_changes_of_line_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (j : ℕ)
+    (hL : 2 ≤ L) (hj : j < L)
+    (hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1),
+          walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L))) +
+        walkBaseEdgeParity γ (edgeOfRow L false 0 (j : ZMod L))) % 2 = 0) :
+    (standardDualHeight L m γ (0, (j : ZMod L)) ≠
+      standardDualHeight L m γ (((L - 1 : ℕ) : ZMod L), (j : ZMod L))) ↔
+    walkBaseEdgeParity γ (edgeOfRow L false 0 (j : ZMod L)) = 1 := by
+  rw [standardDualHeight_horizontal_seam_of_line_parity L m γ j hL hj hline]
+  unfold standardDualHeight walkBaseEdgeParity
+  omega
+
 end Ising2DLambda.KacWard

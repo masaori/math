@@ -152,4 +152,36 @@ theorem closedWalk_standardDualHeight_vertical_internal (L : ℕ) [NeZero L]
   have h := hfour r hr1 hri
   omega
 
+/-- 全周偶奇だけを入力とする、横方向の切断線での高さ差。 -/
+theorem standardDualHeight_horizontal_seam_of_line_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (j : ℕ) (hL : 2 ≤ L) (hj : j < L)
+    (hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 = 0) :
+    standardDualHeight L horizontalCross verticalCross (0, (j : ZMod L)) =
+      (standardDualHeight L horizontalCross verticalCross
+          (((L - 1 : ℕ) : ZMod L), (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 := by
+  have hlast : L - 1 < L := by omega
+  simp only [standardDualHeight, ZMod.val_zero,
+    ZMod.val_cast_of_lt hlast, ZMod.val_cast_of_lt hj]
+  simp only [Finset.Icc_eq_empty_of_lt (by omega : 0 < 1), Finset.sum_empty, Nat.add_zero]
+  omega
+
+theorem standardDualHeight_horizontal_seam_changes_of_line_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (j : ℕ) (hL : 2 ≤ L) (hj : j < L)
+    (hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 = 0) :
+    (standardDualHeight L horizontalCross verticalCross (0, (j : ZMod L)) ≠
+      standardDualHeight L horizontalCross verticalCross
+        (((L - 1 : ℕ) : ZMod L), (j : ZMod L))) ↔
+    horizontalCross 0 (j : ZMod L) % 2 = 1 := by
+  rw [standardDualHeight_horizontal_seam_of_line_parity L horizontalCross verticalCross
+    j hL hj hline]
+  unfold standardDualHeight
+  omega
+
 end Ising2DLambda.NecSuf.KacWard
