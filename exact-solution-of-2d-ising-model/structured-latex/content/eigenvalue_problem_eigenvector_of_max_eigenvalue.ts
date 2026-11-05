@@ -4335,43 +4335,97 @@ V_1^{(+)}
         math(String.raw`\eta_{(1,\dots,1)} \in \{+1,-1\}`),
         " は ",
         ref("epsilon_eigenvalue_on_check_Q"),
-        " (1) の符号とする。",
+        " (1) の符号（",
+        math(String.raw`+1, -1`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        "。",
+        ref("max_eigenvector_in_even_sector"),
+        " の証明の準備と同じ読み方）とし、",
+        math(String.raw`r := \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} \in \mathbb{R}`),
+        " とおく。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-& \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0
-&&(\because\ \text{(1)}) \\
+& \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) = r_{\mathbb{C}}\ \text{かつ}\ r \in \mathbb{R}_{>0}
+&&(\because\ \text{(1)（}\blkref{trace_of_epsilon_V_plus}\text{）とその等号と } \in \mathbb{R}_{>0} \text{ の読み方}) \\
+\Longrightarrow\ & \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0
+&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\text{ の } \mathbb{C} \text{ の元の } z > 0 \text{ の定め方}\ (z \to \mathrm{tr}(\varepsilon V^{(+)})\text{、存在する実数として } r \text{ を取る})) \\
 \Longrightarrow\ & \eta_{(1,\dots,1)} = +1
-&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\ \text{(3) の同値}\ \eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}(\varepsilon V^{(+)}) > 0) \\
-\Longrightarrow\ & \varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}
-&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1) の}\ \varepsilon\check{Q}_{(1,\dots,1)} = \eta_{(1,\dots,1)}\check{Q}_{(1,\dots,1)})
+&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\ \text{(3) の同値の}\ \Longleftarrow)
+\end{aligned}`,
+      ),
+      paragraph([
+        "次に ",
+        math(String.raw`\varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}`),
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\check{Q}_{(1,\dots,1)}
+&= \eta_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}
+&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1)}\ (\epsilon \to (1,\dots,1))) \\
+&= 1_{\mathbb{C}}\check{Q}_{(1,\dots,1)}
+&&(\because\ \text{上の含意の鎖の } \eta_{(1,\dots,1)} = +1) \\
+&= \check{Q}_{(1,\dots,1)}
+&&(\because\ \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`y \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " を取ると、",
-        ref("check_joint_eigenspace_decomposition"),
-        " (1) の冪等性より ",
-        math(String.raw`y = \check{Q}_{(1,\dots,1)}y`),
-        " であり",
+        math(String.raw`y = \check{Q}_{(1,\dots,1)}x`),
+        " なる ",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " が取れる（数ベクトルは ",
+        ref("mat_mult"),
+        " の ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon y
-&= \varepsilon\check{Q}_{(1,\dots,1)}y
-&&(\because\ y = \check{Q}_{(1,\dots,1)}y) \\
-&= \check{Q}_{(1,\dots,1)}y
-&&(\because\ \text{直前の}\ \varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}) \\
+\check{Q}_{(1,\dots,1)}y
+&= \check{Q}_{(1,\dots,1)}\left(\check{Q}_{(1,\dots,1)}x\right)
+&&(\because\ y = \check{Q}_{(1,\dots,1)}x \text{ の取り方}) \\
+&= \left(\check{Q}_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}\right)x
+&&(\because\ \blkref{mat_mult_associative}) \\
+&= \check{Q}_{(1,\dots,1)}x
+&&(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(1) の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\ (\epsilon \to (1,\dots,1))) \\
 &= y
-&&(\because\ y = \check{Q}_{(1,\dots,1)}y)
+&&(\because\ y = \check{Q}_{(1,\dots,1)}x \text{ の取り方})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon y
+&= \varepsilon\left(\check{Q}_{(1,\dots,1)}y\right)
+&&(\because\ \text{直前の鎖の } \check{Q}_{(1,\dots,1)}y = y) \\
+&= \left(\varepsilon\check{Q}_{(1,\dots,1)}\right)y
+&&(\because\ \blkref{mat_mult_associative}) \\
+&= \check{Q}_{(1,\dots,1)}y
+&&(\because\ \text{上の鎖の } \varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}) \\
+&= y
+&&(\because\ \text{直前の鎖の } \check{Q}_{(1,\dots,1)}y = y)
 \end{aligned}`,
       ),
       paragraph([
-        "したがって ",
+        "なので、",
         ref("def_even_eigenvectors_of_epsilon"),
         " より ",
         math(String.raw`y \in \mathcal{F}^{(+)}`),
-        "。これは ",
+        "。",
+        math(String.raw`y`),
+        " は ",
+        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
+        " の任意の元なので ",
+        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)} \subseteq \mathcal{F}^{(+)}`),
+        " である。これは ",
         ref("max_eigenvector_in_even_sector"),
         " (4) と同じ結論である。",
       ]),
@@ -4380,6 +4434,7 @@ V_1^{(+)}
       status: "added",
       notes: [
         "2026-10-31: 章立ての組み直しで、V^{(+)} の最大固有値に属する固有ベクトルの章のゴールの式（tr(εV^{(+)}) = … > 0 ⟹ im Q̌_{(1,…,1)} ⊆ F^{(+)}）を一つの主張として立てた。既存の主張 trace_of_epsilon_V_plus・trace_of_epsilon_V_plus_via_check_eigenvalues・epsilon_eigenvalue_on_check_Q と、max_eigenvector_in_even_sector (4) の証明の計算を並べるだけで、新しい証明は無い。",
+        "2026-11-05: (2) を一ステップ一定理に揃えた。含意の鎖の 1 行目を、(1) の右辺 r の置き方と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方を分けた 2 行にし（max_eigenvector_in_even_sector (1) と同じ）、εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を epsilon_eigenvalue_on_check_Q (1)・η の代入・scalar_multiple_by_one の 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、εy = y を mat_mult_associative の行を入れた 4 行の鎖にした（max_eigenvector_in_even_sector (4) と同じ行）。η の ±1 を ℂ の元 ±1_ℂ と読むことを冒頭に書いた。主張は変えていない。",
       ],
     },
   },
