@@ -134,7 +134,8 @@
 | `VPlusData.traceFactor` | `ϰ := (2sinh 2K_2)^{M_col/2}Π_μ2sinh(γ(θ̃_μ)/2)`（`(2sinh 2K_2)^{M_col/2}` が `C`） | 主張の `ϰ` |
 | `VPlusData.sum_checkT_eq_traceFactor` | `Σ_εť_ε = … = ϰ`（人手の Step 4 の 2 本目の和の鎖と同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。`real_sum_over_binary_words_distributes_in_left_factor` は具体版 `binaryWordRealSum_mul`、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` は具体版 `expansion_of_finite_product_of_two_term_sums_of_real`、`def_cosh_sinh` の `sinh` は mathlib の `Real.sinh_eq`。必要十分版は置かない: 効くのは引いた 2 つの主張（それぞれ必要十分版あり）と ℝ の計算規則と `sinh` の式だけ） | Step 4 |
 | `VPlusData.traceFactor_pos` | `ϰ > 0`（旧い Step の分け方のまま） | (2)・Step 6 |
-| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`**（旧い Step の分け方のまま。Step 2〜4 の具体版（`sum_checkT_eq_traceFactor` を含む）を使って Step 5 の鎖と 1 対 1 にするのは状態台帳の次の一歩） | **(1)・Step 5（定理本体）** |
+| `VPlusData.trace_epsilon_mul_V_step5` | `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（人手の Step 5 の 8 行と同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。`real_inclusion_preserves_sum_over_binary_words` は具体版 `binaryWordComplexSum_ofReal`。必要十分版は置かない: 効くのは引いた Step 1・3・4 の鎖と 3 つの主張と ℝ の乗法の交換則だけで、この鎖はそれらをつなぐだけ） | Step 5 |
+| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ`**（`M` を一般に取る形。`M = r + 1` は `trace_epsilon_mul_V_step5`、人手の範囲外の `M = 0` は mathlib の `simp`） | **(1)（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | (3)・Step 7 |
 
 #### `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
@@ -295,7 +296,7 @@
 | `NecSuf.eq_smul_of_mul_eq_smul_mul'`（同） | `Σ_εQ_ε = 1`（`binWordSum`）, `eQ_ε = c(PQ_ε)` ⇒ `e = cP`（具体版の 9 行のうち「`c`, `P` の置き方」を除く 8 行と同じ行） | `MulOneClass R`・`Add R`・`LeftDistribClass R`・`SMul 𝕜 R`・`IsScalarTower 𝕜 R R`（左単位元は効かないが右単位元だけのクラスが無いので `MulOneClass` で受ける。`R` の積の結合則、加法の結合則・可換則・零元、`Q_ε` の冪等性・直交性、`𝕜` の積は不要） | 同 (4) の後半 |
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
-| **`NecSuf.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
+| `NecSuf.sum_powerset_signed_exp` | `∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)` | ℝ の `exp`/`sinh` だけ | 旧い分け方の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2（冪集合の上の和を一度に積へ変える別の手順。いまの具体版は Step 2〜5 の鎖で、これを使っていない） |
 | **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(s(m)s(m+1)) = 2(g(1)+g(-1))^{M_col-1}`** | **重みの値は可換半環だけ（`M_col ≠ 0`）** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
 | `NecSuf.prod_mul_nextSite_eq_first_mul_last`（同） | 中間のサイトで `x(m)x(m) = 1` なら `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)` | 可換モノイド（`M_col ≥ 2`。両端の `x·x = 1` は不要） | `open_chain_endpoint_product_sum` の Step 2 |
 | **`NecSuf.exp_series_sum_of_sq_eq_one`**（`NecSuf/ExpOfInvolution.lean`） | **`A^2 = 1` で `∑_k (k!)^{-1}(tA)^k` の部分和の極限が `E` なら `E = cosh(t)·1 + sinh(t)·A`** | **`ℂ`-代数の半環、`ContinuousAdd`・`ContinuousSMul ℂ`・`T2`（ノルム・完備性・可換性・`t ∈ ℝ` は不要）** | `trace_of_epsilon_V_plus` Step 2（`two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」も同じ必要十分版の系。`lean/README.md` の「現在 2 本立てになっている主張」の表） |
@@ -313,7 +314,7 @@
 | 同 (3) | `CheckFermi.eta_eq_eta_univ_mul`（`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`。人手の帰納法と同じ行の calc） | `NecSuf.eq_univ_mul_neg_one_pow`（具体版と同じ行。効くのは (2) と `Monoid`・`HasDistribNeg` だけ） | **系**（`eta_eq_eta_univ_mul_of_necSuf` / `eta_eq_neg_eta_insert_of_necSuf`） |
 | 同 (4) の前半 | `CheckFermi.parityFactor_mul_Qproj` / `finProdLeft_mul_Qproj`（人手の鎖と同じ行の calc） | `NecSuf.one_sub_smul_mul_eq_smul'` / `finProdLeft_mul_eq_prod_smul'`（具体版と同じ行） | **系としても得られる**（`*_of_necSuf`） |
 | 同 (4) の後半 | `CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul` / `epsilon_eq_parityProd_succ`（人手の 7 行・9 行の鎖と同じ行の calc） | `NecSuf.mul_eq_smul_mul_of_sign_pow'` / `eq_smul_of_mul_eq_smul_mul'`（具体版と同じ行。7 行に効くのは `Monoid`・`HasDistribNeg`・`SemigroupAction` だけ、9 行に効くのは右単位元・左分配則・`IsScalarTower` だけ） | **系としても得られる**（`*_of_necSuf`） |
-| `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
+| `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2・Step 3 | `checkU_prod_eq_neg_one_pow`・`VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH` | `NecSuf.map_prod_two_valued_eq_pow'`・`NecSuf.signed_term_eq_map_mul'` | **系としても得られる**（`*_of_necSuf`）。Step 1・Step 4・Step 5 の鎖には必要十分版を置かない（引いた主張と鎖をつなぐだけで、鎖に固有の取り払える構造が無い） |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
@@ -353,7 +354,8 @@
   有限集合の冪集合にわたる和の積への変形（`Finset.prod_add`）と
   `sinh x = (e^x − e^{−x})/2` だけである。** `γ` が `arccosh` で書けることも、
   `V^{(+)}` が転送行列であることも、`Λ̌_ε` が固有値であることも、半整数運動量であることも
-  効いていない（`NecSuf.sum_powerset_signed_exp` は `g : ι → ℝ` を任意にとる）。
+  効いていない（`NecSuf.sum_powerset_signed_exp` は `g : ι → ℝ` を任意にとる）。これは旧い Step の分け方での記述で、
+  いまの具体版（Step 2〜5 の鎖）はこの必要十分版を使っていない。
 
 - **1 次元開鎖の二つのスピン和に効いているのは、変数変換 `Φ(s) = (s(1); s(m)s(m+1))` の全単射と、
   重みの値の側の可換半環の構造（有限積の有限和への展開）だけである。** 重みの値については実数・指数関数・`cosh`・`sinh` は効いておらず、

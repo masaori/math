@@ -14,8 +14,9 @@
   （1 次元性が要らないことの別証として残す）
 - `epsilon_eigenvalue_on_check_Q` (4) の前半（`(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε` の 10 行と `P_k` の帰納法）→
   `NecSuf/FactorsActingAsScalarsOnProjection.lean`
-- `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 →
-  `Ising2D.NecSuf.sum_powerset_signed_exp`
+- `trace_of_epsilon_V_plus_via_check_eigenvalues` の旧い Step 2 →
+  `Ising2D.NecSuf.sum_powerset_signed_exp`（冪集合の上の和を一度に積へ変える別証として残す。人手の Step 2〜5 と
+  手順が違うので必要十分版には数えず、具体版はもう使っていない）
 
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査結果）
 
@@ -444,13 +445,13 @@ theorem smul_left_cancel_of_ne_zero {x : A} (hx : x ≠ 0) {η η' : 𝕜} (h : 
 end Scalar
 
 /-! ## 4. 符号つき和の積への分解（人手証明
-`trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2） -/
+`trace_of_epsilon_V_plus_via_check_eigenvalues` の旧い Step 2 の別証。いまの人手の Step 2〜5 とは手順が違う） -/
 
 section SignedSum
 
 variable {ι : Type*} [DecidableEq ι]
 
-/-- **人手証明 Step 2 の必要十分版**:
+/-- **人手証明の旧い Step 2 の別証**（いまの人手の Step 2〜5 と手順が違うので必要十分版には数えない）:
 
   `∑_{T ⊆ s} (-1)^{|s|-|T|} exp(∑_{i∈s} g_i (1_{i∈T} - 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`
 

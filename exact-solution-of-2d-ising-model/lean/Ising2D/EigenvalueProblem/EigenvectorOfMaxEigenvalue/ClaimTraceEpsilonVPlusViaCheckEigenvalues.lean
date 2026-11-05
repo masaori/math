@@ -5,8 +5,9 @@
 （`closing_003_claim_trace_epsilon_V_plus_via_eigenvalues`、
 ラベル **`trace_of_epsilon_V_plus_via_check_eigenvalues`**）
 
-必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
-`Ising2D.NecSuf.sum_powerset_signed_exp`。本ファイルの Step 2 はその**系**である。
+必要十分版は Step ごとに置く（下の対応表）。`Ising2D/NecSuf/ParityFermion.lean` の
+`Ising2D.NecSuf.sum_powerset_signed_exp`（冪集合の上の和を一度に積へ変える）は人手の Step 2〜5 と手順が違い、
+本ファイルの具体版はもう使っていない。
 
 ## 章 017 から受け取る入力
 
@@ -28,7 +29,8 @@
 | Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
 | Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
-| Step 5〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2〜4 の具体版（`sum_checkT_eq_traceFactor` を含む）をまだ使っていない。それらを使って Step 5〜7 の鎖と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5`（同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
+| Step 6・Step 7 | `traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 6 の 4 本の鎖・Step 7 の同値と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -39,6 +41,8 @@ import Ising2D.NecSuf.SignedTermAsImageOfReorderedProduct
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWords
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf
 
 namespace Ising2D
 
@@ -168,8 +172,8 @@ theorem trace_epsilon_mul_V_step1 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) := by
         congr 1; funext ε; exact mul_comm _ _           -- `complex_numbers_form_a_field` の乗法の交換則を各項へ同時に
 
-/-- `tr(εV^{(+)}) = Σ_T η_T Λ̌_T`（和は部分集合の上の `Finset.sum`）。人手の主張の行ではなく、Step 2 以降の Lean の
-証明（`trace_epsilon_mul_V`）が受け取る形である。`M = r + 1` は Step 1 の鎖 `trace_epsilon_mul_V_step1` を通し、
+/-- `tr(εV^{(+)}) = Σ_T η_T Λ̌_T`（和は部分集合の上の `Finset.sum`）。人手の主張の行ではなく、`trace_epsilon_mul_V` の
+人手の範囲外の `M = 0` の場合だけが使う形である（`M = r + 1` の場合は Step 5 の鎖 `trace_epsilon_mul_V_step5` を通る）。`M = r + 1` は Step 1 の鎖 `trace_epsilon_mul_V_step1` を通し、
 人手の和 `NecSuf.binWordSum` を語から部分集合への全単射 `finsetOfWord` で `Finset.sum` へ付け替える（運ぶ段。人手の行は無い）。
 人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる。 -/
 theorem trace_epsilon_mul_V_eq_sum :
@@ -522,47 +526,69 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
                                                         -- ℝ の乗法の交換則
     _ = D.traceFactor := rfl                            -- `ϰ` の置き方
 
+/-! ## Step 5: (1) の等式 -/
+
+/-- **原文 Step 5** の 8 行の鎖（(1) の等式）:
+`tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = Σ_ε(ť_εȟ)_ℂ = (Σ_εť_εȟ)_ℂ = ((Σ_εť_ε)ȟ)_ℂ = (ϰȟ)_ℂ = (ȟϰ)_ℂ = ȟ_ℂϰ_ℂ = η_{(1,…,1)}ϰ_ℂ`
+（人手の `M_col` が Lean の `r + 1`、`ϰ` が `D.traceFactor`、`ȟ` が `F.checkH`。人手の複素数の和
+`Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words_of_complex_numbers`）は、Step 1 の鎖の右辺では `NecSuf.binWordSum r`、
+付け替えの段の右辺では具体版 `binaryWordComplexSum r` で、2 行目の後の 1 段はその付け替え（`binaryWordComplexSum_eq_binWordSum`。
+運ぶ段で、人手の行は無い）。実数の和は `binaryWordRealSum r`）。必要十分版は置かない（効くのは、引いた
+Step 1・Step 3・Step 4 の鎖、`real_inclusion_preserves_sum_over_binary_words`・
+`real_sum_over_binary_words_distributes_in_left_factor`・`real_inclusion_preserves_product` と ℝ の乗法の交換則だけで、
+この鎖はそれらをつなぐだけなので、この鎖に固有の取り払える構造が無い）。 -/
+theorem trace_epsilon_mul_V_step5 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    (epsilon (r + 1) * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) :=
+  calc (epsilon (r + 1) * D.V).trace
+      = NecSuf.binWordSum r (fun ε =>
+          F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) :=
+        trace_epsilon_mul_V_step1 D                     -- Step 1 の鎖
+    _ = NecSuf.binWordSum r (fun ε => ((D.checkT ε * F.checkH : ℝ) : ℂ)) := by
+        congr 1; funext ε; exact D.eta_mul_checkLambda_eq_checkT_mul_checkH ε
+                                                        -- Step 3 の鎖を各項へ同時に
+    _ = binaryWordComplexSum r (fun ε => ((D.checkT ε * F.checkH : ℝ) : ℂ)) :=
+        (binaryWordComplexSum_eq_binWordSum r _).symm   -- 複素数の和を具体版 `binaryWordComplexSum` へ付け替える（運ぶ段。人手の行は無い）
+    _ = ((binaryWordRealSum r (fun ε => D.checkT ε * F.checkH) : ℝ) : ℂ) :=
+        binaryWordComplexSum_ofReal r _                 -- `real_inclusion_preserves_sum_over_binary_words`（`r → M_col`、`x_ε → ť_εȟ`）
+    _ = ((binaryWordRealSum r (fun ε => D.checkT ε) * F.checkH : ℝ) : ℂ) := by
+        rw [binaryWordRealSum_mul r]                    -- `real_sum_over_binary_words_distributes_in_left_factor`
+                                                        -- （`r → M_col`、`x_ε → ť_ε`、`c → ȟ`）を右辺から左辺へ
+    _ = ((D.traceFactor * F.checkH : ℝ) : ℂ) := by
+        rw [D.sum_checkT_eq_traceFactor]                -- Step 4 の鎖
+    _ = ((F.checkH * D.traceFactor : ℝ) : ℂ) := by
+        rw [mul_comm]                                   -- ℝ の乗法の交換則
+    _ = ((F.checkH : ℝ) : ℂ) * ((D.traceFactor : ℝ) : ℂ) :=
+        (real_inclusion_mul _ _).symm                   -- `real_inclusion_preserves_product`（`a → ȟ`、`b → ϰ`）を右辺から左辺へ
+    _ = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) := by
+        rw [F.checkH_ofReal]                            -- `ȟ` の取り方 `ȟ_ℂ = η_{(1,…,1)}`
+
 end VPlusData
 
 namespace VPlusData
 
 variable {F : CheckFermi M} (D : VPlusData M F)
 
-/-! ## Step 5 以降（旧い Step の分け方のまま） -/
+/-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (1)**:
+`tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ`（`M` を一般に取る形）。`M = r + 1` は Step 5 の鎖 `trace_epsilon_mul_V_step5` である。
+人手の範囲外の `M = 0`（和が `T = ∅` の 1 項だけ）は `trace_epsilon_mul_V_eq_sum` を mathlib の `simp` で閉じる。 -/
+theorem trace_epsilon_mul_V :
+    (epsilon M * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) := by
+  match M, F, D with
+  | 0, F, D =>
+    rw [D.trace_epsilon_mul_V_eq_sum]
+    simp [traceFactor, checkLambda, Finset.univ_eq_empty]
+    exact Or.inl (congrArg F.eta (Subsingleton.elim _ _))
+  | r + 1, F, D => exact trace_epsilon_mul_V_step5 D
 
-/-- **人手証明 Step 3**: 右辺の `η` 以外の因子はすべて正。 -/
+/-! ## Step 6・Step 7（旧い Step の分け方のまま） -/
+
+/-- 人手 (2) `ϰ > 0`（人手の Step 6。Step 6 の鎖と 1 対 1 にするのは状態台帳の次の一歩）。 -/
 theorem traceFactor_pos : 0 < D.traceFactor := by
   unfold traceFactor
   refine mul_pos D.hC (Finset.prod_pos fun μ _ => ?_)
   have := D.hgam μ
   have hs : 0 < Real.sinh (D.gam μ / 2) := Real.sinh_pos_iff.2 (by linarith)
   linarith
-
-/-- **人手証明 `trace_of_epsilon_V_plus_via_check_eigenvalues` そのもの**:
-
-  `tr(εV^{(+)}) = η_{(1,…,1)} (2 sinh 2K_2)^{M/2} ∏_μ 2 sinh(γ(θ̃_μ)/2)`。 -/
-theorem trace_epsilon_mul_V :
-    (epsilon M * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) := by
-  rw [D.trace_epsilon_mul_V_eq_sum]
-  have hreal : ∀ T : Finset (Fin M),
-      F.eta T * ((checkLambda D.C D.gam T : ℝ) : ℂ)
-        = F.eta Finset.univ * (((-1 : ℝ) ^ (M - T.card)
-            * checkLambda D.C D.gam T : ℝ) : ℂ) := by
-    intro T
-    rw [F.eta_eq_eta_univ_mul T]
-    push_cast
-    ring
-  rw [Finset.sum_congr rfl (fun T _ => hreal T), ← Finset.mul_sum]
-  congr 1
-  rw [← Complex.ofReal_sum]
-  congr 1
-  -- 実数の等式に落とす
-  have hcard : (Finset.univ : Finset (Fin M)).card = M := by simp
-  have hkey := NecSuf.sum_powerset_signed_exp (Finset.univ : Finset (Fin M)) D.gam
-  rw [Finset.powerset_univ, hcard] at hkey
-  unfold traceFactor checkLambda
-  rw [← hkey, Finset.mul_sum]
-  exact Finset.sum_congr rfl fun T _ => by ring
 
 /-- **人手証明の最後の同値**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`（の一方向）。 -/
 theorem eta_univ_eq_one_of_trace_pos (h : 0 < ((epsilon M * D.V).trace).re) :
