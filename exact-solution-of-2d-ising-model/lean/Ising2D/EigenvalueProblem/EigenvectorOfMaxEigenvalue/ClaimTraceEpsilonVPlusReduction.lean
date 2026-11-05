@@ -6,7 +6,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| Step 1 の式変形 `tr(εV^{(+)}) = tr(εBV_2B) = ⋯ = tr(εV_1^{(+)}V_2)` | `trace_epsilon_VPlusOfTransfer` |
+| Step 1 の 6 行 `tr(εV^{(+)}) = tr(εBV_2B) = tr(BεV_2B) = tr(εV_2BB) = tr(εV_2V_1^{(+)}) = tr(V_1^{(+)}εV_2) = tr(εV_1^{(+)}V_2)` | `trace_epsilon_VPlusOfTransfer` の calc の印 `人手 1`〜`人手 6` の段（ほかの段は括弧の付け替えと `A^2 := AA`） |
 | 準備 (P1) の 4 行 `(iκ)H_1^{(+)} = (κi)H_1^{(+)} = κ(iH_1^{(+)}) = κ(D_0 + εG) = κD_0 + κ(εG)` | `I_mul_smul_H1plus` の calc の 4 段 |
 | 準備 (P2) の 5 行 `D_0(εG) = (D_0ε)G = ⋯ = (εG)D_0` | `commute_openChainD0_epsilon_mul_boundaryG` の calc の 5 段 |
 | 準備 (P2) の `commuting_with_scalar_multiple` の 3 回の適用 `D_0(κ(εG)) = (κ(εG))D_0`・`(κ(εG))(κD_0) = (κD_0)(κ(εG))`・`ε(κD_0) = (κD_0)ε` | `openChainD0_mul_smul_epsilon_mul_boundaryG`・`smul_epsilon_mul_boundaryG_mul_smul_openChainD0`・`epsilon_mul_smul_openChainD0` |
@@ -58,28 +58,40 @@ variable {M : ℕ}
 
 /-! ## Step 1: `ε` を外へ出す -/
 
-/-- **人手 `trace_of_epsilon_V_plus` Step 1**: `tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`。 -/
+/-- **人手 `trace_of_epsilon_V_plus` Step 1**: `tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`。
+
+人手の 6 行が calc の印 `-- 人手 1`〜`-- 人手 6` の段に 1 対 1 で対応する（4 行目だけは `A^2 := AA` の段と合わせて 2 段）。人手は積の括弧を
+`mat_mult_associative` で省き、Lean の積は左から結合する（`εBV_2B` は `((εB)V_2)B`）。
+人手の行が引く事実を当てるために括弧を付け替える段（`-- 括弧の付け替え`）は Lean で補った中間であり、
+`mat_mult_associative` の具体版が無いので既存の慣行どおり mathlib の `mul_assoc` で閉じる。
+人手 4 行目の `BB = V_1^{(+)}` は、`V1_plus_square_root_property` の主張 `B^2 = V_1^{(+)}` と
+その主張の中の `A^2 := AA` の 2 段に分けて当てる。 -/
 theorem trace_epsilon_VPlusOfTransfer (K1 : ℂ) (K2 : ℝ) :
     (epsilon M * VPlusOfTransfer M K1 K2).trace = (epsilon M * V1plus M K1 * V2 M K2).trace := by
   calc (epsilon M * VPlusOfTransfer M K1 K2).trace
       = (epsilon M * (V1plusHalf M K1 * V2 M K2 * V1plusHalf M K1)).trace := by
-        rw [VPlusOfTransfer]
-    -- `εB = Bε`
+        rw [VPlusOfTransfer]                              -- 人手 1: `def_V_plus`
+    _ = (epsilon M * V1plusHalf M K1 * V2 M K2 * V1plusHalf M K1).trace := by
+        rw [← mul_assoc, ← mul_assoc]                     -- 括弧の付け替え（`mat_mult_associative`）
+    _ = (V1plusHalf M K1 * epsilon M * V2 M K2 * V1plusHalf M K1).trace := by
+        rw [(epsilon_commute_V1plusHalf K1).eq]           -- 人手 2: `epsilon_commutes_with_V1_plus_square_root` の `εB = Bε`
     _ = (V1plusHalf M K1 * (epsilon M * V2 M K2 * V1plusHalf M K1)).trace := by
-        rw [← mul_assoc, ← mul_assoc, (epsilon_commute_V1plusHalf K1).eq]
-        simp only [mul_assoc]
-    -- 巡回性を `A = B`, `B' = εV_2B` に適用
-    _ = (epsilon M * V2 M K2 * V1plusHalf M K1 * V1plusHalf M K1).trace := by
-        rw [trace_cyclic]
-    -- `BB = V_1^{(+)}`（人手と同じく `V1_plus_square_root_property`（`def_V1_plus_square_root` の平方根性）を引く）
+        rw [mul_assoc (V1plusHalf M K1) (epsilon M), mul_assoc (V1plusHalf M K1)]
+                                                          -- 括弧の付け替え（`mat_mult_associative`）
+    _ = (epsilon M * V2 M K2 * V1plusHalf M K1 * V1plusHalf M K1).trace :=
+        trace_cyclic _ _                                  -- 人手 3: `trace_basic_properties` (2) を `A = B`, `B' = εV_2B` に
+    _ = (epsilon M * V2 M K2 * (V1plusHalf M K1 * V1plusHalf M K1)).trace := by
+        rw [mul_assoc (epsilon M * V2 M K2)]              -- 括弧の付け替え（`mat_mult_associative`）
+    _ = (epsilon M * V2 M K2 * V1plusHalf M K1 ^ 2).trace := by
+        rw [← pow_two]                                    -- 人手 4 の前半: `V1_plus_square_root_property` の `A^2 := AA`
     _ = (epsilon M * V2 M K2 * V1plus M K1).trace := by
-        rw [mul_assoc (epsilon M * V2 M K2), ← sq, V1_plus_square_root_property]
-    -- 巡回性
-    _ = (V1plus M K1 * (epsilon M * V2 M K2)).trace := by
-        rw [trace_cyclic]
-    -- `V_1^{(+)}ε = εV_1^{(+)}`
+        rw [V1_plus_square_root_property]                 -- 人手 4: `V1_plus_square_root_property` の `BB = V_1^{(+)}`
+    _ = (V1plus M K1 * (epsilon M * V2 M K2)).trace :=
+        trace_cyclic _ _                                  -- 人手 5: `trace_basic_properties` (2) を `A = εV_2`, `B' = V_1^{(+)}` に
+    _ = (V1plus M K1 * epsilon M * V2 M K2).trace := by
+        rw [← mul_assoc]                                  -- 括弧の付け替え（`mat_mult_associative`）
     _ = (epsilon M * V1plus M K1 * V2 M K2).trace := by
-        rw [← mul_assoc, ← (epsilon_commute_V1plus K1).eq]
+        rw [← (epsilon_commute_V1plus K1).eq]             -- 人手 6: `epsilon_commutes_with_V1_plus` の `V_1^{(+)}ε = εV_1^{(+)}`
 
 /-! ## Step 2: `εV_1^{(+)}` を対角行列と `ε` で書く -/
 
