@@ -1058,6 +1058,14 @@ targets=(
   Ising2D.hasSum_extract_taylor_H2_checkZ_of_necSuf
   Ising2D.hasSum_extract_taylor_H2_checkY_of_necSuf
   Ising2D.NecSuf.hasSum_two_dim_series
+  Ising2D.real_inclusion_pow
+  Ising2D.evenOddCoeffA_of_even
+  Ising2D.evenOddCoeffB_of_even
+  Ising2D.evenOddCoeffA_of_odd
+  Ising2D.evenOddCoeffB_of_odd
+  Ising2D.real_inclusion_sub
+  Ising2D.evenOddTerm_of_even
+  Ising2D.evenOddTerm_of_odd
   Ising2D.TConj_V1plusHalf_checkZ
   Ising2D.TConj_V1plusHalf_checkY
   Ising2D.smul_conj_smul_inv_eq
