@@ -2363,7 +2363,11 @@ targets=(
   Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2
   Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2
   Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums
+  Ising2D.finite_sum_of_constant_real
+  Ising2D.finite_sum_of_negated_constant_real
+  Ising2D.spin_sums_combination_eq_closed_form
   Ising2D.trace_epsilon_VPlusOfTransfer_closed_form
+  Ising2D.closed_form_of_trace_epsilon_V_plus_pos
   Ising2D.trace_epsilon_VPlusOfTransfer_pos
   Ising2D.trace_of_epsilon_V_plus
   Ising2D.trace_epsilon_vPlusDataOf_pos

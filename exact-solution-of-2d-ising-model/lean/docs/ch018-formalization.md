@@ -283,8 +283,12 @@
 | **`Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self`** / **`matExp_openChainD0_mul_boundaryG_mul_V2_apply_self`** | **`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = (exp(-K_2M_col)exp(K_1E(s)))_ℂ`、`(exp(κD_0)(GV_2))_{ord(s),ord(s)} = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ`（人手と同じ 7 段ずつ）** | **Step 4 の二つの鎖** |
 | **`Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2`** / **`trace_matExp_openChainD0_mul_boundaryG_mul_V2`** | **`tr(exp(κD_0)(εV_2)) = (exp(-K_2M_col)S_cosh)_ℂ`、`tr(exp(κD_0)(GV_2)) = (exp(K_2M_col)S_sinh)_ℂ`（人手と同じ 4 段ずつ）** | **Step 5 の二つのトレースの鎖** |
 | **`Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums`** | **`tr(εV^{(+)}) = (cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh))_ℂ`（人手と同じ 11 段）** | **Step 5 の組み立ての鎖** |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_closed_form` | `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 5 の実数の鎖（旧い分け方の 4 段のまま。(t9) で人手の 9 行に揃える） |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_pos` | `0 < Re tr(εV^{(+)})`（`K_1 > 0`） | Step 6 |
+| `Ising2D.finite_sum_of_constant_real` | `∑_{j=1}^{M} c = cM` | Step 5 の実数の鎖の 4 行目の根拠（`+K_2` の側） |
+| `Ising2D.finite_sum_of_negated_constant_real` | `∑_{j=1}^{M} (-c) = -(cM)` | 同（`-K_2` の側） |
+| `Ising2D.spin_sums_combination_eq_closed_form` | `cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 5 の実数の鎖（左辺と 8 行） |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_closed_form` | `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 5 の「ゆえに主張の等号が成り立つ」 |
+| `Ising2D.closed_form_of_trace_epsilon_V_plus_pos` | `(2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} > 0`（`K_1 > 0`） | Step 6 |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_pos` | `0 < Re tr(εV^{(+)})`（`K_1 > 0`） | 主張の `∈ ℝ_{>0}` を実部で読んだもの |
 | **`Ising2D.trace_of_epsilon_V_plus`** | **閉じた式と正値性** | **主張本体** |
 | `Ising2D.trace_epsilon_vPlusDataOf_pos` | `vPlusDataOf` の `V^{(+)}` について `0 < Re tr(εV^{(+)})`（`VPlusOfTransfer_eq_VPlus` で人手の形へ戻す） | 最終定理の入力から欄 `htr` を外すために使う |
 

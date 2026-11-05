@@ -4,8 +4,6 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の Step 4・Step 5・Step 6 と主張）
 
-旧い分け方のまま残っているのは、表の「Step 5 の実数の鎖」の行が指す `trace_epsilon_VPlusOfTransfer_closed_form` の本体（4 段）だけである（(t9) で人手の 9 行と 1 対 1 に書き直す）。
-
 | 人手 | Lean |
 | --- | --- |
 | Step 4 の一つ目の鎖（7 行）`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = ⋯ = (exp(-K_2M_col)exp(K_1E(s)))_ℂ` | `matExp_openChainD0_mul_epsilon_mul_V2_apply_self` の 7 段 |
@@ -15,8 +13,11 @@
 | Step 5 の一つ目のトレースの鎖（4 行）`tr(exp(κD_0)(εV_2)) = ⋯ = (exp(-K_2M_col)S_cosh)_ℂ` | `trace_matExp_openChainD0_mul_epsilon_mul_V2` の 4 段 |
 | Step 5 の二つ目のトレースの鎖（4 行）`tr(exp(κD_0)(GV_2)) = ⋯ = (exp(K_2M_col)S_sinh)_ℂ` | `trace_matExp_openChainD0_mul_boundaryG_mul_V2` の 4 段 |
 | Step 5 の組み立ての鎖（11 行）`tr(εV^{(+)}) = ⋯ = (cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh))_ℂ` | `trace_epsilon_VPlusOfTransfer_eq_spin_sums` の 11 段（印 `人手 1`〜`人手 11`） |
-| Step 5 の実数の鎖（9 行）と「ゆえに主張の等号が成り立つ」 | `trace_epsilon_VPlusOfTransfer_closed_form`（旧い分け方の 4 段のまま） |
-| Step 6（正値性） | `trace_epsilon_VPlusOfTransfer_pos` |
+| Step 5 の実数の鎖（左辺と 8 行）`cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh) = ⋯ = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | `spin_sums_combination_eq_closed_form` の 8 段（印 `人手 1`〜`人手 8`） |
+| 同 4 行目の根拠「同じ実数 `∓K_2` を `M_col` 個足すと `∓K_2M_col`」 | `finite_sum_of_constant_real`・`finite_sum_of_negated_constant_real` |
+| Step 5 の「ゆえに主張の等号が成り立つ」 | `trace_epsilon_VPlusOfTransfer_closed_form` |
+| Step 6（正値性）`(2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} > 0` | `closed_form_of_trace_epsilon_V_plus_pos` |
+| 主張の `∈ ℝ_{>0}` を実部で読んだ `0 < Re tr(εV^{(+)})` | `trace_epsilon_VPlusOfTransfer_pos` |
 | 主張 `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}` | `trace_of_epsilon_V_plus` |
 
 `S_cosh`・`S_sinh` は Lean では名前を付けず、和 `∑ s : SpinConf M, …` をそのまま書く。
@@ -31,9 +32,9 @@ Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く
 `VPlus M (sinh 2K_2) K_1 K_2^*` なので、`VPlusOfTransfer_eq_VPlus` で人手の形へ戻して
 `trace_epsilon_vPlusDataOf_pos` を得る。これで最終定理 `onsager_exact_solution_unconditional` の入力から `htr` を外した。
 
-正値性（`trace_epsilon_VPlusOfTransfer_pos`）は、組み立ての鎖の右辺の二項がともに正であることから出す
+正値性は人手 Step 6 と同じく、実数の鎖の左辺の二項がともに正であることから出す
 （`open_chain_spin_sums_positive`（`open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos`）、
-`cosh K_1 > 0`、`sinh K_1 > 0`、`exp(∓K_2M_col) > 0`）。人手 Step 6 は実数の鎖の左辺（同じ実数）の二項から出す。
+`cosh_sinh_basic_properties_3`、`real_exp_positive`）。
 
 必要十分版は置かない。一般化できるのは、行列の積の分配と対角成分の読み取り（可換環上の行列で成り立つ）と、
 順序体での正の数の積と和の正値性だけで、必要十分版にしても何が本質的かについて情報を与えない
@@ -42,6 +43,10 @@ Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusReduction
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpPositive
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -252,14 +257,33 @@ theorem trace_epsilon_VPlusOfTransfer_eq_spin_sums (hM : 2 ≤ M) (K1 K2 : ℝ) 
                 * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
         real_inclusion_add _ _                                     -- 人手 11: `real_inclusion_preserves_sum`
 
-/-- **人手 Step 5 の実数の鎖**（旧い分け方の 4 段のまま。(t9) で人手の 9 行に揃える）:
-`tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}`。 -/
-theorem trace_epsilon_VPlusOfTransfer_closed_form (hM : 2 ≤ M) (K1 K2 : ℝ) :
-    (epsilon M * VPlusOfTransfer M (K1 : ℂ) K2).trace
-      = (((2 * Real.exp (-K2) * Real.cosh K1) ^ M + (2 * Real.exp K2 * Real.sinh K1) ^ M : ℝ) : ℂ) := by
-  rw [trace_epsilon_VPlusOfTransfer_eq_spin_sums hM K1 K2]
-  congr 1
-  obtain ⟨n, rfl⟩ : ∃ n : ℕ, M = n + 1 := ⟨M - 1, by omega⟩
+/-- 人手 Step 5 の実数の鎖の 4 行目の根拠「同じ実数を `M_col` 個足すと `M_col` 倍」の `+K_2` の側:
+`∑_{j=1}^{M} c = cM`。人手は名前の付いたブロックを引かないので、mathlib の `Finset.sum_const`・`nsmul_eq_mul` で閉じる。 -/
+theorem finite_sum_of_constant_real (M : ℕ) (c : ℝ) :
+    ∑ _j : Fin M, c = c * M := by
+  rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, mul_comm]
+
+/-- 同じ根拠の `-K_2` の側: `∑_{j=1}^{M} (-c) = -(cM)`。人手の `-K_2M_col` を Lean は `-(K_2 · M)` と括弧付けするので、
+`finite_sum_of_constant_real` の `(-c)M` を `-(cM)` へ読み替える段（`neg_mul`）をここに置く。 -/
+theorem finite_sum_of_negated_constant_real (M : ℕ) (c : ℝ) :
+    ∑ _j : Fin M, (-c) = -(c * M) := by
+  rw [finite_sum_of_constant_real, neg_mul]
+
+/-- **人手 Step 5 の実数の鎖**（左辺と 8 行）:
+`cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh)
+  = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}`。
+人手の `M_col` は Lean の `n + 1`（`M_col - 1 ≥ 1` は `1 ≤ n`）。人手の冪 `x^n := ∏_{j=1}^{n} x` は Lean の `x ^ n`
+（mathlib の `Monoid.npow`）で、両者を行き来する段は `Fin.prod_const`（`∏_{j : Fin n} x = x ^ n`）を引く。
+人手 3 の根拠 `def_finite_product_of_real_numbers` の帰納の式 `∏_{j=1}^{n+1} x = (∏_{j=1}^{n} x)x` は、`Fin.prod_const` で
+冪へ移した形 `x^{n+1} = x^n x`（Lean の `pow_succ`）で読む。 -/
+theorem spin_sums_combination_eq_closed_form (n : ℕ) (hn : 1 ≤ n) (K1 K2 : ℝ) :
+    Real.cosh K1 * (Real.exp (-(K2 * ((n + 1 : ℕ) : ℝ)))
+          * ∑ s : SpinConf (n + 1), Real.exp (K1 * openChainEnergy s))
+        + Real.sinh K1 * (Real.exp (K2 * ((n + 1 : ℕ) : ℝ))
+          * ∑ s : SpinConf (n + 1), (s (lastSite (n + 1) (by omega)) : ℝ)
+              * (s (firstSite (n + 1) (by omega)) : ℝ) * Real.exp (K1 * openChainEnergy s))
+      = (2 * Real.exp (-K2) * Real.cosh K1) ^ (n + 1) + (2 * Real.exp K2 * Real.sinh K1) ^ (n + 1) := by
+  have hM : 2 ≤ n + 1 := by omega
   calc Real.cosh K1 * (Real.exp (-(K2 * ((n + 1 : ℕ) : ℝ)))
             * ∑ s : SpinConf (n + 1), Real.exp (K1 * openChainEnergy s))
         + Real.sinh K1 * (Real.exp (K2 * ((n + 1 : ℕ) : ℝ))
@@ -267,32 +291,73 @@ theorem trace_epsilon_VPlusOfTransfer_closed_form (hM : 2 ≤ M) (K1 K2 : ℝ) :
               * (s (firstSite (n + 1) (by omega)) : ℝ) * Real.exp (K1 * openChainEnergy s))
       = Real.cosh K1 * (Real.exp (-(K2 * ((n + 1 : ℕ) : ℝ))) * (2 * (2 * Real.cosh K1) ^ (n + 1 - 1)))
         + Real.sinh K1 * (Real.exp (K2 * ((n + 1 : ℕ) : ℝ)) * (2 * (2 * Real.sinh K1) ^ (n + 1 - 1))) := by
-        -- 二つの 1 次元開鎖のスピン和公式（`open_chain_partition_sum`・`open_chain_endpoint_product_sum`、`K = K_1`）
+        -- 人手 1: `open_chain_partition_sum` と `open_chain_endpoint_product_sum` を `K = K_1` に
         rw [open_chain_partition_sum hM K1, open_chain_endpoint_product_sum hM K1]
-    -- `2·2^{M_col-1} = 2^{M_col}`、`cosh(K_1)(cosh K_1)^{M_col-1} = (cosh K_1)^{M_col}`（`sinh` も同じ）
-    _ = 2 ^ (n + 1) * Real.exp (-(((n + 1 : ℕ) : ℝ) * K2)) * Real.cosh K1 ^ (n + 1)
-        + 2 ^ (n + 1) * Real.exp (((n + 1 : ℕ) : ℝ) * K2) * Real.sinh K1 ^ (n + 1) := by
-        rw [Nat.add_sub_cancel, mul_comm K2]
-        ring
-    -- 指数法則 `exp(±M_colK_2) = (exp(±K_2))^{M_col}`
-    _ = 2 ^ (n + 1) * Real.exp (-K2) ^ (n + 1) * Real.cosh K1 ^ (n + 1)
-        + 2 ^ (n + 1) * Real.exp K2 ^ (n + 1) * Real.sinh K1 ^ (n + 1) := by
-        rw [← Real.exp_nat_mul, ← Real.exp_nat_mul, mul_neg]
-    -- 積の冪の分配
+    _ = Real.exp (-(K2 * ((n + 1 : ℕ) : ℝ))) * ((2 * Real.cosh K1) ^ n * (2 * Real.cosh K1))
+        + Real.exp (K2 * ((n + 1 : ℕ) : ℝ)) * ((2 * Real.sinh K1) ^ n * (2 * Real.sinh K1)) := by
+        -- 人手 2: ℝ の積の可換律・結合律（指数の `n + 1 - 1` は Lean の自然数の引き算で、`n` と同じ数）
+        rw [Nat.add_sub_cancel]
+        ac_rfl
+    _ = Real.exp (-(K2 * ((n + 1 : ℕ) : ℝ))) * (2 * Real.cosh K1) ^ (n + 1)
+        + Real.exp (K2 * ((n + 1 : ℕ) : ℝ)) * (2 * Real.sinh K1) ^ (n + 1) := by
+        -- 人手 3: `def_finite_product_of_real_numbers` の帰納的定義（`x^{n+1} = x^n x`、2 か所へ同時に、右辺から左辺へ）
+        rw [← pow_succ, ← pow_succ]
+    _ = Real.exp (∑ _j : Fin (n + 1), (-K2)) * (2 * Real.cosh K1) ^ (n + 1)
+        + Real.exp (∑ _j : Fin (n + 1), K2) * (2 * Real.sinh K1) ^ (n + 1) := by
+        -- 人手 4: ℝ の有限和: 同じ実数 `∓K_2` を `M_col` 個足すと `∓K_2M_col`
+        rw [finite_sum_of_negated_constant_real, finite_sum_of_constant_real]
+    _ = (∏ _j : Fin (n + 1), Real.exp (-K2)) * (2 * Real.cosh K1) ^ (n + 1)
+        + (∏ _j : Fin (n + 1), Real.exp K2) * (2 * Real.sinh K1) ^ (n + 1) := by
+        -- 人手 5: `real_exp_of_finite_sum`（2 か所へ同時に）
+        rw [real_exp_of_finite_sum n (fun _ => -K2), real_exp_of_finite_sum n (fun _ => K2)]
+    _ = (∏ _j : Fin (n + 1), Real.exp (-K2)) * (∏ _j : Fin (n + 1), 2 * Real.cosh K1)
+        + (∏ _j : Fin (n + 1), Real.exp K2) * (∏ _j : Fin (n + 1), 2 * Real.sinh K1) := by
+        -- 人手 6: 冪の定義 `x^n := ∏_{j=1}^{n} x`（2 か所へ同時に、右辺から左辺へ）
+        rw [Fin.prod_const (n + 1) (2 * Real.cosh K1), Fin.prod_const (n + 1) (2 * Real.sinh K1)]
+    _ = (∏ _j : Fin (n + 1), Real.exp (-K2) * (2 * Real.cosh K1))
+        + (∏ _j : Fin (n + 1), Real.exp K2 * (2 * Real.sinh K1)) := by
+        -- 人手 7: `finite_product_of_real_products`（2 か所へ同時に、右辺から左辺へ）
+        rw [finite_product_of_real_products n (fun _ => Real.exp (-K2)) (fun _ => 2 * Real.cosh K1),
+          finite_product_of_real_products n (fun _ => Real.exp K2) (fun _ => 2 * Real.sinh K1)]
     _ = (2 * Real.exp (-K2) * Real.cosh K1) ^ (n + 1) + (2 * Real.exp K2 * Real.sinh K1) ^ (n + 1) := by
-        rw [mul_pow, mul_pow, mul_pow, mul_pow]
+        -- 人手 8: ℝ の積の可換律・結合律と冪の定義
+        rw [Fin.prod_const, Fin.prod_const]
+        ac_rfl
+
+/-- 人手 Step 5 の「ゆえに主張の等号が成り立つ」: 組み立ての鎖（`trace_epsilon_VPlusOfTransfer_eq_spin_sums`）の右辺の
+括弧の中の実数を、実数の鎖（`spin_sums_combination_eq_closed_form`）で書き換える。
+`tr(εV^{(+)}) = ((2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col})_ℂ`。 -/
+theorem trace_epsilon_VPlusOfTransfer_closed_form (hM : 2 ≤ M) (K1 K2 : ℝ) :
+    (epsilon M * VPlusOfTransfer M (K1 : ℂ) K2).trace
+      = (((2 * Real.exp (-K2) * Real.cosh K1) ^ M + (2 * Real.exp K2 * Real.sinh K1) ^ M : ℝ) : ℂ) := by
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, M = n + 1 := ⟨M - 1, by omega⟩
+  rw [trace_epsilon_VPlusOfTransfer_eq_spin_sums hM K1 K2,
+    spin_sums_combination_eq_closed_form n (by omega) K1 K2]
 
 /-! ## Step 6 -/
 
-/-- **人手 Step 6**: `tr(εV^{(+)}) > 0`。Step 5 の組み立ての鎖の右辺の二項がともに正であることから出す
-（`open_chain_spin_sums_positive`、`cosh K_1 > 0`、`sinh K_1 > 0`、`exp(∓K_2M_col) > 0`）。 -/
+/-- **人手 Step 6**: `(2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} > 0`。
+Step 5 の実数の鎖の左辺の二項がともに正であること（`open_chain_spin_sums_positive` の `S_cosh > 0`・`S_sinh > 0`、
+`cosh_sinh_basic_properties` (3) から `cosh K_1 > sinh K_1 > 0`、`real_exp_positive` から `exp(∓K_2M_col) > 0`、
+正の実数の積は正）から左辺が正（正の実数の和は正）、それが右辺に等しい。
+「正の実数の積・和は正」は人手が名前の付いたブロックを引かないので mathlib の `mul_pos`・`add_pos` を引く。 -/
+theorem closed_form_of_trace_epsilon_V_plus_pos (hM : 2 ≤ M) {K1 : ℝ} (hK1 : 0 < K1) (K2 : ℝ) :
+    0 < (2 * Real.exp (-K2) * Real.cosh K1) ^ M + (2 * Real.exp K2 * Real.sinh K1) ^ M := by
+  obtain ⟨n, rfl⟩ : ∃ n : ℕ, M = n + 1 := ⟨M - 1, by omega⟩
+  -- `cosh_sinh_basic_properties` (3) と `K_1 > 0`
+  have hsinh : Real.sinh K1 > 0 := (cosh_sinh_basic_properties_3 hK1).2
+  have hcosh : Real.cosh K1 > 0 := lt_trans hsinh (cosh_sinh_basic_properties_3 hK1).1
+  rw [← spin_sums_combination_eq_closed_form n (by omega) K1 K2]
+  exact add_pos
+    (mul_pos hcosh (mul_pos (real_exp_positive _) (open_chain_partition_sum_pos hM hK1)))
+    (mul_pos hsinh (mul_pos (real_exp_positive _) (open_chain_endpoint_product_sum_pos hM hK1)))
+
+/-- `0 < Re tr(εV^{(+)})`: Step 5 の主張の等号で `tr(εV^{(+)})` を実数の包含に書き、その実部（包含した実数そのもの）に
+Step 6 を当てる。 -/
 theorem trace_epsilon_VPlusOfTransfer_pos (hM : 2 ≤ M) {K1 : ℝ} (hK1 : 0 < K1) (K2 : ℝ) :
     0 < ((epsilon M * VPlusOfTransfer M (K1 : ℂ) K2).trace).re := by
-  rw [trace_epsilon_VPlusOfTransfer_eq_spin_sums hM K1 K2, Complex.ofReal_re]
-  exact add_pos
-    (mul_pos (Real.cosh_pos K1) (mul_pos (Real.exp_pos _) (open_chain_partition_sum_pos hM hK1)))
-    (mul_pos (Real.sinh_pos_iff.mpr hK1) (mul_pos (Real.exp_pos _)
-      (open_chain_endpoint_product_sum_pos hM hK1)))
+  rw [trace_epsilon_VPlusOfTransfer_closed_form hM K1 K2, Complex.ofReal_re]
+  exact closed_form_of_trace_epsilon_V_plus_pos hM hK1 K2
 
 /-! ## 主張 -/
 
