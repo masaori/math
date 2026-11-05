@@ -1,21 +1,21 @@
 /-
 # 必要十分版: 平方が単位元の元の指数級数の偶奇分解
 
-対応する人手証明のラベル: **`trace_of_epsilon_V_plus`** の Step 2 の
-`exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`
-（具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` の `matExp_smul_of_sq_eq_one`、
-系としての導出は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean`）と、
-**`two_by_two_transfer_identity`** の中間目標「`exp(tσ^x)` の閉じた形」`exp(tσ^x) = cosh(t)I + sinh(t)σ^x`
+対応する人手証明のラベル: **`two_by_two_transfer_identity`** の中間目標「`exp(tσ^x)` の閉じた形」
+`exp(tσ^x) = cosh(t)I + sinh(t)σ^x`
 （具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` の `exp_smul_pauliX_eq_cosh_add_sinh`、
 系としての導出は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentityFromNecSuf.lean`）
 
+`trace_of_epsilon_V_plus` の Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` は、人手が
+`exponential_series_of_even_odd_power_terms` を当てる鎖で、具体版
+（`Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` の `exp_epsilon_mul_boundaryG`）もその主張を引く。
+偶数次と奇数次の二つの級数に分けて足し直すこの手順とは別なので、この必要十分版の対応には数えない。
+
 ## 証明手順（具体版と同じ）
 
-具体版 `matExp_smul_of_sq_eq_one`・`exp_smul_pauliX_eq_cosh_add_sinh` の偶数次の項・奇数次の項・足し直しの 3 段が、
-それぞれ下の手順 1・手順 2・手順 3 に当たる。
-ただし手順 1・2 の冪の補題（`pow_two_mul_of_sq_eq_one`・`pow_two_mul_add_one_of_sq_eq_one` の `pow_mul`）と `smul_pow` は
-`two_by_two_transfer_identity` の具体版の手順（`(σ^x)^{2p} = ((σ^x)^2)^p`）に合わせたもので、`trace_of_epsilon_V_plus` の
-具体版（準備 (P3)・(P4) の帰納法）とは段が違う。どちらの具体版とも同じ手順にする直し方は状態台帳に書いてある。
+具体版 `exp_smul_pauliX_eq_cosh_add_sinh` の偶数次の項・奇数次の項・足し直しの 3 段が、
+それぞれ下の手順 1・手順 2・手順 3 に当たる。手順 1・2 の冪の補題（`pow_mul`）と `smul_pow` は具体版の
+`(σ^x)^{2p} = ((σ^x)^2)^p` と `(tσ^x)^k = t^k(σ^x)^k` に当たる。
 
 1. 偶数次の項: `A^{2n} = 1` なので `((2n)!)^{-1}(tA)^{2n} = (t^{2n}/(2n)!)·1`。その和は `cosh(t)·1`。
 2. 奇数次の項: `A^{2n+1} = A` なので `((2n+1)!)^{-1}(tA)^{2n+1} = (t^{2n+1}/(2n+1)!)·A`。その和は `sinh(t)·A`。
@@ -28,7 +28,7 @@
   （`ContinuousAdd 𝔸`）、極限の一意性（`T2Space 𝔸`）。
 - **効いていない**: 行列であること、`𝔸` の可換性、ノルムと完備性（指数級数の部分和が `E` に収束することは
   仮定 `hE` として受け取り、収束の理由は使わない。`hE` は人手の `def_exp` と同じく部分和の極限であり、
-  項の順序によらない和は要求しない）、`t` が実数であること（`t ∈ ℂ` で通る）、`A` が `εG` や `σ^x` という具体的な
+  項の順序によらない和は要求しない）、`A` が `σ^x` という具体的な
   行列であること。
 - 引き算も使わないので `𝔸` は半環でよい。
 -/

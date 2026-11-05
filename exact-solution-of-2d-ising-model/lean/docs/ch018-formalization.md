@@ -248,7 +248,9 @@
 | `Ising2D.commute_openChainD0_epsilon_mul_boundaryG` | `D_0(εG) = (εG)D_0`（5 段の calc） | 準備 (P2) の鎖 |
 | `Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG` / `smul_epsilon_mul_boundaryG_mul_smul_openChainD0` / `epsilon_mul_smul_openChainD0` | `D_0(κ(εG)) = (κ(εG))D_0`、`(κ(εG))(κD_0) = (κD_0)(κ(εG))`、`ε(κD_0) = (κD_0)ε` | 準備 (P2) の `commuting_with_scalar_multiple` の 3 回の適用 |
 | `Ising2D.V1plus_eq_exp_openChainD0_mul_exp` | `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)` | Step 2（`theorem_exp_product`） |
-| `Ising2D.matExp_hasSum`（`Representation.lean`） / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
+| `Ising2D.matExp_hasSum`（`Representation.lean`） / `toFinPow_matExp_eq_evenOddSeriesSum` | `Φ(exp(X)) = Σ_{n=0}^{∞}(1/n!)_ℂΦ(X^n)`（`def_exp` (1) を、添字を `Fin (2^M)` へ付け替える `Φ := toFinPowAlgEquiv M` で移し、部分和 `Σ_{n=0}^{N}` の極限で読む） | Step 2 の真ん中の鎖の 1 行目 |
+| `Ising2D.smul_epsilon_mul_boundaryG_pow_of_even` / `smul_epsilon_mul_boundaryG_pow_of_odd` | `(κ(εG))^n` は `n` 偶数で `κ^nI`、奇数で `(1_ℂκ^n)(εG)` | Step 2（`exponential_series_of_even_odd_power_terms` の仮定。(P4)・(P3)） |
+| `Ising2D.exp_epsilon_mul_boundaryG` | `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`（人手の 3 行と印 `人手 1`〜`人手 3` の段。`exponential_series_of_even_odd_power_terms` は `Φ` で移した `Fin (2^M)` 添字の行列に当て、逆写像で戻す） | Step 2 の真ん中の鎖 |
 | **`Ising2D.epsilon_mul_V1plus`** | **`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`** | **Step 2** |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の準備 (P5) と Step 3）
@@ -315,7 +317,6 @@
 | `NecSuf.sum_powerset_signed_exp` | `∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)` | ℝ の `exp`/`sinh` だけ | 旧い分け方の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2（冪集合の上の和を一度に積へ変える別の手順。いまの具体版は Step 2〜5 の鎖で、これを使っていない） |
 | **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(s(m)s(m+1)) = 2(g(1)+g(-1))^{M_col-1}`** | **重みの値は可換半環だけ（`M_col ≠ 0`）** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
 | `NecSuf.prod_mul_nextSite_eq_first_mul_last`（同） | 中間のサイトで `x(m)x(m) = 1` なら `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)` | 可換モノイド（`M_col ≥ 2`。両端の `x·x = 1` は不要） | `open_chain_endpoint_product_sum` の Step 2 |
-| **`NecSuf.exp_series_sum_of_sq_eq_one`**（`NecSuf/ExpOfInvolution.lean`） | **`A^2 = 1` で `∑_k (k!)^{-1}(tA)^k` の部分和の極限が `E` なら `E = cosh(t)·1 + sinh(t)·A`** | **`ℂ`-代数の半環、`ContinuousAdd`・`ContinuousSMul ℂ`・`T2`（ノルム・完備性・可換性・`t ∈ ℝ` は不要）** | `trace_of_epsilon_V_plus` Step 2（`two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」も同じ必要十分版の系。`lean/README.md` の「現在 2 本立てになっている主張」の表） |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -338,7 +339,7 @@
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性（`epsilon_anticomm_sigmaZ`）・相異なるサイトの `σ^z` の可換性（`siteOp_mul_comm`）・`(σ^z)^2 = I`・対角作用という既存の関係を、環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無い（`H1_plus_in_sigma_z_form` と同じ判断） |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
-| `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |
+| `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.exp_epsilon_mul_boundaryG` | **置かない** | 引いている `exponential_series_of_even_odd_power_terms` が中間目標「各項」「部分和」「差」を行列の成分の鎖で示すので、同じ手順のまま抽象度を上げられない（ノルムの評価の必要十分版は `NecSuf/EvenOddSeriesNormEstimate.lean`）。偶数次と奇数次の二つの級数に分ける必要十分版 `NecSuf.exp_series_sum_of_sq_eq_one`（`NecSuf/ExpOfInvolution.lean`）は手順が違うので対応に数えない（`two_by_two_transfer_identity` の必要十分版である。`ch010-formalization.md`）。Step 1 と Step 2 の残りも具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけなので置かない |
 | `trace_of_epsilon_V_plus` Step 3 | `Ising2D.matExp_smul_openChainD0` ほか | **置かない** | 一般化できるのは行列の列の読み取り（任意の半環で成り立つ自明な事実）と `{±1}` の符号反転の組合せだけで、必要十分版にしても何が本質的かについて情報を与えない |
 | `onsager_exact_solution`（Step 1・2・4） | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 011・018 の結果に接続するだけ |
 

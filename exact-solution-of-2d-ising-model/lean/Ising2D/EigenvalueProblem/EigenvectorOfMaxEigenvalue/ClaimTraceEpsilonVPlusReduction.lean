@@ -13,7 +13,8 @@
 | 準備 (P3) の帰納法 `(εG)^{2j} = I`（`j = 0` と `j → j+1` の 4 行）・`(εG)^{2j+1} = εG` の 3 行 | `pow_two_mul_of_sq_eq_one`・`pow_two_mul_add_one_of_pow_two_mul_eq_one`（`(εG)^2 = I` から `(εG)^{2j+1} = εG` を出す系 `pow_two_mul_add_one_of_sq_eq_one`） |
 | 準備 (P4) の帰納法 `(κX)^n = κ^nX^n`（`n = 0` と `n → n+1` の 6 行） | `smul_pow_tensorPow` の 2 つの calc |
 | Step 2 の最初の鎖の 3 行 `V_1^{(+)} = exp((iκ)H_1^{(+)}) = exp(κD_0 + κ(εG)) = exp(κD_0)exp(κ(εG))` | `V1plus_eq_exp_openChainD0_mul_exp` の calc の 3 段 |
-| Step 2 の `exp(κ(εG)) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)`（`def_exp` の級数を偶数次と奇数次に分ける） | `matExp_smul_of_sq_eq_one`（`εG` について `exp_epsilon_mul_boundaryG`） |
+| Step 2 の `T_n := (κ(εG))^n` が偶数のとき `κ^nI`、奇数のとき `κ^n(εG) = (1_ℂκ^n)(εG)`（(P4)・(P3) と積の単位元） | `smul_epsilon_mul_boundaryG_pow_of_even` の calc の 2 段・`smul_epsilon_mul_boundaryG_pow_of_odd` の calc の 3 段 |
+| Step 2 の真ん中の鎖の 3 行 `exp(κ(εG)) = Σ_{n=0}^{∞}(1/n!)_ℂ(κ(εG))^n = (cosh K_1)_ℂI + (1_ℂ(sinh K_1)_ℂ)(εG) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)` | `exp_epsilon_mul_boundaryG` の calc の印 `人手 1`〜`人手 3` の段（1 行目の `def_exp` (1) は `toFinPow_matExp_eq_evenOddSeriesSum`。前後の 2 段は添字の付け替え `Φ` で移して戻す段） |
 | Step 2 の最後の鎖の 11 行 `εV_1^{(+)} = ε(exp(κD_0)exp(κ(εG))) = ⋯ = exp(κD_0)((cosh K_1)_ℂε + (sinh K_1)_ℂG)` | `epsilon_mul_V1plus` の calc の印 `人手 1`〜`人手 11` の段 |
 
 `B := (V_1^{(+)})^{1/2}` は `V1plusHalf M K_1`、`V^{(+)} = BV_2B` は `VPlusOfTransfer M K_1 K_2`
@@ -36,13 +37,15 @@ Step 2 の最初の鎖と最後の鎖の根拠は、`V1_plus_exponential_represe
 `theorem_exp_product`・`commuting_matrix_commutes_with_exp` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `Matrix.exp_add_of_commute`・`Commute.exp_right` である。
 
-`exp(K_1εG)` の偶奇分解は、人手どおり指数級数 `∑_k (k!)^{-1}(K_1εG)^k` を偶数次と奇数次に分け、
-`(εG)^{2n} = I`、`(εG)^{2n+1} = εG` と `cosh K_1 = ∑_n K_1^{2n}/(2n)!`、`sinh K_1 = ∑_n K_1^{2n+1}/(2n+1)!`
-（`Complex.hasSum_cosh`・`Complex.hasSum_sinh`）を代入して足し直す（`HasSum.even_add_odd`）。
-最後に、`def_exp` の部分和の極限が一つに決まることで `exp(K_1εG)` と足し直した和を等しいとする。
-この偶奇分解が使うのは `A^2 = 1` と、スカラー倍・和と極限の交換だけなので、必要十分版
-`NecSuf/ExpOfInvolution.lean` を置き、具体版の `matExp_smul_of_sq_eq_one` をその系として
-`ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` で導く。
+Step 2 の真ん中の鎖は、人手どおり `exponential_series_of_even_odd_power_terms`（具体版は
+`EigenvalueProblem/ReductionToATheta/ClaimExponentialSeriesOfEvenOddPowerTerms.lean`）を当てる。その具体版は人手の `Mat(d,ℂ)` を
+添字が `Fin d` の行列で述べ、`TensorPow M` は添字が `Conf M` なので、添字を付け替える写像 `Φ := toFinPowAlgEquiv M`
+（`Representation.lean`）で移して当て、逆写像で戻す。`Φ` で移す段・戻す段と、`def_exp` (1) の `Finset.range` の上の部分和と
+係数 `(n! : ℂ)⁻¹` を人手の添字 `{0, …, N}` と係数 `(1/n!)_ℂ` へ読み替える段（`toFinPow_matExp_eq_evenOddSeriesSum`）は人手の行ではない。
+真ん中の鎖と `T_n` の 2 つの場合には必要十分版を置かない。引いている `exponential_series_of_even_odd_power_terms` は
+中間目標「各項」「部分和」「差」を行列の成分の鎖で示すので、同じ手順のまま抽象度を上げられないからである（手順を替えると
+必要十分版の要件 1 に反する。`ClaimExponentialSeriesOfEvenOddPowerTerms.lean` の冒頭と同じ理由。そのノルムの評価の
+必要十分版は `NecSuf/EvenOddSeriesNormEstimate.lean` にある）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimH1PlusInSigmaZForm
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
@@ -53,7 +56,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExponentialSeriesOfEvenOddPowerTerms
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
 namespace Ising2D
@@ -220,35 +223,104 @@ theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^
       _ = κ ^ (n + 1) • X ^ (n + 1) := by                     -- `def_power_of_complex_number` と冪の定義
           rw [← pow_succ, ← pow_succ]
 
-/-- **人手 Step 2 の偶奇分解**: `A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A`（`t ∈ ℝ`）。
+/-! ## Step 2 の真ん中の鎖 `exp(κ(εG)) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)`
 
-人手の式変形どおり、指数級数を偶数次の項 `t^{2n}/(2n)! · I` と奇数次の項 `t^{2n+1}/(2n+1)! · A` に分け、
-それぞれの和が `cosh t`・`sinh t` であることを代入する。 -/
-theorem matExp_smul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (t : ℝ) :
-    matExp ((t : ℂ) • A) = ((Real.cosh t : ℝ) : ℂ) • (1 : TensorPow M) + ((Real.sinh t : ℝ) : ℂ) • A := by
-  -- 偶数次の項: `((2n)!)^{-1}(tA)^{2n} = (t^{2n}/(2n)!) I`
-  have heven : HasSum (fun n : ℕ => (((2 * n).factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ (2 * n))
-      (Complex.cosh (t : ℂ) • (1 : TensorPow M)) := by
-    refine ((Complex.hasSum_cosh (t : ℂ)).smul_const (1 : TensorPow M)).congr_fun fun n => ?_
-    rw [smul_pow_tensorPow, pow_two_mul_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
-  -- 奇数次の項: `((2n+1)!)^{-1}(tA)^{2n+1} = (t^{2n+1}/(2n+1)!) A`
-  have hodd : HasSum (fun n : ℕ => (((2 * n + 1).factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ (2 * n + 1))
-      (Complex.sinh (t : ℂ) • A) := by
-    refine ((Complex.hasSum_sinh (t : ℂ)).smul_const A).congr_fun fun n => ?_
-    rw [smul_pow_tensorPow, pow_two_mul_add_one_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
-  -- 偶数次と奇数次を足し直す
-  have hall := HasSum.even_add_odd
-    (f := fun k : ℕ => ((k.factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ k) heven hodd
-  -- 部分和の極限は一つに決まる
-  rw [tendsto_nhds_unique (matExp_hasSum ((t : ℂ) • A)).tendsto_sum_nat hall.tendsto_sum_nat,
-    ← Complex.ofReal_cosh, ← Complex.ofReal_sinh]
+人手は `exponential_series_of_even_odd_power_terms` を `d = 2^{M_col}`、`x = K_1`、`A = I`、`B = εG`、`c = 1_ℂ`、
+`T_n := (κ(εG))^n` で当てる。その主張の Lean の具体版は人手の `Mat(d,ℂ)` を添字が `Fin d` の行列で述べ、
+`TensorPow M` の行列は添字が `Conf M` である。そこで添字を付け替える写像
+`Φ := toFinPowAlgEquiv M : TensorPow M → Matrix (Fin (2^M)) (Fin (2^M)) ℂ`（`Representation.lean`。
+`finFunctionFinEquiv : Conf M ≃ Fin (2^M)` による付け替えで、和・積・スカラー倍を保つ全単射）に名前を付け、
+主張は `Φ` で移した列 `Φ(T_n)` と `A = Φ(I)`、`B = Φ(εG)` に当て、結果を逆写像 `Φ^{-1}` で戻す。
+`Φ` で移す段と戻す段は人手の行ではない（人手は `⊠` で作った行列をはじめから `Mat(2^{M_col},ℂ)` の元として書いている）。
+`Φ` の番号の付け方（`finFunctionFinEquiv` の `Σ_i f(i)2^i`、0 から数え先頭の成分が最下位の桁）は人手 `def_kronecker` の
+`ν(I) = 1 + Σ_k(i_k−1)2^{M−k}` と別の全単射だが、移して当ててから戻すので、結論は付け替えの選び方によらない。
+級数の和と収束は `def_matrix_norm` の行列ノルムと値が一致する mathlib の Frobenius ノルムによる
+（`ClaimExponentialSeriesOfEvenOddPowerTerms.lean` と同じ入れ方）。 -/
 
-/-- 人手 Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`（`epsilon_G_is_involution` の `(εG)^2 = I`）。 -/
+section MiddleChain
+
+open Filter Topology
+
+attribute [local instance] Matrix.frobeniusNormedAddCommGroup Matrix.frobeniusNormSMulClass
+
+/-- 人手 Step 2 の真ん中の鎖の 1 行目 `exp(X) = Σ_{n=0}^{∞}(1/n!)_ℂX^n`（`def_exp` (1)）を、`Φ` で移して
+`exponential_series_of_even_odd_power_terms` の級数の和（部分和 `Σ_{n=0}^{N}(1/n!)_ℂΦ(X^n)` の極限 `evenOddSeriesSum`）で読んだもの。
+Lean の `matExp` は mathlib の `NormedSpace.exp` で、`def_exp` (1) の級数の和であることは `matExp_hasSum` が与える。
+`Φ` は成分の付け替えなので連続で（`Continuous.matrix_reindex`）、和とスカラー倍を保つ（`map_sum`・`map_smul`）。
+`matExp_hasSum` の部分和は `Finset.range` の上の和で係数は `(n! : ℂ)⁻¹` なので、人手の添字 `{0, …, N}`（`Fin (N + 1)`）と
+係数 `(1/n!)_ℂ` へ読み替える（いずれも人手の行ではない。写像で移すことと、和の添字と係数の書き方の読み替え）。 -/
+theorem toFinPow_matExp_eq_evenOddSeriesSum (X : TensorPow M) :
+    toFinPowAlgEquiv M (matExp X) = evenOddSeriesSum (fun n => toFinPowAlgEquiv M (X ^ n)) := by
+  have hΦ : Continuous (toFinPowAlgEquiv M) := continuous_id.matrix_reindex _ _
+  have h : Tendsto (fun N => evenOddPartialSum (fun n => toFinPowAlgEquiv M (X ^ n)) N) atTop
+      (𝓝 (toFinPowAlgEquiv M (matExp X))) := by
+    refine ((tendsto_add_atTop_iff_nat 1).2
+      ((hΦ.tendsto _).comp (matExp_hasSum X).tendsto_sum_nat)).congr fun N => ?_
+    rw [Function.comp_apply, map_sum, evenOddPartialSum,
+      ← Fin.sum_univ_eq_sum_range (fun n => toFinPowAlgEquiv M (((n.factorial : ℂ))⁻¹ • X ^ n))]
+    refine Finset.sum_congr rfl fun n _ => ?_
+    rw [map_smul, one_div, Complex.ofReal_inv, Complex.ofReal_natCast]
+  exact h.limUnder_eq.symm
+
+/-- 人手 Step 2 の `T_n := (κ(εG))^n` の `n` が偶数の場合 `T_n = κ^nI`。人手の「(P4)・(P3) より」の 2 段と calc の 2 段が 1 対 1 である。 -/
+theorem smul_epsilon_mul_boundaryG_pow_of_even (hM : 2 ≤ M) (κ : ℂ) {n : ℕ} (hn : Even n) :
+    (κ • (epsilon M * boundaryG M (by omega))) ^ n = κ ^ n • (1 : TensorPow M) :=
+  calc (κ • (epsilon M * boundaryG M (by omega))) ^ n
+      = κ ^ n • (epsilon M * boundaryG M (by omega)) ^ n :=
+        smul_pow_tensorPow κ _ n                              -- (P4)
+    _ = κ ^ n • (1 : TensorPow M) := by                       -- (P3) の `(εG)^{2j} = I`（`n = 2j`）
+        obtain ⟨j, rfl⟩ := hn
+        rw [← two_mul, pow_two_mul_of_sq_eq_one (epsilon_mul_boundaryG_sq hM) j]
+
+/-- 人手 Step 2 の `T_n := (κ(εG))^n` の `n` が奇数の場合 `T_n = κ^n(εG) = (1_ℂκ^n)(εG)`。
+人手の「(P4)・(P3) より」の 2 段と `complex_numbers_form_a_field` の積の単位元の 1 段が、calc の 3 段に 1 対 1 で対応する。 -/
+theorem smul_epsilon_mul_boundaryG_pow_of_odd (hM : 2 ≤ M) (κ : ℂ) {n : ℕ} (hn : Odd n) :
+    (κ • (epsilon M * boundaryG M (by omega))) ^ n = (1 * κ ^ n) • (epsilon M * boundaryG M (by omega)) :=
+  calc (κ • (epsilon M * boundaryG M (by omega))) ^ n
+      = κ ^ n • (epsilon M * boundaryG M (by omega)) ^ n :=
+        smul_pow_tensorPow κ _ n                              -- (P4)
+    _ = κ ^ n • (epsilon M * boundaryG M (by omega)) := by    -- (P3) の `(εG)^{2j+1} = εG`（`n = 2j+1`）
+        obtain ⟨j, rfl⟩ := hn
+        rw [pow_two_mul_add_one_of_sq_eq_one (epsilon_mul_boundaryG_sq hM) j]
+    _ = (1 * κ ^ n) • (epsilon M * boundaryG M (by omega)) := by
+        rw [one_mul]                                          -- `complex_numbers_form_a_field` の積の単位元
+
+/-- **人手 `trace_of_epsilon_V_plus` Step 2 の真ん中の鎖**: `exp(κ(εG)) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)`。
+
+人手の 3 行が calc の印 `人手 1`〜`人手 3` の段に 1 対 1 で対応する。最初の段（`Φ` で移して戻す）と最後の段
+（`Φ^{-1}` が和とスカラー倍を保ち `Φ^{-1}(Φ(Y)) = Y`）は、添字の付け替え `Φ` のための段で人手の行ではない。
+`人手 2` は `exponential_series_of_even_odd_power_terms`（級数の和の主張）を `d = 2^M`、`x = K_1`、`A = Φ(I)`、`B = Φ(εG)`、`c = 1_ℂ`、
+`T_n := Φ((κ(εG))^n)` で当てる（仮定は `smul_epsilon_mul_boundaryG_pow_of_even`・`smul_epsilon_mul_boundaryG_pow_of_odd` を `Φ` で移したもの。
+`Φ` はスカラー倍を保つ）。 -/
 theorem exp_epsilon_mul_boundaryG (hM : 2 ≤ M) (K1 : ℝ) :
     matExp ((K1 : ℂ) • (epsilon M * boundaryG M (by omega)))
       = ((Real.cosh K1 : ℝ) : ℂ) • (1 : TensorPow M)
         + ((Real.sinh K1 : ℝ) : ℂ) • (epsilon M * boundaryG M (by omega)) :=
-  matExp_smul_of_sq_eq_one (epsilon_mul_boundaryG_sq hM) K1
+  calc matExp ((K1 : ℂ) • (epsilon M * boundaryG M (by omega)))
+      = (toFinPowAlgEquiv M).symm (toFinPowAlgEquiv M (matExp ((K1 : ℂ) • (epsilon M * boundaryG M (by omega))))) :=
+        ((toFinPowAlgEquiv M).symm_apply_apply _).symm       -- `Φ` で移して戻す
+    _ = (toFinPowAlgEquiv M).symm (evenOddSeriesSum
+          (fun n => toFinPowAlgEquiv M (((K1 : ℂ) • (epsilon M * boundaryG M (by omega))) ^ n))) := by
+        rw [toFinPow_matExp_eq_evenOddSeriesSum]              -- 人手 1: `def_exp` (1)
+    _ = (toFinPowAlgEquiv M).symm (((Real.cosh K1 : ℝ) : ℂ) • toFinPowAlgEquiv M (1 : TensorPow M)
+          + (1 * ((Real.sinh K1 : ℝ) : ℂ)) • toFinPowAlgEquiv M (epsilon M * boundaryG M (by omega))) := by
+        rw [(exponential_series_of_even_odd_power_terms (toFinPowAlgEquiv M (1 : TensorPow M))
+          (toFinPowAlgEquiv M (epsilon M * boundaryG M (by omega))) K1 1
+          (fun n => toFinPowAlgEquiv M (((K1 : ℂ) • (epsilon M * boundaryG M (by omega))) ^ n))
+          (fun _ hn => by
+            simp only [smul_epsilon_mul_boundaryG_pow_of_even hM (K1 : ℂ) hn, map_smul])
+          (fun _ hn => by
+            simp only [smul_epsilon_mul_boundaryG_pow_of_odd hM (K1 : ℂ) hn, map_smul])).2]
+                                                              -- 人手 2: `exponential_series_of_even_odd_power_terms`
+    _ = (toFinPowAlgEquiv M).symm (((Real.cosh K1 : ℝ) : ℂ) • toFinPowAlgEquiv M (1 : TensorPow M)
+          + ((Real.sinh K1 : ℝ) : ℂ) • toFinPowAlgEquiv M (epsilon M * boundaryG M (by omega))) := by
+        rw [one_mul]                                          -- 人手 3: `complex_numbers_form_a_field` の積の単位元
+    _ = ((Real.cosh K1 : ℝ) : ℂ) • (1 : TensorPow M)
+          + ((Real.sinh K1 : ℝ) : ℂ) • (epsilon M * boundaryG M (by omega)) := by
+        rw [map_add, map_smul, map_smul, AlgEquiv.symm_apply_apply, AlgEquiv.symm_apply_apply]
+                                                              -- `Φ^{-1}` で戻す
+
+end MiddleChain
 
 /-- **人手 `trace_of_epsilon_V_plus` Step 2 の最後の鎖**: `εV_1^{(+)} = exp(κD_0)((cosh K_1)_ℂε + (sinh K_1)_ℂG)`。
 

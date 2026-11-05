@@ -2323,13 +2323,14 @@ targets=(
   Ising2D.V1plus_eq_exp_openChainD0_mul_exp
   Ising2D.pow_two_mul_of_sq_eq_one
   Ising2D.pow_two_mul_add_one_of_sq_eq_one
-  Ising2D.matExp_smul_of_sq_eq_one
+  Ising2D.toFinPow_matExp_eq_evenOddSeriesSum
+  Ising2D.smul_epsilon_mul_boundaryG_pow_of_even
+  Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd
   Ising2D.exp_epsilon_mul_boundaryG
   Ising2D.epsilon_mul_V1plus
   Ising2D.NecSuf.pow_two_mul_of_sq_eq_one
   Ising2D.NecSuf.pow_two_mul_add_one_of_sq_eq_one
   Ising2D.NecSuf.exp_series_sum_of_sq_eq_one
-  Ising2D.matExp_smul_of_sq_eq_one_of_necSuf
   Ising2D.negSpinConf
   Ising2D.eq_diagonal_of_mulVec_basisVec
   Ising2D.openChainD0_eq_diagonal

@@ -32,8 +32,8 @@
   （2 段目の積の結合 `ε(Q̌y) = (εQ̌)y`（`Matrix.mulVec_mulVec`）は Lean で補った中間）
 
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
-（(1) の証明が使う 1 次元開鎖のスピン和と `exp(K_1εG)` の偶奇分解の必要十分版は `NecSuf/OpenChainSpinSum.lean`・
-`NecSuf/ExpOfInvolution.lean`、(2) の各行の必要十分版は `Ising2D/NecSuf/ParityFermion.lean` が持つ）。
+（(1) の証明が使う 1 次元開鎖のスピン和と、`exp(K_1εG)` の鎖が引く `exponential_series_of_even_odd_power_terms` のノルムの評価の
+必要十分版は `NecSuf/OpenChainSpinSum.lean`・`NecSuf/EvenOddSeriesNormEstimate.lean`、(2) の各行の必要十分版は `Ising2D/NecSuf/ParityFermion.lean` が持つ）。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
