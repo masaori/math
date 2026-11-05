@@ -221,7 +221,8 @@
 | --- | --- | --- |
 | `Ising2D.epsilon_mul_openChainD0` / `epsilon_mul_boundaryG` / `openChainD0_mul_boundaryG` | `εD_0 = D_0ε`、`εG = Gε`、`D_0G = GD_0` | `epsilon_D0_G_pairwise_commute` |
 | `Ising2D.epsilon_mul_boundaryG_sq` | `(εG)^2 = I` | `epsilon_G_is_involution` |
-| `Ising2D.openChainD0_mulVec_basisVec` / `boundaryG_mulVec_basisVec` | `D_0f_{ι(s)} = (∑_m s(m)s(m+1))f_{ι(s)}`、`Gf_{ι(s)} = s(M_col)s(1)f_{ι(s)}` | `D0_G_diagonal_action` |
+| `Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin` | `(σ^z_aσ^z_b)f_{ι(s)} = (s(a)s(b))_ℂ f_{ι(s)}`（7 段の `calc`） | `D0_G_diagonal_action` の準備の 7 行 |
+| `Ising2D.openChainD0_mulVec_basisVec` / `boundaryG_mulVec_basisVec` | `D_0f_{ι(s)} = (∑_m s(m)s(m+1))_ℂ f_{ι(s)}`（5 段）、`Gf_{ι(s)} = (s(M_col)s(1))_ℂ f_{ι(s)}`（8 段） | `D0_G_diagonal_action` の開鎖項の 5 行・周期境界項の 8 行 |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSums.lean`（ラベル `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`）
 
