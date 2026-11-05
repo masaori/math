@@ -7106,10 +7106,10 @@ c_\varphi\prod_{i\in\mathcal J}B_{f(i),\varphi(i)}=0\in\overline{\mathbb Q}[x]`)
                 ]),
                 displayMath(String.raw`\begin{aligned}
 f(t(a))&=f(b)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\text{ の }t\text{ の定義}\bigr)\\
-&=f(a)&&\bigl(\because\ f(a)=f(b)\bigr),\\
+&=f(a)&&\bigl(\because\ f(a)=f(b)\bigr)\\
 f(t(b))&=f(a)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\text{ の }t\text{ の定義}\bigr)\\
-&=f(b)&&\bigl(\because\ f(a)=f(b)\bigr),\\
-f(t(i))&=f(i)&&\bigl(\because\ i\ne a,b\text{ と }\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr).
+&=f(b)&&\bigl(\because\ f(a)=f(b)\bigr)\\
+f(t(i))&=f(i)&&\bigl(\because\ i\ne a,b\text{ と }\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)
 \end{aligned}`),
                 paragraph([
                   "よって全ての ", math(String.raw`i\in\mathcal J`), " で ",
@@ -67068,6 +67068,11 @@ cL W_{\perp}(\gamma)
                     labels: ["claim_plane_simple_cycle_projection_closed_nonbacktracking"],
                     habitat: "Z",
                     verification: ["sagemath/check/plane-cycle-torus-projection"],
+                    lean: [
+                      "Ising2DLambda.KacWard.planeUnitPathTorusProjection_closedNonbacktracking",
+                      "Ising2DLambda.NecSuf.KacWard.simple_cycle_projection_closed_nonbacktracking_necSuf",
+                      "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         ref("def_plane_unit_path_torus_projection"), " の有限列 ",
