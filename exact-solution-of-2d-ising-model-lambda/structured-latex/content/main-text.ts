@@ -63274,21 +63274,21 @@ f_\gamma(i,j+1)
 N_\gamma(n_{\mathrm h}(0,0))
 &=\left(\sum_{r=0}^{0}N_\gamma(n_{\mathrm h}(r,0))\right)\bmod2
 &&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と一項の和}\bigr)\\
-&=0&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\bigr),\\
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\bigr)\\
 N_\gamma(n_{\mathrm v}(0,0))
 &=\left(\sum_{c=0}^{0}N_\gamma(n_{\mathrm v}(0,c))\right)\bmod2
 &&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と一項の和}\bigr)\\
-&=0&&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\bigr).
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\bigr)
 \end{aligned}`),
                       paragraph(["唯一のセルの高さは空和で零である（", ref("def_standard_dual_height"), "）。",
                         "横・縦の通過偶奇の零をそれぞれ代入すると、"]),
                       displayMath(String.raw`\begin{aligned}
 \bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm h}(0,0))\bigr)\bmod2
 &=f_\gamma(0,0)\bmod2&&\bigl(\because\ \text{上の横辺の零}\bigr)\\
-&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr),\\
+&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr)\\
 \bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm v}(0,0))\bigr)\bmod2
 &=f_\gamma(0,0)\bmod2&&\bigl(\because\ \text{上の縦辺の零}\bigr)\\
-&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr).
+&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr)
 \end{aligned}`),
                     ],
                   },
@@ -63681,6 +63681,52 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &=\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}
 &&\bigl(\because\ \text{有限集合における指示値の和}\bigr)
 \end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_height_one_boundary_support",
+                  focus: {
+                    id: "kac_ward_claim_height_one_boundary_support",
+                    kind: "claim",
+                    title: { text: "高さ一のセル集合の境界係数は高さ差で決まる" },
+                    labels: ["claim_height_one_boundary_support"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/height-one-boundary-support"],
+                    lean: [
+                      "Ising2DLambda.KacWard.heightOneBoundary_horizontal_support",
+                      "Ising2DLambda.KacWard.heightOneBoundary_horizontal_values",
+                      "Ising2DLambda.KacWard.heightOneBoundary_vertical_support",
+                      "Ising2DLambda.KacWard.heightOneBoundary_vertical_values",
+                      "Ising2DLambda.NecSuf.KacWard.heightOneBoundary_support",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        " を取る（", ref("def_closed_nonbacktracking_walk"), "）。", ref("def_standard_dual_height"),
+                        " の高さが一のセル集合を ", math(String.raw`S_\gamma:=\{(i,j):f_\gamma(i,j)=1\}`),
+                        " とする。任意の ", math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について" ]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm h}(i,j)}\ne0
+&\iff f_\gamma(i,j)\ne f_\gamma(i-1,j),\\
+[\partial_\square S_\gamma]_{n_{\mathrm v}(i,j)}\ne0
+&\iff f_\gamma(i,j-1)\ne f_\gamma(i,j).
+\end{aligned}`),
+                      paragraph(["非零の境界係数は ", math(String.raw`\{1,-1\}\subset\mathbb Z`),
+                        " に属する。辺長一では両側が同じセルなので両係数は零である。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_cell_set_boundary_coefficients"), " を ", math(String.raw`S_\gamma`),
+                        " に適用する。", ref("def_standard_dual_height"), " より高さは零か一であるから、",
+                        " 任意の二つのセル ", math(String.raw`p,q`), " について" ]),
+                      displayMath(String.raw`\mathbf1_{p\in S_\gamma}-\mathbf1_{q\in S_\gamma}\ne0
+\iff f_\gamma(p)\ne f_\gamma(q)`),
+                      paragraph(["が成り立つ。左辺の差は二つの零または一の整数の差なので、非零なら一または負一である。",
+                        "横辺には ", math(String.raw`p=(i,j),q=(i-1,j)`),
+                        "、縦辺には ", math(String.raw`p=(i,j-1),q=(i,j)`), " を代入する。",
+                        "辺長一では ", math(String.raw`p=q`), " となる。"]),
                     ],
                   },
                 },
