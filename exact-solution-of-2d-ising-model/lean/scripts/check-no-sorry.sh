@@ -446,7 +446,7 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean）---
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean・NecSuf/StarFixedScalarMultipleOfHermitian.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -468,6 +468,9 @@ targets=(
   Ising2D.posDef_conjugateBilinearValue_pos
   Ising2D.standardBasisVec_ne_zero
   Ising2D.star_kroneckerDelta
+  Ising2D.real_multiple_isHermitian
+  Ising2D.real_multiple_isHermitian_of_necSuf
+  Ising2D.NecSuf.star_fixed_smul_isHermitian
   Ising2D.kroneckerDelta_comm
   Ising2D.conjugate_bilinear_value_basis_eq_diag
   Ising2D.trace_of_positive_definite_is_positive
@@ -772,15 +775,26 @@ targets=(
   Ising2D.sigmaZ_mul_sigmaZ_transpose
   Ising2D.halfK1D_transpose
   Ising2D.physicalV1halfC_transpose
-  Ising2D.physicalV1halfC_isUnit
   Ising2D.physicalV1halfR_isSymm
-  Ising2D.physicalV1halfR_isUnit
   Ising2D.card_conf
-  Ising2D.partitionFunction_eq_trace_real
-  Ising2D.V2_posDef
   Ising2D.V2_transpose
   Ising2D.physicalV2R_isSymm
-  Ising2D.physicalV2R_posDef
+  Ising2D.K1D_hasRealEntries
+  Ising2D.K1D_transpose
+  Ising2D.K1D_isRealSymmetric
+  Ising2D.K1D_isHermitian
+  Ising2D.halfK1D_isHermitian
+  Ising2D.halfK1D_eq_half_smul_K1D
+  Ising2D.physicalV1halfC_eq_matExp_half
+  Ising2D.physicalV1halfC_posDef
+  Ising2D.physicalV1halfC_conjTranspose
+  Ising2D.physicalV1halfInvC_mul_physicalV1halfC
+  Ising2D.expS2C_posDef
+  Ising2D.twoS2Pow_pos
+  Ising2D.physicalSymTransferC_eq_smul_congruence
+  Ising2D.physicalSymTransferC_posDef
+  Ising2D.realQuadForm_pos_of_map_posDef
+  Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow
   Ising2D.partition_function_sandwich_physical
   # --- 数演算子と同時固有空間の必要十分版（NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean。章「V^{(+)} の固有値」と整数運動量の経路の記録が共有）と、それに続く各章 ---
   Ising2D.NecSuf.num_mul_num
