@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-05: Lean の通しの証明のゴールラインの確認の百五十五個目として、`H1_plus_in_sigma_z_form` を (f1) 準備 1・2・(f2) 準備 3・(f3) 準備 4・(f4) 最後の鎖に割り、(f1) を行った。`ClaimH1PlusInSigmaZForm.lean` に、人手の準備 1・2 のクロネッカー積表示の 7 本の鎖（`Y_kronecker_form`・`Z_nextSite_kronecker_form`・`sigmaZ_mul_sigmaZ_nextSite_kronecker`・`Y_lastSite_kronecker_form`・`Z_firstSite_kronecker_form`・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker`）を人手の各行と 1 対 1 で置いた。必要十分版は置かない。本文と SageMath は不変。レビューの必須の指摘は無く、任意の指摘 4 件を直した。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。次は (f2) 準備 3。
+
 2026-11-05: 全証明の SageMath 検算として、`check_number_operator_is_hermitian`（ň_μ・Q̌_ε はエルミート）に検算 `sagemath/check/check_number_operator_is_hermitian/` を付けた（未検算 7 件）。(1)(2) を QQ(i)・円分体で、(3)(4) を本物の ψ̌ の数体で、複素共役を体の自己同型として厳密に確かめた。人手証明の根拠のラベルの取り違え 7 箇所を直し、クロネッカー積の共役転置と結びの鎖を成分の鎖に書き直した（主張・計算は不変）。次は `c_plus_equals_Lambda_half_integer`。
 2026-11-05: Lean の通しの証明のゴールラインの確認の百五十四個目として、`trace_of_epsilon_V_plus_via_check_eigenvalues` の (e3) Step 7 の同値を行い、この主張の Lean を人手の Step 1〜7 と 1 対 1 にし終えた。`⟹`（`trace_pos_of_eta_univ_eq_one_step7`）・`⟸`（`eta_univ_eq_one_of_trace_pos_step7`。成分の比較と `ȟ = −1` の背理）・同値（`eta_univ_eq_one_iff_trace_pos_step7`、一般の `M` は `eta_univ_eq_one_iff_trace_pos`）を人手と同じ行の calc で置き、`⟸` が引く Step 5 の 1〜6 行目を `trace_epsilon_mul_V_step5_rows_one_to_six` に分けた。下流が使う `eta_univ_eq_one_of_trace_pos`（`0 < Re tr` の形、型は不変）は (3) から導く運ぶ段にした。必要十分版は置かない。本文と SageMath は不変。次は `H1_plus_in_sigma_z_form`。
 

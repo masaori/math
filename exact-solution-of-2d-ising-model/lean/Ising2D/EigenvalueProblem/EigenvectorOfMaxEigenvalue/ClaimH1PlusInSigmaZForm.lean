@@ -10,6 +10,8 @@
 | --- | --- |
 | 1 サイトの積 `σ^yσ^x = -iσ^z`, `σ^xσ^x = I`（`V1_in_Z_Y_epsilon` の Step 0） | `pauliY_mul_pauliX_eq`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`）、`pauliX_mul_pauliX`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols`） |
 | 1 サイトの積 `σ^xσ^z = -iσ^y`（2 次の成分計算） | `pauliX_mul_pauliZ_eq`（人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖と 1 対 1） |
+| 準備 1 の `Y_m`・`Z_{m+1}` の鎖（各 2 行）と `σ_m^zσ_{m+1}^z` の鎖（4 行） | `Y_kronecker_form`・`Z_nextSite_kronecker_form`（定義そのもので `rfl`）と `sigmaZ_mul_sigmaZ_nextSite_kronecker` の `calc` の 4 段（サイト `m` と `m+1` が異なることは `ne_nextSite_of_not_last`） |
+| 準備 2 の `Y_{M_col}`・`Z_1` の鎖（各 2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`rfl`）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
 | 内部辺 `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_mul_Z_next_of_not_last`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`。人手と同じ計算） |
 | 両辺に `i` を掛けて `iY_mZ_{m+1} = σ^z_mσ^z_{m+1}` | `I_smul_Y_mul_Z_next_of_not_last` |
 | 境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
@@ -17,6 +19,8 @@
 | 突き合わせ `-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | `neg_I_smul_Y_last_mul_Z_first` |
 | `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary` |
 | 最後の式変形 `iH_1^{(+)} = ⋯ = D_0 + εG` | `H1_plus_in_sigma_z_form` |
+
+2026-11-04 に書き直された人手の鎖のうち、準備 1・2 はこのファイルの同名の節と 1 対 1 である。準備 3（内部の辺の 11 行）・準備 4（境界の辺の 17 行）・最後の 7 行の鎖は、まだ上の表の旧い道（`Y_mul_Z_next_of_not_last`・`Y_last_mul_Z_first` ほか）で閉じており、人手の新しい鎖と 1 対 1 ではない。
 
 人手の `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積
 `siteProd` に入れたものとして書く。「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は
@@ -90,6 +94,127 @@ theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
     -- `pauli_matrix_products`（Pauli 行列）
     _ = (-Complex.I) • pauliY := rfl
 
+/-! ## 準備 1（内部の辺の因子のクロネッカー積表示）
+
+Lean のサイトの添字は 0 始まりで、人手のサイト `m` は値が `m - 1` の `Fin M` の元である。人手の `m ∈ {1,…,M_col-1}` は Lean の `(m : ℕ) + 1 ≠ M` なる `m : Fin M`、人手の `m+1` は `nextSite m` である。
+人手の因子の並び `A⊠⋯⊠A`（`k` 個）は、Lean ではサイトごとの因子の族を `siteProd` に入れたもので、族は
+サイトの添字についての `if` で書く（人手の「第 `1` から第 `m-1` 因子」は `(i : ℕ) < (m : ℕ)`、第 `m` 因子は `i = m`）。 -/
+
+/-- **人手の準備 1 の `Y_m` の鎖**（2 行）: `Y_m = σ_1^x⋯σ_{m-1}^xσ_m^y = σ^x⊠⋯⊠σ^x⊠σ^y⊠I⊠⋯⊠I`。
+
+人手の 1 行目（`def_jordan_wigner_Y_matrices`）と 2 行目（`site_pauli_prefix_product_kronecker_form`）は、Lean では
+`Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので `rfl` である（`Z_mul_Y_same` と同じ。Lean の `Y` が
+人手の積の形と一致することは `Y_eq_xString_mul` が持つ。`site_pauli_prefix_product_kronecker_form` の Lean の具体版は無い）。
+人手は `m ≤ M_col - 1` に限るが、Lean の等式は全ての `m` で成り立つので仮定を置かない。 -/
+theorem Y_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) := rfl
+
+/-- **人手の準備 1 の `Z_{m+1}` の鎖**（2 行）: `Z_{m+1} = σ_1^x⋯σ_m^xσ_{m+1}^z = σ^x⊠⋯⊠σ^x⊠σ^z⊠I⊠⋯⊠I`。
+`Y_kronecker_form` と同じ理由で `rfl` である（人手の `m+1` は Lean の `nextSite m`）。 -/
+theorem Z_nextSite_kronecker_form (m : Fin M) :
+    Z (nextSite m) = siteProd M (jwFamily (nextSite m) pauliZ) := rfl
+
+/-- 人手の `m ∈ {1,…,M_col-1}` のサイト `m` と `m+1` は異なる（`nextSite m` の値は `m + 1`）。 -/
+theorem ne_nextSite_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) : m ≠ nextSite m := by
+  have hlt : (m : ℕ) + 1 < M := by have := m.isLt; omega
+  intro h
+  have := congrArg Fin.val h
+  rw [nextSite_val_of_lt hlt] at this
+  omega
+
+/-- **人手の準備 1 の `σ_m^zσ_{m+1}^z` の鎖**（4 行。`m ∈ {1,…,M_col-1}`）。人手の 4 行と `calc` の 4 段が 1 対 1 に対応する。 -/
+theorem sigmaZ_mul_sigmaZ_nextSite_kronecker (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
+    sigmaZ m * sigmaZ (nextSite m)
+      = siteProd M (fun i => if i = m then pauliZ else if i = nextSite m then pauliZ else 1) := by
+  have hne := ne_nextSite_of_not_last m hm
+  calc
+    sigmaZ m * sigmaZ (nextSite m)
+        = siteProd M (Function.update 1 m pauliZ)
+          * siteProd M (Function.update 1 (nextSite m) pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices` を 2 箇所へ同時適用
+    _ = siteProd M (fun i =>
+          if i = m then pauliZ * 1
+          else if i = nextSite m then 1 * pauliZ else 1 * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      by_cases ha : i = m
+      · rw [ha, Function.update_self, Function.update_of_ne hne, if_pos rfl]; rfl
+      · by_cases hb : i = nextSite m
+        · rw [hb, Function.update_self, Function.update_of_ne hne.symm, if_neg hne.symm, if_pos rfl]; rfl
+        · rw [Function.update_of_ne ha, Function.update_of_ne hb, if_neg ha, if_neg hb]; rfl
+    _ = siteProd M (fun i =>
+          if i = m then pauliZ
+          else if i = nextSite m then 1 * pauliZ else 1) := by
+      rw [mul_identity_matrix pauliZ, mul_identity_matrix (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult` を `AI` の形の因子（第 `m` 因子と、第 `m`・`m+1` 以外の因子）へ同時適用
+    _ = siteProd M (fun i => if i = m then pauliZ else if i = nextSite m then pauliZ else 1) := by
+      rw [identity_matrix_mul pauliZ]                   -- `identity_matrix_is_left_unit_of_mat_mult`（第 `m+1` 因子）
+
+/-! ## 準備 2（境界の因子のクロネッカー積表示）
+
+人手のサイト `1` と `M_col` は Lean の `firstSite`・`lastSite` である。 -/
+
+/-- `M_col ≥ 2` なら人手のサイト `1` と `M_col` は異なる。 -/
+private theorem firstSite_ne_lastSite (hM : 2 ≤ M) :
+    firstSite M (by omega) ≠ lastSite M (by omega) :=
+  Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
+
+/-- **人手の準備 2 の `Y_{M_col}` の鎖**（2 行）: `Y_{M_col} = σ_1^x⋯σ_{M_col-1}^xσ_{M_col}^y = σ^x⊠⋯⊠σ^x⊠σ^y`。
+`Y_kronecker_form` と同じ理由で `rfl` である。 -/
+theorem Y_lastSite_kronecker_form (hM : M ≠ 0) :
+    Y (lastSite M hM) = siteProd M (jwFamily (lastSite M hM) pauliY) := rfl
+
+/-- **人手の準備 2 の `Z_1` の鎖**（2 行）: `Z_1 = σ_1^z = σ^z⊠I⊠⋯⊠I`。人手の 2 行と `calc` の 2 段が 1 対 1 に対応する。 -/
+theorem Z_firstSite_kronecker_form (hM : M ≠ 0) :
+    Z (firstSite M hM) = siteProd M (Function.update 1 (firstSite M hM) pauliZ) :=
+  calc
+    Z (firstSite M hM) = sigmaZ (firstSite M hM) := Z_zero (Nat.pos_of_ne_zero hM)
+                                                        -- `def_jordan_wigner_Z_matrices`（`m = 1`）。人手は `Z_1 := σ_1^z` を定義の場合分けで置くが、Lean の `Z` は一様な定義なので、その場合分けは導いた補題 `Z_zero` に当たる
+    _ = siteProd M (Function.update 1 (firstSite M hM) pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices`
+
+/-- **人手の準備 2 の `ε` の式**: `ε = σ^x⊠⋯⊠σ^x`（`global_spin_flip_kronecker_form`。その Lean は
+`epsilon_eq_siteProd`（`PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonCommutes.lean`）で、中身は
+`epsilon_eq_siteProd_pauliX_by_induction`）。 -/
+theorem epsilon_kronecker_form : epsilon M = siteProd M (fun _ => pauliX) :=
+  epsilon_eq_siteProd_pauliX_by_induction
+
+/-- **人手の準備 2 の `σ_{M_col}^zσ_1^z` の鎖**（4 行。`M_col ≥ 2`）。人手の 4 行と `calc` の 4 段が 1 対 1 に対応する。
+人手の第 `1` 因子は Lean の `i = firstSite M _`、第 `M_col` 因子は `i = lastSite M _`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+theorem sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker (hM : 2 ≤ M) :
+    sigmaZ (lastSite M (by omega)) * sigmaZ (firstSite M (by omega))
+      = siteProd M (fun i =>
+          if i = firstSite M (by omega) then pauliZ
+          else if i = lastSite M (by omega) then pauliZ else 1) := by
+  have hne := firstSite_ne_lastSite hM
+  calc
+    sigmaZ (lastSite M (by omega)) * sigmaZ (firstSite M (by omega))
+        = siteProd M (Function.update 1 (lastSite M (by omega)) pauliZ)
+          * siteProd M (Function.update 1 (firstSite M (by omega)) pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices` を 2 箇所へ同時適用
+    _ = siteProd M (fun i =>
+          if i = firstSite M (by omega) then 1 * pauliZ
+          else if i = lastSite M (by omega) then pauliZ * 1 else 1 * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M ≥ 2` より第 `1` 因子と第 `M_col` 因子は異なる）
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      by_cases ha : i = firstSite M (by omega)
+      · rw [ha, Function.update_self, Function.update_of_ne hne, if_pos rfl]; rfl
+      · by_cases hb : i = lastSite M (by omega)
+        · rw [hb, Function.update_self, Function.update_of_ne hne.symm, if_neg hne.symm, if_pos rfl]; rfl
+        · rw [Function.update_of_ne ha, Function.update_of_ne hb, if_neg ha, if_neg hb]; rfl
+    _ = siteProd M (fun i =>
+          if i = firstSite M (by omega) then 1 * pauliZ
+          else if i = lastSite M (by omega) then pauliZ else 1) := by
+      rw [mul_identity_matrix pauliZ, mul_identity_matrix (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult` を `AI` の形の因子（第 `M_col` 因子と、第 `2` から第 `M_col-1` 因子）へ同時適用
+    _ = siteProd M (fun i =>
+          if i = firstSite M (by omega) then pauliZ
+          else if i = lastSite M (by omega) then pauliZ else 1) := by
+      rw [identity_matrix_mul pauliZ]                   -- `identity_matrix_is_left_unit_of_mat_mult`（第 `1` 因子）
+
 /-! ## 内部辺 -/
 
 /-- 人手の「両辺に `i` を掛けて `iY_mZ_{m+1} = σ^z_mσ^z_{m+1}`（`i·(-i) = 1`）」。 -/
@@ -104,10 +229,6 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
 /-- `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` のサイトごとの因子（サイト `1` と `M_col` に `σ^y`、ほかに `σ^x`）。 -/
 noncomputable def boundaryYXYFamily (M : ℕ) (hM : M ≠ 0) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
   fun i => if i = firstSite M hM ∨ i = lastSite M hM then pauliY else pauliX
-
-private theorem firstSite_ne_lastSite (hM : 2 ≤ M) :
-    firstSite M (by omega) ≠ lastSite M (by omega) :=
-  Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
 
 /-- **人手の境界項の左辺**: `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`。
 

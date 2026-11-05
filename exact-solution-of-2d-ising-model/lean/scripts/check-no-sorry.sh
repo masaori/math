@@ -2244,6 +2244,14 @@ targets=(
   Ising2D.boundaryG
   Ising2D.nextSite_lastSite
   Ising2D.pauliX_mul_pauliZ_eq
+  Ising2D.Y_kronecker_form
+  Ising2D.Z_nextSite_kronecker_form
+  Ising2D.ne_nextSite_of_not_last
+  Ising2D.sigmaZ_mul_sigmaZ_nextSite_kronecker
+  Ising2D.Y_lastSite_kronecker_form
+  Ising2D.Z_firstSite_kronecker_form
+  Ising2D.epsilon_kronecker_form
+  Ising2D.sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker
   Ising2D.I_smul_Y_mul_Z_next_of_not_last
   Ising2D.boundaryYXYFamily
   Ising2D.Y_last_mul_Z_first
