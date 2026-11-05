@@ -1,4 +1,4 @@
-# 対象ラベル: transpose_preserves_matrix_norm, transpose_preserves_matrix_limits
+# 対象ラベル: transpose_preserves_matrix_norm（transpose_preserves_matrix_limits の検算 ../transpose_preserves_matrix_limits/ もこの準備を読み込む）
 # 共通の準備。ℂ を本文 definition_of_cc どおり実数の対で持ち（_shared/complex_as_real_pairs.sage）、
 # 行列は対を成分に持つ n×n の表として、本文の定め方どおりに成分から組む:
 # 転置 (A^⊤)_{kl} := A_{lk}（def_matrix_transpose）、差は def_matrix_difference の成分の式、

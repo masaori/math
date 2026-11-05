@@ -2085,6 +2085,205 @@ SS^{m+1}
   },
 
   {
+    id: "eigenvalues_of_V_claim_exp_of_symmetric_is_symmetric",
+    kind: "claim",
+    title: { text: "転置で不変な行列の exp は転置で不変" },
+    labels: ["exp_of_symmetric_is_symmetric"],
+    statement: [
+      paragraph(["指数と冪は ", ref("def_exp"), "、転置は ", ref("def_matrix_transpose"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`S \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`S^{\top} = S`),
+        " を満たすとき、",
+      ]),
+      displayMath(String.raw`\exp(S)^{\top} = \exp(S)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\exp(S)`),
+        " は ",
+        ref("def_exp"),
+        " の部分和の極限（部分和と ",
+        math(String.raw`\exp(S)`),
+        " の差のノルムという ",
+        math(String.raw`\mathbb{R}`),
+        " の数列の極限）であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "単位行列を ",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書く。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(I^{\top})_{kl}
+&= I_{lk}
+&&(\because\ \blkref{def_matrix_transpose}\ (m \to n,\ B \to I,\ p \to k,\ q \to l\ \text{を同時に置き換える}))\\
+&= \delta_{lk}
+&&(\because\ \blkref{def_identity_matrix}\ (i \to l,\ j \to k))\\
+&= \delta_{kl}
+&&(\because\ \blkref{def_kronecker_delta}\ \text{で}\ l = k\ \text{と}\ k = l\ \text{は同じ条件})\\
+&= I_{kl}
+&&(\because\ \blkref{def_identity_matrix}\ (i \to k,\ j \to l))
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`I^{\top} = I`),
+        " である。",
+      ]),
+      paragraph([
+        "準備として、すべての ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`SS^m = S^mS`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+SS^0
+&= SI
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&= S
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= IS
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= S^0S
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+SS^{m+1}
+&= S(S^mS)
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&= (SS^m)S
+&&(\because\ \blkref{mat_mult_associative})\\
+&= (S^mS)S
+&&(\because\ \text{帰納法の仮定})\\
+&= S^{m+1}S
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+\end{aligned}`),
+      paragraph([
+        "次に、すべての ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`(S^m)^{\top} = S^m`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(S^0)^{\top}
+&= I^{\top}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&= I
+&&(\because\ I^{\top} = I)\\
+&= S^0
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+(S^{m+1})^{\top}
+&= (S^mS)^{\top}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&= S^{\top}(S^m)^{\top}
+&&(\because\ \blkref{transpose_of_matrix_product}\ (m, n, p \to n,\ A \to S^m,\ B \to S\ \text{を同時に置き換える}))\\
+&= S(S^m)^{\top}
+&&(\because\ S^{\top} = S)\\
+&= SS^m
+&&(\because\ \text{帰納法の仮定})\\
+&= S^mS
+&&(\because\ \text{準備の}\ SS^m = S^mS)\\
+&= S^{m+1}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について部分和を ",
+        math(String.raw`E_N := \sum_{m=0}^{N}\frac{1}{m!}S^m`),
+        "（",
+        ref("def_exp"),
+        " (1) の部分和。係数は ",
+        math(String.raw`(1/m!)_{\mathbb{C}}`),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "）と置く。",
+        ref("def_matrix_sum"),
+        " を項の数についての帰納法で、",
+        ref("def_matrix_scalar_multiple"),
+        " を各項へ当てはめると、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`(E_N)_{kl} = \sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{kl}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+((E_N)^{\top})_{kl}
+&= (E_N)_{lk}
+&&(\because\ \blkref{def_matrix_transpose}\ (m \to n,\ B \to E_N,\ p \to k,\ q \to l\ \text{を同時に置き換える}))\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{lk}
+&&(\because\ (E_N)_{lk}\ \text{の成分の式})\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,((S^m)^{\top})_{kl}
+&&(\because\ \blkref{def_matrix_transpose}\ (m \to n,\ B \to S^m,\ p \to k,\ q \to l)\ \text{を各項へ})\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{kl}
+&&(\because\ \text{上で示した}\ (S^m)^{\top} = S^m\ \text{を各項へ})\\
+&= (E_N)_{kl}
+&&(\because\ (E_N)_{kl}\ \text{の成分の式})
+\end{aligned}`),
+      paragraph([
+        "なので、すべての ",
+        math(String.raw`N`),
+        " で ",
+        math(String.raw`E_N^{\top} = E_N`),
+        " である。",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`E_N \to \exp(S)`),
+        " であり、",
+        ref("transpose_preserves_matrix_limits"),
+        "（",
+        math(String.raw`A_N`),
+        " を ",
+        math(String.raw`E_N`),
+        " に、",
+        math(String.raw`A`),
+        " を ",
+        math(String.raw`\exp(S)`),
+        " に同時に置き換える）より ",
+        math(String.raw`E_N^{\top} \to \exp(S)^{\top}`),
+        " である。",
+        math(String.raw`E_N^{\top} = E_N`),
+        " なので ",
+        math(String.raw`E_N \to \exp(S)^{\top}`),
+        " でもあり、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4)（極限の一意性）より ",
+        math(String.raw`\exp(S)^{\top} = \exp(S)`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていたので、そのうち転置で不変であることの側を主張に切り出した。手順は exp_of_hermitian_is_hermitian と同じで、共役転置の積の法則を transpose_of_matrix_product に替え、部分和の成分の 8 行の鎖からは複素共役の 3 行（complex_conjugate_of_sum・complex_conjugate_of_product・complex_conjugate_of_real_inclusion）を落とし、def_hermitian_positive_definite の 2 行を def_matrix_transpose に替えて 5 行にし、極限の段を transpose_preserves_matrix_limits に替えた。I^⊤ = I は本文に主張が無いので、証明の冒頭で成分の鎖として示した。",
+      ],
+    },
+  },
+
+  {
     id: "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
     kind: "claim",
     origin: { path: SRC, ordinal: 15 },

@@ -1561,6 +1561,26 @@ targets=(
   Ising2D.matrix_transpose_tendsto_of_necSuf
   "Ising2D.NecSuf.transpose_norm'"
   "Ising2D.NecSuf.transpose_tendsto'"
+  Ising2D.transpose_tendsto_tensorPow
+  Ising2D.identity_transpose_tensorPow
+  Ising2D.tensorPow_mul_pow_comm
+  Ising2D.tensorPow_pow_transpose_of_transpose_eq
+  Ising2D.expPartialSum_apply
+  Ising2D.expPartialSum_transpose_apply
+  Ising2D.expPartialSum_transpose
+  Ising2D.matExp_transpose_of_transpose_eq
+  Ising2D.identity_transpose_tensorPow_of_necSuf
+  Ising2D.tensorPow_mul_pow_comm_of_necSuf
+  Ising2D.tensorPow_pow_transpose_of_transpose_eq_of_necSuf
+  Ising2D.expPartialSum_transpose_of_necSuf
+  Ising2D.matExp_transpose_of_transpose_eq_of_necSuf
+  "Ising2D.NecSuf.one_transpose_matrix'"
+  "Ising2D.NecSuf.mul_pow_comm_self'"
+  "Ising2D.NecSuf.pow_transpose_of_transpose_eq'"
+  "Ising2D.NecSuf.partialSum_transpose_apply'"
+  "Ising2D.NecSuf.partialSum_transpose'"
+  "Ising2D.NecSuf.limit_transpose_of_forall_transpose_eq'"
+  "Ising2D.NecSuf.limit_transpose_of_transpose_eq'"
   Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
   Ising2D.S2_isHermitian_of_real_symmetric
   Ising2D.S1plus_isHermitian_of_real_symmetric

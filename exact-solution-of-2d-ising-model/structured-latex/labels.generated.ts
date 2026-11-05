@@ -298,6 +298,7 @@ export const ALL_LABELS = [
   "exp_of_hermitian_is_hermitian",
   "exp_of_negative_i_real_as_cos_minus_i_sin",
   "exp_of_negative_is_left_inverse",
+  "exp_of_symmetric_is_symmetric",
   "exp_sum",
   "expansion_of_finite_product_of_two_term_sums",
   "expansion_of_finite_product_of_two_term_sums_of_real_numbers",

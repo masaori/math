@@ -2,7 +2,7 @@
 # 各 N での ‖A_N^⊤ - A^⊤‖ = ‖(A_N - A)^⊤‖ = ‖A_N - A‖ を、
 # 成分の式（不定元の対）と具体の列 A_N := A + (1/(N+1)) C（成分は QQ(i)）の AA で厳密に確かめる。
 # N → ∞ の極限そのものは有限の計算では確かめられない（overview.md）。
-load("_prelude.sage")
+load("../transpose_preserves_matrix_norm/_prelude.sage")
 
 # 1 行目の根拠 transpose_of_matrix_difference: A_N^⊤ - A^⊤ = (A_N - A)^⊤ を不定元で（成分ごと）
 for n in SIZES:
