@@ -21,6 +21,7 @@ export const ALL_LABELS = [
   "claim_interchange_of_double_sum_over_finite_sets",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
   "claim_linear_map_maps_sum_over_finite_set_to_sum_of_values",
+  "claim_matrices_indexed_by_finite_set_form_complex_algebra",
   "claim_matrices_indexed_by_finite_set_form_complex_vector_space",
   "claim_matrix_product_distributes_over_sum_in_left_factor",
   "claim_matrix_product_distributes_over_sum_in_right_factor",
