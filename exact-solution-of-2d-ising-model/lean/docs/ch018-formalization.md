@@ -162,10 +162,14 @@
 | `CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card` | `εQ̌_ε = (−1)^{M+|ε|}Q̌_ε` | (2) の行列の式 2 行 |
 | `CheckFermi.epsilon_eq_neg_one_pow_smul_parityProd` | `ε = (−1)^M ∏_μ(I − 2ň_μ)` | (3) の 3 行 |
 | `CheckFermi.epsilon_mul_Qproj_univ_of_eta` | `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}` | (4) の 1 つ目の鎖 3 行 |
-| `CheckFermi.Qproj_univ_mulVec_of_mem_range` | `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y` | (4) の 2 つ目の鎖 4 行 |
-| `CheckFermi.epsilon_mulVec_of_mem_range_univ` | `y = Q̌_{(1,…,1)}x` なら `εy = y` | (4) の 3 つ目の鎖 4 行 |
-| **`Ising2D.max_eigenvector_in_even_sector`** | **(1)〜(4)**（具体的な `V^{(+)}`。仮定は `IsingParam` の `K_1, K_2 > 0` と `2 ≤ M`） | **主張**（固有空間の言い換え `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}` は未対応） |
-| `VPlusData.eta_univ_eq_one` / `eta_eq_sign` / `epsilon_eq_parityProd_of_trace_pos` / `epsilon_mul_Qproj_univ` / `mem_evenSector_of_mem_range_univ` | 上の (1)〜(4) を任意の `VPlusData` について `0 < Re tr(εV^{(+)})` の仮定で述べた形 | 下流（`TheoremCPlusEqualsLambda.lean`）のための形。`heta` を (1) の最後の行で埋める |
+| `CheckFermi.Qproj_univ_mulVec_of_mem_range` | `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y` | (4) の 2 つ目の鎖 4 行（3 行目の冪等性は仮定 `hidem` で受け取る） |
+| `CheckFermi.epsilon_mulVec_of_mem_range_univ` | `y = Q̌_{(1,…,1)}x` なら `εy = y` | (4) の 3 つ目の鎖 4 行（冪等性は仮定 `hidem` で受け取る） |
+| `Ising2D.checkFermiOf_Qproj_eq` / `checkFermiOf_Qproj_univ_eq` | 具体的な `ψ̌` の `CheckFermi` の `Q̌_T` と `CheckFermiSetup` の `Q̌_{e(T)}`（`e = finCheckIdxEquiv`）は同じ行列 | 運ぶ段（人手の証明の行ではない） |
+| `Ising2D.checkFermiOf_Qproj_univ_mul_self` | `Q̌_{(1,…,1)}Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`（人手と 1 対 1 の `CheckFermiSetup.Qproj_mul_self` から運んだもの） | (4) の 2 つ目の鎖の 3 行目が引く `check_joint_eigenspace_decomposition` (1) |
+| `Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf` | `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}`（具体的な `V^{(+)}`、`CheckFermiSetup` の `Q̌`。一般の `Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ` の特殊化） | `max_eigenvalue_of_V_plus_simple` (3) の集合の等号 |
+| `Ising2D.eigenspace_VPlus_max_subset_evenSector` | `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}` | (4) の言い換えの 2 行 |
+| **`Ising2D.max_eigenvector_in_even_sector`** | **(1)〜(4)** と言い換え（具体的な `V^{(+)}`。仮定は `IsingParam` の `K_1, K_2 > 0` と `2 ≤ M`） | **主張** |
+| `VPlusData.eta_univ_eq_one` / `eta_eq_sign` / `epsilon_eq_parityProd_of_trace_pos` / `epsilon_mul_Qproj_univ` / `mem_evenSector_of_mem_range_univ` | 上の (1)〜(4) を任意の `VPlusData` について `0 < Re tr(εV^{(+)})` の仮定で述べた形 | 下流（`TheoremCPlusEqualsLambda.lean`）のための形。`heta` を (1) の最後の行で、`hidem` を必要十分版の特殊化 `CheckFermi.Qproj_mul_self` で埋める |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`（ラベル `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`）
 

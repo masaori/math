@@ -10,6 +10,8 @@
   `checkBigLambda_lt_checkBigLambda_univ`。必要十分版の特殊化は `checkBigLambda_lt_max`）
 - (3) の固有空間の同定 → `NecSuf.eq_proj_of_eigen`（人手の順の具体版は `Qproj_mulVec_eq_zero_of_eigen`・`eq_Qproj_univ_mulVec_of_eigen`）、
   逆向き → `NecSuf.act_eq_smul_of_proj_fixed`（具体版は `VPlus_mulVec_of_mem_range_Qproj_univ`）
+  （(3) の集合の等号 `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}` そのものは、二つの包含の具体版を合わせた
+  `eigenspace_VPlus_max_eq_range_Qproj_univ`）
 
 ## `γ(θ~_μ) > 0`（半整数運動量に固有の点）
 
@@ -473,6 +475,26 @@ theorem VPlus_mulVec_of_mem_range_Qproj_univ_of_necSuf {r : ℕ} (F : CheckFermi
     (fun r A v => Matrix.smul_mulVec r A v)
     (CheckFermiSetup.Qproj_mulVec_Qproj_mulVec F Finset.univ z)
     (VPlus_mul_Qproj F g hK1 hK2 hs2 hVeq Finset.univ)
+
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の集合の等号**: `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}`。
+`⊆` は `eq_Qproj_univ_mulVec_of_eigen`（`x = Q̌_{(1,…,1)}x` なので `x` 自身が `Q̌_{(1,…,1)}` の像）、
+`⊇` は `VPlus_mulVec_of_mem_range_Qproj_univ`。人手の範囲 `M_col ≥ 2` を含む `M = r + 1` で述べる。 -/
+theorem eigenspace_VPlus_max_eq_range_Qproj_univ {r : ℕ} (F : CheckFermiSetup (r + 1))
+    (g : CheckIdx (r + 1) → ℝ) (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus (r + 1) s2 K1 K2star = c • F.Vprime g) :
+    {x : Conf (r + 1) → ℂ |
+        (VPlus (r + 1) s2 K1 K2star).mulVec x = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x}
+      = (LinearMap.range (Matrix.toLin' (F.Qproj (Finset.univ : Finset (CheckIdx (r + 1)))))
+          : Set (Conf (r + 1) → ℂ)) := by
+  ext x
+  constructor
+  · intro hx                                            -- `⊆`
+    exact ⟨x, by
+      rw [Matrix.toLin'_apply]
+      exact (eq_Qproj_univ_mulVec_of_eigen F g hgpos hK1 hK2 hs2 hVeq hx).symm⟩
+  · intro hx                                            -- `⊇`
+    exact VPlus_mulVec_of_mem_range_Qproj_univ F g hK1 hK2 hs2 hVeq hx
 
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の最後**: 固有空間 `im Q̌_{(1,…,1)}` の次元は `1`
 （`check_joint_eigenspace_decomposition` (4)）。 -/

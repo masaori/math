@@ -24,8 +24,9 @@
 | (2) 行列の式 2 行 | `CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card` |
 | (3) 3 行 | `CheckFermi.epsilon_eq_neg_one_pow_smul_parityProd` |
 | (4) `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}` の 3 行 | `CheckFermi.epsilon_mul_Qproj_univ_of_eta` |
-| (4) `Q̌_{(1,…,1)}y = y` の 4 行 | `CheckFermi.Qproj_univ_mulVec_of_mem_range` |
+| (4) `Q̌_{(1,…,1)}y = y` の 4 行 | `CheckFermi.Qproj_univ_mulVec_of_mem_range`（3 行目の冪等性は `checkFermiOf_Qproj_univ_mul_self`） |
 | (4) `εy = y` の 4 行 | `CheckFermi.epsilon_mulVec_of_mem_range_univ` |
+| (4) 言い換えの 2 行 `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}` | `eigenspace_VPlus_max_subset_evenSector`（1 行目は `eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf`） |
 | 主張 (1)〜(4) | `max_eigenvector_in_even_sector` |
 
 (2)〜(4) の鎖は (1) の結論 `η_{(1,…,1)} = +1` だけを使うので、`CheckFermi` について仮定 `heta` で受け取る形で置く。
@@ -41,11 +42,11 @@
 `(M_col − |ε|) + |ε| = M_col` は (P2) と `Nat.sub_add_cancel` で閉じる。`mat_mult_associative` も具体版が無いので
 `Matrix.mulVec_mulVec` を引く。
 
-固有空間の言い換え（`{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}`、`max_eigenvalue_of_V_plus_simple` (3)）は、
-`max_eigenvalue_of_V_plus_simple` の Lean が `CheckFermiSetup` の上にあり `CheckFermi` とまだつながっていないので、
-ここには置いていない（状態台帳の「次の一歩」）。同じ理由で、(4) の 2 つ目の鎖の 3 行目が引く冪等性
-`CheckFermi.Qproj_mul_self` も、人手 `check_joint_eigenspace_decomposition` (1) と 1 対 1 の `CheckFermiSetup` 側の Lean ではなく、
-`CheckFermi` の上の必要十分版の特殊化（`CheckFermiInput.lean`）である。
+`max_eigenvalue_of_V_plus_simple`・`check_joint_eigenspace_decomposition` と 1 対 1 の Lean は `CheckFermiSetup`（添字 `CheckIdx M`）の
+上にあり、この章の鎖は `CheckFermi`（添字 `Fin M`）の上にある。具体的な `ψ̌` から作った二つの `Q̌_ε` が同じ行列であることを
+`checkFermiOf_Qproj_eq`（運ぶ段）で示し、固有空間の言い換えの 1 行目と、(4) の 2 つ目の鎖の 3 行目が引く冪等性を
+`CheckFermiSetup` 側の人手と 1 対 1 の Lean から運ぶ。任意の `VPlusData` についての形では、冪等性を `CheckFermi` の上の
+必要十分版の特殊化 `CheckFermi.Qproj_mul_self`（`CheckFermiInput.lean`）で埋める。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
@@ -134,29 +135,33 @@ theorem epsilon_mul_Qproj_univ_of_eta (heta : F.eta Finset.univ = 1) :
     _ = (1 : ℂ) • F.Qproj Finset.univ := by rw [heta]                               -- 人手 2: (1)
     _ = F.Qproj Finset.univ := one_smul_tensorPow _                                  -- 人手 3: `scalar_multiple_by_one`
 
-/-- **人手 (4) の 2 つ目の鎖**: `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y`。 -/
-theorem Qproj_univ_mulVec_of_mem_range {x y : Conf M → ℂ}
-    (hy : y = F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ x) :
+/-- **人手 (4) の 2 つ目の鎖**: `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y`。
+3 行目が引く `check_joint_eigenspace_decomposition` (1) の冪等性 `Q̌_{(1,…,1)}Q̌_{(1,…,1)} = Q̌_{(1,…,1)}` は仮定 `hidem` で受け取る
+（具体的な `V^{(+)}` の主張では、人手と 1 対 1 の `CheckFermiSetup.Qproj_mul_self` から運んだ `checkFermiOf_Qproj_univ_mul_self` で埋める）。 -/
+theorem Qproj_univ_mulVec_of_mem_range
+    (hidem : F.Qproj (Finset.univ : Finset (Fin M)) * F.Qproj Finset.univ = F.Qproj Finset.univ)
+    {x y : Conf M → ℂ} (hy : y = F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ x) :
     F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ y = y :=
   calc F.Qproj Finset.univ *ᵥ y
       = F.Qproj Finset.univ *ᵥ (F.Qproj Finset.univ *ᵥ x) := by rw [← hy]   -- 人手 1: `y` の取り方
     _ = (F.Qproj Finset.univ * F.Qproj Finset.univ) *ᵥ x :=
           Matrix.mulVec_mulVec _ _ _                                       -- 人手 2: `mat_mult_associative`
-    _ = F.Qproj Finset.univ *ᵥ x := by rw [F.Qproj_mul_self]               -- 人手 3: `check_joint_eigenspace_decomposition` (1)
+    _ = F.Qproj Finset.univ *ᵥ x := by rw [hidem]                          -- 人手 3: `check_joint_eigenspace_decomposition` (1)
     _ = y := hy.symm                                                       -- 人手 4: `y` の取り方
 
 /-- **人手 (4) の 3 つ目の鎖**: `y = Q̌_{(1,…,1)}x` なら `εy = y`（`y ∈ 𝓕^{(+)}`、`def_even_eigenvectors_of_epsilon`）。 -/
-theorem epsilon_mulVec_of_mem_range_univ (heta : F.eta Finset.univ = 1) {x y : Conf M → ℂ}
-    (hy : y = F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ x) :
+theorem epsilon_mulVec_of_mem_range_univ (heta : F.eta Finset.univ = 1)
+    (hidem : F.Qproj (Finset.univ : Finset (Fin M)) * F.Qproj Finset.univ = F.Qproj Finset.univ)
+    {x y : Conf M → ℂ} (hy : y = F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ x) :
     epsilon M *ᵥ y = y :=
   calc epsilon M *ᵥ y
       = epsilon M *ᵥ (F.Qproj Finset.univ *ᵥ y) := by
-          rw [F.Qproj_univ_mulVec_of_mem_range hy]                         -- 人手 1: 直前の鎖の `Q̌y = y`
+          rw [F.Qproj_univ_mulVec_of_mem_range hidem hy]                   -- 人手 1: 直前の鎖の `Q̌y = y`
     _ = (epsilon M * F.Qproj Finset.univ) *ᵥ y :=
           Matrix.mulVec_mulVec _ _ _                                       -- 人手 2: `mat_mult_associative`
     _ = F.Qproj Finset.univ *ᵥ y := by
           rw [F.epsilon_mul_Qproj_univ_of_eta heta]                        -- 人手 3: 1 つ目の鎖
-    _ = y := F.Qproj_univ_mulVec_of_mem_range hy                           -- 人手 4: 直前の鎖の `Q̌y = y`
+    _ = y := F.Qproj_univ_mulVec_of_mem_range hidem hy                     -- 人手 4: 直前の鎖の `Q̌y = y`
 
 end CheckFermi
 
@@ -186,11 +191,118 @@ theorem vPlusDataOf_eta_univ_eq_one (P : IsingParam) (hM2 : 2 ≤ M) :
   -- 人手 3 行目: `trace_of_epsilon_V_plus_via_check_eigenvalues` (3) の `⟸`
   exact D.eta_univ_eq_one_iff_trace_pos.mpr h2
 
+/-! ## 二つの `Q̌_ε` をつなぐ（運ぶ段）と、固有空間の言い換え
+
+人手の `Q̌_ε` の Lean は二つある。`max_eigenvalue_of_V_plus_simple`・`check_joint_eigenspace_decomposition` と 1 対 1 の鎖は
+`CheckFermiSetup`（添字 `𝓜̌ = CheckIdx M`）の上の `CheckFermiSetup.Qproj`、この章の鎖は `CheckFermi`（添字 `Fin M`）の上の
+`CheckFermi.Qproj` である。具体的な `ψ̌` から作った二つ（`checkFermiSetupOf`・`checkFermiOf`）では、
+どちらも人手の定義 `Q̌_ε = ∏_{ν=1}^{M_col} A_ν` の同じ行列であることを `checkFermiOf_Qproj_eq` で示す
+（添字 `j : Fin M` を `finCheckIdxEquiv M j = j + 1 ∈ 𝓜̌` へ送る付け替えで、人手の証明の行ではない）。 -/
+
+/-- 運ぶ段: 具体的な `ψ̌` について、`CheckFermi` の `Q̌_T` と `CheckFermiSetup` の `Q̌_{e(T)}`（`e = finCheckIdxEquiv`）は
+同じ行列。どちらも人手の左から掛ける積 `∏_{ν=1}^{M_col}`（`NecSuf.finProdLeft`、人手の `M_col` が Lean の `r + 1`）に等しく、
+因子の `ň_ν` は両側で `ψ̌_ν^†ψ̌_{M_col+1−ν}` の同じ行列、`ν ∈ T ⟺ e(ν) ∈ e(T)` である。 -/
+theorem checkFermiOf_Qproj_eq (P : IsingParam) {r : ℕ} (T : Finset (Fin (r + 1))) :
+    (checkFermiOf P (Nat.succ_ne_zero r)).Qproj T
+      = (checkFermiSetupOf P (Nat.succ_ne_zero r)).Qproj (T.map (finCheckIdxEquiv (r + 1)).toEmbedding) := by
+  set F := checkFermiOf P (Nat.succ_ne_zero r)
+  set Fs := checkFermiSetupOf P (Nat.succ_ne_zero r)
+  set e := finCheckIdxEquiv (r + 1)
+  have h := NecSuf.finProdLeft_eq_noncommProd_image (NecSuf.projFactor F.nOp T)
+    (fun i j => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) r id Function.injective_id
+  rw [Finset.image_id] at h
+  have hfac : ∀ j : Fin (r + 1),
+      NecSuf.projFactor F.nOp T j
+        = NecSuf.projFactor Fs.nOp (T.map e.toEmbedding) (CheckFermiSetup.checkIdxOfFin j) := by
+    intro j
+    have hj : CheckFermiSetup.checkIdxOfFin j = e j := Subtype.ext (by simp [CheckFermiSetup.checkIdxOfFin, e, checkIdx])
+    have hn : Fs.nOp (e j) = F.nOp j := rfl
+    rw [hj]
+    by_cases hT : j ∈ T
+    · rw [NecSuf.projFactor_of_mem hT, NecSuf.projFactor_of_mem (Finset.mem_map_equiv.2 (by simpa using hT)), hn]
+    · rw [NecSuf.projFactor_of_notMem hT,
+        NecSuf.projFactor_of_notMem (fun h' => hT (by simpa using Finset.mem_map_equiv.1 h')), hn]
+  calc F.Qproj T
+      = (Finset.univ : Finset (Fin (r + 1))).noncommProd (NecSuf.projFactor F.nOp T)
+          (fun i _ j _ _ => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) := rfl
+    _ = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T j) := h.symm
+    _ = NecSuf.finProdLeft r
+          (fun j => NecSuf.projFactor Fs.nOp (T.map e.toEmbedding) (CheckFermiSetup.checkIdxOfFin j)) :=
+        congrArg (NecSuf.finProdLeft r) (funext hfac)
+    _ = Fs.Qproj (T.map e.toEmbedding) := (CheckFermiSetup.Qproj_eq_finProdLeft Fs _).symm
+
+/-- 運ぶ段の `ε = (1,…,1)` の場合: `e((1,…,1)) = (1,…,1)`。 -/
+theorem checkFermiOf_Qproj_univ_eq (P : IsingParam) {r : ℕ} :
+    (checkFermiOf P (Nat.succ_ne_zero r)).Qproj (Finset.univ : Finset (Fin (r + 1)))
+      = (checkFermiSetupOf P (Nat.succ_ne_zero r)).Qproj (Finset.univ : Finset (CheckIdx (r + 1))) := by
+  rw [checkFermiOf_Qproj_eq, Finset.map_univ_equiv]
+
+/-- 人手 `check_joint_eigenspace_decomposition` (1) の `Q̌_{(1,…,1)}Q̌_{(1,…,1)} = Q̌_{(1,…,1)}` を、具体的な `ψ̌` の `CheckFermi` の
+`Q̌_{(1,…,1)}` について、人手と 1 対 1 の `CheckFermiSetup.Qproj_mul_self` から運んだもの。 -/
+theorem checkFermiOf_Qproj_univ_mul_self (P : IsingParam) {r : ℕ} :
+    (checkFermiOf P (Nat.succ_ne_zero r)).Qproj (Finset.univ : Finset (Fin (r + 1)))
+        * (checkFermiOf P (Nat.succ_ne_zero r)).Qproj Finset.univ
+      = (checkFermiOf P (Nat.succ_ne_zero r)).Qproj Finset.univ := by
+  rw [checkFermiOf_Qproj_univ_eq]
+  exact CheckFermiSetup.Qproj_mul_self _ _
+
+/-- **人手 `max_eigenvalue_of_V_plus_simple` (3)** を具体的な `V^{(+)}` について集合の等号で述べたもの:
+`{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}`（`CheckFermiSetup` の `Q̌`。`Λ̌_max` は `checkBigLambda … univ`）。
+一般の `CheckFermiSetup` についての `eigenspace_VPlus_max_eq_range_Qproj_univ` を具体的な `ψ̌` へ特殊化する。
+`V^{(+)} = c V̌'` は `VPlus_eq_smul_checkVprime_const` と `checkFermiSetupOf_Vprime`、`γ(θ~_μ) > 0` は `gammaFn_thetaTilde_pos`。 -/
+theorem eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf (P : IsingParam) {r : ℕ} :
+    {x : Conf (r + 1) → ℂ |
+        (VPlus (r + 1) (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)) *ᵥ x
+          = ((checkBigLambda (checkFermiSetupOf P (Nat.succ_ne_zero r)) (fun i => gammaTilde P (r + 1) i.1)
+                (Real.sinh (2 * P.K2)) Finset.univ : ℝ) : ℂ) • x}
+      = (LinearMap.range (Matrix.toLin'
+          ((checkFermiSetupOf P (Nat.succ_ne_zero r)).Qproj (Finset.univ : Finset (CheckIdx (r + 1)))))
+          : Set (Conf (r + 1) → ℂ)) := by
+  set Fs := checkFermiSetupOf P (Nat.succ_ne_zero r)
+  have hVeq : VPlus (r + 1) (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)
+      = ((((2 * Real.sinh (2 * P.K2)) ^ (((r + 1 : ℕ) : ℝ) / 2) : ℝ) : ℂ))
+          • Fs.Vprime (fun i => gammaTilde P (r + 1) i.1) := by
+    rw [VPlus_eq_smul_checkVprime_const P (Nat.succ_ne_zero r) P.c2_mul_s2star_eq_c2star,
+      checkFermiSetupOf_Vprime]
+  have hgpos : ∀ i : CheckIdx (r + 1), 0 < gammaTilde P (r + 1) i.1 :=
+    fun i => gammaFn_thetaTilde_pos P (Nat.succ_ne_zero r) (CheckIdx.prop' i)
+  exact eigenspace_VPlus_max_eq_range_Qproj_univ Fs _ hgpos (star_ofReal_self P.K1)
+    (star_ofReal_self P.K2star) (sinh_two_K2_pos P) hVeq
+
+/-- **人手 (4) の言い換えの 2 行**（`M_col ≥ 2`）:
+`{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`。
+1 行目は `max_eigenvalue_of_V_plus_simple` (3)（`eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf`）で、`CheckFermiSetup` の
+`Q̌_{(1,…,1)}` をこの章の `CheckFermi` の `Q̌_{(1,…,1)}` へ `checkFermiOf_Qproj_univ_eq` で運ぶ（運ぶ段）。
+2 行目は上で示した包含 `epsilon_mulVec_of_mem_range_univ`（`𝓕^{(+)}` の元であることは `ε *ᵥ y = y`、`def_even_eigenvectors_of_epsilon`）。 -/
+theorem eigenspace_VPlus_max_subset_evenSector (P : IsingParam) (hM2 : 2 ≤ M) :
+    {x : Conf M → ℂ |
+        (VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)) *ᵥ x
+          = ((checkBigLambda (checkFermiSetupOf P (by omega : M ≠ 0)) (fun i => gammaTilde P M i.1)
+                (Real.sinh (2 * P.K2)) Finset.univ : ℝ) : ℂ) • x}
+      = (LinearMap.range (Matrix.toLin'
+          ((checkFermiOf P (by omega : M ≠ 0)).Qproj (Finset.univ : Finset (Fin M))))
+          : Set (Conf M → ℂ))
+    ∧ (LinearMap.range (Matrix.toLin'
+          ((checkFermiOf P (by omega : M ≠ 0)).Qproj (Finset.univ : Finset (Fin M))))
+          : Set (Conf M → ℂ))
+        ⊆ {y : Conf M → ℂ | epsilon M *ᵥ y = y} := by
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 1 := ⟨M - 1, by omega⟩
+  refine ⟨?_, ?_⟩
+  · rw [eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf P, checkFermiOf_Qproj_univ_eq P]
+                                                        -- 人手 1: `max_eigenvalue_of_V_plus_simple` (3)（`Q̌` を運ぶ段を含む）
+  · rintro y ⟨x, rfl⟩                                   -- 人手 2: 上で示した包含（`y = Q̌_{(1,…,1)}x`）
+    have heta := vPlusDataOf_eta_univ_eq_one P hM2
+    rw [Matrix.toLin'_apply]
+    exact (checkFermiOf P (Nat.succ_ne_zero r)).epsilon_mulVec_of_mem_range_univ heta
+      (checkFermiOf_Qproj_univ_mul_self P) rfl
+
 /-- **人手 `max_eigenvector_in_even_sector`**（`K_1, K_2 > 0` は `IsingParam` が持つ。`M_col ≥ 2`）:
 (1) `η_{(1,…,1)} = +1`、
 (2) `η_ε = (-1)^{M_col−|ε|} = (-1)^{M_col+|ε|}`、`εQ̌_ε = (-1)^{M_col+|ε|}Q̌_ε`、
 (3) `ε = (-1)^{M_col}∏_μ(I − 2ň_μ)`、
-(4) `im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`im Q̌_{(1,…,1)}` の元は `Q̌_{(1,…,1)} *ᵥ x`、`𝓕^{(+)}` の元であることは `ε *ᵥ y = y`）。 -/
+(4) `im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`im Q̌_{(1,…,1)}` の元は `Q̌_{(1,…,1)} *ᵥ x`、`𝓕^{(+)}` の元であることは `ε *ᵥ y = y`）、
+すなわち `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`eigenspace_VPlus_max_subset_evenSector`）。
+(4) の第 1 の形 `∀ x, ε(Q̌_{(1,…,1)}x) = Q̌_{(1,…,1)}x` は、最後の包含を像の元ごとに書いたもので、内容は同じである。 -/
 theorem max_eigenvector_in_even_sector (P : IsingParam) (hM2 : 2 ≤ M) :
     (checkFermiOf P (by omega : M ≠ 0)).eta (Finset.univ : Finset (Fin M)) = 1
     ∧ (∀ T : Finset (Fin M),
@@ -199,16 +311,30 @@ theorem max_eigenvector_in_even_sector (P : IsingParam) (hM2 : 2 ≤ M) :
         ∧ epsilon M * (checkFermiOf P (by omega : M ≠ 0)).Qproj T
             = (-1 : ℂ) ^ (M + T.card) • (checkFermiOf P (by omega : M ≠ 0)).Qproj T)
     ∧ epsilon M = (-1 : ℂ) ^ M • (checkFermiOf P (by omega : M ≠ 0)).parityProd
-    ∧ ∀ x : Conf M → ℂ,
+    ∧ (∀ x : Conf M → ℂ,
         epsilon M *ᵥ ((checkFermiOf P (by omega : M ≠ 0)).Qproj (Finset.univ : Finset (Fin M)) *ᵥ x)
-          = (checkFermiOf P (by omega : M ≠ 0)).Qproj Finset.univ *ᵥ x := by
+          = (checkFermiOf P (by omega : M ≠ 0)).Qproj Finset.univ *ᵥ x)
+    ∧ {x : Conf M → ℂ |
+        (VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)) *ᵥ x
+          = ((checkBigLambda (checkFermiSetupOf P (by omega : M ≠ 0)) (fun i => gammaTilde P M i.1)
+                (Real.sinh (2 * P.K2)) Finset.univ : ℝ) : ℂ) • x}
+      = (LinearMap.range (Matrix.toLin'
+          ((checkFermiOf P (by omega : M ≠ 0)).Qproj (Finset.univ : Finset (Fin M))))
+          : Set (Conf M → ℂ))
+    ∧ (LinearMap.range (Matrix.toLin'
+          ((checkFermiOf P (by omega : M ≠ 0)).Qproj (Finset.univ : Finset (Fin M))))
+          : Set (Conf M → ℂ))
+        ⊆ {y : Conf M → ℂ | epsilon M *ᵥ y = y} := by
+  have hsub := eigenspace_VPlus_max_subset_evenSector P hM2
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 1 := ⟨M - 1, by omega⟩
   have heta := vPlusDataOf_eta_univ_eq_one P hM2
-  set F := checkFermiOf P (by omega : M ≠ 0)
+  have hidem := checkFermiOf_Qproj_univ_mul_self P (r := r)
+  set F := checkFermiOf P (Nat.succ_ne_zero r)
   exact ⟨heta,
     fun T => ⟨F.eta_eq_neg_one_pow_sub_card heta T, F.eta_eq_neg_one_pow_add_card heta T,
       F.epsilon_mul_Qproj_eq_neg_one_pow_add_card heta T⟩,
     F.epsilon_eq_neg_one_pow_smul_parityProd heta,
-    fun x => F.epsilon_mulVec_of_mem_range_univ heta rfl⟩
+    fun x => F.epsilon_mulVec_of_mem_range_univ heta hidem rfl, hsub.1, hsub.2⟩
 
 /-! ## 任意の `VPlusData` についての形（下流のため） -/
 
@@ -238,11 +364,11 @@ theorem epsilon_mul_Qproj_univ (htr : 0 < ((epsilon M * D.V).trace).re) :
   F.epsilon_mul_Qproj_univ_of_eta (D.eta_univ_eq_one htr)
 
 /-- 人手 (4) の `im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`CheckFermi.epsilon_mulVec_of_mem_range_univ` の `heta` を
-`eta_univ_eq_one` で埋める）。 -/
+`eta_univ_eq_one` で、`hidem` を必要十分版の特殊化 `CheckFermi.Qproj_mul_self` で埋める）。 -/
 theorem mem_evenSector_of_mem_range_univ (htr : 0 < ((epsilon M * D.V).trace).re)
     {x y : Conf M → ℂ} (hy : y = F.Qproj (Finset.univ : Finset (Fin M)) *ᵥ x) :
     epsilon M *ᵥ y = y :=
-  F.epsilon_mulVec_of_mem_range_univ (D.eta_univ_eq_one htr) hy
+  F.epsilon_mulVec_of_mem_range_univ (D.eta_univ_eq_one htr) (F.Qproj_mul_self Finset.univ) hy
 
 end VPlusData
 

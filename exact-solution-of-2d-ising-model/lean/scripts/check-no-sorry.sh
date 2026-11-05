@@ -1973,6 +1973,12 @@ targets=(
   Ising2D.CheckFermi.Qproj_univ_mulVec_of_mem_range
   Ising2D.CheckFermi.epsilon_mulVec_of_mem_range_univ
   Ising2D.vPlusDataOf_eta_univ_eq_one
+  Ising2D.checkFermiOf_Qproj_eq
+  Ising2D.checkFermiOf_Qproj_univ_eq
+  Ising2D.checkFermiOf_Qproj_univ_mul_self
+  Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ
+  Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf
+  Ising2D.eigenspace_VPlus_max_subset_evenSector
   Ising2D.max_eigenvector_in_even_sector
   Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus
   Ising2D.partition_function_sandwich_and_limit_in_N_row

@@ -168,6 +168,7 @@
 | `Qproj_mulVec_eq_zero_of_eigen` | `ε' ≠ (1,…,1)` なら `Q̌_{ε'}x = 0`（人手の `d(Q̌_{ε'}x) = O` の 4 行と `Q̌_{ε'}x = O` の 5 行と 1 対 1 の calc） | 同 (3) の割り算の鎖 |
 | `colVec_eq_Qproj_mul_of_zero`（1 列の行列と 2 進語の上の和で人手の 4 行と 1 対 1 の calc） / `eq_Qproj_univ_mulVec_of_eigen`（数ベクトルへ運んだ形。必要十分版の特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） | **固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る** | 同 (3) の `x = Q̌_{(1,…,1)}x` の鎖 |
 | `VPlus_mulVec_of_mem_range_Qproj_univ`（人手の 6 行と 1 対 1 の calc。必要十分版の特殊化は `VPlus_mulVec_of_mem_range_Qproj_univ_of_necSuf`） | **逆に `im Q̌_{(1,…,1)}` の各元は固有値 `Λ̌_max` の固有ベクトル** | 同 (3) の逆向きの鎖 |
+| `eigenspace_VPlus_max_eq_range_Qproj_univ` | **`{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}`**（上の 2 つの包含を合わせた集合の等号。具体的な `ψ̌` への特殊化は ch018 の `eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf`） | 同 (3) の集合の等号 |
 | `finrank_range_Qproj_univ` | **その空間の次元は `1`（単純固有値）** | 同 (3) の最後（`check_joint_eigenspace_decomposition` (4)） |
 | `CheckFermiSetup.isInternal_range_Qproj` | **`ℂ^{2^M} = ⊕_ε im Q̌_ε`（内部直和。各成分は 1 次元）** | `check_joint_eigenspace_decomposition` (5) |
 | `CheckFermiSetup.iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | 同 (5) を `Submodule` の言葉で分けて述べた版 | 同 (5) |
@@ -191,7 +192,7 @@
 | `eigenvalues_of_check_Vprime` | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime`（Step 3・Step 3' の極限の鎖と 1 対 1 の calc。特殊化は `ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Vprime_mul_Qproj_of_necSuf` / `Qproj_mul_Vprime_of_necSuf`） | `NecSuf.exp_mul_eq_of_mul_eq_smul`（章 009 と同一）／その左右反転 `NecSuf.mul_exp_eq_of_mul_eq_smul` |
 | `constant_c_value_even_sector` Step 4・Step 5 | `Ising2D.constant_c_steps_four_five`（特殊化は `constant_c_steps_four_five_of_necSuf`） | `NecSuf.const_eq_of_trace_chains` |
 | `eigenvalues_of_V_plus` (2) | `checkBigLambda_le_checkBigLambda_univ` / `checkBigLambda_empty_le_checkBigLambda`（必要十分版の特殊化は `checkBigLambda_le_max` / `checkBigLambda_min_le`） | `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le`（具体版と同じ並びの calc。重みは非負、添字集合は空でない） |
-| `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_checkBigLambda_univ`（必要十分版の特殊化は `checkBigLambda_lt_max`） / `eq_Qproj_univ_mulVec_of_eigen`（特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） / `VPlus_mulVec_of_mem_range_Qproj_univ`（特殊化は `VPlus_mulVec_of_mem_range_Qproj_univ_of_necSuf`） | `NecSuf.sum_weight_lt_of_ne_univ` / `NecSuf.eq_proj_of_eigen` / `NecSuf.act_eq_smul_of_proj_fixed` |
+| `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_checkBigLambda_univ`（必要十分版の特殊化は `checkBigLambda_lt_max`） / `eq_Qproj_univ_mulVec_of_eigen`（特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） / `VPlus_mulVec_of_mem_range_Qproj_univ`（特殊化は `VPlus_mulVec_of_mem_range_Qproj_univ_of_necSuf`）。(3) の集合の等号は二つの包含を合わせた `eigenspace_VPlus_max_eq_range_Qproj_univ` | `NecSuf.sum_weight_lt_of_ne_univ` / `NecSuf.eq_proj_of_eigen` / `NecSuf.act_eq_smul_of_proj_fixed` |
 | `check_joint_eigenspace_decomposition` (5) | `CheckFermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | `NecSuf.isInternal_range_proj`（**章 009 と同一**） |
 | `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | `NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（**章 009 と同一**） |
 
