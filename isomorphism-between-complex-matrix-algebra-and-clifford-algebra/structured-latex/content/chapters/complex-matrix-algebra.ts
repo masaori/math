@@ -807,4 +807,83 @@ A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{z,y}
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor",
+    kind: "claim",
+    title: { text: "行列のスカラー倍は、行列の積の左の因子へ移せる" },
+    labels: ["claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`A,B\in\mathrm{Mat}_X(\mathbb{C})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " とする。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`\lambda\ast_{\mathrm{Mat}_X}(A\cdot_{\mathrm{Mat}_X}B)=(\lambda\ast_{\mathrm{Mat}_X}A)\cdot_{\mathrm{Mat}_X}B`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の元なので、すべての ",
+        math(String.raw`x,y\in X`),
+        " について ",
+        math(String.raw`(x,y)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことを示せばよい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`x,y\in X`),
+        " を任意に固定する。以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`X`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\lambda\ast_{\mathrm{Mat}_X}(A\cdot_{\mathrm{Mat}_X}B)\bigr)_{x,y}
+&=\lambda\cdot_{\mathbb{C}}(A\cdot_{\mathrm{Mat}_X}B)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\left(\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,y}\right)
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,y}\right)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\sum_{z\in X}(\lambda\cdot_{\mathbb{C}}A_{x,z})\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,y}
+&&\left(\because\ \rho:=\lambda,\ \lambda_z:=A_{x,z},\ v_z:=B_{z,y}\ \text{として当てる。}\blkref{claim_scalar_multiple_of_sum_over_finite_set}\right)\\
+&=\sum_{z\in X}(\lambda\ast_{\mathrm{Mat}_X}A)_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,y}
+&&\left(\because\ \text{各}\ z\ \text{で}\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\ \blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\bigl((\lambda\ast_{\mathrm{Mat}_X}A)\cdot_{\mathrm{Mat}_X}B\bigr)_{x,y}
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x,y\in X`),
+        " は任意だったので、",
+        math(String.raw`\lambda\ast_{\mathrm{Mat}_X}(A\cdot_{\mathrm{Mat}_X}B)=(\lambda\ast_{\mathrm{Mat}_X}A)\cdot_{\mathrm{Mat}_X}B`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
