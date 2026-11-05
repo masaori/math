@@ -763,93 +763,155 @@ c_+(M_{\mathrm{col}})
     labels: ["epsilon_commutes_with_W"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。",
         ref("def_symmetrized_transfer_matrix"),
         " の ",
-        math(String.raw`W`),
-        " は全スピン反転行列 ",
-        math(String.raw`\varepsilon`),
-        " と可換である。したがって ",
+        math(String.raw`W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は ",
+        ref("def_global_spin_flip_matrix"),
+        " の全スピン反転行列 ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と可換である（積は ",
+        ref("mat_mult"),
+        "）。",
+      ]),
+      displayMath(String.raw`\varepsilon W = W\varepsilon`),
+      paragraph([
+        "したがって ",
         math(String.raw`W`),
         " は ",
         ref("def_even_eigenvectors_of_epsilon"),
         " の ",
         math(String.raw`\mathcal{F}^{(+)}`),
-        " を保つ。",
+        " を保つ。すなわち、すべての ",
+        math(String.raw`f \in \mathcal{F}^{(+)}`),
+        " について ",
+        math(String.raw`Wf \in \mathcal{F}^{(+)}`),
+        " である。",
       ]),
     ],
     proof: [
       paragraph([
+        "準備。",
+        math(String.raw`S := V_1^{1/2}`),
+        "（",
+        ref("def_transfer_matrix_square_root"),
+        "）とおく。",
+        ref("def_transfer_matrix_square_root"),
+        " の ",
+        math(String.raw`D = \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
+        " は ",
         ref("epsilon_commutes_with_bond_sum"),
-        " より ",
-        math(String.raw`\varepsilon`),
-        " は ",
-        math(String.raw`D = \sum_m\sigma_m^z\sigma_{m+1}^z`),
-        " と可換である。",
-        math(String.raw`c := (\tfrac12 K_1)_{\mathbb{C}}`),
-        "（",
+        " の ",
+        math(String.raw`D`),
+        " と同じ式で定まる同じ行列である。",
+        math(String.raw`\tfrac12 K_1 D`),
+        " は実数 ",
+        math(String.raw`\tfrac12 K_1 \in \mathbb{R}`),
+        " の ",
         ref("inclusion_rr_to_cc"),
-        " の略記）と置くと、",
-        ref("commuting_with_scalar_multiple"),
-        "（",
-        math(String.raw`G \to \varepsilon,\ X \to D`),
-        "）より ",
-        math(String.raw`\varepsilon(cD) = (cD)\varepsilon`),
-        "、",
-        ref("commuting_matrix_commutes_with_exp"),
-        "（",
-        math(String.raw`A \to \varepsilon,\ B \to cD`),
-        "）より ",
-        math(String.raw`\varepsilon`),
-        " は ",
-        math(String.raw`V_1^{1/2} = \exp(cD)`),
-        " と可換であり、",
-        ref("epsilon_commutes_with_V2"),
-        " より ",
-        math(String.raw`V_2`),
-        " とも可換である。よって次の等式鎖を得る。",
+        " による像 ",
+        math(String.raw`c := \left(\tfrac12 K_1\right)_{\mathbb{C}} \in \mathbb{C}`),
+        " による ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍 ",
+        math(String.raw`cD`),
+        " と読む。したがって ",
+        math(String.raw`S = \exp(cD)`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon D &= D\varepsilon
+   &&(\because \blkref{epsilon_commutes_with_bond_sum}) \\
+\varepsilon(cD) &= (cD)\varepsilon
+   &&(\because \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ X \to D)\text{、仮定 }GX = XG\text{ は }\varepsilon D = D\varepsilon) \\
+\varepsilon V_2 &= V_2\varepsilon
+   &&(\because \blkref{epsilon_commutes_with_V2})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon S
+&= \varepsilon\exp(cD)
+   &&(\because \blkref{def_transfer_matrix_square_root}) \\
+&= \exp(cD)\,\varepsilon
+   &&(\because \blkref{commuting_matrix_commutes_with_exp}\ (A \to \varepsilon,\ B \to cD)\text{、仮定 }AB = BA\text{ は }\varepsilon(cD) = (cD)\varepsilon) \\
+&= S\varepsilon
+   &&(\because \blkref{def_transfer_matrix_square_root})
+\end{aligned}`,
+      ),
+      paragraph([
+        "本体。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon W
-&= \varepsilon V_1^{1/2}V_2V_1^{1/2}
-   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}) \\
-&= V_1^{1/2}\varepsilon V_2V_1^{1/2}
-   \quad (\because \varepsilon V_1^{1/2}=V_1^{1/2}\varepsilon) \\
-&= V_1^{1/2}V_2\varepsilon V_1^{1/2}
-   \quad (\because \varepsilon V_2=V_2\varepsilon) \\
-&= V_1^{1/2}V_2V_1^{1/2}\varepsilon
-   \quad (\because \varepsilon V_1^{1/2}=V_1^{1/2}\varepsilon) \\
+&= \varepsilon\left((SV_2)S\right)
+   &&(\because \blkref{def_symmetrized_transfer_matrix}) \\
+&= \left(\varepsilon(SV_2)\right)S
+   &&(\because \blkref{mat_mult_associative}) \\
+&= \left((\varepsilon S)V_2\right)S
+   &&(\because \blkref{mat_mult_associative}) \\
+&= \left((S\varepsilon)V_2\right)S
+   &&(\because \varepsilon S = S\varepsilon) \\
+&= \left(S(\varepsilon V_2)\right)S
+   &&(\because \blkref{mat_mult_associative}) \\
+&= \left(S(V_2\varepsilon)\right)S
+   &&(\because \varepsilon V_2 = V_2\varepsilon) \\
+&= \left((SV_2)\varepsilon\right)S
+   &&(\because \blkref{mat_mult_associative}) \\
+&= (SV_2)(\varepsilon S)
+   &&(\because \blkref{mat_mult_associative}) \\
+&= (SV_2)(S\varepsilon)
+   &&(\because \varepsilon S = S\varepsilon) \\
+&= \left((SV_2)S\right)\varepsilon
+   &&(\because \blkref{mat_mult_associative}) \\
 &= W\varepsilon
-   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}).
+   &&(\because \blkref{def_symmetrized_transfer_matrix})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`f \in \mathcal{F}^{(+)}`),
-        " とすると、",
+        " とする。",
+        math(String.raw`f`),
+        " は ",
+        ref("mat_mult"),
+        " の取り決めで ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列として積に入る。",
         ref("def_even_eigenvectors_of_epsilon"),
         " より ",
         math(String.raw`\varepsilon f = f`),
-        " であり、",
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon(Wf)
 &= (\varepsilon W)f
-   \quad (\because \text{行列の積の結合則}) \\
+   &&(\because \blkref{mat_mult_associative}\ (q = 1)) \\
 &= (W\varepsilon)f
-   \quad (\because \text{上の等式鎖 } \varepsilon W = W\varepsilon) \\
+   &&(\because \varepsilon W = W\varepsilon) \\
 &= W(\varepsilon f)
-   \quad (\because \text{行列の積の結合則}) \\
+   &&(\because \blkref{mat_mult_associative}\ (q = 1)) \\
 &= Wf
-   \quad (\because \varepsilon f = f)
+   &&(\because \varepsilon f = f)
 \end{aligned}`,
       ),
       paragraph([
-        "なので ",
-        math(String.raw`Wf \in \mathcal{F}^{(+)}`),
+        math(String.raw`Wf \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         "（",
+        ref("mat_mult"),
+        "）と ",
+        math(String.raw`\varepsilon(Wf) = Wf`),
+        " より、",
         ref("def_even_eigenvectors_of_epsilon"),
-        "）。",
+        " から ",
+        math(String.raw`Wf \in \mathcal{F}^{(+)}`),
+        " である。",
       ]),
     ],
     conversion: {
@@ -857,6 +919,7 @@ c_+(M_{\mathrm{col}})
       notes: [
         "2026-09-05 の分割で、上限のセクター分解のブロックから、全スピン反転行列との可換性と固有空間の保存を独立させた。式変形と根拠は分割前と同じである。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-05: 全証明の SageMath 検算（sagemath/check/epsilon_commutes_with_W/）に合わせ、括弧を省いた等式鎖を mat_mult_associative と可換性を一行ずつ当てる鎖にし、準備の可換性を (∵) 付きの鎖にした。主張文に M_col・K_1・K_2 の帰属と「F^(+) を保つ」の読み方を書いた（主張は不変）。",
       ],
     },
   },

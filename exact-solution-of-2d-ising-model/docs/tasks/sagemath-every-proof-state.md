@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 11 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 9 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -391,12 +391,16 @@
 
 - `W_has_positive_entries`（W の成分はすべて正）: `sagemath/check/W_has_positive_entries/`。証明の準備・Step 1（D の二つの鎖、X := ((1/2)K_1)_ℂD の対角性、B := V_1^{1/2} の成分の二つの鎖）・Step 2・Step 3（0 になる項の鎖と 9 行の鎖、w > 0）と主張の言い換えを、M_col = 2..5 で、exp(½K_1)・exp(K_2) を Laurent 多項式環の不定元に置いた一般の場合と、K_1 = 2 log y・K_2 = log x の具体の 13 組（B は D の固有値の射影から作る独立な経路）で厳密に確かめた（等号 583199 件、不等号 4880 件、否定コントロール 1978 件。浮動小数点なし）。**人手証明を直した**（主張の中身は不変、計算の誤りは無し）: (1) 散文の Step 1・Step 2 と根拠の無い Step 3 を、(∵) とラベル参照の付いた鎖にした（D の鎖は first_transfer_matrix_pauli_form の証明の中間目標を引かずに書き直し、½K_1D を ((1/2)K_1)_ℂD と読むことを書き、実数の exp の正値性を cosh_sinh_basic_properties ではなく real_exp_positive で引いた）。(2) 主張文に、W_{ι(μ),ι(μ')} が def_kronecker の取り決めで W_{ν(ι(μ)),ν(ι(μ'))} を表すこと、複素数の z > 0 の読み方（z = w_ℂ なる w ∈ ℝ_{>0}）、任意の k, l についての言い換え W_kl > 0 を書いた。下流（c_between_Lambda_half_and_twice_Lambda_half ほか）は任意の行・列番号で使っており、言い換えは config_numbering_equals_kronecker_numbering と row_configuration_numbering_bijective で証明の末尾に示した。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimPhysicalWHasPositiveEntries.lean` の対応表は旧い Step の分け方のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `epsilon_commutes_with_W`（εW = Wε と、W が F^(+) を保つこと）: `sagemath/check/epsilon_commutes_with_W/`。準備の三つの可換性と εS の鎖 3 行、本体の鎖 11 行、F^(+) の鎖 4 行を、M_col = 1..5 で、exp((1/2)K_1)・exp(K_2) を QQ(i) 上の Laurent 多項式環の不定元に置き、S = V_1^{1/2} = exp(cD) を D の固有値の射影から作って（SS = V_1 を確かめる）、各行の括弧の形どおりに mat_mult の成分の式で組んで厳密に確かめた（等号 315 件、否定コントロール 24 件。浮動小数点なし）。人手証明を直した（主張は不変、計算の誤りは無し）: 括弧を省いた等式鎖の各行が結合律と可換性を同時に当てていたので、mat_mult_associative と可換性を一行ずつ当てる 11 行の鎖にし、散文の準備を (∵) とラベル参照の鎖にし、「行列の積の結合則」を mat_mult_associative の参照にした。主張文に M_col・K_1・K_2 の帰属と「F^(+) を保つ」の読み方を書いた。二回のレビューで必須の指摘（別名 B と引いた主張の変数 B の衝突。別名を S にした）が無くなるまで直した。Lean は不変（`ClaimEpsilonCommutesWithW.lean` は旧い 5 行の鎖のままで、新しい 11 行との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`thermodynamic_limit_column_limit_and_closed_form.ts` の `epsilon_commutes_with_W`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_column_limit_and_closed_form.ts` の `gamma_is_continuous`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`epsilon_commutes_with_W` のレビューで見つかった（残したもの。今回の差分より前から）: (a) このブロックは εW = Wε と「W は F^(+) を保つ」の二つの主張を持つ（後者は前者の帰結で言い換えではない）。Lean は既に別の定理にしている。直すには後者を独立のブロックへ分け、同じファイルの引く側と `notes/minus_sector_not_adopted.ts` の参照を付け替える。(b) ½K_1D を ((1/2)K_1)_ℂD と読むことは、`W_has_positive_entries` の項と同じく `def_transfer_matrix_square_root` の主張文で定めるべきもので、使う側の証明に書いた。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-05、`W_has_positive_entries` のレビューで見つかった（上流の住処。今回の差分より前から）: `def_transfer_matrix` は V_1・V_2 の成分を exp(K_1Σ…)・exp(K_2Σ…) と書き、値が「ℝ_{>0} ⊂ ℂ に属する」とだけ述べて、実数の exp の値を名前の付いた包含 (·)_ℂ を通さずに ℂ の元として使っている。`def_transfer_matrix_square_root`・`first_transfer_matrix_pauli_form` も ½K_1D・K_1D を (K_1)_ℂ 倍のスカラー倍と書いていない。`W_has_positive_entries` の証明はこの読み方を行の根拠に書いた。直すには、成分を (exp(…))_ℂ、行列を ((1/2)K_1)_ℂD と明示する。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
