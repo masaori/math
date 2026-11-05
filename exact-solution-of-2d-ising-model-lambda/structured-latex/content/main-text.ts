@@ -62866,7 +62866,14 @@ B_\gamma(i)
                       displayMath(String.raw`\left(\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2=0`),
                     ],
                     proof: [
-                      paragraph(["縦辺の内側の項は隣り合う頂点の局所偶奇に二度現れる。まず ", math(String.raw`i=0`), " なら二つの縦辺は同じ辺であり、和は偶数である。"]),
+                      paragraph(["縦辺の内側の項は隣り合う頂点の局所偶奇に二度現れる。まず ", math(String.raw`i=0`), " なら二つの縦辺は同じ辺であり、"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))\right)\bmod2
+&=\left(2N_\gamma(n_{\mathrm v}(0,j+1))\right)\bmod2
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)\\
+&=0
+&&\bigl(\because\ \text{偶数の二を法とする剰余}\bigr)
+\end{aligned}`),
                       paragraph(["代表 ", math(String.raw`1\le i<L`), " について、", math(String.raw`i-1`), " までの等式を仮定する。二つの横辺の末項を加え、頂点 ", math(String.raw`(i,j+1)`), " の局所偶奇を足すと"]),
                       displayMath(String.raw`\begin{aligned}
 &\left(\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2\\
