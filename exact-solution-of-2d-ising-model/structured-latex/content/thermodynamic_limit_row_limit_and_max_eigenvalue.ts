@@ -329,16 +329,202 @@ Z(K_1,K_2)
         " と ",
         math(String.raw`S_2`),
         " は実対称）。",
-        math(String.raw`\sigma_m^z\sigma_{m+1}^z`),
-        " は ",
         ref("iH_is_real_symmetric"),
-        " の Step 3 で見たとおり、成分が実で転置について対称である（",
-        math(String.raw`\sigma^z`),
-        " が 2 個、他は単位行列のクロネッカー積）。実係数 ",
-        math(String.raw`K_1`),
-        " の有限和なので ",
+        " の Step 3 と同じく ",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        math(String.raw`D`),
+        " は ",
+        ref("def_transfer_matrix_square_root"),
+        " の ",
+        math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
+        "（",
+        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z := \sigma_1^z`),
+        "、",
+        ref("def_site_pauli_periodic_extension"),
+        "）であり、",
+        math(String.raw`K_1 \in \mathbb{R}`),
+        " の ",
         math(String.raw`K_1D`),
-        " も実対称。",
+        " は ",
+        math(String.raw`(K_1)_{\mathbb{C}}D`),
+        "（",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "）を表す。",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`m^{+} := m+1`),
+        "（",
+        math(String.raw`m \leq M_{\mathrm{col}}-1`),
+        "）、",
+        math(String.raw`m^{+} := 1`),
+        "（",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        "）とおく。",
+        math(String.raw`m^{+} \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " である。",
+        math(String.raw`\sigma_{m+1}^z = \sigma_{m^{+}}^z`),
+        " である。",
+        math(String.raw`m \leq M_{\mathrm{col}}-1`),
+        " のときは ",
+        math(String.raw`m^{+}`),
+        " の定義そのものであり、",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        " のときは ",
+        ref("def_site_pauli_periodic_extension"),
+        " より ",
+        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z = \sigma_1^z`),
+        " である。また ",
+        math(String.raw`\sigma_{m^{+}}^z\sigma_m^z = \sigma_m^z\sigma_{m^{+}}^z`),
+        " である。",
+        math(String.raw`m^{+} \neq m`),
+        " のときは ",
+        ref("distinct_site_pauli_matrices_commute"),
+        "（",
+        math(String.raw`j \to m^{+},\ k \to m,\ a, b \to z`),
+        "）による。",
+        math(String.raw`m^{+} = m`),
+        " となるのは ",
+        math(String.raw`M_{\mathrm{col}} = 1`),
+        " のときに限り、このとき両辺は同じ行列 ",
+        math(String.raw`\sigma_1^z\sigma_1^z`),
+        " である。",
+      ]),
+      paragraph([
+        "まず転置（",
+        ref("def_matrix_transpose"),
+        "）を計算する。",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について（",
+        math(String.raw`k = 1`),
+        " のとき第 ",
+        math(String.raw`k`),
+        " 因子より前の因子は無く、",
+        math(String.raw`k = M_{\mathrm{col}}`),
+        " のとき第 ",
+        math(String.raw`k`),
+        " 因子より後の因子は無い）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sigma_k^z\right)^\top
+&= \Bigl(I\boxtimes\cdots\boxtimes\overbrace{\sigma^{z}}^{k\text{th}}\boxtimes\cdots\boxtimes I\Bigr)^\top
+   \quad (\because \blkref{def_site_pauli_matrices}\ (k \to k,\ a \to z)) \\
+&= I^\top\boxtimes\cdots\boxtimes\overbrace{\left(\sigma^{z}\right)^\top}^{k\text{th}}\boxtimes\cdots\boxtimes I^\top
+   \quad (\because \blkref{kronecker_transpose}\ (M \to M_{\mathrm{col}},\ A_k \to \sigma^z,\ A_j \to I\ (j \neq k))) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left(\sigma^{z}\right)^\top}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because \blkref{transpose_of_identity_matrix_of_order_two}\ \text{を第}\ k\ \text{因子以外の因子へ同時に適用}) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^{z}}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because \blkref{transpose_of_pauli_z}\ \text{を第}\ k\ \text{因子へ}) \\
+&= \sigma_k^z
+   \quad (\because \blkref{def_site_pauli_matrices}\ (k \to k,\ a \to z))
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sigma_m^z\sigma_{m+1}^z\right)^\top
+&= \left(\sigma_m^z\sigma_{m^{+}}^z\right)^\top
+   \quad (\because \text{準備の } \sigma_{m+1}^z = \sigma_{m^{+}}^z) \\
+&= \left(\sigma_{m^{+}}^z\right)^\top\left(\sigma_m^z\right)^\top
+   \quad (\because \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z)) \\
+&= \sigma_{m^{+}}^z\sigma_m^z
+   \quad (\because \text{上で得た } \left(\sigma_k^z\right)^\top = \sigma_k^z \text{ を } k \to m^{+} \text{ と } k \to m \text{ へ同時に適用}) \\
+&= \sigma_m^z\sigma_{m^{+}}^z
+   \quad (\because \text{準備の } \sigma_{m^{+}}^z\sigma_m^z = \sigma_m^z\sigma_{m^{+}}^z) \\
+&= \sigma_m^z\sigma_{m+1}^z
+   \quad (\because \text{準備の } \sigma_{m+1}^z = \sigma_{m^{+}}^z)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。これを用いて ",
+        math(String.raw`K_1D`),
+        " の転置を計算する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(K_1D\right)^\top
+&= \Bigl((K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top
+   \quad (\because \blkref{def_transfer_matrix_square_root}\ \text{の}\ D\ \text{の定義}) \\
+&= (K_1)_{\mathbb{C}}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^z\sigma_{\ell+1}^z)\right) \\
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)^\top
+   \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}}))\right) \\
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z
+   \quad (\because \text{上で得た } \left(\sigma_m^z\sigma_{m+1}^z\right)^\top = \sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
+&= K_1D
+   \quad (\because \blkref{def_transfer_matrix_square_root}\ \text{の}\ D\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "次に成分が実数であること（",
+        ref("def_matrix_with_real_entries"),
+        "）を見る。",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        ref("def_site_pauli_matrices"),
+        "（",
+        math(String.raw`k \to k,\ a \to z`),
+        "）より ",
+        math(String.raw`\sigma_k^z = I\boxtimes\cdots\boxtimes\overbrace{\sigma^{z}}^{k\text{th}}\boxtimes\cdots\boxtimes I`),
+        " である。因子 ",
+        math(String.raw`I`),
+        " の成分はすべて実数（",
+        ref("identity_matrix_of_order_two_has_real_entries"),
+        "）、因子 ",
+        math(String.raw`\sigma^z`),
+        " の成分もすべて実数（",
+        ref("pauli_z_has_real_entries"),
+        "）なので、",
+        ref("kronecker_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`M \to M_{\mathrm{col}},\ A_k \to \sigma^z,\ A_j \to I\ (j \neq k)`),
+        "）より ",
+        math(String.raw`\sigma_k^z`),
+        " の成分はすべて実数である。",
+      ]),
+      paragraph([
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        math(String.raw`\sigma_m^z`),
+        " と ",
+        math(String.raw`\sigma_{m^{+}}^z`),
+        " の成分はすべて実数なので、",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z`),
+        "）より ",
+        math(String.raw`\sigma_m^z\sigma_{m^{+}}^z`),
+        " の成分はすべて実数であり、",
+        "準備の ",
+        math(String.raw`\sigma_{m+1}^z = \sigma_{m^{+}}^z`),
+        " より ",
+        math(String.raw`\sigma_m^z\sigma_{m+1}^z`),
+        " の成分もすべて実数である。",
+        ref("finite_sum_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}})`),
+        "）より ",
+        math(String.raw`D`),
+        " の成分はすべて実数であり、",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ B \to D`),
+        "）より ",
+        math(String.raw`K_1D = (K_1)_{\mathbb{C}}D`),
+        " の成分もすべて実数である。転置について対称であることと合わせて、",
+        math(String.raw`K_1D`),
+        " は実対称である（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）。",
         ref("iH_is_real_symmetric"),
         " の Step 1 より ",
         math(String.raw`S_2`),
@@ -499,6 +685,7 @@ W
       notes: [
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 が「def_hermitian_positive_definite の最後の注意より実対称行列はエルミート」と定義の中の主張を引いていたのを、それを切り出した主張 real_symmetric_matrix_is_hermitian と定義 def_real_symmetric_complex_matrix を引く形にし、当てはめ（n → 2^{M_col}、A → K_1D と A → S_2）を書いた。exp_hermitian_is_positive_definite を当てはめる ½K_1D がエルミートであることの根拠が無かったので、real_multiple_of_hermitian_is_hermitian（α → ½、A → K_1D）を足した。Step 1 の K_1D・S_2 の実対称性の論証（名前だけの根拠が残る）は変えていない。主張は変えていない。",
         "2026-11-04: SageMath の検算（sagemath/check/W_is_real_symmetric_positive_definite/）を付けるにあたり、可逆性の段を直した。旧い段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性（def_hermitian_positive_definite）は x ∈ ℂ^n の x^*Wx についての条件で、複素の x では x^⊤Wx = 0 から x = 0 は従わない（検算で、実対称正定値な W と x = u + iv（u^⊤Wu = v^⊤Wv、u^⊤Wv = 0）で x^⊤Wx = 0 となる例を作った）。また核が {0} であることから可逆を導く主張は本文に無かった。可逆性を、BB' = I の 3 行の鎖（matrix_double_negation・exp_of_negative_is_left_inverse）と Step 2 の B'B = I による B ∈ R^×、V2_invertible、def_invertible_elements_of_R (ii) の 2 回の適用で示す形にした。主張の「とくに W は可逆」を、def_invertible_elements_of_R の意味で可逆と書いた（内容は不変）。",
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: Step 1 の K_1D の実対称性が「iH_is_real_symmetric の Step 3 で見たとおり」と散文で済ませていた（その Step 3 は 1 ≤ m ≤ M_col−1 の σ_m^zσ_{m+1}^z しか扱わず、周期端 σ_{M_col}^zσ_1^z を覆わない）のを、(σ_k^z)^⊤ = σ_k^z の 5 行、(σ_m^zσ_{m+1}^z)^⊤ の 5 行（m^+ を置き、transpose_of_matrix_product と distinct_site_pauli_matrices_commute で。M_col = 1 は同じ行列）、(K_1D)^⊤ の 5 行と、成分の実性の 2 段落（kronecker_of_real_entry_matrices_has_real_entries・product_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries・real_scalar_multiple_of_real_entry_matrix_has_real_entries）に書き直した。主張は不変。",
       ],
     },
   },
