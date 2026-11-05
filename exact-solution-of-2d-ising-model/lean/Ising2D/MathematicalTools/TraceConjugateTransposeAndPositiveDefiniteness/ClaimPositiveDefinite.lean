@@ -17,7 +17,7 @@
 原文 `star_preserves_norm_and_limits` の (1)(2)(3) の具体版は、人手の鎖と 1 対 1 に
 `ClaimStarPreservesNormAndLimits.lean` に置いた。このファイルの `posDef_exp_of_isHermitian` は、`exp(S)` のエルミート性を
 まだ mathlib の `Matrix.IsHermitian.exp`（`Matrix.exp_conjTranspose` から従う）で得ている。人手 `exp_of_hermitian_is_hermitian` の
-具体版で置き換えるのは状態台帳の (r2c2c2b)・(r2c2c2c) である。
+具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）は置いてあり、使う側をそれへ置き換えるのは状態台帳の (r2c2c2c) である。
 
 ## 人手 `iH_is_real_symmetric` との違い（形式化して分かったこと）
 

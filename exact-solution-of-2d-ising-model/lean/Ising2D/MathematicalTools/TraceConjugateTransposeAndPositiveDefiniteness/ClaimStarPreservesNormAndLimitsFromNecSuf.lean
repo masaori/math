@@ -10,7 +10,7 @@
 
 `TensorPow M`（添字 `Conf M`）の系 `conjTranspose_mul_tensorPow`・`conjTranspose_tendsto_tensorPow` も同じ必要十分版の特殊化として置く。
 具体版は添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないためである
-（`ClaimTransposePreservesMatrixNormAndLimitsFromNecSuf.lean` と同じ）。使う側は人手 `exp_of_hermitian_is_hermitian` の具体版（状態台帳の (r2c2c2b)）である。
+（`ClaimTransposePreservesMatrixNormAndLimitsFromNecSuf.lean` と同じ）。使う側は人手 `exp_of_hermitian_is_hermitian` の具体版（`ClaimExpOfHermitianIsHermitian.lean`）である。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimits
 import Ising2D.NecSuf.StarPreservesNormAndLimits
