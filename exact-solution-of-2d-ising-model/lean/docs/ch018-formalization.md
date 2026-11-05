@@ -124,8 +124,8 @@
 | `Ising2D.checkLambda_pos` / `checkLambda_le_univ` / `checkLambda_lt_univ` | `Λ̌_ε > 0`、`Λ̌_ε ≤ Λ̌_{(1,…,1)}`（`ε ≠ (1,…,1)` なら狭義） | 同 (2) |
 | `Ising2D.VPlusData` | 章 015・017 から受け取る入力 | 同上 |
 | `VPlusData.lamMax` / `lamMax_pos` / `checkLambda_le_lamMax` | `Λ̌_max = Λ̌_{(1,…,1)}` とその最大性 | 同 (2) |
-| `VPlusData.epsilon_mul_V_mul_Qproj` | `εV^{(+)}Q̌_ε = η_ε Λ̌_ε Q̌_ε` | Step 1 |
-| `VPlusData.trace_epsilon_mul_V_eq_sum` | `tr(εV^{(+)}) = ∑_ε η_ε Λ̌_ε` | Step 1 |
+| `VPlusData.trace_epsilon_mul_V_step1` | `tr(εV^{(+)}) = tr((εV^{(+)})I) = … = Σ_εη_ε(Λ̌_ε)_ℂ`（人手の 13 行と同じ行の calc。人手の `M_col` が `r + 1`、行列の和も複素数の和も `NecSuf.binWordSum r`） | Step 1 |
+| `VPlusData.trace_epsilon_mul_V_eq_sum` | `tr(εV^{(+)}) = ∑_T η_T Λ̌_T`（`Finset.sum`。`M = r + 1` は Step 1 の鎖を `finsetOfWord` で付け替える。人手の範囲外の `M = 0` は mathlib） | Step 1 |
 | `VPlusData.traceFactor` / `traceFactor_pos` | `C·∏_μ 2 sinh(γ_μ/2) > 0` | Step 2 |
 | **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`** | **Step 2（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | Step 3 |
