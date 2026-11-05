@@ -21,12 +21,12 @@
 | 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
 | 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
 | 同 Step 2 の最後の鎖（左辺と 12 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 12` の calc） |
-| （書き換える前の形。必要十分版 `NecSuf/OpenChainSpinSum.lean` とその系だけが使い、状態台帳の次の一歩で消す）結合の添字を `OpenChainBond M` で数える `t_m`・`Φ` | `openChainBondSpin`・`openChainChange`・`openChainChange_injective`・`card_openChainChange_target`・`openChainChange_bijective`・`openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy`・`card_openChainBond`・`nextSite_val_of_bond`・`prevSite`・`prevSite_val_of_ne_zero` |
 | `open_chain_spin_sums_positive` | `open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos` |
 | `D0_G_diagonal_action` の `D_0f_{ι(s)}` の係数を `E(s)` で書いたもの（`trace_of_epsilon_V_plus` で使う） | `openChainD0_mulVec_basisVec_eq_energy` |
 
-人手の列の添字 `{1,…,M_col}` は `Fin M`（人手の `m` が Lean の `(m : ℕ) + 1`）、人手の `1` と `M_col` は
-`firstSite`・`lastSite`、人手の `m+1` は `nextSite m` である。`openChainEnergy` の開鎖の結合の添字 `{1,…,M_col-1}` は、
+`openChainEnergy` の定義と二つの主張の型では、人手の列の添字 `{1,…,M_col}` は `Fin M`（人手の `m` が Lean の `(m : ℕ) + 1`）、
+人手の `1` と `M_col` は `firstSite`・`lastSite`、人手の `m+1` は `nextSite m` である（証明の中の書き方は下の節の冒頭に書いた）。
+`openChainEnergy` の開鎖の結合の添字 `{1,…,M_col-1}` は、
 `openChainD0`・`openChainD0_mulVec_basisVec` と同じ「`(m : ℕ) + 1 ≠ M` なる `m : Fin M`」である。
 `openChainEnergy` は `openChainD0_mulVec_basisVec` の係数と定義で一致する。
 
@@ -45,9 +45,9 @@
 値は実数である必要がなく、可換半環（端点因子の書き替えは可換モノイドと `s(m)s(m) = 1`）で足りるので、
 必要十分版を `Ising2D/NecSuf/OpenChainSpinSum.lean` に置き、具体版をその系として
 `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
-必要十分版の手順は書き換える前の具体版の手順（`Fintype.prod_sum` による展開）のままで、二つの主張のいまの手順
-（`ς` による付け替えと `expansion_of_finite_product_of_two_term_sums_of_real_numbers`）とは同じでない。
-必要十分版を同じ手順へ直すのは、状態台帳の次の一歩である。
+必要十分版は、二つの主張の最後の鎖のうち重みに依らない行（`Φ` と `ς` による付け替え、二項の和の有限積の展開、
+`ς(1) = 1`・`ς(0) = -1`、`{-1,1}` の上の和）と、Step 2 の `M_col = 2`・`M_col ≥ 3` の鎖を、この具体版と同じ並びで踏む。
+重みに固有の行と冪の行は、導出のファイルに具体版と同じ根拠で置く。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
@@ -85,9 +85,6 @@ def spinMul (a b : SpinVal) : SpinVal :=
 
 /-! ## `def_open_chain_spin_energy` -/
 
-/-- 人手の開鎖の結合の添字 `{1,…,M_col-1}`（`(m : ℕ) + 1 ≠ M` なる `m : Fin M`）。 -/
-abbrev OpenChainBond (M : ℕ) : Type := {m : Fin M // (m : ℕ) + 1 ≠ M}
-
 /-- **人手 `def_open_chain_spin_energy`**: `E(s) := ∑_{m=1}^{M_col-1} s(m)s(m+1)`。 -/
 noncomputable def openChainEnergy (s : SpinConf M) : ℝ :=
   ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M), (s m : ℝ) * (s (nextSite m) : ℝ)
@@ -109,88 +106,6 @@ theorem openChainD0_mulVec_basisVec_eq_energy (s : SpinConf M) :
     openChainD0 M *ᵥ basisVec (configBasisIso M s)
       = ((openChainEnergy s : ℝ) : ℂ) • basisVec (configBasisIso M s) :=
   openChainD0_mulVec_basisVec s
-
-/-! ## `open_chain_partition_sum` の Step 1（変数変換） -/
-
-/-- 人手の `t_m := s(m)s(m+1)`。 -/
-def openChainBondSpin (s : SpinConf M) (b : OpenChainBond M) : SpinVal :=
-  spinMul (s b.1) (s (nextSite b.1))
-
-/-- 人手の `Φ(s) := (s(1); t_1,…,t_{M_col-1})`。 -/
-def openChainChange (hM : M ≠ 0) (s : SpinConf M) : SpinVal × (OpenChainBond M → SpinVal) :=
-  (s (firstSite M hM), openChainBondSpin s)
-
-/-- 人手の「`(s(1); t_1,…,t_{M_col-1})` が与えられれば `s(m+1) = s(m)t_m` により
-`s(2),…,s(M_col)` が順に一意に定まる」: `Φ` は単射。 -/
-theorem openChainChange_injective (hM : M ≠ 0) : Function.Injective (openChainChange hM) := by
-  intro s s' h
-  simp only [openChainChange, Prod.mk.injEq] at h
-  obtain ⟨h0, ht⟩ := h
-  have key : ∀ k (hk : k < M), s ⟨k, hk⟩ = s' ⟨k, hk⟩ := by
-    intro k
-    induction k with
-    | zero => intro hk; exact h0
-    | succ k ih =>
-      intro hk
-      have hk' : k < M := by omega
-      have hb : ((⟨k, hk'⟩ : Fin M) : ℕ) + 1 ≠ M := by simp only; omega
-      have hnext : nextSite (⟨k, hk'⟩ : Fin M) = ⟨k + 1, hk⟩ :=
-        Fin.ext (nextSite_val_of_lt (by simp only; omega))
-      -- `t_k` の一致: `s(k)s(k+1) = s'(k)s'(k+1)`
-      have e : (s ⟨k, hk'⟩ : ℝ) * (s ⟨k + 1, hk⟩ : ℝ) = (s' ⟨k, hk'⟩ : ℝ) * (s' ⟨k + 1, hk⟩ : ℝ) := by
-        have := congrArg Subtype.val (congrFun ht ⟨⟨k, hk'⟩, hb⟩)
-        simpa only [openChainBondSpin, coe_spinMul, hnext] using this
-      rw [ih hk'] at e
-      apply Subtype.ext
-      -- `s(k+1) = s(k)t_k`（`s(k)s(k) = 1`）
-      calc (s ⟨k + 1, hk⟩ : ℝ)
-          = ((s' ⟨k, hk'⟩ : ℝ) * (s' ⟨k, hk'⟩ : ℝ)) * (s ⟨k + 1, hk⟩ : ℝ) := by
-            rw [spinVal_mul_self, one_mul]
-        _ = (s' ⟨k, hk'⟩ : ℝ) * ((s' ⟨k, hk'⟩ : ℝ) * (s ⟨k + 1, hk⟩ : ℝ)) := mul_assoc _ _ _
-        _ = (s' ⟨k, hk'⟩ : ℝ) * ((s' ⟨k, hk'⟩ : ℝ) * (s' ⟨k + 1, hk⟩ : ℝ)) := by rw [e]
-        _ = ((s' ⟨k, hk'⟩ : ℝ) * (s' ⟨k, hk'⟩ : ℝ)) * (s' ⟨k + 1, hk⟩ : ℝ) := (mul_assoc _ _ _).symm
-        _ = (s' ⟨k + 1, hk⟩ : ℝ) := by rw [spinVal_mul_self, one_mul]
-  funext i
-  exact key i.1 i.2
-
-/-- 開鎖の結合の個数 `M_col - 1`。 -/
-theorem card_openChainBond (hM : M ≠ 0) : Fintype.card (OpenChainBond M) = M - 1 := by
-  rw [Fintype.card_subtype]
-  have hfilter : Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M)
-      = Finset.univ.filter (fun m : Fin M => m ≠ lastSite M hM) := by
-    apply Finset.filter_congr
-    intro m _
-    rw [Ne, Ne, Fin.ext_iff, lastSite]
-    simp only
-    omega
-  rw [hfilter, Finset.filter_ne', Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ,
-    Fintype.card_fin]
-
-/-- 人手の `|{-1,1} × {-1,1}^{M_col-1}| = 2^{M_col}`。 -/
-theorem card_openChainChange_target (hM : M ≠ 0) :
-    Fintype.card (SpinVal × (OpenChainBond M → SpinVal)) = 2 ^ M := by
-  rw [Fintype.card_prod, Fintype.card_fun, card_spinVal, card_openChainBond hM, ← pow_succ',
-    Nat.sub_add_cancel (Nat.one_le_iff_ne_zero.mpr hM)]
-
-/-- **人手 `open_chain_partition_sum` の Step 1**: `Φ` は全単射。 -/
-theorem openChainChange_bijective (hM : M ≠ 0) : Function.Bijective (openChainChange hM) :=
-  (Fintype.bijective_iff_injective_and_card _).mpr
-    ⟨openChainChange_injective hM, by rw [card_spinConf, card_openChainChange_target hM]⟩
-
-/-! ## `open_chain_partition_sum` の Step 2（スピン和の計算） -/
-
-/-- 人手の `E(s) = ∑_{m=1}^{M_col-1} t_m`。 -/
-theorem openChainEnergy_eq_sum_bondSpin (s : SpinConf M) :
-    openChainEnergy s = ∑ b : OpenChainBond M, (openChainBondSpin s b : ℝ) := by
-  rw [openChainEnergy,
-    Finset.sum_subtype (p := fun m : Fin M => (m : ℕ) + 1 ≠ M) _ (fun m => by simp)]
-  rfl
-
-/-- 人手の `exp(KE(s)) = ∏_{m=1}^{M_col-1} exp(Kt_m)`（準備の鎖の `real_exp_of_finite_sum`、実数の有限和の指数法則）。 -/
-theorem exp_openChainEnergy (K : ℝ) (s : SpinConf M) :
-    Real.exp (K * openChainEnergy s)
-      = ∏ b : OpenChainBond M, Real.exp (K * (openChainBondSpin s b : ℝ)) := by
-  rw [openChainEnergy_eq_sum_bondSpin, Finset.mul_sum, Real.exp_sum]
 
 /-! ## `open_chain_partition_sum`（人手の Step 1・Step 2 と同じ行）
 
@@ -375,26 +290,6 @@ theorem open_chain_partition_sum (hM : 2 ≤ M) (K : ℝ) :
     _ = 2 * (2 * Real.cosh K) ^ (n + 2 - 1) := by
         rw [Fin.prod_const]; rfl                        -- 人手 10: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2cosh K`、`n → M_col-1`）。
                                                         -- 指数の `n + 2 - 1` は Lean の自然数の引き算で、`n + 1` と同じ数
-
-/-! ## 書き換える前の `open_chain_endpoint_product_sum` の添字の補題
-
-`nextSite_val_of_bond`・`prevSite`・`prevSite_val_of_ne_zero` は、いまの具体版の証明では使わない。
-必要十分版 `NecSuf/OpenChainSpinSum.lean` だけが使い、状態台帳の次の一歩で消す。 -/
-
-/-- 人手の `m ∈ {1,…,M_col-1}` に対する `m+1`: 結合の添字では `nextSite m` は `m+1` そのもの。 -/
-theorem nextSite_val_of_bond {m : Fin M} (h : (m : ℕ) + 1 ≠ M) :
-    ((nextSite m : Fin M) : ℕ) = (m : ℕ) + 1 :=
-  nextSite_val_of_lt (by have := m.isLt; omega)
-
-/-- 人手の `m ∈ {2,…,M_col}` に対する `m-1`（添字のずらしの逆向き）。 -/
-def prevSite (m : Fin M) : Fin M := ⟨((m : ℕ) + M - 1) % M, Nat.mod_lt _ m.pos⟩
-
-theorem prevSite_val_of_ne_zero {m : Fin M} (h : (m : ℕ) ≠ 0) :
-    ((prevSite m : Fin M) : ℕ) = (m : ℕ) - 1 := by
-  have := m.isLt
-  simp only [prevSite]
-  rw [show (m : ℕ) + M - 1 = ((m : ℕ) - 1) + M by omega, Nat.add_mod_right,
-    Nat.mod_eq_of_lt (by omega)]
 
 /-! 以下、`open_chain_endpoint_product_sum` の Step 2 と本体の鎖を、`open_chain_partition_sum` と同じく人手の `M_col` を
 Lean の `n + 2`、結合の添字を `Fin (n + 1)` で書く。人手の `s(1)` は `s 0`、`s(M_col)` は `s (Fin.last (n + 1))` である。 -/

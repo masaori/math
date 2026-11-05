@@ -1,3 +1,5 @@
+2026-11-05: Lean の通しの証明のゴールラインの確認の百七十九個目として、(iii-c) 開鎖のスピン和の必要十分版 `NecSuf/OpenChainSpinSum.lean` を新しい具体版と同じ手順（`Φ`・`ς` による付け替え、二項の和の有限積の展開、`M_col = 2`・`M_col ≥ 3` の鎖）に書き直し、導出 `ClaimOpenChainSpinSumsFromNecSuf.lean` を具体版と同じ行の順の calc にし、旧い形の `OpenChainBond`・`openChainChange` 系・`prevSite` 系と旧い必要十分版を消した。(iii) を終えた。主張と通しの定理の型は不変。本文と SageMath は不変。レビューの必須の指摘 1 件（`check-no-sorry.sh` の `'` を含む名前の引用）と任意の指摘 8 件を直した。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。次は `max_eigenvector_in_even_sector` の Lean を人手の鎖に揃える。
+
 # MEMORY — exact-solution-of-2d-ising-model
 
 2026-11-05: Lean の通しの証明のゴールラインの確認の百七十八個目として、(iii-b) `open_chain_endpoint_product_sum` の Lean を人手の新しい鎖に揃えた。`ClaimOpenChainSpinSums.lean` で、Step 2 の `M_col = 2` の 3 行（`prod_bondSpin_of_two`）・`M_col ≥ 3` の 4 行（`prod_bondSpin_of_ge_three`、可換性と結合性の段は `prod_bondSpin_rearrange`）・端点の積の 4 行（`endpoint_mul_exp_openChainEnergy_eq_prod`）・最後の 12 行（`open_chain_endpoint_product_sum`）を 1 対 1 の calc にし、旧い `prod_openChainBondSpin` を消した。主張と通しの定理の型は不変。本文と SageMath は不変。レビューの必須の指摘は無く、任意の指摘 4 件を直した。次は (iii-c) 必要十分版と旧い補題の整理。
