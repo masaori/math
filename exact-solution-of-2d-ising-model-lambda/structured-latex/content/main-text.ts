@@ -63721,8 +63721,13 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                       paragraph([ref("claim_cell_set_boundary_coefficients"), " を ", math(String.raw`S_\gamma`),
                         " に適用する。", ref("def_standard_dual_height"), " より高さは零か一であるから、",
                         " 任意の二つのセル ", math(String.raw`p,q`), " について" ]),
-                      displayMath(String.raw`\mathbf1_{p\in S_\gamma}-\mathbf1_{q\in S_\gamma}\ne0
-\iff f_\gamma(p)\ne f_\gamma(q)`),
+                      displayMath(String.raw`\begin{aligned}
+\mathbf1_{p\in S_\gamma}-\mathbf1_{q\in S_\gamma}\ne0
+&\iff\mathbf1_{p\in S_\gamma}\ne\mathbf1_{q\in S_\gamma}
+&&\bigl(\because\ \mathbb Z\text{ における減法}\bigr)\\
+&\iff f_\gamma(p)\ne f_\gamma(q)
+&&\bigl(\because\ S_\gamma\text{ の定義と二値性}\bigr)
+\end{aligned}`),
                       paragraph(["が成り立つ。左辺の差は二つの零または一の整数の差なので、非零なら一または負一である。",
                         "横辺には ", math(String.raw`p=(i,j),q=(i-1,j)`),
                         "、縦辺には ", math(String.raw`p=(i,j-1),q=(i,j)`), " を代入する。",
