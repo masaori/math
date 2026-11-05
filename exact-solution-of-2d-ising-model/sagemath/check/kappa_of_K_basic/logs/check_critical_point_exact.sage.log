@@ -1,0 +1,31 @@
+PASS sinh 2K_c = 1 の w > 0 の解は 1 + √2 ただ一つ
+PASS 2K_c = arcsinh(1) = log(1 + √(1^2+1)): exp(2K_c) = 1 + √2（def_arcsinh）
+PASS 準備 K_c > 0: w_c = 1 + √2 > 1
+PASS 準備 K_c > 0 の背理法: (w − 1/w)/2 = (w − 1)(w + 1)/(2w)
+PASS 準備 K_c > 0 の背理法: w ∈ {1/100, 1/3, 1/2, 9/10, 1} で (w − 1/w)/2 ≤ 0 < 1（sinh 2K_c = 1 に反する）
+PASS 準備 K_c > 0 の背理法: sinh 0 = (1 − 1)/2 = 0（sinh_zero）
+PASS K_c の定義の確認 sinh 2K_c = 1
+PASS 準備 (cosh 2K_c)^2 = 1 + (sinh 2K_c)^2
+PASS 準備 1 + 1^2 = 2 = (√2)^2
+PASS 準備 cosh 2K_c = √2
+PASS 準備 cosh 2K_c > 0、√2 > 0
+PASS 対照: cosh 2K_c = −√2 ではない
+PASS 1.414213^2 = 1.999998409369
+PASS 1.999998409369 ≤ 2
+PASS 2 ≤ 2.000001237796
+PASS 2.000001237796 = 1.414214^2
+PASS 結論 1.414213 ≤ √2 ≤ 1.414214（AA で）
+PASS 対照: 1.414214 は √2 の下界ではない
+PASS 1 行目 κ(K) = 0 の条件は w^2 − 2w − 1 = 0
+PASS 1 行目 ⟺ 2 行目: def_kappa の κ を K_1 = K_2 = K に置いた条件が、def_isotropic_kappa_of_K の κ(K) の条件と一致（isotropic_kappa_equals_kappa_of_K）
+PASS 2 行目 対照: K_1 ≠ K_2 なら κ = 0 の条件は κ(K) の条件と恒等的には等しくない
+PASS 3 行目 ⟺ 4 行目: s_1s_2 = sinh 2K_1 sinh 2K_2 は K_1 = K_2 = K（w_1 = w_2 = w）で sinh^2 2K
+PASS 3 行目 対照: K_1 ≠ K_2 なら s_1s_2 は sinh^2 2K_2 と恒等的には等しくない
+PASS 4 行目の条件は (w^2 − 2w − 1)(w^2 + 2w − 1)
+PASS 4 行目 ⟺ 5 行目: w > 1 では w^2 + 2w − 1 = (w − 1)^2 + 4w − 2 > 0
+PASS 2 行目 ⟺ 3 行目（critical_point_iff_kappa_zero）: w > 1 の根の集合が一致
+PASS 5 行目 ⟺ 6・7 行目: w > 1 の根は w_c だけ（sinh の単射性と exp の単射性）
+PASS κ(K_c) = 0: w_c は 1 行目の条件を満たす
+PASS 対照: 4 行目の w > 0 の根 √2 − 1（sinh 2K = −1、K < 0）は w > 1 から外れる
+PASS 対照: K > 0 の仮定を外すと sinh^2 2K = 1 は sinh 2K = 1 より根が多い
+RESULT: PASS

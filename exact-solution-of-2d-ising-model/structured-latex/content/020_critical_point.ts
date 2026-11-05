@@ -192,6 +192,8 @@ export default defineBlocks([
           "微分の公式は ",
           ref("sinh_derivative"),
           "、",
+          ref("cosh_derivative"),
+          "、",
           ref("arcsinh_derivative"),
           "、",
           ref("sinh_at_least_argument"),
@@ -759,6 +761,70 @@ u \neq v
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が「sinh' = cosh は定義から直ちに従う」と書いて省いていた等式を、微分の公式から導く独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosh_derivative",
+    kind: "claim",
+    title: { tex: String.raw`\cosh' = \sinh` },
+    labels: ["cosh_derivative"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`\cosh : \mathbb{R} \to \mathbb{R}`),
+        " は微分可能で、",
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\cosh'(x) = \sinh x`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、微分が実数の極限で定まるからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n : \mathbb{R} \to \mathbb{R},\ n(x) := -x`),
+        " と置くと、",
+        math(String.raw`\cosh = \tfrac12\left(\exp + \exp\circ n\right)`),
+        " である（",
+        ref("def_cosh_sinh"),
+        "）。微分可能であることは、",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（",
+        math(String.raw`\exp`),
+        " と恒等関数は微分可能で、和・定数倍・合成は微分可能）による。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cosh'(x)
+&= \left(\tfrac12\left(\exp + \exp\circ n\right)\right)'(x)
+&&(\because\ \cosh = \tfrac12\left(\exp + \exp\circ n\right))\\
+&= \tfrac12\left(\exp + \exp\circ n\right)'(x)
+&&(\because\ \text{微分の公式の定数倍})\\
+&= \tfrac12\left(\exp'(x) + (\exp\circ n)'(x)\right)
+&&(\because\ \text{微分の公式の和})\\
+&= \tfrac12\left(\exp'(x) + \exp'(n(x))\cdot n'(x)\right)
+&&(\because\ \text{微分の公式の合成})\\
+&= \tfrac12\left(\exp(x) + \exp(n(x))\cdot n'(x)\right)
+&&(\because\ \text{微分の公式の }\exp' = \exp\text{ を 2 箇所へ})\\
+&= \tfrac12\left(\exp(x) + \exp(-x)\cdot n'(x)\right)
+&&(\because\ n(x) = -x)\\
+&= \tfrac12\left(\exp(x) + \exp(-x)\cdot(-1)\right)
+&&(\because\ n = (-1)\cdot\mathrm{id}\text{ に微分の公式の定数倍と恒等関数の導関数 }1)\\
+&= \frac{\exp(x)-\exp(-x)}{2}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \sinh x
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: kappa_of_K_basic の証明が (tanh)' = 1/cosh^2 と cosh t/sinh^2 t の導関数で使う cosh' = sinh が本文に無かったので、sinh_derivative と同じ鎖で示す主張として足した。検算は sagemath/check/cosh_derivative/。",
       ],
     },
   },

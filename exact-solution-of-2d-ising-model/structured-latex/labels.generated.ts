@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "cos_arctan_sin_arctan",
   "cosh_addition_formula",
   "cosh_at_least_one",
+  "cosh_derivative",
   "cosh_half_angle_formula",
   "cosh_is_even",
   "cosh_monotone_on_nonnegative",

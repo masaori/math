@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 419 件のうち、SageMath の検算が無いもの 3 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 420 件のうち、SageMath の検算が無いもの 2 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -403,12 +403,16 @@
 
 - `isotropic_A_equals_one`（等方な場合 A = 1）・`isotropic_kappa_equals_kappa_of_K`（κ = κ(K)）・`isotropic_gamma_in_kappa`（γ(θ) = 2 arcsinh(√(sinh²(κ(K)/2) + sin²(θ/2)))）: `sagemath/check/<ラベル>/`（共通の準備 `sagemath/_shared/isotropic_balls.sage`）。A の鎖と準備 K_2^* = K^* は exp(−2K_i) の有理関数体で、仮定 K_i = K の代入と代入しない対照で厳密に、κ の鎖は多項式環で各行の関係式 1 本だけを法として成り立ち抜くと成り立たないことで、γ の鎖は根号の中身と sinh² の引数の等号で厳密に確かめた。具体値（K 7 点 × θ 7 点。K_c の近くの 4407/10000 を含む）は本文の exp のボールと、定義どおりに作った γ = arccosh(γ_1) で確かめた（真偽の確認 63・77・357 件）。**人手証明を直した**（計算の誤りは無し）: (1) 旧い証明は K^* を def_transfer_matrix_symbols から引き「K^* の定義そのものが sinh(2K)sinh(2K^*) = 1」と書いていたが、そこに K^* の定義は無いので、K_2^* を `def_second_dual_coupling_constant`、積 = 1 を `second_dual_coupling_relation`、s_1・s_2^* の展開を `def_indexed_hyperbolic_abbreviations` から引いた。(2) 旧いブロックは A = 1・K^* と κ(K) の定義・γ の式を一つに持っていたので、定義 `def_isotropic_dual_coupling`（K^* := −(1/2)log(tanh K)）・`def_isotropic_kappa_of_K` と主張 `isotropic_kappa_equals_kappa_of_K`・`isotropic_gamma_in_kappa` に分けた（1 ブロック 1 主張）。下流（`kappa_of_K_basic`・`gamma_derivatives_in_kappa`・`second_derivative_log_divergence`・`specific_heat_log_divergence`・章末の主張）の引用を付け替え、`kappa_of_K_basic` の K^* の根拠（同じく def_transfer_matrix_symbols を引いていた）と (2) の κ と κ(K) のつなぎを直した。平方根を √·^(ℝ≥0) にした。三回のレビューで必須の指摘が無くなるまで直した。Lean は対応のコメントと `lean/docs/ch020-formalization.md` の表だけを付け替えた（定理は不変。新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `kappa_of_K_basic`（κ(K) の基本性質と臨界点 K_c）と、そのために足した `cosh_derivative`（cosh' = sinh）: `sagemath/check/<ラベル>/`。導関数の行（(tanh)'・dK^*/dK・κ'・κ''・h(t) = cosh t/sinh² t の h'・(κ'²)'）は v = exp(K) の QQ(v) の導分 v·d/dv で、dK^*/dK の定義・定数倍・合成の行は SR の記号微分で独立に、K_c と準備（K_c > 0・cosh 2K_c = √2・√2 の小数の評価）と (2) の同値の鎖は w = exp(2K) の QQ[w] と AA で厳密に確かめた。(4)・(5) の鎖の各行は QQ の格子点 9 点ごとに a = min{K, K_c}、b = max{K, K_c} を作り、本文の exp のボールと Arb の積分で、最後の小数の行は QQ で確かめた（真偽の確認 543 件、うち対照 7 件）。`cosh_derivative` は QQ[x] の形式冪級数と差分商のボール。**人手証明を直した**（主張の数値は不変、計算の誤りは無し）: (1) K_c ∈ ℝ_{>0} を示していなかった（(2) で `critical_point_iff_kappa_zero`・`isotropic_kappa_equals_kappa_of_K` を K_c に当てるのに要る）ので sinh_strictly_increasing・sinh_zero の背理法を足し、主張に書いた。(2) cosh 2K_c = √2 と √2 の小数の評価を根拠付きの準備にした。(3) (tanh)' = 1/cosh² を商の微分と新しい主張 `cosh_derivative` で示した（本文に cosh' = sinh が無かった）。(4) κ の狭義単調増加と h の単調減少を、平均値の定理を使わず (R3)・(R4) の鎖で示した。(5) (2) を同値の鎖にした。(6) (4) の端点の式は加法定理の複号を直接使い、K ∈ ℝ_{>0} と 2K_c − 1/5 > 0 を示した。(7) (5) は K < K_c で向きの逆の積分を使っていたので a・b で書き、∫G' を (R3) の定数で挟む鎖にした。(8) 微分の公式を 1 行に複数当てていた行を分けた。主張の (2) に K ∈ ℝ_{>0}、(4)・(5) に K ∈ ℝ を書いた（下流の引用は 0 < |K − K_c| ≤ 1/10 の K ∈ ℝ_{>0} で使っており食い違わない）。注記 `remark_real_analysis_escape_chapter_E` は、cosh(1/5)・sinh(1/5) の数値の評価を本文で証明せずに持ち込むことを題と本文に明記し、微分の公式の使い道に `kappa_of_K_basic` を足した。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimKappaOfKBasic.lean` は定数と |κ''| の評価の経路が人手証明と違い、平均値の定理の必要十分版 `NecSuf/MeanValueTwoSided.lean` を使う。新しい人手証明との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`critical_point_and_log_divergence.ts` の `kappa_of_K_basic`（`--list` の先頭）から、文書順に検算を足す。
+`critical_point_and_log_divergence.ts` の `gamma_derivatives_in_kappa`（`--list` の先頭）から、文書順に検算を足す。そのブロックの γ(θ, κ) := 2 arcsinh(√S) の √ を √·^(ℝ≥0) にそろえる（下の「本文の誤り」の項）。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`kappa_of_K_basic` の検算で見つかった（残したもの）: (4) の数値の評価 1.02006 ≤ cosh(1/5) ≤ 1.020067・0.201336 ≤ sinh(1/5) ≤ 0.2013361 は本文で証明せず、`remark_real_analysis_escape_chapter_E` が持ち込む事実として明記した（以前は「数値評価」とだけ書いて暗に持ち込んでいた）。Lean の具体版は cosh t ≥ 1 + t²/2 と cosh t ≤ (1 − t²/2)^{−1} で評価しており、人手証明も本文の exp の部分和と尾の評価で示せば外部の事実を減らせる。検算の付いたブロックの見直しで扱う。同じ単位で残した前回の項（K_c ∈ ℝ_{>0} の欠け）はこの単位で直した。
 
 - 2026-11-05、`isotropic_A_equals_one` の分割のレビューで見つかった（残したもの。今回の差分より前から）: `kappa_of_K_basic` の (2) の証明は、`isotropic_kappa_equals_kappa_of_K` と `critical_point_iff_kappa_zero` を K = K_c で使うのに要る K_c ∈ ℝ_{>0} を示していない（2K_c = log(1+√2) だけ）。次の単位（`kappa_of_K_basic` の検算）で直す。また `gamma_derivatives_in_kappa` の γ(θ, κ) := 2 arcsinh(√S) は記法の付かない √ のままで、`isotropic_gamma_in_kappa` の √·^(ℝ≥0) と記法がそろっていない（下流の「γ(θ) = γ(θ, κ(K))」の行はこの二つをつなぐ）。そのブロックの検算の単位で √·^(ℝ≥0) にそろえる。
 

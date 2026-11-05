@@ -1,0 +1,4 @@
+九行が QQ[x] の形式冪級数で全次数 13 以下で一致する（cosh' ≠ cosh, -sinh は対照）
+SR の記号微分でも cosh' = sinh の両端が一致する
+具体の 5 点で差分商が sinh x に h·cosh(|x|+1)/2 以内で近づく
+RESULT: PASS

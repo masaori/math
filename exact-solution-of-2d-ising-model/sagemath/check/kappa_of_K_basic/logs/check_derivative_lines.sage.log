@@ -1,0 +1,40 @@
+PASS 準備: Dv(sinh) = cosh（sinh_derivative）
+PASS 準備: Dv(cosh) = sinh（cosh_derivative）
+PASS 準備: cosh^2 − sinh^2 = 1（cosh_sinh_basic_properties (2)）
+PASS 準備: sinh 2K = 2 sinh K cosh K（sinh_double_angle_formula を x = 2K で）
+PASS (tanh)' の鎖 0→1 行目
+PASS (tanh)' の鎖 1→2 行目
+PASS (tanh)' の鎖 2→3 行目
+PASS (tanh)' 対照: 商の微分の符号を誤ると一致しない
+PASS dK^*/dK の鎖 0→1 行目
+PASS dK^*/dK の鎖 1→2 行目
+PASS dK^*/dK の鎖 2→3 行目
+PASS dK^*/dK の鎖 3→4 行目
+PASS SR: (−(1/2) log∘tanh)'(K) = −(1/2)(log∘tanh)'(K)
+PASS SR: (log∘tanh)'(K) = log'(tanh K)·tanh'(K) = tanh'(K)/tanh K
+PASS SR: dK^*/dK = −1/sinh 2K（両端。exp で書き直して厳密に）
+PASS SR 対照: −1/sinh K とは等しくない
+PASS SR: κ' の鎖 (2 id − 2K^*)' = (2 id)' − (2K^*)' = 2 id' − 2 dK^*/dK = 2 − 2 dK^*/dK
+PASS SR: κ'(K) = 2 + 2/sinh 2K（両端）
+PASS κ' の鎖 1 行目→2 行目: 2 − 2 dK^*/dK = 2 + 2/sinh 2K
+PASS κ' 対照: K^* の符号を誤る（K^* = +(1/2)log tanh K）と 2 + 2/sinh 2K にならない
+PASS κ' − 2 = 4v^2/(v^4 − 1)（v > 1 で正）
+PASS κ'' の鎖 和の行: Dv(2 + 2/S) = Dv(2) + Dv(2/S)
+PASS κ'' の鎖 定数の行: Dv(2) = 0
+PASS κ'' の鎖 商の行: Dv(2/S) = −2 Dv(S)/S^2
+PASS κ'' の鎖 合成の行: Dv(sinh(2K)) = sinh'(2K)·(2 id)'(K)、(2 id)' = 2
+PASS κ'' の鎖 sinh' = cosh の行: sinh'(2K) = cosh 2K
+PASS κ'' の鎖のまとめ 0→1
+PASS κ'' の鎖のまとめ 1→2
+PASS κ'' の鎖のまとめ 2→3
+PASS κ'' 対照: 合成の 2 を落とすと一致しない
+PASS h' の鎖 1 行目の左辺 Dv(cosh/sinh^2) を商の形と独立に作った（Dv は QQ(v) の導分）
+PASS h' の鎖 0→1 行目
+PASS h' の鎖 1→2 行目
+PASS h' の鎖 2→3 行目
+PASS h' の鎖 3→4 行目
+PASS h' の鎖 4→5 行目
+PASS |κ''(K)| = 4h(2K): 4cosh 2K/sinh^2 2K が h の t = 2K（v ↦ v^2）での値の 4 倍
+PASS (κ'^2)' = 2κ'κ''（積の微分）
+PASS 対照: (κ'^2)' ≠ κ'κ''
+RESULT: PASS

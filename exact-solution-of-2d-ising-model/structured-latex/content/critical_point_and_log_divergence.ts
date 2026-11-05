@@ -24,7 +24,7 @@ export default defineBlocks([
     id: "critical_000_remark_escape_to_real_analysis_chapter_E",
     kind: "remark",
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 2 },
-    title: { text: "この章で新たに持ち込む実数解析の事実（(R5)・(R6)）" },
+    title: { text: "この章で新たに持ち込む実数解析の事実（(R5)・(R6)・数値の評価）" },
     labels: ["remark_real_analysis_escape_chapter_E"],
     statement: [
       paragraph([
@@ -40,7 +40,7 @@ export default defineBlocks([
         "**この章は、その表式を出発点として積分の微分を扱うので、外部事実を追加で持ち込む。**",
         "積分の線型性と単調性 (R3) と微分積分学の基本定理 (R4) は、",
         ref("remark_real_analysis_facts_R3_R4"),
-        " で持ち込んだものをそのまま使う。この章で新たに追加するのは次の 2 つだけであり、他では使わない。",
+        " で持ち込んだものをそのまま使う。この章で新たに追加するのは次の 2 つと、この注記の末尾に挙げる数値の評価だけであり、他では使わない。",
       ]),
       list([
         [
@@ -104,6 +104,24 @@ export default defineBlocks([
           math(String.raw`\theta \mapsto 2\pi-\theta`),
           " による折り返し）とする段でだけ使う。",
         ],
+        [
+          ref("remark_real_analysis_facts_R3_R4"),
+          " の微分の公式は、",
+          ref("kappa_of_K_basic"),
+          " でも、",
+          math(String.raw`\tanh`),
+          "・",
+          math(String.raw`K^*`),
+          "・",
+          math(String.raw`\kappa`),
+          "・",
+          math(String.raw`\kappa'`),
+          "・",
+          math(String.raw`\cosh t/\sinh^2 t`),
+          " の導関数を求める段と、",
+          math(String.raw`\kappa'`),
+          " などの連続性を言う段で使う。",
+        ],
       ]),
       paragraph([
         "**これ以外の解析的道具（広義積分、一様収束、優収束、実解析性、平均値の定理）は使わない。**",
@@ -115,11 +133,14 @@ export default defineBlocks([
         " のもとで行う）。",
       ]),
       paragraph([
-        "また本章には ",
-        math(String.raw`\cosh 0.2`),
-        " のような具体的な数値の評価が現れる。これらは初等関数の数値評価であり、",
-        "示した桁までの不等式として使う（数値検証は ",
-        "sagemath/check/055_claim_critical_point/ に置いた）。",
+        "また ",
+        ref("kappa_of_K_basic"),
+        " は、初等関数の値の次の数値の評価を、本文では証明せずに持ち込む: ",
+        math(String.raw`1.02006 \leq \cosh\tfrac15 \leq 1.020067`),
+        "、",
+        math(String.raw`0.201336 \leq \sinh\tfrac15 \leq 0.2013361`),
+        "。示した桁までの不等式としてだけ使う（数値検証は ",
+        "sagemath/check/kappa_of_K_basic/ に置いた）。",
       ]),
     ],
     conversion: {
@@ -992,8 +1013,10 @@ K_2^*
         ref("def_isotropic_kappa_of_K"),
         " の ",
         math(String.raw`\kappa(K) = 2K - 2K^*`),
-        " について次が成り立つ。ここで **臨界点** ",
-        math(String.raw`K_c`),
+        "（",
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        "）について次が成り立つ。ここで **臨界点** ",
+        math(String.raw`K_c \in \mathbb{R}`),
         " を ",
         math(String.raw`\sinh 2K_c = 1`),
         " で定める（",
@@ -1001,8 +1024,10 @@ K_2^*
         " と ",
         ref("def_arcsinh"),
         " より ",
-        math(String.raw`2K_c = \mathrm{arcsinh}(1) = \log(1+\sqrt2)`),
+        math(String.raw`2K_c = \mathrm{arcsinh}(1) = \log\left(1+\sqrt{2}^{(\mathbb{R}_{\ge 0})}\right)`),
         " と一意に定まる）。",
+        math(String.raw`K_c \in \mathbb{R}_{>0}`),
+        " である。",
       ]),
       list([
         [
@@ -1012,26 +1037,38 @@ K_2^*
           math(String.raw`\mathbb{R}_{>0}`),
           " 上微分可能で ",
           math(String.raw`\kappa'(K) = 2 + \dfrac{2}{\sinh 2K} > 0`),
-          "、とくに狭義単調増加。",
+          "、",
+          math(String.raw`\kappa'`),
+          " は連続であり、",
+          math(String.raw`\kappa`),
+          " は狭義単調増加。",
         ],
         [
           "(2) ",
           math(String.raw`\kappa(K_c) = 0`),
           " であり、",
+          math(String.raw`K \in \mathbb{R}_{>0}`),
+          " について ",
           math(String.raw`\kappa(K) = 0 \iff K = K_c \iff \sinh^2 2K = 1`),
           "（等方な場合の臨界条件）。",
         ],
         [
           "(3) ",
+          math(String.raw`\kappa'`),
+          " は ",
+          math(String.raw`\mathbb{R}_{>0}`),
+          " 上微分可能で ",
           math(String.raw`\kappa''(K) = -\dfrac{4\cosh 2K}{\sinh^2 2K}`),
           "。",
         ],
         [
           "(4) ",
+          math(String.raw`K \in \mathbb{R}`),
+          " が ",
           math(String.raw`|K - K_c| \leq \tfrac{1}{10}`),
-          " なる ",
-          math(String.raw`K`),
-          " について",
+          " を満たすなら ",
+          math(String.raw`K \in \mathbb{R}_{>0}`),
+          " であり、",
           math(String.raw`\ 0.7353 \leq \sinh 2K \leq 1.3048`),
           "、",
           math(String.raw`\ 3.53 \leq \kappa'(K) \leq 4.72`),
@@ -1043,10 +1080,10 @@ K_2^*
         ],
         [
           "(5) ",
+          math(String.raw`K \in \mathbb{R}`),
+          " が ",
           math(String.raw`|K - K_c| \leq \tfrac{1}{10}`),
-          " なる ",
-          math(String.raw`K`),
-          " について ",
+          " を満たすなら ",
           math(String.raw`3.53\,|K-K_c| \leq |\kappa(K)| \leq 4.72\,|K-K_c| \leq 0.472`),
           "、および ",
           math(String.raw`\left|\kappa'(K)^2 - 16\right| \leq 24.7\,|\kappa(K)|`),
@@ -1056,290 +1093,610 @@ K_2^*
     ],
     proof: [
       paragraph([
-        "(1) の証明。",
+        "記号の帰属。",
+        math(String.raw`K, K^*, \kappa(K), \kappa'(K), \kappa''(K), K_c \in \mathbb{R}`),
+        "、小数で書いた数は ",
+        math(String.raw`\mathbb{Q}`),
+        " の元である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\sinh`),
+        "・",
+        math(String.raw`\cosh`),
+        " の値が実数の exp の値（部分和の極限）、",
+        math(String.raw`K^*`),
+        " と ",
+        math(String.raw`K_c`),
+        " が実対数の値であり、微分と積分が実数の極限で定まるからである。微分は ",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式、積分は同じ注記の (R3)・(R4) で扱う（",
+        ref("remark_real_analysis_escape_chapter_E"),
+        "）。",
+      ]),
+      paragraph([
+        "準備。",
+        math(String.raw`K_c \in \mathbb{R}_{>0}`),
+        " であること。",
+        math(String.raw`2K_c \leq 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&= \sinh 2K_c
+&&\bigl(\because\ K_c\text{ の定義}\bigr)\\
+&\leq \sinh 0
+&&\bigl(\because\ 2K_c \leq 0\text{ と }\blkref{sinh_strictly_increasing}\text{（等号のときは等しい）}\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{sinh_zero}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり矛盾する。よって ",
+        math(String.raw`2K_c > 0`),
+        "、すなわち ",
+        math(String.raw`K_c \in \mathbb{R}_{>0}`),
+        "。",
+      ]),
+      paragraph([
+        "準備。",
+        math(String.raw`\cosh 2K_c = \sqrt{2}^{(\mathbb{R}_{\ge 0})}`),
+        " であること。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\cosh 2K_c)^2
+&= 1 + (\sinh 2K_c)^2
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2)}\bigr)\\
+&= 1 + 1^2
+&&\bigl(\because\ K_c\text{ の定義}\bigr)\\
+&= 2
+&&\bigl(\because\ \mathbb{Q}\text{ の四則}\bigr)\\
+&= \left(\sqrt{2}^{(\mathbb{R}_{\ge 0})}\right)^2
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\cosh 2K_c > 0`),
+        "（",
+        ref("cosh_sinh_basic_properties"),
+        " (1)）と ",
+        math(String.raw`\sqrt{2}^{(\mathbb{R}_{\ge 0})} > 0`),
+        "（",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\sqrt{2}^{(\mathbb{R}_{\ge 0})} \geq 0`),
+        " で、その 2 乗は ",
+        math(String.raw`2 \neq 0`),
+        "）に ",
+        ref("cosh_sinh_basic_properties"),
+        " (4) を当てて ",
+        math(String.raw`\cosh 2K_c = \sqrt{2}^{(\mathbb{R}_{\ge 0})}`),
+        "。",
+      ]),
+      paragraph([
+        "準備。",
+        math(String.raw`1.414213 \leq \sqrt{2}^{(\mathbb{R}_{\ge 0})} \leq 1.414214`),
+        " であること。",
+        math(String.raw`1.414213, 1.414214, \sqrt{2}^{(\mathbb{R}_{\ge 0})} \in \mathbb{R}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1.414213^2
+&= 1.999998409369
+&&\bigl(\because\ \mathbb{Q}\text{ の四則}\bigr)\\
+&\leq 2
+&&\bigl(\because\ \mathbb{Q}\text{ の大小}\bigr)\\
+&= \left(\sqrt{2}^{(\mathbb{R}_{\ge 0})}\right)^2
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\bigr)\\
+&\leq 2.000001237796
+&&\bigl(\because\ \mathbb{Q}\text{ の大小}\bigr)\\
+&= 1.414214^2
+&&\bigl(\because\ \mathbb{Q}\text{ の四則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "の二つの不等号に ",
+        ref("nonnegative_real_order_from_squares"),
+        " を当てる。",
+      ]),
+      paragraph([
+        "準備。数値の評価 ",
+        math(String.raw`1.02006 \leq \cosh\tfrac15 \leq 1.020067`),
+        "、",
+        math(String.raw`0.201336 \leq \sinh\tfrac15 \leq 0.2013361`),
+        " は、",
+        ref("remark_real_analysis_escape_chapter_E"),
+        " が持ち込む数値の評価である。",
+      ]),
+      paragraph(["(1) の証明。", math(String.raw`K \in \mathbb{R}_{>0}`), " とする。まず ", ref("def_positive_coupling_tanh"), " の ", math(String.raw`\tanh = \sinh/\cosh`), " の導関数を求める（",
+        math(String.raw`\cosh K > 0`), " は ", ref("cosh_sinh_basic_properties"), " (1)）。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\tanh)'(K)
+&= \left(\frac{\sinh}{\cosh}\right)'(K)
+&&\bigl(\because\ \blkref{def_positive_coupling_tanh}\bigr) \\
+&= \frac{\sinh'(K)\cosh K - \sinh K\cosh'(K)}{\cosh^2 K}
+&&\bigl(\because\ \text{微分の公式の商。}\cosh K \neq 0\bigr) \\
+&= \frac{\cosh K\cosh K - \sinh K\sinh K}{\cosh^2 K}
+&&\bigl(\because\ \blkref{sinh_derivative}\text{ と }\blkref{cosh_derivative}\bigr) \\
+&= \frac{1}{\cosh^2 K}
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2)}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
         ref("def_isotropic_dual_coupling"),
         " より ",
         math(String.raw`K^* = -\tfrac12\log(\tanh K)`),
-        " なので",
+        " で、",
+        math(String.raw`\tanh K \in \mathbb{R}_{>0}`),
+        "（",
+        ref("def_positive_coupling_tanh"),
+        "）なので",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{dK^*}{dK}
-&= -\frac{1}{2}\cdot\frac{1}{\tanh K}\cdot\frac{d}{dK}\tanh K
-&&\bigl(\because\ \log \text{ の微分と合成関数の微分}\bigr) \\
+&= \left(-\frac{1}{2}\,\log\circ\tanh\right)'(K)
+&&\bigl(\because\ \blkref{def_isotropic_dual_coupling}\bigr) \\
+&= -\frac{1}{2}\left(\log\circ\tanh\right)'(K)
+&&\bigl(\because\ \text{微分の公式の定数倍}\bigr) \\
+&= -\frac{1}{2}\cdot\log'(\tanh K)\cdot(\tanh)'(K)
+&&\bigl(\because\ \text{微分の公式の合成}\bigr) \\
+&= -\frac{1}{2}\cdot\frac{1}{\tanh K}\cdot(\tanh)'(K)
+&&\bigl(\because\ \text{微分の公式の }\log'(w) = \tfrac1w\bigr) \\
 &= -\frac{1}{2}\cdot\frac{\cosh K}{\sinh K}\cdot\frac{1}{\cosh^2 K}
-&&\bigl(\because\ (\tanh)' = 1/\cosh^2\bigr) \\
+&&\bigl(\because\ \blkref{def_positive_coupling_tanh}\text{ と上の }(\tanh)'(K)\bigr) \\
 &= -\frac{1}{2\sinh K\cosh K}
 &&\bigl(\because\ \mathbb R\text{ の四則}\bigr) \\
 &= -\frac{1}{\sinh 2K}
 &&\bigl(\because\ \blkref{sinh_double_angle_formula}\text{ を }x = 2K\text{ で}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "よって",
-      ]),
       displayMath(String.raw`\begin{aligned}
 \kappa'(K)
+&=\left(2\,\mathrm{id} - 2K^*\right)'(K)
+&&\bigl(\because\ \blkref{def_isotropic_kappa_of_K}\text{。}K^*\text{ を }K\text{ の関数と読む}\bigr) \\
+&=(2\,\mathrm{id})'(K) - (2K^*)'(K)
+&&\bigl(\because\ \text{微分の公式の和（差は }-1\text{ 倍との和）}\bigr) \\
+&=2\,\mathrm{id}'(K) - 2\frac{dK^*}{dK}
+&&\bigl(\because\ \text{微分の公式の定数倍を 2 箇所へ}\bigr) \\
 &=2-2\frac{dK^*}{dK}
-&&\bigl(\because\ \blkref{def_isotropic_kappa_of_K}\bigr) \\
+&&\bigl(\because\ \text{恒等関数の導関数 }1\bigr) \\
 &=2+\frac{2}{\sinh 2K}
 &&\bigl(\because\ \text{上の }dK^*/dK\text{ の表示}\bigr).
 \end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\kappa'(K)
+&= 2+\frac{2}{\sinh 2K}
+&&\bigl(\because\ \text{上の }\kappa'(K)\text{ の表示}\bigr) \\
+&> 2
+&&\bigl(\because\ \sinh 2K > 0\text{。}\blkref{cosh_sinh_basic_properties}\text{ (3) を }x = 2K > 0\text{ で}\bigr) \\
+&> 0
+&&\bigl(\because\ \mathbb{Q}\text{ の大小}\bigr)
+\end{aligned}`),
       paragraph([
-        ref("cosh_sinh_basic_properties"),
-        " (3) より ",
-        math(String.raw`K > 0`),
-        " で ",
+        math(String.raw`\kappa' = 2 + 2/(\sinh\circ(2\,\mathrm{id}))`),
+        " は ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " 上で微分可能（",
+        ref("sinh_derivative"),
+        " と微分の公式の和・定数倍・商・合成。分母 ",
         math(String.raw`\sinh 2K > 0`),
-        " なので ",
-        math(String.raw`\kappa'(K) > 2 > 0`),
-        "。",
+        "）なので、微分の公式の「微分可能な関数は連続」より連続である。",
+        math(String.raw`0 < a < b`),
+        " なら、(R4) を ",
+        math(String.raw`F = \kappa`),
+        " と ",
+        math(String.raw`F(t) = 2t`),
+        " に当てて",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(b) - \kappa(a)
+&= \int_a^b \kappa'(t)\,dt
+&&\bigl(\because\ \text{(R4)}\bigr)\\
+&\geq \int_a^b 2\,dt
+&&\bigl(\because\ \text{(R3) の単調性と上の }\kappa'(t) > 2\bigr)\\
+&= 2b - 2a
+&&\bigl(\because\ \text{(R4) を }F(t) = 2t\text{ で}\bigr)\\
+&> 0
+&&\bigl(\because\ a < b\bigr)
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`\kappa`), " は狭義単調増加である。"]),
       paragraph([
         "(2) の証明。",
-        math(String.raw`\sinh 2K_c = 1`),
-        " のとき ",
-        math(String.raw`s_1 s_2 = \sinh^2 2K_c = 1`),
-        " なので、",
-        ref("critical_point_iff_kappa_zero"),
-        " の (1) ",
-        math(String.raw`\iff`),
-        " (3) より ",
-        ref("def_kappa"),
-        " の ",
-        math(String.raw`\kappa`),
-        " が 0 であり、",
-        ref("isotropic_kappa_equals_kappa_of_K"),
-        " の ",
-        math(String.raw`\kappa = \kappa(K_c)`),
-        " より ",
-        math(String.raw`\kappa(K_c) = 0`),
-        "。逆に ",
-        math(String.raw`\kappa(K)=0`),
-        " なら ",
-        ref("isotropic_kappa_equals_kappa_of_K"),
-        " より ",
-        ref("def_kappa"),
-        " の ",
-        math(String.raw`\kappa`),
-        " が 0 であり、同じ同値から ",
-        math(String.raw`\sinh^2 2K = 1`),
-        "、",
-        math(String.raw`\sinh 2K > 0`),
-        " より ",
-        math(String.raw`\sinh 2K = 1 = \sinh 2K_c`),
-        "、",
-        ref("sinh_is_injective"),
-        " より ",
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        " とし、",
+        math(String.raw`K_1 = K_2 = K`),
+        " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(K) = 0
+&\iff \kappa = 0
+&&\bigl(\because\ \blkref{isotropic_kappa_equals_kappa_of_K}\text{。左の }\kappa\text{ は }\blkref{def_kappa}\text{ のもの}\bigr)\\
+&\iff s_1s_2 = 1
+&&\bigl(\because\ \blkref{critical_point_iff_kappa_zero}\text{ の (1)}\iff\text{(3)}\bigr)\\
+&\iff \sinh^2 2K = 1
+&&\bigl(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_i = \sinh 2K_i\text{ と }K_1 = K_2 = K\bigr)\\
+&\iff \sinh 2K = 1
+&&\bigl(\because\ \sinh 2K > 0\text{（}\blkref{cosh_sinh_basic_properties}\text{ (3)）}\text{、}1 > 0\text{ と }\blkref{cosh_sinh_basic_properties}\text{ (4)}\bigr)\\
+&\iff \sinh 2K = \sinh 2K_c
+&&\bigl(\because\ K_c\text{ の定義}\bigr)\\
+&\iff 2K = 2K_c
+&&\bigl(\because\ \Rightarrow\text{ は }\blkref{sinh_is_injective}\text{、}\Leftarrow\text{ は等しい実数の }\sinh\text{ は等しい}\bigr)\\
+&\iff K = K_c
+&&\bigl(\because\ \mathbb{R}\text{ の四則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備の ",
+        math(String.raw`K_c \in \mathbb{R}_{>0}`),
+        " より、この同値の鎖を ",
         math(String.raw`K = K_c`),
+        " に当てると最後の条件が成り立つので ",
+        math(String.raw`\kappa(K_c) = 0`),
+        "。鎖の条件 ",
+        math(String.raw`\kappa(K) = 0`),
+        "・",
+        math(String.raw`\sinh^2 2K = 1`),
+        "・",
+        math(String.raw`K = K_c`),
+        " が互いに同値なので ",
+        math(String.raw`\kappa(K) = 0 \iff K = K_c \iff \sinh^2 2K = 1`),
         "。",
       ]),
       paragraph([
-        "(3) の証明。(1) の式を微分して",
+        "(3) の証明。",
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        " とする。(1) の ",
+        math(String.raw`\kappa' = 2 + 2/(\sinh\circ(2\,\mathrm{id}))`),
+        " は微分可能で（(1) の証明）、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \kappa''(K)
-&= \frac{d}{dK}\left(2 + \frac{2}{\sinh 2K}\right)
-&&\bigl(\because\ \text{上の }\kappa'(K)\text{ の表示}\bigr) \\
-&= -\frac{2}{\sinh^2 2K}\cdot 2\cosh 2K
-&&\bigl(\because\ \text{逆数と合成関数の微分}\bigr) \\
+&= \left(2 + \frac{2}{\sinh\circ(2\,\mathrm{id})}\right)'(K)
+&&\bigl(\because\ \text{(1) の }\kappa'\text{ の表示}\bigr) \\
+&= 2'(K) + \left(\frac{2}{\sinh\circ(2\,\mathrm{id})}\right)'(K)
+&&\bigl(\because\ \text{微分の公式の和}\bigr) \\
+&= 0 + \left(\frac{2}{\sinh\circ(2\,\mathrm{id})}\right)'(K)
+&&\bigl(\because\ \text{定数関数の導関数 }0\bigr) \\
+&= -\frac{2\,(\sinh\circ(2\,\mathrm{id}))'(K)}{\sinh^2 2K}
+&&\bigl(\because\ \text{微分の公式の商（分子は定数で導関数 }0\text{）と }\mathbb{R}\text{ の四則}\bigr) \\
+&= -\frac{2\cdot\sinh'(2K)\cdot(2\,\mathrm{id})'(K)}{\sinh^2 2K}
+&&\bigl(\because\ \text{微分の公式の合成}\bigr) \\
+&= -\frac{2\cdot\sinh'(2K)\cdot 2\,\mathrm{id}'(K)}{\sinh^2 2K}
+&&\bigl(\because\ \text{微分の公式の定数倍}\bigr) \\
+&= -\frac{2\cdot\sinh'(2K)\cdot 2}{\sinh^2 2K}
+&&\bigl(\because\ \text{恒等関数の導関数 }1\bigr) \\
+&= -\frac{2\cdot\cosh 2K\cdot 2}{\sinh^2 2K}
+&&\bigl(\because\ \blkref{sinh_derivative}\bigr) \\
 &= -\frac{4\cosh 2K}{\sinh^2 2K}
 &&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
 \end{aligned}`,
       ),
       paragraph([
         "(4) の証明。",
-        math(String.raw`\sinh 2K_c = 1`),
-        " と ",
-        ref("cosh_sinh_basic_properties"),
-        " (2) より ",
-        math(String.raw`\cosh 2K_c = \sqrt2`),
-        "（",
-        math(String.raw`\cosh > 0`),
-        "）。",
+        math(String.raw`K \in \mathbb{R}`),
+        "、",
+        math(String.raw`|K-K_c| \leq \tfrac1{10}`),
+        " とすると、絶対値の定義より ",
+        math(String.raw`2K_c - \tfrac15 \leq 2K \leq 2K_c + \tfrac15`),
+        "。",
         ref("sinh_addition_formula"),
-        " の複号 + を ",
+        " を ",
         math(String.raw`x = 2K_c`),
         "、",
-        math(String.raw`y = 2(K-K_c) \in [-\tfrac15,\tfrac15]`),
-        " に適用すると",
+        math(String.raw`y = \tfrac15`),
+        " に当てると（複号同順）",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sinh 2K
-&= \sinh\left(2K_c + 2(K-K_c)\right)
-&&(\because\ \mathbb R\text{ の四則}) \\
-&= \sinh 2K_c\cosh\left(2(K-K_c)\right) + \cosh 2K_c\sinh\left(2(K-K_c)\right)
+\sinh\left(2K_c \pm \tfrac15\right)
+&= \sinh 2K_c\cosh\tfrac15 \pm \cosh 2K_c\sinh\tfrac15
 &&(\because\ \blkref{sinh_addition_formula}) \\
-&= \cosh\left(2(K-K_c)\right) + \sqrt2\,\sinh\left(2(K-K_c)\right)
-&&(\because \sinh 2K_c = 1,\ \cosh 2K_c = \sqrt2)
+&= \cosh\tfrac15 \pm \sqrt{2}^{(\mathbb{R}_{\ge 0})}\,\sinh\tfrac15
+&&(\because\ K_c\text{ の定義と準備の }\cosh 2K_c = \sqrt{2}^{(\mathbb{R}_{\ge 0})})
 \end{aligned}`,
       ),
       paragraph([
-        ref("sinh_strictly_increasing"),
-        " より ",
-        math(String.raw`\sinh`),
-        " は狭義単調増加なので、",
-        math(String.raw`2K_c - 0.2 \leq 2K \leq 2K_c + 0.2`),
-        " のもとで ",
-        math(String.raw`\sinh(2K_c-0.2) \leq \sinh 2K \leq \sinh(2K_c+0.2)`),
-        " であり、上の加法定理の式（",
-        math(String.raw`2(K-K_c) = \pm 0.2`),
-        "）と ",
-        ref("cosh_is_even"),
-        "・",
-        ref("sinh_is_odd"),
-        "（",
-        math(String.raw`\cosh(-0.2) = \cosh 0.2`),
+        "準備の数値の評価から ",
+        math(String.raw`\sinh\tfrac15 > 0`),
         "、",
-        math(String.raw`\sinh(-0.2) = -\sinh 0.2`),
-        "）から",
-      ]),
-      displayMath(
-        String.raw`\sinh\left(2K_c \pm 0.2\right) = \cosh 0.2 \pm \sqrt2\,\sinh 0.2`,
-      ),
-      paragraph([
-        "数値評価 ",
-        math(String.raw`1.02006 \leq \cosh 0.2 \leq 1.020067`),
-        "、",
-        math(String.raw`0.201336 \leq \sinh 0.2 \leq 0.2013361`),
-        "、",
-        math(String.raw`1.414213 \leq \sqrt2 \leq 1.414214`),
-        " を使うと",
+        math(String.raw`\cosh\tfrac15 > 0`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sinh 2K
-&\geq \cosh 0.2-\sqrt2\sinh 0.2
-&&(\because\ \blkref{sinh_strictly_increasing}\text{ と上の端点の式}) \\
+&\geq \sinh\left(2K_c-\tfrac15\right)
+&&(\because\ 2K_c-\tfrac15 \leq 2K\text{ と }\blkref{sinh_strictly_increasing}\text{（等号のときは等しい）}) \\
+&= \cosh\tfrac15-\sqrt{2}^{(\mathbb{R}_{\ge 0})}\,\sinh\tfrac15
+&&(\because\ \text{上の端点の式の複号 }-) \\
+&\geq 1.02006-\sqrt{2}^{(\mathbb{R}_{\ge 0})}\,\sinh\tfrac15
+&&(\because\ \cosh\tfrac15 \geq 1.02006) \\
+&\geq 1.02006-1.414214\,\sinh\tfrac15
+&&(\because\ \sqrt{2}^{(\mathbb{R}_{\ge 0})} \leq 1.414214\text{ と }\sinh\tfrac15 > 0) \\
 &\geq 1.02006-1.414214\cdot0.2013361
-&&(\because\ \text{上の数値評価}) \\
+&&(\because\ \sinh\tfrac15 \leq 0.2013361) \\
 &\geq 0.7353
-&&(\because\ \mathbb Q\text{ の四則}). \\
+&&(\because\ \mathbb Q\text{ の四則と大小}).
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \sinh 2K
-&\leq \cosh 0.2+\sqrt2\sinh 0.2
-&&(\because\ \blkref{sinh_strictly_increasing}\text{ と上の端点の式}) \\
+&\leq \sinh\left(2K_c+\tfrac15\right)
+&&(\because\ 2K \leq 2K_c+\tfrac15\text{ と }\blkref{sinh_strictly_increasing}\text{（等号のときは等しい）}) \\
+&= \cosh\tfrac15+\sqrt{2}^{(\mathbb{R}_{\ge 0})}\,\sinh\tfrac15
+&&(\because\ \text{上の端点の式の複号 }+) \\
+&\leq 1.020067+\sqrt{2}^{(\mathbb{R}_{\ge 0})}\,\sinh\tfrac15
+&&(\because\ \cosh\tfrac15 \leq 1.020067) \\
+&\leq 1.020067+1.414214\,\sinh\tfrac15
+&&(\because\ \sqrt{2}^{(\mathbb{R}_{\ge 0})} \leq 1.414214\text{ と }\sinh\tfrac15 > 0) \\
 &\leq 1.020067+1.414214\cdot0.2013361
-&&(\because\ \text{上の数値評価}) \\
+&&(\because\ \sinh\tfrac15 \leq 0.2013361) \\
 &\leq 1.3048
-&&(\because\ \mathbb Q\text{ の四則}).
+&&(\because\ \mathbb Q\text{ の四則と大小}).
 \end{aligned}`,
       ),
       paragraph([
-        "したがって ",
-        math(String.raw`\kappa'(K) = 2 + \dfrac{2}{\sinh 2K}`),
-        " は",
+        "一つ目の鎖の 2 行目以降は ",
+        math(String.raw`K`),
+        " に依らないので ",
+        math(String.raw`\sinh(2K_c - \tfrac15) \geq 0.7353`),
+        " でもある。",
+        math(String.raw`2K \leq 0`),
+        " なら ",
+        ref("sinh_strictly_increasing"),
+        "（等号のときは等しい）と ",
+        ref("sinh_zero"),
+        " より ",
+        math(String.raw`\sinh 2K \leq 0 < 0.7353`),
+        " となり一つ目の鎖に反するので ",
+        math(String.raw`2K > 0`),
+        "、すなわち ",
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        "。同じ理由で ",
+        math(String.raw`2K_c - \tfrac15 > 0`),
+        "。したがって (1)・(3) を ",
+        math(String.raw`K`),
+        " で使える。",
       ]),
       displayMath(
-        String.raw`2 + \frac{2}{1.3048} \leq \kappa'(K) \leq 2 + \frac{2}{0.7353},
-\qquad \text{すなわち} \quad 3.53 \leq \kappa'(K) \leq 4.72`,
+        String.raw`\begin{aligned}
+\kappa'(K)
+&= 2 + \frac{2}{\sinh 2K}
+&&(\because\ \text{(1)}) \\
+&\geq 2 + \frac{2}{1.3048}
+&&(\because\ 0 < \sinh 2K \leq 1.3048) \\
+&\geq 3.53
+&&(\because\ \mathbb Q\text{ の四則と大小}). \\
+\kappa'(K)
+&= 2 + \frac{2}{\sinh 2K}
+&&(\because\ \text{(1)}) \\
+&\leq 2 + \frac{2}{0.7353}
+&&(\because\ \sinh 2K \geq 0.7353 > 0) \\
+&\leq 4.72
+&&(\because\ \mathbb Q\text{ の四則と大小}).
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\kappa''`),
-        " については、",
-        math(String.raw`t \mapsto \dfrac{4\cosh t}{\sinh^2 t}`),
-        " が ",
+        " を評価するために ",
+        math(String.raw`h : \mathbb{R}_{>0} \to \mathbb{R},\ h(t) := \dfrac{\cosh t}{\sinh^2 t}`),
+        " と置く（",
         math(String.raw`t > 0`),
-        " で狭義単調減少であること",
+        " で ",
+        math(String.raw`\sinh t > 0`),
+        "。",
+        ref("cosh_sinh_basic_properties"),
+        " (3)）。",
+        math(String.raw`h`),
+        " は微分可能で、",
+        math(String.raw`t \in \mathbb{R}_{>0}`),
+        " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{d}{dt}\frac{\cosh t}{\sinh^2 t}
-&= \frac{\sinh^2 t\cdot\sinh t - \cosh t\cdot 2\sinh t\cosh t}{\sinh^4 t}
-&&(\because\ \text{商と合成関数の微分}) \\
+h'(t)
+&= \frac{\cosh'(t)\sinh^2 t - \cosh t\,(\sinh\cdot\sinh)'(t)}{\sinh^4 t}
+&&(\because\ \text{微分の公式の商}) \\
+&= \frac{\cosh'(t)\sinh^2 t - \cosh t\cdot 2\sinh t\,\sinh'(t)}{\sinh^4 t}
+&&(\because\ \text{微分の公式の積と }\mathbb{R}\text{ の乗法の交換律}) \\
+&= \frac{\sinh t\cdot\sinh^2 t - \cosh t\cdot 2\sinh t\cosh t}{\sinh^4 t}
+&&(\because\ \blkref{cosh_derivative}\text{ と }\blkref{sinh_derivative}) \\
 &= \frac{\sinh^2 t - 2\cosh^2 t}{\sinh^3 t}
-&&(\because\ \mathbb R\text{ の四則}) \\
-&<0
-&&(\because\ \sinh^2 t<\cosh^2 t<2\cosh^2 t,\ \sinh t>0).
+&&(\because\ \mathbb R\text{ の四則。}\sinh t \neq 0) \\
+&= \frac{-1 - \cosh^2 t}{\sinh^3 t}
+&&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2) の }\sinh^2 t = \cosh^2 t - 1) \\
+&< 0
+&&(\because\ -1-\cosh^2 t \leq -1 < 0,\ \sinh^3 t > 0).
 \end{aligned}`,
       ),
       paragraph([
-        "より、",
-        math(String.raw`2K \geq 2K_c - 0.2`),
-        " での最大値をとればよい。",
-        math(String.raw`\sinh(2K_c-0.2) \geq 0.7353`),
-        " と ",
-        math(String.raw`\cosh(2K_c-0.2) = \sqrt2\cosh 0.2 - \sinh 0.2 \leq 1.414214\cdot 1.020067 - 0.201336 \leq 1.2413`),
-        " より",
+        math(String.raw`h'`),
+        " は微分可能な関数の商として微分可能なので連続であり、",
+        math(String.raw`0 < a < b`),
+        " なら",
       ]),
+      displayMath(String.raw`\begin{aligned}
+h(b) - h(a)
+&= \int_a^b h'(t)\,dt
+&&(\because\ \text{(R4) を }F = h\text{ で})\\
+&\leq \int_a^b 0\,dt
+&&(\because\ \text{(R3) の単調性と上の }h'(t) < 0)\\
+&= 0
+&&(\because\ \text{(R4) を定数関数 }F = 0\text{ で})
+\end{aligned}`),
+      paragraph([
+        "である。よって ",
+        math(String.raw`0 < a \leq b`),
+        " なら ",
+        math(String.raw`h(b) \leq h(a)`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh\left(2K_c-\tfrac15\right)
+&= \cosh 2K_c\cosh\tfrac15 - \sinh 2K_c\sinh\tfrac15
+&&(\because\ \blkref{cosh_addition_formula}\text{ の複号 }-) \\
+&= \sqrt{2}^{(\mathbb{R}_{\ge 0})}\cosh\tfrac15 - \sinh\tfrac15
+&&(\because\ \text{準備の }\cosh 2K_c = \sqrt{2}^{(\mathbb{R}_{\ge 0})}\text{ と }K_c\text{ の定義}) \\
+&\leq 1.414214\cosh\tfrac15 - \sinh\tfrac15
+&&(\because\ \sqrt{2}^{(\mathbb{R}_{\ge 0})} \leq 1.414214\text{ と }\cosh\tfrac15 > 0) \\
+&\leq 1.414214\cdot1.020067 - \sinh\tfrac15
+&&(\because\ \cosh\tfrac15 \leq 1.020067) \\
+&\leq 1.414214\cdot1.020067 - 0.201336
+&&(\because\ \sinh\tfrac15 \geq 0.201336) \\
+&\leq 1.2413
+&&(\because\ \mathbb Q\text{ の四則と大小}).
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 \left|\kappa''(K)\right|
+&=\left|-\frac{4\cosh 2K}{\sinh^2 2K}\right|
+&&(\because\ \text{(3)}) \\
 &=\frac{4\cosh 2K}{\sinh^2 2K}
-&&(\because\ \text{上の }\kappa''(K)\text{ の表示と }\cosh 2K>0) \\
-&\leq\frac{4\cosh(2K_c-0.2)}{\sinh^2(2K_c-0.2)}
-&&(\because\ \cosh t/\sinh^2t\text{ の単調減少}) \\
+&&(\because\ \cosh 2K > 0\text{（}\blkref{cosh_sinh_basic_properties}\text{ (1)）、}\sinh^2 2K > 0) \\
+&=4h(2K)
+&&(\because\ h\text{ の定義}) \\
+&\leq4h\left(2K_c-\tfrac15\right)
+&&(\because\ 0 < 2K_c-\tfrac15 \leq 2K\text{ と上の }h\text{ の単調減少}) \\
+&=\frac{4\cosh(2K_c-\frac15)}{\sinh^2(2K_c-\frac15)}
+&&(\because\ h\text{ の定義}) \\
+&\leq\frac{4\cdot1.2413}{\sinh^2(2K_c-\frac15)}
+&&(\because\ \text{上の }\cosh(2K_c-\tfrac15) \leq 1.2413) \\
 &\leq\frac{4\cdot1.2413}{0.7353^2}
-&&(\because\ \text{下端 }2K_c-0.2\text{ での数値評価}) \\
+&&(\because\ \sinh(2K_c-\tfrac15) \geq 0.7353 > 0) \\
 &\leq9.19
-&&(\because\ \mathbb Q\text{ の四則}).
+&&(\because\ \mathbb Q\text{ の四則と大小}).
 \end{aligned}`,
       ),
-      paragraph([
-        "最後に ",
-        math(String.raw`\left(\kappa'^2\right)' = 2\kappa'\kappa''`),
-        " なので",
-      ]),
       displayMath(String.raw`\begin{aligned}
 \left|\left(\kappa'^2\right)'(K)\right|
+&=\left|2\kappa'(K)\kappa''(K)\right|
+&&(\because\ \text{微分の公式の積（(1)・(3) より }\kappa'\text{ は微分可能）}) \\
+&=2\,\kappa'(K)\left|\kappa''(K)\right|
+&&(\because\ \text{積の絶対値と }\kappa'(K) > 0) \\
 &\leq2\cdot4.72\cdot9.19
-&&(\because\ \text{上の }\kappa'(K)\text{ と }\kappa''(K)\text{ の上界}) \\
+&&(\because\ \text{上の }\kappa'(K)\text{ と }|\kappa''(K)|\text{ の上界}) \\
 &\leq87
-&&(\because\ \mathbb Q\text{ の四則}).
+&&(\because\ \mathbb Q\text{ の四則と大小}).
 \end{aligned}`),
       paragraph([
-        "(5) の証明。(R4) を ",
-        math(String.raw`F = \kappa`),
-        " に適用すると ",
-        math(String.raw`\kappa(K) = \kappa(K)-\kappa(K_c) = \int_{K_c}^{K}\kappa'(t)\,dt`),
-        " であり、(4) より積分区間上で ",
-        math(String.raw`3.53 \leq \kappa'(t) \leq 4.72`),
-        " なので、(R3) の単調性より",
+        "(5) の証明。",
+        math(String.raw`K \in \mathbb{R}`),
+        "、",
+        math(String.raw`|K-K_c| \leq \tfrac1{10}`),
+        " とし、",
+        math(String.raw`a := \min\{K, K_c\}`),
+        "、",
+        math(String.raw`b := \max\{K, K_c\}`),
+        " と置く。",
+        math(String.raw`\{a, b\} = \{K, K_c\}`),
+        "、",
+        math(String.raw`b - a = |K - K_c|`),
+        " であり、",
+        math(String.raw`t \in [a, b]`),
+        " は ",
+        math(String.raw`|t - K_c| \leq |K - K_c| \leq \tfrac1{10}`),
+        " を満たすので (4) を ",
+        math(String.raw`t`),
+        " で使える（とくに ",
+        math(String.raw`a > 0`),
+        "）。(1) より ",
+        math(String.raw`\kappa`),
+        " は単調増加なので ",
+        math(String.raw`\kappa(b) - \kappa(a) = |\kappa(K) - \kappa(K_c)|`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 3.53\,|K-K_c|
-&\leq|\kappa(K)|
-&&(\because\ \text{(R4)、(R3) と }\kappa'(t)\geq3.53) \\
-&\leq4.72\,|K-K_c|
-&&(\because\ \text{(R4)、(R3) と }\kappa'(t)\leq4.72) \\
-&\leq4.72\cdot\frac{1}{10}
+&= 3.53\,(b-a)
+&&(\because\ b - a = |K-K_c|) \\
+&= \int_a^b 3.53\,dt
+&&(\because\ \text{(R4) を }F(t) = 3.53\,t\text{ で}) \\
+&\leq \int_a^b \kappa'(t)\,dt
+&&(\because\ \text{(R3) の単調性と (4) の }\kappa'(t)\geq3.53) \\
+&= \kappa(b) - \kappa(a)
+&&(\because\ \text{(R4) を }F = \kappa\text{ で。(1) より }\kappa'\text{ は連続}) \\
+&= |\kappa(K) - \kappa(K_c)|
+&&(\because\ \text{上の }\kappa(b) - \kappa(a)\text{ の表示}) \\
+&= |\kappa(K)|
+&&(\because\ \text{(2) の }\kappa(K_c) = 0) \\
+&= \kappa(b) - \kappa(a)
+&&(\because\ \text{(2) の }\kappa(K_c) = 0\text{ と上の }\kappa(b) - \kappa(a)\text{ の表示}) \\
+&= \int_a^b \kappa'(t)\,dt
+&&(\because\ \text{(R4) を }F = \kappa\text{ で}) \\
+&\leq \int_a^b 4.72\,dt
+&&(\because\ \text{(R3) の単調性と (4) の }\kappa'(t)\leq4.72) \\
+&= 4.72\,(b-a)
+&&(\because\ \text{(R4) を }F(t) = 4.72\,t\text{ で}) \\
+&= 4.72\,|K-K_c|
+&&(\because\ b - a = |K-K_c|) \\
+&\leq 4.72\cdot\frac{1}{10}
 &&(\because\ |K-K_c|\leq\tfrac{1}{10}) \\
 &=0.472
 &&(\because\ \mathbb Q\text{ の四則}).
 \end{aligned}`,
       ),
       paragraph([
-        "同様に (R4) を ",
-        math(String.raw`F = \kappa'^2`),
-        " に適用する。ここで",
+        "次に ",
+        math(String.raw`G := \kappa'^2 : \mathbb{R}_{>0} \to \mathbb{R}`),
+        " と置く。(1)・(3) と微分の公式の積より ",
+        math(String.raw`G`),
+        " は微分可能で ",
+        math(String.raw`G' = 2\kappa'\kappa''`),
+        "、",
+        math(String.raw`\kappa'' = -4\cosh(2\,\cdot)/\sinh^2(2\,\cdot)`),
+        " は微分可能な関数の商なので連続、よって ",
+        math(String.raw`G'`),
+        " は連続である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \kappa'(K_c)
 &= 2 + \frac{2}{\sinh 2K_c}
-&&(\because \text{(1) の } \kappa' \text{ の表示を } K = K_c \text{ で読む}) \\
+&&(\because \text{(1) の } \kappa' \text{ の表示を } K = K_c \in \mathbb{R}_{>0} \text{ で読む}) \\
 &= 2 + \frac{2}{1}
-&&(\because \sinh 2K_c = 1\text{。本主張の } K_c \text{ の定義}) \\
+&&(\because K_c \text{ の定義}) \\
 &= 4
 &&(\because \mathbb{R} \text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
-        "に注意すると",
+        "(4) より ",
+        math(String.raw`t \in [a, b]`),
+        " で ",
+        math(String.raw`-87 \leq G'(t) \leq 87`),
+        " なので",
       ]),
+      displayMath(String.raw`\begin{aligned}
+-87\,(b-a)
+&= \int_a^b (-87)\,dt
+&&(\because\ \text{(R4) を }F(t) = -87\,t\text{ で})\\
+&\leq \int_a^b G'(t)\,dt
+&&(\because\ \text{(R3) の単調性と }-87 \leq G'(t))\\
+&\leq \int_a^b 87\,dt
+&&(\because\ \text{(R3) の単調性と }G'(t) \leq 87)\\
+&= 87\,(b-a)
+&&(\because\ \text{(R4) を }F(t) = 87\,t\text{ で})
+\end{aligned}`),
+      paragraph(["であり、"]),
       displayMath(
         String.raw`\begin{aligned}
 \left|\kappa'(K)^2-16\right|
-&=\left|\int_{K_c}^{K}\left(\kappa'^2\right)'(t)\,dt\right|
-&&(\because\ \text{(R4) と }\kappa'(K_c)=4) \\
-&\leq87\,|K-K_c|
-&&(\because\ \text{(R3) と上の }\left|\left(\kappa'^2\right)'\right|\leq87) \\
-&\leq87\cdot\frac{|\kappa(K)|}{3.53}
+&=\left|G(K) - G(K_c)\right|
+&&(\because\ G\text{ の定義と }\kappa'(K_c)=4) \\
+&=\left|G(b) - G(a)\right|
+&&(\because\ \{a,b\} = \{K, K_c\}\text{ と }|{-x}| = |x|) \\
+&=\left|\int_a^b G'(t)\,dt\right|
+&&(\because\ \text{(R4) を }F = G\text{ で}) \\
+&\leq 87\,(b-a)
+&&(\because\ \text{上の }\textstyle\int_a^b G'\text{ の挟み込みと絶対値の定義}) \\
+&= 87\,|K-K_c|
+&&(\because\ b - a = |K-K_c|) \\
+&\leq 87\cdot\frac{|\kappa(K)|}{3.53}
 &&(\because\ \text{上の }3.53|K-K_c|\leq|\kappa(K)|) \\
-&\leq24.7\,|\kappa(K)|
-&&(\because\ \mathbb Q\text{ の四則}).
+&\leq 24.7\,|\kappa(K)|
+&&(\because\ \mathbb Q\text{ の四則と大小}).
 \end{aligned}`,
       ),
     ],
@@ -1348,6 +1705,7 @@ K_2^*
       notes: [
         "2026-09-02 の式変形統一で、(4)(5) の三本の鎖に行中の \\quad (\\because …) で置かれていた根拠 7 行を、" +
           "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+        "2026-11-05（全証明の SageMath 検算）: K_c ∈ ℝ_{>0} を示していなかった（(2) で critical_point_iff_kappa_zero と isotropic_kappa_equals_kappa_of_K を K_c に使うのに要る）ので、sinh_strictly_increasing と sinh_zero による準備を足し、主張に書いた。cosh 2K_c = √2 と √2 の小数の評価を根拠付きの準備にし、cosh(1/5)・sinh(1/5) の数値の評価を remark_real_analysis_escape_chapter_E が持ち込むものとして引いた。(tanh)' = 1/cosh^2 を商の微分と新しい主張 cosh_derivative で示した。κ の狭義単調増加と h(t) = cosh t/sinh^2 t の単調減少を、平均値の定理を使わず (R3)・(R4) で示した。(2) を同値の鎖にした。(4) の端点の式は加法定理の複号を直接使い（偶奇性を経ない）、K ∈ ℝ_{>0} と 2K_c − 1/5 > 0 を示した。(5) は K < K_c の場合に向きの逆の積分を使っていたので、a = min{K, K_c}、b = max{K, K_c} で書き、|∫G'| の評価を (R3) の定数による挟み込みにした。主張の数値は不変。検算は sagemath/check/kappa_of_K_basic/。",
       ],
     },
   },
