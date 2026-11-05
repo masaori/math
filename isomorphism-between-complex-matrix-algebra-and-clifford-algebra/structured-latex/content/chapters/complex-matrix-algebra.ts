@@ -632,4 +632,75 @@ u_w
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_identity_matrix_is_left_unit_of_matrix_product",
+    kind: "claim",
+    title: { text: "単位行列を左から掛けても、行列は変わらない" },
+    labels: ["claim_identity_matrix_is_left_unit_of_matrix_product"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`A\in\mathrm{Mat}_X(\mathbb{C})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）とする。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`1_{\mathrm{Mat}_X}\cdot_{\mathrm{Mat}_X}A=A`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の元なので、すべての ",
+        math(String.raw`x,y\in X`),
+        " について ",
+        math(String.raw`(x,y)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことを示せばよい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`x,y\in X`),
+        " を任意に固定する。以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`X`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(1_{\mathrm{Mat}_X}\cdot_{\mathrm{Mat}_X}A\bigr)_{x,y}
+&=\sum_{z\in X}(1_{\mathrm{Mat}_X})_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{z,y}
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{z\in X}\delta_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{z,y}
+&&\left(\because\ \text{各}\ z\ \text{で}\ 1_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\ \blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=A_{x,y}
+&&\left(\because\ v_z:=A_{z,y}\ \text{として当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x,y\in X`),
+        " は任意だったので、",
+        math(String.raw`1_{\mathrm{Mat}_X}\cdot_{\mathrm{Mat}_X}A=A`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
 ]);

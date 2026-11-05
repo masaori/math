@@ -16,6 +16,7 @@ export const ALL_LABELS = [
   "claim_embedding_into_first_component_is_linear_map",
   "claim_embedding_into_second_component_is_linear_map",
   "claim_family_member_is_kronecker_delta_linear_combination",
+  "claim_identity_matrix_is_left_unit_of_matrix_product",
   "claim_interchange_of_double_sum_over_finite_sets",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
   "claim_linear_map_maps_sum_over_finite_set_to_sum_of_values",
