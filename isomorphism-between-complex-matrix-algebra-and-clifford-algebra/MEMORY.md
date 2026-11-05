@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-05: 「行列の積の分配法則」を台帳で二行に割り、行列の積が右の因子の和に分配すること（ラベル claim_matrix_product_distributes_over_sum_in_right_factor、A(B+C)=AB+AC）を示した。次は左の因子の和への分配（(A+B)C=AC+BC。各 z の項の (A+B)_{x,z} を A_{x,z}+_ℂB_{x,z} に書き直し、同じ族の二つの和の和の主張 claim_sum_of_sums_over_finite_set_with_same_family を v_z:=C_{z,y} で逆向きに当てる）。
 - 2026-11-05: 行列の積の結合法則（ラベル claim_matrix_product_is_associative）を示した。次は行列の積の分配法則（A(B+C)=AB+AC は族ごとの和、(A+B)C=AC+BC は係数ごとの和の主張を、各項の値だけで決まることと合わせて引く）。
 - 2026-11-05: 有限集合の上の和が各項の値だけで決まること（ラベル claim_sum_over_finite_set_depends_only_on_terms）を、行列の積の結合法則の前に台帳の行として割り出して示した。次は行列の積の結合法則。
 - 2026-11-05: 「有限集合で添字づけた行列の代数」を台帳で七行に割り、新しい章のファイル complex-matrix-algebra.ts（複素行列環の章）に行列の集合と演算の定義（ラベル def_matrices_indexed_by_finite_set、Mat_X(ℂ)、演算 +_{Mat_X}・·_{Mat_X}・∗_{Mat_X}・0_{Mat_X}・1_{Mat_X}）を置いた。次は行列の集合が成分ごとの和とスカラー倍で ℂ-線型空間であること（双対空間の公理の確認と同じく成分の等式で確かめ、加法の逆元は成分ごとの逆元を選んだ行列で与える）。
