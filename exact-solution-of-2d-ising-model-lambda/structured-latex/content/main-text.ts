@@ -62537,10 +62537,21 @@ A_\gamma(j+1)
                     proof: [
                       paragraph([ref("claim_closed_walk_four_edge_parity"), " を頂点 ", math(String.raw`(i+1,j)`),
                         " に適用し、全ての列 ", math(String.raw`j`), " について足す。"]),
-                      displayMath(String.raw`\left(\sum_j N_\gamma(n_{\mathrm v}(i,j))+\sum_j N_\gamma(n_{\mathrm v}(i+1,j))+\sum_j N_\gamma(n_{\mathrm h}(i+1,j-1))+\sum_j N_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2=0\quad\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+&\left(\sum_j N_\gamma(n_{\mathrm v}(i,j))
++\sum_j N_\gamma(n_{\mathrm v}(i+1,j))
++\sum_j N_\gamma(n_{\mathrm h}(i+1,j-1))
++\sum_j N_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2\\
+&=0
+&&\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)
+\end{aligned}`),
                       paragraph(["列の平行移動 ", math(String.raw`j\mapsto j-1`), " は有限集合 ",
                         math(String.raw`\mathbb Z/L\mathbb Z`), " の全単射なので、横辺の二つの和は等しい。"]),
-                      displayMath(String.raw`\sum_jN_\gamma(n_{\mathrm h}(i+1,j-1))=\sum_jN_\gamma(n_{\mathrm h}(i+1,j))\quad\bigl(\because\ j\mapsto j-1\text{ の全単射による再添字付け}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\sum_jN_\gamma(n_{\mathrm h}(i+1,j-1))
+&=\sum_jN_\gamma(n_{\mathrm h}(i+1,j))
+&&\bigl(\because\ j\mapsto j-1\text{ の全単射による再添字付け}\bigr)
+\end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 B_\gamma(i+1)
 &=\left(\sum_jN_\gamma(n_{\mathrm v}(i+1,j))\right)\bmod2
@@ -62604,6 +62615,60 @@ B_\gamma(i+1)
 &=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2
 &&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
 &=h(\gamma)
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertical_seam_parity_equals_row",
+                  focus: {
+                    id: "kac_ward_claim_vertical_seam_parity_equals_row",
+                    kind: "claim",
+                    title: { text: "縦切断線の偶奇は最終行の縦辺の全列和に等しい" },
+                    labels: ["claim_vertical_seam_parity_equals_row"],
+                    habitat: "N",
+                    verification: ["sagemath/check/vertical-seam-parity-equals-row"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertical_seam_row_parity",
+                      "Ising2DLambda.NecSuf.KacWard.seam_column_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。各基底辺の通過偶奇 ",
+                        math(String.raw`N_\gamma(e)`), " は ", ref("def_walk_base_edge_parity"),
+                        " に従う。このとき縦切断線の偶奇は" ]),
+                      displayMath(String.raw`v(\gamma)=\left(\sum_{j\in\mathbb Z/L\mathbb Z}N_\gamma(n_{\mathrm v}(L-1,j))\right)\bmod2`),
+                      paragraph(["を満たす（", ref("def_edge_sequence_seam_parities"),
+                        "、", ref("claim_edge_row_partition"), "）。", math(String.raw`L-1`),
+                        " は ", ref("def_residue_maps"), " の射影で剰余類へ写す。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`),
+                        " について、", ref("claim_edge_row_partition"),
+                        " の一意な辺番号の分解と ", ref("def_seam_parities"), " より"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{j\in\mathbb Z/L\mathbb Z}\mathbf1_{\operatorname{base}(\vec e)=n_{\mathrm v}(L-1,j)}
+&=\mathbf1_{\exists c\in\mathbb Z/L\mathbb Z:\ \operatorname{base}(\vec e)=n_{\mathrm v}(L-1,c)}
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の一意な辺番号の分解}\bigr)\\
+&=c_{\mathrm v}(\vec e)
+&&\bigl(\because\ \blkref{def_seam_parities}\bigr)
+\end{aligned}`),
+                      paragraph(["左辺は縦辺の最終行なら唯一の列で一、他の辺なら零である。上の等式を ",
+                        math(String.raw`\vec e_k`), " に適用し、有限和を入れ替えると"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\sum_j N_\gamma(n_{\mathrm v}(L-1,j))\right)\bmod2
+&=\left(\sum_j\sum_{k=1}^{m}\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(L-1,j)}\right)\bmod2
+&&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と剰余の加法則}\bigr)\\
+&=\left(\sum_{k=1}^{m}\sum_j\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(L-1,j)}\right)\bmod2
+&&\bigl(\because\ \text{有限和の交換}\bigr)\\
+&=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2
+&&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
+&=v(\gamma)
 &&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
 \end{aligned}`),
                     ],

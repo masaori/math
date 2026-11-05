@@ -189,6 +189,71 @@ theorem horizontal_seam_column_parity {L m : ℕ} [NeZero L]
   -- The one-edge identity turns the exchanged sum into the seam count.
   simp only [hsingle]
 
+/-- The vertical seam is precisely the last row of vertical base edges. -/
+theorem vertical_seam_row_parity {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) :
+    (∑ j : ZMod L, walkBaseEdgeParity γ
+      (edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j)) % 2 =
+      (∑ k : Fin (m + 1), verticalSeamParity (γ k)) % 2 := by
+  have hL : 0 < L := Nat.pos_of_ne_zero (NeZero.ne L)
+  have hlast : L - 1 < L := by omega
+  have hsingle (e : OrientedEdge L) :
+      (∑ j : ZMod L,
+        if e.1 = edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j then 1 else 0) =
+        verticalSeamParity e := by
+    rcases e with ⟨b, d⟩
+    rcases (edgeEquiv L).surjective b with ⟨w, hw⟩
+    cases w with
+    | inl p =>
+        rcases p with ⟨r, c⟩
+        simp only [edgeEquiv_inl] at hw
+        rw [← hw]
+        have hneq (j : ZMod L) :
+            edgeOfRow L false r c ≠
+              edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j := by
+          intro h
+          have hv := congrArg Fin.val h
+          have hf : (edgeOfRow L false r c).val < L ^ 2 := by
+            simpa [edgeOfRow] using rowColumnIndex_lt L r c
+          have ht : L ^ 2 ≤
+              (edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j).val := by
+            simp [edgeOfRow]
+          omega
+        have hf : (edgeOfRow L false r c).val < L ^ 2 := by
+          simpa [edgeOfRow] using rowColumnIndex_lt L r c
+        simp [hneq, verticalSeamParity, hf]
+    | inr p =>
+        rcases p with ⟨r, c⟩
+        simp only [edgeEquiv_inr] at hw
+        rw [← hw]
+        have heq (j : ZMod L) :
+            (edgeOfRow L true r c =
+              edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j) ↔
+              r.val = L - 1 ∧ c = j := by
+          constructor
+          · intro h
+            have hr := congrArg (edgeRow L) h
+            have hc := congrArg (edgeColumn L) h
+            simp only [edgeRow_edgeOfRow, edgeColumn_edgeOfRow,
+              ZMod.val_cast_of_lt hlast] at hr hc
+            exact ⟨hr, ZMod.val_injective L hc⟩
+          · rintro ⟨hr, rfl⟩
+            have : r = ((L - 1 : ℕ) : ZMod L) :=
+              ZMod.val_injective L (by simpa [ZMod.val_cast_of_lt hlast] using hr)
+            rw [this]
+        have hh : (∑ j : ZMod L,
+            if edgeOfRow L true r c =
+              edgeOfRow L true ((L - 1 : ℕ) : ZMod L) j then 1 else 0) =
+            if r.val = L - 1 then 1 else 0 := by
+          by_cases hr : r.val = L - 1 <;> simp [heq, hr]
+        have ht : ¬ (edgeOfRow L true r c).val < L ^ 2 := by
+          simp [edgeOfRow]
+        simpa [verticalSeamParity, ht, edgeRow_edgeOfRow] using hh
+  unfold walkBaseEdgeParity
+  simp only [← Finset.sum_nat_mod]
+  rw [Finset.sum_comm]
+  simp only [hsingle]
+
 /-- 切断線の偶奇が零なら、閉歩道の横辺全行和はどの列でも偶数になる。 -/
 theorem closedWalk_horizontal_column_parity_zero {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
