@@ -69250,7 +69250,7 @@ C_n(r)&=t_{\circ}(R_-)
 &=M-\kappa(P_{m-1})
 &&\bigl(\because\ \kappa(P_m)=M\bigr)\\
 &\ge0
-&&\bigl(\because\ \kappa(P_{m-1})\le M\bigr),\\
+&&\bigl(\because\ \kappa(P_{m-1})\le M\bigr)\\
 \kappa(u(0))&=\kappa(P_1-P_0)
 &&\bigl(\because\ u\text{ の定義}\bigr)\\
 &=\kappa(P_1)-\kappa(P_0)

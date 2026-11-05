@@ -3,10 +3,91 @@
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSum
 import Ising2DLambda.KacWard.ParallelStaircaseTransverseWidth
 import Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurning
+import Ising2DLambda.KacWard.ClosedNonbacktrackingWalk
+import Ising2DLambda.KacWard.SuccessorDirectionSelection
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkPeriodicDirectionNonbacktracking
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
+
+/-- 実際の閉歩道の有限辺列を、周期方向番号の循環非後退条件へ移す。 -/
+theorem closedWalk_periodic_direction_nonbacktracking {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) :
+    let γz : ZMod (m + 1) → OrientedEdge L :=
+      fun j => γ ⟨j.val, ZMod.val_lt j⟩
+    ∀ j : ZMod (m + 1),
+      directionNumber (γz (j + 1)) ≠ directionNumber (γz j) + 2 := by
+  dsimp
+  intro j hdir
+  by_cases hm0 : m = 0
+  · subst m
+    have hsame : j + 1 = j := by
+      apply ZMod.val_injective
+      have h₁ := ZMod.val_lt (j + 1)
+      have h₂ := ZMod.val_lt j
+      omega
+    rw [hsame] at hdir
+    have hnot : ∀ d : ZMod 4, d ≠ d + 2 := by decide
+    exact hnot _ hdir
+  have hm : 0 < m := Nat.pos_of_ne_zero hm0
+  have hone : (1 : ZMod (m + 1)).val = 1 := ZMod.val_one'' (by omega)
+  have hj : j.val ≤ m := by have := ZMod.val_lt j; omega
+  by_cases hlast : j.val = m
+  · have hnext : (j + 1).val = 0 := by
+      rw [ZMod.val_add]
+      rw [hone, hlast]
+      simp
+    have hmem := hγ.2
+    have hne := (Finset.mem_filter.mp hmem).2.2
+    apply hne
+    apply sourceDirection_bijective.1
+    apply Prod.ext
+    · exact (Finset.mem_filter.mp hmem).2.1.symm.trans
+        (show orientedSource (reversal (γ (Fin.last m))) =
+          orientedTarget (γ (Fin.last m)) by
+            rcases γ (Fin.last m) with ⟨e, false | true⟩ <;> rfl).symm
+    · have hd : directionNumber (γ 0) =
+          directionNumber (γ (Fin.last m)) + 2 := by
+        simpa [hnext, hlast, Fin.last] using hdir
+      exact hd.trans (directionNumber_reversal (γ (Fin.last m))).symm
+  · have hjlt : j.val < m := by omega
+    have hnext : (j + 1).val = j.val + 1 := by
+      rw [ZMod.val_add]
+      rw [hone, Nat.mod_eq_of_lt (by omega : j.val + 1 < m + 1)]
+    let k : Fin m := ⟨j.val, hjlt⟩
+    have hmem := hγ.1 k
+    have hne := (Finset.mem_filter.mp hmem).2.2
+    apply hne
+    apply sourceDirection_bijective.1
+    apply Prod.ext
+    · exact (Finset.mem_filter.mp hmem).2.1.symm.trans
+        (show orientedSource (reversal (γ (Fin.castSucc k))) =
+          orientedTarget (γ (Fin.castSucc k)) by
+            rcases γ (Fin.castSucc k) with ⟨e, false | true⟩ <;> rfl).symm
+    · simpa [hnext, k, Fin.succ, Fin.castSucc] using hdir.trans
+        (directionNumber_reversal (γ (Fin.castSucc k))).symm
+
+/-- 必要十分版を実際の閉歩道へ特殊化する。 -/
+theorem closedWalk_periodic_direction_nonbacktracking_from_necSuf {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) :
+    let γz : ZMod (m + 1) → OrientedEdge L :=
+      fun j => γ ⟨j.val, ZMod.val_lt j⟩
+    ∀ j : ZMod (m + 1),
+      directionNumber (γz (j + 1)) ≠ directionNumber (γz j) + 2 := by
+  have hstep (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e) :
+      directionNumber f ≠ directionNumber e + 2 := by
+    intro hd
+    have hs : orientedSource f = orientedTarget e := (Finset.mem_filter.mp hf).2.1.symm
+    have hr : orientedSource (reversal e) = orientedTarget e := by
+      rcases e with ⟨edge, false | true⟩ <;> rfl
+    have heq : f = reversal e := sourceDirection_bijective.1
+      (Prod.ext (hs.trans hr.symm) (hd.trans (directionNumber_reversal e).symm))
+    exact (Finset.mem_filter.mp hf).2.2 heq
+  exact finiteWord_periodic_direction_nonbacktracking γ directionNumber
+    (fun k => hstep _ _ (hγ.1 k)) (hstep _ _ hγ.2)
 
 /-- 異なる後続方向が逆向きの単位歩を与えない。 -/
 theorem orientedEdgeLatticeStep_nonopposite {L : ℕ} (e f : OrientedEdge L)
