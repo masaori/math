@@ -63,4 +63,42 @@ theorem standardDualHeight_horizontal_internal_changes (L : ℕ) [NeZero L]
   unfold standardDualHeight
   omega
 
+/-- 必要なのは、二方向の横断数の局所偶奇だけである。 -/
+theorem standardDualHeight_vertical_internal (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hvertex : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (horizontalCross (r : ZMod L) (j : ZMod L) +
+        horizontalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 = 0) :
+    standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) =
+      (standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), (j : ZMod L)) +
+        verticalCross (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 := by
+  have hrect := rectangle_crossing_parity L horizontalCross verticalCross i j hi hj hvertex
+  have hj0 : j < L := by omega
+  simp only [standardDualHeight, ZMod.val_cast_of_lt hi,
+    ZMod.val_cast_of_lt hj, ZMod.val_cast_of_lt hj0]
+  rw [Finset.sum_Icc_succ_top (by omega : 1 ≤ j + 1)]
+  omega
+
+theorem standardDualHeight_vertical_internal_changes (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hvertex : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (horizontalCross (r : ZMod L) (j : ZMod L) +
+        horizontalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 = 0) :
+    (standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) ≠
+      standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), (j : ZMod L))) ↔
+    verticalCross (i : ZMod L) ((j + 1 : ℕ) : ZMod L) % 2 = 1 := by
+  rw [standardDualHeight_vertical_internal L horizontalCross verticalCross i j hi hj hvertex]
+  unfold standardDualHeight
+  omega
+
 end Ising2DLambda.NecSuf.KacWard

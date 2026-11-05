@@ -672,7 +672,7 @@ v_p(a)-v_p(b)
 &=\log\bigl(q^{\,k}\cdot q\bigr)
 &&\bigl(\because\ \text{冪の定義}\bigr)\\
 &=\log\bigl(q^{\,k}\bigr)+\log q
-&&\bigl(\because\ \blkref{claim_log_additive}\text{、}q^{\,k},q\in\mathbb{Q}_{>0}\bigr)\\
+&&\bigl(\because\ \blkref{claim_log_additive}\text{ と }q^{\,k},q\in\mathbb{Q}_{>0}\bigr)\\
 &=k\,\log q+\log q
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=(k+1)\,\log q
@@ -62426,6 +62426,53 @@ s(j')-s(j)
 &&\bigl(\because\ \text{帰納法の仮定と、この頂点の局所偶奇}\bigr)
 \end{aligned}`),
                       paragraph(["ゆえに全ての代表 ", math(String.raw`0\le i<L`), " で成立する。局所偶奇自体を閉歩道の閉性から導く接続は、縦方向の内部一歩の行で扱う。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_standard_dual_height_vertical_internal_conditional",
+                  focus: {
+                    id: "kac_ward_claim_standard_dual_height_vertical_internal_conditional",
+                    kind: "claim",
+                    title: { text: "局所偶奇を仮定した標準双対路の縦方向の内部一歩" },
+                    labels: ["claim_standard_dual_height_vertical_internal_conditional"],
+                    habitat: "N",
+                    verification: ["sagemath/check/standard-dual-height-vertical-internal-conditional"],
+                    lean: [
+                      "Ising2DLambda.KacWard.standardDualHeight_vertical_internal",
+                      "Ising2DLambda.KacWard.standardDualHeight_vertical_internal_changes",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_vertical_internal",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_vertical_internal_changes",
+                      "Ising2DLambda.KacWard.standardDualHeight_vertical_internal_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、代表 ", math(String.raw`0\le i<L`), " と ", math(String.raw`0\le j<L-1`),
+                        " を取る。各 ", math(String.raw`1\le r\le i`), " で次の局所偶奇を仮定する。",
+                      ]),
+                      displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))+N_\gamma(n_{\mathrm v}(r,j+1))\bigr)\bmod2=0`),
+                      paragraph(["このとき、", ref("def_standard_dual_height"), " の高さは"]),
+                      displayMath(String.raw`f_\gamma(i,j+1)=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm v}(i,j+1))\bigr)\bmod2`),
+                      paragraph(["を満たす。高さが変わることと ", math(String.raw`N_\gamma(n_{\mathrm v}(i,j+1))=1`), " は同値である。"]),
+                    ],
+                    proof: [
+                      paragraph(["高さの定義の列方向の和から末項を分ける。行方向の二つの和の差は、長方形の辺偶奇で基底の縦辺と目的の縦辺に置き換わる。"]),
+                      displayMath(String.raw`\begin{aligned}
+f_\gamma(i,j+1)
+&=\left(\sum_{c=1}^{j+1}N_\gamma(n_{\mathrm v}(0,c))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))\right)\bmod2
+&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr)\\
+&=\left(\sum_{c=1}^{j}N_\gamma(n_{\mathrm v}(0,c))+N_\gamma(n_{\mathrm v}(0,j+1))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))\right)\bmod2
+&&\bigl(\because\ \text{有限和の末項を分ける}\bigr)\\
+&=\left(\sum_{c=1}^{j}N_\gamma(n_{\mathrm v}(0,c))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2
+&&\bigl(\because\ \blkref{claim_standard_dual_rectangle_parity}\bigr)\\
+&=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm v}(i,j+1))\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と剰余の加法則}\bigr)
+\end{aligned}`),
+                      paragraph(["高さと辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する（", ref("def_standard_dual_height"), "、", ref("def_walk_base_edge_parity"), "）。二を法とした加法では、一を足したとき、かつそのときに限り高さが変わる。"]),
                     ],
                   },
                 },

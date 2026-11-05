@@ -79,4 +79,49 @@ theorem standardDualHeight_horizontal_internal_changes (L m : ℕ) [NeZero L]
   unfold standardDualHeight walkBaseEdgeParity
   omega
 
+/-- 局所偶数次数を入力すると、縦方向の内部一歩は横切る縦辺だけで決まる。 -/
+theorem standardDualHeight_vertical_internal (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hvertex : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L false (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true (r : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 = 0) :
+    standardDualHeight L m γ
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) =
+      (standardDualHeight L m γ
+        ((i : ZMod L), (j : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 := by
+  have hrect := rectangle_crossing_parity L m γ i j hi hj hvertex
+  have hj0 : j < L := by omega
+  simp only [standardDualHeight, ZMod.val_cast_of_lt hi,
+    ZMod.val_cast_of_lt hj, ZMod.val_cast_of_lt hj0]
+  rw [Finset.sum_Icc_succ_top (by omega : 1 ≤ j + 1)]
+  omega
+
+theorem standardDualHeight_vertical_internal_changes (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hvertex : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L false (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true (r : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 = 0) :
+    (standardDualHeight L m γ
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) ≠
+      standardDualHeight L m γ ((i : ZMod L), (j : ZMod L))) ↔
+    walkBaseEdgeParity γ
+      (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) = 1 := by
+  rw [standardDualHeight_vertical_internal L m γ i j hi hj hvertex]
+  unfold standardDualHeight walkBaseEdgeParity
+  omega
+
 end Ising2DLambda.KacWard
