@@ -63235,6 +63235,64 @@ f_\gamma(i,j+1)
                     ],
                   },
                 },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_single_cell_standard_dual_height_seam",
+                  focus: {
+                    id: "kac_ward_claim_single_cell_standard_dual_height_seam",
+                    kind: "claim",
+                    title: { text: "辺長一の標準双対路の切断線一歩" },
+                    labels: ["claim_single_cell_standard_dual_height_seam"],
+                    habitat: "N",
+                    verification: ["sagemath/check/single-cell-standard-dual-height-seam"],
+                    lean: [
+                      "Ising2DLambda.KacWard.singleCell_horizontal_seam_edge_parity",
+                      "Ising2DLambda.KacWard.singleCell_vertical_seam_edge_parity",
+                      "Ising2DLambda.KacWard.singleCell_standardDualHeight_seam",
+                      "Ising2DLambda.NecSuf.KacWard.singleCell_standardDualHeight_seam",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L=1`), " の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        " を取り、横・縦切断線偶奇 ", math(String.raw`h(\gamma)=v(\gamma)=0`),
+                        " とする（", ref("def_closed_nonbacktracking_walk"), "、", ref("def_edge_sequence_seam_parities"), "）。",
+                        "唯一のセルの高さ ", math(String.raw`f_\gamma(0,0)\in\{0,1\}`),
+                        " と、横・縦の基底辺の通過偶奇について（", ref("def_standard_dual_height"), "、",
+                        ref("def_walk_base_edge_parity"), "）、"]),
+                      displayMath(String.raw`N_\gamma(n_{\mathrm h}(0,0))=N_\gamma(n_{\mathrm v}(0,0))=0`),
+                      paragraph(["が成り立ち、切断線を越える両方向の一歩は同じセルへ戻る。すなわち "]),
+                      displayMath(String.raw`f_\gamma(0,0)=\bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm h}(0,0))\bigr)\bmod2
+=\bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm v}(0,0))\bigr)\bmod2`),
+                      paragraph(["であり、どちらの方向でも高さは変わらない。"]),
+                    ],
+                    proof: [
+                      paragraph(["辺長一では各方向の全周は対応する基底辺一つからなる。",
+                        ref("claim_closed_walk_horizontal_column_parity_zero"), " と ",
+                        ref("claim_closed_walk_vertical_row_parity_zero"), " を唯一の列・行に適用すると、"]),
+                      displayMath(String.raw`\begin{aligned}
+N_\gamma(n_{\mathrm h}(0,0))
+&=\left(\sum_{r=0}^{0}N_\gamma(n_{\mathrm h}(r,0))\right)\bmod2
+&&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と一項の和}\bigr)\\
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\bigr),\\
+N_\gamma(n_{\mathrm v}(0,0))
+&=\left(\sum_{c=0}^{0}N_\gamma(n_{\mathrm v}(0,c))\right)\bmod2
+&&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と一項の和}\bigr)\\
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\bigr).
+\end{aligned}`),
+                      paragraph(["唯一のセルの高さは空和で零である（", ref("def_standard_dual_height"), "）。",
+                        "横・縦の通過偶奇の零をそれぞれ代入すると、"]),
+                      displayMath(String.raw`\begin{aligned}
+\bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm h}(0,0))\bigr)\bmod2
+&=f_\gamma(0,0)\bmod2&&\bigl(\because\ \text{上の横辺の零}\bigr)\\
+&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr),\\
+\bigl(f_\gamma(0,0)+N_\gamma(n_{\mathrm v}(0,0))\bigr)\bmod2
+&=f_\gamma(0,0)\bmod2&&\bigl(\because\ \text{上の縦辺の零}\bigr)\\
+&=f_\gamma(0,0)&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
               }],
             },
           },

@@ -665,4 +665,55 @@ theorem closedWalk_standardDualHeight_vertical_seam_changes (L m : ℕ) [NeZero 
   unfold walkBaseEdgeParity standardDualHeight
   omega
 
+/-- At side length one, the horizontal seam parity is the sole horizontal edge parity. -/
+theorem singleCell_horizontal_seam_edge_parity (m : ℕ)
+    (γ : Fin (m + 1) → OrientedEdge 1)
+    (hseam : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0) :
+    walkBaseEdgeParity γ (edgeOfRow 1 false 0 0) = 0 := by
+  have hpar := (horizontal_seam_column_parity γ).trans hseam
+  simp only [Fintype.sum_unique] at hpar
+  have hbase : edgeOfRow 1 false (default : ZMod 1) ((1 - 1 : ℕ) : ZMod 1) =
+      edgeOfRow 1 false 0 0 := by
+    congr 1
+  have hpar' : walkBaseEdgeParity γ (edgeOfRow 1 false 0 0) % 2 = 0 := by
+    calc
+      _ = walkBaseEdgeParity γ (edgeOfRow 1 false (default : ZMod 1)
+            ((1 - 1 : ℕ) : ZMod 1)) % 2 := by rw [hbase]
+      _ = 0 := hpar
+  unfold walkBaseEdgeParity at hpar' ⊢
+  omega
+
+/-- At side length one, the vertical seam parity is the sole vertical edge parity. -/
+theorem singleCell_vertical_seam_edge_parity (m : ℕ)
+    (γ : Fin (m + 1) → OrientedEdge 1)
+    (hseam : (∑ k : Fin (m + 1), verticalSeamParity (γ k)) % 2 = 0) :
+    walkBaseEdgeParity γ (edgeOfRow 1 true 0 0) = 0 := by
+  have hpar := (vertical_seam_row_parity γ).trans hseam
+  simp only [Fintype.sum_unique] at hpar
+  have hbase : edgeOfRow 1 true ((1 - 1 : ℕ) : ZMod 1) (default : ZMod 1) =
+      edgeOfRow 1 true 0 0 := by
+    congr 1
+  have hpar' : walkBaseEdgeParity γ (edgeOfRow 1 true 0 0) % 2 = 0 := by
+    calc
+      _ = walkBaseEdgeParity γ (edgeOfRow 1 true ((1 - 1 : ℕ) : ZMod 1)
+            (default : ZMod 1)) % 2 := by rw [hbase]
+      _ = 0 := hpar
+  unfold walkBaseEdgeParity at hpar' ⊢
+  omega
+
+/-- The two endpoints of a seam step name the same cell when the side length is one. -/
+theorem singleCell_standardDualHeight_seam (m : ℕ)
+    (γ : Fin (m + 1) → OrientedEdge 1)
+    (hhor : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0)
+    (hver : (∑ k : Fin (m + 1), verticalSeamParity (γ k)) % 2 = 0) :
+    standardDualHeight 1 m γ (0, 0) =
+        (standardDualHeight 1 m γ (0, 0) +
+          walkBaseEdgeParity γ (edgeOfRow 1 false 0 0)) % 2 ∧
+      standardDualHeight 1 m γ (0, 0) =
+        (standardDualHeight 1 m γ (0, 0) +
+          walkBaseEdgeParity γ (edgeOfRow 1 true 0 0)) % 2 := by
+  have hh := singleCell_horizontal_seam_edge_parity m γ hhor
+  have hv := singleCell_vertical_seam_edge_parity m γ hver
+  simp [hh, hv, standardDualHeight]
+
 end Ising2DLambda.KacWard

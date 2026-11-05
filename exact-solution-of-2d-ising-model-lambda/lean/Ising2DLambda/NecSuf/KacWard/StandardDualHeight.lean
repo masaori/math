@@ -445,4 +445,17 @@ theorem standardDualHeight_vertical_seam_changes_of_row_parity (L : ℕ) [NeZero
   exact standardDualHeight_vertical_seam_changes_of_line_parity L horizontalCross
     verticalCross i hL hi hvertex hline
 
+/-- A one-cell lattice has one crossing in each direction, and both ends name that cell. -/
+theorem singleCell_standardDualHeight_seam
+    (horizontalCross verticalCross : ZMod 1 → ZMod 1 → ℕ)
+    (hhor : horizontalCross 0 0 % 2 = 0)
+    (hver : verticalCross 0 0 % 2 = 0) :
+    standardDualHeight 1 horizontalCross verticalCross (0, 0) =
+        (standardDualHeight 1 horizontalCross verticalCross (0, 0) +
+          horizontalCross 0 0 % 2) % 2 ∧
+      standardDualHeight 1 horizontalCross verticalCross (0, 0) =
+        (standardDualHeight 1 horizontalCross verticalCross (0, 0) +
+          verticalCross 0 0 % 2) % 2 := by
+  simp [hhor, hver, standardDualHeight]
+
 end Ising2DLambda.NecSuf.KacWard
