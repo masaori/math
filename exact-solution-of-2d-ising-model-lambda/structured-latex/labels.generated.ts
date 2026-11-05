@@ -36,6 +36,7 @@ export const ALL_LABELS = [
   "claim_closed_walk_standard_dual_height_horizontal_seam",
   "claim_closed_walk_standard_dual_height_vertical_internal",
   "claim_closed_walk_vertical_row_parity_invariant",
+  "claim_closed_walk_vertical_row_parity_zero",
   "claim_coefficient_representation",
   "claim_coefficient_sum",
   "claim_column_translation_bijective",

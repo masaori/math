@@ -138,6 +138,19 @@ theorem horizontalCross_column_parity_zero (L : ℕ) [NeZero L]
   rw [← ZMod.natCast_zmod_val j]
   exact hnat j.val
 
+/-- 隣行の保存と最終行の零から、全ての行の偶奇が零となる。 -/
+theorem verticalCross_row_parity_zero (L : ℕ) [NeZero L]
+    (verticalCross : ZMod L → ZMod L → ℕ)
+    (hnext : ∀ i : ZMod L,
+      (∑ j : ZMod L, verticalCross i j) % 2 =
+        (∑ j : ZMod L, verticalCross (i + 1) j) % 2)
+    (hlast : (∑ j : ZMod L,
+      verticalCross ((L - 1 : ℕ) : ZMod L) j) % 2 = 0)
+    (i : ZMod L) :
+    (∑ j : ZMod L, verticalCross i j) % 2 = 0 := by
+  exact horizontalCross_column_parity_zero L
+    (fun j r => verticalCross r j) hnext hlast i
+
 /-- 各頂点で四辺の通過和が偶数なら、長方形の対向辺の偶奇は一致する。 -/
 theorem rectangle_crossing_parity (L : ℕ) [NeZero L]
     (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)

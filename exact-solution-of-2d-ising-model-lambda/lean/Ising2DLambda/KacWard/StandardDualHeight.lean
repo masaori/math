@@ -295,6 +295,47 @@ theorem closedWalk_horizontal_column_parity_zero {L m : ℕ} [NeZero L]
   rw [← ZMod.natCast_zmod_val j]
   exact hnat j.val
 
+/-- 縦切断線の偶奇が零なら、閉歩道の縦辺全列和はどの行でも偶数になる。 -/
+theorem closedWalk_vertical_row_parity_zero {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hseam : (∑ k : Fin (m + 1), verticalSeamParity (γ k)) % 2 = 0)
+    (i : ZMod L) :
+    (∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true i j)) % 2 = 0 := by
+  let B (r : ZMod L) :=
+    (∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true r j)) % 2
+  have hlast : B (((L - 1 : ℕ) : ZMod L)) = 0 := by
+    exact (vertical_seam_row_parity γ).trans hseam
+  have hL : 1 ≤ L := Nat.pos_of_ne_zero (NeZero.ne L)
+  have hwrap : (((L - 1 : ℕ) : ZMod L) + 1) = 0 := by
+    calc
+      (((L - 1 : ℕ) : ZMod L) + 1) = ((L - 1 + 1 : ℕ) : ZMod L) := by
+        rw [Nat.cast_add, Nat.cast_one]
+      _ = (L : ZMod L) := congrArg (fun n : ℕ => (n : ZMod L))
+        (Nat.sub_add_cancel hL)
+      _ = 0 := ZMod.natCast_self L
+  have hzero : B 0 = 0 := by
+    calc
+      B 0 = B (((L - 1 : ℕ) : ZMod L) + 1) := congrArg B hwrap.symm
+      _ = B ((L - 1 : ℕ) : ZMod L) := by
+        simpa only [B] using
+          (closedWalk_vertical_row_parity_invariant γ hγ
+            ((L - 1 : ℕ) : ZMod L)).symm
+      _ = 0 := hlast
+  have hnat (n : ℕ) : B (n : ZMod L) = 0 := by
+    induction n with
+    | zero => simpa using hzero
+    | succ n ih =>
+        calc
+          B ((n + 1 : ℕ) : ZMod L) = B ((n : ZMod L) + 1) := by simp
+          _ = B (n : ZMod L) := by
+            simpa only [B] using
+              (closedWalk_vertical_row_parity_invariant γ hγ (n : ZMod L)).symm
+          _ = 0 := ih
+  change B i = 0
+  rw [← ZMod.natCast_zmod_val i]
+  exact hnat i.val
+
 /-- 基点セルから列方向、次に行方向へ進む標準双対路の横断偶奇。 -/
 def standardDualHeight (L m : ℕ) [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
