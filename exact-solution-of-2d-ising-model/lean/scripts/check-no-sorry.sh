@@ -1919,6 +1919,7 @@ targets=(
   Ising2D.VPlusData.checkT_eq_prod_checkW_mul
   Ising2D.VPlusData.traceFactor
   Ising2D.VPlusData.sum_checkT_eq_traceFactor
+  Ising2D.VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six
   Ising2D.VPlusData.trace_epsilon_mul_V_step5
   Ising2D.VPlusData.gam_half_pos
   Ising2D.VPlusData.two_sinh_gam_half_pos
@@ -1926,6 +1927,11 @@ targets=(
   Ising2D.VPlusData.traceFactor_pos_step6
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V
+  Ising2D.VPlusData.trace_pos_of_eta_univ_eq_one_step7
+  Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos_step7
+  Ising2D.VPlusData.eta_univ_eq_one_iff_trace_pos_step7
+  Ising2D.VPlusData.trace_epsilon_mul_V_eq_ofReal
+  Ising2D.VPlusData.eta_univ_eq_one_iff_trace_pos
   Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos
   Ising2D.expPhase_conj
   Ising2D.checkPhase_conj_star

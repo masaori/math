@@ -29,9 +29,9 @@
 | Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
 | Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
-| Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5`（同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
+| Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`（1〜6 行目。Step 7 の `⟸` が引く）・`VPlusData.trace_epsilon_mul_V_step5`（それに 7・8 行目を続けた全体。同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 6 の 4 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・2・4 本目は同じ行の calc、人手が 1 行の 3 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
-| Step 7 | `eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 7 の同値と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 4 行の鎖 `(r,0) = r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ = (ȟϰ,0)` と成分の比較、`ȟ = −1` の背理の 4 行、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 3 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -531,17 +531,18 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
 
 /-! ## Step 5: (1) の等式 -/
 
-/-- **原文 Step 5** の 8 行の鎖（(1) の等式）:
-`tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = Σ_ε(ť_εȟ)_ℂ = (Σ_εť_εȟ)_ℂ = ((Σ_εť_ε)ȟ)_ℂ = (ϰȟ)_ℂ = (ȟϰ)_ℂ = ȟ_ℂϰ_ℂ = η_{(1,…,1)}ϰ_ℂ`
+/-- **原文 Step 5** の 8 行の鎖（(1) の等式）の 1〜6 行目:
+`tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = Σ_ε(ť_εȟ)_ℂ = (Σ_εť_εȟ)_ℂ = ((Σ_εť_ε)ȟ)_ℂ = (ϰȟ)_ℂ = (ȟϰ)_ℂ`
+（7・8 行目 `= ȟ_ℂϰ_ℂ = η_{(1,…,1)}ϰ_ℂ` は下の `trace_epsilon_mul_V_step5`）
 （人手の `M_col` が Lean の `r + 1`、`ϰ` が `D.traceFactor`、`ȟ` が `F.checkH`。人手の複素数の和
 `Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words_of_complex_numbers`）は、Step 1 の鎖の右辺では `NecSuf.binWordSum r`、
 付け替えの段の右辺では具体版 `binaryWordComplexSum r` で、2 行目の後の 1 段はその付け替え（`binaryWordComplexSum_eq_binWordSum`。
 運ぶ段で、人手の行は無い）。実数の和は `binaryWordRealSum r`）。必要十分版は置かない（効くのは、引いた
 Step 1・Step 3・Step 4 の鎖、`real_inclusion_preserves_sum_over_binary_words`・
-`real_sum_over_binary_words_distributes_in_left_factor`・`real_inclusion_preserves_product` と ℝ の乗法の交換則だけで、
+`real_sum_over_binary_words_distributes_in_left_factor` と ℝ の乗法の交換則だけで、
 この鎖はそれらをつなぐだけなので、この鎖に固有の取り払える構造が無い）。 -/
-theorem trace_epsilon_mul_V_step5 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
-    (epsilon (r + 1) * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) :=
+theorem trace_epsilon_mul_V_step5_rows_one_to_six {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    (epsilon (r + 1) * D.V).trace = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
   calc (epsilon (r + 1) * D.V).trace
       = NecSuf.binWordSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) :=
@@ -560,6 +561,15 @@ theorem trace_epsilon_mul_V_step5 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
         rw [D.sum_checkT_eq_traceFactor]                -- Step 4 の鎖
     _ = ((F.checkH * D.traceFactor : ℝ) : ℂ) := by
         rw [mul_comm]                                   -- ℝ の乗法の交換則
+
+/-- **原文 Step 5** の 8 行の鎖の全体（(1) の等式）。1〜6 行目は `trace_epsilon_mul_V_step5_rows_one_to_six`
+（Step 7 の `⟸` が 1〜6 行目だけを引くので分けた）、7・8 行目はこの calc の 2 段である
+（7 行目の根拠は `real_inclusion_preserves_product`、8 行目は `ȟ` の取り方）。必要十分版は置かない（1〜6 行目と同じ理由）。 -/
+theorem trace_epsilon_mul_V_step5 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    (epsilon (r + 1) * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) :=
+  calc (epsilon (r + 1) * D.V).trace
+      = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
+        D.trace_epsilon_mul_V_step5_rows_one_to_six     -- Step 5 の鎖の 1〜6 行目
     _ = ((F.checkH : ℝ) : ℂ) * ((D.traceFactor : ℝ) : ℂ) :=
         (real_inclusion_mul _ _).symm                   -- `real_inclusion_preserves_product`（`a → ȟ`、`b → ϰ`）を右辺から左辺へ
     _ = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) := by
@@ -643,18 +653,105 @@ theorem traceFactor_pos : 0 < D.traceFactor := by
   | 0, F, D => simpa [traceFactor] using D.hC
   | r + 1, F, D => exact traceFactor_pos_step6 D
 
-/-! ## Step 7（旧い Step の分け方のまま） -/
+/-! ## Step 7: (3) の同値
 
-/-- **人手証明の最後の同値**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`（の一方向）。 -/
+人手は `z ∈ ℂ` の `z > 0` を「`z = r_ℂ` を満たす `r ∈ ℝ_{>0}` が存在する」と定める。Lean ではこれを
+`∃ s : ℝ, 0 < s ∧ z = (s : ℂ)` と書く（人手の `r` が Lean の `s`。Lean の `r` は人手の `M_col` が `r + 1` の `r` に使っている）。 -/
+
+/-- **原文 Step 7** の `⟹`: `η_{(1,…,1)} = +1` なら
+`tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ` で、(2) の `ϰ ∈ ℝ_{>0}` を `r` に取れば `tr(εV^{(+)}) > 0`（人手の `M_col` が Lean の `r + 1`）。 -/
+theorem trace_pos_of_eta_univ_eq_one_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F)
+    (hη : F.eta Finset.univ = 1) :
+    ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ) :=
+  ⟨D.traceFactor, D.traceFactor_pos_step6,             -- (2) の `ϰ ∈ ℝ_{>0}` を `r` に取る
+    calc (epsilon (r + 1) * D.V).trace
+        = 1 * ((D.traceFactor : ℝ) : ℂ) := by
+          rw [D.trace_epsilon_mul_V_step5, hη]          -- (1) と `η_{(1,…,1)} = 1_ℂ`
+      _ = ((D.traceFactor : ℝ) : ℂ) := one_mul _⟩      -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+
+/-- **原文 Step 7** の `⟸`: `tr(εV^{(+)}) = r_ℂ`（`r ∈ ℝ_{>0}`）なら
+`(r, 0) = r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ = (ȟϰ, 0)`、成分の比較で `r = ȟϰ`、
+`ȟ = −1` と仮定すると `r = ȟϰ = (−1)ϰ = −ϰ < 0` で `r > 0` に反するので `ȟ = 1`、
+`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ`（人手の `M_col` が Lean の `r + 1`、人手の `r` が Lean の `s`）。 -/
+theorem eta_univ_eq_one_of_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F)
+    (htr : ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ)) :
+    F.eta Finset.univ = 1 := by
+  obtain ⟨s, hs, hst⟩ := htr
+  have hpair : (⟨s, 0⟩ : ℂ) = ⟨F.checkH * D.traceFactor, 0⟩ :=
+    calc (⟨s, 0⟩ : ℂ)
+        = (s : ℂ) := rfl                                -- `inclusion_rr_to_cc` の定義を右辺から左辺へ
+      _ = (epsilon (r + 1) * D.V).trace := hst.symm     -- `r` の取り方
+      _ = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
+          D.trace_epsilon_mul_V_step5_rows_one_to_six   -- Step 5 の鎖の 1 行目から 6 行目
+      _ = ⟨F.checkH * D.traceFactor, 0⟩ := rfl          -- `inclusion_rr_to_cc` の定義
+  -- `definition_of_cc` の `ℂ = ℝ × ℝ` の元の等号は成分ごと
+  have hcomp : s = F.checkH * D.traceFactor := (Complex.ext_iff.mp hpair).1
+  have hH : F.checkH = 1 := by
+    rcases F.checkH_mem with h1 | hm1
+    · exact h1
+    · -- `ȟ = −1` と仮定すると `r < 0` となり `r > 0` に反する
+      exfalso
+      have hneg : s < 0 :=
+        calc s
+            = F.checkH * D.traceFactor := hcomp          -- 直前の成分の比較
+          _ = (-1) * D.traceFactor := by rw [hm1]        -- 仮定 `ȟ = −1`
+          _ = -D.traceFactor := neg_one_mul _            -- ℝ で `(−1)a = −a`（`a → ϰ`）
+          _ < 0 := neg_neg_of_pos D.traceFactor_pos_step6
+                                                        -- ℝ で `a > 0` なら `−a < 0`（`a → ϰ`）に (2) の `ϰ > 0` を当てる
+      exact lt_asymm hs hneg
+  calc F.eta Finset.univ
+      = ((F.checkH : ℝ) : ℂ) := F.checkH_ofReal.symm    -- `ȟ` の取り方
+    _ = 1 := by rw [hH, Complex.ofReal_one]             -- `ȟ = 1` と `inclusion_rr_to_cc` の略記
+
+/-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (3)**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`
+（人手の `M_col` が Lean の `r + 1`）。必要十分版は置かない。Step 7 の鎖が新しく効かせるのは、
+`inclusion_rr_to_cc` の定義、`ℂ = ℝ × ℝ` の元の等号が成分ごとであること、`ȟ ∈ {1,−1}`、ℝ の順序環としての規則
+（`(−1)a = −a`、`a > 0` なら `−a < 0`、狭義順序の非対称律）だけで、ℝ の完備性は効かない。しかし引く (1)・(2) の主張が
+`ϰ ∈ ℝ` と `ℝ ⊂ ℂ` の包含に固定されていて、この鎖だけを順序環へ持ち上げても (1)・(2) を当てられないので、置かない。 -/
+theorem eta_univ_eq_one_iff_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    F.eta Finset.univ = 1 ↔ ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ) :=
+  ⟨D.trace_pos_of_eta_univ_eq_one_step7, D.eta_univ_eq_one_of_trace_pos_step7⟩
+
+end VPlusData
+
+namespace VPlusData
+
+variable {F : CheckFermi M} (D : VPlusData M F)
+
+/-- (1) を `tr(εV^{(+)}) = (ȟϰ)_ℂ` の形で読んだもの（`M` を一般に取る形。運ぶ段で、人手の行は無い）。
+`M = r + 1` は Step 5 の鎖の 1〜6 行目 `trace_epsilon_mul_V_step5_rows_one_to_six` と同じ等式である。
+下の `eta_univ_eq_one_of_trace_pos` が、`0 < Re tr(εV^{(+)})` の形の仮定から人手の `tr(εV^{(+)}) > 0` を作るのに使う。 -/
+theorem trace_epsilon_mul_V_eq_ofReal :
+    (epsilon M * D.V).trace = ((F.checkH * D.traceFactor : ℝ) : ℂ) := by
+  rw [D.trace_epsilon_mul_V, ← F.checkH_ofReal, real_inclusion_mul]
+
+/-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (3)**（`M` を一般に取る形）。`M = r + 1` は Step 7 の
+`eta_univ_eq_one_iff_trace_pos_step7` である。人手の範囲外の `M = 0` は、(1)・(2) の `M` を一般に取る形から
+`ȟ = −1` を `Complex.ofReal_injective` と `linarith` で退ける。 -/
+theorem eta_univ_eq_one_iff_trace_pos :
+    F.eta Finset.univ = 1 ↔ ∃ s : ℝ, 0 < s ∧ (epsilon M * D.V).trace = (s : ℂ) := by
+  match M, F, D with
+  | r + 1, F, D => exact D.eta_univ_eq_one_iff_trace_pos_step7
+  | 0, F, D =>
+    constructor
+    · intro hη
+      exact ⟨D.traceFactor, D.traceFactor_pos, by rw [D.trace_epsilon_mul_V, hη, one_mul]⟩
+    · rintro ⟨s, hs, hst⟩
+      have hcomp : s = F.checkH * D.traceFactor :=
+        Complex.ofReal_injective (hst.symm.trans D.trace_epsilon_mul_V_eq_ofReal)
+      rcases F.checkH_mem with h1 | hm1
+      · rw [← F.checkH_ofReal, h1, Complex.ofReal_one]
+      · have := D.traceFactor_pos
+        rw [hm1] at hcomp
+        linarith
+
+/-- (3) の `⟸` を、下流（`TheoremMaxEigenvectorInEvenSector.lean`・`ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`）が
+渡す `0 < Re tr(εV^{(+)})` の形の仮定で読んだもの。`tr(εV^{(+)}) = (ȟϰ)_ℂ`（`trace_epsilon_mul_V_eq_ofReal`）なので
+`r := ȟϰ` を取れば `r = Re tr(εV^{(+)}) > 0` で人手の `tr(εV^{(+)}) > 0` になり、(3) の `⟸` を当てる（運ぶ段）。 -/
 theorem eta_univ_eq_one_of_trace_pos (h : 0 < ((epsilon M * D.V).trace).re) :
     F.eta (Finset.univ : Finset (Fin M)) = 1 := by
-  rcases F.eta_mem (Finset.univ : Finset (Fin M)) with hη | hη
-  · exact hη
-  · exfalso
-    rw [D.trace_epsilon_mul_V, hη] at h
-    simp only [neg_mul, one_mul, Complex.neg_re, Complex.ofReal_re] at h
-    have := D.traceFactor_pos
-    linarith
+  rw [D.trace_epsilon_mul_V_eq_ofReal, Complex.ofReal_re] at h
+  exact D.eta_univ_eq_one_iff_trace_pos.mpr ⟨F.checkH * D.traceFactor, h, D.trace_epsilon_mul_V_eq_ofReal⟩
 
 end VPlusData
 
