@@ -63181,9 +63181,56 @@ f_\gamma(i,j+1)
 &=\left(\sum_{r=0}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
 &&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\text{ と }\blkref{def_residue_maps}\bigr)\\
 &=\left(N_\gamma(n_{\mathrm h}(0,j))+\sum_{r=1}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
-&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)\,.
+&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)
 \end{aligned}`),
                       paragraph(["この等式を ", ref("claim_standard_dual_height_horizontal_seam_conditional"),
+                        " の全周偶奇の仮定へ代入すると、主張の高さ差と同値が従う。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_standard_dual_height_vertical_seam",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_standard_dual_height_vertical_seam",
+                    kind: "claim",
+                    title: { text: "閉歩道の標準双対路で縦方向の切断線を越える一歩" },
+                    labels: ["claim_closed_walk_standard_dual_height_vertical_seam"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-standard-dual-height-vertical-seam"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_vertical_seam",
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_vertical_seam_changes",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_vertical_seam_of_row_parity",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_vertical_seam_changes_of_row_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、代表 ", math(String.raw`0\le i<L`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。縦切断線偶奇 ",
+                        math(String.raw`v(\gamma)=0`), " と仮定する（", ref("def_edge_sequence_seam_parities"),
+                        "）。", ref("def_standard_dual_height"), " の高さは"]),
+                      displayMath(String.raw`f_\gamma(i,0)=\bigl(f_\gamma(i,L-1)+N_\gamma(n_{\mathrm v}(i,0))\bigr)\bmod2`),
+                      paragraph(["を満たす。従って切断線を越える一歩で高さが変わることと ",
+                        math(String.raw`N_\gamma(n_{\mathrm v}(i,0))=1`), " は同値である（",
+                        ref("def_walk_base_edge_parity"), "）。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_closed_walk_vertical_row_parity_zero"),
+                        " を行 ", math(String.raw`\pi(i)\in\mathbb Z/L\mathbb Z`), " に適用する。",
+                        ref("claim_edge_row_partition"), " の一意な辺番号の分解により、全列和は ",
+                        math(String.raw`c=0`), " の項と ", math(String.raw`1\le c\le L-1`),
+                        " の項へ分かれる。したがって"]),
+                      displayMath(String.raw`\begin{aligned}
+0
+&=\left(\sum_{c=0}^{L-1}N_\gamma(n_{\mathrm v}(i,c))\right)\bmod2
+&&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\text{ と }\blkref{def_residue_maps}\bigr)\\
+&=\left(N_\gamma(n_{\mathrm v}(i,0))+\sum_{c=1}^{L-1}N_\gamma(n_{\mathrm v}(i,c))\right)\bmod2
+&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)\,.
+\end{aligned}`),
+                      paragraph(["この等式を ", ref("claim_standard_dual_height_vertical_seam_conditional"),
                         " の全周偶奇の仮定へ代入すると、主張の高さ差と同値が従う。"]),
                     ],
                   },
