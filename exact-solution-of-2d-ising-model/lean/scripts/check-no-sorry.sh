@@ -2254,6 +2254,8 @@ targets=(
   Ising2D.sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker
   Ising2D.siteProd_ite_smul
   Ising2D.I_smul_Y_mul_Z_next_of_not_last
+  Ising2D.siteProd_ite_ite_smul
+  Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite
   Ising2D.boundaryYXYFamily
   Ising2D.Y_last_mul_Z_first
   Ising2D.epsilon_mul_sigmaZ_last_mul_sigmaZ_first

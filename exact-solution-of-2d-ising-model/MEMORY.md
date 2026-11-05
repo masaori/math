@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-05: Lean の通しの証明のゴールラインの確認の百五十七個目として、`H1_plus_in_sigma_z_form` の (f3) 準備 4 を行った。人手の準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG` を新しい定理 `neg_I_smul_Y_lastSite_mul_Z_firstSite` の 17 段の calc として `ClaimH1PlusInSigmaZForm.lean` に置き、10 段目（`j → M_col`）のための補助 `siteProd_ite_ite_smul` を足した。旧い道（`neg_I_smul_Y_last_mul_Z_first` ほか）は最後の鎖がまだ使うので残した。必要十分版は置かない。本文と SageMath は不変。レビューの必須の指摘は無く、任意の指摘 4 件を直した。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。次は (f4) 最後の 7 行の鎖。
+
 2026-11-05: 全証明の SageMath 検算として、`c_plus_equals_Lambda_half_integer`（c_+(M_col) = Λ̌_max = Λ^{(1/2)}_{M_col}）に検算 `sagemath/check/c_plus_equals_Lambda_half_integer/` を付けた（未検算 6 件）。本文の ψ̌ の数体と成分が QQ の V^{(+)}・W で全ての鎖を厳密に確かめ、c_+ を W_ℝ の F^{(+)} への制限の最大固有値として独立に作って比べた。人手証明を書き直した（主張・計算は不変）: ι^n: ℝ^n → ℂ^n と W_ℝ に名前を付けて ℝ の値と ℂ の値を (·)_ℂ でつなぎ、V^{(+)} の成分が実であることの散文を W と ε の成分が実であることからの成分の鎖に替え、結びの鎖を置いた。主張 `sum_over_binary_words_entrywise` を足して検算を付けた。三回のレビューで必須の指摘が無くなるまで直した。Lean は不変（新しい行との 1 対 1 は Lean の連続実行の受け持ち）。次は `gamma_kappa_identity`。
 2026-11-05: Lean の通しの証明のゴールラインの確認の百五十六個目として、`H1_plus_in_sigma_z_form` の (f2) 準備 3 を行った。`I_smul_Y_mul_Z_next_of_not_last`（型は不変）の証明を人手の準備 3 の 11 行と 1 対 1 の calc に置き換え、補助 `siteProd_ite_smul`（`kronecker_multilinear` の `r = 1` の式）を足した。必要十分版は置かない。本文と SageMath は不変。レビューの必須の指摘は無く、任意の指摘 4 件を直した。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。次は (f3) 準備 4。
 

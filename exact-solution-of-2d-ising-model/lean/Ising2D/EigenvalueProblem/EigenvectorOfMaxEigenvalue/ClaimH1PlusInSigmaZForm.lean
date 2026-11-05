@@ -13,15 +13,16 @@
 | 準備 1 の `Y_m`・`Z_{m+1}` の鎖（各 2 行）と `σ_m^zσ_{m+1}^z` の鎖（4 行） | `Y_kronecker_form`・`Z_nextSite_kronecker_form`（定義そのもので `rfl`）と `sigmaZ_mul_sigmaZ_nextSite_kronecker` の `calc` の 4 段（サイト `m` と `m+1` が異なることは `ne_nextSite_of_not_last`） |
 | 準備 2 の `Y_{M_col}`・`Z_1` の鎖（各 2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`rfl`）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
 | 準備 3 の 11 行の鎖 `i(Y_mZ_{m+1}) = ⋯ = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`） | `I_smul_Y_mul_Z_next_of_not_last` の `calc` の 11 段（7 段目の `kronecker_multilinear` の `r = 1` の式は `siteProd_ite_smul`） |
-| 境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
-| 境界項の右辺 `εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` |
-| 突き合わせ `-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | `neg_I_smul_Y_last_mul_Z_first` |
+| 準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG`（`M_col ≥ 2`） | `neg_I_smul_Y_lastSite_mul_Z_firstSite` の `calc` の 17 段（9・11 段目の `kronecker_multilinear` の `r = 1` の式（`j → 1`）は `siteProd_ite_smul`、10 段目（`j → M_col`）は `siteProd_ite_ite_smul`） |
+| （旧い道）境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
+| （旧い道）境界項の右辺 `εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` |
+| （旧い道）突き合わせ `-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | `neg_I_smul_Y_last_mul_Z_first` |
 | `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary` |
 | 最後の式変形 `iH_1^{(+)} = ⋯ = D_0 + εG` | `H1_plus_in_sigma_z_form` |
 
-2026-11-04 に書き直された人手の鎖のうち、準備 1・2・3 はこのファイルの同名の節と 1 対 1 である。準備 4（境界の辺の 17 行）・最後の 7 行の鎖は、まだ上の表の旧い道（`Y_last_mul_Z_first` ほか）で閉じており、人手の新しい鎖と 1 対 1 ではない。
+2026-11-04 に書き直された人手の鎖のうち、準備 1・2・3・4 はこのファイルの同名の節と 1 対 1 である。最後の 7 行の鎖（`H1_plus_in_sigma_z_form`）は、まだ上の表の旧い道（`Y_last_mul_Z_first` ほか）で閉じており、人手の新しい鎖と 1 対 1 ではない。
 
-人手の `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積
+（旧い道）人手の `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積
 `siteProd` に入れたものとして書く。「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は
 Lean では `siteProd_mul`（サイトごとの積）で、各サイトの因子を取り出す段は族の各成分の計算で行う。
 
@@ -31,6 +32,7 @@ Lean では `siteProd_mul`（サイトごとの積）で、各サイトの因子
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
 
 namespace Ising2D
 
@@ -312,6 +314,126 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
       one_smul_tensorPow _                              -- `scalar_multiple_by_one`
     _ = sigmaZ m * sigmaZ (nextSite m) :=
       (sigmaZ_mul_sigmaZ_nextSite_kronecker m hm).symm  -- 準備 1 の `σ_m^zσ_{m+1}^z` の鎖を右辺から左辺へ
+
+/-! ## 準備 4（境界の辺）
+
+人手の準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG`（`M_col ≥ 2`）。添字の読み替えは準備 2 と同じで、
+族は `i = firstSite M _`（人手の第 `1` 因子）・`i = lastSite M _`（第 `M_col` 因子）・それ以外（第 `2` から第 `M_col-1` 因子）の 3 つの場合の `if` で書く。 -/
+
+/-- 人手 `kronecker_multilinear` の `r = 1` の式（`j → m`）を、族の外側の `if` が別のサイト `m'` を取り、
+第 `m` 因子が内側の `if` にある族について述べたもの（`m ≠ m'`）。`siteProd_ite_smul` と同じく、
+`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回使う。族を `Function.update` で書き直す段は、
+因子の並びの書き方を揃えるだけである。仮定 `m ≠ m'` は、第 `m` 因子を取り出すときに外側の `if`（`i = m'`）が成り立たないことを言うのに使う。 -/
+theorem siteProd_ite_ite_smul (m' m : Fin M) (hne : m ≠ m') (c : ℂ) (B A : Matrix (Fin 2) (Fin 2) ℂ)
+    (G : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
+    siteProd M (fun i => if i = m' then B else if i = m then c • A else G i)
+      = c • siteProd M (fun i => if i = m' then B else if i = m then A else G i) := by
+  have hc : (fun i => if i = m' then B else if i = m then c • A else G i)
+      = Function.update (fun i => if i = m' then B else if i = m then A else G i) m (c • A) := by
+    funext i
+    rw [Function.update_apply]
+    by_cases h : i = m
+    · rw [if_pos h, h, if_neg hne, if_pos rfl]
+    · simp only [h, ↓reduceIte]
+  have h1 : (fun i => if i = m' then B else if i = m then A else G i)
+      = Function.update (fun i => if i = m' then B else if i = m then A else G i) m A := by
+    funext i
+    rw [Function.update_apply]
+    by_cases h : i = m
+    · rw [if_pos h, h, if_neg hne, if_pos rfl]
+    · simp only [h, ↓reduceIte]
+  rw [hc]
+  conv_rhs => rw [h1]
+  exact (siteProd M).map_update_smul _ m c A
+
+/-- **人手の準備 4**: `-(i(Y_{M_col}Z_1)) = εG`（`M_col ≥ 2`）。人手の 17 行と `calc` の 17 段が 1 対 1 に対応する。 -/
+theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :
+    -(Complex.I • (Y (lastSite M (by omega)) * Z (firstSite M (by omega))))
+      = epsilon M * boundaryG M (by omega) := by
+  have hM0 : M ≠ 0 := by omega
+  have hne := firstSite_ne_lastSite hM
+  have hlast : ((lastSite M hM0 : Fin M) : ℕ) = M - 1 := by simp [lastSite]
+  have hfirst : ((firstSite M hM0 : Fin M) : ℕ) = 0 := by simp [firstSite]
+  calc
+    -(Complex.I • (Y (lastSite M hM0) * Z (firstSite M hM0)))
+        = (-1 : ℂ) • (Complex.I • (Y (lastSite M hM0) * Z (firstSite M hM0))) :=
+      neg_eq_neg_one_smul_tensorPow _                   -- `negation_is_scalar_multiple_by_minus_one`
+    _ = ((-1 : ℂ) * Complex.I) • (Y (lastSite M hM0) * Z (firstSite M hM0)) :=
+      smul_smul _ _ _                                   -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul` を 1 回）
+    _ = (-Complex.I) • (Y (lastSite M hM0) * Z (firstSite M hM0)) := by
+      rw [neg_one_mul]                                  -- `multiply_by_minus_one`（Lean の具体版は無く、mathlib の `neg_one_mul` を 1 回）
+    _ = (-Complex.I) • (siteProd M (jwFamily (lastSite M hM0) pauliY) * Z (firstSite M hM0)) := by
+      rw [Y_lastSite_kronecker_form]                    -- 準備 2 の `Y_{M_col}` の鎖
+    _ = (-Complex.I) • (siteProd M (jwFamily (lastSite M hM0) pauliY)
+          * siteProd M (Function.update 1 (firstSite M hM0) pauliZ)) := by
+      rw [Z_firstSite_kronecker_form]                   -- 準備 2 の `Z_1` の鎖
+    _ = (-Complex.I) • siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliX * pauliZ
+          else if i = lastSite M hM0 then pauliY * 1 else pauliX * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`。`M ≥ 2` より第 `1` 因子と第 `M_col` 因子は異なる）
+      congr 2
+      funext i
+      simp only [Pi.mul_apply]
+      by_cases ha : i = firstSite M hM0
+      · rw [ha, Function.update_self, if_pos rfl, jwFamily_of_lt (by omega)]
+      · rw [Function.update_of_ne ha, if_neg ha]
+        by_cases hb : i = lastSite M hM0
+        · rw [hb, jwFamily_self, if_pos rfl]; rfl
+        · have hv : (i : ℕ) < M - 1 := by
+            have := i.isLt
+            have : (i : ℕ) ≠ M - 1 := fun h => hb (Fin.val_injective (by rw [h, hlast]))
+            omega
+          rw [jwFamily_of_lt (by omega), if_neg hb]; rfl
+    _ = (-Complex.I) • siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliX * pauliZ
+          else if i = lastSite M hM0 then pauliY else pauliX) := by
+      rw [mul_identity_matrix pauliY, mul_identity_matrix pauliX]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult` を `AI` の形の因子（第 `2` から第 `M_col` 因子）へ同時適用
+    _ = (-Complex.I) • siteProd M (fun i =>
+          if i = firstSite M hM0 then (-Complex.I) • pauliY
+          else if i = lastSite M hM0 then pauliY else pauliX) := by
+      rw [pauliX_mul_pauliZ_eq]                         -- `pauli_x_times_pauli_z`
+    _ = (-Complex.I) • ((-Complex.I) • siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliY
+          else if i = lastSite M hM0 then pauliY else pauliX)) := by
+      rw [siteProd_ite_smul]                            -- `kronecker_multilinear` の `r = 1` の式（`j → 1`）
+    _ = (-Complex.I) • siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliY
+          else if i = lastSite M hM0 then (-Complex.I) • pauliY else pauliX) := by
+      rw [siteProd_ite_ite_smul _ _ hne.symm]           -- `kronecker_multilinear` の `r = 1` の式（`j → M_col`）を右辺から左辺へ
+    _ = siteProd M (fun i =>
+          if i = firstSite M hM0 then (-Complex.I) • pauliY
+          else if i = lastSite M hM0 then (-Complex.I) • pauliY else pauliX) := by
+      rw [siteProd_ite_smul]                            -- `kronecker_multilinear` の `r = 1` の式（`j → 1`）を右辺から左辺へ
+    _ = siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliX * pauliZ
+          else if i = lastSite M hM0 then pauliX * pauliZ else pauliX) := by
+      rw [pauliX_mul_pauliZ_eq]                         -- `pauli_x_times_pauli_z` を 2 箇所へ右辺から左辺へ同時適用
+    _ = siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliX * pauliZ
+          else if i = lastSite M hM0 then pauliX * pauliZ else pauliX * 1) := by
+      rw [mul_identity_matrix pauliX]                   -- `identity_matrix_is_right_unit_of_mat_mult` を右辺から左辺へ同時適用（第 `2` から第 `M_col-1` 因子）
+    _ = siteProd M (fun _ => pauliX) * siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliZ
+          else if i = lastSite M hM0 then pauliZ else 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1) を右辺から左辺へ
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      by_cases ha : i = firstSite M hM0
+      · rw [if_pos ha, if_pos ha]
+      · rw [if_neg ha, if_neg ha]
+        by_cases hb : i = lastSite M hM0
+        · rw [if_pos hb, if_pos hb]
+        · rw [if_neg hb, if_neg hb]
+    _ = epsilon M * siteProd M (fun i =>
+          if i = firstSite M hM0 then pauliZ
+          else if i = lastSite M hM0 then pauliZ else 1) := by
+      rw [epsilon_kronecker_form]                       -- 準備 2 の `ε` の式を右辺から左辺へ
+    _ = epsilon M * (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0)) := by
+      rw [sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker hM]
+                                                        -- 準備 2 の `σ_{M_col}^zσ_1^z` の鎖を右辺から左辺へ
+    _ = epsilon M * boundaryG M hM0 := rfl              -- `def_G_boundary_operator`
 
 /-! ## 境界項 -/
 
