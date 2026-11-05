@@ -69200,7 +69200,7 @@ C_m\bigl(u^{(k_0)}\bigr)
                         "一周期の歩の和は、",
                       ]),
                       displayMath(String.raw`C_m(u)=t_{\circ}(\gamma)
-\qquad\bigl(\because\ \blkref{claim_periodic_plane_lift_period_turning}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_periodic_plane_lift_period_turning}\bigr)`),
                       paragraph([
                         "符号反転した平行階段の射影辺列を ",
                         math(String.raw`R_-:=\Pi(-G^\gamma_0,\ldots,-G^\gamma_n)`),
@@ -69211,7 +69211,7 @@ C_m\bigl(u^{(k_0)}\bigr)
 C_n(r)&=t_{\circ}(R_-)
 &&\bigl(\because\ \blkref{claim_plane_projection_cyclic_turning}\bigr)\\
 &=0
-&&\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\bigr).
+&&\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\bigr)
 \end{aligned}`),
                       paragraph([
                         "射影が閉じた非後退辺列になることを確かめる。",
@@ -69229,7 +69229,7 @@ C_n(r)&=t_{\circ}(R_-)
 \kappa(P_m)&=\kappa(P_0)
 &&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と同じ余り}\bigr)\\
 &=M
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の基点条件}\bigr).
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の基点条件}\bigr)
 \end{aligned}`),
                       paragraph([
                         "固定列の定義（", ref("claim_one_sided_closure_junction_pairs"),
@@ -69251,7 +69251,7 @@ C_n(r)&=t_{\circ}(R_-)
 &=\kappa(P_1)-M
 &&\bigl(\because\ \kappa(P_0)=M\bigr)\\
 &\le0
-&&\bigl(\because\ \kappa(P_1)\le M\bigr).
+&&\bigl(\because\ \kappa(P_1)\le M\bigr)
 \end{aligned}`),
                       paragraph([
                         "任意の ", math(String.raw`i\in\{0,\ldots,b-1\}\subset\mathbb N`), " を取る。",
@@ -69265,7 +69265,7 @@ C_n(r)&=t_{\circ}(R_-)
 &=-\kappa(v(b-i-1))
 &&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
 &<0
-&&\bigl(\because\ 0\le b-i-1<b\text{ と }\kappa(v(b-i-1))>0\bigr).
+&&\bigl(\because\ 0\le b-i-1<b\text{ と }\kappa(v(b-i-1))>0\bigr)
 \end{aligned}`),
                       paragraph([
                         "平行階段の横断座標は ", math(String.raw`\kappa(G_s)\le0`),
@@ -69293,7 +69293,7 @@ C_n(r)&=t_{\circ}(R_-)
 &=\kappa(G_{n-1})
 &&\bigl(\because\ \kappa(G_n)=0\bigr)\\
 &\le0
-&&\bigl(\because\ \kappa(G_{n-1})\le0\bigr).
+&&\bigl(\because\ \kappa(G_{n-1})\le0\bigr)
 \end{aligned}`),
                       paragraph([
                         "四接合（", ref("claim_one_sided_closure_junction_pairs"),
@@ -69307,7 +69307,7 @@ C_n(r)&=t_{\circ}(R_-)
 \kappa(x(0))&<0\le-\kappa(r(n-1))
 &&\bigl(\because\ \kappa(x(0))<0,\ \kappa(r(n-1))\le0\bigr),\\
 \kappa(x(b-1))&<0\le-\kappa(u(0))
-&&\bigl(\because\ \kappa(x(b-1))<0,\ \kappa(u(0))\le0\bigr).
+&&\bigl(\because\ \kappa(x(b-1))<0,\ \kappa(u(0))\le0\bigr)
 \end{aligned}`),
                       paragraph([
                         "となる。逆ベクトルなら横断座標も互いの符号反転となるので、各接合で逆向きの歩は隣り合わない。",
@@ -69339,7 +69339,7 @@ t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 &=t_{\circ}(\gamma)+0
 &&\bigl(\because\ \text{上で示した }C_n(r)=0\bigr)\\
 &=t_{\circ}(\gamma)
-&&\bigl(\because\ \mathbb Z\text{ の加法の零元の法則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の加法の零元の法則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "任意の正の周期数で隣り合う項の差が同じ整数となるので、等差数列の主張も従う。",
