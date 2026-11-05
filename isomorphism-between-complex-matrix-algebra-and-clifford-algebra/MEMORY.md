@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-05: スカラー倍と行列の積の両立の右の因子 λ∗(AB)=A(λ∗B)（ラベル claim_scalar_multiple_is_compatible_with_matrix_product_in_right_factor）を示した。次は Mat_X(ℂ) が ℂ-代数であること（線型空間の公理・結合法則・左右の分配法則・左右の単位元・左右のスカラー倍との両立の八行を ℂ-代数の定義 def_complex_algebra の条件に当てる）。
 - 2026-11-05: 「スカラー倍と行列の積の両立」を台帳で左右の二行に割り、左の因子 λ∗(AB)=(λ∗A)B（ラベル claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor）を示した。次は右の因子 λ∗(AB)=A(λ∗B)（claim_scalar_multiple_of_sum_over_finite_set のあと、各項 (λ·A_{x,z})·B_{z,y} を ℂ の乗法の結合法則・交換法則で A_{x,z}·(λ·B_{z,y}) に書き直し、claim_sum_over_finite_set_depends_only_on_terms を引く）。
 - 2026-11-05: 単位行列を右から掛けても行列が変わらないこと（ラベル claim_identity_matrix_is_right_unit_of_matrix_product、A·1=A）を示した。次はスカラー倍と行列の積の両立（左の因子・右の因子。claim_scalar_multiple_of_sum_over_finite_set と、右の因子では claim_sum_over_finite_set_depends_only_on_terms を引く）。
 - 2026-11-05: 「単位行列が行列の積の単位元であること」を台帳で左右の二行に割り、単位行列を左から掛けても行列が変わらないこと（ラベル claim_identity_matrix_is_left_unit_of_matrix_product、1·A=A）を示した。次は右から掛ける A·1=A（各項 A_{x,z}·δ_{z,y} を ℂ の乗法の交換法則と δ_{z,y}=δ_{y,z} で δ_{y,z}·A_{x,z} に書き直し、claim_sum_over_finite_set_with_kronecker_delta_picks_term を x:=y で当てる）。
