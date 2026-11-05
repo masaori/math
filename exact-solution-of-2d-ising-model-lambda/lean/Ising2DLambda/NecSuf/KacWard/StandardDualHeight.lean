@@ -258,4 +258,45 @@ theorem standardDualHeight_horizontal_seam_changes_of_line_parity (L : ℕ) [NeZ
   unfold standardDualHeight
   omega
 
+/-- A vanishing full-column parity and its finite decomposition give the seam step. -/
+theorem standardDualHeight_horizontal_seam_of_column_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (j : ℕ) (hL : 2 ≤ L) (hj : j < L)
+    (hcolumn : (∑ i : ZMod L, horizontalCross i (j : ZMod L)) % 2 = 0)
+    (hdecomp :
+      (∑ i : ZMod L, horizontalCross i (j : ZMod L)) =
+        (∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+          horizontalCross 0 (j : ZMod L)) :
+    standardDualHeight L horizontalCross verticalCross (0, (j : ZMod L)) =
+      (standardDualHeight L horizontalCross verticalCross
+          (((L - 1 : ℕ) : ZMod L), (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 := by
+  have hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 = 0 := by
+    rw [hdecomp] at hcolumn
+    exact hcolumn
+  exact standardDualHeight_horizontal_seam_of_line_parity L horizontalCross verticalCross
+    j hL hj hline
+
+theorem standardDualHeight_horizontal_seam_changes_of_column_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (j : ℕ) (hL : 2 ≤ L) (hj : j < L)
+    (hcolumn : (∑ i : ZMod L, horizontalCross i (j : ZMod L)) % 2 = 0)
+    (hdecomp :
+      (∑ i : ZMod L, horizontalCross i (j : ZMod L)) =
+        (∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+          horizontalCross 0 (j : ZMod L)) :
+    (standardDualHeight L horizontalCross verticalCross (0, (j : ZMod L)) ≠
+      standardDualHeight L horizontalCross verticalCross
+        (((L - 1 : ℕ) : ZMod L), (j : ZMod L))) ↔
+    horizontalCross 0 (j : ZMod L) % 2 = 1 := by
+  have hline :
+      ((∑ r ∈ Finset.Icc 1 (L - 1), horizontalCross (r : ZMod L) (j : ZMod L)) +
+        horizontalCross 0 (j : ZMod L)) % 2 = 0 := by
+    rw [hdecomp] at hcolumn
+    exact hcolumn
+  exact standardDualHeight_horizontal_seam_changes_of_line_parity L horizontalCross
+    verticalCross j hL hj hline
+
 end Ising2DLambda.NecSuf.KacWard

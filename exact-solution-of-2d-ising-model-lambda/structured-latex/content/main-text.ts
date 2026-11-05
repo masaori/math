@@ -62878,6 +62878,53 @@ f_\gamma(L-1,j)&=(C_j+R_j)\bmod2&&\bigl(\because\ \blkref{def_standard_dual_heig
                     ],
                   },
                 },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_standard_dual_height_horizontal_seam",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_standard_dual_height_horizontal_seam",
+                    kind: "claim",
+                    title: { text: "閉歩道の標準双対路で横方向の切断線を越える一歩" },
+                    labels: ["claim_closed_walk_standard_dual_height_horizontal_seam"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-standard-dual-height-horizontal-seam"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_horizontal_seam",
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_horizontal_seam_changes",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_seam_of_column_parity",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_seam_changes_of_column_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、代表 ", math(String.raw`0\le j<L`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。横切断線偶奇 ",
+                        math(String.raw`h(\gamma)=0`), " と仮定する（", ref("def_edge_sequence_seam_parities"),
+                        "）。", ref("def_standard_dual_height"), " の高さは"]),
+                      displayMath(String.raw`f_\gamma(0,j)=\bigl(f_\gamma(L-1,j)+N_\gamma(n_{\mathrm h}(0,j))\bigr)\bmod2`),
+                      paragraph(["を満たす。従って切断線を越える一歩で高さが変わることと ",
+                        math(String.raw`N_\gamma(n_{\mathrm h}(0,j))=1`), " は同値である（",
+                        ref("def_walk_base_edge_parity"), "）。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_closed_walk_horizontal_column_parity_zero"),
+                        " を列 ", math(String.raw`\pi(j)\in\mathbb Z/L\mathbb Z`), " に適用する。",
+                        ref("claim_edge_row_partition"), " の一意な辺番号の分解により、全行和は ",
+                        math(String.raw`r=0`), " の項と ", math(String.raw`1\le r\le L-1`),
+                        " の項へ分かれる。したがって"]),
+                      displayMath(String.raw`\begin{aligned}
+0
+&=\left(\sum_{r=0}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
+&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\text{ と }\blkref{def_residue_maps}\bigr)\\
+&=\left(N_\gamma(n_{\mathrm h}(0,j))+\sum_{r=1}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
+&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)\,.
+\end{aligned}`),
+                      paragraph(["この等式を ", ref("claim_standard_dual_height_horizontal_seam_conditional"),
+                        " の全周偶奇の仮定へ代入すると、主張の高さ差と同値が従う。"]),
+                    ],
+                  },
+                },
               }],
             },
           },
