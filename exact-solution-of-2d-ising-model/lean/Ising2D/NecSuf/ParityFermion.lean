@@ -12,6 +12,8 @@
   (2) Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行 → `NecSuf.num_mul_cre'`。本ファイルの `NecSuf.projOn_insert_mul_cre` /
   `NecSuf.cre_mul_projOn_ne_zero` は (2) と同じ結論を行列 `c_μQ_T` の上の別の手順で出すもので、人手との対応には数えない
   （1 次元性が要らないことの別証として残す）
+- `epsilon_eigenvalue_on_check_Q` (4) の前半（`(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε` の 10 行と `P_k` の帰納法）→
+  `NecSuf/FactorsActingAsScalarsOnProjection.lean`
 - `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 →
   `Ising2D.NecSuf.sum_powerset_signed_exp`
 
@@ -394,29 +396,6 @@ theorem cre_mul_projOn_ne_zero (c a : ι → A)
   exact hQ key.symm
 
 end Flip
-
-/-! ## 2a. 可換な因子の積と射影（人手証明 `epsilon_eigenvalue_on_check_Q` (4)） -/
-
-section NoncommProdSmul
-
-variable {𝕜 : Type*} [CommSemiring 𝕜] {A : Type*} [Ring A] [Algebra 𝕜 A] {ι : Type*}
-  [DecidableEq ι]
-
-/-- 各因子が `Q` に対してスカラー倍として働くなら、積も働く:
-`g_i Q = c_i Q` （すべての `i`）⇒ `(∏_{i∈s} g_i) Q = (∏_{i∈s} c_i) Q`。
-
-効いているのは結合律とスカラー倍の両立則だけである。 -/
-theorem noncommProd_mul_of_mul_eq_smul (g : ι → A) (comm : ∀ i j, Commute (g i) (g j))
-    (Q : A) (c : ι → 𝕜) (h : ∀ i, g i * Q = c i • Q) (s : Finset ι) :
-    s.noncommProd g (fun i _ j _ _ => comm i j) * Q = (∏ i ∈ s, c i) • Q := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert j s hj ih =>
-      rw [Finset.noncommProd_insert_of_notMem _ _ _ _ hj, Finset.prod_insert hj, mul_assoc, ih,
-        mul_smul_comm, h j, smul_smul, mul_comm]
-
-end NoncommProdSmul
 
 /-! ## 2b. `Q_ε` のエルミート性（人手証明 `check_number_operator_is_hermitian` (4)） -/
 

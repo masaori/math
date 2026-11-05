@@ -5,7 +5,7 @@
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の冒頭・Step 1・Step 2 の後半・Step 3 の数ベクトルの鎖は
-`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`、(3) の帰納法は `Ising2D/NecSuf/SignAfterReplacingComponents.lean`）。符号の反転則 (2) の具体版 `eta_insert` は人手と同じ数ベクトルの鎖で組み、
+`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`、(3) の帰納法は `Ising2D/NecSuf/SignAfterReplacingComponents.lean`、(4) の前半は `Ising2D/NecSuf/FactorsActingAsScalarsOnProjection.lean`）。符号の反転則 (2) の具体版 `eta_insert` は人手と同じ数ベクトルの鎖で組み、
 同じ組み方で冒頭の `εq = η_ε q`・Step 1〜3 の鎖を必要十分版の特殊化に替えたものが `eta_insert_of_necSuf` である
 （`q` を取る段・`Q̌_ε q = q`・`M = 1`・最後に約す段は具体版と共通）。
 
@@ -23,7 +23,8 @@
 | (2) Step 3 の後半: `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（6 行） | `eta_insert_smul_cre_mulVec_generator` |
 | (2) `ψ̌_μ^† q ≠ 0` の 0 でない成分を比べて `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（`smul_generator_cancel`。Step 2 は `M` を限らない形 `Qproj_insert_mulVec_cre_mulVec_of_notMem` で受け、人手の範囲外の `M = 1` は `Qproj_insert_mulVec_cre_mulVec_generator_one`） |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}`: `k := M_col − \|ε\|` の帰納法（`k = 0` の 4 行、`k ≥ 1` で `ε_μ = 0` の `μ` を取り、(2) の両辺に `−1` を掛けた `η_ε = −η_{ε'}` から始まる 7 行の鎖） | `Ising2D.CheckFermi.eta_eq_eta_univ_mul`・`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`（必要十分版の特殊化は `eta_eq_eta_univ_mul_of_necSuf`・`eta_eq_neg_eta_insert_of_necSuf`） |
-| (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
+| (4) の前半: `(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε`（10 行）・`P_kQ̌_ε = p_kQ̌_ε` の `k` の帰納法（`k = 1` と `k → k+1` の 8 行）・`p_{M_col} = (−1)^{\|ε\|}` | `parityFactor_mul_Qproj`・`finProdLeft_mul_Qproj`（人手の鎖と同じ行の calc。`P_k` は左から掛ける有限積 `NecSuf.finProdLeft`）・`prod_one_sub_two_mul_indicator`・`parityProd_mul_Qproj`（必要十分版の特殊化は `*_of_necSuf`） |
+| (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd`（後半の 7 行・9 行の鎖はまだ人手と 1 対 1 でない） |
 
 ## 1 次元性が効いている場所（必要十分版で判明したこと）
 
@@ -37,6 +38,12 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.NecSuf.SignReversalOnGeneratorVector
 import Ising2D.NecSuf.SignAfterReplacingComponents
+import Ising2D.NecSuf.FactorsActingAsScalarsOnProjection
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
@@ -845,41 +852,135 @@ theorem eta_eq_eta_univ_mul_of_necSuf (T : Finset (Fin M)) :
 
 /-! ## 原文 (4): `ε` はパリティ演算子 -/
 
-/-- 原文の `∏_{μ}(I - 2ň_μ)`（因子は互いに可換なので `Finset.noncommProd` で書く）。 -/
-noncomputable def parityFactor (i : Fin M) : TensorPow M := 1 - (2 : ℂ) • F.nOp i
+/-- 原文 (4) の因子 `I − 2ň_μ`（`2ň_μ` は `ň_μ` のスカラー倍）。 -/
+noncomputable def parityFactor (μ : Fin M) : TensorPow M := 1 - (2 : ℂ) • F.nOp μ
 
-theorem commute_parityFactor (i j : Fin M) : Commute (F.parityFactor i) (F.parityFactor j) := by
-  unfold parityFactor
-  exact Commute.sub_right (Commute.sub_left (Commute.one_left _)
-      (Commute.smul_left (Commute.one_right _) 2))
-    (Commute.smul_right (Commute.sub_left (Commute.one_left _)
-      ((F.commute_nOp_nOp i j).smul_left 2)) 2)
+/-- **原文 (4) の前半の 10 行の鎖**: `(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε`。人手の `ε_μ ∈ {0,1}` は Lean の
+`if μ ∈ T then 1 else 0`（`check_joint_eigenspace_decomposition` (3) の `ň_μQ̌_ε = ε_μQ̌_ε` の Lean の形）である。 -/
+theorem parityFactor_mul_Qproj (μ : Fin M) (T : Finset (Fin M)) :
+    F.parityFactor μ * F.Qproj T = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T :=
+  calc F.parityFactor μ * F.Qproj T
+      = (1 + -((2 : ℂ) • F.nOp μ)) * F.Qproj T := by
+        rw [parityFactor, sub_eq_add_neg_tensorPow]     -- `matrix_difference_is_sum_with_negation`
+    _ = 1 * F.Qproj T + -((2 : ℂ) • F.nOp μ) * F.Qproj T := add_mul_matrix_tensorPow _ _ _
+                                                        -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = 1 * F.Qproj T + -(((2 : ℂ) • F.nOp μ) * F.Qproj T) := by
+        rw [neg_mul_matrix_tensorPow]                   -- `negation_factors_out_of_left_factor`
+    _ = 1 * F.Qproj T - ((2 : ℂ) • F.nOp μ) * F.Qproj T := (sub_eq_add_neg_tensorPow _ _).symm
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.Qproj T - ((2 : ℂ) • F.nOp μ) * F.Qproj T := by
+        rw [identity_matrix_mul_tensorPow]              -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) := by
+        rw [smul_mul_matrix_tensorPow]                  -- `scalar_multiple_factors_out_of_left_factor`
+    _ = F.Qproj T - (2 : ℂ) • ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) := by
+        rw [F.nOp_mul_Qproj μ T]                        -- `check_joint_eigenspace_decomposition` (3)
+    _ = (1 : ℂ) • F.Qproj T - (2 : ℂ) • ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) := by
+        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
+    _ = (1 : ℂ) • F.Qproj T - ((2 : ℂ) * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T := by
+        rw [smul_smul]                                  -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
+    _ = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+                                                        -- `difference_of_scalar_multiples_of_one_matrix`
 
-/-- 原文の `∏_{μ=1}^{M}(I - 2ň_μ)`。 -/
+/-- **原文 (4) の `P_kQ̌_ε = p_kQ̌_ε` の `k` についての帰納法**。人手の `P_k := ∏_{μ=1}^{k}(I − 2ň_μ)`
+（`def_finite_product_of_matrices`。左から掛ける）は Lean の `NecSuf.finProdLeft r A`、`p_k := ∏_{μ=1}^{k}(1 − 2ε_μ)`
+（`def_finite_product_of_complex_numbers`）は `∏ j, a j` で、人手の `k` が Lean の `r + 1` である。
+人手が「上の式（`μ → k+1`）」として引く 10 行の鎖を、仮定 `h`（各因子 `A_j` について `A_jQ̌_ε = a_jQ̌_ε`）として受ける。
+
+`k = 1`: 人手の「上の式（`μ → 1`）」を、有限積の定義の 2 行で挟んだ 3 行にした。`k → k+1`: 人手の 8 行と同じ行の calc。 -/
+theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
+    ∀ (r : ℕ) (A : Fin (r + 1) → TensorPow M) (a : Fin (r + 1) → ℂ),
+      (∀ j, A j * F.Qproj T = a j • F.Qproj T) →
+      NecSuf.finProdLeft r A * F.Qproj T = (∏ j, a j) • F.Qproj T
+  | 0, A, a, h =>
+    calc NecSuf.finProdLeft 0 A * F.Qproj T
+        = A 0 * F.Qproj T := rfl                        -- `def_finite_product_of_matrices`
+      _ = a 0 • F.Qproj T := h 0                        -- 上の式（`μ → 1`）
+      _ = (∏ j, a j) • F.Qproj T := by rw [Fin.prod_univ_one]
+                                                        -- `def_finite_product_of_complex_numbers`
+  | r + 1, A, a, h =>
+    calc NecSuf.finProdLeft (r + 1) A * F.Qproj T
+        = (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * F.Qproj T := rfl
+                                                        -- `def_finite_product_of_matrices`
+      _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * F.Qproj T) :=
+          Matrix.mul_assoc _ _ _                        -- `mat_mult_associative`（具体版が無く mathlib の `Matrix.mul_assoc`）
+      _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (a (Fin.last (r + 1)) • F.Qproj T) := by
+          rw [h (Fin.last (r + 1))]                     -- 上の式（`μ → k+1`）
+      _ = a (Fin.last (r + 1)) • (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * F.Qproj T) :=
+          mul_smul_matrix_tensorPow _ _ _               -- `scalar_multiple_factors_out_of_right_factor`
+      _ = a (Fin.last (r + 1)) • ((∏ j, a (Fin.castSucc j)) • F.Qproj T) := by
+          rw [finProdLeft_mul_Qproj T r _ _ (fun j => h (Fin.castSucc j))]
+                                                        -- 帰納法の仮定
+      _ = (a (Fin.last (r + 1)) * ∏ j, a (Fin.castSucc j)) • F.Qproj T := smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
+      _ = ((∏ j, a (Fin.castSucc j)) * a (Fin.last (r + 1))) • F.Qproj T := by
+          rw [mul_comm (a (Fin.last (r + 1)))]          -- `complex_numbers_form_a_field` の乗法の交換則
+      _ = (∏ j, a j) • F.Qproj T := by rw [Fin.prod_univ_castSucc a]
+                                                        -- `def_finite_product_of_complex_numbers`
+
+/-- `parityFactor_mul_Qproj` を必要十分版 `NecSuf.one_sub_smul_mul_eq_smul'` の特殊化として。 -/
+theorem parityFactor_mul_Qproj_of_necSuf (μ : Fin M) (T : Finset (Fin M)) :
+    F.parityFactor μ * F.Qproj T = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T :=
+  NecSuf.one_sub_smul_mul_eq_smul' (2 : ℂ) _ (F.nOp μ) (F.Qproj T) (F.nOp_mul_Qproj μ T)
+
+/-- `finProdLeft_mul_Qproj` を必要十分版 `NecSuf.finProdLeft_mul_eq_prod_smul'` の特殊化として。 -/
+theorem finProdLeft_mul_Qproj_of_necSuf (T : Finset (Fin M)) (r : ℕ) (A : Fin (r + 1) → TensorPow M)
+    (a : Fin (r + 1) → ℂ) (h : ∀ j, A j * F.Qproj T = a j • F.Qproj T) :
+    NecSuf.finProdLeft r A * F.Qproj T = (∏ j, a j) • F.Qproj T :=
+  NecSuf.finProdLeft_mul_eq_prod_smul' (F.Qproj T) r A a h
+
+/-- 原文 (4) の `P := P_{M_col} = ∏_{μ=1}^{M_col}(I − 2ň_μ)`（`def_finite_product_of_matrices`。左から掛ける）。
+人手の `M_col ≥ 1` が Lean の `r + 1` である。人手の範囲外の `M = 0` では因子が無いので単位行列と置く。 -/
 noncomputable def parityProd : TensorPow M :=
-  Finset.univ.noncommProd F.parityFactor fun i _ j _ _ => F.commute_parityFactor i j
+  match M, F with
+  | 0, _ => 1
+  | r + 1, F => NecSuf.finProdLeft r F.parityFactor
 
-theorem parityFactor_mul_Qproj (i : Fin M) (T : Finset (Fin M)) :
-    F.parityFactor i * F.Qproj T = (if i ∈ T then (-1 : ℂ) else 1) • F.Qproj T := by
-  rw [parityFactor, sub_mul, one_mul, smul_mul_assoc, F.nOp_mul_Qproj i T, smul_smul]
-  by_cases h : i ∈ T <;> simp [h] <;> module
+/-- 原文 (4) の「`1 − 2ε_μ` は `ε_μ = 1` なら `−1`、`ε_μ = 0` なら `+1` なので、`p_{M_col}` は `−1` を `|ε|` 個、
+`+1` を残りの個数だけ掛けたものであり `p_{M_col} = (−1)^{|ε|}`」。 -/
+theorem prod_one_sub_two_mul_indicator (T : Finset (Fin M)) :
+    ∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) = (-1 : ℂ) ^ T.card := by
+  -- `ε_μ = 1` なら `1 − 2ε_μ = −1`、`ε_μ = 0` なら `1 − 2ε_μ = +1`
+  have hfac : ∀ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) = if μ ∈ T then -1 else 1 := by
+    intro μ
+    by_cases hμ : μ ∈ T
+    · rw [if_pos hμ, if_pos hμ]; norm_num
+    · rw [if_neg hμ, if_neg hμ]; norm_num
+  have hfilter : (Finset.univ.filter fun μ : Fin M => μ ∈ T) = T := by
+    ext μ; simp
+  calc ∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0))
+      = ∏ μ, (if μ ∈ T then (-1 : ℂ) else 1) := Finset.prod_congr rfl fun μ _ => hfac μ
+                                                        -- 各因子は `ε_μ = 1` なら `−1`、`ε_μ = 0` なら `+1`
+    _ = (∏ μ ∈ Finset.univ.filter (fun μ : Fin M => μ ∈ T), (-1 : ℂ))
+          * ∏ μ ∈ Finset.univ.filter (fun μ : Fin M => μ ∉ T), (1 : ℂ) := Finset.prod_ite _ _
+                                                        -- `−1` の因子と `+1` の因子に分ける
+    _ = (∏ μ ∈ T, (-1 : ℂ)) * 1 := by rw [hfilter, Finset.prod_const_one]
+                                                        -- `ε_μ = 1` の `μ` の集合は `T`、`+1` の積は `1`
+    _ = (-1 : ℂ) ^ T.card := by rw [Finset.prod_const, mul_one]
+                                                        -- `−1` を `|ε|` 個掛けたもの
 
+/-- 原文 (4) の `PQ̌_ε = p_{M_col}Q̌_ε = (−1)^{|ε|}Q̌_ε`（`P_kQ̌_ε = p_kQ̌_ε` の `k = M_col` と `p_{M_col} = (−1)^{|ε|}`）。
+人手の範囲外の `M = 0` では `ε` は空の語で `|ε| = 0`、`P = I` である。 -/
 theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
     F.parityProd * F.Qproj T = (-1 : ℂ) ^ T.card • F.Qproj T := by
-  have key := NecSuf.noncommProd_mul_of_mul_eq_smul (𝕜 := ℂ) F.parityFactor
-    F.commute_parityFactor (F.Qproj T)
-    (fun i => if i ∈ T then (-1 : ℂ) else 1) (fun i => F.parityFactor_mul_Qproj i T) Finset.univ
-  rw [parityProd, key]
-  congr 1
-  rw [← Finset.prod_filter_mul_prod_filter_not Finset.univ (fun i => i ∈ T)]
-  have h1 : (Finset.univ.filter fun i : Fin M => i ∈ T) = T := by
-    ext i; simp
-  have h2 : ∀ i ∈ Finset.univ.filter fun i : Fin M => ¬ i ∈ T,
-      (if i ∈ T then (-1 : ℂ) else 1) = 1 := by
-    intro i hi
-    rw [if_neg (Finset.mem_filter.1 hi).2]
-  rw [h1, Finset.prod_congr rfl h2, Finset.prod_const_one, mul_one]
-  rw [Finset.prod_congr rfl (fun i hi => if_pos hi), Finset.prod_const]
+  match M, F, T with
+  | 0, F, T =>
+    have hT : T = ∅ := Finset.eq_empty_of_isEmpty T
+    calc F.parityProd * F.Qproj T
+        = 1 * F.Qproj T := rfl                          -- 因子が無いので `P = I`
+      _ = F.Qproj T := identity_matrix_mul_tensorPow _  -- `identity_matrix_is_left_unit_of_mat_mult`
+      _ = (1 : ℂ) • F.Qproj T := (one_smul_tensorPow _).symm
+                                                        -- `scalar_multiple_by_one`
+      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [hT, Finset.card_empty, pow_zero]
+                                                        -- `|ε| = 0`
+  | r + 1, F, T =>
+    calc F.parityProd * F.Qproj T
+        = NecSuf.finProdLeft r F.parityFactor * F.Qproj T := rfl
+                                                        -- `P := P_{M_col}`
+      _ = (∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0))) • F.Qproj T :=
+          F.finProdLeft_mul_Qproj T r _ _ fun μ => F.parityFactor_mul_Qproj μ T
+                                                        -- `P_kQ̌_ε = p_kQ̌_ε`（`k = M_col`。因子 `A := I − 2ň_μ`、係数 `a := 1 − 2ε_μ`）
+      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [prod_one_sub_two_mul_indicator]
+                                                        -- `p_{M_col} = (−1)^{|ε|}`
 
 /-- 全部の `Q̌_ε` に右から掛けて一致すれば行列として一致する（`∑_ε Q̌_ε = I`）。 -/
 theorem eq_of_mul_Qproj_eq {A B : TensorPow M}

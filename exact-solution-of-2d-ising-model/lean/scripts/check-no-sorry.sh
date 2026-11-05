@@ -1783,7 +1783,6 @@ targets=(
   Ising2D.NecSuf.num_mul_cre
   Ising2D.NecSuf.projOn_insert_mul_cre
   Ising2D.NecSuf.cre_mul_projOn_ne_zero
-  Ising2D.NecSuf.noncommProd_mul_of_mul_eq_smul
   Ising2D.NecSuf.star_projOn
   Ising2D.NecSuf.smul_left_cancel_of_ne_zero
   Ising2D.NecSuf.sum_powerset_signed_exp
@@ -1862,9 +1861,14 @@ targets=(
   Ising2D.NecSuf.eq_univ_mul_neg_one_pow_of_sub_card
   Ising2D.NecSuf.eq_univ_mul_neg_one_pow
   Ising2D.CheckFermi.parityFactor
-  Ising2D.CheckFermi.commute_parityFactor
-  Ising2D.CheckFermi.parityProd
   Ising2D.CheckFermi.parityFactor_mul_Qproj
+  Ising2D.CheckFermi.finProdLeft_mul_Qproj
+  Ising2D.CheckFermi.parityFactor_mul_Qproj_of_necSuf
+  Ising2D.CheckFermi.finProdLeft_mul_Qproj_of_necSuf
+  "Ising2D.NecSuf.one_sub_smul_mul_eq_smul'"
+  "Ising2D.NecSuf.finProdLeft_mul_eq_prod_smul'"
+  Ising2D.CheckFermi.parityProd
+  Ising2D.CheckFermi.prod_one_sub_two_mul_indicator
   Ising2D.CheckFermi.parityProd_mul_Qproj
   Ising2D.CheckFermi.eq_of_mul_Qproj_eq
   Ising2D.CheckFermi.epsilon_eq_parityProd
