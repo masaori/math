@@ -1668,3 +1668,5 @@ import Ising2DLambda.KacWard.FiniteTorusPolynomialFromNecSuf
 import Ising2DLambda.KacWard.StandardDualHeight
 import Ising2DLambda.NecSuf.KacWard.StandardDualHeight
 import Ising2DLambda.KacWard.StandardDualHeightFromNecSuf
+import Ising2DLambda.KacWard.ClosedWalkIncidenceParity
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkIncidenceParity

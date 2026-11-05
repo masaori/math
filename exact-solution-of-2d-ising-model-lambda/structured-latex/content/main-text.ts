@@ -62336,6 +62336,59 @@ s(j')-s(j)
                 role: "supporting",
                 element: {
                   kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_incidence_even",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_incidence_even",
+                    kind: "claim",
+                    title: { text: "閉歩道の各頂点に接する端点数は偶数である" },
+                    labels: ["claim_closed_walk_incidence_even"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-incidence-even"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_incidence_even",
+                      "Ising2DLambda.NecSuf.KacWard.closedWalk_incidence_even",
+                      "Ising2DLambda.KacWard.closedWalk_incidence_even_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_closed_nonbacktracking_walk"), "）、頂点 ",
+                        math(String.raw`v\in V_L`), " を取る。辺列の始点・終点のうち ",
+                        math(String.raw`v`), " に等しいものの総数は偶数である。すなわち",
+                      ]),
+                      displayMath(String.raw`\left(\sum_{k=1}^{m}\bigl(\mathbf1_{\operatorname{src}(\vec e_k)=v}+\mathbf1_{\operatorname{tgt}(\vec e_k)=v}\bigr)\right)\bmod2=0`),
+                      paragraph(["向き付き辺の始点と終点は ", ref("def_oriented_edge_endpoints"), " による。端点は重複を保って数えるため、ループ辺も二回寄与する。"]),
+                    ],
+                    proof: [
+                      paragraph(["閉性により、各辺の終点は次の辺の始点であり、末辺の終点は始辺の始点である（", ref("def_closed_nonbacktracking_walk"), "）。したがって巡回添字の付け替えで"]),
+                      displayMath(String.raw`\sum_{k=1}^{m}\mathbf1_{\operatorname{tgt}(\vec e_k)=v}
+=\sum_{k=1}^{m}\mathbf1_{\operatorname{src}(\vec e_k)=v}
+\qquad\bigl(\because\ \blkref{def_closed_nonbacktracking_walk}\text{ と巡回添字の全単射}\bigr)`),
+                      paragraph(["ゆえに端点の総数は"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{m}\bigl(\mathbf1_{\operatorname{src}(\vec e_k)=v}+\mathbf1_{\operatorname{tgt}(\vec e_k)=v}\bigr)
+&=\sum_{k=1}^{m}\mathbf1_{\operatorname{src}(\vec e_k)=v}+\sum_{k=1}^{m}\mathbf1_{\operatorname{tgt}(\vec e_k)=v}
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=2\sum_{k=1}^{m}\mathbf1_{\operatorname{src}(\vec e_k)=v}
+&&\bigl(\because\ \text{上の巡回添字の等式}\bigr)
+\end{aligned}`),
+                      paragraph(["二で割った余りを取れば"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\sum_{k=1}^{m}\bigl(\mathbf1_{\operatorname{src}(\vec e_k)=v}+\mathbf1_{\operatorname{tgt}(\vec e_k)=v}\bigr)\right)\bmod2
+&=\left(2\sum_{k=1}^{m}\mathbf1_{\operatorname{src}(\vec e_k)=v}\right)\bmod2
+&&\bigl(\because\ \text{上の端点数の等式}\bigr)\\
+&=0
+&&\bigl(\because\ 2\text{ の倍数を二で割った余り}\bigr)
+\end{aligned}`),
+                      paragraph(["全過程は自然数の有限和で閉じる。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
                   id: "group_of_kac_ward_claim_standard_dual_rectangle_parity",
                   focus: {
                     id: "kac_ward_claim_standard_dual_rectangle_parity",
@@ -73520,7 +73573,7 @@ c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
                         "二通過で四半辺を使い尽くす。辺の標識が相異なるので、", math(String.raw`v`),
                         " に別の通過はない。従って ", ref("def_vertex_axis_straight_visit_count"), " により",
                       ]),
-                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\qquad(\because\ \blkref{def_index_pair_crossing}\text{ と }\blkref{def_vertex_axis_straight_visit_count}).`),
+                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\qquad(\because\ \blkref{def_index_pair_crossing}\text{ と }\blkref{def_vertex_axis_straight_visit_count})`),
                       paragraph([
                         ref("claim_smoothing_crossing_number_update"), " と ",
                         ref("claim_smoothing_split_crossing_partition"), " を一行ずつ適用する。",
@@ -73532,7 +73585,7 @@ c(\gamma)+1
 &=c_{\mathrm{sm}}(\gamma;k,l)+2
 &&\bigl(\because\ n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\bigr)\\
 &=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+2
-&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr).
+&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr)
 \end{aligned}`),
                       paragraph([
                         "自然数の加法の消去律で ", math(String.raw`c(\gamma)=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+1`), " を得る。",
@@ -73542,7 +73595,7 @@ c(\gamma)+1
                         "従って ", ref("def_split_mutual_crossing_number"), " の混合横断と二本の巡回後続写像による混合横断は、同じ添字対を数える。",
                         "従って ", ref("claim_disjoint_walk_mutual_crossing_intersection"), " により",
                       ]),
-                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B)\qquad(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection}).`),
+                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B)\qquad(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection})`),
                       paragraph(["自然数の等式を二で割った余りを取って、上の交差数との等式を代入する。辺長一でも四半辺を方向と辺の標識で区別する。"]),
                     ],
                   },
