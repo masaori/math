@@ -8,6 +8,55 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
 
+/-- 異なる後続方向が逆向きの単位歩を与えない。 -/
+theorem orientedEdgeLatticeStep_nonopposite {L : ℕ} (e f : OrientedEdge L)
+    (h : directionNumber f ≠ directionNumber e + 2) :
+    orientedEdgeLatticeStep f ≠ -orientedEdgeLatticeStep e := by
+  rw [orientedEdgeLatticeStep_eq_directionUnitVector,
+    orientedEdgeLatticeStep_eq_directionUnitVector]
+  have hunit : ∀ d d' : ZMod 4,
+      d' ≠ d + 2 → directionUnitVector d' ≠ -directionUnitVector d := by decide
+  exact hunit _ _ h
+
+/-- 元の辺列の循環方向条件を、任意の切断始点の周期持ち上げへ移す。 -/
+theorem periodicPlaneLift_nonbacktracking_of_direction
+    (m L : ℕ) [NeZero m] (base : ℤ → ℤ × ℤ) (wv wh k₀ : ℤ)
+    (γ : ZMod m → OrientedEdge L)
+    (hstep : ∀ j : ℕ, j < m →
+      base ((j : ℤ) + 1) = base j + orientedEdgeLatticeStep (γ (j : ZMod m)))
+    (hend : base m = base 0 + windingShift L wv wh)
+    (hnb : ∀ j : ZMod m, directionNumber (γ (j + 1)) ≠ directionNumber (γ j) + 2) :
+    let p := fun i : ℕ => periodicPlaneLift m base L wv wh (k₀ + i)
+    ∀ j, j < m → p ((j + 1) % m + 1) - p ((j + 1) % m) ≠
+      -(p (j + 1) - p j) := by
+  dsimp
+  intro j _
+  have hfirst := periodicPlaneLift_step_edgeDisplacement m L base wv wh γ hstep hend
+    (k₀ + (((j + 1) % m : ℕ) : ℤ))
+  have hsecond := periodicPlaneLift_step_edgeDisplacement m L base wv wh γ hstep hend
+    (k₀ + (j : ℤ))
+  have hcast : ((((j + 1) % m : ℕ) : ℤ) : ZMod m) = ((j : ZMod m) + 1) := by
+    simp
+  have hneq := orientedEdgeLatticeStep_nonopposite
+    (γ ((k₀ : ZMod m) + (j : ZMod m)))
+    (γ (((k₀ : ZMod m) + (j : ZMod m)) + 1))
+    (hnb ((k₀ : ZMod m) + (j : ZMod m)))
+  change periodicPlaneLift m base L wv wh
+      (k₀ + (((((j + 1) % m) + 1 : ℕ) : ℤ))) -
+        periodicPlaneLift m base L wv wh (k₀ + ((((j + 1) % m : ℕ) : ℤ))) ≠
+      -(periodicPlaneLift m base L wv wh (k₀ + (((j + 1 : ℕ) : ℤ))) -
+        periodicPlaneLift m base L wv wh (k₀ + (j : ℤ)))
+  have hcastFirst : (k₀ + (((((j + 1) % m) + 1 : ℕ) : ℤ))) =
+      k₀ + ((((j + 1) % m : ℕ) : ℤ)) + 1 := by push_cast; ring
+  have hcastSecond : (k₀ + (((j + 1 : ℕ) : ℤ))) =
+      k₀ + (j : ℤ) + 1 := by push_cast; ring
+  have hindex : ((k₀ + (((j + 1) % m : ℕ) : ℤ) : ℤ) : ZMod m) =
+      ((k₀ + (j : ℤ) : ℤ) : ZMod m) + 1 := by
+    simpa [Int.cast_add, add_assoc] using
+      congrArg (fun d : ZMod m => (k₀ : ZMod m) + d) hcast
+  rw [hcastFirst, hcastSecond, hfirst, hsecond, hindex]
+  simpa [Int.cast_add, add_assoc] using hneq
+
 private lemma nb_join (u v : ℕ → ℤ × ℤ) (a b : ℕ) (ha : 0 < a)
     (hu : ∀ j, j + 1 < a → u (j + 1) ≠ -u j)
     (hv : ∀ j, j + 1 < b → v (j + 1) ≠ -v j)

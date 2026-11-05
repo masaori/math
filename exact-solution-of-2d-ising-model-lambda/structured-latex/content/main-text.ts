@@ -69308,11 +69308,11 @@ C_n(r)&=t_{\circ}(R_-)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \kappa(v(0))&>0\ge-\kappa(u(m-1))
-&&\bigl(\because\ \kappa(v(0))>0,\ \kappa(u(m-1))\ge0\bigr),\\
+&&\bigl(\because\ \kappa(v(0))>0,\ \kappa(u(m-1))\ge0\bigr)\\
 \kappa(v(b-1))&>0\ge-\kappa(r(0))
-&&\bigl(\because\ \kappa(v(b-1))>0,\ \kappa(r(0))\ge0\bigr),\\
+&&\bigl(\because\ \kappa(v(b-1))>0,\ \kappa(r(0))\ge0\bigr)\\
 \kappa(x(0))&<0\le-\kappa(r(n-1))
-&&\bigl(\because\ \kappa(x(0))<0,\ \kappa(r(n-1))\le0\bigr),\\
+&&\bigl(\because\ \kappa(x(0))<0,\ \kappa(r(n-1))\le0\bigr)\\
 \kappa(x(b-1))&<0\le-\kappa(u(0))
 &&\bigl(\because\ \kappa(x(b-1))<0,\ \kappa(u(0))\le0\bigr)
 \end{aligned}`),
