@@ -446,7 +446,7 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean）---
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -480,6 +480,27 @@ targets=(
   "Ising2D.posDef_conjBilin'_pos"
   Ising2D.trace_of_positive_definite_is_positive_of_necSuf
   Ising2D.trace_of_positive_definite_is_positive_tensorPow
+  Ising2D.posDef_of_conjugateBilinearValue_pos
+  Ising2D.conjugate_bilinear_value_of_congruence
+  Ising2D.conjTranspose_conjTranspose_apply
+  Ising2D.conjTranspose_conjTranspose_eq
+  Ising2D.mulVec_zero_apply
+  Ising2D.mulVec_zero_eq
+  Ising2D.congruence_isHermitian
+  Ising2D.mulVec_ne_zero_of_left_inverse
+  Ising2D.congruence_preserves_positive_definite
+  "Ising2D.NecSuf.conjBilin_congruence'"
+  "Ising2D.NecSuf.mulVec_zero_apply'"
+  "Ising2D.NecSuf.mulVec_ne_zero_of_left_inverse'"
+  "Ising2D.NecSuf.conjTranspose_conjTranspose_apply'"
+  "Ising2D.NecSuf.congruence_isHermitian'"
+  "Ising2D.NecSuf.congruence_preserves_pos'"
+  "Ising2D.conjugateBilinearValue_eq_conjBilin'"
+  Ising2D.conjugate_bilinear_value_of_congruence_of_necSuf
+  "Ising2D.posDef_of_conjBilin'_pos"
+  "Ising2D.congruence_preserves_positive_definite_of_necSuf'"
+  Ising2D.congruence_preserves_positive_definite_of_necSuf
+  Ising2D.congruence_preserves_positive_definite_tensorPow
   Ising2D.Z_transpose
   Ising2D.Z_conjTranspose
   Ising2D.Y_conjTranspose
