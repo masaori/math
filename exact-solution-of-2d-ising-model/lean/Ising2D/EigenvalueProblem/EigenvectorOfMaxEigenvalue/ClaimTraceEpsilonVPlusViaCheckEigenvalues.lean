@@ -27,7 +27,8 @@
 | Step 2 の `(Π_{μ≤k}ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−\|ε\|_k}` の `k` の帰納法（`k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行）と準備の `ǔ^{(e)}`・`\|ε\|_k` の数え上げ | `checkU_prod_eq_neg_one_pow`（同じ行の calc。人手の `k` が `n + 1`）・`checkU`・`ite_eq_one_eq_val`・`card_finsetOfWord_one`・`card_finsetOfWord_castSucc`・`card_finsetOfWord_le`（必要十分版の特殊化は `checkU_prod_eq_neg_one_pow_of_necSuf`。必要十分版は `NecSuf/PowerFromProductOfTwoValuedFactors.lean`） |
 | Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
 | Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
-| Step 4 の 2 本目の和の鎖、Step 5〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2〜4 の具体版はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
+| 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
+| Step 5〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2〜4 の具体版（`sum_checkT_eq_traceFactor` を含む）をまだ使っていない。それらを使って Step 5〜7 の鎖と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -37,6 +38,7 @@ import Ising2D.NecSuf.PowerFromProductOfTwoValuedFactors
 import Ising2D.NecSuf.SignedTermAsImageOfReorderedProduct
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
 
 namespace Ising2D
 
@@ -441,16 +443,92 @@ theorem checkT_eq_prod_checkW_mul {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
     _ = D.C * ∏ μ, D.checkW μ (ε μ) := rfl              -- `w̌_μ^{(e)}` の置き方（`e → ε_μ`）を各因子へ同時に
     _ = (∏ μ, D.checkW μ (ε μ)) * D.C := mul_comm _ _   -- ℝ の乗法の交換則
 
+/-- 主張の `ϰ := (2 sinh 2K_2)^{M_col/2} Π_{μ=1}^{M_col} 2 sinh(γ(θ̃_μ)/2) ∈ ℝ`（`(2 sinh 2K_2)^{M_col/2}` が `D.C`、
+`γ(θ̃_μ)` が `D.gam μ`）。 -/
+noncomputable def traceFactor {F : CheckFermi M} (D : VPlusData M F) : ℝ := D.C * ∏ μ : Fin M, (2 * Real.sinh (D.gam μ / 2))
+
+/-- **原文 Step 4** の 2 本目の和の鎖:
+`Σ_εť_ε = Σ_ε(Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2} = (Σ_εΠ_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}
+= (Π_μ(w̌_μ^{(1)} + w̌_μ^{(0)}))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(ǔ^{(1)}exp(γ(θ̃_μ)(1−1/2)) + ǔ^{(0)}exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(1·exp(γ(θ̃_μ)(1−1/2)) + (−1)exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)(1−1/2)) + (−1)exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)(1−1/2)) − exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)·1/2) − exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)·1/2) − exp(γ(θ̃_μ)(−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)·1/2) − exp(−(γ(θ̃_μ)·1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)/2) − exp(−γ(θ̃_μ)/2)))(2sinh 2K_2)^{M_col/2}
+= (Π_μ2·((exp(γ(θ̃_μ)/2) − exp(−γ(θ̃_μ)/2))/2))(2sinh 2K_2)^{M_col/2}
+= (Π_μ2sinh(γ(θ̃_μ)/2))(2sinh 2K_2)^{M_col/2} = (2sinh 2K_2)^{M_col/2}Π_μ2sinh(γ(θ̃_μ)/2) = ϰ`
+（人手の `M_col` が Lean の `r + 1`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words_of_real_numbers`）が `binaryWordRealSum r`、
+`(2 sinh 2K_2)^{M_col/2}` が `D.C`、`γ(θ̃_μ)` が `D.gam μ`、`ϰ` が `D.traceFactor`）。
+4 行目の後の 1 段は、`w̌_μ^{(e)}` の `e ∈ {0,1}` を ℝ の元として使う書き方 `(((e : Fin 2) : ℕ) : ℝ)` を ℝ の `1`・`0` へ付け替える
+運ぶ段で、人手の行は無い（`prod_step2_cosh` の 1 段目と同じ）。必要十分版は置かない（効くのは、引いた
+`real_sum_over_binary_words_distributes_in_left_factor`・`expansion_of_finite_product_of_two_term_sums_of_real_numbers`
+（それぞれ必要十分版あり）と、ℝ の計算規則と `def_cosh_sinh` の `sinh` の式だけで、`ClaimTraceCheckVprime.lean` の
+`prod_step2_cosh` と同じく取り払える構造が無い）。 -/
+theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    binaryWordRealSum r (fun ε => D.checkT ε) = D.traceFactor :=
+  calc binaryWordRealSum r (fun ε => D.checkT ε)
+      = binaryWordRealSum r (fun ε => (∏ μ, D.checkW μ (ε μ)) * D.C) := by
+        congr 1; funext ε; exact D.checkT_eq_prod_checkW_mul ε
+                                                        -- 直前の鎖（`checkT_eq_prod_checkW_mul`）を各項へ同時に
+    _ = binaryWordRealSum r (fun ε => ∏ μ, D.checkW μ (ε μ)) * D.C :=
+        (binaryWordRealSum_mul r _ _).symm              -- `real_sum_over_binary_words_distributes_in_left_factor`
+                                                        -- （`r → M_col`、`x_ε → Π_μw̌_μ^{(ε_μ)}`、`c → (2sinh 2K_2)^{M_col/2}`）を右辺から左辺へ
+    _ = (∏ μ, (D.checkW μ 1 + D.checkW μ 0)) * D.C := by
+        rw [expansion_of_finite_product_of_two_term_sums_of_real r (fun μ e => D.checkW μ e)]
+                                                        -- `expansion_of_finite_product_of_two_term_sums_of_real_numbers`
+                                                        -- （`r → M_col`、`j → μ`、`a_j^{(e)} → w̌_μ^{(e)}`）を右辺から左辺へ
+    _ = (∏ μ, (checkU 1 * Real.exp (D.gam μ * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
+          + checkU 0 * Real.exp (D.gam μ * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2)))) * D.C := rfl
+                                                        -- `w̌_μ^{(e)}` の置き方（`e → 1`、`e → 0`）を各因子へ同時に
+    _ = (∏ μ, (checkU 1 * Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
+          + checkU 0 * Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        rw [Fin.val_one, Fin.val_zero, Nat.cast_one, Nat.cast_zero]
+                                                        -- `e ∈ {0,1}` を ℝ の `1`・`0` へ付け替える（運ぶ段。人手の行は無い）
+    _ = (∏ μ, (1 * Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
+          + (-1) * Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        rw [checkU_one, checkU_zero]                    -- `ǔ^{(1)} := 1`、`ǔ^{(0)} := −1` を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
+          + (-1) * Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        simp only [one_mul]                             -- ℝ で `1·b = b` を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
+          - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        simp only [neg_one_mul, ← sub_eq_add_neg]       -- ℝ で `a + (−1)b = a − b` を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
+          - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        rw [sub_half (1 : ℝ)]                           -- ℝ で `1 − 1/2 = 1/2` を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
+          - Real.exp (D.gam μ * (-(1 / 2))))) * D.C := by
+        rw [zero_sub (1 / 2 : ℝ)]                       -- ℝ で `0 − a = −a`（`a → 1/2`）を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
+          - Real.exp (-(D.gam μ * (1 / 2))))) * D.C := by
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [mul_neg (D.gam μ) (1 / 2)]                  -- ℝ で `a(−b) = −(ab)`（`a → γ(θ̃_μ)`、`b → 1/2`）を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ / 2) - Real.exp (-(D.gam μ / 2)))) * D.C := by
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [mul_one_div (D.gam μ) 2]                    -- ℝ で `a·(1/2) = a/2`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
+    _ = (∏ μ, 2 * ((Real.exp (D.gam μ / 2) - Real.exp (-(D.gam μ / 2))) / 2)) * D.C := by
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
+                                                        -- ℝ で `2 ≠ 0` なので `b = 2·(b/2)` を各因子へ同時に
+    _ = (∏ μ, 2 * Real.sinh (D.gam μ / 2)) * D.C := by
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [← Real.sinh_eq]                             -- `def_cosh_sinh` の `sinh`（`x → γ(θ̃_μ)/2`）を各因子へ同時に、右辺から左辺へ
+                                                        -- （`def_cosh_sinh` は Lean で定義し直していない。mathlib の `Real.sinh` の
+                                                        -- 等式 `Real.sinh_eq` が、人手の定義の式そのものとしてその役を担う）
+    _ = D.C * ∏ μ, (2 * Real.sinh (D.gam μ / 2)) := mul_comm _ _
+                                                        -- ℝ の乗法の交換則
+    _ = D.traceFactor := rfl                            -- `ϰ` の置き方
+
 end VPlusData
 
 namespace VPlusData
 
 variable {F : CheckFermi M} (D : VPlusData M F)
 
-/-! ## Step 4 以降（旧い Step の分け方のまま）: 積への分解 -/
-
-/-- 人手証明 Step 2 の右辺の実数因子 `(2 sinh 2K_2)^{M/2} ∏_μ 2 sinh(γ(θ̃_μ)/2)`。 -/
-noncomputable def traceFactor : ℝ := D.C * ∏ μ : Fin M, (2 * Real.sinh (D.gam μ / 2))
+/-! ## Step 5 以降（旧い Step の分け方のまま） -/
 
 /-- **人手証明 Step 3**: 右辺の `η` 以外の因子はすべて正。 -/
 theorem traceFactor_pos : 0 < D.traceFactor := by

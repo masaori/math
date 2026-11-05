@@ -131,8 +131,10 @@
 | `CheckFermi.checkH` / `checkH_mem` / `checkH_ofReal` / `VPlusData.checkT` | `ȟ ∈ {1,−1}` を `ȟ_ℂ = η_{(1,…,1)}` となるように取る、`ť_ε := (Π_μǔ^{(ε_μ)})Λ̌_ε` | 準備・Step 3 |
 | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH` / `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf` | `η_ε(Λ̌_ε)_ℂ = (ť_εȟ)_ℂ`（人手の 7 行と同じ行の calc。人手の `M_col` が `r + 1`。後者は必要十分版の特殊化） | Step 3 |
 | `VPlusData.checkW` / `checkLambda_finsetOfWord` / `Ising2D.ite_eq_one_eq_val_real` / `VPlusData.checkT_eq_prod_checkW_mul` | `w̌_μ^{(e)} := ǔ^{(e)}exp(γ(θ̃_μ)(e − 1/2))`、`Λ̌_ε` の定義を語の成分 `ε_μ` で読む運ぶ段、`ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}`（人手の 7 行と同じ行の calc。人手の `M_col` が `r + 1`。`finite_product_of_real_products` は具体版 `Ising2D.finite_product_of_real_products`。必要十分版は置かない: 効くのは引いた 2 つの主張（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） | Step 4 |
-| `VPlusData.traceFactor` / `traceFactor_pos` | `C·∏_μ 2 sinh(γ_μ/2) > 0`（旧い Step の分け方のまま） | (2)・Step 6 |
-| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`**（旧い Step の分け方のまま。Step 2〜4 の具体版を使って人手の Step 4 の和の鎖と Step 5 の鎖と 1 対 1 にするのは状態台帳の次の一歩） | **(1)・Step 5（定理本体）** |
+| `VPlusData.traceFactor` | `ϰ := (2sinh 2K_2)^{M_col/2}Π_μ2sinh(γ(θ̃_μ)/2)`（`(2sinh 2K_2)^{M_col/2}` が `C`） | 主張の `ϰ` |
+| `VPlusData.sum_checkT_eq_traceFactor` | `Σ_εť_ε = … = ϰ`（人手の Step 4 の 2 本目の和の鎖と同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。`real_sum_over_binary_words_distributes_in_left_factor` は具体版 `binaryWordRealSum_mul`、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` は具体版 `expansion_of_finite_product_of_two_term_sums_of_real`、`def_cosh_sinh` の `sinh` は mathlib の `Real.sinh_eq`。必要十分版は置かない: 効くのは引いた 2 つの主張（それぞれ必要十分版あり）と ℝ の計算規則と `sinh` の式だけ） | Step 4 |
+| `VPlusData.traceFactor_pos` | `ϰ > 0`（旧い Step の分け方のまま） | (2)・Step 6 |
+| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`**（旧い Step の分け方のまま。Step 2〜4 の具体版（`sum_checkT_eq_traceFactor` を含む）を使って Step 5 の鎖と 1 対 1 にするのは状態台帳の次の一歩） | **(1)・Step 5（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | (3)・Step 7 |
 
 #### `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）

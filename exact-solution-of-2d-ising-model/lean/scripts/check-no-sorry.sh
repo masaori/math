@@ -1918,6 +1918,7 @@ targets=(
   Ising2D.VPlusData.checkLambda_finsetOfWord
   Ising2D.VPlusData.checkT_eq_prod_checkW_mul
   Ising2D.VPlusData.traceFactor
+  Ising2D.VPlusData.sum_checkT_eq_traceFactor
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V
   Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos
