@@ -64,6 +64,20 @@ theorem horizontalCross_column_parity_invariant (L : ℕ) [NeZero L]
   rw [hshift] at hsum
   omega
 
+/-- Counting each seam edge once by its row agrees with counting seam traversals. -/
+theorem seam_column_parity {E I : Type*} [Fintype I] [DecidableEq E]
+    {m : ℕ} (γ : Fin (m + 1) → E) (columnEdge : I → E)
+    (seam : E → ℕ)
+    (hsingle : ∀ e : E,
+      (∑ i : I, if e = columnEdge i then 1 else 0) = seam e) :
+    (∑ i : I,
+      ((∑ k : Fin (m + 1), if γ k = columnEdge i then 1 else 0) % 2)) % 2 =
+      (∑ k : Fin (m + 1), seam (γ k)) % 2 := by
+  -- Only the one-edge count, finite-sum exchange, and mod-two addition are used.
+  simp only [← Finset.sum_nat_mod]
+  rw [Finset.sum_comm]
+  simp only [hsingle]
+
 /-- 各頂点で四辺の通過和が偶数なら、長方形の対向辺の偶奇は一致する。 -/
 theorem rectangle_crossing_parity (L : ℕ) [NeZero L]
     (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)

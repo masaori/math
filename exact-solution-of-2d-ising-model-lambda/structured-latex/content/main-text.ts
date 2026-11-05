@@ -62492,10 +62492,71 @@ s(j')-s(j)
 =\sum_i N_\gamma(n_{\mathrm v}(i,j+1))
 \qquad\bigl(\because\ i\mapsto i-1\text{ の全単射による再添字付け}\bigr)`),
                       displayMath(String.raw`\begin{aligned}
-0&=\bigl(A_\gamma(j+1)+A_\gamma(j)\bigr)\bmod2
-&&\bigl(\because\ \text{上の二つの等式と }2\text{ の倍数の偶奇}\bigr)\\
-A_\gamma(j+1)&=A_\gamma(j)
-&&\bigl(\because\ A_\gamma(j),A_\gamma(j+1)\in\{0,1\}\bigr)
+A_\gamma(j+1)
+&=\left(\sum_iN_\gamma(n_{\mathrm h}(i,j+1))\right)\bmod2
+&&\bigl(\because\ A_\gamma\text{ の定義}\bigr)\\
+&=\left(\sum_iN_\gamma(n_{\mathrm h}(i,j))
+  +\sum_iN_\gamma(n_{\mathrm v}(i-1,j+1))
+  +\sum_iN_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2
+&&\bigl(\because\ \text{上の局所偶奇の総和}\bigr)\\
+&=\left(\sum_iN_\gamma(n_{\mathrm h}(i,j))+2\sum_iN_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2
+&&\bigl(\because\ \text{縦辺の再添字付け}\bigr)\\
+&=A_\gamma(j)
+&&\bigl(\because\ 2\text{ の倍数の偶奇と }A_\gamma\text{ の定義}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_horizontal_seam_parity_equals_column",
+                  focus: {
+                    id: "kac_ward_claim_horizontal_seam_parity_equals_column",
+                    kind: "claim",
+                    title: { text: "横切断線の偶奇は最終列の横辺の全行和に等しい" },
+                    labels: ["claim_horizontal_seam_parity_equals_column"],
+                    habitat: "N",
+                    verification: ["sagemath/check/horizontal-seam-parity-equals-column"],
+                    lean: [
+                      "Ising2DLambda.KacWard.horizontal_seam_column_parity",
+                      "Ising2DLambda.NecSuf.KacWard.seam_column_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。各基底辺の通過偶奇 ",
+                        math(String.raw`N_\gamma(e)`), " は ", ref("def_walk_base_edge_parity"),
+                        " に従う。このとき横切断線の偶奇は" ]),
+                      displayMath(String.raw`h(\gamma)=\left(\sum_{i\in\mathbb Z/L\mathbb Z}N_\gamma(n_{\mathrm h}(i,L-1))\right)\bmod2`),
+                      paragraph(["を満たす（", ref("def_edge_sequence_seam_parities"),
+                        "、", ref("claim_edge_row_partition"), "）。", math(String.raw`L-1`),
+                        " は ", ref("def_residue_maps"), " の射影で剰余類へ写す。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`),
+                        " について、", ref("claim_edge_row_partition"),
+                        " の一意な辺番号の分解と ", ref("def_seam_parities"), " より"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{i\in\mathbb Z/L\mathbb Z}\mathbf1_{\operatorname{base}(\vec e)=n_{\mathrm h}(i,L-1)}
+&=\mathbf1_{\exists r\in\mathbb Z/L\mathbb Z:\ \operatorname{base}(\vec e)=n_{\mathrm h}(r,L-1)}
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の一意な辺番号の分解}\bigr)\\
+&=c_{\mathrm h}(\vec e)
+&&\bigl(\because\ \blkref{def_seam_parities}\bigr)
+\end{aligned}`),
+                      paragraph(["左辺は横辺の最終列なら唯一の行で一、他の辺なら零である。上の等式を ",
+                        math(String.raw`\vec e_k`), " に適用し、有限和を入れ替えると"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\sum_i N_\gamma(n_{\mathrm h}(i,L-1))\right)\bmod2
+&=\left(\sum_i\sum_{k=1}^{m}\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,L-1)}\right)\bmod2
+&&\bigl(\because\ \blkref{def_walk_base_edge_parity}\text{ と剰余の加法則}\bigr)\\
+&=\left(\sum_{k=1}^{m}\sum_i\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,L-1)}\right)\bmod2
+&&\bigl(\because\ \text{有限和の交換}\bigr)\\
+&=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2
+&&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
+&=h(\gamma)
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
 \end{aligned}`),
                     ],
                   },

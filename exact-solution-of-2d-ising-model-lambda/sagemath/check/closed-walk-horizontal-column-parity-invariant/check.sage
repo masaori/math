@@ -42,6 +42,10 @@ for size in (1, 2, 3):
                                        for i in range(size))
                 assert vertical == shifted_vertical
                 assert (before + after + vertical + shifted_vertical) % 2 == 0
+                assert after == (sum(parity(("h", i, j)) for i in range(size))
+                                 + shifted_vertical + vertical) % 2
+                assert after == (sum(parity(("h", i, j)) for i in range(size))
+                                 + 2 * vertical) % 2
                 assert before == after
                 checked += 1
 
