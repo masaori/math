@@ -35179,9 +35179,9 @@ Z_L(1)
                         displayMath(String.raw`\begin{aligned}
 &\bigl(\nu_L(\sigma)\bigr)(\partial_0(e))\ne\bigl(\nu_L(\sigma)\bigr)(\partial_1(e))\\
 &\quad\Longleftrightarrow -\sigma(\partial_0(e))\ne-\sigma(\partial_1(e))
-&& (\because\ \blkref{def_global_spin_reversal})\\
+&&\bigl(\because\ \blkref{def_global_spin_reversal}\bigr)\\
 &\quad\Longleftrightarrow \sigma(\partial_0(e))\ne\sigma(\partial_1(e))
-&& (\because\ \mathbb{Z}\ \text{で加法逆元を取る写像は単射})
+&&\bigl(\because\ \mathbb{Z}\ \text{で加法逆元を取る写像は単射}\bigr)
 \end{aligned}`),
                       ],
                     },
@@ -63870,6 +63870,58 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &&\bigl(\because\ \text{不等号の対称性}\bigr)\\
 &\iff N_\gamma(n_{\mathrm v}(i,j+1))=1
 &&\bigl(\because\ \blkref{claim_closed_walk_standard_dual_height_vertical_internal}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_height_one_boundary_vertical_seam_parity",
+                  focus: {
+                    id: "kac_ward_claim_height_one_boundary_vertical_seam_parity",
+                    kind: "claim",
+                    title: { text: "高さ一の境界係数は縦方向の切断線上の通過偶奇で決まる" },
+                    labels: ["claim_height_one_boundary_vertical_seam_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/height-one-boundary-vertical-seam-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.heightOneBoundary_vertical_seam_parity",
+                      "Ising2DLambda.KacWard.heightOneBoundary_vertical_seam_parity_singleCell",
+                      "Ising2DLambda.NecSuf.KacWard.heightOneBoundary_internal_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、代表 ", math(String.raw`0\le i<L`), " を取る。縦切断線偶奇 ",
+                        math(String.raw`v(\gamma)=0`), " と仮定する（", ref("def_edge_sequence_seam_parities"), "）。",
+                        "高さ一のセル集合 ", math(String.raw`S_\gamma`), " の境界係数と通過偶奇について、"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{n_{\mathrm v}(i,0)}\ne0
+\iff N_\gamma(n_{\mathrm v}(i,0))=1`),
+                      paragraph(["が成り立つ。左辺の係数は ", math(String.raw`\mathbb Z`),
+                        "、右辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する。"]),
+                    ],
+                    proof: [
+                      paragraph([math(String.raw`L\ge2`), " のとき、縦辺 ", math(String.raw`n_{\mathrm v}(i,0)`),
+                        " の両側のセルは ", math(String.raw`(i,L-1)`), " と ", math(String.raw`(i,0)`),
+                        " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm v}(i,0)}\ne0
+&\iff f_\gamma(i,L-1)\ne f_\gamma(i,0)
+&&\bigl(\because\ \blkref{claim_height_one_boundary_support}\bigr)\\
+&\iff f_\gamma(i,0)\ne f_\gamma(i,L-1)
+&&\bigl(\because\ \text{不等号の対称性}\bigr)\\
+&\iff N_\gamma(n_{\mathrm v}(i,0))=1
+&&\bigl(\because\ \blkref{claim_closed_walk_standard_dual_height_vertical_seam}\text{ と }v(\gamma)=0\bigr)
+\end{aligned}`),
+                      paragraph([math(String.raw`L=1`), " のとき、両側は同じセルである。"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm v}(0,0)}
+&=\mathbf1_{(0,0)\in S_\gamma}-\mathbf1_{(0,0)\in S_\gamma}
+&&\bigl(\because\ \blkref{claim_cell_set_boundary_coefficients}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)\\
+N_\gamma(n_{\mathrm v}(0,0))
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\text{ の一項和と }v(\gamma)=0\bigr)
 \end{aligned}`),
                     ],
                   },
