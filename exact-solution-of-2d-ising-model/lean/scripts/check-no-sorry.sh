@@ -2099,6 +2099,37 @@ targets=(
   Ising2D.cosh_at_least_one
   "Ising2D.NecSuf.one_add_two_mul_sq_ge_one'"
   Ising2D.cosh_at_least_one_of_necSuf
+  Ising2D.cosh_sub_sinh_eq_exp_neg
+  Ising2D.cosh_add_sinh_eq_exp
+  Ising2D.cosh_sub_sinh_pos
+  Ising2D.real_cosh_gt_sinh
+  Ising2D.two_cosh_pos
+  Ising2D.cosh_pos_of_two_cosh_pos
+  Ising2D.cosh_sinh_basic_properties_1
+  Ising2D.real_neg_lt_zero_of_pos
+  Ising2D.real_exp_neg_lt_one
+  Ising2D.real_one_lt_exp
+  Ising2D.real_exp_sub_exp_neg_pos
+  Ising2D.real_sinh_pos_of_pos
+  Ising2D.cosh_sinh_basic_properties_3
+  "Ising2D.NecSuf.evenPart_sub_oddPart'"
+  "Ising2D.NecSuf.evenPart_add_oddPart'"
+  "Ising2D.NecSuf.evenPart_sub_oddPart_pos'"
+  "Ising2D.NecSuf.oddPart_lt_evenPart'"
+  "Ising2D.NecSuf.two_mul_evenPart_pos'"
+  "Ising2D.NecSuf.evenPart_pos'"
+  "Ising2D.NecSuf.neg_lt_zero_of_pos'"
+  "Ising2D.NecSuf.map_neg_lt_map_zero'"
+  "Ising2D.NecSuf.map_zero_lt_map'"
+  "Ising2D.NecSuf.map_sub_map_neg_pos'"
+  "Ising2D.NecSuf.oddPart_pos'"
+  "Ising2D.NecSuf.evenPart_gt_oddPart_pos'"
+  "Ising2D.NecSuf.evenPart_oddPart_properties'"
+  "Ising2D.NecSuf.invOf_two_pos'"
+  Ising2D.cosh_eq_mul_invOf_two
+  Ising2D.sinh_eq_mul_invOf_two
+  Ising2D.cosh_sinh_basic_properties_1_of_necSuf
+  Ising2D.cosh_sinh_basic_properties_3_of_necSuf
   Ising2D.finite_product_of_positive_reals_is_positive
   "Ising2D.NecSuf.finProdLeft_pos'"
   Ising2D.finite_product_of_positive_reals_is_positive_of_necSuf
