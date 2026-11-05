@@ -65241,6 +65241,8 @@ t_{\circ}(\gamma)
                         "Ising2DLambda.KacWard.periodicPlaneLift",
                         "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk",
                         "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk_eq",
+                        "Ising2DLambda.KacWard.planeLiftIntegerBase_step",
+                        "Ising2DLambda.KacWard.planeLiftIntegerBase_endpoint",
                       ],
                       statement: [
                         paragraph([
@@ -68376,27 +68378,27 @@ P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
                       ]),
                       displayMath(String.raw`\begin{aligned}
 j+am&=(qm+r)+am&&\bigl(\because\ j=qm+r\text{（整数除法）}\bigr)\\
-&=(q+a)m+r&&\bigl(\because\ \mathbb Z\text{ の環の法則}\bigr),\\
-\lfloor(j+am)/m\rfloor&=q+a&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr),\\
-(j+am)\bmod m&=r&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr).
+&=(q+a)m+r&&\bigl(\because\ \mathbb Z\text{ の環の法則}\bigr)\\
+\lfloor(j+am)/m\rfloor&=q+a&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr)\\
+(j+am)\bmod m&=r&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 \widetilde P_{j+am}
 &=P_r+(q+a)B&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ と直前の商・余り}\bigr)\\
 &=P_r+(qB+aB)&&\bigl(\because\ \mathbb Z^2\text{ の整数倍の分配則}\bigr)\\
 &=(P_r+qB)+aB&&\bigl(\because\ \mathbb Z^2\text{ の加法の結合則}\bigr)\\
-&=\widetilde P_j+aB&&\bigl(\because\ \blkref{def_periodic_plane_lift}\bigr).
+&=\widetilde P_j+aB&&\bigl(\because\ \blkref{def_periodic_plane_lift}\bigr)
 \end{aligned}`),
                       paragraph([
                         "次に ", math(String.raw`a:=\lfloor i/m\rfloor\in\mathbb N`),
                         "、", math(String.raw`b:=i\bmod m\in\{0,\ldots,m-1\}`), " と置く。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-i&=am+b&&\bigl(\because\ \text{整数除法}\bigr),\\
+i&=am+b&&\bigl(\because\ \text{整数除法}\bigr)\\
 k_0+i+1&=k_0+(am+b)+1&&\bigl(\because\ i=am+b\bigr)\\
-&=(k_0+b+1)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr),\\
+&=(k_0+b+1)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr)\\
 k_0+i&=k_0+(am+b)&&\bigl(\because\ i=am+b\bigr)\\
-&=(k_0+b)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr).
+&=(k_0+b)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 \widetilde P_{k_0+i+1}-\widetilde P_{k_0+i}
@@ -68406,7 +68408,7 @@ k_0+i&=k_0+(am+b)&&\bigl(\because\ i=am+b\bigr)\\
 &&\bigl(\because\ \text{上で示した }\widetilde P_{j+am}=\widetilde P_j+aB\bigr)\\
 &=\widetilde P_{k_0+b+1}-\widetilde P_{k_0+b}
 &&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr)\\
-&=u_b&&\bigl(\because\ u_b\text{ の定義}\bigr).
+&=u_b&&\bigl(\because\ u_b\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph([
                         "整数除法の一意性により、", math(String.raw`0\le a<c`), "、",
