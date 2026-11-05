@@ -1919,6 +1919,11 @@ targets=(
   Ising2D.VPlusData.checkT_eq_prod_checkW_mul
   Ising2D.VPlusData.traceFactor
   Ising2D.VPlusData.sum_checkT_eq_traceFactor
+  Ising2D.VPlusData.trace_epsilon_mul_V_step5
+  Ising2D.VPlusData.gam_half_pos
+  Ising2D.VPlusData.two_sinh_gam_half_pos
+  Ising2D.VPlusData.prod_two_sinh_gam_half_pos
+  Ising2D.VPlusData.traceFactor_pos_step6
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V
   Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos

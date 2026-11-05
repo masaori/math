@@ -30,7 +30,8 @@
 | Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
 | Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5`（同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
-| Step 6・Step 7 | `traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 6 の 4 本の鎖・Step 7 の同値と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 6 の 4 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・2・4 本目は同じ行の calc、人手が 1 行の 3 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
+| Step 7 | `eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 7 の同値と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -43,6 +44,8 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWords
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 
 namespace Ising2D
 
@@ -580,15 +583,67 @@ theorem trace_epsilon_mul_V :
     exact Or.inl (congrArg F.eta (Subsingleton.elim _ _))
   | r + 1, F, D => exact trace_epsilon_mul_V_step5 D
 
-/-! ## Step 6・Step 7（旧い Step の分け方のまま） -/
+/-! ## Step 6: (2) の不等号 -/
 
-/-- 人手 (2) `ϰ > 0`（人手の Step 6。Step 6 の鎖と 1 対 1 にするのは状態台帳の次の一歩）。 -/
+/-- **原文 Step 6** の 1 本目の鎖: `γ(θ̃_μ)/2 = γ(θ̃_μ)·½ > 0·½ = 0`（`γ(θ̃_μ)` が `D.gam μ`。
+`gamma_theta_tilde_mu_positive` の `γ(θ̃_μ) > 0` は `VPlusData` の入力 `D.hgam μ`）。 -/
+theorem gam_half_pos (μ : Fin M) : D.gam μ / 2 > 0 :=
+  calc D.gam μ / 2
+      = D.gam μ * (1 / 2) := div_eq_mul_one_div _ _   -- ℝ で `a/2 = a·½`
+    _ > 0 * (1 / 2) := mul_lt_mul_of_pos_right (D.hgam μ) one_half_pos
+                                                        -- `γ(θ̃_μ) > 0` の両辺に `½ > 0` を掛ける
+    _ = 0 := zero_mul _                                 -- `0·½ = 0`
+
+/-- **原文 Step 6** の 2 本目の鎖: `2sinh(γ(θ̃_μ)/2) > 2·0 = 0`。 -/
+theorem two_sinh_gam_half_pos (μ : Fin M) : 2 * Real.sinh (D.gam μ / 2) > 0 :=
+  calc 2 * Real.sinh (D.gam μ / 2)
+      > 2 * 0 := mul_lt_mul_of_pos_left (cosh_sinh_basic_properties_3 (D.gam_half_pos μ)).2 two_pos
+                                                        -- `cosh_sinh_basic_properties` (3) の `sinh x > 0`（`x → γ(θ̃_μ)/2`）に
+                                                        -- 上の鎖を当て、両辺に `2 > 0` を掛ける
+    _ = 0 := mul_zero _                                 -- `2·0 = 0`
+
+end VPlusData
+
+namespace VPlusData
+
+/-- **原文 Step 6** の 3 本目の鎖: `Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`）。 -/
+theorem prod_two_sinh_gam_half_pos {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    ∏ μ, 2 * Real.sinh (D.gam μ / 2) > 0 :=
+  finite_product_of_positive_reals_is_positive r (fun μ => 2 * Real.sinh (D.gam μ / 2))
+    (fun μ => D.two_sinh_gam_half_pos μ)
+                                                        -- `finite_product_of_positive_reals_is_positive`
+                                                        -- （`m → M_col`、`j → μ`、`r_μ → 2sinh(γ(θ̃_μ)/2)`）に、上の各 `μ` の鎖を当てる
+
+/-- **原文 Step 6** の 4 本目の鎖（(2) の不等号）:
+`ϰ = (2sinh 2K_2)^{M_col/2}Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`、
+`(2sinh 2K_2)^{M_col/2}` が `D.C`。`def_second_transfer_matrix_prefactor` の `(2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0}` は
+`VPlusData` の入力 `D.hC`）。必要十分版は置かない（Step 6 の 4 本の鎖が効かせるのは、引いた
+`cosh_sinh_basic_properties` (3)・`finite_product_of_positive_reals_is_positive`（それぞれ必要十分版あり）と、
+ℝ の順序と乗法の計算規則（`a/2 = a·½`、正の数を不等号の両辺に掛ける、`0·a = 0`、`a·0 = 0`、正の数どうしの積は正）だけで、
+鎖に固有の取り払える構造が無い）。 -/
+theorem traceFactor_pos_step6 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
+    D.traceFactor > 0 :=
+  calc D.traceFactor
+      = D.C * ∏ μ, 2 * Real.sinh (D.gam μ / 2) := rfl  -- `ϰ` の置き方
+    _ > 0 := mul_pos D.hC D.prod_two_sinh_gam_half_pos
+                                                        -- ℝ で `a > 0`、`b > 0` なら `ab > 0`（`a → (2sinh 2K_2)^{M_col/2}`、
+                                                        -- `b → Π_μ2sinh(γ(θ̃_μ)/2)`）に、`D.hC` と直前の鎖を当てる
+
+end VPlusData
+
+namespace VPlusData
+
+variable {F : CheckFermi M} (D : VPlusData M F)
+
+/-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (2)**: `ϰ > 0`（`M` を一般に取る形）。
+`M = r + 1` は Step 6 の鎖 `traceFactor_pos_step6` である。人手の範囲外の `M = 0`（積が空で `ϰ = C`）は
+mathlib の `simp` で閉じる。 -/
 theorem traceFactor_pos : 0 < D.traceFactor := by
-  unfold traceFactor
-  refine mul_pos D.hC (Finset.prod_pos fun μ _ => ?_)
-  have := D.hgam μ
-  have hs : 0 < Real.sinh (D.gam μ / 2) := Real.sinh_pos_iff.2 (by linarith)
-  linarith
+  match M, F, D with
+  | 0, F, D => simpa [traceFactor] using D.hC
+  | r + 1, F, D => exact traceFactor_pos_step6 D
+
+/-! ## Step 7（旧い Step の分け方のまま） -/
 
 /-- **人手証明の最後の同値**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`（の一方向）。 -/
 theorem eta_univ_eq_one_of_trace_pos (h : 0 < ((epsilon M * D.V).trace).re) :
