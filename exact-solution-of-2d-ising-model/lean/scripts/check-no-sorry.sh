@@ -1870,6 +1870,19 @@ targets=(
   Ising2D.CheckFermi.parityProd
   Ising2D.CheckFermi.prod_one_sub_two_mul_indicator
   Ising2D.CheckFermi.parityProd_mul_Qproj
+  Ising2D.CheckFermi.neg_one_pow_mul_self
+  Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul
+  Ising2D.CheckFermi.finsetOfWord
+  Ising2D.CheckFermi.finsetOfWord_bijective
+  Ising2D.CheckFermi.sum_Qproj_eq_binWordSum
+  Ising2D.CheckFermi.binWordSum_Qproj
+  Ising2D.CheckFermi.epsilon_eq_parityProd_succ
+  Ising2D.CheckFermi.neg_one_pow_mul_self_of_necSuf
+  Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul_of_necSuf
+  Ising2D.CheckFermi.epsilon_eq_parityProd_succ_of_necSuf
+  "Ising2D.NecSuf.neg_one_pow_mul_self'"
+  "Ising2D.NecSuf.mul_eq_smul_mul_of_sign_pow'"
+  "Ising2D.NecSuf.eq_smul_of_mul_eq_smul_mul'"
   Ising2D.CheckFermi.eq_of_mul_Qproj_eq
   Ising2D.CheckFermi.epsilon_eq_parityProd
   Ising2D.checkLambda

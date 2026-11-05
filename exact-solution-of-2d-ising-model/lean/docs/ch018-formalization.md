@@ -110,8 +110,11 @@
 | `CheckFermi.parityFactor_mul_Qproj` / `parityFactor_mul_Qproj_of_necSuf` | `(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε`（人手の 10 行と同じ行の calc。後者は必要十分版 `NecSuf.one_sub_smul_mul_eq_smul'` の特殊化） | (4) |
 | `CheckFermi.finProdLeft_mul_Qproj` / `finProdLeft_mul_Qproj_of_necSuf` | `P_kQ̌_ε = p_kQ̌_ε` の `k` の帰納法（`P_k` は左から掛ける有限積 `NecSuf.finProdLeft`、`p_k` は `∏`。`k = 1` の 3 行と `k → k+1` の 8 行。後者は必要十分版 `NecSuf.finProdLeft_mul_eq_prod_smul'` の特殊化） | (4) |
 | `CheckFermi.parityProd` / `prod_one_sub_two_mul_indicator` / `parityProd_mul_Qproj` | `P := P_{M_col}`（人手の範囲外の `M = 0` は単位行列）、`p_{M_col} = (−1)^{|ε|}`、`PQ̌_ε = (−1)^{|ε|}Q̌_ε` | (4) |
-| `CheckFermi.eq_of_mul_Qproj_eq` | `Q̌_ε` 全体に右から掛けて一致すれば行列が一致する | (4) |
-| **`CheckFermi.epsilon_eq_parityProd`** | **`ε = η_{(1,…,1)}(−1)^M ∏_μ(I − 2ň_μ)`** | **(4)** |
+| `CheckFermi.neg_one_pow_mul_self` / `epsilon_mul_Qproj_eq_smul_parityProd_mul` | `(−1)^{|ε|}(−1)^{|ε|} = ((−1)(−1))^{|ε|} = 1^{|ε|} = 1`（3 行）と、`εQ̌_ε = c(PQ̌_ε)`（`c := η_{(1,…,1)}(−1)^M`。人手の 7 行と同じ行の calc）。必要十分版の特殊化は `*_of_necSuf` | (4) |
+| `CheckFermi.finsetOfWord` / `finsetOfWord_bijective` / `sum_Qproj_eq_binWordSum` / `binWordSum_Qproj` | 人手の語 `ε ∈ {0,1}^𝓜̌` を Lean の `Qproj` の添字（部分集合）へ送る全単射と、`Σ_εQ̌_ε = I` を人手の和 `def_sum_over_binary_words`（`NecSuf.binWordSum`）で述べたもの（運ぶ段。人手の行は無い） | (4)（`check_joint_eigenspace_decomposition` (2)） |
+| `CheckFermi.epsilon_eq_parityProd_succ` / `epsilon_eq_parityProd_succ_of_necSuf` | `ε = εI = εΣ_εQ̌_ε = … = cP`（人手の 9 行と同じ行の calc。人手の `M_col ≥ 1` が `r + 1`。後者は必要十分版の特殊化） | (4) |
+| `CheckFermi.eq_of_mul_Qproj_eq` | `Q̌_ε` 全体に右から掛けて一致すれば行列が一致する（人手の範囲外の `M = 0` にだけ使う） | (4) |
+| **`CheckFermi.epsilon_eq_parityProd`** | **`ε = η_{(1,…,1)}(−1)^M ∏_μ(I − 2ň_μ)`**（`M = r + 1` は 9 行の鎖。人手の範囲外の `M = 0` は 7 行の鎖と `eq_of_mul_Qproj_eq`） | **(4)** |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（ラベル `trace_of_epsilon_V_plus_via_check_eigenvalues`）
 
@@ -279,6 +282,8 @@
 | `NecSuf.eq_neg_of_insert` / **`NecSuf.eq_univ_mul_neg_one_pow_of_sub_card`** / `eq_univ_mul_neg_one_pow`（`NecSuf/SignAfterReplacingComponents.lean`） | **`μ ∉ T ⇒ η(T∪{μ}) = −η(T)` なら `η(T) = η(univ)(−1)^{|ι|−|T|}`**（具体版と同じ 2 行と、`k := |ι| − |T|` の帰納法の 4 行・7 行） | 値の集合は `Monoid R` + `HasDistribNeg R` だけ。人手の「乗法の交換則」の行は `−1` が任意の元と可換であることしか使わず、それは `HasDistribNeg` から出る（`R` の可換則・加法・`η ∈ {±1}` は不要）。添字の集合は有限であることだけ | `epsilon_eigenvalue_on_check_Q` (3) |
 | `NecSuf.one_sub_smul_mul_eq_smul'`（`NecSuf/FactorsActingAsScalarsOnProjection.lean`） | `nQ = dQ` ⇒ `(1 − cn)Q = (1 − cd)Q`（具体版と同じ 10 行） | `NonAssocRing R`・`Ring 𝕜`・`Module 𝕜 R`・`IsScalarTower 𝕜 R R`（`R` の積の結合則・係数の `2`・`ε_μ ∈ {0,1}`・`ň_μ` の冪等性・`𝕜` の可換則は不要） | 同 (4) の前半 |
 | `NecSuf.finProdLeft_mul_eq_prod_smul'`（同） | `A_jQ = a_jQ` ⇒ `(∏_j A_j)Q = (∏_j a_j)Q`（左から掛ける有限積。具体版と同じ 3 行・8 行） | `Semigroup R`・`SemigroupAction 𝕜 R`・`SMulCommClass 𝕜 R R`・`CommMonoid 𝕜`（`R` の加法・単位元、`1x = x`、因子どうしの可換性は不要） | 同 (4) の前半 |
+| `NecSuf.neg_one_pow_mul_self'` / `mul_eq_smul_mul_of_sign_pow'`（`NecSuf/ParityFormFromSignsOnProjections.lean`） | `eQ = η_εQ`, `η_ε = η(−1)^{m−k}`, `PQ = (−1)^kQ`, `k ≤ m` ⇒ `eQ = (η(−1)^m)(PQ)`（具体版と同じ 3 行・7 行） | `Monoid 𝕜`・`HasDistribNeg 𝕜`・`Mul R`・`SemigroupAction 𝕜 R`（`1x = x`、`𝕜` の積の可換則・加法、`R` の結合則・分配則・単位元、`η ∈ {±1}` は不要。`−1` どうしの可換性は `Commute.refl`） | 同 (4) の後半 |
+| `NecSuf.eq_smul_of_mul_eq_smul_mul'`（同） | `Σ_εQ_ε = 1`（`binWordSum`）, `eQ_ε = c(PQ_ε)` ⇒ `e = cP`（具体版の 9 行のうち「`c`, `P` の置き方」を除く 8 行と同じ行） | `MulOneClass R`・`Add R`・`LeftDistribClass R`・`SMul 𝕜 R`・`IsScalarTower 𝕜 R R`（左単位元は効かないが右単位元だけのクラスが無いので `MulOneClass` で受ける。`R` の積の結合則、加法の結合則・可換則・零元、`Q_ε` の冪等性・直交性、`𝕜` の積は不要） | 同 (4) の後半 |
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
 | **`NecSuf.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
@@ -298,7 +303,7 @@
 | 同 (2) | `CheckFermi.eta_insert`（数ベクトルの鎖を人手の順に組む） | 各段の `NecSuf/SignReversalOnGeneratorVector.lean`（行列 `c_μQ_T` の上で同じ結論を出す `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` は手順が違うので対応に数えない） | **系**（`eta_insert_of_necSuf` が冒頭・Step 1〜3 の段を特殊化に替えて同じ組み方をする。`q` を取る段・`Q̌_ε q = q`・`M = 1`・約す段は具体版と共通） |
 | 同 (3) | `CheckFermi.eta_eq_eta_univ_mul`（`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`。人手の帰納法と同じ行の calc） | `NecSuf.eq_univ_mul_neg_one_pow`（具体版と同じ行。効くのは (2) と `Monoid`・`HasDistribNeg` だけ） | **系**（`eta_eq_eta_univ_mul_of_necSuf` / `eta_eq_neg_eta_insert_of_necSuf`） |
 | 同 (4) の前半 | `CheckFermi.parityFactor_mul_Qproj` / `finProdLeft_mul_Qproj`（人手の鎖と同じ行の calc） | `NecSuf.one_sub_smul_mul_eq_smul'` / `finProdLeft_mul_eq_prod_smul'`（具体版と同じ行） | **系としても得られる**（`*_of_necSuf`） |
-| 同 (4) の後半 | `CheckFermi.epsilon_eq_parityProd` | 未検討（後半の 7 行・9 行の鎖を人手どおりに直す回に判断する） | — |
+| 同 (4) の後半 | `CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul` / `epsilon_eq_parityProd_succ`（人手の 7 行・9 行の鎖と同じ行の calc） | `NecSuf.mul_eq_smul_mul_of_sign_pow'` / `eq_smul_of_mul_eq_smul_mul'`（具体版と同じ行。7 行に効くのは `Monoid`・`HasDistribNeg`・`SemigroupAction` だけ、9 行に効くのは右単位元・左分配則・`IsScalarTower` だけ） | **系としても得られる**（`*_of_necSuf`） |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
