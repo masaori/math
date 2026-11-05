@@ -429,4 +429,53 @@ theorem closedWalk_standardDualHeight_horizontal_seam_changes (L m : ℕ) [NeZer
   unfold walkBaseEdgeParity standardDualHeight
   omega
 
+/-- The closed walk supplies local parity; zero full-line parity closes the vertical seam. -/
+theorem closedWalk_standardDualHeight_vertical_seam_of_line_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (i : ℕ) (hL : 2 ≤ L) (hi : i < L)
+    (hline :
+      ((∑ c ∈ Finset.Icc 1 (L - 1),
+          walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) (c : ZMod L))) +
+        walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) 0)) % 2 = 0) :
+    standardDualHeight L m γ ((i : ZMod L), 0) =
+      (standardDualHeight L m γ ((i : ZMod L), ((L - 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) 0)) % 2 := by
+  have hseq (j : ℕ) (hj : j < L) :
+      standardDualHeight L m γ ((i : ZMod L), (j : ZMod L)) =
+        (standardDualHeight L m γ ((i : ZMod L), 0) +
+          ∑ c ∈ Finset.Icc 1 j,
+            walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) (c : ZMod L))) % 2 := by
+    induction j with
+    | zero =>
+        simp
+        unfold standardDualHeight
+        omega
+    | succ j ih =>
+        have hj0 : j < L := by omega
+        have hstep := closedWalk_standardDualHeight_vertical_internal L m γ hγ
+          i j hi hj
+        rw [hstep, ih hj0, Finset.sum_Icc_succ_top (by omega : 1 ≤ j + 1)]
+        omega
+  have hlast : L - 1 < L := by omega
+  have h := hseq (L - 1) hlast
+  have hbound : standardDualHeight L m γ ((i : ZMod L), 0) < 2 := by
+    unfold standardDualHeight
+    omega
+  omega
+
+theorem closedWalk_standardDualHeight_vertical_seam_changes_of_line_parity
+    (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (i : ℕ) (hL : 2 ≤ L) (hi : i < L)
+    (hline :
+      ((∑ c ∈ Finset.Icc 1 (L - 1),
+          walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) (c : ZMod L))) +
+        walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) 0)) % 2 = 0) :
+    (standardDualHeight L m γ ((i : ZMod L), 0) ≠
+      standardDualHeight L m γ ((i : ZMod L), ((L - 1 : ℕ) : ZMod L))) ↔
+    walkBaseEdgeParity γ (edgeOfRow L true (i : ZMod L) 0) = 1 := by
+  rw [closedWalk_standardDualHeight_vertical_seam_of_line_parity L m γ hγ i hL hi hline]
+  unfold standardDualHeight walkBaseEdgeParity
+  omega
+
 end Ising2DLambda.KacWard

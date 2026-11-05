@@ -299,4 +299,63 @@ theorem standardDualHeight_horizontal_seam_changes_of_column_parity (L : ℕ) [N
   exact standardDualHeight_horizontal_seam_changes_of_line_parity L horizontalCross
     verticalCross j hL hj hline
 
+/-- Local parity and a zero vertical full-line parity close the vertical seam. -/
+theorem standardDualHeight_vertical_seam_of_line_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i : ℕ) (hL : 2 ≤ L) (hi : i < L)
+    (hvertex : ∀ j : ℕ, j + 1 < L → ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (horizontalCross (r : ZMod L) (j : ZMod L) +
+        horizontalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 = 0)
+    (hline :
+      ((∑ c ∈ Finset.Icc 1 (L - 1), verticalCross (i : ZMod L) (c : ZMod L)) +
+        verticalCross (i : ZMod L) 0) % 2 = 0) :
+    standardDualHeight L horizontalCross verticalCross ((i : ZMod L), 0) =
+      (standardDualHeight L horizontalCross verticalCross
+          ((i : ZMod L), ((L - 1 : ℕ) : ZMod L)) +
+        verticalCross (i : ZMod L) 0) % 2 := by
+  have hseq (j : ℕ) (hj : j < L) :
+      standardDualHeight L horizontalCross verticalCross
+          ((i : ZMod L), (j : ZMod L)) =
+        (standardDualHeight L horizontalCross verticalCross ((i : ZMod L), 0) +
+          ∑ c ∈ Finset.Icc 1 j, verticalCross (i : ZMod L) (c : ZMod L)) % 2 := by
+    induction j with
+    | zero =>
+        simp
+        unfold standardDualHeight
+        omega
+    | succ j ih =>
+        have hj0 : j < L := by omega
+        have hstep := standardDualHeight_vertical_internal L horizontalCross verticalCross
+          i j hi hj (hvertex j hj)
+        rw [hstep, ih hj0, Finset.sum_Icc_succ_top (by omega : 1 ≤ j + 1)]
+        omega
+  have hlast : L - 1 < L := by omega
+  have h := hseq (L - 1) hlast
+  have hbound : standardDualHeight L horizontalCross verticalCross ((i : ZMod L), 0) < 2 := by
+    unfold standardDualHeight
+    omega
+  omega
+
+theorem standardDualHeight_vertical_seam_changes_of_line_parity (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i : ℕ) (hL : 2 ≤ L) (hi : i < L)
+    (hvertex : ∀ j : ℕ, j + 1 < L → ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (horizontalCross (r : ZMod L) (j : ZMod L) +
+        horizontalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 = 0)
+    (hline :
+      ((∑ c ∈ Finset.Icc 1 (L - 1), verticalCross (i : ZMod L) (c : ZMod L)) +
+        verticalCross (i : ZMod L) 0) % 2 = 0) :
+    (standardDualHeight L horizontalCross verticalCross ((i : ZMod L), 0) ≠
+      standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), ((L - 1 : ℕ) : ZMod L))) ↔
+    verticalCross (i : ZMod L) 0 % 2 = 1 := by
+  rw [standardDualHeight_vertical_seam_of_line_parity L horizontalCross verticalCross
+    i hL hi hvertex hline]
+  unfold standardDualHeight
+  omega
+
 end Ising2DLambda.NecSuf.KacWard

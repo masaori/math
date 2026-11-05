@@ -599,6 +599,7 @@ export const ALL_LABELS = [
   "claim_standard_dual_height_horizontal_internal",
   "claim_standard_dual_height_horizontal_seam_conditional",
   "claim_standard_dual_height_vertical_internal_conditional",
+  "claim_standard_dual_height_vertical_seam_conditional",
   "claim_standard_dual_rectangle_parity",
   "claim_step_advances_direction",
   "claim_successor_direction_selection",
