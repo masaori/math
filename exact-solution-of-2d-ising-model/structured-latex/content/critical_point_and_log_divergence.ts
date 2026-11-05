@@ -403,7 +403,7 @@ A &= s_1 s_2^*
 &= \sinh^2\!\left(\frac{\kappa}{2}\right) + A\sin^2\!\left(\frac{\theta}{2}\right) \\
 \gamma(\theta)
 &= 2\,\mathrm{arcsinh}\!\left(
-     \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right) + A\sin^2\!\left(\frac{\theta}{2}\right)}
+     \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right) + A\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
    \right)
 \end{aligned}`,
       ),
@@ -425,13 +425,29 @@ A &= s_1 s_2^*
     ],
     proof: [
       paragraph([
+        "記号の帰属。",
+        math(String.raw`K_1, K_2, K_2^*, \kappa, A, \theta \in \mathbb{R}`),
+        "、",
+        math(String.raw`c_1, s_1, c_2^*, s_2^* \in \mathbb{R}`),
+        "（",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）、",
+        math(String.raw`\gamma_1(\theta), \gamma(\theta) \in \mathbb{R}`),
+        " である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、cosh・sinh・cos・sin・arccosh・arcsinh の値が部分和の極限・平方根・実対数として定まる実数だからである。",
+        "以下 ",
+        math(String.raw`\sinh^2(a) := (\sinh a)^2`),
+        "（",
+        ref("cosh_half_angle_formula"),
+        "）、",
+        math(String.raw`\sin^2(a) := (\sin a)^2`),
+        " と書く。",
+      ]),
+      paragraph([
         "Step 1（",
         math(String.raw`\gamma_1`),
-        " の書き換え）。",
-        ref("def_gamma1_gamma2_of_theta"),
-        " の ",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
-        " から出発する。",
+        " の書き換えと 1 番目の式）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -440,89 +456,147 @@ A &= s_1 s_2^*
    &&(\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right)
    &&(\because \mathbb R\text{ の分配則}) \\
+&= \left(\cosh 2K_1\cosh 2K_2^* - \sinh 2K_1\sinh 2K_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right)
+   &&(\because \blkref{def_indexed_hyperbolic_abbreviations}) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
    &&(\because \blkref{cosh_addition_formula}\text{ の複号 }-\text{ を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
+&= \cosh\kappa + s_1s_2^*\left(1-\cos\theta\right)
+   &&(\because \blkref{def_kappa}) \\
 &= \cosh\kappa + A\left(1-\cos\theta\right)
-   &&(\because \blkref{def_kappa}\text{ と }\blkref{def_critical_sinh_product_A}) \\
+   &&(\because \blkref{def_critical_sinh_product_A}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
    &&(\because \text{倍角公式 } \cos 2t = 1 - 2\sin^2 t \text{ を } t = \tfrac{\theta}{2} \text{ に適用})
 \end{aligned}`,
       ),
-      paragraph([
-        ref("def_gamma_theta"),
-        " より ",
-        math(String.raw`\gamma(\theta) = \mathrm{arccosh}(\gamma_1(\theta)) \in \mathbb{R}_{\geq 0}`),
-        " が定まり ",
-        math(String.raw`\cosh\gamma(\theta) = \gamma_1(\theta)`),
-        " であるから、1 番目の式が従う。",
-      ]),
-      paragraph([
-        "Step 2（半角の形へ）。",
-        ref("cosh_half_angle_formula"),
-        " を ",
-        math(String.raw`x = \gamma(\theta)`),
-        " と ",
-        math(String.raw`x = \kappa`),
-        " の両方に適用すると",
-      ]),
       displayMath(
         String.raw`\begin{aligned}
-1 + 2\sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)
+\gamma_1(\theta)
+&= \cosh\left(\mathrm{arccosh}\left(\gamma_1(\theta)\right)\right)
+   &&(\because \blkref{arccosh_properties}\text{ (2) を }y = \gamma_1(\theta)\text{ に適用。}\gamma_1(\theta) \ge 1\text{ は }\blkref{gamma1_lower_bound_all_theta}) \\
 &= \cosh\gamma(\theta)
-   &&(\because \blkref{cosh_half_angle_formula}) \\
-&= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   &&(\because \text{Step 1}) \\
-&= 1 + 2\sinh^2\!\left(\frac{\kappa}{2}\right) + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   &&(\because \blkref{cosh_half_angle_formula})
+   &&(\because \blkref{def_gamma_theta})
 \end{aligned}`,
       ),
       paragraph([
-        "両辺から ",
-        math(String.raw`1`),
-        " を引いて ",
-        math(String.raw`2`),
-        " で割ると 2 番目の式を得る。",
+        "二つの鎖の左辺はどちらも ",
+        math(String.raw`\gamma_1(\theta)`),
+        " であり、二つを合わせたものが 1 番目の式である。",
       ]),
       paragraph([
-        "Step 3（",
-        math(String.raw`\mathrm{arcsinh}`),
-        " の形へ）。",
-        math(String.raw`S := \sinh^2(\tfrac{\kappa}{2}) + A\sin^2(\tfrac{\theta}{2}) \geq 0`),
-        " とおく。",
-        math(String.raw`\gamma(\theta) \geq 0`),
-        " より ",
-        math(String.raw`\tfrac{\gamma(\theta)}{2} \geq 0`),
-        " であり、",
+        "Step 2（2 番目の式）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)
+&= \frac{\left(1 + 2\sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)\right) - 1}{2}
+   &&(\because \mathbb R\text{ の四則}) \\
+&= \frac{\cosh\gamma(\theta) - 1}{2}
+   &&(\because \blkref{cosh_half_angle_formula}\text{ を }x = \gamma(\theta)\text{ に適用}) \\
+&= \frac{\left(\cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)\right) - 1}{2}
+   &&(\because \text{Step 1 の 1 番目の式}) \\
+&= \frac{\left(1 + 2\sinh^2\!\left(\frac{\kappa}{2}\right) + 2A\sin^2\!\left(\frac{\theta}{2}\right)\right) - 1}{2}
+   &&(\because \blkref{cosh_half_angle_formula}\text{ を }x = \kappa\text{ に適用}) \\
+&= \sinh^2\!\left(\frac{\kappa}{2}\right) + A\sin^2\!\left(\frac{\theta}{2}\right)
+   &&(\because \mathbb R\text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 3（3 番目の式）。準備として ",
+        math(String.raw`S := \sinh^2(\tfrac{\kappa}{2}) + A\sin^2(\tfrac{\theta}{2}) \in \mathbb{R}`),
+        " とおき、",
+        math(String.raw`S \ge 0`),
+        " と ",
+        math(String.raw`\sinh(\tfrac{\gamma(\theta)}{2}) \ge 0`),
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S
+&= \sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)
+   &&(\because \text{Step 2}) \\
+&= \left(\sinh\frac{\gamma(\theta)}{2}\right)^2
+   &&(\because \sinh^2 \text{ の記法}) \\
+&\ge 0
+   &&(\because \text{実数の 2 乗は非負})
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("arccosh_properties"),
+        " (1) より ",
+        math(String.raw`\gamma(\theta) = \mathrm{arccosh}(\gamma_1(\theta)) \ge 0`),
+        "（",
+        ref("def_gamma_theta"),
+        "。",
+        math(String.raw`\gamma_1(\theta) \ge 1`),
+        " は ",
+        ref("gamma1_lower_bound_all_theta"),
+        "）",
+        "、ゆえに ",
+        math(String.raw`\tfrac{\gamma(\theta)}{2} \ge 0`),
+        " である。",
+        math(String.raw`\tfrac{\gamma(\theta)}{2} > 0`),
+        " なら ",
         ref("cosh_sinh_basic_properties"),
-        " (3) と ",
-        math(String.raw`\sinh 0 = 0`),
-        " より ",
-        math(String.raw`\sinh(\tfrac{\gamma(\theta)}{2}) \geq 0`),
-        "。Step 2 より ",
-        math(String.raw`\sinh^2(\tfrac{\gamma(\theta)}{2}) = S`),
-        " なので、非負実数の平方根の一意性（",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "）から",
-      ]),
-      displayMath(String.raw`\sinh\!\left(\frac{\gamma(\theta)}{2}\right) = \sqrt{S}
-\qquad(\because\ \blkref{sqrt_nonnegative_existence_uniqueness}\text{ と直前の非負性・平方の等式})`),
-      paragraph([
-        ref("sinh_equation_solved_by_arcsinh"),
-        " を ",
-        math(String.raw`u = \tfrac{\gamma(\theta)}{2}`),
+        " (3) より ",
+        math(String.raw`\sinh(\tfrac{\gamma(\theta)}{2}) > 0`),
         "、",
-        math(String.raw`y = \sqrt{S}`),
-        " に適用して ",
-        math(String.raw`\tfrac{\gamma(\theta)}{2} = \mathrm{arcsinh}(\sqrt{S})`),
-        "、すなわち 3 番目の式を得る。",
+        math(String.raw`\tfrac{\gamma(\theta)}{2} = 0`),
+        " なら ",
+        ref("sinh_zero"),
+        " より ",
+        math(String.raw`\sinh(\tfrac{\gamma(\theta)}{2}) = 0`),
+        " であり、どちらでも ",
+        math(String.raw`\sinh(\tfrac{\gamma(\theta)}{2}) \ge 0`),
+        " である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma(\theta)
+&= 2\cdot\frac{\gamma(\theta)}{2}
+   &&(\because \mathbb R\text{ の四則}) \\
+&= 2\,\mathrm{arcsinh}\!\left(\sinh\frac{\gamma(\theta)}{2}\right)
+   &&(\because \blkref{sinh_equation_solved_by_arcsinh}\text{ を }u = \tfrac{\gamma(\theta)}{2},\ y = \sinh\tfrac{\gamma(\theta)}{2}\text{ に適用}) \\
+&= 2\,\mathrm{arcsinh}\!\left(\sqrt{S}^{(\mathbb{R}_{\ge 0})}\right)
+   &&(\because \blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性。}\sinh\tfrac{\gamma(\theta)}{2} \ge 0\text{ と上の鎖の }\left(\sinh\tfrac{\gamma(\theta)}{2}\right)^2 = S) \\
+&= 2\,\mathrm{arcsinh}\!\left(
+     \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right) + A\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
+   \right)
+   &&(\because S \text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
-        "偶関数性は ",
-        math(String.raw`\sinh^2(\tfrac{-\kappa}{2}) = \left(-\sinh(\tfrac{\kappa}{2})\right)^2 = \sinh^2(\tfrac{\kappa}{2})`),
-        " から従う。",
+        "偶関数性。3 番目の式の右辺は ",
+        math(String.raw`\kappa`),
+        " を ",
+        math(String.raw`\sinh^2(\tfrac{\kappa}{2})`),
+        " を通してだけ含み、",
+        math(String.raw`\kappa`),
+        " を ",
+        math(String.raw`-\kappa`),
+        " に置き換えても次の鎖により値が変わらない。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh^2\!\left(\frac{-\kappa}{2}\right)
+&= \left(\sinh\frac{-\kappa}{2}\right)^2
+   &&(\because \sinh^2 \text{ の記法}) \\
+&= \left(\sinh\left(-\frac{\kappa}{2}\right)\right)^2
+   &&(\because \mathbb R\text{ の四則 }\tfrac{-\kappa}{2} = -\tfrac{\kappa}{2}) \\
+&= \left(-\sinh\frac{\kappa}{2}\right)^2
+   &&(\because \blkref{sinh_is_odd}\text{ を }x = \tfrac{\kappa}{2}\text{ に適用}) \\
+&= \left(\sinh\frac{\kappa}{2}\right)^2
+   &&(\because \mathbb R\text{ の四則 }(-a)^2 = a^2) \\
+&= \sinh^2\!\left(\frac{\kappa}{2}\right)
+   &&(\because \sinh^2 \text{ の記法})
+\end{aligned}`,
+      ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: Step 2 の「両辺から 1 を引いて 2 で割る」を、主張の左辺 sinh^2(γ/2) から始まる一続きの鎖にした。Step 1 の記号の代入・加法定理・κ と A の定義を一行ずつに分け、cosh γ = γ_1 を def_gamma_theta と arccosh_properties (2) の鎖にした。γ_1 ≥ 1 の根拠に gamma1_lower_bound_all_theta を引いた。Step 3 で S ≥ 0 を Step 2 から導き、sinh(γ/2) ≥ 0 の根拠に sinh_zero を引き、散文の平方根の一意性と arcsinh の適用を γ(θ) から始まる鎖の行にし、平方根を本文の実数の平方根の記法 √·^(ℝ≥0) にした。偶関数性に sinh_is_odd を引いた。主張の中身は不変。倍角公式 cos 2t = 1 − 2 sin^2 t は全実数上の cos・sin とともに本文に未整備のまま引いている。検算は sagemath/check/gamma_kappa_identity/。",
+      ],
+    },
   },
   {
     id: "critical_004_claim_critical_point_iff_kappa_zero",

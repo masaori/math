@@ -1,0 +1,23 @@
+PASS 加法定理（複号 −）: cosh a cosh b − sinh a sinh b = cosh(a − b)（全次数 16 以下）
+PASS 加法定理 対照: cosh(a + b) とは一致しない
+PASS def_kappa: cosh(2K_1 − 2K_2^*) と cosh κ は同じ級数
+PASS 半角公式: cosh x = 1 + 2 sinh^2(x/2)（次数 16 以下）
+PASS 半角公式 対照: cosh x ≠ 1 + sinh^2(x/2)
+PASS sinh は奇関数: sinh(−x) = −sinh x（級数）
+PASS 偶関数性の鎖の両端: sinh^2(−x/2) = sinh^2(x/2)（級数）
+PASS 倍角公式（級数、次数 30 以下）: 1 − cos θ = 2 sin^2(θ/2)
+PASS 倍角公式 対照（級数）: 1 − cos θ ≠ sin^2(θ/2)
+PASS 倍角公式（厳密値）θ = 0π
+PASS 倍角公式（厳密値）θ = 1π
+PASS 倍角公式（厳密値）θ = -1π
+PASS 倍角公式（厳密値）θ = 1/2π
+PASS 倍角公式（厳密値）θ = -1/3π
+PASS 倍角公式（厳密値）θ = 2/5π
+PASS 倍角公式（厳密値）θ = 7/6π
+PASS 倍角公式（厳密値）θ = -9/4π
+PASS 倍角公式（厳密値）θ = 13/3π
+PASS 倍角公式（厳密値）θ = 5/7π
+PASS 倍角公式（厳密値）θ = -11/8π
+PASS 倍角公式（厳密値）θ = 3π
+PASS 倍角公式 対照（厳密値）θ = 2π/5 で 1 − cos θ ≠ sin^2(θ/2)
+RESULT: PASS
