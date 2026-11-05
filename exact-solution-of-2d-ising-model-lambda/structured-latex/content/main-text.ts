@@ -8977,7 +8977,7 @@ p-1&<p&&\bigl(\because\ 0<p\text{ と自然数の差}\bigr).
 &=e_{r+1}&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
 \end{aligned}`),
                 paragraph(["ここで ", math(String.raw`r<p`), " とする。", math(String.raw`r+1<p`), " ならば、直前の等式と ", math(String.raw`e_{r+1}\in C`), " により ", math(String.raw`\sigma(e_r)\in C`), " である。そうでなければ、"]),
-                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p,\ \neg(r+1<p)\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p,\ \neg(r+1<p)\text{ と自然数の順序}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \sigma(e_r)&=e_{r+1}&&\bigl(\because\ \text{直前に示した一歩の等式}\bigr)\\
 &=e_p&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
@@ -8994,7 +8994,7 @@ p-1&<p&&\bigl(\because\ 0<p\text{ と自然数の差}\bigr).
 &=e_{p-1}&&\bigl(\because\ \sigma\text{ の逆写像の性質}\bigr).
 \end{aligned}`),
                 paragraph([math(String.raw`p-1<p`), " により ", math(String.raw`e_{p-1}\in C`), " なので、", math(String.raw`\sigma^{-1}(e_0)\in C`), " である。", math(String.raw`0<r<p`), " のときは、ある ", math(String.raw`k\in\mathbb N`), " を用いて ", math(String.raw`r=k+1`), " と書ける。このとき、"]),
-                displayMath(String.raw`k<p\qquad\bigl(\because\ k<k+1=r<p\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`k<p\qquad\bigl(\because\ k<k+1=r<p\text{ と自然数の順序}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{-1}(e_{k+1})&=\sigma^{-1}(\sigma(e_k))
 &&\bigl(\because\ \text{一歩の等式を }k\text{ に適用}\bigr)\\
@@ -69164,6 +69164,12 @@ C_m\bigl(u^{(k_0)}\bigr)
                     title: { text: "一側閉包の周期数を一つ増やすと元の閉歩道の循環総回転数だけ増える" },
                     labels: ["claim_one_sided_closure_period_difference_turning"],
                     habitat: "Z",
+                    lean: [
+                      "Ising2DLambda.KacWard.oneSidedClosure_periodDifferenceTurning",
+                      "Ising2DLambda.KacWard.oneSidedClosure_periodDifferenceTurning_from_necSuf",
+                      "Ising2DLambda.KacWard.oneSidedClosureFromWalk_periodDifferenceTurning",
+                      "Ising2DLambda.KacWard.oneSidedClosurePointFromWalk_nonbacktracking",
+                    ],
                     verification: [
                       "sagemath/check/one-sided-periodic-lift-closure",
                       "sagemath/check/one-sided-closure-period-difference-turning",
