@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-05: Lean の通しの証明のゴールラインの確認の百七十個目として、`trace_of_epsilon_V_plus` の (t5b3) を行った。`ClaimExponentialSeriesOfEvenOddPowerTerms.lean` に人手 `exponential_series_of_even_odd_power_terms` の中間目標「実数の評価」（5 行 × 2）・「ノルムの評価」（8 行）・`ε` の鎖（3 行）・級数の和の最後の鎖（3 行）を人手の行と 1 対 1 の calc で置き、主張そのもの `exponential_series_of_even_odd_power_terms`（`Matrix (Fin d) (Fin d) ℂ`、Frobenius ノルム、級数の和は部分和の `limUnder`）が立った。ノルムの評価と `ε` の鎖には必要十分版 `NecSuf/EvenOddSeriesNormEstimate.lean` と導出 `ClaimExponentialSeriesOfEvenOddPowerTermsFromNecSuf.lean` を置いた。本文と SageMath は不変。次は (t5b4)（`trace_of_epsilon_V_plus` の真ん中の鎖をこの主張を `TensorPow M` へ当てる形にする）。
+
 2026-11-05: Lean の通しの証明のゴールラインの確認の百六十九個目として、`trace_of_epsilon_V_plus` の (t5b2) を行った。`ClaimExponentialSeriesOfEvenOddPowerTerms.lean` に人手 `exponential_series_of_even_odd_power_terms` の `S_N`・`E_N`・`α_N`・`β_N`・`L` の定義と、中間目標「部分和」（11 行）・「差」（9 行）を人手の行と 1 対 1 の calc で置いた（`evenOddPartialSum_eq`・`evenOddPartialSum_sub_limit` ほか）。本文と SageMath は不変。レビューの必須の指摘（冒頭の対応表が古い）を直した。人手の「部分和」の 8・9 行目の書き方の未決 2 件は状態台帳へ。次は (t5b3)（実数の評価・ノルムの評価・`S_N → L`）。
 
 2026-11-05: Lean の通しの証明のゴールラインの確認の百六十八個目として、`trace_of_epsilon_V_plus` の (t5b) を (t5b1)〜(t5b5) に割り、(t5b1) を行った。真ん中の鎖が引く人手 `exponential_series_of_even_odd_power_terms` に Lean の具体版が無かったので、`EigenvalueProblem/ReductionToATheta/ClaimExponentialSeriesOfEvenOddPowerTerms.lean` を新しく置き、準備（冪の像・`a_n, b_n` の値・実数の差の像）と中間目標「各項」を人手の行と 1 対 1 の calc にした。本文と SageMath は不変。レビューの必須の指摘は無く、任意の指摘 2 件を直した。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。次は (t5b2)（部分和と差）。

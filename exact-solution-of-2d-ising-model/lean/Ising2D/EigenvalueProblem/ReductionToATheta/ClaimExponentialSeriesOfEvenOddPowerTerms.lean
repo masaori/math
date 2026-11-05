@@ -24,9 +24,13 @@
 | 中間目標「部分和」の「行列は成分で定まる」 | `evenOddPartialSum_eq`（`Matrix.ext`） |
 | 中間目標「差」の成分の鎖の 9 行 | `evenOddPartialSum_sub_limit_apply` の calc の 9 段 |
 | 中間目標「差」の「行列は成分で定まる」 | `evenOddPartialSum_sub_limit`（`Matrix.ext`） |
-
-中間目標「実数の評価」「ノルムの評価」と、`S_N → L` から級数の和を出す最後の鎖は、まだ置いていない
-（状態台帳の (t5b) の割り方）。
+| 中間目標「実数の評価」の `u_N`・`v_N` | `evenOddErrPlus`・`evenOddErrMinus` |
+| 中間目標「実数の評価」の `|α_N − cosh x|` の 5 行・`|β_N − sinh x|` の 5 行 | `evenOddAlpha_sub_cosh_abs_le`・`evenOddBeta_sub_sinh_abs_le` の calc の 5 段 |
+| 中間目標「ノルムの評価」の `κ` と 8 行 | `evenOddKappa` と `evenOddPartialSum_sub_limit_norm_le` の calc の 8 段 |
+| `scalar_exp_is_limit_of_partial_sums` を `K = ℝ` で `x`・`−x` へ当てて `N_1, N_2` を取る段 | `expPartialSumReal_tendsto`・`evenOddErr_eventually_lt` |
+| `N ≥ max(N_1, N_2)` での `‖S_N − L‖ < ε` の 3 行と「よって `‖S_N − L‖ → 0`」 | `evenOddPartialSum_sub_limit_norm_tendsto` の calc の 3 段 |
+| 級数の和 `Σ_{n=0}^{∞}(1/n!)_ℂ T_n`（部分和の極限） | `evenOddSeriesSum`（`limUnder atTop`） |
+| 最後の鎖の 3 行と主張 | `exponential_series_of_even_odd_power_terms` の calc の 3 段 |
 
 根拠の当て方:
 - `scalar_exp_is_limit_of_partial_sums` の冪の約束 `y^0 := 1`・`y^{m+1} := y^m y` は `pow_zero`・`pow_succ`。
@@ -53,7 +57,12 @@
 - 中間目標「部分和」の 9 行目は、人手 8 行目の `(1/2)(…)` を定義の `(…)/2` へ並べ替える `1/2·y = y/2`（実数の四則）を含む。
   人手はこの並べ替えを書いていない。Lean は同じ段の中で `one_div_mul_eq_div` で埋める。
 
-具体的な実数・複素数・行列の等式を並べるだけで、主張に固有の構造は無いので、この段の必要十分版は置かない。
+中間目標「各項」「部分和」「差」は行列の成分の鎖（「行列は成分で定まる」）で示すので、同じ手順のまま対象を一般の集合へ
+上げられず、必要十分版は置かない。ノルムだけを使う中間目標「ノルムの評価」と `ε` の鎖には必要十分版
+`Ising2D/NecSuf/EvenOddSeriesNormEstimate.lean` を置き、この具体版をその特殊化として導くのは
+`ClaimExponentialSeriesOfEvenOddPowerTermsFromNecSuf.lean` である。
+中間目標「実数の評価」は ℝ の絶対値と四則だけで取り払える構造が無く、最後の級数の和の鎖は定義の展開と極限の一意性だけなので、
+どちらにも必要十分版は置かない。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
@@ -67,6 +76,9 @@ import Mathlib.Data.Matrix.Basic
 import Mathlib.Algebra.Ring.Parity
 import Mathlib.Data.Nat.Factorial.Basic
 import Mathlib.Tactic.FieldSimp
+import Mathlib.Analysis.Matrix.Normed
+import Mathlib.Analysis.SpecialFunctions.Exponential
+import Mathlib.Order.Filter.AtTopBot.Basic
 
 namespace Ising2D
 
@@ -367,5 +379,171 @@ theorem evenOddPartialSum_sub_limit (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ)
       = ((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ) • A
           + (c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)) • B :=
   Matrix.ext (evenOddPartialSum_sub_limit_apply A B x c T hTe hTo N)   -- 行列は成分で定まる
+
+/-! ## 中間目標「実数の評価」 -/
+
+/-- 人手の `u_N := |E_N(x) − exp(x)|`（`def_scalar_exp` の実数の `exp` は mathlib の `Real.exp`）。 -/
+noncomputable def evenOddErrPlus (x : ℝ) (N : ℕ) : ℝ := |expPartialSumReal x N - Real.exp x|
+
+/-- 人手の `v_N := |E_N(−x) − exp(−x)|`。 -/
+noncomputable def evenOddErrMinus (x : ℝ) (N : ℕ) : ℝ := |expPartialSumReal (-x) N - Real.exp (-x)|
+
+/-- **人手の中間目標「実数の評価」の 1 本目**: `|α_N − cosh x| ≤ (u_N + v_N)/2`。人手の 5 行と calc の 5 段が 1 対 1 である。 -/
+theorem evenOddAlpha_sub_cosh_abs_le (x : ℝ) (N : ℕ) :
+    |evenOddAlpha x N - Real.cosh x| ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 :=
+  calc |evenOddAlpha x N - Real.cosh x|
+      = |(expPartialSumReal x N + expPartialSumReal (-x) N) / 2 - Real.cosh x| := by
+        rw [evenOddAlpha]                                     -- 人手 1: `α_N` の定義
+    _ = |(expPartialSumReal x N + expPartialSumReal (-x) N) / 2 - (Real.exp x + Real.exp (-x)) / 2| := by
+        rw [Real.cosh_eq]                                     -- 人手 2: `def_cosh_sinh`（mathlib の `Real.cosh_eq`）
+    _ = |((expPartialSumReal x N - Real.exp x) + (expPartialSumReal (-x) N - Real.exp (-x))) / 2| := by
+        congr 1; ring                                         -- 人手 3: 実数の四則
+    _ = |(expPartialSumReal x N - Real.exp x) + (expPartialSumReal (-x) N - Real.exp (-x))| / 2 := by
+        rw [abs_div, abs_two]                                 -- 人手 4: 実数の絶対値は正の数で割ることと交換する
+    _ ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 := by
+        gcongr; exact abs_add_le _ _                          -- 人手 5: 実数の絶対値の三角不等式（人手が添えた `|−y| = |y|` はこの段では使わない）
+
+/-- **人手の中間目標「実数の評価」の 2 本目**: `|β_N − sinh x| ≤ (u_N + v_N)/2`。人手の 5 行と calc の 5 段が 1 対 1 である。 -/
+theorem evenOddBeta_sub_sinh_abs_le (x : ℝ) (N : ℕ) :
+    |evenOddBeta x N - Real.sinh x| ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 :=
+  calc |evenOddBeta x N - Real.sinh x|
+      = |(expPartialSumReal x N - expPartialSumReal (-x) N) / 2 - Real.sinh x| := by
+        rw [evenOddBeta]                                      -- 人手 1: `β_N` の定義
+    _ = |(expPartialSumReal x N - expPartialSumReal (-x) N) / 2 - (Real.exp x - Real.exp (-x)) / 2| := by
+        rw [Real.sinh_eq]                                     -- 人手 2: `def_cosh_sinh`（mathlib の `Real.sinh_eq`）
+    _ = |((expPartialSumReal x N - Real.exp x) - (expPartialSumReal (-x) N - Real.exp (-x))) / 2| := by
+        congr 1; ring                                         -- 人手 3: 実数の四則
+    _ = |(expPartialSumReal x N - Real.exp x) - (expPartialSumReal (-x) N - Real.exp (-x))| / 2 := by
+        rw [abs_div, abs_two]                                 -- 人手 4: 実数の絶対値は正の数で割ることと交換する
+    _ ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 := by
+        gcongr; exact abs_sub _ _                             -- 人手 5: 実数の絶対値の三角不等式と `|−y| = |y|`
+
+/-! ## 中間目標「ノルムの評価」以降
+
+ノルムは `def_matrix_norm` の行列ノルム（成分の絶対値の二乗和の平方根）と値が一致する mathlib の Frobenius ノルムである
+（`ClaimScalarSequenceTimesMatrixConverges.lean` と同じ入れ方）。人手 `matrix_norm_triangle_inequality` (2)・(3) は
+このノルムでの `norm_smul`・`norm_add_le`、`abs_basic_properties` (4)・(6) は `norm_mul`・`Complex.norm_real` と
+`Real.norm_eq_abs`（Lean の具体版は無い）。 -/
+
+section Norm
+
+open Filter Topology
+
+attribute [local instance] Matrix.frobeniusNormedAddCommGroup Matrix.frobeniusNormSMulClass
+
+/-- 人手の `κ := ‖A‖ + |c|‖B‖`。 -/
+noncomputable def evenOddKappa (A B : Matrix (Fin d) (Fin d) ℂ) (c : ℂ) : ℝ := ‖A‖ + ‖c‖ * ‖B‖
+
+/-- **人手の中間目標「ノルムの評価」**: `‖S_N − L‖ ≤ ((u_N + v_N)/2)κ`。人手の 8 行と calc の 8 段が 1 対 1 である。必要十分版は `NecSuf.evenOdd_norm_le'`。 -/
+theorem evenOddPartialSum_sub_limit_norm_le (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c : ℂ)
+    (T : ℕ → Matrix (Fin d) (Fin d) ℂ)
+    (hTe : ∀ n, Even n → T n = (x : ℂ) ^ n • A) (hTo : ∀ n, Odd n → T n = (c * (x : ℂ) ^ n) • B) (N : ℕ) :
+    ‖evenOddPartialSum T N - evenOddLimit A B x c‖
+      ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 * evenOddKappa A B c :=
+  calc ‖evenOddPartialSum T N - evenOddLimit A B x c‖
+      = ‖((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ) • A
+          + (c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)) • B‖ := by
+        rw [evenOddPartialSum_sub_limit A B x c T hTe hTo N] -- 人手 1: 差の中間目標
+    _ ≤ ‖((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ) • A‖
+          + ‖(c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)) • B‖ :=
+        norm_add_le _ _                                       -- 人手 2: `matrix_norm_triangle_inequality` (3)
+    _ = ‖((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ)‖ * ‖A‖
+          + ‖c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)‖ * ‖B‖ := by
+        rw [norm_smul, norm_smul]                             -- 人手 3: `matrix_norm_triangle_inequality` (2) を 2 項へ同時適用
+    _ = ‖((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ)‖ * ‖A‖
+          + (‖c‖ * ‖((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)‖) * ‖B‖ := by
+        rw [norm_mul]                                         -- 人手 4: `abs_basic_properties` (4)
+    _ = |evenOddAlpha x N - Real.cosh x| * ‖A‖
+          + (‖c‖ * |evenOddBeta x N - Real.sinh x|) * ‖B‖ := by
+        rw [Complex.norm_real, Complex.norm_real, Real.norm_eq_abs, Real.norm_eq_abs]
+                                                              -- 人手 5: `abs_basic_properties` (6) を 2 箇所へ同時適用
+    _ ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 * ‖A‖
+          + (‖c‖ * ((evenOddErrPlus x N + evenOddErrMinus x N) / 2)) * ‖B‖ := by
+        gcongr
+        · exact evenOddAlpha_sub_cosh_abs_le x N
+        · exact evenOddBeta_sub_sinh_abs_le x N               -- 人手 6: 実数の評価の中間目標と `‖A‖ ≥ 0`・`|c| ≥ 0`・`‖B‖ ≥ 0`
+    _ = (evenOddErrPlus x N + evenOddErrMinus x N) / 2 * (‖A‖ + ‖c‖ * ‖B‖) := by
+        ring                                                  -- 人手 7: 実数の四則
+    _ = (evenOddErrPlus x N + evenOddErrMinus x N) / 2 * evenOddKappa A B c := by
+        rw [evenOddKappa]                                     -- 人手 8: `κ` の定義
+
+/-- 人手が `K = ℝ` で引く `scalar_exp_is_limit_of_partial_sums`: `E_N(y) → exp(y)`。
+Lean の具体版は無く、既存の慣行（`complex_exp_partial_sum_tendsto`）どおり mathlib の `NormedSpace.expSeries_div_hasSum_exp`
+で引く。mathlib の部分和は `Finset.range` の上の和なので、人手の添字 `{0, …, N}`（Lean の `Fin (N + 1)`）へ
+`Fin.sum_univ_eq_sum_range` で読み替える（人手の行ではない。添字の書き方の読み替え）。 -/
+theorem expPartialSumReal_tendsto (y : ℝ) :
+    Tendsto (fun N => expPartialSumReal y N) atTop (𝓝 (Real.exp y)) := by
+  have h := NormedSpace.expSeries_div_hasSum_exp y
+  rw [← Real.exp_eq_exp_ℝ] at h
+  have h' := (h.tendsto_sum_nat).comp (tendsto_add_atTop_nat 1)
+  refine h'.congr fun N => ?_
+  simp only [Function.comp_apply, expPartialSumReal]
+  exact (Fin.sum_univ_eq_sum_range (fun n => y ^ n / (n ! : ℝ)) (N + 1)).symm
+
+/-- 人手の「`scalar_exp_is_limit_of_partial_sums` を `K = ℝ` で `x` と `−x` へ当てると `u_N → 0`、`v_N → 0`」から
+`N_1, N_2` を取る段: `δ > 0` に対し、ある `N_0` 以降で `u_N < δ` かつ `v_N < δ`（`N_0 := max(N_1, N_2)`）。
+人手の `u_N → 0`・`v_N → 0` は `E_N(±x) → exp(±x)` の `Real.dist_eq` による読み替えで、独立の段として置かない。 -/
+theorem evenOddErr_eventually_lt (x : ℝ) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ N0 : ℕ, ∀ N ≥ N0, evenOddErrPlus x N < δ ∧ evenOddErrMinus x N < δ := by
+  obtain ⟨N1, hN1⟩ := Metric.tendsto_atTop.1 (expPartialSumReal_tendsto x) δ hδ
+  obtain ⟨N2, hN2⟩ := Metric.tendsto_atTop.1 (expPartialSumReal_tendsto (-x)) δ hδ
+  refine ⟨max N1 N2, fun N hN => ⟨?_, ?_⟩⟩
+  · have := hN1 N (le_of_max_le_left hN)
+    rwa [Real.dist_eq] at this                                -- 人手の行ではない。`def_matrix_norm` の収束の定義の読み替え
+  · have := hN2 N (le_of_max_le_right hN)
+    rwa [Real.dist_eq] at this                                -- 同上
+
+/-- **人手の `‖S_N − L‖ → 0`**: `ε > 0` に対し `N ≥ max(N_1, N_2)` で `‖S_N − L‖ < ε`。
+人手の 3 行の鎖と calc の 3 段が 1 対 1 である。必要十分版は `NecSuf.evenOdd_err_tendsto'`。 -/
+theorem evenOddPartialSum_sub_limit_norm_tendsto (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c : ℂ)
+    (T : ℕ → Matrix (Fin d) (Fin d) ℂ)
+    (hTe : ∀ n, Even n → T n = (x : ℂ) ^ n • A) (hTo : ∀ n, Odd n → T n = (c * (x : ℂ) ^ n) • B) :
+    Tendsto (fun N => ‖evenOddPartialSum T N - evenOddLimit A B x c‖) atTop (𝓝 0) := by
+  have hκ : 0 ≤ evenOddKappa A B c := by
+    rw [evenOddKappa]; positivity                             -- `κ ≥ 0`（`‖A‖ ≥ 0`・`|c| ≥ 0`・`‖B‖ ≥ 0`）
+  refine Metric.tendsto_atTop.2 fun ε hε => ?_
+  have hδ : 0 < ε / (evenOddKappa A B c + 1) := by positivity
+  obtain ⟨N0, hN0⟩ := evenOddErr_eventually_lt x hδ
+  refine ⟨N0, fun N hN => ?_⟩
+  obtain ⟨hu, hv⟩ := hN0 N hN
+  rw [Real.dist_eq, sub_zero, abs_norm]                     -- 人手の行ではない。`def_matrix_norm` の収束の定義の読み替え
+  calc ‖evenOddPartialSum T N - evenOddLimit A B x c‖
+      ≤ (evenOddErrPlus x N + evenOddErrMinus x N) / 2 * evenOddKappa A B c :=
+        evenOddPartialSum_sub_limit_norm_le A B x c T hTe hTo N   -- 人手 1: ノルムの評価の中間目標
+    _ ≤ ε / (evenOddKappa A B c + 1) * evenOddKappa A B c := by
+        have : (evenOddErrPlus x N + evenOddErrMinus x N) / 2 < ε / (evenOddKappa A B c + 1) := by linarith
+        exact mul_le_mul_of_nonneg_right this.le hκ          -- 人手 2: `(u_N + v_N)/2 < ε/(κ+1)` と `κ ≥ 0`
+    _ < ε := by
+        rw [div_mul_eq_mul_div, div_lt_iff₀ (by linarith)]
+        nlinarith                                             -- 人手 3: `κ < κ + 1` と `ε > 0`
+
+/-- 人手の級数の和 `Σ_{n=0}^{∞} (1/n!)_ℂ T_n`（`def_matrix_norm` の「部分和 `S_N` の極限」）。Lean は部分和
+`evenOddPartialSum T N` の `limUnder atTop` で書く（`ClaimEigenvaluesCheckVprime.lean` の `Vprime_mul_Qproj` と同じ書き方）。 -/
+noncomputable def evenOddSeriesSum (T : ℕ → Matrix (Fin d) (Fin d) ℂ) : Matrix (Fin d) (Fin d) ℂ :=
+  limUnder atTop (fun N => evenOddPartialSum T N)
+
+/-- **人手 `exponential_series_of_even_odd_power_terms`**（具体版）: 部分和 `S_N` は `L` に収束し（級数は収束し）、
+級数の和は `(cosh x)_ℂ A + (c(sinh x)_ℂ)B` である。
+
+人手の収束 `‖S_N − L‖ → 0`（`evenOddPartialSum_sub_limit_norm_tendsto`）と Lean の `Tendsto … (𝓝 L)` は
+`tendsto_iff_norm_sub_tendsto_zero` で行き来する（人手の行ではない。収束の定義の読み替え）。
+最後の鎖の 3 行と calc の 3 段が 1 対 1 である。2 段目の `Filter.Tendsto.limUnder_eq` は、人手が 1 行目の根拠に添えた
+`matrix_norm_triangle_inequality` (4)（極限の一意性。Lean の具体版は無い）に当たる。 -/
+theorem exponential_series_of_even_odd_power_terms (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c : ℂ)
+    (T : ℕ → Matrix (Fin d) (Fin d) ℂ)
+    (hTe : ∀ n, Even n → T n = (x : ℂ) ^ n • A) (hTo : ∀ n, Odd n → T n = (c * (x : ℂ) ^ n) • B) :
+    Tendsto (fun N => evenOddPartialSum T N) atTop (𝓝 (evenOddLimit A B x c))
+      ∧ evenOddSeriesSum T = ((Real.cosh x : ℝ) : ℂ) • A + (c * ((Real.sinh x : ℝ) : ℂ)) • B := by
+  have hS : Tendsto (fun N => evenOddPartialSum T N) atTop (𝓝 (evenOddLimit A B x c)) :=
+    tendsto_iff_norm_sub_tendsto_zero.2 (evenOddPartialSum_sub_limit_norm_tendsto A B x c T hTe hTo)
+  refine ⟨hS, ?_⟩
+  calc evenOddSeriesSum T
+      = limUnder atTop (fun N => evenOddPartialSum T N) := rfl
+                                                              -- 人手 1: `def_matrix_norm` の級数の和（極限は (4) により一意）
+    _ = evenOddLimit A B x c := hS.limUnder_eq                -- 人手 2: `S_N → L`（`matrix_norm_triangle_inequality` (4) は Lean ではここで効く）
+    _ = ((Real.cosh x : ℝ) : ℂ) • A + (c * ((Real.sinh x : ℝ) : ℂ)) • B := rfl
+                                                              -- 人手 3: `L` の定義
+
+end Norm
 
 end Ising2D

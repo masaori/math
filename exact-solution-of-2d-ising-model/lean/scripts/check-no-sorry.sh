@@ -1066,6 +1066,17 @@ targets=(
   Ising2D.real_inclusion_sub
   Ising2D.evenOddTerm_of_even
   Ising2D.evenOddTerm_of_odd
+  Ising2D.evenOddPartialSum_sub_limit
+  Ising2D.evenOddAlpha_sub_cosh_abs_le
+  Ising2D.evenOddBeta_sub_sinh_abs_le
+  Ising2D.evenOddPartialSum_sub_limit_norm_le
+  Ising2D.expPartialSumReal_tendsto
+  Ising2D.evenOddPartialSum_sub_limit_norm_tendsto
+  Ising2D.exponential_series_of_even_odd_power_terms
+  Ising2D.evenOddPartialSum_sub_limit_norm_le_of_necSuf
+  Ising2D.evenOddPartialSum_sub_limit_norm_tendsto_of_necSuf
+  "Ising2D.NecSuf.evenOdd_norm_le'"
+  "Ising2D.NecSuf.evenOdd_err_tendsto'"
   Ising2D.TConj_V1plusHalf_checkZ
   Ising2D.TConj_V1plusHalf_checkY
   Ising2D.smul_conj_smul_inv_eq
