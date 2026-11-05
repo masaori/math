@@ -1906,6 +1906,13 @@ targets=(
   "Ising2D.NecSuf.wordCount_castSucc'"
   "Ising2D.NecSuf.wordCount_le'"
   "Ising2D.NecSuf.map_prod_two_valued_eq_pow'"
+  Ising2D.CheckFermi.checkH
+  Ising2D.CheckFermi.checkH_mem
+  Ising2D.CheckFermi.checkH_ofReal
+  Ising2D.VPlusData.checkT
+  Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH
+  Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf
+  "Ising2D.NecSuf.signed_term_eq_map_mul'"
   Ising2D.VPlusData.traceFactor
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V

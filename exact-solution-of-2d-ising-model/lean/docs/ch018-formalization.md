@@ -128,8 +128,10 @@
 | `VPlusData.trace_epsilon_mul_V_eq_sum` | `tr(εV^{(+)}) = ∑_T η_T Λ̌_T`（`Finset.sum`。`M = r + 1` は Step 1 の鎖を `finsetOfWord` で付け替える。人手の範囲外の `M = 0` は mathlib） | Step 1 |
 | `Ising2D.checkU` / `ite_eq_one_eq_val` / `card_finsetOfWord_one` / `card_finsetOfWord_castSucc` / `card_finsetOfWord_le` | `ǔ^{(1)} := 1`、`ǔ^{(0)} := −1`、`\|ε\|_1 = ε_1`、`\|ε\|_{k+1} = \|ε\|_k + ε_{k+1}`、`\|ε\|_k ≤ k` | 準備 |
 | `Ising2D.checkU_prod_eq_neg_one_pow` / `checkU_prod_eq_neg_one_pow_of_necSuf` | `(Π_{μ≤k}ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−\|ε\|_k}`（`k` の帰納法。人手の `k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行と同じ行の calc。人手の `k` が `n + 1`。後者は必要十分版の特殊化） | Step 2 |
+| `CheckFermi.checkH` / `checkH_mem` / `checkH_ofReal` / `VPlusData.checkT` | `ȟ ∈ {1,−1}` を `ȟ_ℂ = η_{(1,…,1)}` となるように取る、`ť_ε := (Π_μǔ^{(ε_μ)})Λ̌_ε` | 準備・Step 3 |
+| `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH` / `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf` | `η_ε(Λ̌_ε)_ℂ = (ť_εȟ)_ℂ`（人手の 7 行と同じ行の calc。人手の `M_col` が `r + 1`。後者は必要十分版の特殊化） | Step 3 |
 | `VPlusData.traceFactor` / `traceFactor_pos` | `C·∏_μ 2 sinh(γ_μ/2) > 0`（旧い Step の分け方のまま） | (2)・Step 6 |
-| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`**（旧い Step の分け方のまま。人手の Step 3〜5 の鎖と 1 対 1 にするのは状態台帳の次の一歩） | **(1)・Step 5（定理本体）** |
+| **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`**（旧い Step の分け方のまま。Step 2・Step 3 の具体版を使って人手の Step 4〜5 の鎖と 1 対 1 にするのは状態台帳の次の一歩） | **(1)・Step 5（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | (3)・Step 7 |
 
 #### `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
@@ -286,6 +288,7 @@
 | `NecSuf.finProdLeft_mul_eq_prod_smul'`（同） | `A_jQ = a_jQ` ⇒ `(∏_j A_j)Q = (∏_j a_j)Q`（左から掛ける有限積。具体版と同じ 3 行・8 行） | `Semigroup R`・`SemigroupAction 𝕜 R`・`SMulCommClass 𝕜 R R`・`CommMonoid 𝕜`（`R` の加法・単位元、`1x = x`、因子どうしの可換性は不要） | 同 (4) の前半 |
 | `NecSuf.neg_one_pow_mul_self'` / `mul_eq_smul_mul_of_sign_pow'`（`NecSuf/ParityFormFromSignsOnProjections.lean`） | `eQ = η_εQ`, `η_ε = η(−1)^{m−k}`, `PQ = (−1)^kQ`, `k ≤ m` ⇒ `eQ = (η(−1)^m)(PQ)`（具体版と同じ 3 行・7 行） | `Monoid 𝕜`・`HasDistribNeg 𝕜`・`Mul R`・`SemigroupAction 𝕜 R`（`1x = x`、`𝕜` の積の可換則・加法、`R` の結合則・分配則・単位元、`η ∈ {±1}` は不要。`−1` どうしの可換性は `Commute.refl`） | 同 (4) の後半 |
 | `NecSuf.map_prod_two_valued_eq_pow'`（`NecSuf/PowerFromProductOfTwoValuedFactors.lean`。数え上げの `wordCount_one'`・`wordCount_castSucc'`・`wordCount_le'` も同じファイル） | `f(ab) = f(a)f(b)`, `f(u(1)) = 1`, `f(u(0)) = s` ⇒ `f(Π_μ u(ε_μ)) = s^{k−\|ε\|_k}`（具体版と同じ 5 行・7 行・6 行・6 行） | `Mul R`（有限積は左から掛ける `finProdLeft`。`R` の結合則・単位元・可換則は不要）・`Monoid S`（効くのは単位元の `1z = z`・`z1 = z` と冪の定義。`S` の結合則・可換則、`s = −1`、`(−1)(−1) = 1`、`f(1) = 1` は不要） | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
+| `NecSuf.signed_term_eq_map_mul'`（`NecSuf/SignedTermAsImageOfReorderedProduct.lean`） | `f(a)f(b) = f(ab)`, `ηε = η1q`, `f(u) = q`, `f(h) = η1` ⇒ `ηεf(l) = f((ul)h)`（具体版と同じ 6 行。7 行目の `ť_ε` の置き方は具体版の定義） | `CommSemigroup R`（6 行目の `(ab)c = (bc)a` に結合則と可換則が 1 回ずつ要る）・`Mul S`（`S` の結合則・可換則・単位元、`q` が `−1` の冪であること、`η1`・`h` が `±1` であること、`f(1) = 1` は不要） | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 3 |
 | `NecSuf.eq_smul_of_mul_eq_smul_mul'`（同） | `Σ_εQ_ε = 1`（`binWordSum`）, `eQ_ε = c(PQ_ε)` ⇒ `e = cP`（具体版の 9 行のうち「`c`, `P` の置き方」を除く 8 行と同じ行） | `MulOneClass R`・`Add R`・`LeftDistribClass R`・`SMul 𝕜 R`・`IsScalarTower 𝕜 R R`（左単位元は効かないが右単位元だけのクラスが無いので `MulOneClass` で受ける。`R` の積の結合則、加法の結合則・可換則・零元、`Q_ε` の冪等性・直交性、`𝕜` の積は不要） | 同 (4) の後半 |
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |

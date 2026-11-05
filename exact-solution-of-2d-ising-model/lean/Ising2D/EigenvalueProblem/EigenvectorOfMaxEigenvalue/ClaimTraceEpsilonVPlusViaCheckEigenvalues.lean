@@ -25,13 +25,15 @@
 | --- | --- |
 | Step 1 の 13 行の鎖 `tr(εV^{(+)}) = … = Σ_εη_ε(Λ̌_ε)_ℂ` | `VPlusData.trace_epsilon_mul_V_step1`（同じ行の calc。人手の `M_col` が `r + 1`） |
 | Step 2 の `(Π_{μ≤k}ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−\|ε\|_k}` の `k` の帰納法（`k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行）と準備の `ǔ^{(e)}`・`\|ε\|_k` の数え上げ | `checkU_prod_eq_neg_one_pow`（同じ行の calc。人手の `k` が `n + 1`）・`checkU`・`ite_eq_one_eq_val`・`card_finsetOfWord_one`・`card_finsetOfWord_castSucc`・`card_finsetOfWord_le`（必要十分版の特殊化は `checkU_prod_eq_neg_one_pow_of_necSuf`。必要十分版は `NecSuf/PowerFromProductOfTwoValuedFactors.lean`） |
-| Step 3〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2 の `checkU_prod_eq_neg_one_pow` はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
+| Step 4〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2・Step 3 の `checkU_prod_eq_neg_one_pow`・`eta_mul_checkLambda_eq_checkT_mul_checkH` はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.NecSuf.PowerFromProductOfTwoValuedFactors
+import Ising2D.NecSuf.SignedTermAsImageOfReorderedProduct
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 
 namespace Ising2D
@@ -315,11 +317,82 @@ theorem checkU_prod_eq_neg_one_pow_of_necSuf (n : ℕ) (ε : Fin (n + 1) → Fin
     checkU (-1 : ℂ) (by rw [checkU_one, Complex.ofReal_one])
     (by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]) n ε
 
+/-! ## Step 3: 各項を実数の包含で表す -/
+
+namespace CheckFermi
+
+/-- 準備の `ȟ ∈ {1,−1} ⊂ ℝ`。`η_{(1,…,1)} ∈ {1_ℂ, −1_ℂ}` なので、`ȟ_ℂ = η_{(1,…,1)}` となるように取る
+（`η_{(1,…,1)} = 1_ℂ` なら `1`、そうでなければ `−1`。取り方を満たすことは `checkH_ofReal`）。 -/
+noncomputable def checkH (F : CheckFermi M) : ℝ := if F.eta Finset.univ = 1 then 1 else -1
+
+/-- 準備の `ȟ ∈ {1,−1}`。 -/
+theorem checkH_mem (F : CheckFermi M) : F.checkH = 1 ∨ F.checkH = -1 := by
+  unfold checkH
+  by_cases h : F.eta Finset.univ = 1
+  · exact Or.inl (if_pos h)
+  · exact Or.inr (if_neg h)
+
+/-- 準備の `ȟ` の取り方 `ȟ_ℂ = η_{(1,…,1)}`（`η_{(1,…,1)} ∈ {1_ℂ, −1_ℂ}` は `epsilon_eigenvalue_on_check_Q` (1)、
+`±1_ℂ` は `inclusion_rr_to_cc` の略記）。 -/
+theorem checkH_ofReal (F : CheckFermi M) : ((F.checkH : ℝ) : ℂ) = F.eta Finset.univ := by
+  unfold checkH
+  rcases F.eta_mem Finset.univ with h | h
+  · rw [if_pos h, Complex.ofReal_one, h]
+  · have hne : F.eta Finset.univ ≠ 1 := by rw [h]; norm_num
+    rw [if_neg hne, Complex.ofReal_neg, Complex.ofReal_one, h]
+
+end CheckFermi
+
+namespace VPlusData
+
+/-- Step 3 の `ť_ε := (Π_{μ=1}^{M_col} ǔ^{(ε_μ)}) Λ̌_ε ∈ ℝ`（人手の `M_col` が Lean の `r + 1`）。 -/
+noncomputable def checkT {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) (ε : Fin (r + 1) → Fin 2) : ℝ :=
+  (∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε)
+
+/-- **原文 Step 3** の 7 行の鎖:
+`η_ε(Λ̌_ε)_ℂ = (η_{(1,…,1)}(−1_ℂ)^{M_col−|ε|})(Λ̌_ε)_ℂ = (η_{(1,…,1)}(Π_μǔ^{(ε_μ)})_ℂ)(Λ̌_ε)_ℂ
+= (ȟ_ℂ(Π_μǔ^{(ε_μ)})_ℂ)(Λ̌_ε)_ℂ = (ȟΠ_μǔ^{(ε_μ)})_ℂ(Λ̌_ε)_ℂ = ((ȟΠ_μǔ^{(ε_μ)})Λ̌_ε)_ℂ
+= (((Π_μǔ^{(ε_μ)})Λ̌_ε)ȟ)_ℂ = (ť_εȟ)_ℂ`
+（人手の `M_col` が Lean の `r + 1`、`η_ε` が `F.eta (CheckFermi.finsetOfWord ε)`、`|ε|` が `(CheckFermi.finsetOfWord ε).card`）。 -/
+theorem eta_mul_checkLambda_eq_checkT_mul_checkH {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F)
+    (ε : Fin (r + 1) → Fin 2) :
+    F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)
+      = ((D.checkT ε * F.checkH : ℝ) : ℂ) :=
+  calc F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)
+      = (F.eta Finset.univ * (-1 : ℂ) ^ ((r + 1) - (CheckFermi.finsetOfWord ε).card))
+          * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) := by
+        rw [F.eta_eq_eta_univ_mul]                      -- `epsilon_eigenvalue_on_check_Q` (3)
+    _ = (F.eta Finset.univ * ((∏ μ, checkU (ε μ) : ℝ) : ℂ))
+          * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) := by
+        rw [checkU_prod_eq_neg_one_pow r ε]             -- Step 2 の `k = M_col` の式を右辺から左辺へ
+    _ = (((F.checkH : ℝ) : ℂ) * ((∏ μ, checkU (ε μ) : ℝ) : ℂ))
+          * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) := by
+        rw [F.checkH_ofReal]                            -- `ȟ` の取り方 `ȟ_ℂ = η_{(1,…,1)}` を右辺から左辺へ
+    _ = ((F.checkH * ∏ μ, checkU (ε μ) : ℝ) : ℂ)
+          * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) := by
+        rw [real_inclusion_mul]                         -- `real_inclusion_preserves_product`（`a → ȟ`、`b → Π_μǔ^{(ε_μ)}`）
+    _ = (((F.checkH * ∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) :=
+        real_inclusion_mul _ _                          -- `real_inclusion_preserves_product`（`a → ȟΠ_μǔ^{(ε_μ)}`、`b → Λ̌_ε`）
+    _ = ((((∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε)) * F.checkH : ℝ) : ℂ) := by
+        rw [mul_assoc, mul_comm]                        -- ℝ で `(ab)c = (bc)a`（乗法の交換則と結合則）
+    _ = ((D.checkT ε * F.checkH : ℝ) : ℂ) := rfl        -- `ť_ε` の置き方
+
+/-- `eta_mul_checkLambda_eq_checkT_mul_checkH` を必要十分版 `NecSuf.signed_term_eq_map_mul'`
+（`f → (·)_ℂ`、`h → ȟ`、`u → Π_μǔ^{(ε_μ)}`、`l → Λ̌_ε`）の特殊化として。 -/
+theorem eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf {r : ℕ} {F : CheckFermi (r + 1)}
+    (D : VPlusData (r + 1) F) (ε : Fin (r + 1) → Fin 2) :
+    F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)
+      = ((D.checkT ε * F.checkH : ℝ) : ℂ) :=
+  NecSuf.signed_term_eq_map_mul' (fun a : ℝ => (a : ℂ)) real_inclusion_mul
+    (F.eta_eq_eta_univ_mul _) (checkU_prod_eq_neg_one_pow r ε) F.checkH_ofReal
+
+end VPlusData
+
 namespace VPlusData
 
 variable {F : CheckFermi M} (D : VPlusData M F)
 
-/-! ## Step 3 以降（旧い Step の分け方のまま）: 積への分解 -/
+/-! ## Step 4 以降（旧い Step の分け方のまま）: 積への分解 -/
 
 /-- 人手証明 Step 2 の右辺の実数因子 `(2 sinh 2K_2)^{M/2} ∏_μ 2 sinh(γ(θ̃_μ)/2)`。 -/
 noncomputable def traceFactor : ℝ := D.C * ∏ μ : Fin M, (2 * Real.sinh (D.gam μ / 2))
