@@ -21,19 +21,26 @@
 ## 人手証明との対応
 
 - (1) 「`trace_of_epsilon_V_plus` そのもの」: `ClaimTraceEpsilonVPlusClosedForm.lean` の `trace_of_epsilon_V_plus`
+- (2) の含意の鎖 3 行（証明の `htr`・`heta`・`hεQ`）:
+  - 1 行目 `tr(εV^{(+)}) > 0`（`∵` (1)）: (1) の右辺の実数を `s ∈ ℝ_{>0}` とし、ℂ の元の `z > 0` の定め方
+    （正の実数の包含に等しい。`tr(εV^{(+)}) = s_ℂ` と読むのは `max_eigenvector_in_even_sector` (1) の 1 行目と同じ）どおり
+    `∃ s ∈ ℝ_{>0}, tr(εV^{(+)}) = s_ℂ` を作る。`vPlusDataOf` の `V^{(+)}` は `VPlus` の形で持つので、
+    `vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus`（`K_2^* = Kstar K_2` は `IsingParam.K2star` の定義）で (1) の `V^{(+)}` へ戻す（運ぶ段）。
+    Lean の (1) は `∈ ℝ_{>0}` を `0 < Re tr(εV^{(+)})` で持つので、等号で書き換えて `0 < s` を読む
+  - 2 行目 `η_{(1,…,1)} = +1`: `trace_of_epsilon_V_plus_via_check_eigenvalues` (3) の `⟸`（`VPlusData.eta_univ_eq_one_iff_trace_pos`）
+  - 3 行目 `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`: `epsilon_eigenvalue_on_check_Q` (1) に 2 行目を代入する鎖
+    `CheckFermi.epsilon_mul_Qproj_univ_of_eta`（`TheoremMaxEigenvectorInEvenSector.lean`。`1_ℂ Q̌ = Q̌` は `scalar_multiple_by_one`）
 - (2) の前置き `y ∈ im Q̌_{(1,…,1)}` を取ると冪等性より `y = Q̌_{(1,…,1)}y`:
-  `check_joint_eigenspace_decomposition` (1) の冪等性 `CheckFermi.Qproj_mul_self` と `Matrix.mulVec_mulVec`
-- (2) 1 行目 `tr(εV^{(+)}) > 0`: (1)
-- (2) 2 行目 `η_{(1,…,1)} = +1`: `trace_of_epsilon_V_plus_via_check_eigenvalues` の同値
-  （`VPlusData.eta_univ_eq_one_of_trace_pos`）
-- (2) 3 行目 `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`: `epsilon_eigenvalue_on_check_Q` (1) の
-  `εQ̌_{(1,…,1)} = η_{(1,…,1)}Q̌_{(1,…,1)}`（`CheckFermi.epsilon_mul_Qproj`）に 2 行目を代入する
+  `CheckFermi.Qproj_univ_mulVec_of_mem_range`（冪等性は人手 `check_joint_eigenspace_decomposition` (1) と 1 対 1 の
+  `CheckFermiSetup.Qproj_mul_self` から運んだ `checkFermiOf_Qproj_univ_mul_self`）
 - `εy = εQ̌_{(1,…,1)}y = Q̌_{(1,…,1)}y = y` の式変形 3 行: 証明の最後の `calc`
-  （2 段目の積の結合 `ε(Q̌y) = (εQ̌)y`（`Matrix.mulVec_mulVec`）は Lean で補った中間）
+  （人手 1 と 2 の間の積の結合 `ε(Q̌y) = (εQ̌)y`（`mat_mult_associative`。具体版が無いので `Matrix.mulVec_mulVec`）は Lean で補った段）
 
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
 （(1) の証明が使う 1 次元開鎖のスピン和と、`exp(K_1εG)` の鎖が引く `exponential_series_of_even_odd_power_terms` のノルムの評価の
-必要十分版は `NecSuf/OpenChainSpinSum.lean`・`NecSuf/EvenOddSeriesNormEstimate.lean`、(2) の各行の必要十分版は `Ising2D/NecSuf/ParityFermion.lean` が持つ）。
+必要十分版は `NecSuf/OpenChainSpinSum.lean`・`NecSuf/EvenOddSeriesNormEstimate.lean` にある。(2) の各行が引く
+`max_eigenvector_in_even_sector` の鎖は必要十分版を置かない（`TheoremMaxEigenvectorInEvenSector.lean` の冒頭）が、
+3 行目が引く `epsilon_eigenvalue_on_check_Q` の必要十分版は `ClaimEpsilonEigenvalueOnCheckQ.lean` の冒頭が指す `NecSuf/ParityFermion.lean` ほかにある）。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
@@ -59,25 +66,31 @@ theorem max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus (P : IsingPar
   -- (1): `trace_of_epsilon_V_plus` そのもの
   have h1 := trace_of_epsilon_V_plus hM2 P.K1_pos P.K2
   refine ⟨h1, fun x => ?_⟩
-  have hM : M ≠ 0 := by omega
-  set F := checkFermiOf P hM with hF
-  set D := vPlusDataOf P hM P.c2_mul_s2star_eq_c2star with hD
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 1 := ⟨M - 1, by omega⟩
+  set F := checkFermiOf P (Nat.succ_ne_zero r) with hF
+  set D := vPlusDataOf P (Nat.succ_ne_zero r) P.c2_mul_s2star_eq_c2star with hD
+  -- (2) 1 行目: `tr(εV^{(+)}) > 0`（∵ (1)。ℂ の元の `z > 0` の定め方で、`s` は (1) の右辺の実数）
+  have htr : ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ) := by
+    have hV : D.V = VPlusOfTransfer (r + 1) (P.K1 : ℂ) P.K2 := by
+      rw [hD, vPlusDataOf_V, IsingParam.K2star, ← VPlusOfTransfer_eq_VPlus P.K2_pos]
+    obtain ⟨heq, hpos⟩ := h1
+    rw [heq, Complex.ofReal_re] at hpos
+    exact ⟨_, hpos, hV ▸ heq⟩
+  -- (2) 2 行目: `η_{(1,…,1)} = +1`（∵ `trace_of_epsilon_V_plus_via_check_eigenvalues` (3) の同値）
+  have heta : F.eta Finset.univ = 1 := D.eta_univ_eq_one_iff_trace_pos.mpr htr
+  -- (2) 3 行目: `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`（∵ `epsilon_eigenvalue_on_check_Q` (1)）
+  have hεQ : epsilon (r + 1) * F.Qproj Finset.univ = F.Qproj Finset.univ :=
+    F.epsilon_mul_Qproj_univ_of_eta heta
+  -- (2) の前置き: `y ∈ im Q̌_{(1,…,1)}` を取ると、`check_joint_eigenspace_decomposition` (1) の冪等性より `y = Q̌_{(1,…,1)}y`
   set y := F.Qproj Finset.univ *ᵥ x with hyx
-  -- (2) の前置き: `y ∈ im Q̌_{(1,…,1)}` なら冪等性より `y = Q̌_{(1,…,1)}y`
-  have hy : F.Qproj Finset.univ *ᵥ y = y := by
-    rw [hyx, Matrix.mulVec_mulVec, F.Qproj_mul_self]
-  -- (2) 1 行目: (1) の `tr(εV^{(+)}) > 0` を `vPlusDataOf` の `V^{(+)}` の形で読む
-  have htr : 0 < ((epsilon M * D.V).trace).re := by
-    rw [hD, vPlusDataOf_V, IsingParam.K2star, ← VPlusOfTransfer_eq_VPlus P.K2_pos]
-    exact h1.2
-  -- (2) 2 行目: `η_{(1,…,1)} = +1`
-  have heta : F.eta Finset.univ = 1 := D.eta_univ_eq_one_of_trace_pos htr
-  -- (2) 3 行目: `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`
-  have hεQ : epsilon M * F.Qproj Finset.univ = F.Qproj Finset.univ := by
-    rw [F.epsilon_mul_Qproj, heta, one_smul]
+  have hy : F.Qproj Finset.univ *ᵥ y = y :=
+    F.Qproj_univ_mulVec_of_mem_range (checkFermiOf_Qproj_univ_mul_self P) hyx
   -- `εy = εQ̌_{(1,…,1)}y = Q̌_{(1,…,1)}y = y`
-  calc epsilon M *ᵥ y = epsilon M *ᵥ (F.Qproj Finset.univ *ᵥ y) := by rw [hy]
-    _ = F.Qproj Finset.univ *ᵥ y := by rw [Matrix.mulVec_mulVec, hεQ]
-    _ = y := hy
+  calc epsilon (r + 1) *ᵥ y
+      = epsilon (r + 1) *ᵥ (F.Qproj Finset.univ *ᵥ y) := by rw [hy]   -- 人手 1: `y = Q̌_{(1,…,1)}y`
+    _ = (epsilon (r + 1) * F.Qproj Finset.univ) *ᵥ y :=
+          Matrix.mulVec_mulVec _ _ _                                -- Lean で補った段: `mat_mult_associative`
+    _ = F.Qproj Finset.univ *ᵥ y := by rw [hεQ]                     -- 人手 2: 直前の `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`
+    _ = y := hy                                                     -- 人手 3: `y = Q̌_{(1,…,1)}y`
 
 end Ising2D

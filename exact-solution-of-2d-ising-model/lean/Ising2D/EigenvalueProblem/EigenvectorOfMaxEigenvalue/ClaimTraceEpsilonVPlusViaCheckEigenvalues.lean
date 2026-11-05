@@ -745,7 +745,7 @@ theorem eta_univ_eq_one_iff_trace_pos :
         rw [hm1] at hcomp
         linarith
 
-/-- (3) の `⟸` を、下流（`TheoremMaxEigenvectorInEvenSector.lean`・`ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`）が
+/-- (3) の `⟸` を、下流（`TheoremMaxEigenvectorInEvenSector.lean` の任意の `VPlusData` についての形）が
 渡す `0 < Re tr(εV^{(+)})` の形の仮定で読んだもの。`tr(εV^{(+)}) = (ȟϰ)_ℂ`（`trace_epsilon_mul_V_eq_ofReal`）なので
 `r := ȟϰ` を取れば `r = Re tr(εV^{(+)}) > 0` で人手の `tr(εV^{(+)}) > 0` になり、(3) の `⟸` を当てる（運ぶ段）。 -/
 theorem eta_univ_eq_one_of_trace_pos (h : 0 < ((epsilon M * D.V).trace).re) :
