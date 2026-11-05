@@ -68608,7 +68608,7 @@ V_c(i)&=v(i)
 R_c(s)&=r(s\bmod n)
 &&\bigl(\because\ \blkref{claim_one_sided_parallel_return_repetition}\bigr),\\
 X_c(i)&=x(i)
-&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr).
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr)
 \end{aligned}`),
                       paragraph([
                         "反復列の末項の添字を確定する。任意の ", math(String.raw`h\in\mathbb N_{>0}`),
@@ -69009,7 +69009,7 @@ w^{(c)}_j
 &=\mathcal J_c(U,v,R,x)_j
 &&\bigl(\because\ X_c(i)=x(i)\ (i<b)\bigr)\\
 &=z^{(c)}_j
-&&\bigl(\because\ z^{(c)}\text{ の定義}\bigr).
+&&\bigl(\because\ z^{(c)}\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`N_c>0`), " なので末歩と始歩が存在する。整数の重み ",
@@ -69028,7 +69028,7 @@ C_{N_c}\bigl(w^{(c)}\bigr)
 +\vartheta\bigl(z^{(c)}_{N_c-1},z^{(c)}_0\bigr)
 &&\bigl(\because\ w^{(c)}_j=z^{(c)}_j\text{ を閉じ目へ代入}\bigr)\\
 &=C_{N_c}\bigl(z^{(c)}\bigr)
-&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr).
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph(["比較したのは整数格子点の差であり、異なる位置の射影辺を同一視していない。"]),
                     ],

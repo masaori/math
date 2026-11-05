@@ -7,6 +7,7 @@ import Ising2DLambda.KacWard.ClosedNonbacktrackingWalk
 import Ising2DLambda.KacWard.SuccessorDirectionSelection
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
 import Ising2DLambda.KacWard.PlaneLift
+import Ising2DLambda.KacWard.PlaneLiftIntegerBaseEndpoint
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkPeriodicDirectionNonbacktracking
 
 namespace Ising2DLambda.KacWard
@@ -492,5 +493,57 @@ theorem oneSidedClosurePoint_nonbacktracking
       simpa only [Nat.sub_add_cancel hN] using hstep (N - 1) (by omega)
     rw [show W 1 - W 0 = z 0 from hstep 0 hN, hlast]
     exact hfixed.2
+
+/-- 実際の閉歩道の最大横断水準から切断した一側閉包は非後退である。 -/
+theorem oneSidedClosurePointFromWalk_nonbacktracking {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ,
+      0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      (∀ j, j + 1 < N → W (j + 2) - W (j + 1) ≠ -(W (j + 1) - W j)) ∧
+        W 1 - W 0 ≠ -(W N - W (N - 1)) := by
+  obtain ⟨k₀, hmax⟩ := periodicPlaneLiftFromWalk_maximum_cut γ
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  have hstep (j : ℕ) (hj : j < m + 1) :
+      planeLiftIntegerBase γ ((j : ℤ) + 1) =
+        planeLiftIntegerBase γ j +
+          orientedEdgeLatticeStep (γ ⟨(j : ZMod (m + 1)).val,
+            ZMod.val_lt (j : ZMod (m + 1))⟩) := by
+    simpa [ZMod.val_natCast, Nat.mod_eq_of_lt hj] using
+      planeLiftIntegerBase_step γ j hj
+  have hend := planeLiftIntegerBase_endpoint γ hγ
+  have hnb := periodicPlaneLift_nonbacktracking_of_direction
+    (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀
+    (fun j => γ ⟨j.val, ZMod.val_lt j⟩)
+    hstep hend (closedWalk_periodic_direction_nonbacktracking γ hγ)
+  have hsum : 0 < (horizontalDirectedWindingNumber γ).natAbs +
+      (verticalDirectedWindingNumber γ).natAbs := by
+    by_contra h
+    have hh : horizontalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    have hv : verticalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    exact hwind (Prod.ext hh hv)
+  have hn : 0 < L * (horizontalDirectedWindingNumber γ).natAbs +
+      L * (verticalDirectedWindingNumber γ).natAbs := by
+    rw [← Nat.mul_add]
+    exact Nat.mul_pos (NeZero.pos L) hsum
+  have hb : 0 < t * ((horizontalDirectedWindingNumber γ).natAbs +
+      (verticalDirectedWindingNumber γ).natAbs) := Nat.mul_pos ht hsum
+  exact oneSidedClosurePoint_nonbacktracking (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+    (by omega) hn hb hc (by
+      dsimp only
+      intro j hj
+      simpa [windingTransverseCoordinateFromWalk, periodicPlaneLiftFromWalk] using
+        hmax j) hnb
 
 end Ising2DLambda.KacWard
