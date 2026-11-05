@@ -158,6 +158,47 @@ theorem horizontal_seam_column_parity {L m : ℕ} [NeZero L]
   -- The one-edge identity turns the exchanged sum into the seam count.
   simp only [hsingle]
 
+/-- 切断線の偶奇が零なら、閉歩道の横辺全行和はどの列でも偶数になる。 -/
+theorem closedWalk_horizontal_column_parity_zero {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hseam : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0)
+    (j : ZMod L) :
+    (∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false i j)) % 2 = 0 := by
+  let A (c : ZMod L) :=
+    (∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false i c)) % 2
+  have hlast : A (((L - 1 : ℕ) : ZMod L)) = 0 := by
+    exact (horizontal_seam_column_parity γ).trans hseam
+  have hL : 1 ≤ L := Nat.pos_of_ne_zero (NeZero.ne L)
+  have hwrap : (((L - 1 : ℕ) : ZMod L) + 1) = 0 := by
+    calc
+      (((L - 1 : ℕ) : ZMod L) + 1) = ((L - 1 + 1 : ℕ) : ZMod L) := by
+        rw [Nat.cast_add, Nat.cast_one]
+      _ = (L : ZMod L) := congrArg (fun n : ℕ => (n : ZMod L))
+        (Nat.sub_add_cancel hL)
+      _ = 0 := ZMod.natCast_self L
+  have hzero : A 0 = 0 := by
+    calc
+      A 0 = A (((L - 1 : ℕ) : ZMod L) + 1) := congrArg A hwrap.symm
+      _ = A ((L - 1 : ℕ) : ZMod L) := by
+        simpa only [A] using
+          (closedWalk_horizontal_column_parity_invariant γ hγ
+            ((L - 1 : ℕ) : ZMod L)).symm
+      _ = 0 := hlast
+  have hnat (n : ℕ) : A (n : ZMod L) = 0 := by
+    induction n with
+    | zero => simpa using hzero
+    | succ n ih =>
+        calc
+          A ((n + 1 : ℕ) : ZMod L) = A ((n : ZMod L) + 1) := by simp
+          _ = A (n : ZMod L) := by
+            simpa only [A] using
+              (closedWalk_horizontal_column_parity_invariant γ hγ (n : ZMod L)).symm
+          _ = 0 := ih
+  change A j = 0
+  rw [← ZMod.natCast_zmod_val j]
+  exact hnat j.val
+
 /-- 基点セルから列方向、次に行方向へ進む標準双対路の横断偶奇。 -/
 def standardDualHeight (L m : ℕ) [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)

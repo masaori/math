@@ -78,6 +78,43 @@ theorem seam_column_parity {E I : Type*} [Fintype I] [DecidableEq E]
   rw [Finset.sum_comm]
   simp only [hsingle]
 
+/-- 隣列の保存と最終列の零から、全ての列の偶奇が零となる。 -/
+theorem horizontalCross_column_parity_zero (L : ℕ) [NeZero L]
+    (horizontalCross : ZMod L → ZMod L → ℕ)
+    (hnext : ∀ j : ZMod L,
+      (∑ i : ZMod L, horizontalCross i j) % 2 =
+        (∑ i : ZMod L, horizontalCross i (j + 1)) % 2)
+    (hlast : (∑ i : ZMod L,
+      horizontalCross i ((L - 1 : ℕ) : ZMod L)) % 2 = 0)
+    (j : ZMod L) :
+    (∑ i : ZMod L, horizontalCross i j) % 2 = 0 := by
+  let A (c : ZMod L) := (∑ i : ZMod L, horizontalCross i c) % 2
+  have hL : 1 ≤ L := Nat.pos_of_ne_zero (NeZero.ne L)
+  have hwrap : (((L - 1 : ℕ) : ZMod L) + 1) = 0 := by
+    calc
+      (((L - 1 : ℕ) : ZMod L) + 1) = ((L - 1 + 1 : ℕ) : ZMod L) := by
+        rw [Nat.cast_add, Nat.cast_one]
+      _ = (L : ZMod L) := congrArg (fun n : ℕ => (n : ZMod L))
+        (Nat.sub_add_cancel hL)
+      _ = 0 := ZMod.natCast_self L
+  have hzero : A 0 = 0 := by
+    calc
+      A 0 = A (((L - 1 : ℕ) : ZMod L) + 1) := congrArg A hwrap.symm
+      _ = A ((L - 1 : ℕ) : ZMod L) := by
+        simpa only [A] using (hnext ((L - 1 : ℕ) : ZMod L)).symm
+      _ = 0 := hlast
+  have hnat (n : ℕ) : A (n : ZMod L) = 0 := by
+    induction n with
+    | zero => simpa using hzero
+    | succ n ih =>
+        calc
+          A ((n + 1 : ℕ) : ZMod L) = A ((n : ZMod L) + 1) := by simp
+          _ = A (n : ZMod L) := by simpa only [A] using (hnext (n : ZMod L)).symm
+          _ = 0 := ih
+  change A j = 0
+  rw [← ZMod.natCast_zmod_val j]
+  exact hnat j.val
+
 /-- 各頂点で四辺の通過和が偶数なら、長方形の対向辺の偶奇は一致する。 -/
 theorem rectangle_crossing_parity (L : ℕ) [NeZero L]
     (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)

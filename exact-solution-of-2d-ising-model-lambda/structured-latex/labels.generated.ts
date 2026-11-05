@@ -28,6 +28,7 @@ export const ALL_LABELS = [
   "claim_closed_walk_bijection",
   "claim_closed_walk_four_edge_parity",
   "claim_closed_walk_horizontal_column_parity_invariant",
+  "claim_closed_walk_horizontal_column_parity_zero",
   "claim_closed_walk_incidence_even",
   "claim_closed_walk_plane_displacement",
   "claim_closed_walk_rotation_phase",

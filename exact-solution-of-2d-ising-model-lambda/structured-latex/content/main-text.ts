@@ -62481,11 +62481,14 @@ s(j')-s(j)
                     proof: [
                       paragraph([ref("claim_closed_walk_four_edge_parity"), " を頂点 ",
                         math(String.raw`(i,j+1)`), " に適用し、全ての行 ", math(String.raw`i`), " について足す。"]),
-                      displayMath(String.raw`\left(\sum_i N_\gamma(n_{\mathrm h}(i,j+1))
+                      displayMath(String.raw`\begin{aligned}
+\left(\sum_i N_\gamma(n_{\mathrm h}(i,j+1))
 +\sum_i N_\gamma(n_{\mathrm h}(i,j))
 +\sum_i N_\gamma(n_{\mathrm v}(i,j+1))
-+\sum_i N_\gamma(n_{\mathrm v}(i-1,j+1))\right)\bmod2=0
-\qquad\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)`),
++\sum_i N_\gamma(n_{\mathrm v}(i-1,j+1))\right)\bmod2
+&=0
+&&\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)
+\end{aligned}`),
                       paragraph(["行の平行移動 ", math(String.raw`i\mapsto i-1`), " は有限集合 ",
                         math(String.raw`\mathbb Z/L\mathbb Z`), " の全単射である。したがって縦辺の二つの和は等しく、二を法として消える。"]),
                       displayMath(String.raw`\sum_i N_\gamma(n_{\mathrm v}(i-1,j+1))
@@ -62557,6 +62560,85 @@ A_\gamma(j+1)
 &&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
 &=h(\gamma)
 &&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_horizontal_column_parity_zero",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_horizontal_column_parity_zero",
+                    kind: "claim",
+                    title: { text: "横切断線の偶奇が零なら横辺の全行和は全列で偶数である" },
+                    labels: ["claim_closed_walk_horizontal_column_parity_zero"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-horizontal-column-parity-zero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_horizontal_column_parity_zero",
+                      "Ising2DLambda.NecSuf.KacWard.horizontalCross_column_parity_zero",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、列 ", math(String.raw`j\in\mathbb Z/L\mathbb Z`),
+                        " を取る。", ref("def_edge_sequence_seam_parities"), " の横切断線偶奇が ",
+                        math(String.raw`h(\gamma)=0`), " ならば、" ]),
+                      displayMath(String.raw`\left(\sum_{i\in\mathbb Z/L\mathbb Z}
+N_\gamma(n_{\mathrm h}(i,j))\right)\bmod2=0`),
+                      paragraph(["が成り立つ。辺の通過偶奇は ", ref("def_walk_base_edge_parity"),
+                        " に従う。"]),
+                    ],
+                    proof: [
+                      paragraph(["列 ", math(String.raw`c\in\mathbb Z/L\mathbb Z`),
+                        " に対する横辺の全行和の偶奇を ",
+                        math(String.raw`A_\gamma(c):=(\sum_iN_\gamma(n_{\mathrm h}(i,c)))\bmod2\in\{0,1\}`),
+                        " と置く（", ref("claim_closed_walk_horizontal_column_parity_invariant"), "）。",
+                        ref("claim_horizontal_seam_parity_equals_column"), " より、最後の列では"]),
+                      displayMath(String.raw`\begin{aligned}
+A_\gamma(\pi(L-1))
+&=h(\gamma)
+&&\bigl(\because\ \blkref{claim_horizontal_seam_parity_equals_column}\bigr)\\
+&=0
+&&\bigl(\because\ \text{仮定}\bigr)
+\end{aligned}`),
+                      paragraph(["列の加算は ", ref("def_residue_addition_notation"),
+                        " に従う。", ref("def_residue_maps"), " より ",
+                        math(String.raw`\pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1=\pi(0)`),
+                        " であり、", ref("claim_closed_walk_horizontal_column_parity_invariant"), " より"]),
+                      displayMath(String.raw`\begin{aligned}
+A_\gamma(\pi(0))
+&=A_\gamma(\pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1)
+&&\bigl(\because\ \pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1=\pi(0)\bigr)\\
+&=A_\gamma(\pi(L-1))
+&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_invariant}\bigr)\\
+&=0
+&&\bigl(\because\ \text{最後の列の等式}\bigr)
+\end{aligned}`),
+                      paragraph(["任意の ", math(String.raw`n\in\mathbb N`),
+                        " について、", math(String.raw`A_\gamma(\pi(n))=0`),
+                        " を帰納法で示す。零は上の等式である。", ref("claim_closed_walk_horizontal_column_parity_invariant"),
+                        " により、", math(String.raw`A_\gamma(\pi(n))=0`), " ならば"]),
+                      displayMath(String.raw`\begin{aligned}
+A_\gamma(\pi(n+1))
+&=A_\gamma(\pi(n)+_{\mathbb Z/L\mathbb Z}\bar1)
+&&\bigl(\because\ \blkref{def_residue_maps}\text{ と }\blkref{def_residue_addition_notation}\bigr)\\
+&=A_\gamma(\pi(n))
+&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_invariant}\bigr)\\
+&=0
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)
+\end{aligned}`),
+                      paragraph(["任意の列 ", math(String.raw`j\in\mathbb Z/L\mathbb Z`),
+                        " には代表 ", math(String.raw`s(j)\in\{0,\ldots,L-1\}`),
+                        " があり、", math(String.raw`\pi(s(j))=j`), " である（",
+                        ref("def_residue_maps"), "）。したがって"]),
+                      displayMath(String.raw`\begin{aligned}
+A_\gamma(j)
+&=A_\gamma(\pi(s(j)))
+&&\bigl(\because\ \blkref{def_residue_maps}\bigr)\\
+&=0
+&&\bigl(\because\ \text{自然数に関する帰納法の結論}\bigr)
 \end{aligned}`),
                     ],
                   },
