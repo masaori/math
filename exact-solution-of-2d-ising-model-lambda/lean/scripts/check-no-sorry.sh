@@ -2409,6 +2409,7 @@ targets=(
   Ising2DLambda.KacWard.oneSidedClosure_period_boundary_signs
   Ising2DLambda.KacWard.oneSidedClosure_fixedWord_nonbacktracking_of_maximum
   Ising2DLambda.KacWard.oneSidedClosurePoint_nonbacktracking
+  Ising2DLambda.KacWard.planeLiftIntegerBase_step
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_iterate_ne_mate
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate

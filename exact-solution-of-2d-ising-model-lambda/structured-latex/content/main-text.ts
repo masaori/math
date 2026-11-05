@@ -69070,16 +69070,16 @@ C_{N_c}\bigl(w^{(c)}\bigr)
                       paragraph(["この証明では ", math(String.raw`P_j:=P_j(\gamma)`), "、", math(String.raw`\widetilde P_h:=\widetilde P_h(\gamma)`), "、", math(String.raw`B:=(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma))\in\mathbb Z^2`), " と略記する。また、", math(String.raw`i\in I_m`), " に対し"]),
                       displayMath(String.raw`D_i:=\bigl(\delta_{\mathrm{row}}(\vec e_{i+1}),\delta_{\mathrm{col}}(\vec e_{i+1})\bigr)\in\mathbb Z^2`),
                       paragraph(["と置く（", ref("def_plane_displacement"), "）。まず一周期内の点を読み直す。", math(String.raw`r\in I_m`), " について"]),
-                      displayMath(String.raw`\widetilde P_r=P_r\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r\bigr).`),
+                      displayMath(String.raw`\widetilde P_r=P_r\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r\bigr)`),
                       paragraph([math(String.raw`r+1<m`), " ならば、同じ定義で"]),
-                      displayMath(String.raw`\widetilde P_{r+1}=P_{r+1}\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r+1\bigr).`),
+                      displayMath(String.raw`\widetilde P_{r+1}=P_{r+1}\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r+1\bigr)`),
                       paragraph([math(String.raw`r=m-1`), " ならば、周期の継ぎ目で次のようになる。"]),
                       displayMath(String.raw`\begin{aligned}
 \widetilde P_{r+1}
 &=\widetilde P_m&&\bigl(\because\ r+1=m\bigr)\\
 &=P_0+B&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }1\text{ と余り }0\bigr)\\
 &=P_m&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\bigr)\\
-&=P_{r+1}&&\bigl(\because\ m=r+1\bigr).
+&=P_{r+1}&&\bigl(\because\ m=r+1\bigr)
 \end{aligned}`),
                       paragraph(["従って ", math(String.raw`\widetilde P_{r+1}=P_{r+1}`), " は ", math(String.raw`r\in I_m`), " の全てで成り立つ。次に任意の ", math(String.raw`h\in\mathbb Z`), " を整数除法で ", math(String.raw`h=qm+r`), "、", math(String.raw`q\in\mathbb Z`), "、", math(String.raw`r=[h]_m\in I_m`), " と書く。", ref("claim_one_sided_periodic_lift_repetition"), " の証明中の並進等式 ", math(String.raw`\widetilde P_{j+am}=\widetilde P_j+aB`), " は、周期持ち上げの定義と整数除法だけから任意の整数 ", math(String.raw`j,a`), " について得たものである。それを使うと、"]),
                       displayMath(String.raw`\begin{aligned}
