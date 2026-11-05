@@ -80,7 +80,7 @@ theorem checkPhase_neg_one_eq_exp (hM : M ≠ 0) (μ : ℤ) :
 
 /-- **原文 第 1 式**: `T_{(V_1^{(+)})^{1/2}}(check(Z)_μ)
 = cosh(K_1) check(Z)_μ + i e^{-iθ~_μ} sinh(K_1) check(Y)_μ`。 -/
-theorem TConj_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem TConj_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℝ) (μ : ℤ) :
     TConj (V1plusHalfUnits M K1) (checkZ M μ)
       = Complex.cosh K1 • checkZ M μ
         + (Complex.I * checkPhase M 1 μ * Complex.sinh K1) • checkY M μ := by
@@ -102,11 +102,13 @@ theorem TConj_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h1.z)
     _ = Complex.cosh K1 • checkZ M μ
           + (Complex.I * checkPhase M 1 μ * Complex.sinh K1) • checkY M μ :=
-        extract_taylor_H1Plus_checkZ hM K1 μ
+        (extract_taylor_H1Plus_checkZ hM K1 μ).2.trans (by
+          rw [Complex.ofReal_cosh, Complex.ofReal_sinh])
+          -- 右の `rw` は値の像 `(cosh K_1)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 2 式**: `T_{(V_1^{(+)})^{1/2}}(check(Y)_μ)
 = -i e^{iθ~_μ} sinh(K_1) check(Z)_μ + cosh(K_1) check(Y)_μ`。 -/
-theorem TConj_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem TConj_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℝ) (μ : ℤ) :
     TConj (V1plusHalfUnits M K1) (checkY M μ)
       = (-Complex.I * checkPhase M (-1) μ * Complex.sinh K1) • checkZ M μ
         + Complex.cosh K1 • checkY M μ := by
@@ -128,7 +130,9 @@ theorem TConj_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h1.y)
     _ = (-Complex.I * checkPhase M (-1) μ * Complex.sinh K1) • checkZ M μ
           + Complex.cosh K1 • checkY M μ :=
-        extract_taylor_H1Plus_checkY hM K1 μ
+        (extract_taylor_H1Plus_checkY hM K1 μ).2.trans (by
+          rw [Complex.ofReal_cosh, Complex.ofReal_sinh])
+          -- 右の `rw` は値の像 `(cosh K_1)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- 人手の第 3・第 4 式の証明の、前因子 `c = (2s_2)^{M/2}` を打ち消す 2 行
 （`A` は `check(Z)_μ` と `check(Y)_μ` に同時に使う）。 -/
@@ -147,7 +151,7 @@ theorem smul_conj_smul_inv_eq {s2 : ℝ} (hs2 : 0 < s2) (X A : TensorPow M) :
 
 /-- **原文 第 3 式**（`V_2` を `V2_exponential_representation` の右辺 `V2H2Form` で書いた形）:
 `T_{V_2}(check(Z)_μ) = cosh(2K_2^*) check(Z)_μ - i sinh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2H2Form_checkZ {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem TConj_V2H2Form_checkZ {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ) :
     TConj (V2H2FormUnits M hs2 K2star) (checkZ M μ)
       = Complex.cosh (2 * K2star) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ := by
@@ -169,11 +173,13 @@ theorem TConj_V2H2Form_checkZ {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.z)
     _ = Complex.cosh (2 * K2star) • checkZ M μ
           + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ :=
-        extract_taylor_H2_checkZ K2star μ
+        (extract_taylor_H2_checkZ K2star μ).2.trans (by
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 4 式**（`V_2` を `V2H2Form` で書いた形）:
 `T_{V_2}(check(Y)_μ) = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2H2Form_checkY {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem TConj_V2H2Form_checkY {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ) :
     TConj (V2H2FormUnits M hs2 K2star) (checkY M μ)
       = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
         + Complex.cosh (2 * K2star) • checkY M μ := by
@@ -195,7 +201,9 @@ theorem TConj_V2H2Form_checkY {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.y)
     _ = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
           + Complex.cosh (2 * K2star) • checkY M μ :=
-        extract_taylor_H2_checkY K2star μ
+        (extract_taylor_H2_checkY K2star μ).2.trans (by
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 3 式**（`V_2` は `def_transfer_matrix` の `V_2`、`K_2^*` はその双対結合定数）:
 `T_{V_2}(check(Z)_μ) = cosh(2K_2^*) check(Z)_μ - i sinh(2K_2^*) check(Y)_μ`。 -/
@@ -224,7 +232,9 @@ theorem TConj_V2_checkZ {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.z)
     _ = Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkZ M μ
           + (-Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkY M μ :=
-        extract_taylor_H2_checkZ _ μ
+        (extract_taylor_H2_checkZ (Kstar K2) μ).2.trans (by
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 4 式**（`V_2` は `def_transfer_matrix` の `V_2`）:
 `T_{V_2}(check(Y)_μ) = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
@@ -253,7 +263,9 @@ theorem TConj_V2_checkY {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.y)
     _ = (Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkZ M μ
           + Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkY M μ :=
-        extract_taylor_H2_checkY _ μ
+        (extract_taylor_H2_checkY (Kstar K2) μ).2.trans (by
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-! ## 原文 `calc_of_TxT_check_Z_Y`（4 式を 2 列に並べる） -/
 
@@ -261,7 +273,7 @@ theorem TConj_V2_checkY {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
 `(T_{(V_1^{(+)})^{1/2}}(check(Z)_μ), T_{(V_1^{(+)})^{1/2}}(check(Y)_μ)) = (check(Z)_μ, check(Y)_μ) B_1(θ~_μ)`。
 `T_actions_on_check_Z_Y` の第 1・第 2 式を 2 列へ同時に使い（`ActsBy` の定義が行ベクトルと行列の積の定義）、
 `def_B1_theta_B2` の成分と突き合わせる。 -/
-theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℝ) (μ : ℤ) :
     ActsBy (TConj (V1plusHalfUnits M K1)).toLinearMap (checkZ M μ) (checkY M μ)
       (B1mat K1 ((thetaTilde M μ : ℝ) : ℂ)) := by
   constructor
@@ -275,7 +287,7 @@ theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 /-- **原文 `calc_of_TxT_check_Z_Y` の第 2 式**:
 `(T_{V_2}(check(Z)_μ), T_{V_2}(check(Y)_μ)) = (check(Z)_μ, check(Y)_μ) B_2`
 （`V_2` は `V2H2Form`。人手の `V_2` 版は `actsBy_TConj_V2_check`）。 -/
-theorem actsBy_TConj_V2H2Form_check {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem actsBy_TConj_V2H2Form_check {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ) :
     ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat K2star) := by
   constructor

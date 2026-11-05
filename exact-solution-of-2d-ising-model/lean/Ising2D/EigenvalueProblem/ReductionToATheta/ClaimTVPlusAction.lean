@@ -76,7 +76,7 @@ theorem B1mat_col_one (K1 θ : ℂ) :
 
 /-- **原文 `T_V_plus_check_Z_Y` の証明の (z) の鎖**:
 `T_{(V^{(+)})}(check(Z)_μ) = (check(Z)_μ, check(Y)_μ) B_1(θ~) B_2 (cosh K_1, i e^{-iθ~} sinh K_1)^T`。 -/
-theorem TVPlus_apply_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) (μ : ℤ) :
+theorem TVPlus_apply_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℝ) (μ : ℤ) :
     TVPlus M hs2 K1 K2star (checkZ M μ)
       = (B1mat K1 ((thetaTilde M μ : ℝ) : ℂ) *ᵥ (B2mat K2star *ᵥ
             ![Complex.cosh K1,
@@ -125,7 +125,7 @@ theorem TVPlus_apply_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star 
 
 /-- **原文 `T_V_plus_check_Z_Y` の証明の (y) の鎖**:
 `T_{(V^{(+)})}(check(Y)_μ) = (check(Z)_μ, check(Y)_μ) B_1(θ~) B_2 (-i e^{iθ~} sinh K_1, cosh K_1)^T`。 -/
-theorem TVPlus_apply_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) (μ : ℤ) :
+theorem TVPlus_apply_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℝ) (μ : ℤ) :
     TVPlus M hs2 K1 K2star (checkY M μ)
       = (B1mat K1 ((thetaTilde M μ : ℝ) : ℂ) *ᵥ (B2mat K2star *ᵥ
             ![-Complex.I * Complex.exp (((thetaTilde M μ : ℝ) : ℂ) * Complex.I) * Complex.sinh K1,
@@ -185,7 +185,7 @@ theorem mulVec_mulVec_col (B1 B2 : Matrix (Fin 2) (Fin 2) ℂ) (j : Fin 2) :
      = (check(Z)_μ, check(Y)_μ) A(θ~_μ)`
 
 行ベクトル記法は `Ising2D.ActsBy`（`B` の**列**が像の係数）。 -/
-theorem TVPlus_checkZ_checkY (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
+theorem TVPlus_checkZ_checkY (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℝ)
     {s2 : ℝ} (hs2 : 0 < s2)
     (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
     (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
@@ -207,7 +207,7 @@ theorem TVPlus_checkZ_checkY (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2st
   rwa [factorization_of_A_thetaTilde (M := M) K K1 K2star μ hc1 hs1 hc2star hs2star hdual] at hB
 
 /-- 上を成分の形（原文の 2 本の等式）で書いた版。 -/
-theorem TVPlus_checkZ_checkY_components (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
+theorem TVPlus_checkZ_checkY_components (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℝ)
     {s2 : ℝ} (hs2 : 0 < s2)
     (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
     (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))

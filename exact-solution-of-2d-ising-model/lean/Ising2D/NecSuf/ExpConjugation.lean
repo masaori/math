@@ -198,27 +198,27 @@ theorem exp_conj_eq_tsum (x a : 𝔸) :
 
 end Ad
 
-/-! ## 偶数項・奇数項の係数が決まった級数の和（`extract_taylor_coefficient_of_check_Z_Y` の必要十分版） -/
+/-! ## 偶数項・奇数項の係数が決まった級数の和（`exp_conj_two_dim_z`・`exp_conj_two_dim_y` の材料） -/
 
 section TaylorTwoDim
 
 /-
-具体版 `Ising2D.hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本
-（`EigenvalueProblem/ReductionToATheta/ClaimExtractTaylor.lean`）と同じ手順で述べる。
-1 行目（係数変換）は仮定 `heven`・`hodd` として受け取り、2 行目（偶奇の分割）を `HasSum.even_add_odd`、
-3 行目（`n` に依らない因子を外へ出す）を `HasSum.smul_const`・`HasSum.mul_left`、
-4 行目（テイラー級数）を `Complex.hasSum_cosh`・`hasSum_sinhc` で行う。
+`exp_conj_two_dim_z`・`exp_conj_two_dim_y`（`ad x` が `span{z, y}` を保つときの `exp(x)z exp(-x)` の閉じた形）の材料である。
+人手 `extract_taylor_coefficient_of_check_Z_Y` の具体版（`EigenvalueProblem/ReductionToATheta/ClaimExtractTaylor.lean`）は
+部分和と極限で示す `exponential_series_of_even_odd_power_terms` を引く別の手順なので、ここはその必要十分版ではない。
+級数を偶奇に分ける手順の段は次のとおりで、人手の行は指さない。
+係数変換の段は仮定 `heven`・`hodd` として受け取り、偶奇の分割の段を `HasSum.even_add_odd`、
+`n` に依らない因子を外へ出す段を `HasSum.smul_const`・`HasSum.mul_left`、
+テイラー級数の段を `Complex.hasSum_cosh`・`hasSum_sinhc` で行う。
 
 **何が効いているか / 効いていないか**
 
-* 効いているのは、`V` が ℂ 加群で、和が連続（`ContinuousAdd V`、2 行目で偶数項と奇数項を足し直すため）、
-  スカラー倍が連続（`ContinuousSMul ℂ V`、3 行目で `cosh`・`sinhc` の級数に `z`・`y` を掛けるため）であることだけである。
-* 係数体は ℂ に固定してある。4 行目で使う `Complex.hasSum_cosh` と `sinhc`（`ℂ → ℂ` として定義）が ℂ 上の級数だからである。
+* 効いているのは、`V` が ℂ 加群で、和が連続（`ContinuousAdd V`、偶数項と奇数項を足し直すため）、
+  スカラー倍が連続（`ContinuousSMul ℂ V`、`cosh`・`sinhc` の級数に `z`・`y` を掛けるため）であることだけである。
+* 係数体は ℂ に固定してある。テイラー級数の段で使う `Complex.hasSum_cosh` と `sinhc`（`ℂ → ℂ` として定義）が ℂ 上の級数だからである。
 * 行列であること・積・ノルム・完備性・指数関数は効いていない。`f n` が入れ子交換子であることも効いていない
-  （それは 1 行目の係数変換の側で使われ、ここでは仮定 `heven`・`hodd` に入っている）。
-* 具体版は `sinh` を使い、`i e^{-iθ~}` を外へ出す。ここでは `s = 0` でも成り立つよう `sinhc` を使い、
-  `α`（具体版では `i K_1 e^{-iθ~}`）を外へ出す。違いはこの 2 点だけで、
-  具体版への戻し方は `EigenvalueProblem/ReductionToATheta/ClaimExtractTaylorFromNecSuf.lean` にある。
+  （それは 係数変換の側で使われ、ここでは仮定 `heven`・`hodd` に入っている）。
+* `s = 0` でも成り立つよう `sinh` ではなく `sinhc` を使い、`α` を外へ出す。
 -/
 
 variable {V : Type*} [AddCommMonoid V] [Module ℂ V] [TopologicalSpace V]
@@ -230,11 +230,11 @@ theorem hasSum_two_dim_series {f : ℕ → V} {z y : V} {α s : ℂ}
     (heven : ∀ k : ℕ, f (2 * k) = (s ^ (2 * k)) • z)
     (hodd : ∀ k : ℕ, f (2 * k + 1) = (s ^ (2 * k) * α) • y) :
     HasSum (fun n : ℕ => (((n ! : ℕ) : ℂ))⁻¹ • f n) (Complex.cosh s • z + (α * sinhc s) • y) := by
-  -- 偶数項: 4 行目の cosh の級数 → 3 行目（`z` を外へ）→ 1 行目の偶数側 `s^{2k} z`
+  -- 偶数項: cosh の級数 → `z` を外へ → 偶数側 `s^{2k} z`
   have hev : HasSum (fun k : ℕ => ((((2 * k)! : ℕ) : ℂ))⁻¹ • f (2 * k)) (Complex.cosh s • z) := by
     refine ((Complex.hasSum_cosh s).smul_const z).congr_fun fun k => ?_
     rw [heven k, smul_smul, div_eq_inv_mul]
-  -- 奇数項: 4 行目の sinhc の級数 → 3 行目（`α` と `y` を外へ）→ 1 行目の奇数側 `s^{2k} α y`
+  -- 奇数項: sinhc の級数 → `α` と `y` を外へ → 奇数側 `s^{2k} α y`
   have hod : HasSum (fun k : ℕ => ((((2 * k + 1)! : ℕ) : ℂ))⁻¹ • f (2 * k + 1))
       ((α * sinhc s) • y) := by
     refine (((hasSum_sinhc s).mul_left α).smul_const y).congr_fun fun k => ?_

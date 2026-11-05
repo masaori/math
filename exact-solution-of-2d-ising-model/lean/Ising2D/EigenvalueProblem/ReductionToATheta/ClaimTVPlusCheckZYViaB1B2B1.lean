@@ -38,7 +38,7 @@ namespace Ising2D
 variable {M : ℕ}
 
 /-- **人手 `T_V_plus_check_Z_Y_via_B1_B2_B1`**。 -/
-theorem T_V_plus_check_Z_Y_via_B1_B2_B1 (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
+theorem T_V_plus_check_Z_Y_via_B1_B2_B1 (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℝ)
     {s2 : ℝ} (hs2 : 0 < s2)
     (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
     (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))

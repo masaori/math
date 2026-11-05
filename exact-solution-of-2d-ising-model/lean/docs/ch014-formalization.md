@@ -40,10 +40,9 @@
 | `Ising2D.conversion_H1Plus_checkZ_even` / `..._odd` ほか 8 本 | (h1.z)(h1.y)(h2.z)(h2.y)。人手の鎖（補題 1 → `nesting_*` の代入 → `(i/2)^n = i^n2^{-n}`・`(2K_1)^n = 2^nK_1^n`・`2^{-n}2^n = 1` → 補題 2 → 符号の整理）どおりの `calc` | `cosh_sinh_coefficient_conversion_for_check` |
 | `Ising2D.adPow_smul_left_of_necSuf` / `conversion_*_of_necSuf` 8 本（`ClaimCoefficientConversionFromNecSuf.lean`） | 同じ 8 本を、具体版と同じ手順のまま補題 1 を `NecSuf.iterComm_smul_left` の特殊化、代入する入れ子交換子を `nesting_*_of_necSuf` に差し替えて導いたもの | 同上 |
 | `Ising2D.ad_V1plusHalf_checkZ` / `ad_V1plusHalf_checkY` / `ad_V2H2Form_checkZ` / `ad_V2H2Form_checkY` / `sK1_sq` / `sK2_sq`（同） | スカラー倍した生成子 `(i/2)K_1H_1^{(+)}`・`iK_2^*H_2` の 2 次元不変性（`αβ = K_1^2`, `(2K_2^*)^2`）。`T_actions_on_check_Z_Y` を必要十分版から導く `ClaimTActionsOnCheckFromNecSuf.lean` が使う | `T_actions_on_check_Z_Y` |
-| `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY`（`ClaimExtractTaylor.lean`） | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
-| `Ising2D.extract_taylor_H2_checkZ` / `..._checkY` | (h2.z)(h2.y) の級数和 | 同上 |
-| `Ising2D.hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本 | 4 式の級数の収束と和。人手の 4 行（係数変換 → 偶奇分割 → 定数の括り出し → `cosh`・`sinh` のテイラー級数）どおり（`Complex.hasSum_cosh`・`Complex.hasSum_sinh`・`HasSum.even_add_odd`） | 同上 |
-| `Ising2D.hasSum_extract_taylor_H1Plus_checkZ_of_necSuf` ほか 4 本（`ClaimExtractTaylorFromNecSuf.lean`） | 同じ 4 式を必要十分版 `NecSuf.hasSum_two_dim_series` の特殊化として導いたもの | 同上 |
+| `Ising2D.two_mul_real_inclusion` / `adPow_G1_checkZ_of_even` / `_of_odd` / `adPow_G1_checkY_of_even` / `_of_odd` / `adPow_G2_checkZ_of_even` / `_of_odd` / `adPow_G2_checkY_of_even` / `_of_odd`（`ClaimExtractTaylor.lean`） | 準備 `2(K_2^*)_ℂ = (2K_2^*)_ℂ` と、各項 `ad^n_G(·)` を `exponential_series_of_even_odd_power_terms` の仮定の形 `(x_ℂ)^nA`・`(c(x_ℂ)^n)B` へ並べ替える人手の鎖（係数変換 → 積の結合律・可換律、または準備の代入） | `extract_taylor_coefficient_of_check_Z_Y` |
+| `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY` / `extract_taylor_H2_checkZ` / `..._checkY`（同） | 4 式。`Φ := toFinPowAlgEquiv M` で移した部分和の収束と、級数の和 `∑'` の値。人手の最後の行（`exponential_series_of_even_odd_power_terms`、(h1.y)(h2.y) は続けて `matrix_sum_is_commutative`）を `Φ` で移して当て、逆写像で戻す。`K_1, K_2^*` は実数 | 同上 |
+| `Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum`（`SeriesSumUnderReindexToFin.lean`） | `HasSum` の和を `Φ` で移すと、移した列の部分和の極限 `evenOddSeriesSum` に等しい（人手の項目を持たない補助） | 同上 |
 | `Ising2D.real_inclusion_pow` / `real_inclusion_sub` / `evenOddCoeffA_of_even` ほか 3 本 / `evenOddTerm_of_even` / `evenOddTerm_of_odd` / `evenOddTerm` / `evenOddPartialSum_apply` / `evenOddPartialSum_apply_eq` / `evenOddPartialSum_eq` / `evenOddPartialSum_sub_limit_apply` / `evenOddPartialSum_sub_limit` / `evenOddAlpha_sub_cosh_abs_le` / `evenOddBeta_sub_sinh_abs_le` / `evenOddPartialSum_sub_limit_norm_le` / `expPartialSumReal_tendsto` / `evenOddErr_eventually_lt` / `evenOddPartialSum_sub_limit_norm_tendsto` / `exponential_series_of_even_odd_power_terms`（`ClaimExponentialSeriesOfEvenOddPowerTerms.lean`） | 準備（冪の像・`a_n, b_n` の値・実数の差の像）と中間目標「各項」`(1/n!)_ℂT_n = (a_n)_ℂA + (c(b_n)_ℂ)B`、「部分和」`S_N = (α_N)_ℂA + (c(β_N)_ℂ)B`、「差」`S_N − L = (α_N − cosh x)_ℂA + (c(β_N − sinh x)_ℂ)B`、「実数の評価」`|α_N − cosh x|, |β_N − sinh x| ≤ (u_N+v_N)/2`、「ノルムの評価」`‖S_N − L‖ ≤ ((u_N+v_N)/2)κ`、`ε` の鎖による `‖S_N − L‖ → 0` と、級数の和（部分和の `limUnder`）が `(cosh x)_ℂA + (c(sinh x)_ℂ)B` であること（主張そのもの。Frobenius ノルム）。人手の各行と calc の段が 1 対 1 | `exponential_series_of_even_odd_power_terms` |
 | `Ising2D.evenOddPartialSum_sub_limit_norm_le_of_necSuf` / `evenOddPartialSum_sub_limit_norm_tendsto_of_necSuf`（`ClaimExponentialSeriesOfEvenOddPowerTermsFromNecSuf.lean`） | ノルムの評価と `ε` の鎖を、必要十分版 `NecSuf.evenOdd_norm_le'`・`NecSuf.evenOdd_err_tendsto'`（`NecSuf/EvenOddSeriesNormEstimate.lean`。元の集合はノルムの三角不等式と斉次性だけ、係数の集合は `‖kl‖ = ‖k‖‖l‖` と絶対値を保つ `ι : ℝ → K` だけ）の特殊化として導いたもの | 同上 |
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp`（`ClaimTActionsOnCheck.lean`） | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
@@ -93,10 +92,10 @@
 
 ### 本章で新しく足した必要十分版
 
-新しく足した必要十分版は 2 本である。1 本は、原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
+新しく足した必要十分版は 1 本で、原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
 4 段で往復している部分を 1 本にまとめた `NecSuf.actsBy_sandwich` である。
-もう 1 本は `extract_taylor_coefficient_of_check_Z_Y` の `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）である。
-既存の `NecSuf.exp_conj_two_dim_z` / `_y` は指数共役と級数の和の 2 つの主張を束ねており、この主張だけの必要十分版にならないため、級数の和の部分を切り出した。
+`NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）は `NecSuf.exp_conj_two_dim_z` / `_y` の材料で、`extract_taylor_coefficient_of_check_Z_Y` の必要十分版ではない
+（その具体版は `exponential_series_of_even_odd_power_terms` を引く別の手順である）。
 ほかの主要主張は既存の必要十分版の特殊化で閉じた。
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
@@ -104,7 +103,7 @@
 | `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本（人手の帰納法どおり） | `NecSuf.nested_z_even` / `nested_z_odd` / `nested_y_even` / `nested_y_odd`（同じ帰納段階 1・2。スカラーは可換環、台は引き算と積があればよい。導出は `Ising2D.nesting_*_of_necSuf`） |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本（人手の補題 1・補題 2 と代入の鎖どおり） | 補題 1 は `NecSuf.iterComm_smul_left`（台は引き算と積があればよく、スカラーは任意のモノイド）。8 本は補題 1 と `NecSuf.nested_*` の特殊化から具体版と同じ手順で得る（導出は `Ising2D.adPow_smul_left_of_necSuf`・`conversion_*_of_necSuf`） |
-| `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本（`hasSum_extract_taylor_*` が人手の 4 行どおり） | `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群。導出は `Ising2D.hasSum_extract_taylor_*_of_necSuf`） |
+| `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本（各項の鎖と `exponential_series_of_even_odd_power_terms` の適用が人手どおり） | 置かない（このファイル固有の段は ℂ の積の並べ替えと実数の積の像だけで、部品の係数変換とノルムの評価はそれぞれ既存の必要十分版を持つ） |
 | `T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` | `Ising2D.actsBy_TConj_V1plusHalf` / `actsBy_TConj_V2H2Form_check` ほか | 既存の `NecSuf.twoDimConjMat` / `exp_conj_two_dim_actsBy` / `conj_smul_eq` |
 | `linearity_of_T` | `Ising2D.linearity_of_T_on_check` | 既存の `Ising2D.TConj_linear`（任意の環 + ℂ-代数） |
 | `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_V1plusHalf` | 既存の `Ising2D.TConj_linear` の半指数行列への特殊化 |
@@ -143,7 +142,7 @@ Lean での機械的裏づけである。
    3 段でやっていることは、「`ad X` が `span{Ž_μ, Y̌_μ}` を保つ」という 1 つの事実に集約できる。**
    とくに原文の補題 1（`ad_{αX}^n = α^n ad_X^n`）と補題 2（`i^n` の偶奇）は、
    `T_actions_on_check_Z_Y` の導出が使う 2 次元の必要十分版 `NecSuf.exp_conj_two_dim_*` では `(α, β, s)` の付け替えに完全に吸収される
-   （各主張の必要十分版は、具体版と同じ手順をたどる `NecSuf.nested_*`・`NecSuf.iterComm_smul_left`・`NecSuf.hasSum_two_dim_series` である）。原文で
+   （各主張の必要十分版は、具体版と同じ手順をたどる `NecSuf.nested_*`・`NecSuf.iterComm_smul_left` である）。原文で
    `(-1)^{n/2}(2K_1)^n` が `K_1^n` へ変わるのは、`s` が純虚数 `2iK_1` から実の `K_1` へ
    変わることに他ならない（`Ising2D.sK1_sq`）。
 2. **原文が 4 段の往復（`T_actions` → 線型性 → `calc_of_TxT` → 線型性 → `calc_of_TxT`）で

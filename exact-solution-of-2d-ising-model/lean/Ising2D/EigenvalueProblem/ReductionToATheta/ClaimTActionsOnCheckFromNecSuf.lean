@@ -129,7 +129,7 @@ private theorem exp_neg_mul_exp_check (θ : ℂ) :
   simp
 
 /-- **`calc_of_TxT_check_Z_Y` の第 1 式を必要十分版の特殊化として得たもの**
-（主張は `actsBy_TConj_V1plusHalf` と同じ）。 -/
+（`K1 : ℝ` の像 `(K1 : ℂ)` で使うと具体版 `actsBy_TConj_V1plusHalf` の主張になる）。 -/
 theorem actsBy_TConj_V1plusHalf_fromNecSuf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     ActsBy (TConj (V1plusHalfUnits M K1)).toLinearMap (checkZ M μ) (checkY M μ)
       (B1mat K1 ((thetaTilde M μ : ℝ) : ℂ)) := by
@@ -143,7 +143,7 @@ theorem actsBy_TConj_V1plusHalf_fromNecSuf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) 
       Complex.exp (((thetaTilde M μ : ℝ) : ℂ) * Complex.I)) * hI
 
 /-- **`calc_of_TxT_check_Z_Y` の第 2 式を必要十分版の特殊化として得たもの**
-（主張は `actsBy_TConj_V2H2Form_check` と同じ）。 -/
+（`K2star : ℝ` の像で使うと具体版 `actsBy_TConj_V2H2Form_check` の主張になる）。 -/
 theorem actsBy_TConj_V2H2Form_check_fromNecSuf {s2 : ℝ} (hs2 : 0 < s2)
     (K2star : ℂ) (μ : ℤ) :
     ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (checkZ M μ) (checkY M μ)

@@ -1049,14 +1049,16 @@ targets=(
   Ising2D.extract_taylor_H1Plus_checkY
   Ising2D.extract_taylor_H2_checkZ
   Ising2D.extract_taylor_H2_checkY
-  Ising2D.hasSum_extract_taylor_H1Plus_checkZ
-  Ising2D.hasSum_extract_taylor_H1Plus_checkY
-  Ising2D.hasSum_extract_taylor_H2_checkZ
-  Ising2D.hasSum_extract_taylor_H2_checkY
-  Ising2D.hasSum_extract_taylor_H1Plus_checkZ_of_necSuf
-  Ising2D.hasSum_extract_taylor_H1Plus_checkY_of_necSuf
-  Ising2D.hasSum_extract_taylor_H2_checkZ_of_necSuf
-  Ising2D.hasSum_extract_taylor_H2_checkY_of_necSuf
+  Ising2D.two_mul_real_inclusion
+  Ising2D.adPow_G1_checkZ_of_even
+  Ising2D.adPow_G1_checkZ_of_odd
+  Ising2D.adPow_G1_checkY_of_even
+  Ising2D.adPow_G1_checkY_of_odd
+  Ising2D.adPow_G2_checkZ_of_even
+  Ising2D.adPow_G2_checkZ_of_odd
+  Ising2D.adPow_G2_checkY_of_even
+  Ising2D.adPow_G2_checkY_of_odd
+  Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum
   Ising2D.NecSuf.hasSum_two_dim_series
   Ising2D.real_inclusion_pow
   Ising2D.evenOddCoeffA_of_even

@@ -56,7 +56,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
-import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExponentialSeriesOfEvenOddPowerTerms
+import Ising2D.EigenvalueProblem.ReductionToATheta.SeriesSumUnderReindexToFin
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
 namespace Ising2D
@@ -246,21 +246,11 @@ attribute [local instance] Matrix.frobeniusNormedAddCommGroup Matrix.frobeniusNo
 /-- 人手 Step 2 の真ん中の鎖の 1 行目 `exp(X) = Σ_{n=0}^{∞}(1/n!)_ℂX^n`（`def_exp` (1)）を、`Φ` で移して
 `exponential_series_of_even_odd_power_terms` の級数の和（部分和 `Σ_{n=0}^{N}(1/n!)_ℂΦ(X^n)` の極限 `evenOddSeriesSum`）で読んだもの。
 Lean の `matExp` は mathlib の `NormedSpace.exp` で、`def_exp` (1) の級数の和であることは `matExp_hasSum` が与える。
-`Φ` は成分の付け替えなので連続で（`Continuous.matrix_reindex`）、和とスカラー倍を保つ（`map_sum`・`map_smul`）。
-`matExp_hasSum` の部分和は `Finset.range` の上の和で係数は `(n! : ℂ)⁻¹` なので、人手の添字 `{0, …, N}`（`Fin (N + 1)`）と
-係数 `(1/n!)_ℂ` へ読み替える（いずれも人手の行ではない。写像で移すことと、和の添字と係数の書き方の読み替え）。 -/
+それを `Φ` で移して部分和の添字と係数を読み替えるのは `toFinPow_eq_evenOddSeriesSum_of_hasSum`
+（`EigenvalueProblem/ReductionToATheta/SeriesSumUnderReindexToFin.lean`。人手の行ではない）。 -/
 theorem toFinPow_matExp_eq_evenOddSeriesSum (X : TensorPow M) :
-    toFinPowAlgEquiv M (matExp X) = evenOddSeriesSum (fun n => toFinPowAlgEquiv M (X ^ n)) := by
-  have hΦ : Continuous (toFinPowAlgEquiv M) := continuous_id.matrix_reindex _ _
-  have h : Tendsto (fun N => evenOddPartialSum (fun n => toFinPowAlgEquiv M (X ^ n)) N) atTop
-      (𝓝 (toFinPowAlgEquiv M (matExp X))) := by
-    refine ((tendsto_add_atTop_iff_nat 1).2
-      ((hΦ.tendsto _).comp (matExp_hasSum X).tendsto_sum_nat)).congr fun N => ?_
-    rw [Function.comp_apply, map_sum, evenOddPartialSum,
-      ← Fin.sum_univ_eq_sum_range (fun n => toFinPowAlgEquiv M (((n.factorial : ℂ))⁻¹ • X ^ n))]
-    refine Finset.sum_congr rfl fun n _ => ?_
-    rw [map_smul, one_div, Complex.ofReal_inv, Complex.ofReal_natCast]
-  exact h.limUnder_eq.symm
+    toFinPowAlgEquiv M (matExp X) = evenOddSeriesSum (fun n => toFinPowAlgEquiv M (X ^ n)) :=
+  toFinPow_eq_evenOddSeriesSum_of_hasSum (matExp_hasSum X)
 
 /-- 人手 Step 2 の `T_n := (κ(εG))^n` の `n` が偶数の場合 `T_n = κ^nI`。人手の「(P4)・(P3) より」の 2 段と calc の 2 段が 1 対 1 である。 -/
 theorem smul_epsilon_mul_boundaryG_pow_of_even (hM : 2 ≤ M) (κ : ℂ) {n : ℕ} (hn : Even n) :

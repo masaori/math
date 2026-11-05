@@ -21,7 +21,7 @@ namespace Ising2D
 variable {M : ℕ}
 
 /-- `TVPlus_checkZ_checkY` を必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化として得たもの。 -/
-theorem TVPlus_checkZ_checkY_of_necSuf (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
+theorem TVPlus_checkZ_checkY_of_necSuf (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℝ)
     {s2 : ℝ} (hs2 : 0 < s2)
     (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
     (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))

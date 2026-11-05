@@ -154,7 +154,7 @@ theorem TVPlus_actsBy_checkZY (P : IsingParam) {M : ℕ} (hM : M ≠ 0)
       = ((P.const.c2star : ℝ) : ℂ) := by
     rw [← Complex.ofReal_mul]
     exact_mod_cast congrArg (fun r : ℝ => (r : ℂ)) (by rw [mul_comm]; exact hdual)
-  have h := TVPlus_checkZ_checkY (M := M) hM P.const μ (P.K1 : ℂ) (P.K2star : ℂ)
+  have h := TVPlus_checkZ_checkY (M := M) hM P.const μ P.K1 P.K2star
     (sinh_two_K2_pos P)
     (by simp [IsingParam.const, Complex.ofReal_cosh])
     (by simp [IsingParam.const, Complex.ofReal_sinh])
