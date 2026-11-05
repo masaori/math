@@ -6878,7 +6878,7 @@ N_{k,l}
 &=\operatorname{ins}(h(i_0),h|_S)(i_0)
 &&\bigl(\because\ \operatorname{spl}\text{ の定義}\bigr)\\
 &=h(i_0)
-&&\bigl(\because\ \operatorname{ins}\text{ の }i_0\text{ での値}\bigr),
+&&\bigl(\because\ \operatorname{ins}\text{ の }i_0\text{ での値}\bigr)
 \end{aligned}`),
                 paragraph(["また各 ", math(String.raw`i\in S`), " で"]),
                 displayMath(String.raw`\begin{aligned}
