@@ -274,16 +274,17 @@
 | `Ising2D.negSpinConf_negSpinConf` / `epsilon_apply_configBasisIso_of_ne` / `epsilon_apply_configBasisIso_neg_self` | `-(-s) = s`、`ε_{ord(s),ord(t)} = 0_ℂ`（`t ≠ -s`）、`ε_{ord(s),ord(-s)} = δ_{-(-s)=s} = 1_ℂ`（(b) の 3 行を行の成分に使う） | Step 4 が (b) として使う形 |
 | `Ising2D.sum_spin_mul_self` / `sum_negSpin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、`∑_m (-s(m))s(m) = -M_col`（項ごとに `1`・`-1` を足す）、**`(V_2)_{ord(s),ord(s)} = (exp(K_2M_col))_ℂ`、`(V_2)_{ord(-s),ord(s)} = (exp(-K_2M_col))_ℂ`** | **Step 3 (c)**（一般の成分は `Ising2D.V2_apply_configBasisIso`） |
 
-#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5・Step 6 と主張）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.trace_eq_sum_configBasisIso` | `tr(X) = ∑_{s∈𝔐} X_{ι(s),ι(s)}` | Step 4（`def_trace`） |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_split` | `tr(εV^{(+)}) = cosh(K_1)tr(exp(K_1D_0)εV_2) + sinh(K_1)tr(exp(K_1D_0)GV_2)` | Step 4 の最初の式 |
+| `Ising2D.trace_eq_sum_configBasisIso` | `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}` | Step 5 の二つの鎖の 1 行目の根拠（`def_trace` と準備の和の定め方） |
+| `Ising2D.finite_sum_over_spinConf_of_real_scalar_multiples` | `∑_{s∈𝔐} c a(s) = c ∑_{s∈𝔐} a(s)`（`Fin (2^M)` へ付け替えて具体版 `finite_sum_of_real_scalar_multiples` を当てる） | Step 5 の二つの鎖の 4 行目の根拠 |
 | **`Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self`** / **`matExp_openChainD0_mul_boundaryG_mul_V2_apply_self`** | **`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = (exp(-K_2M_col)exp(K_1E(s)))_ℂ`、`(exp(κD_0)(GV_2))_{ord(s),ord(s)} = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ`（人手と同じ 7 段ずつ）** | **Step 4 の二つの鎖** |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums` | トレースを二つのスピン和で書いた形（実数） | Step 4 の最後の式鎖の 1 行目 |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_closed_form` | `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 4 の最後の式鎖の 2〜4 行目 |
-| `Ising2D.trace_epsilon_VPlusOfTransfer_pos` | `0 < Re tr(εV^{(+)})`（`K_1 > 0`） | Step 5 |
+| **`Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2`** / **`trace_matExp_openChainD0_mul_boundaryG_mul_V2`** | **`tr(exp(κD_0)(εV_2)) = (exp(-K_2M_col)S_cosh)_ℂ`、`tr(exp(κD_0)(GV_2)) = (exp(K_2M_col)S_sinh)_ℂ`（人手と同じ 4 段ずつ）** | **Step 5 の二つのトレースの鎖** |
+| **`Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums`** | **`tr(εV^{(+)}) = (cosh K_1(exp(-K_2M_col)S_cosh) + sinh K_1(exp(K_2M_col)S_sinh))_ℂ`（人手と同じ 11 段）** | **Step 5 の組み立ての鎖** |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_closed_form` | `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 5 の実数の鎖（旧い分け方の 4 段のまま。(t9) で人手の 9 行に揃える） |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_pos` | `0 < Re tr(εV^{(+)})`（`K_1 > 0`） | Step 6 |
 | **`Ising2D.trace_of_epsilon_V_plus`** | **閉じた式と正値性** | **主張本体** |
 | `Ising2D.trace_epsilon_vPlusDataOf_pos` | `vPlusDataOf` の `V^{(+)}` について `0 < Re tr(εV^{(+)})`（`VPlusOfTransfer_eq_VPlus` で人手の形へ戻す） | 最終定理の入力から欄 `htr` を外すために使う |
 

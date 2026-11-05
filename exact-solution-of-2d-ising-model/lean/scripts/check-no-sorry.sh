@@ -2357,9 +2357,11 @@ targets=(
   Ising2D.epsilon_apply_configBasisIso_of_ne
   Ising2D.epsilon_apply_configBasisIso_neg_self
   Ising2D.trace_eq_sum_configBasisIso
-  Ising2D.trace_epsilon_VPlusOfTransfer_split
+  Ising2D.finite_sum_over_spinConf_of_real_scalar_multiples
   Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self
   Ising2D.matExp_openChainD0_mul_boundaryG_mul_V2_apply_self
+  Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2
+  Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2
   Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums
   Ising2D.trace_epsilon_VPlusOfTransfer_closed_form
   Ising2D.trace_epsilon_VPlusOfTransfer_pos
