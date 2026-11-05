@@ -7567,60 +7567,60 @@ I(\alpha(\tau))
                 paragraph(["まず相手の存在を示す。", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " と ", math(String.raw`i\in\mathcal J`), " を取る。", ref("def_finite_perfect_matching"), " の第二条件で ", math(String.raw`i`), " を含む組 ", math(String.raw`p\in\mathcal D`), " を取り、第一条件で ", math(String.raw`p=\{a,b\}`), "、", math(String.raw`a,b\in\mathcal J`), "、", math(String.raw`a\ne b`), " と書く。二元集合への所属から ", math(String.raw`i=a`), " または ", math(String.raw`i=b`), " である。前者では ", math(String.raw`b\ne i`), " で、後者では ", math(String.raw`a\ne i`), " であり、それぞれ"]),
                 displayMath(String.raw`\begin{aligned}
 p&=\{a,b\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
- &=\{i,b\}&&\bigl(\because\ i=a\text{ の代入}\bigr),\\
+ &=\{i,b\}&&\bigl(\because\ i=a\text{ の代入}\bigr)\\
 p&=\{a,b\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
  &=\{a,i\}&&\bigl(\because\ i=b\text{ の代入}\bigr)\\
- &=\{i,a\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr).
+ &=\{i,a\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr)
 \end{aligned}`),
                 paragraph(["したがって相手が存在する。一意性のため、", math(String.raw`j,k\in\mathcal J`), " がともに相手の条件を満たすとする。両方の組が ", math(String.raw`i`), " を含むため、"]),
                 displayMath(String.raw`\begin{aligned}
-\{i,j\}&=\{i,k\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\text{ の組の一意性}\bigr),\\
-j&\in\{i,k\}&&\bigl(\because\ j\in\{i,j\}\text{ に上の等式を代入}\bigr),\\
-j&=k&&\bigl(\because\ \text{二元集合への所属と }j\ne i\bigr).
+\{i,j\}&=\{i,k\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\text{ の組の一意性}\bigr)\\
+j&\in\{i,k\}&&\bigl(\because\ j\in\{i,j\}\text{ に上の等式を代入}\bigr)\\
+j&=k&&\bigl(\because\ \text{二元集合への所属と }j\ne i\bigr)
 \end{aligned}`),
                 paragraph(["これで相手写像が定まる。その仕様から、すべての ", math(String.raw`i\in\mathcal J`), " について ", math(String.raw`m_{\mathcal D}(i)\ne i`), " および ", math(String.raw`\{i,m_{\mathcal D}(i)\}\in\mathcal D`), " である。", math(String.raw`j:=m_{\mathcal D}(i)\in\mathcal J`), " と置くと、"]),
                 displayMath(String.raw`\begin{aligned}
-\{j,i\}&=\{i,j\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr),\\
-\{j,i\}&\in\mathcal D&&\bigl(\because\ \text{相手写像の仕様と上の等式}\bigr),\\
-m_{\mathcal D}(j)&=i&&\bigl(\because\ i\ne j\text{ と相手の一意性}\bigr).
+\{j,i\}&=\{i,j\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr)\\
+\{j,i\}&\in\mathcal D&&\bigl(\because\ \text{相手写像の仕様と上の等式}\bigr)\\
+m_{\mathcal D}(j)&=i&&\bigl(\because\ i\ne j\text{ と相手の一意性}\bigr)
 \end{aligned}`),
                 paragraph(["すなわち ", math(String.raw`m_{\mathcal D}(m_{\mathcal D}(i))=i`), " なので、", ref("def_fixed_point_free_involution"), " により ", math(String.raw`\Phi`), " は指定した値域へ写る。"]),
                 paragraph(["次に ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " を取り、", math(String.raw`\mathcal D_\tau`), " が完全マッチングであることを示す。各組 ", math(String.raw`\{k,\tau(k)\}`), " は ", math(String.raw`k,\tau(k)\in\mathcal J`), "、", math(String.raw`\tau(k)\ne k`), " により相異なる二点からなる。各 ", math(String.raw`i\in\mathcal J`), " は ", math(String.raw`\{i,\tau(i)\}\in\mathcal D_\tau`), " に含まれる。組の一意性のため、", math(String.raw`p\in\mathcal D_\tau`), " が ", math(String.raw`i`), " を含むとする。族の定義から ", math(String.raw`p=\{k,\tau(k)\}`), " となる ", math(String.raw`k\in\mathcal J`), " を取る。", math(String.raw`i=k`), " の場合には"]),
                 displayMath(String.raw`\begin{aligned}
 p&=\{k,\tau(k)\}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)\\
- &=\{i,\tau(i)\}&&\bigl(\because\ i=k\text{ の代入}\bigr).
+ &=\{i,\tau(i)\}&&\bigl(\because\ i=k\text{ の代入}\bigr)
 \end{aligned}`),
                 paragraph(["もう一方の ", math(String.raw`i=\tau(k)`), " の場合には、"]),
                 displayMath(String.raw`\begin{aligned}
 \tau(i)&=\tau(\tau(k))&&\bigl(\because\ i=\tau(k)\text{ の代入}\bigr)\\
- &=k&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr),\\
+ &=k&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr)\\
 p&=\{k,\tau(k)\}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)\\
  &=\{k,i\}&&\bigl(\because\ i=\tau(k)\text{ の代入}\bigr)\\
  &=\{\tau(i),i\}&&\bigl(\because\ \tau(i)=k\text{ の代入}\bigr)\\
- &=\{i,\tau(i)\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr).
+ &=\{i,\tau(i)\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr)
 \end{aligned}`),
                 paragraph(["二元集合への所属はこの二場合だけなので、組は一意である。これで ", ref("def_finite_perfect_matching"), " の両条件を満たし、", math(String.raw`\Psi`), " も指定した値域へ写る。"]),
                 paragraph(["両逆を確かめる。", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " について、相手写像の仕様から ", math(String.raw`\mathcal D_{m_{\mathcal D}}\subseteq\mathcal D`), " である。逆に ", math(String.raw`p\in\mathcal D`), " を ", math(String.raw`p=\{i,j\}`), "、", math(String.raw`i,j\in\mathcal J`), "、", math(String.raw`i\ne j`), " と書く。相手の一意性で ", math(String.raw`m_{\mathcal D}(i)=j`), " だから、"]),
                 displayMath(String.raw`\begin{aligned}
 p&=\{i,j\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
- &=\{i,m_{\mathcal D}(i)\}&&\bigl(\because\ \text{相手の一意性}\bigr),\\
-p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の族の定義}\bigr).
+ &=\{i,m_{\mathcal D}(i)\}&&\bigl(\because\ \text{相手の一意性}\bigr)\\
+p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の族の定義}\bigr)
 \end{aligned}`),
                 paragraph(["これが逆の包含を与えるので、"]),
                 displayMath(String.raw`\begin{aligned}
 \Psi(\Phi(\mathcal D))&=\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \Phi,\Psi\text{ の定義}\bigr)\\
- &=\mathcal D&&\bigl(\because\ \text{上の両包含}\bigr).
+ &=\mathcal D&&\bigl(\because\ \text{上の両包含}\bigr)
 \end{aligned}`),
                 paragraph(["最後に ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " と ", math(String.raw`i\in\mathcal J`), " に対し、", math(String.raw`\tau(i)\ne i`), " かつ ", math(String.raw`\{i,\tau(i)\}\in\mathcal D_\tau`), " なので、"]),
                 displayMath(String.raw`\begin{aligned}
 \Phi(\Psi(\tau))(i)&=m_{\mathcal D_\tau}(i)&&\bigl(\because\ \Phi,\Psi\text{ の定義}\bigr)\\
- &=\tau(i)&&\bigl(\because\ \text{相手の一意性}\bigr).
+ &=\tau(i)&&\bigl(\because\ \text{相手の一意性}\bigr)
 \end{aligned}`),
                 paragraph(["すべての入力で値が等しいため ", math(String.raw`\Phi(\Psi(\tau))=\tau`), " である。これが両逆である。単射性を明示すると、", math(String.raw`\mathcal D,\mathcal E\in\mathcal M(\mathcal J)`), " が ", math(String.raw`\Phi(\mathcal D)=\Phi(\mathcal E)`), " を満たす場合、"]),
                 displayMath(String.raw`\begin{aligned}
 \mathcal D&=\Psi(\Phi(\mathcal D))&&\bigl(\because\ \text{左逆の等式}\bigr)\\
  &=\Psi(\Phi(\mathcal E))&&\bigl(\because\ \Phi(\mathcal D)=\Phi(\mathcal E)\text{ の代入}\bigr)\\
- &=\mathcal E&&\bigl(\because\ \text{左逆の等式}\bigr).
+ &=\mathcal E&&\bigl(\because\ \text{左逆の等式}\bigr)
 \end{aligned}`),
                 paragraph(["全射性は、任意の ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " に対し ", math(String.raw`\Psi(\tau)\in\mathcal M(\mathcal J)`), " を原像に取れば、右逆の等式が ", math(String.raw`\Phi(\Psi(\tau))=\tau`), " を与えることから従う。空集合の場合も各条件はそのまま成り立ち、空の族と空集合上の唯一の写像が対応する。用いた集合・写像はすべて有限であり、実数体・複素数体への脱出はない。"]),
               ],
@@ -62382,6 +62382,64 @@ s(j')-s(j)
 &&\bigl(\because\ 2\text{ の倍数を二で割った余り}\bigr)
 \end{aligned}`),
                       paragraph(["全過程は自然数の有限和で閉じる。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_four_edge_parity",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_four_edge_parity",
+                    kind: "claim",
+                    title: { text: "閉歩道の端点偶奇は頂点の四辺の通過偶奇である" },
+                    labels: ["claim_closed_walk_four_edge_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-four-edge-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_four_edge_parity",
+                      "Ising2DLambda.NecSuf.KacWard.closedWalk_four_edge_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、頂点 ", math(String.raw`(i,j)\in V_L`), " を取る（", ref("def_closed_nonbacktracking_walk"),
+                        "、", ref("def_lattice"), "）。", ref("def_walk_base_edge_parity"), " の通過偶奇について、"]),
+                      displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(i,j))+N_\gamma(n_{\mathrm h}(i,j-1))+N_\gamma(n_{\mathrm v}(i,j))+N_\gamma(n_{\mathrm v}(i-1,j))\bigr)\bmod2=0`),
+                      paragraph(["が成り立つ。四辺は位置ごとに数え、", math(String.raw`L=1`), " で同じ辺が現れても重複を保つ。"]),
+                    ],
+                    proof: [
+                      paragraph(["基底辺 ", math(String.raw`e\in E_L`), " の通過回数を ",
+                        math(String.raw`T_\gamma(e):=\sum_{k=1}^{m}\mathbf1_{\operatorname{base}(\vec e_k)=e}\in\mathbb N`),
+                        " と書く。", ref("claim_edge_row_partition"), " の端点表示より、各 ",
+                        math(String.raw`k\in\{1,\ldots,m\}`), " について次の四位置の等式が成り立つ。"]),
+                      displayMath(String.raw`\begin{aligned}
+&\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,j)}
++\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,j-1)}
++\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(i,j)}
++\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(i-1,j)}\\
+&=\mathbf1_{\operatorname{src}(\vec e_k)=(i,j)}+\mathbf1_{\operatorname{tgt}(\vec e_k)=(i,j)}
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の端点表示}\bigr)
+\end{aligned}`),
+                      paragraph(["四位置は辺の集合ではなく位置の列なので、", math(String.raw`L=1`),
+                        " でも同じ辺を二回数える。上の等式を ", math(String.raw`k`), " にわたって足すと、"]),
+                      displayMath(String.raw`\begin{aligned}
+&T_\gamma(n_{\mathrm h}(i,j))+T_\gamma(n_{\mathrm h}(i,j-1))
++T_\gamma(n_{\mathrm v}(i,j))+T_\gamma(n_{\mathrm v}(i-1,j))\\
+&=\sum_{k=1}^{m}\Bigl(
+\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,j)}+
+\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm h}(i,j-1)}+
+\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(i,j)}+
+\mathbf1_{\operatorname{base}(\vec e_k)=n_{\mathrm v}(i-1,j)}\Bigr)
+&&\bigl(\because\ T_\gamma\text{ の定義と有限和の分配則}\bigr)\\
+&=\sum_{k=1}^{m}\bigl(\mathbf1_{\operatorname{src}(\vec e_k)=(i,j)}+
+\mathbf1_{\operatorname{tgt}(\vec e_k)=(i,j)}\bigr)
+&&\bigl(\because\ \text{上の四位置の等式}\bigr)
+\end{aligned}`),
+                      paragraph([ref("claim_closed_walk_incidence_even"), " により最後の和は偶数である。",
+                        ref("def_walk_base_edge_parity"), " により ",
+                        math(String.raw`N_\gamma(e)=T_\gamma(e)\bmod2`), " なので、",
+                        "四位置の和を二で割った余りは零である。"]),
                     ],
                   },
                 },

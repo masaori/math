@@ -1,6 +1,38 @@
 import Mathlib
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkIncidenceParity
 
 namespace Ising2DLambda.NecSuf.KacWard
+
+/-- The only combinatorial input is the four-position incidence identity for each edge. -/
+theorem closedWalk_four_edge_parity {E B V : Type*} [DecidableEq B] [DecidableEq V]
+    {m : ℕ} (γ : Fin (m + 1) → E) (base : E → B) (source target : E → V)
+    (first second third fourth : B) (v : V)
+    (hstep : ∀ k : Fin m, target (γ (Fin.castSucc k)) = source (γ (Fin.succ k)))
+    (hclose : target (γ (Fin.last m)) = source (γ 0))
+    (hlocal : ∀ e : E,
+      ((if base e = first then 1 else 0) +
+        (if base e = second then 1 else 0) +
+        (if base e = third then 1 else 0) +
+        (if base e = fourth then 1 else 0)) =
+        (if source e = v then 1 else 0) +
+          (if target e = v then 1 else 0)) :
+    (((∑ k : Fin (m + 1), if base (γ k) = first then 1 else 0) % 2) +
+      ((∑ k : Fin (m + 1), if base (γ k) = second then 1 else 0) % 2) +
+      ((∑ k : Fin (m + 1), if base (γ k) = third then 1 else 0) % 2) +
+      ((∑ k : Fin (m + 1), if base (γ k) = fourth then 1 else 0) % 2)) % 2 = 0 := by
+  have hsum :
+      (∑ k : Fin (m + 1), if base (γ k) = first then 1 else 0) +
+      (∑ k : Fin (m + 1), if base (γ k) = second then 1 else 0) +
+      (∑ k : Fin (m + 1), if base (γ k) = third then 1 else 0) +
+      (∑ k : Fin (m + 1), if base (γ k) = fourth then 1 else 0) =
+      ∑ k : Fin (m + 1),
+        ((if source (γ k) = v then 1 else 0) +
+          (if target (γ k) = v then 1 else 0)) := by
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib,
+      ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl (fun k _ => hlocal (γ k))
+  have heven := closedWalk_incidence_even γ source target hstep hclose v
+  omega
 
 /-- 二方向の横断偶奇を入力した標準双対路の高さ。 -/
 def standardDualHeight (L : ℕ) [NeZero L]

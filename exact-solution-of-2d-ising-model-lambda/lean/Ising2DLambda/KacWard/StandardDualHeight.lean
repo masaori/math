@@ -1,5 +1,7 @@
 import Ising2DLambda.KacWard.WalkTwistSign
 import Ising2DLambda.KacWard.CellSetBoundaryCoefficients
+import Ising2DLambda.KacWard.ClosedWalkIncidenceParity
+import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
 
 namespace Ising2DLambda.KacWard
 
@@ -9,6 +11,56 @@ open Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
 def walkBaseEdgeParity {L m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L) (edge : Edge L) : ℕ :=
   (∑ k : Fin (m + 1), if (γ k).1 = edge then 1 else 0) % 2
+
+/-- A single traversal contributes one endpoint at each end of its base edge. -/
+private lemma singleton_edge_incidence {L : ℕ} (e : OrientedEdge L) (v : Vertex L) :
+    Ising2DLambda.FisherZero.edgeSubsetIncidenceCount L {e.1} v =
+      (if orientedSource e = v then 1 else 0) +
+        (if orientedTarget e = v then 1 else 0) := by
+  cases e with
+  | mk edge direction =>
+    cases direction <;>
+      simp [Ising2DLambda.FisherZero.edgeSubsetIncidenceCount,
+        orientedSource, orientedTarget, add_comm]
+
+/-- Each edge traversal contributes to precisely the four named edge positions at a vertex. -/
+private lemma one_walk_edge_four_incidence {L : ℕ} [NeZero L]
+    (e : OrientedEdge L) (i j : ZMod L) :
+    (if e.1 = edgeOfRow L false i j then 1 else 0) +
+      (if e.1 = edgeOfRow L false i (j - 1) then 1 else 0) +
+      (if e.1 = edgeOfRow L true i j then 1 else 0) +
+      (if e.1 = edgeOfRow L true (i - 1) j then 1 else 0) =
+      (if orientedSource e = (i, j) then 1 else 0) +
+        (if orientedTarget e = (i, j) then 1 else 0) := by
+  have h := Ising2DLambda.FisherZero.edgeSubsetIncidenceCount_four_incident_edges
+    L {e.1} i j
+  simp only [Finset.mem_singleton] at h
+  have h' := h.symm.trans (singleton_edge_incidence e (i, j))
+  simpa only [eq_comm] using h'
+
+/-- A closed walk has even traversal parity among the four edge positions at every vertex. -/
+theorem closedWalk_four_edge_parity {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (i j : ZMod L) :
+    (walkBaseEdgeParity γ (edgeOfRow L false i j) +
+      walkBaseEdgeParity γ (edgeOfRow L false i (j - 1)) +
+      walkBaseEdgeParity γ (edgeOfRow L true i j) +
+      walkBaseEdgeParity γ (edgeOfRow L true (i - 1) j)) % 2 = 0 := by
+  have hlocal := fun k : Fin (m + 1) => one_walk_edge_four_incidence (γ k) i j
+  have hsum :
+      (∑ k : Fin (m + 1), if (γ k).1 = edgeOfRow L false i j then 1 else 0) +
+      (∑ k : Fin (m + 1), if (γ k).1 = edgeOfRow L false i (j - 1) then 1 else 0) +
+      (∑ k : Fin (m + 1), if (γ k).1 = edgeOfRow L true i j then 1 else 0) +
+      (∑ k : Fin (m + 1), if (γ k).1 = edgeOfRow L true (i - 1) j then 1 else 0) =
+      ∑ k : Fin (m + 1),
+        ((if orientedSource (γ k) = (i, j) then 1 else 0) +
+          (if orientedTarget (γ k) = (i, j) then 1 else 0)) := by
+    rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib,
+      ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl (fun k _ => hlocal k)
+  have heven := closedWalk_incidence_even γ hγ (i, j)
+  unfold walkBaseEdgeParity
+  omega
 
 /-- 基点セルから列方向、次に行方向へ進む標準双対路の横断偶奇。 -/
 def standardDualHeight (L m : ℕ) [NeZero L]

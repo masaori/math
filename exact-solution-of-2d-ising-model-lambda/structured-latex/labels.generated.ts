@@ -26,6 +26,7 @@ export const ALL_LABELS = [
   "claim_cell_boundary_winding_zero",
   "claim_cell_set_boundary_coefficients",
   "claim_closed_walk_bijection",
+  "claim_closed_walk_four_edge_parity",
   "claim_closed_walk_incidence_even",
   "claim_closed_walk_plane_displacement",
   "claim_closed_walk_rotation_phase",
