@@ -176,4 +176,39 @@ theorem standardDualHeight_vertical_internal_changes (L m : ℕ) [NeZero L]
   unfold standardDualHeight walkBaseEdgeParity
   omega
 
+/-- 閉歩道では各頂点の局所偶奇が自動的に成り立つ。 -/
+theorem closedWalk_standardDualHeight_vertical_internal (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L) :
+    standardDualHeight L m γ
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) =
+      (standardDualHeight L m γ ((i : ZMod L), (j : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 := by
+  apply standardDualHeight_vertical_internal L m γ i j hi hj
+  intro r _ _
+  have h := closedWalk_four_edge_parity γ hγ
+    (r : ZMod L) ((j + 1 : ℕ) : ZMod L)
+  have hr : ((r : ZMod L) - 1) = ((r - 1 : ℕ) : ZMod L) := by
+    have : 1 ≤ r := by omega
+    rw [Nat.cast_sub this]
+    norm_num
+  have hjcast : (((j + 1 : ℕ) : ZMod L) - 1) = (j : ZMod L) := by
+    simp
+  rw [hr, hjcast] at h
+  omega
+
+theorem closedWalk_standardDualHeight_vertical_internal_changes
+    (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L) :
+    (standardDualHeight L m γ
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) ≠
+      standardDualHeight L m γ ((i : ZMod L), (j : ZMod L))) ↔
+    walkBaseEdgeParity γ
+      (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) = 1 := by
+  rw [closedWalk_standardDualHeight_vertical_internal L m γ hγ i j hi hj]
+  unfold standardDualHeight walkBaseEdgeParity
+  omega
+
 end Ising2DLambda.KacWard

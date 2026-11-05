@@ -133,4 +133,23 @@ theorem standardDualHeight_vertical_internal_changes (L : ℕ) [NeZero L]
   unfold standardDualHeight
   omega
 
+/-- 四辺の偶奇を閉歩道から得た後に、縦方向の高さ差へ代入する。 -/
+theorem closedWalk_standardDualHeight_vertical_internal (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hfour : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (horizontalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        horizontalCross (r : ZMod L) (j : ZMod L) +
+        verticalCross (r : ZMod L) ((j + 1 : ℕ) : ZMod L) +
+        verticalCross ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 = 0) :
+    standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), ((j + 1 : ℕ) : ZMod L)) =
+      (standardDualHeight L horizontalCross verticalCross
+        ((i : ZMod L), (j : ZMod L)) +
+        verticalCross (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) % 2 := by
+  apply standardDualHeight_vertical_internal L horizontalCross verticalCross i j hi hj
+  intro r hr1 hri
+  have h := hfour r hr1 hri
+  omega
+
 end Ising2DLambda.NecSuf.KacWard

@@ -784,11 +784,11 @@ q
 &=\frac{a}{b}
 &&\bigl(\because\ q\text{ の表示}\bigr)\\
 &=\frac{ab'}{bb'}
-&&\bigl(\because\ b'\ge1\text{ なので }b'\ne0\text{、}\mathbb{Q}\text{ の約分の逆}\bigr)\\
+&&\bigl(\because\ b'\ge1\text{ なので }b'\ne0\text{ であり、}\mathbb{Q}\text{ の約分の逆}\bigr)\\
 &=\frac{a'b}{bb'}
 &&\bigl(\because\ ab'=a'b\bigr)\\
 &=\frac{a'}{b'}
-&&\bigl(\because\ b\ge1\text{ なので }b\ne0\text{、}\mathbb{Q}\text{ の約分}\bigr)\\
+&&\bigl(\because\ b\ge1\text{ なので }b\ne0\text{ であり、}\mathbb{Q}\text{ の約分}\bigr)\\
 &=q'
 &&\bigl(\because\ q'\text{ の表示}\bigr)
 \end{aligned}`),
@@ -62531,6 +62531,46 @@ f_\gamma(i,j+1)
 &&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と剰余の加法則}\bigr)
 \end{aligned}`),
                       paragraph(["高さと辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する（", ref("def_standard_dual_height"), "、", ref("def_walk_base_edge_parity"), "）。二を法とした加法では、一を足したとき、かつそのときに限り高さが変わる。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_standard_dual_height_vertical_internal",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_standard_dual_height_vertical_internal",
+                    kind: "claim",
+                    title: { text: "閉歩道の標準双対路で縦方向の内部一歩が変わる条件" },
+                    labels: ["claim_closed_walk_standard_dual_height_vertical_internal"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-standard-dual-height-vertical-internal"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_vertical_internal",
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_vertical_internal_changes",
+                      "Ising2DLambda.NecSuf.KacWard.closedWalk_standardDualHeight_vertical_internal",
+                      "Ising2DLambda.KacWard.closedWalk_standardDualHeight_vertical_internal_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、代表 ", math(String.raw`0\le i<L`), " と ",
+                        math(String.raw`0\le j<L-1`), " を取る。", ref("def_standard_dual_height"), " の高さについて、"]),
+                      displayMath(String.raw`f_\gamma(i,j+1)=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm v}(i,j+1))\bigr)\bmod2`),
+                      paragraph(["が成り立つ。高さが変わることと ",
+                        math(String.raw`N_\gamma(n_{\mathrm v}(i,j+1))=1`), " は同値である。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`1\le r\le i`), " を取る。", ref("claim_closed_walk_four_edge_parity"),
+                        " を頂点 ", math(String.raw`(r,j+1)`), " に適用すると、"]),
+                      displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm v}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))\bigr)\bmod2=0
+\quad(\because\ \blkref{claim_closed_walk_four_edge_parity})`),
+                      displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))+N_\gamma(n_{\mathrm v}(r,j+1))\bigr)\bmod2=0
+\quad(\because\ \text{加法の交換則})`),
+                      paragraph(["これは全ての ", math(String.raw`1\le r\le i`), " で成り立つ。", ref("claim_standard_dual_height_vertical_internal_conditional"), " から、"]),
+                      displayMath(String.raw`f_\gamma(i,j+1)=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm v}(i,j+1))\bigr)\bmod2
+\quad(\because\ \blkref{claim_standard_dual_height_vertical_internal_conditional})`),
+                      paragraph(["同じ主張の高さが変わる条件を適用して、通過偶奇が一であることとの同値を得る。"]),
                     ],
                   },
                 },
