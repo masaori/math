@@ -88,4 +88,19 @@ theorem heightOneBoundary_horizontal_internal_parity (L m : ℕ) [NeZero L]
   rw [hprev] at hsupport
   exact hsupport.trans (standardDualHeight_horizontal_internal_changes L m γ i j hi hj)
 
+/-- An interior vertical edge occurs in the height-one boundary precisely when a closed walk crosses it oddly. -/
+theorem heightOneBoundary_vertical_internal_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L) :
+    cellSetEdgeCoefficient L (heightOneCells L m γ)
+        (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) ≠ 0 ↔
+      walkBaseEdgeParity γ
+        (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L)) = 1 := by
+  have hsupport := heightOneBoundary_vertical_support L m γ
+    (i : ZMod L) ((j + 1 : ℕ) : ZMod L)
+  have hprev : (((j + 1 : ℕ) : ZMod L) - 1) = (j : ZMod L) := by simp
+  rw [hprev] at hsupport
+  exact hsupport.trans
+    ((ne_comm).trans (closedWalk_standardDualHeight_vertical_internal_changes L m γ hγ i j hi hj))
+
 end Ising2DLambda.KacWard

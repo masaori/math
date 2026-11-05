@@ -63776,6 +63776,49 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                     ],
                   },
                 },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_height_one_boundary_vertical_internal_parity",
+                  focus: {
+                    id: "kac_ward_claim_height_one_boundary_vertical_internal_parity",
+                    kind: "claim",
+                    title: { text: "高さ一の境界係数は縦方向の内部辺の通過偶奇で決まる" },
+                    labels: ["claim_height_one_boundary_vertical_internal_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/height-one-boundary-vertical-internal-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.heightOneBoundary_vertical_internal_parity",
+                      "Ising2DLambda.NecSuf.KacWard.heightOneBoundary_internal_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、代表 ", math(String.raw`0\le i<L`), " と ", math(String.raw`0\le j<L-1`),
+                        " を取る。高さ一のセル集合 ", math(String.raw`S_\gamma`),
+                        " の境界係数（", ref("claim_height_one_boundary_support"), "）と辺の通過偶奇（",
+                        ref("def_walk_base_edge_parity"), "）について、"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{n_{\mathrm v}(i,j+1)}\ne0
+\iff N_\gamma(n_{\mathrm v}(i,j+1))=1`),
+                      paragraph(["が成り立つ。左辺の係数は ", math(String.raw`\mathbb Z`),
+                        "、右辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する。"]),
+                    ],
+                    proof: [
+                      paragraph(["辺 ", math(String.raw`n_{\mathrm v}(i,j+1)`),
+                        " の両側のセルは ", math(String.raw`(i,j)`), " と ", math(String.raw`(i,j+1)`),
+                        " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm v}(i,j+1)}\ne0
+&\iff f_\gamma(i,j)\ne f_\gamma(i,j+1)
+&&\bigl(\because\ \blkref{claim_height_one_boundary_support}\bigr)\\
+&\iff f_\gamma(i,j+1)\ne f_\gamma(i,j)
+&&\bigl(\because\ \text{不等号の対称性}\bigr)\\
+&\iff N_\gamma(n_{\mathrm v}(i,j+1))=1
+&&\bigl(\because\ \blkref{claim_closed_walk_standard_dual_height_vertical_internal}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
               }],
             },
           },

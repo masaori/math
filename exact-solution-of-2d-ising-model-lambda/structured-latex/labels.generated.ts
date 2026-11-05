@@ -159,6 +159,7 @@ export const ALL_LABELS = [
   "claim_gluing_restriction_family",
   "claim_height_one_boundary_horizontal_internal_parity",
   "claim_height_one_boundary_support",
+  "claim_height_one_boundary_vertical_internal_parity",
   "claim_high_temperature_partition_bounds",
   "claim_high_temperature_polynomial_identity",
   "claim_high_temperature_sector_decomposition",
