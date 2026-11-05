@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 8 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 7 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -394,13 +394,16 @@
 - `epsilon_commutes_with_W`（εW = Wε と、W が F^(+) を保つこと）: `sagemath/check/epsilon_commutes_with_W/`。準備の三つの可換性と εS の鎖 3 行、本体の鎖 11 行、F^(+) の鎖 4 行を、M_col = 1..5 で、exp((1/2)K_1)・exp(K_2) を QQ(i) 上の Laurent 多項式環の不定元に置き、S = V_1^{1/2} = exp(cD) を D の固有値の射影から作って（SS = V_1 を確かめる）、各行の括弧の形どおりに mat_mult の成分の式で組んで厳密に確かめた（等号 315 件、否定コントロール 24 件。浮動小数点なし）。人手証明を直した（主張は不変、計算の誤りは無し）: 括弧を省いた等式鎖の各行が結合律と可換性を同時に当てていたので、mat_mult_associative と可換性を一行ずつ当てる 11 行の鎖にし、散文の準備を (∵) とラベル参照の鎖にし、「行列の積の結合則」を mat_mult_associative の参照にした。主張文に M_col・K_1・K_2 の帰属と「F^(+) を保つ」の読み方を書いた。二回のレビューで必須の指摘（別名 B と引いた主張の変数 B の衝突。別名を S にした）が無くなるまで直した。Lean は不変（`ClaimEpsilonCommutesWithW.lean` は旧い 5 行の鎖のままで、新しい 11 行との 1 対 1 は Lean の連続実行の受け持ち）。
 
 - `gamma_is_continuous`（γ は ℝ 上で連続）: `sagemath/check/gamma_is_continuous/`。Step 1 の γ_1 の式と係数、Step 2 の y^2-1 ≥ 0・y+√(y^2-1) ≥ 1、Step 3 の γ_1(qπ) ≥ 1 を `QQ` の多項式と `AA` で厳密に、連続性（γ_1・arccosh・γ）を、選んだ点の周りの区間での振れ幅の囲みが δ = 2^{-10}〜2^{-40} で 0 へ縮むことで `RealBallField(512)` で確かめた（連続性の証明ではない。log は本文の exp のボールで挟み、cos は Arb の cos）。**人手証明を直した**（主張は連続性だけに減らした。計算の誤りは無し）: (1) 主張が連続性と周期 2π の二つを持っていた。周期性は本文のどこからも使われず、根拠の cos の 2π 周期性も前提として宣言していなかったので、`notes/claims_unused_by_chapter_goals_not_adopted.ts` へ移した。(2) Step 2 の準備（u := log(y+√(y^2-1)) と exp(u)・exp(-u)・cosh u = y・u ≥ 0）は結論に使われず、arccosh(y) = u = log(…) は定義へ戻るだけだったので除いた。(3) 各 Step に `def_gamma1_gamma2_of_theta`・`def_arccosh`・`def_gamma_theta` の blkref と (R0) の参照を置き、(R0) に無い定数関数・恒等写像・制限の連続性は連続の定義から従うと書いて分けた。Step 3 は γ_1 の値域を書き換えずに合成した。主張に全実数上の cos を前提とすることを書いた。三回のレビューで必須の指摘が無くなるまで直した。Lean はコメントと `lean/docs/ch012-formalization.md` の表だけを付け替えた（`gamma1R_periodic`・`gammaFn_periodic` はノートの内容の形式化として残した）。
+- `check_number_operator_is_hermitian`（ň_μ・Q̌_ε はエルミートで x^*Q̌_εx = ‖Q̌_εx‖^2 ≥ 0）: `sagemath/check/check_number_operator_is_hermitian/`。(1) の Pauli 行列・クロネッカー積の共役転置の成分の鎖・(σ_k^a)^*・Z_j・Y_j の鎖を QQ(i) で（M_col = 1..5）、(2) の位相の等式と Ž_μ・Y̌_μ の鎖を円分体で（M_col = 2..6）、(3)(4) の conj(α_μ)・(ψ̌_μ^†)^*・ň_μ・Q̌_ε・結びの鎖を本物の ψ̌ の数体 E_μ で（結合定数 3 組 × M_col = 2, 3、ε の全て）厳密に確かめた（等号 5495・495・5126 件、否定コントロール 26・72・32 件。複素共役は体の自己同型として生成元で確かめた。浮動小数点なし）。**人手証明を直した**（計算と主張は不変）: 根拠のラベルの取り違え 7 箇所（kronecker_product_rule (2)→def_kronecker (2)、同 (1)→distinct_site_pauli_matrices_commute、def_transfer_matrix_symbols→def_jordan_wigner_Z/Y_matrices、def_half_integer_modes→def_half_integer_checkZ/Y、def_check_fermi→def_check_number_operator、Z_Y_linearly_independent→pauli_matrix_products）、クロネッカー積の共役転置と (σ_k^a)^* を散文から鎖へ、結びの鎖を本文に定義の無い数ベクトルの共役転置を経ない成分の鎖へ書き直し、(XW)^* = W^*X^* と線型性を star_preserves_norm_and_limits (1) で引いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（ClaimCheckQHermitian.lean は新しい鎖の行と 1 対 1 でない。Lean の連続実行の受け持ち）。
 
 ## 次の一歩
-`thermodynamic_limit_column_limit_and_closed_form.ts` の `check_number_operator_is_hermitian`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_column_limit_and_closed_form.ts` の `c_plus_equals_Lambda_half_integer`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`check_number_operator_is_hermitian` のレビューで見つかった（残したもの）: 主張の表示式 x^*Q̌_εx = x^*Q̌_ε^*Q̌_εx = ‖Q̌_εx‖^2 ≥ 0 は ℂ の元と実数を `=` で結ぶ（証明の最後の段落で、右辺を ι で ℂ に入れた値と読むと書いた）。主張の形を (‖Q̌_εx‖^2)_ℂ に変えると c_plus_equals_Lambda_half_integer の証明の行も変わるので、この単位では変えなかった。結びの鎖の「分配則と有限和の並べ替え」の行は複数の操作を 1 行で使う（教科書の水準）。
 
 - 2026-11-05、`gamma_is_continuous` のレビューで見つかった（残したもの）: Lean の `ClaimGammaContinuous.lean` は人手証明 Step 2（log・√・和の合成による arccosh の連続性）を mathlib の `Real.continuousOn_arcosh` 一つで済ませており、人手証明との 1 対 1 になっていない。Lean の連続実行の受け持ち。(R0) は定数関数・恒等写像・制限の連続性を挙げておらず、人手証明は「連続の定義から直ちに従う」と書いて分けた。(R0) の文に足すかは、検算の付いたブロックの見直しで扱う。
 

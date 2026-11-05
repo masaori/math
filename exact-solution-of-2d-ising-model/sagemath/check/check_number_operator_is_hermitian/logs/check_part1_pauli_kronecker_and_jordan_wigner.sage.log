@@ -1,0 +1,8 @@
+== check_number_operator_is_hermitian (1): Pauli 行列・クロネッカー積・Z_j・Y_j の共役転置（QQ(i) で厳密）
+  M=1: 済（累計 等号 5155 件）
+  M=2: 済（累計 等号 5204 件）
+  M=3: 済（累計 等号 5277 件）
+  M=4: 済（累計 等号 5374 件）
+  M=5: 済（累計 等号 5495 件）
+-- check_number_operator_is_hermitian (1): Pauli 行列・クロネッカー積・Z_j・Y_j の共役転置（QQ(i) で厳密）: 等号 5495 件、否定コントロール 26 件
+RESULT: PASS

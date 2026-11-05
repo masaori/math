@@ -2042,8 +2042,8 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
     proof: [
       paragraph([
         "(1) ",
-        ref("Z_Y_linearly_independent"),
-        " の証明で用いた Pauli 行列の成分表示より ",
+        ref("pauli_matrix_products"),
+        " の Pauli 行列の成分より ",
         math(String.raw`\left(\sigma^x\right)^* = \sigma^x`),
         "、",
         math(String.raw`\left(\sigma^y\right)^* = \sigma^y`),
@@ -2060,39 +2060,94 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         " 成分 ",
         math(String.raw`i`),
         " が入れ替わり、複素共役でさらに符号が戻る）。",
-        ref("kronecker_product_rule"),
-        " (2) の成分の定義より ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}^* = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " である（",
+        ref("def_identity_matrix"),
+        " の成分 ",
+        math(String.raw`\delta_{kl}`),
+        " は実数で、",
+        math(String.raw`\delta_{lk} = \delta_{kl}`),
+        "）。",
+        math(String.raw`A_1,\dots,A_{M_{\mathrm{col}}} \in \mathrm{Mat}(2,\mathbb{C})`),
+        " と ",
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`I = (i_1,\dots,i_{M_{\mathrm{col}}}),\ J = (j_1,\dots,j_{M_{\mathrm{col}}}) \in \mathcal{I}_{M_{\mathrm{col}}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)^*\right)_{\nu(I),\,\nu(J)}
+&= \overline{\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)_{\nu(J),\,\nu(I)}}
+&&\left(\because\ \blkref{def_hermitian_positive_definite}\right)\\
+&= \overline{\prod_{k=1}^{M_{\mathrm{col}}}(A_k)_{j_k i_k}}
+&&\left(\because\ \blkref{def_kronecker}\text{ (2)}\right)\\
+&= \prod_{k=1}^{M_{\mathrm{col}}}\overline{(A_k)_{j_k i_k}}
+&&\left(\because\ \blkref{complex_conjugate_of_product}\text{ の反復適用}\right)\\
+&= \prod_{k=1}^{M_{\mathrm{col}}}\left(A_k^*\right)_{i_k j_k}
+&&\left(\because\ \blkref{def_hermitian_positive_definite}\text{ を各因子へ}\right)\\
+&= \left(A_1^*\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}^*\right)_{\nu(I),\,\nu(J)}
+&&\left(\because\ \blkref{def_kronecker}\text{ (2)}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\nu`),
+        " は全単射なので ",
         math(String.raw`\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)^*
 = A_1^*\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}^*`),
-        " なので ",
-        math(String.raw`\left(\sigma_k^a\right)^* = \sigma_k^a`),
-        "（",
+        " である。よって ",
         math(String.raw`a \in \{x,y,z\}`),
-        "）。",
+        "、",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sigma_k^a\right)^*
+&= \left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes\sigma^a\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)^*
+&&\left(\because\ \blkref{def_site_pauli_matrices}\right)\\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}^*\boxtimes\cdots\boxtimes\left(\sigma^a\right)^*\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}^*
+&&\left(\because\ \text{直前の式}\right)\\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes\sigma^a\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
+&&\left(\because\ \left(\sigma^a\right)^* = \sigma^a\text{ と }I_{\mathrm{Mat}(2,\mathbb{C})}^* = I_{\mathrm{Mat}(2,\mathbb{C})}\right)\\
+&= \sigma_k^a
+&&\left(\because\ \blkref{def_site_pauli_matrices}\right)
+\end{aligned}`,
+      ),
       paragraph([
+        ref("star_preserves_norm_and_limits"),
+        " (1) の ",
         math(String.raw`(XW)^* = W^*X^*`),
         " と、相異なるサイトの因子が可換であること（",
-        ref("kronecker_product_rule"),
-        " (1)）から",
+        ref("distinct_site_pauli_matrices_commute"),
+        "）から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 Z_j^*
 &= \left(\sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^z\right)^*
-   \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
+   \quad (\because \blkref{def_jordan_wigner_Z_matrices}) \\
 &= \left(\sigma_j^z\right)^*\left(\sigma_{j-1}^x\right)^*\cdots\left(\sigma_1^x\right)^*
-   \quad (\because (XW)^* = W^*X^*) \\
+   \quad (\because \blkref{star_preserves_norm_and_limits}\text{ (1) の }(XW)^* = W^*X^*\text{ の反復適用}) \\
 &= \sigma_j^z\,\sigma_{j-1}^x\cdots\sigma_1^x
-   \quad (\because \text{直前の段落}) \\
+   \quad (\because \left(\sigma_k^a\right)^* = \sigma_k^a) \\
 &= \sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^z
-   \quad (\because \text{相異なるサイトの因子は可換}) \\
+   \quad (\because \blkref{distinct_site_pauli_matrices_commute}\text{ の反復適用}) \\
 &= Z_j
+   \quad (\because \blkref{def_jordan_wigner_Z_matrices})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`Y_j`),
-        " も同じ計算である。",
+        " も、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_j = \sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^y`),
+        " について同じ計算である（",
+        math(String.raw`\sigma_j^z`),
+        " を ",
+        math(String.raw`\sigma_j^y`),
+        " に替える）。",
       ]),
       paragraph([
         "(2) ",
@@ -2115,20 +2170,22 @@ Z_j^*
         String.raw`\begin{aligned}
 \check{Z}_\mu^*
 &= \left(\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j\right)^*
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+   \quad (\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}}\overline{\exp(-ij\tilde\theta_\mu)}\;Z_j^*
-   \quad (\because \text{転置共役は和を保ち、スカラー倍を複素共役つきで保つ}) \\
+   \quad (\because \blkref{star_preserves_norm_and_limits}\text{ (1) の }(\alpha A + \beta B)^* = \overline{\alpha}A^* + \overline{\beta}B^*\text{ の反復適用}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}}\exp(ij\tilde\theta_\mu)\,Z_j
    \quad (\because \text{(1) と } \tilde\theta_\mu \in \mathbb{R}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_{M_{\mathrm{col}}+1-\mu})\,Z_j
-   \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)}) \\
+   \quad (\because \blkref{conjugate_index_of_check_Z_Y}\text{ (2)}) \\
 &= \check{Z}_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{def\_half\_integer\_modes})
+   \quad (\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`\check{Y}_\mu`),
-        " も同じ計算である（",
+        " も、",
+        ref("def_half_integer_checkY"),
+        " について同じ計算である（",
         ref("def_check_index_set"),
         " (2) より ",
         math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
@@ -2183,12 +2240,12 @@ Z_j^*
    \quad \left(\because r, 2\sqrt{M_{\mathrm{col}}} \in \mathbb{R} \text{ と }
    \overline{z^{-1}} = \left(\bar z\right)^{-1}\right) \\
 &= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\left(-\gamma_2(\tilde\theta_\mu)\right)}
-   \quad \left(\because \text{relation\_of\_gamma\_2\_theta\_tilde (1) を }
+   \quad \left(\because \blkref{relation_of_gamma_2_theta_tilde}\text{ (1) を }
    \overline{\gamma_2(-\tilde\theta_\mu)} = -\gamma_2(\tilde\theta_\mu)
    \text{ の形で使う}\right) \\
 &= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)} \\
 &= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)}
-   \quad (\because \text{periodicity\_of\_check\_fermi (3)}) \\
+   \quad (\because \blkref{periodicity_of_check_fermi}\text{ (3)}) \\
 &= -\alpha_\nu
    \quad (\because \alpha_\nu \text{ の定義と }
    \left|\gamma_2(\tilde\theta_\nu)\right| = r)
@@ -2207,15 +2264,15 @@ Z_j^*
         String.raw`\begin{aligned}
 \left(\check\psi_\mu^\dagger\right)^*
 &= \left(\alpha_\mu\check{Z}_\mu + \beta\check{Y}_\mu\right)^*
-   \quad (\because \text{def\_check\_fermi}) \\
+   \quad (\because \blkref{def_check_fermi}) \\
 &= \overline{\alpha_\mu}\,\check{Z}_\mu^* + \overline{\beta}\,\check{Y}_\mu^*
-   \quad (\because \text{転置共役の線型性（複素共役つき）}) \\
+   \quad (\because \blkref{star_preserves_norm_and_limits}\text{ (1) の }(\alpha A + \beta B)^* = \overline{\alpha}A^* + \overline{\beta}B^*) \\
 &= \overline{\alpha_\mu}\,\check{Z}_\nu + \beta\,\check{Y}_\nu
    \quad (\because \text{(2) と } \beta \in \mathbb{R}) \\
 &= -\alpha_\nu\check{Z}_\nu + \beta\check{Y}_\nu
    \quad \left(\because \overline{\alpha_\mu} = -\alpha_\nu\right) \\
 &= \check\psi_\nu
-   \quad (\because \text{def\_check\_fermi})
+   \quad (\because \blkref{def_check_fermi})
 \end{aligned}`,
       ),
       paragraph([
@@ -2229,13 +2286,13 @@ Z_j^*
         String.raw`\begin{aligned}
 \check{n}_\mu^*
 &= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^*
-&&\left(\because\ \text{def\_check\_fermi}\right)\\
+&&\left(\because\ \blkref{def_check_number_operator}\right)\\
 &= \left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^*\left(\check\psi_\mu^\dagger\right)^*
-&&\left(\because\ (XW)^*=W^*X^*\right)\\
+&&\left(\because\ \blkref{star_preserves_norm_and_limits}\text{ (1) の }(XW)^*=W^*X^*\right)\\
 &= \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}
 &&\left(\because\ \text{(3) とその転置共役}\right)\\
 &= \check{n}_\mu
-&&\left(\because\ \text{def\_check\_fermi}\right)
+&&\left(\because\ \blkref{def_check_number_operator}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2256,36 +2313,74 @@ Z_j^*
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^*
 &= \left(R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*
-&&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)\\
+&&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\right)\\
 &= \left(R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
-&&\left(\because\ (XW)^*=W^*X^*\text{ の反復適用}\right)\\
+&&\left(\because\ \blkref{star_preserves_norm_and_limits}\text{ (1) の }(XW)^*=W^*X^*\text{ の反復適用}\right)\\
 &= R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\cdots R_1^{(\epsilon_1)}
-&&\left(\because\ \check n_\mu^*=\check n_\mu\text{ と }I^*=I\right)\\
+&&\left(\because\ \check n_\mu^*=\check n_\mu\text{、}I^*=I\text{ と、}\blkref{star_preserves_norm_and_limits}\text{ (1) の線型性による }(I-\check n_\mu)^*=I^*-\check n_\mu^*\right)\\
 &= R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}
-&&\left(\because\ \text{因子の可換性。check\_number\_operators\_commute (2)}\right)\\
+&&\left(\because\ \text{因子の可換性。}\blkref{check_number_operators_commute}\text{ (2) の }\check n_\mu\check n_\nu=\check n_\nu\check n_\mu\text{ と、分配則による }(I-\check n_\mu)\check n_\nu=\check n_\nu(I-\check n_\mu)\text{ など}\right)\\
 &= \check{Q}_\epsilon
-&&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)
+&&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\right)
 \end{aligned}`,
       ),
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
         " (1) の ",
         math(String.raw`\check{Q}_\epsilon^2 = \check{Q}_\epsilon`),
-        " と合わせると",
+        " と合わせる。",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " に対し ",
+        math(String.raw`w := \check{Q}_\epsilon x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " とおき、その第 ",
+        math(String.raw`k`),
+        " 成分を ",
+        math(String.raw`w_k \in \mathbb{C}`),
+        " と書くと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 x^*\check{Q}_\epsilon x
-&=x^*\check{Q}_\epsilon^*\check{Q}_\epsilon x
-&&\left(\because\ \check{Q}_\epsilon^*=\check{Q}_\epsilon\text{ と }\check{Q}_\epsilon^2=\check{Q}_\epsilon\right)\\
-&=\left(\check{Q}_\epsilon x\right)^*\left(\check{Q}_\epsilon x\right)
-&&\left(\because\ (XW)^*=W^*X^*\right)\\
-&=\left\|\check{Q}_\epsilon x\right\|^2
-&&\left(\because\ \text{複素ベクトルのノルムの定義}\right)\\
-&\geq0
-&&\left(\because\ \text{実数の平方和は非負}\right)
+&=x^*\check{Q}_\epsilon^2 x
+&&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\text{ (1) の }\check{Q}_\epsilon=\check{Q}_\epsilon^2\right)\\
+&=x^*\left(\check{Q}_\epsilon^*\check{Q}_\epsilon\right) x
+&&\left(\because\ \check{Q}_\epsilon^*=\check{Q}_\epsilon\right)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}\overline{x_k}\left(\check{Q}_\epsilon^*\check{Q}_\epsilon\right)_{kl}x_l
+&&\left(\because\ \blkref{def_conjugate_bilinear_value}\right)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}\overline{x_k}\left(\sum_{m=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}}\left(\check{Q}_\epsilon\right)_{ml}\right)x_l
+&&\left(\because\ \blkref{mat_mult}\text{ と }\blkref{def_hermitian_positive_definite}\right)\\
+&=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}}\,\overline{x_k}\right)\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
+&&\left(\because\ \text{分配則と有限和の並べ替え（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}x_k}\right)\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
+&&\left(\because\ \blkref{complex_conjugate_of_product}\text{ を各項へ}\right)\\
+&=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{mk}x_k\right)}\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
+&&\left(\because\ \blkref{complex_conjugate_of_sum}\right)\\
+&=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\overline{w_m}\,w_m
+&&\left(\because\ \blkref{mat_mult}\text{ の行列と数ベクトルの積と }w\text{ の定義}\right)\\
+&=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\left(|w_m|^2\right)_{\mathbb{C}}
+&&\left(\because\ \blkref{complex_conjugate_times_self}\text{ を各項へ}\right)\\
+&=\left(\sum_{m=1}^{2^{M_{\mathrm{col}}}}|w_m|^2\right)_{\mathbb{C}}
+&&\left(\because\ \blkref{real_inclusion_preserves_finite_sum}\right)\\
+&=\left(\left(\sqrt{\sum_{m=1}^{2^{M_{\mathrm{col}}}}|w_m|^2}^{\,(\mathbb{R}_{\ge0})}\right)^2\right)_{\mathbb{C}}
+&&\left(\because\ \blkref{definition_of_sqrt_r_positive}\right)\\
+&=\left(\left\|\check{Q}_\epsilon x\right\|^2\right)_{\mathbb{C}}
+&&\left(\because\ \blkref{def_matrix_norm}\text{ と }w=\check{Q}_\epsilon x\right)
 \end{aligned}`,
       ),
+      paragraph([
+        math(String.raw`\left\|\check{Q}_\epsilon x\right\|^2 \in \mathbb{R}_{\geq 0}`),
+        " である（",
+        ref("def_matrix_norm"),
+        " のノルムは ",
+        math(String.raw`\mathbb{R}_{\geq 0}`),
+        " の元で、実数の平方は非負）。主張の ",
+        math(String.raw`x^*\check{Q}_\epsilon x = \left\|\check{Q}_\epsilon x\right\|^2 \geq 0`),
+        " の右辺は、この実数を ",
+        ref("inclusion_rr_to_cc"),
+        " で ",
+        math(String.raw`\mathbb{C}`),
+        " に入れた値と、その実数についての不等式である。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -2293,6 +2388,7 @@ x^*\check{Q}_\epsilon x
         "c_+(M) ≤ Λ̌_max を示すのに必要なのは「Q̌_ε がエルミートな冪等行列であること」だけである。これがあれば x^*V^{(+)}x = Σ_ε Λ̌_ε ‖Q̌_ε x‖² と書けて、スペクトル定理（実対称行列の対角化可能性）を持ち出さずに Rayleigh 商の上限が押さえられる。011 章が「固有値の存在を使わない」方針を取っているのと整合する。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（(ψ̌_μ^†)^* = ψ̌_{M+1−μ}、ň_μ, Q̌_ε のエルミート性、残差 ≤ 1.2e-14）。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が (4) を引く）。",
+        "2026-11-05: 全証明の SageMath 検算（sagemath/check/check_number_operator_is_hermitian/）を付けたときに根拠を直した（計算と主張は不変）。Pauli 行列の成分の出典を pauli_matrix_products に、(A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^* の出典を kronecker_product_rule (2)（I⊠⋯⊠I = I の主張）から def_kronecker (2) の成分の鎖に、(σ_k^a)^* = σ_k^a を def_site_pauli_matrices の鎖に、相異なるサイトの因子の可換性を kronecker_product_rule (1) から distinct_site_pauli_matrices_commute に、Z_j・Y_j の定義を def_transfer_matrix_symbols から def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices に、Ž_μ・Y̌_μ の定義を def_half_integer_modes（θ̃ の共役添字恒等式のラベル）から def_half_integer_checkZ・def_half_integer_checkY に、ň_μ の定義を def_check_fermi から def_check_number_operator に直した。(XW)^* = W^*X^* と転置共役の線型性を star_preserves_norm_and_limits (1) で、結びの鎖を、数ベクトルの共役転置（本文に定義が無い）を経ない成分の鎖に書き直した（def_conjugate_bilinear_value・mat_mult・complex_conjugate_of_product・complex_conjugate_of_sum・complex_conjugate_times_self・real_inclusion_preserves_finite_sum・definition_of_sqrt_r_positive・def_matrix_norm）。Q̌_ε の鎖の (I−ň_μ)^* と因子の可換性の根拠を足した。名前だけの根拠（\\text{…}）を \\blkref に直した。",
       ],
     },
   },
