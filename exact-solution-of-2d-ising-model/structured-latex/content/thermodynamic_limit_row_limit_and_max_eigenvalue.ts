@@ -1649,122 +1649,557 @@ a+b+1 &= p+(p+1)+1
     ],
     proof: [
       paragraph([
-        "まず、任意の ",
-        math(String.raw`k \geq 1`),
+        math(String.raw`c := c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        "（",
+        ref("def_rayleigh_sup"),
+        "）、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`\mathcal{R} := \{x^\top Wx \mid x \in \mathbb{R}^d,\ \|x\| = 1\} \subseteq \mathbb{R}_{>0}`),
+        "（",
+        ref("def_rayleigh_sup"),
+        "）と略記する。冪は ",
+        ref("def_exp"),
+        " (1) のもの、積は ",
+        ref("mat_mult"),
+        " のもの、",
+        math(String.raw`\mathbb{R}`),
+        " の元 ",
+        math(String.raw`t`),
+        " の冪は ",
+        math(String.raw`t^0 := 1,\ t^{p+1} := t^pt`),
+        " である。上からの評価 ",
+        math(String.raw`\mathrm{tr}(W^n) \leq 2^{M_{\mathrm{col}}}c^n`),
+        " は ",
+        ref("trace_power_upper_bound"),
+        " なので、以下で下からの評価 ",
+        math(String.raw`c^n \leq \mathrm{tr}(W^n)`),
+        " を示す。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`W^n`),
+        " の成分の対称性】",
+        math(String.raw`W`),
+        " は実対称なので（",
+        ref("W_is_real_symmetric_positive_definite"),
+        "）、",
+        math(String.raw`W^n`),
+        " は実対称である（",
+        ref("power_of_real_symmetric_complex_matrix_is_real_symmetric"),
+        "、",
+        math(String.raw`n \to d,\ A \to W`),
+        "、指数 ",
+        math(String.raw`n`),
+        "）。すなわち ",
+        math(String.raw`W^n`),
+        " の成分はすべて実数で、すべての ",
+        math(String.raw`k, l \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\frac{m_k}{m_{k-1}}
-&=\frac{m_k^2}{m_{k-1}\,m_k}
-&&\bigl(\because\ \text{分子と分母に }m_k>0\text{ を掛けた（}\blkref{moment_log_convexity}\text{ の正値性）}\bigr)\\
-&\leq\frac{m_{k-1}\,m_{k+1}}{m_{k-1}\,m_k}
-&&\bigl(\because\ \text{対数凸性 }\blkref{moment_log_convexity}\text{ と、正の分母での商は順序を保つ}\bigr)\\
-&=\frac{m_{k+1}}{m_k}
-&&\bigl(\because\ m_{k-1}>0\ \text{の約分}\bigr)
+(W^n)_{lk}
+&=\bigl((W^n)^\top\bigr)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)\\
+&=(W^n)_{kl}
+&&\bigl(\because\ W^n\ \text{は実対称なので}\ (W^n)^\top = W^n\ \text{（}\blkref{def_real_symmetric_complex_matrix}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
-        "であり、比 ",
-        math(String.raw`m_{k+1}/m_k`),
-        " は ",
-        math(String.raw`k`),
-        " について単調非減少である。したがって",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-m_n
-&=m_0\cdot\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
-&&\bigl(\because\ \text{望遠鏡積（分母は }\blkref{moment_log_convexity}\text{ の正値性により零でない）}\bigr)\\
-&=\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
-&&\bigl(\because\ m_0=x^\top W^0x=\|x\|^2=1\ \text{（}x\text{ は単位ベクトル）}\bigr)\\
-&\geq\left(\frac{m_1}{m_0}\right)^{n}
-&&\bigl(\because\ \text{各 }j\text{ で }\tfrac{m_j}{m_{j-1}}\geq\tfrac{m_1}{m_0}\text{（上の単調非減少を }j-1\text{ 回適用）と、}\\
-&&&\quad\text{正の項どうしの積は順序を保つ}\bigr)\\
-&=\left(x^\top Wx\right)^{n}
-&&\bigl(\because\ m_1=x^\top Wx\ \text{と}\ m_0=1\bigr)
-\end{aligned}`),
-      paragraph([
-        "一方、",
-        math(String.raw`W^n`),
-        " は正定値（",
-        math(String.raw`W`),
-        " が正定値なので、",
-        math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`y^\top W^ny = \|W^{n/2}y\|^2`),
-        "、奇数なら ",
-        math(String.raw`(W^{(n-1)/2}y)^\top W(W^{(n-1)/2}y)`),
-        " がいずれも ",
-        math(String.raw`y \neq 0`),
-        " で正）であり、半正定値行列 ",
-        math(String.raw`A`),
-        " については",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^\top A x
-&=|x^\top A x|
-&&\bigl(\because\ A\text{ は半正定値なので }0\leq x^\top A x\bigr)\\
-&=\left|\sum_{k,l=1}^{d}x_kx_lA_{kl}\right|
-&&\bigl(\because\ \text{行列の積の成分表示}\bigr)\\
-&\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\,|A_{kl}|
-&&\bigl(\because\ \text{有限和の三角不等式}\bigr)\\
-&\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}A_{ll}}
-&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=A,\ x=e_k,\ y=e_l\ \text{に適用して}\ |A_{kl}|\leq\sqrt{A_{kk}A_{ll}}\bigr)\\
-&=\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}}\sqrt{A_{ll}}
-&&\bigl(\because\ A_{kk},A_{ll}\geq0\text{ と平方根の積の法則}\bigr)\\
-&=\left(\sum_{k=1}^{d}|x_k|\sqrt{A_{kk}}\right)^2
-&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
-&\leq\left(\sum_{k=1}^{d}x_k^2\right)\left(\sum_{k=1}^{d}A_{kk}\right)
-&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=I\ \text{と}\\
-&&&\quad\text{二つのベクトル}\ \left(|x_k|\right)_k,\ \left(\sqrt{A_{kk}}\right)_k\ \text{に適用}\bigr)\\
-&=\|x\|^2\,\mathrm{tr}(A)
-&&\bigl(\because\ \text{ノルムとトレースの定義}\bigr).
-\end{aligned}`,
-      ),
-      paragraph([
-        "この評価を ",
-        math(String.raw`A = W^n`),
-        " と単位ベクトル ",
-        math(String.raw`x`),
-        " に適用すると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-m_n
-&=x^\top W^nx
-&&\bigl(\because\ m_n=x^\top W^nx\ \text{の定義}\bigr)\\
-&\leq\|x\|^2\,\mathrm{tr}(W^n)
-&&\bigl(\because\ \text{上の評価を半正定値行列}\ A=W^n\ \text{へ適用}\bigr)\\
-&=\mathrm{tr}(W^n)
-&&\bigl(\because\ \|x\|=1\ \text{（}x\text{ は単位ベクトル）}\bigr)
-\end{aligned}`),
-      paragraph(["である。以上を合わせると、任意の単位ベクトル ", math(String.raw`x`), " について"]),
-      displayMath(String.raw`\left(x^\top Wx\right)^{n} \leq m_n \leq \mathrm{tr}(W^n)`),
-      paragraph([
-        "である。左辺の ",
-        math(String.raw`x`),
-        " についての上限を取ると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-c^{n}
-&=\left(\sup_{\|x\|=1}x^\top Wx\right)^{n}
-&&\bigl(\because\ c\ \text{の定義}\bigr)\\
-&=\sup_{\|x\|=1}\left(x^\top Wx\right)^{n}
-&&\bigl(\because\ t\mapsto t^n\ \text{は}\ \mathbb{R}_{>0}\ \text{上で単調増加なので、上限と可換}\bigr)\\
-&\leq\mathrm{tr}(W^n)
-&&\bigl(\because\ \text{各単位ベクトル}\ x\ \text{で}\ (x^\top Wx)^n\leq\mathrm{tr}(W^n)\ \text{（上の鎖）なので}\\
-&&&\quad\mathrm{tr}(W^n)\ \text{は上界であり、上限は最小の上界}\bigr)
-\end{aligned}`),
-      paragraph([
-        "であり、",
-        math(String.raw`c^n \leq \mathrm{tr}(W^n)`),
-        " を得る（",
-        math(String.raw`c`),
-        " の定義は ",
+        "である。以下、",
         ref("def_rayleigh_sup"),
-        "）。上からの評価 ",
-        math(String.raw`\mathrm{tr}(W^n) \leq 2^{M_{\mathrm{col}}} c^n`),
+        " が ",
+        math(String.raw`W`),
+        " を読むのと同じく、",
+        math(String.raw`W^n`),
+        " の成分を実数として ",
+        math(String.raw`y^\top W^nz`),
+        "（",
+        ref("def_real_bilinear_value"),
+        "）と ",
+        math(String.raw`\mathrm{tr}(W^n) = \sum_{k=1}^{d}(W^n)_{kk}`),
+        "（",
+        ref("def_trace"),
+        "）を読む。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`W^n`),
+        " の半正定値性】",
+        math(String.raw`z \in \mathbb{R}^d`),
+        " について ",
+        math(String.raw`z^\top W^nz \geq 0`),
+        " を示す。",
+        math(String.raw`z = 0`),
+        " なら ",
+        ref("def_real_bilinear_value"),
+        " の和の各項が ",
+        math(String.raw`0\cdot(W^n)_{ij}\cdot 0 = 0`),
+        " なので ",
+        math(String.raw`z^\top W^nz = 0`),
+        " である。",
+        math(String.raw`z \neq 0`),
+        " なら ",
+        math(String.raw`z_{j_0} \neq 0`),
+        " となる ",
+        math(String.raw`j_0`),
+        " があり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|z\|^2
+&=\sum_{j=1}^{d}|z_j|^2
+&&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
+&\geq |z_{j_0}|^2
+&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (a_j \to |z_j|^2,\ k \to j_0)\bigr)\\
+&>0
+&&\bigl(\because\ z_{j_0} \neq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`\|z\| \geq 0`),
+        "（",
+        ref("def_matrix_norm"),
+        "）と ",
+        math(String.raw`\|z\| \neq 0`),
+        "（",
+        math(String.raw`\|z\| = 0`),
+        " なら ",
+        math(String.raw`\|z\|^2 = 0^2 = 0`),
+        " となり ",
+        math(String.raw`\|z\|^2 > 0`),
+        " に反する）から ",
+        math(String.raw`\|z\| > 0`),
+        " である。",
+        math(String.raw`w \in \mathbb{R}^d`),
+        " を ",
+        math(String.raw`w_i := \|z\|^{-1}z_i`),
+        " で定めると、",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`z_i = \|z\|\bigl(\|z\|^{-1}z_i\bigr) = \|z\|\,w_i`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|w\|
+&=\sqrt{\sum_{i=1}^{d}|w_i|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{def_matrix_norm}\bigr)\\
+&=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{と、}\mathbb{R}\ \text{の元}\ t\ \text{で}\ |t|^2 = t^2\ \text{を各項へ同時に適用}\bigr)\\
+&=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\bigr)^2z_i^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (st)^2 = s^2t^2\ \text{を各項へ同時に適用}\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}z_i^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to (\|z\|^{-1})^2)\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}|z_i|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{の元}\ t\ \text{で}\ t^2 = |t|^2\ \text{を各項へ同時に適用}\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\|z\|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \text{上の}\ \|z\|^2 = \sum_{j}|z_j|^2\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|^{-1}\|z\| = 1,\ 1^2 = 1\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+z^\top W^nz
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}z_i\,(W^n)_{ij}\,z_j
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,w_i\bigr)(W^n)_{ij}\bigl(\|z\|\,w_j\bigr)
+&&\bigl(\because\ z_i = \|z\|\,w_i\ \text{を各項へ同時に適用}\bigr)\\
+&=\|z\|^2\sum_{i=1}^{d}\sum_{j=1}^{d}w_i\,(W^n)_{ij}\,w_j
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
+&=\|z\|^2\,\bigl(w^\top W^nw\bigr)
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&>0
+&&\bigl(\because\ \|z\|^2 > 0\ \text{と、}\blkref{moment_log_convexity}\ \text{の正値性を単位ベクトル}\ x \to w\ \text{と}\ k \to n\ \text{で適用した}\ w^\top W^nw > 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。いずれの場合も ",
+        math(String.raw`z^\top W^nz \geq 0`),
+        " である。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`W^n`),
+        " の成分の評価】",
+        math(String.raw`x \in \mathbb{R}^d`),
+        "、",
+        math(String.raw`k, l \in \{1,\dots,d\}`),
+        " について、",
+        math(String.raw`v \in \mathbb{R}^d`),
+        " を ",
+        math(String.raw`v_i := x_l\,(e_k)_i - x_k\,(e_l)_i`),
+        " で定める。ここで ",
+        math(String.raw`q \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`e_q \in \mathbb{R}^d`),
+        " は、",
+        math(String.raw`i = q`),
+        " なら ",
+        math(String.raw`(e_q)_i := 1`),
+        "、",
+        math(String.raw`i \neq q`),
+        " なら ",
+        math(String.raw`(e_q)_i := 0`),
+        " で定めた実数の組である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&\leq v^\top W^nv
+&&\bigl(\because\ \text{【}W^n\text{ の半正定値性】}\ (z \to v)\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}v_i\,(W^n)_{ij}\,v_j
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(x_l(e_k)_i - x_k(e_l)_i\bigr)(W^n)_{ij}\bigl(x_l(e_k)_j - x_k(e_l)_j\bigr)
+&&\bigl(\because\ v\ \text{の定義}\bigr)\\
+&=x_l^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i(W^n)_{ij}(e_k)_j
+ - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i(W^n)_{ij}(e_l)_j\\
+&\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i(W^n)_{ij}(e_k)_j
+ + x_k^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i(W^n)_{ij}(e_l)_j
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
+&=x_l^2\,(W^n)_{kk} - x_lx_k\,(W^n)_{kl} - x_kx_l\,(W^n)_{lk} + x_k^2\,(W^n)_{ll}
+&&\bigl(\because\ (e_q)_i\ \text{は}\ i = q\ \text{でだけ}\ 1\ \text{でほかは}\ 0\ \text{なので、各二重和で}\ 0\ \text{でない項は一つだけ}\bigr)\\
+&=x_l^2\,(W^n)_{kk} - x_lx_k\,(W^n)_{kl} - x_kx_l\,(W^n)_{kl} + x_k^2\,(W^n)_{ll}
+&&\bigl(\because\ \text{【}W^n\text{ の成分の対称性】の}\ (W^n)_{lk} = (W^n)_{kl}\bigr)\\
+&=x_l^2\,(W^n)_{kk} - 2\,x_k\,(W^n)_{kl}\,x_l + x_k^2\,(W^n)_{ll}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と同類項の加法}\bigr)
+\end{aligned}`),
+      paragraph(["であり、移項して"]),
+      displayMath(String.raw`2\,x_k\,(W^n)_{kl}\,x_l \ \leq\ x_l^2\,(W^n)_{kk} + x_k^2\,(W^n)_{ll}`),
+      paragraph(["である。"]),
+      paragraph([
+        "【単位ベクトルでの評価】",
+        math(String.raw`x \in \mathbb{R}^d`),
+        "、",
+        math(String.raw`\|x\| = 1`),
+        " とし、",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`m_k := x^\top W^kx`),
+        " を ",
+        ref("moment_log_convexity"),
+        " のとおりに置く。",
+        ref("moment_log_convexity"),
+        " より、すべての ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " で ",
+        math(String.raw`m_k > 0`),
+        "、すべての ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " で ",
+        math(String.raw`m_k^{\,2} \leq m_{k-1}m_{k+1}`),
+        " である。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{d}x_k^2
+&=\sum_{k=1}^{d}|x_k|^2
+&&\bigl(\because\ x_k \in \mathbb{R}\ \text{なので}\ x_k^2 = |x_k|^2\bigr)\\
+&=\|x\|^2
+&&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
+&=1
+&&\bigl(\because\ \|x\| = 1\ \text{と}\ 1^2 = 1\bigr)
+\end{aligned}`),
+      paragraph(["であり、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(d,\mathbb{C})}`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+m_0
+&=x^\top W^0x
+&&\bigl(\because\ m_0 := x^\top W^0x\bigr)\\
+&=x^\top Ix
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&=\sum_{k=1}^{d}\sum_{l=1}^{d}x_k\,\delta_{kl}\,x_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ \text{と}\ \blkref{def_identity_matrix}\bigr)\\
+&=\sum_{k=1}^{d}x_k\,\delta_{kk}\,x_k
+&&\bigl(\because\ l \neq k\ \text{の項は}\ \delta_{kl} = 0\ \text{（}\blkref{def_kronecker_delta}\text{）なので}\ 0\bigr)\\
+&=\sum_{k=1}^{d}x_kx_k
+&&\bigl(\because\ \delta_{kk} = 1\ \text{（}\blkref{def_kronecker_delta}\text{）}\bigr)\\
+&=\sum_{k=1}^{d}x_k^2
+&&\bigl(\because\ \text{冪の定義}\ t^2 = (t^0t)t = tt\bigr)\\
+&=1
+&&\bigl(\because\ \text{上の式変形}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+m_1
+&=x^\top W^1x
+&&\bigl(\because\ m_1 := x^\top W^1x\bigr)\\
+&=x^\top W^{0+1}x
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
+&=x^\top\bigl(W^0W\bigr)x
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
+&=x^\top\bigl(IW\bigr)x
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&=x^\top Wx
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。次に、",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`m_k \geq m_1m_{k-1}`),
+        " を ",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+        math(String.raw`k = 1`),
+        " では ",
+        math(String.raw`m_1 = m_1\cdot 1 = m_1m_0`),
+        "（",
+        math(String.raw`m_0 = 1`),
+        "）である。",
+        math(String.raw`k \geq 1`),
+        " で ",
+        math(String.raw`m_k \geq m_1m_{k-1}`),
+        " とすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{m_k}{m_{k-1}}
+&\geq\frac{m_1m_{k-1}}{m_{k-1}}
+&&\bigl(\because\ \text{帰納法の仮定と、正の}\ m_{k-1}\ \text{での商は順序を保つ}\bigr)\\
+&=m_1
+&&\bigl(\because\ m_{k-1} > 0\ \text{の約分}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+m_{k+1}
+&=\frac{m_{k-1}m_{k+1}}{m_{k-1}}
+&&\bigl(\because\ m_{k-1} > 0\ \text{の約分}\bigr)\\
+&\geq\frac{m_k^{\,2}}{m_{k-1}}
+&&\bigl(\because\ \blkref{moment_log_convexity}\ \text{の}\ m_k^{\,2} \leq m_{k-1}m_{k+1}\ \text{と、正の}\ m_{k-1}\ \text{での商は順序を保つ}\bigr)\\
+&=m_k\,\frac{m_k}{m_{k-1}}
+&&\bigl(\because\ m_k^{\,2} = m_km_k\ \text{と乗法の結合則}\bigr)\\
+&\geq m_k\,m_1
+&&\bigl(\because\ \text{上の}\ \tfrac{m_k}{m_{k-1}} \geq m_1\ \text{と、正の}\ m_k\ \text{を掛けても順序を保つ}\bigr)\\
+&=m_1m_{(k+1)-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と}\ \mathbb{Z}\ \text{で}\ k = (k+1)-1\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。さらに、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`m_p \geq m_1^{\,p}`),
+        " を ",
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 0`),
+        " では ",
+        math(String.raw`m_0 = 1 = m_1^{\,0}`),
+        " である。",
+        math(String.raw`m_p \geq m_1^{\,p}`),
+        " とすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_{p+1}
+&\geq m_1m_{(p+1)-1}
+&&\bigl(\because\ \text{上の}\ m_k \geq m_1m_{k-1}\ (k \to p+1)\bigr)\\
+&=m_1m_p
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ (p+1)-1 = p\bigr)\\
+&\geq m_1m_1^{\,p}
+&&\bigl(\because\ \text{帰納法の仮定と、正の}\ m_1\ \text{を掛けても順序を保つ}\bigr)\\
+&=m_1^{\,p+1}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と冪の定義}\ t^{p+1} := t^pt\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。最後に、【",
+        math(String.raw`W^n`),
+        " の成分の評価】をすべての ",
+        math(String.raw`k, l`),
+        " に当てて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_n
+&=\sum_{k=1}^{d}\sum_{l=1}^{d}x_k\,(W^n)_{kl}\,x_l
+&&\bigl(\because\ m_n := x^\top W^nx\ \text{と}\ \blkref{def_real_bilinear_value}\bigr)\\
+&=2^{-1}\sum_{k=1}^{d}\sum_{l=1}^{d}2\,x_k\,(W^n)_{kl}\,x_l
+&&\bigl(\because\ 2^{-1}\cdot 2 = 1\ \text{と}\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to 2^{-1})\ \text{を内側と外側の和へ適用}\bigr)\\
+&\leq 2^{-1}\sum_{k=1}^{d}\sum_{l=1}^{d}\bigl(x_l^2\,(W^n)_{kk} + x_k^2\,(W^n)_{ll}\bigr)
+&&\bigl(\because\ \text{【}W^n\text{ の成分の評価】を}\ d^2\ \text{個の項へ同時に適用し、項ごとの不等式の有限和と}\ 2^{-1} > 0\ \text{倍は順序を保つ}\bigr)\\
+&=2^{-1}\Bigl(\sum_{k=1}^{d}\sum_{l=1}^{d}x_l^2\,(W^n)_{kk} + \sum_{k=1}^{d}\sum_{l=1}^{d}x_k^2\,(W^n)_{ll}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の有限和の加法の交換則・結合則}\bigr)\\
+&=2^{-1}\Bigl(\sum_{k=1}^{d}(W^n)_{kk}\sum_{l=1}^{d}x_l^2 + \sum_{k=1}^{d}x_k^2\sum_{l=1}^{d}(W^n)_{ll}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側の和へ適用}\bigr)\\
+&=2^{-1}\Bigl(\Bigl(\sum_{k=1}^{d}(W^n)_{kk}\Bigr)\Bigl(\sum_{l=1}^{d}x_l^2\Bigr) + \Bigl(\sum_{k=1}^{d}x_k^2\Bigr)\Bigl(\sum_{l=1}^{d}(W^n)_{ll}\Bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を外側の和へ適用}\bigr)\\
+&=2^{-1}\bigl(\mathrm{tr}(W^n)\cdot 1 + 1\cdot\mathrm{tr}(W^n)\bigr)
+&&\bigl(\because\ \blkref{def_trace}\ \text{と、上の}\ \textstyle\sum_{k}x_k^2 = 1\bigr)\\
+&=\mathrm{tr}(W^n)
+&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)
+\end{aligned}`),
+      paragraph(["である。以上を合わせると、単位ベクトル ", math(String.raw`x`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(x^\top Wx\bigr)^n
+&=m_1^{\,n}
+&&\bigl(\because\ \text{上の}\ m_1 = x^\top Wx\bigr)\\
+&\leq m_n
+&&\bigl(\because\ \text{上の}\ m_p \geq m_1^{\,p}\ (p \to n)\bigr)\\
+&\leq\mathrm{tr}(W^n)
+&&\bigl(\because\ \text{上の式変形}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
+        "【正の実数の冪の比較】",
+        math(String.raw`r, s \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`r < s`),
+        " とする。",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        " について (a) ",
+        math(String.raw`0 < r^p < s^p`),
+        "、(b) ",
+        math(String.raw`s^p - r^p \leq p\,s^{p-1}(s - r)`),
+        " を ",
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 1`),
+        " では ",
+        math(String.raw`r^1 = r^0r = r`),
+        "、",
+        math(String.raw`s^1 = s`),
+        " なので (a) は ",
+        math(String.raw`0 < r < s`),
+        "、(b) は ",
+        math(String.raw`s - r = 1\cdot s^0(s - r)`),
+        " である。",
+        math(String.raw`p`),
+        " で (a)(b) が成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r^{p+1}
+&=r^pr
+&&\bigl(\because\ \text{冪の定義}\bigr)\\
+&<s^pr
+&&\bigl(\because\ \text{(a) の}\ r^p < s^p\ \text{と}\ r > 0\bigr)\\
+&<s^ps
+&&\bigl(\because\ r < s\ \text{と、(a) から}\ s^p > r^p > 0\bigr)\\
+&=s^{p+1}
+&&\bigl(\because\ \text{冪の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "かつ ",
+        math(String.raw`r^{p+1} = r^pr > 0`),
+        "（",
+        math(String.raw`r^p > 0`),
+        "、",
+        math(String.raw`r > 0`),
+        "）なので (a) が ",
+        math(String.raw`p+1`),
+        " で成り立ち、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s^{p+1} - r^{p+1}
+&=s\bigl(s^p - r^p\bigr) + r^p(s - r)
+&&\bigl(\because\ \text{冪の定義と}\ \mathbb{R}\ \text{の分配則（}-sr^p + r^ps = 0\text{）}\bigr)\\
+&\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + r^p(s - r)
+&&\bigl(\because\ \text{(b) と}\ s > 0\bigr)\\
+&\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + s^p(s - r)
+&&\bigl(\because\ \text{(a) の}\ r^p < s^p\ \text{と}\ s - r > 0\bigr)\\
+&=p\,s^p(s - r) + s^p(s - r)
+&&\bigl(\because\ s\,s^{p-1} = s^{p-1}s = s^p\ \text{（冪の定義）と乗法の交換則・結合則}\bigr)\\
+&=(p+1)\,s^{(p+1)-1}(s - r)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と}\ \mathbb{Z}\ \text{で}\ p = (p+1)-1\bigr)
+\end{aligned}`),
+      paragraph(["なので (b) が ", math(String.raw`p+1`), " で成り立つ。"]),
+      paragraph([
+        "【上限への移行】",
+        math(String.raw`T := \mathrm{tr}(W^n)`),
+        " とおく。",
+        math(String.raw`\|e_1\| = 1`),
+        " の ",
+        math(String.raw`e_1`),
+        "（",
+        ref("def_rayleigh_sup"),
+        "）に【単位ベクトルでの評価】を当てると ",
+        math(String.raw`T \geq m_n > 0`),
+        " である（",
+        math(String.raw`m_n`),
         " は ",
+        math(String.raw`x = e_1`),
+        " のもの）。",
+        math(String.raw`c^n \leq T`),
+        " を背理法で示す。",
+        math(String.raw`c^n > T`),
+        " と仮定し、",
+        math(String.raw`\delta := (c^n - T)\,(n\,c^{n-1})^{-1}`),
+        "、",
+        math(String.raw`r := c - \delta`),
+        " とおく（",
+        math(String.raw`c^{n-1} > 0`),
+        "（",
+        math(String.raw`n = 1`),
+        " なら ",
+        math(String.raw`c^0 = 1`),
+        "、",
+        math(String.raw`n \geq 2`),
+        " なら【正の実数の冪の比較】(a) を ",
+        math(String.raw`r \to c,\ s \to c+1,\ p \to n-1`),
+        " に当てる）なので ",
+        math(String.raw`n\,c^{n-1} > 0`),
+        "、",
+        math(String.raw`\delta \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        "、",
+        math(String.raw`r < c`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta
+&=(c^n - T)\,(n\,c^{n-1})^{-1}
+&&\bigl(\because\ \delta\ \text{の定義}\bigr)\\
+&<c^n\,(n\,c^{n-1})^{-1}
+&&\bigl(\because\ T > 0\ \text{と、正の}\ (n\,c^{n-1})^{-1}\ \text{を掛けても順序を保つ}\bigr)\\
+&=c^{n-1}c\,(n\,c^{n-1})^{-1}
+&&\bigl(\because\ \text{冪の定義と}\ \mathbb{Z}\ \text{で}\ n = (n-1)+1\bigr)\\
+&=c^{n-1}c\,\bigl(n^{-1}(c^{n-1})^{-1}\bigr)
+&&\bigl(\because\ n \neq 0,\ c^{n-1} \neq 0\ \text{なので}\ (n\,c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}\bigr)\\
+&=c\,n^{-1}\bigl(c^{n-1}(c^{n-1})^{-1}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&=c\,n^{-1}
+&&\bigl(\because\ c^{n-1}(c^{n-1})^{-1} = 1\bigr)\\
+&\leq c
+&&\bigl(\because\ n \geq 1\ \text{なので}\ 0 < n^{-1} \leq 1\ \text{と}\ c > 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`r = c - \delta > 0`),
+        " である。",
+        math(String.raw`r < c = \sup\mathcal{R}`),
+        " で、上限は最小の上界なので、",
+        math(String.raw`r`),
+        " は ",
+        math(String.raw`\mathcal{R}`),
+        " の上界でない。すなわち ",
+        math(String.raw`\|x\| = 1`),
+        " で ",
+        math(String.raw`t := x^\top Wx > r`),
+        " となる ",
+        math(String.raw`x \in \mathbb{R}^d`),
+        " があり、",
+        math(String.raw`t \in \mathcal{R} \subseteq \mathbb{R}_{>0}`),
+        " である。この ",
+        math(String.raw`x`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T
+&\geq t^n
+&&\bigl(\because\ \text{【単位ベクトルでの評価】の}\ \bigl(x^\top Wx\bigr)^n \leq \mathrm{tr}(W^n)\bigr)\\
+&>r^n
+&&\bigl(\because\ \text{【正の実数の冪の比較】(a)}\ (r \to r,\ s \to t,\ p \to n)\bigr)\\
+&\geq c^n - n\,c^{n-1}(c - r)
+&&\bigl(\because\ \text{【正の実数の冪の比較】(b)}\ (r \to r,\ s \to c,\ p \to n)\ \text{の移項}\bigr)\\
+&=c^n - n\,c^{n-1}\delta
+&&\bigl(\because\ r := c - \delta\ \text{なので}\ c - r = \delta\bigr)\\
+&=c^n - (c^n - T)
+&&\bigl(\because\ \delta\ \text{の定義と}\ n\,c^{n-1}\,(n\,c^{n-1})^{-1} = 1\bigr)\\
+&=T
+&&\bigl(\because\ \mathbb{R}\ \text{の加法}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`T > T`),
+        " で矛盾する。よって ",
+        math(String.raw`c^n \leq \mathrm{tr}(W^n)`),
+        " である。上からの評価 ",
         ref("trace_power_upper_bound"),
-        " である。二つを合わせて主張を得る。",
+        " と合わせて主張を得る。",
       ]),
     ],
     conversion: {
@@ -1776,6 +2211,7 @@ c^{n}
         "2026-08-14 の式変形統一で、半正定値行列の二次形式をトレースで上から評価する計算を、成分表示・二つの Cauchy--Schwarz・有限和の分配則を行末根拠にした八段の一続きの鎖へ開いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、トレース評価の A = W^n への適用（三段）と、単位ベクトル上の上限を取って c^n ≤ tr(W^n) を得る圧縮（三段）を、それぞれ行末根拠付きの鎖へ開いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、モーメントの対数凸性に使う P = W 版の Cauchy--Schwarz の一行圧縮を、定義・冪の指数法則・実対称性・不等式・定義への復帰の五段へ開いた。内容は変えていない。",
+        "2026-11-05: SageMath の検算（sagemath/check/trace_power_sandwich/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1) 「…」で書いた望遠鏡積と「単調非減少を j−1 回適用」を、m_k ≥ m_1m_{k−1}（k の帰納法）と m_p ≥ m_1^p（p の帰納法）の鎖にし、m_0 = 1・m_1 = x^⊤Wx を def_exp (1)・def_real_bilinear_value・def_matrix_norm の鎖で示した。m_k は moment_log_convexity の置き方で読むと書いた。(2) 半正定値行列の二次形式をトレースで抑える八段の鎖は、実数の絶対値・有限和の三角不等式・平方根の積の法則という本文にラベルの無い道具と psd_cauchy_schwarz の二回の適用を使っていた。W^n の半正定値性を v_i := x_l(e_k)_i − x_k(e_l)_i に当てた 2x_k(W^n)_{kl}x_l ≤ x_l^2(W^n)_{kk} + x_k^2(W^n)_{ll} を足し合わせる鎖に替え、絶対値と平方根を使わない形にした。旧い鎖は誤りではないが、より初等的に書けるのでこちらを採った（README の新しい道具を導入するときの判断基準）。(3) 「W^n は正定値」の散文を、z = 0 と z ≠ 0 に分け、z ≠ 0 では w := ‖z‖^{-1}z が単位ベクトルであることを示して moment_log_convexity の正値性を当てる鎖にした。(4) 「t ↦ t^n は単調増加なので上限と可換」は t^n の連続性を暗に使っていた。正の実数の冪の比較 0 < r^p < s^p・s^p − r^p ≤ p s^{p−1}(s − r)（p の帰納法）を示し、c^n > tr(W^n) を仮定して δ := (c^n − T)(nc^{n−1})^{−1}、r := c − δ が R の上界でないことから矛盾を導く背理法にした。極限・連続性を使わず、上限の性質は最小の上界であることだけを使う。",
       ],
     },
   },

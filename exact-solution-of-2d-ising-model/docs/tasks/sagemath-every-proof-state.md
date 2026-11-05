@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 415 件のうち、SageMath の検算が無いもの 13 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 415 件のうち、SageMath の検算が無いもの 12 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -384,8 +384,10 @@
 
 - `moment_log_convexity`（モーメント列 m_k := x^⊤W^kx の正値性と対数凸性 m_k^2 ≤ m_{k−1}m_{k+1}）: `sagemath/check/moment_log_convexity/`。証明の準備・正値性の鎖・二つの Cauchy–Schwarz の鎖・場合分けと添字を、P = A^⊤A の正定値有理行列 20 個と本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3）、逆立体射影で作った有理の単位ベクトル x で QQ の厳密計算で確かめた（等号 94420・26992 件、不等号 5792・1296 件、否定コントロール 3 件。浮動小数点なし）。**人手証明を直した**（主張の不等式は不変、主張文に m_k の読み方を足した）: (1) 旧い鎖は (W^bx)^⊤W(W^ax) = x^⊤W^{a+b+1}x を本文に無い積の転置で得ていた。【二つの冪で挟んだ値】x^⊤(W^b(BW^a))x = (W^bx)^⊤B(W^ax)（B = I, W）を def_real_bilinear_value・mat_mult・冪の成分の対称性で示し、二つの不等式の鎖をこれで書いた（P = I の鎖はノルムを経ない）。(2) 冪の指数法則と冪の実対称性を `matrix_power_exponent_law`・`power_of_real_symmetric_complex_matrix_is_real_symmetric` の行にした。(3) 正値性の「W が可逆なので W^ax ≠ 0」は可逆から核の自明性を導く主張が本文に無いので、正定値性から Wu ≠ 0 を示す a の帰納法にした。I と W が psd_cauchy_schwarz の前提（def_real_symmetric_matrix の対称と半正定値）を満たすこと、積の行列の成分が実数であること（product_of_real_entry_matrices_has_real_entries）を書いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（Lean の必要十分版 `NecSuf/RayleighMoments.lean` の `moment_log_convex` と新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `trace_power_sandwich`（c(M_col)^n ≤ tr(W^n) ≤ 2^{M_col}c(M_col)^n）: `sagemath/check/trace_power_sandwich/`。証明の六つの段（W^n の成分の対称性・半正定値性・成分の評価、単位ベクトルでの評価、正の実数の冪の比較、上限への移行）の全ての鎖を、P = A^⊤A の正定値有理行列 12 個と本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3）、逆立体射影の有理の単位ベクトルで QQ・AA の厳密計算で確かめた（等号 12646・17508 件、不等号 5253・5148 件。c は特性多項式の最大の実根の AA。浮動小数点なし）。否定コントロールは検査の関数が期待した行で落ちることを 6 箇所で確かめた。**人手証明を直した**（主張は不変、計算の誤りは無し）: (1)「…」の望遠鏡積を m_k ≥ m_1m_{k−1}・m_p ≥ m_1^p の二つの帰納法にし、m_0 = 1・m_1 = x^⊤Wx を鎖で示した。(2) 二次形式をトレースで抑える鎖は、本文にラベルの無い実数の絶対値・三角不等式・平方根の積の法則を使っていたので、W^n の半正定値性を v := x_le_k − x_ke_l に当てた 2x_k(W^n)_{kl}x_l ≤ x_l^2(W^n)_{kk} + x_k^2(W^n)_{ll} を足し合わせる鎖に替えた。(3)「W^n は正定値」の散文を、w := ‖z‖^{-1}z に moment_log_convexity の正値性を当てる鎖にした。(4)「t ↦ t^n は単調なので上限と可換」は連続性を暗に使っていたので、正の実数の冪の比較（帰納法）と、δ := (c^n − T)(nc^{n−1})^{−1} による背理法にした。二回のレビューで必須の指摘が無くなるまで直した。残した任意の指摘: m_0 の鎖は単位行列の成分 δ（ℂ の元）を実数として def_real_bilinear_value に入れている（moment_log_convexity と同じ読み方）。Lean は不変（`ClaimTracePowerSandwich.lean`・`TraceBound.lean` の `psd_quad_le_normSq_mul_trace` は旧い絶対値と Cauchy–Schwarz の経路と望遠鏡積のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `trace_power_sandwich`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `limit_of_log_Z_in_N_row`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
