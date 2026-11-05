@@ -1,0 +1,80 @@
+PASS Step 1: γ_1 は cos θ の 1 次式
+PASS Step 1: 定数項は c_1c_2^*、cos θ の係数は -s_1s_2^*（どちらも cos θ を含まず、θ に依らない）
+PASS Step 1: (Y,X)=(4,3) で c_1c_2^*, s_1s_2^* ∈ QQ（s_1s_2^* > 0）
+PASS Step 1: (Y,X)=(9,7/3) で c_1c_2^*, s_1s_2^* ∈ QQ（s_1s_2^* > 0）
+PASS Step 1: (Y,X)=(2,5) で c_1c_2^*, s_1s_2^* ∈ QQ（s_1s_2^* > 0）
+PASS Step 1: (Y,X)=(3,3) で c_1c_2^*, s_1s_2^* ∈ QQ（s_1s_2^* > 0）
+PASS Step 1: (Y,X)=(11/10,100) で c_1c_2^*, s_1s_2^* ∈ QQ（s_1s_2^* > 0）
+Step 2: y ∈ [1,∞) で y^2 - 1 ≥ 0、√(y^2-1) ≥ 0、y + √(y^2-1) ≥ 1 > 0（具体の y ∈ AA）
+PASS   y=1: y^2 - 1 ≥ 0
+PASS   y=1: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=1: y + √(y^2-1) ≥ 1 > 0
+PASS   y=1000001/1000000: y^2 - 1 ≥ 0
+PASS   y=1000001/1000000: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=1000001/1000000: y + √(y^2-1) ≥ 1 > 0
+PASS   y=5/4: y^2 - 1 ≥ 0
+PASS   y=5/4: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=5/4: y + √(y^2-1) ≥ 1 > 0
+PASS   y=2: y^2 - 1 ≥ 0
+PASS   y=2: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=2: y + √(y^2-1) ≥ 1 > 0
+PASS   y=2.414213562373095?: y^2 - 1 ≥ 0
+PASS   y=2.414213562373095?: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=2.414213562373095?: y + √(y^2-1) ≥ 1 > 0
+PASS   y=17/8: y^2 - 1 ≥ 0
+PASS   y=17/8: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=17/8: y + √(y^2-1) ≥ 1 > 0
+PASS   y=1000000: y^2 - 1 ≥ 0
+PASS   y=1000000: √(y^2-1) は非負で平方が y^2-1（definition_of_sqrt_r_positive）
+PASS   y=1000000: y + √(y^2-1) ≥ 1 > 0
+PASS   y = 1 では y + √(y^2-1) = 1（下界 1 に達する）
+PASS 対照: y = 1/2 では y^2 - 1 < 0
+Step 3: γ_1(θ) ≥ 1（gamma1_lower_bound_all_theta の当てはめ）
+PASS   (Y,X)=(4,3) q=0: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=1/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=1/2: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=1: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=5/4: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=7/6: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=-2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(4,3) q=13/5: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=0: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=1/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=1/2: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=1: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=5/4: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=7/6: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=-2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(9,7/3) q=13/5: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=0: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=1/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=1/2: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=1: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=5/4: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=7/6: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=-2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(2,5) q=13/5: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=0: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=1/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=1/2: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=1: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=5/4: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=7/6: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=-2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(3,3) q=13/5: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=0: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=1/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=1/2: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=1: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=5/4: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=7/6: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=-2/3: γ_1(qπ) ≥ 1
+PASS   (Y,X)=(11/10,100) q=13/5: γ_1(qπ) ≥ 1
+PASS   臨界の結合定数（2K_1 = 2K_2^*）、θ = 0 では γ_1 = 1（arccosh の定義域の端に達する）
+-- check_lines_exact: 76 PASS
+RESULT: PASS

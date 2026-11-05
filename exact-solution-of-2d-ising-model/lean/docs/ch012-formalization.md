@@ -28,10 +28,10 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.gammaFn_eq` | `γ` の明示形（`cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ` の `arcosh`） | `onsager_free_energy_expression` の `γ` |
 | `Ising2D.gammaFn_nonneg` | `γ(θ) ∈ ℝ_{≥0}` | `def_gamma_theta` |
 | `Ising2D.cosh_gammaFn` | `cosh γ(θ) = γ_1(θ)` | 同上（`arccosh` が逆写像であること） |
-| `Ising2D.continuous_gamma1R`（`ClaimGammaContinuous.lean`） | `γ_1` は連続 | `gamma_is_continuous` Step 1 前半 |
-| `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 同 Step 1 後半 |
-| `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続** | `gamma_is_continuous` 前半 |
-| `Ising2D.gammaFn_periodic` | `γ(θ+2π) = γ(θ)` | 同 後半 |
+| `Ising2D.continuous_gamma1R`（`ClaimGammaContinuous.lean`） | `γ_1` は連続 | `gamma_is_continuous` Step 1 |
+| `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 参照用ノート claims_unused_by_chapter_goals_not_adopted.ts に移した、もとの `gamma_is_continuous` の後半（周期性） |
+| `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続** | `gamma_is_continuous` |
+| `Ising2D.gammaFn_periodic` | `γ(θ+2π) = γ(θ)` | 同上のノート |
 | `Ising2D.abs_log_Z_sub_log_c_le`（`ClaimLimitInNRow.lean`） | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の誤差評価 |
 | `Ising2D.limit_of_log_Z_in_N_row` | **`(1/(M N_row))log Z → (1/M)log c(M)`** | `limit_of_log_Z_in_N_row` |
 | `Ising2D.tagPoint` | `t^{(M)}_μ = 2π(μ-δ)/M` | `riemann_sum_to_integral` |
@@ -139,7 +139,8 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
   `lean/README.md` の「mathlib に無いことが分かっているもの: `Real.arccosh`（自前定義が必要）」は
   現行の mathlib（`v4.32.1`）では**誤り**である。綴りが `arccosh` ではなく `arcosh` であることに注意。
   定義 `Real.arcosh x = log (x + √(x^2-1))` は人手証明 `gamma_is_continuous` Step 2 の
-  明示式とまったく同じで、Step 2 の内容も `Real.cosh_arcosh` として存在する。
+  明示式とまったく同じで、Step 2 の連続性は `Real.continuousOn_arcosh` として存在する
+  （`Real.cosh_arcosh` は `arccosh_properties` (2) に当たる）。
 - (R1)(R2) に対応する mathlib の補題（すべて存在）:
   `IsCompact.uniformContinuousOn_of_continuous`, `Metric.uniformContinuousOn_iff`,
   `Continuous.intervalIntegrable`, `intervalIntegral.sum_integral_adjacent_intervals`,

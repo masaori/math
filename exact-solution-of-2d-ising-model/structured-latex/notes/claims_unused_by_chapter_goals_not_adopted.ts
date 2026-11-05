@@ -21,6 +21,10 @@ import type { Label } from "../schema.ts";
 // A(θ̃_μ)v_{±,μ} = λ_{±,μ}v_{±,μ} だけで、「限る」の側はどこからも使われない。加えて Step 3 は「階数」「固有空間」
 // 「次元」を本文で定義しないまま使っていた（Lean でも形式化していない）。
 
+// 2026-11-05 に、gamma_is_continuous の statement のうち「周期 2π をもつ」の側とその証明（Step 1・Step 3 の周期性の文）を足した。
+// 理由: 本文で gamma_is_continuous を引く箇所（riemann_sum_to_integral の適用）は連続性だけを使い、周期性はどこからも使われない。
+// 加えて、このブロックは根拠の「cos は周期 2π をもつ」を前提として宣言していなかった（本文では定義も証明もされていない）。
+
 const NOT_ADOPTED = paragraph<Label>([
   "【本文不採用。理由: 本文のどの章のゴールの主張の証明もこの主張を引かず、本文のどこからも使われないため。】",
 ]);
@@ -619,6 +623,68 @@ C_-B_-
         "（",
         ref("gamma_2_theta_tilde_nonzero"),
         "）から言う必要がある。）",
+      ]),
+    ],
+  },
+  {
+    id: "note_freeenergy_002_claim_gamma_is_2pi_periodic_unused_by_chapter_goals",
+    targets: ["gamma_is_continuous"],
+    title: { tex: String.raw`\gamma \text{ は周期 } 2\pi \text{ をもつ}` },
+    origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 4 },
+    body: [
+      NOT_ADOPTED,
+      paragraph(["（もと content/thermodynamic_limit_column_limit_and_closed_form.ts の主張ブロック freeenergy_002_claim_gamma_is_continuous（labels: gamma_is_continuous）の後半。本文にあったときの主張と証明から、周期性に関わる文だけを抜き出した。）"]),
+      paragraph([
+        ref("def_gamma_theta"),
+        " の ",
+        math(String.raw`\gamma : \mathbb{R} \to \mathbb{R}_{\geq 0}`),
+        " は周期 ",
+        math(String.raw`2\pi`),
+        " をもつ：",
+        math(String.raw`\gamma(\theta + 2\pi) = \gamma(\theta)`),
+        "。",
+        ref("riemann_sum_to_integral"),
+        " を適用するために使うのは連続性だけであり、周期 ",
+        math(String.raw`2\pi`),
+        " をもつことは ",
+        ref("riemann_sum_to_integral"),
+        " の仮定には入っていない（積分区間を ",
+        math(String.raw`[0,2\pi]`),
+        " に取れば十分であることの根拠にはなる）。",
+      ]),
+      paragraph([
+        "証明（もとの Step 1・Step 3 の周期性の文）。",
+        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
+        " は定数と ",
+        math(String.raw`\cos`),
+        " の 1 次式であり、",
+        math(String.raw`\cos`),
+        " は周期 ",
+        math(String.raw`2\pi`),
+        " をもつので、",
+        math(String.raw`\gamma_1`),
+        " も周期 ",
+        math(String.raw`2\pi`),
+        " をもつ。",
+        math(String.raw`\gamma = \mathrm{arccosh}\circ\gamma_1`),
+        " の周期性は ",
+        math(String.raw`\gamma_1`),
+        " の周期性から従う。",
+      ]),
+      paragraph([
+        "退避時の注記: 本文へ戻すなら、全実数上の ",
+        math(String.raw`\cos`),
+        " とその周期 ",
+        math(String.raw`2\pi`),
+        " を本文で定めるか外部事実として数えたうえで、独立のブロックにし、",
+        math(String.raw`\gamma(\theta+2\pi) = \mathrm{arccosh}(\gamma_1(\theta+2\pi)) = \mathrm{arccosh}(\gamma_1(\theta)) = \gamma(\theta)`),
+        " を ",
+        ref("def_gamma_theta"),
+        " を引く一続きの式変形で書く。Lean の ",
+        math(String.raw`\texttt{gamma1R\_periodic}`),
+        "・",
+        math(String.raw`\texttt{gammaFn\_periodic}`),
+        " がこの内容を形式化している。",
       ]),
     ],
   },

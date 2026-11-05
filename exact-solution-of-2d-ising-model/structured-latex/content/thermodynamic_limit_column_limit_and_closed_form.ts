@@ -1105,137 +1105,146 @@ c_+(M_{\mathrm{col}})
         ref("def_gamma_theta"),
         " の ",
         math(String.raw`\gamma : \mathbb{R} \to \mathbb{R}_{\geq 0}`),
-        " は連続であり、周期 ",
-        math(String.raw`2\pi`),
-        " をもつ：",
-        math(String.raw`\gamma(\theta + 2\pi) = \gamma(\theta)`),
-        "。",
-      ]),
-      paragraph([
-        ref("riemann_sum_to_integral"),
-        " を適用するために使うのは**連続性だけ**である。",
-        "周期 ",
-        math(String.raw`2\pi`),
-        " をもつことは ",
-        math(String.raw`\gamma`),
-        " の性質として併せて述べておく（積分区間を ",
-        math(String.raw`[0,2\pi]`),
-        " に取れば十分であることの根拠にはなるが、",
-        ref("riemann_sum_to_integral"),
-        " の仮定には入っていない）。",
+        " は連続である。証明は全実数上の ",
+        math(String.raw`\cos`),
+        " とその連続性（",
+        ref("remark_real_analysis_escape_point"),
+        " の (R0)）を前提とする（本文の ",
+        ref("def_cos"),
+        " は ",
+        math(String.raw`[-\pi/2, \pi/2]`),
+        " に限る）。",
       ]),
     ],
     proof: [
       paragraph([
         "Step 1（",
         math(String.raw`\gamma_1`),
-        " の連続性と周期性）。",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
-        " は定数と ",
-        math(String.raw`\cos`),
-        " の 1 次式である。",
-        math(String.raw`\cos`),
+        " の連続性）。",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta
+\qquad \left(\because\ \blkref{def_gamma1_gamma2_of_theta}\right)`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`c_1c_2^*, s_1s_2^* \in \mathbb{R}`),
         " は ",
-        math(String.raw`\mathbb{R}`),
-        " 上連続（",
+        math(String.raw`\theta`),
+        " に依らない（",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）。定数関数は連続である（連続の定義の ",
+        math(String.raw`\delta`),
+        " を任意に取れる）。",
+        math(String.raw`\cos : \mathbb{R} \to \mathbb{R}`),
+        " は連続、連続関数の積と差は連続である（",
         ref("remark_real_analysis_escape_point"),
-        " の (R0)）で周期 ",
-        math(String.raw`2\pi`),
-        " をもつので、",
-        math(String.raw`\gamma_1`),
-        " も連続で周期 ",
-        math(String.raw`2\pi`),
-        " をもつ。",
+        " の (R0)）。よって ",
+        math(String.raw`\gamma_1 : \mathbb{R} \to \mathbb{R}`),
+        " は連続である。",
       ]),
       paragraph([
         "Step 2（",
         math(String.raw`\mathrm{arccosh}`),
-        " の連続性）。",
-        math(String.raw`y \geq 1`),
-        " とし、準備として",
-      ]),
-      displayMath(
-        String.raw`u:=\log\left(y+\sqrt{y^2-1}\right)`,
-      ),
-      paragraph([
-        "とおく。このとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(u)
-&=y+\sqrt{y^2-1}
-&&\left(\because\ \log\text{ と }\exp\text{ は正の実数上で互いに逆写像}\right),\\
-\exp(-u)
-&=\frac{1}{\exp(u)}
-&&\left(\because\ \text{指数法則 }\exp(-u)\cdot \exp(u)=\exp(0)=1\right)\\
-&=\frac{1}{y+\sqrt{y^2-1}}
-&&\left(\because\ \text{上の }\exp(u)\text{ の表示}\right)\\
-&=y-\sqrt{y^2-1}
-&&\left(\because\ \text{分母の有理化と }y^2-(y^2-1)=1\right),\\
-\cosh u
-&=\frac{\exp(u)+\exp(-u)}{2}
-&&\left(\because\ \cosh\text{ の定義}\right)\\
-&=\frac{y+\sqrt{y^2-1}+y-\sqrt{y^2-1}}{2}
-&&\left(\because\ \text{上の }\exp(u),\exp(-u)\text{ の表示}\right)\\
-&=y
-&&\left(\because\ \mathbb{R}\text{ の四則}\right).
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-u
-&=\log\left(y+\sqrt{y^2-1}\right)
-&&\left(\because\ u\text{ の定義}\right)\\
-&\geq\log 1
-&&\left(\because\ y\geq1,\ \sqrt{y^2-1}\geq0,\ \log\text{ の単調性}\right)\\
-&=0
-&&\left(\because\ \log 1=0\right).
-\end{aligned}`,
-      ),
-      paragraph(["したがって、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{arccosh}(y)
-&=u
-&&\left(\because\ \blkref{def_arccosh}\text{ と }u\text{ の定義}\right)\\
-&=\log\left(y+\sqrt{y^2-1}\right)
-&&\left(\because\ u\text{ の定義}\right).
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`y \mapsto y^2-1`),
-        " は連続で ",
+        " の ",
         math(String.raw`[1,\infty)`),
-        " 上非負、非負実数の平方根は連続、",
-        math(String.raw`y+\sqrt{y^2-1} \geq 1 > 0`),
-        " 上で ",
-        math(String.raw`\log`),
-        " は連続である（いずれも ",
+        " 上の連続性）。",
+        math(String.raw`y \in [1,\infty)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\mathrm{arccosh}(y) = \log\left(y+\sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}\right)
+\qquad \left(\because\ \blkref{def_arccosh}\right)`,
+      ),
+      paragraph([
+        "であり、",
+        ref("def_arccosh"),
+        " の右辺が定まることの鎖により ",
+        math(String.raw`y^2-1 \geq 0`),
+        "、",
+        math(String.raw`y+\sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \geq 1 > 0`),
+        " である。恒等写像 ",
+        math(String.raw`y \mapsto y`),
+        " と定数関数は連続であり（連続の定義の ",
+        math(String.raw`\delta`),
+        " を ",
+        math(String.raw`\epsilon`),
+        " に、または任意に取れる）、連続写像を定義域の部分集合へ制限しても連続である（同じ ",
+        math(String.raw`\delta`),
+        " が使える）。これらと ",
         ref("remark_real_analysis_escape_point"),
-        " の (R0)）。よって合成として ",
-        math(String.raw`\mathrm{arccosh}`),
-        " は ",
-        math(String.raw`[1,\infty)`),
-        " 上連続である。",
+        " の (R0) により、次の各写像は連続である。",
+      ]),
+      list([
+        [
+          math(String.raw`[1,\infty) \to \mathbb{R},\ y \mapsto y^2-1`),
+          "（恒等写像の積と定数関数の差。値は ",
+          math(String.raw`\mathbb{R}_{\geq 0}`),
+          " に入る）",
+        ],
+        [
+          math(String.raw`[1,\infty) \to \mathbb{R},\ y \mapsto \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}`),
+          "（前の写像の値が ",
+          math(String.raw`\sqrt{\ \cdot\ } : \mathbb{R}_{\geq 0} \to \mathbb{R}`),
+          " の定義域に入るので、その連続性と合成）",
+        ],
+        [
+          math(String.raw`[1,\infty) \to \mathbb{R},\ y \mapsto y+\sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}`),
+          "（連続関数の和。値は ",
+          math(String.raw`\mathbb{R}_{>0}`),
+          " に入る）",
+        ],
+        [
+          math(String.raw`\mathrm{arccosh} : [1,\infty) \to \mathbb{R}`),
+          "（前の写像の値が ",
+          math(String.raw`\log : \mathbb{R}_{>0} \to \mathbb{R}`),
+          " の定義域に入るので、その連続性と合成）",
+        ],
       ]),
       paragraph([
-        "Step 3。",
+        "Step 3（合成）。",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\gamma(\theta) = \mathrm{arccosh}\left(\gamma_1(\theta)\right)
+\qquad \left(\because\ \blkref{def_gamma_theta}\right)`,
+      ),
+      paragraph([
+        "であり、",
         ref("gamma1_lower_bound_all_theta"),
         " より ",
         math(String.raw`\gamma_1(\mathbb{R}) \subseteq [1,\infty)`),
-        " なので、連続写像の合成 ",
-        math(String.raw`\gamma = \mathrm{arccosh}\circ\gamma_1`),
+        " である。Step 1 より ",
+        math(String.raw`\gamma_1 : \mathbb{R} \to \mathbb{R}`),
+        " は連続で、その値はすべて Step 2 で連続性を示した ",
+        math(String.raw`\mathrm{arccosh}`),
+        " の定義域 ",
+        math(String.raw`[1,\infty)`),
+        " に入るので、合成 ",
+        math(String.raw`\theta \mapsto \mathrm{arccosh}(\gamma_1(\theta))`),
         " は ",
         math(String.raw`\mathbb{R}`),
-        " 上連続である。周期性は ",
-        math(String.raw`\gamma_1`),
-        " の周期性から従う。",
+        " 上連続である（",
+        ref("remark_real_analysis_escape_point"),
+        " の (R0) の合成）。よって ",
+        math(String.raw`\gamma`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " 上連続である（値が ",
+        math(String.raw`\mathbb{R}_{\geq 0}`),
+        " に入ることは ",
+        ref("def_gamma_theta"),
+        " が述べている）。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-08-18: 式変形の書き方を統一した。arccosh の表示を確かめる e^u・e^{-u}・cosh u の計算が散文中に連結されていたのを、準備と一続きの式変形へ開き、根拠を各行末の (∵ …) へ移した。連続性・周期性の論法と参照は変更していない。",
+        "2026-11-05: SageMath の検算（sagemath/check/gamma_is_continuous/）のレビューの指摘で直した。(a) 主張が連続性と周期 2π の二つを持っていた（1 ブロック 1 主張の違反）。本文で引かれるのは連続性だけなので、周期性とその証明を参照用ノート notes/claims_unused_by_chapter_goals_not_adopted.ts へ移した。(b) このブロックは cos の 2π 周期性を前提として宣言していなかった（本文では定義も証明もされておらず、half_integer_phase_antiperiodicity は前提として宣言して使っている。周期性ごと移したので解消）。全実数上の cos を前提とすることを主張に書いた。(c) Step 2 の準備（u := log(y+√(y²-1)) と exp(u)・exp(-u)・cosh u = y・u ≥ 0 の計算）は連続性の結論に使われておらず、arccosh(y) = u = log(…) は定義へ戻るだけだったので除き、Step 2 を def_arccosh の式と (R0) による合成だけにした（除いた計算は arccosh_properties が示している）。(d) def_gamma1_gamma2_of_theta・def_arccosh・def_gamma_theta への blkref と、各段の (R0) への参照を足した。(R0) に無い定数関数・恒等写像・制限の連続性は、連続の定義から直ちに従うことを書いて分けた。Step 3 は γ_1 の値域を書き換えず、値が arccosh の定義域に入ることで合成した。",
       ],
     },
   },

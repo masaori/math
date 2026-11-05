@@ -14,9 +14,10 @@
 
   `Real.arcosh x = Real.log (x + √(x ^ 2 - 1))`
 
-であり、人手証明が Step 2 で証明している内容も `Real.cosh_arcosh`（`1 ≤ x` で
-`cosh (arcosh x) = x`）、`Real.arcosh_nonneg`、`Real.continuousOn_arcosh`
-（`ContinuousOn arcosh (Ici 1)`）としてすでに用意されている。
+であり、人手証明 Step 2 が示す `arccosh` の `[1,∞)` 上の連続性は `Real.continuousOn_arcosh`
+（`ContinuousOn arcosh (Ici 1)`）としてすでに用意されている。`arccosh_properties` の (2)・(1)
+（`cosh(arccosh y) = y`・`arccosh y ≥ 0`）に当たるものも `Real.cosh_arcosh`（`1 ≤ x` で
+`cosh (arcosh x) = x`）・`Real.arcosh_nonneg` として存在する。
 したがって**自前定義は不要**であり、本ファイルでは mathlib のものをそのまま使う。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
