@@ -65283,6 +65283,7 @@ t_{\circ}(\gamma)
                     verification: ["sagemath/check/periodic-plane-lift-distinct"],
                     lean: [
                       "Ising2DLambda.KacWard.periodicPlaneLift_injective",
+                      "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf",
                       "Ising2DLambda.KacWard.periodicPlaneLift_injective_from_necSuf",
                     ],
@@ -65321,7 +65322,7 @@ t_{\circ}(\gamma)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 P_t(\gamma)&=\bigl(s(i_t)+La_t,\ s(j_t)+Lb_t\bigr)
-&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr).
+&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr)
 \end{aligned}`),
                       paragraph(["と書ける。まず ", math(String.raw`r=r'`), " を示す。第 1 成分について"]),
                       displayMath(String.raw`\begin{aligned}
