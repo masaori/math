@@ -761,85 +761,263 @@ W
     ],
     proof: [
       paragraph([
-        math(String.raw`c := c(M_{\mathrm{col}})`),
-        "、",
+        math(String.raw`c := c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        "（",
+        ref("def_rayleigh_sup"),
+        "）、",
         math(String.raw`d := 2^{M_{\mathrm{col}}}`),
-        " と略記し、",
-        math(String.raw`e_1,\dots,e_d`),
-        " を標準基底とする。",
+        " と略記する。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`e_k \in \mathbb{R}^{d}`),
+        " を、",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`i = k`),
+        " なら ",
+        math(String.raw`(e_k)_i := 1`),
+        "、",
+        math(String.raw`i \neq k`),
+        " なら ",
+        math(String.raw`(e_k)_i := 0`),
+        " で定める。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`e_k`),
+        " のノルム】",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|e_k\|
+&=\sqrt{\sum_{i=1}^{d}|(e_k)_i|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R})\bigr)\\
+&=\sqrt{|(e_k)_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ i \neq k\ \text{の項は}\ |(e_k)_i|^2 = |0|^2 = 0\bigr)\\
+&=\sqrt{|1|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ (e_k)_k = 1\bigr)\\
+&=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ |1|^2 = 1\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "【冪の実対称性】",
         math(String.raw`W`),
         " は実対称なので（",
         ref("W_is_real_symmetric_positive_definite"),
-        "）、その冪 ",
-        math(String.raw`W^n`),
-        " も実対称である。標準基底を用いるトレースの表示は、次の一続きの等式で得られる。",
+        "）、すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`W^p`),
+        " は実対称である（",
+        ref("power_of_real_symmetric_complex_matrix_is_real_symmetric"),
+        "、",
+        math(String.raw`n \to d,\ A \to W`),
+        "）。すなわち ",
+        math(String.raw`W^p`),
+        " の成分はすべて実数で、すべての ",
+        math(String.raw`k, l \in \{1,\dots,d\}`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\mathrm{tr}(W^n)
-&=\sum_{k=1}^{d}(W^n)_{kk}
-&&\bigl(\because\ \text{トレースの定義}\bigr)\\
-&=\sum_{k=1}^{d} e_k^\top W^n e_k
-&&\bigl(\because\ \text{標準基底 }e_k\text{ による対角成分の表示 }(W^n)_{kk}=e_k^\top W^n e_k\bigr)
+(W^p)_{kl}
+&=\bigl((W^p)^\top\bigr)_{kl}
+&&\bigl(\because\ W^p\ \text{は実対称なので}\ (W^p)^\top = W^p\ \text{（}\blkref{def_real_symmetric_complex_matrix}\text{）}\bigr)\\
+&=(W^p)_{lk}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)
 \end{aligned}`),
       paragraph([
-        "まず ",
+        "である。以下、",
+        ref("def_rayleigh_sup"),
+        " が ",
+        math(String.raw`W`),
+        " を読むのと同じく、",
+        math(String.raw`W^p`),
+        " の成分を実数として ",
+        math(String.raw`W^pe_k \in \mathbb{R}^d`),
+        "（",
+        ref("mat_mult"),
+        "）と ",
+        math(String.raw`x^\top W^p y`),
+        "（",
+        ref("def_real_bilinear_value"),
+        "）を読む。",
+      ]),
+      paragraph([
+        "【対角成分の表示】",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e_k^\top W^p e_k
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i\,(W^p)_{ij}\,(e_k)_j
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{j=1}^{d}(e_k)_k\,(W^p)_{kj}\,(e_k)_j
+&&\bigl(\because\ i \neq k\ \text{の項は}\ (e_k)_i = 0\ \text{なので}\ 0\bigr)\\
+&=\sum_{j=1}^{d}(W^p)_{kj}\,(e_k)_j
+&&\bigl(\because\ (e_k)_k = 1\bigr)\\
+&=(W^p)_{kk}\,(e_k)_k
+&&\bigl(\because\ j \neq k\ \text{の項は}\ (e_k)_j = 0\ \text{なので}\ 0\bigr)\\
+&=(W^p)_{kk}
+&&\bigl(\because\ (e_k)_k = 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "【",
+        math(String.raw`W^ae_k`),
+        " の成分とノルム】",
+        math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`u := W^ae_k \in \mathbb{R}^d`),
+        " とおく。",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u_l
+&=\sum_{m=1}^{d}(W^a)_{lm}\,(e_k)_m
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=(W^a)_{lk}\,(e_k)_k
+&&\bigl(\because\ m \neq k\ \text{の項は}\ (e_k)_m = 0\ \text{なので}\ 0\bigr)\\
+&=(W^a)_{lk}
+&&\bigl(\because\ (e_k)_k = 1\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\|u\|
+&=\|W^ae_k\|
+&&\bigl(\because\ u := W^ae_k\bigr)\\
+&\leq c^a\,\|e_k\|
+&&\bigl(\because\ \blkref{rayleigh_bounds_operator_norm}\ \text{の冪の主張を指数}\ a\ \text{と}\ x \to e_k\ \text{で適用}\bigr)\\
+&=c^a
+&&\bigl(\because\ \text{【}e_k\text{ のノルム】}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\|u\|^2
+&\leq \bigl(c^a\bigr)^2
+&&\bigl(\because\ 0 \leq \|u\| \leq c^a\ \text{（上の式変形と}\ \blkref{def_matrix_norm}\ \text{の値が}\ \mathbb{R}_{\geq 0}\text{）と}\ \mathbb{R}_{\geq 0}\ \text{の平方の単調性}\bigr)\\
+&=c^{2a}
+&&\bigl(\because\ \mathbb{R}\ \text{の冪の指数法則}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
         math(String.raw`n = 2a`),
-        " が偶数の場合。各 ",
-        math(String.raw`k`),
+        "（",
+        math(String.raw`a \in \mathbb{Z}_{\geq 1}`),
+        "）が偶数の場合。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " と【",
+        math(String.raw`W^ae_k`),
+        " の成分とノルム】の ",
+        math(String.raw`u = W^ae_k`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 e_k^\top W^{2a}e_k
-&=(W^a e_k)^\top(W^a e_k)
-&&\bigl(\because\ W^{2a}=W^aW^a\ \text{（冪の指数法則）と}\ (W^a)^\top=W^a\ \text{（}W\text{ は実対称）}\bigr)\\
-&=\|W^a e_k\|^2
-&&\bigl(\because\ \text{ノルムの定義}\bigr)\\
-&\leq \bigl(c^a\,\|e_k\|\bigr)^2
-&&\bigl(\because\ \text{作用素ノルムのレイリー上限評価の}\ a\ \text{回の適用と、非負の両辺の二乗は順序を保つ}\bigr)\\
-&=c^{2a}\,\|e_k\|^2
-&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
-&=c^{n}
-&&\bigl(\because\ \|e_k\|=1\ \text{と}\ n=2a\bigr)
+&=(W^{2a})_{kk}
+&&\bigl(\because\ \text{【対角成分の表示】}\ (p \to 2a)\bigr)\\
+&=(W^{a+a})_{kk}
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
+&=(W^aW^a)_{kk}
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p, q \to a)\bigr)\\
+&=\sum_{l=1}^{d}(W^a)_{kl}\,(W^a)_{lk}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=\sum_{l=1}^{d}(W^a)_{lk}\,(W^a)_{lk}
+&&\bigl(\because\ \text{【冪の実対称性】の}\ (W^a)_{kl} = (W^a)_{lk}\bigr)\\
+&=\sum_{l=1}^{d}u_l\,u_l
+&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ u_l = (W^a)_{lk}\bigr)\\
+&=\sum_{l=1}^{d}|u_l|^2
+&&\bigl(\because\ u_l \in \mathbb{R}\ \text{なので}\ u_lu_l = |u_l|^2\bigr)\\
+&=\|u\|^2
+&&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
+&\leq c^{2a}
+&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\bigr)\\
+&=c^n
+&&\bigl(\because\ n = 2a\bigr)
 \end{aligned}`),
       paragraph([
-        "である（レイリー上限評価は ",
-        ref("rayleigh_bounds_operator_norm"),
-        "）。次に ",
+        "である。",
         math(String.raw`n = 2a+1`),
-        " が奇数なら",
+        "（",
+        math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
+        "）が奇数の場合。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W^{2a+1}
+&=W^{a+(1+a)}
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a+1 = a+(1+a)\bigr)\\
+&=W^aW^{1+a}
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to a,\ q \to 1+a)\bigr)\\
+&=W^a\bigl(W^1W^a\bigr)
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to a)\bigr)\\
+&=W^a\bigl(W^{0+1}W^a\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
+&=W^a\bigl((W^0W)W^a\bigr)
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
+&=W^a\bigl((I_{\mathrm{Mat}(d,\mathbb{C})}W)W^a\bigr)
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&=W^a\bigl(WW^a\bigr)
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " と【",
+        math(String.raw`W^ae_k`),
+        " の成分とノルム】の ",
+        math(String.raw`u = W^ae_k`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 e_k^\top W^{2a+1}e_k
-&=(W^ae_k)^\top W(W^ae_k)
-&&\bigl(\because\ W^{2a+1}=W^aWW^a\ \text{（冪の指数法則）と}\ (W^a)^\top=W^a\ \text{（}W\text{ は実対称）}\bigr)\\
-&\leq c\,\|W^ae_k\|^2
-&&\bigl(\because\ \text{レイリー商の上限 }c\text{ の定義}\bigr)\\
-&\leq c\,\bigl(c^a\|e_k\|\bigr)^2
-&&\bigl(\because\ \text{作用素ノルムのレイリー上限評価の}\ a\ \text{回の適用と、非負量による乗法は順序を保つ}\bigr)\\
-&=c\cdot c^{2a}\,\|e_k\|^2
-&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=(W^{2a+1})_{kk}
+&&\bigl(\because\ \text{【対角成分の表示】}\ (p \to 2a+1)\bigr)\\
+&=\bigl(W^a(WW^a)\bigr)_{kk}
+&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&=\sum_{l=1}^{d}(W^a)_{kl}\,(WW^a)_{lk}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=\sum_{l=1}^{d}(W^a)_{kl}\sum_{m=1}^{d}W_{lm}\,(W^a)_{mk}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}(W^a)_{kl}\,W_{lm}\,(W^a)_{mk}
+&&\bigl(\because\ \text{分配則と乗法の結合則}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}(W^a)_{lk}\,W_{lm}\,(W^a)_{mk}
+&&\bigl(\because\ \text{【冪の実対称性】の}\ (W^a)_{kl} = (W^a)_{lk}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}u_l\,W_{lm}\,u_m
+&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ u_l = (W^a)_{lk},\ u_m = (W^a)_{mk}\bigr)\\
+&=u^\top Wu
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&\leq c\,\|u\|^2
+&&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top Wx \leq c\|x\|^2\ (x \to u)\bigr)\\
+&\leq c\,c^{2a}
+&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\ \text{と}\ c > 0\bigr)\\
 &=c^{2a+1}
-&&\bigl(\because\ \|e_k\|=1\ \text{と冪の指数法則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の冪の指数法則}\bigr)\\
 &=c^n
-&&\bigl(\because\ n=2a+1\bigr)
+&&\bigl(\because\ n = 2a+1\bigr)
 \end{aligned}`),
       paragraph([
-        "（1 つ目の不等号は ",
-        ref("def_rayleigh_sup"),
-        "）。いずれの場合も ",
+        "である。いずれの場合も、すべての ",
+        math(String.raw`k`),
+        " について ",
         math(String.raw`e_k^\top W^ne_k \leq c^n`),
-        " である。これを標準基底の全体にわたって足すと",
+        " である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}(W^n)
+&=\sum_{k=1}^{d}(W^n)_{kk}
+&&\bigl(\because\ \blkref{def_trace}\bigr)\\
 &=\sum_{k=1}^{d} e_k^\top W^n e_k
-&&\bigl(\because\ \text{冒頭のトレースの標準基底表示}\bigr)\\
+&&\bigl(\because\ \text{【対角成分の表示】}\ (p \to n)\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
 &\leq \sum_{k=1}^{d} c^n
-&&\bigl(\because\ \text{各 }k\text{ の評価 }e_k^\top W^ne_k \leq c^n\text{ と、項ごとの不等式の有限和は順序を保つ}\bigr)\\
+&&\bigl(\because\ \text{各}\ k\ \text{の}\ e_k^\top W^ne_k \leq c^n\ \text{と、項ごとの不等式の有限和は順序を保つ}\bigr)\\
 &=d\,c^n
-&&\bigl(\because\ \text{同じ項 }c^n\text{ を }d\text{ 個足した和}\bigr)\\
+&&\bigl(\because\ \text{同じ項}\ c^n\ \text{を}\ d\ \text{個足した和}\bigr)\\
 &=2^{M_{\mathrm{col}}} c^n
-&&\bigl(\because\ d=2^{M_{\mathrm{col}}}\ \text{（冒頭の略記）}\bigr)
+&&\bigl(\because\ d := 2^{M_{\mathrm{col}}}\bigr)
 \end{aligned}`),
       paragraph(["となり、上からの評価を得る。"]),
     ],
@@ -847,6 +1025,7 @@ e_k^\top W^{2a+1}e_k
       status: "added",
       notes: [
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
+        "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
       ],
     },
   },

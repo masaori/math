@@ -5690,6 +5690,76 @@ A - B
     },
   },
   {
+    id: "linear_space_general_claim_product_of_real_entry_matrices_has_real_entries",
+    kind: "claim",
+    title: { text: "成分がすべて実数の行列の積は成分がすべて実数" },
+    labels: ["product_of_real_entry_matrices_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " の成分がすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）とする。このとき ",
+        math(String.raw`AB \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の積）の成分もすべて実数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を任意に取る。仮定（",
+        ref("def_matrix_with_real_entries"),
+        "）から、各 ",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`A_{ij} = (s_j)_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`s_j \in \mathbb{R}`),
+        " と、",
+        math(String.raw`B_{jk} = (t_j)_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`t_j \in \mathbb{R}`),
+        " がある。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(AB)_{ik}
+&= \sum_{j=1}^{n} A_{ij}B_{jk}
+&&(\because \blkref{mat_mult}) \\
+&= \sum_{j=1}^{n} (s_j)_{\mathbb{C}}\,(t_j)_{\mathbb{C}}
+&&(\because s_j, t_j \text{ の取り方}) \\
+&= \sum_{j=1}^{n} (s_jt_j)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}\ (a \to s_j,\ b \to t_j)\ \text{を}\ n\ \text{個の項へ同時に適用}) \\
+&= \Bigl(\sum_{j=1}^{n} s_jt_j\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ (m \to n,\ r_j \to s_jt_j))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\sum_{j=1}^{n} s_jt_j \in \mathbb{R}`),
+        "（",
+        ref("def_finite_sum_of_real_numbers"),
+        "）である。",
+        math(String.raw`i, k`),
+        " は任意なので ",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の証明が W の冪の成分を実数として読むのに、成分が実の行列の積の成分が実であることを述べる主張が本文に無かったので足した（power_of_real_symmetric_complex_matrix_is_real_symmetric から引く）。数値検証: sagemath/check/product_of_real_entry_matrices_has_real_entries/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },

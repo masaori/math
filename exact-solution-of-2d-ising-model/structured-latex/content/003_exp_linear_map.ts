@@ -1000,6 +1000,76 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     },
   },
   {
+    id: "exp_linear_map_claim_matrix_power_exponent_law",
+    kind: "claim",
+    title: { tex: String.raw`\text{行列の冪の指数法則 } A^{p+q} = A^pA^q` },
+    labels: ["matrix_power_exponent_law"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とし、冪は ",
+        ref("def_exp"),
+        " (1) のもの、積は ",
+        ref("mat_mult"),
+        " のものとする。すべての ",
+        math(String.raw`p, q \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`A^{p+q} = A^pA^q`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " を固定し、",
+        math(String.raw`q`),
+        " についての帰納法で示す。",
+        math(String.raw`q = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{p+0}
+&= A^p
+&&(\because \mathbb{Z}\ \text{で}\ p + 0 = p) \\
+&= A^p\,I_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
+&= A^pA^0
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q`),
+        " で成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^{p+(q+1)}
+&= A^{(p+q)+1}
+&&(\because \mathbb{Z}\ \text{の加法の結合則}) \\
+&= A^{p+q}A
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p+q\ \text{に適用}) \\
+&= (A^pA^q)A
+&&(\because \text{帰納法の仮定}) \\
+&= A^p(A^qA)
+&&(\because \blkref{mat_mult_associative}) \\
+&= A^pA^{q+1}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = q\ \text{に適用})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`q+1`),
+        " でも成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の証明が W^{2a} = W^aW^a・W^{2a+1} = W^aWW^a を「冪の指数法則」と名前だけで根拠にしていた。def_exp (1) の冪は A^{m+1} := A^mA の右からの漸化式だけで定まり、指数法則は本文に無かったので足した。数値検証: sagemath/check/matrix_power_exponent_law/。",
+      ],
+    },
+  },
+  {
     id: "exp_linear_map_claim_commuting_matrix_commutes_with_exp",
     kind: "claim",
     title: { text: "可換な行列は exp とも可換" },

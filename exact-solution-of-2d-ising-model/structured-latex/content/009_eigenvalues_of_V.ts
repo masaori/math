@@ -787,6 +787,158 @@ Qv_j
       ],
     },
   },
+  {
+    id: "eigenvalues_of_V_claim_power_of_real_symmetric_complex_matrix_is_real_symmetric",
+    kind: "claim",
+    title: { text: "実対称な複素行列の冪は実対称" },
+    labels: ["power_of_real_symmetric_complex_matrix_is_real_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）とする。このとき、すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`A^p`),
+        "（",
+        ref("def_exp"),
+        " (1) の冪）は実対称である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`A^1 = A`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A^1
+&= A^{0+1}
+&&(\because \mathbb{Z}\ \text{で}\ 1 = 0 + 1) \\
+&= A^0A
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}) \\
+&= I_{\mathrm{Mat}(n,\mathbb{C})}\,A
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I) \\
+&= A
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 0`),
+        " のとき、",
+        math(String.raw`A^0 = I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "（",
+        ref("def_exp"),
+        " (1)）である。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{kl}
+&= \delta_{kl}
+&&(\because \blkref{def_identity_matrix}) \\
+&= \begin{cases} 1_{\mathbb{C}} & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= \begin{cases} \iota_{\mathbb{R}\to\mathbb{C}}(1) & (k = l) \\ \iota_{\mathbb{R}\to\mathbb{C}}(0) & (k \neq l) \end{cases}
+&&(\because \blkref{def_kronecker_delta}\ \text{の略記}\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1),\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0))
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " の成分はすべて実数である（",
+        ref("def_matrix_with_real_entries"),
+        "）。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}^{\top}\bigr)_{kl}
+&= \bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{lk}
+&&(\because \blkref{def_matrix_transpose}) \\
+&= \delta_{lk}
+&&(\because \blkref{def_identity_matrix}) \\
+&= \delta_{kl}
+&&(\because \blkref{def_kronecker_delta}\ \text{の場合分けは}\ k = l\ \text{と}\ l = k\ \text{で同じ}) \\
+&= \bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{kl}
+&&(\because \blkref{def_identity_matrix})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`k, l`),
+        " は任意なので ",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{C})}^{\top} = I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " である。よって ",
+        math(String.raw`A^0`),
+        " は実対称である。",
+      ]),
+      paragraph([
+        math(String.raw`A^p`),
+        " が実対称であるとする。",
+        math(String.raw`A^{p+1} = A^pA`),
+        "（",
+        ref("def_exp"),
+        " (1)）であり、",
+        math(String.raw`A^p`),
+        " と ",
+        math(String.raw`A`),
+        " の成分はすべて実数なので、",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        "（行列の大きさはすべて ",
+        math(String.raw`n`),
+        "、",
+        math(String.raw`A \to A^p`),
+        "、",
+        math(String.raw`B \to A`),
+        "）より ",
+        math(String.raw`A^{p+1}`),
+        " の成分はすべて実数である。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A^{p+1})^{\top}\bigr)_{kl}
+&= (A^{p+1})_{lk}
+&&(\because \blkref{def_matrix_transpose}) \\
+&= (A^pA)_{lk}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p\ \text{に適用}) \\
+&= \sum_{j=1}^{n} (A^p)_{lj}\,A_{jk}
+&&(\because \blkref{mat_mult}) \\
+&= \sum_{j=1}^{n} \bigl((A^p)^{\top}\bigr)_{jl}\,\bigl(A^{\top}\bigr)_{kj}
+&&(\because \blkref{def_matrix_transpose}\ \text{を 2 箇所へ同時に適用}) \\
+&= \sum_{j=1}^{n} (A^p)_{jl}\,\bigl(A^{\top}\bigr)_{kj}
+&&(\because \text{帰納法の仮定の}\ (A^p)^{\top} = A^p) \\
+&= \sum_{j=1}^{n} (A^p)_{jl}\,A_{kj}
+&&(\because \text{仮定の}\ A^{\top} = A) \\
+&= \sum_{j=1}^{n} A_{kj}\,(A^p)_{jl}
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の乗法の可換則}) \\
+&= (AA^p)_{kl}
+&&(\because \blkref{mat_mult}) \\
+&= (A^1A^p)_{kl}
+&&(\because \text{準備の}\ A^1 = A) \\
+&= (A^{1+p})_{kl}
+&&(\because \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to p)) \\
+&= (A^{p+1})_{kl}
+&&(\because \mathbb{Z}\ \text{の加法の可換則})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`k, l`),
+        " は任意なので ",
+        math(String.raw`(A^{p+1})^{\top} = A^{p+1}`),
+        " である。よって ",
+        math(String.raw`A^{p+1}`),
+        " は実対称である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の証明が「W は実対称なので、その冪 W^n も実対称である」と根拠なしに述べていたので足した。def_exp (1) の冪は A^{m+1} := A^mA なので、転置を取ると AA^p が現れ、A^{1+p} = A^1A^p（matrix_power_exponent_law）で戻す。数値検証: sagemath/check/power_of_real_symmetric_complex_matrix_is_real_symmetric/。",
+      ],
+    },
+  },
 
   {
     id: "eigenvalues_of_V_012_claim_star_is_norm_preserving",

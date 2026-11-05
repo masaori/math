@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 15 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 415 件のうち、SageMath の検算が無いもの 14 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -380,12 +380,16 @@
 - `rayleigh_bounds_operator_norm`（‖Wx‖ ≤ c(M_col)‖x‖ と ‖W^kx‖ ≤ c(M_col)^k‖x‖）: `sagemath/check/rayleigh_bounds_operator_norm/`。証明の一つ目の鎖 6 行・二つ目の鎖 6 行とその側の条件・場合分け・割り算と平方根・k = 0 の 3 行・帰納法の鎖 5 行を、P = A^⊤A（A は整数の行列、n = 2..5、特異なものを含む）157 組と、本文の W（K_1 = 2 log y・K_2 = log x、x, y ∈ {2, 3}、M_col = 2, 3。W は QQ の行列）で、QQ・AA の厳密計算で確かめた（等号 4986・716 件、不等号 3586・504 件、否定コントロール 6 件。浮動小数点なし）。c(M_col) は特性多項式の最大の実根として AA で作り、cI − W の半正定値性（実根だけの多項式の係数の符号）と固有ベクトルでの到達で上限であることをその場で確かめた。**人手証明を直した**: (1) 一つ目の鎖が y^⊤(Wx) で止まり、続く鎖の y^⊤Wx（def_real_bilinear_value）との等号が無かった。mat_mult・def_matrix_norm・分配則で y^⊤Wx まで一続きにした。(2) 帰納法の段の ‖W^{k+1}x‖ = ‖W(W^kx)‖ は def_exp (1) の W^{k+1} := W^kW から W^kW = WW^k を要するが、その主張は本文に無い。W^{k+1}x = (W^kW)x = W^k(Wx) とし、帰納法の仮定を Wx に当てる順にした。k = 0 の行に根拠の鎖を置いた（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（ClaimOperatorBound.lean と新しい鎖の 1 対 1 は Lean の連続実行の受け持ち）。
   申し送り（Lean の連続実行の受け持ち。Lean は不変）: Lean の具体版は実行列で可逆性を IsUnit から作っており、人手の新しい可逆性の段（BB' の鎖、V2_invertible、可逆元の積）と 1 対 1 でない。Step 1・Step 2 の散文（「同じ議論」「極限も実対称」、転置の積の法則）は名前だけの根拠のまま残る（転置の積の法則と実成分の行列の積の主張は本文に無い）。
 
+- `trace_power_upper_bound`（tr(W^n) ≤ 2^{M_col}c(M_col)^n）と、そのために足した `matrix_power_exponent_law`（A^{p+q} = A^pA^q）・`product_of_real_entry_matrices_has_real_entries`（成分が実の行列の積は成分が実）・`power_of_real_symmetric_complex_matrix_is_real_symmetric`（実対称な複素行列の冪は実対称）: `sagemath/check/<ラベル>/`。本体は四つの準備（e_k のノルム・冪の実対称性・対角成分の表示・W^ae_k の成分とノルム）、偶数・奇数の場合の鎖、トレースの鎖の全行を、P = A^⊤A の有理行列 28 組と本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3、n ≤ 5）で QQ・AA の厳密計算で確かめた（等号 20672・14464 件、不等号 2446・1144 件、否定コントロール 3 件。浮動小数点なし。W と c(M_col) の作り方は `rayleigh_bounds_operator_norm/_prelude.sage` を読み込む）。足した三つは QQ・QQ(i) 上の不定元と実数の組で組んだ ℂ で厳密に確かめた。**人手証明を直した**: 「W^n も実対称」「冪の指数法則」は本文に主張が無く、旧い鎖は本文に無い行列の積の転置 (W^ae_k)^⊤(W^ae_k) を使っていた。三つの主張を足し、対角成分を mat_mult で開いて対称性と u_l = (W^a)_lk で ‖u‖^2・u^⊤Wu に着く形にし、(W^n)_kk = e_k^⊤W^ne_k と ‖e_k‖ = 1 の鎖を置いた。「レイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張を一度当てる形に書いた（主張は不変、計算の誤りは無し）。三回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimTracePowerSandwich.lean` と新しい鎖の 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `trace_power_upper_bound`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `moment_log_convexity`（`--list` の先頭）から、文書順に検算を足す。`moment_log_convexity` の証明も「冪の指数法則」「(W^a)^⊤ = W^a」を名前だけで引いているので、今回足した `matrix_power_exponent_law`・`power_of_real_symmetric_complex_matrix_is_real_symmetric` を引く形にする。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`trace_power_upper_bound` のレビューで見つかった（上流の同一視の延長。今回の差分より前から）: 主張の tr(W^n) は `def_trace` で ℂ の元だが、証明は ℝ の e_k^⊤W^ne_k の和と等号で結び ≤ で比べる。2026-11-04 の `rayleigh_bounds_operator_norm` の項（W を実行列として読む同一視）と同じ直し方（成分が実数の複素行列から Mat(n, ℝ) への写像に名前を付ける）で扱う。主張の正しさには影響しない。
 
 - 2026-11-04、`rayleigh_bounds_operator_norm` のレビューで見つかった（上流の同一視。今回の差分より前から）: W は Mat(2^{M_col}, ℂ) の元だが、`def_rayleigh_sup` は「W は実行列とみなせる」と写像に名前を付けずに同一視し、`def_real_bilinear_value`・`psd_cauchy_schwarz` は Mat(n, ℝ) と ℝ^n、`mat_mult`・`mat_mult_associative` は ℂ の行列と ℂ^n（n×1 行列とみなす）について述べる。また `W_is_real_symmetric_positive_definite` の正定値は複素の x の x^*Wx > 0 で、`psd_cauchy_schwarz` が要る実の x の x^⊤Wx ≥ 0 へ移る主張（実の x で x^*Wx が x^⊤Wx の (·)_ℂ であること）が本文に無い（`def_rayleigh_sup` の 𝓡 ⊆ ℝ_{>0} も同じ）。直すには、成分が実数の複素行列から Mat(n, ℝ) への写像と ℝ^n → ℂ^n の包含に名前を付け、正定値から実の半正定値への主張を足して、`def_rayleigh_sup` と下流を付け替える。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 

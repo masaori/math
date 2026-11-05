@@ -1,0 +1,152 @@
+# 対象ラベル: trace_power_upper_bound
+# 証明の四つの準備、偶数の場合の鎖、奇数の場合の W^{2a+1} = W^a(WW^a) の鎖と成分の鎖、最後のトレースの鎖を、
+# 実対称で半正定値な P（本文では P = W）・その上限 c = c(M_col) について一行ずつ確かめる。
+# 等号は QQ と AA の厳密な等号、不等号は AA の厳密な比較である。
+
+n_eq = 0
+n_le = 0
+
+
+def eq(a, b, what):
+    global n_eq
+    assert a == b, what
+    n_eq += 1
+
+
+def le(a, b, what):
+    global n_le
+    assert a <= b, what
+    n_le += 1
+
+
+def check_proof_lines(P, c, nmax, what):
+    """P は QQ の実対称で半正定値、c は rayleigh_sup_exact(P)、nmax は主張を確かめる最大の n。"""
+    d = P.nrows()
+    R = P.base_ring()
+    I = body_identity(R, d)
+    E = [vector(QQ, [1 if i == k else 0 for i in range(d)]) for k in range(d)]   # e_k ∈ ℝ^d
+    le(0, c, f"{what}: c ≥ 0")
+    # 【e_k のノルム】: ‖e_k‖ = √(Σ_i |(e_k)_i|^2) = √1 = 1
+    for k in range(d):
+        l1 = norm_exact(E[k])
+        l2 = AA(sum(abs(E[k][i])**2 for i in range(d))).sqrt()
+        l2b = AA(abs(E[k][k])**2).sqrt()
+        l2c = AA(abs(QQ(1))**2).sqrt()
+        l3 = AA(1).sqrt()
+        eq(l1, l2, f"{what}: 【e_k のノルム】の 1 行目 k={k}")
+        eq(sum(abs(E[k][i])**2 for i in range(d)), 1, f"{what}: 【e_k のノルム】の 根号の中が 1k={k}")
+        eq(l2, l2b, f"{what}: 【e_k のノルム】の 2 行目（i ≠ k の項を落とす）k={k}")
+        eq(l2b, l2c, f"{what}: 【e_k のノルム】の 3 行目（(e_k)_k = 1）k={k}")
+        eq(l2c, l3, f"{what}: 【e_k のノルム】の 4 行目（|1|^2 = 1）k={k}")
+        eq(l3, 1, f"{what}: 【e_k のノルム】の 5 行目 k={k}")
+    # 【冪の実対称性】: W^p は実対称（成分は QQ、(W^p)_kl = (W^p)_lk）
+    pw = [power_by_def_exp(P, p) for p in range(nmax + 1)]
+    for p in range(nmax + 1):
+        eq(pw[p], P**p, f"{what}: def_exp (1) の冪と Sage の冪 p={p}")
+        assert pw[p].base_ring() == QQ
+        eq(body_transpose(pw[p]), pw[p], f"{what}: 【冪の実対称性】の (W^p)^⊤ = W^p p={p}")
+        for k in range(d):
+            for l in range(d):
+                eq(pw[p][k, l], body_transpose(pw[p])[k, l], f"{what}: 【冪の実対称性】の鎖 1 行目")
+                eq(body_transpose(pw[p])[k, l], pw[p][l, k], f"{what}: 【冪の実対称性】の鎖 2 行目")
+    # 【対角成分の表示】: e_k^⊤W^pe_k = ΣΣ (e_k)_i (W^p)_ij (e_k)_j = Σ_j (e_k)_k (W^p)_kj (e_k)_j = Σ_j (W^p)_kj (e_k)_j = (W^p)_kk
+    for p in range(nmax + 1):
+        Q = pw[p]
+        for k in range(d):
+            e = E[k]
+            L = [bil(e, Q, e),
+                 sum(sum(e[i] * Q[i, j] * e[j] for j in range(d)) for i in range(d)),
+                 sum(e[k] * Q[k, j] * e[j] for j in range(d)),
+                 sum(Q[k, j] * e[j] for j in range(d)),
+                 Q[k, k] * e[k],
+                 Q[k, k]]
+            for a, b in zip(L, L[1:]):
+                eq(a, b, f"{what}: 【対角成分の表示】 p={p}, k={k}")
+            eq(L[0], (e.row() * Q * e.column())[0, 0], f"{what}: 【対角成分の表示】 と組み込みの行列積 p={p}, k={k}")
+            for i in range(d):
+                if i != k:
+                    eq(e[i], 0, f"{what}: 【対角成分の表示】の i ≠ k の項は 0")
+    # 【W^ae_k の成分とノルム】: u := W^ae_k、u_l = Σ_m (W^a)_lm (e_k)_m = (W^a)_lk、‖u‖ ≤ c^a‖e_k‖ = c^a、‖u‖^2 ≤ c^{2a}
+    U = {}
+    for a in range(nmax // 2 + 1):
+        for k in range(d):
+            u = matvec(pw[a], E[k])
+            eq(u, pw[a] * E[k], f"{what}: u の成分の式と組み込みの積 a={a}, k={k}")
+            for l in range(d):
+                eq(u[l], sum(pw[a][l, m] * E[k][m] for m in range(d)), f"{what}: 【W^ae_k の成分とノルム】の 1 行目")
+                eq(sum(pw[a][l, m] * E[k][m] for m in range(d)), pw[a][l, k] * E[k][k], f"{what}: 【W^ae_k の成分とノルム】の 2 行目")
+                eq(pw[a][l, k] * E[k][k], pw[a][l, k], f"{what}: 【W^ae_k の成分とノルム】の 3 行目")
+                eq(u[l], pw[a][l, k], f"{what}: u_l = (W^a)_lk")
+            nu = norm_exact(u)
+            le(nu, c**a * norm_exact(E[k]), f"{what}: 【W^ae_k の成分とノルム】の ‖u‖ ≤ c^a‖e_k‖ a={a}, k={k}")
+            eq(c**a * norm_exact(E[k]), c**a, f"{what}: 【W^ae_k の成分とノルム】の c^a‖e_k‖ = c^a")
+            le(0, nu, f"{what}: 【W^ae_k の成分とノルム】の 0 ≤ ‖u‖")
+            eq((c**a)**2, c**(2 * a), f"{what}: 【W^ae_k の成分とノルム】の (c^a)^2 = c^{{2a}}")
+            le(nu**2, (c**a)**2, f"{what}: 【W^ae_k の成分とノルム】の ‖u‖^2 ≤ c^{{2a}} a={a}, k={k}")
+            U[(a, k)] = u
+    # 偶数の場合 n = 2a（a ≥ 1）
+    for n in range(2, nmax + 1, 2):
+        a = n // 2
+        WaWa = body_product(pw[a], pw[a])
+        eq(pw[2 * a], WaWa, f"{what}: matrix_power_exponent_law (p, q → a)")
+        for k in range(d):
+            u = U[(a, k)]
+            L = [bil(E[k], pw[2 * a], E[k]),
+                 pw[2 * a][k, k],
+                 pw[a + a][k, k],
+                 WaWa[k, k],
+                 sum(pw[a][k, l] * pw[a][l, k] for l in range(d)),
+                 sum(pw[a][l, k] * pw[a][l, k] for l in range(d)),
+                 sum(u[l] * u[l] for l in range(d)),
+                 sum(abs(u[l])**2 for l in range(d)),
+                 norm_exact(u)**2]
+            for x, y in zip(L, L[1:]):
+                eq(x, y, f"{what}: 偶数の鎖 n={n}, k={k}")
+            le(L[-1], c**(2 * a), f"{what}: 偶数の鎖の不等号 n={n}, k={k}")
+            eq(c**(2 * a), c**n, f"{what}: 偶数の鎖の最後 n={n}")
+    # 奇数の場合 n = 2a+1（a ≥ 0）
+    for n in range(1, nmax + 1, 2):
+        a = (n - 1) // 2
+        # W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)
+        M = [pw[2 * a + 1],
+             pw[a + (1 + a)],
+             body_product(pw[a], pw[1 + a]),
+             body_product(pw[a], body_product(pw[1], pw[a])),
+             body_product(pw[a], body_product(pw[0 + 1], pw[a])),
+             body_product(pw[a], body_product(body_product(pw[0], P), pw[a])),
+             body_product(pw[a], body_product(body_product(I, P), pw[a])),
+             body_product(pw[a], body_product(P, pw[a]))]
+        for x, y in zip(M, M[1:]):
+            eq(x, y, f"{what}: W^{{2a+1}} の鎖 n={n}")
+        WWa = body_product(P, pw[a])
+        for k in range(d):
+            u = U[(a, k)]
+            L = [bil(E[k], pw[2 * a + 1], E[k]),
+                 pw[2 * a + 1][k, k],
+                 M[-1][k, k],
+                 sum(pw[a][k, l] * WWa[l, k] for l in range(d)),
+                 sum(pw[a][k, l] * sum(P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
+                 sum(sum(pw[a][k, l] * P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
+                 sum(sum(pw[a][l, k] * P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
+                 sum(sum(u[l] * P[l, m] * u[m] for m in range(d)) for l in range(d)),
+                 bil(u, P, u)]
+            for x, y in zip(L, L[1:]):
+                eq(x, y, f"{what}: 奇数の鎖の等号 n={n}, k={k}")
+            nu2 = norm_exact(u)**2
+            le(L[-1], c * nu2, f"{what}: 奇数の鎖 u^⊤Wu ≤ c‖u‖^2 n={n}, k={k}")
+            le(c * nu2, c * c**(2 * a), f"{what}: 奇数の鎖 c‖u‖^2 ≤ c·c^{{2a}} n={n}, k={k}")
+            eq(c * c**(2 * a), c**(2 * a + 1), f"{what}: 奇数の鎖 c·c^{{2a}} = c^{{2a+1}}")
+            eq(c**(2 * a + 1), c**n, f"{what}: 奇数の鎖の最後 n={n}")
+    # 最後のトレースの鎖
+    for n in range(1, nmax + 1):
+        Q = pw[n]
+        L = [Q.trace(),                                     # Sage の trace（別の経路）
+             sum(Q[k, k] for k in range(d)),                # def_trace
+             sum(bil(E[k], Q, E[k]) for k in range(d))]     # 【対角成分の表示】
+        for x, y in zip(L, L[1:]):
+            eq(x, y, f"{what}: トレースの鎖の等号 n={n}")
+        for k in range(d):
+            le(bil(E[k], Q, E[k]), c**n, f"{what}: 各 k の e_k^⊤W^ne_k ≤ c^n n={n}, k={k}")
+        le(L[-1], sum(c**n for k in range(d)), f"{what}: トレースの鎖の不等号 n={n}")
+        eq(sum(c**n for k in range(d)), d * c**n, f"{what}: Σ c^n = d c^n")
+        le((P**n).trace(), d * c**n, f"{what}: 主張 tr(W^n) ≤ d c^n n={n}")
