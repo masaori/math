@@ -211,8 +211,9 @@
 | `Ising2D.Y_kronecker_form` / `Z_nextSite_kronecker_form` / `sigmaZ_mul_sigmaZ_nextSite_kronecker`（と `ne_nextSite_of_not_last`） | `Y_m`・`Z_{m+1}`・`σ^z_mσ^z_{m+1}` のクロネッカー積表示（`Y`・`Z` の 2 本は定義そのもので `rfl`、`σ^zσ^z` は 4 段の `calc`） | 証明の準備 1 |
 | `Ising2D.Y_lastSite_kronecker_form` / `Z_firstSite_kronecker_form` / `epsilon_kronecker_form` / `sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` | `Y_{M_col}`・`Z_1`・`ε`・`σ^z_{M_col}σ^z_1` のクロネッカー積表示（`Z_1` は 2 段、`σ^zσ^z` は 4 段の `calc`） | 証明の準備 2 |
 | `Ising2D.I_smul_Y_mul_Z_next_of_not_last`（と `siteProd_ite_smul`） | `i(Y_mZ_{m+1}) = σ^z_mσ^z_{m+1}`（11 段の `calc`。`siteProd_ite_smul` は第 `m` 因子を `if` で書いた族についての `kronecker_multilinear` の `r = 1` の式） | 証明の準備 3 |
-| `Ising2D.Y_last_mul_Z_first` / `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` / `neg_I_smul_Y_last_mul_Z_first` | `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^y_{M_col}`、`εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^y_{M_col}`、`-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | 境界項の計算 |
-| **`Ising2D.H1_plus_in_sigma_z_form`** | **`iH_1^{(+)} = D_0 + εG`**（`M_col ≥ 2`） | **主張本体** |
+| `Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite`（と `siteProd_ite_ite_smul`） | `-(i(Y_{M_col}Z_1)) = εG`（17 段の `calc`） | 証明の準備 4 |
+| `Ising2D.H1plus_eq_bulk_sub_boundary` / `sum_filter_not_last_eq_sum_castSucc` / `castSucc_val_add_one_ne` | `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1`、和の添字 `{1,…,M_col-1}` の `Finset.filter` から `Fin (M_col-1)` への読み替え | `def_H1_plus` と最後の鎖の 1・5 行目 |
+| **`Ising2D.H1_plus_in_sigma_z_form`** | **`iH_1^{(+)} = D_0 + εG`**（`M_col ≥ 2`。最後の 7 行の鎖と 7 段の `calc`） | **主張本体** |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonD0GCommuteAndDiagonalAction.lean`（ラベル `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`）
 
@@ -324,7 +325,7 @@
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
-| `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_smul_family` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
+| `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
 | `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |

@@ -233,8 +233,7 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
 `calc` の 1・2 段は `rfl` である。準備の `G` の表示（主張の `G := σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` と
 `site_pauli_prefix_product_kronecker_form`）は、Lean では `G` をはじめから `siteProd` に `boundaryYXYFamily` を入れたものとして
 書くので、人手の準備の `G` の 2 行（サイトの積としての定義と、クロネッカー積表示へ移す行）に当たる Lean の段は無く、`calc` の 8 段は因子の並びの書き方（`ite` と `boundaryYXYFamily` の `∨`）を揃えるだけである。
-人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。
-`H1_plus_in_sigma_z_form` が使う同じ等式 `Y_last_mul_Z_first`（`lastSite`・`firstSite` の添字）は、別の主張の鎖として残す。 -/
+人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
 theorem Y_last_mul_Z_zero (r : ℕ) :
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
       = (-Complex.I) • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by

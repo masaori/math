@@ -9,22 +9,15 @@
 | 人手 | Lean |
 | --- | --- |
 | 1 サイトの積 `σ^yσ^x = -iσ^z`（`pauli_y_times_pauli_x`）, `σ^xσ^x = I`（`pauli_matrix_products`） | `pauliY_mul_pauliX_eq`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`。その `calc` は旧い `V1_in_Z_Y_epsilon` の Step 0 の鎖に合わせたもので、`pauli_y_times_pauli_x` の 7 行の証明とは 1 対 1 でない）、`pauliX_mul_pauliX`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols`） |
-| 1 サイトの積 `σ^xσ^z = -iσ^y`（2 次の成分計算） | `pauliX_mul_pauliZ_eq`（人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖と 1 対 1） |
+| 1 サイトの積 `σ^xσ^z = -iσ^y`（`pauli_x_times_pauli_z`） | `pauliX_mul_pauliZ_eq`（人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖と 1 対 1） |
 | 準備 1 の `Y_m`・`Z_{m+1}` の鎖（各 2 行）と `σ_m^zσ_{m+1}^z` の鎖（4 行） | `Y_kronecker_form`・`Z_nextSite_kronecker_form`（定義そのもので `rfl`）と `sigmaZ_mul_sigmaZ_nextSite_kronecker` の `calc` の 4 段（サイト `m` と `m+1` が異なることは `ne_nextSite_of_not_last`） |
 | 準備 2 の `Y_{M_col}`・`Z_1` の鎖（各 2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`rfl`）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
 | 準備 3 の 11 行の鎖 `i(Y_mZ_{m+1}) = ⋯ = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`） | `I_smul_Y_mul_Z_next_of_not_last` の `calc` の 11 段（7 段目の `kronecker_multilinear` の `r = 1` の式は `siteProd_ite_smul`） |
 | 準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG`（`M_col ≥ 2`） | `neg_I_smul_Y_lastSite_mul_Z_firstSite` の `calc` の 17 段（9・11 段目の `kronecker_multilinear` の `r = 1` の式（`j → 1`）は `siteProd_ite_smul`、10 段目（`j → M_col`）は `siteProd_ite_ite_smul`） |
-| （旧い道）境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
-| （旧い道）境界項の右辺 `εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` |
-| （旧い道）突き合わせ `-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | `neg_I_smul_Y_last_mul_Z_first` |
-| `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary` |
-| 最後の式変形 `iH_1^{(+)} = ⋯ = D_0 + εG` | `H1_plus_in_sigma_z_form` |
+| `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary`（和は `Finset.filter` の上。`Fin (r + 1)` の上の和への読み替えは `sum_filter_not_last_eq_sum_castSucc`） |
+| 最後の 7 行の鎖 `iH_1^{(+)} = i(Σ Y_mZ_{m+1} − Y_{M_col}Z_1) = ⋯ = D_0 + εG` | `H1_plus_in_sigma_z_form` の `calc` の 7 段（`M_col = r + 2`。1・5 段目は和の添字の読み替えを含む） |
 
-2026-11-04 に書き直された人手の鎖のうち、準備 1・2・3・4 はこのファイルの同名の節と 1 対 1 である。最後の 7 行の鎖（`H1_plus_in_sigma_z_form`）は、まだ上の表の旧い道（`Y_last_mul_Z_first` ほか）で閉じており、人手の新しい鎖と 1 対 1 ではない。
-
-（旧い道）人手の `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積
-`siteProd` に入れたものとして書く。「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は
-Lean では `siteProd_mul`（サイトごとの積）で、各サイトの因子を取り出す段は族の各成分の計算で行う。
+人手の準備 1・2・3・4 と最後の鎖は、このファイルの同名の節・定理と 1 対 1 である。
 
 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の間の等式であり、主張に固有なのは各サイトの Pauli 行列の積だけなので、
 必要十分版は置かない（同じ型の主張 `V1_in_Z_Y_epsilon` と同じ判断）。
@@ -33,6 +26,9 @@ import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainA
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
 
 namespace Ising2D
 
@@ -62,7 +58,7 @@ theorem negI_mul_negI_eq_neg_one : (-Complex.I) * (-Complex.I) = -1 :=
     _ = -1 := mul_one _                                                      -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
 
 /-- 人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖 `σ^xσ^z = (-i)σ^y`。人手の鎖の 11 行と `calc` の 11 段が 1 対 1 に対応する。
-`H1_plus_in_sigma_z_form` が「2 次の成分計算」として使う同じ等式でもある。 -/
+`H1_plus_in_sigma_z_form` の準備 4 が `pauli_x_times_pauli_z` として使う同じ等式でもある。 -/
 theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
   calc
     -- `pauli_matrix_products`（Pauli 行列）
@@ -435,102 +431,12 @@ theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :
                                                         -- 準備 2 の `σ_{M_col}^zσ_1^z` の鎖を右辺から左辺へ
     _ = epsilon M * boundaryG M hM0 := rfl              -- `def_G_boundary_operator`
 
-/-! ## 境界項 -/
+/-! ## 境界の因子の族（`ClaimIHPauliForm.lean` が使う） -/
 
-/-- `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` のサイトごとの因子（サイト `1` と `M_col` に `σ^y`、ほかに `σ^x`）。 -/
+/-- `σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` のサイトごとの因子（サイト `1` と `M_col` に `σ^y`、ほかに `σ^x`）。
+このファイルの鎖は使わない。`ClaimIHPauliForm.lean` の `G` の表示が使う。 -/
 noncomputable def boundaryYXYFamily (M : ℕ) (hM : M ≠ 0) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
   fun i => if i = firstSite M hM ∨ i = lastSite M hM then pauliY else pauliX
-
-/-- **人手の境界項の左辺**: `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`。
-
-人手の各行: `def_transfer_matrix_symbols` で展開し、相異なるサイトの因子を並べ替えて（`siteProd_mul`）
-サイト `1` に `σ^xσ^z` を作り、`σ^xσ^z = -iσ^y` を適用し、スカラーを外へ出す。 -/
-theorem Y_last_mul_Z_first (hM : 2 ≤ M) :
-    Y (lastSite M (by omega)) * Z (firstSite M (by omega))
-      = (-Complex.I) • siteProd M (boundaryYXYFamily M (by omega)) := by
-  have hM0 : M ≠ 0 := by omega
-  rw [Y, Z, ← siteProd_mul]
-  let c : Fin M → ℂ := Function.update 1 (firstSite M hM0) (-Complex.I)
-  have hfamily : jwFamily (lastSite M hM0) pauliY * jwFamily (firstSite M hM0) pauliZ
-      = fun i => c i • boundaryYXYFamily M hM0 i := by
-    funext i
-    simp only [Pi.mul_apply]
-    by_cases h1 : i = firstSite M hM0
-    · subst h1
-      rw [jwFamily_of_lt (by simp [firstSite, lastSite]; omega), jwFamily_self,
-        pauliX_mul_pauliZ_eq]
-      simp [c, boundaryYXYFamily]
-    · have h1v : 0 < (i : ℕ) := by
-        rcases Nat.eq_zero_or_pos (i : ℕ) with h | h
-        · exact absurd (Fin.val_injective (by simp [firstSite, h])) h1
-        · exact h
-      rw [jwFamily_of_gt (A := pauliZ) (by simp [firstSite]; omega), mul_one]
-      by_cases h2 : i = lastSite M hM0
-      · subst h2
-        rw [jwFamily_self]
-        simp [c, boundaryYXYFamily, h1]
-      · have h2v : (i : ℕ) < M - 1 := by
-          have := i.isLt
-          have : (i : ℕ) ≠ M - 1 := fun h => h2 (Fin.val_injective (by simp [lastSite, h]))
-          omega
-        rw [jwFamily_of_lt (by simp [lastSite]; omega)]
-        simp [c, boundaryYXYFamily, h1, h2]
-  rw [hfamily, siteProd_smul_family]
-  congr 1
-  simp [c, Finset.prod_update_of_mem]
-
-/-- **人手の境界項の右辺**: `εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`。
-
-人手の各行: `def_transfer_matrix_symbols` の `ε = σ^x_1⋯σ^x_{M_col}` で展開し、相異なるサイトの因子を並べ替えて
-（`siteProd_mul`）サイト `1` と `M_col` に `σ^xσ^z` を作り、`σ^xσ^z = -iσ^y` を 2 箇所へ同時適用し、
-`(-i)^2 = -1`。 -/
-theorem epsilon_mul_sigmaZ_last_mul_sigmaZ_first (hM : 2 ≤ M) :
-    epsilon M * (sigmaZ (lastSite M (by omega)) * sigmaZ (firstSite M (by omega)))
-      = (-1 : ℂ) • siteProd M (boundaryYXYFamily M (by omega)) := by
-  have hM0 : M ≠ 0 := by omega
-  have hne := firstSite_ne_lastSite hM
-  rw [epsilon_eq_siteProd_pauliX_by_induction, sigmaZ, sigmaZ, siteOp_apply, siteOp_apply,
-    ← siteProd_mul, ← siteProd_mul]
-  let c : Fin M → ℂ :=
-    Function.update (Function.update 1 (firstSite M hM0) (-Complex.I)) (lastSite M hM0) (-Complex.I)
-  have hfamily : (fun _ : Fin M => pauliX) *
-      (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (lastSite M hM0) pauliZ *
-        Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (firstSite M hM0) pauliZ)
-      = fun i => c i • boundaryYXYFamily M hM0 i := by
-    funext i
-    simp only [Pi.mul_apply]
-    by_cases h1 : i = firstSite M hM0
-    · subst h1
-      simp [c, boundaryYXYFamily, hne, pauliX_mul_pauliZ_eq]
-    · by_cases h2 : i = lastSite M hM0
-      · subst h2
-        simp [c, boundaryYXYFamily, hne.symm, pauliX_mul_pauliZ_eq]
-      · simp [c, boundaryYXYFamily, h1, h2]
-  rw [hfamily, siteProd_smul_family]
-  congr 1
-  rw [Fintype.prod_eq_mul_prod_compl (lastSite M hM0)]
-  simp only [c, Function.update_self]
-  rw [Finset.prod_eq_single (firstSite M hM0)]
-  · rw [Function.update_of_ne hne, Function.update_self]
-    rw [neg_mul_neg, Complex.I_mul_I]
-  · intro b _ hb
-    by_cases h2 : b = lastSite M hM0
-    · simp_all
-    · rw [Function.update_of_ne h2, Function.update_of_ne hb, Pi.one_apply]
-  · intro h
-    exact absurd (Finset.mem_compl.2 (by simpa using hne)) h
-
-/-- **人手の突き合わせ**: `-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1`。 -/
-theorem neg_I_smul_Y_last_mul_Z_first (hM : 2 ≤ M) :
-    (-Complex.I) • (Y (lastSite M (by omega)) * Z (firstSite M (by omega)))
-      = epsilon M * (sigmaZ (lastSite M (by omega)) * sigmaZ (firstSite M (by omega))) := by
-  calc (-Complex.I) • (Y (lastSite M (by omega)) * Z (firstSite M (by omega)))
-      = (-Complex.I) • ((-Complex.I) • siteProd M (boundaryYXYFamily M (by omega))) := by
-        rw [Y_last_mul_Z_first hM]
-    _ = (-1 : ℂ) • siteProd M (boundaryYXYFamily M (by omega)) := by
-        rw [smul_smul, neg_mul_neg, Complex.I_mul_I]
-    _ = epsilon M * (sigmaZ (lastSite M (by omega)) * sigmaZ (firstSite M (by omega))) := by
-        rw [epsilon_mul_sigmaZ_last_mul_sigmaZ_first hM]
 
 /-! ## `H_1^{(+)}` の書き換え -/
 
@@ -560,39 +466,55 @@ theorem H1plus_eq_bulk_sub_boundary (hM : M ≠ 0) :
       rw [lastSign_of_not_last (Finset.mem_filter.1 hm).2, one_smul]
   · rw [lastSign_of_last (by simp [lastSite]; omega), nextSite_lastSite hM, neg_one_smul]
 
+/-- 人手の和 `Σ_{m=1}^{M_col-1}` の添字の読み替え（`M_col = r + 2`）。Lean の `H1plus_eq_bulk_sub_boundary`・`openChainD0` は
+人手の `m ∈ {1, …, M_col-1}` を `Fin (r + 2)` のうち `(m : ℕ) + 1 ≠ r + 2` を満たすものとして書き、
+`finite_sum_of_scalar_multiples` の Lean の系 `finite_sum_smul_tensorPow` は項の個数 `r + 1` の和を `Fin (r + 1)` の上に取るので、
+`Fin.castSucc` で両者をつなぐ（人手の添字 `m` は Lean の `Fin.castSucc j`、`j` は `m - 1`）。 -/
+theorem sum_filter_not_last_eq_sum_castSucc {α : Type*} [AddCommMonoid α] (r : ℕ) (f : Fin (r + 2) → α) :
+    ∑ m ∈ Finset.univ.filter (fun m : Fin (r + 2) => (m : ℕ) + 1 ≠ r + 2), f m
+      = ∑ j : Fin (r + 1), f (Fin.castSucc j) := by
+  rw [Finset.sum_filter, Fin.sum_univ_castSucc, Fin.val_last, if_neg (by omega), add_zero]
+  exact Finset.sum_congr rfl fun j _ => if_pos (by simp only [Fin.val_castSucc]; omega)
+
+/-- 人手のサイト `m ∈ {1, …, M_col-1}`（Lean の `Fin.castSucc j`）は最後のサイトではない。 -/
+theorem castSucc_val_add_one_ne (r : ℕ) (j : Fin (r + 1)) :
+    ((Fin.castSucc j : Fin (r + 2)) : ℕ) + 1 ≠ r + 2 := by
+  simp only [Fin.val_castSucc]; omega
+
 /-- **人手 `H1_plus_in_sigma_z_form`**: `iH_1^{(+)} = D_0 + εG`（`M_col ≥ 2`）。
 
-人手の最後の式変形を 1 行ずつ辿る。 -/
+人手の最後の 7 行の鎖と `calc` の 7 段が 1 対 1 に対応する。Lean では `M_col = r + 2` と置き、人手の和 `Σ_{m=1}^{M_col-1}` を
+`Fin (r + 1)` の上の和（人手の `m` は `Fin.castSucc j`）で書く。1 段目（`def_H1_plus`）と 5 段目（`def_D0_open_chain_operator`）は、
+Lean の `H1plus`・`openChainD0` の和の書き方（`Finset.filter`）をこの和へ読み替える段を含む（`sum_filter_not_last_eq_sum_castSucc`）。 -/
 theorem H1_plus_in_sigma_z_form (hM : 2 ≤ M) :
     Complex.I • H1plus M = openChainD0 M + epsilon M * boundaryG M (by omega) := by
-  have hM0 : M ≠ 0 := by omega
-  calc Complex.I • H1plus M
-      = Complex.I • (∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-            Y m * Z (nextSite m) - Y (lastSite M hM0) * Z (firstSite M hM0)) := by
-        -- def_H1_plus
-        rw [H1plus_eq_bulk_sub_boundary hM0]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-            Complex.I • (Y m * Z (nextSite m))
-          + (-Complex.I) • (Y (lastSite M hM0) * Z (firstSite M hM0)) := by
-        -- スカラー倍の分配法則
-        rw [smul_sub, Finset.smul_sum, sub_eq_add_neg, neg_smul]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-            sigmaZ m * sigmaZ (nextSite m)
-          + (-Complex.I) • (Y (lastSite M hM0) * Z (firstSite M hM0)) := by
-        -- 内部辺の等式を有限和へ適用
-        congr 1
-        exact Finset.sum_congr rfl fun m hm =>
-          I_smul_Y_mul_Z_next_of_not_last m (Finset.mem_filter.1 hm).2
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-            sigmaZ m * sigmaZ (nextSite m)
-          + epsilon M * (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0)) := by
-        -- 境界項の等式
-        rw [neg_I_smul_Y_last_mul_Z_first hM]
-    _ = openChainD0 M + epsilon M * (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0)) := by
-        -- def_D0_open_chain_operator
-        rfl
-    _ = openChainD0 M + epsilon M * boundaryG M hM0 := by
-        -- def_G_boundary_operator
-        rfl
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 2 := ⟨M - 2, by omega⟩
+  have hM0 : r + 2 ≠ 0 := by omega
+  calc Complex.I • H1plus (r + 2)
+      = Complex.I • ((∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
+          - Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
+        rw [H1plus_eq_bulk_sub_boundary hM0,
+          sum_filter_not_last_eq_sum_castSucc r (fun m => Y m * Z (nextSite m))]
+                                                        -- `def_H1_plus`（和の添字を `Fin (r + 1)` へ読み替える）
+    _ = Complex.I • (∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
+          - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) :=
+        smul_sub_tensorPow _ _ _                        -- `scalar_multiple_distributes_over_matrix_difference`
+    _ = (∑ j : Fin (r + 1), Complex.I • (Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j))))
+          - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
+        rw [finite_sum_smul_tensorPow Complex.I r]      -- `finite_sum_of_scalar_multiples` を右辺から左辺へ
+    _ = (∑ j : Fin (r + 1), sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j)))
+          - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
+        rw [Finset.sum_congr rfl fun j _ =>
+          I_smul_Y_mul_Z_next_of_not_last (Fin.castSucc j) (castSucc_val_add_one_ne r j)]
+                                                        -- 準備 3 を各項へ同時適用
+    _ = openChainD0 (r + 2)
+          - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
+        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
+                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
+    _ = openChainD0 (r + 2)
+          + -(Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0))) :=
+        sub_eq_add_neg_tensorPow _ _                    -- `matrix_difference_is_sum_with_negation`
+    _ = openChainD0 (r + 2) + epsilon (r + 2) * boundaryG (r + 2) hM0 := by
+        rw [neg_I_smul_Y_lastSite_mul_Z_firstSite hM]   -- 準備 4
 
 end Ising2D

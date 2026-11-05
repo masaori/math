@@ -2257,10 +2257,9 @@ targets=(
   Ising2D.siteProd_ite_ite_smul
   Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite
   Ising2D.boundaryYXYFamily
-  Ising2D.Y_last_mul_Z_first
-  Ising2D.epsilon_mul_sigmaZ_last_mul_sigmaZ_first
-  Ising2D.neg_I_smul_Y_last_mul_Z_first
   Ising2D.H1plus_eq_bulk_sub_boundary
+  Ising2D.sum_filter_not_last_eq_sum_castSucc
+  Ising2D.castSucc_val_add_one_ne
   Ising2D.H1_plus_in_sigma_z_form
   Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ
   Ising2D.epsilon_mul_openChainD0
