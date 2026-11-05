@@ -58,7 +58,7 @@ theorem trace_epsilon_VPlusOfTransfer (K1 : ℂ) (K2 : ℝ) :
         rw [trace_cyclic]
     -- `BB = V_1^{(+)}`（人手と同じく `V1_plus_square_root_property`（`def_V1_plus_square_root` の平方根性）を引く）
     _ = (epsilon M * V2 M K2 * V1plus M K1).trace := by
-        rw [mul_assoc (epsilon M * V2 M K2), V1_plus_square_root_property]
+        rw [mul_assoc (epsilon M * V2 M K2), ← sq, V1_plus_square_root_property]
     -- 巡回性
     _ = (V1plus M K1 * (epsilon M * V2 M K2)).trace := by
         rw [trace_cyclic]
