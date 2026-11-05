@@ -7124,13 +7124,13 @@ f(t(i))&=f(i)&&\bigl(\because\ i\ne a,b\text{ と }\blkref{claim_transposition_s
                 displayMath(String.raw`\begin{aligned}
 \Theta(\Theta(\varphi))(i)&=\Theta(\varphi)(t(i))&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
 &=\varphi(t(t(i)))&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
-&=\varphi(i)&&\bigl(\because\ t\text{ は二回で元へ戻る、}\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr).
+&=\varphi(i)&&\bigl(\because\ t\text{ は二回で元へ戻る、}\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)
 \end{aligned}`),
                 paragraph(["従って ", math(String.raw`\Theta(\Theta(\varphi))=\varphi`), " である。一方、"]),
                 displayMath(String.raw`\begin{aligned}
 \Theta(\varphi)(a)&=\varphi(t(a))&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
 &=\varphi(b)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\text{ の }t\text{ の定義}\bigr)\\
-&\ne\varphi(a)&&\bigl(\because\ a\ne b\text{ と }\varphi\text{ の単射性}\bigr).
+&\ne\varphi(a)&&\bigl(\because\ a\ne b\text{ と }\varphi\text{ の単射性}\bigr)
 \end{aligned}`),
                 paragraph([
                   "よって ", math(String.raw`\Theta(\varphi)\ne\varphi`), " であり、不動点はない。多項式",
@@ -7143,14 +7143,14 @@ P_{\Theta(\varphi)}&=\prod_i B_{f(i),\Theta(\varphi)(i)}&&\bigl(\because\ P\text
 &=\prod_i B_{f(i),\varphi(t(i))}&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
 &=\prod_i B_{f(t(i)),\varphi(t(i))}&&\bigl(\because\ f(t(i))=f(i)\bigr)\\
 &=\prod_j B_{f(j),\varphi(j)}&&\bigl(\because\ j=t(i)\text{ は逆写像 }t\text{ を持つ全単射}\bigr)\\
-&=P_\varphi&&\bigl(\because\ P\text{ の定義}\bigr).
+&=P_\varphi&&\bigl(\because\ P\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["符号については、整数の中で"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\Theta(\varphi))&=\operatorname{sgn}(\varphi\circ t)&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
 &=\operatorname{sgn}(\varphi)\operatorname{sgn}(t)&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
 &=\operatorname{sgn}(\varphi)(-1)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)\\
-&=-\operatorname{sgn}(\varphi)&&\bigl(\because\ \mathbb Z\text{ の乗法と加法逆元}\bigr).
+&=-\operatorname{sgn}(\varphi)&&\bigl(\because\ \mathbb Z\text{ の乗法と加法逆元}\bigr)
 \end{aligned}`),
                 paragraph(["これを定数多項式へ移すと、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7158,7 +7158,7 @@ c_{\Theta(\varphi)}&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\Theta(\varph
 &=\widehat{\iota_{\mathbb Z}(-\operatorname{sgn}(\varphi))}&&\bigl(\because\ \text{直前の符号の等式}\bigr)\\
 &=\widehat{-\iota_{\mathbb Z}(\operatorname{sgn}(\varphi))}&&\bigl(\because\ \iota_{\mathbb Z}\text{ は加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &=-\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\varphi))}&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\bigr)\\
-&=-c_\varphi&&\bigl(\because\ c\text{ の定義}\bigr).
+&=-c_\varphi&&\bigl(\because\ c\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["従って各対の項は、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7166,9 +7166,9 @@ w_{\Theta(\varphi)}&=c_{\Theta(\varphi)}P_{\Theta(\varphi)}&&\bigl(\because\ w\t
 &=(-c_\varphi)P_{\Theta(\varphi)}&&\bigl(\because\ c_{\Theta(\varphi)}=-c_\varphi\bigr)\\
 &=(-c_\varphi)P_\varphi&&\bigl(\because\ P_{\Theta(\varphi)}=P_\varphi\bigr)\\
 &=-(c_\varphi P_\varphi)&&\bigl(\because\ \text{積の加法逆元、}\blkref{def_qbar_polynomial_ring}\bigr)\\
-&=-w_\varphi&&\bigl(\because\ w\text{ の定義}\bigr),\\
+&=-w_\varphi&&\bigl(\because\ w\text{ の定義}\bigr)\\
 w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直前の等式}\bigr)\\
-&=0&&\bigl(\because\ \text{加法逆元、}\blkref{def_qbar_polynomial_ring}\bigr).
+&=0&&\bigl(\because\ \text{加法逆元、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph([
                   "全体の和の相殺を、対を一つずつ取り除いて示す。",
@@ -7192,7 +7192,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                 ]),
                 displayMath(String.raw`\begin{aligned}
 \rho&=\Theta(\Theta(\rho))&&\bigl(\because\ \Theta\text{ は二回で元へ戻る}\bigr)\\
-&=\Theta(\varphi)&&\bigl(\because\ \Theta(\rho)=\varphi\bigr),
+&=\Theta(\varphi)&&\bigl(\because\ \Theta(\rho)=\varphi\bigr)
 \end{aligned}`),
                 paragraph([
                   "となり ", math(String.raw`\rho\in\mathcal P'`), " に反する。もし ",
@@ -7201,7 +7201,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                 displayMath(String.raw`\begin{aligned}
 \rho&=\Theta(\Theta(\rho))&&\bigl(\because\ \Theta\text{ は二回で元へ戻る}\bigr)\\
 &=\Theta(\Theta(\varphi))&&\bigl(\because\ \Theta(\rho)=\Theta(\varphi)\bigr)\\
-&=\varphi&&\bigl(\because\ \Theta\text{ は二回で元へ戻る}\bigr),
+&=\varphi&&\bigl(\because\ \Theta\text{ は二回で元へ戻る}\bigr)
 \end{aligned}`),
                 paragraph([
                   "となり、これも反する。従って ", math(String.raw`\forall\rho\in\mathcal P',\ \Theta(\rho)\in\mathcal P'`),
@@ -7218,7 +7218,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
 &=0+\sum_{\rho\in\mathcal P'}w_\rho
 &&\bigl(\because\ \text{各対の和は零}\bigr)\\
 &=0+0&&\bigl(\because\ \mathcal P'\text{ への帰納法の仮定}\bigr)\\
-&=0&&\bigl(\because\ \text{零の加法、}\blkref{def_qbar_polynomial_ring}\bigr).
+&=0&&\bigl(\because\ \text{零の加法、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph([
                   "最後に ", math(String.raw`\mathcal P=\operatorname{Perm}(\mathcal J)`),
@@ -7227,7 +7227,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                 displayMath(String.raw`\begin{aligned}
 \sum_\varphi c_\varphi\prod_i B_{f(i),\varphi(i)}
 &=\sum_\varphi w_\varphi&&\bigl(\because\ P,w\text{ の定義}\bigr)\\
-&=0&&\bigl(\because\ \text{上の有限集合の帰納法}\bigr).
+&=0&&\bigl(\because\ \text{上の有限集合の帰納法}\bigr)
 \end{aligned}`),
                 paragraph([
                   "これで非単射の写像に対応する内側の和が消える。使ったのは有限集合、整数の符号と ",
@@ -66917,6 +66917,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective",
+                      "Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],

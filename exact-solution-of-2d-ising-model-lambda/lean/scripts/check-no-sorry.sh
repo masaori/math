@@ -1211,6 +1211,7 @@ targets=(
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf
   Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective
+  Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf
   Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf
   Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning
