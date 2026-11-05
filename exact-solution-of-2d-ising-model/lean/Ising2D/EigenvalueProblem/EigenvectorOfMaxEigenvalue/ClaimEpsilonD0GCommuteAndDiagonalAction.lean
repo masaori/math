@@ -5,11 +5,12 @@
 
 | 人手 | Lean |
 | --- | --- |
-| `epsilon_D0_G_pairwise_commute` の各 `m` の `ε(σ^z_mσ^z_{m+1}) = (σ^z_mσ^z_{m+1})ε` | `epsilon_mul_sigmaZ_mul_sigmaZ` |
-| 同 `εD_0 = D_0ε` | `epsilon_mul_openChainD0` |
-| 同 `εG = Gε` | `epsilon_mul_boundaryG` |
-| 同 「`kronecker_product_rule` (1) を各サイトへ適用」した `(σ^z_aσ^z_b)(σ^z_cσ^z_d) = (σ^z_cσ^z_d)(σ^z_aσ^z_b)` | `sigmaZ_mul_sigmaZ_mul_comm` |
-| 同 各 `m` の `(σ^z_mσ^z_{m+1})G = G(σ^z_mσ^z_{m+1})` と `D_0G = GD_0` | `openChainD0_mul_boundaryG` |
+| `epsilon_D0_G_pairwise_commute` の準備（`ε` と `σ^z` の対の可換）の 8 行 `ε(σ^z_jσ^z_k) = ⋯ = (σ^z_jσ^z_k)ε` | `epsilon_mul_sigmaZ_mul_sigmaZ` の 8 段 |
+| 同 準備（`σ^z` どうしの可換）`σ^z_jσ^z_k = σ^z_kσ^z_j`（`j ≠ k` と `j = k` の場合分け） | `sigmaZ_mul_sigmaZ_comm` |
+| 同 準備（`σ^z` の対と `G` の可換）の 14 行 `(σ^z_mσ^z_{m+1})G = ⋯ = G(σ^z_mσ^z_{m+1})` | `sigmaZ_mul_sigmaZ_mul_boundaryG` の 14 段 |
+| 同 `εD_0 = D_0ε` の 5 行 | `epsilon_mul_openChainD0` の 5 段（`M_col = r + 2`） |
+| 同 `εG = Gε` の 3 行 | `epsilon_mul_boundaryG` の 3 段 |
+| 同 `D_0G = GD_0` の 5 行 | `openChainD0_mul_boundaryG` の 5 段（`M_col = r + 2`） |
 | `epsilon_G_is_involution` の `(σ^z_k)^2 = I`（`pauli_matrix_products` と `kronecker_product_rule`） | `sigmaZ_mul_self` |
 | 同 `G^2 = (σ^z_{M_col})^2(σ^z_1)^2`（相異なるサイトの因子の可換性） | `boundaryG_mul_self` の第 1〜2 段 |
 | 同 `(εG)^2 = I` | `epsilon_mul_boundaryG_sq` |
@@ -19,19 +20,26 @@
 
 人手の `ε σ^z_k = -σ^z_k ε`（`epsilon_anticommutes_with_site_sigma_z`）は
 `epsilon_anticomm_sigmaZ`、`σ^z_m f_{ι(s)} = s(m) f_{ι(s)}`（`sigma_z_diagonal_action`）は
-`sigmaZ_mulVec_basisVec_spin`、`ε^2 = I` は `epsilon_sq` である。
-「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は `siteProd_mul` でサイトごとの積に直して、
+`sigmaZ_mulVec_basisVec_spin`、`ε^2 = I` は `epsilon_sq`、`distinct_site_pauli_matrices_commute` は `siteOp_mul_comm` である。
+`epsilon_G_is_involution` の「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は `siteProd_mul` でサイトごとの積に直して、
 各サイトの因子の積を比べる形で書く。
 
-この証明が使うのは、既存の補題 `epsilon_anticomm_sigmaZ`・`sigmaZ_mulVec_basisVec_spin`・`epsilon_sq`・
+この証明が使うのは、既存の補題 `epsilon_anticomm_sigmaZ`・`siteOp_mul_comm`・`sigmaZ_mulVec_basisVec_spin`・`epsilon_sq`・
 `pauliZ_mul_pauliZ`・`siteProd_mul`・`real_inclusion_mul`（`ℝ` から `ℂ` への包含が積を保つこと）に加えて、
-環の公理と有限和・スカラー倍の線型性と、包含が有限和を保つことだけである。
-取り払える構造が残らないので、必要十分版は置かない。
+環の公理と有限和・スカラー倍の線型性と、包含が有限和を保つことと、和の添字の読み替え
+`sum_filter_not_last_eq_sum_castSucc`（`ClaimH1PlusInSigmaZForm.lean`）だけである。
+既存の関係を環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無いので、必要十分版は置かない
+（`H1_plus_in_sigma_z_form` と同じ判断）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimH1PlusInSigmaZForm
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInLeftFactorFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInRightFactorFromNecSuf
 
 namespace Ising2D
 
@@ -39,71 +47,138 @@ open Matrix
 
 variable {M : ℕ}
 
-/-! ## `epsilon_D0_G_pairwise_commute` -/
+/-! ## `epsilon_D0_G_pairwise_commute`
 
-/-- 人手の各 `m` の式変形 `ε(σ^z_aσ^z_b) = ⋯ = (σ^z_aσ^z_b)ε`（二回の反可換移動）。 -/
-theorem epsilon_mul_sigmaZ_mul_sigmaZ (a b : Fin M) :
-    epsilon M * (sigmaZ a * sigmaZ b) = (sigmaZ a * sigmaZ b) * epsilon M :=
-  calc epsilon M * (sigmaZ a * sigmaZ b)
-      = (epsilon M * sigmaZ a) * sigmaZ b := by rw [mul_assoc]
-    _ = (-(sigmaZ a * epsilon M)) * sigmaZ b := by rw [epsilon_anticomm_sigmaZ a]
-    _ = -(sigmaZ a * (epsilon M * sigmaZ b)) := by rw [neg_mul, mul_assoc]
-    _ = -(sigmaZ a * (-(sigmaZ b * epsilon M))) := by rw [epsilon_anticomm_sigmaZ b]
-    _ = sigmaZ a * (sigmaZ b * epsilon M) := by rw [mul_neg, neg_neg]
-    _ = (sigmaZ a * sigmaZ b) * epsilon M := by rw [mul_assoc]
+人手の 3 つの準備（`ε` と `σ^z` の対の可換の 8 行、`σ^z` どうしの可換の場合分け、`σ^z` の対と `G` の可換の 14 行）と
+3 つの鎖（`εD_0 = D_0ε` の 5 行、`εG = Gε` の 3 行、`D_0G = GD_0` の 5 行）が、下の 6 つの定理の `calc` の段と 1 対 1 に対応する。
+`mat_mult_associative` の段は、Lean の具体版が無いので mathlib の `Matrix.mul_assoc` を 1 回ずつ引く（ほかのファイルと同じ扱い）。
+`negation_factors_out_of_left_factor`・`negation_factors_out_of_right_factor`・`matrix_double_negation`・
+`finite_sum_of_matrices_distributes_in_left_factor`・`finite_sum_of_matrices_distributes_in_right_factor` の段は、
+具体版の `TensorPow M` の系 `neg_mul_matrix_tensorPow`・`mul_neg_matrix_tensorPow`・`neg_neg_tensorPow`・`finite_sum_mul_tensorPow`・
+`mul_finite_sum_tensorPow` を引く。和の鎖は `H1_plus_in_sigma_z_form` と同じく `M_col = r + 2` と置き、人手の和 `Σ_{m=1}^{M_col-1}` を
+`Fin (r + 1)` の上の和（人手の `m` は `Fin.castSucc j`）で書く。1 段目と 5 段目（`def_D0_open_chain_operator`）は、
+Lean の `openChainD0` の和の書き方（`Finset.filter`）をこの和へ読み替える段を含む（`sum_filter_not_last_eq_sum_castSucc`）。 -/
 
-/-- **人手 `epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε`。** -/
-theorem epsilon_mul_openChainD0 (M : ℕ) :
-    epsilon M * openChainD0 M = openChainD0 M * epsilon M :=
-  calc epsilon M * openChainD0 M
-      = epsilon M * ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          sigmaZ m * sigmaZ (nextSite m) := by rw [openChainD0]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          epsilon M * (sigmaZ m * sigmaZ (nextSite m)) := by rw [Finset.mul_sum]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          (sigmaZ m * sigmaZ (nextSite m)) * epsilon M :=
-        Finset.sum_congr rfl fun m _ => epsilon_mul_sigmaZ_mul_sigmaZ m (nextSite m)
-    _ = (∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          sigmaZ m * sigmaZ (nextSite m)) * epsilon M := by rw [Finset.sum_mul]
-    _ = openChainD0 M * epsilon M := by rw [openChainD0]
+/-- **人手 `epsilon_D0_G_pairwise_commute` の準備（`ε` と `σ^z` の対の可換）** `ε(σ^z_jσ^z_k) = ⋯ = (σ^z_jσ^z_k)ε` の 8 行。 -/
+theorem epsilon_mul_sigmaZ_mul_sigmaZ (j k : Fin M) :
+    epsilon M * (sigmaZ j * sigmaZ k) = (sigmaZ j * sigmaZ k) * epsilon M :=
+  calc epsilon M * (sigmaZ j * sigmaZ k)
+      = (epsilon M * sigmaZ j) * sigmaZ k :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
+    _ = (-(sigmaZ j * epsilon M)) * sigmaZ k := by
+        rw [epsilon_anticomm_sigmaZ j]                  -- `epsilon_anticommutes_with_site_sigma_z`（`k → j`）
+    _ = -((sigmaZ j * epsilon M) * sigmaZ k) :=
+        neg_mul_matrix_tensorPow _ _                    -- `negation_factors_out_of_left_factor`
+    _ = -(sigmaZ j * (epsilon M * sigmaZ k)) := by
+        rw [Matrix.mul_assoc]                           -- `mat_mult_associative`
+    _ = -(sigmaZ j * (-(sigmaZ k * epsilon M))) := by
+        rw [epsilon_anticomm_sigmaZ k]                  -- `epsilon_anticommutes_with_site_sigma_z`（`k → k`）
+    _ = -(-(sigmaZ j * (sigmaZ k * epsilon M))) := by
+        rw [mul_neg_matrix_tensorPow]                   -- `negation_factors_out_of_right_factor`
+    _ = sigmaZ j * (sigmaZ k * epsilon M) :=
+        neg_neg_tensorPow _                             -- `matrix_double_negation`
+    _ = (sigmaZ j * sigmaZ k) * epsilon M :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
 
-/-- **人手 `epsilon_D0_G_pairwise_commute` の `εG = Gε`。** -/
+/-- **人手 `epsilon_D0_G_pairwise_commute` の準備（`σ^z` どうしの可換）** `σ^z_jσ^z_k = σ^z_kσ^z_j`。
+
+人手どおり `j ≠ k` と `j = k` に場合を分ける。`j ≠ k` は `distinct_site_pauli_matrices_commute`（`a = b = z`）の具体版
+`siteOp_mul_comm`、`j = k` は両辺が同じ行列である。 -/
+theorem sigmaZ_mul_sigmaZ_comm (j k : Fin M) : sigmaZ j * sigmaZ k = sigmaZ k * sigmaZ j := by
+  by_cases h : j = k
+  · rw [h]                                              -- `j = k`: 両辺は同じ行列
+  · exact siteOp_mul_comm h pauliZ pauliZ               -- `distinct_site_pauli_matrices_commute`（`a = b = z`）
+
+/-- **人手 `epsilon_D0_G_pairwise_commute` の準備（`σ^z` の対と `G` の可換）**
+`(σ^z_aσ^z_b)G = ⋯ = G(σ^z_aσ^z_b)` の 14 行。
+
+人手の準備は `a = m`、`b = m + 1`（`m ∈ {1, …, M_col-1}`）について書くが、鎖は `b = a + 1` を使わないので、Lean は
+任意の 2 サイト `a, b` について述べる（`D_0G = GD_0` の鎖で `a → m`、`b → m + 1` として使う）。人手のサイト `M_col` は
+`lastSite M hM`、サイト `1` は `firstSite M hM` で、`G` の定義に要る `M ≠ 0` だけを仮定する。 -/
+theorem sigmaZ_mul_sigmaZ_mul_boundaryG (hM : M ≠ 0) (a b : Fin M) :
+    (sigmaZ a * sigmaZ b) * boundaryG M hM = boundaryG M hM * (sigmaZ a * sigmaZ b) :=
+  calc (sigmaZ a * sigmaZ b) * boundaryG M hM
+      = (sigmaZ a * sigmaZ b) * (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM)) := by
+        rw [boundaryG]                                  -- `def_G_boundary_operator`
+    _ = sigmaZ a * (sigmaZ b * (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM))) :=
+        Matrix.mul_assoc _ _ _                          -- `mat_mult_associative`
+    _ = sigmaZ a * ((sigmaZ b * sigmaZ (lastSite M hM)) * sigmaZ (firstSite M hM)) := by
+        rw [Matrix.mul_assoc (sigmaZ b)]                -- `mat_mult_associative`
+    _ = sigmaZ a * ((sigmaZ (lastSite M hM) * sigmaZ b) * sigmaZ (firstSite M hM)) := by
+        rw [sigmaZ_mul_sigmaZ_comm b (lastSite M hM)]   -- 準備（`σ^z` どうしの可換）（`j → b`、`k → M_col`。人手の `b` は `m+1`）
+    _ = sigmaZ a * (sigmaZ (lastSite M hM) * (sigmaZ b * sigmaZ (firstSite M hM))) := by
+        rw [Matrix.mul_assoc (sigmaZ (lastSite M hM))]  -- `mat_mult_associative`
+    _ = sigmaZ a * (sigmaZ (lastSite M hM) * (sigmaZ (firstSite M hM) * sigmaZ b)) := by
+        rw [sigmaZ_mul_sigmaZ_comm b (firstSite M hM)]  -- 準備（`σ^z` どうしの可換）（`j → b`、`k → 1`）
+    _ = (sigmaZ a * sigmaZ (lastSite M hM)) * (sigmaZ (firstSite M hM) * sigmaZ b) :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
+    _ = (sigmaZ (lastSite M hM) * sigmaZ a) * (sigmaZ (firstSite M hM) * sigmaZ b) := by
+        rw [sigmaZ_mul_sigmaZ_comm a (lastSite M hM)]   -- 準備（`σ^z` どうしの可換）（`j → a`、`k → M_col`。人手の `a` は `m`）
+    _ = sigmaZ (lastSite M hM) * (sigmaZ a * (sigmaZ (firstSite M hM) * sigmaZ b)) :=
+        Matrix.mul_assoc _ _ _                          -- `mat_mult_associative`
+    _ = sigmaZ (lastSite M hM) * ((sigmaZ a * sigmaZ (firstSite M hM)) * sigmaZ b) := by
+        rw [Matrix.mul_assoc (sigmaZ a)]                -- `mat_mult_associative`
+    _ = sigmaZ (lastSite M hM) * ((sigmaZ (firstSite M hM) * sigmaZ a) * sigmaZ b) := by
+        rw [sigmaZ_mul_sigmaZ_comm a (firstSite M hM)]  -- 準備（`σ^z` どうしの可換）（`j → a`、`k → 1`）
+    _ = sigmaZ (lastSite M hM) * (sigmaZ (firstSite M hM) * (sigmaZ a * sigmaZ b)) := by
+        rw [Matrix.mul_assoc (sigmaZ (firstSite M hM))] -- `mat_mult_associative`
+    _ = (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM)) * (sigmaZ a * sigmaZ b) :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
+    _ = boundaryG M hM * (sigmaZ a * sigmaZ b) := by
+        rw [boundaryG]                                  -- `def_G_boundary_operator`
+
+/-- **人手 `epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε`** の 5 行（`M_col ≥ 2`）。 -/
+theorem epsilon_mul_openChainD0 (hM : 2 ≤ M) :
+    epsilon M * openChainD0 M = openChainD0 M * epsilon M := by
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 2 := ⟨M - 2, by omega⟩
+  calc epsilon (r + 2) * openChainD0 (r + 2)
+      = epsilon (r + 2) * ∑ j : Fin (r + 1), sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j)) := by
+        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
+                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
+    _ = ∑ j : Fin (r + 1), epsilon (r + 2) * (sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) :=
+        mul_finite_sum_tensorPow r _ _                  -- `finite_sum_of_matrices_distributes_in_right_factor`（`r → M_col - 1`）
+    _ = ∑ j : Fin (r + 1), (sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) * epsilon (r + 2) :=
+        Finset.sum_congr rfl fun j _ =>
+          epsilon_mul_sigmaZ_mul_sigmaZ (Fin.castSucc j) (nextSite (Fin.castSucc j))
+                                                        -- 準備（`ε` と `σ^z` の対の可換）（`j → m`、`k → m+1`）
+    _ = (∑ j : Fin (r + 1), sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) * epsilon (r + 2) :=
+        (finite_sum_mul_tensorPow r _ _).symm           -- `finite_sum_of_matrices_distributes_in_left_factor`（`r → M_col - 1`）
+    _ = openChainD0 (r + 2) * epsilon (r + 2) := by
+        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
+                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
+
+/-- **人手 `epsilon_D0_G_pairwise_commute` の `εG = Gε`** の 3 行。`G` の定義に要る `M ≠ 0` だけを仮定する。 -/
 theorem epsilon_mul_boundaryG (hM : M ≠ 0) :
-    epsilon M * boundaryG M hM = boundaryG M hM * epsilon M := by
-  rw [boundaryG]
-  exact epsilon_mul_sigmaZ_mul_sigmaZ (lastSite M hM) (firstSite M hM)
+    epsilon M * boundaryG M hM = boundaryG M hM * epsilon M :=
+  calc epsilon M * boundaryG M hM
+      = epsilon M * (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM)) := by
+        rw [boundaryG]                                  -- `def_G_boundary_operator`
+    _ = (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM)) * epsilon M :=
+        epsilon_mul_sigmaZ_mul_sigmaZ (lastSite M hM) (firstSite M hM)
+                                                        -- 準備（`ε` と `σ^z` の対の可換）（`j → M_col`、`k → 1`）
+    _ = boundaryG M hM * epsilon M := by
+        rw [boundaryG]                                  -- `def_G_boundary_operator`
 
-/-- 人手の「`kronecker_product_rule` (1) より、相異なるサイトの因子は可換し、同じサイトに現れる因子は
-いずれも `σ^z` なので、各サイトの因子を並べ替える」:
-`(σ^z_aσ^z_b)(σ^z_cσ^z_d) = (σ^z_cσ^z_d)(σ^z_aσ^z_b)`。
-
-`siteProd_mul` で両辺をサイトごとの積に直すと、各サイトの因子は `1` か `σ^z` の積で、
-`1` と `σ^z` は互いに可換なので並べ替えられる。 -/
-theorem sigmaZ_mul_sigmaZ_mul_comm (a b c d : Fin M) :
-    (sigmaZ a * sigmaZ b) * (sigmaZ c * sigmaZ d)
-      = (sigmaZ c * sigmaZ d) * (sigmaZ a * sigmaZ b) := by
-  simp only [sigmaZ, siteOp_apply, ← siteProd_mul]
-  congr 1
-  funext i
-  simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-  split_ifs <;> simp
-
-/-- **人手 `epsilon_D0_G_pairwise_commute` の `D_0G = GD_0`。** -/
-theorem openChainD0_mul_boundaryG (hM : M ≠ 0) :
-    openChainD0 M * boundaryG M hM = boundaryG M hM * openChainD0 M :=
-  calc openChainD0 M * boundaryG M hM
-      = (∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          sigmaZ m * sigmaZ (nextSite m)) * boundaryG M hM := by rw [openChainD0]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          (sigmaZ m * sigmaZ (nextSite m)) * boundaryG M hM := by rw [Finset.sum_mul]
-    _ = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          boundaryG M hM * (sigmaZ m * sigmaZ (nextSite m)) :=
-        Finset.sum_congr rfl fun m _ => by
-          rw [boundaryG]
-          exact sigmaZ_mul_sigmaZ_mul_comm _ _ _ _
-    _ = boundaryG M hM * ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-          sigmaZ m * sigmaZ (nextSite m) := by rw [Finset.mul_sum]
-    _ = boundaryG M hM * openChainD0 M := by rw [openChainD0]
+/-- **人手 `epsilon_D0_G_pairwise_commute` の `D_0G = GD_0`** の 5 行（`M_col ≥ 2`）。 -/
+theorem openChainD0_mul_boundaryG (hM : 2 ≤ M) :
+    openChainD0 M * boundaryG M (by omega) = boundaryG M (by omega) * openChainD0 M := by
+  obtain ⟨r, rfl⟩ : ∃ r, M = r + 2 := ⟨M - 2, by omega⟩
+  have hM0 : r + 2 ≠ 0 := by omega
+  calc openChainD0 (r + 2) * boundaryG (r + 2) hM0
+      = (∑ j : Fin (r + 1), sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) * boundaryG (r + 2) hM0 := by
+        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
+                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
+    _ = ∑ j : Fin (r + 1), (sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) * boundaryG (r + 2) hM0 :=
+        finite_sum_mul_tensorPow r _ _                  -- `finite_sum_of_matrices_distributes_in_left_factor`（`r → M_col - 1`）
+    _ = ∑ j : Fin (r + 1), boundaryG (r + 2) hM0 * (sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j))) :=
+        Finset.sum_congr rfl fun j _ =>
+          sigmaZ_mul_sigmaZ_mul_boundaryG hM0 (Fin.castSucc j) (nextSite (Fin.castSucc j))
+                                                        -- 準備（`σ^z` の対と `G` の可換）
+    _ = boundaryG (r + 2) hM0 * ∑ j : Fin (r + 1), sigmaZ (Fin.castSucc j) * sigmaZ (nextSite (Fin.castSucc j)) :=
+        (mul_finite_sum_tensorPow r _ _).symm           -- `finite_sum_of_matrices_distributes_in_right_factor`（`r → M_col - 1`）
+    _ = boundaryG (r + 2) hM0 * openChainD0 (r + 2) := by
+        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
+                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
 
 /-! ## `epsilon_G_is_involution` -/
 

@@ -75,14 +75,14 @@ theorem I_mul_smul_H1plus (hM : 2 ≤ M) (K1 : ℂ) :
   rw [mul_comm, ← smul_smul, H1_plus_in_sigma_z_form hM, smul_add]
 
 /-- 人手 Step 2 の「`D_0` と `εG` は可換」（`epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε`・`D_0G = GD_0`）。 -/
-theorem commute_openChainD0_epsilon_mul_boundaryG (hM : M ≠ 0) :
-    Commute (openChainD0 M) (epsilon M * boundaryG M hM) :=
-  calc openChainD0 M * (epsilon M * boundaryG M hM)
-      = (openChainD0 M * epsilon M) * boundaryG M hM := (mul_assoc _ _ _).symm
-    _ = (epsilon M * openChainD0 M) * boundaryG M hM := by rw [epsilon_mul_openChainD0]
-    _ = epsilon M * (openChainD0 M * boundaryG M hM) := mul_assoc _ _ _
-    _ = epsilon M * (boundaryG M hM * openChainD0 M) := by rw [openChainD0_mul_boundaryG]
-    _ = (epsilon M * boundaryG M hM) * openChainD0 M := (mul_assoc _ _ _).symm
+theorem commute_openChainD0_epsilon_mul_boundaryG (hM : 2 ≤ M) :
+    Commute (openChainD0 M) (epsilon M * boundaryG M (by omega)) :=
+  calc openChainD0 M * (epsilon M * boundaryG M (by omega))
+      = (openChainD0 M * epsilon M) * boundaryG M (by omega) := (mul_assoc _ _ _).symm
+    _ = (epsilon M * openChainD0 M) * boundaryG M (by omega) := by rw [epsilon_mul_openChainD0 hM]
+    _ = epsilon M * (openChainD0 M * boundaryG M (by omega)) := mul_assoc _ _ _
+    _ = epsilon M * (boundaryG M (by omega) * openChainD0 M) := by rw [openChainD0_mul_boundaryG hM]
+    _ = (epsilon M * boundaryG M (by omega)) * openChainD0 M := (mul_assoc _ _ _).symm
 
 /-- **人手 Step 2**: `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)`（`V1_plus_exponential_representation`、
 `H1_plus_in_sigma_z_form`、`K_1D_0` と `K_1εG` の可換性と `theorem_exp_product`）。 -/
@@ -90,7 +90,7 @@ theorem V1plus_eq_exp_openChainD0_mul_exp (hM : 2 ≤ M) (K1 : ℂ) :
     V1plus M K1
       = matExp (K1 • openChainD0 M) * matExp (K1 • (epsilon M * boundaryG M (by omega))) := by
   have hc : Commute (K1 • openChainD0 M) (K1 • (epsilon M * boundaryG M (by omega))) :=
-    ((commute_openChainD0_epsilon_mul_boundaryG (by omega)).smul_left K1).smul_right K1
+    ((commute_openChainD0_epsilon_mul_boundaryG hM).smul_left K1).smul_right K1
   rw [V1plus_exponential_representation, I_mul_smul_H1plus hM, matExp, matExp, matExp,
     Matrix.exp_add_of_commute _ _ hc]
 
@@ -141,7 +141,7 @@ theorem epsilon_mul_V1plus (hM : 2 ≤ M) (K1 : ℝ) :
   have hM0 : M ≠ 0 := by omega
   -- `εexp(K_1D_0) = exp(K_1D_0)ε`（`εD_0 = D_0ε` から、級数の部分和とも極限とも可換）
   have hcomm : Commute (epsilon M) (matExp ((K1 : ℂ) • openChainD0 M)) := by
-    have h : Commute (epsilon M) (openChainD0 M) := epsilon_mul_openChainD0 M
+    have h : Commute (epsilon M) (openChainD0 M) := epsilon_mul_openChainD0 hM
     rw [matExp]
     exact (h.smul_right _).exp_right
   calc epsilon M * V1plus M (K1 : ℂ)

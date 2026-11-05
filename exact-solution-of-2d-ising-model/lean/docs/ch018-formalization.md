@@ -219,7 +219,10 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.epsilon_mul_openChainD0` / `epsilon_mul_boundaryG` / `openChainD0_mul_boundaryG` | `εD_0 = D_0ε`、`εG = Gε`、`D_0G = GD_0` | `epsilon_D0_G_pairwise_commute` |
+| `Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ` | `ε(σ^z_jσ^z_k) = (σ^z_jσ^z_k)ε`（8 段の `calc`） | `epsilon_D0_G_pairwise_commute` の準備（`ε` と `σ^z` の対の可換）の 8 行 |
+| `Ising2D.sigmaZ_mul_sigmaZ_comm` | `σ^z_jσ^z_k = σ^z_kσ^z_j`（`j ≠ k` は `siteOp_mul_comm`） | 同 準備（`σ^z` どうしの可換） |
+| `Ising2D.sigmaZ_mul_sigmaZ_mul_boundaryG` | `(σ^z_aσ^z_b)G = G(σ^z_aσ^z_b)`（14 段の `calc`） | 同 準備（`σ^z` の対と `G` の可換）の 14 行 |
+| `Ising2D.epsilon_mul_openChainD0` / `epsilon_mul_boundaryG` / `openChainD0_mul_boundaryG` | `εD_0 = D_0ε`（`M_col ≥ 2`、5 段）、`εG = Gε`（3 段）、`D_0G = GD_0`（`M_col ≥ 2`、5 段） | `epsilon_D0_G_pairwise_commute` の 3 つの鎖 |
 | `Ising2D.epsilon_mul_boundaryG_sq` | `(εG)^2 = I` | `epsilon_G_is_involution` |
 | `Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin` | `(σ^z_aσ^z_b)f_{ι(s)} = (s(a)s(b))_ℂ f_{ι(s)}`（7 段の `calc`） | `D0_G_diagonal_action` の準備の 7 行 |
 | `Ising2D.openChainD0_mulVec_basisVec` / `boundaryG_mulVec_basisVec` | `D_0f_{ι(s)} = (∑_m s(m)s(m+1))_ℂ f_{ι(s)}`（5 段）、`Gf_{ι(s)} = (s(M_col)s(1))_ℂ f_{ι(s)}`（8 段） | `D0_G_diagonal_action` の開鎖項の 5 行・周期境界項の 8 行 |
@@ -327,7 +330,7 @@
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
-| `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
+| `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性（`epsilon_anticomm_sigmaZ`）・相異なるサイトの `σ^z` の可換性（`siteOp_mul_comm`）・`(σ^z)^2 = I`・対角作用という既存の関係を、環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無い（`H1_plus_in_sigma_z_form` と同じ判断） |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
 | `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |
 | `trace_of_epsilon_V_plus` Step 3 | `Ising2D.matExp_smul_openChainD0` ほか | **置かない** | 一般化できるのは行列の列の読み取り（任意の半環で成り立つ自明な事実）と `{±1}` の符号反転の組合せだけで、必要十分版にしても何が本質的かについて情報を与えない |
