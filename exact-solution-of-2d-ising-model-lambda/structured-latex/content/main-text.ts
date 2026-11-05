@@ -9110,30 +9110,30 @@ j\in O'
  &\ \Longleftrightarrow\ \operatorname{len}_{\sigma}(j)\text{ は奇数}
  &&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit_length}\bigr)\\
  &\ \Longleftrightarrow\ j\in O
- &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`O'=O\qquad\bigl(\because\ \forall j\in\mathcal J,\ j\in O'\Longleftrightarrow j\in O\text{ と集合の外延性}\bigr)`),
                 paragraph([math(String.raw`O=\varnothing`), " なら、両方で選択を定めない。以下は ", math(String.raw`O\ne\varnothing`), " とする。集合等号により ", math(String.raw`O'\ne\varnothing`), " でもあるから、", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in O`), " と ", math(String.raw`m':=\operatorname{oddmin}(\tau)\in O'`), " がともに定まる（", ref("def_odd_orbit_selection"), "）。"]),
                 displayMath(String.raw`\begin{aligned}
 m'\in O&\ \Longleftrightarrow\ m'\in O'
- &&\bigl(\because\ O'=O\bigr),\\
+ &&\bigl(\because\ O'=O\bigr)\\
 m\in O'&\ \Longleftrightarrow\ m\in O
- &&\bigl(\because\ O'=O\bigr).
+ &&\bigl(\because\ O'=O\bigr)
 \end{aligned}`),
                 paragraph(["各右辺は最小元自身の所属により成り立つ。したがって、各集合での最小性により、"]),
                 displayMath(String.raw`\begin{aligned}
-m&\preceq m'&&\bigl(\because\ m'\in O\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr),\\
-m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr).
+m&\preceq m'&&\bigl(\because\ m'\in O\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr)\\
+m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr)
 \end{aligned}`),
                 paragraph(["この二つの比較から、"]),
-                displayMath(String.raw`m'=m\qquad\bigl(\because\ \text{順序の反対称律}\bigr).`),
+                displayMath(String.raw`m'=m\qquad\bigl(\because\ \text{順序の反対称律}\bigr)`),
                 paragraph(["最後に、選ぶ台を比較する。"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{OddOrb}(\tau)
  &=\operatorname{Orb}_{\tau}(m')&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
  &=\operatorname{Orb}_{\sigma}(m')&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\bigr)\\
  &=\operatorname{Orb}_{\sigma}(m)&&\bigl(\because\ m'=m\bigr)\\
- &=\operatorname{OddOrb}(\sigma)&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+ &=\operatorname{OddOrb}(\sigma)&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)
 \end{aligned}`),
                 paragraph(["以上で三つの一致が得られた。", math(String.raw`\mathcal J=\varnothing`), " の場合も奇数点の集合は空であり、集合等号が成り立つ。有限集合・自然数・その集合に固定した順序だけを使い、実数体・複素数体への脱出はない。"]),
               ],
@@ -62329,6 +62329,57 @@ s(j')-s(j)
                         "空和は零とするため ", math(String.raw`L=1`), " でも定義できる。",
                         "この定義は有限和と二で割った余りだけを使う。",
                       ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_standard_dual_height_horizontal_internal",
+                  focus: {
+                    id: "kac_ward_claim_standard_dual_height_horizontal_internal",
+                    kind: "claim",
+                    title: { text: "標準双対路の横方向の内部一歩で高さが変わる条件" },
+                    labels: ["claim_standard_dual_height_horizontal_internal"],
+                    habitat: "N",
+                    verification: ["sagemath/check/standard-dual-height-horizontal-internal"],
+                    lean: [
+                      "Ising2DLambda.KacWard.standardDualHeight_horizontal_internal",
+                      "Ising2DLambda.KacWard.standardDualHeight_horizontal_internal_changes",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_internal",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight_horizontal_internal_changes",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、代表 ",
+                        math(String.raw`0\le i<L-1`), " と ", math(String.raw`0\le j<L`),
+                        " を取る。", ref("def_standard_dual_height"), " の高さは",
+                      ]),
+                      displayMath(String.raw`f_\gamma(i+1,j)=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm h}(i+1,j))\bigr)\bmod2`),
+                      paragraph(["を満たす。したがって、高さが変わることと ",
+                        math(String.raw`N_\gamma(n_{\mathrm h}(i+1,j))=1`), " は同値である。"]),
+                    ],
+                    proof: [
+                      paragraph(["定義の列方向の和は同じ ", math(String.raw`j`),
+                        " を用いるので変わらない。行方向の和には末項だけが加わる。すなわち"]),
+                      displayMath(String.raw`\begin{aligned}
+f_\gamma(i+1,j)
+&=\left(\sum_{c=1}^{j}N_\gamma(n_{\mathrm v}(0,c))
+  +\sum_{r=1}^{i+1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
+&&\bigl(\because\ \blkref{def_standard_dual_height}\bigr)\\
+&=\left(\sum_{c=1}^{j}N_\gamma(n_{\mathrm v}(0,c))
+  +\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))
+  +N_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2
+&&\bigl(\because\ \text{有限和の末項を分ける}\bigr)\\
+&=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm h}(i+1,j))\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_standard_dual_height}\text{ と剰余の加法則}\bigr)
+\end{aligned}`),
+                      paragraph(["二つの高さと辺の通過偶奇は ", math(String.raw`\{0,1\}`),
+                        " に属する（", ref("def_standard_dual_height"), "、",
+                        ref("def_walk_base_edge_parity"),
+                        "）。二を法とした加法では、一を足したとき、かつそのときに限り値が変わる。"]),
                     ],
                   },
                 },
