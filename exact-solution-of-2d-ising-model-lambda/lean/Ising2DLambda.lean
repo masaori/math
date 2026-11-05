@@ -1240,6 +1240,8 @@ import Ising2DLambda.NecSuf.KacWard.CellSetBoundaryCoefficients
 import Ising2DLambda.KacWard.CellSetBoundaryCoefficientsFromNecSuf
 import Ising2DLambda.KacWard.HeightOneBoundarySupport
 import Ising2DLambda.NecSuf.KacWard.HeightOneBoundarySupport
+import Ising2DLambda.KacWard.VertexSimpleIncidentEdges
+import Ising2DLambda.NecSuf.KacWard.VertexSimpleIncidentEdges
 import Ising2DLambda.KacWard.DualCellComponent
 import Ising2DLambda.NecSuf.KacWard.DualCellComponent
 import Ising2DLambda.KacWard.DualCellComponentFromNecSuf

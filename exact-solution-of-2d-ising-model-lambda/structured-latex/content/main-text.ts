@@ -63937,6 +63937,44 @@ N_\gamma(n_{\mathrm v}(0,0))
               labels: [],
               title: { text: "閉歩道とセル集合の境界鎖の係数一致" },
               children: [{
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_simple_incident_edges",
+                  focus: {
+                    id: "kac_ward_claim_vertex_simple_incident_edges",
+                    kind: "claim",
+                    title: { text: "頂点単純閉路の通過頂点に接する辺は二本である" },
+                    labels: ["claim_vertex_simple_incident_edges"],
+                    habitat: "N",
+                    verification: ["sagemath/check/vertex-simple-incident-edges"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimple_incident_edges",
+                      "Ising2DLambda.NecSuf.KacWard.vertexSimple_incident_edges",
+                    ],
+                    statement: [
+                      paragraph(["閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " の接触対数が零とする（", ref("def_contact_pair_count"), "）。任意の ",
+                        math(String.raw`k\in I_m`), " に対し、通過頂点 ",
+                        math(String.raw`v_k:=\operatorname{tgt}(\vec e_k)`), " に接する辺の端点寄与は" ]),
+                      displayMath(String.raw`\sum_{j\in I_m}\left(\mathbf1_{\operatorname{src}(\vec e_j)=v_k}+\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}\right)=2`),
+                      paragraph(["である。和は辺列の各項を標識とともに数えるので、辺長一で基底辺の両端が同じ頂点でも二つの端点寄与を残す。"]),
+                    ],
+                    proof: [
+                      paragraph(["接触対数が零なので通過頂点は添字ごとに相異なる（", ref("claim_zero_contact_iff_distinct_pass_vertices"), "）。従って終点寄与の和は、添字 ", math(String.raw`k`), " の一項だけである。"]),
+                      displayMath(String.raw`\sum_{j\in I_m}\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}=1\qquad\bigl(\because\ \blkref{claim_zero_contact_iff_distinct_pass_vertices}\bigr)`),
+                      paragraph(["閉歩道の各接続では、次の辺の始点が前の辺の終点であり、末項の次は初項である（", ref("def_closed_nonbacktracking_walk"), "、", ref("def_closed_walk_passes"), "）。巡回添字の付け替えにより始点寄与の和も一である。"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{j\in I_m}\left(\mathbf1_{\operatorname{src}(\vec e_j)=v_k}+\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}\right)
+&=\sum_{j\in I_m}\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}+\sum_{j\in I_m}\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}
+&&\bigl(\because\ \blkref{def_closed_walk_passes}\text{ による巡回再添字}\bigr)\\
+&=1+1&&\bigl(\because\ \blkref{claim_zero_contact_iff_distinct_pass_vertices}\bigr)\\
+&=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
                 role: "primary",
                 element: {
                   kind: "elementGroup",
@@ -69986,7 +70024,7 @@ U_{cm-1}&=u_{m-1}
 &&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ の反復列の末項計算}\bigr),\\
 R_0&=r_0&&\bigl(\because\ 0\bmod n=0\bigr),\\
 R_{cn-1}&=r_{n-1}
-&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ の反復列の末項計算}\bigr).
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ の反復列の末項計算}\bigr)
 \end{aligned}`),
                       paragraph(["となる。四接合の整数の和と、その固定値を"]),
                       displayMath(String.raw`\begin{aligned}
@@ -70010,7 +70048,7 @@ J_c
 &=\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},r_0)
 +\vartheta(r_{n-1},x_0)+\vartheta(x_{d-1},u_0)
 &&\bigl(\because\ U_0=u_0\bigr)\\
-&=J&&\bigl(\because\ J\text{ の定義}\bigr).
+&=J&&\bigl(\because\ J\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph([
                         "四つの長さ ", math(String.raw`cm,b,cn,d`),
@@ -70028,7 +70066,7 @@ C_{N_c}\bigl(z^{(c)}\bigr)
 &=I_{cm}(U)+I_b(v)+I_{cn}(R)+I_d(x)+J_c
 &&\bigl(\because\ J_c\text{ の定義}\bigr)\\
 &=I_{cm}(U)+I_b(v)+I_{cn}(R)+I_d(x)+J
-&&\bigl(\because\ J_c=J\bigr).
+&&\bigl(\because\ J_c=J\bigr)
 \end{aligned}`),
                       paragraph([
                         "整数 ", math(String.raw`A_c:=I_{cm}(U)`), "、",
@@ -70038,7 +70076,7 @@ C_{N_c}\bigl(z^{(c)}\bigr)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 C_{N_c}\bigl(z^{(c)}\bigr)&=A_c+B_c+K
-&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則と }A_c,B_c,K\text{ の定義}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則と }A_c,B_c,K\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph(["同じ表示を ", math(String.raw`c+1`), " にも用いて、"]),
                       displayMath(String.raw`\begin{aligned}
@@ -70052,7 +70090,7 @@ C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
 &=C_m(u)+(B_{c+1}-B_c)
 &&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ を }u\text{ へ適用}\bigr)\\
 &=C_m(u)+C_n(r)
-&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ を }r\text{ へ適用}\bigr).
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ を }r\text{ へ適用}\bigr)
 \end{aligned}`),
                       paragraph(["全計算は有限個の整数ベクトルと整数の有限和で閉じる。"]),
                     ],

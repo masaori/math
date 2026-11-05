@@ -664,6 +664,7 @@ export const ALL_LABELS = [
   "claim_vertex_local_pairing_product",
   "claim_vertex_port_bijection",
   "claim_vertex_simple_cycle_turning_by_seam_parity",
+  "claim_vertex_simple_incident_edges",
   "claim_vertex_simple_orbit_quadratic_sign",
   "claim_vertex_simple_plane_lift_points_distinct",
   "claim_vertex_simple_winding_zero_or_primitive",
