@@ -5,11 +5,50 @@ import Ising2DLambda.KacWard.ParallelStaircaseTransverseWidth
 import Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurning
 import Ising2DLambda.KacWard.ClosedNonbacktrackingWalk
 import Ising2DLambda.KacWard.SuccessorDirectionSelection
+import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
+import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkPeriodicDirectionNonbacktracking
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
+
+/-- 一周期の有限個の横断水準から最大値を選び、その添字を切断始点にする。 -/
+theorem periodicPlaneLift_maximum_cut
+    (m L : ℕ) (hm : 0 < m) (base : ℤ → ℤ × ℤ) (wv wh : ℤ) :
+    ∃ k₀ : ℤ, ∀ j : ℕ,
+      windingTransverseCoordinate wh wv
+          (periodicPlaneLift m base L wv wh (k₀ + j)) ≤
+        windingTransverseCoordinate wh wv
+          (periodicPlaneLift m base L wv wh k₀) := by
+  obtain ⟨k, hk, hmax⟩ := Finset.exists_max_image (Finset.range m)
+    (fun i : ℕ => windingTransverseCoordinate wh wv (base i))
+    ⟨0, Finset.mem_range.mpr hm⟩
+  have hkl : k < m := Finset.mem_range.mp hk
+  refine ⟨k, ?_⟩
+  intro j
+  rw [periodicPlaneLift_transverseCoordinate_eq_base,
+    periodicPlaneLift_transverseCoordinate_eq_base]
+  have hrem : 0 ≤ ((k : ℤ) + j) % (m : ℤ) := Int.emod_nonneg _ (by omega)
+  have hlt : ((k : ℤ) + j) % (m : ℤ) < m := Int.emod_lt_of_pos _ (by omega)
+  have hle := hmax (((k : ℤ) + j) % (m : ℤ)).toNat
+    (Finset.mem_range.mpr (by omega))
+  have hcast : (((((k : ℤ) + j) % (m : ℤ)).toNat : ℕ) : ℤ) =
+      ((k : ℤ) + j) % (m : ℤ) := Int.toNat_of_nonneg hrem
+  have hkrem : (k : ℤ) % (m : ℤ) = k := Int.emod_eq_of_lt (by omega) (by omega)
+  simpa [hcast, hkrem] using hle
+
+/-- 実際の閉歩道の平面持ち上げにも、最大横断水準の切断始点がある。 -/
+theorem periodicPlaneLiftFromWalk_maximum_cut {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) :
+    ∃ k₀ : ℤ, ∀ j : ℕ,
+      windingTransverseCoordinateFromWalk γ
+          (periodicPlaneLiftFromWalk γ (k₀ + j)) ≤
+        windingTransverseCoordinateFromWalk γ
+          (periodicPlaneLiftFromWalk γ k₀) := by
+  exact periodicPlaneLift_maximum_cut (m + 1) L (by omega)
+    (planeLiftIntegerBase γ) (verticalDirectedWindingNumber γ)
+    (horizontalDirectedWindingNumber γ)
 
 /-- 実際の閉歩道の有限辺列を、周期方向番号の循環非後退条件へ移す。 -/
 theorem closedWalk_periodic_direction_nonbacktracking {L m : ℕ} [NeZero L]

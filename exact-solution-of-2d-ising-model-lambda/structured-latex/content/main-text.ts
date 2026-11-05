@@ -68490,7 +68490,7 @@ D^Q_s&=(Q+q_s d)+C^\gamma_{r_s}
 &=Q+\bigl(((0,0)+q_s d)+C^\gamma_{r_s}\bigr)
 &&\bigl(\because\ \mathbb Z^2\text{ の零元の法則}\bigr)\\
 &=Q+D^0_s
-&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr).
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`0\le i<i+1\le b`), " より ",
@@ -68502,7 +68502,7 @@ D^Q_{j_\varepsilon(i+1)}-D^Q_{j_\varepsilon(i)}
 &=(Q+D^0_{j_\varepsilon(i+1)})-(Q+D^0_{j_\varepsilon(i)})
 &&\bigl(\because\ \text{直前の }D^Q_s=Q+D^0_s\bigr)\\
 &=D^0_{j_\varepsilon(i+1)}-D^0_{j_\varepsilon(i)}
-&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr).
+&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr)
 \end{aligned}`),
                       paragraph([
                         "一側閉包の基点を ", math(String.raw`S\in\mathbb Z^2`), "、周期ベクトルを ",
@@ -68518,7 +68518,7 @@ v^{(c)}_i&=D^{S+cB}_{i+1}-D^{S+cB}_i
 x^{(c)}_i&=D^S_{b-(i+1)}-D^S_{b-i}
 &&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
 &=D^0_{b-(i+1)}-D^0_{b-i}
-&&\bigl(\because\ \text{上の等式へ }Q=S,\ \varepsilon=1\text{ を代入}\bigr).
+&&\bigl(\because\ \text{上の等式へ }Q=S,\ \varepsilon=1\text{ を代入}\bigr)
 \end{aligned}`),
                       paragraph([
                         "右辺はいずれも ", math(String.raw`\gamma,t,i`), " だけで定まり、",
