@@ -63,9 +63,11 @@
 | `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | 同 Step 3 の `sup` を取る操作 |
 | **`Ising2D.trace_power_sandwich`** | `c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n` | **`trace_power_sandwich`** |
 | `Ising2D.symTransfer` | `W := B V₂ B`（`B = V₁^{1/2}`） | `def_symmetrized_transfer_matrix` |
-| `Ising2D.symTransfer_pow_succ` | `(BV₂B)^{k+1} = B(V₂BB)^k V₂ B` | `Z_equals_trace_of_W` の括り直し |
-| `Ising2D.mul_pow_mul_eq` | `V₁(V₂V₁)^k V₂ = (V₁V₂)^{k+1}` | 同上の最後の等号 |
-| **`Ising2D.trace_symTransfer_pow`** | `tr(W^n) = tr((V₁V₂)^n)` | **`Z_equals_trace_of_W`** |
+| `Ising2D.open_product_pow` | `X, Y ∈ Mat(n, ℂ)` で `(X(YX)^k)Y = (XY)^{k+1}` | `Z_equals_trace_of_W` の準備 2（`k = 0` の 5 行と帰納段階の 6 行） |
+| `Ising2D.symmetrized_pow_succ` | `BB = V₁` のもとで `((BV₂)B)^{k+1} = ((B(V₂V₁)^k)V₂)B` | 同 準備 3（`k = 0` の 6 行と帰納段階の 12 行） |
+| **`Ising2D.trace_mul_pow_eq_trace_symmetrized_pow`** | 係数が `ℂ` の行列で、`n ≥ 1` なら `tr((V₁V₂)^n) = tr(((BV₂)B)^n)` | **`Z_equals_trace_of_W`** の本体（6 行） |
+| `Ising2D.partition_function_eq_trace_physicalSymTransferC`（`PhysicalPartitionFunctionSandwich.lean`） | 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W` は `physicalSymTransferC`） | 同「とくに」（2 行） |
+| `Ising2D.trace_mul_pow_eq_trace_symTransfer_pow` / `partition_function_eq_trace_symTransfer_pow`（`ClaimZEqualsTraceOfWFromNecSuf.lean`） | 係数が `ℝ` の行列での同じ等式（必要十分版の特殊化）と、`Z = tr((V₁V₂)^N)` を仮定に取る「とくに」 | `partition_function_sandwich` が使う読み |
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR`（`PhysicalSymTransferBridge.lean`） | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
@@ -130,7 +132,7 @@
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
-| `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
+| `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`。使う側の実行列の読み `trace_mul_pow_eq_trace_symTransfer_pow` も同じ特殊化） |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
@@ -164,13 +166,15 @@
   `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
   転送行列であることも使わない。具体版はこの一般定理へ物理的な四因子を特殊化して得られる。
 
-- **`W` の対称性・正定値性、および `Z = tr(W^n)` は、
-  抽象化しても失われる構造がない。**
-  `Z = tr(W^n)` に効いているのは結合法則と跡の巡回性 `tr(AB) = tr(BA)` だけで、
-  Lean 側の `Ising2D.trace_symTransfer_pow` は `B * B = V₁` 以外の仮定を一切置いていない
-  （`V₂` も任意の行列でよい）。正定値性は「合同変換 `B*AB` が正定値性を保つ」ことに尽き、
+- **`Z = tr(W^n)` に効いているのは、積の結合律・単位元・冪の定め方（モノイド）と、跡の巡回性 `τ(ab) = τ(ba)` だけである。**
+  必要十分版 `NecSuf/OpenProductPowAndCyclicTrace.lean` は具体版と同じ段の calc を、任意のモノイドと巡回的な写像 `τ` で述べる。
+  加法・係数・`τ` の線型性、`B` が平方根・可逆・正定値であることは効かない（`BB = V₁` だけを仮定する）。
+  係数が `ℂ` の具体版（人手の主張）と、使う側の係数が `ℝ` の読みは、どちらもこの特殊化として得られる。
+
+- **`W` の対称性・正定値性は、抽象化しても失われる構造がない。**
+  正定値性は「合同変換 `B*AB` が正定値性を保つ」ことに尽き、
   Lean 側は `B` が対称かつ**可逆**であることしか使っていない（`B` が `exp` であることは不要）。
-  いずれも既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
+  既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
 
 - **`W_has_positive_entries` の Step 3（`NecSuf/SandwichByDiagonal.lean`）に効いているのは、添字が有限であること、
   係数の `0` が乗法で吸収されること、挟む行列 `B` の非対角成分が `0` であることだけである。**

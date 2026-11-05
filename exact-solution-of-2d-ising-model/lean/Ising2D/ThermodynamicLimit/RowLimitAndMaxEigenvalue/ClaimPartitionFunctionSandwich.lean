@@ -14,7 +14,7 @@ Lean では `Ising2D.partition_function_via_transfer_matrix`）は **仮定 `hZ`
 必要十分版は置かない（この主張は `trace_power_sandwich` の言い換えであり、
 抽象的な内容は `Ising2D/NecSuf/RayleighMoments.lean` に尽きている）。
 -/
-import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimZEqualsTraceOfWFromNecSuf
 
 set_option linter.unusedSectionVars false
 
@@ -38,13 +38,10 @@ theorem partition_function_sandwich {B V1 V2 : Matrix n n ℝ} (hBB : B * B = V1
     {Z : ℝ} {N : ℕ} (hN : 1 ≤ N) (hZ : Z = ((V1 * V2) ^ N).trace) :
     rayleighSup (symTransfer B V2) ^ N ≤ Z ∧
       Z ≤ (Fintype.card n : ℝ) * rayleighSup (symTransfer B V2) ^ N := by
-  obtain ⟨k, rfl⟩ : ∃ k, N = k + 1 := ⟨N - 1, by omega⟩
   have hWsymm : (symTransfer B V2).IsSymm := symTransfer_isSymm hB hV2symm
   have hWpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ symTransfer B V2 *ᵥ x :=
     fun x hx => symTransfer_posDef hB hBunit hV2pd x hx
-  have hZW : Z = (symTransfer B V2 ^ (k + 1)).trace := by
-    rw [hZ, trace_symTransfer_pow hBB k]
-  rw [hZW]
-  exact trace_power_sandwich hWsymm hWpd (by omega)
+  rw [partition_function_eq_trace_symTransfer_pow hBB hN hZ]  -- `Z_equals_trace_of_W` の「とくに」
+  exact trace_power_sandwich hWsymm hWpd hN
 
 end Ising2D

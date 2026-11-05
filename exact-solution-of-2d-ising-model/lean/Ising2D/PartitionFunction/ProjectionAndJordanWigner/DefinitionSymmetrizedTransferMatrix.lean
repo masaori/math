@@ -24,7 +24,7 @@
 それらの Lean 形式化は本タスクの担当外なので **import せず仮定として受け取る**。
 具体的には次を仮定の形にしている。
 
-1. `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` の仮定。
+1. `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` と `ClaimZEqualsTraceOfWFromNecSuf.lean` の `partition_function_eq_trace_symTransfer_pow` の仮定（具体的な `Z` については `PhysicalPartitionFunctionSandwich.lean` が Lean の `partition_function_via_transfer_matrix` を引く）。
 2. `V₁^{1/2}` が**正の対角行列**であること（章 009 の `sigma_z_diagonal_action` +
    `exp_of_diagonal_matrix`）— ここでは `Ising2D.diagExp d`（`d : n → ℝ`）として与える。
    人手証明の `d μ = (1/2)K₁ ∑_m μ(m)μ(m+1)` に対応する。
@@ -36,6 +36,7 @@
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 
 set_option linter.unusedSectionVars false
 
@@ -51,34 +52,96 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 /-- 人手証明の `W := V₁^{1/2} V₂ V₁^{1/2}`（`B = V₁^{1/2}`）。 -/
 def symTransfer (B V2 : Matrix n n ℝ) : Matrix n n ℝ := B * V2 * B
 
-/-- `(B V₂ B)^{k+1} = B (V₂ (B B))^k V₂ B`（人手証明の結合法則による括り直し）。 -/
-theorem symTransfer_pow_succ (B V2 : Matrix n n ℝ) (k : ℕ) :
-    symTransfer B V2 ^ (k + 1) = B * (V2 * (B * B)) ^ k * V2 * B := by
+/-! ## `Z = tr(W^{N_row})`（人手 `Z_equals_trace_of_W`）
+
+人手は `B, V_1, V_2 ∈ Mat(2^{M_col}, ℂ)` で述べるので、具体版も係数が `ℂ` の行列について、人手の準備 2・準備 3・本体の鎖と
+同じ段の calc で置く（準備 1 の `BB = V_1`・`W = (BV_2)B` は仮定 `hBB`・`hW` として受け取る）。「とくに」の
+`Z(K_1,K_2) = tr(W^{N_row})` は、具体的な `V_1`・`V_2`・`V_1^{1/2}` について
+`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean` の `partition_function_eq_trace_physicalSymTransferC` に置く。
+人手の `X^0 := I`、`X^{m+1} := X^m X`（`def_exp` (1)）は mathlib の `pow_zero`・`pow_succ` と同じ定め方である。
+`mat_mult_associative` は具体版が無いので、既存の慣行どおり `Matrix.mul_assoc` を 1 段に 1 回ずつ引く。
+単位行列の左右の単位律（`identity_matrix_is_left_unit_of_mat_mult`・`_right_unit_`）の具体版は添字が `Fin m` の行列にしかないので、
+同じ主張の mathlib の一段の補題 `Matrix.one_mul`・`Matrix.mul_one` を引く。跡の巡回性（`trace_basic_properties` (2)）は具体版 `trace_cyclic`。
+必要十分版は `NecSuf/OpenProductPowAndCyclicTrace.lean`（モノイドと巡回的な写像）で、具体版とその特殊化の一致、
+および使う側（`partition_function_sandwich`）が引く係数が `ℝ` の行列での読みは
+同じフォルダの `ClaimZEqualsTraceOfWFromNecSuf.lean` にある。 -/
+
+/-- 人手 `Z_equals_trace_of_W` の準備 2: `(X(YX)^k)Y = (XY)^{k+1}`（`k` の帰納法。`k = 0` の 5 行と帰納段階の 6 行）。 -/
+theorem open_product_pow (X Y : Matrix n n ℂ) (k : ℕ) :
+    (X * (Y * X) ^ k) * Y = (X * Y) ^ (k + 1) := by
   induction k with
-  | zero => simp [symTransfer]
+  | zero =>
+    calc (X * (Y * X) ^ 0) * Y
+        = (X * 1) * Y := by rw [pow_zero]                      -- `def_exp` (1) の `(YX)^0 := I`
+      _ = X * Y := by rw [Matrix.mul_one]                      -- `identity_matrix_is_right_unit_of_mat_mult`
+      _ = 1 * (X * Y) := (Matrix.one_mul _).symm               -- `identity_matrix_is_left_unit_of_mat_mult`
+      _ = (X * Y) ^ 0 * (X * Y) := by rw [pow_zero]            -- `def_exp` (1) の `(XY)^0 := I`
+      _ = (X * Y) ^ (0 + 1) := (pow_succ _ _).symm             -- `def_exp` (1) の `(XY)^{0+1} := (XY)^0(XY)`
   | succ k ih =>
-      rw [pow_succ, ih]
-      simp only [symTransfer, pow_succ]
-      noncomm_ring
+    calc (X * (Y * X) ^ (k + 1)) * Y
+        = (X * ((Y * X) ^ k * (Y * X))) * Y := by rw [pow_succ] -- `def_exp` (1) の `(YX)^{k+1} := (YX)^k(YX)`
+      _ = ((X * (Y * X) ^ k) * (Y * X)) * Y := by
+          rw [← Matrix.mul_assoc X ((Y * X) ^ k) (Y * X)]      -- `mat_mult_associative`
+      _ = (((X * (Y * X) ^ k) * Y) * X) * Y := by
+          rw [← Matrix.mul_assoc (X * (Y * X) ^ k) Y X]          -- `mat_mult_associative`
+      _ = ((X * Y) ^ (k + 1) * X) * Y := by rw [ih]            -- 帰納法の仮定
+      _ = (X * Y) ^ (k + 1) * (X * Y) := Matrix.mul_assoc _ _ _ -- `mat_mult_associative`
+      _ = (X * Y) ^ (k + 1 + 1) := (pow_succ _ _).symm         -- `def_exp` (1) の `(XY)^{(k+1)+1} := (XY)^{k+1}(XY)`
 
-/-- `V₁ (V₂ V₁)^k V₂ = (V₁ V₂)^{k+1}`（人手証明の最後の等号）。 -/
-theorem mul_pow_mul_eq (V1 V2 : Matrix n n ℝ) (k : ℕ) :
-    V1 * (V2 * V1) ^ k * V2 = (V1 * V2) ^ (k + 1) := by
+/-- 人手 `Z_equals_trace_of_W` の準備 3: `B B = V_1`（準備 1）のもとで `W^{k+1} = ((B(V_2V_1)^k)V_2)B`
+（`k` の帰納法。`k = 0` の 6 行と帰納段階の 12 行。帰納段階の `C := B(V_2V_1)^k` は等式 `hC` を持つ変数として置く）。
+準備 1 の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）は仮定 `hW` として受け取る。 -/
+theorem symmetrized_pow_succ {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
+    (hW : W = (B * V2) * B) (k : ℕ) :
+    W ^ (k + 1) = ((B * (V2 * V1) ^ k) * V2) * B := by
   induction k with
-  | zero => simp
+  | zero =>
+    calc W ^ (0 + 1)
+        = W ^ 0 * W := pow_succ _ _                            -- `def_exp` (1) の `W^{0+1} := W^0W`
+      _ = 1 * W := by rw [pow_zero]                            -- `def_exp` (1) の `W^0 := I`
+      _ = W := Matrix.one_mul _                                -- `identity_matrix_is_left_unit_of_mat_mult`
+      _ = (B * V2) * B := hW                                   -- 準備 1（`def_symmetrized_transfer_matrix`）
+      _ = ((B * 1) * V2) * B := by rw [Matrix.mul_one]         -- `identity_matrix_is_right_unit_of_mat_mult`
+      _ = ((B * (V2 * V1) ^ 0) * V2) * B := by rw [pow_zero]   -- `def_exp` (1) の `(V_2V_1)^0 := I`
   | succ k ih =>
-      rw [pow_succ, pow_succ, ← ih]
-      noncomm_ring
+    obtain ⟨C, hC⟩ : ∃ C : Matrix n n ℂ, C = B * (V2 * V1) ^ k := ⟨_, rfl⟩
+    calc W ^ (k + 1 + 1)
+        = W ^ (k + 1) * W := pow_succ _ _                      -- `def_exp` (1) の `W^{(k+1)+1} := W^{k+1}W`
+      _ = (((B * (V2 * V1) ^ k) * V2) * B) * W := by rw [ih]   -- 帰納法の仮定
+      _ = ((C * V2) * B) * W := by rw [hC]                     -- `C` の置き方
+      _ = ((C * V2) * B) * ((B * V2) * B) := by rw [hW]        -- 準備 1（`def_symmetrized_transfer_matrix`）
+      _ = (((C * V2) * B) * (B * V2)) * B :=
+          (Matrix.mul_assoc _ _ _).symm                        -- `mat_mult_associative`
+      _ = ((((C * V2) * B) * B) * V2) * B := by
+          rw [← Matrix.mul_assoc ((C * V2) * B) B V2]          -- `mat_mult_associative`
+      _ = (((C * V2) * (B * B)) * V2) * B := by
+          rw [Matrix.mul_assoc (C * V2) B B]                   -- `mat_mult_associative`
+      _ = (((C * V2) * V1) * V2) * B := by rw [hBB]            -- 準備 1（`def_transfer_matrix_square_root`）
+      _ = ((C * (V2 * V1)) * V2) * B := by
+          rw [Matrix.mul_assoc C V2 V1]                        -- `mat_mult_associative`
+      _ = (((B * (V2 * V1) ^ k) * (V2 * V1)) * V2) * B := by rw [hC] -- `C` の置き方
+      _ = ((B * ((V2 * V1) ^ k * (V2 * V1))) * V2) * B := by
+          rw [Matrix.mul_assoc B ((V2 * V1) ^ k) (V2 * V1)]   -- `mat_mult_associative`
+      _ = ((B * (V2 * V1) ^ (k + 1)) * V2) * B := by rw [← pow_succ] -- `def_exp` (1) の `(V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)`
 
-/-- **`tr((V₁V₂)^n) = tr(W^n)`**（人手証明 `Z_equals_trace_of_W`）。
-
-`B * B = V₁` だけを仮定する。 -/
-theorem trace_symTransfer_pow {B V1 V2 : Matrix n n ℝ} (hBB : B * B = V1) (k : ℕ) :
-    (symTransfer B V2 ^ (k + 1)).trace = ((V1 * V2) ^ (k + 1)).trace := by
-  rw [symTransfer_pow_succ, hBB]
-  rw [Matrix.trace_mul_comm (B * (V2 * V1) ^ k * V2) B]
-  rw [← Matrix.mul_assoc, ← Matrix.mul_assoc, hBB]
-  rw [mul_pow_mul_eq]
+/-- **人手 `Z_equals_trace_of_W` の本体**: `n ∈ ℤ_{≥1}` について `tr((V_1V_2)^n) = tr(W^n)`。
+`k := n - 1` と置いて（`k + 1 = n`）、人手の 6 行と同じ段の calc で示す。`B * B = V₁`（準備 1）だけを仮定する。 -/
+theorem trace_mul_pow_eq_trace_symmetrized_pow {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
+    (hW : W = (B * V2) * B) (N : ℕ) (hN : 1 ≤ N) :
+    ((V1 * V2) ^ N).trace = (W ^ N).trace := by
+  obtain ⟨k, rfl⟩ : ∃ k, N = k + 1 := ⟨N - 1, by omega⟩
+  calc ((V1 * V2) ^ (k + 1)).trace
+      = ((V1 * (V2 * V1) ^ k) * V2).trace := by
+        rw [open_product_pow]                                  -- 準備 2 を `X := V_1`、`Y := V_2` に適用
+    _ = (((B * B) * (V2 * V1) ^ k) * V2).trace := by rw [hBB]  -- 準備 1
+    _ = ((B * (B * (V2 * V1) ^ k)) * V2).trace := by
+        rw [Matrix.mul_assoc B B]                              -- `mat_mult_associative`
+    _ = (B * ((B * (V2 * V1) ^ k) * V2)).trace := by
+        rw [Matrix.mul_assoc B (B * (V2 * V1) ^ k) V2]         -- `mat_mult_associative`
+    _ = (((B * (V2 * V1) ^ k) * V2) * B).trace :=
+        trace_cyclic _ _                                       -- `trace_basic_properties` (2)（左の因子 `B`、右の因子 `(B(V_2V_1)^k)V_2`）
+    _ = (W ^ (k + 1)).trace := by
+        rw [symmetrized_pow_succ hBB hW]                          -- 準備 3
 
 /-! ## `W` の対称性・正定値性・成分の正値性 -/
 

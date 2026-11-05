@@ -26,6 +26,7 @@
 | --- | --- |
 | `def_transfer_matrix_square_root`: `V_1^{1/2}V_1^{1/2} = exp(K_1D) = V_1`（`theorem_exp_product`、`½K_1D` は自分自身と可換） | `physicalV1halfC_mul_self` |
 | 同じ等式の実行列での表示 | `physicalV1halfR_mul_self_map` |
+| `Z_equals_trace_of_W` の「とくに」: 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
 | `partition_function_via_transfer_matrix` を実行列 `V_1 = V_1^{1/2}V_1^{1/2}`, `V_2` で読む | `partitionFunction_eq_trace_real` |
 | Step 1: `σ^z_mσ^z_{m+1}` は転置不変（人手はクロネッカー積の形から、Lean は `sigma_z_diagonal_action` の対角表示から示す） | `sigmaZ_mul_sigmaZ_transpose` |
 | Step 1: 実係数の有限和 `½K_1D` も転置不変 | `halfK1D_transpose` |
@@ -130,6 +131,19 @@ theorem partitionFunction_eq_trace_real (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ N
     physicalV2C_eq_map, ← Matrix.map_mul, ← Matrix.map_pow]
   simp only [Matrix.trace, Matrix.diag, Matrix.map_apply, Complex.ofRealHom_eq_coe,
     Complex.ofReal_sum]
+
+/-- **人手 `Z_equals_trace_of_W` の「とくに」**（具体的な `Z(K_1,K_2)` と `W` について。2 行）:
+`N_row ∈ ℤ_{≥1}` について `Z(K_1,K_2) = tr((V_1V_2)^{N_row}) = tr(W^{N_row})`。
+`Z(K_1,K_2) ∈ ℝ` は包含 `ℝ → ℂ`（`inclusion_rr_to_cc`）で `ℂ` の元として読む。
+本体は具体版 `trace_mul_pow_eq_trace_symmetrized_pow` を `B := V_1^{1/2}`（準備 1 の `BB = V_1` は `physicalV1halfC_mul_self`、`W = (BV_2)B` は `physicalSymTransferC` の定義）で引く。 -/
+theorem partition_function_eq_trace_physicalSymTransferC (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ Nrow) :
+    ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
+  calc ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
+      = ((V1 M K1 * V2 M K2) ^ Nrow).trace :=
+        partition_function_via_transfer_matrix K1 K2 hN          -- `partition_function_via_transfer_matrix`
+    _ = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
+        trace_mul_pow_eq_trace_symmetrized_pow (physicalV1halfC_mul_self K1) rfl Nrow hN
+                                                                -- 本体を `n := N_row` に適用
 
 /-! ## `V_2` -/
 

@@ -674,9 +674,16 @@ targets=(
   Ising2D.rayleighSup_pow_le_trace_pow
   Ising2D.trace_power_sandwich
   Ising2D.symTransfer
-  Ising2D.symTransfer_pow_succ
-  Ising2D.mul_pow_mul_eq
-  Ising2D.trace_symTransfer_pow
+  Ising2D.open_product_pow
+  Ising2D.symmetrized_pow_succ
+  Ising2D.trace_mul_pow_eq_trace_symmetrized_pow
+  Ising2D.trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf
+  Ising2D.NecSuf.open_product_pow
+  Ising2D.NecSuf.sandwich_pow_succ
+  Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow
+  Ising2D.trace_mul_pow_eq_trace_symTransfer_pow
+  Ising2D.partition_function_eq_trace_symTransfer_pow
+  Ising2D.partition_function_eq_trace_physicalSymTransferC
   Ising2D.physicalV1halfC_eq_map
   Ising2D.physicalV2C_eq_map
   Ising2D.physicalSymTransferC_eq_map
