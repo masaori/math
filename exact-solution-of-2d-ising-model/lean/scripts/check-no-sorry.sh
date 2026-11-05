@@ -2349,10 +2349,13 @@ targets=(
   Ising2D.sum_negSpin_mul_self
   Ising2D.V2_apply_configBasisIso_self
   Ising2D.V2_apply_configBasisIso_neg_self
-  Ising2D.matExp_smul_openChainD0_mul_apply
-  Ising2D.boundaryG_mul_apply
-  Ising2D.epsilon_apply_configBasisIso
-  Ising2D.epsilon_mul_apply_configBasisIso
+  Ising2D.mul_apply_configBasisIso_of_single_nonzero
+  Ising2D.matExp_smul_openChainD0_apply_of_ne
+  Ising2D.boundaryG_apply_configBasisIso_of_ne
+  Ising2D.boundaryG_apply_configBasisIso_self
+  Ising2D.negSpinConf_negSpinConf
+  Ising2D.epsilon_apply_configBasisIso_of_ne
+  Ising2D.epsilon_apply_configBasisIso_neg_self
   Ising2D.trace_eq_sum_configBasisIso
   Ising2D.trace_epsilon_VPlusOfTransfer_split
   Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self

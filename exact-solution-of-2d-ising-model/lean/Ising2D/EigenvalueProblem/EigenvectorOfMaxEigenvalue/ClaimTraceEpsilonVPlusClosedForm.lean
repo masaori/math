@@ -4,18 +4,20 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の Step 4・Step 5 と主張）
 
+この表のうち Step 4 の二つの鎖以外の行と、表の下の Step 4・Step 5 を述べる段落は、いまの人手の Step 5 と主張 (2) を、旧い Step の分け方（「Step 4 の最後の式鎖」「Step 5（正値性）」）で書いている。Step 5 の 1 対 1 で書き直す。
+
 | 人手 | Lean |
 | --- | --- |
 | Step 4 の `tr(X) = ∑_{s∈𝔐} X_{ι(s),ι(s)}`（`def_trace` を `ι` の番号付けで読む） | `trace_eq_sum_configBasisIso` |
 | Step 4 の最初の式 `tr(εV^{(+)}) = cosh(K_1)tr(exp(K_1D_0)εV_2) + sinh(K_1)tr(exp(K_1D_0)GV_2)`（Step 2 を Step 1 に代入し `trace_basic_properties` (1)） | `trace_epsilon_VPlusOfTransfer_split` |
-| 同 第 1 項の対角成分 `(exp(K_1D_0)εV_2)_{ι(s),ι(s)} = exp(K_1E(s))exp(-M_colK_2)` | `matExp_openChainD0_mul_epsilon_mul_V2_apply_self` |
-| 同 第 2 項の対角成分 `(exp(K_1D_0)GV_2)_{ι(s),ι(s)} = exp(K_1E(s))s(M_col)s(1)exp(M_colK_2)` | `matExp_openChainD0_mul_boundaryG_mul_V2_apply_self` |
-| 同 最後の式鎖の 1 行目（`def_trace` と直前の 2 式） | `trace_epsilon_VPlusOfTransfer_eq_spin_sums` |
-| 同 2 行目から 4 行目（二つの 1 次元開鎖のスピン和公式、`2·2^{M_col-1} = 2^{M_col}`） | `trace_epsilon_VPlusOfTransfer_closed_form` |
+| Step 4 の一つ目の鎖（7 行）`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = ⋯ = (exp(-K_2M_col)exp(K_1E(s)))_ℂ` | `matExp_openChainD0_mul_epsilon_mul_V2_apply_self` の 7 段 |
+| Step 4 の二つ目の鎖（7 行）`(exp(κD_0)(GV_2))_{ord(s),ord(s)} = ⋯ = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ` | `matExp_openChainD0_mul_boundaryG_mul_V2_apply_self` の 7 段 |
+| Step 4（旧い分け方）の最後の式鎖の 1 行目（`def_trace` と直前の 2 式） | `trace_epsilon_VPlusOfTransfer_eq_spin_sums` |
+| 旧い分け方の最後の式鎖の 2 行目から 4 行目（二つの 1 次元開鎖のスピン和公式、`2·2^{M_col-1} = 2^{M_col}`） | `trace_epsilon_VPlusOfTransfer_closed_form` |
 | Step 5（正値性） | `trace_epsilon_VPlusOfTransfer_pos` |
 | 主張 `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}` | `trace_of_epsilon_V_plus` |
 | Step 4 の最初の式の途中（Lean で補った中間）: 行列の積の分配則 `exp(K_1D_0)(aε + bG)V_2 = a·exp(K_1D_0)εV_2 + b·exp(K_1D_0)GV_2` | `trace_epsilon_VPlusOfTransfer_split` の 3 行目 |
-| 二つの対角成分の最初の行（Lean で補った中間）: 積の結合則 `(exp(K_1D_0)X)V_2 = exp(K_1D_0)(XV_2)` | 二つの対角成分の補題の 1 行目 |
+| Step 4 の二つの鎖の左辺 `exp(κD_0)(εV_2)` へ、`trace_epsilon_VPlusOfTransfer_split` の `(exp(κD_0)ε)V_2` を移す積の結合則（Lean で補った中間。人手 Step 5 の鎖は分配の前に `mat_mult_associative` を 1 回使い、段の順序が違う。Step 5 の 1 対 1 で人手の順序に揃える） | `trace_epsilon_VPlusOfTransfer_eq_spin_sums` の 3 段目 |
 | 最後の式鎖の 1 行目の途中（Lean で補った中間）: 定数を和の外へ出し実数の積として並べる | `trace_epsilon_VPlusOfTransfer_eq_spin_sums` の最後の行 |
 
 `V^{(+)}` は人手 `def_V_plus` の `(V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`、Lean の `VPlusOfTransfer M K_1 K_2` である。
@@ -82,52 +84,73 @@ theorem trace_epsilon_VPlusOfTransfer_split (hM : 2 ≤ M) (K1 K2 : ℝ) :
             * (matExp ((K1 : ℂ) • openChainD0 M) * boundaryG M (by omega) * V2 M K2).trace :=
         trace_linear _ _ _ _
 
-/-- **人手 Step 4 の第 1 項の対角成分**:
-`(exp(K_1D_0)εV_2)_{ι(s),ι(s)} = exp(K_1E(s))exp(-M_colK_2)`。 -/
+/-- **人手 Step 4 の一つ目の鎖**（7 行）:
+`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = (exp(-K_2M_col)exp(K_1E(s)))_ℂ`。 -/
 theorem matExp_openChainD0_mul_epsilon_mul_V2_apply_self (K1 K2 : ℝ) (s : SpinConf M) :
-    (matExp ((K1 : ℂ) • openChainD0 M) * epsilon M * V2 M K2) (configBasisIso M s) (configBasisIso M s)
-      = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) * ((Real.exp (-((M : ℝ) * K2)) : ℝ) : ℂ) :=
-  calc (matExp ((K1 : ℂ) • openChainD0 M) * epsilon M * V2 M K2) (configBasisIso M s) (configBasisIso M s)
-      = (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2))
-          (configBasisIso M s) (configBasisIso M s) := by rw [mul_assoc]
-    -- (a) の対角性
-    _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
+    (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)) (configBasisIso M s) (configBasisIso M s)
+      = ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
+  calc (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)) (configBasisIso M s) (configBasisIso M s)
+      = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (epsilon M * V2 M K2) (configBasisIso M s) (configBasisIso M s) :=
-        matExp_smul_openChainD0_mul_apply K1 _ s _
-    -- (b)、`ε` は行番号 `ι(s)` を `ι(-s)` に移す置換行列
+        -- 人手 1: `mat_mult` と (a) の `exp(κD_0)` の対角性、`finite_sum_with_single_nonzero_term`
+        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne K1 s) _
+    _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
+          * (epsilon M (configBasisIso M s) (configBasisIso M (negSpinConf s))
+            * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s)) := by
+        -- 人手 2: `mat_mult` と (b)、`finite_sum_with_single_nonzero_term`
+        rw [mul_apply_configBasisIso_of_single_nonzero _ (epsilon_apply_configBasisIso_of_ne s)]
+    _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
+          * (1 * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s)) := by
+        rw [epsilon_apply_configBasisIso_neg_self]                 -- 人手 3: (b) の `δ_{-(-s)=s} = 1_ℂ`
+    _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
+          * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s) := by
+        rw [one_mul]                                               -- 人手 4: `complex_numbers_form_a_field` の積の単位元
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s) := by
-        rw [epsilon_mul_apply_configBasisIso]
-    -- (c)
-    _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) * ((Real.exp (-((M : ℝ) * K2)) : ℝ) : ℂ) := by
-        rw [V2_apply_configBasisIso_neg_self]
+        rw [matExp_smul_openChainD0_apply]                         -- 人手 5: (a)
+    _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) * ((Real.exp (-(K2 * M)) : ℝ) : ℂ) := by
+        rw [V2_apply_configBasisIso_neg_self]                      -- 人手 6: (c)
+    _ = ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
+        -- 人手 7: `real_inclusion_preserves_product` と ℝ の積の可換律
+        (real_inclusion_mul _ _).trans (congrArg (fun x : ℝ => (x : ℂ)) (mul_comm _ _))
 
-/-- **人手 Step 4 の第 2 項の対角成分**:
-`(exp(K_1D_0)GV_2)_{ι(s),ι(s)} = exp(K_1E(s))s(M_col)s(1)exp(M_colK_2)`。 -/
+/-- **人手 Step 4 の二つ目の鎖**（7 行）:
+`(exp(κD_0)(GV_2))_{ord(s),ord(s)} = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ`。 -/
 theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM : M ≠ 0) (K1 K2 : ℝ) (s : SpinConf M) :
-    (matExp ((K1 : ℂ) • openChainD0 M) * boundaryG M hM * V2 M K2)
+    (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2))
         (configBasisIso M s) (configBasisIso M s)
-      = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
-          * ((((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) : ℝ) : ℂ)
-            * ((Real.exp ((M : ℝ) * K2) : ℝ) : ℂ)) :=
-  calc (matExp ((K1 : ℂ) • openChainD0 M) * boundaryG M hM * V2 M K2)
+      = ((Real.exp (K2 * M)
+          * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
+  calc (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2))
         (configBasisIso M s) (configBasisIso M s)
-      = (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2))
-          (configBasisIso M s) (configBasisIso M s) := by rw [mul_assoc]
-    -- (a) の `exp(K_1D_0)` の対角性
-    _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
+      = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (boundaryG M hM * V2 M K2) (configBasisIso M s) (configBasisIso M s) :=
-        matExp_smul_openChainD0_mul_apply K1 _ s _
-    -- (a) の `G` の対角性
+        -- 人手 1: `mat_mult` と (a) の `exp(κD_0)` の対角性、`finite_sum_with_single_nonzero_term`
+        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne K1 s) _
+    _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
+          * (boundaryG M hM (configBasisIso M s) (configBasisIso M s)
+            * V2 M K2 (configBasisIso M s) (configBasisIso M s)) := by
+        -- 人手 2: `mat_mult` と (a) の `G` の対角性、`finite_sum_with_single_nonzero_term`
+        rw [mul_apply_configBasisIso_of_single_nonzero _ (boundaryG_apply_configBasisIso_of_ne hM s)]
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * ((((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) : ℝ) : ℂ)
             * V2 M K2 (configBasisIso M s) (configBasisIso M s)) := by
-        rw [boundaryG_mul_apply]
-    -- (c)
+        rw [matExp_smul_openChainD0_apply, boundaryG_apply_configBasisIso_self]  -- 人手 3: (a)
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * ((((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) : ℝ) : ℂ)
-            * ((Real.exp ((M : ℝ) * K2) : ℝ) : ℂ)) := by
-        rw [V2_apply_configBasisIso_self]
+            * ((Real.exp (K2 * M) : ℝ) : ℂ)) := by
+        rw [V2_apply_configBasisIso_self]                          -- 人手 4: (c)
+    _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
+          * (((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K2 * M) : ℝ) : ℂ) :=
+        congrArg _ (real_inclusion_mul _ _)                        -- 人手 5: `real_inclusion_preserves_product`
+    _ = ((Real.exp (K1 * openChainEnergy s)
+          * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K2 * M)) : ℝ) : ℂ) :=
+        real_inclusion_mul _ _                                     -- 人手 6: `real_inclusion_preserves_product`
+    _ = ((Real.exp (K2 * M)
+          * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
+        -- 人手 7: ℝ の積の可換律・結合律
+        congrArg (fun x : ℝ => (x : ℂ)) (by
+          rw [mul_comm _ (Real.exp (K2 * M)), mul_left_comm, mul_comm (Real.exp (K1 * openChainEnergy s))])
 
 /-- **人手 Step 4 の最後の式鎖の 1 行目**（`def_trace` と直前の 2 式）:
 `tr(εV^{(+)}) = cosh(K_1)exp(-M_colK_2)∑_s exp(K_1E(s)) + sinh(K_1)exp(M_colK_2)∑_s s(M_col)s(1)exp(K_1E(s))`。
@@ -153,14 +176,15 @@ theorem trace_epsilon_VPlusOfTransfer_eq_spin_sums (hM : 2 ≤ M) (K1 K2 : ℝ) 
             (matExp ((K1 : ℂ) • openChainD0 M) * boundaryG M hM0 * V2 M K2)
               (configBasisIso M s) (configBasisIso M s) := by
         rw [trace_eq_sum_configBasisIso, trace_eq_sum_configBasisIso]
-    -- 直前の 2 式（対角成分）
+    -- 直前の 2 式（対角成分。積の結合則で人手の `exp(κD_0)(εV_2)`・`exp(κD_0)(GV_2)` の形にしてから）
     _ = ((Real.cosh K1 : ℝ) : ℂ) * ∑ s : SpinConf M,
-            ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) * ((Real.exp (-((M : ℝ) * K2)) : ℝ) : ℂ)
+            ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           + ((Real.sinh K1 : ℝ) : ℂ) * ∑ s : SpinConf M,
-            ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
-              * ((((s (lastSite M hM0) : ℝ) * (s (firstSite M hM0) : ℝ) : ℝ) : ℂ)
-                * ((Real.exp ((M : ℝ) * K2) : ℝ) : ℂ)) := by
-        rw [Finset.sum_congr rfl fun s _ => matExp_openChainD0_mul_epsilon_mul_V2_apply_self K1 K2 s,
+            ((Real.exp (K2 * M) * ((s (lastSite M hM0) : ℝ) * (s (firstSite M hM0) : ℝ)
+              * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) := by
+        rw [Matrix.mul_assoc (matExp ((K1 : ℂ) • openChainD0 M)) (epsilon M) (V2 M K2),
+          Matrix.mul_assoc (matExp ((K1 : ℂ) • openChainD0 M)) (boundaryG M hM0) (V2 M K2),
+          Finset.sum_congr rfl fun s _ => matExp_openChainD0_mul_epsilon_mul_V2_apply_self K1 K2 s,
           Finset.sum_congr rfl fun s _ => matExp_openChainD0_mul_boundaryG_mul_V2_apply_self hM0 K1 K2 s]
     -- 和の外へ定数を出し、実数の積として並べる
     _ = ((Real.cosh K1 * Real.exp (-((M : ℝ) * K2))
@@ -168,6 +192,7 @@ theorem trace_epsilon_VPlusOfTransfer_eq_spin_sums (hM : 2 ≤ M) (K1 K2 : ℝ) 
           + Real.sinh K1 * Real.exp ((M : ℝ) * K2)
             * ∑ s : SpinConf M, (s (lastSite M hM0) : ℝ) * (s (firstSite M hM0) : ℝ)
                 * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) := by
+        rw [mul_comm K2 (M : ℝ)]
         push_cast
         rw [Finset.mul_sum, Finset.mul_sum, Finset.mul_sum, Finset.mul_sum]
         congr 1 <;> exact Finset.sum_congr rfl fun s _ => by ring
