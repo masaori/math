@@ -202,85 +202,334 @@ export default defineBlocks([
         "）のもとで、",
         ref("def_symmetrized_transfer_matrix"),
         " で定めた ",
-        math(String.raw`W`),
-        " のすべての成分は正の実数である：",
+        math(String.raw`W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        "）のすべての成分は正の実数である：",
       ]),
       displayMath(
         String.raw`W_{\iota(\mu),\iota(\mu')} > 0 \qquad (\mu,\mu' \in \mathfrak{M})`,
       ),
+      paragraph([
+        "ここで ",
+        math(String.raw`W_{\iota(\mu),\iota(\mu')}`),
+        " は ",
+        ref("def_kronecker"),
+        " の取り決めにより ",
+        math(String.raw`W_{\nu(\iota(\mu)),\nu(\iota(\mu'))}`),
+        " を表し、",
+        math(String.raw`z \in \mathbb{C}`),
+        " について ",
+        math(String.raw`z > 0`),
+        " は「",
+        math(String.raw`z = w_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`w \in \mathbb{R}_{>0}`),
+        " が存在する」ことを表す（",
+        math(String.raw`w_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記。正であることの判定に ",
+        math(String.raw`\mathbb{R}`),
+        " の順序を使うので、",
+        math(String.raw`w`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の元として取る）。言い換えると、すべての ",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について ",
+        math(String.raw`W_{kl} > 0`),
+        " である。",
+      ]),
     ],
     proof: [
       paragraph([
-        "Step 1（",
-        math(String.raw`V_1^{1/2}`),
-        " は正の対角行列）。以下、周期端では ",
-        math(String.raw`\mu(M_{\mathrm{col}}+1):=\mu(1)`),
-        " と書く。",
+        "準備。",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`B := V_1^{1/2}`),
+        "（",
         ref("def_transfer_matrix_square_root"),
-        " の定義と ",
-        ref("finite_sum_of_matrices_entrywise"),
-        "・",
-        ref("site_sigma_z_product_is_diagonal"),
-        "・",
-        ref("site_sigma_z_product_diagonal_entry"),
-        " より、",
-        math(String.raw`D`),
-        " は対角行列で、その第 ",
-        math(String.raw`\nu(\iota(\mu))`),
-        " 対角成分は ",
-        math(String.raw`\left(\sum_{m}\mu(m)\mu(m+1)\right)_{\mathbb{C}}`),
-        " なので（",
-        ref("first_transfer_matrix_pauli_form"),
-        " の証明と同じ鎖）、",
+        "）とおく。",
+        ref("def_transfer_matrix_square_root"),
+        " の ",
+        math(String.raw`D = \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
+        "（",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和）について、",
         math(String.raw`\tfrac12 K_1 D`),
-        " は対角行列である。",
-        ref("exp_of_diagonal_matrix"),
-        " と ",
-        ref("cosh_sinh_basic_properties"),
-        " に記録した実指数関数の正値性より",
-      ]),
-      displayMath(
-        String.raw`\left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
-= \begin{cases}
-\exp\!\left(\tfrac{1}{2}K_1\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1)\right) > 0 & (\mu = \mu') \\
-0 & (\mu \neq \mu')
-\end{cases}`,
-      ),
-      paragraph([
-        "Step 2（",
-        math(String.raw`V_2`),
-        " の成分は正）。",
+        " は実数 ",
+        math(String.raw`\tfrac12 K_1 \in \mathbb{R}`),
+        " による ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍 ",
+        math(String.raw`X := \left(\tfrac12 K_1\right)_{\mathbb{C}} D`),
+        " と読む。",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`m^{+} := m+1`),
+        "（",
+        math(String.raw`m \leq M_{\mathrm{col}}-1`),
+        "）、",
+        math(String.raw`m^{+} := 1`),
+        "（",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        "）とおく。",
+        ref("def_site_pauli_periodic_extension"),
+        " より ",
+        math(String.raw`\sigma_{m+1}^z = \sigma_{m^{+}}^z`),
+        "、",
         ref("def_transfer_matrix"),
-        " と ",
-        ref("config_numbering_equals_kronecker_numbering"),
-        "（行・列番号 ",
-        math(String.raw`\nu(\iota(\mu)) = \mathrm{ord}(\mu)`),
-        "）より ",
-        math(String.raw`(V_2)_{\iota(\mu),\iota(\mu')} = \exp\!\left(K_2\sum_{m}\mu(m)\mu'(m)\right)`),
-        " である。指数は実数なので、",
-        ref("cosh_sinh_basic_properties"),
-        " に記録した実指数関数の正値性より、この値は正である。",
+        " の周期規約 ",
+        math(String.raw`\mu(M_{\mathrm{col}}+1) := \mu(1)`),
+        " より ",
+        math(String.raw`\mu(m+1) = \mu(m^{+})`),
+        " である。",
+        math(String.raw`\mu, \mu' \in \mathfrak{M}`),
+        " について",
       ]),
-      paragraph(["Step 3。"]),
       displayMath(
         String.raw`\begin{aligned}
-W_{\iota(\mu),\iota(\mu')}
-&= \left(V_1^{1/2}\,V_2\,V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
-   \quad (\because W = V_1^{1/2}V_2V_1^{1/2}) \\
-&= \sum_{j=1}^{2^{M_{\mathrm{col}}}}\sum_{k=1}^{2^{M_{\mathrm{col}}}}
-   \left(V_1^{1/2}\right)_{\iota(\mu),j}\left(V_2\right)_{j,k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
-   \quad (\because \text{行列の積の定義}) \\
-&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}
-   \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}\left(V_2\right)_{\iota(\mu),k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
-   \quad (\because \text{Step 1 の対角性で } j\neq\iota(\mu)\ \text{の項は } 0) \\
-&= \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}
-   \left(V_2\right)_{\iota(\mu),\iota(\mu')}
-   \left(V_1^{1/2}\right)_{\iota(\mu'),\iota(\mu')}
-   \quad (\because \text{Step 1 の対角性で } k\neq\iota(\mu')\ \text{の項は } 0)
+d(\mu) &:= \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu(m+1) \in \mathbb{R}, &
+b(\mu) &:= \exp\!\left(\tfrac12 K_1\,d(\mu)\right) \in \mathbb{R}, \\
+e(\mu,\mu') &:= \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu'(m) \in \mathbb{R}, &
+v(\mu,\mu') &:= \exp\!\left(K_2\,e(\mu,\mu')\right) \in \mathbb{R}
 \end{aligned}`,
       ),
       paragraph([
-        "3 つの因子はいずれも正の実数なので、積も正である。",
+        "とおく（和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の実数の exp。実数の指数関数を使うので ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している）。",
+        ref("real_exp_positive"),
+        " より ",
+        math(String.raw`b(\mu) > 0`),
+        "、",
+        math(String.raw`v(\mu,\mu') > 0`),
+        " である。以下、",
+        math(String.raw`\mu, \mu' \in \mathfrak{M}`),
+        " を固定し、",
+        math(String.raw`k := \nu(\iota(\mu))`),
+        "、",
+        math(String.raw`l := \nu(\iota(\mu'))`),
+        " とおく。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`B`),
+        " は対角行列で、",
+        math(String.raw`B_{kk} = b(\mu)_{\mathbb{C}}`),
+        "）。",
+        math(String.raw`p, q \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`p \neq q`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_{pq}
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)_{pq}
+   &&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m^{+}}^z\right)_{pq}
+   &&(\because \sigma_{m+1}^z = \sigma_{m^{+}}^z\text{ を各項へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}} 0_{\mathbb{C}}
+   &&(\because \blkref{site_sigma_z_product_is_diagonal}\text{ を各 }(m, m^{+})\text{ へ同時に適用}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{finite_sum_of_complex_zeros})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+D_{kk}
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)_{kk}
+   &&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m^{+}}^z\right)_{kk}
+   &&(\because \sigma_{m+1}^z = \sigma_{m^{+}}^z\text{ を各項へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)_{\mathbb{C}}\,\mu(m^{+})_{\mathbb{C}}
+   &&(\because \blkref{site_sigma_z_product_diagonal_entry}\text{ を各 }(m, m^{+})\text{ へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\mu(m)\,\mu(m^{+})\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_product}\text{ を各項へ同時に適用}) \\
+&= \left(\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu(m^{+})\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \left(\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu(m+1)\right)_{\mathbb{C}}
+   &&(\because \mu(m+1) = \mu(m^{+})\text{ を各項へ同時に適用}) \\
+&= d(\mu)_{\mathbb{C}}
+   &&(\because d(\mu)\text{ の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+X_{pq}
+&= \left(\tfrac12 K_1\right)_{\mathbb{C}} D_{pq}
+   &&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \left(\tfrac12 K_1\right)_{\mathbb{C}}\,0_{\mathbb{C}}
+   &&(\because \text{上の } D_{pq} = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{complex_times_zero_is_zero})
+\end{aligned}`,
+      ),
+      paragraph([
+        "より ",
+        math(String.raw`X`),
+        " は対角行列（",
+        ref("def_diagonal_matrix"),
+        "）である。ゆえに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+B_{pq}
+&= \left(\exp(X)\right)_{pq}
+   &&(\because \blkref{def_transfer_matrix_square_root}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{exp_of_diagonal_matrix}\text{ を対角行列 }X\text{ へ})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+B_{kk}
+&= \left(\exp(X)\right)_{kk}
+   &&(\because \blkref{def_transfer_matrix_square_root}) \\
+&= \exp\!\left(X_{kk}\right)
+   &&(\because \blkref{exp_of_diagonal_matrix}\text{ を対角行列 }X\text{ へ}) \\
+&= \exp\!\left(\left(\tfrac12 K_1\right)_{\mathbb{C}} D_{kk}\right)
+   &&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \exp\!\left(\left(\tfrac12 K_1\right)_{\mathbb{C}}\,d(\mu)_{\mathbb{C}}\right)
+   &&(\because \text{上の } D_{kk} = d(\mu)_{\mathbb{C}}) \\
+&= \exp\!\left(\left(\tfrac12 K_1\,d(\mu)\right)_{\mathbb{C}}\right)
+   &&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \left(\exp\!\left(\tfrac12 K_1\,d(\mu)\right)\right)_{\mathbb{C}}
+   &&(\because \blkref{complex_exp_of_real_argument}) \\
+&= b(\mu)_{\mathbb{C}}
+   &&(\because b(\mu)\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "同じ鎖を ",
+        math(String.raw`\mu'`),
+        " と ",
+        math(String.raw`l = \nu(\iota(\mu'))`),
+        " に当てて ",
+        math(String.raw`B_{ll} = b(\mu')_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 2（",
+        math(String.raw`(V_2)_{kl} = v(\mu,\mu')_{\mathbb{C}}`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(V_2)_{kl}
+&= (V_2)_{\mathrm{ord}(\mu),\,\mathrm{ord}(\mu')}
+   &&(\because \blkref{config_numbering_equals_kronecker_numbering}\text{ を }\mu\text{ と }\mu'\text{ へ}) \\
+&= \left(\exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu'(m)\right)\right)_{\mathbb{C}}
+   &&(\because \blkref{def_transfer_matrix}\text{。指数の肩は実数で、値は実数の exp の }\mathbb{C}\text{ への包含}) \\
+&= v(\mu,\mu')_{\mathbb{C}}
+   &&(\because e(\mu,\mu')\text{ と }v(\mu,\mu')\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 3（成分の計算）。",
+        math(String.raw`s, t \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`s \neq k`),
+        "、",
+        math(String.raw`t \neq l`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(BV_2\right)_{kt}B_{tl}
+&= \left(BV_2\right)_{kt}\,0_{\mathbb{C}}
+   &&(\because \text{Step 1 の }B_{tl} = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{complex_times_zero_is_zero})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+B_{ks}\left(V_2\right)_{sl}
+&= 0_{\mathbb{C}}\left(V_2\right)_{sl}
+   &&(\because \text{Step 1 の }B_{ks} = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{complex_zero_times_is_zero})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+W_{kl}
+&= \left(\left(BV_2\right)B\right)_{kl}
+   &&(\because \blkref{def_symmetrized_transfer_matrix}) \\
+&= \sum_{t=1}^{n}\left(BV_2\right)_{kt}B_{tl}
+   &&(\because \blkref{mat_mult}) \\
+&= \left(BV_2\right)_{kl}B_{ll}
+   &&(\because \blkref{finite_sum_with_single_nonzero_term}\text{ を、上の }t \neq l\text{ の項の値へ}) \\
+&= \left(\sum_{s=1}^{n}B_{ks}\left(V_2\right)_{sl}\right)B_{ll}
+   &&(\because \blkref{mat_mult}) \\
+&= \left(B_{kk}\left(V_2\right)_{kl}\right)B_{ll}
+   &&(\because \blkref{finite_sum_with_single_nonzero_term}\text{ を、上の }s \neq k\text{ の項の値へ}) \\
+&= \left(b(\mu)_{\mathbb{C}}\left(V_2\right)_{kl}\right)b(\mu')_{\mathbb{C}}
+   &&(\because \text{Step 1 の }B_{kk}\text{ と }B_{ll}) \\
+&= \left(b(\mu)_{\mathbb{C}}\,v(\mu,\mu')_{\mathbb{C}}\right)b(\mu')_{\mathbb{C}}
+   &&(\because \text{Step 2}) \\
+&= \left(b(\mu)\,v(\mu,\mu')\right)_{\mathbb{C}}\,b(\mu')_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \left(\left(b(\mu)\,v(\mu,\mu')\right)b(\mu')\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_product})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`w := \left(b(\mu)\,v(\mu,\mu')\right)b(\mu') \in \mathbb{R}`),
+        "、",
+        math(String.raw`r_1 := b(\mu),\ r_2 := v(\mu,\mu'),\ r_3 := b(\mu') \in \mathbb{R}`),
+        " とおくと、準備の ",
+        math(String.raw`b(\mu) > 0`),
+        "・",
+        math(String.raw`v(\mu,\mu') > 0`),
+        "・",
+        math(String.raw`b(\mu') > 0`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+w
+&= \prod_{j=1}^{3} r_j
+   &&(\because \blkref{def_finite_product_of_real_numbers}) \\
+&> 0
+   &&(\because \blkref{finite_product_of_positive_reals_is_positive}\text{ を }m := 3\text{ で})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`W_{kl} = w_{\mathbb{C}}`),
+        " である。",
+        math(String.raw`k = \nu(\iota(\mu))`),
+        "、",
+        math(String.raw`l = \nu(\iota(\mu'))`),
+        " なので、これが主張である。",
+        ref("config_numbering_equals_kronecker_numbering"),
+        " と ",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`\mathfrak{M} \ni \mu \mapsto \nu(\iota(\mu)) = \mathrm{ord}(\mu) \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " は全単射なので、どの ",
+        math(String.raw`k', l' \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " もある ",
+        math(String.raw`\lambda, \lambda' \in \mathfrak{M}`),
+        " で ",
+        math(String.raw`k' = \nu(\iota(\lambda))`),
+        "、",
+        math(String.raw`l' = \nu(\iota(\lambda'))`),
+        " と書け、上の議論を ",
+        math(String.raw`(\mu,\mu') := (\lambda,\lambda')`),
+        " で行えば ",
+        math(String.raw`W_{k'l'} > 0`),
+        " である。これが言い換えの形である。",
       ]),
     ],
     conversion: {

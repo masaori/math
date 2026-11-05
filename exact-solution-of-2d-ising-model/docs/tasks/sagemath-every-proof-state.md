@@ -389,12 +389,16 @@
 - `limit_of_log_Z_in_N_row`（lim_{N_row→∞} (1/(M_col N_row)) log Z = (1/M_col) log c(M_col)）と、そのために足した `real_log_of_power`（log(a^n) = n log a）: `sagemath/check/<ラベル>/`。本体は含意の鎖の十行と極限の段（log 2 > 0 の準備の三行、ε と N_0 の三行の鎖）を、本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3、8 組）と N_row = 1..60 で確かめた。Z は QQ（M_col·N_row ≤ 12 の 40 格子では全ての配位の和と tr(W^N) が一致）、c は AA で、一行目は厳密、log を含む行は RealBallField(512)（比較 18416 個、否定コントロール 4 件）。`real_log_of_power` は QQ・AA の 8 点と n ≤ 40（比較 1600 個）。人手証明を直した（主張は不変、計算の誤りは無し）: 各行の根拠をラベル参照にし、log(c^N) = N log c・log(2^M) = M log 2 を新しい主張 `real_log_of_power` で、正の実数の冪を新しい定義 `def_power_of_real_number`（a^0 := 1、a^{m+1} := a^m a）で引き、割り算と約分・差と絶対値の行を分け、極限の段を ε・N_0 の鎖と `def_matrix_norm`・`scalar_limit_is_unique` で書き、「この段階では実数解析へ移行していない」の誤った断り書きを実対数と極限による ℝ 脱出の宣言に替えた。
   上流の残り（今回の差分より前から）: `trace_power_sandwich`・`partition_function_sandwich` の c^n は実数の冪の定義を引いていない（`def_power_of_real_number` へ付け替えられる）。`def_matrix_norm` の列の添字は Z_{≥0} から始まるが、ここの列は N_row ≥ 1 から始まる。整数と実数の積（N_row log c など）に Z → ℝ の写像の名前が無いのは論文全体の書き方である。
 
+- `W_has_positive_entries`（W の成分はすべて正）: `sagemath/check/W_has_positive_entries/`。証明の準備・Step 1（D の二つの鎖、X := ((1/2)K_1)_ℂD の対角性、B := V_1^{1/2} の成分の二つの鎖）・Step 2・Step 3（0 になる項の鎖と 9 行の鎖、w > 0）と主張の言い換えを、M_col = 2..5 で、exp(½K_1)・exp(K_2) を Laurent 多項式環の不定元に置いた一般の場合と、K_1 = 2 log y・K_2 = log x の具体の 13 組（B は D の固有値の射影から作る独立な経路）で厳密に確かめた（等号 583199 件、不等号 4880 件、否定コントロール 1978 件。浮動小数点なし）。**人手証明を直した**（主張の中身は不変、計算の誤りは無し）: (1) 散文の Step 1・Step 2 と根拠の無い Step 3 を、(∵) とラベル参照の付いた鎖にした（D の鎖は first_transfer_matrix_pauli_form の証明の中間目標を引かずに書き直し、½K_1D を ((1/2)K_1)_ℂD と読むことを書き、実数の exp の正値性を cosh_sinh_basic_properties ではなく real_exp_positive で引いた）。(2) 主張文に、W_{ι(μ),ι(μ')} が def_kronecker の取り決めで W_{ν(ι(μ)),ν(ι(μ'))} を表すこと、複素数の z > 0 の読み方（z = w_ℂ なる w ∈ ℝ_{>0}）、任意の k, l についての言い換え W_kl > 0 を書いた。下流（c_between_Lambda_half_and_twice_Lambda_half ほか）は任意の行・列番号で使っており、言い換えは config_numbering_equals_kronecker_numbering と row_configuration_numbering_bijective で証明の末尾に示した。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimPhysicalWHasPositiveEntries.lean` の対応表は旧い Step の分け方のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`thermodynamic_limit_column_limit_and_closed_form.ts` の `W_has_positive_entries`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_column_limit_and_closed_form.ts` の `epsilon_commutes_with_W`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`W_has_positive_entries` のレビューで見つかった（上流の住処。今回の差分より前から）: `def_transfer_matrix` は V_1・V_2 の成分を exp(K_1Σ…)・exp(K_2Σ…) と書き、値が「ℝ_{>0} ⊂ ℂ に属する」とだけ述べて、実数の exp の値を名前の付いた包含 (·)_ℂ を通さずに ℂ の元として使っている。`def_transfer_matrix_square_root`・`first_transfer_matrix_pauli_form` も ½K_1D・K_1D を (K_1)_ℂ 倍のスカラー倍と書いていない。`W_has_positive_entries` の証明はこの読み方を行の根拠に書いた。直すには、成分を (exp(…))_ℂ、行列を ((1/2)K_1)_ℂD と明示する。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-05、`trace_power_upper_bound` のレビューで見つかった（上流の同一視の延長。今回の差分より前から）: 主張の tr(W^n) は `def_trace` で ℂ の元だが、証明は ℝ の e_k^⊤W^ne_k の和と等号で結び ≤ で比べる。2026-11-04 の `rayleigh_bounds_operator_norm` の項（W を実行列として読む同一視）と同じ直し方（成分が実数の複素行列から Mat(n, ℝ) への写像に名前を付ける）で扱う。主張の正しさには影響しない。
 
