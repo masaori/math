@@ -32,6 +32,9 @@
   積の結合律も単位元も効かない（`NonUnitalNonAssocSemiring`）。
 - エルミート性の段に効いているのは、共役転置が積の順を逆にすること（`Matrix.conjTranspose_mul`、`StarRing`）と、共役を 2 回取ると
   戻ること（`star_star`）と、行列の積の結合律だけである。係数の積の可換律も単位元も使わない（`NonUnitalSemiring`）。
+  ただし具体版の 1・2 段目が引く `matrix_conjTranspose_mul`（人手 `star_preserves_norm_and_limits` (1) の第 1 式）は、共役が積の順を保つ形と
+  係数の積の交換律で示しており（`NecSuf/StarPreservesNormAndLimits.lean`）、ここで引く `Matrix.conjTranspose_mul` とは手順が違う。
+  この段の「可換律を使わない」は、積の順を逆にする共役（`StarRing`）を係数に仮定したうえでのことである。
   準備の `(B^*)^* = B`（`conjTranspose_conjTranspose_apply'`）に効いているのは共役の対合性だけで、係数の演算は効かない（`InvolutiveStar`）。
 - 添字は `Fin n` でなくてよい。有限で（和のため）、等号が決定可能（単位行列 `1` のため）なら何でもよい。
 -/

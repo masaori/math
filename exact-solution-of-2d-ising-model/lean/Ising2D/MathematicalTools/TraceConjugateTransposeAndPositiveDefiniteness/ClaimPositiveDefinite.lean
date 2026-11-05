@@ -3,7 +3,7 @@
 
 対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
 - `def_hermitian_positive_definite`（`eigenvalues_of_V_011_definition_...`）
-- `star_preserves_norm_and_limits`（`eigenvalues_of_V_012_claim_...`）
+- `star_preserves_norm_and_limits`（`eigenvalues_of_V_012_claim_...`。具体版は `ClaimStarPreservesNormAndLimits.lean` にあり、ここには置かない）
 - `exp_hermitian_is_positive_definite`（`eigenvalues_of_V_013_claim_...`）
 - `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）の、反可換性による別の論法の補助だけ
   （人手の主張の具体版は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）
@@ -12,13 +12,14 @@
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
 `Matrix.conjTranspose` / `Matrix.IsHermitian` / `Matrix.PosDef` と同じものである。
 
-## 原文との違い（形式化して分かったこと）
+## `star_preserves_norm_and_limits` と `exp` のエルミート性の置き場
 
-原文 `star_preserves_norm_and_limits` の (2)(3)（`‖A^*‖ = ‖A‖` と極限の共役転置）は、
-原文では `exp(S)` がエルミートであることを示すためだけに使われている。
-mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）として
-持っているので、本ファイルではそちらを使う。したがって (2)(3) は
-**結論に効かない補題**であり、ここでは (1) だけを形式化する。
+原文 `star_preserves_norm_and_limits` の (1)(2)(3) の具体版は、人手の鎖と 1 対 1 に
+`ClaimStarPreservesNormAndLimits.lean` に置いた。このファイルの `posDef_exp_of_isHermitian` は、`exp(S)` のエルミート性を
+まだ mathlib の `Matrix.IsHermitian.exp`（`Matrix.exp_conjTranspose` から従う）で得ている。人手 `exp_of_hermitian_is_hermitian` の
+具体版で置き換えるのは状態台帳の (r2c2c2b)・(r2c2c2c) である。
+
+## 人手 `iH_is_real_symmetric` との違い（形式化して分かったこと）
 
 人手 `iH_is_real_symmetric` は `S_1^{(+)} = iK_1H_1^{(+)}` を `K_1 ∑ σ^z_m σ^z_{m+1} - K_1 G` へ、
 `S_2` を `K_2^* ∑ σ^x_m` へ書き換えてから成分の実性と転置対称性を数えている。
@@ -42,6 +43,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -131,7 +133,7 @@ theorem Y_transpose (m : Fin M) : (Y m)ᵀ = -(Y m) := by
 
 /-- `(Y_m Z_n)^* = -(Y_m Z_n)`（`[Z,Y]_+ = 0` による）。 -/
 theorem conjTranspose_Y_mul_Z (m n : Fin M) : (Y m * Z n)ᴴ = -(Y m * Z n) := by
-  rw [Matrix.conjTranspose_mul, Z_conjTranspose, Y_conjTranspose]
+  rw [conjTranspose_mul_tensorPow, Z_conjTranspose, Y_conjTranspose]
   have h := anticomm_Z_Y n m
   rw [acomm] at h
   linear_combination (norm := noncomm_ring) h
@@ -144,7 +146,7 @@ theorem transpose_Y_mul_Z (m n : Fin M) : (Y m * Z n)ᵀ = Y m * Z n := by
   linear_combination (norm := noncomm_ring) -h
 
 theorem conjTranspose_Z_mul_Y (m : Fin M) : (Z m * Y m)ᴴ = -(Z m * Y m) := by
-  rw [Matrix.conjTranspose_mul, Z_conjTranspose, Y_conjTranspose]
+  rw [conjTranspose_mul_tensorPow, Z_conjTranspose, Y_conjTranspose]
   have h := anticomm_Z_Y m m
   rw [acomm] at h
   linear_combination (norm := noncomm_ring) h

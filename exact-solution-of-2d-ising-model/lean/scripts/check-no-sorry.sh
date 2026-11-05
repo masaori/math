@@ -1566,6 +1566,28 @@ targets=(
   "Ising2D.NecSuf.transpose_norm'"
   "Ising2D.NecSuf.transpose_tendsto'"
   Ising2D.transpose_tendsto_tensorPow
+  Ising2D.matrix_conjTranspose_mul_apply
+  Ising2D.matrix_conjTranspose_mul
+  Ising2D.matrix_conjTranspose_add_smul_apply
+  Ising2D.matrix_conjTranspose_add_smul
+  Ising2D.matrix_conjTranspose_norm
+  Ising2D.matrix_conjTranspose_sub_apply
+  Ising2D.matrix_conjTranspose_sub
+  Ising2D.matrix_conjTranspose_tendsto
+  Ising2D.matrix_conjTranspose_mul_of_necSuf
+  Ising2D.matrix_conjTranspose_add_smul_of_necSuf
+  Ising2D.matrix_conjTranspose_norm_of_necSuf
+  Ising2D.matrix_conjTranspose_tendsto_of_necSuf
+  Ising2D.conjTranspose_mul_tensorPow
+  Ising2D.conjTranspose_tendsto_tensorPow
+  "Ising2D.NecSuf.conjTranspose_mul_matrix_apply'"
+  "Ising2D.NecSuf.conjTranspose_mul_matrix'"
+  "Ising2D.NecSuf.conjTranspose_add_smul_matrix_apply'"
+  "Ising2D.NecSuf.conjTranspose_add_smul_matrix'"
+  "Ising2D.NecSuf.conjTranspose_sub_matrix_apply'"
+  "Ising2D.NecSuf.conjTranspose_sub_matrix'"
+  "Ising2D.NecSuf.conjTranspose_norm'"
+  "Ising2D.NecSuf.conjTranspose_tendsto'"
   Ising2D.identity_transpose_tensorPow
   Ising2D.tensorPow_mul_pow_comm
   Ising2D.tensorPow_pow_transpose_of_transpose_eq

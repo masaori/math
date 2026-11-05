@@ -24,15 +24,16 @@
 | 正値性の `Bx = 0` を仮定した 5 行の鎖（背理法） | `mulVec_ne_zero_of_left_inverse` の `calc` の 5 段 |
 | 正値性の最後の 2 行の鎖と `x^*(B^*(AB))x ∈ ℝ_{>0}` | `congruence_preserves_positive_definite` の `calc` の 2 段 |
 
-- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum`・`star_preserves_norm_and_limits` (1) の第 1 式
-  （`(AB)^* = B^*A^*`）には Lean の具体版が無く、同じ主張の mathlib の一段の補題 `star_mul'`・`star_sum`・
-  `Matrix.conjTranspose_mul` を引く。`mat_mult_associative` も具体版が無いので、既存の慣行どおり `Matrix.mul_assoc`
+- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum` には Lean の具体版が無く、同じ主張の mathlib の一段の補題
+  `star_mul'`・`star_sum` を引く。`star_preserves_norm_and_limits` (1) の第 1 式（`(AB)^* = B^*A^*`）は具体版
+  `matrix_conjTranspose_mul`（`ClaimStarPreservesNormAndLimits.lean`）を引く。`mat_mult_associative` も具体版が無いので、既存の慣行どおり `Matrix.mul_assoc`
   （行列と数ベクトルの積では `Matrix.mulVec_mulVec`）を 1 段に 1 回ずつ引く。
 - 人手の鎖の「分配律を項の数だけ繰り返す」「加法の結合律・交換律による有限和の順序の入れ替え」（`complex_numbers_form_a_field`）は、
   mathlib の `Finset.mul_sum`・`Finset.sum_mul`・`Finset.sum_comm` を、人手と同じ 1 行に当たる段の中でだけ使う。
 - 人手の `n ∈ ℤ_{≥1}` は効かないので仮定に置かない（`n = 0` でも主張は成り立つ）。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimits
 
 namespace Ising2D
 
@@ -120,8 +121,8 @@ theorem mulVec_zero_eq {n : ℕ} (B' : Matrix (Fin n) (Fin n) ℂ) : B' *ᵥ (0 
 theorem congruence_isHermitian {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ} (hA : Aᴴ = A)
     (B : Matrix (Fin n) (Fin n) ℂ) : (Bᴴ * (A * B))ᴴ = Bᴴ * (A * B) :=
   calc (Bᴴ * (A * B))ᴴ
-      = (A * B)ᴴ * Bᴴᴴ := Matrix.conjTranspose_mul _ _                           -- `star_preserves_norm_and_limits` (1) の第 1 式
-    _ = (Bᴴ * Aᴴ) * Bᴴᴴ := by rw [Matrix.conjTranspose_mul A B]                 -- `star_preserves_norm_and_limits` (1) の第 1 式
+      = (A * B)ᴴ * Bᴴᴴ := matrix_conjTranspose_mul _ _                           -- `star_preserves_norm_and_limits` (1) の第 1 式
+    _ = (Bᴴ * Aᴴ) * Bᴴᴴ := by rw [matrix_conjTranspose_mul A B]                 -- `star_preserves_norm_and_limits` (1) の第 1 式
     _ = (Bᴴ * A) * Bᴴᴴ := by rw [hA]                                             -- `A` は正定値なのでエルミート、`A^* = A`
     _ = (Bᴴ * A) * B := by rw [conjTranspose_conjTranspose_eq B]                -- 準備の `(B^*)^* = B`
     _ = Bᴴ * (A * B) := Matrix.mul_assoc _ _ _                                    -- `mat_mult_associative`
