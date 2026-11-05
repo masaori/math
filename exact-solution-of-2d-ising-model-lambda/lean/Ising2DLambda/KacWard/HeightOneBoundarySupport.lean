@@ -103,4 +103,21 @@ theorem heightOneBoundary_vertical_internal_parity (L m : ℕ) [NeZero L]
   exact hsupport.trans
     ((ne_comm).trans (closedWalk_standardDualHeight_vertical_internal_changes L m γ hγ i j hi hj))
 
+/-- At the horizontal seam, zero horizontal winding identifies the boundary support with traversal parity. -/
+theorem heightOneBoundary_horizontal_seam_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
+    (hseam : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0)
+    (j : ℕ) (hL : 2 ≤ L) (hj : j < L) :
+    cellSetEdgeCoefficient L (heightOneCells L m γ)
+        (edgeOfRow L false 0 (j : ZMod L)) ≠ 0 ↔
+      walkBaseEdgeParity γ (edgeOfRow L false 0 (j : ZMod L)) = 1 := by
+  have hprev : (0 : ZMod L) - 1 = ((L - 1 : ℕ) : ZMod L) := by
+    have hpositive : 1 ≤ L := by omega
+    rw [Nat.cast_sub hpositive, ZMod.natCast_self]
+    norm_num
+  have hsupport := heightOneBoundary_horizontal_support L m γ 0 (j : ZMod L)
+  rw [hprev] at hsupport
+  exact hsupport.trans
+    (closedWalk_standardDualHeight_horizontal_seam_changes L m γ hγ hseam j hL hj)
+
 end Ising2DLambda.KacWard

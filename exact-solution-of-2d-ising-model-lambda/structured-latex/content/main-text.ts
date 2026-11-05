@@ -63738,7 +63738,15 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                       paragraph(["が成り立つ。左辺の差は二つの零または一の整数の差なので、非零なら一または負一である。",
                         "横辺には ", math(String.raw`p=(i,j),q=(i-1,j)`),
                         "、縦辺には ", math(String.raw`p=(i,j-1),q=(i,j)`), " を代入する。",
-                        "辺長一では ", math(String.raw`p=q`), " となる。"]),
+                        "辺長一では横辺または縦辺 ", math(String.raw`e\in E_L`), " の両側は ", math(String.raw`p=q`), " となる。",
+                        "この場合の境界係数は"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_e
+&=\mathbf1_{p\in S_\gamma}-\mathbf1_{q\in S_\gamma}
+&&\bigl(\because\ \blkref{claim_cell_set_boundary_coefficients}\bigr)\\
+&=0
+&&\bigl(\because\ p=q\bigr)
+\end{aligned}`),
                     ],
                   },
                 },
@@ -63779,6 +63787,46 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &&\bigl(\because\ \blkref{claim_height_one_boundary_support}\bigr)\\
 &\iff N_\gamma(n_{\mathrm h}(i+1,j))=1
 &&\bigl(\because\ \blkref{claim_standard_dual_height_horizontal_internal}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_height_one_boundary_horizontal_seam_parity",
+                  focus: {
+                    id: "kac_ward_claim_height_one_boundary_horizontal_seam_parity",
+                    kind: "claim",
+                    title: { text: "高さ一の境界係数は横方向の切断線上の通過偶奇で決まる" },
+                    labels: ["claim_height_one_boundary_horizontal_seam_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/height-one-boundary-horizontal-seam-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.heightOneBoundary_horizontal_seam_parity",
+                      "Ising2DLambda.NecSuf.KacWard.heightOneBoundary_internal_parity",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、代表 ", math(String.raw`0\le j<L`), " を取る。横切断線偶奇 ",
+                        math(String.raw`h(\gamma)=0`), " と仮定する（", ref("def_edge_sequence_seam_parities"), "）。",
+                        "高さ一のセル集合 ", math(String.raw`S_\gamma`), " の境界係数と通過偶奇について、"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{n_{\mathrm h}(0,j)}\ne0
+\iff N_\gamma(n_{\mathrm h}(0,j))=1`),
+                      paragraph(["左辺の係数は ", math(String.raw`\mathbb Z`),
+                        "、右辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する。"]),
+                    ],
+                    proof: [
+                      paragraph(["切断線上の横辺 ", math(String.raw`n_{\mathrm h}(0,j)`),
+                        " の両側のセルは ", math(String.raw`(0,j)`), " と ",
+                        math(String.raw`(L-1,j)`), " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm h}(0,j)}\ne0
+&\iff f_\gamma(0,j)\ne f_\gamma(L-1,j)
+&&\bigl(\because\ \blkref{claim_height_one_boundary_support}\bigr)\\
+&\iff N_\gamma(n_{\mathrm h}(0,j))=1
+&&\bigl(\because\ \blkref{claim_closed_walk_standard_dual_height_horizontal_seam}\text{ と }h(\gamma)=0\bigr)
 \end{aligned}`),
                     ],
                   },
