@@ -529,6 +529,7 @@ export const ALL_LABELS = [
   "sum_of_real_entry_matrices_has_real_entries",
   "sum_over_binary_words_distributes_in_left_factor",
   "sum_over_binary_words_distributes_in_right_factor",
+  "sum_over_binary_words_entrywise",
   "sum_over_binary_words_with_one_nonzero_term",
   "symmetrized_transfer_matrix_on_sectors",
   "tensor_anticommutation_from_single_site",

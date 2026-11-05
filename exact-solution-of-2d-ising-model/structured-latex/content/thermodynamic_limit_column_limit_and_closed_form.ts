@@ -2431,6 +2431,151 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\righ
     ],
     proof: [
       paragraph([
+        "準備 1（記号）。",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`),
+        " とおく。",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`r \mapsto r_{\mathbb{C}}`),
+        " を成分ごとに当てる写像を",
+      ]),
+      displayMath(
+        String.raw`\iota^{n} : \mathbb{R}^{n} \to \mathbb{C}^{n}, \qquad
+\iota^{n}(x) := \bigl((x_1)_{\mathbb{C}}, \dots, (x_n)_{\mathbb{C}}\bigr)`,
+      ),
+      paragraph([
+        "と定める。",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " について ",
+        math(String.raw`a_{\mathbb{C}} = b_{\mathbb{C}}`),
+        " なら ",
+        math(String.raw`(a, 0) = (b, 0)`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）なので ",
+        math(String.raw`a = b`),
+        " である（以下「",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " の単射性」と呼ぶ）。",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）なので、各 ",
+        math(String.raw`k, l`),
+        " について ",
+        math(String.raw`W_{kl} = (w_{kl})_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`w_{kl} \in \mathbb{R}`),
+        " がただ一つある（一意性は単射性による）。",
+        math(String.raw`W_{\mathbb{R}} := (w_{kl}) \in \mathrm{Mat}(n,\mathbb{R})`),
+        " とおく。",
+        ref("def_sector_rayleigh_sup"),
+        " の ",
+        math(String.raw`x^\top Wx`),
+        " を ",
+        ref("def_real_bilinear_value"),
+        " の ",
+        math(String.raw`x^\top W_{\mathbb{R}}x \in \mathbb{R}`),
+        " と、",
+        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{n}`),
+        " を「",
+        math(String.raw`x \in \mathbb{R}^{n}`),
+        " かつ ",
+        math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
+        "」と読む。",
+      ]),
+      paragraph([
+        "準備 2（実の二次形式と複素の二次形式の橋）。",
+        math(String.raw`x \in \mathbb{R}^{n}`),
+        "、",
+        math(String.raw`u := \iota^{n}(x)`),
+        " とすると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(x^\top W_{\mathbb{R}}x\right)_{\mathbb{C}}
+&= \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n}\left(x_k\,w_{kl}\right)x_l\Bigr)_{\mathbb{C}}
+ &&\left(\because\ \blkref{def_real_bilinear_value}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\left(x_k\,w_{kl}\right)x_l\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を外と内の和へ}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left((x_k)_{\mathbb{C}}\,(w_{kl})_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_product}\ \text{を二つの積へ}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{(x_k)_{\mathbb{C}}}\,(w_{kl})_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
+ &&\left(\because\ \blkref{complex_conjugate_of_real_inclusion}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{u_k}\,W_{kl}\right)u_l
+ &&\left(\because\ u = \iota^{n}(x),\ W_{kl} = (w_{kl})_{\mathbb{C}}\right)\\
+&= u^*Wu
+ &&\left(\because\ \blkref{def_conjugate_bilinear_value}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 3。",
+        math(String.raw`u \in \mathbb{C}^{n}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について（",
+        math(String.raw`Au`),
+        " は ",
+        ref("mat_mult"),
+        " の積、",
+        math(String.raw`(Au)_k`),
+        " はその第 ",
+        math(String.raw`k`),
+        " 成分）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u^*Au
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{u_k}\,A_{kl}\right)u_l
+ &&\left(\because\ \blkref{def_conjugate_bilinear_value}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\overline{u_k}\left(A_{kl}\,u_l\right)
+ &&\left(\because\ \mathbb{C}\ \text{の積の結合則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\sum_{l=1}^{n}A_{kl}\,u_l
+ &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\,(Au)_k
+ &&\left(\because\ \blkref{mat_mult}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 4。",
+        math(String.raw`u \in \mathbb{C}^{n}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{k=1}^{n}\overline{u_k}\,u_k
+&= \sum_{k=1}^{n}\left(|u_k|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{complex_conjugate_times_self}\right)\\
+&= \Bigl(\sum_{k=1}^{n}|u_k|^2\Bigr)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_finite_sum}\right)\\
+&= \left(\|u\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`u = \iota^{n}(x)`),
+        "（",
+        math(String.raw`x \in \mathbb{R}^{n}`),
+        "）なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|u\|^2
+&= \sum_{k=1}^{n}\left|(x_k)_{\mathbb{C}}\right|^2
+ &&\left(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\right)\\
+&= \sum_{k=1}^{n}|x_k|^2
+ &&\left(\because\ \blkref{abs_basic_properties}\ \text{(6)}\right)\\
+&= \|x\|^2
+ &&\left(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
         "Step 0（",
         math(String.raw`\mathcal{F}^{(+)}`),
         " の上で ",
@@ -2438,109 +2583,207 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\righ
         " と ",
         math(String.raw`V^{(+)}`),
         " が一致すること）。",
-        math(String.raw`x \in \mathcal{F}^{(+)}`),
-        " なら、",
-        ref("def_epsilon_projectors"),
-        " と ",
-        ref("def_even_eigenvectors_of_epsilon"),
-        " より",
+        math(String.raw`y \in \mathcal{F}^{(+)}`),
+        " とすると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-P^{(+)}x
-&= \tfrac12(x + \varepsilon x)
-   \quad (\because \blkref{def_epsilon_projectors}\text{ の } P^{(+)} \text{ の定義}) \\
-&= \tfrac12(x + x)
-   \quad (\because x \in \mathcal{F}^{(+)} \text{ より } \varepsilon x = x.\ \blkref{def_even_eigenvectors_of_epsilon}) \\
-&= x
-   \quad (\because \text{スカラー倍を整理する})
+P^{(+)}y
+&= \left(\tfrac12\left(I + \varepsilon\right)\right)y
+ &&\left(\because\ \blkref{def_epsilon_projectors}\right)\\
+&= \tfrac12\left(\left(I + \varepsilon\right)y\right)
+ &&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right)\\
+&= \tfrac12\left(Iy + \varepsilon y\right)
+ &&\left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\right)\\
+&= \tfrac12\left(y + \varepsilon y\right)
+ &&\left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)\\
+&= \tfrac12\left(y + y\right)
+ &&\left(\because\ y \in \mathcal{F}^{(+)}\ \text{より}\ \varepsilon y = y\ \text{（}\blkref{def_even_eigenvectors_of_epsilon}\text{）}\right)\\
+&= y
+ &&\left(\because\ \blkref{def_matrix_sum}\ \text{と}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分で}\ \tfrac12(y_k + y_k) = y_k\right)
 \end{aligned}`,
       ),
       paragraph([
-        "である。したがって ",
-        ref("symmetrized_transfer_matrix_on_sectors"),
-        " の ",
-        math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
-        " より",
+        "であり、したがって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Wx
-&= WP^{(+)}x
-   \quad (\because \text{直前の } P^{(+)}x = x) \\
-&= V^{(+)}P^{(+)}x
-   \quad (\because \blkref{symmetrized_transfer_matrix_on_sectors}\text{ の }
-   WP^{(+)} = V^{(+)}P^{(+)}) \\
-&= V^{(+)}x
-   \quad (\because \text{直前の } P^{(+)}x = x)
+Wy
+&= W\left(P^{(+)}y\right)
+ &&\left(\because\ \text{直前の}\ P^{(+)}y = y\right)\\
+&= \left(WP^{(+)}\right)y
+ &&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&= \left(V^{(+)}P^{(+)}\right)y
+ &&\left(\because\ \blkref{symmetrized_transfer_matrix_on_sectors}\right)\\
+&= V^{(+)}\left(P^{(+)}y\right)
+ &&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&= V^{(+)}y
+ &&\left(\because\ \text{直前の}\ P^{(+)}y = y\right)
 \end{aligned}
-\qquad \left(x \in \mathcal{F}^{(+)}\right)`,
+\qquad \left(y \in \mathcal{F}^{(+)}\right)`,
       ),
       paragraph([
         "Step 1（",
         math(String.raw`c_+(M_{\mathrm{col}}) \leq \check\Lambda_{\max}`),
         "）。",
-        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x \in \mathbb{R}^{n}`),
+        "、",
+        math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
         "、",
         math(String.raw`\|x\| = 1`),
-        " とする。",
-        math(String.raw`x`),
-        " は実ベクトルなので ",
-        math(String.raw`x^\top = x^*`),
-        " である。",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2) と ",
-        ref("eigenvalues_of_V_plus"),
-        " (1) より",
+        " とし、",
+        math(String.raw`u := \iota^{n}(x)`),
+        "、",
+        math(String.raw`w_\epsilon := \check{Q}_\epsilon u`),
+        "（",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        "）とおく。まず",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-x^\top W x
-&= x^*V^{(+)}x
-   \quad (\because \text{Step 0 と } x^\top = x^*) \\
-&= x^*V^{(+)}\left(\sum_{\epsilon}\check{Q}_\epsilon\right)x
-   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (2)}) \\
-&= \sum_{\epsilon}\check\Lambda_\epsilon\,x^*\check{Q}_\epsilon x
-   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (1)}) \\
-&= \sum_{\epsilon}\check\Lambda_\epsilon
-   \left\|\check{Q}_\epsilon x\right\|^2
-   \quad (\because \blkref{check_number_operator_is_hermitian}\text{ (4)})
+u
+&= Iu
+ &&\left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)\\
+&= \Bigl(\sum_{\epsilon}\check{Q}_\epsilon\Bigr)u
+ &&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(2)}\right)\\
+&= \sum_{\epsilon}\check{Q}_\epsilon u
+ &&\left(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\right)\\
+&= \sum_{\epsilon}w_\epsilon
+ &&\left(\because\ w_\epsilon\ \text{の置き方}\right)
 \end{aligned}`,
       ),
       paragraph([
+        "であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{(+)}u
+&= V^{(+)}\Bigl(\sum_{\epsilon}\check{Q}_\epsilon u\Bigr)
+ &&\left(\because\ \text{直前の鎖の 3 行目}\right)\\
+&= \sum_{\epsilon}V^{(+)}\left(\check{Q}_\epsilon u\right)
+ &&\left(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\right)\\
+&= \sum_{\epsilon}\left(V^{(+)}\check{Q}_\epsilon\right)u
+ &&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&= \sum_{\epsilon}\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\check{Q}_\epsilon\right)u
+ &&\left(\because\ \blkref{eigenvalues_of_V_plus}\ \text{(1)}\right)\\
+&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}w_\epsilon
+ &&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ \text{と}\ w_\epsilon\ \text{の置き方}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`\sum_\epsilon`),
+        " は ",
+        ref("def_sum_over_binary_words"),
+        " の和）。",
+        ref("sum_over_binary_words_entrywise"),
+        " より、",
+        math(String.raw`u_k = \sum_\epsilon (w_\epsilon)_k`),
+        "、",
+        math(String.raw`(V^{(+)}u)_k = \sum_\epsilon(\check\Lambda_\epsilon)_{\mathbb{C}}(w_\epsilon)_k`),
+        " である（後者は ",
+        ref("def_matrix_scalar_multiple"),
+        " も使う）。これらを使うと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(x^\top W_{\mathbb{R}}x\right)_{\mathbb{C}}
+&= u^*Wu
+ &&\left(\because\ \text{準備 2}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\,(Wu)_k
+ &&\left(\because\ \text{準備 3}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\,\left(V^{(+)}u\right)_k
+ &&\left(\because\ u \in \mathcal{F}^{(+)}\ \text{と Step 0}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}(w_\epsilon)_k
+ &&\left(\because\ \text{直前の成分の式}\right)\\
+&= \sum_{k=1}^{n}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
+ &&\left(\because\ \mathbb{C}\ \text{の分配則・交換則・結合則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{\epsilon}\sum_{k=1}^{n}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
+ &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合則・交換則。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
+ &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\,u^*\check{Q}_\epsilon u
+ &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
+&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{check_number_operator_is_hermitian}\ \text{の (4) に続く式}\right)\\
+&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\,\|w_\epsilon\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_product}\right)\\
+&= \Bigl(\sum_{\epsilon}\check\Lambda_\epsilon\,\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、同じく",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon}\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
+&= \sum_{\epsilon}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\right)\\
+&= \sum_{\epsilon}u^*\check{Q}_\epsilon u
+ &&\left(\because\ \blkref{check_number_operator_is_hermitian}\ \text{の (4) に続く式}\right)\\
+&= \sum_{\epsilon}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
+ &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
+&= \sum_{k=1}^{n}\sum_{\epsilon}\overline{u_k}\,(w_\epsilon)_k
+ &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合則・交換則。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}(w_\epsilon)_k
+ &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \sum_{k=1}^{n}\overline{u_k}\,u_k
+ &&\left(\because\ u_k = \textstyle\sum_\epsilon (w_\epsilon)_k\right)\\
+&= \left(\|u\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \text{準備 4}\right)\\
+&= \left(\|x\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \text{準備 4 の}\ \|\iota^{n}(x)\|^2 = \|x\|^2\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " の単射性より、二つの鎖の両端は ",
+        math(String.raw`\mathbb{R}`),
+        " の等式 ",
+        math(String.raw`x^\top W_{\mathbb{R}}x = \sum_\epsilon\check\Lambda_\epsilon\|w_\epsilon\|^2`),
+        "、",
+        math(String.raw`\sum_\epsilon\|w_\epsilon\|^2 = \|x\|^2`),
+        " を与える。",
         ref("eigenvalues_of_V_plus"),
         " (2) より ",
-        math(String.raw`0 < \check\Lambda_\epsilon \leq \check\Lambda_{\max}`),
-        " であり、各 ",
-        math(String.raw`\left\|\check{Q}_\epsilon x\right\|^2 \geq 0`),
-        " なので",
+        math(String.raw`\check\Lambda_\epsilon \leq \check\Lambda_{\max}`),
+        " であり、",
+        math(String.raw`\|w_\epsilon\|^2 \geq 0`),
+        " なので、各 ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`\check\Lambda_\epsilon\|w_\epsilon\|^2 \leq \check\Lambda_{\max}\|w_\epsilon\|^2`),
+        " である。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-x^\top Wx
-&\leq \check\Lambda_{\max}
- \sum_{\epsilon}\left\|\check{Q}_\epsilon x\right\|^2
- &&\left(\because\ 0<\check\Lambda_\epsilon\leq\check\Lambda_{\max}
- \text{ と }\left\|\check{Q}_\epsilon x\right\|^2\geq0\right)\\
-&= \check\Lambda_{\max}\sum_{\epsilon}x^*\check{Q}_\epsilon x
- &&\left(\because\ \check Q_\epsilon\text{ はエルミートな冪等行列}
- \text{（}\blkref{check_number_operator_is_hermitian}\text{ (4)）}\right)\\
-&= \check\Lambda_{\max}\,x^*\!\left(\sum_{\epsilon}\check{Q}_\epsilon\right)\!x
- &&\left(\because\ \text{有限和に対する行列積の分配則}\right)\\
-&= \check\Lambda_{\max}\,x^*x
- &&\left(\because\ \sum_\epsilon\check Q_\epsilon=I
- \text{（}\blkref{check_joint_eigenspace_decomposition}\text{ (2)）}\right)\\
+x^\top W_{\mathbb{R}}x
+&= \sum_{\epsilon}\check\Lambda_\epsilon\,\|w_\epsilon\|^2
+ &&\left(\because\ \text{直前の}\ \mathbb{R}\ \text{の等式}\right)\\
+&\leq \sum_{\epsilon}\check\Lambda_{\max}\,\|w_\epsilon\|^2
+ &&\left(\because\ \text{各項の不等式を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の和で足し合わせる}\right)\\
+&= \check\Lambda_{\max}\sum_{\epsilon}\|w_\epsilon\|^2
+ &&\left(\because\ \mathbb{R}\ \text{の分配則を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の各段の和へ}\right)\\
 &= \check\Lambda_{\max}\,\|x\|^2
- &&\left(\because\ \text{複素ベクトルのノルムの定義}\right)\\
+ &&\left(\because\ \text{直前の}\ \mathbb{R}\ \text{の等式}\right)\\
 &= \check\Lambda_{\max}
- &&\left(\because\ \|x\|=1\right)
+ &&\left(\because\ \|x\| = 1\right)
 \end{aligned}`,
       ),
       paragraph([
+        "である。",
         math(String.raw`x`),
         " は任意だったので ",
+        math(String.raw`\check\Lambda_{\max}`),
+        " は ",
+        ref("def_sector_rayleigh_sup"),
+        " の ",
+        math(String.raw`\mathcal{R}_+`),
+        " の上界であり、上限は最小の上界なので ",
         math(String.raw`c_+(M_{\mathrm{col}}) \leq \check\Lambda_{\max}`),
-        "。",
+        " である。",
       ]),
       paragraph([
         "Step 2（実の最大固有ベクトルの存在）。",
@@ -2549,139 +2792,363 @@ x^\top Wx
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " は 1 次元なので、生成元 ",
         math(String.raw`q \neq 0`),
-        " を取る。",
-        ref("eigenvalues_of_V_plus"),
-        " (1) より ",
-        math(String.raw`V^{(+)}q = \check\Lambda_{\max}q`),
+        " を取ると ",
+        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)} = \mathbb{C}q`),
         " である。",
-      ]),
-      paragraph([
-        math(String.raw`V^{(+)}`),
-        " の成分は実である。実際 ",
-        ref("V_plus_is_positive_definite"),
-        " の表示 ",
-        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(\tfrac12S_1^{(+)}\right)
-\exp(S_2)\exp\!\left(\tfrac12S_1^{(+)}\right)`),
-        " において、",
-        ref("iH_is_real_symmetric"),
+        ref("max_eigenvalue_of_V_plus_simple"),
+        " (3) より ",
+        math(String.raw`V^{(+)}q = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}q`),
+        "、",
+        ref("max_eigenvector_in_even_sector"),
+        " (4) より ",
+        math(String.raw`q \in \mathcal{F}^{(+)}`),
+        " なので、Step 0 より ",
+        math(String.raw`Wq = V^{(+)}q = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}q`),
+        "、",
+        ref("def_even_eigenvectors_of_epsilon"),
         " より ",
-        math(String.raw`S_1^{(+)}, S_2`),
-        " は実対称であり、",
-        ref("W_is_real_symmetric_positive_definite"),
-        " の Step 2 と同じ議論（実対称行列の冪は実対称、",
-        ref("def_exp"),
-        " の部分和も実対称、",
-        ref("star_preserves_norm_and_limits"),
-        " (3) と同様に転置もノルムを保つので極限も実対称）により ",
-        math(String.raw`\exp\!\left(\tfrac12S_1^{(+)}\right)`),
-        " と ",
-        math(String.raw`\exp(S_2)`),
-        " は実対称、",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
-        " なので ",
-        math(String.raw`V^{(+)}`),
-        " も実行列である。",
+        math(String.raw`\varepsilon q = q`),
+        " である。",
+        math(String.raw`\overline{q} := \left(\overline{q_1},\dots,\overline{q_n}\right) \in \mathbb{C}^{n}`),
+        " とおく。",
+        math(String.raw`W`),
+        " の成分は ",
+        math(String.raw`W_{kl} = (w_{kl})_{\mathbb{C}}`),
+        "（準備 1）なので、各 ",
+        math(String.raw`k`),
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(W\overline{q}\right)_k
+&= \sum_{l=1}^{n}W_{kl}\,\overline{q_l}
+ &&\left(\because\ \blkref{mat_mult}\right)\\
+&= \sum_{l=1}^{n}\overline{W_{kl}}\,\overline{q_l}
+ &&\left(\because\ W_{kl} = (w_{kl})_{\mathbb{C}}\ \text{と}\ \blkref{complex_conjugate_of_real_inclusion}\right)\\
+&= \sum_{l=1}^{n}\overline{W_{kl}\,q_l}
+ &&\left(\because\ \blkref{complex_conjugate_of_product}\right)\\
+&= \overline{\sum_{l=1}^{n}W_{kl}\,q_l}
+ &&\left(\because\ \blkref{complex_conjugate_of_sum}\ \text{を左から順の各和へ}\right)\\
+&= \overline{(Wq)_k}
+ &&\left(\because\ \blkref{mat_mult}\right)\\
+&= \overline{\left(\check\Lambda_{\max}\right)_{\mathbb{C}}\,q_k}
+ &&\left(\because\ Wq = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}q\ \text{と}\ \blkref{def_matrix_scalar_multiple}\right)\\
+&= \overline{\left(\check\Lambda_{\max}\right)_{\mathbb{C}}}\;\overline{q_k}
+ &&\left(\because\ \blkref{complex_conjugate_of_product}\right)\\
+&= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\,\overline{q_k}
+ &&\left(\because\ \blkref{complex_conjugate_of_real_inclusion}\right)
+\end{aligned}`,
+      ),
       paragraph([
-        "したがって ",
-        math(String.raw`\overline{V^{(+)}q} = V^{(+)}\overline{q}`),
-        " であり、",
-        math(String.raw`\check\Lambda_{\max} \in \mathbb{R}`),
-        "（",
-        ref("eigenvalues_of_V_plus"),
-        "）なので ",
-        math(String.raw`V^{(+)}\overline{q} = \check\Lambda_{\max}\overline{q}`),
+        "であり、",
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の成分も実数（",
+        ref("def_matrix_with_real_entries"),
+        " の意味で、各 ",
+        math(String.raw`k, l`),
+        " に ",
+        math(String.raw`\varepsilon_{kl} = (e_{kl})_{\mathbb{C}}`),
+        " なる ",
+        math(String.raw`e_{kl} \in \mathbb{R}`),
+        " がある）なので、同じ鎖（",
+        math(String.raw`W \to \varepsilon`),
+        "、",
+        math(String.raw`w_{kl} \to e_{kl}`),
+        "、",
+        math(String.raw`\left(\check\Lambda_{\max}\right)_{\mathbb{C}} \to 1_{\mathbb{C}}`),
+        "。",
+        math(String.raw`\varepsilon q = q = 1_{\mathbb{C}}q`),
+        " は ",
+        ref("scalar_multiple_by_one"),
+        "、",
+        math(String.raw`1_{\mathbb{C}}`),
+        " が共役で動かないことは ",
+        ref("complex_conjugate_of_real_inclusion"),
+        "）で ",
+        math(String.raw`(\varepsilon\overline{q})_k = \overline{q_k}`),
+        " である。よって ",
+        math(String.raw`W\overline{q} = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\overline{q}`),
+        "、",
+        math(String.raw`\overline{q} \in \mathcal{F}^{(+)}`),
+        " であり、Step 0 より ",
+        math(String.raw`V^{(+)}\overline{q} = W\overline{q} = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\overline{q}`),
         "。",
         ref("max_eigenvalue_of_V_plus_simple"),
-        " (3) より固有空間は 1 次元の ",
-        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)} = \mathbb{C}q`),
+        " (3) より ",
+        math(String.raw`\overline{q} \in \mathrm{im}\,\check{Q}_{(1,\dots,1)} = \mathbb{C}q`),
         " なので、ある ",
         math(String.raw`z \in \mathbb{C}`),
         " で ",
         math(String.raw`\overline{q} = zq`),
-        " と書ける。",
+        " である。",
       ]),
       paragraph([
-        "ここで ",
-        math(String.raw`p := q + \overline{q} = (1+z)q`),
+        math(String.raw`i := (0,1) \in \mathbb{C}`),
+        " とし、",
+        math(String.raw`p := q + \overline{q}`),
         "、",
-        math(String.raw`p' := i\left(q - \overline{q}\right) = i(1-z)q`),
-        " とおくと、",
-        math(String.raw`\overline{p} = p`),
-        "、",
-        math(String.raw`\overline{p'} = \overline{i}\left(\overline{q}-q\right)
-= (-i)\left(\overline{q}-q\right) = p'`),
+        math(String.raw`p' := i\left(q - \overline{q}\right)`),
+        " とおく（和・差・スカラー倍は ",
+        ref("def_matrix_sum"),
+        "・",
+        ref("def_matrix_difference"),
+        "・",
+        ref("def_matrix_scalar_multiple"),
+        "）。",
+        ref("def_complex_conjugate"),
+        " より ",
+        math(String.raw`\overline{\overline{c}} = c`),
+        "（",
+        math(String.raw`c \in \mathbb{C}`),
+        "）、",
+        math(String.raw`\overline{i} = (0,-1) = -i`),
+        " である。各 ",
+        math(String.raw`k`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\overline{p_k}
+&= \overline{q_k + \overline{q_k}}
+ &&\left(\because\ p\ \text{の置き方}\right)\\
+&= \overline{q_k} + \overline{\overline{q_k}}
+ &&\left(\because\ \blkref{complex_conjugate_of_sum}\right)\\
+&= \overline{q_k} + q_k
+ &&\left(\because\ \overline{\overline{c}} = c\right)\\
+&= p_k
+ &&\left(\because\ \mathbb{C}\ \text{の加法の交換則（}\blkref{complex_numbers_form_a_field}\text{）}\right)
+\end{aligned}
+\qquad
+\begin{aligned}
+\overline{p'_k}
+&= \overline{i\left(q_k - \overline{q_k}\right)}
+ &&\left(\because\ p'\ \text{の置き方}\right)\\
+&= \overline{i}\;\overline{q_k - \overline{q_k}}
+ &&\left(\because\ \blkref{complex_conjugate_of_product}\right)\\
+&= (-i)\;\overline{q_k - \overline{q_k}}
+ &&\left(\because\ \overline{i} = -i\right)\\
+&= (-i)\left(\overline{q_k} - \overline{\overline{q_k}}\right)
+ &&\left(\because\ \blkref{complex_conjugate_of_difference}\right)\\
+&= (-i)\left(\overline{q_k} - q_k\right)
+ &&\left(\because\ \overline{\overline{c}} = c\right)\\
+&= i\left(q_k - \overline{q_k}\right)
+ &&\left(\because\ \mathbb{C}\ \text{の分配則と符号（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= p'_k
+ &&\left(\because\ p'\ \text{の置き方}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。また ",
+        math(String.raw`\overline{q} = zq`),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+p &= q + zq
+ &&\left(\because\ \overline{q} = zq\right)\\
+&= (1_{\mathbb{C}} + z)q
+ &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_sum}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配則}\right)\\
+p' &= i\left(q - zq\right)
+ &&\left(\because\ \overline{q} = zq\right)\\
+&= i\left((1_{\mathbb{C}} - z)q\right)
+ &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_difference}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配則}\right)\\
+&= \left(i(1_{\mathbb{C}} - z)\right)q
+ &&\left(\because\ \blkref{scalar_multiple_is_associative}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`1_{\mathbb{C}} + z = 0`),
+        " と ",
+        math(String.raw`i(1_{\mathbb{C}} - z) = 0`),
+        " が同時に成り立つと、",
+        math(String.raw`i \neq 0`),
         " なので ",
-        math(String.raw`p, p'`),
-        " はいずれも実ベクトルである。",
-        math(String.raw`1+z`),
-        " と ",
-        math(String.raw`i(1-z)`),
-        " が同時に ",
-        math(String.raw`0`),
-        " になることはない（",
-        math(String.raw`z = -1`),
+        math(String.raw`i^{-1}`),
+        " を掛けて ",
+        math(String.raw`z = -1_{\mathbb{C}}`),
         " かつ ",
-        math(String.raw`z = 1`),
-        " は不可能）ので、",
+        math(String.raw`z = 1_{\mathbb{C}}`),
+        " となり矛盾する。よって ",
+        math(String.raw`1_{\mathbb{C}} + z`),
+        " と ",
+        math(String.raw`i(1_{\mathbb{C}} - z)`),
+        " のうち 0 でない方を ",
+        math(String.raw`c`),
+        " とし、対応する ",
         math(String.raw`p`),
-        " と ",
+        " または ",
         math(String.raw`p'`),
-        " の少なくとも一方は ",
-        math(String.raw`0`),
-        " でない。それを ",
+        " を ",
         math(String.raw`v`),
-        " とすると ",
-        math(String.raw`v \in \mathbb{C}q\setminus\{0\}`),
-        " かつ ",
-        math(String.raw`v \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " とする（",
+        math(String.raw`v = cq`),
+        "）。",
+        math(String.raw`q_{k_0} \neq 0`),
+        " なる ",
+        math(String.raw`k_0`),
+        " を取ると、",
+        math(String.raw`v_{k_0} = 0`),
+        " なら ",
+        math(String.raw`q_{k_0} = c^{-1}(c\,q_{k_0}) = 0`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の逆元）となるので ",
+        math(String.raw`v_{k_0} \neq 0`),
+        "、すなわち ",
+        math(String.raw`v \neq 0`),
+        " である。上の二つの鎖より各 ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`\overline{v_k} = v_k`),
         " である。",
-        math(String.raw`x_0 := v/\|v\|`),
-        " とおく。",
+        math(String.raw`v_k = (a_k, b_k)`),
+        "（",
+        ref("definition_of_cc"),
+        "）とすると ",
+        ref("def_complex_conjugate"),
+        " より ",
+        math(String.raw`(a_k, -b_k) = (a_k, b_k)`),
+        "、よって ",
+        math(String.raw`b_k = 0`),
+        "、",
+        math(String.raw`v_k = (a_k, 0) = (a_k)_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）である。",
+        math(String.raw`r := (a_1,\dots,a_n) \in \mathbb{R}^{n}`),
+        " とおくと ",
+        math(String.raw`\iota^{n}(r) = v \neq 0`),
+        " なので ",
+        math(String.raw`r \neq 0`),
+        "、すなわち ",
+        math(String.raw`a_{k_1} \neq 0`),
+        " なる ",
+        math(String.raw`k_1`),
+        " がある。",
+        ref("def_matrix_norm"),
+        " と ",
+        ref("definition_of_sqrt_r_positive"),
+        " の ",
+        math(String.raw`y^2 = x`),
+        " より ",
+        math(String.raw`\|r\|^2 = \sum_k |a_k|^2`),
+        "、",
+        ref("finite_sum_of_nonnegative_reals_is_at_least_each_term"),
+        " より ",
+        math(String.raw`\|r\|^2 \geq |a_{k_1}|^2 > 0`),
+        "、よって ",
+        math(String.raw`\|r\| > 0`),
+        " である。",
+        math(String.raw`x_0 := \left(a_1/\|r\|,\dots,a_n/\|r\|\right) \in \mathbb{R}^{n}`),
+        " とおくと、",
+        ref("def_matrix_norm"),
+        " と ",
+        ref("definition_of_sqrt_r_positive"),
+        " の ",
+        math(String.raw`y^2 = x`),
+        " より ",
+        math(String.raw`\|x_0\|^2 = \sum_k |a_k|^2/\|r\|^2 = \|r\|^2/\|r\|^2 = 1`),
+        " であり、",
+        ref("real_inclusion_preserves_product"),
+        " より ",
+        math(String.raw`\iota^{n}(x_0) = \left(1/\|r\|\right)_{\mathbb{C}}v
+= \left(\left(1/\|r\|\right)_{\mathbb{C}}c\right)q \in \mathbb{C}q`),
+        "（",
+        ref("scalar_multiple_is_associative"),
+        "）である。",
       ]),
       paragraph([
         "Step 3（",
         math(String.raw`c_+(M_{\mathrm{col}}) \geq \check\Lambda_{\max}`),
         "）。",
-        math(String.raw`x_0 \in \mathbb{C}q = \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
+        math(String.raw`u_0 := \iota^{n}(x_0)`),
+        " とおく。",
+        math(String.raw`u_0 \in \mathbb{C}q = \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " なので ",
         ref("max_eigenvector_in_even_sector"),
         " (4) より ",
-        math(String.raw`x_0 \in \mathcal{F}^{(+)}`),
-        " であり、",
-        math(String.raw`x_0`),
-        " は実で ",
-        math(String.raw`\|x_0\| = 1`),
-        " である。Step 0 と ",
-        ref("eigenvalues_of_V_plus"),
-        " (1) より",
+        math(String.raw`u_0 \in \mathcal{F}^{(+)}`),
+        "、",
+        ref("max_eigenvalue_of_V_plus_simple"),
+        " (3) より ",
+        math(String.raw`V^{(+)}u_0 = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}u_0`),
+        " である。よって",
       ]),
       displayMath(
-        String.raw`x_0^\top Wx_0
-= x_0^\top V^{(+)}x_0
-= x_0^\top\left(\check\Lambda_{\max}x_0\right)
-= \check\Lambda_{\max}\,x_0^\top x_0
-= \check\Lambda_{\max}`,
+        String.raw`\begin{aligned}
+\left(x_0^\top W_{\mathbb{R}}x_0\right)_{\mathbb{C}}
+&= u_0^*Wu_0
+ &&\left(\because\ \text{準備 2}\right)\\
+&= \sum_{k=1}^{n}\overline{(u_0)_k}\,(Wu_0)_k
+ &&\left(\because\ \text{準備 3}\right)\\
+&= \sum_{k=1}^{n}\overline{(u_0)_k}\,\left(V^{(+)}u_0\right)_k
+ &&\left(\because\ u_0 \in \mathcal{F}^{(+)}\ \text{と Step 0}\right)\\
+&= \sum_{k=1}^{n}\overline{(u_0)_k}\left(\left(\check\Lambda_{\max}\right)_{\mathbb{C}}(u_0)_k\right)
+ &&\left(\because\ V^{(+)}u_0 = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}u_0\ \text{と}\ \blkref{def_matrix_scalar_multiple}\right)\\
+&= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{(u_0)_k}\,(u_0)_k
+ &&\left(\because\ \mathbb{C}\ \text{の交換則・結合則・分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\left(\|x_0\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \text{準備 4（}u_0 = \iota^{n}(x_0)\text{）}\right)\\
+&= \left(\check\Lambda_{\max}\,\|x_0\|^2\right)_{\mathbb{C}}
+ &&\left(\because\ \blkref{real_inclusion_preserves_product}\right)\\
+&= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}
+ &&\left(\because\ \|x_0\| = 1\right)
+\end{aligned}`,
       ),
       paragraph([
-        "したがって ",
-        math(String.raw`c_+(M_{\mathrm{col}})`),
-        " を定める集合は ",
-        math(String.raw`\check\Lambda_{\max}`),
-        " を要素にもち、",
-        math(String.raw`c_+(M_{\mathrm{col}}) \geq \check\Lambda_{\max}`),
-        "。Step 1 と合わせて ",
-        math(String.raw`c_+(M_{\mathrm{col}}) = \check\Lambda_{\max}`),
-        " であり、上限は ",
-        math(String.raw`x_0`),
-        " で達成される。",
+        "であり、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " の単射性より ",
+        math(String.raw`x_0^\top W_{\mathbb{R}}x_0 = \check\Lambda_{\max}`),
+        " である。",
+        math(String.raw`x_0 \in \mathbb{R}^{n}`),
+        "、",
+        math(String.raw`\iota^{n}(x_0) \in \mathcal{F}^{(+)}`),
+        "、",
+        math(String.raw`\|x_0\| = 1`),
+        " なので ",
+        math(String.raw`\check\Lambda_{\max} \in \mathcal{R}_+`),
+        " であり、上限は上界なので ",
+        math(String.raw`\check\Lambda_{\max} \leq c_+(M_{\mathrm{col}})`),
+        " である。",
       ]),
       paragraph([
-        "最後に ",
-        ref("max_eigenvalue_of_V_plus_simple"),
-        " (1) の ",
-        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
-        " を代入すれば主張の等式を得る。",
+        "結び。",
+        ref("def_Theta_delta_M"),
+        " の ",
+        math(String.raw`\delta = \tfrac12`),
+        " と ",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        " はどちらも ",
+        math(String.raw`2\pi\left(\mu_{\mathbb{R}} - \tfrac12\right)/(M_{\mathrm{col}})_{\mathbb{R}}`),
+        " なので ",
+        math(String.raw`\theta^{(1/2)}_{M_{\mathrm{col}},\mu} = \tilde\theta_\mu`),
+        " である。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_+(M_{\mathrm{col}})
+&= \check\Lambda_{\max}
+ &&\left(\because\ \text{Step 1 と Step 3（}\mathbb{R}\ \text{の順序の反対称律）}\right)\\
+&= \Lambda^{(1/2)}_{M_{\mathrm{col}}}
+ &&\left(\because\ \blkref{max_eigenvalue_of_V_plus_simple}\ \text{(1)}\right)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+ \exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(1/2)}_{M_{\mathrm{col}},\mu}\bigr)\right)
+ &&\left(\because\ \blkref{def_Lambda_delta_M}\ \text{の}\ \delta = \tfrac12\right)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+ \exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\right)
+ &&\left(\because\ \theta^{(1/2)}_{M_{\mathrm{col}},\mu} = \tilde\theta_\mu\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、上限は ",
+        math(String.raw`x_0`),
+        " で達成される。",
       ]),
     ],
     conversion: {
@@ -2691,6 +3158,8 @@ x^\top Wx
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（P^{(+)}WP^{(+)} を F^{(+)} の実基底へ制限して最大固有値を直接求め、Λ^{(1/2)}_M と比較。相対差 ≤ 2e-14）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した。証明の式の根拠欄でラベルを文字として書いていた箇所（check_joint_eigenspace_decomposition・eigenvalues_of_V_plus・check_number_operator_is_hermitian）を、ブロックへの参照に直した。数学の中身は変えていない。",
+        "2026-11-05: SageMath の検算（sagemath/check/c_plus_equals_Lambda_half_integer/）を付けるにあたり、主張は変えずに証明を書き直した。旧い証明は ℝ の値 x^⊤Wx と ℂ の値 x^*V^{(+)}x を「x^⊤ = x^*」で等号に結んでいた（def_real_bilinear_value・def_conjugate_bilinear_value はどちらも数ベクトルと行列の積としては読まない記号）。ℝ^n → ℂ^n の包含 ι^n と W の実成分の行列 W_ℝ に名前を付け、(x^⊤W_ℝx)_ℂ = ι^n(x)^*Wι^n(x) の鎖を準備に置き、Step 1・Step 3 を ℂ の鎖と (·)_ℂ の単射性で ℝ へ戻す形にした。Step 1 の一行で三つの操作をしていた行を分け、Step 0 の P^{(+)}x の行を分けた。Step 2 の V^{(+)} の成分が実であることを散文（W_is_real_symmetric_positive_definite の Step 2 と同じ議論）で示していた段を、既にある主張 W_is_real_symmetric_positive_definite（W の成分は実）と epsilon_is_real_symmetric（ε の成分は実）と Step 0 から conj(q) が同じ固有空間に入ることを示す成分の鎖に替えた（V^{(+)} の成分が実であることは使わない）。p・p' の段を成分の鎖にし、複素共役で動かない複素数が (a)_ℂ であることを def_complex_conjugate から書いた。最後に c_+ から閉形式までの鎖を置き、θ^{(1/2)}_{M,μ} = θ̃_μ を書いた。計算の誤りは無かった。",
+        "数値検証の場所: 上の 053_claim_even_sector_closing/check_04 に加え、証明の行と対応する検算は sagemath/check/c_plus_equals_Lambda_half_integer/ にある。",
       ],
     },
   },

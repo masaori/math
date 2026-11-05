@@ -3230,6 +3230,79 @@ C \Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr)
     },
   },
   {
+    id: "linear_space_general_claim_sum_over_binary_words_entrywise",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の行列の和の成分は、成分の和に等しい}` },
+    labels: ["sum_over_binary_words_entrywise"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`X_\epsilon \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。行列の和は ",
+        ref("def_sum_over_binary_words"),
+        "、右辺の複素数の和は ",
+        ref("def_sum_over_binary_words_of_complex_numbers"),
+        " による。このとき、",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{\epsilon \in \{0,1\}^{r}} X_\epsilon\Bigr)_{ik} = \sum_{\epsilon \in \{0,1\}^{r}} (X_\epsilon)_{ik}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{1}} X_\epsilon\Bigr)_{ik}
+&= \bigl(X_{(1)} + X_{(0)}\bigr)_{ik}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon)\bigr)\\
+&= (X_{(1)})_{ik} + (X_{(0)})_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} (X_\epsilon)_{ik}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\ (z_\epsilon \to (X_\epsilon)_{ik})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`X_\epsilon`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr)_{ik}
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr)\Bigr)_{ik}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon)\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr)_{ik}
+&&\bigl(\because\ \text{帰納法の仮定}\ (X_{\epsilon'} \to X_{(\epsilon',1)} + X_{(\epsilon',0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl((X_{(\epsilon',1)})_{ik} + (X_{(\epsilon',0)})_{ik}\bigr)
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} (X_\epsilon)_{ik}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\ (z_\epsilon \to (X_\epsilon)_{ik})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05: 原文（Typst）に対応ブロックは無い。c_plus_equals_Lambda_half_integer の証明の Step 1 が、u = Σ_ε w_ε と V^{(+)}u = Σ_ε (Λ̌_ε)_ℂ w_ε の第 k 成分を成分の和として読むところを、主張の無い帰納法の散文で済ませていたので足した。" +
+          "{1,…,r} の上の和の finite_sum_of_matrices_entrywise に当たる。sum_over_binary_words_distributes_in_right_factor と同じ帰納法。Lean は未形式化。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_sum_over_binary_words_with_one_nonzero_term",
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和で、一つの項以外が零行列なら、和はその項に等しい}` },

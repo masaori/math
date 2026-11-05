@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 7 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 417 件のうち、SageMath の検算が無いもの 6 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -396,12 +396,16 @@
 - `gamma_is_continuous`（γ は ℝ 上で連続）: `sagemath/check/gamma_is_continuous/`。Step 1 の γ_1 の式と係数、Step 2 の y^2-1 ≥ 0・y+√(y^2-1) ≥ 1、Step 3 の γ_1(qπ) ≥ 1 を `QQ` の多項式と `AA` で厳密に、連続性（γ_1・arccosh・γ）を、選んだ点の周りの区間での振れ幅の囲みが δ = 2^{-10}〜2^{-40} で 0 へ縮むことで `RealBallField(512)` で確かめた（連続性の証明ではない。log は本文の exp のボールで挟み、cos は Arb の cos）。**人手証明を直した**（主張は連続性だけに減らした。計算の誤りは無し）: (1) 主張が連続性と周期 2π の二つを持っていた。周期性は本文のどこからも使われず、根拠の cos の 2π 周期性も前提として宣言していなかったので、`notes/claims_unused_by_chapter_goals_not_adopted.ts` へ移した。(2) Step 2 の準備（u := log(y+√(y^2-1)) と exp(u)・exp(-u)・cosh u = y・u ≥ 0）は結論に使われず、arccosh(y) = u = log(…) は定義へ戻るだけだったので除いた。(3) 各 Step に `def_gamma1_gamma2_of_theta`・`def_arccosh`・`def_gamma_theta` の blkref と (R0) の参照を置き、(R0) に無い定数関数・恒等写像・制限の連続性は連続の定義から従うと書いて分けた。Step 3 は γ_1 の値域を書き換えずに合成した。主張に全実数上の cos を前提とすることを書いた。三回のレビューで必須の指摘が無くなるまで直した。Lean はコメントと `lean/docs/ch012-formalization.md` の表だけを付け替えた（`gamma1R_periodic`・`gammaFn_periodic` はノートの内容の形式化として残した）。
 - `check_number_operator_is_hermitian`（ň_μ・Q̌_ε はエルミートで x^*Q̌_εx = ‖Q̌_εx‖^2 ≥ 0）: `sagemath/check/check_number_operator_is_hermitian/`。(1) の Pauli 行列・クロネッカー積の共役転置の成分の鎖・(σ_k^a)^*・Z_j・Y_j の鎖を QQ(i) で（M_col = 1..5）、(2) の位相の等式と Ž_μ・Y̌_μ の鎖を円分体で（M_col = 2..6）、(3)(4) の conj(α_μ)・(ψ̌_μ^†)^*・ň_μ・Q̌_ε・結びの鎖を本物の ψ̌ の数体 E_μ で（結合定数 3 組 × M_col = 2, 3、ε の全て）厳密に確かめた（等号 5495・495・5126 件、否定コントロール 26・72・32 件。複素共役は体の自己同型として生成元で確かめた。浮動小数点なし）。**人手証明を直した**（計算と主張は不変）: 根拠のラベルの取り違え 7 箇所（kronecker_product_rule (2)→def_kronecker (2)、同 (1)→distinct_site_pauli_matrices_commute、def_transfer_matrix_symbols→def_jordan_wigner_Z/Y_matrices、def_half_integer_modes→def_half_integer_checkZ/Y、def_check_fermi→def_check_number_operator、Z_Y_linearly_independent→pauli_matrix_products）、クロネッカー積の共役転置と (σ_k^a)^* を散文から鎖へ、結びの鎖を本文に定義の無い数ベクトルの共役転置を経ない成分の鎖へ書き直し、(XW)^* = W^*X^* と線型性を star_preserves_norm_and_limits (1) で引いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（ClaimCheckQHermitian.lean は新しい鎖の行と 1 対 1 でない。Lean の連続実行の受け持ち）。
 
+- `c_plus_equals_Lambda_half_integer`（c_+(M_col) = Λ̌_max = Λ^{(1/2)}_{M_col}）: `sagemath/check/c_plus_equals_Lambda_half_integer/`。本文の ψ̌ から作った ε・Q̌_ε（数体 E_1）、成分が QQ の V^{(+)} と W で、準備・Step 0〜3・結びの全ての鎖を E_1・QQbar・AA で厳密に確かめ（等号 1734・3783 件、否定コントロール 48・24 件。結合定数 3 組 × M_col = 2, 3）、c_+ を Λ̌ を経由せずに W_ℝ の F^{(+)} への制限の最大固有値として作って Λ̌_max・Λ^{(1/2)}・閉形式と比べた。Step 2 の任意の生成元は q に 1, 1+2i, i を掛けた三つで見た。**人手証明を書き直した**（主張は不変、計算の誤りは無し）: (1) ℝ の値 x^⊤Wx と ℂ の値 x^*V^{(+)}x を「x^⊤ = x^*」で結んでいたのを、ι^n: ℝ^n → ℂ^n と W_ℝ に名前を付けた橋 (x^⊤W_ℝx)_ℂ = ι^n(x)^*Wι^n(x) と (·)_ℂ の単射性で通す形にした。(2) Step 1 の三つの操作を一行でしていた行、Step 0 の P^{(+)}x の行を分けた。(3) Step 2 で V^{(+)} の成分が実であることを散文（W_is_real_symmetric_positive_definite の Step 2 と同じ議論）で示していたのを、W と ε の成分が実であることと Step 0 で q̄ を固有空間に入れる成分の鎖に替えた。(4) p・p' と「共役で動かない複素数は実」を成分の鎖にし、結びの鎖（θ^{(1/2)}_{M,μ} = θ̃_μ を含む）を置いた。そのために主張 `sum_over_binary_words_entrywise`（{0,1}^r の上の行列の和の成分は成分の和）を `002_linear_space_general.ts` に足し、検算 `sagemath/check/sum_over_binary_words_entrywise/` を付けた。三回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`TheoremCPlusEqualsLambda.lean` などは新しい行と 1 対 1 でない。Lean の連続実行の受け持ち。`sum_over_binary_words_entrywise` は未形式化）。
+
 ## 次の一歩
-`thermodynamic_limit_column_limit_and_closed_form.ts` の `c_plus_equals_Lambda_half_integer`（`--list` の先頭）から、文書順に検算を足す。
+`critical_point_and_log_divergence.ts` の `gamma_kappa_identity`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`c_plus_equals_Lambda_half_integer` の検算とレビューで見つかった（残したもの。今回の差分より前から）: (a) `def_sector_rayleigh_sup` と `def_rayleigh_sup` は Mat(2^{M_col}, ℂ) の W を「実行列とみなせる」と写像に名前を付けずに x^⊤Wx（`def_real_bilinear_value` は Mat(n, ℝ) の記号）に入れ、`F^{(+)} ∩ ℝ^n` は ℂ^n の部分集合と ℝ^n の共通部分である。この単位の証明は準備 1 で ι^n と W_ℝ に名前を付けて読み方を書いた。直すには両定義を W_ℝ と「ι^n(x) ∈ F^{(+)}」で書き、引く側（`rayleigh_bounds_operator_norm` など）をそろえる（2026-11-04 の `rayleigh_bounds_operator_norm` の項と同じ直し方）。(b) 「有限個の複素数の和の順序の入れ替え」（Σ_k と二進語の和 Σ_ε の交換）と「実数の不等式を項ごとに足し合わせる」を主張するブロックが本文に無く、証明はラベルの無い言葉か体の公理で済ませた。(c) `check_number_operator_is_hermitian` の表示式（ℂ の元と実数の `=`）は既出の項のとおり残した。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-05、`check_number_operator_is_hermitian` のレビューで見つかった（残したもの）: 主張の表示式 x^*Q̌_εx = x^*Q̌_ε^*Q̌_εx = ‖Q̌_εx‖^2 ≥ 0 は ℂ の元と実数を `=` で結ぶ（証明の最後の段落で、右辺を ι で ℂ に入れた値と読むと書いた）。主張の形を (‖Q̌_εx‖^2)_ℂ に変えると c_plus_equals_Lambda_half_integer の証明の行も変わるので、この単位では変えなかった。結びの鎖の「分配則と有限和の並べ替え」の行は複数の操作を 1 行で使う（教科書の水準）。
 
