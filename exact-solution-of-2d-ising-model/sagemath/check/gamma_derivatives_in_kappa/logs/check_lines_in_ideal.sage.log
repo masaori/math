@@ -1,0 +1,55 @@
+PASS 導分 D はイデアルを保つ: D(u*ui - 1) ∈ I
+PASS 導分 D はイデアルを保つ: D(-1/4*u^2 + 1/2*u*ui - 1/4*ui^2 + r^2 - q) ∈ I
+PASS 導分 D はイデアルを保つ: D(-1/4*u^2 + 1/2*u*ui - 1/4*ui^2 + t^2 - q - 1) ∈ I
+PASS 導分 D はイデアルを保つ: D(r*ri - 1) ∈ I
+PASS 導分 D はイデアルを保つ: D(t*ti - 1) ∈ I
+PASS 準備: D(sinh(κ/2)) = cosh(κ/2)/2（sinh_derivative と合成）
+PASS 準備: D(sinh κ) = cosh κ（sinh_derivative）
+PASS 準備: 倍角 sinh κ = 2 sinh(κ/2) cosh(κ/2)
+PASS 準備: cosh^2 − sinh^2 = 1（κ/2 で）
+PASS (1) cosh(γ/2) の鎖 2 行目: (cosh γ/2)^2 = 1 + (sinh γ/2)^2
+PASS (1) cosh(γ/2) の鎖 3→4 行目: 1 + r^2 = 1 + S
+PASS (1) cosh(γ/2) の鎖 4→5 行目: t^2 = 1 + S（t の定義）
+PASS (1) sinh γ の鎖: 2 sinh(γ/2)cosh(γ/2) = 2rt
+PASS (1) sinh γ の鎖: (rt)^2 = r^2 t^2 = S(1+S)
+PASS (1) cosh γ の鎖: 1 + 2 sinh^2(γ/2) = 1 + 2r^2 = 1 + 2S
+PASS (1) 半角公式と倍角公式の整合: cosh γ = cosh^2(γ/2) + sinh^2(γ/2)、sinh γ^2 = cosh γ^2 − 1
+PASS 対照: sinh γ を 2√S（t を落とす）にすると一致しない
+PASS ∂S/∂κ の 2→3 行目: D(q) = 0
+PASS ∂S/∂κ の鎖 1→2 行目
+PASS ∂S/∂κ の鎖 2→3 行目
+PASS ∂S/∂κ の鎖 3→4 行目
+PASS ∂S/∂κ の鎖 4→5 行目
+PASS ∂S/∂κ の鎖 5→6 行目
+PASS ∂S/∂κ の鎖 6→7 行目
+PASS ∂S/∂κ の鎖 7→8 行目
+PASS ∂S/∂κ の合成の行: D(sinh(κ/2)) = sinh'(κ/2)·D(κ/2) で D(κ/2) = 1/2
+PASS 対照: ∂S/∂κ を sinh κ（1/2 を落とす）にすると一致しない
+PASS ∂γ/∂κ: r^2 + 1 = t^2（√(r^2+1) を t と書く根拠）
+PASS ∂γ/∂κ の鎖 9→10 行目
+PASS ∂γ/∂κ の鎖 10→11 行目
+PASS ∂γ/∂κ の 11→12 行目: 1/(2rt)·sinh γ = 1（sinh γ = 2rt）
+PASS ∂γ/∂κ·sinh γ = sinh κ
+PASS 対照: ∂γ/∂κ を sinh κ/(2 sinh γ) にすると一致しない
+PASS 準備: (sinh γ)^{-1}·sinh γ = 1
+PASS 準備: D(sinh γ) = cosh γ·∂γ/∂κ（sinh' = cosh と合成。D は γ を通さないので式として確かめる）
+PASS ∂²γ/∂κ² の鎖 1→2 行目
+PASS ∂²γ/∂κ² の鎖 2→3 行目
+PASS ∂²γ/∂κ² の鎖 3→4 行目
+PASS ∂²γ/∂κ² の鎖 4→5 行目
+PASS ∂²γ/∂κ² の鎖 5→6 行目
+PASS ∂²γ/∂κ² の鎖 6→7 行目
+PASS ∂²γ/∂κ² の鎖 7→8 行目
+PASS ∂²γ/∂κ² の鎖 8→9 行目
+PASS ∂²γ/∂κ² の鎖 9→10 行目
+PASS 対照: ∂²γ/∂κ² の第 2 項の符号を + にすると一致しない
+PASS (3) の鎖 1→2 行目
+PASS (3) の鎖 2→3 行目
+PASS (3) の鎖 3→4 行目
+PASS (3) の鎖 4→5 行目
+PASS (3) の鎖 5→6 行目
+PASS (3) の鎖 6→7 行目
+PASS (3) の鎖 7→8 行目
+PASS (3) 因数分解の恒等式 S(1+S) − a(1+a) = (S−a)(1+S+a)（S, a を独立な不定元に）
+PASS 対照: 因数を (S−a)(1+S−a) にすると一致しない
+RESULT: PASS

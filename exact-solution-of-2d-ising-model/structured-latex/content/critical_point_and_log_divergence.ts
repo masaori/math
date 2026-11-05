@@ -1725,17 +1725,33 @@ h(b) - h(a)
       displayMath(
         String.raw`S(\theta,\kappa) := \sinh^2\!\left(\frac{\kappa}{2}\right) + \sin^2\!\left(\frac{\theta}{2}\right),
 \qquad
-\gamma(\theta,\kappa) := 2\,\mathrm{arcsinh}\!\left(\sqrt{S(\theta,\kappa)}\right)`,
+\gamma(\theta,\kappa) := 2\,\mathrm{arcsinh}\!\left(\sqrt{S(\theta,\kappa)}^{(\mathbb{R}_{\ge 0})}\right)`,
       ),
-      paragraph(["を考える。このとき次が成り立つ。"]),
+      paragraph([
+        "を考える。",
+        math(String.raw`S(\theta,\kappa)`),
+        " は実数の 2 乗の和なので ",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " に属し、",
+        math(String.raw`\sqrt{\cdot}^{(\mathbb{R}_{\ge 0})}`),
+        " は ",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根である。以下、",
+        math(String.raw`\theta`),
+        " を固定したときは ",
+        math(String.raw`S := S(\theta,\kappa)`),
+        "、",
+        math(String.raw`\gamma := \gamma(\theta,\kappa)`),
+        " と書く。このとき次が成り立つ。",
+      ]),
       list([
         [
           "(1) ",
-          math(String.raw`\sinh\!\left(\tfrac{\gamma}{2}\right) = \sqrt{S}`),
+          math(String.raw`\sinh\!\left(\tfrac{\gamma}{2}\right) = \sqrt{S}^{(\mathbb{R}_{\ge 0})}`),
           "、",
-          math(String.raw`\cosh\!\left(\tfrac{\gamma}{2}\right) = \sqrt{1+S}`),
+          math(String.raw`\cosh\!\left(\tfrac{\gamma}{2}\right) = \sqrt{1+S}^{(\mathbb{R}_{\ge 0})}`),
           "、",
-          math(String.raw`\sinh\gamma = 2\sqrt{S(1+S)}`),
+          math(String.raw`\sinh\gamma = 2\sqrt{S(1+S)}^{(\mathbb{R}_{\ge 0})}`),
           "、",
           math(String.raw`\cosh\gamma = 1+2S`),
           "。",
@@ -1745,6 +1761,8 @@ h(b) - h(a)
           math(String.raw`\kappa \neq 0`),
           " のとき ",
           math(String.raw`S > 0`),
+          "、",
+          math(String.raw`\sinh\gamma > 0`),
           " であり、",
           math(String.raw`\gamma`),
           " は ",
@@ -1777,149 +1795,409 @@ h(b) - h(a)
           " 上の連続関数である。",
         ],
       ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、sinh・cosh・arcsinh の値が部分和の極限・平方根・実対数として、sin の値が弧の長さで定めた arcsin の逆関数の値として定まる実数であり、微分が実数の極限で定まるからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式）。",
+      ]),
     ],
     proof: [
       paragraph([
-        "(1) の証明。",
-        ref("gamma_kappa_identity"),
-        " の Step 3 と同じ議論（",
-        math(String.raw`\gamma \geq 0`),
-        " ゆえ ",
-        math(String.raw`\sinh(\tfrac\gamma2) \geq 0`),
-        "）で ",
-        math(String.raw`\sinh(\tfrac\gamma2) = \sqrt S`),
+        "記号の帰属。",
+        math(String.raw`\theta, \kappa, S, \gamma \in \mathbb{R}`),
         "。",
-        ref("cosh_sinh_basic_properties"),
-        " (2) と ",
-        math(String.raw`\cosh > 0`),
+        math(String.raw`\theta`),
+        " を固定する。",
+        math(String.raw`r := \sqrt{S}^{(\mathbb{R}_{\ge 0})}`),
+        "、",
+        math(String.raw`t := \sqrt{1+S}^{(\mathbb{R}_{\ge 0})}`),
+        " と置く（",
+        math(String.raw`1+S \geq 1 > 0`),
+        "）。",
+        ref("definition_of_sqrt_r_positive"),
         " より ",
-        math(String.raw`\cosh(\tfrac\gamma2) = \sqrt{1+S}`),
-        "。残りは",
+        math(String.raw`r, t \in \mathbb{R}_{\ge 0}`),
+        "、",
+        math(String.raw`r^2 = S`),
+        "、",
+        math(String.raw`t^2 = 1+S`),
+        " である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+t < 1
+&\Longrightarrow t^2 < 1
+   &&(\because\ t \geq 0\text{ より }t\cdot t \leq t\cdot 1 = t < 1) \\
+&\Longrightarrow 1+S < 1
+   &&(\because\ t^2 = 1+S) \\
+&\Longrightarrow S < 0
+   &&(\because\ \text{両辺から }1\text{ を引く})
+\end{aligned}`,
+      ),
+      paragraph([
+        "これは ",
+        math(String.raw`S \geq 0`),
+        " に反するので ",
+        math(String.raw`t \geq 1`),
+        " である。",
+      ]),
+      paragraph(["(1) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh\!\left(\frac{\gamma}{2}\right)
+&= \sinh\!\left(\frac{2\,\mathrm{arcsinh}(r)}{2}\right)
+   &&(\because\ \gamma\text{ と }r\text{ の定義}) \\
+&= \sinh\bigl(\mathrm{arcsinh}(r)\bigr)
+   &&(\because\ \mathbb R\text{ の四則}) \\
+&= r
+   &&(\because\ \blkref{sinh_of_arcsinh})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh\!\left(\frac{\gamma}{2}\right)
+&= \sqrt{\left(\cosh\tfrac{\gamma}{2}\right)^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \cosh\tfrac{\gamma}{2} > 0\ (\blkref{cosh_sinh_basic_properties}\text{ (1)}),\ \blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性}) \\
+&= \sqrt{1+\left(\sinh\tfrac{\gamma}{2}\right)^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2) を }\tfrac{\gamma}{2}\text{ で移項}) \\
+&= \sqrt{1+r^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \sinh\tfrac{\gamma}{2} = r) \\
+&= \sqrt{1+S}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ r^2 = S) \\
+&= t
+   &&(\because\ t\text{ の定義})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 \sinh\gamma
 &= 2\sinh\!\left(\frac{\gamma}{2}\right)\cosh\!\left(\frac{\gamma}{2}\right)
    &&(\because\ \blkref{sinh_double_angle_formula}) \\
-&= 2\sqrt{S}\sqrt{1+S} &&(\because\ \text{本主張 (1) の二つの半角等式}) \\
-&= 2\sqrt{S(1+S)} &&(\because\ \mathbb R\text{ の平方根の積}) \\
+&= 2rt &&(\because\ \sinh\tfrac{\gamma}{2} = r,\ \cosh\tfrac{\gamma}{2} = t) \\
+&= 2\sqrt{(rt)^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ rt \geq 0,\ \blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性}) \\
+&= 2\sqrt{r^2t^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \mathbb R\text{ の乗法の交換律と結合律}) \\
+&= 2\sqrt{S\,t^2}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ r^2 = S) \\
+&= 2\sqrt{S(1+S)}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ t^2 = 1+S)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
 \cosh\gamma
 &= 1 + 2\sinh^2\!\left(\frac{\gamma}{2}\right)
    &&(\because\ \blkref{cosh_half_angle_formula}) \\
+&= 1 + 2r^2
+   &&(\because\ \sinh\tfrac{\gamma}{2} = r) \\
 &= 1 + 2S
-   &&(\because\ \text{本主張 (1) の } \sinh(\tfrac\gamma2) = \sqrt S)
+   &&(\because\ r^2 = S)
 \end{aligned}`,
       ),
       paragraph([
         "(2) の証明。",
         math(String.raw`\kappa \neq 0`),
-        " なら ",
-        ref("cosh_sinh_basic_properties"),
-        " (3) より ",
-        math(String.raw`\sinh^2(\tfrac\kappa2) > 0`),
-        " なので ",
-        math(String.raw`S \geq \sinh^2(\tfrac\kappa2) > 0`),
-        "。",
+        " とする。まず ",
+        math(String.raw`S > 0`),
+        " と ",
+        math(String.raw`\sinh\gamma > 0`),
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\kappa \neq 0
+&\Longrightarrow \frac{\kappa}{2} \neq 0
+   &&(\because\ \mathbb R\text{ の四則}) \\
+&\Longrightarrow \sinh\frac{\kappa}{2} \neq \sinh 0
+   &&(\because\ \blkref{sinh_is_injective}\text{ の対偶}) \\
+&\Longrightarrow \sinh\frac{\kappa}{2} \neq 0
+   &&(\because\ \blkref{sinh_zero}) \\
+&\Longrightarrow \sinh^2\frac{\kappa}{2} > 0
+   &&(\because\ 0\text{ でない実数の 2 乗は正})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+S
+&= \sinh^2\!\left(\frac{\kappa}{2}\right) + \sin^2\!\left(\frac{\theta}{2}\right)
+   &&(\because\ S\text{ の定義}) \\
+&\geq \sinh^2\!\left(\frac{\kappa}{2}\right)
+   &&(\because\ \text{実数の 2 乗は非負}) \\
+&> 0
+   &&(\because\ \text{直前の含意})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+S > 0
+&\Longrightarrow r \neq 0
+   &&(\because\ r^2 = S) \\
+&\Longrightarrow r > 0
+   &&(\because\ r \geq 0) \\
+&\Longrightarrow 2rt > 0
+   &&(\because\ t \geq 1 > 0\ (\text{記号の帰属の段})) \\
+&\Longrightarrow \sinh\gamma > 0
+   &&(\because\ \text{本主張 (1) の証明の }\sinh\gamma = 2rt)
+\end{aligned}`,
+      ),
+      paragraph([
+        "微分可能性。",
+        math(String.raw`\kappa \mapsto S`),
+        " は、",
+        ref("sinh_derivative"),
+        " の ",
+        math(String.raw`\sinh`),
+        "、定数倍、恒等関数、積と定数関数の和なので微分可能であり、",
+        math(String.raw`\kappa \neq 0`),
+        " では値が ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " に入る。平方根は ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " 上微分可能、",
+        math(String.raw`\mathrm{arcsinh}`),
+        " は微分可能（",
+        ref("arcsinh_derivative"),
+        "）なので、合成の微分の公式（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        "）より ",
+        math(String.raw`\gamma`),
+        " は ",
+        math(String.raw`\kappa \neq 0`),
+        " で ",
+        math(String.raw`\kappa`),
+        " について微分可能である。",
         math(String.raw`\theta`),
         " を固定して ",
         math(String.raw`\kappa`),
-        " で微分する。まず",
+        " で微分する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\partial S}{\partial\kappa}
-&= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\cosh\!\left(\frac{\kappa}{2}\right)\cdot\frac{1}{2}
-   &&(\because \blkref{sinh_derivative}\text{ と合成関数の微分}) \\
-&= \sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right) &&(\because\ \mathbb R\text{ の四則}) \\
+&= \frac{d}{d\kappa}\left(\sinh^2\!\left(\frac{\kappa}{2}\right) + \sin^2\!\left(\frac{\theta}{2}\right)\right)
+   &&(\because\ S\text{ の定義}) \\
+&= \frac{d}{d\kappa}\sinh^2\!\left(\frac{\kappa}{2}\right) + \frac{d}{d\kappa}\sin^2\!\left(\frac{\theta}{2}\right)
+   &&(\because\ \text{微分の公式の和}) \\
+&= \frac{d}{d\kappa}\sinh^2\!\left(\frac{\kappa}{2}\right) + 0
+   &&(\because\ \theta\text{ は固定。定数関数の導関数は }0) \\
+&= \frac{d}{d\kappa}\sinh\!\left(\frac{\kappa}{2}\right)\cdot\sinh\!\left(\frac{\kappa}{2}\right)
+ + \sinh\!\left(\frac{\kappa}{2}\right)\cdot\frac{d}{d\kappa}\sinh\!\left(\frac{\kappa}{2}\right)
+   &&(\because\ \text{微分の公式の積}) \\
+&= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\frac{d}{d\kappa}\sinh\!\left(\frac{\kappa}{2}\right)
+   &&(\because\ \mathbb R\text{ の乗法の交換律と同類項}) \\
+&= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\sinh'\!\left(\frac{\kappa}{2}\right)\cdot\frac{d}{d\kappa}\frac{\kappa}{2}
+   &&(\because\ \text{微分の公式の合成}) \\
+&= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\sinh'\!\left(\frac{\kappa}{2}\right)\cdot\frac{1}{2}
+   &&(\because\ \text{微分の公式の定数倍と恒等関数の導関数 }1) \\
+&= 2\sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right)\cdot\frac{1}{2}
+   &&(\because\ \blkref{sinh_derivative}) \\
+&= \frac{1}{2}\cdot 2\sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right)
+   &&(\because\ \mathbb R\text{ の乗法の交換律}) \\
 &= \frac{1}{2}\sinh\kappa
    &&(\because\ \blkref{sinh_double_angle_formula})
 \end{aligned}`,
       ),
-      paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\partial\gamma}{\partial\kappa}
-&= 2\cdot\mathrm{arcsinh}'\!\left(\sqrt S\right)\cdot\frac{1}{2\sqrt S}\cdot\frac{\partial S}{\partial\kappa}
-   &&(\because \text{合成関数の微分と } (\sqrt{\ })' = \tfrac{1}{2\sqrt{\ }}) \\
-&= 2\cdot\frac{1}{\sqrt{S+1}}\cdot\frac{1}{2\sqrt S}\cdot\frac{1}{2}\sinh\kappa
-   &&(\because\ \blkref{arcsinh_derivative}\text{ と上の }\tfrac{\partial S}{\partial\kappa}) \\
-&= \frac{\sinh\kappa}{2\sqrt{S(1+S)}} &&(\because\ \mathbb R\text{ の四則と平方根の積}) \\
+&= \frac{d}{d\kappa}\Bigl(2\,\mathrm{arcsinh}\bigl(r\bigr)\Bigr)
+   &&(\because\ \gamma\text{ と }r\text{ の定義}) \\
+&= 2\cdot\frac{d}{d\kappa}\mathrm{arcsinh}\bigl(r\bigr)
+   &&(\because\ \text{微分の公式の定数倍}) \\
+&= 2\cdot\mathrm{arcsinh}'(r)\cdot\frac{d}{d\kappa}\sqrt{S}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \text{微分の公式の合成}) \\
+&= 2\cdot\mathrm{arcsinh}'(r)\cdot\left(\sqrt{\ }\right)'(S)\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ \text{微分の公式の合成}) \\
+&= 2\cdot\mathrm{arcsinh}'(r)\cdot\frac{1}{2r}\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ \text{微分の公式の }(\sqrt{\ })'(w) = \tfrac{1}{2\sqrt w},\ S > 0) \\
+&= 2\cdot\frac{1}{\sqrt{r^2+1}^{(\mathbb{R}_{\ge 0})}}\cdot\frac{1}{2r}\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ \blkref{arcsinh_derivative}) \\
+&= 2\cdot\frac{1}{\sqrt{S+1}^{(\mathbb{R}_{\ge 0})}}\cdot\frac{1}{2r}\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ r^2 = S) \\
+&= 2\cdot\frac{1}{\sqrt{1+S}^{(\mathbb{R}_{\ge 0})}}\cdot\frac{1}{2r}\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ \mathbb R\text{ の加法の交換律}) \\
+&= 2\cdot\frac{1}{t}\cdot\frac{1}{2r}\cdot\frac{\partial S}{\partial\kappa}
+   &&(\because\ t\text{ の定義}) \\
+&= 2\cdot\frac{1}{t}\cdot\frac{1}{2r}\cdot\frac{1}{2}\sinh\kappa
+   &&(\because\ \text{上の }\tfrac{\partial S}{\partial\kappa}) \\
+&= \frac{\sinh\kappa}{2rt}
+   &&(\because\ \mathbb R\text{ の四則}) \\
 &= \frac{\sinh\kappa}{\sinh\gamma}
-   &&(\because\ \text{本主張 (1)})
+   &&(\because\ \text{本主張 (1) の証明の }\sinh\gamma = 2rt)
 \end{aligned}`,
       ),
-      paragraph(["もう一度微分すると"]),
+      paragraph([
+        math(String.raw`\kappa \mapsto \sinh\gamma`),
+        " は ",
+        math(String.raw`\sinh`),
+        " と微分可能な ",
+        math(String.raw`\gamma`),
+        " の合成なので微分可能で、",
+        math(String.raw`\sinh\gamma > 0`),
+        " だから ",
+        math(String.raw`\dfrac{\partial\gamma}{\partial\kappa} = \dfrac{\sinh\kappa}{\sinh\gamma}`),
+        " は商の微分の公式より ",
+        math(String.raw`\kappa`),
+        " について微分可能である。すなわち ",
+        math(String.raw`\gamma`),
+        " は 2 回微分可能で、",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\partial^2\gamma}{\partial\kappa^2}
+&= \frac{d}{d\kappa}\left(\frac{\sinh\kappa}{\sinh\gamma}\right)
+   &&(\because\ \text{上の }\tfrac{\partial\gamma}{\partial\kappa}) \\
+&= \frac{\dfrac{d}{d\kappa}\sinh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\dfrac{d}{d\kappa}\sinh\gamma}{\sinh^2\gamma}
+   &&(\because\ \text{微分の公式の商},\ \sinh\gamma > 0) \\
+&= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\dfrac{d}{d\kappa}\sinh\gamma}{\sinh^2\gamma}
+   &&(\because\ \blkref{sinh_derivative}) \\
+&= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\sinh'(\gamma)\cdot\dfrac{\partial\gamma}{\partial\kappa}}{\sinh^2\gamma}
+   &&(\because\ \text{微分の公式の合成}) \\
 &= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\cosh\gamma\cdot\dfrac{\partial\gamma}{\partial\kappa}}{\sinh^2\gamma}
-   &&(\because \text{商の微分と }\blkref{sinh_derivative}) \\
+   &&(\because\ \blkref{sinh_derivative}) \\
+&= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\cosh\gamma\cdot\dfrac{\sinh\kappa}{\sinh\gamma}}{\sinh^2\gamma}
+   &&(\because\ \text{上の }\tfrac{\partial\gamma}{\partial\kappa}) \\
+&= \frac{\cosh\kappa\cdot\sinh\gamma}{\sinh^2\gamma}
+ - \frac{\sinh\kappa\cdot\cosh\gamma\cdot\dfrac{\sinh\kappa}{\sinh\gamma}}{\sinh^2\gamma}
+   &&(\because\ \text{分母の等しい分数の差}) \\
+&= \frac{\cosh\kappa\cdot\sinh\gamma}{\sinh^2\gamma}
+ - \frac{\sinh\kappa\cdot\cosh\gamma\cdot\sinh\kappa}{\sinh\gamma\cdot\sinh^2\gamma}
+   &&(\because\ \text{分数の積}) \\
 &= \frac{\cosh\kappa}{\sinh\gamma}
- - \frac{\sinh\kappa\cosh\gamma}{\sinh^2\gamma}\cdot\frac{\sinh\kappa}{\sinh\gamma}
-   &&(\because \text{直前の式}) \\
-&= \frac{\cosh\kappa}{\sinh\gamma} - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma} &&(\because\ \mathbb R\text{ の四則})
+ - \frac{\sinh\kappa\cdot\cosh\gamma\cdot\sinh\kappa}{\sinh\gamma\cdot\sinh^2\gamma}
+   &&(\because\ \text{約分}) \\
+&= \frac{\cosh\kappa}{\sinh\gamma} - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}
+   &&(\because\ \mathbb R\text{ の乗法の交換律と冪の記法})
 \end{aligned}`,
       ),
       paragraph([
         "(3) の証明。",
-        math(String.raw`S \geq \sinh^2(\tfrac\kappa2)`),
-        " と ",
-        math(String.raw`1+S \geq 1+\sinh^2(\tfrac\kappa2) = \cosh^2(\tfrac\kappa2)`),
-        "（",
-        ref("cosh_sinh_basic_properties"),
-        " (2)）より",
+        math(String.raw`\kappa \neq 0`),
+        " とする。まず ",
+        math(String.raw`\sinh^2\gamma - \sinh^2\kappa \geq 0`),
+        " を示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sinh\gamma
-&= 2\sqrt{S(1+S)}
-   &&(\because\ \text{本主張 (1)}) \\
-&\geq 2\sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)\cosh^2\!\left(\frac{\kappa}{2}\right)}
-   &&(\because S \geq \sinh^2(\tfrac\kappa2),\ 1+S \geq \cosh^2(\tfrac\kappa2)) \\
-&= 2\left|\sinh\!\left(\frac{\kappa}{2}\right)\right|\cosh\!\left(\frac{\kappa}{2}\right)
-   &&(\because \cosh > 0) \\
-&= \left|\sinh\kappa\right|
-   &&(\because\ \blkref{sinh_double_angle_formula})
+\sinh^2\gamma - \sinh^2\kappa
+&= \left(2\sinh\tfrac{\gamma}{2}\cosh\tfrac{\gamma}{2}\right)^2 - \left(2\sinh\tfrac{\kappa}{2}\cosh\tfrac{\kappa}{2}\right)^2
+   &&(\because\ \blkref{sinh_double_angle_formula}\text{ を }\gamma\text{ と }\kappa\text{ に}) \\
+&= 4\sinh^2\tfrac{\gamma}{2}\cosh^2\tfrac{\gamma}{2} - 4\sinh^2\tfrac{\kappa}{2}\cosh^2\tfrac{\kappa}{2}
+   &&(\because\ \text{積の 2 乗}) \\
+&= 4\sinh^2\tfrac{\gamma}{2}\left(1+\sinh^2\tfrac{\gamma}{2}\right) - 4\sinh^2\tfrac{\kappa}{2}\left(1+\sinh^2\tfrac{\kappa}{2}\right)
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2) を }\tfrac{\gamma}{2}\text{ と }\tfrac{\kappa}{2}\text{ で移項}) \\
+&= 4r^2(1+r^2) - 4\sinh^2\tfrac{\kappa}{2}\left(1+\sinh^2\tfrac{\kappa}{2}\right)
+   &&(\because\ \sinh\tfrac{\gamma}{2} = r) \\
+&= 4S(1+S) - 4\sinh^2\tfrac{\kappa}{2}\left(1+\sinh^2\tfrac{\kappa}{2}\right)
+   &&(\because\ r^2 = S) \\
+&= 4\left(S - \sinh^2\tfrac{\kappa}{2}\right)\left(1 + S + \sinh^2\tfrac{\kappa}{2}\right)
+   &&(\because\ \text{因数分解 }S(1+S) - a(1+a) = (S-a)(1+S+a)) \\
+&= 4\sin^2\tfrac{\theta}{2}\left(1 + S + \sinh^2\tfrac{\kappa}{2}\right)
+   &&(\because\ S\text{ の定義}) \\
+&\geq 0
+   &&(\because\ \text{実数の 2 乗は非負},\ S \geq 0)
 \end{aligned}`,
       ),
       paragraph([
+        "これで ",
+        math(String.raw`\sinh^2\kappa \leq \sinh^2\gamma`),
+        " が示せた。次に ",
+        math(String.raw`|\sinh\kappa| \leq \sinh\gamma`),
+        " を背理法で示す。",
+        math(String.raw`|\sinh\kappa| > \sinh\gamma`),
+        " と仮定すると、(2) の ",
         math(String.raw`\sinh\gamma > 0`),
-        "（",
-        math(String.raw`S>0`),
-        " より）なので、(2) と直前の評価から",
+        " より ",
+        math(String.raw`|\sinh\kappa| > 0`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh^2\kappa
+&= |\sinh\kappa|^2
+   &&(\because\ \text{実数の絶対値の 2 乗は 2 乗に等しい}) \\
+&= |\sinh\kappa|\cdot|\sinh\kappa|
+   &&(\because\ \text{冪の記法}) \\
+&> |\sinh\kappa|\cdot\sinh\gamma
+   &&(\because\ |\sinh\kappa| > \sinh\gamma\text{ の両辺に正の }|\sinh\kappa|\text{ を掛ける}) \\
+&> \sinh\gamma\cdot\sinh\gamma
+   &&(\because\ |\sinh\kappa| > \sinh\gamma\text{ の両辺に正の }\sinh\gamma\text{ を掛ける}) \\
+&= \sinh^2\gamma
+   &&(\because\ \text{冪の記法})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となって ",
+        math(String.raw`\sinh^2\kappa \leq \sinh^2\gamma`),
+        " に反する。よって ",
+        math(String.raw`|\sinh\kappa| \leq \sinh\gamma`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left|\frac{\partial\gamma}{\partial\kappa}\right|
+&= \left|\frac{\sinh\kappa}{\sinh\gamma}\right|
+   &&(\because\ \text{本主張 (2)}) \\
 &= \frac{|\sinh\kappa|}{\sinh\gamma}
-   &&(\because\ \text{本主張 (2) と }\sinh\gamma>0) \\
-&\leq 1
-   &&(\because\ \text{直前の }\sinh\gamma\geq|\sinh\kappa|)
+   &&(\because\ |a/b| = |a|/|b|,\ \sinh\gamma > 0) \\
+&\leq \frac{\sinh\gamma}{\sinh\gamma}
+   &&(\because\ |\sinh\kappa| \leq \sinh\gamma,\ \sinh\gamma > 0) \\
+&= 1
+   &&(\because\ \mathbb R\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
         "(4) の証明。",
         math(String.raw`(\theta,\kappa) \in [0,2\pi]\times[\kappa_1,\kappa_2]`),
-        " では ",
-        math(String.raw`S(\theta,\kappa) \geq \sinh^2(\tfrac{\kappa_1}{2}) > 0`),
-        " である。",
+        " では、",
+        math(String.raw`\tfrac{\kappa}{2} \geq \tfrac{\kappa_1}{2} > 0`),
+        " と ",
+        ref("sinh_strictly_increasing"),
+        "・",
+        ref("cosh_sinh_basic_properties"),
+        " (3) より ",
+        math(String.raw`\sinh\tfrac{\kappa}{2} \geq \sinh\tfrac{\kappa_1}{2} > 0`),
+        " なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S
+&\geq \sinh^2\!\left(\frac{\kappa}{2}\right)
+   &&(\because\ S\text{ の定義と実数の 2 乗は非負}) \\
+&\geq \sinh^2\!\left(\frac{\kappa_1}{2}\right)
+   &&(\because\ \sinh\tfrac{\kappa}{2} \geq \sinh\tfrac{\kappa_1}{2} > 0) \\
+&> 0
+   &&(\because\ \sinh\tfrac{\kappa_1}{2} > 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         math(String.raw`S`),
         " は ",
         math(String.raw`\sinh, \sin`),
         " の連続関数の和・積として連続、",
-        math(String.raw`\sqrt{\ }`),
+        math(String.raw`\sqrt{\cdot}^{(\mathbb{R}_{\ge 0})}`),
         " は ",
         math(String.raw`[\sinh^2(\tfrac{\kappa_1}{2}),\infty)`),
         " 上連続、",
         math(String.raw`\mathrm{arcsinh}`),
         " は連続なので ",
         math(String.raw`\gamma`),
-        " は連続。(2) の 2 つの式はいずれも ",
-        math(String.raw`\sinh\gamma \geq 2\sqrt{S} > 0`),
-        " を分母にもつ連続関数の四則で書けているので連続である。",
+        " は連続。(2) の 2 つの式は、",
+        math(String.raw`\sinh\gamma = 2rt \geq 2r > 0`),
+        "（",
+        math(String.raw`t \geq 1`),
+        "）を分母にもつ連続関数の四則で書けているので連続である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: 平方根を isotropic_gamma_in_kappa と同じ √·^(ℝ≥0) の記法にし、S ≥ 0（√S が定まること）を主張に書いた。(1) の sinh(γ/2) = √S を gamma_kappa_identity の Step 3 の流用から sinh_of_arcsinh の 3 行の鎖に、cosh(γ/2) = √(1+S) を平方根の一意性の鎖にした（r := √S、t := √(1+S) と置いた）。(2) の S > 0 を、κ > 0 にしか使えない cosh_sinh_basic_properties (3) から sinh_is_injective・sinh_zero の含意の鎖にし、sinh γ > 0 を主張に足した。∂S/∂κ・∂γ/∂κ・∂²γ/∂κ² の鎖を微分の公式 1 行 1 つにし、∂γ/∂κ の最後は平方根の積を経ず sinh γ = 2rt で結んだ。(3) を平方根の単調性を使わず sinh²γ − sinh²κ = 4 sin²(θ/2)(1 + S + sinh²(κ/2)) ≥ 0 の鎖にした。(4) の S ≥ sinh²(κ_1/2) に sinh_strictly_increasing を引いた。主張の式は不変。検算は sagemath/check/gamma_derivatives_in_kappa/。",
+      ],
+    },
   },
   {
     id: "critical_011_theorem_second_derivative_log_divergence",
