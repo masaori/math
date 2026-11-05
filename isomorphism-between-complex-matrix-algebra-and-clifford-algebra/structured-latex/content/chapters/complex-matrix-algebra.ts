@@ -1,4 +1,4 @@
-import { defineBlocks, list, math, paragraph, ref } from "../../schema.ts";
+import { defineBlocks, displayMath, list, math, paragraph, ref } from "../../schema.ts";
 
 export default defineBlocks([
   {
@@ -135,6 +135,185 @@ export default defineBlocks([
         " が ℂ-代数（",
         ref("def_complex_algebra"),
         "）の条件を満たすことは、この定義では主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_matrices_form_complex_vector_space",
+    kind: "claim",
+    title: { text: "有限集合で添字づけた行列の集合は、成分ごとの和とスカラー倍で ℂ-線型空間である" },
+    labels: ["claim_matrices_indexed_by_finite_set_form_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とする。組 ",
+        math(String.raw`(\mathrm{Mat}_X(\mathbb{C}),+_{\mathrm{Mat}_X},\ast_{\mathrm{Mat}_X},0_{\mathrm{Mat}_X})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。ここで ℂ-線型空間の定義のスカラー倍 ",
+        math(String.raw`\cdot_V`),
+        " には ",
+        math(String.raw`\ast_{\mathrm{Mat}_X}`),
+        " を当てる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A,B,C`),
+        " を ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の任意の元、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。どの条件も ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の二つの元の等式であり、",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の二つの元が等しいことは、すべての ",
+        math(String.raw`x,y\in X`),
+        " について ",
+        math(String.raw`(x,y)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことである（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。以下の各式変形は、",
+        math(String.raw`x,y\in X`),
+        " を任意に固定した ",
+        math(String.raw`\mathbb{C}`),
+        " の中の等式の連なりである。",
+      ]),
+      paragraph(["加法の結合法則 ", math(String.raw`(A+_{\mathrm{Mat}_X}B)+_{\mathrm{Mat}_X}C=A+_{\mathrm{Mat}_X}(B+_{\mathrm{Mat}_X}C)`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A+_{\mathrm{Mat}_X}B)+_{\mathrm{Mat}_X}C\bigr)_{x,y}
+&=(A+_{\mathrm{Mat}_X}B)_{x,y}+_{\mathbb{C}}C_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=(A_{x,y}+_{\mathbb{C}}B_{x,y})+_{\mathbb{C}}C_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{x,y}+_{\mathbb{C}}(B_{x,y}+_{\mathbb{C}}C_{x,y})
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=A_{x,y}+_{\mathbb{C}}(B+_{\mathrm{Mat}_X}C)_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\bigl(A+_{\mathrm{Mat}_X}(B+_{\mathrm{Mat}_X}C)\bigr)_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則 ", math(String.raw`A+_{\mathrm{Mat}_X}B=B+_{\mathrm{Mat}_X}A`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathrm{Mat}_X}B)_{x,y}
+&=A_{x,y}+_{\mathbb{C}}B_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=B_{x,y}+_{\mathbb{C}}A_{x,y}
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=(B+_{\mathrm{Mat}_X}A)_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元 ", math(String.raw`A+_{\mathrm{Mat}_X}0_{\mathrm{Mat}_X}=A`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathrm{Mat}_X}0_{\mathrm{Mat}_X})_{x,y}
+&=A_{x,y}+_{\mathbb{C}}(0_{\mathrm{Mat}_X})_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{x,y}+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{x,y}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元は次のとおりである。",
+        math(String.raw`\mathbb{C}`),
+        " の各元は ",
+        math(String.raw`\mathbb{C}`),
+        " の加法の逆元をただ一つもつので、",
+        math(String.raw`a\in\mathbb{C}`),
+        " の加法の逆元を ",
+        math(String.raw`-_{\mathbb{C}}a\in\mathbb{C}`),
+        " と書く（",
+        math(String.raw`a+_{\mathbb{C}}(-_{\mathbb{C}}a)=0_{\mathbb{C}}`),
+        "）。写像 ",
+        math(String.raw`A':X\times X\to\mathbb{C}`),
+        " を ",
+        math(String.raw`A'_{x,y}:=-_{\mathbb{C}}A_{x,y}`),
+        "（",
+        math(String.raw`x,y\in X`),
+        "）で定めると、",
+        math(String.raw`A'\in\mathrm{Mat}_X(\mathbb{C})`),
+        " であり（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）、",
+        math(String.raw`A+_{\mathrm{Mat}_X}A'=0_{\mathrm{Mat}_X}`),
+        " を満たす。これは、すべての ",
+        math(String.raw`x,y\in X`),
+        " について次の成分の等式が成り立つことである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathrm{Mat}_X}A')_{x,y}
+&=A_{x,y}+_{\mathbb{C}}A'_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{x,y}+_{\mathbb{C}}(-_{\mathbb{C}}A_{x,y})
+&&\left(\because\ A'\ \text{の定義}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ -_{\mathbb{C}}A_{x,y}\ \text{は}\ A_{x,y}\ \text{の}\ \mathbb{C}\ \text{の加法の逆元}\right)\\
+&=(0_{\mathrm{Mat}_X})_{x,y}
+&&\left(\because\ 0_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則 ", math(String.raw`(\lambda\cdot_{\mathbb{C}}\mu)\ast_{\mathrm{Mat}_X}A=\lambda\ast_{\mathrm{Mat}_X}(\mu\ast_{\mathrm{Mat}_X}A)`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda\cdot_{\mathbb{C}}\mu)\ast_{\mathrm{Mat}_X}A\bigr)_{x,y}
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}A_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}A_{x,y})
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\ast_{\mathrm{Mat}_X}A)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\bigl(\lambda\ast_{\mathrm{Mat}_X}(\mu\ast_{\mathrm{Mat}_X}A)\bigr)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元 ", math(String.raw`1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}A=A`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}A)_{x,y}
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}A_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{x,y}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則 ", math(String.raw`\lambda\ast_{\mathrm{Mat}_X}(A+_{\mathrm{Mat}_X}B)=(\lambda\ast_{\mathrm{Mat}_X}A)+_{\mathrm{Mat}_X}(\lambda\ast_{\mathrm{Mat}_X}B)`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\lambda\ast_{\mathrm{Mat}_X}(A+_{\mathrm{Mat}_X}B)\bigr)_{x,y}
+&=\lambda\cdot_{\mathbb{C}}(A+_{\mathrm{Mat}_X}B)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(A_{x,y}+_{\mathbb{C}}B_{x,y})
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}A_{x,y})+_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}}B_{x,y})
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\ast_{\mathrm{Mat}_X}A)_{x,y}+_{\mathbb{C}}(\lambda\ast_{\mathrm{Mat}_X}B)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義を二か所に適用。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\bigl((\lambda\ast_{\mathrm{Mat}_X}A)+_{\mathrm{Mat}_X}(\lambda\ast_{\mathrm{Mat}_X}B)\bigr)_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則 ", math(String.raw`(\lambda+_{\mathbb{C}}\mu)\ast_{\mathrm{Mat}_X}A=(\lambda\ast_{\mathrm{Mat}_X}A)+_{\mathrm{Mat}_X}(\mu\ast_{\mathrm{Mat}_X}A)`), " は、すべての ", math(String.raw`x,y\in X`), " について次の成分の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda+_{\mathbb{C}}\mu)\ast_{\mathrm{Mat}_X}A\bigr)_{x,y}
+&=(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}A_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}A_{x,y})+_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}A_{x,y})
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\ast_{\mathrm{Mat}_X}A)_{x,y}+_{\mathbb{C}}(\mu\ast_{\mathrm{Mat}_X}A)_{x,y}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義を二か所に適用。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\bigl((\lambda\ast_{\mathrm{Mat}_X}A)+_{\mathrm{Mat}_X}(\mu\ast_{\mathrm{Mat}_X}A)\bigr)_{x,y}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件が満たされたので、組 ",
+        math(String.raw`(\mathrm{Mat}_X(\mathbb{C}),+_{\mathrm{Mat}_X},\ast_{\mathrm{Mat}_X},0_{\mathrm{Mat}_X})`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
       ]),
     ],
   },
