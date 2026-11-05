@@ -21,7 +21,7 @@
 5. **SageMath。** 行列の計算を含む行は、`sagemath/check/<対象名>/` に検算を置き、`overview.md` に対象ラベルと結果を書く。
    厳密計算（`ZZ`・`QQ`・`QQbar`）で行う。抽象的な代数の中の等式（クリフォード代数の中の計算）は、
    行列への像で確かめたことを、像での確認であると明記して書く。証明の代わりにしない。
-6. **検証。** `(cd structured-latex && npm run gen && npm run check)` を通す。SageMath の検算を置いた行は実行して結果を書く。
+6. **検証。** `(cd structured-latex && npm run gen && npm run check && npm run build:pdf)` を通す（build:pdf は最終成果物の PDF に組めない文字・未解決参照が無いことを確かめる。tectonic が無い環境ではそのことを前進の記録に書く）。SageMath の検算を置いた行は実行して結果を書く。
    落ちたら本文を直す。検証を主張に合わせて緩めない。
 7. **台帳と MEMORY の更新。** 台帳の行の状態（記述・SageMath・Lean のどこまで済んだか）と、前進の記録を書く。MEMORY の「次回やること」を直す。
 8. **main へ入れる。** `git fetch origin && git rebase origin/main` の後に main へ push し、

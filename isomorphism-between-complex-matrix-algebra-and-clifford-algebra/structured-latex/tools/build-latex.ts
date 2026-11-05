@@ -269,6 +269,10 @@ function renderDocument(inner: string): string {
 % 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム）は
 % 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
 \\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033}
+% 本文の地の文（見出しの「ℂ-線型空間」など）の ℂ は、欧文フォントにも和文フォントにも字形が無いので、
+% 数式の \\mathbb{C} で組む。しおりには ℂ の文字のまま入れる。
+\\usepackage{newunicodechar}
+\\newunicodechar{ℂ}{\\texorpdfstring{\\ensuremath{\\mathbb{C}}}{ℂ}}
 \\usepackage[hidelinks]{hyperref}
 \\usepackage[nameinlink]{cleveref}
 
