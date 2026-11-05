@@ -1665,3 +1665,6 @@ import Ising2DLambda.KacWard.DispersionKwDualityFromNecSuf
 import Ising2DLambda.KacWard.FiniteTorusPolynomial
 import Ising2DLambda.NecSuf.KacWard.FiniteTorusPolynomial
 import Ising2DLambda.KacWard.FiniteTorusPolynomialFromNecSuf
+import Ising2DLambda.KacWard.StandardDualHeight
+import Ising2DLambda.NecSuf.KacWard.StandardDualHeight
+import Ising2DLambda.KacWard.StandardDualHeightFromNecSuf

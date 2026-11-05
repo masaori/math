@@ -62271,6 +62271,74 @@ s(j')-s(j)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_standard_dual_height",
+              labels: [],
+              title: { text: "標準双対路による二値の高さ関数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_definition_standard_dual_height",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_walk_base_edge_parity",
+                      kind: "definition",
+                      title: { text: "閉歩道の基底辺の通過偶奇" },
+                      labels: ["def_walk_base_edge_parity"],
+                      habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.walkBaseEdgeParity"],
+                      statement: [
+                        paragraph([
+                          "任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                          math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                          "（", ref("def_closed_nonbacktracking_walk"), "）、基底辺 ",
+                          math(String.raw`e\in E_L`), " を取る（", ref("def_lattice"), "）。",
+                          "辺 ", math(String.raw`e`), " の通過偶奇を",
+                        ]),
+                        displayMath(String.raw`N_\gamma(e):=\bigl(\sum_{k=1}^{m}\mathbf1_{\operatorname{base}(\vec e_k)=e}\bigr)\bmod2\in\{0,1\}`),
+                        paragraph(["と定める（基底辺の写像は ", ref("def_oriented_edges"), "）。向きは数えず、同じ辺の通過は重複を保つ。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_definition_standard_dual_height",
+                    kind: "definition",
+                    title: { text: "標準双対路に沿うセルの高さ関数" },
+                    labels: ["def_standard_dual_height"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.KacWard.standardDualHeight",
+                      "Ising2DLambda.NecSuf.KacWard.standardDualHeight",
+                      "Ising2DLambda.KacWard.standardDualHeight_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る。", ref("def_walk_base_edge_parity"),
+                        " の ", math(String.raw`N_\gamma`), " を用いる。セル ", math(String.raw`(i,j)\in(\mathbb Z/L\mathbb Z)^2`),
+                        " の代表を ", math(String.raw`s(i),s(j)\in\{0,\ldots,L-1\}`),
+                        " とする（", ref("def_residue_maps"), "）。基点セル ",
+                        math(String.raw`(0,0)`), " から先に列方向へ、次に行方向へ進む標準双対路が横切る辺を数え、",
+                      ]),
+                      displayMath(String.raw`f_\gamma(i,j):=\left(\sum_{c=1}^{s(j)}N_\gamma(n_{\mathrm v}(0,c))
+  +\sum_{r=1}^{s(i)}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2\in\{0,1\}`),
+                      paragraph([
+                        "と定める（辺の名前は ", ref("claim_edge_row_partition"), "）。添字 ", math(String.raw`c,r`), " は整数の代表を ",
+                        math(String.raw`\mathbb Z/L\mathbb Z`), " へ写したものである。",
+                        "空和は零とするため ", math(String.raw`L=1`), " でも定義できる。",
+                        "この定義は有限和と二で割った余りだけを使う。",
+                      ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_single_cell_boundary_winding",
               labels: [],
               title: { text: "単一セルの境界と切断線横断" },
