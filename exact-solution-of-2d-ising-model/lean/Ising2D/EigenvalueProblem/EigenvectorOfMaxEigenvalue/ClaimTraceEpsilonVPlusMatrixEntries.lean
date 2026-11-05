@@ -2,10 +2,13 @@
 # `exp(K_1D_0)`・`G`・`ε`・`V_2` の成分を配置の基底で読み取る（具体版）
 
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
-（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の Step 3）
+（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の準備 (P5) と Step 3）
 
 | 人手 | Lean |
 | --- | --- |
+| 準備 (P5) の 2 行目の根拠 `(f_I)_J = ∏_m (e_{i_m})_{j_m}`（`def_end_iso`・`def_kronecker` (1)。Lean の定義 `Pi.single` を人手の形へ読み替える段） | `basisVec_apply_eq_prod` |
+| 準備 (P5) の 3 行 `(f_{ι(s)})_{ord(s')} = δ_{s=s'}` | `basisVec_configBasisIso_apply` |
+| 準備 (P5) の列の読み取りの 4 行 `(Xf_{ι(s)})_{ord(s')} = X_{ord(s'),ord(s)}` | `mulVec_basisVec_configBasisIso_apply` |
 | Step 3 (b) の `(-s)(m) := -s(m)` | `negSpinConf`（値の側は `negSpinVal`） |
 | Step 3 (a) の `D0_G_diagonal_action` から `exp(K_1D_0)` の対角性へ進む途中の段（Lean で補った中間）: `D_0` は対角行列で `(D_0)_{ι(s),ι(s)} = E(s)` | `openChainD0_eq_diagonal` |
 | 同 `exp_of_diagonal_matrix` より `exp(K_1D_0)` は対角行列で `(exp(K_1D_0))_{ι(s),ι(s)} = exp(K_1E(s))` | `matExp_smul_openChainD0`（成分は `matExp_smul_openChainD0_apply`、左から掛けた積の行 `ι(s)` は `matExp_smul_openChainD0_mul_apply`） |
@@ -16,8 +19,9 @@
 | 同 `(V_2)_{ι(s),ι(s)} = exp(M_colK_2)` | `V2_apply_configBasisIso_self` |
 | 同 `(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)` | `V2_apply_configBasisIso_neg_self` |
 
-人手 (a) は `D0_G_diagonal_action` から直接対角性を述べる。Lean ではその途中を、行列の第 `ι(s)` 列が
-`A f_{ι(s)}` であること（`(A f_I)_J = A_{J,I}`）から成分を読む形 `eq_diagonal_of_mulVec_basisVec` で書く。
+人手 (a) は `D0_G_diagonal_action` から直接対角性を述べる。Lean ではその途中を、(P5) の列の読み取り
+（`(A f_{ι(s)})_{ι(s')} = A_{ι(s'),ι(s)}`）と (P5) から成分を読む形 `eq_diagonal_of_mulVec_basisVec` で書く。
+(a)(b) を人手の 4 行・3 行の鎖と同じ段にするのは (P5) を使う側の回で行う。
 `D_0f_{ι(s)} = E(s)f_{ι(s)}` は `openChainD0_mulVec_basisVec_eq_energy`、`Gf_{ι(s)} = s(M_col)s(1)f_{ι(s)}` は
 `boundaryG_mulVec_basisVec`（`D0_G_diagonal_action`）、`exp_of_diagonal_matrix` は `matExp_diagonal` である。
 人手 (b) の理由のうち「`ε` はすべての成分を入れ替える」は `epsilon_mulVec_basisVec`（`ε f_I = f_{π(I)}`、
@@ -60,27 +64,98 @@ def negSpinConf (s : SpinConf M) : SpinConf M := fun m => negSpinVal (s m)
 @[simp] theorem coe_negSpinConf_apply (s : SpinConf M) (m : Fin M) :
     ((negSpinConf s m : SpinVal) : ℝ) = -(s m : ℝ) := rfl
 
+/-! ## 準備 (P5): 基底ベクトルの成分と列の読み取り -/
+
+/-- 人手 (P5) の 2 行目の根拠 `def_end_iso` の `f_I = e_{i_1} ⊠ ⋯ ⊠ e_{i_M}` と `def_kronecker` (1) の成分の式:
+`(f_I)_J = ∏_m (e_{i_m})_{j_m}`。
+
+Lean の `basisVec I` は `Pi.single I 1` で定義してあり（`DefinitionConfigBasisIso.lean`）、人手の `e_i ∈ ℂ^2` は
+`Pi.single i 1 : Fin 2 → ℂ` である。この補題は Lean の定義を人手の定義の形へ読み替える段で、人手には対応する行が無い
+（人手では定義そのもの）。
+証明に使う `Finset.prod_boole` は読み替えのためだけのもので、人手の 3 行目の場合分けは
+`basisVec_configBasisIso_apply` が人手どおりに行う。 -/
+theorem basisVec_apply_eq_prod (I J : Conf M) :
+    basisVec I J = ∏ m : Fin M, (Pi.single (I m) (1 : ℂ) : Fin 2 → ℂ) (J m) := by
+  simp only [basisVec, Pi.single_apply]
+  rw [Finset.prod_boole]
+  simp only [Finset.mem_univ, true_implies, funext_iff]
+
+open Classical in
+/-- **人手 準備 (P5) の 3 行**: `(f_{ι(s)})_{ord(s')} = δ_{s=s'}`。
+
+1 行目 `(f_{ι(s)})_{ord(s')} = (f_{ι(s)})_{ν(ι(s'))}`（`config_numbering_equals_kronecker_numbering`）は、Lean では
+ベクトルの添字が `ι(s')` そのものなので（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` 冒頭の「行列の添字」）、
+添字の読み方であって段は無い。2 行目は `basisVec_apply_eq_prod`、3 行目は人手の場合分けである:
+`s = s'` なら全ての因子が `(e_i)_i = 1_ℂ` で、積は `finite_product_of_complex_ones`（Lean は `Finset.prod_const_one`）。
+`s ≠ s'` なら `ι` の単射性（`configBasisIso_eq_iff`）より、ある `m` で `ι(s)_m ≠ ι(s')_m` となってその因子は `0_ℂ`、
+積は `finite_product_with_zero_factor_is_zero`（Lean は `Finset.prod_eq_zero`）。 -/
+theorem basisVec_configBasisIso_apply (s s' : SpinConf M) :
+    basisVec (configBasisIso M s) (configBasisIso M s') = if s = s' then 1 else 0 :=
+  calc basisVec (configBasisIso M s) (configBasisIso M s')
+      = ∏ m : Fin M,
+          (Pi.single (configBasisIso M s m) (1 : ℂ) : Fin 2 → ℂ) (configBasisIso M s' m) :=
+        basisVec_apply_eq_prod _ _
+    _ = if s = s' then 1 else 0 := by
+        by_cases h : s = s'
+        · -- `s = s'`: 全ての因子が `(e_i)_i = 1_ℂ`
+          subst h
+          rw [if_pos rfl]
+          calc ∏ m : Fin M,
+                (Pi.single (configBasisIso M s m) (1 : ℂ) : Fin 2 → ℂ) (configBasisIso M s m)
+              = ∏ _m : Fin M, (1 : ℂ) :=
+                Finset.prod_congr rfl fun m _ => Pi.single_eq_same _ _
+            _ = 1 := Finset.prod_const_one  -- `finite_product_of_complex_ones`
+        · -- `s ≠ s'`: `ι` の単射性より `ι(s)_m ≠ ι(s')_m` なる `m` があり、その因子は `0_ℂ`
+          rw [if_neg h]
+          have hne : configBasisIso M s ≠ configBasisIso M s' :=
+            fun hc => h ((configBasisIso_eq_iff s s').mp hc)
+          obtain ⟨m, hm⟩ := Function.ne_iff.mp hne
+          -- `finite_product_with_zero_factor_is_zero`
+          exact Finset.prod_eq_zero (Finset.mem_univ m) (Pi.single_eq_of_ne (Ne.symm hm) _)
+
+/-- **人手 準備 (P5) の列の読み取りの 4 行**: `X ∈ Mat(2^{M_col},ℂ)` について
+`(Xf_{ι(s)})_{ord(s')} = X_{ord(s'),ord(s)}`。
+
+2 行目の `finite_sum_with_single_nonzero_term`（Lean は `Finset.sum_eq_single`）の仮定は人手どおりに示す:
+`row_configuration_numbering_bijective` より `l ≠ ord(s)` の番号は `t ≠ s` なる `l = ord(t)` と書け
+（Lean では `ι` の全射性 `(configBasisIso M).surjective`）、(P5) より `(f_{ι(s)})_l = 0_ℂ`、
+`complex_times_zero_is_zero` より `X_{ord(s'),l}(f_{ι(s)})_l = 0_ℂ` である。 -/
+theorem mulVec_basisVec_configBasisIso_apply (X : TensorPow M) (s s' : SpinConf M) :
+    (X *ᵥ basisVec (configBasisIso M s)) (configBasisIso M s')
+      = X (configBasisIso M s') (configBasisIso M s) :=
+  calc (X *ᵥ basisVec (configBasisIso M s)) (configBasisIso M s')
+      = ∑ l : Conf M, X (configBasisIso M s') l * basisVec (configBasisIso M s) l := by
+        rw [Matrix.mulVec, dotProduct]  -- `mat_mult`
+    _ = X (configBasisIso M s') (configBasisIso M s)
+          * basisVec (configBasisIso M s) (configBasisIso M s) := by
+        -- `finite_sum_with_single_nonzero_term`
+        refine Finset.sum_eq_single (configBasisIso M s) (fun l _ hl => ?_)
+          (fun hs => absurd (Finset.mem_univ _) hs)
+        obtain ⟨t, rfl⟩ := (configBasisIso M).surjective l
+        have hst : s ≠ t := fun hc => hl (by rw [hc])
+        rw [basisVec_configBasisIso_apply, if_neg hst, mul_zero]  -- (P5)・`complex_times_zero_is_zero`
+    _ = X (configBasisIso M s') (configBasisIso M s) * 1 := by
+        rw [basisVec_configBasisIso_apply, if_pos rfl]  -- (P5) の `s' = s`
+    _ = X (configBasisIso M s') (configBasisIso M s) := mul_one _  -- `complex_numbers_form_a_field` の積の単位元
+
 /-! ## 対角性の読み取り -/
 
 /-- 人手 (a) の対角性を導くために Lean で補った段: `f_{ι(s)}` に `d(s)` 倍で作用する行列は、`(ι(s), ι(s))` 成分が `d(s)` の対角行列である。
 
-第 `I` 列は `A f_I` なので、`A f_{ι(s)} = d(s) f_{ι(s)}` の第 `J` 成分が `A_{J, ι(s)}` を与える。 -/
+行と列の番号を `ι(s')`・`ι(s)` と書き（`ι` の全射性）、(P5) の列の読み取り `(Af_{ι(s)})_{ι(s')} = A_{ι(s'),ι(s)}` と
+(P5) の `(f_{ι(s)})_{ι(s')} = δ_{s=s'}` から成分を読む。 -/
 theorem eq_diagonal_of_mulVec_basisVec {A : TensorPow M} {d : SpinConf M → ℂ}
     (h : ∀ s : SpinConf M, A *ᵥ basisVec (configBasisIso M s) = d s • basisVec (configBasisIso M s)) :
     A = Matrix.diagonal (fun I => d ((configBasisIso M).symm I)) := by
   ext J I
-  -- 第 `I` 列の第 `J` 成分: `(A f_I)_J = A_{J,I}`
-  have hcol : (A *ᵥ basisVec I) J = A J I := by
-    rw [basisVec, Matrix.mulVec, dotProduct, Finset.sum_eq_single I (fun j _ hj => by
-      rw [Pi.single_eq_of_ne hj, mul_zero]) (fun hI => absurd (Finset.mem_univ I) hI),
-      Pi.single_eq_same, mul_one]
-  have hJ := congrFun (h ((configBasisIso M).symm I)) J
-  rw [Equiv.apply_symm_apply, hcol, Pi.smul_apply, smul_eq_mul, basisVec] at hJ
-  rw [hJ, Matrix.diagonal_apply]
-  by_cases hJI : J = I
-  · subst hJI
-    rw [Pi.single_eq_same, mul_one, if_pos rfl]
-  · rw [Pi.single_eq_of_ne hJI, mul_zero, if_neg hJI]
+  obtain ⟨s', rfl⟩ := (configBasisIso M).surjective J
+  obtain ⟨s, rfl⟩ := (configBasisIso M).surjective I
+  rw [← mulVec_basisVec_configBasisIso_apply A s s', h s, Pi.smul_apply, smul_eq_mul,
+    basisVec_configBasisIso_apply, Matrix.diagonal_apply, Equiv.symm_apply_apply]
+  by_cases hs : s = s'
+  · subst hs
+    rw [if_pos rfl, if_pos rfl, mul_one]
+  · rw [if_neg hs, if_neg (fun hc => hs ((configBasisIso_eq_iff s' s).mp hc).symm), mul_zero]
 
 /-! ## Step 3 (a) -/
 

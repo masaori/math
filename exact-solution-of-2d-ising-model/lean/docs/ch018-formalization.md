@@ -251,10 +251,13 @@
 | `Ising2D.matExp_hasSum`（`Representation.lean`） / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
 | **`Ising2D.epsilon_mul_V1plus`** | **`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`** | **Step 2** |
 
-#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の Step 3）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の準備 (P5) と Step 3）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
+| `Ising2D.basisVec_apply_eq_prod` | `(f_I)_J = ∏_m (e_{i_m})_{j_m}`（Lean の定義 `Pi.single` を人手の形へ読み替える段） | 準備 (P5) の 2 行目の根拠（`def_end_iso`・`def_kronecker` (1)） |
+| **`Ising2D.basisVec_configBasisIso_apply`** | **`(f_{ι(s)})_{ord(s')} = δ_{s=s'}`** | **準備 (P5)** |
+| **`Ising2D.mulVec_basisVec_configBasisIso_apply`** | **`(Xf_{ι(s)})_{ord(s')} = X_{ord(s'),ord(s)}`** | **準備 (P5) の列の読み取り** |
 | `Ising2D.negSpinConf` / `configBasisIso_negSpinConf` | `(-s)(m) := -s(m)`、`ι` のもとで全成分の入れ替えは `ι(s) ↦ ι(-s)` | Step 3 (b) とその理由 |
 | `Ising2D.eq_diagonal_of_mulVec_basisVec` / `openChainD0_eq_diagonal` | `D_0` は対角行列で `(D_0)_{ι(s),ι(s)} = E(s)` | Step 3 (a)（`D0_G_diagonal_action`） |
 | **`Ising2D.matExp_smul_openChainD0`** / `matExp_smul_openChainD0_apply` | **`exp(K_1D_0)` は対角行列で `(exp(K_1D_0))_{ι(s),ι(s)} = exp(K_1E(s))`** | **Step 3 (a)**（`exp_of_diagonal_matrix`） |
