@@ -1963,6 +1963,17 @@ targets=(
   Ising2D.VPlusData.epsilon_eq_parityProd_of_trace_pos
   Ising2D.VPlusData.epsilon_mul_Qproj_univ
   Ising2D.VPlusData.mem_evenSector_of_mem_range_univ
+  Ising2D.neg_one_pow_mul_neg_one_pow
+  Ising2D.card_le_of_finset
+  Ising2D.CheckFermi.eta_eq_neg_one_pow_sub_card
+  Ising2D.CheckFermi.eta_eq_neg_one_pow_add_card
+  Ising2D.CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card
+  Ising2D.CheckFermi.epsilon_eq_neg_one_pow_smul_parityProd
+  Ising2D.CheckFermi.epsilon_mul_Qproj_univ_of_eta
+  Ising2D.CheckFermi.Qproj_univ_mulVec_of_mem_range
+  Ising2D.CheckFermi.epsilon_mulVec_of_mem_range_univ
+  Ising2D.vPlusDataOf_eta_univ_eq_one
+  Ising2D.max_eigenvector_in_even_sector
   Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus
   Ising2D.partition_function_sandwich_and_limit_in_N_row
   Ising2D.c_plus_eq_LambdaM_half_physical

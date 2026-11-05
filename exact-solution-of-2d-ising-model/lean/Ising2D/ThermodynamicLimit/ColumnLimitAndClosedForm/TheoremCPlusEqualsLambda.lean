@@ -205,7 +205,7 @@ theorem exists_real_max_eigenvector (htr : 0 < ((epsilon M * D.V).trace).re) :
   -- `ε (c q) = c q`
   have hεq : ∀ c : ℂ, epsilon M *ᵥ (c • q) = c • q := by
     intro c
-    rw [Matrix.mulVec_smul, D.mem_evenSector_of_mem_range_univ htr hqfix]
+    rw [Matrix.mulVec_smul, D.mem_evenSector_of_mem_range_univ htr hqfix.symm]
   -- 実部を取る
   have hmain : ∀ c : ℂ, reVec (c • q) ≠ 0 →
       ∃ y : Conf M → ℝ, y ≠ 0 ∧ B.Vr *ᵥ y = D.lamMax • y ∧ epsilonR M *ᵥ y = y := by

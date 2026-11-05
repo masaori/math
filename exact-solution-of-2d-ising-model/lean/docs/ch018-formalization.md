@@ -155,11 +155,17 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| **`VPlusData.eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`** | **(1)**（`tr(εV^{(+)}) > 0` を仮定として受け取る。具体的な `V^{(+)}` では `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）で埋める） |
-| **`VPlusData.eta_eq_sign`** | **`η_ε = (−1)^{M−|ε|}`** | **(2)** |
-| **`VPlusData.epsilon_eq_parityProd_of_trace_pos`** | **`ε = (−1)^M ∏_μ(I − 2ň_μ)`** | **(3)** |
-| **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
-| **`VPlusData.mem_evenSector_of_mem_range_univ`** | **最大固有ベクトルは偶セクター `𝓕^{(+)}` に属する** | **定理本体** |
+| `Ising2D.neg_one_pow_mul_neg_one_pow` | `(−1)^k(−1)^k = 1_ℂ` | 準備 (P1) の 4 行 |
+| `Ising2D.card_le_of_finset` | `|ε| ≤ M` | 準備 (P2) の 3 行 |
+| **`Ising2D.vPlusDataOf_eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`**（具体的な `V^{(+)}`、`vPlusDataOf`） | **(1)** の 3 行の含意（`trace_of_epsilon_V_plus` の等号と `∈ ℝ_{>0}` の読み方、`z > 0` の定め方、`trace_of_epsilon_V_plus_via_check_eigenvalues` (3) の `⟸`） |
+| `CheckFermi.eta_eq_neg_one_pow_sub_card` / `eta_eq_neg_one_pow_add_card` | `η_ε = (−1)^{M−|ε|}` / `η_ε = (−1)^{M+|ε|}` | (2) の鎖の 1〜3 行 / 3〜8 行（`η_{(1,…,1)} = 1` を仮定 `heta` で受け取る） |
+| `CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card` | `εQ̌_ε = (−1)^{M+|ε|}Q̌_ε` | (2) の行列の式 2 行 |
+| `CheckFermi.epsilon_eq_neg_one_pow_smul_parityProd` | `ε = (−1)^M ∏_μ(I − 2ň_μ)` | (3) の 3 行 |
+| `CheckFermi.epsilon_mul_Qproj_univ_of_eta` | `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}` | (4) の 1 つ目の鎖 3 行 |
+| `CheckFermi.Qproj_univ_mulVec_of_mem_range` | `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y` | (4) の 2 つ目の鎖 4 行 |
+| `CheckFermi.epsilon_mulVec_of_mem_range_univ` | `y = Q̌_{(1,…,1)}x` なら `εy = y` | (4) の 3 つ目の鎖 4 行 |
+| **`Ising2D.max_eigenvector_in_even_sector`** | **(1)〜(4)**（具体的な `V^{(+)}`。仮定は `IsingParam` の `K_1, K_2 > 0` と `2 ≤ M`） | **主張**（固有空間の言い換え `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}` は未対応） |
+| `VPlusData.eta_univ_eq_one` / `eta_eq_sign` / `epsilon_eq_parityProd_of_trace_pos` / `epsilon_mul_Qproj_univ` / `mem_evenSector_of_mem_range_univ` | 上の (1)〜(4) を任意の `VPlusData` について `0 < Re tr(εV^{(+)})` の仮定で述べた形 | 下流（`TheoremCPlusEqualsLambda.lean`）のための形。`heta` を (1) の最後の行で埋める |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`（ラベル `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`）
 
@@ -347,7 +353,7 @@
 | 同 (4) の後半 | `CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul` / `epsilon_eq_parityProd_succ`（人手の 7 行・9 行の鎖と同じ行の calc） | `NecSuf.mul_eq_smul_mul_of_sign_pow'` / `eq_smul_of_mul_eq_smul_mul'`（具体版と同じ行。7 行に効くのは `Monoid`・`HasDistribNeg`・`SemigroupAction` だけ、9 行に効くのは右単位元・左分配則・`IsScalarTower` だけ） | **系としても得られる**（`*_of_necSuf`） |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2・Step 3 | `checkU_prod_eq_neg_one_pow`・`VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH` | `NecSuf.map_prod_two_valued_eq_pow'`・`NecSuf.signed_term_eq_map_mul'` | **系としても得られる**（`*_of_necSuf`）。Step 1・Step 4・Step 5 の鎖には必要十分版を置かない（引いた主張と鎖をつなぐだけで、鎖に固有の取り払える構造が無い） |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
-| `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
+| `max_eigenvector_in_even_sector` | `Ising2D.max_eigenvector_in_even_sector` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
