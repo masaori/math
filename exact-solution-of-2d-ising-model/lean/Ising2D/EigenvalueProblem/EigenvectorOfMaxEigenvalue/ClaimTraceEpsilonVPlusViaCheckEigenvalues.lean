@@ -24,11 +24,15 @@
 | 原文の行 | Lean |
 | --- | --- |
 | Step 1 の 13 行の鎖 `tr(εV^{(+)}) = … = Σ_εη_ε(Λ̌_ε)_ℂ` | `VPlusData.trace_epsilon_mul_V_step1`（同じ行の calc。人手の `M_col` が `r + 1`） |
-| Step 2〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 2 の `(Π_{μ≤k}ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−\|ε\|_k}` の `k` の帰納法（`k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行）と準備の `ǔ^{(e)}`・`\|ε\|_k` の数え上げ | `checkU_prod_eq_neg_one_pow`（同じ行の calc。人手の `k` が `n + 1`）・`checkU`・`ite_eq_one_eq_val`・`card_finsetOfWord_one`・`card_finsetOfWord_castSucc`・`card_finsetOfWord_le`（必要十分版の特殊化は `checkU_prod_eq_neg_one_pow_of_necSuf`。必要十分版は `NecSuf/PowerFromProductOfTwoValuedFactors.lean`） |
+| Step 3〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2 の `checkU_prod_eq_neg_one_pow` はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.NecSuf.PowerFromProductOfTwoValuedFactors
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 
 namespace Ising2D
 
@@ -185,7 +189,137 @@ theorem trace_epsilon_mul_V_eq_sum :
           Fintype.sum_bijective CheckFermi.finsetOfWord CheckFermi.finsetOfWord_bijective _ _ (fun _ => rfl)
                                                         -- 語から部分集合への全単射で添字を付け替える（運ぶ段）
 
-/-! ## Step 2: 積への分解 -/
+end VPlusData
+
+/-! ## Step 2: 符号の冪を実数の積の包含で表す
+
+人手の語 `ε ∈ {0,1}^𝓜̌` は Lean の `ε : Fin (n + 1) → Fin 2`（`ε_{j+1} = ε j`）、人手の `k` は Lean の `n + 1` である。
+人手は `ε` を固定して `k` の帰納法を回し、`|ε|_k` を先頭の `k` 成分の `1` の個数とする。Lean は長さ `n + 1` の語について
+示し、帰納法の仮定を先頭の `k` 成分の語 `fun μ => ε (Fin.castSucc μ)` に当てる（`|ε|_k` はその語の `1` の個数で、
+人手の `|ε|_k` と同じ数である）。`|ε|` は `(CheckFermi.finsetOfWord ε).card` で、
+`epsilon_eigenvalue_on_check_Q` (3) の `eta_eq_eta_univ_mul` の指数 `M - T.card` と同じ形である。 -/
+
+/-- 準備の `ǔ^{(1)} := 1`、`ǔ^{(0)} := −1 ∈ ℝ`。 -/
+def checkU (e : Fin 2) : ℝ := if e = 1 then 1 else -1
+
+theorem checkU_one : checkU 1 = 1 := rfl
+
+theorem checkU_zero : checkU 0 = -1 := rfl
+
+/-- 数え上げの項 `[e = 1]` は `e ∈ {0,1}` の値に等しい。 -/
+theorem ite_eq_one_eq_val (e : Fin 2) : (if e = 1 then 1 else 0) = e.val := by
+  rcases binaryWord_fin_two_eq_one_or_zero e with rfl | rfl <;> rfl
+
+/-- 準備の `|ε|_1 = ε_1`（数え上げの定義）。 -/
+theorem card_finsetOfWord_one (ε : Fin 1 → Fin 2) : (CheckFermi.finsetOfWord ε).card = (ε 0).val := by
+  unfold CheckFermi.finsetOfWord
+  rw [Finset.card_filter, Fin.sum_univ_one, ite_eq_one_eq_val]
+
+/-- 準備の `|ε|_{k+1} = |ε|_k + ε_{k+1}`（数え上げの定義）。 -/
+theorem card_finsetOfWord_castSucc {n : ℕ} (ε : Fin (n + 1) → Fin 2) :
+    (CheckFermi.finsetOfWord ε).card
+      = (CheckFermi.finsetOfWord (fun μ : Fin n => ε (Fin.castSucc μ))).card + (ε (Fin.last n)).val := by
+  unfold CheckFermi.finsetOfWord
+  rw [Finset.card_filter, Finset.card_filter, Fin.sum_univ_castSucc, ite_eq_one_eq_val]
+
+/-- 準備の `0 ≤ |ε|_k ≤ k`（数え上げの定義）。 -/
+theorem card_finsetOfWord_le {n : ℕ} (ε : Fin n → Fin 2) : (CheckFermi.finsetOfWord ε).card ≤ n :=
+  (Finset.card_filter_le _ _).trans (by rw [Finset.card_univ, Fintype.card_fin])
+
+/-- **原文 Step 2**: `(Π_{μ=1}^{k} ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−|ε|_k}` の `k` の帰納法（人手の `k` は Lean の `n + 1`）。
+`k = 1` の `ε_1 = 1` の 5 行・`ε_1 = 0` の 7 行、`k → k+1` の `ε_{k+1} = 1`・`ε_{k+1} = 0` の 6 行ずつを同じ行の calc で置く。
+人手の有限積（`def_finite_product_of_real_numbers`）は Lean の `∏ μ, …`（`Finset.prod`）で、定義の 2 つの式は
+`Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む（`finite_product_of_positive_reals_is_positive` と同じ）。
+`def_power_of_complex_number` の `z^0 := 1_ℂ`・`z^{m+1} := z^m z` は mathlib の `pow_zero`・`pow_succ` である。 -/
+theorem checkU_prod_eq_neg_one_pow :
+    ∀ (n : ℕ) (ε : Fin (n + 1) → Fin 2),
+      ((∏ μ, checkU (ε μ) : ℝ) : ℂ) = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord ε).card)
+  | 0, ε => by
+    rcases binaryWord_fin_two_eq_one_or_zero (ε 0) with he | he
+    · -- `ε_1 = 1` なら `|ε|_1 = 1`
+      have hc : (CheckFermi.finsetOfWord ε).card = 1 := by rw [card_finsetOfWord_one, he]; rfl
+      calc ((∏ μ, checkU (ε μ) : ℝ) : ℂ)
+          = ((checkU (ε 0) : ℝ) : ℂ) := by rw [Fin.prod_univ_one]
+                                                        -- `def_finite_product_of_real_numbers`
+        _ = ((checkU 1 : ℝ) : ℂ) := by rw [he]          -- `ε_1 = 1`
+        _ = 1 := by rw [checkU_one, Complex.ofReal_one] -- `ǔ^{(1)} := 1` と `inclusion_rr_to_cc` の略記
+        _ = (-1 : ℂ) ^ 0 := (pow_zero _).symm           -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ ((0 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hc]
+                                                        -- `|ε|_1 = 1`
+    · -- `ε_1 = 0` なら `|ε|_1 = 0`
+      have hc : (CheckFermi.finsetOfWord ε).card = 0 := by rw [card_finsetOfWord_one, he]; rfl
+      calc ((∏ μ, checkU (ε μ) : ℝ) : ℂ)
+          = ((checkU (ε 0) : ℝ) : ℂ) := by rw [Fin.prod_univ_one]
+                                                        -- `def_finite_product_of_real_numbers`
+        _ = ((checkU 0 : ℝ) : ℂ) := by rw [he]          -- `ε_1 = 0`
+        _ = -1 := by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]
+                                                        -- `ǔ^{(0)} := −1` と `inclusion_rr_to_cc` の略記
+        _ = 1 * (-1 : ℂ) := (one_mul _).symm            -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+        _ = (-1 : ℂ) ^ 0 * (-1 : ℂ) := by rw [pow_zero] -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 1 := (pow_succ _ 0).symm         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+        _ = (-1 : ℂ) ^ ((0 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hc]
+                                                        -- `|ε|_1 = 0`
+  | n + 1, ε => by
+    have ih := checkU_prod_eq_neg_one_pow n (fun μ => ε (Fin.castSucc μ))
+                                                        -- 帰納法の仮定（先頭の `k` 成分の語に当てる）
+    have hcount := card_finsetOfWord_castSucc ε         -- `|ε|_{k+1} = |ε|_k + ε_{k+1}`
+    have hle := card_finsetOfWord_le (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))
+                                                        -- `|ε|_k ≤ k`
+    rcases binaryWord_fin_two_eq_one_or_zero (ε (Fin.last (n + 1))) with he | he
+    · -- `ε_{k+1} = 1` なら `(k+1) − |ε|_{k+1} = k − |ε|_k`
+      have hk : (n + 1 + 1) - (CheckFermi.finsetOfWord ε).card
+          = (n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card := by
+        rw [hcount, he]; simp only [Fin.val_one]; omega
+      calc ((∏ μ, checkU (ε μ) : ℝ) : ℂ)
+          = (((∏ μ : Fin (n + 1), checkU (ε (Fin.castSucc μ))) * checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) := by
+            rw [Fin.prod_univ_castSucc]                 -- `def_finite_product_of_real_numbers`
+        _ = ((∏ μ : Fin (n + 1), checkU (ε (Fin.castSucc μ)) : ℝ) : ℂ) * ((checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) :=
+            (real_inclusion_mul _ _).symm               -- `real_inclusion_preserves_product` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card)
+              * ((checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) := by rw [ih]
+                                                        -- 帰納法の仮定
+        _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card)
+              * 1 := by rw [he, checkU_one, Complex.ofReal_one]
+                                                        -- `ε_{k+1} = 1`、`ǔ^{(1)} := 1` と `inclusion_rr_to_cc` の略記
+        _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card) :=
+            mul_one _                                   -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+        _ = (-1 : ℂ) ^ ((n + 1 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hk]
+                                                        -- `(k+1) − |ε|_{k+1} = k − |ε|_k`
+    · -- `ε_{k+1} = 0` なら `(k+1) − |ε|_{k+1} = (k − |ε|_k) + 1`
+      have hk : (n + 1 + 1) - (CheckFermi.finsetOfWord ε).card
+          = ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card) + 1 := by
+        rw [hcount, he]; simp only [Fin.val_zero, add_zero]; omega
+      calc ((∏ μ, checkU (ε μ) : ℝ) : ℂ)
+          = (((∏ μ : Fin (n + 1), checkU (ε (Fin.castSucc μ))) * checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) := by
+            rw [Fin.prod_univ_castSucc]                 -- `def_finite_product_of_real_numbers`
+        _ = ((∏ μ : Fin (n + 1), checkU (ε (Fin.castSucc μ)) : ℝ) : ℂ) * ((checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) :=
+            (real_inclusion_mul _ _).symm               -- `real_inclusion_preserves_product` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card)
+              * ((checkU (ε (Fin.last (n + 1))) : ℝ) : ℂ) := by rw [ih]
+                                                        -- 帰納法の仮定
+        _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card)
+              * (-1 : ℂ) := by rw [he, checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]
+                                                        -- `ε_{k+1} = 0`、`ǔ^{(0)} := −1` と `inclusion_rr_to_cc` の略記
+        _ = (-1 : ℂ) ^ (((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card) + 1) :=
+            (pow_succ _ _).symm                         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
+                                                        -- （`m → k − |ε|_k`）を右辺から左辺へ
+        _ = (-1 : ℂ) ^ ((n + 1 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hk]
+                                                        -- `(k+1) − |ε|_{k+1} = (k − |ε|_k) + 1`
+
+/-- `checkU_prod_eq_neg_one_pow` を必要十分版 `NecSuf.map_prod_two_valued_eq_pow'`（`f → (·)_ℂ`、`u → ǔ`、`s → −1_ℂ`）の
+特殊化として。`Finset.prod` と左から掛ける有限積の一致は `real_finset_prod_eq_finProdLeft`、`|ε|` は `wordCount'` と同じ数である。 -/
+theorem checkU_prod_eq_neg_one_pow_of_necSuf (n : ℕ) (ε : Fin (n + 1) → Fin 2) :
+    ((∏ μ, checkU (ε μ) : ℝ) : ℂ) = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord ε).card) := by
+  rw [real_finset_prod_eq_finProdLeft n (fun μ => checkU (ε μ))]
+  exact NecSuf.map_prod_two_valued_eq_pow' (fun a : ℝ => (a : ℂ)) (fun a b => (real_inclusion_mul a b).symm)
+    checkU (-1 : ℂ) (by rw [checkU_one, Complex.ofReal_one])
+    (by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]) n ε
+
+namespace VPlusData
+
+variable {F : CheckFermi M} (D : VPlusData M F)
+
+/-! ## Step 3 以降（旧い Step の分け方のまま）: 積への分解 -/
 
 /-- 人手証明 Step 2 の右辺の実数因子 `(2 sinh 2K_2)^{M/2} ∏_μ 2 sinh(γ(θ̃_μ)/2)`。 -/
 noncomputable def traceFactor : ℝ := D.C * ∏ μ : Fin M, (2 * Real.sinh (D.gam μ / 2))

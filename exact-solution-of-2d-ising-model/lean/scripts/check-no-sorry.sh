@@ -1893,8 +1893,19 @@ targets=(
   Ising2D.VPlusData.lamMax
   Ising2D.VPlusData.lamMax_pos
   Ising2D.VPlusData.checkLambda_le_lamMax
-  Ising2D.VPlusData.epsilon_mul_V_mul_Qproj
+  Ising2D.VPlusData.trace_epsilon_mul_V_step1
   Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum
+  Ising2D.checkU
+  Ising2D.ite_eq_one_eq_val
+  Ising2D.card_finsetOfWord_one
+  Ising2D.card_finsetOfWord_castSucc
+  Ising2D.card_finsetOfWord_le
+  Ising2D.checkU_prod_eq_neg_one_pow
+  Ising2D.checkU_prod_eq_neg_one_pow_of_necSuf
+  "Ising2D.NecSuf.wordCount_one'"
+  "Ising2D.NecSuf.wordCount_castSucc'"
+  "Ising2D.NecSuf.wordCount_le'"
+  "Ising2D.NecSuf.map_prod_two_valued_eq_pow'"
   Ising2D.VPlusData.traceFactor
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V
