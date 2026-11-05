@@ -2302,6 +2302,14 @@ targets=(
   Ising2D.openChainChange_bijective
   Ising2D.openChainEnergy_eq_sum_bondSpin
   Ising2D.exp_openChainEnergy
+  Ising2D.openChainPhiEquiv
+  Ising2D.coe_varsigma_one
+  Ising2D.coe_varsigma_zero
+  Ising2D.varsigmaEquiv
+  Ising2D.varsigmaWordEquiv
+  Ising2D.binaryWordRealSum_eq_sum_univ
+  Ising2D.openChainEnergy_eq_sum_fin
+  Ising2D.exp_openChainEnergy_eq_prod_bondSpin
   Ising2D.open_chain_partition_sum
   Ising2D.nextSite_val_of_bond
   Ising2D.prevSite_val_of_ne_zero

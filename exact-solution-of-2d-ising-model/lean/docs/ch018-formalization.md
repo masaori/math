@@ -233,9 +233,13 @@
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.openChainEnergy` / `openChainEnergy_mem_int` | `E(s) = ∑_{m=1}^{M_col-1}s(m)s(m+1) ∈ ℤ` | `def_open_chain_spin_energy` |
-| `Ising2D.openChainChange` / `openChainChange_injective` / `openChainChange_bijective` | `Φ(s) = (s(1); t_1,…,t_{M_col-1})` は全単射 | 二つのスピン和の Step 1 |
+| `Ising2D.bondSpin` / `openChainPhi` / `openChainPhiInv` / `openChainPhiInv_zero` / `openChainPhiInv_succ` / `openChainPhiEquiv` | `t_m(s) = s(m)s(m+1)`、`Φ(s) = (s(1); t_1(s),…,t_{M_col-1}(s))` は全単射（逆写像は `s(1) := u`、`s(m+1) := s(m)τ_m`。人手の `M_col` は `n + 2`、結合の添字は `Fin (n + 1)`） | `open_chain_partition_sum` の Step 1 |
+| `Ising2D.varsigma` / `coe_varsigma_one` / `coe_varsigma_zero` / `varsigmaEquiv` / `varsigmaWordEquiv` | `ς(e) = 2e - 1` と、成分ごとの `ς` による `{0,1}^{M_col-1} → {-1,1}^{M_col-1}` の全単射 | `open_chain_partition_sum` の Step 1 |
+| `Ising2D.exp_openChainEnergy_eq_prod_bondSpin` | `exp(KE(s)) = Π_m exp(Kt_m(s))`（3 段） | `open_chain_partition_sum` の Step 2 の準備の鎖 |
+| `Ising2D.binaryWordRealSum_eq_sum_univ` / `openChainEnergy_eq_sum_fin` | 運ぶ段（人手の行は無い）: `{0,1}^r` の上の和を全体の上の和で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `open_chain_partition_sum` の Step 2 |
+| `Ising2D.openChainChange` / `openChainChange_injective` / `openChainChange_bijective` | 旧い形の `Φ`（結合の添字を `OpenChainBond M` で数え、全単射を単射と元の個数から出す） | `open_chain_endpoint_product_sum` の Step 1（人手の新しい鎖へ揃える前） |
 | `Ising2D.prod_openChainBondSpin` | `∏_m t_m = s(1)s(M_col)` | `open_chain_endpoint_product_sum` の Step 2 |
-| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`** | **主張本体** |
+| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 10 行の calc） | **主張本体** |
 | **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`** | **主張本体** |
 | `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
 
