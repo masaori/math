@@ -1853,8 +1853,14 @@ targets=(
   Ising2D.CheckFermi.epsilon_mul_Qproj
   Ising2D.CheckFermi.eta_unique
   Ising2D.CheckFermi.eta_insert
-  Ising2D.CheckFermi.eta_univ_eq_aux
+  Ising2D.CheckFermi.eta_eq_neg_eta_insert
+  Ising2D.CheckFermi.eta_eq_eta_univ_mul_of_sub_card
   Ising2D.CheckFermi.eta_eq_eta_univ_mul
+  Ising2D.CheckFermi.eta_eq_neg_eta_insert_of_necSuf
+  Ising2D.CheckFermi.eta_eq_eta_univ_mul_of_necSuf
+  Ising2D.NecSuf.eq_neg_of_insert
+  Ising2D.NecSuf.eq_univ_mul_neg_one_pow_of_sub_card
+  Ising2D.NecSuf.eq_univ_mul_neg_one_pow
   Ising2D.CheckFermi.parityFactor
   Ising2D.CheckFermi.commute_parityFactor
   Ising2D.CheckFermi.parityProd

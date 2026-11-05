@@ -5,7 +5,7 @@
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の冒頭・Step 1・Step 2 の後半・Step 3 の数ベクトルの鎖は
-`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`）。符号の反転則 (2) の具体版 `eta_insert` は人手と同じ数ベクトルの鎖で組み、
+`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`、(3) の帰納法は `Ising2D/NecSuf/SignAfterReplacingComponents.lean`）。符号の反転則 (2) の具体版 `eta_insert` は人手と同じ数ベクトルの鎖で組み、
 同じ組み方で冒頭の `εq = η_ε q`・Step 1〜3 の鎖を必要十分版の特殊化に替えたものが `eta_insert_of_necSuf` である
 （`q` を取る段・`Q̌_ε q = q`・`M = 1`・最後に約す段は具体版と共通）。
 
@@ -22,7 +22,7 @@
 | (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
 | (2) Step 3 の後半: `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（6 行） | `eta_insert_smul_cre_mulVec_generator` |
 | (2) `ψ̌_μ^† q ≠ 0` の 0 でない成分を比べて `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（`smul_generator_cancel`。Step 2 は `M` を限らない形 `Qproj_insert_mulVec_cre_mulVec_of_notMem` で受け、人手の範囲外の `M = 1` は `Qproj_insert_mulVec_cre_mulVec_generator_one`） |
-| (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
+| (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}`: `k := M_col − \|ε\|` の帰納法（`k = 0` の 4 行、`k ≥ 1` で `ε_μ = 0` の `μ` を取り、(2) の両辺に `−1` を掛けた `η_ε = −η_{ε'}` から始まる 7 行の鎖） | `Ising2D.CheckFermi.eta_eq_eta_univ_mul`・`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`（必要十分版の特殊化は `eta_eq_eta_univ_mul_of_necSuf`・`eta_eq_neg_eta_insert_of_necSuf`） |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
 
 ## 1 次元性が効いている場所（必要十分版で判明したこと）
@@ -36,6 +36,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.NecSuf.SignReversalOnGeneratorVector
+import Ising2D.NecSuf.SignAfterReplacingComponents
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
@@ -766,43 +767,81 @@ theorem eta_insert_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) 
 
 /-! ## 原文 (3): `η_ε = η_{(1,…,1)}(-1)^{M-|ε|}` -/
 
-theorem eta_univ_eq_aux (n : ℕ) :
-    ∀ T : Finset (Fin M), Tᶜ.card = n → F.eta Finset.univ = (-1 : ℂ) ^ n * F.eta T := by
-  induction n with
-  | zero =>
-      intro T hT
-      have : T = Finset.univ := by
-        have := Finset.card_eq_zero.1 hT
-        have h2 : Tᶜᶜ = (∅ : Finset (Fin M))ᶜ := by rw [this]
-        simpa using h2
-      rw [this]; ring
-  | succ n ih =>
-      intro T hT
-      obtain ⟨μ, hμ⟩ : ∃ μ, μ ∈ Tᶜ := Finset.card_pos.1 (by omega)
-      have hμT : μ ∉ T := Finset.mem_compl.1 hμ
-      have hcard : (insert μ T)ᶜ.card = n := by
-        rw [Finset.compl_insert, Finset.card_erase_of_mem hμ, hT]
-        omega
-      have h1 := ih (insert μ T) hcard
-      rw [h1, F.eta_insert hμT]
-      ring
+/-- (3) の帰納法の段の 1 行目の根拠: (2) の `η_{ε'} = −η_ε` の両辺に `−1` を掛けて `η_ε = −η_{ε'}`
+（`−x = (−1)x` なので、両辺の符号を反転することと同じ）。 -/
+theorem eta_eq_neg_eta_insert {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
+    F.eta T = -F.eta (insert μ T) :=
+  calc F.eta T = -(-F.eta T) := (neg_neg _).symm        -- 符号反転を二回すると元に戻る
+    _ = -F.eta (insert μ T) := by rw [F.eta_insert hμ]  -- (2)
 
-/-- **原文 (3)**: `η_ε = η_{(1,…,1)}(-1)^{M-|ε|}`（`(-1)^{-k} = (-1)^k` に注意）。 -/
+/-- **原文 (3) の `k := M_col − |ε| ∈ {0,1,…,M_col}` についての帰納法**。人手の `ε` は Lean の `T`（`ε_μ = 1` の `μ` の集合）、
+`ε[μ→1]` は `insert μ T`、`(1,…,1)` は `Finset.univ`、`|ε|` は `T.card` である。`|ε| ≤ M_col` なので、
+人手の整数の差 `M_col − |ε|` と Lean の自然数の差 `M - T.card` は一致する。
+
+`k = 0`: 全ての `μ` で `ε_μ = 1`、すなわち `ε = (1,…,1)` で、`η_ε = η_{(1,…,1)} = η_{(1,…,1)}(−1)^0`（人手の 1 行を、乗法の単位元・`z^0 = 1`・`0 = M_col − |ε|` を補った 4 行にした）。
+`k ≥ 1`: `ε_μ = 0` の `μ` を取り、`ε' := ε[μ→1]`（`|ε'| = |ε| + 1`）について人手の 7 行の鎖。 -/
+theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
+    ∀ T : Finset (Fin M), M - T.card = k → F.eta T = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by
+  induction k with
+  | zero =>
+      intro T hk
+      -- `k = 0` なら全ての `μ` で `ε_μ = 1`、すなわち `ε = (1,…,1)`
+      have hT : T = Finset.univ := by
+        apply Finset.eq_univ_of_card
+        have hle : T.card ≤ M := by simpa using Finset.card_le_univ T
+        rw [Fintype.card_fin]
+        omega
+      calc F.eta T = F.eta Finset.univ := by rw [hT]     -- `ε = (1,…,1)`
+        _ = F.eta Finset.univ * 1 := (mul_one _).symm    -- `complex_numbers_form_a_field` の乗法の単位元
+        _ = F.eta Finset.univ * (-1 : ℂ) ^ 0 := by rw [pow_zero]
+                                                          -- `def_power_of_complex_number` の `z^0 := 1_ℂ`
+        _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [hk]
+                                                          -- `0 = M_col − |ε|`
+  | succ k ih =>
+      intro T hk
+      -- `k ≥ 1` より `ε_μ = 0` なる `μ` が取れる
+      obtain ⟨μ, hμ⟩ : ∃ μ, μ ∉ T := by
+        by_contra hall
+        have hT : T = Finset.univ :=
+          Finset.eq_univ_iff_forall.2 fun μ => by_contra fun hμ => hall ⟨μ, hμ⟩
+        rw [hT, Finset.card_univ, Fintype.card_fin, Nat.sub_self] at hk
+        omega
+      -- `|ε'| = |ε| + 1`、すなわち `M_col − |ε'| = k − 1`
+      have hcard : (insert μ T).card = T.card + 1 := Finset.card_insert_of_notMem hμ
+      have hk' : M - (insert μ T).card = k := by rw [hcard]; omega
+      have hpos : 1 ≤ M - T.card := by omega
+      calc F.eta T = -F.eta (insert μ T) := F.eta_eq_neg_eta_insert hμ
+                                                          -- (2)
+        _ = -(F.eta Finset.univ * (-1 : ℂ) ^ (M - (insert μ T).card)) := by rw [ih (insert μ T) hk']
+                                                          -- 帰納法の仮定
+        _ = -(F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card - 1)) := by rw [hcard, Nat.sub_add_eq]
+                                                          -- `|ε'| = |ε| + 1`
+        _ = (-1) * (F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card - 1)) := (neg_one_mul _).symm
+                                                          -- `multiply_by_minus_one`
+        _ = (F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card - 1)) * (-1) := mul_comm _ _
+                                                          -- `complex_numbers_form_a_field` の乗法の交換則
+        _ = F.eta Finset.univ * ((-1 : ℂ) ^ (M - T.card - 1) * (-1)) := mul_assoc _ _ _
+                                                          -- `complex_numbers_form_a_field` の乗法の結合則
+        _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [← pow_succ, Nat.sub_add_cancel hpos]
+                                                          -- `def_power_of_complex_number` の `z^{m+1} = z^m z`
+
+/-- **原文 (3)**: `η_ε = η_{(1,…,1)}(-1)^{M-|ε|}`。`k := M_col − |ε|` で帰納法 `eta_eq_eta_univ_mul_of_sub_card` を使う。 -/
 theorem eta_eq_eta_univ_mul (T : Finset (Fin M)) :
+    F.eta T = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) :=
+  F.eta_eq_eta_univ_mul_of_sub_card (M - T.card) T rfl
+
+/-- `eta_eq_neg_eta_insert` を必要十分版 `NecSuf.eq_neg_of_insert` の特殊化として。 -/
+theorem eta_eq_neg_eta_insert_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
+    F.eta T = -F.eta (insert μ T) :=
+  NecSuf.eq_neg_of_insert (η := F.eta) (fun _ _ h => F.eta_insert h) hμ
+
+/-- **原文 (3)** を必要十分版 `NecSuf.eq_univ_mul_neg_one_pow`（値の集合は `Monoid` と `HasDistribNeg` だけ）の
+特殊化として（`Fintype.card (Fin M) = M`）。 -/
+theorem eta_eq_eta_univ_mul_of_necSuf (T : Finset (Fin M)) :
     F.eta T = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by
-  have hcompl : Tᶜ.card = M - T.card := by
-    rw [Finset.card_compl]
-    simp
-  have h := F.eta_univ_eq_aux Tᶜ.card T rfl
-  rw [hcompl] at h
-  have hsq : ((-1 : ℂ) ^ (M - T.card)) * ((-1 : ℂ) ^ (M - T.card)) = 1 := by
-    rw [← pow_add, ← two_mul, pow_mul]
-    norm_num
-  calc F.eta T = 1 * F.eta T := (one_mul _).symm
-    _ = (((-1 : ℂ) ^ (M - T.card)) * ((-1 : ℂ) ^ (M - T.card))) * F.eta T := by rw [hsq]
-    _ = ((-1 : ℂ) ^ (M - T.card)) * (((-1 : ℂ) ^ (M - T.card)) * F.eta T) := by ring
-    _ = ((-1 : ℂ) ^ (M - T.card)) * F.eta Finset.univ := by rw [← h]
-    _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by ring
+  have h := NecSuf.eq_univ_mul_neg_one_pow (η := F.eta) (fun _ _ h => F.eta_insert h) T
+  rw [Fintype.card_fin] at h
+  exact h
 
 /-! ## 原文 (4): `ε` はパリティ演算子 -/
 
