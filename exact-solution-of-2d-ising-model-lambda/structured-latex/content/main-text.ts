@@ -62649,9 +62649,10 @@ A_\gamma(\pi(L-1))
 &&\bigl(\because\ \text{仮定}\bigr)
 \end{aligned}`),
                       paragraph(["列の加算は ", ref("def_residue_addition_notation"),
-                        " に従う。", ref("def_residue_maps"), " より ",
-                        math(String.raw`\pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1=\pi(0)`),
-                        " であり、", ref("claim_closed_walk_horizontal_column_parity_invariant"), " より"]),
+                        " に従う。", ref("def_residue_maps"), " より"]),
+                      displayMath(String.raw`\pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1=\pi(0)
+\quad\bigl(\because\ \blkref{def_residue_maps}\text{ と }\blkref{def_residue_addition_notation}\bigr)`),
+                      paragraph([ref("claim_closed_walk_horizontal_column_parity_invariant"), " より"]),
                       displayMath(String.raw`\begin{aligned}
 A_\gamma(\pi(0))
 &=A_\gamma(\pi(L-1)+_{\mathbb Z/L\mathbb Z}\bar1)
