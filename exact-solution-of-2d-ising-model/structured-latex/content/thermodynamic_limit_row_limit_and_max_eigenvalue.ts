@@ -575,11 +575,48 @@ S_2
         " で定めた ",
         math(String.raw`V_1^{1/2}`),
         " そのものである。",
-        "さらに実対称行列の冪は実対称で、",
-        ref("def_exp"),
-        " の級数の部分和は実対称、",
-        ref("star_preserves_norm_and_limits"),
-        " (3) と同じ議論（転置もノルムを保つ）から極限も実対称。よって ",
+        math(String.raw`\tfrac12 K_1D`),
+        "（",
+        math(String.raw`(\tfrac12)_{\mathbb{C}}(K_1D)`),
+        " の略記。",
+        math(String.raw`(\tfrac12)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "）は実対称である。成分がすべて実数であることは、Step 1 の ",
+        math(String.raw`K_1D`),
+        " の成分がすべて実数であることと ",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to \tfrac12,\ B \to K_1D`),
+        "）による。転置で不変であることは次の鎖による。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\tfrac12 K_1D\bigr)^{\top}
+&= (\tfrac12)_{\mathbb{C}}\bigl(K_1D\bigr)^{\top}
+  &&\bigl(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to (\tfrac12)_{\mathbb{C}},\ A \to K_1D)\bigr)\\
+&= (\tfrac12)_{\mathbb{C}}\bigl(K_1D\bigr)
+  &&\bigl(\because\ \text{Step 1 の}\ (K_1D)^{\top} = K_1D\bigr)\\
+&= \tfrac12 K_1D
+  &&\bigl(\because\ \tfrac12 K_1D\ \text{の略記}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        ref("exp_of_real_symmetric_is_real_symmetric"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to \tfrac12 K_1D`),
+        " と ",
+        math(String.raw`A \to S_2`),
+        "。",
+        math(String.raw`S_2`),
+        " の実対称性は Step 1）より ",
+        math(String.raw`B = \exp(\tfrac12 K_1D)`),
+        " と ",
+        math(String.raw`A = \exp(S_2)`),
+        " は実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）である。上の正定値性と合わせて、",
         math(String.raw`B, A`),
         " は**実**対称正定値である。",
       ]),
@@ -684,6 +721,7 @@ W
       status: "added",
       notes: [
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 が「def_hermitian_positive_definite の最後の注意より実対称行列はエルミート」と定義の中の主張を引いていたのを、それを切り出した主張 real_symmetric_matrix_is_hermitian と定義 def_real_symmetric_complex_matrix を引く形にし、当てはめ（n → 2^{M_col}、A → K_1D と A → S_2）を書いた。exp_hermitian_is_positive_definite を当てはめる ½K_1D がエルミートであることの根拠が無かったので、real_multiple_of_hermitian_is_hermitian（α → ½、A → K_1D）を足した。Step 1 の K_1D・S_2 の実対称性の論証（名前だけの根拠が残る）は変えていない。主張は変えていない。",
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: Step 2 の最後の散文「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」を、新しい主張 exp_of_real_symmetric_is_real_symmetric を A → ½K_1D・A → S_2 で引く形にした。½K_1D が実対称であることを、成分の実性（real_scalar_multiple_of_real_entry_matrix_has_real_entries）と転置の 3 行の鎖（transpose_of_matrix_scalar_multiple と Step 1）で書いた。主張は変えていない。",
         "2026-11-04: SageMath の検算（sagemath/check/W_is_real_symmetric_positive_definite/）を付けるにあたり、可逆性の段を直した。旧い段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性（def_hermitian_positive_definite）は x ∈ ℂ^n の x^*Wx についての条件で、複素の x では x^⊤Wx = 0 から x = 0 は従わない（検算で、実対称正定値な W と x = u + iv（u^⊤Wu = v^⊤Wv、u^⊤Wv = 0）で x^⊤Wx = 0 となる例を作った）。また核が {0} であることから可逆を導く主張は本文に無かった。可逆性を、BB' = I の 3 行の鎖（matrix_double_negation・exp_of_negative_is_left_inverse）と Step 2 の B'B = I による B ∈ R^×、V2_invertible、def_invertible_elements_of_R (ii) の 2 回の適用で示す形にした。主張の「とくに W は可逆」を、def_invertible_elements_of_R の意味で可逆と書いた（内容は不変）。",
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: Step 1 の K_1D の実対称性が「iH_is_real_symmetric の Step 3 で見たとおり」と散文で済ませていた（その Step 3 は 1 ≤ m ≤ M_col−1 の σ_m^zσ_{m+1}^z しか扱わず、周期端 σ_{M_col}^zσ_1^z を覆わない）のを、(σ_k^z)^⊤ = σ_k^z の 5 行、(σ_m^zσ_{m+1}^z)^⊤ の 5 行（m^+ を置き、transpose_of_matrix_product と distinct_site_pauli_matrices_commute で。M_col = 1 は同じ行列）、(K_1D)^⊤ の 5 行と、成分の実性の 2 段落（kronecker_of_real_entry_matrices_has_real_entries・product_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries・real_scalar_multiple_of_real_entry_matrix_has_real_entries）に書き直した。主張は不変。",
       ],

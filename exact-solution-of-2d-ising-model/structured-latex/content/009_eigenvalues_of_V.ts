@@ -788,6 +788,118 @@ Qv_j
     },
   },
   {
+    id: "eigenvalues_of_V_claim_hermitian_and_transpose_invariant_matrix_is_real_symmetric",
+    kind: "claim",
+    title: { text: "エルミートかつ転置で不変な複素行列は実対称" },
+    labels: ["hermitian_and_transpose_invariant_matrix_is_real_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）が ",
+        math(String.raw`A^* = A`),
+        "（共役転置は ",
+        ref("def_hermitian_positive_definite"),
+        "）と ",
+        math(String.raw`A^{\top} = A`),
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）を満たすならば、",
+        math(String.raw`A`),
+        " は実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A^{\top} = A`),
+        " は仮定にあるので、",
+        math(String.raw`A`),
+        " の成分がすべて実数であること（",
+        ref("def_matrix_with_real_entries"),
+        "）を示せばよい。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " を取る。",
+        ref("definition_of_cc"),
+        " より ",
+        math(String.raw`A_{kl} = (a, b)`),
+        " を満たす ",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " を取れる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a, -b)
+&= \overline{(a, b)}
+&&\bigl(\because\ \blkref{def_complex_conjugate}\ (x \to a,\ y \to b)\bigr)\\
+&= \overline{A_{kl}}
+&&\bigl(\because\ a, b\ \text{の取り方}\ A_{kl} = (a, b)\bigr)\\
+&= \left(A^*\right)_{lk}
+&&\bigl(\because\ \blkref{def_hermitian_positive_definite}\ \text{の共役転置}\ (k \to l,\ l \to k)\bigr)\\
+&= A_{lk}
+&&\bigl(\because\ A^* = A\bigr)\\
+&= \left(A^{\top}\right)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (m, n \to n,\ B \to A,\ p \to k,\ q \to l)\bigr)\\
+&= A_{kl}
+&&\bigl(\because\ A^{\top} = A\bigr)\\
+&= (a, b)
+&&\bigl(\because\ a, b\ \text{の取り方}\ A_{kl} = (a, b)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbf{C} = \mathbf{R}^2`),
+        "（",
+        ref("definition_of_cc"),
+        "）の二つの元が等しいことは第 1 成分どうし・第 2 成分どうしが等しいことなので、第 2 成分から ",
+        math(String.raw`-b = b`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b
+&= \tfrac12\,(b + b)
+&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)\\
+&= \tfrac12\,\bigl((-b) + b\bigr)
+&&\bigl(\because\ -b = b\bigr)\\
+&= \tfrac12 \cdot 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-b) + b = 0\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+A_{kl}
+&= (a, b)
+&&\bigl(\because\ a, b\ \text{の取り方}\bigr)\\
+&= (a, 0)
+&&\bigl(\because\ b = 0\bigr)\\
+&= a_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        ref("def_matrix_with_real_entries"),
+        "（",
+        math(String.raw`m, n \to n,\ B \to A,\ p \to k,\ q \to l,\ r \to a`),
+        "）の条件が全ての ",
+        math(String.raw`k, l`),
+        " で成り立ち、",
+        math(String.raw`A`),
+        " の成分はすべて実数である。",
+        math(String.raw`A^{\top} = A`),
+        " と合わせて、",
+        ref("def_real_symmetric_complex_matrix"),
+        " の条件そのものである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていた。そのうちエルミート性は exp_of_hermitian_is_hermitian、転置で不変であることは exp_of_symmetric_is_symmetric が運ぶので、二つから成分が実数であることへ戻す段を real_symmetric_matrix_is_hermitian の逆向きの主張として足した。",
+      ],
+    },
+  },
+  {
     id: "eigenvalues_of_V_claim_power_of_real_symmetric_complex_matrix_is_real_symmetric",
     kind: "claim",
     title: { text: "実対称な複素行列の冪は実対称" },
@@ -2279,6 +2391,64 @@ SS^{m+1}
       status: "added",
       notes: [
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていたので、そのうち転置で不変であることの側を主張に切り出した。手順は exp_of_hermitian_is_hermitian と同じで、共役転置の積の法則を transpose_of_matrix_product に替え、部分和の成分の 8 行の鎖からは複素共役の 3 行（complex_conjugate_of_sum・complex_conjugate_of_product・complex_conjugate_of_real_inclusion）を落とし、def_hermitian_positive_definite の 2 行を def_matrix_transpose に替えて 5 行にし、極限の段を transpose_preserves_matrix_limits に替えた。I^⊤ = I は本文に主張が無いので、証明の冒頭で成分の鎖として示した。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_exp_of_real_symmetric_is_real_symmetric",
+    kind: "claim",
+    title: { text: "実対称な複素行列の exp は実対称" },
+    labels: ["exp_of_real_symmetric_is_real_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）ならば、",
+        math(String.raw`\exp(A)`),
+        "（",
+        ref("def_exp"),
+        "）も実対称である。",
+        math(String.raw`\exp(A)`),
+        " は ",
+        ref("def_exp"),
+        " の部分和の極限（部分和と ",
+        math(String.raw`\exp(A)`),
+        " の差のノルムという ",
+        math(String.raw`\mathbb{R}`),
+        " の数列の極限）であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+&A^* = A
+&&\bigl(\because\ \blkref{real_symmetric_matrix_is_hermitian}\ (n \to n,\ A \to A)\bigr)\\
+&A^{\top} = A
+&&\bigl(\because\ \blkref{def_real_symmetric_complex_matrix}\bigr)\\
+&\exp(A)^* = \exp(A)
+&&\bigl(\because\ A^* = A,\ \blkref{exp_of_hermitian_is_hermitian}\ (n \to n,\ S \to A)\bigr)\\
+&\exp(A)^{\top} = \exp(A)
+&&\bigl(\because\ A^{\top} = A,\ \blkref{exp_of_symmetric_is_symmetric}\ (n \to n,\ S \to A)\bigr)
+\end{aligned}`),
+      paragraph([
+        "後の二つの等式から、",
+        ref("hermitian_and_transpose_invariant_matrix_is_real_symmetric"),
+        "（",
+        math(String.raw`n \to n,\ A \to \exp(A)`),
+        "）より ",
+        math(String.raw`\exp(A)`),
+        " は実対称である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていたので、主張に切り出した。極限で成分の実性が保たれることを ℝ の閉性から示す代わりに、実対称 ⟹ エルミートかつ転置で不変（real_symmetric_matrix_is_hermitian と定義）、エルミート性と転置での不変性を exp へ運ぶ（exp_of_hermitian_is_hermitian・exp_of_symmetric_is_symmetric）、エルミートかつ転置で不変 ⟹ 実対称（hermitian_and_transpose_invariant_matrix_is_real_symmetric）の順に引く。",
       ],
     },
   },

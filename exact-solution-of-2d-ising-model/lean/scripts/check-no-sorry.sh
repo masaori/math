@@ -1555,6 +1555,10 @@ targets=(
   Ising2D.complex_conjugate_of_real_inclusion
   Ising2D.real_symmetric_isHermitian
   Ising2D.real_symmetric_isHermitian_of_necSuf
+  Ising2D.exists_real_of_star_eq
+  Ising2D.hermitian_and_transpose_invariant_matrix_is_real_symmetric
+  Ising2D.hermitian_and_transpose_invariant_matrix_is_real_symmetric_of_necSuf
+  Ising2D.NecSuf.star_fixed_entries_of_hermitian_symmetric
   Ising2D.matrix_transpose_norm
   Ising2D.matrix_transpose_tendsto
   Ising2D.matrix_transpose_norm_of_necSuf
