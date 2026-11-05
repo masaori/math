@@ -101,7 +101,10 @@
 | `CheckFermi.cre_mul_omittingDefFactor` / `omittingDefFactor_insert` | `Π' := ∏_{ν≠μ}A_ν`（Lean は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`、人手の `M_col` が `r + 2`）について `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`∏_{ν≠μ}A_ν^{ε'} = Π'` | (2) Step 2 |
 | `CheckFermi.defFactor_mulVec_generator_of_notMem` / `omittingDefFactor_mulVec_generator` / `Qproj_insert_mulVec_cre_mulVec_generator` | `A_μ^ε q = q`（5 行）、`Π'q = q`（5 行）、`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）。必要十分版の特殊化は `*_of_necSuf` | (2) Step 2 |
 | `CheckFermi.epsilon_mulVec_cre_mulVec_generator` | `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | (2) Step 3 の前半 |
-| **`CheckFermi.eta_insert`** | **反転則 `η_{ε[μ→1]} = −η_ε`**（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じている。上の数ベクトルの鎖へ組み替えるのは Step 2 を置いた後） | **(2)** |
+| `CheckFermi.epsilon_mulVec_generator_eq_eta_smul` | `εq = η_ε q`（5 行。`Q̌_ε q = q` は冪等性の `Qproj_mulVec_generator`） | (2) の冒頭 |
+| `CheckFermi.eta_insert_smul_cre_mulVec_generator` | (1) を `ε'` に使った `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（6 行） | (2) Step 3 の後半 |
+| `CheckFermi.Qproj_insert_mulVec_cre_mulVec_of_notMem` / `Qproj_insert_mulVec_cre_mulVec_generator_one` | Step 2 の結論を `M` を限らずに述べたもの（`M = r + 2` は上の 3 本の鎖。人手の範囲外の `M = 1` は `Π'` が因子を持たない場合の縮めた鎖） | (2) Step 2 |
+| **`CheckFermi.eta_insert`** / `eta_insert_of_necSuf` | **反転則 `η_{ε[μ→1]} = −η_ε`**（`im Q̌_ε` の `0` でない元 `q`（`exists_ne_zero_mem_range_Qproj`。`Q̌_ε ≠ 0` の 0 でない列で、1 次元性は使わない）を取り、上の数ベクトルの鎖を人手の順に組み、`ψ̌_μ^† q ≠ 0` の 0 でない成分で約す。後者は同じ組み方で冒頭の `εq = η_ε q`・Step 1〜3 の鎖を必要十分版の特殊化に替えたもの。`q` を取る段・`Q̌_ε q = q`・`M = 1`・約す段は共通） | **(2)** |
 | `CheckFermi.eta_univ_eq_aux` | `|ε|` に関する帰納法の補助 | (3) |
 | **`CheckFermi.eta_eq_eta_univ_mul`** | **`η_ε = η_{(1,…,1)}·(−1)^{M−|ε|}`** | **(3)** |
 | `CheckFermi.parityFactor` / `parityProd` / `commute_parityFactor` | `∏_μ (I − 2ň_μ)` とその可換性 | (4) |
@@ -262,8 +265,8 @@
 | **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換**（添字を `Finset` で取る `projOn` の形。`M = 0` の埋め合わせに使う） | **`Ring A` だけ**（`projOn` の定義が要する） | 同 (4) 後半 |
 | `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合則・可換性・逆元則、右分配則、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i`（反交換関係から `ann_mul_cre` で `a_ic_i = 1 − n_i` を出し、`num_mul_cre'` を使う） | `Ring A` | 同 |
-| **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
-| **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
+| **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
+| **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
 | `NecSuf.num_mulVec_eq_zero_of_fixed`（`NecSuf/SignReversalOnGeneratorVector.lean`） | `Qq = q`, `nQ = sQ`, `s = 0` ⇒ `nq = 0`（具体版と同じ 6 行） | 係数は `NonUnitalSemiring`（行列 `Matrix ι ι R` と数ベクトル `ι → R`）。スカラー `s` は別の集合 `S` の元で、`0 • x = 0` だけを使う | 同 (2) Step 1 |
 | `NecSuf.ann_mulVec_cre_mulVec_eq_of_num_mulVec_eq_zero`（同） | `ac = I − n`, `nq = 0` ⇒ `a(cq) = q`（具体版と同じ 6 行） | 係数は `Ring`（可換則は不要。`n = ca` も `n` の冪等性も不要） | 同 (2) Step 1 |
 | `NecSuf.cre_mulVec_ne_zero_of_ann_mulVec_cre_mulVec_eq`（同） | `a(cq) = q`, `q ≠ 0` ⇒ `cq ≠ 0`（具体版と同じ 3 行） | 係数は `NonUnitalNonAssocSemiring` | 同 (2) Step 1 |
@@ -287,8 +290,8 @@
 | 同 (3) | `Ising2D.epsilon_anticomm_checkPsiDag` / `checkPsi`（人手の鎖と同じ行の `epsilon_anticomm_two_term` で証明） | `NecSuf.anticomm_add_smul`（具体版と同じ 7 段の calc） | **系としても得られる**（`epsilon_anticomm_checkPsiDag_of_necSuf` / `checkPsi_of_necSuf`） |
 | 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（人手の鎖と同じ行の calc。`Q̌_ε` は `commute_epsilon_Qproj_succ`） | `NecSuf.commute_parity_num`（具体版と同じ 3 行）/ `commute_parity_finProdLeft_defFactor`（具体版と同じ並び）/ `commute_parity_projOn` | **系としても得られる**（`commute_epsilon_nOp_of_necSuf` / `commute_epsilon_Qproj_succ_of_necSuf` / `commute_epsilon_Qproj_of_necSuf`） |
 | `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `NecSuf.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
-| 同 (2) Step 1・Step 2 の後半・Step 3 の前半 | `CheckFermi.cre_mulVec_generator_ne_zero` / `Qproj_insert_mulVec_cre_mulVec_generator` / `epsilon_mulVec_cre_mulVec_generator`（人手の鎖と同じ行の calc） | `NecSuf/SignReversalOnGeneratorVector.lean` の 7 つ（具体版と同じ行の calc） | **系としても得られる**（`*_of_necSuf`） |
-| 同 (2) | `CheckFermi.eta_insert` | `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |
+| 同 (2) の冒頭・Step 1・Step 2 の後半・Step 3 | `CheckFermi.epsilon_mulVec_generator_eq_eta_smul` / `cre_mulVec_generator_ne_zero` / `Qproj_insert_mulVec_cre_mulVec_generator` / `epsilon_mulVec_cre_mulVec_generator` / `eta_insert_smul_cre_mulVec_generator`（人手の鎖と同じ行の calc） | `NecSuf/SignReversalOnGeneratorVector.lean` の 9 つ（具体版と同じ行の calc） | **系としても得られる**（`*_of_necSuf`） |
+| 同 (2) | `CheckFermi.eta_insert`（数ベクトルの鎖を人手の順に組む） | 各段の `NecSuf/SignReversalOnGeneratorVector.lean`（行列 `c_μQ_T` の上で同じ結論を出す `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` は手順が違うので対応に数えない） | **系**（`eta_insert_of_necSuf` が冒頭・Step 1〜3 の段を特殊化に替えて同じ組み方をする。`q` を取る段・`Q̌_ε q = q`・`M = 1`・約す段は具体版と共通） |
 | 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `NecSuf.noncommProd_mul_of_mul_eq_smul` | **系** |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |

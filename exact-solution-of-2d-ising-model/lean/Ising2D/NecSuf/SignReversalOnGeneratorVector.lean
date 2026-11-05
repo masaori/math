@@ -1,12 +1,13 @@
 /-
-# 符号の反転則の Step 1・Step 2 の後半・Step 3 の前半（数ベクトルの上の必要十分版）
+# 符号の反転則の冒頭・Step 1・Step 2 の後半・Step 3（数ベクトルの上の必要十分版）
 
 人手のラベル: **`epsilon_eigenvalue_on_check_Q`** (2)
 （正本 `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）。
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean` の
 `CheckFermi.nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero`・
 `epsilon_mulVec_cre_mulVec_generator`（Step 1・Step 3 の前半）と `defFactor_mulVec_generator_of_notMem`・
-`omittingDefFactor_mulVec_generator`・`Qproj_insert_mulVec_cre_mulVec_generator`（Step 2 の後半）で、各定理の calc は具体版と同じ行である
+`omittingDefFactor_mulVec_generator`・`Qproj_insert_mulVec_cre_mulVec_generator`（Step 2 の後半）、
+`epsilon_mulVec_generator_eq_eta_smul`（(2) の冒頭）・`eta_insert_smul_cre_mulVec_generator`（Step 3 の後半）で、各定理の calc は具体版と同じ行である
 （Step 2 の後半の `Q̌_δ` の定義の行は、ここでは `Q̌_δ` を有限積 `finProdLeft (r + 1) A` そのものとして書くので同じ項になり、省く）。
 
 人手の (2) は `im Q̌_ε` の `0` でない元 `q`（`Q̌_ε q = q`、`εq = η_ε q`）の上で計算する。
@@ -36,6 +37,11 @@
   `−v = (−1)v`・スカラー倍の結合則・`(−1)η = −η` だけである。係数 `R` は `NonUnitalRing`（可換則も単位元も使わない）。
   スカラー `η` は係数と別の環 `S` の元でよく（`S` の可換則も使わない）、効いているのは `η` 倍が成分の積の左の因子を越えて外へ出ること
   （`x(ηy) = η(xy)`。`SMulCommClass S R R`。`A(ηv) = η(Av)` の行に要る）だけで、`(ηx)y = η(xy)`（`IsScalarTower`）は使わない。
+- **(2) の冒頭の `εq = η_ε q`**（`mulVec_eq_smul_of_fixed_of_mul_eq_smul`）と **Step 3 の後半の `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`**
+  （`smul_eq_of_fixed_of_mul_eq_smul`）に効いているのは、`Q q = q`（`Q' v = v`）、`e Q = η Q`（`e Q' = η' Q'`）と、
+  行列の積と数ベクトルへの作用の結合則・スカラー倍が左の因子から外へ出ることだけである。係数は `NonUnitalSemiring`
+  （`mulVec_mulVec` に要る。単位元・符号反転・可換則は使わない）。`Q` が冪等であること、`e` が `ε` であること、`η ∈ {±1}` は効いていない。
+  後者の `w` は任意の数ベクトルでよく、`w = (−η_ε)v` の形は効いていない。
 - どの定理でも、添字の集合が `Conf M` であること、係数が `ℂ` であること、`ψ̌` が `Ž, Y̌` の 1 次結合であること、
   `ε` が `σ^x` の積であること、`im Q̌_ε` が 1 次元であることは効いていない。
 -/
@@ -191,5 +197,34 @@ theorem mulVec_cre_mulVec_eq_neg_smul_of_anticomm {e c : Matrix ι ι R} {q : ι
     _ = (-η) • (c *ᵥ q) := by rw [neg_one_mul]          -- `multiply_by_minus_one`
 
 end StepThree
+
+section OpeningAndStepThreeLatter
+
+variable {R : Type*} [NonUnitalSemiring R]
+
+/-- **`e q = η q`**（人手 (2) の冒頭の `εq = η_ε q` の 5 行の鎖。具体版 `CheckFermi.epsilon_mulVec_generator_eq_eta_smul`）。 -/
+theorem mulVec_eq_smul_of_fixed_of_mul_eq_smul {e Q : Matrix ι ι R} {q : ι → R} {η : R}
+    (hqfix : Q *ᵥ q = q) (heQ : e * Q = η • Q) : e *ᵥ q = η • q :=
+  calc e *ᵥ q
+      = e *ᵥ (Q *ᵥ q) := by rw [hqfix]                  -- `Q̌_ε q = q`
+    _ = (e * Q) *ᵥ q := Matrix.mulVec_mulVec _ _ _       -- `mat_mult_associative`
+    _ = (η • Q) *ᵥ q := by rw [heQ]                     -- (1)
+    _ = η • (Q *ᵥ q) := smul_mulVec_eq' _ _ _           -- `scalar_multiple_factors_out_of_left_factor`
+    _ = η • q := by rw [hqfix]                          -- `Q̌_ε q = q`
+
+/-- **`η' v = w`**（人手 (2) Step 3 の後半の 6 行の鎖。具体版 `CheckFermi.eta_insert_smul_cre_mulVec_generator`。
+`v` が `ψ̌_μ^† q`、`Q'` が `Q̌_{ε'}`、`w` が `(−η_ε)(ψ̌_μ^† q)`）。 -/
+theorem smul_eq_of_fixed_of_mul_eq_smul {e Q' : Matrix ι ι R} {v w : ι → R} {η' : R}
+    (hfix : Q' *ᵥ v = v) (heQ : e * Q' = η' • Q') (hev : e *ᵥ v = w) : η' • v = w :=
+  calc η' • v
+      = η' • (Q' *ᵥ v) := by rw [hfix]                  -- Step 2 の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`
+    _ = (η' • Q') *ᵥ v := (smul_mulVec_eq' _ _ _).symm   -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (e * Q') *ᵥ v := by rw [heQ]                    -- (1) の `εQ̌_{ε'} = η_{ε'}Q̌_{ε'}`
+    _ = e *ᵥ (Q' *ᵥ v) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = e *ᵥ v := by rw [hfix]                          -- Step 2 の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`
+    _ = w := hev                                        -- 上の式変形（Step 3 の前半）
+
+end OpeningAndStepThreeLatter
 
 end Ising2D.NecSuf

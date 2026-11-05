@@ -4,10 +4,10 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
-必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の Step 1・Step 2 の後半・Step 3 の前半の数ベクトルの鎖は
-`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`）の
-`Ising2D.NecSuf.projOn_insert_mul_cre` / `NecSuf.cre_mul_projOn_ne_zero`。
-**符号の反転則 (2) はその 2 つの系である。**
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の冒頭・Step 1・Step 2 の後半・Step 3 の数ベクトルの鎖は
+`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`）。符号の反転則 (2) の具体版 `eta_insert` は人手と同じ数ベクトルの鎖で組み、
+同じ組み方で冒頭の `εq = η_ε q`・Step 1〜3 の鎖を必要十分版の特殊化に替えたものが `eta_insert_of_necSuf` である
+（`q` を取る段・`Q̌_ε q = q`・`M = 1`・最後に約す段は具体版と共通）。
 
 ## 人手証明との対応
 
@@ -15,12 +15,13 @@
 | --- | --- |
 | (1) `∃! η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε` | `Ising2D.CheckFermi.eta` / `eta_mem` / `epsilon_mul_Qproj` / `eta_unique` |
 | (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（4 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
-| (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | **まだ人手どおりの鎖が無い**（Step 1・Step 3 の補題は `Q̌_ε q = q`・`εq = ηq` を仮定で受ける。`exists_generator_of_eta` の `q` は (1) が選んだ生成元で、人手の「任意の `0` でない元」と違う。`eta_insert` を組み替えるときに置く） |
+| (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | `eta_insert` の冒頭（`q` は `exists_ne_zero_mem_range_Qproj` の `q = Q̌_ε x`。1 次元性は使わない）・`Qproj_mulVec_generator`・`epsilon_mulVec_generator_eq_eta_smul` |
 | (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
 | (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ`（8 行ずつ）・`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`・`XA_ν^δ = A_ν^δX`（3 式と 5 行）と、その `X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†` | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
 | (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν` と `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）の 3 本の鎖 | `cre_mul_omittingDefFactor`・`defFactor_mulVec_generator_of_notMem`・`omittingDefFactor_mulVec_generator`・`omittingDefFactor_insert`・`Qproj_insert_mulVec_cre_mulVec_generator`（`Π'` は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`、人手の `M_col` が Lean の `r + 2`。必要十分版の特殊化は `*_of_necSuf`） |
 | (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
-| (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じる。人手の数ベクトルの鎖へは Step 2 を置いてから組み替える） |
+| (2) Step 3 の後半: `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（6 行） | `eta_insert_smul_cre_mulVec_generator` |
+| (2) `ψ̌_μ^† q ≠ 0` の 0 でない成分を比べて `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（`smul_generator_cancel`。Step 2 は `M` を限らない形 `Qproj_insert_mulVec_cre_mulVec_of_notMem` で受け、人手の範囲外の `M = 1` は `Qproj_insert_mulVec_cre_mulVec_generator_one`） |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
 
@@ -299,7 +300,7 @@ theorem eta_unique {T : Finset (Fin M)} {η : ℂ} (h : epsilon M * F.Qproj T = 
 
 /-! ## 原文 (2): 符号の反転則 -/
 
-/-! 人手の (2) は `im Q̌_ε` の `0` でない元 `q`（`Q̌_ε q = q`、`εq = η_ε q`。`exists_generator_of_eta`）の上で計算する。
+/-! 人手の (2) は `im Q̌_ε` の `0` でない元 `q`（`Q̌_ε q = q`、`εq = η_ε q`。下の `eta_insert` の冒頭で取る）の上で計算する。
 以下の 4 つは人手の Step 1 の 3 本の鎖と Step 3 の前半の鎖で、calc の各行が人手の各行に当たる。
 数ベクトルの上の行のうち、`Matrix.mulVec_mulVec`（`mat_mult_associative`）・`Matrix.mulVec_smul`
 （`scalar_multiple_factors_out_of_right_factor`）は (1) と同じく mathlib の定理で受け、`Oq = 0`・`A0 = 0`・`(−A)q = −(Aq)`・
@@ -631,37 +632,137 @@ theorem Qproj_insert_mulVec_cre_mulVec_generator_of_necSuf {r : ℕ} (F : CheckF
     (fun j => F.defFactor_insert_of_ne T (Fin.succAbove_ne μ j))
     (F.defFactor_of_mem (Finset.mem_insert_self μ T)) (F.nOp_mul_cre μ) (F.cre_mul_omittingDefFactor T μ) hP
 
-/-- **原文 (2)**: `μ ∉ T` なら `η_{T∪{μ}} = -η_T`。
+/-! 人手の (2) の冒頭の `εq = η_ε q`（5 行）と Step 3 の後半（6 行）。 -/
 
-Step 1（`ψ̌_μ^† q ≠ 0`）と Step 2（`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`）は必要十分版
-`NecSuf.cre_mul_projOn_ne_zero` / `NecSuf.projOn_insert_mul_cre` の系である。 -/
+/-- **原文 (2) の冒頭**の `εq = η_ε q` の 5 行の鎖（`Q̌_ε q = q` は冪等性から）。 -/
+theorem epsilon_mulVec_generator_eq_eta_smul {T : Finset (Fin M)} {q : Conf M → ℂ}
+    (hqfix : F.Qproj T *ᵥ q = q) : epsilon M *ᵥ q = F.eta T • q :=
+  calc epsilon M *ᵥ q
+      = epsilon M *ᵥ (F.Qproj T *ᵥ q) := by rw [hqfix]  -- `Q̌_ε q = q`
+    _ = (epsilon M * F.Qproj T) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = (F.eta T • F.Qproj T) *ᵥ q := by rw [F.epsilon_mul_Qproj T]
+                                                        -- (1)
+    _ = F.eta T • (F.Qproj T *ᵥ q) := smul_mulVec_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_left_factor`
+    _ = F.eta T • q := by rw [hqfix]                    -- `Q̌_ε q = q`
+
+/-- **原文 (2) Step 3** の後半: (1) を `ε' := ε[μ→1]`（Lean の `insert μ T`）に使った
+`η_{ε'}(ψ̌_μ^† q) = (−η)(ψ̌_μ^† q)` の 6 行の鎖（最後の行の「上の式変形」は Step 3 の前半 `epsilon_mulVec_cre_mulVec_generator`）。 -/
+theorem eta_insert_smul_cre_mulVec_generator {T : Finset (Fin M)} {μ : Fin M} {q : Conf M → ℂ} {η : ℂ}
+    (h2 : F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q)
+    (h3 : epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q)) :
+    F.eta (insert μ T) • (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
+  calc F.eta (insert μ T) • (F.cre μ *ᵥ q)
+      = F.eta (insert μ T) • (F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)) := by rw [h2]
+                                                        -- Step 2 の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`
+    _ = (F.eta (insert μ T) • F.Qproj (insert μ T)) *ᵥ (F.cre μ *ᵥ q) :=
+        (smul_mulVec_tensorPow _ _ _).symm              -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (epsilon M * F.Qproj (insert μ T)) *ᵥ (F.cre μ *ᵥ q) := by rw [F.epsilon_mul_Qproj]
+                                                        -- (1) の `εQ̌_{ε'} = η_{ε'}Q̌_{ε'}`
+    _ = epsilon M *ᵥ (F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = epsilon M *ᵥ (F.cre μ *ᵥ q) := by rw [h2]       -- Step 2 の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`
+    _ = (-η) • (F.cre μ *ᵥ q) := h3                     -- 上の式変形
+
+/-- `epsilon_mulVec_generator_eq_eta_smul` を `NecSuf.mulVec_eq_smul_of_fixed_of_mul_eq_smul` の特殊化として。 -/
+theorem epsilon_mulVec_generator_eq_eta_smul_of_necSuf {T : Finset (Fin M)} {q : Conf M → ℂ}
+    (hqfix : F.Qproj T *ᵥ q = q) : epsilon M *ᵥ q = F.eta T • q :=
+  NecSuf.mulVec_eq_smul_of_fixed_of_mul_eq_smul hqfix (F.epsilon_mul_Qproj T)
+
+/-- `eta_insert_smul_cre_mulVec_generator` を `NecSuf.smul_eq_of_fixed_of_mul_eq_smul` の特殊化として。 -/
+theorem eta_insert_smul_cre_mulVec_generator_of_necSuf {T : Finset (Fin M)} {μ : Fin M} {q : Conf M → ℂ}
+    {η : ℂ} (h2 : F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q)
+    (h3 : epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q)) :
+    F.eta (insert μ T) • (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
+  NecSuf.smul_eq_of_fixed_of_mul_eq_smul h2 (F.epsilon_mul_Qproj (insert μ T)) h3
+
+/-- `M = 1` の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`。**人手証明の範囲外**: 人手の (2) は `M_col ∈ ℤ_{≥2}` の下で述べ
+（`epsilon_anticommutes_with_check_Z_Y` の仮定）、Step 2 の `Π'`（`def_finite_product_of_matrices_omitting_one_index`）も
+`M_col ≥ 2` を要する。Lean の (2)・(3)・(4) は `M` を限らずに述べてきたので、`M = 1` だけを、`Π'` が因子を持たない場合の
+10 行の鎖の縮めた形（`Q̌_{ε'}` は因子 `A_μ^{ε'}` 1 つ、`A_μ^{ε'} = ň_μ`、`ň_μψ̌_μ^† = ψ̌_μ^†`）で埋める。 -/
+theorem Qproj_insert_mulVec_cre_mulVec_generator_one (F : CheckFermi 1) (T : Finset (Fin 1)) (μ : Fin 1)
+    (q : Conf 1 → ℂ) : F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q :=
+  calc F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)
+      = NecSuf.finProdLeft 0 (F.defFactor (insert μ T)) *ᵥ (F.cre μ *ᵥ q) := by
+        rw [Qproj_eq_finProdLeft_defFactor F (insert μ T)]
+                                                        -- `Q̌_{ε'}` の定義
+    _ = F.defFactor (insert μ T) μ *ᵥ (F.cre μ *ᵥ q) := by rw [Subsingleton.elim μ 0]; rfl
+                                                        -- 因子 1 つの有限積（`Fin 1` の元は `μ` だけ）
+    _ = F.nOp μ *ᵥ (F.cre μ *ᵥ q) := by rw [F.defFactor_of_mem (Finset.mem_insert_self μ T)]
+                                                        -- `A_μ^{ε'} = ň_μ`
+    _ = (F.nOp μ * F.cre μ) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = F.cre μ *ᵥ q := by rw [F.nOp_mul_cre μ]          -- Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†`
+
+/-- **原文 (2) Step 2** の結論を `M` を限らずに述べたもの: `μ ∉ T`・`Q̌_ε q = q` なら `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`。
+`M = r + 2`（人手の `M_col ≥ 2`）では人手の 3 本の鎖（`defFactor_mulVec_generator_of_notMem`・`omittingDefFactor_mulVec_generator`・
+`Qproj_insert_mulVec_cre_mulVec_generator`。`ň_μ q = 0` は Step 1 の鎖）、`M = 1` は上の人手の範囲外の補題、`M = 0` は `μ` が無い。 -/
+theorem Qproj_insert_mulVec_cre_mulVec_of_notMem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
+    {q : Conf M → ℂ} (hqfix : F.Qproj T *ᵥ q = q) :
+    F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q := by
+  have hn := F.nOp_mulVec_generator_eq_zero hμ hqfix   -- Step 1 の `ň_μ q = 0`
+  rcases M with _ | _ | r
+  · exact μ.elim0
+  · exact Qproj_insert_mulVec_cre_mulVec_generator_one F T μ q
+  · exact F.Qproj_insert_mulVec_cre_mulVec_generator
+      (F.omittingDefFactor_mulVec_generator (F.defFactor_mulVec_generator_of_notMem hμ hn) hqfix)
+
+/-- 人手の (2) の冒頭の「`im Q̌_ε` の `0` でない元を 1 つ取る」: `Q̌_ε x = q`・`q ≠ 0` なる `q`。
+`im Q̌_ε` の 1 次元性は使わず、`Q̌_ε ≠ 0`（`Qproj_ne_zero`。`tr Q̌_ε = 1` から）の `0` でない第 `j` 列 `q := Q̌_ε e_j` を取る
+（`e_j` は `I` の第 `j` 列。`Q̌_ε e_j` の第 `i` 成分は `Q̌_ε` の `(i, j)` 成分）。 -/
+theorem exists_ne_zero_mem_range_Qproj (T : Finset (Fin M)) :
+    ∃ q : Conf M → ℂ, q ≠ 0 ∧ ∃ x : Conf M → ℂ, F.Qproj T *ᵥ x = q := by
+  obtain ⟨i, j, hij⟩ : ∃ i j, F.Qproj T i j ≠ 0 := by   -- `Q̌_ε ≠ 0` なので `0` でない成分がある
+    by_contra hc
+    push_neg at hc
+    exact F.Qproj_ne_zero T (by ext i j; simp [hc i j])
+  refine ⟨F.Qproj T *ᵥ Pi.single j 1, fun h => hij ?_, Pi.single j 1, rfl⟩
+  have := congrFun h i
+  simpa [Matrix.mulVec_single_one] using this           -- 第 `i` 成分は `Q̌_ε` の `(i, j)` 成分
+
+/-- **原文 (2)**: `μ ∉ T`（`ε_μ = 0`）なら `η_{ε[μ→1]} = -η_ε`（`ε[μ→1]` は Lean の `insert μ T`）。
+
+人手どおり `im Q̌_ε` の `0` でない元 `q` を 1 つ取り（`q = Q̌_ε x`。`exists_ne_zero_mem_range_Qproj`。1 次元性は使わない）、冪等性で `Q̌_ε q = q`、冒頭の 5 行で `εq = η_ε q`、Step 1 で `ψ̌_μ^† q ≠ 0`、Step 2 で
+`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`、Step 3 の前半と後半で `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)` を出し、
+`ψ̌_μ^† q ≠ 0` の 0 でない成分を比べて（(1) の `ηη − 1 = 0` の段と同じ `smul_generator_cancel`）`η_{ε'} = −η_ε`。 -/
 theorem eta_insert {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
     F.eta (insert μ T) = -F.eta T := by
-  set x : TensorPow M := F.cre μ * F.Qproj T with hx
-  -- Step 1: `x ≠ 0`
-  have hx0 : x ≠ 0 :=
-    NecSuf.cre_mul_projOn_ne_zero F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
-      F.acomm_cre_ann_self (Finset.mem_univ μ) hμ (F.Qproj_ne_zero T)
-  -- Step 2: `Q̌_{T∪{μ}} x = x`
-  have hstep2 : F.Qproj (insert μ T) * x = x :=
-    NecSuf.projOn_insert_mul_cre F.cre F.ann F.commute_nOp_nOp F.nOp_mul_self
-      (fun i j hij => F.commute_cre_nOp hij) F.cre_sq F.acomm_cre_ann_self
-      (Finset.mem_univ μ) hμ
-  -- Step 3: `ε x = -η_T x`
-  have hstep3 : epsilon M * x = (-F.eta T) • x := by
-    calc epsilon M * x = (epsilon M * F.cre μ) * F.Qproj T := by rw [hx, mul_assoc]
-      _ = -(F.cre μ * (epsilon M * F.Qproj T)) := by
-          rw [F.epsilon_anticomm_cre μ, neg_mul, mul_assoc]
-      _ = -(F.cre μ * (F.eta T • F.Qproj T)) := by rw [F.epsilon_mul_Qproj T]
-      _ = (-F.eta T) • x := by rw [hx, mul_smul_comm, neg_smul]
-  -- 一方 `ε x = η_{T∪{μ}} x`
-  have hother : epsilon M * x = F.eta (insert μ T) • x := by
-    calc epsilon M * x = epsilon M * (F.Qproj (insert μ T) * x) := by rw [hstep2]
-      _ = (epsilon M * F.Qproj (insert μ T)) * x := by rw [mul_assoc]
-      _ = (F.eta (insert μ T) • F.Qproj (insert μ T)) * x := by rw [F.epsilon_mul_Qproj]
-      _ = F.eta (insert μ T) • (F.Qproj (insert μ T) * x) := by rw [smul_mul_assoc]
-      _ = F.eta (insert μ T) • x := by rw [hstep2]
-  exact smul_cancel_of_matrix_ne_zero hx0 (hother.symm.trans hstep3)
+  obtain ⟨q, hq0, x, hx⟩ := F.exists_ne_zero_mem_range_Qproj T
+                                                        -- `im Q̌_ε` の `0` でない元 `q`（`q = Q̌_ε x`）
+  have hqfix : F.Qproj T *ᵥ q = q := F.Qproj_mulVec_generator hx
+                                                        -- `check_joint_eigenspace_decomposition` (1) の冪等性
+  have hεq := F.epsilon_mulVec_generator_eq_eta_smul hqfix
+                                                        -- (2) の冒頭の `εq = η_ε q`
+  have h1 := F.cre_mulVec_generator_ne_zero hμ hq0 hqfix
+                                                        -- Step 1: `ψ̌_μ^† q ≠ 0`
+  have h2 := F.Qproj_insert_mulVec_cre_mulVec_of_notMem hμ hqfix
+                                                        -- Step 2: `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`
+  have h3 := F.eta_insert_smul_cre_mulVec_generator h2 (F.epsilon_mulVec_cre_mulVec_generator hεq)
+                                                        -- Step 3: `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`
+  exact smul_generator_cancel h1 h3                     -- 0 でない成分を比べる
+
+/-- `eta_insert` と同じ組み方で、(2) の冒頭の `εq = η_ε q`・Step 1・Step 2（`M = r + 2`）・Step 3 の鎖を必要十分版の特殊化
+（`*_of_necSuf`）に替えたもの。`q` を取る段、`Q̌_ε q = q`（(1) の鎖 `Qproj_mulVec_generator`）、`M = 1` の人手の範囲外の補題、
+最後に 0 でない成分で約す段（`smul_generator_cancel`）は具体版と共通である（約す段の必要十分版 `NecSuf.smul_left_cancel_of_ne_zero`
+は成分を比べない別の手順なので使わない）。 -/
+theorem eta_insert_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
+    F.eta (insert μ T) = -F.eta T := by
+  obtain ⟨q, hq0, x, hx⟩ := F.exists_ne_zero_mem_range_Qproj T
+  have hqfix : F.Qproj T *ᵥ q = q := F.Qproj_mulVec_generator hx
+  have hεq := F.epsilon_mulVec_generator_eq_eta_smul_of_necSuf hqfix
+  have h1 := F.cre_mulVec_generator_ne_zero_of_necSuf hμ hq0 hqfix
+  have h2 : F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q := by
+    have hn := F.nOp_mulVec_generator_eq_zero_of_necSuf hμ hqfix
+    rcases M with _ | _ | r
+    · exact μ.elim0
+    · exact Qproj_insert_mulVec_cre_mulVec_generator_one F T μ q
+    · exact F.Qproj_insert_mulVec_cre_mulVec_generator_of_necSuf
+        (F.omittingDefFactor_mulVec_generator_of_necSuf
+          (F.defFactor_mulVec_generator_of_notMem_of_necSuf hμ hn) hqfix)
+  have h3 := F.eta_insert_smul_cre_mulVec_generator_of_necSuf h2
+    (F.epsilon_mulVec_cre_mulVec_generator_of_necSuf hεq)
+  exact smul_generator_cancel h1 h3
 
 /-! ## 原文 (3): `η_ε = η_{(1,…,1)}(-1)^{M-|ε|}` -/
 
