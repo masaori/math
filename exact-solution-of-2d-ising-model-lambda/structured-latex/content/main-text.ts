@@ -4337,7 +4337,7 @@ A^{0}\cdot v
 &=1\odot v
 &&\bigl(\because\ \text{準備の第 1 の等式}\bigr)\\
 &=z^{0}\odot v
-&&\bigl(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set}\bigr)
+&&\bigl(\because\ z^{0}=1\ \text{の約束と}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                     paragraph([
                       math(String.raw`k`),
@@ -4362,7 +4362,7 @@ A^{k+1}\cdot v
 &=\bigl(z^{k}z\bigr)\odot v
 &&\bigl(\because\ \text{準備の第 2 の等式}\bigr)\\
 &=z^{k+1}\odot v
-&&\bigl(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set}\bigr)
+&&\bigl(\because\ z^{k+1}=z^{k}z\ \text{の約束と}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                     paragraph([
                       "よって任意の ",
@@ -62329,6 +62329,50 @@ s(j')-s(j)
                         "空和は零とするため ", math(String.raw`L=1`), " でも定義できる。",
                         "この定義は有限和と二で割った余りだけを使う。",
                       ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_standard_dual_rectangle_parity",
+                  focus: {
+                    id: "kac_ward_claim_standard_dual_rectangle_parity",
+                    kind: "claim",
+                    title: { text: "偶数次数から得る標準双対路の長方形の辺偶奇" },
+                    labels: ["claim_standard_dual_rectangle_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/standard-dual-rectangle-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.rectangle_crossing_parity",
+                      "Ising2DLambda.NecSuf.KacWard.rectangle_crossing_parity",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、代表 ", math(String.raw`0\le i<L`),
+                        " と ", math(String.raw`0\le j<L-1`),
+                        " を取る。", ref("def_walk_base_edge_parity"), " の ",
+                        math(String.raw`N_\gamma`), " を用い、各 ",
+                        math(String.raw`1\le r\le i`), " で次の局所偶奇を仮定する。",
+                      ]),
+                      displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))+N_\gamma(n_{\mathrm v}(r,j+1))\bigr)\bmod2=0`),
+                      paragraph(["このとき、長方形の対向辺の通過偶奇は次を満たす。"]),
+                      displayMath(String.raw`\left(\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2=0`),
+                    ],
+                    proof: [
+                      paragraph(["縦辺の内側の項は隣り合う頂点の局所偶奇に二度現れる。まず ", math(String.raw`i=0`), " なら二つの縦辺は同じ辺であり、和は偶数である。"]),
+                      paragraph(["代表 ", math(String.raw`1\le i<L`), " について、", math(String.raw`i-1`), " までの等式を仮定する。二つの横辺の末項を加え、頂点 ", math(String.raw`(i,j+1)`), " の局所偶奇を足すと"]),
+                      displayMath(String.raw`\begin{aligned}
+&\left(\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j))+\sum_{r=1}^{i}N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2\\
+&=\left(\sum_{r=1}^{i-1}N_\gamma(n_{\mathrm h}(r,j))+\sum_{r=1}^{i-1}N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(0,j+1))+N_\gamma(n_{\mathrm v}(i-1,j+1))\right.\\
+&\qquad\left.+N_\gamma(n_{\mathrm h}(i,j))+N_\gamma(n_{\mathrm h}(i,j+1))+N_\gamma(n_{\mathrm v}(i-1,j+1))+N_\gamma(n_{\mathrm v}(i,j+1))\right)\bmod2
+&&\bigl(\because\ \text{有限和の末項を分け、同じ縦辺を二度足す}\bigr)\\
+&=0
+&&\bigl(\because\ \text{帰納法の仮定と、この頂点の局所偶奇}\bigr)
+\end{aligned}`),
+                      paragraph(["ゆえに全ての代表 ", math(String.raw`0\le i<L`), " で成立する。局所偶奇自体を閉歩道の閉性から導く接続は、縦方向の内部一歩の行で扱う。"]),
                     ],
                   },
                 },

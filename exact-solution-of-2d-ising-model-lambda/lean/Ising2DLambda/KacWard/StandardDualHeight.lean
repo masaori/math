@@ -19,6 +19,38 @@ def standardDualHeight (L m : ℕ) [NeZero L]
     (∑ r ∈ Finset.Icc 1 cell.1.val,
       walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) cell.2))) % 2
 
+/-- 閉歩道の基底辺について、局所的な偶数次数から長方形の辺偶奇を得る。 -/
+theorem rectangle_crossing_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (i j : ℕ) (hi : i < L) (hj : j + 1 < L)
+    (hvertex : ∀ r : ℕ, 1 ≤ r → r ≤ i →
+      (walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L false (r : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true ((r - 1 : ℕ) : ZMod L) ((j + 1 : ℕ) : ZMod L)) +
+        walkBaseEdgeParity γ
+          (edgeOfRow L true (r : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 = 0) :
+    ((∑ r ∈ Finset.Icc 1 i,
+        walkBaseEdgeParity γ (edgeOfRow L false (r : ZMod L) (j : ZMod L))) +
+      (∑ r ∈ Finset.Icc 1 i,
+        walkBaseEdgeParity γ
+          (edgeOfRow L false (r : ZMod L) ((j + 1 : ℕ) : ZMod L))) +
+      walkBaseEdgeParity γ (edgeOfRow L true 0 ((j + 1 : ℕ) : ZMod L)) +
+      walkBaseEdgeParity γ
+        (edgeOfRow L true (i : ZMod L) ((j + 1 : ℕ) : ZMod L))) % 2 = 0 := by
+  induction i with
+  | zero => simp; omega
+  | succ i ih =>
+      have hi0 : i < L := by omega
+      have hprev := ih hi0 (fun r hr1 hri => hvertex r hr1 (by omega))
+      have hlast := hvertex (i + 1) (by omega) (by omega)
+      rw [Finset.sum_Icc_succ_top (by omega : 1 ≤ i + 1)]
+      rw [Finset.sum_Icc_succ_top (by omega : 1 ≤ i + 1)]
+      have hcast : ((i + 1 - 1 : ℕ) : ZMod L) = (i : ZMod L) := by simp
+      rw [hcast] at hlast
+      omega
+
 /-- 横方向の内部一歩では、横切る辺の通過偶奇だけ高さが変わる。 -/
 theorem standardDualHeight_horizontal_internal (L m : ℕ) [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
