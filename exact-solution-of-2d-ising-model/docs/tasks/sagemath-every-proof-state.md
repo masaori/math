@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 415 件のうち、SageMath の検算が無いもの 12 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 416 件のうち、SageMath の検算が無いもの 11 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -386,8 +386,11 @@
 
 - `trace_power_sandwich`（c(M_col)^n ≤ tr(W^n) ≤ 2^{M_col}c(M_col)^n）: `sagemath/check/trace_power_sandwich/`。証明の六つの段（W^n の成分の対称性・半正定値性・成分の評価、単位ベクトルでの評価、正の実数の冪の比較、上限への移行）の全ての鎖を、P = A^⊤A の正定値有理行列 12 個と本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3）、逆立体射影の有理の単位ベクトルで QQ・AA の厳密計算で確かめた（等号 12646・17508 件、不等号 5253・5148 件。c は特性多項式の最大の実根の AA。浮動小数点なし）。否定コントロールは検査の関数が期待した行で落ちることを 6 箇所で確かめた。**人手証明を直した**（主張は不変、計算の誤りは無し）: (1)「…」の望遠鏡積を m_k ≥ m_1m_{k−1}・m_p ≥ m_1^p の二つの帰納法にし、m_0 = 1・m_1 = x^⊤Wx を鎖で示した。(2) 二次形式をトレースで抑える鎖は、本文にラベルの無い実数の絶対値・三角不等式・平方根の積の法則を使っていたので、W^n の半正定値性を v := x_le_k − x_ke_l に当てた 2x_k(W^n)_{kl}x_l ≤ x_l^2(W^n)_{kk} + x_k^2(W^n)_{ll} を足し合わせる鎖に替えた。(3)「W^n は正定値」の散文を、w := ‖z‖^{-1}z に moment_log_convexity の正値性を当てる鎖にした。(4)「t ↦ t^n は単調なので上限と可換」は連続性を暗に使っていたので、正の実数の冪の比較（帰納法）と、δ := (c^n − T)(nc^{n−1})^{−1} による背理法にした。二回のレビューで必須の指摘が無くなるまで直した。残した任意の指摘: m_0 の鎖は単位行列の成分 δ（ℂ の元）を実数として def_real_bilinear_value に入れている（moment_log_convexity と同じ読み方）。Lean は不変（`ClaimTracePowerSandwich.lean`・`TraceBound.lean` の `psd_quad_le_normSq_mul_trace` は旧い絶対値と Cauchy–Schwarz の経路と望遠鏡積のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `limit_of_log_Z_in_N_row`（lim_{N_row→∞} (1/(M_col N_row)) log Z = (1/M_col) log c(M_col)）と、そのために足した `real_log_of_power`（log(a^n) = n log a）: `sagemath/check/<ラベル>/`。本体は含意の鎖の十行と極限の段（log 2 > 0 の準備の三行、ε と N_0 の三行の鎖）を、本文の W（K_1 = 2 log y・K_2 = log x、M_col = 2, 3、8 組）と N_row = 1..60 で確かめた。Z は QQ（M_col·N_row ≤ 12 の 40 格子では全ての配位の和と tr(W^N) が一致）、c は AA で、一行目は厳密、log を含む行は RealBallField(512)（比較 18416 個、否定コントロール 4 件）。`real_log_of_power` は QQ・AA の 8 点と n ≤ 40（比較 1600 個）。人手証明を直した（主張は不変、計算の誤りは無し）: 各行の根拠をラベル参照にし、log(c^N) = N log c・log(2^M) = M log 2 を新しい主張 `real_log_of_power` で、正の実数の冪を新しい定義 `def_power_of_real_number`（a^0 := 1、a^{m+1} := a^m a）で引き、割り算と約分・差と絶対値の行を分け、極限の段を ε・N_0 の鎖と `def_matrix_norm`・`scalar_limit_is_unique` で書き、「この段階では実数解析へ移行していない」の誤った断り書きを実対数と極限による ℝ 脱出の宣言に替えた。
+  上流の残り（今回の差分より前から）: `trace_power_sandwich`・`partition_function_sandwich` の c^n は実数の冪の定義を引いていない（`def_power_of_real_number` へ付け替えられる）。`def_matrix_norm` の列の添字は Z_{≥0} から始まるが、ここの列は N_row ≥ 1 から始まる。整数と実数の積（N_row log c など）に Z → ℝ の写像の名前が無いのは論文全体の書き方である。
+
 ## 次の一歩
-`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `limit_of_log_Z_in_N_row`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_column_limit_and_closed_form.ts` の `W_has_positive_entries`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

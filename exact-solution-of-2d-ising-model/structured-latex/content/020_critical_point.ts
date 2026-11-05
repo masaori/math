@@ -2170,6 +2170,145 @@ c_0
   },
 
   {
+    id: "critical_definition_power_of_real_number",
+    kind: "definition",
+    title: { text: "実数の冪" },
+    labels: ["def_power_of_real_number"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " と ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について、冪 ",
+        math(String.raw`a^m \in \mathbb{R}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`a^0 := 1,
+\qquad
+a^{m+1} := a^m\, a`),
+      paragraph([
+        "と定める。積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積、",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の単位元である。",
+        ref("def_power_of_complex_number"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の冪とは別の写像であり、両者を同じものとして使わない。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05: limit_of_log_Z_in_N_row の証明の c^N・2^M（正の実数の冪）を定めるブロックが本文に無かったので足した。def_power_of_complex_number と同じ形（零乗から始める帰納法）にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_real_log_of_power",
+    kind: "claim",
+    title: { tex: String.raw`\log(a^n) = n\log a` },
+    labels: ["real_log_of_power"],
+    statement: [
+      paragraph([
+        ref("def_real_logarithm_positive"),
+        " の ",
+        math(String.raw`\log : \mathbb{R}_{>0} \to \mathbb{R}`),
+        " と ",
+        ref("def_power_of_real_number"),
+        " の冪について、",
+        math(String.raw`a \in \mathbb{R}_{>0}`),
+        " と ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " なら ",
+        math(String.raw`a^n \in \mathbb{R}_{>0}`),
+        " であり",
+      ]),
+      displayMath(String.raw`\log(a^n) = n\log a`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、実対数の値が実数だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " についての帰納法で、",
+        math(String.raw`a^n \in \mathbb{R}_{>0}`),
+        " と ",
+        math(String.raw`\log(a^n) = n\log a`),
+        " を同時に示す。",
+        math(String.raw`n = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a^1
+&= a^0\, a
+&&(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ \text{を}\ m = 0\ \text{で})\\
+&= 1\cdot a
+&&(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1)\\
+&= a
+&&(\because\ \mathbb{R}\ \text{の乗法の単位元})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`a^1 \in \mathbb{R}_{>0}`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log(a^1)
+&= \log a
+&&(\because\ \text{上の}\ a^1 = a)\\
+&= 1\cdot\log a
+&&(\because\ \mathbb{R}\ \text{の乗法の単位元})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " で ",
+        math(String.raw`a^n \in \mathbb{R}_{>0}`),
+        " と ",
+        math(String.raw`\log(a^n) = n\log a`),
+        " を仮定する。",
+        math(String.raw`a^{n+1} = a^n a`),
+        "（",
+        ref("def_power_of_real_number"),
+        "）は正の数 ",
+        math(String.raw`a^n`),
+        " と ",
+        math(String.raw`a`),
+        " の積なので ",
+        math(String.raw`a^{n+1} \in \mathbb{R}_{>0}`),
+        " であり（",
+        ref("real_log_of_product"),
+        "）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log(a^{n+1})
+&= \log(a^n\, a)
+&&(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{n+1} := a^n\, a)\\
+&= \log(a^n) + \log a
+&&(\because\ \blkref{real_log_of_product}\ \text{を}\ a^n, a \in \mathbb{R}_{>0}\ \text{に})\\
+&= n\log a + \log a
+&&(\because\ \text{帰納法の仮定})\\
+&= (n+1)\log a
+&&(\because\ \mathbb{R}\ \text{の分配法則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05: limit_of_log_Z_in_N_row の証明が根拠「log(c^N) = N log c」「log(2^M) = M log 2」をラベルなしで使っていたので、real_log_of_product から帰納法で示す主張にした。冪は def_power_of_real_number。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_log_one_plus_at_most_argument",
     kind: "claim",
     title: { tex: String.raw`\log(1+x) \leq x \quad (x \geq 0)` },

@@ -2266,12 +2266,22 @@ Z(K_1,K_2)
     labels: ["limit_of_log_Z_in_N_row"],
     statement: [
       paragraph([
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " と ",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " を固定する。",
         ref("partition_function_sandwich"),
         " の ",
-        math(String.raw`c(M_{\mathrm{col}})`),
-        " について、極限",
+        math(String.raw`c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        " と、行数 ",
+        math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`),
+        " の ",
+        ref("def_partition_function_2d_ising"),
+        " の ",
+        math(String.raw`Z(K_1,K_2) \in \mathbb{R}_{>0}`),
+        " について、",
+        math(String.raw`N_{\mathrm{row}}`),
+        " を動かした実数列の極限",
       ]),
       displayMath(
         String.raw`\lim_{N_{\mathrm{row}} \to \infty}
@@ -2284,12 +2294,24 @@ Z(K_1,K_2)
         " についての極限は ",
         math(String.raw`c(M_{\mathrm{col}})`),
         " だけで決まる。",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_real_logarithm_positive"),
+        " の実対数で、値は ",
+        math(String.raw`\mathbb{R}`),
+        " に住む（実対数と極限による ",
+        math(String.raw`\mathbb{R}`),
+        " 脱出）。",
       ]),
     ],
     proof: [
       paragraph([
+        math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`),
+        " について ",
         math(String.raw`Z := Z(K_1,K_2)`),
-        "、",
+        "（行数 ",
+        math(String.raw`N_{\mathrm{row}}`),
+        " のもの）、",
         math(String.raw`c := c(M_{\mathrm{col}})`),
         " と略記する。",
         ref("def_partition_function_2d_ising"),
@@ -2298,54 +2320,107 @@ Z(K_1,K_2)
         "、",
         ref("def_rayleigh_sup"),
         " より ",
-        math(String.raw`c > 0`),
-        " なので、両者の ",
+        math(String.raw`c \in \mathbb{R}_{>0}`),
+        " である。冪 ",
+        math(String.raw`c^{N_{\mathrm{row}}}`),
+        "、",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪で、",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " に住む。したがって ",
+        math(String.raw`c^{N_{\mathrm{row}}}`),
+        "、",
+        math(String.raw`Z`),
+        "、",
+        math(String.raw`2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}}`),
+        " の ",
         math(String.raw`\log`),
         " が定まる。",
-      ]),
-      paragraph([
-        ref("partition_function_sandwich"),
-        " の挟み込みから始めて、一続きに変形する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 &c^{N_{\mathrm{row}}} \leq Z \leq 2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}}
-&&\left(\because\ \text{分配関数の挟み込み}\right)\\
+&&\left(\because\ \blkref{partition_function_sandwich}\right)\\
 \Longrightarrow\ &\log(c^{N_{\mathrm{row}}}) \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
-&&\left(\because\ \log\text{ は }\mathbb{R}_{>0}\text{ 上で狭義単調増加}\right)\\
+&&\left(\because\ u \leq v\text{ は }u<v\text{ か }u=v\text{。前者は }\blkref{real_log_strictly_increasing}\text{、後者は写像 }\log\text{ の値が一つに定まること}\right)\\
 \Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
-&&\left(\because\ \log(c^{N_{\mathrm{row}}})=N_{\mathrm{row}}\log c\right)\\
+&&\left(\because\ \blkref{real_log_of_power}\text{ を }a=c,\ n=N_{\mathrm{row}}\text{ で}\right)\\
 \Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}})+\log(c^{N_{\mathrm{row}}})
-&&\left(\because\ \log(ab)=\log a+\log b\right)\\
+&&\left(\because\ \blkref{real_log_of_product}\text{ を }a=2^{M_{\mathrm{col}}},\ b=c^{N_{\mathrm{row}}}\text{ で}\right)\\
 \Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+\log(c^{N_{\mathrm{row}}})
-&&\left(\because\ \log(2^{M_{\mathrm{col}}})=M_{\mathrm{col}}\log 2\right)\\
+&&\left(\because\ \blkref{real_log_of_power}\text{ を }a=2,\ n=M_{\mathrm{col}}\text{ で}\right)\\
 \Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+N_{\mathrm{row}}\log c
-&&\left(\because\ \log(c^{N_{\mathrm{row}}})=N_{\mathrm{row}}\log c\right)\\
+&&\left(\because\ \blkref{real_log_of_power}\text{ を }a=c,\ n=N_{\mathrm{row}}\text{ で}\right)\\
+\Longrightarrow\ &\frac{N_{\mathrm{row}}\log c}{M_{\mathrm{col}}N_{\mathrm{row}}} \leq \frac{\log Z}{M_{\mathrm{col}}N_{\mathrm{row}}} \leq \frac{M_{\mathrm{col}}\log 2+N_{\mathrm{row}}\log c}{M_{\mathrm{col}}N_{\mathrm{row}}}
+&&\left(\because\ \text{各辺を }M_{\mathrm{col}}N_{\mathrm{row}}\in\mathbb{R}_{>0}\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
 \Longrightarrow\ &\frac{1}{M_{\mathrm{col}}}\log c \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z \leq \frac{1}{M_{\mathrm{col}}}\log c + \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \text{各辺を }M_{\mathrm{col}}N_{\mathrm{row}}>0\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
+&&\left(\because\ \mathbb{R}\text{ の四則。分子と分母の共通の因子 }N_{\mathrm{row}}\text{、}M_{\mathrm{col}}\text{ を約す}\right)\\
+\Longrightarrow\ &0 \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c \leq \frac{\log 2}{N_{\mathrm{row}}}
+&&\left(\because\ \text{各辺から }\tfrac{1}{M_{\mathrm{col}}}\log c\text{ を引く。引いても不等号は保たれる}\right)\\
 \Longrightarrow\ &\left|\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c\right| \leq \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \text{上下の評価が中心 }\tfrac{1}{M_{\mathrm{col}}}\log c\text{ からの差を }\tfrac{\log 2}{N_{\mathrm{row}}}\text{ で挟む。}\mathbb{R}\text{ の四則}\right).
+&&\left(\because\ \text{非負の実数の絶対値はそれ自身}\right).
 \end{aligned}`,
       ),
       paragraph([
-        "右辺は ",
-        math(String.raw`N_{\mathrm{row}} \to \infty`),
-        " で ",
-        math(String.raw`0`),
-        " に収束する（",
-        math(String.raw`\log 2`),
-        " は ",
-        math(String.raw`N_{\mathrm{row}}`),
-        " に依らない定数）。よって主張の極限が存在して値は ",
-        math(String.raw`\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
-        " である。",
+        math(String.raw`a_{N_{\mathrm{row}}} := \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z(K_1,K_2) \in \mathbb{R}`),
+        "、",
+        math(String.raw`a := \frac{1}{M_{\mathrm{col}}}\log c \in \mathbb{R}`),
+        " と置く。準備として",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\log 2
+&> \log 1
+&&\left(\because\ \blkref{real_log_strictly_increasing}\text{ を }1<2\text{ に}\right)\\
+&= \log(\exp 0)
+&&\left(\because\ \blkref{scalar_exp_zero}\right)\\
+&= 0
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x)=x\right).
+\end{aligned}`,
+      ),
       paragraph([
-        "**この段階では実数解析へ移行していない**：使ったのは有限個の実数の不等式、",
+        math(String.raw`\varepsilon \in \mathbb{R}_{>0}`),
+        " を取る。",
+        math(String.raw`\mathbb{R}`),
+        " のアルキメデス性より ",
+        math(String.raw`N_0\,\varepsilon > \log 2`),
+        " となる ",
+        math(String.raw`N_0 \in \mathbb{Z}_{\geq 1}`),
+        " を取る。",
+        math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq N_0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|a_{N_{\mathrm{row}}} - a\right|
+&\leq \frac{\log 2}{N_{\mathrm{row}}}
+&&\left(\because\ \text{上の含意の鎖の最後の行}\right)\\
+&\leq \frac{\log 2}{N_0}
+&&\left(\because\ \text{準備の }\log 2 > 0\text{ かつ }0 < N_0 \leq N_{\mathrm{row}}\right)\\
+&< \varepsilon
+&&\left(\because\ N_0\,\varepsilon > \log 2\text{ の両辺を }N_0 > 0\text{ で割る}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の列の収束の意味で ",
+        math(String.raw`a_{N_{\mathrm{row}}} \to a`),
+        " であり、極限は ",
+        ref("scalar_limit_is_unique"),
+        " により一つに定まるので、主張の極限は存在して値は ",
+        math(String.raw`a = \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
+        " である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
         math(String.raw`\log`),
-        " の単調性と乗法から加法への変換、および実数列 ",
-        math(String.raw`(\log 2)/N_{\mathrm{row}} \to 0`),
-        " だけである。",
+        " が実対数で値が ",
+        math(String.raw`\mathbb{R}`),
+        " に住むこと（実対数による脱出）と、実数列の極限とアルキメデス性を使うこと（極限による脱出）のためである。",
       ]),
     ],
     conversion: {
@@ -2353,6 +2428,7 @@ Z(K_1,K_2)
       notes: [
         "2026-08-18: 式変形の書き方を統一した。挟み込みへの log の適用・MN による割り算・中心からの差の評価が散文で継がれた 3 つの表示に分かれていたのを、一続きの含意の鎖へまとめ、根拠を各行末の (∵ …) へ移した。極限の存在の論法と参照は変更していない。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-11-05: SageMath の検算（sagemath/check/limit_of_log_Z_in_N_row/）に合わせて直した。各行の根拠をラベル参照にし（log(c^N) = N log c と log(2^M) = M log 2 は新しい主張 real_log_of_power）、割り算と約分の行、差を取る行と絶対値の行を分けた。極限の段を log 2 > 0 の準備と ε と N_0 の鎖で書いて def_matrix_norm・scalar_limit_is_unique を引き、冪を新しい定義 def_power_of_real_number で引き、「この段階では実数解析へ移行していない」の誤った断り書きを、実対数と極限による ℝ 脱出の宣言に替えた。主張に K_1, K_2 と N_row の帰属を書いた。計算の誤りは無かった。",
       ],
     },
   },
