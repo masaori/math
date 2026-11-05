@@ -5385,6 +5385,61 @@ G(X - W)
     },
   },
   {
+    id: "linear_space_general_claim_transpose_of_matrix_product",
+    kind: "claim",
+    title: { text: "行列の積の転置は転置を逆の順に掛けた積" },
+    labels: ["transpose_of_matrix_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。積は ",
+        ref("mat_mult"),
+        "、転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(AB)^\top = B^\top A^\top`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(p,m,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        "、",
+        math(String.raw`l \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((AB)^\top\bigr)_{kl}
+&= (AB)_{lk}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (n \to p,\ B \to AB,\ p \to k,\ q \to l\ \text{を同時に置き換える})\bigr)\\
+&= \sum_{j=1}^{n} A_{lj}\,B_{jk}
+&&\bigl(\because\ \blkref{mat_mult}\ (i \to l)\bigr)\\
+&= \sum_{j=1}^{n} \left(A^\top\right)_{jl}\left(B^\top\right)_{kj}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ \text{を各項の 2 箇所へ同時に適用。}A_{lj}\ \text{へ}\ (B \to A,\ p \to j,\ q \to l)\text{、}B_{jk}\ \text{へ}\ (m \to n,\ n \to p,\ B \to B,\ p \to k,\ q \to j)\text{（それぞれ同時に置き換える）}\bigr)\\
+&= \sum_{j=1}^{n} \left(B^\top\right)_{kj}\left(A^\top\right)_{jl}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に適用}\bigr)\\
+&= \left(B^\top A^\top\right)_{kl}
+&&\bigl(\because\ \blkref{mat_mult}\ (m \to p,\ p \to m,\ A \to B^\top,\ B \to A^\top,\ i \to k,\ k \to l)\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の実対称性の鎖が「転置の積の法則 (ABC)^⊤ = C^⊤B^⊤A^⊤」を名前だけで引いていたので、それを 2 つの因子の積について述べた主張として足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_definition_matrix_with_real_entries",
     kind: "definition",
     title: { text: "成分がすべて実数の行列" },

@@ -1522,6 +1522,12 @@ targets=(
   "Ising2D.NecSuf.transpose_sub_matrix_apply'"
   "Ising2D.NecSuf.transpose_sub_matrix'"
   "Ising2D.NecSuf.finite_sum_transpose_matrix'"
+  Ising2D.matrix_transpose_mul_apply
+  Ising2D.matrix_transpose_mul
+  Ising2D.matrix_transpose_mul_of_necSuf
+  Ising2D.transpose_mul_tensorPow
+  "Ising2D.NecSuf.transpose_mul_matrix_apply'"
+  "Ising2D.NecSuf.transpose_mul_matrix'"
   Ising2D.S2_hasRealEntries
   Ising2D.S1plus_hasRealEntries
   Ising2D.matrix_add_hasRealEntries

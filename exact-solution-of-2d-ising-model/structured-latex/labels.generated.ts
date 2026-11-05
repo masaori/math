@@ -558,6 +558,7 @@ export const ALL_LABELS = [
   "transpose_of_finite_sum_of_matrices",
   "transpose_of_identity_matrix_of_order_two",
   "transpose_of_matrix_difference",
+  "transpose_of_matrix_product",
   "transpose_of_matrix_scalar_multiple",
   "transpose_of_matrix_sum",
   "transpose_of_pauli_x",
