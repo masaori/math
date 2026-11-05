@@ -74,4 +74,18 @@ theorem heightOneBoundary_vertical_values (L m : ℕ) [NeZero L]
   simp only [Finset.mem_insert, Finset.mem_singleton]
   omega
 
+/-- An interior horizontal edge occurs in the height-one boundary precisely when the walk crosses it oddly. -/
+theorem heightOneBoundary_horizontal_internal_parity (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (i j : ℕ) (hi : i + 1 < L) (hj : j < L) :
+    cellSetEdgeCoefficient L (heightOneCells L m γ)
+        (edgeOfRow L false ((i + 1 : ℕ) : ZMod L) (j : ZMod L)) ≠ 0 ↔
+      walkBaseEdgeParity γ
+        (edgeOfRow L false ((i + 1 : ℕ) : ZMod L) (j : ZMod L)) = 1 := by
+  have hsupport := heightOneBoundary_horizontal_support L m γ
+    ((i + 1 : ℕ) : ZMod L) (j : ZMod L)
+  have hprev : (((i + 1 : ℕ) : ZMod L) - 1) = (i : ZMod L) := by simp
+  rw [hprev] at hsupport
+  exact hsupport.trans (standardDualHeight_horizontal_internal_changes L m γ i j hi hj)
+
 end Ising2DLambda.KacWard
