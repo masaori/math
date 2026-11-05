@@ -317,4 +317,163 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_matrix_product_is_associative",
+    kind: "claim",
+    title: { text: "行列の積の結合法則" },
+    labels: ["claim_matrix_product_is_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`A,B,C\in\mathrm{Mat}_X(\mathbb{C})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）とする。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`(A\cdot_{\mathrm{Mat}_X}B)\cdot_{\mathrm{Mat}_X}C=A\cdot_{\mathrm{Mat}_X}(B\cdot_{\mathrm{Mat}_X}C)`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の元なので、すべての ",
+        math(String.raw`x,y\in X`),
+        " について ",
+        math(String.raw`(x,y)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことを示せばよい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`x,y\in X`),
+        " を任意に固定する。以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元であり、係数の側にもベクトルの側にも置ける。",
+      ]),
+      paragraph([
+        "（準備）",
+        math(String.raw`w,z\in X`),
+        " について、",
+        math(String.raw`\mathbb{C}`),
+        " の元を次で置く。",
+      ]),
+      list([
+        [math(String.raw`\lambda_{w,z}:=A_{x,z}\cdot_{\mathbb{C}}B_{z,w}`)],
+        [math(String.raw`p_w:=\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} B_{z,w}`)],
+        [math(String.raw`u_w:=p_w\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}`)],
+      ]),
+      paragraph([
+        "まず、すべての ",
+        math(String.raw`w,z\in X`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(C_{w,y}\cdot_{\mathbb{C}}A_{x,z})\cdot_{\mathbb{C}^{\mathrm{vec}}} B_{z,w}
+&=(C_{w,y}\cdot_{\mathbb{C}}A_{x,z})\cdot_{\mathbb{C}}B_{z,w}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=C_{w,y}\cdot_{\mathbb{C}}(A_{x,z}\cdot_{\mathbb{C}}B_{z,w})
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(A_{x,z}\cdot_{\mathbb{C}}B_{z,w})\cdot_{\mathbb{C}}C_{w,y}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\lambda_{w,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義と}\ \lambda_{w,z}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "次に、すべての ",
+        math(String.raw`w\in X`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u_w
+&=p_w\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
+&&\left(\because\ u_w\ \text{の定義}\right)\\
+&=p_w\cdot_{\mathbb{C}}C_{w,y}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=C_{w,y}\cdot_{\mathbb{C}}p_w
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=C_{w,y}\cdot_{\mathbb{C}^{\mathrm{vec}}} p_w
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=C_{w,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} B_{z,w}\right)
+&&\left(\because\ p_w\ \text{の定義}\right)\\
+&=\sum_{z\in X}(C_{w,y}\cdot_{\mathbb{C}}A_{x,z})\cdot_{\mathbb{C}^{\mathrm{vec}}} B_{z,w}
+&&\left(\because\ \rho:=C_{w,y}\ \text{とする。}\blkref{claim_scalar_multiple_of_sum_over_finite_set}\right)\\
+&=\sum_{z\in X}\lambda_{w,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
+&&\left(\because\ \text{各}\ z\ \text{の項に直前の等式を当てる。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right).
+\end{aligned}`),
+      paragraph([
+        "また、すべての ",
+        math(String.raw`w\in X`),
+        " について、",
+        math(String.raw`(A\cdot_{\mathrm{Mat}_X}B)_{x,w}=p_w`),
+        "（積の定義と ",
+        math(String.raw`p_w`),
+        " の定義。",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）であり、",
+        math(String.raw`p_w\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}=u_w=1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}} u_w`),
+        "（",
+        math(String.raw`u_w`),
+        " の定義と、スカラー倍の単位元を ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " に当てたもの。",
+        ref("def_complex_vector_space"),
+        "・",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）である。同じく、すべての ",
+        math(String.raw`z\in X`),
+        " について、",
+        math(String.raw`(B\cdot_{\mathrm{Mat}_X}C)_{z,y}=\sum_{w\in X}B_{z,w}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）である。",
+      ]),
+      paragraph(["（式変形）準備の記号で、", math(String.raw`(x,y)`), " 成分は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A\cdot_{\mathrm{Mat}_X}B)\cdot_{\mathrm{Mat}_X}C\bigr)_{x,y}
+&=\sum_{w\in X}(A\cdot_{\mathrm{Mat}_X}B)_{x,w}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{w\in X}p_w\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
+&&\left(\because\ \text{各}\ w\ \text{で}\ (A\cdot_{\mathrm{Mat}_X}B)_{x,w}=p_w\ \text{（準備）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{w\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}} u_w
+&&\left(\because\ \text{各}\ w\ \text{で}\ p_w\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}=1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}} u_w\ \text{（準備）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{w\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{z\in X}\lambda_{w,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}\right)
+&&\left(\because\ \text{各}\ w\ \text{で}\ u_w\ \text{の準備の等式を当てる。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{z\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{w\in X}\lambda_{w,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}\right)
+&&\left(\because\ \text{二つの有限集合をともに}\ X\ \text{、添字の組を}\ (w,z)\ \text{、}v_{w,z}:=C_{w,y}\ \text{とする。}\blkref{claim_interchange_of_double_sum_over_finite_sets}\right)\\
+&=\sum_{z\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{w\in X}B_{z,w}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}\right)\right)
+&&\left(\because\ \text{各}\ z\ \text{で、}\rho:=A_{x,z}\ \text{とする}\ \blkref{claim_scalar_multiple_of_sum_over_finite_set}\ \text{を逆向きに当てる。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{w\in X}B_{z,w}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}\right)
+&&\left(\because\ \text{各}\ z\ \text{で、スカラー倍の単位元を}\ \mathbb{C}^{\mathrm{vec}}\ \text{に当てる。}\blkref{def_complex_vector_space}\ \blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{z\in X}A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}(B\cdot_{\mathrm{Mat}_X}C)_{z,y}
+&&\left(\because\ \text{各}\ z\ \text{で}\ \cdot_{\mathrm{Mat}_X}\ \text{の定義（準備）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\bigl(A\cdot_{\mathrm{Mat}_X}(B\cdot_{\mathrm{Mat}_X}C)\bigr)_{x,y}
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x,y\in X`),
+        " は任意だったので、",
+        math(String.raw`(A\cdot_{\mathrm{Mat}_X}B)\cdot_{\mathrm{Mat}_X}C=A\cdot_{\mathrm{Mat}_X}(B\cdot_{\mathrm{Mat}_X}C)`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
