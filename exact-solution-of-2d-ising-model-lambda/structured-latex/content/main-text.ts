@@ -63228,7 +63228,7 @@ f_\gamma(i,j+1)
 &=\left(\sum_{c=0}^{L-1}N_\gamma(n_{\mathrm v}(i,c))\right)\bmod2
 &&\bigl(\because\ \blkref{claim_closed_walk_vertical_row_parity_zero}\text{ と }\blkref{def_residue_maps}\bigr)\\
 &=\left(N_\gamma(n_{\mathrm v}(i,0))+\sum_{c=1}^{L-1}N_\gamma(n_{\mathrm v}(i,c))\right)\bmod2
-&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)\,.
+&&\bigl(\because\ \text{有限和の初項を分ける}\bigr)
 \end{aligned}`),
                       paragraph(["この等式を ", ref("claim_standard_dual_height_vertical_seam_conditional"),
                         " の全周偶奇の仮定へ代入すると、主張の高さ差と同値が従う。"]),
