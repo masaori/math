@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 417 件のうち、SageMath の検算が無いもの 5 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 417 件のうち、SageMath の検算が無いもの 4 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -399,9 +399,10 @@
 - `c_plus_equals_Lambda_half_integer`（c_+(M_col) = Λ̌_max = Λ^{(1/2)}_{M_col}）: `sagemath/check/c_plus_equals_Lambda_half_integer/`。本文の ψ̌ から作った ε・Q̌_ε（数体 E_1）、成分が QQ の V^{(+)} と W で、準備・Step 0〜3・結びの全ての鎖を E_1・QQbar・AA で厳密に確かめ（等号 1734・3783 件、否定コントロール 48・24 件。結合定数 3 組 × M_col = 2, 3）、c_+ を Λ̌ を経由せずに W_ℝ の F^{(+)} への制限の最大固有値として作って Λ̌_max・Λ^{(1/2)}・閉形式と比べた。Step 2 の任意の生成元は q に 1, 1+2i, i を掛けた三つで見た。**人手証明を書き直した**（主張は不変、計算の誤りは無し）: (1) ℝ の値 x^⊤Wx と ℂ の値 x^*V^{(+)}x を「x^⊤ = x^*」で結んでいたのを、ι^n: ℝ^n → ℂ^n と W_ℝ に名前を付けた橋 (x^⊤W_ℝx)_ℂ = ι^n(x)^*Wι^n(x) と (·)_ℂ の単射性で通す形にした。(2) Step 1 の三つの操作を一行でしていた行、Step 0 の P^{(+)}x の行を分けた。(3) Step 2 で V^{(+)} の成分が実であることを散文（W_is_real_symmetric_positive_definite の Step 2 と同じ議論）で示していたのを、W と ε の成分が実であることと Step 0 で q̄ を固有空間に入れる成分の鎖に替えた。(4) p・p' と「共役で動かない複素数は実」を成分の鎖にし、結びの鎖（θ^{(1/2)}_{M,μ} = θ̃_μ を含む）を置いた。そのために主張 `sum_over_binary_words_entrywise`（{0,1}^r の上の行列の和の成分は成分の和）を `002_linear_space_general.ts` に足し、検算 `sagemath/check/sum_over_binary_words_entrywise/` を付けた。三回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`TheoremCPlusEqualsLambda.lean` などは新しい行と 1 対 1 でない。Lean の連続実行の受け持ち。`sum_over_binary_words_entrywise` は未形式化）。
 
 - `gamma_kappa_identity`（γ_1 = cosh γ = cosh κ + 2A sin²(θ/2)、sinh²(γ/2) = sinh²(κ/2) + A sin²(θ/2)、γ = 2 arcsinh(√…)、κ について偶）: `sagemath/check/gamma_kappa_identity/`。行の等号を `QQ` 上の 12 変数の多項式環で、各行が引いた関係式 1 本だけを法として成り立ち抜くと成り立たないことで確かめ、加法定理・半角公式・sinh の奇性を本文の exp の部分和から作った形式冪級数で、倍角公式を冪級数と θ = πr の `QQbar` で厳密に確かめた。具体値（(K_1, K_2^*) 6 組 × θ 10 点）は本文の exp を囲むボールと本文の定義どおりの arccosh・arcsinh で全行を確かめた（真偽の確認 1822 件、うち対照 112 件）。人手証明を直した（主張は不変、計算の誤りは無し）: Step 2 の「両辺から 1 を引いて 2 で割る」を主張の左辺から始まる鎖に、Step 1 の記号の代入・加法定理・κ と A の定義を一行ずつに、γ_1 = cosh γ を `arccosh_properties` (2) と `def_gamma_theta` の鎖に（γ_1 ≥ 1 に `gamma1_lower_bound_all_theta`）、Step 3 の散文の平方根の一意性と arcsinh の適用を γ(θ) から始まる 4 行の鎖に、偶関数性を `sinh_is_odd` を引く 5 行の鎖にし、平方根を本文の実数の平方根の記法 √·^(ℝ≥0) にした。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`DefinitionKappaAndCritical.lean` と新しい行の 1 対 1 は Lean の連続実行の受け持ち）。
+- `critical_point_iff_kappa_zero`（s_1s_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0、あわせて κ = 0 ⟺ c_1 = s_1c_2）: `sagemath/check/critical_point_iff_kappa_zero/`。同値の各行を `QQ` 上の 7 変数の多項式環で、左右の条件が引いた関係式のもとで互いの倍元になること（関係式を抜くと成り立たないこと）で厳密に確かめた。主張は t = exp(−2K_2^*)・u = exp(−2K_1) の `QQ(t,u)` で (s_1s_2 − 1)·u(1−t²) = (t−u)(1+tu) を厳密に確かめ、具体値（30 点。臨界 5 点と差 ±10^{-6} の点を含む）は本文の exp のボールで各行の真偽の一致を確かめた（645 件、うち対照 5 件）。人手証明を直した（主張は不変、計算の誤りは無し）: sinh(2K_2)sinh(2K_2^*) = 1 の根拠を `def_transfer_matrix_symbols` から `second_dual_coupling_relation` へ、s_2 > 0 の根拠を `cosh_sinh_basic_properties` (3) から `indexed_hyperbolic_abbreviations_positive` へ引き直し、準備 s_2^* = 1/s_2 を鎖に、(2)⟺(3) の「明らか」と主張の文の κ = 0 ⟺ c_1 = s_1c_2 を同値の鎖にし、記号の帰属を書いた。三回のレビューで指摘が無くなるまで直した。Lean は不変（新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
 
 ## 次の一歩
-`critical_point_and_log_divergence.ts` の `critical_point_iff_kappa_zero`（`--list` の先頭）から、文書順に検算を足す。
+`critical_point_and_log_divergence.ts` の `isotropic_A_equals_one`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

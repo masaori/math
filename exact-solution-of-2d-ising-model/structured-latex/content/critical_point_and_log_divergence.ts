@@ -627,45 +627,108 @@ S
     ],
     proof: [
       paragraph([
+        "記号の帰属。",
+        math(String.raw`K_1, K_2, K_2^*, \kappa \in \mathbb{R}`),
+        "（",
+        math(String.raw`K_2^* \in \mathbb{R}_{>0}`),
+        " は ",
+        ref("def_second_dual_coupling_constant"),
+        "）、",
+        math(String.raw`c_1, s_1, c_2, s_2, s_2^* \in \mathbb{R}`),
+        "（",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、cosh・sinh の値が実数の exp の値、すなわち部分和の極限であり、",
+        math(String.raw`K_2^*`),
+        " が実対数の値だからである。",
+      ]),
+      paragraph([
+        "準備。",
+        math(String.raw`s_2 \ne 0`),
+        " と ",
+        math(String.raw`s_2^* = \dfrac{1}{s_2}`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_2 &> 0
+&&\bigl(\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i = 2\text{ に適用。}K_2 > 0\text{ は仮定、}K_2^* > 0\text{ は }\blkref{def_second_dual_coupling_constant}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+s_2 &\ne 0
+&&\bigl(\because\ s_2 > 0\text{ と }\mathbb{R}\text{ の順序}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+s_2^*
+&= \frac{s_2\,s_2^*}{s_2}
+&&\bigl(\because\ s_2 \ne 0\text{ なので }\mathbb{R}\text{ の四則}\bigr) \\
+&= \frac{\sinh(2K_2)\sinh(2K_2^*)}{s_2}
+&&\bigl(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\bigr) \\
+&= \frac{1}{s_2}
+&&\bigl(\because\ \blkref{second_dual_coupling_relation}\bigr)
+\end{aligned}`),
+      paragraph([
         "(1) ",
         math(String.raw`\iff`),
         " (2) の証明。",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`K_2^*`),
-        " の定義より ",
-        math(String.raw`\sinh(2K_2)\sinh(2K_2^*) = 1`),
-        " であり、",
-        ref("cosh_sinh_basic_properties"),
-        " (3) より ",
-        math(String.raw`s_2 = \sinh 2K_2 > 0`),
-        " なので",
       ]),
-      displayMath(String.raw`\sinh 2K_2^* = \frac{1}{s_2}
-\quad\bigl(\because\ \blkref{def_transfer_matrix_symbols},\ \blkref{cosh_sinh_basic_properties}\text{ と }s_2>0\bigr)`),
-      paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 s_1 s_2 = 1
-&\iff \sinh 2K_1 = \frac{1}{s_2}
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ と }s_2 > 0\text{ で両辺を割る}\bigr) \\
+&\iff s_1 = \frac{1}{s_2}
+&&\bigl(\because\ s_2 \ne 0\text{ なので、}\Rightarrow\text{ は両辺を }s_2\text{ で割り、}\Leftarrow\text{ は両辺に }s_2\text{ を掛ける}\bigr) \\
+&\iff s_1 = s_2^*
+&&\bigl(\because\ \text{準備の }s_2^* = \tfrac{1}{s_2}\bigr) \\
 &\iff \sinh 2K_1 = \sinh 2K_2^*
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols},\ \blkref{cosh_sinh_basic_properties}\text{ と }s_2>0\bigr) \\
+&&\bigl(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\bigr) \\
 &\iff 2K_1 = 2K_2^*
-&&\bigl(\because\ \blkref{sinh_is_injective}\bigr) \\
+&&\bigl(\because\ \Rightarrow\text{ は }\blkref{sinh_is_injective}\text{ を }u = 2K_1,\ v = 2K_2^*\text{ に適用。}\Leftarrow\text{ は両辺に }\sinh\text{ を施す}\bigr) \\
 &\iff K_1 = K_2^*
-&&\bigl(\because\ \mathbb{R}\text{ の四則と }2\ne0\bigr)
+&&\bigl(\because\ 2 \ne 0\text{ なので、}\Rightarrow\text{ は両辺を }2\text{ で割り、}\Leftarrow\text{ は両辺に }2\text{ を掛ける}\bigr)
 \end{aligned}`,
       ),
       paragraph([
         "(2) ",
         math(String.raw`\iff`),
-        " (3) は ",
-        math(String.raw`\kappa = 2K_1 - 2K_2^* = 2(K_1 - K_2^*)`),
-        " より明らかである。",
+        " (3) の証明。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\kappa = 0
+&\iff 2K_1 - 2K_2^* = 0
+&&\bigl(\because\ \blkref{def_kappa}\bigr) \\
+&\iff 2\left(K_1 - K_2^*\right) = 0
+&&\bigl(\because\ \mathbb{R}\text{ の分配則}\bigr) \\
+&\iff K_1 - K_2^* = 0
+&&\bigl(\because\ 2 \ne 0\text{ なので、}\Rightarrow\text{ は両辺を }2\text{ で割り、}\Leftarrow\text{ は両辺に }2\text{ を掛ける}\bigr) \\
+&\iff K_1 = K_2^*
+&&\bigl(\because\ \mathbb{R}\text{ の移項}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\kappa = 0`),
+        " と ",
+        math(String.raw`c_1 = s_1c_2`),
+        " の同値の証明。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_1 = s_1c_2
+&\iff s_1s_2 = 1
+&&\bigl(\because\ \blkref{critical_condition_c1_eq_s1_c2}\bigr) \\
+&\iff K_1 = K_2^*
+&&\bigl(\because\ \text{上の (1) }\iff\text{ (2)}\bigr) \\
+&\iff \kappa = 0
+&&\bigl(\because\ \text{上の (2) }\iff\text{ (3)}\bigr)
+\end{aligned}`,
+      ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: 根拠を引き直した。sinh(2K_2)sinh(2K_2^*) = 1 は def_transfer_matrix_symbols ではなく second_dual_coupling_relation、s_2 > 0 は cosh_sinh_basic_properties (3) ではなく indexed_hyperbolic_abbreviations_positive から引く。準備の s_2^* = 1/s_2 を一続きの鎖にし、(1)⟺(2) の鎖の各行に ⇒ と ⇐ の根拠を書いた。(2)⟺(3) の「明らか」と、主張の文にある κ = 0 ⟺ c_1 = s_1c_2 を同値の鎖にした。記号の帰属と ℝ を使う理由を書いた。主張の中身は不変。検算は sagemath/check/critical_point_iff_kappa_zero/。",
+      ],
+    },
   },
   {
     id: "critical_005_claim_isotropic_setting",
