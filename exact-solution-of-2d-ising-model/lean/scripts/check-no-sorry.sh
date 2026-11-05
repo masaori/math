@@ -778,7 +778,12 @@ targets=(
   Ising2D.partition_function_sandwich
   Ising2D.physicalV1halfC_mul_self
   Ising2D.physicalV1halfR_mul_self_map
-  Ising2D.sigmaZ_mul_sigmaZ_transpose
+  Ising2D.sigmaZ_transpose
+  Ising2D.sigmaZ_nextSite_mul_comm
+  Ising2D.sigmaZ_mul_sigmaZ_nextSite_transpose
+  Ising2D.K1D_transpose_succ
+  Ising2D.sigmaZ_hasRealEntries
+  Ising2D.K1D_hasRealEntries_succ
   Ising2D.halfK1D_transpose
   Ising2D.physicalV1halfC_transpose
   Ising2D.physicalV1halfR_isSymm
@@ -1550,6 +1555,12 @@ targets=(
   Ising2D.complex_conjugate_of_real_inclusion
   Ising2D.real_symmetric_isHermitian
   Ising2D.real_symmetric_isHermitian_of_necSuf
+  Ising2D.matrix_transpose_norm
+  Ising2D.matrix_transpose_tendsto
+  Ising2D.matrix_transpose_norm_of_necSuf
+  Ising2D.matrix_transpose_tendsto_of_necSuf
+  "Ising2D.NecSuf.transpose_norm'"
+  "Ising2D.NecSuf.transpose_tendsto'"
   Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
   Ising2D.S2_isHermitian_of_real_symmetric
   Ising2D.S1plus_isHermitian_of_real_symmetric

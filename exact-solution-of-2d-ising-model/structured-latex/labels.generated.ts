@@ -564,6 +564,8 @@ export const ALL_LABELS = [
   "transpose_of_pauli_x",
   "transpose_of_pauli_y",
   "transpose_of_pauli_z",
+  "transpose_preserves_matrix_limits",
+  "transpose_preserves_matrix_norm",
   "two_by_two_transfer_identity",
   "zero_matrix_is_left_zero_of_mat_mult",
   "zero_matrix_is_right_zero_of_mat_mult",

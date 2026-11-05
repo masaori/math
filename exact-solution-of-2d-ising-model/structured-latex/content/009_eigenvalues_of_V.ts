@@ -1129,6 +1129,127 @@ A^1
   },
 
   {
+    id: "eigenvalues_of_V_claim_transpose_preserves_matrix_norm",
+    kind: "claim",
+    title: { tex: String.raw`\|A^{\top}\| = \|A\|` },
+    labels: ["transpose_preserves_matrix_norm"],
+    statement: [
+      paragraph(["転置は ", ref("def_matrix_transpose"), "、ノルムは ", ref("def_matrix_norm"), "（", math(String.raw`K = \mathbb{C}`), "）のものとする。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。このとき",
+      ]),
+      displayMath(String.raw`\|A^{\top}\| = \|A\|`),
+      paragraph([
+        "が成り立つ。両辺は ",
+        ref("def_matrix_norm"),
+        " のとおり非負実数の有限和の非負の平方根であり、平方根を取るところで ",
+        math(String.raw`\mathbb{R}`),
+        " を使う。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\|A^{\top}\|
+&= \sqrt{\textstyle\sum_{k=1}^{n}\sum_{l=1}^{n}|(A^{\top})_{kl}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{def_matrix_norm}\ (A \to A^{\top}))\\
+&= \sqrt{\textstyle\sum_{k=1}^{n}\sum_{l=1}^{n}|A_{lk}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{def_matrix_transpose}\ (m, n \to n,\ B \to A,\ p \to k,\ q \to l)\ \text{を各項へ})\\
+&= \sqrt{\textstyle\sum_{l=1}^{n}\sum_{k=1}^{n}|A_{lk}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{の有限和の順序の入れ替え})\\
+&= \|A\|
+&&(\because\ \blkref{def_matrix_norm}\ \text{の}\ i = l,\ j = k)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が、指数関数の極限が実対称であることを「star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）」と名前だけで述べていたので、その議論の転置の側を主張に切り出した。鎖は star_preserves_norm_and_limits (2) と同じ並びで、共役転置の 2 行（定義と abs_of_complex_conjugate）が転置の定義の 1 行になる。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_transpose_preserves_matrix_limits",
+    kind: "claim",
+    title: { text: "収束する行列の列の転置は極限の転置へ収束する" },
+    labels: ["transpose_preserves_matrix_limits"],
+    statement: [
+      paragraph(["転置は ", ref("def_matrix_transpose"), "、差は ", ref("def_matrix_difference"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), "（", math(String.raw`K = \mathbb{C}`), "）のものとする。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
+        " の列とする。このとき",
+      ]),
+      displayMath(String.raw`A_N \to A \ \Longrightarrow\ A_N^{\top} \to A^{\top}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`N \to \infty`),
+        " の極限は ",
+        math(String.raw`\mathbb{R}`),
+        " の数列 ",
+        math(String.raw`\|A_N - A\|`),
+        " の極限であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A_N\to A`),
+        "、すなわち ",
+        math(String.raw`\|A_N - A\| \to 0`),
+        "（",
+        ref("def_matrix_norm"),
+        "）と仮定する。各 ",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|A_N^{\top}-A^{\top}\|
+&= \|(A_N-A)^{\top}\|
+&&(\because\ \blkref{transpose_of_matrix_difference}\ (m, p \to n,\ A \to A_N,\ B \to A\ \text{を同時に置き換える}))\\
+&= \|A_N-A\|
+&&(\because\ \blkref{transpose_preserves_matrix_norm}\ (A \to A_N - A))
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、",
+        math(String.raw`\mathbb{R}`),
+        " の数列 ",
+        math(String.raw`(\|A_N^{\top}-A^{\top}\|)_{N}`),
+        " と ",
+        math(String.raw`(\|A_N-A\|)_{N}`),
+        " はすべての項が等しく、仮定より ",
+        math(String.raw`\|A_N^{\top}-A^{\top}\| \to 0`),
+        " である。",
+        ref("def_matrix_norm"),
+        " の収束の定義より ",
+        math(String.raw`A_N^{\top} \to A^{\top}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていたので、転置の側を主張に切り出した。star_preserves_norm_and_limits (3) では準備の成分の鎖で示した差の等式を、ここでは既存の transpose_of_matrix_difference から引く。",
+      ],
+    },
+  },
+
+  {
     id: "eigenvalues_of_V_claim_real_multiple_of_hermitian_is_hermitian",
     kind: "claim",
     title: { text: "エルミート行列の実数倍はエルミート" },
