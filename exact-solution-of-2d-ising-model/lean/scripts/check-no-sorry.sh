@@ -2298,6 +2298,9 @@ targets=(
   Ising2D.trace_epsilon_VPlusOfTransfer
   Ising2D.I_mul_smul_H1plus
   Ising2D.commute_openChainD0_epsilon_mul_boundaryG
+  Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG
+  Ising2D.smul_epsilon_mul_boundaryG_mul_smul_openChainD0
+  Ising2D.epsilon_mul_smul_openChainD0
   Ising2D.V1plus_eq_exp_openChainD0_mul_exp
   Ising2D.pow_two_mul_of_sq_eq_one
   Ising2D.pow_two_mul_add_one_of_sq_eq_one

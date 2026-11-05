@@ -2,14 +2,15 @@
 # `tr(εV^{(+)})` を `tr(εV_1^{(+)}V_2)` へ移し、`εV_1^{(+)}` を `exp(K_1D_0)` と `ε, G` で書く（具体版）
 
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
-（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の Step 1・Step 2）
+（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の準備 (P1)・(P2)・Step 1・Step 2）
 
 | 人手 | Lean |
 | --- | --- |
 | Step 1 の式変形 `tr(εV^{(+)}) = tr(εBV_2B) = ⋯ = tr(εV_1^{(+)}V_2)` | `trace_epsilon_VPlusOfTransfer` |
-| Step 2 の `iK_1H_1^{(+)} = K_1D_0 + K_1εG`（`H1_plus_in_sigma_z_form`） | `I_mul_smul_H1plus` |
-| 同 `K_1D_0` と `K_1εG` は可換（`epsilon_D0_G_pairwise_commute`） | `commute_openChainD0_epsilon_mul_boundaryG` |
-| 同 `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)`（`theorem_exp_product`） | `V1plus_eq_exp_openChainD0_mul_exp` |
+| 準備 (P1) の 4 行 `(iκ)H_1^{(+)} = (κi)H_1^{(+)} = κ(iH_1^{(+)}) = κ(D_0 + εG) = κD_0 + κ(εG)` | `I_mul_smul_H1plus` の calc の 4 段 |
+| 準備 (P2) の 5 行 `D_0(εG) = (D_0ε)G = ⋯ = (εG)D_0` | `commute_openChainD0_epsilon_mul_boundaryG` の calc の 5 段 |
+| 同 `commuting_with_scalar_multiple` の 3 回の適用 `D_0(κ(εG)) = (κ(εG))D_0`・`(κ(εG))(κD_0) = (κD_0)(κ(εG))`・`ε(κD_0) = (κD_0)ε` | `openChainD0_mul_smul_epsilon_mul_boundaryG`・`smul_epsilon_mul_boundaryG_mul_smul_openChainD0`・`epsilon_mul_smul_openChainD0` |
+| Step 2 の `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)`（`theorem_exp_product`） | `V1plus_eq_exp_openChainD0_mul_exp` |
 | 同 `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`（`def_exp` の級数を偶数次と奇数次に分ける） | `matExp_smul_of_sq_eq_one`（`εG` について `exp_epsilon_mul_boundaryG`） |
 | 同 `εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)` | `epsilon_mul_V1plus` |
 
@@ -17,6 +18,10 @@
 （`def_V_plus`）、`BB = V_1^{(+)}` は `V1_plus_square_root_property`、`εB = Bε`・`εV_1^{(+)} = V_1^{(+)}ε` は
 `epsilon_commute_V1plusHalf`・`epsilon_commute_V1plus`（`epsilon_commutes_with_V1_plus_square_root`・`epsilon_commutes_with_V1_plus`）、
 トレースの巡回性は `trace_cyclic`（`trace_basic_properties` (2)）である。
+準備 (P1)・(P2) の根拠は、`scalar_multiple_distributes_over_matrix_sum` が `smul_add_tensorPow`、
+`commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（どちらも `TensorPow M` での系）、
+`scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
+`smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
 人手 Step 1 は `V_2` との可換性を挙げるが、式変形の各行が使うのは `B` と `V_1^{(+)}` との可換性だけなので、
 Lean の主張は `K_2 > 0` を仮定しない。
 
@@ -32,6 +37,8 @@ import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimH1PlusInSigmaZF
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithScalarMultipleFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -68,29 +75,64 @@ theorem trace_epsilon_VPlusOfTransfer (K1 : ℂ) (K2 : ℝ) :
 
 /-! ## Step 2: `εV_1^{(+)}` を対角行列と `ε` で書く -/
 
-/-- 人手 Step 2 の `iK_1H_1^{(+)} = K_1D_0 + K_1εG`（`H1_plus_in_sigma_z_form` に `K_1` を掛ける）。 -/
-theorem I_mul_smul_H1plus (hM : 2 ≤ M) (K1 : ℂ) :
-    (Complex.I * K1) • H1plus M
-      = K1 • openChainD0 M + K1 • (epsilon M * boundaryG M (by omega)) := by
-  rw [mul_comm, ← smul_smul, H1_plus_in_sigma_z_form hM, smul_add]
+/-- **人手 `trace_of_epsilon_V_plus` の準備 (P1)**: `(iκ)H_1^{(+)} = κD_0 + κ(εG)`。
 
-/-- 人手 Step 2 の「`D_0` と `εG` は可換」（`epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε`・`D_0G = GD_0`）。 -/
+人手の 4 行と calc の 4 段が 1 対 1 である。`κ := (K_1)_ℂ` は Lean では任意の `κ : ℂ`
+（鎖は `κ` が実数の像であることを使わない）。 -/
+theorem I_mul_smul_H1plus (hM : 2 ≤ M) (κ : ℂ) :
+    (Complex.I * κ) • H1plus M
+      = κ • openChainD0 M + κ • (epsilon M * boundaryG M (by omega)) :=
+  calc (Complex.I * κ) • H1plus M
+      = (κ * Complex.I) • H1plus M := by
+        rw [mul_comm Complex.I κ]                         -- `complex_numbers_form_a_field` の積の可換律
+    _ = κ • (Complex.I • H1plus M) := by
+        rw [smul_smul]                                    -- `scalar_multiple_is_associative`
+    _ = κ • (openChainD0 M + epsilon M * boundaryG M (by omega)) := by
+        rw [H1_plus_in_sigma_z_form hM]                   -- `H1_plus_in_sigma_z_form`
+    _ = κ • openChainD0 M + κ • (epsilon M * boundaryG M (by omega)) :=
+        smul_add_tensorPow κ _ _                          -- `scalar_multiple_distributes_over_matrix_sum`
+
+/-- **人手の準備 (P2)** の鎖: `D_0(εG) = (εG)D_0`（`epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε`・`D_0G = GD_0`）。
+
+人手の 5 行と calc の 5 段が 1 対 1 である。 -/
 theorem commute_openChainD0_epsilon_mul_boundaryG (hM : 2 ≤ M) :
     Commute (openChainD0 M) (epsilon M * boundaryG M (by omega)) :=
   calc openChainD0 M * (epsilon M * boundaryG M (by omega))
-      = (openChainD0 M * epsilon M) * boundaryG M (by omega) := (mul_assoc _ _ _).symm
-    _ = (epsilon M * openChainD0 M) * boundaryG M (by omega) := by rw [epsilon_mul_openChainD0 hM]
-    _ = epsilon M * (openChainD0 M * boundaryG M (by omega)) := mul_assoc _ _ _
-    _ = epsilon M * (boundaryG M (by omega) * openChainD0 M) := by rw [openChainD0_mul_boundaryG hM]
-    _ = (epsilon M * boundaryG M (by omega)) * openChainD0 M := (mul_assoc _ _ _).symm
+      = (openChainD0 M * epsilon M) * boundaryG M (by omega) := (mul_assoc _ _ _).symm  -- `mat_mult_associative`
+    _ = (epsilon M * openChainD0 M) * boundaryG M (by omega) := by
+        rw [epsilon_mul_openChainD0 hM]                   -- `εD_0 = D_0ε`
+    _ = epsilon M * (openChainD0 M * boundaryG M (by omega)) := mul_assoc _ _ _          -- `mat_mult_associative`
+    _ = epsilon M * (boundaryG M (by omega) * openChainD0 M) := by
+        rw [openChainD0_mul_boundaryG hM]                 -- `D_0G = GD_0`
+    _ = (epsilon M * boundaryG M (by omega)) * openChainD0 M := (mul_assoc _ _ _).symm  -- `mat_mult_associative`
+
+/-- 人手の準備 (P2) の `D_0(κ(εG)) = (κ(εG))D_0`（`commuting_with_scalar_multiple` を `(G, X, c) = (D_0, εG, κ)` で）。 -/
+theorem openChainD0_mul_smul_epsilon_mul_boundaryG (hM : 2 ≤ M) (κ : ℂ) :
+    openChainD0 M * (κ • (epsilon M * boundaryG M (by omega)))
+      = (κ • (epsilon M * boundaryG M (by omega))) * openChainD0 M :=
+  mul_smul_comm_of_commute_tensorPow κ _ _ (commute_openChainD0_epsilon_mul_boundaryG hM).eq
+
+/-- 人手の準備 (P2) の `(κ(εG))(κD_0) = (κD_0)(κ(εG))`
+（`commuting_with_scalar_multiple` を `(G, X, c) = (κ(εG), D_0, κ)` で。仮定は直前の主張の両辺を入れ替えたもの）。 -/
+theorem smul_epsilon_mul_boundaryG_mul_smul_openChainD0 (hM : 2 ≤ M) (κ : ℂ) :
+    (κ • (epsilon M * boundaryG M (by omega))) * (κ • openChainD0 M)
+      = (κ • openChainD0 M) * (κ • (epsilon M * boundaryG M (by omega))) :=
+  mul_smul_comm_of_commute_tensorPow κ _ _ (openChainD0_mul_smul_epsilon_mul_boundaryG hM κ).symm
+
+/-- 人手の準備 (P2) の `ε(κD_0) = (κD_0)ε`
+（`epsilon_D0_G_pairwise_commute` の `εD_0 = D_0ε` に `commuting_with_scalar_multiple` を `(G, X, c) = (ε, D_0, κ)` で）。 -/
+theorem epsilon_mul_smul_openChainD0 (hM : 2 ≤ M) (κ : ℂ) :
+    epsilon M * (κ • openChainD0 M) = (κ • openChainD0 M) * epsilon M :=
+  mul_smul_comm_of_commute_tensorPow κ _ _ (epsilon_mul_openChainD0 hM)
 
 /-- **人手 Step 2**: `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)`（`V1_plus_exponential_representation`、
 `H1_plus_in_sigma_z_form`、`K_1D_0` と `K_1εG` の可換性と `theorem_exp_product`）。 -/
 theorem V1plus_eq_exp_openChainD0_mul_exp (hM : 2 ≤ M) (K1 : ℂ) :
     V1plus M K1
       = matExp (K1 • openChainD0 M) * matExp (K1 • (epsilon M * boundaryG M (by omega))) := by
+  -- 可換性は (P2) の `(κ(εG))(κD_0) = (κD_0)(κ(εG))`
   have hc : Commute (K1 • openChainD0 M) (K1 • (epsilon M * boundaryG M (by omega))) :=
-    ((commute_openChainD0_epsilon_mul_boundaryG hM).smul_left K1).smul_right K1
+    (smul_epsilon_mul_boundaryG_mul_smul_openChainD0 hM K1).symm
   rw [V1plus_exponential_representation, I_mul_smul_H1plus hM, matExp, matExp, matExp,
     Matrix.exp_add_of_commute _ _ hc]
 
@@ -139,11 +181,11 @@ theorem epsilon_mul_V1plus (hM : 2 ≤ M) (K1 : ℝ) :
       = matExp ((K1 : ℂ) • openChainD0 M)
           * (((Real.cosh K1 : ℝ) : ℂ) • epsilon M + ((Real.sinh K1 : ℝ) : ℂ) • boundaryG M (by omega)) := by
   have hM0 : M ≠ 0 := by omega
-  -- `εexp(K_1D_0) = exp(K_1D_0)ε`（`εD_0 = D_0ε` から、級数の部分和とも極限とも可換）
+  -- `εexp(K_1D_0) = exp(K_1D_0)ε`（(P2) の `ε(κD_0) = (κD_0)ε` から、級数の部分和とも極限とも可換）
   have hcomm : Commute (epsilon M) (matExp ((K1 : ℂ) • openChainD0 M)) := by
-    have h : Commute (epsilon M) (openChainD0 M) := epsilon_mul_openChainD0 hM
+    have h : Commute (epsilon M) ((K1 : ℂ) • openChainD0 M) := epsilon_mul_smul_openChainD0 hM (K1 : ℂ)
     rw [matExp]
-    exact (h.smul_right _).exp_right
+    exact h.exp_right
   calc epsilon M * V1plus M (K1 : ℂ)
       = epsilon M * (matExp ((K1 : ℂ) • openChainD0 M)
           * matExp ((K1 : ℂ) • (epsilon M * boundaryG M hM0))) := by
