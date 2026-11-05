@@ -1913,6 +1913,10 @@ targets=(
   Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH
   Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf
   "Ising2D.NecSuf.signed_term_eq_map_mul'"
+  Ising2D.ite_eq_one_eq_val_real
+  Ising2D.VPlusData.checkW
+  Ising2D.VPlusData.checkLambda_finsetOfWord
+  Ising2D.VPlusData.checkT_eq_prod_checkW_mul
   Ising2D.VPlusData.traceFactor
   Ising2D.VPlusData.traceFactor_pos
   Ising2D.VPlusData.trace_epsilon_mul_V
@@ -2097,6 +2101,9 @@ targets=(
   Ising2D.finite_product_of_positive_reals_is_positive
   "Ising2D.NecSuf.finProdLeft_pos'"
   Ising2D.finite_product_of_positive_reals_is_positive_of_necSuf
+  Ising2D.finite_product_of_real_products
+  "Ising2D.NecSuf.finProdLeft_mul'"
+  Ising2D.finite_product_of_real_products_of_necSuf
   Ising2D.CheckFermiSetup.two_cosh_half_step4
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul

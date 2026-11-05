@@ -26,7 +26,8 @@
 | Step 1 の 13 行の鎖 `tr(εV^{(+)}) = … = Σ_εη_ε(Λ̌_ε)_ℂ` | `VPlusData.trace_epsilon_mul_V_step1`（同じ行の calc。人手の `M_col` が `r + 1`） |
 | Step 2 の `(Π_{μ≤k}ǔ^{(ε_μ)})_ℂ = (−1_ℂ)^{k−\|ε\|_k}` の `k` の帰納法（`k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行）と準備の `ǔ^{(e)}`・`\|ε\|_k` の数え上げ | `checkU_prod_eq_neg_one_pow`（同じ行の calc。人手の `k` が `n + 1`）・`checkU`・`ite_eq_one_eq_val`・`card_finsetOfWord_one`・`card_finsetOfWord_castSucc`・`card_finsetOfWord_le`（必要十分版の特殊化は `checkU_prod_eq_neg_one_pow_of_necSuf`。必要十分版は `NecSuf/PowerFromProductOfTwoValuedFactors.lean`） |
 | Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
-| Step 4〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2・Step 3 の `checkU_prod_eq_neg_one_pow`・`eta_mul_checkLambda_eq_checkT_mul_checkH` はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
+| Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
+| Step 4 の 2 本目の和の鎖、Step 5〜7 | `VPlusData.trace_epsilon_mul_V`・`traceFactor_pos`・`eta_univ_eq_one_of_trace_pos`（旧い Step の分け方のまま。Step 2〜4 の具体版はまだ使っていない。人手の新しい鎖と 1 対 1 にするのは状態台帳の次の一歩） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -35,6 +36,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.NecSuf.PowerFromProductOfTwoValuedFactors
 import Ising2D.NecSuf.SignedTermAsImageOfReorderedProduct
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 
 namespace Ising2D
 
@@ -212,6 +214,10 @@ theorem checkU_zero : checkU 0 = -1 := rfl
 theorem ite_eq_one_eq_val (e : Fin 2) : (if e = 1 then 1 else 0) = e.val := by
   rcases binaryWord_fin_two_eq_one_or_zero e with rfl | rfl <;> rfl
 
+/-- `ite_eq_one_eq_val` の値を ℝ に取った形（`e ∈ {0,1}` を ℝ の元として読む。Step 4 の `Λ̌_ε` の定義の読み替えが使う）。 -/
+theorem ite_eq_one_eq_val_real (e : Fin 2) : (if e = 1 then (1 : ℝ) else 0) = ((e : ℕ) : ℝ) := by
+  rcases binaryWord_fin_two_eq_one_or_zero e with rfl | rfl <;> simp
+
 /-- 準備の `|ε|_1 = ε_1`（数え上げの定義）。 -/
 theorem card_finsetOfWord_one (ε : Fin 1 → Fin 2) : (CheckFermi.finsetOfWord ε).card = (ε 0).val := by
   unfold CheckFermi.finsetOfWord
@@ -385,6 +391,55 @@ theorem eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf {r : ℕ} {F : CheckF
       = ((D.checkT ε * F.checkH : ℝ) : ℂ) :=
   NecSuf.signed_term_eq_map_mul' (fun a : ℝ => (a : ℂ)) real_inclusion_mul
     (F.eta_eq_eta_univ_mul _) (checkU_prod_eq_neg_one_pow r ε) F.checkH_ofReal
+
+end VPlusData
+
+/-! ## Step 4: 実数の和を積へ分解する -/
+
+namespace VPlusData
+
+/-- Step 4 の `w̌_μ^{(e)} := ǔ^{(e)} exp(γ(θ̃_μ)(e − 1/2)) ∈ ℝ`（`μ ∈ 𝓜̌`、`e ∈ {0,1}`。人手の `e` を ℝ の元として使う箇所が
+Lean の `((e : ℕ) : ℝ)`）。 -/
+noncomputable def checkW {F : CheckFermi M} (D : VPlusData M F) (μ : Fin M) (e : Fin 2) : ℝ :=
+  checkU e * Real.exp (D.gam μ * (((e : ℕ) : ℝ) - 1 / 2))
+
+/-- `eigenvalues_of_V_plus` の `Λ̌_ε` の定義 `Λ̌_ε = (2 sinh 2K_2)^{M_col/2} exp(Σ_μ γ(θ̃_μ)(ε_μ − 1/2))` を、語 `ε` の成分
+`ε_μ ∈ {0,1}` を ℝ の元として読む形で書く（Lean の `checkLambda` は部分集合 `finsetOfWord ε` の所属で `ε_μ` を読むので、
+その読み替え。運ぶ段で、人手の行は無い）。 -/
+theorem checkLambda_finsetOfWord (C : ℝ) (gam : Fin M → ℝ) (ε : Fin M → Fin 2) :
+    checkLambda C gam (CheckFermi.finsetOfWord ε)
+      = C * Real.exp (∑ μ, gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2)) := by
+  unfold checkLambda
+  congr 2
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  congr 2
+  simp only [CheckFermi.finsetOfWord, Finset.mem_filter, Finset.mem_univ, true_and]
+  exact ite_eq_one_eq_val_real (ε μ)
+
+/-- **原文 Step 4** の 1 本目の 7 行の鎖:
+`ť_ε = (Π_μǔ^{(ε_μ)})Λ̌_ε = (Π_μǔ^{(ε_μ)})((2sinh 2K_2)^{M_col/2}exp(Σ_μγ(θ̃_μ)(ε_μ−1/2)))
+= (Π_μǔ^{(ε_μ)})((2sinh 2K_2)^{M_col/2}Π_μexp(γ(θ̃_μ)(ε_μ−1/2)))
+= (2sinh 2K_2)^{M_col/2}((Π_μǔ^{(ε_μ)})Π_μexp(γ(θ̃_μ)(ε_μ−1/2)))
+= (2sinh 2K_2)^{M_col/2}Π_μ(ǔ^{(ε_μ)}exp(γ(θ̃_μ)(ε_μ−1/2))) = (2sinh 2K_2)^{M_col/2}Π_μw̌_μ^{(ε_μ)}
+= (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}`
+（人手の `M_col` が Lean の `r + 1`、`(2 sinh 2K_2)^{M_col/2}` が `D.C`、`γ(θ̃_μ)` が `D.gam μ`）。 -/
+theorem checkT_eq_prod_checkW_mul {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F)
+    (ε : Fin (r + 1) → Fin 2) :
+    D.checkT ε = (∏ μ, D.checkW μ (ε μ)) * D.C :=
+  calc D.checkT ε
+      = (∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) := rfl
+                                                        -- `ť_ε` の置き方
+    _ = (∏ μ, checkU (ε μ)) * (D.C * Real.exp (∑ μ, D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) := by
+        rw [checkLambda_finsetOfWord]                   -- `eigenvalues_of_V_plus` の `Λ̌_ε` の定義
+    _ = (∏ μ, checkU (ε μ)) * (D.C * ∏ μ, Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) := by
+        rw [real_exp_of_finite_sum r]                   -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)(ε_μ − 1/2)`）
+    _ = D.C * ((∏ μ, checkU (ε μ)) * ∏ μ, Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) :=
+        mul_left_comm _ _ _                             -- ℝ で `a(bc) = b(ac)`（乗法の交換則と結合則）
+    _ = D.C * ∏ μ, (checkU (ε μ) * Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) := by
+        rw [finite_product_of_real_products r]          -- `finite_product_of_real_products`（`m → M_col`、`j → μ`、`x_j → ǔ^{(ε_μ)}`、
+                                                        -- `y_j → exp(γ(θ̃_μ)(ε_μ − 1/2))`）を右辺から左辺へ
+    _ = D.C * ∏ μ, D.checkW μ (ε μ) := rfl              -- `w̌_μ^{(e)}` の置き方（`e → ε_μ`）を各因子へ同時に
+    _ = (∏ μ, D.checkW μ (ε μ)) * D.C := mul_comm _ _   -- ℝ の乗法の交換則
 
 end VPlusData
 
