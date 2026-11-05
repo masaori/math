@@ -62458,6 +62458,52 @@ s(j')-s(j)
                 role: "supporting",
                 element: {
                   kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_horizontal_column_parity_invariant",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_horizontal_column_parity_invariant",
+                    kind: "claim",
+                    title: { text: "閉歩道の横辺の全行和の偶奇は隣の列で保存される" },
+                    labels: ["claim_closed_walk_horizontal_column_parity_invariant"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-horizontal-column-parity-invariant"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_horizontal_column_parity_invariant",
+                      "Ising2DLambda.NecSuf.KacWard.horizontalCross_column_parity_invariant",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、列 ", math(String.raw`j\in\mathbb Z/L\mathbb Z`), " を取る。横辺の全行和の偶奇を",
+                        math(String.raw`A_\gamma(j):=\bigl(\sum_{i\in\mathbb Z/L\mathbb Z}N_\gamma(n_{\mathrm h}(i,j))\bigr)\bmod2`),
+                        " と置く（", ref("def_walk_base_edge_parity"), "、", ref("claim_edge_row_partition"), "）。"]),
+                      displayMath(String.raw`A_\gamma(j+1)=A_\gamma(j)`),
+                      paragraph(["が成り立つ。列の加算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_closed_walk_four_edge_parity"), " を頂点 ",
+                        math(String.raw`(i,j+1)`), " に適用し、全ての行 ", math(String.raw`i`), " について足す。"]),
+                      displayMath(String.raw`\left(\sum_i N_\gamma(n_{\mathrm h}(i,j+1))
++\sum_i N_\gamma(n_{\mathrm h}(i,j))
++\sum_i N_\gamma(n_{\mathrm v}(i,j+1))
++\sum_i N_\gamma(n_{\mathrm v}(i-1,j+1))\right)\bmod2=0
+\qquad\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)`),
+                      paragraph(["行の平行移動 ", math(String.raw`i\mapsto i-1`), " は有限集合 ",
+                        math(String.raw`\mathbb Z/L\mathbb Z`), " の全単射である。したがって縦辺の二つの和は等しく、二を法として消える。"]),
+                      displayMath(String.raw`\sum_i N_\gamma(n_{\mathrm v}(i-1,j+1))
+=\sum_i N_\gamma(n_{\mathrm v}(i,j+1))
+\qquad\bigl(\because\ i\mapsto i-1\text{ の全単射による再添字付け}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+0&=\bigl(A_\gamma(j+1)+A_\gamma(j)\bigr)\bmod2
+&&\bigl(\because\ \text{上の二つの等式と }2\text{ の倍数の偶奇}\bigr)\\
+A_\gamma(j+1)&=A_\gamma(j)
+&&\bigl(\because\ A_\gamma(j),A_\gamma(j+1)\in\{0,1\}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
                   id: "group_of_kac_ward_claim_standard_dual_rectangle_parity",
                   focus: {
                     id: "kac_ward_claim_standard_dual_rectangle_parity",
@@ -62575,12 +62621,12 @@ f_\gamma(i,j+1)
                       paragraph(["任意の ", math(String.raw`1\le r\le i`), " を取る。", ref("claim_closed_walk_four_edge_parity"),
                         " を頂点 ", math(String.raw`(r,j+1)`), " に適用すると、"]),
                       displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm v}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))\bigr)\bmod2=0
-\quad(\because\ \blkref{claim_closed_walk_four_edge_parity})`),
+\quad\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\bigr)`),
                       displayMath(String.raw`\bigl(N_\gamma(n_{\mathrm h}(r,j))+N_\gamma(n_{\mathrm h}(r,j+1))+N_\gamma(n_{\mathrm v}(r-1,j+1))+N_\gamma(n_{\mathrm v}(r,j+1))\bigr)\bmod2=0
-\quad(\because\ \text{加法の交換則})`),
+\quad\bigl(\because\ \text{加法の交換則}\bigr)`),
                       paragraph(["これは全ての ", math(String.raw`1\le r\le i`), " で成り立つ。", ref("claim_standard_dual_height_vertical_internal_conditional"), " から、"]),
                       displayMath(String.raw`f_\gamma(i,j+1)=\bigl(f_\gamma(i,j)+N_\gamma(n_{\mathrm v}(i,j+1))\bigr)\bmod2
-\quad(\because\ \blkref{claim_standard_dual_height_vertical_internal_conditional})`),
+\quad\bigl(\because\ \blkref{claim_standard_dual_height_vertical_internal_conditional}\bigr)`),
                       paragraph(["同じ主張の高さが変わる条件を適用して、通過偶奇が一であることとの同値を得る。"]),
                     ],
                   },

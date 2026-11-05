@@ -62,6 +62,37 @@ theorem closedWalk_four_edge_parity {L m : ℕ} [NeZero L]
   unfold walkBaseEdgeParity
   omega
 
+/-- 閉歩道では、横辺の全行和の偶奇が隣の列で保存される。 -/
+theorem closedWalk_horizontal_column_parity_invariant {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (j : ZMod L) :
+    (∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false i j)) % 2 =
+      (∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false i (j + 1))) % 2 := by
+  let e : ZMod L ≃ ZMod L := Equiv.addRight (-1)
+  have hshift :
+      (∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true (i - 1) (j + 1))) =
+        ∑ i : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true i (j + 1)) := by
+    exact Fintype.sum_equiv e _ _ (by intro i; simp [e, sub_eq_add_neg])
+  have hsum :
+      (∑ i : ZMod L,
+        (walkBaseEdgeParity γ (edgeOfRow L false i j) +
+          walkBaseEdgeParity γ (edgeOfRow L false i (j + 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L true (i - 1) (j + 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L true i (j + 1)))) % 2 = 0 := by
+    have hlocal (i : ZMod L) :
+        (walkBaseEdgeParity γ (edgeOfRow L false i j) +
+          walkBaseEdgeParity γ (edgeOfRow L false i (j + 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L true (i - 1) (j + 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L true i (j + 1))) % 2 = 0 := by
+      have h := closedWalk_four_edge_parity γ hγ i (j + 1)
+      simp only [add_sub_cancel_right] at h
+      omega
+    rw [Finset.sum_nat_mod]
+    simp [hlocal]
+  simp only [Finset.sum_add_distrib] at hsum
+  rw [hshift] at hsum
+  omega
+
 /-- 基点セルから列方向、次に行方向へ進む標準双対路の横断偶奇。 -/
 def standardDualHeight (L m : ℕ) [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)

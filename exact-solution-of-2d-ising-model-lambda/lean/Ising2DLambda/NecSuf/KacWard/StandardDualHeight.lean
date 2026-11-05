@@ -41,6 +41,29 @@ def standardDualHeight (L : ℕ) [NeZero L]
   ((∑ c ∈ Finset.Icc 1 cell.2.val, verticalCross 0 (c : ZMod L)) +
     (∑ r ∈ Finset.Icc 1 cell.1.val, horizontalCross (r : ZMod L) cell.2)) % 2
 
+/-- 頂点の四辺の偶奇が零なら、横辺の全行和の偶奇は隣の列で一致する。 -/
+theorem horizontalCross_column_parity_invariant (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (j : ZMod L)
+    (hvertex : ∀ i : ZMod L,
+      (horizontalCross i j + horizontalCross i (j + 1) +
+        verticalCross (i - 1) (j + 1) + verticalCross i (j + 1)) % 2 = 0) :
+    (∑ i : ZMod L, horizontalCross i j) % 2 =
+      (∑ i : ZMod L, horizontalCross i (j + 1)) % 2 := by
+  let e : ZMod L ≃ ZMod L := Equiv.addRight (-1)
+  have hshift : (∑ i : ZMod L, verticalCross (i - 1) (j + 1)) =
+      ∑ i : ZMod L, verticalCross i (j + 1) := by
+    exact Fintype.sum_equiv e _ _ (by intro i; simp [e, sub_eq_add_neg])
+  have hsum :
+      (∑ i : ZMod L,
+        (horizontalCross i j + horizontalCross i (j + 1) +
+          verticalCross (i - 1) (j + 1) + verticalCross i (j + 1))) % 2 = 0 := by
+    rw [Finset.sum_nat_mod]
+    simp [hvertex]
+  simp only [Finset.sum_add_distrib] at hsum
+  rw [hshift] at hsum
+  omega
+
 /-- 各頂点で四辺の通過和が偶数なら、長方形の対向辺の偶奇は一致する。 -/
 theorem rectangle_crossing_parity (L : ℕ) [NeZero L]
     (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
