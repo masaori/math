@@ -124,7 +124,7 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
   rw [hBherm.eq] at hBAB
   -- Step 3: `(2s_2)^{M/2} > 0` 倍も正定値（`positive_real_multiple_preserves_positive_definite`）
   rw [VPlus_eq_smul]
-  refine posDef_smul_of_pos hBAB ?_
+  refine positive_real_multiple_preserves_positive_definite_tensorPow hBAB ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact Real.rpow_pos_of_pos this _
 
@@ -344,7 +344,7 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have hEBE : (Eᴴ * B * E).PosDef := hBpos.conjTranspose_mul_mul_same hEinj
   rw [hEherm.eq] at hEBE
   rw [VPlusInv]
-  refine posDef_smul_of_pos hEBE ?_
+  refine positive_real_multiple_preserves_positive_definite_tensorPow hEBE ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact inv_pos.mpr (Real.rpow_pos_of_pos this _)
 

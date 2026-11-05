@@ -44,9 +44,9 @@
 
 - Step 3 の「スカラー倍と行列積の結合則」と `mat_mult_associative` は具体版が無く、mathlib の `Matrix.mul_smul`・`Matrix.smul_mul`・
   `Matrix.mul_assoc` を引く。`exp_hermitian_is_positive_definite` の Lean（`posDef_exp_of_isHermitian`）は人手の段と一対一でない
-  （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` の Lean（`posDef_smul_of_pos`）も、
-  人手のエルミート性の段（`real_multiple_of_hermitian_is_hermitian`）と正値性の 13 行の成分の鎖と 1 対 1 でなく、
-  mathlib の `Matrix.conjTranspose_smul`・`Matrix.smul_mulVec`・`dotProduct_smul`・`mul_pos` で閉じている。
+  （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` は、添字が `Conf M` の行列なので
+  `positive_real_multiple_preserves_positive_definite_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` で、人手の 13 行の鎖と
+  1 対 1。`ClaimPositiveRealMultiplePreservesPositiveDefinite.lean`）を引く。
 - Step 1 の「`K_1D` の成分は実」は、人手（`σ^z` 2 個と単位行列のクロネッカー積なので成分が実、実係数の有限和なので実）と論法が違い、
   `D` の対角表示から示している。
 - 実対称性の段（`halfK1D_transpose`・`physicalV1halfC_transpose`・`V2_transpose` と、実行列の `symTransfer_isSymm`）は、
@@ -71,6 +71,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimIHPauliForm
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimPartitionFunctionSandwich
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefiniteFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealMultipleOfHermitianIsHermitian
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
 
@@ -272,7 +273,7 @@ theorem physicalSymTransferC_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
       = (physicalV1halfC M K1)ᴴ * (expS2C M K2 * physicalV1halfC M K1) :=
     Matrix.mul_assoc _ _ _                                                       -- `mat_mult_associative`
   rw [physicalSymTransferC_eq_smul_congruence K1 hK2, hassoc]
-  exact posDef_smul_of_pos hcong (twoS2Pow_pos hK2)                              -- `positive_real_multiple_preserves_positive_definite`
+  exact positive_real_multiple_preserves_positive_definite_tensorPow hcong (twoS2Pow_pos hK2) -- `positive_real_multiple_preserves_positive_definite`
 
 /-- 実行列 `A` を成分ごとに `ℂ` へ埋め込んだ行列が正定値なら、`x ≠ 0` の実ベクトルで `x^⊤Ax > 0`
 （`x` を成分ごとに `ℂ` へ埋め込むと `x^*Ax = x^⊤Ax`）。 -/

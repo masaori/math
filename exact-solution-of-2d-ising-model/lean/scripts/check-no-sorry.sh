@@ -446,7 +446,7 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean・NecSuf/StarFixedScalarMultipleOfHermitian.lean）---
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean・NecSuf/StarFixedScalarMultipleOfHermitian.lean・NecSuf/PositiveMultiplePreservesPositiveDefinite.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -504,6 +504,13 @@ targets=(
   "Ising2D.congruence_preserves_positive_definite_of_necSuf'"
   Ising2D.congruence_preserves_positive_definite_of_necSuf
   Ising2D.congruence_preserves_positive_definite_tensorPow
+  Ising2D.conjugate_bilinear_value_of_positive_real_multiple
+  Ising2D.positive_real_multiple_preserves_positive_definite
+  "Ising2D.NecSuf.conjBilin_smul'"
+  "Ising2D.NecSuf.smul_preserves_pos'"
+  "Ising2D.positive_real_multiple_preserves_positive_definite_of_necSuf'"
+  Ising2D.positive_real_multiple_preserves_positive_definite_of_necSuf
+  Ising2D.positive_real_multiple_preserves_positive_definite_tensorPow
   Ising2D.Z_transpose
   Ising2D.Z_conjTranspose
   Ising2D.Y_conjTranspose
@@ -516,7 +523,6 @@ targets=(
   Ising2D.S2_transpose
   Ising2D.S2_isHermitian_by_anticommutation
   Ising2D.entries_real_of_isHermitian_of_transpose
-  Ising2D.posDef_smul_of_pos
   Ising2D.posDef_exp_of_isHermitian
   Ising2D.Vmat_posDef
   Ising2D.trace_Vmat_pos

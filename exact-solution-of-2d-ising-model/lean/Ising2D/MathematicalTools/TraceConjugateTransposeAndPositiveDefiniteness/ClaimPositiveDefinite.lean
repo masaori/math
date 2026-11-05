@@ -40,6 +40,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
@@ -225,20 +226,6 @@ section PosDef
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- **原文 `positive_real_multiple_preserves_positive_definite`**: 正定値行列の正実数倍は正定値。 -/
-theorem posDef_smul_of_pos {A : Matrix n n ℂ} (hA : A.PosDef) {r : ℝ} (hr : 0 < r) :
-    (((r : ℂ)) • A).PosDef := by
-  refine Matrix.PosDef.of_dotProduct_mulVec_pos ?_ ?_
-  · have h : (((r : ℂ)) • A)ᴴ = ((r : ℂ)) • A := by
-      rw [Matrix.conjTranspose_smul, hA.isHermitian.eq, Complex.star_def, Complex.conj_ofReal]
-    exact h
-  · intro x hx
-    have hpos := hA.dotProduct_mulVec_pos hx
-    have hr' : (0 : ℂ) < (r : ℂ) := by
-      simpa using (RCLike.ofReal_pos (K := ℂ)).2 hr
-    rw [Matrix.smul_mulVec, dotProduct_smul, smul_eq_mul]
-    exact mul_pos hr' hpos
-
 /-- **原文 `exp_hermitian_is_positive_definite`**: エルミート行列の `exp` はエルミートかつ正定値。
 
 原文は `T := exp(S/2)` について `exp(S) = T^*(IT)` と書き、`I` が正定値であること（`identity_matrix_is_positive_definite`）と
@@ -303,7 +290,7 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
     rw [Vmat, V2H2Form, matExp]
     rw [Matrix.mul_smul, Matrix.smul_mul]
   rw [hV]
-  refine posDef_smul_of_pos hBAB ?_
+  refine positive_real_multiple_preserves_positive_definite_tensorPow hBAB ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact Real.rpow_pos_of_pos this _
 
