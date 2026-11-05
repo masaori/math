@@ -69428,11 +69428,11 @@ t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 a+1\cdot b&=t_{\circ}(\Gamma_1)-t_{\circ}(\gamma)+t_{\circ}(\gamma)
 &&\bigl(\because\ a,b\text{ の定義}\bigr)\\
 &=t_{\circ}(\Gamma_1)
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr),\\
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
 a+2\cdot b&=t_{\circ}(\Gamma_1)+t_{\circ}(\gamma)
 &&\bigl(\because\ a,b\text{ の定義と }\mathbb Z\text{ の四則}\bigr)\\
 &=t_{\circ}(\Gamma_2)
-&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=1\text{ の差の等式}\bigr),\\
+&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=1\text{ の差の等式}\bigr)\\
 a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
 &&\bigl(\because\ a,b\text{ の定義、上の }a+2b=t_{\circ}(\Gamma_2)\text{、}\mathbb Z\text{ の四則}\bigr)\\
 &=t_{\circ}(\Gamma_3)
