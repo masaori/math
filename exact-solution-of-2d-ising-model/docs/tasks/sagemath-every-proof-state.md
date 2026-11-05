@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 420 件のうち、SageMath の検算が無いもの 1 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 420 件のうち、SageMath の検算が無いもの 0 件（`node sagemath/tools/verify-every-proof-has-check.ts` が exit 0）。runbook のゴールラインを満たした（ゴール台帳の該当ゴールを達成にした）。
 
 済んだもの（文書順）:
 
@@ -406,13 +406,16 @@
 - `kappa_of_K_basic`（κ(K) の基本性質と臨界点 K_c）と、そのために足した `cosh_derivative`（cosh' = sinh）: `sagemath/check/<ラベル>/`。導関数の行（(tanh)'・dK^*/dK・κ'・κ''・h(t) = cosh t/sinh² t の h'・(κ'²)'）は v = exp(K) の QQ(v) の導分 v·d/dv で、dK^*/dK の定義・定数倍・合成の行は SR の記号微分で独立に、K_c と準備（K_c > 0・cosh 2K_c = √2・√2 の小数の評価）と (2) の同値の鎖は w = exp(2K) の QQ[w] と AA で厳密に確かめた。(4)・(5) の鎖の各行は QQ の格子点 9 点ごとに a = min{K, K_c}、b = max{K, K_c} を作り、本文の exp のボールと Arb の積分で、最後の小数の行は QQ で確かめた（真偽の確認 543 件、うち対照 7 件）。`cosh_derivative` は QQ[x] の形式冪級数と差分商のボール。**人手証明を直した**（主張の数値は不変、計算の誤りは無し）: (1) K_c ∈ ℝ_{>0} を示していなかった（(2) で `critical_point_iff_kappa_zero`・`isotropic_kappa_equals_kappa_of_K` を K_c に当てるのに要る）ので sinh_strictly_increasing・sinh_zero の背理法を足し、主張に書いた。(2) cosh 2K_c = √2 と √2 の小数の評価を根拠付きの準備にした。(3) (tanh)' = 1/cosh² を商の微分と新しい主張 `cosh_derivative` で示した（本文に cosh' = sinh が無かった）。(4) κ の狭義単調増加と h の単調減少を、平均値の定理を使わず (R3)・(R4) の鎖で示した。(5) (2) を同値の鎖にした。(6) (4) の端点の式は加法定理の複号を直接使い、K ∈ ℝ_{>0} と 2K_c − 1/5 > 0 を示した。(7) (5) は K < K_c で向きの逆の積分を使っていたので a・b で書き、∫G' を (R3) の定数で挟む鎖にした。(8) 微分の公式を 1 行に複数当てていた行を分けた。主張の (2) に K ∈ ℝ_{>0}、(4)・(5) に K ∈ ℝ を書いた（下流の引用は 0 < |K − K_c| ≤ 1/10 の K ∈ ℝ_{>0} で使っており食い違わない）。注記 `remark_real_analysis_escape_chapter_E` は、cosh(1/5)・sinh(1/5) の数値の評価を本文で証明せずに持ち込むことを題と本文に明記し、微分の公式の使い道に `kappa_of_K_basic` を足した。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimKappaOfKBasic.lean` は定数と |κ''| の評価の経路が人手証明と違い、平均値の定理の必要十分版 `NecSuf/MeanValueTwoSided.lean` を使う。新しい人手証明との 1 対 1 は Lean の連続実行の受け持ち）。
 
 - `gamma_derivatives_in_kappa`（S := sinh²(κ/2) + sin²(θ/2)、γ := 2 arcsinh(√S) の半角・倍角の値、∂γ/∂κ = sinh κ/sinh γ と ∂²γ/∂κ²、|∂γ/∂κ| ≤ 1、連続性）: `sagemath/check/gamma_derivatives_in_kappa/`。等号の行は u = exp(κ/2)、q = sin²(θ/2)、r = √S、t = √(1+S) とその逆数の `QQ` 上の多項式環で関係式のイデアルを法として、微分は κ の導分 D で厳密に確かめた。合成・(√)'・arcsinh' の行は D の作り方に入るので、κ = 2 log u・θ = πp の点で Sage の記号微分（D と独立）を `AA` に直して比べた。主張と不等号は `AA` の 48 点と (4) の格子 45 点（真偽の確認 1433 件、うち対照 82 件）。**人手証明を直した**（主張の式は不変、計算の誤りは無し）: 平方根を √·^(ℝ≥0) にそろえ、√S が定まる S ≥ 0 を主張に書いた。(1) の sinh(γ/2) = √S を `gamma_kappa_identity` の流用から `sinh_of_arcsinh` の鎖に、cosh(γ/2) = √(1+S) を平方根の一意性の鎖にした。(2) の S > 0 は κ > 0 にしか使えない `cosh_sinh_basic_properties` (3) を引いていたので `sinh_is_injective`・`sinh_zero` の含意の鎖にし、sinh γ > 0 を主張に足した。微分の三本の鎖を微分の公式 1 行 1 つにした。(3) を平方根の単調性を使わず sinh²γ − sinh²κ = 4 sin²(θ/2)(1 + S + sinh²(κ/2)) ≥ 0 と背理法の鎖にした。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`ClaimGammaDerivativesInKappa.lean` の (3) は別の経路で、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。`lake build` のこのモジュールと `check-no-sorry.sh` は通る）。
+- `second_derivative_log_divergence`（|G'(κ)| ≤ 1/2 と |G''(κ) − (1/2π)log(1/|κ|)| ≤ 6/5、0 < |κ| ≤ 1/2）: `sagemath/check/second_derivative_log_divergence/`。代数の行は δ・cosh(κ/2)・sin²(θ/2)・r = √S・t = √(1+S) とその逆数の `QQ` 上の多項式環で関係式のイデアルを法として（31 件）、被積分関数の各点の行は κ = 2 log u・sin²(θ/2) が有理数の θ = πp の点で `AA` で（852 件）、積分・実対数・初等関数の値の行は RealBallField(256) と Arb の数値積分で（434 件）、有理数の行は `QQ` で確かめた。許容誤差を置いたのは (R5) の行（積分の値と差分商の比較）だけ。実際の |G'' − (1/2π)log(1/κ)| は 0.117〜0.129。**人手証明を直した**（主張と定数は不変、数値の誤りは無し）: 平方根を √·^(ℝ≥0) にそろえ r := √S、t := √(1+S) で書き直した（以前は 1/√(S(1+S)) = (1/√S)(1/√(1+S)) を「ℝ の四則」、(S(1+S))^{3/2} = S^{3/2}(1+S)^{3/2} を本文に無い冪法則としていた）。T ≥ 0 を示していなかったので足した。κ² log(1/κ) の単調増加を導関数の正から言っており（平均値の定理。`remark_real_analysis_escape_chapter_E` が使わないとした道具）、F(s) := −s² log s に (R4)・(R3) を当てる鎖にした。初等関数の値の数値の評価を注記が持ち込むものとして明記し（π の評価と log(2π) > 0 は導いた）、複数の根拠を 1 行で使う行を割り、cosh の単調性・対数の積の法則・対数の単調性・sin² ≤ 1・cosh > 0 などをラベルで引いた。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`lake build` のこのモジュールは通る。新しい行の分け方との 1 対 1 は Lean の連続実行の受け持ち）。
 
 ## 次の一歩
-`critical_point_and_log_divergence.ts` の `second_derivative_log_divergence`（`--list` の残り 1 件）。その証明の Step 3 以降の 2√(S(1+S)) を、`gamma_derivatives_in_kappa` の主張に合わせて √·^(ℝ≥0) の記法にそろえる。
+無し。2026-11-05 にゴールラインを満たし、連続実行「複素行列版イジング: 全証明の SageMath 検算」を一時停止した。下の「検算で見つかった本文の誤り」の残りは、検算の付いたブロックの見直しで扱う。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`second_derivative_log_divergence` のレビューで見つかった（残したもの）: Step 0 は γ(θ, −κ) = γ(θ, κ) の根拠に K から作った γ(θ) の主張 `gamma_kappa_identity` を引いているが、G の γ は `gamma_derivatives_in_kappa` の 2 arcsinh(√S) なので、sinh の奇関数性から S(θ, −κ) = S(θ, κ) を言うほうが引く対象と合う。最後の log(1/|κ|) → +∞ は極限の事実で、注記の持ち込むものに入っていない。Step 2 の u(s) と Step 6 の F(s) は別の意味で同じ文字 s を使う（どちらも束縛変数）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-05、`kappa_of_K_basic` の検算で見つかった（残したもの）: (4) の数値の評価 1.02006 ≤ cosh(1/5) ≤ 1.020067・0.201336 ≤ sinh(1/5) ≤ 0.2013361 は本文で証明せず、`remark_real_analysis_escape_chapter_E` が持ち込む事実として明記した（以前は「数値評価」とだけ書いて暗に持ち込んでいた）。Lean の具体版は cosh t ≥ 1 + t²/2 と cosh t ≤ (1 − t²/2)^{−1} で評価しており、人手証明も本文の exp の部分和と尾の評価で示せば外部の事実を減らせる。検算の付いたブロックの見直しで扱う。同じ単位で残した前回の項（K_c ∈ ℝ_{>0} の欠け）はこの単位で直した。
 

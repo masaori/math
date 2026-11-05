@@ -86,7 +86,9 @@ export default defineBlocks([
           ref("kappa_of_K_basic"),
           "（増分の評価）と ",
           ref("second_derivative_log_divergence"),
-          "（定数関数の積分）で使う。",
+          "（定数関数の積分と、",
+          math(String.raw`F(s) = -s^2\log s`),
+          " の増分の評価）で使う。",
         ],
         [
           "(R5) は ",
@@ -121,6 +123,14 @@ export default defineBlocks([
           " の導関数を求める段と、",
           math(String.raw`\kappa'`),
           " などの連続性を言う段で使う。",
+          ref("second_derivative_log_divergence"),
+          " でも、",
+          math(String.raw`G'`),
+          "・",
+          math(String.raw`G''`),
+          " の偶奇を合成関数の微分で言う段と、",
+          math(String.raw`F(s) = -s^2\log s`),
+          " の導関数とその連続性を言う段で使う。",
         ],
       ]),
       paragraph([
@@ -141,6 +151,23 @@ export default defineBlocks([
         math(String.raw`0.201336 \leq \sinh\tfrac15 \leq 0.2013361`),
         "。示した桁までの不等式としてだけ使う（数値検証は ",
         "sagemath/check/kappa_of_K_basic/ に置いた）。",
+      ]),
+      paragraph([
+        ref("second_derivative_log_divergence"),
+        " も、次の数値の評価を本文では証明せずに持ち込む: ",
+        math(String.raw`\sinh\tfrac14 \leq 0.2527`),
+        "、",
+        math(String.raw`\cosh\tfrac14 \leq 1.0315`),
+        "、",
+        math(String.raw`\log\cosh\tfrac14 \leq 0.0310`),
+        "、",
+        math(String.raw`\cosh\tfrac12 \leq 1.1277`),
+        "、",
+        math(String.raw`0.6931 \leq \log 2 \leq 0.6932`),
+        "、",
+        math(String.raw`\log(2\pi) \leq 1.8380`),
+        "。示した桁までの不等式としてだけ使う（数値検証は ",
+        "sagemath/check/second_derivative_log_divergence/ に置いた）。",
       ]),
     ],
     conversion: {
@@ -2247,6 +2274,49 @@ S
     ],
     proof: [
       paragraph([
+        "数値の評価。この証明は、初等関数の値の次の数値の評価を ",
+        ref("remark_real_analysis_escape_chapter_E"),
+        " から持ち込み、示した桁までの不等式としてだけ使う: ",
+        math(String.raw`\sinh\tfrac14 \leq 0.2527`),
+        "、",
+        math(String.raw`\cosh\tfrac14 \leq 1.0315`),
+        "、",
+        math(String.raw`\log\cosh\tfrac14 \leq 0.0310`),
+        "、",
+        math(String.raw`\cosh\tfrac12 \leq 1.1277`),
+        "、",
+        math(String.raw`0.6931 \leq \log 2 \leq 0.6932`),
+        "、",
+        math(String.raw`\log(2\pi) \leq 1.8380`),
+        "。円周率は ",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の ",
+        math(String.raw`3.141592 \leq \pi \leq 3.141593`),
+        " を使い、有理数の大小比較から ",
+        math(String.raw`\pi \leq 3.1416`),
+        "、",
+        math(String.raw`2\pi \geq 6.283184 \geq 6.2831`),
+        " である。",
+        math(String.raw`9.8696 \leq \pi^2`),
+        " は ",
+        ref("pi_squared_numerical_bounds"),
+        " のものである。",
+        ref("real_log_of_product"),
+        " を ",
+        math(String.raw`1\cdot1 = 1`),
+        " に当てて ",
+        math(String.raw`\log 1 = \log 1 + \log 1`),
+        "、すなわち ",
+        math(String.raw`\log 1 = 0`),
+        " であり、",
+        math(String.raw`2\pi > 1`),
+        " と ",
+        ref("real_log_strictly_increasing"),
+        " より ",
+        math(String.raw`\log(2\pi) > \log 1 = 0`),
+        " である。",
+      ]),
+      paragraph([
         "Step 0（",
         math(String.raw`\kappa > 0`),
         " としてよいこと）。",
@@ -2347,7 +2417,7 @@ G''(\kappa) = \frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^
 &\leq\frac{1}{4\pi}\int_0^{2\pi}1\,d\theta
 && (\because\ \blkref{gamma_derivatives_in_kappa})\\
 &=\frac{1}{4\pi}\cdot 2\pi
-&& (\because\ \text{定数関数の積分})\\
+&& (\because\ \text{定数関数の積分 (R4)})\\
 &=\frac12
 && (\because\ \mathbb R\text{ の四則}).
 \end{aligned}`),
@@ -2359,7 +2429,7 @@ G''(\kappa) = \frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^
         " は ",
         math(String.raw`\theta \mapsto 2\pi-\theta`),
         " で不変である。(R6) を ",
-        math(String.raw`u(t) = 2\pi - t`),
+        math(String.raw`u(s) = 2\pi - s`),
         " に適用すると ",
         math(String.raw`\int_\pi^{2\pi} = \int_0^{\pi}`),
         " となるので",
@@ -2379,28 +2449,81 @@ G''(\kappa)
 \end{aligned}`),
       paragraph([
         "Step 3（2 つの項に分ける）。",
+        "以下この証明の平方根はすべて ",
+        ref("definition_of_sqrt_r_positive"),
+        " の ",
+        math(String.raw`\sqrt{\cdot}^{(\mathbb{R}_{\ge 0})}`),
+        " である。",
         ref("gamma_derivatives_in_kappa"),
         " (1)(2) より ",
-        math(String.raw`\sinh\gamma = 2\sqrt{S(1+S)}`),
+        math(String.raw`\sinh\gamma = 2\sqrt{S(1+S)}^{(\mathbb{R}_{\ge 0})}`),
         "、",
         math(String.raw`\cosh\gamma = 1+2S`),
         "、",
+        math(String.raw`S > 0`),
+        " であり、",
         math(String.raw`S = \delta^2 + \sin^2\!\left(\tfrac\theta2\right)`),
+        " である（",
+        math(String.raw`S`),
+        " の定義と ",
+        math(String.raw`\delta`),
+        " の定義）。",
+        math(String.raw`r := \sqrt{S}^{(\mathbb{R}_{\ge 0})}`),
+        "、",
+        math(String.raw`t := \sqrt{1+S}^{(\mathbb{R}_{\ge 0})}`),
+        " と置くと、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`r, t \geq 0`),
+        "、",
+        math(String.raw`r^2 = S`),
+        "、",
+        math(String.raw`t^2 = 1+S`),
+        " である。",
+        math(String.raw`r = 0`),
+        " なら ",
+        math(String.raw`S = r^2 = 0`),
+        " となり ",
+        math(String.raw`S > 0`),
+        " に反するので ",
+        math(String.raw`r > 0`),
+        "。",
+        math(String.raw`t < 1`),
+        " なら ",
+        math(String.raw`1 + S = t^2 < 1`),
+        " となり ",
+        math(String.raw`S > 0`),
+        " に反するので ",
+        math(String.raw`t \geq 1`),
+        "。",
+        ref("sinh_double_angle_formula"),
+        " と ",
+        ref("gamma_derivatives_in_kappa"),
+        " (1) の ",
+        math(String.raw`\sinh(\tfrac\gamma2) = r`),
+        "、",
+        math(String.raw`\cosh(\tfrac\gamma2) = t`),
+        " より ",
+        math(String.raw`\sinh\gamma = 2\sinh(\tfrac\gamma2)\cosh(\tfrac\gamma2) = 2rt`),
         " である。さらに ",
-        math(String.raw`J := \int_0^{\pi}\frac{d\theta}{\sqrt{S(1+S)}}`),
+        math(String.raw`J := \int_0^{\pi}\frac{d\theta}{rt}`),
         "、",
         math(String.raw`T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta`),
-        " とおく。このとき",
+        " とおく（",
+        math(String.raw`r, t`),
+        " は ",
+        math(String.raw`\theta`),
+        " の関数である）。このとき",
       ]),
       displayMath(String.raw`\begin{aligned}
 \int_0^{\pi}\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
 &= \int_0^{\pi}\left(\frac{\cosh\kappa}{\sinh\gamma}
    - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\right)d\theta
 && (\because\ \blkref{gamma_derivatives_in_kappa}) \\
-&= \int_0^{\pi}\left(\frac{\cosh\kappa}{2\sqrt{S(1+S)}}
+&= \int_0^{\pi}\left(\frac{\cosh\kappa}{2rt}
    - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\right)d\theta
-&& (\because\ \blkref{gamma_derivatives_in_kappa}) \\
-&= \frac{\cosh\kappa}{2}\int_0^{\pi}\frac{d\theta}{\sqrt{S(1+S)}}
+&& (\because\ \sinh\gamma = 2rt) \\
+&= \frac{\cosh\kappa}{2}\int_0^{\pi}\frac{d\theta}{rt}
    - \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
 && (\because\ \text{積分の線型性 (R3)}) \\
 &= \frac{\cosh\kappa}{2}\,J - T
@@ -2409,38 +2532,92 @@ G''(\kappa)
       paragraph([
         "Step 4（",
         math(String.raw`J`),
-        " の評価）。まず各点で",
+        " の評価）。準備として、",
+        math(String.raw`\theta \in [0,\pi]`),
+        " なら ",
+        math(String.raw`\tfrac\theta2 \in [0,\tfrac\pi2]`),
+        " なので ",
+        ref("def_sin"),
+        " と ",
+        ref("arcsin_is_bijection"),
+        " より ",
+        math(String.raw`0 \leq \sin\tfrac\theta2 \leq 1`),
+        "、したがって ",
+        math(String.raw`\sin^2\tfrac\theta2 \leq 1`),
+        " である。これと ",
+        ref("cosh_sinh_basic_properties"),
+        " を使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r^2
+&= \delta^2 + \sin^2\!\left(\tfrac\theta2\right)
+&& (\because\ r^2 = S\text{ と }S\text{ の表示})\\
+&\leq \delta^2 + 1
+&& (\because\ \sin^2\tfrac\theta2 \leq 1)\\
+&= \cosh^2\!\left(\tfrac\kappa2\right)
+&& (\because\ \blkref{cosh_sinh_basic_properties}\ \text{(2)}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r > \cosh(\tfrac\kappa2)`),
+        " なら、",
+        ref("cosh_sinh_basic_properties"),
+        " (1) の ",
+        math(String.raw`\cosh(\tfrac\kappa2) > 0`),
+        " より両辺が正なので ",
+        math(String.raw`r^2 > \cosh^2(\tfrac\kappa2)`),
+        " となり直前の評価に反する。よって ",
+        math(String.raw`r \leq \cosh(\tfrac\kappa2)`),
+        " である。また ",
+        math(String.raw`t+1 \geq 2 > 0`),
+        "、",
+        math(String.raw`t(t+1) \geq 1\cdot 2 = 2`),
+        "（",
+        math(String.raw`t \geq 1`),
+        "）である。各点で",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-0 &\leq \frac{1}{\sqrt S} - \frac{1}{\sqrt{S(1+S)}}
-&& (\because S>0,\ 1+S\geq1) \\
-&= \frac{1}{\sqrt S}\left(1 - \frac{1}{\sqrt{1+S}}\right)
+\frac{1}{r} - \frac{1}{rt}
+&= \frac{1}{r}\left(1 - \frac{1}{t}\right)
+&& (\because \mathbb R\text{ の分配則}) \\
+&= \frac{1}{r}\cdot\frac{t-1}{t}
 && (\because \mathbb R\text{ の四則}) \\
-&= \frac{1}{\sqrt S}\cdot\frac{\sqrt{1+S}-1}{\sqrt{1+S}}
-&& (\because \mathbb R\text{ の四則}) \\
-&= \frac{1}{\sqrt S}\cdot\frac{S}{\sqrt{1+S}\left(\sqrt{1+S}+1\right)}
-&& (\because (\sqrt{1+S}-1)(\sqrt{1+S}+1)=S) \\
-&\leq \frac{1}{\sqrt S}\cdot\frac{S}{2}
-&& (\because \sqrt{1+S}\geq1) \\
-&= \frac{\sqrt S}{2}
-&& (\because S>0) \\
-&\leq \frac{\sqrt{\delta^2+1}}{2}
-&& (\because \sin^2(\theta/2)\leq1) \\
-&= \frac{\cosh\!\left(\frac{\kappa}{2}\right)}{2}
-&& (\because \blkref{cosh_sinh_basic_properties}).
+&= \frac{1}{r}\cdot\frac{(t-1)(t+1)}{t(t+1)}
+&& (\because t+1 \geq 2 > 0) \\
+&= \frac{1}{r}\cdot\frac{t^2-1}{t(t+1)}
+&& (\because \mathbb R\text{ の分配則}) \\
+&= \frac{1}{r}\cdot\frac{S}{t(t+1)}
+&& (\because t^2 = 1+S) \\
+&\leq \frac{1}{r}\cdot\frac{S}{2}
+&& (\because t(t+1)\geq2,\ \tfrac{S}{r} > 0) \\
+&= \frac{r^2}{2r}
+&& (\because S = r^2) \\
+&= \frac{r}{2}
+&& (\because r>0) \\
+&\leq \frac{\cosh\!\left(\frac{\kappa}{2}\right)}{2}
+&& (\because r \leq \cosh(\tfrac\kappa2)).
 \end{aligned}`,
       ),
       paragraph([
-        "この各点評価は **符号のついた片側の評価** である。(R3) の単調性を ",
+        "鎖の中の ",
+        math(String.raw`\frac{1}{r}\cdot\frac{S}{t(t+1)}`),
+        " は ",
+        math(String.raw`r > 0`),
+        "、",
+        math(String.raw`S > 0`),
+        "、",
+        math(String.raw`t(t+1) > 0`),
+        " より正なので、",
+        math(String.raw`0 \leq \frac1r - \frac1{rt}`),
+        " でもある。この各点評価は **符号のついた片側の評価** である。(R3) の単調性を ",
         math(String.raw`[0,\pi]`),
         " 上で使うと",
       ]),
       displayMath(String.raw`\begin{aligned}
 0
-&\leq \int_0^{\pi}\left(\frac{1}{\sqrt S}-\frac{1}{\sqrt{S(1+S)}}\right)d\theta
+&\leq \int_0^{\pi}\left(\frac{1}{r}-\frac{1}{rt}\right)d\theta
 && (\because\ \text{直前の各点評価と積分の単調性 (R3)})\\
-&=\int_0^{\pi}\frac{d\theta}{\sqrt S}-J
+&=\int_0^{\pi}\frac{d\theta}{r}-J
 && (\because\ J\text{ の定義と積分の線型性 (R3)})\\
 &\leq\int_0^{\pi}\frac{\cosh(\kappa/2)}{2}\,d\theta
 && (\because\ \text{直前の各点評価と積分の単調性 (R3)})\\
@@ -2452,7 +2629,7 @@ G''(\kappa)
         " を ",
         math(String.raw`\delta = \sinh(\tfrac\kappa2)`),
         " に適用し、",
-        math(String.raw`R_0 := \displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S}-2\log\frac{\pi}{\delta}`),
+        math(String.raw`R_0 := \displaystyle\int_0^{\pi}\frac{d\theta}{r}-2\log\frac{\pi}{\delta}`),
         " とおく。このとき ",
         math(String.raw`0 \leq R_0 \leq \frac{2\delta^2}{\pi^2} + B`),
         " である（",
@@ -2467,19 +2644,19 @@ G''(\kappa)
 R
 &=J-2\log\frac{\pi}{\delta}
 && (\because\ R\text{ の定義})\\
-&=R_0-\left(\int_0^{\pi}\frac{d\theta}{\sqrt S}-J\right)
+&=R_0-\left(\int_0^{\pi}\frac{d\theta}{r}-J\right)
 && (\because\ R_0\text{ の定義と }\mathbb R\text{ の四則}).
 \end{aligned}`),
       paragraph(["直前の差の評価から下界を、", ref("sine_integral_two_sided"), " から上界をそれぞれ得る。"]),
       displayMath(String.raw`\begin{aligned}
 R
-&\geq-\left(\int_0^{\pi}\frac{d\theta}{\sqrt S}-J\right)
+&\geq-\left(\int_0^{\pi}\frac{d\theta}{r}-J\right)
 && (\because\ R_0\geq0)\\
 &\geq-\frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)
 && (\because\ \text{直前の差の評価}),\\[2pt]
 R
 &\leq R_0
-&& (\because\ \int_0^{\pi}\frac{d\theta}{\sqrt S}-J\geq0)\\
+&& (\because\ \int_0^{\pi}\frac{d\theta}{r}-J\geq0)\\
 &\leq\frac{2\delta^2}{\pi^2}+B
 && (\because\ \blkref{sine_integral_two_sided}).
 \end{aligned}`),
@@ -2491,7 +2668,9 @@ R
         math(String.raw`\kappa \leq \tfrac12`),
         " のとき ",
         math(String.raw`\cosh(\tfrac\kappa2) \leq \cosh\tfrac14 \leq 1.0315`),
-        "、",
+        "（",
+        ref("cosh_monotone_on_nonnegative"),
+        "）、",
         math(String.raw`\delta \leq 0.2527`),
         "、",
         math(String.raw`9.8696 \leq \pi^2`),
@@ -2513,40 +2692,68 @@ R
         math(String.raw`T`),
         " の評価）。3/2 乗は ",
         ref("def_three_halves_power"),
-        " のものである。",
-        ref("gamma_derivatives_in_kappa"),
-        " (1) より ",
-        math(String.raw`\dfrac{\cosh\gamma}{\sinh^3\gamma} = \dfrac{1+2S}{8\left(S(1+S)\right)^{3/2}}`),
-        " であり、",
-        math(String.raw`1+2S \leq 2(1+S)`),
+        " のものである。Step 3 の ",
+        math(String.raw`r, t`),
+        " を使う。",
+        math(String.raw`S^{3/2} = S\,r = r^3`),
+        "（",
+        ref("def_three_halves_power"),
         " と ",
-        math(String.raw`(1+S)^{3/2} \geq 1+S`),
-        " より",
+        math(String.raw`r^2 = S`),
+        "）である。",
       ]),
-      displayMath(String.raw`0\leq\frac{\cosh\gamma}{\sinh^3\gamma}
-\qquad(\because\ \blkref{gamma_derivatives_in_kappa},\ S>0).`),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\cosh\gamma}{\sinh^3\gamma}
-&= \frac{1+2S}{8\left(S(1+S)\right)^{3/2}}
-&& (\because\ \blkref{gamma_derivatives_in_kappa}) \\
-&= \frac{1+2S}{8\,S^{3/2}(1+S)^{3/2}}
-&& (\because\ \text{正の数の冪法則}) \\
-&\leq \frac{2(1+S)}{8\,S^{3/2}(1+S)^{3/2}}
-&& (\because\ 1+2S\leq2(1+S)) \\
-&\leq \frac{2(1+S)}{8\,S^{3/2}(1+S)}
-&& (\because\ (1+S)^{3/2}\geq1+S) \\
+&= \frac{1+2S}{(2rt)^3}
+&& (\because\ \blkref{gamma_derivatives_in_kappa}\text{ と }\sinh\gamma = 2rt) \\
+&= \frac{1+2S}{8\,r^3t^3}
+&& (\because\ \text{積の冪}) \\
+&\leq \frac{2(1+S)}{8\,r^3t^3}
+&& (\because\ 1+2S\leq2+2S,\ 8r^3t^3>0) \\
+&= \frac{2t^2}{8\,r^3t^3}
+&& (\because\ t^2 = 1+S) \\
+&= \frac{1}{4\,r^3t}
+&& (\because\ \mathbb R\text{ の四則}) \\
+&\leq \frac{1}{4\,r^3}
+&& (\because\ t\geq1,\ r>0) \\
 &= \frac{1}{4\,S^{3/2}}
-&& (\because\ \mathbb R\text{ の四則}).
+&& (\because\ S^{3/2} = r^3).
 \end{aligned}`,
       ),
       paragraph([
+        "また 2 行目の値は ",
+        math(String.raw`1+2S > 0`),
+        "、",
+        math(String.raw`8r^3t^3 > 0`),
+        " なので正であり、",
+        math(String.raw`\sinh^2\kappa \geq 0`),
+        " と合わせて、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T
+&=\int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
+&& (\because\ T\text{ の定義})\\
+&\geq\int_0^{\pi}0\,d\theta
+&& (\because\ \text{被積分関数}\geq0\text{ と積分の単調性 (R3)})\\
+&=0
+&& (\because\ \text{定数関数の積分 (R4)}).
+\end{aligned}`),
+      paragraph([
         ref("sine_half_angle_linear_bounds"),
         " より ",
-        math(String.raw`\sin\!\left(\tfrac\theta2\right) \geq c_0\tfrac\theta2`),
-        " なので ",
-        math(String.raw`S \geq \delta^2 + \dfrac{c_0^2\theta^2}{4}`),
-        "、したがって (R3) と ",
+        math(String.raw`\sin\!\left(\tfrac\theta2\right) \geq c_0\tfrac\theta2 \geq 0`),
+        " なので、両辺を 2 乗して ",
+        math(String.raw`S \geq w := \delta^2 + \dfrac{c_0^2\theta^2}{4} \geq \delta^2 > 0`),
+        "。",
+        math(String.raw`\sqrt{w}^{(\mathbb{R}_{\ge 0})} \leq r`),
+        "（逆なら両辺が 0 以上なので ",
+        math(String.raw`w > r^2 = S`),
+        " となり矛盾）から ",
+        math(String.raw`w^{3/2} = w\sqrt{w}^{(\mathbb{R}_{\ge 0})} \leq S\,r = S^{3/2}`),
+        "、したがって ",
+        math(String.raw`\dfrac{1}{S^{3/2}} \leq \dfrac{1}{w^{3/2}}`),
+        " である。(R3) と ",
         ref("three_halves_power_integral_bound"),
         "（",
         math(String.raw`a = c_0`),
@@ -2555,10 +2762,14 @@ R
       displayMath(
         String.raw`\begin{aligned}
 T
-&\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{S^{3/2}}
-&& (\because \text{直前の各点評価と (R3) の単調性}) \\
+&= \int_0^{\pi}\sinh^2\kappa\cdot\frac{\cosh\gamma}{\sinh^3\gamma}\,d\theta
+&& (\because T\text{ の定義}) \\
+&\leq \int_0^{\pi}\sinh^2\kappa\cdot\frac{1}{4S^{3/2}}\,d\theta
+&& (\because \text{直前の各点評価に }\sinh^2\kappa\geq0\text{ を掛け、(R3) の単調性}) \\
+&= \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{S^{3/2}}
+&& (\because \text{(R3) の線型性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{\left(\delta^2+\frac{c_0^2\theta^2}{4}\right)^{3/2}}
-&& (\because \blkref{sine_half_angle_linear_bounds}\text{ と (R3) の単調性}) \\
+&& (\because \tfrac{1}{S^{3/2}}\leq\tfrac{1}{w^{3/2}}\text{ と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\cdot\frac{2}{c_0\delta^2}
 && (\because \blkref{three_halves_power_integral_bound}) \\
 &= \frac{4\delta^2\cosh^2\!\left(\frac{\kappa}{2}\right)}{4}\cdot\frac{2}{c_0\delta^2}
@@ -2566,7 +2777,7 @@ T
 &= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0}
 && (\because \delta>0\text{ と }\mathbb R\text{ の四則}) \\
 &\leq \frac{2\cdot 1.0315^2}{0.5887}
-&& (\because \kappa \leq \tfrac12,\ \cosh(\tfrac\kappa2)\leq1.0315,\ \blkref{sine_bound_constant_numerical_bounds}:c_0\geq0.5887) \\
+&& (\because \kappa \leq \tfrac12,\ \cosh(\tfrac\kappa2)\leq\cosh\tfrac14\leq1.0315\ (\blkref{cosh_monotone_on_nonnegative}),\ \blkref{sine_bound_constant_numerical_bounds}:c_0\geq0.5887) \\
 &\leq 3.615
 && (\because \text{有理数の大小比較})
 \end{aligned}`,
@@ -2579,7 +2790,7 @@ T
         " に直す）。",
         ref("sinh_at_least_argument"),
         " と ", ref("sinh_at_most_argument_times_cosh"), " を ",
-        math(String.raw`t = \tfrac\kappa2`),
+        math(String.raw`\tfrac\kappa2 \in \mathbb{R}_{\geq 0}`),
         " に適用すると ",
         math(String.raw`\tfrac\kappa2 \leq \delta \leq \tfrac\kappa2\cosh\tfrac\kappa2`),
         " となる。正の数の逆数の順序と対数の単調性を順に使う。",
@@ -2592,10 +2803,14 @@ T
 &\leq 2
 && (\because\ \frac\kappa2\leq\delta),\\[2pt]
 -\log\cosh\!\left(\frac{\kappa}{2}\right)
+&=\log\frac{2}{\cosh\!\left(\frac{\kappa}{2}\right)}-\log 2
+&& (\because\ \blkref{real_log_of_product})\\
 &\leq\log\frac{\kappa}{\delta}-\log 2
-&& (\because\ \text{直前の左辺の評価と対数の単調性})\\
-&\leq 0
-&& (\because\ \text{直前の右辺の評価と対数の単調性}).
+&& (\because\ \text{直前の左辺の評価と }\blkref{real_log_strictly_increasing})\\
+&\leq\log 2-\log 2
+&& (\because\ \text{直前の右辺の評価と }\blkref{real_log_strictly_increasing})\\
+&=0
+&& (\because\ \mathbb R\text{ の四則}).
 \end{aligned}`,
       ),
       paragraph([
@@ -2608,25 +2823,28 @@ T
       displayMath(String.raw`\begin{aligned}
 \log\frac{\pi}{\delta}
 &=\log\frac1\kappa+\log\pi+\log\frac\kappa\delta
-&& (\because\ \text{対数の積の法則})\\
+&& (\because\ \blkref{real_log_of_product})\\
 &=\log\frac1\kappa+\log(2\pi)+\left(\log\frac\kappa\delta-\log2\right)
-&& (\because\ \text{対数の積の法則})\\
+&& (\because\ \blkref{real_log_of_product})\\
 &=\log\frac1\kappa+\log(2\pi)+\rho
 && (\because\ \rho\text{ の定義}),\\[2pt]
 |\rho|
 &\leq\log\cosh\!\left(\frac\kappa2\right)
 && (\because\ -\log\cosh\!\left(\frac\kappa2\right)\leq\rho\leq0)\\
 &\leq\log\cosh\tfrac14
-&& (\because\ \text{直前の評価と対数の単調性})\\
+&& (\because\ \text{直前の評価と }\blkref{real_log_strictly_increasing})\\
 &\leq0.0310
-&& (\because\ \text{有理数による数値上界}).
+&& (\because\ \text{数値の評価 }\log\cosh\tfrac14\leq0.0310).
 \end{aligned}`),
       paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}
+&= \cosh\kappa\left(\log\frac1\kappa+\log(2\pi)+\rho\right) - \log\frac{1}{\kappa}
+&& (\because\ \text{直前の }\log\tfrac\pi\delta\text{ の表示})\\
 &= \left(\cosh\kappa - 1\right)\log\frac{1}{\kappa}
  + \cosh\kappa\left(\log(2\pi) + \rho\right)
+&& (\because\ \mathbb R\text{ の分配則}).
 \end{aligned}`,
       ),
       paragraph(["右辺第 1 項は、", ref("cosh_half_angle_formula"), " と ", ref("sinh_at_most_argument_times_cosh"), " より"]),
@@ -2634,26 +2852,85 @@ T
 \cosh\kappa-1
 &=2\sinh^2\!\left(\frac\kappa2\right)
 &&\bigl(\because\ \blkref{cosh_half_angle_formula}\bigr)\\
+&\leq2\left(\frac\kappa2\cosh\frac\kappa2\right)^2
+&&\bigl(\because\ \blkref{sinh_at_most_argument_times_cosh}\text{ を }\tfrac\kappa2\text{ に。両辺は }0\text{ 以上なので 2 乗しても向きは保たれる}\bigr)\\
 &\leq2\left(\frac\kappa2\cosh\frac14\right)^2
-&&\bigl(\because\ \blkref{sinh_at_most_argument_times_cosh}\text{、}\blkref{cosh_monotone_on_nonnegative}\text{ と }0<\kappa\leq\tfrac12\bigr)\\
+&&\bigl(\because\ \blkref{cosh_monotone_on_nonnegative}\text{ と }0<\kappa\leq\tfrac12\bigr)\\
 &\leq0.532\,\kappa^2
 &&\bigl(\because\ \cosh\tfrac14\text{ の数値上界}\bigr).
 \end{aligned}`),
       paragraph([
-        math(String.raw`\kappa^2\log\frac1\kappa`),
-        " は ",
-        math(String.raw`(0,\tfrac12]`),
-        " 上単調増加（導関数 ",
-        math(String.raw`\kappa\left(2\log\frac1\kappa - 1\right) > 0`),
-        "）で最大値は ",
-        math(String.raw`\tfrac14\log 2 \leq 0.1733`),
-        " なので",
+        "次に ",
+        math(String.raw`F(s) := -s^2\log s`),
+        "（",
+        math(String.raw`s \in [\kappa, \tfrac12]`),
+        "）と置く。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（積・恒等関数・",
+        math(String.raw`\log'(x) = 1/x`),
+        "）より ",
+        math(String.raw`F`),
+        " は微分可能で ",
+        math(String.raw`F'(s) = -2s\log s - s^2\cdot\tfrac1s = s\left(-2\log s - 1\right)`),
+        " である。",
+        math(String.raw`F'`),
+        " も同じ公式から微分可能なので、「微分可能な関数は連続である」より連続である。",
+        math(String.raw`0 < s \leq \tfrac12`),
+        " なら ",
+        ref("real_log_strictly_increasing"),
+        " と ",
+        ref("real_log_of_product"),
+        "（",
+        math(String.raw`\log\tfrac12 + \log 2 = \log 1 = 0`),
+        "）より ",
+        math(String.raw`\log s \leq \log\tfrac12 = -\log 2 \leq -0.6931`),
+        "、したがって ",
+        math(String.raw`-2\log s - 1 \geq 0.3862 > 0`),
+        " で ",
+        math(String.raw`F'(s) > 0`),
+        " である。また ",
+        math(String.raw`\log\tfrac1\kappa = -\log\kappa`),
+        "（",
+        ref("real_log_of_product"),
+        " を ",
+        math(String.raw`\kappa\cdot\tfrac1\kappa = 1`),
+        " に）なので ",
+        math(String.raw`\kappa^2\log\tfrac1\kappa = F(\kappa)`),
+        " である。",
+        math(String.raw`\tfrac1\kappa \geq 2 > 1`),
+        " と ",
+        ref("real_log_strictly_increasing"),
+        " より ",
+        math(String.raw`\log\tfrac1\kappa > \log 1 = 0`),
+        "（",
+        math(String.raw`\log 1 = 0`),
+        " は数値の評価の段）、",
+        ref("cosh_at_least_one"),
+        " より ",
+        math(String.raw`\cosh\kappa - 1 \geq 0`),
+        " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
+\kappa^2\log\frac1\kappa
+&=F(\kappa)
+&&\bigl(\because\ \text{直前の式}\bigr)\\
+&=F\!\left(\tfrac12\right)-\int_\kappa^{1/2}F'(s)\,ds
+&&\bigl(\because\ \text{(R4) を }F\text{ で}\bigr)\\
+&\leq F\!\left(\tfrac12\right)-\int_\kappa^{1/2}0\,ds
+&&\bigl(\because\ F'\geq0\text{ と積分の単調性 (R3)}\bigr)\\
+&=F\!\left(\tfrac12\right)
+&&\bigl(\because\ \text{(R4) を定数関数 }0\text{ で}\bigr)\\
+&=\tfrac14\log2
+&&\bigl(\because\ F\text{ の定義と }-\log\tfrac12=\log2\bigr)\\
+&\leq0.1733
+&&\bigl(\because\ \log2\leq0.6932\bigr).
+\end{aligned}`),
+      paragraph(["これを使うと"]),
+      displayMath(String.raw`\begin{aligned}
 0&\leq(\cosh\kappa-1)\log\frac1\kappa
-&&\bigl(\because\ \cosh\kappa\geq1,\ 0<\kappa\leq\tfrac12\bigr)\\
+&&\bigl(\because\ \cosh\kappa-1\geq0,\ \log\tfrac1\kappa>0\bigr)\\
 &\leq0.532\,\kappa^2\log\frac1\kappa
-&&\bigl(\because\ \text{直前の }\cosh\kappa-1\text{ の上界}\bigr)\\
+&&\bigl(\because\ \text{直前の }\cosh\kappa-1\text{ の上界と }\log\tfrac1\kappa>0\bigr)\\
 &\leq0.532\cdot0.1733
 &&\bigl(\because\ \kappa^2\log(1/\kappa)\leq0.1733\bigr)\\
 &\leq0.093
@@ -2662,7 +2939,9 @@ T
       paragraph([
         "第 2 項は ",
         math(String.raw`\cosh\kappa \leq \cosh\tfrac12 \leq 1.1277`),
-        "、",
+        "（",
+        ref("cosh_monotone_on_nonnegative"),
+        "）、",
         math(String.raw`\log(2\pi) \leq 1.8380`),
         " より",
       ]),
@@ -2705,7 +2984,7 @@ T
  + \frac{\cosh\kappa}{2}|R| + |T|
 &&\bigl(\because\ \text{直前の }G''\text{ の表示と三角不等式}\bigr) \\
 &\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.615
-&&\bigl(\because\ \text{Step 4、Step 5、Step 6 の上界}\bigr) \\
+&&\bigl(\because\ \text{Step 4、Step 5（}T\geq0\text{ より }|T|=T\text{）、Step 6 の上界}\bigr) \\
 &\leq 2.201 + 0.915 + 3.615
 &&\bigl(\because\ \tfrac{1.1277}{2}\cdot1.621\leq0.915\bigr) \\
 &= 6.731
@@ -2745,6 +3024,7 @@ G''(\kappa)
       status: "added",
       notes: [
         "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.08 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",
+        "2026-11-05（全証明の SageMath 検算）: 平方根を √·^(ℝ≥0) の記法にそろえ、Step 3 で r := √S、t := √(1+S) と置いて r > 0・t ≥ 1 を示し、sinh γ = 2rt（sinh_double_angle_formula と gamma_derivatives_in_kappa (1)）で書き直した（以前の Step 4 は 1/√(S(1+S)) = (1/√S)(1/√(1+S)) を「ℝ の四則」としていた）。Step 4 の各点評価を r, t の鎖に、Step 5 の (S(1+S))^{3/2} = S^{3/2}(1+S)^{3/2}（本文に無い冪法則）を r³t³ の鎖にし、w^{3/2} ≤ S^{3/2} の理由を書いた。T ≥ 0 を示していなかった（Step 7 で |T| ≤ 3.615 に使う）ので足した。Step 6 の κ² log(1/κ) の単調増加は導関数の正から言っており平均値の定理（remark_real_analysis_escape_chapter_E が使わないとした道具）に当たるので、F(s) := −s² log s に (R4)・(R3) を当てる鎖にした。初等関数の値の数値の評価（sinh(1/4)・cosh(1/4)・log cosh(1/4)・cosh(1/2)・log 2・log(2π) の上界）を remark_real_analysis_escape_chapter_E が持ち込むものとして明記し（π ≤ 3.1416・2π ≥ 6.2831 は remark_real_analysis_facts_R3_R4 の π の評価から、log(2π) > 0 は対数の単調性から導いた）、Step 4 の r ≤ cosh(κ/2) と sin²(θ/2) ≤ 1 を根拠付きの準備にし、Step 5・6 の複数の根拠を 1 行で使っていた行を割り、F' の連続性・log(1/κ) > 0・cosh κ ≥ 1 の根拠を書き、cosh の単調性・対数の積の法則・対数の単調性をラベルで引いた。主張と定数は不変。検算は sagemath/check/second_derivative_log_divergence/。",
       ],
     },
   },
