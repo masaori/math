@@ -8,5 +8,6 @@
  */
 
 import mathematicalToolkit from "./chapters/mathematical-toolkit.ts";
+import complexMatrixAlgebra from "./chapters/complex-matrix-algebra.ts";
 
-export default [...mathematicalToolkit] as const;
+export default [...mathematicalToolkit, ...complexMatrixAlgebra] as const;
