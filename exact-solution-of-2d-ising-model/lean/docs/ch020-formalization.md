@@ -77,7 +77,7 @@
 | `Ising2D.cosh_sinh_basic_properties_3` | (3) の主張全体 `cosh x > sinh x > 0` | (3) |
 | `Ising2D.cosh_sinh_basic_properties_1_of_necSuf`・`Ising2D.cosh_sinh_basic_properties_3_of_necSuf` | 同じ主張を `NecSuf/HyperbolicBasicPropertiesFromMonotoneMap.lean` の特殊化として得る（`ClaimCoshSinhBasicPropertiesFromNecSuf.lean`） | (1)・(3) |
 
-### 1.2 `CriticalPoint/CriticalPointAndLogDivergence/DefinitionKappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）
+### 1.2 `CriticalPoint/CriticalPointAndLogDivergence/DefinitionKappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`, `def_isotropic_dual_coupling`, `def_isotropic_kappa_of_K`, `isotropic_kappa_equals_kappa_of_K`, `isotropic_gamma_in_kappa`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -88,12 +88,12 @@
 | `Ising2D.Sparam` / `Sparam_nonneg` / `Sparam_even` | `S(θ) := sinh²(κ/2) + A sin²(θ/2)` | `gamma_kappa_identity` |
 | `Ising2D.sinh_half_gammaFn_sq` | **`sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)`** | `gamma_kappa_identity` (2) |
 | `Ising2D.gammaFn_eq_two_arsinh` | **`γ(θ) = 2 arcsinh √S`** | `gamma_kappa_identity` (3) |
-| `Ising2D.sinh_two_mul_sinh_two_Kstar` | `sinh 2K sinh 2K^* = 1`（`K^*` は `def_second_dual_coupling_constant` の `Kstar`。`s2star_eq_inv_s2` から） | `def_transfer_matrix_symbols` の `K^*` の定義として引く関係 |
-| `Ising2D.isoParam_K2star` | 等方な場合の `K_2^*` は `Kstar K`（定義から `rfl`） | `isotropic_A_equals_one` の証明の `K_2^* = K^*` |
+| `Ising2D.sinh_two_mul_sinh_two_Kstar` | `sinh 2K sinh 2K^* = 1`（`K^*` は `def_second_dual_coupling_constant` の `Kstar`。`s2star_eq_inv_s2` から） | `second_dual_coupling_relation`（`isotropic_A_equals_one` の鎖の 3→4 行目が引く） |
+| `Ising2D.isoParam_K2star` | 等方な場合の `K_2^*` は `Kstar K`（定義から `rfl`） | `isotropic_kappa_equals_kappa_of_K` の準備の `K_2^* = K^*` |
 | `Ising2D.critical_point_iff_kappa_zero` | **`sinh 2K_1 sinh 2K_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0`** | `critical_point_iff_kappa_zero` |
-| `Ising2D.isoParam` / `AP_isoParam` | 等方な場合 `K_1=K_2=K` と **`A = 1`** | `isotropic_A_equals_one` (1) |
-| `Ising2D.kappaK` / `kappaP_isoParam` | **`κ(K) = 2K - 2K^*`** | `isotropic_A_equals_one` (2) |
-| `Ising2D.gammaFn_isoParam` | 等方な場合の `γ(θ) = 2 arcsinh√(sinh²(κ/2)+sin²(θ/2))` | `isotropic_A_equals_one` (3) |
+| `Ising2D.isoParam` / `AP_isoParam` | 等方な場合 `K_1=K_2=K` と **`A = 1`** | `isotropic_A_equals_one` |
+| `Ising2D.kappaK` / `kappaP_isoParam` | **`κ(K) = 2K - 2K^*`** | `def_isotropic_kappa_of_K` / `isotropic_kappa_equals_kappa_of_K` |
+| `Ising2D.gammaFn_isoParam` | 等方な場合の `γ(θ) = 2 arcsinh√(sinh²(κ/2)+sin²(θ/2))` | `isotropic_gamma_in_kappa` |
 
 ### 1.3 `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean`（ラベル `kappa_of_K_basic`）
 
@@ -208,7 +208,7 @@
 **`specific_heat_log_divergence` が仮定しているもの**: `K ∈ Dnbhd`（`= [K_c-1/10, K_c+1/10]`）
 と `K ≠ K_c` の 2 つだけで、これは原文の `0 < |K-K_c| ≤ 1/10` そのものである。
 **橋渡しに追加の仮定は要らなかった**——`gammaFn (isoParam K hK) θ` と `gammaK θ (kappaK K)` は
-`isotropic_A_equals_one`（`gammaFn_isoParam`）を展開すると定義的に等しく、
+`isotropic_gamma_in_kappa`（`gammaFn_isoParam`）を展開すると定義的に等しく、
 章 012 の `onsager_free_energy_expression` の極限値の積分項がそのまま `Gfun (kappaK K)` になる。
 
 `d²f/dK²` は `deriv (deriv fFun)`（mathlib の `deriv` の 2 回適用）で表した。

@@ -11,7 +11,7 @@
 1. **橋渡し**（人手証明 Step 1）。章 018 の `Ising2D.onsager_exact_solution`（および章 012 の
    `Ising2D.onsager_free_energy_expression`）が与える自由エネルギーは
    `1/2 log(2 sinh 2K_2) + (1/4π)∫_0^{2π} γ_P(θ) dθ` という**極限**の形をしている。
-   等方な場合 `P = isoParam K`（`K_1 = K_2 = K`）にこれを適用すると、`isotropic_A_equals_one`
+   等方な場合 `P = isoParam K`（`K_1 = K_2 = K`）にこれを適用すると、`isotropic_gamma_in_kappa`
    （`Ising2D.gammaFn_isoParam`）より被積分関数が `Ising2D.gammaK θ (kappaK K)` に一致するので、
    積分項は章 020 の `Ising2D.Gfun (kappaK K)` そのものになる。これが
    `Ising2D.fFun K := 1/2 log(2 sinh 2K) + Gfun (kappaK K)` であり、
@@ -43,7 +43,7 @@ open scoped Topology
 /-! ## 1. 橋渡し（人手証明 Step 1）: 章 012・018 の `f` と章 020 の `G ∘ κ` の同一視 -/
 
 /-- **人手証明 Step 1 の恒等式**: 等方な場合の `γ(θ)`（章 012 の `gammaFn`）は
-章 020 の `γ(θ, κ(K))`（`gammaK`）に一致する。`isotropic_A_equals_one` そのもの。 -/
+章 020 の `γ(θ, κ(K))`（`gammaK`）に一致する。`isotropic_gamma_in_kappa` そのもの。 -/
 theorem gammaFn_isoParam_eq_gammaK (K : ℝ) (hK : 0 < K) (θ : ℝ) :
     gammaFn (isoParam K hK) θ = gammaK θ (kappaK K) := by
   rw [gammaFn_isoParam K hK θ]

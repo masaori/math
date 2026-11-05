@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-05: 証明を持つブロック 417 件のうち、SageMath の検算が無いもの 4 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-05: 証明を持つブロック 419 件のうち、SageMath の検算が無いもの 3 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -401,12 +401,16 @@
 - `gamma_kappa_identity`（γ_1 = cosh γ = cosh κ + 2A sin²(θ/2)、sinh²(γ/2) = sinh²(κ/2) + A sin²(θ/2)、γ = 2 arcsinh(√…)、κ について偶）: `sagemath/check/gamma_kappa_identity/`。行の等号を `QQ` 上の 12 変数の多項式環で、各行が引いた関係式 1 本だけを法として成り立ち抜くと成り立たないことで確かめ、加法定理・半角公式・sinh の奇性を本文の exp の部分和から作った形式冪級数で、倍角公式を冪級数と θ = πr の `QQbar` で厳密に確かめた。具体値（(K_1, K_2^*) 6 組 × θ 10 点）は本文の exp を囲むボールと本文の定義どおりの arccosh・arcsinh で全行を確かめた（真偽の確認 1822 件、うち対照 112 件）。人手証明を直した（主張は不変、計算の誤りは無し）: Step 2 の「両辺から 1 を引いて 2 で割る」を主張の左辺から始まる鎖に、Step 1 の記号の代入・加法定理・κ と A の定義を一行ずつに、γ_1 = cosh γ を `arccosh_properties` (2) と `def_gamma_theta` の鎖に（γ_1 ≥ 1 に `gamma1_lower_bound_all_theta`）、Step 3 の散文の平方根の一意性と arcsinh の適用を γ(θ) から始まる 4 行の鎖に、偶関数性を `sinh_is_odd` を引く 5 行の鎖にし、平方根を本文の実数の平方根の記法 √·^(ℝ≥0) にした。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`DefinitionKappaAndCritical.lean` と新しい行の 1 対 1 は Lean の連続実行の受け持ち）。
 - `critical_point_iff_kappa_zero`（s_1s_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0、あわせて κ = 0 ⟺ c_1 = s_1c_2）: `sagemath/check/critical_point_iff_kappa_zero/`。同値の各行を `QQ` 上の 7 変数の多項式環で、左右の条件が引いた関係式のもとで互いの倍元になること（関係式を抜くと成り立たないこと）で厳密に確かめた。主張は t = exp(−2K_2^*)・u = exp(−2K_1) の `QQ(t,u)` で (s_1s_2 − 1)·u(1−t²) = (t−u)(1+tu) を厳密に確かめ、具体値（30 点。臨界 5 点と差 ±10^{-6} の点を含む）は本文の exp のボールで各行の真偽の一致を確かめた（645 件、うち対照 5 件）。人手証明を直した（主張は不変、計算の誤りは無し）: sinh(2K_2)sinh(2K_2^*) = 1 の根拠を `def_transfer_matrix_symbols` から `second_dual_coupling_relation` へ、s_2 > 0 の根拠を `cosh_sinh_basic_properties` (3) から `indexed_hyperbolic_abbreviations_positive` へ引き直し、準備 s_2^* = 1/s_2 を鎖に、(2)⟺(3) の「明らか」と主張の文の κ = 0 ⟺ c_1 = s_1c_2 を同値の鎖にし、記号の帰属を書いた。三回のレビューで指摘が無くなるまで直した。Lean は不変（新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
 
+- `isotropic_A_equals_one`（等方な場合 A = 1）・`isotropic_kappa_equals_kappa_of_K`（κ = κ(K)）・`isotropic_gamma_in_kappa`（γ(θ) = 2 arcsinh(√(sinh²(κ(K)/2) + sin²(θ/2)))）: `sagemath/check/<ラベル>/`（共通の準備 `sagemath/_shared/isotropic_balls.sage`）。A の鎖と準備 K_2^* = K^* は exp(−2K_i) の有理関数体で、仮定 K_i = K の代入と代入しない対照で厳密に、κ の鎖は多項式環で各行の関係式 1 本だけを法として成り立ち抜くと成り立たないことで、γ の鎖は根号の中身と sinh² の引数の等号で厳密に確かめた。具体値（K 7 点 × θ 7 点。K_c の近くの 4407/10000 を含む）は本文の exp のボールと、定義どおりに作った γ = arccosh(γ_1) で確かめた（真偽の確認 63・77・357 件）。**人手証明を直した**（計算の誤りは無し）: (1) 旧い証明は K^* を def_transfer_matrix_symbols から引き「K^* の定義そのものが sinh(2K)sinh(2K^*) = 1」と書いていたが、そこに K^* の定義は無いので、K_2^* を `def_second_dual_coupling_constant`、積 = 1 を `second_dual_coupling_relation`、s_1・s_2^* の展開を `def_indexed_hyperbolic_abbreviations` から引いた。(2) 旧いブロックは A = 1・K^* と κ(K) の定義・γ の式を一つに持っていたので、定義 `def_isotropic_dual_coupling`（K^* := −(1/2)log(tanh K)）・`def_isotropic_kappa_of_K` と主張 `isotropic_kappa_equals_kappa_of_K`・`isotropic_gamma_in_kappa` に分けた（1 ブロック 1 主張）。下流（`kappa_of_K_basic`・`gamma_derivatives_in_kappa`・`second_derivative_log_divergence`・`specific_heat_log_divergence`・章末の主張）の引用を付け替え、`kappa_of_K_basic` の K^* の根拠（同じく def_transfer_matrix_symbols を引いていた）と (2) の κ と κ(K) のつなぎを直した。平方根を √·^(ℝ≥0) にした。三回のレビューで必須の指摘が無くなるまで直した。Lean は対応のコメントと `lean/docs/ch020-formalization.md` の表だけを付け替えた（定理は不変。新しい行との 1 対 1 は Lean の連続実行の受け持ち）。
+
 ## 次の一歩
-`critical_point_and_log_divergence.ts` の `isotropic_A_equals_one`（`--list` の先頭）から、文書順に検算を足す。
+`critical_point_and_log_divergence.ts` の `kappa_of_K_basic`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-05、`isotropic_A_equals_one` の分割のレビューで見つかった（残したもの。今回の差分より前から）: `kappa_of_K_basic` の (2) の証明は、`isotropic_kappa_equals_kappa_of_K` と `critical_point_iff_kappa_zero` を K = K_c で使うのに要る K_c ∈ ℝ_{>0} を示していない（2K_c = log(1+√2) だけ）。次の単位（`kappa_of_K_basic` の検算）で直す。また `gamma_derivatives_in_kappa` の γ(θ, κ) := 2 arcsinh(√S) は記法の付かない √ のままで、`isotropic_gamma_in_kappa` の √·^(ℝ≥0) と記法がそろっていない（下流の「γ(θ) = γ(θ, κ(K))」の行はこの二つをつなぐ）。そのブロックの検算の単位で √·^(ℝ≥0) にそろえる。
 
 - 2026-11-05、`gamma_kappa_identity` の検算で見つかった（残したもの。今回の差分より前から）: Step 1 の倍角公式 cos θ = 1 − 2 sin²(θ/2) と θ ∈ ℝ での cos θ・sin(θ/2) は、全実数上の cos・sin（`def_sin`・`def_cos` は [−π/2, π/2] だけ）と倍角公式のブロックが本文に無いまま引かれている（`def_gamma1_gamma2_of_theta` の項の偶奇性と同じ欠け）。直すには全実数上の cos・sin とその倍角公式を計算公式の章に置いて引く。下流の κ の章の主張（`critical_point_iff_kappa_zero` 以降）が引く第 3 式の平方根は、この単位で √·^(ℝ≥0) の記法にした。検算の付いたブロックの見直しで扱う。
 

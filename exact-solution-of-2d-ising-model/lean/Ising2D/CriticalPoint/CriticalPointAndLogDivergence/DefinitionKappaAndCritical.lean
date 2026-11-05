@@ -7,6 +7,10 @@
 - `critical_003_claim_gamma_kappa_identity`（ラベル `gamma_kappa_identity`）
 - `critical_004_claim_critical_point_iff_kappa_zero`（ラベル `critical_point_iff_kappa_zero`）
 - `critical_005_claim_isotropic_setting`（ラベル `isotropic_A_equals_one`）
+- `critical_point_definition_isotropic_dual_coupling`（ラベル `def_isotropic_dual_coupling`。`Kstar`。`def_second_dual_coupling_constant` と同じ関数で、このファイルでは定義しない）
+- `critical_point_definition_isotropic_kappa_of_K`（ラベル `def_isotropic_kappa_of_K`。`kappaK`）
+- `critical_point_claim_isotropic_kappa_equals_kappa_of_K`（ラベル `isotropic_kappa_equals_kappa_of_K`。`kappaP_isoParam`）
+- `critical_point_claim_isotropic_gamma_in_kappa`（ラベル `isotropic_gamma_in_kappa`。`gammaFn_isoParam`）
 
 **具体版**（人手証明と同じ抽象度）。`γ` は 012 章で形式化済みの `Ising2D.gammaFn`
 （`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）をそのまま使う。
@@ -14,9 +18,10 @@
 ## 原文との対応で明示した前提
 
 `K^*` は `def_second_dual_coupling_constant` の `Ising2D.Kstar`（`-(1/2) log(tanh K)`）だけを使う。
-人手が `def_transfer_matrix_symbols` の `K^*` の定義として引く `sinh 2K sinh 2K^* = 1` は、
-`duality_c2_star_eq_s2_star_c2` の第一式 `s2star_eq_inv_s2`（`sinh 2K^* = 1/sinh 2K`）から得る
-（`sinh_two_mul_sinh_two_Kstar`）。
+人手の `isotropic_A_equals_one` の鎖の最後の行が `second_dual_coupling_relation` から引く
+`sinh 2K_2 sinh 2K_2^* = 1` は、`duality_c2_star_eq_s2_star_c2` の第一式 `s2star_eq_inv_s2`
+（`sinh 2K^* = 1/sinh 2K`）から得る（`sinh_two_mul_sinh_two_Kstar`）。人手の
+`isotropic_kappa_equals_kappa_of_K` の準備 `K_2^* = K^*` は `isoParam_K2star` に当たる。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
@@ -102,7 +107,7 @@ theorem Sparam_even (κ A θ : ℝ) :
 
 /-! ## 臨界条件 -/
 
-/-- 人手 `def_transfer_matrix_symbols` の `K^*` の定義として引く `sinh 2K sinh 2K^* = 1`（`K > 0`）。
+/-- 人手 `second_dual_coupling_relation`（`isotropic_A_equals_one` の鎖の 3→4 行目が引く）の `sinh 2K sinh 2K^* = 1`（`K > 0`）。
 `s2star_eq_inv_s2`（`sinh 2K^* = 1/sinh 2K`）の両辺に `sinh 2K ≠ 0` を掛けたもの。 -/
 theorem sinh_two_mul_sinh_two_Kstar {K : ℝ} (hK : 0 < K) :
     Real.sinh (2 * K) * Real.sinh (2 * Kstar K) = 1 := by
@@ -144,7 +149,7 @@ noncomputable def isoParam (K : ℝ) (hK : 0 < K) : IsingParam where
   K1_pos := hK
   K2_pos := hK
 
-/-- 等方な場合の `K_2^*` は `K^*`（人手 `isotropic_A_equals_one` の証明の `K_2^* = K^*`）。 -/
+/-- 等方な場合の `K_2^*` は `K^*`（人手 `isotropic_kappa_equals_kappa_of_K` の準備の `K_2^* = K^*`）。 -/
 theorem isoParam_K2star (K : ℝ) (hK : 0 < K) : (isoParam K hK).K2star = Kstar K :=
   rfl
 
@@ -153,14 +158,15 @@ theorem AP_isoParam (K : ℝ) (hK : 0 < K) : AP (isoParam K hK) = 1 := by
   rw [AP, isoParam_K2star]
   exact sinh_two_mul_sinh_two_Kstar hK
 
-/-- 等方な場合の `κ(K) = 2K - 2K^*`。 -/
+/-- 人手の定義 `def_isotropic_kappa_of_K` の `κ(K) = 2K - 2K^*`。 -/
 noncomputable def kappaK (K : ℝ) : ℝ := 2 * K - 2 * Kstar K
 
+/-- **人手証明 `isotropic_kappa_equals_kappa_of_K`**: 等方な場合 `κ = κ(K)`。 -/
 theorem kappaP_isoParam (K : ℝ) (hK : 0 < K) : kappaP (isoParam K hK) = kappaK K := by
   rw [kappaP, isoParam_K2star, kappaK]
   rfl
 
-/-- **人手証明 `isotropic_A_equals_one` の表示**:
+/-- **人手証明 `isotropic_gamma_in_kappa`**:
 等方な場合 `γ(θ) = 2 arcsinh(√(sinh²(κ/2) + sin²(θ/2)))`。 -/
 theorem gammaFn_isoParam (K : ℝ) (hK : 0 < K) (θ : ℝ) :
     gammaFn (isoParam K hK) θ

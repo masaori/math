@@ -8,7 +8,7 @@
 
 ## 形式化の方針
 
-原文は等方な場合（`isotropic_A_equals_one`、`A = 1`）の 2 変数関数
+原文は等方な場合（`isotropic_A_equals_one` の `A = 1` を使う `isotropic_gamma_in_kappa`）の 2 変数関数
 
   `S(θ,κ) := sinh²(κ/2) + sin²(θ/2)`,  `γ(θ,κ) := 2 arcsinh(√S)`
 

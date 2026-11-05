@@ -20,7 +20,7 @@
 - (1): 人手 `kappa_of_K_basic` の `K_c` の定義（`sinh_two_Kc`）と、`cosh_addition_and_half_angle` (3)(4) の
   `arcsinh(y) = log(y + √(y²+1))`（`arsinh_eq_log_form`）と `sinh` の単射性（`sinh_injective_real`）。
   正であることは `Kc_pos`。
-- (2) の式変形 `f(K) = (1/2)log(2 sinh 2K) + G(κ(K))`: 人手 `isotropic_A_equals_one` と `G` の定義
+- (2) の式変形 `f(K) = (1/2)log(2 sinh 2K) + G(κ(K))`: 人手 `isotropic_gamma_in_kappa` と `G` の定義
   （`integral_gammaFn_isoParam`）。`f` が 2 重極限の値であることは人手の主張に含まれない
   （人手は `f` を `c_plus_value_c_sandwich_and_double_limit_of_log_Z` (3) の右辺として定義するだけ）ので、ここでは述べない。
 - (2) の不等式: 人手 `specific_heat_log_divergence` の二つ目の不等式（`specific_heat_log_divergence_dist`）と、
@@ -69,7 +69,7 @@ theorem critical_point_sinh_K_c_and_second_derivative_log_divergence :
     rw [abs_le] at h1
     exact Set.mem_Icc.2 ⟨by linarith [h1.1], by linarith [h1.2]⟩
   have hKc : K ≠ Kc := fun h => by rw [h, sub_self, abs_zero] at h0; exact lt_irrefl 0 h0
-  -- 人手 (2) の式変形: isotropic_A_equals_one と G の定義
+  -- 人手 (2) の式変形: isotropic_gamma_in_kappa と G の定義
   refine ⟨by rw [integral_gammaFn_isoParam K hK]; rfl, ?_, ?_⟩
   -- 人手 (2): specific_heat_log_divergence（2 回微分可能であることと二つ目の不等式）
   · exact hasDerivAt_deriv_fFun hK hKc

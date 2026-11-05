@@ -731,6 +731,66 @@ c_1 = s_1c_2
     },
   },
   {
+    id: "critical_point_definition_isotropic_dual_coupling",
+    kind: "definition",
+    title: { tex: String.raw`\text{等方な場合の双対結合定数 } K^*` },
+    labels: ["def_isotropic_dual_coupling"],
+    statement: [
+      paragraph([
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        " に対して（等方な場合 ",
+        math(String.raw`K_1 = K_2 = K`),
+        " に使う）、",
+        ref("def_positive_coupling_tanh"),
+        " の双曲線正接と ",
+        ref("def_real_logarithm_positive"),
+        " の実対数を用いて",
+      ]),
+      displayMath(String.raw`K^* := -\frac{1}{2}\log(\tanh K) \in \mathbb{R}_{>0}`),
+      paragraph([
+        "と定める。右辺は ",
+        ref("def_second_dual_coupling_constant"),
+        " の右辺の ",
+        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
+        " を ",
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        " に置いたものなので、同じブロックの確認により定まり、",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " に属する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: isotropic_A_equals_one の主張の文に置かれていた K^* を独立の定義にした（1 ブロック 1 主張）。旧い本文は K^* を def_transfer_matrix_symbols から引いていたが、そこには K^* の定義が無い。",
+      ],
+    },
+  },
+  {
+    id: "critical_point_definition_isotropic_kappa_of_K",
+    kind: "definition",
+    title: { tex: String.raw`\kappa(K) := 2K - 2K^*` },
+    labels: ["def_isotropic_kappa_of_K"],
+    statement: [
+      paragraph([
+        math(String.raw`K \in \mathbb{R}_{>0}`),
+        " と ",
+        ref("def_isotropic_dual_coupling"),
+        " の ",
+        math(String.raw`K^* \in \mathbb{R}_{>0}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\kappa(K) := 2K - 2K^* \in \mathbb{R}`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: isotropic_A_equals_one の主張の文に置かれていた κ(K) を独立の定義にした（1 ブロック 1 主張）。",
+      ],
+    },
+  },
+  {
     id: "critical_005_claim_isotropic_setting",
     kind: "claim",
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 7 },
@@ -738,30 +798,147 @@ c_1 = s_1c_2
     labels: ["isotropic_A_equals_one"],
     statement: [
       paragraph([
-        "以下、**等方な場合** ",
+        "**等方な場合** ",
         math(String.raw`K_1 = K_2 = K \in \mathbb{R}_{>0}`),
-        " を考える。このとき ",
+        " では、",
         ref("def_critical_sinh_product_A"),
         " の ",
         math(String.raw`A`),
         " について",
       ]),
       displayMath(String.raw`A = 1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
       paragraph([
-        "が成り立ち、",
-        ref("gamma_kappa_identity"),
-        " は",
+        "記号の帰属。",
+        math(String.raw`K, K_1, K_2, K_2^*, A \in \mathbb{R}`),
+        "、",
+        math(String.raw`s_1, s_2^* \in \mathbb{R}`),
+        "（",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`K_2^*`),
+        " が実対数の値であり、sinh の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A
+&= s_1s_2^*
+&&\bigl(\because\ \blkref{def_critical_sinh_product_A}\bigr)\\
+&= \sinh 2K_1\,\sinh 2K_2^*
+&&\bigl(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_1 = \sinh 2K_1,\ s_2^* = \sinh 2K_2^*\bigr)\\
+&= \sinh 2K_2\,\sinh 2K_2^*
+&&\bigl(\because\ K_1 = K = K_2\text{（仮定）}\bigr)\\
+&= 1
+&&\bigl(\because\ \blkref{second_dual_coupling_relation}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: 根拠を引き直した。旧い証明は「def_transfer_matrix_symbols の K^* の定義そのものが sinh(2K)sinh(2K^*) = 1」と書いていたが、def_transfer_matrix_symbols は K^* を定めておらず、sinh(2K_2)sinh(2K_2^*) = 1 は second_dual_coupling_relation が示す。s_1・s_2^* の展開は def_indexed_hyperbolic_abbreviations から引く。旧い主張の文が持っていた K^* と κ(K) の定義、γ の式を、def_isotropic_dual_coupling・def_isotropic_kappa_of_K・isotropic_kappa_equals_kappa_of_K・isotropic_gamma_in_kappa へ分けた（1 ブロック 1 主張）。A = 1 の中身は不変。検算は sagemath/check/isotropic_A_equals_one/。",
+      ],
+    },
+  },
+  {
+    id: "critical_point_claim_isotropic_kappa_equals_kappa_of_K",
+    kind: "claim",
+    title: { tex: String.raw`\text{等方な場合 } \kappa = \kappa(K)` },
+    labels: ["isotropic_kappa_equals_kappa_of_K"],
+    statement: [
+      paragraph([
+        "**等方な場合** ",
+        math(String.raw`K_1 = K_2 = K \in \mathbb{R}_{>0}`),
+        " では、",
+        ref("def_kappa"),
+        " の ",
+        math(String.raw`\kappa`),
+        " と ",
+        ref("def_isotropic_kappa_of_K"),
+        " の ",
+        math(String.raw`\kappa(K)`),
+        " について",
+      ]),
+      displayMath(String.raw`\kappa = \kappa(K)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "記号の帰属。",
+        math(String.raw`K, K_1, K_2, K_2^*, K^*, \kappa, \kappa(K) \in \mathbb{R}`),
+        " である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`K_2^*`),
+        " と ",
+        math(String.raw`K^*`),
+        " が実対数の値だからである。",
+      ]),
+      paragraph([
+        "準備。",
+        math(String.raw`K_2^* = K^*`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+K_2^*
+&= -\frac{1}{2}\log(\tanh K_2)
+&&\bigl(\because\ \blkref{def_second_dual_coupling_constant}\bigr)\\
+&= -\frac{1}{2}\log(\tanh K)
+&&\bigl(\because\ K_2 = K\text{（仮定）}\bigr)\\
+&= K^*
+&&\bigl(\because\ \blkref{def_isotropic_dual_coupling}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\kappa
+&= 2K_1 - 2K_2^*
+&&\bigl(\because\ \blkref{def_kappa}\bigr)\\
+&= 2K - 2K_2^*
+&&\bigl(\because\ K_1 = K\text{（仮定）}\bigr)\\
+&= 2K - 2K^*
+&&\bigl(\because\ \text{準備の }K_2^* = K^*\bigr)\\
+&= \kappa(K)
+&&\bigl(\because\ \blkref{def_isotropic_kappa_of_K}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: 旧い isotropic_A_equals_one の主張の文が κ = κ(K) := 2K − 2K^* と書くだけで示していなかった等式を、独立の主張にして鎖で示した。検算は sagemath/check/isotropic_kappa_equals_kappa_of_K/。",
+      ],
+    },
+  },
+  {
+    id: "critical_point_claim_isotropic_gamma_in_kappa",
+    kind: "claim",
+    title: { tex: String.raw`\text{等方な場合 } \gamma(\theta) = 2\,\mathrm{arcsinh}\sqrt{\sinh^2(\kappa(K)/2) + \sin^2(\theta/2)}` },
+    labels: ["isotropic_gamma_in_kappa"],
+    statement: [
+      paragraph([
+        "**等方な場合** ",
+        math(String.raw`K_1 = K_2 = K \in \mathbb{R}_{>0}`),
+        " では、",
+        ref("def_gamma_theta"),
+        " の ",
+        math(String.raw`\gamma`),
+        " と ",
+        ref("def_isotropic_kappa_of_K"),
+        " の ",
+        math(String.raw`\kappa(K)`),
+        " について、すべての実数 ",
+        math(String.raw`\theta`),
+        " で",
       ]),
       displayMath(
         String.raw`\gamma(\theta) = 2\,\mathrm{arcsinh}\!\left(
-  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right) + \sin^2\!\left(\frac{\theta}{2}\right)}
-\right),
-\qquad \kappa = \kappa(K) := 2K - 2K^*`),
+  \sqrt{\sinh^2\!\left(\frac{\kappa(K)}{2}\right) + \sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
+\right)`),
       paragraph([
-        "となる。すなわち **等方な場合、",
+        "が成り立つ。すなわち **等方な場合、",
         math(String.raw`\gamma`),
         " は ",
-        math(String.raw`\kappa`),
+        math(String.raw`\kappa(K)`),
         " 1 つだけを通じて ",
         math(String.raw`K`),
         " に依存する。**",
@@ -769,41 +946,40 @@ c_1 = s_1c_2
     ],
     proof: [
       paragraph([
-        math(String.raw`K_1 = K_2 = K`),
-        " のとき ",
-        math(String.raw`K_2^* = K^*`),
-        " であり、",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`K^*`),
-        " の定義そのものが ",
-        math(String.raw`\sinh(2K)\sinh(2K^*) = 1`),
-        " である。よって",
+        "記号の帰属。",
+        math(String.raw`K, \kappa, \kappa(K), A, \theta, \gamma(\theta) \in \mathbb{R}`),
+        " である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、sinh・sin・arcsinh の値が部分和の極限・平方根・実対数として定まる実数だからである。",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " を任意にとる。",
       ]),
       displayMath(String.raw`\begin{aligned}
-A
-&=s_1s_2^*
-&&\bigl(\because\ \blkref{def_critical_sinh_product_A}\bigr)\\
-&=\sinh 2K_1\,\sinh 2K_2^*
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)\\
-&=\sinh 2K\,\sinh 2K^*
-&&\bigl(\because\ K_1=K_2=K\text{、}K_2^*=K^*\bigr)\\
-&=1
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }K^*\text{ の定義}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
 \gamma(\theta)
-&=2\,\mathrm{arcsinh}\!\left(
-  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+A\sin^2\!\left(\frac{\theta}{2}\right)}
+&= 2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+A\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
 \right)
-&&(\because\ \blkref{gamma_kappa_identity}\text{ の第3式})\\
-&=2\,\mathrm{arcsinh}\!\left(
-  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+\sin^2\!\left(\frac{\theta}{2}\right)}
+&&\bigl(\because\ \blkref{gamma_kappa_identity}\text{ の第 3 式}\bigr)\\
+&= 2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+1\cdot\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
 \right)
-&&(\because\ A=1).
+&&\bigl(\because\ \blkref{isotropic_A_equals_one}\bigr)\\
+&= 2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
+\right)
+&&\bigl(\because\ \mathbb{R}\text{ の乗法の単位元 }1\cdot x = x\bigr)\\
+&= 2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa(K)}{2}\right)+\sin^2\!\left(\frac{\theta}{2}\right)}^{(\mathbb{R}_{\ge 0})}
+\right)
+&&\bigl(\because\ \blkref{isotropic_kappa_equals_kappa_of_K}\bigr)
 \end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-05（全証明の SageMath 検算）: 旧い isotropic_A_equals_one の主張の後半（γ の式）を独立の主張にした（1 ブロック 1 主張）。平方根を gamma_kappa_identity と同じ √·^(ℝ≥0) の記法にし、κ = κ(K) を isotropic_kappa_equals_kappa_of_K から引いて κ(K) の形で述べた。検算は sagemath/check/isotropic_gamma_in_kappa/。",
+      ],
+    },
   },
   {
     id: "critical_006_claim_kappa_of_K_basic",
@@ -813,7 +989,7 @@ A
     labels: ["kappa_of_K_basic"],
     statement: [
       paragraph([
-        ref("isotropic_A_equals_one"),
+        ref("def_isotropic_kappa_of_K"),
         " の ",
         math(String.raw`\kappa(K) = 2K - 2K^*`),
         " について次が成り立つ。ここで **臨界点** ",
@@ -881,7 +1057,7 @@ A
     proof: [
       paragraph([
         "(1) の証明。",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_isotropic_dual_coupling"),
         " より ",
         math(String.raw`K^* = -\tfrac12\log(\tanh K)`),
         " なので",
@@ -905,7 +1081,7 @@ A
       displayMath(String.raw`\begin{aligned}
 \kappa'(K)
 &=2-2\frac{dK^*}{dK}
-&&\bigl(\because\ \blkref{isotropic_A_equals_one}\text{ の }\kappa(K)\text{ の定義}\bigr) \\
+&&\bigl(\because\ \blkref{def_isotropic_kappa_of_K}\bigr) \\
 &=2+\frac{2}{\sinh 2K}
 &&\bigl(\because\ \text{上の }dK^*/dK\text{ の表示}\bigr).
 \end{aligned}`),
@@ -929,10 +1105,24 @@ A
         " の (1) ",
         math(String.raw`\iff`),
         " (3) より ",
+        ref("def_kappa"),
+        " の ",
+        math(String.raw`\kappa`),
+        " が 0 であり、",
+        ref("isotropic_kappa_equals_kappa_of_K"),
+        " の ",
+        math(String.raw`\kappa = \kappa(K_c)`),
+        " より ",
         math(String.raw`\kappa(K_c) = 0`),
         "。逆に ",
         math(String.raw`\kappa(K)=0`),
-        " なら同じ同値から ",
+        " なら ",
+        ref("isotropic_kappa_equals_kappa_of_K"),
+        " より ",
+        ref("def_kappa"),
+        " の ",
+        math(String.raw`\kappa`),
+        " が 0 であり、同じ同値から ",
         math(String.raw`\sinh^2 2K = 1`),
         "、",
         math(String.raw`\sinh 2K > 0`),
@@ -1169,7 +1359,7 @@ A
     labels: ["gamma_derivatives_in_kappa"],
     statement: [
       paragraph([
-        ref("isotropic_A_equals_one"),
+        ref("isotropic_gamma_in_kappa"),
         " の等方な場合について、",
         math(String.raw`(\theta,\kappa) \in \mathbb{R}\times\mathbb{R}`),
         " の関数",
@@ -1393,7 +1583,7 @@ A
         "とおく（",
         ref("onsager_exact_solution"),
         " の自由エネルギーの積分項そのものであり、等方な場合 ",
-        ref("isotropic_A_equals_one"),
+        ref("isotropic_gamma_in_kappa"),
         " により ",
         math(String.raw`\kappa`),
         " だけの関数になる）。このとき ",
@@ -2005,7 +2195,7 @@ G''(\kappa)
         " であり、",
         math(String.raw`K_1=K_2=K`),
         " のとき ",
-        ref("isotropic_A_equals_one"),
+        ref("isotropic_gamma_in_kappa"),
         " より ",
         math(String.raw`\gamma(\theta) = \gamma(\theta,\kappa(K))`),
         "（",
@@ -2367,7 +2557,7 @@ K_c
         "(2) ",
         math(String.raw`\kappa(K)`),
         " を ",
-        ref("isotropic_A_equals_one"),
+        ref("def_isotropic_kappa_of_K"),
         " のもの、",
         math(String.raw`G`),
         " を ",
@@ -2386,7 +2576,7 @@ f(K)
 &= \frac{1}{2}\log\left(2\sinh 2K\right) + \frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
 &&\bigl(\because\ f\text{ の定義}\bigr)\\
 &= \frac{1}{2}\log\left(2\sinh 2K\right) + \frac{1}{4\pi}\int_0^{2\pi}\gamma\!\left(\theta,\kappa(K)\right)d\theta
-&&\bigl(\because\ \blkref{isotropic_A_equals_one}\text{ と }\blkref{gamma_derivatives_in_kappa}\text{ の記法}\bigr)\\
+&&\bigl(\because\ \blkref{isotropic_gamma_in_kappa}\text{ と }\blkref{gamma_derivatives_in_kappa}\text{ の記法}\bigr)\\
 &= \frac{1}{2}\log\left(2\sinh 2K\right) + G\!\left(\kappa(K)\right)
 &&\bigl(\because\ \blkref{second_derivative_log_divergence}\text{ の }G\text{ の定義}\bigr)
 \end{aligned}`,

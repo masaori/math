@@ -1,0 +1,6 @@
+PASS 1→2 行目: isotropic_A_equals_one（A = 1）の 1 本だけで根号の中身が一致
+PASS 1→2 行目 対照: A = 1 を抜くと一致しない
+PASS 2→3 行目: 1·Y = Y（多項式の等号）
+PASS 3→4 行目: isotropic_kappa_equals_kappa_of_K（κ = κ(K)）の 1 本だけで sinh^2 の引数 κ/2 と κ(K)/2 が一致
+PASS 3→4 行目 対照: κ = κ(K) を抜くと一致しない
+RESULT: PASS

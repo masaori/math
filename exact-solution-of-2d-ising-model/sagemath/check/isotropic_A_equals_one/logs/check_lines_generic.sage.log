@@ -1,0 +1,9 @@
+PASS 左辺→1 行目: A = s_1 s_2^*（def_critical_sinh_product_A。模型に組み込んだ形の一致のみ）
+PASS 1→2 行目: 略記の展開（def_indexed_hyperbolic_abbreviations。形の一致のみ）
+PASS 2→3 行目: K_1 = K_2（u_1 = u_2）を代入すると一致
+PASS 2→3 行目 対照: 仮定を使わないと一致しない
+PASS 3→4 行目: sinh 2K_2 sinh 2K_2^* = 1 が QQ(u_2) の中で恒等的に成り立つ（second_dual_coupling_relation）
+PASS 主張: u_1 = u_2 で A = 1
+PASS 対照: 異方的（u_1 ≠ u_2）なら A − 1 は恒等的には 0 でない
+PASS 対照: K_2^* の符号を誤る（exp(−2K_2^*) = 1/tanh K_2）と sinh 2K_2 sinh 2K_2^* = −1
+RESULT: PASS

@@ -1,0 +1,14 @@
+NOT CHECKED 準備 左辺→1 行目: K_2^* = −(1/2)log(tanh K_2) は def_second_dual_coupling_constant の書き写しなので、検算の対象が無い
+PASS 準備 1→2 行目: K_2 = K（u_2 = u）を代入すると log の引数が一致
+PASS 準備 1→2 行目 対照: 仮定を使わないと一致しない
+PASS 準備 2→3 行目: def_isotropic_dual_coupling の式と一致（形の一致のみ）
+PASS κ の鎖 左辺→1 行目: def_kappa の 1 本だけで成り立つ
+PASS κ の鎖 左辺→1 行目 対照: def_kappa を抜くと（ほかの 3 本があっても）成り立たない
+PASS κ の鎖 1→2 行目: K_1 = K の 1 本だけで成り立つ
+PASS κ の鎖 1→2 行目 対照: K_1 = K を抜くと（ほかの 3 本があっても）成り立たない
+PASS κ の鎖 2→3 行目: 準備の K_2^* = K^* の 1 本だけで成り立つ
+PASS κ の鎖 2→3 行目 対照: 準備の K_2^* = K^* を抜くと（ほかの 3 本があっても）成り立たない
+PASS κ の鎖 3→4 行目: def_isotropic_kappa_of_K の 1 本だけで成り立つ
+PASS κ の鎖 3→4 行目 対照: def_isotropic_kappa_of_K を抜くと（ほかの 3 本があっても）成り立たない
+PASS 主張: 4 本の関係式のもとで κ = κ(K)
+RESULT: PASS

@@ -9,7 +9,7 @@
   - 双曲線関数の主張（加法定理・半角公式・`arcsinh`。2026-11-02 に旧 `cosh_addition_and_half_angle` を `cosh_addition_formula` ほか 21 ブロックに分けた。各主張の検算は `sagemath/check/<ラベル>/`）
   - `def_kappa` / `def_critical_sinh_product_A` / `gamma_kappa_identity`（鍵の恒等式）
   - `critical_point_iff_kappa_zero`（臨界条件の同値。008 章 `critical_condition_c1_eq_s1_c2` とも突き合わせ）
-  - `isotropic_A_equals_one` / `kappa_of_K_basic`（等方な場合の設定と定数）
+  - `isotropic_A_equals_one` / `kappa_of_K_basic`（等方な場合の A = 1 と κ(K) の定数）
   - `gamma_derivatives_in_kappa`（`κ` についての 1 階・2 階導関数）
   - `elementary_sine_bounds` / `closed_form_log_integral` / `sine_integral_two_sided`（初等評価）
   - `second_derivative_log_divergence`（`G''(κ)` の対数発散）
