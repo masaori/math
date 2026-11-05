@@ -2313,7 +2313,11 @@ targets=(
   Ising2D.open_chain_partition_sum
   Ising2D.nextSite_val_of_bond
   Ising2D.prevSite_val_of_ne_zero
-  Ising2D.prod_openChainBondSpin
+  Ising2D.prod_bondSpin_of_two
+  Ising2D.prod_bondSpin_rearrange
+  Ising2D.prod_bondSpin_of_ge_three
+  Ising2D.prod_bondSpin_eq_first_mul_last
+  Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod
   Ising2D.open_chain_endpoint_product_sum
   Ising2D.open_chain_partition_sum_pos
   Ising2D.open_chain_endpoint_product_sum_pos

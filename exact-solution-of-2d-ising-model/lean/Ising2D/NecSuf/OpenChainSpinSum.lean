@@ -9,7 +9,7 @@
 | --- | --- |
 | 二つのスピン和の Step 1（全単射 `Φ`）と Step 2 の「積の展開」「二元集合上の和」「同じ因子の積」 | `open_chain_weighted_sum` |
 | `{-1,1}` 上の有限和 `sum_spinVal` | `sum_spinVal_addCommMonoid` |
-| `open_chain_endpoint_product_sum` の Step 2 `∏_m s(m)s(m+1) = s(1)s(M_col)`（`prod_openChainBondSpin`） | `prod_mul_nextSite_eq_first_mul_last` |
+| `open_chain_endpoint_product_sum` の Step 2 `∏_m s(m)s(m+1) = s(1)s(M_col)`（書き換える前の具体版。いまの具体版は `prod_bondSpin_eq_first_mul_last`） | `prod_mul_nextSite_eq_first_mul_last` |
 
 ## 何が効いているか / 効いていないか
 
@@ -73,7 +73,7 @@ theorem open_chain_weighted_sum {R : Type*} [CommSemiring R] (hM : M ≠ 0) (g :
 `x(m)x(m) = 1` を満たせば
 `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)`。
 
-具体版 `prod_openChainBondSpin` と同じ段（積を `∏_{m≠M_col} x(m)` と `∏_{m≠1} x(m)` に分け、
+書き換える前の具体版（`M_col` で場合を分けない形）と同じ段（積を `∏_{m≠M_col} x(m)` と `∏_{m≠1} x(m)` に分け、
 両側から `x(1)`・`x(M_col)` を括り出し、中間の `x(m)x(m) = 1` を消す）を踏む。 -/
 theorem prod_mul_nextSite_eq_first_mul_last {G : Type*} [CommMonoid G] (hM : 2 ≤ M)
     (x : Fin M → G)

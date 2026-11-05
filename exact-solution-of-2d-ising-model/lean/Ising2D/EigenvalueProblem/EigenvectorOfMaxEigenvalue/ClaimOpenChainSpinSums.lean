@@ -15,9 +15,13 @@
 | 同 Step 2 の準備の鎖（3 行）`exp(KE(s)) = … = Π_m exp(Kt_m(s))` | `exp_openChainEnergy_eq_prod_bondSpin`（同じ 3 段の calc） |
 | 同 Step 2 の鎖（左辺と 10 行） | `open_chain_partition_sum`（印 `人手 1`〜`人手 10` の calc） |
 | （運ぶ段。人手の行は無い）`{0,1}^r` の上の和を全体の上の `∑` で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `binaryWordRealSum_eq_sum_univ`・`openChainEnergy_eq_sum_fin` |
-| `open_chain_endpoint_product_sum` が使う旧い形の `t_m`・`Φ`（結合の添字を `OpenChainBond M` で数える） | `openChainBondSpin`・`openChainChange`・`openChainChange_injective`・`card_openChainChange_target`・`openChainChange_bijective`・`openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy` |
-| `open_chain_endpoint_product_sum` の Step 2 の `∏_m t_m = s(1)s(M_col)` | `prod_openChainBondSpin` |
-| 同 Step 2 の式変形と `open_chain_endpoint_product_sum` | `open_chain_endpoint_product_sum` |
+| `open_chain_endpoint_product_sum` の Step 1（`open_chain_partition_sum` の Step 1 の `Φ` と `ς` を使う） | `openChainPhiEquiv`・`varsigmaWordEquiv` |
+| 同 Step 2 の `M_col = 2` の鎖（3 行）`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)` | `prod_bondSpin_of_two`（同じ 3 段の calc） |
+| 同 Step 2 の `M_col ≥ 3` の鎖（4 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（同じ 4 段の calc。2 行目の「ℝ の乗法の可換性と結合性」は `prod_bondSpin_rearrange`）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
+| 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
+| 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
+| 同 Step 2 の最後の鎖（左辺と 12 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 12` の calc） |
+| （書き換える前の形。必要十分版 `NecSuf/OpenChainSpinSum.lean` とその系だけが使い、状態台帳の次の一歩で消す）結合の添字を `OpenChainBond M` で数える `t_m`・`Φ` | `openChainBondSpin`・`openChainChange`・`openChainChange_injective`・`card_openChainChange_target`・`openChainChange_bijective`・`openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy`・`card_openChainBond`・`nextSite_val_of_bond`・`prevSite`・`prevSite_val_of_ne_zero` |
 | `open_chain_spin_sums_positive` | `open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos` |
 | `D0_G_diagonal_action` の `D_0f_{ι(s)}` の係数を `E(s)` で書いたもの（`trace_of_epsilon_V_plus` で使う） | `openChainD0_mulVec_basisVec_eq_energy` |
 
@@ -28,26 +32,22 @@
 
 人手の `{-1,1}` 上の有限和 `∑_{t∈{-1,1}} f(t) = f(1) + f(-1)` は `sum_spinVal` である。
 
-`open_chain_partition_sum` は、2026-11-04 に書き換えた人手の Step 1・Step 2 と同じ行で書いてある（結合の添字は `Fin (n + 1)`、
-人手の `M_col` は Lean の `n + 2`）。`open_chain_endpoint_product_sum` はまだ書き換える前の形で、結合の添字を
-`OpenChainBond M`（`(m : ℕ) + 1 ≠ M` なる `m : Fin M`）で数え、`Φ` の全単射を単射と元の個数の一致から出し
-（`Fintype.bijective_iff_injective_and_card`）、「有限個の因子の積の展開」を `Fintype.prod_sum` で、Step 2 の端点因子の書き替えを
-`∏_m s(m)` と `∏_m s(m+1)` への分解・添字のずらし（`prevSite`）・両端の括り出しの段に割って書いている。
-人手の鎖（`M_col = 2` の別の鎖、`ς` による付け替えと展開の主張）と同じ行に直すのは、状態台帳の次の一歩である。
+`open_chain_partition_sum` と `open_chain_endpoint_product_sum` は、2026-11-04 に書き換えた人手の Step 1・Step 2 と
+同じ行で書いてある（結合の添字は `Fin (n + 1)`、人手の `M_col` は Lean の `n + 2`）。
 
 この証明が使うのは、`Fin M` 上の自然数の算術、有限和・有限積の並べ替えと展開、実数の指数法則と
 双曲線関数の定義・正値性である。仮定は人手の主張に合わせて残し、実際に効いているものは次のとおりである。
 - `open_chain_partition_sum` の証明は、人手と同じく `M_col ≥ 2`（Lean の `M = n + 2`）で結合の添字を `Fin (n + 1)` に取る
   （主張そのものは `M_col = 1` でも成り立つ）。
-- `prod_openChainBondSpin`・`open_chain_endpoint_product_sum` の証明は、両端を別々に括り出すので `1 ≠ M_col`
-  （`M_col ≥ 2`）を使う（主張そのものは `M_col = 1` でも成り立つ）。
+- `open_chain_endpoint_product_sum` の証明は、人手と同じく `M_col ≥ 2` で結合の添字を `Fin (n + 1)` に取り、
+  Step 2 を `M_col = 2` と `M_col ≥ 3` に分ける（主張そのものは `M_col = 1` でも成り立つ）。
 - `open_chain_partition_sum_pos` の証明は `K > 0` を使わない（`cosh K > 0` は任意の `K` で成り立つ）。
 値は実数である必要がなく、可換半環（端点因子の書き替えは可換モノイドと `s(m)s(m) = 1`）で足りるので、
 必要十分版を `Ising2D/NecSuf/OpenChainSpinSum.lean` に置き、具体版をその系として
 `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
-必要十分版の手順は書き換える前の具体版の手順（`Fintype.prod_sum` による展開）のままで、`open_chain_partition_sum` の
-いまの手順（`ς` による付け替えと `expansion_of_finite_product_of_two_term_sums_of_real_numbers`）とは同じでない。
-二つの主張の具体版を揃えた後に、必要十分版を同じ手順へ直す（状態台帳の次の一歩）。
+必要十分版の手順は書き換える前の具体版の手順（`Fintype.prod_sum` による展開）のままで、二つの主張のいまの手順
+（`ς` による付け替えと `expansion_of_finite_product_of_two_term_sums_of_real_numbers`）とは同じでない。
+必要十分版を同じ手順へ直すのは、状態台帳の次の一歩である。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
@@ -57,6 +57,7 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 
 namespace Ising2D
 
@@ -375,7 +376,10 @@ theorem open_chain_partition_sum (hM : 2 ≤ M) (K : ℝ) :
         rw [Fin.prod_const]; rfl                        -- 人手 10: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2cosh K`、`n → M_col-1`）。
                                                         -- 指数の `n + 2 - 1` は Lean の自然数の引き算で、`n + 1` と同じ数
 
-/-! ## `open_chain_endpoint_product_sum` -/
+/-! ## 書き換える前の `open_chain_endpoint_product_sum` の添字の補題
+
+`nextSite_val_of_bond`・`prevSite`・`prevSite_val_of_ne_zero` は、いまの具体版の証明では使わない。
+必要十分版 `NecSuf/OpenChainSpinSum.lean` だけが使い、状態台帳の次の一歩で消す。 -/
 
 /-- 人手の `m ∈ {1,…,M_col-1}` に対する `m+1`: 結合の添字では `nextSite m` は `m+1` そのもの。 -/
 theorem nextSite_val_of_bond {m : Fin M} (h : (m : ℕ) + 1 ≠ M) :
@@ -392,133 +396,147 @@ theorem prevSite_val_of_ne_zero {m : Fin M} (h : (m : ℕ) ≠ 0) :
   rw [show (m : ℕ) + M - 1 = ((m : ℕ) - 1) + M by omega, Nat.add_mod_right,
     Nat.mod_eq_of_lt (by omega)]
 
-/-- **人手 `open_chain_endpoint_product_sum` の Step 2**: `∏_{m=1}^{M_col-1} t_m = s(1)s(M_col)`。
+/-! 以下、`open_chain_endpoint_product_sum` の Step 2 と本体の鎖を、`open_chain_partition_sum` と同じく人手の `M_col` を
+Lean の `n + 2`、結合の添字を `Fin (n + 1)` で書く。人手の `s(1)` は `s 0`、`s(M_col)` は `s (Fin.last (n + 1))` である。 -/
 
-人手の三段（`ℝ` の乗法の可換性と結合性で `s(1)(∏_{m=2}^{M_col-1}s(m)s(m))s(M_col)` に並べ替え、
-`s(m)s(m) = 1` を各 `m` へ適用し、有限積の単位元で消す）を、
-`∏_m s(m)s(m+1) = (∏_{m≠M_col} s(m))(∏_{m≠1} s(m))` と両側の因子から `s(1)`・`s(M_col)` を
-括り出す形で書く。`1 ≠ M_col`（`M_col ≥ 2`）を使う。 -/
-theorem prod_openChainBondSpin (hM : 2 ≤ M) (s : SpinConf M) :
-    ∏ b : OpenChainBond M, (openChainBondSpin s b : ℝ)
-      = (s (firstSite M (by omega)) : ℝ) * (s (lastSite M (by omega)) : ℝ) := by
-  have hM0 : M ≠ 0 := by omega
-  have hfirst : ((firstSite M hM0 : Fin M) : ℕ) = 0 := rfl
-  have hlast : ((lastSite M hM0 : Fin M) : ℕ) = M - 1 := rfl
-  -- 人手の結合の添字 `m = 1,…,M_col-1`、ずらした添字 `m = 2,…,M_col`、中間の添字 `m = 2,…,M_col-1`
-  obtain ⟨F, hF⟩ : ∃ F : Finset (Fin M),
-      F = Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M) := ⟨_, rfl⟩
-  obtain ⟨G, hG⟩ : ∃ G : Finset (Fin M),
-      G = Finset.univ.filter (fun m : Fin M => m ≠ firstSite M hM0) := ⟨_, rfl⟩
-  obtain ⟨I, hI⟩ : ∃ I : Finset (Fin M), I = Finset.univ.filter
-      (fun m : Fin M => m ≠ firstSite M hM0 ∧ m ≠ lastSite M hM0) := ⟨_, rfl⟩
-  have memF : ∀ m : Fin M, m ∈ F ↔ (m : ℕ) + 1 ≠ M := fun m => by simp [hF]
-  have memG : ∀ m : Fin M, m ∈ G ↔ (m : ℕ) ≠ 0 := fun m => by
-    simp only [hG, Finset.mem_filter, Finset.mem_univ, true_and, Ne, Fin.ext_iff, hfirst]
-  have memI : ∀ m : Fin M, m ∈ I ↔ (m : ℕ) ≠ 0 ∧ (m : ℕ) ≠ M - 1 := fun m => by
-    simp only [hI, Finset.mem_filter, Finset.mem_univ, true_and, Ne, Fin.ext_iff, hfirst, hlast]
-  have hfirstF : firstSite M hM0 ∈ F := by rw [memF, hfirst]; omega
-  have hlastG : lastSite M hM0 ∈ G := by rw [memG, hlast]; omega
-  have hFI : F.erase (firstSite M hM0) = I := by
-    ext m
-    rw [Finset.mem_erase, memF, memI, Ne, Fin.ext_iff, hfirst]
-    have := m.isLt
-    omega
-  have hGI : G.erase (lastSite M hM0) = I := by
-    ext m
-    rw [Finset.mem_erase, memG, memI, Ne, Fin.ext_iff, hlast]
-    tauto
-  -- `∏_{m=1}^{M_col-1} s(m+1) = ∏_{m=2}^{M_col} s(m)`（添字のずらし）
-  have hshift : ∏ m ∈ F, (s (nextSite m) : ℝ) = ∏ m ∈ G, (s m : ℝ) := by
-    apply Finset.prod_nbij' nextSite prevSite
-    · intro m hm
-      rw [memF] at hm
-      rw [memG, nextSite_val_of_bond hm]
-      omega
-    · intro m hm
-      rw [memG] at hm
-      rw [memF, prevSite_val_of_ne_zero hm]
-      have := m.isLt
-      omega
-    · intro m hm
-      rw [memF] at hm
-      apply Fin.ext
-      rw [prevSite_val_of_ne_zero (by rw [nextSite_val_of_bond hm]; omega), nextSite_val_of_bond hm]
-      omega
-    · intro m hm
-      rw [memG] at hm
-      have hb : ((prevSite m : Fin M) : ℕ) + 1 ≠ M := by
-        rw [prevSite_val_of_ne_zero hm]
-        have := m.isLt
-        omega
-      apply Fin.ext
-      rw [nextSite_val_of_bond hb, prevSite_val_of_ne_zero hm]
-      omega
-    · intro m _
-      rfl
-  calc ∏ b : OpenChainBond M, (openChainBondSpin s b : ℝ)
-      = ∏ m ∈ F, (s m : ℝ) * (s (nextSite m) : ℝ) := by
-        rw [Finset.prod_subtype (p := fun m : Fin M => (m : ℕ) + 1 ≠ M) F memF]
-        rfl
-    -- `ℝ` の乗法の可換性と結合性
-    _ = (∏ m ∈ F, (s m : ℝ)) * ∏ m ∈ F, (s (nextSite m) : ℝ) := Finset.prod_mul_distrib
-    _ = (∏ m ∈ F, (s m : ℝ)) * ∏ m ∈ G, (s m : ℝ) := by rw [hshift]
-    _ = ((s (firstSite M hM0) : ℝ) * ∏ m ∈ I, (s m : ℝ))
-          * ((s (lastSite M hM0) : ℝ) * ∏ m ∈ I, (s m : ℝ)) := by
-        rw [Finset.mul_prod_erase F (fun m => (s m : ℝ)) hfirstF |>.symm, hFI,
-          Finset.mul_prod_erase G (fun m => (s m : ℝ)) hlastG |>.symm, hGI]
-    _ = (s (firstSite M hM0) : ℝ) * (∏ m ∈ I, (s m : ℝ) * (s m : ℝ)) * (s (lastSite M hM0) : ℝ) := by
-        rw [Finset.prod_mul_distrib]
-        ring
-    -- `s(m)s(m) = 1` を各 `m` へ同時適用
-    _ = (s (firstSite M hM0) : ℝ) * (∏ _m ∈ I, (1 : ℝ)) * (s (lastSite M hM0) : ℝ) := by
-        rw [Finset.prod_congr rfl fun m _ => spinVal_mul_self (s m)]
-    -- 有限積の単位元
-    _ = (s (firstSite M hM0) : ℝ) * (s (lastSite M hM0) : ℝ) := by
-        rw [Finset.prod_const_one, mul_one]
+section OpenChainEndpointProductSum
+
+variable {n : ℕ}
+
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col = 2` の鎖（Lean の `n = 0`）:
+`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)`。 -/
+theorem prod_bondSpin_of_two (s : SpinConf 2) :
+    ∏ m : Fin 1, (bondSpin s m : ℝ) = (s 0 : ℝ) * (s (Fin.last 1) : ℝ) :=
+  calc ∏ m : Fin 1, (bondSpin s m : ℝ)
+      = (bondSpin s 0 : ℝ) := Fin.prod_univ_one _       -- `def_finite_product_of_real_numbers`（`m → 1`）
+    _ = (s 0 : ℝ) * (s 1 : ℝ) := rfl                    -- `t_1(s) := s(1)s(2)`
+    _ = (s 0 : ℝ) * (s (Fin.last 1) : ℝ) := rfl         -- `M_col = 2`（人手の `2` が Lean の `Fin.last 1`）
+
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖の 2 行目の根拠「ℝ の乗法の可換性と結合性」
+（人手の `M_col` は Lean の `k + 3`、中間の添字 `m = 2,…,M_col-1` は `j : Fin (k + 1)`（人手の `m` が Lean の `(j : ℕ) + 2`、
+サイトは `j.succ.castSucc`））: `Π_{m=1}^{M_col-1}s(m)s(m+1) = s(1)(Π_{m=2}^{M_col-1}s(m)s(m))s(M_col)`。
+人手の一段を、Lean では有限積の端の因子を外へ出す段（末尾の因子は `def_finite_product_of_real_numbers` の帰納の式
+`Fin.prod_univ_castSucc`、先頭の因子は可換性と結合性から従う `Fin.prod_univ_succ`）と、因子の並べ替え
+（`finite_product_of_real_products` と `mul_assoc`）に割って書く。 -/
+theorem prod_bondSpin_rearrange (k : ℕ) (s : SpinConf (k + 3)) :
+    ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ)
+      = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ) :=
+  calc ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ)
+      = (∏ m : Fin (k + 2), (s m.castSucc : ℝ)) * ∏ m : Fin (k + 2), (s m.succ : ℝ) :=
+        finite_product_of_real_products (k + 1) _ _      -- 因子の並べ替え（`finite_product_of_real_products`）
+    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * ((∏ j : Fin (k + 1), (s j.castSucc.succ : ℝ)) * (s (Fin.last (k + 2)) : ℝ)) := by
+        rw [Fin.prod_univ_succ (fun m : Fin (k + 2) => (s m.castSucc : ℝ)),
+          Fin.prod_univ_castSucc (fun m : Fin (k + 2) => (s m.succ : ℝ))]
+        rfl                                             -- 先頭の因子 `s(1)` と末尾の因子 `s(M_col)` を外へ出す
+    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * (s (Fin.last (k + 2)) : ℝ)) := by
+        simp only [Fin.succ_castSucc]                   -- 中間のサイト `m = 2,…,M_col-1` の二つの書き方を揃える
+    _ = (s 0 : ℝ) * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [mul_assoc, mul_assoc, mul_assoc]            -- ℝ の乗法の結合性
+    _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [← finite_product_of_real_products k]        -- 因子の並べ替え（`finite_product_of_real_products` を右辺から左辺へ）
+
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖（人手の `M_col` は Lean の `k + 3`）:
+`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)`（4 行）。 -/
+theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
+    ∏ m : Fin (k + 2), (bondSpin s m : ℝ) = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) :=
+  calc ∏ m : Fin (k + 2), (bondSpin s m : ℝ)
+      = ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ) := rfl
+                                                        -- `t_m(s) := s(m)s(m+1)`
+    _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ) :=
+        prod_bondSpin_rearrange k s                     -- ℝ の乗法の可換性と結合性
+    _ = (s 0 : ℝ) * (∏ _j : Fin (k + 1), (1 : ℝ)) * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [Finset.prod_congr rfl fun j _ => spinVal_mul_self (s j.succ.castSucc)]
+                                                        -- `s(m)s(m) = 1` を各 `m` へ同時適用
+    _ = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [Finset.prod_const_one, mul_one]             -- `1` の有限積は `1`（と `a·1 = a`）
+
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `Π_{m=1}^{M_col-1}t_m(s) = s(1)s(M_col)`
+（`M_col = 2` と `M_col ≥ 3` の二つの鎖。人手の `M_col` は Lean の `n + 2`）。 -/
+theorem prod_bondSpin_eq_first_mul_last : ∀ {n : ℕ} (s : SpinConf (n + 2)),
+    ∏ m : Fin (n + 1), (bondSpin s m : ℝ) = (s 0 : ℝ) * (s (Fin.last (n + 1)) : ℝ)
+  | 0, s => prod_bondSpin_of_two s
+  | k + 1, s => prod_bondSpin_of_ge_three k s
+
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の最後の鎖（左辺と 4 行）:
+`s(M_col)s(1)exp(KE(s)) = ⋯ = Π_{m=1}^{M_col-1}(t_m(s)exp(Kt_m(s)))`。 -/
+theorem endpoint_mul_exp_openChainEnergy_eq_prod (K : ℝ) (s : SpinConf (n + 2)) :
+    (s (Fin.last (n + 1)) : ℝ) * (s 0 : ℝ) * Real.exp (K * openChainEnergy s)
+      = ∏ m : Fin (n + 1), (bondSpin s m : ℝ) * Real.exp (K * (bondSpin s m : ℝ)) :=
+  calc (s (Fin.last (n + 1)) : ℝ) * (s 0 : ℝ) * Real.exp (K * openChainEnergy s)
+      = (s 0 : ℝ) * (s (Fin.last (n + 1)) : ℝ) * Real.exp (K * openChainEnergy s) := by
+        rw [mul_comm (s (Fin.last (n + 1)) : ℝ)]        -- ℝ の乗法の可換性
+    _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * Real.exp (K * openChainEnergy s) := by
+        rw [prod_bondSpin_eq_first_mul_last]            -- 上の等式（`prod_bondSpin_eq_first_mul_last`）を右辺から左辺へ
+    _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * ∏ m : Fin (n + 1), Real.exp (K * (bondSpin s m : ℝ)) := by
+        rw [exp_openChainEnergy_eq_prod_bondSpin]       -- 上の `exp(KE(s))` の鎖
+    _ = ∏ m : Fin (n + 1), (bondSpin s m : ℝ) * Real.exp (K * (bondSpin s m : ℝ)) :=
+        (finite_product_of_real_products n _ _).symm   -- `finite_product_of_real_products`（`m → M_col-1`、`j → m`、
+                                                        -- `x_j → t_m(s)`、`y_j → exp(Kt_m(s))`）を右辺から左辺へ
+
+end OpenChainEndpointProductSum
 
 /-- **人手 `open_chain_endpoint_product_sum`**:
-`∑_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}`。 -/
+`∑_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}`。
+人手の最後の鎖（左辺と 12 行）と、印 `人手 1`〜`人手 12` で 1 対 1 の `calc` である。人手の `M_col` は Lean の `n + 2`。 -/
 theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
     ∑ s : SpinConf M, (s (lastSite M (by omega)) : ℝ) * (s (firstSite M (by omega)) : ℝ)
         * Real.exp (K * openChainEnergy s)
       = 2 * (2 * Real.sinh K) ^ (M - 1) := by
-  have hM0 : M ≠ 0 := by omega
-  calc ∑ s : SpinConf M, (s (lastSite M (by omega)) : ℝ) * (s (firstSite M (by omega)) : ℝ)
+  obtain ⟨n, rfl⟩ : ∃ n, M = n + 2 := ⟨M - 2, by omega⟩
+  calc ∑ s : SpinConf (n + 2), (s (lastSite (n + 2) (by omega)) : ℝ) * (s (firstSite (n + 2) (by omega)) : ℝ)
         * Real.exp (K * openChainEnergy s)
-      = ∑ s : SpinConf M, (∏ b : OpenChainBond M, ((openChainChange hM0 s).2 b : ℝ))
-          * ∏ b : OpenChainBond M, Real.exp (K * ((openChainChange hM0 s).2 b : ℝ)) :=
-        Finset.sum_congr rfl fun s _ => by
-          rw [exp_openChainEnergy K s, mul_comm (s (lastSite M _) : ℝ)]
-          exact congrArg (· * _) (prod_openChainBondSpin hM s).symm
-    _ = ∑ s : SpinConf M, ∏ b : OpenChainBond M,
-          ((openChainChange hM0 s).2 b : ℝ) * Real.exp (K * ((openChainChange hM0 s).2 b : ℝ)) :=
-        Finset.sum_congr rfl fun s _ => Finset.prod_mul_distrib.symm
-    -- Step 1 の全単射
-    _ = ∑ y : SpinVal × (OpenChainBond M → SpinVal),
-          ∏ b : OpenChainBond M, (y.2 b : ℝ) * Real.exp (K * (y.2 b : ℝ)) :=
-        (Equiv.ofBijective _ (openChainChange_bijective hM0)).sum_comp
-          (fun y => ∏ b : OpenChainBond M, (y.2 b : ℝ) * Real.exp (K * (y.2 b : ℝ)))
-    _ = ∑ a : SpinVal, ∑ t : OpenChainBond M → SpinVal,
-          ∏ b : OpenChainBond M, (t b : ℝ) * Real.exp (K * (t b : ℝ)) := Fintype.sum_prod_type _
-    -- 有限個の因子の積の展開
-    _ = (∑ _a : SpinVal, (1 : ℝ)) *
-          ∏ b : OpenChainBond M, ∑ x : SpinVal, (x : ℝ) * Real.exp (K * (x : ℝ)) := by
-        rw [Fintype.prod_sum, Finset.sum_mul]
-        simp only [one_mul]
-    -- 二元集合 `{-1,1}` 上の二つの有限和を計算
-    _ = 2 * ∏ _b : OpenChainBond M, (Real.exp K - Real.exp (-K)) := by
-        rw [sum_spinVal, sum_spinVal]
-        simp only [one_mul, mul_one, mul_neg, neg_mul]
-        norm_num
-        rfl
-    -- 双曲線正弦の定義
-    _ = 2 * ∏ _b : OpenChainBond M, (2 * Real.sinh K) := by
-        rw [Real.sinh_eq]
-        congr 1
-        exact Finset.prod_congr rfl fun _ _ => by ring
-    -- 同じ因子 `2sinh K` の `M_col - 1` 個の積
-    _ = 2 * (2 * Real.sinh K) ^ (M - 1) := by
-        rw [Finset.prod_const, Finset.card_univ, card_openChainBond hM0]
+      = ∑ s : SpinConf (n + 2), ∏ m : Fin (n + 1), (bondSpin s m : ℝ) * Real.exp (K * (bondSpin s m : ℝ)) :=
+        Finset.sum_congr rfl fun s _ => endpoint_mul_exp_openChainEnergy_eq_prod K s
+                                                        -- 人手 1: 直前の等式を各項へ（人手の `s(M_col)`・`s(1)` は
+                                                        -- `lastSite`・`firstSite` で、`Fin.last (n + 1)`・`0` と定義で一致）
+    _ = ∑ u : SpinVal, ∑ τ : Fin (n + 1) → SpinVal, ∏ m : Fin (n + 1), (τ m : ℝ) * Real.exp (K * (τ m : ℝ)) := by
+        rw [← Fintype.sum_prod_type']
+        exact openChainPhiEquiv.sum_comp (fun y => ∏ m : Fin (n + 1), (y.2 m : ℝ) * Real.exp (K * (y.2 m : ℝ)))
+                                                        -- 人手 2: Step 1 の全単射 `Φ` で和の添字を `s` から `(u; τ) = Φ(s)` へ付け替える
+                                                        -- （`Fintype.sum_prod_type'` は組の上の和を `u` と `τ` の二重の和に読む運ぶ段）
+    _ = ∑ u : SpinVal, binaryWordRealSum n
+          (fun ε => ∏ m : Fin (n + 1), (varsigma (ε m) : ℝ) * Real.exp (K * (varsigma (ε m) : ℝ))) := by
+        refine Finset.sum_congr rfl fun u _ => ?_
+        rw [binaryWordRealSum_eq_sum_univ]
+        exact (varsigmaWordEquiv.sum_comp
+          (fun τ => ∏ m : Fin (n + 1), (τ m : ℝ) * Real.exp (K * (τ m : ℝ)))).symm
+                                                        -- 人手 3: Step 1 の全単射 `ε ↦ (ς(ε_1),…)` で内側の和の添字を付け替える
+                                                        -- （`binaryWordRealSum_eq_sum_univ` は運ぶ段）
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1),
+          ((varsigma 1 : ℝ) * Real.exp (K * (varsigma 1 : ℝ))
+            + (varsigma 0 : ℝ) * Real.exp (K * (varsigma 0 : ℝ))) :=
+        Finset.sum_congr rfl fun u _ =>
+          (expansion_of_finite_product_of_two_term_sums_of_real n
+            (fun _ e => (varsigma e : ℝ) * Real.exp (K * (varsigma e : ℝ)))).symm
+                                                        -- 人手 4: `expansion_of_finite_product_of_two_term_sums_of_real_numbers`
+                                                        -- （`r → M_col-1`、`j → m`、`a_j^{(e)} → ς(e)exp(Kς(e))`）を右辺から左辺へ、各 `u` の項へ
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (1 * Real.exp (K * 1) + (-1) * Real.exp (K * (-1))) := by
+        rw [coe_varsigma_one, coe_varsigma_zero]        -- 人手 5: `ς(1) = 1`、`ς(0) = -1` を各因子へ
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp (K * 1) + (-1) * Real.exp (K * (-1))) := by
+        rw [one_mul]                                    -- 人手 6: ℝ で `1·b = b` を各因子へ
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (K * (-1))) := by
+        rw [mul_one]                                    -- 人手 7: ℝ で `a·1 = a` を各因子へ
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (-K)) := by
+        rw [mul_neg_one K]                              -- 人手 8: ℝ で `a·(-1) = -a` を各因子へ
+    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
+        rw [neg_one_mul, ← sub_eq_add_neg]              -- 人手 9: ℝ で `a + (-1)b = a - b` を各因子へ
+                                                        -- （Lean では `(-1)b = -b` と `a + (-b) = a - b` の二つの補題）
+    _ = 2 * ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
+        rw [sum_spinVal, ← two_mul]                     -- 人手 10: `u` に依らない実数 `c` の `{-1,1}` 上の和は `c + c = 2c`
+    _ = 2 * ∏ m : Fin (n + 1), (2 * Real.sinh K) := by
+        rw [Real.sinh_eq, mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
+                                                        -- 人手 11: `def_cosh_sinh`（`x → K`）を各因子へ（`def_cosh_sinh` は Lean で
+                                                        -- 定義し直していないので mathlib の `Real.sinh_eq`。人手の `2sinh K` を
+                                                        -- `exp K - exp(-K)` へ戻す `2·(b/2) = b` を同じ段に置く）
+    _ = 2 * (2 * Real.sinh K) ^ (n + 2 - 1) := by
+        rw [Fin.prod_const]; rfl                        -- 人手 12: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2sinh K`、`n → M_col-1`）。
+                                                        -- 指数の `n + 2 - 1` は Lean の自然数の引き算で、`n + 1` と同じ数
 
 /-! ## `open_chain_spin_sums_positive` -/
 

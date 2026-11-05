@@ -6,7 +6,7 @@
 
 | 人手 | 具体版 | 必要十分版からの導出 | 特殊化 |
 | --- | --- | --- | --- |
-| `open_chain_endpoint_product_sum` の Step 2 | `prod_openChainBondSpin` | `prod_openChainBondSpin_of_necSuf` | `G = ℝ`、`x(m) = s(m)` |
+| `open_chain_endpoint_product_sum` の Step 2 | `prod_bondSpin_eq_first_mul_last`（導出の型は書き換える前の具体版の形で、状態台帳の次の一歩で揃える） | `prod_openChainBondSpin_of_necSuf` | `G = ℝ`、`x(m) = s(m)` |
 | `open_chain_partition_sum` | `open_chain_partition_sum` | `open_chain_partition_sum_of_necSuf` | `R = ℝ`、`g(t) = exp(Kt)` |
 | `open_chain_endpoint_product_sum` | `open_chain_endpoint_product_sum` | `open_chain_endpoint_product_sum_of_necSuf` | `R = ℝ`、`g(t) = t·exp(Kt)` |
 
@@ -20,7 +20,7 @@ open Finset
 
 variable {M : ℕ}
 
-/-- `prod_openChainBondSpin` を `NecSuf.prod_mul_nextSite_eq_first_mul_last`（`G = ℝ`、`x(m) = s(m)`）から得る。 -/
+/-- 書き換える前の具体版の Step 2 の形 `∏_b t_b = s(1)s(M_col)`（結合の添字は `OpenChainBond M`）を `NecSuf.prod_mul_nextSite_eq_first_mul_last`（`G = ℝ`、`x(m) = s(m)`）から得る。 -/
 theorem prod_openChainBondSpin_of_necSuf (hM : 2 ≤ M) (s : SpinConf M) :
     ∏ b : OpenChainBond M, (openChainBondSpin s b : ℝ)
       = (s (firstSite M (by omega)) : ℝ) * (s (lastSite M (by omega)) : ℝ) := by
