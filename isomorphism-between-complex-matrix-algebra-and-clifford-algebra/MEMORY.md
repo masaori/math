@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-05: 行列の積が左の因子の和に分配すること（ラベル claim_matrix_product_distributes_over_sum_in_left_factor、(A+B)C=AC+BC）を示した。次は単位行列が行列の積の単位元であること（デルタが一項を取り出す主張 claim_sum_over_finite_set_with_kronecker_delta_picks_term を引く）。
 - 2026-11-05（研究管理）: 台帳に行列単位の定義の行を足し、「生成作用素の行列 c_i と、その反交換関係」を五行に割った（c_i^T は成分で直接定め、転置の一般論を置かない）。build:pdf が地の文の ℂ で落ちていたのを、プリアンブルで ℂ を \mathbb{C} で組む形にして直し、runbook の検証に build:pdf を足した。
 - 2026-11-05: 「行列の積の分配法則」を台帳で二行に割り、行列の積が右の因子の和に分配すること（ラベル claim_matrix_product_distributes_over_sum_in_right_factor、A(B+C)=AB+AC）を示した。次は左の因子の和への分配（(A+B)C=AC+BC。各 z の項の (A+B)_{x,z} を A_{x,z}+_ℂB_{x,z} に書き直し、同じ族の二つの和の和の主張 claim_sum_of_sums_over_finite_set_with_same_family を v_z:=C_{z,y} で逆向きに当てる）。
 - 2026-11-05: 行列の積の結合法則（ラベル claim_matrix_product_is_associative）を示した。次は行列の積の分配法則（A(B+C)=AB+AC は族ごとの和、(A+B)C=AC+BC は係数ごとの和の主張を、各項の値だけで決まることと合わせて引く）。
