@@ -261,13 +261,17 @@
 | **`Ising2D.basisVec_configBasisIso_apply`** | **`(f_{ι(s)})_{ord(s')} = δ_{s=s'}`** | **準備 (P5)** |
 | **`Ising2D.mulVec_basisVec_configBasisIso_apply`** | **`(Xf_{ι(s)})_{ord(s')} = X_{ord(s'),ord(s)}`** | **準備 (P5) の列の読み取り** |
 | `Ising2D.negSpinConf` / `configBasisIso_negSpinConf` | `(-s)(m) := -s(m)`、`ι` のもとで全成分の入れ替えは `ι(s) ↦ ι(-s)` | Step 3 (b) とその理由 |
-| `Ising2D.eq_diagonal_of_mulVec_basisVec` / `openChainD0_eq_diagonal` | `D_0` は対角行列で `(D_0)_{ι(s),ι(s)} = E(s)` | Step 3 (a)（`D0_G_diagonal_action`） |
-| **`Ising2D.matExp_smul_openChainD0`** / `matExp_smul_openChainD0_apply` | **`exp(K_1D_0)` は対角行列で `(exp(K_1D_0))_{ι(s),ι(s)} = exp(K_1E(s))`** | **Step 3 (a)**（`exp_of_diagonal_matrix`） |
-| **`Ising2D.boundaryG_eq_diagonal`** / `boundaryG_apply` | **`G` は対角行列で `G_{ι(s),ι(s)} = s(M_col)s(1)`** | **Step 3 (a)** |
+| **`Ising2D.openChainD0_apply_configBasisIso`** | **`(D_0)_{ord(s'),ord(s)} = (E(s))_ℂδ_{s=s'}` の 4 段** | **Step 3 (a) の 4 行** |
+| **`Ising2D.boundaryG_apply_configBasisIso`** | **`G_{ord(s'),ord(s)} = (s(M_col)s(1))_ℂδ_{s=s'}` の 4 段** | **Step 3 (a) の「同じ 4 行で」** |
+| `Ising2D.eq_diagonal_of_apply_configBasisIso` | 非対角成分が `0_ℂ`、対角成分が `d(s)` なら対角成分 `d` の対角行列 | Step 3 (a) の「全ての番号は `ord(s)` の形なので対角行列」（`row_configuration_numbering_bijective`・`def_diagonal_matrix`） |
+| `Ising2D.openChainD0_eq_diagonal` / `boundaryG_eq_diagonal` | `D_0`・`G` は対角行列で、対角成分は `(E(s))_ℂ`・`(s(M_col)s(1))_ℂ` | Step 3 (a) |
+| **`Ising2D.smul_openChainD0_eq_diagonal`** | **`κD_0` は対角行列で `(κD_0)_{ord(s),ord(s)} = κ(E(s))_ℂ = (K_1E(s))_ℂ`** | **Step 3 (a) の `κD_0` の 2 行** |
+| **`Ising2D.matExp_smul_openChainD0`** / **`matExp_smul_openChainD0_apply`** | **`exp(κD_0)` は対角行列で `(exp(κD_0))_{ord(s),ord(s)} = exp((K_1E(s))_ℂ) = (exp(K_1E(s)))_ℂ`** | **Step 3 (a) の最後の 2 行**（`exp_of_diagonal_matrix`・`complex_exp_of_real_argument`） |
 | **`Ising2D.epsilon_mulVec_basisVec_configBasisIso`** | **`εf_{ι(s)} = f_{ι(-s)}`** | **Step 3 (b)** |
+| **`Ising2D.epsilon_apply_configBasisIso_col`** | **`ε_{ord(s'),ord(s)} = δ_{-s=s'}` の 3 段** | **Step 3 (b) の 3 行** |
 | `Ising2D.epsilon_apply_configBasisIso` / `epsilon_mul_apply_configBasisIso` | `ε_{ι(s),J} = δ_{J,ι(-s)}`、`(εA)_{ι(s),J} = A_{ι(-s),J}`（行の形。`epsilon_apply` から） | Step 4 が (b) として使う形 |
 | `Ising2D.matExp_smul_openChainD0_mul_apply` / `boundaryG_mul_apply` | `(exp(K_1D_0)X)_{ι(s),J} = exp(K_1E(s))X_{ι(s),J}`、`(GX)_{ι(s),J} = s(M_col)s(1)X_{ι(s),J}` | Step 4 が (a) として使う形 |
-| `Ising2D.sum_spin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `Ising2D.V2_apply_configBasisIso`） |
+| `Ising2D.sum_spin_mul_self` / `sum_negSpin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、`∑_m (-s(m))s(m) = -M_col`（項ごとに `1`・`-1` を足す）、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `Ising2D.V2_apply_configBasisIso`） |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
 
