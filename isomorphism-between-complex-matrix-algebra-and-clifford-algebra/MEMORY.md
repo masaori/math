@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-05: 有限集合の上の和が各項の値だけで決まること（ラベル claim_sum_over_finite_set_depends_only_on_terms）を、行列の積の結合法則の前に台帳の行として割り出して示した。次は行列の積の結合法則。
 - 2026-11-05: 「有限集合で添字づけた行列の代数」を台帳で七行に割り、新しい章のファイル complex-matrix-algebra.ts（複素行列環の章）に行列の集合と演算の定義（ラベル def_matrices_indexed_by_finite_set、Mat_X(ℂ)、演算 +_{Mat_X}・·_{Mat_X}・∗_{Mat_X}・0_{Mat_X}・1_{Mat_X}）を置いた。次は行列の集合が成分ごとの和とスカラー倍で ℂ-線型空間であること（双対空間の公理の確認と同じく成分の等式で確かめ、加法の逆元は成分ごとの逆元を選んだ行列で与える）。
 - 2026-11-04: 代数の中の番号順の積の定義（ラベル def_ordered_product_in_algebra、Π_0:=1_A・Π_m:=Π_{m-1}·_A x_m、記号 ∏_{A,k=1}^{n} x_k。逆順の積は y_k:=x_{n+1-k} の番号順の積として書く）を置いた。次は有限集合で添字づけた行列の代数（複素行列環の章。章のファイル complex-matrix-algebra.ts を新しく作り main-text.ts に足す）。
 - 2026-11-04: 代数から環と線型空間を取り出す対応と記号の規則（ラベル def_underlying_ring_and_vector_space_of_algebra、U_ring(A)・U_vec(A)）を置いた。環・線型空間の主張を代数に当てるときはこのラベルを引き、スカラー倍は ∗_A と書く。次は代数の中の番号順の積の定義（空の積は 1_A。ℂ の中の番号順の和 def_ordered_sum_in_complex_numbers と同じ帰納的な形）。

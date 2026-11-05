@@ -6259,6 +6259,202 @@ R_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_sum_over_finite_set_depends_only_on_terms",
+    kind: "claim",
+    title: { text: "有限集合の上の和は、各項の値だけで決まる" },
+    labels: ["claim_sum_over_finite_set_depends_only_on_terms"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`v_x,\ u_x`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_x,\ \mu_x`),
+        " が一つずつ与えられていて、すべての ",
+        math(String.raw`x\in X`),
+        " について ",
+        math(String.raw`\lambda_x\cdot_V v_x=\mu_x\cdot_V u_x`),
+        " が成り立つとする。このとき、有限集合の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{x\in X}\lambda_x\cdot_V v_x=\sum_{x\in X}\mu_x\cdot_V u_x`),
+      paragraph([
+        "係数どうし ",
+        math(String.raw`\lambda_x,\ \mu_x`),
+        " や元どうし ",
+        math(String.raw`v_x,\ u_x`),
+        " が等しいことは仮定しない。仮定するのは、各 ",
+        math(String.raw`x`),
+        " の項 ",
+        math(String.raw`\lambda_x\cdot_V v_x`),
+        " と ",
+        math(String.raw`\mu_x\cdot_V u_x`),
+        " が ",
+        math(String.raw`V`),
+        " の元として等しいことだけである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`X`),
+        " は有限集合なので、番号付け ",
+        math(String.raw`(n,e)`),
+        "（",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`e:\{1,\dots,n\}\to X`),
+        "）が少なくとも一つある（",
+        ref("def_numbering_of_finite_set"),
+        "）。それを一つ選び、二つの和をどちらもこの ",
+        math(String.raw`(n,e)`),
+        " で定義を開く。有限集合の上の和は番号付けの取り方によらないので（",
+        ref("def_sum_over_finite_set"),
+        "）、二つの和に同じ番号付けを使ってよい。",
+      ]),
+      paragraph([
+        "準備として、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について、",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`b_k:=v_{e(k)}`),
+        "、",
+        math(String.raw`c_k:=u_{e(k)}`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\alpha_k:=\lambda_{e(k)}`),
+        "、",
+        math(String.raw`\beta_k:=\mu_{e(k)}`),
+        " を置く。仮定を ",
+        math(String.raw`x=e(k)`),
+        " に当てると ",
+        math(String.raw`\alpha_k\cdot_V b_k=\lambda_{e(k)}\cdot_V v_{e(k)}=\mu_{e(k)}\cdot_V u_{e(k)}=\beta_k\cdot_V c_k`),
+        " である。",
+      ]),
+      paragraph([
+        "族 ",
+        math(String.raw`b_1,\dots,b_n`),
+        " と係数 ",
+        math(String.raw`\alpha_1,\dots,\alpha_n`),
+        "、族 ",
+        math(String.raw`c_1,\dots,c_n`),
+        " と係数 ",
+        math(String.raw`\beta_1,\dots,\beta_n`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`L_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）を、順に ",
+        math(String.raw`L^{b}_m`),
+        "、",
+        math(String.raw`L^{c}_m`),
+        " と書く。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L^{b}_0:=0_V`),
+          "、",
+          math(String.raw`L^{b}_m:=L^{b}_{m-1}+_V(\alpha_m\cdot_V b_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`L^{c}_0:=0_V`),
+          "、",
+          math(String.raw`L^{c}_m:=L^{c}_{m-1}+_V(\beta_m\cdot_V c_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L^{b}_m=L^{c}_m`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+L^{b}_0
+&=0_V
+&&\left(\because\ L^{b}_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{c}_0
+&&\left(\because\ L^{c}_0\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`L^{b}_{m-1}=L^{c}_{m-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^{b}_m
+&=L^{b}_{m-1}+_V(\alpha_m\cdot_V b_m)
+&&\left(\because\ L^{b}_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{c}_{m-1}+_V(\alpha_m\cdot_V b_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L^{c}_{m-1}+_V(\beta_m\cdot_V c_m)
+&&\left(\because\ \alpha_m\cdot_V b_m=\beta_m\cdot_V c_m\right)\\
+&=L^{c}_m
+&&\left(\because\ L^{c}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L^{b}_m=L^{c}_m`),
+        " が示された（",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`m=0`),
+        " の場合だけで足りる）。これを ",
+        math(String.raw`m=n`),
+        " で使い、主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{x\in X}\lambda_x\cdot_V v_x
+&=\sum_{k=1}^{n}\lambda_{e(k)}\cdot_V v_{e(k)}
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n,e)\ \text{で}\right)\\
+&=\sum_{k=1}^{n}\alpha_k\cdot_V b_k
+&&\left(\because\ \alpha_k,\ b_k\ \text{の定義}\right)\\
+&=L^{b}_n
+&&\left(\because\ L^{b}_n\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{c}_n
+&&\left(\because\ \text{上の帰納法の}\ m=n\right)\\
+&=\sum_{k=1}^{n}\beta_k\cdot_V c_k
+&&\left(\because\ L^{c}_n\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\sum_{k=1}^{n}\mu_{e(k)}\cdot_V u_{e(k)}
+&&\left(\because\ \beta_k,\ c_k\ \text{の定義}\right)\\
+&=\sum_{x\in X}\mu_x\cdot_V u_x
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n,e)\ \text{で}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_algebra_heading",
     kind: "heading",
     level: 2,
