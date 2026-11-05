@@ -2,14 +2,16 @@
 # `tr(εV^{(+)})` を `tr(εV_1^{(+)}V_2)` へ移し、`εV_1^{(+)}` を `exp(K_1D_0)` と `ε, G` で書く（具体版）
 
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
-（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の準備 (P1)・(P2)・Step 1・Step 2）
+（`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の準備 (P1)〜(P4)・Step 1・Step 2）
 
 | 人手 | Lean |
 | --- | --- |
 | Step 1 の式変形 `tr(εV^{(+)}) = tr(εBV_2B) = ⋯ = tr(εV_1^{(+)}V_2)` | `trace_epsilon_VPlusOfTransfer` |
 | 準備 (P1) の 4 行 `(iκ)H_1^{(+)} = (κi)H_1^{(+)} = κ(iH_1^{(+)}) = κ(D_0 + εG) = κD_0 + κ(εG)` | `I_mul_smul_H1plus` の calc の 4 段 |
 | 準備 (P2) の 5 行 `D_0(εG) = (D_0ε)G = ⋯ = (εG)D_0` | `commute_openChainD0_epsilon_mul_boundaryG` の calc の 5 段 |
-| 同 `commuting_with_scalar_multiple` の 3 回の適用 `D_0(κ(εG)) = (κ(εG))D_0`・`(κ(εG))(κD_0) = (κD_0)(κ(εG))`・`ε(κD_0) = (κD_0)ε` | `openChainD0_mul_smul_epsilon_mul_boundaryG`・`smul_epsilon_mul_boundaryG_mul_smul_openChainD0`・`epsilon_mul_smul_openChainD0` |
+| 準備 (P2) の `commuting_with_scalar_multiple` の 3 回の適用 `D_0(κ(εG)) = (κ(εG))D_0`・`(κ(εG))(κD_0) = (κD_0)(κ(εG))`・`ε(κD_0) = (κD_0)ε` | `openChainD0_mul_smul_epsilon_mul_boundaryG`・`smul_epsilon_mul_boundaryG_mul_smul_openChainD0`・`epsilon_mul_smul_openChainD0` |
+| 準備 (P3) の帰納法 `(εG)^{2j} = I`（`j = 0` と `j → j+1` の 4 行）・`(εG)^{2j+1} = εG` の 3 行 | `pow_two_mul_of_sq_eq_one`・`pow_two_mul_add_one_of_pow_two_mul_eq_one`（`(εG)^2 = I` から `(εG)^{2j+1} = εG` を出す系 `pow_two_mul_add_one_of_sq_eq_one`） |
+| 準備 (P4) の帰納法 `(κX)^n = κ^nX^n`（`n = 0` と `n → n+1` の 6 行） | `smul_pow_tensorPow` の 2 つの calc |
 | Step 2 の `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)`（`theorem_exp_product`） | `V1plus_eq_exp_openChainD0_mul_exp` |
 | 同 `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`（`def_exp` の級数を偶数次と奇数次に分ける） | `matExp_smul_of_sq_eq_one`（`εG` について `exp_epsilon_mul_boundaryG`） |
 | 同 `εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)` | `epsilon_mul_V1plus` |
@@ -22,6 +24,10 @@
 `commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（どちらも `TensorPow M` での系）、
 `scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
+準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_exp`）と `def_power_of_complex_number` が
+`pow_zero`・`pow_succ`、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
+`identity_matrix_mul_tensorPow`、`scalar_multiple_by_one` が `one_smul_tensorPow`、`scalar_multiple_factors_out_of_left_factor`・
+`scalar_multiple_factors_out_of_right_factor` が `smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`（いずれも `TensorPow M` での系）である。
 人手 Step 1 は `V_2` との可換性を挙げるが、式変形の各行が使うのは `B` と `V_1^{(+)}` との可換性だけなので、
 Lean の主張は `K_2 > 0` を仮定しない。
 
@@ -39,6 +45,8 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquar
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithScalarMultipleFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -136,14 +144,56 @@ theorem V1plus_eq_exp_openChainD0_mul_exp (hM : 2 ≤ M) (K1 : ℂ) :
   rw [V1plus_exponential_representation, I_mul_smul_H1plus hM, matExp, matExp, matExp,
     Matrix.exp_add_of_commute _ _ hc]
 
-/-- 人手 Step 2 の `(εG)^2 = I` から `(εG)^{2n} = I`。 -/
-theorem pow_two_mul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (n : ℕ) : A ^ (2 * n) = 1 := by
-  rw [pow_mul, hA, one_pow]
+/-- 人手の準備 (P3) の奇数冪の 3 行 `(εG)^{2j+1} = (εG)^{2j}(εG) = I(εG) = εG`（帰納法の仮定 `(εG)^{2j} = I` から）。
+`A` は `εG` で、Lean は `TensorPow M` の任意の元で述べる（`A` が `εG` であることは使わない）。 -/
+theorem pow_two_mul_add_one_of_pow_two_mul_eq_one {A : TensorPow M} (j : ℕ) (h : A ^ (2 * j) = 1) :
+    A ^ (2 * j + 1) = A :=
+  calc A ^ (2 * j + 1)
+      = A ^ (2 * j) * A := pow_succ A (2 * j)                 -- 冪の定義 `A^{n+1} := A^nA`（`def_exp`）
+    _ = 1 * A := by rw [h]                                    -- 帰納法の仮定 `(εG)^{2j} = I`
+    _ = A := identity_matrix_mul_tensorPow A                  -- `identity_matrix_is_left_unit_of_mat_mult`
 
-/-- 人手 Step 2 の `(εG)^2 = I` から `(εG)^{2n+1} = εG`。 -/
-theorem pow_two_mul_add_one_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (n : ℕ) :
-    A ^ (2 * n + 1) = A := by
-  rw [pow_succ, pow_two_mul_of_sq_eq_one hA n, one_mul]
+/-- **人手の準備 (P3)**: `(εG)^2 = I`（`epsilon_G_is_involution`）から、`j` に関する帰納法で `(εG)^{2j} = I`。
+`j = 0` は冪の定義 `A^0 := I`、`j → j+1` は奇数冪の 3 行（`pow_two_mul_add_one_of_pow_two_mul_eq_one`）に続く 4 行
+`(εG)^{2j+2} = (εG)^{2j+1}(εG) = (εG)(εG) = (εG)^2 = I`。 -/
+theorem pow_two_mul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (j : ℕ) : A ^ (2 * j) = 1 := by
+  induction j with
+  | zero => exact pow_zero A                                  -- 冪の定義 `A^0 := I`
+  | succ j ih =>
+    calc A ^ (2 * (j + 1))
+        = A ^ (2 * j + 2) := rfl                              -- 指数 `2(j+1) = 2j+2`（人手は `(εG)^{2j+2}` と書く）
+      _ = A ^ (2 * j + 1) * A := pow_succ A (2 * j + 1)       -- 冪の定義
+      _ = A * A := by                                         -- 直前の `(εG)^{2j+1} = εG`
+          rw [pow_two_mul_add_one_of_pow_two_mul_eq_one j ih]
+      _ = A ^ 2 := (pow_two A).symm                           -- `epsilon_G_is_involution` の `X^2 := XX`
+      _ = 1 := hA                                             -- `epsilon_G_is_involution`
+
+/-- 人手の準備 (P3) の `(εG)^{2j+1} = εG`（`(εG)^{2j} = I` と奇数冪の 3 行から）。 -/
+theorem pow_two_mul_add_one_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (j : ℕ) :
+    A ^ (2 * j + 1) = A :=
+  pow_two_mul_add_one_of_pow_two_mul_eq_one j (pow_two_mul_of_sq_eq_one hA j)
+
+/-- **人手の準備 (P4)**: `n` に関する帰納法で `(κX)^n = κ^nX^n`（`X := εG`、`κ^n` は `def_power_of_complex_number`）。
+`n = 0` は両辺とも `I`（`κ^0 = 1_ℂ` と `scalar_multiple_by_one`）、`n → n+1` は人手の 6 行。
+Lean は任意の `κ : ℂ`・`X : TensorPow M` で述べる（`X` が `εG` であることも `κ` が実数の像であることも使わない）。 -/
+theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^ n = κ ^ n • X ^ n := by
+  induction n with
+  | zero =>
+    calc (κ • X) ^ 0
+        = 1 := pow_zero _                                     -- 冪の定義 `A^0 := I`
+      _ = (1 : ℂ) • (1 : TensorPow M) := (one_smul_tensorPow 1).symm   -- `scalar_multiple_by_one` を右辺から左辺へ
+      _ = κ ^ 0 • X ^ 0 := by rw [pow_zero, pow_zero]         -- `κ^0 = 1_ℂ`（`def_power_of_complex_number`）と冪の定義
+  | succ n ih =>
+    calc (κ • X) ^ (n + 1)
+        = (κ • X) ^ n * (κ • X) := pow_succ _ n               -- 冪の定義
+      _ = (κ ^ n • X ^ n) * (κ • X) := by rw [ih]             -- 帰納法の仮定
+      _ = κ ^ n • (X ^ n * (κ • X)) :=
+          smul_mul_matrix_tensorPow _ _ _                     -- `scalar_multiple_factors_out_of_left_factor`
+      _ = κ ^ n • (κ • (X ^ n * X)) := by
+          rw [mul_smul_matrix_tensorPow]                      -- `scalar_multiple_factors_out_of_right_factor`
+      _ = (κ ^ n * κ) • (X ^ n * X) := smul_smul _ _ _        -- `scalar_multiple_is_associative`（具体版が無いので mathlib の `smul_smul`）
+      _ = κ ^ (n + 1) • X ^ (n + 1) := by                     -- `def_power_of_complex_number` と冪の定義
+          rw [← pow_succ, ← pow_succ]
 
 /-- **人手 Step 2 の偶奇分解**: `A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A`（`t ∈ ℝ`）。
 
@@ -155,12 +205,12 @@ theorem matExp_smul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (t : ℝ) :
   have heven : HasSum (fun n : ℕ => (((2 * n).factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ (2 * n))
       (Complex.cosh (t : ℂ) • (1 : TensorPow M)) := by
     refine ((Complex.hasSum_cosh (t : ℂ)).smul_const (1 : TensorPow M)).congr_fun fun n => ?_
-    rw [smul_pow, pow_two_mul_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
+    rw [smul_pow_tensorPow, pow_two_mul_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
   -- 奇数次の項: `((2n+1)!)^{-1}(tA)^{2n+1} = (t^{2n+1}/(2n+1)!) A`
   have hodd : HasSum (fun n : ℕ => (((2 * n + 1).factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ (2 * n + 1))
       (Complex.sinh (t : ℂ) • A) := by
     refine ((Complex.hasSum_sinh (t : ℂ)).smul_const A).congr_fun fun n => ?_
-    rw [smul_pow, pow_two_mul_add_one_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
+    rw [smul_pow_tensorPow, pow_two_mul_add_one_of_sq_eq_one hA n, smul_smul, div_eq_inv_mul]
   -- 偶数次と奇数次を足し直す
   have hall := HasSum.even_add_odd
     (f := fun k : ℕ => ((k.factorial : ℂ))⁻¹ • ((t : ℂ) • A) ^ k) heven hodd

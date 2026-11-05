@@ -13,6 +13,9 @@
 
 具体版 `matExp_smul_of_sq_eq_one`・`exp_smul_pauliX_eq_cosh_add_sinh` の偶数次の項・奇数次の項・足し直しの 3 段が、
 それぞれ下の手順 1・手順 2・手順 3 に当たる。
+ただし手順 1・2 の冪の補題（`pow_two_mul_of_sq_eq_one`・`pow_two_mul_add_one_of_sq_eq_one` の `pow_mul`）と `smul_pow` は
+`two_by_two_transfer_identity` の具体版の手順（`(σ^x)^{2p} = ((σ^x)^2)^p`）に合わせたもので、`trace_of_epsilon_V_plus` の
+具体版（準備 (P3)・(P4) の帰納法）とは段が違う。どちらの具体版とも同じ手順にする直し方は状態台帳に書いてある。
 
 1. 偶数次の項: `A^{2n} = 1` なので `((2n)!)^{-1}(tA)^{2n} = (t^{2n}/(2n)!)·1`。その和は `cosh(t)·1`。
 2. 奇数次の項: `A^{2n+1} = A` なので `((2n+1)!)^{-1}(tA)^{2n+1} = (t^{2n+1}/(2n+1)!)·A`。その和は `sinh(t)·A`。
