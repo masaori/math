@@ -127,10 +127,10 @@ theorem matExp_smul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (t : ℝ) :
     ← Complex.ofReal_cosh, ← Complex.ofReal_sinh]
 
 /-- 人手 Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`（`epsilon_G_is_involution` の `(εG)^2 = I`）。 -/
-theorem exp_epsilon_mul_boundaryG (hM : M ≠ 0) (K1 : ℝ) :
-    matExp ((K1 : ℂ) • (epsilon M * boundaryG M hM))
+theorem exp_epsilon_mul_boundaryG (hM : 2 ≤ M) (K1 : ℝ) :
+    matExp ((K1 : ℂ) • (epsilon M * boundaryG M (by omega)))
       = ((Real.cosh K1 : ℝ) : ℂ) • (1 : TensorPow M)
-        + ((Real.sinh K1 : ℝ) : ℂ) • (epsilon M * boundaryG M hM) :=
+        + ((Real.sinh K1 : ℝ) : ℂ) • (epsilon M * boundaryG M (by omega)) :=
   matExp_smul_of_sq_eq_one (epsilon_mul_boundaryG_sq hM) K1
 
 /-- **人手 `trace_of_epsilon_V_plus` Step 2**: `εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`。 -/
@@ -154,7 +154,7 @@ theorem epsilon_mul_V1plus (hM : 2 ≤ M) (K1 : ℝ) :
     _ = matExp ((K1 : ℂ) • openChainD0 M) * epsilon M
           * (((Real.cosh K1 : ℝ) : ℂ) • (1 : TensorPow M)
             + ((Real.sinh K1 : ℝ) : ℂ) • (epsilon M * boundaryG M hM0)) := by
-        rw [exp_epsilon_mul_boundaryG hM0 K1]
+        rw [exp_epsilon_mul_boundaryG hM K1]
     -- 行列の積の分配則
     _ = matExp ((K1 : ℂ) • openChainD0 M)
           * (((Real.cosh K1 : ℝ) : ℂ) • epsilon M

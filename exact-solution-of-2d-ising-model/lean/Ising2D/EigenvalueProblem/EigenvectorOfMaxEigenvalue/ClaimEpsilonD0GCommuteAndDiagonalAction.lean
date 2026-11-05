@@ -11,9 +11,8 @@
 | 同 `εD_0 = D_0ε` の 5 行 | `epsilon_mul_openChainD0` の 5 段（`M_col = r + 2`） |
 | 同 `εG = Gε` の 3 行 | `epsilon_mul_boundaryG` の 3 段 |
 | 同 `D_0G = GD_0` の 5 行 | `openChainD0_mul_boundaryG` の 5 段（`M_col = r + 2`） |
-| `epsilon_G_is_involution` の `(σ^z_k)^2 = I`（`pauli_matrix_products` と `kronecker_product_rule`） | `sigmaZ_mul_self` |
-| 同 `G^2 = (σ^z_{M_col})^2(σ^z_1)^2`（相異なるサイトの因子の可換性） | `boundaryG_mul_self` の第 1〜2 段 |
-| 同 `(εG)^2 = I` | `epsilon_mul_boundaryG_sq` |
+| `epsilon_G_is_involution` の準備の 5 行 `σ^z_kσ^z_k = ⋯ = I_{Mat(2^{M_col},ℂ)}` | `sigmaZ_mul_self` の 5 段 |
+| 同 主張の 15 行 `(εG)^2 = ⋯ = I_{Mat(2^{M_col},ℂ)}`（`M_col ≥ 2`） | `epsilon_mul_boundaryG_sq` の 15 段 |
 | `D0_G_diagonal_action` の準備の 7 行 `(σ^z_mσ^z_{m+1})f_{ι(s)} = ⋯ = (s(m)s(m+1))_ℂ f_{ι(s)}` | `sigmaZ_mul_sigmaZ_mulVec_basisVec_spin` の 7 段 |
 | 同 開鎖項の 5 行 `D_0f_{ι(s)} = ⋯ = (∑_{m=1}^{M_col-1}s(m)s(m+1))_ℂ f_{ι(s)}` | `openChainD0_mulVec_basisVec` の 5 段 |
 | 同 周期境界項の 8 行 `Gf_{ι(s)} = ⋯ = (s(M_col)s(1))_ℂ f_{ι(s)}` | `boundaryG_mulVec_basisVec` の 8 段 |
@@ -21,11 +20,9 @@
 人手の `ε σ^z_k = -σ^z_k ε`（`epsilon_anticommutes_with_site_sigma_z`）は
 `epsilon_anticomm_sigmaZ`、`σ^z_m f_{ι(s)} = s(m) f_{ι(s)}`（`sigma_z_diagonal_action`）は
 `sigmaZ_mulVec_basisVec_spin`、`ε^2 = I` は `epsilon_sq`、`distinct_site_pauli_matrices_commute` は `siteOp_mul_comm` である。
-`epsilon_G_is_involution` の「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は `siteProd_mul` でサイトごとの積に直して、
-各サイトの因子の積を比べる形で書く。
 
 この証明が使うのは、既存の補題 `epsilon_anticomm_sigmaZ`・`siteOp_mul_comm`・`sigmaZ_mulVec_basisVec_spin`・`epsilon_sq`・
-`pauliZ_mul_pauliZ`・`siteProd_mul`・`real_inclusion_mul`（`ℝ` から `ℂ` への包含が積を保つこと）に加えて、
+`pauliZ_mul_pauliZ`・`siteProd_mul`・`siteProd_one`・`update_one_mul_update_one_same`・`identity_matrix_mul`・`identity_matrix_mul_tensorPow`・`real_inclusion_mul`（`ℝ` から `ℂ` への包含が積を保つこと）に加えて、
 環の公理と有限和・スカラー倍の線型性と、包含が有限和を保つことと、和の添字の読み替え
 `sum_filter_not_last_eq_sum_castSucc`（`ClaimH1PlusInSigmaZForm.lean`）だけである。
 既存の関係を環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無いので、必要十分版は置かない
@@ -36,6 +33,7 @@ import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagona
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimH1PlusInSigmaZForm
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInLeftFactorFromNecSuf
@@ -180,44 +178,83 @@ theorem openChainD0_mul_boundaryG (hM : 2 ≤ M) :
         rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
                                                         -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
 
-/-! ## `epsilon_G_is_involution` -/
+/-! ## `epsilon_G_is_involution`
 
-/-- 人手の `(σ^z_k)^2 = I`（`pauli_matrix_products` の `(σ^z)^2 = I` を `kronecker_product_rule` でサイト `k` に置く）。 -/
-theorem sigmaZ_mul_self (k : Fin M) : sigmaZ k * sigmaZ k = 1 := by
-  rw [sigmaZ, siteOp_apply, ← siteProd_mul, ← siteProd_one]
-  congr 1
-  funext i
-  by_cases h : i = k
-  · subst h
-    simp [pauliZ_mul_pauliZ]
-  · simp [Function.update_of_ne h]
+人手の準備（`σ^z_kσ^z_k = I` の 5 行）と主張の 15 行が、下の 2 つの定理の `calc` の段と 1 対 1 に対応する。
+`siteProd M x` が人手のクロネッカー積 `x_1 ⊠ ⋯ ⊠ x_{M_col}`、`Function.update 1 k A` が「`k` 番目だけ `A`、ほかは
+`I = I_{Mat(2,ℂ)}`」の因子の並びである（`ClaimSignFlipConjugation.lean` の `σ_m^aσ_m^a = I` の鎖と同じ書き方。
+因子ごとの積の並べ替え `update_one_mul_update_one_same` もそこから引く）。人手の `X^2 := XX` は mathlib の `sq`、
+`mat_mult_associative` の段は具体版が無いので `Matrix.mul_assoc` を 1 回ずつ引く（ほかのファイルと同じ扱い）。
+`identity_matrix_is_left_unit_of_mat_mult` の段は、`Mat(2,ℂ)` では具体版 `identity_matrix_mul`、`Mat(2^{M_col},ℂ)` では
+`TensorPow M` の系 `identity_matrix_mul_tensorPow` を引く。 -/
 
-/-- 人手の `G^2 = (σ^z_{M_col})^2(σ^z_1)^2 = I·I`。 -/
-theorem boundaryG_mul_self (hM : M ≠ 0) : boundaryG M hM * boundaryG M hM = 1 :=
-  calc boundaryG M hM * boundaryG M hM
-      = (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM))
-          * (sigmaZ (lastSite M hM) * sigmaZ (firstSite M hM)) := by rw [boundaryG]
-    _ = (sigmaZ (lastSite M hM) * sigmaZ (lastSite M hM))
-          * (sigmaZ (firstSite M hM) * sigmaZ (firstSite M hM)) := by
-        simp only [sigmaZ, siteOp_apply, ← siteProd_mul]
-        congr 1
-        funext i
-        simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-        split_ifs <;> simp
-    _ = 1 * 1 := by rw [sigmaZ_mul_self, sigmaZ_mul_self]
-    _ = 1 := one_mul 1
+/-- **人手 `epsilon_G_is_involution` の準備** `σ^z_kσ^z_k = ⋯ = I_{Mat(2^{M_col},ℂ)}` の 5 行。 -/
+theorem sigmaZ_mul_self (k : Fin M) : sigmaZ k * sigmaZ k = 1 :=
+  calc sigmaZ k * sigmaZ k
+      = siteProd M (Function.update 1 k pauliZ) * siteProd M (Function.update 1 k pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (pauliZ * pauliZ)) := by
+        rw [← siteProd_mul, update_one_mul_update_one_same]
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (pauliZ * pauliZ)) := by
+        rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 以外の各サイトで）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k 1) := by
+        rw [pauliZ_mul_pauliZ]                          -- `pauli_matrix_products` の `σ^zσ^z = I`
+    _ = 1 := by
+        rw [Function.update_eq_self_iff.mpr rfl]
+        exact siteProd_one M                            -- `kronecker_product_rule` (2)
 
-/-- **人手 `epsilon_G_is_involution`**: `(εG)^2 = I`。 -/
-theorem epsilon_mul_boundaryG_sq (hM : M ≠ 0) :
-    (epsilon M * boundaryG M hM) ^ 2 = 1 :=
-  calc (epsilon M * boundaryG M hM) ^ 2
-      = epsilon M * boundaryG M hM * (epsilon M * boundaryG M hM) := sq _
-    _ = (epsilon M * epsilon M) * (boundaryG M hM * boundaryG M hM) := by
-        rw [mul_assoc, ← mul_assoc (boundaryG M hM), ← epsilon_mul_boundaryG hM]
-        simp only [mul_assoc]
-    _ = 1 * (boundaryG M hM * boundaryG M hM) := by rw [epsilon_sq]
-    _ = 1 * 1 := by rw [boundaryG_mul_self]
-    _ = 1 := one_mul 1
+/-- **人手 `epsilon_G_is_involution`**: `(εG)^2 = ⋯ = I_{Mat(2^{M_col},ℂ)}` の 15 行（`M_col ≥ 2`）。
+
+人手は `M_col ≥ 2` から `M_col ≠ 1`（サイト `1` と `M_col` が異なること）を出し、11 行目で
+`distinct_site_pauli_matrices_commute` を引く。Lean はその具体版 `siteOp_mul_comm` に `firstSite ≠ lastSite` を渡す。 -/
+theorem epsilon_mul_boundaryG_sq (hM : 2 ≤ M) :
+    (epsilon M * boundaryG M (by omega)) ^ 2 = 1 := by
+  have hM0 : M ≠ 0 := by omega
+  have hne : firstSite M hM0 ≠ lastSite M hM0 :=
+    Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
+                                                        -- `M_col ≥ 2` より `M_col ≠ 1`
+  calc (epsilon M * boundaryG M hM0) ^ 2
+      = (epsilon M * boundaryG M hM0) * (epsilon M * boundaryG M hM0) :=
+        sq _                                            -- `X^2 := XX`
+    _ = ((epsilon M * boundaryG M hM0) * epsilon M) * boundaryG M hM0 :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
+    _ = (epsilon M * (boundaryG M hM0 * epsilon M)) * boundaryG M hM0 := by
+        rw [Matrix.mul_assoc (epsilon M)]               -- `mat_mult_associative`
+    _ = (epsilon M * (epsilon M * boundaryG M hM0)) * boundaryG M hM0 := by
+        rw [epsilon_mul_boundaryG hM0]                  -- `epsilon_D0_G_pairwise_commute` の `εG = Gε`
+    _ = ((epsilon M * epsilon M) * boundaryG M hM0) * boundaryG M hM0 := by
+        rw [Matrix.mul_assoc (epsilon M) (epsilon M)]   -- `mat_mult_associative`
+    _ = (1 * boundaryG M hM0) * boundaryG M hM0 := by
+        rw [epsilon_sq]                                 -- `epsilon_square_and_eigenvalues` の `εε = I`
+    _ = boundaryG M hM0 * boundaryG M hM0 := by
+        rw [identity_matrix_mul_tensorPow]              -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0))
+          * (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0)) := by
+        rw [boundaryG]                                  -- `def_G_boundary_operator`
+    _ = sigmaZ (lastSite M hM0)
+          * (sigmaZ (firstSite M hM0) * (sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0))) :=
+        Matrix.mul_assoc _ _ _                          -- `mat_mult_associative`
+    _ = sigmaZ (lastSite M hM0)
+          * ((sigmaZ (firstSite M hM0) * sigmaZ (lastSite M hM0)) * sigmaZ (firstSite M hM0)) := by
+        rw [Matrix.mul_assoc (sigmaZ (firstSite M hM0))] -- `mat_mult_associative`
+    _ = sigmaZ (lastSite M hM0)
+          * ((sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0)) * sigmaZ (firstSite M hM0)) := by
+        rw [show sigmaZ (firstSite M hM0) * sigmaZ (lastSite M hM0)
+              = sigmaZ (lastSite M hM0) * sigmaZ (firstSite M hM0) from siteOp_mul_comm hne pauliZ pauliZ]
+                                                        -- `distinct_site_pauli_matrices_commute`（`j → 1`、`k → M_col`、`a = b = z`）
+    _ = sigmaZ (lastSite M hM0)
+          * (sigmaZ (lastSite M hM0) * (sigmaZ (firstSite M hM0) * sigmaZ (firstSite M hM0))) := by
+        rw [Matrix.mul_assoc (sigmaZ (lastSite M hM0)) (sigmaZ (firstSite M hM0))]
+                                                        -- `mat_mult_associative`
+    _ = (sigmaZ (lastSite M hM0) * sigmaZ (lastSite M hM0))
+          * (sigmaZ (firstSite M hM0) * sigmaZ (firstSite M hM0)) :=
+        (Matrix.mul_assoc _ _ _).symm                   -- `mat_mult_associative`
+    _ = 1 * 1 := by
+        rw [sigmaZ_mul_self, sigmaZ_mul_self]           -- 準備を `k = M_col` と `k = 1` で
+    _ = 1 :=
+        identity_matrix_mul_tensorPow 1                 -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-! ## `D0_G_diagonal_action`
 

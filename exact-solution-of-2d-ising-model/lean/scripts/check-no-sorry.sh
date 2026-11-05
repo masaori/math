@@ -2268,7 +2268,6 @@ targets=(
   Ising2D.sigmaZ_mul_sigmaZ_mul_boundaryG
   Ising2D.openChainD0_mul_boundaryG
   Ising2D.sigmaZ_mul_self
-  Ising2D.boundaryG_mul_self
   Ising2D.epsilon_mul_boundaryG_sq
   Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin
   Ising2D.openChainD0_mulVec_basisVec
