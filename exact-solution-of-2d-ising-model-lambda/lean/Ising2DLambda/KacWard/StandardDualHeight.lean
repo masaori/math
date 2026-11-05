@@ -93,6 +93,37 @@ theorem closedWalk_horizontal_column_parity_invariant {L m : ℕ} [NeZero L]
   rw [hshift] at hsum
   omega
 
+/-- 閉歩道では、縦辺の全列和の偶奇が隣の行で保存される。 -/
+theorem closedWalk_vertical_row_parity_invariant {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (i : ZMod L) :
+    (∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true i j)) % 2 =
+      (∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L true (i + 1) j)) % 2 := by
+  let e : ZMod L ≃ ZMod L := Equiv.addRight (-1)
+  have hshift :
+      (∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false (i + 1) (j - 1))) =
+        ∑ j : ZMod L, walkBaseEdgeParity γ (edgeOfRow L false (i + 1) j) := by
+    exact Fintype.sum_equiv e _ _ (by intro j; simp [e, sub_eq_add_neg])
+  have hsum :
+      (∑ j : ZMod L,
+        (walkBaseEdgeParity γ (edgeOfRow L true i j) +
+          walkBaseEdgeParity γ (edgeOfRow L true (i + 1) j) +
+          walkBaseEdgeParity γ (edgeOfRow L false (i + 1) (j - 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L false (i + 1) j))) % 2 = 0 := by
+    have hlocal (j : ZMod L) :
+        (walkBaseEdgeParity γ (edgeOfRow L true i j) +
+          walkBaseEdgeParity γ (edgeOfRow L true (i + 1) j) +
+          walkBaseEdgeParity γ (edgeOfRow L false (i + 1) (j - 1)) +
+          walkBaseEdgeParity γ (edgeOfRow L false (i + 1) j)) % 2 = 0 := by
+      have h := closedWalk_four_edge_parity γ hγ (i + 1) j
+      simp only [add_sub_cancel_right] at h
+      omega
+    rw [Finset.sum_nat_mod]
+    simp [hlocal]
+  simp only [Finset.sum_add_distrib] at hsum
+  rw [hshift] at hsum
+  omega
+
 /-- The horizontal seam is precisely the last column of horizontal base edges. -/
 theorem horizontal_seam_column_parity {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L) :

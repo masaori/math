@@ -64,6 +64,29 @@ theorem horizontalCross_column_parity_invariant (L : ℕ) [NeZero L]
   rw [hshift] at hsum
   omega
 
+/-- 頂点の局所偶奇から、縦辺の全列和の偶奇は隣の行で一致する。 -/
+theorem verticalCross_row_parity_invariant (L : ℕ) [NeZero L]
+    (horizontalCross verticalCross : ZMod L → ZMod L → ℕ)
+    (i : ZMod L)
+    (hvertex : ∀ j : ZMod L,
+      (verticalCross i j + verticalCross (i + 1) j +
+        horizontalCross (i + 1) (j - 1) + horizontalCross (i + 1) j) % 2 = 0) :
+    (∑ j : ZMod L, verticalCross i j) % 2 =
+      (∑ j : ZMod L, verticalCross (i + 1) j) % 2 := by
+  let e : ZMod L ≃ ZMod L := Equiv.addRight (-1)
+  have hshift : (∑ j : ZMod L, horizontalCross (i + 1) (j - 1)) =
+      ∑ j : ZMod L, horizontalCross (i + 1) j := by
+    exact Fintype.sum_equiv e _ _ (by intro j; simp [e, sub_eq_add_neg])
+  have hsum :
+      (∑ j : ZMod L,
+        (verticalCross i j + verticalCross (i + 1) j +
+          horizontalCross (i + 1) (j - 1) + horizontalCross (i + 1) j)) % 2 = 0 := by
+    rw [Finset.sum_nat_mod]
+    simp [hvertex]
+  simp only [Finset.sum_add_distrib] at hsum
+  rw [hshift] at hsum
+  omega
+
 /-- Counting each seam edge once by its row agrees with counting seam traversals. -/
 theorem seam_column_parity {E I : Type*} [Fintype I] [DecidableEq E]
     {m : ℕ} (γ : Fin (m + 1) → E) (columnEdge : I → E)

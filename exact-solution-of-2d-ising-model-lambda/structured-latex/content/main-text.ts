@@ -62514,6 +62514,51 @@ A_\gamma(j+1)
                 role: "supporting",
                 element: {
                   kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_closed_walk_vertical_row_parity_invariant",
+                  focus: {
+                    id: "kac_ward_claim_closed_walk_vertical_row_parity_invariant",
+                    kind: "claim",
+                    title: { text: "閉歩道の縦辺の全列和の偶奇は隣の行で保存される" },
+                    labels: ["claim_closed_walk_vertical_row_parity_invariant"],
+                    habitat: "N",
+                    verification: ["sagemath/check/closed-walk-vertical-row-parity-invariant"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_vertical_row_parity_invariant",
+                      "Ising2DLambda.NecSuf.KacWard.verticalCross_row_parity_invariant",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        "、行 ", math(String.raw`i\in\mathbb Z/L\mathbb Z`), " を取る。縦辺の全列和の偶奇を",
+                        math(String.raw`B_\gamma(i):=\bigl(\sum_{j\in\mathbb Z/L\mathbb Z}N_\gamma(n_{\mathrm v}(i,j))\bigr)\bmod2`),
+                        " と置く（", ref("def_walk_base_edge_parity"), "、", ref("claim_edge_row_partition"), "）。"]),
+                      displayMath(String.raw`B_\gamma(i+1)=B_\gamma(i)`),
+                      paragraph(["が成り立つ。行の加算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_closed_walk_four_edge_parity"), " を頂点 ", math(String.raw`(i+1,j)`),
+                        " に適用し、全ての列 ", math(String.raw`j`), " について足す。"]),
+                      displayMath(String.raw`\left(\sum_j N_\gamma(n_{\mathrm v}(i,j))+\sum_j N_\gamma(n_{\mathrm v}(i+1,j))+\sum_j N_\gamma(n_{\mathrm h}(i+1,j-1))+\sum_j N_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2=0\quad\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ と有限和の分配則}\bigr)`),
+                      paragraph(["列の平行移動 ", math(String.raw`j\mapsto j-1`), " は有限集合 ",
+                        math(String.raw`\mathbb Z/L\mathbb Z`), " の全単射なので、横辺の二つの和は等しい。"]),
+                      displayMath(String.raw`\sum_jN_\gamma(n_{\mathrm h}(i+1,j-1))=\sum_jN_\gamma(n_{\mathrm h}(i+1,j))\quad\bigl(\because\ j\mapsto j-1\text{ の全単射による再添字付け}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+B_\gamma(i+1)
+&=\left(\sum_jN_\gamma(n_{\mathrm v}(i+1,j))\right)\bmod2
+&&\bigl(\because\ B_\gamma\text{ の定義}\bigr)\\
+&=\left(\sum_jN_\gamma(n_{\mathrm v}(i,j))+\sum_jN_\gamma(n_{\mathrm h}(i+1,j-1))+\sum_jN_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2
+&&\bigl(\because\ \blkref{claim_closed_walk_four_edge_parity}\text{ の総和}\bigr)\\
+&=\left(\sum_jN_\gamma(n_{\mathrm v}(i,j))+2\sum_jN_\gamma(n_{\mathrm h}(i+1,j))\right)\bmod2
+&&\bigl(\because\ \text{横辺の再添字付け}\bigr)\\
+&=B_\gamma(i)
+&&\bigl(\because\ 2\text{ の倍数の偶奇と }B_\gamma\text{ の定義}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
                   id: "group_of_kac_ward_claim_horizontal_seam_parity_equals_column",
                   focus: {
                     id: "kac_ward_claim_horizontal_seam_parity_equals_column",
