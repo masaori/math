@@ -4,11 +4,12 @@
 具体版 `ClaimFiniteSumsOfRealNumbers.lean` の主張を、必要十分版 `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean` を
 係数 `R := ℝ` に特殊化して得る。人手のラベルは `finite_sum_of_real_differences`,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
-`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`（この 2 つは必要十分版 `Ising2D/NecSuf/FiniteSumSubadditiveAndMonotone.lean`）。人手証明と 1 対 1 に対応する形は具体版のほうである。
+`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`（この 2 つは必要十分版 `Ising2D/NecSuf/FiniteSumSubadditiveAndMonotone.lean`）、`finite_sum_of_real_numbers_moves_one_term_to_end`（必要十分版 `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`）。人手証明と 1 対 1 に対応する形は具体版のほうである。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.NecSuf.FiniteSumDifferenceAndNonnegativeTerm
 import Ising2D.NecSuf.FiniteSumSubadditiveAndMonotone
+import Ising2D.NecSuf.FiniteSumMovesOneTermToEnd
 import Ising2D.NecSuf.AbsoluteValueBoundsTriangleAndProduct
 import Mathlib.Data.Real.Basic
 
@@ -46,5 +47,10 @@ theorem finite_sum_of_real_numbers_triangle_inequality_of_necSuf (m : ℕ) (a : 
 theorem finite_sum_of_real_numbers_is_monotone_of_necSuf (m : ℕ) (a b : Fin m → ℝ)
     (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j :=
   NecSuf.finite_sum_le_fin' (R := ℝ) m a b hab
+
+/-- `finite_sum_of_real_numbers_moves_one_term_to_end` を `NecSuf.finite_sum_skip_index_succ'`（係数 `ℝ`）の特殊化として得る。 -/
+theorem finite_sum_of_real_numbers_moves_one_term_to_end_of_necSuf (n : ℕ) (b : Fin (n + 2) → ℝ) (k : Fin (n + 2)) :
+    ∑ j, b j = (∑ j : Fin (n + 1), b (skipIndex k j)) + b k :=
+  NecSuf.finite_sum_skip_index_succ' (R := ℝ) n b k
 
 end Ising2D

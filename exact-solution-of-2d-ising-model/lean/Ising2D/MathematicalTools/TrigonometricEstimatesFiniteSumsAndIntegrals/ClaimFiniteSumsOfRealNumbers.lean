@@ -3,14 +3,16 @@
 
 対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
-`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`
+`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`,
+`finite_sum_of_real_numbers_moves_one_term_to_end`
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_definition_finite_sum_of_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_scalar_multiples`,
 `calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`,
-`calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`, `calc_formulae_claim_finite_sum_of_real_numbers_is_monotone`）。
+`calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`, `calc_formulae_claim_finite_sum_of_real_numbers_is_monotone`,
+`calc_formulae_claim_finite_sum_of_real_numbers_moves_one_term_to_end`）。
 
-**必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`。具体版をその系として導くのは
+**必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`（一つの項を末尾へ移す主張は `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`）。具体版をその系として導くのは
 `ClaimFiniteSumsOfRealNumbersFromNecSuf.lean`。
 
 ## 人手証明との対応
@@ -34,10 +36,17 @@
   人手の行と 1 対 1 の `calc` である（三角不等式の `m = 1` は人手の等号の 2 行に、`≤` へ移す `le_rfl` を 1 段足した）。
   帰納法の段の三角不等式は `real_abs_triangle_inequality`（`ClaimRealAbsoluteValueBoundsTriangleAndProduct.lean`）を引く。
   `_fintype` 版は `finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく、有限型の添字に番号を付けて当てる。
+* `finite_sum_of_real_numbers_moves_one_term_to_end` は人手の `m ≥ 1` を Lean の `n + 1` で書き、`δ^{m}_{k}` は `skipIndex k`
+  （`DefinitionIndexSkippingMap.lean`）である。人手と同じく `m = 1` を `k = 1`（Lean の `castSucc 0`）・`k = 2`（`last 1`）に、
+  帰納法の段を `k = m + 2`（`Fin.last`）・`k ≤ m + 1`（`Fin.castSucc k'`）に分け、各場合の前置き（`δ` の値）を `have` に、鎖を人手の行と 1 対 1 の `calc` にした。
+  人手の `{1, …, m+1} ⊂ {1, …, m+2}` の包含は `Fin.castSucc` で、人手の前置き `δ^{m+1}_{k}(j) = δ^{m}_{k}(j)` は Lean では
+  `skipIndex k'.castSucc j.castSucc = (skipIndex k' j).castSucc` になる。各場合の最後の行「`k = 1`」「`k = 2`」「`k = m + 2`」は、
+  Lean では `k` を場合分けで置き換え済みなので段にしない。`s` の置き方は `let` で、置き方の段は `rfl` である。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMap
 
 namespace Ising2D
 
@@ -267,5 +276,79 @@ theorem finite_sum_of_real_numbers_is_monotone_fintype {κ : Type*} [Fintype κ]
     _ ≤ ∑ j : Fin (Fintype.card κ), b (e.symm j) :=
         finite_sum_of_real_numbers_is_monotone _ _ _ (fun j => hab _)         -- `finite_sum_of_real_numbers_is_monotone`
     _ = ∑ j, b j := e.symm.sum_comp b                                         -- 番号を外す
+
+/-- **`finite_sum_of_real_numbers_moves_one_term_to_end`**: `Σ_{j=1}^{m+1} b_j = (Σ_{j=1}^{m} b_{δ^{m}_{k}(j)}) + b_k`。
+人手の `m ≥ 1` は Lean の `n + 1`（`b : Fin (n + 2) → ℝ`）。`n` についての帰納法（人手の `m` についての帰納法）。 -/
+theorem finite_sum_of_real_numbers_moves_one_term_to_end (n : ℕ) (b : Fin (n + 2) → ℝ) (k : Fin (n + 2)) :
+    ∑ j, b j = (∑ j : Fin (n + 1), b (skipIndex k j)) + b k := by
+  induction n with
+  | zero =>                                                                   -- 人手の `m = 1`
+    induction k using Fin.lastCases with
+    | cast k' =>                                                              -- 人手の `k = 1`
+      have hk' : k' = 0 := Fin.fin_one_eq_zero k'
+      subst hk'
+      have hδ : skipIndex (Fin.castSucc (0 : Fin 1)) (0 : Fin 1) = Fin.last 1 :=
+        skipIndex_of_le _ _ (le_refl _)                                       -- `1 ≥ 1` なので `δ^{1}_{1}(1) = 2`
+      calc ∑ j : Fin 2, b j
+          = (∑ j : Fin 1, b j.castSucc) + b (Fin.last 1) :=
+            Fin.sum_univ_castSucc _                                           -- `def_finite_sum_of_real_numbers`
+        _ = b (Fin.castSucc 0) + b (Fin.last 1) := by
+            rw [Fin.sum_univ_one]                                             -- `def_finite_sum_of_real_numbers`
+        _ = b (Fin.last 1) + b (Fin.castSucc 0) := add_comm _ _               -- ℝ の和の交換法則
+        _ = b (skipIndex (Fin.castSucc (0 : Fin 1)) 0) + b (Fin.castSucc 0) := by
+            rw [hδ]                                                           -- `δ^{1}_{1}(1) = 2`
+        _ = (∑ j : Fin 1, b (skipIndex (Fin.castSucc (0 : Fin 1)) j)) + b (Fin.castSucc 0) := by
+            rw [Fin.sum_univ_one]                                             -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
+                                                                              -- 人手の最後の行 `k = 1` は、Lean では `k` を `castSucc 0` に置き換え済みなので段にしない
+    | last =>                                                                 -- 人手の `k = 2`
+      have hδ : ∀ j : Fin 1, skipIndex (Fin.last 1) j = j.castSucc :=
+        fun j => skipIndex_of_lt _ _ j.isLt                                   -- `1 < 2` なので `δ^{1}_{2}(1) = 1`
+      calc ∑ j : Fin 2, b j
+          = (∑ j : Fin 1, b j.castSucc) + b (Fin.last 1) :=
+            Fin.sum_univ_castSucc _                                           -- `def_finite_sum_of_real_numbers`
+        _ = (∑ j : Fin 1, b (skipIndex (Fin.last 1) j)) + b (Fin.last 1) := by
+            simp only [hδ]                                                    -- `δ^{1}_{2}(1) = 1`
+                                                                              -- 人手の最後の行 `k = 2` は、Lean では `k` を `last 1` に置き換え済みなので段にしない
+  | succ n ih =>                                                              -- 人手の `m → m + 1`（人手の `m` が Lean の `n + 1`）
+    induction k using Fin.lastCases with
+    | last =>                                                                 -- 人手の `k = m + 2`
+      have hδ : ∀ j : Fin (n + 2), skipIndex (Fin.last (n + 2)) j = j.castSucc :=
+        fun j => skipIndex_of_lt _ _ j.isLt                                   -- `j < m + 2` なので `δ^{m+1}_{m+2}(j) = j`
+      calc ∑ j : Fin (n + 3), b j
+          = (∑ j : Fin (n + 2), b j.castSucc) + b (Fin.last _) :=
+            Fin.sum_univ_castSucc _                                           -- `def_finite_sum_of_real_numbers`
+        _ = (∑ j : Fin (n + 2), b (skipIndex (Fin.last (n + 2)) j)) + b (Fin.last _) := by
+            simp only [hδ]                                                    -- `δ^{m+1}_{m+2}(j) = j` を各項へ
+    | cast k' =>                                                              -- 人手の `k ≤ m + 1`
+      have hδ : ∀ j : Fin (n + 1),
+          skipIndex k'.castSucc j.castSucc = (skipIndex k' j).castSucc := by
+        intro j                                                               -- `j ≤ m` で `δ^{m+1}_{k}(j) = δ^{m}_{k}(j)`（`j < k` と `j ≥ k` の 2 本の鎖。`by_cases` の 2 枝）
+        by_cases h : j.val < k'.val
+        · rw [skipIndex_of_lt k'.castSucc j.castSucc h, skipIndex_of_lt k' j h]
+        · rw [skipIndex_of_le k'.castSucc j.castSucc (Nat.le_of_not_lt h),
+            skipIndex_of_le k' j (Nat.le_of_not_lt h)]; rfl
+      have hδlast : skipIndex k'.castSucc (Fin.last (n + 1)) = Fin.last (n + 2) :=
+        skipIndex_of_le _ _ (Nat.le_of_lt_succ k'.isLt)                       -- `m + 1 ≥ k` なので `δ^{m+1}_{k}(m+1) = m + 2`
+      let s : ℝ := ∑ j : Fin (n + 1), b (skipIndex k' j).castSucc            -- `s := Σ_{j=1}^{m} b_{δ^{m}_{k}(j)}`
+      calc ∑ j : Fin (n + 3), b j
+          = (∑ j : Fin (n + 2), b j.castSucc) + b (Fin.last _) :=
+            Fin.sum_univ_castSucc _                                           -- `def_finite_sum_of_real_numbers`
+        _ = ((∑ j : Fin (n + 1), b (skipIndex k' j).castSucc) + b k'.castSucc) + b (Fin.last _) := by
+            rw [ih (fun j => b j.castSucc) k']                                -- 帰納法の仮定（`b_1, …, b_{m+1}` と `k`）
+        _ = (s + b k'.castSucc) + b (Fin.last _) := rfl                       -- `s` の置き方
+        _ = s + (b k'.castSucc + b (Fin.last _)) := add_assoc _ _ _           -- ℝ の和の結合法則
+        _ = s + (b (Fin.last _) + b k'.castSucc) := by
+            rw [add_comm (b k'.castSucc)]                                     -- ℝ の和の交換法則
+        _ = (s + b (Fin.last _)) + b k'.castSucc := (add_assoc _ _ _).symm    -- ℝ の和の結合法則
+        _ = ((∑ j : Fin (n + 1), b (skipIndex k' j).castSucc) + b (Fin.last _))
+              + b k'.castSucc := rfl                                          -- `s` の置き方
+        _ = ((∑ j : Fin (n + 1), b (skipIndex k'.castSucc j.castSucc)) + b (Fin.last _))
+              + b k'.castSucc := by
+            simp only [hδ]                                                    -- `δ^{m}_{k}(j) = δ^{m+1}_{k}(j)` を各項へ
+        _ = ((∑ j : Fin (n + 1), b (skipIndex k'.castSucc j.castSucc))
+              + b (skipIndex k'.castSucc (Fin.last (n + 1)))) + b k'.castSucc := by
+            rw [hδlast]                                                       -- `δ^{m+1}_{k}(m+1) = m + 2`
+        _ = (∑ j : Fin (n + 2), b (skipIndex k'.castSucc j)) + b k'.castSucc := by
+            rw [Fin.sum_univ_castSucc (fun j => b (skipIndex k'.castSucc j))] -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
 
 end Ising2D

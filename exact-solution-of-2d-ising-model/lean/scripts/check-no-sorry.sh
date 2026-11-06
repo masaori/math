@@ -859,6 +859,12 @@ targets=(
   Ising2D.finite_sum_of_real_numbers_is_monotone_fintype
   Ising2D.finite_sum_of_real_numbers_triangle_inequality_of_necSuf
   Ising2D.finite_sum_of_real_numbers_is_monotone_of_necSuf
+  Ising2D.skipIndex
+  Ising2D.skipIndex_of_lt
+  Ising2D.skipIndex_of_le
+  Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end
+  Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end_of_necSuf
+  "Ising2D.NecSuf.finite_sum_skip_index_succ'"
   "Ising2D.NecSuf.finite_sum_subadditive_fin'"
   "Ising2D.NecSuf.finite_sum_le_fin'"
   Ising2D.nonnegative_real_order_from_squares_of_necSuf

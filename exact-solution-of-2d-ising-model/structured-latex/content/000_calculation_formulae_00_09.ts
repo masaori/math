@@ -1657,6 +1657,244 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_definition_index_skipping_map",
+    kind: "definition",
+    title: { text: "一つの添字を飛ばす写像" },
+    labels: ["def_index_skipping_map"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " について、写像 ",
+        math(String.raw`\delta^{m}_{k} : \{1,\dots,m\} \to \{1,\dots,m+1\}`),
+        " を",
+      ]),
+      displayMath(String.raw`\delta^{m}_{k}(j) :=
+\begin{cases}
+  j & (j < k) \\
+  j + 1 & (j \geq k)
+\end{cases}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`\{1,\dots,m+1\}`),
+        " から ",
+        math(String.raw`k`),
+        " だけを飛ばす。",
+        math(String.raw`1,\dots,m`),
+        " を、小さい順を保って ",
+        math(String.raw`\{1,\dots,m+1\}`),
+        " から ",
+        math(String.raw`k`),
+        " を除いた集合へ送る写像である）。値は ",
+        math(String.raw`\{1,\dots,m+1\}`),
+        " に入る: ",
+        math(String.raw`j < k`),
+        " のとき ",
+        math(String.raw`1 \leq j \leq m`),
+        "、",
+        math(String.raw`j \geq k`),
+        " のとき ",
+        math(String.raw`2 \leq j + 1 \leq m + 1`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、有限和の一つの項を末尾へ移す主張 finite_sum_of_real_numbers_moves_one_term_to_end が、残りの項の添字の付け方に使うので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_real_numbers_moves_one_term_to_end",
+    kind: "claim",
+    title: { text: "実数の有限和の一つの項は末尾へ移せる" },
+    labels: ["finite_sum_of_real_numbers_moves_one_term_to_end"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`b_1,\dots,b_{m+1} \in \mathbb{R}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        "、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m+1} b_j = \Bigl(\sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}\Bigr) + b_k`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す（各 ",
+        math(String.raw`m`),
+        " で、すべての ",
+        math(String.raw`b_1,\dots,b_{m+1} \in \mathbb{R}`),
+        " と ",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " についての主張を示す）。",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`k \in \{1, 2\}`),
+        " である。",
+        math(String.raw`k = 1`),
+        " のとき、",
+        math(String.raw`1 \geq 1`),
+        " なので ",
+        ref("def_index_skipping_map"),
+        " より ",
+        math(String.raw`\delta^{1}_{1}(1) = 2`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{2} b_j
+&= \Bigl(\sum_{j=1}^{1} b_j\Bigr) + b_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= b_1 + b_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= b_2 + b_1
+&&\bigl(\because\ \mathbb{R}\ \text{の和の交換法則}\bigr)\\
+&= b_{\delta^{1}_{1}(1)} + b_1
+&&\bigl(\because\ \delta^{1}_{1}(1) = 2\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} b_{\delta^{1}_{1}(j)}\Bigr) + b_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} b_{\delta^{1}_{k}(j)}\Bigr) + b_k
+&&\bigl(\because\ k = 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k = 2`),
+        " のとき、",
+        math(String.raw`1 < 2`),
+        " なので ",
+        ref("def_index_skipping_map"),
+        " より ",
+        math(String.raw`\delta^{1}_{2}(1) = 1`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{2} b_j
+&= \Bigl(\sum_{j=1}^{1} b_j\Bigr) + b_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} b_{\delta^{1}_{2}(j)}\Bigr) + b_2
+&&\bigl(\because\ \delta^{1}_{2}(1) = 1\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} b_{\delta^{1}_{k}(j)}\Bigr) + b_k
+&&\bigl(\because\ k = 2\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`b_1,\dots,b_{m+2} \in \mathbb{R}`),
+        " と ",
+        math(String.raw`k \in \{1,\dots,m+2\}`),
+        " を取る。",
+        math(String.raw`k = m+2`),
+        " のとき、すべての ",
+        math(String.raw`j \in \{1,\dots,m+1\}`),
+        " で ",
+        math(String.raw`j < m+2`),
+        " なので ",
+        ref("def_index_skipping_map"),
+        " より ",
+        math(String.raw`\delta^{m+1}_{m+2}(j) = j`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+2} b_j
+&= \Bigl(\sum_{j=1}^{m+1} b_j\Bigr) + b_{m+2}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} b_{\delta^{m+1}_{m+2}(j)}\Bigr) + b_{m+2}
+&&\bigl(\because\ \delta^{m+1}_{m+2}(j) = j\ \text{を各項へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} b_{\delta^{m+1}_{k}(j)}\Bigr) + b_k
+&&\bigl(\because\ k = m+2\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k \leq m+1`),
+        " のとき、",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " を取る。",
+        math(String.raw`j < k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m+1}_{k}(j)
+&= j
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ (m \to m+1),\ j < k\bigr)\\
+&= \delta^{m}_{k}(j)
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j < k\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`j \geq k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m+1}_{k}(j)
+&= j + 1
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ (m \to m+1),\ j \geq k\bigr)\\
+&= \delta^{m}_{k}(j)
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j \geq k\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。よってすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で ",
+        math(String.raw`\delta^{m+1}_{k}(j) = \delta^{m}_{k}(j)`),
+        " である。また ",
+        math(String.raw`m+1 \geq k`),
+        " なので ",
+        ref("def_index_skipping_map"),
+        " より ",
+        math(String.raw`\delta^{m+1}_{k}(m+1) = m+2`),
+        " である。",
+        math(String.raw`s := \sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}`),
+        " とおく（",
+        math(String.raw`s \in \mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+2} b_j
+&= \Bigl(\sum_{j=1}^{m+1} b_j\Bigr) + b_{m+2}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}\Bigr) + b_k\Bigr) + b_{m+2}
+&&\bigl(\because\ \text{帰納法の仮定（}b_1,\dots,b_{m+1}\ \text{と}\ k \in \{1,\dots,m+1\}\ \text{について）}\bigr)\\
+&= (s + b_k) + b_{m+2}
+&&\bigl(\because\ s\ \text{の置き方}\bigr)\\
+&= s + (b_k + b_{m+2})
+&&\bigl(\because\ \mathbb{R}\ \text{の和の結合法則}\bigr)\\
+&= s + (b_{m+2} + b_k)
+&&\bigl(\because\ \mathbb{R}\ \text{の和の交換法則}\bigr)\\
+&= (s + b_{m+2}) + b_k
+&&\bigl(\because\ \mathbb{R}\ \text{の和の結合法則}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}\Bigr) + b_{m+2}\Bigr) + b_k
+&&\bigl(\because\ s\ \text{の置き方}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m+1}_{k}(j)}\Bigr) + b_{m+2}\Bigr) + b_k
+&&\bigl(\because\ j \in \{1,\dots,m\}\ \text{で}\ \delta^{m}_{k}(j) = \delta^{m+1}_{k}(j)\ \text{を各項へ}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m+1}_{k}(j)}\Bigr) + b_{\delta^{m+1}_{k}(m+1)}\Bigr) + b_k
+&&\bigl(\because\ \delta^{m+1}_{k}(m+1) = m+2\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} b_{\delta^{m+1}_{k}(j)}\Bigr) + b_k
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないこと（c_between_Lambda_half_and_twice_Lambda_half の Step 2 を ε_ℝ で書き直すときに ‖ε_ℝu‖ = ‖u‖ を示すのに要る）を帰納法で示す段で、π(k) = m+1 の項を末尾へ移すのに使うので足した。Lean は Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean）、必要十分版は Ising2D.NecSuf.finite_sum_skip_index_succ'（NecSuf/FiniteSumMovesOneTermToEnd.lean）。数値検証: sagemath/check/finite_sum_of_real_numbers_moves_one_term_to_end/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_definition_real_absolute_value",
     kind: "definition",
     title: { text: "実数の絶対値" },
