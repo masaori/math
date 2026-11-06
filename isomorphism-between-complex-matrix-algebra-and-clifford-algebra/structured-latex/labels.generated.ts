@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "claim_zero_map_is_linear_form",
   "claim_zero_scalar_multiple_is_zero_vector",
   "def_basis",
+  "def_binary_numbering_of_power_set",
   "def_complex_algebra",
   "def_complex_algebra_homomorphism",
   "def_complex_numbers_as_complex_vector_space",

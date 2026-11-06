@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06: 2 進の番号付けの写像 e_M:{1..2^M}→P_M の帰納的な定義（ラベル def_binary_numbering_of_power_set）を置いた。次は (2^M,e_M) が P_M の番号付けであること（M の帰納法。単射は k≤2^{M-1} と k>2^{M-1} の場合で M の所属を比べ、全射は M∈T か否かで T∖{M} の逆像を引く見込み）。
 - 2026-11-06（研究管理）: 台帳に、個数 N_i(T) に一元を足したときの値（j<i なら 1 増え、j≥i なら変わらない）の行を、三つの反交換関係の前に足した（三つの関係の符号の打ち消しがどれも使うため）。
 - 2026-11-06: 台帳の「P_M の定義と有限集合であること」を三行に割り、{1..M} の部分集合全体 P_M の定義（ラベル def_power_set_of_first_m_positive_integers）を置いた。次は 2 進の番号付け e_M:{1..2^M}→P_M の帰納的な定義（値が P_M に入ることを本文に書く）。
 - 2026-11-06: 単位行列の分解 Σ_{x∈X} 1_ℂ∗E_{x,x}=1_{Mat_X}（ラベル claim_decomposition_of_identity_matrix_into_matrix_units）を示し、検算 sagemath/check/identity-matrix-decomposition-into-matrix-units/ を置いた（python3 で実行）。次は {1..M} の部分集合全体 P_M の定義と、P_M が有限集合であること（2 進の番号付け e:{1..2^M}→P_M を構成する）。
