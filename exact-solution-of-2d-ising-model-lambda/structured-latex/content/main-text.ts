@@ -64607,7 +64607,7 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
                         ref("claim_height_one_boundary_all_edges_parity"), " と ",
                         ref("claim_height_one_boundary_support"), " より、その境界係数は ",
                         math(String.raw`\{1,-1\}`), " に属する。そこで"]),
-                      displayMath(String.raw`\varepsilon:=[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_1)}(1-2d(\vec e_1))\in\{1,-1\}`),
+                      displayMath(String.raw`\varepsilon:=[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_1)}(1-2d(\vec e_1))\in\{1,-1\}\quad\bigl(\because\ \blkref{claim_height_one_boundary_all_edges_parity},\ \blkref{claim_height_one_boundary_support}\bigr)`),
                       paragraph(["と置く。", ref("claim_vertex_simple_boundary_nonloop_propagation"),
                         " より、任意の ", math(String.raw`k\in I_m`), " について"]),
                       displayMath(String.raw`[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_k)}(1-2d(\vec e_k))=\varepsilon\quad\bigl(\because\ \blkref{claim_vertex_simple_boundary_nonloop_propagation}\bigr)`),
@@ -64624,6 +64624,59 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
                         " なので、", ref("claim_height_one_boundary_all_edges_parity"),
                         " より境界係数は零である。また ", ref("def_signed_edge_coefficient"),
                         " より閉路の係数も零である。従って全ての辺で等式が成り立つ。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_simple_zero_seam_winding",
+                  focus: {
+                    id: "kac_ward_claim_vertex_simple_zero_seam_winding",
+                    kind: "claim",
+                    title: { text: "切断線偶奇が零の頂点単純閉路の巻き付きは零である" },
+                    labels: ["claim_vertex_simple_zero_seam_winding"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/vertex-simple-zero-seam-winding"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimple_zero_seam_winding",
+                      "Ising2DLambda.NecSuf.KacWard.signed_coefficients_zero_weighted_evaluation",
+                      "Ising2DLambda.KacWard.vertexSimple_zero_seam_winding_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。接触対数と横・縦切断線偶奇が零なら、"]),
+                      displayMath(String.raw`w_{\mathrm h}(\gamma)=0,\qquad w_{\mathrm v}(\gamma)=0\quad\text{in }\mathbb Z`),
+                      paragraph(["が成り立つ。巻き付き数は ", ref("def_directed_winding_numbers"), " による。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_height_one_boundary_signed_walk"), " により、高さ一のセル集合 ",
+                        math(String.raw`S_\gamma`), " と符号 ", math(String.raw`\varepsilon\in\{1,-1\}`),
+                        " を取ると、任意の基底辺 ", math(String.raw`e\in E_L`), " で"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_e=\varepsilon[\gamma]_e\quad\bigl(\because\ \blkref{claim_height_one_boundary_signed_walk}\bigr)`),
+                      paragraph(["この係数等式を横切断線の整数重みで総和する。セル境界の横切断線寄与の総和は零（",
+                        ref("claim_finite_cell_set_boundary_winding_zero"), "）なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon w_{\mathrm h}(\gamma)
+&=\varepsilon\sum_{e\in E_L}[\gamma]_e c_{\mathrm h}(e,0)
+&&\bigl(\because\ \blkref{def_directed_winding_numbers},\ \blkref{def_signed_edge_coefficient}\bigr)\\
+&=\sum_{e\in E_L}[\partial_\square S_\gamma]_e c_{\mathrm h}(e,0)
+&&\bigl(\because\ \blkref{claim_height_one_boundary_signed_walk}\bigr)\\
+&=0&&\bigl(\because\ \blkref{claim_finite_cell_set_boundary_winding_zero}\bigr)
+\end{aligned}`),
+                      paragraph(["同じ計算を縦切断線の整数重みで行うと"]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon w_{\mathrm v}(\gamma)
+&=\varepsilon\sum_{e\in E_L}[\gamma]_e c_{\mathrm v}(e,0)
+&&\bigl(\because\ \blkref{def_directed_winding_numbers},\ \blkref{def_signed_edge_coefficient}\bigr)\\
+&=\sum_{e\in E_L}[\partial_\square S_\gamma]_e c_{\mathrm v}(e,0)
+&&\bigl(\because\ \blkref{claim_height_one_boundary_signed_walk}\bigr)\\
+&=0&&\bigl(\because\ \blkref{claim_finite_cell_set_boundary_winding_zero}\bigr)
+\end{aligned}`),
+                      paragraph(["符号 ", math(String.raw`\varepsilon`), " は零でないので、",
+                        math(String.raw`\mathbb Z`), " の零積性から二つの巻き付き数は零である。"]),
                     ],
                   },
                 },

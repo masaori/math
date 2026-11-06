@@ -1697,3 +1697,5 @@ import Ising2DLambda.KacWard.VertexSimpleBaseInjective
 import Ising2DLambda.KacWard.HeightOneBoundarySignedWalk
 import Ising2DLambda.NecSuf.KacWard.SignedBoundaryOfInjectiveSupport
 import Ising2DLambda.KacWard.HeightOneBoundarySignedWalkFromNecSuf
+import Ising2DLambda.KacWard.VertexSimpleZeroSeamWinding
+import Ising2DLambda.KacWard.VertexSimpleZeroSeamWindingFromNecSuf

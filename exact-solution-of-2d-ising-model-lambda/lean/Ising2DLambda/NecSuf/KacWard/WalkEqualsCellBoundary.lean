@@ -69,4 +69,49 @@ theorem equal_coefficients_equal_weighted_evaluations
           symm
           exact listWeight_sum (boundary cell) weight
 
+theorem signed_coefficients_zero_weighted_evaluation
+    {E C I : Type*} [Fintype E] [DecidableEq E] [Fintype I]
+    [DecidableEq C] (walk : I → E × Bool) (cells : Finset C)
+    (boundary : C → List (E × Bool)) (weight : E → ℤ)
+    (ε : ℤ) (hε : ε ≠ 0)
+    (hcoeff : ∀ edge : E,
+      (∑ cell ∈ cells, ((boundary cell).map (coefficient edge)).sum) =
+        ε * ∑ i : I, coefficient edge (walk i))
+    (hboundary : ∑ cell ∈ cells,
+      ((boundary cell).map fun occurrence =>
+        (1 - 2 * (occurrence.2.toNat : ℤ)) * weight occurrence.1).sum = 0) :
+    (∑ i : I, (1 - 2 * ((walk i).2.toNat : ℤ)) * weight (walk i).1) = 0 := by
+  have hsum : ε * (∑ i : I,
+      (1 - 2 * ((walk i).2.toNat : ℤ)) * weight (walk i).1) = 0 := by
+    calc
+      _ = ε * ∑ edge : E,
+          (∑ i : I, coefficient edge (walk i)) * weight edge := by
+            congr 1
+            calc
+              _ = ∑ i : I, ∑ edge : E,
+                    coefficient edge (walk i) * weight edge := by
+                      apply Finset.sum_congr rfl
+                      intro i _
+                      exact occurrenceWeight_sum (walk i) weight
+              _ = _ := by rw [Finset.sum_comm]; simp [Finset.sum_mul]
+      _ = ∑ edge : E,
+          (∑ cell ∈ cells, ((boundary cell).map (coefficient edge)).sum) *
+            weight edge := by
+              rw [Finset.mul_sum]
+              apply Finset.sum_congr rfl
+              intro edge _
+              rw [hcoeff edge]
+              ring
+      _ = ∑ cell ∈ cells,
+          ((boundary cell).map fun occurrence =>
+            (1 - 2 * (occurrence.2.toNat : ℤ)) * weight occurrence.1).sum := by
+              simp only [Finset.sum_mul]
+              rw [Finset.sum_comm]
+              apply Finset.sum_congr rfl
+              intro cell _
+              symm
+              exact listWeight_sum (boundary cell) weight
+      _ = 0 := hboundary
+  exact (mul_eq_zero.mp hsum).resolve_left hε
+
 end Ising2DLambda.NecSuf.KacWard

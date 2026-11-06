@@ -132,4 +132,71 @@ theorem walk_boundary_winding_zero (L m : ℕ) [NeZero L]
             exact hw e
       _ = 0 := cellSetBoundary_verticalSeam_sum_zero L S
 
+theorem walk_signed_boundary_winding_zero (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (S : Finset (ZMod L × ZMod L))
+    (ε : ℤ) (hε : ε ∈ ({-1, 1} : Finset ℤ))
+    (hcoeff : ∀ edge : Edge L,
+      cellSetEdgeCoefficient L S edge = ε * walkEdgeCoefficient γ edge) :
+    horizontalDirectedWindingNumber γ = 0 ∧
+      verticalDirectedWindingNumber γ = 0 := by
+  have hε0 : ε ≠ 0 := by
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hε
+    rcases hε with h | h <;> simp [h]
+  constructor
+  · let weight : Edge L → ℤ := fun edge => (horizontalSeamParity (edge, false) : ℤ)
+    have hw (e : OrientedEdge L) :
+        (1 - 2 * (e.2.toNat : ℤ)) * weight e.1 = horizontalSeamContribution e := by
+      simp [weight, horizontalSeamContribution, horizontalSeamParity, mul_comm]
+    have hsum : ε * horizontalDirectedWindingNumber γ = 0 := by
+      calc
+        ε * horizontalDirectedWindingNumber γ
+            = ε * (∑ edge : Edge L, walkEdgeCoefficient γ edge * weight edge) := by
+                rw [← walkWeight_sum γ weight]
+                change ε * (∑ k : Fin (m + 1), horizontalSeamContribution (γ k)) = _
+                congr 1
+                apply Finset.sum_congr rfl
+                intro k _
+                exact (hw (γ k)).symm
+        _ = ∑ edge : Edge L, cellSetEdgeCoefficient L S edge * weight edge := by
+              rw [Finset.mul_sum]
+              apply Finset.sum_congr rfl
+              intro edge _
+              rw [hcoeff edge]
+              ring
+        _ = cellSetBoundaryEvaluation L S horizontalSeamContribution := by
+              rw [← cellSetWeight_sum L S weight]
+              congr 1
+              funext e
+              exact hw e
+        _ = 0 := cellSetBoundary_horizontalSeam_sum_zero L S
+    exact (mul_eq_zero.mp hsum).resolve_left hε0
+  · let weight : Edge L → ℤ := fun edge => (verticalSeamParity (edge, false) : ℤ)
+    have hw (e : OrientedEdge L) :
+        (1 - 2 * (e.2.toNat : ℤ)) * weight e.1 = verticalSeamContribution e := by
+      simp [weight, verticalSeamContribution, verticalSeamParity, mul_comm]
+    have hsum : ε * verticalDirectedWindingNumber γ = 0 := by
+      calc
+        ε * verticalDirectedWindingNumber γ
+            = ε * (∑ edge : Edge L, walkEdgeCoefficient γ edge * weight edge) := by
+                rw [← walkWeight_sum γ weight]
+                change ε * (∑ k : Fin (m + 1), verticalSeamContribution (γ k)) = _
+                congr 1
+                apply Finset.sum_congr rfl
+                intro k _
+                exact (hw (γ k)).symm
+        _ = ∑ edge : Edge L, cellSetEdgeCoefficient L S edge * weight edge := by
+              rw [Finset.mul_sum]
+              apply Finset.sum_congr rfl
+              intro edge _
+              rw [hcoeff edge]
+              ring
+        _ = cellSetBoundaryEvaluation L S verticalSeamContribution := by
+              rw [← cellSetWeight_sum L S weight]
+              congr 1
+              funext e
+              exact hw e
+        _ = 0 := cellSetBoundary_verticalSeam_sum_zero L S
+    exact (mul_eq_zero.mp hsum).resolve_left hε0
+
 end Ising2DLambda.KacWard
