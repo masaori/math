@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06: 台帳の「単位行列の分解」の前に、行列の (p,q) 成分を取り出す写像 ent_{p,q} が線型写像であることの行を割り出して示した（ラベル claim_matrix_entry_map_is_linear_map）。次は単位行列の分解 Σ_x 1_ℂ∗E_{x,x}=1_{Mat_X}（(p,q) 成分を ent_{p,q} と claim_linear_map_maps_sum_over_finite_set_to_sum_of_values で Σ_x 1_ℂ·(E_{x,x})_{p,q} に開き、各項を δ_{x,p}·δ_{x,q} の形に直してから claim_sum_over_finite_set_with_kronecker_delta_picks_term で δ_{p,q} を取り出す見込み）。
 - 2026-11-06: 行列単位の積の規則（ラベル claim_product_of_matrix_units、E_{x,y}·E_{z,w}=δ_{y,z}∗E_{x,w}）を示し、検算 sagemath/check/matrix-unit-product-rule/ を置いた（SageMath が無いので python3 で実行）。次は単位行列の分解 Σ_S E_{S,S}=I（成分 (Σ_s 1·E_{s,s})_{p,q} を開くには、行列の線型空間の中の有限集合の上の和の成分を取り出す写像が線型写像であることと claim_linear_map_maps_sum_over_finite_set_to_sum_of_values を当てる見込み）。
 - 2026-11-06: 行列単位の定義（ラベル def_matrix_unit、(E_{x,y})_{u,v}:=δ_{x,u}·_ℂδ_{y,v}）を置いた。次は行列単位の積の規則 E_{S,T}E_{U,R}=δ_{T,U}E_{S,R}（成分を行列の積の定義で開き、claim_sum_over_finite_set_with_kronecker_delta_picks_term で一項を取り出す見込み）。
 - 2026-11-05: Mat_X(ℂ) が ℂ-代数であること（ラベル claim_matrices_indexed_by_finite_set_form_complex_algebra）を示した。次は行列単位の定義。

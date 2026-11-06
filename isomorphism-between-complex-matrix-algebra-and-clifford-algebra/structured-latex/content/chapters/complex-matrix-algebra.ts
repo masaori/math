@@ -1348,4 +1348,110 @@ A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{z,y}
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_matrix_entry_map_is_linear_map",
+    kind: "claim",
+    title: { text: "行列の一つの成分を取り出す写像は線型写像である" },
+    labels: ["claim_matrix_entry_map_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`p,q\in X`),
+        " とする。写像 ",
+        math(String.raw`\mathrm{ent}_{p,q}:\mathrm{Mat}_X(\mathbb{C})\to\mathbb{C}`),
+        " を、",
+        math(String.raw`A\in\mathrm{Mat}_X(\mathbb{C})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）について次で定める。",
+      ]),
+      displayMath(String.raw`\mathrm{ent}_{p,q}(A):=A_{p,q}`),
+      paragraph([
+        "右辺は ",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`(p,q)`),
+        " 成分で ",
+        math(String.raw`\mathbb{C}`),
+        " の元なので、",
+        math(String.raw`\mathrm{ent}_{p,q}`),
+        " は写像として一つに決まる。定義域には ℂ-線型空間 ",
+        math(String.raw`(\mathrm{Mat}_X(\mathbb{C}),+_{\mathrm{Mat}_X},\ast_{\mathrm{Mat}_X},0_{\mathrm{Mat}_X})`),
+        "（",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_vector_space"),
+        "）を、値域には ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）を置く。このとき ",
+        math(String.raw`\mathrm{ent}_{p,q}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " から ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " への線型写像（",
+        ref("def_linear_map"),
+        "）である。すなわち、",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の任意の元 ",
+        math(String.raw`A,B`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\mathrm{ent}_{p,q}(A+_{\mathrm{Mat}_X}B)=\mathrm{ent}_{p,q}(A)+_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(B)`), "（加法を保つ）"],
+        [math(String.raw`\mathrm{ent}_{p,q}(\lambda\ast_{\mathrm{Mat}_X}A)=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(A)`), "（スカラー倍を保つ）"],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A,B`),
+        " を ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ent}_{p,q}(A+_{\mathrm{Mat}_X}B)
+&=(A+_{\mathrm{Mat}_X}B)_{p,q}
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義}\right)\\
+&=A_{p,q}+_{\mathbb{C}}B_{p,q}
+&&\left(\because\ +_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=A_{p,q}+_{\mathbb{C}^{\mathrm{vec}}}B_{p,q}
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\mathrm{ent}_{p,q}(A)+_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(B)
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ent}_{p,q}(\lambda\ast_{\mathrm{Mat}_X}A)
+&=(\lambda\ast_{\mathrm{Mat}_X}A)_{p,q}
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義}\right)\\
+&=\lambda\cdot_{\mathbb{C}}A_{p,q}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{p,q}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(A)
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`\mathrm{ent}_{p,q}`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
