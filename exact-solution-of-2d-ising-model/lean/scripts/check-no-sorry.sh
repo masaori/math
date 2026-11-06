@@ -790,12 +790,15 @@ targets=(
   Ising2D.halfK1D_isRealSymmetric
   Ising2D.physicalV1halfC_isRealSymmetric
   Ising2D.physicalV1halfC_transpose
-  Ising2D.physicalV1halfR_isSymm
   Ising2D.card_conf
   Ising2D.S2C_isRealSymmetric
   Ising2D.expS2C_isRealSymmetric
+  Ising2D.V2_eq_twoS2Pow_smul_expS2C
   Ising2D.V2_transpose
-  Ising2D.physicalV2R_isSymm
+  Ising2D.physicalSymTransferC_transpose
+  Ising2D.V2_hasRealEntries
+  Ising2D.physicalSymTransferC_hasRealEntries
+  Ising2D.physicalSymTransferC_isRealSymmetric
   Ising2D.K1D_hasRealEntries
   Ising2D.K1D_transpose
   Ising2D.K1D_isRealSymmetric

@@ -59,8 +59,17 @@ for M in range(2, 5):
         neq(V2, body_scalar(c**2, A), f"M={M}, x={x}: 係数 (2s_2)^M では外れる")
         # Step 3 の (2s_2)^{M/2} > 0（K_2 > 0 から s_2 > 0）
         assert x > 1 and s2 > 0 and c > 0 and c**2 == (2 * s2)**M
-        # V_2^⊤ = V_2（転置の鎖の 3 行目の根拠）
-        eq(body_transpose(V2), V2, f"M={M}, x={x}: V_2^⊤ = V_2")
+        # Step 3 の V_2^⊤ の鎖 4 行: V_2^⊤ = ((2s_2)^{M/2}A)^⊤ = (2s_2)^{M/2}A^⊤ = (2s_2)^{M/2}A = V_2
+        v1 = body_transpose(V2)
+        v2 = body_transpose(body_scalar(c, A))
+        v3 = body_scalar(c, body_transpose(A))
+        v4 = body_scalar(c, A)
+        eq(v1, v2, f"M={M}, x={x}: V_2^⊤ の鎖 1→2（V2_exponential_representation）")
+        eq(v2, v3, f"M={M}, x={x}: V_2^⊤ の鎖 2→3（transpose_of_matrix_scalar_multiple）")
+        eq(v3, v4, f"M={M}, x={x}: V_2^⊤ の鎖 3→4（Step 2 の A^⊤ = A）")
+        eq(v4, V2, f"M={M}, x={x}: V_2^⊤ の鎖 4→5（V2_exponential_representation）")
+        # Step 3 の成分の実性: V_2 = (2s_2)^{M/2}A（real_scalar_multiple_of_real_entry_matrix_has_real_entries）
+        assert entries_are_real(V2)
         # V2_invertible: V_2^{-1} = (c^{-1})_ℂ exp(−S_2)
         V2inv = body_scalar(c**(-1), Am)
         eq(body_product(V2, V2inv), IdF, f"M={M}, x={x}: V_2V_2^{{-1}} = I")
@@ -83,13 +92,24 @@ for M in range(2, 5):
             assert is_positive_definite_exact(BsAB), (M, x, y)
             # positive_real_multiple_preserves_positive_definite: W = c(B^*(AB)) は正定値（主張の正定値性）
             assert is_positive_definite_exact(W), (M, x, y)
-            # 転置の鎖: W^⊤ = (BV_2B)^⊤ = B^⊤V_2^⊤B^⊤ = BV_2B = W
+            # Step 3 の W^⊤ の鎖 7 行:
+            # W^⊤ = ((BV_2)B)^⊤ = B^⊤(BV_2)^⊤ = B^⊤(V_2^⊤B^⊤) = B(V_2^⊤B) = B(V_2B) = (BV_2)B = W
             t1 = body_transpose(W)
-            t2 = body_product(body_product(body_transpose(B), body_transpose(V2)), body_transpose(B))
-            t3 = body_product(body_product(B, V2), B)
-            eq(t1, t2, f"M={M}: 転置の鎖 1→2（積の転置）")
-            eq(t2, t3, f"M={M}: 転置の鎖 2→3（B^⊤ = B、V_2^⊤ = V_2）")
-            eq(t3, W, f"M={M}: 転置の鎖 3→4（W の定義）")
+            t2 = body_transpose(body_product(body_product(B, V2), B))
+            t3 = body_product(body_transpose(B), body_transpose(body_product(B, V2)))
+            t4 = body_product(body_transpose(B), body_product(body_transpose(V2), body_transpose(B)))
+            t5 = body_product(B, body_product(body_transpose(V2), B))
+            t6 = body_product(B, body_product(V2, B))
+            t7 = body_product(body_product(B, V2), B)
+            eq(t1, t2, f"M={M}: 転置の鎖 1→2（W の定義）")
+            eq(t2, t3, f"M={M}: 転置の鎖 2→3（transpose_of_matrix_product、A → BV_2, B → B）")
+            eq(t3, t4, f"M={M}: 転置の鎖 3→4（transpose_of_matrix_product、A → B, B → V_2）")
+            eq(t4, t5, f"M={M}: 転置の鎖 4→5（B^⊤ = B を 2 箇所へ）")
+            eq(t5, t6, f"M={M}: 転置の鎖 5→6（V_2^⊤ = V_2）")
+            eq(t6, t7, f"M={M}: 転置の鎖 6→7（mat_mult_associative）")
+            eq(t7, W, f"M={M}: 転置の鎖 7→8（W の定義）")
+            # Step 3 の成分の実性: BV_2、W = (BV_2)B（product_of_real_entry_matrices_has_real_entries を 2 回）
+            assert entries_are_real(body_product(B, V2))
             # 積の転置の行が並びの逆転を使っていることの対照: 並びを逆にしない (BV_2)^⊤ ≠ B^⊤V_2^⊤
             neq(body_transpose(body_product(B, V2)), body_product(body_transpose(B), body_transpose(V2)),
                 f"M={M}: (BV_2)^⊤ ≠ B^⊤V_2^⊤")

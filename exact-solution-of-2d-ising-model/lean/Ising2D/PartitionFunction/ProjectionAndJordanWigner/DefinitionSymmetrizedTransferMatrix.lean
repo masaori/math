@@ -37,6 +37,7 @@
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.NecSuf.TransposeOfMatrixProduct
 
 set_option linter.unusedSectionVars false
 
@@ -145,12 +146,21 @@ theorem trace_mul_pow_eq_trace_symmetrized_pow {B V1 V2 W : Matrix n n ℂ} (hBB
 
 /-! ## `W` の対称性・正定値性・成分の正値性 -/
 
-/-- `B`, `V₂` が実対称なら `W = B V₂ B` も実対称
-（人手証明 `W_is_real_symmetric_positive_definite` の Step 3 の後半）。 -/
+/-- `B`, `V₂` が実行列で対称なら `W = (BV₂)B` も対称（人手 `W_is_real_symmetric_positive_definite` の Step 3 の
+`W^⊤ = W` の 7 行の鎖を、係数 `ℝ` の行列で同じ段に書いたもの。具体的な `W` の人手と 1 対 1 の鎖は
+`physicalSymTransferC_transpose`。積の転置は `transpose_of_matrix_product` の必要十分版 `NecSuf.transpose_mul_matrix'`
+（係数は可換な積と加法の可換モノイドだけ）を係数 `ℝ` で引く）。 -/
 theorem symTransfer_isSymm {B V2 : Matrix n n ℝ} (hB : B.IsSymm) (hV2 : V2.IsSymm) :
-    (symTransfer B V2).IsSymm := by
-  show (B * V2 * B)ᵀ = B * V2 * B
-  rw [Matrix.transpose_mul, Matrix.transpose_mul, hB.eq, hV2.eq, Matrix.mul_assoc]
+    (symTransfer B V2).IsSymm :=
+  calc (symTransfer B V2)ᵀ
+      = ((B * V2) * B)ᵀ := rfl                                  -- `def_symmetrized_transfer_matrix`
+    _ = Bᵀ * (B * V2)ᵀ := NecSuf.transpose_mul_matrix' _ _      -- `transpose_of_matrix_product`（`A → BV_2`, `B → B`）
+    _ = Bᵀ * (V2ᵀ * Bᵀ) := by
+        rw [NecSuf.transpose_mul_matrix' B V2]                 -- `transpose_of_matrix_product`（`A → B`, `B → V_2`）
+    _ = B * (V2ᵀ * B) := by rw [hB.eq]                         -- `B^⊤ = B` を 2 箇所へ同時に
+    _ = B * (V2 * B) := by rw [hV2.eq]                         -- `V_2^⊤ = V_2`
+    _ = (B * V2) * B := (Matrix.mul_assoc _ _ _).symm          -- `mat_mult_associative`
+    _ = symTransfer B V2 := rfl                                -- `def_symmetrized_transfer_matrix`
 
 /-- 可逆な行列の `mulVec` は単射。 -/
 theorem mulVec_eq_zero_iff_of_isUnit {B : Matrix n n ℝ} (hB : IsUnit B) {x : n → ℝ}

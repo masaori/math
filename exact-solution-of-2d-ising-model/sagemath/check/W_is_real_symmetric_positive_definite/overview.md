@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 - ブロック: `maxeig_003_claim_W_is_positive_definite`（`W` は実対称正定値で、可逆）
 - 範囲: 証明の Step 1（`σ_m^zσ_{m+1}^z`・`K_1D`・`S_2` の実対称性と `S_2` の表示の鎖 2 行）、Step 2（エルミート性・正定値性・`B'B = I`・
-  `(1/2)K_1D` の実対称性（成分の実性と転置の鎖 3 行）・`B` と `A` の実対称性）、Step 3（`W` の鎖 4 行、合同と正の実数倍による正定値性、転置の鎖 4 行）、
+  `(1/2)K_1D` の実対称性（成分の実性と転置の鎖 3 行）・`B` と `A` の実対称性）、Step 3（`W` の鎖 4 行、合同と正の実数倍による正定値性、`V_2^⊤` の鎖 4 行、`W^⊤` の鎖 7 行、`V_2`・`BV_2`・`W` の成分の実性）、
   可逆性の段（`BB'` の鎖 3 行、`BV_2 ∈ R^×`、`W ∈ R^×`）、主張そのもの。
 - 記号は証明のとおり `D := Σ_m σ_m^zσ_{m+1}^z`（`σ_{M+1}^z := σ_1^z`）、`B := exp((1/2)K_1D) = V_1^{1/2}`、`B' := exp(−(1/2)K_1D)`、
   `S_2 := iK_2^*H_2`、`A := exp(S_2)`、`c := (2s_2)^{M_col/2}`、`W := (BV_2)B`。
@@ -27,7 +27,9 @@
 | Step 3 の `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）と `(2s_2)^{M_col/2} > 0` | `check_exact_exponentials_and_W.sage` | `V_2` を成分の定義から作り `cA` と比べる。`s_2 > 0`・`c > 0`・`c^2 = (2s_2)^{M_col}` | **PASS** |
 | Step 3 の `W` の鎖 4 行（`W = BV_2B = B(cA)B = c(BAB) = c(B^*AB)`） | `check_exact_exponentials_and_W.sage` | 各行を組み、隣の行と比べる | **PASS** |
 | Step 3 の続く段落（`B^*AB = B^*(AB)` は正定値（`congruence_preserves_positive_definite`）、`W` は正定値（`positive_real_multiple_preserves_positive_definite`）） | `check_exact_exponentials_and_W.sage` | 結合律の行を比べ、`B^*(AB)` と `W` に正定値の二つの判定を当てる | **PASS** |
-| Step 3 の転置の鎖 4 行（`W^⊤ = (BV_2B)^⊤ = B^⊤V_2^⊤B^⊤ = BV_2B = W`） | `check_exact_exponentials_and_W.sage` | 転置は `def_matrix_transpose` の成分の式で組み、各行を比べる。`V_2^⊤ = V_2`・`B^⊤ = B` も個別に見る | **PASS** |
+| Step 3 の `V_2^⊤` の鎖 4 行（`V_2^⊤ = (cA)^⊤ = cA^⊤ = cA = V_2`） | `check_exact_exponentials_and_W.sage` | 転置は `def_matrix_transpose` の成分の式で組み、各行を比べる | **PASS** |
+| Step 3 の `W^⊤` の鎖 7 行（`W^⊤ = ((BV_2)B)^⊤ = B^⊤(BV_2)^⊤ = B^⊤(V_2^⊤B^⊤) = B(V_2^⊤B) = B(V_2B) = (BV_2)B = W`） | `check_exact_exponentials_and_W.sage` | 各行を本文の字面どおりに組み、隣の行と比べる。`B^⊤ = B` も個別に見る | **PASS** |
+| Step 3 の成分の実性の段（`V_2 = cA`、`BV_2`、`W = (BV_2)B`） | `check_exact_exponentials_and_W.sage` | 各行列の成分が実（`entries_are_real`） | **PASS** |
 | 可逆性の `BB'` の鎖 3 行（置き方、`matrix_double_negation`、`exp_of_negative_is_left_inverse`） | `check_exact_exponentials_and_W.sage` | `−(−D) = D` を符号反転の成分の式で確かめ、`exp(−(−(1/2)K_1D))` を `−(−D)` の固有値の射影から作って各行を比べる | **PASS** |
 | 可逆性の `BV_2 ∈ R^×`（`V2_invertible`、`def_invertible_elements_of_R` (ii)）と `W = (BV_2)B ∈ R^×` | `check_exact_exponentials_and_W.sage` | `V_2^{-1} = (c^{-1})_ℂexp(−S_2)` が左右の逆元であること、`(BV_2)^{-1} = V_2^{-1}B'`、`W^{-1} = B'(V_2^{-1}B')` が左右の逆元であること、`det W ≠ 0` | **PASS** |
 | 主張そのもの（成分が実、`W^⊤ = W`、正定値、可逆） | `check_exact_exponentials_and_W.sage` | 上の各行に加え、具体の `x = u + iv`（3 本）で `x^*Wx` の虚部が 0・実部が正 | **PASS** |
@@ -49,12 +51,12 @@
 - `check_symbolic_exponents.sage` の `D = Σ_m σ_m^zσ_{m+1}^z`（有限和）は、共有の準備の `bond_sum` が同じ項の有限和なので必ず成り立つ。
 - `BB'` の鎖の 1→2 行は、`−(−D) = D` を確かめた後では、`exp(−(−(1/2)K_1D))` を同じ射影から作るので必ず成り立つ。中身は `−(−D) = D`（符号反転の成分の式）の検査にある。
 - `check_symbolic_exponents.sage` の `((1/2)K_1D)^⊤` の鎖の 3→4 行（`(1/2)_ℂ(K_1D) = (1/2)K_1D`、略記の行）は、両辺を同じ式で作るので必ず成り立つ。
-- `W` の鎖 2→3 行（スカラーの移動）と `B^*(AB) = (B^*A)B`（結合律）は、行列の成分の計算規則だけで必ず成り立つ。
+- `W` の鎖 2→3 行（スカラーの移動）と `B^*(AB) = (B^*A)B`（結合律）、`W^⊤` の鎖の 1→2 行・6→7 行・7→8 行（定義と結合律）、`V_2^⊤` の鎖の 2→3 行（スカラー倍の転置）は、行列の成分の計算規則だけで必ず成り立つ。
 - `check_exact_exponentials_and_W.sage` の数体 `F` の中では、成分は実数なので共役は恒等写像であり、`W` の鎖 3→4 行（`B^* = B`）は必ず成り立つ。
   `B^* = B` の中身は、同じ `B` を AA で作った前半の検査（転置と共役転置）が受け持つ。
 - `B'B = I` と `BB' = I` は、`B`・`B'` を同じ射影の和 `Σ_λ y^{±λ}P_λ` で作るので必ず成り立つ。部分和の極限としての `exp` の値は、この検算では作らない
   （`def_exp` の部分和を通した確認は `exp_of_real_symmetric_is_real_symmetric` の検算フォルダのボールの検算が担う）。
-- `W` の成分が実であることは、`F` が AA へ埋め込まれた実の数体であることから構成上成り立つ。中身は `iH_2` の成分が整数で虚部が 0 であること
+- `V_2`・`BV_2`・`W` の成分が実であることは、`F` が AA へ埋め込まれた実の数体であることから構成上成り立つ。中身は `iH_2` の成分が整数で虚部が 0 であること
   （共有の準備 `iH2_integer_matrix` の検査）と、`D` の成分が整数であることにある。
 
 ## 計算の帰属と範囲
