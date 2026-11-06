@@ -81798,7 +81798,7 @@ f_q(\theta_1,\theta_2):=\log_{\mathbb R}B_q(\theta_1,\theta_2)`),
 &=0+2
 &&\bigl(\because\ q^2+2q-1=0\bigr)\\
 &=2
-&&\bigl(\because\ \mathbb Q\text{ の加法}\bigr).
+&&\bigl(\because\ \mathbb Q\text{ の加法}\bigr)
 \end{aligned}`),
                   paragraph([
                     "これは ", math(String.raw`q+1\in\mathbb Q`), " と ",
@@ -81819,7 +81819,7 @@ B_q(\theta_1,\theta_2)-(r^2+2r-1)^2
 &=2r(1-r^2)\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
 &&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &\ge0
-&&\bigl(\because\ 0<r<1,\ \cos\theta_1\le1,\ \cos\theta_2\le1\bigr).
+&&\bigl(\because\ 0<r<1,\ \cos\theta_1\le1,\ \cos\theta_2\le1\bigr)
 \end{aligned}`),
                   paragraph([
                     "従って ", math(String.raw`B_q(\theta_1,\theta_2)\ge(r^2+2r-1)^2>0`),
