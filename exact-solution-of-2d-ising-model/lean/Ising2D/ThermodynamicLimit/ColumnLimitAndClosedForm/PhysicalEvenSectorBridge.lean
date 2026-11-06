@@ -16,7 +16,7 @@ Step 1・Step 2 で使う `W` と `V^{(+)}` の事実を束ねた構造である
 | `W` | `def_symmetrized_transfer_matrix` の `W = V_1^{1/2} V_2 V_1^{1/2}` | `physicalSymTransferR M P.K1 P.K2` |
 | `hWsymm` | `W_is_real_symmetric_positive_definite`（`W` は実対称） | `physicalSymTransferR_isSymm` |
 | `hWpsd` | `W_is_real_symmetric_positive_definite`（`W` は正定値。`c_plus_equals_Lambda_half_integer` の Step 3 と `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 は、Rayleigh 上限の有界性のために `x^⊤Wx ≥ 0` だけを使う） | `physicalSymTransferR_nonneg` |
-| `Vr`, `hVr` | Step 2「`V^{(+)}` の成分は実である」 | `VPlusR P M`, `vPlusDataOf_V_eq_map`（`ClaimVPlusRealEntries.lean`） |
+| `Vr`, `hVr` | 人手の書き直し前の Step 2「`V^{(+)}` の成分は実である」（いまの人手は使わない。`ClaimVPlusRealEntries.lean` の冒頭） | `VPlusR P M`, `vPlusDataOf_V_eq_map`（`ClaimVPlusRealEntries.lean`） |
 | `hWV` | Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` は一致する」 | `hWV_physical`（`ClaimWEqVPlusOnEvenSector.lean`） |
 
 `physicalSymTransferR_nonneg` の `x = 0` の場合分けは人手に無い段である。人手は Rayleigh 商を `‖x‖ = 1` の `x` についてしか

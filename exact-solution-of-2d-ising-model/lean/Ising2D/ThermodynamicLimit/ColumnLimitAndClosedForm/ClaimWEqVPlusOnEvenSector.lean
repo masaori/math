@@ -31,7 +31,7 @@ Step 1 でそれを実ベクトルへ `ℝ ⊂ ℂ` の包含を明示せずに�
 | `map Complex.ofRealHom` と `ℝ → ℂ` の埋め込みによる `map` の一致 | `map_ofRealHom_eq_map_coe`（`Complex.ofRealHom_eq_coe`） |
 | `map Complex.ofRealHom` と `cvec` の両立 | `cvec_mulVec_ofRealHom`（`map_ofRealHom_eq_map_coe` と `TheoremCPlusEqualsLambda.lean` の `cvec_mulVec` から） |
 | `V^{(+)} = VPlusOfTransfer` を `VPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値へ（`def_V_plus`） | `VPlusOfTransfer_eq_VPlus`（`P.K2star := Kstar P.K2` は定義） |
-| `V^{(+)}` は実行列 `VPlusR` の埋め込み（Step 2「`V^{(+)}` の成分は実である」） | `eq_map_reMat`, `VPlus_hasRealEntries` |
+| `V^{(+)}` は実行列 `VPlusR` の埋め込み（人手の書き直し前の Step 2 の「`V^{(+)}` の成分は実である」。`ClaimVPlusRealEntries.lean` の冒頭） | `eq_map_reMat`, `VPlus_hasRealEntries` |
 | `cvec` の単射性 | `cvec_injective` |
 
 必要十分版は `NecSuf/EvenSectorAgreement.lean` に置く（`NecSuf.invProj_smul_of_fixed`、`NecSuf.smul_eq_of_mul_proj_eq`）。
@@ -182,7 +182,7 @@ theorem hWV_physical (P : IsingParam) (hM : 2 ≤ M) (x : Conf M → ℝ)
         rw [VPlusOfTransfer_eq_VPlus P.K2_pos]
         rfl
     _ = (VPlusR P M).map Complex.ofRealHom *ᵥ cvec x := by
-        -- Step 2「`V^{(+)}` の成分は実である」の実行列表示
+        -- 人手の書き直し前の Step 2「`V^{(+)}` の成分は実である」の実行列表示（`ClaimVPlusRealEntries.lean` の冒頭）
         rw [map_ofRealHom_eq_map_coe, VPlusR, ← eq_map_reMat (VPlus_hasRealEntries _ _ _)]
     _ = cvec (VPlusR P M *ᵥ x) := cvec_mulVec_ofRealHom _ x
 

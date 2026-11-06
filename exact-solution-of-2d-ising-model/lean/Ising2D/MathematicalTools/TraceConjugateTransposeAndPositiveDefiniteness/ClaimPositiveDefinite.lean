@@ -214,14 +214,6 @@ theorem S2_isHermitian_by_anticommutation {K2star : ℂ} (hK2 : star K2star = K2
       smul_neg, neg_smul, neg_neg]
   exact h
 
-/-- 原文の「成分がすべて実数で転置について対称」＝「エルミートかつ転置不変」。 -/
-theorem entries_real_of_isHermitian_of_transpose {A : TensorPow M}
-    (hH : A.IsHermitian) (hT : Aᵀ = A) (s t : Conf M) : (starRingEnd ℂ) (A s t) = A s t := by
-  have h1 : star (A t s) = A s t := congrFun (congrFun hH s) t
-  have h2 : A s t = A t s := (congrFun (congrFun hT s) t).symm
-  calc (starRingEnd ℂ) (A s t) = star (A t s) := by rw [h2]; rfl
-    _ = A s t := h1
-
 end Herm
 
 /-! ## `exp` の正定値性（原文 `exp_hermitian_is_positive_definite`） -/

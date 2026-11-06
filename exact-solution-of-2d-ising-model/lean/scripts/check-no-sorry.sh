@@ -521,8 +521,9 @@ targets=(
   Ising2D.S1plus_transpose
   Ising2D.S2_isHermitian
   Ising2D.S2_transpose
+  Ising2D.S2_isRealSymmetric
+  Ising2D.S1plus_isRealSymmetric
   Ising2D.S2_isHermitian_by_anticommutation
-  Ising2D.entries_real_of_isHermitian_of_transpose
   Ising2D.posDef_exp_of_isHermitian
   Ising2D.Vmat_posDef
   Ising2D.trace_Vmat_pos
@@ -2405,7 +2406,11 @@ targets=(
   Ising2D.vPlusDataOf_V
   Ising2D.vPlusDataOf_C
   Ising2D.vPlusDataOf_gam
+  Ising2D.halfS1plus_isRealSymmetric
+  Ising2D.V1plusHalf_isRealSymmetric
+  Ising2D.V2H2Form_hasRealEntries
   Ising2D.VPlus_hasRealEntries
+  Ising2D.eq_map_reMat
   Ising2D.vPlusDataOf_V_eq_map
   Ising2D.epsProjPlus_mulVec_of_even
   Ising2D.W_mulVec_eq_VPlus_mulVec_of_even

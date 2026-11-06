@@ -36,7 +36,7 @@
 | Step 1 の結論「`K_1D` は実対称」 | `K1D_isRealSymmetric` |
 | Step 2: `real_symmetric_matrix_is_hermitian`（`A → K_1D`）で `K_1D` はエルミート | `K1D_isHermitian` |
 | Step 2: `real_multiple_of_hermitian_is_hermitian`（`α → ½`, `A → K_1D`）で `½K_1D` はエルミート | `halfK1D_isHermitian`（`physicalV1halfC` の指数 `(K_1/2)_ℂD` を `½(K_1D)` へ書き直すのは `halfK1D_eq_half_smul_K1D`・`physicalV1halfC_eq_matExp_half`） |
-| Step 1: `S_2` は実対称（人手は `iH_is_real_symmetric` の Step 1 を引くが、実対称性を示すのはその Step 3） | `S2C_isRealSymmetric`（`M ≥ 1` は `S2_hasRealEntries`・`S2_transpose_by_pauli_form`、`M = 0` は人手の範囲外の補助） |
+| Step 1: `S_2` は実対称（人手は `iH_is_real_symmetric` の Step 1 を引くが、実対称性を示すのはその Step 3） | `S2C_isRealSymmetric`（`iH_is_real_symmetric` の結論の Lean `S2_isRealSymmetric`。`M ≥ 1` は `S2_hasRealEntries`・`S2_transpose_by_pauli_form`、`M = 0` は人手の範囲外の補助） |
 | Step 2: `real_symmetric_matrix_is_hermitian`（`A → S_2`）で `S_2` はエルミート | `expS2C_posDef` の中の `real_symmetric_isHermitian _ (S2C_isRealSymmetric K2)` |
 | Step 2: `exp_hermitian_is_positive_definite` で `B := exp(½K_1D)` と `A := exp(S_2)` は正定値 | `physicalV1halfC_posDef`、`expS2C_posDef` |
 | Step 2: `exp_of_negative_is_left_inverse` で `B' := exp(-½K_1D)` は `B'B = I` | `physicalV1halfInvC`、`physicalV1halfInvC_mul_physicalV1halfC` |
@@ -344,15 +344,11 @@ theorem physicalV1halfInvC_mul_physicalV1halfC (K1 : ℝ) :
   exact matExp_neg_mul_matExp_tensorPow _
 
 /-- 人手 Step 1 の「`S_2` も実対称」（人手は `iH_is_real_symmetric` の Step 1 を引くが、実対称性を示すのはその Step 3 である）。
-`M = r + 1` は `iH_is_real_symmetric` Step 3 の成分の実性 `S2_hasRealEntries` と転置の 5 行の鎖 `S2_transpose_by_pauli_form`。
-`M = 0` は人手の範囲外の補助で、反可換性によるエルミート性 `S2_isHermitian_by_anticommutation` と `S2_transpose` から
-`hermitian_and_transpose_invariant_matrix_is_real_symmetric` で埋める。 -/
+`iH_is_real_symmetric` の結論の Lean `S2_isRealSymmetric`（`ClaimIHPauliForm.lean`。`M = r + 1` は Step 3 の成分の実性と転置の鎖、
+`M = 0` は人手の範囲外の補助）を `K_2^* = Kstar K_2` で引く。 -/
 theorem S2C_isRealSymmetric (K2 : ℝ) :
-    MatrixIsRealSymmetric ((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M) := by
-  rcases M with _ | r
-  · exact hermitian_and_transpose_invariant_matrix_is_real_symmetric _
-      (S2_isHermitian_by_anticommutation (Complex.conj_ofReal _)) S2_transpose   -- 人手の主張の範囲外（`M_col = 0`）
-  · exact ⟨S2_hasRealEntries (Kstar K2) r, S2_transpose_by_pauli_form _ r⟩       -- `iH_is_real_symmetric` Step 3（`def_real_symmetric_complex_matrix`）
+    MatrixIsRealSymmetric ((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M) :=
+  S2_isRealSymmetric (Kstar K2)                                                   -- `iH_is_real_symmetric` の結論（`K_2^* → K_2^*`）
 
 /-- 人手 Step 2 の `A := exp(S_2)`（`S_2 = iK_2^*H_2`）。 -/
 noncomputable def expS2C (M : ℕ) (K2 : ℝ) : TensorPow M :=

@@ -1,78 +1,42 @@
 /-
 # `V^{(+)}` の成分は実である（具体版）
 
-正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
-（`closing_009_theorem_c_plus_equals_Lambda_half`、ラベル **`c_plus_equals_Lambda_half_integer`**）の
-Step 2 の段落「`V^{(+)}` の成分は実である」。
-
 `Ising2D.EvenSectorBridge`（`TheoremCPlusEqualsLambda.lean`）の欄 `Vr`・`hVr`
 （`V^{(+)}` の実行列としての表示）を、`Ising2D.vPlusDataOf` の `V^{(+)}` について与える。
 
-## 人手証明との対応
+## 人手証明との関係
 
-人手は `V_plus_is_positive_definite` の表示
-`V^{(+)} = (2s_2)^{M_col/2} exp(½S_1^{(+)}) exp(S_2) exp(½S_1^{(+)})` において、
-`iH_is_real_symmetric` より `S_1^{(+)}, S_2` が実対称であること、実対称行列の指数関数が実対称であること、
-`(2s_2)^{M_col/2} ∈ ℝ_{>0}` から `V^{(+)}` が実行列であると結論する。
+人手 `c_plus_equals_Lambda_half_integer`（`structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`、
+`closing_009_theorem_c_plus_equals_Lambda_half`）は、2026-11-05 の書き直しで「`V^{(+)}` の成分は実である」を使わなくなった
+（Step 2 は `W` と `ε` の成分の実性から `\overline{q}` が同じ固有空間に入ることを示す）。Lean の `TheoremCPlusEqualsLambda.lean` は
+まだ書き直し前の経路（`V^{(+)}` の実行列表示 `Vr` の実部を取る）で組んであるので、その入力としてこのファイルを置く。
+主張そのものに人手の対応ブロックは無いが、各段は次の人手の定義・主張の具体版を引く。
+
+| 段 | Lean |
+| --- | --- |
+| 成分がすべて実数（`def_matrix_with_real_entries`）、実対称（`def_real_symmetric_complex_matrix`） | `MatrixHasRealEntries`、`MatrixIsRealSymmetric` |
+| `½S_1^{(+)} = i(K_1/2)_ℂH_1^{(+)}` は実対称（`iH_is_real_symmetric`、`K_1 → K_1/2`） | `halfS1plus_isRealSymmetric`（`S1plus_isRealSymmetric`） |
+| `S_2 = i(K_2^*)_ℂH_2` は実対称（`iH_is_real_symmetric`） | `S2_isRealSymmetric` |
+| `exp(½S_1^{(+)}) = (V_1^{(+)})^{1/2}`・`exp(S_2)` は実対称（`exp_of_real_symmetric_is_real_symmetric`、`A → ½S_1^{(+)}`・`A → S_2`） | `V1plusHalf_isRealSymmetric`、`V2H2Form_hasRealEntries` の中 |
+| `(2s_2)^{M_col/2}exp(S_2)` の成分は実（`real_scalar_multiple_of_real_entry_matrix_has_real_entries`、`c → (2s_2)^{M_col/2}`） | `V2H2Form_hasRealEntries`（`real_smul_hasRealEntries`） |
+| 積の成分は実（`product_of_real_entry_matrices_has_real_entries` を 2 回） | `VPlus_hasRealEntries`（`matrix_mul_hasRealEntries`） |
+| 実行列としての表示 | `reMat`、`eq_map_reMat`、`VPlusR`、`vPlusDataOf_V_eq_map` |
+
 Lean の `VPlus` は `(V_1^{(+)})^{1/2} · (2s_2)^{M_col/2}exp(S_2) · (V_1^{(+)})^{1/2}` の積の形
 （`V2H2Form` がスカラー倍を中に持つ）なので、スカラー倍を `V2H2Form` の中で扱う。
-
-| 人手 | Lean |
-| --- | --- |
-| `iH_is_real_symmetric` の「成分がすべて実数で転置について対称」を、Lean では「エルミートかつ転置不変」の 2 条件で持ち、そこから成分の実性を読む（定義の同値の片側の向き） | `hasRealEntries_of_isHermitian_of_transpose` |
-| `½S_1^{(+)} = (i/2)K_1H_1^{(+)}` は実対称（`iH_is_real_symmetric` を `K_1/2` で） | `halfS1plus_isHermitian`, `halfS1plus_transpose` |
-| 実対称行列の指数関数は実対称（`W_is_real_symmetric_positive_definite` の Step 2 と同じ議論） | `matExp_hasRealEntries` |
-| `exp(½S_1^{(+)}) = (V_1^{(+)})^{1/2}` の成分は実 | `V1plusHalf_hasRealEntries` |
-| `(2s_2)^{M_col/2}exp(S_2)` の成分は実（`S_2` は実対称、`(2s_2)^{M_col/2} ∈ ℝ`） | `V2H2Form_hasRealEntries` |
-| 実行列の積は実行列 | `HasRealEntries.mul` |
-| 結論: `V^{(+)}` は実行列 | `VPlus_hasRealEntries`、実行列 `VPlusR` と `vPlusDataOf_V_eq_map` |
-
-人手の「実対称行列の指数関数は実対称」は、部分和と極限の実対称性で示す。Lean では、共役転置の側は人手
-`exp_of_hermitian_is_hermitian` の具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）を、
-転置の側は人手 `exp_of_symmetric_is_symmetric` の具体版 `matExp_transpose_of_transpose_eq`（`ClaimExpOfSymmetricIsSymmetric.lean`）を引く。
 
 具体的な `V^{(+)}` の成分についての主張で、`EvenSectorBridge` の欄を埋めるためだけに立てるので、必要十分版は置かない。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfRealSymmetricIsRealSymmetric
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
 
 namespace Ising2D
 
 open Matrix
 
 variable {M : ℕ}
-
-/-! ## 成分が実であること -/
-
-/-- 行列 `A` の成分がすべて実である（各成分が複素共役で変わらない）。 -/
-def HasRealEntries (A : TensorPow M) : Prop :=
-  ∀ s t : Conf M, (starRingEnd ℂ) (A s t) = A s t
-
-/-- エルミートかつ転置不変なら、成分はすべて実（人手 `iH_is_real_symmetric` の「実対称」を Lean で持つ 2 条件から、成分の実性を読む向き）。 -/
-theorem hasRealEntries_of_isHermitian_of_transpose {A : TensorPow M}
-    (hH : A.IsHermitian) (hT : Aᵀ = A) : HasRealEntries A :=
-  entries_real_of_isHermitian_of_transpose hH hT
-
-/-- 実行列の積は実行列（積の成分 `∑_j A_{sj}B_{jt}` の複素共役は各項の複素共役の和）。 -/
-theorem HasRealEntries.mul {A B : TensorPow M} (hA : HasRealEntries A) (hB : HasRealEntries B) :
-    HasRealEntries (A * B) := by
-  intro s t
-  rw [Matrix.mul_apply, map_sum]
-  exact Finset.sum_congr rfl fun j _ => by rw [map_mul, hA s j, hB j t]
-
-/-- 実行列の実数倍は実行列。 -/
-theorem HasRealEntries.real_smul {A : TensorPow M} (hA : HasRealEntries A) (c : ℝ) :
-    HasRealEntries ((c : ℂ) • A) := by
-  intro s t
-  rw [Matrix.smul_apply, smul_eq_mul, map_mul, Complex.conj_ofReal, hA s t]
-
-/-- **実対称行列の指数関数は実対称**（人手 `W_is_real_symmetric_positive_definite` の Step 2 と同じ議論。
-共役転置の側は `exp_of_hermitian_is_hermitian`、転置の側は `exp_of_symmetric_is_symmetric` の具体版を引く）。 -/
-theorem matExp_hasRealEntries {S : TensorPow M} (hH : S.IsHermitian) (hT : Sᵀ = S) :
-    HasRealEntries (matExp S) := by
-  apply hasRealEntries_of_isHermitian_of_transpose
-  · exact matExp_conjTranspose_of_conjTranspose_eq S hH  -- `exp_of_hermitian_is_hermitian`
-  · exact matExp_transpose_of_transpose_eq S hT  -- `exp_of_symmetric_is_symmetric`
 
 /-! ## `V^{(+)}` の因子 -/
 
@@ -82,33 +46,31 @@ theorem halfS1plus_coeff_eq (K1 : ℝ) :
   push_cast
   ring
 
-/-- 人手 `iH_is_real_symmetric` を `K_1/2` で: `½S_1^{(+)} = (i/2)K_1H_1^{(+)}` はエルミート。 -/
-theorem halfS1plus_isHermitian (K1 : ℝ) :
-    (((1 / 2 : ℂ) * Complex.I * (K1 : ℂ)) • H1plus M).IsHermitian := by
+/-- 人手 `iH_is_real_symmetric` を `K_1 → K_1/2` で: `½S_1^{(+)} = i(K_1/2)_ℂH_1^{(+)}` は実対称。 -/
+theorem halfS1plus_isRealSymmetric (K1 : ℝ) :
+    MatrixIsRealSymmetric (((1 / 2 : ℂ) * Complex.I * (K1 : ℂ)) • H1plus M) := by
   rw [halfS1plus_coeff_eq]
-  exact S1plus_isHermitian (Complex.conj_ofReal _)
+  exact S1plus_isRealSymmetric (K1 / 2)
 
-/-- 人手 `iH_is_real_symmetric` を `K_1/2` で: `½S_1^{(+)}` は転置不変。 -/
-theorem halfS1plus_transpose (K1 : ℝ) :
-    (((1 / 2 : ℂ) * Complex.I * (K1 : ℂ)) • H1plus M)ᵀ
-      = ((1 / 2 : ℂ) * Complex.I * (K1 : ℂ)) • H1plus M := by
-  rw [halfS1plus_coeff_eq]
-  exact S1plus_transpose
+/-- `(V_1^{(+)})^{1/2} = exp(½S_1^{(+)})` は実対称（`exp_of_real_symmetric_is_real_symmetric`、`A → ½S_1^{(+)}`）。 -/
+theorem V1plusHalf_isRealSymmetric (K1 : ℝ) : MatrixIsRealSymmetric (V1plusHalf M (K1 : ℂ)) :=
+  exp_of_real_symmetric_is_real_symmetric _ (halfS1plus_isRealSymmetric K1)
 
-/-- `(V_1^{(+)})^{1/2} = exp(½S_1^{(+)})` の成分は実（`K_1` 実）。 -/
-theorem V1plusHalf_hasRealEntries (K1 : ℝ) : HasRealEntries (V1plusHalf M (K1 : ℂ)) :=
-  matExp_hasRealEntries (halfS1plus_isHermitian K1) (halfS1plus_transpose K1)
-
-/-- `(2s_2)^{M_col/2}exp(S_2)`（`S_2 = iK_2^*H_2`）の成分は実（`K_2^*` 実）。 -/
+/-- `(2s_2)^{M_col/2}exp(S_2)`（`S_2 = iK_2^*H_2`）の成分は実: `exp(S_2)` は実対称
+（`exp_of_real_symmetric_is_real_symmetric`、`A → S_2`）なので成分は実、
+`real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → (2s_2)^{M_col/2}`）。 -/
 theorem V2H2Form_hasRealEntries (s2 K2star : ℝ) :
-    HasRealEntries (V2H2Form M s2 (K2star : ℂ)) :=
-  (matExp_hasRealEntries (S2_isHermitian (Complex.conj_ofReal _)) S2_transpose).real_smul _
+    MatrixHasRealEntries (V2H2Form M s2 (K2star : ℂ)) :=
+  real_smul_hasRealEntries _ _
+    (exp_of_real_symmetric_is_real_symmetric _ (S2_isRealSymmetric K2star)).1
 
-/-- **人手 `c_plus_equals_Lambda_half_integer` Step 2「`V^{(+)}` の成分は実である」**（`K_1, K_2^*` 実）。 -/
+/-- **`V^{(+)}` の成分は実である**（`K_1, K_2^*` 実）: 3 つの因子の成分が実なので、
+`product_of_real_entry_matrices_has_real_entries` を 2 回。 -/
 theorem VPlus_hasRealEntries (s2 K1 K2star : ℝ) :
-    HasRealEntries (VPlus M s2 (K1 : ℂ) (K2star : ℂ)) :=
-  ((V1plusHalf_hasRealEntries K1).mul (V2H2Form_hasRealEntries s2 K2star)).mul
-    (V1plusHalf_hasRealEntries K1)
+    MatrixHasRealEntries (VPlus M s2 (K1 : ℂ) (K2star : ℂ)) :=
+  matrix_mul_hasRealEntries _ _
+    (matrix_mul_hasRealEntries _ _ (V1plusHalf_isRealSymmetric K1).1 (V2H2Form_hasRealEntries s2 K2star))
+    (V1plusHalf_isRealSymmetric K1).1
 
 /-! ## 実行列としての表示 -/
 
@@ -117,11 +79,11 @@ noncomputable def reMat (A : TensorPow M) : Matrix (Conf M) (Conf M) ℝ :=
   A.map Complex.re
 
 /-- 成分が実なら、`A` は実部の実行列を成分ごとに `ℂ` へ埋め込んだもの。 -/
-theorem eq_map_reMat {A : TensorPow M} (h : HasRealEntries A) :
+theorem eq_map_reMat {A : TensorPow M} (h : MatrixHasRealEntries A) :
     A = (reMat A).map (fun r : ℝ => (r : ℂ)) := by
   ext s t
-  rw [Matrix.map_apply, reMat, Matrix.map_apply]
-  exact (Complex.conj_eq_iff_re.mp (h s t)).symm
+  obtain ⟨r, hr⟩ := h s t
+  rw [Matrix.map_apply, reMat, Matrix.map_apply, hr, Complex.ofReal_re]
 
 /-- `vPlusDataOf` の `V^{(+)}` の実行列表示。 -/
 noncomputable def VPlusR (P : IsingParam) (M : ℕ) : Matrix (Conf M) (Conf M) ℝ :=

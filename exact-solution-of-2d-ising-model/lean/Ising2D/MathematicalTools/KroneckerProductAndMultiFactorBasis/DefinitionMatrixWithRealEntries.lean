@@ -7,8 +7,6 @@
 - 人手の `B ∈ Mat(m, n, ℂ)` の成分の番号 `p ∈ {1, …, m}`・`q ∈ {1, …, n}` は、Lean では行と列の添字の型 `α`・`β` の元である。
   `TensorPow M` の行列（人手の `Mat(2^M, ℂ)`）は添字が `Conf M` なので、添字の型を `Fin m`・`Fin n` に固定しない。
 - 人手の `r_ℂ`（`inclusion_rr_to_cc`）は Lean の `(r : ℂ)` である。
-- `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimVPlusRealEntries.lean` の `HasRealEntries`（`TensorPow M` の各成分が複素共役で変わらないこと）は
-  人手のこの定義と 1 対 1 でない別の述語である。人手と 1 対 1 なのはこのファイルの `MatrixHasRealEntries` である。
 -/
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Complex.Basic

@@ -17,7 +17,7 @@
 
 | 場 | 原文の主張 | 章 |
 | --- | --- | --- |
-| `hVr` | `V^{(+)}` は実行列（`V_plus_is_positive_definite` の表示 + `iH_is_real_symmetric`） | 017 |
+| `hVr` | `V^{(+)}` は実行列（`c_plus_equals_Lambda_half_integer` の書き直し前の Step 2。いまの人手は使わない。`ClaimVPlusRealEntries.lean` の冒頭） | 017 |
 | `hWV` | `W P^{(+)} = V^{(+)} P^{(+)}`（`symmetrized_transfer_matrix_on_sectors`） | 011 |
 | `hWsymm`, `hWpsd` | `W` は実対称半正定値（`W_is_real_symmetric_positive_definite`） | 011 |
 
