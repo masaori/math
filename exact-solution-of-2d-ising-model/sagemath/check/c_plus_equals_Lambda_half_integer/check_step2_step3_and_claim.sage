@@ -2,7 +2,7 @@
 # 結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3。全て E_1・QQbar・AA の厳密計算（複素共役は QQbar の conjugate）。
 # Step 2:
 #   im Q̌_{(1,…,1)} が 1 次元（rank 1）、生成元 q ≠ 0、V^(+)q = (Λ̌_max)_ℂ q、q ∈ F^(+)、Wq = V^(+)q、εq = q。
-#   (Wq̄)_k の鎖 8 行（W の成分が実であること W_kl = (w_kl)_ℂ を使う）と、同じ鎖の W → ε、(Λ̌_max)_ℂ → 1_ℂ 版。
+#   (Wq̄)_k の鎖 10 行（def_W_real の ((W_ℝ)_kl)_ℂ = W_kl を使う）と、同じ鎖の W → ε、W_ℝ → ε_ℝ（def_epsilon_real）、(Λ̌_max)_ℂ → 1_ℂ 版。
 #   q̄ ∈ F^(+)、V^(+)q̄ = Wq̄ = (Λ̌_max)_ℂ q̄、q̄ = zq（max_eigenvalue_of_V_plus_simple (3) の固有空間が ℂq）、
 #   conj(p_k) の鎖 4 行、conj(p'_k) の鎖 7 行、p の鎖 2 行、p' の鎖 3 行、1 + z と i(1 − z) は同時に 0 にならない、
 #   v = cq ≠ 0、conj(v_k) = v_k、v_k = (a_k)_ℂ、r := (a_k) ≠ 0、‖r‖ > 0、x_0 := r/‖r‖ で ‖x_0‖ = 1、ι^n(x_0) = ((1/‖r‖)_ℂ c)q。
@@ -29,7 +29,7 @@ for s in c_plus_settings([2, 3]):
     tag = s.tag
     x, y = s.x, s.y
     Q1 = s.Q[s.ones]
-    WA = s.WQ.change_ring(QQbar)                     # W（成分 (w_kl)_ℂ、w_kl ∈ QQ）
+    WA = s.WQ.change_ring(QQbar)                     # W（成分 ((W_ℝ)_kl)_ℂ、(W_ℝ)_kl ∈ QQ）
     VA = s.VQ.change_ring(QQbar)
     EA = s.to_qqbar_mat(s.E)
     Q1A = s.to_qqbar_mat(Q1)
@@ -37,6 +37,10 @@ for s in c_plus_settings([2, 3]):
     one = QQbar(1)
     iQ = QQbar(I)
     rep.ineq(all(z.imag() == 0 for z in EA.list()), f"{tag}: ε の成分は実（epsilon_is_real_symmetric）")
+    WR = s.WQ.change_ring(AA)                        # W_ℝ（def_W_real）
+    ER = EA.apply_map(lambda z: AA(z.real()))        # ε_ℝ（def_epsilon_real）
+    rep.eq(WR.change_ring(QQbar), WA, f"{tag}: ((W_ℝ)_kl)_ℂ = W_kl（def_W_real）")
+    rep.eq(ER.change_ring(QQbar), EA, f"{tag}: ((ε_ℝ)_kl)_ℂ = ε_kl（def_epsilon_real）")
     # ---------------- Step 2 ----------------
     rep.eq(Q1.rank(), 1, f"{tag}: dim im Q̌_(1,…,1) = 1（check_joint_eigenspace_decomposition (4)）")
     _, qF = s.chosen_q(s.ones)
@@ -54,12 +58,14 @@ for s in c_plus_settings([2, 3]):
             rep.neg(not is_real_col(q), f"{tag}: 生成元 {cgen}·q は実でない（実ベクトルを作る段が要る）")
         qb = conj_vec(q)
         # (Wq̄)_k の鎖と、W → ε、(Λ̌_max)_ℂ → 1_ℂ の版
-        for (A, lam, nm) in [(WA, LmQ, "W"), (EA, one, "ε")]:
+        for (A, AR, lam, nm) in [(WA, WR, LmQ, "W"), (EA, ER, one, "ε")]:
             Aq = body_product(A, q)
             Aqb = body_product(A, qb)
             for k in range(n):
                 l1 = Aqb[k, 0]
                 l2 = ordered_sum([A[k, l] * qb[l, 0] for l in range(n)], QQbar(0))
+                l2a = ordered_sum([QQbar(AR[k, l]) * qb[l, 0] for l in range(n)], QQbar(0))
+                l2b = ordered_sum([cj(QQbar(AR[k, l])) * qb[l, 0] for l in range(n)], QQbar(0))
                 l3 = ordered_sum([cj(A[k, l]) * cj(q[l, 0]) for l in range(n)], QQbar(0))
                 l4 = ordered_sum([cj(A[k, l] * q[l, 0]) for l in range(n)], QQbar(0))
                 l5 = cj(ordered_sum([A[k, l] * q[l, 0] for l in range(n)], QQbar(0)))
@@ -67,7 +73,7 @@ for s in c_plus_settings([2, 3]):
                 l7 = cj(lam * q[k, 0])
                 l8 = cj(lam) * cj(q[k, 0])
                 l9 = lam * cj(q[k, 0])
-                rep.chain([l1, l2, l3, l4, l5, l6, l7, l8, l9], f"{tag}: ({nm}q̄)_k の鎖")
+                rep.chain([l1, l2, l2a, l2b, l3, l4, l5, l6, l7, l8, l9], f"{tag}: ({nm}q̄)_k の鎖")
         rep.eq(body_product(EA, qb), qb, f"{tag}: q̄ ∈ F^(+)")
         rep.chain([body_product(VA, qb), body_product(WA, qb), LmQ * qb], f"{tag}: V^(+)q̄ = Wq̄ = (Λ̌_max)_ℂ q̄")
         rep.ineq(vector(QQbar, qb.list()) in K, f"{tag}: q̄ は固有空間（= im Q̌_(1,…,1) = ℂq）に入る")

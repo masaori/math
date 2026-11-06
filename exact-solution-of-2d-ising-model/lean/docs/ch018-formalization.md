@@ -181,13 +181,13 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.cvec` / `cvec_ne_zero` / `star_cvec` / `cvec_mulVec` / `cvec_dotProduct` / `cvec_smul` | 実ベクトルの複素化とその基本性質 | 実／複素の橋渡し（新規） |
+| `Ising2D.cvec` / `cvec_ne_zero` / `star_cvec` / `cvec_mulVec` / `cvec_dotProduct` / `cvec_smul` | 実ベクトルの複素化とその基本性質 | `cvec` は `def_real_vector_inclusion`（準備 1 の `ι^n`）。ほかは実／複素の橋渡し |
 | `Ising2D.star_dotProduct_self` | `x^* x = ‖x‖²` | 同上 |
 | `Ising2D.EvenSectorBridge` | 章 011 の `W` と章 017 の `V^{(+)}` の橋渡し（上記 0 の表） | 011・017 からの入力 |
 | `EvenSectorBridge.quad_Qproj` | `x^* Q̌_ε x = ‖Q̌_ε x‖²` | `check_number_operator_is_hermitian` (4) |
 | `EvenSectorBridge.sum_quad_Qproj` | `∑_ε ‖Q̌_ε x‖² = ‖x‖²` | Step 1 |
 | `EvenSectorBridge.quad_Vr_eq_sum` | `x^T V^{(+)} x = ∑_ε Λ̌_ε ‖Q̌_ε x‖²` | Step 1 |
-| **`EvenSectorBridge.quad_le_lamMax`** | **`x ∈ 𝓕^{(+)}, ‖x‖ = 1 ⇒ x^T W x ≤ Λ̌_max`** | **Step 1** |
+| **`EvenSectorBridge.quad_le_lamMax`** | **`ε_ℝx = x, ‖x‖ = 1 ⇒ x^⊤W_ℝx ≤ Λ̌_max`**（`EvenSectorBridge.W` が人手 `def_W_real` の `W_ℝ`） | **Step 1** |
 | `EvenSectorBridge.reVec` / `cvec_reVec_add` / `reVec_eigen` | 複素固有ベクトルの実部も（実固有値なら）固有ベクトル | Step 2 |
 | **`EvenSectorBridge.exists_real_max_eigenvector`** | **`Λ̌_max` の実固有ベクトルが存在し、偶セクターに属する** | **Step 2** |
 | **`EvenSectorBridge.c_plus_equals_lamMax`** | **`c_+(M) = Λ̌_max`** | **定理本体（Step 3）** |

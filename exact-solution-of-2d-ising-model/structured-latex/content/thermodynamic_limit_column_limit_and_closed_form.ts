@@ -2686,11 +2686,19 @@ x^*\check{Q}_\epsilon x
         "、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}}`),
+        " と ",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}}`),
+        " で書いた ",
         ref("def_sector_rayleigh_sup"),
         " の",
       ]),
       displayMath(
-        String.raw`c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\
+        String.raw`c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W_{\mathbb{R}} x \ \middle|\
 x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| = 1 \,\right\}`,
       ),
       paragraph([
@@ -2713,52 +2721,19 @@ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| 
       paragraph([
         "準備 1（記号）。",
         math(String.raw`n := 2^{M_{\mathrm{col}}}`),
-        " とおく。",
-        ref("inclusion_rr_to_cc"),
+        " とおき、",
+        ref("def_real_vector_inclusion"),
         " の ",
-        math(String.raw`r \mapsto r_{\mathbb{C}}`),
-        " を成分ごとに当てる写像を",
-      ]),
-      displayMath(
-        String.raw`\iota^{n} : \mathbb{R}^{n} \to \mathbb{C}^{n}, \qquad
-\iota^{n}(x) := \bigl((x_1)_{\mathbb{C}}, \dots, (x_n)_{\mathbb{C}}\bigr)`,
-      ),
-      paragraph([
-        "と定める。",
-        math(String.raw`a, b \in \mathbb{R}`),
-        " について ",
-        math(String.raw`a_{\mathbb{C}} = b_{\mathbb{C}}`),
-        " なら ",
-        math(String.raw`(a, 0) = (b, 0)`),
-        "（",
-        ref("inclusion_rr_to_cc"),
-        "）なので ",
-        math(String.raw`a = b`),
-        " である（以下「",
-        math(String.raw`(\cdot)_{\mathbb{C}}`),
-        " の単射性」と呼ぶ）。",
-        ref("W_is_real_symmetric_positive_definite"),
-        " より ",
-        math(String.raw`W`),
-        " の成分はすべて実数（",
-        ref("def_matrix_with_real_entries"),
-        "）なので、各 ",
-        math(String.raw`k, l`),
-        " について ",
-        math(String.raw`W_{kl} = (w_{kl})_{\mathbb{C}}`),
-        " を満たす ",
-        math(String.raw`w_{kl} \in \mathbb{R}`),
-        " がただ一つある（一意性は単射性による）。",
-        math(String.raw`W_{\mathbb{R}} := (w_{kl}) \in \mathrm{Mat}(n,\mathbb{R})`),
-        " とおく。",
-        ref("def_sector_rayleigh_sup"),
-        " の ",
-        math(String.raw`x^\top Wx`),
+        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}} : \mathbb{R}^{n} \to \mathbb{C}^{n}`),
         " を ",
-        ref("def_real_bilinear_value"),
-        " の ",
-        math(String.raw`x^\top W_{\mathbb{R}}x \in \mathbb{R}`),
-        " と読む。",
+        math(String.raw`\iota^{n}`),
+        " と略記する。",
+        ref("def_W_real"),
+        " より、各 ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = W_{kl}`),
+        " である。",
         ref("def_sector_rayleigh_sup"),
         " の条件 ",
         math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
@@ -2768,13 +2743,7 @@ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| 
         ref("epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"),
         " より ",
         math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
-        " と同値である（上の ",
-        math(String.raw`\iota^{n}`),
-        " は ",
-        ref("def_real_vector_inclusion"),
-        " の ",
-        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}`),
-        " と同じ写像である）。以下、",
+        " と同値である。以下、",
         math(String.raw`\mathcal{R}_+`),
         " の条件はこの同値で ",
         math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
@@ -2790,16 +2759,18 @@ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| 
       displayMath(
         String.raw`\begin{aligned}
 \left(x^\top W_{\mathbb{R}}x\right)_{\mathbb{C}}
-&= \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n}\left(x_k\,w_{kl}\right)x_l\Bigr)_{\mathbb{C}}
- &&\left(\because\ \blkref{def_real_bilinear_value}\right)\\
-&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\left(x_k\,w_{kl}\right)x_l\right)_{\mathbb{C}}
+&= \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n}\left(x_k\,(W_{\mathbb{R}})_{kl}\right)x_l\Bigr)_{\mathbb{C}}
+ &&\left(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to W_{\mathbb{R}},\ y \to x)\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\left(x_k\,(W_{\mathbb{R}})_{kl}\right)x_l\right)_{\mathbb{C}}
  &&\left(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を外と内の和へ}\right)\\
-&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left((x_k)_{\mathbb{C}}\,(w_{kl})_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left((x_k)_{\mathbb{C}}\,\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
  &&\left(\because\ \blkref{real_inclusion_preserves_product}\ \text{を二つの積へ}\right)\\
-&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{(x_k)_{\mathbb{C}}}\,(w_{kl})_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{(x_k)_{\mathbb{C}}}\,\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\right)(x_l)_{\mathbb{C}}
  &&\left(\because\ \blkref{complex_conjugate_of_real_inclusion}\right)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{u_k}\,\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\right)u_l
+ &&\left(\because\ \blkref{def_real_vector_inclusion}\ (n \to n,\ x \to x)\ \text{と}\ u = \iota^{n}(x)\right)\\
 &= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{u_k}\,W_{kl}\right)u_l
- &&\left(\because\ u = \iota^{n}(x),\ W_{kl} = (w_{kl})_{\mathbb{C}}\right)\\
+ &&\left(\because\ \blkref{def_W_real}\ \text{の}\ \bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = W_{kl}\right)\\
 &= u^*Wu
  &&\left(\because\ \blkref{def_conjugate_bilinear_value}\right)
 \end{aligned}`,
@@ -3032,8 +3003,12 @@ V^{(+)}u
       ),
       paragraph([
         "である。",
-        math(String.raw`(\cdot)_{\mathbb{C}}`),
-        " の単射性より、二つの鎖の両端は ",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to x^\top W_{\mathbb{R}}x,\ b \to \sum_\epsilon\check\Lambda_\epsilon\|w_\epsilon\|^2`),
+        " と ",
+        math(String.raw`a \to \sum_\epsilon\|w_\epsilon\|^2,\ b \to \|x\|^2`),
+        "）より、二つの鎖の両端は ",
         math(String.raw`\mathbb{R}`),
         " の等式 ",
         math(String.raw`x^\top W_{\mathbb{R}}x = \sum_\epsilon\check\Lambda_\epsilon\|w_\epsilon\|^2`),
@@ -3104,11 +3079,7 @@ x^\top W_{\mathbb{R}}x
         math(String.raw`\varepsilon q = q`),
         " である。",
         math(String.raw`\overline{q} := \left(\overline{q_1},\dots,\overline{q_n}\right) \in \mathbb{C}^{n}`),
-        " とおく。",
-        math(String.raw`W`),
-        " の成分は ",
-        math(String.raw`W_{kl} = (w_{kl})_{\mathbb{C}}`),
-        "（準備 1）なので、各 ",
+        " とおく。各 ",
         math(String.raw`k`),
         " について",
       ]),
@@ -3117,8 +3088,12 @@ x^\top W_{\mathbb{R}}x
 \left(W\overline{q}\right)_k
 &= \sum_{l=1}^{n}W_{kl}\,\overline{q_l}
  &&\left(\because\ \blkref{mat_mult}\right)\\
+&= \sum_{l=1}^{n}\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\,\overline{q_l}
+ &&\left(\because\ \blkref{def_W_real}\right)\\
+&= \sum_{l=1}^{n}\overline{\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}}\,\overline{q_l}
+ &&\left(\because\ \blkref{complex_conjugate_of_real_inclusion}\right)\\
 &= \sum_{l=1}^{n}\overline{W_{kl}}\,\overline{q_l}
- &&\left(\because\ W_{kl} = (w_{kl})_{\mathbb{C}}\ \text{と}\ \blkref{complex_conjugate_of_real_inclusion}\right)\\
+ &&\left(\because\ \blkref{def_W_real}\right)\\
 &= \sum_{l=1}^{n}\overline{W_{kl}\,q_l}
  &&\left(\because\ \blkref{complex_conjugate_of_product}\right)\\
 &= \overline{\sum_{l=1}^{n}W_{kl}\,q_l}
@@ -3135,21 +3110,21 @@ x^\top W_{\mathbb{R}}x
       ),
       paragraph([
         "であり、",
-        ref("epsilon_is_real_symmetric"),
-        " より ",
-        math(String.raw`\varepsilon`),
-        " の成分も実数（",
-        ref("def_matrix_with_real_entries"),
-        " の意味で、各 ",
+        ref("def_epsilon_real"),
+        " より各 ",
         math(String.raw`k, l`),
-        " に ",
-        math(String.raw`\varepsilon_{kl} = (e_{kl})_{\mathbb{C}}`),
-        " なる ",
-        math(String.raw`e_{kl} \in \mathbb{R}`),
-        " がある）なので、同じ鎖（",
+        " について ",
+        math(String.raw`\varepsilon_{kl} = \bigl((\varepsilon_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}`),
+        " なので、同じ鎖（",
         math(String.raw`W \to \varepsilon`),
         "、",
-        math(String.raw`w_{kl} \to e_{kl}`),
+        math(String.raw`W_{\mathbb{R}} \to \varepsilon_{\mathbb{R}}`),
+        "、",
+        ref("def_W_real"),
+        " ",
+        math(String.raw`\to`),
+        " ",
+        ref("def_epsilon_real"),
         "、",
         math(String.raw`\left(\check\Lambda_{\max}\right)_{\mathbb{C}} \to 1_{\mathbb{C}}`),
         "。",
@@ -3394,8 +3369,10 @@ p' &= i\left(q - zq\right)
       ),
       paragraph([
         "であり、",
-        math(String.raw`(\cdot)_{\mathbb{C}}`),
-        " の単射性より ",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to x_0^\top W_{\mathbb{R}}x_0,\ b \to \check\Lambda_{\max}`),
+        "）より ",
         math(String.raw`x_0^\top W_{\mathbb{R}}x_0 = \check\Lambda_{\max}`),
         " である。",
         math(String.raw`x_0 \in \mathbb{R}^{n}`),
@@ -3455,6 +3432,7 @@ c_+(M_{\mathrm{col}})
         "2026-11-05: SageMath の検算（sagemath/check/c_plus_equals_Lambda_half_integer/）を付けるにあたり、主張は変えずに証明を書き直した。旧い証明は ℝ の値 x^⊤Wx と ℂ の値 x^*V^{(+)}x を「x^⊤ = x^*」で等号に結んでいた（def_real_bilinear_value・def_conjugate_bilinear_value はどちらも数ベクトルと行列の積としては読まない記号）。ℝ^n → ℂ^n の包含 ι^n と W の実成分の行列 W_ℝ に名前を付け、(x^⊤W_ℝx)_ℂ = ι^n(x)^*Wι^n(x) の鎖を準備に置き、Step 1・Step 3 を ℂ の鎖と (·)_ℂ の単射性で ℝ へ戻す形にした。Step 1 の一行で三つの操作をしていた行を分け、Step 0 の P^{(+)}x の行を分けた。Step 2 の V^{(+)} の成分が実であることを散文（W_is_real_symmetric_positive_definite の Step 2 と同じ議論）で示していた段を、既にある主張 W_is_real_symmetric_positive_definite（W の成分は実）と epsilon_is_real_symmetric（ε の成分は実）と Step 0 から conj(q) が同じ固有空間に入ることを示す成分の鎖に替えた（V^{(+)} の成分が実であることは使わない）。p・p' の段を成分の鎖にし、複素共役で動かない複素数が (a)_ℂ であることを def_complex_conjugate から書いた。最後に c_+ から閉形式までの鎖を置き、θ^{(1/2)}_{M,μ} = θ̃_μ を書いた。計算の誤りは無かった。",
         "数値検証の場所: 上の 053_claim_even_sector_closing/check_04 に加え、証明の行と対応する検算は sagemath/check/c_plus_equals_Lambda_half_integer/ にある。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ の条件を x ∈ ℝ^{2^{M_col}}、ε_ℝx = x に述べ直したのに合わせ、主張の集合の条件を同じ形にし、準備 1 の「x ∈ 𝓕^{(+)} ∩ ℝ^n を ι^n(x) ∈ 𝓕^{(+)} と読む」を、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors による同値の読み替えにした。x^⊤Wx を W_ℝ で書き直すこと、準備 1 の ι^n を def_real_vector_inclusion への参照に替えることは残っている。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張の x^⊤Wx を def_W_real の W_ℝ による x^⊤W_ℝx に直した（def_sector_rayleigh_sup と同じ式。値は不変）。準備 1 で局所に置いていた写像 ι^n と行列 W_ℝ := (w_kl) を、def_real_vector_inclusion の ι^n_{ℝ→ℂ}（略記 ι^n）と def_W_real の W_ℝ への参照に替え、「(·)_ℂ の単射性」と呼んでいた事実を inclusion_rr_to_cc_is_injective への参照に替えた。準備 2 の 5 行目（u と W_kl の二つの書き換えを 1 行でしていた）と、Step 2 の (Wq̄)_k の鎖の 2 行目（W_kl = (w_kl)_ℂ と共役の 2 段を 1 行でしていた）を一ステップ一定理に分けた。ε の成分の実性は epsilon_is_real_symmetric の e_kl から def_epsilon_real の ε_ℝ に替えた。",
       ],
     },
   },

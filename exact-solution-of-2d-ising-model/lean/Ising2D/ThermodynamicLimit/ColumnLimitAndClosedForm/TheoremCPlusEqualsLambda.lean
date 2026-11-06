@@ -6,6 +6,12 @@
 ラベル **`c_plus_equals_Lambda_half_integer`**）
 
 `c_+(M)` は章 011 `def_sector_rayleigh_sup` の `Ising2D.evenSectorRayleighSup`（`(+)` だけの定義）。
+人手の主張の `x^⊤W_ℝx`（`def_W_real` の `W_ℝ`、`def_real_bilinear_value`）は `x ⬝ᵥ B.W *ᵥ x`、
+条件 `ε_ℝx = x`（`def_epsilon_real`）は `epsilonR M *ᵥ x = x` である（`def_epsilon_real` を直接写した
+`epsilonReal` と `epsilonR` の一致は `epsilonR_eq_epsilonReal`）。`EvenSectorBridge.W` は実数の行列で、
+人手の `W_ℝ` に当たる（具体的な `W` では `physicalEvenSectorBridge` の `physicalSymTransferR`。`def_W_real` との
+一致は `physicalSymTransferR_eq_realMatrixOfRealEntries`）。
+人手の準備 1 の `ι^n`（`def_real_vector_inclusion` の `ι^n_{ℝ→ℂ}` の略記）は `cvec` である。
 本定理は `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 が引く（`TheoremOnsagerExactSolution.lean`）。
 
 必要十分版は置かない。理由は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じで、
@@ -150,7 +156,7 @@ theorem quad_Vr_eq_sum (x : Conf M → ℝ) :
     rw [dotProduct_smul, smul_eq_mul, quad_Qproj x T, Complex.ofReal_mul]
   exact_mod_cast hC
 
-/-- **人手証明 Step 1**: `x ∈ ℝ^{2^M}`, `ε_ℝx = x`, `‖x‖ = 1` なら `x^T W x ≤ Λ̌_max`。 -/
+/-- **人手証明 Step 1**: `x ∈ ℝ^{2^M}`, `ε_ℝx = x`, `‖x‖ = 1` なら `x^⊤W_ℝx ≤ Λ̌_max`。 -/
 theorem quad_le_lamMax {x : Conf M → ℝ} (hx : epsilonR M *ᵥ x = x) (hn : vecNormSq x = 1) :
     x ⬝ᵥ B.W *ᵥ x ≤ D.lamMax := by
   rw [B.hWV x hx, B.quad_Vr_eq_sum x]

@@ -1,6 +1,6 @@
 # 対象ラベル: c_plus_equals_Lambda_half_integer（準備 2〜4、Step 0 の二本の鎖、Step 1 の四本の鎖と「x は任意」の読み）
 # 結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3。等号は QQ・数体 E_1・QQbar、不等号は AA の厳密計算。
-# 証明の記号: n := 2^{M_col}、ι^n(x) := ((x_k)_ℂ)_k、W_ℝ := (w_kl)（W_kl = (w_kl)_ℂ）、u := ι^n(x)、w_ε := Q̌_εu。
+# 証明の記号: n := 2^{M_col}、ι^n := ι^n_{ℝ→ℂ}（def_real_vector_inclusion、ι^n(x) = ((x_k)_ℂ)_k）、W_ℝ（def_W_real、((W_ℝ)_kl)_ℂ = W_kl）、u := ι^n(x)、w_ε := Q̌_εu。
 # - x は F^(+) ∩ ℚ^n の ‖x‖ = 1 の元（単位球面の有理点から作る）。x の成分は有理数なので、ι^n(x) の成分の複素共役は恒等写像で、
 #   u^*Au は def_conjugate_bilinear_value の成分の式を共役を恒等写像として E_1 の中で組む（conj_bilinear）。
 #   一般の u（複素の成分）の準備 3・準備 4 は、QQbar の本物の共役で別に確かめる。
@@ -21,8 +21,8 @@ for s in c_plus_settings([2, 3]):
     iF = s.i_F()
     toq = s.to_qqbar
     # ---------------- 準備 1 ----------------
-    WR = s.WQ                                            # W_ℝ（成分 w_kl ∈ QQ ⊂ ℝ）
-    rep.eq(s.W, WR.change_ring(F), f"{tag}: 準備 1 の W_kl = (w_kl)_ℂ")
+    WR = s.WQ                                            # W_ℝ（成分 (W_ℝ)_kl ∈ QQ ⊂ ℝ）
+    rep.eq(s.W, WR.change_ring(F), f"{tag}: 準備 1 の ((W_ℝ)_kl)_ℂ = W_kl（def_W_real）")
     # ---------------- 準備 3・準備 4（一般の複素の u で、QQbar の本物の共役） ----------------
     VA = s.VQ.change_ring(QQbar)
     for useed in [[QQbar(1) + 2 * QQbar(I) * k - QQbar(k * k) / 3 for k in range(n)],
@@ -91,9 +91,10 @@ for s in c_plus_settings([2, 3]):
         B2 = ordered_sum([ordered_sum([F((xq[k] * WR[k, l]) * xq[l]) for l in range(n)], F(0)) for k in range(n)], F(0))
         B3 = ordered_sum([ordered_sum([(F(xq[k]) * F(WR[k, l])) * F(xq[l]) for l in range(n)], F(0)) for k in range(n)], F(0))
         B4 = ordered_sum([ordered_sum([(ident(F(xq[k])) * F(WR[k, l])) * F(xq[l]) for l in range(n)], F(0)) for k in range(n)], F(0))
-        B5 = ordered_sum([ordered_sum([(ident(u[k, 0]) * s.W[k, l]) * u[l, 0] for l in range(n)], F(0)) for k in range(n)], F(0))
-        B6 = conj_bilinear(u.list(), s.W, u.list(), ident)
-        rep.chain([B1, B2, B3, B4, B5, B6], f"{tag}: 準備 2 の鎖")
+        B5 = ordered_sum([ordered_sum([(ident(u[k, 0]) * F(WR[k, l])) * u[l, 0] for l in range(n)], F(0)) for k in range(n)], F(0))
+        B6 = ordered_sum([ordered_sum([(ident(u[k, 0]) * s.W[k, l]) * u[l, 0] for l in range(n)], F(0)) for k in range(n)], F(0))
+        B7 = conj_bilinear(u.list(), s.W, u.list(), ident)
+        rep.chain([B1, B2, B3, B4, B5, B6, B7], f"{tag}: 準備 2 の鎖")
         # u = Σ_ε w_ε と V^(+)u = Σ_ε (Λ̌_ε)_ℂ w_ε
         ws = {w: body_product(s.Q[w], u) for w in s.words}
         U1 = u
@@ -115,7 +116,7 @@ for s in c_plus_settings([2, 3]):
         # Step 1 の三本目の鎖（1〜8 行目は E_1）
         Wu = body_product(s.W, u)
         C1 = B1
-        C2 = B6
+        C2 = B7
         C3 = ordered_sum([ident(u[k, 0]) * Wu[k, 0] for k in range(n)], F(0))
         C4 = ordered_sum([ident(u[k, 0]) * V1[k, 0] for k in range(n)], F(0))
         C5 = ordered_sum([ident(u[k, 0]) * ordered_sum([s.lam[w] * ws[w][k, 0] for w in s.words], F(0)) for k in range(n)], F(0))
@@ -144,7 +145,7 @@ for s in c_plus_settings([2, 3]):
         D8 = QQbar(norm2_AA(s.to_qqbar_mat(u)))
         D9 = QQbar(AA(sum(z * z for z in xq)))
         rep.chain([D1, D2, D3, D4, D5, D6, D7, D8, D9], f"{tag}: Σ‖w_ε‖^2 = ‖x‖^2 の鎖")
-        # (·)_ℂ の単射性で ℝ へ戻した等式と、実数の鎖
+        # inclusion_rr_to_cc_is_injective で ℝ へ戻した等式と、実数の鎖
         xR = AA(real_bilinear(xq, WR, xq))
         rep.eq(QQbar(xR), C12, f"{tag}: x^⊤W_ℝx = Σ_εΛ̌_ε‖w_ε‖^2（ℝ）")
         E1 = ordered_sum([s.L[w] * nq[w] for w in s.words], AA(0))
