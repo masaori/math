@@ -29,6 +29,7 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.TheoremMaxEigenvectorInEvenSector
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealVectorInclusion
 
 namespace Ising2D
 
@@ -38,8 +39,8 @@ variable {M : ℕ}
 
 /-! ## 実ベクトルの複素化 -/
 
-/-- 実ベクトルを複素ベクトルとみなす。 -/
-def cvec {n : Type*} (x : n → ℝ) : n → ℂ := fun k => (x k : ℂ)
+/-! 実ベクトルの複素化 `cvec` は人手 `def_real_vector_inclusion` の `ι^n_{ℝ→ℂ}`
+（`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealVectorInclusion.lean`）。 -/
 
 theorem cvec_ne_zero {n : Type*} {x : n → ℝ} (hx : x ≠ 0) : cvec x ≠ 0 := by
   intro h

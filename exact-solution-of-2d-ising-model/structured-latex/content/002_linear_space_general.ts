@@ -6049,6 +6049,175 @@ A - B
     },
   },
   {
+    id: "linear_space_general_definition_real_vector_inclusion",
+    kind: "definition",
+    title: { text: "実数のベクトルから複素数のベクトルへの包含" },
+    labels: ["def_real_vector_inclusion"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        math(String.raw`\mathbb{R}^n`),
+        " は実数の ",
+        math(String.raw`n`),
+        " 個の組 ",
+        math(String.raw`x = (x_1,\dots,x_n)`),
+        " の全体、",
+        math(String.raw`\mathbb{C}^n`),
+        " は複素数の ",
+        math(String.raw`n`),
+        " 個の組の全体である。",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
+        " を成分ごとに当てる写像",
+      ]),
+      displayMath(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}} : \mathbb{R}^n \to \mathbb{C}^n, \qquad
+\bigl(\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)\bigr)_i := (x_i)_{\mathbb{C}}
+\qquad (i \in \{1,\dots,n\})`),
+      paragraph([
+        "を定める。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup は実数のベクトルを 𝓕^{(+)}（複素数のベクトルの集合）の元として扱い（𝓕^{(+)} ∩ ℝ^{2^{M_col}}）、c_plus_equals_Lambda_half_integer は証明の準備で同じ写像 ι^n を置いていた。実数のベクトルと複素数のベクトルを行き来する写像に名前を付けるために足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_vector_inclusion_is_injective",
+    kind: "claim",
+    title: { tex: String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}\ \text{は単射}` },
+    labels: ["real_vector_inclusion_is_injective"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x, y \in \mathbb{R}^n`),
+        " が ",
+        ref("def_real_vector_inclusion"),
+        " の ",
+        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}`),
+        " について ",
+        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x) = \iota^{n}_{\mathbb{R}\to\mathbb{C}}(y)`),
+        " を満たすなら ",
+        math(String.raw`x = y`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x_i)_{\mathbb{C}}
+&= \bigl(\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)\bigr)_i
+  &&\bigl(\because\ \blkref{def_real_vector_inclusion}\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\iota^{n}_{\mathbb{R}\to\mathbb{C}}(y)\bigr)_i
+  &&\bigl(\because\ \text{仮定}\bigr)\\
+&= (y_i)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_vector_inclusion}\ (x \to y)\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to x_i,\ b \to y_i`),
+        "）より ",
+        math(String.raw`x_i = y_i`),
+        " である。",
+        math(String.raw`i`),
+        " は任意なので ",
+        math(String.raw`x = y`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_real_vector_inclusion とともに足した（c_plus_equals_Lambda_half_integer の証明の準備は、同じ事実を「(·)_ℂ の単射性」と呼んで使っている）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_vector_inclusion_intertwines_matrix_vector_product",
+    kind: "claim",
+    title: { tex: String.raw`\iota^{m}_{\mathbb{R}\to\mathbb{C}}(B_{\mathbb{R}}x) = B\,\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)` },
+    labels: ["real_vector_inclusion_intertwines_matrix_vector_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`B \in \mathrm{Mat}^{\mathrm{re}}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B_{\mathbb{R}} := \varrho^{m,n}_{\mathbb{C}\to\mathbb{R}}(B) \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`x \in \mathbb{R}^n`),
+        " とする。",
+        ref("def_real_matrix_vector_product"),
+        " の積 ",
+        math(String.raw`B_{\mathbb{R}}x \in \mathbb{R}^m`),
+        " と、",
+        ref("mat_mult"),
+        " の積 ",
+        math(String.raw`B\,\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathbb{C}^m`),
+        " について",
+      ]),
+      displayMath(String.raw`\iota^{m}_{\mathbb{R}\to\mathbb{C}}(B_{\mathbb{R}}x) = B\,\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\iota^{m}_{\mathbb{R}\to\mathbb{C}}`),
+        "・",
+        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}`),
+        " は ",
+        ref("def_real_vector_inclusion"),
+        " の写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\iota^{m}_{\mathbb{R}\to\mathbb{C}}(B_{\mathbb{R}}x)\bigr)_i
+&= \bigl((B_{\mathbb{R}}x)_i\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_vector_inclusion}\ (n \to m,\ x \to B_{\mathbb{R}}x)\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} (B_{\mathbb{R}})_{ij}\,x_j\Bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (P \to B_{\mathbb{R}})\bigr)\\
+&= \sum_{j=1}^{n} \bigl((B_{\mathbb{R}})_{ij}\,x_j\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to n,\ r_j \to (B_{\mathbb{R}})_{ij}\,x_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{j=1}^{n} \bigl((B_{\mathbb{R}})_{ij}\bigr)_{\mathbb{C}}\,(x_j)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to (B_{\mathbb{R}})_{ij},\ b \to x_j)\ \text{を右辺から左辺へ}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} B_{ij}\,(x_j)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_matrix_of_real_entry_matrix}\ \text{の}\ \bigl((B_{\mathbb{R}})_{pq}\bigr)_{\mathbb{C}} = B_{pq}\ (p \to i,\ q \to j)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} B_{ij}\,\bigl(\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)\bigr)_j
+  &&\bigl(\because\ \blkref{def_real_vector_inclusion}\ (i \to j)\ \text{を右辺から左辺へ}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \bigl(B\,\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)\bigr)_i
+  &&\bigl(\because\ \blkref{mat_mult}\ (A \to B,\ a \to \iota^{n}_{\mathbb{R}\to\mathbb{C}}(x))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i`),
+        " は任意なので主張が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。成分がすべて実数の複素行列 ε の固有値 +1 の固有ベクトルのうち実数のもの（def_sector_rayleigh_sup の 𝓕^{(+)} ∩ ℝ^{2^{M_col}}）を、実数の行列 ε_ℝ := ϱ(ε) の式 ε_ℝx = x へ言い換えるために足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_definition_real_identity_matrix",
     kind: "definition",
     title: { text: "実数の単位行列" },

@@ -868,6 +868,8 @@ targets=(
   Ising2D.matrix_pow_hasRealEntries
   Ising2D.real_matrix_of_real_entry_matrix_preserves_power
   Ising2D.real_matrix_vector_product_is_associative
+  Ising2D.real_vector_inclusion_is_injective
+  Ising2D.real_vector_inclusion_intertwines_matrix_vector_product
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype
   Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries
