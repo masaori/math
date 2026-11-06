@@ -189,9 +189,11 @@ mn
                           math(String.raw`S`),
                           " に属する素数 ",
                           math(String.raw`p`),
-                          " については指数が一致して ",
-                          math(String.raw`v_p(mn)=v_p(m)+v_p(n)`),
-                          " である。",
+                          " については指数が一致する。",
+                        ]),
+                        displayMath(String.raw`v_p(mn)=v_p(m)+v_p(n)
+\qquad\bigl(\because\ \text{算術の基本定理の一意性}\bigr)`),
+                        paragraph([
                           math(String.raw`S`),
                           " に属さない素数 ",
                           math(String.raw`p`),
