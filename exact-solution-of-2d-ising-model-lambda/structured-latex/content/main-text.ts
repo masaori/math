@@ -63969,7 +63969,7 @@ N_\gamma(n_{\mathrm v}(0,0))
 &=\sum_{j\in I_m}\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}+\sum_{j\in I_m}\mathbf1_{\operatorname{tgt}(\vec e_j)=v_k}
 &&\bigl(\because\ \blkref{def_closed_walk_passes}\text{ による巡回再添字}\bigr)\\
 &=1+1&&\bigl(\because\ \blkref{claim_zero_contact_iff_distinct_pass_vertices}\bigr)\\
-&=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+&=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr)
 \end{aligned}`),
                     ],
                   },
@@ -64008,7 +64008,7 @@ N_\gamma(n_{\mathrm v}(0,0))
                       displayMath(String.raw`\begin{aligned}
 \sum_{t=1}^{4}\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}
 &=\sum_{t=1}^{4}\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}
-&&\bigl(\because\ \blkref{def_lattice}\text{ と }\blkref{def_oriented_edges}\text{ による巡回接続と再添字}\bigr).
+&&\bigl(\because\ \blkref{def_lattice}\text{ と }\blkref{def_oriented_edges}\text{ による巡回接続と再添字}\bigr)
 \end{aligned}`),
                       paragraph(["各セルの差が零なので、境界鎖について"]),
                       displayMath(String.raw`\begin{aligned}
