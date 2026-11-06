@@ -1179,6 +1179,7 @@ import Ising2DLambda.KacWard.OneSidedClosureStepSequenceFromNecSuf
 import Ising2DLambda.KacWard.OneSidedParallelReturn
 import Ising2DLambda.NecSuf.KacWard.OneSidedParallelReturn
 import Ising2DLambda.KacWard.OneSidedParallelReturnFromNecSuf
+import Ising2DLambda.KacWard.OneSidedParallelReturnFromWalk
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.NecSuf.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetitionFromNecSuf

@@ -68664,10 +68664,20 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
                         "、第四部分が ", math(String.raw`N-j=t\,n_{\perp}`), " なので ",
                         math(String.raw`D^{\gamma,S,t}_{t n_{\perp}}=S+t\,d_{\perp}(\gamma)`),
                         "（", ref("def_iterated_transverse_staircase"), "）で一致する。",
-                        math(String.raw`j=0`), " と ", math(String.raw`j=N`), " では ",
-                        math(String.raw`F^{\gamma,k_0,t,c}_0=\widetilde P_{k_0}(\gamma)=S=D^{\gamma,S,t}_0=F^{\gamma,k_0,t,c}_N`),
-                        "（", ref("def_iterated_transverse_staircase"), "）なので閉じている。",
+                        math(String.raw`j=0`), " と ", math(String.raw`j=N`), " の一致は次の式鎖で確かめられる。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+F^{\gamma,k_0,t,c}_0
+&=\widetilde P_{k_0}(\gamma)
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\bigr)\\
+&=S
+&&\bigl(\because\ S:=\widetilde P_{k_0}(\gamma)\bigr)\\
+&=D^{\gamma,S,t}_0
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=F^{\gamma,k_0,t,c}_N
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\bigr)
+\end{aligned}`),
+                      paragraph(["したがって一側閉包は閉じている。"]),
                       paragraph([
                         "次に各部分の連続差が単位格子ベクトルであることを確かめる。第一部分の ",
                         math(String.raw`0\le j<cm`), " では、", math(String.raw`k_0+j=qm+r`),
@@ -68747,6 +68757,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective",
                       "Ising2DLambda.KacWard.oneSidedPeriodicPartFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective",
+                      "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],

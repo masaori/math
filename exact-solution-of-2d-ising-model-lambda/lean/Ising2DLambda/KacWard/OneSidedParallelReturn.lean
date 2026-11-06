@@ -71,4 +71,29 @@ theorem oneSidedParallelReturn_step (L : ℕ) (wh wv : ℤ) (base : ℤ × ℤ) 
     simp only [Nat.cast_add, Nat.cast_one, sub_smul, add_smul, one_smul]
     abel
 
+/-- 反転平行階段の平行座標は各歩で真に減るため、全ての頂点が相異なる。 -/
+theorem oneSidedParallelReturn_injective (L : ℕ) (wh wv : ℤ)
+    (base : ℤ × ℤ) (c : ℕ)
+    (hn : 0 < L * wh.natAbs + L * wv.natAbs) :
+    Function.Injective (oneSidedParallelReturn L wh wv base c) := by
+  let r := oneSidedParallelReturn L wh wv base c
+  let G := windingParallelStaircase L wh wv
+  let κ := windingParallelCoordinate wv wh
+  let n := L * wh.natAbs + L * wv.natAbs
+  have hdecrease (s : ℕ) : κ (r (s + 1)) < κ (r s) := by
+    have hs : s % n < n := Nat.mod_lt s hn
+    have hG := (windingParallelStaircase_step_increase L wh wv (s % n) hs).2
+    change κ (G (s % n)) < κ (G (s % n + 1)) at hG
+    have hr := oneSidedParallelReturn_step L wh wv base c hn s
+    have hdifference : κ (r (s + 1)) - κ (r s) =
+        -(κ (G (s % n + 1)) - κ (G (s % n))) := by
+      rw [← map_sub, hr, negatedParallelStaircaseStep_difference,
+        map_neg, map_sub]
+    omega
+  have hmono : StrictMono (fun s : ℕ => -(κ (r s))) :=
+    strictMono_nat_of_lt_succ (fun s => by have h := hdecrease s; omega)
+  intro i j hij
+  apply hmono.injective
+  exact congrArg (fun p : ℤ × ℤ => -(κ p)) hij
+
 end Ising2DLambda.KacWard
