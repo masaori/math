@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06（研究管理）: 台帳に、個数 N_i(T) に一元を足したときの値（j<i なら 1 増え、j≥i なら変わらない）の行を、三つの反交換関係の前に足した（三つの関係の符号の打ち消しがどれも使うため）。
 - 2026-11-06: 台帳の「P_M の定義と有限集合であること」を三行に割り、{1..M} の部分集合全体 P_M の定義（ラベル def_power_set_of_first_m_positive_integers）を置いた。次は 2 進の番号付け e_M:{1..2^M}→P_M の帰納的な定義（値が P_M に入ることを本文に書く）。
 - 2026-11-06: 単位行列の分解 Σ_{x∈X} 1_ℂ∗E_{x,x}=1_{Mat_X}（ラベル claim_decomposition_of_identity_matrix_into_matrix_units）を示し、検算 sagemath/check/identity-matrix-decomposition-into-matrix-units/ を置いた（python3 で実行）。次は {1..M} の部分集合全体 P_M の定義と、P_M が有限集合であること（2 進の番号付け e:{1..2^M}→P_M を構成する）。
 - 2026-11-06: 台帳の「単位行列の分解」の前に、行列の (p,q) 成分を取り出す写像 ent_{p,q} が線型写像であることの行を割り出して示した（ラベル claim_matrix_entry_map_is_linear_map）。次は単位行列の分解 Σ_x 1_ℂ∗E_{x,x}=1_{Mat_X}（(p,q) 成分を ent_{p,q} と claim_linear_map_maps_sum_over_finite_set_to_sum_of_values で Σ_x 1_ℂ·(E_{x,x})_{p,q} に開き、各項を δ_{x,p}·δ_{x,q} の形に直してから claim_sum_over_finite_set_with_kronecker_delta_picks_term で δ_{p,q} を取り出す見込み）。
