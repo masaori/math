@@ -1676,3 +1676,4 @@ import Ising2DLambda.KacWard.ClosedWalkIncidenceParity
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkIncidenceParity
 import Ising2DLambda.KacWard.CellBoundaryVertexBalance
 import Ising2DLambda.NecSuf.KacWard.CellBoundaryVertexBalance
+import Ising2DLambda.NecSuf.KacWard.CoefficientVertexBalance

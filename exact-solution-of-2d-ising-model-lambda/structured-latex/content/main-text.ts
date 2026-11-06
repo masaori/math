@@ -64126,6 +64126,54 @@ w_{\mathrm v}(\gamma)
                     ],
                   },
                 },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_cell_boundary_coefficient_vertex_balance",
+                  focus: {
+                    id: "kac_ward_claim_cell_boundary_coefficient_vertex_balance",
+                    kind: "claim",
+                    title: { text: "境界鎖の頂点別釣り合いは基底辺の符号付き係数で書ける" },
+                    labels: ["claim_cell_boundary_coefficient_vertex_balance"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cell-boundary-coefficient-vertex-balance"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellSetBoundary_coefficient_vertex_balance",
+                      "Ising2DLambda.NecSuf.KacWard.coefficient_vertex_balance",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), "、頂点 ",
+                        math(String.raw`v\in V_L`), " を取る。基底辺 ", math(String.raw`e\in E_L`),
+                        " の正向きの始点と終点による頂点寄与を "]),
+                      displayMath(String.raw`D_v(e):=\mathbf1_{\operatorname{src}(e,0)=v}-\mathbf1_{\operatorname{tgt}(e,0)=v}\in\mathbb Z`),
+                      paragraph(["と定める。境界鎖の各基底辺の符号付き係数（",
+                        ref("def_signed_edge_coefficient"), "）について"]),
+                      displayMath(String.raw`\sum_{e\in E_L}[\partial_\square S]_eD_v(e)=0\quad\text{in }\mathbb Z`),
+                      paragraph(["が成り立つ。辺長一で始点と終点が一致する辺も ",
+                        math(String.raw`D_v(e)=0`), " として含む。"]),
+                    ],
+                    proof: [
+                      paragraph(["向き付き辺 ", math(String.raw`\vec f=(e,d)\in\vec E_L`),
+                        " の反転は始点と終点を交換する（", ref("def_oriented_edges"),
+                        "）。", math(String.raw`d\in\{0,1\}`), " の二場合で"]),
+                      displayMath(String.raw`\mathbf1_{\operatorname{src}(\vec f)=v}-\mathbf1_{\operatorname{tgt}(\vec f)=v}
+=(1-2d)D_v(e)\quad\bigl(\because\ \blkref{def_oriented_edges}\text{ と }D_v(e)\text{ の定義}\bigr)`),
+                      paragraph(["を得る。境界鎖の標識付き四辺列を全セルで足して、基底辺で集めると"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{(i,j)\in S}\sum_{t=1}^{4}
+ \bigl(\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}-\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}\bigr)
+&=\sum_{(i,j)\in S}\sum_{t=1}^{4}(1-2d(B_L(i,j)_t))D_v(\operatorname{base}(B_L(i,j)_t))
+&&\bigl(\because\ \blkref{def_oriented_edges}\text{ と直前の二場合}\bigr)\\
+&=\sum_{e\in E_L}[\partial_\square S]_eD_v(e)
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr).
+\end{aligned}`),
+                      paragraph(["左辺は ", ref("claim_cell_boundary_vertex_balance"),
+                        " により零である。有限和は ", math(String.raw`\mathbb Z`), " の中で閉じる。"]),
+                    ],
+                  },
+                },
               }],
             },
           },
@@ -64698,13 +64746,13 @@ P_{k+1}(\gamma)_{\mathrm{row}}
                       ]),
                       displayMath(String.raw`\begin{aligned}
 P_r(\gamma)&=\bigl(s(i_r)+La_r,\ s(j_r)+Lb_r\bigr)
-&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr).
+&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr)
 \end{aligned}`),
                       paragraph(["と書ける。したがって第 1 成分について"]),
                       displayMath(String.raw`\begin{aligned}
 s(i_j)-s(i_k)
 &=L(a_k-a_j)
-&&\bigl(\because\ P_j(\gamma)=P_k(\gamma)\text{ の第 1 成分と }\mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ P_j(\gamma)=P_k(\gamma)\text{ の第 1 成分と }\mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
                         ref("def_residue_maps"), " により ", math(String.raw`0\le s(i_j),s(i_k)\le L-1`),
