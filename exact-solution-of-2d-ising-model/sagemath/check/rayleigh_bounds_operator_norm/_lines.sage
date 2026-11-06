@@ -25,7 +25,7 @@ def check_proof_lines(P, c, x, K, what):
     """P は QQ の実対称で半正定値、c は rayleigh_sup_exact(P)、x は QQ の数ベクトル、K は冪の主張を確かめる最大の k。"""
     n = P.nrows()
     PA = P.change_ring(AA)
-    y = matvec(P, x)                                    # y := Wx（成分は実数。mat_mult の成分の式）
+    y = matvec(P, x)                                    # y := Wx（成分は実数。def_real_matrix_vector_product の成分の式）
     y_builtin = P * x                                   # 同じ積を Sage の組み込みの行列・ベクトル積で作る（別の経路）
     eq(y, y_builtin, f"{what}: y = Wx の成分の式と組み込みの積")
     nx = norm_exact(x)
@@ -81,7 +81,7 @@ def check_proof_lines(P, c, x, K, what):
     le(ny, c * nx, f"{what}: 主張 ‖Wx‖ ≤ c‖x‖")
     # 冪: k = 0 と、帰納法の段の鎖 ‖W^{k+1}x‖ = ‖(W^kW)x‖ = ‖W^k(Wx)‖ ≤ c^k‖Wx‖ ≤ c^k(c‖x‖) = c^{k+1}‖x‖
     eq(power_by_def_exp(P, 0), identity_matrix(QQ, n), f"{what}: W^0 = I（Sage の単位行列）")
-    eq(matvec(identity_matrix(QQ, n), x), x, f"{what}: Ix = x")
+    eq(matvec(identity_matrix(QQ, n), x), x, f"{what}: Ix = x（real_identity_matrix_is_left_unit_of_real_matrix_vector_product）")
     eq(norm_exact(matvec(power_by_def_exp(P, 0), x)), nx, f"{what}: ‖W^0x‖ = ‖x‖")
     eq(nx, c**0 * nx, f"{what}: ‖x‖ = c^0‖x‖")
     for k in range(K):
@@ -96,7 +96,7 @@ def check_proof_lines(P, c, x, K, what):
         p5 = c**k * (c * nx)
         p6 = c**(k + 1) * nx
         eq(p1, p2, f"{what}: 冪の鎖 1→2（k = {k}）")
-        eq(p2, p3, f"{what}: 冪の鎖 2→3（結合律, k = {k}）")
+        eq(p2, p3, f"{what}: 冪の鎖 2→3（real_matrix_vector_product_is_associative, k = {k}）")
         le(p3, p4, f"{what}: 冪の鎖 3→4（帰納法の仮定を Wx に, k = {k}）")
         le(0, c**k, f"{what}: 0 ≤ c^k（k = {k}）")
         le(p4, p5, f"{what}: 冪の鎖 4→5（‖Wx‖ ≤ c‖x‖ と c^k ≥ 0, k = {k}）")

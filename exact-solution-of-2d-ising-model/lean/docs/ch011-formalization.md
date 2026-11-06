@@ -61,7 +61,7 @@
 | `Ising2D.psd_of_pd`（`ClaimOperatorBound.lean`）/ `Ising2D.W_real_is_positive_semidefinite`（`PhysicalPartitionFunctionSandwich.lean`、本文の `W_ℝ` に当てたもの） | 正定値なら半正定値（`u ≠ 0` は正定値性、`u = 0` は人手の 5 行の鎖） | `W_real_is_positive_semidefinite` |
 | `Ising2D.vecNorm_mulVec_sq_eq_bilinear` | `‖Wx‖² = (Wx)ᵀWx`（人手の一つ目の鎖 6 行） | `rayleigh_bounds_operator_norm`（一つ目の鎖） |
 | `Ising2D.rayleigh_bounds_operator_norm` | `‖Wx‖ ≤ c(M)‖x‖`（人手の二つ目の鎖・場合分け・割り算と平方の 3 行を同じ順に。正定値性 `hpd` を取る） | 同上 |
-| `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖`（人手の `k = 0` の 3 行と帰納法の 5 行） | 同上（帰納法の部分） |
+| `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖`（人手の `k = 0` の 3 行と帰納法の 5 行。`Ix = x` は `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`(W^kW)x = W^k(Wx)` は `real_matrix_vector_product_is_associative` の具体版を引く） | 同上（帰納法の部分） |
 | `Ising2D.rayleigh_bounds_operator_normSq` / `rayleigh_bounds_operator_normSq_pow` | `‖Wx‖² ≤ c(M)²‖x‖²` / `‖W^k x‖² ≤ (c(M)²)^k‖x‖²`（必要十分版の特殊化。具体版の証明には使わない） | 同上 |
 | `Ising2D.rayleigh_bounds_operator_norm_of_necSuf` / `rayleigh_bounds_operator_norm_pow_of_necSuf` | 上の 2 つの平方根を取った `‖Wx‖ ≤ c(M)‖x‖` / `‖W^k x‖ ≤ c(M)^k‖x‖`（具体版と同じ主張を必要十分版から得たもの） | 同上 |
 | `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | `trace_power_sandwich` Step 3 の補題 |

@@ -6075,6 +6075,195 @@ A - B
     },
   },
   {
+    id: "linear_space_general_claim_real_matrix_vector_product_is_associative",
+    kind: "claim",
+    title: { text: "実数の行列の積と実数のベクトルへの積の結合則" },
+    labels: ["real_matrix_vector_product_is_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`P \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        "、",
+        math(String.raw`Q \in \mathrm{Mat}(n,p,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`x \in \mathbb{R}^p`),
+        " とする。このとき",
+      ]),
+      displayMath(String.raw`(PQ)\,x = P\,(Qx)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`PQ \in \mathrm{Mat}(m,p,\mathbb{R})`),
+        " は ",
+        ref("def_real_matrix_product"),
+        " の積、行列とベクトルの積 ",
+        math(String.raw`(PQ)x \in \mathbb{R}^m`),
+        "・",
+        math(String.raw`Qx \in \mathbb{R}^n`),
+        "・",
+        math(String.raw`P(Qx) \in \mathbb{R}^m`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathbb{R}^m`),
+        " の元（実数の ",
+        math(String.raw`m`),
+        " 個の組）なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((PQ)x\bigr)_i
+&= \sum_{k=1}^{p} (PQ)_{ik}\,x_k
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to m,\ n \to p,\ P \to PQ,\ x \to x)\bigr)\\
+&= \sum_{k=1}^{p} \Bigl(\sum_{j=1}^{n} P_{ij}\,Q_{jk}\Bigr) x_k
+&&\bigl(\because\ \blkref{def_real_matrix_product}\ (P \to P,\ Q \to Q)\ \text{を}\ (PQ)_{ik}\ \text{へ、}p\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p} x_k \Bigl(\sum_{j=1}^{n} P_{ij}\,Q_{jk}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ p\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p} \sum_{j=1}^{n} x_k\,(P_{ij}\,Q_{jk})
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to x_k,\ (x_1,\dots,x_n) \to (P_{i1}Q_{1k},\dots,P_{in}Q_{nk}))\ \text{を右辺から左辺へ、}p\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p} \sum_{j=1}^{n} (P_{ij}\,Q_{jk})\,x_k
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ np\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p} \sum_{j=1}^{n} P_{ij}\,(Q_{jk}\,x_k)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ np\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} \sum_{k=1}^{p} P_{ij}\,(Q_{jk}\,x_k)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則・交換則による有限和の順序の入れ替え}\bigr)\\
+&= \sum_{j=1}^{n} P_{ij} \Bigl(\sum_{k=1}^{p} Q_{jk}\,x_k\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to p,\ c \to P_{ij},\ (x_1,\dots,x_p) \to (Q_{j1}x_1,\dots,Q_{jp}x_p))\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} P_{ij}\,(Qx)_j
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to p,\ P \to Q,\ x \to x)\ \text{を右辺から左辺へ、}n\ \text{個の項へ同時に適用}\bigr)\\
+&= \bigl(P(Qx)\bigr)_i
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to m,\ n \to n,\ P \to P,\ x \to Qx)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i`),
+        " は任意なので、",
+        math(String.raw`\mathbb{R}^m`),
+        " の二つの元の成分がすべて等しく、",
+        math(String.raw`(PQ)x = P(Qx)`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm の帰納法の段 ((W_ℝ)^kW_ℝ)x = (W_ℝ)^k(W_ℝx) が、係数が ℂ の行列の積の結合律 mat_mult_associative（数ベクトルを n 行 1 列の行列とみなす）を実数の行列とベクトルへ当てていたので、def_real_matrix_product と def_real_matrix_vector_product の積について足した。有限和の順序の入れ替えは、mat_mult_associative・finite_double_sum_of_matrices_interchange の ℂ の段と同じく、加法の結合則・交換則の名前で引く（実数の二重和の順序の入れ替えを述べるブロックは本文に無い）。数値検証: sagemath/check/real_matrix_vector_product_is_associative/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_identity_matrix_is_left_unit_of_real_matrix_vector_product",
+    kind: "claim",
+    title: { text: "実数の単位行列を実数のベクトルに掛けても変わらない" },
+    labels: ["real_identity_matrix_is_left_unit_of_real_matrix_vector_product"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x \in \mathbb{R}^n`),
+        " とする。",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{R})}`),
+        " を ",
+        ref("def_real_identity_matrix"),
+        " の単位行列とすると",
+      ]),
+      displayMath(String.raw`I_{\mathrm{Mat}(n,\mathbb{R})}\,x = x`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m \to n,\ n \to n,\ P \to I_{\mathrm{Mat}(n,\mathbb{R})}`),
+        "）のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{R})}`),
+        " と書き、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記とする。両辺はともに ",
+        math(String.raw`\mathbb{R}^n`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`r_j := I_{ij}\,x_j \in \mathbb{R}`),
+        " とおく。",
+        math(String.raw`j \neq i`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(r_j)_{\mathbb{C}}
+&= (I_{ij}\,x_j)_{\mathbb{C}}
+&&\bigl(\because\ r_j := I_{ij}\,x_j\bigr)\\
+&= (0\cdot x_j)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_real_identity_matrix}\ (s \to i,\ t \to j,\ i \neq j)\bigr)\\
+&= (0)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot a = 0\ (a \to x_j)\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = (0)_{\mathbb{C}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`j = i`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r_i
+&= I_{ii}\,x_i
+&&\bigl(\because\ r_j := I_{ij}\,x_j\ (j \to i)\bigr)\\
+&= 1\cdot x_i
+&&\bigl(\because\ \blkref{def_real_identity_matrix}\ (s, t \to i)\bigr)\\
+&= x_i
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((Ix)_i\bigr)_{\mathbb{C}}
+&= \Bigl(\sum_{j=1}^{n} I_{ij}\,x_j\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to I,\ x \to x)\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} r_j\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ r_j := I_{ij}\,x_j\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} (r_j)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to n,\ r_j \to r_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= (r_i)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to n,\ z_j \to (r_j)_{\mathbb{C}},\ n \to i)\ \text{と、上で示した}\ j \neq i\ \text{のときの}\ (r_j)_{\mathbb{C}} = 0_{\mathbb{C}}\bigr)\\
+&= (x_i)_{\mathbb{C}}
+&&\bigl(\because\ \text{上で示した}\ r_i = x_i\bigr)
+\end{aligned}`),
+      paragraph([
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to (Ix)_i,\ b \to x_i`),
+        "）より ",
+        math(String.raw`(Ix)_i = x_i`),
+        " である。",
+        math(String.raw`i`),
+        " は任意なので、",
+        math(String.raw`\mathbb{R}^n`),
+        " の二つの元の成分がすべて等しく、",
+        math(String.raw`Ix = x`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm の k = 0 の段 ‖(W_ℝ)^0x‖ = ‖Ix‖ = ‖x‖ が、係数が ℂ の行列の積の左単位 identity_matrix_is_left_unit_of_mat_mult を実数の単位行列と実数のベクトルへ当てていたので、def_real_identity_matrix と def_real_matrix_vector_product について足した。実数の有限和のうち一つの項のほかが 0 のものを述べるブロックが本文に無いので、和を ℂ へ包含して finite_sum_with_single_nonzero_term を当て、単射性で戻す（n = 1 のときも空の和を使わない）。数値検証: sagemath/check/real_identity_matrix_is_left_unit_of_real_matrix_vector_product/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_real_matrix_of_real_entry_matrix_preserves_product",
     kind: "claim",
     title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は積を保つ}` },

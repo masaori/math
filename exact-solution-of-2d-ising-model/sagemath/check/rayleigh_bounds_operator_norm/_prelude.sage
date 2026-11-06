@@ -31,13 +31,13 @@ def bil(x, P, y):
 
 
 def matvec(P, x):
-    """行列積の成分表示 (Px)_k := Σ_l P_kl x_l。"""
+    """def_real_matrix_vector_product の (Px)_k := Σ_l P_kl x_l。"""
     n = P.nrows()
     return vector([sum(P[k, l] * x[l] for l in range(n)) for k in range(n)])
 
 
 def power_by_def_exp(P, k):
-    """def_exp (1) の冪: P^0 := I、P^{m+1} := P^m P（積は mat_mult の成分の式）。"""
+    """def_exp (1) の冪: P^0 := I、P^{m+1} := P^m P（積は def_real_matrix_product の成分の式。呼ぶ共有の body_product・body_identity は mat_mult・def_identity_matrix として書かれているが、式は同じ）。"""
     A = body_identity(P.base_ring(), P.nrows())
     for _ in range(k):
         A = body_product(A, P)

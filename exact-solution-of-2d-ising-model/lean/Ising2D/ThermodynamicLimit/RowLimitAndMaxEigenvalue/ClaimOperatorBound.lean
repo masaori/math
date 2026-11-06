@@ -22,12 +22,14 @@
 | 場合分けと割り算・平方の 3 行 | `rayleigh_bounds_operator_norm` の後半 |
 | `k = 0` の 3 行、帰納法の 5 行 | `rayleigh_bounds_operator_norm_pow` |
 
+人手の行列とベクトルの積 `def_real_matrix_vector_product` は Lean の `*ᵥ`（成分は `dotProduct` で、人手の式と `rfl`）である。
 人手の `x^⊤W_ℝx ≤ c‖x‖^2`（`def_rayleigh_sup`）は `quad_le_rayleighSup_mul`（`‖x‖^2` を `vecNormSq` で書く）を `vecNorm_sq` で読み替えて引く。
 `rayleigh_bounds_operator_normSq`・`rayleigh_bounds_operator_normSq_pow` は必要十分版を実行列へ特殊化したもの、
 `rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf` はその平方根を取って具体版と同じ主張を得たもので、
 具体版が必要十分版の特殊化として得られることの記録である（具体版の証明には使わない）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixVectorProductAssociativityAndIdentity
 
 set_option linter.unusedSectionVars false
 
@@ -91,13 +93,13 @@ theorem rayleigh_bounds_operator_normSq_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
 /-- **人手 `rayleigh_bounds_operator_norm` の一つ目の鎖 6 行**: `y := W_ℝx` について `‖W_ℝx‖^2 = y^⊤W_ℝx`。 -/
 theorem vecNorm_mulVec_sq_eq_bilinear (W : Matrix n n ℝ) (x : n → ℝ) :
     vecNorm (W *ᵥ x) ^ 2 = (W *ᵥ x) ⬝ᵥ W *ᵥ x := by
-  set y := W *ᵥ x with hy                                                     -- 置き方 `y := W_ℝx`（成分 `y_k = Σ_l (W_ℝ)_kl x_l`）
+  set y := W *ᵥ x with hy                                                     -- 置き方 `y := W_ℝx`（成分 `y_k = Σ_l (W_ℝ)_kl x_l`、`def_real_matrix_vector_product`）
   calc vecNorm (W *ᵥ x) ^ 2
       = vecNorm y ^ 2 := rfl                                                  -- 1 行目: `y := W_ℝx`
     _ = ∑ k, y k ^ 2 := by rw [vecNorm_sq, vecNormSq_eq_sum]                  -- 2 行目: `def_matrix_norm` と `(√a)^2 = a`
                                                                               -- （Lean の `vecNormSq` は `Σ y_k^2` で、人手の `|y_k|^2` の `|·|` は現れない）
     _ = ∑ k, y k * y k := by simp only [sq]                                   -- 3 行目: `y_k ∈ ℝ` なので `|y_k|^2 = y_ky_k`
-    _ = ∑ k, y k * ∑ l, W k l * x l := by rw [hy]; rfl                        -- 4 行目: `y = W_ℝx` の成分（`mat_mult`、右因子）
+    _ = ∑ k, y k * ∑ l, W k l * x l := by rw [hy]; rfl                        -- 4 行目: `y = W_ℝx` の成分（`def_real_matrix_vector_product`）
     _ = ∑ k, ∑ l, y k * W k l * x l := by
         simp only [Finset.mul_sum, mul_assoc]                                 -- 5 行目: 分配則と乗法の結合則
     _ = y ⬝ᵥ W *ᵥ x := (dotProduct_mulVec_eq_real_bilinear_value y x W).symm  -- 6 行目: `def_real_bilinear_value`（`x → y`、`y → x`）
@@ -147,13 +149,16 @@ theorem rayleigh_bounds_operator_norm_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
   | zero =>
       exact le_of_eq <|
         calc vecNorm (W ^ 0 *ᵥ x)
-            = vecNorm ((1 : Matrix n n ℝ) *ᵥ x) := by rw [pow_zero]           -- 1 行目: `def_exp` (1) の `A^0 := I`
-          _ = vecNorm x := by rw [one_mulVec]                                 -- 2 行目: `identity_matrix_is_left_unit_of_mat_mult`（mathlib の `one_mulVec`）
+            = vecNorm ((1 : Matrix n n ℝ) *ᵥ x) := by rw [pow_zero]           -- 1 行目: `def_exp` (1) の `A^0 := I`（`def_real_identity_matrix`）
+          _ = vecNorm x := by
+              rw [real_identity_matrix_is_left_unit_of_real_matrix_vector_product x]
+                                                                              -- 2 行目: `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`
           _ = rayleighSup W ^ 0 * vecNorm x := by rw [pow_zero, one_mul]      -- 3 行目: `c^0 = 1`
   | succ k ih =>
       calc vecNorm (W ^ (k + 1) *ᵥ x)
-          = vecNorm ((W ^ k * W) *ᵥ x) := by rw [pow_succ]                    -- 1 行目: `def_exp` (1) の `A^{m+1} := A^mA`
-        _ = vecNorm (W ^ k *ᵥ (W *ᵥ x)) := by rw [← mulVec_mulVec]           -- 2 行目: `mat_mult_associative`（mathlib の `mulVec_mulVec`）
+          = vecNorm ((W ^ k * W) *ᵥ x) := by rw [pow_succ]                    -- 1 行目: `def_exp` (1) の `A^{m+1} := A^mA`（積は `def_real_matrix_product`）
+        _ = vecNorm (W ^ k *ᵥ (W *ᵥ x)) := by
+            rw [real_matrix_vector_product_is_associative (W ^ k) W x]       -- 2 行目: `real_matrix_vector_product_is_associative`（`P → (W_ℝ)^k`, `Q → W_ℝ`）
         _ ≤ rayleighSup W ^ k * vecNorm (W *ᵥ x) := ih (W *ᵥ x)               -- 3 行目: 帰納法の仮定を `W_ℝx` に適用
         _ ≤ rayleighSup W ^ k * (rayleighSup W * vecNorm x) :=
             mul_le_mul_of_nonneg_left (rayleigh_bounds_operator_norm hW hpd x)

@@ -1516,19 +1516,29 @@ c(M_{\mathrm{col}})
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         " について ",
         math(String.raw`\|(W_{\mathbb{R}})^k x\| \leq c(M_{\mathrm{col}})^k\|x\|`),
-        "。積 ",
+        "。行列とベクトルの積 ",
         math(String.raw`W_{\mathbb{R}}x`),
+        "・",
+        math(String.raw`(W_{\mathbb{R}})^kx`),
         " は ",
-        ref("mat_mult"),
-        " の成分の式（",
-        math(String.raw`(W_{\mathbb{R}}x)_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} (W_{\mathbb{R}})_{kl}\,x_l`),
-        "）、冪 ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}}`),
+        "）のもの、冪 ",
         math(String.raw`(W_{\mathbb{R}})^k`),
         " は ",
         ref("def_exp"),
         " (1) の ",
         math(String.raw`K = \mathbb{R}`),
-        " のもの、ノルムは ",
+        " のもの（積は ",
+        ref("def_real_matrix_product"),
+        "、",
+        math(String.raw`(W_{\mathbb{R}})^0`),
+        " は ",
+        ref("def_real_identity_matrix"),
+        " の ",
+        math(String.raw`I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})}`),
+        "）、ノルムは ",
         ref("def_matrix_norm"),
         " の ",
         math(String.raw`K = \mathbb{R}`),
@@ -1549,8 +1559,10 @@ c(M_{\mathrm{col}})
         "（成分は ",
         math(String.raw`y_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} (W_{\mathbb{R}})_{kl}\,x_l`),
         "（",
-        ref("mat_mult"),
-        "）。",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to x`),
+        "））。",
         math(String.raw`(W_{\mathbb{R}})_{kl}`),
         " と ",
         math(String.raw`x_l`),
@@ -1567,7 +1579,7 @@ c(M_{\mathrm{col}})
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\,y_k
 &&\bigl(\because\ y_k\in\mathbb{R}\ \text{なので}\ |y_k|^2=y_ky_k\bigr)\\
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\sum_{l=1}^{2^{M_{\mathrm{col}}}}(W_{\mathbb{R}})_{kl}\,x_l
-&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{の成分 }\blkref{mat_mult}\ \text{（右因子）}\bigr)\\
+&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{の成分 }\blkref{def_real_matrix_vector_product}\ (m, n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to x)\bigr)\\
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}y_k\,(W_{\mathbb{R}})_{kl}\,x_l
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\ y_k((W_{\mathbb{R}})_{kl}x_l)=(y_k(W_{\mathbb{R}})_{kl})x_l\bigr)\\
 &=y^\top W_{\mathbb{R}}x
@@ -1635,10 +1647,10 @@ c(M_{\mathrm{col}})
       ]),
       displayMath(String.raw`\begin{aligned}
 \|(W_{\mathbb{R}})^0x\|
-&=\|Ix\|
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0:=I\bigr)\\
+&=\|I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})}\,x\|
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0:=I\ (K = \mathbb{R}\text{。}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
 &=\|x\|
-  &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+  &&\bigl(\because\ \blkref{real_identity_matrix_is_left_unit_of_real_matrix_vector_product}\ (n \to 2^{M_{\mathrm{col}}},\ x \to x)\bigr)\\
 &=c^0\|x\|
   &&\bigl(\because\ c^0=1\bigr)
 \end{aligned}`),
@@ -1656,9 +1668,9 @@ c(M_{\mathrm{col}})
       displayMath(String.raw`\begin{aligned}
 \|(W_{\mathbb{R}})^{k+1}x\|
 &=\|((W_{\mathbb{R}})^kW_{\mathbb{R}})x\|
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1}:=A^mA\bigr)\\
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1}:=A^mA\ (K = \mathbb{R}\text{。積は}\ \blkref{def_real_matrix_product})\bigr)\\
 &=\|(W_{\mathbb{R}})^k(W_{\mathbb{R}}x)\|
-  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to 2^{M_{\mathrm{col}}},\ P \to (W_{\mathbb{R}})^k,\ Q \to W_{\mathbb{R}},\ x \to x)\bigr)\\
 &\leq c^k\|W_{\mathbb{R}}x\|
   &&\bigl(\because\ \text{帰納法の仮定を}\ W_{\mathbb{R}}x\in\mathbb{R}^{2^{M_{\mathrm{col}}}}\ \text{に適用}\bigr)\\
 &\leq c^k\bigl(c\|x\|\bigr)
@@ -1680,6 +1692,7 @@ c(M_{\mathrm{col}})
       notes: [
         "2026-11-04: SageMath の検算（sagemath/check/rayleigh_bounds_operator_norm/）を付けるにあたり、二か所を直した（主張は不変）。(1) 一つ目の鎖は ‖Wx‖^2 = (Wx)^⊤(Wx) = y^⊤(Wx) で止まり、続く鎖が使う y^⊤Wx（def_real_bilinear_value の二重和）との等号が書かれていなかった。def_matrix_norm・definition_of_sqrt_r_positive・y の成分・分配則・def_real_bilinear_value の 5 行（‖Wx‖^2 = ‖y‖^2 の置き換えと合わせて 6 行）で ‖Wx‖^2 = y^⊤Wx まで一続きにし、y ∈ ℝ^n であることを置き方に書いた（y の成分と鎖の 4 行目に mat_mult を引き、‖Wx‖^2 = ‖y‖^2 の置き換えを独立の行にした）。k = 0 の行に def_exp (1) の A^0 := I・identity_matrix_is_left_unit_of_mat_mult・c^0 = 1 の 3 行の鎖を置いた。(2) 帰納法の段の 1 行目 ‖W^{k+1}x‖ = ‖W(W^kx)‖ は「行列の冪の定義と結合則」としていたが、def_exp (1) の冪は W^{k+1} := W^kW で、W(W^kx) にするには W^kW = WW^k が要り、その主張は本文に無い。W^{k+1}x = (W^kW)x = W^k(Wx) とし、帰納法の仮定（すべての x について）を Wx に当て、前半の評価を後に使う順にした。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: psd_cauchy_schwarz は実数の行列 P を取るのに、複素行列 W を当てていた。主張と証明の W を def_W_real の W_ℝ に替え（冪は (W_ℝ)^k）、psd_cauchy_schwarz の仮定を W_real_is_symmetric と、新しく足した主張 W_real_is_positive_semidefinite で満たす形にした。旧い根拠「W_is_real_symmetric_positive_definite より実対称かつ正定値、とくに半正定値」はこれに替わる。y の成分が実数である理由を (W_ℝ)_{kl} が実数であることにした。最後の段の「平方の単調性」を c^2‖x‖^2 = (c‖x‖)^2 の行と nonnegative_real_order_from_squares（u → ‖W_ℝx‖、v → c‖x‖）に割り、c > 0 の根拠に def_rayleigh_sup を引いた。実数の行列の積・冪・単位行列は、ほかの K = ℝ の箇所と同じく mat_mult・def_exp (1)・identity_matrix_is_left_unit_of_mat_mult を引いている（これらは ℂ の行列についてだけ述べる。状態台帳の「mat_mult を K について述べる件」）。主張の値は変わらない。",
+        "2026-11-06（同じ確認の続き）: 主張と証明の行列とベクトルの積を、係数が ℂ の行列の積 mat_mult の成分の式（数ベクトルを 1 列の行列とみなす）から def_real_matrix_vector_product に替え、冪の積と (W_ℝ)^0 を def_real_matrix_product・def_real_identity_matrix で読むと書いた。k = 0 の段の identity_matrix_is_left_unit_of_mat_mult を、新しく足した real_identity_matrix_is_left_unit_of_real_matrix_vector_product に、帰納法の段の mat_mult_associative を、新しく足した real_matrix_vector_product_is_associative に替えた。主張の値は変わらない。",
       ],
     },
   },

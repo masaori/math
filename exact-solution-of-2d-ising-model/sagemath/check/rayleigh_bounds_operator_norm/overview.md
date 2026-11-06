@@ -14,11 +14,11 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
-| 置き方 `y := Wx`（成分 `y_k = Σ_l W_kl x_l`（`mat_mult`）、`y ∈ ℝ^n`） | `_lines.sage` | `matvec` で成分の式から作り、Sage の組み込みの積 `P*x` と比べる（QQ） | **PASS** |
+| 置き方 `y := Wx`（成分 `y_k = Σ_l W_kl x_l`（`def_real_matrix_vector_product`）、`y ∈ ℝ^n`） | `_lines.sage` | `matvec` で成分の式から作り、Sage の組み込みの積 `P*x` と比べる（QQ） | **PASS** |
 | 一つ目の鎖 1→2（`y := Wx` の置き換え） | `_lines.sage` | 上の `y` の比較が受け持つ | **PASS** |
 | 一つ目の鎖 2→3（`def_matrix_norm` と `(√a)^2 = a`） | `_lines.sage` | `‖y‖` を AA の平方根で作って二乗したものと `Σ_k |y_k|^2` | **PASS** |
 | 一つ目の鎖 3→4（`|y_k|^2 = y_ky_k`） | `_lines.sage` | 絶対値の平方の和と積の和 | **PASS** |
-| 一つ目の鎖 4→5（`y = Wx` の成分、`mat_mult`） | `_lines.sage` | 左の因子を組み込みの積の `y`、右の因子を成分の式 `Σ_l W_kl x_l` にした和 | **PASS** |
+| 一つ目の鎖 4→5（`y = Wx` の成分、`def_real_matrix_vector_product`） | `_lines.sage` | 左の因子を組み込みの積の `y`、右の因子を成分の式 `Σ_l W_kl x_l` にした和 | **PASS** |
 | 一つ目の鎖 5→6（分配則と乗法の結合則） | `_lines.sage` | 二重和 `Σ_kΣ_l y_kW_klx_l` | **PASS** |
 | 一つ目の鎖 6→7（`def_real_bilinear_value`） | `_lines.sage` | `bil(y, W, x)`（定義どおり左から足す）。さらに組み込みの行列積 `y^⊤(Wx)` と比べる | **PASS** |
 | 二つ目の鎖 1→2・2→3（冪、一つ目の鎖） | `_lines.sage` | `‖y‖^4`、`(‖y‖^2)^2`、`(y^⊤Wx)^2` | **PASS** |
@@ -28,9 +28,9 @@
 | 二つ目の鎖 6→7（`y = Wx`、乗法の可換則・結合則） | `_lines.sage` | `‖Wx‖` を組み込みの積と内積から作り直して比べる | **PASS** |
 | 場合分け `‖Wx‖ = 0` の側（`0 ≤ c‖x‖`） | `_lines.sage` | 特異な `P` の核の `x ≠ 0` で通る（`check_generic_…`） | **PASS** |
 | `‖Wx‖^2 ≤ c^2‖x‖^2`（`‖Wx‖^2 > 0` で割る）、`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖ ≤ c‖x‖`（`nonnegative_real_order_from_squares`、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`） | `_lines.sage` | 両辺を `‖Wx‖^2` で割った値の等号 2 つ、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`・`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖^2 ≤ (c‖x‖)^2` と両方の不等号。場合分けの件数をログに出す（一般の行列で `‖Wx‖ = 0` の側 13 件、`> 0` の側 144 件） | **PASS** |
-| `k = 0` の鎖 3 行（`def_exp` (1) の `W^0 := I`、`identity_matrix_is_left_unit_of_mat_mult`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
+| `k = 0` の鎖 3 行（`def_exp` (1) の `W^0 := I`（`def_real_identity_matrix`）、`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
 | 帰納法の鎖 1→2（`def_exp` (1) の `W^{k+1} := W^kW`） | `_lines.sage` | 冪を `def_exp` (1) の漸化式で作り、Sage の冪 `P**(k+1)`（別の実装）と比べる。左辺のノルムは `P**(k+1)` から、右辺は `W^kW` から作る | **PASS** |
-| 帰納法の鎖 2→3（`mat_mult_associative`） | `_lines.sage` | `‖(W^kW)x‖` と `‖W^k(Wx)‖` | **PASS** |
+| 帰納法の鎖 2→3（`real_matrix_vector_product_is_associative`） | `_lines.sage` | `‖(W^kW)x‖` と `‖W^k(Wx)‖` | **PASS** |
 | 帰納法の鎖 3→4（帰納法の仮定を `Wx` に） | `_lines.sage` | `‖W^k(Wx)‖ ≤ c^k‖Wx‖` | **PASS** |
 | 帰納法の鎖 4→5（`‖Wx‖ ≤ c‖x‖` と `c^k ≥ 0`） | `_lines.sage` | 側の条件と行の不等号 | **PASS** |
 | 帰納法の鎖 5→6（冪の指数法則） | `_lines.sage` | `c^k(c‖x‖) = c^{k+1}‖x‖` | **PASS** |
@@ -85,6 +85,9 @@
 - 主張と証明の `W` を `def_W_real` の `W_ℝ` に替えた（`psd_cauchy_schwarz` は実数の行列を取る）。`psd_cauchy_schwarz` の仮定を `W_real_is_symmetric` と、
   新しく足した主張 `W_real_is_positive_semidefinite`（検算は `sagemath/check/W_real_is_positive_semidefinite/`）で満たす。
 - 最後の段の「平方の単調性」を `c^2‖x‖^2 = (c‖x‖)^2` の行と `nonnegative_real_order_from_squares` に割った。検算に `‖Wx‖^2 ≤ (c‖x‖)^2` を足した。
+- 行列とベクトルの積を `mat_mult` から `def_real_matrix_vector_product` に、`k = 0` の段の根拠を新しい主張 `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`
+  （検算は `sagemath/check/real_identity_matrix_is_left_unit_of_real_matrix_vector_product/`）に、帰納法の段の結合則を新しい主張
+  `real_matrix_vector_product_is_associative`（検算は `sagemath/check/real_matrix_vector_product_is_associative/`）に替えた。値と検算の式は不変で、行の名前だけを直した。
 
 ## 計算の帰属と範囲
 

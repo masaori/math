@@ -26,6 +26,7 @@
   人手の 1 行「ℝ で `(−a) + (−b) = −(a + b)`」は mathlib の `neg_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`）。
 * `finite_sum_of_real_scalar_multiples_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
   人手の 1 行「ℝ の分配法則 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_scalar_multiples`）。
+  有限型の添字の和には、`finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく番号を付けて当てる `finite_sum_of_real_scalar_multiples_fintype` を置く。
 * `finite_sum_of_nonnegative_reals_ge_term_succ` は人手と同じく、`k ≤ m`（Lean の `Fin.castSucc k'`）と `k = m + 1`（`Fin.last`）に分け、
   それぞれ人手の 4 行と 1 対 1 の `calc` にした。`k = m + 1` の前置き `Σ_{j=1}^{m} a_j ≥ a_1 ≥ 0` は帰納法の仮定を `k → 1`（Lean の `0`）で使う。
   「両辺に同じ実数を足す」は `add_le_add` の片方を `le_rfl` にしたもの、「0 は ℝ の和の単位元」は `add_zero`・`zero_add` である。
@@ -127,6 +128,19 @@ theorem finite_sum_of_real_scalar_multiples (m : ℕ) (c : ℝ) (x : Fin m → �
   cases m with
   | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, mul_zero]
   | succ m => exact finite_sum_of_real_scalar_multiples_succ m c x
+
+/-- **`finite_sum_of_real_scalar_multiples`**（添字が有限型 `κ` の和）。
+人手の和は添字 `1, …, m` の上の和なので、`κ` に `Fintype.equivFin κ` で番号を付け、`Fin (card κ)` の上の和として
+`finite_sum_of_real_scalar_multiples` を当てる（番号を付ける段と外す段は mathlib の `Equiv.sum_comp` による）。 -/
+theorem finite_sum_of_real_scalar_multiples_fintype {κ : Type*} [Fintype κ] (c : ℝ) (x : κ → ℝ) :
+    ∑ j, c * x j = c * ∑ j, x j := by
+  set e := Fintype.equivFin κ
+  calc ∑ j, c * x j
+      = ∑ j : Fin (Fintype.card κ), c * x (e.symm j) :=
+        (e.symm.sum_comp (fun j => c * x j)).symm                             -- `κ` に番号を付ける
+    _ = c * ∑ j : Fin (Fintype.card κ), x (e.symm j) :=
+        finite_sum_of_real_scalar_multiples _ c (fun j => x (e.symm j))       -- `finite_sum_of_real_scalar_multiples`（`x_j → x(e^{-1}(j))`）
+    _ = c * ∑ j, x j := by rw [e.symm.sum_comp x]                             -- 番号を外す
 
 /-- **`finite_sum_of_nonnegative_reals_is_at_least_each_term`**（`m + 1` 項）:
 すべての `a_j ≥ 0` なら、すべての `k` について `Σ_{j=1}^{m+1} a_j ≥ a_k`。`m` についての帰納法。 -/
