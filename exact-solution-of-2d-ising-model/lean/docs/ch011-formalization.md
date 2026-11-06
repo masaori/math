@@ -137,8 +137,8 @@
 | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm_pow` | `⟪W^k x, W^k x⟫ ≤ (c²)^k⟪x,x⟫` | 同上（帰納法） |
 | `NecSuf.IsPsdPair.moment_split` | `⟪W^p x, W^q x⟫ = ⟪x, W^{p+q}x⟫` | Step 2 の書き換え |
 | `NecSuf.IsPsdPair.moment_nonneg` / `moment_le_pow` | `0 ≤ m_k`、`m_k ≤ c^k⟪x,x⟫` | Step 1 の偶奇の場合分け |
-| `NecSuf.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | Step 2 |
-| `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero`（`RayleighMoments.lean`） | `m_k > 0`、`W` の核は `{0}`（`m_k > 0` を示すための補助） | Step 2 冒頭（人手の `W` の可逆性の段（`def_invertible_elements_of_R`）とは別の論法） |
+| `NecSuf.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | `moment_log_convexity` の不等式（人手は `W_ℝ` の冪の `m_k := x^⊤(W_ℝ)^kx` で述べる。添字は `k → k+1`。人手と 1 対 1 の具体版は無い） |
+| `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero`（`RayleighMoments.lean`） | `m_k > 0`、`W` の核は `{0}`（`m_k > 0` を示すための補助） | `moment_log_convexity` の【(W_ℝ)^ax は零でない】と【正値性】（人手も `W_ℝu = 0` なら `u^⊤W_ℝu = 0` で正定値性に反するという `a` の帰納法で、同じ論法） |
 | `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le` | 比の単調性と `(xᵀWx)^n ≤ m_n` | Step 3 前半 |
 | `Ising2D.NecSuf.sandwich_mul_proj_eq` | 任意の半群で `BP=CP` と `C,V` の `P` との可換性から `BVB P=CVC P` | `symmetrized_transfer_matrix_on_sectors` |
 

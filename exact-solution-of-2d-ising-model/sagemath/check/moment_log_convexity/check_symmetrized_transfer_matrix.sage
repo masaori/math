@@ -18,6 +18,7 @@ for M in [2, 3]:
                   rational_unit_vector([QQ.random_element(num_bound=4, den_bound=3) for _ in range(d - 1)])]
             for x in xs:
                 check_proof_lines(W, x, 5 if M == 2 else 3, f"M_col={M}, K_2=log {xx}, K_1=2log {yy}, x={list(x)}")
+            check_varrho_lines(W, (5 if M == 2 else 3) + 1, f"M_col={M}, K_2=log {xx}, K_1=2log {yy}")
     print(f"M_col = {M}: 等号 {n_eq} 個、不等号 {n_le} 個（累計）")
 print(f"等号 {n_eq} 個、不等号 {n_le} 個")
 print("RESULT: PASS")

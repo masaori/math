@@ -23,6 +23,7 @@ for n in range(1, 6):
             for x in xs:
                 check_proof_lines(P, x, 6 if n <= 3 else 5, f"n={n}, P={P.list()}, x={list(x)}")
                 count += 1
+            check_varrho_lines(P, (6 if n <= 3 else 5) + 1, f"n={n}, P={P.list()}")
 print(f"(P, x) {count} 組、等号 {n_eq} 個、不等号 {n_le} 個")
 
 # 否定コントロール 1: 対称だが正定値でない diag(1, −2) と x = (3/5, 4/5) では m_1 = −23/25 < 0 で正値性が外れ、

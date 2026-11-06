@@ -151,7 +151,8 @@ namespace IsPdPair
 variable {ip : V →ₗ[R] V →ₗ[R] R} {W : V →ₗ[R] V}
 
 omit [IsStrictOrderedRing R] in
-/-- 正定値なら `W` の核は `{0}`（人手証明の「可逆性」に対応）。 -/
+/-- 正定値なら `W` の核は `{0}`。人手証明 `moment_log_convexity` の【(W_ℝ)^ax は零でない】の背理法
+（`W_ℝu = 0` なら `u^⊤W_ℝu = 0` で正定値性に反する）に対応。 -/
 theorem W_ker (h : IsPdPair ip W) {u : V} (hu : W u = 0) : u = 0 := by
   by_contra hne
   have := h.W_pos u hne
@@ -172,8 +173,8 @@ theorem pow_ne_zero_of_ne_zero (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (p : �
 
 /-- モーメント列は正: `0 < ⟪x, W^k x⟫`（`x ≠ 0`）。
 
-人手証明の Step 2 冒頭「`k = 2a` なら `m_k = ‖W^a x‖² > 0`、`k = 2a+1` なら
-`m_k = (W^a x)ᵀ W (W^a x) > 0`」に対応。 -/
+人手証明 `moment_log_convexity` の【正値性】（`m_{2a} = (u^(a))^⊤I_ℝu^(a) > 0`、
+`m_{2a+1} = (u^(a))^⊤W_ℝu^(a) > 0`、`u^(a) := (W_ℝ)^ax`）に対応。 -/
 theorem moment_pos (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (k : ℕ) :
     0 < ip x ((W ^ k) x) := by
   rcases Nat.even_or_odd k with ⟨p, hp⟩ | ⟨p, hp⟩
@@ -254,13 +255,11 @@ theorem moment_le_pow (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ c)
 
 /-- **モーメント列の対数凸性**: `m_{k+1}² ≤ m_k · m_{k+2}`。
 
-人手証明 `trace_power_sandwich` の Step 2。偶奇で `P = I` の Cauchy–Schwarz と
-`P = W` の Cauchy–Schwarz を使い分ける。
-
-（人手証明の括弧書き「`a = k-1`、`b = k+1` の場合」は添字の書き誤りで、
-正しくは `k+1` が奇数なら `(a, b) = (k/2, k/2+1)` で `P = I` 版、
-`k+1` が偶数なら `(a, b) = ((k-1)/2, (k+1)/2)` で `P = W` 版を使う。
-本ファイルの証明はこの正しい添字で書いてある。） -/
+人手証明 `moment_log_convexity` の不等式。人手は `def_W_real` の `W_ℝ` の冪で
+`m_k := x^⊤(W_ℝ)^kx` と述べ、`k ∈ ℤ_{≥1}` について `m_k² ≤ m_{k−1}m_{k+1}` とする。
+ここでは添字を `k → k+1` とずらして述べる。偶奇で `P = I` の Cauchy–Schwarz と
+`P = W` の Cauchy–Schwarz を使い分けるのは人手と同じである。
+人手と 1 対 1 の具体版はまだ無い（状態台帳の (r6)）。 -/
 theorem moment_log_convex (h : IsPsdPair ip W) (x : V) (k : ℕ) :
     (ip x ((W ^ (k + 1)) x)) ^ 2
       ≤ (ip x ((W ^ k) x)) * (ip x ((W ^ (k + 2)) x)) := by

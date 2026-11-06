@@ -2077,30 +2077,38 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     labels: ["moment_log_convexity"],
     statement: [
       paragraph([
-        ref("def_symmetrized_transfer_matrix"),
-        " の ",
-        math(String.raw`W`),
-        " は ",
-        ref("W_is_real_symmetric_positive_definite"),
-        " より実対称正定値である。単位ベクトル ",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記し、",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列とする（",
+        ref("W_real_is_symmetric"),
+        " より対称、",
+        ref("W_real_is_positive_definite"),
+        " より正定値）。単位ベクトル ",
+        math(String.raw`x \in \mathbb{R}^{d}`),
         "（",
         math(String.raw`\|x\| = 1`),
+        "。ノルムは ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K = \mathbb{R}`),
         "）を固定し、",
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         " について ",
-        math(String.raw`m_k := x^\top W^k x \in \mathbb{R}`),
+        math(String.raw`m_k := x^\top (W_{\mathbb{R}})^k x \in \mathbb{R}`),
         "（",
-        math(String.raw`W^k`),
+        math(String.raw`(W_{\mathbb{R}})^k`),
         " は ",
         ref("def_exp"),
-        " (1) の冪で、",
-        ref("def_rayleigh_sup"),
-        " が ",
-        math(String.raw`W`),
-        " を読むのと同じく、その成分を実数として ",
+        " (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪で積は ",
+        ref("def_real_matrix_product"),
+        "、値は ",
         ref("def_real_bilinear_value"),
-        " で読む）とおく。このとき全ての ",
+        "）とおく。このとき全ての ",
         math(String.raw`k`),
         " について ",
         math(String.raw`m_k > 0`),
@@ -2111,15 +2119,110 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     ],
     proof: [
       paragraph([
-        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
-        " と略記する。冪は ",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " は ",
+        ref("def_symmetrized_transfer_matrix"),
+        " の行列で、",
+        ref("def_W_real"),
+        " より ",
+        math(String.raw`W \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`W_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W)`),
+        " である。",
+        math(String.raw`B \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " について ",
+        math(String.raw`B_{\mathbb{R}} := \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(B)`),
+        " と書く（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の略記）。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+        math(String.raw`I := I_{\mathrm{Mat}(d,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）、",
+        math(String.raw`I_{\mathbb{R}} := I_{\mathrm{Mat}(d,\mathbb{R})}`),
+        "（",
+        ref("def_real_identity_matrix"),
+        "）と書く。",
+        math(String.raw`W^p`),
+        " は ",
         ref("def_exp"),
-        " (1) のもの、積は ",
+        " (1) の ",
+        math(String.raw`K = \mathbb{C}`),
+        " の冪で積は ",
         ref("mat_mult"),
+        "、",
+        math(String.raw`(W_{\mathbb{R}})^p`),
+        " は同じ (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪で、実数の行列どうしの積は ",
+        ref("def_real_matrix_product"),
+        "、実数の行列と実数のベクトルの積は ",
+        ref("def_real_matrix_vector_product"),
         " のものである。",
       ]),
       paragraph([
-        "【冪の実対称性】",
+        "【冪の実数の行列】",
+        ref("real_matrix_of_real_entry_matrix_preserves_power"),
+        "（",
+        math(String.raw`n \to d,\ A \to W,\ q \to p`),
+        "）より、すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`W^p \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " であり、",
+      ]),
+      displayMath(String.raw`(W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p`),
+      paragraph([
+        "である。とくに ",
+        math(String.raw`I = W^0`),
+        "（",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`A^0 := I`),
+        "、",
+        math(String.raw`K = \mathbb{C}`),
+        "）なので ",
+        math(String.raw`I \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+I_{\mathbb{R}}
+&=(W_{\mathbb{R}})^0
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(d,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
+&=(W^0)_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 0)\bigr)\\
+&=\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(I)
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`C = I`),
+        " または ",
+        math(String.raw`C = W`),
+        " とすると、",
+        math(String.raw`C \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " であり、",
+        math(String.raw`C_{\mathbb{R}}`),
+        " は ",
+        math(String.raw`C = I`),
+        " なら上の鎖より ",
+        math(String.raw`I_{\mathbb{R}}`),
+        "、",
+        math(String.raw`C = W`),
+        " なら ",
+        ref("def_W_real"),
+        " より ",
+        math(String.raw`W_{\mathbb{R}}`),
+        " である。",
+      ]),
+      paragraph([
+        "【冪の対称性】",
         math(String.raw`W`),
         " は実対称なので（",
         ref("W_is_real_symmetric_positive_definite"),
@@ -2127,102 +2230,74 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
         " について ",
         math(String.raw`W^p`),
-        " は実対称である（",
+        " は実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）であり（",
         ref("power_of_real_symmetric_complex_matrix_is_real_symmetric"),
         "、",
         math(String.raw`n \to d,\ A \to W`),
-        "）。すなわち ",
-        math(String.raw`W^p`),
-        " の成分はすべて実数で、すべての ",
+        "）、とくに ",
+        math(String.raw`(W^p)^\top = W^p`),
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）である。すべての ",
         math(String.raw`k, l \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-(W^p)_{kl}
+\Bigl(\bigl((W_{\mathbb{R}})^p\bigr)_{kl}\Bigr)_{\mathbb{C}}
+&=\Bigl(\bigl((W^p)_{\mathbb{R}}\bigr)_{kl}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{【冪の実数の行列】の}\ (W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p\bigr)\\
+&=(W^p)_{kl}
+&&\bigl(\because\ \blkref{def_real_matrix_of_real_entry_matrix}\ (m, n \to d,\ B \to W^p)\bigr)\\
 &=\bigl((W^p)^\top\bigr)_{kl}
-&&\bigl(\because\ W^p\ \text{は実対称なので}\ (W^p)^\top = W^p\ \text{（}\blkref{def_real_symmetric_complex_matrix}\text{）}\bigr)\\
+&&\bigl(\because\ (W^p)^\top = W^p\bigr)\\
 &=(W^p)_{lk}
-&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)
+&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)\\
+&=\Bigl(\bigl((W^p)_{\mathbb{R}}\bigr)_{lk}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_real_matrix_of_real_entry_matrix}\ (m, n \to d,\ B \to W^p)\bigr)\\
+&=\Bigl(\bigl((W_{\mathbb{R}})^p\bigr)_{lk}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{【冪の実数の行列】の}\ (W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p\bigr)
 \end{aligned}`),
       paragraph([
-        "である。単位行列 ",
-        math(String.raw`I := I_{\mathrm{Mat}(d,\mathbb{C})}`),
-        " の成分 ",
-        math(String.raw`I_{kl} = \delta_{kl}`),
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
         "（",
-        ref("def_identity_matrix"),
-        "、",
-        ref("def_kronecker_delta"),
-        "）も実数である。",
-        math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
-        "、",
-        math(String.raw`B = I`),
-        " または ",
-        math(String.raw`B = W`),
-        " について、",
-        math(String.raw`BW^a`),
-        " と ",
-        math(String.raw`W^b(BW^a)`),
-        " の成分も実数である（",
-        ref("product_of_real_entry_matrices_has_real_entries"),
-        " の行列 ",
-        math(String.raw`A`),
-        "・",
-        math(String.raw`B`),
-        " を、ここの ",
-        math(String.raw`B`),
-        "・",
-        math(String.raw`W^a`),
-        " とした場合と、",
-        math(String.raw`W^b`),
-        "・",
-        math(String.raw`BW^a`),
-        " とした場合の二回適用）。以下、",
-        ref("def_rayleigh_sup"),
-        " が ",
-        math(String.raw`W`),
-        " を読むのと同じく、",
-        math(String.raw`W^p`),
-        "・",
-        math(String.raw`I`),
-        "・",
-        math(String.raw`W^b(BW^a)`),
-        " の成分を実数として、",
-        math(String.raw`W^px \in \mathbb{R}^d`),
-        "（",
-        ref("mat_mult"),
-        "）と ",
-        math(String.raw`y^\top Pz`),
-        "（",
-        ref("def_real_bilinear_value"),
-        "）を読む。",
+        math(String.raw`a \to ((W_{\mathbb{R}})^p)_{kl},\ b \to ((W_{\mathbb{R}})^p)_{lk}`),
+        "）より ",
+        math(String.raw`((W_{\mathbb{R}})^p)_{kl} = ((W_{\mathbb{R}})^p)_{lk}`),
+        " である。",
       ]),
       paragraph([
         "【",
-        math(String.raw`W^ax`),
+        math(String.raw`(W_{\mathbb{R}})^ax`),
         " の成分】",
         math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
         " について ",
-        math(String.raw`u^{(a)} := W^ax \in \mathbb{R}^d`),
+        math(String.raw`u^{(a)} := (W_{\mathbb{R}})^ax \in \mathbb{R}^d`),
         " とおく。",
-        ref("mat_mult"),
-        " より、",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to (W_{\mathbb{R}})^a`),
+        "）より、",
         math(String.raw`l \in \{1,\dots,d\}`),
         " について ",
-        math(String.raw`u^{(a)}_l = \sum_{m=1}^{d}(W^a)_{lm}\,x_m`),
+        math(String.raw`u^{(a)}_l = \sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,x_m`),
         " である。",
       ]),
       paragraph([
         "【冪の分け方】",
         math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
-        " について",
+        " について、",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " で",
       ]),
       displayMath(String.raw`\begin{aligned}
 W^{a+b}
 &=W^{b+a}
 &&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換則}\bigr)\\
 &=W^bW^a
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to b,\ q \to a)\bigr)\\
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to b,\ q \to a)\bigr)\\
 &=W^b\bigl(IW^a\bigr)
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
 \end{aligned}`),
@@ -2232,9 +2307,9 @@ W^{a+b+1}
 &=W^{b+(1+a)}
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+b+1 = b+(1+a)\bigr)\\
 &=W^bW^{1+a}
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to b,\ q \to 1+a)\bigr)\\
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to b,\ q \to 1+a)\bigr)\\
 &=W^b\bigl(W^1W^a\bigr)
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to a)\bigr)\\
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to 1,\ q \to a)\bigr)\\
 &=W^b\bigl(W^{0+1}W^a\bigr)
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
 &=W^b\bigl((W^0W)W^a\bigr)
@@ -2244,57 +2319,97 @@ W^{a+b+1}
 &=W^b\bigl(WW^a\bigr)
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
 \end{aligned}`),
-      paragraph(["である。"]),
+      paragraph([
+        "である。",
+        math(String.raw`C = I`),
+        " なら ",
+        math(String.raw`s := a+b`),
+        "、",
+        math(String.raw`C = W`),
+        " なら ",
+        math(String.raw`s := a+b+1`),
+        " とおくと、上の二つの鎖は ",
+        math(String.raw`W^{s} = W^b(CW^a)`),
+        " である。",
+        ref("real_matrix_of_real_entry_matrix_preserves_product"),
+        "（",
+        math(String.raw`m, n, p \to d,\ A \to C,\ B \to W^a`),
+        "）より ",
+        math(String.raw`CW^a \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " で ",
+        math(String.raw`(CW^a)_{\mathbb{R}} = C_{\mathbb{R}}(W^a)_{\mathbb{R}}`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(W_{\mathbb{R}})^{s}
+&=(W^{s})_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to s)\bigr)\\
+&=\bigl(W^b(CW^a)\bigr)_{\mathbb{R}}
+&&\bigl(\because\ \text{上の二つの鎖}\bigr)\\
+&=(W^b)_{\mathbb{R}}\,(CW^a)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to W^b,\ B \to CW^a)\bigr)\\
+&=(W^b)_{\mathbb{R}}\bigl(C_{\mathbb{R}}(W^a)_{\mathbb{R}}\bigr)
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to C,\ B \to W^a)\bigr)\\
+&=(W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to b)\ \text{と}\ (p \to a)\ \text{を二か所へ同時に適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。すなわち ",
+        math(String.raw`(W_{\mathbb{R}})^{a+b} = (W_{\mathbb{R}})^b\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)`),
+        "（一つ目）、",
+        math(String.raw`(W_{\mathbb{R}})^{a+b+1} = (W_{\mathbb{R}})^b\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)`),
+        "（二つ目）である。",
+      ]),
       paragraph([
         "【二つの冪で挟んだ値】",
         math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
         " と、",
-        math(String.raw`B = I`),
+        math(String.raw`C_{\mathbb{R}} = I_{\mathbb{R}}`),
         " または ",
-        math(String.raw`B = W`),
+        math(String.raw`C_{\mathbb{R}} = W_{\mathbb{R}}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-x^\top\bigl(W^b(BW^a)\bigr)x
-&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\bigl(W^b(BW^a)\bigr)_{ij}\,x_j
+x^\top\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)_{ij}\,x_j
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
-&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}(W^b)_{il}\,(BW^a)_{lj}\Bigr)x_j
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}(W^b)_{il}\sum_{m=1}^{d}B_{lm}\,(W^a)_{mj}\Bigr)x_j
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=\sum_{i=1}^{d}\sum_{j=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}x_i\,(W^b)_{il}\,B_{lm}\,(W^a)_{mj}\,x_j
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)_{lj}\Bigr)x_j
+&&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{il}\sum_{m=1}^{d}(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\Bigr)x_j
+&&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,(W^b)_{il}\,B_{lm}\,(W^a)_{mj}\,x_j
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,(W^b)_{il}\Bigr)B_{lm}\Bigl(\sum_{j=1}^{d}(W^a)_{mj}\,x_j\Bigr)
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,(W^b)_{li}\Bigr)B_{lm}\Bigl(\sum_{j=1}^{d}(W^a)_{mj}\,x_j\Bigr)
-&&\bigl(\because\ \text{【冪の実対称性】の}\ (W^b)_{il} = (W^b)_{li}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}(W^b)_{li}\,x_i\Bigr)B_{lm}\Bigl(\sum_{j=1}^{d}(W^a)_{mj}\,x_j\Bigr)
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{li}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
+&&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^b)_{il} = ((W_{\mathbb{R}})^b)_{li}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{li}\,x_i\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}u^{(b)}_l\,B_{lm}\,u^{(a)}_m
-&&\bigl(\because\ \text{【}W^ax\text{ の成分】を}\ a\ \text{と}\ b\ \text{へ同時に適用}\bigr)\\
-&=\bigl(u^{(b)}\bigr)^\top B\,u^{(a)}
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}u^{(b)}_l\,(C_{\mathbb{R}})_{lm}\,u^{(a)}_m
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】を}\ a\ \text{と}\ b\ \text{へ同時に適用}\bigr)\\
+&=\bigl(u^{(b)}\bigr)^\top C_{\mathbb{R}}\,u^{(a)}
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
       paragraph([
         "【",
-        math(String.raw`I`),
+        math(String.raw`I_{\mathbb{R}}`),
         " と ",
-        math(String.raw`W`),
+        math(String.raw`W_{\mathbb{R}}`),
         " の正値性】",
         math(String.raw`y \in \mathbb{R}^d`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-y^\top Iy
-&=\sum_{k=1}^{d}\sum_{l=1}^{d}y_k\,\delta_{kl}\,y_l
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ \text{と}\ \blkref{def_identity_matrix}\bigr)\\
-&=\sum_{k=1}^{d}y_k\,\delta_{kk}\,y_k
-&&\bigl(\because\ l \neq k\ \text{の項は}\ \delta_{kl} = 0\ \text{（}\blkref{def_kronecker_delta}\text{）なので}\ 0\bigr)\\
+y^\top I_{\mathbb{R}}y
+&=\sum_{k=1}^{d}\sum_{l=1}^{d}y_k\,(I_{\mathbb{R}})_{kl}\,y_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{k=1}^{d}y_k\,(I_{\mathbb{R}})_{kk}\,y_k
+&&\bigl(\because\ l \neq k\ \text{の項は}\ (I_{\mathbb{R}})_{kl} = 0\ \text{（}\blkref{def_real_identity_matrix}\text{）なので}\ 0\bigr)\\
 &=\sum_{k=1}^{d}y_k\,y_k
-&&\bigl(\because\ \delta_{kk} = 1\ \text{（}\blkref{def_kronecker_delta}\text{）}\bigr)
+&&\bigl(\because\ (I_{\mathbb{R}})_{kk} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、各項 ",
@@ -2302,7 +2417,7 @@ y^\top Iy
         " は ",
         math(String.raw`0`),
         " 以上なので ",
-        math(String.raw`y^\top Iy \geq 0`),
+        math(String.raw`y^\top I_{\mathbb{R}}y \geq 0`),
         "、",
         math(String.raw`y \neq 0`),
         " なら ",
@@ -2310,57 +2425,56 @@ y^\top Iy
         " となる ",
         math(String.raw`k_0`),
         " の項が正なので ",
-        math(String.raw`y^\top Iy > 0`),
+        math(String.raw`y^\top I_{\mathbb{R}}y > 0`),
         " である。また ",
-        math(String.raw`W`),
-        " は正定値なので（",
-        ref("W_is_real_symmetric_positive_definite"),
-        " の正定値性を、",
-        ref("def_rayleigh_sup"),
-        " が ",
-        math(String.raw`W`),
-        " を読むのと同じく実の ",
-        math(String.raw`y`),
-        " で読む）、",
+        ref("W_real_is_positive_definite"),
+        "（",
+        math(String.raw`x \to y`),
+        "）より ",
         math(String.raw`y \neq 0`),
         " なら ",
-        math(String.raw`y^\top Wy > 0`),
-        "、すべての ",
+        math(String.raw`y^\top W_{\mathbb{R}}y > 0`),
+        "、",
+        ref("W_real_is_positive_semidefinite"),
+        "（",
+        math(String.raw`u \to y`),
+        "）よりすべての ",
         math(String.raw`y`),
         " について ",
-        math(String.raw`y^\top Wy \geq 0`),
+        math(String.raw`y^\top W_{\mathbb{R}}y \geq 0`),
         " である。さらに、すべての ",
         math(String.raw`k, l \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-I_{kl}
-&=\delta_{kl}
-&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
-&=\delta_{lk}
-&&\bigl(\because\ \blkref{def_kronecker_delta}\ \text{の場合分けは}\ k = l\ \text{と}\ l = k\ \text{で同じ}\bigr)\\
-&=I_{lk}
-&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
-W_{kl}
-&=\bigl(W^\top\bigr)_{kl}
-&&\bigl(\because\ W\ \text{は実対称なので}\ W^\top = W\ \text{（}\blkref{W_is_real_symmetric_positive_definite}\text{、}\blkref{def_real_symmetric_complex_matrix}\text{）}\bigr)\\
-&=W_{lk}
-&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)
+(I_{\mathbb{R}})_{kl}
+&=\begin{cases} 1 & (k = l) \\ 0 & (k \neq l) \end{cases}
+&&\bigl(\because\ \blkref{def_real_identity_matrix}\bigr)\\
+&=\begin{cases} 1 & (l = k) \\ 0 & (l \neq k) \end{cases}
+&&\bigl(\because\ \text{場合分けの条件は}\ k = l\ \text{と}\ l = k\ \text{で同じ}\bigr)\\
+&=(I_{\mathbb{R}})_{lk}
+&&\bigl(\because\ \blkref{def_real_identity_matrix}\bigr)
 \end{aligned}`),
       paragraph([
-        "なので、",
-        math(String.raw`I`),
-        " と ",
-        math(String.raw`W`),
+        "なので ",
+        math(String.raw`I_{\mathbb{R}}`),
         " は ",
         ref("def_real_symmetric_matrix"),
-        " の意味で対称であり、上の評価から半正定値である。すなわち ",
+        " の意味で対称であり、",
+        math(String.raw`W_{\mathbb{R}}`),
+        " も ",
+        ref("W_real_is_symmetric"),
+        " より対称である。上の評価と合わせて、",
+        math(String.raw`I_{\mathbb{R}}`),
+        " と ",
+        math(String.raw`W_{\mathbb{R}}`),
+        " はともに ",
         ref("psd_cauchy_schwarz"),
-        " の前提を満たす。",
+        " の前提（対称かつ半正定値）を満たす。",
       ]),
       paragraph([
         "【",
-        math(String.raw`W^ax`),
+        math(String.raw`(W_{\mathbb{R}})^ax`),
         " は零でない】",
         math(String.raw`\|x\| = 1`),
         " なので ",
@@ -2383,60 +2497,86 @@ W_{kl}
         math(String.raw`u^{(a)} \neq 0`),
         " を示す。",
         math(String.raw`a = 0`),
-        " では",
+        " では、",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-u^{(0)}
-&=W^0x
-&&\bigl(\because\ u^{(0)} := W^0x\bigr)\\
-&=Ix
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
-&=x
-&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
+u^{(0)}_l
+&=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^0\bigr)_{lm}\,x_m
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\ (a \to 0)\bigr)\\
+&=\sum_{m=1}^{d}(I_{\mathbb{R}})_{lm}\,x_m
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R})\bigr)\\
+&=(I_{\mathbb{R}})_{ll}\,x_l
+&&\bigl(\because\ m \neq l\ \text{の項は}\ (I_{\mathbb{R}})_{lm} = 0\ \text{（}\blkref{def_real_identity_matrix}\text{）なので}\ 0\bigr)\\
+&=x_l
+&&\bigl(\because\ (I_{\mathbb{R}})_{ll} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "なので ",
-        math(String.raw`u^{(0)} \neq 0`),
+        math(String.raw`u^{(0)} = x \neq 0`),
         " である。",
         math(String.raw`u^{(a)} \neq 0`),
-        " とすると、",
+        " とする。まず",
       ]),
       displayMath(String.raw`\begin{aligned}
-u^{(a+1)}
-&=W^{a+1}x
-&&\bigl(\because\ u^{(a+1)} := W^{a+1}x\bigr)\\
-&=W^{1+a}x
-&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換則}\bigr)\\
-&=\bigl(W^1W^a\bigr)x
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to a)\bigr)\\
-&=\bigl(W^{0+1}W^a\bigr)x
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
-&=\bigl((W^0W)W^a\bigr)x
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
-&=\bigl((IW)W^a\bigr)x
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
-&=\bigl(WW^a\bigr)x
+(W_{\mathbb{R}})^{a+1}
+&=(W^{a+1})_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to a+1)\bigr)\\
+&=(W^{a+0+1})_{\mathbb{R}}
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+1 = a+0+1\bigr)\\
+&=\bigl(W^0(WW^a)\bigr)_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の分け方】の}\ \mathrm{Mat}(d,\mathbb{C})\ \text{の二つ目の鎖}\ (b \to 0)\bigr)\\
+&=\bigl(I(WW^a)\bigr)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)\\
+&=(WW^a)_{\mathbb{R}}
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
-&=W\bigl(W^ax\bigr)
-&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
-&=Wu^{(a)}
-&&\bigl(\because\ u^{(a)} := W^ax\bigr)
+&=W_{\mathbb{R}}\,(W^a)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to W,\ B \to W^a)\bigr)\\
+&=W_{\mathbb{R}}\,(W_{\mathbb{R}})^a
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to a)\bigr)
 \end{aligned}`),
       paragraph([
-        "である。仮に ",
-        math(String.raw`Wu^{(a)} = 0`),
+        "であり、",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u^{(a+1)}_l
+&=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^{a+1}\bigr)_{lm}\,x_m
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\ (a \to a+1)\bigr)\\
+&=\sum_{m=1}^{d}\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)_{lm}\,x_m
+&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&=\sum_{m=1}^{d}\Bigl(\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\Bigr)x_m
+&&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
+&=\sum_{m=1}^{d}\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&=\sum_{n=1}^{d}\sum_{m=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
+&&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
+&=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,u^{(a)}_n
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\bigr)\\
+&=\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_l
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to W_{\mathbb{R}},\ x \to u^{(a)})\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`u^{(a+1)} = W_{\mathbb{R}}u^{(a)}`),
+        " である。仮に ",
+        math(String.raw`W_{\mathbb{R}}u^{(a)} = 0`),
         " なら",
       ]),
       displayMath(String.raw`\begin{aligned}
-\bigl(u^{(a)}\bigr)^\top Wu^{(a)}
-&=\sum_{k=1}^{d}\sum_{l=1}^{d}u^{(a)}_k\,W_{kl}\,u^{(a)}_l
+\bigl(u^{(a)}\bigr)^\top W_{\mathbb{R}}u^{(a)}
+&=\sum_{k=1}^{d}\sum_{l=1}^{d}u^{(a)}_k\,(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
-&=\sum_{k=1}^{d}u^{(a)}_k\sum_{l=1}^{d}W_{kl}\,u^{(a)}_l
+&=\sum_{k=1}^{d}u^{(a)}_k\sum_{l=1}^{d}(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
-&=\sum_{k=1}^{d}u^{(a)}_k\,\bigl(Wu^{(a)}\bigr)_k
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=\sum_{k=1}^{d}u^{(a)}_k\,\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_k
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\cdot 0
-&&\bigl(\because\ Wu^{(a)} = 0\ \text{という仮定}\bigr)\\
+&&\bigl(\because\ W_{\mathbb{R}}u^{(a)} = 0\ \text{という仮定}\bigr)\\
 &=0
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ r \cdot 0 = 0\ \text{と}\ 0\ \text{の有限和}\bigr)
 \end{aligned}`),
@@ -2444,13 +2584,13 @@ u^{(a+1)}
         "となり、帰納法の仮定 ",
         math(String.raw`u^{(a)} \neq 0`),
         " と【",
-        math(String.raw`I`),
+        math(String.raw`I_{\mathbb{R}}`),
         " と ",
-        math(String.raw`W`),
+        math(String.raw`W_{\mathbb{R}}`),
         " の正値性】の ",
-        math(String.raw`\bigl(u^{(a)}\bigr)^\top Wu^{(a)} > 0`),
+        math(String.raw`\bigl(u^{(a)}\bigr)^\top W_{\mathbb{R}}u^{(a)} > 0`),
         " に反する。よって ",
-        math(String.raw`u^{(a+1)} = Wu^{(a)} \neq 0`),
+        math(String.raw`u^{(a+1)} = W_{\mathbb{R}}u^{(a)} \neq 0`),
         " である。",
       ]),
       paragraph([
@@ -2468,16 +2608,16 @@ u^{(a+1)}
       ]),
       displayMath(String.raw`\begin{aligned}
 m_{2a}
-&=x^\top W^{2a}x
-&&\bigl(\because\ m_k := x^\top W^kx\bigr)\\
-&=x^\top W^{a+a}x
+&=x^\top (W_{\mathbb{R}})^{2a}x
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
+&=x^\top (W_{\mathbb{R}})^{a+a}x
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
-&=x^\top\bigl(W^a(IW^a)\bigr)x
+&=x^\top\Bigl((W_{\mathbb{R}})^a\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x
 &&\bigl(\because\ \text{【冪の分け方】の一つ目}\ (b \to a)\bigr)\\
-&=\bigl(u^{(a)}\bigr)^\top I\,u^{(a)}
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (b \to a,\ B = I)\bigr)\\
+&=\bigl(u^{(a)}\bigr)^\top I_{\mathbb{R}}\,u^{(a)}
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (b \to a,\ C_{\mathbb{R}} = I_{\mathbb{R}})\bigr)\\
 &>0
-&&\bigl(\because\ \text{【}W^ax\text{ は零でない】と【}I\text{ と }W\text{ の正値性】}\bigr)
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ は零でない】と【}I_{\mathbb{R}}\text{ と }W_{\mathbb{R}}\text{ の正値性】}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -2486,79 +2626,79 @@ m_{2a}
       ]),
       displayMath(String.raw`\begin{aligned}
 m_{2a+1}
-&=x^\top W^{2a+1}x
-&&\bigl(\because\ m_k := x^\top W^kx\bigr)\\
-&=x^\top W^{a+a+1}x
+&=x^\top (W_{\mathbb{R}})^{2a+1}x
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
+&=x^\top (W_{\mathbb{R}})^{a+a+1}x
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a+1 = a+a+1\bigr)\\
-&=x^\top\bigl(W^a(WW^a)\bigr)x
+&=x^\top\Bigl((W_{\mathbb{R}})^a\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x
 &&\bigl(\because\ \text{【冪の分け方】の二つ目}\ (b \to a)\bigr)\\
-&=\bigl(u^{(a)}\bigr)^\top W\,u^{(a)}
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (b \to a,\ B = W)\bigr)\\
+&=\bigl(u^{(a)}\bigr)^\top W_{\mathbb{R}}\,u^{(a)}
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (b \to a,\ C_{\mathbb{R}} = W_{\mathbb{R}})\bigr)\\
 &>0
-&&\bigl(\because\ \text{【}W^ax\text{ は零でない】と【}I\text{ と }W\text{ の正値性】}\bigr)
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ は零でない】と【}I_{\mathbb{R}}\text{ と }W_{\mathbb{R}}\text{ の正値性】}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
       ]),
       paragraph([
         "【",
-        math(String.raw`P = W`),
+        math(String.raw`P = W_{\mathbb{R}}`),
         " の不等式】",
         math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left(m_{a+b+1}\right)^2
-&=\left(x^\top W^{a+b+1}x\right)^2
-&&\bigl(\because\ m_k := x^\top W^kx\bigr)\\
-&=\left(x^\top\bigl(W^b(WW^a)\bigr)x\right)^2
+&=\left(x^\top (W_{\mathbb{R}})^{a+b+1}x\right)^2
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
+&=\left(x^\top\Bigl((W_{\mathbb{R}})^b\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x\right)^2
 &&\bigl(\because\ \text{【冪の分け方】の二つ目}\bigr)\\
-&=\left(\bigl(u^{(b)}\bigr)^\top W\,u^{(a)}\right)^2
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (B = W)\bigr)\\
-&\leq\left(\bigl(u^{(a)}\bigr)^\top W\,u^{(a)}\right)\left(\bigl(u^{(b)}\bigr)^\top W\,u^{(b)}\right)
-&&\bigl(\because\ \blkref{psd_cauchy_schwarz}\ (n \to d,\ P \to W,\ x \to u^{(a)},\ y \to u^{(b)})\bigr)\\
-&=\left(x^\top\bigl(W^a(WW^a)\bigr)x\right)\left(x^\top\bigl(W^b(WW^b)\bigr)x\right)
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】を}\ (a,b) \to (a,a),\ (b,b),\ B = W\ \text{で両因子へ同時に適用}\bigr)\\
-&=\left(x^\top W^{a+a+1}x\right)\left(x^\top W^{b+b+1}x\right)
+&=\left(\bigl(u^{(b)}\bigr)^\top W_{\mathbb{R}}\,u^{(a)}\right)^2
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (C_{\mathbb{R}} = W_{\mathbb{R}})\bigr)\\
+&\leq\left(\bigl(u^{(a)}\bigr)^\top W_{\mathbb{R}}\,u^{(a)}\right)\left(\bigl(u^{(b)}\bigr)^\top W_{\mathbb{R}}\,u^{(b)}\right)
+&&\bigl(\because\ \blkref{psd_cauchy_schwarz}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to u^{(a)},\ y \to u^{(b)})\bigr)\\
+&=\left(x^\top\Bigl((W_{\mathbb{R}})^a\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x\right)\left(x^\top\Bigl((W_{\mathbb{R}})^b\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^b\bigr)\Bigr)x\right)
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】を}\ (a,b) \to (a,a),\ (b,b),\ C_{\mathbb{R}} = W_{\mathbb{R}}\ \text{で両因子へ同時に適用}\bigr)\\
+&=\left(x^\top (W_{\mathbb{R}})^{a+a+1}x\right)\left(x^\top (W_{\mathbb{R}})^{b+b+1}x\right)
 &&\bigl(\because\ \text{【冪の分け方】の二つ目を両因子へ同時に適用}\bigr)\\
-&=\left(x^\top W^{2a+1}x\right)\left(x^\top W^{2b+1}x\right)
+&=\left(x^\top (W_{\mathbb{R}})^{2a+1}x\right)\left(x^\top (W_{\mathbb{R}})^{2b+1}x\right)
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+a+1 = 2a+1,\ b+b+1 = 2b+1\bigr)\\
 &=m_{2a+1}\,m_{2b+1}
-&&\bigl(\because\ m_k := x^\top W^kx\ \text{を両因子へ同時に適用}\bigr)
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\ \text{を両因子へ同時に適用}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
       paragraph([
         "【",
-        math(String.raw`P = I`),
+        math(String.raw`P = I_{\mathbb{R}}`),
         " の不等式】",
         math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left(m_{a+b}\right)^2
-&=\left(x^\top W^{a+b}x\right)^2
-&&\bigl(\because\ m_k := x^\top W^kx\bigr)\\
-&=\left(x^\top\bigl(W^b(IW^a)\bigr)x\right)^2
+&=\left(x^\top (W_{\mathbb{R}})^{a+b}x\right)^2
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
+&=\left(x^\top\Bigl((W_{\mathbb{R}})^b\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x\right)^2
 &&\bigl(\because\ \text{【冪の分け方】の一つ目}\bigr)\\
-&=\left(\bigl(u^{(b)}\bigr)^\top I\,u^{(a)}\right)^2
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (B = I)\bigr)\\
-&\leq\left(\bigl(u^{(a)}\bigr)^\top I\,u^{(a)}\right)\left(\bigl(u^{(b)}\bigr)^\top I\,u^{(b)}\right)
-&&\bigl(\because\ \blkref{psd_cauchy_schwarz}\ (n \to d,\ P \to I,\ x \to u^{(a)},\ y \to u^{(b)})\bigr)\\
-&=\left(x^\top\bigl(W^a(IW^a)\bigr)x\right)\left(x^\top\bigl(W^b(IW^b)\bigr)x\right)
-&&\bigl(\because\ \text{【二つの冪で挟んだ値】を}\ (a,b) \to (a,a),\ (b,b),\ B = I\ \text{で両因子へ同時に適用}\bigr)\\
-&=\left(x^\top W^{a+a}x\right)\left(x^\top W^{b+b}x\right)
+&=\left(\bigl(u^{(b)}\bigr)^\top I_{\mathbb{R}}\,u^{(a)}\right)^2
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】}\ (C_{\mathbb{R}} = I_{\mathbb{R}})\bigr)\\
+&\leq\left(\bigl(u^{(a)}\bigr)^\top I_{\mathbb{R}}\,u^{(a)}\right)\left(\bigl(u^{(b)}\bigr)^\top I_{\mathbb{R}}\,u^{(b)}\right)
+&&\bigl(\because\ \blkref{psd_cauchy_schwarz}\ (n \to d,\ P \to I_{\mathbb{R}},\ x \to u^{(a)},\ y \to u^{(b)})\bigr)\\
+&=\left(x^\top\Bigl((W_{\mathbb{R}})^a\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x\right)\left(x^\top\Bigl((W_{\mathbb{R}})^b\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^b\bigr)\Bigr)x\right)
+&&\bigl(\because\ \text{【二つの冪で挟んだ値】を}\ (a,b) \to (a,a),\ (b,b),\ C_{\mathbb{R}} = I_{\mathbb{R}}\ \text{で両因子へ同時に適用}\bigr)\\
+&=\left(x^\top (W_{\mathbb{R}})^{a+a}x\right)\left(x^\top (W_{\mathbb{R}})^{b+b}x\right)
 &&\bigl(\because\ \text{【冪の分け方】の一つ目を両因子へ同時に適用}\bigr)\\
-&=\left(x^\top W^{2a}x\right)\left(x^\top W^{2b}x\right)
+&=\left(x^\top (W_{\mathbb{R}})^{2a}x\right)\left(x^\top (W_{\mathbb{R}})^{2b}x\right)
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+a = 2a,\ b+b = 2b\bigr)\\
 &=m_{2a}\,m_{2b}
-&&\bigl(\because\ m_k := x^\top W^kx\ \text{を両因子へ同時に適用}\bigr)
+&&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\ \text{を両因子へ同時に適用}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
       paragraph([
         "【",
-        math(String.raw`P = I`),
+        math(String.raw`P = I_{\mathbb{R}}`),
         " の不等式】と【",
-        math(String.raw`P = W`),
+        math(String.raw`P = W_{\mathbb{R}}`),
         " の不等式】から、任意の ",
         math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
         " について",
@@ -2586,7 +2726,7 @@ m_k^{\,2}
 &=\left(m_{a+b}\right)^2
 &&(\because\ k=2p+1=a+b)\\
 &\leq m_{2a}\,m_{2b}
-&&(\because\ \text{【}P = I\text{ の不等式】})\\
+&&(\because\ \text{【}P = I_{\mathbb{R}}\text{ の不等式】})\\
 &=m_{2p}\,m_{2p+2}
 &&(\because\ a=p,\ b=p+1)\\
 &=m_{k-1}\,m_{k+1}
@@ -2605,7 +2745,7 @@ m_k^{\,2}
 &=\left(m_{a+b+1}\right)^2
 &&(\because\ k=2p+2=a+b+1)\\
 &\leq m_{2a+1}\,m_{2b+1}
-&&(\because\ \text{【}P = W\text{ の不等式】})\\
+&&(\because\ \text{【}P = W_{\mathbb{R}}\text{ の不等式】})\\
 &=m_{2p+1}\,m_{2p+3}
 &&(\because\ a=p,\ b=p+1)\\
 &=m_{k-1}\,m_{k+1}
@@ -2672,6 +2812,7 @@ a+b+1 &= p+(p+1)+1
       notes: [
         "2026-09-05 の分割で、トレースの挟み込みから独立した主張として切り出した。式変形と根拠は分割前と同じである。",
         "2026-11-05: SageMath の検算（sagemath/check/moment_log_convexity/）を付けるにあたり、根拠の欠けを直した（主張の不等式は不変。主張文に m_k の読み方を足した）。(1) 旧い鎖は (W^bx)^⊤W(W^ax) と x^⊤W^{a+b+1}x の等号を「冪の指数法則と (W^b)^⊤ = W^b」としていたが、行列の積の転置の主張は本文に無い。【二つの冪で挟んだ値】x^⊤(W^b(BW^a))x = (W^bx)^⊤B(W^ax)（B = I, W）を def_real_bilinear_value・mat_mult・W^b の成分の対称性で示し、二つの不等式の鎖をこれで書いた。P = I の鎖はユークリッドノルムを経ずに (u^{(a)})^⊤Iu^{(a)} で閉じた。(2)「冪の指数法則」を matrix_power_exponent_law の行に、「W は実対称」を power_of_real_symmetric_complex_matrix_is_real_symmetric の【冪の実対称性】にした。(3) 正値性の「W が可逆なので W^ax ≠ 0」は、可逆から核の自明性を導く主張が本文に無い。W の正定値性から Wu ≠ 0（u ≠ 0）を示し、a の帰納法で W^ax ≠ 0 とした。m_{2a}・m_{2a+1} > 0 を【二つの冪で挟んだ値】の鎖にした。I と W が psd_cauchy_schwarz の前提（def_real_symmetric_matrix の対称と半正定値）を満たすことを鎖で示した。積の行列 W^b(BW^a) の成分が実数であることを product_of_real_entry_matrices_has_real_entries で示して def_real_bilinear_value で読んだ。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張と証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ で m_k := x^⊤(W_ℝ)^kx と述べ直し、証明の冪をすべて (W_ℝ)^p、単位行列を I_ℝ（def_real_identity_matrix）にした。trace_power_upper_bound と同じく【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power。I_ℝ = ϱ(I) もここから出した）と【冪の対称性】（W^p の実対称性から ϱ を通す 6 行の鎖と単射性）を置き、【冪の分け方】は Mat(d,ℂ) の二つの鎖を ϱ で運ぶ 5 行の鎖（real_matrix_of_real_entry_matrix_preserves_product）にした。成分の積は def_real_matrix_product、(W_ℝ)^ax は def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で読んでいた）。u^(a+1) = W_ℝu^(a) は、(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a を ϱ で運ぶ 7 行の鎖と成分の 8 行の鎖にした（実数の行列とベクトルの積の結合則の主張が本文に無いため、mat_mult_associative の行を成分の計算に替えた）。W_ℝ の対称性・正定値性・半正定値性は W_real_is_symmetric・W_real_is_positive_definite・W_real_is_positive_semidefinite を引いた。主張の不等式は不変である。下流の trace_power_sandwich はまだこの主張を旧い形（m_k := x^⊤W^kx、w^⊤W^nw > 0）で引いており、主張と食い違っている（状態台帳の (r3b2e2) で W_ℝ の形に書き直す）。",
       ],
     },
   },
