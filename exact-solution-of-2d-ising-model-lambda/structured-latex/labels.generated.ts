@@ -24,6 +24,7 @@ export const ALL_LABELS = [
   "claim_boundary_vertex_diagonal_contact_excluded",
   "claim_broken_bond_row_decomposition",
   "claim_cell_boundary_coefficient_vertex_balance",
+  "claim_cell_boundary_two_edge_propagation",
   "claim_cell_boundary_vertex_balance",
   "claim_cell_boundary_winding_zero",
   "claim_cell_set_boundary_coefficients",

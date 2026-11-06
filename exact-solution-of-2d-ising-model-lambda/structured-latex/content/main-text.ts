@@ -64167,10 +64167,76 @@ w_{\mathrm v}(\gamma)
 &=\sum_{(i,j)\in S}\sum_{t=1}^{4}(1-2d(B_L(i,j)_t))D_v(\operatorname{base}(B_L(i,j)_t))
 &&\bigl(\because\ \blkref{def_oriented_edges}\text{ と直前の二場合}\bigr)\\
 &=\sum_{e\in E_L}[\partial_\square S]_eD_v(e)
-&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr).
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)
 \end{aligned}`),
                       paragraph(["左辺は ", ref("claim_cell_boundary_vertex_balance"),
                         " により零である。有限和は ", math(String.raw`\mathbb Z`), " の中で閉じる。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_cell_boundary_two_edge_propagation",
+                  focus: {
+                    id: "kac_ward_claim_cell_boundary_two_edge_propagation",
+                    kind: "claim",
+                    title: { text: "境界鎖の頂点別釣り合いから二辺の向き付き係数が等しい" },
+                    labels: ["claim_cell_boundary_two_edge_propagation"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cell-boundary-two-edge-propagation"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellSetBoundary_two_edge_propagation",
+                      "Ising2DLambda.NecSuf.KacWard.two_edge_coefficient_propagation",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), "、頂点 ",
+                        math(String.raw`v\in V_L`), "、向き付き辺 ",
+                        math(String.raw`\vec a,\vec b\in\vec E_L`), " を取る。",
+                        math(String.raw`\operatorname{base}(\vec a)\ne\operatorname{base}(\vec b)`),
+                        "、", math(String.raw`\operatorname{tgt}(\vec a)=v\ne\operatorname{src}(\vec a)`),
+                        "、", math(String.raw`\operatorname{src}(\vec b)=v\ne\operatorname{tgt}(\vec b)`),
+                        " と仮定する。さらに ",
+                        math(String.raw`e\in E_L\setminus\{\operatorname{base}(\vec a),\operatorname{base}(\vec b)\}`),
+                        " のすべてで ", math(String.raw`[\partial_\square S]_eD_v(e)=0`),
+                        " と仮定する。係数は ", ref("def_signed_edge_coefficient"),
+                        "、頂点寄与 ", math(String.raw`D_v(e)\in\mathbb Z`), " は ",
+                        ref("claim_cell_boundary_coefficient_vertex_balance"), " による。このとき"]),
+                      displayMath(String.raw`[\partial_\square S]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+=[\partial_\square S]_{\operatorname{base}(\vec b)}(1-2d(\vec b))\quad\text{in }\mathbb Z`),
+                      paragraph(["が成り立つ。仮定は、通過頂点で寄与する二辺が判明したときの局所条件である。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_cell_boundary_coefficient_vertex_balance"),
+                        " の有限和を二つの基底辺と残りに分ける。残りの各項は仮定で零なので"]),
+                      displayMath(String.raw`\begin{aligned}
+0
+&=\sum_{e\in E_L}[\partial_\square S]_eD_v(e)
+&&\bigl(\because\ \blkref{claim_cell_boundary_coefficient_vertex_balance}\bigr)\\
+&=[\partial_\square S]_{\operatorname{base}(\vec a)}D_v(\operatorname{base}(\vec a))
+ +[\partial_\square S]_{\operatorname{base}(\vec b)}D_v(\operatorname{base}(\vec b))
+&&\bigl(\because\ \text{有限和の分割と残りの項が零である仮定}\bigr)
+\end{aligned}`),
+                      paragraph([ref("def_oriented_edges"), " の反転による端点交換と、",
+                        "二辺の端点の仮定から、各方向 ", math(String.raw`d\in\{0,1\}`), " について"]),
+                      displayMath(String.raw`\begin{aligned}
+D_v(\operatorname{base}(\vec a))&=-(1-2d(\vec a))
+&&\bigl(\because\ \blkref{def_oriented_edges}\text{ と入辺の端点条件}\bigr)\\
+D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
+&&\bigl(\because\ \blkref{def_oriented_edges}\text{ と出辺の端点条件}\bigr)
+\end{aligned}`),
+                      paragraph(["この二式を先の零和へ代入して、", math(String.raw`\mathbb Z`), " の加法で移項する。"]),
+                      displayMath(String.raw`\begin{aligned}
+0
+&=-[\partial_\square S]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+ +[\partial_\square S]_{\operatorname{base}(\vec b)}(1-2d(\vec b))
+&&\bigl(\because\ \text{直前の端点二式を代入}\bigr)\\
+[\partial_\square S]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+&=[\partial_\square S]_{\operatorname{base}(\vec b)}(1-2d(\vec b))
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
                     ],
                   },
                 },
