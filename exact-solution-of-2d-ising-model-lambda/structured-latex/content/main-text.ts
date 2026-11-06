@@ -68769,6 +68769,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_disjoint",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_staircases",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosureFromWalk_injective",
+                      "Ising2DLambda.KacWard.oneSidedClosurePointFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
@@ -68829,7 +68830,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       ]),
                       displayMath(String.raw`\begin{aligned}
 Q_1&=S+cB_{\gamma}
-&&(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第二部分の始点})
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第二部分の始点}\bigr)
 \end{aligned}`),
                       paragraph([
                         "下り階段と同じ頂点集合を持つ順向きの階段の基点は ", math(String.raw`S`),
