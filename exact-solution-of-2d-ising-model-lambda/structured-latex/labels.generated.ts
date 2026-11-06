@@ -552,6 +552,7 @@ export const ALL_LABELS = [
   "claim_row_config_shift_period_divides",
   "claim_row_shift_iterate_distinct_below_period",
   "claim_rows_bijection",
+  "claim_same_base_successor_is_loop",
   "claim_same_broken_edges_equal_or_global_reversal",
   "claim_same_direction_dual_inner_orthogonality",
   "claim_scaled_embedding_order_transfer",

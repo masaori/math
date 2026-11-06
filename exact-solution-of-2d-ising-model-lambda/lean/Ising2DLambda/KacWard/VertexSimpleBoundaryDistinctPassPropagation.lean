@@ -5,6 +5,19 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.PartitionPolynomial
 
+/-- Consecutive nonbacktracking edges on the same base edge can only be a loop. -/
+theorem same_base_successor_is_loop {L : ℕ} (e f : OrientedEdge L)
+    (hf : f ∈ nonbacktrackingSuccessors e) (hbase : e.1 = f.1) :
+    orientedSource e = orientedTarget e := by
+  have hnext : orientedTarget e = orientedSource f :=
+    (Finset.mem_filter.mp hf).2.1
+  have hne : f ≠ reversal e := (Finset.mem_filter.mp hf).2.2
+  have heq : f = e := by
+    rcases e with ⟨b, false | true⟩ <;>
+      rcases f with ⟨c, false | true⟩ <;>
+      simp_all [reversal]
+  simpa [heq] using hnext.symm
+
 /-- The vanishing contribution outside the two passage edges supplies the support
 hypothesis of the two-edge balance argument at an actual simple walk. -/
 theorem vertexSimple_boundary_distinct_pass_propagation (L m : ℕ) [NeZero L]

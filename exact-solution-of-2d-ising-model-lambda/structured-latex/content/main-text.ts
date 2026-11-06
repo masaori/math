@@ -64344,6 +64344,51 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                 role: "supporting",
                 element: {
                   kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_same_base_successor_is_loop",
+                  focus: {
+                    id: "kac_ward_claim_same_base_successor_is_loop",
+                    kind: "claim",
+                    title: { text: "同じ基底辺を連続して通る非後退接続はループである" },
+                    labels: ["claim_same_base_successor_is_loop"],
+                    habitat: "N",
+                    verification: ["sagemath/check/same-base-successor-is-loop"],
+                    lean: [
+                      "Ising2DLambda.KacWard.same_base_successor_is_loop",
+                      "Ising2DLambda.NecSuf.KacWard.same_base_successor_is_loop",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と向き付き辺 ",
+                        math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " かつ ",
+                        math(String.raw`\operatorname{base}(\vec e)=\operatorname{base}(\vec f)`),
+                        " ならば、"]),
+                      displayMath(String.raw`\operatorname{src}(\vec e)=\operatorname{tgt}(\vec e)`),
+                      paragraph(["である。始点・終点と反転は ", ref("def_oriented_edge_endpoints"),
+                        "、", ref("def_edge_reversal"), " による。"]),
+                    ],
+                    proof: [
+                      paragraph(["同じ基底辺の向き付き辺は二方向だけである（",
+                        ref("def_oriented_edges"), "）。従って ",
+                        math(String.raw`\vec f=\vec e`), " または ",
+                        math(String.raw`\vec f=\iota(\vec e)`), " である。"]),
+                      paragraph(["後者は ", ref("def_nonbacktracking_successors"),
+                        " に反するので ", math(String.raw`\vec f=\vec e`), " である。",
+                        "同じ定義の接続条件から"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(\vec e)
+&=\operatorname{src}(\vec f)
+&&\bigl(\because\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{src}(\vec e)
+&&\bigl(\because\ \vec f=\vec e\bigr)
+\end{aligned}`),
+                      paragraph(["を得る。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
                   id: "group_of_kac_ward_claim_vertex_simple_boundary_distinct_pass_propagation",
                   focus: {
                     id: "kac_ward_claim_vertex_simple_boundary_distinct_pass_propagation",

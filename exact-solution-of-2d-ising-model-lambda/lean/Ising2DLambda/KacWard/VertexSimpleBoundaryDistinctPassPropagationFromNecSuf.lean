@@ -5,6 +5,19 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.PartitionPolynomial
 
+/-- The abstract same-base argument specializes to lattice oriented edges. -/
+theorem same_base_successor_is_loop_from_necSuf {L : ℕ}
+    (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e)
+    (hbase : e.1 = f.1) : orientedSource e = orientedTarget e := by
+  have hclass : e.1 = f.1 → f = e ∨ f = reversal e := by
+    intro hb
+    rcases e with ⟨b, false | true⟩ <;>
+      rcases f with ⟨c, false | true⟩ <;>
+      simp_all [reversal]
+  exact Ising2DLambda.NecSuf.KacWard.same_base_successor_is_loop
+    e f Prod.fst orientedSource orientedTarget reversal hclass hbase
+    (Finset.mem_filter.mp hf).2.2 (Finset.mem_filter.mp hf).2.1
+
 /-- The abstract two-edge argument applies to the height-one cell boundary. -/
 theorem vertexSimple_boundary_distinct_pass_propagation_from_necSuf
     (L m : ℕ) [NeZero L] (γ : Fin (m + 1) → OrientedEdge L)
