@@ -670,6 +670,7 @@ export const ALL_LABELS = [
   "claim_vertex_local_pairing_product",
   "claim_vertex_port_bijection",
   "claim_vertex_simple_boundary_distinct_pass_propagation",
+  "claim_vertex_simple_boundary_nonloop_propagation",
   "claim_vertex_simple_boundary_other_edges_zero",
   "claim_vertex_simple_cycle_turning_by_seam_parity",
   "claim_vertex_simple_incident_edges",

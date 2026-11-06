@@ -64464,11 +64464,57 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                         " により ", math(String.raw`\operatorname{src}(\vec b)=v_k`), " である。"]),
                       paragraph(["基底辺の相異と二つの非ループ条件を合わせ、",
                         ref("claim_cell_boundary_two_edge_propagation"), " を適用すると、"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+=[\partial_\square S_\gamma]_{\operatorname{base}(\vec b)}(1-2d(\vec b))
+\quad\bigl(\because\ \blkref{claim_cell_boundary_two_edge_propagation}\bigr)`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_simple_boundary_nonloop_propagation",
+                  focus: {
+                    id: "kac_ward_claim_vertex_simple_boundary_nonloop_propagation",
+                    kind: "claim",
+                    title: { text: "非ループの頂点単純閉路では境界係数の向き付き符号が一定である" },
+                    labels: ["claim_vertex_simple_boundary_nonloop_propagation"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/vertex-simple-boundary-nonloop-propagation"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_nonloop_propagation",
+                      "Ising2DLambda.NecSuf.KacWard.cyclic_coefficient_propagation",
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_nonloop_propagation_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。接触対数と横・縦切断線偶奇が零とする。",
+                        "高さ一のセル集合 ", math(String.raw`S_\gamma`), " は ",
+                        ref("claim_height_one_boundary_support"), " による。任意の ",
+                        math(String.raw`k\in I_m`), " に対し、" ]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_k)}(1-2d(\vec e_k))
+=[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_1)}(1-2d(\vec e_1))\quad\text{in }\mathbb Z`),
+                      paragraph(["が成り立つ。"]),
+                    ],
+                    proof: [
+                      paragraph(["向き付き境界係数を ",
+                        math(String.raw`c_k:=[\partial_\square S_\gamma]_{\operatorname{base}(\vec e_k)}(1-2d(\vec e_k))\in\mathbb Z`),
+                        " と置く。辺長 ", math(String.raw`L\ge2`), " では全ての辺が非ループである（",
+                        ref("claim_nonloop_successor_distinct_base"), "）。同じ主張で、巡回する前後二辺の基底辺は異なる。",
+                        ref("claim_vertex_simple_boundary_distinct_pass_propagation"), " を各 ",
+                        math(String.raw`j\in I_m`), " に適用すると"]),
+                      displayMath(String.raw`c_j=c_{j+1}\quad\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass_propagation}\bigr)`),
+                      paragraph(["自然数 ", math(String.raw`k\in I_m`), " に関する帰納法を使う。",
+                        math(String.raw`k=1`), " では ", math(String.raw`c_1=c_1`), " は反射律である。",
+                        "ある ", math(String.raw`k<m`), " で ", math(String.raw`c_k=c_1`),
+                        " とすると、"]),
                       displayMath(String.raw`\begin{aligned}
-[\partial_\square S_\gamma]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
-&=[\partial_\square S_\gamma]_{\operatorname{base}(\vec b)}(1-2d(\vec b))
-&&\bigl(\because\ \blkref{claim_cell_boundary_two_edge_propagation}\bigr)
+c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass_propagation}\bigr)\\
+&=c_1&&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
+                      paragraph(["よって全ての ", math(String.raw`k\in I_m`), " で成り立つ。"]),
                     ],
                   },
                 },
