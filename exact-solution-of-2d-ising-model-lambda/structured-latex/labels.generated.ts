@@ -160,6 +160,7 @@ export const ALL_LABELS = [
   "claim_gauged_terminal_matrix_skew",
   "claim_global_spin_reversal_preserves_broken_edge",
   "claim_gluing_restriction_family",
+  "claim_height_one_boundary_all_edges_parity",
   "claim_height_one_boundary_horizontal_internal_parity",
   "claim_height_one_boundary_horizontal_seam_parity",
   "claim_height_one_boundary_support",

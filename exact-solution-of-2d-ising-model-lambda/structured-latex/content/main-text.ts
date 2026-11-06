@@ -63936,6 +63936,45 @@ N_\gamma(n_{\mathrm v}(0,0))
                     ],
                   },
                 },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_height_one_boundary_all_edges_parity",
+                  focus: {
+                    id: "kac_ward_claim_height_one_boundary_all_edges_parity",
+                    kind: "claim",
+                    title: { text: "高さ一の境界係数の支持は全ての辺で通過偶奇に等しい" },
+                    labels: ["claim_height_one_boundary_all_edges_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/height-one-boundary-all-edges-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.heightOneBoundary_all_edges",
+                      "Ising2DLambda.NecSuf.KacWard.four_edge_classes_cover",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る（", ref("def_closed_nonbacktracking_walk"), "）。",
+                        "横・縦切断線偶奇（", ref("def_edge_sequence_seam_parities"), "）がともに零なら、任意の ",
+                        math(String.raw`e\in E_L`), " について"]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_e\ne0\iff N_\gamma(e)=1`),
+                      paragraph(["が成り立つ。境界係数は ", math(String.raw`\mathbb Z`),
+                        "、通過偶奇（", ref("def_walk_base_edge_parity"), "）は ",
+                        math(String.raw`\{0,1\}`), " に属する。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_edge_row_partition"), " により、辺 ", math(String.raw`e`),
+                        " は横辺または縦辺に一意に分かれる。各辺の行・列の代表を ",
+                        math(String.raw`0,\ldots,L-1`), " から取る。横辺の行代表が零なら ",
+                        ref("claim_height_one_boundary_horizontal_seam_parity"), "、正なら ",
+                        ref("claim_height_one_boundary_horizontal_internal_parity"), " を適用する。",
+                        "縦辺の列代表が零なら ",
+                        ref("claim_height_one_boundary_vertical_seam_parity"), "、正なら ",
+                        ref("claim_height_one_boundary_vertical_internal_parity"), " を適用する。",
+                        math(String.raw`L=1`), " では横辺・縦辺とも零代表の切断線の場合に含まれる。"]),
+                    ],
+                  },
+                },
               }],
             },
           },
@@ -85878,7 +85917,7 @@ u_{w,w'}\cdot a+(-u_{w,w'})\cdot b
 &=u_{w,w'}\cdot a-u_{w,w'}\cdot b
 &&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の分配則と加法逆元}\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{claim_qbar_distinct_linear_factors_bezout}\bigr).
+&&\bigl(\because\ \blkref{claim_qbar_distinct_linear_factors_bezout}\bigr)
 \end{aligned}`),
                         paragraph([
                           "この等式に ", ref("claim_qbar_bezout_power_propagation"), " を ", math(String.raw`n:=m`),
@@ -85894,7 +85933,7 @@ Q_{1}\cdot b^{m+1}+P_{1}\cdot a
 &=P_{1}\cdot a+Q_{1}\cdot b^{m+1}
 &&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の加法の可換則}\bigr)\\
 &=1
-&&\bigl(\because\ \text{直前の等式}\bigr).
+&&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
                         paragraph([
                           "とも書ける。これは、", math(String.raw`a':=b^{m+1}`), "、", math(String.raw`b':=a`), "、",
@@ -85913,7 +85952,7 @@ Q_{2}\cdot a^{k+1}+P_{2}\cdot b^{m+1}
 &=P_{2}\cdot b^{m+1}+Q_{2}\cdot a^{k+1}
 &&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の加法の可換則}\bigr)\\
 &=1
-&&\bigl(\because\ \text{直前の等式}\bigr).
+&&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`P:=Q_{2}`), "、", math(String.raw`Q:=P_{2}`), " と置けば主張の等式を得る。",
