@@ -49,6 +49,7 @@ export const ALL_LABELS = [
   "claim_value_of_linear_combination_in_dual_space",
   "claim_zero_map_is_linear_form",
   "claim_zero_scalar_multiple_is_zero_vector",
+  "def_annihilation_operator_matrix",
   "def_basis",
   "def_binary_numbering_of_power_set",
   "def_complex_algebra",
