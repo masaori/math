@@ -9,8 +9,9 @@
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、
 `B^* A B` が正定値、正実数倍が正定値）は数学的道具立て「トレース・共役転置・正定値性」の
-`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean` で既に「任意の有限次元複素行列」について
-述べてあり、そこがこの主張の必要十分版にあたる。
+`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` に置いてある。合同変換と正実数倍は必要十分版を
+`TensorPow M` へ特殊化した系（`congruence_preserves_positive_definite_tensorPow`・`positive_real_multiple_preserves_positive_definite_tensorPow`）、
+`exp` の正定値性は `TensorPow M` で述べた `posDef_exp_of_isHermitian`（`ClaimPositiveDefinite.lean`）を引く。
 
 ## 記号
 
@@ -109,7 +110,10 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
       norm_num
     exact h
   -- Step 2: `B` はエルミート（`exp_hermitian_is_positive_definite`）
-  have hBherm : B.IsHermitian := by rw [hB, matExp]; exact hS1.exp
+  have hBherm : B.IsHermitian := by
+    rw [hB, matExp]
+    -- `exp_hermitian_is_positive_definite`（`S → ½S_1^{(+)}`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
+    exact (posDef_exp_of_isHermitian hS1).isHermitian
   -- Step 2: `B` は可逆
   have hBinj : Function.Injective B.mulVec := by
     rw [hB, matExp]
@@ -329,7 +333,10 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
     exact h
   have hEeq : E = NormedSpace.exp (-(((1 / 2 : ℂ)) • ((Complex.I * K1) • H1plus M))) := by
     rw [hE, matExp]
-  have hEherm : E.IsHermitian := by rw [hEeq]; exact hS1.exp
+  have hEherm : E.IsHermitian := by
+    rw [hEeq]
+    -- `exp_hermitian_is_positive_definite`（`S → -½S_1^{(+)}`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
+    exact (posDef_exp_of_isHermitian hS1).isHermitian
   have hEinj : Function.Injective E.mulVec := by
     rw [hEeq]
     exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)

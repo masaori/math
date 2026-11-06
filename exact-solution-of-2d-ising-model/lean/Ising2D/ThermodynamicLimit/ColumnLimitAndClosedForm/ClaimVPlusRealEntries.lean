@@ -27,10 +27,9 @@ Lean の `VPlus` は `(V_1^{(+)})^{1/2} · (2s_2)^{M_col/2}exp(S_2) · (V_1^{(+)
 | 実行列の積は実行列 | `HasRealEntries.mul` |
 | 結論: `V^{(+)}` は実行列 | `VPlus_hasRealEntries`、実行列 `VPlusR` と `vPlusDataOf_V_eq_map` |
 
-人手の「実対称行列の指数関数は実対称」は、部分和と極限の実対称性で示す。Lean では
-`Matrix.IsHermitian.exp`（`exp(A^*) = exp(A)^*` から従う）と `Matrix.exp_transpose`（`exp(A^⊤) = exp(A)^⊤`）を使う。
-共役転置の側は数学的道具立て「トレース・共役転置・正定値性」の `ClaimPositiveDefinite.lean`、転置の側は章 011 の
-`PhysicalPartitionFunctionSandwich.lean`（`physicalV1halfC_transpose`・`V2_transpose`）が同じ置き換えをしている。
+人手の「実対称行列の指数関数は実対称」は、部分和と極限の実対称性で示す。Lean では、共役転置の側は人手
+`exp_of_hermitian_is_hermitian` の具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）を、
+転置の側は人手 `exp_of_symmetric_is_symmetric` の具体版 `matExp_transpose_of_transpose_eq`（`ClaimExpOfSymmetricIsSymmetric.lean`）を引く。
 
 具体的な `V^{(+)}` の成分についての主張で、`EvenSectorBridge` の欄を埋めるためだけに立てるので、必要十分版は置かない。
 -/
@@ -68,12 +67,12 @@ theorem HasRealEntries.real_smul {A : TensorPow M} (hA : HasRealEntries A) (c : 
   rw [Matrix.smul_apply, smul_eq_mul, map_mul, Complex.conj_ofReal, hA s t]
 
 /-- **実対称行列の指数関数は実対称**（人手 `W_is_real_symmetric_positive_definite` の Step 2 と同じ議論。
-Lean では `Matrix.IsHermitian.exp` と `Matrix.exp_transpose` を使う）。 -/
+共役転置の側は `exp_of_hermitian_is_hermitian`、転置の側は `exp_of_symmetric_is_symmetric` の具体版を引く）。 -/
 theorem matExp_hasRealEntries {S : TensorPow M} (hH : S.IsHermitian) (hT : Sᵀ = S) :
     HasRealEntries (matExp S) := by
   apply hasRealEntries_of_isHermitian_of_transpose
-  · exact hH.exp
-  · rw [matExp, ← Matrix.exp_transpose, hT]
+  · exact matExp_conjTranspose_of_conjTranspose_eq S hH  -- `exp_of_hermitian_is_hermitian`
+  · exact matExp_transpose_of_transpose_eq S hT  -- `exp_of_symmetric_is_symmetric`
 
 /-! ## `V^{(+)}` の因子 -/
 

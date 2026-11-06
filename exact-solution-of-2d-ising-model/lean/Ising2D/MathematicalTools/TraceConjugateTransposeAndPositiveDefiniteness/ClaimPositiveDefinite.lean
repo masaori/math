@@ -15,9 +15,10 @@
 ## `star_preserves_norm_and_limits` と `exp` のエルミート性の置き場
 
 原文 `star_preserves_norm_and_limits` の (1)(2)(3) の具体版は、人手の鎖と 1 対 1 に
-`ClaimStarPreservesNormAndLimits.lean` に置いた。このファイルの `posDef_exp_of_isHermitian` は、`exp(S)` のエルミート性を
-まだ mathlib の `Matrix.IsHermitian.exp`（`Matrix.exp_conjTranspose` から従う）で得ている。人手 `exp_of_hermitian_is_hermitian` の
-具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）は置いてあり、使う側をそれへ置き換えるのは状態台帳の (r2c2c2c) である。
+`ClaimStarPreservesNormAndLimits.lean` に置いた。`posDef_exp_of_isHermitian` の `T^* = T` は、人手 `exp_of_hermitian_is_hermitian` の
+具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）を引く。`Vmat_posDef` の `B^* = B` は、
+人手 `V_is_positive_definite` の Step 2 どおり、`posDef_exp_of_isHermitian` の正定値性から「とくにエルミート」を読む。`matExp_conjTranspose_of_conjTranspose_eq` は `TensorPow M` で述べてあるので、`posDef_exp_of_isHermitian` も
+`TensorPow M` で述べる（使う側はすべて `TensorPow M` である）。
 
 ## 人手 `iH_is_real_symmetric` との違い（形式化して分かったこと）
 
@@ -44,6 +45,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfHermitianIsHermitian
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -226,16 +228,16 @@ end Herm
 
 section PosDef
 
-variable {n : Type*} [Fintype n] [DecidableEq n]
-
 /-- **原文 `exp_hermitian_is_positive_definite`**: エルミート行列の `exp` はエルミートかつ正定値。
 
 原文は `T := exp(S/2)` について `exp(S) = T^*(IT)` と書き、`I` が正定値であること（`identity_matrix_is_positive_definite`）と
 `T' := exp(-S/2)` が `T'T = I` を満たすこと（`exp_of_negative_is_left_inverse`）から `congruence_preserves_positive_definite` で示す。
-ここでは `exp(S/2)` の可逆性 → `A^* A` が正定値（mathlib の `Matrix.PosDef.conjTranspose_mul_self`）で示しており、人手の段とは一対一でない。 -/
-theorem posDef_exp_of_isHermitian {S : Matrix n n ℂ} (hS : S.IsHermitian) :
+ここでは `exp(S/2)` の可逆性 → `A^* A` が正定値（mathlib の `Matrix.PosDef.conjTranspose_mul_self`）で示しており、人手の段とは一対一でない。
+人手の `T^* = T`（`exp_of_hermitian_is_hermitian` を `H = S/2` に当てはめる）だけは、その具体版
+`matExp_conjTranspose_of_conjTranspose_eq` を引く。 -/
+theorem posDef_exp_of_isHermitian {M : ℕ} {S : TensorPow M} (hS : S.IsHermitian) :
     (NormedSpace.exp S).PosDef := by
-  set X : Matrix n n ℂ := (1 / 2 : ℂ) • S with hX
+  set X : TensorPow M := (1 / 2 : ℂ) • S with hX
   have hhalf : X.IsHermitian := by
     have : Xᴴ = X := by
       rw [hX, Matrix.conjTranspose_smul, hS.eq]
@@ -247,7 +249,9 @@ theorem posDef_exp_of_isHermitian {S : Matrix n n ℂ} (hS : S.IsHermitian) :
   have hinj : Function.Injective (NormedSpace.exp X).mulVec :=
     Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
   have h := Matrix.PosDef.conjTranspose_mul_self (NormedSpace.exp X) hinj
-  rwa [hhalf.exp.eq, hsq] at h
+  -- 人手 `T^* = T`（`exp_of_hermitian_is_hermitian`、`S → H = S/2`）
+  have hT : (NormedSpace.exp X)ᴴ = NormedSpace.exp X := matExp_conjTranspose_of_conjTranspose_eq X hhalf
+  rwa [hT, hsq] at h
 
 end PosDef
 
@@ -276,7 +280,8 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
     have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)) := by
       rw [V1pmHalf, matExp, smul_smul, mul_assoc]
     rw [hEq]
-    exact hS1.exp
+    -- `exp_hermitian_is_positive_definite`（`S → ½(iK_1H)`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
+    exact (posDef_exp_of_isHermitian hS1).isHermitian
   have hA : (NormedSpace.exp ((Complex.I * K2star) • H2 M)).PosDef :=
     posDef_exp_of_isHermitian (S2_isHermitian_by_anticommutation hK2)
   have hinj : Function.Injective (V1pmHalf M K1 η).mulVec := by
