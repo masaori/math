@@ -69213,6 +69213,7 @@ P_n(\gamma)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
                     ],
@@ -69253,7 +69254,7 @@ P_n(\gamma)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 P_j(\Gamma)&=P_0(\Gamma)+W_j-W_0
-&&\bigl(\because\ \blkref{claim_projected_plane_cycle_lift_translation}\bigr).
+&&\bigl(\because\ \blkref{claim_projected_plane_cycle_lift_translation}\bigr)
 \end{aligned}`),
                       paragraph([
                         "であり、", math(String.raw`w_{\mathrm h}(\Gamma)=w_{\mathrm v}(\Gamma)=0`), " である。さらに任意の ",
@@ -69264,7 +69265,7 @@ P_j(\Gamma)=P_{j'}(\Gamma)
 &\Longrightarrow P_0(\Gamma)+W_j-W_0=P_0(\Gamma)+W_{j'}-W_0
 &&\bigl(\because\ \blkref{claim_projected_plane_cycle_lift_translation}\bigr)\\
 &\Longrightarrow W_j=W_{j'}
-&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の四則}\bigr),
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となり、", ref("claim_one_sided_periodic_lift_closure_simple"), " に反する。従って一周期の持ち上げ点 ",

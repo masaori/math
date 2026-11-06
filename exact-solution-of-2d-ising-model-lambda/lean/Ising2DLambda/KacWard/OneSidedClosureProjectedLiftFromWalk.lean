@@ -1,5 +1,6 @@
 import Ising2DLambda.KacWard.OneSidedClosureNonbacktracking
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
+import Ising2DLambda.KacWard.OneSidedClosurePointInjectiveFromWalk
 
 namespace Ising2DLambda.KacWard
 
@@ -67,5 +68,42 @@ theorem oneSidedClosureProjectedLiftFromWalk_translation {L m : ℕ} [NeZero L]
       rw [projectedClosureLift, hstep, ih (by omega)]
       dsimp only [W] at *
       ext <;> simp only [Prod.fst_add, Prod.snd_add, Prod.fst_sub, Prod.snd_sub] <;> omega
+
+/-- 実際の閉歩道から作った射影辺列の持ち上げ点は、終点を除いて相異なる。 -/
+theorem oneSidedClosureProjectedLiftFromWalk_injective {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (start : ℤ × ℤ) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      ∀ i < N, ∀ j < N,
+        projectedClosureLift L W start i = projectedClosureLift L W start j → i = j := by
+  obtain ⟨k₀, hsimple⟩ :=
+    oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  dsimp only
+  intro i hi j hj hij
+  have htranslation := oneSidedClosureProjectedLiftFromWalk_translation
+    γ hγ hwind k₀ t c ht hc start
+  have hi' := htranslation i (by omega)
+  have hj' := htranslation j (by omega)
+  rw [hi', hj'] at hij
+  have hW : oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+      (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c i =
+      oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c j := by
+    have hfst := congrArg Prod.fst hij
+    have hsnd := congrArg Prod.snd hij
+    ext <;>
+      simp only [Prod.fst_add, Prod.snd_add, Prod.fst_sub, Prod.snd_sub] at * <;>
+      omega
+  exact hsimple t c ht hc i hi j hj hW
 
 end Ising2DLambda.KacWard
