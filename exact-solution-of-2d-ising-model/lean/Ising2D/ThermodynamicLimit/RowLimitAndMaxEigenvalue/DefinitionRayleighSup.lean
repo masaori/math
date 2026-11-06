@@ -12,9 +12,18 @@
 `xᵀAx ≤ ‖x‖² tr A`）を使う。どちらでも「上に有界な空でない実数集合は上限をもつ」という
 結論は同じであり、後者の方が本章の中で閉じている。
 
-必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
+`def_rayleigh_sup`（`sSup`）の必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
+
+上に有界であることを示す人手の鎖のうち、`‖x‖ = 1` から `|x_i| ≤ 1` を出す段は `abs_component_le_one_of_unit` が同じ行で持つ
+（`|x_i|^2 ≤ Σ|x_k|^2 = (√Σ|x_k|^2)^2 = ‖x‖^2 = 1^2`、続けて `nonnegative_real_order_from_squares`）。
+その段が引く人手 `nonnegative_real_order_from_squares` の具体版は
+`MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean` にある。
+`rayleighSet_bddAbove` はまだ人手の `Σ|W_ij|` の鎖ではなく `psd_quad_le_normSq_mul_trace` で閉じている
+（`docs/tasks/lean-end-to-end-state.md` の (r3a2)）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.TraceBound
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimNonnegativeRealOrderFromSquares
 
 set_option linter.unusedSectionVars false
 
@@ -29,6 +38,28 @@ theorem quad_smul (A : Matrix n n ℝ) (c : ℝ) (x : n → ℝ) :
     (c • x) ⬝ᵥ A *ᵥ (c • x) = c ^ 2 * (x ⬝ᵥ A *ᵥ x) := by
   rw [Matrix.mulVec_smul, smul_dotProduct, dotProduct_smul, smul_eq_mul, smul_eq_mul]
   ring
+
+/-- 人手 `def_rayleigh_sup` の、上に有界であることを示す段の前半: `‖x‖ = 1` なら各 `i` について `|x_i| ≤ 1`。
+Lean の `𝓡`（`rayleighSet`）は `‖x‖ = 1` を `vecNormSq x = 1`（`‖x‖^2 = xᵀx = 1`）で書くので、
+ここでも `vecNormSq x = 1` を受け取り、そこから `‖x‖ = √1 = 1` を出してから人手の 4 行に入る。 -/
+theorem abs_component_le_one_of_unit (x : n → ℝ) (hx : vecNormSq x = 1) (i : n) : |x i| ≤ 1 := by
+  have hnorm : vecNorm x = 1 := by                                          -- Lean の `𝓡` の条件を `‖x‖ = 1` に読む
+    rw [vecNorm, hx, Real.sqrt_one]
+  have hge : ∑ k, |x k| ^ 2 ≥ |x i| ^ 2 :=
+    finite_sum_of_nonnegative_reals_ge_term_fintype (fun k => |x k| ^ 2)
+      (fun k => sq_nonneg _) i                                              -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |x_j|^2`、`k → i`）
+  have hsum_nonneg : 0 ≤ ∑ k, |x k| ^ 2 := le_trans (sq_nonneg _) hge       -- 鎖の前: `Σ|x_j|^2 ≥ |x_i|^2 ≥ 0`
+  have hsq : |x i| ^ 2 ≤ 1 ^ 2 :=
+    calc |x i| ^ 2
+        ≤ ∑ k, |x k| ^ 2 := hge                                             -- 1 行目: `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |x_j|^2`、`k → i`）
+      _ = Real.sqrt (∑ k, |x k| ^ 2) ^ 2 :=
+          (Real.sq_sqrt hsum_nonneg).symm                                   -- 2 行目: `definition_of_sqrt_r_positive` の `y^2 = x`
+      _ = vecNorm x ^ 2 := by                                               -- 3 行目: `def_matrix_norm` の `‖w‖`
+          rw [vecNorm, vecNormSq_eq_sum]
+          simp only [sq_abs]                                                -- `sq_abs` は人手の行ではない。Lean の `vecNormSq`（`x⬝x = Σ x_k^2`）と
+                                                                            -- `def_matrix_norm`（`Σ|w_k|^2`）の書き方の差を埋める段
+      _ = 1 ^ 2 := by rw [hnorm]                                            -- 4 行目: `‖x‖ = 1`
+  exact nonnegative_real_order_from_squares (abs_nonneg _) zero_le_one hsq  -- `nonnegative_real_order_from_squares`（`u → |x_i|`、`v → 1`）
 
 /-- 人手証明の `𝓡 = {xᵀWx | ‖x‖ = 1}`。 -/
 def rayleighSet (W : Matrix n n ℝ) : Set ℝ :=

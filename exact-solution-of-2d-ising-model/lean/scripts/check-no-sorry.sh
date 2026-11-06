@@ -826,6 +826,11 @@ targets=(
   Ising2D.invertible_product_isUnit_tensorPow
   "Ising2D.NecSuf.invertible_product_right_inverse'"
   "Ising2D.NecSuf.invertible_product_left_inverse'"
+  Ising2D.finite_sum_of_nonnegative_reals_ge_term_fintype
+  Ising2D.nonnegative_real_order_from_squares
+  Ising2D.abs_component_le_one_of_unit
+  Ising2D.nonnegative_real_order_from_squares_of_necSuf
+  "Ising2D.NecSuf.order_from_squares'"
   Ising2D.realQuadForm_pos_of_map_posDef
   Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow
   Ising2D.partition_function_sandwich_physical

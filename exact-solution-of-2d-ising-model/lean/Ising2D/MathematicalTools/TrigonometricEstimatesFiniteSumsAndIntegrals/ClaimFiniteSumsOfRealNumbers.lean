@@ -159,4 +159,17 @@ theorem finite_sum_of_nonnegative_reals_ge_term (m : ℕ) (a : Fin m → ℝ)
   | zero => exact k.elim0
   | succ m => exact finite_sum_of_nonnegative_reals_ge_term_succ m a ha k
 
+/-- **`finite_sum_of_nonnegative_reals_is_at_least_each_term`**（添字が有限型 `κ` の和）。
+人手の和は添字 `1, …, m` の上の和なので、`κ` に `Fintype.equivFin κ` で番号を付け、`Fin (card κ)` の上の和として
+`finite_sum_of_nonnegative_reals_ge_term` を当てる（番号を付ける段と外す段は mathlib の `Equiv.sum_comp` による）。 -/
+theorem finite_sum_of_nonnegative_reals_ge_term_fintype {κ : Type*} [Fintype κ] (a : κ → ℝ)
+    (ha : ∀ j, 0 ≤ a j) (k : κ) : ∑ j, a j ≥ a k := by
+  set e := Fintype.equivFin κ
+  calc ∑ j, a j
+      = ∑ j : Fin (Fintype.card κ), a (e.symm j) := (e.symm.sum_comp a).symm  -- `κ` に番号を付ける
+    _ ≥ a (e.symm (e k)) :=
+        finite_sum_of_nonnegative_reals_ge_term _ (fun j => a (e.symm j)) (fun j => ha _) (e k)
+                                                                              -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`k → e(k)`）
+    _ = a k := by rw [Equiv.symm_apply_apply]                                 -- 番号を外す
+
 end Ising2D

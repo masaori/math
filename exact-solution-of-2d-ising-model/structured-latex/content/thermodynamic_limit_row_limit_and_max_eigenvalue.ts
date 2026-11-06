@@ -851,22 +851,56 @@ W
         " なので ",
         math(String.raw`e_1`),
         " を取れる）。上に有界であることは、成分の有限和として次のように評価できる。",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " が ",
         math(String.raw`\|x\| = 1`),
-        " とすると、各 ",
-        math(String.raw`i`),
-        " について",
+        " を満たすとし、",
+        math(String.raw`i \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " を取る。",
+        math(String.raw`|\cdot|`),
+        " は実数の絶対値（",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K = \mathbb{R}`),
+        "）で、各 ",
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`|x_k| \geq 0`),
+        " なので ",
+        math(String.raw`|x_k|^2 = |x_k|\,|x_k| \geq 0`),
+        " である。よって ",
+        ref("finite_sum_of_nonnegative_reals_is_at_least_each_term"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_j|^2\ (j \in \{1,\dots,2^{M_{\mathrm{col}}}\}),\ k \to i`),
+        "）より ",
+        math(String.raw`\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2 \geq |x_i|^2 \geq 0`),
+        " で、",
+        math(String.raw`\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2 \in \mathbb{R}_{\geq 0}`),
+        " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 |x_i|^2
-&\leq \sum_{k=1}^{2^{M_{\mathrm{col}}}}|x_k|^2
-  &&\bigl(\because\ \text{非負の項の有限和は各項以上}\bigr)\\
+&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2
+  &&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_j|^2\ (j \in \{1,\dots,2^{M_{\mathrm{col}}}\}),\ k \to i)\bigr)\\
+&= \Bigl(\sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ \bigl(x \to \textstyle\sum_{j}|x_j|^2 \in \mathbb{R}_{\geq 0}\bigr)\bigr)\\
 &= \|x\|^2
-  &&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\bigr)\\
-&= 1
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{の}\ \|w\|\ (d \to 2^{M_{\mathrm{col}}},\ w \to x)\bigr)\\
+&= 1^2
   &&\bigl(\because\ \|x\| = 1\bigr)
 \end{aligned}`),
       paragraph([
-        "であるから ",
+        "である。",
+        math(String.raw`|x_i| \geq 0`),
+        "、",
+        math(String.raw`1 \geq 0`),
+        " なので、",
+        ref("nonnegative_real_order_from_squares"),
+        "（",
+        math(String.raw`u \to |x_i|`),
+        "、",
+        math(String.raw`v \to 1`),
+        "）より ",
         math(String.raw`|x_i| \leq 1`),
         " である。これを成分表示へ入れると",
       ]),
@@ -915,7 +949,12 @@ W
         " だけで足りる。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
+      ],
+    },
   },
   {
     id: "maxeig_007_claim_operator_bound",

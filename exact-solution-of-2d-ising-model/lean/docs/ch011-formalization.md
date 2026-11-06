@@ -50,6 +50,7 @@
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
 | `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀWx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
 | `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界 | 同上 |
+| `Ising2D.abs_component_le_one_of_unit`（`DefinitionRayleighSup.lean`） | `‖x‖ = 1` なら `\|x_i\| ≤ 1`（上に有界であることの段の前半。人手の 4 行と `nonnegative_real_order_from_squares`（具体版は `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean`）。`rayleighSet_bddAbove` はまだこれを使わず `psd_quad_le_normSq_mul_trace` で閉じる） | `def_rayleigh_sup` |
 | `Ising2D.le_rayleighSup` | 単位ベクトルで `xᵀWx ≤ c(M)` | 同上 |
 | `Ising2D.quad_le_rayleighSup_mul` | 任意の `x` で `xᵀWx ≤ c(M)‖x‖²` | 同上 |
 | `Ising2D.rayleighSup_nonneg` / `rayleighSup_pos` | `c(M) ≥ 0` / `c(M) > 0` | 同上（本文は `𝓡 ⊆ ℝ_{>0}` と書いている） |
