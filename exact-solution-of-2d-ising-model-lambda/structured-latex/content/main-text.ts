@@ -12266,11 +12266,11 @@ j&<n
                   displayMath(String.raw`\begin{aligned}
 0
 &=\mathrm{ac}_0(0_{\mathrm{pol}})
-&&\bigl(\because\ \text{零多項式の係数。}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&&\bigl(\because\ \text{零多項式の係数}\ \blkref{def_qbar_polynomial_ring}\bigr)\\
 &=\mathrm{ac}_0(S+T)
 &&\bigl(\because\ S+T=0_{\mathrm{pol}}\text{（背理法の仮定）}\bigr)\\
 &=\mathrm{ac}_0(S)+\mathrm{ac}_0(T)
-&&\bigl(\because\ \text{和の係数。}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&&\bigl(\because\ \text{和の係数}\ \blkref{def_qbar_polynomial_ring}\bigr)\\
 &=1+1
 &&\bigl(\because\ \mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1\text{（仮定）}\bigr)\\
 &=2
@@ -12284,7 +12284,7 @@ j&<n
                   displayMath(String.raw`\begin{aligned}
 (S-T)(S+T)=0_{\mathrm{pol}}
 &\Longrightarrow S-T=0_{\mathrm{pol}}\ \text{または}\ S+T=0_{\mathrm{pol}}
-&&\bigl(\because\ \text{多項式の零積性。}\blkref{claim_qbar_polynomial_zero_product}\bigr)\\
+&&\bigl(\because\ \text{多項式の零積性}\ \blkref{claim_qbar_polynomial_zero_product}\bigr)\\
 &\Longrightarrow S-T=0_{\mathrm{pol}}
 &&\bigl(\because\ S+T\ne0_{\mathrm{pol}}\text{（直前の結論）}\bigr)
 \end{aligned}`),
@@ -64352,7 +64352,11 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                     labels: ["claim_vertex_simple_boundary_distinct_pass_propagation"],
                     habitat: "Z",
                     verification: ["sagemath/check/vertex-simple-boundary-distinct-pass-propagation"],
-                    lean: ["Ising2DLambda.KacWard.vertexSimple_boundary_distinct_pass_propagation"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_distinct_pass_propagation",
+                      "Ising2DLambda.NecSuf.KacWard.vertexSimple_distinct_pass_coefficient_propagation",
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_distinct_pass_propagation_from_necSuf",
+                    ],
                     statement: [
                       paragraph([ref("claim_vertex_simple_boundary_other_edges_zero"),
                         " と同じ ", math(String.raw`L,\gamma,S_\gamma,k`), " を取る。",
