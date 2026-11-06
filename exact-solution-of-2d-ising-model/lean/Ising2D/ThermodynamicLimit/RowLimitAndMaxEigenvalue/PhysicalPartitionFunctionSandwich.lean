@@ -10,6 +10,9 @@
 
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
   の正定値性（Step 1・Step 2・Step 3 の鎖）と実対称性（Step 3 の転置の鎖と成分の実性）と可逆性（`BB' = I` の鎖と `def_invertible_elements_of_R` (ii) の 2 回の適用）
+* `maxeig_definition_W_real`（ラベル **`def_W_real`**）の `W_ℝ := ϱ(W)`
+* `maxeig_claim_W_real_is_symmetric`（ラベル **`W_real_is_symmetric`**）
+* `maxeig_claim_W_real_is_positive_definite`（ラベル **`W_real_is_positive_definite`**）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）
 
 本ファイルは、章 001 の具体的な分配関数 `Ising2D.partitionFunction` と、`PhysicalSymTransferBridge.lean` の
@@ -43,7 +46,12 @@
 | Step 3: `B` がエルミートなので `B^* = B` | `physicalV1halfC_conjTranspose` |
 | Step 3 の 5 行の鎖 `W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)`（`c = (2s_2)^{M_col/2}`。3 行目は `scalar_multiple_factors_out_of_right_factor`、4 行目は `scalar_multiple_factors_out_of_left_factor`） | `physicalSymTransferC_eq_smul_congruence` の `calc` の 5 段（係数 `c` は `twoS2Pow`。3・4 段は `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`） |
 | Step 3: `congruence_preserves_positive_definite`（Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative` で `(B^*A)B = B^*(AB)`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite` で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
-| 正定値性を実ベクトルで読む（`partition_function_sandwich` が使う形） | `realQuadForm_pos_of_map_posDef`、`physicalSymTransferR_posDef` |
+| `def_W_real`: `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`） | `realMatrixOfRealEntries (physicalSymTransferC …) (physicalSymTransferC_hasRealEntries …)`。実成分で組んだ `physicalSymTransferR` に等しい（`physicalSymTransferR_eq_realMatrixOfRealEntries`） |
+| `W_real_is_positive_definite`: `ξ_k := (x_k)_ℂ` と `ξ ≠ 0`（`inclusion_rr_to_cc_is_injective`、`a → x_k`, `b → 0`） | `W_real_is_positive_definite` の `hξ` |
+| 同じ主張の「`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}`」（`W_is_real_symmetric_positive_definite`、`def_hermitian_positive_definite`） | 同じ定理の `posDef_conjugateBilinearValue_pos (physicalSymTransferC_posDef …)` |
+| 同じ主張の 10 行の鎖 `ρ_ℂ = ξ^*Wξ = … = (x^⊤W_ℝx)_ℂ` | `conjugate_bilinear_value_of_real_vector_W` の `calc` の 9 段と、10 行目（`def_real_bilinear_value`）の `W_real_is_positive_definite` の `rw [dotProduct_mulVec_eq_real_bilinear_value]` |
+| 同じ主張の結び（`inclusion_rr_to_cc_is_injective`、`a → ρ`, `b → x^⊤W_ℝx`） | `W_real_is_positive_definite` |
+| 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich` が使う形） | `physicalSymTransferR_posDef` |
 | Step 2: `½K_1D` の成分は実（Step 1 の `K_1D` の成分の実性と `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → ½`, `B → K_1D`）） | `halfK1D_hasRealEntries` |
 | Step 2: `(½K_1D)^⊤ = ½K_1D` の 3 行（`transpose_of_matrix_scalar_multiple`、Step 1 の `(K_1D)^⊤ = K_1D`、`½K_1D` の略記） | `halfK1D_transpose` の `calc` の 3 段（`transpose_smul_tensorPow`・`K1D_transpose`・`rfl`） |
 | Step 2: `½K_1D` は実対称（上の 2 つ） | `halfK1D_isRealSymmetric` |
@@ -55,7 +63,9 @@
 | Step 3: `V_2` の成分は実（`real_scalar_multiple_of_real_entry_matrix_has_real_entries`、`c → (2s_2)^{M_col/2}`, `B → A`） | `V2_hasRealEntries` |
 | Step 3: `BV_2` と `W = (BV_2)B` の成分は実（`product_of_real_entry_matrices_has_real_entries` を 2 回） | `physicalSymTransferC_hasRealEntries` |
 | Step 3 の結論「`W` は実対称」（`def_real_symmetric_complex_matrix`） | `physicalSymTransferC_isRealSymmetric` |
-| 同じ転置の等式を実行列 `W` で読む（`partition_function_sandwich_physical` の `trace_power_sandwich` が使う形） | `physicalSymTransferR_isSymm` |
+| `W_real_is_symmetric`: 4 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = (W^⊤)_kl = W_lk = ((W_ℝ)_lk)_ℂ` と `inclusion_rr_to_cc_is_injective`（`a → (W_ℝ)_kl`, `b → (W_ℝ)_lk`） | `W_real_entry_symm` の `calc` の 4 段 |
+| 同じ主張の結び（`def_real_symmetric_matrix` の意味で対称。Lean の `Matrix.IsSymm`） | `W_real_is_symmetric` |
+| 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich_physical` の `trace_power_sandwich` が使う形） | `physicalSymTransferR_isSymm` |
 | 可逆性: `BB' = I` の 3 行の鎖（`B`・`B'` の置き方、`matrix_double_negation`（`A → ½K_1D`）、`exp_of_negative_is_left_inverse`（`A → -½K_1D`）） | `physicalV1halfC_mul_physicalV1halfInvC` の `calc` の 3 段 |
 | 可逆性: `B ∈ R^×`（`def_invertible_elements_of_R` の `g → B`, `h → B'`。`B'B = I` は Step 2） | `physicalV1halfC_isUnit` |
 | 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
@@ -75,6 +85,8 @@
   人手の範囲外の `M = 0` は、添字が空で `D` が零行列であることによる補助の場合分けで一般の `M` の形（`K1D_transpose`・`K1D_hasRealEntries`）へ広げる。
 - Step 2 の `exp_of_real_symmetric_is_real_symmetric` と Step 3 の `V_2^⊤ = V_2` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
   `TensorPow M` で述べた具体版 `exp_of_real_symmetric_is_real_symmetric` と系 `transpose_smul_tensorPow` を引く。
+- `W_real_is_positive_definite` の鎖の `real_inclusion_preserves_finite_sum` には Lean の具体版が無く、既存の慣行どおり mathlib の
+  `Complex.ofReal_sum` を引く（`ClaimTraceOfPositiveDefiniteIsPositive.lean` と同じ扱い）。各項へ当てる行は `Finset.sum_congr` で項ごとに 1 回ずつ当てる。
 - Step 3 の `W^⊤ = W` の鎖の `transpose_of_matrix_product` は、添字が `Conf M` の行列なので `TensorPow M` の系 `transpose_mul_tensorPow` を引き、
   `mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc` を引く。
 - 可逆性の段の `matrix_double_negation`・`exp_of_negative_is_left_inverse`・`def_invertible_elements_of_R` (ii) は、添字が `Conf M` の行列なので
@@ -109,6 +121,9 @@ import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndCon
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 
 namespace Ising2D
 
@@ -460,13 +475,35 @@ theorem rayleighSup_physicalSymTransferR_eq (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
           (physicalSymTransferC_hasRealEntries K1 hK2)) := by
   rw [← physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
 
-/-- 実行列の `W` は対称（`physicalSymTransferC_transpose` を成分の埋め込みで読む）。 -/
+/-- **人手 `W_real_is_symmetric` の 4 行の鎖と単射性**:
+`((W_ℝ)_kl)_ℂ = W_kl = (W^⊤)_kl = W_lk = ((W_ℝ)_lk)_ℂ` に `inclusion_rr_to_cc_is_injective`（`a → (W_ℝ)_kl`, `b → (W_ℝ)_lk`）を当てる。 -/
+theorem W_real_entry_symm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (k l : Conf M) :
+    realMatrixOfRealEntries (physicalSymTransferC M K1 K2) (physicalSymTransferC_hasRealEntries K1 hK2) k l
+      = realMatrixOfRealEntries (physicalSymTransferC M K1 K2) (physicalSymTransferC_hasRealEntries K1 hK2) l k :=
+  inclusion_rr_to_cc_is_injective <|
+    calc ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+            (physicalSymTransferC_hasRealEntries K1 hK2) k l : ℝ) : ℂ)
+        = physicalSymTransferC M K1 K2 k l :=
+          ofReal_realMatrixOfRealEntries_apply _ _ k l                           -- `def_W_real`
+      _ = (physicalSymTransferC M K1 K2)ᵀ k l := by
+          rw [physicalSymTransferC_transpose K1 hK2]                             -- `W^⊤ = W`（`W_is_real_symmetric_positive_definite`）
+      _ = physicalSymTransferC M K1 K2 l k := Matrix.transpose_apply _ _ _       -- `def_matrix_transpose`
+      _ = ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+            (physicalSymTransferC_hasRealEntries K1 hK2) l k : ℝ) : ℂ) :=
+          (ofReal_realMatrixOfRealEntries_apply _ _ l k).symm                    -- `def_W_real`
+
+/-- **人手 `W_real_is_symmetric`**: `W_ℝ` は対称（`def_real_symmetric_matrix`。Lean の `Matrix.IsSymm` は `W_ℝ^⊤ = W_ℝ`、
+成分では `(W_ℝ)_lk = (W_ℝ)_kl`）。`k, l` は任意なので、上の鎖を各 `k, l` に当てる。 -/
+theorem W_real_is_symmetric (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    (realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2)).IsSymm :=
+  Matrix.IsSymm.ext fun k l => W_real_entry_symm K1 hK2 l k
+
+/-- 人手 `W_real_is_symmetric` を、実成分で組んだ `physicalSymTransferR` で読む（`physicalSymTransferR_eq_realMatrixOfRealEntries`）。 -/
 theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     (physicalSymTransferR M K1 K2).IsSymm := by
-  apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
-  show (physicalSymTransferR M K1 K2)ᵀ.map Complex.ofRealHom
-    = (physicalSymTransferR M K1 K2).map Complex.ofRealHom
-  rw [Matrix.transpose_map, ← physicalSymTransferC_eq_map, physicalSymTransferC_transpose K1 hK2]
+  rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
+  exact W_real_is_symmetric K1 hK2
 
 /-! ## Step 3: 具体的な `W` は正定値 -/
 
@@ -502,35 +539,63 @@ theorem physicalSymTransferC_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
   rw [physicalSymTransferC_eq_smul_congruence K1 hK2, hassoc]
   exact positive_real_multiple_preserves_positive_definite_tensorPow hcong (twoS2Pow_pos hK2) -- `positive_real_multiple_preserves_positive_definite`
 
-/-- 実行列 `A` を成分ごとに `ℂ` へ埋め込んだ行列が正定値なら、`x ≠ 0` の実ベクトルで `x^⊤Ax > 0`
-（`x` を成分ごとに `ℂ` へ埋め込むと `x^*Ax = x^⊤Ax`）。 -/
-theorem realQuadForm_pos_of_map_posDef {A : Matrix (Conf M) (Conf M) ℝ}
-    (hA : (A.map Complex.ofRealHom).PosDef) (x : Conf M → ℝ) (hx : x ≠ 0) :
-    0 < x ⬝ᵥ A *ᵥ x := by
-  set xc : Conf M → ℂ := fun i => (x i : ℂ) with hxc
-  have hxc0 : xc ≠ 0 := by
-    intro h
-    apply hx
-    funext i
-    exact Complex.ofReal_injective (congrFun h i)
-  have hpos := hA.dotProduct_mulVec_pos hxc0
-  have hval : star xc ⬝ᵥ A.map Complex.ofRealHom *ᵥ xc = ((x ⬝ᵥ A *ᵥ x : ℝ) : ℂ) := by
-    have hstar : star xc = Complex.ofRealHom ∘ x := by
-      funext i
-      simp [hxc, Complex.conj_ofReal]
-    have hxc' : xc = Complex.ofRealHom ∘ x := rfl
-    rw [hstar, hxc']
-    simp only [dotProduct, mulVec, Function.comp_apply, Matrix.map_apply,
-      Complex.ofRealHom_eq_coe, Complex.ofReal_sum, Complex.ofReal_mul]
-  rw [hval] at hpos
-  exact Complex.zero_lt_real.mp hpos
+/-- **人手 `W_real_is_positive_definite` の 10 行の鎖のうち 9 行**（`ξ_k := (x_k)_ℂ`）:
+`ρ_ℂ = ξ^*Wξ = ΣΣ \overline{ξ_k}W_klξ_l = ΣΣ \overline{(x_k)_ℂ}W_kl(x_l)_ℂ = ΣΣ (x_k)_ℂW_kl(x_l)_ℂ = ΣΣ (x_k)_ℂ((W_ℝ)_kl)_ℂ(x_l)_ℂ
+= ΣΣ (x_k(W_ℝ)_kl)_ℂ(x_l)_ℂ = ΣΣ (x_k(W_ℝ)_klx_l)_ℂ = Σ_k(Σ_l x_k(W_ℝ)_klx_l)_ℂ = (ΣΣ x_k(W_ℝ)_klx_l)_ℂ`。
+人手の 10 行目 `= (x^⊤W_ℝx)_ℂ`（`def_real_bilinear_value`）は `W_real_is_positive_definite` の `rw [dotProduct_mulVec_eq_real_bilinear_value]` が受け持つ。 -/
+theorem conjugate_bilinear_value_of_real_vector_W (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ)
+    {ρ : ℝ} (hρ : conjugateBilinearValue (fun k => (x k : ℂ)) (physicalSymTransferC M K1 K2)
+      (fun k => (x k : ℂ)) = (ρ : ℂ)) :
+    (ρ : ℂ) = ((∑ k, ∑ l, x k * realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2) k l * x l : ℝ) : ℂ) := by
+  set WR := realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+    (physicalSymTransferC_hasRealEntries K1 hK2) with hWR
+  set ξ : Conf M → ℂ := fun k => (x k : ℂ) with hξ
+  calc (ρ : ℂ)
+      = conjugateBilinearValue ξ (physicalSymTransferC M K1 K2) ξ := hρ.symm     -- `ρ` の取り方
+    _ = ∑ k, ∑ l, (star (ξ k) * physicalSymTransferC M K1 K2 k l) * ξ l := rfl   -- `def_conjugate_bilinear_value`
+    _ = ∑ k, ∑ l, (star (x k : ℂ) * physicalSymTransferC M K1 K2 k l) * (x l : ℂ) := rfl -- `ξ` の置き方
+    _ = ∑ k, ∑ l, ((x k : ℂ) * physicalSymTransferC M K1 K2 k l) * (x l : ℂ) :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
+          rw [complex_conjugate_of_real_inclusion (x k)]                          -- `complex_conjugate_of_real_inclusion`（`r → x_k`）を各項へ
+    _ = ∑ k, ∑ l, ((x k : ℂ) * ((WR k l : ℝ) : ℂ)) * (x l : ℂ) :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
+          rw [ofReal_realMatrixOfRealEntries_apply]                               -- `def_W_real` の `((W_ℝ)_kl)_ℂ = W_kl` を各項へ
+    _ = ∑ k, ∑ l, ((x k * WR k l : ℝ) : ℂ) * (x l : ℂ) :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
+          rw [real_inclusion_mul (x k) (WR k l)]                                  -- `real_inclusion_preserves_product`（`a → x_k`, `b → (W_ℝ)_kl`）を各項へ
+    _ = ∑ k, ∑ l, ((x k * WR k l * x l : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
+          real_inclusion_mul (x k * WR k l) (x l)                                 -- `real_inclusion_preserves_product`（`a → x_k(W_ℝ)_kl`, `b → x_l`）を各項へ
+    _ = ∑ k, ((∑ l, x k * WR k l * x l : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun k _ => (Complex.ofReal_sum _ _).symm             -- `real_inclusion_preserves_finite_sum`（`r_l → x_k(W_ℝ)_klx_l`）を各 `k` へ
+    _ = ((∑ k, ∑ l, x k * WR k l * x l : ℝ) : ℂ) := (Complex.ofReal_sum _ _).symm -- `real_inclusion_preserves_finite_sum`（`r_k → Σ_l x_k(W_ℝ)_klx_l`）
 
-/-- **人手 `W_is_real_symmetric_positive_definite` の「`W` は正定値」を実ベクトルで読む**（`partition_function_sandwich` が使う形）:
-`x ≠ 0` なら `x^⊤Wx > 0`（`physicalSymTransferC_posDef` を `physicalSymTransferC_eq_map` で実行列へ）。 -/
+/-- **人手 `W_real_is_positive_definite`**: `x ∈ ℝ^{2^{M_col}}` が `x ≠ 0` なら `x^⊤W_ℝx > 0`。
+`ξ_k := (x_k)_ℂ` は `ξ ≠ 0`（`x_k ≠ 0` の `k` で `ξ_k = 0_ℂ = (0)_ℂ` なら単射性で `x_k = 0`）、`W` は正定値なので
+`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}` があり、10 行の鎖と単射性（`a → ρ`, `b → x^⊤W_ℝx`）で `x^⊤W_ℝx = ρ > 0`。 -/
+theorem W_real_is_positive_definite (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : x ≠ 0) :
+    0 < x ⬝ᵥ realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2) *ᵥ x := by
+  have hξ : (fun k => (x k : ℂ)) ≠ 0 := by
+    obtain ⟨k, hk⟩ := Function.ne_iff.mp hx                                     -- `x_k ≠ 0` となる `k`
+    intro h
+    apply hk
+    exact inclusion_rr_to_cc_is_injective
+      ((congrFun h k).trans Complex.ofReal_zero.symm)                             -- `ξ_k = 0_ℂ = (0)_ℂ` なら `x_k = 0`（`a → x_k`, `b → 0`）
+  obtain ⟨ρ, hρ, hρW⟩ :=
+    posDef_conjugateBilinearValue_pos (physicalSymTransferC_posDef K1 hK2) hξ     -- `W` は正定値（`W_is_real_symmetric_positive_definite`）
+  have hxWx := inclusion_rr_to_cc_is_injective
+    (conjugate_bilinear_value_of_real_vector_W K1 hK2 x hρW)                      -- 単射性（`a → ρ`, `b → x^⊤W_ℝx`）
+  rw [dotProduct_mulVec_eq_real_bilinear_value, ← hxWx]                           -- `def_real_bilinear_value`（人手の鎖の 10 行目）
+  exact hρ
+
+/-- 人手 `W_real_is_positive_definite` を、実成分で組んだ `physicalSymTransferR` で読む
+（`physicalSymTransferR_eq_realMatrixOfRealEntries`。`partition_function_sandwich` が使う形）。 -/
 theorem physicalSymTransferR_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : x ≠ 0) :
-    0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x :=
-  realQuadForm_pos_of_map_posDef
-    (by rw [← physicalSymTransferC_eq_map]; exact physicalSymTransferC_posDef K1 hK2) x hx
+    0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x := by
+  rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
+  exact W_real_is_positive_definite K1 hK2 x hx
 
 /-! ## 可逆性: `B ∈ R^×`、`BV_2 ∈ R^×`、`W ∈ R^×`
 

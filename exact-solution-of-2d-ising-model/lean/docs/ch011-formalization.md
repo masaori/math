@@ -49,13 +49,15 @@
 | --- | --- | --- |
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
 | `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀWx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
-| `Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries` / `rayleighSup_physicalSymTransferR_eq`（`PhysicalPartitionFunctionSandwich.lean`） | 冒頭の `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について: 実成分で組んだ `physicalSymTransferR` は `ϱ(physicalSymTransferC)` に等しく、Lean の `c(M)` は人手の `sup{xᵀW_ℝx \| ‖x‖ = 1}` と同じ値 | 同上 |
+| `Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries`（`PhysicalPartitionFunctionSandwich.lean`） | `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について: 実成分で組んだ `physicalSymTransferR` は `ϱ(physicalSymTransferC)` に等しい | `def_W_real` |
+| `Ising2D.rayleighSup_physicalSymTransferR_eq`（`PhysicalPartitionFunctionSandwich.lean`） | Lean の `c(M)` は人手の `sup{xᵀW_ℝx \| ‖x‖ = 1}` と同じ値 | `def_rayleigh_sup` |
 | `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界（上界は `Σ_iΣ_j\|W_ij\|`。`W` に仮定を置かない） | 同上 |
 | `Ising2D.abs_component_le_one_of_unit`（`DefinitionRayleighSup.lean`） | `‖x‖ = 1` なら `\|x_i\| ≤ 1`（上に有界であることの段の前半。人手の 4 行と `nonnegative_real_order_from_squares`（具体版は `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean`）） | `def_rayleigh_sup` |
 | `Ising2D.abs_bilinear_term_le_abs_entry` / `abs_bilinear_row_le_row_abs_sum` / `bilinear_le_abs_entry_sum`（`DefinitionRayleighSup.lean`） | `\|x_k\| ≤ 1` なら `\|x_iW_ijx_j\| ≤ \|W_ij\|`、`\|Σ_j x_iW_ijx_j\| ≤ Σ_j\|W_ij\|`、`xᵀWx ≤ Σ_iΣ_j\|W_ij\|`（上に有界であることの段の後半。人手の項ごとの 6 行・各 `i` の 2 行・外側の 4 行と 1 対 1。人手 `def_real_bilinear_value` の行は `dotProduct_mulVec_eq_real_bilinear_value`） | `def_rayleigh_sup` |
 | `Ising2D.le_rayleighSup` | 単位ベクトルで `xᵀWx ≤ c(M)` | 同上 |
 | `Ising2D.quad_le_rayleighSup_mul` | 任意の `x` で `xᵀWx ≤ c(M)‖x‖²` | 同上 |
-| `Ising2D.rayleighSup_nonneg` / `rayleighSup_pos` | `c(M) ≥ 0` / `c(M) > 0` | 同上（本文は `𝓡 ⊆ ℝ_{>0}` と書いている） |
+| `Ising2D.rayleighSup_nonneg` | `c(M) ≥ 0`（半正定値性だけを使う） | `def_rayleigh_sup` |
+| `Ising2D.ne_zero_of_vecNormSq_eq_one` / `rayleighSup_pos`（`DefinitionRayleighSup.lean`） | `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」（`‖0‖² = Σ0² = Σ0 = 0` の鎖。Lean の `𝓡` は `‖x‖² = 1` で述べるので、人手の `√·`・`\|0\|` の行は現れない）/ `c(M) = sup 𝓡 ≥ e_1ᵀWe_1 > 0` の 3 行の鎖（`‖e_1‖² = 1` は既存の `vecNormSq_single` で受け、人手の `|(e_1)_i|^2` の鎖 2 本と `‖e_1‖ = 1` の 4 行の鎖とは 1 対 1 でない。和の `0 + 0 = 0` は mathlib の `Finset.sum_const_zero`） | `def_rayleigh_sup` |
 | `Ising2D.rayleigh_bounds_operator_normSq`（`ClaimOperatorBound.lean`） | `‖Wx‖² ≤ c(M)²‖x‖²` | `rayleigh_bounds_operator_norm` |
 | `Ising2D.rayleigh_bounds_operator_norm` | `‖Wx‖ ≤ c(M)‖x‖` | 同上 |
 | `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖` | 同上（帰納法の部分） |
@@ -100,7 +102,9 @@
 | `Ising2D.V2_hasRealEntries` / `physicalSymTransferC_hasRealEntries` / `physicalSymTransferC_isRealSymmetric` | `V₂`・`W` の成分は実（`real_scalar_multiple_of_real_entry_matrix_has_real_entries`、`product_of_real_entry_matrices_has_real_entries` を 2 回）、`W` は実対称 | 同 Step 3 |
 | `Ising2D.twoS2Pow` / `twoS2Pow_pos` / `physicalSymTransferC_eq_smul_congruence` / `physicalSymTransferC_posDef` | 具体的な `W = (2s_2)^{M/2}B^*AB`（Step 3 の 4 行の鎖）と、`congruence_preserves_positive_definite`・`positive_real_multiple_preserves_positive_definite` による `W` の正定値性 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.physicalV1halfC_mul_physicalV1halfInvC` / `physicalV1halfC_isUnit` / `physicalV1halfC_mul_V2_isUnit` / `physicalSymTransferC_isUnit` | 可逆性: `BB' = I` の 3 行（`matrix_double_negation`、`exp_of_negative_is_left_inverse`）、`B ∈ R^×`、`BV₂ ∈ R^×`・`W = (BV₂)B ∈ R^×`（`V2_invertible`、`def_invertible_elements_of_R` (ii) の `TensorPow M` での系 `invertible_product_isUnit_tensorPow`） | 同 可逆性の段 |
-| `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 実行列の `W` は対称（`physicalSymTransferC_transpose` を成分の埋め込みで読む）・正定値（`physicalSymTransferC_posDef` を `realQuadForm_pos_of_map_posDef` で実ベクトルへ） | 同 Step 3 |
+| `Ising2D.W_real_entry_symm` / `W_real_is_symmetric`（`PhysicalPartitionFunctionSandwich.lean`） | `W_ℝ` は対称: 4 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = (W^⊤)_kl = W_lk = ((W_ℝ)_lk)_ℂ` と `inclusion_rr_to_cc_is_injective` | `W_real_is_symmetric` |
+| `Ising2D.conjugate_bilinear_value_of_real_vector_W` / `W_real_is_positive_definite`（同） | `x ≠ 0` なら `xᵀW_ℝx > 0`: `ξ_k := (x_k)_ℂ` について 10 行の鎖 `ρ_ℂ = ξ^*Wξ = … = (xᵀW_ℝx)_ℂ`（`calc` の 9 段と `rw` 1 回）と単射性 | `W_real_is_positive_definite` |
+| `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 上の 2 つを実成分で組んだ `physicalSymTransferR` で読む（`physicalSymTransferR_eq_realMatrixOfRealEntries`） | `W_real_is_symmetric` / `W_real_is_positive_definite` |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |
 | `Ising2D.partition_function_sandwich_and_limit_in_N_row`（`ClaimPartitionFunctionSandwichAndLimitInNRow.lean`） | 章「N→∞ の極限と最大固有値 c(M)」の章末の主張: `M ≥ 2`、`K_2 > 0`（`K_1` は任意の実数）で、具体的な `W` について `c(M) > 0`、`N_row ≥ 1` で `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`、`(1/(M N_row)) log Z → (1/M) log c(M)`（既存の主張を並べたもの） | `partition_function_sandwich_and_limit_in_N_row` |
 | `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |

@@ -164,20 +164,29 @@ theorem rayleighSup_nonneg {W : Matrix n n ℝ}
   obtain ⟨i⟩ := (inferInstance : Nonempty n)
   exact le_trans (hpsd (Pi.single i 1)) (le_rayleighSup (W := W) (vecNormSq_single i))
 
-/-- `c(M) > 0`（`W` の正定値性だけを使う）。 -/
+/-- **人手 `def_rayleigh_sup` の `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」**: `x = 0` と仮定すると `‖x‖ = 0` となって矛盾する。
+Lean の `𝓡` は `‖x‖² = 1`（`vecNormSq`）で述べるので、人手の鎖の `√·` の行（`definition_of_sqrt_r_positive`）と
+`|0| = 0` の行（`def_real_absolute_value`。`vecNormSq` は成分の平方の和で、絶対値を通らない）は現れず、
+`‖0‖² = Σ_j 0^2 = Σ_j 0 = 0` の鎖になる。 -/
+theorem ne_zero_of_vecNormSq_eq_one {x : n → ℝ} (hx : vecNormSq x = 1) : x ≠ 0 := by
+  rintro rfl
+  have h0 : vecNormSq (0 : n → ℝ) = 0 :=
+    calc vecNormSq (0 : n → ℝ)
+        = ∑ j, (0 : n → ℝ) j ^ 2 := vecNormSq_eq_sum 0                        -- `def_matrix_norm`（`‖x‖²` の形）
+      _ = ∑ _j : n, (0 : ℝ) ^ 2 := rfl                                        -- `x_j = 0` を各項へ
+      _ = ∑ _j : n, (0 : ℝ) :=
+          Finset.sum_congr rfl fun _ _ => zero_pow two_ne_zero                -- `ℝ` で `0^2 = 0` を各項へ
+      _ = 0 := Finset.sum_const_zero                                          -- `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
+  exact zero_ne_one (h0.symm.trans hx)                                        -- `‖x‖ = 1` と矛盾
+
+/-- **人手 `def_rayleigh_sup` の `c(M_col) > 0` の 3 行の鎖**（`W` の正定値性だけを使う）:
+`c(M_col) = sup 𝓡 ≥ e_1^⊤We_1 > 0`。`e_1` は Lean の `Pi.single i 1`（添字 `i` は `Nonempty n` から取る）、
+`‖e_1‖ = 1` は `vecNormSq_single`（Lean の `𝓡` は `‖x‖² = 1` で述べるので、人手の `|(e_1)_i|^2` の鎖 2 本と `‖e_1‖ = 1` の 4 行の鎖の `√·`・`|·|` の行は現れず、mathlib の `simp` で閉じている。人手の鎖とは 1 対 1 でない）、`e_1^⊤We_1 > 0` は `𝓡 ⊆ ℝ_{>0}` の段（`ne_zero_of_vecNormSq_eq_one` と正定値性）。 -/
 theorem rayleighSup_pos {W : Matrix n n ℝ}
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) : 0 < rayleighSup W := by
-  have hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x := by
-    intro x
-    rcases eq_or_ne x 0 with rfl | hx
-    · simp
-    · exact (hpd x hx).le
   obtain ⟨i⟩ := (inferInstance : Nonempty n)
-  have hne : (Pi.single i 1 : n → ℝ) ≠ 0 := by
-    intro h
-    have hu := vecNormSq_single (n := n) i
-    rw [h] at hu
-    simp [vecNormSq] at hu
-  exact lt_of_lt_of_le (hpd _ hne) (le_rayleighSup (W := W) (vecNormSq_single i))
+  calc 0 < (Pi.single i 1 : n → ℝ) ⬝ᵥ W *ᵥ (Pi.single i 1 : n → ℝ) :=
+        hpd _ (ne_zero_of_vecNormSq_eq_one (vecNormSq_single i))              -- `e_1^⊤We_1 ∈ 𝓡 ⊆ ℝ_{>0}`
+    _ ≤ rayleighSup W := le_rayleighSup (vecNormSq_single i)                  -- 上限は `𝓡` の上界（`c(M_col) = sup 𝓡`）
 
 end Ising2D

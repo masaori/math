@@ -26,6 +26,8 @@
   `mul_identity_matrix`・`identity_matrix_mul`（`identity_matrix_is_right_unit_of_mat_mult`・`_left_unit_`）・
   `trace_eq_sum_diag`（`def_trace`）である。
 - 人手の `real_inclusion_preserves_finite_sum` には Lean の具体版が無く、mathlib の `Complex.ofReal_sum` を引く。
+- `conjugateBilinearValue`・`posDef_conjugateBilinearValue_pos` の添字は有限集合 `ι` で受け取る（人手の `{1,…,n}` は `Fin n`、
+  `2^{M_col}` 個の行配位で添字づけた行列（`W_real_is_positive_definite`）は `Conf M`）。和を取るのに有限であることだけを使う。
 - 人手の `n ∈ ℤ_{≥1}` は仮定 `1 ≤ n` で受け取る。`r_1` は添字 `⟨0, _⟩ : Fin n` の `r` である。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
@@ -42,12 +44,12 @@ open Matrix
 open scoped ComplexOrder
 
 /-- **`def_conjugate_bilinear_value`**: `x^*Ay := Σ_k Σ_l (\overline{x_k} A_{kl}) y_l`。 -/
-def conjugateBilinearValue {n : ℕ} (x : Fin n → ℂ) (A : Matrix (Fin n) (Fin n) ℂ) (y : Fin n → ℂ) : ℂ :=
+def conjugateBilinearValue {ι : Type*} [Fintype ι] (x : ι → ℂ) (A : Matrix ι ι ℂ) (y : ι → ℂ) : ℂ :=
   ∑ k, ∑ l, (star (x k) * A k l) * y l
 
 /-- mathlib の `star x ⬝ᵥ (A *ᵥ y)` は人手の `x^*Ay` と同じ値である（`Matrix.PosDef` を人手の正定値で読むため）。 -/
-theorem dotProduct_mulVec_eq_conjugateBilinearValue {n : ℕ} (x : Fin n → ℂ) (A : Matrix (Fin n) (Fin n) ℂ)
-    (y : Fin n → ℂ) : star x ⬝ᵥ (A *ᵥ y) = conjugateBilinearValue x A y :=
+theorem dotProduct_mulVec_eq_conjugateBilinearValue {ι : Type*} [Fintype ι] (x : ι → ℂ) (A : Matrix ι ι ℂ)
+    (y : ι → ℂ) : star x ⬝ᵥ (A *ᵥ y) = conjugateBilinearValue x A y :=
   calc star x ⬝ᵥ (A *ᵥ y)
       = ∑ k, star (x k) * ∑ l, A k l * y l := rfl                                 -- `⬝ᵥ`・`*ᵥ` の定義
     _ = ∑ k, ∑ l, star (x k) * (A k l * y l) :=                                   -- 分配律を各項へ
@@ -60,8 +62,8 @@ theorem dotProduct_mulVec_eq_conjugateBilinearValue {n : ℕ} (x : Fin n → ℂ
 
 mathlib の `Matrix.PosDef` は `0 < star x ⬝ᵥ (A *ᵥ x)`（`ℂ` の順序 `ComplexOrder`）の形なので、
 `0 < z ↔ 0 < z.re ∧ 0 = z.im`（`Complex.pos_iff`）で人手の略記 `z ∈ ℝ_{>0}` へ読み替える。 -/
-theorem posDef_conjugateBilinearValue_pos {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ} (hA : A.PosDef)
-    {x : Fin n → ℂ} (hx : x ≠ 0) : ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ) := by
+theorem posDef_conjugateBilinearValue_pos {ι : Type*} [Fintype ι] {A : Matrix ι ι ℂ} (hA : A.PosDef)
+    {x : ι → ℂ} (hx : x ≠ 0) : ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ) := by
   have h := Complex.pos_iff.mp (hA.dotProduct_mulVec_pos hx)
   rw [dotProduct_mulVec_eq_conjugateBilinearValue] at h
   exact ⟨(conjugateBilinearValue x A x).re, h.1, Complex.ext rfl (by rw [Complex.ofReal_im, ← h.2])⟩

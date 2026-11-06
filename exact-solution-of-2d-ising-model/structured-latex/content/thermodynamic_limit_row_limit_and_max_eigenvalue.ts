@@ -828,11 +828,10 @@ W
     },
   },
   {
-    id: "maxeig_006_definition_rayleigh_sup",
+    id: "maxeig_definition_W_real",
     kind: "definition",
-    origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
-    title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W_{\mathbb{R}} x` },
-    labels: ["def_rayleigh_sup"],
+    title: { tex: String.raw`W \text{ の実数の行列 } W_{\mathbb{R}}` },
+    labels: ["def_W_real"],
     statement: [
       paragraph([
         ref("W_is_real_symmetric_positive_definite"),
@@ -849,16 +848,261 @@ W
       displayMath(String.raw`W_{\mathbb{R}} := \varrho^{2^{M_{\mathrm{col}}},2^{M_{\mathrm{col}}}}_{\mathbb{C}\to\mathbb{R}}(W) \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
       paragraph([
         "が定まる。",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " より、すべての ",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について ",
+        math(String.raw`\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = W_{kl}`),
+        " である（",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の中で定めていた W_ℝ := ϱ(W) を、W_ℝ の対称性（W_real_is_symmetric）と正定値性（W_real_is_positive_definite）が def_rayleigh_sup より前に引けるよう、独立の定義ブロックに切り出した。中身は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_W_real_is_symmetric",
+    kind: "claim",
+    title: { tex: String.raw`W_{\mathbb{R}} \text{ は対称}` },
+    labels: ["W_real_is_symmetric"],
+    statement: [
+      paragraph([
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " は ",
+        ref("def_real_symmetric_matrix"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}}`),
+        "）の意味で対称である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " を取る。",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W^{\top} = W`),
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}
+&= W_{kl}
+  &&\bigl(\because\ \blkref{def_W_real}\bigr)\\
+&= \bigl(W^{\top}\bigr)_{kl}
+  &&\bigl(\because\ W^{\top} = W\ \text{（}\blkref{W_is_real_symmetric_positive_definite}\text{）}\bigr)\\
+&= W_{lk}
+  &&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)\\
+&= \bigl((W_{\mathbb{R}})_{lk}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_W_real}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to (W_{\mathbb{R}})_{kl},\ b \to (W_{\mathbb{R}})_{lk}`),
+        "）より ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} = (W_{\mathbb{R}})_{lk}`),
+        " である。",
+        math(String.raw`k, l`),
+        " は任意なので、",
+        ref("def_real_symmetric_matrix"),
+        " の意味で ",
+        math(String.raw`W_{\mathbb{R}}`),
+        " は対称である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm などが psd_cauchy_schwarz を W に当てるとき、psd_cauchy_schwarz が求める「実数の行列で対称」を W について示す主張が本文に無かった（W_is_real_symmetric_positive_definite は複素行列 W の W^⊤ = W を述べる）。W_ℝ について示す主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_W_real_is_positive_definite",
+    kind: "claim",
+    title: { tex: String.raw`x \neq 0 \text{ なら } x^\top W_{\mathbb{R}} x > 0` },
+    labels: ["W_real_is_positive_definite"],
+    statement: [
+      paragraph([
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について、",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " が ",
+        math(String.raw`x \neq 0`),
+        "（ある ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`x_k \neq 0`),
+        "）なら ",
+        math(String.raw`x^\top W_{\mathbb{R}} x > 0`),
+        " である。",
+        math(String.raw`x^\top W_{\mathbb{R}} x`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ y \to x`),
+        "）の値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記する。",
+        math(String.raw`\xi \in \mathbb{C}^{d}`),
+        " を ",
+        math(String.raw`\xi_k := (x_k)_{\mathbb{C}}`),
+        "（",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "）で定める。",
+        math(String.raw`x_k \neq 0`),
+        " となる ",
+        math(String.raw`k`),
+        " を取ると、",
+        math(String.raw`\xi_k = 0_{\mathbb{C}} = (0)_{\mathbb{C}}`),
+        " なら ",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to x_k,\ b \to 0`),
+        "）より ",
+        math(String.raw`x_k = 0`),
+        " となって矛盾するので、",
+        math(String.raw`\xi_k \neq 0_{\mathbb{C}}`),
+        "、すなわち ",
+        math(String.raw`\xi \neq 0`),
+        "（",
+        ref("def_zero_matrix"),
+        " の零ベクトル）である。",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W`),
+        " は ",
+        ref("def_hermitian_positive_definite"),
+        " の意味で正定値なので、",
+        math(String.raw`\xi^* W \xi = \rho_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`\rho \in \mathbb{R}_{>0}`),
+        " がある。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb{C}}
+&= \xi^* W \xi
+  &&\bigl(\because\ \rho\ \text{の取り方}\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \overline{\xi_k}\,W_{kl}\,\xi_l
+  &&\bigl(\because\ \blkref{def_conjugate_bilinear_value}\ (n \to d,\ A \to W,\ \text{定義の変数}\ x, y \to \xi)\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \overline{(x_k)_{\mathbb{C}}}\,W_{kl}\,(x_l)_{\mathbb{C}}
+  &&\bigl(\because\ \xi\ \text{の置き方}\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} (x_k)_{\mathbb{C}}\,W_{kl}\,(x_l)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to x_k)\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} (x_k)_{\mathbb{C}}\,\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\,(x_l)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_W_real}\ \text{の}\ \bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = W_{kl}\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \bigl(x_k\,(W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}\,(x_l)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to x_k,\ b \to (W_{\mathbb{R}})_{kl})\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \bigl(x_k\,(W_{\mathbb{R}})_{kl}\,x_l\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to x_k\,(W_{\mathbb{R}})_{kl},\ b \to x_l)\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{d}\Bigl(\sum_{l=1}^{d} x_k\,(W_{\mathbb{R}})_{kl}\,x_l\Bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to d,\ r_j \to x_k\,(W_{\mathbb{R}})_{kj}\,x_j)\ \text{を各}\ k\ \text{へ}\bigr)\\
+&= \Bigl(\sum_{k=1}^{d}\sum_{l=1}^{d} x_k\,(W_{\mathbb{R}})_{kl}\,x_l\Bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to d,\ r_j \to \textstyle\sum_{l} x_j\,(W_{\mathbb{R}})_{jl}\,x_l)\bigr)\\
+&= \bigl(x^\top W_{\mathbb{R}} x\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ y \to x)\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to \rho,\ b \to x^\top W_{\mathbb{R}} x`),
+        "）より ",
+        math(String.raw`x^\top W_{\mathbb{R}} x = \rho > 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の 𝓡 ⊆ ℝ_{>0} と、rayleigh_bounds_operator_norm などが psd_cauchy_schwarz を W に当てるときの半正定値性（x^⊤Wx ≥ 0）を、複素行列 W の正定値性（x ∈ ℂ^n の x^*Wx についての条件）から実数の x の x^⊤W_ℝx へ移す段が本文に無かった。x を ℂ^n へ成分ごとに包含した ξ について ξ^*Wξ = (x^⊤W_ℝx)_ℂ を示す主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_006_definition_rayleigh_sup",
+    kind: "definition",
+    origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
+    title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W_{\mathbb{R}} x` },
+    labels: ["def_rayleigh_sup"],
+    statement: [
+      paragraph([
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列とし、",
       ]),
       displayMath(
         String.raw`\mathcal{R} := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
       ),
       paragraph([
         "とおく。",
+        math(String.raw`\mathcal{R} \subseteq \mathbb{R}_{>0}`),
+        " を示す。",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " が ",
+        math(String.raw`\|x\| = 1`),
+        " を満たすとする。",
+        math(String.raw`x = 0`),
+        "（すべての ",
+        math(String.raw`j`),
+        " で ",
+        math(String.raw`x_j = 0`),
+        "）と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|x\|
+&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (d \to 2^{M_{\mathrm{col}}},\ w \to x)\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|0|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ x_j = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}0^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}0}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{0}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&= 0
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y \to 0\ \text{が}\ 0 \geq 0,\ 0^2 = 0\ \text{を満たす}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`\|x\| = 1`),
+        " と矛盾するので、",
+        math(String.raw`x \neq 0`),
+        " である。よって ",
+        ref("W_real_is_positive_definite"),
+        "（",
+        math(String.raw`x \to x`),
+        "）より ",
+        math(String.raw`x^\top W_{\mathbb{R}} x > 0`),
+        " で、",
+        math(String.raw`\mathcal{R} \subseteq \mathbb{R}_{>0}`),
+        " である。",
         math(String.raw`\mathcal{R}`),
-        " は空でない（",
+        " は空でない（下で示す ",
         math(String.raw`\|e_1\| = 1`),
-        " なので ",
+        " により ",
         math(String.raw`e_1`),
         " を取れる）。上に有界であることは、成分の有限和として次のように評価できる。",
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
@@ -988,7 +1232,69 @@ x^\top W_{\mathbb{R}} x
         math(String.raw`\mathcal{R}`),
         " は一般に有限集合でも可算集合でもなく、上限の存在は「空でなく上に有界な実数の集合は上限をもつ」という ",
         math(String.raw`\mathbb{R}`),
-        " の性質による。有理数の範囲では同じ主張は成り立たない。定義から",
+        " の性質による。有理数の範囲では同じ主張は成り立たない。",
+        math(String.raw`c(M_{\mathrm{col}}) > 0`),
+        " を示す。",
+        math(String.raw`e_1 \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " を ",
+        math(String.raw`(e_1)_1 := 1`),
+        "、",
+        math(String.raw`i \neq 1`),
+        " なら ",
+        math(String.raw`(e_1)_i := 0`),
+        " で定める。",
+        math(String.raw`i \in \{2,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|(e_1)_i|^2
+&= |0|^2
+  &&\bigl(\because\ i \neq 1\ \text{なので}\ (e_1)_i = 0\bigr)\\
+&= 0^2
+  &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\bigr)\\
+&= 0
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+|(e_1)_1|^2
+&= |1|^2
+  &&\bigl(\because\ (e_1)_1 = 1\bigr)\\
+&= 1^2
+  &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 1 \geq 0\ \text{の場合}\ |1| = 1\bigr)\\
+&= 1
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1^2 = 1\bigr)
+\end{aligned}`),
+      paragraph(["なので"]),
+      displayMath(String.raw`\begin{aligned}
+\|e_1\|
+&= \sqrt{\textstyle\sum_{i=1}^{2^{M_{\mathrm{col}}}}|(e_1)_i|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (d \to 2^{M_{\mathrm{col}}},\ w \to e_1)\bigr)\\
+&= \sqrt{1 + 0 + \cdots + 0}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \text{上の}\ |(e_1)_1|^2 = 1\ \text{と}\ |(e_1)_i|^2 = 0\ (i \geq 2)\ \text{を各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの}\bigr)\\
+&= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 0 = 1\ \text{を左から順に}\bigr)\\
+&= 1
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y \to 1\ \text{が}\ 1 \geq 0,\ 1^2 = 1\ \text{を満たす}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`e_1^\top W_{\mathbb{R}} e_1 \in \mathcal{R}`),
+        " である（これが ",
+        math(String.raw`\mathcal{R}`),
+        " が空でないことの根拠でもある）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c(M_{\mathrm{col}})
+&= \sup \mathcal{R}
+  &&\bigl(\because\ c(M_{\mathrm{col}})\ \text{の定義}\bigr)\\
+&\geq e_1^\top W_{\mathbb{R}} e_1
+  &&\bigl(\because\ \text{上限は}\ \mathcal{R}\ \text{の上界であり、}\ e_1^\top W_{\mathbb{R}} e_1 \in \mathcal{R}\bigr)\\
+&> 0
+  &&\bigl(\because\ e_1^\top W_{\mathbb{R}} e_1 \in \mathcal{R} \subseteq \mathbb{R}_{>0}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。定義から",
       ]),
       displayMath(
         String.raw`x^\top W_{\mathbb{R}} x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}})`,
@@ -1016,6 +1322,7 @@ x^\top W_{\mathbb{R}} x
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
         "2026-11-06（同じ確認の続き）: |x^⊤Wx| ≤ ΣΣ|W_ij| の鎖の名前だけの根拠を直した。𝓡 の元 x^⊤Wx を |x^⊤Wx| で上から抑える行（real_number_is_at_most_its_absolute_value）を鎖の先頭に足し、「行列積の成分表示」を def_real_bilinear_value の参照に、「有限和の三角不等式と積の絶対値」と「|x_i| ≤ 1, |x_j| ≤ 1」を、項ごとの 6 行の鎖（real_abs_of_product を 2 回、|x_j| ≤ 1 と |x_i| ≤ 1 に非負の実数を掛ける行）、各 i の 2 行の鎖（finite_sum_of_real_numbers_triangle_inequality・finite_sum_of_real_numbers_is_monotone）、外側の和の 2 行（同じ 2 つの主張）に割った。上界 ΣΣ|W_ij| と主張は不変。",
+        "2026-11-06（同じ確認の続き）: 冒頭で定めていた W_ℝ := ϱ(W) を独立の定義 def_W_real へ切り出して引く形にした。𝓡 ⊆ ℝ_{>0} と c(M_col) > 0 の根拠が書かれていなかったので、x = 0 なら ‖x‖ = 0 の 6 行の鎖と W_real_is_positive_definite、項ごとの値の 3 行の鎖 2 本・‖e_1‖ = 1 の 4 行の鎖と c = sup 𝓡 ≥ e_1^⊤W_ℝe_1 > 0 の 3 行の鎖を足した（𝓡 が空でないことの ‖e_1‖ = 1 もこの鎖で示す）。主張は変えていない。",
         "2026-11-06（同じ確認の続き）: 冒頭の「W は W_is_real_symmetric_positive_definite より実行列とみなせる」（同一視）を、W の成分がすべて実数であること（def_matrix_with_real_entries）と、新しく足した def_real_matrix_of_real_entry_matrix の写像 ϱ で定める W_ℝ := ϱ(W) ∈ Mat(2^{M_col},ℝ) に替え、𝓡・c(M_col)・上に有界であることの鎖・x^⊤Wx ≤ c‖x‖^2 の W を W_ℝ（成分 (W_ℝ)_{ij}）にした。値は変わらない。このブロックを引くほかのブロックの x^⊤Wx は、まだ W のまま書いてある。",
       ],
     },
