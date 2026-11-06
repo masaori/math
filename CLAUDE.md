@@ -351,8 +351,11 @@ commit しただけで「完了しました」と報告し、成果が remote de
 
 - Claim, Definition, Theorem 等に言及するときは、対応する .typ ファイル名で伝えること
 - Slack へ送る全報告は、冒頭に人間が識別できる日本語の研究話題名と、その研究本文・レビュー成果を
-  閲覧できる既存の `https://hexcomp-artifacts.web.app/math/<研究パス>/` を付ける。内部ラベルや
-  commit URL で代用せず、報告専用の成果物を新規作成しない。
+  閲覧できる既存の成果物の URL を付ける。内部ラベルや commit URL で代用せず、報告専用の成果物を新規作成しない。
+  URL は Artifacts の `GET /api/artifact-addresses` でその成果物に在ることを確かめてから書く。
+  移行で持ち込んだ成果物は `https://hexcomp-artifacts.web.app/math/<研究パス>/`、
+  API から初めて公開した成果物は `https://hexcomp-artifacts.web.app/masaori/math/<研究パス>/`（Google のログインが要る）で、
+  後者に `math/<研究パス>/` の URL は無い（開くと not found になる）。
 
 ### Typst 記法
 

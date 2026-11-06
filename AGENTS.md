@@ -133,8 +133,12 @@
 ## Slack 報告の研究識別
 
 math から送る全報告は、本文冒頭へ人間が識別できる日本語の研究話題名と、その研究本文・
-レビュー成果を閲覧できる既存の `https://hexcomp-artifacts.web.app/math/<研究パス>/` を付ける。
+レビュー成果を閲覧できる既存の成果物の URL を付ける。
 内部ラベルや commit URL で代用せず、完了報告専用の成果物を新規作成しない。
+URL は Artifacts の `GET /api/artifact-addresses` でその成果物に在ることを確かめてから書く。
+移行で持ち込んだ成果物は `https://hexcomp-artifacts.web.app/math/<研究パス>/`、
+API から初めて公開した成果物は `https://hexcomp-artifacts.web.app/masaori/math/<研究パス>/`（Google のログインが要る）で、
+後者に `math/<研究パス>/` の URL は無い（開くと not found になる）。
 
 証明プロジェクト（例: `exact-solution-of-2d-ising-model/`）では以下をすべて通すこと。
 
