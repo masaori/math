@@ -97,6 +97,103 @@ export default defineBlocks([
   },
 
   {
+    id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
+    kind: "claim",
+    title: {
+      text: "成分が非負の実数の行列について、x^⊤Px は成分の絶対値を並べたベクトルでの値以下である",
+    },
+    labels: ["real_bilinear_value_at_most_value_at_absolute_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        " がすべての ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " で ",
+        math(String.raw`P_{kl} \geq 0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序）を満たすとする。",
+        math(String.raw`x \in \mathbb{R}^n`),
+        " に対し、",
+        math(String.raw`u \in \mathbb{R}^n`),
+        " を ",
+        math(String.raw`u_k := |x_k|`),
+        "（",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        "。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値）で定める。",
+        math(String.raw`x^\top Px,\ u^\top Pu \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`x^\top P x \leq u^\top P u`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`x_k\,P_{kl}\,x_l := \bigl(x_k\,P_{kl}\bigr)\,x_l`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の項である。",
+      ]),
+      displayMath(String.raw`\left|\sum_{l=1}^{n} x_k\,P_{kl}\,x_l\right| \leq \sum_{l=1}^{n} \left|x_k\,P_{kl}\,x_l\right|
+  \qquad\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to n,\ \text{添字}\ j \to l,\ a_l \to x_k\,P_{kl}\,x_l)\bigr)`),
+      paragraph([
+        "である。また ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`P_{kl} \geq 0`),
+        " なので、",
+        ref("def_real_absolute_value"),
+        "（",
+        math(String.raw`q \to P_{kl}`),
+        " の ",
+        math(String.raw`q \geq 0`),
+        " の場合）より ",
+        math(String.raw`|P_{kl}| = P_{kl}`),
+        " である。これらを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^\top P x
+&\leq \left|x^\top P x\right|
+  &&\bigl(\because\ \blkref{real_number_is_at_most_its_absolute_value}\ (q \to x^\top P x)\bigr)\\
+&= \left|\sum_{k=1}^{n}\sum_{l=1}^{n} x_k\,P_{kl}\,x_l\right|
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ y \to x)\bigr)\\
+&\leq \sum_{k=1}^{n}\left|\sum_{l=1}^{n} x_k\,P_{kl}\,x_l\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \textstyle\sum_{l} x_k\,P_{kl}\,x_l)\bigr)\\
+&\leq \sum_{k=1}^{n}\sum_{l=1}^{n} \left|x_k\,P_{kl}\,x_l\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \bigl|\textstyle\sum_{l} x_k\,P_{kl}\,x_l\bigr|,\ b_k \to \textstyle\sum_{l}|x_k\,P_{kl}\,x_l|)\text{。各}\ k\ \text{の大小は準備の不等式}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \left|x_k\,P_{kl}\right|\,|x_l|
+  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_k\,P_{kl},\ b \to x_l)\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} |x_k|\,|P_{kl}|\,|x_l|
+  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_k,\ b \to P_{kl})\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} |x_k|\,P_{kl}\,|x_l|
+  &&\bigl(\because\ |P_{kl}| = P_{kl}\ \text{（準備）を各項へ}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,P_{kl}\,u_l
+  &&\bigl(\because\ u_k := |x_k|\ \text{を各項へ}\bigr)\\
+&= u^\top P u
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to u)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["となる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は u^⊤Wu ≥ |Σ x_kx_lW_kl| ≥ x^⊤Wx を「三角不等式と W_kl > 0」の一行で、実数のベクトルと複素行列 W の二次形式として出していた。def_W_real の W_ℝ で書き直すために、成分が非負の実数の行列についての主張として切り出した。使うのは成分の非負性だけなので、仮定は P_kl ≥ 0 にした（W_real_has_positive_entries の正値性から従う）。鎖の形は def_rayleigh_sup の上に有界であることの段と同じである。数値検証: sagemath/check/real_bilinear_value_at_most_value_at_absolute_vector/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_005_claim_psd_cauchy_schwarz",
     kind: "claim",
     origin: { path: SRC, ordinal: 7 },

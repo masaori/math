@@ -838,6 +838,12 @@ targets=(
   Ising2D.abs_bilinear_term_le_abs_entry
   Ising2D.abs_bilinear_row_le_row_abs_sum
   Ising2D.bilinear_le_abs_entry_sum
+  Ising2D.abs_real_bilinear_row_le_row_abs_sum
+  Ising2D.real_bilinear_value_at_most_value_at_absolute_vector
+  Ising2D.real_bilinear_value_at_most_value_at_absolute_vector_of_necSuf
+  "Ising2D.NecSuf.dotProduct_mulVec_eq_double_sum'"
+  "Ising2D.NecSuf.abs_bilinear_row_le_row_abs_sum'"
+  "Ising2D.NecSuf.bilinear_value_at_most_value_at_absolute_vector'"
   Ising2D.real_number_is_at_most_its_absolute_value
   Ising2D.negative_absolute_value_is_at_most_real_number
   Ising2D.real_absolute_value_of_nonpositive
