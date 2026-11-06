@@ -74,7 +74,7 @@
 | **`Ising2D.symmetrized_transfer_matrix_on_sectors`** | 実行列 `W` の複素化について `W P^{(+)} = V^{(+)}P^{(+)}`（`V^{(+)}` は章 010 の `VPlusOfTransfer`。`B P = C P` を `V1_restriction_to_eigenspaces`（結合定数 `K_1/2`）と `epsilon_projector_properties` (2) から作る） | **`symmetrized_transfer_matrix_on_sectors`** |
 | `Ising2D.symTransfer_isSymm` | 実行列 `B`, `V₂` が対称なら `W = (BV₂)B` も対称（Step 3 の `W^⊤ = W` の 7 行と同じ段を係数 `ℝ` で） | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.symTransfer_posDef` | `W` は正定値（合同変換） | 同上 |
-| `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
+| `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射（実行列の一般の形 `symTransfer_posDef` の中で使う補助） | 人手に対応する段は無い（人手の可逆性の段の形式化は、この表の可逆性の行にある） |
 | `Ising2D.diagExp` ほか（`diagExp_isSymm`, `diagExp_mul_self`, `diagExp_isUnit`, `diagExp_posDef`）（`DefinitionSymmetrizedTransferMatrix.lean`） | 正の対角行列としての `V₁^{1/2}` と `V₁^{1/2}V₁^{1/2} = V₁` | `def_transfer_matrix_square_root`, `W_has_positive_entries` Step 1 |
 | `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef` | 実対称行列の `exp` は実対称正定値 | `exp_hermitian_is_positive_definite` の実行列版（章 009 への接続点） |
 | **`Ising2D.symTransfer_entry_pos`** | `W` の成分はすべて正（`V₁^{1/2}` を一般の正の対角行列 `diagonal d`、`V₂` を成分が正の一般の行列として） | **`W_has_positive_entries`** |
@@ -96,6 +96,7 @@
 | `Ising2D.physicalSymTransferC_transpose` | 具体的な `W^⊤ = W` の 7 行（`transpose_of_matrix_product` を 2 回、`B^⊤ = B`、`V₂^⊤ = V₂`、`mat_mult_associative`） | 同 Step 3 |
 | `Ising2D.V2_hasRealEntries` / `physicalSymTransferC_hasRealEntries` / `physicalSymTransferC_isRealSymmetric` | `V₂`・`W` の成分は実（`real_scalar_multiple_of_real_entry_matrix_has_real_entries`、`product_of_real_entry_matrices_has_real_entries` を 2 回）、`W` は実対称 | 同 Step 3 |
 | `Ising2D.twoS2Pow` / `twoS2Pow_pos` / `physicalSymTransferC_eq_smul_congruence` / `physicalSymTransferC_posDef` | 具体的な `W = (2s_2)^{M/2}B^*AB`（Step 3 の 4 行の鎖）と、`congruence_preserves_positive_definite`・`positive_real_multiple_preserves_positive_definite` による `W` の正定値性 | `W_is_real_symmetric_positive_definite` Step 3 |
+| `Ising2D.physicalV1halfC_mul_physicalV1halfInvC` / `physicalV1halfC_isUnit` / `physicalV1halfC_mul_V2_isUnit` / `physicalSymTransferC_isUnit` | 可逆性: `BB' = I` の 3 行（`matrix_double_negation`、`exp_of_negative_is_left_inverse`）、`B ∈ R^×`、`BV₂ ∈ R^×`・`W = (BV₂)B ∈ R^×`（`V2_invertible`、`def_invertible_elements_of_R` (ii) の `TensorPow M` での系 `invertible_product_isUnit_tensorPow`） | 同 可逆性の段 |
 | `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 実行列の `W` は対称（`physicalSymTransferC_transpose` を成分の埋め込みで読む）・正定値（`physicalSymTransferC_posDef` を `realQuadForm_pos_of_map_posDef` で実ベクトルへ） | 同 Step 3 |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |
 | `Ising2D.partition_function_sandwich_and_limit_in_N_row`（`ClaimPartitionFunctionSandwichAndLimitInNRow.lean`） | 章「N→∞ の極限と最大固有値 c(M)」の章末の主張: `M ≥ 2`、`K_2 > 0`（`K_1` は任意の実数）で、具体的な `W` について `c(M) > 0`、`N_row ≥ 1` で `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`、`(1/(M N_row)) log Z → (1/M) log c(M)`（既存の主張を並べたもの） | `partition_function_sandwich_and_limit_in_N_row` |
@@ -126,7 +127,7 @@
 | `NecSuf.IsPsdPair.moment_split` | `⟪W^p x, W^q x⟫ = ⟪x, W^{p+q}x⟫` | Step 2 の書き換え |
 | `NecSuf.IsPsdPair.moment_nonneg` / `moment_le_pow` | `0 ≤ m_k`、`m_k ≤ c^k⟪x,x⟫` | Step 1 の偶奇の場合分け |
 | `NecSuf.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | Step 2 |
-| `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero`（`RayleighMoments.lean`） | `m_k > 0`、`W` の核は `{0}` | Step 2 冒頭・`W` の可逆性 |
+| `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero`（`RayleighMoments.lean`） | `m_k > 0`、`W` の核は `{0}`（`m_k > 0` を示すための補助） | Step 2 冒頭（人手の `W` の可逆性の段（`def_invertible_elements_of_R`）とは別の論法） |
 | `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le` | 比の単調性と `(xᵀWx)^n ≤ m_n` | Step 3 前半 |
 | `Ising2D.NecSuf.sandwich_mul_proj_eq` | 任意の半群で `BP=CP` と `C,V` の `P` との可換性から `BVB P=CVC P` | `symmetrized_transfer_matrix_on_sectors` |
 
@@ -141,7 +142,7 @@
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`。使う側の実行列の読み `trace_mul_pow_eq_trace_symTransfer_pow` も同じ特殊化） |
-| `W_is_real_symmetric_positive_definite` | `Ising2D.physicalSymTransferC_isRealSymmetric` / `physicalSymTransferC_posDef`（具体的な `W`）。`Ising2D.symTransfer_isSymm` / `symTransfer_posDef` は実行列の一般の形 | なし（下記） | — |
+| `W_is_real_symmetric_positive_definite` | `Ising2D.physicalSymTransferC_isRealSymmetric` / `physicalSymTransferC_posDef` / `physicalSymTransferC_isUnit`（具体的な `W`）。`Ising2D.symTransfer_isSymm` / `symTransfer_posDef` は実行列の一般の形 | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |

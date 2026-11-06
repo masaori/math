@@ -9,7 +9,7 @@
 正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
-  の正定値性（Step 1・Step 2・Step 3 の鎖）と実対称性（Step 3 の転置の鎖と成分の実性）（可逆性はまだ置いていない）
+  の正定値性（Step 1・Step 2・Step 3 の鎖）と実対称性（Step 3 の転置の鎖と成分の実性）と可逆性（`BB' = I` の鎖と `def_invertible_elements_of_R` (ii) の 2 回の適用）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）
 
 本ファイルは、章 001 の具体的な分配関数 `Ising2D.partitionFunction` と、`PhysicalSymTransferBridge.lean` の
@@ -56,6 +56,10 @@
 | Step 3: `BV_2` と `W = (BV_2)B` の成分は実（`product_of_real_entry_matrices_has_real_entries` を 2 回） | `physicalSymTransferC_hasRealEntries` |
 | Step 3 の結論「`W` は実対称」（`def_real_symmetric_complex_matrix`） | `physicalSymTransferC_isRealSymmetric` |
 | 同じ転置の等式を実行列 `W` で読む（`partition_function_sandwich_physical` の `trace_power_sandwich` が使う形） | `physicalSymTransferR_isSymm` |
+| 可逆性: `BB' = I` の 3 行の鎖（`B`・`B'` の置き方、`matrix_double_negation`（`A → ½K_1D`）、`exp_of_negative_is_left_inverse`（`A → -½K_1D`）） | `physicalV1halfC_mul_physicalV1halfInvC` の `calc` の 3 段 |
+| 可逆性: `B ∈ R^×`（`def_invertible_elements_of_R` の `g → B`, `h → B'`。`B'B = I` は Step 2） | `physicalV1halfC_isUnit` |
+| 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
+| 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
 | `partition_function_sandwich`（`Z = tr(W^{N_row})` → `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
 - Step 3 の「スカラー倍と行列積の結合則」と `mat_mult_associative` は具体版が無く、mathlib の `Matrix.mul_smul`・`Matrix.smul_mul`・
@@ -71,8 +75,10 @@
 - Step 2 の `exp_of_real_symmetric_is_real_symmetric` と Step 3 の `V_2^⊤ = V_2` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
   `TensorPow M` で述べた具体版 `exp_of_real_symmetric_is_real_symmetric` と系 `transpose_smul_tensorPow` を引く。
 - Step 3 の `W^⊤ = W` の鎖の `transpose_of_matrix_product` は、添字が `Conf M` の行列なので `TensorPow M` の系 `transpose_mul_tensorPow` を引き、
-  `mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc` を引く。可逆性（人手の `BB' = I` の鎖と
-  `def_invertible_elements_of_R` (ii) の 2 回の適用）はまだ置いていない。状態台帳の次の単位で扱う。
+  `mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc` を引く。
+- 可逆性の段の `matrix_double_negation`・`exp_of_negative_is_left_inverse`・`def_invertible_elements_of_R` (ii) は、添字が `Conf M` の行列なので
+  `TensorPow M` の系 `neg_neg_tensorPow`・`matExp_neg_mul_matExp_tensorPow`・`invertible_product_isUnit_tensorPow`（必要十分版の特殊化。
+  (ii) の具体版（添字 `Fin n`、人手の 2 本の 6 行の鎖と 1 対 1）は `DefinitionInvertibleElementsProduct.lean`）を引く。
 
 ## 仮定について
 
@@ -98,6 +104,9 @@ import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegat
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfRealSymmetricIsRealSymmetric
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionInvertibleElementsProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 
 namespace Ising2D
 
@@ -496,6 +505,47 @@ theorem physicalSymTransferR_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Co
     0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x :=
   realQuadForm_pos_of_map_posDef
     (by rw [← physicalSymTransferC_eq_map]; exact physicalSymTransferC_posDef K1 hK2) x hx
+
+/-! ## 可逆性: `B ∈ R^×`、`BV_2 ∈ R^×`、`W ∈ R^×`
+
+人手の可逆性の段と 1 対 1 に対応する。`R = Mat(2^{M_col},ℂ)`（`def_invertible_elements_of_R`、`M → M_col`）は Lean の `TensorPow M`、
+「`g ∈ R^×`」は単元 `⟨g, h, gh = I, hg = I⟩` を値 `g` に持つこと（`IsUnit g`）である。 -/
+
+/-- **人手の可逆性の段の `BB' = I` の 3 行の鎖**:
+`BB' = exp(½K_1D)exp(-½K_1D) = exp(-(-½K_1D))exp(-½K_1D) = I`。 -/
+theorem physicalV1halfC_mul_physicalV1halfInvC (K1 : ℝ) :
+    physicalV1halfC M K1 * physicalV1halfInvC M K1 = 1 :=
+  calc physicalV1halfC M K1 * physicalV1halfInvC M K1
+      = matExp (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))
+          * matExp (-(((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))) := by
+        rw [physicalV1halfC_eq_matExp_half, physicalV1halfInvC]                  -- `B`, `B'` の置き方
+    _ = matExp (-(-(((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))))
+          * matExp (-(((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))) := by
+        rw [neg_neg_tensorPow]                                                   -- `matrix_double_negation`（`m, n → 2^{M_col}`, `A → ½K_1D`）
+    _ = 1 := matExp_neg_mul_matExp_tensorPow _                                   -- `exp_of_negative_is_left_inverse`（`n → 2^{M_col}`, `A → -½K_1D`）
+
+/-- **人手の可逆性の段の `B ∈ R^×`**（`def_invertible_elements_of_R` の `g → B`, `h → B'`。
+`BB' = I` は上の 3 行の鎖、`B'B = I` は Step 2）。 -/
+theorem physicalV1halfC_isUnit (K1 : ℝ) : IsUnit (physicalV1halfC M K1) :=
+  ⟨⟨physicalV1halfC M K1, physicalV1halfInvC M K1,
+    physicalV1halfC_mul_physicalV1halfInvC K1, physicalV1halfInvC_mul_physicalV1halfC K1⟩, rfl⟩
+
+/-- **人手の可逆性の段の `BV_2 ∈ R^×`**（`B ∈ R^×`、`V2_invertible`（Lean の `isUnit_V2`）、
+`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`））。 -/
+theorem physicalV1halfC_mul_V2_isUnit (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    IsUnit (physicalV1halfC M K1 * V2 M K2) :=
+  invertible_product_isUnit_tensorPow (physicalV1halfC_isUnit K1) (isUnit_V2 hK2)
+
+/-- **人手の可逆性の段の `W ∈ R^×` の 2 行**:
+`W = (BV_2)B`（`def_symmetrized_transfer_matrix`、`B = V_1^{1/2}`）`∈ R^×`
+（前の式の `BV_2 ∈ R^×`、`B ∈ R^×`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`））。 -/
+theorem physicalSymTransferC_isUnit (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    IsUnit (physicalSymTransferC M K1 K2) := by
+  have hW : physicalSymTransferC M K1 K2 = (physicalV1halfC M K1 * V2 M K2) * physicalV1halfC M K1 := rfl
+                                                                                 -- `def_symmetrized_transfer_matrix`、`B = V_1^{1/2}`
+  rw [hW]
+  exact invertible_product_isUnit_tensorPow (physicalV1halfC_mul_V2_isUnit K1 hK2)
+    (physicalV1halfC_isUnit K1)                                                  -- `def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）
 
 /-! ## 挟み撃ち -/
 

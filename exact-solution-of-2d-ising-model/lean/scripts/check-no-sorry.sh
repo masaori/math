@@ -813,6 +813,19 @@ targets=(
   Ising2D.twoS2Pow_pos
   Ising2D.physicalSymTransferC_eq_smul_congruence
   Ising2D.physicalSymTransferC_posDef
+  Ising2D.physicalV1halfC_mul_physicalV1halfInvC
+  Ising2D.physicalV1halfC_isUnit
+  Ising2D.physicalV1halfC_mul_V2_isUnit
+  Ising2D.physicalSymTransferC_isUnit
+  Ising2D.invertible_product_right_inverse
+  Ising2D.invertible_product_left_inverse
+  Ising2D.invertible_product_isUnit
+  Ising2D.invertible_product_right_inverse_of_necSuf
+  Ising2D.invertible_product_left_inverse_of_necSuf
+  Ising2D.invertible_product_isUnit_of_necSuf
+  Ising2D.invertible_product_isUnit_tensorPow
+  "Ising2D.NecSuf.invertible_product_right_inverse'"
+  "Ising2D.NecSuf.invertible_product_left_inverse'"
   Ising2D.realQuadForm_pos_of_map_posDef
   Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow
   Ising2D.partition_function_sandwich_physical
