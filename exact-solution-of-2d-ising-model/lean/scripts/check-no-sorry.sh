@@ -1607,6 +1607,27 @@ targets=(
   "Ising2D.NecSuf.partialSum_transpose'"
   "Ising2D.NecSuf.limit_transpose_of_forall_transpose_eq'"
   "Ising2D.NecSuf.limit_transpose_of_transpose_eq'"
+  Ising2D.star_identity_entry_tensorPow
+  Ising2D.identity_conjTranspose_tensorPow
+  Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq
+  Ising2D.star_inv_factorial
+  Ising2D.expPartialSum_conjTranspose_apply
+  Ising2D.expPartialSum_conjTranspose
+  Ising2D.matExp_conjTranspose_of_conjTranspose_eq
+  Ising2D.star_identity_entry_tensorPow_of_necSuf
+  Ising2D.identity_conjTranspose_tensorPow_of_necSuf
+  Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq_of_necSuf
+  Ising2D.expPartialSum_conjTranspose_of_necSuf
+  Ising2D.matExp_conjTranspose_of_conjTranspose_eq_of_necSuf
+  "Ising2D.NecSuf.star_ite_one_zero'"
+  "Ising2D.NecSuf.one_conjTranspose_matrix'"
+  "Ising2D.NecSuf.pow_conjTranspose_of_conjTranspose_eq'"
+  "Ising2D.NecSuf.star_zero_of_star_sum_range'"
+  "Ising2D.NecSuf.partialSum_conjTranspose_apply'"
+  "Ising2D.NecSuf.partialSum_conjTranspose'"
+  "Ising2D.NecSuf.limit_conjTranspose_of_forall_conjTranspose_eq'"
+  "Ising2D.NecSuf.limit_conjTranspose_of_conjTranspose_eq'"
+  Ising2D.exp_of_real_symmetric_is_real_symmetric
   Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
   Ising2D.S2_isHermitian_of_real_symmetric
   Ising2D.S1plus_isHermitian_of_real_symmetric
