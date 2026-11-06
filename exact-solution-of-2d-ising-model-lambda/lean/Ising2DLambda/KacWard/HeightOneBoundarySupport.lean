@@ -120,6 +120,23 @@ theorem heightOneBoundary_horizontal_seam_parity (L m : ℕ) [NeZero L]
   exact hsupport.trans
     (closedWalk_standardDualHeight_horizontal_seam_changes L m γ hγ hseam j hL hj)
 
+/-- At side length one, both sides are one cell and zero horizontal seam parity excludes the sole horizontal edge. -/
+theorem heightOneBoundary_horizontal_seam_parity_singleCell (m : ℕ)
+    (γ : Fin (m + 1) → OrientedEdge 1)
+    (hseam : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0) :
+    cellSetEdgeCoefficient 1 (heightOneCells 1 m γ)
+        (edgeOfRow 1 false 0 0) ≠ 0 ↔
+      walkBaseEdgeParity γ (edgeOfRow 1 false 0 0) = 1 := by
+  have hleft : cellSetEdgeCoefficient 1 (heightOneCells 1 m γ)
+      (edgeOfRow 1 false 0 0) = 0 := by
+    rw [cellSetEdgeCoefficient_horizontal]
+    have hcell : (((0 : ZMod 1) - 1), (0 : ZMod 1)) = (0, 0) :=
+      Subsingleton.elim _ _
+    rw [hcell]
+    simp
+  have hright := singleCell_horizontal_seam_edge_parity m γ hseam
+  simp [hleft, hright]
+
 /-- At the vertical seam, zero vertical winding identifies the boundary support with traversal parity. -/
 theorem heightOneBoundary_vertical_seam_parity (L m : ℕ) [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)

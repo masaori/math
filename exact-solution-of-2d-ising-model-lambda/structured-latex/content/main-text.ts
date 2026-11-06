@@ -7281,7 +7281,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                 displayMath(String.raw`\begin{aligned}
 |f(\mathcal J)|
 &=|\mathcal J|
-&&\bigl(\because\ \text{単射による有限集合の元の数の保存}\bigr).
+&&\bigl(\because\ \text{単射による有限集合の元の数の保存}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`f(\mathcal J)\subseteq\mathcal J`), " で元の数が等しいので、像に欠ける元はなく全射である。従って ", math(String.raw`f\notin\mathcal U`), " なら単射でなく、", ref("claim_polynomial_determinant_noninjective_cancellation"), " より、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -63805,10 +63805,11 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                     verification: ["sagemath/check/height-one-boundary-horizontal-seam-parity"],
                     lean: [
                       "Ising2DLambda.KacWard.heightOneBoundary_horizontal_seam_parity",
+                      "Ising2DLambda.KacWard.heightOneBoundary_horizontal_seam_parity_singleCell",
                       "Ising2DLambda.NecSuf.KacWard.heightOneBoundary_internal_parity",
                     ],
                     statement: [
-                      paragraph(["任意の ", math(String.raw`L\ge2`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ", math(String.raw`\gamma`),
                         "、代表 ", math(String.raw`0\le j<L`), " を取る。横切断線偶奇 ",
                         math(String.raw`h(\gamma)=0`), " と仮定する（", ref("def_edge_sequence_seam_parities"), "）。",
                         "高さ一のセル集合 ", math(String.raw`S_\gamma`), " の境界係数と通過偶奇について、"]),
@@ -63818,7 +63819,7 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                         "、右辺の通過偶奇は ", math(String.raw`\{0,1\}`), " に属する。"]),
                     ],
                     proof: [
-                      paragraph(["切断線上の横辺 ", math(String.raw`n_{\mathrm h}(0,j)`),
+                      paragraph([math(String.raw`L\ge2`), " のとき、切断線上の横辺 ", math(String.raw`n_{\mathrm h}(0,j)`),
                         " の両側のセルは ", math(String.raw`(0,j)`), " と ",
                         math(String.raw`(L-1,j)`), " である（", ref("claim_edge_row_partition"), "）。従って"]),
                       displayMath(String.raw`\begin{aligned}
@@ -63827,6 +63828,15 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &&\bigl(\because\ \blkref{claim_height_one_boundary_support}\bigr)\\
 &\iff N_\gamma(n_{\mathrm h}(0,j))=1
 &&\bigl(\because\ \blkref{claim_closed_walk_standard_dual_height_horizontal_seam}\text{ と }h(\gamma)=0\bigr)
+\end{aligned}`),
+                      paragraph([math(String.raw`L=1`), " のとき、両側は同じセルである。"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{n_{\mathrm h}(0,0)}
+&=\mathbf1_{(0,0)\in S_\gamma}-\mathbf1_{(0,0)\in S_\gamma}
+&&\bigl(\because\ \blkref{claim_cell_set_boundary_coefficients}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)\\
+N_\gamma(n_{\mathrm h}(0,0))
+&=0&&\bigl(\because\ \blkref{claim_closed_walk_horizontal_column_parity_zero}\text{ の一項和と }h(\gamma)=0\bigr)
 \end{aligned}`),
                     ],
                   },
