@@ -9,6 +9,7 @@ export const ALL_LABELS = [
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
   "claim_coordinate_map_is_linear_form",
   "claim_coordinate_maps_form_dual_basis",
+  "claim_decomposition_of_identity_matrix_into_matrix_units",
   "claim_direct_sum_element_is_sum_of_embedded_components",
   "claim_direct_sum_of_two_vector_spaces_is_complex_vector_space",
   "claim_dual_basis_spans_dual_space",

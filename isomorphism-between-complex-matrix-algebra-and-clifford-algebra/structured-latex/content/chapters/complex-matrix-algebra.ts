@@ -1454,4 +1454,140 @@ A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{z,y}
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_decomposition_of_identity_matrix_into_matrix_units",
+    kind: "claim",
+    title: { text: "単位行列は、対角の行列単位の和である" },
+    labels: ["claim_decomposition_of_identity_matrix_into_matrix_units"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とする。ℂ-線型空間 ",
+        math(String.raw`(\mathrm{Mat}_X(\mathbb{C}),+_{\mathrm{Mat}_X},\ast_{\mathrm{Mat}_X},0_{\mathrm{Mat}_X})`),
+        "（",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_vector_space"),
+        "）の中で、",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に行列単位 ",
+        math(String.raw`E_{x,x}`),
+        "（",
+        ref("def_matrix_unit"),
+        "）と係数 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " を与える族の有限集合 ",
+        math(String.raw`X`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）について、次が成り立つ。",
+        math(String.raw`1_{\mathrm{Mat}_X}`),
+        " は単位行列（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）である。",
+      ]),
+      displayMath(String.raw`\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}E_{x,x}=1_{\mathrm{Mat}_X}`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の元なので、すべての ",
+        math(String.raw`p,q\in X`),
+        " について ",
+        math(String.raw`(p,q)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことを示せばよい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`p,q\in X`),
+        " を任意に固定し、",
+        math(String.raw`(p,q)`),
+        " 成分を取り出す線型写像 ",
+        math(String.raw`\mathrm{ent}_{p,q}:\mathrm{Mat}_X(\mathbb{C})\to\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("claim_matrix_entry_map_is_linear_map"),
+        "）を使う。左辺の和は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の中の和であり、それ以外の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`X`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）である。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、その和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      paragraph([
+        "準備として、各 ",
+        math(String.raw`x\in X`),
+        " について、和の項を、係数が ",
+        math(String.raw`\delta_{p,x}`),
+        " の形に直した次の等式を示す。",
+        math(String.raw`\delta_{x,p},\ \delta_{p,x},\ \delta_{x,q},\ \delta_{q,x}`),
+        " はどれも ",
+        math(String.raw`X`),
+        " の二元についてのクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）で、",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(E_{x,x})
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}(E_{x,x})_{p,q}
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義。}\blkref{claim_matrix_entry_map_is_linear_map}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{x,q})
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{x,q})
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\delta_{x,p}\cdot_{\mathbb{C}}\delta_{x,q}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{p,x}\cdot_{\mathbb{C}}\delta_{q,x}
+&&\left(\because\ x=p\ \text{と}\ p=x\text{、}x=q\ \text{と}\ q=x\ \text{はそれぞれ同値なので、場合分けが一致する。}\blkref{def_kronecker_delta}\right)\\
+&=\delta_{p,x}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{q,x}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(p,q)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}E_{x,x}\right)_{p,q}
+&=\mathrm{ent}_{p,q}\left(\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}E_{x,x}\right)
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義。}\blkref{claim_matrix_entry_map_is_linear_map}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(E_{x,x})
+&&\left(\because\ V:=\mathrm{Mat}_X(\mathbb{C})\text{、}U:=\mathbb{C}^{\mathrm{vec}}\text{、}f:=\mathrm{ent}_{p,q}\text{、}\lambda_x:=1_{\mathbb{C}}\text{、}v_x:=E_{x,x}\ \text{として当てる。}\blkref{claim_matrix_entry_map_is_linear_map}\ \blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
+&=\sum_{x\in X}\delta_{p,x}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{q,x}
+&&\left(\because\ \text{各}\ x\ \text{で準備の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\delta_{q,p}
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ p\text{、和の変数に}\ x\text{、}v_x:=\delta_{q,x}\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=\delta_{p,q}
+&&\left(\because\ q=p\ \text{と}\ p=q\ \text{は同値なので、場合分けが一致する。}\blkref{def_kronecker_delta}\right)\\
+&=(1_{\mathrm{Mat}_X})_{p,q}
+&&\left(\because\ 1_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in X`),
+        " は任意だったので、",
+        math(String.raw`\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}E_{x,x}=1_{\mathrm{Mat}_X}`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
