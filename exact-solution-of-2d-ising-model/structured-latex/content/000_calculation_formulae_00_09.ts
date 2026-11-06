@@ -1424,6 +1424,83 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_real_sums",
+    kind: "claim",
+    title: { text: "実数の和の有限和は有限和の和" },
+    labels: ["finite_sum_of_real_sums"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m, b_1,\dots,b_m \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} (a_j + b_j) = \Bigl(\sum_{j=1}^{m} a_j\Bigr) + \Bigl(\sum_{j=1}^{m} b_j\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (a_j + b_j)
+&= a_1 + b_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j + b_j)\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} a_j\Bigr) + \Bigl(\sum_{j=1}^{1} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j,\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1}, b_1,\dots,b_{m+1} \in \mathbb{R}`),
+        " を取る。",
+        math(String.raw`\alpha := \sum_{j=1}^{m} a_j`),
+        "、",
+        math(String.raw`\beta := \sum_{j=1}^{m} b_j`),
+        " とおく（",
+        math(String.raw`\alpha, \beta \in \mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} (a_j + b_j)
+&= \Bigl(\sum_{j=1}^{m} (a_j + b_j)\Bigr) + (a_{m+1} + b_{m+1})
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j + b_j)\bigr)\\
+&= (\alpha + \beta) + (a_{m+1} + b_{m+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \alpha + \bigl(\beta + (a_{m+1} + b_{m+1})\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= \alpha + \bigl((\beta + a_{m+1}) + b_{m+1}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= \alpha + \bigl((a_{m+1} + \beta) + b_{m+1}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+&= \alpha + \bigl(a_{m+1} + (\beta + b_{m+1})\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= (\alpha + a_{m+1}) + (\beta + b_{m+1})
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) + \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
+&&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) + \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j,\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すとき、実数の双線型値 (a+b)^⊤P(a+b) を 4 項へ展開する段（def_real_bilinear_value の二重の有限和を項ごとの和の有限和から二つの有限和へ分ける）から引けるよう足した。psd_cauchy_schwarz の q(t) の展開も同じ段を「有限和の項の並べ替え」の名前だけで使っている。複素数の兄弟の主張 finite_sum_of_complex_sums と同じ帰納法で、和の結合則・交換則の適用を 1 段ずつに割った。数値検証: sagemath/check/finite_sum_of_real_sums/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_negated_real_numbers",
     kind: "claim",
     title: { text: "実数の符号反転の有限和は有限和の符号反転" },

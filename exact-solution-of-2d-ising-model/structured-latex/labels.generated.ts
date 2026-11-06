@@ -354,6 +354,7 @@ export const ALL_LABELS = [
   "finite_sum_of_real_numbers_moves_one_term_to_end",
   "finite_sum_of_real_numbers_triangle_inequality",
   "finite_sum_of_real_scalar_multiples",
+  "finite_sum_of_real_sums",
   "finite_sum_of_scalar_multiples",
   "finite_sum_of_scalar_multiples_of_one_matrix",
   "finite_sum_of_zero_matrices",

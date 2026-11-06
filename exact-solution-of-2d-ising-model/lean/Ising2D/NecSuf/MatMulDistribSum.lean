@@ -4,13 +4,15 @@
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimMatMultDistributesOverSum.lean`
 （人手 `finite_sum_of_complex_sums`・`mat_mult_distributes_over_sum_in_right_factor`・`mat_mult_distributes_over_sum_in_left_factor`）。
 具体版をこのファイルの系として導くのは `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimMatMultDistributesOverSumFromNecSuf.lean`。
+係数が ℝ の兄弟の人手 `finite_sum_of_real_sums`（具体版 `finite_sum_of_real_sums` は `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean`、同じ 5 段）も
+`finite_sum_add_fin'` の特殊化として `ClaimFiniteSumsOfRealNumbersFromNecSuf.lean` の `finite_sum_of_real_sums_of_necSuf`（添字が有限型の和は `finite_sum_add'` の特殊化 `finite_sum_of_real_sums_fintype_of_necSuf`）で得る。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `finite_sum_of_complex_sums_step`（結合則 → 結合則 → 交換則 → 結合則 → 結合則） | `finite_sum_add_step'`（同じ並び） |
-| `finite_sum_of_complex_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び） |
-| `finite_sum_of_complex_sums`（`n = 0` は空の和。人手には無い） | `finite_sum_add_fin'` |
-| （具体版の添字は `Fin n` なので無い。`TensorPow M` の系が縮める添字 `Conf M` のために使う） | `finite_sum_add'`（有限型 `κ` の上の和を `Fintype.equivFin` で `Fin (card κ)` の上の和へ番号付けし直してから `finite_sum_add_fin'` を使う） |
+| `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`（結合則 → 結合則 → 交換則 → 結合則 → 結合則） | `finite_sum_add_step'`（同じ並び） |
+| `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び） |
+| `finite_sum_of_complex_sums`・`finite_sum_of_real_sums`（`n = 0` は空の和。人手には無い） | `finite_sum_add_fin'` |
+| `finite_sum_of_real_sums_fintype`（複素数の具体版の添字は `Fin n` なので無い。`TensorPow M` の系が縮める添字 `Conf M` のためにも使う） | `finite_sum_add'`（有限型 `κ` の上の和を `Fintype.equivFin` で `Fin (card κ)` の上の和へ番号付けし直してから `finite_sum_add_fin'` を使う） |
 | `mul_add_matrix_apply`（積の定義 → 和の定義 → 分配則を各項へ → 有限和を二つに分ける → 積の定義 → 和の定義） | `mul_add_matrix_apply'`（同じ並び） |
 | `add_mul_matrix_apply`（同上。分配則は右分配則） | `add_mul_matrix_apply'`（同じ並び） |
 
@@ -35,7 +37,7 @@ open Matrix
 
 variable {R : Type*}
 
-/-- **帰納法の段の 5 行**（具体版 `finite_sum_of_complex_sums_step`）: `(α + β) + (x + y) = (α + x) + (β + y)`。加法の結合則と交換則だけを使う。 -/
+/-- **帰納法の段の 5 行**（具体版 `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`）: `(α + β) + (x + y) = (α + x) + (β + y)`。加法の結合則と交換則だけを使う。 -/
 theorem finite_sum_add_step' [AddCommSemigroup R] (α β x y : R) :
     (α + β) + (x + y) = (α + x) + (β + y) :=
   calc (α + β) + (x + y)
@@ -45,7 +47,7 @@ theorem finite_sum_add_step' [AddCommSemigroup R] (α β x y : R) :
     _ = α + (x + (β + y)) := by rw [add_assoc x β y]                         -- 結合則
     _ = (α + x) + (β + y) := (add_assoc _ _ _).symm                          -- 結合則
 
-/-- **`Σ_{j=1}^{n+1}(a_j + b_j) = Σ a_j + Σ b_j`**（具体版 `finite_sum_of_complex_sums_succ`）。`n` についての帰納法。 -/
+/-- **`Σ_{j=1}^{n+1}(a_j + b_j) = Σ a_j + Σ b_j`**（具体版 `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`）。`n` についての帰納法。 -/
 theorem finite_sum_add_succ' [AddCommMonoid R] (n : ℕ) (a b : Fin (n + 1) → R) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j := by
   induction n with
@@ -67,14 +69,14 @@ theorem finite_sum_add_succ' [AddCommMonoid R] (n : ℕ) (a b : Fin (n + 1) → 
       _ = (∑ j, a j) + ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- 和の定義を 2 か所
 
-/-- `Fin n` の上の和（`n = 0` を含む。具体版 `finite_sum_of_complex_sums`）。 -/
+/-- `Fin n` の上の和（`n = 0` を含む。具体版 `finite_sum_of_complex_sums`・`finite_sum_of_real_sums`）。 -/
 theorem finite_sum_add_fin' [AddCommMonoid R] (n : ℕ) (a b : Fin n → R) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j := by
   cases n with
   | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, add_zero]   -- 空の和（人手には無い）
   | succ n => exact finite_sum_add_succ' n a b
 
-/-- 有限型 `κ` の上の和。`κ` に `Fintype.equivFin` で番号を付け、`finite_sum_add_fin'` を使う。 -/
+/-- 有限型 `κ` の上の和（具体版 `finite_sum_of_real_sums_fintype`）。`κ` に `Fintype.equivFin` で番号を付け、`finite_sum_add_fin'` を使う。 -/
 theorem finite_sum_add' [AddCommMonoid R] {κ : Type*} [Fintype κ] (a b : κ → R) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j := by
   let e := Fintype.equivFin κ
