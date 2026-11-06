@@ -632,6 +632,18 @@ S_2
         " と Step 2 の ",
         math(String.raw`A := \exp(S_2)`),
         " の置き方）であり、",
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}X`),
+        " は ",
+        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}X`),
+        "（",
+        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "）を表す。",
         math(String.raw`B`),
         " がエルミートなので ",
         math(String.raw`B^* = B`),
@@ -639,22 +651,30 @@ S_2
       ]),
       displayMath(String.raw`\begin{aligned}
 W
-&=B\,V_2\,B
-  &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)\\
-&=B\bigl((2s_2)^{M_{\mathrm{col}}/2}A\bigr)B
-  &&\bigl(\because\ V_2=(2s_2)^{M_{\mathrm{col}}/2}A\bigr)\\
-&=(2s_2)^{M_{\mathrm{col}}/2}B A B
-  &&\bigl(\because\ \text{スカラー倍と行列積の結合則}\bigr)\\
-&=(2s_2)^{M_{\mathrm{col}}/2}B^{*}A B
+&=\bigl(B V_2\bigr)B
+  &&\bigl(\because\ \blkref{def_symmetrized_transfer_matrix},\ B = V_1^{1/2}\ \blkref{def_transfer_matrix_square_root}\bigr)\\
+&=\Bigl(B\bigl((2s_2)^{M_{\mathrm{col}}/2}A\bigr)\Bigr)B
+  &&\bigl(\because\ \text{Step 3 の冒頭の}\ V_2=(2s_2)^{M_{\mathrm{col}}/2}A\bigr)\\
+&=\Bigl((2s_2)^{M_{\mathrm{col}}/2}\bigl(BA\bigr)\Bigr)B
+  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to B,\ B \to A)\bigr)\\
+&=(2s_2)^{M_{\mathrm{col}}/2}\Bigl(\bigl(BA\bigr)B\Bigr)
+  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to BA,\ B \to B)\bigr)\\
+&=(2s_2)^{M_{\mathrm{col}}/2}\Bigl(\bigl(B^{*}A\bigr)B\Bigr)
   &&\bigl(\because\ B^*=B\bigr)
 \end{aligned}`),
       paragraph([
         ref("congruence_preserves_positive_definite"),
         " より ",
-        math(String.raw`B^*AB = B^*(AB)`),
+        math(String.raw`B^*(AB)`),
+        " は正定値であり、",
+        math(String.raw`(B^*A)B = B^*(AB)`),
         "（",
         ref("mat_mult_associative"),
-        "）は正定値、",
+        "（",
+        math(String.raw`\text{主張の行数・列数 } m, n, p, q \to 2^{M_{\mathrm{col}}},\ A \to B^*,\ B \to A,\ C \to B`),
+        "））なので ",
+        math(String.raw`(B^*A)B`),
+        " も正定値、",
         math(String.raw`K_2 > 0`),
         " より ",
         math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
@@ -665,17 +685,7 @@ W
         " は正定値である。",
       ]),
       paragraph([
-        "次に実対称性を示す。",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}A`),
-        " は ",
-        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}A`),
-        "（",
-        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
-        " は ",
-        ref("inclusion_rr_to_cc"),
-        " の略記、スカラー倍は ",
-        ref("def_matrix_scalar_multiple"),
-        "）を表す。Step 2 より ",
+        "次に実対称性を示す。Step 2 より ",
         math(String.raw`B`),
         " と ",
         math(String.raw`A`),
@@ -813,6 +823,7 @@ W
         "2026-11-04: SageMath の検算（sagemath/check/W_is_real_symmetric_positive_definite/）を付けるにあたり、可逆性の段を直した。旧い段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性（def_hermitian_positive_definite）は x ∈ ℂ^n の x^*Wx についての条件で、複素の x では x^⊤Wx = 0 から x = 0 は従わない（検算で、実対称正定値な W と x = u + iv（u^⊤Wu = v^⊤Wv、u^⊤Wv = 0）で x^⊤Wx = 0 となる例を作った）。また核が {0} であることから可逆を導く主張は本文に無かった。可逆性を、BB' = I の 3 行の鎖（matrix_double_negation・exp_of_negative_is_left_inverse）と Step 2 の B'B = I による B ∈ R^×、V2_invertible、def_invertible_elements_of_R (ii) の 2 回の適用で示す形にした。主張の「とくに W は可逆」を、def_invertible_elements_of_R の意味で可逆と書いた（内容は不変）。",
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: Step 1 の K_1D の実対称性が「iH_is_real_symmetric の Step 3 で見たとおり」と散文で済ませていた（その Step 3 は 1 ≤ m ≤ M_col−1 の σ_m^zσ_{m+1}^z しか扱わず、周期端 σ_{M_col}^zσ_1^z を覆わない）のを、(σ_k^z)^⊤ = σ_k^z の 5 行、(σ_m^zσ_{m+1}^z)^⊤ の 5 行（m^+ を置き、transpose_of_matrix_product と distinct_site_pauli_matrices_commute で。M_col = 1 は同じ行列）、(K_1D)^⊤ の 5 行と、成分の実性の 2 段落（kronecker_of_real_entry_matrices_has_real_entries・product_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries・real_scalar_multiple_of_real_entry_matrix_has_real_entries）に書き直した。主張は不変。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: Step 3 の転置の鎖 4 行が「転置の積の法則 (ABC)^⊤ = C^⊤B^⊤A^⊤」と「B^⊤ = B, V_2^⊤ = V_2」を名前だけで引いていたのを、V_2^⊤ = V_2 の 4 行（Step 3 冒頭の V_2 = (2s_2)^{M_col/2}A・transpose_of_matrix_scalar_multiple・Step 2 の A^⊤ = A）と W^⊤ の 7 行（transpose_of_matrix_product を 2 回、Step 2 の B^⊤ = B、V_2^⊤ = V_2、mat_mult_associative）に書き直した。主張の「W は成分がすべて実数」を示す段が無かったので、real_scalar_multiple_of_real_entry_matrix_has_real_entries と product_of_real_entry_matrices_has_real_entries を 2 回引く段を足した。Step 1 の「iH_is_real_symmetric の Step 1 より S_2 も実対称」と S_2 の表示の根拠を、主張そのものを引く形に直した（実対称性を示すのはその Step 3）。Step 3 冒頭の V_2 = (2s_2)^{M_col/2}A の根拠を、V2_exponential_representation の exp(iK_2^*H_2) と S_2・A の置き方に直した。主張は不変。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: Step 3 の W の鎖の「スカラー倍と行列積の結合則」（名前だけの根拠）を、scalar_multiple_factors_out_of_right_factor（B(cA) = c(BA)）と scalar_multiple_factors_out_of_left_factor（(c(BA))B = c((BA)B)）を引く 2 行に割り、鎖の各行の括弧を def_symmetrized_transfer_matrix の W = (BV_2)B に合わせた（4 行 → 5 行）。c = (2s_2)^{M_col/2} を ℂ の元として使うこと（inclusion_rr_to_cc）の断りを Step 3 の冒頭へ移した。続く段落の B^*AB = B^*(AB) を、鎖の終わりの (B^*A)B と mat_mult_associative で結ぶ形にした。主張は不変。",
       ],
     },
   },

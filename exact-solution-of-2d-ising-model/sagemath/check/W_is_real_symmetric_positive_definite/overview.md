@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 - ブロック: `maxeig_003_claim_W_is_positive_definite`（`W` は実対称正定値で、可逆）
 - 範囲: 証明の Step 1（`σ_m^zσ_{m+1}^z`・`K_1D`・`S_2` の実対称性と `S_2` の表示の鎖 2 行）、Step 2（エルミート性・正定値性・`B'B = I`・
-  `(1/2)K_1D` の実対称性（成分の実性と転置の鎖 3 行）・`B` と `A` の実対称性）、Step 3（`W` の鎖 4 行、合同と正の実数倍による正定値性、`V_2^⊤` の鎖 4 行、`W^⊤` の鎖 7 行、`V_2`・`BV_2`・`W` の成分の実性）、
+  `(1/2)K_1D` の実対称性（成分の実性と転置の鎖 3 行）・`B` と `A` の実対称性）、Step 3（`W` の鎖 5 行、合同と正の実数倍による正定値性、`V_2^⊤` の鎖 4 行、`W^⊤` の鎖 7 行、`V_2`・`BV_2`・`W` の成分の実性）、
   可逆性の段（`BB'` の鎖 3 行、`BV_2 ∈ R^×`、`W ∈ R^×`）、主張そのもの。
 - 記号は証明のとおり `D := Σ_m σ_m^zσ_{m+1}^z`（`σ_{M+1}^z := σ_1^z`）、`B := exp((1/2)K_1D) = V_1^{1/2}`、`B' := exp(−(1/2)K_1D)`、
   `S_2 := iK_2^*H_2`、`A := exp(S_2)`、`c := (2s_2)^{M_col/2}`、`W := (BV_2)B`。
@@ -25,8 +25,8 @@
 | Step 2: `(1/2)K_1D` の成分が実（`real_scalar_multiple_of_real_entry_matrix_has_real_entries`）と転置の鎖 3 行（`transpose_of_matrix_scalar_multiple` → Step 1 の `(K_1D)^⊤ = K_1D` → 略記） | `check_symbolic_exponents.sage` | 各行を組み、隣の行と比べる。`M_col = 2..5`、`K_1` は実の不定元 | **PASS** |
 | Step 2: `B`・`A` は実対称正定値（`exp_hermitian_is_positive_definite` と `exp_of_real_symmetric_is_real_symmetric`（`A → (1/2)K_1D`・`A → S_2`））、`B'B = I`（`exp_of_negative_is_left_inverse`）、`B = V_1^{1/2}`（`def_transfer_matrix_square_root`） | `check_exact_exponentials_and_W.sage` | 下の「計算の帰属」の厳密な `B, B', A` で、成分が実・転置で不変・`B^* = B`・正定値の二つの判定・`B'B = I`。`BB = V_1` は `V_1` を `def_transfer_matrix` の成分から `B` を経由せずに作って比べる | **PASS** |
 | Step 3 の `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）と `(2s_2)^{M_col/2} > 0` | `check_exact_exponentials_and_W.sage` | `V_2` を成分の定義から作り `cA` と比べる。`s_2 > 0`・`c > 0`・`c^2 = (2s_2)^{M_col}` | **PASS** |
-| Step 3 の `W` の鎖 4 行（`W = BV_2B = B(cA)B = c(BAB) = c(B^*AB)`） | `check_exact_exponentials_and_W.sage` | 各行を組み、隣の行と比べる | **PASS** |
-| Step 3 の続く段落（`B^*AB = B^*(AB)` は正定値（`congruence_preserves_positive_definite`）、`W` は正定値（`positive_real_multiple_preserves_positive_definite`）） | `check_exact_exponentials_and_W.sage` | 結合律の行を比べ、`B^*(AB)` と `W` に正定値の二つの判定を当てる | **PASS** |
+| Step 3 の `W` の鎖 5 行（`W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)`。3 行目は `scalar_multiple_factors_out_of_right_factor`、4 行目は `scalar_multiple_factors_out_of_left_factor`） | `check_exact_exponentials_and_W.sage` | 各行を本文の字面どおりの括弧で組み、隣の行と比べる | **PASS** |
+| Step 3 の続く段落（`(B^*A)B = B^*(AB)` は正定値（`congruence_preserves_positive_definite`）、`W` は正定値（`positive_real_multiple_preserves_positive_definite`）） | `check_exact_exponentials_and_W.sage` | 結合律の行を比べ、`B^*(AB)` と `W` に正定値の二つの判定を当てる | **PASS** |
 | Step 3 の `V_2^⊤` の鎖 4 行（`V_2^⊤ = (cA)^⊤ = cA^⊤ = cA = V_2`） | `check_exact_exponentials_and_W.sage` | 転置は `def_matrix_transpose` の成分の式で組み、各行を比べる | **PASS** |
 | Step 3 の `W^⊤` の鎖 7 行（`W^⊤ = ((BV_2)B)^⊤ = B^⊤(BV_2)^⊤ = B^⊤(V_2^⊤B^⊤) = B(V_2^⊤B) = B(V_2B) = (BV_2)B = W`） | `check_exact_exponentials_and_W.sage` | 各行を本文の字面どおりに組み、隣の行と比べる。`B^⊤ = B` も個別に見る | **PASS** |
 | Step 3 の成分の実性の段（`V_2 = cA`、`BV_2`、`W = (BV_2)B`） | `check_exact_exponentials_and_W.sage` | 各行列の成分が実（`entries_are_real`） | **PASS** |

@@ -78,14 +78,16 @@ for M in range(2, 5):
             B = exp_by_spectral_projectors(DQ, lambda lam: y**lam, QQ).change_ring(F)
             Bp = exp_by_spectral_projectors(DQ, lambda lam: y**(-lam), QQ).change_ring(F)
             W = body_product(body_product(B, V2), B)                          # def_symmetrized_transfer_matrix: W = (BV_2)B
-            # Step 3 の W の鎖: W = BV_2B = B(cA)B = c(BAB) = c(B^*AB)
+            # Step 3 の W の鎖 5 行: W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)
             l1 = W
             l2 = body_product(body_product(B, body_scalar(c, A)), B)
-            l3 = body_scalar(c, body_product(body_product(B, A), B))
-            l4 = body_scalar(c, body_product(body_product(conj_transpose_exact(B), A), B))
+            l3 = body_product(body_scalar(c, body_product(B, A)), B)
+            l4 = body_scalar(c, body_product(body_product(B, A), B))
+            l5 = body_scalar(c, body_product(body_product(conj_transpose_exact(B), A), B))
             eq(l1, l2, f"M={M}: W の鎖 1→2（V_2 = cA を代入）")
-            eq(l2, l3, f"M={M}: W の鎖 2→3（スカラー倍と行列積の結合則）")
-            eq(l3, l4, f"M={M}: W の鎖 3→4（B^* = B）")
+            eq(l2, l3, f"M={M}: W の鎖 2→3（scalar_multiple_factors_out_of_right_factor: B(cA) = c(BA)）")
+            eq(l3, l4, f"M={M}: W の鎖 3→4（scalar_multiple_factors_out_of_left_factor: (c(BA))B = c((BA)B)）")
+            eq(l4, l5, f"M={M}: W の鎖 4→5（B^* = B）")
             # 続く段落: B^*(AB)（mat_mult_associative で (B^*A)B と同じ行列）は正定値（congruence_preserves_positive_definite）
             BsAB = body_product(conj_transpose_exact(B), body_product(A, B))
             eq(BsAB, body_product(body_product(conj_transpose_exact(B), A), B), f"M={M}: B^*(AB) = (B^*A)B")

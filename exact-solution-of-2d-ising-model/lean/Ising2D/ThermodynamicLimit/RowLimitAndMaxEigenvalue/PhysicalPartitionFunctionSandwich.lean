@@ -41,8 +41,8 @@
 | Step 2: `exp_hermitian_is_positive_definite` で `B := exp(½K_1D)` と `A := exp(S_2)` は正定値 | `physicalV1halfC_posDef`、`expS2C_posDef` |
 | Step 2: `exp_of_negative_is_left_inverse` で `B' := exp(-½K_1D)` は `B'B = I` | `physicalV1halfInvC`、`physicalV1halfInvC_mul_physicalV1halfC` |
 | Step 3: `B` がエルミートなので `B^* = B` | `physicalV1halfC_conjTranspose` |
-| Step 3 の 4 行の鎖 `W = BV_2B = B((2s_2)^{M_col/2}A)B = (2s_2)^{M_col/2}BAB = (2s_2)^{M_col/2}B^*AB` | `physicalSymTransferC_eq_smul_congruence` の `calc` の 4 段（係数 `(2s_2)^{M_col/2}` は `twoS2Pow`） |
-| Step 3: `congruence_preserves_positive_definite`（Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite` で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
+| Step 3 の 5 行の鎖 `W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)`（`c = (2s_2)^{M_col/2}`。3 行目は `scalar_multiple_factors_out_of_right_factor`、4 行目は `scalar_multiple_factors_out_of_left_factor`） | `physicalSymTransferC_eq_smul_congruence` の `calc` の 5 段（係数 `c` は `twoS2Pow`。3・4 段は `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`） |
+| Step 3: `congruence_preserves_positive_definite`（Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative` で `(B^*A)B = B^*(AB)`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite` で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
 | 正定値性を実ベクトルで読む（`partition_function_sandwich` が使う形） | `realQuadForm_pos_of_map_posDef`、`physicalSymTransferR_posDef` |
 | Step 2: `½K_1D` の成分は実（Step 1 の `K_1D` の成分の実性と `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → ½`, `B → K_1D`）） | `halfK1D_hasRealEntries` |
 | Step 2: `(½K_1D)^⊤ = ½K_1D` の 3 行（`transpose_of_matrix_scalar_multiple`、Step 1 の `(K_1D)^⊤ = K_1D`、`½K_1D` の略記） | `halfK1D_transpose` の `calc` の 3 段（`transpose_smul_tensorPow`・`K1D_transpose`・`rfl`） |
@@ -62,8 +62,9 @@
 | 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
 | `partition_function_sandwich`（`Z = tr(W^{N_row})` → `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
-- Step 3 の「スカラー倍と行列積の結合則」と `mat_mult_associative` は具体版が無く、mathlib の `Matrix.mul_smul`・`Matrix.smul_mul`・
-  `Matrix.mul_assoc` を引く。`exp_hermitian_is_positive_definite` の Lean（`posDef_exp_of_isHermitian`）は人手の段と一対一でない
+- Step 3 の `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor` は、添字が `Conf M` の行列なので
+  `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` の
+  `mul_smul_matrix`・`smul_mul_matrix`）を引く。`mat_mult_associative` は具体版が無く、mathlib の `Matrix.mul_assoc` を引く。`exp_hermitian_is_positive_definite` の Lean（`posDef_exp_of_isHermitian`）は人手の段と一対一でない
   （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` は、添字が `Conf M` の行列なので
   `positive_real_multiple_preserves_positive_definite_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` で、人手の 13 行の鎖と
   1 対 1。`ClaimPositiveRealMultiplePreservesPositiveDefinite.lean`）を引く。
@@ -446,25 +447,27 @@ theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
 
 /-! ## Step 3: 具体的な `W` は正定値 -/
 
-/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の 4 行の鎖**:
-`W = BV_2B = B((2s_2)^{M_col/2}A)B = (2s_2)^{M_col/2}BAB = (2s_2)^{M_col/2}B^*AB`。 -/
+/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の 5 行の鎖**（`c := (2s_2)^{M_col/2}` を `ℂ` の元として）:
+`W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)`。 -/
 theorem physicalSymTransferC_eq_smul_congruence (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     physicalSymTransferC M K1 K2
       = ((twoS2Pow M K2 : ℝ) : ℂ)
           • ((physicalV1halfC M K1)ᴴ * expS2C M K2 * physicalV1halfC M K1) :=
   calc physicalSymTransferC M K1 K2
-      = physicalV1halfC M K1 * V2 M K2 * physicalV1halfC M K1 := rfl            -- `def_symmetrized_transfer_matrix`
-    _ = physicalV1halfC M K1 * (((twoS2Pow M K2 : ℝ) : ℂ) • expS2C M K2) * physicalV1halfC M K1 := by
-        rw [V2_exponential_representation hK2]; rfl                              -- `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）
-    _ = ((twoS2Pow M K2 : ℝ) : ℂ) • (physicalV1halfC M K1 * expS2C M K2 * physicalV1halfC M K1) := by
-        rw [Matrix.mul_smul, Matrix.smul_mul]                                    -- スカラー倍と行列積の結合則
+      = (physicalV1halfC M K1 * V2 M K2) * physicalV1halfC M K1 := rfl          -- `def_symmetrized_transfer_matrix`、`B = V_1^{1/2}`
+    _ = (physicalV1halfC M K1 * (((twoS2Pow M K2 : ℝ) : ℂ) • expS2C M K2)) * physicalV1halfC M K1 := by
+        rw [V2_eq_twoS2Pow_smul_expS2C hK2]                                     -- Step 3 の冒頭の `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）
+    _ = (((twoS2Pow M K2 : ℝ) : ℂ) • (physicalV1halfC M K1 * expS2C M K2)) * physicalV1halfC M K1 := by
+        rw [mul_smul_matrix_tensorPow]                                           -- `scalar_multiple_factors_out_of_right_factor`（`a → c`, `A → B`, `B → A`）
+    _ = ((twoS2Pow M K2 : ℝ) : ℂ) • ((physicalV1halfC M K1 * expS2C M K2) * physicalV1halfC M K1) :=
+        smul_mul_matrix_tensorPow _ _ _                                          -- `scalar_multiple_factors_out_of_left_factor`（`a → c`, `A → BA`, `B → B`）
     _ = ((twoS2Pow M K2 : ℝ) : ℂ)
           • ((physicalV1halfC M K1)ᴴ * expS2C M K2 * physicalV1halfC M K1) := by
         rw [physicalV1halfC_conjTranspose]                                       -- `B^* = B`
 
 /-- **人手 `W_is_real_symmetric_positive_definite` の「`W` は正定値」を具体的な `W` について**:
 `congruence_preserves_positive_definite`（`A → exp(S_2)`, `B → V_1^{1/2}`, `B' → exp(-½K_1D)`）で `B^*(AB)` は正定値、
-`mat_mult_associative` で `B^*AB = B^*(AB)`、`positive_real_multiple_preserves_positive_definite`（`r → (2s_2)^{M_col/2}`）で `W` は正定値。 -/
+`mat_mult_associative` で `(B^*A)B = B^*(AB)`、`positive_real_multiple_preserves_positive_definite`（`α → (2s_2)^{M_col/2}`）で `W` は正定値。 -/
 theorem physicalSymTransferC_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     (physicalSymTransferC M K1 K2).PosDef := by
   have hcong : ((physicalV1halfC M K1)ᴴ * (expS2C M K2 * physicalV1halfC M K1)).PosDef :=
