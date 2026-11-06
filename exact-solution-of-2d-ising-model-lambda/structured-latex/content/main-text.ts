@@ -68024,7 +68024,7 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
 &\le \max\{0,A\}-\min\{0,A\}
 &&\bigl(\because\ \blkref{claim_iterated_staircase_parallel_width_bound}\text{ と }\mathbb Z\text{ の順序}\bigr)\\
 &=|A|
-&&\bigl(\because\ \mathbb Z\text{ の四則と絶対値の定義}\bigr),
+&&\bigl(\because\ \mathbb Z\text{ の四則と絶対値の定義}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となり、仮定した分離 ",
@@ -68760,6 +68760,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_periodicLift",
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_avoid_periodicLift",
+                      "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_disjoint",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
