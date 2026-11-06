@@ -7795,7 +7795,7 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
 &\longmapsto[c,a,d,b]
 &&\bigl(\because\ b,d\text{ を交換}\bigr)\\
 &\longmapsto[c,d,a,b]
-&&\bigl(\because\ a,d\text{ を交換}\bigr).
+&&\bigl(\because\ a,d\text{ を交換}\bigr)
 \end{aligned}`),
                 paragraph(["各交換は完全列挙を保つので、途中の列にも ", ref("claim_matching_word_sign_swap"), " を適用できる。以下では同じ ", math(String.raw`U,V`), " を前後へ付ける記号を省いて ", math(String.raw`\varepsilon[a,b,c,d]:=\varepsilon(U\mathbin{+\!+}[a,b,c,d]\mathbin{+\!+}V)`), " とだけ略記する。"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7804,14 +7804,14 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
  &=\varepsilon[c,a,b,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr)\\
  &=-\varepsilon[a,c,b,d]&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }a,c\text{ へ適用}\bigr)\\
  &=-(-\varepsilon[a,b,c,d])&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }b,c\text{ へ適用}\bigr)\\
- &=\varepsilon[a,b,c,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr).
+ &=\varepsilon[a,b,c,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr)
 \end{aligned}`),
                 paragraph(["これで隣り合う二対の交換は符号を保つ。一般の二つの列挙は ", ref("claim_perfect_matching_enumeration_complete"), " の先頭を合わせる帰納法で移り合う。帰納法では、既に一致させた対の端点を前置列 ", math(String.raw`U`), " として残し、", math(String.raw`U\mathbin{+\!+}W(\mathcal L)`), " 全体を完全列挙とする。尾の ", math(String.raw`W(\mathcal L)`), " だけを完全列挙とはしない。交換を一回追加するたび上の等号を適用し、交換列をつなぐときは等号の推移律を使う。交換零回の等号からの帰納法により、すべての列挙で符号は一致する。", ref("def_perfect_matching_sign"), " で選んだ ", math(String.raw`\mathcal L_0`), " と比較すれば主張の等号を得る。"]),
                 paragraph(["空集合では対の列挙も端点の列も空である。", ref("def_matching_word_sign"), " の置換は空集合上の恒等置換で、転倒対は存在しない。したがって"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\varnothing)&=\operatorname{sgn}(\operatorname{id}_{\varnothing})&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
  &=(-1)^0&&\bigl(\because\ \blkref{def_permutation_sign},\ \text{転倒対は空}\bigr)\\
- &=1&&\bigl(\because\ \text{整数の零乗}\bigr).
+ &=1&&\bigl(\because\ \text{整数の零乗}\bigr)
 \end{aligned}`),
                 paragraph(["すべての集合と列は有限で、符号の計算は整数の中で閉じる。実数体・複素数体への脱出はない。"]),
               ],
