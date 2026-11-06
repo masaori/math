@@ -124,6 +124,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionR
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 
 namespace Ising2D
 
@@ -596,6 +597,13 @@ theorem physicalSymTransferR_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Co
     0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x := by
   rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
   exact W_real_is_positive_definite K1 hK2 x hx
+
+/-- **人手 `W_real_is_positive_semidefinite`**: すべての `u` で `u^⊤W_ℝu ≥ 0`（`W_ℝ := ϱ(W)`）。
+人手の `u ≠ 0` の側（`W_real_is_positive_definite`）と `u = 0` の 5 行の鎖は `psd_of_pd`（`ClaimOperatorBound.lean`）の 2 つの場合である。 -/
+theorem W_real_is_positive_semidefinite (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (u : Conf M → ℝ) :
+    0 ≤ u ⬝ᵥ realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2) *ᵥ u :=
+  psd_of_pd (W_real_is_positive_definite K1 hK2) u
 
 /-! ## 可逆性: `B ∈ R^×`、`BV_2 ∈ R^×`、`W ∈ R^×`
 

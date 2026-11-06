@@ -1040,6 +1040,76 @@ W
     },
   },
   {
+    id: "maxeig_claim_W_real_is_positive_semidefinite",
+    kind: "claim",
+    title: { tex: String.raw`u^\top W_{\mathbb{R}} u \geq 0` },
+    labels: ["W_real_is_positive_semidefinite"],
+    statement: [
+      paragraph([
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について、すべての ",
+        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " で ",
+        math(String.raw`u^\top W_{\mathbb{R}} u \geq 0`),
+        " である（",
+        ref("psd_cauchy_schwarz"),
+        " の意味で半正定値）。",
+        math(String.raw`u^\top W_{\mathbb{R}} u`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u`),
+        "）の値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " を取る。",
+        math(String.raw`u \neq 0`),
+        " なら ",
+        ref("W_real_is_positive_definite"),
+        "（",
+        math(String.raw`x \to u`),
+        "）より ",
+        math(String.raw`u^\top W_{\mathbb{R}} u > 0`),
+        " である。",
+        math(String.raw`u = 0`),
+        "（すべての ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`u_k = 0`),
+        "）なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u^\top W_{\mathbb{R}} u
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} \bigl(u_k\,(W_{\mathbb{R}})_{kl}\bigr)\,u_l
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u)\bigr)\\
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} \bigl(0\cdot(W_{\mathbb{R}})_{kl}\bigr)\cdot 0
+  &&\bigl(\because\ u_k = 0,\ u_l = 0\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} 0\cdot 0
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 \cdot a = 0\ (a \to (W_{\mathbb{R}})_{kl})\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} 0
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 \cdot a = 0\ (a \to 0)\ \text{を各項へ}\bigr)\\
+&= 0
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`u^\top W_{\mathbb{R}} u \geq 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm と moment_log_convexity は psd_cauchy_schwarz を W に当てるとき、その仮定の半正定値性を W_is_real_symmetric_positive_definite（複素行列 W の正定値性）から「とくに半正定値」として名前だけで取っていた。実数の行列 W_ℝ について、正定値性（W_real_is_positive_definite）と u = 0 の 5 行の鎖から示す主張として足した。",
+      ],
+    },
+  },
+  {
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
@@ -1331,99 +1401,131 @@ c(M_{\mathrm{col}})
     id: "maxeig_007_claim_operator_bound",
     kind: "claim",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 9 },
-    title: { tex: String.raw`\|Wx\| \leq c(M_{\mathrm{col}})\,\|x\|` },
+    title: { tex: String.raw`\|W_{\mathbb{R}}x\| \leq c(M_{\mathrm{col}})\,\|x\|` },
     labels: ["rayleigh_bounds_operator_norm"],
     statement: [
       paragraph([
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列、",
+        math(String.raw`c(M_{\mathrm{col}})`),
+        " を ",
+        ref("def_rayleigh_sup"),
+        " の数とする。",
         math(String.raw`\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " について ",
-        math(String.raw`\|Wx\| \leq c(M_{\mathrm{col}})\,\|x\|`),
+        math(String.raw`\|W_{\mathbb{R}}x\| \leq c(M_{\mathrm{col}})\,\|x\|`),
         "。したがって ",
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         " について ",
-        math(String.raw`\|W^k x\| \leq c(M_{\mathrm{col}})^k\|x\|`),
-        "。",
+        math(String.raw`\|(W_{\mathbb{R}})^k x\| \leq c(M_{\mathrm{col}})^k\|x\|`),
+        "。積 ",
+        math(String.raw`W_{\mathbb{R}}x`),
+        " は ",
+        ref("mat_mult"),
+        " の成分の式（",
+        math(String.raw`(W_{\mathbb{R}}x)_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} (W_{\mathbb{R}})_{kl}\,x_l`),
+        "）、冪 ",
+        math(String.raw`(W_{\mathbb{R}})^k`),
+        " は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " のもの、ノルムは ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K = \mathbb{R}`),
+        " のものである。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`c := c(M_{\mathrm{col}})`),
-        " と略記する。",
+        math(String.raw`c := c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        "（",
+        ref("def_rayleigh_sup"),
+        "）と略記する。",
+      ]),
+      paragraph([
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " を取り、",
-        math(String.raw`y := Wx`),
+        math(String.raw`y := W_{\mathbb{R}}x`),
         "（成分は ",
-        math(String.raw`y_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} W_{kl}\,x_l`),
+        math(String.raw`y_k = \sum_{l=1}^{2^{M_{\mathrm{col}}}} (W_{\mathbb{R}})_{kl}\,x_l`),
         "（",
         ref("mat_mult"),
         "）。",
-        math(String.raw`W`),
-        " の成分と ",
-        math(String.raw`x`),
-        " の成分は実数なので ",
+        math(String.raw`(W_{\mathbb{R}})_{kl}`),
+        " と ",
+        math(String.raw`x_l`),
+        " は実数なので ",
         math(String.raw`y \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "）とおく。まず",
       ]),
       displayMath(String.raw`\begin{aligned}
-\|Wx\|^2
+\|W_{\mathbb{R}}x\|^2
 &=\|y\|^2
-&&\bigl(\because\ y:=Wx\bigr)\\
+&&\bigl(\because\ y:=W_{\mathbb{R}}x\bigr)\\
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}|y_k|^2
 &&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{a}\bigr)^2=a\bigr)\\
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\,y_k
 &&\bigl(\because\ y_k\in\mathbb{R}\ \text{なので}\ |y_k|^2=y_ky_k\bigr)\\
-&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\sum_{l=1}^{2^{M_{\mathrm{col}}}}W_{kl}\,x_l
-&&\bigl(\because\ y=Wx\ \text{の成分 }\blkref{mat_mult}\ \text{（右因子）}\bigr)\\
-&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}y_k\,W_{kl}\,x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\ y_k(W_{kl}x_l)=(y_kW_{kl})x_l\bigr)\\
-&=y^\top Wx
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}y_k\sum_{l=1}^{2^{M_{\mathrm{col}}}}(W_{\mathbb{R}})_{kl}\,x_l
+&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{の成分 }\blkref{mat_mult}\ \text{（右因子）}\bigr)\\
+&=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}y_k\,(W_{\mathbb{R}})_{kl}\,x_l
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\ y_k((W_{\mathbb{R}})_{kl}x_l)=(y_k(W_{\mathbb{R}})_{kl})x_l\bigr)\\
+&=y^\top W_{\mathbb{R}}x
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to y,\ y \to x)\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
-        math(String.raw`W`),
-        " は実対称かつ正定値、とくに半正定値である（",
-        ref("W_is_real_symmetric_positive_definite"),
-        "）から、",
+        math(String.raw`W_{\mathbb{R}}`),
+        " は対称（",
+        ref("W_real_is_symmetric"),
+        "）かつ半正定値（",
+        ref("W_real_is_positive_semidefinite"),
+        "）であるから、",
       ]),
       displayMath(String.raw`\begin{aligned}
-\|Wx\|^4
-&=\left(\|Wx\|^2\right)^2
+\|W_{\mathbb{R}}x\|^4
+&=\left(\|W_{\mathbb{R}}x\|^2\right)^2
 &&\bigl(\because\ \text{冪の指数法則}\bigr)\\
-&=\left(y^\top Wx\right)^2
+&=\left(y^\top W_{\mathbb{R}}x\right)^2
 &&\bigl(\because\ \text{上の式変形}\bigr)\\
-&\leq\left(x^\top Wx\right)\left(y^\top Wy\right)
-&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=W,\ y=Wx\ \text{に適用}\bigr)\\
-&\leq\left(c\|x\|^2\right)\left(y^\top Wy\right)
-&&\bigl(\because\ \text{上限の評価}\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top Wx\leq c\|x\|^2\ \text{と}\ 0\leq y^\top Wy\ \text{（半正定値性）}\bigr)\\
+&\leq\left(x^\top W_{\mathbb{R}}x\right)\left(y^\top W_{\mathbb{R}}y\right)
+&&\bigl(\because\ \blkref{psd_cauchy_schwarz}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to x,\ y \to y)\bigr)\\
+&\leq\left(c\|x\|^2\right)\left(y^\top W_{\mathbb{R}}y\right)
+&&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top W_{\mathbb{R}}x\leq c\|x\|^2\ \text{と}\ \blkref{W_real_is_positive_semidefinite}\ (u \to y)\ \text{の}\ 0\leq y^\top W_{\mathbb{R}}y\bigr)\\
 &\leq\left(c\|x\|^2\right)\left(c\|y\|^2\right)
-&&\bigl(\because\ \text{上限の評価}\ \blkref{def_rayleigh_sup}\ \text{の}\ y^\top Wy\leq c\|y\|^2\ \text{と}\ 0\leq c\|x\|^2\bigr)\\
-&=c^2\|x\|^2\|Wx\|^2
-&&\bigl(\because\ y=Wx\ \text{と}\ \mathbb{R}\ \text{の乗法の可換則・結合則}\bigr)
+&&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ y^\top W_{\mathbb{R}}y\leq c\|y\|^2\ (x \to y)\ \text{と}\ 0\leq c\|x\|^2\ \text{（}c>0\text{）}\bigr)\\
+&=c^2\|x\|^2\|W_{\mathbb{R}}x\|^2
+&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{と}\ \mathbb{R}\ \text{の乗法の可換則・結合則}\bigr)
 \end{aligned}`),
       paragraph([
-        math(String.raw`\|Wx\| = 0`),
+        math(String.raw`\|W_{\mathbb{R}}x\| = 0`),
         " のときは左辺が ",
         math(String.raw`0`),
         "、右辺が ",
         math(String.raw`c\|x\| \geq 0`),
         " なので主張が成り立つ。以下 ",
-        math(String.raw`\|Wx\| > 0`),
+        math(String.raw`\|W_{\mathbb{R}}x\| > 0`),
         " とする。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\|Wx\|^4 \leq c^2\|x\|^2\|Wx\|^2
-&\Longrightarrow \|Wx\|^2 \leq c^2\|x\|^2
-  &&\bigl(\because\ \text{両辺を}\ \|Wx\|^2>0\ \text{で割る}\bigr)\\
-&\Longrightarrow \|Wx\| \leq c\|x\|
-  &&\bigl(\because\ \|Wx\| \geq 0,\ c\|x\| \geq 0\ \text{と平方の単調性}\bigr)
+\|W_{\mathbb{R}}x\|^4 \leq c^2\|x\|^2\|W_{\mathbb{R}}x\|^2
+&\Longrightarrow \|W_{\mathbb{R}}x\|^2 \leq c^2\|x\|^2
+  &&\bigl(\because\ \text{両辺を}\ \|W_{\mathbb{R}}x\|^2>0\ \text{で割る}\bigr)\\
+&\Longrightarrow \|W_{\mathbb{R}}x\|^2 \leq \bigl(c\|x\|\bigr)^2
+  &&\bigl(\because\ \text{冪の指数法則}\ c^2\|x\|^2=\bigl(c\|x\|\bigr)^2\bigr)\\
+&\Longrightarrow \|W_{\mathbb{R}}x\| \leq c\|x\|
+  &&\bigl(\because\ \blkref{nonnegative_real_order_from_squares}\ (u \to \|W_{\mathbb{R}}x\|,\ v \to c\|x\|)\ \text{と}\ \|W_{\mathbb{R}}x\| \geq 0,\ c\|x\| \geq 0\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`x`),
         " は任意に取ったので、すべての ",
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " について ",
-        math(String.raw`\|Wx\| \leq c\|x\|`),
+        math(String.raw`\|W_{\mathbb{R}}x\| \leq c\|x\|`),
         " である。",
       ]),
       paragraph([
@@ -1436,7 +1538,7 @@ c(M_{\mathrm{col}})
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\|W^0x\|
+\|(W_{\mathbb{R}})^0x\|
 &=\|Ix\|
   &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0:=I\bigr)\\
 &=\|x\|
@@ -1450,21 +1552,21 @@ c(M_{\mathrm{col}})
         " で成り立つ（すべての ",
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " について ",
-        math(String.raw`\|W^kx\| \leq c^k\|x\|`),
+        math(String.raw`\|(W_{\mathbb{R}})^kx\| \leq c^k\|x\|`),
         "）とし、",
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " を取ると",
       ]),
       displayMath(String.raw`\begin{aligned}
-\|W^{k+1}x\|
-&=\|(W^kW)x\|
+\|(W_{\mathbb{R}})^{k+1}x\|
+&=\|((W_{\mathbb{R}})^kW_{\mathbb{R}})x\|
   &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1}:=A^mA\bigr)\\
-&=\|W^k(Wx)\|
+&=\|(W_{\mathbb{R}})^k(W_{\mathbb{R}}x)\|
   &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
-&\leq c^k\|Wx\|
-  &&\bigl(\because\ \text{帰納法の仮定を}\ Wx\in\mathbb{R}^{2^{M_{\mathrm{col}}}}\ \text{に適用}\bigr)\\
+&\leq c^k\|W_{\mathbb{R}}x\|
+  &&\bigl(\because\ \text{帰納法の仮定を}\ W_{\mathbb{R}}x\in\mathbb{R}^{2^{M_{\mathrm{col}}}}\ \text{に適用}\bigr)\\
 &\leq c^k\bigl(c\|x\|\bigr)
-  &&\bigl(\because\ \text{いま示した評価}\ \|Wx\|\leq c\|x\|\ \text{と}\ c^k\geq 0\ \text{（}c>0\text{）}\bigr)\\
+  &&\bigl(\because\ \text{いま示した評価}\ \|W_{\mathbb{R}}x\|\leq c\|x\|\ \text{と}\ c^k\geq 0\ \text{（}c>0\text{）}\bigr)\\
 &=c^{k+1}\|x\|
   &&\bigl(\because\ \text{冪の指数法則と}\ \mathbb{R}\ \text{の乗法の結合則}\bigr)
 \end{aligned}`),
@@ -1481,6 +1583,7 @@ c(M_{\mathrm{col}})
       status: "added",
       notes: [
         "2026-11-04: SageMath の検算（sagemath/check/rayleigh_bounds_operator_norm/）を付けるにあたり、二か所を直した（主張は不変）。(1) 一つ目の鎖は ‖Wx‖^2 = (Wx)^⊤(Wx) = y^⊤(Wx) で止まり、続く鎖が使う y^⊤Wx（def_real_bilinear_value の二重和）との等号が書かれていなかった。def_matrix_norm・definition_of_sqrt_r_positive・y の成分・分配則・def_real_bilinear_value の 5 行（‖Wx‖^2 = ‖y‖^2 の置き換えと合わせて 6 行）で ‖Wx‖^2 = y^⊤Wx まで一続きにし、y ∈ ℝ^n であることを置き方に書いた（y の成分と鎖の 4 行目に mat_mult を引き、‖Wx‖^2 = ‖y‖^2 の置き換えを独立の行にした）。k = 0 の行に def_exp (1) の A^0 := I・identity_matrix_is_left_unit_of_mat_mult・c^0 = 1 の 3 行の鎖を置いた。(2) 帰納法の段の 1 行目 ‖W^{k+1}x‖ = ‖W(W^kx)‖ は「行列の冪の定義と結合則」としていたが、def_exp (1) の冪は W^{k+1} := W^kW で、W(W^kx) にするには W^kW = WW^k が要り、その主張は本文に無い。W^{k+1}x = (W^kW)x = W^k(Wx) とし、帰納法の仮定（すべての x について）を Wx に当て、前半の評価を後に使う順にした。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: psd_cauchy_schwarz は実数の行列 P を取るのに、複素行列 W を当てていた。主張と証明の W を def_W_real の W_ℝ に替え（冪は (W_ℝ)^k）、psd_cauchy_schwarz の仮定を W_real_is_symmetric と、新しく足した主張 W_real_is_positive_semidefinite で満たす形にした。旧い根拠「W_is_real_symmetric_positive_definite より実対称かつ正定値、とくに半正定値」はこれに替わる。y の成分が実数である理由を (W_ℝ)_{kl} が実数であることにした。最後の段の「平方の単調性」を c^2‖x‖^2 = (c‖x‖)^2 の行と nonnegative_real_order_from_squares（u → ‖W_ℝx‖、v → c‖x‖）に割り、c > 0 の根拠に def_rayleigh_sup を引いた。実数の行列の積・冪・単位行列は、ほかの K = ℝ の箇所と同じく mat_mult・def_exp (1)・identity_matrix_is_left_unit_of_mat_mult を引いている（これらは ℂ の行列についてだけ述べる。状態台帳の「mat_mult を K について述べる件」）。主張の値は変わらない。",
       ],
     },
   },

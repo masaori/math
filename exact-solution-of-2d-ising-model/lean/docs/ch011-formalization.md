@@ -58,9 +58,12 @@
 | `Ising2D.quad_le_rayleighSup_mul` | 任意の `x` で `xᵀWx ≤ c(M)‖x‖²` | 同上 |
 | `Ising2D.rayleighSup_nonneg` | `c(M) ≥ 0`（半正定値性だけを使う） | `def_rayleigh_sup` |
 | `Ising2D.ne_zero_of_vecNormSq_eq_one` / `rayleighSup_pos`（`DefinitionRayleighSup.lean`） | `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」（`‖0‖² = Σ0² = Σ0 = 0` の鎖。Lean の `𝓡` は `‖x‖² = 1` で述べるので、人手の `√·`・`\|0\|` の行は現れない）/ `c(M) = sup 𝓡 ≥ e_1ᵀWe_1 > 0` の 3 行の鎖（`‖e_1‖² = 1` は既存の `vecNormSq_single` で受け、人手の `|(e_1)_i|^2` の鎖 2 本と `‖e_1‖ = 1` の 4 行の鎖とは 1 対 1 でない。和の `0 + 0 = 0` は mathlib の `Finset.sum_const_zero`） | `def_rayleigh_sup` |
-| `Ising2D.rayleigh_bounds_operator_normSq`（`ClaimOperatorBound.lean`） | `‖Wx‖² ≤ c(M)²‖x‖²` | `rayleigh_bounds_operator_norm` |
-| `Ising2D.rayleigh_bounds_operator_norm` | `‖Wx‖ ≤ c(M)‖x‖` | 同上 |
-| `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖` | 同上（帰納法の部分） |
+| `Ising2D.psd_of_pd`（`ClaimOperatorBound.lean`）/ `Ising2D.W_real_is_positive_semidefinite`（`PhysicalPartitionFunctionSandwich.lean`、本文の `W_ℝ` に当てたもの） | 正定値なら半正定値（`u ≠ 0` は正定値性、`u = 0` は人手の 5 行の鎖） | `W_real_is_positive_semidefinite` |
+| `Ising2D.vecNorm_mulVec_sq_eq_bilinear` | `‖Wx‖² = (Wx)ᵀWx`（人手の一つ目の鎖 6 行） | `rayleigh_bounds_operator_norm`（一つ目の鎖） |
+| `Ising2D.rayleigh_bounds_operator_norm` | `‖Wx‖ ≤ c(M)‖x‖`（人手の二つ目の鎖・場合分け・割り算と平方の 3 行を同じ順に。正定値性 `hpd` を取る） | 同上 |
+| `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖`（人手の `k = 0` の 3 行と帰納法の 5 行） | 同上（帰納法の部分） |
+| `Ising2D.rayleigh_bounds_operator_normSq` / `rayleigh_bounds_operator_normSq_pow` | `‖Wx‖² ≤ c(M)²‖x‖²` / `‖W^k x‖² ≤ (c(M)²)^k‖x‖²`（必要十分版の特殊化。具体版の証明には使わない） | 同上 |
+| `Ising2D.rayleigh_bounds_operator_norm_of_necSuf` / `rayleigh_bounds_operator_norm_pow_of_necSuf` | 上の 2 つの平方根を取った `‖Wx‖ ≤ c(M)‖x‖` / `‖W^k x‖ ≤ c(M)^k‖x‖`（具体版と同じ主張を必要十分版から得たもの） | 同上 |
 | `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | `trace_power_sandwich` Step 3 の補題 |
 | `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 同上 |
 | `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`） | `tr(W^n) ≤ (dim) c(M)^n` | `trace_power_sandwich` Step 1 |
@@ -145,7 +148,7 @@
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
-| `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
+| `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(_pow)`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`Ising2D.rayleigh_bounds_operator_norm(_pow)_of_necSuf`。`isPsdPair_of_matrix` 経由） |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`。使う側の実行列の読み `trace_mul_pow_eq_trace_symTransfer_pow` も同じ特殊化） |

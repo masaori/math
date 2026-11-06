@@ -5,10 +5,10 @@
 **対象ラベル**: `rayleigh_bounds_operator_norm` （structured-latex 側の安定識別子）
 
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
-- ブロック: `maxeig_007_claim_operator_bound`（`‖Wx‖ ≤ c(M_col)‖x‖`、`‖W^kx‖ ≤ c(M_col)^k‖x‖`）
-- 範囲: 証明の一つ目の鎖 6 行、二つ目の鎖 6 行とその各行の側の条件、場合分け（`‖Wx‖ = 0` の側と `‖Wx‖ > 0` の側の割り算・平方根の 2 行）、
+- ブロック: `maxeig_007_claim_operator_bound`（`‖W_ℝx‖ ≤ c(M_col)‖x‖`、`‖(W_ℝ)^kx‖ ≤ c(M_col)^k‖x‖`。`W_ℝ` は `def_W_real`）
+- 範囲: 証明の一つ目の鎖 6 行、二つ目の鎖 6 行とその各行の側の条件、場合分け（`‖Wx‖ = 0` の側と `‖Wx‖ > 0` の側の割り算・冪の指数法則・`nonnegative_real_order_from_squares` の 3 行）、
   `k = 0`、帰納法の段の鎖 5 行、主張そのもの。
-- 記号は証明のとおり `c := c(M_col)`、`y := Wx`。
+- 記号は証明のとおり `c := c(M_col)`、`y := W_ℝx`。下の表とコードの `W`・`P` は `W_ℝ`（成分が QQ の実数の行列）を指す。
 
 ## 証明の行との対応
 
@@ -27,7 +27,7 @@
 | 二つ目の鎖 5→6（`y^⊤Wy ≤ c‖y‖^2` と `0 ≤ c‖x‖^2`） | `_lines.sage` | 側の条件 2 つと行の不等号 | **PASS** |
 | 二つ目の鎖 6→7（`y = Wx`、乗法の可換則・結合則） | `_lines.sage` | `‖Wx‖` を組み込みの積と内積から作り直して比べる | **PASS** |
 | 場合分け `‖Wx‖ = 0` の側（`0 ≤ c‖x‖`） | `_lines.sage` | 特異な `P` の核の `x ≠ 0` で通る（`check_generic_…`） | **PASS** |
-| `‖Wx‖^2 ≤ c^2‖x‖^2`（`‖Wx‖^2 > 0` で割る）、`‖Wx‖ ≤ c‖x‖`（平方の単調性、`c‖x‖ ≥ 0`） | `_lines.sage` | 両辺を `‖Wx‖^2` で割った値の等号 2 つ、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`・`(c‖x‖)^2 = c^2‖x‖^2`、両方の不等号。場合分けの件数をログに出す（一般の行列で `‖Wx‖ = 0` の側 13 件、`> 0` の側 144 件） | **PASS** |
+| `‖Wx‖^2 ≤ c^2‖x‖^2`（`‖Wx‖^2 > 0` で割る）、`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖ ≤ c‖x‖`（`nonnegative_real_order_from_squares`、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`） | `_lines.sage` | 両辺を `‖Wx‖^2` で割った値の等号 2 つ、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`・`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖^2 ≤ (c‖x‖)^2` と両方の不等号。場合分けの件数をログに出す（一般の行列で `‖Wx‖ = 0` の側 13 件、`> 0` の側 144 件） | **PASS** |
 | `k = 0` の鎖 3 行（`def_exp` (1) の `W^0 := I`、`identity_matrix_is_left_unit_of_mat_mult`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
 | 帰納法の鎖 1→2（`def_exp` (1) の `W^{k+1} := W^kW`） | `_lines.sage` | 冪を `def_exp` (1) の漸化式で作り、Sage の冪 `P**(k+1)`（別の実装）と比べる。左辺のノルムは `P**(k+1)` から、右辺は `W^kW` から作る | **PASS** |
 | 帰納法の鎖 2→3（`mat_mult_associative`） | `_lines.sage` | `‖(W^kW)x‖` と `‖W^k(Wx)‖` | **PASS** |
@@ -40,9 +40,9 @@
 
 - `check_generic_positive_semidefinite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「半正定値」「`c` は上限」だけなので、
   `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 2..5`、`n' = n−1, n, n+1`）の有理行列 157 組で確かめる。`n' < n` の `P` は特異で、
-  核の `x ≠ 0` で場合分けの `‖Wx‖ = 0` の側を通す。等号 4672 個、不等号 3586 個。
+  核の `x ≠ 0` で場合分けの `‖Wx‖ = 0` の側を通す。等号 4986 個、不等号 3730 個。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`B = Σ_λ y^λP_λ(D)` と `V_2`（成分 `x^n`）は QQ なので `W` は QQ の行列である。因子の順に組み込みの積で作った `BV_2B` とも比べる。等号 668 個、不等号 504 個。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`B = Σ_λ y^λP_λ(D)` と `V_2`（成分 `x^n`）は QQ なので `W` は QQ の行列である。因子の順に組み込みの積で作った `BV_2B` とも比べる。等号 716 個、不等号 528 個。
 
 ## `c(M_col)` の作り方
 
@@ -79,6 +79,12 @@
 - 旧い帰納法の段の 1 行目 `‖W^{k+1}x‖ = ‖W(W^kx)‖` は、`def_exp` (1) の `W^{k+1} := W^kW` から `W^kW = WW^k` を要するが、その主張は本文に無い。
   `W^{k+1}x = (W^kW)x = W^k(Wx)` とし、帰納法の仮定（全ての `x`）を `Wx` に当てる順にした。主張は不変。
 - レビューの指摘で、`y` の成分と鎖の行に `mat_mult` を引き、`‖Wx‖^2 = ‖y‖^2` を独立の行にし、`k = 0` を 3 行の鎖にし、帰納法で `x` を取り直す一文を足した。
+
+## 証明の修正（2026-11-06）
+
+- 主張と証明の `W` を `def_W_real` の `W_ℝ` に替えた（`psd_cauchy_schwarz` は実数の行列を取る）。`psd_cauchy_schwarz` の仮定を `W_real_is_symmetric` と、
+  新しく足した主張 `W_real_is_positive_semidefinite`（検算は `sagemath/check/W_real_is_positive_semidefinite/`）で満たす。
+- 最後の段の「平方の単調性」を `c^2‖x‖^2 = (c‖x‖)^2` の行と `nonnegative_real_order_from_squares` に割った。検算に `‖Wx‖^2 ≤ (c‖x‖)^2` を足した。
 
 ## 計算の帰属と範囲
 

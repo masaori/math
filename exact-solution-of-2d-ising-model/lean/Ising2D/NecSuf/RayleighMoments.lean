@@ -9,7 +9,7 @@
 * `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
 * `Ising2D.trace_power_sandwich`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwich.lean`）
 
-いずれも本ファイルの結果の特殊化として導出している。
+具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）と `Ising2D.trace_power_sandwich` が示す。
 
 ## この主張に本質的に効いている構造
 
@@ -89,17 +89,16 @@ theorem cs_W (h : IsPsdPair ip W) (x y : V) :
 theorem rayleigh_bounds_operator_norm (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ c)
     (hc : ∀ u, ip u (W u) ≤ c * ip u u) (x : V) :
     ip (W x) (W x) ≤ c ^ 2 * ip x x := by
-  have key : (ip (W x) (W x)) ^ 2 ≤ (ip x (W x)) * (ip (W x) (W (W x))) := h.cs_W x (W x)
-  have h1 : ip x (W x) ≤ c * ip x x := hc x
-  have h2 : ip (W x) (W (W x)) ≤ c * ip (W x) (W x) := hc (W x)
-  have hbound : (ip x (W x)) * (ip (W x) (W (W x)))
-      ≤ (c * ip x x) * (c * ip (W x) (W x)) := by
-    refine mul_le_mul h1 h2 (h.W_psd (W x)) ?_
-    exact mul_nonneg hc0 (h.ip_psd x)
+  -- 人手の二つ目の鎖（`‖Wx‖^2` を `⟪Wx, Wx⟫` と書いた形。一つ目の鎖 `‖Wx‖^2 = y^⊤Wx` は自己共役性で `cs_W` に入っている）
   have hN : (ip (W x) (W x)) ^ 2 ≤ (c ^ 2 * ip x x) * (ip (W x) (W x)) := by
-    calc (ip (W x) (W x)) ^ 2 ≤ (ip x (W x)) * (ip (W x) (W (W x))) := key
-      _ ≤ (c * ip x x) * (c * ip (W x) (W x)) := hbound
-      _ = (c ^ 2 * ip x x) * (ip (W x) (W x)) := by ring
+    calc (ip (W x) (W x)) ^ 2
+        ≤ (ip x (W x)) * (ip (W x) (W (W x))) := h.cs_W x (W x)               -- 3 行目: Cauchy–Schwarz（`y → Wx`）
+      _ ≤ (c * ip x x) * (ip (W x) (W (W x))) :=
+          mul_le_mul_of_nonneg_right (hc x) (h.W_psd (W x))                   -- 4 行目: `⟪x, Wx⟫ ≤ c⟪x, x⟫` と `0 ≤ ⟪Wx, W(Wx)⟫`
+      _ ≤ (c * ip x x) * (c * ip (W x) (W x)) :=
+          mul_le_mul_of_nonneg_left (hc (W x)) (mul_nonneg hc0 (h.ip_psd x))  -- 5 行目: `⟪Wx, W(Wx)⟫ ≤ c⟪Wx, Wx⟫` と `0 ≤ c⟪x, x⟫`
+      _ = (c ^ 2 * ip x x) * (ip (W x) (W x)) := by ring                      -- 6 行目: 乗法の可換則・結合則
+  -- 場合分けと割り算（人手の平方根の行は、平方根を取る前の形なので現れない）
   rcases eq_or_lt_of_le (h.ip_psd (W x)) with hzero | hpos
   · rw [← hzero]
     exact mul_nonneg (sq_nonneg c) (h.ip_psd x)
@@ -109,24 +108,23 @@ theorem rayleigh_bounds_operator_norm (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ 
 
 /-- 上の反復版: `⟪W^k x, W^k x⟫ ≤ (c²)^k ⟪x, x⟫`。
 
-人手証明の「`k` に関する帰納法：`‖W^{k+1}x‖ = ‖W(W^kx)‖ ≤ c‖W^kx‖ ≤ c·c^k‖x‖`」に対応。 -/
+人手証明の帰納法「`W^{k+1}x = (W^kW)x = W^k(Wx)`、帰納法の仮定を `Wx` に当て、`‖Wx‖ ≤ c‖x‖` を使う」と同じ順に、
+平方根を取る前の形で書いたもの。 -/
 theorem rayleigh_bounds_operator_norm_pow (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ c)
     (hc : ∀ u, ip u (W u) ≤ c * ip u u) (k : ℕ) (x : V) :
     ip ((W ^ k) x) ((W ^ k) x) ≤ (c ^ 2) ^ k * ip x x := by
-  induction k with
+  induction k generalizing x with
   | zero => simp
   | succ k ih =>
-      have hstep : ip (W ((W ^ k) x)) (W ((W ^ k) x))
-          ≤ c ^ 2 * ip ((W ^ k) x) ((W ^ k) x) :=
-        h.rayleigh_bounds_operator_norm hc0 hc ((W ^ k) x)
-      have happ : (W ^ (k + 1)) x = W ((W ^ k) x) := by
-        rw [pow_succ']
+      have happ : (W ^ (k + 1)) x = (W ^ k) (W x) := by                       -- `W^{k+1} = W^kW` と結合則
+        rw [pow_succ]
         rfl
       rw [happ]
-      calc ip (W ((W ^ k) x)) (W ((W ^ k) x))
-          ≤ c ^ 2 * ip ((W ^ k) x) ((W ^ k) x) := hstep
-        _ ≤ c ^ 2 * ((c ^ 2) ^ k * ip x x) := by
-              exact mul_le_mul_of_nonneg_left ih (by positivity)
+      calc ip ((W ^ k) (W x)) ((W ^ k) (W x))
+          ≤ (c ^ 2) ^ k * ip (W x) (W x) := ih (W x)                          -- 帰納法の仮定を `Wx` に当てる
+        _ ≤ (c ^ 2) ^ k * (c ^ 2 * ip x x) :=
+            mul_le_mul_of_nonneg_left (h.rayleigh_bounds_operator_norm hc0 hc x)
+              (by positivity)                                                 -- `⟪Wx, Wx⟫ ≤ c²⟪x, x⟫` と `(c²)^k ≥ 0`
         _ = (c ^ 2) ^ (k + 1) * ip x x := by ring
 
 /-- モーメント `m_k := ⟪x, W^k x⟫` を `⟪W^p x, W^q x⟫` の形へ分解する（`p + q = k`）。

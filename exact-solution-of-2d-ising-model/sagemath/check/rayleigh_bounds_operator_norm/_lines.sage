@@ -1,5 +1,5 @@
 # 対象ラベル: rayleigh_bounds_operator_norm
-# 証明の行を、実対称で半正定値な P（本文では P = W）・その上限 c = c(M_col)・x ∈ ℝ^n について一行ずつ確かめる。
+# 証明の行を、実対称で半正定値な P（本文では P = W_ℝ。def_W_real）・その上限 c = c(M_col)・x ∈ ℝ^n について一行ずつ確かめる。
 # 等号は QQ と AA の厳密な等号、不等号は AA の厳密な比較である。
 
 n_steps = 0
@@ -30,7 +30,7 @@ def check_proof_lines(P, c, x, K, what):
     eq(y, y_builtin, f"{what}: y = Wx の成分の式と組み込みの積")
     nx = norm_exact(x)
     ny = norm_exact(y)
-    # 準備: W の半正定値性（psd_cauchy_schwarz の仮定）と上限の評価（def_rayleigh_sup）を、この x, y で
+    # W の半正定値性（W_real_is_positive_semidefinite。psd_cauchy_schwarz の仮定）と上限の評価（def_rayleigh_sup）を、この x, y で
     le(0, bil(y, P, y), f"{what}: 0 ≤ y^⊤Wy")
     le(bil(x, P, x), c * nx**2, f"{what}: x^⊤Wx ≤ c‖x‖^2")
     le(bil(y, P, y), c * ny**2, f"{what}: y^⊤Wy ≤ c‖y‖^2")
@@ -74,8 +74,9 @@ def check_proof_lines(P, c, x, K, what):
         eq(m1 / ny**2, ny**2, f"{what}: 左辺 ‖Wx‖^4 を ‖Wx‖^2 で割ると ‖Wx‖^2")
         eq(m7 / ny**2, c**2 * nx**2, f"{what}: 右辺 c^2‖x‖^2‖Wx‖^2 を ‖Wx‖^2 で割ると c^2‖x‖^2")
         le(0, ny, f"{what}: ‖Wx‖ ≥ 0")
-        eq((c * nx)**2, c**2 * nx**2, f"{what}: (c‖x‖)^2 = c^2‖x‖^2（平方の単調性を当てる形）")
         le(ny**2, c**2 * nx**2, f"{what}: ‖Wx‖^2 ≤ c^2‖x‖^2（‖Wx‖^2 > 0 で割る）")
+        eq((c * nx)**2, c**2 * nx**2, f"{what}: c^2‖x‖^2 = (c‖x‖)^2（冪の指数法則）")
+        le(ny**2, (c * nx)**2, f"{what}: ‖Wx‖^2 ≤ (c‖x‖)^2（nonnegative_real_order_from_squares に渡す形）")
         le(0, c * nx, f"{what}: c‖x‖ ≥ 0")
     le(ny, c * nx, f"{what}: 主張 ‖Wx‖ ≤ c‖x‖")
     # 冪: k = 0 と、帰納法の段の鎖 ‖W^{k+1}x‖ = ‖(W^kW)x‖ = ‖W^k(Wx)‖ ≤ c^k‖Wx‖ ≤ c^k(c‖x‖) = c^{k+1}‖x‖

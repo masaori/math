@@ -1,6 +1,7 @@
 # 対象ラベル: rayleigh_bounds_operator_norm
 # 本文の W = (BV_2)B（def_symmetrized_transfer_matrix）で証明の行を一行ずつ確かめる。
 # K_1 := 2 log y、K_2 := log x（x, y ∈ {2, 3}）と選ぶと、B = Σ_λ y^λ P_λ(D) と V_2（成分 x^n）は QQ に乗り、W も QQ の行列になる。
+# W_exact は成分を QQ（⊂ ℝ）で返すので、本文の W_ℝ := ϱ(W)（def_W_real。成分を実数として読んだ行列）に当たる。
 # ℝ への脱出は K_1・K_2 の選び方と、c(M_col)（上限。AA の代数的数）・ノルム（AA の平方根）の値だけで、等号・不等号は AA の厳密計算である。
 load("_prelude.sage")
 load("_lines.sage")
@@ -16,10 +17,10 @@ for M in [2, 3]:
             B_ = exp_by_spectral_projectors(DQ_, lambda lam: yy**lam, QQ)
             V2_ = V2_by_components(M, lambda m: xx**m, QQ).change_ring(QQ)
             eq(W, B_ * V2_ * B_, f"M_col={M}: W の成分の式と組み込みの積")
-            assert is_real_symmetric(W)                       # W_is_real_symmetric_positive_definite
-            assert real_rooted_with_signs(W, strict=True)      # 正定値（とくに半正定値）
+            assert is_real_symmetric(W)                       # W_real_is_symmetric
+            assert real_rooted_with_signs(W, strict=True)      # W_real_is_positive_definite（正定値）
             c = rayleigh_sup_exact(W)
-            assert c > 0
+            assert c > 0                                      # def_rayleigh_sup の c(M_col) > 0
             xs = [random_vector(QQ, n, num_bound=4, den_bound=3) for _ in range(2)]
             xs += [vector(QQ, [1] + [0] * (n - 1))]
             for x in xs:

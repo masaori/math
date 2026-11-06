@@ -34,6 +34,7 @@ export const ALL_LABELS = [
   "W_has_positive_entries",
   "W_is_real_symmetric_positive_definite",
   "W_real_is_positive_definite",
+  "W_real_is_positive_semidefinite",
   "W_real_is_symmetric",
   "Z_Y_generate_algebra",
   "Z_Y_linearly_independent",
