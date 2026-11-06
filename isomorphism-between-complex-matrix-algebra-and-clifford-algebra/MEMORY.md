@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06: 行列単位の定義（ラベル def_matrix_unit、(E_{x,y})_{u,v}:=δ_{x,u}·_ℂδ_{y,v}）を置いた。次は行列単位の積の規則 E_{S,T}E_{U,R}=δ_{T,U}E_{S,R}（成分を行列の積の定義で開き、claim_sum_over_finite_set_with_kronecker_delta_picks_term で一項を取り出す見込み）。
 - 2026-11-05: Mat_X(ℂ) が ℂ-代数であること（ラベル claim_matrices_indexed_by_finite_set_form_complex_algebra）を示した。次は行列単位の定義。
 - 2026-11-05: スカラー倍と行列の積の両立の右の因子 λ∗(AB)=A(λ∗B)（ラベル claim_scalar_multiple_is_compatible_with_matrix_product_in_right_factor）を示した。次は Mat_X(ℂ) が ℂ-代数であること（線型空間の公理・結合法則・左右の分配法則・左右の単位元・左右のスカラー倍との両立の八行を ℂ-代数の定義 def_complex_algebra の条件に当てる）。
 - 2026-11-05: 「スカラー倍と行列の積の両立」を台帳で左右の二行に割り、左の因子 λ∗(AB)=(λ∗A)B（ラベル claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor）を示した。次は右の因子 λ∗(AB)=A(λ∗B)（claim_scalar_multiple_of_sum_over_finite_set のあと、各項 (λ·A_{x,z})·B_{z,y} を ℂ の乗法の結合法則・交換法則で A_{x,z}·(λ·B_{z,y}) に書き直し、claim_sum_over_finite_set_depends_only_on_terms を引く）。

@@ -61,6 +61,7 @@ export const ALL_LABELS = [
   "def_linear_independence",
   "def_linear_map",
   "def_matrices_indexed_by_finite_set",
+  "def_matrix_unit",
   "def_numbering_of_finite_set",
   "def_ordered_product_in_algebra",
   "def_ordered_sum_in_complex_numbers",
