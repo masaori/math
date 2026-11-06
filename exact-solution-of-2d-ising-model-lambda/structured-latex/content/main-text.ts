@@ -64551,10 +64551,11 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
                       paragraph([ref("def_oriented_edges"), " により唯一の基底辺 ",
                         math(String.raw`\operatorname{base}(\vec e_1)`),
                         " は横辺か縦辺のいずれかである。辺長一ではいずれもその方向の切断線上にある（",
-                        ref("def_seam_parities"), "）。従って横辺なら ",
-                        math(String.raw`h(\gamma)=1`), "、縦辺なら ",
-                        math(String.raw`v(\gamma)=1`), " である（",
-                        ref("def_edge_sequence_seam_parities"), "）。" ]),
+                        ref("def_seam_parities"), "）。従って ", ref("def_edge_sequence_seam_parities"), " により、横辺なら" ]),
+                      displayMath(String.raw`h(\gamma)=1\quad\bigl(\because\ \blkref{def_seam_parities},\ \blkref{def_edge_sequence_seam_parities}\bigr)`),
+                      paragraph(["縦辺なら"]),
+                      displayMath(String.raw`v(\gamma)=1\quad\bigl(\because\ \blkref{def_seam_parities},\ \blkref{def_edge_sequence_seam_parities}\bigr)`),
+                      paragraph(["である。"]),
                     ],
                   },
                 },
@@ -71421,37 +71422,13 @@ t_{\circ}(\gamma)=0,&\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)
               proof: [
                 paragraph([
                   "まず ", math(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)=(0,0)`),
-                  " とする。整数巻き付き数の偶奇（", ref("claim_directed_winding_parity"), "）により、",
-                  math(String.raw`w_{\mathrm h}(\gamma)`), " と ", math(String.raw`w_{\mathrm v}(\gamma)`),
-                  " はともに偶数である。一方、頂点単純閉路の巻き付きベクトル（",
-                  ref("claim_vertex_simple_winding_zero_or_primitive"), "）により、巻き付きベクトルは零または原始的である。",
+                  " とする。接触対数零も仮定しているので、",
+                  ref("claim_vertex_simple_zero_seam_winding"), " により",
                 ]),
+                displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)=(0,0)
+\qquad\bigl(\because\ \blkref{claim_vertex_simple_zero_seam_winding}\bigr)`),
                 paragraph([
-                  "零でない原始的な場合を仮定する。二つの巻き付き数は偶数なので、整数 ",
-                  math(String.raw`r,s\in\mathbb Z`), " を",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-w_{\mathrm h}(\gamma)&=2r&&\bigl(\because\ \blkref{claim_directed_winding_parity}\text{ による偶数性}\bigr)\\
-w_{\mathrm v}(\gamma)&=2s&&\bigl(\because\ \blkref{claim_directed_winding_parity}\text{ による偶数性}\bigr)
-\end{aligned}`),
-                paragraph([
-                  "で取る。原始性の Bézout 条件（", ref("def_primitive_integer_pair"), "）により、ある ",
-                  math(String.raw`a,b\in\mathbb Z`), " について",
-                ]),
-                displayMath(String.raw`w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a\in\{1,-1\}`),
-                paragraph(["となる。しかし左辺は"]),
-                displayMath(String.raw`\begin{aligned}
-w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a
-&=2rb-2sa
-&&\bigl(\because\ w_{\mathrm h}(\gamma)=2r,\ w_{\mathrm v}(\gamma)=2s\bigr)\\
-&=2(rb-sa)
-&&\bigl(\because\ \mathbb Z\text{ の分配則}\bigr)
-\end{aligned}`),
-                paragraph([
-                  "で偶数であり、", math(String.raw`1`), " または ", math(String.raw`-1`),
-                  " にはならない。従って原始的な場合は排除され、",
-                  math(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)=(0,0)`),
-                  " である。さらに ", ref("claim_vertex_simple_plane_lift_points_distinct"),
+                  "さらに ", ref("claim_vertex_simple_plane_lift_points_distinct"),
                   " により一周期の持ち上げ点は二つずつ相異なるので、",
                   ref("claim_plane_simple_polygon_cyclic_turning"), " を適用して",
                 ]),
@@ -71475,7 +71452,7 @@ w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a
                 displayMath(String.raw`t_{\circ}(\gamma)=0
 \qquad\bigl(\because\ \blkref{claim_nonzero_winding_simple_cycle_turning_zero}\bigr)`),
                 paragraph([
-                  "を得る。二場合を合わせて主張が従う。全過程は有限列・整数の偶奇・Bézout の整数等式だけで閉じ、実数体も複素数体も現れない。",
+                  "を得る。二場合を合わせて主張が従う。全過程は有限列と整数の等式だけで閉じ、実数体も複素数体も現れない。",
                 ]),
               ],
             },

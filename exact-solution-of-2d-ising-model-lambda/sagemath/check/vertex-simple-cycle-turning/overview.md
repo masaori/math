@@ -8,7 +8,7 @@
 $(h(\gamma)\bmod2,\ v(\gamma)\bmod2)$ を突き合わせた。
 
 - 実行: `sage sagemath/check/vertex-simple-cycle-turning/check.sage`
-- 状態: PASS（2026-11-03 再実行）
+- 状態: PASS（2026-11-06 再実行）
 - 結果: 全 $373{,}716$ 本（基点・向きを区別）で、次の離散 Whitney の言明が
   例外なく成り立った。
   - 切断線偶奇が $(0,0)$ の頂点単純閉路（$73{,}616$ 本）は
@@ -22,7 +22,9 @@ $(h(\gamma)\bmod2,\ v(\gamma)\bmod2)$ を突き合わせた。
   $-x^{|C|}\zeta_8^{\,t_{\circ}}$ の符号が切断線偶奇だけで決まる。
   整数巻き付きベクトルが零の場合は本文の
   `claim_plane_simple_polygon_cyclic_turning` で一般の $L$ について証明済みである。
-  零でない原始的巻き付きの場合は本文の
+  切断線偶奇が零の場合の巻き付き零は本文の
+  `claim_vertex_simple_zero_seam_winding` で一般の $L$ について証明済みである。
+  零でない巻き付きの場合の回転数零は
   `claim_nonzero_winding_simple_cycle_turning_zero` で一般の $L$ について証明済みであり、
   二場合の合成が `claim_vertex_simple_cycle_turning_by_seam_parity` である。
 
