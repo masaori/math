@@ -917,7 +917,25 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     title: { text: "exp の定義（行列の場合と、行列への線型写像の場合）" },
     labels: ["def_exp"],
     statement: [
-      paragraph(["行列の積は ", ref("mat_mult"), "、実数係数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
+      paragraph([
+        "行列の積と単位行列 ",
+        math(String.raw`I`),
+        " は、",
+        math(String.raw`K = \mathbb{C}`),
+        " なら ",
+        ref("mat_mult"),
+        " と ",
+        ref("def_identity_matrix"),
+        "、",
+        math(String.raw`K = \mathbb{R}`),
+        " なら ",
+        ref("def_real_matrix_product"),
+        " と ",
+        ref("def_real_identity_matrix"),
+        " のものとする。実数係数の複素数への包含は ",
+        ref("inclusion_rr_to_cc"),
+        " を用いる。",
+      ]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
@@ -988,6 +1006,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: K = ℝ の冪の積と単位行列を定めるブロックが無かった（mat_mult・def_identity_matrix は係数が ℂ のものだけ）ので、冒頭の段落で K ごとに def_real_matrix_product・def_real_identity_matrix を引くようにした。K = ℂ の内容は不変。",
         "原文は「有限次元線型空間 V の自己準同型 X ∈ End(V) の exp」として定義していた。" +
           "README 4 節（主張は複素行列について具体的に述べる）に従い、" +
           "本文で exp が実際に適用される 2 つの形だけを具体的に定義した。" +

@@ -13,6 +13,7 @@
 * `maxeig_definition_W_real`（ラベル **`def_W_real`**）の `W_ℝ := ϱ(W)`
 * `maxeig_claim_W_real_is_symmetric`（ラベル **`W_real_is_symmetric`**）
 * `maxeig_claim_W_real_is_positive_definite`（ラベル **`W_real_is_positive_definite`**）
+* `maxeig_claim_trace_of_W_power_via_W_real`（ラベル **`trace_of_W_power_via_W_real`**）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）
 
 本ファイルは、章 001 の具体的な分配関数 `Ising2D.partitionFunction` と、`PhysicalSymTransferBridge.lean` の
@@ -28,7 +29,8 @@
 | `def_transfer_matrix_square_root`: `V_1^{1/2}V_1^{1/2} = exp(K_1D) = V_1`（`theorem_exp_product`、`½K_1D` は自分自身と可換） | `physicalV1halfC_mul_self` |
 | 同じ等式の実行列での表示 | `physicalV1halfR_mul_self_map` |
 | `Z_equals_trace_of_W` の「とくに」: 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
-| 同じ等式を実行列 `W` で読む | `partitionFunction_eq_trace_physicalSymTransferR_pow` |
+| `trace_of_W_power_via_W_real`: `W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q`（`real_matrix_of_real_entry_matrix_preserves_power`、`n → d`, `A → W`）、4 行の鎖 `tr(W^q) = Σ_k (W^q)_kk = Σ_k (((W^q)_ℝ)_kk)_ℂ = Σ_k (((W_ℝ)^q)_kk)_ℂ = (Σ_k ((W_ℝ)^q)_kk)_ℂ` | `trace_of_W_power_via_W_real` の `calc` の 4 段 |
+| 「とくに」を実行列 `W_ℝ` で読む（`trace_of_W_power_via_W_real` の `q → N_row` と `inclusion_rr_to_cc_is_injective`） | `partitionFunction_eq_trace_physicalSymTransferR_pow` |
 | Step 1 の準備: `m^+`、`σ^z_{m+1} = σ^z_{m^+}`（Lean の `D` は `nextSite` で書いてあるので定義どおり） | `nextSite`（`rfl`） |
 | Step 1 の準備: `σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`（`distinct_site_pauli_matrices_commute`。`M_col = 1` は同じ行列） | `sigmaZ_nextSite_mul_comm`（`siteOp_mul_comm`） |
 | Step 1: `(σ^z_k)^⊤ = σ^z_k` の 5 行 | `sigmaZ_transpose` の `calc` の 5 段 |
@@ -121,6 +123,7 @@ import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndCon
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
@@ -648,15 +651,45 @@ theorem physicalSymTransferC_isUnit (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
 
 /-! ## 挟み撃ち -/
 
-/-- 人手 `Z_equals_trace_of_W` の「とくに」を実行列 `W` で読む: `Z(K_1,K_2) = tr(W^{N_row})`
-（`partition_function_eq_trace_physicalSymTransferC` を `physicalSymTransferC_eq_map` と埋め込みの単射性で `ℝ` へ戻す）。 -/
-theorem partitionFunction_eq_trace_physicalSymTransferR_pow (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ Nrow) :
+/-- **人手 `trace_of_W_power_via_W_real`**: `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W_ℝ := ϱ(W)`、`def_W_real`）。
+`W` の成分の実性は `physicalSymTransferC_hasRealEntries`（`W_is_real_symmetric_positive_definite`）、`W^q` の成分の実性と
+`(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`（`n → d`, `A → W`）。右辺の `Σ_k ((W_ℝ)^q)_kk` は
+Lean の実行列の `Matrix.trace` の中身（`partitionFunction_eq_trace_physicalSymTransferR_pow` が `rfl` で `.trace` に読む）である。 -/
+theorem trace_of_W_power_via_W_real (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (q : ℕ) :
+    (physicalSymTransferC M K1 K2 ^ q).trace
+      = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ q) k k : ℝ) : ℂ) := by
+  set hW := physicalSymTransferC_hasRealEntries (M := M) K1 hK2
+  calc (physicalSymTransferC M K1 K2 ^ q).trace
+      = ∑ k, (physicalSymTransferC M K1 K2 ^ q) k k := rfl                    -- `def_trace`（`n → d`, `A → W^q`）
+    _ = ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2 ^ q)
+          (matrix_pow_hasRealEntries _ hW q) k k : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun k _ =>
+          (ofReal_realMatrixOfRealEntries_apply _ _ k k).symm                 -- `def_real_matrix_of_real_entry_matrix`（`B → W^q`）を `d` 個の項へ
+    _ = ∑ k, (((realMatrixOfRealEntries (physicalSymTransferC M K1 K2) hW) ^ q) k k : ℂ) := by
+        rw [real_matrix_of_real_entry_matrix_preserves_power _ hW q]          -- `real_matrix_of_real_entry_matrix_preserves_power`（`n → d`, `A → W`）
+    _ = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2) hW) ^ q) k k : ℝ) : ℂ) :=
+        (Complex.ofReal_sum _ _).symm                                         -- `real_inclusion_preserves_finite_sum`（`m → d`）
+
+/-- 人手 `Z_equals_trace_of_W` の「とくに」を実行列 `W_ℝ` で読む: `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`
+（`(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`partition_function_eq_trace_physicalSymTransferC`）と `trace_of_W_power_via_W_real`
+（`q → N_row`）をつなぎ、`inclusion_rr_to_cc_is_injective` で `ℝ` へ戻す。`W_ℝ` は実成分で組んだ `physicalSymTransferR`
+（`physicalSymTransferR_eq_realMatrixOfRealEntries`））。 -/
+theorem partitionFunction_eq_trace_physicalSymTransferR_pow (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
+    {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     partitionFunction Nrow M K1 K2 = (physicalSymTransferR M K1 K2 ^ Nrow).trace := by
-  apply Complex.ofReal_injective
-  rw [partition_function_eq_trace_physicalSymTransferC K1 K2 hN, physicalSymTransferC_eq_map,
-    ← Matrix.map_pow]
-  simp only [Matrix.trace, Matrix.diag, Matrix.map_apply, Complex.ofRealHom_eq_coe,
-    Complex.ofReal_sum]
+  apply inclusion_rr_to_cc_is_injective
+  calc ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
+      = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
+        partition_function_eq_trace_physicalSymTransferC K1 K2 hN             -- `Z_equals_trace_of_W` の「とくに」
+    _ = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow) k k : ℝ) : ℂ) :=
+        trace_of_W_power_via_W_real K1 hK2 Nrow                               -- `trace_of_W_power_via_W_real`（`q → N_row`）
+    _ = (((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow).trace : ℂ) := rfl
+                                                                              -- 実行列の `Matrix.trace` は対角成分の和
+    _ = ((physicalSymTransferR M K1 K2 ^ Nrow).trace : ℂ) := by
+        rw [← physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]         -- `W_ℝ = physicalSymTransferR`
 
 /-- **人手 `partition_function_sandwich`（具体的な `Z(K_1,K_2)` と具体的な `W` について）**:
 `c(M_col)^{N_row} ≤ Z(K_1,K_2) ≤ 2^{M_col} c(M_col)^{N_row}`、`c(M_col) := sup{x^⊤Wx | ‖x‖ = 1}`。
@@ -667,7 +700,7 @@ theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
     rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow ≤ partitionFunction Nrow M K1 K2
       ∧ partitionFunction Nrow M K1 K2
         ≤ 2 ^ M * rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow := by
-  rw [partitionFunction_eq_trace_physicalSymTransferR_pow K1 K2 hN]                -- `Z_equals_trace_of_W`
+  rw [partitionFunction_eq_trace_physicalSymTransferR_pow K1 hK2 hN]                -- `Z_equals_trace_of_W`
   have h := trace_power_sandwich (physicalSymTransferR_isSymm (M := M) K1 hK2)
     (physicalSymTransferR_posDef K1 hK2) hN                                        -- `trace_power_sandwich`（`n = N_row`）
   rw [card_conf] at h

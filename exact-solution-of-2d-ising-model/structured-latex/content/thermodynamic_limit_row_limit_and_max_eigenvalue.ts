@@ -1110,6 +1110,92 @@ u^\top W_{\mathbb{R}} u
     },
   },
   {
+    id: "maxeig_claim_trace_of_W_power_via_W_real",
+    kind: "claim",
+    title: { tex: String.raw`\mathrm{tr}(W^q) = \Bigl(\sum_k ((W_{\mathbb{R}})^q)_{kk}\Bigr)_{\mathbb{C}}` },
+    labels: ["trace_of_W_power_via_W_real"],
+    statement: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記し、",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " を ",
+        ref("def_symmetrized_transfer_matrix"),
+        " の行列、",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列とする。すべての ",
+        math(String.raw`q \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\mathrm{tr}\!\left(W^q\right) = \Bigl(\sum_{k=1}^{d} \bigl((W_{\mathbb{R}})^q\bigr)_{kk}\Bigr)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。左辺のトレースは ",
+        ref("def_trace"),
+        "、右辺の和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和、",
+        math(String.raw`W^q`),
+        " は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{C}`),
+        " の冪、",
+        math(String.raw`(W_{\mathbb{R}})^q`),
+        " は同じ (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W`),
+        " の成分はすべて実数なので ",
+        math(String.raw`W \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）であり、",
+        ref("def_W_real"),
+        " より ",
+        math(String.raw`W_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W)`),
+        " である。",
+        ref("real_matrix_of_real_entry_matrix_preserves_power"),
+        "（",
+        math(String.raw`n \to d,\ A \to W`),
+        "）より、",
+        math(String.raw`W^q`),
+        " の成分はすべて実数で、",
+        math(String.raw`(W^q)_{\mathbb{R}} = (W_{\mathbb{R}})^q`),
+        " である。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}\!\left(W^q\right)
+&= \sum_{k=1}^{d} (W^q)_{kk}
+&&(\because \blkref{def_trace}\ (n \to d,\ A \to W^q)) \\
+&= \sum_{k=1}^{d} \bigl(((W^q)_{\mathbb{R}})_{kk}\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_real_matrix_of_real_entry_matrix}\ (m, n \to d,\ B \to W^q)\ \text{を}\ d\ \text{個の項へ同時に適用}) \\
+&= \sum_{k=1}^{d} \Bigl(\bigl((W_{\mathbb{R}})^q\bigr)_{kk}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_matrix_of_real_entry_matrix_preserves_power}\ (n \to d,\ A \to W)\ \text{の}\ (W^q)_{\mathbb{R}} = (W_{\mathbb{R}})^q) \\
+&= \Bigl(\sum_{k=1}^{d} \bigl((W_{\mathbb{R}})^q\bigr)_{kk}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ (m \to d,\ r_k \to ((W_{\mathbb{R}})^q)_{kk}))
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W^q のトレースを W_ℝ の冪の対角成分の実数の和で言う主張が本文に無かったので足した。いまは Lean の partitionFunction_eq_trace_physicalSymTransferR_pow が使い、本文の trace_power_upper_bound・trace_power_sandwich・partition_function_sandwich を W_ℝ で書き直すときに引く予定である。数値検証: sagemath/check/trace_of_W_power_via_W_real/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },

@@ -5975,6 +5975,312 @@ A - B
     },
   },
   {
+    id: "linear_space_general_definition_real_matrix_product",
+    kind: "definition",
+    title: { text: "実数の行列の積" },
+    labels: ["def_real_matrix_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`P \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        "、",
+        math(String.raw`Q \in \mathrm{Mat}(n,p,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）とする。積 ",
+        math(String.raw`PQ \in \mathrm{Mat}(m,p,\mathbb{R})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(PQ)_{ik} := \sum_{j=1}^{n} P_{ij}\,Q_{jk}
+\qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`n`),
+        " 個の実数の有限和（",
+        ref("def_finite_sum_of_real_numbers"),
+        "）である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。mat_mult は係数が ℂ の行列の積だけを定めており、W_ℝ のような実数の行列の積と、def_exp (1) の K = ℝ の冪の積を定めるブロックが無かったので足した。式は mat_mult と同じで、和が実数の有限和である。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_real_identity_matrix",
+    kind: "definition",
+    title: { text: "実数の単位行列" },
+    labels: ["def_real_identity_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{R})} \in \mathrm{Mat}(n,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）を、",
+        math(String.raw`s, t \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\left(I_{\mathrm{Mat}(n,\mathbb{R})}\right)_{st} := \begin{cases} 1 & (s = t) \\ 0 & (s \neq t) \end{cases} \in \mathbb{R}`),
+      paragraph(["で定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_identity_matrix は係数が ℂ の単位行列だけを定めており、def_exp (1) の K = ℝ の A^0 := I を定めるブロックが無かったので足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_matrix_of_real_entry_matrix_preserves_product",
+    kind: "claim",
+    title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は積を保つ}` },
+    labels: ["real_matrix_of_real_entry_matrix_preserves_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`A \in \mathrm{Mat}^{\mathrm{re}}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}^{\mathrm{re}}(n,p,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）とする。",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        " より ",
+        math(String.raw`AB \in \mathrm{Mat}^{\mathrm{re}}(m,p,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の積）であり、",
+      ]),
+      displayMath(String.raw`(AB)_{\mathbb{R}} = A_{\mathbb{R}}\,B_{\mathbb{R}}`),
+      paragraph([
+        "が成り立つ。左辺は ",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        "（",
+        math(String.raw`m \to m,\ n \to p,\ B \to AB`),
+        "）の略記、右辺の ",
+        math(String.raw`A_{\mathbb{R}} \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        " と ",
+        math(String.raw`B_{\mathbb{R}} \in \mathrm{Mat}(n,p,\mathbb{R})`),
+        " の積は ",
+        ref("def_real_matrix_product"),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を任意に取る。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(((AB)_{\mathbb{R}})_{ik}\bigr)_{\mathbb{C}}
+&= (AB)_{ik}
+&&(\because \blkref{def_real_matrix_of_real_entry_matrix}\ (m \to m,\ n \to p,\ B \to AB)) \\
+&= \sum_{j=1}^{n} A_{ij}B_{jk}
+&&(\because \blkref{mat_mult}) \\
+&= \sum_{j=1}^{n} \bigl((A_{\mathbb{R}})_{ij}\bigr)_{\mathbb{C}}\,\bigl((B_{\mathbb{R}})_{jk}\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_real_matrix_of_real_entry_matrix}\ (m \to m,\ n \to n,\ B \to A\ \text{と}\ m \to n,\ n \to p,\ B \to B)\ \text{を}\ n\ \text{個の項へ同時に適用}) \\
+&= \sum_{j=1}^{n} \bigl((A_{\mathbb{R}})_{ij}(B_{\mathbb{R}})_{jk}\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}\ (a \to (A_{\mathbb{R}})_{ij},\ b \to (B_{\mathbb{R}})_{jk})\ \text{を}\ n\ \text{個の項へ同時に適用}) \\
+&= \Bigl(\sum_{j=1}^{n} (A_{\mathbb{R}})_{ij}(B_{\mathbb{R}})_{jk}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ (m \to n,\ r_j \to (A_{\mathbb{R}})_{ij}(B_{\mathbb{R}})_{jk})) \\
+&= \bigl((A_{\mathbb{R}}B_{\mathbb{R}})_{ik}\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_real_matrix_product}\ (P \to A_{\mathbb{R}},\ Q \to B_{\mathbb{R}}))
+\end{aligned}`),
+      paragraph([
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to ((AB)_{\mathbb{R}})_{ik},\ b \to (A_{\mathbb{R}}B_{\mathbb{R}})_{ik}`),
+        "）より ",
+        math(String.raw`((AB)_{\mathbb{R}})_{ik} = (A_{\mathbb{R}}B_{\mathbb{R}})_{ik}`),
+        " である。",
+        math(String.raw`i, k`),
+        " は任意なので、",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{R})`),
+        " の二つの元の成分がすべて等しく、",
+        math(String.raw`(AB)_{\mathbb{R}} = A_{\mathbb{R}}B_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W の冪のトレースを W_ℝ の冪のトレースとして読む（trace_of_W_power_via_W_real）のに、ϱ が積を保つことを述べる主張が本文に無かったので足した。数値検証: sagemath/check/real_matrix_of_real_entry_matrix_preserves_product/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_matrix_of_real_entry_matrix_preserves_power",
+    kind: "claim",
+    title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は冪を保つ}` },
+    labels: ["real_matrix_of_real_entry_matrix_preserves_power"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}^{\mathrm{re}}(n,n,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）とする。すべての ",
+        math(String.raw`q \in \mathbb{Z}_{\geq 0}`),
+        " について、",
+        math(String.raw`A^q`),
+        "（",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{C}`),
+        " の冪）の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）であり、",
+      ]),
+      displayMath(String.raw`(A^q)_{\mathbb{R}} = (A_{\mathbb{R}})^q`),
+      paragraph([
+        "が成り立つ。左辺は ",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        "（",
+        math(String.raw`m \to n,\ n \to n,\ B \to A^q`),
+        "）の略記、右辺は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪（積は ",
+        ref("def_real_matrix_product"),
+        "、",
+        math(String.raw`(A_{\mathbb{R}})^0`),
+        " は ",
+        ref("def_real_identity_matrix"),
+        " の ",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{R})}`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q`),
+        " についての帰納法で示す。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書く。",
+      ]),
+      paragraph([
+        math(String.raw`q = 0`),
+        " のとき、",
+        math(String.raw`A^0 = I`),
+        "（",
+        ref("def_exp"),
+        " (1)、",
+        math(String.raw`K = \mathbb{C}`),
+        "）である。",
+        math(String.raw`s, t \in \{1,\dots,n\}`),
+        " を任意に取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+I_{st}
+&= \delta_{st}
+&&(\because \blkref{def_identity_matrix}) \\
+&= \begin{cases} 1_{\mathbb{C}} & (s = t) \\ 0_{\mathbb{C}} & (s \neq t) \end{cases}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= \begin{cases} (1)_{\mathbb{C}} & (s = t) \\ (0)_{\mathbb{C}} & (s \neq t) \end{cases}
+&&(\because \blkref{def_kronecker_delta}\ \text{の略記}\ 1_{\mathbb{C}} = (1)_{\mathbb{C}},\ 0_{\mathbb{C}} = (0)_{\mathbb{C}}) \\
+&= \bigl((I_{\mathrm{Mat}(n,\mathbb{R})})_{st}\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_real_identity_matrix})
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`(I_{\mathrm{Mat}(n,\mathbb{R})})_{st} \in \mathbb{R}`),
+        " が ",
+        ref("def_matrix_with_real_entries"),
+        " の ",
+        math(String.raw`r`),
+        " に当たり、",
+        math(String.raw`A^0 = I`),
+        " の成分はすべて実数である。さらに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(((A^0)_{\mathbb{R}})_{st}\bigr)_{\mathbb{C}}
+&= (A^0)_{st}
+&&(\because \blkref{def_real_matrix_of_real_entry_matrix}\ (m \to n,\ n \to n,\ B \to A^0)) \\
+&= I_{st}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})) \\
+&= \bigl((I_{\mathrm{Mat}(n,\mathbb{R})})_{st}\bigr)_{\mathbb{C}}
+&&(\because \text{上の鎖}) \\
+&= \bigl(((A_{\mathbb{R}})^0)_{st}\bigr)_{\mathbb{C}}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ (A_{\mathbb{R}})^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(n,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix}))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to ((A^0)_{\mathbb{R}})_{st},\ b \to ((A_{\mathbb{R}})^0)_{st}`),
+        "）より ",
+        math(String.raw`((A^0)_{\mathbb{R}})_{st} = ((A_{\mathbb{R}})^0)_{st}`),
+        " である。",
+        math(String.raw`s, t`),
+        " は任意なので ",
+        math(String.raw`(A^0)_{\mathbb{R}} = (A_{\mathbb{R}})^0`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`q`),
+        " で主張が成り立つとする。",
+        math(String.raw`A^{q+1} = A^qA`),
+        "（",
+        ref("def_exp"),
+        " (1)、",
+        math(String.raw`K = \mathbb{C}`),
+        "）であり、帰納法の仮定より ",
+        math(String.raw`A^q`),
+        " の成分はすべて実数、仮定より ",
+        math(String.raw`A`),
+        " の成分はすべて実数なので、",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`m, n, p \to n,\ A \to A^q,\ B \to A`),
+        "）より ",
+        math(String.raw`A^{q+1}`),
+        " の成分はすべて実数である。さらに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A^{q+1})_{\mathbb{R}}
+&= (A^qA)_{\mathbb{R}}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{q+1} := A^qA\ (K = \mathbb{C})) \\
+&= (A^q)_{\mathbb{R}}\,A_{\mathbb{R}}
+&&(\because \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to n,\ A \to A^q,\ B \to A)) \\
+&= (A_{\mathbb{R}})^q\,A_{\mathbb{R}}
+&&(\because \text{帰納法の仮定}) \\
+&= (A_{\mathbb{R}})^{q+1}
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ (A_{\mathbb{R}})^{q+1} := (A_{\mathbb{R}})^qA_{\mathbb{R}}\ (K = \mathbb{R}\text{、積は}\ \blkref{def_real_matrix_product}))
+\end{aligned}`),
+      paragraph([
+        "である。よって ",
+        math(String.raw`q + 1`),
+        " でも主張が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W の冪のトレースを W_ℝ の冪のトレースとして読む（trace_of_W_power_via_W_real）のに、ϱ が冪を保つことを述べる主張が本文に無かったので足した。数値検証: sagemath/check/real_matrix_of_real_entry_matrix_preserves_power/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },
