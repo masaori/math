@@ -596,6 +596,7 @@ export const ALL_LABELS = [
   "claim_signed_even_subgraph_rational_sign",
   "claim_signed_even_subgraph_sector_sum",
   "claim_single_cell_standard_dual_height_seam",
+  "claim_single_cell_vertex_simple_zero_seam_impossible",
   "claim_smoothing_crossing_number_update",
   "claim_smoothing_cyclic_turning_invariance",
   "claim_smoothing_other_vertex_crossing_invariance",

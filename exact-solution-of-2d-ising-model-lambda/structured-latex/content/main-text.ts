@@ -7287,14 +7287,14 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                 displayMath(String.raw`\begin{aligned}
 I(f)
 &=0
-&&\bigl(\because\ \blkref{claim_polynomial_determinant_noninjective_cancellation}\bigr).
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_noninjective_cancellation}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 P(f)I(f)
 &=P(f)\,0
 &&\bigl(\because\ \text{直前の内側の和の消去}\bigr)\\
 &=0
-&&\bigl(\because\ \text{零との積、}\blkref{def_qbar_polynomial_ring}\bigr).
+&&\bigl(\because\ \text{零との積、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph(["次に ", math(String.raw`\alpha:\operatorname{Perm}(\mathcal J)\to\mathcal U`), " を、置換の各点での値をそのまま写像へ渡す対応 ", math(String.raw`\alpha(\tau)(i):=\tau(i)`), " とする。逆向き ", math(String.raw`\beta:\mathcal U\to\operatorname{Perm}(\mathcal J)`), " は ", math(String.raw`\beta(f)(i):=f(i)`), " とし、逆置換の値は各点の唯一の逆像で定める。これは ", math(String.raw`f`), " の全単射性から存在して一意である。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7304,7 +7304,7 @@ P(f)I(f)
 &=\alpha(\tau)(i)
 &&\bigl(\because\ \beta\text{ の定義}\bigr)\\
 &=\tau(i)
-&&\bigl(\because\ \alpha\text{ の定義}\bigr).
+&&\bigl(\because\ \alpha\text{ の定義}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 ((\alpha\circ\beta)(f))(i)
@@ -7313,7 +7313,7 @@ P(f)I(f)
 &=\beta(f)(i)
 &&\bigl(\because\ \alpha\text{ の定義}\bigr)\\
 &=f(i)
-&&\bigl(\because\ \beta\text{ の定義}\bigr).
+&&\bigl(\because\ \beta\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["全点で一致するので両合成は恒等写像となり、", math(String.raw`\alpha`), " と ", math(String.raw`\beta`), " は互いに逆の全単射である。"]),
                 paragraph(["固定した ", math(String.raw`\tau`), " について、置換の集合から自身への写像 ", math(String.raw`T_\tau(\pi):=\pi\circ\tau`), " と ", math(String.raw`S_\tau(\sigma):=\sigma\circ\tau^{-1}`), " を定める。合成は右側から作用させる。各 ", math(String.raw`i`), " で、"]),
@@ -7324,7 +7324,7 @@ S_\tau(T_\tau(\pi))(i)
 &=\pi(\tau(\tau^{-1}(i)))
 &&\bigl(\because\ T_\tau\text{ の定義}\bigr)\\
 &=\pi(i)
-&&\bigl(\because\ \tau\circ\tau^{-1}\text{ は恒等写像}\bigr).
+&&\bigl(\because\ \tau\circ\tau^{-1}\text{ は恒等写像}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 T_\tau(S_\tau(\sigma))(i)
@@ -7333,7 +7333,7 @@ T_\tau(S_\tau(\sigma))(i)
 &=\sigma(\tau^{-1}(\tau(i)))
 &&\bigl(\because\ S_\tau\text{ の定義}\bigr)\\
 &=\sigma(i)
-&&\bigl(\because\ \tau^{-1}\circ\tau\text{ は恒等写像}\bigr).
+&&\bigl(\because\ \tau^{-1}\circ\tau\text{ は恒等写像}\bigr)
 \end{aligned}`),
                 paragraph(["従って ", math(String.raw`T_\tau`), " と ", math(String.raw`S_\tau`), " も互いに逆の全単射である。係数は ", ref("claim_permutation_sign_mul"), " と定数多項式への埋め込みにより、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7347,7 +7347,7 @@ c_{\pi\circ\tau}
 &=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi))}\,\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}
 &&\bigl(\because\ \blkref{def_qbar_constant_embedding}\bigr)\\
 &=c_\pi c_\tau
-&&\bigl(\because\ c\text{ の定義}\bigr).
+&&\bigl(\because\ c\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["また ", math(String.raw`j=\tau(i)`), " は ", math(String.raw`\mathcal J`), " の全点を重複なく走るから、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7355,7 +7355,7 @@ c_{\pi\circ\tau}
 &=\prod_i B_{\tau(i),\pi(\tau(i))}
 &&\bigl(\because\ \text{合成の定義}\bigr)\\
 &=\prod_j B_{j,\pi(j)}
-&&\bigl(\because\ \tau\text{ による有限積の再添字付け}\bigr).
+&&\bigl(\because\ \tau\text{ による有限積の再添字付け}\bigr)
 \end{aligned}`),
                 paragraph(["これらを内側の和へ順に代入する。", ref("def_qbar_polynomial_determinant"), " と ", ref("def_qbar_polynomial_ring"), " を使い、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7381,7 +7381,7 @@ I(\alpha(\tau))
 &=c_\tau\sum_\pi c_\pi\prod_j B_{j,\pi(j)}
 &&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
 &=c_\tau\det_x(B)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)
 \end{aligned}`),
                 paragraph(["最後に ", ref("claim_polynomial_determinant_function_expansion"), " の外側の和から、上で零と示した項を除く。残る全単射の写像は ", math(String.raw`\alpha`), " で一度ずつ数えられるから、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -7405,7 +7405,7 @@ I(\alpha(\tau))
 &=\left(\sum_\tau c_\tau\prod_i A_{i,\tau(i)}\right)\det_x(B)
 &&\bigl(\because\ \alpha\text{ の定義}\bigr)\\
 &=\det_x(A)\det_x(B)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)
 \end{aligned}`),
                 paragraph(["すべての計算は有限集合と ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で閉じており、実数体・複素数体への脱出はない。"]),
               ],
@@ -64515,6 +64515,45 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
 &=c_1&&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
                       paragraph(["よって全ての ", math(String.raw`k\in I_m`), " で成り立つ。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_single_cell_vertex_simple_zero_seam_impossible",
+                  focus: {
+                    id: "kac_ward_claim_single_cell_vertex_simple_zero_seam_impossible",
+                    kind: "claim",
+                    title: { text: "辺長一では頂点単純閉路と切断線偶奇零は両立しない" },
+                    labels: ["claim_single_cell_vertex_simple_zero_seam_impossible"],
+                    habitat: "N",
+                    verification: ["sagemath/check/single-cell-vertex-simple-zero-seam-impossible"],
+                    lean: [
+                      "Ising2DLambda.KacWard.single_cell_vertex_simple_zero_seam_impossible",
+                      "Ising2DLambda.NecSuf.KacWard.single_cell_vertex_simple_seam",
+                      "Ising2DLambda.KacWard.single_cell_vertex_simple_zero_seam_impossible_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L=1`), " と ", math(String.raw`m\in\mathbb N_{>0}`),
+                        "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
+                        ref("def_closed_nonbacktracking_walk"), "）。接触対数が零なら、横・縦切断線偶奇 ",
+                        math(String.raw`h(\gamma),v(\gamma)\in\{0,1\}`), " は同時には零にならない。" ]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_lattice"), " より ", math(String.raw`V_1`),
+                        " は一頂点である。接触対数が零なら通過頂点は相異なる（",
+                        ref("claim_zero_contact_iff_distinct_pass_vertices"), "）。辺列は空でないので、",
+                        math(String.raw`m=1`), " となる。" ]),
+                      paragraph([ref("def_oriented_edges"), " により唯一の基底辺 ",
+                        math(String.raw`\operatorname{base}(\vec e_1)`),
+                        " は横辺か縦辺のいずれかである。辺長一ではいずれもその方向の切断線上にある（",
+                        ref("def_seam_parities"), "）。従って横辺なら ",
+                        math(String.raw`h(\gamma)=1`), "、縦辺なら ",
+                        math(String.raw`v(\gamma)=1`), " である（",
+                        ref("def_edge_sequence_seam_parities"), "）。" ]),
                     ],
                   },
                 },
