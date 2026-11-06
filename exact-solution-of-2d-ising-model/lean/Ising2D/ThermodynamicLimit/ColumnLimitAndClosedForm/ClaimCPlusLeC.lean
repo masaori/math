@@ -23,11 +23,10 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- **人手本文 `c_plus_le_c`**: `c_+(M) ≤ c(M)`。 -/
-theorem c_plus_le_c {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) :
+/-- **人手本文 `c_plus_le_c`**: `c_+(M) ≤ c(M)`（`W` に仮定を置かない）。 -/
+theorem c_plus_le_c (W : Matrix (Conf M) (Conf M) ℝ) :
     evenSectorRayleighSup W (epsilonR M) ≤ rayleighSup W :=
-  csSup_le_csSup (rayleighSet_bddAbove hW hpsd) (evenSectorSet_epsilonR_nonempty W)
+  csSup_le_csSup (rayleighSet_bddAbove W) (evenSectorSet_epsilonR_nonempty W)
     (evenSectorSet_subset W (epsilonR M))
 
 end Ising2D

@@ -49,8 +49,9 @@
 | --- | --- | --- |
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
 | `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀWx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
-| `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界 | 同上 |
-| `Ising2D.abs_component_le_one_of_unit`（`DefinitionRayleighSup.lean`） | `‖x‖ = 1` なら `\|x_i\| ≤ 1`（上に有界であることの段の前半。人手の 4 行と `nonnegative_real_order_from_squares`（具体版は `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean`）。`rayleighSet_bddAbove` はまだこれを使わず `psd_quad_le_normSq_mul_trace` で閉じる） | `def_rayleigh_sup` |
+| `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界（上界は `Σ_iΣ_j\|W_ij\|`。`W` に仮定を置かない） | 同上 |
+| `Ising2D.abs_component_le_one_of_unit`（`DefinitionRayleighSup.lean`） | `‖x‖ = 1` なら `\|x_i\| ≤ 1`（上に有界であることの段の前半。人手の 4 行と `nonnegative_real_order_from_squares`（具体版は `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean`）） | `def_rayleigh_sup` |
+| `Ising2D.abs_bilinear_term_le_abs_entry` / `abs_bilinear_row_le_row_abs_sum` / `bilinear_le_abs_entry_sum`（`DefinitionRayleighSup.lean`） | `\|x_k\| ≤ 1` なら `\|x_iW_ijx_j\| ≤ \|W_ij\|`、`\|Σ_j x_iW_ijx_j\| ≤ Σ_j\|W_ij\|`、`xᵀWx ≤ Σ_iΣ_j\|W_ij\|`（上に有界であることの段の後半。人手の項ごとの 6 行・各 `i` の 2 行・外側の 4 行と 1 対 1。人手 `def_real_bilinear_value` の行は `dotProduct_mulVec_eq_real_bilinear_value`） | `def_rayleigh_sup` |
 | `Ising2D.le_rayleighSup` | 単位ベクトルで `xᵀWx ≤ c(M)` | 同上 |
 | `Ising2D.quad_le_rayleighSup_mul` | 任意の `x` で `xᵀWx ≤ c(M)‖x‖²` | 同上 |
 | `Ising2D.rayleighSup_nonneg` / `rayleighSup_pos` | `c(M) ≥ 0` / `c(M) > 0` | 同上（本文は `𝓡 ⊆ ℝ_{>0}` と書いている） |
@@ -233,8 +234,7 @@
 
 ## 5.1 人手証明と 1 対 1 にならない箇所（2026-09-26 に追加した主張）
 
-- `def_sector_rayleigh_sup`: `𝓡` の有界性の根拠（人手は `∑|W_ij|`、Lean は `xᵀWx ≤ ‖x‖² tr W`）と、
-  `ε x^{(+)} = x^{(+)}` の示し方（人手はクロネッカー積の積の規則、Lean は置換行列の成分表示と
+- `def_sector_rayleigh_sup`: `ε x^{(+)} = x^{(+)}` の示し方（人手はクロネッカー積の積の規則、Lean は置換行列の成分表示と
   成分が定数であること）。`x^{(+)}` は人手が確かめた「各成分が `2^{-M/2}`」の形で直接定義した。
 - `epsilon_commutes_with_W`: 人手は複素行列として `εW = Wε` を示す。Lean は複素行列の等式を示したあと、
   成分の埋め込みの単射性で実行列の等式へ移す一段を足している。

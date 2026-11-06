@@ -1612,6 +1612,538 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_definition_real_absolute_value",
+    kind: "definition",
+    title: { text: "実数の絶対値" },
+    labels: ["def_real_absolute_value"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{R}`),
+        " について、実数の絶対値 ",
+        math(String.raw`|q| \in \mathbb{R}`),
+        " を",
+      ]),
+      displayMath(String.raw`|q| :=
+\begin{cases}
+q & (q \geq 0),\\
+-q & (q < 0)
+\end{cases}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`-q`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転）。",
+        math(String.raw`q \geq 0`),
+        " なら ",
+        math(String.raw`|q| = q \geq 0`),
+        "、",
+        math(String.raw`q < 0`),
+        " なら ",
+        math(String.raw`|q| = -q > 0`),
+        " なので、",
+        math(String.raw`|q| \in \mathbb{R}_{\geq 0}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。本文の各所が「実数の絶対値の定め方」を名前だけで使っていたが、引ける定義のブロックが無かった。def_rayleigh_sup の上に有界であることの鎖を引ける形にするために足した主張（real_number_is_at_most_its_absolute_value ほか）が引けるよう、先に置いた。既存の名前だけの箇所は、それぞれのブロックを扱うときに参照へ替える。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_real_number_is_at_most_its_absolute_value",
+    kind: "claim",
+    title: { text: "実数は絶対値以下" },
+    labels: ["real_number_is_at_most_its_absolute_value"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。このとき",
+      ]),
+      displayMath(String.raw`q \leq |q|`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q \geq 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q
+&= |q|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q \geq 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q < 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q
+&< 0
+&&\bigl(\because\ q < 0\bigr)\\
+&< -q
+&&\bigl(\because\ q < 0\ \text{の両辺の符号を反転する}\bigr)\\
+&= |q|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q < 0)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が、𝓡 の元 x^⊤Wx をその絶対値で上から抑える段を書いていなかったので、その段と real_abs_triangle_inequality の証明から引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_negative_absolute_value_is_at_most_real_number",
+    kind: "claim",
+    title: { text: "絶対値の符号反転は実数以下" },
+    labels: ["negative_absolute_value_is_at_most_real_number"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。このとき",
+      ]),
+      displayMath(String.raw`-|q| \leq q`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q \geq 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-|q|
+&= -q
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q \geq 0)\bigr)\\
+&\leq 0
+&&\bigl(\because\ q \geq 0\ \text{の両辺の符号を反転する}\bigr)\\
+&\leq q
+&&\bigl(\because\ q \geq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q < 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-|q|
+&= -(-q)
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q < 0)\bigr)\\
+&= q
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-q) = q\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。real_abs_triangle_inequality の証明（a + b < 0 の場合）から引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_real_absolute_value_of_nonpositive",
+    kind: "claim",
+    title: { text: "0 以下の実数の絶対値は符号反転" },
+    labels: ["real_absolute_value_of_nonpositive"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{R}`),
+        " が ",
+        math(String.raw`q \leq 0`),
+        " を満たすとする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。このとき",
+      ]),
+      displayMath(String.raw`|q| = -q`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q < 0`),
+        " のときは ",
+        ref("def_real_absolute_value"),
+        "（",
+        math(String.raw`q < 0`),
+        "）そのものである。",
+        math(String.raw`q = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|q|
+&= q
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q \geq 0)\bigr)\\
+&= 0
+&&\bigl(\because\ q = 0\bigr)\\
+&= -0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -0 = 0\bigr)\\
+&= -q
+&&\bigl(\because\ q = 0\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。real_abs_of_product の証明で ab ≤ 0 の場合の絶対値を出す段から引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_real_abs_triangle_inequality",
+    kind: "claim",
+    title: { text: "実数の絶対値の三角不等式" },
+    labels: ["real_abs_triangle_inequality"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。このとき",
+      ]),
+      displayMath(String.raw`|a + b| \leq |a| + |b|`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("real_number_is_at_most_its_absolute_value"),
+        "（",
+        math(String.raw`q \to a`),
+        "、",
+        math(String.raw`q \to b`),
+        "）より ",
+        math(String.raw`a \leq |a|`),
+        "、",
+        math(String.raw`b \leq |b|`),
+        " である。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-a
+&\leq -(-|a|)
+&&\bigl(\because\ \blkref{negative_absolute_value_is_at_most_real_number}\ (q \to a)\ \text{の}\ -|a| \leq a\ \text{の両辺の符号を反転する}\bigr)\\
+&= |a|
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-|a|) = |a|\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-b
+&\leq -(-|b|)
+&&\bigl(\because\ \blkref{negative_absolute_value_is_at_most_real_number}\ (q \to b)\ \text{の}\ -|b| \leq b\ \text{の両辺の符号を反転する}\bigr)\\
+&= |b|
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-|b|) = |b|\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`a + b \geq 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|a + b|
+&= a + b
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a + b \geq 0)\bigr)\\
+&\leq |a| + b
+&&\bigl(\because\ a \leq |a|\ \text{の両辺に}\ b\ \text{を足す}\bigr)\\
+&\leq |a| + |b|
+&&\bigl(\because\ b \leq |b|\ \text{の両辺に}\ |a|\ \text{を足す}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`a + b < 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|a + b|
+&= -(a + b)
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a + b < 0)\bigr)\\
+&= (-a) + (-b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(a + b) = (-a) + (-b)\bigr)\\
+&\leq |a| + (-b)
+&&\bigl(\because\ -a \leq |a|\ \text{の両辺に}\ -b\ \text{を足す}\bigr)\\
+&\leq |a| + |b|
+&&\bigl(\because\ -b \leq |b|\ \text{の両辺に}\ |a|\ \text{を足す}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。finite_sum_of_real_numbers_triangle_inequality の帰納法の段から引けるよう足した（def_rayleigh_sup の上に有界であることの鎖が「有限和の三角不等式」を名前だけで使っていた）。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_real_abs_of_product",
+    kind: "claim",
+    title: { text: "実数の積の絶対値は絶対値の積" },
+    labels: ["real_abs_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。このとき",
+      ]),
+      displayMath(String.raw`|ab| = |a|\,|b|`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " の符号で 4 つに場合を分ける。",
+        math(String.raw`a \geq 0`),
+        " かつ ",
+        math(String.raw`b \geq 0`),
+        " のとき。非負の実数の積は非負なので ",
+        math(String.raw`ab \geq 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|ab|
+&= ab
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (ab \geq 0)\bigr)\\
+&= |a|\,b
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a \geq 0)\bigr)\\
+&= |a|\,|b|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (b \geq 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a \geq 0`),
+        " かつ ",
+        math(String.raw`b < 0`),
+        " のとき。",
+        math(String.raw`-b > 0`),
+        " なので非負の実数の積として ",
+        math(String.raw`a(-b) \geq 0`),
+        " であり、",
+        math(String.raw`ab = -(a(-b)) \leq 0`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|ab|
+&= -(ab)
+&&\bigl(\because\ \blkref{real_absolute_value_of_nonpositive}\ (q \to ab)\bigr)\\
+&= a(-b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(ab) = a(-b)\bigr)\\
+&= |a|\,(-b)
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a \geq 0)\bigr)\\
+&= |a|\,|b|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (b < 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a < 0`),
+        " かつ ",
+        math(String.raw`b \geq 0`),
+        " のとき。",
+        math(String.raw`-a > 0`),
+        " なので非負の実数の積として ",
+        math(String.raw`(-a)b \geq 0`),
+        " であり、",
+        math(String.raw`ab = -((-a)b) \leq 0`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|ab|
+&= -(ab)
+&&\bigl(\because\ \blkref{real_absolute_value_of_nonpositive}\ (q \to ab)\bigr)\\
+&= (-a)\,b
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(ab) = (-a)b\bigr)\\
+&= |a|\,b
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a < 0)\bigr)\\
+&= |a|\,|b|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (b \geq 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a < 0`),
+        " かつ ",
+        math(String.raw`b < 0`),
+        " のとき。",
+        math(String.raw`-a > 0`),
+        "、",
+        math(String.raw`-b > 0`),
+        " なので非負の実数の積として ",
+        math(String.raw`ab = (-a)(-b) \geq 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|ab|
+&= ab
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (ab \geq 0)\bigr)\\
+&= (-a)(-b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ ab = (-a)(-b)\bigr)\\
+&= |a|\,(-b)
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (a < 0)\bigr)\\
+&= |a|\,|b|
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (b < 0)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が「積の絶対値」を名前だけで使っていたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality",
+    kind: "claim",
+    title: { text: "実数の有限和の三角不等式" },
+    labels: ["finite_sum_of_real_numbers_triangle_inequality"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        "、",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値による。このとき",
+      ]),
+      displayMath(String.raw`\left|\sum_{j=1}^{m} a_j\right| \leq \sum_{j=1}^{m} |a_j|`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|\sum_{j=1}^{1} a_j\right|
+&= |a_1|
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= \sum_{j=1}^{1} |a_j|
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to |a_j|)\bigr)
+\end{aligned}`),
+      paragraph([
+        "だから成り立つ。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1} \in \mathbb{R}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|\sum_{j=1}^{m+1} a_j\right|
+&= \left|\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\right|
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&\leq \left|\sum_{j=1}^{m} a_j\right| + |a_{m+1}|
+&&\bigl(\because\ \blkref{real_abs_triangle_inequality}\ (a \to \textstyle\sum_{j=1}^{m} a_j,\ b \to a_{m+1})\bigr)\\
+&\leq \Bigl(\sum_{j=1}^{m} |a_j|\Bigr) + |a_{m+1}|
+&&\bigl(\because\ \text{帰納法の仮定の両辺に}\ |a_{m+1}|\ \text{を足す}\bigr)\\
+&= \sum_{j=1}^{m+1} |a_j|
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to |a_j|)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が「有限和の三角不等式」を名前だけで使っていたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_real_numbers_is_monotone",
+    kind: "claim",
+    title: { text: "項ごとの大小は実数の有限和の大小に移る" },
+    labels: ["finite_sum_of_real_numbers_is_monotone"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m, b_1,\dots,b_m \in \mathbb{R}`),
+        " がすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で ",
+        math(String.raw`a_j \leq b_j`),
+        " を満たすとする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} a_j \leq \sum_{j=1}^{m} b_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} a_j
+&= a_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&\leq b_1
+&&\bigl(\because\ \text{仮定}\ a_1 \leq b_1\bigr)\\
+&= \sum_{j=1}^{1} b_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1}, b_1,\dots,b_{m+1} \in \mathbb{R}`),
+        " がすべての ",
+        math(String.raw`j \in \{1,\dots,m+1\}`),
+        " で ",
+        math(String.raw`a_j \leq b_j`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} a_j
+&= \Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&\leq \Bigl(\sum_{j=1}^{m} b_j\Bigr) + a_{m+1}
+&&\bigl(\because\ \text{帰納法の仮定（}a_1,\dots,a_m\ \text{と}\ b_1,\dots,b_m\text{）の両辺に}\ a_{m+1}\ \text{を足す}\bigr)\\
+&\leq \Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}
+&&\bigl(\because\ a_{m+1} \leq b_{m+1}\ \text{の両辺に}\ \textstyle\sum_{j=1}^{m} b_j\ \text{を足す}\bigr)\\
+&= \sum_{j=1}^{m+1} b_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が「|x_i| ≤ 1, |x_j| ≤ 1」の名前だけで項ごとの評価を有限和へ移していたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_definition_maximum_value_of_real_family",
     kind: "definition",
     title: { text: "実数の族の最大値" },

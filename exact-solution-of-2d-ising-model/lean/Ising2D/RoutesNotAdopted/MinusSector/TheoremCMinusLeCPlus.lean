@@ -43,50 +43,46 @@ variable {M : ℕ}
 /-! ## Step 1: `c_±(M)` が実数として定まること -/
 
 /-- 人手証明 Step 1: `𝓡_±` は上に有界（章 011 の `sectorSet_bddAbove` の言い換え）。 -/
-theorem sectorSet_bddAbove_epsilonR {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (s : ℝ) :
+theorem sectorSet_bddAbove_epsilonR (W : Matrix (Conf M) (Conf M) ℝ) (s : ℝ) :
     BddAbove (sectorSet W (epsilonR M) s) :=
-  sectorSet_bddAbove hW hpsd (epsilonR M) s
+  sectorSet_bddAbove W (epsilonR M) s
 
 /-- 人手証明 Step 1 のまとめ: `𝓡_-` は空でなく上に有界（`M ≥ 1` が要る）。 -/
-theorem sectorSet_neg_nonempty_bddAbove (hM : 0 < M) {W : Matrix (Conf M) (Conf M) ℝ}
-    (hW : W.IsSymm) (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) :
+theorem sectorSet_neg_nonempty_bddAbove (hM : 0 < M) (W : Matrix (Conf M) (Conf M) ℝ) :
     (sectorSet W (epsilonR M) (-1 : ℝ)).Nonempty ∧
       BddAbove (sectorSet W (epsilonR M) (-1 : ℝ)) :=
-  ⟨sectorSet_neg_nonempty_epsilonR hM W, sectorSet_bddAbove_epsilonR hW hpsd _⟩
+  ⟨sectorSet_neg_nonempty_epsilonR hM W, sectorSet_bddAbove_epsilonR W _⟩
 
 /-- 人手証明 Step 1 のまとめ: `𝓡_+` は空でなく上に有界。 -/
-theorem sectorSet_pos_nonempty_bddAbove {W : Matrix (Conf M) (Conf M) ℝ}
-    (hW : W.IsSymm) (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) :
+theorem sectorSet_pos_nonempty_bddAbove (W : Matrix (Conf M) (Conf M) ℝ) :
     (sectorSet W (epsilonR M) (1 : ℝ)).Nonempty ∧
       BddAbove (sectorSet W (epsilonR M) (1 : ℝ)) :=
-  ⟨sectorSet_pos_nonempty_epsilonR W, sectorSet_bddAbove_epsilonR hW hpsd _⟩
+  ⟨sectorSet_pos_nonempty_epsilonR W, sectorSet_bddAbove_epsilonR W _⟩
 
 /-! ## Step 2: 各点での比較 -/
 
 /-- **人手証明 Step 2** `x ∈ 𝓕^{(-)}, ‖x‖ = 1 ⇒ xᵀWx ≤ c_+(M)`。 -/
-theorem quad_le_sectorRayleighSup_pos {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hpos : ∀ k l, 0 < W k l)
+theorem quad_le_sectorRayleighSup_pos {W : Matrix (Conf M) (Conf M) ℝ} (hpos : ∀ k l, 0 < W k l)
     {x : Conf M → ℝ} (hx : epsilonR M *ᵥ x = (-1 : ℝ) • x) (hx1 : vecNormSq x = 1) :
     x ⬝ᵥ W *ᵥ x ≤ sectorRayleighSup W (epsilonR M) 1 := by
   obtain ⟨u, hu, hu1, hle⟩ := exists_even_sector_unit_ge hpos hx hx1
   exact le_trans hle
-    (le_csSup (sectorSet_bddAbove_epsilonR hW hpsd _) ⟨u, hu, hu1, rfl⟩)
+    (le_csSup (sectorSet_bddAbove_epsilonR W _) ⟨u, hu, hu1, rfl⟩)
 
 /-! ## Step 3: 上限を取る -/
 
 /-- **人手証明の定理 `c_minus_le_c_plus`** `c_-(M) ≤ c_+(M)`。 -/
-theorem c_minus_le_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
+theorem c_minus_le_c_plus {W : Matrix (Conf M) (Conf M) ℝ}
     (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hpos : ∀ k l, 0 < W k l) :
     sectorRayleighSup W (epsilonR M) (-1 : ℝ) ≤ sectorRayleighSup W (epsilonR M) 1 :=
-  NecSuf.sectorRayleighSup_neg_le_pos hW hpsd (fun k l => (hpos k l).le)
+  NecSuf.sectorRayleighSup_neg_le_pos hpsd (fun k l => (hpos k l).le)
     flipConf_involutive
 
 /-- 上の非負版（必要十分版で分かった、本当に効いている仮定）。 -/
-theorem c_minus_le_c_plus_of_nonneg {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
+theorem c_minus_le_c_plus_of_nonneg {W : Matrix (Conf M) (Conf M) ℝ}
     (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hnn : ∀ k l, 0 ≤ W k l) :
     sectorRayleighSup W (epsilonR M) (-1 : ℝ) ≤ sectorRayleighSup W (epsilonR M) 1 :=
-  NecSuf.sectorRayleighSup_neg_le_pos hW hpsd hnn flipConf_involutive
+  NecSuf.sectorRayleighSup_neg_le_pos hpsd hnn flipConf_involutive
 
 /-! ## 章 011 の `W = V_1^{1/2} V_2 V_1^{1/2}` への特殊化 -/
 
@@ -102,12 +98,10 @@ theorem isUnit_diagonal_of_pos {d : Conf M → ℝ} (hd : ∀ i, 0 < d i) :
 成分がすべて正であれば、`W` は人手証明 `c_minus_le_c_plus` の仮定
 （実対称・半正定値・成分がすべて正）をすべて満たす。 -/
 theorem c_minus_le_c_plus_symTransfer {d : Conf M → ℝ} {V2 : Matrix (Conf M) (Conf M) ℝ}
-    (hd : ∀ i, 0 < d i) (hV2symm : V2.IsSymm) (hV2pos : ∀ i j, 0 < V2 i j)
+    (hd : ∀ i, 0 < d i) (hV2pos : ∀ i j, 0 < V2 i j)
     (hV2pd : ∀ x : Conf M → ℝ, x ≠ 0 → 0 < x ⬝ᵥ V2 *ᵥ x) :
     sectorRayleighSup (symTransfer (diagonal d) V2) (epsilonR M) (-1 : ℝ)
       ≤ sectorRayleighSup (symTransfer (diagonal d) V2) (epsilonR M) 1 := by
-  have hsymm : (symTransfer (diagonal d) V2).IsSymm :=
-    symTransfer_isSymm (Matrix.isSymm_diagonal d) hV2symm
   have hpd : ∀ x : Conf M → ℝ, x ≠ 0 → 0 < x ⬝ᵥ symTransfer (diagonal d) V2 *ᵥ x :=
     symTransfer_posDef (Matrix.isSymm_diagonal d) (isUnit_diagonal_of_pos hd) hV2pd
   have hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ symTransfer (diagonal d) V2 *ᵥ x := by
@@ -115,6 +109,6 @@ theorem c_minus_le_c_plus_symTransfer {d : Conf M → ℝ} {V2 : Matrix (Conf M)
     rcases eq_or_ne x 0 with rfl | hx
     · simp
     · exact (hpd x hx).le
-  exact c_minus_le_c_plus hsymm hpsd (symTransfer_entry_pos hd hV2pos)
+  exact c_minus_le_c_plus hpsd (symTransfer_entry_pos hd hV2pos)
 
 end Ising2D

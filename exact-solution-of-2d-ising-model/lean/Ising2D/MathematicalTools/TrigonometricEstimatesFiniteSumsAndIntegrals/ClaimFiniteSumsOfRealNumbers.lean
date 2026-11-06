@@ -1,12 +1,14 @@
 /-
-# 実数の差・符号反転・共通の因子の有限和と、非負の実数の有限和の下からの評価（**具体版**）
+# 実数の差・符号反転・共通の因子の有限和、非負の実数の有限和の下からの評価、有限和の三角不等式と項ごとの大小（**具体版**）
 
 対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`,
-`finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`
+`finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
+`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_definition_finite_sum_of_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_scalar_multiples`,
-`calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`）。
+`calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`,
+`calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`, `calc_formulae_claim_finite_sum_of_real_numbers_is_monotone`）。
 
 **必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`。具体版をその系として導くのは
 `ClaimFiniteSumsOfRealNumbersFromNecSuf.lean`。
@@ -27,9 +29,14 @@
 * `finite_sum_of_nonnegative_reals_ge_term_succ` は人手と同じく、`k ≤ m`（Lean の `Fin.castSucc k'`）と `k = m + 1`（`Fin.last`）に分け、
   それぞれ人手の 4 行と 1 対 1 の `calc` にした。`k = m + 1` の前置き `Σ_{j=1}^{m} a_j ≥ a_1 ≥ 0` は帰納法の仮定を `k → 1`（Lean の `0`）で使う。
   「両辺に同じ実数を足す」は `add_le_add` の片方を `le_rfl` にしたもの、「0 は ℝ の和の単位元」は `add_zero`・`zero_add` である。
+* `finite_sum_of_real_numbers_triangle_inequality_succ` と `finite_sum_of_real_numbers_is_monotone_succ` は、`m = 1` の 2 行・3 行と帰納法の段の 4 行が
+  人手の行と 1 対 1 の `calc` である（三角不等式の `m = 1` は人手の等号の 2 行に、`≤` へ移す `le_rfl` を 1 段足した）。
+  帰納法の段の三角不等式は `real_abs_triangle_inequality`（`ClaimRealAbsoluteValueBoundsTriangleAndProduct.lean`）を引く。
+  `_fintype` 版は `finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく、有限型の添字に番号を付けて当てる。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 
 namespace Ising2D
 
@@ -171,5 +178,80 @@ theorem finite_sum_of_nonnegative_reals_ge_term_fintype {κ : Type*} [Fintype κ
         finite_sum_of_nonnegative_reals_ge_term _ (fun j => a (e.symm j)) (fun j => ha _) (e k)
                                                                               -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`k → e(k)`）
     _ = a k := by rw [Equiv.symm_apply_apply]                                 -- 番号を外す
+
+/-- **`finite_sum_of_real_numbers_triangle_inequality`**（`m + 1` 項）: `|Σ_{j=1}^{m+1} a_j| ≤ Σ_{j=1}^{m+1} |a_j|`。`m` についての帰納法。 -/
+theorem finite_sum_of_real_numbers_triangle_inequality_succ (m : ℕ) (a : Fin (m + 1) → ℝ) :
+    |∑ j, a j| ≤ ∑ j, |a j| := by
+  induction m with
+  | zero =>
+    calc |∑ j : Fin 1, a j|
+        = |a 0| := by rw [Fin.sum_univ_one]                                  -- `def_finite_sum_of_real_numbers`
+      _ = ∑ j : Fin 1, |a j| := (Fin.sum_univ_one (fun j => |a j|)).symm      -- `def_finite_sum_of_real_numbers`（`r_j → |a_j|`）
+      _ ≤ ∑ j : Fin 1, |a j| := le_rfl
+  | succ m ih =>
+    calc |∑ j : Fin (m + 2), a j|
+        = |(∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _)| := by
+          rw [Fin.sum_univ_castSucc]                                          -- `def_finite_sum_of_real_numbers`
+      _ ≤ |∑ j : Fin (m + 1), a j.castSucc| + |a (Fin.last _)| :=
+          real_abs_triangle_inequality _ _                                    -- `real_abs_triangle_inequality`（`a → Σ_{j=1}^{m} a_j`、`b → a_{m+1}`）
+      _ ≤ (∑ j : Fin (m + 1), |a j.castSucc|) + |a (Fin.last _)| :=
+          add_le_add (ih (fun j => a j.castSucc)) le_rfl                      -- 帰納法の仮定の両辺に `|a_{m+1}|` を足す
+      _ = ∑ j, |a j| := (Fin.sum_univ_castSucc (fun j => |a j|)).symm         -- `def_finite_sum_of_real_numbers`（`r_j → |a_j|`）
+
+/-- **`finite_sum_of_real_numbers_triangle_inequality`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+theorem finite_sum_of_real_numbers_triangle_inequality (m : ℕ) (a : Fin m → ℝ) :
+    |∑ j, a j| ≤ ∑ j, |a j| := by
+  cases m with
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, abs_zero]
+  | succ m => exact finite_sum_of_real_numbers_triangle_inequality_succ m a
+
+/-- **`finite_sum_of_real_numbers_triangle_inequality`**（添字が有限型 `κ` の和）。
+`κ` に `Fintype.equivFin κ` で番号を付け、`Fin (card κ)` の上の和として当てる（番号を付ける段と外す段は mathlib の `Equiv.sum_comp` による）。 -/
+theorem finite_sum_of_real_numbers_triangle_inequality_fintype {κ : Type*} [Fintype κ] (a : κ → ℝ) :
+    |∑ j, a j| ≤ ∑ j, |a j| := by
+  set e := Fintype.equivFin κ
+  calc |∑ j, a j|
+      = |∑ j : Fin (Fintype.card κ), a (e.symm j)| := by rw [e.symm.sum_comp a]  -- `κ` に番号を付ける
+    _ ≤ ∑ j : Fin (Fintype.card κ), |a (e.symm j)| :=
+        finite_sum_of_real_numbers_triangle_inequality _ _                    -- `finite_sum_of_real_numbers_triangle_inequality`
+    _ = ∑ j, |a j| := e.symm.sum_comp (fun j => |a j|)                        -- 番号を外す
+
+/-- **`finite_sum_of_real_numbers_is_monotone`**（`m + 1` 項）: すべての `j` で `a_j ≤ b_j` なら `Σ a_j ≤ Σ b_j`。`m` についての帰納法。 -/
+theorem finite_sum_of_real_numbers_is_monotone_succ (m : ℕ) (a b : Fin (m + 1) → ℝ)
+    (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j := by
+  induction m with
+  | zero =>
+    calc ∑ j : Fin 1, a j
+        = a 0 := Fin.sum_univ_one _                                          -- `def_finite_sum_of_real_numbers`
+      _ ≤ b 0 := hab 0                                                        -- 仮定 `a_1 ≤ b_1`
+      _ = ∑ j : Fin 1, b j := (Fin.sum_univ_one _).symm                       -- `def_finite_sum_of_real_numbers`
+  | succ m ih =>
+    calc ∑ j : Fin (m + 2), a j
+        = (∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _) :=
+          Fin.sum_univ_castSucc _                                             -- `def_finite_sum_of_real_numbers`
+      _ ≤ (∑ j : Fin (m + 1), b j.castSucc) + a (Fin.last _) :=
+          add_le_add (ih (fun j => a j.castSucc) (fun j => b j.castSucc) (fun j => hab _)) le_rfl
+                                                                              -- 帰納法の仮定の両辺に `a_{m+1}` を足す
+      _ ≤ (∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _) :=
+          add_le_add le_rfl (hab _)                                           -- `a_{m+1} ≤ b_{m+1}` の両辺に `Σ_{j=1}^{m} b_j` を足す
+      _ = ∑ j, b j := (Fin.sum_univ_castSucc b).symm                          -- `def_finite_sum_of_real_numbers`
+
+/-- **`finite_sum_of_real_numbers_is_monotone`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+theorem finite_sum_of_real_numbers_is_monotone (m : ℕ) (a b : Fin m → ℝ)
+    (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j := by
+  cases m with
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero]
+  | succ m => exact finite_sum_of_real_numbers_is_monotone_succ m a b hab
+
+/-- **`finite_sum_of_real_numbers_is_monotone`**（添字が有限型 `κ` の和）。番号の付け方は
+`finite_sum_of_real_numbers_triangle_inequality_fintype` と同じ。 -/
+theorem finite_sum_of_real_numbers_is_monotone_fintype {κ : Type*} [Fintype κ] (a b : κ → ℝ)
+    (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j := by
+  set e := Fintype.equivFin κ
+  calc ∑ j, a j
+      = ∑ j : Fin (Fintype.card κ), a (e.symm j) := (e.symm.sum_comp a).symm  -- `κ` に番号を付ける
+    _ ≤ ∑ j : Fin (Fintype.card κ), b (e.symm j) :=
+        finite_sum_of_real_numbers_is_monotone _ _ _ (fun j => hab _)         -- `finite_sum_of_real_numbers_is_monotone`
+    _ = ∑ j, b j := e.symm.sum_comp b                                         -- 番号を外す
 
 end Ising2D

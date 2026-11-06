@@ -268,7 +268,7 @@ theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
     rintro r ⟨x, hxs, hxn, rfl⟩
     exact B.quad_le_lamMax hxs hxn
   · rw [← hquad]
-    exact le_evenSectorRayleighSup B.hWsymm B.hWpsd hsec hunit
+    exact le_evenSectorRayleighSup hsec hunit
 
 /-- 上限が偶セクターの実単位ベクトルで**達成される**こと（人手証明の最後の一文）。 -/
 theorem exists_maximizer (htr : 0 < ((epsilon M * D.V).trace).re) :

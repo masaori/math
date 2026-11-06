@@ -829,6 +829,33 @@ targets=(
   Ising2D.finite_sum_of_nonnegative_reals_ge_term_fintype
   Ising2D.nonnegative_real_order_from_squares
   Ising2D.abs_component_le_one_of_unit
+  Ising2D.dotProduct_mulVec_eq_real_bilinear_value
+  Ising2D.abs_bilinear_term_le_abs_entry
+  Ising2D.abs_bilinear_row_le_row_abs_sum
+  Ising2D.bilinear_le_abs_entry_sum
+  Ising2D.real_number_is_at_most_its_absolute_value
+  Ising2D.negative_absolute_value_is_at_most_real_number
+  Ising2D.real_absolute_value_of_nonpositive
+  Ising2D.real_abs_triangle_inequality
+  Ising2D.real_abs_of_product
+  Ising2D.real_number_is_at_most_its_absolute_value_of_necSuf
+  Ising2D.negative_absolute_value_is_at_most_real_number_of_necSuf
+  Ising2D.real_absolute_value_of_nonpositive_of_necSuf
+  Ising2D.real_abs_triangle_inequality_of_necSuf
+  Ising2D.real_abs_of_product_of_necSuf
+  "Ising2D.NecSuf.le_abs'"
+  "Ising2D.NecSuf.neg_abs_le'"
+  "Ising2D.NecSuf.abs_of_nonpos'"
+  "Ising2D.NecSuf.abs_add_le'"
+  "Ising2D.NecSuf.abs_mul'"
+  Ising2D.finite_sum_of_real_numbers_triangle_inequality
+  Ising2D.finite_sum_of_real_numbers_triangle_inequality_fintype
+  Ising2D.finite_sum_of_real_numbers_is_monotone
+  Ising2D.finite_sum_of_real_numbers_is_monotone_fintype
+  Ising2D.finite_sum_of_real_numbers_triangle_inequality_of_necSuf
+  Ising2D.finite_sum_of_real_numbers_is_monotone_of_necSuf
+  "Ising2D.NecSuf.finite_sum_subadditive_fin'"
+  "Ising2D.NecSuf.finite_sum_le_fin'"
   Ising2D.nonnegative_real_order_from_squares_of_necSuf
   "Ising2D.NecSuf.order_from_squares'"
   Ising2D.realQuadForm_pos_of_map_posDef

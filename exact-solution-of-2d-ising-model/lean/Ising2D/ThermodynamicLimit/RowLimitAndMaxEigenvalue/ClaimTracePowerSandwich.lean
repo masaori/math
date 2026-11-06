@@ -47,8 +47,8 @@ theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
   have hpair := isPsdPair_of_matrix hW hpsd
   have hdiag : ∀ i : n, (W ^ N) i i ≤ rayleighSup W ^ N := by
     intro i
-    have h := hpair.moment_le_pow (rayleighSup_nonneg hW hpsd)
-      (necSuf_rayleigh_hyp hW hpsd) (Pi.single i 1) N
+    have h := hpair.moment_le_pow (rayleighSup_nonneg hpsd)
+      (necSuf_rayleigh_hyp (W := W)) (Pi.single i 1) N
     rw [matBilin_one_mulVecLin_pow, single_dotProduct_mulVec_single] at h
     have he : matBilin (1 : Matrix n n ℝ) (Pi.single i 1) (Pi.single i 1) = 1 := by
       simpa [vecNormSq] using vecNormSq_single (n := n) i
@@ -119,7 +119,7 @@ theorem rayleighSup_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     rw [← Real.rpow_natCast (T ^ ((1 : ℝ) / N)) N, ← Real.rpow_mul hTpos.le,
       one_div, inv_mul_cancel₀ hNne, Real.rpow_one]
   calc rayleighSup W ^ N ≤ (T ^ ((1 : ℝ) / N)) ^ N :=
-        pow_le_pow_left₀ (rayleighSup_nonneg hW hpsd) hle N
+        pow_le_pow_left₀ (rayleighSup_nonneg hpsd) hle N
     _ = T := hpow
 
 /-- **`c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n`**（人手証明 `trace_power_sandwich`）。 -/

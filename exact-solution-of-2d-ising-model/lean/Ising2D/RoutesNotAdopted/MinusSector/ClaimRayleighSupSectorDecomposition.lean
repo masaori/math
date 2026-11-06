@@ -80,24 +80,22 @@ theorem sectorSet_subset (W ε : Matrix n n ℝ) (s : ℝ) :
   rintro r ⟨x, _, hx, rfl⟩
   exact ⟨x, hx, rfl⟩
 
-theorem sectorSet_bddAbove {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (ε : Matrix n n ℝ) (s : ℝ) :
+theorem sectorSet_bddAbove (W ε : Matrix n n ℝ) (s : ℝ) :
     BddAbove (sectorSet W ε s) :=
-  (rayleighSet_bddAbove hW hpsd).mono (sectorSet_subset W ε s)
+  (rayleighSet_bddAbove W).mono (sectorSet_subset W ε s)
 
-theorem sectorRayleighSup_le {W : Matrix n n ℝ} (hW : W.IsSymm)
+theorem sectorRayleighSup_le {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (ε : Matrix n n ℝ) (s : ℝ) :
     sectorRayleighSup W ε s ≤ rayleighSup W := by
   rcases Set.eq_empty_or_nonempty (sectorSet W ε s) with hemp | hne
   · rw [sectorRayleighSup, hemp, Real.sSup_empty]
-    exact rayleighSup_nonneg hW hpsd
+    exact rayleighSup_nonneg hpsd
   · refine csSup_le hne ?_
     intro r hr
-    exact le_csSup (rayleighSet_bddAbove hW hpsd) (sectorSet_subset W ε s hr)
+    exact le_csSup (rayleighSet_bddAbove W) (sectorSet_subset W ε s hr)
 
 /-- セクター内の任意のベクトルに対する `xᵀWx ≤ c_s ‖x‖²`。 -/
-theorem sector_quad_le {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) {ε : Matrix n n ℝ} {s : ℝ} {x : n → ℝ}
+theorem sector_quad_le {W : Matrix n n ℝ} {ε : Matrix n n ℝ} {s : ℝ} {x : n → ℝ}
     (hx : ε *ᵥ x = s • x) :
     x ⬝ᵥ W *ᵥ x ≤ sectorRayleighSup W ε s * vecNormSq x := by
   rcases eq_or_ne x 0 with rfl | hx0
@@ -113,7 +111,7 @@ theorem sector_quad_le {W : Matrix n n ℝ} (hW : W.IsSymm)
     have hmem : (c • x) ⬝ᵥ W *ᵥ (c • x) ∈ sectorSet W ε s :=
       ⟨c • x, sector_smul hx, hunit, rfl⟩
     have hle : (c • x) ⬝ᵥ W *ᵥ (c • x) ≤ sectorRayleighSup W ε s :=
-      le_csSup (sectorSet_bddAbove hW hpsd ε s) hmem
+      le_csSup (sectorSet_bddAbove W ε s) hmem
     rw [quad_smul, hc2] at hle
     calc x ⬝ᵥ W *ᵥ x = a * (a⁻¹ * (x ⬝ᵥ W *ᵥ x)) := by field_simp
       _ ≤ a * sectorRayleighSup W ε s := mul_le_mul_of_nonneg_left hle ha.le
@@ -150,7 +148,7 @@ theorem projMinus_mulVec_eigen {ε : Matrix n n ℝ} (hεε : ε * ε = 1) (x : 
   abel
 
 /-- **(3) `c(M) = max(c₊(M), c₋(M))`**（ノートの `sector_decomposition_of_rayleigh_sup` (3)）。 -/
-theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ} (hW : W.IsSymm)
+theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hε : ε.IsSymm) (hεε : ε * ε = 1)
     (hcomm : ε * W = W * ε) :
     rayleighSup W = max (sectorRayleighSup W ε 1) (sectorRayleighSup W ε (-1)) := by
@@ -191,8 +189,8 @@ theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ} (hW : W.IsS
       simp only [Matrix.mulVec_add, add_dotProduct, dotProduct_add]
       rw [horthoW1, horthoW2]
       ring
-    have hbp := sector_quad_le hW hpsd (s := (1 : ℝ)) (x := xp) hplus'
-    have hbm := sector_quad_le hW hpsd (s := (-1 : ℝ)) (x := xm) hminus'
+    have hbp := sector_quad_le (W := W) (s := (1 : ℝ)) (x := xp) hplus'
+    have hbm := sector_quad_le (W := W) (s := (-1 : ℝ)) (x := xm) hminus'
     have hnp : 0 ≤ vecNormSq xp := vecNormSq_nonneg xp
     have hnm : 0 ≤ vecNormSq xm := vecNormSq_nonneg xm
     have hmp : sectorRayleighSup W ε 1 ≤ max (sectorRayleighSup W ε 1) (sectorRayleighSup W ε (-1)) :=
@@ -212,6 +210,6 @@ theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ} (hW : W.IsS
       _ = max (sectorRayleighSup W ε 1) (sectorRayleighSup W ε (-1)) := by
           rw [hx, mul_one]
   · -- `max(c₊, c₋) ≤ c(M)`
-    exact max_le (sectorRayleighSup_le hW hpsd ε 1) (sectorRayleighSup_le hW hpsd ε (-1))
+    exact max_le (sectorRayleighSup_le hpsd ε 1) (sectorRayleighSup_le hpsd ε (-1))
 
 end Ising2D

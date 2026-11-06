@@ -7,23 +7,30 @@
 人手証明のとおり、**`c(M)` は最大固有値ではなく Rayleigh 商の上限として定義する。**
 上限が達成されること（固有値の存在・スペクトル定理）はここでも以降でも一切使わない。
 
-上に有界であることの根拠として、人手証明は `|xᵀWx| ≤ ‖W‖‖x‖²`（行列ノルム）を挙げているが、
-本形式化では既に用意した `Ising2D.psd_quad_le_normSq_mul_trace`（半正定値行列に対する
-`xᵀAx ≤ ‖x‖² tr A`）を使う。どちらでも「上に有界な空でない実数集合は上限をもつ」という
-結論は同じであり、後者の方が本章の中で閉じている。
+上に有界であることは、人手証明と同じく、成分の有限和 `x^⊤Wx ≤ |x^⊤Wx| ≤ Σ_iΣ_j|W_ij|` で示す（`rayleighSet_bddAbove`）。
+この評価は `W` の対称性も半正定値性も使わないので、`rayleighSet_bddAbove`・`le_rayleighSup`・`quad_le_rayleighSup_mul` は `W` に仮定を置かない。
+このファイルで半正定値性・正定値性を使うのは `c(M) ≥ 0`（`rayleighSup_nonneg`）・`c(M) > 0`（`rayleighSup_pos`）だけである。
 
 `def_rayleigh_sup`（`sSup`）の必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
 
-上に有界であることを示す人手の鎖のうち、`‖x‖ = 1` から `|x_i| ≤ 1` を出す段は `abs_component_le_one_of_unit` が同じ行で持つ
-（`|x_i|^2 ≤ Σ|x_k|^2 = (√Σ|x_k|^2)^2 = ‖x‖^2 = 1^2`、続けて `nonnegative_real_order_from_squares`）。
-その段が引く人手 `nonnegative_real_order_from_squares` の具体版は
-`MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean` にある。
-`rayleighSet_bddAbove` はまだ人手の `Σ|W_ij|` の鎖ではなく `psd_quad_le_normSq_mul_trace` で閉じている
-（`docs/tasks/lean-end-to-end-state.md` の (r3a2)）。
+上に有界であることを示す人手の鎖と Lean の対応:
+
+| 人手の段 | Lean |
+| --- | --- |
+| `‖x‖ = 1` から `|x_i| ≤ 1`（4 行と `nonnegative_real_order_from_squares`） | `abs_component_le_one_of_unit` |
+| 項ごとの 6 行 `|x_iW_ijx_j| = … ≤ |W_ij|` | `abs_bilinear_term_le_abs_entry` |
+| 各 `i` の 2 行 `|Σ_j x_iW_ijx_j| ≤ Σ_j|x_iW_ijx_j| ≤ Σ_j|W_ij|` | `abs_bilinear_row_le_row_abs_sum` |
+| 外側の 4 行 `x^⊤Wx ≤ |x^⊤Wx| = |ΣΣ x_iW_ijx_j| ≤ Σ_i|Σ_j …| ≤ ΣΣ|W_ij|` | `bilinear_le_abs_entry_sum` |
+| `𝓡` は上に有界 | `rayleighSet_bddAbove` |
+
+人手の `x^⊤Wx` は `def_real_bilinear_value` の `Σ_kΣ_l (x_kW_kl)x_l` で、Lean の `x ⬝ᵥ W *ᵥ x` は `Σ_k x_k (Σ_l W_kl x_l)` である。
+`dotProduct_mulVec_eq_real_bilinear_value` が mathlib の `⬝ᵥ`・`*ᵥ` の定義を人手の和の形へ開く（`def_real_bilinear_value` の行に当たる）。
+有限和の主張は、添字が有限型 `n` の和に当てる `_fintype` 版（`ClaimFiniteSumsOfRealNumbers.lean`）を引く。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.TraceBound
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimNonnegativeRealOrderFromSquares
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 
 set_option linter.unusedSectionVars false
 
@@ -68,28 +75,63 @@ def rayleighSet (W : Matrix n n ℝ) : Set ℝ :=
 /-- 人手証明の `c(M) := sup 𝓡`。 -/
 noncomputable def rayleighSup (W : Matrix n n ℝ) : ℝ := sSup (rayleighSet W)
 
-variable [Nonempty n]
+/-- 人手 `def_real_bilinear_value` の行: Lean の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を、人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く。
+mathlib の `⬝ᵥ`・`*ᵥ` の定義を開き（`dotProduct`・`mulVec`）、`x_k` を内側の和へ入れ（`Finset.mul_sum`）、積の括弧を付け替える（`mul_assoc`）。 -/
+theorem dotProduct_mulVec_eq_real_bilinear_value (x y : n → ℝ) (P : Matrix n n ℝ) :
+    x ⬝ᵥ P *ᵥ y = ∑ k, ∑ l, x k * P k l * y l :=
+  calc x ⬝ᵥ P *ᵥ y
+      = ∑ k, x k * ∑ l, P k l * y l := rfl                                    -- `⬝ᵥ`・`*ᵥ` の定義を開く
+    _ = ∑ k, ∑ l, x k * (P k l * y l) := by simp only [Finset.mul_sum]         -- `x_k` を内側の和へ入れる
+    _ = ∑ k, ∑ l, x k * P k l * y l := by simp only [mul_assoc]                -- 積の括弧を付け替える
 
-theorem rayleighSet_nonempty (W : Matrix n n ℝ) : (rayleighSet W).Nonempty := by
-  obtain ⟨i⟩ := (inferInstance : Nonempty n)
-  exact ⟨_, ⟨Pi.single i 1, vecNormSq_single i, rfl⟩⟩
+/-- 人手 `def_rayleigh_sup` の項ごとの 6 行: すべての `k` で `|x_k| ≤ 1` なら `|x_iW_ijx_j| ≤ |W_ij|`。 -/
+theorem abs_bilinear_term_le_abs_entry (W : Matrix n n ℝ) (x : n → ℝ) (hx : ∀ k, |x k| ≤ 1) (i j : n) :
+    |x i * W i j * x j| ≤ |W i j| := by
+  have hnn : 0 ≤ |x i| * |W i j| := mul_nonneg (abs_nonneg _) (abs_nonneg _) -- 非負の実数の積
+  calc |x i * W i j * x j|
+      = |x i * W i j| * |x j| := real_abs_of_product _ _                     -- `real_abs_of_product`（`a → x_iW_ij`、`b → x_j`）
+    _ = |x i| * |W i j| * |x j| := by rw [real_abs_of_product (x i) (W i j)] -- `real_abs_of_product`（`a → x_i`、`b → W_ij`）
+    _ ≤ |x i| * |W i j| * 1 := mul_le_mul_of_nonneg_left (hx j) hnn          -- `|x_j| ≤ 1` の両辺に非負の実数 `|x_i||W_ij|` を左から掛ける
+    _ = |x i| * |W i j| := mul_one _                                          -- 1 は ℝ の積の単位元
+    _ ≤ 1 * |W i j| := mul_le_mul_of_nonneg_right (hx i) (abs_nonneg _)       -- `|x_i| ≤ 1` の両辺に非負の実数 `|W_ij|` を右から掛ける
+    _ = |W i j| := one_mul _                                                  -- 1 は ℝ の積の単位元
 
-theorem rayleighSet_bddAbove {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) : BddAbove (rayleighSet W) := by
-  refine ⟨W.trace, ?_⟩
+/-- 人手 `def_rayleigh_sup` の各 `i` の 2 行: `|Σ_j x_iW_ijx_j| ≤ Σ_j|x_iW_ijx_j| ≤ Σ_j|W_ij|`。 -/
+theorem abs_bilinear_row_le_row_abs_sum (W : Matrix n n ℝ) (x : n → ℝ) (hx : ∀ k, |x k| ≤ 1) (i : n) :
+    |∑ j, x i * W i j * x j| ≤ ∑ j, |W i j| :=
+  calc |∑ j, x i * W i j * x j|
+      ≤ ∑ j, |x i * W i j * x j| :=
+        finite_sum_of_real_numbers_triangle_inequality_fintype _              -- `finite_sum_of_real_numbers_triangle_inequality`（`a_j → x_iW_ijx_j`）
+    _ ≤ ∑ j, |W i j| :=
+        finite_sum_of_real_numbers_is_monotone_fintype _ _
+          (abs_bilinear_term_le_abs_entry W x hx i)                           -- `finite_sum_of_real_numbers_is_monotone`。各 `j` の大小は項ごとの 6 行
+
+/-- 人手 `def_rayleigh_sup` の外側の 4 行: すべての `k` で `|x_k| ≤ 1` なら `x^⊤Wx ≤ Σ_iΣ_j|W_ij|`。 -/
+theorem bilinear_le_abs_entry_sum (W : Matrix n n ℝ) (x : n → ℝ) (hx : ∀ k, |x k| ≤ 1) :
+    x ⬝ᵥ W *ᵥ x ≤ ∑ i, ∑ j, |W i j| :=
+  calc x ⬝ᵥ W *ᵥ x
+      ≤ |x ⬝ᵥ W *ᵥ x| := real_number_is_at_most_its_absolute_value _        -- `real_number_is_at_most_its_absolute_value`（`q → x^⊤Wx`）
+    _ = |∑ i, ∑ j, x i * W i j * x j| := by
+        rw [dotProduct_mulVec_eq_real_bilinear_value]                         -- `def_real_bilinear_value`（`P → W`、`y → x`）
+    _ ≤ ∑ i, |∑ j, x i * W i j * x j| :=
+        finite_sum_of_real_numbers_triangle_inequality_fintype _              -- `finite_sum_of_real_numbers_triangle_inequality`（`a_i → Σ_j x_iW_ijx_j`）
+    _ ≤ ∑ i, ∑ j, |W i j| :=
+        finite_sum_of_real_numbers_is_monotone_fintype _ _
+          (abs_bilinear_row_le_row_abs_sum W x hx)                            -- `finite_sum_of_real_numbers_is_monotone`。各 `i` の大小は各 `i` の 2 行
+
+/-- 人手 `def_rayleigh_sup` の「`𝓡` は上に有界」: 上界は `x` によらない `Σ_iΣ_j|W_ij|`。`W` に仮定を置かない。 -/
+theorem rayleighSet_bddAbove (W : Matrix n n ℝ) : BddAbove (rayleighSet W) := by
+  refine ⟨∑ i, ∑ j, |W i j|, ?_⟩
   rintro r ⟨x, hx, rfl⟩
-  have h := psd_quad_le_normSq_mul_trace hW hpsd x
-  rwa [hx, one_mul] at h
+  exact bilinear_le_abs_entry_sum W x (abs_component_le_one_of_unit x hx)     -- `‖x‖ = 1` から `|x_k| ≤ 1`、続けて外側の 4 行
 
 /-- 単位ベクトルに対する `xᵀWx ≤ c(M)`。 -/
-theorem le_rayleighSup {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) {x : n → ℝ} (hx : vecNormSq x = 1) :
+theorem le_rayleighSup {W : Matrix n n ℝ} {x : n → ℝ} (hx : vecNormSq x = 1) :
     x ⬝ᵥ W *ᵥ x ≤ rayleighSup W :=
-  le_csSup (rayleighSet_bddAbove hW hpsd) ⟨x, hx, rfl⟩
+  le_csSup (rayleighSet_bddAbove W) ⟨x, hx, rfl⟩
 
 /-- 人手証明の `xᵀWx ≤ c(M)‖x‖²`（任意の `x`）。 -/
-theorem quad_le_rayleighSup_mul {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (x : n → ℝ) :
+theorem quad_le_rayleighSup_mul {W : Matrix n n ℝ} (x : n → ℝ) :
     x ⬝ᵥ W *ᵥ x ≤ rayleighSup W * vecNormSq x := by
   rcases eq_or_ne x 0 with rfl | hx
   · simp [vecNormSq]
@@ -102,7 +144,7 @@ theorem quad_le_rayleighSup_mul {W : Matrix n n ℝ} (hW : W.IsSymm)
       rw [hcdef, inv_pow, hsq]
     have hunit : vecNormSq (c • x) = 1 := by
       rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ (ne_of_gt ha)]
-    have hle := le_rayleighSup hW hpsd hunit
+    have hle := le_rayleighSup (W := W) hunit
     rw [quad_smul, hc2] at hle
     calc x ⬝ᵥ W *ᵥ x = a * (a⁻¹ * (x ⬝ᵥ W *ᵥ x)) := by
           field_simp
@@ -110,12 +152,20 @@ theorem quad_le_rayleighSup_mul {W : Matrix n n ℝ} (hW : W.IsSymm)
           exact mul_le_mul_of_nonneg_left hle ha.le
       _ = rayleighSup W * a := by ring
 
-theorem rayleighSup_nonneg {W : Matrix n n ℝ} (hW : W.IsSymm)
+variable [Nonempty n]
+
+theorem rayleighSet_nonempty (W : Matrix n n ℝ) : (rayleighSet W).Nonempty := by
+  obtain ⟨i⟩ := (inferInstance : Nonempty n)
+  exact ⟨_, ⟨Pi.single i 1, vecNormSq_single i, rfl⟩⟩
+
+/-- `c(M) ≥ 0`（`W` の半正定値性だけを使う）。 -/
+theorem rayleighSup_nonneg {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) : 0 ≤ rayleighSup W := by
   obtain ⟨i⟩ := (inferInstance : Nonempty n)
-  exact le_trans (hpsd (Pi.single i 1)) (le_rayleighSup hW hpsd (vecNormSq_single i))
+  exact le_trans (hpsd (Pi.single i 1)) (le_rayleighSup (W := W) (vecNormSq_single i))
 
-theorem rayleighSup_pos {W : Matrix n n ℝ} (hW : W.IsSymm)
+/-- `c(M) > 0`（`W` の正定値性だけを使う）。 -/
+theorem rayleighSup_pos {W : Matrix n n ℝ}
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) : 0 < rayleighSup W := by
   have hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x := by
     intro x
@@ -128,6 +178,6 @@ theorem rayleighSup_pos {W : Matrix n n ℝ} (hW : W.IsSymm)
     have hu := vecNormSq_single (n := n) i
     rw [h] at hu
     simp [vecNormSq] at hu
-  exact lt_of_lt_of_le (hpd _ hne) (le_rayleighSup hW hpsd (vecNormSq_single i))
+  exact lt_of_lt_of_le (hpd _ hne) (le_rayleighSup (W := W) (vecNormSq_single i))
 
 end Ising2D

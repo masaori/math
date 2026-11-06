@@ -33,20 +33,19 @@ theorem psd_of_pd {W : Matrix n n ℝ} (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 <
   · simp
   · exact (hpd x hx).le
 
-/-- `Ising2D.rayleighSup` を必要十分版の仮定 `∀ u, ⟪u, W u⟫ ≤ c⟪u, u⟫` の形にしたもの。 -/
-theorem necSuf_rayleigh_hyp {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (u : n → ℝ) :
+/-- `Ising2D.rayleighSup` を必要十分版の仮定 `∀ u, ⟪u, W u⟫ ≤ c⟪u, u⟫` の形にしたもの（`W` に仮定を置かない）。 -/
+theorem necSuf_rayleigh_hyp {W : Matrix n n ℝ} (u : n → ℝ) :
     matBilin (1 : Matrix n n ℝ) u (W.mulVecLin u)
       ≤ rayleighSup W * matBilin (1 : Matrix n n ℝ) u u := by
-  simpa [vecNormSq] using quad_le_rayleighSup_mul hW hpsd u
+  simpa [vecNormSq] using quad_le_rayleighSup_mul (W := W) u
 
 /-- **`‖Wx‖² ≤ c(M)²‖x‖²`**（必要十分版の特殊化）。 -/
 theorem rayleigh_bounds_operator_normSq {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (x : n → ℝ) :
     vecNormSq (W *ᵥ x) ≤ rayleighSup W ^ 2 * vecNormSq x := by
   have hpair := isPsdPair_of_matrix hW hpsd
-  have h := hpair.rayleigh_bounds_operator_norm (rayleighSup_nonneg hW hpsd)
-    (necSuf_rayleigh_hyp hW hpsd) x
+  have h := hpair.rayleigh_bounds_operator_norm (rayleighSup_nonneg hpsd)
+    (necSuf_rayleigh_hyp (W := W)) x
   simpa [vecNormSq] using h
 
 /-- **`‖W^k x‖² ≤ (c(M)²)^k ‖x‖²`**（必要十分版の反復形の特殊化）。 -/
@@ -54,8 +53,8 @@ theorem rayleigh_bounds_operator_normSq_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (k : ℕ) (x : n → ℝ) :
     vecNormSq (W ^ k *ᵥ x) ≤ (rayleighSup W ^ 2) ^ k * vecNormSq x := by
   have hpair := isPsdPair_of_matrix hW hpsd
-  have h := hpair.rayleigh_bounds_operator_norm_pow (rayleighSup_nonneg hW hpsd)
-    (necSuf_rayleigh_hyp hW hpsd) k x
+  have h := hpair.rayleigh_bounds_operator_norm_pow (rayleighSup_nonneg hpsd)
+    (necSuf_rayleigh_hyp (W := W)) k x
   rw [mulVecLin_pow_apply] at h
   simpa [vecNormSq] using h
 
@@ -63,7 +62,7 @@ theorem rayleigh_bounds_operator_normSq_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
 theorem rayleigh_bounds_operator_norm {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (x : n → ℝ) :
     vecNorm (W *ᵥ x) ≤ rayleighSup W * vecNorm x := by
-  have hc0 : 0 ≤ rayleighSup W := rayleighSup_nonneg hW hpsd
+  have hc0 : 0 ≤ rayleighSup W := rayleighSup_nonneg hpsd
   have h := rayleigh_bounds_operator_normSq hW hpsd x
   calc vecNorm (W *ᵥ x) = Real.sqrt (vecNormSq (W *ᵥ x)) := rfl
     _ ≤ Real.sqrt (rayleighSup W ^ 2 * vecNormSq x) := Real.sqrt_le_sqrt h
@@ -75,7 +74,7 @@ theorem rayleigh_bounds_operator_norm {W : Matrix n n ℝ} (hW : W.IsSymm)
 theorem rayleigh_bounds_operator_norm_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (k : ℕ) (x : n → ℝ) :
     vecNorm (W ^ k *ᵥ x) ≤ rayleighSup W ^ k * vecNorm x := by
-  have hc0 : 0 ≤ rayleighSup W := rayleighSup_nonneg hW hpsd
+  have hc0 : 0 ≤ rayleighSup W := rayleighSup_nonneg hpsd
   have h := rayleigh_bounds_operator_normSq_pow hW hpsd k x
   have hpow : (rayleighSup W ^ 2) ^ k = (rayleighSup W ^ k) ^ 2 := by
     rw [← pow_mul, ← pow_mul, Nat.mul_comm]

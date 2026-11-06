@@ -53,10 +53,10 @@ variable {M : ℕ}
 `c(M) ≤ 2c_+(M)`（必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` を
 `ε = epsilonR M = permMat flipConf` で特殊化したもの）。 -/
 theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : Conf M → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hpos : ∀ k l, 0 < W k l)
+    (hpos : ∀ k l, 0 < W k l)
     (hcomm : epsilonR M * W = W * epsilonR M) :
     rayleighSup W ≤ 2 * evenSectorRayleighSup W (epsilonR M) :=
-  NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup hW hpsd (fun k l => (hpos k l).le)
+  NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup hW (fun k l => (hpos k l).le)
     flipConf_involutive hcomm
 
 namespace EvenSectorBridge
@@ -88,7 +88,7 @@ theorem LambdaM_le_rayleighSup (P : IsingParam)
   calc LambdaM P (1 / 2) M
       = evenSectorRayleighSup B.W (epsilonR M) := by
         rw [B.c_plus_equals_lamMax htr, lamMax_eq_LambdaM P hC hgam]
-    _ ≤ rayleighSup B.W := c_plus_le_c B.hWsymm B.hWpsd
+    _ ≤ rayleighSup B.W := c_plus_le_c B.W
 
 /-- **人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 2**: `c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`。 -/
 theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
@@ -101,7 +101,7 @@ theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
     rayleighSup B.W ≤ 2 * LambdaM P (1 / 2) M :=
   calc rayleighSup B.W
       ≤ 2 * evenSectorRayleighSup B.W (epsilonR M) :=
-        onsager_step3_c_le_two_c_plus B.hWsymm B.hWpsd hpos hcomm
+        onsager_step3_c_le_two_c_plus B.hWsymm hpos hcomm
     _ = 2 * LambdaM P (1 / 2) M := by
         rw [B.c_plus_equals_lamMax htr, lamMax_eq_LambdaM P hC hgam]
 

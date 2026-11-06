@@ -30,8 +30,11 @@
    三角不等式 `|Σ x_k x_l W_{kl}| ≤ Σ |x_k||x_l|W_{kl}` に必要なのは `0 ≤ W_{kl}` だけで、
    **狭義の正値性は使っていない**（`Ising2D/NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` の仮定は `0 ≤ W k l`）。
    `W` が転送行列であることも、指数関数で書けることも効いていない。
-3. **`W` が実対称半正定値であること。** これは `c_±(M)` が上に有界であること
-   （退避先 `ClaimRayleighSupSectorDecomposition.lean` の `sectorSet_bddAbove`）を出すためだけに使う。
+3. **`W` が半正定値であること。** これは `c_±(M) ≥ 0`（`sectorRayleighSup_nonneg`）と、
+   `c(M) = max(c_+(M), c_-(M))` の `≤` の側で空のセクターの上限 `0` と比べる段にだけ使う。
+   `c_±(M)` が上に有界であること（退避先 `ClaimRayleighSupSectorDecomposition.lean` の `sectorSet_bddAbove`）は、
+   `𝓡` の上界 `Σ_iΣ_j|W_ij|`（`DefinitionRayleighSup.lean` の `rayleighSet_bddAbove`）から出るので仮定が要らない。
+   `W` が対称であることは効いていない。
 
 逆に、**人手証明 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」は
 `c_-(M) ≤ c_+(M)` には効いていない。** 不動点があってもよい。不動点をもたないことが
@@ -142,39 +145,39 @@ theorem sectorSet_neg_nonempty [Nonempty n] (W : Matrix n n ℝ) {π : n → n} 
     norm_num at hi
   exact sectorSet_nonempty_of_mem hinv hv0
 
-theorem sectorRayleighSup_nonneg [Nonempty n] {W ε : Matrix n n ℝ} (hW : W.IsSymm)
+theorem sectorRayleighSup_nonneg [Nonempty n] {W ε : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) {s : ℝ}
     (hne : (sectorSet W ε s).Nonempty) : 0 ≤ sectorRayleighSup W ε s := by
   obtain ⟨r, hr⟩ := hne
   obtain ⟨x, _, _, rfl⟩ := hr
-  exact le_trans (hpsd x) (le_csSup (sectorSet_bddAbove hW hpsd ε s) ⟨x, ‹_›, ‹_›, rfl⟩)
+  exact le_trans (hpsd x) (le_csSup (sectorSet_bddAbove W ε s) ⟨x, ‹_›, ‹_›, rfl⟩)
 
 /-- **人手証明 `c_minus_le_c_plus` の必要十分版** `c_-(M) ≤ c_+(M)`。
 
-仮定は「`W` が実対称半正定値で成分が非負」「`ε` が対合 `π` の置換行列」だけ。
+仮定は「`W` が半正定値で成分が非負」「`ε` が対合 `π` の置換行列」だけ（`W` の対称性は効かない）。
 **`π` が不動点をもたないことは仮定していない。** -/
-theorem sectorRayleighSup_neg_le_pos [Nonempty n] {W : Matrix n n ℝ} (hW : W.IsSymm)
+theorem sectorRayleighSup_neg_le_pos [Nonempty n] {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) :
     sectorRayleighSup W (permMat π) (-1 : ℝ) ≤ sectorRayleighSup W (permMat π) 1 := by
   rcases Set.eq_empty_or_nonempty (sectorSet W (permMat π) (-1 : ℝ)) with hemp | hne
   · rw [sectorRayleighSup, hemp, Real.sSup_empty]
-    exact sectorRayleighSup_nonneg hW hpsd (sectorSet_pos_nonempty W hπ)
+    exact sectorRayleighSup_nonneg hpsd (sectorSet_pos_nonempty W hπ)
   · refine csSup_le hne ?_
     rintro r ⟨x, hx, hx1, rfl⟩
     have h1 : permMat π *ᵥ absVec x = (1 : ℝ) • absVec x := permMat_mulVec_absVec hx
     have h2 : vecNormSq (absVec x) = 1 := by rw [vecNormSq_absVec, hx1]
     refine le_trans (quad_le_quad_absVec hWnn x) ?_
-    exact le_csSup (sectorSet_bddAbove hW hpsd _ _) ⟨absVec x, h1, h2, rfl⟩
+    exact le_csSup (sectorSet_bddAbove W _ _) ⟨absVec x, h1, h2, rfl⟩
 
 /-- **人手証明 `c_equals_c_plus` Step 1 の必要十分版** `c(M) = c_+(M)`。 -/
-theorem rayleighSup_eq_sectorRayleighSup_pos [Nonempty n] {W : Matrix n n ℝ} (hW : W.IsSymm)
+theorem rayleighSup_eq_sectorRayleighSup_pos [Nonempty n] {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π)
     (hcomm : permMat π * W = W * permMat π) :
     rayleighSup W = sectorRayleighSup W (permMat π) 1 := by
-  rw [sector_decomposition_of_rayleigh_sup hW hpsd (permMat_isSymm hπ)
+  rw [sector_decomposition_of_rayleigh_sup hpsd (permMat_isSymm hπ)
     (permMat_mul_self hπ) hcomm]
-  exact max_eq_left (sectorRayleighSup_neg_le_pos hW hpsd hWnn hπ)
+  exact max_eq_left (sectorRayleighSup_neg_le_pos hpsd hWnn hπ)
 
 end Ising2D.NecSuf

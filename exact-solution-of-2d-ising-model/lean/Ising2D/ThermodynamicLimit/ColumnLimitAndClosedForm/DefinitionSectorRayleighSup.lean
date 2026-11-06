@@ -20,9 +20,6 @@
 
 ## 人手証明と 1 対 1 にならない箇所
 
-* `𝓡` が上に有界であることの根拠は、人手が成分の絶対値の和 `∑|W_ij|` を挙げるのに対し、
-  Lean は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じく半正定値行列の評価
-  `xᵀWx ≤ ‖x‖² tr W` を使う（`rayleighSet_bddAbove`）。
 * 単位ベクトル `x^{(+)} = a_+⊠⋯⊠a_+` は、人手が確かめた「各成分が `2^{-M/2}`」の形
   （定数ベクトル `evenUnit`）で直接定義した。`ε x^{(+)} = x^{(+)}` は、人手が
   `ε = σ^x⊠⋯⊠σ^x` とクロネッカー積の積の規則で示すのに対し、Lean は `ε` が符号反転 `π` の
@@ -57,18 +54,16 @@ theorem evenSectorSet_subset (W ε : Matrix n n ℝ) : evenSectorSet W ε ⊆ ra
   rintro r ⟨x, _, hx, rfl⟩
   exact ⟨x, hx, rfl⟩
 
-/-- 人手の「`𝓡_+` は上に有界」（`𝓡_+ ⊆ 𝓡` と `𝓡` の有界性）。 -/
-theorem evenSectorSet_bddAbove [Nonempty n] {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (ε : Matrix n n ℝ) :
+/-- 人手の「`𝓡_+` は上に有界」（`𝓡_+ ⊆ 𝓡` と `𝓡` の有界性）。`W` に仮定を置かない。 -/
+theorem evenSectorSet_bddAbove (W ε : Matrix n n ℝ) :
     BddAbove (evenSectorSet W ε) :=
-  (rayleighSet_bddAbove hW hpsd).mono (evenSectorSet_subset W ε)
+  (rayleighSet_bddAbove W).mono (evenSectorSet_subset W ε)
 
 /-- 偶セクターの単位ベクトルに対する `xᵀWx ≤ c_+(M)`（上限の定義そのもの）。 -/
-theorem le_evenSectorRayleighSup [Nonempty n] {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) {ε : Matrix n n ℝ} {x : n → ℝ}
+theorem le_evenSectorRayleighSup {W : Matrix n n ℝ} {ε : Matrix n n ℝ} {x : n → ℝ}
     (hx : ε *ᵥ x = x) (hx1 : vecNormSq x = 1) :
     x ⬝ᵥ W *ᵥ x ≤ evenSectorRayleighSup W ε :=
-  le_csSup (evenSectorSet_bddAbove hW hpsd ε) ⟨x, hx, hx1, rfl⟩
+  le_csSup (evenSectorSet_bddAbove W ε) ⟨x, hx, hx1, rfl⟩
 
 end General
 

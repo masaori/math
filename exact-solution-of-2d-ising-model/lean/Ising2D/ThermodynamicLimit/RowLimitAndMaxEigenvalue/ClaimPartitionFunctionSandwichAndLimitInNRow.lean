@@ -50,7 +50,7 @@ theorem partition_function_sandwich_and_limit_in_N_row (K1 : ℝ) {K2 : ℝ} (hK
           atTop (𝓝 (1 / (M : ℝ) * Real.log (rayleighSup (physicalSymTransferR M K1 K2)))) := by
   -- 前提: c(M_col) > 0（人手 def_rayleigh_sup と W_is_real_symmetric_positive_definite）
   have hc : 0 < rayleighSup (physicalSymTransferR M K1 K2) :=
-    rayleighSup_pos (physicalSymTransferR_isSymm K1 hK2) (physicalSymTransferR_posDef K1 hK2)
+    rayleighSup_pos (physicalSymTransferR_posDef K1 hK2)
   -- (1): 人手 partition_function_sandwich
   have h1 : ∀ Nrow : ℕ, 1 ≤ Nrow →
       rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow ≤ partitionFunction Nrow M K1 K2

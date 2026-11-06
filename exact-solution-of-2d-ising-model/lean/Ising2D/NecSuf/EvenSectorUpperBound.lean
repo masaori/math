@@ -22,8 +22,9 @@
 
 * `ε` が対合 `π` の置換行列であること（`(εx)_k = x_{π(k)}`、`εᵀ = ε`、`ε² = I`、ノルムを保つ）。
   `ε` が `σ^x_1 ⋯ σ^x_M` であることも、添字集合がスピン配置であることも効いていない。
-* `W` が実対称半正定値であること（`c(M)`, `c_+(M)` の上限が定まることに使う）、`εW = Wε`、
-  成分が**非負**であること。人手は `W_has_positive_entries`（正）を引くが、使うのは
+* `W` が対称であること（`uᵀWεu = (εu)ᵀWu` の入れ替え）、`εW = Wε`、
+  成分が**非負**であること。半正定値性は効いていない（`c(M)`, `c_+(M)` の上限が定まることは、`𝓡` の上界 `Σ_iΣ_j|W_ij|`
+  （`DefinitionRayleighSup.lean` の `rayleighSet_bddAbove`）から仮定なしに出る）。人手は `W_has_positive_entries`（正）を引くが、使うのは
   `0 ≤ W_{kl}`（三角不等式と `uᵀWεu ≥ 0`）だけである。
 * `π` が不動点をもたないことは使っていない。
 -/
@@ -54,7 +55,7 @@ theorem bilin_nonneg_of_nonneg {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) 
 
 /-- **人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の必要十分版**: `c(M) ≤ 2 c_+(M)`。 -/
 theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n n ℝ}
-    (hW : W.IsSymm) (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
+    (hW : W.IsSymm) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) (hcomm : permMat π * W = W * permMat π) :
     rayleighSup W ≤ 2 * evenSectorRayleighSup W (permMat π) := by
   refine csSup_le (rayleighSet_nonempty W) ?_
@@ -120,7 +121,7 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ hvpos.ne']
   have hsec : ε *ᵥ (c • v) = c • v := by rw [Matrix.mulVec_smul, hεv]
   have hmax : (c • v) ⬝ᵥ W *ᵥ (c • v) ≤ evenSectorRayleighSup W ε :=
-    le_evenSectorRayleighSup hW hpsd hsec hunit
+    le_evenSectorRayleighSup hsec hunit
   have hchain : x ⬝ᵥ W *ᵥ x / 2 ≤ evenSectorRayleighSup W ε :=
     calc x ⬝ᵥ W *ᵥ x / 2
         ≤ u ⬝ᵥ W *ᵥ u / 2 := by linarith [quad_le_quad_absVec hWnn x]
