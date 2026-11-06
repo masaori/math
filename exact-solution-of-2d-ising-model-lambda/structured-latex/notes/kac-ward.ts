@@ -7,6 +7,22 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_vertex_simple_winding_primitive_archived",
+    targets: ["claim_vertex_simple_zero_seam_winding"],
+    title: { text: "参照用: 頂点単純閉路の巻き付きベクトルの原始性" },
+    body: [
+      paragraph(["旧定義では、零でない整数組 ", math(String.raw`(a,b)\in\mathbb Z^2`),
+        " の成分の正の最大公約数が一であるとき原始的と呼んだ。Bézout の等式によれば、整数 ",
+        math(String.raw`r,s`), " を選んで ", math(String.raw`as-br\in\{1,-1\}`),
+        " とできることと同値である。旧ラベルは def_primitive_integer_pair。"]),
+      paragraph(["旧主張は、接触対数零の閉じた非後退辺列の整数巻き付きベクトルが零または原始的であるというものだった。旧ラベルは claim_vertex_simple_winding_zero_or_primitive。SageMath の有限例と原始的な整数組の Lean 定義は保管したが、この主張の Lean 証明は無い。"]),
+      paragraph(["旧証明は、閉路がトーラスを分ける場合と分けない場合に分ける。分ける場合、一方の側の正方形を同じ向きで足し、内部辺と切断線上の辺を対で消すと、両方向の巻き付きが零になる。"]),
+      paragraph(["分けない場合、閉路を横断する双対辺を除いた双対グラフの連結性から、閉路を一度だけ横断する閉じた双対辺列を作る。その横・縦巻き付きを ", math(String.raw`(r,s)`), " と置き、符号付き交点の対消去で"]),
+      displayMath(String.raw`w_{\mathrm h}(\gamma)s-w_{\mathrm v}(\gamma)r\in\{1,-1\}`),
+      paragraph(["を得るという経路だった。分離・非分離の位相概念、双対グラフの連結性と符号付き交点の対消去が本文の定義と補題で裏付けられていないため、この論法を採用しない。下流の総回転数の零切断線の場合に必要なのは巻き付き零だけであり、", ref("claim_vertex_simple_zero_seam_winding"), " が高さ一の境界鎖からこれを直接示す。接触対数零と通過頂点の相異性の同値は他でも使うため本文に残す。"]),
+    ],
+  },
+  {
     id: "note_untwisted_mode_zero_condition_archived",
     targets: ["def_dispersion_polynomial"],
     title: { text: "参照用: 無ねじれモードの零条件" },

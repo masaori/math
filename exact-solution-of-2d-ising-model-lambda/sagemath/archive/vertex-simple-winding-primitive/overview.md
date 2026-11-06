@@ -13,6 +13,6 @@
 全 $373{,}720$ 本のうち、巻き付きベクトルが零のものは $73{,}616$ 本、零でなく原始的なものは
 $300{,}104$ 本であった。$L=1$ の四本も含めている。
 
-- 実行: `sage sagemath/check/vertex-simple-winding-primitive/check.sage`
+- 実行: `sage sagemath/archive/vertex-simple-winding-primitive/check.sage`
 - 状態: PASS（2026-08-31）
 - 計算: `ZZ` の加減乗除、最大公約数、有限列挙だけ。浮動小数点は使わない。

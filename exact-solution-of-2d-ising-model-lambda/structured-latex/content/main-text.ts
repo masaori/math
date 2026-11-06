@@ -64676,8 +64676,12 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
 &&\bigl(\because\ \blkref{claim_height_one_boundary_signed_walk}\bigr)\\
 &=0&&\bigl(\because\ \blkref{claim_finite_cell_set_boundary_winding_zero}\bigr)
 \end{aligned}`),
-                      paragraph(["符号 ", math(String.raw`\varepsilon`), " は零でないので、",
-                        math(String.raw`\mathbb Z`), " の零積性から二つの巻き付き数は零である。"]),
+                      paragraph(["符号 ", math(String.raw`\varepsilon\in\{1,-1\}`),
+                        " は零でない。上の二つの零積を ", math(String.raw`\mathbb Z`),
+                        " の零積性でそれぞれ解くと"]),
+                      displayMath(String.raw`w_{\mathrm h}(\gamma)=0,\qquad w_{\mathrm v}(\gamma)=0
+\qquad\bigl(\because\ \varepsilon\ne0\text{ と }\mathbb Z\text{ の零積性}\bigr)`),
+                      paragraph(["を得る。"]),
                     ],
                   },
                 },
@@ -64688,42 +64692,15 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_vertex_simple_winding_primitive",
+              id: "kac_ward_heading_zero_contact_distinct_pass_vertices",
               labels: [],
-              title: { text: "頂点単純閉路の巻き付きベクトル" },
+              title: { text: "接触対と通過頂点の相異性" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_vertex_simple_winding_zero_or_primitive",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
-                      id: "kac_ward_definition_primitive_integer_pair",
-                      kind: "definition",
-                      title: { text: "原始的な整数の組" },
-                      labels: ["def_primitive_integer_pair"],
-                      habitat: "Z",
-                      lean: [
-                        "Ising2DLambda.KacWard.primitiveIntegerPair",
-                        "Ising2DLambda.KacWard.primitiveIntegerPair_iff_bezout",
-                        "Ising2DLambda.NecSuf.KacWard.primitivePair",
-                        "Ising2DLambda.KacWard.primitiveIntegerPair_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([
-                          "零でない整数の組 ", math(String.raw`(a,b)\in\mathbb Z\times\mathbb Z`),
-                          " が原始的であるとは、", math(String.raw`|a|`), " と ", math(String.raw`|b|`),
-                          " の正の最大公約数が ", math(String.raw`1`), " であることと定める。Bézout の等式により、これは、ある ",
-                          math(String.raw`r,s\in\mathbb Z`), " について ",
-                          math(String.raw`a s-b r\in\{1,-1\}`),
-                          " が成り立つことと同値である。どちらの条件も整数の有限計算だけで判定できる。",
-                        ]),
-                      ],
-                    },
-                  }, {
-                    role: "supportingClaim",
-                    element: {
+                  id: "group_of_kac_ward_claim_zero_contact_iff_distinct_pass_vertices",
+                  focus: {
                       id: "kac_ward_claim_zero_contact_iff_distinct_pass_vertices",
                       kind: "claim",
                       title: { text: "接触対が零であることと通過頂点が相異なることは同値である" },
@@ -64761,71 +64738,6 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
                         ]),
                       ],
                     },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_vertex_simple_winding_zero_or_primitive",
-                    kind: "claim",
-                    title: { text: "頂点単純閉路の巻き付きベクトルは零または原始的である" },
-                    labels: ["claim_vertex_simple_winding_zero_or_primitive"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/vertex-simple-winding-primitive"],
-                    statement: [
-                      paragraph([
-                        "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
-                        " について、通過の頂点が相異なる、すなわち ",
-                        math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
-                        "）ならば、整数巻き付き数の組 ",
-                        math(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)`),
-                        " は ", math(String.raw`(0,0)`), " であるか、", ref("def_primitive_integer_pair"),
-                        " の意味で原始的である。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "正方トーラスを、", math(String.raw`L^2`), " 個の正方形を辺で貼り合わせた有限セル複体と見る。",
-                        math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
-                        " なら異なる二項の通過の頂点は一致しない（", ref("claim_zero_contact_iff_distinct_pass_vertices"), "）。正方格子の二辺は共通頂点以外では交わらないので、辺列を各辺に沿って結んだ閉曲線 ",
-                        math(String.raw`C_\gamma`), " は自己交差を持たない。",
-                      ]),
-                      paragraph([
-                        "まず ", math(String.raw`C_\gamma`),
-                        " がトーラスを二つに分ける場合を考える。一方の側に属する正方形をすべて同じ向きで足すと、内側の辺は逆向きに二度現れて打ち消し合い、境界には ",
-                        math(String.raw`C_\gamma`),
-                        " だけが残る。基本領域の左右の切断線から出る境界辺も貼り合わせで対になり、上下についても同じである。従って境界の向き付き切断線横断数は両方向とも零であり、",
-                      ]),
-                      displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)=(0,0)
-\qquad\bigl(\because\ \blkref{def_directed_winding_numbers}\text{ と有限セルの境界辺の相殺}\bigr)`),
-                      paragraph([
-                        "次に ", math(String.raw`C_\gamma`),
-                        " がトーラスを二つに分けない場合を考える。正方形を頂点とし、辺を共有する二正方形を結ぶ双対辺を置いた有限双対グラフを取る。",
-                        math(String.raw`C_\gamma`),
-                        " の辺を横断する双対辺をすべて除いても、この双対グラフは連結である。実際、二成分以上に分かれれば、一成分に属する正方形の合併とその補集合の境界が ",
-                        math(String.raw`C_\gamma`), " となり、", math(String.raw`C_\gamma`),
-                        " がトーラスを二つに分けないという仮定に反する。",
-                      ]),
-                      paragraph([
-                        math(String.raw`C_\gamma`),
-                        " の辺を一つ選び、その両側の正方形を考える。除去後の双対グラフは連結なので、両正方形を結び、",
-                        math(String.raw`C_\gamma`),
-                        " のどの辺も横断しない有限双対路がある。この路へ、選んだ辺を横断する双対辺を一つ加えると、",
-                        math(String.raw`C_\gamma`), " とちょうど一度だけ横断する閉じた双対辺列 ",
-                        math(String.raw`\eta`), " が得られる。横断の向きを付ければ、符号付き交点数は ",
-                        math(String.raw`+1`), " または ", math(String.raw`-1`), " である。",
-                      ]),
-                      paragraph([
-                        math(String.raw`\eta`), " の横向き・縦向きの整数巻き付き数を ",
-                        math(String.raw`(r,s)\in\mathbb Z\times\mathbb Z`),
-                        " と書く。二本の閉路の符号付き交点数は、各交点を基本領域の内部へ移して対で相殺すると、切断線を横断して残る項だけになり、二つの巻き付き数の行列式に等しい。従って",
-                      ]),
-                      displayMath(String.raw`w_{\mathrm h}(\gamma)s-w_{\mathrm v}(\gamma)r
-=\begin{cases}1,&\text{横断の向きが正の場合},\\-1,&\text{横断の向きが負の場合}
-\end{cases}
-\qquad\bigl(\because\ \text{有限トーラス上の符号付き交点の対消去}\bigr)`),
-                      paragraph([
-                        ref("def_primitive_integer_pair"), " の Bézout 条件により、零でない巻き付きベクトルは原始的である。場合分けを合わせて主張を得る。使った操作は有限セルの切断、有限路、整数の符号付き和だけであり、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                  },
                 },
               }],
             },
