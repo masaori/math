@@ -69214,6 +69214,7 @@ P_n(\gamma)
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_closed",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
                     ],
@@ -69272,7 +69273,7 @@ P_j(\Gamma)=P_{j'}(\Gamma)
                         math(String.raw`P_0(\Gamma),\ldots,P_{N-1}(\Gamma)`), " は二つずつ相異なる。以上の相異性と巻き付き零を ",
                         ref("claim_plane_simple_polygon_cyclic_turning"), " へ適用すると",
                       ]),
-                      displayMath(String.raw`t_{\circ}(\Gamma)\in\{4,-4\}`),
+                      displayMath(String.raw`t_{\circ}(\Gamma)\in\{4,-4\}\qquad\bigl(\because\ \blkref{claim_plane_simple_polygon_cyclic_turning}\bigr)`),
                       paragraph([
                         "を得る。全過程は有限列と整数の四則・順序だけで閉じ、実数体も複素数体も現れない。",
                       ]),
