@@ -163,6 +163,7 @@ export const ALL_LABELS = [
   "claim_height_one_boundary_all_edges_parity",
   "claim_height_one_boundary_horizontal_internal_parity",
   "claim_height_one_boundary_horizontal_seam_parity",
+  "claim_height_one_boundary_signed_walk",
   "claim_height_one_boundary_support",
   "claim_height_one_boundary_vertical_internal_parity",
   "claim_height_one_boundary_vertical_seam_parity",
