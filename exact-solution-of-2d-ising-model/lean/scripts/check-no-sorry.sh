@@ -885,6 +885,7 @@ targets=(
   Ising2D.pauliX_configBasisIso_apply_of_ne_neg
   Ising2D.epsilon_entries_in_row_configuration_numbering
   Ising2D.epsilon_real_permutes_entries_by_spin_flip
+  Ising2D.epsilon_real_preserves_nonnegative_vectors
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype

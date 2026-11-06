@@ -305,6 +305,7 @@ export const ALL_LABELS = [
   "epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
   "epsilon_real_is_symmetric",
   "epsilon_real_permutes_entries_by_spin_flip",
+  "epsilon_real_preserves_nonnegative_vectors",
   "epsilon_real_square_is_identity",
   "epsilon_square_and_eigenvalues",
   "epsilon_square_identity",

@@ -1174,6 +1174,81 @@ w
     },
   },
   {
+    id: "maxeig_claim_epsilon_real_preserves_nonnegative_vectors",
+    kind: "claim",
+    title: { tex: String.raw`u_k \geq 0\ (\forall k) \Longrightarrow (\varepsilon_{\mathbb{R}}u)_k \geq 0\ (\forall k)` },
+    labels: ["epsilon_real_preserves_nonnegative_vectors"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`u \in \mathbb{R}^{d}`),
+        " がすべての ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`u_k \geq 0`),
+        " を満たすとする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " について、すべての ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " で",
+      ]),
+      displayMath(String.raw`(\varepsilon_{\mathbb{R}}u)_k \geq 0`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " を取る。",
+        ref("def_row_configuration_numbering"),
+        " の ",
+        math(String.raw`\mathrm{ord}`),
+        " について、",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`k = \mathrm{ord}(s)`),
+        " を満たす ",
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`s \in \mathfrak{M}`),
+        " が在る。",
+        ref("def_negated_row_configuration"),
+        " より ",
+        math(String.raw`-s \in \mathfrak{M}`),
+        " なので、",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`\mathrm{ord}(-s) \in \{1,\dots,d\}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\varepsilon_{\mathbb{R}}u)_k
+&= (\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)}
+  &&\bigl(\because\ k = \mathrm{ord}(s)\bigr)\\
+&= u_{\mathrm{ord}(-s)}
+  &&\bigl(\because\ \blkref{epsilon_real_permutes_entries_by_spin_flip}\ (u \to u,\ s \to s)\bigr)\\
+&\geq 0
+  &&\bigl(\because\ \text{仮定の}\ u_k \geq 0\ (k \to \mathrm{ord}(-s))\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「ε は置換行列」（trace_of_epsilon_V_plus の証明 Step 3 の (b)）から u ≥ 0 ⇒ εu ≥ 0 を散文で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、epsilon_real_permutes_entries_by_spin_flip の帰結として足した。本文に実数のベクトルの順序 u ≥ 0 を定めるブロックが無いので、主張は成分ごとに述べる。数値検証: sagemath/check/epsilon_real_preserves_nonnegative_vectors/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_claim_epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },
