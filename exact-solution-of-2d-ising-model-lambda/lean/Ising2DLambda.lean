@@ -1681,3 +1681,6 @@ import Ising2DLambda.NecSuf.KacWard.CellBoundaryTwoEdgePropagation
 import Ising2DLambda.NecSuf.KacWard.CoefficientVertexBalance
 import Ising2DLambda.KacWard.HeightOneBoundaryAllEdges
 import Ising2DLambda.NecSuf.KacWard.HeightOneBoundaryAllEdges
+import Ising2DLambda.KacWard.VertexSimpleBoundaryOtherEdgesZero
+import Ising2DLambda.NecSuf.KacWard.VertexSimpleBoundaryOtherEdgesZero
+import Ising2DLambda.KacWard.VertexSimpleBoundaryOtherEdgesZeroFromNecSuf

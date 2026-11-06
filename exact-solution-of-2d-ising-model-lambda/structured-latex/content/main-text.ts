@@ -7748,7 +7748,7 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
                     displayMath(String.raw`\begin{aligned}
 \pi_{w'}(j_k)&=w'_k&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
  &=t_{a,b}(w_k)&&\bigl(\because\ \text{各位置での値の交換}\bigr)\\
- &=t_{a,b}(\pi_w(j_k))&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+ &=t_{a,b}(\pi_w(j_k))&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)
 \end{aligned}`),
                     paragraph(["基準列が全元を含むから、これは置換そのものの等号 ", math(String.raw`\pi_{w'}=t_{a,b}\circ\pi_w`), " である。したがって、"]),
                     displayMath(String.raw`\begin{aligned}
@@ -7757,7 +7757,7 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
  &=\operatorname{sgn}(t_{a,b})\operatorname{sgn}(\pi_w)&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
  &=(-1)\operatorname{sgn}(\pi_w)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set},\ a\ne b\bigr)\\
  &=-\operatorname{sgn}(\pi_w)&&\bigl(\because\ \text{整数の }-1\text{ 倍}\bigr)\\
- &=-\varepsilon(w)&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+ &=-\varepsilon(w)&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)
 \end{aligned}`),
                   ],
                 },
@@ -64301,6 +64301,11 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                     labels: ["claim_vertex_simple_boundary_other_edges_zero"],
                     habitat: "Z",
                     verification: ["sagemath/check/vertex-simple-boundary-other-edges-zero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_other_edges_zero",
+                      "Ising2DLambda.NecSuf.KacWard.vertexSimple_other_edge_contribution_zero",
+                      "Ising2DLambda.KacWard.vertexSimple_boundary_other_edges_zero_from_necSuf",
+                    ],
                     statement: [
                       paragraph(["任意の ", math(String.raw`L\ge1`), " と閉じた非後退辺列 ",
                         math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " を取る（",
