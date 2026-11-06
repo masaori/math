@@ -69353,7 +69353,7 @@ F_{j+1}-F_j
 ((j+1-q)-(j-q))C,&j>q\end{cases}
 &&\bigl(\because\ \mathbb Z^2\text{ の分配則と共通項の相殺}\bigr)\\
 &=\begin{cases}B,&j<q,\\C,&j\ge q\end{cases}
-&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
 \end{aligned}`),
                       paragraph([
                         "反転した歩を ", math(String.raw`u_s:=G^{\gamma}_{n-1-s}-G^{\gamma}_{n-s}\in\mathbb Z^2`),
@@ -69367,7 +69367,7 @@ u_s
 &=\begin{cases}-B,&n-1-s<q,\\-C,&n-1-s\ge q\end{cases}
 &&\bigl(\because\ \text{直前の隣接差の式}\bigr)\\
 &=\begin{cases}a,&s<p,\\b,&s\ge p\end{cases}
-&&\bigl(\because\ n=p+q,\ B=-b,\ C=-a\text{ を代入}\bigr).
+&&\bigl(\because\ n=p+q,\ B=-b,\ C=-a\text{ を代入}\bigr)
 \end{aligned}`),
                       paragraph([
                         "現れる歩は単位歩（", ref("claim_winding_parallel_staircase_step_increase"),

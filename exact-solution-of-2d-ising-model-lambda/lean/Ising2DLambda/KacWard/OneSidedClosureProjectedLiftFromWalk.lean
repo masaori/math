@@ -13,7 +13,7 @@ def projectedClosureLift (L : ℕ) [NeZero L] (W : ℕ → ℤ × ℤ)
   | j + 1 => projectedClosureLift L W start j +
       orientedEdgeLatticeStep (projectedUnitStep L (W j) (W (j + 1) - W j))
 
-private theorem projectedUnitStep_displacement (L : ℕ) [NeZero L]
+theorem projectedUnitStep_displacement (L : ℕ) [NeZero L]
     (p u : ℤ × ℤ)
     (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)) :
     orientedEdgeLatticeStep (projectedUnitStep L p u) = u := by
