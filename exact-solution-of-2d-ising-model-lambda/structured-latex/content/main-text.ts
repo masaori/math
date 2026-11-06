@@ -68759,6 +68759,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_periodicLift",
+                      "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_avoid_periodicLift",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
@@ -68809,7 +68810,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
 &\ge K_{\max}(\gamma)+tW_{\perp}(\gamma)
 &&\bigl(\because\ \blkref{claim_parallel_staircase_transverse_width_bound}\text{ により }\kappa_{\gamma}(G^{\gamma}_b)\le0\bigr)\\
 &>K_{\max}(\gamma)
-&&\bigl(\because\ t\ge1\text{ かつ }W_{\perp}(\gamma)\ge1\bigr).
+&&\bigl(\because\ t\ge1\text{ かつ }W_{\perp}(\gamma)\ge1\bigr)
 \end{aligned}`),
                       paragraph([
                         "したがって反転平行階段は周期持ち上げと交わらない。",
@@ -68825,7 +68826,7 @@ cL W_{\perp}(\gamma)
 &\ge W_{\perp}(\gamma)
 &&\bigl(\because\ c\ge1\text{、}L\ge1\bigr)\\
 &>|w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)|
-&&\bigl(\because\ (w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)\text{ と整数の平方の順序}\bigr).
+&&\bigl(\because\ (w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)\text{ と整数の平方の順序}\bigr)
 \end{aligned}`),
                       paragraph([
                         "よって二つの反復横断階段は交わらない（",
