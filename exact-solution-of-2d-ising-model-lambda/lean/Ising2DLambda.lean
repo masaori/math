@@ -1684,3 +1684,4 @@ import Ising2DLambda.NecSuf.KacWard.HeightOneBoundaryAllEdges
 import Ising2DLambda.KacWard.VertexSimpleBoundaryOtherEdgesZero
 import Ising2DLambda.NecSuf.KacWard.VertexSimpleBoundaryOtherEdgesZero
 import Ising2DLambda.KacWard.VertexSimpleBoundaryOtherEdgesZeroFromNecSuf
+import Ising2DLambda.KacWard.VertexSimpleBoundaryDistinctPassPropagation

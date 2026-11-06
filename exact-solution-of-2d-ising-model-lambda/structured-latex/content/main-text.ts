@@ -64216,10 +64216,12 @@ w_{\mathrm v}(\gamma)
 &=\sum_{(i,j)\in S}\sum_{t=1}^{4}(1-2d(B_L(i,j)_t))D_v(\operatorname{base}(B_L(i,j)_t))
 &&\bigl(\because\ \blkref{def_oriented_edges}\text{ と直前の二場合}\bigr)\\
 &=\sum_{e\in E_L}[\partial_\square S]_eD_v(e)
-&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)
+&&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と有限和の再添字付け}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_cell_boundary_vertex_balance}\bigr)
 \end{aligned}`),
-                      paragraph(["左辺は ", ref("claim_cell_boundary_vertex_balance"),
-                        " により零である。有限和は ", math(String.raw`\mathbb Z`), " の中で閉じる。"]),
+                      paragraph(["最後の等号には ", ref("claim_cell_boundary_vertex_balance"),
+                        " を使う。この等式は ", math(String.raw`\mathbb Z`), " の中で閉じる。"]),
                     ],
                   },
                 },
@@ -64335,6 +64337,45 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                         " によれば全項の端点寄与は二である。",
                         "基底辺が前後二辺と異なる第三の項は寄与できず、矛盾する。",
                         "前後の項が同一の場合も、その項の始点と終点を別々に数えた二寄与が既に全体を占める。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_simple_boundary_distinct_pass_propagation",
+                  focus: {
+                    id: "kac_ward_claim_vertex_simple_boundary_distinct_pass_propagation",
+                    kind: "claim",
+                    title: { text: "頂点単純閉路の異なる前後二辺で境界係数が伝播する" },
+                    labels: ["claim_vertex_simple_boundary_distinct_pass_propagation"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/vertex-simple-boundary-distinct-pass-propagation"],
+                    lean: ["Ising2DLambda.KacWard.vertexSimple_boundary_distinct_pass_propagation"],
+                    statement: [
+                      paragraph([ref("claim_vertex_simple_boundary_other_edges_zero"),
+                        " と同じ ", math(String.raw`L,\gamma,S_\gamma,k`), " を取る。",
+                        math(String.raw`\vec a=\vec e_k`), " と ", math(String.raw`\vec b=\vec e_{k+1}`),
+                        " の基底辺が異なり、", math(String.raw`\operatorname{src}(\vec a)\ne\operatorname{tgt}(\vec a)`),
+                        " および ", math(String.raw`\operatorname{src}(\vec b)\ne\operatorname{tgt}(\vec b)`),
+                        " と仮定する。このとき "]),
+                      displayMath(String.raw`[\partial_\square S_\gamma]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+=[\partial_\square S_\gamma]_{\operatorname{base}(\vec b)}(1-2d(\vec b))\quad\text{in }\mathbb Z`),
+                      paragraph(["が成り立つ。"]),
+                    ],
+                    proof: [
+                      paragraph(["通過頂点を ", math(String.raw`v_k=\operatorname{tgt}(\vec a)`),
+                        " と置く。", ref("claim_vertex_simple_boundary_other_edges_zero"),
+                        " により前後の基底辺以外の頂点寄与は零である。", ref("def_closed_walk_passes"),
+                        " により ", math(String.raw`\operatorname{src}(\vec b)=v_k`), " である。"]),
+                      paragraph(["基底辺の相異と二つの非ループ条件を合わせ、",
+                        ref("claim_cell_boundary_two_edge_propagation"), " を適用すると、"]),
+                      displayMath(String.raw`\begin{aligned}
+[\partial_\square S_\gamma]_{\operatorname{base}(\vec a)}(1-2d(\vec a))
+&=[\partial_\square S_\gamma]_{\operatorname{base}(\vec b)}(1-2d(\vec b))
+&&\bigl(\because\ \blkref{claim_cell_boundary_two_edge_propagation}\bigr)
+\end{aligned}`),
                     ],
                   },
                 },
