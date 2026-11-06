@@ -384,4 +384,239 @@ export default defineBlocks([
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_count_below_index_after_adding_one_element",
+    kind: "claim",
+    title: { text: "部分集合に一つの元を足したときの、番号より小さい元を数える個数の値" },
+    labels: ["claim_count_below_index_after_adding_one_element"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`T\in\mathcal{P}_M`),
+        "（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）、",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " で ",
+        math(String.raw`j\notin T`),
+        " とする。このとき ",
+        math(String.raw`T\cup\{j\}\in\mathcal{P}_M`),
+        " であり、すべての ",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " について、部分集合のうち番号より小さい元を数える個数（",
+        ref("def_count_of_subset_elements_below_index"),
+        "）は次を満たす（",
+        math(String.raw`+`),
+        " は ",
+        math(String.raw`\mathbb{Z}`),
+        " の加法）。",
+      ]),
+      displayMath(String.raw`N_i(T\cup\{j\})=
+\begin{cases}
+  N_i(T)+1 & (j<i),\\
+  N_i(T) & (j\ge i).
+\end{cases}`),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`T\subseteq\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " から ",
+        math(String.raw`T\cup\{j\}\subseteq\{1,\dots,M\}`),
+        " なので、",
+        math(String.raw`T\cup\{j\}\in\mathcal{P}_M`),
+        " であり、",
+        math(String.raw`N_i(T\cup\{j\})`),
+        " が定まる（",
+        ref("def_count_of_subset_elements_below_index"),
+        "）。和集合と ",
+        math(String.raw`\{j\}`),
+        " の定義により、",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " で ",
+        math(String.raw`t\neq j`),
+        " なら ",
+        math(String.raw`t\in T\cup\{j\}`),
+        " と ",
+        math(String.raw`t\in T`),
+        " は同値であり（",
+        math(String.raw`\star`),
+        "）、",
+        math(String.raw`j\in T\cup\{j\}`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`T`),
+        " と ",
+        math(String.raw`j`),
+        " を固定し、",
+        math(String.raw`i`),
+        " についての帰納法で示す。",
+        math(String.raw`i=1`),
+        " のとき。",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " なので ",
+        math(String.raw`j\ge 1=i`),
+        " であり、示す等式は ",
+        math(String.raw`N_1(T\cup\{j\})=N_1(T)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_1(T\cup\{j\})
+&=0
+&&\left(\because\ N_1\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=N_1(T)
+&&\left(\because\ N_1\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i\in\{2,\dots,M\}`),
+        " とし、",
+        math(String.raw`i-1`),
+        " について主張が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`j`),
+        " と ",
+        math(String.raw`i-1`),
+        " の大小で三つの場合に分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`j<i-1`),
+          " のとき。",
+          math(String.raw`j<i`),
+          " なので、示す等式は ",
+          math(String.raw`N_i(T\cup\{j\})=N_i(T)+1`),
+          " である。帰納法の仮定（",
+          math(String.raw`j<i-1`),
+          " の場合）から ",
+          math(String.raw`N_{i-1}(T\cup\{j\})=N_{i-1}(T)+1`),
+          " である。",
+          math(String.raw`i-1\neq j`),
+          " なので、（",
+          math(String.raw`\star`),
+          "）から ",
+          math(String.raw`i-1\in T\cup\{j\}`),
+          " と ",
+          math(String.raw`i-1\in T`),
+          " は同値である。",
+          math(String.raw`i-1\in T`),
+          " なら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_i(T\cup\{j\})
+&=N_{i-1}(T\cup\{j\})+1
+&&\left(\because\ i-1\in T\cup\{j\}\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=\bigl(N_{i-1}(T)+1\bigr)+1
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=N_i(T)+1
+&&\left(\because\ i-1\in T\ \text{なので}\ N_i(T)=N_{i-1}(T)+1\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i-1\notin T`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_i(T\cup\{j\})
+&=N_{i-1}(T\cup\{j\})
+&&\left(\because\ i-1\notin T\cup\{j\}\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=N_{i-1}(T)+1
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=N_i(T)+1
+&&\left(\because\ i-1\notin T\ \text{なので}\ N_i(T)=N_{i-1}(T)\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`j=i-1`),
+          " のとき。",
+          math(String.raw`j<i`),
+          " なので、示す等式は ",
+          math(String.raw`N_i(T\cup\{j\})=N_i(T)+1`),
+          " である。",
+          math(String.raw`j\ge i-1`),
+          " なので、帰納法の仮定（",
+          math(String.raw`j\ge i-1`),
+          " の場合）から ",
+          math(String.raw`N_{i-1}(T\cup\{j\})=N_{i-1}(T)`),
+          " である。",
+          math(String.raw`i-1=j\in T\cup\{j\}`),
+          " であり、",
+          math(String.raw`i-1=j\notin T`),
+          " である。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_i(T\cup\{j\})
+&=N_{i-1}(T\cup\{j\})+1
+&&\left(\because\ i-1\in T\cup\{j\}\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=N_{i-1}(T)+1
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=N_i(T)+1
+&&\left(\because\ i-1\notin T\ \text{なので}\ N_i(T)=N_{i-1}(T)\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`j\ge i`),
+          " のとき。示す等式は ",
+          math(String.raw`N_i(T\cup\{j\})=N_i(T)`),
+          " である。",
+          math(String.raw`j\ge i>i-1`),
+          " なので、帰納法の仮定（",
+          math(String.raw`j\ge i-1`),
+          " の場合）から ",
+          math(String.raw`N_{i-1}(T\cup\{j\})=N_{i-1}(T)`),
+          " である。",
+          math(String.raw`i-1\neq j`),
+          " なので、（",
+          math(String.raw`\star`),
+          "）から ",
+          math(String.raw`i-1\in T\cup\{j\}`),
+          " と ",
+          math(String.raw`i-1\in T`),
+          " は同値である。",
+          math(String.raw`i-1\in T`),
+          " なら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_i(T\cup\{j\})
+&=N_{i-1}(T\cup\{j\})+1
+&&\left(\because\ i-1\in T\cup\{j\}\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=N_{i-1}(T)+1
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=N_i(T)
+&&\left(\because\ i-1\in T\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i-1\notin T`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+N_i(T\cup\{j\})
+&=N_{i-1}(T\cup\{j\})
+&&\left(\because\ i-1\notin T\cup\{j\}\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right)\\
+&=N_{i-1}(T)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=N_i(T)
+&&\left(\because\ i-1\notin T\ \text{なので}\ N_i\ \text{の定義。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([
+        "三つの場合は ",
+        math(String.raw`j<i-1`),
+        "、",
+        math(String.raw`j=i-1`),
+        "、",
+        math(String.raw`j>i-1`),
+        "（整数なので ",
+        math(String.raw`j\ge i`),
+        " と同じ）を尽くすので、",
+        math(String.raw`i`),
+        " について主張が成り立つ。以上で、すべての ",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " について主張が示された。",
+      ]),
+    ],
+  },
 ]);
