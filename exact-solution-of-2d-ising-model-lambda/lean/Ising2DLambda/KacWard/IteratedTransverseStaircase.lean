@@ -19,7 +19,7 @@ def iteratedTransverseStaircase (wh wv : ℤ) (base : ℤ × ℤ) (s : ℕ) : �
   iteratedStaircase (wh.natAbs + wv.natAbs) (windingTransverseStaircase wh wv)
     (wh, -wv) base s
 
-private lemma windingTransverseStaircase_zero (wh wv : ℤ) :
+theorem windingTransverseStaircase_zero (wh wv : ℤ) :
     windingTransverseStaircase wh wv 0 = 0 := by
   simp [windingTransverseStaircase, twoPhaseStaircase]
 

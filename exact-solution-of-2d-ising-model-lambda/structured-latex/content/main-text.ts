@@ -68645,10 +68645,16 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
                     proof: [
                       paragraph([
                         "まず四部分の境界で二つの表示が一致することを確かめる。",
-                        math(String.raw`j=cm`), " では第一部分が ",
-                        math(String.raw`\widetilde P_{k_0+cm}(\gamma)=Q_1`),
-                        "、第二部分が ", math(String.raw`D^{\gamma,Q_1,t}_0=Q_1`),
-                        "（", ref("def_iterated_transverse_staircase"), "）である。",
+                        math(String.raw`j=cm`), " では第一部分と第二部分が次の式鎖で接合する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\widetilde P_{k_0+cm}(\gamma)
+&=Q_1
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の }Q_1\text{ の定義}\bigr)\\
+&=D^{\gamma,Q_1,t}_0
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)
+\end{aligned}`),
+                      paragraph([
                         math(String.raw`j=cm+t\,n_{\perp}`), " では第二部分が ",
                         math(String.raw`D^{\gamma,Q_1,t}_{t n_{\perp}}=Q_1+t\,d_{\perp}(\gamma)=S+c\,B_{\gamma}+t\,d_{\perp}(\gamma)`),
                         "（", ref("def_iterated_transverse_staircase"), "、",
@@ -68761,6 +68767,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_periodicLift",
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_avoid_periodicLift",
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_disjoint",
+                      "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_staircases",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
