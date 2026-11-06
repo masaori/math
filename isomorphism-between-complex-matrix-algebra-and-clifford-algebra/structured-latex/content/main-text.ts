@@ -9,5 +9,6 @@
 
 import mathematicalToolkit from "./chapters/mathematical-toolkit.ts";
 import complexMatrixAlgebra from "./chapters/complex-matrix-algebra.ts";
+import isomorphism from "./chapters/isomorphism.ts";
 
-export default [...mathematicalToolkit, ...complexMatrixAlgebra] as const;
+export default [...mathematicalToolkit, ...complexMatrixAlgebra, ...isomorphism] as const;

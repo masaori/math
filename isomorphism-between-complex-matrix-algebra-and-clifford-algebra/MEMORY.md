@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06: 同型の証明の章のファイル isomorphism.ts を作り、生成作用素の符号に使う個数 N_i(T) の帰納的な定義（ラベル def_count_of_subset_elements_below_index、N_1(T):=0、N_i(T):=N_{i-1}(T)+[i-1∈T]）を置いた。次は生成作用素の行列 c_i の定義（(-1)^{N_i(T)} を ℂ の中の積で帰納的に書く）。クリフォード代数の章のファイルは main-text.ts の複素行列環と同型の証明の間に足す。
 - 2026-11-06: 論文の HTML の URL を https://hexcomp-artifacts.web.app/masaori/math/clifford-matrix-isomorphism/ に直した（math/clifford-matrix-isomorphism/ は not found。この論文は API から初めて公開したので masaori/math/ の URL だけを持つ）。README・リポジトリ直下の CLAUDE.md と AGENTS.md の報告の URL の決まり・定時実行「クリフォード代数の同型: 研究管理」の指示文を直した。
 - 2026-11-06: (2^M,e_M) が P_M の番号付けであり P_M が有限集合であること（ラベル claim_binary_numbering_is_numbering_of_power_set）を M の帰納法で示し、検算 sagemath/check/binary-numbering-of-power-set/ を置いた（M=0..8 で通過）。次は生成作用素の符号に使う個数 N_i(T) の帰納的な定義（同型の証明の章。章のファイル isomorphism.ts を新しく作り main-text.ts に足す）。
 - 2026-11-06: 「VM に SageMath が無い」は誤りだった（SageMath 10.9 は micromamba の環境 `sage` に在り、PATH に無いだけ）。runbook の SageMath の手順に実行コマンドを書き、検算 2 件（行列単位の積の規則・単位行列の分解）を SageMath で実行し直して通過を overview.md に書いた。

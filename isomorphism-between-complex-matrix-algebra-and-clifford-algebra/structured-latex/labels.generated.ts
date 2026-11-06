@@ -55,6 +55,7 @@ export const ALL_LABELS = [
   "def_complex_algebra_homomorphism",
   "def_complex_numbers_as_complex_vector_space",
   "def_complex_vector_space",
+  "def_count_of_subset_elements_below_index",
   "def_direct_sum_of_two_vector_spaces",
   "def_dual_basis",
   "def_dual_space",
