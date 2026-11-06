@@ -881,6 +881,10 @@ targets=(
   Ising2D.W_has_positive_entries_as_inclusion
   Ising2D.W_real_has_positive_entries
   Ising2D.epsilon_real_commutes_with_W_real
+  Ising2D.pauliX_configBasisIso_apply_of_eq_neg
+  Ising2D.pauliX_configBasisIso_apply_of_ne_neg
+  Ising2D.epsilon_entries_in_row_configuration_numbering
+  Ising2D.epsilon_real_permutes_entries_by_spin_flip
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype

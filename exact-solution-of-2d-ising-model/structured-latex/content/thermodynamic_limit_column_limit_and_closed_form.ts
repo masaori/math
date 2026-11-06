@@ -867,6 +867,313 @@ w
     },
   },
   {
+    id: "maxeig_definition_negated_row_configuration",
+    kind: "definition",
+    title: { tex: String.raw`\text{符号を反転したスピン配置 } -s` },
+    labels: ["def_negated_row_configuration"],
+    statement: [
+      paragraph([
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`s \in \mathfrak{M}`),
+        " について、",
+        math(String.raw`-s : \{1,\dots,M_{\mathrm{col}}\} \to \{-1,1\}`),
+        " を",
+      ]),
+      displayMath(String.raw`(-s)(m) := -s(m) \qquad (m \in \{1,\dots,M_{\mathrm{col}}\})`),
+      paragraph([
+        "で定める。",
+        math(String.raw`s(m) \in \{-1,1\}`),
+        " なら ",
+        math(String.raw`-s(m) \in \{-1,1\}`),
+        " なので、",
+        math(String.raw`-s \in \mathfrak{M}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。同じ記号は trace_of_epsilon_V_plus の証明の準備の中で置かれていたが、引ける定義ではなかった。epsilon_entries_in_row_configuration_numbering と epsilon_real_permutes_entries_by_spin_flip が引くので定義として足した（Lean は negSpinConf）。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_entries_in_row_configuration_numbering",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ の成分を 1 行ぶんのスピン配置の番号で読む}` },
+    labels: ["epsilon_entries_in_row_configuration_numbering"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`s, s' \in \mathfrak{M}`),
+        " とし、",
+        math(String.raw`-s \in \mathfrak{M}`),
+        " を ",
+        ref("def_negated_row_configuration"),
+        " のものとする。",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と ",
+        ref("def_row_configuration_numbering"),
+        " の ",
+        math(String.raw`\mathrm{ord}`),
+        "（値は ",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`\{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " に属し、行列の番号として使える）について",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathrm{ord}(s),\,\mathrm{ord}(s')} =
+\begin{cases}
+1_{\mathbb{C}} & (s' = -s)\\
+0_{\mathbb{C}} & (s' \neq -s)
+\end{cases}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`0_{\mathbb{C}}, 1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_config_basis_iso"),
+        " の ",
+        math(String.raw`\iota`),
+        " で ",
+        math(String.raw`I := \iota(s) = (i_1,\dots,i_{M_{\mathrm{col}}})`),
+        "、",
+        math(String.raw`J := \iota(s') = (j_1,\dots,j_{M_{\mathrm{col}}})`),
+        " とおく。準備として、",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " を取り、",
+        math(String.raw`(\sigma^x)_{i_m j_m}`),
+        " を場合分けで求める。",
+        math(String.raw`s'(m) = -s(m)`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&s'(m) = -s(m)\\
+\Longrightarrow\ &s'(m) \neq s(m)
+  &&\bigl(\because\ s(m) \in \{-1,1\}\ \text{なので}\ -s(m) \neq s(m)\bigr)\\
+\Longrightarrow\ &i_m \neq j_m
+  &&\bigl(\because\ \blkref{def_config_basis_iso}\ \text{の}\ i_m\ \text{の場合分け}\bigr)\\
+\Longrightarrow\ &(\sigma^x)_{i_m j_m} = 1_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{12} = (\sigma^x)_{21} = 1_{\mathbb{C}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`s'(m) \neq -s(m)`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&s'(m) \neq -s(m)\\
+\Longrightarrow\ &s'(m) = s(m)
+  &&\bigl(\because\ s'(m)\ \text{は 2 元の集合}\ \{-1,1\} = \{s(m), -s(m)\}\ \text{の元}\bigr)\\
+\Longrightarrow\ &i_m = j_m
+  &&\bigl(\because\ \blkref{def_config_basis_iso}\ \text{の}\ i_m\ \text{の場合分け}\bigr)\\
+\Longrightarrow\ &(\sigma^x)_{i_m j_m} = 0_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{11} = (\sigma^x)_{22} = 0_{\mathbb{C}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`s' = -s`),
+        "（",
+        ref("def_negated_row_configuration"),
+        "）のとき、すべての ",
+        math(String.raw`m`),
+        " で ",
+        math(String.raw`s'(m) = -s(m)`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{\mathrm{ord}(s),\,\mathrm{ord}(s')}
+&= \varepsilon_{\nu(I),\,\nu(J)}
+  &&\bigl(\because\ \blkref{config_numbering_equals_kronecker_numbering}\ (\mu \to s,\ \mu \to s')\bigr)\\
+&= \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}}\bigr)_{\nu(I),\,\nu(J)}
+  &&\bigl(\because\ \blkref{global_spin_flip_kronecker_form}\bigr)\\
+&= \prod_{m=1}^{M_{\mathrm{col}}} (\sigma^x)_{i_m j_m}
+  &&\bigl(\because\ \blkref{def_kronecker}\ (2)\ (M \to M_{\mathrm{col}},\ A_k \to \sigma^x)\bigr)\\
+&= \prod_{m=1}^{M_{\mathrm{col}}} 1_{\mathbb{C}}
+  &&\bigl(\because\ \text{準備の}\ s'(m) = -s(m)\ \text{の場合を各因子へ同時に適用}\bigr)\\
+&= 1_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{finite_product_of_complex_ones}\ (m \to M_{\mathrm{col}})\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`s' \neq -s`),
+        " のとき、",
+        math(String.raw`\mathfrak{M}`),
+        " の二つの元 ",
+        math(String.raw`s', -s`),
+        " は写像として異なるので、",
+        math(String.raw`s'(n) \neq (-s)(n) = -s(n)`),
+        " を満たす ",
+        math(String.raw`n \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " が在り、準備の ",
+        math(String.raw`s'(m) \neq -s(m)`),
+        " の場合（",
+        math(String.raw`m \to n`),
+        "）より ",
+        math(String.raw`(\sigma^x)_{i_n j_n} = 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{\mathrm{ord}(s),\,\mathrm{ord}(s')}
+&= \varepsilon_{\nu(I),\,\nu(J)}
+  &&\bigl(\because\ \blkref{config_numbering_equals_kronecker_numbering}\ (\mu \to s,\ \mu \to s')\bigr)\\
+&= \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}}\bigr)_{\nu(I),\,\nu(J)}
+  &&\bigl(\because\ \blkref{global_spin_flip_kronecker_form}\bigr)\\
+&= \prod_{m=1}^{M_{\mathrm{col}}} (\sigma^x)_{i_m j_m}
+  &&\bigl(\because\ \blkref{def_kronecker}\ (2)\ (M \to M_{\mathrm{col}},\ A_k \to \sigma^x)\bigr)\\
+&= 0_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{finite_product_with_zero_factor_is_zero}\ (m \to M_{\mathrm{col}},\ z_m \to (\sigma^x)_{i_m j_m},\ n \to n)\ \text{と}\ (\sigma^x)_{i_n j_n} = 0_{\mathbb{C}}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「ε は各基底ベクトルを別の基底ベクトルへ写す置換行列」を trace_of_epsilon_V_plus の証明 Step 3 の (b)（証明の途中の段で、理由は散文）から引いていた。引ける主張にするため、ε の成分を global_spin_flip_kronecker_form と def_kronecker (2) から一行ずつ求める主張として足した。trace_of_epsilon_V_plus の (b) は列の向き ε_{ord(s'),ord(s)} = δ_{-s=s'} を基底ベクトルへの作用から読むもので、値は同じである。数値検証: sagemath/check/epsilon_entries_in_row_configuration_numbering/。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_real_permutes_entries_by_spin_flip",
+    kind: "claim",
+    title: { tex: String.raw`(\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)} = u_{\mathrm{ord}(-s)}` },
+    labels: ["epsilon_real_permutes_entries_by_spin_flip"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "、",
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`s \in \mathfrak{M}`),
+        " とし、",
+        math(String.raw`-s`),
+        " は ",
+        ref("def_negated_row_configuration"),
+        " のものとする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " と ",
+        ref("def_row_configuration_numbering"),
+        " の ",
+        math(String.raw`\mathrm{ord}`),
+        "（値は ",
+        ref("row_configuration_numbering_bijective"),
+        " より ",
+        math(String.raw`\{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " に属する）について",
+      ]),
+      displayMath(String.raw`(\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)} = u_{\mathrm{ord}(-s)}`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記し、",
+        math(String.raw`r_{\mathbb{C}}`),
+        "（",
+        math(String.raw`r \in \mathbb{R}`),
+        "）は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記とする。",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`y_l := (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,l}\,u_l \in \mathbb{R}`),
+        " とおく。",
+        ref("row_configuration_numbering_bijective"),
+        " より、",
+        math(String.raw`l \neq \mathrm{ord}(-s)`),
+        " の ",
+        math(String.raw`l`),
+        " は ",
+        math(String.raw`t \neq -s`),
+        " を満たす ",
+        math(String.raw`t \in \mathfrak{M}`),
+        " で ",
+        math(String.raw`l = \mathrm{ord}(t)`),
+        " と書ける。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(y_l)_{\mathbb{C}}
+&= \bigl((\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(t)}\,u_{\mathrm{ord}(t)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ y_l := (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,l}\,u_l\ \text{と}\ l = \mathrm{ord}(t)\bigr)\\
+&= \bigl((\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(t)}\bigr)_{\mathbb{C}}\,\bigl(u_{\mathrm{ord}(t)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(t)},\ b \to u_{\mathrm{ord}(t)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \varepsilon_{\mathrm{ord}(s),\,\mathrm{ord}(t)}\,\bigl(u_{\mathrm{ord}(t)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_epsilon_real}\bigr)\\
+&= 0_{\mathbb{C}}\,\bigl(u_{\mathrm{ord}(t)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{epsilon_entries_in_row_configuration_numbering}\ (s' \to t,\ t \neq -s)\bigr)\\
+&= 0_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`l = \mathrm{ord}(-s)`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(y_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+&= \bigl((\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(-s)}\,u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ y_l := (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,l}\,u_l\ (l \to \mathrm{ord}(-s))\bigr)\\
+&= \bigl((\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}\,\bigl(u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,\mathrm{ord}(-s)},\ b \to u_{\mathrm{ord}(-s)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \varepsilon_{\mathrm{ord}(s),\,\mathrm{ord}(-s)}\,\bigl(u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_epsilon_real}\bigr)\\
+&= 1_{\mathbb{C}}\,\bigl(u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{epsilon_entries_in_row_configuration_numbering}\ (s' \to -s)\bigr)\\
+&= \bigl(u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)}\bigr)_{\mathbb{C}}
+&= \Bigl(\sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,l}\,u_l\Bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u,\ i \to \mathrm{ord}(s))\bigr)\\
+&= \Bigl(\sum_{l=1}^{d} y_l\Bigr)_{\mathbb{C}}
+  &&\bigl(\because\ y_l := (\varepsilon_{\mathbb{R}})_{\mathrm{ord}(s),\,l}\,u_l\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{l=1}^{d} (y_l)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to d,\ r_j \to y_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(y_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to d,\ z_j \to (y_j)_{\mathbb{C}},\ n \to \mathrm{ord}(-s))\ \text{と、上で示した}\ l \neq \mathrm{ord}(-s)\ \text{のときの}\ (y_l)_{\mathbb{C}} = 0_{\mathbb{C}}\bigr)\\
+&= \bigl(u_{\mathrm{ord}(-s)}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \text{上で示した}\ (y_{\mathrm{ord}(-s)})_{\mathbb{C}} = (u_{\mathrm{ord}(-s)})_{\mathbb{C}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to (\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)},\ b \to u_{\mathrm{ord}(-s)}`),
+        "）より ",
+        math(String.raw`(\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)} = u_{\mathrm{ord}(-s)}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε を掛け、「ε は置換行列」（trace_of_epsilon_V_plus の証明 Step 3 の (b)）から u ≥ 0 ⇒ εu ≥ 0 と ‖εu‖ = ‖u‖ を出していた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、ε_ℝ を実数のベクトルに掛けると成分が符号反転 s ↦ -s で並べ替わることを示す主張として足した。実数の有限和のうち一つの項のほかが 0 のものを述べるブロックが本文に無いので、real_identity_matrix_is_left_unit_of_real_matrix_vector_product と同じく和を ℂ へ包含して finite_sum_with_single_nonzero_term を当て、単射性で戻す。数値検証: sagemath/check/epsilon_real_permutes_entries_by_spin_flip/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_claim_epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },
