@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_binary_numbering_is_numbering_of_power_set",
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
   "claim_coordinate_map_is_linear_form",
   "claim_coordinate_maps_form_dual_basis",

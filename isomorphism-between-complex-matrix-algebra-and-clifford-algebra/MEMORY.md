@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-06: (2^M,e_M) が P_M の番号付けであり P_M が有限集合であること（ラベル claim_binary_numbering_is_numbering_of_power_set）を M の帰納法で示し、検算 sagemath/check/binary-numbering-of-power-set/ を置いた（M=0..8 で通過）。次は生成作用素の符号に使う個数 N_i(T) の帰納的な定義（同型の証明の章。章のファイル isomorphism.ts を新しく作り main-text.ts に足す）。
 - 2026-11-06: 「VM に SageMath が無い」は誤りだった（SageMath 10.9 は micromamba の環境 `sage` に在り、PATH に無いだけ）。runbook の SageMath の手順に実行コマンドを書き、検算 2 件（行列単位の積の規則・単位行列の分解）を SageMath で実行し直して通過を overview.md に書いた。
 - 2026-11-06: 2 進の番号付けの写像 e_M:{1..2^M}→P_M の帰納的な定義（ラベル def_binary_numbering_of_power_set）を置いた。次は (2^M,e_M) が P_M の番号付けであること（M の帰納法。単射は k≤2^{M-1} と k>2^{M-1} の場合で M の所属を比べ、全射は M∈T か否かで T∖{M} の逆像を引く見込み）。
 - 2026-11-06（研究管理）: 台帳に、個数 N_i(T) に一元を足したときの値（j<i なら 1 増え、j≥i なら変わらない）の行を、三つの反交換関係の前に足した（三つの関係の符号の打ち消しがどれも使うため）。
