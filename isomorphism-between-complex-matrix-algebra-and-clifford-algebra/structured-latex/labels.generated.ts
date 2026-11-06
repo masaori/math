@@ -30,6 +30,7 @@ export const ALL_LABELS = [
   "claim_ordered_sum_with_kronecker_delta_picks_term",
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
+  "claim_product_of_matrix_units",
   "claim_reindexing_linear_combination_by_bijection",
   "claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor",
   "claim_scalar_multiple_is_compatible_with_matrix_product_in_right_factor",

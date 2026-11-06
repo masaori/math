@@ -1208,4 +1208,144 @@ A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{z,y}
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_claim_product_of_matrix_units",
+    kind: "claim",
+    title: { text: "行列単位の積の規則" },
+    labels: ["claim_product_of_matrix_units"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`x,y,z,w\in X`),
+        " とする。このとき、行列単位（",
+        ref("def_matrix_unit"),
+        "）について次が成り立つ。",
+        math(String.raw`\delta_{y,z}\in\mathbb{C}`),
+        " は ",
+        math(String.raw`X`),
+        " の二元についてのクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）であり、",
+        math(String.raw`\cdot_{\mathrm{Mat}_X}`),
+        " と ",
+        math(String.raw`\ast_{\mathrm{Mat}_X}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の積とスカラー倍（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）である。",
+      ]),
+      displayMath(String.raw`E_{x,y}\cdot_{\mathrm{Mat}_X}E_{z,w}=\delta_{y,z}\ast_{\mathrm{Mat}_X}E_{x,w}`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`\mathrm{Mat}_X(\mathbb{C})`),
+        " の元なので、すべての ",
+        math(String.raw`p,q\in X`),
+        " について ",
+        math(String.raw`(p,q)`),
+        " 成分どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことを示せばよい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`p,q\in X`),
+        " を任意に固定する。以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`X`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      paragraph([
+        "準備として、",
+        math(String.raw`t\in X`),
+        " について ",
+        math(String.raw`r_t:=(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{w,q})\cdot_{\mathbb{C}}\delta_{z,t}\in\mathbb{C}`),
+        " と置き、各 ",
+        math(String.raw`t\in X`),
+        " について、和の項から ",
+        math(String.raw`t`),
+        " に依る因子 ",
+        math(String.raw`\delta_{y,t}`),
+        " を係数の位置へ移した次の等式を示す。",
+        math(String.raw`\delta_{x,p},\ \delta_{y,t},\ \delta_{z,t},\ \delta_{w,q}`),
+        " はどれも ",
+        math(String.raw`X`),
+        " の二元についてのクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）で、",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{y,t})\cdot_{\mathbb{C}^{\mathrm{vec}}}(\delta_{z,t}\cdot_{\mathbb{C}}\delta_{w,q})
+&=(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{y,t})\cdot_{\mathbb{C}}(\delta_{z,t}\cdot_{\mathbb{C}}\delta_{w,q})
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(\delta_{y,t}\cdot_{\mathbb{C}}\delta_{x,p})\cdot_{\mathbb{C}}(\delta_{z,t}\cdot_{\mathbb{C}}\delta_{w,q})
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{y,t}\cdot_{\mathbb{C}}\bigl(\delta_{x,p}\cdot_{\mathbb{C}}(\delta_{z,t}\cdot_{\mathbb{C}}\delta_{w,q})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{y,t}\cdot_{\mathbb{C}}\bigl(\delta_{x,p}\cdot_{\mathbb{C}}(\delta_{w,q}\cdot_{\mathbb{C}}\delta_{z,t})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{y,t}\cdot_{\mathbb{C}}\bigl((\delta_{x,p}\cdot_{\mathbb{C}}\delta_{w,q})\cdot_{\mathbb{C}}\delta_{z,t}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{y,t}\cdot_{\mathbb{C}}r_t
+&&\left(\because\ r_t\ \text{の置き方}\right)\\
+&=\delta_{y,t}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_t
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(p,q)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(E_{x,y}\cdot_{\mathrm{Mat}_X}E_{z,w}\bigr)_{p,q}
+&=\sum_{t\in X}(E_{x,y})_{p,t}\cdot_{\mathbb{C}^{\mathrm{vec}}}(E_{z,w})_{t,q}
+&&\left(\because\ \cdot_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{t\in X}(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{y,t})\cdot_{\mathbb{C}^{\mathrm{vec}}}(\delta_{z,t}\cdot_{\mathbb{C}}\delta_{w,q})
+&&\left(\because\ \text{各}\ t\ \text{で行列単位の定義。}\blkref{def_matrix_unit}\ \blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{t\in X}\delta_{y,t}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_t
+&&\left(\because\ \text{各}\ t\ \text{で準備の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=r_y
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ y\text{、和の変数に}\ t\text{、}v_t:=r_t\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{w,q})\cdot_{\mathbb{C}}\delta_{z,y}
+&&\left(\because\ r_t\ \text{の置き方で}\ t:=y\right)\\
+&=\delta_{z,y}\cdot_{\mathbb{C}}(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{w,q})
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{y,z}\cdot_{\mathbb{C}}(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{w,q})
+&&\left(\because\ y=z\ \text{と}\ z=y\ \text{は同値なので、場合分けが一致する。}\blkref{def_kronecker_delta}\right)\\
+&=\delta_{y,z}\cdot_{\mathbb{C}}(E_{x,w})_{p,q}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
+&=\bigl(\delta_{y,z}\ast_{\mathrm{Mat}_X}E_{x,w}\bigr)_{p,q}
+&&\left(\because\ \ast_{\mathrm{Mat}_X}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in X`),
+        " は任意だったので、",
+        math(String.raw`E_{x,y}\cdot_{\mathrm{Mat}_X}E_{z,w}=\delta_{y,z}\ast_{\mathrm{Mat}_X}E_{x,w}`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
