@@ -858,6 +858,11 @@ targets=(
   "Ising2D.NecSuf.finite_sum_le_fin'"
   Ising2D.nonnegative_real_order_from_squares_of_necSuf
   "Ising2D.NecSuf.order_from_squares'"
+  Ising2D.inclusion_rr_to_cc_is_injective
+  Ising2D.ofReal_realMatrixOfRealEntries_apply
+  Ising2D.realMatrixOfRealEntries_apply_eq
+  Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries
+  Ising2D.rayleighSup_physicalSymTransferR_eq
   Ising2D.realQuadForm_pos_of_map_posDef
   Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow
   Ising2D.partition_function_sandwich_physical

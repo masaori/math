@@ -1001,6 +1001,51 @@ T_B(X - W)
     ],
   },
   {
+    id: "calc_formulae_claim_inclusion_rr_to_cc_is_injective",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{R}\to\mathbb{C}}\ \text{は単射}` },
+    labels: ["inclusion_rr_to_cc_is_injective"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " が ",
+        math(String.raw`a_{\mathbb{C}} = b_{\mathbb{C}}`),
+        " を満たすなら ",
+        math(String.raw`a = b`),
+        " である。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(a, 0)
+&= a_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ (x \to a)\bigr)\\
+&= b_{\mathbb{C}}
+  &&\bigl(\because\ \text{仮定}\bigr)\\
+&= (b, 0)
+  &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ (x \to b)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbf{C} = \mathbf{R}^2`),
+        "（",
+        ref("definition_of_cc"),
+        "）の二つの元が等しいのは第 1 成分どうしと第 2 成分どうしがそれぞれ等しいときなので、第 1 成分を比べて ",
+        math(String.raw`a = b`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。成分がすべて実数の複素行列から実数の行列を定める def_real_matrix_of_real_entry_matrix が、各成分の実数がただ一つに決まることに使うので足した（ε の固有値 +1 の固有空間の上限の章の証明は、同じ事実を「(·)_ℂ の単射性」と呼んで証明の中で示している）。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_008_multiply_by_minus_one",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ", ordinal: 9 },

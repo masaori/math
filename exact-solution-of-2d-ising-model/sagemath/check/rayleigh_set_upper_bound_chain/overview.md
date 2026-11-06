@@ -5,8 +5,8 @@
 **対象ラベル**: `def_rayleigh_sup` （structured-latex 側の安定識別子）
 
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
-- ブロック: `maxeig_006_definition_rayleigh_sup`（𝓡 は上に有界（|x_k| ≤ 1 のもとで x^⊤Wx ≤ Σ_iΣ_j|W_ij|））
-- 範囲: 項ごとの 6 行、各 i の 2 行、外側の 4 行（x^⊤Wx ≤ |x^⊤Wx| から ΣΣ|W_ij| まで）。|x_i| ≤ 1 を出す前の段の鎖は含めない
+- ブロック: `maxeig_006_definition_rayleigh_sup`（𝓡 は上に有界（|x_k| ≤ 1 のもとで x^⊤W_ℝx ≤ Σ_iΣ_j|(W_ℝ)_ij|。W_ℝ = ϱ(W) は def_real_matrix_of_real_entry_matrix の実数の行列で、検算では QQ 成分の行列として直接取る））
+- 範囲: 項ごとの 6 行、各 i の 2 行、外側の 4 行（x^⊤W_ℝx ≤ |x^⊤W_ℝx| から ΣΣ|(W_ℝ)_ij| まで）。|x_i| ≤ 1 を出す前の段の鎖は含めない
 
 ## 証明の行との対応
 

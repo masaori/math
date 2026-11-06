@@ -49,6 +49,7 @@
 | --- | --- | --- |
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
 | `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀWx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
+| `Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries` / `rayleighSup_physicalSymTransferR_eq`（`PhysicalPartitionFunctionSandwich.lean`） | 冒頭の `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について: 実成分で組んだ `physicalSymTransferR` は `ϱ(physicalSymTransferC)` に等しく、Lean の `c(M)` は人手の `sup{xᵀW_ℝx \| ‖x‖ = 1}` と同じ値 | 同上 |
 | `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界（上界は `Σ_iΣ_j\|W_ij\|`。`W` に仮定を置かない） | 同上 |
 | `Ising2D.abs_component_le_one_of_unit`（`DefinitionRayleighSup.lean`） | `‖x‖ = 1` なら `\|x_i\| ≤ 1`（上に有界であることの段の前半。人手の 4 行と `nonnegative_real_order_from_squares`（具体版は `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimNonnegativeRealOrderFromSquares.lean`）） | `def_rayleigh_sup` |
 | `Ising2D.abs_bilinear_term_le_abs_entry` / `abs_bilinear_row_le_row_abs_sum` / `bilinear_le_abs_entry_sum`（`DefinitionRayleighSup.lean`） | `\|x_k\| ≤ 1` なら `\|x_iW_ijx_j\| ≤ \|W_ij\|`、`\|Σ_j x_iW_ijx_j\| ≤ Σ_j\|W_ij\|`、`xᵀWx ≤ Σ_iΣ_j\|W_ij\|`（上に有界であることの段の後半。人手の項ごとの 6 行・各 `i` の 2 行・外側の 4 行と 1 対 1。人手 `def_real_bilinear_value` の行は `dotProduct_mulVec_eq_real_bilinear_value`） | `def_rayleigh_sup` |

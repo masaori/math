@@ -108,6 +108,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionInvertibleElementsProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 
 namespace Ising2D
 
@@ -436,6 +437,28 @@ theorem physicalSymTransferC_hasRealEntries (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
 theorem physicalSymTransferC_isRealSymmetric (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     MatrixIsRealSymmetric (physicalSymTransferC M K1 K2) :=
   ⟨physicalSymTransferC_hasRealEntries K1 hK2, physicalSymTransferC_transpose K1 hK2⟩
+
+/-- **人手 `def_rayleigh_sup` の冒頭 `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について**:
+成分がすべて実数の `W = physicalSymTransferC`（`physicalSymTransferC_hasRealEntries`）を `ϱ` で実数の行列へ移すと、
+実成分で組んだ `physicalSymTransferR` になる（各成分で `W_pq = (physicalSymTransferR_pq)_ℂ`（`physicalSymTransferC_eq_map`）に
+`realMatrixOfRealEntries_apply_eq` を当てる）。Lean の `c(M_col) = rayleighSup (physicalSymTransferR …)` は、この等式で人手の
+`sup{x^⊤W_ℝx | ‖x‖ = 1}` と同じ値である（`rayleighSup_physicalSymTransferR_eq`）。 -/
+theorem physicalSymTransferR_eq_realMatrixOfRealEntries (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    physicalSymTransferR M K1 K2
+      = realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2) := by
+  ext p q
+  symm
+  apply realMatrixOfRealEntries_apply_eq
+  rw [physicalSymTransferC_eq_map, Matrix.map_apply, Complex.ofRealHom_eq_coe]
+
+/-- **人手 `def_rayleigh_sup` の `c(M_col) := sup 𝓡`、`𝓡 = {x^⊤W_ℝx | ‖x‖ = 1}`、`W_ℝ = ϱ(W)` を具体的な `W` について**:
+Lean の `rayleighSup (physicalSymTransferR …)` は `rayleighSup (ϱ(W))` に等しい。 -/
+theorem rayleighSup_physicalSymTransferR_eq (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    rayleighSup (physicalSymTransferR M K1 K2)
+      = rayleighSup (realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) := by
+  rw [← physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
 
 /-- 実行列の `W` は対称（`physicalSymTransferC_transpose` を成分の埋め込みで読む）。 -/
 theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :

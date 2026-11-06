@@ -831,17 +831,27 @@ W
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
-    title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W x` },
+    title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W_{\mathbb{R}} x` },
     labels: ["def_rayleigh_sup"],
     statement: [
       paragraph([
-        math(String.raw`W`),
-        " は ",
         ref("W_is_real_symmetric_positive_definite"),
-        " より実行列とみなせるので、",
+        " より ",
+        math(String.raw`W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）なので、",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ B \to W`),
+        "）の",
+      ]),
+      displayMath(String.raw`W_{\mathbb{R}} := \varrho^{2^{M_{\mathrm{col}}},2^{M_{\mathrm{col}}}}_{\mathbb{C}\to\mathbb{R}}(W) \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+      paragraph([
+        "が定まる。",
       ]),
       displayMath(
-        String.raw`\mathcal{R} := \left\{\, x^\top W x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
+        String.raw`\mathcal{R} := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
       ),
       paragraph([
         "とおく。",
@@ -913,30 +923,30 @@ W
         " である。次に ",
         math(String.raw`i, j \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
         " を取る。",
-        math(String.raw`W_{ij} \in \mathbb{R}`),
+        math(String.raw`(W_{\mathbb{R}})_{ij} \in \mathbb{R}`),
         " は ",
-        math(String.raw`W`),
+        math(String.raw`W_{\mathbb{R}}`),
         " の成分、",
-        math(String.raw`x_i\,W_{ij}\,x_j := \bigl(x_i\,W_{ij}\bigr)\,x_j`),
+        math(String.raw`x_i\,(W_{\mathbb{R}})_{ij}\,x_j := \bigl(x_i\,(W_{\mathbb{R}})_{ij}\bigr)\,x_j`),
         " は ",
         ref("def_real_bilinear_value"),
         " の項であり、",
-        math(String.raw`|x_i|\,|W_{ij}| \geq 0`),
+        math(String.raw`|x_i|\,|(W_{\mathbb{R}})_{ij}| \geq 0`),
         "（非負の実数の積）である。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\left|x_i\,W_{ij}\,x_j\right|
-&= \left|x_i\,W_{ij}\right|\,|x_j|
-  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_i\,W_{ij},\ b \to x_j)\bigr)\\
-&= |x_i|\,|W_{ij}|\,|x_j|
-  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_i,\ b \to W_{ij})\bigr)\\
-&\leq |x_i|\,|W_{ij}| \cdot 1
-  &&\bigl(\because\ |x_j| \leq 1\ \text{の両辺に非負の実数}\ |x_i|\,|W_{ij}|\ \text{を左から掛ける}\bigr)\\
-&= |x_i|\,|W_{ij}|
+\left|x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+&= \left|x_i\,(W_{\mathbb{R}})_{ij}\right|\,|x_j|
+  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_i\,(W_{\mathbb{R}})_{ij},\ b \to x_j)\bigr)\\
+&= |x_i|\,|(W_{\mathbb{R}})_{ij}|\,|x_j|
+  &&\bigl(\because\ \blkref{real_abs_of_product}\ (a \to x_i,\ b \to (W_{\mathbb{R}})_{ij})\bigr)\\
+&\leq |x_i|\,|(W_{\mathbb{R}})_{ij}| \cdot 1
+  &&\bigl(\because\ |x_j| \leq 1\ \text{の両辺に非負の実数}\ |x_i|\,|(W_{\mathbb{R}})_{ij}|\ \text{を左から掛ける}\bigr)\\
+&= |x_i|\,|(W_{\mathbb{R}})_{ij}|
   &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元}\bigr)\\
-&\leq 1 \cdot |W_{ij}|
-  &&\bigl(\because\ |x_i| \leq 1\ \text{の両辺に非負の実数}\ |W_{ij}|\ \text{を右から掛ける}\bigr)\\
-&= |W_{ij}|
+&\leq 1 \cdot |(W_{\mathbb{R}})_{ij}|
+  &&\bigl(\because\ |x_i| \leq 1\ \text{の両辺に非負の実数}\ |(W_{\mathbb{R}})_{ij}|\ \text{を右から掛ける}\bigr)\\
+&= |(W_{\mathbb{R}})_{ij}|
   &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元}\bigr)
 \end{aligned}`),
       paragraph([
@@ -945,25 +955,25 @@ W
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,W_{ij}\,x_j\right|
-&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} \left|x_i\,W_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to x_i\,W_{ij}\,x_j)\bigr)\\
-&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} |W_{ij}|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_i\,W_{ij}\,x_j|,\ b_j \to |W_{ij}|)\text{。各}\ j\ \text{の大小は上の鎖}\bigr)
+\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} \left|x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
+&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} |(W_{\mathbb{R}})_{ij}|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_i\,(W_{\mathbb{R}})_{ij}\,x_j|,\ b_j \to |(W_{\mathbb{R}})_{ij}|)\text{。各}\ j\ \text{の大小は上の鎖}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、",
       ]),
       displayMath(String.raw`\begin{aligned}
-x^\top W x
-&\leq \left|x^\top W x\right|
-  &&\bigl(\because\ \blkref{real_number_is_at_most_its_absolute_value}\ (q \to x^\top W x)\bigr)\\
-&= \left|\sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,W_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W,\ y \to x)\bigr)\\
-&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,W_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \textstyle\sum_{j} x_i\,W_{ij}\,x_j)\bigr)\\
-&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} |W_{ij}|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \bigl|\textstyle\sum_{j} x_i\,W_{ij}\,x_j\bigr|,\ b_i \to \textstyle\sum_{j}|W_{ij}|)\text{。各}\ i\ \text{の大小は上の鎖}\bigr)
+x^\top W_{\mathbb{R}} x
+&\leq \left|x^\top W_{\mathbb{R}} x\right|
+  &&\bigl(\because\ \blkref{real_number_is_at_most_its_absolute_value}\ (q \to x^\top W_{\mathbb{R}} x)\bigr)\\
+&= \left|\sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ y \to x)\bigr)\\
+&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
+&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} |(W_{\mathbb{R}})_{ij}|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \bigl|\textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\bigr|,\ b_i \to \textstyle\sum_{j}|(W_{\mathbb{R}})_{ij}|)\text{。各}\ i\ \text{の大小は上の鎖}\bigr)
 \end{aligned}`),
       paragraph([
         "となる。右辺は ",
@@ -981,7 +991,7 @@ x^\top W x
         " の性質による。有理数の範囲では同じ主張は成り立たない。定義から",
       ]),
       displayMath(
-        String.raw`x^\top W x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}})`,
+        String.raw`x^\top W_{\mathbb{R}} x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}})`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1006,6 +1016,7 @@ x^\top W x
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
         "2026-11-06（同じ確認の続き）: |x^⊤Wx| ≤ ΣΣ|W_ij| の鎖の名前だけの根拠を直した。𝓡 の元 x^⊤Wx を |x^⊤Wx| で上から抑える行（real_number_is_at_most_its_absolute_value）を鎖の先頭に足し、「行列積の成分表示」を def_real_bilinear_value の参照に、「有限和の三角不等式と積の絶対値」と「|x_i| ≤ 1, |x_j| ≤ 1」を、項ごとの 6 行の鎖（real_abs_of_product を 2 回、|x_j| ≤ 1 と |x_i| ≤ 1 に非負の実数を掛ける行）、各 i の 2 行の鎖（finite_sum_of_real_numbers_triangle_inequality・finite_sum_of_real_numbers_is_monotone）、外側の和の 2 行（同じ 2 つの主張）に割った。上界 ΣΣ|W_ij| と主張は不変。",
+        "2026-11-06（同じ確認の続き）: 冒頭の「W は W_is_real_symmetric_positive_definite より実行列とみなせる」（同一視）を、W の成分がすべて実数であること（def_matrix_with_real_entries）と、新しく足した def_real_matrix_of_real_entry_matrix の写像 ϱ で定める W_ℝ := ϱ(W) ∈ Mat(2^{M_col},ℝ) に替え、𝓡・c(M_col)・上に有界であることの鎖・x^⊤Wx ≤ c‖x‖^2 の W を W_ℝ（成分 (W_ℝ)_{ij}）にした。値は変わらない。このブロックを引くほかのブロックの x^⊤Wx は、まだ W のまま書いてある。",
       ],
     },
   },
