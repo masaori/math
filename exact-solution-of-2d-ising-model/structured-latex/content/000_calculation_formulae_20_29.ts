@@ -1675,6 +1675,72 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_real_inclusion_preserves_finite_product",
+    kind: "claim",
+    title: { text: "実数の有限積の包含は包含の有限積に等しい" },
+    labels: ["real_inclusion_preserves_finite_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} (r_j)_{\mathbb{C}} = \Bigl(\prod_{j=1}^{m} r_j\Bigr)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、左辺の積は ",
+        ref("def_finite_product_of_complex_numbers"),
+        " の有限積、右辺の積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の有限積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} (r_j)_{\mathbb{C}}
+&= (r_1)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_complex_numbers}\bigr)\\
+&= \Bigl(\prod_{j=1}^{1} r_j\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} (r_j)_{\mathbb{C}}
+&= \Bigl(\prod_{j=1}^{m} (r_j)_{\mathbb{C}}\Bigr)\,(r_{m+1})_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_complex_numbers}\bigr)\\
+&= \Bigl(\prod_{j=1}^{m} r_j\Bigr)_{\mathbb{C}}\,(r_{m+1})_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定（}r_1,\dots,r_m\ \text{に当てる）}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{m} r_j\Bigr)\, r_{m+1}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \textstyle\prod_{j=1}^{m} r_j,\ b \to r_{m+1}\bigr)\bigr)\\
+&= \Bigl(\prod_{j=1}^{m+1} r_j\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup の x^{(+)} を実数のベクトルとして書き直すときに、その包含 ι(x^{(+)}) が複素数のベクトルのクロネッカー積 ι(a_+)⊠⋯⊠ι(a_+) に等しいことを成分の有限積で示すのに要るので足した（real_inclusion_preserves_finite_sum の積の版）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_finite_product_of_real_products",
     kind: "claim",
     title: { text: "実数の積の有限積は有限積の積" },

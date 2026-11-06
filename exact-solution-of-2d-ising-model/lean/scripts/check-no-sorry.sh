@@ -2393,6 +2393,10 @@ targets=(
   Ising2D.finite_product_of_real_products
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf
+  Ising2D.real_inclusion_preserves_finite_product
+  Ising2D.NecSuf.finProdLeft_map_of_mul
+  Ising2D.real_inclusion_preserves_finite_product_of_necSuf
+  Ising2D.complex_finset_prod_eq_finProdLeft
   Ising2D.CheckFermiSetup.two_cosh_half_step4
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul
