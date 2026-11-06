@@ -63975,6 +63975,56 @@ N_\gamma(n_{\mathrm v}(0,0))
                   },
                 },
               }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_cell_boundary_vertex_balance",
+                  focus: {
+                    id: "kac_ward_claim_cell_boundary_vertex_balance",
+                    kind: "claim",
+                    title: { text: "セル集合の境界鎖は各頂点で流入と流出が釣り合う" },
+                    labels: ["claim_cell_boundary_vertex_balance"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cell-boundary-vertex-balance"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellSetBoundary_vertex_balance",
+                      "Ising2DLambda.NecSuf.KacWard.closedFourEdgeBoundary_vertex_balance",
+                    ],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\ge1`), "、有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)^2`), "、頂点 ",
+                        math(String.raw`v\in V_L`), " に対し、境界鎖の標識付き辺の始点寄与と終点寄与は等しい。すなわち"]),
+                      displayMath(String.raw`\sum_{(i,j)\in S}\sum_{t=1}^{4}
+\left(\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}-\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}\right)=0\quad\text{in }\mathbb Z`),
+                      paragraph(["四辺列は ", ref("claim_cell_boundary_winding_zero"),
+                        "、境界鎖の重複を保つ和は ", ref("claim_finite_cell_set_boundary_winding_zero"),
+                        " による。辺長一でも四項の標識を残す。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`(i,j)\in S`), " を取る。",
+                        ref("claim_cell_boundary_winding_zero"), " の四辺列について、",
+                        ref("def_lattice"), " の端点写像と ", ref("def_oriented_edges"),
+                        " の反転の定義から、各項の終点は次項の始点に等しく、末項の終点は初項の始点に等しい。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{4}\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}
+&=\sum_{t=1}^{4}\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}
+&&\bigl(\because\ \blkref{def_lattice}\text{ と }\blkref{def_oriented_edges}\text{ による巡回接続と再添字}\bigr).
+\end{aligned}`),
+                      paragraph(["各セルの差が零なので、境界鎖について"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{(i,j)\in S}\sum_{t=1}^{4}
+\left(\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}-\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}\right)
+&=\sum_{(i,j)\in S}\left(\sum_{t=1}^{4}\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}
+-\sum_{t=1}^{4}\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}\right)
+&&\bigl(\because\ \mathbb Z\text{ の有限和の分配則}\bigr)\\
+&=\sum_{(i,j)\in S}0
+&&\bigl(\because\ \blkref{def_lattice}\text{ と }\blkref{def_oriented_edges}\text{ による巡回接続}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の有限和}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
                 role: "primary",
                 element: {
                   kind: "elementGroup",

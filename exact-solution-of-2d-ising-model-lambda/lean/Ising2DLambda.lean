@@ -1674,3 +1674,5 @@ import Ising2DLambda.NecSuf.KacWard.StandardDualHeight
 import Ising2DLambda.KacWard.StandardDualHeightFromNecSuf
 import Ising2DLambda.KacWard.ClosedWalkIncidenceParity
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkIncidenceParity
+import Ising2DLambda.KacWard.CellBoundaryVertexBalance
+import Ising2DLambda.NecSuf.KacWard.CellBoundaryVertexBalance
