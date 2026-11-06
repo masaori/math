@@ -493,7 +493,20 @@ export default defineBlocks([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         " のとき",
       ]),
-      displayMath(String.raw`Z(K_1, K_2) = \mathrm{tr}\!\left((V_1 V_2)^{N_{\mathrm{row}}}\right)`),
+      displayMath(String.raw`\bigl(Z(K_1, K_2)\bigr)_{\mathbb{C}} = \mathrm{tr}\!\left((V_1 V_2)^{N_{\mathrm{row}}}\right)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`Z(K_1,K_2) \in \mathbb{R}_{>0}`),
+        " で右辺は ",
+        math(String.raw`\mathbb{C}`),
+        " の元なので、左辺は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " で ",
+        math(String.raw`\mathbb{C}`),
+        " へ送って比べる。",
+      ]),
     ],
     proof: [
       paragraph([
@@ -817,12 +830,15 @@ s(i,M_{\mathrm{col}}+1)
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)
 &= \sum_{(\mu^{(1)},\dots,\mu^{(N_{\mathrm{row}})}) \in \mathfrak{M}^{N_{\mathrm{row}}}}
-   \exp\!\left(\sum_{\substack{k\in\{1,\dots,N_{\mathrm{row}}\}\\m\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)
-&&(\because\ \text{上で示したトレースの展開と、直前に示した積の表式}) \\
+   \Bigl(\exp\!\left(\sum_{\substack{k\in\{1,\dots,N_{\mathrm{row}}\}\\m\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)\Bigr)_{\mathbb{C}}
+&&(\because\ \text{上で示したトレースの展開と、直前に示した積の表式。}\ \mathbb{C}\ \text{の積を実数の積の包含へまとめるのは}\ \blkref{real_inclusion_preserves_product}\ \text{を因子ごとに}) \\
 &= \sum_{s \in \mathfrak{S}}
-   \exp\!\left(\sum_{\substack{i\in\{1,\dots,N_{\mathrm{row}}\}\\j\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,s(i,j)\,s(i,j+1) + K_2\,s(i,j)\,s(i+1,j)\bigr)\right)
+   \Bigl(\exp\!\left(\sum_{\substack{i\in\{1,\dots,N_{\mathrm{row}}\}\\j\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,s(i,j)\,s(i,j+1) + K_2\,s(i,j)\,s(i+1,j)\bigr)\right)\Bigr)_{\mathbb{C}}
 &&(\because\ \Phi\ \text{が全単射であることによる添え字の付け替えと}\ (\mathrm{P})) \\
-&= Z(K_1,K_2)
+&= \Bigl(\sum_{s \in \mathfrak{S}}
+   \exp\!\left(\sum_{\substack{i\in\{1,\dots,N_{\mathrm{row}}\}\\j\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,s(i,j)\,s(i,j+1) + K_2\,s(i,j)\,s(i+1,j)\bigr)\right)\Bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to 2^{M_{\mathrm{col}}N_{\mathrm{row}}}\text{、}\mathfrak{S}\ \text{の元を一つの並べ方で添字}\ 1,\dots,m\ \text{に並べ、両辺の和に同じ並べ方を使う})) \\
+&= \bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
 &&(\because\ \blkref{def_partition_function_2d_ising})
 \end{aligned}`,
       ),
@@ -846,6 +862,7 @@ s(i,M_{\mathrm{col}}+1)
           "格子の第 1 引数を行にしたため、旧版の最後の加法の交換律の段は不要になった。" +
           "周期規約の整合は、延長後の s について s(i,j+1)=μ^{(i)}(j+1), s(i+1,j)=μ^{(i+1)}(j) を端で確かめる形に直した。",
         "2026-09-26: 旧 <partition_function_in_pauli_form>（分配関数をパウリ行列表示の転送行列で書く主張）はこの主張と同一になったため削除し、参照をこの主張へ付け替えた。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張の左辺 Z(K_1,K_2) は def_partition_function_2d_ising で ℝ_{>0} の元、右辺のトレースは ℂ の元で、二つを等号で結んでいた。左辺を inclusion_rr_to_cc の (Z(K_1,K_2))_ℂ と書き、分配関数との一致の鎖の各項を (exp(…))_ℂ と書いて、最後に real_inclusion_preserves_finite_sum で包含を和の外へ出す行を足した（Lean の partition_function_via_transfer_matrix は元から ((Z : ℝ) : ℂ) = tr(…) の形である）。def_transfer_matrix が成分 exp(…) ∈ ℝ_{>0} を ℂ の元として書いていること（ℝ_{>0} ⊂ ℂ の包含の同一視）は、論文全体の実数の帰属の件として残っている。そのため、転送行列の積の成分と指数の積を指数の和へ書く二つの鎖は exp の値を ℂ の元として掛けており、成分を (exp(…))_ℂ と書いて real_inclusion_preserves_product で積の包含へまとめる段は、鎖の 1 行目の根拠に名前で挙げるだけになっている（Lean は ← Complex.ofReal_prod で書いている）。同一視を直すときに段として開く。𝔖 の上の和は本文に定義が無く（有限集合の添字の付け方の件）、1..m に並べて読む。",
       ],
     },
   },
@@ -3433,7 +3450,7 @@ V_2
         " のとき",
       ]),
       displayMath(
-        String.raw`Z(K_1, K_2) = \mathrm{tr}\!\left(\left(
+        String.raw`\bigl(Z(K_1, K_2)\bigr)_{\mathbb{C}} = \mathrm{tr}\!\left(\left(
   \exp\!\left(K_1 \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\right)
   (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\left(K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
 \right)^{N_{\mathrm{row}}}\right)`,
@@ -3443,7 +3460,11 @@ V_2
         math(String.raw`\exp`),
         " は、",
         ref("def_exp"),
-        " で成分級数として定めた行列の指数関数である。",
+        " で成分級数として定めた行列の指数関数、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
       ]),
     ],
     proof: [
@@ -3455,7 +3476,7 @@ V_2
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Z(K_1, K_2)
+\bigl(Z(K_1, K_2)\bigr)_{\mathbb{C}}
 &= \mathrm{tr}\!\left((V_1 V_2)^{N_{\mathrm{row}}}\right)
 &&(\because\ \blkref{partition_function_via_transfer_matrix}) \\
 &= \mathrm{tr}\!\left(\left(
@@ -3475,6 +3496,7 @@ Z(K_1, K_2)
       status: "added",
       notes: [
         "2026-10-31: 章立ての組み直しで、転送行列による表示の章のゴールの式を一つの主張として立てた。既存の三つの主張を代入するだけで、新しい証明は無い。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: partition_function_via_transfer_matrix の左辺を (Z(K_1,K_2))_ℂ と書き直したのに合わせ、主張と鎖の左辺を (Z(K_1,K_2))_ℂ にした。",
       ],
     },
   },

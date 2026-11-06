@@ -1446,7 +1446,7 @@ c_+(M_{\mathrm{col}})
         [
           ref("partition_function_via_transfer_matrix"),
           "：",
-          math(String.raw`Z = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
+          math(String.raw`Z_{\mathbb{C}} = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
         ],
         [
           ref("partition_function_sandwich"),

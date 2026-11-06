@@ -74,7 +74,7 @@
 | `Ising2D.open_product_pow` | `X, Y ∈ Mat(n, ℂ)` で `(X(YX)^k)Y = (XY)^{k+1}` | `Z_equals_trace_of_W` の準備 2（`k = 0` の 5 行と帰納段階の 6 行） |
 | `Ising2D.symmetrized_pow_succ` | `BB = V₁` のもとで `((BV₂)B)^{k+1} = ((B(V₂V₁)^k)V₂)B` | 同 準備 3（`k = 0` の 6 行と帰納段階の 12 行） |
 | **`Ising2D.trace_mul_pow_eq_trace_symmetrized_pow`** | 係数が `ℂ` の行列で、`n ≥ 1` なら `tr((V₁V₂)^n) = tr(((BV₂)B)^n)` | **`Z_equals_trace_of_W`** の本体（6 行） |
-| `Ising2D.partition_function_eq_trace_physicalSymTransferC`（`PhysicalPartitionFunctionSandwich.lean`） | 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W` は `physicalSymTransferC`） | 同「とくに」（2 行） |
+| `Ising2D.partition_function_eq_trace_physicalSymTransferC`（`PhysicalPartitionFunctionSandwich.lean`） | 具体的な `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`W` は `physicalSymTransferC`、`(·)_ℂ` は Lean の `((· : ℝ) : ℂ)`） | 同「とくに」（2 行） |
 | `Ising2D.trace_mul_pow_eq_trace_symTransfer_pow` / `partition_function_eq_trace_symTransfer_pow`（`ClaimZEqualsTraceOfWFromNecSuf.lean`） | 係数が `ℝ` の行列での同じ等式（必要十分版の特殊化）と、`Z = tr((V₁V₂)^N)` を仮定に取る「とくに」 | `partition_function_sandwich` が使う読み |
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR`（`PhysicalSymTransferBridge.lean`） | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
@@ -93,7 +93,7 @@
 | **`Ising2D.partition_function_sandwich`**（`ClaimPartitionFunctionSandwich.lean`） | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.trace_of_W_power_via_W_real` | `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`。4 行の鎖と 1 対 1） | `trace_of_W_power_via_W_real` |
-| `Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow` | 具体的な `Z(K_1,K_2)` は実行列 `(W_ℝ)^{N_row}` のトレース（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` と `trace_of_W_power_via_W_real` をつなぎ、`inclusion_rr_to_cc_is_injective` で実数へ戻す） | `Z_equals_trace_of_W` の「とくに」 |
+| `Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow` | 具体的な `Z(K_1,K_2)` は実行列 `(W_ℝ)^{N_row}` のトレース（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` と `trace_of_W_power_via_W_real` をつなぎ、`inclusion_rr_to_cc_is_injective` で実数へ戻す） | `partition_function_sandwich` の準備（`Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`） |
 | `Ising2D.sigmaZ_transpose` / `sigmaZ_nextSite_mul_comm` / `sigmaZ_mul_sigmaZ_nextSite_transpose` | `(σ^z_k)^⊤ = σ^z_k`（5 行）、`σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`、`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`（5 行。周期端を含む） | `W_is_real_symmetric_positive_definite` Step 1 |
 | `Ising2D.K1D_transpose_succ` / `sigmaZ_hasRealEntries` / `K1D_hasRealEntries_succ` | `(K₁D)^⊤ = K₁D`（5 行）、`σ^z_k`・`K₁D` の成分は実（2 段落） | 同 Step 1 |
 | `Ising2D.halfK1D_hasRealEntries` / `halfK1D_transpose` / `halfK1D_isRealSymmetric` | `½K₁D` の成分は実、`(½K₁D)^⊤ = ½K₁D`（3 行）、`½K₁D` は実対称 | 同 Step 2 |
@@ -215,7 +215,7 @@
 
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |
 | --- | --- | --- |
-| `Z(K_1,K_2) = tr((V₁V₂)^{N_row})` | `partition_function_via_transfer_matrix`（章 001。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ`。具体的な `Z` と `W` については `partition_function_sandwich_physical` が `Z = tr(W^{N_row})`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）を証明して使う |
+| `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（実成分の行列で読んだ形） | `partition_function_via_transfer_matrix`（章 001。人手は `(Z(K_1,K_2))_ℂ = tr(…)`。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ`（`Z : ℝ` と実成分の行列で、人手の ℂ 版の主張を実数で読んだもの）。具体的な `Z` と `W` については `partition_function_sandwich_physical` が人手の準備 `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）を証明して使う |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
 | `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `Ising2D.physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。具体的な `W` については `partition_function_sandwich_physical` が一般の `partition_function_sandwich` を経ず、人手どおり `W` の正定値性 `physicalSymTransferR_posDef`（`congruence_preserves_positive_definite` を `A = exp(S₂)` に使う）から `trace_power_sandwich` を引く |

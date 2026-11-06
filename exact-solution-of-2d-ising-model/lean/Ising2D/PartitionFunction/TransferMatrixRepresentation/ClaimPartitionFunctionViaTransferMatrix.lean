@@ -65,7 +65,9 @@ theorem rowsToLattice_apply {Nrow : ℕ} (w : Fin Nrow → Conf M) (p : Fin Nrow
   simp only [rowsToLattice, Equiv.trans_apply, Equiv.curry_symm_apply]
   exact coe_configBasisIso_symm_apply _ _
 
-/-- **人手 `partition_function_via_transfer_matrix`: `Z(K_1,K_2) = tr((V_1V_2)^{N_row})`。** -/
+/-- **人手 `partition_function_via_transfer_matrix`: `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})`。**
+人手の `r_ℂ`（`inclusion_rr_to_cc`）は Lean の `((· : ℝ) : ℂ)`。人手の分配関数との一致の鎖の最後の行
+（包含を和の外へ出す `real_inclusion_preserves_finite_sum`）は、下の `Complex.ofReal_sum` の書き換えに当たる。 -/
 theorem partition_function_via_transfer_matrix (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) = ((V1 M K1 * V2 M K2) ^ Nrow).trace := by
   obtain ⟨n, rfl⟩ : ∃ n, Nrow = n + 1 := ⟨Nrow - 1, by omega⟩

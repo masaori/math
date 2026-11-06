@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix`）
-- 範囲: `Z(K_1,K_2) = tr((V_1V_2)^{N_row})` と proof の全中間目標
+- 範囲: `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})` と proof の全中間目標
   （(R) 有限和の添字の付け替え・転送行列の積の成分・行列の冪の成分 (*)・トレースの展開・
   指数の積を指数の和へ・`𝔐^{N_row}` と `𝔖` の全単射と (P)・分配関数との一致）
 - 記号は本文どおり: 行数 `N_row`（`s(i,j)` の第 1 引数 `i` の周期）、列数 `M_col`（第 2 引数 `j` の周期）、

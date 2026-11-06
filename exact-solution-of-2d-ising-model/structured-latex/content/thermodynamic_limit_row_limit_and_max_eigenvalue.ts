@@ -30,7 +30,7 @@ export default defineBlocks([
       paragraph([
         ref("partition_function_via_transfer_matrix"),
         " により ",
-        math(String.raw`Z(K_1,K_2) = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
+        math(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}} = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
         " である。熱力学極限を取るには、この ",
         math(String.raw`N_{\mathrm{row}}`),
         " 乗のトレースを**最大固有値ひとつ**で挟み撃ちしたい。以下でそれを行う。",
@@ -38,8 +38,12 @@ export default defineBlocks([
       paragraph([
         "得られる評価は、",
         math(String.raw`W := V_1^{1/2}V_2V_1^{1/2}`),
-        "、",
-        math(String.raw`c(M_{\mathrm{col}}) := \sup\{\,x^{\top}Wx \mid x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1\,\}`),
+        "、その成分を実数として並べた行列 ",
+        math(String.raw`W_{\mathbb{R}}`),
+        "（",
+        ref("def_W_real"),
+        "）、",
+        math(String.raw`c(M_{\mathrm{col}}) := \sup\{\,x^{\top}W_{\mathbb{R}}x \mid x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1\,\}`),
         " として",
       ]),
       displayMath(
@@ -72,6 +76,7 @@ export default defineBlocks([
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-10-31: 章立ての組み直しで、N→∞ の極限と最大固有値 c(M) の章の冒頭へ移した。c_+(M) と ε の性質を述べる段落は 011 の案内文 maxeig_remark_overview_c_plus_and_epsilon に残し、N_row→∞ の極限（limit_of_log_Z_in_N_row）を述べる段落を足した。「この章」を「以下」に直した。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 冒頭の引用を (Z(K_1,K_2))_ℂ = tr(…)（partition_function_via_transfer_matrix の新しい形）に、c(M_col) の式を W_ℝ（def_W_real）の二次形式に直した。",
       ],
     },
   },
@@ -79,7 +84,7 @@ export default defineBlocks([
     id: "maxeig_002_claim_Z_equals_trace_of_W",
     kind: "claim",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 4 },
-    title: { tex: String.raw`Z = \mathrm{tr}(W^{N_{\mathrm{row}}})` },
+    title: { tex: String.raw`Z_{\mathbb{C}} = \mathrm{tr}(W^{N_{\mathrm{row}}})` },
     labels: ["Z_equals_trace_of_W"],
     statement: [
       paragraph([
@@ -91,8 +96,12 @@ export default defineBlocks([
       displayMath(String.raw`\mathrm{tr}\!\left((V_1V_2)^{n}\right) = \mathrm{tr}\!\left(W^{n}\right)`),
       paragraph([
         "が成り立つ。とくに ",
-        math(String.raw`Z(K_1,K_2) = \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)`),
-        "。",
+        math(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}} = \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)`),
+        "（",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
       ]),
     ],
     proof: [
@@ -286,7 +295,7 @@ W^{k+2}
       paragraph(["とくに ", math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`), " について"]),
       displayMath(
         String.raw`\begin{aligned}
-Z(K_1,K_2)
+\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
   &= \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)
   &&\bigl(\because\ \blkref{partition_function_via_transfer_matrix}\bigr)\\
   &= \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
@@ -298,6 +307,7 @@ Z(K_1,K_2)
       status: "added",
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: Z(K_1,K_2) ∈ ℝ_{>0} とトレース（ℂ の元）を等号で結んでいたので、表題・主張の「とくに」・その鎖の左辺を inclusion_rr_to_cc の (Z(K_1,K_2))_ℂ にした（partition_function_via_transfer_matrix の新しい形に合わせた）。",
         "2026-11-04: SageMath の検算（sagemath/check/Z_equals_trace_of_W/）を付けるにあたり、証明を (∵) 付きの鎖にした。散文の「結合法則で括り直す」「冪の定義」「n−1 個の積」を、冪の定義 <def_exp> (1) による二つの帰納法（準備 2: (X(YX)^k)Y = (XY)^{k+1}、準備 3: W^{k+1} = ((B(V_2V_1)^k)V_2)B）と <mat_mult_associative>・単位行列の左右の単位律の行に分けた。本体の鎖は元の証明と同じ順（V_1(V_2V_1)^{n−1}V_2 → BB を代入 → 巡回性 → W^n）で、内容は不変。",
       ],
     },
@@ -3498,34 +3508,107 @@ T
         ref("partition_function_via_transfer_matrix"),
         " と同じ設定のもと、",
         math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`),
-        " について",
+        " について、",
+        ref("def_partition_function_2d_ising"),
+        " の ",
+        math(String.raw`Z(K_1,K_2) \in \mathbb{R}_{>0}`),
+        "（行数 ",
+        math(String.raw`N_{\mathrm{row}}`),
+        " のもの）と ",
+        ref("def_rayleigh_sup"),
+        " の ",
+        math(String.raw`c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        " は",
       ]),
       displayMath(
         String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \ \leq\ Z(K_1,K_2)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{N_{\mathrm{row}}}`,
       ),
+      paragraph([
+        "を満たす。三つの量はいずれも ",
+        math(String.raw`\mathbb{R}`),
+        " の元で、不等号は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序である。冪 ",
+        math(String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}}`),
+        "・",
+        math(String.raw`2^{M_{\mathrm{col}}} \in \mathbb{R}_{>0}`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        ref("trace_power_sandwich"),
+        " がその場で定める ",
+        math(String.raw`t^0 := 1,\ t^{p+1} := t^pt`),
+        " と同じもの）である。",
+      ]),
     ],
     proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " を ",
+        ref("def_symmetrized_transfer_matrix"),
+        " の行列、",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列とし、",
+        math(String.raw`c := c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`T := \sum_{k=1}^{d}\bigl((W_{\mathbb{R}})^{N_{\mathrm{row}}}\bigr)_{kk} \in \mathbb{R}`),
+        "（",
+        math(String.raw`(W_{\mathbb{R}})^{N_{\mathrm{row}}}`),
+        " は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪、和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和）と略記する。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+      paragraph(["準備（", math(String.raw`Z(K_1,K_2) = T`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
+&=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
+  &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\ \text{の「とくに」}\bigr)\\
+&=T_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{trace_of_W_power_via_W_real}\ (q \to N_{\mathrm{row}})\bigr)
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to Z(K_1,K_2),\ b \to T`),
+        "）より ",
+        math(String.raw`Z(K_1,K_2) = T`),
+        " である。これを使って",
+      ]),
       displayMath(String.raw`\begin{aligned}
 Z(K_1,K_2)
-&=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
-  &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
-&\geq c(M_{\mathrm{col}})^{N_{\mathrm{row}}}
-  &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の下からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
+&=T
+  &&\bigl(\because\ \text{準備}\bigr)\\
+&\geq c^{N_{\mathrm{row}}}
+  &&\bigl(\because\ \blkref{trace_power_sandwich}\ (n \to N_{\mathrm{row}})\ \text{の左の不等式}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 Z(K_1,K_2)
-&=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
-  &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
-&\leq 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{N_{\mathrm{row}}}
-  &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の上からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
+&=T
+  &&\bigl(\because\ \text{準備}\bigr)\\
+&\leq 2^{M_{\mathrm{col}}}\,c^{N_{\mathrm{row}}}
+  &&\bigl(\because\ \blkref{trace_power_sandwich}\ (n \to N_{\mathrm{row}})\ \text{の右の不等式}\bigr)
 \end{aligned}`),
-      paragraph(["この二つを合わせて主張を得る。"]),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-05 の式変形統一で、一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開いた。内容と根拠は変えていない。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 旧い証明は Z(K_1,K_2) = tr(W^{N_row}) と書き、trace_power_sandwich の旧い主張 c^n ≤ tr(W^n) ≤ 2^{M_col}c^n（ℂ の元に順序を使っていた）を当てていた。trace_power_sandwich は T := Σ_k ((W_ℝ)^n)_kk ∈ ℝ について述べ直されたので、(Z(K_1,K_2))_ℂ = tr(W^{N_row}) = T_ℂ（Z_equals_trace_of_W の「とくに」と trace_of_W_power_via_W_real）と inclusion_rr_to_cc_is_injective で Z(K_1,K_2) = T を示し、T に新しい主張を当てる形にした。主張に Z(K_1,K_2)・c(M_col) の帰属と、不等号が ℝ の順序であることを書いた。値は変えていない。",
       ],
     },
   },
@@ -3731,12 +3814,16 @@ Z(K_1,K_2)
         math(String.raw`\mathbb{R}`),
         " に住むのは、",
         ref("def_exp"),
-        " の行列の指数関数の値であるため。指数評価による脱出）と、",
+        " の行列の指数関数の値であるため。指数評価による脱出）、その成分を実数として並べた ",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        "、",
         ref("def_rayleigh_sup"),
         " の",
       ]),
       displayMath(
-        String.raw`c(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \in \mathbb{R}_{>0}`,
+        String.raw`c(M_{\mathrm{col}}) = \sup\left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \in \mathbb{R}_{>0}`,
       ),
       paragraph([
         "（",
@@ -3783,6 +3870,7 @@ Z(K_1,K_2)
       status: "added",
       notes: [
         "2026-10-31: 章立ての組み直しで、N→∞ の極限と最大固有値 c(M) の章のゴールの式（W・c(M) の定義のもとでの c(M)^N ≤ Z ≤ 2^M c(M)^N と lim (1/(MN)) log Z = (1/M) log c(M)）を一つの主張として立てた。既存の主張 partition_function_sandwich・limit_of_log_Z_in_N_row を並べるだけで、新しい証明は無い。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: c(M_col) の式を、def_rayleigh_sup の定義どおり W_ℝ（def_W_real）の二次形式 x^⊤W_ℝx の上限に直した（旧い式は複素行列 W に実ベクトルを掛けていた）。",
       ],
     },
   },
