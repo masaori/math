@@ -688,7 +688,7 @@ theorem S1plus_isHermitian_of_real_symmetric (K1 : ℝ) (r : ℕ) :
 
 /-! ## 主張: `S_1^{(+)}`・`S_2` はエルミートで転置で不変（使う側が引く形）
 
-使う側（`ClaimVPlusPositiveDefinite.lean`・`ClaimVPlusRealEntries.lean`・`PhysicalPartitionFunctionSandwich.lean`）は、
+使う側（`ClaimVPlusPositiveDefinite.lean`・`ClaimVPlusRealEntries.lean`。`PhysicalPartitionFunctionSandwich.lean` は人手の範囲外の `M = 0` の補助で `S2_transpose` だけを引く）は、
 添字の個数を一般の `M` に、係数を `star K = K` を満たす `K : ℂ` に取って引く。次の 2 点で人手の主張と読み替える。
 
 - 係数: `star K = K` を満たす `K : ℂ` は `((K.re : ℝ) : ℂ) = K`（`Complex.conj_eq_iff_re`）なので、人手の `K ∈ ℝ` の `K_ℂ` として

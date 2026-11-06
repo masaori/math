@@ -86,11 +86,13 @@
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow` | 具体的な `Z(K_1,K_2)` は実行列 `W^{N_row}` のトレース（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` を実行列へ戻す） | `Z_equals_trace_of_W` の「とくに」 |
 | `Ising2D.sigmaZ_transpose` / `sigmaZ_nextSite_mul_comm` / `sigmaZ_mul_sigmaZ_nextSite_transpose` | `(σ^z_k)^⊤ = σ^z_k`（5 行）、`σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`、`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`（5 行。周期端を含む） | `W_is_real_symmetric_positive_definite` Step 1 |
-| `Ising2D.K1D_transpose_succ` / `sigmaZ_hasRealEntries` / `K1D_hasRealEntries_succ` / `halfK1D_transpose` | `(K₁D)^⊤ = K₁D`（5 行）、`σ^z_k`・`K₁D` の成分は実（2 段落）、`½K₁D` は転置不変（`K₁D` の転置から） | 同 Step 1 |
-| `Ising2D.physicalV1halfC_transpose` / `physicalV1halfR_isSymm` | 具体的な `V₁^{1/2} = exp(½K₁D)` は実対称 | 同 Step 2 |
+| `Ising2D.K1D_transpose_succ` / `sigmaZ_hasRealEntries` / `K1D_hasRealEntries_succ` | `(K₁D)^⊤ = K₁D`（5 行）、`σ^z_k`・`K₁D` の成分は実（2 段落） | 同 Step 1 |
+| `Ising2D.halfK1D_hasRealEntries` / `halfK1D_transpose` / `halfK1D_isRealSymmetric` | `½K₁D` の成分は実、`(½K₁D)^⊤ = ½K₁D`（3 行）、`½K₁D` は実対称 | 同 Step 2 |
+| `Ising2D.physicalV1halfC_isRealSymmetric` / `physicalV1halfC_transpose` / `physicalV1halfR_isSymm` | 具体的な `V₁^{1/2} = exp(½K₁D)` は実対称（`exp_of_real_symmetric_is_real_symmetric`、`A → ½K₁D`） | 同 Step 2 |
 | `Ising2D.K1D_hasRealEntries` / `K1D_transpose` / `K1D_isRealSymmetric` / `K1D_isHermitian` / `halfK1D_isHermitian` | `K₁D` は実対称でエルミート、`½K₁D` はエルミート | 同 Step 1・Step 2 |
 | `Ising2D.halfK1D_eq_half_smul_K1D` / `physicalV1halfC_eq_matExp_half` / `physicalV1halfInvC` / `expS2C` / `physicalV1halfC_posDef` / `expS2C_posDef` / `physicalV1halfInvC_mul_physicalV1halfC` / `physicalV1halfC_conjTranspose` | `B = exp(½K₁D)`・`A = exp(S₂)` は正定値、`B' = exp(-½K₁D)` は `B'B = I`、`B^* = B` | 同 Step 2・Step 3 |
-| `Ising2D.V2_transpose` / `physicalV2R_isSymm` | 具体的な `V₂ = (2s_2)^{M/2}exp(iK_2^*H_2)` は実対称 | 同 Step 2–3 |
+| `Ising2D.S2C_isRealSymmetric` / `expS2C_isRealSymmetric` | `S_2` は実対称（Step 1）、`A = exp(S_2)` は実対称（Step 2。`exp_of_real_symmetric_is_real_symmetric`、`A → S_2`） | 同 Step 1・Step 2 |
+| `Ising2D.V2_transpose` / `physicalV2R_isSymm` | 具体的な `V₂ = (2s_2)^{M/2}exp(iK_2^*H_2)` は実対称（`V₂ = (2s_2)^{M/2}A`、`transpose_of_matrix_scalar_multiple`、`A^⊤ = A` の 4 行。人手の鎖は状態台帳の (r2c3) で本文に書く） | 同 Step 3 |
 | `Ising2D.twoS2Pow` / `twoS2Pow_pos` / `physicalSymTransferC_eq_smul_congruence` / `physicalSymTransferC_posDef` | 具体的な `W = (2s_2)^{M/2}B^*AB`（Step 3 の 4 行の鎖）と、`congruence_preserves_positive_definite`・`positive_real_multiple_preserves_positive_definite` による `W` の正定値性 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 具体的な `W` は実対称（`symTransfer_isSymm`）・正定値（`physicalSymTransferC_posDef` を `realQuadForm_pos_of_map_posDef` で実ベクトルへ） | 同 Step 3 |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |

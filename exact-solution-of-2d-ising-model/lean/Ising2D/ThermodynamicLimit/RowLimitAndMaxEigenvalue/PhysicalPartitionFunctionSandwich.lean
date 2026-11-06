@@ -36,14 +36,20 @@
 | Step 1 の結論「`K_1D` は実対称」 | `K1D_isRealSymmetric` |
 | Step 2: `real_symmetric_matrix_is_hermitian`（`A → K_1D`）で `K_1D` はエルミート | `K1D_isHermitian` |
 | Step 2: `real_multiple_of_hermitian_is_hermitian`（`α → ½`, `A → K_1D`）で `½K_1D` はエルミート | `halfK1D_isHermitian`（`physicalV1halfC` の指数 `(K_1/2)_ℂD` を `½(K_1D)` へ書き直すのは `halfK1D_eq_half_smul_K1D`・`physicalV1halfC_eq_matExp_half`） |
-| Step 1・Step 2: `S_2` は実対称（`iH_is_real_symmetric` Step 1）で、`real_symmetric_matrix_is_hermitian`（`A → S_2`）でエルミート | `expS2C_posDef` の中の `S2_isHermitian`（`M ≥ 1` では人手の鎖の `S2_isHermitian_of_real_symmetric`、`M = 0` は人手の範囲外の補助で反可換性から） |
+| Step 1: `S_2` は実対称（人手は `iH_is_real_symmetric` の Step 1 を引くが、実対称性を示すのはその Step 3） | `S2C_isRealSymmetric`（`M ≥ 1` は `S2_hasRealEntries`・`S2_transpose_by_pauli_form`、`M = 0` は人手の範囲外の補助） |
+| Step 2: `real_symmetric_matrix_is_hermitian`（`A → S_2`）で `S_2` はエルミート | `expS2C_posDef` の中の `real_symmetric_isHermitian _ (S2C_isRealSymmetric K2)` |
 | Step 2: `exp_hermitian_is_positive_definite` で `B := exp(½K_1D)` と `A := exp(S_2)` は正定値 | `physicalV1halfC_posDef`、`expS2C_posDef` |
 | Step 2: `exp_of_negative_is_left_inverse` で `B' := exp(-½K_1D)` は `B'B = I` | `physicalV1halfInvC`、`physicalV1halfInvC_mul_physicalV1halfC` |
 | Step 3: `B` がエルミートなので `B^* = B` | `physicalV1halfC_conjTranspose` |
 | Step 3 の 4 行の鎖 `W = BV_2B = B((2s_2)^{M_col/2}A)B = (2s_2)^{M_col/2}BAB = (2s_2)^{M_col/2}B^*AB` | `physicalSymTransferC_eq_smul_congruence` の `calc` の 4 段（係数 `(2s_2)^{M_col/2}` は `twoS2Pow`） |
 | Step 3: `congruence_preserves_positive_definite`（Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite` で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
 | 正定値性を実ベクトルで読む（`partition_function_sandwich` が使う形） | `realQuadForm_pos_of_map_posDef`、`physicalSymTransferR_posDef` |
-| `½K_1D` は転置不変（人手に対応する行の無い補助。Step 2・Step 3 が使う `B^⊤ = B` の前提で、`½K_1D = ½(K_1D)`・`transpose_of_matrix_scalar_multiple`・`(K_1D)^⊤ = K_1D` から）、Step 2: `B = exp(½K_1D)` は転置不変、Step 2–3: `V_2^⊤ = V_2` | `halfK1D_transpose`、`physicalV1halfC_transpose`・`physicalV1halfR_isSymm`、`V2_transpose`・`physicalV2R_isSymm` |
+| Step 2: `½K_1D` の成分は実（Step 1 の `K_1D` の成分の実性と `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → ½`, `B → K_1D`）） | `halfK1D_hasRealEntries` |
+| Step 2: `(½K_1D)^⊤ = ½K_1D` の 3 行（`transpose_of_matrix_scalar_multiple`、Step 1 の `(K_1D)^⊤ = K_1D`、`½K_1D` の略記） | `halfK1D_transpose` の `calc` の 3 段（`transpose_smul_tensorPow`・`K1D_transpose`・`rfl`） |
+| Step 2: `½K_1D` は実対称（上の 2 つ） | `halfK1D_isRealSymmetric` |
+| Step 2: `exp_of_real_symmetric_is_real_symmetric`（`n → 2^{M_col}`, `A → ½K_1D` と `A → S_2`）で `B = exp(½K_1D)` と `A = exp(S_2)` は実対称 | `physicalV1halfC_isRealSymmetric`、`expS2C_isRealSymmetric` |
+| Step 3 が使う `B^⊤ = B`（Step 2 の `B` の実対称性の第 2 成分、`def_real_symmetric_complex_matrix`） | `physicalV1halfC_transpose`・`physicalV1halfR_isSymm` |
+| Step 3 が使う `V_2^⊤ = V_2`（`V_2 = (2s_2)^{M_col/2}A`、`transpose_of_matrix_scalar_multiple`、Step 2 の `A^⊤ = A`。人手のこの鎖は状態台帳の (r2c3) で本文に書く） | `V2_transpose` の `calc` の 4 段・`physicalV2R_isSymm` |
 | Step 3 の結論「`W = BV_2B` は実対称」（具体的な `B = V_1^{1/2}`, `V_2` について） | `physicalSymTransferR_isSymm` |
 | `partition_function_sandwich`（`Z = tr(W^{N_row})` → `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
@@ -52,13 +58,15 @@
   （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` は、添字が `Conf M` の行列なので
   `positive_real_multiple_preserves_positive_definite_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` で、人手の 13 行の鎖と
   1 対 1。`ClaimPositiveRealMultiplePreservesPositiveDefinite.lean`）を引く。
-- Step 1 の `transpose_of_matrix_product`・`transpose_of_matrix_scalar_multiple`・`transpose_of_finite_sum_of_matrices` は、添字が `Conf M` の行列なので、
+- Step 1 の `transpose_of_matrix_product`・`transpose_of_matrix_scalar_multiple`・`transpose_of_finite_sum_of_matrices`、Step 2 の `(½K_1D)^⊤` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
   `TensorPow M` の系 `transpose_mul_tensorPow`・`transpose_smul_tensorPow`・`finite_sum_transpose_tensorPow`（必要十分版を添字 `Conf M` へ特殊化したもの。
   具体版（添字 `Fin m`）と手順は同じ。`ClaimIHPauliForm.lean` の Step 3 の節と同じ扱い）を引く。
 - 人手の Step 1 は `M_col ≥ 1` で述べる。Lean の鎖は `M = n + 1` で述べ（`K1D_transpose_succ`・`K1D_hasRealEntries_succ`）、
   人手の範囲外の `M = 0` は、添字が空で `D` が零行列であることによる補助の場合分けで一般の `M` の形（`K1D_transpose`・`K1D_hasRealEntries`）へ広げる。
-- 実対称性の段のうち Step 2・Step 3（`physicalV1halfC_transpose`・`V2_transpose` と、実行列の `symTransfer_isSymm`）は、
-  人手の転置の 4 行の鎖と 1 対 1 でなく、mathlib の `Matrix.exp_transpose` に委ねている。可逆性（人手の `BB' = I` の鎖と
+- Step 2 の `exp_of_real_symmetric_is_real_symmetric` と Step 3 の `V_2^⊤ = V_2` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
+  `TensorPow M` で述べた具体版 `exp_of_real_symmetric_is_real_symmetric` と系 `transpose_smul_tensorPow` を引く。
+- Step 3 の `W^⊤ = W` の 4 行（実行列の `symTransfer_isSymm`）は、人手の「転置の積の法則 `(ABC)^⊤ = C^⊤B^⊤A^⊤`」が
+  `transpose_of_matrix_product` を 2 回と `mat_mult_associative` の段に書かれておらず、1 対 1 でない。可逆性（人手の `BB' = I` の鎖と
   `def_invertible_elements_of_R` (ii) の 2 回の適用）はまだ置いていない。どちらも状態台帳の次の単位で扱う。
 
 ## 仮定について
@@ -84,6 +92,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfRealSymmetricIsRealSymmetric
 
 namespace Ising2D
 
@@ -123,19 +132,6 @@ theorem partition_function_eq_trace_physicalSymTransferC (K1 K2 : ℝ) {Nrow : �
     _ = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
         trace_mul_pow_eq_trace_symmetrized_pow (physicalV1halfC_mul_self K1) rfl Nrow hN
                                                                 -- 本体を `n := N_row` に適用
-
-/-! ## `V_2` -/
-
-/-- **人手 Step 2–3**: `A = exp(S_2)` は転置不変（`S_2` が転置不変）なので `V_2 = (2s_2)^{M_col/2}A` も転置不変。 -/
-theorem V2_transpose {K2 : ℝ} (hK2 : 0 < K2) : (V2 M K2)ᵀ = V2 M K2 := by
-  rw [V2_exponential_representation hK2, V2H2Form, matExp, Matrix.transpose_smul,
-    ← Matrix.exp_transpose, S2_transpose]
-
-/-- `V_2` は実対称（実行列で）。 -/
-theorem physicalV2R_isSymm {K2 : ℝ} (hK2 : 0 < K2) : (physicalV2R M K2).IsSymm := by
-  apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
-  show (physicalV2R M K2)ᵀ.map Complex.ofRealHom = (physicalV2R M K2).map Complex.ofRealHom
-  rw [Matrix.transpose_map, ← physicalV2C_eq_map, V2_transpose hK2]
 
 /-! ## Step 1: `K_1D` は実対称
 
@@ -283,29 +279,50 @@ theorem halfK1D_eq_half_smul_K1D (K1 : ℝ) :
   push_cast
   ring
 
-/-- 人手に対応する行の無い補助（Step 2・Step 3 が使う `B^⊤ = B` の前提）: `½K_1D` は転置不変（`½K_1D = ½(K_1D)`（`halfK1D_eq_half_smul_K1D`）、`transpose_of_matrix_scalar_multiple`、`(K_1D)^⊤ = K_1D`）。 -/
+/-- 人手 `def_transfer_matrix_square_root` の `B = V_1^{1/2} = exp(½K_1D)` を、`½K_1D` の形で書いたもの。 -/
+theorem physicalV1halfC_eq_matExp_half (K1 : ℝ) :
+    physicalV1halfC M K1
+      = matExp (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))) := by
+  rw [physicalV1halfC, V1PauliForm, halfK1D_eq_half_smul_K1D]
+
+/-- 人手 Step 2: `½K_1D` の成分はすべて実数（Step 1 の `K_1D` の成分の実性と
+`real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → ½`, `B → K_1D`））。 -/
+theorem halfK1D_hasRealEntries (K1 : ℝ) :
+    MatrixHasRealEntries (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))) :=
+  real_smul_hasRealEntries (1 / 2) _ (K1D_hasRealEntries K1)
+
+/-- **人手 Step 2 の `(½K_1D)^⊤ = ½K_1D` の 3 行の鎖**。 -/
 theorem halfK1D_transpose (K1 : ℝ) :
-    ((((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))ᵀ
-      = (((K1 / 2 : ℝ) : ℂ)) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m) := by
-  rw [halfK1D_eq_half_smul_K1D, transpose_smul_tensorPow, K1D_transpose]
+    (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))ᵀ
+      = ((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) :=
+  calc (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)))ᵀ
+      = ((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))ᵀ :=
+        transpose_smul_tensorPow _ _                    -- `transpose_of_matrix_scalar_multiple`（必要十分版の `Conf M` への特殊化。主張の行数・列数 `m, n → 2^{M_col}`, `c → (½)_ℂ`, `A → K_1D`）
+    _ = ((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) := by
+        rw [K1D_transpose]                              -- Step 1 の `(K_1D)^⊤ = K_1D`
+    _ = ((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) := rfl   -- `½K_1D` の略記
 
-/-- 人手 Step 2: `B = exp(½K_1D)` は転置不変（転置不変な行列の指数関数は転置不変）。 -/
-theorem physicalV1halfC_transpose (K1 : ℝ) : (physicalV1halfC M K1)ᵀ = physicalV1halfC M K1 := by
-  rw [physicalV1halfC, V1PauliForm, matExp, ← Matrix.exp_transpose, halfK1D_transpose]
+/-- 人手 Step 2: `½K_1D` は実対称（成分の実性と転置の 3 行の鎖、`def_real_symmetric_complex_matrix`）。 -/
+theorem halfK1D_isRealSymmetric (K1 : ℝ) :
+    MatrixIsRealSymmetric (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))) :=
+  ⟨halfK1D_hasRealEntries K1, halfK1D_transpose K1⟩
 
-/-- 人手 Step 2: `V_1^{1/2}` は実対称（実行列で）。 -/
+/-- 人手 Step 2: `B = exp(½K_1D)` は実対称（`exp_of_real_symmetric_is_real_symmetric`、`n → 2^{M_col}`, `A → ½K_1D`）。 -/
+theorem physicalV1halfC_isRealSymmetric (K1 : ℝ) : MatrixIsRealSymmetric (physicalV1halfC M K1) := by
+  rw [physicalV1halfC_eq_matExp_half]
+  exact exp_of_real_symmetric_is_real_symmetric _ (halfK1D_isRealSymmetric K1)
+
+/-- 人手 Step 3 が使う `B^⊤ = B`（Step 2 の `B` の実対称性の第 2 成分、`def_real_symmetric_complex_matrix`）。 -/
+theorem physicalV1halfC_transpose (K1 : ℝ) : (physicalV1halfC M K1)ᵀ = physicalV1halfC M K1 :=
+  (physicalV1halfC_isRealSymmetric K1).2
+
+/-- `V_1^{1/2}` は実対称（実行列で）。 -/
 theorem physicalV1halfR_isSymm (K1 : ℝ) : (physicalV1halfR M K1).IsSymm := by
   apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
   show (physicalV1halfR M K1)ᵀ.map Complex.ofRealHom = (physicalV1halfR M K1).map Complex.ofRealHom
   rw [Matrix.transpose_map, ← physicalV1halfC_eq_map, physicalV1halfC_transpose]
 
 /-! ## Step 1・Step 2: `B = exp(½K_1D)` と `A = exp(S_2)` は正定値、`B' = exp(-½K_1D)` は `B'B = I` -/
-
-/-- 人手 `def_transfer_matrix_square_root` の `B = V_1^{1/2} = exp(½K_1D)` を、`½K_1D` の形で書いたもの。 -/
-theorem physicalV1halfC_eq_matExp_half (K1 : ℝ) :
-    physicalV1halfC M K1
-      = matExp (((1 / 2 : ℝ) : ℂ) • ((K1 : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m))) := by
-  rw [physicalV1halfC, V1PauliForm, halfK1D_eq_half_smul_K1D]
 
 /-- 人手 Step 2: `B = exp(½K_1D)` は正定値（`exp_hermitian_is_positive_definite`、`S → ½K_1D`）。 -/
 theorem physicalV1halfC_posDef (K1 : ℝ) : (physicalV1halfC M K1).PosDef := by
@@ -326,13 +343,25 @@ theorem physicalV1halfInvC_mul_physicalV1halfC (K1 : ℝ) :
   rw [physicalV1halfInvC, physicalV1halfC_eq_matExp_half]
   exact matExp_neg_mul_matExp_tensorPow _
 
+/-- 人手 Step 1 の「`S_2` も実対称」（人手は `iH_is_real_symmetric` の Step 1 を引くが、実対称性を示すのはその Step 3 である）。
+`M = r + 1` は `iH_is_real_symmetric` Step 3 の成分の実性 `S2_hasRealEntries` と転置の 5 行の鎖 `S2_transpose_by_pauli_form`。
+`M = 0` は人手の範囲外の補助で、反可換性によるエルミート性 `S2_isHermitian_by_anticommutation` と `S2_transpose` から
+`hermitian_and_transpose_invariant_matrix_is_real_symmetric` で埋める。 -/
+theorem S2C_isRealSymmetric (K2 : ℝ) :
+    MatrixIsRealSymmetric ((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M) := by
+  rcases M with _ | r
+  · exact hermitian_and_transpose_invariant_matrix_is_real_symmetric _
+      (S2_isHermitian_by_anticommutation (Complex.conj_ofReal _)) S2_transpose   -- 人手の主張の範囲外（`M_col = 0`）
+  · exact ⟨S2_hasRealEntries (Kstar K2) r, S2_transpose_by_pauli_form _ r⟩       -- `iH_is_real_symmetric` Step 3（`def_real_symmetric_complex_matrix`）
+
 /-- 人手 Step 2 の `A := exp(S_2)`（`S_2 = iK_2^*H_2`）。 -/
 noncomputable def expS2C (M : ℕ) (K2 : ℝ) : TensorPow M :=
   matExp ((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M)
 
-/-- 人手 Step 2: `A = exp(S_2)` は正定値（`S_2` はエルミート（`iH_is_real_symmetric`）なので `exp_hermitian_is_positive_definite`）。 -/
+/-- 人手 Step 2: `A = exp(S_2)` は正定値（Step 1 の `S_2` の実対称性と `real_symmetric_matrix_is_hermitian`（`n → 2^{M_col}`, `A → S_2`）で
+`S_2` はエルミート、`exp_hermitian_is_positive_definite`（`S → S_2`））。 -/
 theorem expS2C_posDef (K2 : ℝ) : (expS2C M K2).PosDef :=
-  posDef_exp_of_isHermitian (S2_isHermitian (Complex.conj_ofReal _))
+  posDef_exp_of_isHermitian (real_symmetric_isHermitian _ (S2C_isRealSymmetric K2))
 
 /-- 人手 Step 3 の係数 `(2s_2)^{M_col/2}`（`s_2 = sinh 2K_2`）。 -/
 noncomputable def twoS2Pow (M : ℕ) (K2 : ℝ) : ℝ := (2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2)
@@ -340,6 +369,31 @@ noncomputable def twoS2Pow (M : ℕ) (K2 : ℝ) : ℝ := (2 * Real.sinh (2 * K2)
 /-- 人手 Step 3: `K_2 > 0` なら `(2s_2)^{M_col/2} > 0`。 -/
 theorem twoS2Pow_pos {K2 : ℝ} (hK2 : 0 < K2) : 0 < twoS2Pow M K2 :=
   Real.rpow_pos_of_pos (by linarith [sinh_two_mul_pos hK2]) _
+
+/-! ## Step 2: `A = exp(S_2)` は実対称、Step 3 が使う `V_2^⊤ = V_2` -/
+
+/-- 人手 Step 2: `A = exp(S_2)` は実対称（`exp_of_real_symmetric_is_real_symmetric`、`n → 2^{M_col}`, `A → S_2`）。 -/
+theorem expS2C_isRealSymmetric (K2 : ℝ) : MatrixIsRealSymmetric (expS2C M K2) :=
+  exp_of_real_symmetric_is_real_symmetric _ (S2C_isRealSymmetric K2)
+
+/-- 人手 Step 3 が使う `V_2^⊤ = V_2` の 4 行の鎖（`V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）、
+`transpose_of_matrix_scalar_multiple`、Step 2 の `A^⊤ = A`）。人手の本文のこの鎖は状態台帳の (r2c3) で書く。 -/
+theorem V2_transpose {K2 : ℝ} (hK2 : 0 < K2) : (V2 M K2)ᵀ = V2 M K2 := by
+  have hV2 : V2 M K2 = ((twoS2Pow M K2 : ℝ) : ℂ) • expS2C M K2 := by
+    rw [V2_exponential_representation hK2]; rfl
+  calc (V2 M K2)ᵀ
+      = (((twoS2Pow M K2 : ℝ) : ℂ) • expS2C M K2)ᵀ := by rw [hV2]               -- `V_2 = (2s_2)^{M_col/2}A`
+    _ = ((twoS2Pow M K2 : ℝ) : ℂ) • (expS2C M K2)ᵀ :=
+        transpose_smul_tensorPow _ _                                            -- `transpose_of_matrix_scalar_multiple`（必要十分版の `Conf M` への特殊化。`c → ((2s_2)^{M_col/2})_ℂ`, `A → A`）
+    _ = ((twoS2Pow M K2 : ℝ) : ℂ) • expS2C M K2 := by
+        rw [(expS2C_isRealSymmetric K2).2]                                      -- Step 2 の `A^⊤ = A`（`def_real_symmetric_complex_matrix` の第 2 成分）
+    _ = V2 M K2 := hV2.symm                                                     -- `V_2 = (2s_2)^{M_col/2}A`
+
+/-- `V_2` は実対称（実行列で）。 -/
+theorem physicalV2R_isSymm {K2 : ℝ} (hK2 : 0 < K2) : (physicalV2R M K2).IsSymm := by
+  apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
+  show (physicalV2R M K2)ᵀ.map Complex.ofRealHom = (physicalV2R M K2).map Complex.ofRealHom
+  rw [Matrix.transpose_map, ← physicalV2C_eq_map, V2_transpose hK2]
 
 /-! ## 具体的な `W` は実対称 -/
 
