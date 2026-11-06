@@ -348,6 +348,7 @@ export const ALL_LABELS = [
   "finite_sum_of_nonnegative_reals_is_at_least_each_term",
   "finite_sum_of_real_differences",
   "finite_sum_of_real_entry_matrices_has_real_entries",
+  "finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing",
   "finite_sum_of_real_numbers_is_monotone",
   "finite_sum_of_real_numbers_moves_one_term_to_end",
   "finite_sum_of_real_numbers_triangle_inequality",

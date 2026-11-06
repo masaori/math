@@ -2383,6 +2383,107 @@ i
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing",
+    kind: "claim",
+    title: { text: "実数の有限和は添字の全単射による付け替えで変わらない" },
+    labels: ["finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m \in \mathbb{R}`),
+        "、",
+        math(String.raw`\pi : \{1,\dots,m\} \to \{1,\dots,m\}`),
+        " を全単射とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} a_{\pi(j)} = \sum_{j=1}^{m} a_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す（各 ",
+        math(String.raw`m`),
+        " で、すべての ",
+        math(String.raw`a_1,\dots,a_m \in \mathbb{R}`),
+        " と全単射 ",
+        math(String.raw`\pi : \{1,\dots,m\} \to \{1,\dots,m\}`),
+        " についての主張を示す）。",
+        math(String.raw`m = 1`),
+        " のとき、",
+        math(String.raw`\pi(1) \in \{1\}`),
+        " なので ",
+        math(String.raw`\pi(1) = 1`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} a_{\pi(j)}
+&= a_{\pi(1)}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= a_1
+&&\bigl(\because\ \pi(1) = 1\bigr)\\
+&= \sum_{j=1}^{1} a_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1} \in \mathbb{R}`),
+        " と全単射 ",
+        math(String.raw`\pi : \{1,\dots,m+1\} \to \{1,\dots,m+1\}`),
+        " を取る。",
+        math(String.raw`\pi`),
+        " は全射なので、",
+        math(String.raw`\pi(k) = m+1`),
+        " を満たす ",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " がある。",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        "、",
+        math(String.raw`\tau^{\pi}_{k} : \{1,\dots,m\} \to \{1,\dots,m\}`),
+        " は ",
+        ref("def_bijection_composed_with_index_skipping_map"),
+        " による。",
+        math(String.raw`j \in \{1,\dots,m+1\}`),
+        " について ",
+        math(String.raw`b_j := a_{\pi(j)}`),
+        " とおく（",
+        math(String.raw`b_j \in \mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} a_{\pi(j)}
+&= \sum_{j=1}^{m+1} b_j
+&&\bigl(\because\ b_j\ \text{の置き方}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}\Bigr) + b_k
+&&\bigl(\because\ \blkref{finite_sum_of_real_numbers_moves_one_term_to_end}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} a_{\pi(\delta^{m}_{k}(j))}\Bigr) + a_{\pi(k)}
+&&\bigl(\because\ b_j\ \text{の置き方}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} a_{\tau^{\pi}_{k}(j)}\Bigr) + a_{\pi(k)}
+&&\bigl(\because\ \blkref{def_bijection_composed_with_index_skipping_map}\ \text{を右辺から左辺へ各項へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} a_{\tau^{\pi}_{k}(j)}\Bigr) + a_{m+1}
+&&\bigl(\because\ \pi(k) = m+1\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}
+&&\bigl(\because\ \text{帰納法の仮定（}a_1,\dots,a_m\ \text{と、}\blkref{bijection_composed_with_index_skipping_map_is_bijective}\ \text{により全単射である}\ \tau^{\pi}_{k}\ \text{について）}\bigr)\\
+&= \sum_{j=1}^{m+1} a_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を ε_ℝ で書き直すときに ‖ε_ℝu‖ = ‖u‖ を示すのに、二乗の和の添字を π(k) := ord(-ord^{-1}(k)) で付け替えるので足した。Lean は Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumOfRealNumbersReindexedByBijection.lean）、必要十分版は Ising2D.NecSuf.finite_sum_reindex_bijective'（NecSuf/FiniteSumReindexedByBijection.lean）。数値検証: sagemath/check/finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_definition_real_absolute_value",
     kind: "definition",
     title: { text: "実数の絶対値" },

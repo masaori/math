@@ -879,6 +879,9 @@ targets=(
   Ising2D.NecSuf.compSkipIndex
   Ising2D.NecSuf.compSkipIndex_castSucc
   Ising2D.NecSuf.compSkipIndex_bijective
+  Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing
+  Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_of_necSuf
+  "Ising2D.NecSuf.finite_sum_reindex_bijective'"
   "Ising2D.NecSuf.finite_sum_subadditive_fin'"
   "Ising2D.NecSuf.finite_sum_le_fin'"
   Ising2D.nonnegative_real_order_from_squares_of_necSuf
