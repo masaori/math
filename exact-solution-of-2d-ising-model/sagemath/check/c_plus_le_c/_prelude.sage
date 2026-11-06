@@ -14,7 +14,7 @@
 #   epsilon := sigma^x_1 … sigma^x_M（def_global_spin_flip_matrix）
 #   W_R := varrho(W)（成分の包含が W の成分になる実数の行列。def_W_real）
 #   c(M)   := sup{ x^T W_R x | x in R^{2^M}, ||x|| = 1 }            （def_rayleigh_sup）
-#   c_+(M) := sup{ x^T W_R x | x in F^{(+)} ∩ R^{2^M}, ||x|| = 1 }  （def_sector_rayleigh_sup）
+#   c_+(M) := sup{ x^T W_R x | x in R^{2^M}, eps_R x = x, ||x|| = 1 }  （def_sector_rayleigh_sup。eps_R := varrho(epsilon)）
 #   x^T W_R x は def_real_bilinear_value の実数の値。下の W_matrix は RDF の実数の行列なので W_R そのもの。
 #
 #   帰属: K_1, K_2 in R_{>0} と exp の値は R（指数評価による R への脱出）。倍精度 RDF で計算する。
@@ -59,7 +59,7 @@ def W_matrix(M, K1, K2):
 
 
 def even_real_basis(M):
-    """F^{(+)} ∩ R^{2^M} の正規直交基底 (e_k + e_{k̄})/√2（k̄ は全スピン反転した配位の番号）を列に並べる。"""
+    """{x ∈ R^{2^M} | eps_R x = x} の正規直交基底 (e_k + e_{k̄})/√2（k̄ は全スピン反転した配位の番号）を列に並べる。"""
     d = 2 ** M
     cols = []
     for k in range(d):

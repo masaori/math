@@ -23,9 +23,15 @@ export default defineBlocks([
         ref("def_sector_rayleigh_sup"),
         " の ",
         math(String.raw`c_+(M_{\mathrm{col}})`),
-        " は ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルにわたる上限であり、",
+        " は、",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}}`),
+        " について ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " を満たす単位ベクトル ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " にわたる上限であり、",
         ref("symmetrized_transfer_matrix_on_sectors"),
         " の ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
@@ -121,8 +127,10 @@ export default defineBlocks([
         " の固有空間 ",
         math(String.raw`\mathcal{F}^{(+)}`),
         " について次を示す。",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルにわたる上限 ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " を満たす単位ベクトル ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " にわたる上限 ",
         math(String.raw`c_+(M_{\mathrm{col}})`),
         " を定め（",
         ref("def_sector_rayleigh_sup"),
@@ -756,25 +764,39 @@ w
     id: "maxeig_010a_definition_sector_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
-    title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（}\mathcal{F}^{(+)}\text{ での上限）}` },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（}\varepsilon_{\mathbb{R}}x = x\text{ を満たす単位ベクトルでの上限）}` },
     labels: ["def_sector_rayleigh_sup"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
         ref("def_W_real"),
         " の ",
         math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
         " と ",
-        ref("def_even_eigenvectors_of_epsilon"),
+        ref("def_epsilon_real"),
         " の ",
-        math(String.raw`\mathcal{F}^{(+)}`),
-        " について、",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について（",
+        math(String.raw`\varepsilon_{\mathbb{R}}x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        " の積）、",
       ]),
       displayMath(
-        String.raw`\mathcal{R}_+ := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R},
+        String.raw`\mathcal{R}_+ := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| = 1 \,\right\} \subseteq \mathbb{R},
 \qquad c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+`,
       ),
       paragraph([
         "とおく。",
+        ref("epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"),
+        " より、条件 ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " は ",
+        math(String.raw`\iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}`),
+        "（",
+        ref("def_even_eigenvectors_of_epsilon"),
+        "）と同値である。",
         math(String.raw`x^\top W_{\mathbb{R}} x \in \mathbb{R}`),
         " は ",
         ref("def_real_bilinear_value"),
@@ -786,9 +808,17 @@ w
         math(String.raw`\mathcal{R}`),
         " の元と同じ式である。この上限が定まること、すなわち ",
         math(String.raw`\mathcal{R}_+`),
-        " が空でなく上に有界であることを先に確かめる。上に有界なのは ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " より ",
+        " が空でなく上に有界であることを先に確かめる。上に有界なのは、",
+        math(String.raw`\mathcal{R}_+`),
+        " の元 ",
+        math(String.raw`x^\top W_{\mathbb{R}} x`),
+        " の ",
+        math(String.raw`x`),
+        " が ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "、",
+        math(String.raw`\|x\| = 1`),
+        " を満たすので ",
         math(String.raw`\mathcal{R}_+ \subseteq \mathcal{R}`),
         "（",
         ref("def_rayleigh_sup"),
@@ -801,68 +831,136 @@ w
         " で上に有界だからである（",
         ref("def_rayleigh_sup"),
         " の有界性の評価）。空でないことは、",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルを具体的に作れることから従う。",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " を満たす単位ベクトル ",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " を具体的に作れることから従う。",
       ]),
       paragraph([
+        math(String.raw`\iota^{n} := \iota^{n}_{\mathbb{R}\to\mathbb{C}}`),
+        "（",
+        ref("def_real_vector_inclusion"),
+        "）と略記する。",
         ref("pauli_matrix_products"),
         " の ",
         math(String.raw`\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix} \in \mathrm{Mat}(2,\mathbb{C})`),
         " について",
       ]),
       displayMath(
-        String.raw`a_+ := \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} \in \mathbb{R}^2,
+        String.raw`a_+ := \begin{pmatrix}\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}\end{pmatrix} \in \mathbb{R}^2,
 \qquad
-\sigma^x a_+ = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} = a_+`,
+b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
       ),
       paragraph([
-        "とおき（右の等式は ",
-        math(String.raw`2\times 2`),
-        " 行列と ",
-        math(String.raw`2`),
-        " 次元数ベクトルの積の計算そのもの）、",
-        ref("def_kronecker"),
-        " (1) の数ベクトルのクロネッカー積で",
-      ]),
-      displayMath(
-        String.raw`x^{(+)} := \overbrace{a_+ \boxtimes a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}}
-\quad \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`,
-      ),
-      paragraph([
-        "と定める（",
-        ref("def_kronecker"),
-        " (1) より成分は各因子の成分の積だから、",
-        math(String.raw`x^{(+)}`),
-        " の各成分は ",
-        math(String.raw`2^{-M_{\mathrm{col}}/2}`),
-        " という実数であり、とくに ",
-        math(String.raw`x^{(+)} \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        "）。",
-        ref("epsilon_square_and_eigenvalues"),
-        " の証明で得た ",
-        math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
-        " と ",
-        ref("kronecker_product_rule"),
-        " (3) より",
+        "とおく。",
+        ref("def_real_vector_inclusion"),
+        "（",
+        math(String.raw`n \to 2,\ x \to a_+`),
+        "）より ",
+        math(String.raw`(b_+)_1 = \bigl(\tfrac{1}{\sqrt{2}}\bigr)_{\mathbb{C}} = (b_+)_2`),
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,x^{(+)}
-&= \left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)\left(a_+\boxtimes\cdots\boxtimes a_+\right)
-   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示と}\ x^{(+)}\ \text{の定義}) \\
-&= \left(\sigma^xa_+\right)\boxtimes\cdots\boxtimes\left(\sigma^xa_+\right)
+\sigma^x b_+
+&= \begin{pmatrix}(b_+)_2 \\ (b_+)_1\end{pmatrix}
+   \quad (\because \blkref{mat_mult}\ \text{の行列と数ベクトルの積と}\ \sigma^x\ \text{の成分}) \\
+&= \begin{pmatrix}(b_+)_1 \\ (b_+)_2\end{pmatrix}
+   \quad (\because (b_+)_1 = (b_+)_2) \\
+&= b_+
+   \quad (\because \text{数ベクトルを成分で書いた})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("def_kronecker"),
+        " の添字集合 ",
+        math(String.raw`\mathcal{I}_{M_{\mathrm{col}}}`),
+        " と番号 ",
+        math(String.raw`\nu`),
+        " で、",
+        math(String.raw`x^{(+)} \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " を成分で",
+      ]),
+      displayMath(
+        String.raw`\left(x^{(+)}\right)_{\nu(I)} := \prod_{k=1}^{M_{\mathrm{col}}} (a_+)_{i_k}
+\qquad (I = (i_1,\dots,i_{M_{\mathrm{col}}}) \in \mathcal{I}_{M_{\mathrm{col}}})`,
+      ),
+      paragraph([
+        "と定める（右辺は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の実数の有限積。",
+        math(String.raw`\nu`),
+        " が全単射だから、これで ",
+        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " の元が 1 つ確定する）。",
+        math(String.raw`(a_+)_{i_k} = \frac{1}{\sqrt{2}}`),
+        " なので、",
+        math(String.raw`x^{(+)}`),
+        " の各成分は ",
+        math(String.raw`\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}} = 2^{-M_{\mathrm{col}}/2}`),
+        " である。各 ",
+        math(String.raw`I \in \mathcal{I}_{M_{\mathrm{col}}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right)\right)_{\nu(I)}
+&= \left(\left(x^{(+)}\right)_{\nu(I)}\right)_{\mathbb{C}}
+   \quad (\because \blkref{def_real_vector_inclusion}\ (n \to 2^{M_{\mathrm{col}}},\ x \to x^{(+)},\ i \to \nu(I))) \\
+&= \left(\prod_{k=1}^{M_{\mathrm{col}}} (a_+)_{i_k}\right)_{\mathbb{C}}
+   \quad (\because x^{(+)}\ \text{の定義}) \\
+&= \prod_{k=1}^{M_{\mathrm{col}}} \bigl((a_+)_{i_k}\bigr)_{\mathbb{C}}
+   \quad (\because \blkref{real_inclusion_preserves_finite_product}\ (m \to M_{\mathrm{col}},\ r_k \to (a_+)_{i_k})\ \text{を右辺から左辺へ}) \\
+&= \prod_{k=1}^{M_{\mathrm{col}}} (b_+)_{i_k}
+   \quad (\because \blkref{def_real_vector_inclusion}\ (n \to 2,\ x \to a_+)\ \text{を各因子へ同時に適用}) \\
+&= \left(b_+\boxtimes\cdots\boxtimes b_+\right)_{\nu(I)}
+   \quad (\because \blkref{def_kronecker}\ \text{(1)}\ (M \to M_{\mathrm{col}},\ v_k \to b_+)\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\nu`),
+        " は全単射だから ",
+        math(String.raw`\iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right) = b_+\boxtimes\cdots\boxtimes b_+`),
+        "（",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個）である。",
+        ref("epsilon_square_and_eigenvalues"),
+        " の証明で得た ",
+        math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        " を使って",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,\iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right)
+&= \left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)\iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right)
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}) \\
+&= \left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)\left(b_+\boxtimes\cdots\boxtimes b_+\right)
+   \quad (\because \iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right) = b_+\boxtimes\cdots\boxtimes b_+) \\
+&= \left(\sigma^xb_+\right)\boxtimes\cdots\boxtimes\left(\sigma^xb_+\right)
    \quad (\because \blkref{kronecker_product_rule}\ \text{(3)}) \\
-&= a_+\boxtimes\cdots\boxtimes a_+
-   \quad (\because \sigma^x a_+ = a_+\ \text{を各因子へ同時に適用}) \\
-&= x^{(+)}
-   \quad (\because x^{(+)}\ \text{の定義})
+&= b_+\boxtimes\cdots\boxtimes b_+
+   \quad (\because \sigma^x b_+ = b_+\ \text{を各因子へ同時に適用}) \\
+&= \iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right)
+   \quad (\because \iota^{2^{M_{\mathrm{col}}}}\!\left(x^{(+)}\right) = b_+\boxtimes\cdots\boxtimes b_+\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
         "である。よって ",
         ref("def_even_eigenvectors_of_epsilon"),
-        " より ",
-        math(String.raw`x^{(+)} \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "（",
+        math(String.raw`f \to \iota^{2^{M_{\mathrm{col}}}}(x^{(+)})`),
+        "）より ",
+        math(String.raw`\iota^{2^{M_{\mathrm{col}}}}(x^{(+)}) \in \mathcal{F}^{(+)}`),
+        " であり、",
+        ref("epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"),
+        "（",
+        math(String.raw`x \to x^{(+)}`),
+        "、",
+        math(String.raw`(\Leftarrow)`),
+        "）より ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x^{(+)} = x^{(+)}`),
         " である。さらに ",
         math(String.raw`x^{(+)}`),
         " の ",
@@ -906,6 +1004,7 @@ w
         "2026-09-05 の分割で、上限のセクター分解のブロックから、セクターごとの上限の定義とその整合性（値の集合が空でなく上に有界であること）を独立させた。式変形と根拠は分割前と同じである。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。ε のクロネッカー積表示の参照先を <epsilon_square_and_eigenvalues> の証明に直し（旧参照 <def_eigenspaces_of_epsilon> にはこの表示が無い）、ε x^{(+)} = x^{(+)} とノルムの計算を一行一等号の鎖に開いた。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の値 x^⊤Wx は複素行列 W の二次形式で、def_rayleigh_sup の 𝓡（W_ℝ の実数の二次形式 def_real_bilinear_value）と式が違い、𝓡_+ ⊆ 𝓡 も c_+(M_col) が実数の上限であることも型が合っていなかった。𝓡_+ の値を def_W_real の W_ℝ の x^⊤W_ℝx（def_real_bilinear_value）にし、有界性の評価の和を Σ_iΣ_j|(W_ℝ)_ij| に、空でないことの元を (x^{(+)})^⊤W_ℝx^{(+)} にした。値は不変（W_ℝ の成分の包含が W の成分）。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の条件 x ∈ 𝓕^{(+)} ∩ ℝ^{2^{M_col}} は実数のベクトルを複素数のベクトルの集合 𝓕^{(+)} の元とみなす同一視だったので、def_epsilon_real の ε_ℝ で x ∈ ℝ^{2^{M_col}}、ε_ℝx = x と述べ直した（epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ι(x) ∈ 𝓕^{(+)} と同値）。a_+ を ℝ^2 の元、x^{(+)} を成分 Π_k (a_+)_{i_k}（実数の有限積）で定め、def_kronecker (1) が複素数のベクトルのクロネッカー積だけを定めるので、b_+ := ι^2(a_+) を置いて ι(x^{(+)}) = b_+⊠⋯⊠b_+ を成分の 5 行の鎖（real_inclusion_preserves_finite_product を引く）で示し、ει(x^{(+)}) = ι(x^{(+)}) の鎖を b_+ で書き、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ε_ℝx^{(+)} = x^{(+)} へ戻した。σ^x b_+ = b_+ を 3 行の鎖に開いた。M_col ∈ ℤ_{≥1} を明記した。ノルムの鎖と上限の存在は不変。",
       ],
     },
   },
@@ -936,7 +1035,9 @@ w
         " の ",
         math(String.raw`\mathcal{R}_+`),
         " の元は、",
-        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "、",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
         "、",
         math(String.raw`\|x\| = 1`),
         " を満たす ",
@@ -947,15 +1048,13 @@ w
         math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ y \to x`),
         "）の値 ",
         math(String.raw`x^\top W_{\mathbb{R}} x`),
-        " である。",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " なので、この ",
+        " である。この ",
         math(String.raw`x`),
         " は ",
         math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "、",
         math(String.raw`\|x\| = 1`),
-        " を満たし、同じ値 ",
+        " を満たすので、同じ値 ",
         math(String.raw`x^\top W_{\mathbb{R}} x`),
         " は ",
         ref("def_rayleigh_sup"),
@@ -990,6 +1089,7 @@ c_+(M_{\mathrm{col}})
       notes: [
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。最大値分解 c(M_col) = max(c_+(M_col), c_-(M_col)) のうち、最終定理が使う片側の不等式 c_+(M_col) ≤ c(M_col) だけを独立した主張として立てた（証明は最大値分解の証明の該当部分と同じ）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ を W_ℝ の実数の二次形式にしたのに合わせ、𝓡_+ ⊆ 𝓡 を「単位ベクトルどうしの包含」から「𝓡_+ の元 x^⊤W_ℝx が同じ式で 𝓡 の元である」と値の包含で述べ直した。主張は不変。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ の条件を x ∈ ℝ^{2^{M_col}}、ε_ℝx = x に述べ直したのに合わせ、𝓡_+ の元の x の条件を書き直した。主張と論法は不変。",
       ],
     },
   },
@@ -2591,7 +2691,7 @@ x^*\check{Q}_\epsilon x
       ]),
       displayMath(
         String.raw`c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\
-x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\}`,
+x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| = 1 \,\right\}`,
       ),
       paragraph([
         "と ",
@@ -2658,13 +2758,27 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\righ
         ref("def_real_bilinear_value"),
         " の ",
         math(String.raw`x^\top W_{\mathbb{R}}x \in \mathbb{R}`),
-        " と、",
-        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{n}`),
-        " を「",
-        math(String.raw`x \in \mathbb{R}^{n}`),
-        " かつ ",
+        " と読む。",
+        ref("def_sector_rayleigh_sup"),
+        " の条件 ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        "（",
+        ref("def_epsilon_real"),
+        "）は、",
+        ref("epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"),
+        " より ",
         math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
-        "」と読む。",
+        " と同値である（上の ",
+        math(String.raw`\iota^{n}`),
+        " は ",
+        ref("def_real_vector_inclusion"),
+        " の ",
+        math(String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}`),
+        " と同じ写像である）。以下、",
+        math(String.raw`\mathcal{R}_+`),
+        " の条件はこの同値で ",
+        math(String.raw`\iota^{n}(x) \in \mathcal{F}^{(+)}`),
+        " と読み替えて使う。",
       ]),
       paragraph([
         "準備 2（実の二次形式と複素の二次形式の橋）。",
@@ -3340,6 +3454,7 @@ c_+(M_{\mathrm{col}})
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した。証明の式の根拠欄でラベルを文字として書いていた箇所（check_joint_eigenspace_decomposition・eigenvalues_of_V_plus・check_number_operator_is_hermitian）を、ブロックへの参照に直した。数学の中身は変えていない。",
         "2026-11-05: SageMath の検算（sagemath/check/c_plus_equals_Lambda_half_integer/）を付けるにあたり、主張は変えずに証明を書き直した。旧い証明は ℝ の値 x^⊤Wx と ℂ の値 x^*V^{(+)}x を「x^⊤ = x^*」で等号に結んでいた（def_real_bilinear_value・def_conjugate_bilinear_value はどちらも数ベクトルと行列の積としては読まない記号）。ℝ^n → ℂ^n の包含 ι^n と W の実成分の行列 W_ℝ に名前を付け、(x^⊤W_ℝx)_ℂ = ι^n(x)^*Wι^n(x) の鎖を準備に置き、Step 1・Step 3 を ℂ の鎖と (·)_ℂ の単射性で ℝ へ戻す形にした。Step 1 の一行で三つの操作をしていた行を分け、Step 0 の P^{(+)}x の行を分けた。Step 2 の V^{(+)} の成分が実であることを散文（W_is_real_symmetric_positive_definite の Step 2 と同じ議論）で示していた段を、既にある主張 W_is_real_symmetric_positive_definite（W の成分は実）と epsilon_is_real_symmetric（ε の成分は実）と Step 0 から conj(q) が同じ固有空間に入ることを示す成分の鎖に替えた（V^{(+)} の成分が実であることは使わない）。p・p' の段を成分の鎖にし、複素共役で動かない複素数が (a)_ℂ であることを def_complex_conjugate から書いた。最後に c_+ から閉形式までの鎖を置き、θ^{(1/2)}_{M,μ} = θ̃_μ を書いた。計算の誤りは無かった。",
         "数値検証の場所: 上の 053_claim_even_sector_closing/check_04 に加え、証明の行と対応する検算は sagemath/check/c_plus_equals_Lambda_half_integer/ にある。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ の条件を x ∈ ℝ^{2^{M_col}}、ε_ℝx = x に述べ直したのに合わせ、主張の集合の条件を同じ形にし、準備 1 の「x ∈ 𝓕^{(+)} ∩ ℝ^n を ι^n(x) ∈ 𝓕^{(+)} と読む」を、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors による同値の読み替えにした。x^⊤Wx を W_ℝ で書き直すこと、準備 1 の ι^n を def_real_vector_inclusion への参照に替えることは残っている。",
       ],
     },
   },
@@ -3881,7 +3996,7 @@ v^\top Wv
       ]),
       list([
         [
-          math(String.raw`\text{(1)}\quad c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
+          math(String.raw`\text{(1)}\quad c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \varepsilon_{\mathbb{R}}x = x,\ \|x\| = 1 \,\right\} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         ],
         [
           math(String.raw`\text{(2)}\quad \Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
@@ -3921,6 +4036,7 @@ v^\top Wv
       status: "added",
       notes: [
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章のゴールの式（c_+(M) = Λ^{(1/2)}_M、Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M、2 重極限の閉形式）を一つの主張として立てた。既存の主張 c_plus_equals_Lambda_half_integer・c_between_Lambda_half_and_twice_Lambda_half・onsager_exact_solution を並べるだけで、新しい証明は無い。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ の条件を x ∈ ℝ^{2^{M_col}}、ε_ℝx = x に述べ直したのに合わせ、(1) の集合の条件を同じ形にした。",
       ],
     },
   },

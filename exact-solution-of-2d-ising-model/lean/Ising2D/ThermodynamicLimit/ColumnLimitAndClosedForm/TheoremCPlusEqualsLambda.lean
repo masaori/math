@@ -150,7 +150,7 @@ theorem quad_Vr_eq_sum (x : Conf M → ℝ) :
     rw [dotProduct_smul, smul_eq_mul, quad_Qproj x T, Complex.ofReal_mul]
   exact_mod_cast hC
 
-/-- **人手証明 Step 1**: `x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}`, `‖x‖ = 1` なら `x^T W x ≤ Λ̌_max`。 -/
+/-- **人手証明 Step 1**: `x ∈ ℝ^{2^M}`, `ε_ℝx = x`, `‖x‖ = 1` なら `x^T W x ≤ Λ̌_max`。 -/
 theorem quad_le_lamMax {x : Conf M → ℝ} (hx : epsilonR M *ᵥ x = x) (hn : vecNormSq x = 1) :
     x ⬝ᵥ B.W *ᵥ x ≤ D.lamMax := by
   rw [B.hWV x hx, B.quad_Vr_eq_sum x]

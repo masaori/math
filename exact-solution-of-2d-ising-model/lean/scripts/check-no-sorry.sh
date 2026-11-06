@@ -753,7 +753,12 @@ targets=(
   Ising2D.epsilon_eq_ofReal_epsilonR
   Ising2D.evenSectorSet_bddAbove
   Ising2D.le_evenSectorRayleighSup
+  Ising2D.pauliX_mulVec_cvec_aPlus
+  Ising2D.evenUnit_apply
+  Ising2D.cvec_evenUnit
+  Ising2D.epsilon_mulVec_cvec_evenUnit
   Ising2D.epsilonR_mulVec_evenUnit
+  Ising2D.epsilonR_zero_mulVec_evenUnit
   Ising2D.vecNormSq_evenUnit
   Ising2D.evenSectorSet_epsilonR_nonempty
   Ising2D.c_plus_le_c
