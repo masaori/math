@@ -6303,7 +6303,7 @@ A - B
 &= \sum_{k=1}^{p} \sum_{j=1}^{n} P_{ij}\,(Q_{jk}\,x_k)
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ np\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} \sum_{k=1}^{p} P_{ij}\,(Q_{jk}\,x_k)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則・交換則による有限和の順序の入れ替え}\bigr)\\
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to p,\ n_2 \to n,\ c_{k,l} \to P_{il}\,(Q_{lk}\,x_k))\bigr)\\
 &= \sum_{j=1}^{n} P_{ij} \Bigl(\sum_{k=1}^{p} Q_{jk}\,x_k\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to p,\ c \to P_{ij},\ (x_1,\dots,x_p) \to (Q_{j1}x_1,\dots,Q_{jp}x_p))\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} P_{ij}\,(Qx)_j
@@ -6323,7 +6323,7 @@ A - B
     conversion: {
       status: "added",
       notes: [
-        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm の帰納法の段 ((W_ℝ)^kW_ℝ)x = (W_ℝ)^k(W_ℝx) が、係数が ℂ の行列の積の結合律 mat_mult_associative（数ベクトルを n 行 1 列の行列とみなす）を実数の行列とベクトルへ当てていたので、def_real_matrix_product と def_real_matrix_vector_product の積について足した。有限和の順序の入れ替えは、mat_mult_associative・finite_double_sum_of_matrices_interchange の ℂ の段と同じく、加法の結合則・交換則の名前で引く（実数の二重和の順序の入れ替えを述べるブロックは本文に無い）。数値検証: sagemath/check/real_matrix_vector_product_is_associative/。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm の帰納法の段 ((W_ℝ)^kW_ℝ)x = (W_ℝ)^k(W_ℝx) が、係数が ℂ の行列の積の結合律 mat_mult_associative（数ベクトルを n 行 1 列の行列とみなす）を実数の行列とベクトルへ当てていたので、def_real_matrix_product と def_real_matrix_vector_product の積について足した。有限和の順序の入れ替えは finite_double_sum_of_real_numbers_interchange を引く（2026-11-06 に足した主張）。数値検証: sagemath/check/real_matrix_vector_product_is_associative/。",
       ],
     },
   },

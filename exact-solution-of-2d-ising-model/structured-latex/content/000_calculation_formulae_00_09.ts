@@ -1501,6 +1501,81 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_finite_double_sum_of_real_numbers_interchange",
+    kind: "claim",
+    title: { text: "実数の二重の有限和は和の順序を入れ替えても等しい" },
+    labels: ["finite_double_sum_of_real_numbers_interchange"],
+    statement: [
+      paragraph([
+        math(String.raw`n_1, n_2 \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`k \in \{1,\dots,n_1\}`),
+        "、",
+        math(String.raw`l \in \{1,\dots,n_2\}`),
+        " について ",
+        math(String.raw`c_{k,l} \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による（内側の和 ",
+        math(String.raw`\sum_{l=1}^{n_2} c_{k,l}`),
+        "・",
+        math(String.raw`\sum_{k=1}^{n_1} c_{k,l}`),
+        " も ",
+        math(String.raw`\mathbb{R}`),
+        " の元で、外側の和はその有限和である）。このとき",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n_1}\sum_{l=1}^{n_2} c_{k,l} = \sum_{l=1}^{n_2}\sum_{k=1}^{n_1} c_{k,l}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n_1`),
+        " についての帰納法で示す（",
+        math(String.raw`n_2`),
+        " は固定する）。",
+        math(String.raw`n_1 = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{1}\sum_{l=1}^{n_2} c_{k,l}
+&= \sum_{l=1}^{n_2} c_{1,l}
+&&\Bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \Bigl(r_j \to \sum_{l=1}^{n_2} c_{j,l}\Bigr)\Bigr)\\
+&= \sum_{l=1}^{n_2}\sum_{k=1}^{1} c_{k,l}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to c_{j,l})\ \text{を右辺から左辺へ、各}\ l\ \text{の項へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n_1`),
+        " で成り立つと仮定し、",
+        math(String.raw`k \in \{1,\dots,n_1+1\}`),
+        "、",
+        math(String.raw`l \in \{1,\dots,n_2\}`),
+        " について ",
+        math(String.raw`c_{k,l} \in \mathbb{R}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n_1+1}\sum_{l=1}^{n_2} c_{k,l}
+&= \Bigl(\sum_{k=1}^{n_1}\sum_{l=1}^{n_2} c_{k,l}\Bigr) + \sum_{l=1}^{n_2} c_{n_1+1,l}
+&&\Bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \Bigl(m \to n_1,\ r_j \to \sum_{l=1}^{n_2} c_{j,l}\Bigr)\Bigr)\\
+&= \Bigl(\sum_{l=1}^{n_2}\sum_{k=1}^{n_1} c_{k,l}\Bigr) + \sum_{l=1}^{n_2} c_{n_1+1,l}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{l=1}^{n_2}\Bigl(\Bigl(\sum_{k=1}^{n_1} c_{k,l}\Bigr) + c_{n_1+1,l}\Bigr)
+&&\Bigl(\because\ \blkref{finite_sum_of_real_sums}\ \Bigl(m \to n_2,\ a_j \to \sum_{k=1}^{n_1} c_{k,j},\ b_j \to c_{n_1+1,j}\Bigr)\ \text{を右辺から左辺へ}\Bigr)\\
+&= \sum_{l=1}^{n_2}\sum_{k=1}^{n_1+1} c_{k,l}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (m \to n_1,\ r_j \to c_{j,l})\ \text{を右辺から左辺へ、各}\ l\ \text{の項へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。psd_cauchy_schwarz の準備の鎖が実数の二重の有限和の順序を「ℝ の加法の結合則・可換則による有限和の順序の入れ替え」と名前だけで入れ替えていたので、その段を引けるよう足した。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すときの双線型値の対称性の段も同じ入れ替えを使う。外側の和の項の数 n_1 についての帰納法で、帰納法の段は finite_sum_of_real_sums を引く。数値検証: sagemath/check/finite_double_sum_of_real_numbers_interchange/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_negated_real_numbers",
     kind: "claim",
     title: { text: "実数の符号反転の有限和は有限和の符号反転" },

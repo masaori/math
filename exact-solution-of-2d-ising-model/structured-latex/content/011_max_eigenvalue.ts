@@ -246,7 +246,7 @@ u^\top Pv
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,P_{lk}\,u_k
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則・可換則}\bigr)\\
 &=\sum_{l=1}^{n}\sum_{k=1}^{n} v_l\,P_{lk}\,u_k
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則・可換則による有限和の順序の入れ替え}\bigr)\\
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to v_l\,P_{lk}\,u_k)\bigr)\\
 &=v^\top Pu
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)
 \end{aligned}`),

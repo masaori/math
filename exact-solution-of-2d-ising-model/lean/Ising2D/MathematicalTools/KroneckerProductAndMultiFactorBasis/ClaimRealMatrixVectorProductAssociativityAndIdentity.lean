@@ -22,7 +22,7 @@
   （成分は `dotProduct` で、人手の式と `rfl`）・`1`（成分は `Matrix.one_apply_eq`・`Matrix.one_apply_ne`）である。
 - 人手の `m, n, p ∈ ℤ_{≥1}` と成分の番号は、Lean の添字の型の元である。Lean の主張は添字の型が空でも成り立つので、`Nonempty` を置かない。
 - 結合則の 4 行目・8 行目の `finite_sum_of_real_scalar_multiples` は、有限型の添字の版 `finite_sum_of_real_scalar_multiples_fintype` を引く。
-  7 行目の「有限和の順序の入れ替え」は、人手が名前だけで引く段で具体版が無いので、mathlib の `Finset.sum_comm` を引く。
+  7 行目の `finite_double_sum_of_real_numbers_interchange` は、有限型の添字の版 `finite_double_sum_of_real_numbers_interchange_fintype` を引く。
   乗法の交換則・結合則は `mul_comm`・`mul_assoc` である。
 - 左単位の 5 行目の `finite_sum_with_single_nonzero_term` は具体版が無いので、既存の慣行どおり mathlib の `Finset.sum_eq_single` を引く
   （仮定の「`j ≠ i` のとき `0_ℂ`」は `hoff` で人手どおりに示す）。3 行目の `real_inclusion_preserves_finite_sum` は
@@ -61,7 +61,9 @@ theorem real_matrix_vector_product_is_associative {α β γ : Type*} [Fintype β
     _ = ∑ k, ∑ j, P i j * (Q j k * x k) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
           mul_assoc _ _ _                                                     -- ℝ の乗法の結合則を `np` 個の項へ
-    _ = ∑ j, ∑ k, P i j * (Q j k * x k) := Finset.sum_comm                   -- 有限和の順序の入れ替え
+    _ = ∑ j, ∑ k, P i j * (Q j k * x k) :=
+        finite_double_sum_of_real_numbers_interchange_fintype (fun k j => P i j * (Q j k * x k))
+                                                                              -- `finite_double_sum_of_real_numbers_interchange`（`n_1 → p`、`n_2 → n`、`c_{k,l} → P_il(Q_lk x_k)`）
     _ = ∑ j, P i j * ∑ k, Q j k * x k :=
         Finset.sum_congr rfl fun j _ =>
           finite_sum_of_real_scalar_multiples_fintype (P i j) (fun k => Q j k * x k)

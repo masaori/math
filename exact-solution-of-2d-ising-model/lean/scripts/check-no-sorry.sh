@@ -1409,11 +1409,19 @@ targets=(
   Ising2D.finite_sum_of_real_sums_succ
   Ising2D.finite_sum_of_real_sums
   Ising2D.finite_sum_of_real_sums_fintype
+  Ising2D.finite_double_sum_of_real_numbers_interchange_succ
+  Ising2D.finite_double_sum_of_real_numbers_interchange
+  Ising2D.finite_double_sum_of_real_numbers_interchange_fintype
   Ising2D.finite_sum_of_nonnegative_reals_ge_term_succ
   Ising2D.finite_sum_of_nonnegative_reals_ge_term
   Ising2D.finite_sum_of_real_differences_of_necSuf
   Ising2D.finite_sum_of_real_sums_of_necSuf
   Ising2D.finite_sum_of_real_sums_fintype_of_necSuf
+  Ising2D.finite_double_sum_of_real_numbers_interchange_of_necSuf
+  Ising2D.finite_double_sum_of_real_numbers_interchange_fintype_of_necSuf
+  "Ising2D.NecSuf.finite_double_sum_interchange_succ'"
+  "Ising2D.NecSuf.finite_double_sum_interchange_fin'"
+  "Ising2D.NecSuf.finite_double_sum_interchange'"
   Ising2D.finite_sum_of_nonnegative_reals_ge_term_of_necSuf
   Ising2D.mul_add_matrix_of_necSuf
   Ising2D.add_mul_matrix_of_necSuf

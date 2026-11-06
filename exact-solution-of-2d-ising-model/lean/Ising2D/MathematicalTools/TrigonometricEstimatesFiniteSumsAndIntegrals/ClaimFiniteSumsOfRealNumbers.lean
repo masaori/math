@@ -1,18 +1,18 @@
 /-
-# 実数の差・符号反転・共通の因子の有限和、非負の実数の有限和の下からの評価、有限和の三角不等式と項ごとの大小（**具体版**）
+# 実数の差・和・符号反転・共通の因子の有限和、二重の有限和の順序の入れ替え、非負の実数の有限和の下からの評価、有限和の三角不等式と項ごとの大小（**具体版**）
 
-対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`, `finite_sum_of_real_sums`,
+対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`, `finite_sum_of_real_sums`, `finite_double_sum_of_real_numbers_interchange`,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
 `finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`,
 `finite_sum_of_real_numbers_moves_one_term_to_end`
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_definition_finite_sum_of_real_numbers`,
-`calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_real_sums`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
+`calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_real_sums`, `calc_formulae_claim_finite_double_sum_of_real_numbers_interchange`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_scalar_multiples`,
 `calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`,
 `calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`, `calc_formulae_claim_finite_sum_of_real_numbers_is_monotone`,
 `calc_formulae_claim_finite_sum_of_real_numbers_moves_one_term_to_end`）。
 
-**必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`（一つの項を末尾へ移す主張は `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`、和の主張は複素数の兄弟 `finite_sum_of_complex_sums` と共有の `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`）。具体版をその系として導くのは
+**必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`（一つの項を末尾へ移す主張は `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`、和の主張は複素数の兄弟 `finite_sum_of_complex_sums` と共有の `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`、二重の和の順序の入れ替えは `Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`）。具体版をその系として導くのは
 `ClaimFiniteSumsOfRealNumbersFromNecSuf.lean`。
 
 ## 人手証明との対応
@@ -27,6 +27,9 @@
 * `finite_sum_of_real_sums_succ` の `m = 1` の 2 行と帰納法の段は人手の行と対応する。人手の結合則・交換則の 5 行は
   `finite_sum_of_real_sums_step`（1 行 1 段）。「`α, β` の置き方」の行は `finite_sum_of_real_differences_succ` と同じ理由で段にしない。
   `m = 0`（空の和）は人手には無い（`finite_sum_of_real_sums`）。有限型の添字の和には `finite_sum_of_real_sums_fintype` を置く。
+* `finite_double_sum_of_real_numbers_interchange_succ` は人手の `n_1, n_2 ∈ ℤ_{≥1}` を Lean の `p + 1`・`q + 1`、`c_{k,l}` を `a k l` で書き、`n_1 = 1` の 2 行と
+  帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である。人手の「各 `l` の項へ同時適用」は `Finset.sum_congr` で各項に当てる段である。
+  Lean の `p = 0` または `q = 0`（空の和）は人手には無い（`finite_double_sum_of_real_numbers_interchange`）。有限型の添字の二重の和には `_fintype` を置く。
 * `finite_sum_of_negated_real_numbers_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
   人手の 1 行「ℝ で `(−a) + (−b) = −(a + b)`」は mathlib の `neg_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`）。
 * `finite_sum_of_real_scalar_multiples_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
@@ -142,6 +145,58 @@ theorem finite_sum_of_real_sums_fintype {κ : Type*} [Fintype κ] (a b : κ → 
     _ = (∑ j : Fin (Fintype.card κ), a (e.symm j)) + ∑ j : Fin (Fintype.card κ), b (e.symm j) :=
         finite_sum_of_real_sums _ (fun j => a (e.symm j)) (fun j => b (e.symm j))   -- `finite_sum_of_real_sums`（`a_j → a(e^{-1}(j))`、`b_j → b(e^{-1}(j))`）
     _ = (∑ j, a j) + ∑ j, b j := by rw [e.symm.sum_comp a, e.symm.sum_comp b]       -- 番号を外す
+
+/-- **`finite_double_sum_of_real_numbers_interchange`**（外側 `p + 1` 項・内側 `q + 1` 項）:
+`Σ_{k=1}^{n_1} Σ_{l=1}^{n_2} c_{k,l} = Σ_{l=1}^{n_2} Σ_{k=1}^{n_1} c_{k,l}`（人手の `n_1, n_2` は Lean の `p + 1`・`q + 1`、`c_{k,l}` は `a k l`）。`p` についての帰納法（`q` は固定）。 -/
+theorem finite_double_sum_of_real_numbers_interchange_succ (p q : ℕ) (a : Fin (p + 1) → Fin (q + 1) → ℝ) :
+    ∑ k, ∑ l, a k l = ∑ l, ∑ k, a k l := by
+  induction p with
+  | zero =>
+    calc ∑ k : Fin 1, ∑ l, a k l
+        = ∑ l, a 0 l := Fin.sum_univ_one _                                   -- `def_finite_sum_of_real_numbers`（`r_j → Σ_l c_{j,l}`）
+      _ = ∑ l, ∑ k : Fin 1, a k l :=
+          Finset.sum_congr rfl fun l _ => (Fin.sum_univ_one (fun k => a k l)).symm
+                                                                              -- `def_finite_sum_of_real_numbers`（`r_j → c_{j,l}`）を右辺から左辺へ、各 `l` の項へ
+  | succ p ih =>
+    calc ∑ k : Fin (p + 2), ∑ l, a k l
+        = (∑ k : Fin (p + 1), ∑ l, a k.castSucc l) + ∑ l, a (Fin.last _) l :=
+          Fin.sum_univ_castSucc _                                             -- `def_finite_sum_of_real_numbers`（`m → n_1`、`r_j → Σ_l c_{j,l}`）
+      _ = (∑ l, ∑ k : Fin (p + 1), a k.castSucc l) + ∑ l, a (Fin.last _) l := by
+          rw [ih (fun k l => a k.castSucc l)]                                 -- 帰納法の仮定
+      _ = ∑ l, ((∑ k : Fin (p + 1), a k.castSucc l) + a (Fin.last _) l) :=
+          (finite_sum_of_real_sums (q + 1) _ _).symm                          -- `finite_sum_of_real_sums`（`m → n_2`、`a_j → Σ_{k=1}^{n_1} c_{k,j}`、`b_j → c_{n_1+1,j}`）を右辺から左辺へ
+      _ = ∑ l, ∑ k, a k l :=
+          Finset.sum_congr rfl fun l _ => (Fin.sum_univ_castSucc (fun k => a k l)).symm
+                                                                              -- `def_finite_sum_of_real_numbers`（`m → n_1`、`r_j → c_{j,l}`）を右辺から左辺へ、各 `l` の項へ
+
+/-- **`finite_double_sum_of_real_numbers_interchange`**（`p = 0` または `q = 0` の空の和を含む。空の和は人手には無い）。 -/
+theorem finite_double_sum_of_real_numbers_interchange (p q : ℕ) (a : Fin p → Fin q → ℝ) :
+    ∑ k, ∑ l, a k l = ∑ l, ∑ k, a k l := by
+  cases p with
+  | zero => simp only [Finset.univ_eq_empty, Finset.sum_empty, Finset.sum_const_zero]
+  | succ p =>
+    cases q with
+    | zero => simp only [Finset.univ_eq_empty, Finset.sum_empty, Finset.sum_const_zero]
+    | succ q => exact finite_double_sum_of_real_numbers_interchange_succ p q a
+
+/-- **`finite_double_sum_of_real_numbers_interchange`**（添字が有限型 `κ`・`ι` の二重の和）。
+`finite_sum_of_real_sums_fintype` と同じく、`κ`・`ι` に `Fintype.equivFin` で番号を付け、`Fin (card κ)`・`Fin (card ι)` の上の和として
+`finite_double_sum_of_real_numbers_interchange` を当てる（番号を付ける段と外す段は mathlib の `Equiv.sum_comp` による）。 -/
+theorem finite_double_sum_of_real_numbers_interchange_fintype {κ ι : Type*} [Fintype κ] [Fintype ι]
+    (a : κ → ι → ℝ) :
+    ∑ k, ∑ l, a k l = ∑ l, ∑ k, a k l := by
+  set e := Fintype.equivFin κ
+  set f := Fintype.equivFin ι
+  calc ∑ k, ∑ l, a k l
+      = ∑ k : Fin (Fintype.card κ), ∑ l, a (e.symm k) l :=
+        (e.symm.sum_comp (fun k => ∑ l, a k l)).symm                          -- `κ` に番号を付ける
+    _ = ∑ k : Fin (Fintype.card κ), ∑ l : Fin (Fintype.card ι), a (e.symm k) (f.symm l) :=
+        Finset.sum_congr rfl fun k _ => (f.symm.sum_comp (fun l => a (e.symm k) l)).symm   -- `ι` に番号を付ける（各 `k` の項へ）
+    _ = ∑ l : Fin (Fintype.card ι), ∑ k : Fin (Fintype.card κ), a (e.symm k) (f.symm l) :=
+        finite_double_sum_of_real_numbers_interchange _ _ _                    -- `finite_double_sum_of_real_numbers_interchange`（`c_{k,l} → a(e^{-1}(k), f^{-1}(l))`）
+    _ = ∑ l : Fin (Fintype.card ι), ∑ k, a k (f.symm l) :=
+        Finset.sum_congr rfl fun l _ => e.symm.sum_comp (fun k => a k (f.symm l))   -- `κ` の番号を外す（各 `l` の項へ）
+    _ = ∑ l, ∑ k, a k l := f.symm.sum_comp (fun l => ∑ k, a k l)               -- `ι` の番号を外す
 
 /-- **`finite_sum_of_negated_real_numbers`**（`m + 1` 項）: `Σ_{j=1}^{m+1}(−x_j) = −Σ_{j=1}^{m+1} x_j`。`m` についての帰納法。 -/
 theorem finite_sum_of_negated_real_numbers_succ (m : ℕ) (x : Fin (m + 1) → ℝ) :

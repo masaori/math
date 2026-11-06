@@ -401,6 +401,7 @@ import Ising2D.NecSuf.SmulMatrixSum
 import Ising2D.NecSuf.FiniteSumMulMatrix
 import Ising2D.NecSuf.FiniteSumDifferenceAndNonnegativeTerm
 import Ising2D.NecSuf.FiniteSumMovesOneTermToEnd
+import Ising2D.NecSuf.FiniteDoubleSumInterchange
 import Ising2D.NecSuf.BijectionComposedWithIndexSkippingMap
 import Ising2D.NecSuf.FiniteSumReindexedByBijection
 import Ising2D.NecSuf.FiniteSumSubadditiveAndMonotone

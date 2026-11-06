@@ -332,6 +332,7 @@ export const ALL_LABELS = [
   "extract_taylor_coefficient_of_check_Z_Y",
   "factorization_of_A_theta_general",
   "finite_double_sum_of_matrices_interchange",
+  "finite_double_sum_of_real_numbers_interchange",
   "finite_product_of_complex_ones",
   "finite_product_of_identity_matrices",
   "finite_product_of_positive_reals_is_positive",
