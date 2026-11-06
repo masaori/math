@@ -68504,7 +68504,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
 &&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{、}\blkref{def_winding_transverse_coordinate}\text{、}\varepsilon\text{ の三場合の定義}\bigr)\\
 &\in\{-L|A|,-L|A|+1,\ldots,0\}
 &&\bigl(\because\ 0\le s\le LH\text{ または }0\le s-LH\le LV\text{、}\
-0\le s\le LV\text{ または }0\le s-LV\le LH\text{ と }\mathbb Z\text{ の順序}\bigr).
+0\le s\le LV\text{ または }0\le s-LV\le LH\text{ と }\mathbb Z\text{ の順序}\bigr)
 \end{aligned}`),
                       paragraph([
                         "を得る。最後に基点について帯外条件を仮定し、",
@@ -68517,7 +68517,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
 &>K_{\max}(\gamma)
 &&\bigl(\because\ \text{基点についての仮定}\bigr)\\
 &\ge\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
-&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr).
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr)
 \end{aligned}`),
                       paragraph([
                         "横断座標の値が異なるので二点は異なる。",
@@ -68758,6 +68758,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedPeriodicPartFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_injective",
+                      "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_periodicLift",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
