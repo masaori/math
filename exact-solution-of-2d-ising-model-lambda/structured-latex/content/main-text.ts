@@ -68768,6 +68768,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_avoid_periodicLift",
                       "Ising2DLambda.KacWard.oneSidedStaircasesFromWalk_disjoint",
                       "Ising2DLambda.KacWard.oneSidedParallelReturnFromWalk_avoids_staircases",
+                      "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosureFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
                     ],
@@ -68824,8 +68825,14 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                         "したがって反転平行階段は周期持ち上げと交わらない。",
                       ]),
                       paragraph([
-                        "上り階段の基点は ", math(String.raw`Q_1=S+cB_{\gamma}`),
-                        "、下り階段と同じ頂点集合を持つ順向きの階段の基点は ", math(String.raw`S`),
+                        "上り階段の基点について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+Q_1&=S+cB_{\gamma}
+&&(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第二部分の始点})
+\end{aligned}`),
+                      paragraph([
+                        "下り階段と同じ頂点集合を持つ順向きの階段の基点は ", math(String.raw`S`),
                         " である。二基点の平行座標の差の絶対値は ",
                         math(String.raw`cL W_{\perp}(\gamma)`), " であり、",
                       ]),
