@@ -548,6 +548,76 @@ w
       ],
     },
   },
+  {
+    id: "maxeig_claim_W_real_has_positive_entries",
+    kind: "claim",
+    title: { tex: String.raw`W_{\mathbb{R}} \text{ の成分はすべて正}` },
+    labels: ["W_real_has_positive_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について、すべての ",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " で ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} > 0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " を取る。",
+        ref("W_has_positive_entries"),
+        " の言い換えの形より ",
+        math(String.raw`W_{kl} > 0`),
+        "、すなわち ",
+        math(String.raw`W_{kl} = w_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`w \in \mathbb{R}_{>0}`),
+        " が存在する（",
+        math(String.raw`w_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。この ",
+        math(String.raw`w`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}
+&= W_{kl}
+  &&\bigl(\because\ \blkref{def_W_real}\bigr)\\
+&= w_{\mathbb{C}}
+  &&\bigl(\because\ w\ \text{の取り方（}\blkref{W_has_positive_entries}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to (W_{\mathbb{R}})_{kl},\ b \to w`),
+        "）より ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} = w`),
+        " である。",
+        math(String.raw`w \in \mathbb{R}_{>0}`),
+        " なので ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} > 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトルと複素行列 W の二次形式の評価に W_kl > 0（W_has_positive_entries は複素行列 W の成分が「正の実数の包含」であることを述べる）を使っていた。この同一視を def_W_real の W_ℝ で書き直すために、W_ℝ の成分が ℝ の順序で正であることを示す主張として足した。数値検証: sagemath/check/W_real_has_positive_entries/。",
+      ],
+    },
+  },
 
   {
     id: "maxeig_claim_epsilon_is_real_symmetric",
@@ -1406,6 +1476,87 @@ c_+(M_{\mathrm{col}})
         "2026-09-05 の分割で、上限のセクター分解のブロックから、全スピン反転行列との可換性と固有空間の保存を独立させた。式変形と根拠は分割前と同じである。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-05: 全証明の SageMath 検算（sagemath/check/epsilon_commutes_with_W/）に合わせ、括弧を省いた等式鎖を mat_mult_associative と可換性を一行ずつ当てる鎖にし、準備の可換性を (∵) 付きの鎖にした。主張文に M_col・K_1・K_2 の帰属と「F^(+) を保つ」の読み方を書いた（主張は不変）。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_real_commutes_with_W_real",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon_{\mathbb{R}} W_{\mathbb{R}} = W_{\mathbb{R}} \varepsilon_{\mathbb{R}}` },
+    labels: ["epsilon_real_commutes_with_W_real"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " と ",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathbb{R}} W_{\mathbb{R}} = W_{\mathbb{R}} \varepsilon_{\mathbb{R}}`),
+      paragraph([
+        "が成り立つ。両辺の積は ",
+        ref("def_real_matrix_product"),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記する。",
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "、",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）であり、",
+        ref("def_epsilon_real"),
+        " と ",
+        ref("def_W_real"),
+        " より ",
+        math(String.raw`\varepsilon_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon)`),
+        "、",
+        math(String.raw`W_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W)`),
+        " である。したがって ",
+        ref("real_matrix_of_real_entry_matrix_preserves_product"),
+        "（",
+        math(String.raw`m, n, p \to d,\ A \to \varepsilon,\ B \to W`),
+        "、および ",
+        math(String.raw`m, n, p \to d,\ A \to W,\ B \to \varepsilon`),
+        "）が当てはまり、",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        " より ",
+        math(String.raw`\varepsilon W, W\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " で、",
+        math(String.raw`\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon W)`),
+        "・",
+        math(String.raw`\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W\varepsilon)`),
+        " が定まる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{\mathbb{R}} W_{\mathbb{R}}
+&= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon W)
+  &&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to \varepsilon,\ B \to W)\ \text{を右辺から左辺へ}\bigr)\\
+&= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W\varepsilon)
+  &&\bigl(\because\ \blkref{epsilon_commutes_with_W}\ \text{の}\ \varepsilon W = W\varepsilon\bigr)\\
+&= W_{\mathbb{R}} \varepsilon_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to W,\ B \to \varepsilon)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε・W を掛け、εW = Wε（epsilon_commutes_with_W は複素行列についての主張）を実数の二次形式 u^⊤εWεu の書き換えに使っていた。この同一視を def_epsilon_real の ε_ℝ と def_W_real の W_ℝ で書き直すために、実数の行列どうしの可換性を示す主張として足した。ϱ が積を保つことだけで閉じ、成分ごとの単射性の段は要らない（epsilon_real_square_is_identity と同じ経路）。数値検証: sagemath/check/epsilon_real_commutes_with_W_real/。",
       ],
     },
   },

@@ -1,0 +1,94 @@
+/-
+# `W_ℝ` の成分はすべて正、`ε_ℝW_ℝ = W_ℝε_ℝ`
+
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
+
+* `maxeig_claim_W_real_has_positive_entries`（ラベル **`W_real_has_positive_entries`**）
+* `maxeig_claim_epsilon_real_commutes_with_W_real`（ラベル **`epsilon_real_commutes_with_W_real`**）
+
+## 人手証明との対応
+
+| 人手 | Lean |
+| --- | --- |
+| `W_has_positive_entries` の言い換えの形「`W_kl > 0`、すなわち `W_kl = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る」 | `W_has_positive_entries_as_inclusion` |
+| `W_real_has_positive_entries` の 2 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = w_ℂ` と `inclusion_rr_to_cc_is_injective`（`a → (W_ℝ)_kl`, `b → w`）、`w > 0` | `W_real_has_positive_entries` の `calc` の 2 段と結び |
+| `epsilon_real_commutes_with_W_real` の 3 行の鎖 `ε_ℝW_ℝ = ϱ(εW) = ϱ(Wε) = W_ℝε_ℝ` | `epsilon_real_commutes_with_W_real` の `calc` の 3 段 |
+
+- 人手の `W_ℝ` は `realMatrixOfRealEntries (physicalSymTransferC …) (physicalSymTransferC_hasRealEntries …)`（`def_W_real`）、
+  人手の `ε_ℝ` は `epsilonReal n`（`def_epsilon_real`、人手の `M_col` は `n + 1`）である。
+- 人手の `W_has_positive_entries` の Lean の具体版 `W_has_positive_entries_physical`・`physicalSymTransferR_pos` は、実成分で組んだ
+  `physicalSymTransferR` の成分が正であることを述べる。人手の「`W_kl > 0`」は複素数 `W_kl` が正の実数の包含であることなので、
+  `W_has_positive_entries_as_inclusion` で `w := (physicalSymTransferR)_kl` と取り、`physicalSymTransferC_eq_map` でこの形に読む。
+- 人手の `εW = Wε`（`epsilon_commutes_with_W`。複素行列の等式）は Lean の `epsilon_commute_physicalSymTransferC`。
+  Lean の `epsilon_commutes_with_W` は同じ内容を実成分で組んだ `epsilonR`・`physicalSymTransferR` について述べたもので、
+  人手の `ϱ` を経由する形と 1 対 1 なのは本ファイルの `epsilon_real_commutes_with_W_real` である。
+
+必要十分版は置かない。どちらの主張も、引いた主張（`W_has_positive_entries`・`epsilon_commutes_with_W`・
+`real_matrix_of_real_entry_matrix_preserves_product`・`inclusion_rr_to_cc_is_injective`）を成分ごと、または 1 回ずつ当てることに尽き、
+それらの外に抽象的な内容を持たない（`W_real_is_symmetric`・`epsilon_real_square_is_identity` と同じ）。
+-/
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealIsSymmetricAndSquareIsIdentity
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonCommutesWithW
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimPhysicalWHasPositiveEntries
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
+
+namespace Ising2D
+
+open Matrix
+
+/-- **人手 `W_has_positive_entries` の言い換えの形**: すべての `k, l` について `W_kl > 0`、すなわち
+`W_kl = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る（人手の主張文の「`z > 0`」の読み方）。
+`w` は実成分で組んだ `physicalSymTransferR` の成分で、その正値性は `physicalSymTransferR_pos`（`W_has_positive_entries` の具体版
+`W_has_positive_entries_physical` から `ι` の全射性で得る「すべての `k, l`」の言い換え）、
+`W_kl = w_ℂ` は `physicalSymTransferC_eq_map` である。 -/
+theorem W_has_positive_entries_as_inclusion {M : ℕ} (K1 K2 : ℝ) (k l : Conf M) :
+    ∃ w : ℝ, 0 < w ∧ physicalSymTransferC M K1 K2 k l = (w : ℂ) :=
+  ⟨physicalSymTransferR M K1 K2 k l, physicalSymTransferR_pos K1 K2 k l, by
+    rw [physicalSymTransferC_eq_map, Matrix.map_apply, Complex.ofRealHom_eq_coe]⟩
+
+/-- **人手 `W_real_has_positive_entries`**: `W_ℝ`（`def_W_real`）のすべての成分は `ℝ` の順序で正。
+`W_has_positive_entries` の `w` を取り、2 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = w_ℂ` に `inclusion_rr_to_cc_is_injective`
+（`a → (W_ℝ)_kl`, `b → w`）を当てて `(W_ℝ)_kl = w > 0`。 -/
+theorem W_real_has_positive_entries {M : ℕ} (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (k l : Conf M) :
+    0 < realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2) k l := by
+  obtain ⟨w, hw, hW⟩ := W_has_positive_entries_as_inclusion (M := M) K1 K2 k l
+  have h : realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+      (physicalSymTransferC_hasRealEntries K1 hK2) k l = w :=
+    inclusion_rr_to_cc_is_injective <|
+      calc ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+              (physicalSymTransferC_hasRealEntries K1 hK2) k l : ℝ) : ℂ)
+          = physicalSymTransferC M K1 K2 k l :=
+            ofReal_realMatrixOfRealEntries_apply _ _ k l                       -- `def_W_real`
+        _ = (w : ℂ) := hW                                                     -- `w` の取り方（`W_has_positive_entries`）
+  rw [h]
+  exact hw                                                                    -- `w ∈ ℝ_{>0}`
+
+/-- **人手 `epsilon_real_commutes_with_W_real`**: `ε_ℝW_ℝ = W_ℝε_ℝ`（人手の `M_col` は `n + 1`、`d := 2^{M_col}`）。
+準備（`ε, W ∈ Mat^re`、`ε_ℝ = ϱ(ε)`、`W_ℝ = ϱ(W)`）は `epsilonReal` の定義と `epsilon_hasRealEntries`・`physicalSymTransferC_hasRealEntries`。
+人手の `εW = Wε`（`epsilon_commutes_with_W`）は Lean の `epsilon_commute_physicalSymTransferC`。 -/
+theorem epsilon_real_commutes_with_W_real (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    epsilonReal n * realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
+        (physicalSymTransferC_hasRealEntries K1 hK2)
+      = realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2) * epsilonReal n :=
+  calc epsilonReal n * realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)
+      = realMatrixOfRealEntries (epsilon (n + 1) * physicalSymTransferC (n + 1) K1 K2)
+          (matrix_mul_hasRealEntries _ _ (epsilon_hasRealEntries n)
+            (physicalSymTransferC_hasRealEntries K1 hK2)) :=
+        (real_matrix_of_real_entry_matrix_preserves_product _ _
+          (epsilon_hasRealEntries n) (physicalSymTransferC_hasRealEntries K1 hK2)).symm
+                                                                            -- `real_matrix_of_real_entry_matrix_preserves_product`（`A → ε`, `B → W`）を右辺から左辺へ
+    _ = realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2 * epsilon (n + 1))
+          (matrix_mul_hasRealEntries _ _ (physicalSymTransferC_hasRealEntries K1 hK2)
+            (epsilon_hasRealEntries n)) :=
+        realMatrixOfRealEntries_congr (epsilon_commute_physicalSymTransferC K1 hK2).eq _ _
+                                                                            -- `epsilon_commutes_with_W` の `εW = Wε`
+    _ = realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2) * epsilonReal n :=
+        real_matrix_of_real_entry_matrix_preserves_product _ _
+          (physicalSymTransferC_hasRealEntries K1 hK2) (epsilon_hasRealEntries n)
+                                                                            -- `real_matrix_of_real_entry_matrix_preserves_product`（`A → W`, `B → ε`）
+
+end Ising2D
