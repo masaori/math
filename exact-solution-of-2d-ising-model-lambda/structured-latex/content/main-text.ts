@@ -68973,7 +68973,7 @@ cL W_{\perp}(\gamma)
 &=\bigl(i,\ k+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
 &&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
 &=\operatorname{vt}(W_{j+1})
-&&\bigl(\because\ W_{j+1}=W_j+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{ の射影と剰余類の加法）}\bigr).
+&&\bigl(\because\ W_{j+1}=W_j+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{ の射影と剰余類の加法）}\bigr)
 \end{aligned}`),
                       paragraph([
                         "差が ", math(String.raw`(1,0)`), " の場合は縦向きの番号 ",
