@@ -364,10 +364,17 @@ theorem epsilon_apply_configBasisIso_col (s s' : SpinConf M) :
     _ = if negSpinConf s = s' then 1 else 0 :=
         basisVec_configBasisIso_apply _ _                          -- 人手 3: (P5)
 
-/-- 人手 (b) の `-(-s) = s`（`{-1,1}` の元の符号を 2 回反転すると元に戻る）。 -/
+/-- 人手 `negated_row_configuration_is_involutive`（`trace_of_epsilon_V_plus` の (b) が使う `-(-s) = s`）。
+人手の 3 行の鎖を `calc` の 3 段にした（`def_negated_row_configuration` を `s → -s`・`s → s` で 2 回、符号反転を 2 回）。
+住処の違い: 人手は `s(m) ∈ {-1,1} ⊂ ℤ` で計算するが、Lean の `SpinVal` は `{-1,1} ⊂ ℝ` の部分型なので、鎖は値を ℝ へ埋め込んで書き、
+最後の段の `neg_neg` は ℝ で効く。写像の等号（すべての `m` で値が等しい）は `funext`・`Subtype.ext` である。 -/
 theorem negSpinConf_negSpinConf (s : SpinConf M) : negSpinConf (negSpinConf s) = s := by
   funext m
-  exact Subtype.ext (by rw [coe_negSpinConf_apply, coe_negSpinConf_apply, neg_neg])
+  apply Subtype.ext
+  calc ((negSpinConf (negSpinConf s) m : SpinVal) : ℝ)
+      = -((negSpinConf s m : SpinVal) : ℝ) := coe_negSpinConf_apply _ m   -- `def_negated_row_configuration`（`s → -s`）
+    _ = -(-((s m : SpinVal) : ℝ)) := by rw [coe_negSpinConf_apply]       -- `def_negated_row_configuration`（`s → s`）
+    _ = ((s m : SpinVal) : ℝ) := neg_neg _                               -- 符号反転を 2 回行うと元に戻る
 
 /-- 人手 Step 4 が (b) として使う非対角成分: `t ≠ -s` なら `ε_{ord(s),ord(t)} = δ_{-t=s} = 0_ℂ`
 （(b) の 3 行 `epsilon_apply_configBasisIso_col` を `s → t`、`s' → s` で。`-t = s` なら `t = -(-t) = -s`）。 -/

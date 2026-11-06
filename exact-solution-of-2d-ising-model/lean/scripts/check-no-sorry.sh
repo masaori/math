@@ -881,6 +881,7 @@ targets=(
   Ising2D.NecSuf.compSkipIndex_bijective
   Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing
   Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_of_necSuf
+  Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype
   "Ising2D.NecSuf.finite_sum_reindex_bijective'"
   "Ising2D.NecSuf.finite_sum_subadditive_fin'"
   "Ising2D.NecSuf.finite_sum_le_fin'"
@@ -909,6 +910,10 @@ targets=(
   Ising2D.epsilon_entries_in_row_configuration_numbering
   Ising2D.epsilon_real_permutes_entries_by_spin_flip
   Ising2D.epsilon_real_preserves_nonnegative_vectors
+  Ising2D.spinFlipIndex_spinFlipIndex
+  Ising2D.spinFlipIndex_bijective
+  Ising2D.epsilon_real_mulVec_eq_spinFlipIndex
+  Ising2D.epsilon_real_preserves_norm
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype

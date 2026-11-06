@@ -57,4 +57,29 @@ theorem finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing (n : 
             (bijectionCompSkipIndex_bijective π hπ k hk)]                     -- 帰納法の仮定（`bijection_composed_with_index_skipping_map_is_bijective`）
       _ = ∑ j, a j := (Fin.sum_univ_castSucc a).symm                          -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
 
+/-- **`finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`**（添字が空でない有限型 `κ` の和）。
+人手のベクトルは最初から `{1, …, m}` を添字に持つが、Lean のベクトルは有限型 `κ`（例えば `Conf M`）を添字に持つ。
+この差を埋めるため、`κ` に固定した番号 `e`（`Fintype.equivFin κ`）を付けて `Fin m` の上の和へ移し、外す
+（この 2 段は mathlib の `Equiv.sum_comp` によるが、人手のどの行にも当たらない番号付けの埋め合わせである）。
+`π` による付け替えそのものは、`Fin m` の上の具体版 `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing` を
+`e ∘ π ∘ e⁻¹` に当てて通す。`Equiv.ofBijective π hπ` を `Equiv.sum_comp` へ渡せば全体が 1 行で閉じるが、それは主張そのものの
+mathlib 版への丸投げになるので使わない。 -/
+theorem finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype {κ : Type*} [Fintype κ]
+    [Nonempty κ] (a : κ → ℝ) (π : κ → κ) (hπ : Function.Bijective π) :
+    ∑ j, a (π j) = ∑ j, a j := by
+  obtain ⟨n, hn⟩ : ∃ n, Fintype.card κ = n + 1 :=
+    Nat.exists_eq_succ_of_ne_zero Fintype.card_ne_zero                       -- `κ` は空でないので `m = card κ ≥ 1`
+  let e : κ ≃ Fin (n + 1) := (Fintype.equivFin κ).trans (finCongr hn)
+  have he : Function.Bijective (fun i => e (π (e.symm i))) :=
+    e.bijective.comp (hπ.comp e.symm.bijective)
+  calc ∑ j, a (π j)
+      = ∑ i : Fin (n + 1), a (π (e.symm i)) :=
+        (e.symm.sum_comp (fun j => a (π j))).symm                             -- `κ` に番号を付ける
+    _ = ∑ i : Fin (n + 1), (fun i => a (e.symm i)) (e (π (e.symm i))) := by
+        simp only [Equiv.symm_apply_apply]                                    -- 番号を付けた列 `i ↦ a(e⁻¹(i))` の項として書く
+    _ = ∑ i : Fin (n + 1), (fun i => a (e.symm i)) i :=
+        finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing n (fun i => a (e.symm i)) _ he
+                                                                              -- `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`（`π → e ∘ π ∘ e⁻¹`）
+    _ = ∑ j, a j := e.symm.sum_comp a                                         -- 番号を外す
+
 end Ising2D

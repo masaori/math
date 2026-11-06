@@ -899,6 +899,62 @@ w
     },
   },
   {
+    id: "maxeig_claim_negated_row_configuration_is_involutive",
+    kind: "claim",
+    title: { tex: String.raw`-(-s) = s` },
+    labels: ["negated_row_configuration_is_involutive"],
+    statement: [
+      paragraph([
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`s \in \mathfrak{M}`),
+        " について、",
+        ref("def_negated_row_configuration"),
+        " の符号の反転を 2 回行ったもの ",
+        math(String.raw`-(-s) \in \mathfrak{M}`),
+        " は",
+      ]),
+      displayMath(String.raw`-(-s) = s`),
+      paragraph(["を満たす。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " を取る（",
+        math(String.raw`s(m) \in \{-1,1\} \subset \mathbb{Z}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(-(-s)\bigr)(m)
+&= -\bigl((-s)(m)\bigr)
+  &&\bigl(\because\ \blkref{def_negated_row_configuration}\ (s \to -s)\bigr)\\
+&= -\bigl(-s(m)\bigr)
+  &&\bigl(\because\ \blkref{def_negated_row_configuration}\ (s \to s)\bigr)\\
+&= s(m)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の符号反転を 2 回行うと元に戻る}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`-(-s)`),
+        " と ",
+        math(String.raw`s`),
+        " は同じ定義域 ",
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
+        " のすべての ",
+        math(String.raw`m`),
+        " で値が等しいので、写像として ",
+        math(String.raw`-(-s) = s`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus の証明 Step 3 の (b)・Step 4 は δ_{-(-s)=s} = 1_ℂ として証明の中で使っていたが、引ける主張ではなかった。epsilon_real_preserves_norm の準備で添字の付け替え χ(k) := ord(-ord^{-1}(k)) が χ(χ(k)) = k を満たすことを示すのに引くので主張として足した。Lean は Ising2D.negSpinConf_negSpinConf（EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean）。数値検証: sagemath/check/negated_row_configuration_is_involutive/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_claim_epsilon_entries_in_row_configuration_numbering",
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ の成分を 1 行ぶんのスピン配置の番号で読む}` },
@@ -1245,6 +1301,167 @@ w
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「ε は置換行列」（trace_of_epsilon_V_plus の証明 Step 3 の (b)）から u ≥ 0 ⇒ εu ≥ 0 を散文で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、epsilon_real_permutes_entries_by_spin_flip の帰結として足した。本文に実数のベクトルの順序 u ≥ 0 を定めるブロックが無いので、主張は成分ごとに述べる。数値検証: sagemath/check/epsilon_real_preserves_nonnegative_vectors/。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_real_preserves_norm",
+    kind: "claim",
+    title: { tex: String.raw`\|\varepsilon_{\mathbb{R}}u\| = \|u\|` },
+    labels: ["epsilon_real_preserves_norm"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`u \in \mathbb{R}^{d}`),
+        " とする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " について",
+      ]),
+      displayMath(String.raw`\|\varepsilon_{\mathbb{R}}u\| = \|u\|`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）のもの、両辺のノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to d`),
+        "）の数ベクトルのノルムである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_row_configuration_numbering"),
+        " の ",
+        math(String.raw`\mathrm{ord} : \mathfrak{M} \to \{1,\dots,d\}`),
+        " は ",
+        ref("row_configuration_numbering_bijective"),
+        " より全単射なので、各 ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " に ",
+        math(String.raw`\mathrm{ord}(s) = k`),
+        " を満たす ",
+        math(String.raw`s \in \mathfrak{M}`),
+        " がただ一つ在る。それを ",
+        math(String.raw`\mathrm{ord}^{-1}(k) \in \mathfrak{M}`),
+        " と書く。すなわち ",
+        math(String.raw`\mathrm{ord}(\mathrm{ord}^{-1}(k)) = k`),
+        "（",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        "）、",
+        math(String.raw`\mathrm{ord}^{-1}(\mathrm{ord}(t)) = t`),
+        "（",
+        math(String.raw`t \in \mathfrak{M}`),
+        "）である。",
+        ref("def_negated_row_configuration"),
+        " より ",
+        math(String.raw`-\mathrm{ord}^{-1}(k) \in \mathfrak{M}`),
+        " なので、",
+        math(String.raw`\chi : \{1,\dots,d\} \to \{1,\dots,d\}`),
+        " を",
+      ]),
+      displayMath(String.raw`\chi(k) := \mathrm{ord}\bigl(-\mathrm{ord}^{-1}(k)\bigr) \qquad (k \in \{1,\dots,d\})`),
+      paragraph([
+        "で定める。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi(\chi(k))
+&= \mathrm{ord}\bigl(-\mathrm{ord}^{-1}(\chi(k))\bigr)
+  &&\bigl(\because\ \chi\ \text{の定義}\ (k \to \chi(k))\bigr)\\
+&= \mathrm{ord}\Bigl(-\mathrm{ord}^{-1}\bigl(\mathrm{ord}(-\mathrm{ord}^{-1}(k))\bigr)\Bigr)
+  &&\bigl(\because\ \chi\ \text{の定義}\bigr)\\
+&= \mathrm{ord}\bigl(-(-\mathrm{ord}^{-1}(k))\bigr)
+  &&\bigl(\because\ \mathrm{ord}^{-1}(\mathrm{ord}(t)) = t\ (t \to -\mathrm{ord}^{-1}(k))\bigr)\\
+&= \mathrm{ord}\bigl(\mathrm{ord}^{-1}(k)\bigr)
+  &&\bigl(\because\ \blkref{negated_row_configuration_is_involutive}\ (s \to \mathrm{ord}^{-1}(k))\bigr)\\
+&= k
+  &&\bigl(\because\ \mathrm{ord}(\mathrm{ord}^{-1}(k)) = k\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\chi`),
+        " は単射である。実際、",
+        math(String.raw`k, k' \in \{1,\dots,d\}`),
+        " が ",
+        math(String.raw`\chi(k) = \chi(k')`),
+        " を満たすなら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+k
+&= \chi(\chi(k))
+  &&\bigl(\because\ \text{上で示した}\ \chi(\chi(k)) = k\ \text{を右辺から左辺へ}\bigr)\\
+&= \chi(\chi(k'))
+  &&\bigl(\because\ \chi(k) = \chi(k')\bigr)\\
+&= k'
+  &&\bigl(\because\ \text{上で示した}\ \chi(\chi(k)) = k\ (k \to k')\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。また ",
+        math(String.raw`\chi`),
+        " は全射である。実際、",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について ",
+        math(String.raw`\chi(k) \in \{1,\dots,d\}`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi\bigl(\chi(k)\bigr)
+&= k
+  &&\bigl(\because\ \text{上で示した}\ \chi(\chi(k)) = k\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`k`),
+        " は ",
+        math(String.raw`\chi(k)`),
+        " の像である。したがって ",
+        math(String.raw`\chi`),
+        " は全単射である。さらに ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\varepsilon_{\mathbb{R}}u)_k
+&= (\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(\mathrm{ord}^{-1}(k))}
+  &&\bigl(\because\ \mathrm{ord}(\mathrm{ord}^{-1}(k)) = k\ \text{を右辺から左辺へ}\bigr)\\
+&= u_{\mathrm{ord}(-\mathrm{ord}^{-1}(k))}
+  &&\bigl(\because\ \blkref{epsilon_real_permutes_entries_by_spin_flip}\ (u \to u,\ s \to \mathrm{ord}^{-1}(k))\bigr)\\
+&= u_{\chi(k)}
+  &&\bigl(\because\ \chi\ \text{の定義を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|\varepsilon_{\mathbb{R}}u\|
+&= \sqrt{\sum_{k=1}^{d} \bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to \varepsilon_{\mathbb{R}}u)\bigr)\\
+&= \sqrt{\sum_{k=1}^{d} \bigl|u_{\chi(k)}\bigr|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \text{上で示した}\ (\varepsilon_{\mathbb{R}}u)_k = u_{\chi(k)}\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{d} |u_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing}\ (m \to d,\ a_j \to |u_j|^2,\ \pi \to \chi)\bigr)\\
+&= \|u\|
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to u)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「ε は置換行列であり、成分の並べ替えは二乗和を変えない」から ‖εu‖ = ‖u‖ を散文で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、epsilon_real_permutes_entries_by_spin_flip と finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing の帰結として足した。Lean は Ising2D.epsilon_real_preserves_norm（ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonRealPreservesNorm.lean）。付け替えの写像を χ と書くのは、π をこの章で円周率に、κ を論文の別の章で定数と添字に使っているためである。数値検証: sagemath/check/epsilon_real_preserves_norm/。",
       ],
     },
   },
