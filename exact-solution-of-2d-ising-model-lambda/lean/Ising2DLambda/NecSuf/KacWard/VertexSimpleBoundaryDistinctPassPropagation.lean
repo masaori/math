@@ -13,6 +13,16 @@ theorem same_base_successor_is_loop {E B V : Type*}
   · simpa [heq] using hconnect.symm
   · exact (hnotreverse hreverse).elim
 
+/-- The same classification gives distinct bases whenever the incoming edge is not a loop. -/
+theorem nonloop_successor_distinct_base {E B V : Type*}
+    (e f : E) (base : E → B) (source target : E → V) (reverse : E → E)
+    (hclass : base e = base f → f = e ∨ f = reverse e)
+    (hnotreverse : f ≠ reverse e) (hconnect : target e = source f)
+    (hnotloop : source e ≠ target e) : base e ≠ base f := by
+  intro hbase
+  exact hnotloop (same_base_successor_is_loop e f base source target reverse
+    hclass hbase hnotreverse hconnect)
+
 /-- At a simple passage, support of the boundary on the walk reduces vertex balance
 to the two distinct passage edges. No lattice geometry is used in this reduction. -/
 theorem vertexSimple_distinct_pass_coefficient_propagation

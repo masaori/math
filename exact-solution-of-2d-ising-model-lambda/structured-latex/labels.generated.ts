@@ -253,6 +253,7 @@ export const ALL_LABELS = [
   "claim_negated_parallel_staircase_turning_zero",
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
+  "claim_nonloop_successor_distinct_base",
   "claim_nonzero_long_pair_reference",
   "claim_nonzero_winding_simple_cycle_turning_zero",
   "claim_odd_orbit_selection_invariant",

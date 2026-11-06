@@ -18,6 +18,19 @@ theorem same_base_successor_is_loop_from_necSuf {L : ℕ}
     e f Prod.fst orientedSource orientedTarget reversal hclass hbase
     (Finset.mem_filter.mp hf).2.2 (Finset.mem_filter.mp hf).2.1
 
+/-- The abstract nonloop implication specializes to the lattice passage. -/
+theorem nonloop_successor_distinct_base_from_necSuf {L : ℕ}
+    (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e)
+    (hnotloop : orientedSource e ≠ orientedTarget e) : e.1 ≠ f.1 := by
+  have hclass : e.1 = f.1 → f = e ∨ f = reversal e := by
+    intro hb
+    rcases e with ⟨b, false | true⟩ <;>
+      rcases f with ⟨c, false | true⟩ <;>
+      simp_all [reversal]
+  exact Ising2DLambda.NecSuf.KacWard.nonloop_successor_distinct_base
+    e f Prod.fst orientedSource orientedTarget reversal hclass
+    (Finset.mem_filter.mp hf).2.2 (Finset.mem_filter.mp hf).2.1 hnotloop
+
 /-- The abstract two-edge argument applies to the height-one cell boundary. -/
 theorem vertexSimple_boundary_distinct_pass_propagation_from_necSuf
     (L m : ℕ) [NeZero L] (γ : Fin (m + 1) → OrientedEdge L)
