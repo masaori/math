@@ -2397,6 +2397,17 @@ targets=(
   Ising2D.NecSuf.finProdLeft_map_of_mul
   Ising2D.real_inclusion_preserves_finite_product_of_necSuf
   Ising2D.complex_finset_prod_eq_finProdLeft
+  Ising2D.vecKron_apply
+  Ising2D.sum_conf_succ_eq_sum_last_sum_init
+  Ising2D.sum_over_multi_index_of_product_eq_product_of_sums
+  Ising2D.kronecker_product_rule_mulVec
+  Ising2D.NecSuf.sum_pi_succ_eq_sum_last_sum_init
+  Ising2D.NecSuf.sum_pi_finProdLeft_eq_finProdLeft_sum
+  "Ising2D.NecSuf.matKron'_mulVec_vecKron'"
+  "Ising2D.siteProd_eq_matKron'"
+  "Ising2D.vecKron_eq_vecKron'"
+  Ising2D.sum_over_multi_index_of_product_eq_product_of_sums_of_necSuf
+  Ising2D.kronecker_product_rule_mulVec_of_necSuf
   Ising2D.CheckFermiSetup.two_cosh_half_step4
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul
