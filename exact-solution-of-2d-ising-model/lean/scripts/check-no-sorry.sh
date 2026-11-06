@@ -865,6 +865,20 @@ targets=(
   Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end
   Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end_of_necSuf
   "Ising2D.NecSuf.finite_sum_skip_index_succ'"
+  Ising2D.skipIndex_ne
+  Ising2D.skipIndex_injective
+  Ising2D.skipIndex_reaches_every_other_index
+  Ising2D.bijection_comp_skipIndex_ne_last
+  Ising2D.bijectionCompSkipIndex
+  Ising2D.bijectionCompSkipIndex_castSucc
+  Ising2D.bijectionCompSkipIndex_bijective
+  Ising2D.bijection_comp_skipIndex_ne_last_of_necSuf
+  Ising2D.bijectionCompSkipIndex_eq_necSuf
+  Ising2D.bijectionCompSkipIndex_bijective_of_necSuf
+  Ising2D.NecSuf.comp_skipIndex_ne_last
+  Ising2D.NecSuf.compSkipIndex
+  Ising2D.NecSuf.compSkipIndex_castSucc
+  Ising2D.NecSuf.compSkipIndex_bijective
   "Ising2D.NecSuf.finite_sum_subadditive_fin'"
   "Ising2D.NecSuf.finite_sum_le_fin'"
   Ising2D.nonnegative_real_order_from_squares_of_necSuf

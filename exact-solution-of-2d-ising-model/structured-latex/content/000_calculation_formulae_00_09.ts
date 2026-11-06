@@ -1895,6 +1895,494 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_index_skipping_map_never_takes_skipped_index",
+    kind: "claim",
+    title: { text: "一つの添字を飛ばす写像は飛ばした添字を値に取らない" },
+    labels: ["index_skipping_map_never_takes_skipped_index"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。このとき、すべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で ",
+        math(String.raw`\delta^{m}_{k}(j) \neq k`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " を取る。",
+        math(String.raw`j < k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j)
+&= j
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j < k\bigr)\\
+&< k
+&&\bigl(\because\ j < k\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`j \geq k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j)
+&= j + 1
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j \geq k\bigr)\\
+&> j
+&&\bigl(\because\ 1 > 0\bigr)\\
+&\geq k
+&&\bigl(\because\ j \geq k\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`\delta^{m}_{k}(j) \neq k`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_stays_in_lower_indices が使うので足した。Lean は Ising2D.skipIndex_ne（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_is_injective/。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_index_skipping_map_is_injective",
+    kind: "claim",
+    title: { text: "一つの添字を飛ばす写像は単射である" },
+    labels: ["index_skipping_map_is_injective"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。このとき、",
+        math(String.raw`j, j' \in \{1,\dots,m\}`),
+        " が ",
+        math(String.raw`\delta^{m}_{k}(j) = \delta^{m}_{k}(j')`),
+        " を満たすなら ",
+        math(String.raw`j = j'`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`j, j' \in \{1,\dots,m\}`),
+        " が ",
+        math(String.raw`\delta^{m}_{k}(j) = \delta^{m}_{k}(j')`),
+        " を満たすとする。",
+        math(String.raw`j < k`),
+        " かつ ",
+        math(String.raw`j' < k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+j
+&= \delta^{m}_{k}(j)
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j < k\bigr)\\
+&= \delta^{m}_{k}(j')
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&= j'
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j' < k\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j \geq k`),
+        " かつ ",
+        math(String.raw`j' \geq k`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+j
+&= (j + 1) - 1
+&&\bigl(\because\ 1 - 1 = 0\bigr)\\
+&= \delta^{m}_{k}(j) - 1
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j \geq k\bigr)\\
+&= \delta^{m}_{k}(j') - 1
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&= (j' + 1) - 1
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j' \geq k\bigr)\\
+&= j'
+&&\bigl(\because\ 1 - 1 = 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j < k \leq j'`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j)
+&= j
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j < k\bigr)\\
+&< k
+&&\bigl(\because\ j < k\bigr)\\
+&\leq j'
+&&\bigl(\because\ k \leq j'\bigr)\\
+&< j' + 1
+&&\bigl(\because\ 1 > 0\bigr)\\
+&= \delta^{m}_{k}(j')
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j' \geq k\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり仮定に反するので、この場合は起こらない。",
+        math(String.raw`j' < k \leq j`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j')
+&= j'
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j' < k\bigr)\\
+&< k
+&&\bigl(\because\ j' < k\bigr)\\
+&\leq j
+&&\bigl(\because\ k \leq j\bigr)\\
+&< j + 1
+&&\bigl(\because\ 1 > 0\bigr)\\
+&= \delta^{m}_{k}(j)
+&&\bigl(\because\ \blkref{def_index_skipping_map}\ \text{を右辺から左辺へ},\ j \geq k\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり仮定に反するので、この場合も起こらない。よって ",
+        math(String.raw`j = j'`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_is_bijective の単射性の段が使うので足した。Lean は Ising2D.skipIndex_injective（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_is_injective/。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_index_skipping_map_reaches_every_other_index",
+    kind: "claim",
+    title: { text: "一つの添字を飛ばす写像は飛ばした添字以外のすべてを値に取る" },
+    labels: ["index_skipping_map_reaches_every_other_index"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。このとき、",
+        math(String.raw`i \neq k`),
+        " を満たすすべての ",
+        math(String.raw`i \in \{1,\dots,m+1\}`),
+        " について、",
+        math(String.raw`\delta^{m}_{k}(j) = i`),
+        " を満たす ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " がある。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m+1\}`),
+        "、",
+        math(String.raw`i \neq k`),
+        " を取る。",
+        math(String.raw`i < k`),
+        " のとき、",
+        math(String.raw`j := i`),
+        " とおく。",
+        math(String.raw`1 \leq i`),
+        " であり、",
+        math(String.raw`i < k \leq m+1`),
+        " と ",
+        math(String.raw`i \in \mathbb{Z}`),
+        " から ",
+        math(String.raw`i \leq m`),
+        " なので ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j)
+&= \delta^{m}_{k}(i)
+&&\bigl(\because\ j\ \text{の置き方}\bigr)\\
+&= i
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ i < k\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`i > k`),
+        " のとき（",
+        math(String.raw`i \neq k`),
+        " なので ",
+        math(String.raw`i < k`),
+        " でなければこの場合である）、",
+        math(String.raw`j := i - 1`),
+        " とおく。",
+        math(String.raw`i > k \geq 1`),
+        " と ",
+        math(String.raw`i \in \mathbb{Z}`),
+        " から ",
+        math(String.raw`i - 1 \geq 1`),
+        "、",
+        math(String.raw`i \leq m+1`),
+        " から ",
+        math(String.raw`i - 1 \leq m`),
+        " なので ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " であり、",
+        math(String.raw`i > k`),
+        " と ",
+        math(String.raw`i, k \in \mathbb{Z}`),
+        " から ",
+        math(String.raw`j = i - 1 \geq k`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^{m}_{k}(j)
+&= j + 1
+&&\bigl(\because\ \blkref{def_index_skipping_map},\ j \geq k\bigr)\\
+&= (i - 1) + 1
+&&\bigl(\because\ j\ \text{の置き方}\bigr)\\
+&= i
+&&\bigl(\because\ -1 + 1 = 0\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_is_bijective の全射性の段が使うので足した。Lean は Ising2D.skipIndex_reaches_every_other_index（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_is_injective/。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_bijection_composed_with_index_skipping_map_stays_in_lower_indices",
+    kind: "claim",
+    title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送ると、最後の添字には届かない" },
+    labels: ["bijection_composed_with_index_skipping_map_stays_in_lower_indices"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\pi : \{1,\dots,m+1\} \to \{1,\dots,m+1\}`),
+        " を全単射、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " を ",
+        math(String.raw`\pi(k) = m+1`),
+        " を満たす添字とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。このとき、すべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で ",
+        math(String.raw`\pi(\delta^{m}_{k}(j)) \in \{1,\dots,m\}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " を取る。",
+        math(String.raw`\pi(\delta^{m}_{k}(j)) = m+1`),
+        " と仮定すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi(\delta^{m}_{k}(j))
+&= m+1
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&= \pi(k)
+&&\bigl(\because\ \pi(k) = m+1\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\pi`),
+        " は単射なので ",
+        math(String.raw`\delta^{m}_{k}(j) = k`),
+        " となって ",
+        ref("index_skipping_map_never_takes_skipped_index"),
+        " に反する。よって ",
+        math(String.raw`\pi(\delta^{m}_{k}(j)) \neq m+1`),
+        " である。",
+        math(String.raw`\pi(\delta^{m}_{k}(j)) \in \{1,\dots,m+1\}`),
+        " なので、",
+        math(String.raw`\pi(\delta^{m}_{k}(j)) \in \{1,\dots,m\}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを m についての帰納法で示すとき、m → m+1 の段で残りの m 項の添字の付け替えを {1,…,m} の上の写像として定める def_bijection_composed_with_index_skipping_map が、値が {1,…,m} に入ることに使うので足した。Lean は Ising2D.bijection_comp_skipIndex_ne_last（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimBijectionComposedWithIndexSkippingMap.lean）。数値検証: sagemath/check/bijection_composed_with_index_skipping_map_is_bijective/。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_definition_bijection_composed_with_index_skipping_map",
+    kind: "definition",
+    title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送る写像" },
+    labels: ["def_bijection_composed_with_index_skipping_map"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\pi : \{1,\dots,m+1\} \to \{1,\dots,m+1\}`),
+        " を全単射、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " を ",
+        math(String.raw`\pi(k) = m+1`),
+        " を満たす添字とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        " による。写像 ",
+        math(String.raw`\tau^{\pi}_{k} : \{1,\dots,m\} \to \{1,\dots,m\}`),
+        " を",
+      ]),
+      displayMath(String.raw`\tau^{\pi}_{k}(j) := \pi(\delta^{m}_{k}(j))`),
+      paragraph([
+        "と定める。値が ",
+        math(String.raw`\{1,\dots,m\}`),
+        " に入ることは ",
+        ref("bijection_composed_with_index_skipping_map_stays_in_lower_indices"),
+        " による。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを m についての帰納法で示すとき、m → m+1 の段で、π(k) = m+1 の項を末尾へ移した残りの m 項の添字の付け替えとして帰納法の仮定に渡すので足した。Lean は Ising2D.bijectionCompSkipIndex（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimBijectionComposedWithIndexSkippingMap.lean）。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_bijection_composed_with_index_skipping_map_is_bijective",
+    kind: "claim",
+    title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送る写像は全単射である" },
+    labels: ["bijection_composed_with_index_skipping_map_is_bijective"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\pi : \{1,\dots,m+1\} \to \{1,\dots,m+1\}`),
+        " を全単射、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " を ",
+        math(String.raw`\pi(k) = m+1`),
+        " を満たす添字とし、",
+        math(String.raw`\delta^{m}_{k}`),
+        " は ",
+        ref("def_index_skipping_map"),
+        "、",
+        math(String.raw`\tau^{\pi}_{k}`),
+        " は ",
+        ref("def_bijection_composed_with_index_skipping_map"),
+        " による。このとき ",
+        math(String.raw`\tau^{\pi}_{k} : \{1,\dots,m\} \to \{1,\dots,m\}`),
+        " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "単射であることを示す。",
+        math(String.raw`j, j' \in \{1,\dots,m\}`),
+        " が ",
+        math(String.raw`\tau^{\pi}_{k}(j) = \tau^{\pi}_{k}(j')`),
+        " を満たすとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi(\delta^{m}_{k}(j))
+&= \tau^{\pi}_{k}(j)
+&&\bigl(\because\ \blkref{def_bijection_composed_with_index_skipping_map}\ \text{を右辺から左辺へ}\bigr)\\
+&= \tau^{\pi}_{k}(j')
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&= \pi(\delta^{m}_{k}(j'))
+&&\bigl(\because\ \blkref{def_bijection_composed_with_index_skipping_map}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\pi`),
+        " は単射なので ",
+        math(String.raw`\delta^{m}_{k}(j) = \delta^{m}_{k}(j')`),
+        " であり、",
+        ref("index_skipping_map_is_injective"),
+        " より ",
+        math(String.raw`j = j'`),
+        " である。",
+      ]),
+      paragraph([
+        "全射であることを示す。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+        math(String.raw`\pi`),
+        " は全射なので、",
+        math(String.raw`\pi(p) = i`),
+        " を満たす ",
+        math(String.raw`p \in \{1,\dots,m+1\}`),
+        " がある。",
+        math(String.raw`p = k`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+i
+&= \pi(p)
+&&\bigl(\because\ \pi(p) = i\bigr)\\
+&= \pi(k)
+&&\bigl(\because\ p = k\bigr)\\
+&= m+1
+&&\bigl(\because\ \pi(k) = m+1\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`i \leq m`),
+        " に反するので、",
+        math(String.raw`p \neq k`),
+        " である。",
+        ref("index_skipping_map_reaches_every_other_index"),
+        " より、",
+        math(String.raw`\delta^{m}_{k}(j) = p`),
+        " を満たす ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " があり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tau^{\pi}_{k}(j)
+&= \pi(\delta^{m}_{k}(j))
+&&\bigl(\because\ \blkref{def_bijection_composed_with_index_skipping_map}\bigr)\\
+&= \pi(p)
+&&\bigl(\because\ \delta^{m}_{k}(j) = p\bigr)\\
+&= i
+&&\bigl(\because\ \pi(p) = i\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを m についての帰納法で示すとき、m → m+1 の段で帰納法の仮定を τ^π_k に当てるので足した。Lean は Ising2D.bijectionCompSkipIndex_bijective（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimBijectionComposedWithIndexSkippingMap.lean）。数値検証: sagemath/check/bijection_composed_with_index_skipping_map_is_bijective/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_definition_real_absolute_value",
     kind: "definition",
     title: { text: "実数の絶対値" },
