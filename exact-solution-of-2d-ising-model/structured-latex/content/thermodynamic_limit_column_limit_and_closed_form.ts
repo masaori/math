@@ -650,6 +650,153 @@ w
     },
   },
   {
+    id: "maxeig_claim_epsilon_real_is_symmetric",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon_{\mathbb{R}} \text{ は対称}` },
+    labels: ["epsilon_real_is_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " は ",
+        ref("def_real_symmetric_matrix"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to \varepsilon_{\mathbb{R}}`),
+        "）の意味で対称である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " を取る。",
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        math(String.raw`\varepsilon^{\top} = \varepsilon`),
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\varepsilon_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}}
+&= \varepsilon_{kl}
+  &&\bigl(\because\ \blkref{def_epsilon_real}\bigr)\\
+&= \bigl(\varepsilon^{\top}\bigr)_{kl}
+  &&\bigl(\because\ \varepsilon^{\top} = \varepsilon\ \text{（}\blkref{epsilon_is_real_symmetric}\text{）}\bigr)\\
+&= \varepsilon_{lk}
+  &&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)\\
+&= \bigl((\varepsilon_{\mathbb{R}})_{lk}\bigr)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_epsilon_real}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to (\varepsilon_{\mathbb{R}})_{kl},\ b \to (\varepsilon_{\mathbb{R}})_{lk}`),
+        "）より ",
+        math(String.raw`(\varepsilon_{\mathbb{R}})_{kl} = (\varepsilon_{\mathbb{R}})_{lk}`),
+        " である。",
+        math(String.raw`k, l`),
+        " は任意なので、",
+        ref("def_real_symmetric_matrix"),
+        " の意味で ",
+        math(String.raw`\varepsilon_{\mathbb{R}}`),
+        " は対称である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε を掛け、ε^⊤ = ε（epsilon_is_real_symmetric は複素行列 ε についての主張）を実数の二次形式 u^⊤εu の入れ替えに使っていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、ε_ℝ の対称性を W_real_is_symmetric と同じ形で示す主張として足した。数値検証: sagemath/check/epsilon_real_is_symmetric/。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_real_square_is_identity",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}} = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})}` },
+    labels: ["epsilon_real_square_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}} = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})}`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_product"),
+        " のもの、右辺は ",
+        ref("def_real_identity_matrix"),
+        " の単位行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記する。",
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）であり、",
+        ref("def_epsilon_real"),
+        " より ",
+        math(String.raw`\varepsilon_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon)`),
+        " なので、",
+        ref("real_matrix_of_real_entry_matrix_preserves_product"),
+        "（",
+        math(String.raw`m, n, p \to d,\ A \to \varepsilon,\ B \to \varepsilon`),
+        "）と ",
+        ref("real_matrix_of_real_entry_matrix_preserves_power"),
+        "（",
+        math(String.raw`n \to d,\ A \to \varepsilon`),
+        "）が当てはまる。",
+        ref("epsilon_square_and_eigenvalues"),
+        " の ",
+        math(String.raw`\varepsilon^2`),
+        " は積 ",
+        math(String.raw`\varepsilon\varepsilon`),
+        "（",
+        ref("mat_mult"),
+        "）を表す（その証明の鎖の 1 行目）ので、",
+        math(String.raw`\varepsilon\varepsilon = I_{\mathrm{Mat}(d,\mathbb{C})}`),
+        " である。とくに ",
+        math(String.raw`I_{\mathrm{Mat}(d,\mathbb{C})} = \varepsilon\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("product_of_real_entry_matrices_has_real_entries"),
+        "）で、",
+        math(String.raw`\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}\bigl(I_{\mathrm{Mat}(d,\mathbb{C})}\bigr)`),
+        " が定まる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}}
+&= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon\varepsilon)
+  &&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to \varepsilon,\ B \to \varepsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}\bigl(I_{\mathrm{Mat}(d,\mathbb{C})}\bigr)
+  &&\bigl(\because\ \blkref{epsilon_square_and_eigenvalues}\ \text{の}\ \varepsilon\varepsilon = I_{\mathrm{Mat}(d,\mathbb{C})}\bigr)\\
+&= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}\bigl(\varepsilon^0\bigr)
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C},\ A \to \varepsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= (\varepsilon_{\mathbb{R}})^0
+  &&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_power}\ (n \to d,\ A \to \varepsilon,\ q \to 0)\bigr)\\
+&= I_{\mathrm{Mat}(d,\mathbb{R})}
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R},\ A \to \varepsilon_{\mathbb{R}}\text{、}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε を掛け、ε^2 = I（epsilon_square_and_eigenvalues は複素行列 ε についての主張）で ε(εu) = u としていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、ε_ℝ と自身の積が実数の単位行列であることを示す主張として足した。冪 (ε_ℝ)^2 ではなく積で述べたのは、Step 2 が使う ε_ℝ(ε_ℝu) = u へ real_matrix_vector_product_is_associative だけで渡せるようにするため（冪の形だと実数の行列どうしの積の左単位が別に要る）。ϱ(I) = I_ℝ の段は trace_of_W_power_via_W_real と同じ経路（real_matrix_of_real_entry_matrix_preserves_power の q → 0）である。数値検証: sagemath/check/epsilon_real_square_is_identity/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_claim_epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },

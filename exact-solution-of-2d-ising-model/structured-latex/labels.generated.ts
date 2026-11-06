@@ -299,6 +299,8 @@ export const ALL_LABELS = [
   "epsilon_projector_commutes_with_epsilon_commuting_matrix",
   "epsilon_projector_properties",
   "epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
+  "epsilon_real_is_symmetric",
+  "epsilon_real_square_is_identity",
   "epsilon_square_and_eigenvalues",
   "epsilon_square_identity",
   "euler_formula_cos_sin",

@@ -876,6 +876,8 @@ targets=(
   Ising2D.real_vector_inclusion_is_injective
   Ising2D.real_vector_inclusion_intertwines_matrix_vector_product
   Ising2D.epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors
+  Ising2D.epsilon_real_is_symmetric
+  Ising2D.epsilon_real_square_is_identity
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype
