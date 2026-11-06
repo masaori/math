@@ -68743,6 +68743,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective",
+                      "Ising2DLambda.KacWard.oneSidedPeriodicPartFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureStaircasesFromWalk_injective",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
@@ -70206,7 +70207,9 @@ P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
                       ]),
                       displayMath(String.raw`\begin{aligned}
 j+am&=(qm+r)+am&&\bigl(\because\ j=qm+r\text{（整数除法）}\bigr)\\
-&=(q+a)m+r&&\bigl(\because\ \mathbb Z\text{ の環の法則}\bigr)\\
+&=(q+a)m+r&&\bigl(\because\ \mathbb Z\text{ の環の法則}\bigr)
+\end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
 \lfloor(j+am)/m\rfloor&=q+a&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr)\\
 (j+am)\bmod m&=r&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr)
 \end{aligned}`),

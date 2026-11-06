@@ -64,4 +64,19 @@ theorem periodicPlaneLiftFromWalk_injective {L m : ℕ} [NeZero L]
       (planeLiftIntegerBase γ) (verticalDirectedWindingNumber γ)
       (horizontalDirectedWindingNumber γ) hnonzero hbase
 
+/-- 一側閉包で用いる `c` 周期分の頂点は相異なる。 -/
+theorem oneSidedPeriodicPartFromWalk_injective {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (k0 : ℤ) (c : ℕ) :
+    ∀ i < c * (m + 1), ∀ j < c * (m + 1),
+      periodicPlaneLiftFromWalk γ (k0 + (i : ℤ)) =
+        periodicPlaneLiftFromWalk γ (k0 + (j : ℤ)) → i = j := by
+  intro i _ j _ heq
+  have hij := periodicPlaneLiftFromWalk_injective γ hγ hcontact hwind heq
+  omega
+
 end Ising2DLambda.KacWard
