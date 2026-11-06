@@ -12,8 +12,10 @@
 #   V_2         : 成分定義 (V_2)_{ord(mu),ord(mu')} = exp(K_2 sum_m mu(m) mu'(m))（def_transfer_matrix）
 #   W := V_1^{1/2} V_2 V_1^{1/2}（def_symmetrized_transfer_matrix）
 #   epsilon := sigma^x_1 … sigma^x_M（def_global_spin_flip_matrix）
-#   c(M)   := sup{ x^T W x | x in R^{2^M}, ||x|| = 1 }            （def_rayleigh_sup）
-#   c_+(M) := sup{ x^T W x | x in F^{(+)} ∩ R^{2^M}, ||x|| = 1 }  （def_sector_rayleigh_sup）
+#   W_R := varrho(W)（成分の包含が W の成分になる実数の行列。def_W_real）
+#   c(M)   := sup{ x^T W_R x | x in R^{2^M}, ||x|| = 1 }            （def_rayleigh_sup）
+#   c_+(M) := sup{ x^T W_R x | x in F^{(+)} ∩ R^{2^M}, ||x|| = 1 }  （def_sector_rayleigh_sup）
+#   x^T W_R x は def_real_bilinear_value の実数の値。下の W_matrix は RDF の実数の行列なので W_R そのもの。
 #
 #   帰属: K_1, K_2 in R_{>0} と exp の値は R（指数評価による R への脱出）。倍精度 RDF で計算する。
 # ---------------------------------------------------------

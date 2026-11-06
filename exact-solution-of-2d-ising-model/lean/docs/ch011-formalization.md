@@ -48,7 +48,7 @@
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
-| `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀWx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
+| `Ising2D.rayleighSet` / `Ising2D.rayleighSup` | `𝓡 = {xᵀW_ℝx : ‖x‖=1}` と `c(M) := sup 𝓡` | `def_rayleigh_sup` |
 | `Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries`（`PhysicalPartitionFunctionSandwich.lean`） | `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について: 実成分で組んだ `physicalSymTransferR` は `ϱ(physicalSymTransferC)` に等しい | `def_W_real` |
 | `Ising2D.rayleighSup_physicalSymTransferR_eq`（`PhysicalPartitionFunctionSandwich.lean`） | Lean の `c(M)` は人手の `sup{xᵀW_ℝx \| ‖x‖ = 1}` と同じ値 | `def_rayleigh_sup` |
 | `Ising2D.rayleighSet_nonempty` / `rayleighSet_bddAbove` | `𝓡` は空でなく上に有界（上界は `Σ_iΣ_j\|W_ij\|`。`W` に仮定を置かない） | 同上 |
@@ -111,8 +111,8 @@
 | `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 上の 2 つを実成分で組んだ `physicalSymTransferR` で読む（`physicalSymTransferR_eq_realMatrixOfRealEntries`） | `W_real_is_symmetric` / `W_real_is_positive_definite` |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |
 | `Ising2D.partition_function_sandwich_and_limit_in_N_row`（`ClaimPartitionFunctionSandwichAndLimitInNRow.lean`） | 章「N→∞ の極限と最大固有値 c(M)」の章末の主張: `M ≥ 2`、`K_2 > 0`（`K_1` は任意の実数）で、具体的な `W` について `c(M) > 0`、`N_row ≥ 1` で `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`、`(1/(M N_row)) log Z → (1/M) log c(M)`（既存の主張を並べたもの） | `partition_function_sandwich_and_limit_in_N_row` |
-| `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |
-| `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡` と上に有界、単位ベクトルで `xᵀWx ≤ c_+` | 同上 |
+| `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+ = {xᵀW_ℝx}` と `c_+(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSup.lean`。`W` は実数の行列で、Ising では `W_ℝ` の具体形 `physicalSymTransferR`） | `def_sector_rayleigh_sup` |
+| `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡`（同じ式 `xᵀW_ℝx` の値の包含）と上に有界、単位ベクトルで `xᵀW_ℝx ≤ c_+` | 同上 |
 | `Ising2D.evenUnit` / `epsilonR_mulVec_evenUnit` / `vecNormSq_evenUnit` / `evenSectorSet_epsilonR_nonempty` | 単位ベクトル `x^{(+)}`（各成分 `2^{-M/2}`）で `𝓡_+ ≠ ∅` | 同上 |
 | **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
 | `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` は実行列 `epsilonR` の成分の埋め込み、`ε^⊤ = ε` とその実行列版（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |

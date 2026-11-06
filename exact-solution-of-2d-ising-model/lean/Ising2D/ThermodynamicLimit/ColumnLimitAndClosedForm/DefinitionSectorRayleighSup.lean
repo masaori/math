@@ -6,9 +6,14 @@
 
 人手の定義:
 
-  `𝓡_+ := { xᵀWx | x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}, ‖x‖ = 1 }`,  `c_+(M) := sup 𝓡_+`
+  `𝓡_+ := { xᵀW_ℝx | x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}, ‖x‖ = 1 }`,  `c_+(M) := sup 𝓡_+`
 
-と、上限が定まること（`𝓡_+` が空でなく上に有界であること）。
+と、上限が定まること（`𝓡_+` が空でなく上に有界であること）。`W_ℝ` は `def_W_real` の実数の行列、
+`xᵀW_ℝx` は `def_real_bilinear_value` の実数の値で、`def_rayleigh_sup` の `𝓡` の元と同じ式である。
+Lean の `x ⬝ᵥ W *ᵥ x` を人手の和の形へ開くのは `dotProduct_mulVec_eq_real_bilinear_value`
+（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean`）である。
+Lean の `evenSectorSet W ε` は実数の行列 `W` を受け取り、Ising では `W := physicalSymTransferR`
+（`W_ℝ` の具体形。`physicalSymTransferR_eq_realMatrixOfRealEntries`）で使う。
 
 ## 人手証明との対応
 
@@ -42,14 +47,14 @@ section General
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-- **人手本文 `def_sector_rayleigh_sup` の `𝓡_+`**:
-`{xᵀWx | x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}, ‖x‖ = 1}`（`𝓕^{(+)} ∩ ℝ^{2^M}` は `ε x = x` を満たす実ベクトル）。 -/
+`{xᵀW_ℝx | x ∈ 𝓕^{(+)} ∩ ℝ^{2^M}, ‖x‖ = 1}`（`𝓕^{(+)} ∩ ℝ^{2^M}` は `ε x = x` を満たす実ベクトル）。 -/
 def evenSectorSet (W ε : Matrix n n ℝ) : Set ℝ :=
   {r | ∃ x : n → ℝ, ε *ᵥ x = x ∧ vecNormSq x = 1 ∧ r = x ⬝ᵥ W *ᵥ x}
 
 /-- **人手本文 `def_sector_rayleigh_sup` の `c_+(M) := sup 𝓡_+`**。 -/
 noncomputable def evenSectorRayleighSup (W ε : Matrix n n ℝ) : ℝ := sSup (evenSectorSet W ε)
 
-/-- 人手の「`𝓕^{(+)} ∩ ℝ^{2^M} ⊆ ℝ^{2^M}` より `𝓡_+ ⊆ 𝓡`」。 -/
+/-- 人手の「`𝓡_+` の元 `xᵀW_ℝx` は同じ式で `𝓡` の元」（`𝓕^{(+)} ∩ ℝ^{2^M} ⊆ ℝ^{2^M}` より `𝓡_+ ⊆ 𝓡`）。 -/
 theorem evenSectorSet_subset (W ε : Matrix n n ℝ) : evenSectorSet W ε ⊆ rayleighSet W := by
   rintro r ⟨x, _, hx, rfl⟩
   exact ⟨x, hx, rfl⟩
@@ -59,7 +64,7 @@ theorem evenSectorSet_bddAbove (W ε : Matrix n n ℝ) :
     BddAbove (evenSectorSet W ε) :=
   (rayleighSet_bddAbove W).mono (evenSectorSet_subset W ε)
 
-/-- 偶セクターの単位ベクトルに対する `xᵀWx ≤ c_+(M)`（上限の定義そのもの）。 -/
+/-- 偶セクターの単位ベクトルに対する `xᵀW_ℝx ≤ c_+(M)`（上限の定義そのもの）。 -/
 theorem le_evenSectorRayleighSup {W : Matrix n n ℝ} {ε : Matrix n n ℝ} {x : n → ℝ}
     (hx : ε *ᵥ x = x) (hx1 : vecNormSq x = 1) :
     x ⬝ᵥ W *ᵥ x ≤ evenSectorRayleighSup W ε :=
@@ -87,7 +92,7 @@ theorem vecNormSq_evenUnit : vecNormSq (evenUnit M) = 1 := by
   rw [card_conf, ← pow_mul, mul_comm M 2, pow_mul, inv_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2),
     inv_pow, mul_inv_cancel₀ (pow_ne_zero _ (by norm_num))]
 
-/-- **人手 `def_sector_rayleigh_sup` の「`𝓡_+ ≠ ∅`」**: `(x^{(+)})ᵀWx^{(+)} ∈ 𝓡_+`。 -/
+/-- **人手 `def_sector_rayleigh_sup` の「`𝓡_+ ≠ ∅`」**: `(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`。 -/
 theorem evenSectorSet_epsilonR_nonempty (W : Matrix (Conf M) (Conf M) ℝ) :
     (evenSectorSet W (epsilonR M)).Nonempty :=
   ⟨_, evenUnit M, epsilonR_mulVec_evenUnit, vecNormSq_evenUnit, rfl⟩

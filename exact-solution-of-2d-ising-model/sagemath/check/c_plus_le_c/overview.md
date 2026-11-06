@@ -9,10 +9,14 @@
   単位ベクトル `x^{(+)}` の構成）も含める
 
 ```
-c(M)   := sup{ x^⊤ W x | x ∈ R^{2^M}, ‖x‖ = 1 }              (def_rayleigh_sup)
-c_+(M) := sup{ x^⊤ W x | x ∈ F^{(+)} ∩ R^{2^M}, ‖x‖ = 1 }    (def_sector_rayleigh_sup)
-W      := V_1^{1/2} V_2 V_1^{1/2}                             (def_symmetrized_transfer_matrix)
+c(M)   := sup{ x^⊤ W_ℝ x | x ∈ R^{2^M}, ‖x‖ = 1 }              (def_rayleigh_sup)
+c_+(M) := sup{ x^⊤ W_ℝ x | x ∈ F^{(+)} ∩ R^{2^M}, ‖x‖ = 1 }    (def_sector_rayleigh_sup)
+W      := V_1^{1/2} V_2 V_1^{1/2}                               (def_symmetrized_transfer_matrix)
+W_ℝ    := ϱ(W)（成分の包含が W の成分になる実数の行列）           (def_W_real)
 ```
+
+`x^⊤W_ℝx` は `def_real_bilinear_value` の実数の値である。検算は `W` の成分を倍精度の実数 `RDF` で作るので、
+組んだ行列は `W_ℝ` そのものであり、`x * W * x` は `x^⊤W_ℝx` を計算している。
 
 ## チェック一覧
 
