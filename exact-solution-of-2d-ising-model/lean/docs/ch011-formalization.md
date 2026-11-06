@@ -40,8 +40,8 @@
 `lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある。
 章「N→∞ の極限と最大固有値 c(M)」に当たる `c(M)` の定義・`‖Wx‖ ≤ c(M)‖x‖`・`xᵀAx ≤ ‖x‖² tr A`・`trace_power_sandwich`・分配関数の挟み撃ち（一般の行列の版と具体的な `Z`・`W` の版）のファイルは
 `lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` にある（`DefinitionRayleighSup`・`ClaimOperatorBound`・`TraceBound`・`ClaimTracePowerSandwich`・`ClaimPartitionFunctionSandwich`・`PhysicalPartitionFunctionSandwich`）。
-章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・具体的な `W` の成分の正値性のファイルは
-`lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` にある（`DefinitionSectorRayleighSup`・`ClaimCPlusLeC`・`ClaimEpsilonIsRealSymmetric`・`ClaimEpsilonCommutesWithW`・`ClaimPhysicalWHasPositiveEntries`・`ClaimPhysicalWHasPositiveEntriesFromNecSuf`）。
+章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`ε_ℝ := ϱ(ε)` と `ε_ℝx = x ⟺ ι(x) ∈ 𝓕^{(+)}`・`εW = Wε`・具体的な `W` の成分の正値性のファイルは
+`lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` にある（`DefinitionSectorRayleighSup`・`ClaimCPlusLeC`・`ClaimEpsilonIsRealSymmetric`・`ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors`・`ClaimEpsilonCommutesWithW`・`ClaimPhysicalWHasPositiveEntries`・`ClaimPhysicalWHasPositiveEntriesFromNecSuf`）。
 
 この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
@@ -118,6 +118,7 @@
 | `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` は実行列 `epsilonR` の成分の埋め込み、`ε^⊤ = ε` とその実行列版（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
 | `Ising2D.epsilon_hasRealEntries` | `ε` の成分はすべて実数（`MatrixHasRealEntries`。`epsilon_eq_siteProd` と `siteProd_hasRealEntries`・`pauliX_hasRealEntries`） | `epsilon_is_real_symmetric` の証明の成分の実性 |
 | **`Ising2D.epsilon_is_real_symmetric`** | `MatrixHasRealEntries ε ∧ ε^⊤ = ε`（`M_col = n + 1`） | **`epsilon_is_real_symmetric`** |
+| `Ising2D.epsilonReal` / `ofReal_epsilonReal_apply` / **`epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`** / `epsilonR_eq_epsilonReal` / `epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` | `ε_ℝ := ϱ(ε)`、`ε_ℝx = x ⟺ ι(x) ∈ 𝓕^{(+)}`、`epsilonR = ε_ℝ` とその形の同値（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors.lean`） | `def_epsilon_real` / **`epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`** |
 | `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`c_between_Lambda_half_and_twice_Lambda_half` Step 2 が引く） |
 | `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
 | `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |

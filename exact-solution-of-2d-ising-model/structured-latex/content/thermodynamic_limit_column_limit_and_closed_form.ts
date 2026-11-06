@@ -542,6 +542,217 @@ w
   },
 
   {
+    id: "maxeig_claim_epsilon_is_real_symmetric",
+    kind: "claim",
+    origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon^\top = \varepsilon` },
+    labels: ["epsilon_is_real_symmetric"],
+    statement: [
+      paragraph([
+        ref("def_global_spin_flip_matrix"),
+        " の全スピン反転行列 ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は成分がすべて実数であり、転置について対称である。",
+      ]),
+      displayMath(String.raw`\varepsilon^\top = \varepsilon`),
+    ],
+    proof: [
+      paragraph([
+        ref("epsilon_square_and_eigenvalues"),
+        " の証明で得た表示より ",
+        math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        "（",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個の因子）である。因子 ",
+        math(String.raw`\sigma^x`),
+        " の成分はすべて実数（",
+        ref("pauli_x_has_real_entries"),
+        "）なので、",
+        ref("kronecker_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`M \to M_{\mathrm{col}},\ A_k \to \sigma^x\ (k \in \{1,\dots,M_{\mathrm{col}}\})`),
+        "）より ",
+        math(String.raw`\varepsilon`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）である。転置については",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon^\top
+&=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示})\\
+&=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
+  \quad (\because \blkref{kronecker_transpose})\\
+&=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
+  \quad (\because \blkref{transpose_of_pauli_x}\ \text{を各因子へ同時に適用})\\
+&=\varepsilon
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 <sector_decomposition_of_rayleigh_sup> の証明の中にあった ε^⊤ = ε の導出を、最終定理が引く独立した主張として取り出した。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 成分の実性を「σ^x の成分は 0 または 1」「クロネッカー積の成分は各因子の成分の積」と名前だけで述べていたのを、epsilon_square_and_eigenvalues の証明の表示と pauli_x_has_real_entries・kronecker_of_real_entry_matrices_has_real_entries を引く形にした。転置の鎖の (σ^x)^⊤ = σ^x の段の根拠を pauli_matrix_products の成分表示から transpose_of_pauli_x に替えた。主張は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_definition_epsilon_real",
+    kind: "definition",
+    title: { tex: String.raw`\varepsilon \text{ の実数の行列 } \varepsilon_{\mathbb{R}}` },
+    labels: ["def_epsilon_real"],
+    statement: [
+      paragraph([
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）なので、",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ B \to \varepsilon`),
+        "）の",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathbb{R}} := \varrho^{2^{M_{\mathrm{col}}},2^{M_{\mathrm{col}}}}_{\mathbb{C}\to\mathbb{R}}(\varepsilon) \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+      paragraph([
+        "が定まる。",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " より、すべての ",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について ",
+        math(String.raw`\bigl((\varepsilon_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = \varepsilon_{kl}`),
+        " である（",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup の 𝓕^{(+)} ∩ ℝ^{2^{M_col}}（実数のベクトルを複素数のベクトルの集合 𝓕^{(+)} の元として扱う同一視）を、実数の行列 ε_ℝ と実数のベクトルの積の式 ε_ℝx = x で述べ直すために足した（def_W_real と同じ形）。",
+      ],
+    },
+  },
+  {
+    id: "maxeig_claim_epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },
+    labels: ["epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " とする。",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        " と ",
+        ref("def_real_matrix_vector_product"),
+        " の積 ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        "、",
+        ref("def_real_vector_inclusion"),
+        " の ",
+        math(String.raw`\iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}`),
+        "、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`\iota := \iota^{d}_{\mathbb{R}\to\mathbb{C}}`),
+        " と略記する。",
+        ref("epsilon_is_real_symmetric"),
+        " より ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）であり、",
+        ref("def_epsilon_real"),
+        " より ",
+        math(String.raw`\varepsilon_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(\varepsilon)`),
+        " なので、",
+        ref("real_vector_inclusion_intertwines_matrix_vector_product"),
+        "（",
+        math(String.raw`m \to d,\ n \to d,\ B \to \varepsilon`),
+        "）が当てはまる。",
+      ]),
+      paragraph([
+        math(String.raw`(\Rightarrow)`),
+        " ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " と仮定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,\iota(x)
+&= \iota(\varepsilon_{\mathbb{R}}x)
+  &&\bigl(\because\ \blkref{real_vector_inclusion_intertwines_matrix_vector_product}\ (m \to d,\ n \to d,\ B \to \varepsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota(x)
+  &&\bigl(\because\ \text{仮定}\ \varepsilon_{\mathbb{R}}x = x\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        "（",
+        math(String.raw`f \to \iota(x)`),
+        "）より ",
+        math(String.raw`\iota(x) \in \mathcal{F}^{(+)}`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`(\Leftarrow)`),
+        " ",
+        math(String.raw`\iota(x) \in \mathcal{F}^{(+)}`),
+        " と仮定する。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        "（",
+        math(String.raw`f \to \iota(x)`),
+        "）より ",
+        math(String.raw`\varepsilon\,\iota(x) = \iota(x)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(\varepsilon_{\mathbb{R}}x)
+&= \varepsilon\,\iota(x)
+  &&\bigl(\because\ \blkref{real_vector_inclusion_intertwines_matrix_vector_product}\ (m \to d,\ n \to d,\ B \to \varepsilon)\bigr)\\
+&= \iota(x)
+  &&\bigl(\because\ \text{仮定から得た}\ \varepsilon\,\iota(x) = \iota(x)\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("real_vector_inclusion_is_injective"),
+        "（",
+        math(String.raw`n \to d,\ x \to \varepsilon_{\mathbb{R}}x,\ y \to x`),
+        "）より ",
+        math(String.raw`\varepsilon_{\mathbb{R}}x = x`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup の 𝓕^{(+)} ∩ ℝ^{2^{M_col}} を {x ∈ ℝ^{2^{M_col}} | ε_ℝx = x} と述べ直すときに、二つの集合の元の行き来を ι^{2^{M_col}}_{ℝ→ℂ} で書くために足した。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_010a_definition_sector_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
@@ -948,65 +1159,6 @@ c_+(M_{\mathrm{col}})
         "2026-09-05 の分割で、上限のセクター分解のブロックから、全スピン反転行列との可換性と固有空間の保存を独立させた。式変形と根拠は分割前と同じである。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-05: 全証明の SageMath 検算（sagemath/check/epsilon_commutes_with_W/）に合わせ、括弧を省いた等式鎖を mat_mult_associative と可換性を一行ずつ当てる鎖にし、準備の可換性を (∵) 付きの鎖にした。主張文に M_col・K_1・K_2 の帰属と「F^(+) を保つ」の読み方を書いた（主張は不変）。",
-      ],
-    },
-  },
-
-  {
-    id: "maxeig_claim_epsilon_is_real_symmetric",
-    kind: "claim",
-    origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
-    title: { tex: String.raw`\varepsilon^\top = \varepsilon` },
-    labels: ["epsilon_is_real_symmetric"],
-    statement: [
-      paragraph([
-        ref("def_global_spin_flip_matrix"),
-        " の全スピン反転行列 ",
-        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " は成分がすべて実数であり、転置について対称である。",
-      ]),
-      displayMath(String.raw`\varepsilon^\top = \varepsilon`),
-    ],
-    proof: [
-      paragraph([
-        ref("epsilon_square_and_eigenvalues"),
-        " の証明で得た表示より ",
-        math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
-        "（",
-        math(String.raw`M_{\mathrm{col}}`),
-        " 個の因子）である。因子 ",
-        math(String.raw`\sigma^x`),
-        " の成分はすべて実数（",
-        ref("pauli_x_has_real_entries"),
-        "）なので、",
-        ref("kronecker_of_real_entry_matrices_has_real_entries"),
-        "（",
-        math(String.raw`M \to M_{\mathrm{col}},\ A_k \to \sigma^x\ (k \in \{1,\dots,M_{\mathrm{col}}\})`),
-        "）より ",
-        math(String.raw`\varepsilon`),
-        " の成分はすべて実数（",
-        ref("def_matrix_with_real_entries"),
-        "）である。転置については",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon^\top
-&=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
-  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示})\\
-&=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
-  \quad (\because \blkref{kronecker_transpose})\\
-&=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
-  \quad (\because \blkref{transpose_of_pauli_x}\ \text{を各因子へ同時に適用})\\
-&=\varepsilon
-  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
-\end{aligned}`,
-      ),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 <sector_decomposition_of_rayleigh_sup> の証明の中にあった ε^⊤ = ε の導出を、最終定理が引く独立した主張として取り出した。",
-        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 成分の実性を「σ^x の成分は 0 または 1」「クロネッカー積の成分は各因子の成分の積」と名前だけで述べていたのを、epsilon_square_and_eigenvalues の証明の表示と pauli_x_has_real_entries・kronecker_of_real_entry_matrices_has_real_entries を引く形にした。転置の鎖の (σ^x)^⊤ = σ^x の段の根拠を pauli_matrix_products の成分表示から transpose_of_pauli_x に替えた。主張は変えていない。",
       ],
     },
   },
