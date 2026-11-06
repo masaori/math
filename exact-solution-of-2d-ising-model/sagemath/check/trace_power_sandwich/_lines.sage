@@ -1,6 +1,8 @@
 # 対象ラベル: trace_power_sandwich
-# 証明の各段（【W^n の成分の対称性】【W^n の半正定値性】【W^n の成分の評価】【単位ベクトルでの評価】【正の実数の冪の比較】
-# 【上限への移行】）を一行ずつ確かめる関数。P は QQ の実対称正定値行列（本文では P = W）、x は ‖x‖ = 1 の QQ^d の元。
+# 証明の各段（【(W_ℝ)^n の成分の対称性】【(W_ℝ)^n の半正定値性】【(W_ℝ)^n の成分の評価】【単位ベクトルでの評価】【正の実数の冪の比較】
+# 【上限への移行】）を一行ずつ確かめる関数。P は QQ の実対称正定値行列（本文では P = W_ℝ）、x は ‖x‖ = 1 の QQ^d の元。
+# 実数の側の行（P = W_ℝ、I = I_ℝ、T := Σ_k ((W_ℝ)^n)_kk）は QQ で、W（QQbar）から ϱ で W_ℝ（AA）へ運ぶ行
+# （【冪の実数の行列】、(W_ℝ)^1 = W_ℝ の 5 行の鎖、【(W_ℝ)^n の成分の対称性】の 6 行の鎖）は check_varrho_lines が QQbar と AA で確かめる。
 # 等号・不等号は QQ と AA の厳密な比較である。
 
 n_eq = 0
@@ -25,21 +27,21 @@ def chain_eq(L, what):
 
 
 def check_symmetry(Pn, what):
-    """【W^n の成分の対称性】(W^n)_lk = ((W^n)^⊤)_kl = (W^n)_kl。成分は QQ。"""
+    """【(W_ℝ)^n の成分の対称性】の結論 ((W_ℝ)^n)_lk = ((W_ℝ)^n)_kl の値の確認（実数の側。証明の鎖は check_varrho_lines）。成分は QQ。"""
     assert Pn.base_ring() == QQ
     T = body_transpose(Pn)
     d = Pn.nrows()
     for k in range(d):
         for l in range(d):
-            chain_eq([Pn[l, k], T[k, l], Pn[k, l]], f"{what}: 【W^n の成分の対称性】 k={k}, l={l}")
+            chain_eq([Pn[l, k], T[k, l], Pn[k, l]], f"{what}: 【(W_ℝ)^n の成分の対称性】 k={k}, l={l}")
 
 
 def check_psd(P, Pn, n, z, what):
-    """【W^n の半正定値性】を z ∈ QQ^d で確かめる。z ≠ 0 の段は ‖z‖ = √s（AA）を使う。"""
+    """【(W_ℝ)^n の半正定値性】を z ∈ QQ^d で確かめる。z ≠ 0 の段は ‖z‖ = √s（AA）を使う。"""
     d = Pn.nrows()
     rng = range(d)
     if z == 0:
-        eq(bil(z, Pn, z), 0, f"{what}: z = 0 なら z^⊤W^nz = 0")
+        eq(bil(z, Pn, z), 0, f"{what}: z = 0 なら z^⊤(W_ℝ)^nz = 0")
         for i in rng:
             for j in rng:
                 eq(z[i] * Pn[i, j] * z[j], 0, f"{what}: z = 0 の各項")
@@ -69,14 +71,14 @@ def check_psd(P, Pn, n, z, what):
          sum(sum((nz * w[i]) * PnA[i, j] * (nz * w[j]) for j in rng) for i in rng),
          nz**2 * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),
          nz**2 * bil(w, PnA, w)]
-    chain_eq(L, f"{what}: z^⊤W^nz の鎖")
+    chain_eq(L, f"{what}: z^⊤(W_ℝ)^nz の鎖")
     # moment_log_convexity の正値性（x → w、k → n）。w は AA の単位ベクトルなので、その主張の値を直接比べる
-    le(0, bil(w, PnA, w), f"{what}: w^⊤W^nw > 0", strict=True)
-    le(0, L[-1], f"{what}: z^⊤W^nz > 0", strict=True)
+    le(0, bil(w, PnA, w), f"{what}: w^⊤(W_ℝ)^nw > 0", strict=True)
+    le(0, L[-1], f"{what}: z^⊤(W_ℝ)^nz > 0", strict=True)
 
 
 def check_entry_bound(Pn, x, k, l, what):
-    """【W^n の成分の評価】v_i := x_l(e_k)_i − x_k(e_l)_i の 7 行と、移項した不等式。"""
+    """【(W_ℝ)^n の成分の評価】v_i := x_l(e_k)_i − x_k(e_l)_i の 7 行と、移項した不等式。"""
     d = Pn.nrows()
     rng = range(d)
     def e(p):
@@ -94,8 +96,8 @@ def check_entry_bound(Pn, x, k, l, what):
          x[l]**2 * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[l, k] + x[k]**2 * Pn[l, l],
          x[l]**2 * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[k, l] + x[k]**2 * Pn[l, l],
          x[l]**2 * Pn[k, k] - 2 * x[k] * Pn[k, l] * x[l] + x[k]**2 * Pn[l, l]]
-    le(0, L[0], f"{what}: 0 ≤ v^⊤W^nv k={k}, l={l}")
-    chain_eq(L, f"{what}: 【W^n の成分の評価】 k={k}, l={l}")
+    le(0, L[0], f"{what}: 0 ≤ v^⊤(W_ℝ)^nv k={k}, l={l}")
+    chain_eq(L, f"{what}: 【(W_ℝ)^n の成分の評価】 k={k}, l={l}")
     le(2 * x[k] * Pn[k, l] * x[l], x[l]**2 * Pn[k, k] + x[k]**2 * Pn[l, l], f"{what}: 移項した不等式 k={k}, l={l}")
 
 
@@ -114,14 +116,17 @@ def check_unit_vector_bound(P, x, nmax, what):
             le(m[k]**2, m[k - 1] * m[k + 1], f"{what}: moment_log_convexity の対数凸性 k={k}")
     # Σ x_kx_k = Σ|x_k|^2 = ‖x‖^2 = 1
     chain_eq([sum(x[k]**2 for k in rng), sum(abs(AA(x[k]))**2 for k in rng), norm_exact(x)**2, AA(1)], f"{what}: Σx_k^2 の鎖")
-    # m_0 の鎖
+    # m_0 の鎖（I = I_ℝ の成分は def_real_identity_matrix の 1・0）
+    for k in rng:
+        for l in rng:
+            eq(I[k, l], kd(k, l), f"{what}: (I_ℝ)_kl")
     chain_eq([m[0], bil(x, pw[0], x), bil(x, I, x),
-              sum(sum(x[k] * kd(k, l) * x[l] for l in rng) for k in rng),
-              sum(x[k] * kd(k, k) * x[k] for k in rng),
+              sum(sum(x[k] * I[k, l] * x[l] for l in rng) for k in rng),
+              sum(x[k] * I[k, k] * x[k] for k in rng),
               sum(x[k] * x[k] for k in rng), sum(x[k]**2 for k in rng), 1], f"{what}: m_0 の鎖")
-    # m_1 の鎖
-    chain_eq([m[1], bil(x, pw[1], x), bil(x, pw[0 + 1], x), bil(x, body_product(pw[0], P), x),
-              bil(x, body_product(I, P), x), bil(x, P, x)], f"{what}: m_1 の鎖")
+    # m_1 の鎖（(W_ℝ)^1 = W_ℝ は check_varrho_lines の ϱ の鎖。ここでは実数の側の値の一致）
+    eq(pw[1], P, f"{what}: (W_ℝ)^1 = W_ℝ")
+    chain_eq([m[1], bil(x, pw[1], x), bil(x, P, x)], f"{what}: m_1 の鎖")
     # m_k ≥ m_1m_{k−1}（k = 1 と帰納の段 k → k+1）
     chain_eq([m[1], m[1] * 1, m[1] * m[0]], f"{what}: k = 1 の段")
     for k in range(1, nmax):
@@ -142,9 +147,10 @@ def check_unit_vector_bound(P, x, nmax, what):
         eq(L[1], L[2], f"{what}: 冪の鎖 2→3 p={p}")
         le(L[3], L[2], f"{what}: 冪の鎖 3→4 p={p}")
         eq(L[3], L[4], f"{what}: 冪の鎖 4→5 p={p}")
-    # m_n ≤ tr(W^n) の鎖と、(x^⊤Wx)^n ≤ m_n ≤ tr(W^n)
+    # m_n ≤ T の鎖と、(x^⊤W_ℝx)^n ≤ m_n ≤ T（T := Σ_k ((W_ℝ)^n)_kk）
     for n in range(1, nmax + 1):
         A = pw[n]
+        T = sum(A[k, k] for k in rng)
         L = [m[n],
              sum(sum(x[k] * A[k, l] * x[l] for l in rng) for k in rng),
              QQ(1) / 2 * sum(sum(2 * x[k] * A[k, l] * x[l] for l in rng) for k in rng),
@@ -152,15 +158,14 @@ def check_unit_vector_bound(P, x, nmax, what):
              QQ(1) / 2 * (sum(sum(x[l]**2 * A[k, k] for l in rng) for k in rng) + sum(sum(x[k]**2 * A[l, l] for l in rng) for k in rng)),
              QQ(1) / 2 * (sum(A[k, k] * sum(x[l]**2 for l in rng) for k in rng) + sum(x[k]**2 * sum(A[l, l] for l in rng) for k in rng)),
              QQ(1) / 2 * (sum(A[k, k] for k in rng) * sum(x[l]**2 for l in rng) + sum(x[k]**2 for k in rng) * sum(A[l, l] for l in rng)),
-             QQ(1) / 2 * (A.trace() * 1 + 1 * A.trace()),
-             A.trace()]
+             QQ(1) / 2 * (T * 1 + 1 * T),
+             T]
         eq(L[0], L[1], f"{what}: m_n の鎖 1→2 n={n}")
         eq(L[1], L[2], f"{what}: m_n の鎖 2→3 n={n}")
         le(L[2], L[3], f"{what}: m_n の鎖 3→4 n={n}")
         for i in range(3, len(L) - 1):
             eq(L[i], L[i + 1], f"{what}: m_n の鎖 {i + 1}→{i + 2} n={n}")
-        eq(sum(A[k, k] for k in rng), A.trace(), f"{what}: def_trace n={n}")
-        L2 = [bil(x, P, x)**n, m[1]**n, m[n], A.trace()]
+        L2 = [bil(x, P, x)**n, m[1]**n, m[n], T]
         eq(L2[0], L2[1], f"{what}: 合わせた鎖 1→2 n={n}")
         le(L2[1], L2[2], f"{what}: 合わせた鎖 2→3 n={n}")
         le(L2[2], L2[3], f"{what}: 合わせた鎖 3→4 n={n}")
@@ -222,3 +227,46 @@ def check_sup_step(c, T, n, t, what):
     for i in range(2, 5):
         eq(L[i], L[i + 1], f"{what}: 背理法の鎖 {i + 1}→{i + 2}")
     le(T, t**n, f"{what}: t^n > T（仮定の下の T ≥ t^n と両立しない）", strict=True)
+
+
+# ϱ で運ぶ行を確かめる: 【冪の実数の行列】(W^p)_ℝ = (W_ℝ)^p（p ≤ nmax）、
+# (W_ℝ)^1 = (W^1)_ℝ = (W^{0+1})_ℝ = (W^0W)_ℝ = (IW)_ℝ = ϱ(W) = W_ℝ、
+# 【(W_ℝ)^n の成分の対称性】((W_ℝ)^n)_lk)_ℂ = ((W^n)_ℝ)_lk)_ℂ = (W^n)_lk = ((W^n)^⊤)_kl = (W^n)_kl = ((W^n)_ℝ)_kl)_ℂ = ((W_ℝ)^n)_kl)_ℂ と単射性の結論。
+# 冪はどちらの側も def_exp (1) の漸化式（X^0 := I、X^{m+1} := X^mX）で組み、積は成分の式で組む。
+
+def iota_rc(r):
+    return QQbar(r)
+
+
+def varrho_rc(B):
+    assert all(z.imag() == 0 for z in B.list())                    # def_matrix_with_real_entries
+    return matrix(AA, B.nrows(), B.ncols(), lambda p, q: AA(B[p, q].real()))
+
+
+def power_rec(X, q, ring):
+    Y = identity_matrix(ring, X.nrows())
+    for _ in range(q):
+        Y = body_product(Y, X)
+    return Y
+
+
+def check_varrho_lines(P, nmax, what):
+    d = P.nrows()
+    Wc = P.change_ring(QQbar)                                        # W ∈ Mat(d, ℂ)
+    WR = varrho_rc(Wc)                                               # W_ℝ := ϱ(W)（def_W_real）
+    Ic = identity_matrix(QQbar, d)                                   # I = I_{Mat(d,ℂ)}
+    pc = [power_rec(Wc, p, QQbar) for p in range(nmax + 1)]          # W^p（K = ℂ）
+    pr = [power_rec(WR, p, AA) for p in range(nmax + 1)]             # (W_ℝ)^p（K = ℝ）
+    for p in range(nmax + 1):
+        eq(varrho_rc(pc[p]), pr[p], f"{what}: 【冪の実数の行列】 p={p}")
+    L = [pr[1], varrho_rc(pc[1]), varrho_rc(pc[0 + 1]), varrho_rc(body_product(pc[0], Wc)), varrho_rc(body_product(Ic, Wc)), varrho_rc(Wc), WR]
+    chain_eq(L, f"{what}: (W_ℝ)^1 = W_ℝ の ϱ の鎖")
+    for n in range(1, nmax + 1):
+        T = body_transpose(pc[n])
+        eq(T, pc[n], f"{what}: (W^n)^⊤ = W^n n={n}")
+        for k in range(d):
+            for l in range(d):
+                L = [iota_rc(pr[n][l, k]), iota_rc(varrho_rc(pc[n])[l, k]), pc[n][l, k], T[k, l], pc[n][k, l],
+                     iota_rc(varrho_rc(pc[n])[k, l]), iota_rc(pr[n][k, l])]
+                chain_eq(L, f"{what}: 【(W_ℝ)^n の成分の対称性】の鎖 n={n}, k={k}, l={l}")
+                eq(pr[n][l, k], pr[n][k, l], f"{what}: 【(W_ℝ)^n の成分の対称性】の単射性の結論 n={n}")

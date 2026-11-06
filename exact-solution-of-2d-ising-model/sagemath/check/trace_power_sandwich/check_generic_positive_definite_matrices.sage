@@ -24,6 +24,7 @@ for d in range(1, 5):
         what = f"d={d}, P={P.list()}"
         for x in xs:
             check_unit_vector_bound(P, x, nmax, f"{what}, x={list(x)}")
+        check_varrho_lines(P, nmax, what)
         c = rayleigh_sup_exact(P)
         for n in range(1, nmax + 1):
             Pn = power_by_def_exp(P, n)
@@ -35,10 +36,10 @@ for d in range(1, 5):
                 for k in range(d):
                     for l in range(d):
                         check_entry_bound(Pn, x, k, l, f"{what}, n={n}")
-            # 主張: c^n ≤ tr(W^n) ≤ d c^n
-            T = Pn.trace()
-            le(c**n, T, f"{what}: 主張 c^n ≤ tr(W^n) n={n}")
-            le(T, d * c**n, f"{what}: 主張 tr(W^n) ≤ d c^n n={n}")
+            # 主張: c^n ≤ T ≤ d c^n（T := Σ_k ((W_ℝ)^n)_kk）
+            T = sum(Pn[k, k] for k in range(d))
+            le(c**n, T, f"{what}: 主張 c^n ≤ T n={n}")
+            le(T, d * c**n, f"{what}: 主張 T ≤ d c^n n={n}")
             # 【上限への移行】: 仮定 c^n > T' を満たす T' := c^n/2, c^n/(n+1) を置き、R の元として c の固有ベクトルの値 t = c で背理法の鎖を確かめる
             for Tp in [c**n / 2, c**n / (n + 1)]:
                 check_sup_step(c, Tp, n, c, f"{what}: 上限への移行 n={n}, T'={Tp}")
@@ -64,18 +65,18 @@ def expect_fail(fn, needle):
     raise RuntimeError(f"落ちるはずの検査が通った: {needle}")
 
 
-# 否定コントロール 1: 対称でない [[1, 1], [0, 1]] の 2 乗では、【W^n の成分の対称性】と【W^n の成分の評価】の対称性の行（6 行目）が外れる
+# 否定コントロール 1: 対称でない [[1, 1], [0, 1]] の 2 乗では、【(W_ℝ)^n の成分の対称性】と【(W_ℝ)^n の成分の評価】の対称性の行（6 行目）が外れる
 Tm = matrix(QQ, [[1, 1], [0, 1]])
 x = vector(QQ, [3/5, 4/5])
-expect_fail(lambda: check_symmetry(Tm**2, "非対称"), "【W^n の成分の対称性】")
-expect_fail(lambda: check_entry_bound(Tm**2, x, 0, 1, "非対称"), "【W^n の成分の評価】 k=0, l=1 5→6 行目")
+expect_fail(lambda: check_symmetry(Tm**2, "非対称"), "【(W_ℝ)^n の成分の対称性】")
+expect_fail(lambda: check_entry_bound(Tm**2, x, 0, 1, "非対称"), "【(W_ℝ)^n の成分の評価】 k=0, l=1 5→6 行目")
 # 否定コントロール 2: 対称だが正定値でない diag(1, −2) では、z = e_2 で w^⊤Nw > 0 が、x = (3/5, 4/5) で m_1 > 0 が、
 # (k, l) = (0, 1) で 0 ≤ v^⊤Nv（= −2/25）が外れる
 N = diagonal_matrix(QQ, [1, -2])
-expect_fail(lambda: check_psd(N, N, 1, vector(QQ, [0, 1]), "不定値"), "w^⊤W^nw > 0")
+expect_fail(lambda: check_psd(N, N, 1, vector(QQ, [0, 1]), "不定値"), "w^⊤(W_ℝ)^nw > 0")
 expect_fail(lambda: check_unit_vector_bound(N, x, 1, "不定値"), "m_k > 0 k=1")
-expect_fail(lambda: check_entry_bound(N, x, 0, 1, "不定値"), "0 ≤ v^⊤W^nv")
-# 否定コントロール 3: 単位でない x = (1, 1) と P = I（d = 2）では ‖x‖ = 1 の行で落ちる（m_0 = 2、(x^⊤Px)^2 = 4 > tr(P^2) = 2）
+expect_fail(lambda: check_entry_bound(N, x, 0, 1, "不定値"), "0 ≤ v^⊤(W_ℝ)^nv")
+# 否定コントロール 3: 単位でない x = (1, 1) と P = I（d = 2）では ‖x‖ = 1 の行で落ちる（m_0 = 2、(x^⊤Px)^2 = 4 > Σ_k (P^2)_kk = 2）
 x = vector(QQ, [1, 1])
 Iq = identity_matrix(QQ, 2)
 assert bil(x, Iq, x) == 2 and bil(x, Iq, x)**2 == 4 > (Iq**2).trace()

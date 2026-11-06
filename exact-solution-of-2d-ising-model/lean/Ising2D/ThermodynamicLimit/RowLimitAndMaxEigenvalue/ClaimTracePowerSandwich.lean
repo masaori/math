@@ -1,18 +1,19 @@
 /-
-# `c(M)^n ≤ tr(W^n) ≤ 2^M c(M)^n`（具体版）
+# `c(M)^n ≤ Σ_k (W^n)_kk ≤ 2^M c(M)^n`（具体版）
 
 正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
-必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（Step 1）、
-`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（Step 2）、
-`Ising2D.NecSuf.IsPdPair.moment_pow_le`（Step 3 前半）
+必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（上からの評価 `trace_power_upper_bound`）、
+`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（`moment_log_convexity`）、
+`Ising2D.NecSuf.IsPdPair.moment_pow_le`（【単位ベクトルでの評価】の `m_p ≥ m_1^p`）
 （いずれも `Ising2D/NecSuf/RayleighMoments.lean`）
 
 **この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。**
 上からの評価は `rayleigh_bounds_operator_norm` から、下からの評価は
 モーメント列 `m_k = xᵀW^k x` の対数凸性 `m_k² ≤ m_{k-1}m_{k+1}` による。
-人手証明の経路をそのまま写している。
+ただし人手と 1 対 1 ではない。`m_n ≤ tr(W^n)` は `psd_quad_le_normSq_mul_trace`（`|A_kl| ≤ √(A_kk A_ll)` の経路）で、
+人手は【(W_ℝ)^n の成分の評価】を足し合わせる鎖である。上限への移行は `Real.rpow`（`n` 乗根）で、人手は冪の比較と背理法である。
 
 人手証明の `2^M` は空間の次元なので、ここでは `Fintype.card n` として述べる
 （Ising の場合 `n = Conf M` で `Fintype.card (Conf M) = 2^M`）。
@@ -32,7 +33,7 @@ theorem IsSymm_pow {W : Matrix n n ℝ} (hW : W.IsSymm) (N : ℕ) : (W ^ N).IsSy
   show (W ^ N)ᵀ = W ^ N
   rw [Matrix.transpose_pow, hW.eq]
 
-/-- `W^N` も半正定値（人手証明 Step 3 の「`W^n` は正定値」の半正定値版）。 -/
+/-- `W^N` も半正定値（人手 `trace_power_sandwich` の【(W_ℝ)^n の半正定値性】）。 -/
 theorem psd_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (N : ℕ) (x : n → ℝ) :
     0 ≤ x ⬝ᵥ W ^ N *ᵥ x := by
@@ -60,7 +61,8 @@ theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
     _ = (Fintype.card n : ℝ) * rayleighSup W ^ N := by
         rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
 
-/-- 単位ベクトルに対する `(xᵀWx)^n ≤ tr(W^n)`（人手証明 Step 2・Step 3）。 -/
+/-- 単位ベクトルに対する `(xᵀWx)^n ≤ tr(W^n)`（人手 `trace_power_sandwich` の【単位ベクトルでの評価】の `(x^⊤W_ℝx)^n ≤ T`。
+証明は必要十分版の特殊化で、人手の【(W_ℝ)^n の成分の評価】を足し合わせる鎖とはまだ 1 対 1 でない）。 -/
 theorem quad_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {x : n → ℝ} (hx : vecNormSq x = 1)
     (N : ℕ) :
@@ -73,7 +75,7 @@ theorem quad_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     simp [vecNormSq] at hx
   have hip1 : matBilin (1 : Matrix n n ℝ) x x = 1 := by
     simpa [vecNormSq] using hx
-  -- Step 2・Step 3: `(xᵀWx)^n ≤ m_n`
+  -- 【単位ベクトルでの評価】: `(xᵀWx)^n ≤ m_n`
   have h1 := hpair.moment_pow_le hx0 hip1 N
   rw [matBilin_one_mulVecLin_pow] at h1
   have h1' : (x ⬝ᵥ W *ᵥ x) ^ N ≤ x ⬝ᵥ W ^ N *ᵥ x := by
@@ -83,7 +85,8 @@ theorem quad_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
   rw [hx, one_mul] at h2
   exact le_trans h1' h2
 
-/-- **下からの評価**（人手証明 Step 3 の最後の `sup` を取る操作）: `c(M)^n ≤ tr(W^n)`。 -/
+/-- **下からの評価**（人手 `trace_power_sandwich` の【上限への移行】）: `c(M)^n ≤ tr(W^n)`。
+人手は【正の実数の冪の比較】と背理法で示すが、ここは `n` 乗根（`Real.rpow`）を取って上限と比べており、まだ 1 対 1 でない。 -/
 theorem rayleighSup_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {N : ℕ} (hN : 1 ≤ N) :
     rayleighSup W ^ N ≤ (W ^ N).trace := by
@@ -124,7 +127,9 @@ theorem rayleighSup_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
         pow_le_pow_left₀ (rayleighSup_nonneg hpsd) hle N
     _ = T := hpow
 
-/-- **`c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n`**（人手証明 `trace_power_sandwich`）。 -/
+/-- **`c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n`**（人手証明 `trace_power_sandwich`）。
+`W` は実数の行列で `tr(W^n) = Σ_k (W^n)_kk` なので、人手の `c^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は
+`W := W_ℝ`・`Fintype.card n = 2^{M_col}` と置いたものである（具体的な `W_ℝ` への当てはめは `partition_function_sandwich_physical`）。 -/
 theorem trace_power_sandwich {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {N : ℕ} (hN : 1 ≤ N) :
     rayleighSup W ^ N ≤ (W ^ N).trace ∧

@@ -18,6 +18,7 @@ for M in [2, 3]:
                   rational_unit_vector([QQ.random_element(num_bound=4, den_bound=3) for _ in range(d - 1)])]
             for x in xs:
                 check_unit_vector_bound(W, x, nmax, f"{what}, x={list(x)}")
+            check_varrho_lines(W, nmax, what)
             c = rayleigh_sup_exact(W)
             for n in range(1, nmax + 1):
                 Wn = power_by_def_exp(W, n)
@@ -28,9 +29,9 @@ for M in [2, 3]:
                     for k in range(d):
                         for l in range(d):
                             check_entry_bound(Wn, x, k, l, f"{what}, n={n}")
-                T = Wn.trace()
-                le(c**n, T, f"{what}: 主張 c^n ≤ tr(W^n) n={n}")
-                le(T, 2**M * c**n, f"{what}: 主張 tr(W^n) ≤ 2^M c^n n={n}")
+                T = sum(Wn[k, k] for k in range(d))                # T := Σ_k ((W_ℝ)^n)_kk
+                le(c**n, T, f"{what}: 主張 c^n ≤ T n={n}")
+                le(T, 2**M * c**n, f"{what}: 主張 T ≤ 2^M c^n n={n}")
                 check_sup_step(c, c**n / 2, n, c, f"{what}: 上限への移行 n={n}")
     print(f"M_col = {M}: 等号 {n_eq} 個、不等号 {n_le} 個（累計）")
 print(f"等号 {n_eq} 個、不等号 {n_le} 個")

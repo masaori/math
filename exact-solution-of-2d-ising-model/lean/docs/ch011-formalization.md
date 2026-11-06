@@ -67,9 +67,9 @@
 | `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | `trace_power_sandwich` Step 3 の補題 |
 | `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 同上 |
 | `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は `W := W_ℝ`・`card = 2^{M_col}`・`N ≥ 1` と置いた特殊化。証明は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化で、人手の偶数・奇数の場合分けの鎖と 1 対 1 でない） | `trace_power_upper_bound` |
-| `Ising2D.quad_pow_le_trace_pow` | 単位 `x` で `(xᵀWx)^n ≤ tr(W^n)` | 同 Step 2・Step 3 |
-| `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | 同 Step 3 の `sup` を取る操作 |
-| **`Ising2D.trace_power_sandwich`** | `c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n` | **`trace_power_sandwich`** |
+| `Ising2D.quad_pow_le_trace_pow` | 単位 `x` で `(xᵀWx)^n ≤ tr(W^n)` | `trace_power_sandwich` の【単位ベクトルでの評価】（証明は必要十分版の特殊化で、人手の成分の評価を足し合わせる鎖と 1 対 1 でない） |
+| `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | `trace_power_sandwich` の【上限への移行】（人手は冪の比較と背理法、Lean は `n` 乗根で、1 対 1 でない） |
+| **`Ising2D.trace_power_sandwich`** | 実数の行列 `W` の `c(M)^n ≤ Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `c^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col}c^n` は `W := W_ℝ`・`card = 2^{M_col}` の特殊化） | **`trace_power_sandwich`** |
 | `Ising2D.symTransfer` | `W := B V₂ B`（`B = V₁^{1/2}`） | `def_symmetrized_transfer_matrix` |
 | `Ising2D.open_product_pow` | `X, Y ∈ Mat(n, ℂ)` で `(X(YX)^k)Y = (XY)^{k+1}` | `Z_equals_trace_of_W` の準備 2（`k = 0` の 5 行と帰納段階の 6 行） |
 | `Ising2D.symmetrized_pow_succ` | `BB = V₁` のもとで `((BV₂)B)^{k+1} = ((B(V₂V₁)^k)V₂)B` | 同 準備 3（`k = 0` の 6 行と帰納段階の 12 行） |
