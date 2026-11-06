@@ -7909,7 +7909,7 @@ b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
  &=\sum_D\sum_E\bigl(c_D(c_Eb_D)\bigr)b_E&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
  &=\sum_D\sum_E\bigl((c_Dc_E)b_D\bigr)b_E&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
  &=\sum_D\sum_E(c_Dc_E)(b_Db_E)&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
- &=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \text{順序付きの対への再添字付け}\bigr).
+ &=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \text{順序付きの対への再添字付け}\bigr)
 \end{aligned}`),
                 paragraph(["最後の行では、外側で ", math(String.raw`D`), " を選んでから内側で ", math(String.raw`E`), " を選ぶことと、直積の元 ", math(String.raw`(D,E)`), " を選ぶことが一対一に対応する。逆は第一成分と第二成分を読む操作である。したがって項の重複も欠落もなく、係数を半分にする操作は入らない。すべて有限和・有限積であり、実数体・複素数体への脱出はない。"]),
               ],
