@@ -66,7 +66,7 @@
 | `Ising2D.rayleigh_bounds_operator_norm_of_necSuf` / `rayleigh_bounds_operator_norm_pow_of_necSuf` | 上の 2 つの平方根を取った `‖Wx‖ ≤ c(M)‖x‖` / `‖W^k x‖ ≤ c(M)^k‖x‖`（具体版と同じ主張を必要十分版から得たもの） | 同上 |
 | `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | `trace_power_sandwich` Step 3 の補題 |
 | `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 同上 |
-| `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`） | `tr(W^n) ≤ (dim) c(M)^n` | `trace_power_sandwich` Step 1 |
+| `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は `W := W_ℝ`・`card = 2^{M_col}`・`N ≥ 1` と置いた特殊化。証明は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化で、人手の偶数・奇数の場合分けの鎖と 1 対 1 でない） | `trace_power_upper_bound` |
 | `Ising2D.quad_pow_le_trace_pow` | 単位 `x` で `(xᵀWx)^n ≤ tr(W^n)` | 同 Step 2・Step 3 |
 | `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | 同 Step 3 の `sup` を取る操作 |
 | **`Ising2D.trace_power_sandwich`** | `c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n` | **`trace_power_sandwich`** |

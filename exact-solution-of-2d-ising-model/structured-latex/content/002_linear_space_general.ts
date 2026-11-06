@@ -6010,6 +6010,45 @@ A - B
     },
   },
   {
+    id: "linear_space_general_definition_real_matrix_vector_product",
+    kind: "definition",
+    title: { text: "実数の行列と実数のベクトルの積" },
+    labels: ["def_real_matrix_vector_product"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`P \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`x = (x_1,\dots,x_n) \in \mathbb{R}^n`),
+        "（実数の ",
+        math(String.raw`n`),
+        " 個の組）とする。積 ",
+        math(String.raw`Px \in \mathbb{R}^m`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(Px)_{i} := \sum_{j=1}^{n} P_{ij}\,x_{j}
+\qquad (i \in \{1,\dots,m\})`),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`n`),
+        " 個の実数の有限和（",
+        ref("def_finite_sum_of_real_numbers"),
+        "）である。",
+        math(String.raw`x`),
+        " を行列として扱うことはせず、この式で定める一つの写像とする。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の (W_ℝ)^a e_k は、係数が ℂ の行列の積 mat_mult（数ベクトルを n 行 1 列の行列とみなす）の成分の式で読んでいた。実数の行列と実数のベクトルの積を定めるブロックが無かったので足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_definition_real_identity_matrix",
     kind: "definition",
     title: { text: "実数の単位行列" },

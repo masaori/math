@@ -18,6 +18,7 @@ for n in range(1, 6):
             assert is_real_symmetric(P) and real_rooted_with_signs(P, strict=False)
             c = rayleigh_sup_exact(P)
             check_proof_lines(P, c, 6 if n <= 3 else 5, f"n={n}, n'={nn}, P={P.list()}")
+            check_varrho_lines(P, 6 if n <= 3 else 5, f"n={n}, n'={nn}, P={P.list()}")
             count += 1
 print(f"行列 {count} 組、等号 {n_eq} 個、不等号 {n_le} 個")
 

@@ -150,3 +150,64 @@ def check_proof_lines(P, c, nmax, what):
         le(L[-1], sum(c**n for k in range(d)), f"{what}: トレースの鎖の不等号 n={n}")
         eq(sum(c**n for k in range(d)), d * c**n, f"{what}: Σ c^n = d c^n")
         le((P**n).trace(), d * c**n, f"{what}: 主張 tr(W^n) ≤ d c^n n={n}")
+
+
+# 2026-11-06: 証明を W_ℝ := ϱ(W)（def_W_real）の冪で書き直した。上の check_proof_lines は P を W_ℝ（QQ の実数の行列）として
+# 実数の側の行を確かめる。ここでは複素行列 W（QQbar）と W_ℝ = ϱ(W)（AA）を別々に作り、ϱ で運ぶ行を確かめる:
+# 【冪の実数の行列】(W^p)_ℝ = (W_ℝ)^p、【冪の対称性】の 6 行の鎖、
+# (W_ℝ)^{2a} = (W^{2a})_ℝ = (W^{a+a})_ℝ = (W^aW^a)_ℝ = (W^a)_ℝ(W^a)_ℝ = (W_ℝ)^a(W_ℝ)^a、
+# (WW^a)_ℝ = W_ℝ(W^a)_ℝ と (W_ℝ)^{2a+1} = (W^{2a+1})_ℝ = (W^a(WW^a))_ℝ = (W^a)_ℝ(WW^a)_ℝ = (W^a)_ℝ(W_ℝ(W^a)_ℝ) = (W_ℝ)^a(W_ℝ(W_ℝ)^a)。
+# 冪はどちらの側も def_exp (1) の漸化式（X^0 := I、X^{m+1} := X^mX）で組み、積は成分の式で組む。
+
+def iota_rc(r):
+    return QQbar(r)
+
+
+def varrho_rc(B):
+    assert all(z.imag() == 0 for z in B.list())                    # def_matrix_with_real_entries
+    return matrix(AA, B.nrows(), B.ncols(), lambda p, q: AA(B[p, q].real()))
+
+
+def power_rec(X, q, ring):
+    Y = identity_matrix(ring, X.nrows())
+    for _ in range(q):
+        Y = body_product(Y, X)
+    return Y
+
+
+def check_varrho_lines(P, nmax, what):
+    d = P.nrows()
+    Wc = P.change_ring(QQbar)                                        # W ∈ Mat(d, ℂ)
+    WR = varrho_rc(Wc)                                               # W_ℝ := ϱ(W)
+    pc = [power_rec(Wc, p, QQbar) for p in range(nmax + 1)]          # W^p（K = ℂ）
+    pr = [power_rec(WR, p, AA) for p in range(nmax + 1)]             # (W_ℝ)^p（K = ℝ）
+    for p in range(nmax + 1):
+        eq(varrho_rc(pc[p]), pr[p], f"{what}: 【冪の実数の行列】 p={p}")
+        T = body_transpose(pc[p])
+        eq(T, pc[p], f"{what}: (W^p)^⊤ = W^p p={p}")
+        for k in range(d):
+            for l in range(d):
+                L = [iota_rc(pr[p][k, l]), iota_rc(varrho_rc(pc[p])[k, l]), pc[p][k, l], T[k, l], pc[p][l, k],
+                     iota_rc(varrho_rc(pc[p])[l, k]), iota_rc(pr[p][l, k])]
+                for x, y in zip(L, L[1:]):
+                    eq(x, y, f"{what}: 【冪の対称性】の鎖 p={p}")
+                eq(pr[p][k, l], pr[p][l, k], f"{what}: 【冪の対称性】の単射性の結論 p={p}")
+    for n in range(2, nmax + 1, 2):
+        a = n // 2
+        M = [pr[2 * a], varrho_rc(pc[2 * a]), varrho_rc(pc[a + a]), varrho_rc(body_product(pc[a], pc[a])),
+             body_product(varrho_rc(pc[a]), varrho_rc(pc[a])), body_product(pr[a], pr[a])]
+        for x, y in zip(M, M[1:]):
+            eq(x, y, f"{what}: 偶数の ϱ の鎖 n={n}")
+    for n in range(1, nmax + 1, 2):
+        a = (n - 1) // 2
+        WWa = body_product(Wc, pc[a])
+        eq(varrho_rc(WWa), body_product(WR, varrho_rc(pc[a])), f"{what}: (WW^a)_ℝ = W_ℝ(W^a)_ℝ n={n}")
+        M = [pr[2 * a + 1], varrho_rc(pc[2 * a + 1]), varrho_rc(body_product(pc[a], WWa)),
+             body_product(varrho_rc(pc[a]), varrho_rc(WWa)),
+             body_product(varrho_rc(pc[a]), body_product(WR, varrho_rc(pc[a]))),
+             body_product(pr[a], body_product(WR, pr[a]))]
+        for x, y in zip(M, M[1:]):
+            eq(x, y, f"{what}: 奇数の ϱ の鎖 n={n}")
+    # 主張の注記: tr(W^n) = (Σ_k ((W_ℝ)^n)_kk)_ℂ（trace_of_W_power_via_W_real）
+    for n in range(1, nmax + 1):
+        eq(sum(pc[n][k, k] for k in range(d)), iota_rc(sum(pr[n][k, k] for k in range(d))), f"{what}: tr(W^n) = (Σ((W_ℝ)^n)_kk)_ℂ n={n}")

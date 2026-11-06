@@ -15,6 +15,7 @@ for M in [2, 3]:
             c = rayleigh_sup_exact(W)
             assert c > 0
             check_proof_lines(W, c, 5, f"M_col={M}, K_2=log {xx}, K_1=2log {yy}")
+            check_varrho_lines(W, 5, f"M_col={M}, K_2=log {xx}, K_1=2log {yy}")
     print(f"M_col = {M}: 等号 {n_eq} 個、不等号 {n_le} 個（累計）")
 print(f"等号 {n_eq} 個、不等号 {n_le} 個")
 print("RESULT: PASS")

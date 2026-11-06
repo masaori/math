@@ -40,7 +40,9 @@ theorem psd_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
   have h := hpair.moment_nonneg x N
   rwa [matBilin_one_mulVecLin_pow] at h
 
-/-- **上からの評価**（人手証明 Step 1）: `tr(W^n) ≤ (dim) c(M)^n`。 -/
+/-- **上からの評価**（人手 `trace_power_upper_bound`）: `Σ_k (W^n)_kk ≤ (dim) c(M)^n`。
+人手の `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は、これを `W := W_ℝ`、`Fintype.card n = 2^{M_col}`、`N ≥ 1` と置いた特殊化（ここは対称で半正定値な任意の実数の行列と `N = 0` も含めて述べる）。証明は必要十分版
+`NecSuf.IsPsdPair.moment_le_pow` の特殊化で、人手の偶数・奇数の場合分けの鎖とはまだ 1 対 1 でない。 -/
 theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (N : ℕ) :
     (W ^ N).trace ≤ (Fintype.card n : ℝ) * rayleighSup W ^ N := by

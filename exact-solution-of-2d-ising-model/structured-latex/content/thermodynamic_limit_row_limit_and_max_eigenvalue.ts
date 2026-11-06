@@ -1677,20 +1677,64 @@ c(M_{\mathrm{col}})
     id: "maxeig_008a_claim_trace_power_upper_bound",
     kind: "claim",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 10 },
-    title: { tex: String.raw`\mathrm{tr}(W^{n}) \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
+    title: { tex: String.raw`\sum_{k} ((W_{\mathbb{R}})^{n})_{kk} \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
     labels: ["trace_power_upper_bound"],
     statement: [
-      paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " について"]),
-      displayMath(String.raw`\mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{n}`),
+      paragraph([
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " と略記し、",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を ",
+        ref("def_W_real"),
+        " の行列、",
+        math(String.raw`c(M_{\mathrm{col}})`),
+        " を ",
+        ref("def_rayleigh_sup"),
+        " の数とする。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{d} \bigl((W_{\mathbb{R}})^{n}\bigr)_{kk}\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{n}`),
+      paragraph([
+        "が成り立つ。左辺の ",
+        math(String.raw`(W_{\mathbb{R}})^{n}`),
+        " は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪、和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和である。",
+      ]),
     ],
     proof: [
       paragraph([
         math(String.raw`c := c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
         "（",
         ref("def_rayleigh_sup"),
-        "）、",
-        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
-        " と略記する。",
+        "）と略記する。",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " は ",
+        ref("def_symmetrized_transfer_matrix"),
+        " の行列で、",
+        ref("def_W_real"),
+        " より ",
+        math(String.raw`W \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`W_{\mathbb{R}} = \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W)`),
+        " である。",
+        math(String.raw`B \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " について ",
+        math(String.raw`B_{\mathbb{R}} := \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(B)`),
+        " と書く（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の略記）。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
         math(String.raw`k \in \{1,\dots,d\}`),
         " について ",
         math(String.raw`e_k \in \mathbb{R}^{d}`),
@@ -1704,7 +1748,11 @@ c(M_{\mathrm{col}})
         math(String.raw`i \neq k`),
         " なら ",
         math(String.raw`(e_k)_i := 0`),
-        " で定める。",
+        " で定める。実数の行列とベクトルの積 ",
+        math(String.raw`(W_{\mathbb{R}})^{a}e_k \in \mathbb{R}^{d}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        " の積である。",
       ]),
       paragraph([
         "【",
@@ -1725,7 +1773,26 @@ c(M_{\mathrm{col}})
 &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
 \end{aligned}`),
       paragraph([
-        "【冪の実対称性】",
+        "【冪の実数の行列】",
+        ref("real_matrix_of_real_entry_matrix_preserves_power"),
+        "（",
+        math(String.raw`n \to d,\ A \to W,\ q \to p`),
+        "）より、すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`W^p \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        "（",
+        math(String.raw`W^p`),
+        " は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`K = \mathbb{C}`),
+        " の冪）であり、",
+      ]),
+      displayMath(String.raw`(W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p`),
+      paragraph(["である。"]),
+      paragraph([
+        "【冪の対称性】",
         math(String.raw`W`),
         " は実対称なので（",
         ref("W_is_real_symmetric_positive_definite"),
@@ -1733,39 +1800,43 @@ c(M_{\mathrm{col}})
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
         " について ",
         math(String.raw`W^p`),
-        " は実対称である（",
+        " は実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）であり（",
         ref("power_of_real_symmetric_complex_matrix_is_real_symmetric"),
         "、",
         math(String.raw`n \to d,\ A \to W`),
-        "）。すなわち ",
-        math(String.raw`W^p`),
-        " の成分はすべて実数で、すべての ",
+        "）、とくに ",
+        math(String.raw`(W^p)^\top = W^p`),
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）である。すべての ",
         math(String.raw`k, l \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-(W^p)_{kl}
+\Bigl(\bigl((W_{\mathbb{R}})^p\bigr)_{kl}\Bigr)_{\mathbb{C}}
+&=\Bigl(\bigl((W^p)_{\mathbb{R}}\bigr)_{kl}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{【冪の実数の行列】の}\ (W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p\bigr)\\
+&=(W^p)_{kl}
+&&\bigl(\because\ \blkref{def_real_matrix_of_real_entry_matrix}\ (m, n \to d,\ B \to W^p)\bigr)\\
 &=\bigl((W^p)^\top\bigr)_{kl}
-&&\bigl(\because\ W^p\ \text{は実対称なので}\ (W^p)^\top = W^p\ \text{（}\blkref{def_real_symmetric_complex_matrix}\text{）}\bigr)\\
+&&\bigl(\because\ (W^p)^\top = W^p\bigr)\\
 &=(W^p)_{lk}
-&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)
+&&\bigl(\because\ \blkref{def_matrix_transpose}\bigr)\\
+&=\Bigl(\bigl((W^p)_{\mathbb{R}}\bigr)_{lk}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_real_matrix_of_real_entry_matrix}\ (m, n \to d,\ B \to W^p)\bigr)\\
+&=\Bigl(\bigl((W_{\mathbb{R}})^p\bigr)_{lk}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{【冪の実数の行列】の}\ (W^p)_{\mathbb{R}} = (W_{\mathbb{R}})^p\bigr)
 \end{aligned}`),
       paragraph([
-        "である。以下、",
-        ref("def_rayleigh_sup"),
-        " が ",
-        math(String.raw`W`),
-        " を読むのと同じく、",
-        math(String.raw`W^p`),
-        " の成分を実数として ",
-        math(String.raw`W^pe_k \in \mathbb{R}^d`),
+        "なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
         "（",
-        ref("mat_mult"),
-        "）と ",
-        math(String.raw`x^\top W^p y`),
-        "（",
-        ref("def_real_bilinear_value"),
-        "）を読む。",
+        math(String.raw`a \to ((W_{\mathbb{R}})^p)_{kl},\ b \to ((W_{\mathbb{R}})^p)_{lk}`),
+        "）より ",
+        math(String.raw`((W_{\mathbb{R}})^p)_{kl} = ((W_{\mathbb{R}})^p)_{lk}`),
+        " である。",
       ]),
       paragraph([
         "【対角成分の表示】",
@@ -1775,47 +1846,47 @@ c(M_{\mathrm{col}})
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-e_k^\top W^p e_k
-&=\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i\,(W^p)_{ij}\,(e_k)_j
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
-&=\sum_{j=1}^{d}(e_k)_k\,(W^p)_{kj}\,(e_k)_j
+e_k^\top (W_{\mathbb{R}})^p e_k
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i\,\bigl((W_{\mathbb{R}})^p\bigr)_{ij}\,(e_k)_j
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to (W_{\mathbb{R}})^p,\ x, y \to e_k)\bigr)\\
+&=\sum_{j=1}^{d}(e_k)_k\,\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
 &&\bigl(\because\ i \neq k\ \text{の項は}\ (e_k)_i = 0\ \text{なので}\ 0\bigr)\\
-&=\sum_{j=1}^{d}(W^p)_{kj}\,(e_k)_j
+&=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
 &&\bigl(\because\ (e_k)_k = 1\bigr)\\
-&=(W^p)_{kk}\,(e_k)_k
+&=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}\,(e_k)_k
 &&\bigl(\because\ j \neq k\ \text{の項は}\ (e_k)_j = 0\ \text{なので}\ 0\bigr)\\
-&=(W^p)_{kk}
+&=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}
 &&\bigl(\because\ (e_k)_k = 1\bigr)
 \end{aligned}`),
       paragraph([
         "【",
-        math(String.raw`W^ae_k`),
+        math(String.raw`(W_{\mathbb{R}})^ae_k`),
         " の成分とノルム】",
         math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`k \in \{1,\dots,d\}`),
         " について ",
-        math(String.raw`u := W^ae_k \in \mathbb{R}^d`),
+        math(String.raw`u := (W_{\mathbb{R}})^ae_k \in \mathbb{R}^d`),
         " とおく。",
         math(String.raw`l \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 u_l
-&=\sum_{m=1}^{d}(W^a)_{lm}\,(e_k)_m
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=(W^a)_{lk}\,(e_k)_k
+&=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,(e_k)_m
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to (W_{\mathbb{R}})^a,\ x \to e_k)\bigr)\\
+&=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k
 &&\bigl(\because\ m \neq k\ \text{の項は}\ (e_k)_m = 0\ \text{なので}\ 0\bigr)\\
-&=(W^a)_{lk}
+&=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}
 &&\bigl(\because\ (e_k)_k = 1\bigr)
 \end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
 \|u\|
-&=\|W^ae_k\|
-&&\bigl(\because\ u := W^ae_k\bigr)\\
+&=\bigl\|(W_{\mathbb{R}})^ae_k\bigr\|
+&&\bigl(\because\ u := (W_{\mathbb{R}})^ae_k\bigr)\\
 &\leq c^a\,\|e_k\|
-&&\bigl(\because\ \blkref{rayleigh_bounds_operator_norm}\ \text{の冪の主張を指数}\ a\ \text{と}\ x \to e_k\ \text{で適用}\bigr)\\
+&&\bigl(\because\ \blkref{rayleigh_bounds_operator_norm}\ \text{の冪の主張}\ (\text{指数}\ k \to a,\ x \to e_k)\bigr)\\
 &=c^a
 &&\bigl(\because\ \text{【}e_k\text{ のノルム】}\bigr)
 \end{aligned}`),
@@ -1832,34 +1903,52 @@ u_l
         math(String.raw`n = 2a`),
         "（",
         math(String.raw`a \in \mathbb{Z}_{\geq 1}`),
-        "）が偶数の場合。",
+        "）が偶数の場合。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(W_{\mathbb{R}})^{2a}
+&=(W^{2a})_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 2a)\bigr)\\
+&=(W^{a+a})_{\mathbb{R}}
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
+&=(W^aW^a)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p, q \to a)\bigr)\\
+&=(W^a)_{\mathbb{R}}\,(W^a)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A, B \to W^a)\bigr)\\
+&=(W_{\mathbb{R}})^a\,(W_{\mathbb{R}})^a
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to a)\ \text{を二つの因子へ同時に適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（",
+        math(String.raw`W^a \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " は【冪の実数の行列】、右辺の積は ",
+        ref("def_real_matrix_product"),
+        "）。",
         math(String.raw`k \in \{1,\dots,d\}`),
         " と【",
-        math(String.raw`W^ae_k`),
+        math(String.raw`(W_{\mathbb{R}})^ae_k`),
         " の成分とノルム】の ",
-        math(String.raw`u = W^ae_k`),
+        math(String.raw`u = (W_{\mathbb{R}})^ae_k`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-e_k^\top W^{2a}e_k
-&=(W^{2a})_{kk}
+e_k^\top (W_{\mathbb{R}})^{2a}e_k
+&=\bigl((W_{\mathbb{R}})^{2a}\bigr)_{kk}
 &&\bigl(\because\ \text{【対角成分の表示】}\ (p \to 2a)\bigr)\\
-&=(W^{a+a})_{kk}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
-&=(W^aW^a)_{kk}
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p, q \to a)\bigr)\\
-&=\sum_{l=1}^{d}(W^a)_{kl}\,(W^a)_{lk}
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=\sum_{l=1}^{d}(W^a)_{lk}\,(W^a)_{lk}
-&&\bigl(\because\ \text{【冪の実対称性】の}\ (W^a)_{kl} = (W^a)_{lk}\bigr)\\
+&=\bigl((W_{\mathbb{R}})^a(W_{\mathbb{R}})^a\bigr)_{kk}
+&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,\bigl((W_{\mathbb{R}})^a\bigr)_{lk}
+&&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P, Q \to (W_{\mathbb{R}})^a)\bigr)\\
+&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,\bigl((W_{\mathbb{R}})^a\bigr)_{lk}
+&&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^a)_{kl} = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
 &=\sum_{l=1}^{d}u_l\,u_l
-&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ u_l = (W^a)_{lk}\bigr)\\
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ u_l = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
 &=\sum_{l=1}^{d}|u_l|^2
-&&\bigl(\because\ u_l \in \mathbb{R}\ \text{なので}\ u_lu_l = |u_l|^2\bigr)\\
+&&\bigl(\because\ u_l \in \mathbb{R}\ \text{なので}\ \blkref{def_real_absolute_value}\ \text{より}\ u_lu_l = |u_l|^2\bigr)\\
 &=\|u\|^2
 &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
 &\leq c^{2a}
-&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\bigr)\\
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\bigr)\\
 &=c^n
 &&\bigl(\because\ n = 2a\bigr)
 \end{aligned}`),
@@ -1868,16 +1957,18 @@ e_k^\top W^{2a}e_k
         math(String.raw`n = 2a+1`),
         "（",
         math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
-        "）が奇数の場合。まず",
+        "）が奇数の場合。まず ",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " で",
       ]),
       displayMath(String.raw`\begin{aligned}
 W^{2a+1}
 &=W^{a+(1+a)}
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a+1 = a+(1+a)\bigr)\\
 &=W^aW^{1+a}
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to a,\ q \to 1+a)\bigr)\\
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to a,\ q \to 1+a)\bigr)\\
 &=W^a\bigl(W^1W^a\bigr)
-&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to a)\bigr)\\
+&&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to 1,\ q \to a)\bigr)\\
 &=W^a\bigl(W^{0+1}W^a\bigr)
 &&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
 &=W^a\bigl((W^0W)W^a\bigr)
@@ -1889,35 +1980,61 @@ W^{2a+1}
 \end{aligned}`),
       paragraph([
         "である。",
+        ref("real_matrix_of_real_entry_matrix_preserves_product"),
+        "（",
+        math(String.raw`m, n, p \to d,\ A \to W,\ B \to W^a`),
+        "）より ",
+        math(String.raw`WW^a \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
+        " で ",
+        math(String.raw`(WW^a)_{\mathbb{R}} = W_{\mathbb{R}}(W^a)_{\mathbb{R}}`),
+        " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(W_{\mathbb{R}})^{2a+1}
+&=(W^{2a+1})_{\mathbb{R}}
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 2a+1)\bigr)\\
+&=\bigl(W^a(WW^a)\bigr)_{\mathbb{R}}
+&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&=(W^a)_{\mathbb{R}}\,(WW^a)_{\mathbb{R}}
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to W^a,\ B \to WW^a)\bigr)\\
+&=(W^a)_{\mathbb{R}}\bigl(W_{\mathbb{R}}(W^a)_{\mathbb{R}}\bigr)
+&&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to d,\ A \to W,\ B \to W^a)\bigr)\\
+&=(W_{\mathbb{R}})^a\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)
+&&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to a)\ \text{を二か所へ同時に適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（右辺の積は ",
+        ref("def_real_matrix_product"),
+        "）。",
         math(String.raw`k \in \{1,\dots,d\}`),
         " と【",
-        math(String.raw`W^ae_k`),
+        math(String.raw`(W_{\mathbb{R}})^ae_k`),
         " の成分とノルム】の ",
-        math(String.raw`u = W^ae_k`),
+        math(String.raw`u = (W_{\mathbb{R}})^ae_k`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-e_k^\top W^{2a+1}e_k
-&=(W^{2a+1})_{kk}
+e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
+&=\bigl((W_{\mathbb{R}})^{2a+1}\bigr)_{kk}
 &&\bigl(\because\ \text{【対角成分の表示】}\ (p \to 2a+1)\bigr)\\
-&=\bigl(W^a(WW^a)\bigr)_{kk}
+&=\Bigl((W_{\mathbb{R}})^a\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)_{kk}
 &&\bigl(\because\ \text{上の式変形}\bigr)\\
-&=\sum_{l=1}^{d}(W^a)_{kl}\,(WW^a)_{lk}
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=\sum_{l=1}^{d}(W^a)_{kl}\sum_{m=1}^{d}W_{lm}\,(W^a)_{mk}
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}(W^a)_{kl}\,W_{lm}\,(W^a)_{mk}
+&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)_{lk}
+&&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to (W_{\mathbb{R}})^a,\ Q \to W_{\mathbb{R}}(W_{\mathbb{R}})^a)\bigr)\\
+&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\sum_{m=1}^{d}(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
+&&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to (W_{\mathbb{R}})^a)\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
 &&\bigl(\because\ \text{分配則と乗法の結合則}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}(W^a)_{lk}\,W_{lm}\,(W^a)_{mk}
-&&\bigl(\because\ \text{【冪の実対称性】の}\ (W^a)_{kl} = (W^a)_{lk}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}u_l\,W_{lm}\,u_m
-&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ u_l = (W^a)_{lk},\ u_m = (W^a)_{mk}\bigr)\\
-&=u^\top Wu
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
+&&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^a)_{kl} = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{m=1}^{d}u_l\,(W_{\mathbb{R}})_{lm}\,u_m
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ u_l = ((W_{\mathbb{R}})^a)_{lk},\ u_m = ((W_{\mathbb{R}})^a)_{mk}\bigr)\\
+&=u^\top W_{\mathbb{R}}u
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x, y \to u)\bigr)\\
 &\leq c\,\|u\|^2
-&&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top Wx \leq c\|x\|^2\ (x \to u)\bigr)\\
+&&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top W_{\mathbb{R}}x \leq c\|x\|^2\ (x \to u)\bigr)\\
 &\leq c\,c^{2a}
-&&\bigl(\because\ \text{【}W^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\ \text{と}\ c > 0\bigr)\\
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ \|u\|^2 \leq c^{2a}\ \text{と}\ c > 0\bigr)\\
 &=c^{2a+1}
 &&\bigl(\because\ \mathbb{R}\ \text{の冪の指数法則}\bigr)\\
 &=c^n
@@ -1927,29 +2044,28 @@ e_k^\top W^{2a+1}e_k
         "である。いずれの場合も、すべての ",
         math(String.raw`k`),
         " について ",
-        math(String.raw`e_k^\top W^ne_k \leq c^n`),
+        math(String.raw`e_k^\top (W_{\mathbb{R}})^ne_k \leq c^n`),
         " である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
-\mathrm{tr}(W^n)
-&=\sum_{k=1}^{d}(W^n)_{kk}
-&&\bigl(\because\ \blkref{def_trace}\bigr)\\
-&=\sum_{k=1}^{d} e_k^\top W^n e_k
+\sum_{k=1}^{d}\bigl((W_{\mathbb{R}})^n\bigr)_{kk}
+&=\sum_{k=1}^{d} e_k^\top (W_{\mathbb{R}})^n e_k
 &&\bigl(\because\ \text{【対角成分の表示】}\ (p \to n)\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
 &\leq \sum_{k=1}^{d} c^n
-&&\bigl(\because\ \text{各}\ k\ \text{の}\ e_k^\top W^ne_k \leq c^n\ \text{と、項ごとの不等式の有限和は順序を保つ}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to d,\ \text{添字}\ j \to k,\ a_k \to e_k^\top (W_{\mathbb{R}})^ne_k,\ b_k \to c^n\text{。各}\ k\ \text{の}\ a_k \leq b_k\ \text{は上の偶数・奇数の鎖})\bigr)\\
 &=d\,c^n
 &&\bigl(\because\ \text{同じ項}\ c^n\ \text{を}\ d\ \text{個足した和}\bigr)\\
 &=2^{M_{\mathrm{col}}} c^n
 &&\bigl(\because\ d := 2^{M_{\mathrm{col}}}\bigr)
 \end{aligned}`),
-      paragraph(["となり、上からの評価を得る。"]),
+      paragraph(["となり、主張を得る。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
         "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
+        "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",
       ],
     },
   },

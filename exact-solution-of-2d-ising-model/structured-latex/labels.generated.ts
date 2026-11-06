@@ -229,6 +229,7 @@ export const ALL_LABELS = [
   "def_real_logarithm_positive",
   "def_real_matrix_of_real_entry_matrix",
   "def_real_matrix_product",
+  "def_real_matrix_vector_product",
   "def_real_symmetric_complex_matrix",
   "def_real_symmetric_matrix",
   "def_row_configuration_numbering",
