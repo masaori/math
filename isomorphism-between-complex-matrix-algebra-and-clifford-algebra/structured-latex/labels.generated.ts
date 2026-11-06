@@ -73,6 +73,7 @@ export const ALL_LABELS = [
   "def_ordered_sum_in_complex_numbers",
   "def_power_set_of_first_m_positive_integers",
   "def_ring_homomorphism",
+  "def_sign_of_nonnegative_integer",
   "def_spanning_family",
   "def_sum_over_finite_set",
   "def_underlying_ring_and_vector_space_of_algebra",
