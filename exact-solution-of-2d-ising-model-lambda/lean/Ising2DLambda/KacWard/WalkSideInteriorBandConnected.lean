@@ -276,6 +276,59 @@ theorem walkSideInteriorBandFromWalk_no_cyclic_two_step_return {L m : ℕ} [NeZe
     simp only [Prod.snd_add, Prod.snd_neg] at ha hb ⊢
     omega
 
+/-- 非後退性により、各訪問点への入辺と出辺のもう一方の端点は異なる。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_neighbors_distinct {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    ∀ j < m + 1,
+      row (if j = 0 then m else j - 1) ≠ row (j + 1) ∨
+      col (if j = 0 then m else j - 1) ≠ col (j + 1) := by
+  dsimp only
+  intro j hj
+  by_cases hj0 : j = 0
+  · subst j
+    have h := walkSideInteriorBandFromWalk_no_cyclic_two_step_return γ hγ hh hv
+    have hm : Fin.ofNat (m + 2) m = (Fin.last m).castSucc := by
+      apply Fin.ext
+      simp [Nat.mod_eq_of_lt (by omega : m < m + 2)]
+    have hfirst : Fin.ofNat (m + 2) 1 = Fin.succ (0 : Fin (m + 1)) := by
+      apply Fin.ext
+      simp [Nat.mod_eq_of_lt (by omega : 1 < m + 2)]
+    by_contra hc
+    push Not at hc
+    have hpoint : planeLift γ (Fin.last m).castSucc =
+        planeLift γ (Fin.succ (0 : Fin (m + 1))) := by
+      apply Prod.ext
+      · have hc1 := hc.1
+        change (planeLift γ (Fin.ofNat (m + 2) m)).1 =
+          (planeLift γ (Fin.ofNat (m + 2) 1)).1 at hc1
+        rw [hm, hfirst] at hc1
+        exact hc1
+      · have hc2 := hc.2
+        change (planeLift γ (Fin.ofNat (m + 2) m)).2 =
+          (planeLift γ (Fin.ofNat (m + 2) 1)).2 at hc2
+        rw [hm, hfirst] at hc2
+        exact hc2
+    exact h hpoint
+  · have hjpos : 0 < j := Nat.pos_of_ne_zero hj0
+    let k : Fin m := ⟨j - 1, by omega⟩
+    have h := walkSideInteriorBandFromWalk_no_two_step_return γ hγ k
+    have hprev : Fin.ofNat (m + 2) (j - 1) = Fin.castSucc (Fin.castSucc k) := by
+      apply Fin.ext
+      simp [k, Nat.mod_eq_of_lt (by omega : j - 1 < m + 2)]
+    have hnext : Fin.ofNat (m + 2) (j + 1) = Fin.succ (Fin.succ k) := by
+      apply Fin.ext
+      simp [k, Nat.mod_eq_of_lt (by omega : j + 1 < m + 2)]
+      omega
+    simp only [if_neg hj0, hprev, hnext] at h ⊢
+    by_contra hc
+    push Not at hc
+    exact h (Prod.ext hc.1 hc.2)
+
 /-- 持ち上げ点の相異性から、各訪問頂点に接する四辺の総通過回数は二である。 -/
 theorem walkSideInteriorBand_coordinate_incident_total_two
     (n : ℕ) (row col : ℕ → ℤ) (j : ℕ) (hj : j < n)

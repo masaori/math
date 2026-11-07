@@ -60927,7 +60927,7 @@ t_{\circ}(\gamma_A)
 &=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_l,\vec f_l)
 &&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
 &=\sum_{r\in A}\tau(\vec e_r,\vec f_r)
-&&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }A\text{ と有限和の項の合併}\bigr).
+&&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }A\text{ と有限和の項の合併}\bigr)
 \end{aligned}`),
                       paragraph([
                         "第二に、", math(String.raw`t_{\circ}(\gamma_B)`), " を補集合 ",
@@ -60944,7 +60944,7 @@ t_{\circ}(\gamma_B)
 &=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_k,\vec f_k)
 &&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
 &=\sum_{r\in B}\tau(\vec e_r,\vec f_r)
-&&\bigl(\because\ \text{有限和の項の合併}\bigr).
+&&\bigl(\because\ \text{有限和の項の合併}\bigr)
 \end{aligned}`),
                       paragraph([
                         "次に ", math(String.raw`l=m`), " の場合。",
@@ -60958,7 +60958,7 @@ t_{\circ}(\gamma_B)
 &=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_k,\vec f_k)
 &&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
 &=\sum_{r\in B}\tau(\vec e_r,\vec f_r)
-&&\bigl(\because\ \text{有限和の項の合併}\bigr).
+&&\bigl(\because\ \text{有限和の項の合併}\bigr)
 \end{aligned}`),
                       paragraph(["どちらの場合も同じ形に着く。二つの準備を合わせて"]),
                       displayMath(String.raw`\begin{aligned}
@@ -66026,6 +66026,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_two_step_return",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_cyclic_two_step_return",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_neighbors_distinct",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
