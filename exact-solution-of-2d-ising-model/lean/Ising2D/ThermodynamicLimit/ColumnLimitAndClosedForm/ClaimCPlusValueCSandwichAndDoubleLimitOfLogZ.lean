@@ -6,14 +6,16 @@
 * `column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit`
   （ラベル **`c_plus_value_c_sandwich_and_double_limit_of_log_Z`**）
 
-主張（`K_1, K_2 > 0`、`M_col ≥ 2`。`W = V_1^{1/2}V_2V_1^{1/2}`）:
+主張（`K_1, K_2 > 0`、`M_col ≥ 2`。`W_ℝ` は人手 `def_W_real`、`ε_ℝ` は人手 `def_epsilon_real`）:
 
-1. `c_+(M_col) = sup{xᵀWx | x ∈ ℝ^{2^{M_col}}, ε_ℝx = x, ‖x‖ = 1} = Λ^{(1/2)}_{M_col}`
+1. `c_+(M_col) = sup{xᵀW_ℝx | x ∈ ℝ^{2^{M_col}}, ε_ℝx = x, ‖x‖ = 1} = Λ^{(1/2)}_{M_col}`
 2. `Λ^{(1/2)}_{M_col} ≤ c(M_col) ≤ 2Λ^{(1/2)}_{M_col}`
 3. `lim_{M_col→∞} lim_{N_row→∞} (1/(M_col N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`
 
-`W` は `physicalSymTransferR M K_1 K_2`、`c(M_col)` は `rayleighSup W`、`c_+(M_col)` は
-`evenSectorRayleighSup W (epsilonR M)`、`Z` は `partitionFunction N_row M K_1 K_2` である。
+`W_ℝ` は `physicalSymTransferR M K_1 K_2`（`physicalSymTransferR_eq_realMatrixOfRealEntries` で
+`realMatrixOfRealEntries (physicalSymTransferC …) _` に等しい）、`ε_ℝ` は `epsilonR M`（`M = n + 1` のとき
+`epsilonR_eq_epsilonReal` で `epsilonReal n` に等しい）、`c(M_col)` は `rayleighSup W_ℝ`、`c_+(M_col)` は `evenSectorRayleighSup W_ℝ (epsilonR M)`、
+`Z` は `partitionFunction N_row M K_1 K_2` である。
 
 ## 人手証明との対応
 
