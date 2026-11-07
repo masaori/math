@@ -26,8 +26,8 @@
 | `∑_μ D.gam μ = ∑_{μ=1}^{M} γ(t^{(M)}_μ)`（`δ = 1/2`） | 本ファイルの `Ising2D.sum_checkGam`（章 017 `tagPoint_half_eq_thetaTilde` の系） |
 | `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`、`ClaimTraceEpsilonVPlusClosedForm.lean`）。`M ≠ 0` は `2 ≤ M` から出す |
-| `hWpos`（具体的な `W` の成分が正） | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
-| `hWcomm`（`ε` と具体的な `W` の可換性） | `Ising2D.epsilon_commutes_with_W`（人手 `epsilon_commutes_with_W`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） |
+| `hWpos`（具体的な `W` の成分が正） | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）。いまの通しの経路では、Step 2 の `c_le_twice_c_plus_physical` が同じ内容を `W_real_has_positive_entries` で引く |
+| `hWcomm`（`ε` と具体的な `W` の可換性） | `Ising2D.epsilon_commutes_with_W`（人手 `epsilon_commutes_with_W`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）。いまの通しの経路では使わない（Step 2 の `c_le_twice_c_plus_physical` が引く `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice` が、`epsilon_real_commutes_with_W_real` を通して可換性を使う） |
 | `bridge`（章 011 の実行列 `W` と `V^{(+)}` の橋渡し）と `hW`（`bridge.W` が具体的な `W` であること） | `Ising2D.physicalEvenSectorBridge`（`PhysicalEvenSectorBridge.lean`）。具体的な `W` について、章 011 の `W_is_real_symmetric_positive_definite` と、`c_plus_equals_Lambda_half_integer` の Step 0・Step 2 の実行列表示を組み合わせて構成する |
 
 ## 残った仮定
@@ -82,13 +82,26 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
 もとの `Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` は `F`, `D`, `hC`, `hgam` を
 仮定として受け取っていたが、それらはすべて構成・証明済みになった。`W` は具体的な
 `W = V_1^{1/2} V_2 V_1^{1/2}` で、その橋渡しは `Ising2D.physicalEvenSectorBridge`、
-成分の正値性は `Ising2D.physicalSymTransferR_pos`、`ε` との可換性は `Ising2D.epsilon_commutes_with_W` が与える。 -/
+Step 1 は橋渡しの `EvenSectorBridge.LambdaM_le_rayleighSup`、Step 2 は人手の鎖と 1 対 1 の
+`Ising2D.c_le_twice_c_plus_physical` で与える。Step 2 の `Λ = c_+(M)`（`c_plus_equals_Lambda_half_integer`）は
+`EvenSectorBridge.c_plus_equals_lamMax` を、Lean の `W = physicalSymTransferR` と `ε = epsilonR (n+1)` から
+人手の `W_ℝ = ϱ(W)`（`physicalSymTransferR_eq_realMatrixOfRealEntries`）と `ε_ℝ`（`epsilonR_eq_epsilonReal`）へ書き換えて渡す。 -/
 theorem rayleighSup_sandwich_LambdaM_physical (P : IsingParam) (hM2 : 2 ≤ M) :
     LambdaM P (1 / 2) M ≤ rayleighSup (physicalSymTransferR M P.K1 P.K2)
-      ∧ rayleighSup (physicalSymTransferR M P.K1 P.K2) ≤ 2 * LambdaM P (1 / 2) M :=
+      ∧ rayleighSup (physicalSymTransferR M P.K1 P.K2) ≤ 2 * LambdaM P (1 / 2) M := by
   have hM : M ≠ 0 := by omega
-  (physicalEvenSectorBridge P hM2 hM).rayleighSup_sandwich_LambdaM P (trace_epsilon_vPlusDataOf_pos P hM2 hM)
-    (physicalSymTransferR_pos P.K1 P.K2) (epsilon_commutes_with_W P.K1 P.K2_pos) rfl (sum_checkGam P M)
+  have htr := trace_epsilon_vPlusDataOf_pos P hM2 hM
+  refine ⟨(physicalEvenSectorBridge P hM2 hM).LambdaM_le_rayleighSup P htr rfl (sum_checkGam P M), ?_⟩
+  obtain ⟨n, rfl⟩ : ∃ n, M = n + 1 := ⟨M - 1, by omega⟩
+  have hΛ : LambdaM P (1 / 2) (n + 1)
+      = evenSectorRayleighSup
+          (realMatrixOfRealEntries (physicalSymTransferC (n + 1) P.K1 P.K2)
+            (physicalSymTransferC_hasRealEntries P.K1 P.K2_pos)) (epsilonReal n) := by
+    rw [← physicalSymTransferR_eq_realMatrixOfRealEntries P.K1 P.K2_pos, ← epsilonR_eq_epsilonReal]
+    exact ((physicalEvenSectorBridge P hM2 hM).c_plus_equals_lamMax htr).trans
+      (EvenSectorBridge.lamMax_eq_LambdaM P rfl (sum_checkGam P (n + 1))) |>.symm
+  rw [rayleighSup_physicalSymTransferR_eq P.K1 P.K2_pos]
+  exact c_le_twice_c_plus_physical n P.K1 P.K2_pos _ hΛ
 
 /-! ## Step 1: `N_row → ∞` の極限（`c(M) > 0` は `def_rayleigh_sup` から） -/
 

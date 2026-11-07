@@ -200,8 +200,9 @@
 | `EvenSectorBridge.lamMax_eq_LambdaM` | `Λ̌_max = Λ^{(1/2)}_M`（章 012 の記法との突き合わせ） | 記法の同定 |
 | **`EvenSectorBridge.LambdaM_le_rayleighSup`** | **`Λ^{(1/2)}_M = c_+(M) ≤ c(M)`**（章 011 の `c_plus_le_c` と `c_plus_equals_lamMax`） | `c_between_Lambda_half_and_twice_Lambda_half` Step 1 |
 | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（`NecSuf/EvenSectorUpperBound.lean`）/ `Ising2D.onsager_step3_c_le_two_c_plus` | **`c(M) ≤ 2c_+(M)`**（必要十分版とその `ε = epsilonR M` への特殊化） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
-| **`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`** | **`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`** | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
-| `EvenSectorBridge.rayleighSup_sandwich_LambdaM` | `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` | `c_between_Lambda_half_and_twice_Lambda_half`（`onsager_exact_solution` の Step 2 が引く） |
+| **`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`** | **`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`**（任意の橋渡しの `W` について、必要十分版の特殊化を通す。通しの定理は使わない） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
+| **`Ising2D.c_le_twice_c_plus_physical`**（`TheoremOnsagerExactSolution.lean`） | 具体的な `W_ℝ = ϱ(W)` と `ε_ℝ` について、`Λ = c_+(M)` なら **`c(M) ≤ 2Λ`**（人手の準備の各行・7 行の鎖・2 行・2 行と 1 対 1） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2（通しの定理が引く） |
+| `EvenSectorBridge.rayleighSup_sandwich_LambdaM` | `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`（任意の橋渡しの `W` について。通しの定理は具体的な `W` の `rayleighSup_sandwich_LambdaM_physical` を使う） | `c_between_Lambda_half_and_twice_Lambda_half` |
 | `Ising2D.onsager_limit_in_N_row` | `N_row → ∞` の極限は `(1/M) log c(M)` | Step 1（章 012 の `limit_of_log_Z_in_N_row`） |
 | `Ising2D.onsager_limit_in_M` | 挟み撃ち `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M` から、`M → ∞` の極限が Onsager の表式になる | Step 3（`log` の単調性、`(log 2)/M → 0`、章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
@@ -359,7 +360,7 @@
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `Ising2D.max_eigenvector_in_even_sector` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
-| `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の対称性（`uᵀWεu = (εu)ᵀWu` の入れ替え）・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。半正定値性は効かない（上限が定まることは `rayleighSet_bddAbove` の上界 `Σ_iΣ_j\|W_ij\|` から仮定なしに出る）。`π` が不動点をもたないことは使わない |
+| `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.c_le_twice_c_plus_physical`（人手の鎖と 1 対 1）。任意の `W` について必要十分版を特殊化した `Ising2D.onsager_step3_c_le_two_c_plus` も残す | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **`onsager_step3_c_le_two_c_plus` は系**。必要十分版は具体版 `c_le_twice_c_plus_physical` と別の手順（下の 4 節の表）で、同じ手順への寄せは状態台帳に残す。効くのは `ε` が対合の置換行列であること、`W` の対称性（`uᵀWεu = (εu)ᵀWu` の入れ替え）・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。半正定値性は効かない（上限が定まることは `rayleighSet_bddAbove` の上界 `Σ_iΣ_j\|W_ij\|` から仮定なしに出る）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性（`epsilon_anticomm_sigmaZ`）・相異なるサイトの `σ^z` の可換性（`siteOp_mul_comm`）・`(σ^z)^2 = I`・対角作用という既存の関係を、環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無い（`H1_plus_in_sigma_z_form` と同じ判断） |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_bondSpin_eq_first_mul_last` | `NecSuf.open_chain_weighted_sum_eq_sum_prod` / `NecSuf.sum_spinVal_const`（二つをまとめた形が `NecSuf.open_chain_weighted_sum`）/ `NecSuf.prod_mul_succ_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`。`endpoint_mul_exp_openChainEnergy_eq_prod_of_necSuf` は 2 段目だけを導出に替える） |
@@ -446,8 +447,18 @@
 | `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`） | `mulVec_dotProduct_selfadjoint`（`εᵀ = ε`）、仮定 `hcomm`、`NecSuf.bilin_nonneg_of_nonneg` |
 | `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ ⋯ ≥ xᵀWx/2` | `le_evenSectorRayleighSup` と同じ順の `calc` |
 
-Lean は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく `‖v‖² ≥ ‖u‖² = 1 > 0` の形で示し、
-`v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使う。
+この表は必要十分版 `NecSuf/EvenSectorUpperBound.lean` の手順である。必要十分版は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく
+`‖v‖² ≥ ‖u‖² = 1 > 0` の形で示し、`v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使う。
+
+人手の鎖と 1 対 1 の具体版は `Ising2D.c_le_twice_c_plus_physical`（`TheoremOnsagerExactSolution.lean`）で、人手の準備の各行を
+`W_real_has_positive_entries`・`real_bilinear_value_at_most_value_at_absolute_vector`・`norm_of_vector_of_absolute_values_equals_norm`・
+`sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・`norm_of_normalized_real_vector_is_one`・
+`epsilon_real_fixes_sum_of_vector_and_its_image`・`real_matrix_fixed_vector_stays_fixed_after_normalization`・
+`norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`・
+`W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`・
+`real_bilinear_value_with_nonnegative_entries_is_nonnegative` の Lean の同名の定理で引き、7 行の鎖を `calc` の 7 段
+（`real_bilinear_value_of_normalized_vector` を引く）、続く 2 行と `c(M) = sup𝓡 ≤ 2Λ` の 2 行を同じ順に書く。
+`u ≠ 0` の行（`matrix_norm_triangle_inequality` (1) の `K^n`）は、その具体版が Lean に無いので `vecNormSq_eq_zero_iff` と `Real.sqrt` の零で示す。
 
 ## 5. 検証
 
@@ -491,8 +502,8 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
 | `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`。**無条件**） |
 | `rayleighSup_sandwich_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
-| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
-| `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） |
+| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）。いまの通しの経路では、Step 2 の `c_le_twice_c_plus_physical` が同じ内容を `W_real_has_positive_entries` で引く |
+| `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）。いまの通しの経路では使わない（Step 2 の `c_le_twice_c_plus_physical` が引く `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice` が、`epsilon_real_commutes_with_W_real` を通して可換性を使う） |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | 018 | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）。`M ≠ 0` は `2 ≤ M` から出す |
 
 ### 6.3 噛み合わせが必要だった箇所（一次情報）

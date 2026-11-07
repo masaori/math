@@ -2318,6 +2318,7 @@ targets=(
   Ising2D.EvenSectorBridge.lamMax_eq_LambdaM
   Ising2D.EvenSectorBridge.LambdaM_le_rayleighSup
   Ising2D.EvenSectorBridge.rayleighSup_le_two_mul_LambdaM
+  Ising2D.c_le_twice_c_plus_physical
   Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM
   Ising2D.onsager_limit_in_N_row
   Ising2D.onsager_limit_in_M
