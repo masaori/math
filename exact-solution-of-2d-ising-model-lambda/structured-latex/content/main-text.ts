@@ -69130,16 +69130,24 @@ cL W_{\perp}(\gamma)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
-&=(0,1)=W_{j+1}-W_j
+&=(0,1)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection},\ \blkref{def_plane_displacement}\bigr)\\
+&=W_{j+1}-W_j
 &&\bigl(\because\ W_{j+1}-W_j=(0,1)\text{ の場合}\bigr),\\
 \bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
-&=(1,0)=W_{j+1}-W_j
+&=(1,0)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection},\ \blkref{def_plane_displacement}\bigr)\\
+&=W_{j+1}-W_j
 &&\bigl(\because\ W_{j+1}-W_j=(1,0)\text{ の場合}\bigr),\\
 \bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
-&=(0,-1)=W_{j+1}-W_j
+&=(0,-1)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection},\ \blkref{def_plane_displacement}\bigr)\\
+&=W_{j+1}-W_j
 &&\bigl(\because\ W_{j+1}-W_j=(0,-1)\text{ の場合}\bigr),\\
 \bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
-&=(-1,0)=W_{j+1}-W_j
+&=(-1,0)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection},\ \blkref{def_plane_displacement}\bigr)\\
+&=W_{j+1}-W_j
 &&\bigl(\because\ W_{j+1}-W_j=(-1,0)\text{ の場合}\bigr).
 \end{aligned}`),
                       paragraph([
@@ -69219,6 +69227,7 @@ P_n(\gamma)
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_closed",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_winding_zero",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
                     ],
