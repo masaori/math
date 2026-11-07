@@ -713,6 +713,60 @@ x^\top P x
   },
 
   {
+    id: "maxeig_claim_norm_of_vector_of_absolute_values_equals_norm",
+    kind: "claim",
+    title: {
+      text: "成分の絶対値を並べたベクトルのノルムは、もとのベクトルのノルムに等しい",
+    },
+    labels: ["norm_of_vector_of_absolute_values_equals_norm"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x \in \mathbb{R}^n`),
+        " とする。",
+        math(String.raw`u \in \mathbb{R}^n`),
+        " を ",
+        math(String.raw`u_k := |x_k|`),
+        "（",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        "。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値）で定める。両辺のノルムを ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to n`),
+        "）の数ベクトルのノルムとして",
+      ]),
+      displayMath(String.raw`\|u\| = \|x\|`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\|u\|
+&= \sqrt{\sum_{k=1}^{n} |u_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to n,\ i \to k,\ w \to u)\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \bigl|\,|x_k|\,\bigr|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ u_k := |x_k|\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} |x_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to |x_k|)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \|x\|
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to n,\ i \to k,\ w \to x)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は ‖u‖ = ‖x‖（u_k = |x_k|）を「ノルムは成分の絶対値だけで決まる」の散文で出していた。この行を参照に替えるために、real_bilinear_value_at_most_value_at_absolute_vector と同じ u について足した。数値検証: sagemath/check/norm_of_vector_of_absolute_values_equals_norm/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_005_claim_psd_cauchy_schwarz",
     kind: "claim",
     origin: { path: SRC, ordinal: 7 },
