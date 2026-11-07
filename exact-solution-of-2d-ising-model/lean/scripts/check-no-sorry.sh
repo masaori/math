@@ -940,6 +940,7 @@ targets=(
   Ising2D.epsilon_entries_in_row_configuration_numbering
   Ising2D.epsilon_real_permutes_entries_by_spin_flip
   Ising2D.epsilon_real_preserves_nonnegative_vectors
+  Ising2D.sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero
   Ising2D.spinFlipIndex_spinFlipIndex
   Ising2D.spinFlipIndex_bijective
   Ising2D.epsilon_real_mulVec_eq_spinFlipIndex

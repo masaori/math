@@ -591,6 +591,7 @@ export const ALL_LABELS = [
   "sqrt_squared_is_original",
   "square_of_sqrt",
   "star_preserves_norm_and_limits",
+  "sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero",
   "sum_of_real_entry_matrices_has_real_entries",
   "sum_over_binary_words_distributes_in_left_factor",
   "sum_over_binary_words_distributes_in_right_factor",
