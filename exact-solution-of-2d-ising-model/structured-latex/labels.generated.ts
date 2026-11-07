@@ -460,6 +460,7 @@ export const ALL_LABELS = [
   "nesting_of_commutator_of_H_and_check_Z",
   "nonnegative_real_order_from_squares",
   "nonzero_kernel_iff_det_zero_two_by_two",
+  "norm_of_normalized_real_vector_is_one",
   "norm_of_vector_of_absolute_values_equals_norm",
   "norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four",
   "onsager_exact_solution",

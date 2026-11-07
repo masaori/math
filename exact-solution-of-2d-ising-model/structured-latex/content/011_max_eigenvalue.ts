@@ -767,6 +767,144 @@ x^\top P x
   },
 
   {
+    id: "maxeig_claim_norm_of_normalized_real_vector_is_one",
+    kind: "claim",
+    title: {
+      text: "零でない実数のベクトルの各成分をそのノルムで割ったベクトルは、ノルムが 1 である",
+    },
+    labels: ["norm_of_normalized_real_vector_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`v \in \mathbb{R}^n`),
+        " が ",
+        math(String.raw`v \neq 0`),
+        " を満たすとする（",
+        math(String.raw`\mathbb{R}^{n}`),
+        " の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`x = 0`),
+        " は、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " で ",
+        math(String.raw`x_k = 0`),
+        " であることを表す）。ノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to n`),
+        "）の数ベクトルのノルムである。このとき ",
+        math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+        " であり（証明の準備で示す）、",
+        math(String.raw`\hat{v} \in \mathbb{R}^n`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`\hat{v}_k := \frac{v_k}{\|v\|} \qquad (k \in \{1,\dots,n\})`),
+      paragraph([
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の商）で定めると",
+      ]),
+      displayMath(String.raw`\|\hat{v}\| = 1`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとるベクトルにこの主張を使うためである。",
+        "ノルムの平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        " のもので、その存在に ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性を使う（",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）。証明はそのほかに ",
+        math(String.raw`\mathbb{R}`),
+        " の四則演算と順序と有限和だけを使い、極限を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値、二乗は ",
+        math(String.raw`\mathbb{R}`),
+        " の積 ",
+        math(String.raw`r^2 := r\,r`),
+        " である。まず ",
+        ref("matrix_norm_triangle_inequality"),
+        " (1)（",
+        math(String.raw`K = \mathbb{R}`),
+        " の ",
+        math(String.raw`K^{d}`),
+        " のノルム、",
+        math(String.raw`d \to n,\ A \to v`),
+        "）より ",
+        math(String.raw`\|v\| \geq 0`),
+        " であり、",
+        math(String.raw`\|v\| = 0`),
+        " なら ",
+        math(String.raw`v = 0`),
+        " となって仮定 ",
+        math(String.raw`v \neq 0`),
+        " に反するので ",
+        math(String.raw`\|v\| \neq 0`),
+        "、よって ",
+        math(String.raw`\|v\| > 0`),
+        "、とくに ",
+        math(String.raw`\|v\|^2 = \|v\|\,\|v\| > 0`),
+        "（正の実数どうしの積は正）、よって ",
+        math(String.raw`\|v\|^2 \neq 0`),
+        " である。次に、",
+        math(String.raw`x \in \mathbb{R}^{n}`),
+        " について ",
+        math(String.raw`\sum_{k=1}^{n} |x_k|^2 \geq 0`),
+        "（",
+        ref("def_matrix_norm"),
+        " の根号の中）であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|x\|^2
+&= \Bigl(\sqrt{\textstyle\sum_{k=1}^{n} |x_k|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to n,\ i \to k,\ w \to x)\bigr)\\
+&= \sum_{k=1}^{n} |x_k|^2
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to \textstyle\sum_{k=1}^{n} |x_k|^2)\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\|\hat{v}\|
+&= \sqrt{\sum_{k=1}^{n} |\hat{v}_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to n,\ i \to k,\ w \to \hat{v})\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \Bigl|\frac{v_k}{\|v\|}\Bigr|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \hat{v}\ \text{の定義を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \Bigl(\frac{v_k}{\|v\|}\Bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to v_k/\|v\|)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \frac{1}{\|v\|^2}\,v_k^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (a/b)^2 = (1/b^2)\,a^2\ (a \to v_k,\ b \to \|v\| \neq 0)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\frac{1}{\|v\|^2}\sum_{k=1}^{n} v_k^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to 1/\|v\|^2,\ \text{添字}\ j \to k,\ x_j \to v_k^2)\bigr)\\
+&= \sqrt{\frac{1}{\|v\|^2}\sum_{k=1}^{n} |v_k|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to v_k)\ \text{を右辺から左辺へ}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\frac{1}{\|v\|^2}\,\|v\|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \text{上で示した}\ \|x\|^2 = \textstyle\sum_{k=1}^{n} |x_k|^2\ (x \to v)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,b = 1\ (b \to \|v\|^2 \neq 0)\bigr)\\
+&= 1
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{と}\ 1 \geq 0,\ 1^2 = 1\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂ := v/‖v‖ を「𝓕^{(+)} ∩ ℝ^{2^{M_col}} の単位ベクトル」とだけ書き、‖v̂‖ = 1 を示していなかった。この行を参照に替えるために足した。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（real_bilinear_value_of_scalar_multiple_vector と同じ）。数値検証: sagemath/check/norm_of_normalized_real_vector_is_one/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_005_claim_psd_cauchy_schwarz",
     kind: "claim",
     origin: { path: SRC, ordinal: 7 },

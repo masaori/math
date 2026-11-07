@@ -13,7 +13,7 @@
 
 - 人手の `def_matrix_norm`（`K = ℝ`）の `‖w‖ = √(Σ|w_k|^2)` は、Lean の `vecNorm w = √(w ⬝ᵥ w)` を `vecNormSq_eq_sum` で `√(Σ w_k^2)` に開き、
   `square_of_real_absolute_value` で `√(Σ|w_k|^2)` に書いたものである（この `square_of_real_absolute_value` は人手の行ではなく、二つの書き方の差を埋める段。
-  `ClaimNormSquaredOfSumOfUnitVectorAndItsEpsilonRealImageIsAtMostFour.lean` の `vecNorm_sq_eq_sum_abs_sq` と同じ）。
+  `ClaimNormOfNormalizedRealVectorIsOne.lean` の `vecNorm_sq_eq_sum_abs_sq` と同じ）。
 - 人手の和の添字 `{1, …, n}` は Lean では有限型 `n` である。人手の `u` は Lean の `fun k => |x k|` である
   （`ClaimRealBilinearValueAtMostValueAtAbsoluteVector.lean` と同じ）。
 
