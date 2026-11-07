@@ -61655,7 +61655,7 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
 &&\bigl(\because\ \nu\text{ の置き方と有限和から }k,l\text{ の二項を分ける操作}\bigr)\\
 &=\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)
  -\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
-&&\bigl(\because\ \mathbb Z\text{ の加法と減法}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の加法と減法}\bigr)
 \end{aligned}`),
                 paragraph([
                   "全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",

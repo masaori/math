@@ -344,6 +344,18 @@ theorem walkSideInteriorBand_coordinate_incident_total_two
     hunit hclosedRow hclosedCol]
   rw [vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct]
 
+/-- 接触四辺の総通過回数が二なら、異なる二辺の正の寄与が各辺の高々一を強制する。 -/
+theorem four_incident_counts_le_one_of_distinct_positive
+    (a b c d : ℕ) (hsum : a + b + c + d = 2)
+    (hpositive :
+      (0 < a ∧ 0 < b) ∨ (0 < a ∧ 0 < c) ∨
+      (0 < a ∧ 0 < d) ∨ (0 < b ∧ 0 < c) ∨
+      (0 < b ∧ 0 < d) ∨ (0 < c ∧ 0 < d)) :
+    a ≤ 1 ∧ b ≤ 1 ∧ c ≤ 1 ∧ d ≤ 1 := by
+  rcases hpositive with ⟨ha, hb⟩ | ⟨ha, hc⟩ | ⟨ha, hd⟩ |
+    ⟨hb, hc⟩ | ⟨hb, hd⟩ | ⟨hc, hd⟩
+  all_goals omega
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h
