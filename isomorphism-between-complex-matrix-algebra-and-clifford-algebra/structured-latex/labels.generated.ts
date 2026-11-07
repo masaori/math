@@ -44,6 +44,7 @@ export const ALL_LABELS = [
   "claim_scalar_multiple_of_linear_combination",
   "claim_scalar_multiple_of_sum_over_finite_set",
   "claim_scalar_multiple_of_zero_vector_is_zero_vector",
+  "claim_sign_of_nonnegative_integer_squares_to_one",
   "claim_sum_of_linear_combinations_of_same_family",
   "claim_sum_of_sums_over_finite_set_with_same_coefficients",
   "claim_sum_of_sums_over_finite_set_with_same_family",

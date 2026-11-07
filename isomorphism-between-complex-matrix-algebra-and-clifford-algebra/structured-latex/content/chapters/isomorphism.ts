@@ -1261,4 +1261,118 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i^{\mathsf T}
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_sign_of_nonnegative_integer_squares_to_one",
+    kind: "claim",
+    title: { text: "非負整数の偶奇による符号の自分自身との積は 1 であること" },
+    labels: ["claim_sign_of_nonnegative_integer_squares_to_one"],
+    statement: [
+      paragraph([
+        "すべての ",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " について、非負整数の偶奇による符号 ",
+        math(String.raw`\varsigma(n)\in\mathbb{C}`),
+        "（",
+        ref("def_sign_of_nonnegative_integer"),
+        "）は ",
+        math(String.raw`\mathbb{C}`),
+        " の中で次を満たす。",
+      ]),
+      displayMath(String.raw`\varsigma(n)\cdot_{\mathbb{C}}\varsigma(n)=1_{\mathbb{C}}.`),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " の加法の逆元である（",
+        ref("def_sign_of_nonnegative_integer"),
+        "）。まず ",
+        math(String.raw`(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}(-1_{\mathbb{C}})=0_{\mathbb{C}}`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}(-1_{\mathbb{C}})
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}(-1_{\mathbb{C}})\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って、",
+        math(String.raw`(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})=1_{\mathbb{C}}`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)+_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \text{上の等式}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "本題。",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n=0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varsigma(0)\cdot_{\mathbb{C}}\varsigma(0)
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \varsigma(0)\ \text{の定義を二つの因子に。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`n-1\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`\varsigma(n-1)\cdot_{\mathbb{C}}\varsigma(n-1)=1_{\mathbb{C}}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varsigma(n)\cdot_{\mathbb{C}}\varsigma(n)
+&=\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)\cdot_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)
+&&\left(\because\ n\in\mathbb{Z}_{\ge 1}\ \text{での}\ \varsigma(n)\ \text{の定義を二つの因子に。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\Bigl(\varsigma(n-1)\cdot_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\Bigl(\bigl(\varsigma(n-1)\cdot_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}\varsigma(n-1)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\Bigl(\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)\cdot_{\mathbb{C}}\varsigma(n-1)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\Bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(n-1)\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}\bigl(\varsigma(n-1)\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(\varsigma(n-1)\cdot_{\mathbb{C}}\varsigma(n-1)\bigr)
+&&\left(\because\ \text{準備の}\ (-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})=1_{\mathbb{C}}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "帰納法により、すべての ",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " について主張が示された。",
+      ]),
+    ],
+  },
 ]);
