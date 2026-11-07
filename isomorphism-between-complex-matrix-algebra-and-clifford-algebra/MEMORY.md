@@ -105,3 +105,4 @@
 - 2026-11-02: 「双対基底が双対空間を線型結合で張ること」の前に二行を足し、双対空間の元の線型結合の点 x での値が係数と値の積の ℂ の中の番号順の和であること（ラベル claim_value_of_linear_combination_in_dual_space）を示した（帰納法の添字は写像 m_{μ,f} と衝突しないよう r とした）。次は ℂ の中の番号順の和で第 k 項に δ_{k,j} を掛けた和が α_j になること（S_r についての帰納法。r<j・r=j・r>j に分ける。ℂ の中の積 α·_ℂ0_ℂ=0_ℂ・α·_ℂ1_ℂ=α は ℂ の性質として行末に書く）。その後、双対基底が張ることを h:=Σ_k g(b_k)·f_k が h(b_j)=g(b_j) を満たすことと、claim_linear_form_maps_linear_combination_to_ordered_sum で示す。
 - 2026-11-04: 代表の依頼で Jordan–Wigner 行列と同型の関係を解説した。Jordan–Wigner の系で使う等長写像と共役の行列（K^{⊗M}）を、構成案の系の段落に書き足した（M=1,2,3 の行列計算で確認済み）。
 - 2026-11-05: 行列の集合が成分ごとの和とスカラー倍で ℂ-線型空間であること（ラベル claim_matrices_indexed_by_finite_set_form_complex_vector_space）を示した。次は行列の積の結合法則。
+- 2026-11-07: Φ(P) に当たる行列の積 ∏ c_i^T c_i が E_{∅,∅} であること（ラベル claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit）を示し、SageMath で M=1,2,3 を検算した。次は Φ(a†_S) に当たる行列の番号順の積を E_{∅,∅} に左から掛けると E_{S,∅} になること。

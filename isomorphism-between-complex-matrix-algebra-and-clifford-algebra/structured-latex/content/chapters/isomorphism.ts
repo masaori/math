@@ -2481,4 +2481,587 @@ N_i(T)
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit",
+    kind: "claim",
+    title: { text: "消滅作用素の行列と生成作用素の行列の積を番号順に掛けると、空集合の位置の行列単位になること" },
+    labels: ["claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_i\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を生成作用素の行列（",
+        ref("def_creation_operator_matrix"),
+        "）、",
+        math(String.raw`c_i^{\mathsf T}\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を消滅作用素の行列（",
+        ref("def_annihilation_operator_matrix"),
+        "）とし、",
+      ]),
+      displayMath(String.raw`x_i:=c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+      paragraph([
+        "と置く（",
+        math(String.raw`\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        " は行列の積。",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " は ℂ-代数である（",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"),
+        "。",
+        math(String.raw`\mathcal{P}_M`),
+        " が有限集合であることは ",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）。その中の ",
+        math(String.raw`x_1,\dots,x_M`),
+        " の番号順の積（",
+        ref("def_ordered_product_in_algebra"),
+        "）と、",
+        math(String.raw`\emptyset\in\mathcal{P}_M`),
+        " の位置の行列単位 ",
+        math(String.raw`E_{\emptyset,\emptyset}`),
+        "（",
+        ref("def_matrix_unit"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,i=1}^{M}x_i=E_{\emptyset,\emptyset}.`),
+    ],
+    proof: [
+      paragraph([
+        "以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        "、",
+        math(String.raw`X:=\mathcal{P}_M`),
+        " に当てる。",
+        math(String.raw`\delta`),
+        " は ",
+        math(String.raw`\mathcal{P}_M`),
+        " の二元についてのクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）である。",
+      ]),
+      paragraph([
+        "記号の準備。",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`U\in\mathcal{P}_M`),
+        " について、",
+        math(String.raw`\eta_i(U)\in\mathbb{C}`),
+        " を、",
+        math(String.raw`i\notin U`),
+        " なら ",
+        math(String.raw`\eta_i(U):=1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`i\in U`),
+        " なら ",
+        math(String.raw`\eta_i(U):=0_{\mathbb{C}}`),
+        " と定める（",
+        math(String.raw`i\in U`),
+        " の真偽は ",
+        ref("def_power_set_of_first_m_positive_integers"),
+        " により一つに決まる）。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、条件 ",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " を「",
+        math(String.raw`S=U`),
+        " かつ、",
+        math(String.raw`t\in S`),
+        " を満たす ",
+        math(String.raw`t\in\{1,\dots,m\}`),
+        " が無い」と定め、",
+        math(String.raw`\chi_m(S,U)\in\mathbb{C}`),
+        " を、",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立つなら ",
+        math(String.raw`1_{\mathbb{C}}`),
+        "、成り立たないなら ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " と定める。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " について、",
+        math(String.raw`\Pi_m\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を、番号順の積の定義（",
+        ref("def_ordered_product_in_algebra"),
+        "）の ",
+        math(String.raw`\Pi_m`),
+        " に ",
+        math(String.raw`A:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        "、",
+        math(String.raw`n:=M`),
+        "、族 ",
+        math(String.raw`x_1,\dots,x_M`),
+        " を当てたものとする。すなわち ",
+        math(String.raw`\Pi_0=1_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "、",
+        math(String.raw`\Pi_m=\Pi_{m-1}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}x_m`),
+        "（",
+        math(String.raw`1\le m\le M`),
+        "）であり、",
+        math(String.raw`\Pi_M=\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,i=1}^{M}x_i`),
+        " である。",
+      ]),
+      paragraph([
+        "準備の一つ目。すべての ",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`T,U\in\mathcal{P}_M`),
+        " について、次を示す。",
+      ]),
+      displayMath(String.raw`(x_i)_{T,U}=\delta_{U,T}\cdot_{\mathbb{C}}\eta_i(U)\qquad(\star_1).`),
+      paragraph([
+        "右から生成作用素の行列を掛けた行列の成分の主張（",
+        ref("claim_entry_of_matrix_times_creation_operator_matrix"),
+        "）を ",
+        math(String.raw`A:=c_i^{\mathsf T}`),
+        "、",
+        math(String.raw`j:=i`),
+        "、主張の ",
+        math(String.raw`S`),
+        " に ",
+        math(String.raw`T`),
+        " を当てて使う。",
+        math(String.raw`i\in U`),
+        " か ",
+        math(String.raw`i\notin U`),
+        " かで分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`i\in U`),
+          " のとき。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x_i)_{T,U}
+&=\bigl(c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{T,U}
+&&\left(\because\ x_i\ \text{の置き方}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ i\in U\ \text{なので右から掛けた成分の主張。}\blkref{claim_entry_of_matrix_times_creation_operator_matrix}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}\eta_i(U)
+&&\left(\because\ i\in U\ \text{なので}\ \eta_i\ \text{の置き方}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`i\notin U`),
+          " のとき。まず、",
+          math(String.raw`c_i`),
+          " の定義（",
+          ref("def_creation_operator_matrix"),
+          "）の ",
+          math(String.raw`(U\cup\{i\},T)`),
+          " 成分の条件「",
+          math(String.raw`i\notin T`),
+          " かつ ",
+          math(String.raw`U\cup\{i\}=T\cup\{i\}`),
+          "」が ",
+          math(String.raw`T=U`),
+          " と同値であることを示す。",
+          math(String.raw`T=U`),
+          " なら、",
+          math(String.raw`i\notin U`),
+          " から ",
+          math(String.raw`i\notin T`),
+          " であり、",
+          math(String.raw`U\cup\{i\}=T\cup\{i\}`),
+          " である。逆に条件が成り立つとする。",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " が ",
+          math(String.raw`t\neq i`),
+          " なら、",
+          math(String.raw`t\in T`),
+          " と ",
+          math(String.raw`t\in T\cup\{i\}`),
+          " と ",
+          math(String.raw`t\in U\cup\{i\}`),
+          " と ",
+          math(String.raw`t\in U`),
+          " は同値である。",
+          math(String.raw`t=i`),
+          " なら、",
+          math(String.raw`i\notin T`),
+          " と ",
+          math(String.raw`i\notin U`),
+          " から、",
+          math(String.raw`t\in T`),
+          " と ",
+          math(String.raw`t\in U`),
+          " はどちらも成り立たない。したがってすべての ",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " で ",
+          math(String.raw`t\in T`),
+          " と ",
+          math(String.raw`t\in U`),
+          " は同値であり、",
+          math(String.raw`T=U`),
+          " である（",
+          ref("def_power_set_of_first_m_positive_integers"),
+          "）。",
+          math(String.raw`T=U`),
+          " なら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x_i)_{T,U}
+&=\bigl(c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{T,U}
+&&\left(\because\ x_i\ \text{の置き方}\right)\\
+&=(c_i^{\mathsf T})_{T,U\cup\{i\}}\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ i\notin U\ \text{なので右から掛けた成分の主張。}\blkref{claim_entry_of_matrix_times_creation_operator_matrix}\right)\\
+&=(c_i)_{U\cup\{i\},T}\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ c_i^{\mathsf T}\ \text{の定義。}\blkref{def_annihilation_operator_matrix}\right)\\
+&=\varsigma(N_i(T))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ T=U\ \text{なので条件が成り立ち、}c_i\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ T=U\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \text{符号の自分自身との積。}\blkref{claim_sign_of_nonnegative_integer_squares_to_one}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ U=T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}\eta_i(U)
+&&\left(\because\ i\notin U\ \text{なので}\ \eta_i\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`T\neq U`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x_i)_{T,U}
+&=\bigl(c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{T,U}
+&&\left(\because\ x_i\ \text{の置き方}\right)\\
+&=(c_i^{\mathsf T})_{T,U\cup\{i\}}\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ i\notin U\ \text{なので右から掛けた成分の主張。}\blkref{claim_entry_of_matrix_times_creation_operator_matrix}\right)\\
+&=(c_i)_{U\cup\{i\},T}\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ c_i^{\mathsf T}\ \text{の定義。}\blkref{def_annihilation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ T\neq U\ \text{なので条件が成り立たず、}c_i\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\eta_i(U)
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}\eta_i(U)
+&&\left(\because\ U\neq T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        "準備の二つ目。すべての ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、次を示す。",
+      ]),
+      displayMath(String.raw`\chi_{m-1}(S,U)\cdot_{\mathbb{C}}\eta_m(U)=\chi_m(S,U)\qquad(\star_2).`),
+      paragraph([
+        "まず、",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が「",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " かつ ",
+        math(String.raw`m\notin U`),
+        "」と同値であることを示す。",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立つなら、",
+        math(String.raw`\{1,\dots,m-1\}\subseteq\{1,\dots,m\}`),
+        " なので ",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " が成り立ち、",
+        math(String.raw`m\in\{1,\dots,m\}`),
+        " なので ",
+        math(String.raw`m\notin S`),
+        "、",
+        math(String.raw`S=U`),
+        " から ",
+        math(String.raw`m\notin U`),
+        " である。逆に「",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " かつ ",
+        math(String.raw`m\notin U`),
+        "」が成り立つなら、",
+        math(String.raw`S=U`),
+        " であり、",
+        math(String.raw`t\in\{1,\dots,m\}`),
+        " は ",
+        math(String.raw`t\le m-1`),
+        " なら ",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " から、",
+        math(String.raw`t=m`),
+        " なら ",
+        math(String.raw`m\notin U=S`),
+        " から ",
+        math(String.raw`t\notin S`),
+        " を満たすので、",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立つ。",
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立つなら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_{m-1}(S,U)\cdot_{\mathbb{C}}\eta_m(U)
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ \mathrm{C}_{m-1}(S,U)\ \text{が成り立つので}\ \chi_{m-1}\ \text{の置き方}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ m\notin U\ \text{なので}\ \eta_m\ \text{の置き方}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\chi_m(S,U)
+&&\left(\because\ \mathrm{C}_m(S,U)\ \text{が成り立つので}\ \chi_m\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立たず、",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " も成り立たないなら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_{m-1}(S,U)\cdot_{\mathbb{C}}\eta_m(U)
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ \mathrm{C}_{m-1}(S,U)\ \text{が成り立たないので}\ \chi_{m-1}\ \text{の置き方}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\chi_m(S,U)
+&&\left(\because\ \mathrm{C}_m(S,U)\ \text{が成り立たないので}\ \chi_m\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathrm{C}_m(S,U)`),
+        " が成り立たず、",
+        math(String.raw`\mathrm{C}_{m-1}(S,U)`),
+        " が成り立つなら、上の同値から ",
+        math(String.raw`m\in U`),
+        " であり、次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_{m-1}(S,U)\cdot_{\mathbb{C}}\eta_m(U)
+&=\chi_{m-1}(S,U)\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ m\in U\ \text{なので}\ \eta_m\ \text{の置き方}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\chi_m(S,U)
+&&\left(\because\ \mathrm{C}_m(S,U)\ \text{が成り立たないので}\ \chi_m\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        "本題の前半。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " についての帰納法で、命題「すべての ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`(\Pi_m)_{S,U}=\chi_m(S,U)`),
+        "」を示す。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき。",
+        math(String.raw`\{1,\dots,0\}`),
+        " は空集合なので、",
+        math(String.raw`\mathrm{C}_0(S,U)`),
+        " は ",
+        math(String.raw`S=U`),
+        " と同値である。",
+        math(String.raw`S=U`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_0)_{S,U}
+&=(1_{\mathrm{Mat}_{\mathcal{P}_M}})_{S,U}
+&&\left(\because\ \Pi_0\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=\delta_{S,U}
+&&\left(\because\ \text{単位行列の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ S=U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=\chi_0(S,U)
+&&\left(\because\ \mathrm{C}_0(S,U)\ \text{が成り立つので}\ \chi_0\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`S\neq U`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_0)_{S,U}
+&=(1_{\mathrm{Mat}_{\mathcal{P}_M}})_{S,U}
+&&\left(\because\ \Pi_0\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=\delta_{S,U}
+&&\left(\because\ \text{単位行列の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ S\neq U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=\chi_0(S,U)
+&&\left(\because\ \mathrm{C}_0(S,U)\ \text{が成り立たないので}\ \chi_0\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について命題が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " を固定する。",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`r_T:=(\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}}\eta_m(U)\in\mathbb{C}`),
+        " と置き、各 ",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について、和の項のデルタを係数の位置へ移した次の等式を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(x_m)_{T,U}
+&=(\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}}(x_m)_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}}\bigl(\delta_{U,T}\cdot_{\mathbb{C}}\eta_m(U)\bigr)
+&&\left(\because\ (\star_1)\ \text{を}\ i:=m\ \text{に当てる}\right)\\
+&=\bigl((\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}}\delta_{U,T}\bigr)\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\bigl(\delta_{U,T}\cdot_{\mathbb{C}}(\Pi_{m-1})_{S,T}\bigr)\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}\bigl((\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}}\eta_m(U)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}}r_T
+&&\left(\because\ r_T\ \text{の置き方}\right)\\
+&=\delta_{U,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(S,U)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_m)_{S,U}
+&=\bigl(\Pi_{m-1}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}x_m\bigr)_{S,U}
+&&\left(\because\ \Pi_m\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=\sum_{T\in\mathcal{P}_M}(\Pi_{m-1})_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(x_m)_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}\delta_{U,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \text{各}\ T\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=r_U
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ U\text{、和の変数に}\ T\text{、}v_T:=r_T\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=(\Pi_{m-1})_{S,U}\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ r_T\ \text{の置き方で}\ T:=U\right)\\
+&=\chi_{m-1}(S,U)\cdot_{\mathbb{C}}\eta_m(U)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\chi_m(S,U)
+&&\left(\because\ (\star_2)\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " について命題が示された。",
+      ]),
+      paragraph([
+        "本題の後半。",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、",
+        math(String.raw`\mathrm{C}_M(S,U)`),
+        " が「",
+        math(String.raw`S=\emptyset`),
+        " かつ ",
+        math(String.raw`U=\emptyset`),
+        "」と同値であることを示す。",
+        math(String.raw`\mathrm{C}_M(S,U)`),
+        " が成り立つなら、すべての ",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " で ",
+        math(String.raw`t\notin S`),
+        " かつ ",
+        math(String.raw`t\notin\emptyset`),
+        " なので ",
+        math(String.raw`S=\emptyset`),
+        " であり（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）、",
+        math(String.raw`U=S=\emptyset`),
+        " である。逆に ",
+        math(String.raw`S=U=\emptyset`),
+        " なら、",
+        math(String.raw`S=U`),
+        " であり、",
+        math(String.raw`t\in S`),
+        " を満たす ",
+        math(String.raw`t`),
+        " は無いので、",
+        math(String.raw`\mathrm{C}_M(S,U)`),
+        " が成り立つ。",
+        math(String.raw`S=\emptyset`),
+        " かつ ",
+        math(String.raw`U=\emptyset`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_M)_{S,U}
+&=\chi_M(S,U)
+&&\left(\because\ \text{前半の命題で}\ m:=M\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathrm{C}_M(S,U)\ \text{が成り立つので}\ \chi_M\ \text{の置き方}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{\emptyset,S}\cdot_{\mathbb{C}}\delta_{\emptyset,U}
+&&\left(\because\ \emptyset=S\ \text{と}\ \emptyset=U\ \text{なので}\ \delta\ \text{の定義（二回）。}\blkref{def_kronecker_delta}\right)\\
+&=(E_{\emptyset,\emptyset})_{S,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`S\neq\emptyset`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_M)_{S,U}
+&=\chi_M(S,U)
+&&\left(\because\ \text{前半の命題で}\ m:=M\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathrm{C}_M(S,U)\ \text{が成り立たないので}\ \chi_M\ \text{の置き方}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\delta_{\emptyset,U}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{\emptyset,S}\cdot_{\mathbb{C}}\delta_{\emptyset,U}
+&&\left(\because\ \emptyset\neq S\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=(E_{\emptyset,\emptyset})_{S,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`S=\emptyset`),
+        " かつ ",
+        math(String.raw`U\neq\emptyset`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Pi_M)_{S,U}
+&=\chi_M(S,U)
+&&\left(\because\ \text{前半の命題で}\ m:=M\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathrm{C}_M(S,U)\ \text{が成り立たないので}\ \chi_M\ \text{の置き方}\right)\\
+&=\delta_{\emptyset,S}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{\emptyset,S}\cdot_{\mathbb{C}}\delta_{\emptyset,U}
+&&\left(\because\ \emptyset\neq U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=(E_{\emptyset,\emptyset})_{S,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph([
+        "三つの場合はすべての ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " を尽くすので、",
+        math(String.raw`\Pi_M`),
+        " と ",
+        math(String.raw`E_{\emptyset,\emptyset}`),
+        " の成分はすべて等しく、行列として等しい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+        math(String.raw`\Pi_M=\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,i=1}^{M}x_i`),
+        " なので、主張が示された。",
+      ]),
+    ],
+  },
 ]);
