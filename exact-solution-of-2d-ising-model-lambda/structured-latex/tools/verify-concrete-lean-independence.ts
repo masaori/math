@@ -73,14 +73,42 @@ async function main(): Promise<void> {
       }
     }
   }
+  // `open Ising2DLambda.NecSuf...` の後では必要十分版の定理を修飾なしで呼べるので、
+  // 修飾付きの参照だけでなく、開いた名前空間から見た相対名の参照も委譲として数える。
+  const files = leanFiles(leanRoot);
+  const necSufTheorems: string[] = [];
+  const concreteNames = new Set<string>();
+  for (const file of files) {
+    const necSuf = file.includes("/NecSuf/");
+    for (const { name, body } of declarations(file)) {
+      if (necSuf && /^\s*(?:private\s+|protected\s+|noncomputable\s+)*(?:theorem|lemma)\s/.test(body)) {
+        necSufTheorems.push(name);
+      } else if (!necSuf) concreteNames.add(name);
+    }
+  }
   const found = new Set<string>();
   const problems: string[] = [];
-  for (const file of leanFiles(leanRoot)) {
+  for (const file of files) {
     if (file.includes("/NecSuf/") || basename(file).endsWith("FromNecSuf.lean")) continue;
+    const source = sourceWithoutComments(readFileSync(file, "utf8"));
+    const opened = [...source.matchAll(/^\s*open\s+([^\n]*)$/gm)]
+      .flatMap((match) => (match[1] ?? "").split(/\s+/))
+      .filter((namespace) => namespace.includes("NecSuf"));
+    const relativeNames = new Set<string>();
+    for (const namespace of opened) {
+      for (const theorem of necSufTheorems) {
+        if (theorem.startsWith(`${namespace}.`)) relativeNames.add(theorem.slice(namespace.length + 1));
+      }
+    }
     for (const declaration of declarations(file)) {
       const { name, body } = declaration;
       if (!registered.has(name) || name.includes("from_necSuf") || name.includes("_eq_necSuf")) continue;
-      if (/\bNecSuf\./.test(body)) found.add(name);
+      if (/\bNecSuf\./.test(body)) { found.add(name); continue; }
+      const namespace = name.split(".").slice(0, -1).join(".");
+      const tokens = body.slice(body.indexOf(name.split(".").at(-1) ?? "") + 1).match(/[\w.'₀-₉]+/g) ?? [];
+      const delegates = tokens.some((token) => relativeNames.has(token)
+        && !concreteNames.has(`${namespace}.${token}`));
+      if (delegates) found.add(name);
     }
   }
   const ledger = new Set(readFileSync(ledgerPath, "utf8").split(/\r?\n/)
