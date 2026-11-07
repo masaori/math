@@ -297,6 +297,185 @@ w^\top Px
   },
 
   {
+    id: "maxeig_claim_real_bilinear_value_with_nonnegative_entries_is_nonnegative",
+    kind: "claim",
+    title: {
+      text: "成分が非負の実数の行列と、成分が非負の二つの実数のベクトルについて、x^⊤Py は非負である",
+    },
+    labels: ["real_bilinear_value_with_nonnegative_entries_is_nonnegative"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "、",
+        math(String.raw`x, y \in \mathbb{R}^n`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）が、すべての ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " で ",
+        math(String.raw`P_{kl} \geq 0`),
+        "、",
+        math(String.raw`x_k \geq 0`),
+        "、",
+        math(String.raw`y_l \geq 0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序）を満たすとする。",
+        math(String.raw`x^\top Py \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`x^\top P y \geq 0`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序と積・有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`p, q \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`x_p \geq 0`),
+        "、",
+        math(String.raw`P_{pq} \geq 0`),
+        "、",
+        math(String.raw`y_q \geq 0`),
+        " なので",
+      ]),
+      displayMath(String.raw`x_p\,P_{pq} \geq 0
+  \qquad\bigl(\because\ \text{非負の実数の積は非負}\ (x_p \geq 0,\ P_{pq} \geq 0)\bigr)`),
+      displayMath(String.raw`\bigl(x_p\,P_{pq}\bigr)\,y_q \geq 0
+  \qquad\bigl(\because\ \text{非負の実数の積は非負}\ (x_p\,P_{pq} \geq 0\ \text{（上の不等式）},\ y_q \geq 0)\bigr)`),
+      paragraph([
+        "である（以下、この 2 つ目の不等式を「項の非負性」と呼ぶ）。これを使って、各 ",
+        math(String.raw`p \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{l=1}^{n} \bigl(x_p\,P_{pl}\bigr)\,y_l
+&\geq \bigl(x_p\,P_{p1}\bigr)\,y_1
+&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to n,\ a_j \to (x_p\,P_{pj})\,y_j,\ k \to 1)\text{。仮定の}\ a_j \geq 0\ \text{は項の非負性}\ (q \to j)\bigr)\\
+&\geq 0
+&&\bigl(\because\ \text{項の非負性}\ (q \to 1)\bigr)
+\end{aligned}`),
+      paragraph(["である（以下、この不等式を「行の和の非負性」と呼ぶ）。これらを使って"]),
+      displayMath(String.raw`\begin{aligned}
+x^\top Py
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to x,\ y \to y)\bigr)\\
+&\geq \sum_{l=1}^{n} \bigl(x_1\,P_{1l}\bigr)\,y_l
+&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to n,\ a_j \to \textstyle\sum_{l=1}^{n} (x_j\,P_{jl})\,y_l,\ k \to 1)\text{。仮定の}\ a_j \geq 0\ \text{は行の和の非負性}\ (p \to j)\bigr)\\
+&\geq 0
+&&\bigl(\because\ \text{行の和の非負性}\ (p \to 1)\bigr)
+\end{aligned}`),
+      paragraph(["となる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は u^⊤Wεu ≥ 0 と u^⊤Wu ≥ 0 を「u, εu ≥ 0 と W_kl > 0」の名前だけで出していた。W_ℝ・ε_ℝ で書き直すときに引くために足した。使うのは成分の非負性だけなので、仮定は P_kl ≥ 0 にした。引く finite_sum_of_nonnegative_reals_is_at_least_each_term の記号 a_j・k とぶつからないよう、ベクトルを x・y、準備の添字を p・q と書く。数値検証: sagemath/check/real_bilinear_value_with_nonnegative_entries_is_nonnegative/。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_real_bilinear_value_of_scalar_multiple_vector",
+    kind: "claim",
+    title: {
+      text: "ベクトルを実数倍すると、実数の双線型値 w^⊤Pw はその実数どうしの積の倍になる",
+    },
+    labels: ["real_bilinear_value_of_scalar_multiple_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "、",
+        math(String.raw`u, w \in \mathbb{R}^n`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）、",
+        math(String.raw`c \in \mathbb{R}`),
+        " とし、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`w_k = c\,u_k`),
+        "（",
+        math(String.raw`c\,u_k`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の積）であるとする。",
+        math(String.raw`w^\top Pw,\ u^\top Pu \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`w^\top P w = (c\,c)\,\bigl(u^\top P u\bigr)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`c\,c`),
+        " と、それと ",
+        math(String.raw`u^\top Pu`),
+        " の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+        math(String.raw`\mathbb{R}^n`),
+        " の元の実数倍は本文で定めていないので、",
+        math(String.raw`w`),
+        " を成分の等式で与える。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の結合則・可換則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+w^\top Pw
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(w_k\,P_{kl}\bigr)\,w_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to w,\ y \to w)\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(c\,u_k\bigr)\,P_{kl}\Bigr)\,\bigl(c\,u_l\bigr)
+&&\bigl(\because\ \text{仮定}\ w_k = c\,u_k\ \text{を各項の}\ w_k\ \text{と}\ w_l\ \text{へ同時適用}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(c\,\bigl(u_k\,P_{kl}\bigr)\Bigr)\,\bigl(c\,u_l\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,u_k)\,P_{kl} = c\,(u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,\bigl(c\,u_l\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,s)\,t = c\,(s\,t)\ (s \to u_k\,P_{kl},\ t \to c\,u_l)\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\Bigl(\bigl(u_k\,P_{kl}\bigr)\,c\Bigr)\,u_l\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ s\,(c\,u_l) = (s\,c)\,u_l\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\Bigl(c\,\bigl(u_k\,P_{kl}\bigr)\Bigr)\,u_l\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ s\,c = c\,s\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,s)\,u_l = c\,(s\,u_l)\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n} c\sum_{l=1}^{n} c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to c\,((u_k\,P_{kj})\,u_j))\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n} c\,\Bigl(c\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to (u_k\,P_{kj})\,u_j)\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=c\sum_{k=1}^{n} c\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,u_l
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to c\,\textstyle\sum_{l=1}^{n} (u_j\,P_{jl})\,u_l)\bigr)\\
+&=c\,\Bigl(c\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to \textstyle\sum_{l=1}^{n} (u_j\,P_{jl})\,u_l)\bigr)\\
+&=c\,\Bigl(c\,\bigl(u^\top Pu\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to u)\ \text{を右辺から左辺へ}\bigr)\\
+&=(c\,c)\,\bigl(u^\top Pu\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ c\,(c\,t) = (c\,c)\,t\ (t \to u^\top Pu)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂ := v/‖v‖ について v̂^⊤Wv̂ = v^⊤Wv/‖v‖^2 を「v̂ = v/‖v‖ の代入と二次形式の斉次性」の名前だけで出していた。W_ℝ で書き直すときに c → 1/‖v‖ として引くために足した。実数の冪 c^2（def_power_of_real_number）を経ずに積 c c で述べたのは、引く側で 1/‖v‖ どうしの積として使えば足りるためである。引く finite_sum_of_real_scalar_multiples の記号 x_j とぶつからないよう、ベクトルを u・w と書く。数値検証: sagemath/check/real_bilinear_value_of_scalar_multiple_vector/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
     kind: "claim",
     title: {

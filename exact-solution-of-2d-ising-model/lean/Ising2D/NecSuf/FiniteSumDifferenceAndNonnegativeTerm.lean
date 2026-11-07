@@ -17,8 +17,10 @@
 | `finite_sum_of_negated_real_numbers` | `finite_sum_neg_fin'` | 同上と、空の和のための明示の仮定 `-0 = 0` |
 | `finite_sum_of_real_scalar_multiples_succ` | `finite_sum_mul_left_succ'`（同じ並び） | 加法についての可換モノイドと乗法 `Mul` に、左からの分配法則 `c(a + b) = ca + cb`（`LeftDistribClass`）を足したものだけ |
 | `finite_sum_of_real_scalar_multiples` | `finite_sum_mul_left_fin'` | 同上と、空の和のための明示の仮定 `c0 = 0` |
+| `finite_sum_of_real_scalar_multiples_fintype` | `finite_sum_mul_left'`（同じく番号を付けて `fin'` 版を当てる） | 同上 |
 | `finite_sum_of_nonnegative_reals_ge_term_succ` | `finite_sum_ge_term_succ'`（同じ場合分けと並び） | 加法についての可換モノイドと、両辺に同じ元を左右どちらから足しても保たれる前順序（`Preorder`・`AddLeftMono`・`AddRightMono`） |
 | `finite_sum_of_nonnegative_reals_ge_term` | `finite_sum_ge_term_fin'` | 同上 |
+| `finite_sum_of_nonnegative_reals_ge_term_fintype` | `finite_sum_ge_term'`（同じく番号を付けて `fin'` 版を当てる） | 同上 |
 
 * 差の主張に効いているのは、帰納法の段の `(α - β) + (x - y) = (α + x) - (β + y)` だけで、`finite_sum_sub_step'` の 4 段が示すとおり
   差が「符号反転を足すこと」（`sub_eq_add_neg`）、加法の結合則・交換則（`finite_sum_add_step'`）、`-(β + y) = -β + -y`（`neg_add`）から出る。
@@ -168,5 +170,26 @@ theorem finite_sum_ge_term_fin' [AddCommMonoid R] [Preorder R] [AddLeftMono R] [
   cases m with
   | zero => exact k.elim0
   | succ m => exact finite_sum_ge_term_succ' m a ha k
+
+/-- 有限型 `κ` の上の和（具体版 `finite_sum_of_real_scalar_multiples_fintype`）。`κ` に `Fintype.equivFin` で番号を付け、
+`finite_sum_mul_left_fin'` を使う。 -/
+theorem finite_sum_mul_left' [AddCommMonoid R] [Mul R] [LeftDistribClass R] (c : R) (h0 : c * 0 = 0)
+    {κ : Type*} [Fintype κ] (x : κ → R) : ∑ j, c * x j = c * ∑ j, x j := by
+  let e := Fintype.equivFin κ
+  calc ∑ j, c * x j
+      = ∑ t : Fin (Fintype.card κ), c * x (e.symm t) :=
+        (Equiv.sum_comp e.symm (fun j => c * x j)).symm                      -- 番号を付ける
+    _ = c * ∑ t, x (e.symm t) := finite_sum_mul_left_fin' c h0 _ _
+    _ = c * ∑ j, x j := by rw [Equiv.sum_comp e.symm x]                       -- 番号を外す
+
+/-- 有限型 `κ` の上の和（具体版 `finite_sum_of_nonnegative_reals_ge_term_fintype`）。`κ` に `Fintype.equivFin` で番号を付け、
+`finite_sum_ge_term_fin'` を使う。 -/
+theorem finite_sum_ge_term' [AddCommMonoid R] [Preorder R] [AddLeftMono R] [AddRightMono R]
+    {κ : Type*} [Fintype κ] (a : κ → R) (ha : ∀ j, 0 ≤ a j) (k : κ) : ∑ j, a j ≥ a k := by
+  let e := Fintype.equivFin κ
+  calc ∑ j, a j
+      = ∑ t : Fin (Fintype.card κ), a (e.symm t) := (Equiv.sum_comp e.symm a).symm  -- 番号を付ける
+    _ ≥ a (e.symm (e k)) := finite_sum_ge_term_fin' _ (fun t => a (e.symm t)) (fun t => ha _) (e k)
+    _ = a k := by rw [Equiv.symm_apply_apply]                                 -- 番号を外す
 
 end Ising2D.NecSuf

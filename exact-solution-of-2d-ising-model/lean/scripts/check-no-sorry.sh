@@ -850,6 +850,14 @@ targets=(
   Ising2D.real_bilinear_value_is_additive_in_left_vector_of_necSuf
   "Ising2D.NecSuf.bilinear_value_is_additive_in_right_vector'"
   "Ising2D.NecSuf.bilinear_value_is_additive_in_left_vector'"
+  Ising2D.real_bilinear_value_with_nonnegative_entries_is_nonnegative
+  Ising2D.real_bilinear_value_of_scalar_multiple_vector
+  Ising2D.real_bilinear_value_with_nonnegative_entries_is_nonnegative_of_necSuf
+  Ising2D.real_bilinear_value_of_scalar_multiple_vector_of_necSuf
+  "Ising2D.NecSuf.bilinear_value_with_nonnegative_entries_is_nonnegative'"
+  "Ising2D.NecSuf.bilinear_value_of_scalar_multiple_vector'"
+  "Ising2D.NecSuf.finite_sum_mul_left'"
+  "Ising2D.NecSuf.finite_sum_ge_term'"
   "Ising2D.NecSuf.dotProduct_mulVec_eq_double_sum'"
   "Ising2D.NecSuf.abs_bilinear_row_le_row_abs_sum'"
   "Ising2D.NecSuf.bilinear_value_at_most_value_at_absolute_vector'"
