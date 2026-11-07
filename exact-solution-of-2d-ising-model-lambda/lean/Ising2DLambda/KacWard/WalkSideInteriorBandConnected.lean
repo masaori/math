@@ -169,6 +169,32 @@ theorem walkSideInteriorBandFromWalk_coordinate_closed {L m : ℕ} [NeZero L]
     simpa [hh, hv, windingShift, Prod.add_def] using h
   exact ⟨congrArg Prod.fst hpoint, congrArg Prod.snd hpoint⟩
 
+/-- 実際の閉歩道の持ち上げ座標は、各辺で単位格子歩を進む。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_unit {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    IsUnitGridWalk (m + 1) row col := by
+  dsimp only [IsUnitGridWalk]
+  intro k hk
+  have hindex : Fin.ofNat (m + 2) k = (⟨k, hk⟩ : Fin (m + 1)).castSucc := by
+    apply Fin.ext
+    simp [Nat.mod_eq_of_lt (by omega : k < m + 2)]
+  have hnext : Fin.ofNat (m + 2) (k + 1) = (⟨k, hk⟩ : Fin (m + 1)).succ := by
+    apply Fin.ext
+    simp [Nat.mod_eq_of_lt (by omega : k + 1 < m + 2)]
+  have hstep := planeLift_succ γ ⟨k, hk⟩
+  simp only [hnext, hindex] at *
+  have hunit := orientedEdgeLatticeStep_unit (γ ⟨k, hk⟩)
+  rcases hunit with hunit | hunit | hunit | hunit <;>
+    rw [hunit] at hstep <;>
+    simp only [Prod.add_def] at hstep
+  all_goals
+    have hr := congrArg Prod.fst hstep
+    have hc := congrArg Prod.snd hstep
+    dsimp only at hr hc
+    omega
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h

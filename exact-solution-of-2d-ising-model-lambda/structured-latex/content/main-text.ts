@@ -9326,10 +9326,10 @@ R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
             proof: [
               paragraph(["有限集合 ", math(String.raw`C:=\operatorname{OddOrb}(\sigma)=\operatorname{Orb}_{\sigma}(m)\subseteq\mathcal J`), "、点 ", math(String.raw`b:=\sigma(m)\in\mathcal J`), "、自然数 ", math(String.raw`\ell:=\operatorname{len}_{\sigma}(m)`), " と置く。最小元は選んだ集合に属するので、"]),
               displayMath(String.raw`m\in\operatorname{OddPts}(\sigma)
-\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ と非空有限集合の最小元の所属}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ と非空有限集合の最小元の所属}\bigr)`),
               paragraph(["よってある自然数 ", math(String.raw`k\in\mathbb N`), " が存在して、"]),
               displayMath(String.raw`\ell=k+k+1
-\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ の奇数点の条件}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ の奇数点の条件}\bigr)`),
               paragraph(["零回と一回の反復を計算する。"]),
               displayMath(String.raw`\sigma^{[0]}(m)=m
 \qquad\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),`),
@@ -9337,14 +9337,14 @@ R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
 \sigma^{[1]}(m)
  &=\sigma^{[0]}(\sigma(m))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=\sigma(m)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
- &=b&&\bigl(\because\ b\text{ の定義}\bigr).
+ &=b&&\bigl(\because\ b\text{ の定義}\bigr)
 \end{aligned}`),
               paragraph([ref("def_finite_permutation_orbit"), " より、これらはそれぞれ ", math(String.raw`m\in C`), " と ", math(String.raw`b\in C`), " の到達の証拠である。また、"]),
               displayMath(String.raw`b\ne m
-\qquad\bigl(\because\ \blkref{def_odd_orbit_derangements}\text{ の不動点を持たない条件}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_odd_orbit_derangements}\text{ の不動点を持たない条件}\bigr)`),
               paragraph(["二点の所属を集合の包含で書けば、"]),
               displayMath(String.raw`\{m,b\}\subseteq C
-\qquad\bigl(\because\ m\in C\text{ と }b\in C\bigr).`),
+\qquad\bigl(\because\ m\in C\text{ と }b\in C\bigr)`),
               displayMath(String.raw`\begin{aligned}
 2&=|\{m,b\}|&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr)\\
  &\le|C|&&\bigl(\because\ \text{有限集合の包含による個数の単調性}\bigr)\\
@@ -66022,6 +66022,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     lean: [
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
