@@ -34,7 +34,9 @@ theorem cellEdgeAdjacent_from_necSuf (p q : ℤ × ℤ) :
 
 /-- 整数格子セルの集合が辺隣接の有限列で連結であること。 -/
 def EdgeConnectedCellSet (S : Set (ℤ × ℤ)) : Prop :=
-  ConnectedBy CellEdgeAdjacent S
+  ∀ ⦃x⦄, x ∈ S → ∀ ⦃y⦄, y ∈ S →
+    Relation.ReflTransGen
+      (fun a b => a ∈ S ∧ b ∈ S ∧ CellEdgeAdjacent a b) x y
 
 theorem edgeConnectedCellSet_from_necSuf (S : Set (ℤ × ℤ)) :
     EdgeConnectedCellSet S ↔
@@ -318,8 +320,52 @@ theorem walkSideInteriorBand_nonempty_edgeConnected_local
       p ∈ surroundingInteriorCells n row col (k + 1)) :
     (walkSideInteriorBand n row col).Nonempty ∧
       EdgeConnectedCellSet (walkSideInteriorBand n row col) := by
-  exact finite_chain_union_connected_necSuf CellEdgeAdjacent cellEdgeAdjacent_symmetric
-    n (surroundingInteriorCells n row col) hn hnonempty hlocal hbridge
+  let A := surroundingInteriorCells n row col
+  let band := walkSideInteriorBand n row col
+  have hsubset (k : ℕ) (hk : k < n) : A k ⊆ band := by
+    intro p hp
+    exact ⟨k, hk, hp⟩
+  obtain ⟨base, hbase⟩ := hnonempty 0 hn
+  have hbaseBand : base ∈ band := hsubset 0 hn hbase
+  let step := fun p q => p ∈ band ∧ q ∈ band ∧ CellEdgeAdjacent p q
+  have htoBase : ∀ k < n, ∀ ⦃p⦄, p ∈ A k →
+      Relation.ReflTransGen step p base := by
+    intro k
+    induction k with
+    | zero =>
+        intro hk p hp
+        exact (Relation.ReflTransGen.mono
+          (r := fun a b => a ∈ A 0 ∧ b ∈ A 0 ∧ CellEdgeAdjacent a b)
+          (fun (a b : ℤ × ℤ) h =>
+            ⟨hsubset 0 hk h.1, hsubset 0 hk h.2.1, h.2.2⟩) p base)
+          (hlocal 0 hk hp hbase)
+    | succ k ih =>
+        intro hk p hp
+        obtain ⟨z, hzPrev, hzNext⟩ := hbridge k hk
+        have hlift :
+            (fun a b => a ∈ A (k + 1) ∧ b ∈ A (k + 1) ∧ CellEdgeAdjacent a b) ≤
+              step := by
+          intro a b h
+          exact ⟨hsubset (k + 1) hk h.1, hsubset (k + 1) hk h.2.1, h.2.2⟩
+        have hpz := (Relation.ReflTransGen.mono
+          (r := fun a b => a ∈ A (k + 1) ∧ b ∈ A (k + 1) ∧ CellEdgeAdjacent a b)
+          hlift p z)
+          (hlocal (k + 1) hk hp hzNext)
+        exact hpz.trans (ih (Nat.lt_of_succ_lt hk) hzPrev)
+  refine ⟨⟨base, hbaseBand⟩, ?_⟩
+  intro p hp q hq
+  obtain ⟨i, hi, hpi⟩ := hp
+  obtain ⟨j, hj, hqj⟩ := hq
+  have hpb := htoBase i hi hpi
+  have hqb := htoBase j hj hqj
+  have hbqSwap : Relation.ReflTransGen (Function.swap step) base q :=
+    (Relation.ReflTransGen.swap (r := step) base q) hqb
+  have hstepSwap : Function.swap step ≤ step := by
+    intro a b hab
+    exact ⟨hab.2.1, hab.1, cellEdgeAdjacent_symmetric hab.2.2⟩
+  have hbq : Relation.ReflTransGen step base q :=
+    (Relation.ReflTransGen.mono (r := Function.swap step) hstepSwap base q) hbqSwap
+  exact hpb.trans hbq
 
 /-- `claim_walk_side_interior_band_edge_connected` の具体版。 -/
 theorem walkSideInteriorBand_nonempty_edgeConnected

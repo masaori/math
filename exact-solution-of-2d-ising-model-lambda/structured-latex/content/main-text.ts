@@ -9588,20 +9588,20 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
               proof: [
                 paragraph([ref("def_odd_orbit_selection"), " の ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " と ", math(String.raw`C:=\operatorname{OddOrb}(\sigma)\subseteq\mathcal J`), " を取る。最小元は選んだ集合に属するので、"]),
                 displayMath(String.raw`m\in\operatorname{OddPts}(\sigma)
-\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)`),
                 displayMath(String.raw`\operatorname{len}_{\sigma}(m)\text{ は奇数}
-\qquad\bigl(\because\ \operatorname{OddPts}\text{ の定義、}\blkref{def_odd_orbit_selection}\bigr).`),
+\qquad\bigl(\because\ \operatorname{OddPts}\text{ の定義、}\blkref{def_odd_orbit_selection}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 |C|&=|\operatorname{Orb}_{\sigma}(m)|
 &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
 &=\operatorname{len}_{\sigma}(m)
-&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`|C|\text{ は奇数}
-\qquad\bigl(\because\ \text{上の個数の等号へ奇数性を代入}\bigr).`),
+\qquad\bigl(\because\ \text{上の個数の等号へ奇数性を代入}\bigr)`),
                 paragraph(["次に ", math(String.raw`C`), " の中で積の添字を取り直す。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
                 displayMath(String.raw`\sigma(i)\in C\ \Longleftrightarrow\ i\in C
-\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{-1}(i)\in C
 &\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))\in C
