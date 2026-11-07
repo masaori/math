@@ -7992,14 +7992,14 @@ P_\sigma
  &=0R_{\sigma,j}
  &&\bigl(\because\ A_{j,j}=0\bigr)\\
  &=0
- &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr).
+ &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 c_\sigma P_\sigma
  &=c_\sigma0
  &&\bigl(\because\ P_\sigma=0\bigr)\\
  &=0
- &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr).
+ &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph(["置換全体は ", math(String.raw`\operatorname{Der}(\mathcal J)`), " と ", math(String.raw`\mathcal F`), " の重複のない合併である。従って有限和を分けると、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8015,7 +8015,7 @@ c_\sigma P_\sigma
  &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma+0
  &&\bigl(\because\ \text{零の有限和}\bigr)\\
  &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
- &&\bigl(\because\ \text{加法の零元、}\blkref{def_qbar_polynomial_ring}\bigr).
+ &&\bigl(\because\ \text{加法の零元、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph(["すべての積・和と等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で扱った。実数体・複素数体への脱出はない。"]),
               ],
@@ -65663,6 +65663,8 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
                     verification: ["sagemath/check/interior-cells-reach-odd-vertical-edge"],
                     lean: [
                       "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge",
+                      "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_reachOddVerticalEdge",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reachesOddVerticalEdge",
                       "Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf",
                       "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf",
                     ],
