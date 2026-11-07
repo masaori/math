@@ -718,6 +718,9 @@ targets=(
   Ising2D.trace_power_upper_bound
   Ising2D.trace_power_upper_bound_physical
   Ising2D.trace_power_upper_bound_of_necSuf
+  Ising2D.moment_log_convexity
+  Ising2D.moment_log_convexity_physical
+  Ising2D.moment_log_convexity_of_necSuf
   Ising2D.quad_pow_le_trace_pow
   Ising2D.rayleighSup_pow_le_trace_pow
   Ising2D.trace_power_sandwich

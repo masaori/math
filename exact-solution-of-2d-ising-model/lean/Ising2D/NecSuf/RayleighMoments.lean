@@ -4,14 +4,16 @@
 対応する人手証明のラベル:
 * **`rayleigh_bounds_operator_norm`**（`maxeig_007_claim_operator_bound`）
 * **`trace_power_upper_bound`** の偶数・奇数の場合（`maxeig_008a_claim_trace_power_upper_bound`。`moment_le_pow`）
+* **`moment_log_convexity`**（`maxeig_008b_claim_moment_log_convexity`。`moment_pos`・`moment_log_convex`）
 * **`trace_power_sandwich`** の Step 2・Step 3（`maxeig_008_claim_trace_power_sandwich`）
 
 具体版:
 * `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
 * `Ising2D.trace_power_upper_bound`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerUpperBound.lean`）
+* `Ising2D.moment_log_convexity`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimMomentLogConvexity.lean`）
 * `Ising2D.trace_power_sandwich`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwich.lean`）
 
-具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）、`Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`）と `Ising2D.trace_power_sandwich` が示す。
+具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）、`Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`）、`Ising2D.moment_log_convexity_of_necSuf`（`ClaimMomentLogConvexityFromNecSuf.lean`）と `Ising2D.trace_power_sandwich` が示す。
 
 ## この主張に本質的に効いている構造
 
@@ -176,7 +178,7 @@ theorem pow_ne_zero_of_ne_zero (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (p : �
 /-- モーメント列は正: `0 < ⟪x, W^k x⟫`（`x ≠ 0`）。
 
 人手証明 `moment_log_convexity` の【正値性】（`m_{2a} = (u^(a))^⊤I_ℝu^(a) > 0`、
-`m_{2a+1} = (u^(a))^⊤W_ℝu^(a) > 0`、`u^(a) := (W_ℝ)^ax`）に対応。 -/
+`m_{2a+1} = (u^(a))^⊤W_ℝu^(a) > 0`、`u^(a) := (W_ℝ)^ax`）に対応（具体版 `Ising2D.moment_even_pos`・`moment_odd_pos`）。 -/
 theorem moment_pos (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (k : ℕ) :
     0 < ip x ((W ^ k) x) := by
   rcases Nat.even_or_odd k with ⟨p, hp⟩ | ⟨p, hp⟩
@@ -260,8 +262,11 @@ theorem moment_le_pow (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ c)
 人手証明 `moment_log_convexity` の不等式。人手は `def_W_real` の `W_ℝ` の冪で
 `m_k := x^⊤(W_ℝ)^kx` と述べ、`k ∈ ℤ_{≥1}` について `m_k² ≤ m_{k−1}m_{k+1}` とする。
 ここでは添字を `k → k+1` とずらして述べる。偶奇で `P = I` の Cauchy–Schwarz と
-`P = W` の Cauchy–Schwarz を使い分けるのは人手と同じである。
-人手と 1 対 1 の具体版はまだ無い（状態台帳の (r6)）。 -/
+`P = W` の Cauchy–Schwarz を使い分けるのは人手と同じである（人手の奇数 `k = 2p+1` は `k → k+1` の偶数 `k = 2p` の場合、
+人手の偶数 `k = 2p+2` は奇数 `k = 2p+1` の場合で、どちらも `(a, b) = (p, p+1)`）。
+人手と 1 対 1 の具体版は `Ising2D.moment_log_convexity`（`ClaimMomentLogConvexity.lean`。【冪の分け方】と【二つの冪で挟んだ値】が
+ここの `moment_split`、【`P = I_ℝ` の不等式】【`P = W_ℝ` の不等式】が `cs_ip`・`cs_W` に当たる。
+人手は【冪の対称性】で `W^b` を一度に移すが、`moment_split` は自己共役性で `W` を一つずつ移す帰納法で、冪の対称性はその帰納法に吸収されている）。 -/
 theorem moment_log_convex (h : IsPsdPair ip W) (x : V) (k : ℕ) :
     (ip x ((W ^ (k + 1)) x)) ^ 2
       ≤ (ip x ((W ^ k) x)) * (ip x ((W ^ (k + 2)) x)) := by

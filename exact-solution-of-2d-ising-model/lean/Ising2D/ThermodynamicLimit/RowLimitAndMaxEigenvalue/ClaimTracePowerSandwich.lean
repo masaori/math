@@ -5,7 +5,7 @@
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
 必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（上からの評価 `trace_power_upper_bound`。人手と 1 対 1 の具体版は `ClaimTracePowerUpperBound.lean`）、
-`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（`moment_log_convexity`）、
+`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（`moment_log_convexity`。人手と 1 対 1 の具体版は `ClaimMomentLogConvexity.lean`。この証明はまだ必要十分版を使う）、
 `Ising2D.NecSuf.IsPdPair.moment_pow_le`（【単位ベクトルでの評価】の `m_p ≥ m_1^p`）
 （いずれも `Ising2D/NecSuf/RayleighMoments.lean`）
 

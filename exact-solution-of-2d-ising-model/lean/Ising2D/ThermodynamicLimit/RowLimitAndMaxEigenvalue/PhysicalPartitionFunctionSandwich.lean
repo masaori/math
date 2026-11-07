@@ -73,6 +73,7 @@
 | 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
 | 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
 | `trace_power_upper_bound` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（`W` の実対称性は `W_is_real_symmetric_positive_definite`、`rayleigh_bounds_operator_norm` が要る `W_ℝ` の対称性・正定値性は `W_real_is_symmetric`・`W_real_is_positive_definite`） | `trace_power_upper_bound_physical`（一般の `W` の具体版は `ClaimTracePowerUpperBound.lean` の `trace_power_upper_bound`） |
+| `moment_log_convexity` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（`W` の実対称性は `W_is_real_symmetric_positive_definite`、`W_ℝ` の対称性・正定値性は `W_real_is_symmetric`・`W_real_is_positive_definite`） | `moment_log_convexity_physical`（一般の `W` の具体版は `ClaimMomentLogConvexity.lean` の `moment_log_convexity`） |
 | `partition_function_sandwich`（準備の `Z(K_1,K_2) = T`（`T := Σ_k ((W_ℝ)^{N_row})_kk`）→ `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
 - Step 3 の `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor` は、添字が `Conf M` の行列なので
@@ -130,6 +131,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexity
 
 namespace Ising2D
 
@@ -720,5 +722,18 @@ theorem trace_power_upper_bound_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {n
           (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n :=
   trace_power_upper_bound (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2)
     (W_real_is_symmetric K1 hK2) (W_real_is_positive_definite K1 hK2) hn
+
+/-- **人手 `moment_log_convexity`** を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの:
+単位ベクトル `x` について、すべての `k ≥ 0` で `m_k > 0`、すべての `k ≥ 1` で `m_k^2 ≤ m_{k-1}m_{k+1}`（`m_k := x^⊤(W_ℝ)^kx`）。 -/
+theorem moment_log_convexity_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {x : Conf M → ℝ}
+    (hx : vecNorm x = 1) :
+    (∀ k : ℕ, 0 < momentWReal (physicalSymTransferC M K1 K2)
+        (physicalSymTransferC_isRealSymmetric K1 hK2) x k)
+      ∧ ∀ k : ℕ, 1 ≤ k →
+          momentWReal (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2) x k ^ 2
+            ≤ momentWReal (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2) x (k - 1)
+              * momentWReal (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2) x (k + 1) :=
+  moment_log_convexity (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2)
+    (W_real_is_symmetric K1 hK2) (W_real_is_positive_definite K1 hK2) hx
 
 end Ising2D
