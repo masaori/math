@@ -66,13 +66,14 @@ theorem norm_sq_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0
     _ ≥ |z j0| ^ 2 :=
         finite_sum_of_nonnegative_reals_ge_term_fintype (fun j => |z j| ^ 2)
           (fun _ => sq_nonneg _) j0                                         -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |z_j|^2`, `k → j_0`）
-    _ > 0 := pow_pos (abs_pos.mpr hj0) 2                                    -- `z_{j_0} ≠ 0`
+    _ > 0 := by
+        rw [sq]; exact mul_pos (abs_pos.mpr hj0) (abs_pos.mpr hj0)          -- `z_{j_0} ≠ 0` なので `|z_{j_0}| > 0` で、`def_power_of_real_number` で `|z_{j_0}|^2 = |z_{j_0}||z_{j_0}|` は正の実数の積
 
 /-- 人手【`(W_ℝ)^n` の半正定値性】の `‖z‖ ≥ 0` と `‖z‖ ≠ 0` から `‖z‖ > 0`。 -/
 theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0) :
     vecNorm z > 0 := by
   have hge : 0 ≤ vecNorm z := vecNorm_nonneg z                              -- `def_matrix_norm`
-  have hne : vecNorm z ≠ 0 := by                                            -- `‖z‖ = 0` なら `‖z‖^2 = 0^2 = 0` で `‖z‖^2 > 0` に反する
+  have hne : vecNorm z ≠ 0 := by                                            -- `‖z‖ = 0` なら `‖z‖^2 = 0^2 = 0`（`def_power_of_real_number`）で `‖z‖^2 > 0` に反する
     intro h
     have h2 := norm_sq_pos_of_component_ne_zero hj0
     rw [h, zero_pow two_ne_zero] at h2
@@ -89,19 +90,20 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
         rw [vecNorm, vecNormSq_eq_sum]
         simp only [square_of_real_absolute_value]                           -- `def_matrix_norm`。`square_of_real_absolute_value` は書き方の差を埋める段
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹ * z i) ^ 2) := by
-        simp only [hw, square_of_real_absolute_value]                       -- `w_i := ‖z‖^{-1}z_i` と、`ℝ` の元 `t` で `|t|^2 = t^2` を各項へ同時に
+        simp only [hw, square_of_real_absolute_value]                       -- `w_i := ‖z‖^{-1}z_i` と、`square_of_real_absolute_value` の `|q|^2 = q^2` を各項へ同時に
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹) ^ 2 * z i ^ 2) := by
-        simp only [mul_pow]                                                 -- `ℝ` で `(st)^2 = s^2t^2` を各項へ同時に
+        congr 1
+        exact Finset.sum_congr rfl fun i _ => by rw [sq, sq, sq]; ring      -- `def_power_of_real_number` で `(st)^2 = (st)(st)`, `s^2 = ss`, `t^2 = tt` と乗法の交換則・結合則を各項へ同時に
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * ∑ i, z i ^ 2) := by
         rw [finite_sum_of_real_scalar_multiples_fintype]                    -- `finite_sum_of_real_scalar_multiples`（`c → (‖z‖^{-1})^2`）
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * ∑ i, |z i| ^ 2) := by
-        simp only [square_of_real_absolute_value]                           -- `ℝ` の元 `t` で `t^2 = |t|^2` を各項へ同時に
+        simp only [square_of_real_absolute_value]                           -- `square_of_real_absolute_value` の `|q|^2 = q^2` を各項へ同時に
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * vecNorm z ^ 2) := by
         rw [vecNorm_sq_eq_sum_abs_sq z]                                     -- 上の `‖z‖^2 = Σ_j|z_j|^2`
     _ = Real.sqrt (((vecNorm z)⁻¹ * vecNorm z) ^ 2) := by
-        rw [mul_pow]                                                        -- `ℝ` の乗法の交換則・結合則
+        congr 1; rw [sq, sq, sq]; ring                                      -- `def_power_of_real_number` で `t^2 = tt`（`t → ‖z‖^{-1}, ‖z‖, ‖z‖^{-1}‖z‖`）と乗法の交換則・結合則
     _ = Real.sqrt 1 := by
-        rw [inv_mul_cancel₀ hne, one_pow]                                   -- `‖z‖ ≠ 0` なので `‖z‖^{-1}‖z‖ = 1`、`1^2 = 1`
+        rw [inv_mul_cancel₀ hne, one_pow]                                   -- `‖z‖ ≠ 0` なので `‖z‖^{-1}‖z‖ = 1`、`def_power_of_real_number` で `1^2 = 1`
     _ = 1 := Real.sqrt_one                                                  -- `definition_of_sqrt_r_positive` の `1 ≥ 0`, `1^2 = 1`
 
 /-- 人手【`(W_ℝ)^n` の成分の評価】の各二重和: `Σ_iΣ_j (e_q)_iP_ij(e_r)_j = P_qr`
@@ -175,7 +177,7 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
             rw [← finite_sum_of_real_scalar_multiples_fintype]
             refine Finset.sum_congr rfl fun i _ => ?_
             rw [← finite_sum_of_real_scalar_multiples_fintype]
-            exact Finset.sum_congr rfl fun j _ => by ring                   -- 乗法の交換則・結合則と、`finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を内側と外側の和へ
+            exact Finset.sum_congr rfl fun j _ => by ring                   -- 乗法の交換則・結合則と `def_power_of_real_number` で `‖z‖‖z‖ = ‖z‖^2`、`finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を内側と外側の和へ
         _ = vecNorm z ^ 2 * (w ⬝ᵥ P *ᵥ w) := by
             rw [dotProduct_mulVec_eq_real_bilinear_value w w P]             -- `def_real_bilinear_value`
         _ > 0 :=
@@ -221,9 +223,9 @@ omit hWRsymm hpd in
 /-- 人手【単位ベクトルでの評価】の `Σ_k x_k^2 = 1`（3 行）。 -/
 theorem sum_sq_of_unit_vector {x : Conf M → ℝ} (hx : vecNorm x = 1) : ∑ k, x k ^ 2 = 1 :=
   calc ∑ k, x k ^ 2
-      = ∑ k, |x k| ^ 2 := by simp only [square_of_real_absolute_value]      -- `x_k ∈ ℝ` なので `x_k^2 = |x_k|^2`
+      = ∑ k, |x k| ^ 2 := by simp only [square_of_real_absolute_value]      -- `x_k ∈ ℝ` なので `square_of_real_absolute_value` の `|q|^2 = q^2`（`q → x_k`）
     _ = vecNorm x ^ 2 := (vecNorm_sq_eq_sum_abs_sq x).symm                  -- `def_matrix_norm` と `(√b)^2 = b`
-    _ = 1 := by rw [hx, one_pow]                                            -- `‖x‖ = 1` と `1^2 = 1`
+    _ = 1 := by rw [hx, one_pow]                                            -- `‖x‖ = 1` と `def_power_of_real_number` で `1^2 = 1`
 
 omit hWRsymm hpd in
 /-- 人手【単位ベクトルでの評価】の `m_0 = 1`（7 行）。 -/
@@ -240,7 +242,7 @@ theorem moment_zero_eq_one {x : Conf M → ℝ} (hx : vecNorm x = 1) : momentWRe
             (fun l _ hlk => by rw [hI, Matrix.one_apply_ne (Ne.symm hlk), mul_zero, zero_mul])
             (fun h => absurd (Finset.mem_univ k) h)]                       -- `l ≠ k` の項は `(I_ℝ)_kl = 0`（`def_real_identity_matrix`）なので `0`
     _ = ∑ k, x k * x k := by simp only [hI, Matrix.one_apply_eq, mul_one]   -- `(I_ℝ)_kk = 1`（`def_real_identity_matrix`）
-    _ = ∑ k, x k ^ 2 := by simp only [sq]                                   -- 冪の定義 `t^2 = tt`
+    _ = ∑ k, x k ^ 2 := by simp only [sq]                                   -- `def_power_of_real_number` で `x_k^2 = (x_k^0x_k)x_k = x_kx_k` を各項へ同時に
     _ = 1 := sum_sq_of_unit_vector hx                                       -- 上の式変形
 
 omit hWRsymm hpd in
@@ -274,7 +276,7 @@ theorem moment_ge_moment_one_mul_prev {x : Conf M → ℝ} (hx : vecNorm x = 1) 
         _ ≥ momentWReal W hW x k ^ 2 / momentWReal W hW x (k - 1) :=
             div_le_div_of_nonneg_right (hlc.2 k hk) hprev.le                -- `moment_log_convexity` の `m_k^2 ≤ m_{k-1}m_{k+1}` と商の順序
         _ = momentWReal W hW x k * (momentWReal W hW x k / momentWReal W hW x (k - 1)) := by
-            rw [sq, mul_div_assoc]                                          -- `m_k^2 = m_km_k` と乗法の結合則
+            rw [sq, mul_div_assoc]                                          -- `def_power_of_real_number` で `m_k^2 = (m_k^0m_k)m_k = m_km_k` と乗法の結合則
         _ ≥ momentWReal W hW x k * momentWReal W hW x 1 :=
             mul_le_mul_of_nonneg_left hratio hk0.le                         -- 上の `m_k/m_{k-1} ≥ m_1` と、正の `m_k` を掛けても順序を保つ
         _ = momentWReal W hW x 1 * momentWReal W hW x (k + 1 - 1) := by
@@ -286,7 +288,7 @@ theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
   have hm1 : momentWReal W hW x 1 > 0 := (moment_log_convexity W hW hWRsymm hpd hx).1 1
   intro p
   induction p with
-  | zero =>                                                                 -- `p = 0`: `m_0 = 1 = m_1^0`
+  | zero =>                                                                 -- `p = 0`: `m_0 = 1 = m_1^0`（`def_power_of_real_number`）
       rw [moment_zero_eq_one W hW hx, pow_zero]
   | succ p ih =>
       calc momentWReal W hW x (p + 1)
@@ -298,7 +300,7 @@ theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
         _ ≥ momentWReal W hW x 1 * momentWReal W hW x 1 ^ p :=
             mul_le_mul_of_nonneg_left ih hm1.le                             -- 帰納法の仮定と、正の `m_1` を掛けても順序を保つ
         _ = momentWReal W hW x 1 ^ (p + 1) := by
-            rw [mul_comm, pow_succ]                                         -- 乗法の交換則と冪の定義 `t^{p+1} := t^pt`
+            rw [mul_comm, pow_succ]                                         -- 乗法の交換則と `def_power_of_real_number` で `m_1^{p+1} = m_1^pm_1`
 
 /-- 人手【単位ベクトルでの評価】の `m_n ≤ T`（`T := Σ_k ((W_ℝ)^n)_kk`、8 行）。 -/
 theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : ℕ) :

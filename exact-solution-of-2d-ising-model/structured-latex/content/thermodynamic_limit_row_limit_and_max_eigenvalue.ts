@@ -2874,11 +2874,9 @@ a+b+1 &= p+(p+1)+1
         ref("def_finite_sum_of_real_numbers"),
         " の有限和、",
         math(String.raw`\mathbb{R}`),
-        " の元 ",
-        math(String.raw`t`),
-        " の冪は ",
-        math(String.raw`t^0 := 1,\ t^{p+1} := t^pt`),
-        " である。",
+        " の元の冪は ",
+        ref("def_power_of_real_number"),
+        " の冪である。",
       ]),
     ],
     proof: [
@@ -3050,7 +3048,7 @@ a+b+1 &= p+(p+1)+1
 &\geq |z_{j_0}|^2
 &&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (a_j \to |z_j|^2,\ k \to j_0)\bigr)\\
 &>0
-&&\bigl(\because\ z_{j_0} \neq 0\bigr)
+&&\bigl(\because\ z_{j_0} \neq 0\ \text{なので}\ |z_{j_0}| > 0\ \text{で、}\blkref{def_power_of_real_number}\ \text{で}\ |z_{j_0}|^2 = (|z_{j_0}|^0|z_{j_0}|)|z_{j_0}| = |z_{j_0}|\,|z_{j_0}|\ \text{は正の実数の積}\bigr)
 \end{aligned}`),
       paragraph([
         "なので、",
@@ -3063,7 +3061,9 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`\|z\| = 0`),
         " なら ",
         math(String.raw`\|z\|^2 = 0^2 = 0`),
-        " となり ",
+        "（",
+        ref("def_power_of_real_number"),
+        "）となり ",
         math(String.raw`\|z\|^2 > 0`),
         " に反する）から ",
         math(String.raw`\|z\| > 0`),
@@ -3082,19 +3082,19 @@ a+b+1 &= p+(p+1)+1
 &=\sqrt{\sum_{i=1}^{d}|w_i|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{def_matrix_norm}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{と、}\mathbb{R}\ \text{の元}\ t\ \text{で}\ |t|^2 = t^2\ \text{を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{と、}\blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\bigr)^2z_i^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (st)^2 = s^2t^2\ \text{を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ (st)^2 = (st)(st),\ s^2 = ss,\ t^2 = tt\ \text{と}\ \mathbb{R}\ \text{の乗法の交換則・結合則（}s \to \|z\|^{-1},\ t \to z_i\text{）を各項へ同時に適用}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}z_i^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to (\|z\|^{-1})^2)\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}|z_i|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{の元}\ t\ \text{で}\ t^2 = |t|^2\ \text{を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\|z\|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \text{上の}\ \|z\|^2 = \sum_{j}|z_j|^2\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ t^2 = tt\ (t \to \|z\|^{-1},\ \|z\|,\ \|z\|^{-1}\|z\|)\ \text{と}\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|^{-1}\|z\| = 1,\ 1^2 = 1\bigr)\\
+&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|^{-1}\|z\| = 1,\ \blkref{def_power_of_real_number}\ \text{で}\ 1^2 = 1\bigr)\\
 &=1
 &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
 \end{aligned}`),
@@ -3106,7 +3106,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,w_i\bigr)((W_{\mathbb{R}})^n)_{ij}\bigl(\|z\|\,w_j\bigr)
 &&\bigl(\because\ z_i = \|z\|\,w_i\ \text{を各項へ同時に適用}\bigr)\\
 &=\|z\|^2\sum_{i=1}^{d}\sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と}\ \blkref{def_power_of_real_number}\ \text{で}\ \|z\|\,\|z\| = \|z\|^2\ \text{、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
 &=\|z\|^2\,\bigl(w^\top (W_{\mathbb{R}})^nw\bigr)
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &>0
@@ -3191,11 +3191,11 @@ z^\top (W_{\mathbb{R}})^nz
       displayMath(String.raw`\begin{aligned}
 \sum_{k=1}^{d}x_k^2
 &=\sum_{k=1}^{d}|x_k|^2
-&&\bigl(\because\ x_k \in \mathbb{R}\ \text{なので}\ x_k^2 = |x_k|^2\bigr)\\
+&&\bigl(\because\ x_k \in \mathbb{R}\ \text{なので}\ \blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ (q \to x_k)\bigr)\\
 &=\|x\|^2
 &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
 &=1
-&&\bigl(\because\ \|x\| = 1\ \text{と}\ 1^2 = 1\bigr)
+&&\bigl(\because\ \|x\| = 1\ \text{と}\ \blkref{def_power_of_real_number}\ \text{で}\ 1^2 = 1\bigr)
 \end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -3211,7 +3211,7 @@ m_0
 &=\sum_{k=1}^{d}x_kx_k
 &&\bigl(\because\ (I_{\mathbb{R}})_{kk} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)\\
 &=\sum_{k=1}^{d}x_k^2
-&&\bigl(\because\ \text{冪の定義}\ t^2 = (t^0t)t = tt\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ x_k^{\,2} = (x_k^{\,0}x_k)x_k = x_kx_k\ \text{を各項へ同時に適用}\bigr)\\
 &=1
 &&\bigl(\because\ \text{上の式変形}\bigr)
 \end{aligned}`),
@@ -3257,7 +3257,7 @@ m_{k+1}
 &\geq\frac{m_k^{\,2}}{m_{k-1}}
 &&\bigl(\because\ \blkref{moment_log_convexity}\ \text{の}\ m_k^{\,2} \leq m_{k-1}m_{k+1}\ \text{と、正の}\ m_{k-1}\ \text{での商は順序を保つ}\bigr)\\
 &=m_k\,\frac{m_k}{m_{k-1}}
-&&\bigl(\because\ m_k^{\,2} = m_km_k\ \text{と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ m_k^{\,2} = (m_k^{\,0}m_k)m_k = m_km_k\ \text{と乗法の結合則}\bigr)\\
 &\geq m_k\,m_1
 &&\bigl(\because\ \text{上の}\ \tfrac{m_k}{m_{k-1}} \geq m_1\ \text{と、正の}\ m_k\ \text{を掛けても順序を保つ}\bigr)\\
 &=m_1m_{(k+1)-1}
@@ -3274,7 +3274,11 @@ m_{k+1}
         math(String.raw`p = 0`),
         " では ",
         math(String.raw`m_0 = 1 = m_1^{\,0}`),
-        " である。",
+        "（",
+        ref("def_power_of_real_number"),
+        " で ",
+        math(String.raw`m_1^{\,0} = 1`),
+        "）である。",
         math(String.raw`m_p \geq m_1^{\,p}`),
         " とすると、",
       ]),
@@ -3287,7 +3291,7 @@ m_{p+1}
 &\geq m_1m_1^{\,p}
 &&\bigl(\because\ \text{帰納法の仮定と、正の}\ m_1\ \text{を掛けても順序を保つ}\bigr)\\
 &=m_1^{\,p+1}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と冪の定義}\ t^{p+1} := t^pt\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と}\ \blkref{def_power_of_real_number}\ \text{で}\ m_1^{\,p+1} = m_1^{\,p}m_1\bigr)
 \end{aligned}`),
       paragraph([
         "である。最後に、【",
@@ -3345,29 +3349,37 @@ m_n
         math(String.raw`r^1 = r^0r = r`),
         "、",
         math(String.raw`s^1 = s`),
-        " なので (a) は ",
+        "（",
+        ref("def_power_of_real_number"),
+        "）なので (a) は ",
         math(String.raw`0 < r < s`),
         "、(b) は ",
         math(String.raw`s - r = 1\cdot s^0(s - r)`),
-        " である。",
+        "（",
+        ref("def_power_of_real_number"),
+        " で ",
+        math(String.raw`s^0 = 1`),
+        "）である。",
         math(String.raw`p`),
         " で (a)(b) が成り立つとすると、",
       ]),
       displayMath(String.raw`\begin{aligned}
 r^{p+1}
 &=r^pr
-&&\bigl(\because\ \text{冪の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ r^{p+1} = r^pr\bigr)\\
 &<s^pr
 &&\bigl(\because\ \text{(a) の}\ r^p < s^p\ \text{と}\ r > 0\bigr)\\
 &<s^ps
 &&\bigl(\because\ r < s\ \text{と、(a) から}\ s^p > r^p > 0\bigr)\\
 &=s^{p+1}
-&&\bigl(\because\ \text{冪の定義}\bigr)
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ s^{p+1} = s^ps\bigr)
 \end{aligned}`),
       paragraph([
         "かつ ",
         math(String.raw`r^{p+1} = r^pr > 0`),
         "（",
+        ref("def_power_of_real_number"),
+        "、",
         math(String.raw`r^p > 0`),
         "、",
         math(String.raw`r > 0`),
@@ -3378,13 +3390,13 @@ r^{p+1}
       displayMath(String.raw`\begin{aligned}
 s^{p+1} - r^{p+1}
 &=s\bigl(s^p - r^p\bigr) + r^p(s - r)
-&&\bigl(\because\ \text{冪の定義と}\ \mathbb{R}\ \text{の分配則（}-sr^p + r^ps = 0\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ s^{p+1} = s^ps,\ r^{p+1} = r^pr\ \text{と}\ \mathbb{R}\ \text{の分配則・乗法の交換則（}-sr^p + r^ps = 0\text{）}\bigr)\\
 &\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + r^p(s - r)
 &&\bigl(\because\ \text{(b) と}\ s > 0\bigr)\\
 &\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + s^p(s - r)
 &&\bigl(\because\ \text{(a) の}\ r^p < s^p\ \text{と}\ s - r > 0\bigr)\\
 &=p\,s^p(s - r) + s^p(s - r)
-&&\bigl(\because\ s\,s^{p-1} = s^{p-1}s = s^p\ \text{（冪の定義）と乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ s\,s^{p-1} = s^{p-1}s = s^p\ \text{（乗法の交換則と、}\blkref{def_power_of_real_number}\ \text{で}\ s^{(p-1)+1} = s^{p-1}s\ \text{、}\mathbb{Z}\ \text{で}\ (p-1)+1 = p\text{）と乗法の結合則}\bigr)\\
 &=(p+1)\,s^{(p+1)-1}(s - r)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と}\ \mathbb{Z}\ \text{で}\ p = (p+1)-1\bigr)
 \end{aligned}`),
@@ -3416,7 +3428,9 @@ s^{p+1} - r^{p+1}
         math(String.raw`n = 1`),
         " なら ",
         math(String.raw`c^0 = 1`),
-        "、",
+        "（",
+        ref("def_power_of_real_number"),
+        "）、",
         math(String.raw`n \geq 2`),
         " なら【正の実数の冪の比較】(a) を ",
         math(String.raw`r \to c,\ s \to c+1,\ p \to n-1`),
@@ -3437,7 +3451,7 @@ s^{p+1} - r^{p+1}
 &<c^n\,(n\,c^{n-1})^{-1}
 &&\bigl(\because\ T > 0\ \text{と、正の}\ (n\,c^{n-1})^{-1}\ \text{を掛けても順序を保つ}\bigr)\\
 &=c^{n-1}c\,(n\,c^{n-1})^{-1}
-&&\bigl(\because\ \text{冪の定義と}\ \mathbb{Z}\ \text{で}\ n = (n-1)+1\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ c^{(n-1)+1} = c^{n-1}c\ \text{と}\ \mathbb{Z}\ \text{で}\ n = (n-1)+1\bigr)\\
 &=c^{n-1}c\,\bigl(n^{-1}(c^{n-1})^{-1}\bigr)
 &&\bigl(\because\ n \neq 0,\ c^{n-1} \neq 0\ \text{なので}\ (n\,c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}\bigr)\\
 &=c\,n^{-1}\bigl(c^{n-1}(c^{n-1})^{-1}\bigr)
@@ -3506,6 +3520,7 @@ T
         "2026-08-14 の式変形統一で、モーメントの対数凸性に使う P = W 版の Cauchy--Schwarz の一行圧縮を、定義・冪の指数法則・実対称性・不等式・定義への復帰の五段へ開いた。内容は変えていない。",
         "2026-11-05: SageMath の検算（sagemath/check/trace_power_sandwich/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1) 「…」で書いた望遠鏡積と「単調非減少を j−1 回適用」を、m_k ≥ m_1m_{k−1}（k の帰納法）と m_p ≥ m_1^p（p の帰納法）の鎖にし、m_0 = 1・m_1 = x^⊤Wx を def_exp (1)・def_real_bilinear_value・def_matrix_norm の鎖で示した。m_k は moment_log_convexity の置き方で読むと書いた。(2) 半正定値行列の二次形式をトレースで抑える八段の鎖は、実数の絶対値・有限和の三角不等式・平方根の積の法則という本文にラベルの無い道具と psd_cauchy_schwarz の二回の適用を使っていた。W^n の半正定値性を v_i := x_l(e_k)_i − x_k(e_l)_i に当てた 2x_k(W^n)_{kl}x_l ≤ x_l^2(W^n)_{kk} + x_k^2(W^n)_{ll} を足し合わせる鎖に替え、絶対値と平方根を使わない形にした。旧い鎖は誤りではないが、より初等的に書けるのでこちらを採った（README の新しい道具を導入するときの判断基準）。(3) 「W^n は正定値」の散文を、z = 0 と z ≠ 0 に分け、z ≠ 0 では w := ‖z‖^{-1}z が単位ベクトルであることを示して moment_log_convexity の正値性を当てる鎖にした。(4) 「t ↦ t^n は単調増加なので上限と可換」は t^n の連続性を暗に使っていた。正の実数の冪の比較 0 < r^p < s^p・s^p − r^p ≤ p s^{p−1}(s − r)（p の帰納法）を示し、c^n > tr(W^n) を仮定して δ := (c^n − T)(nc^{n−1})^{−1}、r := c − δ が R の上界でないことから矛盾を導く背理法にした。極限・連続性を使わず、上限の性質は最小の上界であることだけを使う。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 旧い主張 c^n ≤ tr(W^n) ≤ 2^{M_col}c^n は ℂ の元 tr(W^n) に順序を使っており、証明は W^n の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。上流の trace_power_upper_bound・moment_log_convexity は既に def_W_real の W_ℝ で述べ直されており、この証明は旧い形（tr(W^n) ≤ …、m_k := x^⊤W^kx）で引いて食い違っていた。主張を T := Σ_k ((W_ℝ)^n)_kk について c^n ≤ T ≤ 2^{M_col}c^n と述べ直し（tr(W^n) = (T)_ℂ は trace_of_W_power_via_W_real が述べる）、証明の冪をすべて (W_ℝ)^n にした。【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power）を置き、(W_ℝ)^1 = W_ℝ を ϱ で運ぶ 5 行の鎖（実数の行列の左単位の主張が本文に無いため、Mat(d,ℂ) の identity_matrix_is_left_unit_of_mat_mult を ϱ の中で使う）にした。成分の対称性は W^n の実対称性から ϱ を通す 6 行の鎖と inclusion_rr_to_cc_is_injective にした。m_0 = 1 は I_ℝ（def_real_identity_matrix）で読んだ。上からの評価は trace_power_upper_bound をそのまま引く。値は変えていない。下流の partition_function_sandwich はまだ Z = tr(W^{N_row}) に旧い形で当てている（状態台帳の (r3b2e3) で trace_of_W_power_via_W_real を引く形に書き直す）。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 正の実数の冪を名前だけの根拠「冪の定義」で引いていた 7 行と、実数の冪の定義を根拠なしに使っていた箇所（m_1^0 = 1、r^1 = r^0r = r と s^1 = s、s^0 = 1、r^{p+1} = r^pr、c^0 = 1、m_k^2 = m_km_k、|z_{j_0}|^2 > 0、0^2 = 0、(st)^2 = s^2t^2、(‖z‖^{-1})^2‖z‖^2 = (‖z‖^{-1}‖z‖)^2、1^2 = 1 の 2 か所、‖z‖‖z‖ = ‖z‖^2）を def_power_of_real_number の参照にし、各行で定義を当てた等式を書き添えた。主張の段落が t^0 := 1, t^{p+1} := t^pt と冪を定義し直していたのを def_power_of_real_number の参照にした。|t|^2 = t^2 の 3 か所を square_of_real_absolute_value の参照にした。s^{p+1} − r^{p+1} の行の根拠に乗法の交換則を足した。値と手順は変えていない。",
       ],
     },
   },
