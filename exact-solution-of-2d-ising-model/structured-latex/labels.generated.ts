@@ -307,6 +307,7 @@ export const ALL_LABELS = [
   "epsilon_projector_properties",
   "epsilon_real_commutes_with_W_real",
   "epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
+  "epsilon_real_fixes_sum_of_vector_and_its_image",
   "epsilon_real_is_symmetric",
   "epsilon_real_permutes_entries_by_spin_flip",
   "epsilon_real_preserves_nonnegative_vectors",

@@ -867,6 +867,100 @@ w
     },
   },
   {
+    id: "maxeig_claim_epsilon_real_fixes_sum_of_vector_and_its_image",
+    kind: "claim",
+    title: { text: "成分が u_k + (ε_ℝu)_k のベクトルは ε_ℝ を掛けても変わらない" },
+    labels: ["epsilon_real_fixes_sum_of_vector_and_its_image"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " とし、",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        "、",
+        math(String.raw`u \in \mathbb{R}^{d}`),
+        " を取る。",
+        math(String.raw`v \in \mathbb{R}^{d}`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`v_k := u_k + (\varepsilon_{\mathbb{R}}u)_k \qquad (k \in \{1,\dots,d\})`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\varepsilon_{\mathbb{R}}u \in \mathbb{R}^{d}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        " の積、和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和）。このとき",
+      ]),
+      displayMath(String.raw`\varepsilon_{\mathbb{R}}v = v`),
+      paragraph([
+        "が成り立つ。左辺の積は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to v`),
+        "）のものである。",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の元どうしの和は本文で定めていないので、",
+        math(String.raw`v`),
+        " を成分の等式で与える。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の分配則・加法の交換則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\varepsilon_{\mathbb{R}}v)_k
+&= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,v_l
+  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to v,\ i \to k,\ j \to l)\bigr)\\
+&= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,\bigl(u_l + (\varepsilon_{\mathbb{R}}u)_l\bigr)
+  &&\bigl(\because\ v\ \text{の定義}\ (k \to l)\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{l=1}^{d} \bigl((\varepsilon_{\mathbb{R}})_{kl}\,u_l + (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,u_l + \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l
+  &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to d,\ j \to l,\ a_l \to (\varepsilon_{\mathbb{R}})_{kl}\,u_l,\ b_l \to (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l)\bigr)\\
+&= (\varepsilon_{\mathbb{R}}u)_k + \bigl(\varepsilon_{\mathbb{R}}(\varepsilon_{\mathbb{R}}u)\bigr)_k
+  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ i \to k,\ j \to l\text{；}x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)\\
+&= (\varepsilon_{\mathbb{R}}u)_k + \bigl((\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}})u\bigr)_k
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P, Q \to \varepsilon_{\mathbb{R}},\ x \to u)\ \text{を右辺から左辺へ}\bigr)\\
+&= (\varepsilon_{\mathbb{R}}u)_k + \bigl(I_{\mathrm{Mat}(d,\mathbb{R})}\,u\bigr)_k
+  &&\bigl(\because\ \blkref{epsilon_real_square_is_identity}\bigr)\\
+&= (\varepsilon_{\mathbb{R}}u)_k + u_k
+  &&\bigl(\because\ \blkref{real_identity_matrix_is_left_unit_of_real_matrix_vector_product}\ (n \to d,\ x \to u)\bigr)\\
+&= u_k + (\varepsilon_{\mathbb{R}}u)_k
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+&= v_k
+  &&\bigl(\because\ v\ \text{の定義を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k`),
+        " は任意なので、",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の二つの元の成分がすべて等しく、",
+        math(String.raw`\varepsilon_{\mathbb{R}}v = v`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε を掛け、εv = ε(u + εu) = εu + ε^2u = εu + u = v を「行列の分配則」と ε^2 = I で出していた。この同一視を def_epsilon_real の ε_ℝ で書き直すために足した。ℝ^d の元どうしの和は本文に定義が無いので、v を成分の等式で与えた（real_bilinear_value_is_additive_in_right_vector と同じ）。行列とベクトルの積の分配則は本文に主張が無いので、成分の式で ℝ の分配則と finite_sum_of_real_sums を引いた。数値検証: sagemath/check/epsilon_real_fixes_sum_of_vector_and_its_image/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_definition_negated_row_configuration",
     kind: "definition",
     title: { tex: String.raw`\text{符号を反転したスピン配置 } -s` },

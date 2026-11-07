@@ -931,6 +931,7 @@ targets=(
   Ising2D.epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors
   Ising2D.epsilon_real_is_symmetric
   Ising2D.epsilon_real_square_is_identity
+  Ising2D.epsilon_real_fixes_sum_of_vector_and_its_image
   Ising2D.W_has_positive_entries_as_inclusion
   Ising2D.W_real_has_positive_entries
   Ising2D.epsilon_real_commutes_with_W_real
