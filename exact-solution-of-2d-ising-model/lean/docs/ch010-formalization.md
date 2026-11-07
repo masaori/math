@@ -12,7 +12,7 @@
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `P^{(-)}`, `V_1^{(-)}` を使う主張（`sector_replacement_of_V1`, `sector_replacement_pow`,
 `partition_function_sector_decomposition`。以前この章の結論だった
-`Z = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})`）と 004 章の
+`(Z)_ℂ = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})`）と 004 章の
 `def_odd_eigenvectors_of_epsilon` / `odd_eigenspace_is_complex_subspace` は参照用ノート
 `structured-latex/notes/minus_sector_not_adopted.ts` へ移った。対応する Lean
 （`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`, `RoutesNotAdopted/MinusSector/ClaimPartitionFunctionSectorDecomposition.lean`,
@@ -68,7 +68,7 @@
 | `Ising2D.sector_replacement_pow` | `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}` | ノート `sector_replacement_pow` |
 | `Ising2D.Vsym` / `Vsym_neg_one_eq_VPlusOfTransfer` | `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`（`ηsign = -1` で本文の `VPlusOfTransfer`） | ノート `partition_function_sector_decomposition` の主張中の定義 |
 | `Ising2D.trace_eq_sector_sum` / `trace_epsProj_sym_pow` / `trace_epsProj_sym_pow_eq_plain`（`ClaimPartitionFunctionSectorDecomposition.lean`） | Step 1・Step 3・Step 2 と 3 の合成 | ノート `partition_function_sector_decomposition` |
-| `Ising2D.partition_function_sector_decomposition` | `Z = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})` | ノート `partition_function_sector_decomposition` |
+| `Ising2D.partition_function_sector_decomposition` | `(Z)_ℂ = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})` | ノート `partition_function_sector_decomposition` |
 | `Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form`（`ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean`） | `M ≥ 2`、`K_2 > 0`（`K_1` は任意の実数）で `W P^{(+)} = exp((i/2)K_1H_1^{(+)}) (2 sinh 2K_2)^{M/2} exp(iK_2^*H_2) exp((i/2)K_1H_1^{(+)}) P^{(+)}` | ノート `symmetrized_transfer_matrix_on_sector_exponential_form` |
 
 必要十分版（`Ising2D/NecSuf/`）:

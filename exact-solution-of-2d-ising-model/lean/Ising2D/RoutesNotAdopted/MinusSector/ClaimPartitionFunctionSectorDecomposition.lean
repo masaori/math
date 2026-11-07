@@ -8,9 +8,10 @@
 * もと `bridge_012_claim_partition_function_sector_decomposition`
   （ラベル `partition_function_sector_decomposition`）
 
-原文の主張:
+ノートの主張（左辺は `partition_function_via_transfer_matrix` の今の主張に合わせて `ℂ` へ送った形。
+Lean の `((partitionFunction … : ℝ) : ℂ)` と同じ）:
 
-  `Z(K_1,K_2) = tr(P^{(+)} (V^{(+)})^{N_row}) + tr(P^{(-)} (V^{(-)})^{N_row})`,
+  `(Z(K_1,K_2))_ℂ = tr(P^{(+)} (V^{(+)})^{N_row}) + tr(P^{(-)} (V^{(-)})^{N_row})`,
   `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`
 
 ## 原文の Step との対応

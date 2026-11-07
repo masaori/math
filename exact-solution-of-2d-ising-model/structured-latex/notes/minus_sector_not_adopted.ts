@@ -184,16 +184,16 @@ export default defineNotes([
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 14 },
     body: [
       NOT_ADOPTED,
-      paragraph(["（もと content/010_transfer_matrix_bridge.ts の主張ブロック bridge_012_claim_partition_function_sector_decomposition。labels: partition_function_sector_decomposition。以下は本文にあったときの内容のまま。）"]),
+      paragraph(["（もと content/010_transfer_matrix_bridge.ts の主張ブロック bridge_012_claim_partition_function_sector_decomposition。labels: partition_function_sector_decomposition。以下は本文にあったときの内容のまま。ただし左辺の分配関数は、", ref("partition_function_via_transfer_matrix"), " の今の主張に合わせて ", ref("inclusion_rr_to_cc"), " の略記 ", math(String.raw`r_{\mathbb{C}}`), " で ", math(String.raw`\mathbb{C}`), " へ送った ", math(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}`), " と書いた。", math(String.raw`Z(K_1,K_2) \in \mathbb{R}_{>0}`), " で右辺は ", math(String.raw`\mathbb{C}`), " の元だからである。）"]),
       paragraph([ref("partition_function_via_transfer_matrix"), " と同じ設定のもと、"]),
       displayMath(String.raw`V^{(\pm)} := \left(V_1^{(\pm)}\right)^{1/2} V_2 \left(V_1^{(\pm)}\right)^{1/2},
 \qquad \left(V_1^{(\pm)}\right)^{1/2} := \exp\!\left(\tfrac{1}{2}iK_1H_1^{(\pm)}\right)`),
       paragraph(["について"]),
-      displayMath(String.raw`Z(K_1, K_2)
+      displayMath(String.raw`\bigl(Z(K_1, K_2)\bigr)_{\mathbb{C}}
 = \mathrm{tr}\!\left(P^{(+)}\left(V^{(+)}\right)^{N_{\mathrm{row}}}\right)
 + \mathrm{tr}\!\left(P^{(-)}\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)`),
       paragraph(["が成り立つ。", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(\pm)} = \tfrac12(I\pm\varepsilon)`), " を代入すれば"]),
-      displayMath(String.raw`Z(K_1,K_2) = \tfrac{1}{2}\Bigl(
+      displayMath(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}} = \tfrac{1}{2}\Bigl(
   \mathrm{tr}\bigl((V^{(+)})^{N_{\mathrm{row}}}\bigr)
 + \mathrm{tr}\bigl(\varepsilon\,(V^{(+)})^{N_{\mathrm{row}}}\bigr)
 + \mathrm{tr}\bigl((V^{(-)})^{N_{\mathrm{row}}}\bigr)
@@ -212,7 +212,7 @@ export default defineNotes([
    \quad (\because \text{トレースの線型性})
 \end{aligned}`),
       paragraph(["これを ", ref("partition_function_via_transfer_matrix"), " の ", math(String.raw`X = (V_1V_2)^{N_{\mathrm{row}}}`), " に適用して"]),
-      displayMath(String.raw`Z(K_1,K_2)
+      displayMath(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
 = \mathrm{tr}\!\left(P^{(+)}(V_1V_2)^{N_{\mathrm{row}}}\right)
 + \mathrm{tr}\!\left(P^{(-)}(V_1V_2)^{N_{\mathrm{row}}}\right)
 \quad (\because \blkref{partition_function_via_transfer_matrix}\text{ と上のトレース分解})`),
@@ -257,13 +257,13 @@ BB
    \quad (\because \text{行列積の結合法則})
 \end{aligned}`),
       paragraph(["Step 4（結論）。Step 1〜3 を合わせて"]),
-      displayMath(String.raw`Z(K_1,K_2)
+      displayMath(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
 = \mathrm{tr}\!\left(P^{(+)}\left(V^{(+)}\right)^{N_{\mathrm{row}}}\right)
 + \mathrm{tr}\!\left(P^{(-)}\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)
 \quad (\because \text{Step 1--3})`),
       paragraph(["さらに ", ref("def_epsilon_projectors"), " の射影子の定義と ", ref("trace_basic_properties"), " (1) の線型性により、次の鎖で statement の 4 項の形を得る。"]),
       displayMath(String.raw`\begin{aligned}
-Z(K_1,K_2)
+\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}
 &= \mathrm{tr}\!\left(\tfrac12(I+\varepsilon)\left(V^{(+)}\right)^{N_{\mathrm{row}}}\right)
  + \mathrm{tr}\!\left(\tfrac12(I-\varepsilon)\left(V^{(-)}\right)^{N_{\mathrm{row}}}\right)
    \quad (\because P^{(\pm)}=\tfrac12(I\pm\varepsilon)) \\
