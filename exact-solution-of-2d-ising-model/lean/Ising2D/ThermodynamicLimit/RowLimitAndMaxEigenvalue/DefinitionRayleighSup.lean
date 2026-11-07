@@ -11,6 +11,9 @@
 この評価は `W` の対称性も半正定値性も使わないので、`rayleighSet_bddAbove`・`le_rayleighSup`・`quad_le_rayleighSup_mul` は `W` に仮定を置かない。
 このファイルで半正定値性・正定値性を使うのは `c(M) ≥ 0`（`rayleighSup_nonneg`）・`c(M) > 0`（`rayleighSup_pos`）だけである。
 
+人手の主張の冒頭の `d := 2_ℤ^{M_col}`（行列の大きさ・ベクトルの次元・添字の範囲 `{1,…,d}`）は、ここでは任意の有限型の添字 `n` で受ける。
+具体的な `W`（`physicalSymTransferR M K_1 K_2`）に当てるときの添字は `Conf M` で、`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one` である。
+
 `def_rayleigh_sup`（`sSup`）の必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
 
 上に有界であることを示す人手の鎖と Lean の対応:

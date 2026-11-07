@@ -1291,19 +1291,27 @@ u^\top W_{\mathbb{R}} u
     labels: ["def_rayleigh_sup"],
     statement: [
       paragraph([
-        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記し、",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
         " を ",
         ref("def_W_real"),
         " の行列とし、",
       ]),
       displayMath(
-        String.raw`\mathcal{R} := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
+        String.raw`\mathcal{R} := \left\{\, x^\top W_{\mathbb{R}} x \ \middle|\ x \in \mathbb{R}^{d},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
       ),
       paragraph([
         "とおく。",
         math(String.raw`\mathcal{R} \subseteq \mathbb{R}_{>0}`),
         " を示す。",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x \in \mathbb{R}^{d}`),
         " が ",
         math(String.raw`\|x\| = 1`),
         " を満たすとする。",
@@ -1316,13 +1324,13 @@ u^\top W_{\mathbb{R}} u
       ]),
       displayMath(String.raw`\begin{aligned}
 \|x\|
-&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \blkref{def_matrix_norm}\ (d \to 2^{M_{\mathrm{col}}},\ w \to x)\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|0|^2}^{\,(\mathbb{R}_{\ge 0})}
+&= \sqrt{\textstyle\sum_{j=1}^{d}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to x)\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{d}|0|^2}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ x_j = 0\ \text{を各項へ}\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}0^2}^{\,(\mathbb{R}_{\ge 0})}
+&= \sqrt{\textstyle\sum_{j=1}^{d}0^2}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\ \text{を各項へ}\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}0}^{\,(\mathbb{R}_{\ge 0})}
+&= \sqrt{\textstyle\sum_{j=1}^{d}0}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\ \text{を各項へ}\bigr)\\
 &= \sqrt{0}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
@@ -1349,11 +1357,11 @@ u^\top W_{\mathbb{R}} u
         " により ",
         math(String.raw`e_1`),
         " を取れる）。上に有界であることは、成分の有限和として次のように評価できる。",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x \in \mathbb{R}^{d}`),
         " が ",
         math(String.raw`\|x\| = 1`),
         " を満たすとし、",
-        math(String.raw`i \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`i \in \{1,\dots,d\}`),
         " を取る。",
         math(String.raw`|\cdot|`),
         " は ",
@@ -1371,21 +1379,21 @@ u^\top W_{\mathbb{R}} u
         " である。よって ",
         ref("finite_sum_of_nonnegative_reals_is_at_least_each_term"),
         "（",
-        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_j|^2\ (j \in \{1,\dots,2^{M_{\mathrm{col}}}\}),\ k \to i`),
+        math(String.raw`m \to d,\ a_j \to |x_j|^2\ (j \in \{1,\dots,d\}),\ k \to i`),
         "）より ",
-        math(String.raw`\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2 \geq |x_i|^2 \geq 0`),
+        math(String.raw`\sum_{j=1}^{d}|x_j|^2 \geq |x_i|^2 \geq 0`),
         " で、",
-        math(String.raw`\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2 \in \mathbb{R}_{\geq 0}`),
+        math(String.raw`\sum_{j=1}^{d}|x_j|^2 \in \mathbb{R}_{\geq 0}`),
         " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 |x_i|^2
-&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2
-  &&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_j|^2\ (j \in \{1,\dots,2^{M_{\mathrm{col}}}\}),\ k \to i)\bigr)\\
-&= \Bigl(\sqrt{\textstyle\sum_{j=1}^{2^{M_{\mathrm{col}}}}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2
+&\leq \sum_{j=1}^{d}|x_j|^2
+  &&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to d,\ a_j \to |x_j|^2\ (j \in \{1,\dots,d\}),\ k \to i)\bigr)\\
+&= \Bigl(\sqrt{\textstyle\sum_{j=1}^{d}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2
   &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ \bigl(x \to \textstyle\sum_{j}|x_j|^2 \in \mathbb{R}_{\geq 0}\bigr)\bigr)\\
 &= \|x\|^2
-  &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{の}\ \|w\|\ (d \to 2^{M_{\mathrm{col}}},\ w \to x)\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{の}\ \|w\|\ (K = \mathbb{R},\ d \to d,\ w \to x)\bigr)\\
 &= 1^2
   &&\bigl(\because\ \|x\| = 1\bigr)
 \end{aligned}`),
@@ -1405,11 +1413,11 @@ u^\top W_{\mathbb{R}} u
         " である。",
         math(String.raw`i`),
         " は任意なので、すべての ",
-        math(String.raw`k \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`k \in \{1,\dots,d\}`),
         " について ",
         math(String.raw`|x_k| \leq 1`),
         " である。次に ",
-        math(String.raw`i, j \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`i, j \in \{1,\dots,d\}`),
         " を取る。",
         math(String.raw`(W_{\mathbb{R}})_{ij} \in \mathbb{R}`),
         " は ",
@@ -1443,11 +1451,11 @@ u^\top W_{\mathbb{R}} u
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
-&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} \left|x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
-&\leq \sum_{j=1}^{2^{M_{\mathrm{col}}}} |(W_{\mathbb{R}})_{ij}|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ a_j \to |x_i\,(W_{\mathbb{R}})_{ij}\,x_j|,\ b_j \to |(W_{\mathbb{R}})_{ij}|)\text{。各}\ j\ \text{の大小は上の鎖}\bigr)
+\left|\sum_{j=1}^{d} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+&\leq \sum_{j=1}^{d} \left|x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to d,\ a_j \to x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
+&\leq \sum_{j=1}^{d} |(W_{\mathbb{R}})_{ij}|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to d,\ a_j \to |x_i\,(W_{\mathbb{R}})_{ij}\,x_j|,\ b_j \to |(W_{\mathbb{R}})_{ij}|)\text{。各}\ j\ \text{の大小は上の鎖}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -1456,12 +1464,12 @@ u^\top W_{\mathbb{R}} u
 x^\top W_{\mathbb{R}} x
 &\leq \left|x^\top W_{\mathbb{R}} x\right|
   &&\bigl(\because\ \blkref{real_number_is_at_most_its_absolute_value}\ (q \to x^\top W_{\mathbb{R}} x)\bigr)\\
-&= \left|\sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ y \to x)\bigr)\\
-&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\left|\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
-&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} |(W_{\mathbb{R}})_{ij}|
-  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to 2^{M_{\mathrm{col}}},\ \text{添字}\ j \to i,\ a_i \to \bigl|\textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\bigr|,\ b_i \to \textstyle\sum_{j}|(W_{\mathbb{R}})_{ij}|)\text{。各}\ i\ \text{の大小は上の鎖}\bigr)
+&= \left|\sum_{i=1}^{d}\sum_{j=1}^{d} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ y \to x)\bigr)\\
+&\leq \sum_{i=1}^{d}\left|\sum_{j=1}^{d} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\right|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_triangle_inequality}\ (m \to d,\ \text{添字}\ j \to i,\ a_i \to \textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j)\bigr)\\
+&\leq \sum_{i=1}^{d}\sum_{j=1}^{d} |(W_{\mathbb{R}})_{ij}|
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to d,\ \text{添字}\ j \to i,\ a_i \to \bigl|\textstyle\sum_{j} x_i\,(W_{\mathbb{R}})_{ij}\,x_j\bigr|,\ b_i \to \textstyle\sum_{j}|(W_{\mathbb{R}})_{ij}|)\text{。各}\ i\ \text{の大小は上の鎖}\bigr)
 \end{aligned}`),
       paragraph([
         "となる。右辺は ",
@@ -1479,7 +1487,7 @@ x^\top W_{\mathbb{R}} x
         " の性質による。有理数の範囲では同じ主張は成り立たない。",
         math(String.raw`c(M_{\mathrm{col}}) > 0`),
         " を示す。",
-        math(String.raw`e_1 \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`e_1 \in \mathbb{R}^{d}`),
         " を ",
         math(String.raw`(e_1)_1 := 1`),
         "、",
@@ -1487,7 +1495,7 @@ x^\top W_{\mathbb{R}} x
         " なら ",
         math(String.raw`(e_1)_i := 0`),
         " で定める。",
-        math(String.raw`i \in \{2,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`i \in \{2,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1512,8 +1520,8 @@ x^\top W_{\mathbb{R}} x
       paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 \|e_1\|
-&= \sqrt{\textstyle\sum_{i=1}^{2^{M_{\mathrm{col}}}}|(e_1)_i|^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \blkref{def_matrix_norm}\ (d \to 2^{M_{\mathrm{col}}},\ w \to e_1)\bigr)\\
+&= \sqrt{\textstyle\sum_{i=1}^{d}|(e_1)_i|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to e_1)\bigr)\\
 &= \sqrt{1 + 0 + \cdots + 0}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \text{上の}\ |(e_1)_1|^2 = 1\ \text{と}\ |(e_1)_i|^2 = 0\ (i \geq 2)\ \text{を各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの}\bigr)\\
 &= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
@@ -1541,7 +1549,7 @@ c(M_{\mathrm{col}})
         "である。定義から",
       ]),
       displayMath(
-        String.raw`x^\top W_{\mathbb{R}} x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}})`,
+        String.raw`x^\top W_{\mathbb{R}} x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{d})`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1568,6 +1576,7 @@ c(M_{\mathrm{col}})
         "2026-11-06（同じ確認の続き）: |x^⊤Wx| ≤ ΣΣ|W_ij| の鎖の名前だけの根拠を直した。𝓡 の元 x^⊤Wx を |x^⊤Wx| で上から抑える行（real_number_is_at_most_its_absolute_value）を鎖の先頭に足し、「行列積の成分表示」を def_real_bilinear_value の参照に、「有限和の三角不等式と積の絶対値」と「|x_i| ≤ 1, |x_j| ≤ 1」を、項ごとの 6 行の鎖（real_abs_of_product を 2 回、|x_j| ≤ 1 と |x_i| ≤ 1 に非負の実数を掛ける行）、各 i の 2 行の鎖（finite_sum_of_real_numbers_triangle_inequality・finite_sum_of_real_numbers_is_monotone）、外側の和の 2 行（同じ 2 つの主張）に割った。上界 ΣΣ|W_ij| と主張は不変。",
         "2026-11-06（同じ確認の続き）: 冒頭で定めていた W_ℝ := ϱ(W) を独立の定義 def_W_real へ切り出して引く形にした。𝓡 ⊆ ℝ_{>0} と c(M_col) > 0 の根拠が書かれていなかったので、x = 0 なら ‖x‖ = 0 の 6 行の鎖と W_real_is_positive_definite、項ごとの値の 3 行の鎖 2 本・‖e_1‖ = 1 の 4 行の鎖と c = sup 𝓡 ≥ e_1^⊤W_ℝe_1 > 0 の 3 行の鎖を足した（𝓡 が空でないことの ‖e_1‖ = 1 もこの鎖で示す）。主張は変えていない。",
         "2026-11-06（同じ確認の続き）: 冒頭の「W は W_is_real_symmetric_positive_definite より実行列とみなせる」（同一視）を、W の成分がすべて実数であること（def_matrix_with_real_entries）と、新しく足した def_real_matrix_of_real_entry_matrix の写像 ϱ で定める W_ℝ := ϱ(W) ∈ Mat(2^{M_col},ℝ) に替え、𝓡・c(M_col)・上に有界であることの鎖・x^⊤Wx ≤ c‖x‖^2 の W を W_ℝ（成分 (W_ℝ)_{ij}）にした。値は変わらない。このブロックを引くほかのブロックの x^⊤Wx は、まだ W のまま書いてある。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ・ベクトルの次元・添字の範囲・有限和の上端を添字なしの 2^{M_col} で書いていた 40 か所を、主張の冒頭で d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）と置いて d で書いた（同じ章の def_W_real・trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。def_matrix_norm の当てはめは K = ℝ, d → d と書いた（K の当てはめの抜けも合わせて直した）。値と手順は変えていない。",
       ],
     },
   },
