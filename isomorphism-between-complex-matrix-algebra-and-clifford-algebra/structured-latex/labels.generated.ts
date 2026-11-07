@@ -38,6 +38,7 @@ export const ALL_LABELS = [
   "claim_matrix_product_is_associative",
   "claim_moving_term_of_linear_combination_to_last",
   "claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit",
+  "claim_ordered_product_of_selected_creation_matrices_times_vacuum_matrix_unit",
   "claim_ordered_sum_with_kronecker_delta_picks_term",
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",

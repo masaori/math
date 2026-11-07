@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-07: Φ(a†_S) に当たる行列の番号順の積を E_{∅,∅} に左から掛けると E_{S,∅} になること（ラベル claim_ordered_product_of_selected_creation_matrices_times_vacuum_matrix_unit）を、c_m·E_{R,∅}=E_{R∪{m},∅}（R の元がすべて m+1 以上）の準備と m の帰納法で示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。次は Φ(a_T) に当たる行列の逆順の積を E_{∅,∅} に右から掛けると E_{∅,T} になること。
+
 - 2026-11-07: 番号より小さい元を持たない部分集合の個数が 0 であること（ラベル claim_count_below_index_vanishes_without_smaller_elements、T のすべての元が i 以上なら N_i(T)=0）を i の帰納法で示した。次は Φ(P) に当たる行列の積が E_{∅,∅} であること。
 - 2026-11-07: 反交換関係 c_i c_j^T + c_j^T c_i = δ_{i,j}∗1_{Mat}（ラベル claim_creation_and_annihilation_operator_matrices_anticommute）を、左右から掛ける補題で二つの積の成分を条件つきの式に開き、i=j と i≠j に分けて示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。次は番号より小さい元を持たない部分集合の個数は 0 であること。
 - 2026-11-07（研究管理）: 本文 12 ブロック（2 進の番号付け、同型の証明の章の個数 N_i・符号 ς・c_i・c_i^T の定義、反交換関係二つ、成分の補題二つなど）に暗黙の同一視は無かった。台帳の c_i c_j^T + c_j^T c_i の行の後に、Φ∘Ψ が使う行列の側の四行を足した。
