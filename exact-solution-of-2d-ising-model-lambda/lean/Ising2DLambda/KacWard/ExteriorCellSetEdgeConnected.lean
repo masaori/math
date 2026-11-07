@@ -20,6 +20,23 @@ def outsideBoundingRectangle
     (rMin rMax cMin cMax : ℤ) : Set (ℤ × ℤ) :=
   {p | p.1 < rMin ∨ rMax ≤ p.1 ∨ p.2 < cMin ∨ cMax ≤ p.2}
 
+/-- 最大列を持つ持ち上げ点の右側のセルは、外側帯と長方形の外側の双方に属する。 -/
+theorem outsideBoundingRectangle_inter_walkSideExteriorBand
+    (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)
+    (hmax : ∃ k < n, col k = cMax)
+    (houtsideSubset : outsideBoundingRectangle rMin rMax cMin cMax ⊆
+      exteriorCells n row col) :
+    ∃ p, p ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+      p ∈ walkSideExteriorBand n row col := by
+  obtain ⟨k, hk, hcol⟩ := hmax
+  refine ⟨(row k, cMax), ?_, ?_⟩
+  · change row k < rMin ∨ rMax ≤ row k ∨ cMax < cMin ∨ cMax ≤ cMax
+    exact Or.inr (Or.inr (Or.inr le_rfl))
+  · refine ⟨k, hk, ?_⟩
+    constructor
+    · exact Or.inr (Or.inr (Or.inl (by rw [hcol])))
+    · exact houtsideSubset (Or.inr (Or.inr (Or.inr le_rfl)))
+
 /-- 交わる外側の二つの核を、辺隣接の有限路で一つにつなぐ。 -/
 theorem exteriorCores_nonempty_edgeConnected
     (S firstCore secondCore : Set (ℤ × ℤ))
