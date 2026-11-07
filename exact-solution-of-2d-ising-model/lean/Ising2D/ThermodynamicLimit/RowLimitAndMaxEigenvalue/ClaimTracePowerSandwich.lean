@@ -4,7 +4,7 @@
 正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
-必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（上からの評価 `trace_power_upper_bound`）、
+必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（上からの評価 `trace_power_upper_bound`。人手と 1 対 1 の具体版は `ClaimTracePowerUpperBound.lean`）、
 `Ising2D.NecSuf.IsPsdPair.moment_log_convex`（`moment_log_convexity`）、
 `Ising2D.NecSuf.IsPdPair.moment_pow_le`（【単位ベクトルでの評価】の `m_p ≥ m_1^p`）
 （いずれも `Ising2D/NecSuf/RayleighMoments.lean`）
@@ -41,9 +41,10 @@ theorem psd_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
   have h := hpair.moment_nonneg x N
   rwa [matBilin_one_mulVecLin_pow] at h
 
-/-- **上からの評価**（人手 `trace_power_upper_bound`）: `Σ_k (W^n)_kk ≤ (dim) c(M)^n`。
-人手の `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は、これを `W := W_ℝ`、`Fintype.card n = 2^{M_col}`、`N ≥ 1` と置いた特殊化（ここは対称で半正定値な任意の実数の行列と `N = 0` も含めて述べる）。証明は必要十分版
-`NecSuf.IsPsdPair.moment_le_pow` の特殊化で、人手の偶数・奇数の場合分けの鎖とはまだ 1 対 1 でない。 -/
+/-- **上からの評価を必要十分版から得たもの**（人手 `trace_power_upper_bound` の必要十分版からの導出）: `Σ_k (W^n)_kk ≤ (dim) c(M)^n`。
+人手の鎖と 1 対 1 の具体版は `ClaimTracePowerUpperBound.lean` の `trace_power_upper_bound`（本文の `W` への当てはめは
+`trace_power_upper_bound_physical`）。ここは対称で半正定値な任意の実数の行列と `N = 0` も含めて述べ、各 `k` の評価を必要十分版
+`NecSuf.IsPsdPair.moment_le_pow` の特殊化で得る。`trace_power_sandwich` の上側はまだこれを使う（状態台帳の (r7) で `trace_power_upper_bound` を引く形に替える）。 -/
 theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (N : ℕ) :
     (W ^ N).trace ≤ (Fintype.card n : ℝ) * rayleighSup W ^ N := by

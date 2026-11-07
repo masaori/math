@@ -72,6 +72,7 @@
 | 可逆性: `B ∈ R^×`（`def_invertible_elements_of_R` の `g → B`, `h → B'`。`B'B = I` は Step 2） | `physicalV1halfC_isUnit` |
 | 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
 | 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
+| `trace_power_upper_bound` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（`W` の実対称性は `W_is_real_symmetric_positive_definite`、`rayleigh_bounds_operator_norm` が要る `W_ℝ` の対称性・正定値性は `W_real_is_symmetric`・`W_real_is_positive_definite`） | `trace_power_upper_bound_physical`（一般の `W` の具体版は `ClaimTracePowerUpperBound.lean` の `trace_power_upper_bound`） |
 | `partition_function_sandwich`（準備の `Z(K_1,K_2) = T`（`T := Σ_k ((W_ℝ)^{N_row})_kk`）→ `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
 - Step 3 の `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor` は、添字が `Conf M` の行列なので
@@ -128,6 +129,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 
 namespace Ising2D
 
@@ -706,5 +708,17 @@ theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
     (physicalSymTransferR_posDef K1 hK2) hN                                        -- `trace_power_sandwich`（`n = N_row`）
   rw [card_conf] at h
   exact h
+
+/-- **人手 `trace_power_upper_bound`（本文の具体的な `W` について）**: `n ≥ 1` について
+`Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`（`W_ℝ := ϱ(W)`、`def_W_real`）。一般の `W` の具体版 `trace_power_upper_bound` に、
+`W_is_real_symmetric_positive_definite`（実対称性、`physicalSymTransferC_isRealSymmetric`）と、`rayleigh_bounds_operator_norm` が要る
+`W_real_is_symmetric`・`W_real_is_positive_definite` を渡す。 -/
+theorem trace_power_upper_bound_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {n : ℕ} (hn : 1 ≤ n) :
+    ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+        (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n) k k
+      ≤ 2 ^ M * rayleighSup (realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n :=
+  trace_power_upper_bound (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2)
+    (W_real_is_symmetric K1 hK2) (W_real_is_positive_definite K1 hK2) hn
 
 end Ising2D

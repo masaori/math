@@ -73,9 +73,12 @@
 | `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖`（人手の `k = 0` の 3 行と帰納法の 5 行。`Ix = x` は `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`(W^kW)x = W^k(Wx)` は `real_matrix_vector_product_is_associative` の具体版を引く） | 同上（帰納法の部分） |
 | `Ising2D.rayleigh_bounds_operator_normSq` / `rayleigh_bounds_operator_normSq_pow` | `‖Wx‖² ≤ c(M)²‖x‖²` / `‖W^k x‖² ≤ (c(M)²)^k‖x‖²`（必要十分版の特殊化。具体版の証明には使わない） | 同上 |
 | `Ising2D.rayleigh_bounds_operator_norm_of_necSuf` / `rayleigh_bounds_operator_norm_pow_of_necSuf` | 上の 2 つの平方根を取った `‖Wx‖ ≤ c(M)‖x‖` / `‖W^k x‖ ≤ c(M)^k‖x‖`（具体版と同じ主張を必要十分版から得たもの） | 同上 |
-| `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | `trace_power_sandwich` Step 3 の補題 |
-| `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 同上 |
-| `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は `W := W_ℝ`・`card = 2^{M_col}`・`N ≥ 1` と置いた特殊化。証明は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化で、人手の偶数・奇数の場合分けの鎖と 1 対 1 でない） | `trace_power_upper_bound` |
+| `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | 人手に対応する段は無い。下の単位ベクトルでの評価（Lean の `m_n ≤ tr(W^n)`）が使う、人手が捨てた経路（人手の `trace_power_sandwich` の【(W_ℝ)^n の成分の評価】は平方根を使わない。台帳の (r7) で人手の鎖に替える） |
+| `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 人手に対応する段は無い（上の行の補題だけが使う） |
+| `Ising2D.norm_of_standard_basis_vector` / `power_of_W_real_entry_symm` / `diagonal_entry_via_standard_basis` / `power_of_W_real_mulVec_standard_basis_apply` / `norm_power_of_W_real_mulVec_standard_basis_le` / `norm_sq_power_of_W_real_mulVec_standard_basis_le`（`ClaimTracePowerUpperBound.lean`） | `‖e_k‖ = 1`（5 行）/ `((W_ℝ)^p)_kl = ((W_ℝ)^p)_lk`（6 行と単射性）/ `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（5 行）/ `u_l = ((W_ℝ)^a)_lk`（3 行）/ `‖u‖ ≤ c^a`（3 行）/ `‖u‖^2 ≤ c^{2a}`（2 行） | `trace_power_upper_bound` の【e_k のノルム】【冪の対称性】【対角成分の表示】【(W_ℝ)^ae_k の成分とノルム】 |
+| `Ising2D.power_of_W_real_even_split` / `diagonal_bound_even` / `power_of_W_odd_split` / `power_of_W_real_odd_split` / `diagonal_bound_odd` | `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a`（5 行）/ `n = 2a` について `e_k^⊤(W_ℝ)^{2a}e_k ≤ c^n`（9 行）/ `W^{2a+1} = W^a(WW^a)`（7 行）/ `(W_ℝ)^{2a+1} = (W_ℝ)^a(W_ℝ(W_ℝ)^a)`（5 行）/ `n = 2a+1` について `e_k^⊤(W_ℝ)^{2a+1}e_k ≤ c^n`（12 行） | `trace_power_upper_bound` の偶数・奇数の場合 |
+| **`Ising2D.trace_power_upper_bound`** / `trace_power_upper_bound_physical`（`PhysicalPartitionFunctionSandwich.lean`） | 一般の `W : TensorPow M`（実対称、`W_ℝ := ϱ(W)` は対称で正定値）について `n ≥ 1` で `Σ_k ((W_ℝ)^n)_kk ≤ 2^M c(M)^n`（最後のトレースの 4 行）/ 本文の `W` に当てたもの | **`trace_power_upper_bound`** |
+| `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`）/ `Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（各 `k` の評価は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化）/ それを具体版 `trace_power_upper_bound` と同じ型に読んだもの（具体版が必要十分版の特殊化として得られることの記録。具体版の証明には使わない）。`trace_power_sandwich` の上側はまだ `trace_pow_le` を使う（台帳の (r7) で `trace_power_upper_bound` を引く形に替える） | `trace_power_upper_bound`（必要十分版からの導出） |
 | `Ising2D.quad_pow_le_trace_pow` | 単位 `x` で `(xᵀWx)^n ≤ tr(W^n)` | `trace_power_sandwich` の【単位ベクトルでの評価】（証明は必要十分版の特殊化で、人手の成分の評価を足し合わせる鎖と 1 対 1 でない） |
 | `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | `trace_power_sandwich` の【上限への移行】（人手は冪の比較と背理法、Lean は `n` 乗根で、1 対 1 でない） |
 | **`Ising2D.trace_power_sandwich`** | 実数の行列 `W` の `c(M)^n ≤ Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `c^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col}c^n` は `W := W_ℝ`・`card = 2^{M_col}` の特殊化） | **`trace_power_sandwich`** |
@@ -169,6 +172,7 @@
 | --- | --- | --- | --- |
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(_pow)`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`Ising2D.rayleigh_bounds_operator_norm(_pow)_of_necSuf`。`isPsdPair_of_matrix` 経由） |
+| `trace_power_upper_bound` | `Ising2D.trace_power_upper_bound`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.moment_le_pow`（各 `k` の評価。同じ偶奇の手順で、人手の【冪の対称性】と成分の鎖に当たる段は自己共役性から出る `moment_split`） | 各 `k` の評価は**はい**（`trace_power_upper_bound_of_necSuf`）。対角成分の和と `2^{M_col}` の段は有限の添字と ℝ の順序に固有なので具体版のみ |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`。使う側の実行列の読み `trace_mul_pow_eq_trace_symTransfer_pow` も同じ特殊化） |
@@ -197,8 +201,10 @@
   モーメントの対数凸性 `m_k² ≤ m_{k-1}m_{k+1}` も、比の単調性から出る `(xᵀWx)^n ≤ m_n` も、
   実数性を全く使わない。ℝ が本質的に効くのは次の 2 箇所だけである。
   1. `c(M) = sup 𝓡` が存在すること（ℝ の完備性そのもの）。
-  2. `m_n ≤ tr(W^n)` の証明（`|A_kl| ≤ √(A_kk A_ll)` で平方根を使う）。
-  つまり**この章で「実数への脱出」が必要なのはこの 2 点だけ**であり、
+  2. Lean の `quad_pow_le_trace_pow` の `m_n ≤ tr(W^n)`（`|A_kl| ≤ √(A_kk A_ll)` で平方根を使う）。ただしこれは人手が捨てた経路で、
+     人手のいまの【(W_ℝ)^n の成分の評価】は平方根を使わない（台帳の (r7) で人手の鎖に替えるときに、この項を見直す）。
+     人手の鎖に限れば、ℝ が本質的に効くのは 1 の `sup` の存在だけである。
+  つまり**この章で「実数への脱出」が必要なのは（Lean のいまの経路では）この 2 点だけ**であり、
   行列の対角化可能性も固有値の存在も要らない。
 
 - **`symmetrized_transfer_matrix_on_sectors` の射影子移動は任意の半群で閉じている。**

@@ -3,13 +3,15 @@
 
 対応する人手証明のラベル:
 * **`rayleigh_bounds_operator_norm`**（`maxeig_007_claim_operator_bound`）
+* **`trace_power_upper_bound`** の偶数・奇数の場合（`maxeig_008a_claim_trace_power_upper_bound`。`moment_le_pow`）
 * **`trace_power_sandwich`** の Step 2・Step 3（`maxeig_008_claim_trace_power_sandwich`）
 
 具体版:
 * `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
+* `Ising2D.trace_power_upper_bound`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerUpperBound.lean`）
 * `Ising2D.trace_power_sandwich`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwich.lean`）
 
-具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）と `Ising2D.trace_power_sandwich` が示す。
+具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）、`Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`）と `Ising2D.trace_power_sandwich` が示す。
 
 ## この主張に本質的に効いている構造
 
@@ -214,7 +216,7 @@ theorem moment_nonneg (h : IsPsdPair ip W) (x : V) (k : ℕ) :
 
 /-- **モーメント列の上からの評価**: `m_k ≤ c^k ⟪x, x⟫`。
 
-人手証明 `trace_power_sandwich` の Step 1（`e_kᵀ W^n e_k ≤ c^n` の偶奇の場合分け）に対応。 -/
+人手証明 `trace_power_upper_bound` の偶数・奇数の場合（`e_k^⊤(W_ℝ)^ne_k ≤ c^n`）に対応（具体版 `Ising2D.diagonal_bound_even`・`diagonal_bound_odd`）。 -/
 theorem moment_le_pow (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ c)
     (hc : ∀ u, ip u (W u) ≤ c * ip u u) (x : V) (k : ℕ) :
     ip x ((W ^ k) x) ≤ c ^ k * ip x x := by

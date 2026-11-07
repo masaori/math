@@ -704,6 +704,20 @@ targets=(
   Ising2D.IsSymm_pow
   Ising2D.psd_pow
   Ising2D.trace_pow_le
+  Ising2D.norm_of_standard_basis_vector
+  Ising2D.power_of_W_real_entry_symm
+  Ising2D.diagonal_entry_via_standard_basis
+  Ising2D.power_of_W_real_mulVec_standard_basis_apply
+  Ising2D.power_of_W_real_even_split
+  Ising2D.power_of_W_odd_split
+  Ising2D.power_of_W_real_odd_split
+  Ising2D.norm_power_of_W_real_mulVec_standard_basis_le
+  Ising2D.norm_sq_power_of_W_real_mulVec_standard_basis_le
+  Ising2D.diagonal_bound_even
+  Ising2D.diagonal_bound_odd
+  Ising2D.trace_power_upper_bound
+  Ising2D.trace_power_upper_bound_physical
+  Ising2D.trace_power_upper_bound_of_necSuf
   Ising2D.quad_pow_le_trace_pow
   Ising2D.rayleighSup_pow_le_trace_pow
   Ising2D.trace_power_sandwich
