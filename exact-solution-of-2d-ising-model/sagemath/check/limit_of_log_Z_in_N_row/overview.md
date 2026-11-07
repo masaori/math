@@ -5,24 +5,24 @@
 **対象ラベル**: `limit_of_log_Z_in_N_row` （structured-latex 側の安定識別子）
 
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
-- ブロック: `freeenergy_003_claim_limit_in_N_row`（`lim_{N_row→∞} (1/(M_col N_row)) log Z(K_1,K_2) = (1/M_col) log c(M_col)`）
-- 範囲: 準備（`Z > 0`、`c > 0`）、含意の鎖の十行、極限の段（`log 2 > log 1 = log(exp 0) = 0` の三行、`log 2/ε > 0`、`0 < log 2/ε < N_0 ⟹ 0 < N_0 ⟹ N_0 ≥ 1`、`log 2 = (log 2/ε)ε < N_0ε`、`|a_N − a| ≤ (log 2)/N ≤ (log 2)/N_0 < ε` の三行）と主張
+- ブロック: `freeenergy_003_claim_limit_in_N_row`（`lim_{N_row→∞} (1/(ι(M_col)ι(N_row))) log Z(K_1,K_2) = (1/ι(M_col)) log c(M_col)`。`ι = ι_{ℤ→ℝ}` は `inclusion_zz_to_rr`）
+- 範囲: 準備（`Z > 0`、`c > 0`、`ι(M_col), ι(N_row) ≥ 1`、`ι(M_col)ι(N_row) > 0`）、含意の鎖の十行、極限の段（`log 2 > log 1 = log(exp 0) = 0` の三行、`log 2/ε > 0`、`0 < log 2/ε < ι(N_0) ⟹ 0 < ι(N_0) ⟹ N_0 > 0 ⟹ N_0 ≥ 1`、`log 2 = (log 2/ε)ε < ι(N_0)ε`、`ι(N_0) ≤ ι(N_row)`、`|a_N − a| ≤ (log 2)/ι(N) ≤ (log 2)/ι(N_0) < ε` の三行）と主張
 
 ## 証明の行との対応
 
 | 証明の行 | 検査内容 | ステータス |
 |---|---|---|
-| 準備: `Z ∈ ℝ_{>0}`、`c ∈ ℝ_{>0}` | `Z`（QQ）と `c`（AA）の正値性 | **PASS** |
+| 準備: `Z ∈ ℝ_{>0}`、`c ∈ ℝ_{>0}`、`ι(M_col) ≥ 1`、`ι(N_row) ≥ 1`、`ι(M_col)ι(N_row) > 0` | `Z`（QQ）と `c`（AA）の正値性。`ι` は定義の再帰（`sagemath/_shared/inclusion_zz_to_rr_by_definition.sage`）で作り QQ で | **PASS** |
 | 一行目 `c^N ≤ Z ≤ 2^M c^N`（`partition_function_sandwich`） | QQ・AA の厳密な比較。冪は `def_power_of_real_number` の再帰 | **PASS** |
 | 二行目（log の単調性） | 各辺の log をボールで作り二つの不等号。一行目の狭義の不等号から log の狭義の不等号が出ること | **PASS** |
-| 三〜六行目（`real_log_of_power`・`real_log_of_product`） | 変わった辺の等号（`log(c^N) = N log c`、`log(2^M c^N) = log(2^M) + log(c^N)`、`log(2^M) = M log 2`）と各行の二つの不等号 | **PASS** |
-| 七行目（`M N` で割る）・八行目（約分） | 各行の二つの不等号と、八行目の左辺・右辺の約分の等号 | **PASS** |
-| 九行目（`(1/M) log c` を引く）・十行目（`def_real_absolute_value` の `q ≥ 0` の場合） | 二つの不等号、引いた辺の等号、差が非負で `|d| = d` | **PASS** |
-| 極限の段（`log 2 > log 1`、`exp(0)` のボールが 1 を含み `log 1 = 0`、`log 2/ε > 0`、`log 2/ε < N_0` と `N_0 ≥ 1`、`log 2 = (log 2/ε)ε < N_0ε`、三行の鎖） | `ε ∈ {1, 1/2, 1/10, 1/40}` と `N_0 := ⌊(log 2)/ε⌋ + 1`、`N_row = N_0..60`。`N = N_0` の二行目は等号、`N > N_0` は狭義 | **PASS** |
+| 三〜六行目（`real_log_of_power`・`real_log_of_product`） | 変わった辺の等号（`log(c^N) = ι(N) log c`、`log(2^M c^N) = log(2^M) + log(c^N)`、`log(2^M) = ι(M) log 2`）と各行の二つの不等号 | **PASS** |
+| 七行目（`ι(M)ι(N)` で割る）・八行目（約分） | 各行の二つの不等号と、八行目の左辺・右辺の約分の等号 | **PASS** |
+| 九行目（`(1/ι(M)) log c` を引く）・十行目（`def_real_absolute_value` の `q ≥ 0` の場合） | 二つの不等号、引いた辺の等号、差が非負で `|d| = d` | **PASS** |
+| 極限の段（`log 2 > log 1`、`exp(0)` のボールが 1 を含み `log 1 = 0`、`log 2/ε > 0`、`log 2/ε < ι(N_0)` と `0 < ι(N_0)`、`N_0 > 0`（`ℤ_{≤0}` の `-50..0` で `ι ≤ 0`）と `N_0 ≥ 1`、`log 2 = (log 2/ε)ε < ι(N_0)ε`、`ι(N_0) ≤ ι(N_row)`、三行の鎖） | `ε ∈ {1, 1/2, 1/10, 1/40}` と `N_0 := ⌊(log 2)/ε⌋ + 1 ∈ ℤ`、`N_row = N_0..60`。`N = N_0` の二行目は等号、`N > N_0` は狭義 | **PASS** |
 | 主張 | `N_row = 60` で `|a_60 − a|` が 1.6e-11〜3.4e-3（`(log 2)/60 ≈ 1.2e-2` 以下） | **PASS** |
 
 パラメータは `K_1 := 2 log y`、`K_2 := log x` で `(M_col, x, y)` ∈ {2, 3} × {(2,2), (3,2), (2,3), (3,3)} と `(3, 3/2, 5/4)` の 8 組、
-`N_row = 1..60`。比較は 18416 個。
+`N_row = 1..60`。比較は 21504 個。
 
 ## 計算の帰属と範囲
 

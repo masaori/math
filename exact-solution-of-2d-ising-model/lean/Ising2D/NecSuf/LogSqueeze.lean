@@ -36,6 +36,7 @@
 収束列の定数倍・定数加算が収束することだけである。**Ising 模型の構造は何も効いていない。**
 -/
 import Ising2D.NecSuf.InverseOfAdditiveToMultiplicativeMap
+import Ising2D.NecSuf.NaturalNumberCastIntoSemiring
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Topology.Algebra.Order.Field
@@ -65,8 +66,8 @@ theorem abs_div_sub_le_of_sandwich {D K : Type*} [Semiring D] [PartialOrder D] [
     · exact hle u v hu h                                          -- `u < v` の場合
     · rw [h]                                                      -- `u = v` の場合
   have hZ : 0 < Z := lt_of_lt_of_le hcN.1 h1
-  have hMR : (0 : K) < M := by exact_mod_cast hM
-  have hNR : (0 : K) < N := by exact_mod_cast hN
+  have hMR : (0 : K) < M := lt_of_lt_of_le one_pos (one_le_cast' M hM)    -- `ι(M) ≥ 1 > 0`（`one_le_cast'`）
+  have hNR : (0 : K) < N := lt_of_lt_of_le one_pos (one_le_cast' N hN)    -- `ι(N) ≥ 1 > 0`
   have hMN : (0 : K) < (M : K) * N := mul_pos hMR hNR
   -- s1: 挟み撃ち（仮定 h1, h2）
   -- s2: `L` を当てる
@@ -111,14 +112,19 @@ theorem tendsto_of_abs_sub_le_div {u : ℕ → ℝ} {a C : ℝ} (hC : 0 ≤ C)
     (h : ∀ N : ℕ, 1 ≤ N → |u N - a| ≤ C / N) : Tendsto u atTop (𝓝 a) := by
   rw [Metric.tendsto_atTop]
   intro ε hε
-  obtain ⟨n, hn⟩ := exists_nat_gt (C / ε)                         -- ℝ のアルキメデス性
-  have hN0pos : (0 : ℝ) < n := lt_of_le_of_lt (div_nonneg hC hε.le) hn
-  have hN0 : 1 ≤ n := Nat.one_le_iff_ne_zero.2 (by rintro rfl; simp at hN0pos)
-  have hN0eps : C < n * ε := (div_lt_iff₀ hε).1 hn
-  refine ⟨n, fun N hN => ?_⟩
-  have hNR : (n : ℝ) ≤ N := by exact_mod_cast hN
+  obtain ⟨n, hn⟩ := exists_int_gt (C / ε)                         -- ℝ のアルキメデス性（`N_0 ∈ ℤ`）
+  have hN0pos : (0 : ℝ) < (n : ℝ) := lt_of_le_of_lt (div_nonneg hC hε.le) hn
+  have hN0gt : 0 < n := lt_of_not_ge fun h => (not_lt.2 (int_cast_nonpos' (R := ℝ) n h)) hN0pos
+                                                                  -- `0 < ι(N_0)` から `N_0 > 0`（`int_cast_nonpos'` の対偶）
+  have hN0eps : C < (n : ℝ) * ε := (div_lt_iff₀ hε).1 hn
+  obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0gt.le⟩
+                                                                  -- 列の添字の `ℕ` へ書き直す
+  have hkR : (n : ℝ) = (k : ℝ) := by rw [← hk, Int.cast_natCast]
+  have hk1 : 1 ≤ k := by omega
+  refine ⟨k, fun N hN => ?_⟩
+  have hNR : (n : ℝ) ≤ N := hkR ▸ cast_mono' (R := ℝ) k N hN     -- `ι(N_0) ≤ ι(N)`（`cast_mono'`）
   rw [Real.dist_eq]
-  calc |u N - a| ≤ C / N := h N (le_trans hN0 hN)                 -- 誤差評価
+  calc |u N - a| ≤ C / N := h N (le_trans hk1 hN)                 -- 誤差評価
     _ ≤ C / n := div_le_div_of_nonneg_left hC hN0pos hNR          -- `C ≥ 0` かつ `0 < N_0 ≤ N`
     _ < ε := (div_lt_iff₀ hN0pos).2 (by rw [mul_comm]; exact hN0eps)
                                                                   -- `N_0ε > C` の両辺を `N_0 > 0` で割る

@@ -13,6 +13,7 @@
 #   許容誤差は置かない（共通の準備 _shared/log_integral_by_balls.sage）。
 load("../rayleigh_bounds_operator_norm/_prelude.sage")
 load("../../_shared/log_integral_by_balls.sage")
+load("../../_shared/inclusion_zz_to_rr_by_definition.sage")   # ι_{ℤ→ℝ}（inclusion_zz_to_rr）を定義の再帰で作る
 import itertools
 
 
@@ -46,16 +47,20 @@ def check_chain(M, N, Z, c):
     assert cN <= Z and Z <= tM * cN
     k += 2
     lc, lZ, l2 = log_ball(c), log_ball(Z), log_ball(QQ(2))
+    # 冒頭: ι(M_col) ≥ 1 > 0、ι(N_row) ≥ 1 > 0（inclusion_zz_to_rr_of_positive_is_at_least_one）、ι(M_col)ι(N_row) > 0（real_log_of_product）
+    iM, iN = iota_zz_to_rr(M), iota_zz_to_rr(N)
+    assert iM >= 1 and iN >= 1 and iM * iN > 0
+    k += 3
     rows = []
     rows.append((log_ball(cN), lZ, log_ball(tM * cN)))                     # 二行目
-    rows.append((N * lc, lZ, log_ball(tM * cN)))                           # 三行目
-    rows.append((N * lc, lZ, log_ball(tM) + log_ball(cN)))                 # 四行目
-    rows.append((N * lc, lZ, M * l2 + log_ball(cN)))                       # 五行目
-    rows.append((N * lc, lZ, M * l2 + N * lc))                             # 六行目
-    rows.append(((N * lc) / (M * N), lZ / (M * N), (M * l2 + N * lc) / (M * N)))   # 七行目
-    rows.append((lc / M, lZ / (M * N), lc / M + l2 / N))                   # 八行目
-    rows.append((RBF512(0), lZ / (M * N) - lc / M, l2 / N))                # 九行目
-    rows.append((None, abs(lZ / (M * N) - lc / M), l2 / N))                # 十行目
+    rows.append((iN * lc, lZ, log_ball(tM * cN)))                          # 三行目（ι(N_row) log c）
+    rows.append((iN * lc, lZ, log_ball(tM) + log_ball(cN)))                # 四行目
+    rows.append((iN * lc, lZ, iM * l2 + log_ball(cN)))                     # 五行目（ι(M_col) log 2）
+    rows.append((iN * lc, lZ, iM * l2 + iN * lc))                          # 六行目
+    rows.append(((iN * lc) / (iM * iN), lZ / (iM * iN), (iM * l2 + iN * lc) / (iM * iN)))   # 七行目
+    rows.append((lc / iM, lZ / (iM * iN), lc / iM + l2 / iN))              # 八行目
+    rows.append((RBF512(0), lZ / (iM * iN) - lc / iM, l2 / iN))            # 九行目
+    rows.append((None, abs(lZ / (iM * iN) - lc / iM), l2 / iN))            # 十行目
     for (lo, mid, hi) in rows:
         if lo is not None:
             assert le(lo, mid)
@@ -71,8 +76,8 @@ def check_chain(M, N, Z, c):
         (log_ball(tM * cN), log_ball(tM) + log_ball(cN)),                  # 四行目: real_log_of_product
         (log_ball(tM), M * l2),                                            # 五行目: real_log_of_power（a = 2, n = M）
         (log_ball(cN), N * lc),                                            # 六行目: real_log_of_power（a = c, n = N）
-        ((N * lc) / (M * N), lc / M),                                      # 八行目の左辺（約分）
-        ((M * l2 + N * lc) / (M * N), lc / M + l2 / N),                    # 八行目の右辺（約分）
+        ((iN * lc) / (iM * iN), lc / iM),                                  # 八行目の左辺（約分）
+        ((iM * l2 + iN * lc) / (iM * iN), lc / iM + l2 / iN),              # 八行目の右辺（約分）
         (lc / M - lc / M, RBF512(0)),                                      # 九行目の左辺
         (lc / M + l2 / N - lc / M, l2 / N),                                # 九行目の右辺
     ]
@@ -80,7 +85,7 @@ def check_chain(M, N, Z, c):
         assert surely_equal(a, b)
         k += 1
     # 十行目: def_real_absolute_value の q >= 0 の場合（九行目の 0 <= 差 に）
-    d = lZ / (M * N) - lc / M
+    d = lZ / (iM * iN) - lc / iM
     assert d.lower() >= 0 and surely_equal(abs(d), d)
     k += 1
     return k
@@ -104,21 +109,27 @@ def check_limit_step(eps, N0, Ns, a_of, a):
     assert l2.lower() > 0
     t = l2 / RBF512(eps)
     assert t.lower() > 0                                                    # log 2/ε > 0
-    assert surely_lt(t, RBF512(N0))                                         # N_0 の取り方: log 2/ε < N_0
-    assert N0 > 0                                                           # 0 < log 2/ε < N_0 ⟹ 0 < N_0（推移律）
-    assert N0 in ZZ and N0 >= 1                                             # ⟹ N_0 ≥ 1
+    N0 = ZZ(N0)                                                             # N_0 ∈ ℤ
+    iN0 = iota_zz_to_rr(N0)
+    assert surely_lt(t, RBF512(iN0))                                        # N_0 の取り方: log 2/ε < ι(N_0)
+    assert iN0 > 0                                                          # 0 < log 2/ε < ι(N_0) ⟹ 0 < ι(N_0)（推移律）
+    # ⟹ N_0 > 0（inclusion_zz_to_rr_of_nonpositive_is_nonpositive の対偶）: N_0 の近くの ℤ_{≤0} の元は ι ≤ 0 なので N_0 はそこに無い
+    assert all(iota_zz_to_rr(n) <= 0 for n in range(-50, 1)) and N0 > 0
+    assert N0 >= 1                                                          # ⟹ N_0 ≥ 1（0 と 1 の間に整数は無い）
     assert surely_equal(t * RBF512(eps), l2)                                 # log 2 = (log 2/ε)ε
-    assert surely_lt(t * RBF512(eps), RBF512(N0) * RBF512(eps))             # (log 2/ε)ε < N_0ε
-    assert surely_lt(l2, N0 * eps)
+    assert surely_lt(t * RBF512(eps), RBF512(iN0) * RBF512(eps))            # (log 2/ε)ε < ι(N_0)ε
+    assert surely_lt(l2, iN0 * eps)
     k = 1
     for N in Ns:
         assert N >= N0
+        iN = iota_zz_to_rr(N)
+        assert iN0 <= iN                                                    # ι(N_0) ≤ ι(N_row)（inclusion_zz_to_rr_is_monotone_on_nonnegatives）
         dN = abs(a_of(N) - a)
-        assert le(dN, l2 / N)
-        # (log 2)/N ≤ (log 2)/N_0: N = N_0 なら等号、N > N_0 なら（log 2 > 0 なので）狭義
-        assert surely_equal(l2 / N, l2 / N0) if N == N0 else surely_lt(l2 / N, l2 / N0)
-        assert surely_lt(l2 / N0, RBF512(eps))
-        k += 3
+        assert le(dN, l2 / iN)
+        # (log 2)/ι(N) ≤ (log 2)/ι(N_0): N = N_0 なら等号、N > N_0 なら（log 2 > 0 なので）狭義
+        assert surely_equal(l2 / iN, l2 / iN0) if N == N0 else surely_lt(l2 / iN, l2 / iN0)
+        assert surely_lt(l2 / iN0, RBF512(eps))
+        k += 4
     return k
 
 

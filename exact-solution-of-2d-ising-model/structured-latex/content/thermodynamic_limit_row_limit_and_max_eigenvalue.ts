@@ -3782,7 +3782,19 @@ Z(K_1,K_2)
         math(String.raw`\mathbb{R}`),
         " に住む（実対数と極限による ",
         math(String.raw`\mathbb{R}`),
-        " 脱出）。",
+        " 脱出）。左辺の分母の ",
+        math(String.raw`M_{\mathrm{col}}\,N_{\mathrm{row}}`),
+        " は ",
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " で送った ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}}) \in \mathbb{R}`),
+        " の、右辺の ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " は ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}}) \in \mathbb{R}`),
+        " の略記である（証明では略さずに書く）。",
       ]),
     ],
     proof: [
@@ -3831,6 +3843,22 @@ Z(K_1,K_2)
         " の ",
         math(String.raw`\log`),
         " が定まる。",
+        ref("inclusion_zz_to_rr_of_positive_is_at_least_one"),
+        " を ",
+        math(String.raw`n=M_{\mathrm{col}}`),
+        " と ",
+        math(String.raw`n=N_{\mathrm{row}}`),
+        " で引くと ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}}) \geq 1 > 0`),
+        "、",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}}) \geq 1 > 0`),
+        " であり、",
+        ref("real_log_of_product"),
+        " を ",
+        math(String.raw`a=\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}}),\ b=\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})`),
+        " で引くと ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}}) \in \mathbb{R}_{>0}`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3838,28 +3866,28 @@ Z(K_1,K_2)
 &&\left(\because\ \blkref{partition_function_sandwich}\right)\\
 \Longrightarrow\ &\log(c^{N_{\mathrm{row}}}) \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
 &&\left(\because\ u \leq v\text{ は }u<v\text{ か }u=v\text{。前者は }\blkref{real_log_strictly_increasing}\text{、後者は写像 }\log\text{ の値が一つに定まること}\right)\\
-\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
+\Longrightarrow\ &\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
 &&\left(\because\ \blkref{real_log_of_power}\text{ を }a=c,\ n=N_{\mathrm{row}}\text{ で}\right)\\
-\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}})+\log(c^{N_{\mathrm{row}}})
+\Longrightarrow\ &\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}})+\log(c^{N_{\mathrm{row}}})
 &&\left(\because\ \blkref{real_log_of_product}\text{ を }a=2^{M_{\mathrm{col}}},\ b=c^{N_{\mathrm{row}}}\text{ で}\right)\\
-\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+\log(c^{N_{\mathrm{row}}})
+\Longrightarrow\ &\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c \leq \log Z \leq \iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\log 2+\log(c^{N_{\mathrm{row}}})
 &&\left(\because\ \blkref{real_log_of_power}\text{ を }a=2,\ n=M_{\mathrm{col}}\text{ で}\right)\\
-\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+N_{\mathrm{row}}\log c
+\Longrightarrow\ &\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c \leq \log Z \leq \iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\log 2+\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c
 &&\left(\because\ \blkref{real_log_of_power}\text{ を }a=c,\ n=N_{\mathrm{row}}\text{ で}\right)\\
-\Longrightarrow\ &\frac{N_{\mathrm{row}}\log c}{M_{\mathrm{col}}N_{\mathrm{row}}} \leq \frac{\log Z}{M_{\mathrm{col}}N_{\mathrm{row}}} \leq \frac{M_{\mathrm{col}}\log 2+N_{\mathrm{row}}\log c}{M_{\mathrm{col}}N_{\mathrm{row}}}
-&&\left(\because\ \text{各辺を }M_{\mathrm{col}}N_{\mathrm{row}}\in\mathbb{R}_{>0}\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
-\Longrightarrow\ &\frac{1}{M_{\mathrm{col}}}\log c \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z \leq \frac{1}{M_{\mathrm{col}}}\log c + \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \mathbb{R}\text{ の四則。分子と分母の共通の因子 }N_{\mathrm{row}}\text{、}M_{\mathrm{col}}\text{ を約す}\right)\\
-\Longrightarrow\ &0 \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c \leq \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \text{各辺から }\tfrac{1}{M_{\mathrm{col}}}\log c\text{ を引く。引いても不等号は保たれる}\right)\\
-\Longrightarrow\ &\left|\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c\right| \leq \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \blkref{def_real_absolute_value}\text{ の }q\geq 0\text{ の場合を、前の行の }0\leq\tfrac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z-\tfrac{1}{M_{\mathrm{col}}}\log c\text{ に}\right).
+\Longrightarrow\ &\frac{\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})} \leq \frac{\log Z}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})} \leq \frac{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\log 2+\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\,\log c}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}
+&&\left(\because\ \text{各辺を }\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\in\mathbb{R}_{>0}\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
+\Longrightarrow\ &\frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c \leq \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}\log Z \leq \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c + \frac{\log 2}{\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}
+&&\left(\because\ \mathbb{R}\text{ の四則。分子と分母の共通の因子 }\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\text{、}\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\text{ を約す}\right)\\
+\Longrightarrow\ &0 \leq \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}\log Z - \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c \leq \frac{\log 2}{\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}
+&&\left(\because\ \text{各辺から }\tfrac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c\text{ を引く。引いても不等号は保たれる}\right)\\
+\Longrightarrow\ &\left|\frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}\log Z - \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c\right| \leq \frac{\log 2}{\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}
+&&\left(\because\ \blkref{def_real_absolute_value}\text{ の }q\geq 0\text{ の場合を、前の行の }0\leq\tfrac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}\log Z-\tfrac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c\text{ に}\right).
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`a_{N_{\mathrm{row}}} := \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z(K_1,K_2) \in \mathbb{R}`),
+        math(String.raw`a_{N_{\mathrm{row}}} := \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\,\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}\log Z(K_1,K_2) \in \mathbb{R}`),
         "、",
-        math(String.raw`a := \frac{1}{M_{\mathrm{col}}}\log c \in \mathbb{R}`),
+        math(String.raw`a := \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c \in \mathbb{R}`),
         " と置く。準備として",
       ]),
       displayMath(
@@ -3889,23 +3917,25 @@ Z(K_1,K_2)
         " のアルキメデス性（任意の ",
         math(String.raw`t \in \mathbb{R}`),
         " について ",
-        math(String.raw`t < m`),
+        math(String.raw`t < \iota_{\mathbb{Z}\to\mathbb{R}}(m)`),
         " となる ",
         math(String.raw`m \in \mathbb{Z}`),
         " がある）を ",
         math(String.raw`t = \frac{\log 2}{\varepsilon}`),
         " に使い、",
-        math(String.raw`\frac{\log 2}{\varepsilon} < N_0`),
+        math(String.raw`\frac{\log 2}{\varepsilon} < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)`),
         " となる ",
         math(String.raw`N_0 \in \mathbb{Z}`),
         " を取る。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-&0 < \frac{\log 2}{\varepsilon} < N_0
+&0 < \frac{\log 2}{\varepsilon} < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)
 &&\left(\because\ \text{上の行と }N_0\text{ の取り方}\right)\\
-\Longrightarrow\ &0 < N_0
+\Longrightarrow\ &0 < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)
 &&\left(\because\ \text{不等号の推移律}\right)\\
+\Longrightarrow\ &N_0 > 0
+&&\left(\because\ \blkref{inclusion_zz_to_rr_of_nonpositive_is_nonpositive}\text{ の対偶を }n=N_0\text{ に}\right)\\
 \Longrightarrow\ &N_0 \geq 1
 &&\left(\because\ N_0 \in \mathbb{Z}\text{。}0\text{ と }1\text{ の間に整数は無い}\right),
 \end{aligned}`,
@@ -3915,8 +3945,8 @@ Z(K_1,K_2)
 \log 2
 &= \frac{\log 2}{\varepsilon}\,\varepsilon
 &&\left(\because\ \mathbb{R}\text{ の四則。}\varepsilon \neq 0\text{ を約す}\right)\\
-&< N_0\,\varepsilon
-&&\left(\because\ \frac{\log 2}{\varepsilon} < N_0\text{ の両辺に }\varepsilon > 0\text{ を掛ける}\right).
+&< \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)\,\varepsilon
+&&\left(\because\ \frac{\log 2}{\varepsilon} < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)\text{ の両辺に }\varepsilon > 0\text{ を掛ける}\right).
 \end{aligned}`,
       ),
       paragraph([
@@ -3926,12 +3956,12 @@ Z(K_1,K_2)
       displayMath(
         String.raw`\begin{aligned}
 \left|a_{N_{\mathrm{row}}} - a\right|
-&\leq \frac{\log 2}{N_{\mathrm{row}}}
+&\leq \frac{\log 2}{\iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})}
 &&\left(\because\ \text{上の含意の鎖の最後の行}\right)\\
-&\leq \frac{\log 2}{N_0}
-&&\left(\because\ \text{準備の }\log 2 > 0\text{ かつ }0 < N_0 \leq N_{\mathrm{row}}\right)\\
+&\leq \frac{\log 2}{\iota_{\mathbb{Z}\to\mathbb{R}}(N_0)}
+&&\left(\because\ \text{準備の }\log 2 > 0\text{ かつ }0 < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0) \leq \iota_{\mathbb{Z}\to\mathbb{R}}(N_{\mathrm{row}})\text{。後者は }\blkref{inclusion_zz_to_rr_is_monotone_on_nonnegatives}\text{ を }1 \leq N_0 \leq N_{\mathrm{row}}\text{ に}\right)\\
 &< \varepsilon
-&&\left(\because\ N_0\,\varepsilon > \log 2\text{ の両辺を }N_0 > 0\text{ で割る}\right).
+&&\left(\because\ \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)\,\varepsilon > \log 2\text{ の両辺を }\iota_{\mathbb{Z}\to\mathbb{R}}(N_0) > 0\text{ で割る}\right).
 \end{aligned}`,
       ),
       paragraph([
@@ -3944,7 +3974,7 @@ Z(K_1,K_2)
         " であり、極限は ",
         ref("scalar_limit_is_unique"),
         " により一つに定まるので、主張の極限は存在して値は ",
-        math(String.raw`a = \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
+        math(String.raw`a = \frac{1}{\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})}\log c(M_{\mathrm{col}})`),
         " である。",
         math(String.raw`\mathbb{R}`),
         " を使うのは、",
@@ -3962,6 +3992,7 @@ Z(K_1,K_2)
         "2026-11-05: SageMath の検算（sagemath/check/limit_of_log_Z_in_N_row/）に合わせて直した。各行の根拠をラベル参照にし（log(c^N) = N log c と log(2^M) = M log 2 は新しい主張 real_log_of_power）、割り算と約分の行、差を取る行と絶対値の行を分けた。極限の段を log 2 > 0 の準備と ε と N_0 の鎖で書いて def_matrix_norm・scalar_limit_is_unique を引き、冪を新しい定義 def_power_of_real_number で引き、「この段階では実数解析へ移行していない」の誤った断り書きを、実対数と極限による ℝ 脱出の宣言に替えた。主張に K_1, K_2 と N_row の帰属を書いた。計算の誤りは無かった。",
         "2026-11-07: 証明の冒頭で、c^{N_row}・2^{M_col} が正であることの根拠を def_power_of_real_number（ℝ の元であることしか与えない）から real_log_of_power の a^n ∈ ℝ_{>0} に替え、2^{M_col}c^{N_row} が正であることに real_log_of_product の ab ∈ ℝ_{>0} を引いた（Lean の具体版 abs_log_Z_sub_log_c_le の冒頭と 1 対 1 にした）。値・手順は不変。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 含意の鎖の最後の行の根拠「非負の実数の絶対値はそれ自身」を def_real_absolute_value の q ≥ 0 の場合への参照にした。「ℝ のアルキメデス性より N_0ε > log 2 となる N_0 ∈ ℤ_{≥1} を取る」を、アルキメデス性の述べ方（任意の t ∈ ℝ に t < m となる m ∈ ℤ がある）と適用先 t = log 2/ε の文と、log 2/ε > 0・0 < N_0・N_0 ≥ 1・N_0ε > log 2 の表示式の鎖にした（アルキメデス性は ℝ の性質で、本文に引ける主張は無い）。正の数で割る・共通の因子を約す・引く・u ≤ v の場合分けの行は、高校教科書レベルの四則と順序の操作なので名前のまま残した。値と手順は変えていない。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: ℤ の元 M_col・N_row・N_0 を ℝ の式に入れる箇所と ℝ の元と比べる箇所を、inclusion_zz_to_rr の ι_{ℤ→ℝ} を通して書いた（証明の書き方の「同一視をしない」）。real_log_of_power の右辺が ι(n) log a になったのに合わせ、ι(M_col), ι(N_row) ∈ ℝ_{>0} を新しい主張 inclusion_zz_to_rr_of_positive_is_at_least_one で、アルキメデス性で取る N_0 ∈ ℤ について 0 < ι(N_0) から N_0 > 0 を inclusion_zz_to_rr_of_nonpositive_is_nonpositive の対偶で、ι(N_0) ≤ ι(N_row) を inclusion_zz_to_rr_is_monotone_on_nonnegatives で引いた。主張の M_col N_row は ι(M_col)ι(N_row) の略記と書いた。値・手順は不変。",
       ],
     },
   },

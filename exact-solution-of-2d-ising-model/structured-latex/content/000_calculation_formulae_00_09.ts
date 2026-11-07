@@ -1211,6 +1211,208 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_of_positive_is_at_least_one",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\quad(n \geq 1)` },
+    labels: ["inclusion_zz_to_rr_of_positive_is_at_least_one"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " なら ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n = 1_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})
+&= 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\bigr)\\
+&\geq 1_{\mathbb{R}}
+  &&\bigl(\because\ \leq_{\mathbb{R}}\ \text{の反射律}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " で主張が成り立つと仮定すると、",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\\
+&\geq 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \text{帰納法の仮定}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\ \text{の両辺に}\ 1_{\mathbb{R}}\ \text{を足す}\bigr)\\
+&\geq 1_{\mathbb{R}} +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 1_{\mathbb{R}} \geq 0_{\mathbb{R}}\ \text{の両辺に}\ 1_{\mathbb{R}}\ \text{を足す}\bigr)\\
+&= 1_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`n +_{\mathbb{Z}} 1_{\mathbb{Z}}`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。limit_of_log_Z_in_N_row で ℤ_{≥1} の元 M_col・N_row を ι_{ℤ→ℝ} で送った値が ℝ_{>0} に住むこと（割る数が正であること）を引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_of_nonpositive_is_nonpositive",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \leq 0_{\mathbb{R}}\quad(n \leq 0)` },
+    labels: ["inclusion_zz_to_rr_of_nonpositive_is_nonpositive"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`n \in \mathbb{Z}_{\leq 0}`),
+        " なら ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \leq 0_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{Z}_{\leq 0}`),
+        " の元は、",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " であるか、ある ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`-m`),
+        " と書けるかの、ちょうど一方である。",
+        math(String.raw`n = 0_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
+&= 0_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
+&\leq 0_{\mathbb{R}}
+  &&\bigl(\because\ \leq_{\mathbb{R}}\ \text{の反射律}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n = -m`),
+        "（",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "）のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(-m)
+&= -\iota_{\mathbb{Z}\to\mathbb{R}}(m)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)\ (n \to m)\bigr)\\
+&\leq -1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_positive_is_at_least_one}\ (n \to m)\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(m) \geq 1_{\mathbb{R}}\ \text{の両辺の符号を反転する。符号を反転すると不等号の向きが変わる}\bigr)\\
+&\leq -0_{\mathbb{R}}
+  &&\bigl(\because\ 1_{\mathbb{R}} \geq 0_{\mathbb{R}}\ \text{の両辺の符号を反転する}\bigr)\\
+&= 0_{\mathbb{R}}
+  &&\bigl(\because\ -0_{\mathbb{R}} = 0_{\mathbb{R}}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。limit_of_log_Z_in_N_row がアルキメデス性で取る N_0 ∈ ℤ について、0_ℝ < ι_{ℤ→ℝ}(N_0) から N_0 ∈ ℤ_{≥1} を導く段（この主張の対偶）で引けるよう足した。inclusion_zz_to_rr の負の元の節を使う最初の主張である。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_is_monotone_on_nonnegatives",
+    kind: "claim",
+    title: { tex: String.raw`a \leq b \Rightarrow \iota_{\mathbb{Z}\to\mathbb{R}}(a) \leq \iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \geq 0)` },
+    labels: ["inclusion_zz_to_rr_is_monotone_on_nonnegatives"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
+        " が ",
+        math(String.raw`a \leq b`),
+        " を満たすなら ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a) \leq \iota_{\mathbb{Z}\to\mathbb{R}}(b)`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k := b -_{\mathbb{Z}} a`),
+        " と置く。",
+        math(String.raw`a \leq b`),
+        " より ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`\mathbb{Z}`),
+        " の四則より ",
+        math(String.raw`b = a +_{\mathbb{Z}} k`),
+        " である。",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(k) \geq 0_{\mathbb{R}}`),
+        " を、",
+        math(String.raw`k = 0_{\mathbb{Z}}`),
+        " と ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " に分けて示す。",
+        math(String.raw`k = 0_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
+&= 0_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
+&\geq 0_{\mathbb{R}}
+  &&\bigl(\because\ \leq_{\mathbb{R}}\ \text{の反射律}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(k)
+&\geq 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_positive_is_at_least_one}\ (n \to k)\bigr)\\
+&\geq 0_{\mathbb{R}}
+  &&\bigl(\because\ 1_{\mathbb{R}} \geq 0_{\mathbb{R}}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(b)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} k)
+  &&\bigl(\because\ b = a +_{\mathbb{Z}} k\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(k)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum_of_nonnegatives}\ (b \to k)\bigr)\\
+&\geq \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ \text{上の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(k) \geq 0_{\mathbb{R}}\ \text{の両辺に}\ \iota_{\mathbb{Z}\to\mathbb{R}}(a)\ \text{を足す}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。limit_of_log_Z_in_N_row の最後の評価で、1 ≤ N_0 ≤ N_row（ℤ）から ι_{ℤ→ℝ}(N_0) ≤ ι_{ℤ→ℝ}(N_row)（ℝ）を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_008_multiply_by_minus_one",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ", ordinal: 9 },

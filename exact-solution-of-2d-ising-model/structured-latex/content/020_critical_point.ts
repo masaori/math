@@ -2472,7 +2472,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
   {
     id: "critical_claim_real_log_of_power",
     kind: "claim",
-    title: { tex: String.raw`\log(a^n) = n\log a` },
+    title: { tex: String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\log a` },
     labels: ["real_log_of_power"],
     statement: [
       paragraph([
@@ -2489,8 +2489,19 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
         math(String.raw`a^n \in \mathbb{R}_{>0}`),
         " であり",
       ]),
-      displayMath(String.raw`\log(a^n) = n\log a`),
+      displayMath(String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a`),
       paragraph([
+        "である。",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " は ",
+        ref("inclusion_zz_to_rr"),
+        " の写像で、右辺は ",
+        math(String.raw`n \in \mathbb{Z}`),
+        " を ",
+        math(String.raw`\mathbb{R}`),
+        " の元へ送ってから ",
+        math(String.raw`\log a \in \mathbb{R}`),
+        " と掛けた積である。",
         math(String.raw`\mathbb{R}`),
         " を使うのは、実対数の値が実数だからである。",
       ]),
@@ -2501,7 +2512,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
         " についての帰納法で、",
         math(String.raw`a^n \in \mathbb{R}_{>0}`),
         " と ",
-        math(String.raw`\log(a^n) = n\log a`),
+        math(String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a`),
         " を同時に示す。",
         math(String.raw`n = 1`),
         " のとき",
@@ -2524,15 +2535,17 @@ a^1
 \log(a^1)
 &= \log a
 &&(\because\ \text{上の}\ a^1 = a)\\
-&= 1\cdot\log a
-&&(\because\ \mathbb{R}\ \text{の乗法の単位元})
+&= 1_{\mathbb{R}}\cdot\log a
+&&(\because\ \mathbb{R}\ \text{の乗法の単位元})\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})\,\log a
+&&(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}\ \text{を右辺から左辺へ})
 \end{aligned}`),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         " で ",
         math(String.raw`a^n \in \mathbb{R}_{>0}`),
         " と ",
-        math(String.raw`\log(a^n) = n\log a`),
+        math(String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a`),
         " を仮定する。",
         math(String.raw`a^{n+1} = a^n a`),
         "（",
@@ -2553,16 +2566,21 @@ a^1
 &&(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{n+1} := a^n\, a)\\
 &= \log(a^n) + \log a
 &&(\because\ \blkref{real_log_of_product}\ \text{を}\ a^n, a \in \mathbb{R}_{>0}\ \text{に})\\
-&= n\log a + \log a
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a + \log a
 &&(\because\ \text{帰納法の仮定})\\
-&= (n+1)\log a
-&&(\because\ \mathbb{R}\ \text{の分配法則})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a + 1_{\mathbb{R}}\cdot\log a
+&&(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元})\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\log a
+&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}})\,\log a
+&&(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ \text{を右辺から左辺へ})
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-05: limit_of_log_Z_in_N_row の証明が根拠「log(c^N) = N log c」「log(2^M) = M log 2」をラベルなしで使っていたので、real_log_of_product から帰納法で示す主張にした。冪は def_power_of_real_number。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 右辺の n log a は n ∈ ℤ と log a ∈ ℝ の積で、ℤ の元を ℝ の積へ入れる写像が名指されていなかった（証明の書き方の「同一視をしない」）。inclusion_zz_to_rr の ι_{ℤ→ℝ} を通して ι(n) log a と書き、n = 1 の鎖に ι(1) = 1（inclusion_zz_to_rr_of_one）の行、帰納法の段に 1·log a と ι(n) + 1 = ι(n+1)（inclusion_zz_to_rr の定義）の行を足した。値は不変。",
       ],
     },
   },

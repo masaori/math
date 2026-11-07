@@ -16,10 +16,10 @@
 | --- | --- | --- | --- |
 | `real_log_strictly_increasing` | `log u < log v` でないと仮定し三分律 → `log v < log u` なら `v = exp(log v) < exp(log u) = u`、`log v = log u` なら `v = exp(log v) = exp(log u) = u` → どちらも `u < v` と矛盾 | `inv_strictMono`（同じ段） | `G` の順序の三分律、`R` の `<` の非対称性と非反射性、`f` の狭義単調性、`P y` なら `f(L y) = y` |
 | `real_log_of_product` | `exp(log a + log b) = exp(log a)exp(log b) = ab` → `log(ab) = log(exp(log a + log b)) = log a + log b` | `inv_map_mul`（同じ段） | `f(x + y) = f(x)f(y)`、`P y` なら `f(L y) = y`、`L(f x) = x`、`P` が積で閉じること |
-| `real_log_of_power` | `n` の帰納法。`n = 1` は `a^1 = a^0a = 1·a = a` と `log(a^1) = log a = 1·log a`、`n → n+1` は `log(a^{n+1}) = log(a^na) = log(a^n) + log a = n log a + log a = (n+1) log a` | `inv_map_pow`（同じ段） | 積の法則（`real_log_of_product` の形）、`P` が積で閉じること、`1 • x = x` と `(n+1) • x = n • x + x`（`G` の `n` 倍）、`a^1 = a^0a`・`a^0 = 1`・`1a = a`（`R` の冪）。`[AddMonoid G]`・`[Monoid R]` は記法 `•`・`^` のためで、加法・乗法の結合則は効いていない |
+| `real_log_of_power` | `n` の帰納法。`n = 1` は `a^1 = a^0a = 1·a = a` と `log(a^1) = log a = 1·log a = ι(1) log a`、`n → n+1` は `log(a^{n+1}) = log(a^na) = log(a^n) + log a = ι(n) log a + log a = ι(n) log a + 1·log a = (ι(n)+1) log a = ι(n+1) log a` | `inv_map_pow`（同じ段。ただし `1·log a = ι(1) log a` は `one_nsmul` の 1 段、`ι(n) log a + log a = … = ι(n+1) log a` の 3 行は `succ_nsmul` の 1 段にまとまる。`G` の `n` 倍では `ι` と `G` の積を分けて書けないため） | 積の法則（`real_log_of_product` の形）、`P` が積で閉じること、`1 • x = x` と `(n+1) • x = n • x + x`（`G` の `n` 倍）、`a^1 = a^0a`・`a^0 = 1`・`1a = a`（`R` の冪）。`[AddMonoid G]`・`[Monoid R]` は記法 `•`・`^` のためで、加法・乗法の結合則は効いていない |
 
 - **効いていないもの**: `exp` の連続性・全射性（人手の定義が実解析の事実として使うもの）、`G`・`R` が `ℝ` であること、
-  `G` の乗法（人手の `n log a` の実数の積は、`G` の `n` 倍 `n • L a` で足りる）、`R` の加法、`R` の乗法の可換性。
+  `G` の乗法（人手の `ι(n) log a` の実数の積は、`G` の `n` 倍 `n • L a` で足りる）、`R` の加法、`R` の乗法の可換性。
 - 狭義単調性の証明は `f` の加法の法則も `L(f x) = x` も使わない。積の法則の証明は順序を使わない。
 -/
 import Mathlib.Algebra.Group.Basic

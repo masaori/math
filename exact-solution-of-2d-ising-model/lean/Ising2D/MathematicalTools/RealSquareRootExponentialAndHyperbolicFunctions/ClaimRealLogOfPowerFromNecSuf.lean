@@ -1,5 +1,5 @@
 /-
-# `log(a^n) = n log a`（具体版を必要十分版から導く）
+# `log(a^n) = ι(n) log a`（具体版を必要十分版から導く）
 
 具体版 `ClaimRealLogOfPower.lean` の主張を、必要十分版
 `Ising2D/NecSuf/InverseOfAdditiveToMultiplicativeMap.lean` の `NecSuf.inv_map_pow` の

@@ -1028,6 +1028,15 @@ targets=(
   "Ising2D.NecSuf.cast_add'"
   "Ising2D.NecSuf.sum_const_fin_succ'"
   "Ising2D.NecSuf.cast_two_pow'"
+  Ising2D.inclusion_zz_to_rr_of_positive_is_at_least_one
+  Ising2D.inclusion_zz_to_rr_of_nonpositive_is_nonpositive
+  Ising2D.inclusion_zz_to_rr_is_monotone_on_nonnegatives
+  Ising2D.inclusion_zz_to_rr_of_positive_is_at_least_one_of_necSuf
+  Ising2D.inclusion_zz_to_rr_of_nonpositive_is_nonpositive_of_necSuf
+  Ising2D.inclusion_zz_to_rr_is_monotone_on_nonnegatives_of_necSuf
+  "Ising2D.NecSuf.one_le_cast'"
+  "Ising2D.NecSuf.int_cast_nonpos'"
+  "Ising2D.NecSuf.cast_mono'"
   Ising2D.card_conf_nat
   Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries
   Ising2D.rayleighSup_physicalSymTransferR_eq
