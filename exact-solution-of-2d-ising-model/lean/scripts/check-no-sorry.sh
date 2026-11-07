@@ -858,6 +858,12 @@ targets=(
   "Ising2D.NecSuf.bilinear_value_of_scalar_multiple_vector'"
   "Ising2D.NecSuf.finite_sum_mul_left'"
   "Ising2D.NecSuf.finite_sum_ge_term'"
+  Ising2D.real_bilinear_value_is_sum_with_real_matrix_vector_product
+  Ising2D.real_symmetric_matrix_moves_between_factors_of_sum_of_products
+  Ising2D.real_bilinear_value_is_sum_with_real_matrix_vector_product_of_necSuf
+  Ising2D.real_symmetric_matrix_moves_between_factors_of_sum_of_products_of_necSuf
+  "Ising2D.NecSuf.bilinear_value_is_sum_with_matrix_vector_product'"
+  "Ising2D.NecSuf.symmetric_matrix_moves_between_factors_of_sum_of_products'"
   "Ising2D.NecSuf.dotProduct_mulVec_eq_double_sum'"
   "Ising2D.NecSuf.abs_bilinear_row_le_row_abs_sum'"
   "Ising2D.NecSuf.bilinear_value_at_most_value_at_absolute_vector'"

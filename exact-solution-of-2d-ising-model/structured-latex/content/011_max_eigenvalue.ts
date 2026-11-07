@@ -476,6 +476,146 @@ w^\top Pw
   },
 
   {
+    id: "maxeig_claim_real_bilinear_value_is_sum_with_real_matrix_vector_product",
+    kind: "claim",
+    title: {
+      text: "実数の双線型値 u^⊤Pv は、u の成分と Pv の成分の積の和である",
+    },
+    labels: ["real_bilinear_value_is_sum_with_real_matrix_vector_product"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "、",
+        math(String.raw`u, v \in \mathbb{R}^n`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）とする。",
+        math(String.raw`u^\top Pv \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値、",
+        math(String.raw`Pv \in \mathbb{R}^n`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m \to n,\ n \to n,\ P \to P,\ x \to v`),
+        "）の積である。このとき",
+      ]),
+      displayMath(String.raw`u^\top P v = \sum_{k=1}^{n} u_k\,(Pv)_k`),
+      paragraph([
+        "が成り立つ。右辺の ",
+        math(String.raw`u_k\,(Pv)_k`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の積、",
+        math(String.raw`\sum`),
+        " は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の結合則・分配則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+u^\top Pv
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,v_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to v)\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,\bigl(P_{kl}\,v_l\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&=\sum_{k=1}^{n} u_k\sum_{l=1}^{n} P_{kl}\,v_l
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to u_k,\ x_j \to P_{kj}\,v_j)\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n} u_k\,(Pv)_k
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to P,\ x \to v,\ i \to k。\text{和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を右辺から左辺へ、各}\ k\ \text{へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v^⊤Wv の展開で (εu)^⊤W(εu) = u^⊤Wu を「ε は W と可換で ε^2 = I」の名前だけで出していた。W_ℝ・ε_ℝ で書き直すと、行列とベクトルの積の等式（real_matrix_vector_product_is_associative・real_identity_matrix_is_left_unit_of_real_matrix_vector_product・epsilon_real_commutes_with_W_real・epsilon_real_square_is_identity）を双線型値へ運ぶ段が要るので、その形として足した。実数の行列の積の結合則と右単位の主張は本文に無いので、行列の積ではなく行列とベクトルの積の等式を運ぶ形にした。引く finite_sum_of_real_scalar_multiples・def_real_matrix_vector_product の記号 x とぶつからないよう、ベクトルを u・v と書く。数値検証: sagemath/check/real_bilinear_value_is_sum_with_real_matrix_vector_product/。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_real_symmetric_matrix_moves_between_factors_of_sum_of_products",
+    kind: "claim",
+    title: {
+      text: "対称な実数の行列は、成分の積の和で左の因子から右の因子へ移せる",
+    },
+    labels: ["real_symmetric_matrix_moves_between_factors_of_sum_of_products"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`Q \in \mathrm{Mat}(n,\mathbb{R})`),
+        " が対称（",
+        ref("def_real_symmetric_matrix"),
+        "（",
+        math(String.raw`P \to Q`),
+        "））であるとし、",
+        math(String.raw`u, v \in \mathbb{R}^n`),
+        " とする。",
+        math(String.raw`Qu, Qv \in \mathbb{R}^n`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m \to n,\ n \to n,\ P \to Q`),
+        "）の積である。このとき",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n} (Qu)_k\,v_k = \sum_{k=1}^{n} u_k\,(Qv)_k`),
+      paragraph([
+        "が成り立つ。各項は ",
+        math(String.raw`\mathbb{R}`),
+        " の積、",
+        math(String.raw`\sum`),
+        " は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の結合則・可換則・分配則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n} (Qu)_k\,v_k
+&=\sum_{k=1}^{n} \Bigl(\sum_{l=1}^{n} Q_{kl}\,u_l\Bigr)\,v_k
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to u,\ i \to k。\text{和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n} v_k\sum_{l=1}^{n} Q_{kl}\,u_l
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則を各}\ k\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} v_k\,\bigl(Q_{kl}\,u_l\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to v_k,\ x_j \to Q_{kj}\,u_j)\ \text{を右辺から左辺へ、各}\ k\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} v_k\,\bigl(Q_{lk}\,u_l\bigr)
+&&\bigl(\because\ Q\ \text{は対称}\ \blkref{def_real_symmetric_matrix}\ (P \to Q,\ k \to k,\ l \to l)\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(Q_{lk}\,u_l\bigr)\,v_k
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_l\,Q_{lk}\bigr)\,v_k
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ Q_{lk}\,u_l = u_l\,Q_{lk}\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} u_l\,\bigl(Q_{lk}\,v_k\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&=\sum_{l=1}^{n}\sum_{k=1}^{n} u_l\,\bigl(Q_{lk}\,v_k\bigr)
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to u_l\,(Q_{lk}\,v_k))\bigr)\\
+&=\sum_{l=1}^{n} u_l\sum_{k=1}^{n} Q_{lk}\,v_k
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to u_l,\ x_j \to Q_{lj}\,v_j)\ \text{を各}\ l\ \text{へ}\bigr)\\
+&=\sum_{k=1}^{n} u_k\,(Qv)_k
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to v,\ i \to l。\text{和の添字}\ j\ \text{を}\ k\ \text{と書く})\ \text{を右辺から左辺へ、各}\ l\ \text{へ。外側の和の添字}\ l\ \text{を}\ k\ \text{と書く}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 の (εu)^⊤W(εu) = u^⊤Wu を W_ℝ・ε_ℝ で書き直すとき、real_bilinear_value_is_sum_with_real_matrix_vector_product で開いた和の左の因子 (ε_ℝu)_k の ε_ℝ を右の因子へ移す段に引くために足した。実数の行列の転置は本文に定義が無いので、対称な行列に限って述べた（引く側の ε_ℝ は epsilon_real_is_symmetric により対称）。数値検証: sagemath/check/real_symmetric_matrix_moves_between_factors_of_sum_of_products/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
     kind: "claim",
     title: {
