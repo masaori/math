@@ -84,7 +84,7 @@
 | `Ising2D.symmetrized_pow_succ` | `BB = V₁` のもとで `((BV₂)B)^{k+1} = ((B(V₂V₁)^k)V₂)B` | 同 準備 3（`k = 0` の 6 行と帰納段階の 12 行） |
 | **`Ising2D.trace_mul_pow_eq_trace_symmetrized_pow`** | 係数が `ℂ` の行列で、`n ≥ 1` なら `tr((V₁V₂)^n) = tr(((BV₂)B)^n)` | **`Z_equals_trace_of_W`** の本体（6 行） |
 | `Ising2D.partition_function_eq_trace_physicalSymTransferC`（`PhysicalPartitionFunctionSandwich.lean`） | 具体的な `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`W` は `physicalSymTransferC`、`(·)_ℂ` は Lean の `((· : ℝ) : ℂ)`） | 同「とくに」（2 行） |
-| `Ising2D.trace_mul_pow_eq_trace_symTransfer_pow` / `partition_function_eq_trace_symTransfer_pow`（`ClaimZEqualsTraceOfWFromNecSuf.lean`） | 係数が `ℝ` の行列での同じ等式（必要十分版の特殊化）と、`Z = tr((V₁V₂)^N)` を仮定に取る「とくに」 | `partition_function_sandwich` が使う読み |
+| `Ising2D.trace_mul_pow_eq_trace_symTransfer_pow` / `partition_function_eq_trace_symTransfer_pow`（`ClaimZEqualsTraceOfWFromNecSuf.lean`） | 係数が `ℝ` の行列での同じ等式（必要十分版の特殊化）と、`Z = tr((V₁V₂)^N)`（本文には無い、実成分の行列で述べた仮定の形。本文の主張は `(Z)_ℂ = tr((V_1V_2)^N)`）を仮定に取る「とくに」 | `partition_function_sandwich` が使う読み |
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR`（`PhysicalSymTransferBridge.lean`） | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
@@ -205,7 +205,7 @@
   `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
   転送行列であることも使わない。具体版はこの一般定理へ物理的な四因子を特殊化して得られる。
 
-- **`Z = tr(W^n)` に効いているのは、積の結合律・単位元・冪の定め方（モノイド）と、跡の巡回性 `τ(ab) = τ(ba)` だけである。**
+- **`tr((V₁V₂)^n) = tr(W^n)` に効いているのは、積の結合律・単位元・冪の定め方（モノイド）と、跡の巡回性 `τ(ab) = τ(ba)` だけである。**
   必要十分版 `NecSuf/OpenProductPowAndCyclicTrace.lean` は具体版と同じ段の calc を、任意のモノイドと巡回的な写像 `τ` で述べる。
   加法・係数・`τ` の線型性、`B` が平方根・可逆・正定値であることは効かない（`BB = V₁` だけを仮定する）。
   係数が `ℂ` の具体版（人手の主張）と、使う側の係数が `ℝ` の読みは、どちらもこの特殊化として得られる。

@@ -28,7 +28,7 @@
 | --- | --- |
 | `def_transfer_matrix_square_root`: `V_1^{1/2}V_1^{1/2} = exp(K_1D) = V_1`（`theorem_exp_product`、`½K_1D` は自分自身と可換） | `physicalV1halfC_mul_self` |
 | 同じ等式の実行列での表示 | `physicalV1halfR_mul_self_map` |
-| `Z_equals_trace_of_W` の「とくに」: 具体的な `Z(K_1,K_2) = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
+| `Z_equals_trace_of_W` の「とくに」: 具体的な `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
 | `trace_of_W_power_via_W_real`: `W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q`（`real_matrix_of_real_entry_matrix_preserves_power`、`n → d`, `A → W`）、4 行の鎖 `tr(W^q) = Σ_k (W^q)_kk = Σ_k (((W^q)_ℝ)_kk)_ℂ = Σ_k (((W_ℝ)^q)_kk)_ℂ = (Σ_k ((W_ℝ)^q)_kk)_ℂ` | `trace_of_W_power_via_W_real` の `calc` の 4 段 |
 | 「とくに」を実行列 `W_ℝ` で読む（`trace_of_W_power_via_W_real` の `q → N_row` と `inclusion_rr_to_cc_is_injective`） | `partitionFunction_eq_trace_physicalSymTransferR_pow` |
 | Step 1 の準備: `m^+`、`σ^z_{m+1} = σ^z_{m^+}`（Lean の `D` は `nextSite` で書いてあるので定義どおり） | `nextSite`（`rfl`） |
@@ -72,7 +72,7 @@
 | 可逆性: `B ∈ R^×`（`def_invertible_elements_of_R` の `g → B`, `h → B'`。`B'B = I` は Step 2） | `physicalV1halfC_isUnit` |
 | 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
 | 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
-| `partition_function_sandwich`（`Z = tr(W^{N_row})` → `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
+| `partition_function_sandwich`（準備の `Z(K_1,K_2) = T`（`T := Σ_k ((W_ℝ)^{N_row})_kk`）→ `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
 - Step 3 の `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor` は、添字が `Conf M` の行列なので
   `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` の

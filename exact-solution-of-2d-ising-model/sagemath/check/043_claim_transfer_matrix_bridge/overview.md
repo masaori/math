@@ -22,7 +22,7 @@
 `second_transfer_matrix_pauli_form` として示す。ここでは
 
 1. 成分定義の `V_1, V_2` とパウリ行列表示が**行列として一致すること**
-2. スピン配置についての**直接和で定義された分配関数** `Z(K_1,K_2)` が `tr((V_1V_2)^{N_row})` に一致すること
+2. スピン配置についての**直接和で定義された分配関数** `Z(K_1,K_2)` を `inclusion_rr_to_cc` で複素数へ送った `(Z(K_1,K_2))_ℂ` が `tr((V_1V_2)^{N_row})` に一致すること
 3. `ε` の偶セクターへの射影子 `P^{(+)}` の性質と、`ε`・`P^{(+)}` が転送行列と可換であること
    （`partition_function_projection_and_jordan_wigner.ts`）
 
@@ -74,7 +74,7 @@
 | 01 | check_01_V1_bridge.sage | `V_1` の成分定義とパウリ行列表示の一致、`σ^z` の対角作用、周期端 `σ_M^zσ_1^z` の作用 | PASS | 全 7 ケース残差 **0.00e+00**（厳密に一致） |
 | 02 | check_02_V2_bridge.sage | `2×2` の恒等式、`A` のクロネッカー冪、`V_2` の一致 | PASS | 最大残差 2.4e-14 |
 | 03 | check_03_epsilon_projectors.sage | `P^{(+)}` の性質、`ε`・`P^{(+)}` と転送行列の可換性 | PASS | 最大残差 1.5e-14 |
-| 04 | check_04_partition_function.sage | `Z(K_1,K_2)`（直接和）` = tr((V_1V_2)^{N_row})` | PASS | 相対誤差 最大 2.0e-15。取り違えは相対誤差 0.09〜0.44 で明確に不一致 |
+| 04 | check_04_partition_function.sage | `(Z(K_1,K_2))_ℂ`（`Z` は直接和）` = tr((V_1V_2)^{N_row})` | PASS | 相対誤差 最大 2.0e-15。取り違えは相対誤差 0.09〜0.44 で明確に不一致 |
 
 ## 検証した式
 
@@ -109,8 +109,8 @@ im P^{(+)} = F^{(+)}:  ε P^{(+)} = P^{(+)}（⊆）,  F^{(+)} の基底 f = e_k
 check_04（`partition_function_via_transfer_matrix`）:
 
 ```
-Z(K_1,K_2) = Σ_s exp( Σ_{i,j} ( K_1 s(i,j)s(i,j+1) + K_2 s(i,j)s(i+1,j) ) )
-           = tr( (V_1 V_2)^{N_row} )        （成分定義でもパウリ行列表示でも）
+Z(K_1,K_2) = Σ_s exp( Σ_{i,j} ( K_1 s(i,j)s(i,j+1) + K_2 s(i,j)s(i+1,j) ) )      （ℝ）
+(Z(K_1,K_2))_ℂ = tr( (V_1 V_2)^{N_row} )   （ℂ。(·)_ℂ は inclusion_rr_to_cc。成分定義でもパウリ行列表示でも）
 ```
 
 **結合定数の向きの確定**: `K_1` と `K_2` を取り違えた `tr((V_1(K_2) V_2(K_1))^{N_row})` は、

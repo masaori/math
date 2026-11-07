@@ -1,4 +1,4 @@
-import { defineBlocks, diagram, displayMath, list, math, paragraph } from "../schema.ts";
+import { defineBlocks, diagram, displayMath, list, math, paragraph, ref } from "../schema.ts";
 
 /**
  * 論文の冒頭に置く章「この論文について」。論文のゴールと、部と章の並び（冒頭に章の依存関係の図を置く）と、
@@ -274,8 +274,12 @@ export default defineBlocks([
     labels: ["chapter_organization_goal_transfer_matrix_representation"],
     statement: [
       paragraph([
-        "分配関数 ",
+        "実数である分配関数 ",
         math(String.raw`Z`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " で複素数へ送った ",
+        math(String.raw`\bigl(Z\bigr)_{\mathbb{C}}`),
         " が、Pauli 行列から作った ",
         math(String.raw`2^M\times2^M`),
         " 複素行列の積の ",
@@ -283,9 +287,10 @@ export default defineBlocks([
         " 乗のトレースで書けることを示す式である。",
       ]),
       paragraph(["この章のゴールの式は次である（転送行列 ", math(String.raw`V_1, V_2`), " による表示 ",
-        math(String.raw`Z=\mathrm{tr}\left((V_1V_2)^{N}\right)`), " に、", math(String.raw`V_1, V_2`), " の Pauli 行列による表示を代入した式）。"]),
-      displayMath(String.raw`Z=\mathrm{tr}\left(\left(\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right)
+        math(String.raw`\bigl(Z\bigr)_{\mathbb{C}}=\mathrm{tr}\left((V_1V_2)^{N}\right)`), " に、", math(String.raw`V_1, V_2`), " の Pauli 行列による表示を代入した式）。"]),
+      displayMath(String.raw`\bigl(Z\bigr)_{\mathbb{C}}=\mathrm{tr}\left(\left(\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right)
 (2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)\right)^{N}\right)`),
+      paragraph(["右辺のトレースは複素数なので、実数 ", math(String.raw`Z`), " は複素数へ送ってから等号で結ぶ。"]),
     ],
   },
   {

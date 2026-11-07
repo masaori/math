@@ -7,8 +7,9 @@
 人手証明は `Z_equals_trace_of_W` と `trace_power_sandwich` を合わせるだけなので、
 本ファイルもそれをそのまま写す。
 
-**章 001 への依存**: `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（ラベル `partition_function_via_transfer_matrix`、
-Lean では `Ising2D.partition_function_via_transfer_matrix`）は **仮定 `hZ` として受け取る**
+**章 001 への依存**: 本文の主張 `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})`（ラベル `partition_function_via_transfer_matrix`、
+`(·)_ℂ` は `inclusion_rr_to_cc`、Lean では `Ising2D.partition_function_via_transfer_matrix`）を、実成分の行列で述べた ℝ の等式
+`Z = tr((V₁V₂)^{N_row})` の形で **仮定 `hZ` として受け取る**。この形は本文には無い（本文は実成分の `V_1, V_2` を定めない）。
 （本定理は一般の実行列について述べてあり、その具体化で使う）。
 
 必要十分版は置かない（この主張は `trace_power_sandwich` の言い換えであり、
@@ -29,7 +30,7 @@ variable {n : Type*} [Fintype n] [DecidableEq n] [Nonempty n]
 * `hBB : B * B = V₁`（`B = V₁^{1/2}`）
 * `hB`, `hBunit`: `V₁^{1/2}` は実対称かつ可逆
 * `hV2symm`, `hV2pd`: `V₂` は実対称正定値（章 009 の帰結。`Ising2D.matExp_posDef` で作れる）
-* `hZ`: `Z = tr((V₁V₂)^{N_row})`（**章 001 の `partition_function_via_transfer_matrix`**）
+* `hZ`: `Z = tr((V₁V₂)^{N_row})`（**章 001 の `partition_function_via_transfer_matrix`** の主張 `(Z)_ℂ = tr((V_1V_2)^{N_row})` を実成分の行列で述べた ℝ の等式。本文には無い形）
 
 結論は `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}`（Ising では `dim = 2^M`）。 -/
 theorem partition_function_sandwich {B V1 V2 : Matrix n n ℝ} (hBB : B * B = V1)

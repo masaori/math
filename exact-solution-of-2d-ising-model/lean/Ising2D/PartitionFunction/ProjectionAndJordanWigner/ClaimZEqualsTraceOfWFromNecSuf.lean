@@ -32,7 +32,7 @@ theorem trace_mul_pow_eq_trace_symTransfer_pow {B V1 V2 : Matrix n n ℝ} (hBB :
   NecSuf.trace_mul_pow_eq_trace_sandwich_pow Matrix.trace Matrix.trace_mul_comm hBB rfl N hN
 
 /-- 人手 `Z_equals_trace_of_W` の「とくに」を使う側の読みで: `Z = tr((V_1V_2)^{N_row})`
-（`partition_function_via_transfer_matrix`。仮定 `hZ` で受け取る）のもとで `Z = tr(W^{N_row})`（2 行）。 -/
+（`partition_function_via_transfer_matrix` の主張 `(Z)_ℂ = tr((V_1V_2)^{N_row})` を実成分の行列で述べた ℝ の等式。本文には無い形。仮定 `hZ` で受け取る）のもとで `Z = tr(W^{N_row})`（2 行）。 -/
 theorem partition_function_eq_trace_symTransfer_pow {B V1 V2 : Matrix n n ℝ} (hBB : B * B = V1)
     {Z : ℝ} {N : ℕ} (hN : 1 ≤ N) (hZ : Z = ((V1 * V2) ^ N).trace) :
     Z = (symTransfer B V2 ^ N).trace :=

@@ -1,5 +1,5 @@
 /-
-# 転送行列による分配関数の表式 `Z(K_1,K_2) = tr((V_1V_2)^{N_row})`
+# 転送行列による分配関数の表式 `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})`
 
 対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 

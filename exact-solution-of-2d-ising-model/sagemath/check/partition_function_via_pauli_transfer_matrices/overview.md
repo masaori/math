@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `transfer_matrix_representation_claim_partition_function_via_pauli_transfer_matrices`）
 - 主張: `K_1, K_2 > 0` のとき
-  `Z(K_1,K_2) = tr((exp(K_1 Σ_{m=1}^{M_col} σ^z_m σ^z_{m+1}) (2 sinh 2K_2)^{M_col/2} exp(K_2^* Σ_{m=1}^{M_col} σ^x_m))^{N_row})`
+  `(Z(K_1,K_2))_ℂ = tr((exp(K_1 Σ_{m=1}^{M_col} σ^z_m σ^z_{m+1}) (2 sinh 2K_2)^{M_col/2} exp(K_2^* Σ_{m=1}^{M_col} σ^x_m))^{N_row})`（`(·)_ℂ` は `inclusion_rr_to_cc`）
 - 範囲: statement と proof の式変形 3 行（`partition_function_via_transfer_matrix`、
   `first_transfer_matrix_pauli_form`、`second_transfer_matrix_pauli_form` の代入）
 

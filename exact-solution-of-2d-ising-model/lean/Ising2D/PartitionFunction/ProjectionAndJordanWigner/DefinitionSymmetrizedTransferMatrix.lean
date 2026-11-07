@@ -1,5 +1,5 @@
 /-
-# 対称化転送行列 `W := V₁^{1/2} V₂ V₁^{1/2}` と `Z = tr(W^{N_row})`
+# 対称化転送行列 `W := V₁^{1/2} V₂ V₁^{1/2}` と `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`
 
 正本: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 
@@ -24,7 +24,7 @@
 それらの Lean 形式化は本タスクの担当外なので **import せず仮定として受け取る**。
 具体的には次を仮定の形にしている。
 
-1. `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` と `ClaimZEqualsTraceOfWFromNecSuf.lean` の `partition_function_eq_trace_symTransfer_pow` の仮定（具体的な `Z` については `PhysicalPartitionFunctionSandwich.lean` が Lean の `partition_function_via_transfer_matrix` を引く）。
+1. `(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`。`(·)_ℂ` は `inclusion_rr_to_cc`。仮定の形で受け取る側は、実成分の行列で述べた `Z = tr((V₁V₂)^{N_row})`（ℝ の等式。本文には無い形）を受け取る）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` と `ClaimZEqualsTraceOfWFromNecSuf.lean` の `partition_function_eq_trace_symTransfer_pow` の仮定（具体的な `Z` については `PhysicalPartitionFunctionSandwich.lean` が Lean の `partition_function_via_transfer_matrix` を引く）。
 2. `V₁^{1/2}` が**正の対角行列**であること（章 009 の `sigma_z_diagonal_action` +
    `exp_of_diagonal_matrix`）— ここでは `Ising2D.diagExp d`（`d : n → ℝ`）として与える。
    人手証明の `d μ = (1/2)K₁ ∑_m μ(m)μ(m+1)` に対応する。
@@ -53,11 +53,11 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 /-- 人手証明の `W := V₁^{1/2} V₂ V₁^{1/2}`（`B = V₁^{1/2}`）。 -/
 def symTransfer (B V2 : Matrix n n ℝ) : Matrix n n ℝ := B * V2 * B
 
-/-! ## `Z = tr(W^{N_row})`（人手 `Z_equals_trace_of_W`）
+/-! ## `Z_ℂ = tr(W^{N_row})`（人手 `Z_equals_trace_of_W`）
 
 人手は `B, V_1, V_2 ∈ Mat(2^{M_col}, ℂ)` で述べるので、具体版も係数が `ℂ` の行列について、人手の準備 2・準備 3・本体の鎖と
 同じ段の calc で置く（準備 1 の `BB = V_1`・`W = (BV_2)B` は仮定 `hBB`・`hW` として受け取る）。「とくに」の
-`Z(K_1,K_2) = tr(W^{N_row})` は、具体的な `V_1`・`V_2`・`V_1^{1/2}` について
+`(Z(K_1,K_2))_ℂ = tr(W^{N_row})` は、具体的な `V_1`・`V_2`・`V_1^{1/2}` について
 `ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean` の `partition_function_eq_trace_physicalSymTransferC` に置く。
 人手の `X^0 := I`、`X^{m+1} := X^m X`（`def_exp` (1)）は mathlib の `pow_zero`・`pow_succ` と同じ定め方である。
 `mat_mult_associative` は具体版が無いので、既存の慣行どおり `Matrix.mul_assoc` を 1 段に 1 回ずつ引く。
