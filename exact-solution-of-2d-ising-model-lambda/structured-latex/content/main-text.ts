@@ -8347,19 +8347,19 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
   i
   &=\sigma^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)\\
   &=\sigma^{[0]}(j)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr)\\
-  &=j&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+  &=j&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)
 \end{aligned}`),
                 paragraph(["ある ", math(String.raw`n\in\mathbb N`), " で、含意がすべての二点について成り立つと仮定する。任意の ", math(String.raw`i,j\in\mathcal J`), " を取り、", math(String.raw`\sigma^{[n+1]}(i)=\sigma^{[n+1]}(j)`), " と仮定すると、"]),
                 displayMath(String.raw`\begin{aligned}
   \sigma^{[n]}\bigl(\sigma(i)\bigr)
   &=\sigma^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
   &=\sigma^{[n+1]}(j)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr)\\
-  &=\sigma^{[n]}\bigl(\sigma(j)\bigr)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+  &=\sigma^{[n]}\bigl(\sigma(j)\bigr)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`\sigma(i),\sigma(j)\in\mathcal J`), " なので、この二点に帰納法の仮定を適用できる。"]),
                 displayMath(String.raw`\begin{aligned}
-  \sigma(i)&=\sigma(j)&&\bigl(\because\ \text{直前の等式と帰納法の仮定}\bigr),\\
-  i&=j&&\bigl(\because\ \text{全単射 }\sigma\text{ の単射性}\bigr).
+  \sigma(i)&=\sigma(j)&&\bigl(\because\ \text{直前の等式と帰納法の仮定}\bigr)\\
+  i&=j&&\bigl(\because\ \text{全単射 }\sigma\text{ の単射性}\bigr)
 \end{aligned}`),
                 paragraph(["これで帰納法が閉じる。", math(String.raw`\mathcal J=\varnothing`), " の場合は二点を取れず、含意は全称命題として成り立つ。有限集合上の写像と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
               ],
@@ -66021,6 +66021,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",

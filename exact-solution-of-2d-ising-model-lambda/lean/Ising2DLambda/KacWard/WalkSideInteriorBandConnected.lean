@@ -825,4 +825,25 @@ theorem walkSideInteriorBand_nonempty_edgeConnected
   exact walkSideInteriorBand_nonempty_edgeConnected_local n row col hn
     hnonempty hlocal hbridge
 
+/-- 実際の閉歩道について、歩道沿いの内側帯は空でなく辺連結である。 -/
+theorem walkSideInteriorBandFromWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    (walkSideInteriorBandFromWalk γ hγ hh hv).Nonempty ∧
+      EdgeConnectedCellSet (walkSideInteriorBandFromWalk γ hγ hh hv) := by
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
+  have hband := walkSideInteriorBand_nonempty_edgeConnected (m + 1) row col
+    (by omega) hclosed.1 hclosed.2
+    (walkSideInteriorBandFromWalk_coordinate_unit γ)
+    (walkSideInteriorBandFromWalk_coordinate_distinct γ hdistinct)
+    (walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one γ hγ hh hv hdistinct)
+  rw [walkSideInteriorBandFromWalk_eq_coordinateBand γ hγ hh hv]
+  exact hband
+
 end Ising2DLambda.KacWard

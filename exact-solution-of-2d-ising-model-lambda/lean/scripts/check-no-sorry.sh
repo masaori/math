@@ -1702,6 +1702,7 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf
   Ising2DLambda.KacWard.edgeConnectedCellSet_from_necSuf
   Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected
+  Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_nonempty_edgeConnected
   Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_distinct_positive
   Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive
   Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one
