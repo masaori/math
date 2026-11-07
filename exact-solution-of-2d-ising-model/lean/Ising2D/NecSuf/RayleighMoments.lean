@@ -5,7 +5,7 @@
 * **`rayleigh_bounds_operator_norm`**（`maxeig_007_claim_operator_bound`）
 * **`trace_power_upper_bound`** の偶数・奇数の場合（`maxeig_008a_claim_trace_power_upper_bound`。`moment_le_pow`）
 * **`moment_log_convexity`**（`maxeig_008b_claim_moment_log_convexity`。`moment_pos`・`moment_log_convex`）
-* **`trace_power_sandwich`** の Step 2・Step 3（`maxeig_008_claim_trace_power_sandwich`）
+* **`trace_power_sandwich`** の【単位ベクトルでの評価】の `m_k ≥ m_1m_{k-1}`・`m_p ≥ m_1^p`（`maxeig_008_claim_trace_power_sandwich`。`moment_ratio_le`・`moment_pow_le`）
 
 具体版:
 * `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
@@ -300,9 +300,11 @@ namespace IsPdPair
 
 variable {ip : V →ₗ[R] V →ₗ[R] R} {W : V →ₗ[R] V}
 
-/-- 比 `m_{k+1}/m_k` が非減少であることの言い換え: `m_1 · m_k ≤ m_{k+1}`（`m_0 = 1`）。
+/-- `m_1 · m_k ≤ m_{k+1}`（`m_0 = 1`）。
 
-人手証明 `trace_power_sandwich` の Step 3 前半。 -/
+人手証明 `trace_power_sandwich` の【単位ベクトルでの評価】の `k ≥ 1` で `m_k ≥ m_1m_{k-1}`（添字を `k → k+1` とずらした形）。
+具体版は `Ising2D.moment_ge_moment_one_mul_prev`（`ClaimTracePowerSandwichUnitVectorBound.lean`）。帰納法の一歩の論法は具体版と違い、
+人手と具体版は商 `m_k/m_{k-1} ≥ m_1` を経る 2 段と 5 段で、ここは両辺に `m_k` を掛けた不等式を作ってから `m_k > 0` で約す。 -/
 theorem moment_ratio_le (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (hx1 : ip x x = 1) (k : ℕ) :
     (ip x ((W ^ 1) x)) * (ip x ((W ^ k) x)) ≤ ip x ((W ^ (k + 1)) x) := by
   induction k with
@@ -326,8 +328,9 @@ theorem moment_ratio_le (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (hx1 : ip x x
 
 /-- **`(x ᵀ W x)^n ≤ m_n`**（`x` は単位ベクトル）。
 
-人手証明 `trace_power_sandwich` の Step 3 の
-`m_n = (m_n/m_{n-1})⋯(m_1/m_0) ≥ (m_1/m_0)^n = (xᵀWx)^n` に対応する。 -/
+人手証明 `trace_power_sandwich` の【単位ベクトルでの評価】の `m_p ≥ m_1^p`（`p` の帰納法。手順は具体版と同じ）。
+具体版は `Ising2D.moment_ge_moment_one_pow`（`ClaimTracePowerSandwichUnitVectorBound.lean`）、具体版と同じ型での導出は
+`Ising2D.moment_ge_moment_one_pow_of_necSuf`（`ClaimTracePowerSandwichUnitVectorBoundFromNecSuf.lean`）。 -/
 theorem moment_pow_le (h : IsPdPair ip W) {x : V} (hx : x ≠ 0) (hx1 : ip x x = 1) (n : ℕ) :
     (ip x (W x)) ^ n ≤ ip x ((W ^ n) x) := by
   have hW1 : ip x ((W ^ 1) x) = ip x (W x) := by

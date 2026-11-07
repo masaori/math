@@ -721,6 +721,21 @@ targets=(
   Ising2D.moment_log_convexity
   Ising2D.moment_log_convexity_physical
   Ising2D.moment_log_convexity_of_necSuf
+  Ising2D.power_one_of_W_real
+  Ising2D.norm_sq_pos_of_component_ne_zero
+  Ising2D.norm_pos_of_component_ne_zero
+  Ising2D.norm_of_inverse_norm_multiple_is_one
+  Ising2D.standard_basis_real_bilinear_value
+  Ising2D.power_of_W_real_is_positive_semidefinite
+  Ising2D.power_of_W_real_entry_bound
+  Ising2D.sum_sq_of_unit_vector
+  Ising2D.moment_zero_eq_one
+  Ising2D.moment_one_eq
+  Ising2D.moment_ge_moment_one_mul_prev
+  Ising2D.moment_ge_moment_one_pow
+  Ising2D.moment_le_trace_of_power
+  Ising2D.real_bilinear_value_pow_le_trace_of_power
+  Ising2D.moment_ge_moment_one_pow_of_necSuf
   Ising2D.quad_pow_le_trace_pow
   Ising2D.rayleighSup_pow_le_trace_pow
   Ising2D.trace_power_sandwich
