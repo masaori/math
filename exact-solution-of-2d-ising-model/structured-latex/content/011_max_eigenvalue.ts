@@ -97,6 +97,64 @@ export default defineBlocks([
   },
 
   {
+    id: "maxeig_claim_real_bilinear_value_of_symmetric_matrix_is_symmetric",
+    kind: "claim",
+    title: { text: "対称な実数の行列について、u^⊤Pv と v^⊤Pu は等しい" },
+    labels: ["real_bilinear_value_of_symmetric_matrix_is_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        " が対称（",
+        ref("def_real_symmetric_matrix"),
+        "）であるとする。",
+        math(String.raw`u, v \in \mathbb{R}^n`),
+        " に対し、",
+        math(String.raw`u^\top Pv,\ v^\top Pu \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`u^\top P v = v^\top P u`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        ref("psd_cauchy_schwarz"),
+        " と熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の可換則・結合則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+u^\top Pv
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,P_{kl}\,v_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to v)\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_k\,P_{lk}\bigr)\,v_l
+&&\bigl(\because\ P\ \text{は対称}\ \blkref{def_real_symmetric_matrix}\ (k \to k,\ l \to l)\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,\bigl(u_k\,P_{lk}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ (u_k\,P_{lk})\,v_l = v_l\,(u_k\,P_{lk})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,\bigl(P_{lk}\,u_k\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ u_k\,P_{lk} = P_{lk}\,u_k\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(v_l\,P_{lk}\bigr)\,u_k
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&=\sum_{l=1}^{n}\sum_{k=1}^{n} \bigl(v_l\,P_{lk}\bigr)\,u_k
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to (v_l\,P_{lk})\,u_k)\bigr)\\
+&=v^\top Pu
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to v,\ y \to u。\text{和の添字}\ k, l\ \text{を}\ l, k\ \text{と書く})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。psd_cauchy_schwarz の証明の準備に置いていた u^⊤Pv = v^⊤Pu の鎖を、ほかの証明からも引けるよう主張として切り出した（c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すときに引く）。準備の鎖の「ℝ の乗法の結合則・可換則」の一行は、可換則 2 回と結合則 1 回の 3 行に割った。数値検証: sagemath/check/real_bilinear_value_of_symmetric_matrix_is_symmetric/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
     kind: "claim",
     title: {
@@ -231,26 +289,6 @@ x^\top P x
     ],
     proof: [
       paragraph([
-        "準備として、",
-        math(String.raw`u, v \in \mathbb{R}^n`),
-        " について ",
-        math(String.raw`u^\top Pv = v^\top Pu`),
-        " を示す。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-u^\top Pv
-&=\sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,P_{kl}\,v_l
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
-&=\sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,P_{lk}\,v_l
-&&\bigl(\because\ P\ \text{は対称}\ \blkref{def_real_symmetric_matrix}\bigr)\\
-&=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,P_{lk}\,u_k
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則・可換則}\bigr)\\
-&=\sum_{l=1}^{n}\sum_{k=1}^{n} v_l\,P_{lk}\,u_k
-&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to v_l\,P_{lk}\,u_k)\bigr)\\
-&=v^\top Pu
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)
-\end{aligned}`),
-      paragraph([
         math(String.raw`t \in \mathbb{R}`),
         " について ",
         math(String.raw`w(t) \in \mathbb{R}^n`),
@@ -281,7 +319,7 @@ q(t)
 &=y^\top Py+t\,y^\top Px+t\,x^\top Py+t^2\,x^\top Px
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=y^\top Py+t\,y^\top Px+t\,y^\top Px+t^2\,x^\top Px
-&&\bigl(\because\ \text{準備の}\ u^\top Pv=v^\top Pu\ \text{を}\ u=x,\ v=y\ \text{で}\bigr)\\
+&&\bigl(\because\ \blkref{real_bilinear_value_of_symmetric_matrix_is_symmetric}\ (n \to n,\ P \to P,\ u \to x,\ v \to y)\bigr)\\
 &=(x^\top Px)\,t^2+2\,(y^\top Px)\,t+y^\top Py
 &&\bigl(\because\ \mathbb{R}\ \text{の加法と乗法の可換則・分配則}\bigr)
 \end{aligned}`),
@@ -375,6 +413,7 @@ q(t_0)
       status: "added",
       notes: [
         "2026-11-01: SageMath の検算（sagemath/check/psd_cauchy_schwarz/）を付けるときに直した。未定義だった x^⊤Py を def_real_bilinear_value の成分の和で定め、対称性を def_real_symmetric_matrix の P_kl = P_lk とした。原文の冒頭の「成分積は mat_mult の式を実数成分について用い、複素数への包含は inclusion_rr_to_cc による」は外した（mat_mult は複素行列の積で、証明は ℂ を使わないので inclusion_rr_to_cc も要らない）。「転置・行列積の分配法則」の一行を、成分の和の展開・項の並べ替え・t と t^2 を和の外へ出す段に、「P^⊤ = P より x^⊤Py = y^⊤Px」を準備の成分の鎖に割った。a ≥ 0 から a > 0 か a = 0 に分かれること（原文は a < 0 の場合を除く理由を書いていなかった）、(i) の結論を主張の左辺から始まる鎖にすること、(ii) の 0·t^2 の行と最後の 0 = 0·c の行を足した。計算の誤りは無かった。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 証明の準備の u^⊤Pv = v^⊤Pu の鎖を主張 real_bilinear_value_of_symmetric_matrix_is_symmetric に切り出し、q(t) の展開の行はその参照で引くようにした。",
       ],
     },
   },

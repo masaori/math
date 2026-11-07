@@ -1,34 +1,13 @@
 # 対象ラベル: psd_cauchy_schwarz
-# 準備の u^T P v = v^T P u（5 行）と、q(t) の展開（7 行）を、P を対称な不定元の表、x, y, u, v, t を不定元に置いて
-# QQ 上の多項式として厳密に確かめる。両端は Sage の vector * matrix * vector と比べる。
+# q(t) の展開（7 行）を、P を対称な不定元の表、x, y, t を不定元に置いて QQ 上の多項式として厳密に確かめる。
+# 左端は Sage の vector * matrix * vector と比べる。展開の 6 行目が引く u^T P v = v^T P u は主張
+# real_bilinear_value_of_symmetric_matrix_is_symmetric の鎖として sagemath/check/real_bilinear_value_of_symmetric_matrix_is_symmetric/ で確かめる。
 load("real_bilinear_value_by_definition.sage")
 
 for n in [1, 2, 3, 4]:
     R, P, V, (t,) = generic_symmetric_ring(n, extra=["t"])
-    x, y, u, v = V["x"], V["y"], V["u"], V["v"]
+    x, y = V["x"], V["y"]
     N = range(n)
-    # 準備の鎖
-    prep = [
-        bilin(u, P, v),                                                                   # u^T P v
-        lsum([lsum([(u[k] * P[k][l]) * v[l] for l in N]) for k in N]),                    # 定義
-        lsum([lsum([(u[k] * P[l][k]) * v[l] for l in N]) for k in N]),                    # P_kl = P_lk
-        lsum([lsum([(v[l] * P[l][k]) * u[k] for l in N]) for k in N]),                    # 乗法の結合・可換
-        lsum([lsum([(v[l] * P[l][k]) * u[k] for k in N]) for l in N]),                    # 和の順序の入れ替え
-        bilin(v, P, u),                                                                   # v^T P u
-    ]
-    for i in range(len(prep) - 1):
-        assert prep[i] == prep[i + 1], ("prep", n, i)
-    assert prep[0] == sage_bilin(u, P, v, R) and prep[-1] == sage_bilin(v, P, u, R)
-    # 対称でない P では準備の第 2 行が成り立たないこと（仮定が効いている行の確認）
-    if n >= 2:
-        Rn = PolynomialRing(QQ, [f"Q_{k}_{l}" for k in N for l in N] + [f"{s}_{k}" for s in "uv" for k in N])
-        gn = Rn.gens()
-        Q = [[gn[k * n + l] for l in N] for k in N]
-        un, vn = list(gn[n * n:n * n + n]), list(gn[n * n + n:])
-        line1 = lsum([lsum([(un[k] * Q[k][l]) * vn[l] for l in N]) for k in N])       # 第 1 行
-        line2 = lsum([lsum([(un[k] * Q[l][k]) * vn[l] for l in N]) for k in N])       # 第 2 行（対称性を使った行）
-        assert line1 != line2
-        assert bilin(un, Q, vn) != bilin(vn, Q, un)
     # 展開の鎖
     w = [y[k] + t * x[k] for k in N]
     a, b, c = bilin(x, P, x), bilin(y, P, x), bilin(y, P, y)
@@ -52,5 +31,5 @@ for n in [1, 2, 3, 4]:
     for i in range(len(expa) - 1):
         assert expa[i] == expa[i + 1], ("expand", n, i)
     assert expa[0] == sage_bilin(w, P, w, R)
-    print(f"n = {n}: 準備の 5 行と展開の 7 行を、対称な不定元の P で厳密に確かめた")
+    print(f"n = {n}: 展開の 7 行を、対称な不定元の P で厳密に確かめた")
 print("RESULT: PASS")

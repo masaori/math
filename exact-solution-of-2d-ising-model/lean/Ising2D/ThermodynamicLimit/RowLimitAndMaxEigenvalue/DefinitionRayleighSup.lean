@@ -24,7 +24,7 @@
 | `𝓡` は上に有界 | `rayleighSet_bddAbove` |
 
 人手の `x^⊤W_ℝx` は `def_real_bilinear_value` の `Σ_kΣ_l (x_kW_kl)x_l` で、Lean の `x ⬝ᵥ W *ᵥ x` は `Σ_k x_k (Σ_l W_kl x_l)` である。
-`dotProduct_mulVec_eq_real_bilinear_value` が mathlib の `⬝ᵥ`・`*ᵥ` の定義を人手の和の形へ開く（`def_real_bilinear_value` の行に当たる）。
+`dotProduct_mulVec_eq_real_bilinear_value`（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）が mathlib の `⬝ᵥ`・`*ᵥ` の定義を人手の和の形へ開く（`def_real_bilinear_value` の行に当たる）。
 有限和の主張は、添字が有限型 `n` の和に当てる `_fintype` 版（`ClaimFiniteSumsOfRealNumbers.lean`）を引く。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.TraceBound
@@ -74,15 +74,6 @@ def rayleighSet (W : Matrix n n ℝ) : Set ℝ :=
 
 /-- 人手証明の `c(M) := sup 𝓡`。 -/
 noncomputable def rayleighSup (W : Matrix n n ℝ) : ℝ := sSup (rayleighSet W)
-
-/-- 人手 `def_real_bilinear_value` の行: Lean の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を、人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く。
-mathlib の `⬝ᵥ`・`*ᵥ` の定義を開き（`dotProduct`・`mulVec`）、`x_k` を内側の和へ入れ（`Finset.mul_sum`）、積の括弧を付け替える（`mul_assoc`）。 -/
-theorem dotProduct_mulVec_eq_real_bilinear_value (x y : n → ℝ) (P : Matrix n n ℝ) :
-    x ⬝ᵥ P *ᵥ y = ∑ k, ∑ l, x k * P k l * y l :=
-  calc x ⬝ᵥ P *ᵥ y
-      = ∑ k, x k * ∑ l, P k l * y l := rfl                                    -- `⬝ᵥ`・`*ᵥ` の定義を開く
-    _ = ∑ k, ∑ l, x k * (P k l * y l) := by simp only [Finset.mul_sum]         -- `x_k` を内側の和へ入れる
-    _ = ∑ k, ∑ l, x k * P k l * y l := by simp only [mul_assoc]                -- 積の括弧を付け替える
 
 /-- 人手 `def_rayleigh_sup` の項ごとの 6 行: すべての `k` で `|x_k| ≤ 1` なら `|x_iW_ijx_j| ≤ |W_ij|`。 -/
 theorem abs_bilinear_term_le_abs_entry (W : Matrix n n ℝ) (x : n → ℝ) (hx : ∀ k, |x k| ≤ 1) (i j : n) :

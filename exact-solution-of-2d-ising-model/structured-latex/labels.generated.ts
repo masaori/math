@@ -496,6 +496,7 @@ export const ALL_LABELS = [
   "real_abs_triangle_inequality",
   "real_absolute_value_of_nonpositive",
   "real_bilinear_value_at_most_value_at_absolute_vector",
+  "real_bilinear_value_of_symmetric_matrix_is_symmetric",
   "real_exp_of_finite_sum",
   "real_exp_positive",
   "real_exp_series_converges",

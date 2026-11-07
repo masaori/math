@@ -841,6 +841,9 @@ targets=(
   Ising2D.abs_real_bilinear_row_le_row_abs_sum
   Ising2D.real_bilinear_value_at_most_value_at_absolute_vector
   Ising2D.real_bilinear_value_at_most_value_at_absolute_vector_of_necSuf
+  Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric
+  Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric_of_necSuf
+  "Ising2D.NecSuf.bilinear_value_of_symmetric_matrix_is_symmetric'"
   "Ising2D.NecSuf.dotProduct_mulVec_eq_double_sum'"
   "Ising2D.NecSuf.abs_bilinear_row_le_row_abs_sum'"
   "Ising2D.NecSuf.bilinear_value_at_most_value_at_absolute_vector'"

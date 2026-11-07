@@ -10,8 +10,12 @@
 本ファイルの `Ising2D.psd_cauchy_schwarz` は、人手証明と 1 対 1 に対応する形
 （`P ∈ Mat(n, ℝ)` が対称かつ半正定値、`x, y ∈ ℝ^n`）で主張を立て、
 必要十分版の系として導出している。
+人手の `q(t)` の展開の 6 行目が引く `real_bilinear_value_of_symmetric_matrix_is_symmetric` は、
+具体版 `Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric`（`ClaimRealBilinearValueOfSymmetricMatrixIsSymmetric.lean`）を
+必要十分版の対称性の仮定として渡す。`q(t)` の展開の残りの行と場合分けは、必要十分版の `bilin_quadratic_expand` と
+`psd_cauchy_schwarz` の中にあり、人手の鎖と 1 対 1 の具体版はまだ無い。
 -/
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealBilinearValueOfSymmetricMatrixIsSymmetric
 
 set_option linter.unusedSectionVars false
 
@@ -29,7 +33,8 @@ theorem psd_cauchy_schwarz {P : Matrix n n ℝ} (hP : P.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ P *ᵥ x) (x y : n → ℝ) :
     (y ⬝ᵥ P *ᵥ x) ^ 2 ≤ (x ⬝ᵥ P *ᵥ x) * (y ⬝ᵥ P *ᵥ y) := by
   have h := NecSuf.psd_cauchy_schwarz (matBilin P)
-    (fun u v => dotProduct_mulVec_comm hP u v) (fun u => hpsd u) x y
+    (fun u v => real_bilinear_value_of_symmetric_matrix_is_symmetric P hP u v)  -- `real_bilinear_value_of_symmetric_matrix_is_symmetric`
+    (fun u => hpsd u) x y
   simpa using h
 
 end Ising2D

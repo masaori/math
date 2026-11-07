@@ -11,6 +11,7 @@
 ここでは以下を用意する。
 
 * `Ising2D.matBilin A` — 実行列が定める双線型形式 `(x, y) ↦ xᵀ A y`
+* `Ising2D.dotProduct_mulVec_eq_real_bilinear_value` — Lean の `x ⬝ᵥ P *ᵥ y` を人手 `def_real_bilinear_value` の和の形へ開く
 * `Ising2D.vecNormSq` / `Ising2D.vecNorm` — `‖x‖²` と `‖x‖`
   （`n → ℝ` に mathlib が入れている既定のノルムは sup ノルムなので、
   ユークリッドノルムは自前で定義する）
@@ -58,6 +59,16 @@ theorem matBilin_apply (A : Matrix n n ℝ) (x y : n → ℝ) :
 theorem matBilin_one_apply (x y : n → ℝ) :
     matBilin (1 : Matrix n n ℝ) x y = x ⬝ᵥ y := by
   simp [matBilin]
+
+omit [DecidableEq n] in
+/-- 人手 `def_real_bilinear_value` の行: Lean の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を、人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く。
+mathlib の `⬝ᵥ`・`*ᵥ` の定義を開き（`dotProduct`・`mulVec`）、`x_k` を内側の和へ入れ（`Finset.mul_sum`）、積の括弧を付け替える（`mul_assoc`）。 -/
+theorem dotProduct_mulVec_eq_real_bilinear_value (x y : n → ℝ) (P : Matrix n n ℝ) :
+    x ⬝ᵥ P *ᵥ y = ∑ k, ∑ l, x k * P k l * y l :=
+  calc x ⬝ᵥ P *ᵥ y
+      = ∑ k, x k * ∑ l, P k l * y l := rfl                                    -- `⬝ᵥ`・`*ᵥ` の定義を開く
+    _ = ∑ k, ∑ l, x k * (P k l * y l) := by simp only [Finset.mul_sum]         -- `x_k` を内側の和へ入れる
+    _ = ∑ k, ∑ l, x k * P k l * y l := by simp only [mul_assoc]                -- 積の括弧を付け替える
 
 /-- 対称行列に対する `xᵀ A y = yᵀ A x`。 -/
 theorem dotProduct_mulVec_comm {A : Matrix n n ℝ} (hA : A.IsSymm) (x y : n → ℝ) :

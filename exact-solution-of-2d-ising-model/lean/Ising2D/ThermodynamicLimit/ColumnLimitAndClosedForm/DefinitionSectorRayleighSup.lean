@@ -12,7 +12,7 @@
 `ε_ℝ` は `def_epsilon_real` の実数の行列、
 `xᵀW_ℝx` は `def_real_bilinear_value` の実数の値で、`def_rayleigh_sup` の `𝓡` の元と同じ式である。
 Lean の `x ⬝ᵥ W *ᵥ x` を人手の和の形へ開くのは `dotProduct_mulVec_eq_real_bilinear_value`
-（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean`）である。
+（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）である。
 Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Ising では `W := physicalSymTransferR`
 （`W_ℝ` の具体形。`physicalSymTransferR_eq_realMatrixOfRealEntries`）、`ε := epsilonR M`
 （`ε_ℝ` と同じ行列であることは `epsilonR_eq_epsilonReal`）で使う。

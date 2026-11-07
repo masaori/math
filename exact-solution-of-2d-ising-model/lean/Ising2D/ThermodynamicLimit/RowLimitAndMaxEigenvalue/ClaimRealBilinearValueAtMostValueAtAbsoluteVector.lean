@@ -14,7 +14,7 @@
 | 主張の 9 行の鎖 | `real_bilinear_value_at_most_value_at_absolute_vector` の `calc` の 9 段 |
 
 - 人手の `x^⊤Px`（`def_real_bilinear_value` の `Σ_kΣ_l (x_kP_kl)x_l`）は Lean の `x ⬝ᵥ P *ᵥ x` で、
-  `dotProduct_mulVec_eq_real_bilinear_value`（`DefinitionRayleighSup.lean`）が人手の和の形へ開く。
+  `dotProduct_mulVec_eq_real_bilinear_value`（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）が人手の和の形へ開く。
 - 人手の和の添字 `{1, …, n}` は Lean では有限型 `n` で、有限和の主張は `_fintype` 版を引く。
 - 人手の `u` は Lean の `fun k => |x k|` である。
 

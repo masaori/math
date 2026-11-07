@@ -28,7 +28,7 @@
 
 * 係数 `R` は、加法について可換群で全順序と両立し（有限和の三角不等式・単調性）、
   `0 ≤ a` を左から掛けると `≤` が保たれる（`PosMulMono`。積の絶対値 `abs_mul'` に要る）。
-* 乗法の結合則は、mathlib の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く段
+* 分配律と乗法の結合則は、mathlib の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く段
   （2・9 段目）だけで使う。乗法の可換性・単位元・逆元・ℝ の完備性は使わない。
 * `P` の成分は非負であることだけを使う（人手の用途 `W_ℝ` の正値性は要らない）。
 -/
@@ -42,16 +42,24 @@ namespace Ising2D.NecSuf
 
 open Matrix
 
-variable {R : Type*} [NonUnitalRing R] [LinearOrder R] [IsOrderedAddMonoid R] [PosMulMono R]
 variable {n : Type*} [Fintype n]
 
-/-- 2・9 段目: mathlib の `x ⬝ᵥ P *ᵥ y` を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く（乗法の結合則だけを使う）。 -/
+section DoubleSum
+
+variable {R : Type*} [NonUnitalSemiring R]
+
+/-- 2・9 段目: mathlib の `x ⬝ᵥ P *ᵥ y` を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く（分配律と乗法の結合則だけを使う）。
+`NecSuf/BilinearValueOfSymmetricMatrixIsSymmetric.lean` も同じ段に使うので、係数は非単位的な半環に置く。 -/
 theorem dotProduct_mulVec_eq_double_sum' (x y : n → R) (P : Matrix n n R) :
     x ⬝ᵥ P *ᵥ y = ∑ k, ∑ l, x k * P k l * y l :=
   calc x ⬝ᵥ P *ᵥ y
       = ∑ k, x k * ∑ l, P k l * y l := rfl
     _ = ∑ k, ∑ l, x k * (P k l * y l) := by simp only [Finset.mul_sum]
     _ = ∑ k, ∑ l, x k * P k l * y l := by simp only [mul_assoc]
+
+end DoubleSum
+
+variable {R : Type*} [NonUnitalRing R] [LinearOrder R] [IsOrderedAddMonoid R] [PosMulMono R]
 
 /-- 準備: 各 `k` で `|Σ_l x_kP_klx_l| ≤ Σ_l |x_kP_klx_l|`。 -/
 theorem abs_bilinear_row_le_row_abs_sum' (P : Matrix n n R) (x : n → R) (k : n) :
