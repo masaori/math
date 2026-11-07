@@ -33,6 +33,7 @@ export const ALL_LABELS = [
   "W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form",
   "W_has_positive_entries",
   "W_is_real_symmetric_positive_definite",
+  "W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice",
   "W_real_has_positive_entries",
   "W_real_is_positive_definite",
   "W_real_is_positive_semidefinite",

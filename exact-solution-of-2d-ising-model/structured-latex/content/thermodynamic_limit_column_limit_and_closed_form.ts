@@ -2496,6 +2496,211 @@ c_+(M_{\mathrm{col}})
   },
 
   {
+    id: "maxeig_claim_W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice",
+    kind: "claim",
+    title: { text: "成分が非負のベクトル u について、成分が u_k + (ε_ℝu)_k のベクトル v は v^⊤W_ℝv ≥ 2(u^⊤W_ℝu) を満たす" },
+    labels: ["W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "、結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とし、",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " と ",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を取る。",
+        math(String.raw`u \in \mathbb{R}^{d}`),
+        " がすべての ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`u_k \geq 0`),
+        " を満たすとし、",
+        math(String.raw`v \in \mathbb{R}^{d}`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`v_k := u_k + (\varepsilon_{\mathbb{R}}u)_k \qquad (k \in \{1,\dots,d\})`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\varepsilon_{\mathbb{R}}u \in \mathbb{R}^{d}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）の積、和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和）。このとき",
+      ]),
+      displayMath(String.raw`v^\top W_{\mathbb{R}}v \geq 2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)`),
+      paragraph([
+        "が成り立つ。両辺の ",
+        math(String.raw`x^\top W_{\mathbb{R}}y`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        "（",
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}}`),
+        "）の値、右辺の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の元どうしの和は本文で定めていないので、",
+        math(String.raw`v`),
+        " を成分の等式で与える。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序と四則演算と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\tilde{u} := \varepsilon_{\mathbb{R}}u \in \mathbb{R}^{d}`),
+        " と略記する。",
+        math(String.raw`v`),
+        " の定義より、すべての ",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`v_k = u_k + \tilde{u}_k`),
+        " である。また ",
+        math(String.raw`A := u^\top W_{\mathbb{R}}u \in \mathbb{R}`),
+        " と略記する。",
+      ]),
+      paragraph([
+        "準備として、三つの事実を示す。一つ目に、",
+        ref("epsilon_real_preserves_nonnegative_vectors"),
+        "（",
+        math(String.raw`u \to u`),
+        "）より、すべての ",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`\tilde{u}_l \geq 0`),
+        " である。",
+        ref("W_real_has_positive_entries"),
+        " より、すべての ",
+        math(String.raw`k, l \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} > 0`),
+        "、とくに ",
+        math(String.raw`(W_{\mathbb{R}})_{kl} \geq 0`),
+        " である。仮定の ",
+        math(String.raw`u_k \geq 0`),
+        " と合わせて、",
+        ref("real_bilinear_value_with_nonnegative_entries_is_nonnegative"),
+        "（",
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}},\ x \to u,\ y \to \tilde{u}`),
+        " と ",
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}},\ x \to \tilde{u},\ y \to u`),
+        "）より",
+      ]),
+      displayMath(String.raw`u^\top W_{\mathbb{R}}\tilde{u} \geq 0, \qquad \tilde{u}^\top W_{\mathbb{R}}u \geq 0`),
+      paragraph([
+        "である。これと ",
+        math(String.raw`\mathbb{R}`),
+        " の順序と加法の両立（",
+        math(String.raw`x \geq y \Rightarrow c + x \geq c + y`),
+        " と ",
+        math(String.raw`x \geq y \Rightarrow x + c \geq y + c`),
+        "）より",
+      ]),
+      displayMath(String.raw`A + u^\top W_{\mathbb{R}}\tilde{u} \geq A + 0, \qquad \tilde{u}^\top W_{\mathbb{R}}u + A \geq 0 + A`),
+      paragraph([
+        "である（前者は ",
+        math(String.raw`c \to A`),
+        " で前の規則、後者は ",
+        math(String.raw`c \to A`),
+        " で後の規則を 1 回ずつ当てる）。二つ目に、",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の元の等式として",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon_{\mathbb{R}}\bigl(W_{\mathbb{R}}\tilde{u}\bigr)
+&= \varepsilon_{\mathbb{R}}\bigl(W_{\mathbb{R}}(\varepsilon_{\mathbb{R}}u)\bigr)
+  &&\bigl(\because\ \tilde{u}\ \text{の定義}\bigr)\\
+&= \bigl(\varepsilon_{\mathbb{R}}W_{\mathbb{R}}\bigr)(\varepsilon_{\mathbb{R}}u)
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P \to \varepsilon_{\mathbb{R}},\ Q \to W_{\mathbb{R}},\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(W_{\mathbb{R}}\varepsilon_{\mathbb{R}}\bigr)(\varepsilon_{\mathbb{R}}u)
+  &&\bigl(\because\ \blkref{epsilon_real_commutes_with_W_real}\bigr)\\
+&= W_{\mathbb{R}}\bigl(\varepsilon_{\mathbb{R}}(\varepsilon_{\mathbb{R}}u)\bigr)
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to \varepsilon_{\mathbb{R}},\ x \to \varepsilon_{\mathbb{R}}u)\bigr)\\
+&= W_{\mathbb{R}}\bigl((\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}})u\bigr)
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P, Q \to \varepsilon_{\mathbb{R}},\ x \to u)\ \text{を右辺から左辺へ}\bigr)\\
+&= W_{\mathbb{R}}\bigl(I_{\mathrm{Mat}(d,\mathbb{R})}\,u\bigr)
+  &&\bigl(\because\ \blkref{epsilon_real_square_is_identity}\bigr)\\
+&= W_{\mathbb{R}}u
+  &&\bigl(\because\ \blkref{real_identity_matrix_is_left_unit_of_real_matrix_vector_product}\ (n \to d,\ x \to u)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（積はすべて ",
+        ref("def_real_matrix_vector_product"),
+        " と ",
+        ref("def_real_matrix_product"),
+        " のもの）。三つ目に、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tilde{u}^\top W_{\mathbb{R}}\tilde{u}
+&= \sum_{k=1}^{d} \tilde{u}_k\,(W_{\mathbb{R}}\tilde{u})_k
+  &&\bigl(\because\ \blkref{real_bilinear_value_is_sum_with_real_matrix_vector_product}\ (n \to d,\ P \to W_{\mathbb{R}},\ u \to \tilde{u},\ v \to \tilde{u})\bigr)\\
+&= \sum_{k=1}^{d} (\varepsilon_{\mathbb{R}}u)_k\,(W_{\mathbb{R}}\tilde{u})_k
+  &&\bigl(\because\ \tilde{u}\ \text{の定義を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{d} u_k\,\bigl(\varepsilon_{\mathbb{R}}(W_{\mathbb{R}}\tilde{u})\bigr)_k
+  &&\bigl(\because\ \blkref{real_symmetric_matrix_moves_between_factors_of_sum_of_products}\ (n \to d,\ Q \to \varepsilon_{\mathbb{R}},\ u \to u,\ v \to W_{\mathbb{R}}\tilde{u})\text{。}\varepsilon_{\mathbb{R}}\ \text{の対称性は}\ \blkref{epsilon_real_is_symmetric}\bigr)\\
+&= \sum_{k=1}^{d} u_k\,(W_{\mathbb{R}}u)_k
+  &&\bigl(\because\ \text{二つ目の準備の}\ \varepsilon_{\mathbb{R}}(W_{\mathbb{R}}\tilde{u}) = W_{\mathbb{R}}u\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+&= A
+  &&\bigl(\because\ \blkref{real_bilinear_value_is_sum_with_real_matrix_vector_product}\ (n \to d,\ P \to W_{\mathbb{R}},\ u \to u,\ v \to u)\ \text{を右辺から左辺へと}\ A\ \text{の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。これらを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v^\top W_{\mathbb{R}}v
+&= u^\top W_{\mathbb{R}}v + \tilde{u}^\top W_{\mathbb{R}}v
+  &&\bigl(\because\ \blkref{real_bilinear_value_is_additive_in_left_vector}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to v,\ y \to u,\ z \to \tilde{u},\ w \to v)\text{。仮定の}\ w_k = y_k + z_k\ \text{は}\ v_k = u_k + \tilde{u}_k\bigr)\\
+&= \bigl(A + u^\top W_{\mathbb{R}}\tilde{u}\bigr) + \tilde{u}^\top W_{\mathbb{R}}v
+  &&\bigl(\because\ \blkref{real_bilinear_value_is_additive_in_right_vector}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u,\ z \to \tilde{u},\ w \to v)\ \text{と}\ A\ \text{の定義}\bigr)\\
+&= \bigl(A + u^\top W_{\mathbb{R}}\tilde{u}\bigr) + \bigl(\tilde{u}^\top W_{\mathbb{R}}u + \tilde{u}^\top W_{\mathbb{R}}\tilde{u}\bigr)
+  &&\bigl(\because\ \blkref{real_bilinear_value_is_additive_in_right_vector}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to \tilde{u},\ y \to u,\ z \to \tilde{u},\ w \to v)\bigr)\\
+&= \bigl(A + u^\top W_{\mathbb{R}}\tilde{u}\bigr) + \bigl(\tilde{u}^\top W_{\mathbb{R}}u + A\bigr)
+  &&\bigl(\because\ \text{三つ目の準備の}\ \tilde{u}^\top W_{\mathbb{R}}\tilde{u} = A\bigr)\\
+&\geq \bigl(A + 0\bigr) + \bigl(\tilde{u}^\top W_{\mathbb{R}}u + A\bigr)
+  &&\bigl(\because\ \text{一つ目の準備の}\ A + u^\top W_{\mathbb{R}}\tilde{u} \geq A + 0\ \text{と}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \geq y \Rightarrow x + c \geq y + c\bigr)\\
+&\geq \bigl(A + 0\bigr) + \bigl(0 + A\bigr)
+  &&\bigl(\because\ \text{一つ目の準備の}\ \tilde{u}^\top W_{\mathbb{R}}u + A \geq 0 + A\ \text{と}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \geq y \Rightarrow c + x \geq c + y\bigr)\\
+&= A + \bigl(0 + A\bigr)
+  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の右単位元}\ A + 0 = A\bigr)\\
+&= A + A
+  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の左単位元}\ 0 + A = A\bigr)\\
+&= 1\,A + 1\,A
+  &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元。2 か所へ同時適用}\bigr)\\
+&= (1 + 1)\,A
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)\,c = a\,c + b\,c\ \text{を右辺から左辺へ}\bigr)\\
+&= 2\,A
+  &&\bigl(\because\ \mathbb{R}\ \text{の}\ 1 + 1 = 2\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " の順序の推移律と ",
+        math(String.raw`A`),
+        " の定義で、",
+        math(String.raw`v^\top W_{\mathbb{R}}v \geq 2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε・W を掛け、v^⊤Wv = u^⊤Wu + 2u^⊤Wεu + (εu)^⊤W(εu) = … ≥ 2u^⊤Wu を「v = u + εu の展開と W^⊤ = W」「ε^⊤ = ε」「εW = Wε」「ε^2 = I」で出していた。この同一視を def_epsilon_real の ε_ℝ と def_W_real の W_ℝ で書き直すために足した。ℝ^d の元どうしの和は本文に定義が無いので、v を成分の等式で与え（epsilon_real_fixes_sum_of_vector_and_its_image と同じ v）、展開は双線型値の左右の加法性で行う。W^⊤ = W は使わない（交差項 u^⊤W_ℝũ・ũ^⊤W_ℝu はどちらも real_bilinear_value_with_nonnegative_entries_is_nonnegative で 0 以上なので、入れ替えて 2u^⊤Wεu にまとめる段が要らない）。(εu)^⊤W(εu) = u^⊤Wu の段は、元の u^⊤εWεu を経る書き方が双線型値と行列の積の結合を要するので、双線型値を Σ_k u_k(Pv)_k の形に開いて ε_ℝ を対称な行列として右の因子へ移す道にした（real_symmetric_matrix_moves_between_factors_of_sum_of_products）。数値検証: sagemath/check/W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice/。",
+      ],
+    },
+  },
+
+  {
     id: "freeenergy_000_remark_escape_to_real_analysis",
     kind: "remark",
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 2 },
