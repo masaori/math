@@ -6433,6 +6433,86 @@ r_i
     },
   },
   {
+    id: "linear_space_general_claim_real_matrix_vector_product_commutes_with_real_scalar_multiple",
+    kind: "claim",
+    title: { text: "実数のベクトルを実数倍してから実数の行列を掛けると、積の各成分が同じ実数倍になる" },
+    labels: ["real_matrix_vector_product_commutes_with_real_scalar_multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`P \in \mathrm{Mat}(m,n,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`c \in \mathbb{R}`),
+        "、",
+        math(String.raw`u, w \in \mathbb{R}^n`),
+        " が、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " で",
+      ]),
+      displayMath(String.raw`w_k = c\,u_k`),
+      paragraph([
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の積）を満たすとする。このとき、すべての ",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " で",
+      ]),
+      displayMath(String.raw`(Pw)_i = c\,(Pu)_i`),
+      paragraph([
+        "が成り立つ。積 ",
+        math(String.raw`Pw,\ Pu \in \mathbb{R}^m`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        " の積、右辺の ",
+        math(String.raw`c\,(Pu)_i`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
+        "証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の結合則・交換則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(Pw)_i
+&= \sum_{j=1}^{n} P_{ij}\,w_j
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to m,\ n \to n,\ P \to P,\ x \to w)\bigr)\\
+&= \sum_{j=1}^{n} P_{ij}\,(c\,u_j)
+&&\bigl(\because\ \text{仮定}\ w_k = c\,u_k\ (k \to j)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} (P_{ij}\,c)\,u_j
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} (c\,P_{ij})\,u_j
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} c\,(P_{ij}\,u_j)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= c\sum_{j=1}^{n} P_{ij}\,u_j
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to P_{ij}\,u_j)\bigr)\\
+&= c\,(Pu)_i
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to m,\ n \to n,\ P \to P,\ x \to u)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i`),
+        " は任意なので主張が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は、v̂_k := v_k/‖v‖ について ε_ℝv = v から ε_ℝv̂ = v̂ が従うことを書いていなかった。実数の行列とベクトルの積が実数倍と交換することを述べるブロックが本文に無いので、その行を参照に替えるために足した。ℝ^n の元の実数倍は本文で定めていないので、w を成分の等式で与える（real_bilinear_value_of_scalar_multiple_vector と同じ）。引く def_real_matrix_vector_product の記号 x とぶつからないよう、ベクトルを u・w と書く。数値検証: sagemath/check/real_matrix_vector_product_commutes_with_real_scalar_multiple/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_real_matrix_of_real_entry_matrix_preserves_product",
     kind: "claim",
     title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は積を保つ}` },

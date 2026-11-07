@@ -935,6 +935,9 @@ targets=(
   Ising2D.matrix_pow_hasRealEntries
   Ising2D.real_matrix_of_real_entry_matrix_preserves_power
   Ising2D.real_matrix_vector_product_is_associative
+  Ising2D.real_matrix_vector_product_commutes_with_real_scalar_multiple
+  Ising2D.real_matrix_vector_product_commutes_with_real_scalar_multiple_of_necSuf
+  "Ising2D.NecSuf.matrix_vector_product_commutes_with_scalar_multiple'"
   Ising2D.real_vector_inclusion_is_injective
   Ising2D.real_vector_inclusion_intertwines_matrix_vector_product
   Ising2D.epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors
