@@ -9242,11 +9242,11 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
  &\ \Longleftrightarrow\ i=\sigma(i)
  &&\bigl(\because\ \sigma^{-1}\text{ は逆写像}\bigr)\\
  &\ \Longleftrightarrow\ \sigma(i)=i
- &&\bigl(\because\ \text{等号の対称性}\bigr).
+ &&\bigl(\because\ \text{等号の対称性}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、"]),
                 displayMath(String.raw`\tau(i)=i\quad\Longleftrightarrow\quad\sigma(i)=i
-\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\notin C\bigr).`),
+\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\notin C\bigr)`),
                 paragraph(["どちらの場合も同じ同値を得た。したがって、"]),
                 displayMath(String.raw`\begin{aligned}
 \tau\in\operatorname{Der}(\mathcal J)
@@ -9255,15 +9255,15 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
  &\ \Longleftrightarrow\ (\forall i\in\mathcal J,\ \sigma(i)\ne i)
  &&\bigl(\because\ \text{各点で示した同値}\bigr)\\
  &\ \Longleftrightarrow\ \sigma\in\operatorname{Der}(\mathcal J)
- &&\bigl(\because\ \blkref{def_fixed_point_free_permutations}\bigr).
+ &&\bigl(\because\ \blkref{def_fixed_point_free_permutations}\bigr)
 \end{aligned}`),
                 paragraph(["右辺は入力の所属から成り立つ（", ref("def_odd_orbit_derangements"), "）。さらに、"]),
                 displayMath(String.raw`\operatorname{OddPts}(\tau)=\operatorname{OddPts}(\sigma)
-\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr)`),
                 paragraph(["右辺は空でない（", ref("def_odd_orbit_derangements"), "）。集合等号によって左辺も空でない。これと不動点のないことから ", math(String.raw`\tau\in\operatorname{DerOdd}(\mathcal J)`), " となる（", ref("def_odd_orbit_derangements"), "）。よって値域を対象集合に制限した自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}`), " が定まる。"]),
                 paragraph(["次に、反転後も奇数点の集合が空でないので、"]),
                 displayMath(String.raw`\operatorname{OddOrb}(\tau)=\operatorname{OddOrb}(\sigma)
-\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr)`),
                 paragraph(["したがって、再び同じ台を反転することになり、"]),
                 displayMath(String.raw`\begin{aligned}
 \mathcal R_{\mathrm{odd}}(\mathcal R_{\mathrm{odd}}(\sigma))
@@ -66021,6 +66021,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",

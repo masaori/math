@@ -9,6 +9,7 @@
 import Ising2DLambda.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCells
 import Ising2DLambda.KacWard.PlaneLift
+import Ising2DLambda.KacWard.PlaneLiftIntegerBaseEndpoint
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
 import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
 import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
@@ -152,6 +153,21 @@ theorem walkSideInteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
       simp [i, Nat.mod_eq_of_lt (by omega : k < m + 2)]
     refine ⟨hinside ▸ hpInside, i, ?_⟩
     simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hcorner
+
+/-- 零巻き付きの閉歩道では、整数添字の持ち上げ座標が一周期で閉じる。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_closed {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    row (m + 1) = row 0 ∧ col (m + 1) = col 0 := by
+  dsimp only
+  have h := planeLiftIntegerBase_endpoint γ hγ
+  have hpoint : planeLiftIntegerBase γ (m + 1) = planeLiftIntegerBase γ 0 := by
+    simpa [hh, hv, windingShift, Prod.add_def] using h
+  exact ⟨congrArg Prod.fst hpoint, congrArg Prod.snd hpoint⟩
 
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
