@@ -1375,4 +1375,326 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i^{\mathsf T}
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_entry_of_creation_operator_matrix_times_matrix",
+    kind: "claim",
+    title: { text: "左から生成作用素の行列を掛けた行列の成分" },
+    labels: ["claim_entry_of_creation_operator_matrix_times_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`i\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_i\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を生成作用素の行列（",
+        ref("def_creation_operator_matrix"),
+        "）とする。",
+        math(String.raw`S\in\mathcal{P}_M`),
+        " が ",
+        math(String.raw`i\in S`),
+        " を満たすとき、",
+        math(String.raw`S'`),
+        " を次の集合とする。",
+      ]),
+      displayMath(String.raw`S':=\{\,t\in\{1,\dots,M\}\ :\ t\in S\ \text{かつ}\ t\neq i\,\}.`),
+      paragraph([
+        math(String.raw`S'\subseteq\{1,\dots,M\}`),
+        " なので ",
+        math(String.raw`S'\in\mathcal{P}_M`),
+        "（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）である。",
+        math(String.raw`A\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、行列の積 ",
+        math(String.raw`\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）の成分は次のとおりである。",
+      ]),
+      displayMath(String.raw`\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}A\bigr)_{S,U}=
+\begin{cases}
+  \varsigma(N_i(S'))\cdot_{\mathbb{C}}A_{S',U} & (i\in S),\\
+  0_{\mathbb{C}} & (i\notin S).
+\end{cases}`),
+      paragraph([
+        "右辺の ",
+        math(String.raw`N_i(S')\in\mathbb{Z}_{\ge 0}`),
+        " は部分集合のうち番号より小さい元を数える個数（",
+        ref("def_count_of_subset_elements_below_index"),
+        "）、",
+        math(String.raw`\varsigma(N_i(S'))\in\mathbb{C}`),
+        " は非負整数の偶奇による符号（",
+        ref("def_sign_of_nonnegative_integer"),
+        "）である。記号 ",
+        math(String.raw`S'`),
+        " は ",
+        math(String.raw`S`),
+        " と ",
+        math(String.raw`i`),
+        " を書かないが、",
+        math(String.raw`S`),
+        " と ",
+        math(String.raw`i`),
+        " ごとに別の集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`),
+        "（有限集合であることは ",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        "、",
+        math(String.raw`X:=\mathcal{P}_M`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+        math(String.raw`i\notin S`),
+        " か ",
+        math(String.raw`i\in S`),
+        " かで二つの場合に分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`i\notin S`),
+          " のとき。準備として、各 ",
+          math(String.raw`T\in\mathcal{P}_M`),
+          " について次の等式を示す。",
+          math(String.raw`S=T\cup\{i\}`),
+          " なら ",
+          math(String.raw`i\in S`),
+          " となるので、",
+          math(String.raw`i\notin S`),
+          " から ",
+          math(String.raw`S\neq T\cup\{i\}`),
+          " であり、",
+          math(String.raw`c_i`),
+          " の定義の条件「",
+          math(String.raw`i\notin T`),
+          " かつ ",
+          math(String.raw`S=T\cup\{i\}`),
+          "」は成り立たない。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i)_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{T,U}
+&=(c_i)_{S,T}\cdot_{\mathbb{C}}A_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}A_{T,U}
+&&\left(\because\ \text{条件が成り立たないので}\ c_i\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\text{（二回）}\right)\\
+&=(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(S,U)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}A\bigr)_{S,U}
+&=\sum_{T\in\mathcal{P}_M}(c_i)_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}
+&&\left(\because\ \text{各}\ T\ \text{で準備の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}\right)
+&&\left(\because\ \rho:=0_{\mathbb{C}}\text{、}\lambda_T:=1_{\mathbb{C}}\text{、}v_T:=1_{\mathbb{C}}\ \text{を当てる。}\blkref{claim_scalar_multiple_of_sum_over_finite_set}\right)\\
+&=0_{\mathbb{C}^{\mathrm{vec}}}
+&&\left(\because\ \text{零のスカラー倍は零ベクトル。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`i\in S`),
+          " のとき。準備として、",
+          math(String.raw`T\in\mathcal{P}_M`),
+          " について、",
+          math(String.raw`c_i`),
+          " の定義の条件「",
+          math(String.raw`i\notin T`),
+          " かつ ",
+          math(String.raw`S=T\cup\{i\}`),
+          "」が ",
+          math(String.raw`T=S'`),
+          " と同値であることを示す。",
+          math(String.raw`\mathcal{P}_M`),
+          " の二元が等しいことは、各 ",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " での所属が同値であることである（",
+          ref("def_power_set_of_first_m_positive_integers"),
+          "）。",
+        ],
+        [
+          "条件が成り立つとする。",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " について、",
+          math(String.raw`t\in S'`),
+          " は ",
+          math(String.raw`S'`),
+          " の置き方で「",
+          math(String.raw`t\in S`),
+          " かつ ",
+          math(String.raw`t\neq i`),
+          "」と同値であり、",
+          math(String.raw`S=T\cup\{i\}`),
+          " から「（",
+          math(String.raw`t\in T`),
+          " または ",
+          math(String.raw`t=i`),
+          "）かつ ",
+          math(String.raw`t\neq i`),
+          "」と同値であり、これは「",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t\neq i`),
+          "」と同値である。",
+          math(String.raw`i\notin T`),
+          " なので ",
+          math(String.raw`t\in T`),
+          " なら ",
+          math(String.raw`t\neq i`),
+          " であり、これは ",
+          math(String.raw`t\in T`),
+          " と同値である。したがって ",
+          math(String.raw`T=S'`),
+          " である。",
+        ],
+        [
+          math(String.raw`T=S'`),
+          " とする。",
+          math(String.raw`S'`),
+          " の置き方で ",
+          math(String.raw`i\notin S'`),
+          " なので ",
+          math(String.raw`i\notin T`),
+          " である。",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " について、",
+          math(String.raw`t\in T\cup\{i\}`),
+          " は「（",
+          math(String.raw`t\in S`),
+          " かつ ",
+          math(String.raw`t\neq i`),
+          "）または ",
+          math(String.raw`t=i`),
+          "」と同値である。",
+          math(String.raw`t=i`),
+          " なら ",
+          math(String.raw`i\in S`),
+          " から ",
+          math(String.raw`t\in S`),
+          " なので、これは ",
+          math(String.raw`t\in S`),
+          " と同値である。したがって ",
+          math(String.raw`S=T\cup\{i\}`),
+          " であり、条件が成り立つ。",
+        ],
+      ]),
+      paragraph([
+        "次に、各 ",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`(c_i)_{S,T}=\delta_{S',T}\cdot_{\mathbb{C}}\varsigma(N_i(S'))`),
+        " を示す。",
+        math(String.raw`\delta_{S',T}\in\mathbb{C}`),
+        " は ",
+        math(String.raw`\mathcal{P}_M`),
+        " の二元についてのクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）である。",
+        math(String.raw`T=S'`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i)_{S,T}
+&=\varsigma(N_i(T))
+&&\left(\because\ T=S'\ \text{なので上の同値により条件が成り立ち、}c_i\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=\varsigma(N_i(S'))
+&&\left(\because\ T=S'\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_i(S'))
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{S',T}\cdot_{\mathbb{C}}\varsigma(N_i(S'))
+&&\left(\because\ S'=T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`T\neq S'`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i)_{S,T}
+&=0_{\mathbb{C}}
+&&\left(\because\ T\neq S'\ \text{なので上の同値により条件が成り立たず、}c_i\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_i(S'))
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{S',T}\cdot_{\mathbb{C}}\varsigma(N_i(S'))
+&&\left(\because\ S'\neq T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        "さらに、",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`r_T:=\varsigma(N_i(S'))\cdot_{\mathbb{C}}A_{T,U}\in\mathbb{C}`),
+        " と置き、各 ",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について、和の項を次のように書き直す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i)_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{T,U}
+&=(c_i)_{S,T}\cdot_{\mathbb{C}}A_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\bigl(\delta_{S',T}\cdot_{\mathbb{C}}\varsigma(N_i(S'))\bigr)\cdot_{\mathbb{C}}A_{T,U}
+&&\left(\because\ \text{上の準備の等式}\right)\\
+&=\delta_{S',T}\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(S'))\cdot_{\mathbb{C}}A_{T,U}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{S',T}\cdot_{\mathbb{C}}r_T
+&&\left(\because\ r_T\ \text{の置き方}\right)\\
+&=\delta_{S',T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(S,U)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}A\bigr)_{S,U}
+&=\sum_{T\in\mathcal{P}_M}(c_i)_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}A_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}\delta_{S',T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \text{各}\ T\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=r_{S'}
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ S'\text{、和の変数に}\ T\text{、}v_T:=r_T\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=\varsigma(N_i(S'))\cdot_{\mathbb{C}}A_{S',U}
+&&\left(\because\ r_T\ \text{の置き方で}\ T:=S'\right).
+\end{aligned}`),
+      paragraph([
+        "二つの場合は ",
+        math(String.raw`i\notin S`),
+        " と ",
+        math(String.raw`i\in S`),
+        " を尽くすので、主張が示された。",
+      ]),
+    ],
+  },
 ]);

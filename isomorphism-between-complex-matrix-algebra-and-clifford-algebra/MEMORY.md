@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-07: 左から生成作用素の行列を掛けた行列の成分の補題（ラベル claim_entry_of_creation_operator_matrix_times_matrix、(c_i A)_{S,U}=ς(N_i(S'))·A_{S',U}（i∈S、S':=S から i を除いた集合）、0_ℂ（i∉S））を示し、SageMath（M=1,2,3、不定元の A）で検算した。次は反交換関係 c_i c_j^T + c_j^T c_i = δ_{i,j}·I。
 - 2026-11-07: 台帳の反交換関係 c_i c_j^T + c_j^T c_i = δ_{i,j}·I を三行に割り、符号の自分自身との積 ς(n)·ς(n)=1_ℂ（ラベル claim_sign_of_nonnegative_integer_squares_to_one）を n の帰納法で示した（準備で (-1_ℂ)·(-1_ℂ)=1_ℂ を ℂ の公理から示した）。次は左から生成作用素の行列を掛けた行列の成分の補題（(c_i A)_{S,U}=ς(N_i(S'))·A_{S',U}（i∈S、S':=S から i を除いた集合）、0_ℂ（i∉S））。
 - 2026-11-07: 反交換関係 c_i^T c_j^T + c_j^T c_i^T = 0（ラベル claim_annihilation_operator_matrices_anticommute、i=j を含む）を、成分の等式 (c_k^T c_l^T)_{S,U}=(c_l c_k)_{U,S} で生成作用素の行列どうしの反交換関係へ帰着して示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。
 - 2026-11-07: 反交換関係 c_i c_j + c_j c_i = 0（ラベル claim_creation_operator_matrices_anticommute、i=j を含む）を示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。次は反交換関係 c_i^T c_j^T + c_j^T c_i^T = 0。
