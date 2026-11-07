@@ -8105,35 +8105,35 @@ g_{C,\sigma}(i):=
  &\Longleftrightarrow \sigma(\sigma^{-1}(i))\in C
  &&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ の不変条件}\bigr)\\
  &\Longleftrightarrow i\in C
- &&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+ &&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr)
 \end{aligned}`),
                 paragraph(["以下、", math(String.raw`f:=f_{C,\sigma}`), "、", math(String.raw`g:=g_{C,\sigma}`), " と略す。まず ", math(String.raw`g\circ f=\mathrm{id}_{\mathcal J}`), " を示す。", math(String.raw`i\in C`), " なら、直前の同値によって ", math(String.raw`\sigma^{-1}(i)\in C`), " なので、"]),
                 displayMath(String.raw`\begin{aligned}
 g(f(i))
  &=g(\sigma^{-1}(i))&&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &=\sigma(\sigma^{-1}(i))&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma^{-1}(i)\in C\bigr)\\
- &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+ &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、不変条件によって ", math(String.raw`\sigma(i)\notin C`), " なので、"]),
                 displayMath(String.raw`\begin{aligned}
 g(f(i))
  &=g(\sigma(i))&&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &=\sigma^{-1}(\sigma(i))&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma(i)\notin C\bigr)\\
- &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr).
+ &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr)
 \end{aligned}`),
                 paragraph(["次に ", math(String.raw`f\circ g=\mathrm{id}_{\mathcal J}`), " を示す。", math(String.raw`i\in C`), " なら、不変条件によって ", math(String.raw`\sigma(i)\in C`), " なので、"]),
                 displayMath(String.raw`\begin{aligned}
 f(g(i))
  &=f(\sigma(i))&&\bigl(\because\ g\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &=\sigma^{-1}(\sigma(i))&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma(i)\in C\bigr)\\
- &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr).
+ &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、最初の同値によって ", math(String.raw`\sigma^{-1}(i)\notin C`), " なので、"]),
                 displayMath(String.raw`\begin{aligned}
 f(g(i))
  &=f(\sigma^{-1}(i))&&\bigl(\because\ g\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &=\sigma(\sigma^{-1}(i))&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma^{-1}(i)\notin C\bigr)\\
- &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+ &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr)
 \end{aligned}`),
                 paragraph(["以上で二写像は両側で逆になり、", math(String.raw`\rho_C(\sigma)`), " は写像 ", math(String.raw`f`), " を持ち、逆写像 ", math(String.raw`g`), " を持つ置換として定まる。その不変条件を示す。", math(String.raw`i\in C`), " の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8141,7 +8141,7 @@ f(g(i))
  &\Longleftrightarrow\sigma^{-1}(i)\in C
  &&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &\Longleftrightarrow i\in C
- &&\bigl(\because\ \text{最初に示した逆置換の不変条件}\bigr).
+ &&\bigl(\because\ \text{最初に示した逆置換の不変条件}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8149,21 +8149,21 @@ f(g(i))
  &\Longleftrightarrow\sigma(i)\in C
  &&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
  &\Longleftrightarrow i\in C
- &&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ の不変条件}\bigr).
+ &&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ の不変条件}\bigr)
 \end{aligned}`),
                 paragraph(["従って ", math(String.raw`\rho_C(\sigma)`), " にも同じ ", math(String.raw`C`), " で反転を行える。", math(String.raw`i\in C`), " の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho_C(\rho_C(\sigma))(i)
  &=(\rho_C(\sigma))^{-1}(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)\\
  &=g(i)&&\bigl(\because\ \text{上で求めた逆写像}\bigr)\\
- &=\sigma(i)&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\in C\bigr).
+ &=\sigma(i)&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\in C\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho_C(\rho_C(\sigma))(i)
  &=\rho_C(\sigma)(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)\\
  &=f(i)&&\bigl(\because\ \rho_C(\sigma)\text{ の与える写像}\bigr)\\
- &=\sigma(i)&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\notin C\bigr).
+ &=\sigma(i)&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\notin C\bigr)
 \end{aligned}`),
                 paragraph(["すべての点で値が一致するので二つの置換は等しい。", math(String.raw`\mathcal J=\varnothing`), " では点についての条件は空であり、唯一の空置換について同じ結論を得る。議論は有限集合と写像だけで閉じ、実数体・複素数体への脱出はない。"]),
               ],
