@@ -619,4 +619,237 @@ N_i(T\cup\{j\})
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_entry_of_matrix_times_creation_operator_matrix",
+    kind: "claim",
+    title: { text: "右から生成作用素の行列を掛けた行列の成分" },
+    labels: ["claim_entry_of_matrix_times_creation_operator_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_j\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を生成作用素の行列（",
+        ref("def_creation_operator_matrix"),
+        "）とする。",
+        math(String.raw`A\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、行列の積 ",
+        math(String.raw`\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）の成分は次のとおりである。",
+      ]),
+      displayMath(String.raw`\bigl(A\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}=
+\begin{cases}
+  A_{S,U\cup\{j\}}\cdot_{\mathbb{C}}\varsigma(N_j(U)) & (j\notin U),\\
+  0_{\mathbb{C}} & (j\in U).
+\end{cases}`),
+      paragraph([
+        "右辺の ",
+        math(String.raw`N_j(U)\in\mathbb{Z}_{\ge 0}`),
+        " は部分集合のうち番号より小さい元を数える個数（",
+        ref("def_count_of_subset_elements_below_index"),
+        "）、",
+        math(String.raw`\varsigma(N_j(U))\in\mathbb{C}`),
+        " は非負整数の偶奇による符号（",
+        ref("def_sign_of_nonnegative_integer"),
+        "）である。",
+        math(String.raw`U\subseteq\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`j\in\{1,\dots,M\}`),
+        " から ",
+        math(String.raw`U\cup\{j\}\in\mathcal{P}_M`),
+        " なので、",
+        math(String.raw`A_{S,U\cup\{j\}}\in\mathbb{C}`),
+        " が定まる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "以下の和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`),
+        "（有限集合であることは ",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）であり、有限集合の上の和についての主張はどれも ",
+        math(String.raw`V:=\mathbb{C}^{\mathrm{vec}}`),
+        "、",
+        math(String.raw`X:=\mathcal{P}_M`),
+        " に当てる。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の台集合は ",
+        math(String.raw`\mathbb{C}`),
+        " なので、和の値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+        math(String.raw`j\in U`),
+        " か ",
+        math(String.raw`j\notin U`),
+        " かで二つの場合に分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`j\in U`),
+          " のとき。準備として、各 ",
+          math(String.raw`T\in\mathcal{P}_M`),
+          " について次の等式を示す。",
+          math(String.raw`j\in U`),
+          " なので、",
+          math(String.raw`c_j`),
+          " の定義の条件「",
+          math(String.raw`j\notin U`),
+          " かつ ",
+          math(String.raw`T=U\cup\{j\}`),
+          "」は成り立たない。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_j)_{T,U}
+&=A_{S,T}\cdot_{\mathbb{C}}(c_j)_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=A_{S,T}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \text{条件が成り立たないので}\ c_j\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\text{（二回）}\right)\\
+&=(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(S,U)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}
+&=\sum_{T\in\mathcal{P}_M}A_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_j)_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}
+&&\left(\because\ \text{各}\ T\ \text{で準備の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}\right)
+&&\left(\because\ \rho:=0_{\mathbb{C}}\text{、}\lambda_T:=1_{\mathbb{C}}\text{、}v_T:=1_{\mathbb{C}}\ \text{を当てる。}\blkref{claim_scalar_multiple_of_sum_over_finite_set}\right)\\
+&=0_{\mathbb{C}^{\mathrm{vec}}}
+&&\left(\because\ \text{零のスカラー倍は零ベクトル。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`j\notin U`),
+          " のとき。",
+          math(String.raw`R:=U\cup\{j\}\in\mathcal{P}_M`),
+          " と置く。",
+          math(String.raw`j\notin U`),
+          " なので、",
+          math(String.raw`T\in\mathcal{P}_M`),
+          " について ",
+          math(String.raw`c_j`),
+          " の定義の条件「",
+          math(String.raw`j\notin U`),
+          " かつ ",
+          math(String.raw`T=U\cup\{j\}`),
+          "」は ",
+          math(String.raw`T=R`),
+          " と同値である。準備として、各 ",
+          math(String.raw`T\in\mathcal{P}_M`),
+          " について ",
+          math(String.raw`(c_j)_{T,U}=\delta_{R,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))`),
+          " を示す。",
+          math(String.raw`\delta_{R,T}\in\mathbb{C}`),
+          " は ",
+          math(String.raw`\mathcal{P}_M`),
+          " の二元についてのクロネッカーのデルタ（",
+          ref("def_kronecker_delta"),
+          "）である。",
+          math(String.raw`T=R`),
+          " なら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_j)_{T,U}
+&=\varsigma(N_j(U))
+&&\left(\because\ T=R\ \text{なので}\ c_j\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{R,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ R=T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`T\neq R`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_j)_{T,U}
+&=0_{\mathbb{C}}
+&&\left(\because\ T\neq R\ \text{なので条件が成り立たず、}c_j\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&=\delta_{R,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ R\neq T\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        "さらに、",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`r_T:=A_{S,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))\in\mathbb{C}`),
+        " と置き、各 ",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について、和の項のデルタを係数の位置へ移した次の等式を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_j)_{T,U}
+&=A_{S,T}\cdot_{\mathbb{C}}(c_j)_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=A_{S,T}\cdot_{\mathbb{C}}\bigl(\delta_{R,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \text{上の準備の等式}\right)\\
+&=(A_{S,T}\cdot_{\mathbb{C}}\delta_{R,T})\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(\delta_{R,T}\cdot_{\mathbb{C}}A_{S,T})\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{R,T}\cdot_{\mathbb{C}}\bigl(A_{S,T}\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{R,T}\cdot_{\mathbb{C}}r_T
+&&\left(\because\ r_T\ \text{の置き方}\right)\\
+&=\delta_{R,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(S,U)`),
+        " 成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}
+&=\sum_{T\in\mathcal{P}_M}A_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_j)_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}\delta_{R,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_T
+&&\left(\because\ \text{各}\ T\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=r_R
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ R\text{、和の変数に}\ T\text{、}v_T:=r_T\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=A_{S,R}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ r_T\ \text{の置き方で}\ T:=R\right)\\
+&=A_{S,U\cup\{j\}}\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ R\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの場合は ",
+        math(String.raw`j\in U`),
+        " と ",
+        math(String.raw`j\notin U`),
+        " を尽くすので、主張が示された。",
+      ]),
+    ],
+  },
 ]);

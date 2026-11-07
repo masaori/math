@@ -18,6 +18,7 @@ export const ALL_LABELS = [
   "claim_dual_space_is_complex_vector_space",
   "claim_embedding_into_first_component_is_linear_map",
   "claim_embedding_into_second_component_is_linear_map",
+  "claim_entry_of_matrix_times_creation_operator_matrix",
   "claim_family_member_is_kronecker_delta_linear_combination",
   "claim_identity_matrix_is_left_unit_of_matrix_product",
   "claim_identity_matrix_is_right_unit_of_matrix_product",
