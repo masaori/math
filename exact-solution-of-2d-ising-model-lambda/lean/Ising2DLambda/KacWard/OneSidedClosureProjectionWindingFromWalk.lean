@@ -16,6 +16,7 @@ theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
         (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
       let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
         projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+      closedNonbacktrackingWalk Γ ∧
       verticalDirectedWindingNumber Γ = 0 ∧ horizontalDirectedWindingNumber Γ = 0 := by
   obtain ⟨k₀, hprojection⟩ :=
     oneSidedClosureProjectionFromWalk_closedNonbacktracking γ hγ hcontact hwind
@@ -90,6 +91,6 @@ theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
     (by simpa [hm'] using hclosed)
     (by intro j hj; exact hunit j (by simpa [hm'] using hj))
     hwalk
-  simpa [Γ, hm'] using hresult
+  exact ⟨hwalk, by simpa [Γ, hm'] using hresult⟩
 
 end Ising2DLambda.KacWard

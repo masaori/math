@@ -65440,7 +65440,7 @@ N_{r,c}^{\rightarrow}(\gamma)
                         " を満たす縦辺の列座標は無いので",
                       ]),
                       displayMath(String.raw`N_{r,c}^{\rightarrow}(\gamma)=0
-\qquad\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\text{ と }c_{\max}\le c\bigr).`),
+\qquad\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\text{ と }c_{\max}\le c\bigr)`),
                       paragraph([
                         "また、", math(String.raw`r<r_{\min}`), " または ", math(String.raw`r_{\max}\le r`),
                         " なら行座標 ", math(String.raw`r`), " と ", math(String.raw`r+1`),
@@ -65448,7 +65448,7 @@ N_{r,c}^{\rightarrow}(\gamma)
                         " について",
                       ]),
                       displayMath(String.raw`N_{r,c}^{\rightarrow}(\gamma)=0
-\qquad\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\text{ と }r<r_{\min}\text{ または }r_{\max}\le r\bigr).`),
+\qquad\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\text{ と }r<r_{\min}\text{ または }r_{\max}\le r\bigr)`),
                       paragraph([
                         "よって交差数が奇数になり得るのは ",
                         math(String.raw`r_{\min}\le r<r_{\max}`), " かつ ",
