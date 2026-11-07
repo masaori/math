@@ -20,6 +20,42 @@ def outsideBoundingRectangle
     (rMin rMax cMin cMax : ℤ) : Set (ℤ × ℤ) :=
   {p | p.1 < rMin ∨ rMax ≤ p.1 ∨ p.2 < cMin ∨ cMax ≤ p.2}
 
+/-- 横の有限区間に奇数回通過した縦辺がなければ、外側セルのまま進める。 -/
+theorem exteriorCells_horizontalPath_of_even_vertical_edges
+    (n : ℕ) (row col : ℕ → ℤ) (r c d : ℤ)
+    (hcd : c ≤ d) (hstart : (r, c) ∈ exteriorCells n row col)
+    (heven : ∀ j : ℤ, c < j → j ≤ d →
+      Even (verticalEdgeTraversalCount n row col r j)) :
+    Relation.ReflTransGen
+      (fun a b => a ∈ exteriorCells n row col ∧
+        b ∈ exteriorCells n row col ∧ CellEdgeAdjacent a b)
+      (r, c) (r, d) := by
+  let step := fun a b => a ∈ exteriorCells n row col ∧
+    b ∈ exteriorCells n row col ∧ CellEdgeAdjacent a b
+  have hpath (z : ℤ) (hcz : c ≤ z)
+      (hevenZ : ∀ j : ℤ, c < j → j ≤ z →
+        Even (verticalEdgeTraversalCount n row col r j)) :
+      Relation.ReflTransGen step (r, c) (r, z) ∧
+        (r, z) ∈ exteriorCells n row col := by
+    induction z, hcz using Int.leInduction with
+    | base => exact ⟨Relation.ReflTransGen.refl, hstart⟩
+    | succ z hcz ih =>
+      have hprevious := ih (fun j hcj hjz => hevenZ j hcj (by omega))
+      have hcurrent : Even (rightRayCrossingCount n row col r z) :=
+        Nat.not_odd_iff_even.mp hprevious.2
+      have hcross : Even (verticalEdgeTraversalCount n row col r (z + 1)) :=
+        hevenZ (z + 1) (by omega) (by omega)
+      have hnext : (r, z + 1) ∈ exteriorCells n row col := by
+        change ¬ Odd (rightRayCrossingCount n row col r (z + 1))
+        apply Nat.not_odd_iff_even.mpr
+        have hsplit := rightRayCrossingCount_adjacent n row col r z
+        rcases hcurrent with ⟨q, hq⟩
+        rcases hcross with ⟨t, ht⟩
+        exact ⟨q - t, by omega⟩
+      exact ⟨hprevious.1.tail ⟨hprevious.2, hnext,
+        Or.inl ⟨rfl, Or.inr (by omega)⟩⟩, hnext⟩
+  exact (hpath d hcd heven).1
+
 /-- 長方形の上側または下側の固定行では、任意の二セルを列方向の有限路で結べる。 -/
 theorem outsideBoundingRectangle_horizontalPath
     (rMin rMax cMin cMax r c d : ℤ)
