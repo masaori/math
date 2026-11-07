@@ -3550,4 +3550,430 @@ N_i(T)
 \end{aligned}`),
     ],
   },
+  {
+    id: "isomorphism_claim_vacuum_matrix_unit_times_reverse_ordered_product_of_selected_annihilation_matrices",
+    kind: "claim",
+    title: { text: "空集合の位置の行列単位に、部分集合の元の番号の消滅作用素の行列を番号の逆順に右から掛けると、その部分集合の列の行列単位になること" },
+    labels: ["claim_vacuum_matrix_unit_times_reverse_ordered_product_of_selected_annihilation_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`T\in\mathcal{P}_M`),
+        "（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）とする。",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_t^{\mathsf T}\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を消滅作用素の行列（",
+        ref("def_annihilation_operator_matrix"),
+        "）とし、",
+        math(String.raw`z_t\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を、",
+        math(String.raw`t\in T`),
+        " なら ",
+        math(String.raw`z_t:=c_t^{\mathsf T}`),
+        "、",
+        math(String.raw`t\notin T`),
+        " なら ",
+        math(String.raw`z_t:=1_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "（単位行列。",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）と定める。",
+        math(String.raw`k\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`M+1-k\in\{1,\dots,M\}`),
+        " なので、番号を逆順に並べ直した族 ",
+        math(String.raw`w_k:=z_{M+1-k}`),
+        " が定まる。",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " は ℂ-代数である（",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"),
+        "。",
+        math(String.raw`\mathcal{P}_M`),
+        " が有限集合であることは ",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）。その中の ",
+        math(String.raw`w_1,\dots,w_M`),
+        " の番号順の積（",
+        ref("def_ordered_product_in_algebra"),
+        "。",
+        math(String.raw`z_M,\dots,z_1`),
+        " をこの順に掛けた積である）と、行列単位 ",
+        math(String.raw`E_{\emptyset,\emptyset},\ E_{\emptyset,T}`),
+        "（",
+        ref("def_matrix_unit"),
+        "）について、行列の積 ",
+        math(String.raw`\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）で次が成り立つ。",
+      ]),
+      displayMath(String.raw`E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Bigl(\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,k=1}^{M}w_k\Bigr)=E_{\emptyset,T}.`),
+    ],
+    proof: [
+      paragraph([
+        "記号の準備。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " について、",
+        math(String.raw`\Pi_m\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を、番号順の積の定義（",
+        ref("def_ordered_product_in_algebra"),
+        "）の ",
+        math(String.raw`\Pi_m`),
+        " に ",
+        math(String.raw`A:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        "、",
+        math(String.raw`n:=M`),
+        "、族 ",
+        math(String.raw`w_1,\dots,w_M`),
+        " を当てたものとする。すなわち ",
+        math(String.raw`\Pi_0=1_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "、",
+        math(String.raw`\Pi_m=\Pi_{m-1}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m`),
+        "（",
+        math(String.raw`1\le m\le M`),
+        "）であり、",
+        math(String.raw`\Pi_M=\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,k=1}^{M}w_k`),
+        " である。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " について、次の集合を置く。",
+      ]),
+      displayMath(String.raw`T^{\langle m\rangle}:=\{\,t\in\{1,\dots,M\}\ :\ t\in T\ \text{かつ}\ t\ge M+1-m\,\}.`),
+      paragraph([
+        math(String.raw`T^{\langle m\rangle}\subseteq\{1,\dots,M\}`),
+        " なので ",
+        math(String.raw`T^{\langle m\rangle}\in\mathcal{P}_M`),
+        " である（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）。",
+      ]),
+      paragraph([
+        "準備。和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`),
+        " の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）である。",
+        math(String.raw`s\in\{1,\dots,M\}`),
+        " とし、",
+        math(String.raw`R\in\mathcal{P}_M`),
+        " のすべての元 ",
+        math(String.raw`t`),
+        " が ",
+        math(String.raw`t\ge s+1`),
+        " を満たすとする。このとき ",
+        math(String.raw`s\notin R`),
+        " であり、",
+        math(String.raw`R\cup\{s\}\subseteq\{1,\dots,M\}`),
+        " なので ",
+        math(String.raw`R\cup\{s\}\in\mathcal{P}_M`),
+        " である。また ",
+        math(String.raw`R`),
+        " のすべての元 ",
+        math(String.raw`t`),
+        " は ",
+        math(String.raw`t\ge s+1>s`),
+        " を満たすので、",
+        math(String.raw`N_s(R)=0`),
+        " である（",
+        ref("claim_count_below_index_vanishes_without_smaller_elements"),
+        " を ",
+        math(String.raw`i:=s`),
+        "、",
+        math(String.raw`T:=R`),
+        " に当てる）。次を示す。",
+      ]),
+      displayMath(String.raw`E_{\emptyset,R}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}=E_{\emptyset,R\cup\{s\}}\qquad(\star).`),
+      paragraph([
+        math(String.raw`X,U\in\mathcal{P}_M`),
+        " を固定し、",
+        math(String.raw`(X,U)`),
+        " 成分を比べる。",
+        math(String.raw`V\in\mathcal{P}_M`),
+        " について ",
+        math(String.raw`r_V:=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,V}\in\mathbb{C}`),
+        " と置き、各 ",
+        math(String.raw`V\in\mathcal{P}_M`),
+        " について、和の項を次のように書き直す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{V,U}
+&=(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{V,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,V}\bigr)\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{V,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
+&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,V}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,V}
+&&\left(\because\ c_s^{\mathsf T}\ \text{の定義。}\blkref{def_annihilation_operator_matrix}\right)\\
+&=\bigl(\delta_{R,V}\cdot_{\mathbb{C}}\delta_{\emptyset,X}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,V}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{R,V}\cdot_{\mathbb{C}}\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,V}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{R,V}\cdot_{\mathbb{C}}r_V
+&&\left(\because\ r_V\ \text{の置き方}\right)\\
+&=\delta_{R,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_V
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って ",
+        math(String.raw`(X,U)`),
+        " 成分を開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(E_{\emptyset,R}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}\bigr)_{X,U}
+&=\sum_{V\in\mathcal{P}_M}(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{V,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{V\in\mathcal{P}_M}\delta_{R,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_V
+&&\left(\because\ \text{各}\ V\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=r_R
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ R\text{、和の変数に}\ V\text{、}v_V:=r_V\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,R}
+&&\left(\because\ r_V\ \text{の置き方で}\ V:=R\right).
+\end{aligned}\qquad(\dagger)`),
+      paragraph([
+        math(String.raw`U=R\cup\{s\}`),
+        " か ",
+        math(String.raw`U\neq R\cup\{s\}`),
+        " かで分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`U=R\cup\{s\}`),
+          " のとき。",
+          math(String.raw`s\notin R`),
+          " なので、",
+          math(String.raw`c_s`),
+          " の定義（",
+          ref("def_creation_operator_matrix"),
+          "）の条件「",
+          math(String.raw`s\notin R`),
+          " かつ ",
+          math(String.raw`U=R\cup\{s\}`),
+          "」が成り立つ。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(E_{\emptyset,R}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}\bigr)_{X,U}
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,R}
+&&\left(\because\ (\dagger)\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}\varsigma(N_s(R))
+&&\left(\because\ \text{条件が成り立つので}\ c_s\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}\varsigma(0)
+&&\left(\because\ N_s(R)=0\text{。}\blkref{claim_count_below_index_vanishes_without_smaller_elements}\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \varsigma(0)\ \text{の定義。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R\cup\{s\},U}
+&&\left(\because\ R\cup\{s\}=U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=\bigl(E_{\emptyset,R\cup\{s\}}\bigr)_{X,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`U\neq R\cup\{s\}`),
+          " のとき。",
+          math(String.raw`c_s`),
+          " の定義（",
+          ref("def_creation_operator_matrix"),
+          "）の条件「",
+          math(String.raw`s\notin R`),
+          " かつ ",
+          math(String.raw`U=R\cup\{s\}`),
+          "」は成り立たない。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(E_{\emptyset,R}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}\bigr)_{X,U}
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,R}
+&&\left(\because\ (\dagger)\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \text{条件が成り立たないので}\ c_s\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R\cup\{s\},U}
+&&\left(\because\ R\cup\{s\}\neq U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
+&=\bigl(E_{\emptyset,R\cup\{s\}}\bigr)_{X,U}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの場合はすべての ",
+        math(String.raw`X,U\in\mathcal{P}_M`),
+        " を尽くすので、両辺の成分はすべて等しく、行列として等しい（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。これで（",
+        math(String.raw`\star`),
+        "）が示された。",
+      ]),
+      paragraph([
+        "本題の前半。",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " についての帰納法で、",
+        math(String.raw`E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_m=E_{\emptyset,T^{\langle m\rangle}}`),
+        " を示す。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき。",
+        math(String.raw`t\ge M+1`),
+        " を満たす ",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " は無いので、",
+        math(String.raw`T^{\langle 0\rangle}`),
+        " は元を持たず、",
+        math(String.raw`T^{\langle 0\rangle}=\emptyset`),
+        " である（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_0
+&=E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}1_{\mathrm{Mat}_{\mathcal{P}_M}}
+&&\left(\because\ \Pi_0\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=E_{\emptyset,\emptyset}
+&&\left(\because\ \text{単位行列を右から掛けても変わらない。}\blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right)\\
+&=E_{\emptyset,T^{\langle 0\rangle}}
+&&\left(\because\ \emptyset=T^{\langle 0\rangle}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " とし、",
+        math(String.raw`E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_{m-1}=E_{\emptyset,T^{\langle m-1\rangle}}`),
+        " を仮定する（帰納法の仮定）。",
+        math(String.raw`s:=M+1-m\in\{1,\dots,M\}`),
+        " と置く。",
+        math(String.raw`w_m=z_s`),
+        " である（",
+        math(String.raw`w_m`),
+        " の定め方）。",
+        math(String.raw`T^{\langle m-1\rangle}`),
+        " のすべての元 ",
+        math(String.raw`t`),
+        " は ",
+        math(String.raw`t\ge M+1-(m-1)=s+1`),
+        " を満たす。",
+        math(String.raw`s\in T`),
+        " か ",
+        math(String.raw`s\notin T`),
+        " かで分ける。",
+      ]),
+      list([
+        [
+          math(String.raw`s\in T`),
+          " のとき。",
+          math(String.raw`T^{\langle m-1\rangle}\cup\{s\}=T^{\langle m\rangle}`),
+          " である。実際、",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " について、",
+          math(String.raw`t\in T^{\langle m\rangle}`),
+          " は「",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t\ge s`),
+          "」と同値であり、それは「",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t\ge s+1`),
+          "、または ",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t=s`),
+          "」と同値であり、",
+          math(String.raw`s\in T`),
+          " なのでそれは「",
+          math(String.raw`t\in T^{\langle m-1\rangle}`),
+          "、または ",
+          math(String.raw`t=s`),
+          "」と同値である（",
+          ref("def_power_set_of_first_m_positive_integers"),
+          "）。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_m
+&=E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\bigl(\Pi_{m-1}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m\bigr)
+&&\left(\because\ \Pi_m\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=\bigl(E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_{m-1}\bigr)\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m
+&&\left(\because\ \text{行列の積の結合法則。}\blkref{claim_matrix_product_is_associative}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}
+&&\left(\because\ w_m=z_s\ \text{で、}s\in T\ \text{なので}\ z_s\ \text{の定め方}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}\cup\{s\}}
+&&\left(\because\ R:=T^{\langle m-1\rangle}\ \text{で}\ (\star)\right)\\
+&=E_{\emptyset,T^{\langle m\rangle}}
+&&\left(\because\ T^{\langle m-1\rangle}\cup\{s\}=T^{\langle m\rangle}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`s\notin T`),
+          " のとき。",
+          math(String.raw`T^{\langle m-1\rangle}=T^{\langle m\rangle}`),
+          " である。実際、",
+          math(String.raw`s\notin T`),
+          " なので、",
+          math(String.raw`t\in\{1,\dots,M\}`),
+          " について「",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t\ge s`),
+          "」は「",
+          math(String.raw`t\in T`),
+          " かつ ",
+          math(String.raw`t\ge s+1`),
+          "」と同値である（",
+          ref("def_power_set_of_first_m_positive_integers"),
+          "）。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_m
+&=E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\bigl(\Pi_{m-1}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m\bigr)
+&&\left(\because\ \Pi_m\ \text{の定義。}\blkref{def_ordered_product_in_algebra}\right)\\
+&=\bigl(E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_{m-1}\bigr)\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m
+&&\left(\because\ \text{行列の積の結合法則。}\blkref{claim_matrix_product_is_associative}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}w_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}1_{\mathrm{Mat}_{\mathcal{P}_M}}
+&&\left(\because\ w_m=z_s\ \text{で、}s\notin T\ \text{なので}\ z_s\ \text{の定め方}\right)\\
+&=E_{\emptyset,T^{\langle m-1\rangle}}
+&&\left(\because\ \text{単位行列を右から掛けても変わらない。}\blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right)\\
+&=E_{\emptyset,T^{\langle m\rangle}}
+&&\left(\because\ T^{\langle m-1\rangle}=T^{\langle m\rangle}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,M\}`),
+        " について ",
+        math(String.raw`E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_m=E_{\emptyset,T^{\langle m\rangle}}`),
+        " が示された。",
+      ]),
+      paragraph([
+        "本題の後半。",
+        math(String.raw`T^{\langle M\rangle}=T`),
+        " である。実際、",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`t\ge 1=M+1-M`),
+        " は成り立つので、",
+        math(String.raw`t\in T^{\langle M\rangle}`),
+        " は ",
+        math(String.raw`t\in T`),
+        " と同値である（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Bigl(\prod_{\mathrm{Mat}_{\mathcal{P}_M},\,k=1}^{M}w_k\Bigr)
+&=E_{\emptyset,\emptyset}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Pi_M
+&&\left(\because\ \Pi_M\ \text{の置き方}\right)\\
+&=E_{\emptyset,T^{\langle M\rangle}}
+&&\left(\because\ \text{前半の命題で}\ m:=M\right)\\
+&=E_{\emptyset,T}
+&&\left(\because\ T^{\langle M\rangle}=T\right).
+\end{aligned}`),
+    ],
+  },
 ]);

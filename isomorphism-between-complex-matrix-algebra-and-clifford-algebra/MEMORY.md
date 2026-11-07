@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-07: Φ(a_T) に当たる行列の逆順の積を E_{∅,∅} に右から掛けると E_{∅,T} になること（ラベル claim_vacuum_matrix_unit_times_reverse_ordered_product_of_selected_annihilation_matrices）を、E_{∅,R}·c_s^T=E_{∅,R∪{s}}（R の元がすべて s+1 以上）の準備と m の帰納法で示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。これで Φ∘Ψ が使う行列の側の四行が済んだ。次は部分集合が生成する部分代数と、生成元で一致する準同型は等しいこと。
+
 - 2026-11-07: Φ(a†_S) に当たる行列の番号順の積を E_{∅,∅} に左から掛けると E_{S,∅} になること（ラベル claim_ordered_product_of_selected_creation_matrices_times_vacuum_matrix_unit）を、c_m·E_{R,∅}=E_{R∪{m},∅}（R の元がすべて m+1 以上）の準備と m の帰納法で示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。次は Φ(a_T) に当たる行列の逆順の積を E_{∅,∅} に右から掛けると E_{∅,T} になること。
 
 - 2026-11-07: 番号より小さい元を持たない部分集合の個数が 0 であること（ラベル claim_count_below_index_vanishes_without_smaller_elements、T のすべての元が i 以上なら N_i(T)=0）を i の帰納法で示した。次は Φ(P) に当たる行列の積が E_{∅,∅} であること。
