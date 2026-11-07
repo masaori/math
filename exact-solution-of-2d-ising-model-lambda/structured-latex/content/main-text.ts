@@ -8498,19 +8498,19 @@ r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr)
 0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr),\\
 r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr),\\
 d&\le t&&\bigl(\because\ 0\le r\text{ と自然数の差}\bigr),\\
-d&<p&&\bigl(\because\ d\le t\text{ と }t\in I_p\text{ の条件 }t<p\bigr).
+d&<p&&\bigl(\because\ d\le t\text{ と }t\in I_p\text{ の条件 }t<p\bigr)
 \end{aligned}`),
                 paragraph(["両辺に共通する反復を取り消せる形へ、次の三等号で書き換える。"]),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[r]}\bigl(\sigma^{[d]}(i)\bigr)
 &=\sigma^{[r+d]}(i)&&\bigl(\because\ \blkref{claim_finite_map_iterate_add}\bigr)\\
 &=\sigma^{[t]}(i)&&\bigl(\because\ r+d=t\bigr)\\
-&=\sigma^{[r]}(i)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr).
+&=\sigma^{[r]}(i)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr)
 \end{aligned}`),
                 paragraph(["二点 ", math(String.raw`\sigma^{[d]}(i),i\in\mathcal J`), " に反復の単射性を適用すると、"]),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[d]}(i)&=i&&\bigl(\because\ \blkref{claim_finite_permutation_iterate_injective}\text{ を直前の等式に適用}\bigr),\\
-p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_permutation_minimal_period}\text{ の最小性}\bigr).
+p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_permutation_minimal_period}\text{ の最小性}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`p\le d<p\qquad\bigl(\because\ \text{直前の }p\le d\text{ と先に得た }d<p\bigr)`),
                 paragraph(["これは自然数の大小に矛盾する。よって"]),

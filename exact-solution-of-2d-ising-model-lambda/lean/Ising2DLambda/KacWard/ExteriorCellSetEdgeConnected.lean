@@ -7,11 +7,9 @@
 任意の外側セルから同じ行を進んでその合併へ至る有限列をつなぐ。
 -/
 import Ising2DLambda.KacWard.WalkSideExteriorBandConnected
-import Ising2DLambda.NecSuf.KacWard.ExteriorCellSetEdgeConnected
+import Ising2DLambda.KacWard.InteriorCellSetEdgeConnected
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 右半直線交差数が偶数であるセル、すなわち内側セル集合の補集合。 -/
 def exteriorCells (n : ℕ) (row col : ℕ → ℤ) : Set (ℤ × ℤ) :=
@@ -21,6 +19,54 @@ def exteriorCells (n : ℕ) (row col : ℕ → ℤ) : Set (ℤ × ℤ) :=
 def outsideBoundingRectangle
     (rMin rMax cMin cMax : ℤ) : Set (ℤ × ℤ) :=
   {p | p.1 < rMin ∨ rMax ≤ p.1 ∨ p.2 < cMin ∨ cMax ≤ p.2}
+
+/-- 交わる外側の二つの核を、辺隣接の有限路で一つにつなぐ。 -/
+theorem exteriorCores_nonempty_edgeConnected
+    (S firstCore secondCore : Set (ℤ × ℤ))
+    (hfirstSubset : firstCore ⊆ S) (hsecondSubset : secondCore ⊆ S)
+    (hfirstConnected : EdgeConnectedCellSet firstCore)
+    (hsecondConnected : EdgeConnectedCellSet secondCore)
+    (hoverlap : ∃ p, p ∈ firstCore ∧ p ∈ secondCore)
+    (hreaches : ∀ x ∈ S, ∃ b ∈ firstCore ∪ secondCore,
+      Relation.ReflTransGen
+        (fun a b => a ∈ S ∧ b ∈ S ∧ CellEdgeAdjacent a b) x b) :
+    S.Nonempty ∧ EdgeConnectedCellSet S := by
+  have hcoreNonempty : (firstCore ∪ secondCore).Nonempty := by
+    obtain ⟨p, hp, -⟩ := hoverlap
+    exact ⟨p, Or.inl hp⟩
+  have hcoreConnected : EdgeConnectedCellSet (firstCore ∪ secondCore) := by
+    intro x hx y hy
+    obtain ⟨p, hpFirst, hpSecond⟩ := hoverlap
+    have liftFirst :
+        (fun a b => a ∈ firstCore ∧ b ∈ firstCore ∧ CellEdgeAdjacent a b) ≤
+        (fun a b => a ∈ firstCore ∪ secondCore ∧
+          b ∈ firstCore ∪ secondCore ∧ CellEdgeAdjacent a b) := by
+      intro a b hab
+      exact ⟨Or.inl hab.1, Or.inl hab.2.1, hab.2.2⟩
+    have liftSecond :
+        (fun a b => a ∈ secondCore ∧ b ∈ secondCore ∧ CellEdgeAdjacent a b) ≤
+        (fun a b => a ∈ firstCore ∪ secondCore ∧
+          b ∈ firstCore ∪ secondCore ∧ CellEdgeAdjacent a b) := by
+      intro a b hab
+      exact ⟨Or.inr hab.1, Or.inr hab.2.1, hab.2.2⟩
+    rcases hx with hxFirst | hxSecond
+    · rcases hy with hyFirst | hySecond
+      · exact (Relation.ReflTransGen.mono liftFirst x y)
+          (hfirstConnected hxFirst hyFirst)
+      · exact ((Relation.ReflTransGen.mono liftFirst x p)
+          (hfirstConnected hxFirst hpFirst)).trans
+          ((Relation.ReflTransGen.mono liftSecond p y)
+            (hsecondConnected hpSecond hySecond))
+    · rcases hy with hyFirst | hySecond
+      · exact ((Relation.ReflTransGen.mono liftSecond x p)
+          (hsecondConnected hxSecond hpSecond)).trans
+          ((Relation.ReflTransGen.mono liftFirst p y)
+            (hfirstConnected hpFirst hyFirst))
+      · exact (Relation.ReflTransGen.mono liftSecond x y)
+          (hsecondConnected hxSecond hySecond)
+  exact edgeConnected_of_band_reaches S (firstCore ∪ secondCore)
+    hcoreNonempty (Set.union_subset hfirstSubset hsecondSubset)
+    hcoreConnected hreaches
 
 /-- 外側帯・外接長方形外・行方向到達を合成する局所版。 -/
 theorem exteriorCellSet_nonempty_edgeConnected_local
@@ -55,8 +101,7 @@ theorem exteriorCellSet_nonempty_edgeConnected_local
     rintro p ⟨k, hk, hp⟩
     change p ∉ oddRayInteriorCells n row col
     exact hp.2
-  exact connected_of_two_connected_cores_and_reaches_necSuf
-    CellEdgeAdjacent cellEdgeAdjacent_symmetric
+  exact exteriorCores_nonempty_edgeConnected
     (exteriorCells n row col)
     (outsideBoundingRectangle rMin rMax cMin cMax)
     (walkSideExteriorBand n row col)
@@ -103,8 +148,7 @@ theorem exteriorCellSet_nonempty_edgeConnected
     rintro p ⟨k, hk, hp⟩
     change p ∉ oddRayInteriorCells n row col
     exact hp.2
-  exact connected_of_two_connected_cores_and_reaches_necSuf
-    CellEdgeAdjacent cellEdgeAdjacent_symmetric
+  exact exteriorCores_nonempty_edgeConnected
     (exteriorCells n row col)
     (outsideBoundingRectangle rMin rMax cMin cMax)
     (walkSideExteriorBand n row col)
