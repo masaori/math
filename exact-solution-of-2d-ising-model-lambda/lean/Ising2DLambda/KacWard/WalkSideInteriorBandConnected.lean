@@ -195,6 +195,31 @@ theorem walkSideInteriorBandFromWalk_coordinate_unit {L m : ℕ}
     dsimp only at hr hc
     omega
 
+/-- 一周期の持ち上げ点の単射性を整数添字の行・列座標へ移す。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_distinct {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    ∀ k l, k < m + 1 → l < m + 1 →
+      row k = row l → col k = col l → k = l := by
+  dsimp only
+  intro k l hk hl hr hc
+  let i : Fin (m + 1) := ⟨k, hk⟩
+  let j : Fin (m + 1) := ⟨l, hl⟩
+  have hi : Fin.ofNat (m + 2) k = i.castSucc := by
+    apply Fin.ext
+    simp [i, Nat.mod_eq_of_lt (by omega : k < m + 2)]
+  have hj : Fin.ofNat (m + 2) l = j.castSucc := by
+    apply Fin.ext
+    simp [j, Nat.mod_eq_of_lt (by omega : l < m + 2)]
+  have hp : planeLift γ i.castSucc = planeLift γ j.castSucc := by
+    rw [hi, hj] at hr hc
+    exact Prod.ext hr hc
+  have hij := hdistinct hp
+  exact congrArg Fin.val hij
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h

@@ -7276,7 +7276,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
               ],
               proof: [
                 paragraph(["有限集合 ", math(String.raw`\mathcal F:=\{f\mid f:\mathcal J\to\mathcal J\}`), " と、その部分集合 ", math(String.raw`\mathcal U:=\{f\in\mathcal F\mid f\text{ は全単射}\}`), " を使う。以下、", math(String.raw`i,j\in\mathcal J`), "、", math(String.raw`\sigma,\pi,\tau\in\operatorname{Perm}(\mathcal J)`), " とする。整数の包含 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " と ", ref("def_qbar_constant_embedding"), " により、"]),
-                displayMath(String.raw`c_\sigma:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\in\overline{\mathbb Q}[x],\qquad P(f):=\prod_i A_{i,f(i)}\in\overline{\mathbb Q}[x],`),
+                displayMath(String.raw`c_\sigma:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\in\overline{\mathbb Q}[x],\qquad P(f):=\prod_i A_{i,f(i)}\in\overline{\mathbb Q}[x]`),
                 displayMath(String.raw`I(f):=\sum_\sigma c_\sigma\prod_i B_{f(i),\sigma(i)}\in\overline{\mathbb Q}[x]\qquad(f\in\mathcal F)`),
                 paragraph(["と置く。符号は ", ref("def_permutation_sign"), " の整数値であり、和と積の省略した範囲は直前に宣言した有限集合とする。"]),
                 paragraph(["単射の ", math(String.raw`f\in\mathcal F`), " なら、異なる元の像が異なることから、"]),
@@ -66023,6 +66023,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
