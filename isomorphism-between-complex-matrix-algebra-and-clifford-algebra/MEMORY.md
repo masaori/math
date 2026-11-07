@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-07: 反交換関係 c_i c_j + c_j c_i = 0（ラベル claim_creation_operator_matrices_anticommute、i=j を含む）を示し、SageMath（M=1,2,3、ZZ の厳密計算）で検算した。次は反交換関係 c_i^T c_j^T + c_j^T c_i^T = 0。
 - 2026-11-07: 台帳の反交換関係 c_i c_j + c_j c_i = 0 を二行に割り、右から生成作用素の行列を掛けた行列の成分の補題（ラベル claim_entry_of_matrix_times_creation_operator_matrix、(A c_j)_{S,U}=A_{S,U∪{j}}·ς(N_j(U))（j∉U）、0_ℂ（j∈U））を示し、SageMath（M=1,2,3）で検算した。次は反交換関係 c_i c_j + c_j c_i = 0。
 - 2026-11-06: 個数 N_i(T) に一元を足したときの値（ラベル claim_count_below_index_after_adding_one_element、j<i なら N_i(T∪{j})=N_i(T)+1、j≥i なら N_i(T)）を i の帰納法で示した。次は反交換関係 c_i c_j + c_j c_i = 0。
 - 2026-11-06: 消滅作用素の行列の定義を置いた（ラベル def_annihilation_operator_matrix。(c_i^T)_{S,T}:=(c_i)_{T,S}。転置の一般の定義は置かない）。npm run check と build:pdf は通った。次は個数 N_i(T) に一元を足したときの値の主張。

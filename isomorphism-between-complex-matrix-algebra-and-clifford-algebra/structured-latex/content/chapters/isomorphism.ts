@@ -852,4 +852,297 @@ A_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_j)_{T,U}
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_creation_operator_matrices_anticommute",
+    kind: "claim",
+    title: { text: "生成作用素の行列どうしの反交換関係" },
+    labels: ["claim_creation_operator_matrices_anticommute"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`i,j\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_i,c_j\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を生成作用素の行列（",
+        ref("def_creation_operator_matrix"),
+        "）とする。",
+        math(String.raw`i=j`),
+        " の場合も含めて、",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の中で次が成り立つ（演算と零行列は ",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+      displayMath(String.raw`c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j
++_{\mathrm{Mat}_{\mathcal{P}_M}}
+c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
+=0_{\mathrm{Mat}_{\mathcal{P}_M}}.`),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`k,l\in\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、条件 ",
+        math(String.raw`\mathrm{C}_{k,l}(S,U)`),
+        " を「",
+        math(String.raw`k\notin U`),
+        " かつ ",
+        math(String.raw`l\notin U`),
+        " かつ ",
+        math(String.raw`k\neq l`),
+        " かつ ",
+        math(String.raw`S=(U\cup\{l\})\cup\{k\}`),
+        "」と置く。各 ",
+        math(String.raw`k,l,S,U`),
+        " について、次の等式（",
+        math(String.raw`\star`),
+        "）を示す。",
+      ]),
+      displayMath(String.raw`\bigl(c_k\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l\bigr)_{S,U}=
+\begin{cases}
+  \varsigma\bigl(N_k(U\cup\{l\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_l(U)) & (\mathrm{C}_{k,l}(S,U)\ \text{が成り立つ}),\\
+  0_{\mathbb{C}} & (\text{成り立たない}).
+\end{cases}
+\qquad(\star)`),
+      list([
+        [
+          math(String.raw`l\in U`),
+          " のとき。",
+          math(String.raw`\mathrm{C}_{k,l}(S,U)`),
+          " は成り立たず、右から生成作用素の行列を掛けた行列の成分の主張（",
+          ref("claim_entry_of_matrix_times_creation_operator_matrix"),
+          "）を ",
+          math(String.raw`A:=c_k`),
+          "、主張の ",
+          math(String.raw`j`),
+          " に ",
+          math(String.raw`l`),
+          " を当てると、",
+          math(String.raw`(c_k\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l)_{S,U}=0_{\mathbb{C}}`),
+          " である。",
+        ],
+        [
+          math(String.raw`l\notin U`),
+          " のとき。",
+          math(String.raw`U\cup\{l\}\in\mathcal{P}_M`),
+          " である。和集合の定義により、",
+          math(String.raw`k\notin U\cup\{l\}`),
+          " は「",
+          math(String.raw`k\notin U`),
+          " かつ ",
+          math(String.raw`k\neq l`),
+          "」と同値である。したがって、",
+          math(String.raw`c_k`),
+          " の定義（",
+          ref("def_creation_operator_matrix"),
+          "）で列の添字を ",
+          math(String.raw`U\cup\{l\}`),
+          " としたときの条件「",
+          math(String.raw`k\notin U\cup\{l\}`),
+          " かつ ",
+          math(String.raw`S=(U\cup\{l\})\cup\{k\}`),
+          "」は、",
+          math(String.raw`\mathrm{C}_{k,l}(S,U)`),
+          " と同値である。",
+          math(String.raw`\mathrm{C}_{k,l}(S,U)`),
+          " が成り立つなら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_k\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l\bigr)_{S,U}
+&=(c_k)_{S,U\cup\{l\}}\cdot_{\mathbb{C}}\varsigma(N_l(U))
+&&\left(\because\ A:=c_k\text{、主張の}\ j\ \text{に}\ l\ \text{を当て、}l\notin U\text{。}\blkref{claim_entry_of_matrix_times_creation_operator_matrix}\right)\\
+&=\varsigma\bigl(N_k(U\cup\{l\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_l(U))
+&&\left(\because\ \text{条件が成り立つので}\ c_k\ \text{の定義。}\blkref{def_creation_operator_matrix}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathrm{C}_{k,l}(S,U)`),
+        " が成り立たないなら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_k\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l\bigr)_{S,U}
+&=(c_k)_{S,U\cup\{l\}}\cdot_{\mathbb{C}}\varsigma(N_l(U))
+&&\left(\because\ A:=c_k\text{、主張の}\ j\ \text{に}\ l\ \text{を当て、}l\notin U\text{。}\blkref{claim_entry_of_matrix_times_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\varsigma(N_l(U))
+&&\left(\because\ \text{条件が成り立たないので}\ c_k\ \text{の定義。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で（",
+        math(String.raw`\star`),
+        "）が示された。次に、",
+        math(String.raw`\mathrm{C}_{i,j}(S,U)`),
+        " と ",
+        math(String.raw`\mathrm{C}_{j,i}(S,U)`),
+        " は同値である。実際、",
+        math(String.raw`i\neq j`),
+        " と ",
+        math(String.raw`j\neq i`),
+        " は同値であり、和集合の定義により、",
+        math(String.raw`t\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`t\in(U\cup\{j\})\cup\{i\}`),
+        " と ",
+        math(String.raw`t\in(U\cup\{i\})\cup\{j\}`),
+        " はどちらも「",
+        math(String.raw`t\in U`),
+        " または ",
+        math(String.raw`t=i`),
+        " または ",
+        math(String.raw`t=j`),
+        "」と同値なので、",
+        math(String.raw`(U\cup\{j\})\cup\{i\}=(U\cup\{i\})\cup\{j\}`),
+        " である（",
+        ref("def_power_set_of_first_m_positive_integers"),
+        " の元の等しさ）。",
+      ]),
+      paragraph([
+        "本題。行列の等しさの定義（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）により、すべての ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について両辺の ",
+        math(String.raw`(S,U)`),
+        " 成分が等しいことを示せばよい。",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " を固定する。",
+        math(String.raw`\mathrm{C}_{i,j}(S,U)`),
+        " が成り立つか否かで場合を分ける（上で示した同値により、",
+        math(String.raw`\mathrm{C}_{j,i}(S,U)`),
+        " も同じ真偽をとる）。",
+      ]),
+      list([
+        [
+          math(String.raw`\mathrm{C}_{i,j}(S,U)`),
+          " が成り立たないとき。",
+          math(String.raw`\mathrm{C}_{j,i}(S,U)`),
+          " も成り立たない。",
+          math(String.raw`i=j`),
+          " の場合はつねにこちらに入る（",
+          math(String.raw`i\neq j`),
+          " が成り立たないため）。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ (k,l):=(i,j)\ \text{と}\ (k,l):=(j,i)\ \text{で}\ (\star)\text{。条件は成り立たない}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=\bigl(0_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
+&&\left(\because\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      list([
+        [
+          math(String.raw`\mathrm{C}_{i,j}(S,U)`),
+          " が成り立つとき。",
+          math(String.raw`\mathrm{C}_{j,i}(S,U)`),
+          " も成り立ち、",
+          math(String.raw`i\notin U`),
+          "、",
+          math(String.raw`j\notin U`),
+          "、",
+          math(String.raw`i\neq j`),
+          " である。",
+          math(String.raw`i,j`),
+          " は整数なので、",
+          math(String.raw`j<i`),
+          " か ",
+          math(String.raw`i<j`),
+          " のどちらか一方である。どちらの場合も、部分集合に一つの元を足したときの個数の値の主張（",
+          ref("claim_count_below_index_after_adding_one_element"),
+          "）を ",
+          math(String.raw`T:=U`),
+          " に当てる。",
+          math(String.raw`j<i`),
+          " なら次のとおりである。",
+        ],
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
+&\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\varsigma\bigl(N_i(U\cup\{j\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma\bigl(N_j(U\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ (k,l):=(i,j)\ \text{と}\ (k,l):=(j,i)\ \text{で}\ (\star)\text{。条件は成り立つ}\right)\\
+&\quad=\varsigma\bigl(N_i(U)+1\bigr)\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma\bigl(N_j(U\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{足す元}\ j\text{、番号}\ i\text{、}j<i\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
+&\quad=\varsigma\bigl(N_i(U)+1\bigr)\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma(N_j(U))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{足す元}\ i\text{、番号}\ j\text{、}i\ge j\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
+&\quad=\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(N_i(U))\bigr)\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma(N_j(U))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ n:=N_i(U)+1\in\mathbb{Z}_{\ge 1}\text{、}n-1=N_i(U)\ \text{で}\ \varsigma\ \text{の定義。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&\quad=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+  +_{\mathbb{C}}\varsigma(N_j(U))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&\quad=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+  +_{\mathbb{C}}\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&\quad=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+  +_{\mathbb{C}}1_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&\quad=\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&\quad=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&\quad=0_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&\quad=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&\quad=\bigl(0_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
+&&\left(\because\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i<j`),
+        " なら次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
+&\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\varsigma\bigl(N_i(U\cup\{j\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma\bigl(N_j(U\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ (k,l):=(i,j)\ \text{と}\ (k,l):=(j,i)\ \text{で}\ (\star)\text{。条件は成り立つ}\right)\\
+&\quad=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma\bigl(N_j(U\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{足す元}\ j\text{、番号}\ i\text{、}j\ge i\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
+&\quad=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\varsigma\bigl(N_j(U)+1\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{足す元}\ i\text{、番号}\ j\text{、}i<j\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
+&\quad=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ n:=N_j(U)+1\in\mathbb{Z}_{\ge 1}\text{、}n-1=N_j(U)\ \text{で}\ \varsigma\ \text{の定義。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&\quad=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_j(U))\cdot_{\mathbb{C}}\varsigma(N_i(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&\quad=\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))
+  +_{\mathbb{C}}(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&\quad=1_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+  +_{\mathbb{C}}(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&\quad=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&\quad=0_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(\varsigma(N_i(U))\cdot_{\mathbb{C}}\varsigma(N_j(U))\bigr)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&\quad=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&\quad=\bigl(0_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
+&&\left(\because\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "場合分けはすべての ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " を尽くすので、両辺の成分はすべて等しく、主張が示された。",
+      ]),
+    ],
+  },
 ]);
