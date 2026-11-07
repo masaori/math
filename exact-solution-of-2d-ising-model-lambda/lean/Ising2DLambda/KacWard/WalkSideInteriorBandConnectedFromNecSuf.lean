@@ -18,13 +18,10 @@ theorem walkSideInteriorBand_nonempty_edgeConnected_from_necSuf
       verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
       verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hbridge : ∀ k, k + 1 < n → ∃ p,
-      p ∈ surroundingInteriorCells n row col k ∧
-      p ∈ surroundingInteriorCells n row col (k + 1)) :
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
     (walkSideInteriorBand n row col).Nonempty ∧
       EdgeConnectedCellSet (walkSideInteriorBand n row col) :=
   walkSideInteriorBand_nonempty_edgeConnected n row col hn hclosedRow hclosedCol hunit
-    hdistinct hedgeSimple hbridge
+    hdistinct hedgeSimple
 
 end Ising2DLambda.KacWard

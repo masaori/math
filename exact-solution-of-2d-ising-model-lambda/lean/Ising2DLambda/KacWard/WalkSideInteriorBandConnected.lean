@@ -332,10 +332,7 @@ theorem walkSideInteriorBand_nonempty_edgeConnected
       verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
       verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hbridge : ∀ k, k + 1 < n → ∃ p,
-      p ∈ surroundingInteriorCells n row col k ∧
-      p ∈ surroundingInteriorCells n row col (k + 1)) :
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
     (walkSideInteriorBand n row col).Nonempty ∧
       EdgeConnectedCellSet (walkSideInteriorBand n row col) := by
   have hnonempty : ∀ k, k < n →
@@ -354,6 +351,12 @@ theorem walkSideInteriorBand_nonempty_edgeConnected
       (hedgeSimple k hk).1 (hedgeSimple k hk).2.1
       (hedgeSimple k hk).2.2.1 (hedgeSimple k hk).2.2.2
     exact surroundingInteriorCells_edgeConnected_of_parityArcs n row col k hshape
+  have hbridge : ∀ k, k + 1 < n → ∃ p,
+      p ∈ surroundingInteriorCells n row col k ∧
+      p ∈ surroundingInteriorCells n row col (k + 1) := by
+    intro k hk
+    exact consecutive_surroundingInteriorCells_intersect n row col k (by omega)
+      hclosedRow hclosedCol hunit (hedgeSimple k (by omega))
   exact walkSideInteriorBand_nonempty_edgeConnected_local n row col hn
     hnonempty hlocal hbridge
 

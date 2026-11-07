@@ -66,7 +66,7 @@ theorem interiorCellSet_nonempty_edgeConnected
     (oddRayInteriorCells n row col).Nonempty ∧
       EdgeConnectedCellSet (oddRayInteriorCells n row col) := by
   have hband := walkSideInteriorBand_nonempty_edgeConnected n row col hn
-    hclosedRow hclosedCol hunit hdistinct hedgeSimple hbridge
+    hclosedRow hclosedCol hunit hdistinct hedgeSimple
   apply connected_of_connected_core_and_reaches_necSuf
     CellEdgeAdjacent cellEdgeAdjacent_symmetric
     (oddRayInteriorCells n row col) (walkSideInteriorBand n row col)

@@ -8292,7 +8292,7 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
   \tau^{[m+0]}(i)
    &=\tau^{[m]}(i)&&\bigl(\because\ \mathbb N\text{ の加法の単位元}\bigr)\\
    &=\tau^{[m]}\bigl(\tau^{[0]}(i)\bigr)
-   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)
   \end{aligned}`),
                 paragraph(["ある ", math(String.raw`n\in\mathbb N`), " で、等式がすべての始点に対して成り立つと仮定する。任意の ", math(String.raw`i\in\mathcal J`), " に対し、", math(String.raw`\tau(i)\in\mathcal J`), " なので、この点を始点とする帰納法の仮定を使える。"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8303,7 +8303,7 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
    &=\tau^{[m]}\bigl(\tau^{[n]}(\tau(i))\bigr)
    &&\bigl(\because\ \text{始点 }\tau(i)\text{ での帰納法の仮定}\bigr)\\
    &=\tau^{[m]}\bigl(\tau^{[n+1]}(i)\bigr)
-   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)
   \end{aligned}`),
                 paragraph(["これで帰納法が閉じる。", math(String.raw`m`), " も任意だったので主張を得る。", math(String.raw`\mathcal J=\varnothing`), " の場合は始点がなく、等式は全称命題として成り立つ。有限集合上の写像と自然数だけを用い、実数体・複素数体への脱出はない。"]),
               ],
