@@ -124,6 +124,35 @@ theorem walkSideInteriorBandFromWalk_subset_coordinateBand {L m : ℕ}
     simpa only [row, col, hk] using hpCorner
   · exact hinside ▸ hpInside
 
+/-- 実際の閉歩道の内側帯は、持ち上げ座標で作った有限鎖の合併に等しい。 -/
+theorem walkSideInteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    walkSideInteriorBandFromWalk γ hγ hh hv =
+      walkSideInteriorBand (m + 1) row col := by
+  dsimp only
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  apply Set.Subset.antisymm
+  · exact walkSideInteriorBandFromWalk_subset_coordinateBand γ hγ hh hv
+  · intro p hp
+    obtain ⟨k, hk, hcorner, hpInside⟩ := hp
+    let i : Fin (m + 1) := ⟨k, hk⟩
+    have hi : Fin.ofNat (m + 2) k = i.castSucc := by
+      apply Fin.ext
+      simp [i, Nat.mod_eq_of_lt (by omega : k < m + 2)]
+    refine ⟨hinside ▸ hpInside, i, ?_⟩
+    simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hcorner
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h

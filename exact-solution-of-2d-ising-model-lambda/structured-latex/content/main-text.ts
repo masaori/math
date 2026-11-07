@@ -9463,7 +9463,7 @@ R_{\mathrm{odd}}(\sigma)
  &\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))\in C
  &&\bigl(\because\ C\text{ の不変条件を }\sigma^{-1}(i)\text{ へ適用}\bigr)\\
  &\ \Longleftrightarrow\ i\in C
- &&\bigl(\because\ \text{置換と逆写像の相殺}\bigr).
+ &&\bigl(\because\ \text{置換と逆写像の相殺}\bigr)
 \end{aligned}`),
                 paragraph(["二つの写像 ", math(String.raw`p,q:\mathcal J\to\mathcal J`), " を次で定める。内側では元の置換または逆置換、外側では恒等写像とする。"]),
                 displayMath(String.raw`p(i):=
@@ -65984,6 +65984,7 @@ c'=c\ \text{かつ}\ r'\in\{r-1,r+1\}`),
                           "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk",
                           "Ising2DLambda.NecSuf.KacWard.walkSideBand",
                           "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_from_necSuf",
+                          "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_eq_coordinateBand",
                         ],
                         statement: [
                           paragraph([
