@@ -5074,153 +5074,263 @@ c(M_{\mathrm{col}})
         "Step 2（上からの評価 ",
         math(String.raw`c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "）。",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        " と略記し、",
+        ref("def_W_real"),
+        " の ",
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " と ",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を取る。ノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
         "、",
+        math(String.raw`d \to d`),
+        "）の数ベクトルのノルムである。",
+        math(String.raw`x \in \mathbb{R}^{d}`),
+        " が ",
         math(String.raw`\|x\| = 1`),
-        " を任意に取る。成分ごとの絶対値を取ったベクトルを ",
-        math(String.raw`u`),
-        "（",
-        math(String.raw`u_k := |x_k|`),
-        "）とし、",
-        math(String.raw`v := u + \varepsilon u`),
-        " とおく。",
+        " を満たすとし、",
+        math(String.raw`u, v, \hat{v} \in \mathbb{R}^{d}`),
+        " を成分ごとに",
       ]),
+      displayMath(String.raw`u_k := |x_k|,\qquad v_k := u_k + (\varepsilon_{\mathbb{R}}u)_k,\qquad \hat{v}_k := \frac{v_k}{\|v\|} \qquad (k \in \{1,\dots,d\})`),
       paragraph([
-        ref("W_has_positive_entries"),
-        " より ",
-        math(String.raw`W`),
-        " の成分はすべて正なので、",
-      ]),
-      displayMath(
-        String.raw`u^\top Wu = \sum_{k,l}|x_k|\,|x_l|\,W_{kl}
-\ \geq\ \left|\sum_{k,l}x_kx_lW_{kl}\right|
-\ \geq\ x^\top Wx
-\quad (\because \text{三角不等式と } W_{kl} > 0)`,
-      ),
-      paragraph([
-        "である。また ",
-        math(String.raw`\varepsilon`),
-        " は各基底ベクトルを別の基底ベクトルへ写す置換行列（",
-        ref("trace_of_epsilon_V_plus"),
-        " の証明 Step 3 の (b)）なので、",
-        math(String.raw`u \geq 0`),
-        " なら ",
-        math(String.raw`\varepsilon u \geq 0`),
-        " であり、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\|\varepsilon u\|
-&= \|u\|
-&&\left(\because\ \varepsilon\ \text{は置換行列であり、成分の並べ替えは二乗和を変えない}\right)\\
-&= \|x\|
-&&\left(\because\ u_k=|x_k|\ \text{であり、ノルムは成分の絶対値だけで決まる}\right)\\
-&= 1
-&&\left(\because\ \|x\|=1\ \text{（Step 2 の }x\text{ の取り方）}\right)
-\end{aligned}`),
-      paragraph([
-        "である。さらに ",
-        math(String.raw`\varepsilon^\top = \varepsilon`),
+        "で定める（",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値、",
+        math(String.raw`\varepsilon_{\mathbb{R}}u \in \mathbb{R}^{d}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
         "（",
-        ref("epsilon_is_real_symmetric"),
-        "）、",
-        math(String.raw`\varepsilon^2 = I`),
-        "（",
-        ref("epsilon_square_and_eigenvalues"),
-        "）である。",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）の積、和と商は ",
+        math(String.raw`\mathbb{R}`),
+        " のもの。",
+        math(String.raw`u, v, \hat{v}`),
+        " を ",
+        math(String.raw`\mathbb{R}^{d}`),
+        " に置くのは、",
+        math(String.raw`c(M_{\mathrm{col}})`),
+        "・",
+        math(String.raw`c_+(M_{\mathrm{col}})`),
+        " が実数のベクトルの上で取った上限だからで、",
+        math(String.raw`\|v\|`),
+        " と ",
+        math(String.raw`\hat{v}`),
+        " は平方根を通すので完備性による脱出である。",
+        math(String.raw`\|v\| \neq 0`),
+        " で ",
+        math(String.raw`\hat{v}`),
+        " が定まることは下の準備で示す）。",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の元の等号 ",
+        math(String.raw`\varepsilon_{\mathbb{R}}v = v`),
+        " などは、すべての成分の等号として読む。",
       ]),
+      paragraph(["準備として、次を示す。"]),
       list([
         [
-          displayMath(String.raw`\begin{aligned}
-\varepsilon v
-&= \varepsilon\left(u+\varepsilon u\right)
-&&\left(\because\ v=u+\varepsilon u\right)\\
-&= \varepsilon u+\varepsilon^2u
-&&\left(\because\ \text{行列の分配則}\right)\\
-&= \varepsilon u+u
-&&\left(\because\ \blkref{epsilon_square_and_eigenvalues}\text{ の }\varepsilon^2=I\right)\\
-&=v
-&&\left(\because\ v=u+\varepsilon u\right)
-\end{aligned}`),
-          " より ",
-          math(String.raw`v \in \mathcal{F}^{(+)}`),
+          ref("W_real_has_positive_entries"),
+          " より、すべての ",
+          math(String.raw`k, l \in \{1,\dots,d\}`),
+          " で ",
+          math(String.raw`(W_{\mathbb{R}})_{kl} > 0`),
+          "、とくに ",
+          math(String.raw`(W_{\mathbb{R}})_{kl} \geq 0`),
+          " である。",
+        ],
+        [
+          ref("def_real_absolute_value"),
           "（",
-          ref("def_even_eigenvectors_of_epsilon"),
-          "）。また ",
-          math(String.raw`v`),
-          " は実である。",
+          math(String.raw`q \to x_k`),
+          "）の ",
+          math(String.raw`|q| \in \mathbb{R}_{\geq 0}`),
+          " より、すべての ",
+          math(String.raw`k \in \{1,\dots,d\}`),
+          " で ",
+          math(String.raw`u_k \geq 0`),
+          " である。",
         ],
         [
-          math(String.raw`v \geq u \geq 0`),
-          " かつ ",
-          math(String.raw`u \neq 0`),
+          ref("real_bilinear_value_at_most_value_at_absolute_vector"),
+          "（",
+          math(String.raw`n \to d,\ P \to W_{\mathbb{R}}`),
+          "。成分の非負性は上の準備の ",
+          math(String.raw`(W_{\mathbb{R}})_{kl} \geq 0`),
+          "）より ",
+          math(String.raw`x^\top W_{\mathbb{R}}x \leq u^\top W_{\mathbb{R}}u`),
+          " である。",
+        ],
+        [
+          displayMath(String.raw`\begin{aligned}
+\|u\|
+&= \|x\|
+  &&\bigl(\because\ \blkref{norm_of_vector_of_absolute_values_equals_norm}\ (n \to d)\bigr)\\
+&= 1
+  &&\bigl(\because\ x\ \text{の取り方}\bigr)
+\end{aligned}`),
+          "である。",
+          ref("matrix_norm_triangle_inequality"),
+          " (1)（",
+          math(String.raw`K^{d}`),
+          "、",
+          math(String.raw`K = \mathbb{R}`),
+          "、",
+          math(String.raw`A \to u`),
+          "）の ",
+          math(String.raw`\|u\| = 0 \iff u = 0`),
+          " と ",
+          math(String.raw`\|u\| = 1 \neq 0`),
           " より ",
-          math(String.raw`v \neq 0`),
+          math(String.raw`u \neq 0`),
+          " である。",
+        ],
+        [
+          ref("sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero"),
+          "（",
+          math(String.raw`u \to u`),
           "。",
+          math(String.raw`u_k \geq 0`),
+          " と ",
+          math(String.raw`u \neq 0`),
+          " は上の準備）より ",
+          math(String.raw`v \neq 0`),
+          " である。よって ",
+          ref("norm_of_normalized_real_vector_is_one"),
+          "（",
+          math(String.raw`n \to d,\ v \to v`),
+          "）より ",
+          math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+          "（",
+          math(String.raw`\hat{v}`),
+          " が定まる）かつ ",
+          math(String.raw`\|\hat{v}\| = 1`),
+          " であり、",
+          math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
+          "（",
+          math(String.raw`\mathbb{R}`),
+          " の積）は正の実数どうしの積なので ",
+          math(String.raw`\|v\|^2 > 0`),
+          " である。",
         ],
         [
-          displayMath(String.raw`\begin{aligned}
-\|v\|^2
-&= \|u\|^2 + 2u^\top\varepsilon u + \|\varepsilon u\|^2
-&&\left(\because\ v=u+\varepsilon u\text{ の展開と }\varepsilon^\top=\varepsilon.\ \blkref{epsilon_is_real_symmetric}\right)\\
-&= 2 + 2u^\top\varepsilon u
-&&\left(\because\ \|u\| = \|\varepsilon u\| = 1\right)\\
-&\leq 4
-&&\left(\because\ \text{Cauchy–Schwarz より } u^\top\varepsilon u \leq \|u\|\|\varepsilon u\| = 1\right)
-\end{aligned}`),
+          ref("epsilon_real_fixes_sum_of_vector_and_its_image"),
+          "（",
+          math(String.raw`u \to u`),
+          "）より ",
+          math(String.raw`\varepsilon_{\mathbb{R}}v = v`),
+          " である。これと ",
+          math(String.raw`v \neq 0`),
+          " から、",
+          ref("real_matrix_fixed_vector_stays_fixed_after_normalization"),
+          "（",
+          math(String.raw`n \to d,\ P \to \varepsilon_{\mathbb{R}},\ v \to v`),
+          "）より ",
+          math(String.raw`\varepsilon_{\mathbb{R}}\hat{v} = \hat{v}`),
+          " である。",
+          math(String.raw`\|\hat{v}\| = 1`),
+          " と合わせて、",
+          ref("def_sector_rayleigh_sup"),
+          "（",
+          math(String.raw`x \to \hat{v}`),
+          "）より ",
+          math(String.raw`\hat{v}^\top W_{\mathbb{R}}\hat{v} \in \mathcal{R}_+`),
+          " である。",
         ],
         [
-          displayMath(String.raw`\begin{aligned}
-v^\top Wv
-&=u^\top Wu+2u^\top W\varepsilon u+(\varepsilon u)^\top W(\varepsilon u)
-&&\left(\because\ v=u+\varepsilon u\text{ の展開と }W^\top=W\right)\\
-&=u^\top Wu+2u^\top W\varepsilon u+u^\top\varepsilon W\varepsilon u
-&&\left(\because\ \blkref{epsilon_is_real_symmetric}\text{ の }\varepsilon^\top=\varepsilon\right)\\
-&=u^\top Wu+2u^\top W\varepsilon u+u^\top W\varepsilon^2u
-&&\left(\because\ \varepsilon W=W\varepsilon.\ \blkref{epsilon_commutes_with_W}\right)\\
-&=2u^\top Wu+2u^\top W\varepsilon u
-&&\left(\because\ \blkref{epsilon_square_and_eigenvalues}\text{ の }\varepsilon^2=I\right)\\
-&\geq2u^\top Wu
-&&\left(\because\ u,\varepsilon u\geq0\text{ と }W_{kl}>0\text{ より }u^\top W\varepsilon u\geq0\right)
-\end{aligned}`),
+          ref("norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"),
+          "（",
+          math(String.raw`u \to u`),
+          "。",
+          math(String.raw`\|u\| = 1`),
+          " は上の準備）より ",
+          math(String.raw`\|v\|^2 \leq 4`),
+          " である。",
+          math(String.raw`0 < \|v\|^2 \leq 4`),
+          " なので、",
+          math(String.raw`\mathbb{R}`),
+          " で正の数の逆数を取ると大小が逆になることから ",
+          math(String.raw`\frac{1}{\|v\|^2} \geq \frac{1}{4}`),
+          " である。",
+        ],
+        [
+          ref("W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"),
+          "（",
+          math(String.raw`u \to u`),
+          "。",
+          math(String.raw`u_k \geq 0`),
+          " は上の準備）より ",
+          math(String.raw`v^\top W_{\mathbb{R}}v \geq 2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)`),
+          " である。",
+        ],
+        [
+          ref("real_bilinear_value_with_nonnegative_entries_is_nonnegative"),
+          "（",
+          math(String.raw`n \to d,\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u`),
+          "。成分の非負性は上の準備）より ",
+          math(String.raw`u^\top W_{\mathbb{R}}u \geq 0`),
+          " であり、",
+          math(String.raw`2 > 0`),
+          " を掛けて ",
+          math(String.raw`2\,\bigl(u^\top W_{\mathbb{R}}u\bigr) \geq 0`),
+          " である。",
         ],
       ]),
-      paragraph([
-        math(String.raw`\hat{v} := v/\|v\|`),
-        " は ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトル（",
-        math(String.raw`1/\|v\|\in\mathbb{R}\subset\mathbb{C}`),
-        " なので、",
-        ref("even_eigenspace_is_complex_subspace"),
-        " の複素スカラー倍で閉じることから ",
-        math(String.raw`\hat{v}\in\mathcal{F}^{(+)}`),
-        "）なので ",
-        ref("c_plus_equals_Lambda_half_integer"),
-        " より",
-      ]),
+      paragraph(["これらを使うと"]),
       displayMath(String.raw`\begin{aligned}
 \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 &= c_+(M_{\mathrm{col}})
-&&\left(\because\ \blkref{c_plus_equals_Lambda_half_integer}\right)\\
-&\geq \hat{v}^\top W\hat{v}
-&&\left(\because\ c_+(M_{\mathrm{col}})\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}\text{ の単位ベクトル上の上限. }\blkref{def_sector_rayleigh_sup}\right)\\
-&= \frac{v^\top Wv}{\|v\|^2}
-&&\left(\because\ \hat{v}=v/\|v\|\text{ の代入と二次形式の斉次性}\right)\\
-&\geq \frac{2\,u^\top Wu}{\|v\|^2}
-&&\left(\because\ v^\top Wv\geq2u^\top Wu\text{（上の式変形）と }\|v\|^2>0\right)\\
-&\geq \frac{2\,u^\top Wu}{4}
-&&\left(\because\ \|v\|^2\leq4\text{（上の式変形）と }u^\top Wu\geq0\text{（}u\geq0,\ W_{kl}>0\text{）}\right)\\
-&= \frac{u^\top Wu}{2}
-&&\left(\because\ \mathbb{R}\text{ の約分}\right)\\
-&\geq \frac{x^\top Wx}{2}
-&&\left(\because\ u^\top Wu\geq x^\top Wx\text{（上の三角不等式）}\right)
+  &&\bigl(\because\ \blkref{c_plus_equals_Lambda_half_integer}\bigr)\\
+&\geq \hat{v}^\top W_{\mathbb{R}}\hat{v}
+  &&\bigl(\because\ \blkref{def_sector_rayleigh_sup}\ \text{の}\ c_+(M_{\mathrm{col}}) = \sup\mathcal{R}_+\ \text{は}\ \mathcal{R}_+\ \text{の上界であり、準備より}\ \hat{v}^\top W_{\mathbb{R}}\hat{v} \in \mathcal{R}_+\bigr)\\
+&= \frac{v^\top W_{\mathbb{R}}v}{\|v\|^2}
+  &&\bigl(\because\ \blkref{real_bilinear_value_of_normalized_vector}\ (n \to d,\ P \to W_{\mathbb{R}},\ v \to v)\bigr)\\
+&\geq \frac{2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)}{\|v\|^2}
+  &&\bigl(\because\ \text{準備の}\ v^\top W_{\mathbb{R}}v \geq 2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)\ \text{の両辺を正の数}\ \|v\|^2\ \text{で割る}\bigr)\\
+&\geq \frac{2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)}{4}
+  &&\bigl(\because\ \text{準備の}\ \tfrac{1}{\|v\|^2} \geq \tfrac{1}{4}\ \text{の両辺に非負の数}\ 2\,\bigl(u^\top W_{\mathbb{R}}u\bigr)\ \text{を掛ける}\bigr)\\
+&= \frac{u^\top W_{\mathbb{R}}u}{2}
+  &&\bigl(\because\ \mathbb{R}\ \text{の約分}\bigr)\\
+&\geq \frac{x^\top W_{\mathbb{R}}x}{2}
+  &&\bigl(\because\ \text{準備の}\ x^\top W_{\mathbb{R}}x \leq u^\top W_{\mathbb{R}}u\ \text{の両辺を正の数}\ 2\ \text{で割る}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+x^\top W_{\mathbb{R}}x
+&= 2 \cdot \frac{x^\top W_{\mathbb{R}}x}{2}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\bigr)\\
+&\leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+  &&\bigl(\because\ \text{上の鎖の}\ \tfrac{x^\top W_{\mathbb{R}}x}{2} \leq \Lambda^{(1/2)}_{M_{\mathrm{col}}}\ \text{の両辺に正の数}\ 2\ \text{を掛ける}\bigr)
 \end{aligned}`),
       paragraph([
+        "である。",
         math(String.raw`x`),
-        " は任意だったので、上限を取って ",
-        math(String.raw`c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
-        "。",
+        " は ",
+        math(String.raw`\|x\| = 1`),
+        " を満たす ",
+        math(String.raw`\mathbb{R}^{d}`),
+        " の任意の元だったので、",
+        math(String.raw`2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
+        " は ",
+        ref("def_rayleigh_sup"),
+        " の ",
+        math(String.raw`\mathcal{R}`),
+        " の上界である。よって",
       ]),
+      displayMath(String.raw`\begin{aligned}
+c(M_{\mathrm{col}})
+&= \sup\mathcal{R}
+  &&\bigl(\because\ \blkref{def_rayleigh_sup}\bigr)\\
+&\leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+  &&\bigl(\because\ \text{上限は上界のうち最小のものであり、}\ 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}\ \text{は}\ \mathcal{R}\ \text{の上界}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -5228,7 +5338,8 @@ v^\top Wv
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章のゴールの式の Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M を主張するブロックが無かったため、onsager_exact_solution の証明の Step 2（下からの評価）・Step 3（上からの評価）を、内容を変えずにこの主張の証明の Step 1・Step 2 として独立させた。Step の番号と、それを指す「Step 3 の x の取り方」を「Step 2 の x の取り方」に直しただけで、式と根拠は変えていない。",
         "上からの評価（Step 2）の係数 2 は最良ではない（数値では c(M) = c_+(M) が全パラメータで成り立つ。sagemath/check/053_claim_even_sector_closing/check_05 (3')）。しかし 1/M を掛けて M → ∞ とすると log 2 / M → 0 で消えるため、Onsager の表式を出すにはこの粗い評価で十分である。",
         "この粗い評価を採ったのは c_-(M) の値に依存しないためである。一次情報で確認したところ c_-(M) = Λ^{(0)}_M は一般には成り立たない: 高温側 (K_1,K_2) = (0.05,0.1)（sinh2K_1 sinh2K_2 ≈ 0.020）では c_-(M)/Λ^{(0)}_M = 0.1102 で、M = 2,3,4,5 のすべてで一致しない（同 check_05 の対照出力）。V^{(-)} の最大固有値の固有ベクトルが F^{(+)} 側に落ちる場合があるためで、偶セクターで解決したのと同じ問題が奇セクターでは別の答えになりうる。本文はこの点に触れずに済む形にしてある。",
-        "数値検証: sagemath/check/c_between_Lambda_half_and_twice_Lambda_half（Step 1・Step 2 の各行）と sagemath/check/053_claim_even_sector_closing/check_05 (1)〜(3)。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 2 を、複素行列 W・ε を実数のベクトルに掛ける同一視をやめ、def_W_real の W_ℝ・def_epsilon_real の ε_ℝ で書き直した。散文で済ませていた各行（三角不等式による x^⊤Wx ≤ u^⊤Wu、‖u‖ = ‖x‖、εv = v、v ≠ 0、‖v‖^2 ≤ 4、v^⊤Wv ≥ 2u^⊤Wu、v̂ の ε_ℝv̂ = v̂・‖v̂‖ = 1、二次形式の斉次性、u^⊤Wu ≥ 0）を、それぞれを主張として足したブロックを 1 つずつ引く準備に置き換え、v̂ を def_sector_rayleigh_sup のいまの集合の条件 ε_ℝx = x、‖x‖ = 1 で 𝓡_+ に入れた。最後に x^⊤W_ℝx ≤ 2Λ^{(1/2)} から上限の比較を書いた。主張と論法は不変。",
+        "数値検証: sagemath/check/c_between_Lambda_half_and_twice_Lambda_half（Step 1・Step 2 の各行）。sagemath/check/053_claim_even_sector_closing/check_05 の (1)〜(3) は 2026-11-07 より前の Step 2（複素行列 W・ε の形）を確かめたもので、いまの Step 2 の各行の検算ではない。",
       ],
     },
   },

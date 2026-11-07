@@ -1,16 +1,16 @@
 # ---------------------------------------------------------
 # SageMath: 主張 c_between_Lambda_half_and_twice_Lambda_half の証明を一行ずつ確かめる。
 #   Step 1（下からの評価）: c(M) >= c_+(M)（c_plus_le_c）と c_+(M) = Λ^{(1/2)}_M（c_plus_equals_Lambda_half_integer）
-#   Step 2（上からの評価）: 単位ベクトル x から u := |x|、v := u + εu を作り、本文の式変形の各行を確かめて
-#                          c(M) <= 2Λ^{(1/2)}_M を得る
+#   Step 2（上からの評価）: 単位ベクトル x から u_k := |x_k|、v_k := u_k + (ε_ℝu)_k、v̂_k := v_k/‖v‖ を作り、
+#                          準備の各行（引く主張ごとの結論）と、Λ ≥ … ≥ x^⊤W_ℝx/2、x^⊤W_ℝx ≤ 2Λ の鎖の各行を確かめて
+#                          c(M) <= 2Λ^{(1/2)}_M を得る（W_ℝ・ε_ℝ は実数の行列）
 #   結論: Λ^{(1/2)}_M <= c(M) <= 2Λ^{(1/2)}_M
 #   下界の鋭さの確認: 下界を 1.01Λ にしたもの（1.01Λ <= c）と上界を 0.99Λ にしたもの（c <= 0.99Λ）が
 #                     すべての組で破れること（数値では c = c_+ = Λ なので、上からの評価の検査にはならない）。
 #   否定コントロール: Step 2 の ‖v‖^2 <= 4 を ‖v‖^2 <= 2 にすると破れる x があること、
 #                     F^{(+)} を F^{(-)} に替えた c(M) <= 2c_-(M) が破れる組があること（上からの評価が
 #                     εv = v、すなわち F^{(+)} への制限に依ることの対照）。
-#   以下の検算の本体（行ごとの判定）は 053_claim_even_sector_closing/check_05 の (1)〜(3) と同じものを、
-#   この主張だけについて走らせる（Step の番号はこの主張の証明の番号に直した）。
+#   否定コントロール（準備）: u 自身は ε_ℝu = u を満たすとは限らないこと（v を作る理由）。
 # 対象ラベル: c_between_Lambda_half_and_twice_Lambda_half
 # 対象: structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts
 #       ブロック column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half
@@ -95,6 +95,7 @@ neg_low_ok = True
 neg_up_ok = True
 neg_norm_hits = 0
 neg_minus_hits = 0
+neg_fix_hits = 0
 print("  --- 有限 M での Step 1 / Step 2 ---")
 for M in EIG_M:
     O = SpinOps(M)
@@ -114,65 +115,65 @@ for M in EIG_M:
         w3_eq = max(w3_eq, abs(cp - Lhalf) / Lhalf)   # c_plus_equals_Lambda_half_integer
         if not (Lhalf <= cM * (1 + REL)):
             w_lower += 1
-        # (2) Step 2 の前提: ε^T = ε、ε^2 = I、ε は置換行列、εW = Wε、W^T = W、W の成分が正
-        w3_eq = max(w3_eq, (E.transpose() - E).norm(1), (E * E - Id).norm(1),
-                    (E * Wr - Wr * E).norm(1) / Wr.norm(1), (Wr.transpose() - Wr).norm(1) / Wr.norm(1))
-        if not (all(E[i, j] in (0, 1) for i in range(O.d) for j in range(O.d))
-                and all(sum(E.row(i)) == 1 and sum(E.column(i)) == 1 for i in range(O.d))):
-            w3_ineq += 1
+        # (2) Step 2 の準備: (W_ℝ)_kl > 0（W_real_has_positive_entries）
         if not all(Wr[i, j] > 0 for i in range(O.d) for j in range(O.d)):
             w3_ineq += 1
         for x in test_vectors(M, Wr):
             n3 += 1
-            u = vector(RDF, [abs(t) for t in x])
-            Eu = E * u
-            v = u + Eu
+            u = vector(RDF, [abs(t) for t in x])          # u_k := |x_k|
+            Eu = E * u                                     # ε_ℝu（def_real_matrix_vector_product）
+            v = u + Eu                                     # v_k := u_k + (ε_ℝu)_k
+            nv = v.norm()
+            vh = v / nv                                    # v̂_k := v_k/‖v‖
+            nv2 = nv * nv                                  # ‖v‖^2 := ‖v‖‖v‖
             qx = x * Wr * x
             qu = u * Wr * u
-            # u^T W u = Σ|x_k||x_l|W_kl ≥ |Σ x_k x_l W_kl| ≥ x^T W x
-            ssum = sum(abs(x[k]) * abs(x[l]) * Wr[k, l] for k in range(O.d) for l in range(O.d))
-            w3_eq = max(w3_eq, abs(qu - ssum) / qu)
-            if not (qu >= abs(qx) * (1 - REL) and abs(qx) >= qx):
+            qv = v * Wr * v
+            q_vh = vh * Wr * vh
+            # 準備: u_k ≥ 0（def_real_absolute_value）
+            if not all(t >= 0 for t in u):
                 w3_ineq += 1
-            # εu ≥ 0、‖εu‖ = ‖u‖ = ‖x‖ = 1
-            if not all(t >= 0 for t in Eu):
+            # 準備: x^⊤W_ℝx ≤ u^⊤W_ℝu（real_bilinear_value_at_most_value_at_absolute_vector）
+            if not (qx <= qu * (1 + REL) + 1e-300):
                 w3_ineq += 1
-            w3_eq = max(w3_eq, abs(Eu.norm() - u.norm()), abs(u.norm() - x.norm()), abs(x.norm() - 1))
-            # εv = ε(u + εu) = εu + ε^2 u = εu + u = v
-            chain = [E * v, E * (u + Eu), Eu + E * E * u, Eu + u, v]
-            for a, b in zip(chain, chain[1:]):
-                w3_eq = max(w3_eq, (a - b).norm())
-            # v ≥ u ≥ 0、v ≠ 0
-            if not (all(v[k] >= u[k] >= 0 for k in range(O.d)) and v.norm() > 0):
+            # 準備: ‖u‖ = ‖x‖ = 1（norm_of_vector_of_absolute_values_equals_norm、x の取り方）と u ≠ 0
+            w3_eq = max(w3_eq, abs(u.norm() - x.norm()), abs(x.norm() - 1))
+            if not any(t != 0 for t in u):
                 w3_ineq += 1
-            # ‖v‖^2 = ‖u‖^2 + 2u^Tεu + ‖εu‖^2 = 2 + 2u^Tεu ≤ 4
-            nv2 = v * v
+            # 準備: v ≠ 0、‖v‖ > 0、‖v̂‖ = 1、‖v‖^2 > 0
+            if not (any(t != 0 for t in v) and nv > 0 and nv2 > 0):
+                w3_ineq += 1
+            w3_eq = max(w3_eq, abs(vh.norm() - 1))
+            # 準備: ε_ℝv = v（epsilon_real_fixes_sum_of_vector_and_its_image）、ε_ℝv̂ = v̂（real_matrix_fixed_vector_stays_fixed_after_normalization）
+            w3_eq = max(w3_eq, (E * v - v).norm(), (E * vh - vh).norm())
+            if (E * u - u).norm() > 1e-9:
+                neg_fix_hits += 1   # 否定コントロール: u 自身は ε_ℝu = u を満たすとは限らない（v を作る意味）
+            # 準備: ‖v‖^2 ≤ 4（norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four）
+            if not (nv2 <= 4 * (1 + REL)):
+                w3_ineq += 1
+            # 準備: 0 < ‖v‖^2 ≤ 4 から 1/‖v‖^2 ≥ 1/4（正の数の逆数は大小を逆にする）
+            if not (1 / nv2 >= (RDF(1) / 4) * (1 - REL)):
+                w3_ineq += 1
             if nv2 > 2 * (1 + 1e-9):
                 neg_norm_hits += 1   # ‖v‖^2 <= 4 を ‖v‖^2 <= 2 にすると破れる x がある
-            w3_eq = max(w3_eq, abs(nv2 - (u * u + 2 * (u * Eu) + Eu * Eu)),
-                        abs(u * u + 2 * (u * Eu) + Eu * Eu - (2 + 2 * (u * Eu))))
-            if not (u * Eu <= u.norm() * Eu.norm() * (1 + REL) and 2 + 2 * (u * Eu) <= 4 * (1 + REL)):
+            # 準備: v^⊤W_ℝv ≥ 2(u^⊤W_ℝu)（W_real_bilinear_value_at_sum_..._is_at_least_twice）
+            if not (qv >= 2 * qu * (1 - REL)):
                 w3_ineq += 1
-            # v^T W v = u^TWu + 2u^TWεu + (εu)^TW(εu) = … + u^TεWεu = … + u^TWε^2u = 2u^TWu + 2u^TWεu ≥ 2u^TWu
-            vWv = [v * Wr * v,
-                   qu + 2 * (u * Wr * Eu) + Eu * Wr * Eu,
-                   qu + 2 * (u * Wr * Eu) + u * (E.transpose() * Wr * E) * u,
-                   qu + 2 * (u * Wr * Eu) + u * (Wr * E * E) * u,
-                   2 * qu + 2 * (u * Wr * Eu)]
-            for a, b in zip(vWv, vWv[1:]):
-                w3_eq = max(w3_eq, abs(a - b) / abs(vWv[0]))
-            if not (u * Wr * Eu >= 0 and vWv[-1] >= 2 * qu * (1 - REL)):
+            # 準備: u^⊤W_ℝu ≥ 0（real_bilinear_value_with_nonnegative_entries_is_nonnegative）と 2(u^⊤W_ℝu) ≥ 0
+            if not (qu >= 0 and 2 * qu >= 0):
                 w3_ineq += 1
-            # Λ^{(1/2)} = c_+ ≥ v̂^TWv̂ = v^TWv/‖v‖^2 ≥ 2u^TWu/‖v‖^2 ≥ 2u^TWu/4 = u^TWu/2 ≥ x^TWx/2
-            vh = v / v.norm()
-            q_vh = vh * Wr * vh
-            w3_eq = max(w3_eq, abs(q_vh - vWv[0] / nv2) / q_vh)
-            ineq = [Lhalf, cp, q_vh, 2 * qu / nv2, 2 * qu / 4, qu / 2, qx / 2]
-            # Λ = c_+（等号）、以降は ≥ の鎖（2u^TWu/4 = u^TWu/2 も等号）
-            if not (ineq[1] >= ineq[2] * (1 - REL) and ineq[3] >= ineq[4] * (1 - REL)
-                    and ineq[5] >= ineq[6] * (1 - REL) and ineq[2] >= ineq[3] * (1 - REL)):
+            # 主の鎖: Λ = c_+ ≥ v̂^⊤W_ℝv̂ = v^⊤W_ℝv/‖v‖^2 ≥ 2u^⊤W_ℝu/‖v‖^2 ≥ 2u^⊤W_ℝu/4 = u^⊤W_ℝu/2 ≥ x^⊤W_ℝx/2
+            chain = [Lhalf, cp, q_vh, qv / nv2, 2 * qu / nv2, 2 * qu / 4, qu / 2, qx / 2]
+            rel = ['=', '>=', '=', '>=', '>=', '=', '>=']
+            for (a_, b_), r in zip(zip(chain, chain[1:]), rel):
+                if r == '=':
+                    w3_eq = max(w3_eq, abs(a_ - b_) / abs(chain[0]))
+                elif not (a_ >= b_ - REL * abs(chain[0])):
+                    w3_ineq += 1
+            # 二つ目の鎖: x^⊤W_ℝx = 2·(x^⊤W_ℝx/2) ≤ 2Λ
+            w3_eq = max(w3_eq, abs(qx - 2 * (qx / 2)) / abs(chain[0]))
+            if not (2 * (qx / 2) <= 2 * Lhalf * (1 + REL)):
                 w3_ineq += 1
-            w3_eq = max(w3_eq, abs(ineq[4] - ineq[5]) / ineq[5])
         # 結論 c(M) ≤ 2Λ^{(1/2)}_M
         if not (Lhalf <= cM * (1 + REL) and cM <= 2 * Lhalf * (1 + REL)):
             w_sand += 1
@@ -205,5 +206,6 @@ ok_all &= report("(3') 実際には c(M) = c_+(M)（本文の評価より強い�
 print(f"  下界の鋭さ: 1.01Λ <= c が全て破れる {neg_low_ok}、c <= 0.99Λ が全て破れる {neg_up_ok}")
 print(f"  否定コントロール: ‖v‖^2 <= 2 が破れる x の本数 {neg_norm_hits}（x の本数 {n3}）、"
       f"F^(+) を F^(-) に替えた c <= 2c_- が破れる組の数 {neg_minus_hits}")
-neg_ok = neg_low_ok and neg_up_ok and neg_norm_hits > 0 and neg_minus_hits > 0
+print(f"  否定コントロール: ε_ℝu = u が破れる x の本数 {neg_fix_hits}（x の本数 {n3}）")
+neg_ok = neg_low_ok and neg_up_ok and neg_norm_hits > 0 and neg_minus_hits > 0 and neg_fix_hits > 0
 print("RESULT: PASS" if (ok_all and neg_ok) else "RESULT: FAIL")

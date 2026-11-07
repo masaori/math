@@ -18,10 +18,14 @@
 | Step 3（挟み撃ち、`M → ∞`） | `onsager_limit_in_M`（`log` の単調性、`(log 2)/M → 0`、章 012 の `Ising2D.onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | 主張 | `onsager_exact_solution` |
 
-`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 が使う `ε` の性質は `epsilon_is_real_symmetric`（`εᵀ = ε`）、`epsilon_square_and_eigenvalues`
-（`ε² = I`）、`ε` が置換行列であること（`trace_of_epsilon_V_plus` の Step 3 (b)。Lean では
-`epsilonR M = permMat flipConf`）で、`W` の性質は `epsilon_commutes_with_W`（`εW = Wε`）と
-`W_has_positive_entries`（成分が正。使うのは非負だけ）である。
+人手 `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 は、`W_ℝ`・`ε_ℝ` について、`u_k := |x_k|`・
+`v_k := u_k + (ε_ℝu)_k`・`v̂_k := v_k/‖v‖` の性質を本文の主張（`real_bilinear_value_at_most_value_at_absolute_vector`・
+`epsilon_real_fixes_sum_of_vector_and_its_image`・`norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`・
+`W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`・
+`real_matrix_fixed_vector_stays_fixed_after_normalization`・`real_bilinear_value_of_normalized_vector` ほか）で 1 つずつ引く。
+`onsager_step3_c_le_two_c_plus` はまだ必要十分版の特殊化で、その鎖と 1 対 1 ではない（状態台帳の (r3b2e3c4d5d)）。
+必要十分版が使う `ε` の性質は、置換行列であること（`epsilonR M = permMat flipConf`）・対称性・対合性、
+`W` の性質は `ε` との可換性と成分の非負である。
 
 以前の形式化は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 章 019 の `c_equals_c_plus`（`c(M) = max(c_+, c_-) = c_+(M)`）を使って挟み撃ちなしに
