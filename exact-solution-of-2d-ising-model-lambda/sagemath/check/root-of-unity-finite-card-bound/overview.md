@@ -11,4 +11,4 @@
 sage sagemath/check/root-of-unity-finite-card-bound/check.sage
 ```
 
-**2026-08-11 実行: すべて通過。**
+**2026-11-07 再実行: すべて通過。**

@@ -32628,7 +32628,7 @@ f
                           "無限集合から任意の有限個数の相異なる元を取れるので、",
                           math(String.raw`\mu_n`), " の有限部分集合 ", math(String.raw`s`), " で",
                         ]),
-                        displayMath(String.raw`\lvert s\rvert=n+1\qquad(\because\ \text{無限集合から相異なる }n+1\text{ 元を取る})`),
+                        displayMath(String.raw`\lvert s\rvert=n+1\qquad\bigl(\because\ \text{無限集合から相異なる }n+1\text{ 元を取る}\bigr)`),
                         paragraph([
                           "を満たすものがある。一方、", ref("claim_root_of_unity_subset_card_bound"),
                           " をこの ", math(String.raw`s`), " に当てると ", math(String.raw`\lvert s\rvert\le n`),
@@ -32637,9 +32637,9 @@ f
                         displayMath(String.raw`\begin{aligned}
 n+1
 &=\lvert s\rvert
-&& (\because\ \lvert s\rvert=n+1)\\
+&&\bigl(\because\ \lvert s\rvert=n+1\bigr)\\
 &\le n
-&& (\because\ \blkref{claim_root_of_unity_subset_card_bound})
+&&\bigl(\because\ \blkref{claim_root_of_unity_subset_card_bound}\bigr)
 \end{aligned}`),
                         paragraph([
                           "となるが、自然数について ", math(String.raw`n<n+1`), " なので矛盾する。ゆえに ",
@@ -32649,7 +32649,7 @@ n+1
                           "有限集合になった ", math(String.raw`\mu_n`), " 自身を有限部分集合として ",
                           ref("claim_root_of_unity_subset_card_bound"), " に当てると、",
                         ]),
-                        displayMath(String.raw`\lvert\mu_n\rvert\le n\qquad(\because\ \blkref{claim_root_of_unity_subset_card_bound}\text{ を }s=\mu_n\text{ に適用})`),
+                        displayMath(String.raw`\lvert\mu_n\rvert\le n\qquad\bigl(\because\ \blkref{claim_root_of_unity_subset_card_bound}\text{ を }s=\mu_n\text{ に適用}\bigr)`),
                         paragraph([
                           "を得る。この議論に実数体も複素数体も現れず、代数的数の集合と自然数の大小だけで閉じている。",
                         ]),
