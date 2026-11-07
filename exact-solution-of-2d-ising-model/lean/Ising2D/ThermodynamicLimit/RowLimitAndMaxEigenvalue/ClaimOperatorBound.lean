@@ -12,6 +12,9 @@
 正定値性 `hpd`（人手 `W_real_is_positive_definite`）を持つ実行列 `W : Matrix n n ℝ` で表す。
 本文の `W_ℝ` に当てるのは `PhysicalPartitionFunctionSandwich.lean` の `physicalSymTransferR`（`W_real_is_symmetric`・`W_real_is_positive_definite` を持つ）である。
 
+人手の主張の冒頭の `d := 2_ℤ^{M_col}`（行列の大きさ・ベクトルの次元・有限和の上端）は、ここでは任意の有限型の添字 `n` で受ける。
+具体的な `W` に当てるときの添字は `Conf M` で、`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one` である。
+
 人手の行と Lean の対応:
 
 | 人手の段 | Lean |
