@@ -31,6 +31,27 @@ theorem planeLift_projectedUnitStep_eq_projectedClosureLift (L m : ℕ) [NeZero 
       rw [planeLift_succ Γ i, ih]
       rfl
 
+/-- The lift of a projected unit-step edge sequence inherits distinctness of its
+reconstructed plane points before the closing endpoint. -/
+theorem planeLift_projectedUnitStep_injective (L m : ℕ) [NeZero L]
+    (W : ℕ → ℤ × ℤ)
+    (hdistinct : ∀ i < m + 1, ∀ j < m + 1,
+      projectedClosureLift L W
+        (planeLift (fun k : Fin (m + 1) =>
+          projectedUnitStep L (W k.val) (W (k.val + 1) - W k.val)) 0) i =
+      projectedClosureLift L W
+        (planeLift (fun k : Fin (m + 1) =>
+          projectedUnitStep L (W k.val) (W (k.val + 1) - W k.val)) 0) j → i = j) :
+    Function.Injective (fun i : Fin (m + 1) =>
+      planeLift (fun k : Fin (m + 1) =>
+        projectedUnitStep L (W k.val) (W (k.val + 1) - W k.val)) i.castSucc) := by
+  intro i j hij
+  have hi := planeLift_projectedUnitStep_eq_projectedClosureLift L m W i.castSucc
+  have hj := planeLift_projectedUnitStep_eq_projectedClosureLift L m W j.castSucc
+  have heq := hdistinct i.val i.isLt j.val j.isLt (by
+    simpa only [Fin.val_castSucc] using hi.symm.trans (hij.trans hj))
+  exact Fin.ext heq
+
 theorem projectedUnitStep_displacement (L : ℕ) [NeZero L]
     (p u : ℤ × ℤ)
     (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)) :
@@ -211,6 +232,66 @@ theorem oneSidedClosureProjectedLiftFromWalk_injective {L m : ℕ} [NeZero L]
       simp only [Prod.fst_add, Prod.snd_add, Prod.fst_sub, Prod.snd_sub] at * <;>
       omega
   exact hsimple t c ht hc i hi j hj hW
+
+/-- The actual plane lift of the projected one-sided closure has distinct points
+before its closing endpoint. -/
+theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      Function.Injective (fun i : Fin (N - 1 + 1) =>
+        planeLift (fun j : Fin (N - 1 + 1) =>
+          projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) i.castSucc) := by
+  obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+  let N := oneSidedClosureLength (m + 1) L
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+  apply planeLift_projectedUnitStep_injective L (N - 1) W
+  intro i hi j hj hij
+  have htranslation := oneSidedClosureProjectedLiftFromWalk_translation
+    γ hγ hwind k₀ t c ht hc
+    (planeLift (fun j : Fin (N - 1 + 1) =>
+      projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) 0)
+  have hN : N - 1 + 1 = N := by
+    dsimp [N, oneSidedClosureLength]
+    have hsum : 0 < (horizontalDirectedWindingNumber γ).natAbs +
+        (verticalDirectedWindingNumber γ).natAbs := by
+      by_contra h
+      have hh : horizontalDirectedWindingNumber γ = 0 :=
+        Int.natAbs_eq_zero.mp (by omega)
+      have hv : verticalDirectedWindingNumber γ = 0 :=
+        Int.natAbs_eq_zero.mp (by omega)
+      exact hwind (Prod.ext hh hv)
+    have hb := Nat.mul_pos ht hsum
+    omega
+  have hi' := htranslation i (by omega)
+  have hj' := htranslation j (by omega)
+  rw [hi', hj'] at hij
+  have hW : W i = W j := by
+    calc
+      W i = (planeLift (fun j : Fin (N - 1 + 1) =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) 0 +
+        W i - W 0) -
+        planeLift (fun j : Fin (N - 1 + 1) =>
+          projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) 0 + W 0 := by abel
+      _ = (planeLift (fun j : Fin (N - 1 + 1) =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) 0 +
+        W j - W 0) -
+        planeLift (fun j : Fin (N - 1 + 1) =>
+          projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) 0 + W 0 := by
+            rw [hij]
+      _ = W j := by abel
+  exact hsimple t c ht hc i (by omega) j (by omega) hW
 
 /-- 実際の閉歩道から作った一側閉包の射影辺列は巡回接続し、反転しない。 -/
 theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZero L]
