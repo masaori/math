@@ -88,6 +88,7 @@ export const ALL_LABELS = [
   "def_ring_homomorphism",
   "def_sign_of_nonnegative_integer",
   "def_spanning_family",
+  "def_subalgebra",
   "def_sum_over_finite_set",
   "def_underlying_ring_and_vector_space_of_algebra",
   "def_unital_ring",
