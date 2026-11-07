@@ -68965,8 +68965,10 @@ cL W_{\perp}(\gamma)
 \operatorname{src}\bigl(p_j(W)\bigr)
 &=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
-&=(i,k)=\operatorname{vt}(W_j)
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr),\\
+&=(i,k)
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&=\operatorname{vt}(W_j)
+&&\bigl(\because\ \operatorname{vt}(W_j)=(i,k)\text{ の置き方}\bigr)\\
 \operatorname{tgt}\bigl(p_j(W)\bigr)
 &=\partial_1\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
@@ -68992,8 +68994,10 @@ cL W_{\perp}(\gamma)
 \operatorname{tgt}\bigl(p_j(W)\bigr)
 &=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=1\text{ の場合}\bigr)\\
-&=(i,k)=\operatorname{vt}(W_{j+1})
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr).
+&=(i,k)
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&=\operatorname{vt}(W_{j+1})
+&&\bigl(\because\ \operatorname{vt}(W_{j+1})=(i,k)\text{ の置き方}\bigr)
 \end{aligned}`),
                       paragraph([
                         "差が ", math(String.raw`(-1,0)`), " の場合も縦向きの番号で同じ計算になる。",
