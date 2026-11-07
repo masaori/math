@@ -12,7 +12,7 @@
 具体版と同じ主張を必要十分版の特殊化として得ることは `ClaimTracePowerUpperBoundFromNecSuf.lean` の `trace_power_upper_bound_of_necSuf` が記録している。
 必要十分版は半正定値性と `c ≥ 0` だけで通る。具体版の `hpd`（正定値性）は、人手が引く `rayleigh_bounds_operator_norm` と
 `c ∈ ℝ_{>0}`（`def_rayleigh_sup`）の仮定から来ており、この主張そのものには要らない。
-トレース（対角成分の和）と `d = 2^{M_col}` の段は有限の添字と `ℝ` の順序に固有なので、必要十分版を置かない。
+トレース（対角成分の和）の段は有限の添字と `ℝ` の順序に固有なので、必要十分版を置かない（`Σ_k c^n = ι(d)c^n`・`ι(2^{M_col}) = 2^{M_col}` の段が引く主張の必要十分版は `Ising2D/NecSuf/NaturalNumberCastIntoSemiring.lean`）。
 
 ## 人手証明との対応
 
@@ -31,9 +31,9 @@
 | 奇数: `W^{2a+1} = W^a(WW^a)`（`Mat(d,ℂ)`）の 7 行 | `power_of_W_odd_split` の `calc` の 7 段 |
 | 奇数: `(W_ℝ)^{2a+1} = (W_ℝ)^a(W_ℝ(W_ℝ)^a)` の 5 行 | `power_of_W_real_odd_split` の `calc` の 5 段 |
 | 奇数: `e_k^⊤(W_ℝ)^{2a+1}e_k ≤ c^n` の 12 行 | `diagonal_bound_odd` の `calc` の 12 段 |
-| 最後のトレースの 4 行 | `trace_power_upper_bound` の `calc` の 4 段 |
+| 最後のトレースの 5 行 | `trace_power_upper_bound` の `calc` の 5 段（`Σ_k c^n = ι(d)c^n` は `finite_sum_of_constant_real_number_fintype`、`ι(2^{M_col}) = 2_ℝ^{M_col}` は `inclusion_zz_to_rr_of_power_of_two`。人手の `ι_{ℤ→ℝ}` は Lean の `Nat.cast`） |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2^M` は `card_conf`）である。
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2_ℤ^M` は `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は `power_of_two_in_integers_is_at_least_one`）である。
   一般の `W` で述べ、人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、
   `hWRsymm`・`hpd` は `rayleigh_bounds_operator_norm` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`
   （`hpd` は `c ∈ ℝ_{>0}`（`def_rayleigh_sup`、Lean の `rayleighSup_pos`）にも使う）。具体的な `W` への当てはめは
@@ -52,6 +52,7 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimNormOfNormalized
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPowerOfRealSymmetricComplexMatrixIsRealSymmetric
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 
 set_option linter.unusedSectionVars false
@@ -272,7 +273,7 @@ theorem diagonal_bound_odd (n a : ℕ) (hn : n = 2 * a + 1) (k : Conf M) :
     _ = c ^ n := by rw [hn]                                                 -- `n = 2a + 1`
 
 /-- **人手 `trace_power_upper_bound`**: `n ≥ 1` について `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
-`n` の偶奇で各 `k` の `e_k^⊤(W_ℝ)^ne_k ≤ c^n` を出し、最後のトレースの 4 行で足し合わせる。
+`n` の偶奇で各 `k` の `e_k^⊤(W_ℝ)^ne_k ≤ c^n` を出し、最後のトレースの 5 行で足し合わせる。
 仮定 `1 ≤ n` は人手の主張に合わせて置いたもので、証明は使わない（`n = 0` でも `Σ_k (I_ℝ)_kk = 2^{M_col}` で成り立つ）。 -/
 theorem trace_power_upper_bound {n : ℕ} (_hn : 1 ≤ n) :
     ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k
@@ -293,9 +294,12 @@ theorem trace_power_upper_bound {n : ℕ} (_hn : 1 ≤ n) :
           (diagonal_entry_via_standard_basis W hW n k).symm                 -- 【対角成分の表示】（`p → n`）を `d` 個の項へ同時に
     _ ≤ ∑ _k : Conf M, c ^ n :=
         finite_sum_of_real_numbers_is_monotone_fintype _ _ hbound           -- `finite_sum_of_real_numbers_is_monotone`（各 `k` は偶数・奇数の鎖）
-    _ = (Fintype.card (Conf M) : ℝ) * c ^ n := by
-        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]               -- 同じ項 `c^n` を `d` 個足した和
-    _ = 2 ^ M * c ^ n := by rw [card_conf]                                  -- `d := 2^{M_col}`
+    _ = (Fintype.card (Conf M) : ℝ) * c ^ n :=
+        finite_sum_of_constant_real_number_fintype
+          (by rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M) (c ^ n)
+                                                                            -- `finite_sum_of_constant_real_number`（`m → d ∈ ℤ_{≥1}`, `r → c^n`）
+    _ = ((2 ^ M : ℕ) : ℝ) * c ^ n := by rw [card_conf_nat]                  -- `d := 2_ℤ^{M_col}`
+    _ = 2 ^ M * c ^ n := by rw [inclusion_zz_to_rr_of_power_of_two M]       -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）
 
 end General
 

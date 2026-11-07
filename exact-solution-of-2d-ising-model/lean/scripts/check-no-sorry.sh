@@ -1008,6 +1008,27 @@ targets=(
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype
+  Ising2D.inclusion_zz_to_rr_zero
+  Ising2D.inclusion_zz_to_rr_succ
+  Ising2D.inclusion_zz_to_rr_neg
+  Ising2D.inclusion_zz_to_rr_of_natCast
+  Ising2D.inclusion_zz_to_rr_of_one
+  Ising2D.inclusion_zz_to_rr_preserves_sum_of_nonnegatives
+  Ising2D.finite_sum_of_constant_real_number_succ
+  Ising2D.power_of_two_in_integers_is_at_least_one
+  Ising2D.power_of_two_in_integers_is_at_least_one_of_necSuf
+  "Ising2D.NecSuf.one_le_two_pow'"
+  Ising2D.finite_sum_of_constant_real_number_fintype
+  Ising2D.inclusion_zz_to_rr_of_power_of_two
+  Ising2D.inclusion_zz_to_rr_of_one_of_necSuf
+  Ising2D.inclusion_zz_to_rr_preserves_sum_of_nonnegatives_of_necSuf
+  Ising2D.finite_sum_of_constant_real_number_succ_of_necSuf
+  Ising2D.inclusion_zz_to_rr_of_power_of_two_of_necSuf
+  "Ising2D.NecSuf.cast_one'"
+  "Ising2D.NecSuf.cast_add'"
+  "Ising2D.NecSuf.sum_const_fin_succ'"
+  "Ising2D.NecSuf.cast_two_pow'"
+  Ising2D.card_conf_nat
   Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries
   Ising2D.rayleighSup_physicalSymTransferR_eq
   Ising2D.trace_of_W_power_via_W_real

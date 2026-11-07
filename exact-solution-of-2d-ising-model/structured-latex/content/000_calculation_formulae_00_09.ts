@@ -1046,6 +1046,171 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_definition_inclusion_zz_to_rr",
+    kind: "definition",
+    title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },
+    labels: ["inclusion_zz_to_rr"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " は ",
+        math(String.raw`\mathbb{Z}`),
+        " と ",
+        math(String.raw`\mathbb{R}`),
+        " を別々の台集合の上の構造として置く。写像 ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}:\mathbb{Z}\to\mathbb{R}`),
+        " を次で定める。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " については ",
+        math(String.raw`n`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}},
+\qquad
+\iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " の各元は、",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " であるか、ただ一つの ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`n +_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+        " と書けるかの、ちょうど一方である）。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " については",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)`),
+      paragraph([
+        "と定める（右辺の ",
+        math(String.raw`-`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転）。",
+        math(String.raw`\mathbb{Z}`),
+        " の各元は、",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " の元であるか、ある ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`-n`),
+        " と書けるかの、ちょうど一方である（後者の ",
+        math(String.raw`n`),
+        " はただ一つ）ので、各元にただ一つの値が定まる。これを ",
+        math(String.raw`\mathbb{Z}`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への包含写像と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖が、行列の大きさ d := 2^{M_col} ∈ ℤ と ℝ の冪 2^{M_col} を「d := 2^{M_col}」の一行で等号で結び、同じ記号を ℤ と ℝ の元に使い回していた（証明の書き方の「同一視をしない」）。ℤ の元を ℝ の計算に入れる写像に名前を付けるために足した。負の元の節 ι(-n) := -ι(n) はこの時点では使われないが、limit_of_log_Z_in_N_row がアルキメデス性で取る N_0 ∈ ℤ（比べる時点では正と分かっていない）を ℝ の元と比べるのに使うので、ℤ 全体で定める。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_of_one",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}` },
+    labels: ["inclusion_zz_to_rr_of_one"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}})
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to 0_{\mathbb{Z}})\bigr)\\
+&= 0_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
+&= 1_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07: 原文（Typst）に対応ブロックは無い。finite_sum_of_constant_real_number と inclusion_zz_to_rr_of_power_of_two の帰納法の出発点で使うので足した。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_preserves_sum_of_nonnegatives",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a+b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a)+\iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \geq 0)` },
+    labels: ["inclusion_zz_to_rr_preserves_sum_of_nonnegatives"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
+        " を固定し、",
+        math(String.raw`b`),
+        " についての帰納法で示す。",
+        math(String.raw`b = 0_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} 0_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`b \in \mathbb{Z}_{\geq 0}`),
+        " で主張が成り立つと仮定すると、",
+        math(String.raw`a +_{\mathbb{Z}} b \in \mathbb{Z}_{\geq 0}`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a +_{\mathbb{Z}} b) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の結合則}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to a +_{\mathbb{Z}} b)\bigr)\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合則}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b +_{\mathbb{Z}} 1_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to b)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`b +_{\mathbb{Z}} 1_{\mathbb{Z}}`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07: 原文（Typst）に対応ブロックは無い。inclusion_zz_to_rr_of_power_of_two の帰納法の段で ι(2^M + 2^M) を分けるのに使うので足した。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_008_multiply_by_minus_one",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ", ordinal: 9 },
@@ -1237,6 +1402,79 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-03: 原文（Typst）に対応ブロックは無い。real_inclusion_preserves_finite_sum と max_eigenvalue_of_V_plus_simple (2) の ǧ の差の鎖が ℝ の有限和を名前だけで使っていたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_constant_real_number",
+    kind: "claim",
+    title: { tex: String.raw`\sum_{j=1}^{m} r = \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r` },
+    labels: ["finite_sum_of_constant_real_number"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " について、すべての項が ",
+        math(String.raw`r`),
+        " の有限和（",
+        ref("def_finite_sum_of_real_numbers"),
+        " の ",
+        math(String.raw`r_1 = \dots = r_m = r`),
+        "）は",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} r = \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r`),
+      paragraph([
+        "である。",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " は ",
+        ref("inclusion_zz_to_rr"),
+        " の写像、右辺の積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} r
+&= r
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} r_j := r_1\ (r_1 \to r)\bigr)\\
+&= 1_{\mathbb{R}}\, r
+  &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})\, r
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " で主張が成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} r
+&= \Bigl(\sum_{j=1}^{m} r\Bigr) + r
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{m+1} r_j := \bigl(\sum_{j=1}^{m} r_j\bigr) + r_{m+1}\ (r_j \to r)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r + r
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r + 1_{\mathbb{R}}\, r
+  &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(m) + 1_{\mathbb{R}}\bigr)\, r
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(m +_{\mathbb{Z}} 1_{\mathbb{Z}})\, r
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to m)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`m+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖の「同じ項 c^n を d 個足した和」を引けるよう足した。",
       ],
     },
   },

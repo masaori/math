@@ -2277,6 +2277,199 @@ a^{m+1} := a^m\, a`),
   },
 
   {
+    id: "critical_definition_power_of_integer",
+    kind: "definition",
+    title: { text: "整数の冪" },
+    labels: ["def_power_of_integer"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{Z}`),
+        " と ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について、冪 ",
+        math(String.raw`a^m \in \mathbb{Z}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`a^0 := 1_{\mathbb{Z}},
+\qquad
+a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
+      paragraph([
+        "と定める。",
+        ref("def_power_of_real_number"),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の冪とは別の写像であり、両者を同じものとして使わない。",
+        math(String.raw`2_{\mathbb{Z}} := 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+        " と書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。行列の大きさ 2^{M_col} は整数の冪だが、本文に定義が無かった。inclusion_zz_to_rr_of_power_of_two と power_of_two_in_integers_is_at_least_one が引けるよう、def_power_of_real_number と同じ形で足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_power_of_two_in_integers_is_at_least_one",
+    kind: "claim",
+    title: { tex: String.raw`2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}` },
+    labels: ["power_of_two_in_integers_is_at_least_one"],
+    statement: [
+      paragraph([
+        ref("def_power_of_integer"),
+        " の冪について、",
+        math(String.raw`M \in \mathbb{Z}_{\geq 0}`),
+        " なら ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M} \in \mathbb{Z}_{\geq 1}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`M`),
+        " についての帰納法で示す。",
+        math(String.raw`M = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}^{\,0}
+&= 1_{\mathbb{Z}}
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^0 := 1_{\mathbb{Z}}\ (a \to 2_{\mathbb{Z}})\bigr)\\
+&\geq 1_{\mathbb{Z}}
+  &&\bigl(\because\ \leq_{\mathbb{Z}}\ \text{の反射律}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`M \in \mathbb{Z}_{\geq 0}`),
+        " で ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}^{\,M+1}
+&= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 2_{\mathbb{Z}}
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^{m+1} := a^m a\ (a \to 2_{\mathbb{Z}},\ m \to M)\bigr)\\
+&= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} (1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}} := 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
+&= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
+&= 2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+&\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
+  &&\bigl(\because\ \text{帰納法の仮定}\ 2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}\ \text{の両辺に}\ 2_{\mathbb{Z}}^{\,M}\ \text{を足す}\bigr)\\
+&\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}
+  &&\bigl(\because\ \text{帰納法の仮定}\ 2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}\ \text{の両辺に}\ 1_{\mathbb{Z}}\ \text{を足す}\bigr)\\
+&\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 0_{\mathbb{Z}}
+  &&\bigl(\because\ 1_{\mathbb{Z}} \geq 0_{\mathbb{Z}}\ \text{の両辺に}\ 1_{\mathbb{Z}}\ \text{を足す}\bigr)\\
+&= 1_{\mathbb{Z}}
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`M+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。行列の大きさ d := 2_ℤ^{M_col} が ℤ_{≥1} の元であること（finite_sum_of_constant_real_number の m ∈ ℤ_{≥1}）と、inclusion_zz_to_rr_of_power_of_two の帰納法の段の 2_ℤ^M ∈ ℤ_{≥0} を引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_inclusion_zz_to_rr_of_power_of_two",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(2_{\mathbb{Z}}^{\,M}) = 2_{\mathbb{R}}^{\,M}` },
+    labels: ["inclusion_zz_to_rr_of_power_of_two"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr) = 2_{\mathbb{R}}^{\,M}`),
+      paragraph([
+        "である。左辺の ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M} \in \mathbb{Z}_{\geq 1}`),
+        " は ",
+        ref("def_power_of_integer"),
+        " の ",
+        math(String.raw`2_{\mathbb{Z}}`),
+        " の冪（",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        "）、右辺の ",
+        math(String.raw`2_{\mathbb{R}}^{\,M} \in \mathbb{R}`),
+        " は ",
+        math(String.raw`2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}`),
+        " の ",
+        ref("def_power_of_real_number"),
+        " の冪、",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " は ",
+        ref("inclusion_zz_to_rr"),
+        " の写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`M`),
+        " についての帰納法で示す。",
+        math(String.raw`M = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,0}\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^0 := 1_{\mathbb{Z}}\ (a \to 2_{\mathbb{Z}})\bigr)\\
+&= 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\bigr)\\
+&= 2_{\mathbb{R}}^{\,0}
+  &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to 2_{\mathbb{R}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`M \in \mathbb{Z}_{\geq 0}`),
+        " で主張が成り立つと仮定すると、",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M} \in \mathbb{Z}_{\geq 1} \subset \mathbb{Z}_{\geq 0}`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M+1}\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 2_{\mathbb{Z}}\bigr)
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^{m+1} := a^m a\ (a \to 2_{\mathbb{Z}},\ m \to M)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} (1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
+  &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}} := 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}\bigr)
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum_of_nonnegatives}\ (a, b \to 2_{\mathbb{Z}}^{\,M})\bigr)\\
+&= 2_{\mathbb{R}}^{\,M} +_{\mathbb{R}} 2_{\mathbb{R}}^{\,M}
+  &&\bigl(\because\ \text{帰納法の仮定を二か所へ同時に}\bigr)\\
+&= 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}} +_{\mathbb{R}} 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}}
+  &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+&= 2_{\mathbb{R}}^{\,M}\,(1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}})
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\bigr)\\
+&= 2_{\mathbb{R}}^{\,M}\, 2_{\mathbb{R}}
+  &&\bigl(\because\ 2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\\
+&= 2_{\mathbb{R}}^{\,M+1}
+  &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m\, a\ (a \to 2_{\mathbb{R}},\ m \to M)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`M+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖で、行列の大きさ d = 2^{M_col} ∈ ℤ を ι_{ℤ→ℝ} で送った値が ℝ の冪 2^{M_col} であることを引けるよう足した。ℝ の冪の定義の隣に置く。ℤ の冪は def_power_of_integer。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_real_log_of_power",
     kind: "claim",
     title: { tex: String.raw`\log(a^n) = n\log a` },

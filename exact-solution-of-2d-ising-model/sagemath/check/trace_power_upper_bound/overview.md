@@ -20,7 +20,7 @@
 | 偶数の場合の鎖（【対角成分の表示】 → `2a = a+a` → `matrix_power_exponent_law` → `mat_mult` → 【冪の実対称性】 の対称性 → `u_l = (W^a)_lk` → `u_lu_l = |u_l|^2` → `def_matrix_norm` → `≤ c^{2a}` → `n = 2a`） | `_lines.sage` | 8 段の等号、不等号、最後の等号。`W^{2a} = W^aW^a` を行列として比較 | **PASS** |
 | 奇数の場合の `W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a(W^{0+1}W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)` | `_lines.sage` | 7 段の行列の等号（冪は `def_exp` (1)、積は `mat_mult` の成分の式） | **PASS** |
 | 奇数の場合の成分の鎖（【対角成分の表示】 → 上の鎖 → `mat_mult` 2 回 → 分配則 → 【冪の実対称性】 → 【W^ae_k の成分とノルム】 → `def_real_bilinear_value` → `def_rayleigh_sup` → 【W^ae_k の成分とノルム】 と `c > 0` → 指数法則 → `n = 2a+1`） | `_lines.sage` | 8 段の等号、不等号 2 段、等号 2 段 | **PASS** |
-| トレースの鎖（`def_trace` → 【対角成分の表示】 → 各 `k` の評価と有限和 → `d c^n` → `d = 2^{M_col}`） | `_lines.sage` | Sage の `trace`（別の経路）と `def_trace` の和と【対角成分の表示】 の和の一致、各 `k` の不等号、和の不等号、`Σc^n = dc^n` | **PASS** |
+| トレースの鎖（`def_trace` → 【対角成分の表示】 → 各 `k` の評価と有限和 → `ι(d) c^n`（`finite_sum_of_constant_real_number`） → `ι(2^{M_col}) c^n`（`d := 2^{M_col} ∈ ℤ_{≥1}`） → `2_ℝ^{M_col} c^n`（`inclusion_zz_to_rr_of_power_of_two`）） | `_lines.sage`（最後の 2 行は `check_power_of_two_lines`、本文の `W` だけ） | Sage の `trace`（別の経路）と `def_trace` の和と【対角成分の表示】 の和の一致、各 `k` の不等号、和の不等号、定義の再帰で作った和と `ι`（`sagemath/_shared/inclusion_zz_to_rr_by_definition.sage`）で `Σc^n = ι(d)c^n`、組み込みの `dc^n` との一致、`d = 2^{M_col}`、`ι(2^{M_col})c^n = 2_ℝ^{M_col}c^n`（`2_ℝ^{M_col}` は `def_power_of_real_number` の再帰） | **PASS** |
 | 【冪の実数の行列】（`(W^p)_ℝ = (W_ℝ)^p`） | `_lines.sage`（`check_varrho_lines`） | QQbar の冪を ϱ で移したものと AA の冪（どちらも `def_exp` (1) の漸化式） | **PASS** |
 | 【冪の対称性】の 6 行の鎖と単射性の結論（`((W_ℝ)^p)_kl = ((W_ℝ)^p)_lk`） | `_lines.sage`（`check_varrho_lines`） | 6 段の等号を全成分で、結論を AA で | **PASS** |
 | 偶数の ϱ の鎖（`(W_ℝ)^{2a} = (W^{2a})_ℝ = (W^{a+a})_ℝ = (W^aW^a)_ℝ = (W^a)_ℝ(W^a)_ℝ = (W_ℝ)^a(W_ℝ)^a`） | `_lines.sage`（`check_varrho_lines`） | 5 段の行列の等号 | **PASS** |
@@ -31,9 +31,9 @@
 `_lines.sage` の `check_proof_lines` を二つの検算が呼ぶ。
 
 - `check_generic_positive_semidefinite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「半正定値（`rayleigh_bounds_operator_norm` の前提）」「`c` は上限」だけなので、
-  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 36410 個、不等号 2446 個（2026-11-06 の `check_varrho_lines` を含む）。
+  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 36566 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行を含む）。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 28264 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 28384 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
 
 `W` の作り方、`c(M_col)` の作り方（特性多項式の最大の実根を AA で取り、`cI − W` の半正定値性と固有ベクトルでの到達で上限であることを確かめる）、
 ノルム・`x^⊤Py`・行列とベクトルの積・冪の関数は、直前の主張の検算 `sagemath/check/rayleigh_bounds_operator_norm/_prelude.sage` を読み込んで使う（その overview の「`c(M_col)` の作り方」）。

@@ -3,6 +3,8 @@
 # 実対称で半正定値な P（本文では P = W）・その上限 c = c(M_col) について一行ずつ確かめる。
 # 等号は QQ と AA の厳密な等号、不等号は AA の厳密な比較である。
 
+load("../../_shared/inclusion_zz_to_rr_by_definition.sage")
+
 n_eq = 0
 n_le = 0
 
@@ -148,8 +150,20 @@ def check_proof_lines(P, c, nmax, what):
         for k in range(d):
             le(bil(E[k], Q, E[k]), c**n, f"{what}: 各 k の e_k^⊤W^ne_k ≤ c^n n={n}, k={k}")
         le(L[-1], sum(c**n for k in range(d)), f"{what}: トレースの鎖の不等号 n={n}")
-        eq(sum(c**n for k in range(d)), d * c**n, f"{what}: Σ c^n = d c^n")
+        # Σ_{k=1}^{d} c^n = ι_{ℤ→ℝ}(d) c^n（finite_sum_of_constant_real_number。和と ι は定義の再帰）
+        eq(finite_sum_by_definition([c**n] * d), iota_zz_to_rr(d) * c**n, f"{what}: Σ c^n = ι(d) c^n")
+        eq(sum(c**n for k in range(d)), d * c**n, f"{what}: Σ c^n = d c^n（組み込みの整数倍）")
         le((P**n).trace(), d * c**n, f"{what}: 主張 tr(W^n) ≤ d c^n n={n}")
+
+
+def check_power_of_two_lines(d, M, c, nmax, what):
+    """最後の鎖の後の 2 行: ι(d) c^n = ι(2^{M_col}) c^n = 2_ℝ^{M_col} c^n（d := 2^{M_col} ∈ ℤ_{≥1}、inclusion_zz_to_rr_of_power_of_two）。"""
+    t = power_of_integer_by_definition(ZZ(1) + ZZ(1), M)   # 2_ℤ^{M_col}（def_power_of_integer の再帰）
+    assert d == t and t >= 1                               # d := 2_ℤ^{M_col} ∈ ℤ_{≥1}
+    two = QQ(1) + QQ(1)                                    # 2_ℝ := 1_ℝ + 1_ℝ
+    for n in range(1, nmax + 1):
+        eq(iota_zz_to_rr(d) * c**n, iota_zz_to_rr(t) * c**n, f"{what}: ι(d) c^n = ι(2^M) c^n n={n}")
+        eq(iota_zz_to_rr(t) * c**n, power_of_real_by_definition(two, M) * c**n, f"{what}: ι(2^M) c^n = 2_ℝ^M c^n n={n}")
 
 
 # 2026-11-06: 証明を W_ℝ := ϱ(W)（def_W_real）の冪で書き直した。上の check_proof_lines は P を W_ℝ（QQ の実数の行列）として

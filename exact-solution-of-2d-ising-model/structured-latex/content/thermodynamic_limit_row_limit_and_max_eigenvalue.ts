@@ -1705,8 +1705,14 @@ c(M_{\mathrm{col}})
     labels: ["trace_power_upper_bound"],
     statement: [
       paragraph([
-        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
-        " と略記し、",
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記し、",
         math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
         " を ",
         ref("def_W_real"),
@@ -1728,7 +1734,19 @@ c(M_{\mathrm{col}})
         math(String.raw`K = \mathbb{R}`),
         " の冪、和は ",
         ref("def_finite_sum_of_real_numbers"),
-        " の有限和である。",
+        " の有限和である。右辺の ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " は ",
+        math(String.raw`2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}`),
+        " の ",
+        ref("def_power_of_real_number"),
+        " の冪 ",
+        math(String.raw`2_{\mathbb{R}}^{\,M_{\mathrm{col}}} \in \mathbb{R}`),
+        " の略記で、",
+        math(String.raw`\mathbb{Z}`),
+        " の元 ",
+        math(String.raw`d`),
+        " とは別の元である。",
       ]),
     ],
     proof: [
@@ -2077,12 +2095,24 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
 &&\bigl(\because\ \text{【対角成分の表示】}\ (p \to n)\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
 &\leq \sum_{k=1}^{d} c^n
 &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to d,\ \text{添字}\ j \to k,\ a_k \to e_k^\top (W_{\mathbb{R}})^ne_k,\ b_k \to c^n\text{。各}\ k\ \text{の}\ a_k \leq b_k\ \text{は上の偶数・奇数の鎖})\bigr)\\
-&=d\,c^n
-&&\bigl(\because\ \text{同じ項}\ c^n\ \text{を}\ d\ \text{個足した和}\bigr)\\
-&=2^{M_{\mathrm{col}}} c^n
-&&\bigl(\because\ d := 2^{M_{\mathrm{col}}}\bigr)
+&=\iota_{\mathbb{Z}\to\mathbb{R}}(d)\,c^n
+&&\bigl(\because\ \blkref{finite_sum_of_constant_real_number}\ (m \to d \in \mathbb{Z}_{\geq 1},\ r \to c^n)\bigr)\\
+&=\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}\bigr)\,c^n
+&&\bigl(\because\ d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}\bigr)\\
+&=2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\,c^n
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_power_of_two}\ (M \to M_{\mathrm{col}})\bigr)
 \end{aligned}`),
-      paragraph(["となり、主張を得る。"]),
+      paragraph([
+        "となり（",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " は ",
+        ref("inclusion_zz_to_rr"),
+        " の写像）、",
+        math(String.raw`2_{\mathbb{R}}^{\,M_{\mathrm{col}}}`),
+        " は主張の右辺の ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " なので、主張を得る。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -2090,6 +2120,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
         "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「d c^n = 2^{M_col} c^n（∵ d := 2^{M_col}）」は、行列の大きさ d ∈ ℤ と ℝ の冪 2^{M_col} を同じ記号で等号で結んでいた。新しく足した inclusion_zz_to_rr の写像 ι_{ℤ→ℝ} を通し、「同じ項 c^n を d 個足した和 = ι(d)c^n」を finite_sum_of_constant_real_number、「ι(2_ℤ^{M_col}) = 2_ℝ^{M_col}」を inclusion_zz_to_rr_of_power_of_two の参照にした。d を def_power_of_integer の 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した。主張の 2^{M_col} が ℝ の冪であることを主張の文に書いた。値は変わらない。",
       ],
     },
   },
