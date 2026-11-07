@@ -27,8 +27,8 @@
 入力は結合定数の組 `P : IsingParam`（`K_1, K_2 > 0`）だけである（`onsager_exact_solution_unconditional` と同じ）。
 
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
-（(2) の上からの評価の必要十分版は `Ising2D/NecSuf/EvenSectorUpperBound.lean`、(3) の挟み撃ちと
-Riemann 和は `Ising2D/NecSuf/LogSqueeze.lean`・`Ising2D/NecSuf/RiemannSum.lean` が持つ）。
+（(2) の上からの評価 `c_le_twice_c_plus_physical` も必要十分版を置かない（`TheoremOnsagerExactSolution.lean` の冒頭）。
+(3) の挟み撃ちと Riemann 和は `Ising2D/NecSuf/LogSqueeze.lean`・`Ising2D/NecSuf/RiemannSum.lean` が持つ）。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerUnconditional
 

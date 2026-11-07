@@ -15,7 +15,7 @@
 | 移した名前 | 移動先 | 本文で使う主張 |
 | --- | --- | --- |
 | `flipIdx` / `flipConf` / `flipConf_involutive` / `sgn_flipConf` / `epsilonR` / `epsilonR_apply` / `epsilonR_isSymm` / `epsilonR_mul_self` / `epsilonR_mulVec_apply` / `epsilonR_mulVec_single` / `pauliX_apply_eq_ite` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_mulVec_basisVec` | `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean` | `epsilon_is_real_symmetric`、`trace_of_epsilon_V_plus` Step 3 (b) |
-| `NecSuf.permMat` と基本性質、`NecSuf.absVec` / `vecNormSq_absVec` / `quad_eq_sum` / `abs_quad_le_quad_absVec` / `quad_le_quad_absVec` | `NecSuf/PermMatrix.lean` | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
+| `NecSuf.permMat` と基本性質、`NecSuf.absVec` / `vecNormSq_absVec` / `quad_eq_sum` / `abs_quad_le_quad_absVec` / `quad_le_quad_absVec` | `NecSuf/PermMatrix.lean` | `permMat` は `trace_of_epsilon_V_plus` Step 3 (b)。`absVec` の側は今は本文の Lean が使わず、形式化の記録（`c_between_Lambda_half_and_twice_Lambda_half` Step 2 の前の形の `NecSuf/EvenSectorUpperBound.lean`、`NecSuf/PermSector.lean`、`RoutesNotAdopted/MinusSector/ClaimAbsVectorMovesToEvenSector.lean`）だけが使う |
 
 `sectorRayleighSup W ε 1`（本章の定理の `c_+(M)`）は本文の `def_sector_rayleigh_sup` の
 `Ising2D.evenSectorRayleighSup W ε` と一致する（`Ising2D.sectorRayleighSup_one_eq`）。

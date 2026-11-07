@@ -22,7 +22,8 @@
 係数を、加法について全順序と両立する可換群で、`0 ≤ a` を左から掛けて `≤` を保ち、乗法が結合的な環 `R` へ上げ、本ファイルの `calc` の 9 段と同じ並びで示す。
 具体版がその `R → ℝ` の特殊化として得られることは `real_bilinear_value_at_most_value_at_absolute_vector_of_necSuf`
 （`ClaimRealBilinearValueAtMostValueAtAbsoluteVectorFromNecSuf.lean`）に置く。
-`NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` は `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の必要十分版の部品で、係数が ℝ に固定されているので、この主張の必要十分版には当てない。
+`NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` は、`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の前の形の形式化の記録（`NecSuf/EvenSectorUpperBound.lean`）と
+`(−)` セクターの記録（`NecSuf/PermSector.lean`・`RoutesNotAdopted/MinusSector/ClaimAbsVectorMovesToEvenSector.lean`）の部品で、係数が ℝ に固定されているので、この主張の必要十分版には当てない。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 

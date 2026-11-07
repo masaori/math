@@ -27,10 +27,9 @@
 その準備の各行と鎖の各行を同じ順に引く。
 
 `onsager_step3_c_le_two_c_plus` と `EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`・`rayleighSup_sandwich_LambdaM` は、
-任意の橋渡し `EvenSectorBridge` の `W` について必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` を
-`ε = epsilonR M` で特殊化したもので、人手の鎖と 1 対 1 ではない。通しの定理はこれらを使わない。
-必要十分版が使う `ε` の性質は、置換行列であること（`epsilonR M = permMat flipConf`）・対称性・対合性、
-`W` の性質は `ε` との可換性と成分の非負である。
+任意の橋渡し `EvenSectorBridge` の `W` について、記録 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`
+（`NecSuf/EvenSectorUpperBound.lean`。人手の Step 2 が `W_ℝ`・`ε_ℝ` で書き直される前の形の形式化で、今の Step 2 の必要十分版ではない）を
+`ε = epsilonR M` で特殊化したもので、人手の鎖と 1 対 1 ではない。形式化の記録として残し、通しの定理はこれらを使わない。
 
 以前の形式化は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 章 019 の `c_equals_c_plus`（`c(M) = max(c_+, c_-) = c_+(M)`）を使って挟み撃ちなしに
@@ -38,7 +37,9 @@
 `Λ ≤ c(M) ≤ 2Λ` の挟み撃ちで述べる。章 019 の Lean（`RoutesNotAdopted/MinusSector/`）は形式化の記録として残してあり、
 本ファイルはそれに依存しない。
 
-必要十分版は `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の不等式だけに置く（`NecSuf/EvenSectorUpperBound.lean`）。Step 1・Step 3 は
+本ファイルには必要十分版を置かない。`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の具体版 `c_le_twice_c_plus_physical` は、
+準備で本文の主張を 1 つずつ引き、それらの結論を上限の性質と ℝ の四則演算・大小でつなぐだけで、引いた主張の外に
+取り払える構造を持たない（`ε_ℝ`・`W_ℝ` のどの性質が効くかは、引いた各主張のファイルが書いている）。Step 1・Step 3 は
 既存の必要十分版（`NecSuf/LogSqueeze.lean` の `abs_log_div_sub_log_le_of_sandwich`、
 `NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルは
 それらの具体版を接続するだけだからである。
@@ -70,7 +71,8 @@ variable {M : ℕ}
 /-! ## `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の不等式 `c(M) ≤ 2c_+(M)` -/
 
 /-- 人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の主張を、成分が正で `ε` と可換な実対称行列 `W` 一般について
-必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` から `ε = epsilonR M = permMat flipConf` で特殊化したもの。
+記録 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（Step 2 の前の形の形式化。今の Step 2 の必要十分版ではない）から
+`ε = epsilonR M = permMat flipConf` で特殊化したもの（形式化の記録）。
 人手の鎖と 1 対 1 の具体版は `c_le_twice_c_plus_physical`（下）で、通しの定理はそちらを引く。 -/
 theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
     (hpos : ∀ k l, 0 < W k l)
@@ -216,7 +218,7 @@ theorem LambdaM_le_rayleighSup (P : IsingParam)
     _ ≤ rayleighSup B.W := c_plus_le_c B.W
 
 /-- 人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の `c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M` を、任意の橋渡しの `W` について
-必要十分版の特殊化 `onsager_step3_c_le_two_c_plus` から出したもの（人手の鎖と 1 対 1 ではない。具体的な `W` では
+記録の特殊化 `onsager_step3_c_le_two_c_plus` から出したもの（形式化の記録。人手の鎖と 1 対 1 ではない。具体的な `W` では
 `rayleighSup_sandwich_LambdaM_physical` が `c_le_twice_c_plus_physical` を引く）。 -/
 theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)
@@ -233,7 +235,7 @@ theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
         rw [B.c_plus_equals_lamMax htr, lamMax_eq_LambdaM P hC hgam]
 
 /-- 人手 `c_between_Lambda_half_and_twice_Lambda_half`（Step 1・Step 2 を合わせた挟み撃ち）を任意の橋渡しの `W` について述べたもの:
-`Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`。Step 2 は必要十分版の特殊化を通す。
+`Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`。Step 2 は記録の特殊化 `onsager_step3_c_le_two_c_plus` を通す（形式化の記録）。
 通しの定理は具体的な `W` の `rayleighSup_sandwich_LambdaM_physical` を引き、これを使わない。 -/
 theorem rayleighSup_sandwich_LambdaM (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)

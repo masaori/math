@@ -1,24 +1,47 @@
 /-
-# 必要十分版: `c(M) ≤ 2 c_+(M)`（成分が非負の `W` と、対合の置換行列 `ε`）
+# `c(M) ≤ 2 c_+(M)`（成分が非負の `W` と、対合の置換行列 `ε`）（形式化の記録。今の人手の Step 2 の必要十分版ではない）
 
 人手証明のラベル: **`c_between_Lambda_half_and_twice_Lambda_half`** の Step 2（旧 `onsager_exact_solution` の Step 3）
 （正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）。
-具体版は `Ising2D.onsager_step3_c_le_two_c_plus`（`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）で、
-本ファイルの `rayleighSup_le_two_mul_evenSectorRayleighSup` を `π = flipConf`
-（`epsilonR M = permMat flipConf`）で特殊化したものである。
 
-## 証明の手順（人手 `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 と同じ）
+本ファイルの `rayleighSup_le_two_mul_evenSectorRayleighSup` は、人手の Step 2 が `W_ℝ`・`ε_ℝ` で書き直される前の形
+（Cauchy–Schwarz で `‖v‖² ≤ 4` を出す形）を形式化したもので、**今の人手の Step 2 の必要十分版ではない**。
+README 4 節の要件を次のとおり満たさない。
+
+* 要件 1（具体版と同じ手順）: 今の人手と 1 対 1 の具体版 `Ising2D.c_le_twice_c_plus_physical`
+  （`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）と手順が違う。
+  本ファイルは `v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使い、`v ≠ 0` を `‖v‖² ≥ ‖u‖² = 1` から、`‖v‖² ≤ 4` を
+  Cauchy–Schwarz（`psd_cauchy_schwarz`）から出し、`uᵀWu ≥ xᵀWx` を `quad_le_quad_absVec` で出す。
+* 要件 4（具体版が特殊化として得られる）: `c_le_twice_c_plus_physical` は本ファイルから導いていない。
+* 要件 2: 本ファイルは `W` の対称性を仮定する（`uᵀWεu = (εu)ᵀWu` の入れ替え）が、今の具体版の鎖は使わない。
+
+**今の具体版 `c_le_twice_c_plus_physical` には必要十分版を置かない。** その証明は、準備で本文の主張
+（`W_real_has_positive_entries`・`real_bilinear_value_at_most_value_at_absolute_vector`・
+`sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・`epsilon_real_fixes_sum_of_vector_and_its_image`・
+`norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`・
+`W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice` ほか）を 1 つずつ引き、
+それらの結論を上限の性質（`sup 𝓡_+` は `𝓡_+` の上界、`sup 𝓡` は上界のうち最小）と ℝ の四則演算・大小でつなぐだけで、
+引いた主張の外に取り払える構造を持たない。`ε_ℝ`・`W_ℝ` のどの性質が効くかは、引いた各主張のファイルが書いている
+（同じ章の `sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・`epsilon_real_fixes_sum_of_vector_and_its_image`・
+`norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four` が必要十分版を置かないのと同じ判断）。
+
+本ファイルは、`(−)` セクターの記録 `NecSuf/PermSector.lean` と同じく形式化の記録として残し、ビルドは通し続ける。
+通しの定理 `Ising2D.onsager_exact_solution_end_to_end` は本ファイルを使わない。本ファイルを使うのは、任意の橋渡しの `W`
+について述べた `Ising2D.onsager_step3_c_le_two_c_plus`・`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`・
+`EvenSectorBridge.rayleighSup_sandwich_LambdaM`（`TheoremOnsagerExactSolution.lean`）だけで、これらも記録である。
+
+## 本ファイルの証明の手順（Step 2 の前の形）
 
 `x`（`‖x‖ = 1`）を任意に取り、`u_k := |x_k|`, `v := u + εu` とおく。
 
 1. `uᵀWu ≥ |xᵀWx| ≥ xᵀWx`（三角不等式と `W_{kl} ≥ 0`）— `quad_le_quad_absVec`
 2. `‖εu‖ = ‖u‖ = ‖x‖ = 1`（`ε` は置換行列）— `vecNormSq_permMat_mulVec`, `vecNormSq_absVec`
-3. `εv = v`（`ε² = I`）、`v ≠ 0`（`v ≥ u ≥ 0`, `u ≠ 0`）
+3. `εv = v`（`ε² = I`）、`v ≠ 0`（`v ≥ u ≥ 0` より `‖v‖² ≥ ‖u‖² = 1 > 0`）
 4. `‖v‖² = 2 + 2uᵀεu ≤ 4`（Cauchy–Schwarz `uᵀεu ≤ ‖u‖‖εu‖ = 1`）
 5. `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`, `u, εu ≥ 0`, `W_{kl} ≥ 0`）
 6. `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ 2uᵀWu/‖v‖² ≥ 2uᵀWu/4 = uᵀWu/2 ≥ xᵀWx/2`
 
-## この主張に本質的に効いている構造
+## 本ファイルの証明に効いている構造
 
 * `ε` が対合 `π` の置換行列であること（`(εx)_k = x_{π(k)}`、`εᵀ = ε`、`ε² = I`、ノルムを保つ）。
   `ε` が `σ^x_1 ⋯ σ^x_M` であることも、添字集合がスピン配置であることも効いていない。
@@ -53,7 +76,8 @@ theorem bilin_nonneg_of_nonneg {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) 
   refine Finset.sum_nonneg fun i _ => mul_nonneg (ha i) ?_
   exact Finset.sum_nonneg fun j _ => mul_nonneg (hW i j) (hb j)
 
-/-- **人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の必要十分版**: `c(M) ≤ 2 c_+(M)`。 -/
+/-- 人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の前の形の形式化（記録。今の Step 2 の必要十分版ではない）:
+`c(M) ≤ 2 c_+(M)`。 -/
 theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n n ℝ}
     (hW : W.IsSymm) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) (hcomm : permMat π * W = W * permMat π) :

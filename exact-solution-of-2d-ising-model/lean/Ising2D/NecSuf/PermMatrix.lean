@@ -1,13 +1,16 @@
 /-
-# 必要十分版: 対合の置換行列と「成分の絶対値を取る」操作
+# 必要十分版: 対合の置換行列と「成分の絶対値を取る」操作（`absVec` の側は形式化の記録だけが使う）
 
-人手の本文で使う箇所（具体版は `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean` と
-`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）:
+人手の本文で使う箇所（具体版は `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`）:
 
 * **`trace_of_epsilon_V_plus`** の証明 Step 3 の (b)（`ε` は置換行列）
   — `permMat`, `permMat_mulVec`, `permMat_isSymm`, `permMat_mul_self`
-* **`onsager_exact_solution`** の証明 Step 3（`u_k := |x_k|` と `uᵀWu ≥ xᵀWx`、`‖u‖ = ‖x‖`）
-  — `absVec`, `abs_quad_le_quad_absVec`, `quad_le_quad_absVec`, `vecNormSq_absVec`
+
+成分の絶対値の側（`absVec`, `abs_quad_le_quad_absVec`, `quad_le_quad_absVec`, `vecNormSq_absVec`）を使うのは、形式化の記録だけである:
+`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の前の形の形式化 `NecSuf/EvenSectorUpperBound.lean` と、
+`(−)` セクターの記録 `NecSuf/PermSector.lean`・`RoutesNotAdopted/MinusSector/`。今の Step 2 の具体版
+`c_le_twice_c_plus_physical`（`TheoremOnsagerExactSolution.lean`）は、本文の主張
+`real_bilinear_value_at_most_value_at_absolute_vector`・`norm_of_vector_of_absolute_values_equals_norm` の Lean を引く。
 
 ## 本質的に効いている構造
 

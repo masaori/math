@@ -199,10 +199,10 @@
 | --- | --- | --- |
 | `EvenSectorBridge.lamMax_eq_LambdaM` | `Λ̌_max = Λ^{(1/2)}_M`（章 012 の記法との突き合わせ） | 記法の同定 |
 | **`EvenSectorBridge.LambdaM_le_rayleighSup`** | **`Λ^{(1/2)}_M = c_+(M) ≤ c(M)`**（章 011 の `c_plus_le_c` と `c_plus_equals_lamMax`） | `c_between_Lambda_half_and_twice_Lambda_half` Step 1 |
-| `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（`NecSuf/EvenSectorUpperBound.lean`）/ `Ising2D.onsager_step3_c_le_two_c_plus` | **`c(M) ≤ 2c_+(M)`**（必要十分版とその `ε = epsilonR M` への特殊化） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
-| **`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`** | **`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`**（任意の橋渡しの `W` について、必要十分版の特殊化を通す。通しの定理は使わない） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
+| `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（`NecSuf/EvenSectorUpperBound.lean`）/ `Ising2D.onsager_step3_c_le_two_c_plus` | **`c(M) ≤ 2c_+(M)`**（Step 2 の前の形の形式化の記録とその `ε = epsilonR M` への特殊化。今の Step 2 の必要十分版ではない） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
+| **`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`** | **`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`**（任意の橋渡しの `W` について、記録の特殊化を通す。形式化の記録で、通しの定理は使わない） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 |
 | **`Ising2D.c_le_twice_c_plus_physical`**（`TheoremOnsagerExactSolution.lean`） | 具体的な `W_ℝ = ϱ(W)` と `ε_ℝ` について、`Λ = c_+(M)` なら **`c(M) ≤ 2Λ`**（人手の準備の各行・7 行の鎖・2 行・2 行と 1 対 1） | `c_between_Lambda_half_and_twice_Lambda_half` Step 2（通しの定理が引く） |
-| `EvenSectorBridge.rayleighSup_sandwich_LambdaM` | `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`（任意の橋渡しの `W` について。通しの定理は具体的な `W` の `rayleighSup_sandwich_LambdaM_physical` を使う） | `c_between_Lambda_half_and_twice_Lambda_half` |
+| `EvenSectorBridge.rayleighSup_sandwich_LambdaM` | `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`（任意の橋渡しの `W` について。形式化の記録で、通しの定理は具体的な `W` の `rayleighSup_sandwich_LambdaM_physical` を使う） | `c_between_Lambda_half_and_twice_Lambda_half` |
 | `Ising2D.onsager_limit_in_N_row` | `N_row → ∞` の極限は `(1/M) log c(M)` | Step 1（章 012 の `limit_of_log_Z_in_N_row`） |
 | `Ising2D.onsager_limit_in_M` | 挟み撃ち `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M` から、`M → ∞` の極限が Onsager の表式になる | Step 3（`log` の単調性、`(log 2)/M → 0`、章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
@@ -360,7 +360,7 @@
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `Ising2D.max_eigenvector_in_even_sector` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
-| `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.c_le_twice_c_plus_physical`（人手の鎖と 1 対 1）。任意の `W` について必要十分版を特殊化した `Ising2D.onsager_step3_c_le_two_c_plus` も残す | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **`onsager_step3_c_le_two_c_plus` は系**。必要十分版は具体版 `c_le_twice_c_plus_physical` と別の手順（下の 4 節の表）で、同じ手順への寄せは状態台帳に残す。効くのは `ε` が対合の置換行列であること、`W` の対称性（`uᵀWεu = (εu)ᵀWu` の入れ替え）・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。半正定値性は効かない（上限が定まることは `rayleighSet_bddAbove` の上界 `Σ_iΣ_j\|W_ij\|` から仮定なしに出る）。`π` が不動点をもたないことは使わない |
+| `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.c_le_twice_c_plus_physical`（人手の鎖と 1 対 1） | **置かない** | 準備で本文の主張（`real_bilinear_value_at_most_value_at_absolute_vector`・`sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・`epsilon_real_fixes_sum_of_vector_and_its_image`・`norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`・`W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice` ほか）を 1 つずつ引き、上限の性質と `ℝ` の四則演算・大小でつなぐだけで、引いた主張の外に取り払える構造を持たない（`ε_ℝ`・`W_ℝ` のどの性質が効くかは引いた各主張のファイルが書く）。`Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（`NecSuf/EvenSectorUpperBound.lean`）とその特殊化 `Ising2D.onsager_step3_c_le_two_c_plus` は、Step 2 の前の形（下の 4 節の表）の形式化の記録で、今の Step 2 の必要十分版ではない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_ite_smul`・`siteProd_ite_ite_smul` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性（`epsilon_anticomm_sigmaZ`）・相異なるサイトの `σ^z` の可換性（`siteOp_mul_comm`）・`(σ^z)^2 = I`・対角作用という既存の関係を、環の公理と有限和の分配で組み合わせるだけで、主張に固有の構造が無い（`H1_plus_in_sigma_z_form` と同じ判断） |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_bondSpin_eq_first_mul_last` | `NecSuf.open_chain_weighted_sum_eq_sum_prod` / `NecSuf.sum_spinVal_const`（二つをまとめた形が `NecSuf.open_chain_weighted_sum`）/ `NecSuf.prod_mul_succ_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`。`endpoint_mul_exp_openChainEnergy_eq_prod_of_necSuf` は 2 段目だけを導出に替える） |
@@ -427,8 +427,8 @@
 人手証明 `c_between_Lambda_half_and_twice_Lambda_half`（もとは `onsager_exact_solution` の Step 2・Step 3。2026-10-31 に独立した主張へ分けた）は
 `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` という**粗い挟み撃ち**を採る（原文 `conversion.notes` に
 よれば `c_-(M)` の値に依存しないため）。Lean も同じ挟み撃ちで述べる
-（`EvenSectorBridge.LambdaM_le_rayleighSup` / `rayleighSup_le_two_mul_LambdaM`、`onsager_exact_solution` の Step 3 の
-`onsager_limit_in_M` で `(log 2)/M → 0` を使う）。
+（通しの定理は `rayleighSup_sandwich_LambdaM_physical` で、Step 1 は `EvenSectorBridge.LambdaM_le_rayleighSup`、Step 2 は `c_le_twice_c_plus_physical`。
+`onsager_exact_solution` の Step 3 の `onsager_limit_in_M` で `(log 2)/M → 0` を使う）。
 
 以前の Lean は、章 019 の `Ising2D.c_minus_le_c_plus`（`c_-(M) ≤ c_+(M)`）と `Ising2D.c_equals_c_plus`
 （`c(M) = c_+(M)`）で挟み撃ちなしに `c(M) = Λ^{(1/2)}_M` を出していた（旧 `rayleighSup_eq_LambdaM`）。
@@ -436,7 +436,7 @@
 `structured-latex/notes/minus_sector_not_adopted.ts` へ退避し、章 019 も本文から外れたので、Lean も
 本文と同じ経路に揃えた。章 019 の Lean は形式化の記録として残してある（`lean/docs/ch019-formalization.md`）。
 
-`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の人手証明と Lean の対応（`NecSuf/EvenSectorUpperBound.lean`）:
+`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の前の形（`W_ℝ`・`ε_ℝ` で書き直す前、Cauchy–Schwarz で `‖v‖² ≤ 4` を出す形）と、その形式化の記録 `NecSuf/EvenSectorUpperBound.lean` の対応:
 
 | 人手の段 | Lean |
 | --- | --- |
@@ -447,7 +447,7 @@
 | `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`） | `mulVec_dotProduct_selfadjoint`（`εᵀ = ε`）、仮定 `hcomm`、`NecSuf.bilin_nonneg_of_nonneg` |
 | `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ ⋯ ≥ xᵀWx/2` | `le_evenSectorRayleighSup` と同じ順の `calc` |
 
-この表は必要十分版 `NecSuf/EvenSectorUpperBound.lean` の手順である。必要十分版は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく
+この表は記録 `NecSuf/EvenSectorUpperBound.lean` の手順で、今の Step 2 の必要十分版ではない（手順が今の具体版と違い、具体版をその特殊化として導いていない）。記録は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく
 `‖v‖² ≥ ‖u‖² = 1 > 0` の形で示し、`v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使う。
 
 人手の鎖と 1 対 1 の具体版は `Ising2D.c_le_twice_c_plus_physical`（`TheoremOnsagerExactSolution.lean`）で、人手の準備の各行を
