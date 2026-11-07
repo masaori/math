@@ -13,6 +13,7 @@
 * `maxeig_definition_W_real`（ラベル **`def_W_real`**）の `W_ℝ := ϱ(W)`
 * `maxeig_claim_W_real_is_symmetric`（ラベル **`W_real_is_symmetric`**）
 * `maxeig_claim_W_real_is_positive_definite`（ラベル **`W_real_is_positive_definite`**）
+* `maxeig_claim_W_real_is_positive_semidefinite`（ラベル **`W_real_is_positive_semidefinite`**）
 * `maxeig_claim_trace_of_W_power_via_W_real`（ラベル **`trace_of_W_power_via_W_real`**）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）
 
@@ -581,7 +582,8 @@ theorem conjugate_bilinear_value_of_real_vector_W (K1 : ℝ) {K2 : ℝ} (hK2 : 0
         Finset.sum_congr rfl fun k _ => (Complex.ofReal_sum _ _).symm             -- `real_inclusion_preserves_finite_sum`（`r_l → x_k(W_ℝ)_klx_l`）を各 `k` へ
     _ = ((∑ k, ∑ l, x k * WR k l * x l : ℝ) : ℂ) := (Complex.ofReal_sum _ _).symm -- `real_inclusion_preserves_finite_sum`（`r_k → Σ_l x_k(W_ℝ)_klx_l`）
 
-/-- **人手 `W_real_is_positive_definite`**: `x ∈ ℝ^{2^{M_col}}` が `x ≠ 0` なら `x^⊤W_ℝx > 0`。
+/-- **人手 `W_real_is_positive_definite`**: `d := 2_ℤ^{M_col}` について `x ∈ ℝ^d` が `x ≠ 0` なら `x^⊤W_ℝx > 0`
+（人手の `M_col` は Lean の `M`、`x` は Lean の `x : Conf M → ℝ`。`d = 2_ℤ^M` は `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は `power_of_two_in_integers_is_at_least_one`）。
 `ξ_k := (x_k)_ℂ` は `ξ ≠ 0`（`x_k ≠ 0` の `k` で `ξ_k = 0_ℂ = (0)_ℂ` なら単射性で `x_k = 0`）、`W` は正定値なので
 `ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}` があり、10 行の鎖と単射性（`a → ρ`, `b → x^⊤W_ℝx`）で `x^⊤W_ℝx = ρ > 0`。 -/
 theorem W_real_is_positive_definite (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : x ≠ 0) :

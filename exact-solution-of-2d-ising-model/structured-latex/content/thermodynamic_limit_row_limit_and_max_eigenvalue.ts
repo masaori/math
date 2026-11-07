@@ -852,23 +852,33 @@ W
     labels: ["def_W_real"],
     statement: [
       paragraph([
-        ref("W_is_real_symmetric_positive_definite"),
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
         " より ",
-        math(String.raw`W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の成分はすべて実数（",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記する。",
+        ref("def_symmetrized_transfer_matrix"),
+        " の ",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " は、",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より成分がすべて実数（",
         ref("def_matrix_with_real_entries"),
         "）なので、",
         ref("def_real_matrix_of_real_entry_matrix"),
         "（",
-        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ B \to W`),
+        math(String.raw`m \to d,\ n \to d,\ B \to W`),
         "）の",
       ]),
-      displayMath(String.raw`W_{\mathbb{R}} := \varrho^{2^{M_{\mathrm{col}}},2^{M_{\mathrm{col}}}}_{\mathbb{C}\to\mathbb{R}}(W) \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+      displayMath(String.raw`W_{\mathbb{R}} := \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W) \in \mathrm{Mat}(d,\mathbb{R})`),
       paragraph([
         "が定まる。",
         ref("def_real_matrix_of_real_entry_matrix"),
         " より、すべての ",
-        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`k, l \in \{1,\dots,d\}`),
         " について ",
         math(String.raw`\bigl((W_{\mathbb{R}})_{kl}\bigr)_{\mathbb{C}} = W_{kl}`),
         " である（",
@@ -882,6 +892,7 @@ W
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の中で定めていた W_ℝ := ϱ(W) を、W_ℝ の対称性（W_real_is_symmetric）と正定値性（W_real_is_positive_definite）が def_rayleigh_sup より前に引けるよう、独立の定義ブロックに切り出した。中身は変えていない。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさを添字なしの 2^{M_col} で書いていたのを、主張の冒頭で d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）と置いて d で書いた（同じ章の trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。W が Mat(d,ℂ) の元であることの出典として def_symmetrized_transfer_matrix を引いた。値と手順は変えていない。",
       ],
     },
   },
@@ -892,19 +903,27 @@ W
     labels: ["W_real_is_symmetric"],
     statement: [
       paragraph([
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記する。",
         ref("def_W_real"),
         " の ",
-        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
         " は ",
         ref("def_real_symmetric_matrix"),
         "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}}`),
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}}`),
         "）の意味で対称である。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        math(String.raw`k, l \in \{1,\dots,d\}`),
         " を取る。",
         ref("W_is_real_symmetric_positive_definite"),
         " より ",
@@ -944,6 +963,7 @@ W
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm などが psd_cauchy_schwarz を W に当てるとき、psd_cauchy_schwarz が求める「実数の行列で対称」を W について示す主張が本文に無かった（W_is_real_symmetric_positive_definite は複素行列 W の W^⊤ = W を述べる）。W_ℝ について示す主張として足した。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさを添字なしの 2^{M_col} で書いていたのを、主張の冒頭で d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）と置いて d で書いた（同じ章の trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。値と手順は変えていない。",
       ],
     },
   },
@@ -954,11 +974,19 @@ W
     labels: ["W_real_is_positive_definite"],
     statement: [
       paragraph([
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記する。",
         ref("def_W_real"),
         " の ",
-        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
         " について、",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x \in \mathbb{R}^{d}`),
         " が ",
         math(String.raw`x \neq 0`),
         "（ある ",
@@ -972,20 +1000,12 @@ W
         " は ",
         ref("def_real_bilinear_value"),
         "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ y \to x`),
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}},\ y \to x`),
         "）の値である。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
-        "（",
-        ref("def_power_of_integer"),
-        " の冪。",
-        ref("power_of_two_in_integers_is_at_least_one"),
-        " より ",
-        math(String.raw`\mathbb{Z}_{\geq 1}`),
-        " の元）と略記する。",
         math(String.raw`\xi \in \mathbb{C}^{d}`),
         " を ",
         math(String.raw`\xi_k := (x_k)_{\mathbb{C}}`),
@@ -1061,6 +1081,7 @@ W
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の 𝓡 ⊆ ℝ_{>0} と、rayleigh_bounds_operator_norm などが psd_cauchy_schwarz を W に当てるときの半正定値性（x^⊤Wx ≥ 0）を、複素行列 W の正定値性（x ∈ ℂ^n の x^*Wx についての条件）から実数の x の x^⊤W_ℝx へ移す段が本文に無かった。x を ℂ^n へ成分ごとに包含した ξ について ξ^*Wξ = (x^⊤W_ℝx)_ℂ を示す主張として足した。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。値と手順は変えていない。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 主張が行列の大きさを添字なしの 2^{M_col} で書き、証明が d := 2_ℤ^{M_col} を置いていた（ブロックの中で書き方が二通り）のを、d の置き方を主張の冒頭へ移し、主張も d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）の d で書いた（同じ章の trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。値と手順は変えていない。",
       ],
     },
   },
@@ -1071,11 +1092,19 @@ W
     labels: ["W_real_is_positive_semidefinite"],
     statement: [
       paragraph([
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記する。",
         ref("def_W_real"),
         " の ",
-        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})`),
+        math(String.raw`W_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
         " について、すべての ",
-        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`u \in \mathbb{R}^{d}`),
         " で ",
         math(String.raw`u^\top W_{\mathbb{R}} u \geq 0`),
         " である（",
@@ -1085,13 +1114,13 @@ W
         " は ",
         ref("def_real_bilinear_value"),
         "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u`),
+        math(String.raw`n \to d,\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u`),
         "）の値である。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`u \in \mathbb{R}^{d}`),
         " を取る。",
         math(String.raw`u \neq 0`),
         " なら ",
@@ -1110,13 +1139,13 @@ W
       ]),
       displayMath(String.raw`\begin{aligned}
 u^\top W_{\mathbb{R}} u
-&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} \bigl(u_k\,(W_{\mathbb{R}})_{kl}\bigr)\,u_l
-  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to 2^{M_{\mathrm{col}}},\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u)\bigr)\\
-&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} \bigl(0\cdot(W_{\mathbb{R}})_{kl}\bigr)\cdot 0
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \bigl(u_k\,(W_{\mathbb{R}})_{kl}\bigr)\,u_l
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to u,\ y \to u)\bigr)\\
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} \bigl(0\cdot(W_{\mathbb{R}})_{kl}\bigr)\cdot 0
   &&\bigl(\because\ u_k = 0,\ u_l = 0\ \text{を各項へ}\bigr)\\
-&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} 0\cdot 0
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} 0\cdot 0
   &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 \cdot a = 0\ (a \to (W_{\mathbb{R}})_{kl})\ \text{を各項へ}\bigr)\\
-&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}} 0
+&= \sum_{k=1}^{d}\sum_{l=1}^{d} 0
   &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 \cdot a = 0\ (a \to 0)\ \text{を各項へ}\bigr)\\
 &= 0
   &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)
@@ -1131,6 +1160,7 @@ u^\top W_{\mathbb{R}} u
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm と moment_log_convexity は psd_cauchy_schwarz を W に当てるとき、その仮定の半正定値性を W_is_real_symmetric_positive_definite（複素行列 W の正定値性）から「とくに半正定値」として名前だけで取っていた。実数の行列 W_ℝ について、正定値性（W_real_is_positive_definite）と u = 0 の 5 行の鎖から示す主張として足した。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさを添字なしの 2^{M_col} で書いていたのを、主張の冒頭で d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）と置いて d で書いた（同じ章の trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。値と手順は変えていない。",
       ],
     },
   },
