@@ -342,6 +342,20 @@ W^{k+2}
     ],
     proof: [
       paragraph([
+        math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_power_of_integer"),
+        " の冪。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元）と略記する。",
+        ref("def_symmetrized_transfer_matrix"),
+        " より ",
+        math(String.raw`W \in \mathrm{Mat}(d,\mathbb{C})`),
+        " である。",
+      ]),
+      paragraph([
         "Step 1（",
         math(String.raw`K_1D`),
         " と ",
@@ -453,7 +467,7 @@ W^{k+2}
 &= \left(\sigma_m^z\sigma_{m^{+}}^z\right)^\top
    \quad (\because \text{準備の } \sigma_{m+1}^z = \sigma_{m^{+}}^z) \\
 &= \left(\sigma_{m^{+}}^z\right)^\top\left(\sigma_m^z\right)^\top
-   \quad (\because \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z)) \\
+   \quad (\because \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to d,\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z)) \\
 &= \sigma_{m^{+}}^z\sigma_m^z
    \quad (\because \text{上で得た } \left(\sigma_k^z\right)^\top = \sigma_k^z \text{ を } k \to m^{+} \text{ と } k \to m \text{ へ同時に適用}) \\
 &= \sigma_m^z\sigma_{m^{+}}^z
@@ -473,9 +487,9 @@ W^{k+2}
 &= \Bigl((K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top
    \quad (\because \blkref{def_transfer_matrix_square_root}\ \text{の}\ D\ \text{の定義}) \\
 &= (K_1)_{\mathbb{C}}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top
-   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^z\sigma_{\ell+1}^z)\right) \\
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to d,\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^z\sigma_{\ell+1}^z)\right) \\
 &= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)^\top
-   \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}}))\right) \\
+   \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (\text{主張の行数・列数 } m, n \to d,\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}}))\right) \\
 &= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z
    \quad (\because \text{上で得た } \left(\sigma_m^z\sigma_{m+1}^z\right)^\top = \sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
 &= K_1D
@@ -518,7 +532,7 @@ W^{k+2}
         " の成分はすべて実数なので、",
         ref("product_of_real_entry_matrices_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z`),
+        math(String.raw`\text{主張の行数・列数 } m, n, p \to d,\ A \to \sigma_m^z,\ B \to \sigma_{m^{+}}^z`),
         "）より ",
         math(String.raw`\sigma_m^z\sigma_{m^{+}}^z`),
         " の成分はすべて実数であり、",
@@ -529,13 +543,13 @@ W^{k+2}
         " の成分もすべて実数である。",
         ref("finite_sum_of_real_entry_matrices_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}})`),
+        math(String.raw`\text{主張の行数・列数 } m, n \to d,\ r \to M_{\mathrm{col}},\ X_\ell \to \sigma_\ell^z\sigma_{\ell+1}^z\ (1 \leq \ell \leq M_{\mathrm{col}})`),
         "）より ",
         math(String.raw`D`),
         " の成分はすべて実数であり、",
         ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ B \to D`),
+        math(String.raw`\text{主張の行数・列数 } m, n \to d,\ c \to K_1,\ B \to D`),
         "）より ",
         math(String.raw`K_1D = (K_1)_{\mathbb{C}}D`),
         " の成分もすべて実数である。転置について対称であることと合わせて、",
@@ -565,24 +579,30 @@ S_2
         "）なので、",
         ref("real_symmetric_matrix_is_hermitian"),
         "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to K_1D`),
+        math(String.raw`n \to d,\ A \to K_1D`),
         " と ",
         math(String.raw`A \to S_2`),
         "）よりエルミートであり、",
         ref("real_multiple_of_hermitian_is_hermitian"),
         "（",
-        math(String.raw`\alpha \to \tfrac12,\ A \to K_1D`),
+        math(String.raw`n \to d,\ \alpha \to \tfrac12,\ A \to K_1D`),
         "）より ",
         math(String.raw`\tfrac12 K_1D`),
         " もエルミートである。",
         ref("exp_hermitian_is_positive_definite"),
-        " より ",
+        "（",
+        math(String.raw`n \to d,\ S \to \tfrac12 K_1D`),
+        " と ",
+        math(String.raw`n \to d,\ S \to S_2`),
+        "）より ",
         math(String.raw`B := \exp(\tfrac12 K_1D)`),
         " と ",
         math(String.raw`A := \exp(S_2)`),
         " はいずれも正定値（とくにエルミート）であり、",
         ref("exp_of_negative_is_left_inverse"),
-        " より ",
+        "（",
+        math(String.raw`n \to d,\ A \to \tfrac12 K_1D`),
+        "）より ",
         math(String.raw`B' := \exp(-\tfrac12 K_1D)`),
         " は ",
         math(String.raw`B'B = I`),
@@ -607,13 +627,13 @@ S_2
         " の成分がすべて実数であることと ",
         ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to \tfrac12,\ B \to K_1D`),
+        math(String.raw`\text{主張の行数・列数 } m, n \to d,\ c \to \tfrac12,\ B \to K_1D`),
         "）による。転置で不変であることは次の鎖による。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \bigl(\tfrac12 K_1D\bigr)^{\top}
 &= (\tfrac12)_{\mathbb{C}}\bigl(K_1D\bigr)^{\top}
-  &&\bigl(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to (\tfrac12)_{\mathbb{C}},\ A \to K_1D)\bigr)\\
+  &&\bigl(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to d,\ c \to (\tfrac12)_{\mathbb{C}},\ A \to K_1D)\bigr)\\
 &= (\tfrac12)_{\mathbb{C}}\bigl(K_1D\bigr)
   &&\bigl(\because\ \text{Step 1 の}\ (K_1D)^{\top} = K_1D\bigr)\\
 &= \tfrac12 K_1D
@@ -623,7 +643,7 @@ S_2
         "よって ",
         ref("exp_of_real_symmetric_is_real_symmetric"),
         "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to \tfrac12 K_1D`),
+        math(String.raw`n \to d,\ A \to \tfrac12 K_1D`),
         " と ",
         math(String.raw`A \to S_2`),
         "。",
@@ -650,7 +670,7 @@ S_2
         " と Step 2 の ",
         math(String.raw`A := \exp(S_2)`),
         " の置き方）であり、",
-        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`X \in \mathrm{Mat}(d,\mathbb{C})`),
         " について ",
         math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}X`),
         " は ",
@@ -674,22 +694,24 @@ W
 &=\Bigl(B\bigl((2s_2)^{M_{\mathrm{col}}/2}A\bigr)\Bigr)B
   &&\bigl(\because\ \text{Step 3 の冒頭の}\ V_2=(2s_2)^{M_{\mathrm{col}}/2}A\bigr)\\
 &=\Bigl((2s_2)^{M_{\mathrm{col}}/2}\bigl(BA\bigr)\Bigr)B
-  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to B,\ B \to A)\bigr)\\
+  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (\text{主張の行数・列数 } m, n, p \to d,\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to B,\ B \to A)\bigr)\\
 &=(2s_2)^{M_{\mathrm{col}}/2}\Bigl(\bigl(BA\bigr)B\Bigr)
-  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to BA,\ B \to B)\bigr)\\
+  &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (\text{主張の行数・列数 } m, n, p \to d,\ a \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to BA,\ B \to B)\bigr)\\
 &=(2s_2)^{M_{\mathrm{col}}/2}\Bigl(\bigl(B^{*}A\bigr)B\Bigr)
   &&\bigl(\because\ B^*=B\bigr)
 \end{aligned}`),
       paragraph([
         ref("congruence_preserves_positive_definite"),
-        " より ",
+        "（",
+        math(String.raw`n \to d,\ A \to A,\ B \to B,\ B' \to B'`),
+        "）より ",
         math(String.raw`B^*(AB)`),
         " は正定値であり、",
         math(String.raw`(B^*A)B = B^*(AB)`),
         "（",
         ref("mat_mult_associative"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n, p, q \to 2^{M_{\mathrm{col}}},\ A \to B^*,\ B \to A,\ C \to B`),
+        math(String.raw`\text{主張の行数・列数 } m, n, p, q \to d,\ A \to B^*,\ B \to A,\ C \to B`),
         "））なので ",
         math(String.raw`(B^*A)B`),
         " も正定値、",
@@ -698,7 +720,9 @@ W
         math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
         " なので ",
         ref("positive_real_multiple_preserves_positive_definite"),
-        " より ",
+        "（",
+        math(String.raw`n \to d,\ \alpha \to (2s_2)^{M_{\mathrm{col}}/2},\ A \to (B^*A)B`),
+        "）より ",
         math(String.raw`W`),
         " は正定値である。",
       ]),
@@ -726,7 +750,7 @@ V_2^\top
 &=\bigl((2s_2)^{M_{\mathrm{col}}/2}A\bigr)^\top
   &&\bigl(\because\ \text{Step 3 の冒頭の}\ V_2=(2s_2)^{M_{\mathrm{col}}/2}A\bigr)\\
 &=(2s_2)^{M_{\mathrm{col}}/2}A^\top
-  &&\bigl(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to A)\bigr)\\
+  &&\bigl(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (\text{主張の行数・列数 } m, n \to d,\ c \to \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}},\ A \to A)\bigr)\\
 &=(2s_2)^{M_{\mathrm{col}}/2}A
   &&\bigl(\because\ \text{Step 2 の}\ A^\top = A\bigr)\\
 &=V_2
@@ -742,15 +766,15 @@ W^\top
 &=\bigl((B V_2) B\bigr)^\top
   &&\bigl(\because\ \blkref{def_symmetrized_transfer_matrix},\ B = V_1^{1/2}\ \blkref{def_transfer_matrix_square_root}\bigr)\\
 &=B^\top\bigl(B V_2\bigr)^\top
-  &&\bigl(\because\ \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to BV_2,\ B \to B)\bigr)\\
+  &&\bigl(\because\ \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to d,\ A \to BV_2,\ B \to B)\bigr)\\
 &=B^\top\bigl(V_2^\top B^\top\bigr)
-  &&\bigl(\because\ \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to B,\ B \to V_2)\bigr)\\
+  &&\bigl(\because\ \blkref{transpose_of_matrix_product}\ (\text{主張の行数・列数 } m, n, p \to d,\ A \to B,\ B \to V_2)\bigr)\\
 &=B\bigl(V_2^\top B\bigr)
   &&\bigl(\because\ \text{Step 2 の}\ B^\top = B\ \text{を 2 箇所へ同時に適用}\bigr)\\
 &=B\bigl(V_2 B\bigr)
   &&\bigl(\because\ \text{上で得た}\ V_2^\top = V_2\bigr)\\
 &=\bigl(B V_2\bigr)B
-  &&\bigl(\because\ \blkref{mat_mult_associative}\ (\text{主張の行数・列数 } m, n, p, q \to 2^{M_{\mathrm{col}}},\ A \to B,\ B \to V_2,\ C \to B)\bigr)\\
+  &&\bigl(\because\ \blkref{mat_mult_associative}\ (\text{主張の行数・列数 } m, n, p, q \to d,\ A \to B,\ B \to V_2,\ C \to B)\bigr)\\
 &=W
   &&\bigl(\because\ \blkref{def_symmetrized_transfer_matrix},\ B = V_1^{1/2}\ \blkref{def_transfer_matrix_square_root}\bigr)
 \end{aligned}`),
@@ -762,7 +786,7 @@ W^\top
         " の成分はすべて実数なので、",
         ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n \to 2^{M_{\mathrm{col}}},\ c \to (2s_2)^{M_{\mathrm{col}}/2},\ B \to A`),
+        math(String.raw`\text{主張の行数・列数 } m, n \to d,\ c \to (2s_2)^{M_{\mathrm{col}}/2},\ B \to A`),
         "）より ",
         math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}A`),
         " の成分はすべて実数である。",
@@ -772,13 +796,13 @@ W^\top
         " の成分はすべて実数なので、",
         ref("product_of_real_entry_matrices_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to B,\ B \to V_2`),
+        math(String.raw`\text{主張の行数・列数 } m, n, p \to d,\ A \to B,\ B \to V_2`),
         "）より ",
         math(String.raw`BV_2`),
         " の成分はすべて実数であり、もう一度 ",
         ref("product_of_real_entry_matrices_has_real_entries"),
         "（",
-        math(String.raw`\text{主張の行数・列数 } m, n, p \to 2^{M_{\mathrm{col}}},\ A \to BV_2,\ B \to B`),
+        math(String.raw`\text{主張の行数・列数 } m, n, p \to d,\ A \to BV_2,\ B \to B`),
         "）より ",
         math(String.raw`W = (BV_2)B`),
         " の成分はすべて実数である。転置について対称であることと合わせて、",
@@ -795,7 +819,7 @@ W^\top
         " を ",
         math(String.raw`M_{\mathrm{col}}`),
         " に取った ",
-        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`R=\mathrm{Mat}(d,\mathbb{C})`),
         " と、その単位行列 ",
         math(String.raw`I`),
         "・可逆元の集合 ",
@@ -819,9 +843,9 @@ BB'
 &=\exp\!\left(\tfrac12 K_1D\right)\exp\!\left(-\tfrac12 K_1D\right)
   &&\bigl(\because\ B,\ B'\ \text{の置き方}\bigr)\\
 &=\exp\!\left(-\left(-\tfrac12 K_1D\right)\right)\exp\!\left(-\tfrac12 K_1D\right)
-  &&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to \tfrac12 K_1D)\bigr)\\
+  &&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to d,\ n\to d,\ A\to \tfrac12 K_1D)\bigr)\\
 &=I
-  &&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -\tfrac12 K_1D)\bigr)
+  &&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to d,\ A\to -\tfrac12 K_1D)\bigr)
 \end{aligned}`),
       displayMath(String.raw`BV_2\in R^\times
 \qquad\bigl(\because\ B \in R^\times,\ \blkref{V2_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to B,\ g_2\to V_2)\bigr)`),
@@ -842,6 +866,7 @@ W
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: Step 1 の K_1D の実対称性が「iH_is_real_symmetric の Step 3 で見たとおり」と散文で済ませていた（その Step 3 は 1 ≤ m ≤ M_col−1 の σ_m^zσ_{m+1}^z しか扱わず、周期端 σ_{M_col}^zσ_1^z を覆わない）のを、(σ_k^z)^⊤ = σ_k^z の 5 行、(σ_m^zσ_{m+1}^z)^⊤ の 5 行（m^+ を置き、transpose_of_matrix_product と distinct_site_pauli_matrices_commute で。M_col = 1 は同じ行列）、(K_1D)^⊤ の 5 行と、成分の実性の 2 段落（kronecker_of_real_entry_matrices_has_real_entries・product_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries・real_scalar_multiple_of_real_entry_matrix_has_real_entries）に書き直した。主張は不変。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: Step 3 の転置の鎖 4 行が「転置の積の法則 (ABC)^⊤ = C^⊤B^⊤A^⊤」と「B^⊤ = B, V_2^⊤ = V_2」を名前だけで引いていたのを、V_2^⊤ = V_2 の 4 行（Step 3 冒頭の V_2 = (2s_2)^{M_col/2}A・transpose_of_matrix_scalar_multiple・Step 2 の A^⊤ = A）と W^⊤ の 7 行（transpose_of_matrix_product を 2 回、Step 2 の B^⊤ = B、V_2^⊤ = V_2、mat_mult_associative）に書き直した。主張の「W は成分がすべて実数」を示す段が無かったので、real_scalar_multiple_of_real_entry_matrix_has_real_entries と product_of_real_entry_matrices_has_real_entries を 2 回引く段を足した。Step 1 の「iH_is_real_symmetric の Step 1 より S_2 も実対称」と S_2 の表示の根拠を、主張そのものを引く形に直した（実対称性を示すのはその Step 3）。Step 3 冒頭の V_2 = (2s_2)^{M_col/2}A の根拠を、V2_exponential_representation の exp(iK_2^*H_2) と S_2・A の置き方に直した。主張は不変。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: Step 3 の W の鎖の「スカラー倍と行列積の結合則」（名前だけの根拠）を、scalar_multiple_factors_out_of_right_factor（B(cA) = c(BA)）と scalar_multiple_factors_out_of_left_factor（(c(BA))B = c((BA)B)）を引く 2 行に割り、鎖の各行の括弧を def_symmetrized_transfer_matrix の W = (BV_2)B に合わせた（4 行 → 5 行）。c = (2s_2)^{M_col/2} を ℂ の元として使うこと（inclusion_rr_to_cc）の断りを Step 3 の冒頭へ移した。続く段落の B^*AB = B^*(AB) を、鎖の終わりの (B^*A)B と mat_mult_associative で結ぶ形にした。主張は不変。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 証明の中で行列の大きさを添字なしの 2^{M_col} で書いていた 24 行 25 か所（当てはめの「主張の行数・列数 m, n, p → 2^{M_col}」、X ∈ Mat(2^{M_col},ℂ)、R = Mat(2^{M_col},ℂ) ほか）を、証明の冒頭で d := 2_ℤ^{M_col}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one より ℤ_{≥1} の元）と置いて d で書いた（同じ章の def_W_real・trace_of_W_power_via_W_real と同じ書き方。ℝ の元 2_ℝ^{M_col} と同じ記号を使わないため）。W ∈ Mat(d,ℂ) の出典として def_symmetrized_transfer_matrix を引いた。当てはめが書かれていなかった real_multiple_of_hermitian_is_hermitian・exp_hermitian_is_positive_definite・exp_of_negative_is_left_inverse（Step 2）・congruence_preserves_positive_definite・positive_real_multiple_preserves_positive_definite に n → d ほかの当てはめを書いた。主張・値・手順は変えていない。",
       ],
     },
   },
