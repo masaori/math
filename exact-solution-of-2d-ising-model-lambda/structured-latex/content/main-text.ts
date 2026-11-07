@@ -7470,7 +7470,7 @@ I(\alpha(\tau))
 &=c^n\left(\sum_\sigma w_\sigma\prod_i A_{i,\sigma(i)}\right)
 &&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
 &=c^n\det_x(A)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)
 \end{aligned}`),
                 paragraph(["すべての和・積は有限で、計算は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で閉じる。逆元は使わず、実数体・複素数体への脱出はない。"]),
               ],
@@ -65379,6 +65379,8 @@ N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
                       "Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf",
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf",
                       "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_eq_coordinateSum",
+                      "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_finite",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_finite",
                     ],
                     statement: [
                       paragraph([
