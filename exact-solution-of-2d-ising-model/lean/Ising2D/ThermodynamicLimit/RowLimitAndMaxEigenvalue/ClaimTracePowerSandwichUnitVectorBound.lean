@@ -35,7 +35,7 @@
 | 同じ段の `m_n ≤ T` の 8 行 | `moment_le_trace_of_power` の `calc` の 8 段 |
 | 同じ段の `(x^⊤W_ℝx)^n ≤ T` の 3 行 | `real_bilinear_value_pow_le_trace_of_power` の `calc` の 3 段 |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2^M`）である。`ClaimTracePowerUpperBound.lean`・
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。`ClaimTracePowerUpperBound.lean`・
   `ClaimMomentLogConvexity.lean` と同じく一般の `W` で述べ、人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、
   `hWRsymm`・`hpd` は `moment_log_convexity` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`。
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`m_k := x^⊤(W_ℝ)^kx` は `momentWReal`、`e_q` は `Pi.single q 1`、

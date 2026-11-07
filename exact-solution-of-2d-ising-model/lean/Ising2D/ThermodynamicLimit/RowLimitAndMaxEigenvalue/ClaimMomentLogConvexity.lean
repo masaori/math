@@ -43,7 +43,7 @@
 | 【`P = I_ℝ` の不等式】8 行 | `moment_sq_le_with_real_identity` の `calc` の 8 段 |
 | 奇数 `k = 2p+1`・偶数 `k = 2p+2` の 4 行ずつと添字の確認 | `moment_log_convexity` の二つの `calc` の 4 段（人手と同じく奇数・偶数の順。添字の確認は `omega`） |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2^M`）である。一般の `W` で述べ、人手が引く主張を仮定に置く:
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。一般の `W` で述べ、人手が引く主張を仮定に置く:
   `hW` は `W_is_real_symmetric_positive_definite` の実対称性、`hWRsymm`・`hpd` は `W_real_is_symmetric`・`W_real_is_positive_definite`。
   各補題は使う仮定だけを取る（`hpd` は【`(W_ℝ)^ax` は零でない】と【正値性】と【`P = W_ℝ` の不等式】、`hWRsymm` は【`P = W_ℝ` の不等式】だけ）。
   本文の `W` への当てはめは `PhysicalPartitionFunctionSandwich.lean` の `moment_log_convexity_physical`。

@@ -28,7 +28,7 @@
 | 同じ段の `T > T` の 6 行 | 同じ定理の最後の `calc` の 6 段 |
 | 主張（上からの評価 `trace_power_upper_bound` と合わせる） | `trace_power_sandwich` |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2^M`）である。兄弟の具体版と同じく一般の `W` で述べ、
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。兄弟の具体版と同じく一般の `W` で述べ、
   人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、`hWRsymm`・`hpd` は
   `W_real_is_symmetric`・`W_real_is_positive_definite`。本文の `W` への当てはめは `PhysicalPartitionFunctionSandwich.lean` の
   `trace_power_sandwich_physical`。
