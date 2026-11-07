@@ -29023,9 +29023,9 @@ const chapter_algebraic_eigenvalue = defineSection({
 &=\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)(\xi)
 &&\bigl(\because\ \blkref{def_matrix_product}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)(\xi)
-&&\bigl(\because\ \text{代入が有限和を保つこと。}\ \blkref{def_partition_polynomial}\bigr)\\
+&&\bigl(\because\ \text{代入が有限和を保つこと}\ \blkref{def_partition_polynomial}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\bigr)(\xi)\,\bigl(B_{\tau',\tau''}\bigr)(\xi)
-&&\bigl(\because\ \text{代入が積を保つこと。}\ \blkref{def_partition_polynomial}\bigr)\\
+&&\bigl(\because\ \text{代入が積を保つこと}\ \blkref{def_partition_polynomial}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(\mathrm{Ev}_{\xi}(A)\bigr)_{\tau,\tau'}\,\bigl(\mathrm{Ev}_{\xi}(B)\bigr)_{\tau',\tau''}
 &&\bigl(\because\ \blkref{def_qbar_matrix_eval}\ \text{を 2 箇所へ適用}\bigr)\\
 &=\bigl(\mathrm{Ev}_{\xi}(A)\,\mathrm{Ev}_{\xi}(B)\bigr)_{\tau,\tau''}
@@ -66201,6 +66201,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.interiorCellSetOfWalk_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reaches_band",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",

@@ -7,6 +7,7 @@
 同じ行を進んで帯へ至る有限列を前後につなぐ。
 -/
 import Ising2DLambda.KacWard.WalkSideInteriorBandConnected
+import Ising2DLambda.KacWard.InteriorCellReachesWalkSideBand
 
 namespace Ising2DLambda.KacWard
 
@@ -108,5 +109,26 @@ theorem interiorCellSet_nonempty_edgeConnected
     exact hp.2
   · exact hband.2
   · exact hreaches
+
+/-- 実際の閉歩道では、内側帯と各セルから帯への有限路が内側全体をつなぐ。 -/
+theorem interiorCellSetOfWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    (oddRayInteriorCellsOfWalk γ hγ hh hv).Nonempty ∧
+      EdgeConnectedCellSet (oddRayInteriorCellsOfWalk γ hγ hh hv) := by
+  have hband := walkSideInteriorBandFromWalk_nonempty_edgeConnected
+    γ hγ hh hv hdistinct
+  apply edgeConnected_of_band_reaches
+    (oddRayInteriorCellsOfWalk γ hγ hh hv)
+    (walkSideInteriorBandFromWalk γ hγ hh hv) hband.1
+  · intro p hp
+    exact hp.1
+  · exact hband.2
+  · rintro ⟨r, c⟩ hinside
+    exact interiorCellOfWalk_reaches_band γ hγ hh hv r c hinside
 
 end Ising2DLambda.KacWard
