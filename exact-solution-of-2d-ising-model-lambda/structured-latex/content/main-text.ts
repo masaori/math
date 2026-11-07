@@ -9345,19 +9345,19 @@ R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
               displayMath(String.raw`\begin{aligned}
 2&=|\{m,b\}|&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr)\\
  &\le|C|&&\bigl(\because\ \text{有限集合の包含による個数の単調性}\bigr)\\
- &=\ell&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+ &=\ell&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)
 \end{aligned}`),
               paragraph([math(String.raw`k=0`), " ならば ", math(String.raw`\ell=k+k+1=1`), " となり ", math(String.raw`2\le\ell`), " に反する。したがって ", math(String.raw`k\ne0`), " であり、"]),
-              displayMath(String.raw`1\le k\qquad\bigl(\because\ k\in\mathbb N\text{ と }k\ne0\bigr).`),
+              displayMath(String.raw`1\le k\qquad\bigl(\because\ k\in\mathbb N\text{ と }k\ne0\bigr)`),
               displayMath(String.raw`\begin{aligned}
 k+k&\ge1+k&&\bigl(\because\ 1\le k\text{ に右から }k\text{ を加える}\bigr)\\
  &\ge1+1&&\bigl(\because\ 1\le k\text{ に左から }1\text{ を加える}\bigr)\\
- &=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+ &=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr)
 \end{aligned}`),
               displayMath(String.raw`\begin{aligned}
 \ell&=k+k+1&&\bigl(\because\ \text{上の奇数表示}\bigr)\\
  &\ge2+1&&\bigl(\because\ 2\le k+k\text{ に右から }1\text{ を加える}\bigr)\\
- &=3&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+ &=3&&\bigl(\because\ \mathbb N\text{ の加法}\bigr)
 \end{aligned}`),
               paragraph(["次に ", math(String.raw`\tau:=\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と置き、背理法のため ", math(String.raw`\tau=\sigma`), " と仮定する。", math(String.raw`m\in C`), " なので、"]),
               displayMath(String.raw`\begin{aligned}

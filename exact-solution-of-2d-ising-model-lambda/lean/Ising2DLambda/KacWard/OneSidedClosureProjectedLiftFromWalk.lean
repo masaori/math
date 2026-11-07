@@ -235,13 +235,20 @@ theorem oneSidedClosureProjectedLiftFromWalk_injective {L m : ℕ} [NeZero L]
 
 /-- The actual plane lift of the projected one-sided closure has distinct points
 before its closing endpoint. -/
-theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZero L]
+theorem oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
+    {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)
-    (hcontact : contactPairCount γ hγ = 0)
     (hwind : (horizontalDirectedWindingNumber γ,
-      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
-    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (k₀ : ℤ)
+    (hsimple : ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      ∀ i < N, ∀ j < N, W i = W j → i = j) :
+    ∀ t c : ℕ, 0 < t → 0 < c →
       let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
         (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
       let N := oneSidedClosureLength (m + 1) L
@@ -249,8 +256,6 @@ theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZer
       Function.Injective (fun i : Fin (N - 1 + 1) =>
         planeLift (fun j : Fin (N - 1 + 1) =>
           projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) i.castSucc) := by
-  obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
-  refine ⟨k₀, ?_⟩
   intro t c ht hc
   let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
     (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
@@ -293,14 +298,40 @@ theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZer
       _ = W j := by abel
   exact hsimple t c ht hc i (by omega) j (by omega) hW
 
-/-- 実際の閉歩道から作った一側閉包の射影辺列は巡回接続し、反転しない。 -/
-theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZero L]
+/-- 実際の閉歩道から作った射影辺列の持ち上げ点は、終点を除いて相異なる。 -/
+theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)
     (hcontact : contactPairCount γ hγ = 0)
     (hwind : (horizontalDirectedWindingNumber γ,
       verticalDirectedWindingNumber γ) ≠ (0, 0)) :
     ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      Function.Injective (fun i : Fin (N - 1 + 1) =>
+        planeLift (fun j : Fin (N - 1 + 1) =>
+          projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) i.castSucc) := by
+  obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  exact ⟨k₀, oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
+    γ hγ hwind k₀ hsimple⟩
+
+/-- A point-simple one-sided closure projects to a closed nonbacktracking walk. -/
+theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking_of_point_injective
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (k₀ : ℤ)
+    (hsimple : ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      ∀ i < N, ∀ j < N, W i = W j → i = j) :
+    ∀ t c : ℕ, 0 < t → 0 < c →
       let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
         (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
       let N := oneSidedClosureLength (m + 1) L
@@ -313,9 +344,6 @@ theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZ
         orientedTarget (edge j) = orientedSource (edge k)) ∧
       (∀ j k : Fin N, k.val = (j.val + 1) % N →
         edge k ≠ reversal (edge j)) := by
-  obtain ⟨k₀, hsimple⟩ :=
-    oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
-  refine ⟨k₀, ?_⟩
   intro t c ht hc
   dsimp only
   let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
@@ -377,5 +405,30 @@ theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZ
     have hkj : k = j + 1 := Fin.ext (by simpa [Fin.val_add] using hk)
     subst k
     exact hprojection.2.2 j
+
+/-- 実際の閉歩道から作った一側閉包の射影辺列は巡回接続し、反転しない。 -/
+theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let edge := planeUnitPathTorusProjection L N (fun j : Fin (N + 1) => W j.val)
+      (∀ j : Fin N,
+        orientedSource (edge j) = planeVertexProjection L (W j.val) ∧
+        orientedTarget (edge j) = planeVertexProjection L (W (j.val + 1))) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        orientedTarget (edge j) = orientedSource (edge k)) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        edge k ≠ reversal (edge j)) := by
+  obtain ⟨k₀, hsimple⟩ :=
+    oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  exact ⟨k₀, oneSidedClosureProjectionFromWalk_closedNonbacktracking_of_point_injective
+    γ hγ hwind k₀ hsimple⟩
 
 end Ising2DLambda.KacWard

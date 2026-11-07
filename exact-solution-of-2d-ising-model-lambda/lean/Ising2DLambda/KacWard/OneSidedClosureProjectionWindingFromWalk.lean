@@ -2,14 +2,28 @@ import Ising2DLambda.KacWard.ProjectedClosedUnitPathWinding
 
 namespace Ising2DLambda.KacWard
 
-/-- 実際の閉歩道から作った一側閉包の射影辺列は巻き付きが零である。 -/
-theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
+/-- A one-sided closure projection with a fixed cut point has zero winding. -/
+theorem oneSidedClosureProjectionFromWalk_winding_zero_of_projection
+    {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)
-    (hcontact : contactPairCount γ hγ = 0)
     (hwind : (horizontalDirectedWindingNumber γ,
-      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
-    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (k₀ : ℤ)
+    (hprojection : ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let edge := planeUnitPathTorusProjection L N (fun j : Fin (N + 1) => W j.val)
+      (∀ j : Fin N,
+        orientedSource (edge j) = planeVertexProjection L (W j.val) ∧
+        orientedTarget (edge j) = planeVertexProjection L (W (j.val + 1))) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        orientedTarget (edge j) = orientedSource (edge k)) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        edge k ≠ reversal (edge j))) :
+    ∀ t c : ℕ, 0 < t → 0 < c →
       let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
         (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
       let N := oneSidedClosureLength (m + 1) L
@@ -18,9 +32,6 @@ theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
         projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
       closedNonbacktrackingWalk Γ ∧
       verticalDirectedWindingNumber Γ = 0 ∧ horizontalDirectedWindingNumber Γ = 0 := by
-  obtain ⟨k₀, hprojection⟩ :=
-    oneSidedClosureProjectionFromWalk_closedNonbacktracking γ hγ hcontact hwind
-  refine ⟨k₀, ?_⟩
   intro t c ht hc
   dsimp only
   let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
@@ -92,5 +103,57 @@ theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
     (by intro j hj; exact hunit j (by simpa [hm'] using hj))
     hwalk
   exact ⟨hwalk, by simpa [Γ, hm'] using hresult⟩
+
+/-- 実際の閉歩道から作った一側閉包の射影辺列は巻き付きが零である。 -/
+theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+      closedNonbacktrackingWalk Γ ∧
+      verticalDirectedWindingNumber Γ = 0 ∧ horizontalDirectedWindingNumber Γ = 0 := by
+  obtain ⟨k₀, hprojection⟩ :=
+    oneSidedClosureProjectionFromWalk_closedNonbacktracking γ hγ hcontact hwind
+  exact ⟨k₀, oneSidedClosureProjectionFromWalk_winding_zero_of_projection
+    γ hγ hwind k₀ hprojection⟩
+
+/-- The same cut point witnesses distinct lift points and zero winding. -/
+theorem oneSidedClosureProjectionFromWalk_simple_zero_winding
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+      Function.Injective (fun i : Fin (N - 1 + 1) => planeLift Γ i.castSucc) ∧
+      closedNonbacktrackingWalk Γ ∧
+      verticalDirectedWindingNumber Γ = 0 ∧
+      horizontalDirectedWindingNumber Γ = 0 := by
+  obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  have hinj := oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
+    γ hγ hwind k₀ hsimple
+  have hprojection :=
+    oneSidedClosureProjectionFromWalk_closedNonbacktracking_of_point_injective
+      γ hγ hwind k₀ hsimple
+  have hzero := oneSidedClosureProjectionFromWalk_winding_zero_of_projection
+    γ hγ hwind k₀ hprojection
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  exact ⟨hinj t c ht hc, hzero t c ht hc⟩
 
 end Ising2DLambda.KacWard
