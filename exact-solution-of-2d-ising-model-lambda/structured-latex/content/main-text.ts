@@ -8227,12 +8227,12 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
                 paragraph([math(String.raw`n\in\mathbb N`), " について、すべての始点 ", math(String.raw`i\in\mathcal J`), " に対する二つの含意を同時に帰納法で示す。零回について、", math(String.raw`i\in C`), " なら、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
-&=(\sigma^{-1})^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+&=(\sigma^{-1})^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
-&=\sigma^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+&=\sigma^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph(["ある ", math(String.raw`n\in\mathbb N`), " について、二つの含意がすべての始点で成り立つと仮定する。任意の ", math(String.raw`i\in\mathcal J`), " を取る。", math(String.raw`i\in C`), " なら、", ref("claim_invariant_subset_reversal"), " の証明で得た逆置換の所属同値により ", math(String.raw`\sigma^{-1}(i)\in C`), " である。従って、この点を始点とする帰納法の仮定を使える。"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8240,7 +8240,7 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
 &=\rho^{[n]}(\rho(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
 &=\rho^{[n]}(\sigma^{-1}(i))&&\bigl(\because\ i\in C\text{ と }\blkref{def_invariant_subset_reversal}\bigr)\\
 &=(\sigma^{-1})^{[n]}(\sigma^{-1}(i))&&\bigl(\because\ \sigma^{-1}(i)\in C\text{ と帰納法の仮定}\bigr)\\
-&=(\sigma^{-1})^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+&=(\sigma^{-1})^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、", ref("def_invariant_subset_reversal"), " の不変条件より ", math(String.raw`\sigma(i)\notin C`), " である。従って、この点を始点とする帰納法の仮定を使える。"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8248,7 +8248,7 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
 &=\rho^{[n]}(\rho(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
 &=\rho^{[n]}(\sigma(i))&&\bigl(\because\ i\notin C\text{ と }\blkref{def_invariant_subset_reversal}\bigr)\\
 &=\sigma^{[n]}(\sigma(i))&&\bigl(\because\ \sigma(i)\notin C\text{ と帰納法の仮定}\bigr)\\
-&=\sigma^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+&=\sigma^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph(["以上で帰納法が閉じる。", math(String.raw`\mathcal J=\varnothing`), " なら始点に関する条件は空であり、結論もそのまま成り立つ。有限集合の写像と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
               ],
