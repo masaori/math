@@ -53,7 +53,6 @@ theorem interiorCellSet_nonempty_edgeConnected
       verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hlocal : ∀ k < n, EdgeConnectedCellSet (surroundingInteriorCells n row col k))
     (hbridge : ∀ k, k + 1 < n → ∃ p,
       p ∈ surroundingInteriorCells n row col k ∧
       p ∈ surroundingInteriorCells n row col (k + 1))
@@ -67,7 +66,7 @@ theorem interiorCellSet_nonempty_edgeConnected
     (oddRayInteriorCells n row col).Nonempty ∧
       EdgeConnectedCellSet (oddRayInteriorCells n row col) := by
   have hband := walkSideInteriorBand_nonempty_edgeConnected n row col hn
-    hclosedRow hclosedCol hunit hdistinct hedgeSimple hlocal hbridge
+    hclosedRow hclosedCol hunit hdistinct hedgeSimple hbridge
   apply connected_of_connected_core_and_reaches_necSuf
     CellEdgeAdjacent cellEdgeAdjacent_symmetric
     (oddRayInteriorCells n row col) (walkSideInteriorBand n row col)
