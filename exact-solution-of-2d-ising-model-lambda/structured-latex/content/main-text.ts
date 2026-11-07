@@ -6715,7 +6715,7 @@ N_{k,l}
   \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}
   \prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}
 \right)
-&&(\because\ \overline{\mathbb Q}[x]\text{ の有限積の乗法性}).
+&&(\because\ \overline{\mathbb Q}[x]\text{ の有限積の乗法性})
 \end{aligned}`),
               ],
             },

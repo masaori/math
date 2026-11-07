@@ -6,7 +6,7 @@
 
 | ファイル | 対象の等号 | 実行状態 |
 |---|---|---|
-| `check_sign_factor.sage` | 貼合せの符号と各ファイバーの符号 | PASS（2026-11-04、436項） |
-| `check_constant_embedding.sage` | 定数多項式への埋込みと有限積 | PASS（2026-11-04、436項） |
-| `check_fiber_product.sage` | 全添字の成分積とファイバー別の成分積 | PASS（2026-11-04、436項） |
-| `check_pair_products.sage` | 符号の積と成分積の組合せ | PASS（2026-11-04、436項） |
+| `check_sign_factor.sage` | 貼合せの符号と各ファイバーの符号 | PASS（2026-11-07、436項） |
+| `check_constant_embedding.sage` | 定数多項式への埋込みと有限積 | PASS（2026-11-07、436項） |
+| `check_fiber_product.sage` | 全添字の成分積とファイバー別の成分積 | PASS（2026-11-07、436項） |
+| `check_pair_products.sage` | 符号の積と成分積の組合せ | PASS（2026-11-07、436項） |
