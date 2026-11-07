@@ -882,6 +882,12 @@ targets=(
   "Ising2D.NecSuf.abs_of_nonpos'"
   "Ising2D.NecSuf.abs_add_le'"
   "Ising2D.NecSuf.abs_mul'"
+  Ising2D.square_of_real_absolute_value
+  Ising2D.square_of_real_sum_is_at_most_twice_sum_of_squares
+  Ising2D.square_of_real_absolute_value_of_necSuf
+  Ising2D.square_of_real_sum_is_at_most_twice_sum_of_squares_of_necSuf
+  "Ising2D.NecSuf.sq_abs'"
+  "Ising2D.NecSuf.add_sq_le_two_mul_add'"
   Ising2D.finite_sum_of_real_numbers_triangle_inequality
   Ising2D.finite_sum_of_real_numbers_triangle_inequality_fintype
   Ising2D.finite_sum_of_real_numbers_is_monotone
@@ -945,6 +951,8 @@ targets=(
   Ising2D.spinFlipIndex_bijective
   Ising2D.epsilon_real_mulVec_eq_spinFlipIndex
   Ising2D.epsilon_real_preserves_norm
+  Ising2D.vecNorm_sq_eq_sum_abs_sq
+  Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four
   Ising2D.epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors
   Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product
   Ising2D.finite_sum_of_real_scalar_multiples_fintype

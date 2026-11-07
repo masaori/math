@@ -1676,6 +1676,131 @@ k
     },
   },
   {
+    id: "maxeig_claim_norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four",
+    kind: "claim",
+    title: { text: "‖u‖ = 1 のとき、成分が u_k + (ε_ℝu)_k のベクトル v について ‖v‖^2 ≤ 4" },
+    labels: ["norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_epsilon_real"),
+        " の ",
+        math(String.raw`\varepsilon_{\mathbb{R}} \in \mathrm{Mat}(d,\mathbb{R})`),
+        " を取る。",
+        math(String.raw`u \in \mathbb{R}^{d}`),
+        " が ",
+        math(String.raw`\|u\| = 1`),
+        " を満たすとする（ノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to d`),
+        "）の数ベクトルのノルム）。",
+        math(String.raw`v \in \mathbb{R}^{d}`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`v_k := u_k + (\varepsilon_{\mathbb{R}}u)_k \qquad (k \in \{1,\dots,d\})`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\varepsilon_{\mathbb{R}}u \in \mathbb{R}^{d}`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ x \to u`),
+        "）の積、和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和）。このとき",
+      ]),
+      displayMath(String.raw`\|v\|^2 \leq 4`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
+        "ノルムの平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        " のもので、その存在に ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性を使う（",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）。証明はそのほかに ",
+        math(String.raw`\mathbb{R}`),
+        " の四則演算と順序と有限和だけを使い、極限を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値である。まず、",
+        math(String.raw`x \in \mathbb{R}^{d}`),
+        " について ",
+        math(String.raw`\sum_{k=1}^{d} |x_k|^2 \geq 0`),
+        "（",
+        ref("def_matrix_norm"),
+        " の根号の中）であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|x\|^2
+&= \Bigl(\sqrt{\textstyle\sum_{k=1}^{d} |x_k|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to x)\bigr)\\
+&= \sum_{k=1}^{d} |x_k|^2
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to \textstyle\sum_{k=1}^{d} |x_k|^2)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。次に、",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|v_k|^2
+&= v_k^2
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to v_k)\bigr)\\
+&= \bigl(u_k + (\varepsilon_{\mathbb{R}}u)_k\bigr)^2
+  &&\bigl(\because\ v\ \text{の定義}\bigr)\\
+&\leq 2u_k^2 + 2(\varepsilon_{\mathbb{R}}u)_k^2
+  &&\bigl(\because\ \blkref{square_of_real_sum_is_at_most_twice_sum_of_squares}\ (a \to u_k,\ b \to (\varepsilon_{\mathbb{R}}u)_k)\bigr)\\
+&= 2|u_k|^2 + 2\bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to u_k\ \text{と}\ q \to (\varepsilon_{\mathbb{R}}u)_k)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\|v\|^2
+&= \sum_{k=1}^{d} |v_k|^2
+  &&\bigl(\because\ \text{上で示した}\ \|x\|^2 = \textstyle\sum_{k=1}^{d} |x_k|^2\ (x \to v)\bigr)\\
+&\leq \sum_{k=1}^{d} \Bigl(2|u_k|^2 + 2\bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2\Bigr)
+  &&\bigl(\because\ \blkref{finite_sum_of_real_numbers_is_monotone}\ (m \to d,\ a_j \to |v_j|^2,\ b_j \to 2|u_j|^2 + 2|(\varepsilon_{\mathbb{R}}u)_j|^2)\ \text{と上で示した}\ |v_k|^2\ \text{の評価}\bigr)\\
+&= \Bigl(\sum_{k=1}^{d} 2|u_k|^2\Bigr) + \Bigl(\sum_{k=1}^{d} 2\bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2\Bigr)
+  &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to d,\ \text{添字}\ j \to k,\ a_k \to 2|u_k|^2,\ b_k \to 2|(\varepsilon_{\mathbb{R}}u)_k|^2)\bigr)\\
+&= 2\sum_{k=1}^{d} |u_k|^2 + 2\sum_{k=1}^{d} \bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2
+  &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to d,\ c \to 2,\ \text{添字}\ j \to k,\ x_k \to |u_k|^2\ \text{と}\ x_k \to |(\varepsilon_{\mathbb{R}}u)_k|^2)\ \text{を 2 か所へ同時適用}\bigr)\\
+&= 2\|u\|^2 + 2\|\varepsilon_{\mathbb{R}}u\|^2
+  &&\bigl(\because\ \text{上で示した}\ \|x\|^2 = \textstyle\sum_{k=1}^{d} |x_k|^2\ (x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)\\
+&= 2\|u\|^2 + 2\|u\|^2
+  &&\bigl(\because\ \blkref{epsilon_real_preserves_norm}\ (u \to u)\bigr)\\
+&= 2 \cdot 1^2 + 2 \cdot 1^2
+  &&\bigl(\because\ \|u\| = 1\ \text{を 2 か所へ同時適用}\bigr)\\
+&= 4
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は ‖v‖^2 = ‖u‖^2 + 2u^⊤εu + ‖εu‖^2 = 2 + 2u^⊤εu ≤ 4 を「v = u + εu の展開と ε^⊤ = ε」「Cauchy–Schwarz」の名前で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために足した。Cauchy–Schwarz（psd_cauchy_schwarz の P → I_ℝ）で示すには、x^⊤I_ℝy = Σ_k x_ky_k、I_ℝ の対称性と半正定値性、‖x‖^2 = x^⊤I_ℝx の主張が本文に要る。成分ごとに (a + b)^2 ≤ 2a^2 + 2b^2 で評価する道は、ℝ の四則演算と順序と有限和と epsilon_real_preserves_norm だけで閉じるので、こちらを採った。v は epsilon_real_fixes_sum_of_vector_and_its_image と同じく成分の等式で与える。数値検証: sagemath/check/norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_claim_epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors",
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },

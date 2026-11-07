@@ -3036,6 +3036,101 @@ q
   },
 
   {
+    id: "calc_formulae_claim_square_of_real_absolute_value",
+    kind: "claim",
+    title: { text: "実数の絶対値の二乗は、もとの実数の二乗に等しい" },
+    labels: ["square_of_real_absolute_value"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_real_absolute_value"),
+        " の実数の絶対値、二乗は ",
+        math(String.raw`\mathbb{R}`),
+        " の積 ",
+        math(String.raw`r^2 := r\,r`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`|q|^2 = q^2`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q \geq 0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|q|^2
+&= q^2
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q \geq 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`q < 0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|q|^2
+&= (-q)^2
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q < 0)\bigr)\\
+&= q^2
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a)(-b) = ab\ (a, b \to q)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_matrix_norm（K = ℝ）のノルムの二乗は成分の絶対値の二乗の和なので、成分の二乗の評価（square_of_real_sum_is_at_most_twice_sum_of_squares）へ渡すために足した。norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four が引く。数値検証: sagemath/check/square_of_real_absolute_value/。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_square_of_real_sum_is_at_most_twice_sum_of_squares",
+    kind: "claim",
+    title: { text: "二つの実数の和の二乗は、二乗の和の 2 倍以下" },
+    labels: ["square_of_real_sum_is_at_most_twice_sum_of_squares"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " とする。二乗は ",
+        math(String.raw`\mathbb{R}`),
+        " の積 ",
+        math(String.raw`r^2 := r\,r`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`(a + b)^2 \leq 2a^2 + 2b^2`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "実数の平方は非負なので、",
+        math(String.raw`0 \leq (a - b)^2`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a + b)^2
+&= (a + b)^2 + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\bigr)\\
+&\leq (a + b)^2 + (a - b)^2
+&&\bigl(\because\ \text{上の}\ 0 \leq (a - b)^2\ \text{と}\ \mathbb{R}\ \text{の順序と加法の両立}\ (x \leq y \Rightarrow c + x \leq c + y)\ (c \to (a + b)^2)\bigr)\\
+&= \bigl(a^2 + ab + ba + b^2\bigr) + \bigl(a^2 - ab - ba + b^2\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則による展開を 2 か所へ同時適用}\bigr)\\
+&= 2a^2 + 2b^2
+&&\bigl(\because\ \mathbb{R}\ \text{の加法と減法の計算}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 の ‖v‖^2 ≤ 4 を、成分ごとの評価 |v_k|^2 ≤ 2|u_k|^2 + 2|(ε_ℝu)_k|^2 から示すために足した。norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four が引く。数値検証: sagemath/check/square_of_real_sum_is_at_most_twice_sum_of_squares/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality",
     kind: "claim",
     title: { text: "実数の有限和の三角不等式" },
