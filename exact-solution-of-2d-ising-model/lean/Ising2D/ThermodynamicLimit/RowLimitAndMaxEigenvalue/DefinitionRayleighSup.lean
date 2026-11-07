@@ -27,7 +27,7 @@
 `dotProduct_mulVec_eq_real_bilinear_value`（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）が mathlib の `⬝ᵥ`・`*ᵥ` の定義を人手の和の形へ開く（`def_real_bilinear_value` の行に当たる）。
 有限和の主張は、添字が有限型 `n` の和に当てる `_fintype` 版（`ClaimFiniteSumsOfRealNumbers.lean`）を引く。
 -/
-import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.TraceBound
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimNonnegativeRealOrderFromSquares
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct

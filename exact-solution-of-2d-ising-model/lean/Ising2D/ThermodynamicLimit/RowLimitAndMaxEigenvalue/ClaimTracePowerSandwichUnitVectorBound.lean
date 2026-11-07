@@ -44,7 +44,7 @@
 - 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
   `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
   `m_n ≤ T` の「有限和の加法の交換則・結合則」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
-- 本文の `W` への当てはめ（`*_physical`）は置かない。`trace_power_sandwich` の具体版がこれらを引く形に替えるとき（状態台帳の (r7b)）に、そこで当てはめる。
+- 本文の `W` への当てはめ（`*_physical`）は段ごとには置かない。主張 `trace_power_sandwich` の当てはめ `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`）が、ここの段をまとめて本文の `W` へ渡す。
 - 人手の `ℝ` の分配則・結合則・交換則と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
 -/

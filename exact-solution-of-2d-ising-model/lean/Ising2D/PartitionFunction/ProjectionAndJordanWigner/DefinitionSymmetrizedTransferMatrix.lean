@@ -24,7 +24,9 @@
 それらの Lean 形式化は本タスクの担当外なので **import せず仮定として受け取る**。
 具体的には次を仮定の形にしている。
 
-1. `(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`。`(·)_ℂ` は `inclusion_rr_to_cc`。仮定の形で受け取る側は、実成分の行列で述べた `Z = tr((V₁V₂)^{N_row})`（ℝ の等式。本文には無い形）を受け取る）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` と `ClaimZEqualsTraceOfWFromNecSuf.lean` の `partition_function_eq_trace_symTransfer_pow` の仮定（具体的な `Z` については `PhysicalPartitionFunctionSandwich.lean` が Lean の `partition_function_via_transfer_matrix` を引く）。
+1. `(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）は、仮定に取る Lean の定理はもう無い。
+   具体的な `Z` については `ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean` が Lean の
+   `partition_function_via_transfer_matrix` を引く。
 2. `V₁^{1/2}` が**正の対角行列**であること（章 009 の `sigma_z_diagonal_action` +
    `exp_of_diagonal_matrix`）— ここでは `Ising2D.diagExp d`（`d : n → ℝ`）として与える。
    人手証明の `d μ = (1/2)K₁ ∑_m μ(m)μ(m+1)` に対応する。
@@ -34,7 +36,7 @@
    `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef`（実対称行列の指数関数は
    実対称正定値）は本ファイルで証明済みなので、章 009 が形式化されればそのまま接続できる。
 -/
-import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.NecSuf.TransposeOfMatrixProduct
@@ -63,8 +65,7 @@ def symTransfer (B V2 : Matrix n n ℝ) : Matrix n n ℝ := B * V2 * B
 `mat_mult_associative` は具体版が無いので、既存の慣行どおり `Matrix.mul_assoc` を 1 段に 1 回ずつ引く。
 単位行列の左右の単位律（`identity_matrix_is_left_unit_of_mat_mult`・`_right_unit_`）の具体版は添字が `Fin m` の行列にしかないので、
 同じ主張の mathlib の一段の補題 `Matrix.one_mul`・`Matrix.mul_one` を引く。跡の巡回性（`trace_basic_properties` (2)）は具体版 `trace_cyclic`。
-必要十分版は `NecSuf/OpenProductPowAndCyclicTrace.lean`（モノイドと巡回的な写像）で、具体版とその特殊化の一致、
-および使う側（`partition_function_sandwich`）が引く係数が `ℝ` の行列での読みは
+必要十分版は `NecSuf/OpenProductPowAndCyclicTrace.lean`（モノイドと巡回的な写像）で、具体版とその特殊化の一致は
 同じフォルダの `ClaimZEqualsTraceOfWFromNecSuf.lean` にある。 -/
 
 /-- 人手 `Z_equals_trace_of_W` の準備 2: `(X(YX)^k)Y = (XY)^{k+1}`（`k` の帰納法。`k = 0` の 5 行と帰納段階の 6 行）。 -/

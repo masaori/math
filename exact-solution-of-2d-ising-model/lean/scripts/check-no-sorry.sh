@@ -682,9 +682,6 @@ targets=(
   Ising2D.NecSuf.IsPdPair.moment_pos
   Ising2D.NecSuf.IsPdPair.moment_ratio_le
   Ising2D.NecSuf.IsPdPair.moment_pow_le
-  Ising2D.psd_diag_nonneg
-  Ising2D.psd_abs_entry_le
-  Ising2D.psd_quad_le_normSq_mul_trace
   Ising2D.quad_smul
   Ising2D.rayleighSet
   Ising2D.rayleighSup
@@ -701,8 +698,6 @@ targets=(
   Ising2D.rayleigh_bounds_operator_normSq_pow
   Ising2D.rayleigh_bounds_operator_norm
   Ising2D.rayleigh_bounds_operator_norm_pow
-  Ising2D.IsSymm_pow
-  Ising2D.psd_pow
   Ising2D.trace_pow_le
   Ising2D.norm_of_standard_basis_vector
   Ising2D.power_of_W_real_entry_symm
@@ -736,9 +731,12 @@ targets=(
   Ising2D.moment_le_trace_of_power
   Ising2D.real_bilinear_value_pow_le_trace_of_power
   Ising2D.moment_ge_moment_one_pow_of_necSuf
-  Ising2D.quad_pow_le_trace_pow
-  Ising2D.rayleighSup_pow_le_trace_pow
+  Ising2D.power_comparison_of_positive_reals
+  Ising2D.pow_pred_pos_of_pos
+  Ising2D.trace_of_power_pos
+  Ising2D.rayleighSup_pow_le_trace_of_power
   Ising2D.trace_power_sandwich
+  Ising2D.trace_power_sandwich_physical
   Ising2D.symTransfer
   Ising2D.open_product_pow
   Ising2D.symmetrized_pow_succ
@@ -747,8 +745,6 @@ targets=(
   Ising2D.NecSuf.open_product_pow
   Ising2D.NecSuf.sandwich_pow_succ
   Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow
-  Ising2D.trace_mul_pow_eq_trace_symTransfer_pow
-  Ising2D.partition_function_eq_trace_symTransfer_pow
   Ising2D.partition_function_eq_trace_physicalSymTransferC
   Ising2D.physicalV1halfC_eq_map
   Ising2D.physicalV2C_eq_map
@@ -816,7 +812,6 @@ targets=(
   Ising2D.diagExp_posDef
   Ising2D.matExp_isSymm
   Ising2D.matExp_posDef
-  Ising2D.partition_function_sandwich
   Ising2D.physicalV1halfC_mul_self
   Ising2D.physicalV1halfR_mul_self_map
   Ising2D.sigmaZ_transpose

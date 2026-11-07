@@ -1,24 +1,51 @@
 /-
-# `c(M)^n ≤ Σ_k (W^n)_kk ≤ 2^M c(M)^n`（具体版）
+# `c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`（具体版）
 
 正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
-必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（上からの評価 `trace_power_upper_bound`。人手と 1 対 1 の具体版は `ClaimTracePowerUpperBound.lean`）、
-`Ising2D.NecSuf.IsPsdPair.moment_log_convex`（`moment_log_convexity`。人手と 1 対 1 の具体版は `ClaimMomentLogConvexity.lean`。この証明はまだ必要十分版を使う）、
-`Ising2D.NecSuf.IsPdPair.moment_pow_le`（【単位ベクトルでの評価】の `m_p ≥ m_1^p`）
-（いずれも `Ising2D/NecSuf/RayleighMoments.lean`）
+この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。上からの評価は `trace_power_upper_bound`
+（`ClaimTracePowerUpperBound.lean`）、下からの評価は【単位ベクトルでの評価】（`ClaimTracePowerSandwichUnitVectorBound.lean`）と
+本ファイルの【正の実数の冪の比較】・【上限への移行】による。上限への移行は極限・連続性を使わず、上限が最小の上界であることだけを使う。
 
-**この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。**
-上からの評価は `rayleigh_bounds_operator_norm` から、下からの評価は
-モーメント列 `m_k = xᵀW^k x` の対数凸性 `m_k² ≤ m_{k-1}m_{k+1}` による。
-ただし人手と 1 対 1 ではない。`m_n ≤ tr(W^n)` は `psd_quad_le_normSq_mul_trace`（`|A_kl| ≤ √(A_kk A_ll)` の経路）で、
-人手は【(W_ℝ)^n の成分の評価】を足し合わせる鎖である。上限への移行は `Real.rpow`（`n` 乗根）で、人手は冪の比較と背理法である。
+必要十分版は置かない。【正の実数の冪の比較】は順序体の冪の初等的な不等式で、【上限への移行】は `def_rayleigh_sup` の上限と
+`ℝ` の順序に固有である。各 `k` の評価・モーメントの評価の必要十分版は、兄弟のファイルの冒頭に書いた
+（`NecSuf.IsPsdPair.moment_le_pow`・`NecSuf.IsPdPair.moment_ratio_le`・`moment_pow_le`。`Ising2D/NecSuf/RayleighMoments.lean`）。
 
-人手証明の `2^M` は空間の次元なので、ここでは `Fintype.card n` として述べる
-（Ising の場合 `n = Conf M` で `Fintype.card (Conf M) = 2^M`）。
+## 人手証明との対応
+
+| 人手 | Lean |
+| --- | --- |
+| 準備の `c ∈ ℝ_{>0}`・`𝓡 ⊆ ℝ_{>0}`（`def_rayleigh_sup`） | `rayleighSup_pos`・`hpd`（`DefinitionRayleighSup.lean`） |
+| 【冪の実数の行列】〜【単位ベクトルでの評価】 | `ClaimTracePowerSandwichUnitVectorBound.lean` |
+| 【正の実数の冪の比較】`p = 1` | `power_comparison_of_positive_reals` の帰納法の初段（(a) は `r^1 = r^0r = r`・`s^1 = s`、(b) は 1 段） |
+| 同じ段の (a) の `r^{p+1} < s^{p+1}` の 4 行と `r^{p+1} > 0` | 同じ定理の帰納法の一歩の `calc` の 4 段と `mul_pos` |
+| 同じ段の (b) の 5 行 | 同じ定理の帰納法の一歩の `calc` の 5 段 |
+| 【上限への移行】`T ≥ m_n > 0`（`x = e_1`） | `trace_of_power_pos` |
+| 同じ段の `c^{n-1} > 0`（`n = 1` と `n ≥ 2` の場合分け） | `pow_pred_pos_of_pos` |
+| 同じ段の `δ < c` の 7 行 | `rayleighSup_pow_le_trace_of_power` の `δ` の `calc` の 7 段 |
+| 同じ段の「`r` は `𝓡` の上界でない」 | 同じ定理の `exists_lt_of_lt_csSup` |
+| 同じ段の `T > T` の 6 行 | 同じ定理の最後の `calc` の 6 段 |
+| 主張（上からの評価 `trace_power_upper_bound` と合わせる） | `trace_power_sandwich` |
+
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2^M`）である。兄弟の具体版と同じく一般の `W` で述べ、
+  人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、`hWRsymm`・`hpd` は
+  `W_real_is_symmetric`・`W_real_is_positive_definite`。本文の `W` への当てはめは `PhysicalPartitionFunctionSandwich.lean` の
+  `trace_power_sandwich_physical`。
+- 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`c := c(M_col)` は `rayleighSup W_ℝ`、`𝓡` は `rayleighSet W_ℝ`、
+  `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。Lean の `𝓡` は `‖x‖² = 1`（`vecNormSq`）で述べるので、
+  【単位ベクトルでの評価】（`‖x‖ = 1`、`vecNorm`）へ渡すときに `√1 = 1` の 1 行を挟む。
+- 人手の `e_1` は Lean の `Pi.single i 1`（`i` は値がすべて `0` の配位）である。
+- 人手の冪の定義 `t^{p+1} := t^pt` は mathlib の `pow_succ`、`t^0 := 1` は `pow_zero` で書く。人手の「`ℝ` の分配則」「乗法の交換則・結合則」
+  「`ℝ` の加法」の行は `ring` で、`(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}` は `mul_inv`、`c^{n-1}(c^{n-1})^{-1} = 1` は `mul_inv_cancel₀`、
+  正の数を掛けても順序を保つ行は `mul_lt_mul_of_pos_*`・`mul_le_mul_of_nonneg_left`・`mul_le_mul_of_nonneg_right` で、移項は `linarith` で、
+  `0 < n^{-1} ≤ 1` と `c > 0` から `cn^{-1} ≤ c` の行は `inv_le_one_of_one_le₀` と `nlinarith` で、`ℤ` の `n = (n−1)+1`・`p = (p+1)−1` は
+  `Nat.sub_add_cancel`・`Nat.add_sub_cancel` で書く（人手のこれらの行には参照が無い）。
+- 人手の「上限は最小の上界なので `r` は `𝓡` の上界でない」は mathlib の `exists_lt_of_lt_csSup` で書く（`c` は Lean の `sSup` で、
+  `def_rayleigh_sup` の上限と同じものである）。
 -/
-import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwichUnitVectorBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 
 set_option linter.unusedSectionVars false
 
@@ -26,115 +53,144 @@ namespace Ising2D
 
 open Matrix
 
-variable {n : Type*} [Fintype n] [DecidableEq n] [Nonempty n]
+/-- **人手【正の実数の冪の比較】**: `r, s ∈ ℝ_{>0}`、`r < s`、`p ∈ ℤ_{≥1}` について
+(a) `0 < r^p < s^p`、(b) `s^p − r^p ≤ p s^{p−1}(s − r)`（`p` についての帰納法）。 -/
+theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s) (hrs : r < s)
+    {p : ℕ} (hp : 1 ≤ p) :
+    (0 < r ^ p ∧ r ^ p < s ^ p) ∧ s ^ p - r ^ p ≤ (p : ℝ) * s ^ (p - 1) * (s - r) := by
+  induction p, hp using Nat.le_induction with
+  | base =>
+      have hr1 : r ^ 1 = r := by rw [pow_succ, pow_zero, one_mul]           -- `r^1 = r^0r = r`
+      have hs1 : s ^ 1 = s := by rw [pow_succ, pow_zero, one_mul]           -- `s^1 = s`
+      refine ⟨⟨?_, ?_⟩, ?_⟩
+      · rw [hr1]; exact hr                                                  -- (a) は `0 < r`
+      · rw [hr1, hs1]; exact hrs                                            -- (a) は `r < s`
+      · rw [hr1, hs1]
+        exact le_of_eq (by rw [Nat.sub_self, pow_zero, Nat.cast_one, one_mul, one_mul])
+                                                                            -- (b) は `s − r = 1·s^0(s − r)`
+  | succ p hp ih =>
+      obtain ⟨⟨hrp, hrsp⟩, hb⟩ := ih
+      have hsp : 0 < s ^ p := lt_trans hrp hrsp                             -- (a) から `s^p > r^p > 0`
+      have ha : r ^ (p + 1) < s ^ (p + 1) :=
+        calc r ^ (p + 1)
+            = r ^ p * r := pow_succ r p                                     -- 冪の定義
+          _ < s ^ p * r := mul_lt_mul_of_pos_right hrsp hr                  -- (a) の `r^p < s^p` と `r > 0`
+          _ < s ^ p * s := mul_lt_mul_of_pos_left hrs hsp                   -- `r < s` と、(a) から `s^p > r^p > 0`
+          _ = s ^ (p + 1) := (pow_succ s p).symm                            -- 冪の定義
+      have hpos : 0 < r ^ (p + 1) := by
+        rw [pow_succ]; exact mul_pos hrp hr                                 -- `r^{p+1} = r^pr > 0`（`r^p > 0`、`r > 0`）
+      refine ⟨⟨hpos, ha⟩, ?_⟩
+      have hsr : 0 < s - r := sub_pos.mpr hrs
+      have hss : s * s ^ (p - 1) = s ^ p := by                              -- `s s^{p−1} = s^{p−1}s = s^p`（冪の定義と、`ℤ` で `(p−1)+1 = p`）
+        rw [mul_comm, ← pow_succ, Nat.sub_add_cancel hp]
+      calc s ^ (p + 1) - r ^ (p + 1)
+          = s * (s ^ p - r ^ p) + r ^ p * (s - r) := by
+            rw [pow_succ, pow_succ]; ring                                   -- 冪の定義と `ℝ` の分配則（`−sr^p + r^ps = 0`）
+        _ ≤ s * ((p : ℝ) * s ^ (p - 1) * (s - r)) + r ^ p * (s - r) := by
+            have := mul_le_mul_of_nonneg_left hb hs.le
+            linarith                                                        -- (b) と `s > 0`
+        _ ≤ s * ((p : ℝ) * s ^ (p - 1) * (s - r)) + s ^ p * (s - r) := by
+            have := mul_le_mul_of_nonneg_right hrsp.le hsr.le
+            linarith                                                        -- (a) の `r^p < s^p` と `s − r > 0`
+        _ = (p : ℝ) * s ^ p * (s - r) + s ^ p * (s - r) := by
+            rw [← hss]; ring                                                -- `s s^{p−1} = s^p`（冪の定義）と乗法の交換則・結合則
+        _ = ((p + 1 : ℕ) : ℝ) * s ^ (p + 1 - 1) * (s - r) := by
+            rw [Nat.add_sub_cancel]; push_cast; ring                        -- `ℝ` の分配則と `ℤ` で `p = (p+1)−1`
 
-/-- `W^N` も実対称。 -/
-theorem IsSymm_pow {W : Matrix n n ℝ} (hW : W.IsSymm) (N : ℕ) : (W ^ N).IsSymm := by
-  show (W ^ N)ᵀ = W ^ N
-  rw [Matrix.transpose_pow, hW.eq]
+variable {M : ℕ}
 
-/-- `W^N` も半正定値（人手 `trace_power_sandwich` の【(W_ℝ)^n の半正定値性】）。 -/
-theorem psd_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (N : ℕ) (x : n → ℝ) :
-    0 ≤ x ⬝ᵥ W ^ N *ᵥ x := by
-  have hpair := isPsdPair_of_matrix hW hpsd
-  have h := hpair.moment_nonneg x N
-  rwa [matBilin_one_mulVecLin_pow] at h
+/-- 人手【上限への移行】の `c^{n-1} > 0`: `n = 1` なら `c^0 = 1`、`n ≥ 2` なら【正の実数の冪の比較】(a) を
+`r → c, s → c+1, p → n−1` に当てる。 -/
+theorem pow_pred_pos_of_pos {c : ℝ} (hc : 0 < c) {n : ℕ} (hn : 1 ≤ n) : 0 < c ^ (n - 1) := by
+  rcases Nat.lt_or_ge n 2 with h | h
+  · rw [show n - 1 = 0 by omega, pow_zero]; exact one_pos                    -- `n = 1` なら `c^0 = 1`
+  · exact ((power_comparison_of_positive_reals hc (by linarith) (by linarith : c < c + 1)
+      (show 1 ≤ n - 1 by omega)).1).1                                       -- 【正の実数の冪の比較】(a)（`r → c, s → c+1, p → n−1`）
 
-/-- **上からの評価を必要十分版から得たもの**（人手 `trace_power_upper_bound` の必要十分版からの導出）: `Σ_k (W^n)_kk ≤ (dim) c(M)^n`。
-人手の鎖と 1 対 1 の具体版は `ClaimTracePowerUpperBound.lean` の `trace_power_upper_bound`（本文の `W` への当てはめは
-`trace_power_upper_bound_physical`）。ここは対称で半正定値な任意の実数の行列と `N = 0` も含めて述べ、各 `k` の評価を必要十分版
-`NecSuf.IsPsdPair.moment_le_pow` の特殊化で得る。`trace_power_sandwich` の上側はまだこれを使う（状態台帳の (r7) で `trace_power_upper_bound` を引く形に替える）。 -/
-theorem trace_pow_le {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (N : ℕ) :
-    (W ^ N).trace ≤ (Fintype.card n : ℝ) * rayleighSup W ^ N := by
-  have hpair := isPsdPair_of_matrix hW hpsd
-  have hdiag : ∀ i : n, (W ^ N) i i ≤ rayleighSup W ^ N := by
-    intro i
-    have h := hpair.moment_le_pow (rayleighSup_nonneg hpsd)
-      (necSuf_rayleigh_hyp (W := W)) (Pi.single i 1) N
-    rw [matBilin_one_mulVecLin_pow, single_dotProduct_mulVec_single] at h
-    have he : matBilin (1 : Matrix n n ℝ) (Pi.single i 1) (Pi.single i 1) = 1 := by
-      simpa [vecNormSq] using vecNormSq_single (n := n) i
-    rwa [he, mul_one] at h
-  calc (W ^ N).trace = ∑ i, (W ^ N) i i := rfl
-    _ ≤ ∑ _i : n, rayleighSup W ^ N := Finset.sum_le_sum fun i _ => hdiag i
-    _ = (Fintype.card n : ℝ) * rayleighSup W ^ N := by
-        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+section General
 
-/-- 単位ベクトルに対する `(xᵀWx)^n ≤ tr(W^n)`（人手 `trace_power_sandwich` の【単位ベクトルでの評価】の `(x^⊤W_ℝx)^n ≤ T`。
-証明は必要十分版の特殊化で、人手の【(W_ℝ)^n の成分の評価】を足し合わせる鎖とはまだ 1 対 1 でない）。 -/
-theorem quad_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {x : n → ℝ} (hx : vecNormSq x = 1)
-    (N : ℕ) :
-    (x ⬝ᵥ W *ᵥ x) ^ N ≤ (W ^ N).trace := by
-  have hpsd : ∀ y : n → ℝ, 0 ≤ y ⬝ᵥ W *ᵥ y := psd_of_pd hpd
-  have hpair := isPdPair_of_matrix hW hpd
-  have hx0 : x ≠ 0 := by
-    intro h
-    rw [h] at hx
-    simp [vecNormSq] at hx
-  have hip1 : matBilin (1 : Matrix n n ℝ) x x = 1 := by
-    simpa [vecNormSq] using hx
-  -- 【単位ベクトルでの評価】: `(xᵀWx)^n ≤ m_n`
-  have h1 := hpair.moment_pow_le hx0 hip1 N
-  rw [matBilin_one_mulVecLin_pow] at h1
-  have h1' : (x ⬝ᵥ W *ᵥ x) ^ N ≤ x ⬝ᵥ W ^ N *ᵥ x := by
-    simpa using h1
-  -- `m_n ≤ tr(W^n)`（半正定値行列に対する `xᵀAx ≤ ‖x‖² tr A`）
-  have h2 := psd_quad_le_normSq_mul_trace (IsSymm_pow hW N) (psd_pow hW hpsd N) x
-  rw [hx, one_mul] at h2
-  exact le_trans h1' h2
+variable (W : TensorPow M) (hW : MatrixIsRealSymmetric W)
+  (hWRsymm : (realMatrixOfRealEntries W hW.1).IsSymm)
+  (hpd : ∀ x : Conf M → ℝ, x ≠ 0 → 0 < x ⬝ᵥ realMatrixOfRealEntries W hW.1 *ᵥ x)
 
-/-- **下からの評価**（人手 `trace_power_sandwich` の【上限への移行】）: `c(M)^n ≤ tr(W^n)`。
-人手は【正の実数の冪の比較】と背理法で示すが、ここは `n` 乗根（`Real.rpow`）を取って上限と比べており、まだ 1 対 1 でない。 -/
-theorem rayleighSup_pow_le_trace_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {N : ℕ} (hN : 1 ≤ N) :
-    rayleighSup W ^ N ≤ (W ^ N).trace := by
-  have hpsd : ∀ y : n → ℝ, 0 ≤ y ⬝ᵥ W *ᵥ y := psd_of_pd hpd
-  set T := (W ^ N).trace with hT
-  have hNne : (N : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr (by omega)
-  -- `T > 0`
-  obtain ⟨i⟩ := (inferInstance : Nonempty n)
-  have hei : (Pi.single i 1 : n → ℝ) ≠ 0 := by
-    intro h
-    have hu := vecNormSq_single (n := n) i
-    rw [h] at hu
-    simp [vecNormSq] at hu
-  have hTpos : 0 < T := by
-    have h := quad_pow_le_trace_pow hW hpd (vecNormSq_single (n := n) i) N
-    exact lt_of_lt_of_le (pow_pos (hpd _ hei) N) h
-  -- 各 `r ∈ 𝓡` について `r ≤ T^{1/N}`
-  have hroot : ∀ r : ℝ, 0 < r → r ^ N ≤ T → r ≤ T ^ ((1 : ℝ) / N) := by
-    intro r hr hrN
-    have h1 : ((r ^ N : ℝ)) ^ ((1 : ℝ) / N) ≤ T ^ ((1 : ℝ) / N) :=
-      Real.rpow_le_rpow (by positivity) hrN (by positivity)
-    have h2 : ((r ^ N : ℝ)) ^ ((1 : ℝ) / N) = r := by
-      rw [← Real.rpow_natCast r N, ← Real.rpow_mul hr.le, mul_one_div, div_self hNne,
-        Real.rpow_one]
-    rwa [h2] at h1
-  have hle : rayleighSup W ≤ T ^ ((1 : ℝ) / N) := by
-    refine csSup_le (rayleighSet_nonempty W) ?_
-    rintro r ⟨x, hx, rfl⟩
-    have hx0 : x ≠ 0 := by
-      intro h
-      rw [h] at hx
-      simp [vecNormSq] at hx
-    exact hroot _ (hpd x hx0) (quad_pow_le_trace_pow hW hpd hx N)
-  have hpow : (T ^ ((1 : ℝ) / N)) ^ N = T := by
-    rw [← Real.rpow_natCast (T ^ ((1 : ℝ) / N)) N, ← Real.rpow_mul hTpos.le,
-      one_div, inv_mul_cancel₀ hNne, Real.rpow_one]
-  calc rayleighSup W ^ N ≤ (T ^ ((1 : ℝ) / N)) ^ N :=
-        pow_le_pow_left₀ (rayleighSup_nonneg hpsd) hle N
-    _ = T := hpow
+include hWRsymm hpd
 
-/-- **`c(M)^n ≤ tr(W^n) ≤ (dim) c(M)^n`**（人手証明 `trace_power_sandwich`）。
-`W` は実数の行列で `tr(W^n) = Σ_k (W^n)_kk` なので、人手の `c^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c^n` は
-`W := W_ℝ`・`Fintype.card n = 2^{M_col}` と置いたものである（具体的な `W_ℝ` への当てはめは `partition_function_sandwich_physical`）。 -/
-theorem trace_power_sandwich {W : Matrix n n ℝ} (hW : W.IsSymm)
-    (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x) {N : ℕ} (hN : 1 ≤ N) :
-    rayleighSup W ^ N ≤ (W ^ N).trace ∧
-      (W ^ N).trace ≤ (Fintype.card n : ℝ) * rayleighSup W ^ N :=
-  ⟨rayleighSup_pow_le_trace_pow hW hpd hN, trace_pow_le hW (psd_of_pd hpd) N⟩
+/-- 人手【上限への移行】の冒頭: `‖e_1‖ = 1` の `e_1` に【単位ベクトルでの評価】を当てて `T ≥ m_n > 0`
+（`m_n` は `x = e_1` のもの。`m_n > 0` は `moment_log_convexity` の正値性）。 -/
+theorem trace_of_power_pos (n : ℕ) : 0 < ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k := by
+  set e : Conf M → ℝ := Pi.single (fun _ => 0) 1
+  have he : vecNorm e = 1 := norm_of_standard_basis_vector _               -- `‖e_1‖ = 1`
+  calc (0 : ℝ)
+      < momentWReal W hW e n := (moment_log_convexity W hW hWRsymm hpd he).1 n
+                                                                            -- `moment_log_convexity` の `m_k > 0`（`k → n`）
+    _ ≤ ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k :=
+        moment_le_trace_of_power W hW hWRsymm hpd he n                      -- 【単位ベクトルでの評価】の `m_n ≤ T`
+
+/-- **人手【上限への移行】**: `n ≥ 1` について `c^n ≤ T`（`c := c(M_col)`、`T := Σ_k ((W_ℝ)^n)_kk`）を背理法で示す。 -/
+theorem rayleighSup_pow_le_trace_of_power {n : ℕ} (hn : 1 ≤ n) :
+    rayleighSup (realMatrixOfRealEntries W hW.1) ^ n
+      ≤ ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k := by
+  haveI : Nonempty (Conf M) := ⟨fun _ => 0⟩
+  set WR := realMatrixOfRealEntries W hW.1 with hWR
+  set c := rayleighSup WR with hcdef
+  set T := ∑ k, (WR ^ n) k k with hT
+  have hc : 0 < c := rayleighSup_pos hpd                                    -- `c ∈ ℝ_{>0}`（`def_rayleigh_sup`）
+  have hTpos : 0 < T := trace_of_power_pos W hW hWRsymm hpd n               -- `T ≥ m_n > 0`
+  by_contra hcon
+  have hgt : T < c ^ n := lt_of_not_ge hcon                                 -- `c^n > T` と仮定する
+  have hcn1 : 0 < c ^ (n - 1) := pow_pred_pos_of_pos hc hn                  -- `c^{n-1} > 0`
+  have hn0 : (0 : ℝ) < n := by exact_mod_cast hn
+  have hncn : 0 < (n : ℝ) * c ^ (n - 1) := mul_pos hn0 hcn1                 -- `n c^{n-1} > 0`
+  set δ : ℝ := (c ^ n - T) * ((n : ℝ) * c ^ (n - 1))⁻¹ with hδ
+  set r : ℝ := c - δ with hr
+  have hδpos : 0 < δ := mul_pos (sub_pos.mpr hgt) (inv_pos.mpr hncn)        -- `δ ∈ ℝ_{>0}`
+  have hrc : r < c := by rw [hr]; linarith                                  -- `r < c`
+  have hδc : δ < c :=
+    calc δ
+        = (c ^ n - T) * ((n : ℝ) * c ^ (n - 1))⁻¹ := hδ                     -- `δ` の定義
+      _ < c ^ n * ((n : ℝ) * c ^ (n - 1))⁻¹ :=
+          mul_lt_mul_of_pos_right (by linarith) (inv_pos.mpr hncn)          -- `T > 0` と、正の `(n c^{n-1})^{-1}` を掛けても順序を保つ
+      _ = c ^ (n - 1) * c * ((n : ℝ) * c ^ (n - 1))⁻¹ := by
+          rw [← pow_succ, Nat.sub_add_cancel hn]                            -- 冪の定義と `ℤ` で `n = (n−1)+1`
+      _ = c ^ (n - 1) * c * ((n : ℝ)⁻¹ * (c ^ (n - 1))⁻¹) := by
+          rw [mul_inv]                                                      -- `n ≠ 0`, `c^{n-1} ≠ 0` なので `(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}`
+      _ = c * (n : ℝ)⁻¹ * (c ^ (n - 1) * (c ^ (n - 1))⁻¹) := by ring       -- `ℝ` の乗法の交換則・結合則
+      _ = c * (n : ℝ)⁻¹ := by rw [mul_inv_cancel₀ hcn1.ne', mul_one]       -- `c^{n-1}(c^{n-1})^{-1} = 1`
+      _ ≤ c := by
+          have hn1 : (n : ℝ)⁻¹ ≤ 1 := inv_le_one_of_one_le₀ (by exact_mod_cast hn)
+          nlinarith                                                         -- `n ≥ 1` なので `0 < n^{-1} ≤ 1` と `c > 0`
+  have hrpos : 0 < r := by rw [hr]; linarith                                -- `r = c − δ > 0`
+  obtain ⟨t, ⟨x, hx, rfl⟩, hrt⟩ :=
+    exists_lt_of_lt_csSup (rayleighSet_nonempty WR) hrc                     -- `r < c = sup 𝓡` で、上限は最小の上界なので `r` は `𝓡` の上界でない
+  have hx1 : vecNorm x = 1 := by rw [vecNorm, hx, Real.sqrt_one]            -- `‖x‖^2 = 1` から `‖x‖ = √1 = 1`
+  have htpos : 0 < x ⬝ᵥ WR *ᵥ x := hpd x (ne_zero_of_vecNormSq_eq_one hx)   -- `t ∈ 𝓡 ⊆ ℝ_{>0}`
+  have hcomp_t := power_comparison_of_positive_reals hrpos htpos hrt hn
+  have hcomp_c := power_comparison_of_positive_reals hrpos hc hrc hn
+  have hTT : T > T :=
+    calc T
+        ≥ (x ⬝ᵥ WR *ᵥ x) ^ n :=
+          real_bilinear_value_pow_le_trace_of_power W hW hWRsymm hpd hx1 n  -- 【単位ベクトルでの評価】の `(x^⊤W_ℝx)^n ≤ T`
+      _ > r ^ n := hcomp_t.1.2                                              -- 【正の実数の冪の比較】(a)（`r → r, s → t, p → n`）
+      _ ≥ c ^ n - (n : ℝ) * c ^ (n - 1) * (c - r) := by
+          have := hcomp_c.2; linarith                                       -- 【正の実数の冪の比較】(b)（`r → r, s → c, p → n`）の移項
+      _ = c ^ n - (n : ℝ) * c ^ (n - 1) * δ := by
+          rw [show c - r = δ by rw [hr]; ring]                              -- `r := c − δ` なので `c − r = δ`
+      _ = c ^ n - (c ^ n - T) := by
+          rw [hδ, mul_comm (c ^ n - T), ← mul_assoc, mul_inv_cancel₀ hncn.ne', one_mul]
+                                                                            -- `δ` の定義と `n c^{n-1}(n c^{n-1})^{-1} = 1`
+      _ = T := by ring                                                      -- `ℝ` の加法
+  exact lt_irrefl T hTT                                                     -- `T > T` で矛盾
+
+/-- **人手 `trace_power_sandwich`**: `n ≥ 1` について `c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
+下からの評価は【上限への移行】、上からの評価は `trace_power_upper_bound`。 -/
+theorem trace_power_sandwich {n : ℕ} (hn : 1 ≤ n) :
+    rayleighSup (realMatrixOfRealEntries W hW.1) ^ n
+        ≤ ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k
+      ∧ ∑ k, (realMatrixOfRealEntries W hW.1 ^ n) k k
+        ≤ 2 ^ M * rayleighSup (realMatrixOfRealEntries W hW.1) ^ n :=
+  ⟨rayleighSup_pow_le_trace_of_power W hW hWRsymm hpd hn,                  -- 【上限への移行】の `c^n ≤ T`
+    trace_power_upper_bound W hW hWRsymm hpd hn⟩                            -- `trace_power_upper_bound` の `T ≤ 2^{M_col}c^n`
+
+end General
 
 end Ising2D

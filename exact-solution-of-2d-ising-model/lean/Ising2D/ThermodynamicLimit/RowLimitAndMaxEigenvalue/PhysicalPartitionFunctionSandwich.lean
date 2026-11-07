@@ -53,7 +53,7 @@
 | 同じ主張の「`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}`」（`W_is_real_symmetric_positive_definite`、`def_hermitian_positive_definite`） | 同じ定理の `posDef_conjugateBilinearValue_pos (physicalSymTransferC_posDef …)` |
 | 同じ主張の 10 行の鎖 `ρ_ℂ = ξ^*Wξ = … = (x^⊤W_ℝx)_ℂ` | `conjugate_bilinear_value_of_real_vector_W` の `calc` の 9 段と、10 行目（`def_real_bilinear_value`）の `W_real_is_positive_definite` の `rw [dotProduct_mulVec_eq_real_bilinear_value]` |
 | 同じ主張の結び（`inclusion_rr_to_cc_is_injective`、`a → ρ`, `b → x^⊤W_ℝx`） | `W_real_is_positive_definite` |
-| 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich` が使う形） | `physicalSymTransferR_posDef` |
+| 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich_and_limit_in_N_row`・`onsager_limit_in_N_row_physical` の `c(M_col) > 0` と、章「M→∞ の極限と閉形式」の偶セクターの橋渡しが使う形） | `physicalSymTransferR_posDef` |
 | Step 2: `½K_1D` の成分は実（Step 1 の `K_1D` の成分の実性と `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（主張の行数・列数 `m, n → 2^{M_col}`, `c → ½`, `B → K_1D`）） | `halfK1D_hasRealEntries` |
 | Step 2: `(½K_1D)^⊤ = ½K_1D` の 3 行（`transpose_of_matrix_scalar_multiple`、Step 1 の `(K_1D)^⊤ = K_1D`、`½K_1D` の略記） | `halfK1D_transpose` の `calc` の 3 段（`transpose_smul_tensorPow`・`K1D_transpose`・`rfl`） |
 | Step 2: `½K_1D` は実対称（上の 2 つ） | `halfK1D_isRealSymmetric` |
@@ -67,13 +67,14 @@
 | Step 3 の結論「`W` は実対称」（`def_real_symmetric_complex_matrix`） | `physicalSymTransferC_isRealSymmetric` |
 | `W_real_is_symmetric`: 4 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = (W^⊤)_kl = W_lk = ((W_ℝ)_lk)_ℂ` と `inclusion_rr_to_cc_is_injective`（`a → (W_ℝ)_kl`, `b → (W_ℝ)_lk`） | `W_real_entry_symm` の `calc` の 4 段 |
 | 同じ主張の結び（`def_real_symmetric_matrix` の意味で対称。Lean の `Matrix.IsSymm`） | `W_real_is_symmetric` |
-| 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich_physical` の `trace_power_sandwich` が使う形） | `physicalSymTransferR_isSymm` |
+| 同じ主張を実成分で組んだ `W` で読む（章「M→∞ の極限と閉形式」の偶セクターの橋渡しが使う形） | `physicalSymTransferR_isSymm` |
 | 可逆性: `BB' = I` の 3 行の鎖（`B`・`B'` の置き方、`matrix_double_negation`（`A → ½K_1D`）、`exp_of_negative_is_left_inverse`（`A → -½K_1D`）） | `physicalV1halfC_mul_physicalV1halfInvC` の `calc` の 3 段 |
 | 可逆性: `B ∈ R^×`（`def_invertible_elements_of_R` の `g → B`, `h → B'`。`B'B = I` は Step 2） | `physicalV1halfC_isUnit` |
 | 可逆性: `BV_2 ∈ R^×`（`B ∈ R^×`、`V2_invertible`、`def_invertible_elements_of_R` (ii)（`g_1 → B`, `g_2 → V_2`）） | `physicalV1halfC_mul_V2_isUnit`（`V2_invertible` は `isUnit_V2`） |
 | 可逆性: `W = (BV_2)B ∈ R^×` の 2 行（`def_symmetrized_transfer_matrix`、`def_invertible_elements_of_R` (ii)（`g_1 → BV_2`, `g_2 → B`）） | `physicalSymTransferC_isUnit` |
 | `trace_power_upper_bound` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（`W` の実対称性は `W_is_real_symmetric_positive_definite`、`rayleigh_bounds_operator_norm` が要る `W_ℝ` の対称性・正定値性は `W_real_is_symmetric`・`W_real_is_positive_definite`） | `trace_power_upper_bound_physical`（一般の `W` の具体版は `ClaimTracePowerUpperBound.lean` の `trace_power_upper_bound`） |
 | `moment_log_convexity` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（`W` の実対称性は `W_is_real_symmetric_positive_definite`、`W_ℝ` の対称性・正定値性は `W_real_is_symmetric`・`W_real_is_positive_definite`） | `moment_log_convexity_physical`（一般の `W` の具体版は `ClaimMomentLogConvexity.lean` の `moment_log_convexity`） |
+| `trace_power_sandwich` を本文の `W`（`def_symmetrized_transfer_matrix`）と `W_ℝ`（`def_W_real`）に当てたもの（仮定の渡し方は上の 2 行と同じ） | `trace_power_sandwich_physical`（一般の `W` の具体版は `ClaimTracePowerSandwich.lean` の `trace_power_sandwich`） |
 | `partition_function_sandwich`（準備の `Z(K_1,K_2) = T`（`T := Σ_k ((W_ℝ)^{N_row})_kk`）→ `trace_power_sandwich` の両側の評価を `n = N_row` に適用） | `partition_function_sandwich_physical` |
 
 - Step 3 の `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor` は、添字が `Conf M` の行列なので
@@ -113,7 +114,8 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimIHPauliForm
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
-import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimPartitionFunctionSandwich
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealMultipleOfHermitianIsHermitian
@@ -696,20 +698,47 @@ theorem partitionFunction_eq_trace_physicalSymTransferR_pow (K1 : ℝ) {K2 : ℝ
     _ = ((physicalSymTransferR M K1 K2 ^ Nrow).trace : ℂ) := by
         rw [← physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]         -- `W_ℝ = physicalSymTransferR`
 
+/-- **人手 `trace_power_sandwich`（本文の具体的な `W` について）**: `n ≥ 1` について
+`c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`（`W_ℝ := ϱ(W)`、`def_W_real`）。一般の `W` の具体版 `trace_power_sandwich`
+（`ClaimTracePowerSandwich.lean`）に、`W_is_real_symmetric_positive_definite`（実対称性、`physicalSymTransferC_isRealSymmetric`）と
+`W_real_is_symmetric`・`W_real_is_positive_definite` を渡す。 -/
+theorem trace_power_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {n : ℕ} (hn : 1 ≤ n) :
+    rayleighSup (realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+        (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n
+        ≤ ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n) k k
+      ∧ ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n) k k
+        ≤ 2 ^ M * rayleighSup (realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ n :=
+  trace_power_sandwich (physicalSymTransferC M K1 K2) (physicalSymTransferC_isRealSymmetric K1 hK2)
+    (W_real_is_symmetric K1 hK2) (W_real_is_positive_definite K1 hK2) hn
+
 /-- **人手 `partition_function_sandwich`（具体的な `Z(K_1,K_2)` と具体的な `W` について）**:
 `c(M_col)^{N_row} ≤ Z(K_1,K_2) ≤ 2^{M_col} c(M_col)^{N_row}`（`ℝ` の順序）、`c(M_col) := sup{x^⊤W_ℝx | ‖x‖ = 1}`。
-人手どおり、準備の `Z(K_1,K_2) = T`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）で書き換え、`trace_power_sandwich`
-（`n → N_row`）の左右の不等式を `T` に当てる（`W_ℝ` の実対称性は `physicalSymTransferR_isSymm`、正定値性は `physicalSymTransferR_posDef`）。 -/
+人手の 2 行の鎖 2 本（`Z(K_1,K_2) = T ≥ c^{N_row}`、`Z(K_1,K_2) = T ≤ 2^{M_col}c^{N_row}`）と 1 対 1 の `calc`。準備の `Z(K_1,K_2) = T` は
+`partitionFunction_eq_trace_physicalSymTransferR_pow`（実成分で組んだ `physicalSymTransferR` を `W_ℝ = ϱ(W)` へ戻す行
+`physicalSymTransferR_eq_realMatrixOfRealEntries` が続く）、不等式は `trace_power_sandwich_physical`（`n → N_row`）。 -/
 theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow ≤ partitionFunction Nrow M K1 K2
       ∧ partitionFunction Nrow M K1 K2
         ≤ 2 ^ M * rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow := by
-  rw [partitionFunction_eq_trace_physicalSymTransferR_pow K1 hK2 hN]                -- 準備の `Z(K_1,K_2) = T`
-  have h := trace_power_sandwich (physicalSymTransferR_isSymm (M := M) K1 hK2)
-    (physicalSymTransferR_posDef K1 hK2) hN                                        -- `trace_power_sandwich`（`n = N_row`）
-  rw [card_conf] at h
-  exact h
+  rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]                      -- `W_ℝ = physicalSymTransferR`
+  set WR := realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+    (physicalSymTransferC_hasRealEntries K1 hK2) with hWR
+  have hZT : partitionFunction Nrow M K1 K2 = ∑ k, (WR ^ Nrow) k k := by           -- 準備の `Z(K_1,K_2) = T`
+    rw [partitionFunction_eq_trace_physicalSymTransferR_pow K1 hK2 hN,
+      physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
+    rfl
+  have h := trace_power_sandwich_physical (M := M) K1 hK2 hN
+  refine ⟨?_, ?_⟩
+  · exact calc partitionFunction Nrow M K1 K2
+        = ∑ k, (WR ^ Nrow) k k := hZT                                              -- 準備
+      _ ≥ rayleighSup WR ^ Nrow := h.1                                             -- `trace_power_sandwich`（`n → N_row`）の左の不等式
+  · calc partitionFunction Nrow M K1 K2
+        = ∑ k, (WR ^ Nrow) k k := hZT                                              -- 準備
+      _ ≤ 2 ^ M * rayleighSup WR ^ Nrow := h.2                                     -- `trace_power_sandwich`（`n → N_row`）の右の不等式
 
 /-- **人手 `trace_power_upper_bound`（本文の具体的な `W` について）**: `n ≥ 1` について
 `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`（`W_ℝ := ϱ(W)`、`def_W_real`）。一般の `W` の具体版 `trace_power_upper_bound` に、

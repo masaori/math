@@ -30,7 +30,7 @@
 これ以上ほどく余地がない（`sSup` は ℝ の完備性そのもの）。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
-import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 
 set_option linter.unusedSectionVars false
 

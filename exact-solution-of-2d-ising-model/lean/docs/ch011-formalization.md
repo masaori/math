@@ -38,8 +38,8 @@
 
 `psd_cauchy_schwarz`（数学的道具立て「トレース・共役転置・正定値性」）の `ClaimPsdCauchySchwarz.lean` と補助の `RealMatrixBilinearFormAndNorm.lean` は
 `lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある。
-章「N→∞ の極限と最大固有値 c(M)」に当たる `c(M)` の定義・`‖Wx‖ ≤ c(M)‖x‖`・`xᵀAx ≤ ‖x‖² tr A`・`trace_power_sandwich`・分配関数の挟み撃ち（一般の行列の版と具体的な `Z`・`W` の版）のファイルは
-`lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` にある（`DefinitionRayleighSup`・`ClaimOperatorBound`・`TraceBound`・`ClaimTracePowerSandwich`・`ClaimTracePowerSandwichUnitVectorBound`・`ClaimTracePowerSandwichUnitVectorBoundFromNecSuf`・`ClaimPartitionFunctionSandwich`・`PhysicalPartitionFunctionSandwich`）。
+章「N→∞ の極限と最大固有値 c(M)」に当たる `c(M)` の定義・`‖Wx‖ ≤ c(M)‖x‖`・`trace_power_upper_bound`・`moment_log_convexity`・`trace_power_sandwich`・具体的な `Z`・`W` の分配関数の挟み撃ちのファイルは
+`lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` にある（`DefinitionRayleighSup`・`ClaimOperatorBound`・`ClaimTracePowerUpperBound`・`ClaimTracePowerUpperBoundFromNecSuf`・`ClaimMomentLogConvexity`・`ClaimMomentLogConvexityFromNecSuf`・`ClaimTracePowerSandwichUnitVectorBound`・`ClaimTracePowerSandwichUnitVectorBoundFromNecSuf`・`ClaimTracePowerSandwich`・`PhysicalPartitionFunctionSandwich`）。
 章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`ε_ℝ := ϱ(ε)` と `ε_ℝx = x ⟺ ι(x) ∈ 𝓕^{(+)}`・`ε_ℝ` の対称性と `ε_ℝε_ℝ = I`・`ε` の成分と `(ε_ℝu)_{ord(s)} = u_{ord(-s)}`・`u_k ≥ 0 (∀k)` なら `(ε_ℝu)_k ≥ 0 (∀k)`・`u_k ≥ 0 (∀k)` かつ `u ≠ 0` なら `u_k + (ε_ℝu)_k` を成分とするベクトルは 0 でない・`‖u‖ = 1` なら `u_k + (ε_ℝu)_k` を成分とするベクトル `v` について `‖v‖^2 ≤ 4`・`εW = Wε` と `ε_ℝW_ℝ = W_ℝε_ℝ`・`u_k ≥ 0 (∀k)` なら `u_k + (ε_ℝu)_k` を成分とするベクトル `v` について `v^⊤W_ℝv ≥ 2(u^⊤W_ℝu)`・具体的な `W` と `W_ℝ` の成分の正値性のファイルは
 `lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` にある（`DefinitionSectorRayleighSup`・`ClaimCPlusLeC`・`ClaimEpsilonIsRealSymmetric`・`ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors`・`ClaimEpsilonRealIsSymmetricAndSquareIsIdentity`・`ClaimEpsilonRealFixesSumOfVectorAndItsImage`・`ClaimEpsilonRealPermutesEntriesBySpinFlip`・`ClaimEpsilonRealPreservesNonnegativeVectors`・`ClaimSumOfNonnegativeVectorAndItsEpsilonRealImageIsNonzero`・`ClaimNormSquaredOfSumOfUnitVectorAndItsEpsilonRealImageIsAtMostFour`・`ClaimEpsilonCommutesWithW`・`ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries`・`ClaimWRealBilinearValueAtSumOfNonnegativeVectorAndItsEpsilonRealImageIsAtLeastTwice`・`ClaimPhysicalWHasPositiveEntries`・`ClaimPhysicalWHasPositiveEntriesFromNecSuf`）。
 
@@ -73,8 +73,6 @@
 | `Ising2D.rayleigh_bounds_operator_norm_pow` | `‖W^k x‖ ≤ c(M)^k‖x‖`（人手の `k = 0` の 3 行と帰納法の 5 行。`Ix = x` は `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`(W^kW)x = W^k(Wx)` は `real_matrix_vector_product_is_associative` の具体版を引く） | 同上（帰納法の部分） |
 | `Ising2D.rayleigh_bounds_operator_normSq` / `rayleigh_bounds_operator_normSq_pow` | `‖Wx‖² ≤ c(M)²‖x‖²` / `‖W^k x‖² ≤ (c(M)²)^k‖x‖²`（必要十分版の特殊化。具体版の証明には使わない） | 同上 |
 | `Ising2D.rayleigh_bounds_operator_norm_of_necSuf` / `rayleigh_bounds_operator_norm_pow_of_necSuf` | 上の 2 つの平方根を取った `‖Wx‖ ≤ c(M)‖x‖` / `‖W^k x‖ ≤ c(M)^k‖x‖`（具体版と同じ主張を必要十分版から得たもの） | 同上 |
-| `Ising2D.psd_quad_le_normSq_mul_trace`（`TraceBound.lean`） | `xᵀAx ≤ ‖x‖² tr A`（`A` 半正定値） | 人手に対応する段は無い。下の単位ベクトルでの評価（Lean の `m_n ≤ tr(W^n)`）が使う、人手が捨てた経路（人手の `trace_power_sandwich` の【(W_ℝ)^n の成分の評価】は平方根を使わない。台帳の (r7) で人手の鎖に替える） |
-| `Ising2D.psd_abs_entry_le` | `\|A_ij\| ≤ √(A_ii)√(A_jj)` | 人手に対応する段は無い（上の行の補題だけが使う） |
 | `Ising2D.norm_of_standard_basis_vector` / `power_of_W_real_entry_symm` / `diagonal_entry_via_standard_basis` / `power_of_W_real_mulVec_standard_basis_apply` / `norm_power_of_W_real_mulVec_standard_basis_le` / `norm_sq_power_of_W_real_mulVec_standard_basis_le`（`ClaimTracePowerUpperBound.lean`） | `‖e_k‖ = 1`（5 行）/ `((W_ℝ)^p)_kl = ((W_ℝ)^p)_lk`（6 行と単射性）/ `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（5 行）/ `u_l = ((W_ℝ)^a)_lk`（3 行）/ `‖u‖ ≤ c^a`（3 行）/ `‖u‖^2 ≤ c^{2a}`（2 行） | `trace_power_upper_bound` の【e_k のノルム】【冪の対称性】【対角成分の表示】【(W_ℝ)^ae_k の成分とノルム】 |
 | `Ising2D.power_of_W_real_even_split` / `diagonal_bound_even` / `power_of_W_odd_split` / `power_of_W_real_odd_split` / `diagonal_bound_odd` | `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a`（5 行）/ `n = 2a` について `e_k^⊤(W_ℝ)^{2a}e_k ≤ c^n`（9 行）/ `W^{2a+1} = W^a(WW^a)`（7 行）/ `(W_ℝ)^{2a+1} = (W_ℝ)^a(W_ℝ(W_ℝ)^a)`（5 行）/ `n = 2a+1` について `e_k^⊤(W_ℝ)^{2a+1}e_k ≤ c^n`（12 行） | `trace_power_upper_bound` の偶数・奇数の場合 |
 | **`Ising2D.trace_power_upper_bound`** / `trace_power_upper_bound_physical`（`PhysicalPartitionFunctionSandwich.lean`） | 一般の `W : TensorPow M`（実対称、`W_ℝ := ϱ(W)` は対称で正定値）について `n ≥ 1` で `Σ_k ((W_ℝ)^n)_kk ≤ 2^M c(M)^n`（最後のトレースの 4 行）/ 本文の `W` に当てたもの | **`trace_power_upper_bound`** |
@@ -83,19 +81,18 @@
 | `Ising2D.power_zero_of_W_real_mulVec_apply` / `power_succ_of_W_real` / `power_succ_of_W_real_mulVec_apply` / `real_bilinear_value_eq_zero_of_mulVec_eq_zero` / `power_of_W_real_mulVec_ne_zero` | `u^{(0)}_l = x_l`（4 行）/ `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a`（7 行）/ `u^{(a+1)}_l = (W_ℝu^{(a)})_l`（8 行）/ `W_ℝu = 0` なら `u^⊤W_ℝu = 0`（5 行）/ `u^{(a)} ≠ 0`（`a` の帰納法） | `moment_log_convexity` の【(W_ℝ)^ax は零でない】 |
 | `Ising2D.moment_even_pos` / `moment_odd_pos` / `moment_sq_le_with_W_real` / `moment_sq_le_with_real_identity` | `m_{2a} > 0`・`m_{2a+1} > 0`（5 行ずつ）/ `(m_{a+b+1})^2 ≤ m_{2a+1}m_{2b+1}`・`(m_{a+b})^2 ≤ m_{2a}m_{2b}`（8 行ずつ） | `moment_log_convexity` の【正値性】と【P = W_ℝ の不等式】【P = I_ℝ の不等式】 |
 | **`Ising2D.moment_log_convexity`** / `moment_log_convexity_physical`（`PhysicalPartitionFunctionSandwich.lean`）/ `moment_log_convexity_of_necSuf`（`ClaimMomentLogConvexityFromNecSuf.lean`） | 一般の `W : TensorPow M`（実対称、`W_ℝ := ϱ(W)` は対称で正定値）と単位ベクトル `x` について、`m_k := x^⊤(W_ℝ)^kx`（`momentWReal`）は `m_k > 0`、`k ≥ 1` で `m_k^2 ≤ m_{k-1}m_{k+1}`（偶奇の 4 行ずつ）/ 本文の `W` に当てたもの / 同じ型を必要十分版から得たもの（具体版の証明には使わない） | **`moment_log_convexity`** |
-| `Ising2D.trace_pow_le`（`ClaimTracePowerSandwich.lean`）/ `Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（各 `k` の評価は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化）/ それを具体版 `trace_power_upper_bound` と同じ型に読んだもの（具体版が必要十分版の特殊化として得られることの記録。具体版の証明には使わない）。`trace_power_sandwich` の上側はまだ `trace_pow_le` を使う（台帳の (r7) で `trace_power_upper_bound` を引く形に替える） | `trace_power_upper_bound`（必要十分版からの導出） |
+| `Ising2D.trace_pow_le` / `Ising2D.trace_power_upper_bound_of_necSuf`（どちらも `ClaimTracePowerUpperBoundFromNecSuf.lean`） | 実数の行列 `W` の `Σ_k (W^n)_kk ≤ (dim) c(M)^n`（各 `k` の評価は必要十分版 `NecSuf.IsPsdPair.moment_le_pow` の特殊化）/ それを具体版 `trace_power_upper_bound` と同じ型に読んだもの（具体版が必要十分版の特殊化として得られることの記録。具体版の証明と通しの証明には使わない） | `trace_power_upper_bound`（必要十分版からの導出） |
 | `Ising2D.power_one_of_W_real` / `norm_sq_pos_of_component_ne_zero` / `norm_pos_of_component_ne_zero` / `norm_of_inverse_norm_multiple_is_one` / `power_of_W_real_is_positive_semidefinite`（`ClaimTracePowerSandwichUnitVectorBound.lean`） | `(W_ℝ)^1 = W_ℝ`（6 行）/ `z_{j_0} ≠ 0` なら `‖z‖^2 > 0`（3 行）・`‖z‖ > 0` / `w_i := ‖z‖^{-1}z_i` で `‖w‖ = 1`（9 行）/ `z^⊤(W_ℝ)^nz ≥ 0`（`z = 0` の 2 行、`z ≠ 0` の 5 行） | `trace_power_sandwich` の【冪の実数の行列】の `(W_ℝ)^1 = W_ℝ` と【(W_ℝ)^n の半正定値性】（成分の対称性は `Ising2D.power_of_W_real_entry_symm` をそのまま引く） |
 | `Ising2D.standard_basis_real_bilinear_value` / `power_of_W_real_entry_bound` | `Σ_iΣ_j (e_q)_iP_ij(e_r)_j = P_qr` / `2x_k((W_ℝ)^n)_klx_l ≤ x_l^2((W_ℝ)^n)_kk + x_k^2((W_ℝ)^n)_ll`（7 行と移項） | `trace_power_sandwich` の【(W_ℝ)^n の成分の評価】 |
-| `Ising2D.sum_sq_of_unit_vector` / `moment_zero_eq_one` / `moment_one_eq` / `moment_ge_moment_one_mul_prev` / `moment_ge_moment_one_pow` / `moment_le_trace_of_power` / `real_bilinear_value_pow_le_trace_of_power` | `Σ_k x_k^2 = 1`（3 行）/ `m_0 = 1`（7 行）/ `m_1 = x^⊤W_ℝx`（2 行）/ `m_k ≥ m_1m_{k-1}`（帰納法）/ `m_p ≥ m_1^p`（帰納法の 4 行）/ `m_n ≤ T`（8 行）/ `(x^⊤W_ℝx)^n ≤ T`（3 行） | `trace_power_sandwich` の【単位ベクトルでの評価】（人手と 1 対 1。`trace_power_sandwich` 本体がこれを引く形に替えるのは台帳の (r7b)） |
-| `Ising2D.quad_pow_le_trace_pow` | 単位 `x` で `(xᵀWx)^n ≤ tr(W^n)` | `trace_power_sandwich` の【単位ベクトルでの評価】（証明は必要十分版の特殊化で、人手の成分の評価を足し合わせる鎖と 1 対 1 でない） |
-| `Ising2D.rayleighSup_pow_le_trace_pow` | `c(M)^n ≤ tr(W^n)` | `trace_power_sandwich` の【上限への移行】（人手は冪の比較と背理法、Lean は `n` 乗根で、1 対 1 でない） |
-| **`Ising2D.trace_power_sandwich`** | 実数の行列 `W` の `c(M)^n ≤ Σ_k (W^n)_kk ≤ (dim) c(M)^n`（人手の `c^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col}c^n` は `W := W_ℝ`・`card = 2^{M_col}` の特殊化） | **`trace_power_sandwich`** |
+| `Ising2D.sum_sq_of_unit_vector` / `moment_zero_eq_one` / `moment_one_eq` / `moment_ge_moment_one_mul_prev` / `moment_ge_moment_one_pow` / `moment_le_trace_of_power` / `real_bilinear_value_pow_le_trace_of_power` | `Σ_k x_k^2 = 1`（3 行）/ `m_0 = 1`（7 行）/ `m_1 = x^⊤W_ℝx`（2 行）/ `m_k ≥ m_1m_{k-1}`（帰納法）/ `m_p ≥ m_1^p`（帰納法の 4 行）/ `m_n ≤ T`（8 行）/ `(x^⊤W_ℝx)^n ≤ T`（3 行） | `trace_power_sandwich` の【単位ベクトルでの評価】（人手と 1 対 1） |
+| `Ising2D.power_comparison_of_positive_reals`（`ClaimTracePowerSandwich.lean`） | `r, s ∈ ℝ_{>0}`、`r < s`、`p ≥ 1` で (a) `0 < r^p < s^p`、(b) `s^p − r^p ≤ ps^{p−1}(s − r)`（`p` の帰納法。一歩は (a) の 4 行、(b) の 5 行） | `trace_power_sandwich` の【正の実数の冪の比較】 |
+| `Ising2D.trace_of_power_pos` / `pow_pred_pos_of_pos` / `rayleighSup_pow_le_trace_of_power` | `T ≥ m_n > 0`（`x = e_1`）/ `c^{n−1} > 0` / `c^n ≤ T`（背理法。`δ < c` の 7 行と `T > T` の 6 行） | `trace_power_sandwich` の【上限への移行】（人手と 1 対 1。極限・連続性・`n` 乗根を使わない） |
+| **`Ising2D.trace_power_sandwich`** / `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`） | 一般の `W : TensorPow M`（実対称、`W_ℝ := ϱ(W)` は対称で正定値）について `n ≥ 1` で `c(M)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^M c(M)^n`（下は【上限への移行】、上は `trace_power_upper_bound`）/ 本文の `W` に当てたもの | **`trace_power_sandwich`** |
 | `Ising2D.symTransfer` | `W := B V₂ B`（`B = V₁^{1/2}`） | `def_symmetrized_transfer_matrix` |
 | `Ising2D.open_product_pow` | `X, Y ∈ Mat(n, ℂ)` で `(X(YX)^k)Y = (XY)^{k+1}` | `Z_equals_trace_of_W` の準備 2（`k = 0` の 5 行と帰納段階の 6 行） |
 | `Ising2D.symmetrized_pow_succ` | `BB = V₁` のもとで `((BV₂)B)^{k+1} = ((B(V₂V₁)^k)V₂)B` | 同 準備 3（`k = 0` の 6 行と帰納段階の 12 行） |
 | **`Ising2D.trace_mul_pow_eq_trace_symmetrized_pow`** | 係数が `ℂ` の行列で、`n ≥ 1` なら `tr((V₁V₂)^n) = tr(((BV₂)B)^n)` | **`Z_equals_trace_of_W`** の本体（6 行） |
 | `Ising2D.partition_function_eq_trace_physicalSymTransferC`（`PhysicalPartitionFunctionSandwich.lean`） | 具体的な `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`W` は `physicalSymTransferC`、`(·)_ℂ` は Lean の `((· : ℝ) : ℂ)`） | 同「とくに」（2 行） |
-| `Ising2D.trace_mul_pow_eq_trace_symTransfer_pow` / `partition_function_eq_trace_symTransfer_pow`（`ClaimZEqualsTraceOfWFromNecSuf.lean`） | 係数が `ℝ` の行列での同じ等式（必要十分版の特殊化）と、`Z = tr((V₁V₂)^N)`（本文には無い、実成分の行列で述べた仮定の形。本文の主張は `(Z)_ℂ = tr((V_1V_2)^N)`）を仮定に取る「とくに」 | `partition_function_sandwich` が使う読み |
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR`（`PhysicalSymTransferBridge.lean`） | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
@@ -110,7 +107,6 @@
 | `Ising2D.V2_apply_configBasisIso`（章 001） / `physicalV2R_apply_configBasisIso` / `physicalV2R_apply_configBasisIso_pos` | 具体的な `V₂` の成分は `exp(K₂∑_m μ(m)μ'(m)) > 0` | `W_has_positive_entries` Step 2 |
 | `Ising2D.physicalSymTransferR_apply_configBasisIso` | 具体的な `W` の成分は `(V₁^{1/2})_{ι(μ),ι(μ)}(V₂)_{ι(μ),ι(μ')}(V₁^{1/2})_{ι(μ'),ι(μ')}`（人手の式変形の各行） | `W_has_positive_entries` Step 3 |
 | **`Ising2D.W_has_positive_entries_physical`** / `physicalSymTransferR_pos` | 具体的な `W` の成分はすべて正（後者は `ι` の全射性で任意の行・列番号へ広げた形） | **`W_has_positive_entries`**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
-| **`Ising2D.partition_function_sandwich`**（`ClaimPartitionFunctionSandwich.lean`） | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.trace_of_W_power_via_W_real` | `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`。4 行の鎖と 1 対 1） | `trace_of_W_power_via_W_real` |
 | `Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow` | 具体的な `Z(K_1,K_2)` は実行列 `(W_ℝ)^{N_row}` のトレース（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` と `trace_of_W_power_via_W_real` をつなぎ、`inclusion_rr_to_cc_is_injective` で実数へ戻す） | `partition_function_sandwich` の準備（`Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`） |
@@ -181,12 +177,12 @@
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(_pow)`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`Ising2D.rayleigh_bounds_operator_norm(_pow)_of_necSuf`。`isPsdPair_of_matrix` 経由） |
 | `trace_power_upper_bound` | `Ising2D.trace_power_upper_bound`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.moment_le_pow`（各 `k` の評価。同じ偶奇の手順で、人手の【冪の対称性】と成分の鎖に当たる段は自己共役性から出る `moment_split`） | 各 `k` の評価は**はい**（`trace_power_upper_bound_of_necSuf`）。対角成分の和と `2^{M_col}` の段は有限の添字と ℝ の順序に固有なので具体版のみ |
-| `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
+| `trace_power_sandwich` | `Ising2D.trace_power_sandwich`（人手の鎖と 1 対 1） | 【単位ベクトルでの評価】の `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le`（上からの評価は `trace_power_upper_bound` の行） | 【単位ベクトルでの評価】は**はい**（`moment_ge_moment_one_pow_of_necSuf`）。【正の実数の冪の比較】・【上限への移行】・跡の段は ℝ の順序と `sup` に固有なので具体版のみ |
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
-| `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`。使う側の実行列の読み `trace_mul_pow_eq_trace_symTransfer_pow` も同じ特殊化） |
+| `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`、`ClaimZEqualsTraceOfWFromNecSuf.lean`） |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.physicalSymTransferC_isRealSymmetric` / `physicalSymTransferC_posDef` / `physicalSymTransferC_isUnit`（具体的な `W`）。`Ising2D.symTransfer_isSymm` / `symTransfer_posDef` は実行列の一般の形 | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
-| `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
+| `partition_function_sandwich` | `Ising2D.partition_function_sandwich_physical`（具体的な `Z`・`W`） | なし（`Z_equals_trace_of_W`・`trace_of_W_power_via_W_real` と `trace_power_sandwich` をつなぐだけ） | — |
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
 | `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |
 | `epsilon_commutes_with_W` | `Ising2D.epsilon_commutes_with_W` | なし（結合律だけの鎖。置き換えた構造は章 010 の具体的な反交換関係） | — |
@@ -205,15 +201,12 @@
   効いているのは Cauchy–Schwarz（上記 3 条件）と、`W` が形式について自己共役かつ半正定値であることだけ。
   有限次元性・行列であること・実数であること・**スペクトル定理**はいずれも効いていない。
 
-- **`trace_power_sandwich` の不等式の中核（Step 1〜Step 3 前半）も順序体で閉じている。**
+- **`trace_power_sandwich` の不等式の中核（【単位ベクトルでの評価】の `m_k ≥ m_1m_{k-1}`・`m_p ≥ m_1^p` と、`moment_log_convexity`）も順序体で閉じている。**
   モーメントの対数凸性 `m_k² ≤ m_{k-1}m_{k+1}` も、比の単調性から出る `(xᵀWx)^n ≤ m_n` も、
-  実数性を全く使わない。ℝ が本質的に効くのは次の 2 箇所だけである。
-  1. `c(M) = sup 𝓡` が存在すること（ℝ の完備性そのもの）。
-  2. Lean の `quad_pow_le_trace_pow` の `m_n ≤ tr(W^n)`（`|A_kl| ≤ √(A_kk A_ll)` で平方根を使う）。ただしこれは人手が捨てた経路で、
-     人手のいまの【(W_ℝ)^n の成分の評価】は平方根を使わない（台帳の (r7) で人手の鎖に替えるときに、この項を見直す）。
-     人手の鎖に限れば、ℝ が本質的に効くのは 1 の `sup` の存在だけである。
-  つまり**この章で「実数への脱出」が必要なのは（Lean のいまの経路では）この 2 点だけ**であり、
-  行列の対角化可能性も固有値の存在も要らない。
+  実数性を全く使わない。【(W_ℝ)^n の成分の評価】の `m_n ≤ T` も、半正定値性を `v = x_le_k − x_ke_l` に当てる鎖で、平方根を使わない。
+  ℝ が本質的に効くのは `c(M) = sup 𝓡` が存在すること（ℝ の完備性そのもの）だけである。
+  【上限への移行】は、その上限が最小の上界であることだけを使い、極限・連続性・`n` 乗根を使わない（【正の実数の冪の比較】と背理法）。
+  つまり**この章で「実数への脱出」が必要なのはこの 1 点だけ**であり、行列の対角化可能性も固有値の存在も要らない。
 
 - **`symmetrized_transfer_matrix_on_sectors` の射影子移動は任意の半群で閉じている。**
   `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
@@ -242,16 +235,16 @@
 
 ## 3. 他章に仮定として置いた事実
 
-章 009 / 010 などの結果は、次を **import せず仮定として受け取っている**（本章の定理は一般の実行列について述べてある）。
-（`PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` と
-`ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` の冒頭コメントにも明記した。）
+章 009 / 010 などの結果は、一般の実行列について述べた次の定理では **import せず仮定として受け取っている**。
+（`PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` の冒頭コメントにも明記した。）
+具体的な `Z`・`W` についての通しの証明（`partition_function_sandwich_physical` ほか）は、これらを仮定に取らず証明して使う。
+`(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）を仮定に取る定理はもう無い。`partition_function_sandwich_physical` が人手の準備 `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）を証明して使う。
 
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |
 | --- | --- | --- |
-| `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（実成分の行列で読んだ形） | `partition_function_via_transfer_matrix`（章 001。人手は `(Z(K_1,K_2))_ℂ = tr(…)`。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ`（`Z : ℝ` と実成分の行列で、人手の ℂ 版の主張を実数で読んだもの）。具体的な `Z` と `W` については `partition_function_sandwich_physical` が人手の準備 `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）を証明して使う |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
 | `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `Ising2D.physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
-| `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。具体的な `W` については `partition_function_sandwich_physical` が一般の `partition_function_sandwich` を経ず、人手どおり `W` の正定値性 `physicalSymTransferR_posDef`（`congruence_preserves_positive_definite` を `A = exp(S₂)` に使う）から `trace_power_sandwich` を引く |
+| `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` の引数。具体的な `W` については `partition_function_sandwich_physical` が、人手どおり `W_ℝ` の正定値性 `W_real_is_positive_definite` から `trace_power_sandwich` を引く |
 | `ε` が実対称・`ε² = 1`・`εW = Wε`（一般の `W` について） | `epsilon_is_real_symmetric`・`epsilon_square_and_eigenvalues`・`epsilon_commutes_with_W` | 物理的な `W`（`physicalSymTransferR`）と `ε`（`epsilonR`）については `epsilon_commutes_with_W` / `epsilonR_isSymm` / `epsilonR_mul_self` で証明済み。一般の `W` について述べる定理（章 018 の `EvenSectorBridge` など）は `εW = Wε` を引数で受け取る |
 
 ## 4. 形式化できなかった主張とその理由

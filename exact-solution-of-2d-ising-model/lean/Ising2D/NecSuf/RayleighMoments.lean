@@ -11,9 +11,9 @@
 * `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
 * `Ising2D.trace_power_upper_bound`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerUpperBound.lean`）
 * `Ising2D.moment_log_convexity`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimMomentLogConvexity.lean`）
-* `Ising2D.trace_power_sandwich`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwich.lean`）
+* `Ising2D.moment_ge_moment_one_pow`（`trace_power_sandwich` の【単位ベクトルでの評価】。`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwichUnitVectorBound.lean`）
 
-具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）、`Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`）、`Ising2D.moment_log_convexity_of_necSuf`（`ClaimMomentLogConvexityFromNecSuf.lean`）と `Ising2D.trace_power_sandwich` が示す。
+具体版と同じ主張が本ファイルの結果の特殊化として得られることは、`Ising2D.rayleigh_bounds_operator_norm_of_necSuf`・`rayleigh_bounds_operator_norm_pow_of_necSuf`（`ClaimOperatorBound.lean`）、`Ising2D.trace_power_upper_bound_of_necSuf`（`ClaimTracePowerUpperBoundFromNecSuf.lean`）、`Ising2D.moment_log_convexity_of_necSuf`（`ClaimMomentLogConvexityFromNecSuf.lean`）、`Ising2D.moment_ge_moment_one_pow_of_necSuf`（`ClaimTracePowerSandwichUnitVectorBoundFromNecSuf.lean`）が示す。
 
 ## この主張に本質的に効いている構造
 
@@ -31,8 +31,9 @@
 `⟪Wx, Wx⟫ ≤ c²⟪x, x⟫` の形で順序体の上で成り立つ。平方根が要るのは
 「ノルム」という言い方をするためだけであって、証明の内容ではない。
 
-なお `c` の存在（上限 `sup` が取れること）と、跡による下からの評価だけは
-ℝ の完備性・平方根を使うので、具体版の側（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/`）に置いてある。
+なお `c` の存在（上限 `sup` が取れること）は ℝ の完備性を使う。跡による下からの評価（`trace_power_sandwich` の
+【`(W_ℝ)^n` の成分の評価】・`m_n ≤ T` と【上限への移行】）は、標準基底・トレース・`def_rayleigh_sup` の上限に固有なので
+具体版の側（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/`）に置いてあるが、平方根は使わない。
 -/
 import Ising2D.NecSuf.PsdCauchySchwarz
 
