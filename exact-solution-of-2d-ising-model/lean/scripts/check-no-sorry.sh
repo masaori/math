@@ -844,6 +844,8 @@ targets=(
   Ising2D.norm_of_vector_of_absolute_values_equals_norm
   Ising2D.vecNorm_pos_of_ne_zero
   Ising2D.norm_of_normalized_real_vector_is_one
+  Ising2D.real_matrix_fixed_vector_stays_fixed_after_normalization
+  Ising2D.real_bilinear_value_of_normalized_vector
   Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric
   Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric_of_necSuf
   "Ising2D.NecSuf.bilinear_value_of_symmetric_matrix_is_symmetric'"

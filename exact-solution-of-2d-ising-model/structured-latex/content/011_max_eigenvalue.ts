@@ -905,6 +905,233 @@ x^\top P x
   },
 
   {
+    id: "maxeig_claim_real_matrix_fixed_vector_stays_fixed_after_normalization",
+    kind: "claim",
+    title: {
+      text: "実数の行列が動かさない零でない実数のベクトルは、各成分をそのノルムで割っても、その行列で動かない",
+    },
+    labels: ["real_matrix_fixed_vector_stays_fixed_after_normalization"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "（",
+        ref("def_real_matrix_of_real_entry_matrix"),
+        " の記号）、",
+        math(String.raw`v \in \mathbb{R}^n`),
+        " が ",
+        math(String.raw`v \neq 0`),
+        "（",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " と同じ意味）を満たすとし、",
+        math(String.raw`\hat{v} \in \mathbb{R}^n`),
+        " を ",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " と同じく成分ごとに",
+      ]),
+      displayMath(String.raw`\hat{v}_k := \frac{v_k}{\|v\|} \qquad (k \in \{1,\dots,n\})`),
+      paragraph([
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の商）で定める。ノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to n`),
+        "）の数ベクトルのノルムで、",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " より ",
+        math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+        " である。積 ",
+        math(String.raw`Pv,\ P\hat{v} \in \mathbb{R}^n`),
+        " は ",
+        ref("def_real_matrix_vector_product"),
+        "（",
+        math(String.raw`m \to n,\ n \to n`),
+        "）の積である。すべての ",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " で ",
+        math(String.raw`(Pv)_i = v_i`),
+        " ならば、すべての ",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " で",
+      ]),
+      displayMath(String.raw`(P\hat{v})_i = \hat{v}_i`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
+        math(String.raw`\|v\|`),
+        " の存在に ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性を使う（",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）。証明はそのほかに ",
+        math(String.raw`\mathbb{R}`),
+        " の四則演算だけを使い、極限を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("norm_of_normalized_real_vector_is_one"),
+        " の ",
+        math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+        " より ",
+        math(String.raw`\|v\| \neq 0`),
+        " である。まず、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\hat{v}_k
+&= \frac{v_k}{\|v\|}
+  &&\bigl(\because\ \hat{v}\ \text{の定義}\bigr)\\
+&= \frac{1}{\|v\|}\,v_k
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ a/b = (1/b)\,a\ (a \to v_k,\ b \to \|v\| \neq 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(P\hat{v})_i
+&= \frac{1}{\|v\|}\,(Pv)_i
+  &&\bigl(\because\ \blkref{real_matrix_vector_product_commutes_with_real_scalar_multiple}\ (m \to n,\ n \to n,\ P \to P,\ c \to 1/\|v\|,\ u \to v,\ w \to \hat{v}.\ \text{仮定}\ w_k = c\,u_k\ \text{は上の式})\bigr)\\
+&= \frac{1}{\|v\|}\,v_i
+  &&\bigl(\because\ \text{仮定}\ (Pv)_i = v_i\bigr)\\
+&= \frac{v_i}{\|v\|}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,a = a/b\ (a \to v_i,\ b \to \|v\| \neq 0)\bigr)\\
+&= \hat{v}_i
+  &&\bigl(\because\ \hat{v}\ \text{の定義}\ (k \to i)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i`),
+        " は任意なので主張が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂ := v/‖v‖ について ε v̂ = v̂ を「𝓕^{(+)} が複素スカラー倍で閉じる」で出していた。def_sector_rayleigh_sup のいまの集合の条件 ε_ℝx = x に合わせて実数の側で引くために、P → ε_ℝ として使う形で足した。ε_ℝ に固有の性質を使わないので、一般の P ∈ Mat(n,ℝ) について述べる。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（norm_of_normalized_real_vector_is_one と同じ）。数値検証: sagemath/check/real_matrix_fixed_vector_stays_fixed_after_normalization/。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_real_bilinear_value_of_normalized_vector",
+    kind: "claim",
+    title: {
+      text: "零でない実数のベクトルの各成分をそのノルムで割ると、実数の双線型値はノルムの二乗で割ったものになる",
+    },
+    labels: ["real_bilinear_value_of_normalized_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）、",
+        math(String.raw`v \in \mathbb{R}^n`),
+        " が ",
+        math(String.raw`v \neq 0`),
+        "（",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " と同じ意味）を満たすとし、",
+        math(String.raw`\hat{v} \in \mathbb{R}^n`),
+        " を ",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " と同じく成分ごとに",
+      ]),
+      displayMath(String.raw`\hat{v}_k := \frac{v_k}{\|v\|} \qquad (k \in \{1,\dots,n\})`),
+      paragraph([
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の商）で定める。ノルムは ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`d \to n`),
+        "）の数ベクトルのノルムで、",
+        ref("norm_of_normalized_real_vector_is_one"),
+        " より ",
+        math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+        " である。",
+        math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の積）とおく。",
+        math(String.raw`\hat{v}^\top P\hat{v},\ v^\top Pv \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`\hat{v}^\top P\hat{v} = \frac{v^\top Pv}{\|v\|^2}`),
+      paragraph([
+        "（右辺は ",
+        math(String.raw`\mathbb{R}`),
+        " の商）が成り立つ。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
+        math(String.raw`\|v\|`),
+        " の存在に ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性を使う（",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        "）。証明はそのほかに ",
+        math(String.raw`\mathbb{R}`),
+        " の四則演算だけを使い、極限を使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("norm_of_normalized_real_vector_is_one"),
+        " の ",
+        math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
+        " より ",
+        math(String.raw`\|v\| \neq 0`),
+        "、",
+        math(String.raw`\|v\|^2 = \|v\|\,\|v\| > 0`),
+        "（正の実数どうしの積は正）より ",
+        math(String.raw`\|v\|^2 \neq 0`),
+        " である。まず、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\hat{v}_k
+&= \frac{v_k}{\|v\|}
+  &&\bigl(\because\ \hat{v}\ \text{の定義}\bigr)\\
+&= \frac{1}{\|v\|}\,v_k
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ a/b = (1/b)\,a\ (a \to v_k,\ b \to \|v\| \neq 0)\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\hat{v}^\top P\hat{v}
+&= \Bigl(\frac{1}{\|v\|}\,\frac{1}{\|v\|}\Bigr)\,\bigl(v^\top Pv\bigr)
+  &&\bigl(\because\ \blkref{real_bilinear_value_of_scalar_multiple_vector}\ (n \to n,\ P \to P,\ c \to 1/\|v\|,\ u \to v,\ w \to \hat{v}.\ \text{仮定}\ w_k = c\,u_k\ \text{は上の式})\bigr)\\
+&= \frac{1}{\|v\|\,\|v\|}\,\bigl(v^\top Pv\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,(1/b) = 1/(b\,b)\ (b \to \|v\| \neq 0)\bigr)\\
+&= \frac{1}{\|v\|^2}\,\bigl(v^\top Pv\bigr)
+  &&\bigl(\because\ \|v\|^2 := \|v\|\,\|v\|\ \text{を右辺から左辺へ}\bigr)\\
+&= \frac{v^\top Pv}{\|v\|^2}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/c)\,a = a/c\ (a \to v^\top Pv,\ c \to \|v\|^2 \neq 0)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂^⊤Wv̂ = v^⊤Wv/‖v‖^2 を「v̂ = v/‖v‖ の代入と二次形式の斉次性」の名前だけで出していた。この行を参照に替えるために、P → W_ℝ として使う形で足した。W_ℝ に固有の性質を使わないので、一般の P ∈ Mat(n,ℝ) について述べる。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（norm_of_normalized_real_vector_is_one と同じ）。数値検証: sagemath/check/real_bilinear_value_of_normalized_vector/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_005_claim_psd_cauchy_schwarz",
     kind: "claim",
     origin: { path: SRC, ordinal: 7 },
