@@ -66200,6 +66200,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                       "Ising2DLambda.KacWard.interiorCellSetOfWalk_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reaches_band",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_planeLift_injective",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],

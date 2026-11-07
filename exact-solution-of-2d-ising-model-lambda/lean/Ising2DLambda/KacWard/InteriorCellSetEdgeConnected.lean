@@ -131,4 +131,34 @@ theorem interiorCellSetOfWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
   · rintro ⟨r, c⟩ hinside
     exact interiorCellOfWalk_reaches_band γ hγ hh hv r c hinside
 
+/-- The projected edge sequence of a one-sided closure has a nonempty,
+edge-connected interior cell set, using one cut point for simplicity and zero winding. -/
+theorem oneSidedClosureProjectionFromWalk_interior_nonempty_edgeConnected
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+      ∃ (hΓ : closedNonbacktrackingWalk Γ)
+        (hh : horizontalDirectedWindingNumber Γ = 0)
+        (hv : verticalDirectedWindingNumber Γ = 0),
+        (oddRayInteriorCellsOfWalk Γ hΓ hh hv).Nonempty ∧
+          EdgeConnectedCellSet (oddRayInteriorCellsOfWalk Γ hΓ hh hv) := by
+  obtain ⟨k₀, hsimpleZero⟩ :=
+    oneSidedClosureProjectionFromWalk_simple_zero_winding γ hγ hcontact hwind
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  have hp := hsimpleZero t c ht hc
+  dsimp only at hp ⊢
+  exact ⟨hp.2.1, hp.2.2.2, hp.2.2.1,
+    interiorCellSetOfWalk_nonempty_edgeConnected _ hp.2.1 hp.2.2.2 hp.2.2.1 hp.1⟩
+
 end Ising2DLambda.KacWard
