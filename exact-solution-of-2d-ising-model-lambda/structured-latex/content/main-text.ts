@@ -69980,7 +69980,7 @@ b,&s=p,\\
 \end{cases}
 &&\bigl(\because\ \mathbb Z^2\text{ の分配則と加法逆元の相殺}\bigr)\\
 &=\begin{cases}a,&s<p,\\b,&s\ge p\end{cases}
-&&\bigl(\because\ \text{整数係数の差は }1\bigr).
+&&\bigl(\because\ \text{整数係数の差は }1\bigr)
 \end{aligned}`),
                       paragraph([
                         "符号反転した点列の歩を ",
@@ -69991,7 +69991,7 @@ b,&s=p,\\
 v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
 &&\bigl(\because\ \mathbb Z^2\text{ の減法と加法逆元}\bigr)\\
 &=\begin{cases}-a,&s<p,\\-b,&s\ge p\end{cases}
-&&\bigl(\because\ \text{直前の隣接差を代入}\bigr).
+&&\bigl(\because\ \text{直前の隣接差を代入}\bigr)
 \end{aligned}`),
                       paragraph([
                         "各 ", math(String.raw`v_s`), " は単位歩である（",
@@ -70004,7 +70004,7 @@ v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
 &&\bigl(\because\ v_s\text{ の隣接差表示}\bigr)\\
 &=-\bigl(\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)\bigr)
 &&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ の加法性}\bigr)\\
-&<0&&\bigl(\because\ \blkref{claim_winding_parallel_staircase_step_increase}\bigr).
+&<0&&\bigl(\because\ \blkref{claim_winding_parallel_staircase_step_increase}\bigr)
 \end{aligned}`),
                       paragraph([
                         "任意の ", math(String.raw`s,t\in\{0,\ldots,n-1\}`),
@@ -70023,7 +70023,7 @@ v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
 &&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ の両端点}\bigr)\\
 &=-B_{\gamma}&&\bigl(\because\ \mathbb Z^2\text{ の零元}\bigr)\\
 &=(-Lw_{\mathrm v},-Lw_{\mathrm h})
-&&\bigl(\because\ \blkref{def_periodic_lift_closure_cycle}\bigr).
+&&\bigl(\because\ \blkref{def_periodic_lift_closure_cycle}\bigr)
 \end{aligned}`),
                       paragraph([
                         "両成分は ", math(String.raw`L`), " の倍数なので射影後は閉じる（",
@@ -70036,7 +70036,7 @@ v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
 t_{\circ}(R_-)&=\sum_{s=0}^{n-2}\tau(\vec r_{s+1},\vec r_{s+2})+\tau(\vec r_n,\vec r_1)
 &&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)\\
 &=\sum_{s=0}^{n-2}\vartheta(v_s,v_{s+1})+\vartheta(v_{n-1},v_0)
-&&\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ の回転表の照合}\bigr).
+&&\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ の回転表の照合}\bigr)
 \end{aligned}`),
                       paragraph([
                         "長さ一の内部和は空和とする。", math(String.raw`p=0`), " または ",
@@ -70047,7 +70047,7 @@ t_{\circ}(R_-)&=\sum_{s=0}^{n-2}\tau(\vec r_{s+1},\vec r_{s+2})+\tau(\vec r_n,\v
 t_{\circ}(R_-)&=\sum_{s=0}^{n-2}\vartheta(d,d)+\vartheta(d,d)
 &&\bigl(\because\ v_s=d\text{ を代入}\bigr)\\
 &=\sum_{s=0}^{n-2}0+0&&\bigl(\because\ \vartheta(d,d)=0\bigr)\\
-&=0&&\bigl(\because\ \text{零の有限和}\bigr).
+&=0&&\bigl(\because\ \text{零の有限和}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`p,q\ge1`), " なら内部で方向が変わる添字は ",
@@ -70060,7 +70060,7 @@ t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
 &&\bigl(\because\ v_{n-1}=-b,\ v_0=-a\bigr)\\
 &=\vartheta(-a,-b)-\vartheta(-a,-b)
 &&\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ の接合相殺}\bigr)\\
-&=0&&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr).
+&=0&&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr)
 \end{aligned}`),
                       paragraph(["二区間の長さの全場合を尽くした。有限列と整数の演算だけで閉じる。"]),
                     ],

@@ -21,6 +21,43 @@ theorem projectedUnitStep_displacement (L : ℕ) [NeZero L]
   rcases hu with rfl | rfl | rfl | rfl <;>
     norm_num [unitStepDirection, directionUnitVector] <;> decide
 
+/-- 実際の閉歩道から作った一側閉包の各歩は単位格子歩である。 -/
+theorem oneSidedClosureFromWalk_unit_steps {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0))
+    (k₀ : ℤ) (t c : ℕ) (ht : 0 < t) (hc : 0 < c) :
+    let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+      (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+    let N := oneSidedClosureLength (m + 1) L
+      (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+    ∀ j < N, W (j + 1) - W j = (0, 1) ∨
+      W (j + 1) - W j = (1, 0) ∨
+      W (j + 1) - W j = (0, -1) ∨
+      W (j + 1) - W j = (-1, 0) := by
+  have hstep (j : ℕ) (hj : j < m + 1) :
+      planeLiftIntegerBase γ ((j : ℤ) + 1) =
+        planeLiftIntegerBase γ j +
+          orientedEdgeLatticeStep (γ ⟨(j : ZMod (m + 1)).val,
+            ZMod.val_lt (j : ZMod (m + 1))⟩) := by
+    simpa [ZMod.val_natCast, Nat.mod_eq_of_lt hj] using
+      planeLiftIntegerBase_step γ j hj
+  have hsum : 0 < (horizontalDirectedWindingNumber γ).natAbs +
+      (verticalDirectedWindingNumber γ).natAbs := by
+    by_contra h
+    have hh : horizontalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    have hv : verticalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    exact hwind (Prod.ext hh hv)
+  exact oneSidedClosurePoint_unit_steps (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+    (fun j => γ ⟨j.val, ZMod.val_lt j⟩) hstep
+    (planeLiftIntegerBase_endpoint γ hγ)
+    (by rw [← Nat.mul_add]; exact Nat.mul_pos (NeZero.pos L) hsum)
+    (Nat.mul_pos ht hsum) hc
+
 /-- 実際の一側閉包の射影辺列を持ち上げ直した点は、閉包点列の一定平行移動である。 -/
 theorem oneSidedClosureProjectedLiftFromWalk_translation {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
