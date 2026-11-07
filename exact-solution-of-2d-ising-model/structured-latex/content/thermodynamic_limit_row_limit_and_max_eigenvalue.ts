@@ -3752,7 +3752,7 @@ Z(K_1,K_2)
 \Longrightarrow\ &0 \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c \leq \frac{\log 2}{N_{\mathrm{row}}}
 &&\left(\because\ \text{各辺から }\tfrac{1}{M_{\mathrm{col}}}\log c\text{ を引く。引いても不等号は保たれる}\right)\\
 \Longrightarrow\ &\left|\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c\right| \leq \frac{\log 2}{N_{\mathrm{row}}}
-&&\left(\because\ \text{非負の実数の絶対値はそれ自身}\right).
+&&\left(\because\ \blkref{def_real_absolute_value}\text{ の }q\geq 0\text{ の場合を、前の行の }0\leq\tfrac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z-\tfrac{1}{M_{\mathrm{col}}}\log c\text{ に}\right).
 \end{aligned}`,
       ),
       paragraph([
@@ -3775,12 +3775,50 @@ Z(K_1,K_2)
       paragraph([
         math(String.raw`\varepsilon \in \mathbb{R}_{>0}`),
         " を取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{\log 2}{\varepsilon}
+&> 0
+&&\left(\because\ \text{準備の }\log 2 > 0\text{ と }\varepsilon > 0\text{。正の数を正の数で割る}\right).
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`\mathbb{R}`),
-        " のアルキメデス性より ",
-        math(String.raw`N_0\,\varepsilon > \log 2`),
+        " のアルキメデス性（任意の ",
+        math(String.raw`t \in \mathbb{R}`),
+        " について ",
+        math(String.raw`t < m`),
         " となる ",
-        math(String.raw`N_0 \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`m \in \mathbb{Z}`),
+        " がある）を ",
+        math(String.raw`t = \frac{\log 2}{\varepsilon}`),
+        " に使い、",
+        math(String.raw`\frac{\log 2}{\varepsilon} < N_0`),
+        " となる ",
+        math(String.raw`N_0 \in \mathbb{Z}`),
         " を取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&0 < \frac{\log 2}{\varepsilon} < N_0
+&&\left(\because\ \text{上の行と }N_0\text{ の取り方}\right)\\
+\Longrightarrow\ &0 < N_0
+&&\left(\because\ \text{不等号の推移律}\right)\\
+\Longrightarrow\ &N_0 \geq 1
+&&\left(\because\ N_0 \in \mathbb{Z}\text{。}0\text{ と }1\text{ の間に整数は無い}\right),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\log 2
+&= \frac{\log 2}{\varepsilon}\,\varepsilon
+&&\left(\because\ \mathbb{R}\text{ の四則。}\varepsilon \neq 0\text{ を約す}\right)\\
+&< N_0\,\varepsilon
+&&\left(\because\ \frac{\log 2}{\varepsilon} < N_0\text{ の両辺に }\varepsilon > 0\text{ を掛ける}\right).
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq N_0}`),
         " について",
       ]),
@@ -3822,6 +3860,7 @@ Z(K_1,K_2)
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
         "2026-11-05: SageMath の検算（sagemath/check/limit_of_log_Z_in_N_row/）に合わせて直した。各行の根拠をラベル参照にし（log(c^N) = N log c と log(2^M) = M log 2 は新しい主張 real_log_of_power）、割り算と約分の行、差を取る行と絶対値の行を分けた。極限の段を log 2 > 0 の準備と ε と N_0 の鎖で書いて def_matrix_norm・scalar_limit_is_unique を引き、冪を新しい定義 def_power_of_real_number で引き、「この段階では実数解析へ移行していない」の誤った断り書きを、実対数と極限による ℝ 脱出の宣言に替えた。主張に K_1, K_2 と N_row の帰属を書いた。計算の誤りは無かった。",
         "2026-11-07: 証明の冒頭で、c^{N_row}・2^{M_col} が正であることの根拠を def_power_of_real_number（ℝ の元であることしか与えない）から real_log_of_power の a^n ∈ ℝ_{>0} に替え、2^{M_col}c^{N_row} が正であることに real_log_of_product の ab ∈ ℝ_{>0} を引いた（Lean の具体版 abs_log_Z_sub_log_c_le の冒頭と 1 対 1 にした）。値・手順は不変。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 含意の鎖の最後の行の根拠「非負の実数の絶対値はそれ自身」を def_real_absolute_value の q ≥ 0 の場合への参照にした。「ℝ のアルキメデス性より N_0ε > log 2 となる N_0 ∈ ℤ_{≥1} を取る」を、アルキメデス性の述べ方（任意の t ∈ ℝ に t < m となる m ∈ ℤ がある）と適用先 t = log 2/ε の文と、log 2/ε > 0・0 < N_0・N_0 ≥ 1・N_0ε > log 2 の表示式の鎖にした（アルキメデス性は ℝ の性質で、本文に引ける主張は無い）。正の数で割る・共通の因子を約す・引く・u ≤ v の場合分けの行は、高校教科書レベルの四則と順序の操作なので名前のまま残した。値と手順は変えていない。",
       ],
     },
   },

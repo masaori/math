@@ -20,15 +20,19 @@
 | 7 行目: 各辺を `M_col N_row ∈ ℝ_{>0}` で割る | `s7` |
 | 8 行目: ℝ の四則（共通の因子 `N_row`、`M_col` を約す） | `e1`〜`e3` と `s8` |
 | 9 行目: 各辺から `(1/M) log c` を引く | `s9` |
-| 10 行目: 非負の実数の絶対値はそれ自身 | `abs_of_nonneg` |
+| 10 行目: `def_real_absolute_value` の `q ≥ 0` の場合を 9 行目の `0 ≤ …` に | `abs_of_nonneg s9.1` |
 | 準備: `log 2 > log 1 = log(exp 0) = 0` | `log_two_pos` の 3 段の `calc` |
-| `ε > 0` を取り、アルキメデス性で `N_0ε > log 2` の `N_0 ≥ 1` を取る | `exists_nat_gt`（`log 2/ε` に）と `hN0`・`hN0eps` |
+| `ε > 0` を取り、`log 2/ε > 0`（正の数を正の数で割る） | `intro ε hε`、`ht` |
+| アルキメデス性を `t = log 2/ε` に使い、`log 2/ε < N_0` の `N_0` を取る | `exists_nat_gt`（人手の `N_0 ∈ ℤ` を Lean は `ℕ` の `n` で取る） |
+| `0 < log 2/ε < N_0 ⟹ 0 < N_0`（推移律） | `hN0pos` |
+| `⟹ N_0 ≥ 1`（`0` と `1` の間に整数は無い） | `hN0` |
+| `log 2 = (log 2/ε)ε < N_0ε`（`ε ≠ 0` を約す、両辺に `ε > 0` を掛ける） | `hN0eps` の 2 段の `calc` |
 | `|a_N − a| ≤ log 2/N ≤ log 2/N_0 < ε`（`N ≥ N_0`） | 3 段の `calc` |
 | `def_matrix_norm` の `K = ℝ` の列の収束の意味で `a_N → a`。極限は `scalar_limit_is_unique` で一つに定まる | `Metric.tendsto_atTop` と `Real.dist_eq`。結論の `Tendsto … (𝓝 a)` が値 `a` を名指すので、一意性の段は Lean では要らない |
 
 人手の `log` は `def_real_logarithm_positive` で、Lean は mathlib の `Real.log` で表す（具体版は無い）。
 準備の `scalar_exp_zero`・`def_real_logarithm_positive` の `log(exp x) = x` は mathlib の `Real.exp_zero`・`Real.log_exp`、
-ℝ のアルキメデス性は mathlib の `exists_nat_gt` で表す。実数列の収束（`def_matrix_norm` の 1 行 1 列の行列のノルムは絶対値）は
+人手の `def_real_absolute_value` は mathlib の `|·|` で表し、`q ≥ 0` の場合を `abs_of_nonneg` で引く。ℝ のアルキメデス性は mathlib の `exists_nat_gt` で表す。実数列の収束（`def_matrix_norm` の 1 行 1 列の行列のノルムは絶対値）は
 mathlib の距離 `dist x y = |x − y|` による `Metric.tendsto_atTop` で表す。
 人手の主張のとおり、ここで実対数と極限による ℝ 脱出をする。
 
@@ -113,7 +117,7 @@ theorem abs_log_Z_sub_log_c_le
   have s9 : 0 ≤ 1 / ((M : ℝ) * N) * Real.log (Z N) - 1 / (M : ℝ) * Real.log c
       ∧ 1 / ((M : ℝ) * N) * Real.log (Z N) - 1 / (M : ℝ) * Real.log c ≤ Real.log 2 / N :=
     ⟨sub_nonneg.2 s8.1, sub_le_iff_le_add'.2 s8.2⟩
-  -- 10 行目: 非負の実数の絶対値はそれ自身
+  -- 10 行目: `def_real_absolute_value` の `q ≥ 0` の場合を 9 行目の `0 ≤ …` に
   rw [abs_of_nonneg s9.1]
   exact s9.2
 
@@ -135,11 +139,15 @@ theorem limit_of_log_Z_in_N_row
       (𝓝 (1 / (M : ℝ) * Real.log c)) := by
   rw [Metric.tendsto_atTop]                                       -- `def_matrix_norm` の `K = ℝ` の列の収束
   intro ε hε                                                      -- `ε ∈ ℝ_{>0}` を取る
-  obtain ⟨n, hn⟩ := exists_nat_gt (Real.log 2 / ε)                -- ℝ のアルキメデス性
-  have hN0pos : (0 : ℝ) < n := lt_trans (div_pos log_two_pos hε) hn
+  have ht : 0 < Real.log 2 / ε := div_pos log_two_pos hε         -- `log 2/ε > 0`（準備の `log 2 > 0` と `ε > 0`。正の数を正の数で割る）
+  obtain ⟨n, hn⟩ := exists_nat_gt (Real.log 2 / ε)                -- ℝ のアルキメデス性を `t = log 2/ε` に: `log 2/ε < N_0`
+  have hN0pos : (0 : ℝ) < n := lt_trans ht hn                     -- `0 < log 2/ε < N_0 ⟹ 0 < N_0`（推移律）
   have hN0 : 1 ≤ n := Nat.one_le_iff_ne_zero.2 (by rintro rfl; simp at hN0pos)
-                                                                  -- `N_0 ∈ ℤ_{≥1}`
-  have hN0eps : Real.log 2 < n * ε := (div_lt_iff₀ hε).1 hn       -- `N_0ε > log 2`
+                                                                  -- `N_0 ≥ 1`（`0` と `1` の間に整数は無い）
+  have hN0eps : Real.log 2 < n * ε :=
+    calc Real.log 2 = Real.log 2 / ε * ε := (div_mul_cancel₀ _ hε.ne').symm
+                                                                  -- ℝ の四則。`ε ≠ 0` を約す
+      _ < n * ε := mul_lt_mul_of_pos_right hn hε                 -- `log 2/ε < N_0` の両辺に `ε > 0` を掛ける
   refine ⟨n, fun N hN => ?_⟩                                      -- `N_row ∈ ℤ_{≥N_0}` について
   have hNR : (n : ℝ) ≤ N := by exact_mod_cast hN
   rw [Real.dist_eq]

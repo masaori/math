@@ -1,5 +1,5 @@
 # 対象ラベル: limit_of_log_Z_in_N_row
-# 証明の含意の鎖（十行）と、極限の段（log 2 > 0 の準備の三行と、ε と N_0 の三行の鎖）を、本文の Z と c で確かめる。
+# 証明の含意の鎖（十行）と、極限の段（log 2 > 0 の準備の三行と、log 2/ε > 0 の一行と N_0 ≥ 1 の三行と log 2 < N_0ε の二行と、N_row ≥ N_0 の三行の鎖）を、本文の Z と c で確かめる。
 # 帰属:
 # - K_1 := 2 log y、K_2 := log x（x, y ∈ QQ_{>1} なので K_1, K_2 > 0）と置くと、def_partition_function_2d_ising の Z は
 #   Σ_s y^{2h(s)} x^{v(s)}（h は同じ行の隣り合う組の積の和、v は隣り合う行の同じ列の組の積の和）で QQ の元になる。
@@ -79,7 +79,7 @@ def check_chain(M, N, Z, c):
     for a, b in eqs:
         assert surely_equal(a, b)
         k += 1
-    # 十行目: 非負の実数の絶対値はそれ自身
+    # 十行目: def_real_absolute_value の q >= 0 の場合（九行目の 0 <= 差 に）
     d = lZ / (M * N) - lc / M
     assert d.lower() >= 0 and surely_equal(abs(d), d)
     k += 1
@@ -102,7 +102,14 @@ def check_limit_step(eps, N0, Ns, a_of, a):
     assert exp_ball_of_ball(RBF512(0)).contains_exact(1)                    # log 1 = log(exp 0)（scalar_exp_zero）
     assert surely_equal(log_ball(exp_ball_of_ball(RBF512(0))), RBF512(0))  # log(exp 0) = 0
     assert l2.lower() > 0
-    assert N0 >= 1 and surely_lt(l2, N0 * eps)
+    t = l2 / RBF512(eps)
+    assert t.lower() > 0                                                    # log 2/ε > 0
+    assert surely_lt(t, RBF512(N0))                                         # N_0 の取り方: log 2/ε < N_0
+    assert N0 > 0                                                           # 0 < log 2/ε < N_0 ⟹ 0 < N_0（推移律）
+    assert N0 in ZZ and N0 >= 1                                             # ⟹ N_0 ≥ 1
+    assert surely_equal(t * RBF512(eps), l2)                                 # log 2 = (log 2/ε)ε
+    assert surely_lt(t * RBF512(eps), RBF512(N0) * RBF512(eps))             # (log 2/ε)ε < N_0ε
+    assert surely_lt(l2, N0 * eps)
     k = 1
     for N in Ns:
         assert N >= N0
