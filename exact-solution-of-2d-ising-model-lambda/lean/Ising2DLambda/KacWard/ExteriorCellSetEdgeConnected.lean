@@ -20,6 +20,45 @@ def outsideBoundingRectangle
     (rMin rMax cMin cMax : ℤ) : Set (ℤ × ℤ) :=
   {p | p.1 < rMin ∨ rMax ≤ p.1 ∨ p.2 < cMin ∨ cMax ≤ p.2}
 
+/-- 長方形の上側または下側の固定行では、任意の二セルを列方向の有限路で結べる。 -/
+theorem outsideBoundingRectangle_horizontalPath
+    (rMin rMax cMin cMax r c d : ℤ)
+    (hr : r < rMin ∨ rMax ≤ r) :
+    Relation.ReflTransGen
+      (fun a b => a ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+        b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧ CellEdgeAdjacent a b)
+      (r, c) (r, d) := by
+  let step := fun a b => a ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+    b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧ CellEdgeAdjacent a b
+  have hmem (z : ℤ) : (r, z) ∈ outsideBoundingRectangle rMin rMax cMin cMax := by
+    change r < rMin ∨ rMax ≤ r ∨ z < cMin ∨ cMax ≤ z
+    rcases hr with h | h
+    · exact Or.inl h
+    · exact Or.inr (Or.inl h)
+  have hforward (a b : ℤ) (hab : a ≤ b) :
+      Relation.ReflTransGen step (r, a) (r, b) := by
+    induction b, hab using Int.leInduction with
+    | base => exact Relation.ReflTransGen.refl
+    | succ b _ ih =>
+      exact ih.tail ⟨hmem b, hmem (b + 1),
+        Or.inl ⟨rfl, Or.inr (by omega)⟩⟩
+  rcases le_total c d with hcd | hdc
+  · exact hforward c d hcd
+  · have hreverse : Relation.ReflTransGen (Function.swap step) (r, c) (r, d) :=
+      (Relation.ReflTransGen.swap (r := step) (r, c) (r, d))
+        (hforward d c hdc)
+    apply Relation.ReflTransGen.mono (r := Function.swap step) ?_ _ _ hreverse
+    intro a b hab
+    rcases hab.2.2 with h | h
+    · rcases h with ⟨hrEq, hc⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inl ⟨hrEq.symm, hc.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+    · rcases h with ⟨hcEq, hrStep⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inr ⟨hcEq.symm, hrStep.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+
 /-- 最大列を持つ持ち上げ点の右側のセルは、外側帯と長方形の外側の双方に属する。 -/
 theorem outsideBoundingRectangle_inter_walkSideExteriorBand
     (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)

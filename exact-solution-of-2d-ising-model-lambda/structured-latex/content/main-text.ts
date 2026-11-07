@@ -9329,7 +9329,7 @@ R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
 \qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ の奇数点の条件}\bigr)`),
               paragraph(["零回と一回の反復を計算する。"]),
               displayMath(String.raw`\sigma^{[0]}(m)=m
-\qquad\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),`),
+\qquad\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)`),
               displayMath(String.raw`\begin{aligned}
 \sigma^{[1]}(m)
  &=\sigma^{[0]}(\sigma(m))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
