@@ -104,7 +104,9 @@
 
 人手は `N_row ∈ ℤ_{≥1}` を仮定するので `1 ≤ Nrow` を仮定する。`K_2 > 0` は `V2_exponential_representation`
 の仮定と、`positive_real_multiple_preserves_positive_definite` に渡す `(2s_2)^{M_col/2} > 0` が使う。
-`K_1` の正値性は使わないので仮定に置かない。
+`K_1` の正値性は証明で使わない。人手の `Z(K_1,K_2)` を主張に持つ `partition_function_eq_trace_physicalSymTransferC`・
+`partition_function_eq_sum_diag_W_real_pow`・`partition_function_sandwich_physical` だけは、主張を人手どおりにするため
+`K_1 > 0` も仮定に取り、`partition_function_via_transfer_matrix` へ渡す。ほかの定理には置かない。
 
 同じ具体的な行列についての主張を具体化しただけなので、必要十分版は置かない
 （抽象的な内容は、引いた主張それぞれの必要十分版（`NecSuf/CongruencePreservesPositiveDefinite.lean`・
@@ -167,11 +169,12 @@ theorem physicalV1halfR_mul_self_map (K1 : ℝ) :
 `N_row ∈ ℤ_{≥1}` について `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row}) = tr(W^{N_row})`。
 `(·)_ℂ` は人手の `inclusion_rr_to_cc` の略記 `r_ℂ` で、Lean の `((· : ℝ) : ℂ)` に当たる。
 本体は具体版 `trace_mul_pow_eq_trace_symmetrized_pow` を `B := V_1^{1/2}`（準備 1 の `BB = V_1` は `physicalV1halfC_mul_self`、`W = (BV_2)B` は `physicalSymTransferC` の定義）で引く。 -/
-theorem partition_function_eq_trace_physicalSymTransferC (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ Nrow) :
+theorem partition_function_eq_trace_physicalSymTransferC {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2)
+    {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
   calc ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
       = ((V1 M K1 * V2 M K2) ^ Nrow).trace :=
-        partition_function_via_transfer_matrix K1 K2 hN          -- `partition_function_via_transfer_matrix`
+        partition_function_via_transfer_matrix hK1 hK2 hN        -- `partition_function_via_transfer_matrix`
     _ = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
         trace_mul_pow_eq_trace_symmetrized_pow (physicalV1halfC_mul_self K1) rfl Nrow hN
                                                                 -- 本体を `n := N_row` に適用
@@ -682,7 +685,7 @@ theorem trace_of_W_power_via_W_real (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (q : �
 /-- **人手 `partition_function_sandwich` の準備**: `Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`（`W_ℝ := ϱ(W)`、`def_W_real`）。
 人手の 2 行の鎖 `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`Z_equals_trace_of_W` の「とくに」、`partition_function_eq_trace_physicalSymTransferC`）
 `= T_ℂ`（`trace_of_W_power_via_W_real`（`q → N_row`））と、`inclusion_rr_to_cc_is_injective`（`a → Z(K_1,K_2)`, `b → T`）に 1 対 1 で対応する。 -/
-theorem partition_function_eq_sum_diag_W_real_pow (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
+theorem partition_function_eq_sum_diag_W_real_pow {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     partitionFunction Nrow M K1 K2
       = ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
@@ -690,7 +693,7 @@ theorem partition_function_eq_sum_diag_W_real_pow (K1 : ℝ) {K2 : ℝ} (hK2 : 0
   apply inclusion_rr_to_cc_is_injective                                       -- `inclusion_rr_to_cc_is_injective`（`a → Z(K_1,K_2)`, `b → T`）
   calc ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
       = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
-        partition_function_eq_trace_physicalSymTransferC K1 K2 hN             -- `Z_equals_trace_of_W` の「とくに」
+        partition_function_eq_trace_physicalSymTransferC hK1 hK2 hN           -- `Z_equals_trace_of_W` の「とくに」
     _ = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
           (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow) k k : ℝ) : ℂ) :=
         trace_of_W_power_via_W_real K1 hK2 Nrow                               -- `trace_of_W_power_via_W_real`（`q → N_row`）
@@ -716,7 +719,7 @@ theorem trace_power_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {n : 
 人手の 2 行の鎖 2 本（`Z(K_1,K_2) = T ≥ c^{N_row}`、`Z(K_1,K_2) = T ≤ 2^{M_col}c^{N_row}`）と 1 対 1 の `calc`。準備の `Z(K_1,K_2) = T` は
 `partition_function_eq_sum_diag_W_real_pow`、不等式は `trace_power_sandwich_physical`（`n → N_row`）。主張の `c(M_col)` を実成分で組んだ
 `physicalSymTransferR` の上限で述べるので、冒頭の 1 行で `W_ℝ = ϱ(W)` へ書き換える（`physicalSymTransferR_eq_realMatrixOfRealEntries`。人手の `W_ℝ` は `def_W_real` の `ϱ(W)` 一つなので、この行に人手の行は無い）。 -/
-theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
+theorem partition_function_sandwich_physical {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow ≤ partitionFunction Nrow M K1 K2
       ∧ partitionFunction Nrow M K1 K2
@@ -725,7 +728,7 @@ theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
   set WR := realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
     (physicalSymTransferC_hasRealEntries K1 hK2) with hWR
   have hZT : partitionFunction Nrow M K1 K2 = ∑ k, (WR ^ Nrow) k k :=             -- 準備の `Z(K_1,K_2) = T`
-    partition_function_eq_sum_diag_W_real_pow K1 hK2 hN
+    partition_function_eq_sum_diag_W_real_pow hK1 hK2 hN
   have h := trace_power_sandwich_physical (M := M) K1 hK2 hN
   refine ⟨?_, ?_⟩
   · exact calc partitionFunction Nrow M K1 K2

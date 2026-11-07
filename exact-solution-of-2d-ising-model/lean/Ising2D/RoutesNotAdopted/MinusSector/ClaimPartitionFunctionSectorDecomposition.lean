@@ -107,9 +107,10 @@ theorem trace_epsProj_sym_pow_eq_plain {K1 K2 : ℝ} {η : ℂ}
 `P^{(+)}` は `epsProj M 1`、`P^{(-)}` は `epsProj M (-1)`。
 Lean の `V1pm M K1 η` は原文の `V_1^{(∓)}`（`η` が原文の `∓1`）なので、
 セクター `P^{(±)}` に対応する `V^{(±)}` は `Vsym M K1 (∓1) K2`、すなわち `Vsym M K1 (-η) K2` である。
-人手の `N_row ≥ 1`, `K_2 > 0`（`def_transfer_matrix` の設定）と `M_col ≥ 2`
+人手の `N_row ≥ 1`, `K_2 > 0`（`def_transfer_matrix` の設定）、`K_1 > 0`（`Z(K_1,K_2)` の定義域。
+`partition_function_via_transfer_matrix` へ渡す）と `M_col ≥ 2`
 （`sector_replacement_of_V1` が使う `V_1` の固有空間への制限の設定）を仮定に置く。 -/
-theorem partition_function_sector_decomposition {K1 K2 : ℝ} (hM : 2 ≤ M) (hK2 : 0 < K2)
+theorem partition_function_sector_decomposition {K1 K2 : ℝ} (hM : 2 ≤ M) (hK1 : 0 < K1) (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
       = (epsProj M 1 * (Vsym M K1 (-1) K2) ^ Nrow).trace
@@ -121,7 +122,7 @@ theorem partition_function_sector_decomposition {K1 K2 : ℝ} (hM : 2 ≤ M) (hK
   have hminus := trace_epsProj_sym_pow_eq_plain (M := M) (K1 := K1) (K2 := K2)
     (η := (-1 : ℂ)) hM hK2 h2 Nrow
   simp only [neg_neg] at hminus
-  rw [hplus, hminus, partition_function_via_transfer_matrix K1 K2 hN]
+  rw [hplus, hminus, partition_function_via_transfer_matrix hK1 hK2 hN]
   exact trace_eq_sector_sum (M := M) 1 ((V1 M K1 * V2 M K2) ^ Nrow)
 
 end Ising2D

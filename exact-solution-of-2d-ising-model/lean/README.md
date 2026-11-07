@@ -629,7 +629,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `row_configuration_numbering_bijective` | `Ising2D.row_configuration_numbering_bijective`（途中は `geom_sum_two` / `rowConfigOrd_mem_Icc` / `rowConfigOrd_sub_pos_of_first_diff` / `rowConfigOrd_injective`） | `PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean` |
 | `def_transfer_matrix` | **`Ising2D.V1` / `Ising2D.V2`**（定義式は `V1_apply_configBasisIso` / `V2_apply_configBasisIso`） | `PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` |
 | `def_lattice_size` / `def_partition_function_2d_ising` | `Ising2D.partitionFunction` | `PartitionFunction/TransferMatrixRepresentation/DefinitionPartitionFunction.lean` |
-| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
+| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`K_1, K_2 > 0`、`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
 | `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
 | `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
 | `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
@@ -641,7 +641,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `epsilon_square_identity` | `Ising2D.epsilon_mul_self`（`εε = I`） | `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`（必要十分版は `NecSuf/EpsilonSquare.lean` の `Ising2D.NecSuf.prefix_terminal_mul_self`、そこからの導出は `PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonSquareFromNecSuf.lean` の `Ising2D.epsilon_mul_self_of_necSuf`） |
 | `global_spin_flip_jordan_wigner_representation` | `Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString`（第二の有限帰納法）/ `Ising2D.epsilon_eq_i_pow_smul_zyPrefixProduct`（`ε = (√-1)^M Z_1Y_1⋯Z_MY_M`） | `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`（第二の有限帰納法の必要十分版は `NecSuf/ScalarPrefixProduct.lean` の `Ising2D.NecSuf.prefix_eq_pow_smul_of_local_smul`、そこからの導出は `PartitionFunction/ProjectionAndJordanWigner/ClaimGlobalSpinFlipJordanWignerRepresentationFromNecSuf.lean` の `Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString_of_necSuf`） |
 | `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean` |
-| `partition_function_via_pauli_transfer_matrices` | `Ising2D.partition_function_via_pauli_transfer_matrices`（`((Z : ℝ) : ℂ) = tr((V1PauliForm · V2PauliForm)^{N_row})`、人手の `(Z(K_1,K_2))_ℂ`、`K_2 > 0`、`N_row ≥ 1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaPauliTransferMatrices.lean` |
+| `partition_function_via_pauli_transfer_matrices` | `Ising2D.partition_function_via_pauli_transfer_matrices`（`((Z : ℝ) : ℂ) = tr((V1PauliForm · V2PauliForm)^{N_row})`、人手の `(Z(K_1,K_2))_ℂ`、`K_1, K_2 > 0`、`N_row ≥ 1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaPauliTransferMatrices.lean` |
 | `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean` |
 | `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
 | `V_plus_exponential_form` | `Ising2D.V_plus_exponential_form`（`VPlusOfTransfer` の指数表示） | `PartitionFunction/ProjectionAndJordanWigner/ClaimVPlusExponentialForm.lean` |
@@ -675,9 +675,10 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
   極限の一意性の 3 段で書いた。人手の「成分ごとの極限」は、有限次元の行列空間の位相での極限として扱っている。
 * `partition_function_via_transfer_matrix` の中間目標「行列の冪の成分」(*) と「トレースの展開」は、
   必要十分版 `NecSuf.trace_pow_succ`（任意の可換半環上の行列）の系として得ている。
-* 人手が仮定する `K_1, K_2 > 0` のうち、`V1`, `V2`, `partitionFunction` の定義、
-  `partition_function_via_transfer_matrix`、`first_transfer_matrix_pauli_form` の証明は正値性を使わないので、
-  Lean では仮定に置いていない。`K_2 > 0` は `K_2^*` の定義域（`tanh K_2 > 0`）と前係数の正値性のために、
+* 人手が仮定する `K_1, K_2 > 0` のうち、`V1`, `V2`, `partitionFunction` の定義と
+  `first_transfer_matrix_pauli_form` の証明は正値性を使わないので、Lean では仮定に置いていない。
+  `partition_function_via_transfer_matrix` の証明も正値性を使わないが、主張を人手どおりにするため
+  `K_1, K_2 > 0` を仮定に取る（`_hK1`・`_hK2`）。`K_2 > 0` は `K_2^*` の定義域（`tanh K_2 > 0`）と前係数の正値性のために、
   `second_transfer_matrix_pauli_form` 以降で仮定する。
 
 ## 現在形式化済みの命題

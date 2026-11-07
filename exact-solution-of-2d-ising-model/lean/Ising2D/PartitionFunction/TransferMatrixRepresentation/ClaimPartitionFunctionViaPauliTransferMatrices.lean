@@ -19,7 +19,8 @@
 3. `V_2` をパウリ行列表示へ: `second_transfer_matrix_pauli_form`
 
 `V1PauliForm M K1` と `V2PauliForm M (sinh 2K_2) K_2^*` は、それぞれ右辺の式に付けた名前である。
-人手の仮定 `K_1 > 0` は、この 3 行のどれも使わないので置かない。
+人手の仮定 `K_1 > 0` は、この 3 行のどれも使わないが、主張を人手どおりにするため `hK1` で受け、1 行目の
+`partition_function_via_transfer_matrix`（同じく `K_1, K_2 > 0` を仮定に取る）へ渡す。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
@@ -30,11 +31,11 @@ namespace Ising2D
 variable {M : ℕ}
 
 /-- **人手 `partition_function_via_pauli_transfer_matrices`**。 -/
-theorem partition_function_via_pauli_transfer_matrices (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
+theorem partition_function_via_pauli_transfer_matrices {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) =
       ((V1PauliForm M (K1 : ℂ) * V2PauliForm M (Real.sinh (2 * K2)) ((Kstar K2 : ℝ) : ℂ)) ^ Nrow).trace := by
-  rw [partition_function_via_transfer_matrix K1 K2 hN,   -- 人手の 1 行目
+  rw [partition_function_via_transfer_matrix hK1 hK2 hN, -- 人手の 1 行目
     first_transfer_matrix_pauli_form K1,                -- 人手の 2 行目
     second_transfer_matrix_pauli_form hK2]              -- 人手の 3 行目
 

@@ -119,8 +119,8 @@ theorem onsager_limit_in_N_row_physical (P : IsingParam) {m : ℕ} (hm : 2 ≤ m
       atTop (𝓝 (1 / (m : ℝ) * Real.log (rayleighSup (physicalSymTransferR m P.K1 P.K2)))) :=
   limit_of_log_Z_in_N_row hm
     (rayleighSup_pos (physicalSymTransferR_posDef P.K1 P.K2_pos))
-    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).1)
-    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).2)
+    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1_pos P.K2_pos hN).1)
+    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1_pos P.K2_pos hN).2)
 
 /-! ## Onsager の厳密解 -/
 

@@ -29,7 +29,9 @@
 
 人手は `N_row ∈ ℤ_{≥1}` を仮定しているので、Lean でも `1 ≤ Nrow` を仮定する
 （`N_row = 0` では `tr(I) = 2^{M_col}` と `Z = 1`（空積の和）が一致しないので、この仮定は必要）。
-`K_1, K_2 > 0` は証明で使わないので仮定に置かない。
+人手は `K_1, K_2 ∈ ℝ_{>0}` を置く（`def_partition_function_2d_ising` の `Z` の定義域）。Lean の `partitionFunction` は
+`ℝ × ℝ` の上で定義され、証明は `K_1, K_2 > 0` を使わないが、主張を人手どおりにするため `_hK1`・`_hK2` で受ける
+（先例 `partition_function_sandwich_and_limit_in_N_row` の `_hK1`）。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionPartitionFunction
@@ -68,7 +70,8 @@ theorem rowsToLattice_apply {Nrow : ℕ} (w : Fin Nrow → Conf M) (p : Fin Nrow
 /-- **人手 `partition_function_via_transfer_matrix`: `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})`。**
 人手の `r_ℂ`（`inclusion_rr_to_cc`）は Lean の `((· : ℝ) : ℂ)`。人手の分配関数との一致の鎖の最後の行
 （包含を和の外へ出す `real_inclusion_preserves_finite_sum`）は、下の `Complex.ofReal_sum` の書き換えに当たる。 -/
-theorem partition_function_via_transfer_matrix (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ Nrow) :
+theorem partition_function_via_transfer_matrix {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 < K2)
+    {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) = ((V1 M K1 * V2 M K2) ^ Nrow).trace := by
   obtain ⟨n, rfl⟩ : ∃ n, Nrow = n + 1 := ⟨Nrow - 1, by omega⟩
   -- 行列の冪の成分とトレースの展開（閉じた道の重みの総和）
