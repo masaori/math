@@ -356,6 +356,160 @@ theorem four_incident_counts_le_one_of_distinct_positive
     ⟨hb, hc⟩ | ⟨hb, hd⟩ | ⟨hc, hd⟩
   all_goals omega
 
+/-- 閉じた単位歩の入辺と出辺は、非帰還なら接触四辺の異なる二項へ正に寄与する。 -/
+theorem walkSideInteriorBand_coordinate_incident_distinct_positive
+    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ) (hj : j < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hneighbors :
+      row (if j = 0 then n - 1 else j - 1) ≠ row (j + 1) ∨
+      col (if j = 0 then n - 1 else j - 1) ≠ col (j + 1)) :
+    let a := verticalEdgeTraversalCount n row col (row j - 1) (col j)
+    let b := verticalEdgeTraversalCount n row col (row j) (col j)
+    let c := horizontalEdgeTraversalCount n row col (row j) (col j - 1)
+    let d := horizontalEdgeTraversalCount n row col (row j) (col j)
+    (0 < a ∧ 0 < b) ∨ (0 < a ∧ 0 < c) ∨
+    (0 < a ∧ 0 < d) ∨ (0 < b ∧ 0 < c) ∨
+    (0 < b ∧ 0 < d) ∨ (0 < c ∧ 0 < d) := by
+  dsimp only
+  let p := if j = 0 then n - 1 else j - 1
+  change row p ≠ row (j + 1) ∨ col p ≠ col (j + 1) at hneighbors
+  have hp : p < n := by dsimp [p]; split_ifs <;> omega
+  have hendRow : row (p + 1) = row j := by
+    by_cases h : j = 0
+    · subst j
+      have hpn : p + 1 = n := by dsimp [p]; omega
+      rw [hpn]
+      exact hclosedRow
+    · have hpj : p + 1 = j := by dsimp [p]; simp [h]; omega
+      rw [hpj]
+  have hendCol : col (p + 1) = col j := by
+    by_cases h : j = 0
+    · subst j
+      have hpn : p + 1 = n := by dsimp [p]; omega
+      rw [hpn]
+      exact hclosedCol
+    · have hpj : p + 1 = j := by dsimp [p]; simp [h]; omega
+      rw [hpj]
+  have hcontribution (f : ℕ → ℕ) (k : ℕ) (hk : k < n) (hf : f k = 1) :
+      0 < ∑ i ∈ Finset.range n, f i := by
+    have hle := Finset.single_le_sum (fun i hi => Nat.zero_le (f i))
+      (Finset.mem_range.mpr hk)
+    omega
+  have hpositiveV (k : ℕ) (hk : k < n) (r c : ℤ)
+      (hr : crossesRowLevel row r k) (hc : col k = c) :
+      0 < verticalEdgeTraversalCount n row col r c := by
+    unfold verticalEdgeTraversalCount
+    apply hcontribution _ k hk
+    simp [hr, hc]
+  have hpositiveH (k : ℕ) (hk : k < n) (r c : ℤ)
+      (hc : crossesColLevel col c k) (hr : row k = r) :
+      0 < horizontalEdgeTraversalCount n row col r c := by
+    unfold horizontalEdgeTraversalCount
+    apply hcontribution _ k hk
+    simp [hc, hr]
+  have hprev :
+      (row p = row j - 1 ∧ col p = col j ∧
+        0 < verticalEdgeTraversalCount n row col (row j - 1) (col j)) ∨
+      (row p = row j + 1 ∧ col p = col j ∧
+        0 < verticalEdgeTraversalCount n row col (row j) (col j)) ∨
+      (row p = row j ∧ col p = col j - 1 ∧
+        0 < horizontalEdgeTraversalCount n row col (row j) (col j - 1)) ∨
+      (row p = row j ∧ col p = col j + 1 ∧
+        0 < horizontalEdgeTraversalCount n row col (row j) (col j)) := by
+    rcases hunit p hp with h | h | h | h
+    · left
+      have hr : row p = row j - 1 := by omega
+      refine ⟨hr, by omega, ?_⟩
+      exact hpositiveV p hp (row j - 1) (col j) (by simp [crossesRowLevel]; omega) (by omega)
+    · right; left
+      have hr : row p = row j + 1 := by omega
+      refine ⟨hr, by omega, ?_⟩
+      exact hpositiveV p hp (row j) (col j) (by simp [crossesRowLevel]; omega) (by omega)
+    · right; right; left
+      have hc : col p = col j - 1 := by omega
+      refine ⟨by omega, hc, ?_⟩
+      exact hpositiveH p hp (row j) (col j - 1) (by simp [crossesColLevel]; omega) (by omega)
+    · right; right; right
+      have hc : col p = col j + 1 := by omega
+      refine ⟨by omega, hc, ?_⟩
+      exact hpositiveH p hp (row j) (col j) (by simp [crossesColLevel]; omega) (by omega)
+  have hnext :
+      (row (j + 1) = row j + 1 ∧ col (j + 1) = col j ∧
+        0 < verticalEdgeTraversalCount n row col (row j) (col j)) ∨
+      (row (j + 1) = row j - 1 ∧ col (j + 1) = col j ∧
+        0 < verticalEdgeTraversalCount n row col (row j - 1) (col j)) ∨
+      (row (j + 1) = row j ∧ col (j + 1) = col j + 1 ∧
+        0 < horizontalEdgeTraversalCount n row col (row j) (col j)) ∨
+      (row (j + 1) = row j ∧ col (j + 1) = col j - 1 ∧
+        0 < horizontalEdgeTraversalCount n row col (row j) (col j - 1)) := by
+    rcases hunit j hj with h | h | h | h
+    · left
+      exact ⟨h.1, h.2, hpositiveV j hj (row j) (col j)
+        (by simp [crossesRowLevel]; omega) rfl⟩
+    · right; left
+      exact ⟨h.1, h.2, hpositiveV j hj (row j - 1) (col j)
+        (by simp [crossesRowLevel]; omega) rfl⟩
+    · right; right; left
+      exact ⟨h.1, h.2, hpositiveH j hj (row j) (col j)
+        (by simp [crossesColLevel]; omega) rfl⟩
+    · right; right; right
+      exact ⟨h.1, h.2, hpositiveH j hj (row j) (col j - 1)
+        (by simp [crossesColLevel]; omega) rfl⟩
+  rcases hprev with hprev | hprev | hprev | hprev <;>
+    rcases hnext with hnext | hnext | hnext | hnext <;> omega
+
+/-- 実際の閉歩道の前後の接辺は、接触四辺の異なる二項へ正に寄与する。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    ∀ j < m + 1,
+      let a := verticalEdgeTraversalCount (m + 1) row col (row j - 1) (col j)
+      let b := verticalEdgeTraversalCount (m + 1) row col (row j) (col j)
+      let c := horizontalEdgeTraversalCount (m + 1) row col (row j) (col j - 1)
+      let d := horizontalEdgeTraversalCount (m + 1) row col (row j) (col j)
+      (0 < a ∧ 0 < b) ∨ (0 < a ∧ 0 < c) ∨
+      (0 < a ∧ 0 < d) ∨ (0 < b ∧ 0 < c) ∨
+      (0 < b ∧ 0 < d) ∨ (0 < c ∧ 0 < d) := by
+  dsimp only
+  intro j hj
+  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
+  exact walkSideInteriorBand_coordinate_incident_distinct_positive
+    (m + 1) _ _ j hj hclosed.1 hclosed.2
+    (walkSideInteriorBandFromWalk_coordinate_unit γ)
+    (walkSideInteriorBandFromWalk_coordinate_neighbors_distinct γ hγ hh hv j hj)
+
+/-- 実際の閉歩道では各訪問点に接する四辺を高々一度ずつ通る。 -/
+theorem walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    ∀ j < m + 1,
+      verticalEdgeTraversalCount (m + 1) row col (row j - 1) (col j) ≤ 1 ∧
+      verticalEdgeTraversalCount (m + 1) row col (row j) (col j) ≤ 1 ∧
+      horizontalEdgeTraversalCount (m + 1) row col (row j) (col j - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount (m + 1) row col (row j) (col j) ≤ 1 := by
+  dsimp only
+  intro j hj
+  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
+  have hsum := walkSideInteriorBand_coordinate_incident_total_two
+    (m + 1) _ _ j hj hclosed.1 hclosed.2
+    (walkSideInteriorBandFromWalk_coordinate_unit γ)
+    (walkSideInteriorBandFromWalk_coordinate_distinct γ hdistinct)
+  exact four_incident_counts_le_one_of_distinct_positive _ _ _ _ hsum
+    (walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive γ hγ hh hv j hj)
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h

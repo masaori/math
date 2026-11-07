@@ -66028,6 +66028,9 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_cyclic_two_step_return",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_neighbors_distinct",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
+                      "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_distinct_positive",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
@@ -82516,7 +82519,7 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
 &=\log_{\mathbb R}(1)+\log_{\mathbb R}(1)-\log_{\mathbb R}(1)
 &&\bigl(\because\ \log_{\mathbb R}(1)=2\log_{\mathbb R}(1)\text{ を上で示した}\bigr)\\
 &=\log_{\mathbb R}(1)
-&&\bigl(\because\ \mathbb R\text{ の加法の結合法則と逆元}\bigr).
+&&\bigl(\because\ \mathbb R\text{ の加法の結合法則と逆元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "次に ",
