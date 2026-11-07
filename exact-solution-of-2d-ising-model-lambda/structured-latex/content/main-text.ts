@@ -66025,6 +66025,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_two_step_return",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_cyclic_two_step_return",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
@@ -66047,9 +66048,12 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     proof: [
                       paragraph([
                         "証明の中だけで使う記号を先に置く。添字 ", math(String.raw`j`), " は ",
-                        math(String.raw`m`), " を法として読む。これは持ち上げの終点が始点に一致すること ",
-                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), "（",
-                        ref("claim_plane_lift_endpoint_winding"), " と零巻き付き）による。各 ",
+                        math(String.raw`m`), " を法として読む。持ち上げの終点は始点に一致する。",
+                      ]),
+                      displayMath(String.raw`P_m(\gamma)=P_0(\gamma)
+\qquad\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\text{ と零巻き付き}\bigr)`),
+                      paragraph([
+                        "各 ",
                         math(String.raw`j\in\{0,\ldots,m-1\}`), " について ",
                         math(String.raw`(a_j,b_j):=P_j(\gamma)`), " と書き、この頂点に接する四セルを巡回順に",
                       ]),

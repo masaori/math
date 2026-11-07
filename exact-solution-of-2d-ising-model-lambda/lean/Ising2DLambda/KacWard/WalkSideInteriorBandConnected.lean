@@ -247,6 +247,35 @@ theorem walkSideInteriorBandFromWalk_no_two_step_return {L m : ℕ} [NeZero L]
     simp only [Prod.snd_add, Prod.snd_neg] at ha hb ⊢
     omega
 
+/-- 零巻き付きの閉歩道では、周期端をまたぐ二歩も元の持ち上げ点へ戻らない。 -/
+theorem walkSideInteriorBandFromWalk_no_cyclic_two_step_return {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    planeLift γ (Fin.last m).castSucc ≠ planeLift γ (Fin.succ 0) := by
+  intro hreturn
+  have hend : planeLift γ (Fin.last (m + 1)) = planeLift γ 0 := by
+    simpa [hh, hv, Prod.add_def] using planeLift_endpoint_winding γ hγ
+  have hlast := planeLift_succ γ (Fin.last m)
+  have hfirst := planeLift_succ γ (0 : Fin (m + 1))
+  rw [show (Fin.last m).succ = Fin.last (m + 1) by rfl, hend] at hlast
+  rw [show Fin.castSucc (0 : Fin (m + 1)) = (0 : Fin (m + 2)) by rfl] at hfirst
+  have hnot := liftedAdjacentSteps_not_opposite
+    (γ (Fin.last m)) (γ 0) hγ.2
+  apply hnot
+  apply Prod.ext
+  · have ha := congrArg Prod.fst hlast
+    have hb := congrArg Prod.fst hfirst
+    have hc := congrArg Prod.fst hreturn
+    simp only [Prod.fst_add, Prod.fst_neg] at ha hb ⊢
+    omega
+  · have ha := congrArg Prod.snd hlast
+    have hb := congrArg Prod.snd hfirst
+    have hc := congrArg Prod.snd hreturn
+    simp only [Prod.snd_add, Prod.snd_neg] at ha hb ⊢
+    omega
+
 /-- 持ち上げ点の相異性から、各訪問頂点に接する四辺の総通過回数は二である。 -/
 theorem walkSideInteriorBand_coordinate_incident_total_two
     (n : ℕ) (row col : ℕ → ℤ) (j : ℕ) (hj : j < n)
