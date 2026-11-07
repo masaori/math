@@ -155,6 +155,148 @@ u^\top Pv
   },
 
   {
+    id: "maxeig_claim_real_bilinear_value_is_additive_in_right_vector",
+    kind: "claim",
+    title: { text: "右のベクトルが成分ごとの和なら、実数の双線型値 x^⊤Pw は和に分かれる" },
+    labels: ["real_bilinear_value_is_additive_in_right_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "、",
+        math(String.raw`x, y, z, w \in \mathbb{R}^n`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）とし、すべての ",
+        math(String.raw`l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`w_l = y_l + z_l`),
+        "（",
+        math(String.raw`y_l + z_l`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の和）であるとする。",
+        math(String.raw`x^\top Pw,\ x^\top Py,\ x^\top Pz \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`x^\top P w = x^\top P y + x^\top P z`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`x^\top P y + x^\top P z`),
+        " の和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。",
+        math(String.raw`\mathbb{R}^n`),
+        " の元どうしの和は本文で定めていないので、",
+        math(String.raw`w`),
+        " を成分の等式で与える。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の分配則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+x^\top Pw
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,w_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to x,\ y \to w)\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,\bigl(y_l + z_l\bigr)
+&&\bigl(\because\ \text{仮定}\ w_l = y_l + z_l\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(x_k\,P_{kl}\bigr)\,y_l + \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a\,(b + c) = a\,b + a\,c\ (a \to x_k\,P_{kl},\ b \to y_l,\ c \to z_l)\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\Bigl(\Bigl(\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l\Bigr) + \Bigl(\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to l,\ a_l \to (x_k\,P_{kl})\,y_l,\ b_l \to (x_k\,P_{kl})\,z_l)\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \textstyle\sum_{l=1}^{n} (x_k\,P_{kl})\,y_l,\ b_k \to \textstyle\sum_{l=1}^{n} (x_k\,P_{kl})\,z_l)\bigr)\\
+&=x^\top Py + x^\top Pz
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to x,\ y \to y\ \text{と}\ y \to z)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すとき、v := u + ε_ℝu について v^⊤W_ℝv を展開する段で引くために足した。数値検証: sagemath/check/real_bilinear_value_is_additive_in_right_vector/。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_real_bilinear_value_is_additive_in_left_vector",
+    kind: "claim",
+    title: { text: "左のベクトルが成分ごとの和なら、実数の双線型値 w^⊤Px は和に分かれる" },
+    labels: ["real_bilinear_value_is_additive_in_left_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
+        "、",
+        math(String.raw`x, y, z, w \in \mathbb{R}^n`),
+        "（",
+        ref("def_real_bilinear_value"),
+        " の記号）とし、すべての ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`w_k = y_k + z_k`),
+        "（",
+        math(String.raw`y_k + z_k`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の和）であるとする。",
+        math(String.raw`w^\top Px,\ y^\top Px,\ z^\top Px \in \mathbb{R}`),
+        " は ",
+        ref("def_real_bilinear_value"),
+        " の値である。このとき",
+      ]),
+      displayMath(String.raw`w^\top P x = y^\top P x + z^\top P x`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`y^\top P x + z^\top P x`),
+        " の和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。",
+        math(String.raw`\mathbb{R}^n`),
+        " の元どうしの和は本文で定めていないので、",
+        math(String.raw`w`),
+        " を成分の等式で与える。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
+        math(String.raw`\mathbb{R}`),
+        " の分配則と有限和だけを使い、極限・完備性を使わない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+w^\top Px
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(w_k\,P_{kl}\bigr)\,x_l
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to w,\ y \to x)\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(y_k + z_k\bigr)\,P_{kl}\Bigr)\,x_l
+&&\bigl(\because\ \text{仮定}\ w_k = y_k + z_k\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_k\,P_{kl} + z_k\,P_{kl}\bigr)\,x_l
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (b + c)\,a = b\,a + c\,a\ (a \to P_{kl},\ b \to y_k,\ c \to z_k)\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(y_k\,P_{kl}\bigr)\,x_l + \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (b + c)\,a = b\,a + c\,a\ (a \to x_l,\ b \to y_k\,P_{kl},\ c \to z_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&=\sum_{k=1}^{n}\Bigl(\Bigl(\sum_{l=1}^{n} \bigl(y_k\,P_{kl}\bigr)\,x_l\Bigr) + \Bigl(\sum_{l=1}^{n} \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to l,\ a_l \to (y_k\,P_{kl})\,x_l,\ b_l \to (z_k\,P_{kl})\,x_l)\ \text{を各}\ k\ \text{へ}\bigr)\\
+&=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_k\,P_{kl}\bigr)\,x_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \textstyle\sum_{l=1}^{n} (y_k\,P_{kl})\,x_l,\ b_k \to \textstyle\sum_{l=1}^{n} (z_k\,P_{kl})\,x_l)\bigr)\\
+&=y^\top Px + z^\top Px
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to y,\ y \to x\ \text{と}\ x \to z,\ y \to x)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すとき、v := u + ε_ℝu について v^⊤W_ℝv を展開する段で引くために足した。右のベクトルについての real_bilinear_value_is_additive_in_right_vector と別のブロックにした（1 ブロック 1 主張）。数値検証: sagemath/check/real_bilinear_value_is_additive_in_left_vector/。",
+      ],
+    },
+  },
+
+  {
     id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
     kind: "claim",
     title: {
