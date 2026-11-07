@@ -66201,6 +66201,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reaches_band",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],
@@ -66236,8 +66237,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                         math(String.raw`\{(r,g),(r+1,g)\}`), " を通過する番号 ",
                         math(String.raw`k\in\{1,\ldots,m\}`), " が存在する。この辺の両端はセル ",
                         math(String.raw`b_x:=(r,g-1)`), " の四隅なので、",
-                        math(String.raw`b_x\in\mathcal B(\gamma)`), " である（",
-                        ref("def_walk_side_interior_band"), "）。また ",
+                      ]),
+                      displayMath(String.raw`b_x=(r,g-1)\in\mathcal B(\gamma)
+\qquad\bigl(\because\ \blkref{def_walk_side_interior_band}\bigr)`),
+                      paragraph([
+                        "また ",
                         math(String.raw`(r,c),(r,c+1),\ldots,(r,g-1)=b_x`),
                         " はすべて内側セルで、隣り合う二セルは列座標が 1 だけ異なるから辺隣接である（",
                         ref("def_cell_edge_adjacency"), "）。ゆえに任意の内側セルは、内側セルだけを通る有限列で帯へ到達する。",
