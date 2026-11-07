@@ -1925,7 +1925,9 @@ k
         math(String.raw`d := 2^{M_{\mathrm{col}}}`),
         "、",
         math(String.raw`\iota := \iota^{d}_{\mathbb{R}\to\mathbb{C}}`),
-        " と略記する。",
+        "（",
+        ref("def_real_vector_inclusion"),
+        "）と略記する。",
         ref("epsilon_is_real_symmetric"),
         " より ",
         math(String.raw`\varepsilon \in \mathrm{Mat}^{\mathrm{re}}(d,d,\mathbb{C})`),
@@ -1996,6 +1998,7 @@ k
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup の 𝓕^{(+)} ∩ ℝ^{2^{M_col}} を {x ∈ ℝ^{2^{M_col}} | ε_ℝx = x} と述べ直すときに、二つの集合の元の行き来を ι^{2^{M_col}}_{ℝ→ℂ} で書くために足した。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: 証明の冒頭の略記 ι := ι^d_{ℝ→ℂ} に def_real_vector_inclusion の参照を添えた。内容は変えていない。",
       ],
     },
   },

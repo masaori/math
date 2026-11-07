@@ -822,8 +822,11 @@ u
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
-        " は単射なので実数の等式 ",
+        "上の鎖の両端に ",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to \|A-tB\|^2,\ b \to \|A\|^2-\frac{|u|^2}{\|B\|^2}`),
+        "）を当てて、実数の等式 ",
         math(String.raw`\|A-tB\|^2=\|A\|^2-|u|^2/\|B\|^2`),
         " を得る。これと ",
         ref("matrix_norm_triangle_inequality"),
@@ -927,7 +930,7 @@ u+\overline{u}
         String.raw`\begin{aligned}
 \|A+B\|^2
 &= \|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2
-   \quad (\because \text{上の鎖と } \iota_{\mathbb{R}\to\mathbb{C}} \text{ の単射性}) \\
+   \quad (\because \text{上の鎖と } \blkref{inclusion_rr_to_cc_is_injective}\ (a \to \|A+B\|^2,\ b \to \|A\|^2+2\,\mathrm{Re}(u)+\|B\|^2)) \\
 &\le \|A\|^2+2|u|+\|B\|^2
    \quad (\because \text{Step 0 の } \mathrm{Re}(u)\le |u|) \\
 &\le \|A\|^2+2\|A\|\,\|B\|+\|B\|^2
@@ -967,6 +970,7 @@ u+\overline{u}
         "2026-09-04 の式変形統一で、Step 5 場合 2 の三つの積の項の計算の前に散文でまとめて" +
           "いた代入根拠（(1) の ⟨B,A⟩=ū、(3) の ⟨B,B⟩・⟨A,A⟩、Step 0 による t̄ の表示）を、" +
           "それぞれを使う式変形行の行末の (∵ …) へ移した。内容・式変形・根拠は変えていない。",
+        "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 5 と Step 6 で名前だけで根拠にしていた「ι_{ℝ→ℂ} の単射性」の 2 か所を、inclusion_rr_to_cc_is_injective への参照（a・b の当てはめ付き）に替えた。内容は変えていない。",
       ],
     },
   },
