@@ -200,14 +200,10 @@ mn
                           math(String.raw`p`),
                           " については、同じ一意性より ",
                           math(String.raw`mn`),
-                          " の因子に現れないので ",
-                          math(String.raw`v_p(mn)=0`),
-                          " であり、",
-                          math(String.raw`v_p(m)=v_p(n)=0`),
-                          " だから両辺とも ",
-                          math(String.raw`0`),
-                          " で等しい。",
+                          " の因子に現れない。したがって次の等式で両辺が一致する。",
                         ]),
+                        displayMath(String.raw`v_p(mn)=0=v_p(m)+v_p(n)
+\qquad\bigl(\because\ \text{算術の基本定理の一意性と }p\notin S\text{ の定義}\bigr)`),
                         paragraph([
                           "この定義に現れるのは 1 以上の整数と自然数だけであり、実数体も複素数体も使っていない。",
                           "指数関数も実対数も現れないことに注意する。",

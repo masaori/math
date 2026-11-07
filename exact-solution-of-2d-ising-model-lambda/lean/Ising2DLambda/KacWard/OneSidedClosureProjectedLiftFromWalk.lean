@@ -14,6 +14,23 @@ def projectedClosureLift (L : ℕ) [NeZero L] (W : ℕ → ℤ × ℤ)
   | j + 1 => projectedClosureLift L W start j +
       orientedEdgeLatticeStep (projectedUnitStep L (W j) (W (j + 1) - W j))
 
+/-- 射影辺列の `planeLift` は、同じ始点からの再持ち上げと各点で一致する。 -/
+theorem planeLift_projectedUnitStep_eq_projectedClosureLift (L m : ℕ) [NeZero L]
+    (W : ℕ → ℤ × ℤ) :
+    let Γ : Fin (m + 1) → OrientedEdge L := fun j =>
+      projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+    ∀ j : Fin (m + 2),
+      planeLift Γ j = projectedClosureLift L W (planeLift Γ 0) j.val := by
+  dsimp only
+  let Γ : Fin (m + 1) → OrientedEdge L := fun j =>
+    projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+  intro j
+  induction j using Fin.induction with
+  | zero => rfl
+  | succ i ih =>
+      rw [planeLift_succ Γ i, ih]
+      rfl
+
 theorem projectedUnitStep_displacement (L : ℕ) [NeZero L]
     (p u : ℤ × ℤ)
     (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)) :
