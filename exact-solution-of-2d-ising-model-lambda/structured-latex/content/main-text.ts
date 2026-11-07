@@ -25332,7 +25332,7 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
 &=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[k+1]}(\tau_0)\bigr)\Bigr)
 &&(\because\ \blkref{def_orbit_transposition_composite})\\
 &=t\bigl(S^{[k+1]}(\tau_0)\bigr)
-&&(\because\ \text{帰納法の仮定の第 3 の場合。}\ k+1>k)\\
+&&(\because\ \text{帰納法の仮定の第 3 の場合}\ k+1>k)\\
 &=\tau_0
 &&(\because\ \blkref{def_orbit_transposition}\ \text{の第 2 の場合})
 \end{aligned}`),
@@ -66024,6 +66024,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
+                      "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",

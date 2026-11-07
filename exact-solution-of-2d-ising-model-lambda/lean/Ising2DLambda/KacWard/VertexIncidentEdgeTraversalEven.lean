@@ -19,6 +19,23 @@ def vertexVisitCount
     (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ) : ℕ :=
   ∑ k ∈ Finset.range n, if row k = a ∧ col k = b then 1 else 0
 
+/-- 相異なる持ち上げ点の列では、列に現れる各頂点の訪問回数は一である。 -/
+theorem vertexVisitCount_eq_one_of_distinct
+    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ) (hj : j < n)
+    (hdistinct : ∀ k l, k < n → l < n →
+      row k = row l → col k = col l → k = l) :
+    vertexVisitCount n row col (row j) (col j) = 1 := by
+  unfold vertexVisitCount
+  rw [Finset.sum_eq_single j]
+  · simp
+  · intro k hk hkj
+    have hklt : k < n := Finset.mem_range.mp hk
+    have hcoordinates : ¬ (row k = row j ∧ col k = col j) := by
+      intro h
+      exact hkj (hdistinct k j hklt hj h.1 h.2)
+    simp [hcoordinates]
+  · exact fun h => False.elim (h (Finset.mem_range.mpr hj))
+
 /-- `claim_vertex_incident_edge_traversal_even` の具体版。 -/
 theorem vertexIncidentEdgeTraversal_even
     (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ)

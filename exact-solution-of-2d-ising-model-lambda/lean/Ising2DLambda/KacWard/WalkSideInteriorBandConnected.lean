@@ -220,6 +220,21 @@ theorem walkSideInteriorBandFromWalk_coordinate_distinct {L m : ℕ}
   have hij := hdistinct hp
   exact congrArg Fin.val hij
 
+/-- 持ち上げ点の相異性から、各訪問頂点に接する四辺の総通過回数は二である。 -/
+theorem walkSideInteriorBand_coordinate_incident_total_two
+    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ) (hj : j < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hdistinct : ∀ k l, k < n → l < n →
+      row k = row l → col k = col l → k = l) :
+    verticalEdgeTraversalCount n row col (row j - 1) (col j) +
+      verticalEdgeTraversalCount n row col (row j) (col j) +
+      horizontalEdgeTraversalCount n row col (row j) (col j - 1) +
+      horizontalEdgeTraversalCount n row col (row j) (col j) = 2 := by
+  rw [vertexIncidentEdgeTraversal_even n row col (row j) (col j)
+    hunit hclosedRow hclosedCol]
+  rw [vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct]
+
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
   rintro ⟨pr, pc⟩ ⟨qr, qc⟩ h

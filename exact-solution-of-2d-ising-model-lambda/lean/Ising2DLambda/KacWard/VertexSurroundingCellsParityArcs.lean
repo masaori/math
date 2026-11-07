@@ -93,17 +93,7 @@ theorem vertexSurroundingCells_formParityArcs
       (rightRayCrossingCount n row col (row j - 1) (col j) % 2)
       (rightRayCrossingCount n row col (row j) (col j) % 2)
       (rightRayCrossingCount n row col (row j) (col j - 1) % 2) := by
-  have hvisit : vertexVisitCount n row col (row j) (col j) = 1 := by
-    unfold vertexVisitCount
-    rw [Finset.sum_eq_single j]
-    · simp
-    · intro k hk hkj
-      have hklt : k < n := Finset.mem_range.mp hk
-      have hcoordinates : ¬ (row k = row j ∧ col k = col j) := by
-        intro h
-        exact hkj (hdistinct k j hklt hj h.1 h.2)
-      simp [hcoordinates]
-    · exact fun h => False.elim (h (Finset.mem_range.mpr hj))
+  have hvisit := vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct
   exact vertexSurroundingCells_formParityArcs_local n row col (row j) (col j)
     hclosedRow hclosedCol hunit hvisit hleft hright hdown hup
 
