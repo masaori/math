@@ -12,6 +12,7 @@ import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.KacWard.PlaneLiftIntegerBaseEndpoint
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
 import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
+import Ising2DLambda.KacWard.LiftedNonbacktracking
 import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
 import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 import Mathlib.Tactic
@@ -219,6 +220,32 @@ theorem walkSideInteriorBandFromWalk_coordinate_distinct {L m : ℕ}
     exact Prod.ext hr hc
   have hij := hdistinct hp
   exact congrArg Fin.val hij
+
+/-- 非後退な隣接二辺の持ち上げは、二歩後に元の格子点へ戻らない。 -/
+theorem walkSideInteriorBandFromWalk_no_two_step_return {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (k : Fin m) :
+    planeLift γ (Fin.castSucc (Fin.castSucc k)) ≠
+      planeLift γ (Fin.succ (Fin.succ k)) := by
+  intro hreturn
+  have hfirst := planeLift_succ γ (Fin.castSucc k)
+  have hsecond := planeLift_succ γ (Fin.succ k)
+  have hmid : (Fin.castSucc k).succ = (Fin.succ k).castSucc := rfl
+  rw [hmid] at hfirst
+  have hnot := liftedAdjacentSteps_not_opposite
+    (γ (Fin.castSucc k)) (γ (Fin.succ k)) (hγ.1 k)
+  apply hnot
+  apply Prod.ext
+  · have ha := congrArg Prod.fst hfirst
+    have hb := congrArg Prod.fst hsecond
+    have hc := congrArg Prod.fst hreturn
+    simp only [Prod.fst_add, Prod.fst_neg] at ha hb ⊢
+    omega
+  · have ha := congrArg Prod.snd hfirst
+    have hb := congrArg Prod.snd hsecond
+    have hc := congrArg Prod.snd hreturn
+    simp only [Prod.snd_add, Prod.snd_neg] at ha hb ⊢
+    omega
 
 /-- 持ち上げ点の相異性から、各訪問頂点に接する四辺の総通過回数は二である。 -/
 theorem walkSideInteriorBand_coordinate_incident_total_two

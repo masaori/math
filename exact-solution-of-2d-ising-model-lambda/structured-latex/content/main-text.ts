@@ -66024,6 +66024,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
+                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_two_step_return",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
@@ -66218,7 +66219,8 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                         math(String.raw`g\in\mathbb Z`), " が存在して ", math(String.raw`c<g`), " かつ",
                       ]),
                       displayMath(String.raw`(r,c),(r,c+1),\ldots,(r,g-1)\in\mathcal F_{\rightarrow}(\gamma),
-\qquad V_{r,g}(\gamma)\ge1`),
+\qquad V_{r,g}(\gamma)\ge1
+\qquad\bigl(\because\ \blkref{claim_interior_cells_reach_odd_vertical_edge}\bigr)`),
                       paragraph([
                         "を満たす。通過回数の定義（", ref("def_vertical_edge_traversal_count"), "）により、縦辺 ",
                         math(String.raw`\{(r,g),(r+1,g)\}`), " を通過する番号 ",
