@@ -1,6 +1,7 @@
 import Ising2DLambda.KacWard.OneSidedClosureNonbacktracking
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
 import Ising2DLambda.KacWard.OneSidedClosurePointInjectiveFromWalk
+import Ising2DLambda.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 
@@ -193,5 +194,90 @@ theorem oneSidedClosureProjectedLiftFromWalk_injective {L m : ℕ} [NeZero L]
       simp only [Prod.fst_add, Prod.snd_add, Prod.fst_sub, Prod.snd_sub] at * <;>
       omega
   exact hsimple t c ht hc i hi j hj hW
+
+/-- 実際の閉歩道から作った一側閉包の射影辺列は巡回接続し、反転しない。 -/
+theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let edge := planeUnitPathTorusProjection L N (fun j : Fin (N + 1) => W j.val)
+      (∀ j : Fin N,
+        orientedSource (edge j) = planeVertexProjection L (W j.val) ∧
+        orientedTarget (edge j) = planeVertexProjection L (W (j.val + 1))) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        orientedTarget (edge j) = orientedSource (edge k)) ∧
+      (∀ j k : Fin N, k.val = (j.val + 1) % N →
+        edge k ≠ reversal (edge j)) := by
+  obtain ⟨k₀, hsimple⟩ :=
+    oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  dsimp only
+  let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+  let N := oneSidedClosureLength (m + 1) L
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+  have hsum : 0 < (horizontalDirectedWindingNumber γ).natAbs +
+      (verticalDirectedWindingNumber γ).natAbs := by
+    by_contra h
+    have hh : horizontalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    have hv : verticalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    exact hwind (Prod.ext hh hv)
+  have hN : 3 ≤ N := by
+    dsimp [N, oneSidedClosureLength]
+    have hb := Nat.mul_pos ht hsum
+    have hm : 0 < c * (m + 1) := Nat.mul_pos hc (by omega)
+    omega
+  letI : NeZero N := ⟨by omega⟩
+  have hunit (j : Fin N) :
+      W (j.val + 1) - W j.val = (0, 1) ∨
+      W (j.val + 1) - W j.val = (1, 0) ∨
+      W (j.val + 1) - W j.val = (0, -1) ∨
+      W (j.val + 1) - W j.val = (-1, 0) :=
+    oneSidedClosureFromWalk_unit_steps γ hγ hwind k₀ t c ht hc j.val j.isLt
+  have hclosed : W N = W 0 := by
+    have ht' := oneSidedClosureProjectedLiftFromWalk_translation
+      γ hγ hwind k₀ t c ht hc (0, 0) N (by omega)
+    have hc' := oneSidedClosureProjectedLiftFromWalk_closed
+      γ hγ hwind k₀ t c ht hc (0, 0)
+    dsimp only at hc'
+    rw [ht'] at hc'
+    have hfst := congrArg Prod.fst hc'
+    have hsnd := congrArg Prod.snd hc'
+    have hfst' : (W N).1 = (W 0).1 := by
+      have h : (W N).1 - (W 0).1 = 0 := by simpa [W] using hfst
+      omega
+    have hsnd' : (W N).2 = (W 0).2 := by
+      have h : (W N).2 - (W 0).2 = 0 := by simpa [W] using hsnd
+      omega
+    exact Prod.ext hfst' hsnd'
+  have hsimple' (i j : Fin N) (hij : i ≠ j) : W i.val ≠ W j.val := by
+    intro heq
+    exact hij (Fin.ext (hsimple t c ht hc i.val i.isLt j.val j.isLt heq))
+  have hprojection :=
+    planeUnitPathTorusProjection_closedNonbacktracking L N hN
+      (fun j : Fin (N + 1) => W j.val)
+      (by intro j; exact hunit j)
+      (by simpa using hclosed)
+      (by intro i j hij; exact hsimple' i j hij)
+  dsimp only at hprojection ⊢
+  refine ⟨hprojection.1, ?_, ?_⟩
+  · intro j k hk
+    have hkj : k = j + 1 := Fin.ext (by simpa [Fin.val_add] using hk)
+    subst k
+    exact hprojection.2.1 j
+  · intro j k hk
+    have hkj : k = j + 1 := Fin.ext (by simpa [Fin.val_add] using hk)
+    subst k
+    exact hprojection.2.2 j
 
 end Ising2DLambda.KacWard
