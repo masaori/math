@@ -12,6 +12,7 @@ export const ALL_LABELS = [
   "claim_coordinate_map_is_linear_form",
   "claim_coordinate_maps_form_dual_basis",
   "claim_count_below_index_after_adding_one_element",
+  "claim_count_below_index_vanishes_without_smaller_elements",
   "claim_creation_and_annihilation_operator_matrices_anticommute",
   "claim_creation_operator_matrices_anticommute",
   "claim_decomposition_of_identity_matrix_into_matrix_units",
