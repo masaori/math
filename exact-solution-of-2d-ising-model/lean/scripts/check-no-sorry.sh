@@ -354,7 +354,7 @@ targets=(
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
-  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean・NecSuf/ExpNegMulExp.lean）---
+  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean・NecSuf/ExpNegMulExp.lean・NecSuf/PowerExponentLaw.lean）---
   Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
@@ -378,6 +378,9 @@ targets=(
   "Ising2D.NecSuf.neg_matrix_mul_self_comm'"
   "Ising2D.NecSuf.neg_matrix_add_self_apply'"
   "Ising2D.NecSuf.neg_matrix_add_self'"
+  Ising2D.matrix_power_exponent_law
+  Ising2D.matrix_power_exponent_law_of_necSuf
+  "Ising2D.NecSuf.power_exponent_law'"
   "Ising2D.NecSuf.matrixExp_neg_mul_matrixExp'"
   Ising2D.matrixExp_neg_mul_matrixExp_of_necSuf
   Ising2D.matExp_neg_mul_matExp_tensorPow
@@ -446,7 +449,7 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean・NecSuf/StarFixedScalarMultipleOfHermitian.lean・NecSuf/PositiveMultiplePreservesPositiveDefinite.lean）---
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean・NecSuf/CongruencePreservesPositiveDefinite.lean・NecSuf/StarFixedScalarMultipleOfHermitian.lean・NecSuf/PositiveMultiplePreservesPositiveDefinite.lean・NecSuf/PowerOfSymmetricMatrixWithClosedEntries.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -1805,6 +1808,17 @@ targets=(
   "Ising2D.NecSuf.limit_conjTranspose_of_forall_conjTranspose_eq'"
   "Ising2D.NecSuf.limit_conjTranspose_of_conjTranspose_eq'"
   Ising2D.exp_of_real_symmetric_is_real_symmetric
+  Ising2D.matrix_pow_one_eq_self_tensorPow
+  Ising2D.identity_matrix_entry_cases_tensorPow
+  Ising2D.identity_matrix_hasRealEntries_tensorPow
+  Ising2D.identity_matrix_isRealSymmetric_tensorPow
+  Ising2D.matrix_pow_succ_transpose_apply_tensorPow
+  Ising2D.power_of_real_symmetric_complex_matrix_is_real_symmetric
+  Ising2D.power_of_real_symmetric_complex_matrix_is_real_symmetric_of_necSuf
+  "Ising2D.NecSuf.pow_one_eq_self'"
+  "Ising2D.NecSuf.one_entries_mem'"
+  "Ising2D.NecSuf.pow_succ_transpose_apply'"
+  "Ising2D.NecSuf.pow_entries_mem_and_transpose_eq'"
   Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
   Ising2D.S2_isHermitian_of_real_symmetric
   Ising2D.S1plus_isHermitian_of_real_symmetric
