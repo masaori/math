@@ -1145,4 +1145,120 @@ c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_annihilation_operator_matrices_anticommute",
+    kind: "claim",
+    title: { text: "消滅作用素の行列どうしの反交換関係" },
+    labels: ["claim_annihilation_operator_matrices_anticommute"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`i,j\in\{1,\dots,M\}`),
+        " について ",
+        math(String.raw`c_i^{\mathsf T},c_j^{\mathsf T}\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " を消滅作用素の行列（",
+        ref("def_annihilation_operator_matrix"),
+        "）とする。",
+        math(String.raw`i=j`),
+        " の場合も含めて、",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の中で次が成り立つ（演算と零行列は ",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+      displayMath(String.raw`c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}
++_{\mathrm{Mat}_{\mathcal{P}_M}}
+c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i^{\mathsf T}
+=0_{\mathrm{Mat}_{\mathcal{P}_M}}.`),
+    ],
+    proof: [
+      paragraph([
+        "準備。和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`),
+        "（有限集合であることは ",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）である。",
+        math(String.raw`k,l\in\{1,\dots,M\}`),
+        " と ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について、次の等式（",
+        math(String.raw`\star`),
+        "）を示す。",
+      ]),
+      displayMath(String.raw`\bigl(c_k^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l^{\mathsf T}\bigr)_{S,U}
+=\bigl(c_l\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_k\bigr)_{U,S}.
+\qquad(\star)`),
+      paragraph([
+        "まず、各 ",
+        math(String.raw`T\in\mathcal{P}_M`),
+        " について和の項を書き直す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_k^{\mathsf T})_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_l^{\mathsf T})_{T,U}
+&=(c_k^{\mathsf T})_{S,T}\cdot_{\mathbb{C}}(c_l^{\mathsf T})_{T,U}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(c_k)_{T,S}\cdot_{\mathbb{C}}(c_l)_{U,T}
+&&\left(\because\ c_k^{\mathsf T}\ \text{と}\ c_l^{\mathsf T}\ \text{の定義。}\blkref{def_annihilation_operator_matrix}\right)\\
+&=(c_l)_{U,T}\cdot_{\mathbb{C}}(c_k)_{T,S}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=(c_l)_{U,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_k)_{T,S}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って（",
+        math(String.raw`\star`),
+        "）の左辺を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c_k^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_l^{\mathsf T}\bigr)_{S,U}
+&=\sum_{T\in\mathcal{P}_M}(c_k^{\mathsf T})_{S,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_l^{\mathsf T})_{T,U}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{T\in\mathcal{P}_M}(c_l)_{U,T}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_k)_{T,S}
+&&\left(\because\ \text{各}\ T\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\bigl(c_l\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_k\bigr)_{U,S}
+&&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "本題。行列の等しさの定義（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）により、すべての ",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " について両辺の ",
+        math(String.raw`(S,U)`),
+        " 成分が等しいことを示せばよい。",
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " を固定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\bigl(c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i^{\mathsf T}\bigr)_{S,U}\\
+&\quad=\bigl(c_i^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i^{\mathsf T}\bigr)_{S,U}
+&&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\bigl(c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{U,S}+_{\mathbb{C}}\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{U,S}
+&&\left(\because\ (k,l):=(i,j)\ \text{と}\ (k,l):=(j,i)\ \text{で}\ (\star)\right)\\
+&\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\bigr)_{U,S}+_{\mathbb{C}}\bigl(c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{U,S}
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{U,S}
+&&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\bigl(0_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{U,S}
+&&\left(\because\ \text{生成作用素の行列どうしの反交換関係。}\blkref{claim_creation_operator_matrices_anticommute}\right)\\
+&\quad=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\bigl(0_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
+&&\left(\because\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`S,U\in\mathcal{P}_M`),
+        " は任意なので、両辺の成分はすべて等しく、主張が示された。",
+      ]),
+    ],
+  },
 ]);
