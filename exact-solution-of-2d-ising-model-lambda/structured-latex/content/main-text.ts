@@ -168,7 +168,8 @@ const chapter_tools = defineSection({
                           " まで増やしても値は変わらず",
                         ]),
                         displayMath(
-                          String.raw`m=\prod_{p\in S}p^{\,v_p(m)},\qquad n=\prod_{p\in S}p^{\,v_p(n)}`,
+                          String.raw`m=\prod_{p\in S}p^{\,v_p(m)},\qquad n=\prod_{p\in S}p^{\,v_p(n)}
+\qquad\bigl(\because\ \blkref{def_prime_exponent}\text{ と }S\text{ の外の指数が零であること}\bigr)`,
                         ),
                         paragraph([
                           "である。両辺どうしを掛け、同じ素数の冪をまとめると",
