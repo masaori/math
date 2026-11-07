@@ -34,6 +34,10 @@
   `finite_product_with_zero_factor_is_zero` は `Finset.prod_eq_zero`、`complex_zero_times_is_zero` は `zero_mul`、
   `complex_numbers_form_a_field` の積の単位元は `one_mul` である（いずれも既存の慣行どおり）。
 
+- 人手 `epsilon_entries_in_row_configuration_numbering` は `M_col ∈ ℤ_{≥1}` を置くので、Lean もその定理と証明の準備の 2 補題に
+  `1 ≤ M` を仮定に取る（証明は使わない）。`epsilon_real_permutes_entries_by_spin_flip` は `M_col = n + 1` なので
+  `Nat.le_add_left 1 n`（`1 ≤ n + 1`）を渡す。
+
 必要十分版は置かない。`ε` の成分は具体的な行列 `σ^x` の成分と `{-1,1}` の場合分けの計算であり、並べ替えの主張は引いた主張
 （`ε` の成分、包含が和と積を保つこと、一つの項のほかが 0 の和）を 1 回ずつ当てることに尽きる。置換行列の一般の性質は
 `Ising2D/NecSuf/PermMatrix.lean` にあり、`epsilonR_mulVec_apply` はその系である（人手と 1 対 1 なのはこちら）。
@@ -49,7 +53,7 @@ variable {M : ℕ}
 
 /-- 人手 `epsilon_entries_in_row_configuration_numbering` の証明の準備の `s'(m) = -s(m)` の場合の 3 行:
 `s'(m) = -s(m) ⟹ s'(m) ≠ s(m) ⟹ i_m ≠ j_m ⟹ (σ^x)_{i_m j_m} = 1_ℂ`（`I = ι(s)`, `J = ι(s')`）。 -/
-theorem pauliX_configBasisIso_apply_of_eq_neg (s s' : SpinConf M) (m : Fin M)
+theorem pauliX_configBasisIso_apply_of_eq_neg (_hM : 1 ≤ M) (s s' : SpinConf M) (m : Fin M)
     (h : (s' m : ℝ) = -(s m : ℝ)) :
     pauliX (configBasisIso M s m) (configBasisIso M s' m) = 1 := by
   have hne : (s' m : ℝ) ≠ (s m : ℝ) := by                          -- `s(m) ∈ {-1,1}` なので `-s(m) ≠ s(m)`
@@ -69,7 +73,7 @@ theorem pauliX_configBasisIso_apply_of_eq_neg (s s' : SpinConf M) (m : Fin M)
 
 /-- 人手 `epsilon_entries_in_row_configuration_numbering` の証明の準備の `s'(m) ≠ -s(m)` の場合の 3 行:
 `s'(m) ≠ -s(m) ⟹ s'(m) = s(m) ⟹ i_m = j_m ⟹ (σ^x)_{i_m j_m} = 0_ℂ`。 -/
-theorem pauliX_configBasisIso_apply_of_ne_neg (s s' : SpinConf M) (m : Fin M)
+theorem pauliX_configBasisIso_apply_of_ne_neg (_hM : 1 ≤ M) (s s' : SpinConf M) (m : Fin M)
     (h : (s' m : ℝ) ≠ -(s m : ℝ)) :
     pauliX (configBasisIso M s m) (configBasisIso M s' m) = 0 := by
   have heq : s' m = s m := by                                       -- `s'(m)` は 2 元の集合 `{-1,1} = {s(m), -s(m)}` の元
@@ -87,7 +91,7 @@ theorem pauliX_configBasisIso_apply_of_ne_neg (s s' : SpinConf M) (m : Fin M)
 /-- **人手 `epsilon_entries_in_row_configuration_numbering`**: `ε_{ord(s),ord(s')}` は `s' = -s` のとき `1_ℂ`、
 そうでないとき `0_ℂ`。人手は場合ごとに `ε_{ord(s),ord(s')}` から始まる 1 本の鎖を書き、Lean も共通の 3 行（2 段）を
 2 つの場合の `calc` にそれぞれ書く。 -/
-theorem epsilon_entries_in_row_configuration_numbering (s s' : SpinConf M) :
+theorem epsilon_entries_in_row_configuration_numbering (hM : 1 ≤ M) (s s' : SpinConf M) :
     epsilon M (configBasisIso M s) (configBasisIso M s') = if s' = negSpinConf s then 1 else 0 := by
   by_cases h : s' = negSpinConf s
   · -- `s' = -s`: すべての `m` で `s'(m) = -s(m)`
@@ -99,14 +103,14 @@ theorem epsilon_entries_in_row_configuration_numbering (s s' : SpinConf M) :
           rw [siteProd_apply]                                       -- `def_kronecker` (2)（`A_k → σ^x`）
       _ = ∏ _m : Fin M, (1 : ℂ) :=
           Finset.prod_congr rfl fun m _ =>
-            pauliX_configBasisIso_apply_of_eq_neg s s' m (by rw [h, coe_negSpinConf_apply])
+            pauliX_configBasisIso_apply_of_eq_neg hM s s' m (by rw [h, coe_negSpinConf_apply])
                                                                     -- 準備の `s'(m) = -s(m)` の場合を各因子へ同時に
       _ = 1 := Finset.prod_const_one                                -- `finite_product_of_complex_ones`
   · -- `s' ≠ -s`: `s'(n) ≠ -s(n)` なる `n` が在り、準備より `(σ^x)_{i_n j_n} = 0_ℂ`
     rw [if_neg h]
     obtain ⟨n, hn⟩ := Function.ne_iff.mp h
     have hn0 : pauliX (configBasisIso M s n) (configBasisIso M s' n) = 0 :=
-      pauliX_configBasisIso_apply_of_ne_neg s s' n
+      pauliX_configBasisIso_apply_of_ne_neg hM s s' n
         (fun hc => hn (Subtype.ext (by rw [coe_negSpinConf_apply, hc])))
     calc epsilon M (configBasisIso M s) (configBasisIso M s')
         = siteProd M (fun _ => pauliX) (configBasisIso M s) (configBasisIso M s') := by
@@ -135,7 +139,7 @@ theorem epsilon_real_permutes_entries_by_spin_flip (n : ℕ) (u : Conf (n + 1) �
             * ((u (configBasisIso (n + 1) t) : ℝ) : ℂ) := by
           rw [ofReal_epsilonReal_apply]                             -- `def_epsilon_real`
       _ = 0 * ((u (configBasisIso (n + 1) t) : ℝ) : ℂ) := by
-          rw [epsilon_entries_in_row_configuration_numbering, if_neg ht]
+          rw [epsilon_entries_in_row_configuration_numbering (Nat.le_add_left 1 n), if_neg ht]
                                                                     -- `epsilon_entries_in_row_configuration_numbering`（`s' → t`）
       _ = 0 := zero_mul _                                           -- `complex_zero_times_is_zero`
   have hon : ((r (configBasisIso (n + 1) (negSpinConf s)) : ℝ) : ℂ)
@@ -151,7 +155,7 @@ theorem epsilon_real_permutes_entries_by_spin_flip (n : ℕ) (u : Conf (n + 1) �
             * ((u (configBasisIso (n + 1) (negSpinConf s)) : ℝ) : ℂ) := by
           rw [ofReal_epsilonReal_apply]                             -- `def_epsilon_real`
       _ = 1 * ((u (configBasisIso (n + 1) (negSpinConf s)) : ℝ) : ℂ) := by
-          rw [epsilon_entries_in_row_configuration_numbering, if_pos rfl]
+          rw [epsilon_entries_in_row_configuration_numbering (Nat.le_add_left 1 n), if_pos rfl]
                                                                     -- `epsilon_entries_in_row_configuration_numbering`（`s' → -s`）
       _ = ((u (configBasisIso (n + 1) (negSpinConf s)) : ℝ) : ℂ) := one_mul _
                                                                     -- `complex_numbers_form_a_field` の積の単位元

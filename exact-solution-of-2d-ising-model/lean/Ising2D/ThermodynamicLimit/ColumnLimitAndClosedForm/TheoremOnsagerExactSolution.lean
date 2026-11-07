@@ -91,8 +91,11 @@ theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W
   引く主張の成分の仮定は `fun k => rfl` で渡す。
 - 人手の `v̂^⊤W_ℝv̂ ∈ 𝓡_+`（`def_sector_rayleigh_sup`、`x → v̂`）は `evenSectorSet` の元であることで、条件 `‖v̂‖ = 1` は
   Lean の `vecNormSq v̂ = 1` に `vecNorm_sq`（`‖v̂‖^2 = vecNormSq v̂`）で読み替える。
-- 人手の `‖v‖^2 := ‖v‖‖v‖` は Lean の `vecNorm v ^ 2` である。 -/
-theorem c_le_twice_c_plus_physical (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (Λ : ℝ)
+- 人手の `‖v‖^2 := ‖v‖‖v‖` は Lean の `vecNorm v ^ 2` である。
+- 人手の設定の `K_1, K_2 ∈ ℝ_{>0}` を `hK1`・`hK2` で受け、準備で引く `W_real_has_positive_entries`・
+  `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`（どちらも人手どおり
+  `K_1, K_2 > 0` を取る）へ渡す。 -/
+theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (Λ : ℝ)
     (hΛ : Λ = evenSectorRayleighSup
       (realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
         (physicalSymTransferC_hasRealEntries K1 hK2)) (epsilonReal n)) :
@@ -101,7 +104,7 @@ theorem c_le_twice_c_plus_physical (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
   set W := realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
     (physicalSymTransferC_hasRealEntries K1 hK2) with hWdef
   -- 準備: `W_real_has_positive_entries` より `(W_ℝ)_kl > 0`、とくに `(W_ℝ)_kl ≥ 0`
-  have hWnn : ∀ k l, 0 ≤ W k l := fun k l => (W_real_has_positive_entries K1 hK2 k l).le
+  have hWnn : ∀ k l, 0 ≤ W k l := fun k l => (W_real_has_positive_entries (Nat.le_add_left 1 n) hK1 hK2 k l).le
   -- 各 `x`（`‖x‖ = 1`）で `x^⊤W_ℝx ≤ 2Λ`
   have hbound : ∀ x : Conf (n + 1) → ℝ, vecNormSq x = 1 → x ⬝ᵥ W *ᵥ x ≤ 2 * Λ := by
     intro x hx1
@@ -152,7 +155,7 @@ theorem c_le_twice_c_plus_physical (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
     -- 準備: `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`（`u → u`）
     have hvW : v ⬝ᵥ W *ᵥ v ≥ 2 * (u ⬝ᵥ W *ᵥ u) :=
       W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice
-        n K1 hK2 u v hunn (fun _ => rfl)
+        n hK1 hK2 u v hunn (fun _ => rfl)
     -- 準備: `real_bilinear_value_with_nonnegative_entries_is_nonnegative`（`P → W_ℝ`、`x → u`、`y → u`）、`2 > 0` を掛ける
     have huW : u ⬝ᵥ W *ᵥ u ≥ 0 :=
       real_bilinear_value_with_nonnegative_entries_is_nonnegative W hWnn u u hunn hunn

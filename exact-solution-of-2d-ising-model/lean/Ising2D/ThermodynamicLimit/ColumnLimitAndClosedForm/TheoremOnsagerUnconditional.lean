@@ -101,7 +101,7 @@ theorem rayleighSup_sandwich_LambdaM_physical (P : IsingParam) (hM2 : 2 ≤ M) :
     exact ((physicalEvenSectorBridge P hM2 hM).c_plus_equals_lamMax htr).trans
       (EvenSectorBridge.lamMax_eq_LambdaM P rfl (sum_checkGam P (n + 1))) |>.symm
   rw [rayleighSup_physicalSymTransferR_eq P.K1 P.K2_pos]
-  exact c_le_twice_c_plus_physical n P.K1 P.K2_pos _ hΛ
+  exact c_le_twice_c_plus_physical n P.K1_pos P.K2_pos _ hΛ
 
 /-! ## Step 1: `N_row → ∞` の極限（`c(M) > 0` は `def_rayleigh_sup` から） -/
 

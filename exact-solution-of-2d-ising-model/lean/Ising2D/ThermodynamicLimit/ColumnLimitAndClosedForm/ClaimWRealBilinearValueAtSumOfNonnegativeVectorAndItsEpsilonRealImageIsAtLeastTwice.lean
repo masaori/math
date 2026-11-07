@@ -25,7 +25,9 @@
   （二重和 `= Σ_k u_k(Pv)_k`）の合成で、1 行に当たる段は `rw` の 2 補題になる。
 - 人手は `ℝ^d` の元どうしの和を定めず、`v` を成分の等式 `v_k = u_k + ũ_k` で与える。Lean も同じく仮定 `hv` に置く
   （`epsilon_real_fixes_sum_of_vector_and_its_image` と同じ形）。
-- 人手は結合定数を `K_1, K_2 ∈ ℝ_{>0}` とする。Lean の `W_ℝ` が要るのは `K_2 > 0` だけである（`physicalSymTransferC_hasRealEntries` の仮定）。
+- 人手は結合定数を `K_1, K_2 ∈ ℝ_{>0}` とし、Lean も `K_1 > 0`・`K_2 > 0` を仮定に取る。`W_ℝ` を作るのに要るのは `K_2 > 0` だけ
+  （`physicalSymTransferC_hasRealEntries` の仮定）で、`K_1 > 0` は `W_real_has_positive_entries`・`epsilon_real_commutes_with_W_real`
+  （どちらも人手どおり `K_1, K_2 > 0` を取る）へ渡すだけである。人手の `M_col ≥ 1` は `M_col = n + 1` が持つ。
 
 必要十分版は置かない。`W_ℝ` について効いているのは、成分が非負であることと `ε_ℝ` と可換であることだけで、`W_ℝ` の対称性は使わない
 （交差項 `u^⊤W_ℝũ`・`ũ^⊤W_ℝu` を入れ替えずに、どちらも非負性で落とす）。`ε_ℝ` について効いているのは、対称性・`ε_ℝε_ℝ = I`・
@@ -48,7 +50,7 @@ open Matrix
 すべての `k` で `u_k ≥ 0` かつ `v_k = u_k + (ε_ℝu)_k` なら `v^⊤W_ℝv ≥ 2(u^⊤W_ℝu)`
 （人手の `M_col` は `n + 1`。準備の 3 つと主張の 11 行の鎖と 1 対 1）。 -/
 theorem W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice
-    (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (u v : Conf (n + 1) → ℝ) (hu : ∀ k, 0 ≤ u k)
+    (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (u v : Conf (n + 1) → ℝ) (hu : ∀ k, 0 ≤ u k)
     (hv : ∀ k, v k = u k + (epsilonReal n *ᵥ u) k) :
     v ⬝ᵥ realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
         (physicalSymTransferC_hasRealEntries K1 hK2) *ᵥ v
@@ -58,7 +60,7 @@ theorem W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_
     (physicalSymTransferC_hasRealEntries K1 hK2) with hW
   set ut := epsilonReal n *ᵥ u with hut                                      -- 準備: `ũ := ε_ℝu`
   -- 一つ目の準備: `u^⊤W_ℝũ ≥ 0`・`ũ^⊤W_ℝu ≥ 0`
-  have hW0 : ∀ k l, 0 ≤ W k l := fun k l => (W_real_has_positive_entries K1 hK2 k l).le
+  have hW0 : ∀ k l, 0 ≤ W k l := fun k l => (W_real_has_positive_entries (Nat.le_add_left 1 n) hK1 hK2 k l).le
                                                                               -- `W_real_has_positive_entries`（`(W_ℝ)_kl > 0` より `≥ 0`）
   have hut0 : ∀ l, 0 ≤ ut l := epsilon_real_preserves_nonnegative_vectors n u hu
                                                                               -- `epsilon_real_preserves_nonnegative_vectors`（`ũ_l ≥ 0`）
@@ -79,7 +81,7 @@ theorem W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_
       _ = (epsilonReal n * W) *ᵥ (epsilonReal n *ᵥ u) :=
           (real_matrix_vector_product_is_associative _ _ _).symm              -- `real_matrix_vector_product_is_associative`（`P → ε_ℝ, Q → W_ℝ, x → ε_ℝu`）を右辺から左辺へ
       _ = (W * epsilonReal n) *ᵥ (epsilonReal n *ᵥ u) := by
-          rw [epsilon_real_commutes_with_W_real n K1 hK2]                     -- `epsilon_real_commutes_with_W_real`
+          rw [epsilon_real_commutes_with_W_real n hK1 hK2]                     -- `epsilon_real_commutes_with_W_real`
       _ = W *ᵥ (epsilonReal n *ᵥ (epsilonReal n *ᵥ u)) :=
           real_matrix_vector_product_is_associative _ _ _                     -- `real_matrix_vector_product_is_associative`（`P → W_ℝ, Q → ε_ℝ, x → ε_ℝu`）
       _ = W *ᵥ ((epsilonReal n * epsilonReal n) *ᵥ u) := by

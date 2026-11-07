@@ -27,6 +27,10 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 （`def_config_basis_iso`）から `physicalSymTransferR_pos` で得る。この最後の段は人手の主張の
 言い換え（`𝓘` の任意の元は `ι(μ)` の形）であり、人手には書かれていない。
 
+人手は結合定数を `K_1, K_2 ∈ ℝ_{>0}` とする。Step 1〜3 はどれも `K_1, K_2` の正値性を使わない（`exp` は実数の指数関数で、
+値はどの実数でも正なので）が、主張を人手どおりにするため `W_has_positive_entries_physical`・`physicalSymTransferR_pos` は
+`K_1 > 0`・`K_2 > 0` を仮定に取る。Step 1〜3 の補題は人手の証明の中の段なので仮定を置かない。
+
 必要十分版は `NecSuf/SandwichByDiagonal.lean`（Step 3 と同じ式変形を、有限の添字と
 結合律・可換律を仮定しない半環の係数で書いたもの）。具体版をその特殊化として導出するのは
 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
@@ -132,7 +136,7 @@ theorem physicalSymTransferR_apply_configBasisIso (K1 K2 : ℝ) (μ μ' : SpinCo
 
 /-- **人手 `W_has_positive_entries`**: 具体的な `W = V_1^{1/2}V_2V_1^{1/2}` について
 `W_{ι(μ),ι(μ')} > 0`（`μ, μ' ∈ 𝔐`）。 -/
-theorem W_has_positive_entries_physical (K1 K2 : ℝ) (μ μ' : SpinConf M) :
+theorem W_has_positive_entries_physical {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 < K2) (μ μ' : SpinConf M) :
     0 < physicalSymTransferR M K1 K2 (configBasisIso M μ) (configBasisIso M μ') := by
   rw [physicalSymTransferR_apply_configBasisIso]
   -- (∵ 3 つの因子はいずれも正の実数なので、積も正)
@@ -142,10 +146,10 @@ theorem W_has_positive_entries_physical (K1 K2 : ℝ) (μ μ' : SpinConf M) :
 
 /-- `W` のすべての成分が正（`ι` が全単射なので、任意の行・列番号は `ι(μ)` の形）。
 `EvenSectorBridge.rayleighSup_sandwich_LambdaM` の入力の形。 -/
-theorem physicalSymTransferR_pos (K1 K2 : ℝ) (k l : Conf M) :
+theorem physicalSymTransferR_pos {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (k l : Conf M) :
     0 < physicalSymTransferR M K1 K2 k l := by
   obtain ⟨μ, rfl⟩ := (configBasisIso M).surjective k
   obtain ⟨μ', rfl⟩ := (configBasisIso M).surjective l
-  exact W_has_positive_entries_physical K1 K2 μ μ'
+  exact W_has_positive_entries_physical hK1 hK2 μ μ'
 
 end Ising2D

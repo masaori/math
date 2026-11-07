@@ -22,8 +22,10 @@ theorem physicalSymTransferR_apply_configBasisIso_of_necSuf (K1 K2 : ℝ) (μ μ
           * physicalV1halfR M K1 (configBasisIso M μ') (configBasisIso M μ') :=
   NecSuf.sandwich_apply_of_offDiag_zero (physicalV1halfR_offDiag K1) _ _
 
-/-- `W_has_positive_entries_physical` は `NecSuf.sandwich_apply_pos` の特殊化。 -/
-theorem W_has_positive_entries_physical_of_necSuf (K1 K2 : ℝ) (μ μ' : SpinConf M) :
+/-- `W_has_positive_entries_physical` は `NecSuf.sandwich_apply_pos` の特殊化（仮定 `K_1, K_2 > 0` は具体版と同じく
+主張を人手どおりにするために受け取るだけで、特殊化に渡す仮定はどれも `K_1, K_2` の正値性を使わない）。 -/
+theorem W_has_positive_entries_physical_of_necSuf {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 < K2)
+    (μ μ' : SpinConf M) :
     0 < physicalSymTransferR M K1 K2 (configBasisIso M μ) (configBasisIso M μ') :=
   NecSuf.sandwich_apply_pos (physicalV1halfR_offDiag K1)
     (fun i => by

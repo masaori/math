@@ -23,6 +23,13 @@
   Lean の `epsilon_commutes_with_W` は同じ内容を実成分で組んだ `epsilonR`・`physicalSymTransferR` について述べたもので、
   人手の `ϱ` を経由する形と 1 対 1 なのは本ファイルの `epsilon_real_commutes_with_W_real` である。
 
+- 人手はどちらの主張も `M_col ∈ ℤ_{≥1}`・`K_1, K_2 ∈ ℝ_{>0}` を置き、Lean も同じ仮定を取る。`W_ℝ` を作るのに要るのは
+  `K_2 > 0` だけ（`physicalSymTransferC_hasRealEntries`）で、`W_real_has_positive_entries` は `K_1, K_2 > 0` を
+  `W_has_positive_entries_as_inclusion`（人手 `W_has_positive_entries` と同じ `K_1, K_2 > 0` を取る）へ渡す。
+  `M_col ≥ 1` は、`W_real_has_positive_entries` では `_hM : 1 ≤ M` で受け、`epsilon_real_commutes_with_W_real` では
+  `ε_ℝ`（`epsilonReal n`）の側が `M_col = n + 1` で持つ。どちらの証明も `M_col ≥ 1` を使わない。`K_1 > 0` は下へ渡すだけで、最後に受ける `W_has_positive_entries_physical` も
+  `_hK1` として受けて使わない。
+
 必要十分版は置かない。どちらの主張も、引いた主張（`W_has_positive_entries`・`epsilon_commutes_with_W`・
 `real_matrix_of_real_entry_matrix_preserves_product`・`inclusion_rr_to_cc_is_injective`）を成分ごと、または 1 回ずつ当てることに尽き、
 それらの外に抽象的な内容を持たない（`W_real_is_symmetric`・`epsilon_real_square_is_identity` と同じ）。
@@ -41,18 +48,19 @@ open Matrix
 `w` は実成分で組んだ `physicalSymTransferR` の成分で、その正値性は `physicalSymTransferR_pos`（`W_has_positive_entries` の具体版
 `W_has_positive_entries_physical` から `ι` の全射性で得る「すべての `k, l`」の言い換え）、
 `W_kl = w_ℂ` は `physicalSymTransferC_eq_map` である。 -/
-theorem W_has_positive_entries_as_inclusion {M : ℕ} (K1 K2 : ℝ) (k l : Conf M) :
+theorem W_has_positive_entries_as_inclusion {M : ℕ} {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (k l : Conf M) :
     ∃ w : ℝ, 0 < w ∧ physicalSymTransferC M K1 K2 k l = (w : ℂ) :=
-  ⟨physicalSymTransferR M K1 K2 k l, physicalSymTransferR_pos K1 K2 k l, by
+  ⟨physicalSymTransferR M K1 K2 k l, physicalSymTransferR_pos hK1 hK2 k l, by
     rw [physicalSymTransferC_eq_map, Matrix.map_apply, Complex.ofRealHom_eq_coe]⟩
 
 /-- **人手 `W_real_has_positive_entries`**: `W_ℝ`（`def_W_real`）のすべての成分は `ℝ` の順序で正。
 `W_has_positive_entries` の `w` を取り、2 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = w_ℂ` に `inclusion_rr_to_cc_is_injective`
 （`a → (W_ℝ)_kl`, `b → w`）を当てて `(W_ℝ)_kl = w > 0`。 -/
-theorem W_real_has_positive_entries {M : ℕ} (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (k l : Conf M) :
+theorem W_real_has_positive_entries {M : ℕ} (_hM : 1 ≤ M) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2)
+    (k l : Conf M) :
     0 < realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
       (physicalSymTransferC_hasRealEntries K1 hK2) k l := by
-  obtain ⟨w, hw, hW⟩ := W_has_positive_entries_as_inclusion (M := M) K1 K2 k l
+  obtain ⟨w, hw, hW⟩ := W_has_positive_entries_as_inclusion (M := M) hK1 hK2 k l
   have h : realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
       (physicalSymTransferC_hasRealEntries K1 hK2) k l = w :=
     inclusion_rr_to_cc_is_injective <|
@@ -67,7 +75,7 @@ theorem W_real_has_positive_entries {M : ℕ} (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K
 /-- **人手 `epsilon_real_commutes_with_W_real`**: `ε_ℝW_ℝ = W_ℝε_ℝ`（人手の `M_col` は `n + 1`、`d := 2^{M_col}`）。
 準備（`ε, W ∈ Mat^re`、`ε_ℝ = ϱ(ε)`、`W_ℝ = ϱ(W)`）は `epsilonReal` の定義と `epsilon_hasRealEntries`・`physicalSymTransferC_hasRealEntries`。
 人手の `εW = Wε`（`epsilon_commutes_with_W`）は Lean の `epsilon_commute_physicalSymTransferC`。 -/
-theorem epsilon_real_commutes_with_W_real (n : ℕ) (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+theorem epsilon_real_commutes_with_W_real (n : ℕ) {K1 K2 : ℝ} (_hK1 : 0 < K1) (hK2 : 0 < K2) :
     epsilonReal n * realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
         (physicalSymTransferC_hasRealEntries K1 hK2)
       = realMatrixOfRealEntries (physicalSymTransferC (n + 1) K1 K2)
