@@ -32,8 +32,9 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 参照用ノート claims_unused_by_chapter_goals_not_adopted.ts に移した、もとの `gamma_is_continuous` の後半（周期性） |
 | `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続** | `gamma_is_continuous` |
 | `Ising2D.gammaFn_periodic` | `γ(θ+2π) = γ(θ)` | 同上のノート |
-| `Ising2D.abs_log_Z_sub_log_c_le`（`ClaimLimitInNRow.lean`） | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の誤差評価 |
-| `Ising2D.limit_of_log_Z_in_N_row` | **`(1/(M N_row))log Z → (1/M)log c(M)`** | `limit_of_log_Z_in_N_row` |
+| `Ising2D.abs_log_Z_sub_log_c_le`（`ClaimLimitInNRow.lean`） | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の含意の鎖（10 行） |
+| `Ising2D.log_two_pos` | `log 2 > 0` | `limit_of_log_Z_in_N_row` の準備 |
+| `Ising2D.limit_of_log_Z_in_N_row` | **`(1/(M N_row))log Z → (1/M)log c(M)`** | `limit_of_log_Z_in_N_row`（ε と N₀ の鎖） |
 | `Ising2D.tagPoint` | `t^{(M)}_μ = 2π(μ-δ)/M` | `riemann_sum_to_integral` |
 | `Ising2D.sum_Icc_one_eq_sum_range` / `sum_Icc_eq_sum_range_tag`（`TheoremRiemannSumToIntegral.lean`） | 添字の付け替え `μ = k+1` | 同上（記法の橋渡し） |
 | `Ising2D.riemann_sum_to_integral_error` | **`\|(1/M)Σγ(t_μ) - (1/2π)∫₀^{2π}γ\| ≤ ω(2π/M)`** | `riemann_sum_to_integral` statement の評価 |
@@ -61,7 +62,8 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.NecSuf.abs_integral_sub_riemann_sum_le_modulus` | 誤差評価（`ε = ω`） | 同上 |
 | `Ising2D.NecSuf.tendsto_modulus_atTop` | `ω((b-a)/M) → 0`（(R1) Heine–Cantor） | 同上 |
 | `Ising2D.NecSuf.tendsto_riemann_sum` | **等分割リーマン和 → 積分の平均値**（必要十分版） | 同上 |
-| `Ising2D.NecSuf.abs_log_div_sub_log_le_of_sandwich` | `c^N ≤ Z ≤ B c^N` ⇒ `\|log Z/N - log c\| ≤ log B/N` | `NecSuf/LogSqueeze.lean` |
+| `Ising2D.NecSuf.abs_div_sub_le_of_sandwich` | `c^N ≤ Z ≤ b^M c^N` ⇒ `\|(1/(MN))L Z - (1/M)L c\| ≤ L b/N`（`L : D → K` は「`0 < u` かつ `u < v` なら `L u ≤ L v`」と積の法則だけを持つ。`D` は順序半環、`K` は順序体） | `NecSuf/LogSqueeze.lean` |
+| `Ising2D.NecSuf.tendsto_of_abs_sub_le_div` | `C ≥ 0`、`\|u_N - a\| ≤ C/N` ⇒ `u_N → a` | 同上 |
 | `Ising2D.NecSuf.log_rpow_mul_exp` | `log(A^r e^S) = r log A + S`（`A > 0`） | 同上 |
 | `Ising2D.NecSuf.tendsto_affine` | 収束列のアフィン変換は収束する | 同上 |
 
@@ -73,7 +75,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | --- | --- | --- | --- |
 | `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`gamma1R_ge_cosh_sub` の証明が必要十分版の特殊化） |
 | `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（1 行の特殊化） |
-| `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_log_div_sub_log_le_of_sandwich` | **している**（`B = 2^M` を代入して `M` で割る） |
+| `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_div_sub_le_of_sandwich` / `NecSuf.tendsto_of_abs_sub_le_div` | **している**（`ClaimLimitInNRowFromNecSuf.lean`。`L := log`、`b := 2`、`C := log 2`） |
 | `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `NecSuf.abs_integral_sub_riemann_sum_le_modulus` / `NecSuf.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |
 | `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `NecSuf.log_rpow_mul_exp` / `NecSuf.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している** |
 
@@ -94,12 +96,11 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
   代表点が対応する小区間に属すること、積分の区間加法性・定数の積分・`|∫_I h| ≤ |I| sup_I |h|`。
   これは人手証明が (R1)(R2) として明示したものと一致する。
 - **`limit_of_log_Z_in_N_row` に Ising 模型の構造はまったく効いていない。**
-  効いているのは挟み撃ちの形 `c^N ≤ Z ≤ B c^N`（`c > 0`, `B ≥ 1`）と、
-  `log` の単調性・`log(xy) = log x + log y`・`log(x^N) = N log x` だけである。
-  `B = 2^M` という具体形も、行列も転送行列も跡も固有値も出てこない。
-  人手証明が得ている `\|log Z/(MN) - log c/M\| ≤ log 2/N` は、必要十分版の
-  `\|log Z/N - log c\| ≤ log B/N` の両辺を `M` で割って `log 2^M = M log 2` が
-  約分された結果にすぎない（`M` で割るのは線型な後処理）。
+  効いているのは挟み撃ちの形 `c^N ≤ Z ≤ b^M c^N`（`b, c > 0`）と、
+  `log` の単調性（「`0 < u` かつ `u < v` なら `log u ≤ log v`」の形）・`log(xy) = log x + log y` だけである（`log(x^N) = N log x` は積の法則から出る）。
+  底 `2` も、`b ≥ 1` も、`log` が `exp` の逆写像であることも、行列も転送行列も跡も固有値も出てこない。
+  誤差評価の段には ℝ の完備性も効いておらず、順序半環から順序体への写像で述べられる。極限の段に効いているのは ℝ のアルキメデス性と距離が `|x − y|` であることだけで、
+  必要十分版が `C ≥ 0`（`C := log 2`）を仮定に残すのは、主張に要るからではなく具体版と同じ手順を保つためである。
 - **`γ_1` の下界に `cos` であることは効いていない。** 効いているのは
   「`cos θ ≤ 1`」と「`sinh 2K_1 · sinh 2K_2^* ≥ 0`」の 2 つだけで、
   `cos θ` は「`1` 以下の任意の実数」に置き換えられる。

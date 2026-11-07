@@ -653,7 +653,11 @@ targets=(
   Ising2D.NecSuf.abs_integral_sub_riemann_sum_le_modulus
   Ising2D.NecSuf.tendsto_modulus_atTop
   Ising2D.NecSuf.tendsto_riemann_sum
-  Ising2D.NecSuf.abs_log_div_sub_log_le_of_sandwich
+  Ising2D.NecSuf.abs_div_sub_le_of_sandwich
+  Ising2D.NecSuf.tendsto_of_abs_sub_le_div
+  Ising2D.NecSuf.inv_strictMono
+  Ising2D.NecSuf.inv_map_mul
+  Ising2D.NecSuf.inv_map_pow
   Ising2D.NecSuf.log_rpow_mul_exp
   Ising2D.NecSuf.tendsto_affine
   Ising2D.gamma1_lower_bound_all_theta
@@ -664,7 +668,16 @@ targets=(
   Ising2D.gamma_is_continuous
   Ising2D.gammaFn_periodic
   Ising2D.abs_log_Z_sub_log_c_le
+  Ising2D.log_two_pos
   Ising2D.limit_of_log_Z_in_N_row
+  Ising2D.abs_log_Z_sub_log_c_le_of_necSuf
+  Ising2D.limit_of_log_Z_in_N_row_of_necSuf
+  Ising2D.real_log_strictly_increasing
+  Ising2D.real_log_strictly_increasing_of_necSuf
+  Ising2D.real_log_of_product
+  Ising2D.real_log_of_product_of_necSuf
+  Ising2D.real_log_of_power
+  Ising2D.real_log_of_power_of_necSuf
   Ising2D.log_LambdaM
   Ising2D.inv_M_log_LambdaM
   Ising2D.onsager_free_energy_expression

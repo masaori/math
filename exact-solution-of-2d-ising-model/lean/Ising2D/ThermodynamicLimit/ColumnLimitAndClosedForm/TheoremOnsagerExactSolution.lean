@@ -40,7 +40,7 @@
 本ファイルには必要十分版を置かない。`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の具体版 `c_le_twice_c_plus_physical` は、
 準備で本文の主張を 1 つずつ引き、それらの結論を上限の性質と ℝ の四則演算・大小でつなぐだけで、引いた主張の外に
 取り払える構造を持たない（`ε_ℝ`・`W_ℝ` のどの性質が効くかは、引いた各主張のファイルが書いている）。Step 1・Step 3 は
-既存の必要十分版（`NecSuf/LogSqueeze.lean` の `abs_log_div_sub_log_le_of_sandwich`、
+既存の必要十分版（`NecSuf/LogSqueeze.lean` の `abs_div_sub_le_of_sandwich`・`tendsto_of_abs_sub_le_div`、
 `NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルは
 それらの具体版を接続するだけだからである。
 -/
