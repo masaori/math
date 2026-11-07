@@ -65378,6 +65378,7 @@ N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite",
                       "Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf",
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf",
+                      "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_eq_coordinateSum",
                     ],
                     statement: [
                       paragraph([
@@ -65433,7 +65434,7 @@ N_{r,c}^{\rightarrow}(\gamma)
 &=2U_r(a)
 &&\bigl(\because\ \text{上で示した等式}\bigr)\\
 &\equiv0\pmod2
-&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr)
 \end{aligned}`),
                       paragraph([
                         "一方、", math(String.raw`c_{\max}\le c`), " なら ", math(String.raw`c<j`),
