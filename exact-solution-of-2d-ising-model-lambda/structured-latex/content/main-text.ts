@@ -9412,7 +9412,7 @@ R_{\mathrm{odd}}(\sigma)
               paragraph([ref("claim_selected_odd_orbit_reversal_involution"), " の自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}`), " は、この ", math(String.raw`R_{\mathrm{odd}}`), " の値域を対象集合へ制限した写像なので、各入力での値は同じである。"]),
               paragraph(["さらに、"]),
               displayMath(String.raw`\mathcal R_{\mathrm{odd}}(\mathcal R_{\mathrm{odd}}(\sigma))=\sigma
-\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr)`),
               paragraph(["これらが対象集合上の不動点のない対合という結論である。対象集合が空のときは入力が無く、いずれも全称命題として成り立つ。最小元を対象集合の外で選ぶ必要はない。有限集合・自然数・写像の反復だけを使い、実数体・複素数体への脱出はない。"]),
             ],
             },
@@ -66485,6 +66485,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.outsideBoundingRectangle_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],

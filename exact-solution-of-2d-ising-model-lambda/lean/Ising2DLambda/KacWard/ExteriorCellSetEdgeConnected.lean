@@ -59,6 +59,91 @@ theorem outsideBoundingRectangle_horizontalPath
         Or.inr ⟨hcEq.symm, hrStep.elim (fun h => Or.inr (by omega))
           (fun h => Or.inl (by omega))⟩⟩
 
+/-- 長方形の左側または右側の固定列では、任意の二セルを行方向の有限路で結べる。 -/
+theorem outsideBoundingRectangle_verticalPath
+    (rMin rMax cMin cMax c r s : ℤ)
+    (hc : c < cMin ∨ cMax ≤ c) :
+    Relation.ReflTransGen
+      (fun a b => a ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+        b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧ CellEdgeAdjacent a b)
+      (r, c) (s, c) := by
+  let step := fun a b => a ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+    b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧ CellEdgeAdjacent a b
+  have hmem (z : ℤ) : (z, c) ∈ outsideBoundingRectangle rMin rMax cMin cMax := by
+    change z < rMin ∨ rMax ≤ z ∨ c < cMin ∨ cMax ≤ c
+    rcases hc with h | h
+    · exact Or.inr (Or.inr (Or.inl h))
+    · exact Or.inr (Or.inr (Or.inr h))
+  have hforward (a b : ℤ) (hab : a ≤ b) :
+      Relation.ReflTransGen step (a, c) (b, c) := by
+    induction b, hab using Int.leInduction with
+    | base => exact Relation.ReflTransGen.refl
+    | succ b _ ih =>
+      exact ih.tail ⟨hmem b, hmem (b + 1),
+        Or.inr ⟨rfl, Or.inr (by omega)⟩⟩
+  rcases le_total r s with hrs | hsr
+  · exact hforward r s hrs
+  · have hreverse : Relation.ReflTransGen (Function.swap step) (r, c) (s, c) :=
+      (Relation.ReflTransGen.swap (r := step) (r, c) (s, c))
+        (hforward s r hsr)
+    apply Relation.ReflTransGen.mono (r := Function.swap step) ?_ _ _ hreverse
+    intro a b hab
+    rcases hab.2.2 with h | h
+    · rcases h with ⟨hrEq, hcStep⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inl ⟨hrEq.symm, hcStep.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+    · rcases h with ⟨hcEq, hrStep⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inr ⟨hcEq.symm, hrStep.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+
+/-- 外接長方形外の各セルを左下の基準セルへ結び、二セル間の有限路を得る。 -/
+theorem outsideBoundingRectangle_edgeConnected
+    (rMin rMax cMin cMax : ℤ) :
+    EdgeConnectedCellSet (outsideBoundingRectangle rMin rMax cMin cMax) := by
+  let S := outsideBoundingRectangle rMin rMax cMin cMax
+  let step := fun a b => a ∈ S ∧ b ∈ S ∧ CellEdgeAdjacent a b
+  let base : ℤ × ℤ := (rMin - 1, cMin - 1)
+  have hleft : cMin - 1 < cMin := by omega
+  have hbelow : rMin - 1 < rMin := by omega
+  have hreach (p : ℤ × ℤ) (hp : p ∈ S) :
+      Relation.ReflTransGen step p base := by
+    rcases p with ⟨r, c⟩
+    change r < rMin ∨ rMax ≤ r ∨ c < cMin ∨ cMax ≤ c at hp
+    rcases hp with hr | hr | hc | hc
+    · exact (outsideBoundingRectangle_horizontalPath
+        rMin rMax cMin cMax r c (cMin - 1) (Or.inl hr)).trans
+        (outsideBoundingRectangle_verticalPath
+          rMin rMax cMin cMax (cMin - 1) r (rMin - 1) (Or.inl hleft))
+    · exact (outsideBoundingRectangle_horizontalPath
+        rMin rMax cMin cMax r c (cMin - 1) (Or.inr hr)).trans
+        (outsideBoundingRectangle_verticalPath
+          rMin rMax cMin cMax (cMin - 1) r (rMin - 1) (Or.inl hleft))
+    · exact (outsideBoundingRectangle_verticalPath
+        rMin rMax cMin cMax c r (rMin - 1) (Or.inl hc)).trans
+        (outsideBoundingRectangle_horizontalPath
+          rMin rMax cMin cMax (rMin - 1) c (cMin - 1) (Or.inl hbelow))
+    · exact (outsideBoundingRectangle_verticalPath
+        rMin rMax cMin cMax c r (rMin - 1) (Or.inr hc)).trans
+        (outsideBoundingRectangle_horizontalPath
+          rMin rMax cMin cMax (rMin - 1) c (cMin - 1) (Or.inl hbelow))
+  intro x hx y hy
+  have hreverse : Relation.ReflTransGen (Function.swap step) base y :=
+    (Relation.ReflTransGen.swap (r := step) base y) (hreach y hy)
+  have hsymm : (Function.swap step) ≤ step := by
+    intro a b hab
+    rcases hab.2.2 with h | h
+    · rcases h with ⟨hrEq, hcStep⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inl ⟨hrEq.symm, hcStep.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+    · rcases h with ⟨hcEq, hrStep⟩
+      exact ⟨hab.2.1, hab.1,
+        Or.inr ⟨hcEq.symm, hrStep.elim (fun h => Or.inr (by omega))
+          (fun h => Or.inl (by omega))⟩⟩
+  exact (hreach x hx).trans ((Relation.ReflTransGen.mono hsymm base y) hreverse)
+
 /-- 最大列を持つ持ち上げ点の右側のセルは、外側帯と長方形の外側の双方に属する。 -/
 theorem outsideBoundingRectangle_inter_walkSideExteriorBand
     (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)
