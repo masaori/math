@@ -8971,7 +8971,7 @@ e_p&=i&&\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\text{ の
 p-1&<p&&\bigl(\because\ 0<p\text{ と自然数の差}\bigr).
 \end{aligned}`),
                 paragraph(["また、任意の ", math(String.raw`r\in I_p`), " について、"]),
-                displayMath(String.raw`e_r\in C\qquad\bigl(\because\ C\text{ の定義、証人は }r\bigr).`),
+                displayMath(String.raw`e_r\in C\qquad\bigl(\because\ C\text{ の定義、証人は }r\bigr)`),
                 paragraph(["順向きの一歩を調べる。任意の ", math(String.raw`r\in\mathbb N`), " に対し、"]),
                 displayMath(String.raw`\begin{aligned}
 \sigma(e_r)&=\sigma^{[r]}(\sigma(i))
@@ -9019,7 +9019,7 @@ p-1&<p&&\bigl(\because\ 0<p\text{ と自然数の差}\bigr).
 \end{aligned}`),
                 paragraph(["帰納法により、順向き・逆向きのどちらの有限回の反復も ", math(String.raw`C`), " に属する。任意の ", math(String.raw`j\in\operatorname{Orb}_\sigma(i)`), " は、", ref("def_finite_permutation_orbit"), " によりいずれかの反復値に等しいため ", math(String.raw`j\in C`), " である。逆に、任意の ", math(String.raw`j\in C`), " は、ある ", math(String.raw`r<p`), " で ", math(String.raw`j=e_r=\sigma^{[r]}(i)`), " と書けるので、同じ定義の順向きの証人 ", math(String.raw`r`), " により軌道に属する。この両包含で最初の同値を得る。"]),
                 paragraph(["写像 ", math(String.raw`\theta`), " の値は、順向きの証人により軌道に属し、写像は定まる。", math(String.raw`r,t\in I_p`), " と ", math(String.raw`\theta(r)=\theta(t)`), " に対して、"]),
-                displayMath(String.raw`r=t\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\bigr).`),
+                displayMath(String.raw`r=t\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\bigr)`),
                 paragraph(["よって単射である。また、任意の軌道の点 ", math(String.raw`j`), " に対して最初の同値から ", math(String.raw`r\in I_p`), " と ", math(String.raw`\theta(r)=j`), " が得られるので全射でもある。これで全単射を明示できた。最後に、"]),
                 displayMath(String.raw`\begin{aligned}
 p&=|I_p|&&\bigl(\because\ 0,\ldots,p-1\text{ の個数}\bigr)\\

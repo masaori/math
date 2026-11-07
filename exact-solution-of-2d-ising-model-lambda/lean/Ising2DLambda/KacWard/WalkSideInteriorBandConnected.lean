@@ -11,6 +11,7 @@ import Ising2DLambda.KacWard.OddRayInteriorCells
 import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
 import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
+import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
 import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 import Mathlib.Tactic
 
@@ -90,6 +91,38 @@ theorem walkSideInteriorBandFromWalk_from_necSuf {L m : ℕ}
   simp only [walkSideInteriorBandFromWalk,
     Ising2DLambda.NecSuf.KacWard.walkSideBand, Finset.mem_univ,
     true_and, Set.mem_setOf_eq]
+
+/-- 実際の内側帯のセルは、整数添字の内側帯にも属する。 -/
+theorem walkSideInteriorBandFromWalk_subset_coordinateBand {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    walkSideInteriorBandFromWalk γ hγ hh hv ⊆
+      walkSideInteriorBand (m + 1) row col := by
+  dsimp only
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  intro p hp
+  obtain ⟨hpInside, k, hpCorner⟩ := hp
+  have hk : Fin.ofNat (m + 2) k.val = k.castSucc := by
+    apply Fin.ext
+    simp [Nat.mod_eq_of_lt (by omega : k.val < m + 2)]
+  refine ⟨k.val, k.isLt, ?_⟩
+  change p ∈ ({q | q = (row k.val - 1, col k.val - 1) ∨
+    q = (row k.val - 1, col k.val) ∨ q = (row k.val, col k.val) ∨
+    q = (row k.val, col k.val - 1)} ∩ oddRayInteriorCells (m + 1) row col)
+  constructor
+  · dsimp at hpCorner ⊢
+    simpa only [row, col, hk] using hpCorner
+  · exact hinside ▸ hpInside
 
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
