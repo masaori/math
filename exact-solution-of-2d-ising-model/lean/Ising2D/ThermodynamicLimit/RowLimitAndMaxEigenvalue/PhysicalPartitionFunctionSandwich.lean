@@ -30,7 +30,7 @@
 | 同じ等式の実行列での表示 | `physicalV1halfR_mul_self_map` |
 | `Z_equals_trace_of_W` の「とくに」: 具体的な `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`W = (V_1^{1/2}V_2)V_1^{1/2}`、係数は `ℂ`） | `partition_function_eq_trace_physicalSymTransferC` |
 | `trace_of_W_power_via_W_real`: `W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q`（`real_matrix_of_real_entry_matrix_preserves_power`、`n → d`, `A → W`）、4 行の鎖 `tr(W^q) = Σ_k (W^q)_kk = Σ_k (((W^q)_ℝ)_kk)_ℂ = Σ_k (((W_ℝ)^q)_kk)_ℂ = (Σ_k ((W_ℝ)^q)_kk)_ℂ` | `trace_of_W_power_via_W_real` の `calc` の 4 段 |
-| 「とくに」を実行列 `W_ℝ` で読む（`trace_of_W_power_via_W_real` の `q → N_row` と `inclusion_rr_to_cc_is_injective`） | `partitionFunction_eq_trace_physicalSymTransferR_pow` |
+| `partition_function_sandwich` の準備 `Z(K_1,K_2) = T`（`Z_equals_trace_of_W` の「とくに」、`trace_of_W_power_via_W_real` の `q → N_row`、`inclusion_rr_to_cc_is_injective`） | `partition_function_eq_sum_diag_W_real_pow` |
 | Step 1 の準備: `m^+`、`σ^z_{m+1} = σ^z_{m^+}`（Lean の `D` は `nextSite` で書いてあるので定義どおり） | `nextSite`（`rfl`） |
 | Step 1 の準備: `σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`（`distinct_site_pauli_matrices_commute`。`M_col = 1` は同じ行列） | `sigmaZ_nextSite_mul_comm`（`siteOp_mul_comm`） |
 | Step 1: `(σ^z_k)^⊤ = σ^z_k` の 5 行 | `sigmaZ_transpose` の `calc` の 5 段 |
@@ -90,7 +90,7 @@
   人手の範囲外の `M = 0` は、添字が空で `D` が零行列であることによる補助の場合分けで一般の `M` の形（`K1D_transpose`・`K1D_hasRealEntries`）へ広げる。
 - Step 2 の `exp_of_real_symmetric_is_real_symmetric` と Step 3 の `V_2^⊤ = V_2` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
   `TensorPow M` で述べた具体版 `exp_of_real_symmetric_is_real_symmetric` と系 `transpose_smul_tensorPow` を引く。
-- `W_real_is_positive_definite` の鎖の `real_inclusion_preserves_finite_sum` には Lean の具体版が無く、既存の慣行どおり mathlib の
+- `W_real_is_positive_definite` の鎖と `trace_of_W_power_via_W_real` の鎖の 4 段目の `real_inclusion_preserves_finite_sum` には Lean の具体版が無く、既存の慣行どおり mathlib の
   `Complex.ofReal_sum` を引く（`ClaimTraceOfPositiveDefiniteIsPositive.lean` と同じ扱い）。各項へ当てる行は `Finset.sum_congr` で項ごとに 1 回ずつ当てる。
 - Step 3 の `W^⊤ = W` の鎖の `transpose_of_matrix_product` は、添字が `Conf M` の行列なので `TensorPow M` の系 `transpose_mul_tensorPow` を引き、
   `mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc` を引く。
@@ -601,7 +601,7 @@ theorem W_real_is_positive_definite (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Co
   exact hρ
 
 /-- 人手 `W_real_is_positive_definite` を、実成分で組んだ `physicalSymTransferR` で読む
-（`physicalSymTransferR_eq_realMatrixOfRealEntries`。`partition_function_sandwich` が使う形）。 -/
+（`physicalSymTransferR_eq_realMatrixOfRealEntries`。`ClaimPartitionFunctionSandwichAndLimitInNRow.lean`・`TheoremOnsagerUnconditional.lean`・`PhysicalEvenSectorBridge.lean` が使う形）。 -/
 theorem physicalSymTransferR_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : x ≠ 0) :
     0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x := by
   rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
@@ -659,8 +659,7 @@ theorem physicalSymTransferC_isUnit (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
 
 /-- **人手 `trace_of_W_power_via_W_real`**: `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W_ℝ := ϱ(W)`、`def_W_real`）。
 `W` の成分の実性は `physicalSymTransferC_hasRealEntries`（`W_is_real_symmetric_positive_definite`）、`W^q` の成分の実性と
-`(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`（`n → d`, `A → W`）。右辺の `Σ_k ((W_ℝ)^q)_kk` は
-Lean の実行列の `Matrix.trace` の中身（`partitionFunction_eq_trace_physicalSymTransferR_pow` が `rfl` で `.trace` に読む）である。 -/
+`(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`（`n → d`, `A → W`）。 -/
 theorem trace_of_W_power_via_W_real (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (q : ℕ) :
     (physicalSymTransferC M K1 K2 ^ q).trace
       = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
@@ -677,26 +676,21 @@ theorem trace_of_W_power_via_W_real (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (q : �
     _ = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2) hW) ^ q) k k : ℝ) : ℂ) :=
         (Complex.ofReal_sum _ _).symm                                         -- `real_inclusion_preserves_finite_sum`（`m → d`）
 
-/-- **人手 `partition_function_sandwich` の準備**: `Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`。
+/-- **人手 `partition_function_sandwich` の準備**: `Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`（`W_ℝ := ϱ(W)`、`def_W_real`）。
 人手の 2 行の鎖 `(Z(K_1,K_2))_ℂ = tr(W^{N_row})`（`Z_equals_trace_of_W` の「とくに」、`partition_function_eq_trace_physicalSymTransferC`）
-`= T_ℂ`（`trace_of_W_power_via_W_real`（`q → N_row`））と、`inclusion_rr_to_cc_is_injective`（`a → Z(K_1,K_2)`, `b → T`）に対応する。
-Lean ではそのあと、`T` を実行列の `Matrix.trace` と読む行（`rfl`）と、`W_ℝ` を実成分で組んだ `physicalSymTransferR` へ
-付け替える行（`physicalSymTransferR_eq_realMatrixOfRealEntries`）が続く。人手の `W_ℝ` は `def_W_real` の `ϱ(W)` 一つなので、この 2 行に人手の行は無い。 -/
-theorem partitionFunction_eq_trace_physicalSymTransferR_pow (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
+`= T_ℂ`（`trace_of_W_power_via_W_real`（`q → N_row`））と、`inclusion_rr_to_cc_is_injective`（`a → Z(K_1,K_2)`, `b → T`）に 1 対 1 で対応する。 -/
+theorem partition_function_eq_sum_diag_W_real_pow (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
-    partitionFunction Nrow M K1 K2 = (physicalSymTransferR M K1 K2 ^ Nrow).trace := by
-  apply inclusion_rr_to_cc_is_injective
+    partitionFunction Nrow M K1 K2
+      = ∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
+          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow) k k := by
+  apply inclusion_rr_to_cc_is_injective                                       -- `inclusion_rr_to_cc_is_injective`（`a → Z(K_1,K_2)`, `b → T`）
   calc ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)
       = (physicalSymTransferC M K1 K2 ^ Nrow).trace :=
         partition_function_eq_trace_physicalSymTransferC K1 K2 hN             -- `Z_equals_trace_of_W` の「とくに」
     _ = ((∑ k, ((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
           (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow) k k : ℝ) : ℂ) :=
         trace_of_W_power_via_W_real K1 hK2 Nrow                               -- `trace_of_W_power_via_W_real`（`q → N_row`）
-    _ = (((realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
-          (physicalSymTransferC_hasRealEntries K1 hK2)) ^ Nrow).trace : ℂ) := rfl
-                                                                              -- 実行列の `Matrix.trace` は対角成分の和
-    _ = ((physicalSymTransferR M K1 K2 ^ Nrow).trace : ℂ) := by
-        rw [← physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]         -- `W_ℝ = physicalSymTransferR`
 
 /-- **人手 `trace_power_sandwich`（本文の具体的な `W` について）**: `n ≥ 1` について
 `c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`（`W_ℝ := ϱ(W)`、`def_W_real`）。一般の `W` の具体版 `trace_power_sandwich`
@@ -717,20 +711,18 @@ theorem trace_power_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) {n : 
 /-- **人手 `partition_function_sandwich`（具体的な `Z(K_1,K_2)` と具体的な `W` について）**:
 `c(M_col)^{N_row} ≤ Z(K_1,K_2) ≤ 2^{M_col} c(M_col)^{N_row}`（`ℝ` の順序）、`c(M_col) := sup{x^⊤W_ℝx | ‖x‖ = 1}`。
 人手の 2 行の鎖 2 本（`Z(K_1,K_2) = T ≥ c^{N_row}`、`Z(K_1,K_2) = T ≤ 2^{M_col}c^{N_row}`）と 1 対 1 の `calc`。準備の `Z(K_1,K_2) = T` は
-`partitionFunction_eq_trace_physicalSymTransferR_pow`（実成分で組んだ `physicalSymTransferR` を `W_ℝ = ϱ(W)` へ戻す行
-`physicalSymTransferR_eq_realMatrixOfRealEntries` が続く）、不等式は `trace_power_sandwich_physical`（`n → N_row`）。 -/
+`partition_function_eq_sum_diag_W_real_pow`、不等式は `trace_power_sandwich_physical`（`n → N_row`）。主張の `c(M_col)` を実成分で組んだ
+`physicalSymTransferR` の上限で述べるので、冒頭の 1 行で `W_ℝ = ϱ(W)` へ書き換える（`physicalSymTransferR_eq_realMatrixOfRealEntries`。人手の `W_ℝ` は `def_W_real` の `ϱ(W)` 一つなので、この行に人手の行は無い）。 -/
 theorem partition_function_sandwich_physical (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow ≤ partitionFunction Nrow M K1 K2
       ∧ partitionFunction Nrow M K1 K2
         ≤ 2 ^ M * rayleighSup (physicalSymTransferR M K1 K2) ^ Nrow := by
-  rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]                      -- `W_ℝ = physicalSymTransferR`
+  rw [physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]                      -- `W_ℝ = physicalSymTransferR`（人手の行なし。主張の読み替え）
   set WR := realMatrixOfRealEntries (physicalSymTransferC M K1 K2)
     (physicalSymTransferC_hasRealEntries K1 hK2) with hWR
-  have hZT : partitionFunction Nrow M K1 K2 = ∑ k, (WR ^ Nrow) k k := by           -- 準備の `Z(K_1,K_2) = T`
-    rw [partitionFunction_eq_trace_physicalSymTransferR_pow K1 hK2 hN,
-      physicalSymTransferR_eq_realMatrixOfRealEntries K1 hK2]
-    rfl
+  have hZT : partitionFunction Nrow M K1 K2 = ∑ k, (WR ^ Nrow) k k :=             -- 準備の `Z(K_1,K_2) = T`
+    partition_function_eq_sum_diag_W_real_pow K1 hK2 hN
   have h := trace_power_sandwich_physical (M := M) K1 hK2 hN
   refine ⟨?_, ?_⟩
   · exact calc partitionFunction Nrow M K1 K2

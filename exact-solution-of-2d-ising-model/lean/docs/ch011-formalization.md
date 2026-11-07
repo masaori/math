@@ -109,7 +109,7 @@
 | **`Ising2D.W_has_positive_entries_physical`** / `physicalSymTransferR_pos` | 具体的な `W` の成分はすべて正（後者は `ι` の全射性で任意の行・列番号へ広げた形） | **`W_has_positive_entries`**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.trace_of_W_power_via_W_real` | `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`。4 行の鎖と 1 対 1） | `trace_of_W_power_via_W_real` |
-| `Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow` | 具体的な `Z(K_1,K_2)` は実行列 `(W_ℝ)^{N_row}` のトレース（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` と `trace_of_W_power_via_W_real` をつなぎ、`inclusion_rr_to_cc_is_injective` で実数へ戻す） | `partition_function_sandwich` の準備（`Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`） |
+| `Ising2D.partition_function_eq_sum_diag_W_real_pow` | 具体的な `Z(K_1,K_2)` は `Σ_k ((W_ℝ)^{N_row})_kk`（係数 `ℂ` の `partition_function_eq_trace_physicalSymTransferC` と `trace_of_W_power_via_W_real` の 2 行の鎖と、`inclusion_rr_to_cc_is_injective` で実数へ戻す段。人手と 1 対 1） | `partition_function_sandwich` の準備（`Z(K_1,K_2) = T`、`T := Σ_k ((W_ℝ)^{N_row})_kk`） |
 | `Ising2D.sigmaZ_transpose` / `sigmaZ_nextSite_mul_comm` / `sigmaZ_mul_sigmaZ_nextSite_transpose` | `(σ^z_k)^⊤ = σ^z_k`（5 行）、`σ^z_{m^+}σ^z_m = σ^z_mσ^z_{m^+}`、`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`（5 行。周期端を含む） | `W_is_real_symmetric_positive_definite` Step 1 |
 | `Ising2D.K1D_transpose_succ` / `sigmaZ_hasRealEntries` / `K1D_hasRealEntries_succ` | `(K₁D)^⊤ = K₁D`（5 行）、`σ^z_k`・`K₁D` の成分は実（2 段落） | 同 Step 1 |
 | `Ising2D.halfK1D_hasRealEntries` / `halfK1D_transpose` / `halfK1D_isRealSymmetric` | `½K₁D` の成分は実、`(½K₁D)^⊤ = ½K₁D`（3 行）、`½K₁D` は実対称 | 同 Step 2 |
@@ -238,7 +238,7 @@
 章 009 / 010 などの結果は、一般の実行列について述べた次の定理では **import せず仮定として受け取っている**。
 （`PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` の冒頭コメントにも明記した。）
 具体的な `Z`・`W` についての通しの証明（`partition_function_sandwich_physical` ほか）は、これらを仮定に取らず証明して使う。
-`(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）を仮定に取る定理はもう無い。`partition_function_sandwich_physical` が人手の準備 `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`（`partitionFunction_eq_trace_physicalSymTransferR_pow`）を証明して使う。
+`(Z(K_1,K_2))_ℂ = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）を仮定に取る定理はもう無い。`partition_function_sandwich_physical` が人手の準備 `Z(K_1,K_2) = Σ_k ((W_ℝ)^{N_row})_kk`（`partition_function_eq_sum_diag_W_real_pow`）を証明して使う。
 
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |
 | --- | --- | --- |

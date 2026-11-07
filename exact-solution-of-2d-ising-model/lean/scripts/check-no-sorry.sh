@@ -998,7 +998,7 @@ targets=(
   Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries
   Ising2D.rayleighSup_physicalSymTransferR_eq
   Ising2D.trace_of_W_power_via_W_real
-  Ising2D.partitionFunction_eq_trace_physicalSymTransferR_pow
+  Ising2D.partition_function_eq_sum_diag_W_real_pow
   Ising2D.partition_function_sandwich_physical
   # --- 数演算子と同時固有空間の必要十分版（NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean。章「V^{(+)} の固有値」と整数運動量の経路の記録が共有）と、それに続く各章 ---
   Ising2D.NecSuf.num_mul_num
