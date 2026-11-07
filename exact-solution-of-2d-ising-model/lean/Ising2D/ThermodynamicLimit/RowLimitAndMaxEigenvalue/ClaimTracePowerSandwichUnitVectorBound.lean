@@ -321,7 +321,7 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
           (finite_sum_of_real_numbers_is_monotone_fintype _ _ fun k =>
             finite_sum_of_real_numbers_is_monotone_fintype _ _ fun l =>
               power_of_W_real_entry_bound W hW hWRsymm hpd n x k l)
-          (by norm_num)                                                     -- 【`(W_ℝ)^n` の成分の評価】を `d^2` 個の項へ同時に、項ごとの不等式の有限和と `2^{-1} > 0` 倍
+          (by norm_num)                                                     -- 【`(W_ℝ)^n` の成分の評価】を組 `(k,l)` ごとの項へ同時に、項ごとの不等式の有限和と `2^{-1} > 0` 倍
     _ = 2⁻¹ * (∑ k, ∑ l, x l ^ 2 * P k k + ∑ k, ∑ l, x k ^ 2 * P l l) := by
         rw [← Finset.sum_add_distrib]
         exact congrArg (2⁻¹ * ·) (Finset.sum_congr rfl fun k _ => Finset.sum_add_distrib)

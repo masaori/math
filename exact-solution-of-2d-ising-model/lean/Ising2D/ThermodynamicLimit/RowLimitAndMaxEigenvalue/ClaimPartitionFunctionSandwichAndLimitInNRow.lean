@@ -6,13 +6,17 @@
 * `row_limit_and_max_eigenvalue_claim_sandwich_and_limit_in_N_row`
   （ラベル **`partition_function_sandwich_and_limit_in_N_row`**）
 
-主張（`K_1, K_2 > 0`、`M_col ≥ 2`。`W = V_1^{1/2}V_2V_1^{1/2}`、`c(M_col) = sup{x^⊤Wx | ‖x‖ = 1} > 0`）:
+主張（`K_1, K_2 > 0`、`M_col ≥ 2`。`W = V_1^{1/2}V_2V_1^{1/2}`、`W_ℝ` はその成分を実数として並べた行列、`c(M_col) = sup{x^⊤W_ℝx | ‖x‖ = 1} > 0`）:
 
 1. `N_row ≥ 1` について `c(M_col)^{N_row} ≤ Z(K_1,K_2) ≤ 2^{M_col} c(M_col)^{N_row}`
 2. `lim_{N_row→∞} (1/(M_col N_row)) log Z(K_1,K_2) = (1/M_col) log c(M_col)`
 
-`Z` は `partitionFunction N_row M K_1 K_2`、`W` は `physicalSymTransferR M K_1 K_2`、
+`Z` は `partitionFunction N_row M K_1 K_2`、`W_ℝ` は実数の行列 `physicalSymTransferR M K_1 K_2`、
 `c(M_col)` は `rayleighSup (physicalSymTransferR M K_1 K_2)` である。
+人手の `d := 2_ℤ^{M_col}`（`W ∈ Mat(d,ℂ)`・`W_ℝ ∈ Mat(d,ℝ)`・`x ∈ ℝ^d`）に当たる添字は `Conf M` で、
+`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat` である。(1) の `2^{M_col}` は人手では `ℝ` の元 `2_ℝ^{M_col}` で、
+Lean でも `(2 : ℝ) ^ M` である。(2) の `M_col N_row`・`M_col` は人手の `ι_{ℤ→ℝ}` の像で、Lean では `ℕ → ℝ` の
+キャスト `(M : ℝ)`・`(Nrow : ℝ)` である。
 
 ## 人手証明との対応
 

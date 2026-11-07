@@ -1,3 +1,5 @@
+2026-11-07: Lean の通しの証明のゴールラインの確認の二百六十九個目として、状態台帳の「行列の大きさの記号を章で揃える件」の「残りの箇所」を行い、この件を済ませた。章の概観 `maxeig_000_remark_overview` と章のゴールの主張 `partition_function_sandwich_and_limit_in_N_row` に `d := 2_ℤ^{M_col}` を置いて行列の大きさ・ベクトルの次元を `d` にし、`ℝ` の `2^{M_col}`（`2_ℝ^{M_col}` の略記）と `ι_{ℤ→ℝ}` の略記の断りを書いた。`trace_power_sandwich` の「`d^2` 個の項」を「組 `(k,l)` ごとの項」にし、`limit_of_log_Z_in_N_row` の証明に `2_ℝ`・`2_ℝ^{M_col}` の略記を置いた。Lean は冒頭のコメントだけ直した。値・手順・SageMath・通しの定理の型は不変。次は (r12)。
+
 2026-11-07: Lean の通しの証明のゴールラインの確認の二百六十八個目として、状態台帳の「行列の大きさの記号を章で揃える件」の「作用素ノルムの評価のブロック」を行った。人手 `rayleigh_bounds_operator_norm` の主張の冒頭で `d := 2_ℤ^{M_col}` を置き、添字なしの `2^{M_col}`（26 か所）を `d` にし、`def_matrix_norm` の当てはめに `K = ℝ, d → d, w → y` を書いた。Lean は `ClaimOperatorBound.lean` の冒頭のコメントだけ直した。値・手順・SageMath・通しの定理の型は不変。次は「残りの箇所」。
 
 2026-11-07: Lean の通しの証明のゴールラインの確認の二百六十七個目として、状態台帳の「行列の大きさの記号を章で揃える件」の「Rayleigh 上限の定義のブロック」を行った。人手 `def_rayleigh_sup` の主張の冒頭で `d := 2_ℤ^{M_col}` を置き、添字なしの `2^{M_col}`（40 か所）を `d` にし、`def_matrix_norm` の当てはめに `K = ℝ` を足した。Lean は `DefinitionRayleighSup.lean` の冒頭のコメントだけ直した。値・手順・SageMath・通しの定理の型は不変。次は「作用素ノルムの評価のブロック」。
