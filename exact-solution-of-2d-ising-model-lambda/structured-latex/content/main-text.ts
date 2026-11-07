@@ -8400,26 +8400,26 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
               proof: [
                 paragraph([math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`N:=|\mathcal J|\in\mathbb N`), " と置く。", math(String.raw`k\in\{0,\ldots,N\}`), " に対して ", math(String.raw`v(k):=\sigma^{[k]}(i)\in\mathcal J`), " と定める（", ref("def_finite_map_iteration"), "）。これら ", math(String.raw`N+1`), " 個の値がすべて相異なると仮定する。このとき ", math(String.raw`v`), " は単射なので、有限集合の元を数えると、"]),
                 displayMath(String.raw`\begin{aligned}
-N+1&\le |\mathcal J|&&\bigl(\because\ \text{相異なる }N+1\text{ 個の値が }\mathcal J\text{ に属する}\bigr),\\
-|\mathcal J|&=N&&\bigl(\because\ N\text{ の定義}\bigr).
+N+1&\le |\mathcal J|&&\bigl(\because\ \text{相異なる }N+1\text{ 個の値が }\mathcal J\text{ に属する}\bigr)\\
+|\mathcal J|&=N&&\bigl(\because\ N\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["となり、自然数の大小に反する。したがって相異なる二つの添字で値が一致する。小さい添字を ", math(String.raw`r`), "、大きい添字を ", math(String.raw`t`), " と書けば、"]),
                 displayMath(String.raw`\begin{aligned}
-r,t&\in\{0,\ldots,N\}&&\bigl(\because\ \text{値が一致する二つの添字の選択}\bigr),\\
-r&<t&&\bigl(\because\ r\text{ を小さい添字、}t\text{ を大きい添字とした}\bigr),\\
-\sigma^{[t]}(i)&=\sigma^{[r]}(i)&&\bigl(\because\ v(t)=v(r)\text{ と }v(k)=\sigma^{[k]}(i)\bigr).
+r,t&\in\{0,\ldots,N\}&&\bigl(\because\ \text{値が一致する二つの添字の選択}\bigr)\\
+r&<t&&\bigl(\because\ r\text{ を小さい添字、}t\text{ を大きい添字とした}\bigr)\\
+\sigma^{[t]}(i)&=\sigma^{[r]}(i)&&\bigl(\because\ v(t)=v(r)\text{ と }v(k)=\sigma^{[k]}(i)\bigr)
 \end{aligned}`),
                 paragraph(["である。", math(String.raw`d:=t-r\in\mathbb N`), " と置くと、"]),
                 displayMath(String.raw`\begin{aligned}
-0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr),\\
-r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr).
+0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr)\\
+r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr)
 \end{aligned}`),
                 paragraph(["反復の加法則を用い、一行ずつ書くと、"]),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[r]}\bigl(\sigma^{[d]}(i)\bigr)
 &=\sigma^{[r+d]}(i)&&\bigl(\because\ \blkref{claim_finite_map_iterate_add}\bigr)\\
 &=\sigma^{[t]}(i)&&\bigl(\because\ r+d=t\bigr)\\
-&=\sigma^{[r]}(i)&&\bigl(\because\ \text{選んだ二つの反復値の一致}\bigr).
+&=\sigma^{[r]}(i)&&\bigl(\because\ \text{選んだ二つの反復値の一致}\bigr)
 \end{aligned}`),
                 paragraph(["両方の始点 ", math(String.raw`\sigma^{[d]}(i),i`), " は ", math(String.raw`\mathcal J`), " に属するから、"]),
                 displayMath(String.raw`\sigma^{[d]}(i)=i\qquad\bigl(\because\ \blkref{claim_finite_permutation_iterate_injective}\text{ を直前の等式に適用}\bigr)`),
