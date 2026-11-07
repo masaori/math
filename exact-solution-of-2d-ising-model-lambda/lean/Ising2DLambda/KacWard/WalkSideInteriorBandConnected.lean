@@ -10,6 +10,7 @@ import Ising2DLambda.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCells
 import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
+import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
 import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 import Mathlib.Tactic
 
@@ -244,6 +245,68 @@ theorem surroundingInteriorCells_edgeConnected_of_parityArcs
            (hstep _ _ (hmem0 hm) hy hedge01)
        · exact (hstep _ _ hx (hmem2 hm) (cellEdgeAdjacent_symmetric hedge23)).trans
            (hstep _ _ (hmem2 hm) hy (cellEdgeAdjacent_symmetric hedge12)))
+
+/-- 一歩の両端に接する内側弧は、歩が通る辺の内側セルを共有する。 -/
+theorem consecutive_surroundingInteriorCells_intersect
+    (n : ℕ) (row col : ℕ → ℤ) (k : ℕ) (hk : k < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hlocal :
+      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
+      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
+    ∃ p, p ∈ surroundingInteriorCells n row col k ∧
+      p ∈ surroundingInteriorCells n row col (k + 1) := by
+  have hodd (a b : ℕ) (h : (a + b) % 2 = 1) : Odd a ∨ Odd b := by
+    rw [Nat.odd_iff, Nat.odd_iff]
+    omega
+  rcases walkStep_edgeTraversal_one n row col k hk hunit hlocal with
+    ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩
+  · have hp : rightRayCrossingCount n row col (row k) (col k - 1) =
+        rightRayCrossingCount n row col (row k) (col k) + 1 := by
+        simpa only [show col k - 1 + 1 = col k by omega, ht] using
+          rightRayCrossingCount_adjacent n row col (row k) (col k - 1)
+    have hparity : (rightRayCrossingCount n row col (row k) (col k - 1) +
+        rightRayCrossingCount n row col (row k) (col k)) % 2 = 1 := by
+      rw [hp]; omega
+    rcases hodd _ _ hparity with h | h
+    · refine ⟨(row k, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+    · refine ⟨(row k, col k), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+  · have hp : rightRayCrossingCount n row col (row k - 1) (col k - 1) =
+        rightRayCrossingCount n row col (row k - 1) (col k) + 1 := by
+        simpa only [show col k - 1 + 1 = col k by omega, ht] using
+          rightRayCrossingCount_adjacent n row col (row k - 1) (col k - 1)
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k - 1) +
+        rightRayCrossingCount n row col (row k - 1) (col k)) % 2 = 1 := by
+      rw [hp]; omega
+    rcases hodd _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+    · refine ⟨(row k - 1, col k), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+  · have hp := verticallyAdjacentCells_boundaryParity n row col
+        (row k - 1) (col k) hclosedRow hclosedCol hunit
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k) +
+        rightRayCrossingCount n row col (row k) (col k)) % 2 = 1 := by
+      simpa only [show row k - 1 + 1 = row k by omega, ht] using hp
+    rcases hodd _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+    · refine ⟨(row k, col k), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+  · have hp := verticallyAdjacentCells_boundaryParity n row col
+        (row k - 1) (col k - 1) hclosedRow hclosedCol hunit
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k - 1) +
+        rightRayCrossingCount n row col (row k) (col k - 1)) % 2 = 1 := by
+      simpa only [show row k - 1 + 1 = row k by omega, ht] using hp
+    rcases hodd _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
+    · refine ⟨(row k, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingInteriorCells, oddRayInteriorCells, hr, hc, h]
 
 /-- 各訪問頂点の内側弧を有限鎖としてつなぐ局所合成。 -/
 theorem walkSideInteriorBand_nonempty_edgeConnected_local

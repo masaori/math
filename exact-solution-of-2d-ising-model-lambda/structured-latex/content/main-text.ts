@@ -66020,6 +66020,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
                     ],
@@ -79326,12 +79327,12 @@ D^{a,b}_L(x)
 &=1+\frac{(1-x)^2}{(1+x)^2}
 &&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
 &=\frac{2(1+x^2)}{(1+x)^2}
-&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr),\\[1mm]
+&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr)\\[1mm]
 \mathrm{KW}(x)(1-\mathrm{KW}(x)^2)
 &=\frac{1-x}{1+x}\left(1-\frac{(1-x)^2}{(1+x)^2}\right)
 &&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
 &=\frac{4x(1-x)}{(1+x)^3}
-&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr).
+&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr)
 \end{aligned}`),
                   displayMath(String.raw`\begin{aligned}
 (1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)
@@ -79344,7 +79345,7 @@ D^{a,b}_L(x)
 &=4\bigl((1+x^2)^2-x(1-x^2)S\bigr)
 &&\bigl(\because\ (1-x)(1+x)=1-x^2\bigr)\\
 &=4\Delta(x;\varpi,\varsigma)
-&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)
 \end{aligned}`),
                 ],
               },
