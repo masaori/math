@@ -131,3 +131,4 @@
 - 2026-11-04: 代表の依頼で Jordan–Wigner 行列と同型の関係を解説した。Jordan–Wigner の系で使う等長写像と共役の行列（K^{⊗M}）を、構成案の系の段落に書き足した（M=1,2,3 の行列計算で確認済み）。
 - 2026-11-05: 行列の集合が成分ごとの和とスカラー倍で ℂ-線型空間であること（ラベル claim_matrices_indexed_by_finite_set_form_complex_vector_space）を示した。次は行列の積の結合法則。
 - 2026-11-07: Φ(P) に当たる行列の積 ∏ c_i^T c_i が E_{∅,∅} であること（ラベル claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit）を示し、SageMath で M=1,2,3 を検算した。次は Φ(a†_S) に当たる行列の番号順の積を E_{∅,∅} に左から掛けると E_{S,∅} になること。
+- 2026-11-08: 合同の対称性（ラベル claim_congruence_modulo_two_sided_ideal_is_symmetric）を、b+_A((-1_ℂ)∗_A a)=(-1_ℂ)∗_A x の六行の鎖とイデアルのスカラー倍での閉性で示した。次は合同の推移性。
