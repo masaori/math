@@ -66832,6 +66832,59 @@ e_v\in\mathcal B_{\square}(T\triangle U)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_cell_boundary_even_at_vertex",
+                        kind: "claim",
+                        title: { text: "平面のセル境界は各頂点で偶数本の辺を持つ" },
+                        labels: ["claim_plane_cell_boundary_even_at_vertex"],
+                        habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeCellBoundary_vertex_even",
+                          "Ising2DLambda.NecSuf.KacWard.boundaryVertex_even_of_binary_cells",
+                        ],
+                        verification: ["sagemath/check/plane-cell-boundary-vertex-even"],
+                        statement: [
+                          paragraph([
+                            "任意の有限セル集合 ", math(String.raw`T\subset\mathbb Z\times\mathbb Z`),
+                            " と格子点 ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
+                            " を取る。", ref("def_plane_cell_boundary_edge_set"),
+                            " の境界辺集合への所属を表す指示関数を ",
+                            math(String.raw`\mathbf1_{e\in\mathcal B_{\square}(T)}\in\{0,1\}`),
+                            " と書く。この頂点に接する横二辺と縦二辺について",
+                          ]),
+                          displayMath(String.raw`\Bigl(\mathbf1_{\{(r,c),(r,c+1)\}\in\mathcal B_{\square}(T)}
++\mathbf1_{\{(r,c-1),(r,c)\}\in\mathcal B_{\square}(T)}
++\mathbf1_{\{(r,c),(r+1,c)\}\in\mathcal B_{\square}(T)}
++\mathbf1_{\{(r-1,c),(r,c)\}\in\mathcal B_{\square}(T)}\Bigr)\bmod2=0`),
+                          paragraph(["が成り立つ。四辺は平面格子では相異なるので、これは境界辺の端点数が偶数であることを述べる。"]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "四セル ", math(String.raw`A:=(r,c),\ B:=(r-1,c),\ C:=(r,c-1),\ D:=(r-1,c-1)`),
+                            " を置き、所属の指示値を ",
+                            math(String.raw`a:=\mathbf1_{A\in T},\ b:=\mathbf1_{B\in T},\ d:=\mathbf1_{C\in T},\ f:=\mathbf1_{D\in T},\quad a,b,d,f\in\{0,1\}`),
+                            " とする。任意の ", math(String.raw`x,y\in\{0,1\}`),
+                            " について ", math(String.raw`x\mathbin{\mathrm{xor}}y:=(x+y)\bmod2\in\{0,1\}`), " と定める。",
+                            "横二辺と縦二辺の境界への所属はそれぞれ ",
+                            math(String.raw`a\mathbin{\mathrm{xor}}b,\ d\mathbin{\mathrm{xor}}f,\ a\mathbin{\mathrm{xor}}d,\ b\mathbin{\mathrm{xor}}f`),
+                            " である（", ref("def_plane_cell_boundary_edge_set"), "）。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+&\bigl((a\mathbin{\mathrm{xor}}b)+(d\mathbin{\mathrm{xor}}f)
++(a\mathbin{\mathrm{xor}}d)+(b\mathbin{\mathrm{xor}}f)\bigr)\bmod2\\
+&=(a+b+d+f+a+d+b+f)\bmod2
+&&\bigl(\because\ x\mathbin{\mathrm{xor}}y=(x+y)\bmod2\text{ と剰余の加法則}\bigr)\\
+&=2(a+b+d+f)\bmod2
+&&\bigl(\because\ \mathbb N\text{ の交換律と結合律}\bigr)\\
+&=0
+&&\bigl(\because\ 2\text{ の倍数の偶奇}\bigr)
+\end{aligned}`),
+                          paragraph(["したがって、四辺の指示関数の和も偶数である。計算は自然数の加法と二を法とする剰余だけで閉じる。"]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",
@@ -66905,7 +66958,10 @@ e_v\in\mathcal B_{\square}(T\triangle U)
                         " に属さず、二セルは同じ面に入る。補集合は辺連結なので、すべての外側セルは一つの面に入り、",
                         "この面はセル座標を任意に遠くまで進められる外側の面である。したがって",
                       ]),
-                      displayMath(String.raw`R_S=|S|+1\qquad\bigl(\because\ \text{各内側セルが一面を与え、外側の面は一つ}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+R_S&=|S|+1
+&&\bigl(\because\ \text{各内側セルが一面を与え、外側の面は一つ}\bigr)
+\end{aligned}`),
                       paragraph([
                         "である。ここで有限連結平面グラフの Euler の数え上げを ", math(String.raw`G_S`),
                         " に適用する。その頂点数と辺数を ", math(String.raw`V_S,E_S\in\mathbb N`),
@@ -66915,7 +66971,10 @@ e_v\in\mathcal B_{\square}(T\triangle U)
                         "各辺は既存の一つの面の内部を二つに分けるので、辺数と面数が同時に一つずつ増える。ゆえに ",
                         math(String.raw`V_S-E_S+R_S`), " は変わらず、木の場合の値 ", math(String.raw`2`), " に等しい。すなわち",
                       ]),
-                      displayMath(String.raw`V_S-E_S+R_S=2\qquad\bigl(\because\ \text{木から格子辺を戻すと辺数と面数が同時に一つずつ増える}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+V_S-E_S+R_S&=2
+&&\bigl(\because\ \text{木から格子辺を戻すと辺数と面数が同時に一つずつ増える}\bigr)
+\end{aligned}`),
                       paragraph(["である。以上を合わせると"]),
                       displayMath(String.raw`\begin{aligned}
 \chi_{\square}(S)

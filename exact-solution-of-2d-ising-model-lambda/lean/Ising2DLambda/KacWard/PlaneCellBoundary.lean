@@ -62,4 +62,17 @@ theorem planeCellBoundary_symmDiff (cells₁ cells₂ : Finset GridCell) :
     simp only [↓reduceIte]
     tauto
 
+/-- The four boundary edge positions incident to a planar grid vertex have even parity. -/
+theorem planeCellBoundary_vertex_even (cells : Finset GridCell) (r c : ℤ) :
+    ((if (false, (r, c)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (false, (r, c - 1)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (true, (r, c)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (true, (r - 1, c)) ∈ planeCellBoundary cells then 1 else 0)) % 2 = 0 := by
+  simp only [planeCellBoundary, Finset.mem_filter, horizontalEdge_mem_cellEdges_iff,
+    verticalEdge_mem_cellEdges_iff, Bool.false_eq_true, ↓reduceIte]
+  by_cases h₁ : (r, c) ∈ cells <;>
+  by_cases h₂ : (r - 1, c) ∈ cells <;>
+  by_cases h₃ : (r, c - 1) ∈ cells <;>
+  by_cases h₄ : (r - 1, c - 1) ∈ cells <;>
+  simp [h₁, h₂, h₃, h₄]
 end Ising2DLambda.KacWard
