@@ -2717,10 +2717,6 @@ s_1c_2
         math(String.raw`\sin(\pi/2) = 1`),
         "・",
         math(String.raw`\cos(\pi/2) = 0`),
-        "・",
-        math(String.raw`\arcsin(0) = 0`),
-        "・",
-        math(String.raw`0 < \pi`),
         " を確かめる。",
         math(String.raw`\pi`),
         " は ",
@@ -2751,26 +2747,11 @@ s_1c_2
 &= 0
 &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
 \end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\arcsin(0)
-&= \arcsin(\sin 0)
-&&(\because\ \blkref{sine_zero})\\
-&= 0
-&&\bigl(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ (\blkref{zero_in_closed_interval_from_minus_half_pi_to_half_pi})\ \text{で}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\pi
-&= 2\arcsin(1)
-&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)\\
-&> 2\arcsin(0)
-&&(\because\ 0 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加})\\
-&= 2\cdot 0
-&&(\because\ \text{上の}\ \arcsin(0) = 0)\\
-&= 0
-&&(\because\ \mathbb{R}\ \text{の四則})
-\end{aligned}`),
       paragraph([
-        "とくに ",
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0 < \pi`),
+        " より ",
         math(String.raw`0 \leq 0 - 2\cdot 0\cdot\pi < 2\pi`),
         " と ",
         math(String.raw`0 \leq \pi - 2\cdot 0\cdot\pi < 2\pi`),
@@ -3052,6 +3033,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖を独立の主張 arctan_zero（020_critical_point.ts）へ移し、(3)(4) の鎖の根拠「準備の arctan 0 = 0」を arctan_zero の参照にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖も同じ主張を引く。0 < π の鎖が引いていた arcsin(0) = 0 は、移した鎖の 7・8 行目と同じ 2 行の鎖（sine_zero・def_sin）として準備の第五に残した。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の cos(π/2) の鎖の「ℝ の四則」1 行（1^2 = 1・1 − 1 = 0 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割った。最後の行 √0 = 0（0 ≥ 0・0^2 = 0・definition_of_sqrt_r_positive の一意性を 1 行で使っていた）を、新しく足した主張 sqrt_of_real_zero_is_zero（000_calculation_formulae_20_29.ts）の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3) の φ_polar((−r)_C) の鎖の最後の行（[(r, arctan 0+π)] = [(r, π)]。arctan 0 = 0 と ℝ の 0 + π = π を 1 行で使っていた）を、arctan_zero の行（[(r, 0+π)]）と ℝ で 0 + a = a（a → π）の行の 2 行に割った。値と主張は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の 0 < π の鎖（arcsin(0) = 0 を経て π = 2arcsin(1) > 2arcsin(0) = 0）を、zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明から独立させた主張 pi_is_positive の参照にした。arcsin(0) = 0 の鎖は 0 < π の鎖にしか使われていなかったので外した。値と主張は不変。",
       ],
     },
   },

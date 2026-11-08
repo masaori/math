@@ -1,44 +1,18 @@
 # 対象ラベル: zero_in_closed_interval_from_minus_half_pi_to_half_pi
 # 0 ∈ [-π/2, π/2] の証明の鎖を一行ずつ確かめる。
-#   準備の arcsin(-1) の鎖 3 行: def_arcsin の第二の式（y' → -1）・ℝ で -(-a) = a（a → 1）・arcsin(1) = π/2
-#   -π/2 < π/2 の鎖 3 行: 上の鎖・-1 < 1 と arcsin の狭義単調増加・arcsin(1) = π/2
-#   0 < π の鎖 3 行: -a + a = 0（a → π/2）・順序と加法の両立（c → π/2）・a/2 + a/2 = a（a → π）
-#   0 < π/2 の鎖 2 行: 0/x = 0（x → 2）・x < y, c > 0 ⇒ x/c < y/c（c → 2）
+#   0 < π/2 の鎖 2 行: 0/x = 0（x → 2）・pi_is_positive の 0 < π と x < y, c > 0 ⇒ x/c < y/c（c → 2）
 #   -π/2 < 0 の鎖 3 行: a + 0 = a（a → -π/2）・順序と加法の両立（c → -π/2）・-a + a = 0（a → π/2）
+# 0 < π の鎖は主張 pi_is_positive の検算 sagemath/check/pi_is_positive/ が扱う。
 # 帰属: 等号は Sage の記号計算（SR）と QQ で厳密。不等号は RealBallField(256) のボールの比較で確かめる
-#       （π と arcsin の値が実数なので ℝ へ脱出する。ボールの比較は真と判定できたときだけ真を返す）。
-# 本文の arcsin（弧の長さ）が標準の arcsin に等しいことは arcsin_is_bijection の検算が扱う。
+#       （π が実数なので ℝ へ脱出する。ボールの比較は真と判定できたときだけ真を返す）。
 
 R = RealBallField(256)
 pi_b = R.pi()
 eq_count = 0
 ineq_count = 0
 
-def arcsin_b(y):
-    return R(y).arcsin()
-
-# 準備の arcsin(-1) の鎖
-# 1 行目: arcsin(-1) = -arcsin(-(-1))（def_arcsin の第二の式。-1 ≤ -1 < 0）
-assert QQ(-1) >= -1 and QQ(-1) < 0
-assert bool(arcsin(SR(-1)) == -arcsin(-(SR(-1))))
-eq_count += 1
-# 2 行目: -(-1) = 1
-assert -(QQ(-1)) == QQ(1); eq_count += 1
-# 3 行目: arcsin(1) = π/2
-assert bool(-arcsin(SR(1)) == -(pi / 2)); eq_count += 1
-
-# -π/2 < π/2 の鎖
-assert bool(-(pi / 2) == arcsin(SR(-1))); eq_count += 1
-assert QQ(-1) < QQ(1)
-assert arcsin_b(-1) < arcsin_b(1); ineq_count += 1
-assert bool(arcsin(SR(1)) == pi / 2); eq_count += 1
-assert -(pi_b / 2) < pi_b / 2; ineq_count += 1
-
-# 0 < π の鎖
-assert bool(SR(0) == -(pi / 2) + pi / 2); eq_count += 1
-assert -(pi_b / 2) + pi_b / 2 < pi_b / 2 + pi_b / 2; ineq_count += 1
-assert bool(pi / 2 + pi / 2 == pi); eq_count += 1
-assert R(0) < pi_b; ineq_count += 1
+# 根拠に引く pi_is_positive の 0 < π（検算は sagemath/check/pi_is_positive/）
+assert R(0) < pi_b
 
 # 0 < π/2 の鎖
 assert QQ(0) == QQ(0) / 2; eq_count += 1
@@ -54,16 +28,13 @@ assert -(pi_b / 2) <= 0 and R(0) <= pi_b / 2; ineq_count += 2
 
 # 否定コントロール
 broken = 0
-# arcsin(-1) の符号を取り違えて +π/2 とすると、-π/2 < π/2 の鎖の 2 行目（arcsin(-1) < arcsin(1)）が成り立たない
-if not (pi_b / 2 < arcsin_b(1)):
-    broken += 1
 # 0 < π/2 の鎖で 2 の代わりに -2 で割ると不等号の向きが逆になり 0 < π/(-2) が成り立たない
 if not (R(0) < pi_b / (-2)):
     broken += 1
 # 区間を [π/2, 3π/2] に取り違えると 0 は入らない
 if not (pi_b / 2 <= 0):
     broken += 1
-assert broken == 3
+assert broken == 2
 
 print(f"等号 {eq_count} 個・不等号 {ineq_count} 件を確かめた（等号は SR と QQ で厳密、不等号は RealBallField(256)）")
 print(f"negative controls (broken lines detected): {broken}")

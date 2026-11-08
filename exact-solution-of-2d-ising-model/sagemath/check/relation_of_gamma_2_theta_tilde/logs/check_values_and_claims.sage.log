@@ -6,15 +6,11 @@ PASS cos(π/2) の鎖 第 4 行: √(1 - 1) = √0（ℝ で a - a = 0 の a →
 PASS cos(π/2) の鎖 第 5 行: √0 = 0（sqrt_of_real_zero_is_zero。検算 sagemath/check/sqrt_of_real_zero_is_zero/）
 PASS cos(π/2) の鎖 否定の対照: 1^2 を 2^2 に、a - a を 2 - 1 に取り違えると等号が崩れる
 PASS cos 0 = 1、sin 0 = 0
-PASS arcsin(0) の鎖 第 1 行: 0 = sin 0（sine_zero。角度 0 の sin を 1 の冪根の虚部で）
-PASS arcsin(0) の鎖 第 2 行: 0 ∈ [-π/2, π/2] で arcsin(sin 0) = 0（def_sin）
-PASS 0 < π の鎖 第 1 行: π = 2 arcsin(1)
-PASS 0 < π の鎖 第 2 行: 2 arcsin(1) > 2 arcsin(0)
-PASS 0 < π の鎖 第 3・4 行: 2 arcsin(0) = 2·0 = 0
+PASS 0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_positive/）
 PASS (3) φ_polar((-r)_C) の鎖 第 6 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 5 行 arctan 0 = 0 は sagemath/check/arctan_zero/）
 PASS (3) φ_polar((-r)_C) の鎖 第 6 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π
 PASS 角度 0 と π の angle_section_existence_uniqueness の整数は 0
 PASS 具体の組の数: 結合定数 4 組 × M_col = 2..8 の全 μ = 140 組
 PASS 全ての組で全ての行が一致
--- relation_of_gamma_2_theta_tilde: 具体の値と主張: 17/17 PASS
+-- relation_of_gamma_2_theta_tilde: 具体の値と主張: 13/13 PASS
 RESULT: PASS

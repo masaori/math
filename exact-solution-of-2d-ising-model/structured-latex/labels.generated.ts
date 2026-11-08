@@ -492,6 +492,7 @@ export const ALL_LABELS = [
   "pauli_z_has_real_entries",
   "periodicity_of_check_fermi",
   "phi_cartesian_after_phi_polar_is_identity",
+  "pi_is_positive",
   "pi_squared_numerical_bounds",
   "polar_equivalence_class",
   "polar_multiplication_well_defined",
