@@ -8751,14 +8751,14 @@ j\in\operatorname{Orb}_{\rho}(i)
                 displayMath(String.raw`\begin{aligned}
 \tau(\tau^{[0]}(y))
  &=\tau(y)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
- &=\tau^{[0]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+ &=\tau^{[0]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`n`), " についてすべての始点で成り立つと仮定すると、"]),
                 displayMath(String.raw`\begin{aligned}
 \tau(\tau^{[n+1]}(y))
  &=\tau(\tau^{[n]}(\tau(y)))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=\tau^{[n]}(\tau(\tau(y)))&&\bigl(\because\ \text{始点 }\tau(y)\text{ での帰納法の仮定}\bigr)\\
- &=\tau^{[n+1]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+ &=\tau^{[n+1]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph(["数学的帰納法により、準備の等式がすべての ", math(String.raw`n,y`), " で成立する。"]),
                 paragraph(["まず ", math(String.raw`j\in\operatorname{Orb}_{\sigma}(i)`), " と仮定する。", ref("def_finite_permutation_orbit"), " により、ある ", math(String.raw`n\in\mathbb N`), " について、順向きまたは逆向きに ", math(String.raw`i`), " から ", math(String.raw`j`), " へ到達する。順向き、すなわち ", math(String.raw`\sigma^{[n]}(i)=j`), " の場合は、"]),
@@ -8766,7 +8766,7 @@ j\in\operatorname{Orb}_{\rho}(i)
 \sigma^{[n+1]}(i)
  &=\sigma^{[n]}(\sigma(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=\sigma(\sigma^{[n]}(i))&&\bigl(\because\ \text{準備の等式を }\tau=\sigma\text{ に適用}\bigr)\\
- &=\sigma(j)&&\bigl(\because\ \sigma^{[n]}(i)=j\bigr).
+ &=\sigma(j)&&\bigl(\because\ \sigma^{[n]}(i)=j\bigr)
 \end{aligned}`),
                 paragraph(["したがって、回数 ", math(String.raw`n+1\in\mathbb N`), " の順向きの反復が、", math(String.raw`\sigma(j)\in\operatorname{Orb}_{\sigma}(i)`), " の証人となる（", ref("def_finite_permutation_orbit"), "）。"]),
                 paragraph(["逆向き、すなわち ", math(String.raw`(\sigma^{-1})^{[n]}(i)=j`), " の場合は、まず ", math(String.raw`n=0`), " なら、"]),
@@ -8775,7 +8775,7 @@ j\in\operatorname{Orb}_{\rho}(i)
  &=\sigma^{[0]}(\sigma(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=\sigma(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=\sigma((\sigma^{-1})^{[0]}(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
- &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[0]}(i)=j\bigr).
+ &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[0]}(i)=j\bigr)
 \end{aligned}`),
                 paragraph(["回数 ", math(String.raw`1\in\mathbb N`), " の順向きの反復が証人となる（", ref("def_finite_permutation_orbit"), "）。残る ", math(String.raw`n=k+1`), "（", math(String.raw`k\in\mathbb N`), "）の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8783,14 +8783,14 @@ j\in\operatorname{Orb}_{\rho}(i)
  &=\sigma\bigl(\sigma^{-1}((\sigma^{-1})^{[k]}(i))\bigr)&&\bigl(\because\ \sigma^{-1}\text{ は }\sigma\text{ の逆写像}\bigr)\\
  &=\sigma\bigl((\sigma^{-1})^{[k]}(\sigma^{-1}(i))\bigr)&&\bigl(\because\ \text{準備の等式を }\tau=\sigma^{-1}\text{ に適用}\bigr)\\
  &=\sigma\bigl((\sigma^{-1})^{[k+1]}(i)\bigr)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
- &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[k+1]}(i)=j\bigr).
+ &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[k+1]}(i)=j\bigr)
 \end{aligned}`),
                 paragraph(["回数 ", math(String.raw`k\in\mathbb N`), " の逆向きの反復が証人となる（", ref("def_finite_permutation_orbit"), "）。以上より、任意の置換について、台に属する点を一歩進めても同じ台に属する。"]),
                 paragraph(["逆に ", math(String.raw`\sigma(j)\in\operatorname{Orb}_{\sigma}(i)`), " と仮定する。逆置換と元の置換の台が一致することは ", ref("claim_invariant_subset_reversal_orbit"), " の証明の冒頭で示した。したがって、"]),
                 displayMath(String.raw`\begin{aligned}
 \sigma(j)\in\operatorname{Orb}_{\sigma^{-1}}(i)
  &\ \Longleftrightarrow\ \sigma(j)\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr).
+ &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr)
 \end{aligned}`),
                 paragraph(["右辺は仮定で成り立つ。直前に示した一歩の所属保存を、置換 ", math(String.raw`\sigma^{-1}`), " と点 ", math(String.raw`\sigma(j)`), " へ適用すると、", math(String.raw`\sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma^{-1}}(i)`), " を得る。よって、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8798,7 +8798,7 @@ j\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ \sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma}(i)
  &&\bigl(\because\ \sigma^{-1}\text{ は }\sigma\text{ の逆写像}\bigr)\\
  &\ \Longleftrightarrow\ \sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma^{-1}}(i)
- &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr).
+ &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr)
 \end{aligned}`),
                 paragraph(["最後の条件が成り立つので、求める逆方向も得た。", math(String.raw`\mathcal J=\varnothing`), " の場合は点がなく、全称命題はそのまま成り立つ。有限集合と自然数回の反復だけで閉じ、実数体・複素数体への脱出はない。"]),
               ],
@@ -66688,6 +66688,85 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                             math(String.raw`S`), " が有限なら、各セルが寄与する辺は四つ以下なので ",
                             math(String.raw`\mathcal E_{\square}(S)`),
                             " は有限集合である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_plane_cell_boundary_edge_set",
+                        kind: "definition",
+                        title: { text: "平面の有限セル集合の境界辺集合" },
+                        labels: ["def_plane_cell_boundary_edge_set"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.planeCellBoundary"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`T\subset\mathbb Z\times\mathbb Z`),
+                            " の境界辺集合 ", math(String.raw`\mathcal B_{\square}(T)`),
+                            " は、", ref("def_cell_edge_set"), " の辺のうち、その辺に接する二セルのちょうど一方が ",
+                            math(String.raw`T`), " に属するものの集合である。横辺と縦辺について、次の式で定める。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathcal B_{\square}(T)
+={}&\left\{\{(r,c),(r,c+1)\}\in\mathcal E_{\square}(T)\ \middle|\
+  \bigl((r,c)\in T\bigr)\mathbin{\mathrm{xor}}\bigl((r-1,c)\in T\bigr)\right\}\\
+&\cup\left\{\{(r,c),(r+1,c)\}\in\mathcal E_{\square}(T)\ \middle|\
+  \bigl((r,c)\in T\bigr)\mathbin{\mathrm{xor}}\bigl((r,c-1)\in T\bigr)\right\},
+\qquad r,c\in\mathbb Z.
+\end{aligned}`),
+                          paragraph([
+                            math(String.raw`P\mathbin{\mathrm{xor}}Q`),
+                            " は二つの命題 ", math(String.raw`P,Q`),
+                            " のちょうど一方だけが真であることを表す。", math(String.raw`T`),
+                            " は有限であり ", math(String.raw`\mathcal B_{\square}(T)\subset\mathcal E_{\square}(T)`),
+                            " なので境界辺集合も有限である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_nonempty_plane_cell_set_has_boundary_edge",
+                        kind: "claim",
+                        title: { text: "空でない有限セル集合には境界辺がある" },
+                        labels: ["claim_nonempty_plane_cell_set_has_boundary_edge"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeCellBoundary_nonempty",
+                          "Ising2DLambda.NecSuf.KacWard.finite_cells_have_exposed_upper_side",
+                          "Ising2DLambda.KacWard.planeCellBoundary_nonempty_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/nonempty-plane-cell-boundary"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`T\subset\mathbb Z\times\mathbb Z`),
+                            " が空でなければ、その境界辺集合（", ref("def_plane_cell_boundary_edge_set"),
+                            "）も空でない。",
+                          ]),
+                          displayMath(String.raw`T\ne\varnothing\quad\Longrightarrow\quad\mathcal B_{\square}(T)\ne\varnothing`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "行座標が最大のセル ", math(String.raw`(r,c)\in T`),
+                            " を一つ取る。有限非空集合の整数座標には最大値がある。任意の ",
+                            math(String.raw`(s,d)\in T`), " に対して ", math(String.raw`s\le r`),
+                            " なので ", math(String.raw`(r+1,c)\notin T`), " である。横辺 ",
+                            math(String.raw`e:=\{(r+1,c),(r+1,c+1)\}`),
+                            " は下側のセル ", math(String.raw`(r,c)`), " の上辺である。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e&\in\mathcal E_{\square}(T)
+&&\bigl(\because\ (r,c)\in T\text{ と }\blkref{def_cell_edge_set}\bigr)\\
+(r+1,c)&\notin T
+&&\bigl(\because\ r\text{ は }T\text{ の行座標の最大値}\bigr)\\
+e&\in\mathcal B_{\square}(T)
+&&\bigl(\because\ (r,c)\in T,\ (r+1,c)\notin T,\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "したがって ", math(String.raw`\mathcal B_{\square}(T)`), " は空でない。",
                           ]),
                         ],
                       },
