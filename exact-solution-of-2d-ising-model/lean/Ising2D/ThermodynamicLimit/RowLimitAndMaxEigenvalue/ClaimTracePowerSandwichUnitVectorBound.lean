@@ -24,7 +24,7 @@
 | 同じ段の各項の非負性 `|z_j|^2 = |z_j||z_j| ≥ 0` の 2 行 | `abs_sq_of_real_number_nonneg` の `calc` の 2 段 |
 | 同じ段の `|z_{j_0}| > 0`（`def_real_absolute_value` の場合分け） | `abs_pos_of_real_number_ne_zero` |
 | 同じ段の `‖z‖^2 ≥ |z_{j_0}|^2 = |z_{j_0}||z_{j_0}| > 0` の 4 行 | `norm_sq_pos_of_component_ne_zero` の `calc` の 4 段 |
-| 同じ段の `‖z‖ > 0` | `norm_pos_of_component_ne_zero` |
+| 同じ段の `‖z‖ = 0` なら `‖z‖^2 = 0^2 = 0·0 = 0` の 3 行と、`‖z‖ ≥ 0` と合わせた `‖z‖ > 0` | `norm_pos_of_component_ne_zero` の `hne` の `calc` の 3 段と `lt_of_le_of_ne` |
 | 同じ段の `z_i = 1z_i = (‖z‖‖z‖^{-1})z_i = ‖z‖(‖z‖^{-1}z_i) = ‖z‖w_i` の 4 行 | `power_of_W_real_is_positive_semidefinite` の `hzw` の `calc` の 4 段 |
 | 同じ段の `w^⊤(W_ℝ)^nw > 0`（`moment_log_convexity` の正値性） | 同じ定理の `hwpos` |
 | 同じ段の `‖w‖ = 1` の 15 行（`w_i := ‖z‖^{-1}z_i`） | `norm_of_inverse_norm_multiple_is_one` の `calc` の 15 段 |
@@ -95,10 +95,15 @@ theorem norm_sq_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0
 theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0) :
     vecNorm z > 0 := by
   have hge : 0 ≤ vecNorm z := vecNorm_nonneg z                              -- `def_matrix_norm`
-  have hne : vecNorm z ≠ 0 := by                                            -- `‖z‖ = 0` なら `‖z‖^2 = 0^2 = 0·0 = 0`（`square_of_real_number_is_product`（`r → 0`）と ℝ の積 `0·0 = 0`）で `‖z‖^2 > 0` に反する
+  have hne : vecNorm z ≠ 0 := by                                            -- `‖z‖ = 0` と仮定すると、下の 3 行で `‖z‖^2 = 0` となり上の `‖z‖^2 > 0` に反する
     intro h
+    have h0 : vecNorm z ^ 2 = 0 :=
+      calc vecNorm z ^ 2
+          = (0 : ℝ) ^ 2 := by rw [h]                                        -- `‖z‖ = 0` を代入
+        _ = 0 * 0 := square_of_real_number_is_product 0                     -- `square_of_real_number_is_product`（`r → 0`）
+        _ = 0 := zero_mul 0                                                 -- ℝ で `0·x = 0`（ℝ は体 `set_and_algebra_notation`）の `x → 0`
     have h2 := norm_sq_pos_of_component_ne_zero hj0
-    rw [h, square_of_real_number_is_product 0, mul_zero] at h2
+    rw [h0] at h2
     exact lt_irrefl 0 h2
   exact lt_of_le_of_ne hge (Ne.symm hne)
 

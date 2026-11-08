@@ -70,7 +70,7 @@ def check_psd(P, Pn, n, z, what):
     le(rpow(abs(AA(z[j0])), 2), L[-1], f"{what}: Σ|z_j|^2 ≥ |z_j0|^2")
     eq(rpow(abs(AA(z[j0])), 2), abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0|^2 = |z_j0||z_j0|")
     le(0, abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0||z_j0| > 0", strict=True)
-    # ‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0（square_of_real_number_is_product（r → 0））
+    # ‖z‖ = 0 と仮定した背理の 3 行 ‖z‖^2 = 0^2 = 0·0 = 0 のうち 2・3 行目（square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0 の x → 0）。1 行目は代入
     chain_eq([rpow(AA(0), 2), AA(0) * AA(0), AA(0)], f"{what}: 0^2 = 0·0 = 0")
     le(0, nz, f"{what}: ‖z‖ > 0", strict=True)
     w = vector(AA, [nz**-1 * z[i] for i in rng])

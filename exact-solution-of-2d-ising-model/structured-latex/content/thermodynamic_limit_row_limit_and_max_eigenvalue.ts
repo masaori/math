@@ -3273,29 +3273,41 @@ a+b+1 &= p+(p+1)+1
 &&\bigl(\because\ \text{上の}\ |z_{j_0}| > 0\ \text{と、}\mathbb{R}\ \text{の順序で正の数の積は正}\bigr)
 \end{aligned}`),
       paragraph([
-        "なので、",
+        "である。",
+        math(String.raw`\|z\| = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|z\|^2
+&=0^2
+&&\bigl(\because\ \|z\| = 0\ \text{を代入}\bigr)\\
+&=0\cdot 0
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、上の ",
+        math(String.raw`\|z\|^2 > 0`),
+        " に反する。よって ",
+        math(String.raw`\|z\| \neq 0`),
+        " であり、",
         math(String.raw`\|z\| \geq 0`),
         "（",
         ref("def_matrix_norm"),
-        "）と ",
-        math(String.raw`\|z\| \neq 0`),
-        "（",
-        math(String.raw`\|z\| = 0`),
-        " なら ",
-        math(String.raw`\|z\|^2 = 0^2 = 0\cdot 0 = 0`),
-        "（",
-        ref("square_of_real_number_is_product"),
-        "（",
-        math(String.raw`r \to 0`),
-        "）と ",
-        math(String.raw`\mathbb{R}`),
-        " の積 ",
-        math(String.raw`0\cdot 0 = 0`),
-        "）となり ",
-        math(String.raw`\|z\|^2 > 0`),
-        " に反する）から ",
+        "）と合わせて ",
         math(String.raw`\|z\| > 0`),
-        " である。",
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序で ",
+        math(String.raw`x \geq 0`),
+        " かつ ",
+        math(String.raw`x \neq 0`),
+        " なら ",
+        math(String.raw`x > 0`),
+        "、",
+        math(String.raw`x \to \|z\|`),
+        "）である。",
         math(String.raw`w \in \mathbb{R}^d`),
         " を ",
         math(String.raw`w_i := \|z\|^{-1}z_i`),
@@ -3801,6 +3813,7 @@ T
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。主張の右辺の 2^{M_col} は 2_ℝ := 1_ℝ + 1_ℝ の def_power_of_real_number の冪 2_ℝ^{M_col} の略記で、ℤ の元 d とは別の元であることを主張の文に書いた（trace_power_upper_bound と同じ書き方）。値と手順は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 上からの評価の鎖の根拠の文「d^2 個の項へ同時に適用」の d^2 は、d ∈ ℤ なので def_power_of_integer の冪としか読めないが、項の数は論証に使わないので数を書かず、「k, l ∈ {1,…,d} の組 (k,l) ごとの項へ同時に適用」とした。値と手順は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗と積の行き来を def_power_of_real_number の冪をその場で開く書き方（x^2 = (x^0x)x = xx、t^2 = tt）から square_of_real_number_is_product を引く行に替え、1^2 = 1 を power_of_real_one_is_one（m → 2）から引いた。1 行に複数の事実をまとめていた行を割った: ‖w‖ の鎖の (‖z‖^{-1}z_i)^2 の行を積へ開く・並べ替える・冪へ戻すの 3 行に、(‖z‖^{-1})^2‖z‖^2 の行を同じく 3 行に、√1 の行を ‖z‖^{-1}‖z‖ = 1 の行と 1^2 = 1 の行に（9 行 → 14 行）、Σx_k^2 の鎖の最後の行を ‖x‖ = 1 の行と 1^2 = 1 の行に（3 行 → 4 行）、m_{k+1} の鎖の m_k^2/m_{k-1} = m_k(m_k/m_{k-1}) を square_of_real_number_is_product の行と結合則の行に（5 行 → 6 行）、【(W_ℝ)^n の成分の評価】の展開の行を、x_lx_l・x_kx_k の積で展開する行と square_of_real_number_is_product で冪へ戻す行に（7 行 → 8 行）。‖z‖ = 0 の場合の ‖z‖^2 = 0^2 = 0 を 0^2 = 0·0 = 0 にし、√1 = 1 の行の 1^2 = 1 を power_of_real_one_is_one から引いた。値と主張は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段で、‖z‖ ≠ 0 の背理（‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0 を文の中の鎖と括弧 1 つの根拠で書いていた）を、‖z‖ = 0 の代入・square_of_real_number_is_product（r → 0）・ℝ で 0·x = 0（x → 0）の 3 行の鎖に開き、‖z‖^2 > 0 との矛盾と ‖z‖ ≥ 0 から ‖z‖ > 0（ℝ の順序で x ≥ 0 かつ x ≠ 0 なら x > 0 の根拠を添えた）を続く文に置いた。値と主張は変えていない。",
       ],
     },
   },
