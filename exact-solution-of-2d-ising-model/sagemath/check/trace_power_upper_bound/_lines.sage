@@ -28,19 +28,23 @@ def check_proof_lines(P, c, nmax, what):
     I = body_identity(R, d)
     E = [vector(QQ, [1 if i == k else 0 for i in range(d)]) for k in range(d)]   # e_k ∈ ℝ^d
     le(0, c, f"{what}: c ≥ 0")
-    # 【e_k のノルム】: ‖e_k‖ = √(Σ_i |(e_k)_i|^2) = √1 = 1
+    # 【e_k のノルム】: ‖e_k‖ = √(Σ_i |(e_k)_i|^2) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1
     for k in range(d):
         l1 = norm_exact(E[k])
         l2 = AA(sum(abs(E[k][i])**2 for i in range(d))).sqrt()
         l2b = AA(abs(E[k][k])**2).sqrt()
         l2c = AA(abs(QQ(1))**2).sqrt()
+        l2d = AA(QQ(1)**2).sqrt()
         l3 = AA(1).sqrt()
         eq(l1, l2, f"{what}: 【e_k のノルム】の 1 行目 k={k}")
-        eq(sum(abs(E[k][i])**2 for i in range(d)), 1, f"{what}: 【e_k のノルム】の 根号の中が 1k={k}")
+        eq(sum(abs(E[k][i])**2 for i in range(d)), 1, f"{what}: 【e_k のノルム】の 根号の中が 1 k={k}")
         eq(l2, l2b, f"{what}: 【e_k のノルム】の 2 行目（i ≠ k の項を落とす）k={k}")
         eq(l2b, l2c, f"{what}: 【e_k のノルム】の 3 行目（(e_k)_k = 1）k={k}")
-        eq(l2c, l3, f"{what}: 【e_k のノルム】の 4 行目（|1|^2 = 1）k={k}")
-        eq(l3, 1, f"{what}: 【e_k のノルム】の 5 行目 k={k}")
+        eq(QQ(1) if QQ(1) >= 0 else -QQ(1), 1, f"{what}: 【e_k のノルム】の 4 行目の根拠 |1| = 1（def_real_absolute_value の 1 ≥ 0 の場合）")
+        eq(l2c, l2d, f"{what}: 【e_k のノルム】の 4 行目（|1| = 1）k={k}")
+        eq(QQ(1)**2, 1, f"{what}: 【e_k のノルム】の 5 行目の根拠 1^2 = 1")
+        eq(l2d, l3, f"{what}: 【e_k のノルム】の 5 行目（1^2 = 1）k={k}")
+        eq(l3, 1, f"{what}: 【e_k のノルム】の 6 行目 k={k}")
     # 【冪の実対称性】: W^p は実対称（成分は QQ、(W^p)_kl = (W^p)_lk）
     pw = [power_by_def_exp(P, p) for p in range(nmax + 1)]
     for p in range(nmax + 1):

@@ -13,7 +13,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
-| 【e_k のノルム】（`‖e_k‖ = √(Σ|(e_k)_i|^2) = √(|(e_k)_k|^2) = √(|1|^2) = √1 = 1`） | `_lines.sage` | AA の平方根で作ったノルムの 5 段、根号の中が 1 | **PASS** |
+| 【e_k のノルム】（`‖e_k‖ = √(Σ|(e_k)_i|^2) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1`） | `_lines.sage` | AA の平方根で作ったノルムの 6 段、根号の中が 1、`|1| = 1` と `1^2 = 1` | **PASS** |
 | 【冪の実対称性】（`W^p` は実対称） | `_lines.sage` | `def_exp` (1) の漸化式で作った冪が Sage の冪 `P**p` と一致し、成分が QQ、`def_matrix_transpose` で作った転置と一致。鎖 `(W^p)_kl = ((W^p)^⊤)_kl = (W^p)_lk` の 2 段を全成分で | **PASS** |
 | 【対角成分の表示】（`e_k^⊤W^pe_k = ΣΣ… = Σ_j (e_k)_k(W^p)_kj(e_k)_j = Σ_j (W^p)_kj(e_k)_j = (W^p)_kk(e_k)_k = (W^p)_kk`） | `_lines.sage` | 5 段の等号と、組み込みの行列積 `e^⊤Qe` との比較、`i ≠ k` の項が 0 | **PASS** |
 | 【W^ae_k の成分とノルム】（`u_l = Σ_m (W^a)_lm(e_k)_m = (W^a)_lk(e_k)_k = (W^a)_lk`、`‖u‖ ≤ c^a‖e_k‖ = c^a`、`‖u‖^2 ≤ c^{2a}`） | `_lines.sage` | 成分の式と組み込みの積、3 行の等号、`rayleigh_bounds_operator_norm` の冪の主張（指数 `a`）の不等号、`0 ≤ ‖u‖`、`(c^a)^2 = c^{2a}`、二乗した不等号 | **PASS** |
@@ -31,9 +31,9 @@
 `_lines.sage` の `check_proof_lines` を二つの検算が呼ぶ。
 
 - `check_generic_positive_semidefinite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「半正定値（`rayleigh_bounds_operator_norm` の前提）」「`c` は上限」だけなので、
-  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 36566 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行を含む）。
+  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 36830 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行、2026-11-08 の `|1| = 1`・`1^2 = 1` の行を含む）。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 28384 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 28528 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
 
 `W` の作り方、`c(M_col)` の作り方（特性多項式の最大の実根を AA で取り、`cI − W` の半正定値性と固有ベクトルでの到達で上限であることを確かめる）、
 ノルム・`x^⊤Py`・行列とベクトルの積・冪の関数は、直前の主張の検算 `sagemath/check/rayleigh_bounds_operator_norm/_prelude.sage` を読み込んで使う（その overview の「`c(M_col)` の作り方」）。

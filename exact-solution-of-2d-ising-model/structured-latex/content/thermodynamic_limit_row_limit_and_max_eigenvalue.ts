@@ -1939,8 +1939,10 @@ c(M_{\mathrm{col}})
 &&\bigl(\because\ i \neq k\ \text{の項は}\ |(e_k)_i|^2 = |0|^2 = 0\bigr)\\
 &=\sqrt{|1|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ (e_k)_k = 1\bigr)\\
+&=\sqrt{1^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 1 \geq 0\ \text{の場合}\ |1| = 1\bigr)\\
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ |1|^2 = 1\bigr)\\
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)\\
 &=1
 &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)
 \end{aligned}`),
@@ -2248,6 +2250,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
       status: "added",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の 4 行目 √(|1|^2) = √1（根拠 |1|^2 = 1 が |1| = 1 と 1^2 = 1 の 2 つの事実を 1 行で使っていた）を、def_real_absolute_value の 1 ≥ 0 の場合 |1| = 1 の行と power_of_real_one_is_one（m → 2）の行の 2 行に割った（def_rayleigh_sup の |(e_1)_1|^2 の鎖と同じ書き方。値は不変）。",
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
         "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",

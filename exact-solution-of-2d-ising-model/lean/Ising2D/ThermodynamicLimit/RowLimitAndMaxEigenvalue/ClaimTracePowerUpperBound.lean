@@ -64,7 +64,7 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 人手【`e_k` のノルム】: `‖e_k‖ = 1`（5 行）。 -/
+/-- 人手【`e_k` のノルム】: `‖e_k‖ = 1`（6 行）。 -/
 theorem norm_of_standard_basis_vector (k : Conf M) : vecNorm (Pi.single k (1 : ℝ)) = 1 :=
   calc vecNorm (Pi.single k (1 : ℝ))
       = Real.sqrt (∑ i, |(Pi.single k (1 : ℝ) : Conf M → ℝ) i| ^ 2) := by
@@ -75,7 +75,8 @@ theorem norm_of_standard_basis_vector (k : Conf M) : vecNorm (Pi.single k (1 : �
           (fun i _ hik => by rw [Pi.single_eq_of_ne hik, abs_zero]; norm_num)
           (fun h => absurd (Finset.mem_univ k) h)]                         -- `i ≠ k` の項は `|0|^2 = 0`
     _ = Real.sqrt (|(1 : ℝ)| ^ 2) := by rw [Pi.single_eq_same]              -- `(e_k)_k = 1`
-    _ = Real.sqrt 1 := by rw [abs_one, one_pow]                             -- `|1|^2 = 1`
+    _ = Real.sqrt ((1 : ℝ) ^ 2) := by rw [abs_of_nonneg (zero_le_one' ℝ)]   -- `def_real_absolute_value` の `1 ≥ 0` の場合 `|1| = 1`
+    _ = Real.sqrt 1 := by rw [power_of_real_one_is_one 2]                   -- `power_of_real_one_is_one`（`m → 2`）
     _ = 1 := sqrt_of_real_one_is_one                                        -- `sqrt_of_real_one_is_one`
 
 section General
