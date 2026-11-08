@@ -43,6 +43,7 @@ Lean ではそれぞれ `F.trace_Vprime_pos g`・`trace_VPlus_pos` の存在の�
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
 
@@ -298,8 +299,12 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
     rw [Complex.ofReal_re, Complex.zero_re] at hre
     exact (ne_of_gt hq) hre
   -- Step 4: `c^2 w = (a^2)_ℂ w`
-  have hcw : (c * c) * T' = ((a * a : ℝ) : ℂ) * T' :=
-    calc (c * c) * T' = (c * c) * (c⁻¹ * (t : ℂ)) := by rw [hT'c]       -- `c^2` の定義と Step 3 の第二の鎖
+  have hcw : c ^ 2 * T' = ((a ^ 2 : ℝ) : ℂ) * T' :=
+    calc c ^ 2 * T' = (c ^ 1 * c) * T' := by rw [pow_succ c 1]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 1`）
+      _ = ((c ^ 0 * c) * c) * T' := by rw [pow_succ c 0]               -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 0`）
+      _ = ((1 * c) * c) * T' := by rw [pow_zero c]                     -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → c`）
+      _ = (c * c) * T' := by rw [one_mul c]                            -- `1_ℂ` は乗法の単位元
+      _ = (c * c) * (c⁻¹ * (t : ℂ)) := by rw [hT'c]                     -- Step 3 の第二の鎖
       _ = c * (c * (c⁻¹ * (t : ℂ))) := mul_assoc _ _ _                 -- 乗法の結合律
       _ = c * ((c * c⁻¹) * (t : ℂ)) := by rw [mul_assoc c c⁻¹]         -- 乗法の結合律
       _ = c * (1 * (t : ℂ)) := by rw [mul_inv_cancel₀ hcne]            -- `c^{-1}` は `c` の逆元
@@ -317,16 +322,18 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
       _ = (a : ℂ) * ((a : ℂ) * T') := by rw [hT']                      -- Step 1 の第二の鎖を右辺から左辺へ
       _ = ((a : ℂ) * (a : ℂ)) * T' := (mul_assoc _ _ _).symm           -- 乗法の結合律
       _ = ((a * a : ℝ) : ℂ) * T' := by
-          rw [real_inclusion_mul a a]                                 -- `real_inclusion_preserves_product` と `a^2` の定義
+          rw [real_inclusion_mul a a]                                 -- `real_inclusion_preserves_product`（`a → a`, `b → a`）
+      _ = ((a ^ 2 : ℝ) : ℂ) * T' := by
+          rw [← square_of_real_number_is_product a]                   -- `square_of_real_number_is_product`（`r → a`）を右辺から左辺へ
   -- Step 4: `c^2 = (a^2)_ℂ`
-  have hc2 : c * c = ((a * a : ℝ) : ℂ) :=
-    calc c * c = (c * c) * 1 := (mul_one _).symm                       -- `1_ℂ` は乗法の単位元
-      _ = (c * c) * (T' * T'⁻¹) := by rw [mul_inv_cancel₀ hwne]        -- `w^{-1}` は `w` の逆元
-      _ = ((c * c) * T') * T'⁻¹ := (mul_assoc _ _ _).symm              -- 乗法の結合律
-      _ = (((a * a : ℝ) : ℂ) * T') * T'⁻¹ := by rw [hcw]               -- 上の鎖
-      _ = ((a * a : ℝ) : ℂ) * (T' * T'⁻¹) := mul_assoc _ _ _           -- 乗法の結合律
-      _ = ((a * a : ℝ) : ℂ) * 1 := by rw [mul_inv_cancel₀ hwne]        -- `w^{-1}` は `w` の逆元
-      _ = ((a * a : ℝ) : ℂ) := mul_one _                               -- `1_ℂ` は乗法の単位元
+  have hc2 : c ^ 2 = ((a ^ 2 : ℝ) : ℂ) :=
+    calc c ^ 2 = c ^ 2 * 1 := (mul_one _).symm                         -- `1_ℂ` は乗法の単位元
+      _ = c ^ 2 * (T' * T'⁻¹) := by rw [mul_inv_cancel₀ hwne]          -- `w^{-1}` は `w` の逆元
+      _ = (c ^ 2 * T') * T'⁻¹ := (mul_assoc _ _ _).symm                -- 乗法の結合律
+      _ = (((a ^ 2 : ℝ) : ℂ) * T') * T'⁻¹ := by rw [hcw]               -- 上の鎖
+      _ = ((a ^ 2 : ℝ) : ℂ) * (T' * T'⁻¹) := mul_assoc _ _ _           -- 乗法の結合律
+      _ = ((a ^ 2 : ℝ) : ℂ) * 1 := by rw [mul_inv_cancel₀ hwne]        -- `w^{-1}` は `w` の逆元
+      _ = ((a ^ 2 : ℝ) : ℂ) := mul_one _                               -- `1_ℂ` は乗法の単位元
   -- Step 5: `ρ := rt^{-1} ∈ ℝ_{>0}`（ℝ の順序）と `c = ρ_ℂ`
   set ρ : ℝ := r * t⁻¹ with hρdef
   have hρpos : 0 < ρ := mul_pos hr (inv_pos.2 ht)
@@ -347,13 +354,19 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
         = ((ρ * ρ : ℝ) : ℂ) := rfl                                     -- `inclusion_rr_to_cc`
       _ = (ρ : ℂ) * (ρ : ℂ) := (real_inclusion_mul _ _).symm           -- `real_inclusion_preserves_product` を右辺から左辺へ
       _ = c * c := by rw [← hcρ]                                       -- 上の鎖の `c = ρ_ℂ`
-      _ = c ^ 2 := (sq c).symm                                         -- `c^2` の定義
-      _ = ((a * a : ℝ) : ℂ) := by rw [sq]; exact hc2                   -- Step 4
-      _ = ⟨a * a, 0⟩ := rfl                                            -- `inclusion_rr_to_cc` と `a^2` の定義
-  -- `definition_of_cc` の元の等号は成分ごとなので `ρρ = aa`、すなわち `ρ^2 = a^2`
-  have hsq : ρ ^ 2 = a ^ 2 := by
-    rw [sq, sq]
-    exact congrArg Complex.re hρρ
+      _ = (1 * c) * c := by rw [one_mul c]                             -- `1_ℂ` は乗法の単位元を右辺から左辺へ
+      _ = (c ^ 0 * c) * c := by rw [pow_zero c]                        -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+      _ = c ^ 1 * c := by rw [← pow_succ c 0]                          -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+      _ = c ^ 2 := by rw [← pow_succ c 1]                              -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
+      _ = ((a ^ 2 : ℝ) : ℂ) := hc2                                     -- Step 4
+      _ = ((a * a : ℝ) : ℂ) := by rw [square_of_real_number_is_product a] -- `square_of_real_number_is_product`（`r → a`）
+      _ = ⟨a * a, 0⟩ := rfl                                            -- `inclusion_rr_to_cc`
+  -- `definition_of_cc` の元の等号は成分ごとなので `ρρ = aa`
+  have hρρre : ρ * ρ = a * a := congrArg Complex.re hρρ
+  have hsq : ρ ^ 2 = a ^ 2 :=
+    calc ρ ^ 2 = ρ * ρ := square_of_real_number_is_product ρ           -- `square_of_real_number_is_product`（`r → ρ`）
+      _ = a * a := hρρre                                               -- 上の `ρρ = aa`
+      _ = a ^ 2 := (square_of_real_number_is_product a).symm           -- `square_of_real_number_is_product`（`r → a`）を右辺から左辺へ
   have hρa : ρ = a :=
     (positive_real_square_injective hρpos ha).1 hsq                   -- `positive_real_square_injective`（`a → ρ`、`b → a`）
   calc c = (ρ : ℂ) := hcρ                                              -- 上の鎖

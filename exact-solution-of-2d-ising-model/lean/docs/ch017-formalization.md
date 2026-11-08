@@ -147,7 +147,7 @@
 | `trace_VPlus_eq_tauPlus` / `trace_VPlusInv_eq_tauPlusPrime` | `tr(V^{(+)}) = a_ℂτ`、`tr((V^{(+)})^{-1}) = (a^{-1})_ℂτ'` | 同 Step 1 |
 | `tauPlusPrime_eq_tauPlus` | `τ' = τ`（`trace_similarity_invariant` は `trace_basic_properties` (4) の人手の形） | 同 Step 2 |
 | `constantCW` / `VPlus_mul_W` / `W_mul_VPlus` / `VPlusInv_eq_W` / `trace_VPlus_eq_c_mul` / `trace_VPlusInv_eq_cinv_mul` | `W := c^{-1}(V̌')^{-1}`、`V^{(+)}W = I`、`WV^{(+)} = I`、逆元の一意性で `(V^{(+)})^{-1} = W`、`tr(V^{(+)}) = ct_ℂ`、`tr((V^{(+)})^{-1}) = c^{-1}t_ℂ` | 同 Step 3 |
-| `constant_c_steps_four_five` | Step 4 の `w`・`c^2w`・`c^2` の鎖、Step 5 の `c = ρ_ℂ`・`(ρρ, 0)` の鎖と `ρ = a`（`positive_real_square_injective`） | 同 Step 4・Step 5 |
+| `constant_c_steps_four_five` | Step 4 の `w`・`c^2w`・`c^2` の鎖、Step 5 の `c = ρ_ℂ`・`(ρρ, 0)`・`ρ^2 = a^2` の鎖と `ρ = a`（`positive_real_square_injective`） | 同 Step 4・Step 5 |
 | `c_ne_zero_of_VPlus_eq_smul` | `V^{(+)} = cV̌'` と `V^{(+)}` の可逆性から `c ≠ 0`（人手の行は無い。仮定に `c ∈ ℂ^×` を持たない使う側の橋渡し） | — |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`**（仮定 `c ≠ 0` は人手の `c ∈ ℂ^×`） | `constant_c_value_even_sector` |
 | `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus`（`TheoremEigenvaluesVPlus.lean`） | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |

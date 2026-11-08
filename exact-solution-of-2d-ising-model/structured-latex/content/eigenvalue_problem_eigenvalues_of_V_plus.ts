@@ -5373,9 +5373,13 @@ T_B\bigl(\exp(X)\bigr)
         ref("V_plus_is_invertible"),
         " の ",
         math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2}`),
-        "）、",
-        math(String.raw`a^2 := aa \in \mathbb{R}_{>0}`),
-        " と書き、",
+        "）と書く。二乗 ",
+        math(String.raw`a^2 \in \mathbb{R}`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
       ]),
       displayMath(String.raw`\tau := \mathrm{tr}\bigl(\exp(S_1)\exp(S_2)\bigr) \in \mathbb{C},
 \qquad
@@ -5436,9 +5440,13 @@ T_B\bigl(\exp(X)\bigr)
         ref("complex_numbers_form_a_field"),
         " の逆元 ",
         math(String.raw`c^{-1} \in \mathbb{C}`),
-        " を持つ。",
-        math(String.raw`c^2 := cc`),
-        " と書く。",
+        " を持つ。二乗 ",
+        math(String.raw`c^2 \in \mathbb{C}`),
+        " は ",
+        ref("def_power_of_complex_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
         ref("def_check_Vprime"),
         " (2) より ",
         math(String.raw`\check{V}' \in R^\times`),
@@ -5682,8 +5690,16 @@ w
       displayMath(
         String.raw`\begin{aligned}
 c^2w
+&= (c^{1}c)\,w
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 1)) \\
+&= \bigl((c^{0}c)\,c\bigr)\,w
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 0)) \\
+&= \bigl((1_{\mathbb{C}}\,c)\,c\bigr)\,w
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)) \\
+&= (cc)\,w
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= (cc)\bigl(c^{-1}t_{\mathbb{C}}\bigr)
-   &&(\because\ c^2\ \text{の定義と Step 3 の第二の鎖}) \\
+   &&(\because\ \text{Step 3 の第二の鎖}) \\
 &= c\bigl(c(c^{-1}t_{\mathbb{C}})\bigr)
    &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
 &= c\bigl((cc^{-1})t_{\mathbb{C}}\bigr)
@@ -5710,8 +5726,10 @@ c^2w
    &&(\because\ \text{Step 1 の第二の鎖を右辺から左辺へ}) \\
 &= (a_{\mathbb{C}}a_{\mathbb{C}})w
    &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (aa)_{\mathbb{C}}\,w
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a)) \\
 &= (a^2)_{\mathbb{C}}\,w
-   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a)\ \text{と}\ a^2\ \text{の定義})
+   &&(\because\ \blkref{square_of_real_number_is_product}\ (r \to a)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph(["であるから、"]),
@@ -5778,12 +5796,20 @@ c
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \rho,\ b \to \rho)\ \text{を右辺から左辺へ}) \\
 &= cc
    &&(\because\ \text{上の鎖の}\ c = \rho_{\mathbb{C}}) \\
+&= (1_{\mathbb{C}}\,c)\,c
+   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を右辺から左辺へ}) \\
+&= (c^{0}c)\,c
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)\ \text{を右辺から左辺へ}) \\
+&= c^{1}c
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 0)\ \text{を右辺から左辺へ}) \\
 &= c^2
-   &&(\because\ c^2\ \text{の定義}) \\
+   &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^{m}z\ (z \to c,\ m \to 1)\ \text{を右辺から左辺へ}) \\
 &= (a^2)_{\mathbb{C}}
    &&(\because\ \text{Step 4}) \\
+&= (aa)_{\mathbb{C}}
+   &&(\because\ \blkref{square_of_real_number_is_product}\ (r \to a)) \\
 &= (aa, 0)
-   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{と}\ a^2\ \text{の定義})
+   &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`,
       ),
       paragraph([
@@ -5791,9 +5817,21 @@ c
         ref("definition_of_cc"),
         " の元の等号は成分ごとであることから ",
         math(String.raw`\rho\rho = aa`),
-        "、すなわち ",
-        math(String.raw`\rho^2 = a^2`),
-        " である。",
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\rho^2
+&= \rho\rho
+   &&(\because\ \blkref{square_of_real_number_is_product}\ (r \to \rho)) \\
+&= aa
+   &&(\because\ \text{上の}\ \rho\rho = aa) \\
+&= a^2
+   &&(\because\ \blkref{square_of_real_number_is_product}\ (r \to a)\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
         math(String.raw`\rho, a \in \mathbb{R}_{>0}`),
         " なので ",
         ref("positive_real_square_injective"),
@@ -5835,6 +5873,7 @@ V^{(+)}
         "2026-11-01: Step 2 の「共役は行列の積とスカラー倍を保ち」を「積・和・スカラー倍を保ち」に直した。部分和の共役には和を保つこと（分配法則）も使うため（Lean の Uflip_conj_expPartialSum で判明）。",
         "2026-11-04（全証明の SageMath 検算）: 主張と計算は変えずに書き方を直した。共役と exp の交換を conjugation_commutes_with_matrix_exp へ切り出し、各段を (∵) とラベル参照付きの鎖にした。ℂ の商（本文に定義が無い）を使わず、逆元 c^{-1}・w^{-1} の積で書いた。(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示した。主張の c を ((2s_2)^{M_col/2})_ℂ と像の記号で書いた。Lean の ClaimConstantCEvenSector.lean・NecSuf/ConstantC.lean はまだ旧い道筋（c^2 = a^2 から (c−a)(c+a) = 0 を割る）と旧い Step 番号のままで、新しい Step 3〜5 と一般の正則な B についての conjugation_commutes_with_matrix_exp とは 1 対 1 でない（Lean の連続実行の受け持ち）。符号の確定は零因子を持たないことを使わず、c が正の実数の像であることと positive_real_square_injective で示した（旧い Step 3 の分数の段と Step 4 の因数分解の段を置き換えた）。",
         "2026-11-04（Lean の通しの証明の連続実行）: Lean を新しい準備・Step 1〜5 と 1 対 1 にした。具体版は lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean（Step 4・Step 5 は constant_c_steps_four_five）、必要十分版は lean/Ising2D/NecSuf/ConstantC.lean にある。positive_real_square_injective と trace_basic_properties (4) の人手の形の具体版も足した。本文は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の局所定義 a^2 := aa・c^2 := cc を消し、a^2 を def_power_of_real_number の冪、c^2 を def_power_of_complex_number の冪（どちらも m = 2）にした（同じ記号がその場の積と冪の 2 つの意味を持つ記号の濫用だった）。c^2w の鎖の 1 行目を冪を積へ開く 4 行と Step 3 の行に、最後の行を real_inclusion_preserves_product の行と square_of_real_number_is_product の行に割った（15 行 → 20 行）。Step 5 の (ρρ, 0) の鎖の cc = c^2 を冪へ戻す 4 行に、最後の行を square_of_real_number_is_product の行と inclusion_rr_to_cc の行に割り（6 行 → 10 行）、散文の「すなわち ρ^2 = a^2」を 3 行の鎖にした。主張と計算は変えていない。",
       ],
     },
   },

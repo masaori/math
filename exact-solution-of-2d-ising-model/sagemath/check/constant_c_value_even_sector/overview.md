@@ -8,7 +8,7 @@
 - ブロック: `evenEigen_009_claim_constant_c_value_even_sector`（V^{(+)} = cV̌' の c は ((2s_2)^{M_col/2})_ℂ）
 - 範囲: 証明の準備（H + H = S_1 の 8 行、exp(H)exp(H) = exp(S_1) の 2 行、exp(−H)exp(−H) = exp(−S_1) の 3 行、c^{-1}・t・r の置き方）、
   Step 1 の二つの鎖（各 6 行）、Step 2 の鎖（8 行）、Step 3 の二つの積の鎖（各 7 行）と逆元の一意性、二つのトレースの鎖（各 3 行）、
-  Step 4 の w の鎖（10 行）・c^2w の鎖（15 行）・c^2 の鎖（7 行）、Step 5 の c = ρ_ℂ の鎖（8 行）・(ρρ, 0) の鎖（6 行）・ρ = a・c の値の鎖（4 行）・主張の鎖（2 行）の全てと、主張そのもの。
+  Step 4 の w の鎖（10 行）・c^2w の鎖（20 行）・c^2 の鎖（7 行）、Step 5 の c = ρ_ℂ の鎖（8 行）・(ρρ, 0) の鎖（10 行）・ρ^2 = a^2 の鎖（3 行）・ρ = a・c の値の鎖（4 行）・主張の鎖（2 行）の全てと、主張そのもの。
 - 記号: H := (1/2)_ℂS_1、a := (2s_2)^{M_col/2}、τ := tr(exp(S_1)exp(S_2))、τ' := tr(exp(−S_1)exp(−S_2))、W := c^{-1}(V̌')^{-1}、
   w := tr((V^{(+)})^{-1})、t := Π_μ 2cosh(γ(θ̃_μ)/2)、tr(V^{(+)}) = r_ℂ、ρ := rt^{-1}。
 
@@ -22,7 +22,7 @@
 | Step 2 の鎖 | 同上 | U は sign_flip_conjugation の EF をクロネッカー積の成分の式で、U^{-1} は Sage の inverse で作る。肩を T_U で共役した整数行列が −2N_1・−N_2 に等しいこと（sign_flip_conjugation の中身。2 行目の実質）を比べ、T_U(exp(S_1))・T_U(exp(S_2)) は実際に共役して作る（3 行目の実質） |
 | Step 3 の V^{(+)}W・WV^{(+)} の鎖、逆元の一意性、二つのトレースの鎖 | `check_steps3_to_5_with_check_Vprime.sage` | 本文の ψ̌ から作った ň_μ で V̌'・(V̌')^{-1} を作り、c を V^{(+)} = cV̌' を満たす数として成分の比から作る（全成分で確かめる）。各行を QQbar で作る |
 | Step 4 の三つの鎖 | 同上 | τ・τ' を Step 1・2 と同じ作り方で作り、各行の値を QQbar・AA で作って隣どうしを比べる。q > 0・w ≠ 0 も確かめる |
-| Step 5 の鎖、ρρ = aa、ρ = a、c の値、主張 | 同上 | 同上。ρ = a を AA で、主張 V^{(+)} = a_ℂV̌' を行列の全成分で |
+| Step 5 の鎖、ρρ = aa、ρ^2 = a^2 の鎖、ρ = a、c の値、主張 | 同上 | 同上。ρ = a を AA で、主張 V^{(+)} = a_ℂV̌' を行列の全成分で |
 | 準備の t・r（trace_of_check_Vprime、trace_V_plus_is_positive の結論） | 同上 | tr(V̌') = tr((V̌')^{-1}) = Π_μ (exp(γ_μ/2) + exp(−γ_μ/2)) と tr(V^{(+)}) ∈ ℝ_{>0} |
 
 否定コントロール:
@@ -40,6 +40,9 @@
 - Step 3〜5 のスカラーの鎖の「乗法の結合律」「1_ℂ は単位元」「逆元」「real_inclusion_preserves_product」の行は、QQbar の計算規則だけで必ず成り立つ。
   中身として効くのは、V^{(+)} = cV̌'、trace_of_check_Vprime の tr(V̌') = tr((V̌')^{-1}) = t、Step 1・2 の結論（tr(V^{(+)}) = a_ℂτ、w = (a^{-1})_ℂτ'、τ' = τ）、
   逆元の一意性（W が Sage の inverse に一致すること）、w ≠ 0、ρ > 0・a > 0 と ρ = a である。
+- 二乗を冪の定義（def_power_of_complex_number・def_power_of_real_number の z^0 := 1、z^{m+1} := z^m z）で積へ開く行・積から冪へ戻す行と、
+  square_of_real_number_is_product の行は、冪を `cpow`・`rpow` で 1 から右へ掛けて組むので、隣の行とかならず一致する（Sage の `**` は使わない）。
+- (ρρ, 0) の鎖の両端の inclusion_rr_to_cc の行（(ρρ, 0) = (ρρ)_ℂ、(aa)_ℂ = (aa, 0)）は、両辺を同じ QQbar の値で表すので比べない（等号の件数に入れない）。
 
 ## 計算の帰属と範囲
 
@@ -61,12 +64,12 @@
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
 | `check_steps1_2_exact.sage` | 準備の H + H = S_1 と二つの exp の鎖、Step 1・Step 2 | **PASS** | 等号 328 個、否定コントロール 52 件 |
-| `check_steps3_to_5_with_check_Vprime.sage` | 準備の c^{-1}・t・r、Step 3〜5、主張 | **PASS** | 等号 438 個、否定コントロール 18 件 |
+| `check_steps3_to_5_with_check_Vprime.sage` | 準備の c^{-1}・t・r、Step 3〜5、主張 | **PASS** | 等号 510 個、否定コントロール 18 件 |
 
 人手証明の計算の誤りは見つからなかった。人手証明の書き方を直した（Step 2 の散文の U exp(S)U^{-1} = exp(USU^{-1}) を新しい主張 `conjugation_commutes_with_matrix_exp` へ切り出し、
 各段を (∵) とラベル参照付きの鎖に、本文に定義の無い ℂ の商を逆元の積に、(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示す形に、
 零因子を持たないことに頼っていた符号の確定を c = ρ_ℂ（ρ ∈ ℝ_{>0}）と positive_real_square_injective に、主張の c を像の記号 ((2s_2)^{M_col/2})_ℂ に）。主張の値は変えていない。
-Lean の `ClaimConstantCEvenSector.lean`・`NecSuf/ConstantC.lean` は旧い道筋（c^2 = a^2 から (c−a)(c+a) = 0 を割る）のままで、新しい Step 3〜5 と一般の B の `conjugation_commutes_with_matrix_exp` とは 1 対 1 でない（Lean の連続実行の受け持ち）。
+2026-11-08: 準備の局所定義 a^2 := aa・c^2 := cc を消して二乗を冪の定義（def_power_of_real_number・def_power_of_complex_number）にした人手の新しい鎖に合わせ、冪を `rpow`・`cpow` で組み直した（等号 438 個 → 510 個）。
 
 ## 実行方法
 

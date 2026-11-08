@@ -19,6 +19,22 @@ n_eq = 0
 n_neg = 0
 
 
+def rpow(a, m):
+    """def_power_of_real_number: a^0 := 1、a^{m+1} := a^m a（Sage の ** は使わない）。"""
+    p = a.parent()(1)
+    for _ in range(m):
+        p = p * a
+    return p
+
+
+def cpow(z, m):
+    """def_power_of_complex_number: z^0 := 1_C、z^{m+1} := z^m z（Sage の ** は使わない）。"""
+    p = QQbar(1)
+    for _ in range(m):
+        p = p * z
+    return p
+
+
 def chain(lines, what):
     global n_eq
     for k in range(len(lines) - 1):
@@ -141,12 +157,14 @@ for (x, y) in COUPLINGS:
         qv = ainv * (ainv * r)
         assert qv > 0 and w != 0
         winv = 1 / w
-        c2 = c * c
-        a2 = a * a
-        chain([c2 * w, (c * c) * (cinv * tq), c * (c * (cinv * tq)), c * ((c * cinv) * tq), c * (QQbar(1) * tq),
+        c2 = cpow(c, 2)
+        a2 = rpow(a, 2)
+        one = QQbar(1)
+        chain([c2 * w, (cpow(c, 1) * c) * w, ((cpow(c, 0) * c) * c) * w, ((one * c) * c) * w, (c * c) * w,
+               (c * c) * (cinv * tq), c * (c * (cinv * tq)), c * ((c * cinv) * tq), c * (QQbar(1) * tq),
                c * tq, trV, aq * tau, aq * (QQbar(1) * tau), aq * (QQbar(a * ainv) * tau),
                aq * ((aq * ainvq) * tau), aq * (aq * (ainvq * tau)), aq * (aq * (ainvq * taup)),
-               aq * (aq * w), (aq * aq) * w, QQbar(a2) * w], f"M={M}: Step 4 c^2w")
+               aq * (aq * w), (aq * aq) * w, QQbar(a * a) * w, QQbar(a2) * w], f"M={M}: Step 4 c^2w")
         chain([c2, c2 * QQbar(1), c2 * (w * winv), (c2 * w) * winv, (QQbar(a2) * w) * winv,
                QQbar(a2) * (w * winv), QQbar(a2) * QQbar(1), QQbar(a2)], f"M={M}: Step 4 c^2")
         # Step 5
@@ -155,15 +173,18 @@ for (x, y) in COUPLINGS:
         assert rho > 0
         chain([c, c * QQbar(1), c * QQbar(t * tinv), c * (tq * QQbar(tinv)), (c * tq) * QQbar(tinv),
                trV * QQbar(tinv), rq * QQbar(tinv), QQbar(r * tinv), QQbar(rho)], f"M={M}: Step 5 c = ρ_C")
-        chain([QQbar(rho * rho), QQbar(rho) * QQbar(rho), c * c, c2, QQbar(a2), QQbar(a * a)], f"M={M}: Step 5 (ρρ, 0)")
-        assert rho * rho == a * a and rho == a          # positive_real_square_injective
+        chain([QQbar(rho * rho), QQbar(rho) * QQbar(rho), c * c, (one * c) * c, (cpow(c, 0) * c) * c,
+               cpow(c, 1) * c, c2, QQbar(a2), QQbar(a * a)], f"M={M}: Step 5 (ρρ, 0)")
+        assert rho * rho == a * a; n_eq += 1            # (ρρ, 0) = (aa, 0) の成分ごとの等号
+        chain([rpow(rho, 2), rho * rho, a * a, rpow(a, 2)], f"M={M}: Step 5 ρ^2 = a^2")
+        assert rho == a                                 # positive_real_square_injective
         n_eq += 1
         s2 = f.s2
         chain([c, QQbar(rho), QQbar(a), QQbar(AA(2 * s2).sqrt() ** M)], f"M={M}: Step 5 c の値")
         chain([Vp, body_scalar(c, Vc), body_scalar(QQbar(a), Vc)], f"M={M}: 主張 V^(+) = a_C V̌'")
         # 否定コントロール
         assert Vp != body_scalar(-QQbar(a), Vc); n_neg += 1                 # 符号を負に取った c = −a は主張を満たさない
-        assert (-QQbar(a))**2 == QQbar(a2) and -a < 0                      # 参考（否定コントロールに数えない）: −a も c^2 = (a^2)_C を満たすので、Step 5 の符号の確定が要る
+        assert cpow(-QQbar(a), 2) == QQbar(a2) and -a < 0                      # 参考（否定コントロールに数えない）: −a も c^2 = (a^2)_C を満たすので、Step 5 の符号の確定が要る
         assert QQbar(a) * tau != w; n_neg += 1                              # Step 4 の w の係数を a^{-1} から a に取り違えると w に一致しない
         Vbad = matrix(QQbar, n, n, 0)                                     # γ_μ を 2γ_μ にした V̌' では V^(+) の定数倍にならない
         for eps in cartesian_product([[0, 1]] * M):

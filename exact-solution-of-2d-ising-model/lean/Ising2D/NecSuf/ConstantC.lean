@@ -13,14 +13,18 @@ Step 4・Step 5。具体版は `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/Cla
   `T = c t_K`, `T' = c⁻¹ t_K`（Step 3 の二つのトレースの鎖）
 
 と、準備の `T = r_K` を受け取り、具体版と同じ鎖を踏む。
-Step 4: `w := T'` を `(a⁻¹(a⁻¹r))_K` と書き、`q := a⁻¹(a⁻¹r) > 0` から `w ≠ 0`。`c^2w = (a^2)_K w` の鎖、`w⁻¹` を掛ける鎖で `c^2 = (a^2)_K`。
-Step 5: `c = (rt⁻¹)_K` の鎖、`(ρρ)_K = ρ_Kρ_K = cc = c^2 = (aa)_K` の鎖（`ρ := rt⁻¹` は名前を付けずに `r * t⁻¹` と書く）、包含の単射性で `ρρ = aa`、正の元の二乗の一意性で `ρ = a`。
+二乗 `c^2`・`a^2` は冪（`K`・`k` の `Monoid` の `npow`。具体版の `def_power_of_complex_number`・`def_power_of_real_number`）で、
+積との行き来は冪の定義の 2 式（`pow_zero`・`pow_succ`）と `NecSuf.sq_eq_mul_self'`（人手 `square_of_real_number_is_product`）で引く。
+Step 4: `w := T'` を `(a⁻¹(a⁻¹r))_K` と書き、`q := a⁻¹(a⁻¹r) > 0` から `w ≠ 0`。`c^2w = (a^2)_K w` の鎖（`c^2` を積へ開く 4 段から始め、
+`(aa)_K` を `(a^2)_K` へ戻す段で終わる）、`w⁻¹` を掛ける鎖で `c^2 = (a^2)_K`。
+Step 5: `c = (rt⁻¹)_K` の鎖、`(ρρ)_K = ρ_Kρ_K = cc = (1c)c = (c^0c)c = c^1c = c^2 = (a^2)_K = (aa)_K` の鎖（`ρ := rt⁻¹` は名前を付けずに `r * t⁻¹` と書く）、
+包含の単射性で `ρρ = aa`、`ρ^2 = ρρ = aa = a^2` の鎖、正の元の二乗の一意性で `ρ = a`。
 具体版の `(ρρ, 0)`・`(aa, 0)` の成分の行は、`K` が一般の群なので包含の単射性の 1 段が受け持つ。
 
 ## 効いているもの / 効いていないもの
 
 - `K`（具体版の ℂ）は**零を持つ群**（`GroupWithZero`）だけでよい。使うのは乗法の結合律、`1` が単位元、`0` でない元の逆元
-  （`cc⁻¹ = 1`・`ww⁻¹ = 1`）だけで、**積の可換律も加法も効いていない**（鎖はどれも括弧の付け替えだけで進み、因子の順序を入れ替える段が無い）。
+  （`cc⁻¹ = 1`・`ww⁻¹ = 1`）、冪の定義の 2 式（`pow_zero`・`pow_succ`。`GroupWithZero` に含まれる `Monoid` の `npow`）だけで、**積の可換律も加法も効いていない**（鎖はどれも括弧の付け替えだけで進み、因子の順序を入れ替える段が無い）。
 - 包含 `(·)_K : k → K`（具体版の `ℝ → ℂ`）は、**積と `0`・`1` を保つ単射**（`k →*₀ K` で単射）だけでよい。
   和を保つことは効いていない。単射性は人手の「`definition_of_cc` の元の等号は成分ごと」の 2 か所（`w ≠ 0` と `ρρ = aa`）に当たる。
 - `k`（具体版の ℝ）は**順序体**（`Field`・`LinearOrder`・`IsStrictOrderedRing`）を使う。`a⁻¹`・`t⁻¹` を取るのに体、
@@ -31,6 +35,7 @@ Step 5: `c = (rt⁻¹)_K` の鎖、`(ρρ)_K = ρ_Kρ_K = cc = c^2 = (aa)_K` の
 - `c ≠ 0` は仮定として受け取る（人手の「`c ∈ ℂ^×` なので `c ≠ 0`」）。
 -/
 import Ising2D.NecSuf.PositiveSquareInjective
+import Ising2D.NecSuf.SquareIsProduct
 import Mathlib.Algebra.GroupWithZero.Hom
 import Mathlib.Algebra.Order.Field.Basic
 
@@ -67,8 +72,12 @@ theorem const_eq_of_trace_chains {K k : Type*} [GroupWithZero K] [Field k] [Line
     intro h0
     exact (ne_of_gt hq) (hφ (h0.trans (map_zero φ).symm))                -- 包含の単射性
   -- Step 4: `c^2 w = (a^2)_K w`
-  have hcw : (c * c) * T' = φ (a * a) * T' :=
-    calc (c * c) * T' = (c * c) * (c⁻¹ * φ t) := by rw [hT'c]             -- `c^2` の定義と Step 3 の第二の鎖
+  have hcw : c ^ 2 * T' = φ (a ^ 2) * T' :=
+    calc c ^ 2 * T' = (c ^ 1 * c) * T' := by rw [pow_succ c 1]           -- 冪の定義 `z^{m+1} := z^m z`（`m → 1`）
+      _ = ((c ^ 0 * c) * c) * T' := by rw [pow_succ c 0]                 -- 冪の定義 `z^{m+1} := z^m z`（`m → 0`）
+      _ = ((1 * c) * c) * T' := by rw [pow_zero c]                       -- 冪の定義 `z^0 := 1`
+      _ = (c * c) * T' := by rw [one_mul c]                              -- `1` は乗法の単位元
+      _ = (c * c) * (c⁻¹ * φ t) := by rw [hT'c]                          -- Step 3 の第二の鎖
       _ = c * (c * (c⁻¹ * φ t)) := mul_assoc _ _ _                       -- 乗法の結合律
       _ = c * ((c * c⁻¹) * φ t) := by rw [mul_assoc c c⁻¹]               -- 乗法の結合律
       _ = c * (1 * φ t) := by rw [mul_inv_cancel₀ hcne]                  -- `c⁻¹` は `c` の逆元
@@ -82,16 +91,17 @@ theorem const_eq_of_trace_chains {K k : Type*} [GroupWithZero K] [Field k] [Line
       _ = φ a * (φ a * (φ a⁻¹ * τ')) := by rw [hτ]                       -- Step 2 を右辺から左辺へ
       _ = φ a * (φ a * T') := by rw [hT']                                -- Step 1 の第二の鎖を右辺から左辺へ
       _ = (φ a * φ a) * T' := (mul_assoc _ _ _).symm                     -- 乗法の結合律
-      _ = φ (a * a) * T' := by rw [map_mul φ a a]                        -- 包含は積を保つと `a^2` の定義
+      _ = φ (a * a) * T' := by rw [map_mul φ a a]                        -- 包含は積を保つ
+      _ = φ (a ^ 2) * T' := by rw [← sq_eq_mul_self' a]                  -- `a^2 = aa`（人手 `square_of_real_number_is_product`）を右辺から左辺へ
   -- Step 4: `c^2 = (a^2)_K`
-  have hc2 : c * c = φ (a * a) :=
-    calc c * c = (c * c) * 1 := (mul_one _).symm                         -- `1` は乗法の単位元
-      _ = (c * c) * (T' * T'⁻¹) := by rw [mul_inv_cancel₀ hwne]          -- `w⁻¹` は `w` の逆元
-      _ = ((c * c) * T') * T'⁻¹ := (mul_assoc _ _ _).symm                -- 乗法の結合律
-      _ = (φ (a * a) * T') * T'⁻¹ := by rw [hcw]                         -- 上の鎖
-      _ = φ (a * a) * (T' * T'⁻¹) := mul_assoc _ _ _                     -- 乗法の結合律
-      _ = φ (a * a) * 1 := by rw [mul_inv_cancel₀ hwne]                  -- `w⁻¹` は `w` の逆元
-      _ = φ (a * a) := mul_one _                                         -- `1` は乗法の単位元
+  have hc2 : c ^ 2 = φ (a ^ 2) :=
+    calc c ^ 2 = c ^ 2 * 1 := (mul_one _).symm                           -- `1` は乗法の単位元
+      _ = c ^ 2 * (T' * T'⁻¹) := by rw [mul_inv_cancel₀ hwne]            -- `w⁻¹` は `w` の逆元
+      _ = (c ^ 2 * T') * T'⁻¹ := (mul_assoc _ _ _).symm                  -- 乗法の結合律
+      _ = (φ (a ^ 2) * T') * T'⁻¹ := by rw [hcw]                         -- 上の鎖
+      _ = φ (a ^ 2) * (T' * T'⁻¹) := mul_assoc _ _ _                     -- 乗法の結合律
+      _ = φ (a ^ 2) * 1 := by rw [mul_inv_cancel₀ hwne]                  -- `w⁻¹` は `w` の逆元
+      _ = φ (a ^ 2) := mul_one _                                         -- `1` は乗法の単位元
   -- Step 5: `c = ρ_K`（`ρ := rt⁻¹`）
   have hρpos : 0 < r * t⁻¹ := mul_pos hr (inv_pos.2 ht)
   have hcρ : c = φ (r * t⁻¹) :=
@@ -106,11 +116,17 @@ theorem const_eq_of_trace_chains {K k : Type*} [GroupWithZero K] [Field k] [Line
   have hρρ : φ ((r * t⁻¹) * (r * t⁻¹)) = φ (a * a) :=
     calc φ ((r * t⁻¹) * (r * t⁻¹)) = φ (r * t⁻¹) * φ (r * t⁻¹) := map_mul _ _ _  -- 包含は積を保つ（右辺から左辺へ）
       _ = c * c := by rw [← hcρ]                                         -- 上の鎖の `c = ρ_K`
-      _ = c ^ 2 := (sq c).symm                                           -- `c^2` の定義
-      _ = φ (a * a) := by rw [sq]; exact hc2                             -- Step 4
-  have hsq : (r * t⁻¹) ^ 2 = a ^ 2 := by
-    rw [sq, sq]
-    exact hφ hρρ                                                         -- 包含の単射性
+      _ = (1 * c) * c := by rw [one_mul c]                               -- `1` は乗法の単位元を右辺から左辺へ
+      _ = (c ^ 0 * c) * c := by rw [pow_zero c]                          -- 冪の定義 `z^0 := 1` を右辺から左辺へ
+      _ = c ^ 1 * c := by rw [← pow_succ c 0]                            -- 冪の定義 `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+      _ = c ^ 2 := by rw [← pow_succ c 1]                                -- 冪の定義 `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
+      _ = φ (a ^ 2) := hc2                                               -- Step 4
+      _ = φ (a * a) := by rw [sq_eq_mul_self' a]                         -- `a^2 = aa`（人手 `square_of_real_number_is_product`）
+  have hρρk : (r * t⁻¹) * (r * t⁻¹) = a * a := hφ hρρ                   -- 包含の単射性
+  have hsq : (r * t⁻¹) ^ 2 = a ^ 2 :=
+    calc (r * t⁻¹) ^ 2 = (r * t⁻¹) * (r * t⁻¹) := sq_eq_mul_self' _      -- `ρ^2 = ρρ`（人手 `square_of_real_number_is_product`）
+      _ = a * a := hρρk                                                  -- 上の `ρρ = aa`
+      _ = a ^ 2 := (sq_eq_mul_self' a).symm                              -- `a^2 = aa` を右辺から左辺へ
   have hρa : r * t⁻¹ = a := (positive_square_injective' hρpos ha).1 hsq  -- 正の元の二乗の一意性
   calc c = φ (r * t⁻¹) := hcρ                                            -- 上の鎖
     _ = φ a := by rw [hρa]                                               -- `ρ = a`
