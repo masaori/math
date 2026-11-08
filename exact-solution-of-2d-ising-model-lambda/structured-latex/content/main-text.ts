@@ -8699,7 +8699,7 @@ j\in\operatorname{Orb}_{\rho}(i)
 &=\left|\operatorname{Orb}_{\sigma}(i)\right|
 &&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\bigr)\\
 &=\operatorname{len}_{\sigma}(i)
-&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)
 \end{aligned}`),
                 paragraph(["自然数である台の個数の等号で閉じる。"]),
               ],

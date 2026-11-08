@@ -225,6 +225,67 @@ theorem surroundingExteriorCells_edgeConnected
     hedgeSimple.1 hedgeSimple.2.1 hedgeSimple.2.2.1 hedgeSimple.2.2.2
   exact surroundingExteriorCells_edgeConnected_of_parityArcs n row col k hshape
 
+/-- 一歩の両端に接する外側弧は、歩が通る辺の外側セルを共有する。 -/
+theorem consecutive_surroundingExteriorCells_intersect
+    (n : ℕ) (row col : ℕ → ℤ) (k : ℕ) (hk : k < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hlocal :
+      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
+      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
+    ∃ p, p ∈ surroundingExteriorCells n row col k ∧
+      p ∈ surroundingExteriorCells n row col (k + 1) := by
+  have heven (a b : ℕ) (h : (a + b) % 2 = 1) :
+      a % 2 = 0 ∨ b % 2 = 0 := by omega
+  rcases walkStep_edgeTraversal_one n row col k hk hunit hlocal with
+    ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩ | ⟨hr, hc, ht⟩
+  · have hp : rightRayCrossingCount n row col (row k) (col k - 1) =
+        rightRayCrossingCount n row col (row k) (col k) + 1 := by
+        simpa only [show col k - 1 + 1 = col k by omega, ht] using
+          rightRayCrossingCount_adjacent n row col (row k) (col k - 1)
+    have hparity : (rightRayCrossingCount n row col (row k) (col k - 1) +
+        rightRayCrossingCount n row col (row k) (col k)) % 2 = 1 := by
+      rw [hp]; omega
+    rcases heven _ _ hparity with h | h
+    · refine ⟨(row k, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+    · refine ⟨(row k, col k), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+  · have hp : rightRayCrossingCount n row col (row k - 1) (col k - 1) =
+        rightRayCrossingCount n row col (row k - 1) (col k) + 1 := by
+        simpa only [show col k - 1 + 1 = col k by omega, ht] using
+          rightRayCrossingCount_adjacent n row col (row k - 1) (col k - 1)
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k - 1) +
+        rightRayCrossingCount n row col (row k - 1) (col k)) % 2 = 1 := by
+      rw [hp]; omega
+    rcases heven _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+    · refine ⟨(row k - 1, col k), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+  · have hp := verticallyAdjacentCells_boundaryParity n row col
+        (row k - 1) (col k) hclosedRow hclosedCol hunit
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k) +
+        rightRayCrossingCount n row col (row k) (col k)) % 2 = 1 := by
+      simpa only [show row k - 1 + 1 = row k by omega, ht] using hp
+    rcases heven _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+    · refine ⟨(row k, col k), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+  · have hp := verticallyAdjacentCells_boundaryParity n row col
+        (row k - 1) (col k - 1) hclosedRow hclosedCol hunit
+    have hparity : (rightRayCrossingCount n row col (row k - 1) (col k - 1) +
+        rightRayCrossingCount n row col (row k) (col k - 1)) % 2 = 1 := by
+      simpa only [show row k - 1 + 1 = row k by omega, ht] using hp
+    rcases heven _ _ hparity with h | h
+    · refine ⟨(row k - 1, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+    · refine ⟨(row k, col k - 1), ?_, ?_⟩ <;>
+        simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, hr, hc, h]
+
 /-- 各訪問頂点の外側弧を有限鎖としてつなぐ局所合成。 -/
 theorem walkSideExteriorBand_nonempty_edgeConnected_local
     (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
