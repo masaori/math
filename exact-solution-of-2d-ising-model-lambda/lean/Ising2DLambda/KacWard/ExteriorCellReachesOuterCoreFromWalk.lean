@@ -175,4 +175,50 @@ theorem exteriorCellOfWalk_reaches_outer_core {L m : ℕ} [NeZero L]
   exact exteriorCell_reaches_outer_core (m + 1) row col
     rMin rMax cMin cMax r c hbelow houtside
 
+/-- The two exterior cores and horizontal reachability connect the complement
+of the interior cells of the actual walk, once the band is connected. -/
+theorem exteriorCellSetOfWalk_nonempty_edgeConnected_of_bandConnected
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (rMin rMax cMin cMax : ℤ)
+    (hrow : ∀ k ≤ m + 1,
+      rMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).1 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).1 ≤ rMax)
+    (hcol : ∀ k < m + 1,
+      cMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).2 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).2 ≤ cMax)
+    (hmax : ∃ k < m + 1,
+      (planeLift γ (Fin.ofNat (m + 2) k)).2 = cMax)
+    (hbandConnected : EdgeConnectedCellSet
+      (walkSideExteriorBandFromWalk γ hγ hh hv)) :
+    ((oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ).Nonempty ∧
+      EdgeConnectedCellSet (oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ := by
+  let S := (oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ
+  let U := outsideBoundingRectangle rMin rMax cMin cMax
+  let B := walkSideExteriorBandFromWalk γ hγ hh hv
+  have hU : U ⊆ S := outsideBoundingRectangle_subset_exteriorCellsOfWalk
+    γ hγ hh hv rMin rMax cMin cMax hrow hcol
+  have hB : B ⊆ S := by
+    intro p hp
+    exact hp.1
+  have hoverlap : ∃ p, p ∈ U ∧ p ∈ B :=
+    outsideBoundingRectangle_inter_walkSideExteriorBandFromWalk
+      γ hγ hh hv rMin rMax cMin cMax hrow hcol hmax
+  have hreach : ∀ x ∈ S, ∃ b ∈ U ∪ B,
+      Relation.ReflTransGen
+        (fun a b => a ∈ S ∧ b ∈ S ∧ CellEdgeAdjacent a b) x b := by
+    rintro ⟨r, c⟩ hx
+    by_cases hbelow : c < cMax
+    · exact exteriorCellOfWalk_reaches_outer_core
+        γ hγ hh hv rMin rMax cMin cMax r c hbelow hx
+    · refine ⟨(r, c), Or.inl ?_, Relation.ReflTransGen.refl⟩
+      change r < rMin ∨ rMax ≤ r ∨ c < cMin ∨ cMax ≤ c
+      exact Or.inr (Or.inr (Or.inr (by omega)))
+  exact exteriorCores_nonempty_edgeConnected S U B hU hB
+    (outsideBoundingRectangle_edgeConnected rMin rMax cMin cMax)
+    hbandConnected hoverlap hreach
+
 end Ising2DLambda.KacWard
