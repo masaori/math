@@ -56,6 +56,7 @@ export const ALL_LABELS = [
   "claim_sum_of_sums_over_finite_set_with_same_family",
   "claim_sum_over_finite_set_depends_only_on_terms",
   "claim_sum_over_finite_set_with_kronecker_delta_picks_term",
+  "claim_two_sided_ideal_generated_by_subset_is_two_sided_ideal",
   "claim_uniqueness_of_coefficients_of_linear_combination",
   "claim_vacuum_matrix_unit_times_reverse_ordered_product_of_selected_annihilation_matrices",
   "claim_value_of_linear_combination_in_dual_space",
