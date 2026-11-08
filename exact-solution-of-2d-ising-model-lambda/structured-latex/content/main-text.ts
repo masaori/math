@@ -25359,7 +25359,7 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
 &=t\Bigl(\Psi^{O,\tau_0}_{k}\bigl(S^{[r]}(\tau_0)\bigr)\Bigr)
 &&(\because\ \blkref{def_orbit_transposition_composite})\\
 &=t\bigl(S^{[r]}(\tau_0)\bigr)
-&&(\because\ \text{帰納法の仮定の第 3 の場合。}\ r>k+1>k)\\
+&&(\because\ \text{帰納法の仮定の第 3 の場合}\ r>k+1>k)\\
 &=S^{[r]}(\tau_0)
 &&(\because\ \blkref{def_orbit_transposition}\ \text{の第 3 の場合})
 \end{aligned}`),
@@ -66498,6 +66498,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCellsOfWalk",
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_inter_walkSideExteriorBandFromWalk",
                       "Ising2DLambda.KacWard.exteriorCellSetOfWalk_nonempty_edgeConnected_of_bandConnected",
+                      "Ising2DLambda.KacWard.exteriorCellSetOfWalk_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],

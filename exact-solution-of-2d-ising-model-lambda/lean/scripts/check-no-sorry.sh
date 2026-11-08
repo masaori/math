@@ -2333,6 +2333,7 @@ targets=(
   Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf
   Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf
   Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected
+  Ising2DLambda.KacWard.exteriorCellSetOfWalk_nonempty_edgeConnected
   Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCells
   Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCellsOfWalk
   Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf

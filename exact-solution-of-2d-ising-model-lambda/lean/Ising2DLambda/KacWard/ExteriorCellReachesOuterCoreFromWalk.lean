@@ -242,4 +242,21 @@ theorem exteriorCellSetOfWalk_nonempty_edgeConnected_of_bandConnected
     (outsideBoundingRectangle_edgeConnected rMin rMax cMin cMax)
     hbandConnected hoverlap hreach
 
+/-- The complement of the interior cells of the actual simple lifted walk is connected. -/
+theorem exteriorCellSetOfWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    ((oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ).Nonempty ∧
+      EdgeConnectedCellSet (oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ := by
+  obtain ⟨rMin, rMax, cMin, cMax, hrow, hcol, hmax⟩ :=
+    exteriorCellOfWalk_boundingRectangle_endpoints γ hγ hh hv
+  have hbandConnected :=
+    (walkSideExteriorBandFromWalk_nonempty_edgeConnected γ hγ hh hv hdistinct).2
+  exact exteriorCellSetOfWalk_nonempty_edgeConnected_of_bandConnected
+    γ hγ hh hv rMin rMax cMin cMax hrow hcol hmax hbandConnected
+
 end Ising2DLambda.KacWard
