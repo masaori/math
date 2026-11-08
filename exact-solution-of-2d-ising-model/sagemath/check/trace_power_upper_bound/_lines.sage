@@ -28,23 +28,52 @@ def check_proof_lines(P, c, nmax, what):
     I = body_identity(R, d)
     E = [vector(QQ, [1 if i == k else 0 for i in range(d)]) for k in range(d)]   # e_k ∈ ℝ^d
     le(0, c, f"{what}: c ≥ 0")
-    # 【e_k のノルム】: ‖e_k‖ = √(Σ_i |(e_k)_i|^2) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1
+    # 【e_k のノルム】i ≠ k の鎖: |(e_k)_i|^2 = |0|^2 = 0^2 = 0（|0| は def_real_absolute_value の 0 ≥ 0 の場合。組み込みの abs を使わない）
+    # ノルムの鎖: ‖e_k‖ = √(Σ_i |(e_k)_i|^2) = √(0+⋯+0+|(e_k)_k|^2+0+⋯+0) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1
+    def abs_by_def(x):
+        return x if x >= 0 else -x   # def_real_absolute_value の場合分け
+    def sum_left_to_right(terms):
+        acc = terms[0]   # def_finite_sum_of_real_numbers: 左から順に足す（d ≥ 1）
+        for t in terms[1:]:
+            acc = acc + t
+        return acc
     for k in range(d):
         l1 = norm_exact(E[k])
-        l2 = AA(sum(abs(E[k][i])**2 for i in range(d))).sqrt()
-        l2b = AA(abs(E[k][k])**2).sqrt()
-        l2c = AA(abs(QQ(1))**2).sqrt()
+        l2 = AA(sum(abs_by_def(E[k][i])**2 for i in range(d))).sqrt()
+        l2b = AA(abs_by_def(E[k][k])**2).sqrt()
+        l2c = AA(abs_by_def(QQ(1))**2).sqrt()
         l2d = AA(QQ(1)**2).sqrt()
         l3 = AA(1).sqrt()
         eq(l1, l2, f"{what}: 【e_k のノルム】の 1 行目 k={k}")
-        eq(sum(abs(E[k][i])**2 for i in range(d)), 1, f"{what}: 【e_k のノルム】の 根号の中が 1 k={k}")
-        eq(l2, l2b, f"{what}: 【e_k のノルム】の 2 行目（i ≠ k の項を落とす）k={k}")
-        eq(l2b, l2c, f"{what}: 【e_k のノルム】の 3 行目（(e_k)_k = 1）k={k}")
-        eq(QQ(1) if QQ(1) >= 0 else -QQ(1), 1, f"{what}: 【e_k のノルム】の 4 行目の根拠 |1| = 1（def_real_absolute_value の 1 ≥ 0 の場合）")
-        eq(l2c, l2d, f"{what}: 【e_k のノルム】の 4 行目（|1| = 1）k={k}")
-        eq(QQ(1)**2, 1, f"{what}: 【e_k のノルム】の 5 行目の根拠 1^2 = 1")
-        eq(l2d, l3, f"{what}: 【e_k のノルム】の 5 行目（1^2 = 1）k={k}")
-        eq(l3, 1, f"{what}: 【e_k のノルム】の 6 行目 k={k}")
+        eq(sum(abs_by_def(E[k][i])**2 for i in range(d)), 1, f"{what}: 【e_k のノルム】の 根号の中が 1 k={k}")
+        for i in range(d):
+            if i == k:
+                continue
+            eq(abs_by_def(E[k][i])**2, abs_by_def(QQ(0))**2, f"{what}: 【e_k のノルム】i ≠ k の鎖の 1 行目（(e_k)_i = 0）k={k}, i={i}")
+            eq(abs_by_def(QQ(0)), 0, f"{what}: 【e_k のノルム】i ≠ k の鎖の 2 行目の根拠 |0| = 0（0 ≥ 0 の場合）")
+            eq(abs_by_def(QQ(0))**2, QQ(0)**2, f"{what}: 【e_k のノルム】i ≠ k の鎖の 2 行目")
+            eq(QQ(0)**2, 0, f"{what}: 【e_k のノルム】i ≠ k の鎖の 3 行目（0^2 = 0）")
+        terms_sub = [abs_by_def(E[k][k])**2 if i == k else QQ(0) for i in range(d)]   # 0+⋯+0+|(e_k)_k|^2+0+⋯+0
+        l2s = AA(sum_left_to_right(terms_sub)).sqrt()
+        eq(sum_left_to_right([abs_by_def(E[k][i])**2 for i in range(d)]), sum_left_to_right(terms_sub), f"{what}: 【e_k のノルム】の 2 行目の根号の中（各項へ当てる）k={k}")
+        eq(l2, l2s, f"{what}: 【e_k のノルム】の 2 行目（i ≠ k の項へ 0 を当てる）k={k}")
+        acc = terms_sub[0]
+        for j in range(1, d):   # 左から順に足す各段で、0 + a = a か a + 0 = a のどちらか一つだけを当てる
+            t = terms_sub[j]
+            if acc == 0:
+                eq(acc + t, t, f"{what}: 【e_k のノルム】の 3 行目の段（0 + a = a）k={k}, j={j}")
+            else:
+                eq(t, 0, f"{what}: 【e_k のノルム】の 3 行目の段で足す項は 0 k={k}, j={j}")
+                eq(acc + t, acc, f"{what}: 【e_k のノルム】の 3 行目の段（a + 0 = a）k={k}, j={j}")
+            acc = acc + t
+        eq(acc, abs_by_def(E[k][k])**2, f"{what}: 【e_k のノルム】の 3 行目の根号の中（0 の項を左から順に落とす）k={k}")
+        eq(l2s, l2b, f"{what}: 【e_k のノルム】の 3 行目（0 の項を落とす）k={k}")
+        eq(l2b, l2c, f"{what}: 【e_k のノルム】の 4 行目（(e_k)_k = 1）k={k}")
+        eq(abs_by_def(QQ(1)), 1, f"{what}: 【e_k のノルム】の 5 行目の根拠 |1| = 1（def_real_absolute_value の 1 ≥ 0 の場合）")
+        eq(l2c, l2d, f"{what}: 【e_k のノルム】の 5 行目（|1| = 1）k={k}")
+        eq(QQ(1)**2, 1, f"{what}: 【e_k のノルム】の 6 行目の根拠 1^2 = 1")
+        eq(l2d, l3, f"{what}: 【e_k のノルム】の 6 行目（1^2 = 1）k={k}")
+        eq(l3, 1, f"{what}: 【e_k のノルム】の 7 行目 k={k}")
     # 【冪の実対称性】: W^p は実対称（成分は QQ、(W^p)_kl = (W^p)_lk）
     pw = [power_by_def_exp(P, p) for p in range(nmax + 1)]
     for p in range(nmax + 1):

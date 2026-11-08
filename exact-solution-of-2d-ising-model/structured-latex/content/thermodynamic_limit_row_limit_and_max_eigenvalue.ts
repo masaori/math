@@ -1930,13 +1930,29 @@ c(M_{\mathrm{col}})
         "【",
         math(String.raw`e_k`),
         " のノルム】",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        "、",
+        math(String.raw`i \neq k`),
+        " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+|(e_k)_i|^2
+&= |0|^2
+&&\bigl(\because\ i \neq k\ \text{なので}\ (e_k)_i = 0\bigr)\\
+&= 0^2
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\bigr)
+\end{aligned}`),
+      paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 \|e_k\|
 &=\sqrt{\sum_{i=1}^{d}|(e_k)_i|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to e_k)\bigr)\\
+&=\sqrt{0 + \cdots + 0 + |(e_k)_k|^2 + 0 + \cdots + 0}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \text{上の}\ |(e_k)_i|^2 = 0\ (i \neq k)\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ |(e_k)_k|^2\ \text{の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=\sqrt{|(e_k)_k|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ i \neq k\ \text{の項は}\ |(e_k)_i|^2 = |0|^2 = 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{と}\ a + 0 = a\ (a \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\sqrt{|1|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ (e_k)_k = 1\bigr)\\
 &=\sqrt{1^2}^{\,(\mathbb{R}_{\ge 0})}
@@ -2249,6 +2265,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の 2 行目「i ≠ k の項は |(e_k)_i|^2 = |0|^2 = 0」（(e_k)_i = 0・|0| = 0・0^2 = 0・0 の項を和から落とすことを 1 行で使っていた）を、i ≠ k の |(e_k)_i|^2 の 3 行の鎖（def_rayleigh_sup の |(e_1)_i|^2 の鎖と同じ書き方）と、ノルムの鎖の「各項へ当てる」「0 の項を落とす」の 2 行に割った（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の 4 行目 √(|1|^2) = √1（根拠 |1|^2 = 1 が |1| = 1 と 1^2 = 1 の 2 つの事実を 1 行で使っていた）を、def_real_absolute_value の 1 ≥ 0 の場合 |1| = 1 の行と power_of_real_one_is_one（m → 2）の行の 2 行に割った（def_rayleigh_sup の |(e_1)_1|^2 の鎖と同じ書き方。値は不変）。",
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",

@@ -19,7 +19,7 @@
 | 人手 | Lean |
 | --- | --- |
 | 準備: `e_k`（`(e_k)_k = 1`、`i ≠ k` で `(e_k)_i = 0`） | `Pi.single k 1`（成分は `Pi.single_eq_same`・`Pi.single_eq_of_ne`） |
-| 【`e_k` のノルム】5 行 | `norm_of_standard_basis_vector` の `calc` の 5 段 |
+| 【`e_k` のノルム】`i ≠ k` の `|(e_k)_i|^2` の 3 行の鎖とノルムの 7 行 | `norm_of_standard_basis_vector` の `hoff` の `calc` の 3 段と `calc` の 7 段 |
 | 【冪の実数の行列】`(W^p)_ℝ = (W_ℝ)^p` | `real_matrix_of_real_entry_matrix_preserves_power`（`A → W`, `q → p`）をそのまま引く |
 | 【冪の対称性】6 行と単射性 | `power_of_W_real_entry_symm` の `calc` の 6 段と `inclusion_rr_to_cc_is_injective` |
 | 【対角成分の表示】5 行 | `diagonal_entry_via_standard_basis` の `calc` の 5 段 |
@@ -64,16 +64,26 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 人手【`e_k` のノルム】: `‖e_k‖ = 1`（6 行）。 -/
-theorem norm_of_standard_basis_vector (k : Conf M) : vecNorm (Pi.single k (1 : ℝ)) = 1 :=
+/-- 人手【`e_k` のノルム】: `i ≠ k` の `|(e_k)_i|^2 = 0`（3 行の鎖、`hoff`）と `‖e_k‖ = 1`（7 行）。 -/
+theorem norm_of_standard_basis_vector (k : Conf M) : vecNorm (Pi.single k (1 : ℝ)) = 1 := by
+  have hoff : ∀ i, i ≠ k → |(Pi.single k (1 : ℝ) : Conf M → ℝ) i| ^ 2 = 0 := fun i hi =>
+    calc |(Pi.single k (1 : ℝ) : Conf M → ℝ) i| ^ 2
+        = |(0 : ℝ)| ^ 2 := by rw [Pi.single_eq_of_ne hi]                    -- `i ≠ k` なので `(e_k)_i = 0`
+      _ = (0 : ℝ) ^ 2 := by rw [abs_of_nonneg (le_refl (0 : ℝ))]            -- `def_real_absolute_value` の `0 ≥ 0` の場合 `|0| = 0`
+      _ = 0 := zero_pow two_ne_zero                                         -- `ℝ` で `0^2 = 0`
   calc vecNorm (Pi.single k (1 : ℝ))
       = Real.sqrt (∑ i, |(Pi.single k (1 : ℝ) : Conf M → ℝ) i| ^ 2) := by
         rw [vecNorm, vecNormSq_eq_sum]
-        simp only [square_of_real_absolute_value]                           -- `def_matrix_norm`（`K = ℝ`）。`square_of_real_absolute_value` は書き方の差を埋める段
+        simp only [square_of_real_absolute_value]                           -- `def_matrix_norm`（`K = ℝ`、`w → e_k`）。`square_of_real_absolute_value` は書き方の差を埋める段
+    _ = Real.sqrt (∑ i, if i = k then |(Pi.single k (1 : ℝ) : Conf M → ℝ) k| ^ 2 else 0) := by
+        congr 1
+        refine Finset.sum_congr rfl fun i _ => ?_
+        by_cases h : i = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hoff i h]                                           -- 上の `|(e_k)_i|^2 = 0`（`i ≠ k`）を `k` 以外の各項へ（`0 + ⋯ + 0 + |(e_k)_k|^2 + 0 + ⋯ + 0`）
     _ = Real.sqrt (|(Pi.single k (1 : ℝ) : Conf M → ℝ) k| ^ 2) := by
-        rw [Finset.sum_eq_single k
-          (fun i _ hik => by rw [Pi.single_eq_of_ne hik, abs_zero]; norm_num)
-          (fun h => absurd (Finset.mem_univ k) h)]                         -- `i ≠ k` の項は `|0|^2 = 0`
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + a = a` と `a + 0 = a` を左から順に（`def_finite_sum_of_real_numbers`。具体版が無いので mathlib。`vecNorm_single` と同じ）
     _ = Real.sqrt (|(1 : ℝ)| ^ 2) := by rw [Pi.single_eq_same]              -- `(e_k)_k = 1`
     _ = Real.sqrt ((1 : ℝ) ^ 2) := by rw [abs_of_nonneg (zero_le_one' ℝ)]   -- `def_real_absolute_value` の `1 ≥ 0` の場合 `|1| = 1`
     _ = Real.sqrt 1 := by rw [power_of_real_one_is_one 2]                   -- `power_of_real_one_is_one`（`m → 2`）
