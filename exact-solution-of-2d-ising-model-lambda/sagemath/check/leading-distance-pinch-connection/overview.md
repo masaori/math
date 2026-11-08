@@ -14,4 +14,4 @@
 sage sagemath/check/leading-distance-pinch-connection/check.sage
 ```
 
-**2026-09-20 実行: すべて通過。**
+**2026-11-08 再実行: すべて通過。**

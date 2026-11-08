@@ -87785,21 +87785,21 @@ z_2\cdot z_2+\beta\cdot\beta&=z_3\cdot z_3
                     displayMath(String.raw`\begin{aligned}
 \varepsilon\cdot\varepsilon-\mathrm{dsq}(\xi,q)
 &=4\cdot\eta-\bigl((\alpha-q)\cdot(\alpha-q)+\beta\cdot\beta\bigr)
-&&(\because\ \varepsilon\cdot\varepsilon=4\cdot\eta\ (\mathbb{Q}\text{ の四則})\text{ と }\mathrm{dsq}(\xi,q)\text{ の表示})\\
+&&\bigl(\because\ \varepsilon\cdot\varepsilon=4\cdot\eta\ (\mathbb{Q}\text{ の四則})\text{ と }\mathrm{dsq}(\xi,q)\text{ の表示}\bigr)\\
 &=4\cdot\eta-\bigl((u+v)\cdot(u+v)+\beta\cdot\beta\bigr)
-&&(\because\ u+v=(\alpha-x_c)+(x_c-q)=\alpha-q\ (R\text{ の四則}))\\
+&&\bigl(\because\ u+v=(\alpha-x_c)+(x_c-q)=\alpha-q\ (R\text{ の四則})\bigr)\\
 &=2\cdot\bigl(\eta-(u\cdot u+\beta\cdot\beta)\bigr)+2\cdot(\eta-v\cdot v)+\bigl(2\cdot(u\cdot u)+2\cdot(v\cdot v)-(u+v)\cdot(u+v)\bigr)+\beta\cdot\beta
-&&(\because\ R\text{ の分配則と同じ項をまとめる（}4=2+2\text{、}2:=1+1\text{）})\\
+&&\bigl(\because\ R\text{ の分配則と同じ項をまとめる（}4=2+2\text{、}2:=1+1\text{）}\bigr)\\
 &=2\cdot(c_1\cdot c_1)+2\cdot(c_2\cdot c_2)+g\cdot g+\beta\cdot\beta
-&&(\because\ c_1,c_2,g\text{ の取り方})\\
+&&\bigl(\because\ c_1,c_2,g\text{ の取り方}\bigr)\\
 &=(t\cdot c_1)\cdot(t\cdot c_1)+(t\cdot c_2)\cdot(t\cdot c_2)+g\cdot g+\beta\cdot\beta
-&&(\because\ t\cdot t=2\text{ と }R\text{ の積の可換則・結合則})\\
+&&\bigl(\because\ t\cdot t=2\text{ と }R\text{ の積の可換則・結合則}\bigr)\\
 &=z_1\cdot z_1+g\cdot g+\beta\cdot\beta
-&&(\because\ z_1\text{ の取り方})\\
+&&\bigl(\because\ z_1\text{ の取り方}\bigr)\\
 &=z_2\cdot z_2+\beta\cdot\beta
-&&(\because\ z_2\text{ の取り方})\\
+&&\bigl(\because\ z_2\text{ の取り方}\bigr)\\
 &=z_3\cdot z_3
-&&(\because\ z_3\text{ の取り方})
+&&\bigl(\because\ z_3\text{ の取り方}\bigr)
 \end{aligned}`),
                     paragraph([
                       "を得る。", math(String.raw`z_3\ne0`), " なので ",

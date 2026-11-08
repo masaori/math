@@ -7,11 +7,8 @@
 セル集合の頂点数・辺数・セル数へ特殊化して結論を得る。
 -/
 import Ising2DLambda.KacWard.CellComplexOneCellIncrement
-import Ising2DLambda.NecSuf.KacWard.HoleFreeCellSetEulerNumber
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `claim_hole_free_cell_set_euler_number_one` の具体版。 -/
 theorem cellEulerNumber_eq_one_of_region_count
@@ -22,8 +19,6 @@ theorem cellEulerNumber_eq_one_of_region_count
         (regionCount : ℤ) = 2) :
     cellEulerNumber cells = 1 := by
   unfold cellEulerNumber
-  exact cellEuler_eq_one_of_region_count_necSuf
-    (cellVertices cells).card (cellEdges cells).card cells.card regionCount
-    hregions hplanarEuler
+  omega
 
 end Ising2DLambda.KacWard
