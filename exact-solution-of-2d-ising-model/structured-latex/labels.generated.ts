@@ -609,6 +609,7 @@ export const ALL_LABELS = [
   "sqrt_expansion_via_polar",
   "sqrt_nonnegative_existence_uniqueness",
   "sqrt_of_real_one_is_one",
+  "sqrt_of_real_zero_is_zero",
   "sqrt_of_square_plus_one_is_positive",
   "sqrt_squared_is_original",
   "square_of_real_absolute_value",

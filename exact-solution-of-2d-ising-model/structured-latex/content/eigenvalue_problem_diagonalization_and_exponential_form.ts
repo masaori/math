@@ -2741,10 +2741,12 @@ s_1c_2
 &&(\because\ \blkref{def_cos})\\
 &= \sqrt{1-1^2}^{(\mathbb{R}_{\geq 0})}
 &&(\because\ \text{上の}\ \sin(\pi/2) = 1)\\
+&= \sqrt{1-1}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ \text{の}\ m \to 2\bigr)\\
 &= \sqrt{0}^{(\mathbb{R}_{\geq 0})}
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
 &= 0
-&&(\because\ 0 \geq 0\ \text{かつ}\ 0^2 = 0\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ 0)
+&&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \arcsin(0)
@@ -3043,6 +3045,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 |γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）、(2) の等号の右辺が実数 −|γ_2(θ̃_μ)|^2 の inclusion_rr_to_cc の像で、< 0 はその実数についての ℝ の順序であると (2) の直後に明記した。−|γ_2|^2 を ℂ と ℝ の両方の元として使わないよう、(2) を γ_2γ_2(−θ̃) = (−|γ_2|^2)_ℂ と −|γ_2|^2 < 0 の 2 式に分けた（証明の鎖の終わりの形と同じ）。続く「とくに〜負の実数」の文も実数の像と書き、anticommutator_of_check_psi の (2) を引く段落の読み方の文を新しい主張の形に合わせた。証明の −|γ_2(θ)|^2 < 0 の鎖の根拠「両辺を −1 倍すると向きが変わる」を、使っているのが符号反転なので「両辺の符号を反転すると向きが変わる」に直した。0 < |γ_2(θ)|^2 の鎖の |γ_2(θ)||γ_2(θ)| = |γ_2(θ)|^2 の行の名前だけの根拠「実数の 2 乗の定義」を square_of_real_number_is_product（r → |γ_2(θ)|）を右辺から左辺へ引く参照にした。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖の 2 行目「ℝ の四則 0/√1 = 0」（0^2 = 0・1 + 0 = 1・√1 = 1・0/1 = 0 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）、sqrt_of_real_one_is_one、ℝ で 0/x = 0（x → 1）の 5 行に割った。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖を独立の主張 arctan_zero（020_critical_point.ts）へ移し、(3)(4) の鎖の根拠「準備の arctan 0 = 0」を arctan_zero の参照にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖も同じ主張を引く。0 < π の鎖が引いていた arcsin(0) = 0 は、移した鎖の 7・8 行目と同じ 2 行の鎖（sine_zero・def_sin）として準備の第五に残した。値と主張は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の cos(π/2) の鎖の「ℝ の四則」1 行（1^2 = 1・1 − 1 = 0 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割った。最後の行 √0 = 0（0 ≥ 0・0^2 = 0・definition_of_sqrt_r_positive の一意性を 1 行で使っていた）を、新しく足した主張 sqrt_of_real_zero_is_zero（000_calculation_formulae_20_29.ts）の参照にした。値と主張は不変。",
       ],
     },
   },
