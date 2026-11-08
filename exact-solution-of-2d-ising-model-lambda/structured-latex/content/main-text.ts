@@ -67309,8 +67309,58 @@ h_Z(r,c)
                           displayMath(String.raw`\begin{aligned}
 a&\le c&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_zero_left}\bigr)\\
 c&<b&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_zero_right}\bigr)\\
+c&\le b&&\bigl(\because\ c,b\in\mathbb Z\text{ と }c<b\bigr)\\
 c&\in C_Z&&\bigl(\because\ C_Z=\{d\in\mathbb Z\mid a\le d\le b\}\bigr)
 \end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_one_cells_finite",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さ一のセル集合は有限である" },
+                        labels: ["claim_plane_dual_ray_height_one_cells_finite"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_one_cells_finite",
+                          "Ising2DLambda.NecSuf.KacWard.binaryHeight_one_cells_finite",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_one_cells_finite_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-one-cells-finite"],
+                        statement: [
+                          paragraph([
+                            "各頂点に接する辺の本数が偶数である有限格子辺集合 ", math(String.raw`Z`),
+                            " を取る。右向き双対路の高さ（", ref("def_plane_dual_ray_height"),
+                            "）が一であるセルの集合",
+                          ]),
+                          displayMath(String.raw`T_Z:=\{(r,c)\in\mathbb Z\times\mathbb Z\mid h_Z(r,c)=1\}`),
+                          paragraph([math(String.raw`T_Z`), " は有限である。"]),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_finite_row_support"), " の有限な行集合を ",
+                            math(String.raw`R_Z\subset\mathbb Z`), " とする。",
+                            ref("claim_plane_dual_ray_height_finite_column_support"), " の有限な列集合を ",
+                            math(String.raw`C_Z\subset\mathbb Z`), " とする。",
+                            "任意の ", math(String.raw`(r,c)\in T_Z`), " では高さが一なので、",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c)&=1
+&&\bigl(\because\ (r,c)\in T_Z\text{ と }T_Z\text{ の定義}\bigr)\\
+r&\in R_Z
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_finite_row_support}\bigr)\\
+c&\in C_Z
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_finite_column_support}\bigr)\\
+(r,c)&\in R_Z\times C_Z
+&&\bigl(\because\ \text{直積の定義}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "したがって ", math(String.raw`T_Z\subset R_Z\times C_Z`),
+                            " である。右辺は有限集合の直積なので有限であり、その部分集合 ",
+                            math(String.raw`T_Z`), " も有限である。実数体も複素数体も使わない。",
+                          ]),
                         ],
                       },
                     },
