@@ -357,6 +357,7 @@ export const ALL_LABELS = [
   "claim_plane_cell_boundary_even_at_vertex",
   "claim_plane_cell_boundary_preserves_symmetric_difference",
   "claim_plane_dual_ray_height_horizontal_difference",
+  "claim_plane_dual_ray_height_vertical_difference",
   "claim_plane_lift_coordinates",
   "claim_plane_lift_endpoint_winding",
   "claim_plane_projection_cyclic_turning",

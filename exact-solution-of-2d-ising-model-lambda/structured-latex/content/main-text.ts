@@ -31075,7 +31075,7 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
 (t-\widehat{w})\,K_{n+1}(w)&=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
 &&(\because\ K_{n+1}(w)\ \text{の約束})\\
 &=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}\bigr)+(t-\widehat{w})t^{\,n}
-&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則}\bigr)\\
 &=\bigl((t-\widehat{w})K_{n}(w)\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の結合則})\\
 &=\bigl(t^{\,n}-\widehat{w}^{\,n}\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
@@ -66955,6 +66955,55 @@ h_Z(r,c-1)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_vertical_difference",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さの縦方向の隣接差" },
+                        labels: ["claim_plane_dual_ray_height_vertical_difference"],
+                        habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_vertical",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRayHeight_vertical",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-vertical"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " の各頂点に接する ",
+                            math(String.raw`Z`), " の辺の本数が偶数であるとする。任意の ",
+                            math(String.raw`r,c\in\mathbb Z`), " について、上下に隣り合うセルの高さ（",
+                            ref("def_plane_dual_ray_height"), "）は、共有横辺 ",
+                            math(String.raw`e_{r,c}:=\{(r,c),(r,c+1)\}`), " により",
+                          ]),
+                          displayMath(String.raw`h_Z(r,c)+h_Z(r-1,c)\equiv\mathbf1_{e_{r,c}\in Z}\pmod2`),
+                          paragraph(["を満たす。指示値は ", math(String.raw`\{0,1\}`), " に属する。"]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "横辺 ", math(String.raw`e_{r,j}:=\{(r,j),(r,j+1)\}`),
+                            " と縦辺 ", math(String.raw`v_{r,j}`), " を用いる。",
+                            math(String.raw`M>c`), " を、", math(String.raw`Z`),
+                            " の全ての辺の列座標より大きい整数として取る。有限性から存在する。",
+                            "頂点 ", math(String.raw`(r,j)`), " の偶数次数条件は",
+                          ]),
+                          displayMath(String.raw`\mathbf1_{v_{r,j}\in Z}+\mathbf1_{v_{r-1,j}\in Z}\equiv\mathbf1_{e_{r,j}\in Z}+\mathbf1_{e_{r,j-1}\in Z}\pmod2`),
+                          paragraph(["である。これを整数 ", math(String.raw`c<j\le M`), " について足す。"]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c)+h_Z(r-1,c)
+&\equiv\sum_{j=c+1}^{M}\bigl(\mathbf1_{v_{r,j}\in Z}+\mathbf1_{v_{r-1,j}\in Z}\bigr)
+&&\bigl(\because\ \blkref{def_plane_dual_ray_height}\text{ と }M\text{ の選び方}\bigr)\\
+&\equiv\sum_{j=c+1}^{M}\bigl(\mathbf1_{e_{r,j}\in Z}+\mathbf1_{e_{r,j-1}\in Z}\bigr)
+&&\bigl(\because\ \text{各頂点の偶数次数}\bigr)\\
+&\equiv\mathbf1_{e_{r,c}\in Z}+\mathbf1_{e_{r,M}\in Z}
+&&\bigl(\because\ \text{中間の横辺は二度現れて偶奇が零}\bigr)\\
+&\equiv\mathbf1_{e_{r,c}\in Z}\pmod2
+&&\bigl(\because\ M\text{ は全ての辺の列座標より大きい}\bigr)
+\end{aligned}`),
+                          paragraph(["全ての和は有限であり、整数の偶奇だけを使った。"]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",
@@ -86412,17 +86461,17 @@ u_{w,w'}\cdot(t-\widehat{w})-u_{w,w'}\cdot(t-\widehat{w'})
 &=u_{w,w'}\cdot\bigl((t-\widehat{w})-(t-\widehat{w'})\bigr)
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
 &=u_{w,w'}\cdot(\widehat{w'}-\widehat{w})
-&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の可換則・結合則で}\ t\ \text{が消える})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の加法の可換則・結合則で}\ t\ \text{が消える}\bigr)\\
 &=u_{w,w'}\cdot\widehat{w'-w}
-&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{が和を保つことと加法の逆元の一意性})\\
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{が和を保つことと加法の逆元の一意性}\bigr)\\
 &=\widehat{(w'-w)^{-1}}\cdot\widehat{w'-w}
-&&(\because\ u_{w,w'}\ \text{の定め方})\\
+&&\bigl(\because\ u_{w,w'}\ \text{の定め方}\bigr)\\
 &=\widehat{(w'-w)^{-1}(w'-w)}
-&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{が積を保つこと})\\
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{が積を保つこと}\bigr)\\
 &=\widehat{1}
-&&(\because\ w'-w\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の体の逆元により}\ (w'-w)^{-1}(w'-w)=1)\\
+&&\bigl(\because\ w'-w\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の体の逆元により}\ (w'-w)^{-1}(w'-w)=1\bigr)\\
 &=1
-&&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{1}=1)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{1}=1\bigr)
 \end{aligned}`),
                         paragraph([
                           "以上で恒等式が示された。この議論に現れるのは代数的数の四則・体の逆元・多項式環の演算だけであり、",

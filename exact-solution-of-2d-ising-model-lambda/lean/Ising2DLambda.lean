@@ -1079,7 +1079,9 @@ import Ising2DLambda.KacWard.CellComplexOneCellIncrement
 import Ising2DLambda.KacWard.CellEdgeIncidence
 import Ising2DLambda.KacWard.PlaneCellBoundary
 import Ising2DLambda.KacWard.PlaneDualRayHeight
+import Ising2DLambda.KacWard.PlaneDualRayHeightVertical
 import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeight
+import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeightVertical
 import Ising2DLambda.KacWard.PlaneDualRayHeightFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundaryVertexEven
 import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundarySymmDiff
