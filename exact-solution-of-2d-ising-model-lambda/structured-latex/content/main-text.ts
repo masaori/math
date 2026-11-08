@@ -12386,6 +12386,11 @@ S&=(S-T)+T
                 title: { text: "木の非空な辺部分集合には接続辺が一本の頂点がある" },
                 labels: ["claim_nonempty_tree_edge_subset_has_leaf"],
                 habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.nonemptyTreeEdgeSubset_has_leaf",
+                  "Ising2DLambda.NecSuf.Tools.nonemptyTreeEdgeSubset_has_leaf",
+                  "Ising2DLambda.Tools.nonemptyTreeEdgeSubset_has_leaf_from_necSuf",
+                ],
                 verification: ["sagemath/check/nonempty-tree-edge-subset-leaf"],
                 statement: [
                   paragraph([
@@ -12415,9 +12420,9 @@ S&=(S-T)+T
                   ]),
                   paragraph([
                     "辺 ", math(String.raw`\{v,w\}`), " は路の最初の辺なので ",
-                    math(String.raw`A`), " に属し、", math(String.raw`v`),
-                    " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
+                    math(String.raw`A`), " に属する。",
                   ]),
+                  displayMath(String.raw`\{e\in A:v\in e\}=\{\{v,w\}\}\quad(\because\ \{v,w\}\in A\text{ と上で示した }u=w)`),
                 ],
               },
             },

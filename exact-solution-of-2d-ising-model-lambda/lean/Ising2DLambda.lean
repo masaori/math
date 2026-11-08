@@ -1,6 +1,9 @@
 import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationOrbitEnumeration
 import Ising2DLambda.Tools.FiniteTreeEdgeCount
 import Ising2DLambda.NecSuf.Tools.FiniteTreeEdgeCount
+import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeaf
+import Ising2DLambda.NecSuf.Tools.NonemptyTreeEdgeSubsetLeaf
+import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeafFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
