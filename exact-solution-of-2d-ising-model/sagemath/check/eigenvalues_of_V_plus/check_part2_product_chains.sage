@@ -61,7 +61,7 @@ def product_chain(K2, gs, M, sinh_, exp_, sqrt_, pw_half, pw_nat, zero):
         A * A,                                             # 16: s_2 = sinh 2K_2
         pw_nat(rt, M) * pw_nat(rt, M),                     # 17: def_second_transfer_matrix_prefactor
         pw_nat(rt * rt, M),                                # 18: (uv)^m = u^m v^m
-        pw_nat(pw_nat(rt, 2), M),                          # 19: y^2 = yy
+        pw_nat(pw_nat(rt, 2), M),                          # 19: square_of_real_number_is_product を右辺から左辺へ
         pw_nat(2 * sinh_(2 * K2), M),                      # 20: definition_of_sqrt_r_positive
     ]
 

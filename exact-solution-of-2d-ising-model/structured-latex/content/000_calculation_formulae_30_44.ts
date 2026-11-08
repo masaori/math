@@ -2315,7 +2315,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { text: "sqrt の2乗は元に戻る" },
     labels: ["sqrt_squared_is_original"],
     statement: [
-      paragraph([ref("sqrt_expansion_via_polar"), "、", ref("operations_on_polar_representation"), "、", ref("definition_of_sqrt_r_positive"), " を用いる。", ref("def_sqrt_cc"), " と ", ref("def_phi_cartesian"), " は正弦・余弦が主値区間でしか定まっていないため未完であり、この主張もそれらが整うまで未完である。"]),
+      paragraph([ref("sqrt_expansion_via_polar"), "、", ref("operations_on_polar_representation"), "、", ref("definition_of_sqrt_r_positive"), "、", ref("square_of_real_number_is_product"), " を用いる。", ref("def_sqrt_cc"), " と ", ref("def_phi_cartesian"), " は正弦・余弦が主値区間でしか定まっていないため未完であり、この主張もそれらが整うまで未完である。"]),
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、", math(String.raw`\sqrt{z}\sqrt{z}=z`)]),
     ],
     proof: [
@@ -2350,8 +2350,10 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{が積を保つこと。}\blkref{isomorphism_of_phi_cartesian})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
 &&(\because\ \text{極座標表現の演算。}\blkref{operations_on_polar_representation})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}}\right)^2,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r \to \sqrt{r}^{\,\mathbb{R}_{\geq 0}})\ \text{を右辺から左辺へ})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&&(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to r)\ \text{の}\ y^2 = x)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}+\tfrac{\theta}{2}\right)-\left(n\pi+n\pi\right)\right)\right]_{\sim}\right)
 &&(\because\ \mathbb{R}\ \text{の和の交換律と結合律})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta-2n\pi\right)\right]_{\sim}\right)
@@ -2385,6 +2387,8 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "（isomorphism_of_phi_cartesian の主張はこれを述べていない）。準備の二つ目と三つ目は、各行の根拠と重なるうえ" +
           "同値関係の言い換えが不正確だったので削除し、同値の行の根拠に角度の差と angle_equivalence_class を書いた。" +
           "実数の和の行を二行に分けた。上流の定義が未完であることを主張に書いた。計算の誤りは無かった。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したので、" +
+          "√r·√r = r を一行で定義から引いていた行を、square_of_real_number_is_product で積を冪 (√r)^2 へ戻す行と、定義の y^2 = x の行の二行に割った（鎖は十の式から十一の式へ）。",
       ],
     },
   },

@@ -444,7 +444,7 @@ theorem checkBigLambda_max_mul_min (F : CheckFermiSetup M) (g : CheckIdx M → �
     _ = (Real.sqrt (2 * s2) * Real.sqrt (2 * s2)) ^ M :=
         (mul_pow _ _ _).symm                            -- 18 行目: ℝ の冪の `(uv)^m = u^m v^m` を右辺から左辺へ
     _ = (Real.sqrt (2 * s2) ^ 2) ^ M := by
-        rw [sq]                                         -- 19 行目: ℝ の冪の `y^2 = yy` を右辺から左辺へ
+        rw [← square_of_real_number_is_product (Real.sqrt (2 * s2))]  -- 19 行目: `square_of_real_number_is_product`（`r → √(2 sinh 2K_2)`）を右辺から左辺へ
     _ = (2 * s2) ^ M := by
         rw [Real.sq_sqrt h2s2]                          -- 20 行目: `definition_of_sqrt_r_positive`（`x → 2 sinh 2K_2`）の `y^2 = x`
 

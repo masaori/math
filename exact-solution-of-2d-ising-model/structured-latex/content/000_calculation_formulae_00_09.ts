@@ -150,7 +150,11 @@ a>0\ \land\ b>0
         " について、",
       ]),
       displayMath(String.raw`y\in\mathbb{R}_{\ge 0} \ \land\ y^2=x`),
-      paragraph(["を満たす ", math(String.raw`y`), " がただ一つ存在する。"]),
+      paragraph([
+        "を満たす ", math(String.raw`y`), " がただ一つ存在する。二乗 ",
+        math(String.raw`y^2`), " は ", ref("def_power_of_real_number"), " の冪（",
+        math(String.raw`m = 2`), "）である。",
+      ]),
     ],
     proof: [
       paragraph([
@@ -502,6 +506,7 @@ y^2>x\ \land\ x>0
           "存在は R の上限性質（完備性）を使い、一意性は" +
           "labels: cosh_sinh_basic_properties の (4) を使う。" +
           "非可算集合 R の完備性へ移行する箇所を proof の冒頭で明示した。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の二乗 y^2 を def_power_of_real_number の冪（m = 2）と明記した（definition_of_sqrt_r_positive と同じ）。証明の中で積 s·s へ開く行が名前だけの「2 乗の定義」を根拠にしている箇所は、square_of_real_number_is_product を引く行へ替える単位として残っている。",
       ],
     },
   },
@@ -522,12 +527,24 @@ y^2>x\ \land\ x>0
       paragraph([
         "を満たすものがただ一つ存在する（",
         ref("sqrt_nonnegative_existence_uniqueness"),
-        "）。",
+        "）。二乗 ",
+        math(String.raw`y^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
       ]),
       paragraph(["この ", math("y"), " を用いて"]),
       displayMath(String.raw`\sqrt{x}^{(\mathbb{R}_{\ge 0})}:=y`),
       paragraph(["と定める。"]),
     ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗 y^2 が def_power_of_real_number の冪か積 yy かを定義の中に書いていなかったので、冪（m = 2）と明記した。積の形が要る行は square_of_real_number_is_product を引く。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（square_of_real_number_is_product と同じ扱い。def_power_of_real_number は平方根を使わないので循環しない）。",
+      ],
+    },
   },
   {
     id: "calc_formulae_002_negative_number_to_sqrt",

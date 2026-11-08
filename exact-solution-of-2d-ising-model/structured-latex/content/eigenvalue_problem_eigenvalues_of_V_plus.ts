@@ -6655,7 +6655,7 @@ x &= Ix
 &= \Bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\,\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\Bigr)^{M_{\mathrm{col}}}
    &&(\because\ \mathbb{R}\ \text{の冪で}\ (uv)^{m} = u^{m}v^{m}\ \bigl(u, v \to \sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})},\ m \to M_{\mathrm{col}}\bigr)\ \text{を右辺から左辺へ}) \\
 &= \Bigl(\bigl(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\bigr)^{2}\Bigr)^{M_{\mathrm{col}}}
-   &&(\because\ \mathbb{R}\ \text{の冪で}\ y^{2} = yy\ \text{を右辺から左辺へ}) \\
+   &&(\because\ \blkref{square_of_real_number_is_product}\ \bigl(r \to \sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\bigr)\ \text{を右辺から左辺へ}) \\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}}
    &&(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 2\sinh 2K_2)\ \text{の}\ y^{2} = x)
 \end{aligned}`,
@@ -6705,6 +6705,7 @@ x &= Ix
         "2026-11-04: (2) の「ǧ(1,…,1) = ½Σγ(θ~_μ)、ǧ(0,…,0) = −½Σγ(θ~_μ) を代入して statement の Λ̌_max, Λ̌_min を得る」は二つの値を根拠なしに書いていたので、Λ̌_max := Λ̌_{(1,…,1)}・Λ̌_min := Λ̌_{(0,…,0)} の置き方と、ǧ(1,…,1) の 4 行・ǧ(0,…,0) の 5 行の鎖（ǧ の定義・ℝ の数の計算・積の交換法則・新しく足した finite_sum_of_real_scalar_multiples・(−a)b = −(ab)）、Λ̌_max・Λ̌_min の 4 行の鎖二本（置き方・Λ̌_ε の定義・ǧ の定義を右辺から左辺へ・上の鎖）にした（内容は不変）。Λ̌_maxΛ̌_min の鎖は扱っていない。Lean の Ising2D.gval_univ_eq_half_sum・Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_max_eq・Ising2D.checkBigLambda_min_eq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_extreme_values_chains.sage。",
         "2026-11-04: (2) の最後の「Λ̌_maxΛ̌_min = (2s_2)^{M_col}（指数部分が互いに打ち消し合う）= c^2（定数 c の決定）」は二つの等号を名前だけで済ませ、ℝ の元と ℂ の元 c^2 を等号で結んでいたので、b := ½Σγ(θ~_μ) の置き方と、Λ̌_max・Λ̌_min の鎖・b / s_2 / a の置き方・ℝ の乗法の結合律と交換律・scalar_exp_product（K → ℝ）・b + (−b) = 0・scalar_exp_zero・a の置き方・def_second_transfer_matrix_prefactor・ℝ の冪の (uv)^m = u^m v^m と y^2 = yy・definition_of_sqrt_r_positive の 20 行の鎖と、(Λ̌_maxΛ̌_min)_ℂ = c^2 の 8 行の鎖（real_inclusion_preserves_product・a の置き方・constant_c_value_even_sector・1_ℂz = z・def_power_of_complex_number）にした。主張文の括弧書きを「Λ̌_maxΛ̌_min = (2 sinh 2K_2)^{M_col}、(Λ̌_maxΛ̌_min)_ℂ = c^2」に直した（内容は不変）。Lean の Ising2D.checkBigLambda_max_mul_min・Ising2D.checkBigLambda_max_mul_min_eq_c_sq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_product_chains.sage。",
         "2026-11-04: (2) の主張に、証明の中でだけ書いていた置き方 Λ̌_max := Λ̌_{(1,…,1)}、Λ̌_min := Λ̌_{(0,…,0)} を書き足した。V_plus_eigenvalues_with_c_value_and_strict_maximum (3) がこの置き方を引くため（内容は不変）。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (2) の積の鎖の 19 行目（√ の積を冪へ戻す行）の名前だけの根拠「ℝ の冪で y^2 = yy」を square_of_real_number_is_product を引く形にした（definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したことに合わせた）。",
       ],
     },
   },
