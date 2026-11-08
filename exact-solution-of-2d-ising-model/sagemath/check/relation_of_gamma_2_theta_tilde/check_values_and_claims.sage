@@ -93,7 +93,15 @@ for (Yv, Zv) in COUPLINGS:
                 tick(two_lines[j] == two_lines[j + 1], "(2) の鎖 左辺 = 第 1 行" if j == 0 else f"(2) の鎖 第 {j} 行 = 第 {j+1} 行")
             tick(to_pair(cj(g) * g) == (abs2, AA(0)), "(2) complex_conjugate_times_self: conj(γ)γ = (|γ|^2)_C")
             tick(to_pair(g * gm) == (-abs2, AA(0)), "(2) γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_C")
-            tick(g != 0 and absg != 0 and absg > 0 and abs2 > 0 and -abs2 < 0, "(2) |γ| ≠ 0、|γ| > 0、|γ|^2 > 0、-|γ|^2 < 0")
+            tick(g != 0 and absg != 0 and absg > 0, "(2) |γ| ≠ 0、|γ| > 0")
+            tick(absg**2 == abs2, "(2) |γ|^2（def_power_of_real_number の冪）は abs_basic_properties (2) の x^2+y^2")
+            # 0 < |γ|^2 の鎖 3 行
+            tick(AA(0) == AA(0) * absg, "(2) 0 < |γ|^2 の鎖 第 1 行: 0 = 0·|γ|")
+            tick(AA(0) * absg < absg * absg, "(2) 0 < |γ|^2 の鎖 第 2 行: 0·|γ| < |γ||γ|")
+            tick(absg * absg == absg**2, "(2) 0 < |γ|^2 の鎖 第 3 行: |γ||γ| = |γ|^2（square_of_real_number_is_product を右辺から左辺へ）")
+            # -|γ|^2 < 0 の鎖 2 行
+            tick(-(absg**2) < -AA(0), "(2) -|γ|^2 < 0 の鎖 第 1 行: -|γ|^2 < -0")
+            tick(-AA(0) == AA(0), "(2) -|γ|^2 < 0 の鎖 第 2 行: -0 = 0")
             tick(gm != 0, "(2) γ_2(-θ) ≠ 0_C")
             tick(cc_conj(cc_conj(gp)) == gp, "(2) 背理の鎖の二重の共役")
             # (3)

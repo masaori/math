@@ -2457,14 +2457,40 @@ s_1c_2
         String.raw`\text{(1)}\quad \gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)},
 \qquad
 \text{(2)}\quad \gamma_2(\tilde\theta_\mu)\,\gamma_2(-\tilde\theta_\mu)
-= -\left|\gamma_2(\tilde\theta_\mu)\right|^2 < 0`,
+= \left(-\left|\gamma_2(\tilde\theta_\mu)\right|^2\right)_{\mathbb{C}},
+\quad -\left|\gamma_2(\tilde\theta_\mu)\right|^2 < 0`,
       ),
       paragraph([
-        "が成り立つ。とくに ",
+        "が成り立つ（",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right| \in \mathbb{R}_{\geq 0}`),
+        " は ",
+        ref("def_abs_arg"),
+        " の絶対値、二乗 ",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）、",
+        math(String.raw`-\left|\gamma_2(\tilde\theta_\mu)\right|^2 \in \mathbb{R}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " に対し ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像、",
+        math(String.raw`< 0`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序である",
+        "）。とくに ",
         math(String.raw`\gamma_2(\tilde\theta_\mu)\gamma_2(-\tilde\theta_\mu)`),
-        " は**負の実数**であり（",
-        ref("gamma_2_theta_tilde_nonzero"),
-        " より狭義に負）、",
+        " は**負の実数** ",
+        math(String.raw`-\left|\gamma_2(\tilde\theta_\mu)\right|^2`),
+        " の ",
+        ref("inclusion_rr_to_cc"),
+        " による像であり、",
       ]),
       displayMath(
         String.raw`\text{(3)}\quad \arg^{[0,2\pi)}\!\left(\gamma_2(\tilde\theta_\mu)\gamma_2(-\tilde\theta_\mu)\right) = \pi,
@@ -2792,9 +2818,9 @@ s_1c_2
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`),
       paragraph([
-        "主張 (2) の右辺 ",
+        "これが主張 (2) の等式である。次に主張 (2) の不等式、すなわち実数 ",
         math(String.raw`-|\gamma_2(\theta)|^2`),
-        " はこの実数の像として読む。この実数が負であることを示す。",
+        " が負であることを示す。",
         ref("def_abs_arg"),
         " より ",
         math(String.raw`|\gamma_2(\theta)| \in \mathbb{R}_{\geq 0}`),
@@ -2817,12 +2843,12 @@ s_1c_2
 &< \left|\gamma_2(\theta)\right|\left|\gamma_2(\theta)\right|
 &&(\because\ 0 < \left|\gamma_2(\theta)\right|\ \text{の両辺に正の実数}\ \left|\gamma_2(\theta)\right|\ \text{を掛ける})\\
 &= \left|\gamma_2(\theta)\right|^2
-&&(\because\ \text{実数の 2 乗の定義})
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 -\left|\gamma_2(\theta)\right|^2
 &< -0
-&&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺を}\ -1\ \text{倍すると向きが変わる})\\
+&&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺の符号を反転すると向きが変わる})\\
 &= 0
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`),
@@ -3018,6 +3044,7 @@ s_1c_2
         "2026-08-19 の式変形統一で、補助的な共役計算の末尾に複素数の四則という行末根拠を補い、散文で行っていた両辺の符号反転を主張 (1) の左辺から始まる一段の鎖へ移した。(5) の終端にも三角関数の特殊値と複素数の四則を行末根拠として明記した。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03: SageMath の検算（sagemath/check/relation_of_gamma_2_theta_tilde/）を付けるときに証明を直した。γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず、euler_formula_cos_sin から cos(−θ)・sin(−θ) を求める鎖で作った。複素共役の行の根拠を complex_conjugate_of_product・complex_conjugate_of_difference・complex_conjugate_of_sum・complex_conjugate_of_real_inclusion に、ī = −i と conj(exp(iθ)) = exp(−iθ) を鎖に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に直した。(2) の狭義の負と γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian から一行ずつの鎖にした。主張の中身は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 |γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）、(2) の等号の右辺が実数 −|γ_2(θ̃_μ)|^2 の inclusion_rr_to_cc の像で、< 0 はその実数についての ℝ の順序であると (2) の直後に明記した。−|γ_2|^2 を ℂ と ℝ の両方の元として使わないよう、(2) を γ_2γ_2(−θ̃) = (−|γ_2|^2)_ℂ と −|γ_2|^2 < 0 の 2 式に分けた（証明の鎖の終わりの形と同じ）。続く「とくに〜負の実数」の文も実数の像と書き、anticommutator_of_check_psi の (2) を引く段落の読み方の文を新しい主張の形に合わせた。証明の −|γ_2(θ)|^2 < 0 の鎖の根拠「両辺を −1 倍すると向きが変わる」を、使っているのが符号反転なので「両辺の符号を反転すると向きが変わる」に直した。0 < |γ_2(θ)|^2 の鎖の |γ_2(θ)||γ_2(θ)| = |γ_2(θ)|^2 の行の名前だけの根拠「実数の 2 乗の定義」を square_of_real_number_is_product（r → |γ_2(θ)|）を右辺から左辺へ引く参照にした。",
       ],
     },
   },
@@ -5907,11 +5934,11 @@ r_\nu
         math(String.raw`\rho := r_{\mathbb C} = \rho_\mu = \rho_\nu`),
         " と書く。",
         ref("relation_of_gamma_2_theta_tilde"),
-        " (2) の右辺 ",
+        " (2) の等式の右辺は、実数 ",
         math(String.raw`-|a_\mu|^2`),
-        " は実数なので、",
-        math(String.raw`\mathbb{C}`),
-        " の等式としては包含の像で読む。",
+        " の包含の像 ",
+        math(String.raw`(-|a_\mu|^2)_{\mathbb{C}}`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}

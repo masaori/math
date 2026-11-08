@@ -29,6 +29,9 @@
 | `Ising2D.sq_absGamma2` | (4) `(|γ_2|)^2 = -γ_2(θ~)γ_2(-θ~)` | 同 (4) |
 | `Ising2D.sq_I_absGamma2` | (5) `(i|γ_2|)^2 = γ_2(θ~)γ_2(-θ~)` | 同 (5) |
 | `Ising2D.absGamma2_thetaTilde_pos` | `|γ_2(θ~_μ)| > 0` | 同 (2)(4) の狭義部分 |
+| `Ising2D.absGamma2_thetaTilde_sq_pos` | `0 < |γ_2(θ~_μ)|^2`（人手の 3 行の鎖と 1 対 1 の `calc`） | 同 (2) の狭義部分 |
+| `Ising2D.neg_absGamma2_thetaTilde_sq_neg` | `-|γ_2(θ~_μ)|^2 < 0`（人手の 2 行の鎖と 1 対 1 の `calc`） | 同 (2) の狭義部分 |
+| `Ising2D.absGamma2_thetaTilde_sq_pos_of_necSuf` / `neg_absGamma2_thetaTilde_sq_neg_of_necSuf`（`ClaimRelationGamma2TildeFromNecSuf.lean`） | 上の 2 つを必要十分版 `NecSuf.sq_pos_of_pos_chain`・`neg_neg_of_pos_chain` の `R := ℝ` の特殊化として導出した版 | 同 (2) の狭義部分 |
 | `Ising2D.lambdaPlusR` / `lambdaMinusR` | `λ_{±,μ} = γ_1(θ~_μ) ± |γ_2(θ~_μ)| ∈ ℝ` | `eigenvector_of_A_theta_tilde` |
 | `Ising2D.gamma2_mul_conj_eq_absGamma2_sq` / `gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` | `a ā = r^2`、`ab = -r^2`（根拠に引く形） | 同 Step 1・Step 2 の根拠 |
 | `Ising2D.factor_identity_thetaTilde` | 準備の因数分解の恒等式 | 同 Step 1 |
@@ -88,6 +91,7 @@
 | --- | --- | --- | --- |
 | `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（必要十分版へ `N := M`, `m := 2μ-1` を代入） |
 | `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `NecSuf.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも必要十分版に `gamma2_neg_eq_neg_conj` を渡しただけ |
+| `relation_of_gamma_2_theta_tilde` (2) の狭義の負の鎖 | `absGamma2_thetaTilde_sq_pos`, `neg_absGamma2_thetaTilde_sq_neg` | `NecSuf.sq_pos_of_pos_chain`（`MonoidWithZero`・`Preorder`・`MulPosStrictMono` だけ）, `neg_neg_of_pos_chain`（`AddGroup`・`LT`・`AddLeftStrictMono`・`AddRightStrictMono` だけ。第一の鎖の結論を入力に取る） | `*_of_necSuf`（`ClaimRelationGamma2TildeFromNecSuf.lean`。`R := ℝ`） |
 | `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `charPoly_factor_thetaTilde`, `det_AMat_sub_smul_eq_zero_iff`, `eigenvalue_AMat_iff`, `lambdaPlusR_ne_lambdaMinusR`, `AMat_mulVec_eigen_pos/neg`, `AMat_mulVec_smul_eigen_pos/neg`, `AMat_mul_checkPmat`, `det_checkPmat(_ne_zero)`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_charPoly`, `skew2_charPoly_factor`, `skew2_det_eq_zero_iff`, `skew2_eigenvalue_iff`, `skew2_eigenvalues_ne`, `skew2_mulVec_pos/neg`, `mulVec_smul_of_mulVec_eq`, `skew2_mul_of_cols`, `det_of_cols(_ne_zero)`, `eq_conj_of_mul_eq` | 各具体版の `*_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`。`γ_2` の関係は `a b = -|γ_2|^2` だけを仮定として渡し、`b = -ā` と `a ā = r^2` は渡さない） |
 | `nonzero_kernel_iff_det_zero_two_by_two`（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖の最後の段） | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` | `NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det` | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`（係数 `R := ℂ`） |
 | `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |

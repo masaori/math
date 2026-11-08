@@ -1410,6 +1410,8 @@ targets=(
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd
   Ising2D.NecSuf.mul_of_eq_neg_conj
+  Ising2D.NecSuf.sq_pos_of_pos_chain
+  Ising2D.NecSuf.neg_neg_of_pos_chain
   Ising2D.NecSuf.sq_absOf_eq_neg_mul
   Ising2D.NecSuf.sq_I_mul_absOf_eq_mul
   Ising2D.NecSuf.skew2_factor_identity
@@ -1441,6 +1443,10 @@ targets=(
   Ising2D.sq_absGamma2
   Ising2D.sq_I_absGamma2
   Ising2D.absGamma2_thetaTilde_pos
+  Ising2D.absGamma2_thetaTilde_sq_pos
+  Ising2D.neg_absGamma2_thetaTilde_sq_neg
+  Ising2D.absGamma2_thetaTilde_sq_pos_of_necSuf
+  Ising2D.neg_absGamma2_thetaTilde_sq_neg_of_necSuf
   Ising2D.gamma2_mul_conj_eq_absGamma2_sq
   Ising2D.gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq
   Ising2D.factor_identity_thetaTilde

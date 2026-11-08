@@ -25,9 +25,16 @@
   人手証明が `arg^{[0,2π)}` で固定しているのは非負の方である。
   (3)（偏角が `π`）は `def_sqrt_cc` を経由するための中間段階なので、
   この方針では対応物が不要になる。積が負の実数であることは (2) で述べている。
+* (2) の狭義の負は、人手の `0 < |γ_2(θ)|^2` の 3 行の鎖と `-|γ_2(θ)|^2 < 0` の 2 行の鎖を
+  `absGamma2_thetaTilde_sq_pos`・`neg_absGamma2_thetaTilde_sq_neg` の `calc` と 1 対 1 に置く。
+  人手の二乗は `def_power_of_real_number` の冪（`m = 2`）で、Lean の `r ^ 2`（`Monoid.npow`）である。
+  積 `|γ_2||γ_2|` との行き来は `square_of_real_number_is_product` を右辺から左辺へ引く。
+  必要十分版は `NecSuf.sq_pos_of_pos_chain`・`NecSuf.neg_neg_of_pos_chain`（`NecSuf/NegConjPair.lean`）、
+  具体版をその系として導くのは `ClaimRelationGamma2TildeFromNecSuf.lean`。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma2TildeNonzero
 import Ising2D.NecSuf.NegConjPair
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 
 namespace Ising2D
 
@@ -68,5 +75,28 @@ theorem sq_I_absGamma2 :
 theorem absGamma2_thetaTilde_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     0 < absGamma2 P.const (thetaTilde M μ) :=
   NecSuf.absOf_pos (gamma2_thetaTilde_ne_zero P hM μ)
+
+/-- **人手証明 (2) の狭義部分の第一の鎖**: `0 < |γ_2(θ~_μ)|^2`（人手の 3 行の鎖と 1 対 1 の `calc`）。 -/
+theorem absGamma2_thetaTilde_sq_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    0 < absGamma2 P.const (thetaTilde M μ) ^ 2 := by
+  have h := absGamma2_thetaTilde_pos P hM μ
+  calc (0 : ℝ)
+      = 0 * absGamma2 P.const (thetaTilde M μ) := (zero_mul _).symm
+                          -- ℝ の四則
+    _ < absGamma2 P.const (thetaTilde M μ) * absGamma2 P.const (thetaTilde M μ) :=
+        mul_lt_mul_of_pos_right h h
+                          -- `0 < |γ_2(θ)|` の両辺に正の実数 `|γ_2(θ)|` を掛ける
+    _ = absGamma2 P.const (thetaTilde M μ) ^ 2 :=
+        (square_of_real_number_is_product _).symm
+                          -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）を右辺から左辺へ
+
+/-- **人手証明 (2) の狭義部分の第二の鎖**: `-|γ_2(θ~_μ)|^2 < 0`（人手の 2 行の鎖と 1 対 1 の `calc`）。 -/
+theorem neg_absGamma2_thetaTilde_sq_neg (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    -(absGamma2 P.const (thetaTilde M μ) ^ 2) < 0 :=
+  calc -(absGamma2 P.const (thetaTilde M μ) ^ 2)
+      < -0 := neg_lt_neg (absGamma2_thetaTilde_sq_pos P hM μ)
+                          -- 直前の鎖の `0 < |γ_2(θ)|^2` の両辺の符号を反転すると向きが変わる
+    _ = 0 := neg_zero
+                          -- ℝ の四則
 
 end Ising2D
