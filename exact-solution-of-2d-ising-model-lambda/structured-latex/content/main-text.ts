@@ -12423,10 +12423,11 @@ S&=(S-T)+T
                   ]),
                   displayMath(String.raw`\forall v\in V,\quad |A_v\mathbin\triangle B_v|\equiv0\pmod2
 \qquad\bigl(\because\ \text{各頂点で上の計算が成り立つ}\bigr)`),
-                  paragraph([
-                    math(String.raw`A\mathbin\triangle B\subset A\cup B\subset E`),
-                    " なので、対称差は ", math(String.raw`E`), " の偶辺部分集合である。",
-                  ]),
+                  displayMath(String.raw`\begin{aligned}
+A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\bigr)\\
+&\subset E&&\bigl(\because\ A,B\subset E\bigr)
+\end{aligned}`),
+                  paragraph(["従って対称差は ", math(String.raw`E`), " の偶辺部分集合である。"]),
                 ],
               },
             },
