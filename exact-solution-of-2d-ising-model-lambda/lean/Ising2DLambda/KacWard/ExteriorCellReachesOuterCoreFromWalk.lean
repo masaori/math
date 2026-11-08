@@ -1,0 +1,74 @@
+import Ising2DLambda.KacWard.ExteriorCellSetEdgeConnected
+import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
+
+namespace Ising2DLambda.KacWard
+
+/-- The exterior band of a closed walk agrees with the band of its integer-indexed lift. -/
+theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    walkSideExteriorBandFromWalk γ hγ hh hv =
+      walkSideExteriorBand (m + 1) row col := by
+  dsimp only
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  ext p
+  constructor
+  · rintro ⟨hpOutside, k, hpCorner⟩
+    have hk : Fin.ofNat (m + 2) k.val = k.castSucc := by
+      apply Fin.ext
+      simp
+    refine ⟨k.val, k.isLt, ?_⟩
+    change (p = (row k.val - 1, col k.val - 1) ∨
+      p = (row k.val - 1, col k.val) ∨
+      p = (row k.val, col k.val) ∨
+      p = (row k.val, col k.val - 1)) ∧
+      p ∉ oddRayInteriorCells (m + 1) row col
+    exact ⟨by simpa only [row, col, hk] using hpCorner, hinside ▸ hpOutside⟩
+  · rintro ⟨k, hk, hpCorner, hpOutside⟩
+    let i : Fin (m + 1) := ⟨k, hk⟩
+    have hi : Fin.ofNat (m + 2) k = i.castSucc := by
+      apply Fin.ext
+      simp [i, Nat.mod_eq_of_lt (by omega : k < m + 2)]
+    refine ⟨hinside ▸ hpOutside, i, ?_⟩
+    simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hpCorner
+
+/-- An exterior cell of the actual walk reaches the outer rectangle or its exterior band. -/
+theorem exteriorCellOfWalk_reaches_outer_core {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (rMin rMax cMin cMax : ℤ) (r c : ℤ)
+    (hbelow : c < cMax)
+    (houtside : (r, c) ∉ oddRayInteriorCellsOfWalk γ hγ hh hv) :
+    ∃ b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∪
+        walkSideExteriorBandFromWalk γ hγ hh hv,
+      Relation.ReflTransGen
+        (fun a b => a ∉ oddRayInteriorCellsOfWalk γ hγ hh hv ∧
+          b ∉ oddRayInteriorCellsOfWalk γ hγ hh hv ∧ CellEdgeAdjacent a b)
+        (r, c) b := by
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  have hband := walkSideExteriorBandFromWalk_eq_coordinateBand γ hγ hh hv
+  dsimp only at hband
+  rw [hinside] at houtside ⊢
+  rw [hband]
+  exact exteriorCell_reaches_outer_core (m + 1) row col
+    rMin rMax cMin cMax r c hbelow houtside
+
+end Ising2DLambda.KacWard

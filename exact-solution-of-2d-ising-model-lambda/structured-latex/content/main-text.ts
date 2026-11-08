@@ -77471,7 +77471,7 @@ y^L
                     "モードは零でなく ", math(String.raw`z^L=\sigma_a`), " だから",
                   ]),
                   displayMath(String.raw`z^{j_e}(z^{-1})^{j_f}=\sigma_a^{-1}z^k
-\qquad(\because\ \blkref{def_horizontal_twisted_modes}\text{ と体の冪法則}).`),
+\qquad(\because\ \blkref{def_horizontal_twisted_modes}\text{ と体の冪法則})`),
                   paragraph([
                     "横モード和を ", ref("claim_twisted_mode_power_sum"), " で評価する。",
                     math(String.raw`0\le j_e,j_f<L`), " より ",
