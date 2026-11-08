@@ -106,13 +106,10 @@
 | `Ising2D.adjacentSpinProductSum` / `sum_sigmaZ_sigmaZ_apply_of_ne` / `sum_sigmaZ_sigmaZ_apply_configBasisIso_self` | 準備の `d(μ)`、`D = ∑_m σ^z_mσ^z_{m+1}` の `D_{pq} = 0_ℂ`（`p ≠ q`、人手の 4 行のうち 3 段）・`D_{kk} = d(μ)_ℂ`（人手の 7 行のうち 5 段。`σ^z_{m+1} = σ^z_{m^+}`・`μ(m+1) = μ(m^+)` の 2 行は Lean の `nextSite` の読み方） | `W_has_positive_entries` Step 1 |
 | `Ising2D.halfK1SmulD` / `squareRootV1DiagonalEntry` / `squareRootV1DiagonalEntry_pos` | 準備の `X := (½K₁)_ℂD`、`b(μ) := exp(½K₁d(μ))`、`b(μ) > 0`（`real_exp_positive`） | `W_has_positive_entries` 準備 |
 | `Ising2D.halfK1SmulD_apply_of_ne` / `halfK1SmulD_eq_diagonal` / `physicalV1halfC_eq_matExp_halfK1SmulD` / `physicalV1halfC_apply_of_ne` / `physicalV1halfC_apply_configBasisIso_self` | `X_{pq} = 0_ℂ`（`p ≠ q`、人手の 3 行を 3 段）、`X` は対角行列（`Matrix.diagonal` への読み替え）、`B = exp(X)`、`B_{pq} = (exp X)_{pq} = 0_ℂ`（2 行を 2 段）、`B_{kk} = b(μ)_ℂ`（7 行を 7 段） | `W_has_positive_entries` Step 1 |
-| `Ising2D.physicalV1halfC_apply_configBasisIso` / `physicalV1halfR_apply_configBasisIso` / `physicalV1halfR_offDiag` / `physicalV1halfR_apply_configBasisIso_self_pos` | 具体的な `V₁^{1/2} = exp(½K₁D)` の成分は `μ = μ'` で `exp(½K₁∑_m μ(m)μ(m+1)) > 0`、それ以外で `0`（`B_{kk}`・`B_{pq}` の鎖から導く。人手に無い実成分の形で、必要十分版からの導出 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean` が使う） | `W_has_positive_entries` Step 1 |
 | `Ising2D.sameSiteSpinProductSum` / `secondTransferEntry` / `secondTransferEntry_pos` | 準備の `e(μ,μ') := ∑_m μ(m)μ'(m)`、`v(μ,μ') := exp(K₂e(μ,μ'))`、`v(μ,μ') > 0`（`real_exp_positive`） | `W_has_positive_entries` 準備 |
 | `Ising2D.V2_apply_configBasisIso_eq_secondTransferEntry` | `(V₂)_{kl} = v(μ,μ')_ℂ`（人手の 3 行のうち 2 段。1 行目の `config_numbering_equals_kronecker_numbering` は Lean の `V2` が添字 `ι(μ)` で定義されている読み方。2 段目の根拠は `Ising2D.V2_apply_configBasisIso`（章 001）） | `W_has_positive_entries` Step 2 |
-| `Ising2D.physicalV2R_apply_configBasisIso` / `physicalV2R_apply_configBasisIso_pos` | 具体的な `V₂` の実成分は `exp(K₂∑_m μ(m)μ'(m)) > 0`（Step 2 の鎖と `secondTransferEntry_pos` から導く。人手に無い実成分の形で、必要十分版からの導出が使う） | `W_has_positive_entries` Step 2 |
 | `Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne` / `physicalV1halfC_apply_mul_V2_apply_of_ne` | Step 3 の補助の鎖 2 本: `t ≠ l` で `(BV₂)_{kt}B_{tl} = 0_ℂ`、`s ≠ k` で `B_{ks}(V₂)_{sl} = 0_ℂ`（各 2 行を 2 段。主の鎖の 3 行目・5 行目が引く） | `W_has_positive_entries` Step 3 |
 | `Ising2D.physicalSymTransferC_apply_configBasisIso` / `symTransferEntryProduct_pos` | Step 3 の主の鎖 `W_{kl} = ((b(μ)v(μ,μ'))b(μ'))_ℂ`（複素行列のまま人手の 9 行を 9 段。外側の和を先に潰す）、`w := (b(μ)v(μ,μ'))b(μ') = ∏_{j=1}^{3}r_j > 0`（2 行を 2 段。`finite_product_of_positive_reals_is_positive`） | `W_has_positive_entries` Step 3 |
-| `Ising2D.physicalSymTransferR_apply_configBasisIso` | 実成分で組んだ `W` の成分は `(V₁^{1/2})_{ι(μ),ι(μ)}(V₂)_{ι(μ),ι(μ')}(V₁^{1/2})_{ι(μ'),ι(μ')}`（人手に無い実行列の側の式変形。必要十分版の特殊化の対象で、状態台帳の (cl2f) で必要十分版とともに主の鎖の手順に合わせる） | `W_has_positive_entries` Step 3 |
 | **`Ising2D.W_has_positive_entries`** / `W_has_positive_entries_physical` / `physicalSymTransferR_pos` | 複素行列 `W` の `ι(μ), ι(μ')` 成分は `w_ℂ`（`w ∈ ℝ_{>0}`）（人手の主張の形。Step 3 の主の鎖と `w > 0` の鎖で閉じる）、実成分で組んだ `W` の成分はすべて正（`ι` の全射性と `ℝ → ℂ` の単射性で主張の形から導く。`W_has_positive_entries_physical` はそれを `ι(μ), ι(μ')` で引いた形） | **`W_has_positive_entries`**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.trace_of_W_power_via_W_real` | `tr(W^q) = (Σ_k ((W_ℝ)^q)_kk)_ℂ`（`W^q` の成分の実性と `(W^q)_ℝ = (W_ℝ)^q` は `real_matrix_of_real_entry_matrix_preserves_power`。4 行の鎖と 1 対 1） | `trace_of_W_power_via_W_real` |
@@ -188,7 +185,7 @@
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`、`ClaimZEqualsTraceOfWFromNecSuf.lean`） |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.physicalSymTransferC_isRealSymmetric` / `physicalSymTransferC_posDef` / `physicalSymTransferC_isUnit`（具体的な `W`）。`Ising2D.symTransfer_isSymm` / `symTransfer_posDef` は実行列の一般の形 | なし（下記） | — |
-| `W_has_positive_entries` | `Ising2D.W_has_positive_entries`（人手の主張の形。人手の Step 1〜3 の鎖と 1 対 1） / `W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（実成分で組んだ具体的な `W`。必要十分版の特殊化として導くのは `W_has_positive_entries_physical`。必要十分版の手順は実行列で内側の和を先に潰す形のままで、状態台帳の (cl2f) で主の鎖の手順に合わせる）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
+| `W_has_positive_entries` | `Ising2D.W_has_positive_entries`（人手の主張の形。人手の Step 1〜3 の鎖と 1 対 1） / `W_has_positive_entries_physical` / `physicalSymTransferR_pos`（実成分で組んだ具体的な `W`。主張の形から導く）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_outer_term_of_ne` / `sandwich_inner_term_of_ne` / `sandwich_apply_eq_map` / `sandwich_weight_pos` / `sandwich_apply_pos`（`NecSuf/SandwichByDiagonal.lean`。Step 3 の補助の鎖 2 本・主の鎖・`w > 0` の鎖・主張の形を同じ並びで。添字は有限、係数 `R` は加法の可換モノイドと乗法で、`x·0 = 0`・`0·x = 0` を明示の仮定に置く。`B` は `l` 列・`k` 行の非対角成分が `0`、値は積を保つ写像 `φ : S → R` の像。正値性には `S` の「正の元どうしの積は正」だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。`R := ℂ`・`S := ℝ`・`φ := ℝ → ℂ の埋め込み`、`B := V₁^{1/2}`・`V := V₂`） |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich_physical`（具体的な `Z`・`W`） | なし（`Z_equals_trace_of_W`・`trace_of_W_power_via_W_real` と `trace_power_sandwich` をつなぐだけ） | — |
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
 | `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |
@@ -230,10 +227,11 @@
   既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
 
 - **`W_has_positive_entries` の Step 3（`NecSuf/SandwichByDiagonal.lean`）に効いているのは、添字が有限であること、
-  係数の `0` が乗法で吸収されること、挟む行列 `B` の非対角成分が `0` であることだけである。**
-  乗法の結合律・可換律・単位元、分配律、添字の等号の判定可能性、実数であること、指数関数は効いていない。
-  正値性の段では、上に加えて `mul_pos` の順序の条件（正の元どうしの積が正）だけが効く。
-  実数・指数関数の正値性は、`B` の対角成分と `V₂` の成分が正であることを示す Step 1・Step 2 にだけ効く。
+  係数の `0` が乗法で吸収されること（`x·0 = 0`・`0·x = 0`）、挟む行列 `B` の `l` 列と `k` 行の非対角成分が `0` であること、`B_{kk}`・`B_{ll}`・`V_{kl}` が
+  積を保つ写像 `φ` の値であることだけである。**
+  乗法の結合律・可換律・単位元、分配律、`B` のほかの非対角成分、添字の等号の判定可能性、`φ` が `0`・和・順序を保つこと、実数であること、指数関数は効いていない。
+  正値性の段では、上に加えて `φ` の元の側の「正の元どうしの積が正」（具体版は ℝ の `mul_pos`）だけが効く。
+  実数・指数関数の正値性は、`b(μ) > 0`・`v(μ,μ') > 0`（準備）にだけ効く。
 
 - （ノートへ退避したセクター分解について）**セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
   `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
@@ -250,7 +248,7 @@
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |
 | --- | --- | --- |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
-| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `Ising2D.physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
+| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `Ising2D.physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `secondTransferEntry_pos` と `V2_apply_configBasisIso_eq_secondTransferEntry`（`(V₂)_{kl} = v(μ,μ')_ℂ`、`v(μ,μ') > 0`）で証明済み |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` の引数。具体的な `W` については `partition_function_sandwich_physical` が、人手どおり `W_ℝ` の正定値性 `W_real_is_positive_definite` から `trace_power_sandwich` を引く |
 | `ε` が実対称・`ε² = 1`・`εW = Wε`（一般の `W` について） | `epsilon_is_real_symmetric`・`epsilon_square_and_eigenvalues`・`epsilon_commutes_with_W` | 物理的な `W`（`physicalSymTransferR`）と `ε`（`epsilonR`）については `epsilon_commutes_with_W` / `epsilonR_isSymm` / `epsilonR_mul_self` で証明済み。一般の `W` について述べる定理（章 018 の `EvenSectorBridge` など）は `εW = Wε` を引数で受け取る |
 

@@ -2834,28 +2834,27 @@ targets=(
   Ising2D.physicalV1halfC_eq_matExp_halfK1SmulD
   Ising2D.physicalV1halfC_apply_of_ne
   Ising2D.physicalV1halfC_apply_configBasisIso_self
-  Ising2D.physicalV1halfR_apply_configBasisIso
-  Ising2D.physicalV1halfC_apply_configBasisIso
-  Ising2D.physicalV1halfR_apply_configBasisIso_self_pos
   Ising2D.sameSiteSpinProductSum
   Ising2D.secondTransferEntry
   Ising2D.secondTransferEntry_pos
   Ising2D.V2_apply_configBasisIso_eq_secondTransferEntry
   Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne
   Ising2D.physicalV1halfC_apply_mul_V2_apply_of_ne
-  Ising2D.physicalV2R_apply_configBasisIso
-  Ising2D.physicalV1halfR_offDiag
-  Ising2D.physicalV2R_apply_configBasisIso_pos
-  Ising2D.physicalSymTransferR_apply_configBasisIso
   Ising2D.physicalSymTransferC_apply_configBasisIso
   Ising2D.symTransferEntryProduct_pos
   Ising2D.W_has_positive_entries_physical
   Ising2D.W_has_positive_entries
   Ising2D.physicalSymTransferR_pos
-  Ising2D.NecSuf.sandwich_apply_of_offDiag_zero
+  Ising2D.NecSuf.sandwich_outer_term_of_ne
+  Ising2D.NecSuf.sandwich_inner_term_of_ne
+  Ising2D.NecSuf.sandwich_apply_eq_map
+  Ising2D.NecSuf.sandwich_weight_pos
   Ising2D.NecSuf.sandwich_apply_pos
-  Ising2D.physicalSymTransferR_apply_configBasisIso_of_necSuf
-  Ising2D.W_has_positive_entries_physical_of_necSuf
+  Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne_of_necSuf
+  Ising2D.physicalV1halfC_apply_mul_V2_apply_of_ne_of_necSuf
+  Ising2D.physicalSymTransferC_apply_configBasisIso_of_necSuf
+  Ising2D.symTransferEntryProduct_pos_of_necSuf
+  Ising2D.W_has_positive_entries_of_necSuf
   Ising2D.rayleighSup_sandwich_LambdaM_physical
   Ising2D.onsager_exact_solution_unconditional
   Ising2D.onsager_limit_in_N_row_physical
