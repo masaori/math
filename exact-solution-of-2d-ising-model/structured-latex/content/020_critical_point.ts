@@ -1781,8 +1781,12 @@ t
 &&\bigl(\because\ \blkref{def_cos}\ \text{の}\ \theta \to 0\text{。}0 \in [-\pi/2,\pi/2]\ \text{は}\ \blkref{zero_in_closed_interval_from_minus_half_pi_to_half_pi}\bigr)\\
 &= \sqrt{1-0^2}^{(\mathbb{R}_{\geq 0})}
 &&(\because\ \blkref{sine_zero})\\
+&= \sqrt{1-0\cdot 0}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&= \sqrt{1-0}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
 &= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
 &= 1
 &&(\because\ \blkref{sqrt_of_real_one_is_one})
 \end{aligned}`),
@@ -1792,6 +1796,7 @@ t
       notes: [
         "2026-11-02: elementary_sine_bounds を分けるときに、積分の端点 0 での値に要るので足した。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 √1 = 1 が 1 ≥ 0・1^2 = 1・definition_of_sqrt_r_positive の一意性を 1 行で使っていたので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 「ℝ の四則」1 行（0^2 = 0・1 − 0 = 1 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a − 0 = a（a → 1）の 3 行に割った。値と主張は不変。",
       ],
     },
   },
