@@ -2753,7 +2753,7 @@ s_1c_2
 &= \arcsin(\sin 0)
 &&(\because\ \blkref{sine_zero})\\
 &= 0
-&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
+&&\bigl(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ (\blkref{zero_in_closed_interval_from_minus_half_pi_to_half_pi})\ \text{で}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \pi

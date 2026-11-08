@@ -12,7 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 1〜3 行目（def_cos・sine_zero・四則） | `check_proof_lines.sage` | AA で厳密に | **PASS** | 成り立つ |
+| 1〜3 行目（def_cos の θ → 0（0 ∈ [−π/2, π/2] は zero_in_closed_interval_from_minus_half_pi_to_half_pi）・sine_zero・四則） | `check_proof_lines.sage` | AA で厳密に | **PASS** | 成り立つ |
 | 4 行目（`sqrt_of_real_one_is_one`: 1 は 1 の非負平方根） | `check_proof_lines.sage` | AA で 1 ≥ 0 と 1² = 1 | **PASS** | 成り立つ |
 | 主張 | `check_proof_lines.sage` | AA。e^{i·0} の実部とも一致 | **PASS** | 成り立つ |
 

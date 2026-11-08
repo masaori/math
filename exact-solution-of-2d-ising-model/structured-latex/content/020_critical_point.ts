@@ -1518,6 +1518,105 @@ t
   },
 
   {
+    id: "critical_claim_zero_in_closed_interval_from_minus_half_pi_to_half_pi",
+    kind: "claim",
+    title: { tex: String.raw`0 \in [-\pi/2,\pi/2]` },
+    labels: ["zero_in_closed_interval_from_minus_half_pi_to_half_pi"],
+    statement: [
+      paragraph([
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の項の ",
+        math(String.raw`\pi \in \mathbb{R}`),
+        "（",
+        math(String.raw`\arcsin(1) = \pi/2`),
+        " となる実数）について ",
+        math(String.raw`0 \in [-\pi/2,\pi/2]`),
+        "、すなわち ",
+        math(String.raw`-\pi/2 \leq 0 \leq \pi/2`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\pi`),
+        " が弧の長さで定まる実数だからである）。ここで ",
+        math(String.raw`-\pi/2`),
+        " は ",
+        math(String.raw`-(\pi/2)`),
+        " を表す。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`-1 \in [-1,0)`),
+        " なので ",
+        ref("def_arcsin"),
+        " の第二の式が使え、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(-1)
+&= -\arcsin(-(-1))
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式の}\ y' \to -1\text{。}-1 \leq -1 < 0)\\
+&= -\arcsin(1)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-a) = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
+&= -\pi/2
+&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\pi/2
+&= \arcsin(-1)
+&&(\because\ \text{上の}\ \arcsin(-1)\ \text{の鎖})\\
+&< \arcsin(1)
+&&(\because\ -1 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加の}\ y_1 \to -1,\ y_2 \to 1)\\
+&= \pi/2
+&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&= -\pi/2 + \pi/2
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{の}\ a \to \pi/2\bigr)\\
+&< \pi/2 + \pi/2
+&&\bigl(\because\ \text{上の}\ -\pi/2 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to \pi/2\bigr)\\
+&= \pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a/2 + a/2 = a\ \text{の}\ a \to \pi\bigr)
+\end{aligned}`),
+      paragraph(["本体。主張の右側の不等号 ", math(String.raw`0 \leq \pi/2`), " を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= 0/2
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{の}\ x \to 2\bigr)\\
+&< \pi/2
+&&\bigl(\because\ \text{上の}\ 0 < \pi\ \text{と、}\mathbb{R}\ \text{の順序で}\ x < y,\ c > 0 \Rightarrow x/c < y/c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to 2\ (2 > 0)\bigr)
+\end{aligned}`),
+      paragraph(["主張の左側の不等号 ", math(String.raw`-\pi/2 \leq 0`), " を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+-\pi/2
+&= -\pi/2 + 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to -\pi/2\bigr)\\
+&< -\pi/2 + \pi/2
+&&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{の}\ c \to -\pi/2\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{の}\ a \to \pi/2\bigr)
+\end{aligned}`),
+      paragraph([
+        "狭義の不等号は等号を含まない不等号を含意するので ",
+        math(String.raw`-\pi/2 \leq 0`),
+        " と ",
+        math(String.raw`0 \leq \pi/2`),
+        " が成り立ち、",
+        math(String.raw`0 \in [-\pi/2,\pi/2]`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08: sine_zero（sin 0 の定義域）・arctan_zero の最後の行・relation_of_gamma_2_theta_tilde の準備の第五の arcsin(0) = 0 の鎖が、0 ∈ [−π/2,π/2] を根拠なしに使っていたので足した。arcsin(0) を経ずに arcsin(−1) < arcsin(1) から示すので、sine_zero との循環は無い。cosine_zero の 1 行目（def_cos の定義域）も同じ。",
+        "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・sin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_sine_zero",
     kind: "claim",
     title: { tex: String.raw`\sin 0 = 0` },
@@ -1535,7 +1634,17 @@ t
     proof: [
       paragraph([
         math(String.raw`y_0 := \sin 0 \in [-1,1]`),
-        " とおく。",
+        " とおく（",
+        ref("zero_in_closed_interval_from_minus_half_pi_to_half_pi"),
+        " より ",
+        math(String.raw`0`),
+        " は ",
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " の定義域 ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " に入る）。",
         ref("def_sin"),
         " より ",
         math(String.raw`\arcsin(y_0) = 0`),
@@ -1639,7 +1748,7 @@ t
 &= \arcsin(\sin 0)
 &&(\because\ \blkref{sine_zero})\\
 &= 0
-&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
+&&\bigl(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ (\blkref{zero_in_closed_interval_from_minus_half_pi_to_half_pi})\ \text{で}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -1669,7 +1778,7 @@ t
       displayMath(String.raw`\begin{aligned}
 \cos 0
 &= \sqrt{1-(\sin 0)^2}^{(\mathbb{R}_{\geq 0})}
-&&(\because\ \blkref{def_cos})\\
+&&\bigl(\because\ \blkref{def_cos}\ \text{の}\ \theta \to 0\text{。}0 \in [-\pi/2,\pi/2]\ \text{は}\ \blkref{zero_in_closed_interval_from_minus_half_pi_to_half_pi}\bigr)\\
 &= \sqrt{1-0^2}^{(\mathbb{R}_{\geq 0})}
 &&(\because\ \blkref{sine_zero})\\
 &= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
