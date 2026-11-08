@@ -1,11 +1,12 @@
 # 対象ラベル: c_plus_le_c（証明が引く「R_+ は空でない」。def_sector_rayleigh_sup の後半の構成）
 #   a_+ := (1/√2, 1/√2) ∈ R^2,  b_+ := ι^2(a_+) ∈ C^2
 #   σ^x b_+ = ((b_+)_2, (b_+)_1) = ((b_+)_1, (b_+)_2) = b_+
-#   (x^{(+)})_{ν(I)} := Π_k (a_+)_{i_k} ∈ R（各成分 (1/√2)^M = 2^{-M/2}）
+#   (x^{(+)})_{ν(I)} := Π_k (a_+)_{i_k} ∈ R
+#   (x^{(+)})_{ν(I)} = Π_k (a_+)_{i_k} = Π_k 1/√2 = (1/√2)^M（finite_product_of_constant_real_is_power）
 #   (ι(x^{(+)}))_{ν(I)} = ((x^{(+)})_{ν(I)})_C = (Π_k (a_+)_{i_k})_C = Π_k ((a_+)_{i_k})_C = Π_k (b_+)_{i_k} = (b_+⊠⋯⊠b_+)_{ν(I)}
 #   ε ι(x^{(+)}) = (σ^x⊠⋯)ι(x^{(+)}) = (σ^x⊠⋯)(b_+⊠⋯) = (σ^x b_+)⊠⋯ = b_+⊠⋯ = ι(x^{(+)})
 #   ε_ℝ x^{(+)} = x^{(+)}（ε_ℝ := ϱ(ε)。epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors の ⇐）
-#   ||x^{(+)}||^2 = Σ_I (2^{-M/2})^2 = 2^M · 2^{-M} = 1
+#   ||x^{(+)}||^2 = Σ_I ((1/√2)^M)^2 = 2^M · 2^{-M} = 1
 # 帰属: 実数の側は AA（実代数的数）、複素数の側は QQbar で厳密に判定する。浮動小数点を使わない。
 # ι は AA → QQbar の包含 QQbar(r)、ν は def_kronecker の ν(I) = 1 + Σ(i_k - 1)2^{M-k}（0 始まりでは Σ(i_k-1)2^{M-k}）。
 import itertools
@@ -54,8 +55,21 @@ for M in [1, 2, 3, 4, 5]:
     for I in itertools.product([1, 2], repeat=M):
         xp[nu(I)] = prod(a_plus[i - 1] for i in I)
     xp = vector(AA, xp)
-    assert all(c == r ** M for c in xp)
-    assert all(c == AA(2) ** (-M / 2) for c in xp)   # (1/√2)^M = 2^{-M/2}
+    # x^{(+)} の各成分の値の 3 行の鎖（冪は def_power_of_real_number どおり a^0 := 1、a^{m+1} := a^m a で組む）
+    rM = AA(1)
+    for _ in range(M):
+        rM = rM * r
+    for I in itertools.product([1, 2], repeat=M):
+        rows = [
+            xp[nu(I)],
+            prod(a_plus[i - 1] for i in I),       # x^{(+)} の定義
+            prod(r for _ in I),                   # a_+ の定義（各因子へ同時に）
+            rM,                                   # finite_product_of_constant_real_is_power（m → M、r → 1/√2）
+        ]
+        for u, w in zip(rows, rows[1:]):
+            assert u == w
+            n_eq += 1
+    assert rM == r ** M                           # 比べる側: Sage の冪
     assert all(c ** 2 == AA(2) ** (-M) for c in xp)
     # ι(x^{(+)}) の成分の 5 行の鎖
     bb = kron_vec_by_components([b_plus] * M)
@@ -93,7 +107,7 @@ for M in [1, 2, 3, 4, 5]:
     assert eps_R * y != y
     # ノルムの鎖
     norm2 = sum(c ** 2 for c in xp)
-    assert norm2 == sum((AA(2) ** (-M / 2)) ** 2 for _ in range(d)) == AA(2) ** M * AA(2) ** (-M) == 1
+    assert norm2 == sum(rM ** 2 for _ in range(d)) == AA(2) ** M * AA(2) ** (-M) == 1
     print(f"  M_col={M}: ι(x^(+)) = b_+⊠…⊠b_+、ε ι(x^(+)) = ι(x^(+))、ε_ℝ x^(+) = x^(+)、||x^(+)||^2 = {norm2}")
 
 print(f"  鎖の等号 {n_eq} 個")

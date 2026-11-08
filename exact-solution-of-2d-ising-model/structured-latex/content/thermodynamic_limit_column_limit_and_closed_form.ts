@@ -2136,13 +2136,23 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         math(String.raw`\nu`),
         " が全単射だから、これで ",
         math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の元が 1 つ確定する）。",
-        math(String.raw`(a_+)_{i_k} = \frac{1}{\sqrt{2}}`),
-        " なので、",
-        math(String.raw`x^{(+)}`),
-        " の各成分は ",
-        math(String.raw`\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}} = 2^{-M_{\mathrm{col}}/2}`),
-        " である。各 ",
+        " の元が 1 つ確定する）。各 ",
+        math(String.raw`I \in \mathcal{I}_{M_{\mathrm{col}}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(x^{(+)}\right)_{\nu(I)}
+&= \prod_{k=1}^{M_{\mathrm{col}}} (a_+)_{i_k}
+   \quad (\because x^{(+)}\ \text{の定義}) \\
+&= \prod_{k=1}^{M_{\mathrm{col}}} \frac{1}{\sqrt{2}}
+   \quad (\because a_+\ \text{の定義の}\ (a_+)_1 = \tfrac{1}{\sqrt{2}} = (a_+)_2\ \text{を各因子へ同時に適用}) \\
+&= \left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}
+   \quad (\because \blkref{finite_product_of_constant_real_is_power}\ (m \to M_{\mathrm{col}},\ r \to \tfrac{1}{\sqrt{2}}))
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。また各 ",
         math(String.raw`I \in \mathcal{I}_{M_{\mathrm{col}}}`),
         " について",
       ]),
@@ -2209,16 +2219,16 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         " の ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
         " 個の成分はすべて ",
-        math(String.raw`2^{-M_{\mathrm{col}}/2}`),
+        math(String.raw`\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}`),
         " なので",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left\|x^{(+)}\right\|^2
-&= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(2^{-M_{\mathrm{col}}/2}\right)^2
+&= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
    \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルムの定義と各成分の値}) \\
 &= 2^{M_{\mathrm{col}}}\cdot 2^{-M_{\mathrm{col}}}
-   \quad (\because \#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}\ \text{と}\ \left(2^{-M_{\mathrm{col}}/2}\right)^2 = 2^{-M_{\mathrm{col}}}) \\
+   \quad (\because \#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}\ \text{と}\ \left(\left(\tfrac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2 = 2^{-M_{\mathrm{col}}}) \\
 &= 1
    \quad (\because \text{指数法則})
 \end{aligned}`,
@@ -2248,6 +2258,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。ε のクロネッカー積表示の参照先を <epsilon_square_and_eigenvalues> の証明に直し（旧参照 <def_eigenspaces_of_epsilon> にはこの表示が無い）、ε x^{(+)} = x^{(+)} とノルムの計算を一行一等号の鎖に開いた。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の値 x^⊤Wx は複素行列 W の二次形式で、def_rayleigh_sup の 𝓡（W_ℝ の実数の二次形式 def_real_bilinear_value）と式が違い、𝓡_+ ⊆ 𝓡 も c_+(M_col) が実数の上限であることも型が合っていなかった。𝓡_+ の値を def_W_real の W_ℝ の x^⊤W_ℝx（def_real_bilinear_value）にし、有界性の評価の和を Σ_iΣ_j|(W_ℝ)_ij| に、空でないことの元を (x^{(+)})^⊤W_ℝx^{(+)} にした。値は不変（W_ℝ の成分の包含が W の成分）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の条件 x ∈ 𝓕^{(+)} ∩ ℝ^{2^{M_col}} は実数のベクトルを複素数のベクトルの集合 𝓕^{(+)} の元とみなす同一視だったので、def_epsilon_real の ε_ℝ で x ∈ ℝ^{2^{M_col}}、ε_ℝx = x と述べ直した（epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ι(x) ∈ 𝓕^{(+)} と同値）。a_+ を ℝ^2 の元、x^{(+)} を成分 Π_k (a_+)_{i_k}（実数の有限積）で定め、def_kronecker (1) が複素数のベクトルのクロネッカー積だけを定めるので、b_+ := ι^2(a_+) を置いて ι(x^{(+)}) = b_+⊠⋯⊠b_+ を成分の 5 行の鎖（real_inclusion_preserves_finite_product を引く）で示し、ει(x^{(+)}) = ι(x^{(+)}) の鎖を b_+ で書き、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ε_ℝx^{(+)} = x^{(+)} へ戻した。σ^x b_+ = b_+ を 3 行の鎖に開いた。M_col ∈ ℤ_{≥1} を明記した。ノルムの鎖と上限の存在は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: x^{(+)} の各成分の値を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col} = 2^{-M_col/2}」という散文の 1 文から、x^{(+)} の定義 → a_+ の定義 → finite_product_of_constant_real_is_power の 3 行の鎖にした。値の書き方を (1/√2)^{M_col} に揃え、本文に定義の無い 2^{-M_col/2}（実数の非整数の冪）を消した（ノルムの鎖の 1 行目もこの値で書いた）。ノルムの鎖の 2・3 行目は内容を変えていない。",
       ],
     },
   },

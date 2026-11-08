@@ -1675,6 +1675,76 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_constant_real_is_power",
+    kind: "claim",
+    title: { text: "実数の定数の有限積は冪に等しい" },
+    labels: ["finite_product_of_constant_real_is_power"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " について、",
+        math(String.raw`\prod_{j=1}^{m} r \in \mathbb{R}`),
+        " を ",
+        ref("def_finite_product_of_real_numbers"),
+        "（",
+        math(String.raw`r_j \to r`),
+        "、すなわちすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で因子を ",
+        math(String.raw`r`),
+        " とした有限積）とし、",
+        math(String.raw`r^m \in \mathbb{R}`),
+        " を ",
+        ref("def_power_of_real_number"),
+        " の冪とする。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} r = r^m`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} r
+&= r
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to r)\bigr)\\
+&= 1\, r
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&= r^0\, r
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to r)\ \text{を右辺から左辺へ}\bigr)\\
+&= r^1
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to r,\ m \to 0)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} r
+&= \Bigl(\prod_{j=1}^{m} r\Bigr)\, r
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to r)\bigr)\\
+&= r^m\, r
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= r^{m+1}
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to r)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup が x^{(+)} の各成分を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col}」と散文の 1 文で述べていたので、成分の値の鎖から引けるよう足した。Lean は Ising2D.finite_product_of_constant_real_is_power（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfConstantRealIsPower.lean）。数値検証: sagemath/check/finite_product_of_constant_real_is_power/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（検査は落とさない。def_finite_product_of_real_numbers の近くに置くか、定義の置き場を前へ移すかは、状態台帳の前方参照の件と合わせて扱う）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inclusion_preserves_finite_product",
     kind: "claim",
     title: { text: "実数の有限積の包含は包含の有限積に等しい" },

@@ -800,6 +800,7 @@ targets=(
   Ising2D.evenSectorSet_bddAbove
   Ising2D.le_evenSectorRayleighSup
   Ising2D.pauliX_mulVec_cvec_aPlus
+  Ising2D.evenUnit_apply_succ
   Ising2D.evenUnit_apply
   Ising2D.cvec_evenUnit
   Ising2D.epsilon_mulVec_cvec_evenUnit
@@ -2582,6 +2583,9 @@ targets=(
   Ising2D.finite_product_of_positive_reals_is_positive
   "Ising2D.NecSuf.finProdLeft_pos'"
   Ising2D.finite_product_of_positive_reals_is_positive_of_necSuf
+  Ising2D.finite_product_of_constant_real_is_power
+  "Ising2D.NecSuf.finProdLeft_const_eq_pow'"
+  Ising2D.finite_product_of_constant_real_is_power_of_necSuf
   Ising2D.finite_product_of_real_products
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf

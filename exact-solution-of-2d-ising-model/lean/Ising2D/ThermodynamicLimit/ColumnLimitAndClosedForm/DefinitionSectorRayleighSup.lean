@@ -25,11 +25,12 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 | 上に有界（`𝓡_+ ⊆ 𝓡`） | `evenSectorSet_subset` / `evenSectorSet_bddAbove` |
 | `a_+ ∈ ℝ^2`、`b_+ := ι^2(a_+)` | `aPlus`、`cvec aPlus` |
 | `σ^x b_+ = b_+` の 3 行の鎖 | `pauliX_mulVec_cvec_aPlus` の `calc` の 3 段 |
-| `x^{(+)}`（成分 `Π_k (a_+)_{i_k}`）と、各成分が `2^{-M/2}` | `evenUnit`、`evenUnit_apply` |
+| `x^{(+)}`（成分 `Π_k (a_+)_{i_k}`） | `evenUnit` |
+| 各成分の値 `(x^{(+)})_{ν(I)} = Π_k (a_+)_{i_k} = Π_k 1/√2 = (1/√2)^{M_col}` の 3 行の鎖 | `evenUnit_apply_succ` の `calc` の 3 段 |
 | `ι(x^{(+)})_{ν(I)} = (b_+⊠⋯⊠b_+)_{ν(I)}` の 5 行の鎖 | `cvec_evenUnit` の `calc` の 5 段 |
 | `ει(x^{(+)}) = ι(x^{(+)})` の 5 行の鎖 | `epsilon_mulVec_cvec_evenUnit` の `calc` の 5 段 |
 | `def_even_eigenvectors_of_epsilon` と `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`（`⇐`）で `ε_ℝx^{(+)} = x^{(+)}` | `epsilonR_mulVec_evenUnit`（`epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` の `mpr`） |
-| `‖x^{(+)}‖² = Σ_I (2^{-M/2})² = 2^M · 2^{-M} = 1` | `vecNormSq_evenUnit` |
+| `‖x^{(+)}‖² = Σ_I ((1/√2)^{M_col})² = 2^M · 2^{-M} = 1` | `vecNormSq_evenUnit`（各成分の値は `evenUnit_apply`） |
 | 空でない（`(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`） | `evenSectorSet_epsilonR_nonempty` |
 
 - 人手の `M_col ≥ 1` は Lean の `n + 1` である。人手の `ν(I)` は Lean の `I : Conf (n + 1)`（`vecKron` の冒頭の注意と同じ）。
@@ -39,11 +40,11 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 
 ## 人手証明と 1 対 1 にならない箇所
 
-* 人手の「`(a_+)_{i_k} = 1/√2` なので各成分は `(1/√2)^M = 2^{-M/2}`」は散文の 1 文で根拠の鎖が無く、
-  Lean の `evenUnit_apply` は定数の有限積を mathlib の `Finset.prod_const` で冪に直している。
+* ノルムの鎖 `vecNormSq_evenUnit` は、まだ人手の 3 行と 1 対 1 の `calc` になっていない（状態台帳の (cl3b)）。
 * Lean の通しの定理は `M` を一般に取るので、`evenSectorSet_epsilonR_nonempty` は `M = 0` も扱う。
   人手は `M_col ≥ 1` なので `M = 0` の行は無い。`M = 0` の `ε_ℝx^{(+)} = x^{(+)}`（`epsilonR_zero_mulVec_evenUnit`）は、
   `ε` が符号反転の置換行列であること（`epsilonR_mulVec_apply`）と `x^{(+)}` の成分が添字に依らないことから示す。
+  同じ理由で、各成分の値の `M = 0` の行（空の積は `1 = (1/√2)^0`）も人手に無く、`evenUnit_apply` の `zero` の節だけが扱う。
 
 必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない。章 011 の
 `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。
@@ -53,6 +54,7 @@ import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSym
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerProductRuleOnVectors
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfConstantRealIsPower
 
 set_option linter.unusedSectionVars false
 
@@ -95,7 +97,7 @@ end General
 variable {M : ℕ}
 
 /-- 人手の `a_+ := (1/√2, 1/√2)^⊤ ∈ ℝ^2`。 -/
-noncomputable def aPlus : Fin 2 → ℝ := fun _ => (Real.sqrt 2)⁻¹
+noncomputable def aPlus : Fin 2 → ℝ := fun _ => 1 / Real.sqrt 2
 
 /-- 人手の `σ^x b_+ = b_+`（`b_+ := ι^2(a_+)`）。 -/
 theorem pauliX_mulVec_cvec_aPlus : pauliX *ᵥ cvec aPlus = cvec aPlus := by
@@ -112,10 +114,21 @@ theorem pauliX_mulVec_cvec_aPlus : pauliX *ᵥ cvec aPlus = cvec aPlus := by
 /-- 人手の `x^{(+)}`: `(x^{(+)})_{ν(I)} := Π_{k=1}^{M} (a_+)_{i_k}`（`def_finite_product_of_real_numbers`）。 -/
 noncomputable def evenUnit (M : ℕ) : Conf M → ℝ := fun I => ∏ k, aPlus (I k)
 
-/-- 人手の「`(a_+)_{i_k} = 1/√2` なので `x^{(+)}` の各成分は `(1/√2)^M = 2^{-M/2}`」。 -/
-theorem evenUnit_apply (I : Conf M) : evenUnit M I = ((Real.sqrt 2)⁻¹) ^ M := by
-  show ∏ _k : Fin M, (Real.sqrt 2)⁻¹ = _
-  rw [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+/-- 人手の `x^{(+)}` の各成分の値の 3 行の鎖 `(x^{(+)})_{ν(I)} = Π_k (a_+)_{i_k} = Π_k 1/√2 = (1/√2)^{M_col}`
+（人手の `M_col` は `n + 1`）。 -/
+theorem evenUnit_apply_succ (n : ℕ) (I : Conf (n + 1)) :
+    evenUnit (n + 1) I = (1 / Real.sqrt 2) ^ (n + 1) :=
+  calc evenUnit (n + 1) I
+      = ∏ k, aPlus (I k) := rfl                                -- `x^{(+)}` の定義
+    _ = ∏ _k : Fin (n + 1), 1 / Real.sqrt 2 := rfl             -- `a_+` の定義の `(a_+)_1 = 1/√2 = (a_+)_2` を各因子へ同時に適用
+    _ = (1 / Real.sqrt 2) ^ (n + 1) :=
+          finite_product_of_constant_real_is_power n _         -- `finite_product_of_constant_real_is_power`（`m → M_col`、`r → 1/√2`）
+
+/-- `x^{(+)}` の各成分は `(1/√2)^M`。`M ≥ 1` は人手の鎖 `evenUnit_apply_succ`、`M = 0`（空の積は `1`）は人手に無い（冒頭の注意）。 -/
+theorem evenUnit_apply (I : Conf M) : evenUnit M I = (1 / Real.sqrt 2) ^ M := by
+  cases M with
+  | zero => exact (Finset.prod_empty).trans (pow_zero _).symm
+  | succ n => exact evenUnit_apply_succ n I
 
 /-- 人手の `ι^{2^M}(x^{(+)}) = b_+⊠⋯⊠b_+`（成分の 5 行の鎖。人手の `M_col` は `n + 1`）。 -/
 theorem cvec_evenUnit (n : ℕ) :
@@ -158,10 +171,10 @@ theorem epsilonR_zero_mulVec_evenUnit : epsilonR 0 *ᵥ evenUnit 0 = evenUnit 0 
   rw [epsilonR_mulVec_apply]
   rfl
 
-/-- 人手の `‖x^{(+)}‖² = ∑_I (2^{-M/2})² = 2^M · 2^{-M} = 1`。 -/
+/-- 人手の `‖x^{(+)}‖² = ∑_I ((1/√2)^M)² = 2^M · 2^{-M} = 1`。 -/
 theorem vecNormSq_evenUnit : vecNormSq (evenUnit M) = 1 := by
   rw [vecNormSq_eq_sum]
-  simp only [evenUnit_apply, Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  simp only [evenUnit_apply, one_div, Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
   rw [card_conf, ← pow_mul, mul_comm M 2, pow_mul, inv_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2),
     inv_pow, mul_inv_cancel₀ (pow_ne_zero _ (by norm_num))]
 
