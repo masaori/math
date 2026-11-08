@@ -120,6 +120,7 @@ export const ALL_LABELS = [
   "claim_empty_pfaffian_determinant",
   "claim_even_edge_chain_intersection",
   "claim_even_edge_chain_torus_normal_form",
+  "claim_even_edge_symmetric_difference",
   "claim_even_orbit_coloring",
   "claim_even_orbit_minimum_color",
   "claim_even_subgraph_spin_sum",

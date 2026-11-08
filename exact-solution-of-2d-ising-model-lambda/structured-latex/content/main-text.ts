@@ -12367,6 +12367,73 @@ S&=(S-T)+T
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_symmetric_difference",
+        labels: [],
+        title: { text: "偶辺集合の対称差" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_symmetric_difference",
+              focus: {
+                id: "tools_claim_even_edge_symmetric_difference",
+                kind: "claim",
+                title: { text: "偶辺部分集合の対称差も偶辺部分集合である" },
+                labels: ["claim_even_edge_symmetric_difference"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdgeSubset_symmDiff",
+                  "Ising2DLambda.NecSuf.Tools.evenIncidenceSubset_symmDiff",
+                  "Ising2DLambda.Tools.evenEdgeSubset_symmDiff_from_necSuf",
+                ],
+                verification: ["sagemath/check/even-edge-symmetric-difference"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " と、相異なる二頂点からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取る。辺集合 ", math(String.raw`A,B\subset E`),
+                    " について、どの頂点にも接する辺の本数がそれぞれ偶数なら、対称差 ",
+                    math(String.raw`A\mathbin\triangle B`), " についても各頂点に接する辺の本数は偶数である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`v\in V`), " を固定する。",
+                    math(String.raw`A_v`), " と ", math(String.raw`B_v`),
+                    " をそれぞれ ", math(String.raw`A`), " と ", math(String.raw`B`),
+                    " のうち ", math(String.raw`v`), " に接する辺の集合とする。",
+                    "辺ごとの所属判定から、対称差で ", math(String.raw`v`),
+                    " に接する辺の集合は ", math(String.raw`A_v\mathbin\triangle B_v`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|A_v\mathbin\triangle B_v|
+&=|A_v\setminus B_v|+|B_v\setminus A_v|
+&&\bigl(\because\ \text{対称差は互いに素な二集合の和}\bigr)\\
+&=|A_v|+|B_v|-2|A_v\cap B_v|
+&&\bigl(\because\ \text{各集合を共通部分と差に分割する}\bigr)\\
+&\equiv 0\pmod 2
+&&\bigl(\because\ |A_v|,|B_v|\text{ は偶数}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "頂点 ", math(String.raw`v`), " は任意だったので、",
+                  ]),
+                  displayMath(String.raw`\forall v\in V,\quad |A_v\mathbin\triangle B_v|\equiv0\pmod2
+\qquad\bigl(\because\ \text{各頂点で上の計算が成り立つ}\bigr)`),
+                  paragraph([
+                    math(String.raw`A\mathbin\triangle B\subset A\cup B\subset E`),
+                    " なので、対称差は ", math(String.raw`E`), " の偶辺部分集合である。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
@@ -76279,7 +76346,7 @@ c(\gamma)\bmod2
                           ref("claim_edge_simple_contact_split"), " の二本を ",
                           math(String.raw`\gamma_A,\gamma_B`), " とすると、",
                         ]),
-                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0.`),
+                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0`),
                       ],
                       proof: [
                         paragraph([
@@ -76290,6 +76357,8 @@ c(\gamma)\bmod2
                           "他の頂点では通過が元と同じであり、元の横断数は零なので、",
                           "どちらの子にも自己横断は無い（", ref("def_closed_walk_crossing_number"), "）。",
                         ]),
+                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0
+\qquad\bigl(\because\ \blkref{claim_edge_simple_contact_split}\text{ と }\blkref{def_closed_walk_crossing_number}\bigr)`),
                       ],
                     },
                   }],
