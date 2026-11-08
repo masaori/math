@@ -7627,4 +7627,82 @@ L^{b}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_two_sided_ideal_is_closed_under_scalar_multiplication",
+    kind: "claim",
+    title: { text: "両側イデアルはスカラー倍で閉じている" },
+    labels: ["claim_two_sided_ideal_is_closed_under_scalar_multiplication"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`I`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`\lambda\ast_A x\in I`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " と ",
+        math(String.raw`x\in I`),
+        " を任意にとる。",
+        math(String.raw`I`),
+        " は ",
+        math(String.raw`A`),
+        " の部分集合なので ",
+        math(String.raw`x\in A`),
+        " である。",
+        math(String.raw`a:=\lambda\ast_A 1_A`),
+        " と置く。スカラー倍 ",
+        math(String.raw`\ast_A`),
+        " は ",
+        math(String.raw`\mathbb{C}\times A\to A`),
+        " の写像なので ",
+        math(String.raw`a\in A`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\ast_A x
+&=\lambda\ast_A(1_A\cdot_A x)
+&&\left(\because\ \text{環の組}\ (A,+_A,\cdot_A,0_A,1_A)\ \text{の乗法の単位元。}\blkref{def_complex_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=(\lambda\ast_A 1_A)\cdot_A x
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=a\cdot_A x
+&&\left(\because\ a\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a\in A`),
+        " と ",
+        math(String.raw`x\in I`),
+        " なので、両側イデアルの三つ目の条件（",
+        math(String.raw`A`),
+        " の元を左から掛けても ",
+        math(String.raw`I`),
+        " に入る。",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`a\cdot_A x\in I`),
+        " である。上の等式により ",
+        math(String.raw`\lambda\ast_A x\in I`),
+        " である。",
+        "この議論は、両側イデアルの一つ目・二つ目・四つ目の条件と、スカラー倍と乗法の両立の右の因子を使わない。",
+      ]),
+    ],
+  },
 ]);

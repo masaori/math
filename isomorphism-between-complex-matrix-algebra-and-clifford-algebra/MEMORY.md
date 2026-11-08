@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-08: 両側イデアルがスカラー倍で閉じていること（ラベル claim_two_sided_ideal_is_closed_under_scalar_multiplication）を、λ∗_A x=(λ∗_A 1_A)·_A x と左から掛ける条件で示した。次は合同の反射性（a≡_I a）。
+
 - 2026-11-08: 台帳の「商代数の構成と射影」を十七行に割り、両側イデアルを法とする合同の定義（ラベル def_congruence_modulo_two_sided_ideal、a+_A((-1_ℂ)∗_A b)∈I のとき a≡_I b）を置いた。次は両側イデアルがスカラー倍で閉じていること。
 
 - 2026-11-08: 部分集合が生成する両側イデアルは、その部分集合を含むどの両側イデアルにも含まれること（ラベル claim_two_sided_ideal_generated_by_subset_is_contained_in_every_ideal_containing_subset）を、⟨X⟩_A の定義の条件を X を含む両側イデアル J に当てて示した。次は商代数の構成と射影。
