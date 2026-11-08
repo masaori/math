@@ -12043,7 +12043,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 &=\sum_{\sigma\in\mathfrak S_{\mathcal J}}w_A(\sigma)+\sum_{\sigma\in\operatorname{DerOdd}(\mathcal J)}w_A(\sigma)&&\bigl(\because\ \text{直前の互いに素な分割}\bigr)\\
 &=\sum_{\sigma\in\mathfrak S_{\mathcal J}}w_A(\sigma)&&\bigl(\because\ \blkref{claim_odd_orbit_signed_sum_zero}\bigr)\\
 &=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{claim_matching_pair_even_sum}\bigr)\\
-&=\operatorname{Pf}(A)^2&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_expansion}\bigr).
+&=\operatorname{Pf}(A)^2&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_expansion}\bigr)
 \end{aligned}`),
                 paragraph(["空集合では唯一の空置換と空マッチングが残り、両辺は一である。有限和と代数的数係数多項式だけを用い、実数体への脱出はない。"]),
               ],
