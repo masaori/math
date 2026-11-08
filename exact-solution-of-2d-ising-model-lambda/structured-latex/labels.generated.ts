@@ -364,6 +364,7 @@ export const ALL_LABELS = [
   "claim_plane_dual_ray_height_vertical_difference",
   "claim_plane_dual_ray_height_zero_left",
   "claim_plane_dual_ray_height_zero_right",
+  "claim_plane_height_one_exterior_inclusion",
   "claim_plane_height_one_horizontal_edge",
   "claim_plane_height_one_vertical_edge",
   "claim_plane_lift_coordinates",

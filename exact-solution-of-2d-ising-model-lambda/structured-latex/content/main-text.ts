@@ -67417,7 +67417,66 @@ e_{r,c}\in\mathcal B_{\square}(T_Z)
                           paragraph([
                             "格子辺は縦辺 ", math(String.raw`v_{r,c}`), " または横辺 ",
                             math(String.raw`e_{r,c}`), " のいずれかなので、両方向の所属判定から ",
+                            "集合として一致する。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T_Z)=Z
+\qquad\bigl(\because\ \text{全ての縦辺と横辺で所属が一致する}\bigr)`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_height_one_exterior_inclusion",
+                        kind: "claim",
+                        title: { text: "補集合が辺連結なら高さ一のセルは元のセル集合に属する" },
+                        labels: ["claim_plane_height_one_exterior_inclusion"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeHeightOne_exterior_inclusion",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRegion_subset_of_connected_complement",
+                          "Ising2DLambda.KacWard.planeHeightOne_exterior_inclusion_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-height-one-exterior-inclusion"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の補集合が辺連結であり（", ref("def_edge_connected_cell_set"), "）、",
+                            "各頂点に接する辺の本数が偶数の有限格子辺集合 ", math(String.raw`Z`),
+                            " が ", math(String.raw`\mathcal E_{\square}(S)`),
+                            " に含まれるとする。右向き双対路の高さ一のセル集合 ",
+                            math(String.raw`T_Z:=\{(r,c)\in\mathbb Z\times\mathbb Z\mid h_Z(r,c)=1\}`),
+                            " は ", math(String.raw`S`), " に含まれる。",
+                          ]),
+                          displayMath(String.raw`Z\subset\mathcal E_{\square}(S),\quad
+(\mathbb Z\times\mathbb Z)\setminus S\text{ は辺連結}
+\quad\Longrightarrow\quad T_Z\subset S`),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_one_boundary"), " により ",
+                            math(String.raw`T_Z`), " は有限で ",
                             math(String.raw`\mathcal B_{\square}(T_Z)=Z`), " である。",
+                            "補集合の隣接二セル ",
+                            math(String.raw`p,q\in(\mathbb Z\times\mathbb Z)\setminus S`),
+                            " の共有格子辺 ", math(String.raw`e`), " は ",
+                            ref("def_cell_edge_set"), " より ",
+                            math(String.raw`\mathcal E_{\square}(S)`), " に属さない。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e\notin\mathcal E_{\square}(S)
+&\Longrightarrow e\notin Z
+&&\bigl(\because\ Z\subset\mathcal E_{\square}(S)\bigr)\\
+&\Longrightarrow e\notin\mathcal B_{\square}(T_Z)
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_one_boundary}\bigr)\\
+&\Longrightarrow (p\in T_Z\Longleftrightarrow q\in T_Z)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "補集合の辺連結路に沿ってこの同値を反復すると、高さ一への所属は補集合上で一定である。",
+                            math(String.raw`S\cup T_Z`), " は有限なので、その外のセル ",
+                            math(String.raw`q_0`), " を選べる。", math(String.raw`q_0\notin T_Z`),
+                            " だから補集合上の所属は常に偽であり、", math(String.raw`T_Z\subset S`), " を得る。",
                           ]),
                         ],
                       },
