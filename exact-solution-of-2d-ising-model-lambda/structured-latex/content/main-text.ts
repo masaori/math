@@ -66887,6 +66887,74 @@ e_v\in\mathcal B_{\square}(T\triangle U)
                     {
                       role: "prerequisiteDefinition",
                       element: {
+                        id: "kac_ward_definition_plane_dual_ray_height",
+                        kind: "definition",
+                        title: { text: "平面の有限辺集合から定まる右向き双対路の高さ" },
+                        labels: ["def_plane_dual_ray_height"],
+                        habitat: "N",
+                        lean: ["Ising2DLambda.KacWard.planeDualRayHeight"],
+                        statement: [
+                          paragraph([
+                            "有限な格子辺集合 ", math(String.raw`Z`), " と任意のセル ",
+                            math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`), " を取る。セルの中心から同じ行の右方へ進む双対路は、列 ",
+                            math(String.raw`j>c`), " の縦辺 ",
+                            math(String.raw`v_{r,j}:=\{(r,j),(r+1,j)\}`),
+                            " を順に横切る。この路が ", math(String.raw`Z`), " の辺を横切る回数の偶奇を",
+                          ]),
+                          displayMath(String.raw`h_Z(r,c):=\left|\{j\in\mathbb Z\mid j>c\text{ かつ }v_{r,j}\in Z\}\right|\bmod2\ \in\{0,1\}`),
+                          paragraph([
+                            "で定める。", math(String.raw`Z`), " は有限なので波括弧内も有限であり、高さは自然数の個数から一意に決まる。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_horizontal_difference",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さの横方向の隣接差" },
+                        labels: ["claim_plane_dual_ray_height_horizontal_difference"],
+                        habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_horizontal",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRayHeight_horizontal",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_horizontal_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-horizontal"],
+                        statement: [
+                          paragraph([
+                            "任意の有限格子辺集合 ", math(String.raw`Z`), " と ", math(String.raw`r,c\in\mathbb Z`),
+                            " について、横に隣り合う二セル ", math(String.raw`(r,c-1),(r,c)`),
+                            " の高さ（", ref("def_plane_dual_ray_height"), "）の差は、共有縦辺 ",
+                            math(String.raw`v_{r,c}`), " が ", math(String.raw`Z`), " に属するかどうかで決まる。",
+                          ]),
+                          displayMath(String.raw`h_Z(r,c-1)=\bigl(h_Z(r,c)+\mathbf1_{v_{r,c}\in Z}\bigr)\bmod2`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "列 ", math(String.raw`j>c-1`), " は ", math(String.raw`j=c`),
+                            " と ", math(String.raw`j>c`), " に互いに素に分かれる。", math(String.raw`Z`),
+                            " が有限なので、それぞれに入る縦辺の有限個数をこの分割で分ける。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c-1)
+&=\left|\{j\in\mathbb Z\mid j>c-1\text{ かつ }v_{r,j}\in Z\}\right|\bmod2
+&&\bigl(\because\ \blkref{def_plane_dual_ray_height}\bigr)\\
+&=\left(\mathbf1_{v_{r,c}\in Z}+\left|\{j\in\mathbb Z\mid j>c\text{ かつ }v_{r,j}\in Z\}\right|\right)\bmod2
+&&\bigl(\because\ j>c-1\Longleftrightarrow j=c\text{ または }j>c\bigr)\\
+&=\bigl(\mathbf1_{v_{r,c}\in Z}+h_Z(r,c)\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_plane_dual_ray_height}\text{ と剰余の加法則}\bigr)\\
+&=\bigl(h_Z(r,c)+\mathbf1_{v_{r,c}\in Z}\bigr)\bmod2
+&&\bigl(\because\ \mathbb N\text{ の加法の交換律}\bigr)
+\end{aligned}`),
+                          paragraph(["この分割と剰余は有限集合と自然数の計算だけで閉じる。"]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
                         id: "kac_ward_definition_cell_euler_number",
                         kind: "definition",
                         title: { text: "セル集合の Euler 数" },
