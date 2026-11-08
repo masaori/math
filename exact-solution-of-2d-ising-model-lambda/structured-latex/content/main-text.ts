@@ -67157,7 +67157,51 @@ h_Z(r,c)
 &=0
 &&\bigl(\because\ |\varnothing|=0\bigr)
 \end{aligned}`),
-                          paragraph(["最後の含意は対偶である。全て有限集合の計数で閉じる。"]),
+                          displayMath(String.raw`h_Z(r,c)=1\Longrightarrow r\in R_Z
+\qquad\bigl(\because\ r\notin R_Z\Longrightarrow h_Z(r,c)=0\text{ の対偶}\bigr)`),
+                          paragraph(["全て有限集合の計数で閉じる。"]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_zero_right",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さは有限辺集合の右側で零である" },
+                        labels: ["claim_plane_dual_ray_height_zero_right"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_zero_right",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRay_zero_right",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-right-bound"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " と整数 ",
+                            math(String.raw`M,r,c\in\mathbb Z`), " を取る。辺を定める格子点の列座標を ",
+                            math(String.raw`\operatorname{col}(e)\in\mathbb Z`), " と書く。", math(String.raw`Z`),
+                            " の各辺の列座標が ", math(String.raw`M`), " 以下で、",
+                            math(String.raw`M\le c`), " なら、右向き双対路の高さ（",
+                            ref("def_plane_dual_ray_height"), "）は零である。",
+                          ]),
+                          displayMath(String.raw`\bigl(\forall e\in Z,\ \operatorname{col}(e)\le M\bigr)\land M\le c\quad\Longrightarrow\quad h_Z(r,c)=0`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "高さを数える列 ", math(String.raw`j`), " は ", math(String.raw`j>c\ge M`),
+                            " を満たす。一方、", math(String.raw`Z`), " の辺の列座標はすべて ",
+                            math(String.raw`M`), " 以下である。したがって該当する縦辺は無い。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c)
+&=\left|\{j\in\mathbb Z\mid j>c\text{ かつ }v_{r,j}\in Z\}\right|\bmod2
+&&\bigl(\because\ \blkref{def_plane_dual_ray_height}\bigr)\\
+&=|\varnothing|\bmod2
+&&\bigl(\because\ j>c\ge M\text{ と }\operatorname{col}(v_{r,j})=j\le M\text{ は両立しない}\bigr)\\
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr)
+\end{aligned}`),
                         ],
                       },
                     },
