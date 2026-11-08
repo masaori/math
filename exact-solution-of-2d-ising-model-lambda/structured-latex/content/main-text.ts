@@ -66825,9 +66825,11 @@ e_v\in\mathcal B_{\square}(T\triangle U)
 &\Longleftrightarrow (e_v\in\mathcal B_{\square}(T))\mathbin{\mathrm{xor}}(e_v\in\mathcal B_{\square}(U))
 &&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
 \end{aligned}`),
-                          paragraph([
-                            "全ての格子辺は横辺か縦辺なので、二つの有限な境界辺集合の所属条件が一致し、集合の等式が従う。",
-                          ]),
+                          paragraph(["全ての格子辺は横辺か縦辺なので、各辺の所属条件が一致する。したがって集合として"]),
+                          displayMath(String.raw`\mathcal B_{\square}(T\triangle U)
+=\mathcal B_{\square}(T)\triangle\mathcal B_{\square}(U)
+\qquad\bigl(\because\ \text{横辺と縦辺の所属条件がそれぞれ一致する}\bigr)`),
+                          paragraph(["である。"]),
                         ],
                       },
                     },
