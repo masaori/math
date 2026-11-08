@@ -6772,7 +6772,7 @@ N_{k,l}
 &=\prod_{k\in\mathcal K}\left(\sum_{\tau\in\operatorname{Perm}(\mathcal J_k)}t_k(\tau)\right)
 &&(\because\ \blkref{claim_polynomial_product_of_sums}\text{ の帰納法を各ファイバーの選択集合に適用})\\
 &=\prod_{k\in\mathcal K}\det_x(B^{(k)})
-&&(\because\ \blkref{def_qbar_polynomial_determinant}).
+&&(\because\ \blkref{def_qbar_polynomial_determinant})
 \end{aligned}`),
               ],
             },
