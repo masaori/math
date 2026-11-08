@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-08: 部分集合が生成する両側イデアルは、その部分集合を含むどの両側イデアルにも含まれること（ラベル claim_two_sided_ideal_generated_by_subset_is_contained_in_every_ideal_containing_subset）を、⟨X⟩_A の定義の条件を X を含む両側イデアル J に当てて示した。次は商代数の構成と射影。
+
 - 2026-11-08: 部分集合が生成する両側イデアルがその部分集合を含むこと（ラベル claim_two_sided_ideal_generated_by_subset_contains_subset）を、X を含む各両側イデアルに X の元が入ることと ⟨X⟩_A の定義から示した。次は ⟨X⟩_A が X を含むどの両側イデアルにも含まれること。
 
 - 2026-11-08: 部分集合が生成する両側イデアルが両側イデアルであること（ラベル claim_two_sided_ideal_generated_by_subset_is_two_sided_ideal）を、X を含む各両側イデアルでの四条件から示した。次は ⟨X⟩_A が X を含むこと（X の元は X を含むどの両側イデアルにも入ることを定義に当てる）。
