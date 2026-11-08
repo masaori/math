@@ -110,4 +110,20 @@ theorem exterior_path_avoids_cellEdges (cells : Finset GridCell)
     exact exterior_adjacent_has_missing_shared_edge cells a b h.1 h.2.1 h.2.2
   exact (Relation.ReflTransGen.mono hmono p q) hpath
 
+/-- Cells lie in the same combinatorial component of the complement of the
+selected grid edges when they can be joined across missing shared edges. -/
+def SameComplementCellRegion (cells : Finset GridCell) (p q : GridCell) : Prop :=
+  Relation.ReflTransGen
+    (fun a b => ∃ e : GridEdge, e ∉ cellEdges cells ∧ SharedGridEdge a b e) p q
+
+/-- Edge connectivity of all exterior cells puts any two of them in one
+combinatorial component of the complement of the grid edges. -/
+theorem exterior_cells_same_complement_region (cells : Finset GridCell)
+    (hconnected : EdgeConnectedCellSet (↑cells : Set GridCell)ᶜ)
+    (p q : GridCell) (hp : p ∉ cells) (hq : q ∉ cells) :
+    SameComplementCellRegion cells p q := by
+  have hpath := hconnected (show p ∈ (↑cells : Set GridCell)ᶜ from hp)
+    (show q ∈ (↑cells : Set GridCell)ᶜ from hq)
+  exact exterior_path_avoids_cellEdges cells hpath
+
 end Ising2DLambda.KacWard

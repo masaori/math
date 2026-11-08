@@ -43,7 +43,7 @@ sage sagemath/check/transfer-matrix-row-decomposition/check.sage
 
 | 項目 | 状態 |
 | --- | --- |
-| 実行 | 2026-08-08 実行（SageMath, `/usr/local/bin/sage`） |
+| 実行 | 2026-11-08 再実行（SageMath） |
 | 結果 | 全アサーション成立（$L=1,2,3$。全配位を総当たり） |
 
 出力:

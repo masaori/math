@@ -13886,11 +13886,8 @@ n_{\mathrm{h}}
                       math(String.raw`\sigma\in\Sigma_L`),
                       " を固定する。この証明の中だけで使う記号として、破れている辺の番号の集合を",
                     ]),
-                    displayMath(String.raw`\begin{aligned}
-B(\sigma)&:=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\\[2pt]
-b(\sigma)&=|B(\sigma)|
-&&\bigl(\because\ \blkref{def_broken_bond_count}\bigr)
-\end{aligned}`),
+                    displayMath(String.raw`B(\sigma):=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}`),
+                    displayMath(String.raw`b(\sigma)=|B(\sigma)|\qquad\bigl(\because\ \blkref{def_broken_bond_count}\bigr)`),
                     paragraph([
                       "と置く。あわせて、各 ",
                       math(String.raw`i\in\mathbb{Z}/L\mathbb{Z}`),
