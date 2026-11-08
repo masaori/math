@@ -56,6 +56,35 @@ theorem closedLift_boundingRectangle_endpoints
     obtain ⟨k, hk, hcol⟩ := Finset.mem_image.mp hmem
     exact ⟨k, Finset.mem_range.mp hk, hcol⟩
 
+/-- The bounding coordinates exclude every odd-ray interior cell outside the rectangle. -/
+theorem outsideBoundingRectangle_subset_exteriorCells
+    (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)
+    (hrow : ∀ k ≤ n, rMin ≤ row k ∧ row k ≤ rMax)
+    (hcol : ∀ k < n, cMin ≤ col k ∧ col k ≤ cMax)
+    (hclosed : row n = row 0)
+    (hstep : ∀ k < n, row (k + 1) - row k = -1 ∨
+      row (k + 1) - row k = 0 ∨ row (k + 1) - row k = 1) :
+    outsideBoundingRectangle rMin rMax cMin cMax ⊆ exteriorCells n row col := by
+  rintro ⟨r, c⟩ houtside hinside
+  change Odd (rightRayCrossingCount n row col r c) at hinside
+  change r < rMin ∨ rMax ≤ r ∨ c < cMin ∨ cMax ≤ c at houtside
+  rcases houtside with hr | hr | hc | hc
+  · have hz := rightRayCrossingCount_eq_zero_of_row_lt n row col rMin r c
+      (fun k hk => (hrow k hk).1) hr
+    rw [hz] at hinside
+    norm_num at hinside
+  · have hz := rightRayCrossingCount_eq_zero_of_row_ge n row col rMax r c
+      (fun k hk => (hrow k hk).2) hr
+    rw [hz] at hinside
+    norm_num at hinside
+  · exact (Nat.not_odd_iff_even.mpr
+      (rightRayCrossingCount_even_of_col_lt n row col cMin r c
+        (fun k hk => (hcol k hk).1) hc hclosed hstep)) hinside
+  · have hz := rightRayCrossingCount_eq_zero_of_col_ge n row col cMax r c
+      (fun k hk => (hcol k hk).2) hc
+    rw [hz] at hinside
+    norm_num at hinside
+
 /-- 横の有限区間に奇数回通過した縦辺がなければ、外側セルのまま進める。 -/
 theorem exteriorCells_horizontalPath_of_even_vertical_edges
     (n : ℕ) (row col : ℕ → ℤ) (r c d : ℤ)

@@ -26,6 +26,54 @@ theorem exteriorCellOfWalk_boundingRectangle_endpoints {L m : ℕ} [NeZero L]
   exact closedLift_boundingRectangle_endpoints (m + 1) row col
     (by omega) hclosedRow
 
+/-- The rectangle selected from the actual lift contains every odd-ray interior cell. -/
+theorem outsideBoundingRectangle_subset_exteriorCellsOfWalk {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (rMin rMax cMin cMax : ℤ)
+    (hrow : ∀ k ≤ m + 1,
+      rMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).1 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).1 ≤ rMax)
+    (hcol : ∀ k < m + 1,
+      cMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).2 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).2 ≤ cMax) :
+    outsideBoundingRectangle rMin rMax cMin cMax ⊆
+      (oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ := by
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hclosedRow : row (m + 1) = row 0 := by
+    have h := planeLift_endpoint_winding γ hγ
+    rw [hv, hh] at h
+    have h' := congrArg Prod.fst h
+    simpa [row] using h'
+  have hstep : ∀ k < m + 1, row (k + 1) - row k = -1 ∨
+      row (k + 1) - row k = 0 ∨ row (k + 1) - row k = 1 := by
+    intro k hk
+    have h0 : Fin.ofNat (m + 2) k = (⟨k, by omega⟩ : Fin (m + 1)).castSucc := by
+      apply Fin.ext
+      simp [Nat.mod_eq_of_lt (by omega : k < m + 2)]
+    have h1 : Fin.ofNat (m + 2) (k + 1) = (⟨k, by omega⟩ : Fin (m + 1)).succ := by
+      apply Fin.ext
+      simp [Nat.mod_eq_of_lt (by omega : k + 1 < m + 2)]
+    have hs := planeLift_succ γ (⟨k, hk⟩ : Fin (m + 1))
+    have hu := orientedEdgeLatticeStep_unit (γ (⟨k, hk⟩ : Fin (m + 1)))
+    have hsrow : row (k + 1) = row k + (orientedEdgeLatticeStep (γ ⟨k, hk⟩)).1 := by
+      simpa only [row, h0, h1, Prod.fst_add] using congrArg Prod.fst hs
+    rcases hu with hu | hu | hu | hu <;>
+      rw [hu] at hsrow <;> simp only at hsrow <;> omega
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  rw [hinside]
+  exact outsideBoundingRectangle_subset_exteriorCells
+    (m + 1) row col rMin rMax cMin cMax
+    (by simpa only [row] using hrow) (by simpa only [col] using hcol)
+    hclosedRow hstep
+
 /-- The exterior band of a closed walk agrees with the band of its integer-indexed lift. -/
 theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L)
