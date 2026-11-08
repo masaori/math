@@ -113,6 +113,39 @@ theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
     refine ⟨hinside ▸ hpOutside, i, ?_⟩
     simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hpCorner
 
+/-- The outer rectangle and exterior band of the actual lifted walk intersect. -/
+theorem outsideBoundingRectangle_inter_walkSideExteriorBandFromWalk {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (rMin rMax cMin cMax : ℤ)
+    (hrow : ∀ k ≤ m + 1,
+      rMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).1 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).1 ≤ rMax)
+    (hcol : ∀ k < m + 1,
+      cMin ≤ (planeLift γ (Fin.ofNat (m + 2) k)).2 ∧
+      (planeLift γ (Fin.ofNat (m + 2) k)).2 ≤ cMax)
+    (hmax : ∃ k < m + 1,
+      (planeLift γ (Fin.ofNat (m + 2) k)).2 = cMax) :
+    ∃ p, p ∈ outsideBoundingRectangle rMin rMax cMin cMax ∧
+      p ∈ walkSideExteriorBandFromWalk γ hγ hh hv := by
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hsubset := outsideBoundingRectangle_subset_exteriorCellsOfWalk
+    γ hγ hh hv rMin rMax cMin cMax hrow hcol
+  have hinside : oddRayInteriorCellsOfWalk γ hγ hh hv =
+      oddRayInteriorCells (m + 1) row col := by
+    ext p
+    simp only [oddRayInteriorCellsOfWalk, oddRayInteriorCells, Set.mem_setOf_eq]
+    rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  rw [hinside] at hsubset
+  have hband := walkSideExteriorBandFromWalk_eq_coordinateBand γ hγ hh hv
+  dsimp only at hband
+  rw [hband]
+  exact outsideBoundingRectangle_inter_walkSideExteriorBand
+    (m + 1) row col rMin rMax cMin cMax hmax hsubset
+
 /-- An exterior cell of the actual walk reaches the outer rectangle or its exterior band. -/
 theorem exteriorCellOfWalk_reaches_outer_core {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)

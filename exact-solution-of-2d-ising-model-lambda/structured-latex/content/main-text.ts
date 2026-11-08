@@ -66494,6 +66494,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCells",
                       "Ising2DLambda.KacWard.exteriorCellOfWalk_boundingRectangle_endpoints",
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCellsOfWalk",
+                      "Ising2DLambda.KacWard.outsideBoundingRectangle_inter_walkSideExteriorBandFromWalk",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],
