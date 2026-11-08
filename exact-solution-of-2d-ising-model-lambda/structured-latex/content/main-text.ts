@@ -11056,25 +11056,25 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
                 paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`S:=\operatorname{Orb}_\sigma(i)\subseteq\mathcal J`), "、", math(String.raw`B:=\mathcal B_{\tau,\upsilon}(i)\subseteq\mathcal J`), "、", math(String.raw`p:=\upsilon\circ\tau\in\operatorname{Perm}(\mathcal J)`), " と略す。", ref("def_finite_permutation_orbit"), " より ", math(String.raw`i\in S`), " であり、", ref("claim_finite_permutation_orbit_invariant"), " より ", math(String.raw`S`), " は ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " で閉じている。"]),
                 paragraph(["任意の ", math(String.raw`j\in S`), " について、", math(String.raw`j\in C_\sigma`), " なら ", math(String.raw`\tau(j)=\sigma(j)`), "、", math(String.raw`\upsilon(j)=\sigma^{-1}(j)`), " である。", math(String.raw`j\notin C_\sigma`), " なら両者の役割が入れ替わる。これは ", ref("def_alternating_neighbor_pairs"), " による。したがって両場合で"]),
                 displayMath(String.raw`\tau(j)\in S,\qquad\upsilon(j)\in S
-\qquad\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 p(j)&=\upsilon(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
-&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr),\\
+&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr)\\
 p^{-1}(j)&=\tau(\upsilon(j))&&\bigl(\because\ \blkref{def_matching_pair_step}\text{ の逆写像}\bigr)\\
-&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr).
+&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i,\tau(i)\in S`), " なので、二つの始点からの ", math(String.raw`p`), " の順逆の反復はすべて ", math(String.raw`S`), " に属する。ゆえに"]),
                 displayMath(String.raw`B\subseteq S
-\qquad\bigl(\because\ \blkref{def_matching_pair_component},\ \blkref{def_finite_permutation_orbit}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_matching_pair_component},\ \blkref{def_finite_permutation_orbit}\bigr)`),
                 paragraph(["逆の包含を示す。", math(String.raw`i\in B`), " は ", ref("def_matching_pair_component"), " の第一軌道の零回から従う。任意の ", math(String.raw`j\in B`), " を取る。", ref("claim_matching_pair_component_basepoint"), " によって ", math(String.raw`\mathcal B_{\tau,\upsilon}(j)=B`), " である。第二軌道の零回を取れば ", math(String.raw`\tau(j)\in B`), " となる。また、", ref("claim_finite_permutation_orbit_invariant"), " を二つの軌道へ適用すると ", math(String.raw`p(\tau(j))\in B`), " である。"]),
                 displayMath(String.raw`\begin{aligned}
 p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
-&=\upsilon(j)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr),\\
-\upsilon(j)&\in B&&\bigl(\because\ p(\tau(j))\in B\bigr).
+&=\upsilon(j)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr)\\
+\upsilon(j)&\in B&&\bigl(\because\ p(\tau(j))\in B\bigr)
 \end{aligned}`),
                 paragraph(["したがって ", math(String.raw`B`), " は二つの相手写像で閉じる。", ref("def_alternating_neighbor_pairs"), " の二場合により、", math(String.raw`j\in C_\sigma`), " なら ", math(String.raw`\sigma(j)=\tau(j)`), " と ", math(String.raw`\sigma^{-1}(j)=\upsilon(j)`), "、補集合なら逆である。よって ", math(String.raw`B`), " は ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " でも閉じる。", math(String.raw`i\in B`), " から順逆の反復回数について帰納し、"]),
                 displayMath(String.raw`S\subseteq B
-\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の二方向の反復}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の二方向の反復}\bigr)`),
                 paragraph(["両包含から等号を得る。空集合では始点がなく、共有対でも二場合の計算は変わらない。有限集合と自然数回の反復だけを扱い、実数体への脱出はない。"]),
               ],
             },
@@ -67000,6 +67000,49 @@ h_Z(r,c)+h_Z(r-1,c)
 &&\bigl(\because\ M\text{ は全ての辺の列座標より大きい}\bigr)
 \end{aligned}`),
                           paragraph(["全ての和は有限であり、整数の偶奇だけを使った。"]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_height_one_vertical_edge",
+                        kind: "claim",
+                        title: { text: "共有縦辺の所属は隣接二セルの高さ一の差で決まる" },
+                        labels: ["claim_plane_height_one_vertical_edge"],
+                        habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeHeightOne_vertical_edge",
+                          "Ising2DLambda.NecSuf.KacWard.binaryHeight_vertical_edge",
+                          "Ising2DLambda.KacWard.planeHeightOne_vertical_edge_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-height-one-vertical-edge"],
+                        statement: [
+                          paragraph([
+                            "任意の有限格子辺集合 ", math(String.raw`Z`), " と ",
+                            math(String.raw`r,c\in\mathbb Z`), " を取る。高さ一のセルとは ",
+                            math(String.raw`h_Z(r,c)=1`), " を満たすセルである（",
+                            ref("def_plane_dual_ray_height"), "）。横に隣り合う二セルのちょうど一方の高さが一であることと、",
+                            "共有縦辺 ", math(String.raw`v_{r,c}`), " が ", math(String.raw`Z`), " に属することは同値である。",
+                          ]),
+                          displayMath(String.raw`\bigl(h_Z(r,c-1)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r,c)=1\bigr)
+\quad\Longleftrightarrow\quad v_{r,c}\in Z`),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_horizontal_difference"), " より、二セルの高さは共有縦辺の所属指示値だけ異なる。",
+                            "高さと指示値はともに ", math(String.raw`\{0,1\}`), " に属する。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+&\bigl(h_Z(r,c-1)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r,c)=1\bigr)\\
+&\Longleftrightarrow h_Z(r,c-1)\ne h_Z(r,c)
+&&\bigl(\because\ h_Z(r,c-1),h_Z(r,c)\in\{0,1\}\bigr)\\
+&\Longleftrightarrow \mathbf1_{v_{r,c}\in Z}=1
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_horizontal_difference}\text{ と二を法とする加法}\bigr)\\
+&\Longleftrightarrow v_{r,c}\in Z
+&&\bigl(\because\ \text{所属指示値の定義}\bigr)
+\end{aligned}`),
+                          paragraph(["したがって、共有縦辺での高さ一の所属差は有限集合の偶奇だけで判定できる。"]),
                         ],
                       },
                     },
