@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
   "claim_congruence_modulo_two_sided_ideal_is_reflexive",
   "claim_congruence_modulo_two_sided_ideal_is_symmetric",
+  "claim_congruence_modulo_two_sided_ideal_is_transitive",
   "claim_coordinate_map_is_linear_form",
   "claim_coordinate_maps_form_dual_basis",
   "claim_count_below_index_after_adding_one_element",
