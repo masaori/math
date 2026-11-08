@@ -2826,6 +2826,14 @@ targets=(
   Ising2D.adjacentSpinProductSum
   Ising2D.sum_sigmaZ_sigmaZ_apply_of_ne
   Ising2D.sum_sigmaZ_sigmaZ_apply_configBasisIso_self
+  Ising2D.halfK1SmulD
+  Ising2D.squareRootV1DiagonalEntry
+  Ising2D.squareRootV1DiagonalEntry_pos
+  Ising2D.halfK1SmulD_apply_of_ne
+  Ising2D.halfK1SmulD_eq_diagonal
+  Ising2D.physicalV1halfC_eq_matExp_halfK1SmulD
+  Ising2D.physicalV1halfC_apply_of_ne
+  Ising2D.physicalV1halfC_apply_configBasisIso_self
   Ising2D.physicalV1halfR_apply_configBasisIso
   Ising2D.physicalV1halfC_apply_configBasisIso
   Ising2D.physicalV1halfR_apply_configBasisIso_self_pos

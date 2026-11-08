@@ -12,10 +12,14 @@
 | 人手証明 | 本ファイル |
 | --- | --- |
 | 準備の `d(μ) := ∑_m μ(m)μ(m+1)` | `adjacentSpinProductSum` |
+| 準備の `X := (½K_1)_ℂD`・`b(μ) := exp(½K_1d(μ))`・`b(μ) > 0`（`real_exp_positive`） | `halfK1SmulD`・`squareRootV1DiagonalEntry`・`squareRootV1DiagonalEntry_pos` |
 | Step 1 の `D_{pq}` の 4 行（`p ≠ q`） | `sum_sigmaZ_sigmaZ_apply_of_ne`（2 行目の `σ^z_{m+1} = σ^z_{m^+}` は `nextSite` の読み方で段は無い） |
 | Step 1 の `D_{kk}` の 7 行 | `sum_sigmaZ_sigmaZ_apply_configBasisIso_self`（2 行目・6 行目は `nextSite` の読み方で段は無い） |
-| Step 1: `(V_1^{1/2})_{ι(μ),ι(μ')}` は `μ = μ'` で `exp(½K_1∑_m μ(m)μ(m+1))`、それ以外で `0` | `physicalV1halfC_apply_configBasisIso`（`V_1^{1/2} = exp(½K_1D)` の成分。`sigma_z_diagonal_action` で `½K_1D` を対角行列に書き、`exp_of_diagonal_matrix` で成分を読む `V1PauliForm_apply_configBasisIso` を結合定数 `K_1/2` で引く）・`physicalV1halfR_apply_configBasisIso`（その実成分。前者から導く） |
-| Step 1 の `exp(…) > 0` | `physicalV1halfR_apply_configBasisIso_self_pos` |
+| Step 1 の `X_{pq}` の 3 行（`p ≠ q`）と「`X` は対角行列」 | `halfK1SmulD_apply_of_ne`・`halfK1SmulD_eq_diagonal`（`def_diagonal_matrix` を Lean の `Matrix.diagonal` へ読み替える段） |
+| Step 1 の `B_{pq}` の 2 行（`p ≠ q`） | `physicalV1halfC_apply_of_ne`（1 行目の `B = exp(X)` は `physicalV1halfC_eq_matExp_halfK1SmulD`） |
+| Step 1 の `B_{kk}` の 7 行 | `physicalV1halfC_apply_configBasisIso_self` |
+| Step 1 の `B` の成分を `μ = μ'` かどうかで一つにまとめた形（人手に無い。いまの Step 3 の証明（実行列で計算する）が使う） | `physicalV1halfC_apply_configBasisIso`（`B_{kk}`・`B_{pq}` の鎖と `ι` の単射性から導く）・`physicalV1halfR_apply_configBasisIso`（その実成分。前者から導く） |
+| 実成分の対角成分が正（人手に無い。いまの Step 3 の証明（実行列で計算する）が使う形） | `physicalV1halfR_apply_configBasisIso_self_pos`（`real_exp_positive`） |
 | Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
 | Step 3 の 1〜4 行目（`W` の定義、行列の積の定義、`j ≠ ι(μ)` の項が `0`、`k ≠ ι(μ')` の項が `0`） | `physicalSymTransferR_apply_configBasisIso` の式変形の各行。3・4 行目の「Step 1 の対角性」は `physicalV1halfR_offDiag`（Step 1 の補題の `μ ≠ μ'` の場合） |
 | Step 3 の「3 つの因子はいずれも正」 | `W_has_positive_entries_physical`（実成分で組んだ `W` の `ι(μ), ι(μ')` 成分が正） |
@@ -32,8 +36,8 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 `W_has_positive_entries_physical` と `physicalSymTransferC_eq_map` で閉じる。人手の Step 1〜3 は複素行列のまま
 `B_{kk} = b(μ)_ℂ`・`(V_2)_{kl} = v(μ,μ')_ℂ`・`W_{kl} = ((b(μ)v(μ,μ'))b(μ'))_ℂ` と計算し、`w > 0` を
 `finite_product_of_positive_reals_is_positive`（`m := 3`）で示すので、この証明はまだ人手と 1 対 1 ではない
-（状態台帳の (cl2c)〜(cl2e) で人手の鎖に組み直す。Step 1 の `D_{pq}`・`D_{kk}` の鎖は
-`sum_sigmaZ_sigmaZ_apply_of_ne`・`sum_sigmaZ_sigmaZ_apply_configBasisIso_self` に置いたが、まだ `B` の成分の証明からは使っていない）。
+（状態台帳の (cl2d)・(cl2e) で人手の鎖に組み直す。Step 1 の `D`・`X`・`B` の成分の鎖は置いてあり、
+`physicalV1halfC_apply_configBasisIso` を通していまの Step 3 の証明から使われているが、Step 3 はまだ実行列で計算している）。
 人手の「言い換えの形」（すべての `k, l` について `W_kl > 0`）は
 `ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries.lean` の `W_has_positive_entries_as_inclusion` で、
 人手の最後の段どおり `ι` の全射性で `W_has_positive_entries` から導く。
@@ -51,6 +55,8 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpPositive
 
 namespace Ising2D
 
@@ -58,12 +64,26 @@ open Matrix
 
 variable {M : ℕ}
 
-/-! ## 準備: `d(μ)` -/
+/-! ## 準備: `d(μ)`・`X`・`b(μ)` -/
 
 /-- 人手の準備の `d(μ) := ∑_{m=1}^{M_col} μ(m)μ(m+1) ∈ ℝ`（`def_finite_sum_of_real_numbers` の和）。
 人手の `μ(m+1)`（周期規約 `μ(M_col+1) := μ(1)`）は Lean の `μ (nextSite m)` である。 -/
 noncomputable def adjacentSpinProductSum (μ : SpinConf M) : ℝ :=
   ∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ)
+
+/-- 人手の準備の `X := (½K_1)_ℂ D`（`½K_1 ∈ ℝ` による `def_matrix_scalar_multiple` のスカラー倍、
+`D = ∑_m σ^z_mσ^z_{m+1}`）。人手の `½K_1` は、`physicalV1halfC` と同じく Lean の `K1 / 2` である。 -/
+noncomputable def halfK1SmulD (M : ℕ) (K1 : ℝ) : TensorPow M :=
+  ((K1 / 2 : ℝ) : ℂ) • ∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)
+
+/-- 人手の準備の `b(μ) := exp(½K_1 d(μ)) ∈ ℝ`（`exp` は実数の指数関数）。 -/
+noncomputable def squareRootV1DiagonalEntry (K1 : ℝ) (μ : SpinConf M) : ℝ :=
+  Real.exp ((K1 / 2) * adjacentSpinProductSum μ)
+
+/-- 人手の準備の `b(μ) > 0`（`real_exp_positive`）。 -/
+theorem squareRootV1DiagonalEntry_pos (K1 : ℝ) (μ : SpinConf M) :
+    squareRootV1DiagonalEntry K1 μ > 0 :=
+  real_exp_positive _                                         -- `real_exp_positive`
 
 /-! ## Step 1: `D` の成分 -/
 
@@ -104,22 +124,84 @@ theorem sum_sigmaZ_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) :
         (Complex.ofReal_sum _ _).symm                         -- `real_inclusion_preserves_finite_sum`
     _ = ((adjacentSpinProductSum μ : ℝ) : ℂ) := rfl           -- `d(μ)` の定義
 
-/-! ## Step 1: `V_1^{1/2}` は正の対角行列 -/
+/-! ## Step 1: `X` と `B := V_1^{1/2} = exp(X)` の成分 -/
 
-/-- **人手 Step 1**: `V_1^{1/2} = exp(½K_1D)`（`def_transfer_matrix_square_root`）の成分は、
-`μ = μ'` で `exp(½K_1∑_m μ(m)μ(m+1))`、それ以外で `0`。
+/-- **人手 Step 1 の `X_{pq}` の鎖**（`p ≠ q`）: `X_{pq} = 0_ℂ`。
 
-`V1PauliForm_apply_configBasisIso`（`sigma_z_diagonal_action` の `sum_sigmaZ_sigmaZ_eq_diagonal` で `K D` を対角行列に書き、
-`exp_of_diagonal_matrix` の `matrixExp_diagonal_apply` で成分を読む）を結合定数 `K_1/2` で引く。 -/
+`def_matrix_scalar_multiple` は具体版が無く `Matrix.smul_apply`、`complex_times_zero_is_zero` は `mul_zero`（既存の慣行どおり）。 -/
+theorem halfK1SmulD_apply_of_ne (K1 : ℝ) {p q : Conf M} (hpq : p ≠ q) :
+    halfK1SmulD M K1 p q = 0 :=
+  calc halfK1SmulD M K1 p q
+      = ((K1 / 2 : ℝ) : ℂ) * (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) p q := by
+        rw [halfK1SmulD, Matrix.smul_apply, smul_eq_mul]      -- `def_matrix_scalar_multiple`
+    _ = ((K1 / 2 : ℝ) : ℂ) * 0 := by
+        rw [sum_sigmaZ_sigmaZ_apply_of_ne hpq]                -- 上の `D_{pq} = 0_ℂ`
+    _ = 0 := mul_zero _                                       -- `complex_times_zero_is_zero`
+
+/-- 人手 Step 1 の「`X` は対角行列（`def_diagonal_matrix`）」: 非対角成分が `0_ℂ` なので、`X` は対角成分 `X_{kk}` の
+Lean の対角行列 `Matrix.diagonal` に等しい（成分ごとの比較 `Matrix.diagonal_apply` による読み替え。
+`exp_of_diagonal_matrix` の具体版 `matExp_diagonal` が `Matrix.diagonal` の形を受け取るため）。 -/
+theorem halfK1SmulD_eq_diagonal (K1 : ℝ) :
+    halfK1SmulD M K1 = Matrix.diagonal (fun I => halfK1SmulD M K1 I I) := by
+  ext p q
+  by_cases h : p = q
+  · subst h
+    rw [Matrix.diagonal_apply_eq]
+  · rw [Matrix.diagonal_apply_ne _ h, halfK1SmulD_apply_of_ne K1 h]
+
+/-- 人手 `def_transfer_matrix_square_root` の `B = V_1^{1/2} = exp(X)`（Lean の定義の展開）。 -/
+theorem physicalV1halfC_eq_matExp_halfK1SmulD (K1 : ℝ) :
+    physicalV1halfC M K1 = matExp (halfK1SmulD M K1) := rfl
+
+/-- **人手 Step 1 の `B_{pq}` の鎖**（`p ≠ q`）: `B_{pq} = (exp(X))_{pq} = 0_ℂ`。 -/
+theorem physicalV1halfC_apply_of_ne (K1 : ℝ) {p q : Conf M} (hpq : p ≠ q) :
+    physicalV1halfC M K1 p q = 0 :=
+  calc physicalV1halfC M K1 p q
+      = matExp (halfK1SmulD M K1) p q := by
+        rw [physicalV1halfC_eq_matExp_halfK1SmulD]            -- `def_transfer_matrix_square_root`
+    _ = 0 := by
+        rw [halfK1SmulD_eq_diagonal, matExp_diagonal, Matrix.diagonal_apply_ne _ hpq]
+                                                              -- `exp_of_diagonal_matrix` を対角行列 `X` へ
+
+/-- **人手 Step 1 の `B_{kk}` の鎖**（`k := ν(ι(μ))`）: `B_{kk} = b(μ)_ℂ`。
+
+`def_matrix_scalar_multiple` は具体版が無く `Matrix.smul_apply`、`complex_exp_of_real_argument` は具体版が無く
+`Complex.ofReal_exp`（既存の慣行どおり）。 -/
+theorem physicalV1halfC_apply_configBasisIso_self (K1 : ℝ) (μ : SpinConf M) :
+    physicalV1halfC M K1 (configBasisIso M μ) (configBasisIso M μ)
+      = ((squareRootV1DiagonalEntry K1 μ : ℝ) : ℂ) :=
+  calc physicalV1halfC M K1 (configBasisIso M μ) (configBasisIso M μ)
+      = matExp (halfK1SmulD M K1) (configBasisIso M μ) (configBasisIso M μ) := by
+        rw [physicalV1halfC_eq_matExp_halfK1SmulD]            -- `def_transfer_matrix_square_root`
+    _ = Complex.exp (halfK1SmulD M K1 (configBasisIso M μ) (configBasisIso M μ)) := by
+        conv_lhs => rw [halfK1SmulD_eq_diagonal, matExp_diagonal, Matrix.diagonal_apply_eq]
+                                                              -- `exp_of_diagonal_matrix` を対角行列 `X` へ
+    _ = Complex.exp (((K1 / 2 : ℝ) : ℂ)
+          * (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ)) := by
+        rw [halfK1SmulD, Matrix.smul_apply, smul_eq_mul]      -- `def_matrix_scalar_multiple`
+    _ = Complex.exp (((K1 / 2 : ℝ) : ℂ) * ((adjacentSpinProductSum μ : ℝ) : ℂ)) := by
+        rw [sum_sigmaZ_sigmaZ_apply_configBasisIso_self]      -- 上の `D_{kk} = d(μ)_ℂ`
+    _ = Complex.exp (((K1 / 2 * adjacentSpinProductSum μ : ℝ) : ℂ)) := by
+        rw [real_inclusion_mul]                               -- `real_inclusion_preserves_product`
+    _ = ((Real.exp (K1 / 2 * adjacentSpinProductSum μ) : ℝ) : ℂ) :=
+        (Complex.ofReal_exp _).symm                           -- `complex_exp_of_real_argument`
+    _ = ((squareRootV1DiagonalEntry K1 μ : ℝ) : ℂ) := rfl     -- `b(μ)` の定義
+
+/-- 人手 Step 1 の `B` の成分（`ι` による番号付け）を一つにまとめた形: `μ = μ'` で `b(μ)`、それ以外で `0`。
+
+`μ = μ'` は `B_{kk}` の鎖 `physicalV1halfC_apply_configBasisIso_self`、`μ ≠ μ'` は `ι` の単射性
+（`configBasisIso_eq_iff`）で `ι(μ) ≠ ι(μ')` とし、`B_{pq}` の鎖 `physicalV1halfC_apply_of_ne` を当てる。 -/
 theorem physicalV1halfC_apply_configBasisIso (K1 : ℝ) (μ μ' : SpinConf M) :
     physicalV1halfC M K1 (configBasisIso M μ) (configBasisIso M μ')
       = ((if μ = μ' then
             Real.exp ((K1 / 2) * ∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ))
           else 0 : ℝ) : ℂ) := by
-  rw [physicalV1halfC, V1PauliForm_apply_configBasisIso (K1 / 2)]
   by_cases h : μ = μ'
-  · rw [if_pos h, if_pos h, one_mul]
-  · rw [if_neg h, if_neg h, zero_mul]
+  · subst h
+    rw [if_pos rfl, physicalV1halfC_apply_configBasisIso_self]
+    rfl
+  · rw [if_neg h, Complex.ofReal_zero,
+      physicalV1halfC_apply_of_ne K1 (fun hc => h ((configBasisIso_eq_iff μ μ').mp hc))]
 
 /-- 人手 Step 1 の `V_1^{1/2}` の実成分（`ι` による番号付け）。
 `physicalV1halfC_apply_configBasisIso` の両辺を `physicalV1halfC_eq_map` で実成分の埋め込みと読み、
@@ -145,7 +227,7 @@ theorem physicalV1halfR_offDiag (K1 : ℝ) (i j : Conf M) (hij : i ≠ j) :
 theorem physicalV1halfR_apply_configBasisIso_self_pos (K1 : ℝ) (μ : SpinConf M) :
     0 < physicalV1halfR M K1 (configBasisIso M μ) (configBasisIso M μ) := by
   rw [physicalV1halfR_apply_configBasisIso, if_pos rfl]
-  exact Real.exp_pos _
+  exact real_exp_positive _                                   -- `real_exp_positive`
 
 /-! ## Step 2: `V_2` の成分は正 -/
 
