@@ -473,7 +473,7 @@ theorem exteriorCellSet_nonempty_edgeConnected
     (exteriorCells n row col).Nonempty ∧
       EdgeConnectedCellSet (exteriorCells n row col) := by
   have hband := walkSideExteriorBand_nonempty_edgeConnected n row col hn
-    hclosedRow hclosedCol hunit hdistinct hedgeSimple hbandLocal hbandBridge
+    hclosedRow hclosedCol hunit hdistinct hedgeSimple
   have hbandSubset : walkSideExteriorBand n row col ⊆ exteriorCells n row col := by
     rintro p ⟨k, hk, hp⟩
     change p ∉ oddRayInteriorCells n row col

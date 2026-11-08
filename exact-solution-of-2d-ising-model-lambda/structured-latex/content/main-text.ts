@@ -9639,7 +9639,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
                 paragraph(["一方、軌道の外では置換の値が変わらないので、"]),
                 displayMath(String.raw`\prod_{i\in\mathcal J\setminus C}A_{i,\tau(i)}
 =\prod_{i\in\mathcal J\setminus C}A_{i,\sigma(i)}
-\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)`),
                 paragraph(["内側と外側の積を、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " について"]),
                 displayMath(String.raw`P_\pi:=\prod_{i\in C}A_{i,\pi(i)},\qquad
 Q_\pi:=\prod_{i\in\mathcal J\setminus C}A_{i,\pi(i)}
@@ -66322,6 +66322,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     lean: [
                       "Ising2DLambda.KacWard.surroundingExteriorCells_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected",
+                      "Ising2DLambda.KacWard.walkSideExteriorBandFromWalk_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected_from_necSuf",
                     ],

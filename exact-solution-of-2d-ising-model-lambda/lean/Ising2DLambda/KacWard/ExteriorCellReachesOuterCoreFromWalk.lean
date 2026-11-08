@@ -113,6 +113,27 @@ theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
     refine ⟨hinside ▸ hpOutside, i, ?_⟩
     simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hpCorner
 
+/-- 実際の零巻き付き閉歩道に沿う外側帯は空でなく辺連結である。 -/
+theorem walkSideExteriorBandFromWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    (walkSideExteriorBandFromWalk γ hγ hh hv).Nonempty ∧
+      EdgeConnectedCellSet (walkSideExteriorBandFromWalk γ hγ hh hv) := by
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
+  have hband := walkSideExteriorBand_nonempty_edgeConnected (m + 1) row col
+    (by omega) hclosed.1 hclosed.2
+    (walkSideInteriorBandFromWalk_coordinate_unit γ)
+    (walkSideInteriorBandFromWalk_coordinate_distinct γ hdistinct)
+    (walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one γ hγ hh hv hdistinct)
+  rw [walkSideExteriorBandFromWalk_eq_coordinateBand γ hγ hh hv]
+  exact hband
+
 /-- The outer rectangle and exterior band of the actual lifted walk intersect. -/
 theorem outsideBoundingRectangle_inter_walkSideExteriorBandFromWalk {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)

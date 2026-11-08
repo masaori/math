@@ -296,8 +296,52 @@ theorem walkSideExteriorBand_nonempty_edgeConnected_local
       p ∈ surroundingExteriorCells n row col (k + 1)) :
     (walkSideExteriorBand n row col).Nonempty ∧
       EdgeConnectedCellSet (walkSideExteriorBand n row col) := by
-  exact finite_chain_union_connected_necSuf CellEdgeAdjacent cellEdgeAdjacent_symmetric
-    n (surroundingExteriorCells n row col) hn hnonempty hlocal hbridge
+  let A := surroundingExteriorCells n row col
+  let band := walkSideExteriorBand n row col
+  have hsubset (k : ℕ) (hk : k < n) : A k ⊆ band := by
+    intro p hp
+    exact ⟨k, hk, hp⟩
+  obtain ⟨base, hbase⟩ := hnonempty 0 hn
+  have hbaseBand : base ∈ band := hsubset 0 hn hbase
+  let step := fun p q => p ∈ band ∧ q ∈ band ∧ CellEdgeAdjacent p q
+  have htoBase : ∀ k < n, ∀ ⦃p⦄, p ∈ A k →
+      Relation.ReflTransGen step p base := by
+    intro k
+    induction k with
+    | zero =>
+        intro hk p hp
+        exact (Relation.ReflTransGen.mono
+          (r := fun a b => a ∈ A 0 ∧ b ∈ A 0 ∧ CellEdgeAdjacent a b)
+          (fun (a b : ℤ × ℤ) h =>
+            ⟨hsubset 0 hk h.1, hsubset 0 hk h.2.1, h.2.2⟩) p base)
+          (hlocal 0 hk hp hbase)
+    | succ k ih =>
+        intro hk p hp
+        obtain ⟨z, hzPrev, hzNext⟩ := hbridge k hk
+        have hlift :
+            (fun a b => a ∈ A (k + 1) ∧ b ∈ A (k + 1) ∧ CellEdgeAdjacent a b) ≤
+              step := by
+          intro a b h
+          exact ⟨hsubset (k + 1) hk h.1, hsubset (k + 1) hk h.2.1, h.2.2⟩
+        have hpz := (Relation.ReflTransGen.mono
+          (r := fun a b => a ∈ A (k + 1) ∧ b ∈ A (k + 1) ∧ CellEdgeAdjacent a b)
+          hlift p z)
+          (hlocal (k + 1) hk hp hzNext)
+        exact hpz.trans (ih (Nat.lt_of_succ_lt hk) hzPrev)
+  refine ⟨⟨base, hbaseBand⟩, ?_⟩
+  intro p hp q hq
+  obtain ⟨i, hi, hpi⟩ := hp
+  obtain ⟨j, hj, hqj⟩ := hq
+  have hpb := htoBase i hi hpi
+  have hqb := htoBase j hj hqj
+  have hbqSwap : Relation.ReflTransGen (Function.swap step) base q :=
+    (Relation.ReflTransGen.swap (r := step) base q) hqb
+  have hstepSwap : Function.swap step ≤ step := by
+    intro a b hab
+    exact ⟨hab.2.1, hab.1, cellEdgeAdjacent_symmetric hab.2.2⟩
+  have hbq : Relation.ReflTransGen step base q :=
+    (Relation.ReflTransGen.mono (r := Function.swap step) hstepSwap base q) hbqSwap
+  exact hpb.trans hbq
 
 /-- `claim_walk_side_exterior_band_edge_connected` の具体版。 -/
 theorem walkSideExteriorBand_nonempty_edgeConnected
@@ -310,11 +354,7 @@ theorem walkSideExteriorBand_nonempty_edgeConnected
       verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
       verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hlocal : ∀ k < n, EdgeConnectedCellSet (surroundingExteriorCells n row col k))
-    (hbridge : ∀ k, k + 1 < n → ∃ p,
-      p ∈ surroundingExteriorCells n row col k ∧
-      p ∈ surroundingExteriorCells n row col (k + 1)) :
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
     (walkSideExteriorBand n row col).Nonempty ∧
       EdgeConnectedCellSet (walkSideExteriorBand n row col) := by
   have hnonempty : ∀ k, k < n →
@@ -325,6 +365,17 @@ theorem walkSideExteriorBand_nonempty_edgeConnected
       (hedgeSimple k hk).1 (hedgeSimple k hk).2.1
       (hedgeSimple k hk).2.2.1 (hedgeSimple k hk).2.2.2
     exact surroundingExteriorCells_nonempty_of_parityArcs n row col k hshape
+  have hlocal : ∀ k < n,
+      EdgeConnectedCellSet (surroundingExteriorCells n row col k) := by
+    intro k hk
+    exact surroundingExteriorCells_edgeConnected n row col k hk
+      hclosedRow hclosedCol hunit hdistinct (hedgeSimple k hk)
+  have hbridge : ∀ k, k + 1 < n → ∃ p,
+      p ∈ surroundingExteriorCells n row col k ∧
+      p ∈ surroundingExteriorCells n row col (k + 1) := by
+    intro k hk
+    exact consecutive_surroundingExteriorCells_intersect n row col k (by omega)
+      hclosedRow hclosedCol hunit (hedgeSimple k (by omega))
   exact walkSideExteriorBand_nonempty_edgeConnected_local n row col hn
     hnonempty hlocal hbridge
 
