@@ -67357,9 +67357,67 @@ c&\in C_Z
 &&\bigl(\because\ \text{直積の定義}\bigr)
 \end{aligned}`),
                           paragraph([
-                            "したがって ", math(String.raw`T_Z\subset R_Z\times C_Z`),
-                            " である。右辺は有限集合の直積なので有限であり、その部分集合 ",
+                            "上の任意元の判定から",
+                          ]),
+                          displayMath(String.raw`T_Z\subset R_Z\times C_Z\qquad\bigl(\because\ (r,c)\in T_Z\Longrightarrow(r,c)\in R_Z\times C_Z\bigr)`),
+                          paragraph([
+                            "右辺は有限集合の直積なので有限であり、その部分集合 ",
                             math(String.raw`T_Z`), " も有限である。実数体も複素数体も使わない。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_one_boundary",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さ一のセル集合の境界は偶辺集合である" },
+                        labels: ["claim_plane_dual_ray_height_one_boundary"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeHeightOne_boundary",
+                          "Ising2DLambda.NecSuf.KacWard.binaryHeight_boundary",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-one-boundary"],
+                        statement: [
+                          paragraph([
+                            "各頂点に接する辺の本数が偶数である有限格子辺集合 ", math(String.raw`Z`),
+                            " を取る。高さ一のセルの有限集合 ",
+                            math(String.raw`T_Z:=\{(r,c)\in\mathbb Z\times\mathbb Z\mid h_Z(r,c)=1\}`),
+                            "（", ref("claim_plane_dual_ray_height_one_cells_finite"), "）の境界辺集合は ",
+                            math(String.raw`Z`), " に等しい。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T_Z)=Z`),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_one_cells_finite"), " により ", math(String.raw`T_Z`),
+                            " は有限なので、その境界は ", ref("def_plane_cell_boundary_edge_set"),
+                            " で定まる。任意の ", math(String.raw`r,c\in\mathbb Z`), " を取る。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+v_{r,c}\in\mathcal B_{\square}(T_Z)
+&\Longleftrightarrow\bigl((r,c)\in T_Z\bigr)\mathbin{\mathrm{xor}}\bigl((r,c-1)\in T_Z\bigr)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)\\
+&\Longleftrightarrow\bigl(h_Z(r,c)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r,c-1)=1\bigr)
+&&\bigl(\because\ T_Z\text{ の定義}\bigr)\\
+&\Longleftrightarrow v_{r,c}\in Z
+&&\bigl(\because\ \blkref{claim_plane_height_one_vertical_edge}\bigr)
+\end{aligned}`),
+                          displayMath(String.raw`\begin{aligned}
+e_{r,c}\in\mathcal B_{\square}(T_Z)
+&\Longleftrightarrow\bigl((r,c)\in T_Z\bigr)\mathbin{\mathrm{xor}}\bigl((r-1,c)\in T_Z\bigr)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)\\
+&\Longleftrightarrow\bigl(h_Z(r,c)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r-1,c)=1\bigr)
+&&\bigl(\because\ T_Z\text{ の定義}\bigr)\\
+&\Longleftrightarrow e_{r,c}\in Z
+&&\bigl(\because\ \blkref{claim_plane_height_one_horizontal_edge}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "格子辺は縦辺 ", math(String.raw`v_{r,c}`), " または横辺 ",
+                            math(String.raw`e_{r,c}`), " のいずれかなので、両方向の所属判定から ",
+                            math(String.raw`\mathcal B_{\square}(T_Z)=Z`), " である。",
                           ]),
                         ],
                       },

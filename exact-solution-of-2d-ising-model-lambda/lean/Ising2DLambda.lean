@@ -8,6 +8,8 @@ import Ising2DLambda.KacWard.PlaneDualRayHeightColumnSupport
 import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeightColumnSupport
 import Ising2DLambda.KacWard.PlaneDualRayHeightColumnSupportFromNecSuf
 import Ising2DLambda.KacWard.PlaneDualRayHeightOneCellsFinite
+import Ising2DLambda.KacWard.PlaneHeightOneBoundary
+import Ising2DLambda.NecSuf.KacWard.PlaneHeightOneBoundary
 import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeightOneCellsFinite
 import Ising2DLambda.KacWard.PlaneDualRayHeightOneCellsFiniteFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.FiniteRayRightBound

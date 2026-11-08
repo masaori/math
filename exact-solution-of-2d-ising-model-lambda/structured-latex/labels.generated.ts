@@ -359,6 +359,7 @@ export const ALL_LABELS = [
   "claim_plane_dual_ray_height_finite_column_support",
   "claim_plane_dual_ray_height_finite_row_support",
   "claim_plane_dual_ray_height_horizontal_difference",
+  "claim_plane_dual_ray_height_one_boundary",
   "claim_plane_dual_ray_height_one_cells_finite",
   "claim_plane_dual_ray_height_vertical_difference",
   "claim_plane_dual_ray_height_zero_left",
