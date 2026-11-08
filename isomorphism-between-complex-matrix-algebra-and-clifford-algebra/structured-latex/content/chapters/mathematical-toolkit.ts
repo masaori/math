@@ -6948,4 +6948,169 @@ L^{b}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_homomorphisms_agreeing_on_generators_are_equal",
+    kind: "claim",
+    title: { text: "生成元で一致する二つの準同型は等しい" },
+    labels: ["claim_homomorphisms_agreeing_on_generators_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " と ",
+        math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）、",
+        math(String.raw`\varphi:A\to B`),
+        " と ",
+        math(String.raw`\psi:A\to B`),
+        " を ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）、",
+        math(String.raw`X`),
+        " を ",
+        math(String.raw`A`),
+        " を生成する ",
+        math(String.raw`A`),
+        " の部分集合（",
+        ref("def_subset_generates_algebra"),
+        "）とする。",
+        math(String.raw`X`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`\varphi(x)=\psi(x)`),
+        " が成り立つとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a`),
+        " について ",
+        math(String.raw`\varphi(a)=\psi(a)`),
+        " が成り立つ。すなわち、写像として ",
+        math(String.raw`\varphi=\psi`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`A`),
+        " の部分集合 ",
+        math(String.raw`E`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`E:=\{\,a\in A:\ \varphi(a)=\psi(a)\,\}.`),
+      paragraph([
+        math(String.raw`E`),
+        " が ",
+        math(String.raw`A`),
+        " の部分代数（",
+        ref("def_subalgebra"),
+        "）の四条件を満たすことを示す。以下、",
+        math(String.raw`x,y`),
+        " は ",
+        math(String.raw`E`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。",
+        math(String.raw`x\in E`),
+        " と ",
+        math(String.raw`y\in E`),
+        " は ",
+        math(String.raw`E`),
+        " の定義により ",
+        math(String.raw`\varphi(x)=\psi(x)`),
+        " と ",
+        math(String.raw`\varphi(y)=\psi(y)`),
+        " のことである。",
+      ]),
+      paragraph(["乗法の単位元を含むこと（",
+        math(String.raw`1_A\in E`),
+        "）は次の等式による。"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(1_A)
+&=1_B
+&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\psi(1_A)
+&&\left(\because\ \psi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+\end{aligned}`),
+      paragraph(["加法で閉じていること（",
+        math(String.raw`x+_A y\in E`),
+        "）は次の等式による。"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(x+_A y)
+&=\varphi(x)+_B\varphi(y)
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\psi(x)+_B\varphi(y)
+&&\left(\because\ x\in E\right)\\
+&=\psi(x)+_B\psi(y)
+&&\left(\because\ y\in E\right)\\
+&=\psi(x+_A y)
+&&\left(\because\ \psi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+\end{aligned}`),
+      paragraph(["乗法で閉じていること（",
+        math(String.raw`x\cdot_A y\in E`),
+        "）は次の等式による。"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(x\cdot_A y)
+&=\varphi(x)\cdot_B\varphi(y)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\psi(x)\cdot_B\varphi(y)
+&&\left(\because\ x\in E\right)\\
+&=\psi(x)\cdot_B\psi(y)
+&&\left(\because\ y\in E\right)\\
+&=\psi(x\cdot_A y)
+&&\left(\because\ \psi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍で閉じていること（",
+        math(String.raw`\lambda\ast_A x\in E`),
+        "）は次の等式による。"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\lambda\ast_A x)
+&=\lambda\ast_B\varphi(x)
+&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\lambda\ast_B\psi(x)
+&&\left(\because\ x\in E\right)\\
+&=\psi(\lambda\ast_A x)
+&&\left(\because\ \psi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+\end{aligned}`),
+      paragraph([
+        "四条件が満たされたので、",
+        math(String.raw`E`),
+        " は ",
+        math(String.raw`A`),
+        " の部分代数である（",
+        ref("def_subalgebra"),
+        "）。仮定により ",
+        math(String.raw`X`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`\varphi(x)=\psi(x)`),
+        " なので、",
+        math(String.raw`X\subseteq E`),
+        " である。",
+        math(String.raw`X`),
+        " は ",
+        math(String.raw`A`),
+        " を生成するので、",
+        math(String.raw`E=A`),
+        " である（",
+        ref("def_subset_generates_algebra"),
+        "）。したがって ",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a`),
+        " は ",
+        math(String.raw`E`),
+        " の元であり、",
+        math(String.raw`E`),
+        " の定義により ",
+        math(String.raw`\varphi(a)=\psi(a)`),
+        " である。",
+      ]),
+    ],
+  },
 ]);
