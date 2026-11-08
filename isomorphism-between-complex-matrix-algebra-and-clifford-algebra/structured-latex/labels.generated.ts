@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "def_subset_generates_algebra",
   "def_sum_over_finite_set",
   "def_two_sided_ideal",
+  "def_two_sided_ideal_generated_by_subset",
   "def_underlying_ring_and_vector_space_of_algebra",
   "def_unital_ring",
 ] as const
