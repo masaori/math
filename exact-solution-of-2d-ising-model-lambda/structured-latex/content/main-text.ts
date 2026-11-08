@@ -9617,7 +9617,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
 \end{aligned}`),
                 paragraph(["なので、この二つの制限は互いに逆の全単射である。選んだ反転と不変部分集合上の反転の接続は、"]),
                 displayMath(String.raw`\tau=\rho_C(\sigma)
-\qquad\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr)`),
                 paragraph(["内側の積では、上で示した全単射によって ", math(String.raw`i=\sigma(j)`), " と再添字付けする。"]),
                 displayMath(String.raw`\begin{aligned}
 \prod_{i\in C}A_{i,\tau(i)}
@@ -66490,6 +66490,8 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                     lean: [
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_edgeConnected",
+                      "Ising2DLambda.KacWard.closedLift_boundingRectangle_endpoints",
+                      "Ising2DLambda.KacWard.exteriorCellOfWalk_boundingRectangle_endpoints",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],

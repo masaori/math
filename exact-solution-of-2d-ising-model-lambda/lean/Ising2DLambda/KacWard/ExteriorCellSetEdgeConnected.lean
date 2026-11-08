@@ -20,6 +20,42 @@ def outsideBoundingRectangle
     (rMin rMax cMin cMax : ℤ) : Set (ℤ × ℤ) :=
   {p | p.1 < rMin ∨ rMax ≤ p.1 ∨ p.2 < cMin ∨ cMax ≤ p.2}
 
+/-- 閉じた持ち上げの有限個の頂点から外接長方形の四端を選ぶ。 -/
+theorem closedLift_boundingRectangle_endpoints
+    (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
+    (hclosedRow : row n = row 0) :
+    ∃ rMin rMax cMin cMax : ℤ,
+      (∀ k ≤ n, rMin ≤ row k ∧ row k ≤ rMax) ∧
+      (∀ k < n, cMin ≤ col k ∧ col k ≤ cMax) ∧
+      (∃ k < n, col k = cMax) := by
+  let rows := (Finset.range n).image row
+  let cols := (Finset.range n).image col
+  have hrows : rows.Nonempty := Finset.image_nonempty.mpr
+    ⟨0, Finset.mem_range.mpr hn⟩
+  have hcols : cols.Nonempty := Finset.image_nonempty.mpr
+    ⟨0, Finset.mem_range.mpr hn⟩
+  refine ⟨rows.min' hrows, rows.max' hrows,
+    cols.min' hcols, cols.max' hcols, ?_, ?_, ?_⟩
+  · intro k hk
+    by_cases hkn : k < n
+    · have hmem : row k ∈ rows := Finset.mem_image.mpr
+        ⟨k, Finset.mem_range.mpr hkn, rfl⟩
+      exact ⟨Finset.min'_le rows _ hmem, Finset.le_max' rows _ hmem⟩
+    · have hzero : row k = row 0 := by
+        have hkeq : k = n := by omega
+        rw [hkeq, hclosedRow]
+      have hmem : row 0 ∈ rows := Finset.mem_image.mpr
+        ⟨0, Finset.mem_range.mpr hn, rfl⟩
+      rw [hzero]
+      exact ⟨Finset.min'_le rows _ hmem, Finset.le_max' rows _ hmem⟩
+  · intro k hk
+    have hmem : col k ∈ cols := Finset.mem_image.mpr
+      ⟨k, Finset.mem_range.mpr hk, rfl⟩
+    exact ⟨Finset.min'_le cols _ hmem, Finset.le_max' cols _ hmem⟩
+  · have hmem := Finset.max'_mem cols hcols
+    obtain ⟨k, hk, hcol⟩ := Finset.mem_image.mp hmem
+    exact ⟨k, Finset.mem_range.mp hk, hcol⟩
+
 /-- 横の有限区間に奇数回通過した縦辺がなければ、外側セルのまま進める。 -/
 theorem exteriorCells_horizontalPath_of_even_vertical_edges
     (n : ℕ) (row col : ℕ → ℤ) (r c d : ℤ)

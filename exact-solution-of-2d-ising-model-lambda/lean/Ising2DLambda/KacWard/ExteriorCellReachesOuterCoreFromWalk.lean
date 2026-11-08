@@ -3,6 +3,29 @@ import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
 
 namespace Ising2DLambda.KacWard
 
+/-- 実際の零巻き付き閉歩道の平面持ち上げから四端と最大列の添字を選ぶ。 -/
+theorem exteriorCellOfWalk_boundingRectangle_endpoints {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+    let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+    ∃ rMin rMax cMin cMax : ℤ,
+      (∀ k ≤ m + 1, rMin ≤ row k ∧ row k ≤ rMax) ∧
+      (∀ k < m + 1, cMin ≤ col k ∧ col k ≤ cMax) ∧
+      (∃ k < m + 1, col k = cMax) := by
+  dsimp only
+  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
+  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
+  have hclosedRow : row (m + 1) = row 0 := by
+    have h := planeLift_endpoint_winding γ hγ
+    rw [hv, hh] at h
+    have h' := congrArg Prod.fst h
+    simpa [row] using h'
+  exact closedLift_boundingRectangle_endpoints (m + 1) row col
+    (by omega) hclosedRow
+
 /-- The exterior band of a closed walk agrees with the band of its integer-indexed lift. -/
 theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L)
