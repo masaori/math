@@ -806,6 +806,7 @@ targets=(
   Ising2D.epsilon_mulVec_cvec_evenUnit
   Ising2D.epsilonR_mulVec_evenUnit
   Ising2D.epsilonR_zero_mulVec_evenUnit
+  Ising2D.vecNorm_sq_evenUnit_succ
   Ising2D.vecNormSq_evenUnit
   Ising2D.evenSectorSet_epsilonR_nonempty
   Ising2D.c_plus_le_c
@@ -2586,6 +2587,12 @@ targets=(
   Ising2D.finite_product_of_constant_real_is_power
   "Ising2D.NecSuf.finProdLeft_const_eq_pow'"
   Ising2D.finite_product_of_constant_real_is_power_of_necSuf
+  Ising2D.product_of_real_powers_is_power_of_product
+  "Ising2D.NecSuf.pow_mul_pow_eq_mul_pow'"
+  Ising2D.product_of_real_powers_is_power_of_product_of_necSuf
+  Ising2D.power_of_real_one_is_one
+  "Ising2D.NecSuf.one_pow'"
+  Ising2D.power_of_real_one_is_one_of_necSuf
   Ising2D.finite_product_of_real_products
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf

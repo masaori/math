@@ -1745,6 +1745,120 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_product_of_real_powers_is_power_of_product",
+    kind: "claim",
+    title: { text: "同じ指数の実数の冪の積は積の冪に等しい" },
+    labels: ["product_of_real_powers_is_power_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        "、",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " とする。冪は ",
+        ref("def_power_of_real_number"),
+        " の冪、積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`a^m\, b^m = (ab)^m`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a^0\, b^0
+&= 1\cdot 1
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to a,\ a \to b)\ \text{を 2 箇所へ同時に}\bigr)\\
+&= 1
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&= (ab)^0
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to ab)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a^{m+1}\, b^{m+1}
+&= \left(a^m\, a\right)\left(b^m\, b\right)
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to a,\ a \to b)\ \text{を 2 箇所へ同時に}\bigr)\\
+&= \left(a^m\, b^m\right)\left(ab\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (pq)(rs) = (pr)(qs)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&= (ab)^m\,(ab)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= (ab)^{m+1}
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to ab)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖が ((1/√2)^{M_col})^2 = 2^{-M_col} と、本文に定義の無い実数の負の整数の冪と「指数法則」を名前だけで使っていたので、((1/√2)^{M_col})^2 から 1 までを一ステップ一定理でつなぐために足した。Lean は Ising2D.product_of_real_powers_is_power_of_product（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimProductOfRealPowersIsPowerOfProduct.lean）。数値検証: sagemath/check/product_of_real_powers_is_power_of_product/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（finite_product_of_constant_real_is_power と同じ扱い）。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_power_of_real_one_is_one",
+    kind: "claim",
+    title: { text: "実数の 1 の冪は 1" },
+    labels: ["power_of_real_one_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " とする。",
+        math(String.raw`1 \in \mathbb{R}`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の単位元、冪は ",
+        ref("def_power_of_real_number"),
+        " の冪である。このとき",
+      ]),
+      displayMath(String.raw`1^m = 1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1^0
+&= 1
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to 1)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1^{m+1}
+&= 1^m\cdot 1
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to 1)\bigr)\\
+&= 1\cdot 1
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= 1
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖の最後の行 1^{M_col} = 1 を引けるよう足した。Lean は Ising2D.power_of_real_one_is_one（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimPowerOfRealOneIsOne.lean）。数値検証: sagemath/check/power_of_real_one_is_one/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（finite_product_of_constant_real_is_power と同じ扱い）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inclusion_preserves_finite_product",
     kind: "claim",
     title: { text: "実数の有限積の包含は包含の有限積に等しい" },

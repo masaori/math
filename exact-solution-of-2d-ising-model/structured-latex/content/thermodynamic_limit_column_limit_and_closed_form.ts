@@ -2215,22 +2215,62 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "）より ",
         math(String.raw`\varepsilon_{\mathbb{R}}x^{(+)} = x^{(+)}`),
         " である。さらに ",
-        math(String.raw`x^{(+)}`),
+        ref("def_kronecker"),
         " の ",
-        math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 個の成分はすべて ",
-        math(String.raw`\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}`),
-        " なので",
+        math(String.raw`\nu`),
+        " は全単射なので、各 ",
+        math(String.raw`i \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について ",
+        math(String.raw`i = \nu(I)`),
+        " となる ",
+        math(String.raw`I \in \mathcal{I}_{M_{\mathrm{col}}}`),
+        " があり、上の各成分の値の鎖より ",
+        math(String.raw`\left(x^{(+)}\right)_i = \left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}`),
+        " である（以下この等式を「各成分の値」と呼ぶ）。",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        " であり、",
+        math(String.raw`\sqrt{2} := \sqrt{2_{\mathbb{R}}}^{(\mathbb{R}_{\ge 0})}`),
+        "（",
+        ref("definition_of_sqrt_r_positive"),
+        "）、二乗は ",
+        math(String.raw`\mathbb{R}`),
+        " の積 ",
+        math(String.raw`r^2 := r\,r`),
+        " である。このとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left\|x^{(+)}\right\|^2
-&= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
-   \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルムの定義と各成分の値}) \\
-&= 2^{M_{\mathrm{col}}}\cdot 2^{-M_{\mathrm{col}}}
-   \quad (\because \#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}\ \text{と}\ \left(\left(\tfrac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2 = 2^{-M_{\mathrm{col}}}) \\
+&= \left(\sqrt{\sum_{i=1}^{2^{M_{\mathrm{col}}}} \left|\left(x^{(+)}\right)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}\right)^2
+   \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルム}\ (K \to \mathbb{R},\ d \to 2^{M_{\mathrm{col}}},\ w \to x^{(+)})) \\
+&= \sum_{i=1}^{2^{M_{\mathrm{col}}}} \left|\left(x^{(+)}\right)_i\right|^2
+   \quad (\because \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ \text{（根号の中は非負実数の有限和）}) \\
+&= \sum_{i=1}^{2^{M_{\mathrm{col}}}} \left(\left(x^{(+)}\right)_i\right)^2
+   \quad (\because \blkref{square_of_real_absolute_value}\ (q \to (x^{(+)})_i)\ \text{を}\ 2^{M_{\mathrm{col}}}\ \text{個の項へ同時に適用}) \\
+&= \sum_{i=1}^{2^{M_{\mathrm{col}}}} \left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
+   \quad (\because \text{各成分の値を}\ 2^{M_{\mathrm{col}}}\ \text{個の項へ同時に適用}) \\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\!\left(2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}\right)\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
+   \quad (\because \blkref{finite_sum_of_constant_real_number}\ (m \to 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}},\ r \to ((1/\sqrt{2})^{M_{\mathrm{col}}})^2)) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
+   \quad (\because \blkref{inclusion_zz_to_rr_of_power_of_two}\ (M \to M_{\mathrm{col}})) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)
+   \quad (\because r^2 := r\,r\ (r \to (1/\sqrt{2})^{M_{\mathrm{col}}})) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}
+   \quad (\because \blkref{product_of_real_powers_is_power_of_product}\ (a, b \to 1/\sqrt{2},\ m \to M_{\mathrm{col}})) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}\,\sqrt{2}}\right)^{M_{\mathrm{col}}}
+   \quad (\because \mathbb{R}\ \text{で}\ \tfrac{1}{p}\cdot\tfrac{1}{q} = \tfrac{1}{pq}\ (p, q \to \sqrt{2} \neq 0)) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\left(\sqrt{2}\right)^2}\right)^{M_{\mathrm{col}}}
+   \quad (\because r^2 := r\,r\ (r \to \sqrt{2})\ \text{を右辺から左辺へ}) \\
+&= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{2_{\mathbb{R}}}\right)^{M_{\mathrm{col}}}
+   \quad (\because \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to 2_{\mathbb{R}} \in \mathbb{R}_{\ge 0})) \\
+&= \left(2_{\mathbb{R}}\cdot\frac{1}{2_{\mathbb{R}}}\right)^{M_{\mathrm{col}}}
+   \quad (\because \blkref{product_of_real_powers_is_power_of_product}\ (a \to 2_{\mathbb{R}},\ b \to 1/2_{\mathbb{R}},\ m \to M_{\mathrm{col}})) \\
+&= 1^{M_{\mathrm{col}}}
+   \quad (\because \mathbb{R}\ \text{で}\ p\cdot\tfrac{1}{p} = 1\ (p \to 2_{\mathbb{R}} \neq 0)) \\
 &= 1
-   \quad (\because \text{指数法則})
+   \quad (\because \blkref{power_of_real_one_is_one}\ (m \to M_{\mathrm{col}}))
 \end{aligned}`,
       ),
       paragraph([
@@ -2259,6 +2299,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の値 x^⊤Wx は複素行列 W の二次形式で、def_rayleigh_sup の 𝓡（W_ℝ の実数の二次形式 def_real_bilinear_value）と式が違い、𝓡_+ ⊆ 𝓡 も c_+(M_col) が実数の上限であることも型が合っていなかった。𝓡_+ の値を def_W_real の W_ℝ の x^⊤W_ℝx（def_real_bilinear_value）にし、有界性の評価の和を Σ_iΣ_j|(W_ℝ)_ij| に、空でないことの元を (x^{(+)})^⊤W_ℝx^{(+)} にした。値は不変（W_ℝ の成分の包含が W の成分）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の条件 x ∈ 𝓕^{(+)} ∩ ℝ^{2^{M_col}} は実数のベクトルを複素数のベクトルの集合 𝓕^{(+)} の元とみなす同一視だったので、def_epsilon_real の ε_ℝ で x ∈ ℝ^{2^{M_col}}、ε_ℝx = x と述べ直した（epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ι(x) ∈ 𝓕^{(+)} と同値）。a_+ を ℝ^2 の元、x^{(+)} を成分 Π_k (a_+)_{i_k}（実数の有限積）で定め、def_kronecker (1) が複素数のベクトルのクロネッカー積だけを定めるので、b_+ := ι^2(a_+) を置いて ι(x^{(+)}) = b_+⊠⋯⊠b_+ を成分の 5 行の鎖（real_inclusion_preserves_finite_product を引く）で示し、ει(x^{(+)}) = ι(x^{(+)}) の鎖を b_+ で書き、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ε_ℝx^{(+)} = x^{(+)} へ戻した。σ^x b_+ = b_+ を 3 行の鎖に開いた。M_col ∈ ℤ_{≥1} を明記した。ノルムの鎖と上限の存在は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: x^{(+)} の各成分の値を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col} = 2^{-M_col/2}」という散文の 1 文から、x^{(+)} の定義 → a_+ の定義 → finite_product_of_constant_real_is_power の 3 行の鎖にした。値の書き方を (1/√2)^{M_col} に揃え、本文に定義の無い 2^{-M_col/2}（実数の非整数の冪）を消した（ノルムの鎖の 1 行目もこの値で書いた）。ノルムの鎖の 2・3 行目は内容を変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の 3 行（各成分の値を使った 1 行目、「#𝓘 = 2^{M_col} と ((1/√2)^{M_col})^2 = 2^{-M_col}」の 2 行目、「指数法則」の 3 行目）を、def_matrix_norm → definition_of_sqrt_r_positive → square_of_real_absolute_value → 各成分の値 → finite_sum_of_constant_real_number → inclusion_zz_to_rr_of_power_of_two → 二乗の定義 → product_of_real_powers_is_power_of_product → ℝ の四則演算 → 二乗の定義 → definition_of_sqrt_r_positive → product_of_real_powers_is_power_of_product → ℝ の四則演算 → power_of_real_one_is_one の 14 行の鎖にした。本文に定義の無い 2^{-M_col}（実数の負の整数の冪）と名前だけの「指数法則」を消した。和の添字を 𝓘_{M_col} から def_matrix_norm の i ∈ {1,…,2^{M_col}} に戻し、ν が全単射であることで各成分の値を各 i へ渡した。値は不変。",
       ],
     },
   },

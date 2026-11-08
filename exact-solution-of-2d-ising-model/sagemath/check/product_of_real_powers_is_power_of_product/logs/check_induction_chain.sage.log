@@ -1,0 +1,3 @@
+等号 1482 個を確かめた（38 組の (a, b)、m = 0 の 3 行と帰納法の段 m → m+1（m = 0,…,8）の 4 行）
+negative controls (broken lines detected): 36
+RESULT: PASS
