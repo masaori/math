@@ -98,13 +98,24 @@ export default defineBlocks([
         " について",
       ]),
       displayMath(String.raw`a^2 = b^2 \iff a = b`),
+      paragraph([
+        "が成り立つ。二乗 ",
+        math(String.raw`a^2`),
+        "・",
+        math(String.raw`b^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
+      ]),
     ],
     proof: [
       paragraph(["両方向を別々に示すので、ここは一続きの式にしない。"]),
       displayMath(String.raw`\begin{aligned}
 a=b
 &\Longrightarrow a^2=b^2
-&&(\because\ \text{等しい実数を二乗しても等しい})
+&&(\because\ a^2\ \text{の}\ a\ \text{へ}\ a = b\ \text{を代入する})
 \end{aligned}`),
       paragraph([
         "逆に ",
@@ -113,10 +124,22 @@ a=b
       ]),
       displayMath(String.raw`\begin{aligned}
 (a - b)(a + b)
+&= (a - b)\,a + (a - b)\,b
+&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&= (a\,a - b\,a) + (a\,b - b\,b)
+&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&= (a\,a - a\,b) + (a\,b - b\,b)
+&&(\because\ \mathbb{R}\ \text{の乗法の交換法則}\ b\,a = a\,b)\\
+&= a\,a - b\,b
+&&(\because\ -a\,b\ \text{と}\ a\,b\ \text{が打ち消し合う})\\
+&= a^2 - b\,b
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to a)\ \text{を右辺から左辺へ}\bigr)\\
 &= a^2 - b^2
-&&(\because\ \text{2 乗の差の因数分解})\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&= b^2 - b^2
+&&(\because\ a^2 = b^2)\\
 &= 0
-&&(\because\ a^2 = b^2)
+&&(\because\ b^2\ \text{は}\ \mathbb{R}\ \text{の加法で自身の逆元と足すと}\ 0)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 a>0\ \land\ b>0
@@ -135,6 +158,7 @@ a>0\ \land\ b>0
       status: "added",
       notes: [
         "順序体の性質であり双曲線関数とは無関係なので、双曲線関数の基本性質 (4) から独立させた。非負実数の平方根の存在と一意性がこれを引くことで、平方根→行列ノルム→行列の exp→数の exp→双曲線関数→平方根という依存の循環を断つ。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の二乗 a^2・b^2 が def_power_of_real_number の冪（m = 2）か積かを書いていなかったので、冪と明記した。名前だけの根拠「等しい実数を二乗しても等しい」を代入の行に、「2 乗の差の因数分解」の 1 行を、分配法則 2 回・乗法の交換法則・打ち消し・square_of_real_number_is_product（r → a、r → b）の 6 行に割った。a^2 − b^2 = 0 の行も、a^2 = b^2 の代入と b^2 − b^2 = 0 の 2 行に割った。square_of_real_number_is_product と def_power_of_real_number は平方根を使わないので循環しない（どちらも文書の並びでは後に来る）。主張と値は変えていない。",
       ],
     },
   },

@@ -28,7 +28,7 @@ Step 5: `c = (rt⁻¹)_K` の鎖、`(ρρ)_K = ρ_Kρ_K = cc = (1c)c = (c^0c)c =
 - 包含 `(·)_K : k → K`（具体版の `ℝ → ℂ`）は、**積と `0`・`1` を保つ単射**（`k →*₀ K` で単射）だけでよい。
   和を保つことは効いていない。単射性は人手の「`definition_of_cc` の元の等号は成分ごと」の 2 か所（`w ≠ 0` と `ρρ = aa`）に当たる。
 - `k`（具体版の ℝ）は**順序体**（`Field`・`LinearOrder`・`IsStrictOrderedRing`）を使う。`a⁻¹`・`t⁻¹` を取るのに体、
-  `q > 0`・`ρ > 0` に正の元の積と逆数が正であること（`inv_pos`。半順序では `0 < a ⇒ 0 < a⁻¹` が言えないので全順序は削れない）、`ρ = a` に `NecSuf.positive_square_injective'`（零因子の無い可換環と前順序）が要る。
+  `q > 0`・`ρ > 0` に正の元の積と逆数が正であること（`inv_pos`。半順序では `0 < a ⇒ 0 < a⁻¹` が言えないので全順序は削れない）、`ρ = a` に `NecSuf.positive_square_injective'`（零因子の無い環、`aρ = ρa`、前順序）が要る。
   完備性・実数であることは効いていない。
 - `T, T'` がトレースであること、`τ, τ'` の中身、`a = (2s_2)^{M/2}` と `t` の具体形、`r` が `V^{(+)}` の正定値性から来ることは、
   いずれも効いていない（使うのは上の 6 つの等式と `0 < a`・`0 < r`・`0 < t` だけ）。
@@ -127,7 +127,7 @@ theorem const_eq_of_trace_chains {K k : Type*} [GroupWithZero K] [Field k] [Line
     calc (r * t⁻¹) ^ 2 = (r * t⁻¹) * (r * t⁻¹) := sq_eq_mul_self' _      -- `ρ^2 = ρρ`（人手 `square_of_real_number_is_product`）
       _ = a * a := hρρk                                                  -- 上の `ρρ = aa`
       _ = a ^ 2 := (sq_eq_mul_self' a).symm                              -- `a^2 = aa` を右辺から左辺へ
-  have hρa : r * t⁻¹ = a := (positive_square_injective' hρpos ha).1 hsq  -- 正の元の二乗の一意性
+  have hρa : r * t⁻¹ = a := (positive_square_injective' (mul_comm a (r * t⁻¹)) hρpos ha).1 hsq  -- 正の元の二乗の一意性（`k` の可換性で `aρ = ρa`）
   calc c = φ (r * t⁻¹) := hcρ                                            -- 上の鎖
     _ = φ a := by rw [hρa]                                               -- `ρ = a`
 
