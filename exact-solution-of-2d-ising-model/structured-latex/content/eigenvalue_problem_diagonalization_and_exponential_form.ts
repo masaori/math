@@ -2732,8 +2732,16 @@ s_1c_2
 \arctan 0
 &= \arcsin\!\left(\frac{0}{\sqrt{1+0^2}^{(\mathbb{R}_{\geq 0})}}\right)
 &&(\because\ \blkref{def_arctan})\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0\cdot 0}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
+&= \arcsin\!\left(\frac{0}{1}\right)
+&&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
 &= \arcsin(0)
-&&(\because\ \mathbb{R}\ \text{の四則}\ 0/\sqrt{1}^{(\mathbb{R}_{\geq 0})} = 0)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
 &= \arcsin(\sin 0)
 &&(\because\ \blkref{sine_zero})\\
 &= 0
@@ -3045,6 +3053,7 @@ s_1c_2
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03: SageMath の検算（sagemath/check/relation_of_gamma_2_theta_tilde/）を付けるときに証明を直した。γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず、euler_formula_cos_sin から cos(−θ)・sin(−θ) を求める鎖で作った。複素共役の行の根拠を complex_conjugate_of_product・complex_conjugate_of_difference・complex_conjugate_of_sum・complex_conjugate_of_real_inclusion に、ī = −i と conj(exp(iθ)) = exp(−iθ) を鎖に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に直した。(2) の狭義の負と γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian から一行ずつの鎖にした。主張の中身は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 |γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）、(2) の等号の右辺が実数 −|γ_2(θ̃_μ)|^2 の inclusion_rr_to_cc の像で、< 0 はその実数についての ℝ の順序であると (2) の直後に明記した。−|γ_2|^2 を ℂ と ℝ の両方の元として使わないよう、(2) を γ_2γ_2(−θ̃) = (−|γ_2|^2)_ℂ と −|γ_2|^2 < 0 の 2 式に分けた（証明の鎖の終わりの形と同じ）。続く「とくに〜負の実数」の文も実数の像と書き、anticommutator_of_check_psi の (2) を引く段落の読み方の文を新しい主張の形に合わせた。証明の −|γ_2(θ)|^2 < 0 の鎖の根拠「両辺を −1 倍すると向きが変わる」を、使っているのが符号反転なので「両辺の符号を反転すると向きが変わる」に直した。0 < |γ_2(θ)|^2 の鎖の |γ_2(θ)||γ_2(θ)| = |γ_2(θ)|^2 の行の名前だけの根拠「実数の 2 乗の定義」を square_of_real_number_is_product（r → |γ_2(θ)|）を右辺から左辺へ引く参照にした。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖の 2 行目「ℝ の四則 0/√1 = 0」（0^2 = 0・1 + 0 = 1・√1 = 1・0/1 = 0 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）、sqrt_of_real_one_is_one、ℝ で 0/x = 0（x → 1）の 5 行に割った。値と主張は変えていない。",
       ],
     },
   },

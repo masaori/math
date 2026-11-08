@@ -1,0 +1,3 @@
+=== inverse_of_sqrt_cc: φ_polar(1_C) の鎖の ℝ の計算 ===
+checks: 6, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

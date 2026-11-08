@@ -2585,12 +2585,18 @@ z
 &&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})\\
 &= \left[\left(\sqrt{1^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \left[\left(\sqrt{1+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ \text{の}\ m \to 2\bigr)\\
+&= \left[\left(\sqrt{1+0\cdot 0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
+&= \left[\left(\sqrt{1+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
-&&(\because\ \mathbb{R}\ \text{の計算}\ 1^2+0^2=1)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
-&&(\because\ \mathbb{R}\ \text{の計算}\ 0/1=0)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
 &&(\because\ \arctan 0=0)
 \end{aligned}`),
@@ -2717,6 +2723,7 @@ z
           "式変形の書き方の統一（2026-09-03）。証明末尾の参照一覧を削除し、" +
           "各参照を実際に使う準備または式変形の行末へ移した。内容・式変形・根拠・参照は不変である。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) と √(1_C) の鎖の √1 = 1 の 2 行が definition_of_sqrt_r_positive だけを根拠にしていた（1 ≥ 0 と 1^2 = 1 が書かれていなかった）ので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 3 行目「ℝ の計算 1^2+0^2=1」（1^2 = 1・0^2 = 0・1 + 0 = 1 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）の 4 行に割り、次の行の根拠「ℝ の計算 0/1=0」を「ℝ で 0/x = 0（x ≠ 0、ℝ は体）の x → 1」にした。値と主張は変えていない。",
       ],
     },
   },
