@@ -80,6 +80,70 @@ theorem exteriorCell_leftOfTraversedVerticalEdge_mem_band
   · exact Or.inr (Or.inr (Or.inr (by simp [hr, hcol])))
   · exact Or.inl (by simp [hr, hcol])
 
+/-- An exterior cell reaches either the outside of its bounding rectangle or
+the exterior band before crossing the first odd vertical edge in its row. -/
+theorem exteriorCell_reaches_outer_core
+    (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax r c : ℤ)
+    (hbelow : c < cMax)
+    (houtside : (r, c) ∈ exteriorCells n row col) :
+    ∃ b ∈ outsideBoundingRectangle rMin rMax cMin cMax ∪
+        walkSideExteriorBand n row col,
+      Relation.ReflTransGen
+        (fun a b => a ∈ exteriorCells n row col ∧
+          b ∈ exteriorCells n row col ∧ CellEdgeAdjacent a b)
+        (r, c) b := by
+  let P : ℤ → Prop := fun g =>
+    c < g ∧ g ≤ cMax ∧ Odd (verticalEdgeTraversalCount n row col r g)
+  by_cases hodd : ∃ g, P g
+  · have hbounded : ∃ b : ℤ, ∀ g, P g → b ≤ g := by
+      refine ⟨c + 1, ?_⟩
+      intro g hg
+      omega
+    obtain ⟨g, hg, hmin⟩ := Int.exists_least_of_bdd hbounded hodd
+    have heven : ∀ j : ℤ, c < j → j ≤ g - 1 →
+        Even (verticalEdgeTraversalCount n row col r j) := by
+      intro j hcj hjg
+      apply Nat.not_odd_iff_even.mp
+      intro hjodd
+      have hjP : P j := ⟨hcj, by omega, hjodd⟩
+      exact (not_le_of_gt (show j < g by omega)) (hmin j hjP)
+    have hpath := exteriorCells_horizontalPath_of_even_vertical_edges
+      n row col r c (g - 1) (by omega) houtside heven
+    have hlast : (r, g - 1) ∈ exteriorCells n row col := by
+      change ¬ Odd (rightRayCrossingCount n row col r (g - 1))
+      have hstart : Even (rightRayCrossingCount n row col r c) :=
+        Nat.not_odd_iff_even.mp houtside
+      have hpreserve : ∀ j : ℤ, c ≤ j → j ≤ g - 1 →
+          Even (rightRayCrossingCount n row col r j) := by
+        intro j hcj hjg
+        induction j, hcj using Int.leInduction with
+        | base => exact hstart
+        | succ j hcj ih =>
+            have hprev := ih (by omega)
+            have hcross := heven (j + 1) (by omega) (by omega)
+            have hsplit := rightRayCrossingCount_adjacent n row col r j
+            rcases hprev with ⟨q, hq⟩
+            rcases hcross with ⟨t, ht⟩
+            exact ⟨q - t, by omega⟩
+      exact Nat.not_odd_iff_even.mpr (hpreserve (g - 1) (by omega) le_rfl)
+    have hpositive : 0 < verticalEdgeTraversalCount n row col r g := by
+      rcases hg.2.2 with ⟨q, hq⟩
+      omega
+    refine ⟨(r, g - 1), Or.inr ?_, hpath⟩
+    exact exteriorCell_leftOfTraversedVerticalEdge_mem_band n row col r g
+      hpositive hlast
+  · have heven : ∀ j : ℤ, c < j → j ≤ cMax →
+        Even (verticalEdgeTraversalCount n row col r j) := by
+      intro j hcj hjmax
+      exact Nat.not_odd_iff_even.mp (by
+        intro hjodd
+        exact hodd ⟨j, hcj, hjmax, hjodd⟩)
+    refine ⟨(r, cMax), Or.inl ?_, ?_⟩
+    · change r < rMin ∨ rMax ≤ r ∨ cMax < cMin ∨ cMax ≤ cMax
+      exact Or.inr (Or.inr (Or.inr le_rfl))
+    exact exteriorCells_horizontalPath_of_even_vertical_edges
+      n row col r c cMax (le_of_lt hbelow) houtside heven
+
 /-- 長方形の上側または下側の固定行では、任意の二セルを列方向の有限路で結べる。 -/
 theorem outsideBoundingRectangle_horizontalPath
     (rMin rMax cMin cMax r c d : ℤ)

@@ -66568,8 +66568,14 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                         math(String.raw`j\in\{c+1,\ldots,c_{\max}\}`),
                         " で ", math(String.raw`V_{r,j}(\gamma)`), " は偶数である。横に隣り合うセルの交差数の差（",
                         ref("claim_adjacent_cells_ray_crossing_difference"),
-                        "）を ", math(String.raw`j=c+1,c+2,\ldots,c_{\max}`),
-                        " の順に使うと、交差数の奇偶は初項 ",
+                        "）は各 ", math(String.raw`j=c+1,c+2,\ldots,c_{\max}`),
+                        " で次の等式を与える。",
+                      ]),
+                      displayMath(String.raw`N_{r,j-1}^{\rightarrow}(\gamma)
+=N_{r,j}^{\rightarrow}(\gamma)+V_{r,j}(\gamma)
+\qquad\bigl(\because\ \blkref{claim_adjacent_cells_ray_crossing_difference}\bigr)`),
+                      paragraph([
+                        "この等式を列の順に使うと、交差数の奇偶は初項 ",
                         math(String.raw`N_{r,c}^{\rightarrow}(\gamma)`),
                         " の偶数から変わらない。ゆえに ",
                         math(String.raw`(r,c),(r,c+1),\ldots,(r,c_{\max})`),
