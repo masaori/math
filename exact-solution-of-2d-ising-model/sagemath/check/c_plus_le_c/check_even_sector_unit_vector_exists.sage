@@ -9,6 +9,8 @@
 #   ||x^{(+)}||^2 = (√Σ_i|x_i|^2)^2 = Σ_i|x_i|^2 = Σ_i x_i^2 = Σ_i ((1/√2)^M)^2 = ι(2^M)((1/√2)^M)^2 = 2^M((1/√2)^M)^2
 #                = 2^M((1/√2)^M(1/√2)^M) = 2^M(1/√2·1/√2)^M = 2^M(1/(√2√2))^M = 2^M(1/(√2)^2)^M = 2^M(1/2)^M
 #                = (2·1/2)^M = 1^M = 1（14 行。冪はすべて def_power_of_real_number どおりに組む）
+#   ‖x^{(+)}‖ ∈ ℝ_{≥0}、‖x‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（4 行）で ‖x‖ ≠ 0、
+#   ‖x‖^2 = 1 = 1·1 = 1^2（3 行）と positive_real_square_injective で ‖x^{(+)}‖ = 1
 # 帰属: 実数の側は AA（実代数的数）、複素数の側は QQbar で厳密に判定する。浮動小数点を使わない。
 # ι は AA → QQbar の包含 QQbar(r)、ν は def_kronecker の ν(I) = 1 + Σ(i_k - 1)2^{M-k}（0 始まりでは Σ(i_k-1)2^{M-k}）。
 import itertools
@@ -142,6 +144,24 @@ for M in [1, 2, 3, 4, 5]:
         n_eq += 1
     norm2 = rows[0]
     assert norm2 == xp.dot_product(xp)                    # 比べる側: Sage の内積（独立な経路）
+    # ‖x^{(+)}‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0 の 4 行の鎖: 仮定 ‖x‖ = 0 の代わりに値 0 を入れた側の行が 0 に着くこと、
+    # 実際の ‖x^{(+)}‖ ∈ ℝ_{≥0} は 0 でないこと（よって ℝ_{>0}）を確かめる
+    assert norm >= 0                                      # def_matrix_norm より ‖x^{(+)}‖ ∈ ℝ_{≥0}
+    z = AA(0)
+    rows0 = [sq(z), z * z, AA(0) * AA(0), AA(0)]          # ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（‖x‖ → 0）
+    for u, w in zip(rows0, rows0[1:]):
+        assert u == w
+        n_eq += 1
+    assert AA(1) != rows0[-1]                             # ℝ で 1 ≠ 0（仮定 ‖x‖ = 0 は 1 = 0 を導く）
+    assert norm != 0 and norm > 0                         # ‖x^{(+)}‖ ∈ ℝ_{>0}
+    # ‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x‖、b → 1）
+    rows1 = [sq(norm), AA(1), AA(1) * AA(1), sq(AA(1))]
+    for u, w in zip(rows1, rows1[1:]):
+        assert u == w
+        n_eq += 1
+    assert norm == 1                                      # positive_real_square_injective の結論 ‖x^{(+)}‖ = 1
+    # 否定コントロール: b → -1（ℝ_{>0} でない）では 2 乗が一致しても a = b にならない
+    assert sq(norm) == sq(AA(-1)) and norm != AA(-1)
     # 否定コントロール: 各成分の値の二乗を取り忘れて 2^M(1/√2)^M とすると 1 にならない
     assert rpow(two, M) * rpow(r, M) != 1
     print(f"  M_col={M}: ι(x^(+)) = b_+⊠…⊠b_+、ε ι(x^(+)) = ι(x^(+))、ε_ℝ x^(+) = x^(+)、||x^(+)||^2 = {norm2}")

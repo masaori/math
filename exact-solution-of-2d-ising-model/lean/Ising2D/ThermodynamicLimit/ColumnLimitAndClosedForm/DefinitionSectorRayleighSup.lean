@@ -30,7 +30,8 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 | `ι(x^{(+)})_{ν(I)} = (b_+⊠⋯⊠b_+)_{ν(I)}` の 5 行の鎖 | `cvec_evenUnit` の `calc` の 5 段 |
 | `ει(x^{(+)}) = ι(x^{(+)})` の 5 行の鎖 | `epsilon_mulVec_cvec_evenUnit` の `calc` の 5 段 |
 | `def_even_eigenvectors_of_epsilon` と `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`（`⇐`）で `ε_ℝx^{(+)} = x^{(+)}` | `epsilonR_mulVec_evenUnit`（`epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` の `mpr`） |
-| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 14 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（14 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段）。`vecNormSq_evenUnit` はそれを `vecNorm_sq` で `vecNormSq` の形にしたもの |
+| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 14 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（14 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段）。`vecNormSq_evenUnit` の `succ` の節は下の `‖x^{(+)}‖ = 1` を Lean の条件へ読み替えたもの |
+| `‖x^{(+)}‖ ∈ ℝ_{≥0}`、`‖x^{(+)}‖ = 0` なら `1 = ⋯ = 0` の 4 行の鎖、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と `positive_real_square_injective` で `‖x^{(+)}‖ = 1` | `vecNorm_evenUnit_succ`（`calc` の 4 段と 3 段） |
 | 空でない（`(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`） | `evenSectorSet_epsilonR_nonempty` |
 
 - 人手の `M_col ≥ 1` は Lean の `n + 1` である。人手の `ν(I)` は Lean の `I : Conf (n + 1)`（`vecKron` の冒頭の注意と同じ）。
@@ -43,6 +44,9 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 * 人手のノルムの鎖は `i ∈ {1,…,2^{M_col}}` の上の和で書き、和の個数を上端の `2^{M_col}` で読む。Lean の和は `I : Conf (n + 1)` の上の和なので、
   `finite_sum_of_constant_real_number` の段の後に、添字の個数を `2^{M_col}` に読み替える段（`card_conf_nat`）が 1 つ多い。
   1 段目の `def_matrix_norm` は、Lean の `vecNorm x = √(x ⬝ᵥ x)` を `√(Σ|x_i|^2)` に書く `square_of_real_absolute_value` を含む（`ClaimNormOfNormalizedRealVectorIsOne.lean` の `vecNorm_sq_eq_sum_abs_sq` と同じ）。
+* 人手の `𝓡_+` は条件を `‖x‖ = 1` で書き、Lean の `evenSectorSet`（と `rayleighSet`）は `vecNormSq x = 1` で書く。そのため Lean では、
+  人手の段 `vecNorm_evenUnit_succ` で `‖x^{(+)}‖ = 1` を出した後に、人手の行ではない読み替えの段 `vecNormSq_eq_one_of_vecNorm_eq_one`
+  （`‖x‖^2 = vecNormSq x`）で `vecNormSq x = 1` へ戻す。
 * Lean の通しの定理は `M` を一般に取るので、`evenSectorSet_epsilonR_nonempty` は `M = 0` も扱う。
   人手は `M_col ≥ 1` なので `M = 0` の行は無い。`M = 0` の `ε_ℝx^{(+)} = x^{(+)}`（`epsilonR_zero_mulVec_evenUnit`）は、
   `ε` が符号反転の置換行列であること（`epsilonR_mulVec_apply`）と `x^{(+)}` の成分が添字に依らないことから示す。
@@ -62,6 +66,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
 
 set_option linter.unusedSectionVars false
 
@@ -229,14 +234,47 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
     _ = 1 := power_of_real_one_is_one (n + 1)
                           -- `power_of_real_one_is_one`（`m → M_col`）
 
-/-- `‖x^{(+)}‖² = 1` を Lean の `vecNormSq` で述べたもの。`M ≥ 1` は人手の 14 行の鎖 `vecNorm_sq_evenUnit_succ` を
-`vecNorm_sq`（`‖x‖^2 = vecNormSq x`）で読み替え、`M = 0`（`x^{(+)}` は成分 `1` の 1 成分のベクトル）は人手に無い（冒頭の注意）。 -/
+/-- 人手の「`‖x^{(+)}‖^2 = 1` から `‖x^{(+)}‖ = 1`」（人手の `M_col` は `n + 1`）: `‖x^{(+)}‖ ∈ ℝ_{≥0}`（`def_matrix_norm`）、
+`‖x^{(+)}‖ = 0` なら `1 = ‖x^{(+)}‖^2 = ‖x^{(+)}‖‖x^{(+)}‖ = 0·0 = 0` の 4 行の鎖で矛盾、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と
+`positive_real_square_injective`（`a → ‖x^{(+)}‖`、`b → 1`、`⇒`）。 -/
+theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
+  have hge : 0 ≤ vecNorm (evenUnit (n + 1)) := vecNorm_nonneg _          -- `def_matrix_norm` より `‖x^{(+)}‖ ∈ ℝ_{≥0}`
+  have hne : vecNorm (evenUnit (n + 1)) ≠ 0 := by
+    intro h0
+    have h10 : (1 : ℝ) = 0 :=
+      calc (1 : ℝ)
+          = vecNorm (evenUnit (n + 1)) ^ 2 := (vecNorm_sq_evenUnit_succ n).symm
+                                              -- 上のノルムの鎖を右辺から左辺へ
+        _ = vecNorm (evenUnit (n + 1)) * vecNorm (evenUnit (n + 1)) := pow_two _
+                                              -- `r^2 := r r`（`r → ‖x^{(+)}‖`）
+        _ = 0 * 0 := by rw [h0]               -- `‖x^{(+)}‖ = 0` を両方の因子へ同時に適用
+        _ = 0 := zero_mul 0                   -- ℝ で `0 · 0 = 0`
+    exact one_ne_zero h10                     -- ℝ で `1 ≠ 0` に反する
+  have hpos : 0 < vecNorm (evenUnit (n + 1)) := lt_of_le_of_ne hge (Ne.symm hne)
+                                              -- `‖x^{(+)}‖ ∈ ℝ_{≥0}` と `‖x^{(+)}‖ ≠ 0` で `‖x^{(+)}‖ ∈ ℝ_{>0}`
+  have hsq : vecNorm (evenUnit (n + 1)) ^ 2 = (1 : ℝ) ^ 2 :=
+    calc vecNorm (evenUnit (n + 1)) ^ 2
+        = 1 := vecNorm_sq_evenUnit_succ n     -- 上のノルムの鎖
+      _ = 1 * 1 := (mul_one 1).symm           -- ℝ で `1 · 1 = 1` を右辺から左辺へ
+      _ = (1 : ℝ) ^ 2 := (pow_two 1).symm     -- `r^2 := r r`（`r → 1`）を右辺から左辺へ
+  exact (positive_real_square_injective hpos one_pos).mp hsq
+                                              -- `positive_real_square_injective`（`a → ‖x^{(+)}‖`、`b → 1`、`⇒`）
+
+/-- 人手の `𝓡_+` の条件 `‖x‖ = 1` を、Lean の `evenSectorSet`・`rayleighSet` の条件 `vecNormSq x = 1` へ読み替える段
+（`vecNorm_sq`: `‖x‖^2 = vecNormSq x`）。人手の行ではない。 -/
+theorem vecNormSq_eq_one_of_vecNorm_eq_one {ι : Type*} [Fintype ι] [DecidableEq ι] {x : ι → ℝ} (h : vecNorm x = 1) :
+    vecNormSq x = 1 := by
+  rw [← vecNorm_sq, h, power_of_real_one_is_one 2]
+
+/-- `‖x^{(+)}‖² = 1` を Lean の `vecNormSq` で述べたもの。`M ≥ 1` は人手の `‖x^{(+)}‖ = 1`（`vecNorm_evenUnit_succ`）を
+`vecNormSq_eq_one_of_vecNorm_eq_one` で Lean の条件 `vecNormSq x = 1` へ読み替え、`M = 0`（`x^{(+)}` は成分 `1` の 1 成分のベクトル）は人手に無い（冒頭の注意）。 -/
 theorem vecNormSq_evenUnit : vecNormSq (evenUnit M) = 1 := by
   cases M with
   | zero =>
     rw [vecNormSq_eq_sum]
     simp [evenUnit_apply]
-  | succ n => exact (vecNorm_sq _).symm.trans (vecNorm_sq_evenUnit_succ n)
+  | succ n => exact vecNormSq_eq_one_of_vecNorm_eq_one (vecNorm_evenUnit_succ n)
+                -- 人手の `‖x^{(+)}‖ = 1`（`vecNorm_evenUnit_succ`）を Lean の条件へ読み替える
 
 /-- **人手 `def_sector_rayleigh_sup` の「`𝓡_+ ≠ ∅`」**: `(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`。 -/
 theorem evenSectorSet_epsilonR_nonempty (W : Matrix (Conf M) (Conf M) ℝ) :

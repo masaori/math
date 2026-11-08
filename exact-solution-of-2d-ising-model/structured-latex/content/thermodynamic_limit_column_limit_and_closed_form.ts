@@ -2274,11 +2274,63 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
 \end{aligned}`,
       ),
       paragraph([
+        "である。",
+        ref("def_matrix_norm"),
+        " より ",
+        math(String.raw`\left\|x^{(+)}\right\| \in \mathbb{R}_{\ge 0}`),
+        " である。",
+        math(String.raw`\left\|x^{(+)}\right\| = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&= \left\|x^{(+)}\right\|^2
+   \quad (\because \text{上のノルムの鎖を右辺から左辺へ}) \\
+&= \left\|x^{(+)}\right\|\,\left\|x^{(+)}\right\|
+   \quad (\because r^2 := r\,r\ (r \to \left\|x^{(+)}\right\|)) \\
+&= 0 \cdot 0
+   \quad (\because \left\|x^{(+)}\right\| = 0\ \text{を両方の因子へ同時に適用}) \\
+&= 0
+   \quad (\because \mathbb{R}\ \text{で}\ 0 \cdot 0 = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり、",
+        math(String.raw`\mathbb{R}`),
+        " で ",
+        math(String.raw`1 \neq 0`),
+        " であることに反する。よって ",
+        math(String.raw`\left\|x^{(+)}\right\| \neq 0`),
+        " であり、",
+        math(String.raw`\left\|x^{(+)}\right\| \in \mathbb{R}_{\ge 0}`),
+        " と合わせて ",
+        math(String.raw`\left\|x^{(+)}\right\| \in \mathbb{R}_{>0}`),
+        " である。",
+        math(String.raw`1 \in \mathbb{R}_{>0}`),
+        " でもあり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|x^{(+)}\right\|^2
+&= 1
+   \quad (\because \text{上のノルムの鎖}) \\
+&= 1 \cdot 1
+   \quad (\because \mathbb{R}\ \text{で}\ 1 \cdot 1 = 1\ \text{を右辺から左辺へ}) \\
+&= 1^2
+   \quad (\because r^2 := r\,r\ (r \to 1)\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "だから、",
+        ref("positive_real_square_injective"),
         "（",
-        math(String.raw`\mathcal{I}_{M_{\mathrm{col}}}`),
-        " は ",
-        ref("def_kronecker"),
-        " の添字集合）。したがって ",
+        math(String.raw`a \to \left\|x^{(+)}\right\|,\ b \to 1`),
+        "、",
+        math(String.raw`(\Rightarrow)`),
+        "）より ",
+        math(String.raw`\left\|x^{(+)}\right\| = 1`),
+        " である。したがって ",
         math(String.raw`\left(x^{(+)}\right)^\top W_{\mathbb{R}}x^{(+)} \in \mathcal{R}_+`),
         " で ",
         math(String.raw`\mathcal{R}_+ \neq \emptyset`),
@@ -2300,6 +2352,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 𝓡_+ の条件 x ∈ 𝓕^{(+)} ∩ ℝ^{2^{M_col}} は実数のベクトルを複素数のベクトルの集合 𝓕^{(+)} の元とみなす同一視だったので、def_epsilon_real の ε_ℝ で x ∈ ℝ^{2^{M_col}}、ε_ℝx = x と述べ直した（epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ι(x) ∈ 𝓕^{(+)} と同値）。a_+ を ℝ^2 の元、x^{(+)} を成分 Π_k (a_+)_{i_k}（実数の有限積）で定め、def_kronecker (1) が複素数のベクトルのクロネッカー積だけを定めるので、b_+ := ι^2(a_+) を置いて ι(x^{(+)}) = b_+⊠⋯⊠b_+ を成分の 5 行の鎖（real_inclusion_preserves_finite_product を引く）で示し、ει(x^{(+)}) = ι(x^{(+)}) の鎖を b_+ で書き、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors で ε_ℝx^{(+)} = x^{(+)} へ戻した。σ^x b_+ = b_+ を 3 行の鎖に開いた。M_col ∈ ℤ_{≥1} を明記した。ノルムの鎖と上限の存在は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: x^{(+)} の各成分の値を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col} = 2^{-M_col/2}」という散文の 1 文から、x^{(+)} の定義 → a_+ の定義 → finite_product_of_constant_real_is_power の 3 行の鎖にした。値の書き方を (1/√2)^{M_col} に揃え、本文に定義の無い 2^{-M_col/2}（実数の非整数の冪）を消した（ノルムの鎖の 1 行目もこの値で書いた）。ノルムの鎖の 2・3 行目は内容を変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の 3 行（各成分の値を使った 1 行目、「#𝓘 = 2^{M_col} と ((1/√2)^{M_col})^2 = 2^{-M_col}」の 2 行目、「指数法則」の 3 行目）を、def_matrix_norm → definition_of_sqrt_r_positive → square_of_real_absolute_value → 各成分の値 → finite_sum_of_constant_real_number → inclusion_zz_to_rr_of_power_of_two → 二乗の定義 → product_of_real_powers_is_power_of_product → ℝ の四則演算 → 二乗の定義 → definition_of_sqrt_r_positive → product_of_real_powers_is_power_of_product → ℝ の四則演算 → power_of_real_one_is_one の 14 行の鎖にした。本文に定義の無い 2^{-M_col}（実数の負の整数の冪）と名前だけの「指数法則」を消した。和の添字を 𝓘_{M_col} から def_matrix_norm の i ∈ {1,…,2^{M_col}} に戻し、ν が全単射であることで各成分の値を各 i へ渡した。値は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の結論 ‖x^{(+)}‖^2 = 1 から、根拠を書かずに 𝓡_+ の条件 ‖x^{(+)}‖ = 1 へ進んでいた。‖x^{(+)}‖ ∈ ℝ_{≥0}（def_matrix_norm）、‖x^{(+)}‖ = 0 なら 1 = ‖x^{(+)}‖^2 = 0 となる 4 行の鎖で ‖x^{(+)}‖ ≠ 0、‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x^{(+)}‖、b → 1）で ‖x^{(+)}‖ = 1 を示す段を足した。",
       ],
     },
   },
