@@ -1601,6 +1601,56 @@ t
   },
 
   {
+    id: "critical_claim_arctan_zero",
+    kind: "claim",
+    title: { tex: String.raw`\arctan 0 = 0` },
+    labels: ["arctan_zero"],
+    statement: [
+      paragraph([
+        ref("def_arctan"),
+        " の ",
+        math(String.raw`\arctan`),
+        " について、",
+        math(String.raw`0 \in \mathbb{R}`),
+        " での値は ",
+        math(String.raw`\arctan 0 = 0`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\arctan`),
+        " の定義域と値域が実数だからである）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\arctan 0
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0^2}^{(\mathbb{R}_{\geq 0})}}\right)
+&&(\because\ \blkref{def_arctan}\ \text{の}\ x \to 0)\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0\cdot 0}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
+&= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
+&= \arcsin\!\left(\frac{0}{1}\right)
+&&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
+&= \arcsin(0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
+&= \arcsin(\sin 0)
+&&(\because\ \blkref{sine_zero})\\
+&= 0
+&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08: relation_of_gamma_2_theta_tilde の準備の第五にあった arctan 0 の鎖を独立の主張にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖と relation_of_gamma_2_theta_tilde の (3)(4) の鎖が引く。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_cosine_zero",
     kind: "claim",
     title: { tex: String.raw`\cos 0 = 1` },

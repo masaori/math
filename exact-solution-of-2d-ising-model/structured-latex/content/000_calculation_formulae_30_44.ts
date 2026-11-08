@@ -2598,7 +2598,7 @@ z
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
-&&(\because\ \arctan 0=0)
+&&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -2724,6 +2724,7 @@ z
           "各参照を実際に使う準備または式変形の行末へ移した。内容・式変形・根拠・参照は不変である。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) と √(1_C) の鎖の √1 = 1 の 2 行が definition_of_sqrt_r_positive だけを根拠にしていた（1 ≥ 0 と 1^2 = 1 が書かれていなかった）ので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 3 行目「ℝ の計算 1^2+0^2=1」（1^2 = 1・0^2 = 0・1 + 0 = 1 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）の 4 行に割り、次の行の根拠「ℝ の計算 0/1=0」を「ℝ で 0/x = 0（x ≠ 0、ℝ は体）の x → 1」にした。値と主張は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の最後の行の根拠「arctan 0=0」に参照が無かったので、新しく立てた主張 arctan_zero の参照にした。値と主張は変えていない。",
       ],
     },
   },

@@ -2711,11 +2711,11 @@ s_1c_2
 \end{aligned}`),
       paragraph([
         "第五に、",
-        math(String.raw`\arctan 0 = 0`),
-        "・",
         math(String.raw`\sin(\pi/2) = 1`),
         "・",
         math(String.raw`\cos(\pi/2) = 0`),
+        "・",
+        math(String.raw`\arcsin(0) = 0`),
         "・",
         math(String.raw`0 < \pi`),
         " を確かめる。",
@@ -2728,25 +2728,6 @@ s_1c_2
         math(String.raw`\pi \in \mathbb{R}`),
         " を使うのは、弧の長さが実数だからである）。",
       ]),
-      displayMath(String.raw`\begin{aligned}
-\arctan 0
-&= \arcsin\!\left(\frac{0}{\sqrt{1+0^2}^{(\mathbb{R}_{\geq 0})}}\right)
-&&(\because\ \blkref{def_arctan})\\
-&= \arcsin\!\left(\frac{0}{\sqrt{1+0\cdot 0}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
-&= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
-&= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
-&= \arcsin\!\left(\frac{0}{1}\right)
-&&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
-&= \arcsin(0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
-&= \arcsin(\sin 0)
-&&(\because\ \blkref{sine_zero})\\
-&= 0
-&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
-\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \sin(\pi/2)
 &= \sin(\arcsin(1))
@@ -2766,13 +2747,20 @@ s_1c_2
 &&(\because\ 0 \geq 0\ \text{かつ}\ 0^2 = 0\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ 0)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
+\arcsin(0)
+&= \arcsin(\sin 0)
+&&(\because\ \blkref{sine_zero})\\
+&= 0
+&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
 \pi
 &= 2\arcsin(1)
 &&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)\\
 &> 2\arcsin(0)
 &&(\because\ 0 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加})\\
 &= 2\cdot 0
-&&(\because\ \text{上の鎖の}\ \arcsin(0) = 0)\\
+&&(\because\ \text{上の}\ \arcsin(0) = 0)\\
 &= 0
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`),
@@ -2918,7 +2906,7 @@ s_1c_2
 &= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
 &&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ \pi\right)\right]_{\sim}
-&&(\because\ \text{準備の}\ \arctan 0 = 0)
+&&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
       paragraph(["主張 (3) の左辺から始める。"]),
       displayMath(String.raw`\begin{aligned}
@@ -2965,7 +2953,7 @@ s_1c_2
 &= \left[\left(r,\ \arctan 0\right)\right]_{\sim}
 &&(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ 0\right)\right]_{\sim}
-&&(\because\ \text{準備の}\ \arctan 0 = 0)
+&&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
       paragraph([
         "代表元 ",
@@ -3054,6 +3042,7 @@ s_1c_2
         "2026-11-03: SageMath の検算（sagemath/check/relation_of_gamma_2_theta_tilde/）を付けるときに証明を直した。γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず、euler_formula_cos_sin から cos(−θ)・sin(−θ) を求める鎖で作った。複素共役の行の根拠を complex_conjugate_of_product・complex_conjugate_of_difference・complex_conjugate_of_sum・complex_conjugate_of_real_inclusion に、ī = −i と conj(exp(iθ)) = exp(−iθ) を鎖に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に直した。(2) の狭義の負と γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian から一行ずつの鎖にした。主張の中身は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 |γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）、(2) の等号の右辺が実数 −|γ_2(θ̃_μ)|^2 の inclusion_rr_to_cc の像で、< 0 はその実数についての ℝ の順序であると (2) の直後に明記した。−|γ_2|^2 を ℂ と ℝ の両方の元として使わないよう、(2) を γ_2γ_2(−θ̃) = (−|γ_2|^2)_ℂ と −|γ_2|^2 < 0 の 2 式に分けた（証明の鎖の終わりの形と同じ）。続く「とくに〜負の実数」の文も実数の像と書き、anticommutator_of_check_psi の (2) を引く段落の読み方の文を新しい主張の形に合わせた。証明の −|γ_2(θ)|^2 < 0 の鎖の根拠「両辺を −1 倍すると向きが変わる」を、使っているのが符号反転なので「両辺の符号を反転すると向きが変わる」に直した。0 < |γ_2(θ)|^2 の鎖の |γ_2(θ)||γ_2(θ)| = |γ_2(θ)|^2 の行の名前だけの根拠「実数の 2 乗の定義」を square_of_real_number_is_product（r → |γ_2(θ)|）を右辺から左辺へ引く参照にした。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖の 2 行目「ℝ の四則 0/√1 = 0」（0^2 = 0・1 + 0 = 1・√1 = 1・0/1 = 0 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）、sqrt_of_real_one_is_one、ℝ で 0/x = 0（x → 1）の 5 行に割った。値と主張は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖を独立の主張 arctan_zero（020_critical_point.ts）へ移し、(3)(4) の鎖の根拠「準備の arctan 0 = 0」を arctan_zero の参照にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖も同じ主張を引く。0 < π の鎖が引いていた arcsin(0) = 0 は、移した鎖の 7・8 行目と同じ 2 行の鎖（sine_zero・def_sin）として準備の第五に残した。値と主張は変えていない。",
       ],
     },
   },

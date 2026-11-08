@@ -5,18 +5,13 @@ load("_prelude.sage")
 
 rep = Report("relation_of_gamma_2_theta_tilde: 具体の値と主張")
 
-# ---- 準備の第五: arctan 0 = 0、sin(π/2) = 1、cos(π/2) = 0、0 < π、角度 0・π の整数 ----
+# ---- 準備の第五: sin(π/2) = 1、cos(π/2) = 0、0 < π、角度 0・π の整数（arctan 0 = 0 は主張 arctan_zero の検算 sagemath/check/arctan_zero/） ----
 rep.check(bool(arcsin(SR(1)) == pi / 2), "Sage の arcsin(1) = π/2（π の定め方）")
-rep.check(QQ(0) / sqrt_aa(1 + QQ(0)**2) == QQ(0) / sqrt_aa(1 + QQ(0) * QQ(0)), "arctan 0 の鎖 第 2 行: 0/√(1+0^2) = 0/√(1+0·0)（square_of_real_number_is_product の r → 0）")
-rep.check(QQ(0) / sqrt_aa(1 + QQ(0) * QQ(0)) == QQ(0) / sqrt_aa(1 + QQ(0)), "arctan 0 の鎖 第 3 行: 0/√(1+0·0) = 0/√(1+0)（0·x = 0）")
-rep.check(QQ(0) / sqrt_aa(1 + QQ(0)) == QQ(0) / sqrt_aa(1), "arctan 0 の鎖 第 4 行: 0/√(1+0) = 0/√1（a + 0 = a）")
-rep.check(QQ(0) / sqrt_aa(1) == QQ(0) / QQ(1), "arctan 0 の鎖 第 5 行: 0/√1 = 0/1（sqrt_of_real_one_is_one）")
-rep.check(QQ(0) / QQ(1) == 0, "arctan 0 の鎖 第 6 行: 0/1 = 0")
-rep.check(cos_sin(Ang(0))[1] == 0, "arctan 0 の鎖 第 7 行: sin 0 = 0")
-rep.check(bool(arcsin(sin(SR(0))) == 0) and bool(arctan(SR(0)) == 0), "arctan 0 の鎖 第 8 行と両端: arcsin(sin 0) = 0、Sage の arctan 0 = 0")
 rep.check(cos_sin(pi_ / 2) == (AA(0), AA(1)), "cos(π/2) = 0、sin(π/2) = 1（1 の 4 乗根の実部・虚部）")
 rep.check(sqrt_aa(1 - AA(1)**2) == 0, "cos(π/2) の鎖: √(1 - 1^2) = √0 = 0")
 rep.check(cos_sin(Ang(0)) == (AA(1), AA(0)), "cos 0 = 1、sin 0 = 0")
+rep.check(cos_sin(Ang(0))[1] == 0, "arcsin(0) の鎖 第 1 行: 0 = sin 0（sine_zero。角度 0 の sin を 1 の冪根の虚部で）")
+rep.check(bool(-pi / 2 <= 0) and bool(0 <= pi / 2) and bool(arcsin(sin(SR(0))) == 0), "arcsin(0) の鎖 第 2 行: 0 ∈ [-π/2, π/2] で arcsin(sin 0) = 0（def_sin）")
 rep.check(bool(pi == 2 * arcsin(SR(1))), "0 < π の鎖 第 1 行: π = 2 arcsin(1)")
 rep.check(bool(2 * arcsin(SR(1)) > 2 * arcsin(SR(0))), "0 < π の鎖 第 2 行: 2 arcsin(1) > 2 arcsin(0)")
 rep.check(bool(2 * arcsin(SR(0)) == 2 * 0) and 2 * 0 == 0, "0 < π の鎖 第 3・4 行: 2 arcsin(0) = 2·0 = 0")

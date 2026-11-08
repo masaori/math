@@ -61,6 +61,7 @@ export const ALL_LABELS = [
   "arcsinh_derivative",
   "arcsinh_two_sided_log_bounds",
   "arctan_argument_in_unit_interval",
+  "arctan_zero",
   "arg_of_product_of_complex_numbers",
   "arg_of_quotient_of_complex_numbers",
   "argument_minus_sine_nonnegative",
