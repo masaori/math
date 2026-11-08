@@ -2,12 +2,20 @@
 # 準備の 2 行の鎖  v̂_k = v_k/‖v‖ = (1/‖v‖)v_k
 # 主張の 4 行の鎖  v̂^⊤Pv̂ = ((1/‖v‖)(1/‖v‖))(v^⊤Pv) = (1/(‖v‖‖v‖))(v^⊤Pv) = (1/‖v‖^2)(v^⊤Pv) = (v^⊤Pv)/‖v‖^2
 # を、n = 1, …, 5 で有理数の行列 P と零でない有理数のベクトル v について、AA（実代数的数）で厳密に確かめる。
-# x^⊤Py は def_real_bilinear_value のとおり Σ_kΣ_l (x_kP_kl)y_l で組む。
+# x^⊤Py は def_real_bilinear_value のとおり Σ_kΣ_l (x_kP_kl)y_l で組む。二乗は def_power_of_real_number のとおり組む（rpow）。
+
+
+def rpow(a, m):
+    """def_power_of_real_number: a^0 := 1、a^{m+1} := a^m a。"""
+    p = AA(1)
+    for _ in range(m):
+        p = p * AA(a)
+    return p
 
 
 def norm(w):
     """def_matrix_norm（K = ℝ）: ‖w‖ := √(Σ_k |w_k|^2)。"""
-    return AA(sum(abs(c)^2 for c in w)).sqrt()
+    return AA(sum(rpow(abs(c), 2) for c in w)).sqrt()
 
 
 def bil(x, P, y):
@@ -21,8 +29,8 @@ def check(P, v):
     assert any(c != 0 for c in v)                                      # 仮定 v ≠ 0
     N = norm(v)
     assert N > 0 and N != 0                                            # norm_of_normalized_real_vector_is_one の ‖v‖ > 0
-    N2 = N * N                                                         # ‖v‖^2 := ‖v‖‖v‖
-    assert N2 > 0 and N2 != 0
+    N2 = rpow(N, 2)                                                    # ‖v‖^2（def_power_of_real_number の冪）
+    assert N2 == N * N and N * N > 0 and N2 != 0                       # 準備: ‖v‖^2 = ‖v‖‖v‖（square_of_real_number_is_product）> 0、≠ 0
     vh = [AA(c) / N for c in v]                                        # v̂_k := v_k/‖v‖
     steps = 0
     for k in range(n):                                                 # 準備の 2 行
@@ -34,7 +42,7 @@ def check(P, v):
         bil(vh, P, vh),                                                # v̂^⊤Pv̂
         ((1 / N) * (1 / N)) * B,                                       # real_bilinear_value_of_scalar_multiple_vector（c → 1/‖v‖）
         (1 / (N * N)) * B,                                             # (1/b)(1/b) = 1/(bb)
-        (1 / N2) * B,                                                  # ‖v‖^2 := ‖v‖‖v‖
+        (1 / N2) * B,                                                  # square_of_real_number_is_product（r → ‖v‖）を右辺から左辺へ
         B / N2,                                                        # (1/c)a = a/c
     ]
     for t in range(4):

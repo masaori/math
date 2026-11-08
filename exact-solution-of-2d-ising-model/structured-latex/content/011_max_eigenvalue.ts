@@ -821,7 +821,13 @@ x^\top P x
         ref("sqrt_nonnegative_existence_uniqueness"),
         "）。証明はそのほかに ",
         math(String.raw`\mathbb{R}`),
-        " の四則演算と順序と有限和だけを使い、極限を使わない。",
+        " の四則演算と順序と有限和と、",
+        ref("def_power_of_real_number"),
+        " の冪の定義から従う ",
+        ref("square_of_real_number_is_product"),
+        "・",
+        ref("power_of_real_one_is_one"),
+        " だけを使い、極限を使わない。",
       ]),
     ],
     proof: [
@@ -830,10 +836,10 @@ x^\top P x
         " は ",
         ref("def_real_absolute_value"),
         " の実数の絶対値、二乗は ",
-        math(String.raw`\mathbb{R}`),
-        " の積 ",
-        math(String.raw`r^2 := r\,r`),
-        " である。まず ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。まず ",
         ref("matrix_norm_triangle_inequality"),
         " (1)（",
         math(String.raw`K = \mathbb{R}`),
@@ -854,7 +860,13 @@ x^\top P x
         "、よって ",
         math(String.raw`\|v\| > 0`),
         "、とくに ",
-        math(String.raw`\|v\|^2 = \|v\|\,\|v\| > 0`),
+        math(String.raw`\|v\|^2 = \|v\|\,\|v\|`),
+        "（",
+        ref("square_of_real_number_is_product"),
+        " (",
+        math(String.raw`r \to \|v\|`),
+        ")）",
+        math(String.raw`> 0`),
         "（正の実数どうしの積は正）、よって ",
         math(String.raw`\|v\|^2 \neq 0`),
         " である。次に、",
@@ -881,8 +893,12 @@ x^\top P x
   &&\bigl(\because\ \hat{v}\ \text{の定義を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sqrt{\sum_{k=1}^{n} \Bigl(\frac{v_k}{\|v\|}\Bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to v_k/\|v\|)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \frac{v_k}{\|v\|}\,\frac{v_k}{\|v\|}}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to v_k/\|v\|)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&= \sqrt{\sum_{k=1}^{n} \frac{1}{\|v\|\,\|v\|}\,(v_k\,v_k)}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (a/b)\,(a/b) = \bigl(1/(b\,b)\bigr)\,(a\,a)\ (a \to v_k,\ b \to \|v\| \neq 0)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sqrt{\sum_{k=1}^{n} \frac{1}{\|v\|^2}\,v_k^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (a/b)^2 = (1/b^2)\,a^2\ (a \to v_k,\ b \to \|v\| \neq 0)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+  &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|v\|,\ r \to v_k)\ \text{を右辺から左辺へ}\ 2n\ \text{か所へ同時に適用}\bigr)\\
 &= \sqrt{\frac{1}{\|v\|^2}\sum_{k=1}^{n} v_k^2}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to 1/\|v\|^2,\ \text{添字}\ j \to k,\ x_j \to v_k^2)\bigr)\\
 &= \sqrt{\frac{1}{\|v\|^2}\sum_{k=1}^{n} |v_k|^2}^{\,(\mathbb{R}_{\ge 0})}
@@ -892,7 +908,7 @@ x^\top P x
 &= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,b = 1\ (b \to \|v\|^2 \neq 0)\bigr)\\
 &= 1
-  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{と}\ 1 \geq 0,\ 1^2 = 1\bigr)
+  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{と}\ 1 \geq 0,\ \blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{の}\ 1^2 = 1\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -900,6 +916,7 @@ x^\top P x
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂ := v/‖v‖ を「𝓕^{(+)} ∩ ℝ^{2^{M_col}} の単位ベクトル」とだけ書き、‖v̂‖ = 1 を示していなかった。この行を参照に替えるために足した。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（real_bilinear_value_of_scalar_multiple_vector と同じ）。数値検証: sagemath/check/norm_of_normalized_real_vector_is_one/。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、積の形との行き来を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。鎖の 4 行目の (a/b)^2 = (1/b^2)a^2 は冪を含むので、積へ開く行・ℝ の四則演算の行・冪へ戻す行の 3 行に割った。最後の行の 1^2 = 1 は power_of_real_one_is_one から引く。",
       ],
     },
   },
@@ -1060,11 +1077,13 @@ x^\top P x
         ref("norm_of_normalized_real_vector_is_one"),
         " より ",
         math(String.raw`\|v\| \in \mathbb{R}_{>0}`),
-        " である。",
-        math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
-        "（",
-        math(String.raw`\mathbb{R}`),
-        " の積）とおく。",
+        " である。二乗 ",
+        math(String.raw`\|v\|^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
         math(String.raw`\hat{v}^\top P\hat{v},\ v^\top Pv \in \mathbb{R}`),
         " は ",
         ref("def_real_bilinear_value"),
@@ -1084,7 +1103,11 @@ x^\top P x
         ref("sqrt_nonnegative_existence_uniqueness"),
         "）。証明はそのほかに ",
         math(String.raw`\mathbb{R}`),
-        " の四則演算だけを使い、極限を使わない。",
+        " の四則演算と、",
+        ref("def_power_of_real_number"),
+        " の冪の定義から従う ",
+        ref("square_of_real_number_is_product"),
+        " だけを使い、極限を使わない。",
       ]),
     ],
     proof: [
@@ -1095,7 +1118,13 @@ x^\top P x
         " より ",
         math(String.raw`\|v\| \neq 0`),
         "、",
-        math(String.raw`\|v\|^2 = \|v\|\,\|v\| > 0`),
+        math(String.raw`\|v\|^2 = \|v\|\,\|v\|`),
+        "（",
+        ref("square_of_real_number_is_product"),
+        " (",
+        math(String.raw`r \to \|v\|`),
+        ")）",
+        math(String.raw`> 0`),
         "（正の実数どうしの積は正）より ",
         math(String.raw`\|v\|^2 \neq 0`),
         " である。まず、すべての ",
@@ -1117,7 +1146,7 @@ x^\top P x
 &= \frac{1}{\|v\|\,\|v\|}\,\bigl(v^\top Pv\bigr)
   &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,(1/b) = 1/(b\,b)\ (b \to \|v\| \neq 0)\bigr)\\
 &= \frac{1}{\|v\|^2}\,\bigl(v^\top Pv\bigr)
-  &&\bigl(\because\ \|v\|^2 := \|v\|\,\|v\|\ \text{を右辺から左辺へ}\bigr)\\
+  &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|v\|)\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{v^\top Pv}{\|v\|^2}
   &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/c)\,a = a/c\ (a \to v^\top Pv,\ c \to \|v\|^2 \neq 0)\bigr)
 \end{aligned}`),
@@ -1127,6 +1156,7 @@ x^\top P x
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂^⊤Wv̂ = v^⊤Wv/‖v‖^2 を「v̂ = v/‖v‖ の代入と二次形式の斉次性」の名前だけで出していた。この行を参照に替えるために、P → W_ℝ として使う形で足した。W_ℝ に固有の性質を使わないので、一般の P ∈ Mat(n,ℝ) について述べる。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（norm_of_normalized_real_vector_is_one と同じ）。数値検証: sagemath/check/real_bilinear_value_of_normalized_vector/。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の ‖v‖^2 := ‖v‖‖v‖ から def_power_of_real_number の冪に替え、鎖の 3 行目の書き戻しと準備の ‖v‖^2 = ‖v‖‖v‖ を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。",
       ],
     },
   },

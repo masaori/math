@@ -807,7 +807,7 @@ targets=(
   Ising2D.epsilonR_mulVec_evenUnit
   Ising2D.epsilonR_zero_mulVec_evenUnit
   Ising2D.vecNorm_sq_evenUnit_succ
-  Ising2D.vecNormSq_evenUnit
+  Ising2D.vecNorm_evenUnit
   Ising2D.evenSectorSet_epsilonR_nonempty
   Ising2D.c_plus_le_c
   Ising2D.epsilon_commute_physicalSymTransferC
