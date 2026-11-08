@@ -1806,11 +1806,13 @@ k
       ]),
       displayMath(String.raw`\|v\|^2 \leq 4`),
       paragraph([
-        "が成り立つ。",
-        math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
+        "が成り立つ。二乗 ",
+        math(String.raw`\|v\|^2`),
         " は ",
-        math(String.raw`\mathbb{R}`),
-        " の積である。",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
         math(String.raw`\mathbb{R}`),
         " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
         "ノルムの平方根は ",
@@ -1821,7 +1823,11 @@ k
         ref("sqrt_nonnegative_existence_uniqueness"),
         "）。証明はそのほかに ",
         math(String.raw`\mathbb{R}`),
-        " の四則演算と順序と有限和だけを使い、極限を使わない。",
+        " の四則演算と順序と有限和と、",
+        ref("def_power_of_real_number"),
+        " の冪の定義から従う ",
+        ref("power_of_real_one_is_one"),
+        " だけを使い、極限を使わない。",
       ]),
     ],
     proof: [
@@ -1877,6 +1883,8 @@ k
   &&\bigl(\because\ \blkref{epsilon_real_preserves_norm}\ (u \to u)\bigr)\\
 &= 2 \cdot 1^2 + 2 \cdot 1^2
   &&\bigl(\because\ \|u\| = 1\ \text{を 2 か所へ同時適用}\bigr)\\
+&= 2 \cdot 1 + 2 \cdot 1
+  &&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{を 2 か所へ同時適用}\bigr)\\
 &= 4
   &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\bigr)
 \end{aligned}`),
@@ -1886,6 +1894,7 @@ k
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は ‖v‖^2 = ‖u‖^2 + 2u^⊤εu + ‖εu‖^2 = 2 + 2u^⊤εu ≤ 4 を「v = u + εu の展開と ε^⊤ = ε」「Cauchy–Schwarz」の名前で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために足した。Cauchy–Schwarz（psd_cauchy_schwarz の P → I_ℝ）で示すには、x^⊤I_ℝy = Σ_k x_ky_k、I_ℝ の対称性と半正定値性、‖x‖^2 = x^⊤I_ℝx の主張が本文に要る。成分ごとに (a + b)^2 ≤ 2a^2 + 2b^2 で評価する道は、ℝ の四則演算と順序と有限和と epsilon_real_preserves_norm だけで閉じるので、こちらを採った。v は epsilon_real_fixes_sum_of_vector_and_its_image と同じく成分の等式で与える。数値検証: sagemath/check/norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four/。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の ‖v‖^2 := ‖v‖‖v‖ から def_power_of_real_number の冪に替えた（記号の濫用の解消）。鎖の最後の 2·1^2 + 2·1^2 = 4 は冪を含むので、power_of_real_one_is_one で 1^2 = 1 にする行と ℝ の四則演算の行の 2 行に割った。",
       ],
     },
   },
@@ -2235,10 +2244,10 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "（",
         ref("definition_of_sqrt_r_positive"),
         "）、二乗は ",
-        math(String.raw`\mathbb{R}`),
-        " の積 ",
-        math(String.raw`r^2 := r\,r`),
-        " である。このとき",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。このとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2256,13 +2265,13 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)^2
    \quad (\because \blkref{inclusion_zz_to_rr_of_power_of_two}\ (M \to M_{\mathrm{col}})) \\
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}\right)
-   \quad (\because r^2 := r\,r\ (r \to (1/\sqrt{2})^{M_{\mathrm{col}}})) \\
+   \quad (\because \blkref{square_of_real_number_is_product}\ (r \to (1/\sqrt{2})^{M_{\mathrm{col}}})) \\
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{2}}\right)^{M_{\mathrm{col}}}
    \quad (\because \blkref{product_of_real_powers_is_power_of_product}\ (a, b \to 1/\sqrt{2},\ m \to M_{\mathrm{col}})) \\
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\sqrt{2}\,\sqrt{2}}\right)^{M_{\mathrm{col}}}
    \quad (\because \mathbb{R}\ \text{で}\ \tfrac{1}{p}\cdot\tfrac{1}{q} = \tfrac{1}{pq}\ (p, q \to \sqrt{2} \neq 0)) \\
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{\left(\sqrt{2}\right)^2}\right)^{M_{\mathrm{col}}}
-   \quad (\because r^2 := r\,r\ (r \to \sqrt{2})\ \text{を右辺から左辺へ}) \\
+   \quad (\because \blkref{square_of_real_number_is_product}\ (r \to \sqrt{2})\ \text{を右辺から左辺へ}) \\
 &= 2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\left(\frac{1}{2_{\mathbb{R}}}\right)^{M_{\mathrm{col}}}
    \quad (\because \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to 2_{\mathbb{R}} \in \mathbb{R}_{\ge 0})) \\
 &= \left(2_{\mathbb{R}}\cdot\frac{1}{2_{\mathbb{R}}}\right)^{M_{\mathrm{col}}}
@@ -2288,7 +2297,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
 &= \left\|x^{(+)}\right\|^2
    \quad (\because \text{上のノルムの鎖を右辺から左辺へ}) \\
 &= \left\|x^{(+)}\right\|\,\left\|x^{(+)}\right\|
-   \quad (\because r^2 := r\,r\ (r \to \left\|x^{(+)}\right\|)) \\
+   \quad (\because \blkref{square_of_real_number_is_product}\ (r \to \left\|x^{(+)}\right\|)) \\
 &= 0 \cdot 0
    \quad (\because \left\|x^{(+)}\right\| = 0\ \text{を両方の因子へ同時に適用}) \\
 &= 0
@@ -2318,7 +2327,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
 &= 1 \cdot 1
    \quad (\because \mathbb{R}\ \text{で}\ 1 \cdot 1 = 1\ \text{を右辺から左辺へ}) \\
 &= 1^2
-   \quad (\because r^2 := r\,r\ (r \to 1)\ \text{を右辺から左辺へ})
+   \quad (\because \blkref{square_of_real_number_is_product}\ (r \to 1)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -2353,6 +2362,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: x^{(+)} の各成分の値を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col} = 2^{-M_col/2}」という散文の 1 文から、x^{(+)} の定義 → a_+ の定義 → finite_product_of_constant_real_is_power の 3 行の鎖にした。値の書き方を (1/√2)^{M_col} に揃え、本文に定義の無い 2^{-M_col/2}（実数の非整数の冪）を消した（ノルムの鎖の 1 行目もこの値で書いた）。ノルムの鎖の 2・3 行目は内容を変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の 3 行（各成分の値を使った 1 行目、「#𝓘 = 2^{M_col} と ((1/√2)^{M_col})^2 = 2^{-M_col}」の 2 行目、「指数法則」の 3 行目）を、def_matrix_norm → definition_of_sqrt_r_positive → square_of_real_absolute_value → 各成分の値 → finite_sum_of_constant_real_number → inclusion_zz_to_rr_of_power_of_two → 二乗の定義 → product_of_real_powers_is_power_of_product → ℝ の四則演算 → 二乗の定義 → definition_of_sqrt_r_positive → product_of_real_powers_is_power_of_product → ℝ の四則演算 → power_of_real_one_is_one の 14 行の鎖にした。本文に定義の無い 2^{-M_col}（実数の負の整数の冪）と名前だけの「指数法則」を消した。和の添字を 𝓘_{M_col} から def_matrix_norm の i ∈ {1,…,2^{M_col}} に戻し、ν が全単射であることで各成分の値を各 i へ渡した。値は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の結論 ‖x^{(+)}‖^2 = 1 から、根拠を書かずに 𝓡_+ の条件 ‖x^{(+)}‖ = 1 へ進んでいた。‖x^{(+)}‖ ∈ ℝ_{≥0}（def_matrix_norm）、‖x^{(+)}‖ = 0 なら 1 = ‖x^{(+)}‖^2 = 0 となる 4 行の鎖で ‖x^{(+)}‖ ≠ 0、‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x^{(+)}‖、b → 1）で ‖x^{(+)}‖ = 1 を示す段を足した。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、ノルムの鎖の積へ開く行・冪へ戻す行と、‖x^{(+)}‖ ≠ 0・‖x^{(+)}‖ = 1 を示す 2 本の鎖の積との行き来を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。",
       ],
     },
   },
@@ -5409,10 +5419,19 @@ c(M_{\mathrm{col}})
           " が定まる）かつ ",
           math(String.raw`\|\hat{v}\| = 1`),
           " であり、",
-          math(String.raw`\|v\|^2 := \|v\|\,\|v\|`),
+          "二乗 ",
+          math(String.raw`\|v\|^2`),
+          " は ",
+          ref("def_power_of_real_number"),
+          " の冪（",
+          math(String.raw`m = 2`),
+          "）で、",
+          math(String.raw`\|v\|^2 = \|v\|\,\|v\|`),
           "（",
-          math(String.raw`\mathbb{R}`),
-          " の積）は正の実数どうしの積なので ",
+          ref("square_of_real_number_is_product"),
+          " (",
+          math(String.raw`r \to \|v\|`),
+          ")）は正の実数どうしの積なので ",
           math(String.raw`\|v\|^2 > 0`),
           " である。",
         ],
@@ -5537,6 +5556,7 @@ c(M_{\mathrm{col}})
         "この粗い評価を採ったのは c_-(M) の値に依存しないためである。一次情報で確認したところ c_-(M) = Λ^{(0)}_M は一般には成り立たない: 高温側 (K_1,K_2) = (0.05,0.1)（sinh2K_1 sinh2K_2 ≈ 0.020）では c_-(M)/Λ^{(0)}_M = 0.1102 で、M = 2,3,4,5 のすべてで一致しない（同 check_05 の対照出力）。V^{(-)} の最大固有値の固有ベクトルが F^{(+)} 側に落ちる場合があるためで、偶セクターで解決したのと同じ問題が奇セクターでは別の答えになりうる。本文はこの点に触れずに済む形にしてある。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 2 を、複素行列 W・ε を実数のベクトルに掛ける同一視をやめ、def_W_real の W_ℝ・def_epsilon_real の ε_ℝ で書き直した。散文で済ませていた各行（三角不等式による x^⊤Wx ≤ u^⊤Wu、‖u‖ = ‖x‖、εv = v、v ≠ 0、‖v‖^2 ≤ 4、v^⊤Wv ≥ 2u^⊤Wu、v̂ の ε_ℝv̂ = v̂・‖v̂‖ = 1、二次形式の斉次性、u^⊤Wu ≥ 0）を、それぞれを主張として足したブロックを 1 つずつ引く準備に置き換え、v̂ を def_sector_rayleigh_sup のいまの集合の条件 ε_ℝx = x、‖x‖ = 1 で 𝓡_+ に入れた。最後に x^⊤W_ℝx ≤ 2Λ^{(1/2)} から上限の比較を書いた。主張と論法は不変。",
         "数値検証: sagemath/check/c_between_Lambda_half_and_twice_Lambda_half（Step 1・Step 2 の各行）。sagemath/check/053_claim_even_sector_closing/check_05 の (1)〜(3) は 2026-11-07 より前の Step 2（複素行列 W・ε の形）を確かめたもので、いまの Step 2 の各行の検算ではない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 2 の準備の二乗をその場の ‖v‖^2 := ‖v‖‖v‖ から def_power_of_real_number の冪に替え、‖v‖^2 = ‖v‖‖v‖ を square_of_real_number_is_product で引く形にした（記号の濫用の解消）。",
       ],
     },
   },

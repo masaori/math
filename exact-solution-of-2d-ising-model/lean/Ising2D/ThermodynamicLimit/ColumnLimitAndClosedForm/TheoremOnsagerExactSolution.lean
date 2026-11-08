@@ -89,7 +89,8 @@ theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W
 - 人手の `u, v, v̂` は成分の等式で置く。Lean も `u k := |x k|`・`v k := u k + (ε_ℝu) k`・`v̂ k := v k / ‖v‖` の関数として置き、
   引く主張の成分の仮定は `fun k => rfl` で渡す。
 - 人手の `v̂^⊤W_ℝv̂ ∈ 𝓡_+`（`def_sector_rayleigh_sup`、`x → v̂`）は `evenSectorSet` の元であることで、条件 `‖v̂‖ = 1` をそのまま渡す。
-- 人手の `‖v‖^2 := ‖v‖‖v‖` は Lean の `vecNorm v ^ 2` である。
+- 人手の二乗 `‖v‖^2` は `def_power_of_real_number` の冪（`m = 2`）で、Lean の `vecNorm v ^ 2`（`Monoid.npow`）と同じものである。
+  準備の `‖v‖^2 = ‖v‖‖v‖` は `square_of_real_number_is_product`（`r → ‖v‖`）で、`hv2pos` の 1 段目に当たる。
 - 人手の設定の `K_1, K_2 ∈ ℝ_{>0}` を `hK1`・`hK2` で受け、準備で引く `W_real_has_positive_entries`・
   `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`（どちらも人手どおり
   `K_1, K_2 > 0` を取る）へ渡す。 -/
@@ -134,7 +135,9 @@ theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 :
     -- 準備: `norm_of_normalized_real_vector_is_one`（`v → v`）より `‖v‖ > 0` かつ `‖v̂‖ = 1`、よって `‖v‖^2 > 0`
     have hvpos : 0 < vecNorm v := vecNorm_pos_of_ne_zero hv0
     have hvhatnorm : vecNorm vhat = 1 := norm_of_normalized_real_vector_is_one v vhat hv0 (fun _ => rfl)
-    have hv2pos : 0 < vecNorm v ^ 2 := pow_pos hvpos 2                       -- 正の実数どうしの積
+    have hv2pos : 0 < vecNorm v ^ 2 := by
+      rw [square_of_real_number_is_product]                                   -- `square_of_real_number_is_product`（`r → ‖v‖`）
+      exact mul_pos hvpos hvpos                                               -- 正の実数どうしの積
     -- 準備: `epsilon_real_fixes_sum_of_vector_and_its_image`（`u → u`）より `ε_ℝv = v`
     have hεv : epsilonReal n *ᵥ v = v := epsilon_real_fixes_sum_of_vector_and_its_image n u v (fun _ => rfl)
     -- 準備: `real_matrix_fixed_vector_stays_fixed_after_normalization`（`P → ε_ℝ`、`v → v`）より `ε_ℝv̂ = v̂`

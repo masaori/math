@@ -1,8 +1,8 @@
 # 対象ラベル: norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four
 # 証明の準備（‖x‖^2 = (√Σ|x_k|^2)^2 = Σ|x_k|^2 の 2 行を x → u, ε_ℝu, v で、|v_k|^2 の 4 行の鎖をすべての k で）と
-# 主張の 8 行の鎖
+# 主張の 9 行の鎖（二乗は def_power_of_real_number の冪。Sage の ** は冪である）
 #   ‖v‖^2 = Σ|v_k|^2 ≤ Σ(2|u_k|^2 + 2|(ε_ℝu)_k|^2) = Σ2|u_k|^2 + Σ2|(ε_ℝu)_k|^2 = 2Σ|u_k|^2 + 2Σ|(ε_ℝu)_k|^2
-#         = 2‖u‖^2 + 2‖ε_ℝu‖^2 = 2‖u‖^2 + 2‖u‖^2 = 2·1^2 + 2·1^2 = 4
+#         = 2‖u‖^2 + 2‖ε_ℝu‖^2 = 2‖u‖^2 + 2‖u‖^2 = 2·1^2 + 2·1^2 = 2·1 + 2·1 = 4
 # を、M_col = 1, 2, 3, 4、‖u‖ = 1 の u（各 M_col で 6 本。負の成分を含むもの、ε_ℝu = u で等号になるものを含む）で厳密に（AA）確かめる。
 load("../epsilon_entries_in_row_configuration_numbering/_epsilon_exact.sage")
 
@@ -50,9 +50,10 @@ def check(M, u):
          2*sum(rabs(u[k])**2 for k in range(d)) + 2*sum(rabs(Eu[k])**2 for k in range(d)),
          2*norm(u)**2 + 2*norm(list(Eu))**2,
          2*norm(u)**2 + 2*norm(u)**2,
-         2*1**2 + 2*1**2,
-         4]
-    ops = ["==", "<=", "==", "==", "==", "==", "==", "=="]
+         2*AA(1)**2 + 2*AA(1)**2,
+         2*AA(1) + 2*AA(1),                                      # power_of_real_one_is_one（m → 2）を 2 か所へ
+         4]                                                      # ℝ の四則演算
+    ops = ["==", "<=", "==", "==", "==", "==", "==", "==", "=="]
     for i, op in enumerate(ops):
         if op == "==":
             assert l[i] == l[i + 1], (M, f"主張の {i + 1} 行目")

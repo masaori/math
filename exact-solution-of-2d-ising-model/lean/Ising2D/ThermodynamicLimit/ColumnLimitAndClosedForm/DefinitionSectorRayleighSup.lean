@@ -210,7 +210,8 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
         rw [inclusion_zz_to_rr_of_power_of_two]
                           -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）
     _ = (2 : ℝ) ^ (n + 1) * ((1 / Real.sqrt 2) ^ (n + 1) * (1 / Real.sqrt 2) ^ (n + 1)) := by
-        rw [pow_two]      -- `r^2 := r r`（`r → (1/√2)^{M_col}`）
+        rw [square_of_real_number_is_product]
+                          -- `square_of_real_number_is_product`（`r → (1/√2)^{M_col}`）
     _ = (2 : ℝ) ^ (n + 1) * (1 / Real.sqrt 2 * (1 / Real.sqrt 2)) ^ (n + 1) := by
         rw [product_of_real_powers_is_power_of_product]
                           -- `product_of_real_powers_is_power_of_product`（`a, b → 1/√2`、`m → M_col`）
@@ -218,7 +219,8 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
         rw [one_div_mul_one_div]
                           -- ℝ で `(1/p)(1/q) = 1/(pq)`（`p, q → √2`）
     _ = (2 : ℝ) ^ (n + 1) * (1 / Real.sqrt 2 ^ 2) ^ (n + 1) := by
-        rw [← pow_two]    -- `r^2 := r r`（`r → √2`）を右辺から左辺へ
+        rw [← square_of_real_number_is_product]
+                          -- `square_of_real_number_is_product`（`r → √2`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / 2) ^ (n + 1) := by
         rw [Real.sq_sqrt h2]
                           -- `definition_of_sqrt_r_positive` の `y^2 = x`（`x → 2_ℝ`）
@@ -242,8 +244,8 @@ theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
       calc (1 : ℝ)
           = vecNorm (evenUnit (n + 1)) ^ 2 := (vecNorm_sq_evenUnit_succ n).symm
                                               -- 上のノルムの鎖を右辺から左辺へ
-        _ = vecNorm (evenUnit (n + 1)) * vecNorm (evenUnit (n + 1)) := pow_two _
-                                              -- `r^2 := r r`（`r → ‖x^{(+)}‖`）
+        _ = vecNorm (evenUnit (n + 1)) * vecNorm (evenUnit (n + 1)) := square_of_real_number_is_product _
+                                              -- `square_of_real_number_is_product`（`r → ‖x^{(+)}‖`）
         _ = 0 * 0 := by rw [h0]               -- `‖x^{(+)}‖ = 0` を両方の因子へ同時に適用
         _ = 0 := zero_mul 0                   -- ℝ で `0 · 0 = 0`
     exact one_ne_zero h10                     -- ℝ で `1 ≠ 0` に反する
@@ -253,7 +255,8 @@ theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
     calc vecNorm (evenUnit (n + 1)) ^ 2
         = 1 := vecNorm_sq_evenUnit_succ n     -- 上のノルムの鎖
       _ = 1 * 1 := (mul_one 1).symm           -- ℝ で `1 · 1 = 1` を右辺から左辺へ
-      _ = (1 : ℝ) ^ 2 := (pow_two 1).symm     -- `r^2 := r r`（`r → 1`）を右辺から左辺へ
+      _ = (1 : ℝ) ^ 2 := (square_of_real_number_is_product 1).symm
+                                              -- `square_of_real_number_is_product`（`r → 1`）を右辺から左辺へ
   exact (positive_real_square_injective hpos one_pos).mp hsq
                                               -- `positive_real_square_injective`（`a → ‖x^{(+)}‖`、`b → 1`、`⇒`）
 

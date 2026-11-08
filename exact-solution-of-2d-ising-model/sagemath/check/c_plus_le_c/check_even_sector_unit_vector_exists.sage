@@ -117,10 +117,10 @@ for M in [1, 2, 3, 4, 5]:
     # 否定コントロール: x^{(+)} の 1 成分の符号を変えると ε_ℝ で動く
     y = vector(AA, list(xp)); y[0] = -y[0]
     assert eps_R * y != y
-    # ノルムの 14 行の鎖（冪は def_power_of_real_number どおり rpow で、二乗は r^2 := r r で組む）
+    # ノルムの 14 行の鎖（冪は def_power_of_real_number どおり rpow で組み、二乗も m = 2 の冪 rpow(t, 2) とする）
     s2 = AA(2).sqrt()
     two = AA(1) + AA(1)
-    sq = lambda t: t * t
+    sq = lambda t: rpow(t, 2)
     norm = sqrt(sum(abs(c) * abs(c) for c in xp))  # def_matrix_norm の ‖x‖ := √(Σ|x_i|^2)
     rows = [
         sq(norm),
@@ -130,10 +130,10 @@ for M in [1, 2, 3, 4, 5]:
         sum(sq(rpow(r, M)) for _ in range(d)),                # 各成分の値
         AA(ZZ(2) ** M) * sq(rpow(r, M)),                      # finite_sum_of_constant_real_number（ι(2_Z^M)）
         rpow(two, M) * sq(rpow(r, M)),                        # inclusion_zz_to_rr_of_power_of_two
-        rpow(two, M) * (rpow(r, M) * rpow(r, M)),             # r^2 := r r
+        rpow(two, M) * (rpow(r, M) * rpow(r, M)),             # square_of_real_number_is_product（r → (1/√2)^M）
         rpow(two, M) * rpow(r * r, M),                        # product_of_real_powers_is_power_of_product
         rpow(two, M) * rpow(1 / (s2 * s2), M),                # (1/p)(1/q) = 1/(pq)
-        rpow(two, M) * rpow(1 / sq(s2), M),                   # r^2 := r r を右辺から左辺へ
+        rpow(two, M) * rpow(1 / sq(s2), M),                   # square_of_real_number_is_product（r → √2）を右辺から左辺へ
         rpow(two, M) * rpow(1 / two, M),                      # definition_of_sqrt_r_positive の y^2 = x（x → 2）
         rpow(two * (1 / two), M),                             # product_of_real_powers_is_power_of_product
         rpow(AA(1), M),                                       # p · (1/p) = 1
@@ -148,14 +148,14 @@ for M in [1, 2, 3, 4, 5]:
     # 実際の ‖x^{(+)}‖ ∈ ℝ_{≥0} は 0 でないこと（よって ℝ_{>0}）を確かめる
     assert norm >= 0                                      # def_matrix_norm より ‖x^{(+)}‖ ∈ ℝ_{≥0}
     z = AA(0)
-    rows0 = [sq(z), z * z, AA(0) * AA(0), AA(0)]          # ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（‖x‖ → 0）
+    rows0 = [sq(z), z * z, AA(0) * AA(0), AA(0)]          # ‖x‖^2 = ‖x‖‖x‖（square_of_real_number_is_product）= 0·0 = 0（‖x‖ → 0）
     for u, w in zip(rows0, rows0[1:]):
         assert u == w
         n_eq += 1
     assert AA(1) != rows0[-1]                             # ℝ で 1 ≠ 0（仮定 ‖x‖ = 0 は 1 = 0 を導く）
     assert norm != 0 and norm > 0                         # ‖x^{(+)}‖ ∈ ℝ_{>0}
     # ‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x‖、b → 1）
-    rows1 = [sq(norm), AA(1), AA(1) * AA(1), sq(AA(1))]
+    rows1 = [sq(norm), AA(1), AA(1) * AA(1), sq(AA(1))]  # 最後の等号は square_of_real_number_is_product（r → 1）を右辺から左辺へ
     for u, w in zip(rows1, rows1[1:]):
         assert u == w
         n_eq += 1

@@ -12,8 +12,9 @@
 | --- | --- |
 | 準備: `‖x‖^2 = (√Σ|x_k|^2)^2 = Σ|x_k|^2` の 2 行（`def_matrix_norm`、`definition_of_sqrt_r_positive` の `y^2 = x`） | `vecNorm_sq_eq_sum_abs_sq` の `calc` の 2 段（同じ準備を持つ `ClaimNormOfNormalizedRealVectorIsOne.lean` に置いた） |
 | 準備: `|v_k|^2` の 4 行の鎖（`square_of_real_absolute_value`、`v` の定義、`square_of_real_sum_is_at_most_twice_sum_of_squares`、`square_of_real_absolute_value` を 2 か所） | `hterm` の `calc` の 4 段 |
-| 主張の 8 行の鎖 | 主定理の `calc` の 8 段 |
+| 主張の 9 行の鎖 | 主定理の `calc` の 9 段 |
 
+- 人手の二乗は `def_power_of_real_number` の冪（`m = 2`）で、Lean の `^ 2`（`Monoid.npow`）と同じものである。
 - 人手の `M_col` は Lean の `n + 1`、`ε_ℝ` は `epsilonReal n`、`ℝ^d` の元は `Conf (n + 1) → ℝ`、`‖·‖` は `vecNorm`（`def_matrix_norm` の `K = ℝ`）である。
 - 人手の `def_matrix_norm` の `‖w‖ = √(Σ|w_k|^2)` は、Lean の `vecNorm w = √(w ⬝ᵥ w)` を `vecNormSq_eq_sum` で `√(Σ w_k^2)` に開き、
   `square_of_real_absolute_value` で `√(Σ|w_k|^2)` に書いたものである（`ClaimEpsilonRealPreservesNorm.lean` と同じ。そちらは同じ段を mathlib の `sq_abs` で埋めている）。
@@ -32,13 +33,14 @@ import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealPrese
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimNormOfNormalizedRealVectorIsOne
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
 
 namespace Ising2D
 
 open Matrix
 
 /-- **人手 `norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`**: `‖u‖ = 1` のとき、
-すべての `k` で `v_k = u_k + (ε_ℝu)_k` なら `‖v‖^2 ≤ 4`（人手の `M_col` は `n + 1`。準備と 8 行の鎖と 1 対 1）。 -/
+すべての `k` で `v_k = u_k + (ε_ℝu)_k` なら `‖v‖^2 ≤ 4`（人手の `M_col` は `n + 1`。準備と 9 行の鎖と 1 対 1）。 -/
 theorem norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four (n : ℕ)
     (u v : Conf (n + 1) → ℝ) (hu : vecNorm u = 1)
     (hv : ∀ k, v k = u k + (epsilonReal n *ᵥ u) k) :
@@ -68,6 +70,7 @@ theorem norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most
     _ = 2 * vecNorm u ^ 2 + 2 * vecNorm u ^ 2 := by
         rw [epsilon_real_preserves_norm]                            -- `epsilon_real_preserves_norm`（`u → u`）
     _ = 2 * 1 ^ 2 + 2 * 1 ^ 2 := by rw [hu]                         -- `‖u‖ = 1` を 2 か所へ同時適用
+    _ = 2 * 1 + 2 * 1 := by rw [power_of_real_one_is_one 2]         -- `power_of_real_one_is_one`（`m → 2`）を 2 か所へ同時適用
     _ = 4 := by norm_num                                            -- ℝ の四則演算
 
 end Ising2D

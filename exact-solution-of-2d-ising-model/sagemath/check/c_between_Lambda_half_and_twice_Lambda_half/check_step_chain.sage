@@ -125,7 +125,9 @@ for M in EIG_M:
             v = u + Eu                                     # v_k := u_k + (ε_ℝu)_k
             nv = v.norm()
             vh = v / nv                                    # v̂_k := v_k/‖v‖
-            nv2 = nv * nv                                  # ‖v‖^2 := ‖v‖‖v‖
+            nv2 = nv ** 2                                  # ‖v‖^2（def_power_of_real_number の冪 m = 2）
+            # 準備: ‖v‖^2 = ‖v‖‖v‖（square_of_real_number_is_product、r → ‖v‖）
+            w3_eq = max(w3_eq, abs(nv2 - nv * nv))
             qx = x * Wr * x
             qu = u * Wr * u
             qv = v * Wr * v
