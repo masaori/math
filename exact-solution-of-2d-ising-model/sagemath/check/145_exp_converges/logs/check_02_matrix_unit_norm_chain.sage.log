@@ -1,0 +1,4 @@
+=== exp_converges: Step 4 の行列単位のノルムの鎖 ===
+  確かめた鎖の行: 9282
+checks: 2525, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

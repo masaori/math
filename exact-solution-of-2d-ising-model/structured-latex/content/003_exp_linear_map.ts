@@ -613,12 +613,136 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         math(String.raw`y_{kl}\cdot 0=0`),
         " であるから、和は ",
         math(String.raw`y_{ij}`),
-        " に等しい。また ", ref("def_matrix_norm"), " より",
+        " に等しい。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`|0_K|`),
+        " と ",
+        math(String.raw`|1_K|`),
+        "】",
+        math(String.raw`E^{(k,l)}`),
+        " の定義の ",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`K`),
+        " の元 ",
+        math(String.raw`0_K`),
+        "、",
+        math(String.raw`1_K`),
+        " であり、",
+        math(String.raw`|\cdot|`),
+        " は ",
+        ref("def_matrix_norm"),
+        " の絶対値である。",
+        math(String.raw`K = \mathbb{R}`),
+        " のとき、",
+        ref("def_real_absolute_value"),
+        " の ",
+        math(String.raw`0 \geq 0`),
+        "・",
+        math(String.raw`1 \geq 0`),
+        " の場合より ",
+        math(String.raw`|0_{\mathbb{R}}| = 0`),
+        "、",
+        math(String.raw`|1_{\mathbb{R}}| = 1`),
+        " である。",
+        math(String.raw`K = \mathbb{C}`),
+        " のとき、",
+        ref("abs_basic_properties"),
+        " (3) の ",
+        math(String.raw`z = 0_{\mathbb{C}} \Rightarrow |z| = 0`),
+        " の向き（",
+        math(String.raw`z \to 0_{\mathbb{C}}`),
+        "）より ",
+        math(String.raw`|0_{\mathbb{C}}| = 0`),
+        " であり、",
       ]),
       displayMath(String.raw`\begin{aligned}
+|1_{\mathbb{C}}|
+&= |\iota_{\mathbb{R}\to\mathbb{C}}(1_{\mathbb{R}})|
+&&\bigl(\because\ 1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(1)\ \text{（}\blkref{multiplicative_group_of_cc}\ \text{の証明の冒頭で}\ \blkref{inclusion_rr_to_cc}\ \text{から置いた}\ \mathbb{C}\ \text{の積の単位元）}\bigr)\\
+&= |1_{\mathbb{R}}|
+&&\bigl(\because\ \blkref{abs_basic_properties}\ (6)\ (x \to 1_{\mathbb{R}})\bigr)\\
+&= 1
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 1 \geq 0\ \text{の場合}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`|0_K| = 0`),
+        "、",
+        math(String.raw`|1_K| = 1`),
+        " である。",
+      ]),
+      paragraph([
+        "【",
+        math(String.raw`E^{(k,l)}`),
+        " の成分の絶対値の二乗】",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " を固定する。",
+        math(String.raw`i, j \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`(i,j) \neq (k,l)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|\left(E^{(k,l)}\right)_{ij}\right|^2
+&= |0_K|^2
+&&\bigl(\because\ E^{(k,l)}\ \text{の定義の}\ (i,j) \neq (k,l)\ \text{の場合}\bigr)\\
+&= 0^2
+&&\bigl(\because\ \text{上の}\ |0_K| = 0\bigr)\\
+&= 0 \cdot 0
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\left|\left(E^{(k,l)}\right)_{kl}\right|^2
+&= |1_K|^2
+&&\bigl(\because\ E^{(k,l)}\ \text{の定義の}\ (i,j) = (k,l)\ \text{の場合}\bigr)\\
+&= 1^2
+&&\bigl(\because\ \text{上の}\ |1_K| = 1\bigr)\\
+&= 1
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。【行ごとの和】",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`i \neq k`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{n}\left|\left(E^{(k,l)}\right)_{ij}\right|^2
+&= 0 + \cdots + 0
+&&\bigl(\because\ i \neq k\ \text{なのですべての}\ j\ \text{で}\ (i,j) \neq (k,l)\text{。上の}\ (i,j) \neq (k,l)\ \text{の鎖を各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ 0\ \text{が}\ n\ \text{個}\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\ \text{を左から順に}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{n}\left|\left(E^{(k,l)}\right)_{kj}\right|^2
+&= 0 + \cdots + 0 + \left|\left(E^{(k,l)}\right)_{kl}\right|^2 + 0 + \cdots + 0
+&&\bigl(\because\ j \neq l\ \text{なら}\ (k,j) \neq (k,l)\text{。上の}\ (i,j) \neq (k,l)\ \text{の鎖を}\ l\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ \left|\left(E^{(k,l)}\right)_{kl}\right|^2\ \text{の前に}\ 0\ \text{が}\ l-1\ \text{個、後に}\ n-l\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
+&= \left|\left(E^{(k,l)}\right)_{kl}\right|^2
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{と}\ a + 0 = a\ (a \in \mathbb{R})\ \text{を左から順に}\bigr)\\
+&= 1
+&&\bigl(\because\ \text{上の}\ \left|\left(E^{(k,l)}\right)_{kl}\right|^2 = 1\bigr)
+\end{aligned}`),
+      paragraph(["である。【ノルム】したがって"]),
+      displayMath(String.raw`\begin{aligned}
 \left\|E^{(k,l)}\right\|
+&=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|\left(E^{(k,l)}\right)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{def_matrix_norm}\ (n \to n,\ A \to E^{(k,l)})\bigr)\\
+&=\sqrt{0 + \cdots + 0 + \sum_{j=1}^{n}\left|\left(E^{(k,l)}\right)_{kj}\right|^2 + 0 + \cdots + 0}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \text{上の}\ i \neq k\ \text{の行ごとの和を}\ k\ \text{以外の各項へ。外側の和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ i = k\ \text{の項の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ n-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
+&=\sqrt{\sum_{j=1}^{n}\left|\left(E^{(k,l)}\right)_{kj}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{と}\ a + 0 = a\ (a \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
-&&\left(\because\ \text{行列ノルムの定義と }E^{(k,l)}\text{ の成分の定義}\right)\\
+&&\bigl(\because\ \text{上の}\ i = k\ \text{の行の和}\bigr)\\
 &=1
 &&\left(\because\ \blkref{sqrt_of_real_one_is_one}\right).
 \end{aligned}`),
@@ -904,6 +1028,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "notes/003_exp_abstract_normed_space.ts へ退避した。",
         "2026-09-01 の式変形統一で、Step 6 の線型性の鎖に行中の \\quad (\\because …) で置かれていた" +
           "根拠 8 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の 1 行目「√1（行列ノルムの定義と E^{(k,l)} の成分の定義）」（ノルムの定義・成分の値・|0_K| = 0 と |1_K| = 1（K = ℝ・ℂ の場合分け）・0 の項を二重の和から落とすことを 1 行で使っていた）を、|0_K|・|1_K| の準備（K = ℂ の |0_C| は abs_basic_properties (3)、|1_C| は 3 行の鎖）、成分の絶対値の二乗の 2 本の鎖、行ごとの和の 2 本の鎖、ノルムの 5 行の鎖に割った（trace_power_upper_bound の【e_k のノルム】と同じ書き方。値と主張は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の最後の行の根拠「ℝ_{≥0} における 1 の非負平方根」を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
