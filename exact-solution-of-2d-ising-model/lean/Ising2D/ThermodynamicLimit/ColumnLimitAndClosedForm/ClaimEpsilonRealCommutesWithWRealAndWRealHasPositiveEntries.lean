@@ -10,15 +10,15 @@
 
 | 人手 | Lean |
 | --- | --- |
-| `W_has_positive_entries` の言い換えの形「`W_kl > 0`、すなわち `W_kl = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る」 | `W_has_positive_entries_as_inclusion` |
+| `W_has_positive_entries` の言い換えの形「すべての `k, l` について `W_kl > 0`、すなわち `W_kl = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る」（人手の最後の段: `μ ↦ ν(ι(μ))` の全単射性で `k = ν(ι(λ))`・`l = ν(ι(λ'))` と書き、主張を `(λ, λ')` で使う） | `W_has_positive_entries_as_inclusion` |
 | `W_real_has_positive_entries` の 2 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = w_ℂ` と `inclusion_rr_to_cc_is_injective`（`a → (W_ℝ)_kl`, `b → w`）、`w > 0` | `W_real_has_positive_entries` の `calc` の 2 段と結び |
 | `epsilon_real_commutes_with_W_real` の 3 行の鎖 `ε_ℝW_ℝ = ϱ(εW) = ϱ(Wε) = W_ℝε_ℝ` | `epsilon_real_commutes_with_W_real` の `calc` の 3 段 |
 
 - 人手の `W_ℝ` は `realMatrixOfRealEntries (physicalSymTransferC …) (physicalSymTransferC_hasRealEntries …)`（`def_W_real`）、
   人手の `ε_ℝ` は `epsilonReal n`（`def_epsilon_real`、人手の `M_col` は `n + 1`）である。
-- 人手の `W_has_positive_entries` の Lean の具体版 `W_has_positive_entries_physical`・`physicalSymTransferR_pos` は、実成分で組んだ
-  `physicalSymTransferR` の成分が正であることを述べる。人手の「`W_kl > 0`」は複素数 `W_kl` が正の実数の包含であることなので、
-  `W_has_positive_entries_as_inclusion` で `w := (physicalSymTransferR)_kl` と取り、`physicalSymTransferC_eq_map` でこの形に読む。
+- 人手の `W_has_positive_entries` の主張の形（複素行列 `W` の `ι(μ), ι(μ')` 成分が `w_ℂ`、`w ∈ ℝ_{>0}`）は
+  `ClaimPhysicalWHasPositiveEntries.lean` の `W_has_positive_entries`。`W_has_positive_entries_as_inclusion` は、
+  人手の最後の段どおり `configBasisIso` の全射性で `k = ι(λ)`・`l = ι(λ')` と書き、それを `(λ, λ')` で引く。
 - 人手の `εW = Wε`（`epsilon_commutes_with_W`。複素行列の等式）は Lean の `epsilon_commute_physicalSymTransferC`。
   Lean の `epsilon_commutes_with_W` は同じ内容を実成分で組んだ `epsilonR`・`physicalSymTransferR` について述べたもので、
   人手の `ϱ` を経由する形と 1 対 1 なのは本ファイルの `epsilon_real_commutes_with_W_real` である。
@@ -45,13 +45,13 @@ open Matrix
 
 /-- **人手 `W_has_positive_entries` の言い換えの形**: すべての `k, l` について `W_kl > 0`、すなわち
 `W_kl = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る（人手の主張文の「`z > 0`」の読み方）。
-`w` は実成分で組んだ `physicalSymTransferR` の成分で、その正値性は `physicalSymTransferR_pos`（`W_has_positive_entries` の具体版
-`W_has_positive_entries_physical` から `ι` の全射性で得る「すべての `k, l`」の言い換え）、
-`W_kl = w_ℂ` は `physicalSymTransferC_eq_map` である。 -/
+人手の最後の段: `μ ↦ ν(ι(μ))` は全単射（`config_numbering_equals_kronecker_numbering`・`row_configuration_numbering_bijective`。
+Lean では `configBasisIso` の全射性）なので `k = ι(λ)`・`l = ι(λ')` と書け、`W_has_positive_entries` を `(μ, μ') := (λ, λ')`（Lean の `lam`・`lam'`）で引く。 -/
 theorem W_has_positive_entries_as_inclusion {M : ℕ} {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (k l : Conf M) :
-    ∃ w : ℝ, 0 < w ∧ physicalSymTransferC M K1 K2 k l = (w : ℂ) :=
-  ⟨physicalSymTransferR M K1 K2 k l, physicalSymTransferR_pos hK1 hK2 k l, by
-    rw [physicalSymTransferC_eq_map, Matrix.map_apply, Complex.ofRealHom_eq_coe]⟩
+    ∃ w : ℝ, 0 < w ∧ physicalSymTransferC M K1 K2 k l = (w : ℂ) := by
+  obtain ⟨lam, rfl⟩ := (configBasisIso M).surjective k
+  obtain ⟨lam', rfl⟩ := (configBasisIso M).surjective l
+  exact W_has_positive_entries hK1 hK2 lam lam'
 
 /-- **人手 `W_real_has_positive_entries`**: `W_ℝ`（`def_W_real`）のすべての成分は `ℝ` の順序で正。
 `W_has_positive_entries` の `w` を取り、2 行の鎖 `((W_ℝ)_kl)_ℂ = W_kl = w_ℂ` に `inclusion_rr_to_cc_is_injective`

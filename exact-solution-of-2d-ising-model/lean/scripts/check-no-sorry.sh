@@ -2829,6 +2829,7 @@ targets=(
   Ising2D.physicalV2R_apply_configBasisIso_pos
   Ising2D.physicalSymTransferR_apply_configBasisIso
   Ising2D.W_has_positive_entries_physical
+  Ising2D.W_has_positive_entries
   Ising2D.physicalSymTransferR_pos
   Ising2D.NecSuf.sandwich_apply_of_offDiag_zero
   Ising2D.NecSuf.sandwich_apply_pos

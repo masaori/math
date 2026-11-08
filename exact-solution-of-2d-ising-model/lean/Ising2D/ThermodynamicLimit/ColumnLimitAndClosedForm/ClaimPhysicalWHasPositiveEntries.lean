@@ -15,7 +15,8 @@
 | Step 1 の `exp(…) > 0` | `physicalV1halfR_apply_configBasisIso_self_pos` |
 | Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
 | Step 3 の 1〜4 行目（`W` の定義、行列の積の定義、`j ≠ ι(μ)` の項が `0`、`k ≠ ι(μ')` の項が `0`） | `physicalSymTransferR_apply_configBasisIso` の式変形の各行。3・4 行目の「Step 1 の対角性」は `physicalV1halfR_offDiag`（Step 1 の補題の `μ ≠ μ'` の場合） |
-| Step 3 の「3 つの因子はいずれも正」と主張 | `W_has_positive_entries_physical` |
+| Step 3 の「3 つの因子はいずれも正」 | `W_has_positive_entries_physical`（実成分で組んだ `W` の `ι(μ), ι(μ')` 成分が正） |
+| 主張「`W_{ι(μ),ι(μ')} > 0`、すなわち `W_{ι(μ),ι(μ')} = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る」（`W` は複素行列） | `W_has_positive_entries` |
 
 Lean の `W`（`physicalSymTransferR`）は実行列で、その成分を `ℂ` へ埋め込んだものが人手の
 `W = V_1^{1/2}V_2V_1^{1/2}`（`physicalSymTransferC`）である（`physicalSymTransferC_eq_map`）。
@@ -23,13 +24,23 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 `physicalV1halfC_eq_map`・`physicalV2C_eq_map` と `ℝ → ℂ` の単射性で読み取る。この読み取りの段は人手に無い
 （人手は `ℝ ⊂ ℂ` の包含を明示せずに使う）。
 
-`EvenSectorBridge` が受け取る形 `∀ k l, 0 < W k l` は、`ι` が全単射であること
-（`def_config_basis_iso`）から `physicalSymTransferR_pos` で得る。この最後の段は人手の主張の
-言い換え（`𝓘` の任意の元は `ι(μ)` の形）であり、人手には書かれていない。
+人手の主張の形 `W_has_positive_entries` は、複素行列 `W`（`physicalSymTransferC`）の成分について
+「`w_ℂ` に等しい `w ∈ ℝ_{>0}` が在る」を述べる。いまの証明は `w := (physicalSymTransferR)_{ι(μ),ι(μ')}` と取り、
+`W_has_positive_entries_physical` と `physicalSymTransferC_eq_map` で閉じる。人手の Step 1〜3 は複素行列のまま
+`B_{kk} = b(μ)_ℂ`・`(V_2)_{kl} = v(μ,μ')_ℂ`・`W_{kl} = ((b(μ)v(μ,μ'))b(μ'))_ℂ` と計算し、`w > 0` を
+`finite_product_of_positive_reals_is_positive`（`m := 3`）で示すので、この証明はまだ人手と 1 対 1 ではない
+（状態台帳の (cl2b)〜(cl2e) で人手の鎖に組み直す）。
+人手の「言い換えの形」（すべての `k, l` について `W_kl > 0`）は
+`ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries.lean` の `W_has_positive_entries_as_inclusion` で、
+人手の最後の段どおり `ι` の全射性で `W_has_positive_entries` から導く。
+
+`EvenSectorBridge` が受け取る形 `∀ k l, 0 < W k l`（実成分で組んだ `W`）は、`ι` が全単射であること
+（`def_config_basis_iso`）から `physicalSymTransferR_pos` で得る。これは人手の最後の段の「言い換えの形」を
+実行列の側で述べたもので、(cl2e) で人手の主張の形から導き直す。
 
 人手は結合定数を `K_1, K_2 ∈ ℝ_{>0}` とする。Step 1〜3 はどれも `K_1, K_2` の正値性を使わない（`exp` は実数の指数関数で、
-値はどの実数でも正なので）が、主張を人手どおりにするため `W_has_positive_entries_physical`・`physicalSymTransferR_pos` は
-`K_1 > 0`・`K_2 > 0` を仮定に取る。Step 1〜3 の補題は人手の証明の中の段なので仮定を置かない。
+値はどの実数でも正なので）が、主張を人手どおりにするため `W_has_positive_entries`・`W_has_positive_entries_physical`・`physicalSymTransferR_pos` は
+`K_1 > 0`・`K_2 > 0` を仮定に取る（`W_has_positive_entries_physical` は Step 3 の段だが、主張の形 `W_has_positive_entries` へ渡すため受ける）。Step 1〜3 のほかの補題は人手の証明の中の段なので仮定を置かない。
 
 必要十分版は `NecSuf/SandwichByDiagonal.lean`（Step 3 と同じ式変形を、有限の添字と
 結合律・可換律を仮定しない半環の係数で書いたもの）。具体版をその特殊化として導出するのは
@@ -134,7 +145,7 @@ theorem physicalSymTransferR_apply_configBasisIso (K1 K2 : ℝ) (μ μ' : SpinCo
         rw [Finset.sum_eq_single I' (fun k _ hk => by rw [hBoff k I' hk, mul_zero])
           (fun h => absurd (Finset.mem_univ I') h)]
 
-/-- **人手 `W_has_positive_entries`**: 具体的な `W = V_1^{1/2}V_2V_1^{1/2}` について
+/-- **人手 Step 3 の「3 つの因子はいずれも正」**（実成分で組んだ `W`）: 具体的な `W = V_1^{1/2}V_2V_1^{1/2}` について
 `W_{ι(μ),ι(μ')} > 0`（`μ, μ' ∈ 𝔐`）。 -/
 theorem W_has_positive_entries_physical {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 < K2) (μ μ' : SpinConf M) :
     0 < physicalSymTransferR M K1 K2 (configBasisIso M μ) (configBasisIso M μ') := by
@@ -143,6 +154,18 @@ theorem W_has_positive_entries_physical {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 
   exact mul_pos (mul_pos (physicalV1halfR_apply_configBasisIso_self_pos K1 μ)
     (physicalV2R_apply_configBasisIso_pos K2 μ μ'))
     (physicalV1halfR_apply_configBasisIso_self_pos K1 μ')
+
+/-- **人手 `W_has_positive_entries` の主張の形**: 複素行列 `W = V_1^{1/2}V_2V_1^{1/2}`（`physicalSymTransferC`、
+結合定数 `K_1, K_2 ∈ ℝ_{>0}`）について、`μ, μ' ∈ 𝔐` ごとに `W_{ι(μ),ι(μ')} = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る
+（人手の「`z > 0`」の読み方。`w` は `ℝ` の元として取る）。
+`w := (physicalSymTransferR)_{ι(μ),ι(μ')}` と取り、`w > 0` は `W_has_positive_entries_physical`、
+`W_{ι(μ),ι(μ')} = w_ℂ` は `physicalSymTransferC_eq_map`（`W` は実成分の行列の `ℂ` への埋め込み）。 -/
+theorem W_has_positive_entries {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) (μ μ' : SpinConf M) :
+    ∃ w : ℝ, 0 < w ∧
+      physicalSymTransferC M K1 K2 (configBasisIso M μ) (configBasisIso M μ') = (w : ℂ) :=
+  ⟨physicalSymTransferR M K1 K2 (configBasisIso M μ) (configBasisIso M μ'),
+    W_has_positive_entries_physical hK1 hK2 μ μ', by
+    rw [physicalSymTransferC_eq_map, Matrix.map_apply, Complex.ofRealHom_eq_coe]⟩
 
 /-- `W` のすべての成分が正（`ι` が全単射なので、任意の行・列番号は `ι(μ)` の形）。
 `EvenSectorBridge.rayleighSup_sandwich_LambdaM` の入力の形。 -/

@@ -502,7 +502,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
 | `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`。**無条件**） |
 | `rayleighSup_sandwich_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
-| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）。いまの通しの経路では、Step 2 の `c_le_twice_c_plus_physical` が同じ内容を `W_real_has_positive_entries` で引く |
+| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries` の言い換えの形を実成分で組んだ `W` の側で述べたもの、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）。いまの通しの経路では、Step 2 の `c_le_twice_c_plus_physical` が同じ内容を `W_real_has_positive_entries` で引く |
 | `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）。いまの通しの経路では使わない（Step 2 の `c_le_twice_c_plus_physical` が引く `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice` が、`epsilon_real_commutes_with_W_real` を通して可換性を使う） |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | 018 | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）。`M ≠ 0` は `2 ≤ M` から出す |
 
@@ -523,7 +523,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 残った仮定は無い。もとの場 `htr`（`tr(εV^{(+)}) > 0`）は `trace_epsilon_vPlusDataOf_pos` で埋め、
 その型のために置いていた `hM`（`M ≠ 0`）は `2 ≤ M` から出す。`hWpos`（具体的な `W` の成分が正）は
-`Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）、
+`Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries` の言い換えの形を実成分で組んだ `W` の側で述べたもの、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）、
 `hWcomm`（`ε` と具体的な `W` の可換性）は `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）で埋め、
 欄を束ねていた構造 `EvenSectorClosureInput` を消した。
 
