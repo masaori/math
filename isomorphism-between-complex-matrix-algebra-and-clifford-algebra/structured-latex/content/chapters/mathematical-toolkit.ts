@@ -7705,4 +7705,75 @@ L^{b}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_congruence_modulo_two_sided_ideal_is_reflexive",
+    kind: "claim",
+    title: { text: "両側イデアルを法とする合同は反射的である" },
+    labels: ["claim_congruence_modulo_two_sided_ideal_is_reflexive"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a`),
+        " について ",
+        math(String.raw`a\equiv_I a`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a\in A`),
+        " を任意にとる。ℂ-線型空間についての定義・主張は、",
+        math(String.raw`V:=U_{\mathrm{vec}}(A)=(A,+_A,\ast_A,0_A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a+_A\bigl((-1_{\mathbb{C}})\ast_A a\bigr)
+&=(1_{\mathbb{C}}\ast_A a)+_A\bigl((-1_{\mathbb{C}})\ast_A a\bigr)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_A a
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\ast_A a
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_congruence_modulo_two_sided_ideal}\right)\\
+&=0_A
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=a\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph([
+        "両側イデアルの一つ目の条件（",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`0_A\in I`),
+        " である。上の等式により ",
+        math(String.raw`a+_A\bigl((-1_{\mathbb{C}})\ast_A a\bigr)\in I`),
+        " であり、合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`a\equiv_I a`),
+        " である。",
+        "この議論は、両側イデアルの二つ目・三つ目・四つ目の条件と、",
+        math(String.raw`A`),
+        " の乗法 ",
+        math(String.raw`\cdot_A`),
+        " を使わない。",
+      ]),
+    ],
+  },
 ]);

@@ -11,6 +11,7 @@
 ## 完了済み
 
 
+- 2026-11-08: 合同の反射性（ラベル claim_congruence_modulo_two_sided_ideal_is_reflexive）を、a+_A((-1_ℂ)∗_A a)=0_A の四行の鎖と 0_A∈I で示した。次は合同の対称性。
 - 2026-11-08: 両側イデアルがスカラー倍で閉じていること（ラベル claim_two_sided_ideal_is_closed_under_scalar_multiplication）を、λ∗_A x=(λ∗_A 1_A)·_A x と左から掛ける条件で示した。次は合同の反射性（a≡_I a）。
 
 - 2026-11-08: 台帳の「商代数の構成と射影」を十七行に割り、両側イデアルを法とする合同の定義（ラベル def_congruence_modulo_two_sided_ideal、a+_A((-1_ℂ)∗_A b)∈I のとき a≡_I b）を置いた。次は両側イデアルがスカラー倍で閉じていること。

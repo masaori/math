@@ -9,6 +9,7 @@ export const ALL_LABELS = [
   "claim_annihilation_operator_matrices_anticommute",
   "claim_binary_numbering_is_numbering_of_power_set",
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
+  "claim_congruence_modulo_two_sided_ideal_is_reflexive",
   "claim_coordinate_map_is_linear_form",
   "claim_coordinate_maps_form_dual_basis",
   "claim_count_below_index_after_adding_one_element",
