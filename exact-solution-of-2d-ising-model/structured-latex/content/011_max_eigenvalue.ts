@@ -908,7 +908,7 @@ x^\top P x
 &= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (1/b)\,b = 1\ (b \to \|v\|^2 \neq 0)\bigr)\\
 &= 1
-  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{と}\ 1 \geq 0,\ \blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{の}\ 1^2 = 1\bigr)
+  &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -917,6 +917,7 @@ x^\top P x
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は v̂ := v/‖v‖ を「𝓕^{(+)} ∩ ℝ^{2^{M_col}} の単位ベクトル」とだけ書き、‖v̂‖ = 1 を示していなかった。この行を参照に替えるために足した。ℝ^n の元の実数倍は本文で定めていないので、v̂ を成分の等式で与える（real_bilinear_value_of_scalar_multiple_vector と同じ）。数値検証: sagemath/check/norm_of_normalized_real_vector_is_one/。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、積の形との行き来を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。鎖の 4 行目の (a/b)^2 = (1/b^2)a^2 は冪を含むので、積へ開く行・ℝ の四則演算の行・冪へ戻す行の 3 行に割った。最後の行の 1^2 = 1 は power_of_real_one_is_one から引く。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 √1 = 1 が definition_of_sqrt_r_positive（x → 1）と 1^2 = 1 の 2 つの事実を 1 行で使っていたので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
   },

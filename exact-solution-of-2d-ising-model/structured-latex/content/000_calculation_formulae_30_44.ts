@@ -2588,7 +2588,7 @@ z
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の計算}\ 1^2+0^2=1)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の計算}\ 0/1=0)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
@@ -2606,7 +2606,7 @@ z
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開。}\blkref{sqrt_expansion_via_polar})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
 &&(\because\ \mathbb{R}\ \text{の計算})\\
 &= (1\cdot\cos 0,\ 1\cdot\sin 0)
@@ -2716,6 +2716,7 @@ z
           "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。" +
           "式変形の書き方の統一（2026-09-03）。証明末尾の参照一覧を削除し、" +
           "各参照を実際に使う準備または式変形の行末へ移した。内容・式変形・根拠・参照は不変である。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) と √(1_C) の鎖の √1 = 1 の 2 行が definition_of_sqrt_r_positive だけを根拠にしていた（1 ≥ 0 と 1^2 = 1 が書かれていなかった）ので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
   },

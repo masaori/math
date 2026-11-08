@@ -1625,13 +1625,14 @@ t
 &= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &= 1
-&&(\because\ 1 \geq 0\ \text{かつ}\ 1^2 = 1\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ 1)
+&&(\because\ \blkref{sqrt_of_real_one_is_one})
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: elementary_sine_bounds を分けるときに、積分の端点 0 での値に要るので足した。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 √1 = 1 が 1 ≥ 0・1^2 = 1・definition_of_sqrt_r_positive の一意性を 1 行で使っていたので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
   },
@@ -2924,12 +2925,6 @@ y + s
         ref("sqrt_nonnegative_existence_uniqueness"),
         " の一意性より ",
         math(String.raw`\sqrt{q(\theta)^2+1} = \tfrac{W(\theta)}{\delta}`),
-        " である。同じ一意性と ",
-        math(String.raw`1 \geq 0`),
-        "、",
-        math(String.raw`1^2 = 1`),
-        " より ",
-        math(String.raw`\sqrt{1} = 1`),
         " である。",
         ref("remark_real_analysis_facts_R3_R4"),
         " の微分の公式（定数倍と恒等関数）より ",
@@ -2972,7 +2967,7 @@ F(0)
 &= 2\log\left(\sqrt{1}\right)
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &= 2\log 1
-&&(\because\ \sqrt{1} = 1)\\
+&&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= 2\log(\exp 0)
 &&(\because\ \blkref{scalar_exp_zero})\\
 &= 2\cdot 0
@@ -2997,6 +2992,7 @@ F(0)
       notes: [
         "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +
           "旧証明の √((θ²+4δ²)/(4δ²)) = √(θ²+4δ²)/(2δ) は平方根の商の規則を定めるブロックが本文に無いので、平方根の一意性から √(q²+1) = W/δ を示す形に改め、F(0) = 0 と F' の連続性を書いた。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: F(0) の鎖の √1 = 1 の行の名前だけの根拠を sqrt_of_real_one_is_one の参照にし、準備の文の「同じ一意性と 1 ≥ 0、1^2 = 1 より √1 = 1」を消した（その主張が担う）。値と主張は不変。",
       ],
     },
   },

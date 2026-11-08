@@ -22,7 +22,7 @@
 - 人手の二乗は `def_power_of_real_number` の冪で、Lean の `^ 2`（`Monoid.npow`）である。積の形との行き来は `square_of_real_number_is_product` で引き、
   mathlib の `sq`・`pow_two`・`div_pow` は使わない。
 - 人手の `definition_of_sqrt_r_positive`（`√x` は `y ≥ 0, y^2 = x` を満たす `y`）は Lean では `Real.sqrt` で、その `y^2 = x` の行は `Real.sq_sqrt`、
-  `√1 = 1` の行は `Real.sqrt_eq_iff_eq_sq`（`x ≥ 0`、`y ≥ 0` のとき `√x = y ↔ x = y^2`）に `1 ≥ 0` と `power_of_real_one_is_one`（`m → 2`）を渡したものである。
+  `√1 = 1` の行は `sqrt_of_real_one_is_one`（`ClaimSqrtOfRealOneIsOne.lean`）である。
 - 人手の「`ℝ` の四則演算」の 2 行（`(a/b)(a/b) = (1/(bb))(aa)`、`(1/b)b = 1`）は `div_mul_div_comm`・`div_eq_mul_one_div`・`mul_comm`・`one_div_mul_cancel` で埋める。
 - 人手は `ℝ^n` の元の実数倍を定めず、`v̂` を成分の等式 `v̂_k = v_k/‖v‖` で与える。Lean も同じく仮定 `hvhat` に置く
   （`real_bilinear_value_of_scalar_multiple_vector` と同じ形）。
@@ -33,7 +33,7 @@
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
-import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 
 set_option linter.unusedSectionVars false
 
@@ -99,7 +99,6 @@ theorem norm_of_normalized_real_vector_is_one (v vhat : n → ℝ) (hv0 : v ≠ 
           (vecNorm_sq_eq_sum_abs_sq v).symm                         -- 準備の `‖x‖^2 = Σ|x_k|^2`（`x → v`）を右辺から左辺へ（右の因子だけ）
     _ = Real.sqrt 1 := by
         rw [one_div_mul_cancel hN2]                                 -- `ℝ` の四則演算 `(1/b)b = 1`（`b → ‖v‖^2 ≠ 0`）
-    _ = 1 := (Real.sqrt_eq_iff_eq_sq zero_le_one zero_le_one).mpr
-        (power_of_real_one_is_one 2).symm                  -- `definition_of_sqrt_r_positive`（`x → 1`）と `1 ≥ 0`、`power_of_real_one_is_one`（`m → 2`）の `1^2 = 1`
+    _ = 1 := sqrt_of_real_one_is_one                               -- `sqrt_of_real_one_is_one`
 
 end Ising2D

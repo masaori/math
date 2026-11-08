@@ -521,7 +521,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 \\
 &=
 \frac{1}{\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}}
-&&(\because\ \sqrt{1}=1)
+&&(\because\ \blkref{sqrt_of_real_one_is_one})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \sin(\arctan(x))
@@ -538,6 +538,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
       status: "converted",
       notes: [
         "2026-08-14 の式変形統一で、根拠なしの圧縮鎖を行末根拠付きの九段・二段の鎖へ開いた（cos(arcsin(·)) の一段を cos の定義と逆関数の二段へ、平方・通分・平方根の商の各操作を一段ずつへ）。内容は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行の名前だけの根拠 √1 = 1 を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
   },

@@ -620,7 +620,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
 &&\left(\because\ \text{行列ノルムの定義と }E^{(k,l)}\text{ の成分の定義}\right)\\
 &=1
-&&\left(\because\ \mathbb{R}_{\ge0}\text{ における }1\text{ の非負平方根}\right).
+&&\left(\because\ \blkref{sqrt_of_real_one_is_one}\right).
 \end{aligned}`),
       paragraph([
         "Step 5: (2a)。",
@@ -904,6 +904,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "notes/003_exp_abstract_normed_space.ts へ退避した。",
         "2026-09-01 の式変形統一で、Step 6 の線型性の鎖に行中の \\quad (\\because …) で置かれていた" +
           "根拠 8 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の最後の行の根拠「ℝ_{≥0} における 1 の非負平方根」を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
       ],
     },
   },

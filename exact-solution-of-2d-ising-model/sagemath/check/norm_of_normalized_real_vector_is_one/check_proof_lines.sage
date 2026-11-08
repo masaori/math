@@ -43,7 +43,7 @@ def check(v):
         AA((1 / rpow(N, 2)) * sum(rpow(abs(AA(v[k])), 2) for k in range(n))).sqrt(), # square_of_real_absolute_value を右辺から左辺へ
         AA((1 / rpow(N, 2)) * rpow(N, 2)).sqrt(),                                # ‖x‖^2 = Σ|x_k|^2 を右辺から左辺へ
         AA(1).sqrt(),                                                            # (1/b)b = 1
-        AA(1),                                                                   # definition_of_sqrt_r_positive（1 ≥ 0、power_of_real_one_is_one の 1^2 = 1）
+        AA(1),                                                                   # sqrt_of_real_one_is_one（1 ≥ 0 と 1^2 = 1 を満たす非負平方根）
     ]
     assert rpow(1, 2) == 1                                             # power_of_real_one_is_one（m → 2）
     for i in range(11):

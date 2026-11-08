@@ -13,7 +13,7 @@
 
 - 人手の `√·^{(ℝ_{≥0})}`（`definition_of_sqrt_r_positive`）は Lean の `Real.sqrt` である。
   「`y ≥ 0 ∧ y^2 = x` を満たす `y` はただ一つで、それが `√x`」は、`x ≥ 0`・`y ≥ 0` のとき `√x = y ↔ x = y^2` を述べる
-  `Real.sqrt_eq_iff_eq_sq` で読む（`ClaimNormOfNormalizedRealVectorIsOne.lean` と同じ読み方）。mathlib の `Real.sqrt_one` は使わない。
+  `Real.sqrt_eq_iff_eq_sq` で読む。mathlib の `Real.sqrt_one` は使わない。
 - 人手の二乗は `def_power_of_real_number` の冪で、Lean の `^ 2`（`Monoid.npow`）である。
 
 必要十分版は置かない。主張は `ℝ_{≥0}` の上の特定の写像 `√·`（`definition_of_sqrt_r_positive`）の具体値についての主張であり、
