@@ -86152,7 +86152,7 @@ u_{w,w'}\cdot(t-\widehat{w})-u_{w,w'}\cdot(t-\widehat{w'})
 &=\widehat{(w'-w)^{-1}(w'-w)}
 &&(\because\ \blkref{def_qbar_constant_embedding}\ \text{が積を保つこと})\\
 &=\widehat{1}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の体の逆元}\text{。}\ w'-w\ne0\ \text{より}\ (w'-w)^{-1}(w'-w)=1)\\
+&&(\because\ w'-w\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の体の逆元により}\ (w'-w)^{-1}(w'-w)=1)\\
 &=1
 &&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{1}=1)
 \end{aligned}`),

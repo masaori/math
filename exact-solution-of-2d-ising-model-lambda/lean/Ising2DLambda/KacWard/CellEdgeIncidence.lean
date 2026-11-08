@@ -116,6 +116,37 @@ def SameComplementCellRegion (cells : Finset GridCell) (p q : GridCell) : Prop :
   Relation.ReflTransGen
     (fun a b => ∃ e : GridEdge, e ∉ cellEdges cells ∧ SharedGridEdge a b e) p q
 
+/-- A selected cell cannot cross one of its boundary edges inside the complement. -/
+theorem selected_cell_has_no_missing_shared_edge (cells : Finset GridCell)
+    (p q : GridCell) (hp : p ∈ cells) :
+    ¬ ∃ e : GridEdge, e ∉ cellEdges cells ∧ SharedGridEdge p q e := by
+  rintro ⟨e, he, hshared⟩
+  rcases p with ⟨r, c⟩
+  rcases q with ⟨s, d⟩
+  rcases hshared with ⟨_, rfl⟩ | ⟨h, rfl⟩ | ⟨_, rfl⟩ | ⟨h, rfl⟩
+  · exact he ((verticalEdge_mem_cellEdges_iff cells r c).2 (Or.inl hp))
+  · have heq : (s, d - 1) = (r, c) := by
+      simp only [Prod.mk.injEq] at h ⊢
+      omega
+    have hq : (s, d - 1) ∈ cells := heq ▸ hp
+    exact he ((verticalEdge_mem_cellEdges_iff cells s d).2 (Or.inr hq))
+  · exact he ((horizontalEdge_mem_cellEdges_iff cells r c).2 (Or.inl hp))
+  · have heq : (s - 1, d) = (r, c) := by
+      simp only [Prod.mk.injEq] at h ⊢
+      omega
+    have hq : (s - 1, d) ∈ cells := heq ▸ hp
+    exact he ((horizontalEdge_mem_cellEdges_iff cells s d).2 (Or.inr hq))
+
+/-- In the combinatorial complement each selected cell is its own component. -/
+theorem selected_cell_complement_region_eq (cells : Finset GridCell)
+    (p q : GridCell) (hp : p ∈ cells)
+    (hregion : SameComplementCellRegion cells p q) : q = p := by
+  induction hregion with
+  | refl => rfl
+  | tail _ hstep ih =>
+    have hselected : _ ∈ cells := ih.symm ▸ hp
+    exact False.elim (selected_cell_has_no_missing_shared_edge cells _ _ hselected hstep)
+
 /-- Edge connectivity of all exterior cells puts any two of them in one
 combinatorial component of the complement of the grid edges. -/
 theorem exterior_cells_same_complement_region (cells : Finset GridCell)
