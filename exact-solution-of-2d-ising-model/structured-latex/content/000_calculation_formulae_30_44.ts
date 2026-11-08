@@ -253,7 +253,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{0}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= 0
-&&(\because\ 0\ge 0\ \text{であり}\ 0^2=0\text{。平方根の一意性})\\
+&&(\because\ \blkref{sqrt_of_real_zero_is_zero})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
 &&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y=0\ \text{の場合})
 \end{aligned}`,
@@ -489,6 +489,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y = 0 の場合の鎖の √0 = 0 の行の根拠（0 ≥ 0・0^2 = 0・平方根の一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "原文（Typst）に対応ブロックは無い。行列ノルムの劣乗法性（labels: matrix_norm_submultiplicativity）の" +
           "証明が K=CC の場合に必要とする絶対値の性質（成分表示・乗法性・三角不等式）を、" +
           "絶対値の定義（labels: def_abs_arg）の直後にまとめて置いた。",
@@ -1769,7 +1770,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       paragraph(["が成り立つ。"]),
       paragraph([
         "第二に、",
-        ref("definition_of_sqrt_r_positive"),
+        ref("sqrt_of_real_zero_is_zero"),
         " より ",
         math(String.raw`\sqrt{0}^{\,\mathbb{R}_{\ge 0}}=0`),
         " である。",
@@ -1878,7 +1879,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合。}\blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二。}\blkref{definition_of_sqrt_r_positive})\\
+&&(\because\ \text{準備の第二。}\blkref{sqrt_of_real_zero_is_zero})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
 &&(\because\ 0\le 0-2\cdot0\cdot\pi<2\pi\ \text{と準備の第一})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
@@ -1896,7 +1897,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
 &&(\because\ r=0\ \text{という、この場合の条件})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二。}\blkref{definition_of_sqrt_r_positive})\\
+&&(\because\ \text{準備の第二。}\blkref{sqrt_of_real_zero_is_zero})\\
 &= \left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)=0_{\mathbb{C}}
@@ -1927,6 +1928,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第二の √0 = 0 の根拠と、それを使う r = 0 の場合の左辺・右辺の鎖の 2 行の参照を、definition_of_sqrt_r_positive から sqrt_of_real_zero_is_zero に替えた（値は不変）。",
         "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は Step 1 から Step 5 までの " +
           "5 段構成で、式と式の間に日本語の説明が挟まっていた。準備（n の一意性から出る " +
           "s_{[0,2π)}([θ]) = θ-2nπ と、√0 = 0）を冒頭にまとめ、そのうえで代表元によらないこと・" +

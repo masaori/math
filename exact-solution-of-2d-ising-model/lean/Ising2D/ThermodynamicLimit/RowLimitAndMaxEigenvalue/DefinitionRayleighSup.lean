@@ -39,6 +39,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealZeroIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -164,7 +165,7 @@ theorem ne_zero_of_unit_norm {x : n → ℝ} (hx : vecNorm x = 1) : x ≠ 0 := b
           rw [abs_of_nonneg (le_refl (0 : ℝ))]                              -- `def_real_absolute_value` の `0 ≥ 0` の場合 `|0| = 0` を各項へ
       _ = Real.sqrt (∑ _j : n, (0 : ℝ)) := by rw [zero_pow two_ne_zero]      -- `ℝ` で `0^2 = 0` を各項へ
       _ = Real.sqrt 0 := by rw [Finset.sum_const_zero]                      -- `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
-      _ = 0 := Real.sqrt_zero                                               -- `definition_of_sqrt_r_positive` の `y → 0`
+      _ = 0 := sqrt_of_real_zero_is_zero                                    -- `sqrt_of_real_zero_is_zero`
   exact zero_ne_one (h0.symm.trans hx)                                      -- `‖x‖ = 1` と矛盾
 
 /-- 人手 `def_rayleigh_sup` の `‖e_1‖ = 1`: `i ≠ 1` の `|(e_1)_i|^2 = |0|^2 = 0^2 = 0` と `|(e_1)_1|^2 = |1|^2 = 1^2 = 1` の 3 行の鎖 2 本と、

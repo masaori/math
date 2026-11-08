@@ -58,6 +58,7 @@
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealZeroIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -115,7 +116,7 @@ theorem ne_zero_of_vecNorm_eq_one {x : Conf M → ℝ} (hx : vecNorm x = 1) : x 
   have h : vecNorm x = 0 :=
     calc vecNorm x
         = Real.sqrt 0 := by rw [h0, vecNorm, vecNormSq, dotProduct_zero]    -- `def_matrix_norm`（`K = ℝ`）を `x = 0` で開く（成分がすべて `0`）
-      _ = 0 := Real.sqrt_zero                                               -- `definition_of_sqrt_r_positive` の `0 ≥ 0`, `0^2 = 0`
+      _ = 0 := sqrt_of_real_zero_is_zero                                    -- `sqrt_of_real_zero_is_zero`
   rw [hx] at h
   exact one_ne_zero h
 

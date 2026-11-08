@@ -29,7 +29,7 @@
 | (3) `(sinh t)^2 = (cosh t)^2 - 1 = y^2 - 1` | exact | `cosh t, sinh t` を不定元に置き、`cosh^2 - sinh^2 = 1`、`cosh t = y` だけのイデアルで | **PASS** | 厳密 |
 | (3) `sinh t = √(y^2-1) = r` | ball | `y := cosh t` のボールで、`sinh t` と `√(y^2-1)` が重なる | **PASS** | 全点で成り立つ |
 | (3) `t = log(exp t) = log(cosh t + sinh t) = log(y + sinh t) = log(y + r) = arccosh(y)` | exact・ball | `exp(t) = cosh t + sinh t`（`cosh_sinh_basic_properties` (1)）は `exp(t)`・`exp(-t)` を不定元に置くと定義の展開だけで成り立つ（exp の性質を使わない）ことを、関係式なしで。代入の二行を別々の関係式で。`log(exp t)` と `arccosh(cosh t)` の囲みが `t` を含むことをボールで | **PASS** | 厳密・囲み |
-| (4) `arccosh(1) = log(1+√(1^2-1)) = log(1+√0) = log(1+0) = log 1 = 0` | exact・ball | `1^2-1 = 0`、AA で `√0 = 0`（`0 ≥ 0`、`0^2 = 0`）、`1+0 = 1`。`arccosh(1)` の囲みが 0 を含む（対照: `y = 1+10^{-6}` では含まない） | **PASS** | 厳密・囲み |
+| (4) `arccosh(1) = log(1+√(1^2-1)) = log(1+√(1-1)) = log(1+√0) = log(1+0) = log 1 = 0` | exact・ball | 一行ずつ: `1^2 = 1`（`power_of_real_one_is_one`、`m → 2`）、`1 - 1 = 0`（`a - a = 0` の `a → 1`）、AA で `√0 = 0`（`sqrt_of_real_zero_is_zero`。`0 ≥ 0`、`0^2 = 0`）、`1+0 = 1`。否定の対照: `1^2` を `2` と取り違えると根号の中身は 1 で `√1 ≠ 0`。`arccosh(1)` の囲みが 0 を含む（対照: `y = 1+10^{-6}` では含まない） | **PASS** | 厳密・囲み |
 | 主張 (3) の仮定 `t ≥ 0` が要ること（対照） | ball | `t = -1/3, -2` では `arccosh(cosh t)` の囲みが `-t` を含み `t` を含まない | **PASS** | 期待どおり不成立 |
 
 ## 計算の帰属と範囲

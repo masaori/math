@@ -329,10 +329,12 @@ t
 \mathrm{arccosh}(1)
 &= \log\!\left(1 + \sqrt{1^2-1}^{(\mathbb{R}_{\ge 0})}\right)
    &&(\because\ \blkref{def_arccosh}) \\
+&= \log\!\left(1 + \sqrt{1-1}^{(\mathbb{R}_{\ge 0})}\right)
+   &&\bigl(\because\ \blkref{power_of_real_one_is_one}\ \text{の}\ m \to 2\bigr) \\
 &= \log\!\left(1 + \sqrt{0}^{(\mathbb{R}_{\ge 0})}\right)
-   &&(\because\ 1^2 - 1 = 0) \\
+   &&\bigl(\because\ \mathbb{R}\ \text{で}\ a - a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr) \\
 &= \log(1 + 0)
-   &&(\because\ 0 \ge 0\text{、}0^2 = 0 \text{ と } \blkref{definition_of_sqrt_r_positive}\text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）}) \\
+   &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr) \\
 &= \log 1
    &&(\because\ 1 + 0 = 1) \\
 &= 0
@@ -343,6 +345,7 @@ t
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (4) の鎖の「1^2 − 1 = 0」1 行（1^2 = 1・1 − 1 = 0 の 2 事実）を power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割り、次の行 √0 = 0（0 ≥ 0・0^2 = 0・一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（relation_of_gamma_2_theta_tilde の準備の第五の cos(π/2) の鎖と同じ書き方）。値と主張は不変。",
         "arccosh を式で定義したことに伴い、本文が使っている性質（非負・cosh との合成・非負側での一意性・arccosh(1)=0）を主張として置いた。",
         "2026-11-02: SageMath の検算（sagemath/check/arccosh_properties/）を付けるにあたり、証明を直した。log 1 = 0 を「def_real_logarithm_positive の証明で示した」と引いていたが、その定義に証明は無いので、scalar_exp_zero と log(exp x) = x からの鎖を準備に置いた。exp(-u)exp(u) = exp(0) の行を積の結合律・指数法則・-u+u=0 の三行に、cosh の鎖の「上の 2 式」を二行に、(3) の二つの代入と (4) の 1^2-1=0・√0=0 を一行ずつに分けた。(1) と (3) の sinh t ≥ 0 を場合分けの鎖に、√ の一意性を散文から (∵) 付きの式に移し、実対数と平方根による ℝ 脱出を準備に書いた。主張は変えていない。",
       ],

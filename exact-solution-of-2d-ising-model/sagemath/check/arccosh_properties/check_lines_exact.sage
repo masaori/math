@@ -112,8 +112,16 @@ for y0 in Y_POINTS:
     if y0 > 1:
         assert y0 + r0 > 1
 print(f"  PASS {len(Y_POINTS)} 点の y で r ≥ 0、r^2 = y^2 - 1、非負の根の一意性、y + r ≥ 1（y > 1 なら > 1）")
-assert QQ(1)^2 - 1 == 0
-assert AA(0).sqrt() == 0 and AA(0) >= 0 and AA(0)^2 == 0
+# (4) の鎖を一行ずつ: √(1^2-1) → √(1-1)（power_of_real_one_is_one の m → 2）→ √0（ℝ で a - a = 0 の a → 1）
+#   → 0（sqrt_of_real_zero_is_zero）→ log(1+0) → log 1（1 + 0 = 1）
+assert QQ(1)^2 == 1                               # power_of_real_one_is_one（m → 2）
+assert QQ(1)^2 - 1 == QQ(1) - 1                   # 2 行目: 根号の中身 1^2 - 1 = 1 - 1
+a = QQ['a'].gen()
+assert a - a == 0                                 # ℝ で a - a = 0（a は不定元。次の行で a → 1）
+assert QQ(1) - 1 == 0                             # 3 行目: 根号の中身 1 - 1 = 0
+assert AA(0).sqrt() == 0 and AA(0) >= 0 and AA(0)^2 == 0   # sqrt_of_real_zero_is_zero
 assert 1 + 0 == 1
-print("  PASS (4) 1^2 - 1 = 0、√0 = 0（0 ≥ 0 かつ 0^2 = 0）、1 + 0 = 1")
+# 否定の対照: 1^2 を 2·1 と取り違えると根号の中身は 1 で、√1 = 1 ≠ 0 になる
+assert 2 * QQ(1) - 1 != 0 and AA(2 * QQ(1) - 1).sqrt() != 0
+print("  PASS (4) 1^2 = 1、1 - 1 = 0、√0 = 0（0 ≥ 0 かつ 0^2 = 0）、1 + 0 = 1（対照: 1^2 を 2 と取り違えると √1 = 1 ≠ 0）")
 print("RESULT: PASS")

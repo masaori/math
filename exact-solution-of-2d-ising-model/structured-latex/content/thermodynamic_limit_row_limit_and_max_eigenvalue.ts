@@ -1369,7 +1369,7 @@ u^\top W_{\mathbb{R}} u
 &= \sqrt{0}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
 &= 0
-  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y \to 0\ \text{が}\ 0 \geq 0,\ 0^2 = 0\ \text{を満たす}\bigr)
+  &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
 \end{aligned}`),
       paragraph([
         "となり ",
@@ -1606,6 +1606,7 @@ c(M_{\mathrm{col}})
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 「‖x‖ = 1 なら x ≠ 0」の鎖の最後の行 √0 = 0 が definition_of_sqrt_r_positive（y → 0）と 0 ≥ 0・0^2 = 0 を 1 行で使っていたので、sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ‖e_1‖ の鎖の |1|^2 = 1^2 = 1 の 2 行目を power_of_real_one_is_one（m → 2）の参照にし、最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
         "2026-11-06（同じ確認の続き）: |x^⊤Wx| ≤ ΣΣ|W_ij| の鎖の名前だけの根拠を直した。𝓡 の元 x^⊤Wx を |x^⊤Wx| で上から抑える行（real_number_is_at_most_its_absolute_value）を鎖の先頭に足し、「行列積の成分表示」を def_real_bilinear_value の参照に、「有限和の三角不等式と積の絶対値」と「|x_i| ≤ 1, |x_j| ≤ 1」を、項ごとの 6 行の鎖（real_abs_of_product を 2 回、|x_j| ≤ 1 と |x_i| ≤ 1 に非負の実数を掛ける行）、各 i の 2 行の鎖（finite_sum_of_real_numbers_triangle_inequality・finite_sum_of_real_numbers_is_monotone）、外側の和の 2 行（同じ 2 つの主張）に割った。上界 ΣΣ|W_ij| と主張は不変。",
@@ -2700,9 +2701,7 @@ y^\top I_{\mathbb{R}}y
         "。",
         math(String.raw`\sqrt{0} = 0`),
         " は ",
-        ref("definition_of_sqrt_r_positive"),
-        " の ",
-        math(String.raw`0 \geq 0,\ 0^2 = 0`),
+        ref("sqrt_of_real_zero_is_zero"),
         "）。",
         math(String.raw`a`),
         " についての帰納法で ",
@@ -3022,6 +3021,7 @@ a+b+1 &= p+(p+1)+1
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の √0 = 0 の根拠（definition_of_sqrt_r_positive の 0 ≥ 0, 0^2 = 0）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "2026-09-05 の分割で、トレースの挟み込みから独立した主張として切り出した。式変形と根拠は分割前と同じである。",
         "2026-11-05: SageMath の検算（sagemath/check/moment_log_convexity/）を付けるにあたり、根拠の欠けを直した（主張の不等式は不変。主張文に m_k の読み方を足した）。(1) 旧い鎖は (W^bx)^⊤W(W^ax) と x^⊤W^{a+b+1}x の等号を「冪の指数法則と (W^b)^⊤ = W^b」としていたが、行列の積の転置の主張は本文に無い。【二つの冪で挟んだ値】x^⊤(W^b(BW^a))x = (W^bx)^⊤B(W^ax)（B = I, W）を def_real_bilinear_value・mat_mult・W^b の成分の対称性で示し、二つの不等式の鎖をこれで書いた。P = I の鎖はユークリッドノルムを経ずに (u^{(a)})^⊤Iu^{(a)} で閉じた。(2)「冪の指数法則」を matrix_power_exponent_law の行に、「W は実対称」を power_of_real_symmetric_complex_matrix_is_real_symmetric の【冪の実対称性】にした。(3) 正値性の「W が可逆なので W^ax ≠ 0」は、可逆から核の自明性を導く主張が本文に無い。W の正定値性から Wu ≠ 0（u ≠ 0）を示し、a の帰納法で W^ax ≠ 0 とした。m_{2a}・m_{2a+1} > 0 を【二つの冪で挟んだ値】の鎖にした。I と W が psd_cauchy_schwarz の前提（def_real_symmetric_matrix の対称と半正定値）を満たすことを鎖で示した。積の行列 W^b(BW^a) の成分が実数であることを product_of_real_entry_matrices_has_real_entries で示して def_real_bilinear_value で読んだ。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張と証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ で m_k := x^⊤(W_ℝ)^kx と述べ直し、証明の冪をすべて (W_ℝ)^p、単位行列を I_ℝ（def_real_identity_matrix）にした。trace_power_upper_bound と同じく【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power。I_ℝ = ϱ(I) もここから出した）と【冪の対称性】（W^p の実対称性から ϱ を通す 6 行の鎖と単射性）を置き、【冪の分け方】は Mat(d,ℂ) の二つの鎖を ϱ で運ぶ 5 行の鎖（real_matrix_of_real_entry_matrix_preserves_product）にした。成分の積は def_real_matrix_product、(W_ℝ)^ax は def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で読んでいた）。u^(a+1) = W_ℝu^(a) は、(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a を ϱ で運ぶ 7 行の鎖と成分の 8 行の鎖にした（実数の行列とベクトルの積の結合則の主張が本文に無いため、mat_mult_associative の行を成分の計算に替えた）。W_ℝ の対称性・正定値性・半正定値性は W_real_is_symmetric・W_real_is_positive_definite・W_real_is_positive_semidefinite を引いた。主張の不等式は不変である。下流の trace_power_sandwich はまだこの主張を旧い形（m_k := x^⊤W^kx、w^⊤W^nw > 0）で引いており、主張と食い違っている（状態台帳の (r3b2e2) で W_ℝ の形に書き直す）。",
