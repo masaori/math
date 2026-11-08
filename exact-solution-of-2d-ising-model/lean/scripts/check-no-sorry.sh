@@ -2024,6 +2024,14 @@ targets=(
   Ising2D.gamma1R_sq_thetaTilde
   Ising2D.lambda_mul_lambda_thetaTilde
   Ising2D.one_lt_gamma1R_thetaTilde
+  Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one
+  Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one_of_necSuf
+  Ising2D.one_lt_gamma1R_thetaTilde_of_necSuf
+  Ising2D.NecSuf.sq_le_one_of_le_one_chain
+  Ising2D.NecSuf.one_lt_of_sq_gt_one
+  Ising2D.NecSuf.sq_pos_of_pos_implication_chain
+  Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos
+  Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos_of_necSuf
   Ising2D.cosh_gammaTilde
   Ising2D.gammaTilde_pos
   Ising2D.sinh_gammaTilde

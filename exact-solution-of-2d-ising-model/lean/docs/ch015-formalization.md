@@ -58,9 +58,11 @@
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
 | `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式（Step 3〜5） |
-| `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2` | 同 最終式 |
+| `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（人手の ℂ の中の 13 行の鎖と 1 対 1） | 同 最終式 |
 | `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式（Step 6） |
-| `Ising2D.one_lt_gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 > 1` | `gamma1_gt_1_theta_tilde` Step 2 |
+| `Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos` | `r > 0` から `r^2 > 0`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の準備の第二の含意の鎖 |
+| `Ising2D.one_lt_gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 > 1`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の `g^2` の鎖 |
+| `Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one` | `0 < γ_1`・`γ_1 ≤ 1` なら `γ_1^2 ≤ 1`（人手の 4 行と 1 対 1） | 同 背理の鎖 |
 | **`Ising2D.one_lt_gamma1R_thetaTilde`** | **`γ_1(θ~_μ) > 1`（狭義）** | **`gamma1_gt_1_theta_tilde`** |
 | `Ising2D.one_le_gamma1R_thetaTilde` | `γ_1(θ~_μ) ≥ 1` | 同上（併記） |
 | `Ising2D.gammaTilde` | `γ(θ~_μ) = arccosh(γ_1(θ~_μ))` | `def_gamma_theta` の `θ = θ~_μ` での値 |
@@ -83,7 +85,7 @@
 | `TwoByTwoKernelAndDeterminant.lean` | `NecSuf.det_mul_vec_zero_of_mulVec` / `det_mul_vec_one_of_mulVec` / `det_eq_zero_of_mulVec_eq_zero` / `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` / `exists_ne_zero_mulVec_eq_zero_iff_det` | 2×2 行列が 0 でないベクトルを 0 へ送る ⟺ `det = 0`（「⇒」は**零因子の無い可換環**、「⇐」は 0 でない可換環） |
 | `MatrixVectorIdentityScalarDifference.lean` | `NecSuf.sub_eq_zero_iff_matrix` / `sub_eq_zero_iff_vec` / `one_mulVec_apply` / `smul_mulVec_apply` / `sub_mulVec_apply` / `one_mulVec_eq` / `smul_mulVec_eq'` / `sub_mulVec_eq'` / `mul_assoc_of_smul_mulVec` | `A - B = O ⟺ A = B` は**加法群**、`Iv = v` は `NonAssocSemiring`、`(λB)v = λ(Bv)` は左分配則と乗法の結合則（**可換則は効かない**）、`Av - Bv = (A - B)v` は右分配則。`skew2_eigenvalue_iff` の鎖の 2〜5 段で引く |
 | `GammaDetIdentity.lean` | `NecSuf.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
-| `ArcoshExp.lean` | `NecSuf.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
+| `ArcoshExp.lean` | `NecSuf.sq_pos_of_pos_implication_chain`（`MonoidWithZero`・`Preorder`・`MulPosStrictMono` だけ） / `sq_le_one_of_le_one_chain`（`Monoid`・`Zero`・`Preorder`・`ZeroLEOneClass`・`MulPosMono`・`PosMulMono` だけ） / `one_lt_of_sq_gt_one`（全順序はここで初めて効く） / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -95,7 +97,7 @@
 | `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `charPoly_factor_thetaTilde`, `det_AMat_sub_smul_eq_zero_iff`, `eigenvalue_AMat_iff`, `lambdaPlusR_ne_lambdaMinusR`, `AMat_mulVec_eigen_pos/neg`, `AMat_mulVec_smul_eigen_pos/neg`, `AMat_mul_checkPmat`, `det_checkPmat(_ne_zero)`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_charPoly`, `skew2_charPoly_factor`, `skew2_det_eq_zero_iff`, `skew2_eigenvalue_iff`, `skew2_eigenvalues_ne`, `skew2_mulVec_pos/neg`, `mulVec_smul_of_mulVec_eq`, `skew2_mul_of_cols`, `det_of_cols(_ne_zero)`, `eq_conj_of_mul_eq` | 各具体版の `*_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`。`γ_2` の関係は `a b = -|γ_2|^2` だけを仮定として渡し、`b = -ā` と `a ā = r^2` は渡さない） |
 | `nonzero_kernel_iff_det_zero_two_by_two`（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖の最後の段） | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` | `NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det` | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`（係数 `R := ℂ`） |
 | `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |
-| `gamma1_gt_1_theta_tilde` | `one_lt_gamma1R_thetaTilde` | `NecSuf.one_lt_of_sq_gt_one` | 具体版は必要十分版の系 |
+| `gamma1_gt_1_theta_tilde` | `gamma1_gt_1_prep_absGamma2_sq_pos`, `one_lt_gamma1R_sq_thetaTilde`, `gamma1R_thetaTilde_sq_le_one_of_le_one`, `one_lt_gamma1R_thetaTilde` | `NecSuf.sq_pos_of_pos_implication_chain`, `sq_le_one_of_le_one_chain`, `one_lt_of_sq_gt_one` | `gamma1_gt_1_prep_absGamma2_sq_pos_of_necSuf`, `gamma1R_thetaTilde_sq_le_one_of_le_one_of_necSuf`, `one_lt_gamma1R_thetaTilde_of_necSuf`（`ClaimDetATildeFromNecSuf.lean`。`R := ℝ` への特殊化） |
 | `gamma_theta_tilde_mu_positive`, `lambda_eq_exp_gamma_theta_tilde` | `gammaTilde_pos`, `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `NecSuf.arcosh_pos_of_one_lt`, `sinh_arcosh_of_sq`, `exp_arcosh_of_sq`, `exp_neg_arcosh_of_sq` | 具体版はいずれも必要十分版の系 |
 
 必要十分版から得られた知見（本文には持ち込まない）:

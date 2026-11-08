@@ -3616,7 +3616,23 @@ A(\tilde\theta_\mu)
       displayMath(
         String.raw`\gamma_1(\tilde\theta_\mu)^2 = 1 + \left|\gamma_2(\tilde\theta_\mu)\right|^2`,
       ),
-      paragraph(["が成り立つ（", math(String.raw`\mathbb{R}`), " の等式）。"]),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`\mathbb{R}`),
+        " の等式。",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|`),
+        " は ",
+        ref("def_abs_arg"),
+        " の絶対値、二乗 ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu)^2`),
+        "・",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である）。",
+      ]),
     ],
     proof: [
       paragraph([
@@ -4222,7 +4238,7 @@ c_2s_2^*
       displayMath(String.raw`\begin{aligned}
 \bigl(\gamma_1(\theta)^2\bigr)_{\mathbb{C}}
 &= \bigl(\gamma_1(\theta)\gamma_1(\theta)\bigr)_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{の冪}\ x^2 = xx)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \gamma_1(\theta))\bigr)\\
 &= \gamma_1(\theta)_{\mathbb{C}}\,\gamma_1(\theta)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= \bigl(\gamma_1(\theta)_{\mathbb{C}}\bigr)^2
@@ -4244,7 +4260,7 @@ c_2s_2^*
 &= (1 + rr)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
 &= \bigl(1 + r^2\bigr)_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{の冪}\ xx = x^2)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、第 3 の等式と同じく ",
@@ -4268,6 +4284,7 @@ c_2s_2^*
         "2026-11-03: SageMath の検算（sagemath/check/det_A_theta_tilde/）を付けるときに証明を直した。Step 0〜Step 6 の散文のつなぎを、準備（像の読み方）と、−(−z) = z・ii = −1_C・e_+e_− = 1_C・u^2 + v^2 = 1_C・γ_2(θ)・γ_2(−θ)・(a_0 − iv)(a_0 + iv)・γ_2(θ)γ_2(−θ)・三つの双曲線の関係の鎖と、主張の左辺から始まる四本の鎖に組み直した。" +
           "e_+e_− = 1 の根拠を行列の theorem_exp_product（n=1）・theorem_exp_zero から scalar_exp_product・scalar_exp_zero に、u^2 + v^2 = 1 を根拠の無い前提から euler_formula_cos_sin による u + iv = e_+ と exp_of_negative_i_real_as_cos_minus_i_sin の鎖に（商は乗法の逆元との積として準備に置いた）、γ_2(−θ) の表示を根拠の無い代入から def_gamma1_gamma2_of_theta と def_A_theta の (2,1) 成分の比較に直し、一行に束ねていた並べ替え・相殺・くくり出しを一操作ずつに分けた。" +
           "第 3・第 4 の等式は ℂ の中で示してから inclusion_rr_to_cc の対の第 1 成分で ℝ の等式に戻した。主張に、どの等式が ℂ と ℝ のどちらのものかを書いた（中身は不変）。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の最後の等式の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 γ_1(θ̃_μ)^2・|γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）と書いた。最後の等式の鎖の第 2 行と第 13 行（左辺だけの行を第 1 行と数える）の名前だけの根拠「ℝ の冪 x^2 = xx」「ℝ の冪 xx = x^2」を square_of_real_number_is_product（r → γ_1(θ)、r → |γ_2(θ)| を右辺から左辺へ）の参照にした（中身は不変）。",
       ],
     },
   },
@@ -4319,7 +4336,15 @@ c_2s_2^*
         math(String.raw`r := \left|\gamma_2(\theta)\right| \in \mathbb{R}_{\geq 0}`),
         "（",
         ref("def_abs_arg"),
-        "）と置く。現れる量はすべて ",
+        "）と置く。二乗 ",
+        math(String.raw`g^2`),
+        "・",
+        math(String.raw`r^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。現れる量はすべて ",
         math(String.raw`\mathbb{R}`),
         " の元で、不等号は ",
         math(String.raw`\mathbb{R}`),
@@ -4360,7 +4385,7 @@ c_2s_2^*
 &\Longrightarrow\ r \cdot r > 0
 &&(\because\ 0 \cdot r = 0)\\
 &\Longrightarrow\ r^2 > 0
-&&(\because\ \text{平方の定義}\ r^2 = r \cdot r)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4391,7 +4416,7 @@ g^2
         String.raw`\begin{aligned}
 g^2
 &= g \cdot g
-&&(\because\ \text{平方の定義})\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to g)\bigr)\\
 &\leq 1 \cdot g
 &&(\because\ g \leq 1\ \text{の両辺に準備の}\ 0 < g\ \text{を掛ける})\\
 &\leq 1 \cdot 1
@@ -4431,6 +4456,7 @@ g^2
           "Step 1 で出典なしに使っていた K_2^* > 0 に def_second_dual_coupling_constant の参照を付けた。",
         "2026-11-03: SageMath の検算（sagemath/check/gamma1_gt_1_theta_tilde/）を付けるときに証明を直した。Step 1 の γ_1 > 0 は、根拠の無い cos θ~_μ ≤ 1 と c_1 > s_1 > 0 を使っていたのを、gamma1_lower_bound_all_theta の γ_1(θ) ≥ cosh(2K_1 − 2K_2^*) ≥ 1 から g ≥ 1 と g > 0 を出す準備に替えた（第 1 の不等式 γ_1 ≥ 1 は狭義の不等式から従うと書いていたのを、この準備で直接示した）。" +
           "Step 2 の根拠「det A = 1 と固有値の積」を det_A_theta_tilde の γ_1^2 = 1 + |γ_2|^2 に、「γ_2 ≠ 0 より |γ_2|^2 > 0」を gamma_2_theta_tilde_nonzero・abs_basic_properties (3) からの含意の鎖にした。cos θ ≤ 1（全実数）を前提とすることを主張に書き、主張の中の「後段で最大固有値の一意性に使う」の一文は使い道の説明なので除いた（中身は不変）。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備に二乗 g^2・r^2 が def_power_of_real_number の冪（m = 2）であることを書き、準備の r·r > 0 ⇒ r^2 > 0 の行と背理の鎖の g^2 = g·g の行の名前だけの根拠「平方の定義」を square_of_real_number_is_product（r → |γ_2(θ)| を右辺から左辺へ、r → g）の参照にした（中身は不変）。",
       ],
     },
   },

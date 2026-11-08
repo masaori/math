@@ -7,7 +7,9 @@
 
 **必要十分版**: `Ising2D/NecSuf/GammaDetIdentity.lean`（`Ising2D.NecSuf.gamma_det_identity`。
 `det A = 1` は可換環の多項式恒等式である）と
-`Ising2D/NecSuf/ArcoshExp.lean`（`Ising2D.NecSuf.one_lt_of_sq_gt_one`）。
+`Ising2D/NecSuf/ArcoshExp.lean`（`gamma1_gt_1_theta_tilde` の準備・背理の鎖・結論の段の
+`Ising2D.NecSuf.sq_pos_of_pos_implication_chain`・`sq_le_one_of_le_one_chain`・`one_lt_of_sq_gt_one`）。
+導出は `ClaimDetATildeFromNecSuf.lean`。
 
 ## 形式化の方針
 
@@ -28,9 +30,9 @@
   `IsingParam` の上では (iii) は定理 `IsingParam.c2_mul_s2star_eq_c2star`
   （`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
 * `γ_1(θ~_μ) ≥ 1` は `Ising2D.one_le_gamma1R`（**すべての実数 `θ`** で成立。
-  人手 `gamma1_lower_bound_all_theta`）として証明済みなので、`gamma1_gt_1_theta_tilde` の Step 1（`γ_1 > 0`）はそれで置き換わる。
-  本章に固有なのは Step 2（`γ_1^2 = 1 + |γ_2|^2 > 1`、`gamma_2_theta_tilde_nonzero` による）と
-  Step 3（`t > 0 ∧ t^2 > 1 ⟹ t > 1`）である。
+  人手 `gamma1_lower_bound_all_theta`）として証明済みなので、`gamma1_gt_1_theta_tilde` の準備の第一の含意の鎖（`g ≥ 1 ⟹ g > 0`）はそれで置き換わる。
+  本章に固有なのは `g^2` の鎖（`γ_1^2 = 1 + |γ_2|^2 > 1`、`gamma_2_theta_tilde_nonzero` による）と、
+  背理の鎖（`0 < g ∧ g ≤ 1 ⟹ g^2 ≤ 1`）と結論の段（`g^2 > 1` と背理の鎖から `g > 1`）である。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.GammaDetIdentity
@@ -210,42 +212,114 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
       _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm
   exact Complex.ofReal_injective hC
 
-/-- **人手証明 `det_A_theta_tilde` の最後の式**: `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（実数の等式）。 -/
+/-- **人手証明 `det_A_theta_tilde` の最後の式**: `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（実数の等式）。
+
+人手の「まず ℂ の中で」の 13 行の鎖と 1 対 1 の `calc` で `((γ_1^2 : ℝ) : ℂ) = ((1 + r^2 : ℝ) : ℂ)` を示し、
+`inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で ℝ の等式に戻す。
+人手が像の記号を省く第 6〜8 行（左辺だけの行を第 1 行と数える）の `r^2` は `((r : ℂ))^2`（`r_ℂ` の ℂ の冪）である。
+第 7 行の `relation_of_gamma_2_theta_tilde` (2) は、`γ_2(θ)γ_2(-θ) = -((r : ℂ))^2` の形の
+`gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` で受ける。 -/
 theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) :
     gamma1R P.const (thetaTilde M μ) ^ 2 = 1 + absGamma2 P.const (thetaTilde M μ) ^ 2 := by
   set θ := thetaTilde M μ
-  set r : ℂ := ((absGamma2 P.const θ : ℝ) : ℂ)
-  have hab : gamma2 P.const θ * gamma2 P.const (-θ) + r ^ 2 = 0 := by
-    rw [gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq, neg_add_cancel]
-  have hC : ((gamma1R P.const θ ^ 2 : ℝ) : ℂ) = ((1 + absGamma2 P.const θ ^ 2 : ℝ) : ℂ) :=
-    calc ((gamma1R P.const θ ^ 2 : ℝ) : ℂ)
-        = gamma1 P.const θ ^ 2 := by rw [Complex.ofReal_pow, gamma1_eq_ofReal]
-      _ = gamma1 P.const θ ^ 2 + (gamma2 P.const θ * gamma2 P.const (-θ) + r ^ 2) := by
-          rw [hab, add_zero]                       -- `γ_2(θ)γ_2(-θ) + r^2 = 0`
-      _ = (gamma1 P.const θ ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)) + r ^ 2 := by
-          rw [add_assoc]                            -- 加法の結合律
-      _ = 1 + r ^ 2 := by rw [gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ]  -- Step 5
-      _ = ((1 + absGamma2 P.const θ ^ 2 : ℝ) : ℂ) := by push_cast; rfl
+  set g : ℝ := gamma1R P.const θ
+  set r : ℝ := absGamma2 P.const θ
+  have hg : gamma1 P.const θ = (g : ℂ) := gamma1_eq_ofReal P.const θ
+  have hsecond : (g : ℂ) ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) = 1 := by
+    rw [← hg]; exact gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ
+  have hC : ((g ^ 2 : ℝ) : ℂ) = ((1 + r ^ 2 : ℝ) : ℂ) :=
+    calc ((g ^ 2 : ℝ) : ℂ)
+        = ((g * g : ℝ) : ℂ) := by rw [square_of_real_number_is_product g]
+                          -- `square_of_real_number_is_product`（`r → γ_1(θ)`）
+      _ = (g : ℂ) * (g : ℂ) := Complex.ofReal_mul g g
+                          -- `real_inclusion_preserves_product`
+      _ = (g : ℂ) ^ 2 := (sq (g : ℂ)).symm
+                          -- `def_power_of_complex_number` より `zz = z^2`
+      _ = (g : ℂ) ^ 2 + 0 := (add_zero _).symm
+                          -- `complex_numbers_form_a_field` の零元
+      _ = (g : ℂ) ^ 2 + (-((r : ℂ)) ^ 2 + (r : ℂ) ^ 2) := by rw [neg_add_cancel]
+                          -- `complex_numbers_form_a_field` の加法逆元
+      _ = (g : ℂ) ^ 2 + (gamma2 P.const θ * gamma2 P.const (-θ) + (r : ℂ) ^ 2) := by
+          rw [gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq]
+                          -- `relation_of_gamma_2_theta_tilde` (2)
+      _ = ((g : ℂ) ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)) + (r : ℂ) ^ 2 :=
+          (add_assoc _ _ _).symm
+                          -- `complex_numbers_form_a_field` の和の結合律
+      _ = 1 + (r : ℂ) ^ 2 := by rw [hsecond]
+                          -- 上の第 2 の等式の鎖（`gamma1_sq_add_gamma2_mul_thetaTilde`）
+      _ = 1 + (r : ℂ) * (r : ℂ) := by rw [sq (r : ℂ)]
+                          -- `def_power_of_complex_number` より `z^2 = zz`
+      _ = 1 + ((r * r : ℝ) : ℂ) := by rw [Complex.ofReal_mul r r]
+                          -- `real_inclusion_preserves_product`
+      _ = ((1 + r * r : ℝ) : ℂ) := by rw [Complex.ofReal_add, Complex.ofReal_one]
+                          -- `real_inclusion_preserves_finite_sum` を `m = 2` で（`1_ℂ` は `1` の像）
+      _ = ((1 + r ^ 2 : ℝ) : ℂ) := by rw [square_of_real_number_is_product r]
+                          -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）を右辺から左辺へ
   exact Complex.ofReal_injective hC
 
-/-! ## `γ_1(θ~_μ) > 1`（人手証明 `gamma1_gt_1_theta_tilde`） -/
+/-! ## `γ_1(θ~_μ) > 1`（人手証明 `gamma1_gt_1_theta_tilde`）
 
-/-- **人手証明 Step 2**: `γ_1(θ~_μ)^2 > 1`（`|γ_2(θ~_μ)| > 0` による）。 -/
+人手証明の準備の 2 本の含意の鎖のうち、第一の鎖の `g > 0` は `one_le_gamma1R`（人手 `gamma1_lower_bound_all_theta`）と
+`0 < 1` から（`one_lt_gamma1R_thetaTilde` の冒頭）、第二の鎖の `γ_2 ≠ 0 ⟹ r ≠ 0 ⟹ r > 0` は `absGamma2_thetaTilde_pos`、
+続く `r·r > 0·r ⟹ r·r > 0 ⟹ r^2 > 0` は `gamma1_gt_1_prep_absGamma2_sq_pos` である。
+`g^2` の鎖は `one_lt_gamma1R_sq_thetaTilde`、背理の鎖は `gamma1R_thetaTilde_sq_le_one_of_le_one`、
+結論の段は `one_lt_gamma1R_thetaTilde` である。 -/
+
+/-- **人手証明 `gamma1_gt_1_theta_tilde` の準備の第二の含意の鎖の後半**: `r > 0` から `r^2 > 0`
+（人手の 3 行 `r·r > 0·r`・`r·r > 0`・`r^2 > 0` と 1 対 1）。 -/
+theorem gamma1_gt_1_prep_absGamma2_sq_pos {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    0 < absGamma2 P.const (thetaTilde M μ) ^ 2 := by
+  have hr := absGamma2_thetaTilde_pos P hM μ                 -- 準備の `r > 0`
+  have h1 : 0 * absGamma2 P.const (thetaTilde M μ)
+      < absGamma2 P.const (thetaTilde M μ) * absGamma2 P.const (thetaTilde M μ) :=
+    mul_lt_mul_of_pos_right hr hr                             -- `r > 0` の両辺に `0 < r` を掛ける
+  have h2 : 0 < absGamma2 P.const (thetaTilde M μ) * absGamma2 P.const (thetaTilde M μ) := by
+    rw [zero_mul] at h1; exact h1                             -- `0·r = 0`
+  rw [square_of_real_number_is_product]; exact h2
+                          -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）を右辺から左辺へ
+
+/-- **人手証明 `gamma1_gt_1_theta_tilde` の `g^2` の鎖**: `γ_1(θ~_μ)^2 > 1`（人手の 3 行と 1 対 1 の `calc`）。 -/
 theorem one_lt_gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     {M : ℕ} (hM : M ≠ 0) (μ : ℤ) : 1 < gamma1R P.const (thetaTilde M μ) ^ 2 := by
-  have h := gamma1R_sq_thetaTilde P hdual M μ
-  have hr := absGamma2_thetaTilde_pos P hM μ
-  nlinarith [h, hr]
+  have hr2 := gamma1_gt_1_prep_absGamma2_sq_pos P hM μ  -- 準備の `r^2 > 0`
+  calc gamma1R P.const (thetaTilde M μ) ^ 2
+      = 1 + absGamma2 P.const (thetaTilde M μ) ^ 2 := gamma1R_sq_thetaTilde P hdual M μ
+                          -- `det_A_theta_tilde`（`γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`）
+    _ > 1 + 0 := (add_lt_add_iff_left 1).2 hr2
+                          -- 準備の `r^2 > 0` の両辺に `1` を加える
+    _ = 1 := add_zero 1                                 -- `0` は加法の単位元
+
+/-- **人手証明 `gamma1_gt_1_theta_tilde` の背理の鎖**: `g > 0` かつ `g ≤ 1` なら `g^2 ≤ 1`
+（人手の 4 行と 1 対 1 の `calc`）。 -/
+theorem gamma1R_thetaTilde_sq_le_one_of_le_one (M : ℕ) (μ : ℤ)
+    (hg0 : 0 < gamma1R P.const (thetaTilde M μ)) (h : gamma1R P.const (thetaTilde M μ) ≤ 1) :
+    gamma1R P.const (thetaTilde M μ) ^ 2 ≤ 1 :=
+  calc gamma1R P.const (thetaTilde M μ) ^ 2
+      = gamma1R P.const (thetaTilde M μ) * gamma1R P.const (thetaTilde M μ) :=
+        square_of_real_number_is_product _
+                          -- `square_of_real_number_is_product`（`r → g`）
+    _ ≤ 1 * gamma1R P.const (thetaTilde M μ) := mul_le_mul_of_nonneg_right h hg0.le
+                          -- `g ≤ 1` の両辺に準備の `0 < g` を掛ける
+    _ ≤ 1 * 1 := mul_le_mul_of_nonneg_left h zero_le_one
+                          -- `g ≤ 1` の両辺に `0 < 1` を掛ける（`≤` の単調性には `0 ≤ 1` で足りる）
+    _ = 1 := mul_one 1
+                          -- `1` は乗法の単位元
 
 /-- **人手証明 `gamma1_gt_1_theta_tilde`**: `γ_1(θ~_μ) > 1`（**狭義**）。
 
+`g ≤ 1` を仮定すると、`g^2` の鎖と背理の鎖から `1 < g^2 ≤ 1`、すなわち `1 < 1` となり ℝ の順序に矛盾する。
+ℝ の順序は全順序なので `g > 1`（人手の結論の段）。必要十分版からの導出は
+`ClaimDetATildeFromNecSuf.lean` の `one_lt_gamma1R_thetaTilde_of_necSuf`。
+
 008 章（整数運動量）では `γ_1(θ_μ) ≥ 1` しか言えず、臨界点の `θ_μ = 0` で等号が起こる。 -/
 theorem one_lt_gamma1R_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
-    {M : ℕ} (hM : M ≠ 0) (μ : ℤ) : 1 < gamma1R P.const (thetaTilde M μ) :=
-  NecSuf.one_lt_of_sq_gt_one
-    (lt_of_lt_of_le one_pos (one_le_gamma1R P (thetaTilde M μ)))
-    (one_lt_gamma1R_sq_thetaTilde P hdual hM μ)
+    {M : ℕ} (hM : M ≠ 0) (μ : ℤ) : 1 < gamma1R P.const (thetaTilde M μ) := by
+  have hg0 : 0 < gamma1R P.const (thetaTilde M μ) :=
+    lt_of_lt_of_le one_pos (one_le_gamma1R P (thetaTilde M μ))   -- 準備の `g ≥ 1` と `1 > 0` に推移律
+  exact lt_of_not_ge fun hle =>
+    lt_irrefl (1 : ℝ) (lt_of_lt_of_le (one_lt_gamma1R_sq_thetaTilde P hdual hM μ)
+      (gamma1R_thetaTilde_sq_le_one_of_le_one P M μ hg0 hle))
 
 /-- 人手証明が併記している `γ_1(θ~_μ) ≥ 1`（012 章の `one_le_gamma1R` の特殊化でもある）。 -/
 theorem one_le_gamma1R_thetaTilde (M : ℕ) (μ : ℤ) : 1 ≤ gamma1R P.const (thetaTilde M μ) :=

@@ -3,11 +3,11 @@ PASS 推移律: g - 1 = (g - c) + (c - 1)（非負 + 非負）
 PASS 推移律: g - 0 = (g - 1) + (1 - 0)（非負 + 正）
 PASS r > 0 の両辺に 0 < r を掛ける: r·r - 0·r = r·(r - 0)（正 × 正）
 PASS 0·r = 0 により r·r > 0·r から r·r > 0
-PASS 平方の定義 r^2 = r·r
+PASS square_of_real_number_is_product (r → |γ_2(θ)|): r^2 = r·r
 PASS 第 1 行 = 第 2 行は det_A_theta_tilde の関係のイデアルで成り立つ（関係なしでは異なる）
 PASS 第 2 行 > 第 3 行: 差がちょうど r^2（準備の r^2 > 0）
 PASS 第 3 行 = 第 4 行: 1 + 0 = 1
-PASS 第 1 行 = 第 2 行: 平方の定義
+PASS 第 1 行 = 第 2 行: square_of_real_number_is_product (r → g)
 PASS 第 2 行 ≤ 第 3 行: 差がちょうど g·(1 - g)（準備の g > 0 と仮定の 1 - g ≥ 0 の積）
 PASS 第 3 行 ≤ 第 4 行: 差がちょうど 1·(1 - g)（1 > 0 と仮定の 1 - g ≥ 0 の積）
 PASS 第 4 行 = 第 5 行: 1·1 = 1
