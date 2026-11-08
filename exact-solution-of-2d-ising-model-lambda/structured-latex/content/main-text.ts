@@ -8612,20 +8612,20 @@ j\in\operatorname{Orb}_{\sigma^{-1}}(i)
 \sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
 &&\bigl(\because\ \text{選言の順序の交換}\bigr)\\
 &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
-&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr).
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)
 \end{aligned}`),
                 paragraph(["従って両集合は等しい。次に、逆置換と反転の順序を交換する。", ref("claim_invariant_subset_reversal"), " の逆置換の所属同値より ", math(String.raw`\sigma^{-1}`), " も ", math(String.raw`C`), " を保つので、", math(String.raw`\rho_C(\sigma^{-1})`), " は定義できる。任意の ", math(String.raw`j\in\mathcal J`), " を取り、", math(String.raw`g_{C,\sigma}`), " を ", ref("def_invariant_subset_reversal"), " の逆写像とする。", math(String.raw`j\in C`), " なら、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho^{-1}(j)&=g_{C,\sigma}(j)&&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr)\\
 &=\sigma(j)&&\bigl(\because\ j\in C,\ \blkref{def_invariant_subset_reversal}\bigr)\\
 &=(\sigma^{-1})^{-1}(j)&&\bigl(\because\ (\sigma^{-1})^{-1}=\sigma\bigr)\\
-&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\in C,\ \blkref{def_invariant_subset_reversal}\bigr).
+&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\in C,\ \blkref{def_invariant_subset_reversal}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`j\notin C`), " なら、"]),
                 displayMath(String.raw`\begin{aligned}
 \rho^{-1}(j)&=g_{C,\sigma}(j)&&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr)\\
 &=\sigma^{-1}(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr)\\
-&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr).
+&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr)
 \end{aligned}`),
                 paragraph(["どの点でも値が等しいので ", math(String.raw`\rho^{-1}=\rho_C(\sigma^{-1})`), " である。この等号を使って台を比較する。始点 ", math(String.raw`i\in\mathcal J`), " と判定する点 ", math(String.raw`j\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8645,7 +8645,7 @@ j\in\operatorname{Orb}_{\rho}(i)
 &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma^{-1}}(i)
 &&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)\\
 &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
-&&\bigl(\because\ \text{冒頭で示した台の等号}\bigr).
+&&\bigl(\because\ \text{冒頭で示した台の等号}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " の場合、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8663,7 +8663,7 @@ j\in\operatorname{Orb}_{\rho}(i)
 \exists n\in\mathbb N,\ \sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
 &&\bigl(\because\ \sigma^{-1}\text{ への }\blkref{claim_invariant_subset_reversal_iterate}\bigr)\\
 &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
-&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr).
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)
 \end{aligned}`),
                 paragraph(["どちらの場合も任意の点の所属が同値なので、軌道の台は等しい。", math(String.raw`\mathcal J=\varnothing`), " の場合は始点がなく、全称命題はそのまま成り立つ。有限集合と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
               ],
