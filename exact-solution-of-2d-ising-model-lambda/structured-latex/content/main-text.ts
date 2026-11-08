@@ -12371,6 +12371,64 @@ S&=(S-T)+T
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_nonempty_tree_edge_subset_has_leaf",
+        labels: [],
+        title: { text: "木の辺部分集合の端点" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_nonempty_tree_edge_subset_has_leaf",
+              focus: {
+                id: "tools_claim_nonempty_tree_edge_subset_has_leaf",
+                kind: "claim",
+                title: { text: "木の非空な辺部分集合には接続辺が一本の頂点がある" },
+                labels: ["claim_nonempty_tree_edge_subset_has_leaf"],
+                habitat: "N",
+                verification: ["sagemath/check/nonempty-tree-edge-subset-leaf"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " と、相異なる二頂点からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
+                    " が連結で閉路を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
+                    " なら、ある頂点 ", math(String.raw`v\in V`),
+                    " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`A`), " が非空なので、", math(String.raw`A`),
+                    " の辺だけを通る、頂点重複のない長さが正の路がある。",
+                    "有限性により、そのような路のうち辺数が最大のものを一つ取り、",
+                    "始点を ", math(String.raw`v\in V`), "、次の頂点を ", math(String.raw`w\in V`), " とする。",
+                  ]),
+                  paragraph([
+                    "始点 ", math(String.raw`v`), " に接する ", math(String.raw`A`),
+                    " の辺 ", math(String.raw`\{v,u\}`), "（", math(String.raw`u\in V`), "）を取る。",
+                    "もし ", math(String.raw`u`), " が路に現れなければ、その辺を始めに付けて路を延長でき、最大性に反する。",
+                    "従って ", math(String.raw`u`), " は路に現れる。",
+                    "もし ", math(String.raw`u\ne w`), " なら、路の ", math(String.raw`v`),
+                    " から ", math(String.raw`u`), " までの部分と辺 ", math(String.raw`\{v,u\}`),
+                    " が閉路を作り、木が閉路を持たないことに反する。",
+                    "従って ", math(String.raw`u=w`), " である。",
+                  ]),
+                  paragraph([
+                    "辺 ", math(String.raw`\{v,w\}`), " は路の最初の辺なので ",
+                    math(String.raw`A`), " に属し、", math(String.raw`v`),
+                    " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_even_edge_symmetric_difference",
         labels: [],
         title: { text: "偶辺集合の対称差" },

@@ -257,6 +257,7 @@ export const ALL_LABELS = [
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
   "claim_nonempty_plane_cell_set_has_boundary_edge",
+  "claim_nonempty_tree_edge_subset_has_leaf",
   "claim_nonloop_successor_distinct_base",
   "claim_nonzero_long_pair_reference",
   "claim_nonzero_winding_simple_cycle_turning_zero",
