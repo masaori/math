@@ -66985,7 +66985,7 @@ h_Z(r,c-1)
                             " の全ての辺の列座標より大きい整数として取る。有限性から存在する。",
                             "頂点 ", math(String.raw`(r,j)`), " の偶数次数条件は",
                           ]),
-                          displayMath(String.raw`\mathbf1_{v_{r,j}\in Z}+\mathbf1_{v_{r-1,j}\in Z}\equiv\mathbf1_{e_{r,j}\in Z}+\mathbf1_{e_{r,j-1}\in Z}\pmod2`),
+                          displayMath(String.raw`\mathbf1_{v_{r,j}\in Z}+\mathbf1_{v_{r-1,j}\in Z}\equiv\mathbf1_{e_{r,j}\in Z}+\mathbf1_{e_{r,j-1}\in Z}\pmod2\quad\bigl(\because\ \text{頂点 }(r,j)\text{ での }Z\text{ の辺数が偶数}\bigr)`),
                           paragraph(["である。これを整数 ", math(String.raw`c<j\le M`), " について足す。"]),
                           displayMath(String.raw`\begin{aligned}
 h_Z(r,c)+h_Z(r-1,c)
@@ -67111,6 +67111,53 @@ e_{r,c}\in\mathcal B_{\square}(T)
 &\Longleftrightarrow e_{r,c}\in Z
 &&\bigl(\because\ \text{上で示した高さ差の同値}\bigr)
 \end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_finite_row_support",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さ一の行は有限個に限られる" },
+                        labels: ["claim_plane_dual_ray_height_finite_row_support"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_zero_of_row_absent",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_row_support",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRay_zero_of_row_absent",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRay_row_support",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_row_support_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-row-support"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " について、辺の行座標の集合 ",
+                            math(String.raw`R_Z:=\{r\in\mathbb Z\mid\exists e\in Z,\ e\text{ の行座標が }r\}`),
+                            " は有限である。任意の ", math(String.raw`r,c\in\mathbb Z`),
+                            " で ", math(String.raw`r\notin R_Z`), " なら、右向き双対路の高さ（",
+                            ref("def_plane_dual_ray_height"), "）は零である。したがって高さ一のセルの行座標は ",
+                            math(String.raw`R_Z`), " に属する。",
+                          ]),
+                          displayMath(String.raw`r\notin R_Z\Longrightarrow h_Z(r,c)=0,\qquad h_Z(r,c)=1\Longrightarrow r\in R_Z`),
+                        ],
+                        proof: [
+                          paragraph([
+                            math(String.raw`R_Z`), " は有限集合 ", math(String.raw`Z`),
+                            " の行座標への像なので有限である。", math(String.raw`r\notin R_Z`),
+                            " なら、任意の ", math(String.raw`j\in\mathbb Z`),
+                            " について縦辺 ", math(String.raw`v_{r,j}\notin Z`), " である。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c)
+&=\left|\{j\in\mathbb Z\mid j>c\text{ かつ }v_{r,j}\in Z\}\right|\bmod2
+&&\bigl(\because\ \blkref{def_plane_dual_ray_height}\bigr)\\
+&=|\varnothing|\bmod2
+&&\bigl(\because\ r\notin R_Z\bigr)\\
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr)
+\end{aligned}`),
+                          paragraph(["最後の含意は対偶である。全て有限集合の計数で閉じる。"]),
                         ],
                       },
                     },

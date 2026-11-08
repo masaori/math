@@ -356,6 +356,7 @@ export const ALL_LABELS = [
   "claim_pfaffian_signed_even_subgraph",
   "claim_plane_cell_boundary_even_at_vertex",
   "claim_plane_cell_boundary_preserves_symmetric_difference",
+  "claim_plane_dual_ray_height_finite_row_support",
   "claim_plane_dual_ray_height_horizontal_difference",
   "claim_plane_dual_ray_height_vertical_difference",
   "claim_plane_height_one_horizontal_edge",
