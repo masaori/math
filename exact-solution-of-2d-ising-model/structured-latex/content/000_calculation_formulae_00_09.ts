@@ -322,7 +322,7 @@ s>1+x\ \land\ 1+x>1
       displayMath(String.raw`\begin{aligned}
 s^2
 &= s\cdot s
-&&(\because\ \text{2 乗の定義})\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to s)\bigr)\\
 &> (1+x)\cdot 1
 &&(\because\ s>1+x>0\ \text{と}\ s>1>0\text{、順序体の乗法の単調性})\\
 &= 1+x
@@ -374,7 +374,7 @@ s^2
       displayMath(String.raw`\begin{aligned}
 \varepsilon^2
 &= \varepsilon\cdot\varepsilon
-&&(\because\ \text{2 乗の定義})\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \varepsilon)\bigr)\\
 &\le 1\cdot\varepsilon
 &&(\because\ \varepsilon\le 1,\ \varepsilon>0\text{、順序体の乗法の単調性})\\
 &= \varepsilon
@@ -506,7 +506,7 @@ y^2>x\ \land\ x>0
           "存在は R の上限性質（完備性）を使い、一意性は" +
           "labels: cosh_sinh_basic_properties の (4) を使う。" +
           "非可算集合 R の完備性へ移行する箇所を proof の冒頭で明示した。",
-        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の二乗 y^2 を def_power_of_real_number の冪（m = 2）と明記した（definition_of_sqrt_r_positive と同じ）。証明の中で積 s·s へ開く行が名前だけの「2 乗の定義」を根拠にしている箇所は、square_of_real_number_is_product を引く行へ替える単位として残っている。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の二乗 y^2 を def_power_of_real_number の冪（m = 2）と明記した（definition_of_sqrt_r_positive と同じ）。証明の中で積 s·s・ε·ε へ開く 2 行の名前だけの根拠「2 乗の定義」を、square_of_real_number_is_product（r → s、r → ε）の参照にした（square_of_real_number_is_product は def_power_of_real_number だけから示され平方根を使わないので循環しない。どちらも文書の並びでは後に来る）。",
       ],
     },
   },
