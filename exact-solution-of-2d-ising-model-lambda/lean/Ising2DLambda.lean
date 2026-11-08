@@ -1,4 +1,6 @@
 import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationOrbitEnumeration
+import Ising2DLambda.Tools.FiniteTreeEdgeCount
+import Ising2DLambda.NecSuf.Tools.FiniteTreeEdgeCount
 import Ising2DLambda.KacWard.PlaneDualRayHeightRowSupport
 import Ising2DLambda.KacWard.PlaneDualRayHeightRightBound
 import Ising2DLambda.KacWard.PlaneDualRayHeightLeftBound

@@ -12308,6 +12308,65 @@ S&=(S-T)+T
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_finite_tree_edge_count",
+        labels: [],
+        title: { text: "有限木の辺の個数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_finite_tree_edge_count",
+              focus: {
+                id: "tools_claim_finite_tree_edge_count",
+                kind: "claim",
+                title: { text: "空でない有限木の辺の個数は頂点の個数より一少ない" },
+                labels: ["claim_finite_tree_edge_count"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.finiteTree_edge_count",
+                  "Ising2DLambda.NecSuf.Tools.finiteTree_edge_count",
+                ],
+                verification: ["sagemath/check/finite-tree-edge-count"],
+                statement: [
+                  paragraph([
+                    "空でない有限頂点集合 ", math(String.raw`V`), " と、その二元からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
+                    " が連結で閉路を持たないなら、",
+                  ]),
+                  displayMath(String.raw`|E|+1=|V|`),
+                  paragraph(["が成り立つ。頂点と辺の個数はいずれも自然数である。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "連結性から基点 ", math(String.raw`o\in V`), " を取る。閉路が無いので、",
+                    "各頂点 ", math(String.raw`v\in V\setminus\{o\}`), " から基点への頂点重複のない路は一意である。",
+                    "存在は連結性から、相異なる二路があれば両者の分岐点から再合流点までが閉路になる。",
+                  ]),
+                  paragraph([
+                    "各 ", math(String.raw`v\in V\setminus\{o\}`), " に、その一意な路の最初の辺を対応させる。",
+                    "相異なる二頂点が同じ辺を最初に持てば、それぞれがその辺の逆側から基点へ向かう。",
+                    "基点への一意な路が両方向へ進むのは不可能なので、この対応は単射である。",
+                    "任意の辺を取り去ると木は二つの連結成分に分かれる。両端がなおつながれば閉路になるからである。",
+                    "基点と反対の成分にある端点の路が、その辺から始まる。",
+                    "従ってこの対応は全単射である。",
+                  ]),
+                  paragraph(["全単射による個数の一致と、空でない有限集合から一点を除く個数より、"]),
+                  displayMath(String.raw`\begin{aligned}
+|E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ \text{上で作った全単射と両辺への }1\text{ の加算}\bigr)\\
+&=|V|&&\bigl(\because\ o\in V\text{ と有限集合の一点除去}\bigr)
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
@@ -67476,8 +67535,9 @@ e\notin\mathcal E_{\square}(S)
                             "補集合の辺連結路に沿ってこの同値を反復すると、高さ一への所属は補集合上で一定である。",
                             math(String.raw`S\cup T_Z`), " は有限なので、その外のセル ",
                             math(String.raw`q_0`), " を選べる。", math(String.raw`q_0\notin T_Z`),
-                            " だから補集合上の所属は常に偽であり、", math(String.raw`T_Z\subset S`), " を得る。",
+                            " だから補集合上の所属は常に偽である。",
                           ]),
+                          displayMath(String.raw`T_Z\subset S\qquad\bigl(\because\ q_0\notin T_Z\text{ と補集合上での所属の一定性}\bigr)`),
                         ],
                       },
                     },

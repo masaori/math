@@ -135,6 +135,7 @@ export const ALL_LABELS = [
   "claim_finite_permutation_period_injective",
   "claim_finite_permutation_positive_return",
   "claim_finite_torus_polynomial",
+  "claim_finite_tree_edge_count",
   "claim_first_hit_connecting_staircase_meets_lifts_only_at_ends",
   "claim_first_root_of_unity_set",
   "claim_fisher_zero_algebraicity",
