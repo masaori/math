@@ -10027,7 +10027,7 @@ w_A(\sigma)+w_A(\tau)
               proof: [
                 paragraph(["まず ", math(String.raw`i\in\mathcal J`), " と ", math(String.raw`j\in\operatorname{Orb}_\sigma(i)`), " を取ると、"]),
                 displayMath(String.raw`\operatorname{Orb}_\sigma(j)=\operatorname{Orb}_\sigma(i)
-\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)`),
                 paragraph(["二つの最小元は、それぞれ同じ集合に属するので、"]),
                 displayMath(String.raw`\begin{aligned}
 m_\sigma(j)&\preceq m_\sigma(i)
@@ -10035,7 +10035,7 @@ m_\sigma(j)&\preceq m_\sigma(i)
 m_\sigma(i)&\preceq m_\sigma(j)
 &&\bigl(\because\ m_\sigma(i)\text{ の最小性と上の集合の等号}\bigr),\\
 m_\sigma(j)&=m_\sigma(i)
-&&\bigl(\because\ \text{順序の反対称律}\bigr).
+&&\bigl(\because\ \text{順序の反対称律}\bigr)
 \end{aligned}`),
                 paragraph(["ここで ", math(String.raw`b:=m_\sigma(i)\in\mathcal J`), "、", math(String.raw`p:=p_\sigma(b)\in\mathbb N`), " と略す。", math(String.raw`b\in\operatorname{Orb}_\sigma(i)`), " なので、直前の等式を ", math(String.raw`j=b`), " に適用すると ", math(String.raw`m_\sigma(b)=b`), " となる。従って、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -10044,16 +10044,16 @@ p_\sigma(m_\sigma(b))&=p_\sigma(b)
 &=p&&\bigl(\because\ p\text{ の略記}\bigr),\\
 \sigma^{[0]}(m_\sigma(b))&=m_\sigma(b)
 &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)\\
-&=b&&\bigl(\because\ m_\sigma(b)=b\bigr).
+&=b&&\bigl(\because\ m_\sigma(b)=b\bigr)
 \end{aligned}`),
-                displayMath(String.raw`0<p\qquad\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\bigr).`),
+                displayMath(String.raw`0<p\qquad\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\bigr)`),
                 paragraph(["零は座標の条件を満たすので、"]),
                 displayMath(String.raw`\begin{aligned}
 r_\sigma(b)&=0&&\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標の一意性}\bigr),\\
 r_\sigma(b)\bmod2&=0\bmod2&&\bigl(\because\ r_\sigma(b)=0\text{ の代入}\bigr)\\
-&=0&&\bigl(\because\ \text{零を二で割った余り}\bigr).
+&=0&&\bigl(\because\ \text{零を二で割った余り}\bigr)
 \end{aligned}`),
-                displayMath(String.raw`b\in C_\sigma\qquad\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義}\bigr).`),
+                displayMath(String.raw`b\in C_\sigma\qquad\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義}\bigr)`),
               ],
             },
           },

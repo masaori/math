@@ -56,6 +56,30 @@ theorem exteriorCells_horizontalPath_of_even_vertical_edges
         Or.inl ⟨rfl, Or.inr (by omega)⟩⟩, hnext⟩
   exact (hpath d hcd heven).1
 
+/-- 通過された縦辺の左側にある外側セルは歩道沿いの外側帯に属する。 -/
+theorem exteriorCell_leftOfTraversedVerticalEdge_mem_band
+    (n : ℕ) (row col : ℕ → ℤ) (r g : ℤ)
+    (hpositive : 0 < verticalEdgeTraversalCount n row col r g)
+    (houtside : (r, g - 1) ∈ exteriorCells n row col) :
+    (r, g - 1) ∈ walkSideExteriorBand n row col := by
+  unfold verticalEdgeTraversalCount at hpositive
+  obtain ⟨k, hk, hterm⟩ := Finset.sum_pos_iff.mp hpositive
+  have hcross : crossesRowLevel row r k ∧ col k = g := by
+    by_contra h
+    simp [h] at hterm
+  rcases hcross with ⟨hrow, hcol⟩
+  change (r, g - 1) ∉ oddRayInteriorCells n row col at houtside
+  refine ⟨k, Finset.mem_range.mp hk, ?_⟩
+  change ((r, g - 1) = (row k - 1, col k - 1) ∨
+    (r, g - 1) = (row k - 1, col k) ∨
+    (r, g - 1) = (row k, col k) ∨
+    (r, g - 1) = (row k, col k - 1)) ∧
+    (r, g - 1) ∉ oddRayInteriorCells n row col
+  refine ⟨?_, houtside⟩
+  rcases hrow with ⟨hr, -⟩ | ⟨hr, -⟩
+  · exact Or.inr (Or.inr (Or.inr (by simp [hr, hcol])))
+  · exact Or.inl (by simp [hr, hcol])
+
 /-- 長方形の上側または下側の固定行では、任意の二セルを列方向の有限路で結べる。 -/
 theorem outsideBoundingRectangle_horizontalPath
     (rMin rMax cMin cMax r c d : ℤ)
