@@ -27,8 +27,8 @@
   `K_2 > 0` だけ（`physicalSymTransferC_hasRealEntries`）で、`W_real_has_positive_entries` は `K_1, K_2 > 0` を
   `W_has_positive_entries_as_inclusion`（人手 `W_has_positive_entries` と同じ `K_1, K_2 > 0` を取る）へ渡す。
   `M_col ≥ 1` は、`W_real_has_positive_entries` では `_hM : 1 ≤ M` で受け、`epsilon_real_commutes_with_W_real` では
-  `ε_ℝ`（`epsilonReal n`）の側が `M_col = n + 1` で持つ。どちらの証明も `M_col ≥ 1` を使わない。`K_1 > 0` は下へ渡すだけで、最後に受ける `W_has_positive_entries_physical` も
-  `_hK1` として受けて使わない。
+  `ε_ℝ`（`epsilonReal n`）の側が `M_col = n + 1` で持つ。どちらの証明も `M_col ≥ 1` を使わない。`K_1 > 0` は下へ渡すだけで、最後に受ける `W_has_positive_entries` も
+  `_hK1`・`_hK2` として受けて使わない。
 
 必要十分版は置かない。どちらの主張も、引いた主張（`W_has_positive_entries`・`epsilon_commutes_with_W`・
 `real_matrix_of_real_entry_matrix_preserves_product`・`inclusion_rr_to_cc_is_injective`）を成分ごと、または 1 回ずつ当てることに尽き、

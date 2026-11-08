@@ -2847,6 +2847,8 @@ targets=(
   Ising2D.physicalV1halfR_offDiag
   Ising2D.physicalV2R_apply_configBasisIso_pos
   Ising2D.physicalSymTransferR_apply_configBasisIso
+  Ising2D.physicalSymTransferC_apply_configBasisIso
+  Ising2D.symTransferEntryProduct_pos
   Ising2D.W_has_positive_entries_physical
   Ising2D.W_has_positive_entries
   Ising2D.physicalSymTransferR_pos
