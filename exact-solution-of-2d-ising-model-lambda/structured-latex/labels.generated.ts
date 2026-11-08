@@ -354,6 +354,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_pfaffian_signed_even_subgraph",
+  "claim_plane_cell_boundary_preserves_symmetric_difference",
   "claim_plane_lift_coordinates",
   "claim_plane_lift_endpoint_winding",
   "claim_plane_projection_cyclic_turning",

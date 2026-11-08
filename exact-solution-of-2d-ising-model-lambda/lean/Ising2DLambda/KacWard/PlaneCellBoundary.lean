@@ -3,6 +3,8 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
+open scoped symmDiff
+
 /-- An edge belongs to the boundary when exactly one of its incident cells is selected. -/
 def planeCellBoundary (cells : Finset GridCell) : Finset GridEdge :=
   (cellEdges cells).filter fun e =>
@@ -42,5 +44,22 @@ theorem planeCellBoundary_nonempty (cells : Finset GridCell)
     have := hmax (r + 1) c h
     omega
   exact ⟨(false, (r + 1, c)), planeCellBoundary_upper_edge cells r c hcell habove⟩
+
+set_option maxHeartbeats 2000000
+
+/-- Cell boundary commutes with symmetric difference of finite cell sets. -/
+theorem planeCellBoundary_symmDiff (cells₁ cells₂ : Finset GridCell) :
+    planeCellBoundary (cells₁ ∆ cells₂) =
+      planeCellBoundary cells₁ ∆ planeCellBoundary cells₂ := by
+  ext ⟨b, ⟨r, c⟩⟩
+  cases b
+  · simp only [planeCellBoundary, Finset.mem_filter, horizontalEdge_mem_cellEdges_iff,
+      Finset.mem_symmDiff]
+    simp only [Bool.false_eq_true, ↓reduceIte]
+    tauto
+  · simp only [planeCellBoundary, Finset.mem_filter, verticalEdge_mem_cellEdges_iff,
+      Finset.mem_symmDiff]
+    simp only [↓reduceIte]
+    tauto
 
 end Ising2DLambda.KacWard

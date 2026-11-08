@@ -66772,6 +66772,66 @@ e&\in\mathcal B_{\square}(T)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_cell_boundary_preserves_symmetric_difference",
+                        kind: "claim",
+                        title: { text: "平面の有限セル集合の境界は対称差を保つ" },
+                        labels: ["claim_plane_cell_boundary_preserves_symmetric_difference"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeCellBoundary_symmDiff",
+                          "Ising2DLambda.NecSuf.KacWard.boundaryParity_symmDiff",
+                        ],
+                        verification: ["sagemath/check/plane-cell-boundary-symmetric-difference"],
+                        statement: [
+                          paragraph([
+                            "任意の有限セル集合 ", math(String.raw`T,U\subset\mathbb Z\times\mathbb Z`),
+                            " について、境界辺集合（", ref("def_plane_cell_boundary_edge_set"),
+                            "）は対称差を保つ。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T\triangle U)=\mathcal B_{\square}(T)\triangle\mathcal B_{\square}(U)`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の ", math(String.raw`r,c\in\mathbb Z`),
+                            " を取り、横辺 ", math(String.raw`e_h=\{(r,c),(r,c+1)\}`),
+                            " と縦辺 ", math(String.raw`e_v=\{(r,c),(r+1,c)\}`),
+                            " を置く。有限集合の対称差では、元の所属の真偽値を排他的論理和で結ぶ。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e_h\in\mathcal B_{\square}(T\triangle U)
+&\Longleftrightarrow ((r,c)\in T\triangle U)\mathbin{\mathrm{xor}}((r-1,c)\in T\triangle U)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)\\
+&\Longleftrightarrow \bigl(((r,c)\in T)\mathbin{\mathrm{xor}}((r,c)\in U)\bigr)
+  \mathbin{\mathrm{xor}}\bigl(((r-1,c)\in T)\mathbin{\mathrm{xor}}((r-1,c)\in U)\bigr)
+&&\bigl(\because\ \text{対称差の所属条件}\bigr)\\
+&\Longleftrightarrow \bigl(((r,c)\in T)\mathbin{\mathrm{xor}}((r-1,c)\in T)\bigr)
+  \mathbin{\mathrm{xor}}\bigl(((r,c)\in U)\mathbin{\mathrm{xor}}((r-1,c)\in U)\bigr)
+&&\bigl(\because\ \text{排他的論理和の結合律と交換律}\bigr)\\
+&\Longleftrightarrow (e_h\in\mathcal B_{\square}(T))\mathbin{\mathrm{xor}}(e_h\in\mathcal B_{\square}(U))
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
+\end{aligned}`),
+                          displayMath(String.raw`\begin{aligned}
+e_v\in\mathcal B_{\square}(T\triangle U)
+&\Longleftrightarrow ((r,c)\in T\triangle U)\mathbin{\mathrm{xor}}((r,c-1)\in T\triangle U)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)\\
+&\Longleftrightarrow \bigl(((r,c)\in T)\mathbin{\mathrm{xor}}((r,c)\in U)\bigr)
+  \mathbin{\mathrm{xor}}\bigl(((r,c-1)\in T)\mathbin{\mathrm{xor}}((r,c-1)\in U)\bigr)
+&&\bigl(\because\ \text{対称差の所属条件}\bigr)\\
+&\Longleftrightarrow \bigl(((r,c)\in T)\mathbin{\mathrm{xor}}((r,c-1)\in T)\bigr)
+  \mathbin{\mathrm{xor}}\bigl(((r,c)\in U)\mathbin{\mathrm{xor}}((r,c-1)\in U)\bigr)
+&&\bigl(\because\ \text{排他的論理和の結合律と交換律}\bigr)\\
+&\Longleftrightarrow (e_v\in\mathcal B_{\square}(T))\mathbin{\mathrm{xor}}(e_v\in\mathcal B_{\square}(U))
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "全ての格子辺は横辺か縦辺なので、二つの有限な境界辺集合の所属条件が一致し、集合の等式が従う。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",

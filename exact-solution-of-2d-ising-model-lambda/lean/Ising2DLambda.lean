@@ -1078,6 +1078,7 @@ import Ising2DLambda.KacWard.ExteriorCellReachesOuterCoreFromWalk
 import Ising2DLambda.KacWard.CellComplexOneCellIncrement
 import Ising2DLambda.KacWard.CellEdgeIncidence
 import Ising2DLambda.KacWard.PlaneCellBoundary
+import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundarySymmDiff
 import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundary
 import Ising2DLambda.KacWard.PlaneCellBoundaryFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.CellComplexOneCellIncrement
