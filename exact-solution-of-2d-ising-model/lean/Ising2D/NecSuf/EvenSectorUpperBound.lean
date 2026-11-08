@@ -83,7 +83,8 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     {π : n → n} (hπ : Function.Involutive π) (hcomm : permMat π * W = W * permMat π) :
     rayleighSup W ≤ 2 * evenSectorRayleighSup W (permMat π) := by
   refine csSup_le (rayleighSet_nonempty W) ?_
-  rintro r ⟨x, hx, rfl⟩
+  rintro r ⟨x, hxn, rfl⟩
+  have hx : vecNormSq x = 1 := vecNormSq_eq_one_of_vecNorm_eq_one hxn
   set ε : Matrix n n ℝ := permMat π with hεdef
   set u : n → ℝ := absVec x with hudef
   set v : n → ℝ := u + ε *ᵥ u with hvdef
@@ -145,7 +146,7 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ hvpos.ne']
   have hsec : ε *ᵥ (c • v) = c • v := by rw [Matrix.mulVec_smul, hεv]
   have hmax : (c • v) ⬝ᵥ W *ᵥ (c • v) ≤ evenSectorRayleighSup W ε :=
-    le_evenSectorRayleighSup hsec hunit
+    le_evenSectorRayleighSup hsec (vecNorm_eq_one_of_vecNormSq_eq_one hunit)
   have hchain : x ⬝ᵥ W *ᵥ x / 2 ≤ evenSectorRayleighSup W ε :=
     calc x ⬝ᵥ W *ᵥ x / 2
         ≤ u ⬝ᵥ W *ᵥ u / 2 := by linarith [quad_le_quad_absVec hWnn x]

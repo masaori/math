@@ -85,12 +85,10 @@ theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W
 `d = 2^{M_col}`、`M_col = n + 1`、`W_ℝ = ϱ(W)`（`def_W_real`）、`ε_ℝ`（`def_epsilon_real`）について、
 `Λ = c_+(M_col)`（人手は `c_plus_equals_Lambda_half_integer` で与える。ここでは仮定 `hΛ`）なら `c(M_col) ≤ 2Λ`。
 
-- 人手の `x ∈ ℝ^d`、`‖x‖ = 1` は、Lean の `𝓡`（`rayleighSet`）の条件 `vecNormSq x = 1`（`‖x‖^2 = 1`）で受け取り、
-  `‖x‖ = √1 = 1` に読み直してから準備に入る（`DefinitionRayleighSup.lean` の `abs_component_le_one_of_unit` と同じ）。
+- 人手の `x ∈ ℝ^d`、`‖x‖ = 1` は、Lean の `𝓡`（`rayleighSet`）の条件 `vecNorm x = 1` で受け取る。
 - 人手の `u, v, v̂` は成分の等式で置く。Lean も `u k := |x k|`・`v k := u k + (ε_ℝu) k`・`v̂ k := v k / ‖v‖` の関数として置き、
   引く主張の成分の仮定は `fun k => rfl` で渡す。
-- 人手の `v̂^⊤W_ℝv̂ ∈ 𝓡_+`（`def_sector_rayleigh_sup`、`x → v̂`）は `evenSectorSet` の元であることで、条件 `‖v̂‖ = 1` は
-  Lean の `vecNormSq v̂ = 1` に `vecNorm_sq`（`‖v̂‖^2 = vecNormSq v̂`）で読み替える。
+- 人手の `v̂^⊤W_ℝv̂ ∈ 𝓡_+`（`def_sector_rayleigh_sup`、`x → v̂`）は `evenSectorSet` の元であることで、条件 `‖v̂‖ = 1` をそのまま渡す。
 - 人手の `‖v‖^2 := ‖v‖‖v‖` は Lean の `vecNorm v ^ 2` である。
 - 人手の設定の `K_1, K_2 ∈ ℝ_{>0}` を `hK1`・`hK2` で受け、準備で引く `W_real_has_positive_entries`・
   `W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice`（どちらも人手どおり
@@ -106,9 +104,8 @@ theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 :
   -- 準備: `W_real_has_positive_entries` より `(W_ℝ)_kl > 0`、とくに `(W_ℝ)_kl ≥ 0`
   have hWnn : ∀ k l, 0 ≤ W k l := fun k l => (W_real_has_positive_entries (Nat.le_add_left 1 n) hK1 hK2 k l).le
   -- 各 `x`（`‖x‖ = 1`）で `x^⊤W_ℝx ≤ 2Λ`
-  have hbound : ∀ x : Conf (n + 1) → ℝ, vecNormSq x = 1 → x ⬝ᵥ W *ᵥ x ≤ 2 * Λ := by
-    intro x hx1
-    have hxnorm : vecNorm x = 1 := by rw [vecNorm, hx1, Real.sqrt_one]       -- Lean の `𝓡` の条件を `‖x‖ = 1` に読む
+  have hbound : ∀ x : Conf (n + 1) → ℝ, vecNorm x = 1 → x ⬝ᵥ W *ᵥ x ≤ 2 * Λ := by
+    intro x hxnorm
     set u : Conf (n + 1) → ℝ := fun k => |x k| with hu
     set v : Conf (n + 1) → ℝ := fun k => u k + (epsilonReal n *ᵥ u) k with hv
     set vhat : Conf (n + 1) → ℝ := fun k => v k / vecNorm v with hvhat
@@ -146,7 +143,7 @@ theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 :
         (fun i => congrFun hεv i)
     -- 準備: `def_sector_rayleigh_sup`（`x → v̂`）より `v̂^⊤W_ℝv̂ ∈ 𝓡_+`
     have hvhat_mem : vhat ⬝ᵥ W *ᵥ vhat ∈ evenSectorSet W (epsilonReal n) :=
-      ⟨vhat, funext hεvhat, by rw [← vecNorm_sq, hvhatnorm, one_pow], rfl⟩
+      ⟨vhat, funext hεvhat, hvhatnorm, rfl⟩
     -- 準備: `norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four`（`u → u`）より `‖v‖^2 ≤ 4`、
     -- 正の数の逆数を取ると大小が逆になることから `1/‖v‖^2 ≥ 1/4`
     have hv4 : vecNorm v ^ 2 ≤ 4 :=

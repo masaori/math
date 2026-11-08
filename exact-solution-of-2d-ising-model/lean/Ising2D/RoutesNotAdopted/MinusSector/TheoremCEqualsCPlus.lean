@@ -117,7 +117,7 @@ theorem rayleighSup_mem_rayleighSet {W : Matrix (Conf M) (Conf M) ℝ}
     (hx₀ : epsilonR M *ᵥ x₀ = (1 : ℝ) • x₀) (hx₀1 : vecNormSq x₀ = 1)
     (hattain : x₀ ⬝ᵥ W *ᵥ x₀ = sectorRayleighSup W (epsilonR M) 1) :
     rayleighSup W ∈ rayleighSet W :=
-  ⟨x₀, hx₀1,
+  ⟨x₀, vecNorm_eq_one_of_vecNormSq_eq_one hx₀1,
     (rayleighSup_attained_in_even_sector hpsd hpos hcomm hx₀ hx₀1 hattain).symm⟩
 
 end Ising2D

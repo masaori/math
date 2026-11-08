@@ -271,11 +271,11 @@ theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
     rw [show y ⬝ᵥ y = a from rfl]
     field_simp
   refine le_antisymm ?_ ?_
-  · refine csSup_le ⟨_, ⟨c • y, hsec, hunit, rfl⟩⟩ ?_
+  · refine csSup_le ⟨_, ⟨c • y, hsec, vecNorm_eq_one_of_vecNormSq_eq_one hunit, rfl⟩⟩ ?_
     rintro r ⟨x, hxs, hxn, rfl⟩
-    exact B.quad_le_lamMax hxs hxn
+    exact B.quad_le_lamMax hxs (vecNormSq_eq_one_of_vecNorm_eq_one hxn)
   · rw [← hquad]
-    exact le_evenSectorRayleighSup hsec hunit
+    exact le_evenSectorRayleighSup hsec (vecNorm_eq_one_of_vecNormSq_eq_one hunit)
 
 /-- 上限が偶セクターの実単位ベクトルで**達成される**こと（人手証明の最後の一文）。 -/
 theorem exists_maximizer (htr : 0 < ((epsilon M * D.V).trace).re) :

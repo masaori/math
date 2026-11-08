@@ -135,6 +135,15 @@ theorem vecNorm_nonneg (x : n → ℝ) : 0 ≤ vecNorm x := Real.sqrt_nonneg _
 theorem vecNorm_sq (x : n → ℝ) : vecNorm x ^ 2 = vecNormSq x :=
   Real.sq_sqrt (vecNormSq_nonneg x)
 
+/-- `‖x‖^2 = 1` から `‖x‖ = √1 = 1`。人手の行ではない（`vecNormSq` で単位ベクトルを作る Lean の証明が、
+人手の `𝓡`・`𝓡_+` の条件 `‖x‖ = 1`（`rayleighSet`・`evenSectorSet`）へ渡すための読み替え）。 -/
+theorem vecNorm_eq_one_of_vecNormSq_eq_one {x : n → ℝ} (h : vecNormSq x = 1) : vecNorm x = 1 := by
+  rw [vecNorm, h, Real.sqrt_one]
+
+/-- `‖x‖ = 1` から `‖x‖^2 = vecNormSq x = 1`。人手の行ではない（`vecNorm_eq_one_of_vecNormSq_eq_one` の逆向き）。 -/
+theorem vecNormSq_eq_one_of_vecNorm_eq_one {x : n → ℝ} (h : vecNorm x = 1) : vecNormSq x = 1 := by
+  rw [← vecNorm_sq, h, one_pow]
+
 /-! ## 行列の冪と線型写像の冪 -/
 
 /-- `A^k` の定める線型写像は `A` の定める線型写像の `k` 乗。 -/

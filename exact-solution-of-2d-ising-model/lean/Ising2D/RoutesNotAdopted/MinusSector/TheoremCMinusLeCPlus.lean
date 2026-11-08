@@ -67,7 +67,7 @@ theorem quad_le_sectorRayleighSup_pos {W : Matrix (Conf M) (Conf M) ℝ} (hpos :
     x ⬝ᵥ W *ᵥ x ≤ sectorRayleighSup W (epsilonR M) 1 := by
   obtain ⟨u, hu, hu1, hle⟩ := exists_even_sector_unit_ge hpos hx hx1
   exact le_trans hle
-    (le_csSup (sectorSet_bddAbove_epsilonR W _) ⟨u, hu, hu1, rfl⟩)
+    (le_csSup (sectorSet_bddAbove_epsilonR W _) ⟨u, hu, vecNorm_eq_one_of_vecNormSq_eq_one hu1, rfl⟩)
 
 /-! ## Step 3: 上限を取る -/
 

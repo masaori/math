@@ -42,7 +42,7 @@ variable {n : Type*} [Fintype n] [DecidableEq n] [Nonempty n]
 
 /-- ノートの `{xᵀWx | x ∈ F^{(s)}, ‖x‖ = 1}`（`s = ±1`）。 -/
 def sectorSet (W ε : Matrix n n ℝ) (s : ℝ) : Set ℝ :=
-  {r | ∃ x : n → ℝ, ε *ᵥ x = s • x ∧ vecNormSq x = 1 ∧ r = x ⬝ᵥ W *ᵥ x}
+  {r | ∃ x : n → ℝ, ε *ᵥ x = s • x ∧ vecNorm x = 1 ∧ r = x ⬝ᵥ W *ᵥ x}
 
 /-- ノートの `c_±(M)`。 -/
 noncomputable def sectorRayleighSup (W ε : Matrix n n ℝ) (s : ℝ) : ℝ := sSup (sectorSet W ε s)
@@ -109,7 +109,7 @@ theorem sector_quad_le {W : Matrix n n ℝ} {ε : Matrix n n ℝ} {s : ℝ} {x :
     have hunit : vecNormSq (c • x) = 1 := by
       rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ (ne_of_gt ha)]
     have hmem : (c • x) ⬝ᵥ W *ᵥ (c • x) ∈ sectorSet W ε s :=
-      ⟨c • x, sector_smul hx, hunit, rfl⟩
+      ⟨c • x, sector_smul hx, vecNorm_eq_one_of_vecNormSq_eq_one hunit, rfl⟩
     have hle : (c • x) ⬝ᵥ W *ᵥ (c • x) ≤ sectorRayleighSup W ε s :=
       le_csSup (sectorSet_bddAbove W ε s) hmem
     rw [quad_smul, hc2] at hle
@@ -208,7 +208,7 @@ theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ}
           rw [hnorm]
           ring
       _ = max (sectorRayleighSup W ε 1) (sectorRayleighSup W ε (-1)) := by
-          rw [hx, mul_one]
+          rw [vecNormSq_eq_one_of_vecNorm_eq_one hx, mul_one]
   · -- `max(c₊, c₋) ≤ c(M)`
     exact max_le (sectorRayleighSup_le hpsd ε 1) (sectorRayleighSup_le hpsd ε (-1))
 

@@ -26,9 +26,7 @@ theorem moment_ge_moment_one_pow_of_necSuf (W : TensorPow M) (hW : MatrixIsRealS
     {x : Conf M → ℝ} (hx : vecNorm x = 1) :
     ∀ p : ℕ, momentWReal W hW x p ≥ momentWReal W hW x 1 ^ p := by
   have hpair := isPdPair_of_matrix hWRsymm hpd
-  have hsq : vecNormSq x = 1 := by
-    have h := hx
-    rwa [vecNorm, Real.sqrt_eq_one] at h
+  have hsq : vecNormSq x = 1 := vecNormSq_eq_one_of_vecNorm_eq_one hx
   have hip : matBilin (1 : Matrix (Conf M) (Conf M) ℝ) x x = 1 := by
     rw [matBilin_one_apply]
     exact hsq

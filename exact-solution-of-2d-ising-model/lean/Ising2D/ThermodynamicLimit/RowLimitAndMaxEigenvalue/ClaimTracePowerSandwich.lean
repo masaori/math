@@ -33,8 +33,7 @@
   `W_real_is_symmetric`・`W_real_is_positive_definite`。本文の `W` への当てはめは `PhysicalPartitionFunctionSandwich.lean` の
   `trace_power_sandwich_physical`。
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`c := c(M_col)` は `rayleighSup W_ℝ`、`𝓡` は `rayleighSet W_ℝ`、
-  `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。Lean の `𝓡` は `‖x‖² = 1`（`vecNormSq`）で述べるので、
-  【単位ベクトルでの評価】（`‖x‖ = 1`、`vecNorm`）へ渡すときに `√1 = 1` の 1 行を挟む。
+  `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。
 - 人手の `e_1` は Lean の `Pi.single i 1`（`i` は値がすべて `0` の配位）である。
 - 人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma` は mathlib の `pow_succ`、`a^0 := 1` は `pow_zero` で書く
   （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配則」「乗法の交換則・結合則」
@@ -161,10 +160,9 @@ theorem rayleighSup_pow_le_trace_of_power {n : ℕ} (hn : 1 ≤ n) :
           have hn1 : (n : ℝ)⁻¹ ≤ 1 := inv_le_one_of_one_le₀ (by exact_mod_cast hn)
           nlinarith                                                         -- `n ≥ 1` なので `0 < n^{-1} ≤ 1` と `c > 0`
   have hrpos : 0 < r := by rw [hr]; linarith                                -- `r = c − δ > 0`
-  obtain ⟨t, ⟨x, hx, rfl⟩, hrt⟩ :=
+  obtain ⟨t, ⟨x, hx1, rfl⟩, hrt⟩ :=
     exists_lt_of_lt_csSup (rayleighSet_nonempty WR) hrc                     -- `r < c = sup 𝓡` で、上限は最小の上界なので `r` は `𝓡` の上界でない
-  have hx1 : vecNorm x = 1 := by rw [vecNorm, hx, Real.sqrt_one]            -- `‖x‖^2 = 1` から `‖x‖ = √1 = 1`
-  have htpos : 0 < x ⬝ᵥ WR *ᵥ x := hpd x (ne_zero_of_vecNormSq_eq_one hx)   -- `t ∈ 𝓡 ⊆ ℝ_{>0}`
+  have htpos : 0 < x ⬝ᵥ WR *ᵥ x := hpd x (ne_zero_of_unit_norm hx1)         -- `t ∈ 𝓡 ⊆ ℝ_{>0}`
   have hcomp_t := power_comparison_of_positive_reals hrpos htpos hrt hn
   have hcomp_c := power_comparison_of_positive_reals hrpos hc hrc hn
   have hTT : T > T :=

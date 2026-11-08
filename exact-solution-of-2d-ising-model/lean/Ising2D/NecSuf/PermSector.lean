@@ -100,7 +100,7 @@ theorem sectorSet_nonempty_of_mem [Nonempty n] {W ε : Matrix n n ℝ} {s : ℝ}
     rw [hc, inv_pow, Real.sq_sqrt ha.le]
   have hunit : vecNormSq (c • v) = 1 := by
     rw [vecNormSq_smul, hc2, inv_mul_cancel₀ ha.ne']
-  exact ⟨_, ⟨c • v, sector_smul hv, hunit, rfl⟩⟩
+  exact ⟨_, ⟨c • v, sector_smul hv, vecNorm_eq_one_of_vecNormSq_eq_one hunit, rfl⟩⟩
 
 /-- 偶セクター `𝓡_+` は空でない。
 
@@ -166,7 +166,8 @@ theorem sectorRayleighSup_neg_le_pos [Nonempty n] {W : Matrix n n ℝ}
   · refine csSup_le hne ?_
     rintro r ⟨x, hx, hx1, rfl⟩
     have h1 : permMat π *ᵥ absVec x = (1 : ℝ) • absVec x := permMat_mulVec_absVec hx
-    have h2 : vecNormSq (absVec x) = 1 := by rw [vecNormSq_absVec, hx1]
+    have h2 : vecNorm (absVec x) = 1 :=
+      vecNorm_eq_one_of_vecNormSq_eq_one (by rw [vecNormSq_absVec, vecNormSq_eq_one_of_vecNorm_eq_one hx1])
     refine le_trans (quad_le_quad_absVec hWnn x) ?_
     exact le_csSup (sectorSet_bddAbove W _ _) ⟨absVec x, h1, h2, rfl⟩
 
