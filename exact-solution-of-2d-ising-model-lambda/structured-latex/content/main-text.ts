@@ -66320,6 +66320,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     labels: ["claim_walk_side_exterior_band_edge_connected"],
                     habitat: "Z",
                     lean: [
+                      "Ising2DLambda.KacWard.surroundingExteriorCells_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected_from_necSuf",
@@ -66787,7 +66788,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
 &=2-1
 &&\bigl(\because\ V_S-E_S+R_S=2\bigr)\\
 &=1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "最後に、零巻き付きで一周期の持ち上げ点が二つずつ相異なる閉じた非後退辺列 ",

@@ -87,6 +87,144 @@ private theorem surroundingExteriorCells_nonempty_of_parityArcs
   refine ⟨(row k, col k - 1), ?_⟩
   simp [surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, c3, h3]
 
+/-- 四つの接触セルの外側弧は、弧上の辺をたどって連結である。 -/
+theorem surroundingExteriorCells_edgeConnected_of_parityArcs
+    (n : ℕ) (row col : ℕ → ℤ) (k : ℕ)
+    (hshape : FourCellsFormParityArcs
+      (rightRayCrossingCount n row col (row k - 1) (col k - 1) % 2)
+      (rightRayCrossingCount n row col (row k - 1) (col k) % 2)
+      (rightRayCrossingCount n row col (row k) (col k) % 2)
+      (rightRayCrossingCount n row col (row k) (col k - 1) % 2)) :
+    EdgeConnectedCellSet (surroundingExteriorCells n row col k) := by
+  let a := (row k - 1, col k - 1)
+  let b := (row k - 1, col k)
+  let c := (row k, col k)
+  let d := (row k, col k - 1)
+  let S := surroundingExteriorCells n row col k
+  let c0 := rightRayCrossingCount n row col a.1 a.2 % 2
+  let c1 := rightRayCrossingCount n row col b.1 b.2 % 2
+  let c2 := rightRayCrossingCount n row col c.1 c.2 % 2
+  let c3 := rightRayCrossingCount n row col d.1 d.2 % 2
+  have hc0 : c0 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
+  have hc1 : c1 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
+  have hc2 : c2 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
+  have hc3 : c3 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
+  have h02 : c0 = 0 → c2 = 0 → c1 = 0 ∨ c3 = 0 := by
+    intro h0 h2
+    change FourCellsFormParityArcs c0 c1 c2 c3 at hshape
+    unfold FourCellsFormParityArcs at hshape
+    omega
+  have h13 : c1 = 0 → c3 = 0 → c0 = 0 ∨ c2 = 0 := by
+    intro h1 h3
+    change FourCellsFormParityArcs c0 c1 c2 c3 at hshape
+    unfold FourCellsFormParityArcs at hshape
+    omega
+  have hmem0 : c0 = 0 → a ∈ S := by
+    intro h
+    simp [S, surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, a, c0, h]
+  have hmem1 : c1 = 0 → b ∈ S := by
+    intro h
+    simp [S, surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, b, c1, h]
+  have hmem2 : c2 = 0 → c ∈ S := by
+    intro h
+    simp [S, surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, c, c2, h]
+  have hmem3 : c3 = 0 → d ∈ S := by
+    intro h
+    simp [S, surroundingExteriorCells, oddRayInteriorCells, Nat.odd_iff, d, c3, h]
+  have hedge01 : CellEdgeAdjacent a b := by simp [CellEdgeAdjacent, a, b]
+  have hedge12 : CellEdgeAdjacent b c := by simp [CellEdgeAdjacent, b, c]
+  have hedge23 : CellEdgeAdjacent c d := by simp [CellEdgeAdjacent, c, d]
+  have hedge30 : CellEdgeAdjacent d a := by simp [CellEdgeAdjacent, d, a]
+  let step := fun x y => x ∈ S ∧ y ∈ S ∧ CellEdgeAdjacent x y
+  have hstep (x y : ℤ × ℤ) (hx : x ∈ S) (hy : y ∈ S)
+      (hxy : CellEdgeAdjacent x y) : Relation.ReflTransGen step x y :=
+    Relation.ReflTransGen.single ⟨hx, hy, hxy⟩
+  intro x hx y hy
+  have hx0 : x = a → c0 = 0 := by
+    intro h; subst x
+    have h : ¬ c0 = 1 := by simpa [oddRayInteriorCells, c0, a, Nat.odd_iff] using hx.2
+    omega
+  have hx1 : x = b → c1 = 0 := by
+    intro h; subst x
+    have h : ¬ c1 = 1 := by simpa [oddRayInteriorCells, c1, b, Nat.odd_iff] using hx.2
+    omega
+  have hx2 : x = c → c2 = 0 := by
+    intro h; subst x
+    have h : ¬ c2 = 1 := by simpa [oddRayInteriorCells, c2, c, Nat.odd_iff] using hx.2
+    omega
+  have hx3 : x = d → c3 = 0 := by
+    intro h; subst x
+    have h : ¬ c3 = 1 := by simpa [oddRayInteriorCells, c3, d, Nat.odd_iff] using hx.2
+    omega
+  have hy0 : y = a → c0 = 0 := by
+    intro h; subst y
+    have h : ¬ c0 = 1 := by simpa [oddRayInteriorCells, c0, a, Nat.odd_iff] using hy.2
+    omega
+  have hy1 : y = b → c1 = 0 := by
+    intro h; subst y
+    have h : ¬ c1 = 1 := by simpa [oddRayInteriorCells, c1, b, Nat.odd_iff] using hy.2
+    omega
+  have hy2 : y = c → c2 = 0 := by
+    intro h; subst y
+    have h : ¬ c2 = 1 := by simpa [oddRayInteriorCells, c2, c, Nat.odd_iff] using hy.2
+    omega
+  have hy3 : y = d → c3 = 0 := by
+    intro h; subst y
+    have h : ¬ c3 = 1 := by simpa [oddRayInteriorCells, c3, d, Nat.odd_iff] using hy.2
+    omega
+  rcases hx.1 with hxa | hxb | hxc | hxd <;>
+    rcases hy.1 with hya | hyb | hyc | hyd
+  all_goals
+    subst x; subst y
+    first
+    | exact Relation.ReflTransGen.refl
+    | exact hstep _ _ hx hy hedge01
+    | exact hstep _ _ hx hy hedge12
+    | exact hstep _ _ hx hy hedge23
+    | exact hstep _ _ hx hy hedge30
+    | exact hstep _ _ hx hy (cellEdgeAdjacent_symmetric hedge01)
+    | exact hstep _ _ hx hy (cellEdgeAdjacent_symmetric hedge12)
+    | exact hstep _ _ hx hy (cellEdgeAdjacent_symmetric hedge23)
+    | exact hstep _ _ hx hy (cellEdgeAdjacent_symmetric hedge30)
+    | (rcases h02 (hx0 rfl) (hy2 rfl) with hm | hm
+       · exact (hstep _ _ hx (hmem1 hm) hedge01).trans
+           (hstep _ _ (hmem1 hm) hy hedge12)
+       · exact (hstep _ _ hx (hmem3 hm) (cellEdgeAdjacent_symmetric hedge30)).trans
+           (hstep _ _ (hmem3 hm) hy (cellEdgeAdjacent_symmetric hedge23)))
+    | (rcases h02 (hy0 rfl) (hx2 rfl) with hm | hm
+       · exact (hstep _ _ hx (hmem1 hm) (cellEdgeAdjacent_symmetric hedge12)).trans
+           (hstep _ _ (hmem1 hm) hy (cellEdgeAdjacent_symmetric hedge01))
+       · exact (hstep _ _ hx (hmem3 hm) hedge23).trans
+           (hstep _ _ (hmem3 hm) hy hedge30))
+    | (rcases h13 (hx1 rfl) (hy3 rfl) with hm | hm
+       · exact (hstep _ _ hx (hmem0 hm) (cellEdgeAdjacent_symmetric hedge01)).trans
+           (hstep _ _ (hmem0 hm) hy (cellEdgeAdjacent_symmetric hedge30))
+       · exact (hstep _ _ hx (hmem2 hm) hedge12).trans
+           (hstep _ _ (hmem2 hm) hy hedge23))
+    | (rcases h13 (hy1 rfl) (hx3 rfl) with hm | hm
+       · exact (hstep _ _ hx (hmem0 hm) hedge30).trans
+           (hstep _ _ (hmem0 hm) hy hedge01)
+       · exact (hstep _ _ hx (hmem2 hm) (cellEdgeAdjacent_symmetric hedge23)).trans
+           (hstep _ _ (hmem2 hm) hy (cellEdgeAdjacent_symmetric hedge12)))
+
+/-- 相異なる持ち上げ点に接する外側セルは辺連結である。 -/
+theorem surroundingExteriorCells_edgeConnected
+    (n : ℕ) (row col : ℕ → ℤ) (k : ℕ) (hk : k < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hdistinct : ∀ i j, i < n → j < n →
+      row i = row j → col i = col j → i = j)
+    (hedgeSimple :
+      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
+      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
+    EdgeConnectedCellSet (surroundingExteriorCells n row col k) := by
+  have hshape := vertexSurroundingCells_formParityArcs n row col k hk
+    hclosedRow hclosedCol hunit hdistinct
+    hedgeSimple.1 hedgeSimple.2.1 hedgeSimple.2.2.1 hedgeSimple.2.2.2
+  exact surroundingExteriorCells_edgeConnected_of_parityArcs n row col k hshape
+
 /-- 各訪問頂点の外側弧を有限鎖としてつなぐ局所合成。 -/
 theorem walkSideExteriorBand_nonempty_edgeConnected_local
     (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
