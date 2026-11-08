@@ -66765,9 +66765,8 @@ e&\in\mathcal E_{\square}(T)
 e&\in\mathcal B_{\square}(T)
 &&\bigl(\because\ (r,c)\in T,\ (r+1,c)\notin T,\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
 \end{aligned}`),
-                          paragraph([
-                            "したがって ", math(String.raw`\mathcal B_{\square}(T)`), " は空でない。",
-                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T)\ne\varnothing
+\qquad\bigl(\because\ e\in\mathcal B_{\square}(T)\bigr)`),
                         ],
                       },
                     },
@@ -67043,6 +67042,75 @@ h_Z(r,c)+h_Z(r-1,c)
 &&\bigl(\because\ \text{所属指示値の定義}\bigr)
 \end{aligned}`),
                           paragraph(["したがって、共有縦辺での高さ一の所属差は有限集合の偶奇だけで判定できる。"]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_height_one_horizontal_edge",
+                        kind: "claim",
+                        title: { text: "共有横辺の所属は隣接二セルの高さ一の差で決まる" },
+                        labels: ["claim_plane_height_one_horizontal_edge"],
+                        habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeHeightOne_horizontal_edge",
+                          "Ising2DLambda.KacWard.planeHeightOne_horizontal_boundary",
+                          "Ising2DLambda.NecSuf.KacWard.binaryHeight_horizontal_edge",
+                          "Ising2DLambda.KacWard.planeHeightOne_horizontal_edge_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-height-one-horizontal-edge"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " の各頂点に接する ", math(String.raw`Z`),
+                            " の辺の本数が偶数であるとする。任意の ", math(String.raw`r,c\in\mathbb Z`),
+                            " について、縦に隣り合う二セルのちょうど一方の高さ（",
+                            ref("def_plane_dual_ray_height"), "）が一であることと、共有横辺 ",
+                            math(String.raw`e_{r,c}=\{(r,c),(r,c+1)\}`), " が ", math(String.raw`Z`),
+                            " に属することは同値である。",
+                          ]),
+                          displayMath(String.raw`\bigl(h_Z(r,c)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r-1,c)=1\bigr)
+\quad\Longleftrightarrow\quad e_{r,c}\in Z`),
+                          paragraph([
+                            "したがって有限セル集合 ", math(String.raw`T\subset\mathbb Z\times\mathbb Z`),
+                            " が全セルについて ", math(String.raw`(s,d)\in T\Longleftrightarrow h_Z(s,d)=1`),
+                            " を満たすなら、その境界辺集合（", ref("def_plane_cell_boundary_edge_set"), "）について",
+                          ]),
+                          displayMath(String.raw`e_{r,c}\in\mathcal B_{\square}(T)\quad\Longleftrightarrow\quad e_{r,c}\in Z`),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_vertical_difference"),
+                            " より、二セルの高さの和を二で割った余りは共有横辺の所属指示値である。",
+                            "高さと指示値はともに ", math(String.raw`\{0,1\}`), " に属する。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+&\bigl(h_Z(r,c)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r-1,c)=1\bigr)\\
+&\Longleftrightarrow h_Z(r,c)\ne h_Z(r-1,c)
+&&\bigl(\because\ h_Z(r,c),h_Z(r-1,c)\in\{0,1\}\bigr)\\
+&\Longleftrightarrow \bigl(h_Z(r,c)+h_Z(r-1,c)\bigr)\bmod2=1
+&&\bigl(\because\ \{0,1\}\text{ の二元の偶奇}\bigr)\\
+&\Longleftrightarrow \mathbf1_{e_{r,c}\in Z}=1
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_vertical_difference}\bigr)\\
+&\Longleftrightarrow e_{r,c}\in Z
+&&\bigl(\because\ \text{所属指示値の定義}\bigr)
+\end{aligned}`),
+                          paragraph(["全ての判定は有限集合と二を法とする加法で閉じる。"]),
+                          paragraph([
+                            "有限な ", math(String.raw`T`), " について、", ref("def_plane_cell_boundary_edge_set"),
+                            " の横辺の所属は ", math(String.raw`(r,c)\in T`), " と ",
+                            math(String.raw`(r-1,c)\in T`), " の排他的論理和である。",
+                            "仮定により、これらを二セルの高さが一という条件へ置き換え、上の同値を適用する。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e_{r,c}\in\mathcal B_{\square}(T)
+&\Longleftrightarrow\bigl((r,c)\in T\bigr)\mathbin{\mathrm{xor}}\bigl((r-1,c)\in T\bigr)
+&&\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set}\bigr)\\
+&\Longleftrightarrow\bigl(h_Z(r,c)=1\bigr)\mathbin{\mathrm{xor}}\bigl(h_Z(r-1,c)=1\bigr)
+&&\bigl(\because\ T\text{ の所属についての仮定}\bigr)\\
+&\Longleftrightarrow e_{r,c}\in Z
+&&\bigl(\because\ \text{上で示した高さ差の同値}\bigr)
+\end{aligned}`),
                         ],
                       },
                     },

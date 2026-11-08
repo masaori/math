@@ -1082,6 +1082,9 @@ import Ising2DLambda.KacWard.PlaneDualRayHeight
 import Ising2DLambda.KacWard.PlaneHeightOneVerticalEdge
 import Ising2DLambda.NecSuf.KacWard.PlaneHeightOneVerticalEdge
 import Ising2DLambda.KacWard.PlaneHeightOneVerticalEdgeFromNecSuf
+import Ising2DLambda.KacWard.PlaneHeightOneHorizontalEdge
+import Ising2DLambda.NecSuf.KacWard.PlaneHeightOneHorizontalEdge
+import Ising2DLambda.KacWard.PlaneHeightOneHorizontalEdgeFromNecSuf
 import Ising2DLambda.KacWard.PlaneDualRayHeightVertical
 import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeight
 import Ising2DLambda.NecSuf.KacWard.PlaneDualRayHeightVertical
