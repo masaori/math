@@ -21,10 +21,14 @@
 | 【冪の実数の行列】の `(W_ℝ)^1 = W_ℝ` の 6 行 | `power_one_of_W_real` の `calc` の 6 段 |
 | 【`(W_ℝ)^n` の成分の対称性】6 行と単射性 | `power_of_W_real_entry_symm`（`ClaimTracePowerUpperBound.lean`、同じ 6 行の鎖）をそのまま引く |
 | 【`(W_ℝ)^n` の半正定値性】`z = 0` の場合 | `power_of_W_real_is_positive_semidefinite` の `z = 0` の `calc` の 2 段 |
-| 同じ段の `‖z‖^2 ≥ |z_{j_0}|^2 > 0` の 3 行 | `norm_sq_pos_of_component_ne_zero` の `calc` の 3 段 |
+| 同じ段の各項の非負性 `|z_j|^2 = |z_j||z_j| ≥ 0` の 2 行 | `abs_sq_of_real_number_nonneg` の `calc` の 2 段 |
+| 同じ段の `|z_{j_0}| > 0`（`def_real_absolute_value` の場合分け） | `abs_pos_of_real_number_ne_zero` |
+| 同じ段の `‖z‖^2 ≥ |z_{j_0}|^2 = |z_{j_0}||z_{j_0}| > 0` の 4 行 | `norm_sq_pos_of_component_ne_zero` の `calc` の 4 段 |
 | 同じ段の `‖z‖ > 0` | `norm_pos_of_component_ne_zero` |
-| 同じ段の `‖w‖ = 1` の 14 行（`w_i := ‖z‖^{-1}z_i`） | `norm_of_inverse_norm_multiple_is_one` の `calc` の 14 段 |
-| 同じ段の `z^⊤(W_ℝ)^nz > 0` の 5 行 | `power_of_W_real_is_positive_semidefinite` の `z ≠ 0` の `calc` の 5 段 |
+| 同じ段の `z_i = 1z_i = (‖z‖‖z‖^{-1})z_i = ‖z‖(‖z‖^{-1}z_i) = ‖z‖w_i` の 4 行 | `power_of_W_real_is_positive_semidefinite` の `hzw` の `calc` の 4 段 |
+| 同じ段の `w^⊤(W_ℝ)^nw > 0`（`moment_log_convexity` の正値性） | 同じ定理の `hwpos` |
+| 同じ段の `‖w‖ = 1` の 15 行（`w_i := ‖z‖^{-1}z_i`） | `norm_of_inverse_norm_multiple_is_one` の `calc` の 15 段 |
+| 同じ段の `z^⊤(W_ℝ)^nz > 0` の 8 行 | `power_of_W_real_is_positive_semidefinite` の `z ≠ 0` の `calc` の 8 段 |
 | 【`(W_ℝ)^n` の成分の評価】の各二重和の値（`(e_q)_i` は `i = q` でだけ `1`） | `standard_basis_real_bilinear_value` |
 | 同じ段の 8 行と移項 | `power_of_W_real_entry_bound` の `calc` の 8 段と移項 |
 | 【単位ベクトルでの評価】`Σ_k x_k^2 = 1` の 4 行 | `sum_sq_of_unit_vector` の `calc` の 4 段 |
@@ -60,17 +64,31 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 人手【`(W_ℝ)^n` の半正定値性】の `z_{j_0} ≠ 0` なら `‖z‖^2 > 0`（3 行）。 -/
+/-- 人手【`(W_ℝ)^n` の半正定値性】の各項の非負性 `|z_j|^2 ≥ 0`（2 行）。 -/
+theorem abs_sq_of_real_number_nonneg (q : ℝ) : |q| ^ 2 ≥ 0 :=
+  calc |q| ^ 2
+      = |q| * |q| := square_of_real_number_is_product |q|                   -- `square_of_real_number_is_product`（`r → |z_j|`）
+    _ ≥ 0 := mul_nonneg (abs_nonneg q) (abs_nonneg q)                       -- `def_real_absolute_value`（`q → z_j`）の `|q| ≥ 0` と、ℝ の順序で非負の数の積は非負
+
+/-- 人手【`(W_ℝ)^n` の半正定値性】の `z_{j_0} ≠ 0` なら `|z_{j_0}| > 0`（`def_real_absolute_value` の場合分け）。 -/
+theorem abs_pos_of_real_number_ne_zero {q : ℝ} (hq : q ≠ 0) : |q| > 0 := by
+  rcases lt_or_gt_of_ne hq.symm with h | h
+  · rw [abs_of_nonneg h.le]                                                 -- `q > 0` なので `q ≥ 0` で `|q| = q`（`def_real_absolute_value` の `q ≥ 0` の場合）
+    exact h
+  · rw [abs_of_neg h]                                                       -- `q < 0` なら `|q| = -q`（`def_real_absolute_value`）
+    exact neg_pos.mpr h                                                     -- `-q > 0`
+
+/-- 人手【`(W_ℝ)^n` の半正定値性】の `z_{j_0} ≠ 0` なら `‖z‖^2 > 0`（4 行）。 -/
 theorem norm_sq_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0) :
     vecNorm z ^ 2 > 0 :=
   calc vecNorm z ^ 2
       = ∑ j, |z j| ^ 2 := vecNorm_sq_eq_sum_abs_sq z                        -- `def_matrix_norm` と `definition_of_sqrt_r_positive` の `(√b)^2 = b`
     _ ≥ |z j0| ^ 2 :=
         finite_sum_of_nonnegative_reals_ge_term_fintype (fun j => |z j| ^ 2)
-          (fun _ => sq_nonneg _) j0                                         -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |z_j|^2`, `k → j_0`）
-    _ > 0 := by
-        rw [square_of_real_number_is_product |z j0|]
-        exact mul_pos (abs_pos.mpr hj0) (abs_pos.mpr hj0)                   -- `z_{j_0} ≠ 0` なので `|z_{j_0}| > 0` で、`square_of_real_number_is_product`（`r → |z_{j_0}|`）の `|z_{j_0}|^2 = |z_{j_0}||z_{j_0}|` は正の実数の積
+          (fun j => abs_sq_of_real_number_nonneg (z j)) j0                  -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |z_j|^2`, `k → j_0`）。各項が非負なのは上の `|z_j|^2 ≥ 0`
+    _ = |z j0| * |z j0| := square_of_real_number_is_product |z j0|          -- `square_of_real_number_is_product`（`r → |z_{j_0}|`）
+    _ > 0 := mul_pos (abs_pos_of_real_number_ne_zero hj0)
+        (abs_pos_of_real_number_ne_zero hj0)                                -- 上の `|z_{j_0}| > 0` と、ℝ の順序で正の数の積は正
 
 /-- 人手【`(W_ℝ)^n` の半正定値性】の `‖z‖ ≥ 0` と `‖z‖ ≠ 0` から `‖z‖ > 0`。 -/
 theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0) :
@@ -83,7 +101,7 @@ theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : 
     exact lt_irrefl 0 h2
   exact lt_of_le_of_ne hge (Ne.symm hne)
 
-/-- 人手【`(W_ℝ)^n` の半正定値性】の `w_i := ‖z‖^{-1}z_i` なら `‖w‖ = 1`（14 行）。 -/
+/-- 人手【`(W_ℝ)^n` の半正定値性】の `w_i := ‖z‖^{-1}z_i` なら `‖w‖ = 1`（15 行）。 -/
 theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0)
     (w : Conf M → ℝ) (hw : ∀ i, w i = (vecNorm z)⁻¹ * z i) :
     vecNorm w = 1 := by
@@ -92,8 +110,10 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
       = Real.sqrt (∑ i, |w i| ^ 2) := by
         rw [vecNorm, vecNormSq_eq_sum]
         simp only [square_of_real_absolute_value]                           -- `def_matrix_norm`。`square_of_real_absolute_value` は書き方の差を埋める段
+    _ = Real.sqrt (∑ i, |(vecNorm z)⁻¹ * z i| ^ 2) := by
+        simp only [hw]                                                      -- `w_i := ‖z‖^{-1}z_i` を各項へ同時に代入
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹ * z i) ^ 2) := by
-        simp only [hw, square_of_real_absolute_value]                       -- `w_i := ‖z‖^{-1}z_i` と、`square_of_real_absolute_value` の `|q|^2 = q^2` を各項へ同時に
+        simp only [square_of_real_absolute_value]                           -- `square_of_real_absolute_value`（`q → ‖z‖^{-1}z_i`）の `|q|^2 = q^2` を各項へ同時に
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹ * z i) * ((vecNorm z)⁻¹ * z i)) := by
         simp only [square_of_real_number_is_product]                        -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}z_i`）を各項へ同時に
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹ * (vecNorm z)⁻¹) * (z i * z i)) := by
@@ -178,26 +198,36 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
     have hsq : vecNorm z ^ 2 > 0 := norm_sq_pos_of_component_ne_zero hj0
     have hne : vecNorm z ≠ 0 := (norm_pos_of_component_ne_zero hj0).ne'
     set w : Conf M → ℝ := fun i => (vecNorm z)⁻¹ * z i with hwdef          -- `w_i := ‖z‖^{-1}z_i`
-    have hzw : ∀ i, z i = vecNorm z * w i := fun i => by
-      rw [hwdef, mul_inv_cancel_left₀ hne]                                  -- `z_i = ‖z‖(‖z‖^{-1}z_i) = ‖z‖w_i`
+    have hzw : ∀ i, z i = vecNorm z * w i := fun i =>
+      calc z i
+          = 1 * z i := (one_mul (z i)).symm                                 -- 1 は ℝ の乗法の単位元
+        _ = (vecNorm z * (vecNorm z)⁻¹) * z i := by rw [mul_inv_cancel₀ hne] -- `‖z‖ ≠ 0` なので `‖z‖‖z‖^{-1} = 1`
+        _ = vecNorm z * ((vecNorm z)⁻¹ * z i) := mul_assoc _ _ _            -- ℝ の乗法の結合則
+        _ = vecNorm z * w i := rfl                                          -- `w_i := ‖z‖^{-1}z_i`
     have hw1 : vecNorm w = 1 :=
-      norm_of_inverse_norm_multiple_is_one hj0 w fun i => rfl               -- 上の 14 行
+      norm_of_inverse_norm_multiple_is_one hj0 w fun i => rfl               -- 上の 15 行
+    have hwpos : w ⬝ᵥ P *ᵥ w > 0 :=
+      (moment_log_convexity W hW hWRsymm hpd hw1).1 n                       -- `moment_log_convexity` の正値性（`x → w`, `k → n`）
     have hpos : z ⬝ᵥ P *ᵥ z > 0 :=
       calc z ⬝ᵥ P *ᵥ z
           = ∑ i, ∑ j, z i * P i j * z j :=
             dotProduct_mulVec_eq_real_bilinear_value z z P                  -- `def_real_bilinear_value`
         _ = ∑ i, ∑ j, (vecNorm z * w i) * P i j * (vecNorm z * w j) := by
             simp only [← hzw]                                               -- `z_i = ‖z‖w_i` を各項へ同時に
-        _ = vecNorm z ^ 2 * ∑ i, ∑ j, w i * P i j * w j := by
-            rw [← finite_sum_of_real_scalar_multiples_fintype]
-            refine Finset.sum_congr rfl fun i _ => ?_
-            rw [← finite_sum_of_real_scalar_multiples_fintype]
-            rw [square_of_real_number_is_product (vecNorm z)]
-            exact Finset.sum_congr rfl fun j _ => by ring                   -- 乗法の交換則・結合則と `square_of_real_number_is_product`（`r → ‖z‖`）を右辺から左辺へ当てた `‖z‖‖z‖ = ‖z‖^2`、`finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を内側と外側の和へ
+        _ = ∑ i, ∑ j, (vecNorm z * vecNorm z) * (w i * P i j * w j) :=
+            Finset.sum_congr rfl fun i _ =>
+              Finset.sum_congr rfl fun j _ => by ring                       -- ℝ の乗法の交換則・結合則を各項へ同時に
+        _ = ∑ i, ∑ j, vecNorm z ^ 2 * (w i * P i j * w j) := by
+            simp only [← square_of_real_number_is_product (vecNorm z)]      -- `square_of_real_number_is_product`（`r → ‖z‖`）を右辺から左辺へ、各項へ同時に
+        _ = ∑ i, vecNorm z ^ 2 * ∑ j, w i * P i j * w j :=
+            Finset.sum_congr rfl fun i _ =>
+              finite_sum_of_real_scalar_multiples_fintype _ _               -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を各 `i` の内側の和へ同時に
+        _ = vecNorm z ^ 2 * ∑ i, ∑ j, w i * P i j * w j :=
+            finite_sum_of_real_scalar_multiples_fintype _ _                 -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を外側の和へ
         _ = vecNorm z ^ 2 * (w ⬝ᵥ P *ᵥ w) := by
             rw [dotProduct_mulVec_eq_real_bilinear_value w w P]             -- `def_real_bilinear_value`
         _ > 0 :=
-            mul_pos hsq ((moment_log_convexity W hW hWRsymm hpd hw1).1 n)   -- `‖z‖^2 > 0` と `moment_log_convexity` の正値性（`x → w`, `k → n`）
+            mul_pos hsq hwpos                                               -- 上の `‖z‖^2 > 0` と `w^⊤(W_ℝ)^nw > 0` で、ℝ の順序で正の数の積は正
     exact hpos.le
 
 /-- 人手【`(W_ℝ)^n` の成分の評価】: `2x_k((W_ℝ)^n)_klx_l ≤ x_l^2((W_ℝ)^n)_kk + x_k^2((W_ℝ)^n)_ll`

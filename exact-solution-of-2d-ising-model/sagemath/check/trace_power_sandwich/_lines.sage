@@ -58,21 +58,30 @@ def check_psd(P, Pn, n, z, what):
     nz = norm_exact(z)
     L = [rpow(nz, 2), sum(rpow(abs(AA(z[j])), 2) for j in rng)]
     chain_eq(L, f"{what}: ‖z‖^2 = Σ|z_j|^2")
-    le(rpow(abs(AA(z[j0])), 2), L[-1], f"{what}: Σ|z_j|^2 ≥ |z_j0|^2")
-    # |z_j0|^2 > 0: square_of_real_number_is_product（r → |z_j0|）で正の実数の積
-    eq(rpow(abs(AA(z[j0])), 2), abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0|^2 = |z_j0||z_j0|")
+    # 各項の非負性 |z_j|^2 = |z_j||z_j| ≥ 0（square_of_real_number_is_product と def_real_absolute_value の |q| ≥ 0）
+    for j in rng:
+        eq(rpow(abs(AA(z[j])), 2), abs(AA(z[j])) * abs(AA(z[j])), f"{what}: |z_j|^2 = |z_j||z_j| j={j}")
+        le(0, abs(AA(z[j])), f"{what}: |z_j| ≥ 0 j={j}")
+        le(0, abs(AA(z[j])) * abs(AA(z[j])), f"{what}: |z_j||z_j| ≥ 0 j={j}")
+    # |z_j0| > 0: def_real_absolute_value の場合分け（z_j0 > 0 なら |z_j0| = z_j0、z_j0 < 0 なら |z_j0| = −z_j0）
+    eq(abs(AA(z[j0])), AA(z[j0]) if z[j0] > 0 else -AA(z[j0]), f"{what}: |z_j0| の場合分け")
     le(0, abs(AA(z[j0])), f"{what}: |z_j0| > 0", strict=True)
-    le(0, rpow(abs(AA(z[j0])), 2), f"{what}: |z_j0|^2 > 0", strict=True)
+    # ‖z‖^2 = Σ|z_j|^2 ≥ |z_j0|^2 = |z_j0||z_j0| > 0
+    le(rpow(abs(AA(z[j0])), 2), L[-1], f"{what}: Σ|z_j|^2 ≥ |z_j0|^2")
+    eq(rpow(abs(AA(z[j0])), 2), abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0|^2 = |z_j0||z_j0|")
+    le(0, abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0||z_j0| > 0", strict=True)
     # ‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0（square_of_real_number_is_product（r → 0））
     chain_eq([rpow(AA(0), 2), AA(0) * AA(0), AA(0)], f"{what}: 0^2 = 0·0 = 0")
     le(0, nz, f"{what}: ‖z‖ > 0", strict=True)
     w = vector(AA, [nz**-1 * z[i] for i in rng])
     for i in rng:
-        chain_eq([AA(z[i]), nz * (nz**-1 * z[i]), nz * w[i]], f"{what}: z_i = ‖z‖w_i")
-    # ‖w‖ の 14 行の鎖。二乗は rpow（def_power_of_real_number の冪）で組む
+        chain_eq([AA(z[i]), 1 * AA(z[i]), (nz * nz**-1) * z[i], nz * (nz**-1 * z[i]), nz * w[i]], f"{what}: z_i = ‖z‖w_i")
+    eq(nz * nz**-1, 1, f"{what}: ‖z‖‖z‖^{{-1}} = 1")
+    # ‖w‖ の 15 行の鎖。二乗は rpow（def_power_of_real_number の冪）で組む
     zi = [AA(z[i]) for i in rng]
     iz = nz**-1
     s1 = sum(rpow(abs(w[i]), 2) for i in rng)
+    s1a = sum(rpow(abs(iz * zi[i]), 2) for i in rng)                    # w_i := ‖z‖^{-1}z_i を代入
     s2 = sum(rpow(iz * zi[i], 2) for i in rng)
     s2a = sum((iz * zi[i]) * (iz * zi[i]) for i in rng)                 # square_of_real_number_is_product（r → ‖z‖^{-1}z_i）
     s2b = sum((iz * iz) * (zi[i] * zi[i]) for i in rng)                 # 乗法の交換則・結合則
@@ -85,17 +94,21 @@ def check_psd(P, Pn, n, z, what):
     s7 = rpow(iz * nz, 2)                                                # 同（r → ‖z‖^{-1}‖z‖）を右辺から左辺へ
     s8 = rpow(AA(1), 2)                                                  # ‖z‖^{-1}‖z‖ = 1
     eq(iz * nz, 1, f"{what}: ‖z‖^{-1}‖z‖ = 1")
-    L = [norm_exact(w), s1.sqrt(), s2.sqrt(), s2a.sqrt(), s2b.sqrt(), s3.sqrt(), s4.sqrt(), s5.sqrt(),
+    L = [norm_exact(w), s1.sqrt(), s1a.sqrt(), s2.sqrt(), s2a.sqrt(), s2b.sqrt(), s3.sqrt(), s4.sqrt(), s5.sqrt(),
          s6.sqrt(), s6a.sqrt(), s6b.sqrt(), s7.sqrt(), s8.sqrt(), AA(1).sqrt(), AA(1)]
-    assert len(L) == 15
+    assert len(L) == 16
     chain_eq(L, f"{what}: ‖w‖ の鎖")
     PnA = Pn.change_ring(AA)
     L = [bil(z, Pn, z),
          sum(sum(z[i] * Pn[i, j] * z[j] for j in rng) for i in rng),
          sum(sum((nz * w[i]) * PnA[i, j] * (nz * w[j]) for j in rng) for i in rng),
-         rpow(nz, 2) * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),
+         sum(sum((nz * nz) * (w[i] * PnA[i, j] * w[j]) for j in rng) for i in rng),       # 乗法の交換則・結合則
+         sum(sum(rpow(nz, 2) * (w[i] * PnA[i, j] * w[j]) for j in rng) for i in rng),     # square_of_real_number_is_product を右辺から左辺へ
+         sum(rpow(nz, 2) * sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),       # finite_sum_of_real_scalar_multiples を内側の和へ
+         rpow(nz, 2) * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),       # 同じ主張を外側の和へ
          rpow(nz, 2) * bil(w, PnA, w)]
     eq(nz * nz, rpow(nz, 2), f"{what}: ‖z‖‖z‖ = ‖z‖^2（square_of_real_number_is_product を右辺から左辺へ）")
+    assert len(L) == 8
     chain_eq(L, f"{what}: z^⊤(W_ℝ)^nz の鎖")
     # moment_log_convexity の正値性（x → w、k → n）。w は AA の単位ベクトルなので、その主張の値を直接比べる
     le(0, bil(w, PnA, w), f"{what}: w^⊤(W_ℝ)^nw > 0", strict=True)

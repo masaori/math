@@ -3225,16 +3225,50 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`z_{j_0} \neq 0`),
         " となる ",
         math(String.raw`j_0`),
-        " があり、",
+        " がある。",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|z_j|^2
+&=|z_j|\,|z_j|
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to |z_j|)\bigr)\\
+&\geq 0
+&&\bigl(\because\ \blkref{def_real_absolute_value}\ (q \to z_j)\ \text{の}\ |q| \geq 0\ \text{と、}\mathbb{R}\ \text{の順序で非負の数の積は非負}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`z_{j_0} \neq 0`),
+        " なので ",
+        math(String.raw`\mathbb{R}`),
+        " の順序で ",
+        math(String.raw`z_{j_0} > 0`),
+        " か ",
+        math(String.raw`z_{j_0} < 0`),
+        " であり、前者なら ",
+        math(String.raw`z_{j_0} \geq 0`),
+        " なので ",
+        math(String.raw`|z_{j_0}| = z_{j_0} > 0`),
+        "、後者なら ",
+        math(String.raw`|z_{j_0}| = -z_{j_0} > 0`),
+        "（",
+        ref("def_real_absolute_value"),
+        "（",
+        math(String.raw`q \to z_{j_0}`),
+        "））なので、",
+        math(String.raw`|z_{j_0}| > 0`),
+        " である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|z\|^2
 &=\sum_{j=1}^{d}|z_j|^2
 &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
 &\geq |z_{j_0}|^2
-&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (a_j \to |z_j|^2,\ k \to j_0)\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (a_j \to |z_j|^2,\ k \to j_0)\ \text{。各項が非負なのは上の}\ |z_j|^2 \geq 0\bigr)\\
+&=|z_{j_0}|\,|z_{j_0}|
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to |z_{j_0}|)\bigr)\\
 &>0
-&&\bigl(\because\ z_{j_0} \neq 0\ \text{なので}\ |z_{j_0}| > 0\ \text{で、}\blkref{square_of_real_number_is_product}\ (r \to |z_{j_0}|)\ \text{の}\ |z_{j_0}|^2 = |z_{j_0}|\,|z_{j_0}|\ \text{は正の実数の積}\bigr)
+&&\bigl(\because\ \text{上の}\ |z_{j_0}| > 0\ \text{と、}\mathbb{R}\ \text{の順序で正の数の積は正}\bigr)
 \end{aligned}`),
       paragraph([
         "なので、",
@@ -3265,16 +3299,28 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`w_i := \|z\|^{-1}z_i`),
         " で定めると、",
         math(String.raw`i \in \{1,\dots,d\}`),
-        " について ",
-        math(String.raw`z_i = \|z\|\bigl(\|z\|^{-1}z_i\bigr) = \|z\|\,w_i`),
-        " であり、",
+        " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+z_i
+&=1\,z_i
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&=\bigl(\|z\|\,\|z\|^{-1}\bigr)z_i
+&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|\,\|z\|^{-1} = 1\bigr)\\
+&=\|z\|\bigl(\|z\|^{-1}z_i\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\bigr)\\
+&=\|z\|\,w_i
+&&\bigl(\because\ w_i := \|z\|^{-1}z_i\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
 \|w\|
 &=\sqrt{\sum_{i=1}^{d}|w_i|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{def_matrix_norm}\bigr)\\
+&=\sqrt{\sum_{i=1}^{d}\bigl|\|z\|^{-1}z_i\bigr|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{を各項へ同時に代入}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{と、}\blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to \|z\|^{-1}z_i)\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)\bigl(\|z\|^{-1}z_i\bigr)}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1}z_i)\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\|z\|^{-1}\bigr)(z_iz_i)}^{\,(\mathbb{R}_{\ge 0})}
@@ -3300,19 +3346,35 @@ a+b+1 &= p+(p+1)+1
 &=1
 &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{の}\ y \to 1\ \text{が}\ 1 \geq 0\ \text{と、}\blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{の}\ 1^2 = 1\ \text{を満たす}\bigr)
 \end{aligned}`),
-      paragraph(["である。よって"]),
+      paragraph([
+        "である。",
+        ref("moment_log_convexity"),
+        " の正値性を単位ベクトル ",
+        math(String.raw`x \to w`),
+        " と ",
+        math(String.raw`k \to n`),
+        " で適用すると ",
+        math(String.raw`w^\top (W_{\mathbb{R}})^nw > 0`),
+        " である。よって",
+      ]),
       displayMath(String.raw`\begin{aligned}
 z^\top (W_{\mathbb{R}})^nz
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}z_i\,((W_{\mathbb{R}})^n)_{ij}\,z_j
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,w_i\bigr)((W_{\mathbb{R}})^n)_{ij}\bigl(\|z\|\,w_j\bigr)
 &&\bigl(\because\ z_i = \|z\|\,w_i\ \text{を各項へ同時に適用}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,\|z\|\bigr)\bigl(w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則を各項へ同時に適用}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{j=1}^{d}\|z\|^2\bigl(w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j\bigr)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|)\ \text{を右辺から左辺へ、各項へ同時に適用}\bigr)\\
+&=\sum_{i=1}^{d}\|z\|^2\sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2,\ x_j \to w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j)\ \text{を各}\ i\ \text{の内側の和へ同時に適用}\bigr)\\
 &=\|z\|^2\sum_{i=1}^{d}\sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と}\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|)\ \text{を右辺から左辺へ当てた}\ \|z\|\,\|z\| = \|z\|^2\ \text{、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2,\ x_i \to \sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j)\ \text{を外側の和へ適用}\bigr)\\
 &=\|z\|^2\,\bigl(w^\top (W_{\mathbb{R}})^nw\bigr)
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &>0
-&&\bigl(\because\ \|z\|^2 > 0\ \text{と、}\blkref{moment_log_convexity}\ \text{の正値性を単位ベクトル}\ x \to w\ \text{と}\ k \to n\ \text{で適用した}\ w^\top (W_{\mathbb{R}})^nw > 0\bigr)
+&&\bigl(\because\ \text{上の}\ \|z\|^2 > 0\ \text{と}\ w^\top (W_{\mathbb{R}})^nw > 0\ \text{で、}\mathbb{R}\ \text{の順序で正の数の積は正}\bigr)
 \end{aligned}`),
       paragraph([
         "である。いずれの場合も ",
@@ -3732,6 +3794,7 @@ T
         "2026-11-05: SageMath の検算（sagemath/check/trace_power_sandwich/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1) 「…」で書いた望遠鏡積と「単調非減少を j−1 回適用」を、m_k ≥ m_1m_{k−1}（k の帰納法）と m_p ≥ m_1^p（p の帰納法）の鎖にし、m_0 = 1・m_1 = x^⊤Wx を def_exp (1)・def_real_bilinear_value・def_matrix_norm の鎖で示した。m_k は moment_log_convexity の置き方で読むと書いた。(2) 半正定値行列の二次形式をトレースで抑える八段の鎖は、実数の絶対値・有限和の三角不等式・平方根の積の法則という本文にラベルの無い道具と psd_cauchy_schwarz の二回の適用を使っていた。W^n の半正定値性を v_i := x_l(e_k)_i − x_k(e_l)_i に当てた 2x_k(W^n)_{kl}x_l ≤ x_l^2(W^n)_{kk} + x_k^2(W^n)_{ll} を足し合わせる鎖に替え、絶対値と平方根を使わない形にした。旧い鎖は誤りではないが、より初等的に書けるのでこちらを採った（README の新しい道具を導入するときの判断基準）。(3) 「W^n は正定値」の散文を、z = 0 と z ≠ 0 に分け、z ≠ 0 では w := ‖z‖^{-1}z が単位ベクトルであることを示して moment_log_convexity の正値性を当てる鎖にした。(4) 「t ↦ t^n は単調増加なので上限と可換」は t^n の連続性を暗に使っていた。正の実数の冪の比較 0 < r^p < s^p・s^p − r^p ≤ p s^{p−1}(s − r)（p の帰納法）を示し、c^n > tr(W^n) を仮定して δ := (c^n − T)(nc^{n−1})^{−1}、r := c − δ が R の上界でないことから矛盾を導く背理法にした。極限・連続性を使わず、上限の性質は最小の上界であることだけを使う。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 旧い主張 c^n ≤ tr(W^n) ≤ 2^{M_col}c^n は ℂ の元 tr(W^n) に順序を使っており、証明は W^n の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。上流の trace_power_upper_bound・moment_log_convexity は既に def_W_real の W_ℝ で述べ直されており、この証明は旧い形（tr(W^n) ≤ …、m_k := x^⊤W^kx）で引いて食い違っていた。主張を T := Σ_k ((W_ℝ)^n)_kk について c^n ≤ T ≤ 2^{M_col}c^n と述べ直し（tr(W^n) = (T)_ℂ は trace_of_W_power_via_W_real が述べる）、証明の冪をすべて (W_ℝ)^n にした。【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power）を置き、(W_ℝ)^1 = W_ℝ を ϱ で運ぶ 5 行の鎖（実数の行列の左単位の主張が本文に無いため、Mat(d,ℂ) の identity_matrix_is_left_unit_of_mat_mult を ϱ の中で使う）にした。成分の対称性は W^n の実対称性から ϱ を通す 6 行の鎖と inclusion_rr_to_cc_is_injective にした。m_0 = 1 は I_ℝ（def_real_identity_matrix）で読んだ。上からの評価は trace_power_upper_bound をそのまま引く。値は変えていない。下流の partition_function_sandwich はまだ Z = tr(W^{N_row}) に旧い形で当てている（状態台帳の (r3b2e3) で trace_of_W_power_via_W_real を引く形に書き直す）。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 正の実数の冪を名前だけの根拠「冪の定義」で引いていた 7 行と、実数の冪の定義を根拠なしに使っていた箇所（m_1^0 = 1、r^1 = r^0r = r と s^1 = s、s^0 = 1、r^{p+1} = r^pr、c^0 = 1、m_k^2 = m_km_k、|z_{j_0}|^2 > 0、0^2 = 0、(st)^2 = s^2t^2、(‖z‖^{-1})^2‖z‖^2 = (‖z‖^{-1}‖z‖)^2、1^2 = 1 の 2 か所、‖z‖‖z‖ = ‖z‖^2）を def_power_of_real_number の参照にし、各行で定義を当てた等式を書き添えた。主張の段落が t^0 := 1, t^{p+1} := t^pt と冪を定義し直していたのを def_power_of_real_number の参照にした。|t|^2 = t^2 の 3 か所を square_of_real_absolute_value の参照にした。s^{p+1} − r^{p+1} の行の根拠に乗法の交換則を足した。値と手順は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段で、|z_{j_0}|^2 > 0 の行が |z_{j_0}| > 0・square_of_real_number_is_product・正の数の積は正の 3 つを 1 行で使っていたので、|z_{j_0}|^2 = |z_{j_0}||z_{j_0}| の行と > 0 の行に割り、|z_{j_0}| > 0 を def_real_absolute_value の場合分けで示した。finite_sum_of_nonnegative_reals_is_at_least_each_term が要る各項の非負性 |z_j|^2 ≥ 0 に根拠が無かったので、square_of_real_number_is_product と def_real_absolute_value の |q| ≥ 0 の 2 行の鎖を置いた。z^⊤(W_ℝ)^nz の鎖の 3 行目（交換則・結合則・square_of_real_number_is_product・finite_sum_of_real_scalar_multiples を 1 行で使っていた）を 4 行に割り（5 行 → 8 行）、最後の行の w^⊤(W_ℝ)^nw > 0 を鎖の前に出した。z_i = ‖z‖w_i を 4 行の鎖にし（‖z‖‖z‖^{-1} = 1・結合則・単位元に根拠が無かった）、‖w‖ の鎖の 2 行目（代入と square_of_real_absolute_value）を 2 行に割った（14 行 → 15 行）。値と主張は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。主張の右辺の 2^{M_col} は 2_ℝ := 1_ℝ + 1_ℝ の def_power_of_real_number の冪 2_ℝ^{M_col} の略記で、ℤ の元 d とは別の元であることを主張の文に書いた（trace_power_upper_bound と同じ書き方）。値と手順は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 上からの評価の鎖の根拠の文「d^2 個の項へ同時に適用」の d^2 は、d ∈ ℤ なので def_power_of_integer の冪としか読めないが、項の数は論証に使わないので数を書かず、「k, l ∈ {1,…,d} の組 (k,l) ごとの項へ同時に適用」とした。値と手順は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗と積の行き来を def_power_of_real_number の冪をその場で開く書き方（x^2 = (x^0x)x = xx、t^2 = tt）から square_of_real_number_is_product を引く行に替え、1^2 = 1 を power_of_real_one_is_one（m → 2）から引いた。1 行に複数の事実をまとめていた行を割った: ‖w‖ の鎖の (‖z‖^{-1}z_i)^2 の行を積へ開く・並べ替える・冪へ戻すの 3 行に、(‖z‖^{-1})^2‖z‖^2 の行を同じく 3 行に、√1 の行を ‖z‖^{-1}‖z‖ = 1 の行と 1^2 = 1 の行に（9 行 → 14 行）、Σx_k^2 の鎖の最後の行を ‖x‖ = 1 の行と 1^2 = 1 の行に（3 行 → 4 行）、m_{k+1} の鎖の m_k^2/m_{k-1} = m_k(m_k/m_{k-1}) を square_of_real_number_is_product の行と結合則の行に（5 行 → 6 行）、【(W_ℝ)^n の成分の評価】の展開の行を、x_lx_l・x_kx_k の積で展開する行と square_of_real_number_is_product で冪へ戻す行に（7 行 → 8 行）。‖z‖ = 0 の場合の ‖z‖^2 = 0^2 = 0 を 0^2 = 0·0 = 0 にし、√1 = 1 の行の 1^2 = 1 を power_of_real_one_is_one から引いた。値と主張は変えていない。",
