@@ -38,6 +38,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimNonnegativeRealOrderFromSquares
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 
 set_option linter.unusedSectionVars false
 
@@ -178,7 +179,7 @@ theorem vecNorm_single (i₁ : n) : vecNorm (Pi.single i₁ (1 : ℝ)) = 1 := by
     calc |(Pi.single i₁ (1 : ℝ) : n → ℝ) i₁| ^ 2
         = |(1 : ℝ)| ^ 2 := by rw [Pi.single_eq_same]                        -- `(e_1)_1 = 1`
       _ = (1 : ℝ) ^ 2 := by rw [abs_of_nonneg (zero_le_one' ℝ)]      -- `def_real_absolute_value` の `1 ≥ 0` の場合 `|1| = 1`
-      _ = 1 := one_pow 2                                                    -- `ℝ` で `1^2 = 1`
+      _ = 1 := power_of_real_one_is_one 2                                   -- `power_of_real_one_is_one`（`m → 2`）
   calc vecNorm (Pi.single i₁ (1 : ℝ))
       = Real.sqrt (∑ i, |(Pi.single i₁ (1 : ℝ) : n → ℝ) i| ^ 2) := by
         rw [vecNorm, vecNormSq_eq_sum]
@@ -191,7 +192,7 @@ theorem vecNorm_single (i₁ : n) : vecNorm (Pi.single i₁ (1 : ℝ)) = 1 := by
         · rw [if_neg h, hoff i h]                                           -- 上の `|(e_1)_1|^2 = 1` と `|(e_1)_i|^2 = 0`（`i ≠ 1`）を各項へ（`1 + 0 + ⋯ + 0`）
     _ = Real.sqrt 1 := by rw [Finset.sum_ite_eq' Finset.univ i₁, if_pos (Finset.mem_univ i₁)]
                                                                             -- `ℝ` で `1 + 0 = 1` を左から順に（`def_finite_sum_of_real_numbers`。具体版が無いので mathlib）
-    _ = 1 := Real.sqrt_one                                                  -- `definition_of_sqrt_r_positive` の `y → 1`
+    _ = 1 := sqrt_of_real_one_is_one                                        -- `sqrt_of_real_one_is_one`
 
 variable [Nonempty n]
 

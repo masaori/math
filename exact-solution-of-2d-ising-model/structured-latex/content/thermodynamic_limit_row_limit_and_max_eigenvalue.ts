@@ -1549,7 +1549,7 @@ x^\top W_{\mathbb{R}} x
 &= 1^2
   &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 1 \geq 0\ \text{の場合}\ |1| = 1\bigr)\\
 &= 1
-  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1^2 = 1\bigr)
+  &&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)
 \end{aligned}`),
       paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
@@ -1561,7 +1561,7 @@ x^\top W_{\mathbb{R}} x
 &= \sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
   &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 0 = 1\ \text{を左から順に}\bigr)\\
 &= 1
-  &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y \to 1\ \text{が}\ 1 \geq 0,\ 1^2 = 1\ \text{を満たす}\bigr)
+  &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)
 \end{aligned}`),
       paragraph([
         "なので ",
@@ -1606,6 +1606,7 @@ c(M_{\mathrm{col}})
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: ‖e_1‖ の鎖の |1|^2 = 1^2 = 1 の 2 行目を power_of_real_one_is_one（m → 2）の参照にし、最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
         "2026-11-06（同じ確認の続き）: |x^⊤Wx| ≤ ΣΣ|W_ij| の鎖の名前だけの根拠を直した。𝓡 の元 x^⊤Wx を |x^⊤Wx| で上から抑える行（real_number_is_at_most_its_absolute_value）を鎖の先頭に足し、「行列積の成分表示」を def_real_bilinear_value の参照に、「有限和の三角不等式と積の絶対値」と「|x_i| ≤ 1, |x_j| ≤ 1」を、項ごとの 6 行の鎖（real_abs_of_product を 2 回、|x_j| ≤ 1 と |x_i| ≤ 1 に非負の実数を掛ける行）、各 i の 2 行の鎖（finite_sum_of_real_numbers_triangle_inequality・finite_sum_of_real_numbers_is_monotone）、外側の和の 2 行（同じ 2 つの主張）に割った。上界 ΣΣ|W_ij| と主張は不変。",
         "2026-11-06（同じ確認の続き）: 冒頭で定めていた W_ℝ := ϱ(W) を独立の定義 def_W_real へ切り出して引く形にした。𝓡 ⊆ ℝ_{>0} と c(M_col) > 0 の根拠が書かれていなかったので、x = 0 なら ‖x‖ = 0 の 6 行の鎖と W_real_is_positive_definite、項ごとの値の 3 行の鎖 2 本・‖e_1‖ = 1 の 4 行の鎖と c = sup 𝓡 ≥ e_1^⊤W_ℝe_1 > 0 の 3 行の鎖を足した（𝓡 が空でないことの ‖e_1‖ = 1 もこの鎖で示す）。主張は変えていない。",
@@ -1941,7 +1942,7 @@ c(M_{\mathrm{col}})
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ |1|^2 = 1\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
+&&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)
 \end{aligned}`),
       paragraph([
         "【冪の実数の行列】",
@@ -2246,6 +2247,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
         "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",
@@ -3344,7 +3346,7 @@ z_i
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{の}\ y \to 1\ \text{が}\ 1 \geq 0\ \text{と、}\blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{の}\ 1^2 = 1\ \text{を満たす}\bigr)
+&&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -3785,6 +3787,7 @@ T
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の ‖w‖ の鎖の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。c(M) は上限として定義され、上からの評価は rayleigh_bounds_operator_norm、下からの評価はモーメント列の対数凸性による。対角化可能性は正しいが本文にまだ無く、挟み撃ちには不要である。",
         "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",
         "2026-08-14 の式変形統一で、Step 3 冒頭の比の単調性（三段）と望遠鏡積からの下からの評価（四段）を、それぞれ一続きの根拠付きの鎖へ開いた。内容は変えていない。",

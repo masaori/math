@@ -55,6 +55,7 @@
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexity
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 
 set_option linter.unusedSectionVars false
 
@@ -138,8 +139,7 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
         rw [inv_mul_cancel₀ hne]                                            -- `‖z‖ ≠ 0` なので `‖z‖^{-1}‖z‖ = 1`
     _ = Real.sqrt 1 := by
         rw [power_of_real_one_is_one 2]                                     -- `power_of_real_one_is_one`（`m → 2`）
-    _ = 1 := (Real.sqrt_eq_iff_eq_sq zero_le_one zero_le_one).mpr
-        (power_of_real_one_is_one 2).symm                                   -- `definition_of_sqrt_r_positive`（`x → 1`）の `y → 1` が `1 ≥ 0` と `power_of_real_one_is_one`（`m → 2`）の `1^2 = 1` を満たす
+    _ = 1 := sqrt_of_real_one_is_one                                        -- `sqrt_of_real_one_is_one`
 
 /-- 人手【`(W_ℝ)^n` の成分の評価】の各二重和: `Σ_iΣ_j (e_q)_iP_ij(e_r)_j = P_qr`
 （`(e_q)_i` は `i = q` でだけ `1` でほかは `0` なので、`0` でない項は一つだけ）。 -/

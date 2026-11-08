@@ -54,6 +54,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 
 set_option linter.unusedSectionVars false
 
@@ -75,7 +76,7 @@ theorem norm_of_standard_basis_vector (k : Conf M) : vecNorm (Pi.single k (1 : �
           (fun h => absurd (Finset.mem_univ k) h)]                         -- `i ≠ k` の項は `|0|^2 = 0`
     _ = Real.sqrt (|(1 : ℝ)| ^ 2) := by rw [Pi.single_eq_same]              -- `(e_k)_k = 1`
     _ = Real.sqrt 1 := by rw [abs_one, one_pow]                             -- `|1|^2 = 1`
-    _ = 1 := Real.sqrt_one                                                  -- `definition_of_sqrt_r_positive` の `1 ≥ 0`, `1^2 = 1`
+    _ = 1 := sqrt_of_real_one_is_one                                        -- `sqrt_of_real_one_is_one`
 
 section General
 
