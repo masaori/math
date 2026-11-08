@@ -354,6 +354,8 @@ targets=(
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
+  Ising2D.sigmaZ_mul_sigmaZ_apply_of_ne
+  Ising2D.sigmaZ_mul_sigmaZ_apply_configBasisIso_self
   # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean・NecSuf/ExpNegMulExp.lean・NecSuf/PowerExponentLaw.lean）---
   Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
@@ -2821,6 +2823,9 @@ targets=(
   Ising2D.trace_of_epsilon_V_plus
   Ising2D.trace_epsilon_vPlusDataOf_pos
   Ising2D.sum_checkGam
+  Ising2D.adjacentSpinProductSum
+  Ising2D.sum_sigmaZ_sigmaZ_apply_of_ne
+  Ising2D.sum_sigmaZ_sigmaZ_apply_configBasisIso_self
   Ising2D.physicalV1halfR_apply_configBasisIso
   Ising2D.physicalV1halfC_apply_configBasisIso
   Ising2D.physicalV1halfR_apply_configBasisIso_self_pos

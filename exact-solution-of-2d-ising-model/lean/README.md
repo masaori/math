@@ -633,6 +633,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
 | `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
 | `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
+| `site_sigma_z_product_is_diagonal` / `site_sigma_z_product_diagonal_entry` | `Ising2D.sigmaZ_mul_sigmaZ_eq_diagonal` / `sigmaZ_mul_sigmaZ_apply_of_ne`（非対角成分は `0_ℂ`） / `sigmaZ_mul_sigmaZ_apply_configBasisIso_self`（`(σ^z_mσ^z_{m'})_{kk} = μ(m)_ℂμ(m')_ℂ`、人手の 8 行と同じ順の `calc`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` |
 | `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
 | `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean` |

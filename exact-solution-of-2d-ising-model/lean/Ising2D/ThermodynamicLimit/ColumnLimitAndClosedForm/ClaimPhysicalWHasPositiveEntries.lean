@@ -11,6 +11,9 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
+| 準備の `d(μ) := ∑_m μ(m)μ(m+1)` | `adjacentSpinProductSum` |
+| Step 1 の `D_{pq}` の 4 行（`p ≠ q`） | `sum_sigmaZ_sigmaZ_apply_of_ne`（2 行目の `σ^z_{m+1} = σ^z_{m^+}` は `nextSite` の読み方で段は無い） |
+| Step 1 の `D_{kk}` の 7 行 | `sum_sigmaZ_sigmaZ_apply_configBasisIso_self`（2 行目・6 行目は `nextSite` の読み方で段は無い） |
 | Step 1: `(V_1^{1/2})_{ι(μ),ι(μ')}` は `μ = μ'` で `exp(½K_1∑_m μ(m)μ(m+1))`、それ以外で `0` | `physicalV1halfC_apply_configBasisIso`（`V_1^{1/2} = exp(½K_1D)` の成分。`sigma_z_diagonal_action` で `½K_1D` を対角行列に書き、`exp_of_diagonal_matrix` で成分を読む `V1PauliForm_apply_configBasisIso` を結合定数 `K_1/2` で引く）・`physicalV1halfR_apply_configBasisIso`（その実成分。前者から導く） |
 | Step 1 の `exp(…) > 0` | `physicalV1halfR_apply_configBasisIso_self_pos` |
 | Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
@@ -29,7 +32,8 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 `W_has_positive_entries_physical` と `physicalSymTransferC_eq_map` で閉じる。人手の Step 1〜3 は複素行列のまま
 `B_{kk} = b(μ)_ℂ`・`(V_2)_{kl} = v(μ,μ')_ℂ`・`W_{kl} = ((b(μ)v(μ,μ'))b(μ'))_ℂ` と計算し、`w > 0` を
 `finite_product_of_positive_reals_is_positive`（`m := 3`）で示すので、この証明はまだ人手と 1 対 1 ではない
-（状態台帳の (cl2b)〜(cl2e) で人手の鎖に組み直す）。
+（状態台帳の (cl2c)〜(cl2e) で人手の鎖に組み直す。Step 1 の `D_{pq}`・`D_{kk}` の鎖は
+`sum_sigmaZ_sigmaZ_apply_of_ne`・`sum_sigmaZ_sigmaZ_apply_configBasisIso_self` に置いたが、まだ `B` の成分の証明からは使っていない）。
 人手の「言い換えの形」（すべての `k, l` について `W_kl > 0`）は
 `ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries.lean` の `W_has_positive_entries_as_inclusion` で、
 人手の最後の段どおり `ι` の全射性で `W_has_positive_entries` から導く。
@@ -53,6 +57,52 @@ namespace Ising2D
 open Matrix
 
 variable {M : ℕ}
+
+/-! ## 準備: `d(μ)` -/
+
+/-- 人手の準備の `d(μ) := ∑_{m=1}^{M_col} μ(m)μ(m+1) ∈ ℝ`（`def_finite_sum_of_real_numbers` の和）。
+人手の `μ(m+1)`（周期規約 `μ(M_col+1) := μ(1)`）は Lean の `μ (nextSite m)` である。 -/
+noncomputable def adjacentSpinProductSum (μ : SpinConf M) : ℝ :=
+  ∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ)
+
+/-! ## Step 1: `D` の成分 -/
+
+/-- **人手 Step 1 の `D_{pq}` の鎖**（`p ≠ q`）: `D = ∑_m σ^z_mσ^z_{m+1}` について `D_{pq} = 0_ℂ`。
+
+人手の 4 行のうち 2 行目（`σ^z_{m+1} = σ^z_{m^+}` を各項へ）は、Lean では `σ^z_{m+1}` を最初から
+`sigmaZ (nextSite m)`（`= σ^z_{m^+}`、`def_site_pauli_periodic_extension`）と書くので、添字の読み方であって段は無い。
+`finite_sum_of_matrices_entrywise` は具体版が無く `Matrix.sum_apply`、`finite_sum_of_complex_zeros` は
+`Finset.sum_const_zero`（既存の慣行どおり）。 -/
+theorem sum_sigmaZ_sigmaZ_apply_of_ne {p q : Conf M} (hpq : p ≠ q) :
+    (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) p q = 0 :=
+  calc (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) p q
+      = ∑ m : Fin M, (sigmaZ m * sigmaZ (nextSite m)) p q :=
+        Matrix.sum_apply _ _ _ _                              -- `finite_sum_of_matrices_entrywise`
+    _ = ∑ _m : Fin M, (0 : ℂ) :=
+        Finset.sum_congr rfl fun m _ =>
+          sigmaZ_mul_sigmaZ_apply_of_ne m (nextSite m) hpq     -- `site_sigma_z_product_is_diagonal` を各 `(m, m^+)` へ
+    _ = 0 := Finset.sum_const_zero                            -- `finite_sum_of_complex_zeros`
+
+/-- **人手 Step 1 の `D_{kk}` の鎖**（`k := ν(ι(μ))`）: `D_{kk} = d(μ)_ℂ`。
+
+人手の 7 行のうち 2 行目（`σ^z_{m+1} = σ^z_{m^+}`）と 6 行目（`μ(m+1) = μ(m^+)`）は、Lean では両方を最初から
+`nextSite m` で書くので、添字の読み方であって段は無い。`real_inclusion_preserves_product` は `real_inclusion_mul`、
+`real_inclusion_preserves_finite_sum` は具体版が無く `Complex.ofReal_sum`（既存の慣行どおり）。 -/
+theorem sum_sigmaZ_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) :
+    (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ)
+      = ((adjacentSpinProductSum μ : ℝ) : ℂ) :=
+  calc (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ)
+      = ∑ m : Fin M, (sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ) :=
+        Matrix.sum_apply _ _ _ _                              -- `finite_sum_of_matrices_entrywise`
+    _ = ∑ m : Fin M, ((μ m : ℝ) : ℂ) * ((μ (nextSite m) : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun m _ =>
+          sigmaZ_mul_sigmaZ_apply_configBasisIso_self μ m (nextSite m)
+                                                              -- `site_sigma_z_product_diagonal_entry` を各 `(m, m^+)` へ
+    _ = ∑ m : Fin M, (((μ m : ℝ) * (μ (nextSite m) : ℝ) : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun _m _ => real_inclusion_mul _ _ -- `real_inclusion_preserves_product` を各項へ
+    _ = ((∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ) : ℝ) : ℂ) :=
+        (Complex.ofReal_sum _ _).symm                         -- `real_inclusion_preserves_finite_sum`
+    _ = ((adjacentSpinProductSum μ : ℝ) : ℂ) := rfl           -- `d(μ)` の定義
 
 /-! ## Step 1: `V_1^{1/2}` は正の対角行列 -/
 
