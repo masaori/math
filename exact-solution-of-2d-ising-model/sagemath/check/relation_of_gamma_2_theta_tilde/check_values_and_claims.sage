@@ -14,8 +14,8 @@ rep.check(sqrt_aa(AA(0)) == 0, "cos(π/2) の鎖 第 5 行: √0 = 0（sqrt_of_r
 rep.check(1 - AA(1)**2 != 1 - AA(2)**2 and AA(2) - AA(1) != 0, "cos(π/2) の鎖 否定の対照: 1^2 を 2^2 に、a - a を 2 - 1 に取り違えると等号が崩れる")
 rep.check(cos_sin(Ang(0)) == (AA(1), AA(0)), "cos 0 = 1、sin 0 = 0")
 rep.check(bool(pi > 0) and RealBallField(256)(0) < RealBallField(256).pi(), "0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_positive/）")
-rep.check(Ang(0) + pi_ == pi_, "(3) φ_polar((-r)_C) の鎖 第 6 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 5 行 arctan 0 = 0 は sagemath/check/arctan_zero/）")
-rep.check(Ang(1) + pi_ != pi_, "(3) φ_polar((-r)_C) の鎖 第 6 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π")
+rep.check(Ang(0) + pi_ == pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）")
+rep.check(Ang(1) + pi_ != pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π")
 rep.check(n_of_section(Ang(0)) == 0 and n_of_section(pi_) == 0, "角度 0 と π の angle_section_existence_uniqueness の整数は 0")
 
 n_cases = 0
@@ -106,27 +106,64 @@ for (Yv, Zv) in COUPLINGS:
             tick(cc_conj(cc_conj(gp)) == gp, "(2) 背理の鎖の二重の共役")
             # (3)
             r = abs2
-            tick(sqrt_aa((-r)**2 + 0**2) == r, "(3) φ_polar((-r)_C) の鎖: √((-r)^2 + 0^2) = r")
+            # (3) φ_polar((-r)_C) の鎖 第 2〜9 行（根号の中身と arctan の引数の対）
+            three_polar = [
+                ((-r)**2 + 0**2, AA(0) / (-r)),
+                ((-r) * (-r) + 0**2, AA(0) / (-r)),   # square_of_real_number_is_product (r → -r)
+                (r * r + 0**2, AA(0) / (-r)),         # (-a)(-b) = ab (a, b → r)
+                (r**2 + 0**2, AA(0) / (-r)),          # square_of_real_number_is_product (r → r) を右辺から左辺へ
+                (r**2 + 0 * 0, AA(0) / (-r)),         # square_of_real_number_is_product (r → 0)
+                (r**2 + 0, AA(0) / (-r)),             # 0·x = 0 (x → 0)
+                (r**2, AA(0) / (-r)),                 # a + 0 = a (a → r^2)
+                (r**2, AA(0)),                        # 0/x = 0 (x → -r ≠ 0)
+            ]
+            for j in range(len(three_polar) - 1):
+                tick(three_polar[j] == three_polar[j + 1], f"(3) φ_polar((-r)_C) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(-r < 0 and -r != 0, "(3) φ_polar((-r)_C) の鎖 第 9 行の前提: -r < 0 より -r ≠ 0")
+            tick((-r) * (-r) != -(r * r), "(3) φ_polar((-r)_C) の鎖 第 4 行 否定の対照: (-a)(-b) を -(ab) に取り違えると等号が崩れる")
+            tick(sqrt_aa(r**2) == r, "(3) φ_polar((-r)_C) の鎖 第 10 行: √(r^2) = r（r ≥ 0、r^2 = r^2）")
             tick(phi_polar_equals((-r, AA(0)), (r, pi_)), "(3) φ_polar((-r)_C) = [(r, π)]")
             t2 = pi_ if r != 0 else Ang(0)                 # first_and_second_projections
             tick(section(t2) == pi_ and section_by_floor(t2) == pi_, "(3) arg = s_{[0,2π)}([π]) = π - 2·0·π = π")
+            three_main = [pi_ - (2 * 0) * pi_, pi_ - 0 * pi_, pi_ - Ang(0), pi_]
+            for j in range(len(three_main) - 1):
+                tick(three_main[j] == three_main[j + 1], f"(3) 主張の鎖 第 {j+5} 行 = 第 {j+6} 行（x·0 = 0、0·x = 0、a - 0 = a）")
+            tick(pi_ - (2 * 1) * pi_ != pi_, "(3) 主張の鎖 否定の対照: 整数 n を 1 に取り違えると π - 2·1·π ≠ π")
             # (4)
             tick(-(g * gm) == F(-1) * (g * gm), "(4) 準備 第 1 行: -z = (-1_C) z")
             tick(to_pair(F(-1) * (g * gm)) == cc_mul(iota(-1, AA), (-r, AA(0))) == (r, AA(0)), "(4) -γ_2(θ)γ_2(-θ) = (-1_C)(-r)_C = r_C")
+            tick((-1) * (-r) == 1 * r and 1 * r == r, "(4) -γγ' の鎖 第 4・5 行: ((-1)(-r))_C = (1·r)_C = r_C（(-a)(-b) = ab、1·x = x）")
+            tick((-1) * (-r) != -r, "(4) -γγ' の鎖 否定の対照: (-1)(-r) を -r に取り違えると等号が崩れる")
+            four_polar = [
+                (r**2 + 0**2, AA(0) / r),
+                (r**2 + 0 * 0, AA(0) / r),            # square_of_real_number_is_product (r → 0)
+                (r**2 + 0, AA(0) / r),                # 0·x = 0 (x → 0)
+                (r**2, AA(0) / r),                    # a + 0 = a (a → r^2)
+                (r**2, AA(0)),                        # 0/x = 0 (x → r ≠ 0)
+            ]
+            for j in range(len(four_polar) - 1):
+                tick(four_polar[j] == four_polar[j + 1], f"(4) φ_polar(r_C) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(AA(1) / r != AA(0), "(4) φ_polar(r_C) の鎖 第 6 行 否定の対照: 0/r を 1/r に取り違えると 0 にならない")
+            tick(r > 0 and sqrt_aa(r**2) == r, "(4) φ_polar(r_C) の鎖 第 7 行: r ≥ 0、r^2 = r^2 なので √(r^2) = r")
             tick(sqrt_aa(r**2 + 0**2) == r and phi_polar_equals((r, AA(0)), (r, Ang(0))), "(4) φ_polar(r_C) = [(r, 0)]")
             four_lines = [
                 phi_cartesian((sqrt_aa(r), Ang(0) / 2 - 0 * pi_)),
                 phi_cartesian((absg, Ang(0) / 2 - 0 * pi_)),
-                phi_cartesian((absg, Ang(0))),
+                phi_cartesian((absg, Ang(0) - 0 * pi_)),     # 0/x = 0 (x → 2)
+                phi_cartesian((absg, Ang(0) - Ang(0))),      # 0·x = 0 (x → π)
+                phi_cartesian((absg, Ang(0))),               # a - 0 = a (a → 0)
                 (absg * cos_sin(Ang(0))[0], absg * cos_sin(Ang(0))[1]),
                 (absg * 1, absg * cos_sin(Ang(0))[1]),
                 (absg * 1, absg * 0),
-                (absg, AA(0)),
+                (absg, absg * 0),                            # x·1 = x (x → |γ|)
+                (absg, AA(0)),                               # x·0 = 0 (x → |γ|)
                 iota(absg, AA),
             ]
             tick(sqrt_aa(r) == absg, "(4)(5) √r = |γ|（|γ| ≥ 0、|γ|^2 = r）")
             for j in range(len(four_lines) - 1):
                 tick(four_lines[j] == four_lines[j + 1], f"(4) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(Ang(0) / 2 - 0 * pi_ == Ang(0) - 0 * pi_ and Ang(0) - 0 * pi_ == Ang(0) - Ang(0) and Ang(0) - Ang(0) == Ang(0), "(4) の鎖 角度の 3 行（0/2 - 0·π = 0 - 0·π = 0 - 0 = 0）")
+            tick(Ang(0) - 1 * pi_ != Ang(0), "(4) の鎖 角度 否定の対照: 0·π を 1·π に取り違えると 0 - π ≠ 0")
             tick(sqrt_cc_by_definition((r, AA(0)), (r, Ang(0))) == four_lines[0], "(4) 第 2 行: sqrt_expansion_via_polar の値が def_sqrt_cc の値と一致")
             tick(to_pair(QQbar(r).sqrt()) == (absg, AA(0)), "(4) 対照: Sage の QQbar の平方根とも一致")
             # (5)

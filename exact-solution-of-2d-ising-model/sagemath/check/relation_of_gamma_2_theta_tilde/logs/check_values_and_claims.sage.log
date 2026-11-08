@@ -7,8 +7,8 @@ PASS cos(π/2) の鎖 第 5 行: √0 = 0（sqrt_of_real_zero_is_zero。検算 s
 PASS cos(π/2) の鎖 否定の対照: 1^2 を 2^2 に、a - a を 2 - 1 に取り違えると等号が崩れる
 PASS cos 0 = 1、sin 0 = 0
 PASS 0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_positive/）
-PASS (3) φ_polar((-r)_C) の鎖 第 6 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 5 行 arctan 0 = 0 は sagemath/check/arctan_zero/）
-PASS (3) φ_polar((-r)_C) の鎖 第 6 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π
+PASS (3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）
+PASS (3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π
 PASS 角度 0 と π の angle_section_existence_uniqueness の整数は 0
 PASS 具体の組の数: 結合定数 4 組 × M_col = 2..8 の全 μ = 140 組
 PASS 全ての組で全ての行が一致

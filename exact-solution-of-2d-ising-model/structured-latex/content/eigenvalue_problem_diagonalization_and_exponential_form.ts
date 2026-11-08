@@ -2887,16 +2887,36 @@ s_1c_2
 &&(\because\ \blkref{inclusion_rr_to_cc})\\
 &= \left[\left(\sqrt{(-r)^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
 &&(\because\ \blkref{def_phi_polar}\ \text{の}\ x = -r < 0,\ y = 0 \geq 0\ \text{の場合})\\
+&= \left[\left(\sqrt{(-r)(-r)+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to -r)\bigr)\\
+&= \left[\left(\sqrt{r\,r+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a)(-b) = ab\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a, b \to r\bigr)\\
+&= \left[\left(\sqrt{r^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to r)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left[\left(\sqrt{r^2+0\cdot 0}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&= \left[\left(\sqrt{r^2+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 0\bigr)\\
+&= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0+\pi\right)\right]_{\sim}
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to -r\text{。}-r < 0\ \text{より}\ -r \neq 0\bigr)\\
 &= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
 &&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ 0+\pi\right)\right]_{\sim}
 &&(\because\ \blkref{arctan_zero})\\
 &= \left[\left(r,\ \pi\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{の}\ a \to \pi\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \pi\bigr)
 \end{aligned}`),
-      paragraph(["主張 (3) の左辺から始める。"]),
+      paragraph([
+        "角度 ",
+        math(String.raw`\pi`),
+        " の ",
+        ref("angle_section_existence_uniqueness"),
+        " の整数は準備により ",
+        math(String.raw`0`),
+        " である。主張 (3) の左辺から始める。",
+      ]),
       displayMath(String.raw`\begin{aligned}
 \arg^{[0,2\pi)}\!\left(\gamma_2(\theta)\gamma_2(-\theta)\right)
 &= \arg^{[0,2\pi)}\!\left((-r)_{\mathbb{C}}\right)
@@ -2908,9 +2928,13 @@ s_1c_2
 &= s_{[0,2\pi)}\!\left([\pi]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \blkref{first_and_second_projections}\ \text{の}\ r \neq 0\ \text{の場合})\\
 &= \pi - 2\cdot 0\cdot\pi
-&&(\because\ \blkref{section_of_angle_representation}\ \text{と準備の、角度}\ \pi\ \text{の整数は}\ 0)\\
+&&\bigl(\because\ \blkref{section_of_angle_representation}\ \text{の}\ \theta \to \pi\ \text{と整数}\ n \to 0\bigr)\\
+&= \pi - 0\cdot\pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 2\bigr)\\
+&= \pi - 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \pi\bigr)\\
 &= \pi
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \pi\bigr)
 \end{aligned}`),
       paragraph([
         "(4) まず ",
@@ -2927,8 +2951,10 @@ s_1c_2
 &&(\because\ (2))\\
 &= \bigl((-1)(-r)\bigr)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(1\cdot r\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a)(-b) = ab\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 1,\ b \to r\bigr)\\
 &= r_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to r\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \phi_{\mathrm{polar}}\bigl(r_{\mathbb{C}}\bigr)
@@ -2936,10 +2962,16 @@ s_1c_2
 &&(\because\ \blkref{inclusion_rr_to_cc})\\
 &= \left[\left(\sqrt{r^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
 &&(\because\ \blkref{def_phi_polar}\ \text{の}\ x = r > 0\ \text{の場合})\\
+&= \left[\left(\sqrt{r^2+0\cdot 0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&= \left[\left(\sqrt{r^2+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 0\bigr)\\
+&= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0\right)\right]_{\sim}
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to r\text{。}r > 0\ \text{より}\ r \neq 0\bigr)\\
 &= \left[\left(r,\ \arctan 0\right)\right]_{\sim}
-&&(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
+&&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ 0\right)\right]_{\sim}
 &&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
@@ -2960,16 +2992,22 @@ s_1c_2
 &&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,0)\ \text{と整数}\ 0\ \text{で})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 2\text{。}2 \neq 0\bigr)\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\right)\right]_{\sim}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \pi\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0\right)\right]_{\sim}\right)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 0\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cos 0,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
 &&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
 &&(\because\ \blkref{cosine_zero})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
 &&(\because\ \blkref{sine_zero})\\
+&= \bigl(\left|\gamma_2(\theta)\right|,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 1 = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
-&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
 &= \left|\gamma_2(\theta)\right|_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -3034,6 +3072,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の cos(π/2) の鎖の「ℝ の四則」1 行（1^2 = 1・1 − 1 = 0 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割った。最後の行 √0 = 0（0 ≥ 0・0^2 = 0・definition_of_sqrt_r_positive の一意性を 1 行で使っていた）を、新しく足した主張 sqrt_of_real_zero_is_zero（000_calculation_formulae_20_29.ts）の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3) の φ_polar((−r)_C) の鎖の最後の行（[(r, arctan 0+π)] = [(r, π)]。arctan 0 = 0 と ℝ の 0 + π = π を 1 行で使っていた）を、arctan_zero の行（[(r, 0+π)]）と ℝ で 0 + a = a（a → π）の行の 2 行に割った。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の 0 < π の鎖（arcsin(0) = 0 を経て π = 2arcsin(1) > 2arcsin(0) = 0）を、zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明から独立させた主張 pi_is_positive の参照にした。arcsin(0) = 0 の鎖は 0 < π の鎖にしか使われていなかったので外した。値と主張は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3)(4) で 1 行に 2 つ以上の事実を使っていた行を割った。(3) の φ_polar((−r)_C) の鎖の「ℝ の四則」1 行（(−r)^2 = r^2・0^2 = 0・r^2 + 0 = r^2・0/(−r) = 0）を、square_of_real_number_is_product（r → −r）、ℝ で (−a)(−b) = ab（a, b → r）、square_of_real_number_is_product（r → r）を右辺から左辺へ、同（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → r^2。ℝ は体）、ℝ で 0/x = 0（x → −r）の 7 行に割った。(3) の主の鎖は、角度 π の angle_section_existence_uniqueness の整数が 0 であることを鎖の前の段落へ出して s_{[0,2π)} の行の根拠を section_of_angle_representation（θ → π、n → 0）だけにし、π − 2·0·π = π を x·0 = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → π）の 3 行に割った。(4) の −γγ' の鎖の最後 (−1)(−r) = r を (−a)(−b) = ab（a → 1、b → r）と 1·x = x（x → r）の 2 行に、φ_polar(r_C) の鎖の「ℝ の四則」1 行（0^2 = 0・r^2 + 0 = r^2・0/r = 0）を 4 行に割り、次の行の根拠に definition_of_sqrt_r_positive の前提「r ≥ 0 かつ r^2 = r^2」を書いた。(4) の主の鎖の 0/2 − 0·π = 0 を 0/x = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → 0）の 3 行に、「ℝ の四則を 2 箇所へ」を x·1 = x と x·0 = 0（x → |γ_2(θ)|）の 2 行に割った（0/x = 0 の x → 2 に 2 ≠ 0 を添えた）。(3) の φ_polar((−r)_C) の鎖の最後の 0 + a = a の行に「ℝ は体」を添えた。値と主張は不変。",
       ],
     },
   },
