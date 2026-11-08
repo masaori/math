@@ -2593,6 +2593,9 @@ targets=(
   Ising2D.power_of_real_one_is_one
   "Ising2D.NecSuf.one_pow'"
   Ising2D.power_of_real_one_is_one_of_necSuf
+  Ising2D.square_of_real_number_is_product
+  "Ising2D.NecSuf.sq_eq_mul_self'"
+  Ising2D.square_of_real_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf

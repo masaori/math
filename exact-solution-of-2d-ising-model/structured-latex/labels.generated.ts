@@ -610,6 +610,7 @@ export const ALL_LABELS = [
   "sqrt_of_square_plus_one_is_positive",
   "sqrt_squared_is_original",
   "square_of_real_absolute_value",
+  "square_of_real_number_is_product",
   "square_of_real_sum_is_at_most_twice_sum_of_squares",
   "square_of_sqrt",
   "star_preserves_norm_and_limits",

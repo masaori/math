@@ -6,13 +6,13 @@
 
 - ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 - ブロック: `calc_formulae_claim_square_of_real_absolute_value`（`|q|^2 = q^2`）
-- 範囲: 2 つの場合（`q ≥ 0` の 1 行、`q < 0` の 2 行）の鎖と主張
+- 範囲: 2 つの場合（`q ≥ 0` の 1 行、`q < 0` の 4 行）の鎖と主張
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 範囲に書いた各行と主張 | `check_proof_lines.sage` | QQ と AA の 11 点の全て（2 つの場合がそれぞれ 1 点以上あることも確かめる）で、各行の等号を厳密に | **PASS** | 成り立つ |
+| 範囲に書いた各行と主張 | `check_proof_lines.sage` | QQ と AA の 11 点の全て（2 つの場合がそれぞれ 1 点以上あることも確かめる）で、二乗を `def_power_of_real_number` どおり組み、各行の等号を厳密に | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲
 
@@ -25,4 +25,4 @@
 bash sagemath/tools/run-all-checks.sh square_of_real_absolute_value
 ```
 
-実行ログは `logs/` に保存する（2026-11-07）。
+実行ログは `logs/` に保存する（2026-11-08）。
