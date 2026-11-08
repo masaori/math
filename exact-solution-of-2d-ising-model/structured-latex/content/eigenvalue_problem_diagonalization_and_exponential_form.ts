@@ -2907,8 +2907,10 @@ s_1c_2
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
 &&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
+&= \left[\left(r,\ 0+\pi\right)\right]_{\sim}
+&&(\because\ \blkref{arctan_zero})\\
 &= \left[\left(r,\ \pi\right)\right]_{\sim}
-&&(\because\ \blkref{arctan_zero})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{の}\ a \to \pi\bigr)
 \end{aligned}`),
       paragraph(["主張 (3) の左辺から始める。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3046,6 +3048,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖の 2 行目「ℝ の四則 0/√1 = 0」（0^2 = 0・1 + 0 = 1・√1 = 1・0/1 = 0 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）、sqrt_of_real_one_is_one、ℝ で 0/x = 0（x → 1）の 5 行に割った。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の arctan 0 の鎖を独立の主張 arctan_zero（020_critical_point.ts）へ移し、(3)(4) の鎖の根拠「準備の arctan 0 = 0」を arctan_zero の参照にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖も同じ主張を引く。0 < π の鎖が引いていた arcsin(0) = 0 は、移した鎖の 7・8 行目と同じ 2 行の鎖（sine_zero・def_sin）として準備の第五に残した。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の cos(π/2) の鎖の「ℝ の四則」1 行（1^2 = 1・1 − 1 = 0 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割った。最後の行 √0 = 0（0 ≥ 0・0^2 = 0・definition_of_sqrt_r_positive の一意性を 1 行で使っていた）を、新しく足した主張 sqrt_of_real_zero_is_zero（000_calculation_formulae_20_29.ts）の参照にした。値と主張は不変。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3) の φ_polar((−r)_C) の鎖の最後の行（[(r, arctan 0+π)] = [(r, π)]。arctan 0 = 0 と ℝ の 0 + π = π を 1 行で使っていた）を、arctan_zero の行（[(r, 0+π)]）と ℝ で 0 + a = a（a → π）の行の 2 行に割った。値と主張は不変。",
       ],
     },
   },

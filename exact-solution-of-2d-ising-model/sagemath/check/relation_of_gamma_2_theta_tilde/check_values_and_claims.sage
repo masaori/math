@@ -18,6 +18,8 @@ rep.check(bool(-pi / 2 <= 0) and bool(0 <= pi / 2) and bool(arcsin(sin(SR(0))) =
 rep.check(bool(pi == 2 * arcsin(SR(1))), "0 < π の鎖 第 1 行: π = 2 arcsin(1)")
 rep.check(bool(2 * arcsin(SR(1)) > 2 * arcsin(SR(0))), "0 < π の鎖 第 2 行: 2 arcsin(1) > 2 arcsin(0)")
 rep.check(bool(2 * arcsin(SR(0)) == 2 * 0) and 2 * 0 == 0, "0 < π の鎖 第 3・4 行: 2 arcsin(0) = 2·0 = 0")
+rep.check(Ang(0) + pi_ == pi_, "(3) φ_polar((-r)_C) の鎖 第 6 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 5 行 arctan 0 = 0 は sagemath/check/arctan_zero/）")
+rep.check(Ang(1) + pi_ != pi_, "(3) φ_polar((-r)_C) の鎖 第 6 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π")
 rep.check(n_of_section(Ang(0)) == 0 and n_of_section(pi_) == 0, "角度 0 と π の angle_section_existence_uniqueness の整数は 0")
 
 n_cases = 0
