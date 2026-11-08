@@ -46292,12 +46292,12 @@ s\cdot s
                         ]),
                         displayMath(String.raw`\begin{aligned}
 z&=2&&\bigl(\because\ z\text{ の置き方}\bigr)\\
-&=s\cdot s&&\bigl(\because\ \blkref{claim_two_is_square_in_real_closed}\bigr).
+&=s\cdot s&&\bigl(\because\ \blkref{claim_two_is_square_in_real_closed}\bigr)
 \end{aligned}`),
                         paragraph(["背理法で、零でない ", math(String.raw`w\in R`), " が ", math(String.raw`-2=w\cdot w`), " を満たすと仮定する。すると"]),
                         displayMath(String.raw`\begin{aligned}
 -z&=-2&&\bigl(\because\ z\text{ の置き方}\bigr)\\
-&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr).
+&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr)
 \end{aligned}`),
                         paragraph([
                           ref("def_real_closed_subfield"), " の第 2 条件では、零でない元 ",
