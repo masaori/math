@@ -1,6 +1,6 @@
 # 対象ラベル: anticommutator_of_check_psi
 # 準備 4（ℂ の符号と逆元の規則）と準備 5（ν = M+1-μ の場合の係数）の鎖を一行ずつ確かめる。準備 5 は:
-#   a_ν・b_ν の各 3 等号、r_ν の 11 等号、b_μ b_ν の 7 等号、t t の 6 等号、d_μ d_ν の 4 等号、d_μ^{-1} d_ν^{-1} の 4 等号、
+#   a_ν・b_ν の各 3 等号、r_ν の 11 等号、b_μ b_ν の 8 等号、t t の 7 等号、d_μ d_ν の 4 等号、d_μ^{-1} d_ν^{-1} の 4 等号、
 #   u^-u^- の 8 等号、u^+u^+ の 7 等号、u^-u^+ の 6 等号、h h の 3 等号、二つの和の各 2 等号、(u^-u^+ + hh)ω の 11 等号。
 # 一般の点: 各行を QQ 上の有理関数（a_μ, b_μ, a_ν, b_ν, ρ, σ, M を不定元）として本文の式どおりに別々に組み、
 #   隣り合う行の差の分子が、その行の根拠の関係（periodicity_of_check_fermi (3) の a_ν = b_μ・b_ν = a_μ、
@@ -17,6 +17,15 @@ rep = Report("anticommutator_of_check_psi: 準備 4・準備 5 の係数の鎖")
 Pg = PolynomialRing(QQ, ['am', 'bm', 'an', 'bn', 'rho', 'sig', 'Mc', 'x', 'y'])
 am, bm, an, bn, rho, sig, Mc, x, y = Pg.gens()
 Kg = Pg.fraction_field()
+
+
+def rpow(a, m):
+    """def_power_of_real_number: a^0 := 1、a^{m+1} := a^m a。"""
+    p = a.parent()(1)
+    for _ in range(m):
+        p = p * a
+    return p
+
 REL = dict(per=[an - bm, bn - am], rel2=[am * bm + rho**2], sq=[sig**2 - Mc])
 
 
@@ -44,10 +53,11 @@ dm, dn = t * bm, t * bn
 tt = t * t
 rr = rho * rho
 
-generic_chain([bm * bn, bm * am, am * bm, -(rho**2), -(rho * rho), (-1) * (rho * rho), -(rho * rho), -(rho * rho)],
-              [['per'], [], ['rel2'], [], [], [], []], "b_μ b_ν")
-generic_chain([(2 * sig) * (2 * sig), (2 * 2) * (sig * sig), (2 * 2) * (sig * sig), 4 * (sig * sig), 4 * Mc, 4 * Mc],
-              [[], [], [], ['sq'], []], "t t")
+# 二乗は def_power_of_real_number の冪（m = 2）として rpow で組み、積の形とは square_of_real_number_is_product の行で行き来する。
+generic_chain([bm * bn, bm * am, am * bm, -(rpow(rho, 2)), -(rpow(rho, 2)), -(rho * rho), (-1) * (rho * rho), -(rho * rho), -(rho * rho)],
+              [['per'], [], ['rel2'], [], [], [], [], []], "b_μ b_ν")
+generic_chain([(2 * sig) * (2 * sig), (2 * 2) * (sig * sig), (2 * 2) * (sig * sig), 4 * (sig * sig), 4 * rpow(sig, 2), 4 * Mc, 4 * Mc],
+              [[], [], [], [], ['sq'], []], "t t")
 generic_chain([(t * bm) * (t * bn), (t * t) * (bm * bn), tt * (-rr), -(tt * rr)],
               [[], ['per', 'rel2'], []], "d_μ d_ν")
 generic_chain([(1 / dm) * (1 / dn), 1 / (dm * dn), 1 / (-(tt * rr)), -(1 / (tt * rr)), -((1 / tt) * (1 / rr))],
@@ -135,8 +145,8 @@ for M in range(2, 7):
             bm_, bn_, am_ = F(b_m), F(b_n), F(a_m)
             chk = lambda rows, lab: rep.check(all(rows[i] == rows[i + 1] for i in range(len(rows) - 1)), f"{lab} {tag}", quiet=True)
             rr_ = rho_ * rho_
-            chk([bm_ * bn_, bm_ * am_, am_ * bm_, F(-n2), -rr_, F(-1) * rr_, -rr_, -rr_], "b_μ b_ν")
-            chk([(F(2) * sg) * (F(2) * sg), (F(2) * F(2)) * (sg * sg), F(2 * 2) * (sg * sg), F(4) * (sg * sg), F(4) * Mf, F(4) * Mf], "t t")
+            chk([bm_ * bn_, bm_ * am_, am_ * bm_, F(-n2), -rpow(rho_, 2), -rr_, F(-1) * rr_, -rr_, -rr_], "b_μ b_ν")
+            chk([(F(2) * sg) * (F(2) * sg), (F(2) * F(2)) * (sg * sg), F(2 * 2) * (sg * sg), F(4) * (sg * sg), F(4) * rpow(sg, 2), F(4) * Mf, F(4) * Mf], "t t")
             tt_ = t_ * t_
             dm_, dn_ = t_ * bm_, t_ * bn_
             rep.check(t_ != 0 and rr_ != 0 and dm_ != 0 and dn_ != 0, f"t, ρρ, d ≠ 0 {tag}", quiet=True)

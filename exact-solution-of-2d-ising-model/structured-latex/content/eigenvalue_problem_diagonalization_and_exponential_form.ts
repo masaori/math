@@ -5493,8 +5493,12 @@ g
         "（",
         ref("definition_of_sqrt_r_positive"),
         "。",
-        math(String.raw`s\,s = (M_{\mathrm{col}})_{\mathbb R}`),
-        "）と置く。",
+        math(String.raw`s^2 = (M_{\mathrm{col}})_{\mathbb R}`),
+        "。二乗は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である）と置く。",
         math(String.raw`s`),
         " と下の ",
         math(String.raw`r_\lambda`),
@@ -5918,8 +5922,10 @@ b_\mu b_\nu
 &&\bigl(\because\ \mathbb{C}\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl(-|a_\mu|^2\bigr)_{\mathbb C}
 &&\bigl(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2)\bigr)\\
+&= \bigl(-r^2\bigr)_{\mathbb C}
+&&(\because\ r\text{ と }r_\mu\text{ の定義：}r = r_\mu = |a_\mu|)\\
 &= \bigl(-(r\,r)\bigr)_{\mathbb C}
-&&\bigl(\because\ |a_\mu|^2 := |a_\mu|\,|a_\mu|\text{（}\mathbb{R}\text{ の 2 乗の記法）と }r = |a_\mu|\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\bigr)\\
 &= (-1_{\mathbb C})\,(r\,r)_{\mathbb C}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\text{ と }\blkref{definition_of_cc}\text{ の積：}(-1_{\mathbb R}, 0_{\mathbb R})(rr, 0_{\mathbb R}) = (-(rr), 0_{\mathbb R})\bigr)\\
 &= -\bigl((r\,r)_{\mathbb C}\bigr)
@@ -5935,8 +5941,10 @@ t\,t
 &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\text{ を 2 箇所へ同時適用}\bigr)\\
 &= (4_{\mathbb R})_{\mathbb C}\,(s\,s)_{\mathbb C}
 &&\bigl(\because\ \mathbb{R}\text{ で }2\cdot 2 = 4\bigr)\\
+&= (4_{\mathbb R})_{\mathbb C}\,\bigl(s^2\bigr)_{\mathbb C}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to s)\ \text{を右辺から左辺へ}\bigr)\\
 &= (4_{\mathbb R})_{\mathbb C}\,\bigl((M_{\mathrm{col}})_{\mathbb R}\bigr)_{\mathbb C}
-&&\bigl(\because\ s\,s = s^2 = (M_{\mathrm{col}})_{\mathbb R}\text{（}\blkref{definition_of_sqrt_r_positive}\text{。}s^2 := s\,s\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to (M_{\mathrm{col}})_{\mathbb R} \in \mathbb{R}_{\ge 0})\bigr)\\
 &= 4_{\mathbb C}\,(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ 4_{\mathbb C} := (4_{\mathbb R})_{\mathbb C}\text{、}\blkref{antiperiodic_exp_sum}\text{ の像の記号}\bigr),\\[4pt]
 d_\mu d_\nu
@@ -6226,6 +6234,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
           "散文に畳まれていた反交換子の双線型性の計算を鎖へ開いた。内容と参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。散文の「和についての加法性も分配法則から従う」を anticommutator_of_finite_sums_of_scalar_multiples による係数を残した展開（準備 2）に、反交換子の対称性を def_matrix_anticommutator と matrix_sum_is_commutative の鎖（準備 1）に、δ = 0 の場合の散文を準備 3 の鎖に、abs_basic_properties が述べていない |−z| = |z|・|z̄| = |z| を def_complex_conjugate と definition_of_cc の積・abs_basic_properties (1) の成分の鎖に、ℂ の符号と逆元の規則を準備 4 の鎖にした。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き（def_check_fermi の √M_col・r・2 を包含の像 σ・ρ・2_C で読む）、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I と O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備 5 の二乗をその場の |a_μ|^2 := |a_μ||a_μ|・s^2 := ss から def_power_of_real_number の冪（m = 2）に替えた（記号の濫用の解消）。b_μ b_ν の鎖は r = |a_μ| の行と square_of_real_number_is_product の行に割り（7 行 → 8 行）、t t の鎖は ss = s^2 を square_of_real_number_is_product で引く行と definition_of_sqrt_r_positive の y^2 = x の行に割った（6 行 → 7 行）。準備の s の性質も s^2 = (M_col)_ℝ と書いた。",
       ],
     },
   },

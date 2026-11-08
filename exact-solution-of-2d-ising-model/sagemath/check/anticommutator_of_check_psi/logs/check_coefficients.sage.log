@@ -8,12 +8,14 @@ PASS b_μ b_ν 第 4→5 行（関係 []）
 PASS b_μ b_ν 第 5→6 行（関係 []）
 PASS b_μ b_ν 第 6→7 行（関係 []）
 PASS b_μ b_ν 第 7→8 行（関係 []）
+PASS b_μ b_ν 第 8→9 行（関係 []）
 PASS t t 第 1→2 行（関係 []）
 PASS t t 第 2→3 行（関係 []）
 PASS t t 第 3→4 行（関係 []）
-PASS t t 第 4→5 行（関係 ['sq']）
-PASS 対照 t t 第 4→5 行は関係なしでは一致しない
-PASS t t 第 5→6 行（関係 []）
+PASS t t 第 4→5 行（関係 []）
+PASS t t 第 5→6 行（関係 ['sq']）
+PASS 対照 t t 第 5→6 行は関係なしでは一致しない
+PASS t t 第 6→7 行（関係 []）
 PASS d_μ d_ν 第 1→2 行（関係 []）
 PASS d_μ d_ν 第 2→3 行（関係 ['per', 'rel2']）
 PASS 対照 d_μ d_ν 第 2→3 行は関係なしでは一致しない
@@ -66,5 +68,5 @@ M=3 済み
 M=4 済み
 M=5 済み
 M=6 済み
--- anticommutator_of_check_psi: 準備 4・準備 5 の係数の鎖: 1670/1670 PASS
+-- anticommutator_of_check_psi: 準備 4・準備 5 の係数の鎖: 1672/1672 PASS
 RESULT: PASS
