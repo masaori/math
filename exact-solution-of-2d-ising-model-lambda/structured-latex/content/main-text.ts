@@ -67243,9 +67243,10 @@ h_Z(s,c)+h_Z(s-1,c)
 &&\bigl(\because\ c<M\le\operatorname{col}(e)\text{（全ての }e\in Z\text{）}\bigr)
 \end{aligned}`),
                           paragraph([
-                            "高さは ", math(String.raw`\{0,1\}`), " に属するので ",
-                            math(String.raw`h_Z(s,c)=h_Z(s-1,c)`), " である。整数の後者関係を両方向に反復すると、",
+                            "高さは ", math(String.raw`\{0,1\}`), " に属するので、",
                           ]),
+                          displayMath(String.raw`h_Z(s,c)=h_Z(s-1,c)\qquad\bigl(\because\ h_Z(s,c)+h_Z(s-1,c)\equiv0\pmod2\text{ と高さの二値性}\bigr)`),
+                          paragraph(["整数の後者関係を両方向に反復すると、"]),
                           displayMath(String.raw`h_Z(r,c)=h_Z(s,c)\quad(r,s\in\mathbb Z)\qquad\bigl(\because\ \mathbb Z\text{ 上の隣接値の一致を帰納法で反復}\bigr)`),
                           paragraph([
                             "有限な ", math(String.raw`R_Z`), " の外から ", math(String.raw`s\in\mathbb Z\setminus R_Z`),
@@ -67257,6 +67258,58 @@ h_Z(r,c)
 &&\bigl(\because\ \text{上で示した行方向の定数性}\bigr)\\
 &=0
 &&\bigl(\because\ \blkref{claim_plane_dual_ray_height_finite_row_support}\bigr)
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_finite_column_support",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さ一の列は有限個に限られる" },
+                        labels: ["claim_plane_dual_ray_height_finite_column_support"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_column_support",
+                          "Ising2DLambda.NecSuf.KacWard.binaryHeight_column_support",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_column_support_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-column-support"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " の各頂点に接する ", math(String.raw`Z`),
+                            " の辺の本数が偶数であるとする。列座標の有限集合 ",
+                            math(String.raw`C_Z\subset\mathbb Z`), " が存在し、任意の ",
+                            math(String.raw`r,c\in\mathbb Z`), " に対し高さ（",
+                            ref("def_plane_dual_ray_height"), "）が一なら ",
+                            math(String.raw`c\in C_Z`), " である。",
+                          ]),
+                          displayMath(String.raw`h_Z(r,c)=1\Longrightarrow c\in C_Z`),
+                        ],
+                        proof: [
+                          paragraph([
+                            math(String.raw`Z=\varnothing`), " なら ", ref("def_plane_dual_ray_height"),
+                            " より全セルの高さは零であり、", math(String.raw`C_Z:=\varnothing`),
+                            " と置ける。以下、", math(String.raw`Z\ne\varnothing`), " とする。有限集合 ",
+                            math(String.raw`Z`), " の列座標の最小値と最大値をそれぞれ ",
+                            math(String.raw`a,b\in\mathbb Z`), " とし、",
+                            math(String.raw`C_Z:=\{c\in\mathbb Z\mid a\le c\le b\}`),
+                            " と置く。この整数区間は有限である。",
+                          ]),
+                          paragraph([
+                            "任意の ", math(String.raw`r,c\in\mathbb Z`), " で ",
+                            math(String.raw`h_Z(r,c)=1`), " とする。もし ",
+                            math(String.raw`c<a`), " なら左端の零（",
+                            ref("claim_plane_dual_ray_height_zero_left"),
+                            "）に反する。もし ", math(String.raw`b\le c`),
+                            " なら右端の零（", ref("claim_plane_dual_ray_height_zero_right"),
+                            "）に反する。よって",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+a&\le c&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_zero_left}\bigr)\\
+c&<b&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_zero_right}\bigr)\\
+c&\in C_Z&&\bigl(\because\ C_Z=\{d\in\mathbb Z\mid a\le d\le b\}\bigr)
 \end{aligned}`),
                         ],
                       },
