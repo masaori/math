@@ -2837,6 +2837,12 @@ targets=(
   Ising2D.physicalV1halfR_apply_configBasisIso
   Ising2D.physicalV1halfC_apply_configBasisIso
   Ising2D.physicalV1halfR_apply_configBasisIso_self_pos
+  Ising2D.sameSiteSpinProductSum
+  Ising2D.secondTransferEntry
+  Ising2D.secondTransferEntry_pos
+  Ising2D.V2_apply_configBasisIso_eq_secondTransferEntry
+  Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne
+  Ising2D.physicalV1halfC_apply_mul_V2_apply_of_ne
   Ising2D.physicalV2R_apply_configBasisIso
   Ising2D.physicalV1halfR_offDiag
   Ising2D.physicalV2R_apply_configBasisIso_pos

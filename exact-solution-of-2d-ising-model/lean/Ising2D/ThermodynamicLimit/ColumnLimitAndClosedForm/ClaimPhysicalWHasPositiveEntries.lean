@@ -20,7 +20,10 @@
 | Step 1 の `B_{kk}` の 7 行 | `physicalV1halfC_apply_configBasisIso_self` |
 | Step 1 の `B` の成分を `μ = μ'` かどうかで一つにまとめた形（人手に無い。いまの Step 3 の証明（実行列で計算する）が使う） | `physicalV1halfC_apply_configBasisIso`（`B_{kk}`・`B_{pq}` の鎖と `ι` の単射性から導く）・`physicalV1halfR_apply_configBasisIso`（その実成分。前者から導く） |
 | 実成分の対角成分が正（人手に無い。いまの Step 3 の証明（実行列で計算する）が使う形） | `physicalV1halfR_apply_configBasisIso_self_pos`（`real_exp_positive`） |
-| Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
+| 準備の `e(μ,μ') := ∑_m μ(m)μ'(m)`・`v(μ,μ') := exp(K_2e(μ,μ'))`・`v(μ,μ') > 0`（`real_exp_positive`） | `sameSiteSpinProductSum`・`secondTransferEntry`・`secondTransferEntry_pos` |
+| Step 2 の `(V_2)_{kl}` の 3 行 | `V2_apply_configBasisIso_eq_secondTransferEntry`（1 行目の `config_numbering_equals_kronecker_numbering` は Lean の `V2` が添字 `ι(μ)` で定義されているので段は無い。2 行目は `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）） |
+| Step 2 の実成分（人手に無い。いまの Step 3 の証明（実行列で計算する）が使う形） | `physicalV2R_apply_configBasisIso`（Step 2 の鎖から導く）・`physicalV2R_apply_configBasisIso_pos`（`secondTransferEntry_pos`） |
+| Step 3 の補助の鎖 2 本（`t ≠ l` で `(BV_2)_{kt}B_{tl} = 0_ℂ`、`s ≠ k` で `B_{ks}(V_2)_{sl} = 0_ℂ`） | `physicalV1halfC_mul_V2_apply_mul_apply_of_ne`・`physicalV1halfC_apply_mul_V2_apply_of_ne`（いまの Step 3 の証明はまだ使わない。(cl2e) で主の鎖から引く） |
 | Step 3 の 1〜4 行目（`W` の定義、行列の積の定義、`j ≠ ι(μ)` の項が `0`、`k ≠ ι(μ')` の項が `0`） | `physicalSymTransferR_apply_configBasisIso` の式変形の各行。3・4 行目の「Step 1 の対角性」は `physicalV1halfR_offDiag`（Step 1 の補題の `μ ≠ μ'` の場合） |
 | Step 3 の「3 つの因子はいずれも正」 | `W_has_positive_entries_physical`（実成分で組んだ `W` の `ι(μ), ι(μ')` 成分が正） |
 | 主張「`W_{ι(μ),ι(μ')} > 0`、すなわち `W_{ι(μ),ι(μ')} = w_ℂ` を満たす `w ∈ ℝ_{>0}` が在る」（`W` は複素行列） | `W_has_positive_entries` |
@@ -36,8 +39,9 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 `W_has_positive_entries_physical` と `physicalSymTransferC_eq_map` で閉じる。人手の Step 1〜3 は複素行列のまま
 `B_{kk} = b(μ)_ℂ`・`(V_2)_{kl} = v(μ,μ')_ℂ`・`W_{kl} = ((b(μ)v(μ,μ'))b(μ'))_ℂ` と計算し、`w > 0` を
 `finite_product_of_positive_reals_is_positive`（`m := 3`）で示すので、この証明はまだ人手と 1 対 1 ではない
-（状態台帳の (cl2d)・(cl2e) で人手の鎖に組み直す。Step 1 の `D`・`X`・`B` の成分の鎖は置いてあり、
-`physicalV1halfC_apply_configBasisIso` を通していまの Step 3 の証明から使われているが、Step 3 はまだ実行列で計算している）。
+（状態台帳の (cl2e) で人手の鎖に組み直す。Step 1 の `D`・`X`・`B` の成分の鎖と Step 2 の鎖は置いてあり、
+`physicalV1halfC_apply_configBasisIso`・`physicalV2R_apply_configBasisIso` を通していまの Step 3 の証明から使われているが、
+Step 3 はまだ実行列で計算している。Step 3 の補助の鎖 2 本も置いてあるが、まだ使われていない）。
 人手の「言い換えの形」（すべての `k, l` について `W_kl > 0`）は
 `ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries.lean` の `W_has_positive_entries_as_inclusion` で、
 人手の最後の段どおり `ι` の全射性で `W_has_positive_entries` から導く。
@@ -229,22 +233,82 @@ theorem physicalV1halfR_apply_configBasisIso_self_pos (K1 : ℝ) (μ : SpinConf 
   rw [physicalV1halfR_apply_configBasisIso, if_pos rfl]
   exact real_exp_positive _                                   -- `real_exp_positive`
 
-/-! ## Step 2: `V_2` の成分は正 -/
+/-! ## 準備: `e(μ,μ')`・`v(μ,μ')` -/
+
+/-- 人手の準備の `e(μ,μ') := ∑_{m=1}^{M_col} μ(m)μ'(m) ∈ ℝ`（`def_finite_sum_of_real_numbers` の和）。 -/
+noncomputable def sameSiteSpinProductSum (μ μ' : SpinConf M) : ℝ :=
+  ∑ m : Fin M, (μ m : ℝ) * (μ' m : ℝ)
+
+/-- 人手の準備の `v(μ,μ') := exp(K_2 e(μ,μ')) ∈ ℝ`（`exp` は実数の指数関数）。 -/
+noncomputable def secondTransferEntry (K2 : ℝ) (μ μ' : SpinConf M) : ℝ :=
+  Real.exp (K2 * sameSiteSpinProductSum μ μ')
+
+/-- 人手の準備の `v(μ,μ') > 0`（`real_exp_positive`）。 -/
+theorem secondTransferEntry_pos (K2 : ℝ) (μ μ' : SpinConf M) :
+    secondTransferEntry K2 μ μ' > 0 :=
+  real_exp_positive _                                         -- `real_exp_positive`
+
+/-! ## Step 2: `(V_2)_{kl} = v(μ,μ')_ℂ` -/
+
+/-- **人手 Step 2 の鎖**（`k := ν(ι(μ))`、`l := ν(ι(μ'))`）: `(V_2)_{kl} = v(μ,μ')_ℂ`。
+
+人手の 3 行のうち 1 行目（`config_numbering_equals_kronecker_numbering` で `(V_2)_{kl}` を `(V_2)_{ord(μ),ord(μ')}` と読む）は、
+Lean の `V2` が添字 `ι(μ)` で定義されている（`DefinitionTransferMatrix.lean` の冒頭。人手の成分 `A_{ord(μ),ord(μ')}` は
+`config_numbering_equals_kronecker_numbering`（`ord = ν ∘ ι`）により Lean の `A (ι μ) (ι μ')` である）ので、
+添字の読み方であって段は無い。 -/
+theorem V2_apply_configBasisIso_eq_secondTransferEntry (K2 : ℝ) (μ μ' : SpinConf M) :
+    V2 M K2 (configBasisIso M μ) (configBasisIso M μ')
+      = ((secondTransferEntry K2 μ μ' : ℝ) : ℂ) :=
+  calc V2 M K2 (configBasisIso M μ) (configBasisIso M μ')
+      = ((Real.exp (K2 * ∑ m : Fin M, (μ m : ℝ) * (μ' m : ℝ)) : ℝ) : ℂ) :=
+        V2_apply_configBasisIso K2 μ μ'                       -- `def_transfer_matrix`
+    _ = ((secondTransferEntry K2 μ μ' : ℝ) : ℂ) := rfl       -- `e(μ,μ')` と `v(μ,μ')` の定義
+
+/-! ## Step 3 の補助の鎖: 和の一つを除く項は `0_ℂ` -/
+
+/-- **人手 Step 3 の補助の鎖の 1 本目**（`t ≠ l`、`k := ν(ι(μ))`、`l := ν(ι(μ'))`）:
+`(BV_2)_{kt}B_{tl} = 0_ℂ`（`B := V_1^{1/2}`）。
+
+`complex_times_zero_is_zero` は具体版が無く `mul_zero`（既存の慣行どおり）。 -/
+theorem physicalV1halfC_mul_V2_apply_mul_apply_of_ne (K1 K2 : ℝ) (μ μ' : SpinConf M)
+    {t : Conf M} (htl : t ≠ configBasisIso M μ') :
+    (physicalV1halfC M K1 * V2 M K2) (configBasisIso M μ) t * physicalV1halfC M K1 t (configBasisIso M μ')
+      = 0 :=
+  calc (physicalV1halfC M K1 * V2 M K2) (configBasisIso M μ) t * physicalV1halfC M K1 t (configBasisIso M μ')
+      = (physicalV1halfC M K1 * V2 M K2) (configBasisIso M μ) t * 0 := by
+        rw [physicalV1halfC_apply_of_ne K1 htl]               -- Step 1 の `B_{tl} = 0_ℂ`
+    _ = 0 := mul_zero _                                       -- `complex_times_zero_is_zero`
+
+/-- **人手 Step 3 の補助の鎖の 2 本目**（`s ≠ k`、`k := ν(ι(μ))`、`l := ν(ι(μ'))`）:
+`B_{ks}(V_2)_{sl} = 0_ℂ`（`B := V_1^{1/2}`）。
+
+`complex_zero_times_is_zero` は具体版が無く `zero_mul`（既存の慣行どおり）。 -/
+theorem physicalV1halfC_apply_mul_V2_apply_of_ne (K1 K2 : ℝ) (μ μ' : SpinConf M)
+    {s : Conf M} (hsk : s ≠ configBasisIso M μ) :
+    physicalV1halfC M K1 (configBasisIso M μ) s * V2 M K2 s (configBasisIso M μ') = 0 :=
+  calc physicalV1halfC M K1 (configBasisIso M μ) s * V2 M K2 s (configBasisIso M μ')
+      = 0 * V2 M K2 s (configBasisIso M μ') := by
+        rw [physicalV1halfC_apply_of_ne K1 (Ne.symm hsk)]     -- Step 1 の `B_{ks} = 0_ℂ`
+    _ = 0 := zero_mul _                                       -- `complex_zero_times_is_zero`
+
+/-! ## Step 2 の実成分（いまの Step 3 の証明（実行列で計算する）が使う形） -/
 
 /-- 人手 Step 2 の `V_2` の実成分（`ι` による番号付け）。
-`def_transfer_matrix` の `V_2` の成分 `V2_apply_configBasisIso` を `physicalV2C_eq_map` で実成分の埋め込みと読み、
-`ℝ → ℂ` の単射性で実数の等式に移す。 -/
+Step 2 の鎖 `V2_apply_configBasisIso_eq_secondTransferEntry` の左辺を `physicalV2C_eq_map` で実成分の埋め込みと読み、
+`ℝ → ℂ` の単射性で実数の等式に移す（右辺は `v(μ,μ')` の定義の展開）。 -/
 theorem physicalV2R_apply_configBasisIso (K2 : ℝ) (μ μ' : SpinConf M) :
     physicalV2R M K2 (configBasisIso M μ) (configBasisIso M μ')
       = Real.exp (K2 * ∑ m : Fin M, (μ m : ℝ) * (μ' m : ℝ)) := by
   apply Complex.ofReal_injective
-  rw [← V2_apply_configBasisIso, physicalV2C_eq_map K2, Matrix.map_apply, Complex.ofRealHom_eq_coe]
+  change _ = ((secondTransferEntry K2 μ μ' : ℝ) : ℂ)
+  rw [← V2_apply_configBasisIso_eq_secondTransferEntry, physicalV2C_eq_map K2, Matrix.map_apply,
+    Complex.ofRealHom_eq_coe]
 
-/-- 人手 Step 2 の「指数は実数なので値は正」（実指数関数の正値性）。 -/
+/-- 人手の準備の `v(μ,μ') > 0` を `V_2` の実成分で述べた形（`secondTransferEntry_pos`）。 -/
 theorem physicalV2R_apply_configBasisIso_pos (K2 : ℝ) (μ μ' : SpinConf M) :
     0 < physicalV2R M K2 (configBasisIso M μ) (configBasisIso M μ') := by
   rw [physicalV2R_apply_configBasisIso]
-  exact Real.exp_pos _
+  exact secondTransferEntry_pos K2 μ μ'
 
 /-! ## Step 3: `W` の成分は三つの正の数の積 -/
 
