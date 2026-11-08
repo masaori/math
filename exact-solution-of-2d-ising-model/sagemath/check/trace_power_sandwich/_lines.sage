@@ -21,6 +21,14 @@ def le(a, b, what, strict=False):
     n_le += 1
 
 
+def rpow(a, m):
+    """def_power_of_real_number: a^0 := 1、a^{m+1} := a^m a。二乗の行は冪をこれで組み、積の形とは square_of_real_number_is_product の行で行き来する。"""
+    p = a.parent()(1)
+    for _ in range(m):
+        p = p * a
+    return p
+
+
 def chain_eq(L, what):
     for i, (s, t) in enumerate(zip(L, L[1:])):
         eq(s, t, f"{what} {i + 1}→{i + 2} 行目")
@@ -48,29 +56,46 @@ def check_psd(P, Pn, n, z, what):
         return
     j0 = next(j for j in rng if z[j] != 0)
     nz = norm_exact(z)
-    L = [nz**2, sum(abs(AA(z[j]))**2 for j in rng)]
+    L = [rpow(nz, 2), sum(rpow(abs(AA(z[j])), 2) for j in rng)]
     chain_eq(L, f"{what}: ‖z‖^2 = Σ|z_j|^2")
-    le(abs(AA(z[j0]))**2, L[-1], f"{what}: Σ|z_j|^2 ≥ |z_j0|^2")
-    le(0, abs(AA(z[j0]))**2, f"{what}: |z_j0|^2 > 0", strict=True)
+    le(rpow(abs(AA(z[j0])), 2), L[-1], f"{what}: Σ|z_j|^2 ≥ |z_j0|^2")
+    # |z_j0|^2 > 0: square_of_real_number_is_product（r → |z_j0|）で正の実数の積
+    eq(rpow(abs(AA(z[j0])), 2), abs(AA(z[j0])) * abs(AA(z[j0])), f"{what}: |z_j0|^2 = |z_j0||z_j0|")
+    le(0, abs(AA(z[j0])), f"{what}: |z_j0| > 0", strict=True)
+    le(0, rpow(abs(AA(z[j0])), 2), f"{what}: |z_j0|^2 > 0", strict=True)
+    # ‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0（square_of_real_number_is_product（r → 0））
+    chain_eq([rpow(AA(0), 2), AA(0) * AA(0), AA(0)], f"{what}: 0^2 = 0·0 = 0")
     le(0, nz, f"{what}: ‖z‖ > 0", strict=True)
     w = vector(AA, [nz**-1 * z[i] for i in rng])
     for i in rng:
         chain_eq([AA(z[i]), nz * (nz**-1 * z[i]), nz * w[i]], f"{what}: z_i = ‖z‖w_i")
-    s1 = sum(abs(w[i])**2 for i in rng)
-    s2 = sum((nz**-1 * z[i])**2 for i in rng)
-    s3 = sum((nz**-1)**2 * AA(z[i])**2 for i in rng)
-    s4 = (nz**-1)**2 * sum(AA(z[i])**2 for i in rng)
-    s5 = (nz**-1)**2 * sum(abs(AA(z[i]))**2 for i in rng)
-    s6 = (nz**-1)**2 * nz**2
-    s7 = (nz**-1 * nz)**2
-    L = [norm_exact(w), s1.sqrt(), s2.sqrt(), s3.sqrt(), s4.sqrt(), s5.sqrt(), s6.sqrt(), s7.sqrt(), AA(1).sqrt(), AA(1)]
+    # ‖w‖ の 14 行の鎖。二乗は rpow（def_power_of_real_number の冪）で組む
+    zi = [AA(z[i]) for i in rng]
+    iz = nz**-1
+    s1 = sum(rpow(abs(w[i]), 2) for i in rng)
+    s2 = sum(rpow(iz * zi[i], 2) for i in rng)
+    s2a = sum((iz * zi[i]) * (iz * zi[i]) for i in rng)                 # square_of_real_number_is_product（r → ‖z‖^{-1}z_i）
+    s2b = sum((iz * iz) * (zi[i] * zi[i]) for i in rng)                 # 乗法の交換則・結合則
+    s3 = sum(rpow(iz, 2) * rpow(zi[i], 2) for i in rng)                 # 同（r → ‖z‖^{-1}, z_i）を右辺から左辺へ
+    s4 = rpow(iz, 2) * sum(rpow(zi[i], 2) for i in rng)
+    s5 = rpow(iz, 2) * sum(rpow(abs(zi[i]), 2) for i in rng)
+    s6 = rpow(iz, 2) * rpow(nz, 2)
+    s6a = (iz * iz) * (nz * nz)                                          # square_of_real_number_is_product（r → ‖z‖^{-1}, ‖z‖）
+    s6b = (iz * nz) * (iz * nz)                                          # 乗法の交換則・結合則
+    s7 = rpow(iz * nz, 2)                                                # 同（r → ‖z‖^{-1}‖z‖）を右辺から左辺へ
+    s8 = rpow(AA(1), 2)                                                  # ‖z‖^{-1}‖z‖ = 1
+    eq(iz * nz, 1, f"{what}: ‖z‖^{-1}‖z‖ = 1")
+    L = [norm_exact(w), s1.sqrt(), s2.sqrt(), s2a.sqrt(), s2b.sqrt(), s3.sqrt(), s4.sqrt(), s5.sqrt(),
+         s6.sqrt(), s6a.sqrt(), s6b.sqrt(), s7.sqrt(), s8.sqrt(), AA(1).sqrt(), AA(1)]
+    assert len(L) == 15
     chain_eq(L, f"{what}: ‖w‖ の鎖")
     PnA = Pn.change_ring(AA)
     L = [bil(z, Pn, z),
          sum(sum(z[i] * Pn[i, j] * z[j] for j in rng) for i in rng),
          sum(sum((nz * w[i]) * PnA[i, j] * (nz * w[j]) for j in rng) for i in rng),
-         nz**2 * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),
-         nz**2 * bil(w, PnA, w)]
+         rpow(nz, 2) * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),
+         rpow(nz, 2) * bil(w, PnA, w)]
+    eq(nz * nz, rpow(nz, 2), f"{what}: ‖z‖‖z‖ = ‖z‖^2（square_of_real_number_is_product を右辺から左辺へ）")
     chain_eq(L, f"{what}: z^⊤(W_ℝ)^nz の鎖")
     # moment_log_convexity の正値性（x → w、k → n）。w は AA の単位ベクトルなので、その主張の値を直接比べる
     le(0, bil(w, PnA, w), f"{what}: w^⊤(W_ℝ)^nw > 0", strict=True)
@@ -78,7 +103,7 @@ def check_psd(P, Pn, n, z, what):
 
 
 def check_entry_bound(Pn, x, k, l, what):
-    """【(W_ℝ)^n の成分の評価】v_i := x_l(e_k)_i − x_k(e_l)_i の 7 行と、移項した不等式。"""
+    """【(W_ℝ)^n の成分の評価】v_i := x_l(e_k)_i − x_k(e_l)_i の 8 行と、移項した不等式。"""
     d = Pn.nrows()
     rng = range(d)
     def e(p):
@@ -89,16 +114,20 @@ def check_entry_bound(Pn, x, k, l, what):
     L = [bil(v, Pn, v),
          sum(sum(v[i] * Pn[i, j] * v[j] for j in rng) for i in rng),
          sum(sum((x[l] * ek[i] - x[k] * el[i]) * Pn[i, j] * (x[l] * ek[j] - x[k] * el[j]) for j in rng) for i in rng),
-         x[l]**2 * sum(sum(ek[i] * Pn[i, j] * ek[j] for j in rng) for i in rng)
+         (x[l] * x[l]) * sum(sum(ek[i] * Pn[i, j] * ek[j] for j in rng) for i in rng)
          - x[l] * x[k] * sum(sum(ek[i] * Pn[i, j] * el[j] for j in rng) for i in rng)
          - x[k] * x[l] * sum(sum(el[i] * Pn[i, j] * ek[j] for j in rng) for i in rng)
-         + x[k]**2 * sum(sum(el[i] * Pn[i, j] * el[j] for j in rng) for i in rng),
-         x[l]**2 * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[l, k] + x[k]**2 * Pn[l, l],
-         x[l]**2 * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[k, l] + x[k]**2 * Pn[l, l],
-         x[l]**2 * Pn[k, k] - 2 * x[k] * Pn[k, l] * x[l] + x[k]**2 * Pn[l, l]]
+         + (x[k] * x[k]) * sum(sum(el[i] * Pn[i, j] * el[j] for j in rng) for i in rng),
+         rpow(x[l], 2) * sum(sum(ek[i] * Pn[i, j] * ek[j] for j in rng) for i in rng)
+         - x[l] * x[k] * sum(sum(ek[i] * Pn[i, j] * el[j] for j in rng) for i in rng)
+         - x[k] * x[l] * sum(sum(el[i] * Pn[i, j] * ek[j] for j in rng) for i in rng)
+         + rpow(x[k], 2) * sum(sum(el[i] * Pn[i, j] * el[j] for j in rng) for i in rng),
+         rpow(x[l], 2) * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[l, k] + rpow(x[k], 2) * Pn[l, l],
+         rpow(x[l], 2) * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[k, l] + rpow(x[k], 2) * Pn[l, l],
+         rpow(x[l], 2) * Pn[k, k] - 2 * x[k] * Pn[k, l] * x[l] + rpow(x[k], 2) * Pn[l, l]]
     le(0, L[0], f"{what}: 0 ≤ v^⊤(W_ℝ)^nv k={k}, l={l}")
     chain_eq(L, f"{what}: 【(W_ℝ)^n の成分の評価】 k={k}, l={l}")
-    le(2 * x[k] * Pn[k, l] * x[l], x[l]**2 * Pn[k, k] + x[k]**2 * Pn[l, l], f"{what}: 移項した不等式 k={k}, l={l}")
+    le(2 * x[k] * Pn[k, l] * x[l], rpow(x[l], 2) * Pn[k, k] + rpow(x[k], 2) * Pn[l, l], f"{what}: 移項した不等式 k={k}, l={l}")
 
 
 def check_unit_vector_bound(P, x, nmax, what):
@@ -113,9 +142,10 @@ def check_unit_vector_bound(P, x, nmax, what):
         eq(pw[k], P**k, f"{what}: def_exp (1) の冪 k={k}")
         le(0, m[k], f"{what}: moment_log_convexity の m_k > 0 k={k}", strict=True)
         if k >= 1 and k + 1 <= nmax + 1:
-            le(m[k]**2, m[k - 1] * m[k + 1], f"{what}: moment_log_convexity の対数凸性 k={k}")
-    # Σ x_kx_k = Σ|x_k|^2 = ‖x‖^2 = 1
-    chain_eq([sum(x[k]**2 for k in rng), sum(abs(AA(x[k]))**2 for k in rng), norm_exact(x)**2, AA(1)], f"{what}: Σx_k^2 の鎖")
+            le(rpow(m[k], 2), m[k - 1] * m[k + 1], f"{what}: moment_log_convexity の対数凸性 k={k}")
+    # Σx_k^2 = Σ|x_k|^2 = ‖x‖^2 = 1^2 = 1（4 行。二乗は rpow）
+    chain_eq([sum(rpow(x[k], 2) for k in rng), sum(rpow(abs(AA(x[k])), 2) for k in rng), rpow(norm_exact(x), 2),
+              rpow(AA(1), 2), AA(1)], f"{what}: Σx_k^2 の鎖")
     # m_0 の鎖（I = I_ℝ の成分は def_real_identity_matrix の 1・0）
     for k in rng:
         for l in rng:
@@ -123,7 +153,7 @@ def check_unit_vector_bound(P, x, nmax, what):
     chain_eq([m[0], bil(x, pw[0], x), bil(x, I, x),
               sum(sum(x[k] * I[k, l] * x[l] for l in rng) for k in rng),
               sum(x[k] * I[k, k] * x[k] for k in rng),
-              sum(x[k] * x[k] for k in rng), sum(x[k]**2 for k in rng), 1], f"{what}: m_0 の鎖")
+              sum(x[k] * x[k] for k in rng), sum(rpow(x[k], 2) for k in rng), 1], f"{what}: m_0 の鎖")
     # m_1 の鎖（(W_ℝ)^1 = W_ℝ は check_varrho_lines の ϱ の鎖。ここでは実数の側の値の一致）
     eq(pw[1], P, f"{what}: (W_ℝ)^1 = W_ℝ")
     chain_eq([m[1], bil(x, pw[1], x), bil(x, P, x)], f"{what}: m_1 の鎖")
@@ -133,12 +163,14 @@ def check_unit_vector_bound(P, x, nmax, what):
         le(m[1] * m[k - 1], m[k], f"{what}: 帰納法の仮定 k={k}")
         le(m[1] * m[k - 1] / m[k - 1], m[k] / m[k - 1], f"{what}: 商の鎖 1 行目 k={k}")
         eq(m[1] * m[k - 1] / m[k - 1], m[1], f"{what}: 商の鎖 2 行目 k={k}")
-        L = [m[k + 1], m[k - 1] * m[k + 1] / m[k - 1], m[k]**2 / m[k - 1], m[k] * (m[k] / m[k - 1]), m[k] * m[1], m[1] * m[(k + 1) - 1]]
+        L = [m[k + 1], m[k - 1] * m[k + 1] / m[k - 1], rpow(m[k], 2) / m[k - 1], (m[k] * m[k]) / m[k - 1],
+             m[k] * (m[k] / m[k - 1]), m[k] * m[1], m[1] * m[(k + 1) - 1]]
         eq(L[0], L[1], f"{what}: 比の鎖 1→2 k={k}")
         le(L[2], L[1], f"{what}: 比の鎖 2→3 k={k}")
         eq(L[2], L[3], f"{what}: 比の鎖 3→4 k={k}")
-        le(L[4], L[3], f"{what}: 比の鎖 4→5 k={k}")
-        eq(L[4], L[5], f"{what}: 比の鎖 5→6 k={k}")
+        eq(L[3], L[4], f"{what}: 比の鎖 4→5 k={k}")
+        le(L[5], L[4], f"{what}: 比の鎖 5→6 k={k}")
+        eq(L[5], L[6], f"{what}: 比の鎖 6→7 k={k}")
     # m_p ≥ m_1^p
     chain_eq([m[0], 1, m[1]**0], f"{what}: p = 0 の段")
     for p in range(0, nmax):
@@ -154,10 +186,10 @@ def check_unit_vector_bound(P, x, nmax, what):
         L = [m[n],
              sum(sum(x[k] * A[k, l] * x[l] for l in rng) for k in rng),
              QQ(1) / 2 * sum(sum(2 * x[k] * A[k, l] * x[l] for l in rng) for k in rng),
-             QQ(1) / 2 * sum(sum(x[l]**2 * A[k, k] + x[k]**2 * A[l, l] for l in rng) for k in rng),
-             QQ(1) / 2 * (sum(sum(x[l]**2 * A[k, k] for l in rng) for k in rng) + sum(sum(x[k]**2 * A[l, l] for l in rng) for k in rng)),
-             QQ(1) / 2 * (sum(A[k, k] * sum(x[l]**2 for l in rng) for k in rng) + sum(x[k]**2 * sum(A[l, l] for l in rng) for k in rng)),
-             QQ(1) / 2 * (sum(A[k, k] for k in rng) * sum(x[l]**2 for l in rng) + sum(x[k]**2 for k in rng) * sum(A[l, l] for l in rng)),
+             QQ(1) / 2 * sum(sum(rpow(x[l], 2) * A[k, k] + rpow(x[k], 2) * A[l, l] for l in rng) for k in rng),
+             QQ(1) / 2 * (sum(sum(rpow(x[l], 2) * A[k, k] for l in rng) for k in rng) + sum(sum(rpow(x[k], 2) * A[l, l] for l in rng) for k in rng)),
+             QQ(1) / 2 * (sum(A[k, k] * sum(rpow(x[l], 2) for l in rng) for k in rng) + sum(rpow(x[k], 2) * sum(A[l, l] for l in rng) for k in rng)),
+             QQ(1) / 2 * (sum(A[k, k] for k in rng) * sum(rpow(x[l], 2) for l in rng) + sum(rpow(x[k], 2) for k in rng) * sum(A[l, l] for l in rng)),
              QQ(1) / 2 * (T * 1 + 1 * T),
              T]
         eq(L[0], L[1], f"{what}: m_n の鎖 1→2 n={n}")

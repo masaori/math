@@ -3234,7 +3234,7 @@ a+b+1 &= p+(p+1)+1
 &\geq |z_{j_0}|^2
 &&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (a_j \to |z_j|^2,\ k \to j_0)\bigr)\\
 &>0
-&&\bigl(\because\ z_{j_0} \neq 0\ \text{なので}\ |z_{j_0}| > 0\ \text{で、}\blkref{def_power_of_real_number}\ \text{で}\ |z_{j_0}|^2 = (|z_{j_0}|^0|z_{j_0}|)|z_{j_0}| = |z_{j_0}|\,|z_{j_0}|\ \text{は正の実数の積}\bigr)
+&&\bigl(\because\ z_{j_0} \neq 0\ \text{なので}\ |z_{j_0}| > 0\ \text{で、}\blkref{square_of_real_number_is_product}\ (r \to |z_{j_0}|)\ \text{の}\ |z_{j_0}|^2 = |z_{j_0}|\,|z_{j_0}|\ \text{は正の実数の積}\bigr)
 \end{aligned}`),
       paragraph([
         "なので、",
@@ -3246,9 +3246,15 @@ a+b+1 &= p+(p+1)+1
         "（",
         math(String.raw`\|z\| = 0`),
         " なら ",
-        math(String.raw`\|z\|^2 = 0^2 = 0`),
+        math(String.raw`\|z\|^2 = 0^2 = 0\cdot 0 = 0`),
         "（",
-        ref("def_power_of_real_number"),
+        ref("square_of_real_number_is_product"),
+        "（",
+        math(String.raw`r \to 0`),
+        "）と ",
+        math(String.raw`\mathbb{R}`),
+        " の積 ",
+        math(String.raw`0\cdot 0 = 0`),
         "）となり ",
         math(String.raw`\|z\|^2 > 0`),
         " に反する）から ",
@@ -3269,20 +3275,30 @@ a+b+1 &= p+(p+1)+1
 &&\bigl(\because\ \blkref{def_matrix_norm}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ w_i := \|z\|^{-1}z_i\ \text{と、}\blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
+&=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)\bigl(\|z\|^{-1}z_i\bigr)}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1}z_i)\ \text{を各項へ同時に適用}\bigr)\\
+&=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\|z\|^{-1}\bigr)(z_iz_i)}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\bigr)^2z_i^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ (st)^2 = (st)(st),\ s^2 = ss,\ t^2 = tt\ \text{と}\ \mathbb{R}\ \text{の乗法の交換則・結合則（}s \to \|z\|^{-1},\ t \to z_i\text{）を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1},\ z_i)\ \text{を右辺から左辺へ、各項へ同時に適用}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}z_i^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to (\|z\|^{-1})^2)\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}|z_i|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\|z\|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \text{上の}\ \|z\|^2 = \sum_{j}|z_j|^2\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\|z\|^{-1}\bigr)\bigl(\|z\|\,\|z\|\bigr)}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1},\ \|z\|)\bigr)\\
+&=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)\bigl(\|z\|^{-1}\|z\|\bigr)}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ t^2 = tt\ (t \to \|z\|^{-1},\ \|z\|,\ \|z\|^{-1}\|z\|)\ \text{と}\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1}\|z\|)\ \text{を右辺から左辺へ}\bigr)\\
+&=\sqrt{1^2}^{\,(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|^{-1}\|z\| = 1\bigr)\\
 &=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|^{-1}\|z\| = 1,\ \blkref{def_power_of_real_number}\ \text{で}\ 1^2 = 1\bigr)\\
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ 1 \geq 0,\ 1^2 = 1\bigr)
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to 1)\ \text{の}\ y \to 1\ \text{が}\ 1 \geq 0\ \text{と、}\blkref{power_of_real_one_is_one}\ (m \to 2)\ \text{の}\ 1^2 = 1\ \text{を満たす}\bigr)
 \end{aligned}`),
       paragraph(["である。よって"]),
       displayMath(String.raw`\begin{aligned}
@@ -3292,7 +3308,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,w_i\bigr)((W_{\mathbb{R}})^n)_{ij}\bigl(\|z\|\,w_j\bigr)
 &&\bigl(\because\ z_i = \|z\|\,w_i\ \text{を各項へ同時に適用}\bigr)\\
 &=\|z\|^2\sum_{i=1}^{d}\sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と}\ \blkref{def_power_of_real_number}\ \text{で}\ \|z\|\,\|z\| = \|z\|^2\ \text{、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則と}\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|)\ \text{を右辺から左辺へ当てた}\ \|z\|\,\|z\| = \|z\|^2\ \text{、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to \|z\|^2)\ \text{を内側と外側の和へ適用}\bigr)\\
 &=\|z\|^2\,\bigl(w^\top (W_{\mathbb{R}})^nw\bigr)
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &>0
@@ -3336,11 +3352,16 @@ z^\top (W_{\mathbb{R}})^nz
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(x_l(e_k)_i - x_k(e_l)_i\bigr)((W_{\mathbb{R}})^n)_{ij}\bigl(x_l(e_k)_j - x_k(e_l)_j\bigr)
 &&\bigl(\because\ v\ \text{の定義}\bigr)\\
+&=(x_lx_l)\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
+ - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
+&\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
+ + (x_kx_k)\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
 &=x_l^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
 &\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  + x_k^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to x_l,\ x_k)\ \text{を右辺から左辺へ}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - x_lx_k\,((W_{\mathbb{R}})^n)_{kl} - x_kx_l\,((W_{\mathbb{R}})^n)_{lk} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
 &&\bigl(\because\ (e_q)_i\ \text{は}\ i = q\ \text{でだけ}\ 1\ \text{でほかは}\ 0\ \text{なので、各二重和で}\ 0\ \text{でない項は一つだけ}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - x_lx_k\,((W_{\mathbb{R}})^n)_{kl} - x_kx_l\,((W_{\mathbb{R}})^n)_{kl} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
@@ -3380,8 +3401,10 @@ z^\top (W_{\mathbb{R}})^nz
 &&\bigl(\because\ x_k \in \mathbb{R}\ \text{なので}\ \blkref{square_of_real_absolute_value}\ \text{の}\ |q|^2 = q^2\ (q \to x_k)\bigr)\\
 &=\|x\|^2
 &&\bigl(\because\ \blkref{def_matrix_norm}\ \text{と}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ \bigl(\sqrt{b}\bigr)^2 = b\bigr)\\
+&=1^2
+&&\bigl(\because\ \|x\| = 1\bigr)\\
 &=1
-&&\bigl(\because\ \|x\| = 1\ \text{と}\ \blkref{def_power_of_real_number}\ \text{で}\ 1^2 = 1\bigr)
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)
 \end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -3397,7 +3420,7 @@ m_0
 &=\sum_{k=1}^{d}x_kx_k
 &&\bigl(\because\ (I_{\mathbb{R}})_{kk} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)\\
 &=\sum_{k=1}^{d}x_k^2
-&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ x_k^{\,2} = (x_k^{\,0}x_k)x_k = x_kx_k\ \text{を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to x_k)\ \text{を右辺から左辺へ、各項へ同時に適用}\bigr)\\
 &=1
 &&\bigl(\because\ \text{上の式変形}\bigr)
 \end{aligned}`),
@@ -3442,8 +3465,10 @@ m_{k+1}
 &&\bigl(\because\ m_{k-1} > 0\ \text{の約分}\bigr)\\
 &\geq\frac{m_k^{\,2}}{m_{k-1}}
 &&\bigl(\because\ \blkref{moment_log_convexity}\ \text{の}\ m_k^{\,2} \leq m_{k-1}m_{k+1}\ \text{と、正の}\ m_{k-1}\ \text{での商は順序を保つ}\bigr)\\
+&=\frac{m_km_k}{m_{k-1}}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to m_k)\bigr)\\
 &=m_k\,\frac{m_k}{m_{k-1}}
-&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ m_k^{\,2} = (m_k^{\,0}m_k)m_k = m_km_k\ \text{と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
 &\geq m_k\,m_1
 &&\bigl(\because\ \text{上の}\ \tfrac{m_k}{m_{k-1}} \geq m_1\ \text{と、正の}\ m_k\ \text{を掛けても順序を保つ}\bigr)\\
 &=m_1m_{(k+1)-1}
@@ -3709,6 +3734,7 @@ T
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 正の実数の冪を名前だけの根拠「冪の定義」で引いていた 7 行と、実数の冪の定義を根拠なしに使っていた箇所（m_1^0 = 1、r^1 = r^0r = r と s^1 = s、s^0 = 1、r^{p+1} = r^pr、c^0 = 1、m_k^2 = m_km_k、|z_{j_0}|^2 > 0、0^2 = 0、(st)^2 = s^2t^2、(‖z‖^{-1})^2‖z‖^2 = (‖z‖^{-1}‖z‖)^2、1^2 = 1 の 2 か所、‖z‖‖z‖ = ‖z‖^2）を def_power_of_real_number の参照にし、各行で定義を当てた等式を書き添えた。主張の段落が t^0 := 1, t^{p+1} := t^pt と冪を定義し直していたのを def_power_of_real_number の参照にした。|t|^2 = t^2 の 3 か所を square_of_real_absolute_value の参照にした。s^{p+1} − r^{p+1} の行の根拠に乗法の交換則を足した。値と手順は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。主張の右辺の 2^{M_col} は 2_ℝ := 1_ℝ + 1_ℝ の def_power_of_real_number の冪 2_ℝ^{M_col} の略記で、ℤ の元 d とは別の元であることを主張の文に書いた（trace_power_upper_bound と同じ書き方）。値と手順は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 上からの評価の鎖の根拠の文「d^2 個の項へ同時に適用」の d^2 は、d ∈ ℤ なので def_power_of_integer の冪としか読めないが、項の数は論証に使わないので数を書かず、「k, l ∈ {1,…,d} の組 (k,l) ごとの項へ同時に適用」とした。値と手順は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗と積の行き来を def_power_of_real_number の冪をその場で開く書き方（x^2 = (x^0x)x = xx、t^2 = tt）から square_of_real_number_is_product を引く行に替え、1^2 = 1 を power_of_real_one_is_one（m → 2）から引いた。1 行に複数の事実をまとめていた行を割った: ‖w‖ の鎖の (‖z‖^{-1}z_i)^2 の行を積へ開く・並べ替える・冪へ戻すの 3 行に、(‖z‖^{-1})^2‖z‖^2 の行を同じく 3 行に、√1 の行を ‖z‖^{-1}‖z‖ = 1 の行と 1^2 = 1 の行に（9 行 → 14 行）、Σx_k^2 の鎖の最後の行を ‖x‖ = 1 の行と 1^2 = 1 の行に（3 行 → 4 行）、m_{k+1} の鎖の m_k^2/m_{k-1} = m_k(m_k/m_{k-1}) を square_of_real_number_is_product の行と結合則の行に（5 行 → 6 行）、【(W_ℝ)^n の成分の評価】の展開の行を、x_lx_l・x_kx_k の積で展開する行と square_of_real_number_is_product で冪へ戻す行に（7 行 → 8 行）。‖z‖ = 0 の場合の ‖z‖^2 = 0^2 = 0 を 0^2 = 0·0 = 0 にし、√1 = 1 の行の 1^2 = 1 を power_of_real_one_is_one から引いた。値と主張は変えていない。",
       ],
     },
   },

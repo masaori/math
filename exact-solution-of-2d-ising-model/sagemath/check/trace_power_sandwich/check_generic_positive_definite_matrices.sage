@@ -69,7 +69,7 @@ def expect_fail(fn, needle):
 Tm = matrix(QQ, [[1, 1], [0, 1]])
 x = vector(QQ, [3/5, 4/5])
 expect_fail(lambda: check_symmetry(Tm**2, "非対称"), "【(W_ℝ)^n の成分の対称性】")
-expect_fail(lambda: check_entry_bound(Tm**2, x, 0, 1, "非対称"), "【(W_ℝ)^n の成分の評価】 k=0, l=1 5→6 行目")
+expect_fail(lambda: check_entry_bound(Tm**2, x, 0, 1, "非対称"), "【(W_ℝ)^n の成分の評価】 k=0, l=1 6→7 行目")
 # 否定コントロール 2: 対称だが正定値でない diag(1, −2) では、z = e_2 で w^⊤Nw > 0 が、x = (3/5, 4/5) で m_1 > 0 が、
 # (k, l) = (0, 1) で 0 ≤ v^⊤Nv（= −2/25）が外れる
 N = diagonal_matrix(QQ, [1, -2])
