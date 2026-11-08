@@ -67206,6 +67206,62 @@ h_Z(r,c)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_dual_ray_height_zero_left",
+                        kind: "claim",
+                        title: { text: "右向き双対路の高さは有限辺集合の左側で零である" },
+                        labels: ["claim_plane_dual_ray_height_zero_left"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeDualRayHeight_zero_left",
+                          "Ising2DLambda.NecSuf.KacWard.finiteRowHeight_zero",
+                          "Ising2DLambda.KacWard.planeDualRayHeight_zero_left_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-dual-ray-height-left-bound"],
+                        statement: [
+                          paragraph([
+                            "有限格子辺集合 ", math(String.raw`Z`), " の各頂点に接する ", math(String.raw`Z`),
+                            " の辺の本数が偶数であるとする。整数 ", math(String.raw`M,r,c\in\mathbb Z`),
+                            " を取り、全ての ", math(String.raw`e\in Z`), " について ",
+                            math(String.raw`M\le\operatorname{col}(e)`), " かつ ", math(String.raw`c<M`),
+                            " とする。右向き双対路の高さ（", ref("def_plane_dual_ray_height"), "）は零である。",
+                          ]),
+                          displayMath(String.raw`\bigl(\forall e\in Z,\ M\le\operatorname{col}(e)\bigr)\land c<M\quad\Longrightarrow\quad h_Z(r,c)=0`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "左端の列 ", math(String.raw`c`), " には横辺 ", math(String.raw`e_{s,c}\in Z`),
+                            " が無い。任意の ", math(String.raw`s\in\mathbb Z`), " に ",
+                            ref("claim_plane_dual_ray_height_vertical_difference"), " を適用すると、",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(s,c)+h_Z(s-1,c)
+&\equiv\mathbf1_{e_{s,c}\in Z}\pmod2
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_vertical_difference}\bigr)\\
+&\equiv0\pmod2
+&&\bigl(\because\ c<M\le\operatorname{col}(e)\text{（全ての }e\in Z\text{）}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "高さは ", math(String.raw`\{0,1\}`), " に属するので ",
+                            math(String.raw`h_Z(s,c)=h_Z(s-1,c)`), " である。整数の後者関係を両方向に反復すると、",
+                          ]),
+                          displayMath(String.raw`h_Z(r,c)=h_Z(s,c)\quad(r,s\in\mathbb Z)\qquad\bigl(\because\ \mathbb Z\text{ 上の隣接値の一致を帰納法で反復}\bigr)`),
+                          paragraph([
+                            "有限な ", math(String.raw`R_Z`), " の外から ", math(String.raw`s\in\mathbb Z\setminus R_Z`),
+                            " を選ぶ（", ref("claim_plane_dual_ray_height_finite_row_support"), "）。すると、",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+h_Z(r,c)
+&=h_Z(s,c)
+&&\bigl(\because\ \text{上で示した行方向の定数性}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_finite_row_support}\bigr)
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",
@@ -86984,7 +87040,7 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           " を ", math(String.raw`A:=(t-\widehat{w})^{M'}\cdot h`), "、",
                           math(String.raw`B:=g`), " として当てられ、",
                         ]),
-                        displayMath(String.raw`(t-\widehat{w})^{M'}\cdot h=g`),
+                        displayMath(String.raw`(t-\widehat{w})^{M'}\cdot h=g\qquad(\because\ \blkref{claim_qbar_poly_linear_factor_cancellation})`),
                         paragraph([
                           "を得る。これは ", ref("def_qbar_linear_factor_power_divides"), " の意味で ",
                           math(String.raw`(t-\widehat{w})^{M'}\mid g`), " を与えるので、",
