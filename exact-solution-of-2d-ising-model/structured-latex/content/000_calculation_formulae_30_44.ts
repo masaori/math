@@ -2503,7 +2503,7 @@ z
     title: { tex: String.raw`\mathbb{C}\text{の逆数の}\sqrt{\cdot}` },
     labels: ["inverse_of_sqrt_cc"],
     statement: [
-      paragraph([ref("def_sqrt_cc"), "、", ref("sqrt_squared_is_original"), "、", ref("sqrt_expansion_via_polar"), "、", ref("definition_of_sqrt_r_positive"), "、", ref("def_phi_cartesian"), "、", ref("inclusion_rr_to_cc"), "、", ref("range_of_args_of_reciprocal_of_complex_numbers"), " を用いる。零での値の計算には ", ref("def_arctan"), "、", ref("def_sin"), "、", ref("def_cos"), " の関数が現れる。"]),
+      paragraph([ref("def_sqrt_cc"), "、", ref("sqrt_squared_is_original"), "、", ref("sqrt_expansion_via_polar"), "、", ref("definition_of_sqrt_r_positive"), "、", ref("def_phi_cartesian"), "、", ref("inclusion_rr_to_cc"), "、", ref("range_of_args_of_reciprocal_of_complex_numbers"), " を用いる。零での値の計算には ", ref("def_arctan"), "、", ref("def_sin"), "、", ref("def_cos"), " の関数が現れ、その値に ", ref("arctan_zero"), "、", ref("cosine_zero"), "、", ref("sine_zero"), " を用いる。"]),
       paragraph([math(String.raw`z \in \mathbb{C},\ z \neq 0`), " について、"]),
       displayMath(
         String.raw`\sqrt{\frac{1}{z}} =
@@ -2613,16 +2613,20 @@ z
 &&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開。}\blkref{sqrt_expansion_via_polar})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 2\bigr)\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\right)\right]_{\sim}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to \pi\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
-&&(\because\ \mathbb{R}\ \text{の計算})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)\\
 &= (1\cdot\cos 0,\ 1\cdot\sin 0)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (1\cdot 1,\ 1\cdot\sin 0)
-&&(\because\ \cos 0=1)\\
+&&(\because\ \blkref{cosine_zero})\\
 &= (1\cdot 1,\ 1\cdot 0)
-&&(\because\ \sin 0=0)\\
+&&(\because\ \blkref{sine_zero})\\
 &= (1,\ 0)
-&&(\because\ \mathbb{R}\ \text{の積の計算を 2 箇所へ適用})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{を 2 箇所へ適用（}x \to 1\text{、}x \to 0\text{）}\bigr)\\
 &= 1_{\mathbb{C}}
 &&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -2725,6 +2729,7 @@ z
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) と √(1_C) の鎖の √1 = 1 の 2 行が definition_of_sqrt_r_positive だけを根拠にしていた（1 ≥ 0 と 1^2 = 1 が書かれていなかった）ので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 3 行目「ℝ の計算 1^2+0^2=1」（1^2 = 1・0^2 = 0・1 + 0 = 1 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）の 4 行に割り、次の行の根拠「ℝ の計算 0/1=0」を「ℝ で 0/x = 0（x ≠ 0、ℝ は体）の x → 1」にした。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の最後の行の根拠「arctan 0=0」に参照が無かったので、新しく立てた主張 arctan_zero の参照にした。値と主張は変えていない。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の「ℝ の計算」1 行（0/2 = 0・0·π = 0・0 − 0 = 0 を 1 行で使っていた）を、ℝ で 0/x = 0（x → 2）、ℝ で 0·x = 0（x → π）、ℝ で a − 0 = a（a → 0）の 3 行に割った。根拠「cos 0=1」「sin 0=0」を cosine_zero・sine_zero の参照にし、「ℝ の積の計算を 2 箇所へ適用」を「ℝ で 1·x = x を 2 箇所へ（x → 1、x → 0）」にした。値と主張は変えていない。",
       ],
     },
   },
