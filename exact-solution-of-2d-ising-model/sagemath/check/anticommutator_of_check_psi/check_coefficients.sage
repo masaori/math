@@ -1,6 +1,6 @@
 # 対象ラベル: anticommutator_of_check_psi
 # 準備 4（ℂ の符号と逆元の規則）と準備 5（ν = M+1-μ の場合の係数）の鎖を一行ずつ確かめる。準備 5 は:
-#   a_ν・b_ν の各 3 等号、r_ν の 11 等号、b_μ b_ν の 8 等号、t t の 7 等号、d_μ d_ν の 4 等号、d_μ^{-1} d_ν^{-1} の 4 等号、
+#   a_ν・b_ν の各 3 等号、r_ν の 13 等号、b_μ b_ν の 8 等号、t t の 7 等号、d_μ d_ν の 4 等号、d_μ^{-1} d_ν^{-1} の 4 等号、
 #   u^-u^- の 8 等号、u^+u^+ の 7 等号、u^-u^+ の 6 等号、h h の 3 等号、二つの和の各 2 等号、(u^-u^+ + hh)ω の 11 等号。
 # 一般の点: 各行を QQ 上の有理関数（a_μ, b_μ, a_ν, b_ν, ρ, σ, M を不定元）として本文の式どおりに別々に組み、
 #   隣り合う行の差の分子が、その行の根拠の関係（periodicity_of_check_fermi (3) の a_ν = b_μ・b_ν = a_μ、
@@ -79,9 +79,11 @@ generic_chain([(1 / tt + 1 / tt) * om, (1 * (1 / tt) + 1 * (1 / tt)) * om, ((1 +
                (2 * (1 / tt)) * ((2 * Mc) * 1), (2 * (1 / tt)) * (2 * Mc), ((2 * 2) * Mc) * (1 / tt), ((2 * 2) * Mc) * (1 / tt),
                (4 * Mc) * (1 / tt), tt * (1 / tt), 1],
               [[], [], [], [], [], [], [], [], ['sq'], []], "(u^-u^+ + hh)ω")
-# r_ν の鎖の成分の行: (-1, 0)(x, -y) = ((-1)x - 0(-y), (-1)(-y) + 0x) = (-x, y)、(-x)^2 + y^2 = x^2 + y^2
+# r_ν の鎖の成分の行: (-1, 0)(x, -y) = ((-1)x - 0(-y), (-1)(-y) + 0x) = (-x, y)、(-x)^2 + y^2 = (-x)(-x) + y^2 = xx + y^2 = x^2 + y^2
 rep.check(((-1) * x - 0 * (-y), (-1) * (-y) + 0 * x) == (-x, y), "r_ν の鎖 definition_of_cc の積の行（一般の点）")
-rep.check((-x)**2 + y**2 == x**2 + y**2, "r_ν の鎖 (-x)^2 = x^2 の行（一般の点）")
+rep.check((-x)**2 + y**2 == (-x) * (-x) + y**2, "r_ν の鎖 square_of_real_number_is_product (r → -x) の行（一般の点）")
+rep.check((-x) * (-x) + y**2 == x * x + y**2, "r_ν の鎖 (-a)(-b) = ab の行（一般の点）")
+rep.check(x * x + y**2 == x**2 + y**2, "r_ν の鎖 square_of_real_number_is_product (r → x) の行（一般の点）")
 
 
 # ---------------- 準備 4（ℂ の符号と逆元の規則）----------------
@@ -130,7 +132,7 @@ for M in range(2, 7):
             prod_pair = ((-1) * xm - 0 * (-ym), (-1) * (-ym) + 0 * xm)
             rows = [ab2(a_n), ab2(b_m), ab2(-a_m.conjugate()), ab2(L(-1) * a_m.conjugate()),
                     ab2(L(-1) * (xm - Iu * ym)), ab2(L(-1) * (xm - Iu * ym)),
-                    ab2(prod_pair[0] + Iu * prod_pair[1]), (-xm)**2 + ym**2, xm**2 + ym**2, ab2(a_m)]
+                    ab2(prod_pair[0] + Iu * prod_pair[1]), (-xm)**2 + ym**2, (-xm) * (-xm) + ym**2, xm * xm + ym**2, xm**2 + ym**2, ab2(a_m)]
             rep.check(all(rows[i] == rows[i + 1] for i in range(len(rows) - 1)), f"r_ν の鎖 {tag}", quiet=True)
             rep.check(prod_pair == (-xm, ym) and (L(-1) * a_m.conjugate()) == prod_pair[0] + Iu * prod_pair[1],
                       f"r_ν の鎖 成分の行 {tag}", quiet=True)

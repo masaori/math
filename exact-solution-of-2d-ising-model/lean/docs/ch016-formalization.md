@@ -23,7 +23,8 @@
 | `Ising2D.gamma1_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)` | 同 (3) |
 | `Ising2D.checkR` | `r_μ := \|γ_2(θ̃_μ)\|` | `def_check_fermi` の係数 |
 | `Ising2D.checkR_sq` | `(r_μ:ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))`（**無条件**） | 同（分枝が要らないことの核） |
-| `Ising2D.checkR_conj` | `r_{M+1-μ} = r_μ`（絶対値の計算だけ） | `anticommutator_of_check_psi` Step 1 |
+| `Ising2D.checkR_conj` | `r_{M+1-μ} = r_μ`（人手の準備 5 の `r_ν` の 13 行の鎖と 1 対 1 の `calc`） | `anticommutator_of_check_psi` 準備 5 |
+| `Ising2D.sqrt_normSq_mk_eq_sqrt_sq_add_sq` | `√(normSq (x, y)) = √(x^2 + y^2)`（`checkR` の表し方で読んだ `abs_basic_properties` (1)） | `abs_basic_properties` (1) |
 | `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として、`M ≠ 0` なら `√M ≠ 0`、`(√M)^2 = M` | `def_check_fermi` の係数の分母 |
 | `Ising2D.checkPsiDag` / `Ising2D.checkPsi` | `ψ̌_μ^†`, `ψ̌_μ` | **`def_check_fermi`** |
 | `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致 | 同（検算） |

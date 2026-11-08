@@ -5910,7 +5910,19 @@ h := 1_{\mathbb C}\,t^{-1}`,
         ref("def_check_index_set"),
         " (5)）。",
         math(String.raw`a_\mu = (x, y) \in \mathbb{C} = \mathbb{R}^2`),
-        " と成分で書く。",
+        "（",
+        math(String.raw`x, y \in \mathbb{R}`),
+        "）と成分で書く。",
+        math(String.raw`(-x)^2`),
+        "・",
+        math(String.raw`x^2`),
+        "・",
+        math(String.raw`y^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -5945,8 +5957,12 @@ r_\nu
 &&\bigl(\because\ \blkref{definition_of_cc}\text{ の積：}\bigl((-1_{\mathbb R})x - 0_{\mathbb R}(-y),\ (-1_{\mathbb R})(-y) + 0_{\mathbb R}x\bigr) = (-x, y)\bigr)\\
 &= \sqrt{(-x)^2 + y^2}^{(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{abs_basic_properties}\ (1)\bigr)\\
+&= \sqrt{(-x)(-x) + y^2}^{(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to -x)\bigr)\\
+&= \sqrt{x\,x + y^2}^{(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{の四則演算}\ (-a)(-b) = ab\ (a \to x,\ b \to x)\bigr)\\
 &= \sqrt{x^2 + y^2}^{(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\text{ で }(-x)^2 = x^2\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to x)\bigr)\\
 &= |a_\mu|
 &&\bigl(\because\ \blkref{abs_basic_properties}\ (1)\bigr)\\
 &= r_\mu
@@ -6288,6 +6304,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。散文の「和についての加法性も分配法則から従う」を anticommutator_of_finite_sums_of_scalar_multiples による係数を残した展開（準備 2）に、反交換子の対称性を def_matrix_anticommutator と matrix_sum_is_commutative の鎖（準備 1）に、δ = 0 の場合の散文を準備 3 の鎖に、abs_basic_properties が述べていない |−z| = |z|・|z̄| = |z| を def_complex_conjugate と definition_of_cc の積・abs_basic_properties (1) の成分の鎖に、ℂ の符号と逆元の規則を準備 4 の鎖にした。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き（def_check_fermi の √M_col・r・2 を包含の像 σ・ρ・2_C で読む）、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I と O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備 5 の二乗をその場の |a_μ|^2 := |a_μ||a_μ|・s^2 := ss から def_power_of_real_number の冪（m = 2）に替えた（記号の濫用の解消）。b_μ b_ν の鎖は r = |a_μ| の行と square_of_real_number_is_product の行に割り（7 行 → 8 行）、t t の鎖は ss = s^2 を square_of_real_number_is_product で引く行と definition_of_sqrt_r_positive の y^2 = x の行に割った（6 行 → 7 行）。準備の s の性質も s^2 = (M_col)_ℝ と書いた。",
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備 5 の r_ν の鎖の「ℝ で (−x)^2 = x^2」を、積へ開く行（square_of_real_number_is_product (r → −x)）・ℝ の四則演算 (−a)(−b) = ab の行・冪へ戻す行（square_of_real_number_is_product (r → x)）の 3 行に割った（11 行 → 13 行）。Lean は checkR_conj（DefinitionCheckFermi.lean）を同じ 13 行の calc にした。",
       ],
     },
   },

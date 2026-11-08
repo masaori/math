@@ -32,6 +32,7 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 
 namespace Ising2D
 
@@ -124,12 +125,55 @@ theorem checkR_ne_zero (K : IsingConst) (M : ℕ) {μ : ℤ}
     (hga : gamma2 K (thetaTilde M μ) ≠ 0) : ((checkR K M μ : ℝ) : ℂ) ≠ 0 := by
   simpa using (checkR_pos K M hga).ne'
 
-/-- 原文 `periodicity_of_check_fermi` (3) の絶対値版（`anticommutator_of_check_psi` Step 1）:
-`r_{M+1-μ} = r_μ`。 -/
+/-- 人手 `abs_basic_properties` (1) の `|(x, y)| = √(x^2 + y^2)` を、`checkR` の表し方 `√(normSq ·)` で読んだもの。
+二乗は `def_power_of_real_number` の冪（mathlib の `^ 2`）である。mathlib の `Complex.normSq ⟨x, y⟩` は積 `x x + y y` なので、
+`square_of_real_number_is_product` で冪へ戻す。 -/
+theorem sqrt_normSq_mk_eq_sqrt_sq_add_sq (x y : ℝ) :
+    Real.sqrt (Complex.normSq ⟨x, y⟩) = Real.sqrt (x ^ 2 + y ^ 2) := by
+  rw [Complex.normSq_mk, ← square_of_real_number_is_product x, ← square_of_real_number_is_product y]
+
+/-- 原文 `anticommutator_of_check_psi` の準備 5 の `r_ν` の鎖: `r_{M+1-μ} = r_μ`。
+
+人手の 13 行の鎖と 1 対 1 の `calc` である（`a_μ = (x, y)`、`x := a_μ.re`、`y := a_μ.im`）。
+`|·|` は `√(normSq ·)` で表す（`checkR` の定義）ので、`abs_basic_properties` (1) の 2 行は
+`sqrt_normSq_mk_eq_sqrt_sq_add_sq` で読む。 -/
 theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     checkR K M ((M : ℤ) + 1 - μ) = checkR K M μ := by
-  rw [checkR, checkR, gamma2_thetaTilde_conj K hM, gamma2_neg_eq_neg_conj,
-    Complex.normSq_neg, Complex.normSq_conj]
+  set a : ℂ := gamma2 K (thetaTilde M μ) with ha
+  set x : ℝ := a.re with hx
+  set y : ℝ := a.im with hy
+  calc checkR K M ((M : ℤ) + 1 - μ)
+      = Real.sqrt (Complex.normSq (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) := rfl
+                                                    -- `r_ν` の定義（`r_ν = |a_ν|`）
+    _ = Real.sqrt (Complex.normSq (gamma2 K (-thetaTilde M μ))) := by
+          rw [gamma2_thetaTilde_conj K hM]          -- 上の `a_ν = b_μ`（`periodicity_of_check_fermi` (3)）
+    _ = Real.sqrt (Complex.normSq (-(starRingEnd ℂ) a)) := by
+          rw [gamma2_neg_eq_neg_conj]               -- `relation_of_gamma_2_theta_tilde` (1)
+    _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * (starRingEnd ℂ) a)) := by
+          rw [neg_one_mul]                          -- `multiply_by_minus_one`
+    _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * ⟨x, -y⟩)) := by
+          rw [show (starRingEnd ℂ) a = ⟨x, -y⟩ from Complex.ext (Complex.conj_re a) (Complex.conj_im a)]
+                                                    -- `def_complex_conjugate`
+    _ = Real.sqrt (Complex.normSq ((⟨-1, 0⟩ : ℂ) * ⟨x, -y⟩)) := by
+          rw [show (-1 : ℂ) = ⟨-1, 0⟩ from Complex.ext (by simp) (by simp)]
+                                                    -- `-1_ℂ = (-1_ℝ)_ℂ = (-1_ℝ, 0_ℝ)`（`inclusion_rr_to_cc`）
+    _ = Real.sqrt (Complex.normSq ⟨-x, y⟩) := by
+          rw [show (⟨-1, 0⟩ : ℂ) * ⟨x, -y⟩ = ⟨-x, y⟩ from
+            Complex.ext (by simp [Complex.mul_re]) (by simp [Complex.mul_im])]
+                                                    -- `definition_of_cc` の積:
+                                                    -- `((-1)x - 0(-y), (-1)(-y) + 0x) = (-x, y)`
+    _ = Real.sqrt ((-x) ^ 2 + y ^ 2) := sqrt_normSq_mk_eq_sqrt_sq_add_sq (-x) y
+                                                    -- `abs_basic_properties` (1)
+    _ = Real.sqrt ((-x) * (-x) + y ^ 2) := by
+          rw [square_of_real_number_is_product (-x)] -- `square_of_real_number_is_product`（`r → -x`）
+    _ = Real.sqrt (x * x + y ^ 2) := by
+          rw [neg_mul_neg]                          -- ℝ の四則演算 `(-a)(-b) = ab`（`a → x`, `b → x`）
+    _ = Real.sqrt (x ^ 2 + y ^ 2) := by
+          rw [← square_of_real_number_is_product x] -- `square_of_real_number_is_product`（`r → x`）
+    _ = Real.sqrt (Complex.normSq a) := by
+          rw [← sqrt_normSq_mk_eq_sqrt_sq_add_sq x y, hx, hy, Complex.eta]
+                                                    -- `abs_basic_properties` (1)（`a_μ = (x, y)`）
+    _ = checkR K M μ := rfl                         -- `r_μ` の定義
 
 /-! ## `√M`（原文 `def_check_fermi` の係数の分母） -/
 
