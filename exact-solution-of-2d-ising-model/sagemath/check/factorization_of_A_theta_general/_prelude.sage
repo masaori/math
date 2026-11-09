@@ -1,13 +1,14 @@
 # 対象ラベル: factorization_of_A_theta_general
 # 証明の各行を、ℂ の元を表す不定元の多項式として写す（行の表記どおりに組む）。
-# 不定元: a=(cosh K_1)_C, b=(sinh K_1)_C, C=(cosh 2K_2^*)_C, S=(sinh 2K_2^*)_C, ep=e_+, em=e_-,
+# 不定元: a=(cosh K_1)_C, b=(sinh K_1)_C, C=(cosh 2K_2^*)_C, S=(sinh 2K_2^*)_C, ep=e_+, em=e_- = exp((-i)(θ)_C),
+#         emn=exp(-(i(θ)_C))（euler_formula_cos_sin の読みの -iθ = -(iθ)）,
 #         co=(cos θ)_C, si=(sin θ)_C, c1, s1, c2, c2s, s2s = (c_1)_C, (s_1)_C, (c_2)_C, (c_2^*)_C, (s_2^*)_C。
 import sys
 
 Ki = QuadraticField(-1, 'i')          # i ↦ +I に埋め込まれた QQ(i)
 i = Ki.gen()
-R = PolynomialRing(Ki, 'a,b,C,S,ep,em,co,si,c1,s1,c2,c2s,s2s', order='degrevlex')
-a, b, C, S, ep, em, co, si, c1, s1, c2, c2s, s2s = R.gens()
+R = PolynomialRing(Ki, 'a,b,C,S,ep,em,emn,co,si,c1,s1,c2,c2s,s2s', order='degrevlex')
+a, b, C, S, ep, em, emn, co, si, c1, s1, c2, c2s, s2s = R.gens()
 
 # 証明の行が (∵ …) で引く事実を、多項式の関係式として持つ（左辺 - 右辺）。
 RELATIONS = {
@@ -18,8 +19,9 @@ RELATIONS = {
     'ep+em=2co': ep + em - 2*co,                  # 準備の 5 本目
     'ep=co+i*si': ep - (co + i*si),               # 準備の 6 本目
     'em=co-i*si': em - (co - i*si),               # 準備の 7 本目
-    'euler1': co - (ep + em)/2,                   # euler_formula_cos_sin の第 1 式
-    'euler2': si - (ep - em)/(2*i),               # euler_formula_cos_sin の第 2 式
+    'em=emn': em - emn,                           # negative_i_times_complex_is_negation_of_i_times（z → (θ)_C）で exp((-i)(θ)_C) = exp(-(i(θ)_C))
+    'euler1': co - (ep + emn)/2,                  # euler_formula_cos_sin の第 1 式（-iθ は -(iθ)）
+    'euler2': si - (ep - emn)/(2*i),              # euler_formula_cos_sin の第 2 式
     'C=c2s': C - c2s,                             # C の定義
     'S=s2s': S - s2s,                             # S の定義
     'dual': c2s - s2s*c2,                         # duality_c2_star_eq_s2_star_c2（包含の像）
@@ -41,16 +43,22 @@ CHAINS = {
     'e_+ + e_-': [
         (ep + em, None),
         (2*((ep + em)/2), []),
+        (2*((ep + em)/2), []),   # e_± の定義を展開する行（e_- = exp((-i)(θ)_C) のまま。不定元では同じ多項式）
+        (2*((ep + emn)/2), ['em=emn']),
         (2*co, ['euler1']),
     ],
     'e_+': [
         (ep, None),
         ((ep + em)/2 + i*((ep - em)/(2*i)), []),
+        ((ep + em)/2 + i*((ep - em)/(2*i)), []),   # e_± の定義を展開する行（e_- = exp((-i)(θ)_C) のまま。不定元では同じ多項式）
+        ((ep + emn)/2 + i*((ep - emn)/(2*i)), ['em=emn']),
         (co + i*si, ['euler1', 'euler2']),
     ],
     'e_-': [
         (em, None),
         ((ep + em)/2 - i*((ep - em)/(2*i)), []),
+        ((ep + em)/2 - i*((ep - em)/(2*i)), []),   # e_± の定義を展開する行（e_- = exp((-i)(θ)_C) のまま。不定元では同じ多項式）
+        ((ep + emn)/2 - i*((ep - emn)/(2*i)), ['em=emn']),
         (co - i*si, ['euler1', 'euler2']),
     ],
     '補助的な等式の 1 本目': [

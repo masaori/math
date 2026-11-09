@@ -58,6 +58,7 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.RingTheory.RootsOfUnity.Complex
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
@@ -108,7 +109,9 @@ noncomputable def AMat : Matrix (Fin 2) (Fin 2) ℂ :=
 - 人手の `-iθ` は `multiply_by_minus_one` の `-(iθ)` で、Lean の `-(Complex.I * (θ : ℂ))` である。
 - 人手の `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1` で、Lean では `((-1 : ℝ) : ℂ)` と `-1 : ℂ` の
   2 つの書き方がある。行き来は略記の読み替えの段（`Complex.ofReal_neg`・`Complex.ofReal_one`）で行う。
-- 分母の `2` は人手どおり `2_ℂ`（Lean の `(2 : ℂ)`）である。 -/
+- 分母の `2` は人手どおり `2_ℂ`（Lean の `(2 : ℂ)`）である。
+- 人手 `euler_formula_cos_sin` の読み `euler_cos_real_inclusion`・`euler_sin_real_inclusion` は
+  `MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean` にある。 -/
 
 /-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `i(-θ) = -iθ`（人手の 6 行と、略記の読み替えの 1 段）。 -/
 theorem I_mul_real_neg_eq_neg_I_mul (θ : ℝ) :
@@ -137,26 +140,6 @@ theorem neg_I_mul_real_neg_eq_I_mul (θ : ℝ) :
         rw [I_mul_real_neg_eq_neg_I_mul]          -- 1 行目: 上の `i(-θ) = -iθ`
     _ = Complex.I * (θ : ℂ) := by
         rw [neg_neg]                              -- 2 行目: ℂ で `-(-z) = z`（`complex_numbers_form_a_field`、`z → iθ`）
-
-/-- 人手 `euler_formula_cos_sin` の第 1 式を、`x ∈ ℝ` の `cos x` を `inclusion_rr_to_cc` の像として読んだ形
-（`cos x = (exp(ix) + exp(-ix))/2`、`-ix` は `-(ix)`）。人手のブロックの具体版が Lean に無いので、mathlib の
-`Complex.ofReal_cos` と `Complex.cos` の定義で受ける（`ClaimFactorizationATheta.lean` の `euler_cos_as_exp` は
-同じ式を `exp((-i)x)`・`2 = (2)_ℂ` で読んだ形）。 -/
-theorem euler_cos_real_inclusion (x : ℝ) :
-    ((Real.cos x : ℝ) : ℂ)
-      = (Complex.exp (Complex.I * (x : ℂ)) + Complex.exp (-(Complex.I * (x : ℂ)))) / 2 := by
-  rw [Complex.ofReal_cos, Complex.cos, neg_mul, mul_comm (x : ℂ) Complex.I]
-
-/-- 人手 `euler_formula_cos_sin` の第 2 式を同じく読んだ形（`sin x = (exp(ix) - exp(-ix))/(2i)`）。
-具体版が Lean に無いので、mathlib の `Complex.ofReal_sin` と `Complex.sin` の定義で受ける。 -/
-theorem euler_sin_real_inclusion (x : ℝ) :
-    ((Real.sin x : ℝ) : ℂ)
-      = (Complex.exp (Complex.I * (x : ℂ)) - Complex.exp (-(Complex.I * (x : ℂ)))) / (2 * Complex.I) := by
-  rw [Complex.ofReal_sin, Complex.sin, neg_mul, mul_comm (x : ℂ) Complex.I]
-  field_simp
-  ring_nf
-  rw [Complex.I_sq]
-  ring
 
 /-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `cos(-θ) = cos θ`（人手の 5 行）。 -/
 theorem real_inclusion_cos_neg (θ : ℝ) :

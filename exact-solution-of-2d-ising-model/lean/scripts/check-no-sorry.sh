@@ -258,6 +258,7 @@ targets=(
   Ising2D.neg_I_mul_real_neg_eq_I_mul
   Ising2D.euler_cos_real_inclusion
   Ising2D.euler_sin_real_inclusion
+  Ising2D.neg_I_mul_eq_neg_of_I_mul
   Ising2D.real_inclusion_cos_neg
   Ising2D.real_inclusion_sin_neg
   Ising2D.gamma2_neg
@@ -1434,8 +1435,6 @@ targets=(
   Ising2D.factorization_prep_sq_add_sq
   Ising2D.factorization_prep_two_mul_mul
   Ising2D.factorization_prep_sq_sub_sq
-  Ising2D.euler_cos_as_exp
-  Ising2D.euler_sin_as_exp
   Ising2D.factorization_prep_exp_mul_exp_neg
   Ising2D.factorization_prep_exp_add_exp_neg
   Ising2D.factorization_prep_exp_eq_cos_add_sin

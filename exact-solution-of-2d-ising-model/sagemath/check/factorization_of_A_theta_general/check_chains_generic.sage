@@ -11,13 +11,25 @@ def in_ideal(f, names):
         return f == 0
     return R.ideal([RELATIONS[n] for n in names]).reduce(f) == 0
 
+# e_+ の鎖の 3 行目 → 4 行目は e_- を exp(-(i(θ)_C)) へ 2 箇所で書き換えるが、(e_+ + e_-)/2 + (e_+ - e_-)/2 の中で
+# e_- の項は打ち消し合うので、どちらの行も多項式としては e_+ である。代わりに、書き換える前の二つの分数のそれぞれが
+# 関係式 em=emn を実際に使って書き換わることを確かめる。
+def _ep_row_uses_relation():
+    I1 = R.ideal([RELATIONS['em=emn']])
+    pairs = [((ep + em)/2, (ep + emn)/2), ((ep - em)/(2*i), (ep - emn)/(2*i))]
+    return all(I1.reduce(u - w) == 0 and u != w for u, w in pairs)
+CANCELLED_IN_NORMAL_FORM = {('e_+', 3): _ep_row_uses_relation}
+
 for name, lines in CHAINS.items():
     for k in range(1, len(lines)):
         prev, cur = lines[k - 1][0], lines[k]
         expr, rels = cur
         diff = prev - expr
         ok = in_ideal(diff, rels)
-        if rels:
+        if rels and (name, k) in CANCELLED_IN_NORMAL_FORM:
+            # 行の書き換えは関係式を使うが、書き換えた項どうしが多項式の正規形で打ち消し合うので差が 0 になる
+            rep.check(ok and diff == 0 and CANCELLED_IN_NORMAL_FORM[(name, k)](), f"{name} 第 {k} 行 → 第 {k+1} 行（引く関係式 {rels} で書き換えた項が正規形で打ち消し合う）")
+        elif rels:
             used = diff != 0
             rep.check(ok and used, f"{name} 第 {k} 行 → 第 {k+1} 行（引く関係式 {rels} のイデアルで等しく、多項式としては異なる）")
         else:
@@ -39,11 +51,11 @@ for key, entry in A_ENTRY_OF.items():
 rep.check((B1 * B2) * B1 == B1 * (B2 * B1), "(B_1 B_2) B_1 = B_1 (B_2 B_1)（多項式行列として）")
 
 # 主張: 証明が引く関係式の全体で B_1 B_2 B_1 - A(θ) の各成分が消え、どれか一つを抜くと消えない
-base = ['a2+b2=c1', '2ab=s1', 'a2-b2=1', 'ep*em=1', 'euler1', 'euler2', 'C=c2s', 'S=s2s', 'dual']
+base = ['a2+b2=c1', '2ab=s1', 'a2-b2=1', 'ep*em=1', 'em=emn', 'euler1', 'euler2', 'C=c2s', 'S=s2s', 'dual']
 D = B1 * B2 * B1 - A
 I_all = R.ideal([RELATIONS[n] for n in base])
 rep.check(all(I_all.reduce(D[r, c]) == 0 for r in range(2) for c in range(2)),
-          "主張: 基本の関係式（双曲線関数・指数・Euler・C,S の定義・双対関係）で B_1B_2B_1 = A(θ)")
+          "主張: 基本の関係式（双曲線関数・指数・(-i)z = -(iz)・Euler・C,S の定義・双対関係）で B_1B_2B_1 = A(θ)")
 for drop in base:
     I_d = R.ideal([RELATIONS[n] for n in base if n != drop])
     survives = any(I_d.reduce(D[r, c]) != 0 for r in range(2) for c in range(2))

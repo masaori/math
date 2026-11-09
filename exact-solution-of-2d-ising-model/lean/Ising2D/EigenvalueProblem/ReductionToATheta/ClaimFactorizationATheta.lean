@@ -57,17 +57,19 @@ Lean 側の `factorization_of_A_theta_general` は `K_2^*` を任意の実数と
 | 人手の鎖 | Lean |
 | --- | --- |
 | `e_+e_-` の 3 行 | `factorization_prep_exp_mul_exp_neg` |
-| `e_+ + e_-` の 2 行 | `factorization_prep_exp_add_exp_neg` |
-| `e_+` の 2 行 | `factorization_prep_exp_eq_cos_add_sin` |
-| `e_-` の 2 行 | `factorization_prep_exp_neg_eq_cos_sub_sin` |
+| `e_+ + e_-` の 4 行（2 行目の定義の展開は段を置かない） | `factorization_prep_exp_add_exp_neg` |
+| `e_+` の 4 行（2 行目の定義の展開は段を置かない） | `factorization_prep_exp_eq_cos_add_sin` |
+| `e_-` の 4 行（2 行目の定義の展開は段を置かない） | `factorization_prep_exp_neg_eq_cos_sub_sin` |
 | `a^2 + b^2e_+e_+` の 7 行 | `factorization_aux_plus`（`(c_1)_ℂ` は準備の 1 本目と同じく `(cosh 2K_1)_ℂ` のまま置く） |
 | `a^2 + b^2e_-e_-` の 7 行 | `factorization_aux_minus`（同上） |
 | `C` の 3 行 | `factorization_prep_C_eq_S_mul_c2`（1 行目 `C = (c_2^*)_ℂ` は定義の展開なので、`c_2^*` を `cosh 2K_2^*` のまま置く）。2 行目の `duality_c2_star_eq_s2_star_c2` を仮定 `hdual` に替えた形が `factorization_prep_C_eq_S_mul_c2_of_dual` で、主張の組み立てはこちらを使う（人手 2 行目の双対関係の引用は、`factorization_of_A_theta_general_of_coupling` が `hdual` を `duality_c2_star_eq_s2_star_c2` で埋めるところで起きる） |
 
 `scalar_exp_product`・`scalar_exp_zero`（`K = ℂ`）は、`def_scalar_exp` の具体版が Lean に無いので mathlib の
 `Complex.exp_add`・`Complex.exp_zero` で表す（`ClaimAnticommutatorCheckZY.lean` と同じ扱い）。
-`euler_formula_cos_sin` の第 1・2 式は具体版が Lean に無いので、`θ ∈ ℝ` の `cos θ`・`sin θ` を包含の像として読んだ形
-`euler_cos_as_exp`・`euler_sin_as_exp` を mathlib の `Complex.ofReal_cos`・`Complex.ofReal_sin` と `Complex.cos`・`Complex.sin` の定義で置いて受ける。
+`euler_formula_cos_sin` の第 1・2 式は、主張の読み（`-iθ` は `-(iθ)`、分母の `2` は `2_ℂ`）のまま
+`euler_cos_real_inclusion`・`euler_sin_real_inclusion`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean`）で引く。
+人手は `e_- := exp((-i)(θ)_ℂ)` と置くので、準備の 5〜7 本目は人手どおり `negative_i_times_complex_is_negation_of_i_times`
+（`neg_I_mul_eq_neg_of_I_mul`）で `exp(-(i(θ)_ℂ))` へ書き換える行を挟む。
 「`(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則」「ℂ の分配則と積の交換律・結合律」の行は `field_simp`・`ring` で閉じる。
 
 ## 人手の記号による `B_1(θ)`・`B_2` の表示と Step 1
@@ -103,6 +105,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimDualityC2StarEqS2StarC2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExponentialSeriesOfEvenOddPowerTerms
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
@@ -175,22 +178,6 @@ theorem factorization_prep_sq_sub_sq (K1 : ℝ) :
 
 /-! ## 準備の `e_±` の鎖 -/
 
-/-- 人手 `euler_formula_cos_sin` の第 1 式を、`θ ∈ ℝ` の `cos θ` を `inclusion_rr_to_cc` の像として読んだ形
-（`(cos θ)_ℂ = (e_+ + e_-)/(2)_ℂ`）。人手のブロックの具体版が Lean に無いので、mathlib の
-`Complex.ofReal_cos` と `Complex.cos` の定義で受ける。 -/
-theorem euler_cos_as_exp (θ : ℝ) :
-    ((Real.cos θ : ℝ) : ℂ)
-      = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp ((-Complex.I) * (θ : ℂ))) / ((2 : ℝ) : ℂ) := by
-  rw [Complex.ofReal_cos, Complex.cos, Complex.ofReal_ofNat]; ring_nf
-
-/-- 人手 `euler_formula_cos_sin` の第 2 式を同じく読んだ形（`(sin θ)_ℂ = (e_+ - e_-)/((2)_ℂ i)`）。
-具体版が Lean に無いので、mathlib の `Complex.ofReal_sin` と `Complex.sin` の定義で受ける。 -/
-theorem euler_sin_as_exp (θ : ℝ) :
-    ((Real.sin θ : ℝ) : ℂ)
-      = (Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp ((-Complex.I) * (θ : ℂ)))
-          / (((2 : ℝ) : ℂ) * Complex.I) := by
-  rw [Complex.ofReal_sin, Complex.sin, Complex.ofReal_ofNat]; field_simp; ring_nf; rw [Complex.I_sq]; ring
-
 /-- **人手 `factorization_of_A_theta_general` の準備の 4 本目**:
 `e_+ e_- = 1_ℂ`（`e_+ := exp(i(θ)_ℂ)`、`e_- := exp((-i)(θ)_ℂ)`）。人手の 3 行と calc の 3 段が 1 対 1 である。
 `scalar_exp_product`・`scalar_exp_zero`（`K = ℂ`）は、`def_scalar_exp` の具体版が Lean に無いので mathlib の
@@ -205,19 +192,29 @@ theorem factorization_prep_exp_mul_exp_neg (θ : ℝ) :
     _ = 1 := Complex.exp_zero                                      -- `scalar_exp_zero`（`K = ℂ`）
 
 /-- **人手 `factorization_of_A_theta_general` の準備の 5 本目**:
-`e_+ + e_- = (2)_ℂ (cos θ)_ℂ`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+`e_+ + e_- = (2)_ℂ (cos θ)_ℂ`。人手の 4 行と calc の 4 段が対応する: 人手の 1・3・4 行目と
+calc の 1・2・4 段が 1 対 1 で、人手の 2 行目（`e_±` の定義の展開）は Lean では `e_±` を展開した式で書くので段を置かない。
+calc の 3 段目は人手の行の無い略記の読み替え（`(2)_ℂ` を `euler_formula_cos_sin` の `2_ℂ` と書く）である。 -/
 theorem factorization_prep_exp_add_exp_neg (θ : ℝ) :
     Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp ((-Complex.I) * (θ : ℂ))
       = ((2 : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) :=
   calc Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp ((-Complex.I) * (θ : ℂ))
       = ((2 : ℝ) : ℂ)
           * ((Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp ((-Complex.I) * (θ : ℂ))) / ((2 : ℝ) : ℂ)) :=
-        (mul_div_cancel₀ _ (by norm_num)).symm                     -- `(2)_ℂ ≠ 0_ℂ` と ℂ の四則
+        (mul_div_cancel₀ _ (by norm_num)).symm                     -- 1 行目: `(2)_ℂ ≠ 0_ℂ` と ℂ の四則
+    _ = ((2 : ℝ) : ℂ)
+          * ((Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / ((2 : ℝ) : ℂ)) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）
+    _ = ((2 : ℝ) : ℂ)
+          * ((Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2) := by
+        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((2 : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) := by
-        rw [← euler_cos_as_exp]                                    -- `euler_formula_cos_sin` の第 1 式
+        rw [← euler_cos_real_inclusion]                            -- 4 行目: `euler_formula_cos_sin` の第 1 式
 
 /-- **人手 `factorization_of_A_theta_general` の準備の 6 本目**:
-`e_+ = (cos θ)_ℂ + i(sin θ)_ℂ`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+`e_+ = (cos θ)_ℂ + i(sin θ)_ℂ`。人手の 4 行と calc の 4 段が対応する: 人手の 1・3・4 行目と
+calc の 1・2・4 段が 1 対 1 で、人手の 2 行目（`e_±` の定義の展開）は Lean では `e_±` を展開した式で書くので段を置かない。
+calc の 3 段目は人手の行の無い略記の読み替え（`(2)_ℂ` を `euler_formula_cos_sin` の `2_ℂ` と書く）である。 -/
 theorem factorization_prep_exp_eq_cos_add_sin (θ : ℝ) :
     Complex.exp (Complex.I * (θ : ℂ)) = ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ) :=
   calc Complex.exp (Complex.I * (θ : ℂ))
@@ -225,12 +222,21 @@ theorem factorization_prep_exp_eq_cos_add_sin (θ : ℝ) :
           + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp ((-Complex.I) * (θ : ℂ)))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         have h2 : ((2 : ℝ) : ℂ) ≠ 0 := by norm_num
-        field_simp; rw [Complex.ofReal_ofNat]; ring                -- `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+        field_simp; rw [Complex.ofReal_ofNat]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+    _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / ((2 : ℝ) : ℂ)
+          + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))
+              / (((2 : ℝ) : ℂ) * Complex.I)) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）を 2 箇所へ
+    _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2
+          + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
+        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
-        rw [← euler_cos_as_exp, ← euler_sin_as_exp]                -- `euler_formula_cos_sin` の第 1 式と第 2 式
+        rw [← euler_cos_real_inclusion, ← euler_sin_real_inclusion] -- 4 行目: `euler_formula_cos_sin` の第 1 式と第 2 式
 
 /-- **人手 `factorization_of_A_theta_general` の準備の 7 本目**:
-`e_- = (cos θ)_ℂ - i(sin θ)_ℂ`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+`e_- = (cos θ)_ℂ - i(sin θ)_ℂ`。人手の 4 行と calc の 4 段が対応する: 人手の 1・3・4 行目と
+calc の 1・2・4 段が 1 対 1 で、人手の 2 行目（`e_±` の定義の展開）は Lean では `e_±` を展開した式で書くので段を置かない。
+calc の 3 段目は人手の行の無い略記の読み替え（`(2)_ℂ` を `euler_formula_cos_sin` の `2_ℂ` と書く）である。 -/
 theorem factorization_prep_exp_neg_eq_cos_sub_sin (θ : ℝ) :
     Complex.exp ((-Complex.I) * (θ : ℂ)) = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) :=
   calc Complex.exp ((-Complex.I) * (θ : ℂ))
@@ -238,9 +244,16 @@ theorem factorization_prep_exp_neg_eq_cos_sub_sin (θ : ℝ) :
           - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp ((-Complex.I) * (θ : ℂ)))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         have h2 : ((2 : ℝ) : ℂ) ≠ 0 := by norm_num
-        field_simp; rw [Complex.ofReal_ofNat]; ring                -- `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+        field_simp; rw [Complex.ofReal_ofNat]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+    _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / ((2 : ℝ) : ℂ)
+          - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))
+              / (((2 : ℝ) : ℂ) * Complex.I)) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）を 2 箇所へ
+    _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2
+          - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
+        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
-        rw [← euler_cos_as_exp, ← euler_sin_as_exp]                -- `euler_formula_cos_sin` の第 1 式と第 2 式
+        rw [← euler_cos_real_inclusion, ← euler_sin_real_inclusion] -- 4 行目: `euler_formula_cos_sin` の第 1 式と第 2 式
 
 /-! ## 準備の補助的な等式 2 本と `C = S(c_2)_ℂ` -/
 

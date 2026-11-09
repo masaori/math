@@ -51,7 +51,8 @@ for (y, x) in PARAMS:
     for (k, n) in ANGLES:
         th = 2 * pi * k / n
         ep_v = QQbar(exp(I * th))
-        em_v = QQbar(exp(-I * th))
+        em_v = QQbar(exp((-I) * th))       # e_- = exp((-i)(θ)_C)
+        emn_v = QQbar(exp(-(I * th)))      # exp(-(i(θ)_C))（euler_formula_cos_sin の読み）
         co_v = QQbar(AA(cos(th)))
         si_v = QQbar(AA(sin(th)))
         tag = f"(y,x)=({y},{x}), θ=2π·{k}/{n}"
@@ -60,10 +61,11 @@ for (y, x) in PARAMS:
         mid = QQbar(exp(I * th + (-I) * th))
         rep.check(lhs == mid and mid == QQbar(exp(0)) and QQbar(exp(0)) == 1, f"{tag} 準備の 4 本目 e_+e_- = 1_C の全行")
         # Euler の公式（引く主張の当てはめ）
-        rep.check(co_v == (ep_v + em_v) / 2 and si_v == (ep_v - em_v) / (2 * QQbar(I)),
+        rep.check(em_v == emn_v, f"{tag} negative_i_times_complex_is_negation_of_i_times の当てはめ exp((-i)(θ)_C) = exp(-(i(θ)_C))")
+        rep.check(co_v == (ep_v + emn_v) / 2 and si_v == (ep_v - emn_v) / (2 * QQbar(I)),
                   f"{tag} euler_formula_cos_sin の当てはめ（cos・sin と e_± を独立に作って）")
 
-        vals = {a: QQbar(chK1), b: QQbar(shK1), C: QQbar(c2s_val), S: QQbar(s2s_val), ep: ep_v, em: em_v,
+        vals = {a: QQbar(chK1), b: QQbar(shK1), C: QQbar(c2s_val), S: QQbar(s2s_val), ep: ep_v, em: em_v, emn: emn_v,
                 co: co_v, si: si_v, c1: QQbar(c1_val), s1: QQbar(s1_val), c2: QQbar(c2_val),
                 c2s: QQbar(c2s_val), s2s: QQbar(s2s_val)}
         def evq(f):

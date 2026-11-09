@@ -6736,6 +6736,10 @@ e_+ e_-
 e_+ + e_-
 &= (2)_{\mathbb{C}}\,\frac{e_+ + e_-}{(2)_{\mathbb{C}}}
 &&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= (2)_{\mathbb{C}}\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr)}{(2)_{\mathbb{C}}}
+&&(\because\ e_\pm\ \text{の定義})\\
+&= (2)_{\mathbb{C}}\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr)}{(2)_{\mathbb{C}}}
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (\theta)_{\mathbb{C}})\bigr)\\
 &= (2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式})
 \end{aligned}`),
@@ -6743,6 +6747,12 @@ e_+ + e_-
 e_+
 &= \frac{e_+ + e_-}{(2)_{\mathbb{C}}} + i\,\frac{e_+ - e_-}{(2)_{\mathbb{C}}\,i}
 &&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}},\ (2)_{\mathbb{C}}\,i \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= \frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr)}{(2)_{\mathbb{C}}}
+  + i\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) - \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr)}{(2)_{\mathbb{C}}\,i}
+&&(\because\ e_\pm\ \text{の定義})\\
+&= \frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr)}{(2)_{\mathbb{C}}}
+  + i\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) - \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr)}{(2)_{\mathbb{C}}\,i}
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (\theta)_{\mathbb{C}})\ \text{を 2 箇所へ}\bigr)\\
 &= (\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式と第 2 式})
 \end{aligned}`),
@@ -6750,6 +6760,12 @@ e_+
 e_-
 &= \frac{e_+ + e_-}{(2)_{\mathbb{C}}} - i\,\frac{e_+ - e_-}{(2)_{\mathbb{C}}\,i}
 &&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}},\ (2)_{\mathbb{C}}\,i \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= \frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr)}{(2)_{\mathbb{C}}}
+  - i\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) - \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr)}{(2)_{\mathbb{C}}\,i}
+&&(\because\ e_\pm\ \text{の定義})\\
+&= \frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) + \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr)}{(2)_{\mathbb{C}}}
+  - i\,\frac{\exp\bigl(i(\theta)_{\mathbb{C}}\bigr) - \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr)}{(2)_{\mathbb{C}}\,i}
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (\theta)_{\mathbb{C}})\ \text{を 2 箇所へ}\bigr)\\
 &= (\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式と第 2 式})
 \end{aligned}`),
@@ -6996,6 +7012,7 @@ P_{21}
         "θ を [0, 2π) 上で 60 点走査し、5 組の (K1,K2) について残差 1e-14 以下であることを数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_04_T_V_plus_and_factorization.sage の (1)）。",
         "2026-08-19 の式変形統一で、Step 5 の「Step 4 とまったく同じ計算（θ → -θ）」に畳まれていた補助的な等式の導出と P_21 の整理を、Step 4 と同形の一続きの鎖（補助等式 5 段と P_21 の 6 段）へ開いた。内容・参照は変えていない。",
         "2026-11-02（全証明の SageMath 検算）: a, b, C, S と e_± := exp(±i(θ)_C) を ℂ の元として置き直し、A(θ) の実数の成分を包含の像として読んだ。本文に無かった「cosh_sinh_basic_properties の倍角公式」の参照を cosh_addition_formula・sinh_double_angle_formula と包含の積・和の保存に、行列の theorem_exp_product (n=1) を scalar_exp_product・scalar_exp_zero に付け替え、e_± = cos θ ± i sin θ を euler_formula_cos_sin から導く行を置いた。Step 4・5 の exp(±2iθ) を e_±e_± のまま扱い、Step 6 に積の結合律を引いた。主張の中身は不変。検算は sagemath/check/factorization_of_A_theta_general/。",
+        "2026-11-09（Lean の通しの証明）: euler_formula_cos_sin は -iθ を -(iθ) と読む。e_- := exp((-i)(θ)_ℂ) と置いたまま引いていた準備の 5〜7 本目に、e_± の定義を展開する行と、negative_i_times_complex_is_negation_of_i_times で exp((-i)(θ)_ℂ) を exp(-(i(θ)_ℂ)) へ書き換える行を 1 行ずつ足した。主張と記号の置き方は変えていない。",
       ],
     },
   },

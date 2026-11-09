@@ -102,6 +102,7 @@ cd exact-solution-of-2d-ising-model/lean
 
   | まとまり | フォルダ |
   | --- | --- |
+  | 集合記号と複素数の直交座標計算 | `Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/` |
   | 実数の平方根・指数関数・双曲線関数 | `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/` |
   | クロネッカー積と多因子基底 | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/` |
   | 有限行列・Pauli行列・交換子 | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` |
@@ -114,6 +115,7 @@ cd exact-solution-of-2d-ising-model/lean
 
   | 人手証明（Typst） | Lean |
   | --- | --- |
+  | `parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ` と `000_calculation_formulae_30_44.ts` の `<negative_i_times_complex_is_negation_of_i_times>`（Typst の原本なし。2026-11-09 に本文へ足した） | `Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean` |
   | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
   | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` |
   | `<def_eigenvector>`・`<def_eigenvalue>`・`<def_det_two_by_two>`・`<nonzero_kernel_iff_det_zero_two_by_two>`（Typst の原本なし。2026-11-01 に本文へ足した） | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` |
@@ -785,7 +787,9 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
-| `Ising2D.I_mul_real_neg_eq_neg_I_mul` / `neg_I_mul_real_neg_eq_I_mul` / `real_inclusion_cos_neg` / `real_inclusion_sin_neg` | `i(-θ) = -iθ`・`-i(-θ) = iθ`・`cos(-θ) = cos θ`・`sin(-θ) = -sin θ`（人手の鎖と 1 段ずつの `calc`。`euler_cos_real_inclusion`・`euler_sin_real_inclusion` は人手 `euler_formula_cos_sin` を mathlib で受けた読み） | `relation_of_gamma_2_theta_tilde` の証明の「第一に」 |
+| `Ising2D.I_mul_real_neg_eq_neg_I_mul` / `neg_I_mul_real_neg_eq_I_mul` / `real_inclusion_cos_neg` / `real_inclusion_sin_neg` | `i(-θ) = -iθ`・`-i(-θ) = iθ`・`cos(-θ) = cos θ`・`sin(-θ) = -sin θ`（人手の鎖と 1 段ずつの `calc`。`euler_cos_real_inclusion`・`euler_sin_real_inclusion` は下の `euler_formula_cos_sin` の行） | `relation_of_gamma_2_theta_tilde` の証明の「第一に」 |
+| `Ising2D.euler_cos_real_inclusion` / `euler_sin_real_inclusion`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean`） | `(cos x)_ℂ = (exp(ix) + exp(-(ix)))/2_ℂ`・`(sin x)_ℂ = (exp(ix) - exp(-(ix)))/(2_ℂ i)`（人手の主張の読みのまま。全実数上の `cos`・`sin` と Euler の公式は人手が未整備なので mathlib の `Complex.cos`・`Complex.sin` の定義で受ける） | `euler_formula_cos_sin` |
+| `Ising2D.neg_I_mul_eq_neg_of_I_mul`（同じファイル） | `(-i)z = -(iz)`（人手の 3 行と 1 対 1 の `calc`。`multiply_by_minus_one` は mathlib の `neg_one_mul` で受ける） | `negative_i_times_complex_is_negation_of_i_times` |
 | `Ising2D.gamma2_neg` | `γ_2(-θ) = i exp(-iθ) s_2^*(c_1cos θ + i sin θ - s_1c_2)`（6 段の `calc`） | `relation_of_gamma_2_theta_tilde` の証明の「第三に」、`def_gamma1_gamma2_of_theta` の `(2,1)` 成分 |
 | `Ising2D.gamma2_neg_eq_neg_conj` | `γ_2(-θ) = -conj(γ_2(θ))` | `relation_of_gamma_2` |
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq` | `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2` | 同上 |

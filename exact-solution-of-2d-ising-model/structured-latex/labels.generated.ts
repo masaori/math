@@ -468,6 +468,7 @@ export const ALL_LABELS = [
   "negation_factors_out_of_right_factor",
   "negation_is_scalar_multiple_by_minus_one",
   "negative_absolute_value_is_at_most_real_number",
+  "negative_i_times_complex_is_negation_of_i_times",
   "negative_number_to_sqrt",
   "nesting_of_commutator_of_H_and_check_Z",
   "nonnegative_real_order_from_squares",
