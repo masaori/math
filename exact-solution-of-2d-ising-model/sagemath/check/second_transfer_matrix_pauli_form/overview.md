@@ -18,9 +18,9 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---------|---------|-----------|------|
-| check_V2_as_kronecker_power_exact.sage | `(V_2)_{ord,ord'} = exp(K_2Σμμ') = Π exp(K_2μ(m)μ'(m)) = Π A_{i_m j_m} = (A^{⊠M})_{ν(ι μ),ν(ι μ')} = (A^{⊠M})_{ord,ord'}` を全 `(μ,μ')` で、および `V_2 = A^{⊠M}`（`M_col = 1..6`） | PASS | Laurent 多項式として一致 |
+| check_V2_as_kronecker_power_exact.sage | `(V_2)_{ord,ord'} = (exp(K_2Σμμ'))_ℂ = (exp(ΣK_2(μμ')))_ℂ = (Π exp(K_2(μμ')))_ℂ = Π (exp(K_2(μμ')))_ℂ = Π A_{i_m j_m} = (A^{⊠M})_{ν(ι μ),ν(ι μ')} = (A^{⊠M})_{ord,ord'}` の 7 行を全 `(μ,μ')` で、および `V_2 = A^{⊠M}`（`M_col = 1..6`）。包含の行は値を変えないので、各行を書かれた形のまま別に組み立てて比べる | PASS | Laurent 多項式として一致 |
 | check_site_exponential_exact.sage | `(σ_m^x)^p = I⊠…⊠(σ^x)^p⊠…⊠I`（`p = 0..4`）、`exp(K_2^*σ_m^x) = I⊠…⊠exp(K_2^*σ^x)⊠…⊠I`、`σ_m^x` どうしの可換性、`exp(K_2^*Σσ_m^x) = Π_m exp(K_2^*σ_m^x) = exp(K_2^*σ^x)^{⊠M}`（`M_col = 1..5`、`exp(K_2) ∈ {2, 3/2, 5/4}`） | PASS | `AA` で全て一致 |
-| check_conclusion_exact.sage | `0 < tanh K_2 < 1`（`K_2^* > 0`）、`A = (2s_2)^{1/2} exp(K_2^*σ^x)`、前係数が正、結論の鎖 5 段と主張そのもの、否定コントロール 2 種（`M_col = 1..5`、`exp(K_2) ∈ {2, 3/2, 5/4, 7/3}`） | PASS | `AA` で全て一致 |
+| check_conclusion_exact.sage | `0 < tanh K_2 < 1`（`K_2^* > 0`）、`A = (2s_2)^{1/2} exp(K_2^*σ^x)`、前係数が正、結論の鎖 6 段（4 段目の包含 `(((2s_2)^{1/2})^M)_ℂ` は `M` 個の積として別に組み立てる）と主張そのもの、否定コントロール 2 種（`M_col = 1..5`、`exp(K_2) ∈ {2, 3/2, 5/4, 7/3}`） | PASS | `AA` で全て一致 |
 | check_numeric_general_K2.sage | 一般の `K_2 ∈ {0.05, 0.3, 0.4406868, 0.8, 1.1}` で主張（`M_col = 1..6`） | PASS | 相対誤差 最大 3.1e-15 |
 
 ## 備考
@@ -45,4 +45,4 @@ cd sagemath/check/second_transfer_matrix_pauli_form
 for f in check_*.sage; do sage "$f"; done
 ```
 
-実行ログは `logs/` に保存してある（2026-09-26、SageMath 10.9）。
+実行ログは `logs/` に保存してある（2026-09-26、SageMath 10.9。`check_V2_as_kronecker_power_exact.sage`・`check_conclusion_exact.sage` は 2026-11-09 に取り直した。この環境の sage は `__file__` を sage のパッケージに向けるので、`sage -c "import os; __file__=os.path.abspath('<名前>'); exec(preparse(open('<名前>').read()))"` で実行した）。

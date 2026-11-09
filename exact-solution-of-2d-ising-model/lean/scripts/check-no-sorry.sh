@@ -588,11 +588,12 @@ targets=(
   Ising2D.continuous_quadIntegrand
   Ising2D.sine_integral_two_sided
   # --- 各章（上の区切りの続き）---
-  Ising2D.V1PauliForm_eq_diagonal
+  Ising2D.K1SmulD_apply_of_ne
+  Ising2D.K1SmulD_apply_configBasisIso_self
+  Ising2D.K1SmulD_eq_diagonal
   Ising2D.V1PauliForm_apply_configBasisIso
   Ising2D.first_transfer_matrix_pauli_form
   Ising2D.sigmaZ_nextSite_of_last
-  Ising2D.sum_sigmaZ_sigmaZ_mulVec_basisVec_spin
   Ising2D.pauliX_sq
   Ising2D.pauliX_pow_two_mul
   Ising2D.pauliX_pow_two_mul_add_one
@@ -2679,6 +2680,8 @@ targets=(
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf
   Ising2D.real_inclusion_preserves_finite_product
+  Ising2D.real_inclusion_preserves_finite_product_or_empty
+  Ising2D.twoByTwo_apply_eq_real_inclusion
   Ising2D.NecSuf.finProdLeft_map_of_mul
   Ising2D.real_inclusion_preserves_finite_product_of_necSuf
   Ising2D.complex_finset_prod_eq_finProdLeft

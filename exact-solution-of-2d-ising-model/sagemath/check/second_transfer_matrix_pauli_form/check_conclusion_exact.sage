@@ -1,7 +1,9 @@
 # ---------------------------------------------------------
 # SageMath: 証明の中間目標「結論」と主張そのもの
-#   V_2 = A^{⊠M} = ((2s_2)^{1/2} exp(K_2^*σ^x))^{⊠M} = ((2s_2)^{1/2})^M exp(K_2^*σ^x)^{⊠M}
-#       = (2 sinh 2K_2)^{M/2} exp(K_2^*σ^x)^{⊠M} = (2 sinh 2K_2)^{M/2} exp(K_2^* Σ_m σ_m^x)
+#   V_2 = A^{⊠M} = ((2s_2)^{1/2} exp(K_2^*σ^x))^{⊠M} = (((2s_2)^{1/2})_C)^M exp(K_2^*σ^x)^{⊠M}
+#       = (((2s_2)^{1/2})^M)_C exp(K_2^*σ^x)^{⊠M}
+#       = ((2 sinh 2K_2)^{M/2})_C exp(K_2^*σ^x)^{⊠M} = ((2 sinh 2K_2)^{M/2})_C exp(K_2^* Σ_m σ_m^x)
+#   （(·)_C は値を変えない。4 行目の冪は M 個の積として別に組み立てて比べる）
 #   ここで V_2 は <def_transfer_matrix> の成分定義（ord で指す）そのもの。
 #   併せて <two_by_two_transfer_identity> A = (2s_2)^{1/2} exp(K_2^* σ^x) と、
 #   <def_second_transfer_matrix_prefactor> の前係数が正であること、K_2^* > 0 を確かめる。
@@ -29,6 +31,7 @@ for x in X_VALUES:
                  kron_by_definition([A] * M_col, AA),
                  kron_by_definition([c * E2] * M_col, AA),
                  (c ** M_col) * kron_by_definition([E2] * M_col, AA),
+                 prod([c] * M_col, AA(1)) * kron_by_definition([E2] * M_col, AA),
                  pref * kron_by_definition([E2] * M_col, AA),
                  pref * exp_by_spectral_projectors(sigma_x_sum(M_col), f, AA)]
         okM = (pref > 0) and all(Mx == chain[0] for Mx in chain)
@@ -36,7 +39,7 @@ for x in X_VALUES:
         wrong_dual = pref * exp_by_spectral_projectors(sigma_x_sum(M_col), lambda lam: x ** lam, AA)
         wrong_pref = prefactor(x, M_col - 1) * exp_by_spectral_projectors(sigma_x_sum(M_col), f, AA)
         okM = okM and (V2 != wrong_dual) and (V2 != wrong_pref)
-        print(f"  exp(K_2)={x}, M_col={M_col}: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> {'PASS' if okM else 'FAIL'}")
+        print(f"  exp(K_2)={x}, M_col={M_col}: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 6 段 -> {'PASS' if okM else 'FAIL'}")
         ok = ok and okM
     print(f"  exp(K_2)={x}: tanh K_2={t}（0<tanh K_2<1）、2×2 の恒等式 -> {'PASS' if ok else 'FAIL'}")
     ok_all = ok_all and ok

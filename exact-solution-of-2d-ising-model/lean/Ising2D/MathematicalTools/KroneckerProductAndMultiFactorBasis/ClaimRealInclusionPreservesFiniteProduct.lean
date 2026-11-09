@@ -16,6 +16,8 @@
 - 人手の 2 つの有限積（`def_finite_product_of_complex_numbers`・`def_finite_product_of_real_numbers`）は Lean の `∏ j, …`
   （ℂ と ℝ の `Finset.prod`）で、定義の 2 つの式は `Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む
   （`ClaimFiniteProductOfPositiveRealsIsPositive.lean` と同じ）。
+- 因子の個数が `0` かもしれない積（Lean の `Fin M`、`M = 0` を含む）には `real_inclusion_preserves_finite_product_or_empty` を使う。
+  人手の主張は `m ≥ 1` なので、`M = 0`（両辺が空の積 `1`、mathlib の `Finset.prod_empty`・`Complex.ofReal_one` で読む）は Lean だけの場合である。
 - `real_inclusion_preserves_product` は具体版 `real_inclusion_mul`（`ClaimRealInclusionPreservesProduct.lean`）を引く。
   mathlib の `Complex.ofReal_prod`・`Complex.ofReal_mul` は使わない。
 
@@ -47,5 +49,16 @@ theorem real_inclusion_preserves_finite_product :
                                                                               -- （`a → Π_{j=1}^{m} r_j`、`b → r_{m+1}`）
       _ = ((∏ j, r j : ℝ) : ℂ) :=
           congrArg (fun t : ℝ => (t : ℂ)) (Fin.prod_univ_castSucc r).symm     -- `def_finite_product_of_real_numbers` を右辺から左辺へ
+
+/-- 因子の個数 `M` が `0` かもしれない有限積。`M ≥ 1` なら `real_inclusion_preserves_finite_product`（人手の主張）、
+`M = 0` なら両辺が空の積 `1`（人手の主張に無い Lean だけの場合）。 -/
+theorem real_inclusion_preserves_finite_product_or_empty :
+    ∀ (M : ℕ) (r : Fin M → ℝ), ∏ j, ((r j : ℝ) : ℂ) = ((∏ j, r j : ℝ) : ℂ)
+  | 0, r =>                                                                   -- 因子が無い（Lean だけの場合）
+    calc ∏ j, ((r j : ℝ) : ℂ)
+        = 1 := Finset.prod_empty                                              -- 空の積
+      _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm                            -- `1_ℂ = (1_ℝ)_ℂ`
+      _ = ((∏ j, r j : ℝ) : ℂ) := by rw [Finset.univ_eq_empty, Finset.prod_empty] -- 空の積を右辺から左辺へ
+  | m + 1, r => real_inclusion_preserves_finite_product m r                   -- `real_inclusion_preserves_finite_product`
 
 end Ising2D

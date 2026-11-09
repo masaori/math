@@ -1,7 +1,10 @@
 # ---------------------------------------------------------
 # SageMath: 証明の中間目標「V_2 を A のクロネッカー冪で書く」の各行
-#   (V_2)_{ord(μ),ord(μ')} = exp(K_2 Σ μ(m)μ'(m)) = Π_m exp(K_2 μ(m)μ'(m)) = Π_m A_{i_m j_m}
+#   (V_2)_{ord(μ),ord(μ')} = (exp(K_2 Σ μ(m)μ'(m)))_C = (exp(Σ K_2(μ(m)μ'(m))))_C = (Π_m exp(K_2(μ(m)μ'(m))))_C
+#     = Π_m (exp(K_2(μ(m)μ'(m))))_C = Π_m A_{i_m j_m}（A_{ij} = (exp(K_2 ς_i ς_j))_C）
 #     = (A^{⊠M})_{ν(ι(μ)),ν(ι(μ'))} = (A^{⊠M})_{ord(μ),ord(μ')}
+#   （ℝ→ℂ の包含の行（有限積）は値を変えない。ここでは各行を書かれた形のまま、
+#     exp(K_2 a) = x^a の規則で別々に組み立てて比べる）
 #   A_{ij} = exp(K_2 ς_i ς_j), ς_1 = +1, ς_2 = -1
 # 対象ラベル: second_transfer_matrix_pauli_form
 # 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
@@ -28,12 +31,14 @@ for M_col in range(1, 7):
             J = iota(mup)
             o, op = ord_number(mu), ord_number(mup)
             chain = [V2[o - 1, op - 1],
-                     xL ** sum(mu[m] * mup[m] for m in range(M_col)),
-                     prod([xL ** (mu[m] * mup[m]) for m in range(M_col)], L(1)),
+                     xL ** sum(mu[m] * mup[m] for m in range(M_col)),                       # 1: (exp(K_2 Σ μμ'))_C
+                     xL ** sum(1 * (mu[m] * mup[m]) for m in range(M_col)),                 # 2: 分配則 K_2 Σ = Σ K_2(·)
+                     prod([xL ** (mu[m] * mup[m]) for m in range(M_col)], L(1)),            # 3: (Π exp(K_2(μμ')))_C
+                     prod([L(xL ** (mu[m] * mup[m])) for m in range(M_col)], L(1)),         # 4: Π (exp(K_2(μμ')))_C
                      prod([A[I[m] - 1, J[m] - 1] for m in range(M_col)], L(1)),
                      Ak[nu_number(I) - 1, nu_number(J) - 1],
                      Ak[o - 1, op - 1]]
             ok = ok and all(c == chain[0] for c in chain)
-    print(f"  M_col={M_col}: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> {'PASS' if ok else 'FAIL'}")
+    print(f"  M_col={M_col}: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 7 行も -> {'PASS' if ok else 'FAIL'}")
     ok_all = ok_all and ok
 exact_result(ok_all)

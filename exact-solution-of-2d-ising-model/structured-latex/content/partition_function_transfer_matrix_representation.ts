@@ -3247,7 +3247,23 @@ A
         math(String.raw`\exp`),
         " は、",
         ref("def_exp"),
-        " で成分級数として定めた行列の指数関数である。",
+        " で成分級数として定めた行列の指数関数である。実数 ",
+        math(String.raw`a`),
+        " と行列 ",
+        math(String.raw`X`),
+        " の積 ",
+        math(String.raw`aX`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " による ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍 ",
+        math(String.raw`a_{\mathbb{C}}X`),
+        " の略記である（証明でも略記で書き、包含を式の外へ出す行だけ ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " と明示して書く）。",
       ]),
     ],
     proof: [
@@ -3291,14 +3307,16 @@ A
       displayMath(
         String.raw`\begin{aligned}
 (V_2)_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
-&= \exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)
+&= \left(\exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)\right)_{\mathbb{C}}
    &&(\because \blkref{def_transfer_matrix}) \\
-&= \exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} K_2\,\mu(m)\mu'(m)\right)
+&= \left(\exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}
    &&(\because \mathbb{R}\text{ の分配則}) \\
-&= \prod_{m=1}^{M_{\mathrm{col}}}\exp\!\left(K_2\,\mu(m)\mu'(m)\right)
+&= \left(\prod_{m=1}^{M_{\mathrm{col}}}\exp\!\left(K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}
    &&(\because \blkref{theorem_exp_product}\text{ を }n=1,\ K=\mathbb{R}\text{ で有限和へ繰り返し適用}) \\
+&= \prod_{m=1}^{M_{\mathrm{col}}}\left(\exp\!\left(K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_finite_product}\ (m \to M_{\mathrm{col}}\text{、}r_m \to \exp(K_2(\mu(m)\mu'(m))))) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}} A_{i_m j_m}
-   &&(\because A\text{ の成分と }\varsigma_{i_m}=\mu(m),\ \varsigma_{j_m}=\mu'(m)\text{ を全因子へ同時適用}) \\
+   &&(\because A\text{ の成分（}\blkref{two_by_two_transfer_identity}\text{ の略記で }A_{ij}=(\exp(K_2\varsigma_i\varsigma_j))_{\mathbb{C}}\text{）と }\varsigma_{i_m}=\mu(m),\ \varsigma_{j_m}=\mu'(m)\text{ を全因子へ同時適用}) \\
 &= \left(\underbrace{A \boxtimes \cdots \boxtimes A}_{M_{\mathrm{col}}}\right)_{\nu(\iota(\mu)),\nu(\iota(\mu'))}
    &&(\because \blkref{def_kronecker}\text{ (2) のクロネッカー積の成分}) \\
 &= \left(\underbrace{A \boxtimes \cdots \boxtimes A}_{M_{\mathrm{col}}}\right)_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
@@ -3399,13 +3417,16 @@ V_2
    &&(\because V_2\text{ を }A\text{ のクロネッカー冪で書いた式}) \\
 &= \underbrace{\left((2s_2)^{1/2}\exp(K_2^*\sigma^x)\right) \boxtimes \cdots \boxtimes \left((2s_2)^{1/2}\exp(K_2^*\sigma^x)\right)}_{M_{\mathrm{col}}}
    &&(\because \blkref{two_by_two_transfer_identity}\text{ を全因子へ同時適用}) \\
-&= \left((2s_2)^{1/2}\right)^{M_{\mathrm{col}}}
+&= \left(\bigl((2s_2)^{1/2}\bigr)_{\mathbb{C}}\right)^{M_{\mathrm{col}}}
   \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M_{\mathrm{col}}}
-   &&(\because \blkref{kronecker_multilinear}\text{ で各因子のスカラーを前へ出す}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   &&(\because \blkref{kronecker_multilinear}\text{ で各因子のスカラー }\bigl((2s_2)^{1/2}\bigr)_{\mathbb{C}}\text{ を前へ出す}) \\
+&= \left(\bigl((2s_2)^{1/2}\bigr)^{M_{\mathrm{col}}}\right)_{\mathbb{C}}
+  \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M_{\mathrm{col}}}
+   &&(\because \blkref{real_inclusion_preserves_power}\ (r \to (2s_2)^{1/2},\ m \to M_{\mathrm{col}})\text{ を右辺から左辺へ}) \\
+&= \left((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\right)_{\mathbb{C}}
   \underbrace{\exp(K_2^*\sigma^x) \boxtimes \cdots \boxtimes \exp(K_2^*\sigma^x)}_{M_{\mathrm{col}}}
    &&(\because s_2=\sinh 2K_2\text{ と }\blkref{def_second_transfer_matrix_prefactor}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\left(K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
+&= \left((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\right)_{\mathbb{C}}\exp\!\left(K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
    &&(\because \text{積にまとめた式})
 \end{aligned}`,
       ),
@@ -3418,6 +3439,7 @@ V_2
           "証明は旧 <V2_component_equals_pauli> の証明を、成分の番号を ord で指し、V_2 から始まる一続きの結論の式へ組み直したものである。前係数の定義は <def_second_transfer_matrix_prefactor> へ分けた。",
         "V_2 の exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
         "M=2,3,4 と複数の K_2 について、成分定義の V_2 とパウリ表示の V_2 が残差 1e-14 以下で一致することを確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_02_V2_bridge.sage）。2×2 の恒等式も同ファイルで確認している。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 実数の値の包含の段を、一ステップ一定理で式に出した。「V_2 を A のクロネッカー冪で書く」の鎖は、def_transfer_matrix の成分を (exp(…))_ℂ と書き、theorem_exp_product の行のあとに real_inclusion_preserves_finite_product（m → M_col）の 1 行を足した。A の成分は two_by_two_transfer_identity の略記で (exp(K_2ς_iς_j))_ℂ と読むので、包含を因子ごとに出した行から A の成分の行へ直接進む（K_2μ(m)μ'(m) は K_2(μ(m)μ'(m)) と括弧を明示した）。「結論」の鎖は、スカラー ((2s_2)^{1/2})_ℂ を前へ出した行のあとに real_inclusion_preserves_power（r → (2s_2)^{1/2}、m → M_col）の行を足し、前係数を ((2 sinh 2K_2)^{M_col/2})_ℂ と書いた。主張の実数と行列の積 aX は a_ℂX の略記であること（証明でも略記で書き、包含を式の外へ出す行だけ a_ℂ と明示すること）を主張の本文に書いた。Lean は Complex.ofReal_prod・Complex.ofReal_pow・push_cast をやめ、具体版 real_inclusion_preserves_finite_product（M_col = 0 も含む版）・real_inclusion_of_power を同じ行の単位で引き、A の成分の略記の読み方を補題 twoByTwo_apply_eq_real_inclusion（real_inclusion_mul・Complex.ofReal_exp）で置く。",
       ],
     },
   },

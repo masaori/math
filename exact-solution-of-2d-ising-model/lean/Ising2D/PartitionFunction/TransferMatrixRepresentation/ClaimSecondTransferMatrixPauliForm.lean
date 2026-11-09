@@ -25,8 +25,9 @@
 `sgn (ι(μ) m) = μ(m)`（`sgn_configBasisIso`）、`s_2 = sinh 2K_2`（`def_indexed_hyperbolic_abbreviations`）。
 
 * 中間目標「`V_2` を `A` のクロネッカー冪で書く」→ `V2_eq_siteProd_twoByTwo`。
-  各段（`def_transfer_matrix`・分配則・`theorem_exp_product`・`A` の成分・クロネッカー積の成分）は
-  `V2_apply_configBasisIso_eq_siteProd` の中で一行ずつ対応する。行番号 `ord(μ)` と `ν(ι(μ))` の
+  人手の 7 行（`def_transfer_matrix`・分配則・`theorem_exp_product`・`real_inclusion_preserves_finite_product`・
+  `A` の成分（略記の取り決めでの読み方は `twoByTwo_apply_eq_real_inclusion`）・クロネッカー積の成分・番号の読み替え）は
+  `V2_apply_configBasisIso_eq_siteProd` の `calc` の中で一行ずつ対応する。行番号 `ord(μ)` と `ν(ι(μ))` の
   読み替え（`config_numbering_equals_kronecker_numbering`）は、Lean では行列の添字が `ι(μ)` そのもの
   であることにあたる（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` 冒頭）。すべての行・列番号が
   `(ord(μ), ord(μ'))` の形に書けること（`row_configuration_numbering_bijective` の全射性）は
@@ -41,8 +42,9 @@
   クロネッカー積の積の規則でまとめる段は `noncommProd_siteOp`。
 * 中間目標「結論」→ `second_transfer_matrix_pauli_form`。
   `two_by_two_transfer_identity` の全因子への同時適用、多重線型性でスカラーを前へ出す段
-  （`siteProd_smul_const`）、`def_second_transfer_matrix_prefactor`（`secondTransferPrefactor`）、
-  積にまとめた式、の順。
+  （`siteProd_smul_const`）、`real_inclusion_preserves_power`（具体版 `real_inclusion_of_power`）、
+  `def_second_transfer_matrix_prefactor`（`secondTransferPrefactor`）、積にまとめた式、の順。
+  mathlib の `Complex.ofReal_prod`・`Complex.ofReal_pow`・`push_cast` は使わない。
 
 必要十分版は置かない。本ファイル固有の内容は具体的な行列 `V_2` の成分定義とパウリ行列表示の
 突き合わせであり、一般的な部分（連続な環準同型と指数関数の可換性）は `Ising2D/NecSuf/ExpDiagonal.lean`
@@ -50,6 +52,8 @@
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimTwoByTwoTransferIdentity
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 
@@ -90,23 +94,48 @@ noncomputable def V2PauliForm (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M 
 
 /-! ## 中間目標「`V_2` を `A` のクロネッカー冪で書く」 -/
 
-/-- 人手の式変形 `(V_2)_{ord(μ),ord(μ')} = ∏_m A_{i_m j_m} = (A ⊠ ⋯ ⊠ A)_{ord(μ),ord(μ')}`。 -/
+/-- 人手 `two_by_two_transfer_identity` の略記の取り決めでの `A` の成分 `A_{ij} = (exp(K_2(ς_iς_j)))_ℂ`
+（複素行列の成分に書いた実数 `a` は `a_ℂ`）。Lean の `twoByTwo` は成分を `exp((K_2)_ℂ ς_i ς_j)`（`ς` は `sgnC`）と書くので、
+その読み替え: `complex_exp_of_real_argument`（具体版が無く `Complex.ofReal_exp`）と `real_inclusion_preserves_product`
+（`real_inclusion_mul` を 2 回）。積の並べ方 `((K_2)_ℂ ς_i)ς_j = (K_2)_ℂ(ς_iς_j)` は ℂ の積の結合法則。 -/
+theorem twoByTwo_apply_eq_real_inclusion (K2 : ℝ) (i j : Fin 2) :
+    twoByTwo (K2 : ℂ) i j = ((Real.exp (K2 * (sgn i * sgn j)) : ℝ) : ℂ) :=
+  calc twoByTwo (K2 : ℂ) i j
+      = Complex.exp ((K2 : ℂ) * ((sgn i : ℝ) : ℂ) * ((sgn j : ℝ) : ℂ)) := rfl -- `A` の成分（`ς` は `sgnC`）
+    _ = Complex.exp ((K2 : ℂ) * (((sgn i : ℝ) : ℂ) * ((sgn j : ℝ) : ℂ))) := by
+        rw [mul_assoc]                                                      -- ℂ の積の結合法則
+    _ = Complex.exp ((K2 : ℂ) * ((sgn i * sgn j : ℝ) : ℂ)) := by
+        rw [real_inclusion_mul]                                             -- `real_inclusion_preserves_product`
+    _ = Complex.exp (((K2 * (sgn i * sgn j) : ℝ) : ℂ)) := by
+        rw [real_inclusion_mul]                                             -- `real_inclusion_preserves_product`
+    _ = ((Real.exp (K2 * (sgn i * sgn j)) : ℝ) : ℂ) :=
+        (Complex.ofReal_exp _).symm                                         -- `complex_exp_of_real_argument`
+
+/-- 人手の式変形 `(V_2)_{ord(μ),ord(μ')} = ∏_m A_{i_m j_m} = (A ⊠ ⋯ ⊠ A)_{ord(μ),ord(μ')}` の 7 行。
+
+1〜6 行目は `calc` の 6 段と 1 対 1 である（4 行目 `real_inclusion_preserves_finite_product` は `M_col = 0` も含む Lean の版
+`real_inclusion_preserves_finite_product_or_empty`）。3 行目の `theorem_exp_product` の有限和への繰り返し適用は
+mathlib の `Real.exp_sum` で受けている。5 行目の `A` の成分は、`two_by_two_transfer_identity` の略記の取り決めで
+`A_{ij} = (exp(K_2(ς_iς_j)))_ℂ` と読む `twoByTwo_apply_eq_real_inclusion` と、`ς_{i_m} = μ(m)`（`sgn_configBasisIso`）。
+7 行目（`config_numbering_equals_kronecker_numbering`、`ν(ι(μ))` と `ord(μ)` の読み替え）は、Lean では行列の添字が `ι(μ)` そのものなので段は無い。 -/
 theorem V2_apply_configBasisIso_eq_siteProd (K2 : ℝ) (μ μ' : SpinConf M) :
     V2 M K2 (configBasisIso M μ) (configBasisIso M μ')
-      = siteProd M (fun _ => twoByTwo (K2 : ℂ)) (configBasisIso M μ) (configBasisIso M μ') := by
-  -- `def_transfer_matrix`
-  rw [V2_apply_configBasisIso,
-    -- `ℝ` の分配則
-    Finset.mul_sum,
-    -- `theorem_exp_product` を有限和へ繰り返し適用
-    Real.exp_sum, Complex.ofReal_prod,
-    -- クロネッカー積の成分（`def_kronecker` (2)）
-    siteProd_apply]
-  -- `A` の成分と `ς_{i_m} = μ(m)`, `ς_{j_m} = μ'(m)` を全因子へ同時適用
-  refine Finset.prod_congr rfl fun m _ => ?_
-  rw [twoByTwo, Matrix.of_apply, sgnC_configBasisIso, sgnC_configBasisIso, Complex.ofReal_exp]
-  push_cast
-  ring_nf
+      = siteProd M (fun _ => twoByTwo (K2 : ℂ)) (configBasisIso M μ) (configBasisIso M μ') :=
+  calc V2 M K2 (configBasisIso M μ) (configBasisIso M μ')
+      = ((Real.exp (K2 * ∑ m : Fin M, (μ m : ℝ) * (μ' m : ℝ)) : ℝ) : ℂ) :=
+        V2_apply_configBasisIso K2 μ μ'                                     -- `def_transfer_matrix`
+    _ = ((Real.exp (∑ m : Fin M, K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) := by
+        rw [Finset.mul_sum]                                                 -- `ℝ` の分配則
+    _ = ((∏ m : Fin M, Real.exp (K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) := by
+        rw [Real.exp_sum]                                                   -- `theorem_exp_product` を有限和へ繰り返し適用
+    _ = ∏ m : Fin M, ((Real.exp (K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) :=
+        (real_inclusion_preserves_finite_product_or_empty M _).symm         -- `real_inclusion_preserves_finite_product`
+    _ = ∏ m : Fin M, twoByTwo (K2 : ℂ) (configBasisIso M μ m) (configBasisIso M μ' m) :=
+        Finset.prod_congr rfl fun m _ => by
+          rw [twoByTwo_apply_eq_real_inclusion, sgn_configBasisIso, sgn_configBasisIso]
+                                                                            -- `A` の成分と `ς_{i_m} = μ(m)`, `ς_{j_m} = μ'(m)` を全因子へ
+    _ = siteProd M (fun _ => twoByTwo (K2 : ℂ)) (configBasisIso M μ) (configBasisIso M μ') :=
+        (siteProd_apply _ _ _ _).symm                                       -- `def_kronecker` (2) のクロネッカー積の成分
 
 /-- **中間目標**: 成分定義の `V_2` は `A` のクロネッカー冪 `A ⊠ ⋯ ⊠ A`（`M_col` 個）。 -/
 theorem V2_eq_siteProd_twoByTwo (K2 : ℝ) :
@@ -228,10 +257,12 @@ theorem second_transfer_matrix_pauli_form_prefactor {K2 : ℝ} (h : 0 < K2) :
       -- `kronecker_multilinear` で各因子のスカラーを前へ出す
     _ = (((Real.sqrt (2 * Real.sinh (2 * K2)) : ℝ) : ℂ)) ^ M •
           siteProd M (fun _ => exp (((Kstar K2 : ℝ) : ℂ) • pauliX)) := siteProd_smul_const _ _
-      -- `def_second_transfer_matrix_prefactor`
-    _ = ((secondTransferPrefactor M K2 : ℝ) : ℂ) •
+    _ = (((Real.sqrt (2 * Real.sinh (2 * K2))) ^ M : ℝ) : ℂ) •
           siteProd M (fun _ => exp (((Kstar K2 : ℝ) : ℂ) • pauliX)) := by
-        rw [secondTransferPrefactor, Complex.ofReal_pow]
+        rw [real_inclusion_of_power]                              -- `real_inclusion_preserves_power`（`r → (2s_2)^{1/2}`、`m → M_col`）を右辺から左辺へ
+      -- `s_2 = sinh 2K_2` と `def_second_transfer_matrix_prefactor`
+    _ = ((secondTransferPrefactor M K2 : ℝ) : ℂ) •
+          siteProd M (fun _ => exp (((Kstar K2 : ℝ) : ℂ) • pauliX)) := rfl
       -- 積にまとめた式
     _ = ((secondTransferPrefactor M K2 : ℝ) : ℂ) •
           exp (((Kstar K2 : ℝ) : ℂ) • ∑ m : Fin M, sigmaX m) := by rw [exp_smul_sum_sigmaX]
