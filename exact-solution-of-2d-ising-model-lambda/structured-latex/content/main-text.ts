@@ -48483,8 +48483,8 @@ p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
                       ]),
                       displayMath(String.raw`\begin{aligned}
 B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
-&\le h&&\bigl(\because\ k\ge1,\ h>0\text{。有理数の順序}\bigr)\\
-&<N&&\bigl(\because\ N=h+1\text{。有理数の順序}\bigr)
+&\le h&&\bigl(\because\ k\ge1,\ h>0\text{ と有理数の順序}\bigr)\\
+&<N&&\bigl(\because\ N=h+1\text{ と有理数の順序}\bigr)
 \end{aligned}`),
                       paragraph([
                         ref("claim_positive_rational_positive_in_real_closed"),
@@ -48495,7 +48495,7 @@ B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
 -N&<_R-B&&(\because\ B<_R N\text{ の加法逆元による順序反転})\\
 &<_R a&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
 &<_R B&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
-&<_R N&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }N-B\text{ に適用}).
+&<_R N&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }N-B\text{ に適用})
 \end{aligned}`),
                     ],
                   },
