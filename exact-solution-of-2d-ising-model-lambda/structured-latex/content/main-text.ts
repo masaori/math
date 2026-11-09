@@ -12685,6 +12685,51 @@ d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集
             role: "supporting",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_claim_tree_induce_remove_leaf",
+              focus: {
+                id: "tools_claim_tree_induce_remove_leaf",
+                kind: "claim",
+                title: { text: "根でない葉を除いた誘導部分木は根を含む木である" },
+                labels: ["claim_tree_induce_remove_leaf"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.tree_induce_remove_leaf",
+                  "Ising2DLambda.NecSuf.Tools.tree_induce_remove_leaf",
+                ],
+                verification: ["sagemath/check/tree-induce-remove-leaf"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " の木 ",
+                    math(String.raw`T=(V,F)`), " と根 ", math(String.raw`o\in V`),
+                    " を取る。根と異なる葉 ", math(String.raw`v\in V\setminus\{o\}`),
+                    " を除くと、", math(String.raw`V\setminus\{v\}`),
+                    " 上の誘導部分グラフは根を含む木である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`o\ne v`), " より、根は残る。",
+                    "相異なる残りの二頂点 ",
+                    math(String.raw`x,y\in V\setminus\{v\}`),
+                    " を取る。木 ", math(String.raw`T`),
+                    " の ", math(String.raw`x`), " から ", math(String.raw`y`),
+                    " への単純路が ", math(String.raw`v`),
+                    " を内部頂点として通るなら、", math(String.raw`v`),
+                    " にはその路の相異なる前後二頂点が隣接する。",
+                    "これは葉に隣接する頂点が一つだけであることに反する。",
+                    "従ってこの路は ", math(String.raw`V\setminus\{v\}`),
+                    " の中にあり、誘導部分グラフは連結である。",
+                    "誘導部分グラフの閉路は元の木の閉路にもなるので存在しない。",
+                    "従って根を含む木である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_even_edge_processed_vertex_parity",
               focus: {
                 id: "tools_claim_even_edge_processed_vertex_parity",
@@ -12784,7 +12829,8 @@ d_{A\mathbin\triangle\{e\}}(w)\bmod 2
                   ]),
                   paragraph([
                     "相異なる残りの二頂点を結ぶ木の路では、葉は内部頂点になれない。",
-                    "従って木の葉を除いた誘導部分グラフは、根を含む連結な木である。",
+                    "従って ", ref("claim_tree_induce_remove_leaf"),
+                    " により、葉を除いた誘導部分グラフは根を含む木である。",
                     "新たに加えうる辺は ", math(String.raw`e_v`),
                     " だけであり、", ref("claim_even_edge_processed_vertex_parity"),
                     " により先に処理した頂点の偶数性は保たれる。",

@@ -674,6 +674,7 @@ export const ALL_LABELS = [
   "claim_transposition_sign_on_finite_ordered_set",
   "claim_transverse_crossing_symmetric",
   "claim_transverse_translates_of_periodic_plane_lift_disjoint",
+  "claim_tree_induce_remove_leaf",
   "claim_trivial_sector_configuration_reconstruction",
   "claim_twist_sign_from_parity",
   "claim_twist_sign_nonzero",
