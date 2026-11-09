@@ -2346,6 +2346,9 @@ targets=(
   Ising2DLambda.KacWard.planeCellBoundary_injective
   Ising2DLambda.NecSuf.KacWard.boundary_injective_of_symmetric_difference
   Ising2DLambda.KacWard.planeCellBoundary_injective_from_necSuf
+  Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective
+  Ising2DLambda.NecSuf.KacWard.boundary_bijective_of_even_edge_preimages
+  Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective_from_necSuf
   Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf
   Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning
   Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf

@@ -68523,8 +68523,11 @@ e_v\in\mathcal B_{\square}(T\triangle U)
                           displayMath(String.raw`\begin{aligned}
 &\bigl((a\mathbin{\mathrm{xor}}b)+(d\mathbin{\mathrm{xor}}f)
 +(a\mathbin{\mathrm{xor}}d)+(b\mathbin{\mathrm{xor}}f)\bigr)\bmod2\\
+&=\bigl(((a+b)\bmod2)+((d+f)\bmod2)
++((a+d)\bmod2)+((b+f)\bmod2)\bigr)\bmod2
+&&\bigl(\because\ x\mathbin{\mathrm{xor}}y=(x+y)\bmod2\bigr)\\
 &=(a+b+d+f+a+d+b+f)\bmod2
-&&\bigl(\because\ x\mathbin{\mathrm{xor}}y=(x+y)\bmod2\text{ と剰余の加法則}\bigr)\\
+&&\bigl(\because\ \text{剰余の加法則}\bigr)\\
 &=2(a+b+d+f)\bmod2
 &&\bigl(\because\ \mathbb N\text{ の交換律と結合律}\bigr)\\
 &=0
@@ -69391,6 +69394,64 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                             ref("def_vertex_simple_path"), "）。", math(String.raw`u,v`),
                             " は任意で頂点集合は空でないので、", ref("def_finite_graph_connected"),
                             " により連結である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_boundary_even_edge_bijection",
+                        kind: "claim",
+                        title: { text: "穴のないセル集合の部分集合と偶辺集合は境界で一対一に対応する" },
+                        labels: ["claim_cell_boundary_even_edge_bijection"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective",
+                          "Ising2DLambda.NecSuf.KacWard.boundary_bijective_of_even_edge_preimages",
+                          "Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/cell-boundary-even-edge-bijection"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の補集合が辺連結（", ref("def_edge_connected_cell_set"),
+                            "）であるとする。", math(String.raw`S`), " の部分集合全体から、",
+                            math(String.raw`\mathcal E_{\square}(S)`), " に含まれる偶辺集合全体への写像",
+                          ]),
+                          displayMath(String.raw`T\longmapsto\mathcal B_{\square}(T)
+\qquad(T\subset S)`),
+                          paragraph([
+                            "は全単射である（", ref("def_plane_cell_boundary_edge_set"),
+                            "、", ref("def_cell_edge_set"), "）。ここで偶辺集合とは、各頂点に接する辺の本数が偶数の有限集合をいう。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の ", math(String.raw`T\subset S`), " を取る。境界の各辺は ",
+                            ref("def_plane_cell_boundary_edge_set"), " により ",
+                            math(String.raw`T`), " のセルの辺であり、従って ",
+                            math(String.raw`\mathcal E_{\square}(S)`), " に属する。",
+                            ref("claim_plane_cell_boundary_even_at_vertex"),
+                            " により境界の各頂点の次数は偶数だから、この写像は指定した集合へ入る。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T)\subset\mathcal E_{\square}(S)
+\qquad\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set},\ \blkref{def_cell_edge_set},\ T\subset S\bigr)`),
+                          paragraph([
+                            "二つの部分集合 ", math(String.raw`T,U\subset S`),
+                            " が同じ境界を持てば、", ref("claim_plane_cell_boundary_injective"),
+                            " より ", math(String.raw`T=U`), " である。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T)=\mathcal B_{\square}(U)
+\Longrightarrow T=U
+\qquad\bigl(\because\ \blkref{claim_plane_cell_boundary_injective}\bigr)`),
+                          paragraph([
+                            "逆に、指定した任意の偶辺集合 ",
+                            math(String.raw`Z\subset\mathcal E_{\square}(S)`),
+                            " には、", ref("claim_even_edge_set_cell_boundary"),
+                            " により ", math(String.raw`T\subset S`), " で ",
+                            math(String.raw`\mathcal B_{\square}(T)=Z`),
+                            " を満たすものが存在する。よって単射性と全射性から全単射を得る。",
                           ]),
                         ],
                       },
