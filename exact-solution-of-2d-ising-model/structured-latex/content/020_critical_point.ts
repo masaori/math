@@ -2622,6 +2622,79 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
   },
 
   {
+    id: "critical_claim_real_inclusion_preserves_power",
+    kind: "claim",
+    title: { tex: String.raw`(r^m)_{\mathbb{C}} = (r_{\mathbb{C}})^m` },
+    labels: ["real_inclusion_preserves_power"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{R}`),
+        "、",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`(r^m)_{\mathbb{C}} = (r_{\mathbb{C}})^m`),
+      paragraph([
+        "が成り立つ。左辺の ",
+        math(String.raw`r^m \in \mathbb{R}`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪、右辺の ",
+        math(String.raw`(r_{\mathbb{C}})^m \in \mathbb{C}`),
+        " は ",
+        ref("def_power_of_complex_number"),
+        " の冪、",
+        math(String.raw`x_{\mathbb{C}}`),
+        "（",
+        math(String.raw`x \in \mathbb{R}`),
+        "）は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(r^0)_{\mathbb{C}}
+&= (1_{\mathbb{R}})_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to r)\bigr)\\
+&= 1_{\mathbb{C}}
+  &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (1_{\mathbb{R}})_{\mathbb{C}}\bigr)\\
+&= (r_{\mathbb{C}})^0
+  &&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\ (z \to r_{\mathbb{C}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " で主張が成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(r^{m+1})_{\mathbb{C}}
+&= (r^m\, r)_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m\, a\ (a \to r)\bigr)\\
+&= (r^m)_{\mathbb{C}}\, r_{\mathbb{C}}
+  &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to r^m,\ b \to r)\ \text{を右辺から左辺へ}\bigr)\\
+&= (r_{\mathbb{C}})^m\, r_{\mathbb{C}}
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= (r_{\mathbb{C}})^{m+1}
+  &&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m\, z\ (z \to r_{\mathbb{C}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`m+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_check_number_operator_product の基底段階の tr(I) = 2^{M_col} の鎖が、ℝ の冪 2_ℝ^{M_col} の包含を ℂ の冪 (2_C)^{M_col} へ移す段を「ℂ の四則」の名前だけで根拠にしていたので足した。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_real_log_of_power",
     kind: "claim",
     title: { tex: String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\log a` },

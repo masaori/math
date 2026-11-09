@@ -47,6 +47,14 @@ theorem trace_linear (α β : ℂ) (A B : Matrix n n ℂ) :
 theorem trace_cyclic (A B : Matrix n n ℂ) : (A * B).trace = (B * A).trace :=
   Matrix.trace_mul_comm A B
 
+/-- **人手 `trace_basic_properties` (3)**: `tr(I_n) = Σ_{k=1}^{n} 1_ℂ`。人手の 3 行と 1 対 1 の `calc`。 -/
+theorem trace_identity_eq_sum_one : (1 : Matrix n n ℂ).trace = ∑ _k : n, (1 : ℂ) :=
+  calc (1 : Matrix n n ℂ).trace
+      = ∑ k, (1 : Matrix n n ℂ) k k := rfl                               -- `def_trace`
+    _ = ∑ k, (if k = k then (1 : ℂ) else 0) :=
+        Finset.sum_congr rfl fun _ _ => Matrix.one_apply              -- `def_identity_matrix`（成分は `δ_{kk}`）
+    _ = ∑ _k : n, (1 : ℂ) := Finset.sum_congr rfl fun _ _ => if_pos rfl   -- `def_kronecker_delta` の `i = j` の場合
+
 /-- **原文 `trace_basic_properties` (3)**: `tr(I_n) = n`。 -/
 theorem trace_one_eq_card : (1 : Matrix n n ℂ).trace = (Fintype.card n : ℂ) :=
   Matrix.trace_one

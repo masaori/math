@@ -2511,15 +2511,37 @@ X\,\check{n}_\nu
         math(String.raw`k = 0`),
         "）。空の積は主張の読みにより ",
         math(String.raw`I`),
+        " である。行列の大きさ ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " は ",
+        ref("def_power_of_integer"),
+        " の整数の冪 ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}`),
+        " で、",
+        ref("power_of_two_in_integers_is_at_least_one"),
+        " より ",
+        math(String.raw`2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
         " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}(I)
-&= \sum_{l=1}^{2^{M_{\mathrm{col}}}} 1_{\mathbb{C}}
-   \quad \left(\because\ \blkref{trace_basic_properties}\ \text{(3)}\ (n \to 2^{M_{\mathrm{col}}})\right) \\
+&= \sum_{l=1}^{2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}} 1_{\mathbb{C}}
+   \quad \left(\because\ \blkref{trace_basic_properties}\ \text{(3)}\ (n \to 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}},\ \text{添字}\ k \to l)\right) \\
+&= \sum_{l=1}^{2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}} (1_{\mathbb{R}})_{\mathbb{C}}
+   \quad \left(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (1_{\mathbb{R}})_{\mathbb{C}}\ \text{を}\ 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}\ \text{個の項へ同時に}\right) \\
+&= \Bigl(\sum_{l=1}^{2_{\mathbb{Z}}^{\,M_{\mathrm{col}}}} 1_{\mathbb{R}}\Bigr)_{\mathbb{C}}
+   \quad \left(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m \to 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}},\ \text{添字}\ j \to l,\ r_j \to 1_{\mathbb{R}})\right) \\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(2_{\mathbb{Z}}^{\,M_{\mathrm{col}}})\, 1_{\mathbb{R}}\bigr)_{\mathbb{C}}
+   \quad \left(\because\ \blkref{finite_sum_of_constant_real_number}\ (m \to 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}},\ r \to 1_{\mathbb{R}})\right) \\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(2_{\mathbb{Z}}^{\,M_{\mathrm{col}}})\bigr)_{\mathbb{C}}
+   \quad (\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}) \\
+&= \bigl(2_{\mathbb{R}}^{\,M_{\mathrm{col}}}\bigr)_{\mathbb{C}}
+   \quad \left(\because\ \blkref{inclusion_zz_to_rr_of_power_of_two}\ (M \to M_{\mathrm{col}})\right) \\
+&= \bigl((2_{\mathbb{R}})_{\mathbb{C}}\bigr)^{M_{\mathrm{col}}}
+   \quad \left(\because\ \blkref{real_inclusion_preserves_power}\ (r \to 2_{\mathbb{R}},\ m \to M_{\mathrm{col}})\right) \\
 &= 2^{M_{\mathrm{col}}}
-   \quad (\because 1_{\mathbb{C}}\ \text{を}\ 2^{M_{\mathrm{col}}}\ \text{個足した和。}\mathbb{C}\ \text{の四則}) \\
+   \quad (\because\ \text{主張の右辺の底}\ 2 := 2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}) \\
 &= 2^{M_{\mathrm{col}}-0}
    \quad (\because \mathbb{Z}\ \text{の計算}\ M_{\mathrm{col}} - 0 = M_{\mathrm{col}})
 \end{aligned}`,
@@ -2910,6 +2932,7 @@ w
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（ň のみの積について {1,…,M} の全部分集合、残差 ≤ 7.1e-15）。因子が混在する場合は check_02 の tr(Q̌_ε) = 1（k = M、残差 ≤ 1.1e-15）が該当する。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: 証明の名前だけの根拠を、1 行 1 主張のラベル参照の鎖に直した。最初の因子 R_{μ_1} を分けて残りの積 P と可換性を使っていた帰納法を、def_finite_product_of_matrices の左から掛ける形に合わせて最後の因子 R_{μ_k} を分ける形にした（準備 1。k = 1 では P := I）。「ψ̌ は各 ň_{μ_j} と可換で I も任意の行列と可換だから R_{μ_j}^{(e_j)} とも、したがって P とも可換」の散文を、単位行列との積の 2 行・e_j ごとの 3 行（check_number_operators_commute (1)、commuting_with_difference）・matrix_commuting_with_each_factor_commutes_with_finite_product の鎖にした（準備 2。最後の因子を分けたので ψ̌_{M_col+1-μ_k} と P の可換性だけで済み、ň と P の可換性は使わない）。「分配則とトレースの線型性」2 か所を準備 3 の 10 行（差の書き換え・分配・単位行列・符号の外出し・1 倍・−1 倍・trace_basic_properties (1)・ℂ の計算）にし、巡回性の行の前後の結合律を mat_mult_associative の行に分けた。基底段階の tr(I) = 2^{M_col} を trace_basic_properties (3) からの 3 行にし、主張に積が def_finite_product_of_matrices の有限積であること・右辺の冪・k ≤ M_col を書いた。末尾の「積の順序に依らないので、どの因子を μ_1 の位置に置いてもよい」の段落は、帰納法が全ての添字の列について示すので要らなくなり、外した。主張は不変。Lean の具体版は Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft（ClaimTraceCheckNumberOperatorProduct.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_47。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 帰納段階の名前だけの根拠「ℂ の四則」4 か所（移項の 2 行、e_k = 0 の最後の行、最後の鎖の最後の行）を、準備 4（2_C = 1_C + 1_C、2_C^{-1}2_C = 1_C、2_C w = w + w、w = 2_C^{-1}(2_C w)、w = 2_C^{-1}w + 2_C^{-1}w）と ℂ の体の等式 1 つずつの鎖にした。「両辺に足して 2 で割る」の 2 行は tr(Pň) から始まる 9 行の鎖にした。½ を 2_C^{-1} と書き、主張の右辺の冪の底が 2_C であることを主張に書いた。値と主張は不変。基底段階の「1_C を 2^{M_col} 個足した和」は別に扱う。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 基底段階の名前だけの根拠「1_C を 2^{M_col} 個足した和。ℂ の四則」を、1_C = (1_ℝ)_C・real_inclusion_preserves_finite_sum・finite_sum_of_constant_real_number・inclusion_zz_to_rr_of_power_of_two と新しく足した real_inclusion_preserves_power（ℝ の冪の包含は包含の ℂ の冪）の 9 行の鎖にした。行列の大きさが def_power_of_integer の 2_ℤ^{M_col} ∈ ℤ_{≥1} であることを基底段階の前置きに書いた。値と主張は不変。",
       ],
     },
   },

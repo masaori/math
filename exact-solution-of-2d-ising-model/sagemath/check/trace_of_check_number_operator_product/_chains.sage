@@ -7,6 +7,7 @@
 #   check(ok, label): 一個の等号（または一つの主張）を受け取る
 # 各行は証明の括弧どおりに組み、隣の行と比べる。同じ式（同じ括弧の積）は一度だけ計算して使い回す。
 from itertools import permutations, product
+load("../../_shared/inclusion_zz_to_rr_by_definition.sage")
 
 
 def neg(X):
@@ -44,8 +45,40 @@ def assumption_lines(M, Id, D, A, check):
 
 
 def base_case(M, Id, check):
-    # 基底段階（k = 0）: tr(I) = Σ_l 1 = 2^{M_col} = 2^{M_col-0}
-    chain([Id.trace(), sum(QQ(1) for _ in range(2 ** M)), QQ(2) ** M, QQ(2) ** (M - 0)], f"M={M} 基底段階", check)
+    # 基底段階（k = 0）の 9 行: tr(I) = Σ_{l=1}^{2_ℤ^M} 1_ℂ = Σ (1_ℝ)_ℂ = (Σ 1_ℝ)_ℂ = (ι(2_ℤ^M) 1_ℝ)_ℂ = (ι(2_ℤ^M))_ℂ
+    #   = (2_ℝ^M)_ℂ = ((2_ℝ)_ℂ)^M = 2^M = 2^{M-0}。ℂ は実数の対（definition_of_cc）、ℤ・ℝ の冪と ι は定義の再帰で作る。
+    one_r, two_r = QQ(1), QQ(1) + QQ(1)
+    incl = lambda x: (QQ(x), QQ(0))                                   # inclusion_rr_to_cc
+    pair_add = lambda z, w: (z[0] + w[0], z[1] + w[1])                # definition_of_cc の和
+    pair_mul = lambda z, w: (z[0] * w[0] - z[1] * w[1], z[0] * w[1] + z[1] * w[0])
+    def csum(zs):                                                     # def_finite_sum_of_complex_numbers（左から足す）
+        out = zs[0]
+        for z in zs[1:]:
+            out = pair_add(out, z)
+        return out
+    def cpow(z, m):                                                   # def_power_of_complex_number
+        out = incl(1)
+        for _ in range(m):
+            out = pair_mul(out, z)
+        return out
+    d = power_of_integer_by_definition(ZZ(1) + ZZ(1), M)              # 2_ℤ^M（def_power_of_integer）
+    check(d >= 1, f"M={M} 基底段階: 2_ℤ^M ∈ ℤ_{{≥1}}")
+    tr = Id.trace()
+    rows = [(QQ(tr), QQ(0)),
+            csum([incl(1)] * d),                                      # trace_basic_properties (3)
+            csum([incl(one_r)] * d),                                  # 1_ℂ = (1_ℝ)_ℂ
+            incl(finite_sum_by_definition([one_r] * d)),              # real_inclusion_preserves_finite_sum
+            incl(iota_zz_to_rr(d) * one_r),                           # finite_sum_of_constant_real_number
+            incl(iota_zz_to_rr(d)),                                   # 1_ℝ は乗法の単位元
+            incl(power_of_real_by_definition(two_r, M)),              # inclusion_zz_to_rr_of_power_of_two
+            cpow(incl(two_r), M),                                     # real_inclusion_preserves_power
+            (QQ(2) ** M, QQ(0)),                                      # 主張の底 2 := 2_ℂ := (2_ℝ)_ℂ（組み込みの冪）
+            (QQ(2) ** (M - 0), QQ(0))]
+    check(Id.trace() == Id.trace().parent()(rows[0][0]), f"M={M} 基底段階: tr(I) は実数の包含")
+    chain(rows, f"M={M} 基底段階", check)
+    # 否定の対照: ℝ の冪の底を 3 に取り違えると M ≥ 1 で合わない
+    if M >= 1:
+        check(incl(power_of_real_by_definition(QQ(3), M)) != rows[6], f"M={M} 基底段階: 否定の対照（底 3）")
 
 
 def induction_step(M, Id, D, A, n, mus, es, check):

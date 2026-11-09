@@ -28,6 +28,9 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.FiniteProductLeft
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
@@ -118,13 +121,28 @@ theorem trace_projFactorProd (S T : Finset (CheckIdx M)) :
 `F.ann μ`、`ň_μ = ψ̌_μ^†ψ̌_{M_col+1-μ}` が `F.nOp_def` である。`mat_mult_associative` の行は、ほかのファイルと同じく mathlib の
 `Matrix.mul_assoc` で受ける（人手 `mat_mult_associative` の具体版が無い）。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
 
-/-- **人手の基底段階**（`k = 0`）: `tr(I) = Σ_{l=1}^{2^{M_col}} 1_ℂ = 2^{M_col} = 2^{M_col-0}`。
-1 行目の `trace_basic_properties` (3) は、Lean では `Σ 1_ℂ` を経ずに添字集合の元の数で述べた `trace_one_eq_card` で受ける
-（人手の (3) の右辺と Lean の形の違いは状態台帳の `trace_basic_properties` の件に残っている）。 -/
-theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0) :=
+/-- **人手の基底段階**（`k = 0`）: `tr(I) = Σ_{l=1}^{2_ℤ^{M_col}} 1_ℂ = Σ (1_ℝ)_ℂ = (Σ 1_ℝ)_ℂ = (ι(2_ℤ^{M_col})1_ℝ)_ℂ = (ι(2_ℤ^{M_col}))_ℂ
+= (2_ℝ^{M_col})_ℂ = ((2_ℝ)_ℂ)^{M_col} = 2^{M_col} = 2^{M_col-0}`。人手の 9 行と 1 対 1 の `calc` に、添字の個数 `#Conf M = 2_ℤ^{M_col}` の
+読み替えの 1 段（人手は和の上端を `2_ℤ^{M_col}` で書くので、Lean だけの段。`DefinitionSectorRayleighSup.lean` と同じ）を足したもの。
+人手の前置きの `2_ℤ^{M_col} ∈ ℤ_{≥1}`（`power_of_two_in_integers_is_at_least_one`）は `hcard`。
+`real_inclusion_preserves_finite_sum` は具体版が無く、既存の使う側と同じく mathlib の `Complex.ofReal_sum` で受ける。 -/
+theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0) := by
+  have hcard : 1 ≤ Fintype.card (Conf M) := by
+    rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M
   calc (1 : TensorPow M).trace
-      = ((Fintype.card (Conf M) : ℕ) : ℂ) := trace_one_eq_card    -- `trace_basic_properties` (3)（`n → 2^{M_col}`）
-    _ = (2 : ℂ) ^ M := by simp [Conf]                               -- `1_ℂ` を `2^{M_col}` 個足した和
+      = ∑ _l : Conf M, (1 : ℂ) := trace_identity_eq_sum_one        -- `trace_basic_properties` (3)（`n → 2_ℤ^{M_col}`、添字 `k → l`）
+    _ = ∑ _l : Conf M, ((1 : ℝ) : ℂ) :=
+        Finset.sum_congr rfl fun _ _ => Complex.ofReal_one.symm      -- `1_ℂ` は `(1_ℝ)_ℂ` の略記を `2_ℤ^{M_col}` 個の項へ同時に
+    _ = ((∑ _l : Conf M, (1 : ℝ) : ℝ) : ℂ) := (Complex.ofReal_sum _ _).symm
+                                                                     -- `real_inclusion_preserves_finite_sum`（`m → 2_ℤ^{M_col}`、添字 `j → l`、`r_j → 1_ℝ`）
+    _ = (((Fintype.card (Conf M) : ℝ) * 1 : ℝ) : ℂ) := by
+        rw [finite_sum_of_constant_real_number_fintype hcard]        -- `finite_sum_of_constant_real_number`（`m → 2_ℤ^{M_col}`、`r → 1_ℝ`）
+    _ = ((((2 ^ M : ℕ) : ℝ) * 1 : ℝ) : ℂ) := by rw [card_conf_nat]   -- 添字の個数 `#Conf M = 2_ℤ^{M_col}`（Lean だけの読み替えの段）
+    _ = (((2 ^ M : ℕ) : ℝ) : ℂ) := by rw [mul_one]                     -- `1_ℝ` は `ℝ` の乗法の単位元
+    _ = (((2 : ℝ) ^ M : ℝ) : ℂ) := by rw [inclusion_zz_to_rr_of_power_of_two]
+                                                                     -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）
+    _ = ((2 : ℝ) : ℂ) ^ M := real_inclusion_of_power 2 M                  -- `real_inclusion_preserves_power`（`r → 2_ℝ`、`m → M_col`）
+    _ = (2 : ℂ) ^ M := by rw [Complex.ofReal_ofNat]                  -- 主張の右辺の底 `2 := 2_ℂ := (2_ℝ)_ℂ`
     _ = (2 : ℂ) ^ (M - 0) := by rw [Nat.sub_zero]                    -- `M_col - 0 = M_col`
 
 /-- **人手の準備 2** の単位行列との積の鎖（2 行）: `ψ̌_{M_col+1-μ_k} I = ψ̌_{M_col+1-μ_k} = I ψ̌_{M_col+1-μ_k}`。 -/

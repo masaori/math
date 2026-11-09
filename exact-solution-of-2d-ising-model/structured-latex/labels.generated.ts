@@ -533,6 +533,7 @@ export const ALL_LABELS = [
   "real_inclusion_of_one_half_is_inverse_of_two",
   "real_inclusion_preserves_finite_product",
   "real_inclusion_preserves_finite_sum",
+  "real_inclusion_preserves_power",
   "real_inclusion_preserves_product",
   "real_inclusion_preserves_sum",
   "real_inclusion_preserves_sum_over_binary_words",
