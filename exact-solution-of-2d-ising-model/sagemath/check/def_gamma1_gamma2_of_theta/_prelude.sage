@@ -33,20 +33,26 @@ A = matrix(R, 2, 2, [
     c1*c2s - s1*s2s*co,
 ])
 
+P21 = c1*co + i*si - s1*c2           # 証明の略記 P
+
 # 鎖: [(式, 引く関係式のリスト)]。最初の行は始点で、関係式は None。
 CHAINS = {
     'γ_2(-θ)': [
-        (gamma2_def(epm, com, sim), None),                       # 本ブロックの γ_2 の定義式
-        (i*em*s2s*(c1*com - i*sim - s1*c2), ['i(-θ)=-iθ']),
-        (i*em*s2s*(c1*co - i*sim - s1*c2), ['cos(-θ)=cos θ']),
-        (i*em*s2s*(c1*co + i*si - s1*c2), ['sin(-θ)=-sin θ']),
+        (gamma2_def(epm, com, sim), None),                       # 本ブロックの γ_2 の定義式を -θ に適用
+        (i*em*s2s*(c1*com - i*sim - s1*c2), ['i(-θ)=-iθ']),      # i_times_negated_real_is_negation_of_i_times
+        (i*em*s2s*(c1*co - i*sim - s1*c2), ['cos(-θ)=cos θ']),   # cos_of_negated_real
+        (i*em*s2s*(c1*co - i*(-si) - s1*c2), ['sin(-θ)=-sin θ']),  # sin_of_negated_real
+        (i*em*s2s*(c1*co - (-(i*si)) - s1*c2), []),              # ℂ で x(-y) = -(xy)
+        (i*em*s2s*(c1*co + i*si - s1*c2), []),                   # ℂ で a - (-b) = a + b
     ],
     'A(θ)_{2,1}': [
-        (A[1, 0], None),
-        (-(i*em*s2s*(c1*co + i*si - s1*c2)), []),               # 直前の γ_2(-θ) の式の終点の符号反転
+        ((((-i)*em)*s2s)*P21, None),                             # def_A_theta の (2,1) 成分（積は左から括る）
+        (((-(i*em))*s2s)*P21, []),                               # negative_i_times_complex_is_negation_of_i_times (z → exp(-iθ))
+        ((-((i*em)*s2s))*P21, []),                               # ℂ で (-x)y = -(xy)（x → i exp(-iθ), y → s_2^*）
+        (-(((i*em)*s2s)*P21), []),                               # ℂ で (-x)y = -(xy)（x → (i exp(-iθ))s_2^*, y → P）
+        (-(i*em*s2s*(c1*co + i*si - s1*c2)), []),                # 上の γ_2(-θ) の鎖の終点を右辺から左辺へ
     ],
 }
-
 
 class Report:
     def __init__(self, title):

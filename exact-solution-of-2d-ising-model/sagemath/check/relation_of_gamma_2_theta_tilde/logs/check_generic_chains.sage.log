@@ -1,23 +1,4 @@
 == relation_of_gamma_2_theta_tilde: 一般の点での鎖
-PASS i(-θ) = -iθ の鎖 第 1 行 = 第 2 行
-PASS i(-θ) = -iθ の鎖 第 2 行 = 第 3 行
-PASS i(-θ) = -iθ の鎖 第 3 行 = 第 4 行
-PASS i(-θ) = -iθ の鎖 第 4 行 = 第 5 行
-PASS i(-θ) = -iθ の鎖 第 5 行 = 第 6 行
-PASS i(-θ) = -iθ の鎖 第 6 行 = 第 7 行
-PASS i(-θ) = -iθ の鎖 否定の対照: iθ ≠ -iθ
-PASS -i(-θ) = iθ の鎖 第 1 行 = 第 2 行
-PASS -i(-θ) = iθ の鎖 第 2 行 = 第 3 行
-PASS cos(-θ) の鎖 第 1 行 = 第 2 行
-PASS cos(-θ) の鎖 第 2 行 = 第 3 行
-PASS cos(-θ) の鎖 第 3 行 = 第 4 行
-PASS cos(-θ) の鎖 最終行 = cos θ
-PASS sin(-θ) の鎖 否定の対照: b - a ≠ a - b
-PASS sin(-θ) の鎖 第 1 行 = 第 2 行
-PASS sin(-θ) の鎖 第 2 行 = 第 3 行
-PASS sin(-θ) の鎖 第 3 行 = 第 4 行
-PASS sin(-θ) の鎖 第 4 行 = 第 5 行
-PASS sin(-θ) の鎖 最終行 = -sin θ
 PASS cos θ + i sin θ の鎖 否定の対照: 分母の i だけを落とすと（分子に i が残ると）等号が崩れる
 PASS cos θ + i sin θ の鎖 第 1 行 = 第 2 行
 PASS cos θ + i sin θ の鎖 第 2 行 = 第 3 行
@@ -100,5 +81,5 @@ PASS (5) の鎖 (|γ|·0, |γ|·1) から (0,1)(|γ|,0) までの第 6 段
 PASS (5) 否定の対照: (1,0)(|γ|,0) は (0,|γ|) にならない
 PASS (5) の鎖 最後の行: (|γ|, 0) = |γ|_C
 PASS (4) 第 9〜11 行: (|γ|·1, |γ|·0) = (|γ|, |γ|·0) = (|γ|, 0)
--- relation_of_gamma_2_theta_tilde: 一般の点での鎖: 101/101 PASS
+-- relation_of_gamma_2_theta_tilde: 一般の点での鎖: 82/82 PASS
 RESULT: PASS

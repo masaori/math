@@ -5,51 +5,15 @@ load("_prelude.sage")
 
 rep = Report("relation_of_gamma_2_theta_tilde: 一般の点での鎖")
 
-# ---- 準備の第一: cos(-θ)・sin(-θ)・exp(iθ) を exp(±iθ) で書く鎖 ----
+# ---- 準備の第一: exp(iθ) を cos θ・sin θ で書く鎖 ----
 K0.<I0> = QuadraticField(-1)
 Rt.<t, Ep, Em> = PolynomialRing(K0)
 Ft = Rt.fraction_field()
 
-def exp_sym(arg):
-    """exp を引数の多項式で引く: 引数が iθ なら Ep、-iθ なら Em（本文の exp(±iθ)）。それ以外は止める。"""
-    if arg == I0 * t:
-        return Ft(Ep)
-    if arg == -I0 * t:
-        return Ft(Em)
-    raise ValueError(arg)
-
-# i(-θ) = -iθ の鎖 4 行と -i(-θ) = iθ の鎖 2 行（θ は QQ(i)[θ] の不定元。ℝ の元 (-1)θ の像は (-1_C)θ）
-m1c = K0(-1)
-ineg_chain = [I0 * (-t), I0 * ((-1) * t), I0 * (m1c * t), (I0 * m1c) * t, (m1c * I0) * t, m1c * (I0 * t), -(I0 * t)]
-for k in range(len(ineg_chain) - 1):
-    rep.check(ineg_chain[k] == ineg_chain[k + 1], f"i(-θ) = -iθ の鎖 第 {k+1} 行 = 第 {k+2} 行")
-rep.check(I0 * t != -(I0 * t), "i(-θ) = -iθ の鎖 否定の対照: iθ ≠ -iθ")
-nn_chain = [-(I0 * (-t)), -(-(I0 * t)), I0 * t]
-for k in range(len(nn_chain) - 1):
-    rep.check(nn_chain[k] == nn_chain[k + 1], f"-i(-θ) = iθ の鎖 第 {k+1} 行 = 第 {k+2} 行")
-cos_chain = [
-    (exp_sym(I0 * (-t)) + exp_sym(-I0 * (-t))) / 2,   # euler_formula_cos_sin を -θ に適用
-    (Ft(Em) + exp_sym(-(I0 * (-t)))) / 2,             # 上の i(-θ) = -iθ
-    (Ft(Em) + Ft(Ep)) / 2,                           # 上の -i(-θ) = iθ
-    (Ft(Ep) + Ft(Em)) / 2,                           # 和の可換律
-]
+# i(-θ) = -iθ・-i(-θ) = iθ・cos(-θ)・sin(-θ) の鎖は主張 i_times_negated_real_is_negation_of_i_times・
+# negation_of_i_times_negated_real_is_i_times・cos_of_negated_real・sin_of_negated_real へ移した（検算はそれぞれのラベルのディレクトリ）。
 cos_theta = (Ft(Ep) + Ft(Em)) / 2                    # euler_formula_cos_sin
-for k in range(len(cos_chain) - 1):
-    rep.check(cos_chain[k] == cos_chain[k + 1], f"cos(-θ) の鎖 第 {k+1} 行 = 第 {k+2} 行")
-rep.check(cos_chain[-1] == cos_theta, "cos(-θ) の鎖 最終行 = cos θ")
-
-sin_chain = [
-    (exp_sym(I0 * (-t)) - exp_sym(-I0 * (-t))) / (2 * I0),
-    (Ft(Em) - exp_sym(-(I0 * (-t)))) / (2 * I0),     # 上の i(-θ) = -iθ
-    (Ft(Em) - Ft(Ep)) / (2 * I0),                    # 上の -i(-θ) = iθ
-    (-(Ft(Ep) - Ft(Em))) / (2 * I0),                 # b - a = -(a - b)
-    -((Ft(Ep) - Ft(Em)) / (2 * I0)),                 # (-x)/y = -(x/y)
-]
-rep.check(Ft(Em) - Ft(Ep) != Ft(Ep) - Ft(Em), "sin(-θ) の鎖 否定の対照: b - a ≠ a - b")
 sin_theta = (Ft(Ep) - Ft(Em)) / (2 * I0)
-for k in range(len(sin_chain) - 1):
-    rep.check(sin_chain[k] == sin_chain[k + 1], f"sin(-θ) の鎖 第 {k+1} 行 = 第 {k+2} 行")
-rep.check(sin_chain[-1] == -sin_theta, "sin(-θ) の鎖 最終行 = -sin θ")
 
 euler_chain = [
     (Ft(Ep) + Ft(Em)) / 2 + I0 * ((Ft(Ep) - Ft(Em)) / (2 * I0)),

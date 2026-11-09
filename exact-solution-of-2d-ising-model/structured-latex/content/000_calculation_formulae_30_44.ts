@@ -3000,6 +3000,264 @@ z
     },
   },
   {
+    id: "calculation_formulae_claim_i_times_negated_real_is_negation_of_i_times",
+    kind: "claim",
+    title: { tex: String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})` },
+    labels: ["i_times_negated_real_is_negation_of_i_times"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta\in\mathbb R`),
+        " とする。",
+        math(String.raw`-\theta\in\mathbb R`),
+        " は ",
+        math(String.raw`\mathbb R`),
+        " の符号反転、",
+        math(String.raw`r\in\mathbb R`),
+        " に対し ",
+        math(String.raw`r_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像、",
+        math(String.raw`-(i\theta_{\mathbb C})`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "鎖の ",
+        math(String.raw`-1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(-1)_{\mathbb C}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+i(-\theta)_{\mathbb C}
+&= i\bigl((-1)\theta\bigr)_{\mathbb C}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a = (-1)a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \theta\bigr)\\
+&= i\bigl((-1_{\mathbb{C}})\theta_{\mathbb C}\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to \theta)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(i(-1_{\mathbb{C}})\bigr)\theta_{\mathbb C}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl((-1_{\mathbb{C}})i\bigr)\theta_{\mathbb C}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})(i\theta_{\mathbb C})
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -(i\theta_{\mathbb C})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to i\theta_{\mathbb C})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: def_gamma1_gamma2_of_theta の (2,1) 成分の鎖が、後ろのブロック relation_of_gamma_2_theta_tilde の証明の中で作る i(-θ) = -iθ を参照なしに根拠にしていた。" +
+          "relation_of_gamma_2_theta_tilde の準備の第一の 6 行の鎖を、実数の包含の像を明示してこの主張へ移し、両方のブロックから引く。鎖の中身は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_negation_of_i_times_negated_real_is_i_times",
+    kind: "claim",
+    title: { tex: String.raw`-\bigl(i(-\theta)_{\mathbb C}\bigr)=i\theta_{\mathbb C}` },
+    labels: ["negation_of_i_times_negated_real_is_i_times"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta\in\mathbb R`),
+        " とし、記号は ",
+        ref("i_times_negated_real_is_negation_of_i_times"),
+        " のとおりとする。このとき",
+      ]),
+      displayMath(String.raw`-\bigl(i(-\theta)_{\mathbb C}\bigr)=i\theta_{\mathbb C}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-\bigl(i(-\theta)_{\mathbb C}\bigr)
+&= -\bigl(-(i\theta_{\mathbb C})\bigr)
+&&(\because\ \blkref{i_times_negated_real_is_negation_of_i_times})\\
+&= i\theta_{\mathbb C}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to i\theta_{\mathbb C}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の -i(-θ) = iθ の 2 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_cos_of_negated_real",
+    kind: "claim",
+    title: { tex: String.raw`(\cos(-\theta))_{\mathbb C}=(\cos\theta)_{\mathbb C}` },
+    labels: ["cos_of_negated_real"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta\in\mathbb R`),
+        " とする。",
+        math(String.raw`\cos(-\theta),\cos\theta\in\mathbb R`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり全実数上の ",
+        math(String.raw`\cos`),
+        " の値で、",
+        math(String.raw`r_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像である。このとき",
+      ]),
+      displayMath(String.raw`(\cos(-\theta))_{\mathbb C}=(\cos\theta)_{\mathbb C}`),
+      paragraph([
+        "が成り立つ。この主張は ",
+        ref("euler_formula_cos_sin"),
+        " を前提とし、したがって全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の拡張（未整備）に依る。",
+        ref("euler_formula_cos_sin"),
+        " の証明は ",
+        math(String.raw`\cos`),
+        " の偶性と ",
+        math(String.raw`\sin`),
+        " の奇性を名前だけで使っており、この主張はそれを ",
+        ref("euler_formula_cos_sin"),
+        " の主張から導き直したものである（偶性・奇性を前提から外すものではない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "分母の ",
+        math(String.raw`2`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の読みのとおり ",
+        math(String.raw`2_{\mathbb C}`),
+        " で、",
+        ref("complex_numbers_form_a_field"),
+        " の体で ",
+        math(String.raw`2_{\mathbb C}\neq0_{\mathbb C}`),
+        " なので分数は定まる。",
+        math(String.raw`-\theta\in\mathbb R`),
+        " なので ",
+        ref("euler_formula_cos_sin"),
+        " を ",
+        math(String.raw`-\theta`),
+        " にも適用できる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\cos(-\theta))_{\mathbb C}
+&= \frac{\exp\bigl(i(-\theta)_{\mathbb C}\bigr) + \exp\bigl(-(i(-\theta)_{\mathbb C})\bigr)}{2}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp\bigl(-(i\theta_{\mathbb C})\bigr) + \exp\bigl(-(i(-\theta)_{\mathbb C})\bigr)}{2}
+&&(\because\ \blkref{i_times_negated_real_is_negation_of_i_times})\\
+&= \frac{\exp\bigl(-(i\theta_{\mathbb C})\bigr) + \exp(i\theta_{\mathbb C})}{2}
+&&(\because\ \blkref{negation_of_i_times_negated_real_is_i_times})\\
+&= \frac{\exp(i\theta_{\mathbb C}) + \exp\bigl(-(i\theta_{\mathbb C})\bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
+&= (\cos\theta)_{\mathbb C}
+&&(\because\ \blkref{euler_formula_cos_sin})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の cos(-θ) の 5 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない（実数の包含の像と -(iθ) の括弧を明示した）。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_sin_of_negated_real",
+    kind: "claim",
+    title: { tex: String.raw`(\sin(-\theta))_{\mathbb C}=-(\sin\theta)_{\mathbb C}` },
+    labels: ["sin_of_negated_real"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta\in\mathbb R`),
+        " とする。",
+        math(String.raw`\sin(-\theta),\sin\theta\in\mathbb R`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり全実数上の ",
+        math(String.raw`\sin`),
+        " の値、",
+        math(String.raw`r_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像、",
+        math(String.raw`-(\sin\theta)_{\mathbb C}`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`(\sin(-\theta))_{\mathbb C}=-(\sin\theta)_{\mathbb C}`),
+      paragraph([
+        "が成り立つ。この主張は ",
+        ref("euler_formula_cos_sin"),
+        " を前提とし、したがって全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の拡張（未整備）に依る。",
+        ref("euler_formula_cos_sin"),
+        " の証明は ",
+        math(String.raw`\cos`),
+        " の偶性と ",
+        math(String.raw`\sin`),
+        " の奇性を名前だけで使っており、この主張はそれを ",
+        ref("euler_formula_cos_sin"),
+        " の主張から導き直したものである（偶性・奇性を前提から外すものではない）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "分母の ",
+        math(String.raw`2`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の読みのとおり ",
+        math(String.raw`2_{\mathbb C}`),
+        " で、",
+        ref("complex_numbers_form_a_field"),
+        " の体で ",
+        math(String.raw`2_{\mathbb C}\neq0_{\mathbb C}`),
+        "、",
+        math(String.raw`i\neq0_{\mathbb C}`),
+        "、",
+        math(String.raw`2_{\mathbb C}i\neq0_{\mathbb C}`),
+        " なので分数は定まる。",
+        math(String.raw`-\theta\in\mathbb R`),
+        " なので ",
+        ref("euler_formula_cos_sin"),
+        " を ",
+        math(String.raw`-\theta`),
+        " にも適用できる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sin(-\theta))_{\mathbb C}
+&= \frac{\exp\bigl(i(-\theta)_{\mathbb C}\bigr) - \exp\bigl(-(i(-\theta)_{\mathbb C})\bigr)}{2i}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp\bigl(-(i\theta_{\mathbb C})\bigr) - \exp\bigl(-(i(-\theta)_{\mathbb C})\bigr)}{2i}
+&&(\because\ \blkref{i_times_negated_real_is_negation_of_i_times})\\
+&= \frac{\exp\bigl(-(i\theta_{\mathbb C})\bigr) - \exp(i\theta_{\mathbb C})}{2i}
+&&(\because\ \blkref{negation_of_i_times_negated_real_is_i_times})\\
+&= \frac{-\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)}{2i}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ b - a = -(a - b)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta_{\mathbb C}),\ b \to \exp(-(i\theta_{\mathbb C}))\bigr)\\
+&= -\frac{\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)}{2i}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{-x}{y} = -\tfrac{x}{y}\ (y \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C})),\ y \to 2i\bigr)\\
+&= -(\sin\theta)_{\mathbb C}
+&&(\because\ \blkref{euler_formula_cos_sin})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の sin(-θ) の 6 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない（実数の包含の像と -(iθ) の括弧を明示した）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_exp_of_negative_i_real_as_cos_minus_i_sin",
     kind: "claim",
     title: { tex: String.raw`\exp(-i\theta_{\mathbb C})=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}` },

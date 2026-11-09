@@ -7,18 +7,18 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - ブロック: `Athetatilde_003_claim_relation_of_gamma2`（(1) γ_2(−θ~_μ) = −conj(γ_2(θ~_μ))、(2) γ_2(θ~_μ)γ_2(−θ~_μ) = (−|γ_2(θ~_μ)|^2)_ℂ と −|γ_2(θ~_μ)|^2 < 0、
   (3) その偏角は π、(4) √(−γ_2γ_2') = |γ_2| > 0、(5) √(γ_2γ_2') = i|γ_2|、γ_2(−θ~_μ) ≠ 0）
-- 範囲: 準備の五つの段（i(−θ)・−i(−θ) の鎖と cos(−θ)・sin(−θ)・exp(iθ) の鎖、ī と conj(exp(iθ)) の鎖、γ_2(−θ) の表示の鎖、conj(γ_2(θ)) の 18 行の鎖、
+- 範囲: 準備の五つの段（exp(iθ) の鎖、ī と conj(exp(iθ)) の鎖、γ_2(−θ) の表示の鎖、conj(γ_2(θ)) の 18 行の鎖、
   sin(π/2)・cos(π/2) の鎖と、主張 pi_is_positive を引く 0 < π）と、(1)〜(5) の鎖と γ_2(−θ) ≠ 0 の背理の鎖のすべての行、主張そのもの
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 準備の第一: i(−θ) = −iθ の鎖 6 行・−i(−θ) = iθ の鎖 2 行・cos(−θ) の鎖 5 行・sin(−θ) の鎖 6 行・cos θ + i sin θ の鎖 17 行 | `check_generic_chains.sage` | i(−θ) の鎖は QQ(i)[θ] で一行ずつ（ℝ の (−1)θ の像を (−1_C)θ として。否定の対照: iθ ≠ −iθ）。exp を引数の多項式で引く記号と、exp(±iθ) を不定元にした QQ(i) 上の有理関数体で一行ずつ（否定の対照: b − a ≠ a − b、分母の i だけを落とすと崩れる） | **PASS** | 厳密 |
+| 準備の第一: cos θ + i sin θ の鎖 17 行（i(−θ)・−i(−θ)・cos(−θ)・sin(−θ) の鎖は主張 `i_times_negated_real_is_negation_of_i_times`・`negation_of_i_times_negated_real_is_i_times`・`cos_of_negated_real`・`sin_of_negated_real` へ移り、検算はそれぞれのラベルのディレクトリにある） | `check_generic_chains.sage` | exp(±iθ) を不定元にした QQ(i) 上の有理関数体で一行ずつ（否定の対照: 分母の i だけを落とすと崩れる） | **PASS** | 厳密 |
 | 同（具体値） | `check_values_and_claims.sage` | 円分体で cos(−θ) = cos θ・sin(−θ) = −sin θ・exp(i(−θ)) = exp(−iθ)・cos θ + i sin θ = exp(iθ)、Euler の式の cos・sin が Sage 組み込みの cos・sin（QQbar）と一致 | **PASS** | 厳密 |
 | 準備の第二: ī = −i の鎖 6 行（i := (0,1) は `antiperiodic_exp_sum` の前置き） | `check_generic_chains.sage` | ℂ を QQ の対で持ち、共役・積・包含・−1 倍を定義どおりに | **PASS** | 厳密 |
 | 準備の第二: conj(exp(iθ)) = exp(−iθ) の鎖 8 行 | `check_generic_chains.sage`、`check_values_and_claims.sage` | cos θ・sin θ を QQ[c, s] の不定元にした対で 7 行（(−i) sin θ = −(i sin θ) と差の定義を 1 行ずつ）、最終行は exp_of_negative_i_real_as_cos_minus_i_sin の右辺 (c, −s)。具体値で円分体の共役と def_complex_conjugate の対の共役の両方 | **PASS** | 厳密 |
-| 準備の第三: γ_2(−θ) の表示の鎖 6 行 | 両方 | 一般の点では cos(−θ)・sin(−θ) を別の不定元にし、第 3・4 行がそれぞれ関係 cos(−θ) = cos θ・sin(−θ) = −sin θ を法としてだけ一致すること（法なしでは一致しない対照つき）。具体値では第 1 行が γ_2 の定義を −θ で評価したものに一致 | **PASS** | 厳密 |
+| 準備の第三: γ_2(−θ) の表示の鎖 6 行（第 2〜4 行は主張 `i_times_negated_real_is_negation_of_i_times`・`cos_of_negated_real`・`sin_of_negated_real` を引く） | 両方 | 一般の点では cos(−θ)・sin(−θ) を別の不定元にし、第 3・4 行がそれぞれ関係 cos(−θ) = cos θ・sin(−θ) = −sin θ を法としてだけ一致すること（法なしでは一致しない対照つき）。具体値では第 1 行が γ_2 の定義を −θ で評価したものに一致 | **PASS** | 厳密 |
 | 準備の第四: conj(γ_2(θ)) の鎖 18 行 | 両方 | 一般の点では exp(±iθ) を不透明な対 (p,q)・(u,v) にし、第 6 行だけが関係 u = p, v = −q（conj(exp(iθ)) = exp(−iθ)）を法として一致すること（対照つき）。具体値では各行を円分体の共役で作る | **PASS** | 厳密 |
 | 準備の第五: sin(π/2) = 1 の鎖 2 行・cos(π/2) = 0 の鎖 5 行、0 < π（pi_is_positive の参照）、角度 0・π の整数が 0 | `check_values_and_claims.sage` | sin(π/2)・cos(π/2) は 1 の 4 乗根の実部・虚部。cos(π/2) の鎖は一行ずつ 1^2 = 1、1 − 1 = 0、√0 = 0（否定の対照 1 件）。0 < π は引く主張の値を記号計算と RealBallField(256) で確かめるだけ（鎖の検算は `sagemath/check/pi_is_positive/`）。`n_of_section` の総当たり | **PASS** | 厳密 |
 | (1) の鎖 2 行 | 両方 | ℂ で −(−z) = z（右辺から左辺へ）、具体値で γ_2(−θ) = −conj(γ_2(θ))。対照: γ_2(−θ) ≠ +conj(γ_2(θ)) | **PASS** | 厳密 |

@@ -264,6 +264,7 @@ targets=(
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg
   Ising2D.AMat_eq
+  Ising2D.AMat_two_one_eq_neg_gamma2_neg
   Ising2D.gamma2_neg_eq_neg_conj
   Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq
   Ising2D.gamma2_neg_eq_zero_iff
