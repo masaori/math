@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-09: 剰余類が等しいことと合同であることの同値（ラベル claim_residue_classes_are_equal_iff_congruent）を、反射性・対称性・推移性と両包含で示した。次は商集合の定義。
+
 - 2026-11-09: 剰余類の定義（ラベル def_residue_class_modulo_two_sided_ideal、[a]_I:={b∈A: a≡_I b}、A の部分集合）を置いた。a と [a]_I の行き来は射影の定義で名前を付ける写像を通すと本文に書いた。次は剰余類が等しいことと合同であることの同値。
 
 - 2026-11-08: 合同の反射性（ラベル claim_congruence_modulo_two_sided_ideal_is_reflexive）を、a+_A((-1_ℂ)∗_A a)=0_A の四行の鎖と 0_A∈I で示した。次は合同の対称性。
