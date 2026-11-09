@@ -1,0 +1,3 @@
+場合 j < k: 165 件、場合 j ≥ k: 165 件（鎖の段 825）
+negative controls (境界をずらした写像は k を値に取る): 45
+RESULT: PASS

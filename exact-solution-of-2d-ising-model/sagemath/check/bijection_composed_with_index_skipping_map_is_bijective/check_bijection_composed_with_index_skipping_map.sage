@@ -1,6 +1,6 @@
 # 対象ラベル: bijection_composed_with_index_skipping_map_is_bijective
-# 同じ回に足した bijection_composed_with_index_skipping_map_stays_in_lower_indices と
-# def_bijection_composed_with_index_skipping_map の値も確かめる。
+# def_bijection_composed_with_index_skipping_map の値も確かめる（値が {1,…,m} に入る証明の鎖は
+# sagemath/check/bijection_composed_with_index_skipping_map_stays_in_lower_indices/ が確かめる）。
 # m = 1,…,5、{1,…,m+1} の全ての置換 π と、π(k) = m+1 の k で、各証明の鎖を一行ずつ確かめる。
 # 帰属: ZZ（添字は整数）。浮動小数点と RR / CC への脱出はない。添字は本文と同じ 1 始まりで書く。
 from itertools import permutations
@@ -23,11 +23,8 @@ for m in range(1, N):
         k = [p for p in pi if pi[p] == m + 1][0]
         perms += 1
         dom = range(1, m + 1)
-        # bijection_composed_with_index_skipping_map_stays_in_lower_indices
         for j in dom:
-            assert pi[delta(m, k, j)] != m + 1
-            assert 1 <= pi[delta(m, k, j)] <= m
-            steps += 1
+            assert 1 <= pi[delta(m, k, j)] <= m                # τ^π_k の終域 {1,…,m}
         tau = {j: pi[delta(m, k, j)] for j in dom}           # def_bijection_composed_with_index_skipping_map
         # 単射性の鎖（τ(j) = τ(j') の組）
         for j in dom:
@@ -41,7 +38,11 @@ for m in range(1, N):
         # 全射性の鎖
         for i in dom:
             p = [q for q in pi if pi[q] == i][0]
-            assert p != k                                      # p = k なら i = m+1
+            # 背理法「p = k と仮定すると i = π(p) = π(k) = m+1 となり i ≤ m に反する」の各行が使う事実
+            assert pi[p] == i; steps += 1                      # i = π(p)            (π(p) = i)
+            assert pi[k] == m + 1; steps += 1                  # π(k) = m+1          (k の取り方)
+            assert i <= m < m + 1; steps += 1                  # i ≤ m なので i ≠ m+1 = π(k)
+            assert p != k                                      # 結び: p ≠ k
             js = [j for j in dom if delta(m, k, j) == p]
             assert len(js) == 1
             j = js[0]

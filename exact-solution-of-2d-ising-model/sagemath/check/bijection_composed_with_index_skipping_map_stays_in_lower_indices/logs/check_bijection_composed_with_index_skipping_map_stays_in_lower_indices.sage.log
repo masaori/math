@@ -1,0 +1,4 @@
+872 個の置換で、π(k) = m+1・単射性・δ(j) ≠ k・値の範囲を確かめた（14242 段）
+negative controls (π(k') ≠ m+1 では m+1 に届く): 4166
+negative controls (単射でない f では m+1 に届く組がある): 165
+RESULT: PASS

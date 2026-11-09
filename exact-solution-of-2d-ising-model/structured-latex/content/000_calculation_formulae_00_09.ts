@@ -2585,7 +2585,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     conversion: {
       status: "added",
       notes: [
-        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_stays_in_lower_indices が使うので足した。Lean は Ising2D.skipIndex_ne（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_is_injective/。",
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_stays_in_lower_indices が使うので足した。Lean は Ising2D.skipIndex_ne（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_never_takes_skipped_index/。",
       ],
     },
   },
@@ -2799,7 +2799,7 @@ j
     conversion: {
       status: "added",
       notes: [
-        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_is_bijective の全射性の段が使うので足した。Lean は Ising2D.skipIndex_reaches_every_other_index（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_is_injective/。",
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを示す準備として、bijection_composed_with_index_skipping_map_is_bijective の全射性の段が使うので足した。Lean は Ising2D.skipIndex_reaches_every_other_index（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimIndexSkippingMapProperties.lean）。数値検証: sagemath/check/index_skipping_map_reaches_every_other_index/。",
       ],
     },
   },
@@ -2862,7 +2862,7 @@ j
     conversion: {
       status: "added",
       notes: [
-        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを m についての帰納法で示すとき、m → m+1 の段で残りの m 項の添字の付け替えを {1,…,m} の上の写像として定める def_bijection_composed_with_index_skipping_map が、値が {1,…,m} に入ることに使うので足した。Lean は Ising2D.bijection_comp_skipIndex_ne_last（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimBijectionComposedWithIndexSkippingMap.lean）。数値検証: sagemath/check/bijection_composed_with_index_skipping_map_is_bijective/。",
+        "2026-11-06: 原文（Typst）に対応ブロックは無い。実数の有限和が添字の全単射による付け替えで変わらないことを m についての帰納法で示すとき、m → m+1 の段で残りの m 項の添字の付け替えを {1,…,m} の上の写像として定める def_bijection_composed_with_index_skipping_map が、値が {1,…,m} に入ることに使うので足した。Lean は Ising2D.bijection_comp_skipIndex_ne_last（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimBijectionComposedWithIndexSkippingMap.lean）。数値検証: sagemath/check/bijection_composed_with_index_skipping_map_stays_in_lower_indices/。",
       ],
     },
   },

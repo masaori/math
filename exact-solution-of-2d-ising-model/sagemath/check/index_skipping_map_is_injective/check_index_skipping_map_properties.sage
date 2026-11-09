@@ -1,5 +1,4 @@
 # 対象ラベル: index_skipping_map_is_injective
-# 同じ回に足した index_skipping_map_never_takes_skipped_index・index_skipping_map_reaches_every_other_index も確かめる。
 # m = 1,…,9、全ての k ∈ {1,…,m+1} で、各証明の場合分けの鎖を一行ずつ確かめる。
 # 帰属: ZZ（添字は整数）。浮動小数点と RR / CC への脱出はない。添字は本文と同じ 1 始まりで書く。
 N = 10
@@ -16,16 +15,8 @@ neg = 0
 for m in range(1, N):
     for k in range(1, m + 2):
         dom = range(1, m + 1)
-        # index_skipping_map_never_takes_skipped_index
-        for j in dom:
-            if j < k:
-                assert delta(m, k, j) == j; steps += 1        # def, j < k
-                assert j < k; steps += 1                       # j < k
-            else:
-                assert delta(m, k, j) == j + 1; steps += 1    # def, j ≥ k
-                assert j + 1 > j; steps += 1                   # 1 > 0
-                assert j >= k; steps += 1                      # j ≥ k
-            assert delta(m, k, j) != k
+        for j in dom:                                   # 定義の読み方（{1,…,m+1}∖{k} の j 番目）と一致
+            assert delta(m, k, j) == [x for x in range(1, m + 2) if x != k][j - 1]
         # index_skipping_map_is_injective: 4 つの場合の鎖
         for j in dom:
             for jp in dom:
@@ -52,27 +43,13 @@ for m in range(1, N):
                     assert not eq                               # この場合は起こらない
                 if eq:
                     assert j == jp
-        # index_skipping_map_reaches_every_other_index
-        for i in range(1, m + 2):
-            if i == k:
-                continue
-            if i < k:
-                j = i
-                assert 1 <= j <= m
-                assert delta(m, k, j) == delta(m, k, i); steps += 1
-                assert delta(m, k, i) == i; steps += 1
-            else:
-                j = i - 1
-                assert 1 <= j <= m and j >= k
-                assert delta(m, k, j) == j + 1; steps += 1
-                assert j + 1 == (i - 1) + 1; steps += 1
-                assert (i - 1) + 1 == i; steps += 1
-            assert delta(m, k, j) == i
-        # 否定コントロール: 境界を 1 つずらした写像（j ≤ k なら j）は、k ≤ m のとき k を値に取る
-        if k <= m:
-            assert any((j if j <= k else j + 1) == k for j in dom)
+        # 否定コントロール: j ≥ k で j + 1 の代わりに j − 1 を取る写像は、2 ≤ k ≤ m のとき
+        # δ'(k − 1) = δ'(k) = k − 1 となり単射でない
+        if 2 <= k <= m:
+            vals = [j if j < k else j - 1 for j in dom]
+            assert len(set(vals)) < len(vals)
             neg += 1
 
-print(f"δ の 3 つの主張の各場合の鎖を m = 1,…,{N-1}、全ての k で確かめた（{steps} 段）")
-print(f"negative controls (境界をずらした写像は k を値に取る): {neg}")
+print(f"δ の単射性の 4 つの場合の鎖を m = 1,…,{N-1}、全ての k で確かめた（{steps} 段）")
+print(f"negative controls (j ≥ k で j − 1 を取る写像は単射でない): {neg}")
 print("RESULT: PASS")
