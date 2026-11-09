@@ -21,6 +21,7 @@ import Ising2DLambda.NecSuf.Tools.TreeEdgeToggleOutside
 import Ising2DLambda.Tools.EvenEdgeLeafStep
 import Ising2DLambda.NecSuf.Tools.EvenEdgeLeafStep
 import Ising2DLambda.Tools.RootedTreeHasNonrootLeaf
+import Ising2DLambda.Tools.InducedTreeNonrootLeaf
 import Ising2DLambda.NecSuf.Tools.RootedTreeHasNonrootLeaf
 import Ising2DLambda.Tools.FiniteRootedDescent
 import Ising2DLambda.NecSuf.Tools.FiniteRootedDescent

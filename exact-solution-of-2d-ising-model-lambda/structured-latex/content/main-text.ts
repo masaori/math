@@ -12896,6 +12896,41 @@ A_i\cap(E\setminus F)
                 {
                   role: "supportingClaim",
                   element: {
+                    id: "tools_claim_induced_tree_nonroot_leaf",
+                    kind: "claim",
+                    title: { text: "未処理頂点の誘導部分木には根でない葉がある" },
+                    labels: ["claim_induced_tree_nonroot_leaf"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.Tools.inducedTree_has_nonrootLeaf",
+                      "Ising2DLambda.NecSuf.Tools.rootedTree_has_nonrootLeaf",
+                    ],
+                    verification: ["sagemath/check/induced-tree-nonroot-leaf"],
+                    statement: [
+                      paragraph([
+                        "有限頂点集合 ", math(String.raw`V`), " 上の木 ",
+                        math(String.raw`T=(V,F)`), " と未処理頂点集合 ",
+                        math(String.raw`U\subseteq V`), " を取る。",
+                        math(String.raw`|U|\ge2`), " とし、",
+                        math(String.raw`U`), " 上の誘導部分グラフが木で、根 ",
+                        math(String.raw`o\in U`), " を含むとする。",
+                        "この誘導部分木には根と異なる葉 ",
+                        math(String.raw`v\in U\setminus\{o\}`), " がある。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "誘導部分木の頂点集合は有限で、頂点数は二以上である。",
+                        "その誘導部分木と根 ", math(String.raw`o`), " に ",
+                        ref("claim_rooted_tree_nonroot_leaf"), " を適用すると、",
+                        "根と異なる葉 ", math(String.raw`v`), " が得られる。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
                     id: "tools_claim_unprocessed_tree_edge_unselected",
                     kind: "claim",
                     title: { text: "未処理の二頂点を結ぶ木辺は未選択である" },
