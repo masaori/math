@@ -459,6 +459,7 @@ targets=(
   Ising2D.trace_identity_eq_sum_one
   Ising2D.real_inclusion_of_power
   Ising2D.real_inclusion_of_power_of_necSuf
+  Ising2D.npowRec_eq_pow_of_power_equations
   "Ising2D.NecSuf.map_pow_of_map_one_of_map_mul'"
   Ising2D.real_inclusion_of_finite_sum_succ
   Ising2D.real_inclusion_of_finite_sum_fintype
