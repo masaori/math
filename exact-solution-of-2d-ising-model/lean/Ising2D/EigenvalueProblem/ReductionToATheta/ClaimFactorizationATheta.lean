@@ -20,7 +20,7 @@
 `B_1(θ) B_2 B_1(θ)` を素朴に展開すると非対角成分に現れるのは `c_2^*` だが、
 `def_A_theta` の `A(θ)` には `c_2` が現れる。一致には双対関係の帰結
 `c_2^* = s_2^* c_2` が要る。**本章の原文 `factorization_of_A_theta_general` の proof は
-Step 4 でこの等式を `duality_c2_star_eq_s2_star_c2` として明示的に引用しており、
+準備の `C = S(c_2)_ℂ` でこの等式を `duality_c2_star_eq_s2_star_c2` として明示的に引用しており（Step 4・5 がそれを使う）、
 008 章で欠けていた前提がここでは補われている。**
 Lean 側では従来どおり仮定 `hdual` として持つ。
 
@@ -79,6 +79,7 @@ Step 1 の `N := B_2B_1(θ)` の 4 成分を、記号 `a, b, C, S, e_±` を ℂ
 | 「この記号で `B_2 = …`」 | `factorization_B2mat_eq_symbols` |
 | Step 1 の `N_{11}`・`N_{12}`・`N_{21}`・`N_{22}`（2 行ずつ） | `factorization_step1_N11`・`factorization_step1_N12`・`factorization_step1_N21`・`factorization_step1_N22` |
 | Step 2 の `P_{11}`・Step 3 の `P_{22}`（12 行ずつ） | `factorization_step2_P11`・`factorization_step3_P22`（記号を ℂ の元とし、準備の `e_+e_- = 1_ℂ`・`a^2 + b^2 = (c_1)_ℂ`・`e_+ + e_- = (2)_ℂ(cos θ)_ℂ`・`2ab = (s_1)_ℂ` を仮定に取る）、`factorization_step2_P11_real`・`factorization_step3_P22_real`（仮定を準備の 4 本で埋めた実数の `K_1, K_2^*, θ` の形） |
+| Step 4 の `P_{12}`・Step 5 の `P_{21}`（9 行ずつ） | `factorization_step4_P12`・`factorization_step5_P21`（記号を ℂ の元とし、準備の補助的な等式の 1 本目・2 本目、`2ab = (s_1)_ℂ`、`C = S(c_2)_ℂ` の 3 本を仮定に取る）、`factorization_step4_P12_real`・`factorization_step5_P21_real`（仮定を準備で埋めた実数の `K_1, K_2, θ` の形。`K_2^* := Kstar K_2`、`0 < K_2`） |
 
 `B1mat` は `K1 : ℂ` と `Complex.cosh K1` で定義され、指数を `θ * i`・`-θ * i` の順で書くので、人手の `def_B1_theta_B2`
 （`K_1 ∈ ℝ` の `(cosh K_1)_ℂ`、指数 `i(θ)_ℂ`・`-i(θ)_ℂ`）と式の形が違う。実数の `K_1, K_2^*, θ` の像を入れた `B1mat`・`B2mat` については
@@ -86,9 +87,10 @@ Step 1 の `N := B_2B_1(θ)` の 4 成分を、記号 `a, b, C, S, e_±` を ℂ
 `Complex.cosh (x)_ℂ = (cosh x)_ℂ` は mathlib の `Complex.ofReal_cosh`・`Complex.ofReal_sinh` で受ける。
 `mat_mult` は Lean の `Matrix.mul_apply` と `Fin.sum_univ_two`、「`i i = -1_ℂ`」は mathlib の `Complex.I_mul_I`（`factorization_I_mul_I`）で受ける。
 
-準備の 7 本・補助的な等式 2 本・`C = S(c_2)_ℂ`・Step 1〜3 はまだ `B1_mul_B2_mul_B1_eq_explicit` の証明から使われていない（あちらは `simp`・`field_simp`・`ring` で成分を一度に計算する）。
-Step 4〜6 を calc に組み直し、主張をそれから組み立てるのは状態台帳の別の項目である。
+準備の 7 本・補助的な等式 2 本・`C = S(c_2)_ℂ`・Step 1〜5 はまだ `B1_mul_B2_mul_B1_eq_explicit` の証明から使われていない（あちらは `simp`・`field_simp`・`ring` で成分を一度に計算する）。
+Step 6 を calc に組み直し、主張を Step 2〜5 から組み立てるのは状態台帳の別の項目である。
 Step 2・3 の ℂ の元とした版は `C, S` のまま述べる。人手の 11 行目「`C, S` の定義を 2 箇所へ」の置き換えは、`_real` 版で `C, S` に `(cosh 2K_2^*)_ℂ, (sinh 2K_2^*)_ℂ` を入れるところで起き、`c_2^*` を `cosh 2K_2^*` のまま置くので式を変えない。このため calc の段を置かない。
+Step 4・5 の ℂ の元とした版も `S` のまま述べ、人手の 9 行目「`S` の定義」の段を同じ理由で置かない（`_real` 版で `S` に `(sinh 2K_2^*)_ℂ` を入れる）。
 いまの主張 `factorization_of_A_theta_general` とその仮定 `hc1`・`hs1`・`hc2star`・`hs2star` は `K1 K2star : ℂ` で述べられており、
 上の 2 本の橋は実数の像にしか使えないので、主張を組み立てるときは、主張を人手どおり `K_1, K_2^* ∈ ℝ` で述べ直すか、
 ℂ の `K1` から実数の像へ移す橋が要る（述べ直すなら、いまの ℂ 版は別の定理として残すかを利用箇所と合わせて決める）。
@@ -528,6 +530,107 @@ theorem factorization_step3_P22_real (K1 K2star θ : ℝ) :
         - ((Real.sinh (2 * K1) : ℝ) : ℂ) * ((Real.sinh (2 * K2star) : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) :=
   factorization_step3_P22 _ _ _ _ _ _ _ _ _ (factorization_prep_exp_mul_exp_neg θ)
     (factorization_prep_sq_add_sq K1) (factorization_prep_exp_add_exp_neg θ) (factorization_prep_two_mul_mul K1)
+
+/-! ## Step 4・5: `P := B_1(θ) N` の非対角成分 -/
+
+/-- **人手 Step 4 の `P_{12}`**（人手の結論 `P_{12} = ie_+(s_2^*)_ℂ((c_1)_ℂ(cos θ)_ℂ - i(sin θ)_ℂ - (s_1)_ℂ(c_2)_ℂ)`）。
+この版の右辺は `ie_+S(c1 cθ - i sθ - s1 c2)` である。
+
+記号 `a, b, C, S, e_±` を ℂ の元とし、人手が準備で示した 3 本（補助的な等式の 1 本目
+`a^2 + b^2e_+e_+ = e_+((c_1)_ℂ(cos θ)_ℂ - i(sin θ)_ℂ)`、`2ab = (s_1)_ℂ`、`C = S(c_2)_ℂ`）を仮定に取る
+（`(c_1)_ℂ, (s_1)_ℂ, (c_2)_ℂ, (cos θ)_ℂ, (sin θ)_ℂ` を `c1, s1, c2, cθ, sθ` と置く）。
+実数の `K_1, K_2, θ` での形は `factorization_step4_P12_real`。
+人手の 9 行のうち、9 行目「`S` の定義」を除く 8 行と calc の 8 段が 1 対 1 である
+（この版は `S` のまま述べる。9 行目の置き換えは `factorization_step4_P12_real` で `S` に `(sinh 2K_2^*)_ℂ` を入れるところで起き、
+`s_2^*` を `sinh 2K_2^*` のまま置くので式を変えない）。
+5 段目の右辺は人手の `Se_+(…)` を、補助的な等式の右辺 `e_+(…)` を `S` に掛けた形 `S(e_+(…))` で書き、
+7 段目の右辺は人手の `(s_1)_ℂS(c_2)_ℂe_+` を、`C` を `S(c_2)_ℂ` に書き換えた形 `(s_1)_ℂ(S(c_2)_ℂ)e_+` で書く。 -/
+theorem factorization_step4_P12 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
+    (haux : a ^ 2 + b ^ 2 * ep * ep = ep * (c1 * cθ - Complex.I * sθ))
+    (h2ab : 2 * a * b = s1) (hC : C = S * c2) :
+    (factorizationB1Symbols a b ep em * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em)) 0 1
+      = Complex.I * ep * S * (c1 * cθ - Complex.I * sθ - s1 * c2) :=
+  calc (factorizationB1Symbols a b ep em * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em)) 0 1
+      = a * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 1
+        + (((-Complex.I) * ep) * b) * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 1 := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = a * (Complex.I * (S * a - C * b * ep)) + (((-Complex.I) * ep) * b) * (C * a - S * b * ep) := by
+        rw [factorization_step1_N12, factorization_step1_N22]        -- Step 1 の `N_{12}, N_{22}`
+    _ = Complex.I * (S * a ^ 2 - C * a * b * ep) + Complex.I * (-(C * a * b * ep) + S * b ^ 2 * ep * ep) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+    _ = Complex.I * (S * (a ^ 2 + b ^ 2 * ep * ep) - 2 * a * b * C * ep) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+    _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - 2 * a * b * C * ep) := by
+        rw [haux]                                                    -- 準備の補助的な等式の 1 本目
+    _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - s1 * C * ep) := by
+        rw [h2ab]                                                    -- `2ab = (s_1)_ℂ`
+    _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - s1 * (S * c2) * ep) := by
+        rw [hC]                                                      -- `C = S(c_2)_ℂ`
+    _ = Complex.I * ep * S * (c1 * cθ - Complex.I * sθ - s1 * c2) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+
+/-- **人手 Step 5 の `P_{21}`**（人手の結論 `P_{21} = (-i)e_-(s_2^*)_ℂ((c_1)_ℂ(cos θ)_ℂ + i(sin θ)_ℂ - (s_1)_ℂ(c_2)_ℂ)`）。
+この版の右辺は `(-i)e_-S(c1 cθ + i sθ - s1 c2)` である。
+記号は `factorization_step4_P12` と同じで、仮定は補助的な等式の 2 本目
+`a^2 + b^2e_-e_- = e_-((c_1)_ℂ(cos θ)_ℂ + i(sin θ)_ℂ)`、`2ab = (s_1)_ℂ`、`C = S(c_2)_ℂ` の 3 本である。
+実数の `K_1, K_2, θ` での形は `factorization_step5_P21_real`。
+人手の 9 行のうち、9 行目「`S` の定義」を除く 8 行と calc の 8 段が 1 対 1 である。
+5 段目・7 段目の括弧の付け方と 9 行目の扱いは `factorization_step4_P12` と同じである（`e_+` を `e_-` に読み替える）。 -/
+theorem factorization_step5_P21 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
+    (haux : a ^ 2 + b ^ 2 * em * em = em * (c1 * cθ + Complex.I * sθ))
+    (h2ab : 2 * a * b = s1) (hC : C = S * c2) :
+    (factorizationB1Symbols a b ep em * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em)) 1 0
+      = (-Complex.I) * em * S * (c1 * cθ + Complex.I * sθ - s1 * c2) :=
+  calc (factorizationB1Symbols a b ep em * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em)) 1 0
+      = ((Complex.I * em) * b) * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 0
+        + a * (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 0 := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = ((Complex.I * em) * b) * (C * a - S * b * em) + a * (Complex.I * (C * b * em - S * a)) := by
+        rw [factorization_step1_N11, factorization_step1_N21]        -- Step 1 の `N_{11}, N_{21}`
+    _ = Complex.I * (C * a * b * em - S * b ^ 2 * em * em) + Complex.I * (C * a * b * em - S * a ^ 2) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+    _ = (-Complex.I) * (S * (a ^ 2 + b ^ 2 * em * em) - 2 * a * b * C * em) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+    _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - 2 * a * b * C * em) := by
+        rw [haux]                                                    -- 準備の補助的な等式の 2 本目
+    _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - s1 * C * em) := by
+        rw [h2ab]                                                    -- `2ab = (s_1)_ℂ`
+    _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - s1 * (S * c2) * em) := by
+        rw [hC]                                                      -- `C = S(c_2)_ℂ`
+    _ = (-Complex.I) * em * S * (c1 * cθ + Complex.I * sθ - s1 * c2) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+
+/-- 人手 Step 4 を、人手の記号の中身（`a := (cosh K_1)_ℂ`、`b := (sinh K_1)_ℂ`、`C := (cosh 2K_2^*)_ℂ`、
+`S := (sinh 2K_2^*)_ℂ`、`e_+ := exp(i(θ)_ℂ)`、`e_- := exp((-i)(θ)_ℂ)`、`K_1, θ ∈ ℝ`、`K_2 ∈ ℝ_{>0}`、`K_2^* := Kstar K_2`）で述べたもの。
+`factorization_step4_P12` の 3 つの仮定を準備の `factorization_aux_plus`・`factorization_prep_two_mul_mul`・
+`factorization_prep_C_eq_S_mul_c2` で埋める（`(c_1)_ℂ, (s_1)_ℂ, (c_2)_ℂ, (s_2^*)_ℂ` は準備と同じく
+`(cosh 2K_1)_ℂ, (sinh 2K_1)_ℂ, (cosh 2K_2)_ℂ, (sinh 2K_2^*)_ℂ` のまま置く）。 -/
+theorem factorization_step4_P12_real (K1 θ : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    (factorizationB1Symbols (Real.cosh K1 : ℂ) (Real.sinh K1 : ℂ)
+        (Complex.exp (Complex.I * (θ : ℂ))) (Complex.exp ((-Complex.I) * (θ : ℂ)))
+      * (factorizationB2Symbols (Real.cosh (2 * Kstar K2) : ℂ) (Real.sinh (2 * Kstar K2) : ℂ)
+        * factorizationB1Symbols (Real.cosh K1 : ℂ) (Real.sinh K1 : ℂ)
+            (Complex.exp (Complex.I * (θ : ℂ))) (Complex.exp ((-Complex.I) * (θ : ℂ))))) 0 1
+      = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * ((Real.sinh (2 * Kstar K2) : ℝ) : ℂ)
+        * (((Real.cosh (2 * K1) : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ)
+          - ((Real.sinh (2 * K1) : ℝ) : ℂ) * ((Real.cosh (2 * K2) : ℝ) : ℂ)) :=
+  factorization_step4_P12 _ _ _ _ _ _ _ _ _ _ _ (factorization_aux_plus K1 θ)
+    (factorization_prep_two_mul_mul K1) (factorization_prep_C_eq_S_mul_c2 hK2)
+
+/-- 人手 Step 5 を、`factorization_step4_P12_real` と同じ記号の中身で述べたもの。
+`factorization_step5_P21` の仮定 3 本を、準備の `factorization_aux_minus`・`factorization_prep_two_mul_mul`・
+`factorization_prep_C_eq_S_mul_c2` で埋める。 -/
+theorem factorization_step5_P21_real (K1 θ : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    (factorizationB1Symbols (Real.cosh K1 : ℂ) (Real.sinh K1 : ℂ)
+        (Complex.exp (Complex.I * (θ : ℂ))) (Complex.exp ((-Complex.I) * (θ : ℂ)))
+      * (factorizationB2Symbols (Real.cosh (2 * Kstar K2) : ℂ) (Real.sinh (2 * Kstar K2) : ℂ)
+        * factorizationB1Symbols (Real.cosh K1 : ℂ) (Real.sinh K1 : ℂ)
+            (Complex.exp (Complex.I * (θ : ℂ))) (Complex.exp ((-Complex.I) * (θ : ℂ))))) 1 0
+      = (-Complex.I) * Complex.exp ((-Complex.I) * (θ : ℂ)) * ((Real.sinh (2 * Kstar K2) : ℝ) : ℂ)
+        * (((Real.cosh (2 * K1) : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ)
+          - ((Real.sinh (2 * K1) : ℝ) : ℂ) * ((Real.cosh (2 * K2) : ℝ) : ℂ)) :=
+  factorization_step5_P21 _ _ _ _ _ _ _ _ _ _ _ (factorization_aux_minus K1 θ)
+    (factorization_prep_two_mul_mul K1) (factorization_prep_C_eq_S_mul_c2 hK2)
 
 /-- **原文 `factorization_of_A_theta_general`**: `θ ∈ ℝ` について
 `B_1(θ) B_2 B_1(θ) = A(θ)`。

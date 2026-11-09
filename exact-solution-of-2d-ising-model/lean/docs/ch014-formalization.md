@@ -66,6 +66,7 @@
 | `Ising2D.factorizationB1Symbols` / `factorizationB2Symbols` / `factorization_B1mat_eq_symbols` / `factorization_B2mat_eq_symbols`（同じファイル） | 証明の冒頭の「この記号で `B_1(θ) = !![a, ((-i)e_+)b; (ie_-)b, a]`、`B_2 = !![C, iS; (-i)S, C]` である」（`K1 : ℂ` で定義した `B1mat`・`B2mat` を、実数 `K_1, K_2^*, θ` の像で書いた人手の形へ移す橋。まだ `B1_mul_B2_mul_B1_eq_explicit` から使われていない） | 同上（記号の置き方） |
 | `Ising2D.factorization_I_mul_I` / `factorization_neg_I_mul_neg_I` / `factorization_step1_N11` / `factorization_step1_N12` / `factorization_step1_N21` / `factorization_step1_N22`（同じファイル） | 証明の Step 1 の `N := B_2B_1(θ)` の 4 成分（人手の 2 行ずつと 1 段ずつの calc。まだ `B1_mul_B2_mul_B1_eq_explicit` から使われていない） | 同上（Step 1） |
 | `Ising2D.factorization_neg_I_mul_I` / `factorization_step2_P11` / `factorization_step3_P22` / `factorization_step2_P11_real` / `factorization_step3_P22_real`（同じファイル） | 証明の Step 2・3 の `P := B_1(θ)N` の対角成分 `P_{11}`・`P_{22}`（人手の 12 行のうち `C, S` の定義の展開の行を除く 11 行と 1 段ずつの calc。記号を ℂ の元とし準備の 4 本を仮定に取る版と、準備の 4 本で埋めた実数の `K_1, K_2^*, θ` の版。まだ `B1_mul_B2_mul_B1_eq_explicit` から使われていない） | 同上（Step 2・3） |
+| `Ising2D.factorization_step4_P12` / `factorization_step5_P21` / `factorization_step4_P12_real` / `factorization_step5_P21_real`（同じファイル） | 証明の Step 4・5 の `P := B_1(θ)N` の非対角成分 `P_{12}`・`P_{21}`（人手の 9 行のうち `S` の定義の展開の行を除く 8 行と 1 段ずつの calc。記号を ℂ の元とし準備の補助的な等式・`2ab = (s_1)_ℂ`・`C = S(c_2)_ℂ` を仮定に取る版と、それらで埋めた実数の `K_1, K_2, θ` の版。まだ `B1_mul_B2_mul_B1_eq_explicit` から使われていない） | 同上（Step 4・5） |
 | `Ising2D.TVPlus_apply_checkZ` / `TVPlus_apply_checkY` | 原文の (z)・(y) の鎖（`def_T_V_plus` → `T_actions_on_check_Z_Y` → `linearity_of_T_V2` → `calc_of_TxT_check_Z_Y`（`B_2`）→ `linearity_of_T_on_check_Z_Y` → `calc_of_TxT_check_Z_Y`（`B_1(θ~)`）の 6 行の `calc`） | `T_V_plus_check_Z_Y` |
 | `Ising2D.B1mat_col_zero` / `B1mat_col_one` / `mulVec_mulVec_col`（`ClaimTVPlusAction.lean`） | (z)・(y) の列ベクトルが `B_1(θ~)` の第 1・第 2 列であること、`B_1(B_2(B_1 の第 j 列))` が `B_1B_2B_1` の第 j 列であること | `def_B1_theta_B2`（最後の鎖の 1 行目） |
 | **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`（(z)・(y) の鎖を 2 列に並べ、`factorization_of_A_thetaTilde` を当てる） | **`T_V_plus_check_Z_Y`** |
@@ -203,7 +204,7 @@ Lean では `n = 2k` / `n = 2k+1` と書き分けた 2 本ずつの定理にし�
 とくに次の 2 点は原文が 008 章より改善している。
 
 - 008 章が `B_1B_2B_1 = A(θ)` に必要な双対関係 `c_2^* = s_2^* c_2` を明示していなかったのに対し、
-  本章の `factorization_of_A_theta_general` の proof は Step 4 でこれを明示的に引用している。
+  本章の `factorization_of_A_theta_general` の proof は準備の `C = S(c_2)_ℂ` でこれを `duality_c2_star_eq_s2_star_c2` として明示的に引用している（Step 4・5 がそれを使う）。
 - 008 章が `(V_1^{(±)})^{1/2}` を「`exp(iK_1H_1^{(±)})` の `1/2` 乗」と書いて proof 中で
   `exp((i/2)K_1H_1^{(±)})` に読み替えていたのに対し、本章は最初から
   `exp((i/2)K_1H_1^{(+)})` を定義とし、それが平方根であることを (2) で示している。
