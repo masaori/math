@@ -996,6 +996,7 @@ export const ALL_LABELS = [
   "def_twisted_fourier_matrix",
   "def_unit_interval_rationals",
   "def_vertex_axis_straight_visit_count",
+  "def_vertex_simple_path",
   "def_vertexwise_crossing_number",
   "def_vertical_edge_traversal_count",
   "def_vertical_twisted_modes",

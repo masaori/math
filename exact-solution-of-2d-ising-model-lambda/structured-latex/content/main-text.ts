@@ -12347,6 +12347,37 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_vertex_simple_path",
+              focus: {
+                id: "tools_definition_vertex_simple_path",
+                kind: "definition",
+                title: { text: "頂点重複のない路" },
+                labels: ["def_vertex_simple_path"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteSimplePath"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と自然数 ", math(String.raw`m\in\mathbb N`),
+                    " を取る。頂点列 ", math(String.raw`(v_0,v_1,\ldots,v_m)`),
+                    " の各頂点が ", math(String.raw`V`), " に属し、相異なる添字 ",
+                    math(String.raw`i,j\in\{0,1,\ldots,m\}`), " に対して ",
+                    math(String.raw`v_i\ne v_j`), " であり、各 ",
+                    math(String.raw`i\in\mathbb N`), " が ",
+                    math(String.raw`i<m`), " を満たすたびに ",
+                    math(String.raw`\{v_i,v_{i+1}\}\in E`),
+                    " なら、この頂点列を始点 ", math(String.raw`v_0`),
+                    "、終点 ", math(String.raw`v_m`), " の頂点重複のない路と呼ぶ。",
+                    math(String.raw`m=0`), " の路は頂点一つだけからなる。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12371,7 +12402,8 @@ S&=(S-T)+T
                 proof: [
                   paragraph([
                     "連結性から基点 ", math(String.raw`o\in V`), " を取る。閉路が無いので、",
-                    "各頂点 ", math(String.raw`v\in V\setminus\{o\}`), " から基点への頂点重複のない路は一意である。",
+                    "各頂点 ", math(String.raw`v\in V\setminus\{o\}`), " から基点への ",
+                    ref("def_vertex_simple_path"), " の路は一意である。",
                     "存在は連結性から、相異なる二路があれば両者の分岐点から再合流点までが閉路になる。",
                   ]),
                   paragraph([
@@ -12432,7 +12464,7 @@ S&=(S-T)+T
                 proof: [
                   paragraph([
                     math(String.raw`A`), " が非空なので、", math(String.raw`A`),
-                    " の辺だけを通る、頂点重複のない長さが正の路がある。",
+                    " の辺だけを通る、", ref("def_vertex_simple_path"), " の長さが正の路がある。",
                     "有限性により、そのような路のうち辺数が最大のものを一つ取り、",
                     "始点を ", math(String.raw`v\in V`), "、次の頂点を ", math(String.raw`w\in V`), " とする。",
                   ]),
@@ -12445,12 +12477,12 @@ S&=(S-T)+T
                     " から ", math(String.raw`u`), " までの部分と辺 ", math(String.raw`\{v,u\}`),
                     " が閉路を作り、木が閉路を持たないことに反する。",
                   ]),
-                  displayMath(String.raw`u=w\quad(\because\ u\text{ は路上にあり、}u\ne w\text{ なら閉路になる})`),
+                  displayMath(String.raw`u=w\quad\bigl(\because\ u\text{ は路上にあり、}u\ne w\text{ なら閉路になる}\bigr)`),
                   paragraph([
                     "辺 ", math(String.raw`\{v,w\}`), " は路の最初の辺なので ",
                     math(String.raw`A`), " に属する。",
                   ]),
-                  displayMath(String.raw`\{e\in A:v\in e\}=\{\{v,w\}\}\quad(\because\ \{v,w\}\in A\text{ と上で示した }u=w)`),
+                  displayMath(String.raw`\{e\in A:v\in e\}=\{\{v,w\}\}\quad\bigl(\because\ \{v,w\}\in A\text{ と上で示した }u=w\bigr)`),
                 ],
               },
             },
