@@ -32,6 +32,8 @@ import Ising2DLambda.Tools.RootedLeafEdgeFromNecSuf
 import Ising2DLambda.Tools.InducedTreeLeafStep
 import Ising2DLambda.NecSuf.Tools.InducedTreeLeafStep
 import Ising2DLambda.Tools.InducedTreeRemoveLeaf
+import Ising2DLambda.Tools.EvenEdgeTreeLeafInduction
+import Ising2DLambda.NecSuf.Tools.EvenEdgeTreeLeafInduction
 import Ising2DLambda.NecSuf.Tools.InducedTreeRemoveLeaf
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
