@@ -69174,6 +69174,53 @@ e\notin\mathcal E_{\square}(S)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_even_edge_set_cell_boundary",
+                        kind: "claim",
+                        title: { text: "セル集合の辺集合に含まれる偶辺集合はセル境界である" },
+                        labels: ["claim_even_edge_set_cell_boundary"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.evenEdgeSet_cell_boundary",
+                          "Ising2DLambda.NecSuf.KacWard.boundary_of_finite_height",
+                          "Ising2DLambda.KacWard.evenEdgeSet_cell_boundary_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/even-edge-set-cell-boundary"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の補集合が辺連結であるとする（", ref("def_edge_connected_cell_set"), "）。",
+                            "各頂点に接する辺の本数が偶数である有限格子辺集合 ",
+                            math(String.raw`Z\subset\mathcal E_{\square}(S)`),
+                            " に対し、有限セル集合 ", math(String.raw`T\subset S`), " が存在して",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T)=Z`),
+                          paragraph(["を満たす。"]),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_plane_dual_ray_height_one_boundary"), " により、",
+                            "高さ一のセルからなる有限集合 ",
+                            math(String.raw`T_Z:=\{(r,c)\in\mathbb Z\times\mathbb Z\mid h_Z(r,c)=1\}`),
+                            " を取ると、その境界は ", math(String.raw`Z`), " に等しい。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T_Z)=Z
+\qquad\bigl(\because\ \blkref{claim_plane_dual_ray_height_one_boundary}\bigr)`),
+                          paragraph([
+                            "補集合の辺連結性と ", math(String.raw`Z\subset\mathcal E_{\square}(S)`),
+                            " に ", ref("claim_plane_height_one_exterior_inclusion"), " を適用する。",
+                          ]),
+                          displayMath(String.raw`T_Z\subset S
+\qquad\bigl(\because\ \blkref{claim_plane_height_one_exterior_inclusion}\bigr)`),
+                          paragraph([
+                            "したがって、この有限集合 ", math(String.raw`T:=T_Z`),
+                            " は求める ", math(String.raw`S`), " の部分集合である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",
