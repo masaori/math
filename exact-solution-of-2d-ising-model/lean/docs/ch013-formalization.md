@@ -83,7 +83,12 @@
 | `Ising2D.lie_H1Plus_checkY` | (B) `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ` | 同上 |
 | `Ising2D.lie_H2_checkZ` | (C) `[H_2, check(Z)_μ] = -2 check(Y)_μ` | 同上 |
 | `Ising2D.lie_H2_checkY` | (D) `[H_2, check(Y)_μ] = 2 check(Z)_μ` | 同上 |
-| `Ising2D.inverse_dft_check` | 反周期的離散フーリエ逆変換（任意の族に対する形） | `recover_Z_Y_from_check_Z_Y` |
+| `Ising2D.checkPhase_neg_eq_exp_I_mul`（`ClaimRecoverZYFromCheckZY.lean`） | 準備の `f_{j,λ} = exp(i(j_ℝθ~_λ)_ℂ)` の読み（`checkPhase M (-j) λ` を人手の形に直す） | `recover_Z_Y_from_check_Z_Y` |
+| `Ising2D.recover_exponent_real_chain` | 準備 2 の実数の鎖 `j_ℝx + (-1_ℝ)(k_ℝx) = (j_ℤ-k_ℤ)_ℝ x`（人手の 5 行） | 同上 |
+| `Ising2D.recover_exponent_complex_chain` | 準備 2 の複素数の鎖 `i(j_ℝx)_ℂ + (-i)(k_ℝx)_ℂ = i((j_ℤ-k_ℤ)_ℝx)_ℂ`（人手の 8 行。積の像は `real_inclusion_mul`、和の像は `real_inclusion_add`） | 同上 |
+| `Ising2D.exp_I_mul_int_mul_real` | `exp(i(n_ℝx)_ℂ) = exp(i n_ℂ x_ℂ)` の読み（和を `antiperiodic_exp_sum` の Lean の形へ直す） | 同上 |
+| `Ising2D.recover_off_diagonal_term` | 準備 1（`k ≠ j` の項は `O`） | 同上 |
+| `Ising2D.inverse_dft_check` | 反周期的離散フーリエ逆変換（任意の族に対する形。人手の第 1 式の鎖と 1 段ずつ対応する calc） | 同上 |
 | `Ising2D.recover_checkZ` / `recover_checkY`（`ClaimRecoverZYFromCheckZY.lean`） | `∑_μ check(Z)_μ e^{ijθ~_μ} = M Z_j` ほか | 同上 |
 | `Ising2D.Z_eq_inverse_dft_check` / `Y_eq_inverse_dft_check` | `Z_j = (1/M) ∑_μ …` ほか | 同上 |
 | `Ising2D.checkZYSet` / `checkZ_checkY_generate_algebra` | `check(Z), check(Y)` が `Mat(2^M,ℂ)` を生成する | 同上（「とくに」） |
@@ -194,9 +199,11 @@
 7. **逆変換だけは新しい必要十分版が要る。** 既存の `NecSuf.inverse_dft_necSuf` は
    「原始 `M` 乗根 `ζ` の周波数 `(j+1)(μ+1)`」の形に固定されており、奇数周波数は
    `ζ = ξ^2` へ揃わないので特殊化にならない。そこで
-   `NecSuf.inverse_dft_antiperiodic` を新設した。ただし**証明の骨格は同一**
-   （位相をまとめる → 二重和の順序交換 → 直交性）であり、
-   違いは使う直交性が `sum_zpow_primitiveRoot` か `sum_zpow_antiperiodic` かだけである。
+   `NecSuf.inverse_dft_antiperiodic` を新設した。段の順は具体版 `inverse_dft_check`（人手の第 1 式の鎖）と同じで
+   （二重和に開く → 順序交換 → 位相をまとめる → 直交性）、具体版の `scalar_exp_product` と準備 2 の 2 本の鎖は
+   指数の足し算の 1 段になる。`inverse_dft_necSuf` とは、位相をまとめる段と順序交換の段の順が違い、
+   使う直交性が `sum_zpow_primitiveRoot` か、`sum_zpow_antiperiodic_not_dvd`・`sum_zpow_antiperiodic_dvd_even`（具体版の
+   `antiperiodic_exp_sum` の「とくに」に当たる）かが違う。
    効いているのは「`ξ` が 1 の原始 `2M` 乗根」と「対象が係数体上の加群」だけで、
    行列であること・積があること・Clifford 関係は使っていない。
 

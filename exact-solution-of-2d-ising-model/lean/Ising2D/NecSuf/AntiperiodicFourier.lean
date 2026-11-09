@@ -49,7 +49,7 @@
 * 逆変換（`recover_Z_Y_from_check_Z_Y`）だけは既存の `inverse_dft_necSuf`
   （`M` 乗根版）の特殊化にならない。周波数が奇数だと `ζ = ξ^2` に揃わないためで、
   本ファイルに `inverse_dft_antiperiodic` として別に立ててある。
-  ただし証明の骨格（位相をまとめる → 二重和の順序交換 → 直交性）は同じである。
+  証明の段の順は具体版 `inverse_dft_check` と同じである（二重和に開く → 順序交換 → 位相をまとめる → 直交性）。
 -/
 import Ising2D.NecSuf.RootOfUnitySum
 import Ising2D.NecSuf.FourierClifford
@@ -313,8 +313,9 @@ variable {V : Type*} [AddCommGroup V] [Module K V]
 
   `∑_{μ} ξ^{(m+1)(2μ-1)} check(x)_μ = M x_m`。
 
-`inverse_dft_necSuf`（整数運動量版、`NecSuf/DiscreteFourier.lean`）と証明の骨格は同じで、
-違いは直交性として `sum_zpow_antiperiodic` を使う点だけ。
+段の順は具体版 `inverse_dft_check`（人手の第 1 式の鎖）と同じで、直交性として具体版の `antiperiodic_exp_sum` の「とくに」に
+当たる `sum_zpow_antiperiodic_not_dvd`（非零の場合）と `sum_zpow_antiperiodic_dvd_even`（`l = 0`）を使う。
+`inverse_dft_necSuf`（整数運動量版、`NecSuf/DiscreteFourier.lean`）とは、位相をまとめる段と順序交換の段の順が違う。
 効いているのは `ξ` が 1 の原始 `2M` 乗根であることと、対象が `K`-加群であることだけで、
 行列であることも積があることも Clifford 関係も効かない。 -/
 theorem inverse_dft_antiperiodic {M : ℕ} (hM : M ≠ 0) {ξ : K} (hξ : IsPrimitiveRoot ξ (2 * M))
@@ -324,35 +325,53 @@ theorem inverse_dft_antiperiodic {M : ℕ} (hM : M ≠ 0) {ξ : K} (hξ : IsPrim
       = (M : K) • x m := by
   classical
   have hξ0 : ξ ≠ 0 := hξ.ne_zero (by omega)
-  -- Step 0: 指数法則で位相をまとめる
-  have step1 : ∀ μ : Fin M,
-      ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)) •
-          (∑ j : Fin M, ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))) • x j)
-        = ∑ j : Fin M,
-            ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (((m : ℕ) : ℤ) - ((j : ℕ) : ℤ))) • x j := by
-    intro μ
-    rw [Finset.smul_sum]
-    refine Finset.sum_congr rfl fun j _ => ?_
-    rw [smul_smul, ← zpow_add₀ hξ0]
-    congr 1
-    ring
-  simp_rw [step1]
-  -- Step 1: 有限二重和の順序交換
-  rw [Finset.sum_comm]
-  -- Step 2: `μ` についての反周期的直交性
-  have step2 : ∀ j : Fin M,
-      (∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (((m : ℕ) : ℤ) - ((j : ℕ) : ℤ))) • x j)
-        = (ξ ^ (((m : ℕ) : ℤ) - ((j : ℕ) : ℤ)) *
-            ((M : K) *
-              (if (M : ℤ) ∣ (((m : ℕ) : ℤ) - ((j : ℕ) : ℤ)) then 1 else 0))) • x j := by
-    intro j
-    rw [← Finset.sum_smul, sum_zpow_antiperiodic hM hξ]
-  simp_rw [step2]
-  -- Step 3: `j = m` の項だけ残る（このとき定数位相は `ξ^0 = 1`）
-  rw [Finset.sum_eq_single_of_mem m (Finset.mem_univ m)]
-  · rw [sub_self, if_pos (dvd_zero _), mul_one, zpow_zero, one_mul]
-  · intro j _ hj
-    rw [if_neg (fun h => hj ((fin_dvd_sub_iff_eq m j).1 h).symm), mul_zero, mul_zero, zero_smul]
+  -- 具体版 `inverse_dft_check` の calc と同じ段の順。具体版の「読み」の段と、`scalar_exp_product` と
+  -- 準備 2 の 2 本の鎖の 2 段は、ここでは指数の足し算（`zpow_add₀` と `ℤ` の計算）の 1 段になる。
+  calc ∑ μ : Fin M, ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)) •
+        (∑ j : Fin M, ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))) • x j)
+      -- 具体版の `finite_sum_of_scalar_multiples` の段
+      = ∑ μ : Fin M, ∑ j : Fin M, ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)) •
+          (ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))) • x j) := by
+        simp_rw [Finset.smul_sum]
+      -- 具体版の `scalar_multiple_is_associative` の段
+    _ = ∑ μ : Fin M, ∑ j : Fin M, (ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))
+          * ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)))) • x j := by
+        simp_rw [smul_smul]
+      -- 具体版の `finite_double_sum_of_matrices_interchange` の段
+    _ = ∑ j : Fin M, ∑ μ : Fin M, (ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))
+          * ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)))) • x j :=
+        Finset.sum_comm
+      -- 具体版の `finite_sum_of_scalar_multiples_of_one_matrix` の段
+    _ = ∑ j : Fin M, (∑ μ : Fin M, ξ ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))
+          * ξ ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)))) • x j := by
+        simp_rw [Finset.sum_smul]
+      -- 具体版の `scalar_exp_product` と準備 2 の 2 本の鎖の段（指数法則 `ξ^a ξ^b = ξ^{a+b}` と `ℤ` の計算）。
+      -- `ξ ≠ 0`（原始根は 0 でない）が要るのは、`ℤ` の冪の指数法則 `zpow_add₀` に使うからである
+    _ = ∑ j : Fin M, (∑ μ : Fin M,
+          ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (((m : ℕ) : ℤ) - ((j : ℕ) : ℤ)))) • x j := by
+        refine Finset.sum_congr rfl fun j _ => ?_
+        congr 1
+        refine Finset.sum_congr rfl fun μ _ => ?_
+        rw [← zpow_add₀ hξ0]
+        congr 1
+        ring
+      -- 具体版の `finite_sum_of_matrices_with_single_nonzero_term` の段。`j ≠ m` の項は、具体版の準備 1
+      -- （`antiperiodic_exp_sum` の「とくに」の非零の場合）に当たる `sum_zpow_antiperiodic_not_dvd` で `0`。
+      -- 前提 `M ∤ (m - j)` は `|m - j| < M` から出る（`fin_dvd_sub_iff_eq`）
+    _ = (∑ μ : Fin M,
+          ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (((m : ℕ) : ℤ) - ((m : ℕ) : ℤ)))) • x m := by
+        rw [Finset.sum_eq_single_of_mem m (Finset.mem_univ m)]
+        intro j _ hj
+        rw [sum_zpow_antiperiodic_not_dvd hM hξ
+          (fun h => hj ((fin_dvd_sub_iff_eq m j).1 h).symm), zero_smul]
+      -- 具体版の `ℤ で j_ℤ - j_ℤ = 0` の段
+    _ = (∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (0 : ℤ))) • x m := by
+        rw [sub_self]
+      -- 具体版の `antiperiodic_exp_sum` の「とくに」を整数 0 で当てる段。具体版の
+      -- `antiperiodic_exp_sum_zero` と同じく、`k = lM` の場合（`l = 0`。偶数）を当てて `(-1)^0 = 1` で閉じる
+    _ = (M : K) • x m := by
+        rw [show (0 : ℤ) = 0 * (M : ℤ) from (zero_mul _).symm,
+          sum_zpow_antiperiodic_dvd_even hM hξ 0 Even.zero, zpow_zero, mul_one]
 
 /-! ## 反周期的フーリエ和どうしの反交換子（`anticommutator_of_check_Z_Y` の必要十分版） -/
 

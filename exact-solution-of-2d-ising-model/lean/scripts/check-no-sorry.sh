@@ -1207,6 +1207,11 @@ targets=(
   Ising2D.lie_H2_Y
   Ising2D.lie_H1Plus_Z
   Ising2D.lie_H1Plus_Y
+  Ising2D.checkPhase_neg_eq_exp_I_mul
+  Ising2D.recover_exponent_real_chain
+  Ising2D.recover_exponent_complex_chain
+  Ising2D.exp_I_mul_int_mul_real
+  Ising2D.recover_off_diagonal_term
   Ising2D.inverse_dft_check
   Ising2D.recover_checkZ
   Ising2D.recover_checkY
