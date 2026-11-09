@@ -67,10 +67,29 @@ Lean 側では従来どおり仮定 `hdual` として持つ。
 `euler_cos_as_exp`・`euler_sin_as_exp` を mathlib の `Complex.ofReal_cos`・`Complex.ofReal_sin` と `Complex.cos`・`Complex.sin` の定義で置いて受ける。
 「`(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則」「ℂ の分配則と積の交換律・結合律」の行は `field_simp`・`ring` で閉じる。
 
-準備の 7 本・補助的な等式 2 本・`C = S(c_2)_ℂ` はまだ `B1_mul_B2_mul_B1_eq_explicit` の証明から使われていない（あちらは `simp`・`field_simp`・`ring` で成分を一度に計算する）。
-人手の Step 1〜6 の calc に組み直すのは状態台帳の別の項目である。組み直すときは、`B1mat` が `K1 : ℂ` と `Complex.cosh K1` で
-定義されていて準備の鎖の `a = (cosh K_1)_ℂ`（`K_1 ∈ ℝ`）と式の形が違うので、主張の `K1` を人手どおり実数にするか、橋の補題が要る。
-また `B1mat` の指数は `θ * Complex.I`・`-θ * Complex.I` で、準備の `e_±` の `Complex.I * θ`・`(-Complex.I) * θ` と積の順が違うので、ここにも橋の補題が要る。
+## 人手の記号による `B_1(θ)`・`B_2` の表示と Step 1
+
+人手の証明は「この記号で `def_B1_theta_B2` は `B_1(θ) = !![a, ((-i)e_+)b; (ie_-)b, a]`、`B_2 = !![C, iS; (-i)S, C]` である」と書き、
+Step 1〜6 をこの形の行列の上で計算する。Lean ではこの形の行列を `factorizationB1Symbols`・`factorizationB2Symbols` と置き、
+Step 1 の `N := B_2B_1(θ)` の 4 成分を、記号 `a, b, C, S, e_±` を ℂ の元として、人手の 2 行ずつと 1 段ずつの calc で置く。
+
+| 人手 | Lean |
+| --- | --- |
+| 「この記号で `B_1(θ) = …`」 | `factorization_B1mat_eq_symbols` |
+| 「この記号で `B_2 = …`」 | `factorization_B2mat_eq_symbols` |
+| Step 1 の `N_{11}`・`N_{12}`・`N_{21}`・`N_{22}`（2 行ずつ） | `factorization_step1_N11`・`factorization_step1_N12`・`factorization_step1_N21`・`factorization_step1_N22` |
+
+`B1mat` は `K1 : ℂ` と `Complex.cosh K1` で定義され、指数を `θ * i`・`-θ * i` の順で書くので、人手の `def_B1_theta_B2`
+（`K_1 ∈ ℝ` の `(cosh K_1)_ℂ`、指数 `i(θ)_ℂ`・`-i(θ)_ℂ`）と式の形が違う。実数の `K_1, K_2^*, θ` の像を入れた `B1mat`・`B2mat` については
+`factorization_B1mat_eq_symbols`・`factorization_B2mat_eq_symbols` がその橋で、
+`Complex.cosh (x)_ℂ = (cosh x)_ℂ` は mathlib の `Complex.ofReal_cosh`・`Complex.ofReal_sinh` で受ける。
+`mat_mult` は Lean の `Matrix.mul_apply` と `Fin.sum_univ_two`、「`i i = -1_ℂ`」は mathlib の `Complex.I_mul_I`（`factorization_I_mul_I`）で受ける。
+
+準備の 7 本・補助的な等式 2 本・`C = S(c_2)_ℂ`・Step 1 はまだ `B1_mul_B2_mul_B1_eq_explicit` の証明から使われていない（あちらは `simp`・`field_simp`・`ring` で成分を一度に計算する）。
+Step 2〜6 を calc に組み直し、主張をそれから組み立てるのは状態台帳の別の項目である。
+いまの主張 `factorization_of_A_theta_general` とその仮定 `hc1`・`hs1`・`hc2star`・`hs2star` は `K1 K2star : ℂ` で述べられており、
+上の 2 本の橋は実数の像にしか使えないので、主張を組み立てるときは、主張を人手どおり `K_1, K_2^* ∈ ℝ` で述べ直すか、
+ℂ の `K1` から実数の像へ移す橋が要る（述べ直すなら、いまの ℂ 版は別の定理として残すかを利用箇所と合わせて決める）。
 
 具体的な数の計算で、主張に固有の構造は実数の像の演算・双曲線関数の公式・複素数の指数法則と Euler の表示だけなので、必要十分版は置かない。
 -/
@@ -305,6 +324,100 @@ theorem factorization_prep_C_eq_S_mul_c2 {K2 : ℝ} (hK2 : 0 < K2) :
         rw [duality_c2_star_eq_s2_star_c2 hK2]                     -- `duality_c2_star_eq_s2_star_c2`
     _ = ((Real.sinh (2 * Kstar K2) : ℝ) : ℂ) * ((Real.cosh (2 * K2) : ℝ) : ℂ) :=
         (real_inclusion_mul _ _).symm                              -- `real_inclusion_preserves_product`、`S` の定義
+
+/-! ## 人手の記号による `B_1(θ)`・`B_2` の表示 -/
+
+/-- 人手の証明の冒頭の記号 `a, b, e_±` で書いた `B_1(θ)`（`!![a, ((-i)e_+)b; (ie_-)b, a]`）。
+人手の証明が「この記号で `def_B1_theta_B2` は」と書く形の行列で、Step 1〜6 はこの形の上で計算する。 -/
+noncomputable def factorizationB1Symbols (a b ep em : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
+  !![a, ((-Complex.I) * ep) * b; (Complex.I * em) * b, a]
+
+/-- 人手の証明の冒頭の記号 `C, S` で書いた `B_2`（`!![C, iS; (-i)S, C]`）。 -/
+noncomputable def factorizationB2Symbols (C S : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
+  !![C, Complex.I * S; (-Complex.I) * S, C]
+
+/-- **人手の「この記号で `def_B1_theta_B2` は `B_1(θ) = !![a, ((-i)e_+)b; (ie_-)b, a]` である」**
+（`a := (cosh K_1)_ℂ`、`b := (sinh K_1)_ℂ`、`e_+ := exp(i(θ)_ℂ)`、`e_- := exp((-i)(θ)_ℂ)`、`K_1, θ ∈ ℝ`）。
+
+Lean の `B1mat` は `K1 : ℂ` と `Complex.cosh K1` で定義され、指数を `θ * i`・`-θ * i` の順で書くので、
+人手の `def_B1_theta_B2`（`K_1 ∈ ℝ` の `(cosh K_1)_ℂ`、指数 `i(θ)_ℂ`・`-i(θ)_ℂ`）と式の形が違う。
+この補題がその橋である: `Complex.cosh (K_1)_ℂ = (cosh K_1)_ℂ`（mathlib `Complex.ofReal_cosh`。`sinh` も同じ）と、
+ℂ の積の交換律で指数を `i(θ)_ℂ` の順にし、人手の括弧書きの `-i(θ)_ℂ = (-i)(θ)_ℂ`（`multiply_by_minus_one`）を当てる。 -/
+theorem factorization_B1mat_eq_symbols (K1 θ : ℝ) :
+    B1mat (K1 : ℂ) (θ : ℂ)
+      = factorizationB1Symbols ((Real.cosh K1 : ℝ) : ℂ) ((Real.sinh K1 : ℝ) : ℂ)
+          (Complex.exp (Complex.I * (θ : ℂ))) (Complex.exp ((-Complex.I) * (θ : ℂ))) := by
+  have hplus : (θ : ℂ) * Complex.I = Complex.I * (θ : ℂ) := mul_comm _ _      -- ℂ の積の交換律
+  have hminus : -(θ : ℂ) * Complex.I = (-Complex.I) * (θ : ℂ) :=
+    calc -(θ : ℂ) * Complex.I
+        = -((θ : ℂ) * Complex.I) := neg_mul _ _                             -- Lean の `B1mat` の書き方の読み
+      _ = -(Complex.I * (θ : ℂ)) := by rw [mul_comm]                         -- ℂ の積の交換律（人手の `-i(θ)_ℂ`）
+      _ = (-Complex.I) * (θ : ℂ) := (neg_mul _ _).symm                      -- `multiply_by_minus_one` の `-i(θ)_ℂ = (-i)(θ)_ℂ`
+  rw [B1mat, factorizationB1Symbols, Complex.ofReal_cosh, Complex.ofReal_sinh, hplus, hminus]
+
+/-- **人手の「この記号で `def_B1_theta_B2` は `B_2 = !![C, iS; (-i)S, C]` である」**
+（`C := (cosh 2K_2^*)_ℂ`、`S := (sinh 2K_2^*)_ℂ`、`K_2^* ∈ ℝ`）。
+
+Lean の `B2mat` は `K2star : ℂ` と `Complex.cosh (2 * K2star)` で定義されるので、`2(K_2^*)_ℂ = (2K_2^*)_ℂ`
+（`2 = (2)_ℂ` と `real_inclusion_preserves_product`。人手の `def_B1_theta_B2` は「実数の積 `2K_2^* ∈ ℝ`」の像を取る）と
+`Complex.cosh (x)_ℂ = (cosh x)_ℂ`（mathlib `Complex.ofReal_cosh`。`sinh` も同じ）で人手の形へ移す。 -/
+theorem factorization_B2mat_eq_symbols (K2star : ℝ) :
+    B2mat (K2star : ℂ)
+      = factorizationB2Symbols ((Real.cosh (2 * K2star) : ℝ) : ℂ) ((Real.sinh (2 * K2star) : ℝ) : ℂ) := by
+  have h2 : (2 : ℂ) * (K2star : ℂ) = ((2 * K2star : ℝ) : ℂ) := by
+    rw [← Complex.ofReal_ofNat 2, real_inclusion_mul]                        -- `2 = (2)_ℂ`、`real_inclusion_preserves_product`
+  rw [B2mat, factorizationB2Symbols, h2, Complex.ofReal_cosh, Complex.ofReal_sinh]
+
+/-! ## Step 1: `N := B_2 B_1(θ)` の成分 -/
+
+/-- 人手 Step 1 の `N_{11}` の根拠「`i i = -1_ℂ`」（mathlib `Complex.I_mul_I`）。 -/
+theorem factorization_I_mul_I : Complex.I * Complex.I = -1 := Complex.I_mul_I
+
+/-- 人手 Step 1 の `N_{22}` の根拠「`(-i)(-i) = -1_ℂ`」。 -/
+theorem factorization_neg_I_mul_neg_I : (-Complex.I) * (-Complex.I) = -1 := by
+  rw [neg_mul_neg, Complex.I_mul_I]
+
+/-- **人手 Step 1 の `N_{11}`**: `N_{11} = Ca - Sbe_-`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+theorem factorization_step1_N11 (a b C S ep em : ℂ) :
+    (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 0 = C * a - S * b * em :=
+  calc (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 0
+      = C * a + (Complex.I * S) * ((Complex.I * em) * b) := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = C * a - S * b * em := by
+        linear_combination (S * em * b) * factorization_I_mul_I        -- `i i = -1_ℂ` と ℂ の積の交換律・結合律
+                                                                     -- （人手が書かない分配則と差の定義も使う）
+
+/-- **人手 Step 1 の `N_{12}`**: `N_{12} = i(Sa - Cbe_+)`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+theorem factorization_step1_N12 (a b C S ep em : ℂ) :
+    (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 1
+      = Complex.I * (S * a - C * b * ep) :=
+  calc (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 0 1
+      = C * (((-Complex.I) * ep) * b) + (Complex.I * S) * a := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = Complex.I * (S * a - C * b * ep) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+                                                                     -- （人手が書かない `(-i)x = -(ix)` と差の定義も使う）
+
+/-- **人手 Step 1 の `N_{21}`**: `N_{21} = i(Cbe_- - Sa)`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+theorem factorization_step1_N21 (a b C S ep em : ℂ) :
+    (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 0
+      = Complex.I * (C * b * em - S * a) :=
+  calc (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 0
+      = ((-Complex.I) * S) * a + C * ((Complex.I * em) * b) := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = Complex.I * (C * b * em - S * a) := by
+        ring                                                         -- ℂ の分配則と積の交換律・結合律
+                                                                     -- （人手が書かない `(-i)x = -(ix)` と差の定義も使う）
+
+/-- **人手 Step 1 の `N_{22}`**: `N_{22} = Ca - Sbe_+`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
+theorem factorization_step1_N22 (a b C S ep em : ℂ) :
+    (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 1 = C * a - S * b * ep :=
+  calc (factorizationB2Symbols C S * factorizationB1Symbols a b ep em) 1 1
+      = ((-Complex.I) * S) * (((-Complex.I) * ep) * b) + C * a := by
+        rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
+    _ = C * a - S * b * ep := by
+        linear_combination (S * ep * b) * factorization_neg_I_mul_neg_I -- `(-i)(-i) = -1_ℂ` と ℂ の積の交換律・結合律
+                                                                     -- （人手が書かない分配則と差の定義も使う）
 
 /-- **原文 `factorization_of_A_theta_general`**: `θ ∈ ℝ` について
 `B_1(θ) B_2 B_1(θ) = A(θ)`。

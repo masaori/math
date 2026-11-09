@@ -1424,6 +1424,14 @@ targets=(
   Ising2D.factorization_aux_plus
   Ising2D.factorization_aux_minus
   Ising2D.factorization_prep_C_eq_S_mul_c2
+  Ising2D.factorization_B1mat_eq_symbols
+  Ising2D.factorization_B2mat_eq_symbols
+  Ising2D.factorization_I_mul_I
+  Ising2D.factorization_neg_I_mul_neg_I
+  Ising2D.factorization_step1_N11
+  Ising2D.factorization_step1_N12
+  Ising2D.factorization_step1_N21
+  Ising2D.factorization_step1_N22
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.B1mat_col_zero
