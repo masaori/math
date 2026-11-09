@@ -1,5 +1,6 @@
 # 対象ラベル: def_rayleigh_sup
-# 𝓡 ⊆ ℝ_{>0} の段（x = 0 なら ‖x‖ = 0 の 6 行の鎖）と、c(M_col) > 0 の段（項ごとの値の 3 行の鎖 2 本と ‖e_1‖ = 1 の 4 行の鎖、e_1^⊤W_ℝe_1 ∈ 𝓡、
+# 𝓡 ⊆ ℝ_{>0} の段の x ≠ 0 は unit_norm_vector_is_nonzero を引くので、その 6 行の鎖は unit_norm_vector_is_nonzero/ が受け持つ。
+# c(M_col) > 0 の段（項ごとの値の 3 行の鎖 2 本と ‖e_1‖ = 1 の 4 行の鎖、e_1^⊤W_ℝe_1 ∈ 𝓡、
 # e_1^⊤W_ℝe_1 > 0）を厳密に（QQ・AA）確かめる。上限 sup 𝓡 そのものは作らない（ℝ の完備性による値なので、
 # 鎖の 2 行目「上限は 𝓡 の上界」は検算の対象外）。
 load("../W_real_is_symmetric/_W_exact.sage")
@@ -21,15 +22,6 @@ count = 0
 for M in [1, 2, 3, 4]:
     d = 2**M
     S = range(d)
-    # x = 0 なら ‖x‖ = 0 の 6 行
-    x = [AA(0)] * d
-    l1 = sqrt_nonneg(sum(absR(x[j])**2 for j in S))
-    l2 = sqrt_nonneg(sum(absR(AA(0))**2 for j in S))
-    l3 = sqrt_nonneg(sum(AA(0)**2 for j in S))
-    l4 = sqrt_nonneg(sum(AA(0) for j in S))
-    l5 = sqrt_nonneg(AA(0))
-    l6 = AA(0)
-    assert l1 == l2 == l3 == l4 == l5 == l6 and l6 != 1
     # e_1 の置き方
     e1 = [AA(1)] + [AA(0)] * (d - 1)
     # 項ごとの値の 3 行の鎖 2 本（i ≥ 2 と i = 1）
@@ -54,7 +46,9 @@ for M in [1, 2, 3, 4]:
                 q = sum(e1[k] * WR[k, l] * e1[l] for k in S for l in S)   # e_1^⊤W_ℝe_1（def_real_bilinear_value）
                 assert q == WR[0, 0] and q > 0                         # 𝓡 ⊆ ℝ_{>0} の元として正
                 count += 1
-# 否定コントロール: 零でない x では ‖x‖ ≠ 0
-assert sqrt_nonneg(sum(absR(AA(t))**2 for t in [0, 1])) != 0
-print(f"{count} 件で ‖0‖ = 0・‖e_1‖ = 1 の鎖と e_1^⊤W_ℝe_1 > 0 を確かめた。否定コントロール 1 件")
+# 否定コントロール: ‖e_1‖ = 1 の鎖は e_1 の成分の値に依る。成分を 2 にした 2e_1 ではノルムが 1 でない（M_col = 1..4）
+for M in [1, 2, 3, 4]:
+    d = 2**M
+    assert sqrt_nonneg(sum(absR(t)**2 for t in [AA(2)] + [AA(0)] * (d - 1))) != 1
+print(f"{count} 件で ‖e_1‖ = 1 の鎖と e_1^⊤W_ℝe_1 > 0 を確かめた。否定コントロール 4 件")
 print("RESULT: PASS")

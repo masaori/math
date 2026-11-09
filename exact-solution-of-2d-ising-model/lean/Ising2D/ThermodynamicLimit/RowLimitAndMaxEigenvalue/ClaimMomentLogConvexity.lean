@@ -33,7 +33,7 @@
 | 【`I_ℝ` と `W_ℝ` の正値性】`y^⊤I_ℝy` の 3 行と、`≥ 0`・`> 0` | `real_bilinear_value_of_real_identity_matrix`（3 段）・`real_identity_matrix_is_positive_semidefinite`・`real_identity_matrix_is_positive_definite` |
 | 同じ段の `W_ℝ` の正定値性・半正定値性 | 仮定 `hpd`（`W_real_is_positive_definite`）と `psd_of_pd`（`W_real_is_positive_semidefinite`） |
 | 同じ段の `(I_ℝ)_kl = (I_ℝ)_lk` の 3 行 | `real_identity_matrix_entry_symm` の `calc` の 3 段（対称性は `real_identity_matrix_is_symmetric`） |
-| 【`(W_ℝ)^ax` は零でない】`x ≠ 0`（`def_rayleigh_sup` の 6 行の鎖を引く） | `ne_zero_of_unit_norm`（`DefinitionRayleighSup.lean`） |
+| 【`(W_ℝ)^ax` は零でない】`x ≠ 0`（`unit_norm_vector_is_nonzero` を引く） | `ne_zero_of_unit_norm`（`ClaimUnitNormVectorIsNonzero.lean`） |
 | 同じ段の `a = 0`: `u^{(0)}_l = x_l` の 4 行 | `power_zero_of_W_real_mulVec_apply` の `calc` の 4 段 |
 | 同じ段の `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a` の 7 行 | `power_succ_of_W_real` の `calc` の 7 段 |
 | 同じ段の `u^{(a+1)}_l = (W_ℝu^{(a)})_l` の 8 行 | `power_succ_of_W_real_mulVec_apply` の `calc` の 8 段 |
@@ -405,7 +405,7 @@ theorem moment_log_convexity
     (∀ k : ℕ, 0 < momentWReal W hW x k)
       ∧ ∀ k : ℕ, 1 ≤ k →
           momentWReal W hW x k ^ 2 ≤ momentWReal W hW x (k - 1) * momentWReal W hW x (k + 1) := by
-  have hx0 : x ≠ 0 := ne_zero_of_unit_norm hx                               -- 【`(W_ℝ)^ax` は零でない】の `x ≠ 0`（`def_rayleigh_sup` の 6 行の鎖）
+  have hx0 : x ≠ 0 := ne_zero_of_unit_norm hx                               -- 【`(W_ℝ)^ax` は零でない】の `x ≠ 0`（`unit_norm_vector_is_nonzero`）
   refine ⟨fun k => ?_, fun k hk => ?_⟩
   · rcases Nat.even_or_odd' k with ⟨a, rfl | rfl⟩                          -- 【正値性】`k = 2a` か `k = 2a + 1`
     · exact moment_even_pos W hW hpd hx0 a

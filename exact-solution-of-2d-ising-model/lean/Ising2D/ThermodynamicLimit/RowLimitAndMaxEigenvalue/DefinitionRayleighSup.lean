@@ -25,7 +25,7 @@
 | 各 `i` の 2 行 `|Σ_j x_iW_ijx_j| ≤ Σ_j|x_iW_ijx_j| ≤ Σ_j|W_ij|` | `abs_bilinear_row_le_row_abs_sum` |
 | 外側の 4 行 `x^⊤Wx ≤ |x^⊤Wx| = |ΣΣ x_iW_ijx_j| ≤ Σ_i|Σ_j …| ≤ ΣΣ|W_ij|` | `bilinear_le_abs_entry_sum` |
 | `𝓡` は上に有界 | `rayleighSet_bddAbove` |
-| `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」（`x = 0` なら `‖x‖ = √Σ\|x_j\|^2 = ⋯ = √0 = 0` の 6 行） | `ne_zero_of_unit_norm` |
+| `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」（人手 `unit_norm_vector_is_nonzero` を引く） | `ne_zero_of_unit_norm`（`ClaimUnitNormVectorIsNonzero.lean`） |
 | `\|(e_1)_i\|^2` の 3 行の鎖 2 本と `‖e_1‖ = √(1 + 0 + ⋯ + 0) = √1 = 1` の 4 行 | `vecNorm_single` |
 | `c(M_col) = sup 𝓡 ≥ e_1^⊤W_ℝe_1 > 0` の 3 行 | `rayleighSup_pos` |
 
@@ -39,7 +39,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
-import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealZeroIsZero
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimUnitNormVectorIsNonzero
 
 set_option linter.unusedSectionVars false
 
@@ -149,24 +149,6 @@ theorem quad_le_rayleighSup_mul {W : Matrix n n ℝ} (x : n → ℝ) :
       _ ≤ a * rayleighSup W := by
           exact mul_le_mul_of_nonneg_left hle ha.le
       _ = rayleighSup W * a := by ring
-
-/-- 人手 `def_rayleigh_sup` の `𝓡 ⊆ ℝ_{>0}` の段の「`‖x‖ = 1` なら `x ≠ 0`」: `x = 0` と仮定すると
-`‖x‖ = √(Σ_j|x_j|^2) = √(Σ_j|0|^2) = √(Σ_j 0^2) = √(Σ_j 0) = √0 = 0` の 6 行の鎖で `‖x‖ = 1` と矛盾する。 -/
-theorem ne_zero_of_unit_norm {x : n → ℝ} (hx : vecNorm x = 1) : x ≠ 0 := by
-  rintro rfl
-  have h0 : vecNorm (0 : n → ℝ) = 0 :=
-    calc vecNorm (0 : n → ℝ)
-        = Real.sqrt (∑ j, |(0 : n → ℝ) j| ^ 2) := by
-          rw [vecNorm, vecNormSq_eq_sum]
-          simp only [square_of_real_absolute_value]                         -- `def_matrix_norm`（`K = ℝ`、`w → x`）。`square_of_real_absolute_value` は
-                                                                            -- Lean の `vecNormSq`（`Σ x_j^2`）と `def_matrix_norm`（`Σ|x_j|^2`）の書き方の差を埋める段
-      _ = Real.sqrt (∑ _j : n, |(0 : ℝ)| ^ 2) := rfl                         -- `x_j = 0` を各項へ
-      _ = Real.sqrt (∑ _j : n, (0 : ℝ) ^ 2) := by
-          rw [abs_of_nonneg (le_refl (0 : ℝ))]                              -- `def_real_absolute_value` の `0 ≥ 0` の場合 `|0| = 0` を各項へ
-      _ = Real.sqrt (∑ _j : n, (0 : ℝ)) := by rw [zero_pow two_ne_zero]      -- `ℝ` で `0^2 = 0` を各項へ
-      _ = Real.sqrt 0 := by rw [Finset.sum_const_zero]                      -- `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
-      _ = 0 := sqrt_of_real_zero_is_zero                                    -- `sqrt_of_real_zero_is_zero`
-  exact zero_ne_one (h0.symm.trans hx)                                      -- `‖x‖ = 1` と矛盾
 
 /-- 人手 `def_rayleigh_sup` の `‖e_1‖ = 1`: `i ≠ 1` の `|(e_1)_i|^2 = |0|^2 = 0^2 = 0` と `|(e_1)_1|^2 = |1|^2 = 1^2 = 1` の 3 行の鎖 2 本と、
 `‖e_1‖ = √(Σ_i|(e_1)_i|^2) = √(1 + 0 + ⋯ + 0) = √1 = 1` の 4 行の鎖。人手の `e_1` は Lean の `Pi.single i₁ 1`（`i₁` が人手の添字 `1`）。 -/

@@ -451,7 +451,17 @@ x^2+y^2
         ref("inclusion_rr_to_cc"),
         "。あとは ",
         math(String.raw`x`),
-        " の符号で場合を分ける。",
+        " の符号で場合を分ける。(1) と同じく、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\sqrt{s}^{(\mathbb{R}_{\ge 0})}`),
+        " は ",
+        math(String.raw`u\ge 0`),
+        " かつ ",
+        math(String.raw`u^2=s`),
+        " を満たす唯一の ",
+        math(String.raw`u`),
+        " であることを使う。",
         math(String.raw`x\ge 0`),
         " のときは",
       ]),
@@ -459,7 +469,7 @@ x^2+y^2
         String.raw`\begin{aligned}
 \sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
 &= x
-&&(\because\ x\ge 0\ \text{であり}\ x^2=x^2\text{。平方根の一意性})\\
+&&(\because\ x\ge 0\ \text{であり}\ x^2=x^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to x^2)\ \text{のただ一つの元}\ u\ \text{は}\ x\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= |x|
 &&(\because\ x\ge 0\ \text{における実数の絶対値の定め方})
 \end{aligned}`,
@@ -475,7 +485,7 @@ x^2+y^2
 &= \sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ (-x)^2=x^2)\\
 &= -x
-&&(\because\ x<0\ \text{なので}\ -x\ge 0\ \text{であり}\ (-x)^2=(-x)^2\text{。平方根の一意性})\\
+&&(\because\ x<0\ \text{なので}\ -x\ge 0\ \text{であり}\ (-x)^2=(-x)^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to (-x)^2)\ \text{のただ一つの元}\ u\ \text{は}\ -x\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= |x|
 &&(\because\ x<0\ \text{における実数の絶対値の定め方})
 \end{aligned}`,
@@ -489,6 +499,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: (6) の x ≥ 0 の場合の √(x^2) = x と x < 0 の場合の √((−x)^2) = −x の行の根拠が「平方根の一意性」の名前だけだったので、(1) と同じく definition_of_sqrt_r_positive（(1) と同じ s・u の言い換えを (6) の場合分けの前に置き直し、s → x^2、s → (−x)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y > 0 の場合の √(y^2) = y と x = 0, y < 0 の場合の √((−y)^2) = −y の行の根拠が「平方根の一意性」の名前だけだったので、definition_of_sqrt_r_positive（直前の段落の s・u で書き、s → y^2、s → (−y)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y = 0 の場合の鎖の √0 = 0 の行の根拠（0 ≥ 0・0^2 = 0・平方根の一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "原文（Typst）に対応ブロックは無い。行列ノルムの劣乗法性（labels: matrix_norm_submultiplicativity）の" +

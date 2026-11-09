@@ -1318,6 +1318,82 @@ u^\top W_{\mathbb{R}} u
     },
   },
   {
+    id: "maxeig_claim_unit_norm_vector_is_nonzero",
+    kind: "claim",
+    title: { tex: String.raw`\|x\| = 1 \text{ なら } x \neq 0` },
+    labels: ["unit_norm_vector_is_nonzero"],
+    statement: [
+      paragraph([
+        math(String.raw`d \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x \in \mathbb{R}^{d}`),
+        " とし、",
+        math(String.raw`\|\cdot\|`),
+        " を ",
+        ref("def_matrix_norm"),
+        "（",
+        math(String.raw`K = \mathbb{R}`),
+        "）のノルムとする。",
+        math(String.raw`\|x\| = 1`),
+        " ならば ",
+        math(String.raw`x \neq 0`),
+        "（ある ",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`x_j \neq 0`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x = 0`),
+        "（すべての ",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " で ",
+        math(String.raw`x_j = 0`),
+        "）と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|x\|
+&= \sqrt{\textstyle\sum_{j=1}^{d}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to x)\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{d}|0|^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ x_j = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{d}0^2}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{\textstyle\sum_{j=1}^{d}0}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\ \text{を各項へ}\bigr)\\
+&= \sqrt{0}^{\,(\mathbb{R}_{\ge 0})}
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&= 0
+  &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。",
+        math(String.raw`\mathbb{R}`),
+        " で ",
+        math(String.raw`0 \neq 1`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " は体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`\|x\| = 0`),
+        " は ",
+        math(String.raw`\|x\| = 1`),
+        " と矛盾する。よって ",
+        math(String.raw`x \neq 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の 𝓡 ⊆ ℝ_{>0} の段にあった「x = 0 と仮定して ‖x‖ = 0 に着く 6 行の鎖」を、そのまま独立した主張として切り出した（値と鎖は不変）。moment_log_convexity の【(W_ℝ)^a x は零でない】が定義のブロックの中の鎖を散文で指していたので、主張として引けるようにするためである。def_rayleigh_sup・moment_log_convexity・c_between_Lambda_half_and_twice_Lambda_half（Step 2 の準備の u ≠ 0）はこの主張を引く。trace_power_sandwich は 𝓡 ⊆ ℝ_{>0}（def_rayleigh_sup）を引くので、この主張を直接は引かない。Lean は Ising2D.ne_zero_of_unit_norm（ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimUnitNormVectorIsNonzero.lean）。数値検証: sagemath/check/unit_norm_vector_is_nonzero/。",
+      ],
+    },
+  },
+  {
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
@@ -1349,32 +1425,10 @@ u^\top W_{\mathbb{R}} u
         " が ",
         math(String.raw`\|x\| = 1`),
         " を満たすとする。",
-        math(String.raw`x = 0`),
-        "（すべての ",
-        math(String.raw`j`),
-        " で ",
-        math(String.raw`x_j = 0`),
-        "）と仮定すると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\|x\|
-&= \sqrt{\textstyle\sum_{j=1}^{d}|x_j|^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \blkref{def_matrix_norm}\ (K = \mathbb{R},\ d \to d,\ w \to x)\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{d}|0|^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ x_j = 0\ \text{を各項へ}\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{d}0^2}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \blkref{def_real_absolute_value}\ \text{の}\ 0 \geq 0\ \text{の場合}\ |0| = 0\ \text{を各項へ}\bigr)\\
-&= \sqrt{\textstyle\sum_{j=1}^{d}0}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0^2 = 0\ \text{を各項へ}\bigr)\\
-&= \sqrt{0}^{\,(\mathbb{R}_{\ge 0})}
-  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
-&= 0
-  &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
-\end{aligned}`),
-      paragraph([
-        "となり ",
-        math(String.raw`\|x\| = 1`),
-        " と矛盾するので、",
+        ref("unit_norm_vector_is_nonzero"),
+        "（",
+        math(String.raw`d \to d,\ x \to x`),
+        "）より ",
         math(String.raw`x \neq 0`),
         " である。よって ",
         ref("W_real_is_positive_definite"),
@@ -1606,6 +1660,7 @@ c(M_{\mathrm{col}})
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 𝓡 ⊆ ℝ_{>0} の段の「x = 0 と仮定して ‖x‖ = 0 に着く 6 行の鎖」を、独立した主張 unit_norm_vector_is_nonzero（このブロックの直前）へ切り出し、ここではそれを引く形にした（値と鎖は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 「‖x‖ = 1 なら x ≠ 0」の鎖の最後の行 √0 = 0 が definition_of_sqrt_r_positive（y → 0）と 0 ≥ 0・0^2 = 0 を 1 行で使っていたので、sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ‖e_1‖ の鎖の |1|^2 = 1^2 = 1 の 2 行目を power_of_real_one_is_one（m → 2）の参照にし、最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: |x_i| ≤ 1 を示す鎖の名前だけの根拠を直した。「非負の項の有限和は各項以上」を finite_sum_of_nonnegative_reals_is_at_least_each_term（m → 2^{M_col}、a_j → |x_j|^2、k → i）の参照に、「ノルムの定義」の 1 行を definition_of_sqrt_r_positive の y^2 = x の行と def_matrix_norm の行の 2 行に割り、最後の行を 1^2 で止めた。|x_i|^2 ≤ 1^2 から |x_i| ≤ 1 へ移る段を nonnegative_real_order_from_squares（u → |x_i|、v → 1）の参照にした。x と i の取り方、|x_k|^2 ≥ 0、根号の中身 Σ_j|x_j|^2 が非負であること（同じ主張と推移律）を鎖の前に書いた。主張は不変。",
@@ -2690,21 +2745,13 @@ y^\top I_{\mathbb{R}}y
         math(String.raw`(W_{\mathbb{R}})^ax`),
         " は零でない】",
         math(String.raw`\|x\| = 1`),
-        " なので ",
-        math(String.raw`x \neq 0`),
-        " である（",
-        ref("def_rayleigh_sup"),
-        " で ",
-        math(String.raw`\mathcal{R} \subseteq \mathbb{R}_{>0}`),
-        " を示すときの、",
-        math(String.raw`x = 0`),
-        " と仮定して ",
-        math(String.raw`\|x\| = 0`),
-        " に着く 6 行の鎖（",
+        " なので、",
+        ref("unit_norm_vector_is_nonzero"),
+        "（",
         math(String.raw`d \to d,\ x \to x`),
-        "）が ",
-        math(String.raw`\|x\| = 1`),
-        " と矛盾する）。",
+        "）より ",
+        math(String.raw`x \neq 0`),
+        " である。",
         math(String.raw`a`),
         " についての帰納法で ",
         math(String.raw`u^{(a)} \neq 0`),
@@ -3023,6 +3070,7 @@ a+b+1 &= p+(p+1)+1
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の x ≠ 0 を、def_rayleigh_sup の中の 6 行の鎖を散文で指す書き方から、主張 unit_norm_vector_is_nonzero（d → d、x → x）を引く形にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の √0 = 0 の根拠（definition_of_sqrt_r_positive の 0 ≥ 0, 0^2 = 0）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の x ≠ 0 は「def_matrix_norm より ‖x‖ = √0 = 0」の 1 文で |0| = 0・0^2 = 0・和の計算をまとめて使っていたので、def_rayleigh_sup の同じ段（x = 0 と仮定して ‖x‖ = 0 に着く 6 行の鎖）を引く形にした（値は不変）。",
         "2026-09-05 の分割で、トレースの挟み込みから独立した主張として切り出した。式変形と根拠は分割前と同じである。",

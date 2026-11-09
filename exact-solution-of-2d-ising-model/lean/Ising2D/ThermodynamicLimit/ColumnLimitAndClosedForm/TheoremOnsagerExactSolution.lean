@@ -120,15 +120,8 @@ theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 :
       calc vecNorm u
           = vecNorm x := norm_of_vector_of_absolute_values_equals_norm x   -- `norm_of_vector_of_absolute_values_equals_norm`（`n → d`）
         _ = 1 := hxnorm                                                    -- `x` の取り方
-    -- 準備: `matrix_norm_triangle_inequality` (1) の `‖u‖ = 0 ⟺ u = 0` と `‖u‖ = 1 ≠ 0` より `u ≠ 0`
-    --（`K^n` の具体版は Lean に無いので、`vecNorm_pos_of_ne_zero` と同じく `vecNormSq_eq_zero_iff` と `Real.sqrt` の零で示す）
-    have hu0 : u ≠ 0 := by
-      intro h
-      have h0 : vecNorm u = 0 := by
-        rw [vecNorm, Real.sqrt_eq_zero (vecNormSq_nonneg u)]
-        exact vecNormSq_eq_zero_iff.mpr h
-      rw [hunorm] at h0
-      exact one_ne_zero h0
+    -- 準備: `unit_norm_vector_is_nonzero`（`d → d`、`x → u`）より `u ≠ 0`
+    have hu0 : u ≠ 0 := ne_zero_of_unit_norm hunorm
     -- 準備: `sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`（`u → u`）より `v ≠ 0`
     have hv0 : v ≠ 0 :=
       sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero n u v hunn hu0 (fun _ => rfl)

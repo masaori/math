@@ -138,7 +138,7 @@ for M in EIG_M:
             # 準備: x^⊤W_ℝx ≤ u^⊤W_ℝu（real_bilinear_value_at_most_value_at_absolute_vector）
             if not (qx <= qu * (1 + REL) + 1e-300):
                 w3_ineq += 1
-            # 準備: ‖u‖ = ‖x‖ = 1（norm_of_vector_of_absolute_values_equals_norm、x の取り方）と u ≠ 0
+            # 準備: ‖u‖ = ‖x‖ = 1（norm_of_vector_of_absolute_values_equals_norm、x の取り方）と u ≠ 0（unit_norm_vector_is_nonzero）
             w3_eq = max(w3_eq, abs(u.norm() - x.norm()), abs(x.norm() - 1))
             if not any(t != 0 for t in u):
                 w3_ineq += 1

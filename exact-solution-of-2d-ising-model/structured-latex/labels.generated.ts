@@ -657,6 +657,7 @@ export const ALL_LABELS = [
   "transpose_preserves_matrix_limits",
   "transpose_preserves_matrix_norm",
   "two_by_two_transfer_identity",
+  "unit_norm_vector_is_nonzero",
   "zero_in_closed_interval_from_minus_half_pi_to_half_pi",
   "zero_matrix_is_left_zero_of_mat_mult",
   "zero_matrix_is_right_zero_of_mat_mult",
