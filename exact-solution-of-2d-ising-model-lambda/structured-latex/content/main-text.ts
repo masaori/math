@@ -12747,6 +12747,68 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_connected_graph_crossing_edge",
+        labels: [],
+        title: { text: "連結グラフの頂点集合の境界辺" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_connected_graph_crossing_edge",
+              focus: {
+                id: "tools_claim_connected_graph_crossing_edge",
+                kind: "claim",
+                title: { text: "連結グラフの非自明な頂点分割をまたぐ辺がある" },
+                labels: ["claim_connected_graph_crossing_edge"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.connectedGraph_crossingEdge",
+                  "Ising2DLambda.NecSuf.Tools.crossingEdge_of_preconnected",
+                  "Ising2DLambda.Tools.connectedGraph_crossingEdge_from_necSuf",
+                ],
+                verification: ["sagemath/check/connected-graph-crossing-edge"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " の有限連結グラフ ",
+                    math(String.raw`G=(V,E)`), " と、空でも ",
+                    math(String.raw`V`), " 全体でもない頂点集合 ",
+                    math(String.raw`U\subset V`), " を取る。このとき ",
+                    math(String.raw`a\in U`), " と ",
+                    math(String.raw`b\in V\setminus U`), " を端点とする辺 ",
+                    math(String.raw`\{a,b\}\in E`), " が存在する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "仮にこのような辺が無いとする。", math(String.raw`a\in U`),
+                    " と ", math(String.raw`b\in V\setminus U`), " を取る。",
+                    ref("def_finite_graph_connected"), " と ", ref("def_vertex_simple_path"),
+                    " より、", math(String.raw`a=v_0`), " から ",
+                    math(String.raw`b=v_m`), " への頂点重複のない路 ",
+                    math(String.raw`(v_0,\ldots,v_m)`), " がある。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`i\in\{0,\ldots,m-1\}`),
+                    " について、", math(String.raw`v_i\in U`),
+                    " なら、辺 ", math(String.raw`\{v_i,v_{i+1}\}\in E`),
+                    " が境界をまたがないという仮定から ",
+                    math(String.raw`v_{i+1}\in U`), " である。",
+                    "有限回の帰納法で ", math(String.raw`v_m\in U`),
+                    " を得るが、", math(String.raw`v_m=b\notin U`),
+                    " に反する。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_even_edge_subset_root_parity",
         labels: [],
         title: { text: "偶辺集合の根での偶数性" },
@@ -13516,9 +13578,9 @@ A\cap(E\setminus F)
                   paragraph([
                     "同じ条件を満たす ", math(String.raw`B\subseteq E`),
                     " に対し、", ref("claim_even_edge_subset_tree_complement_injective"),
-                    " を ", math(String.raw`A,B`), " に適用して ",
-                    math(String.raw`A=B`), " を得る。",
+                    " を ", math(String.raw`A,B`), " に適用する。",
                   ]),
+                  displayMath(String.raw`A=B\quad\bigl(\because\ \blkref{claim_even_edge_subset_tree_complement_injective}\text{ と木外辺での一致}\bigr)`),
                 ],
               },
             },
