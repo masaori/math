@@ -8644,4 +8644,89 @@ c\in[b]_I&\iff b\equiv_I c
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication",
+    kind: "claim",
+    title: { text: "両側イデアルを法とする合同はスカラー倍と両立する" },
+    labels: ["claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a'`),
+        " について、",
+        math(String.raw`a\equiv_I a'`),
+        " ならば ",
+        math(String.raw`\lambda\ast_A a\equiv_I \lambda\ast_A a'`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " と、",
+        math(String.raw`a\equiv_I a'`),
+        " を満たす ",
+        math(String.raw`a,a'\in A`),
+        " をとる。",
+        math(String.raw`x:=a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)`),
+        " と置く。合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x\in I`),
+        " である。ℂ-線型空間についての定義は、",
+        math(String.raw`V:=U_{\mathrm{vec}}(A)=(A,+_A,\ast_A,0_A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\ast_A a)+_A\bigl((-1_{\mathbb{C}})\ast_A(\lambda\ast_A a')\bigr)
+&=(\lambda\ast_A a)+_A\Bigl(\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\lambda\bigr)\ast_A a'\Bigr)
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\ast_A a)+_A\Bigl(\bigl(\lambda\cdot_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_A a'\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=(\lambda\ast_A a)+_A\Bigl(\lambda\ast_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)\Bigr)
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\ast_A\Bigl(a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)\Bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\ast_A x
+&&\left(\because\ x\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x\in I`),
+        " なので、両側イデアルがスカラー倍で閉じていること（",
+        ref("claim_two_sided_ideal_is_closed_under_scalar_multiplication"),
+        "）により ",
+        math(String.raw`\lambda\ast_A x\in I`),
+        " である。上の等式により ",
+        math(String.raw`(\lambda\ast_A a)+_A\bigl((-1_{\mathbb{C}})\ast_A(\lambda\ast_A a')\bigr)\in I`),
+        " であり、合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`\lambda\ast_A a\equiv_I \lambda\ast_A a'`),
+        " である。",
+      ]),
+    ],
+  },
 ]);

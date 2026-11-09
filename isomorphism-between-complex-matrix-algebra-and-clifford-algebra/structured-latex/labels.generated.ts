@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
   "claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition",
   "claim_congruence_modulo_two_sided_ideal_is_compatible_with_multiplication",
+  "claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication",
   "claim_congruence_modulo_two_sided_ideal_is_reflexive",
   "claim_congruence_modulo_two_sided_ideal_is_symmetric",
   "claim_congruence_modulo_two_sided_ideal_is_transitive",
