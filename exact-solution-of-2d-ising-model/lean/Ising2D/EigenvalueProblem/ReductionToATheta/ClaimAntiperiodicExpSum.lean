@@ -32,8 +32,19 @@
   `checkPhase_eq_exp` で `checkPhase` と一致することを示す（原文の記号との橋渡し）。
 * 和の添字は `Fin M`（`0,…,M-1`）で、原文の `μ` は `(μ : ℕ) + 1`。
 * 原文は `M ≥ 2` を仮定しているが、本ファイルの主張に必要なのは `M ≠ 0` だけである。
+* `antiperiodic_exp_sum_not_dvd`（`M ∤ k`）の `calc` と `antiperiodic_exp_sum_dvd` の `l` が偶数・奇数の 2 本の `calc` は、
+  人手の鎖（7 行・10 行・8 行）と 1 段ずつ対応する（段のコメントに人手の行を書いた）。ただし偶数の 10 行目・奇数の 8 行目の
+  根拠 `(-1_ℂ)^l = ±1_ℂ`（人手は `(-1)^{l+2} = (-1)^l` と `(-1)^0`・`(-1)^1` の値から導く）は、mathlib の `Even.neg_one_zpow`・
+  `Odd.neg_one_zpow` を当てた `hpow` のままで、人手の手順と対応していない。偶数の 5 行目の `real_inclusion_preserves_product` は具体版 `real_inclusion_mul`、
+  8 行目の `2_ℂ - 1_ℂ = 1_ℂ` は `two_real_inclusion_sub_one` である。人手の `n_ℂ := (n_ℝ)_ℂ` は、Lean では
+  `(n : ℂ)`（`Nat.cast`）と `((n : ℝ) : ℂ)` が別の項なので、4 行目・5 行目で `Complex.ofReal_natCast` により読み替える。
+  人手のこのブロックで実数の包含の性質の主張（`real_inclusion_preserves_*`）を引くのはこの 5 行目だけである。ほかの `push_cast`（`checkPhase_eq_exp` の
+  `θ~_μ` の像、`expPhase` の周波数の自然数・整数の包含など）は、`expPhase` で書くための Lean 側の橋の計算である。
+  ただし整除の補題（`antiperiodic_exp_sum_dvd` の 2 本の `hdelta2`、`antiperiodic_exp_sum_not_dvd` の `hk2`）の
+  `push_cast`・`ring` は、人手の整除の行（`2M ∣ lM ⟺ 2 ∣ l`・`M ≠ 0` による約分・`2M ∣ k` なら `M ∣ k` の対偶）と未対応である。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -314,6 +325,17 @@ theorem sum_checkPhase (hM : M ≠ 0) (n : ℤ) :
   rw [deltaMod, deltaMod, sub_zero, sub_zero]
   simp only [dvd_neg]
 
+/-- 人手 `antiperiodic_exp_sum` の `l` が偶数の鎖の 8 行目の根拠
+`2_ℂ - 1_ℂ = (2_ℝ - 1_ℝ, 0_ℝ) = (1_ℝ, 0_ℝ) = 1_ℂ`（`inclusion_rr_to_cc`・`definition_of_cc`・
+`def_complex_difference`）。 -/
+theorem two_real_inclusion_sub_one : ((2 : ℝ) : ℂ) - 1 = 1 :=
+  calc ((2 : ℝ) : ℂ) - 1
+      = (⟨2 - 1, 0 - 0⟩ : ℂ) := rfl
+        -- `inclusion_rr_to_cc`（`2_ℂ = (2_ℝ, 0_ℝ)`）・`definition_of_cc`（`1_ℂ = (1_ℝ, 0_ℝ)`）・`def_complex_difference`
+    _ = ⟨1, 0⟩ := Complex.ext (by norm_num) (sub_self (0 : ℝ))
+        -- ℝ で `2 - 1 = 1`。人手は第 2 成分の `0_ℝ - 0_ℝ = 0_ℝ` を書かずに `0_ℝ` としている
+    _ = 1 := rfl                                                        -- `inclusion_rr_to_cc`
+
 /-- **`antiperiodic_exp_sum` の `k = lM` の場合**: `∑_{μ=1}^{M} e^{i l M θ~_μ} = M(-1)^l`。 -/
 theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
     ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1)
@@ -334,13 +356,21 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
     calc
       ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
           ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
-            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum
-      _ = ((2 * M : ℕ) : ℂ) * 1 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]
-      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) * 1 := by rw [mul_one]
-      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) := by rw [mul_one]
-      _ = (M : ℂ) := by push_cast; ring
-      _ = (M : ℂ) * 1 := by rw [mul_one]
-      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]
+            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum              -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
+      _ = ((2 * M : ℕ) : ℂ) * 1 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]       -- 1 行目
+      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) * 1 := by rw [mul_one]                    -- 2 行目
+      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) := by rw [mul_one]                        -- 3 行目
+      _ = (((2 : ℝ) * (M : ℝ) : ℝ) : ℂ) - (M : ℂ) := by                         -- 4 行目
+            -- `n_ℂ := (n_ℝ)_ℂ` の読み（`Complex.ofReal_natCast`）と `(2M)_ℝ = 2_ℝ(M)_ℝ`
+            rw [← Complex.ofReal_natCast (2 * M), Nat.cast_mul, Nat.cast_ofNat]
+      _ = ((2 : ℝ) : ℂ) * (M : ℂ) - (M : ℂ) := by                               -- 5 行目
+            -- `real_inclusion_preserves_product`。`((M)_ℝ)_ℂ` を `(M)_ℂ` と読む
+            rw [← real_inclusion_mul, Complex.ofReal_natCast]
+      _ = ((2 : ℝ) : ℂ) * (M : ℂ) - 1 * (M : ℂ) := by rw [one_mul]              -- 6 行目
+      _ = (((2 : ℝ) : ℂ) - 1) * (M : ℂ) := by rw [sub_mul]                      -- 7 行目
+      _ = 1 * (M : ℂ) := by rw [two_real_inclusion_sub_one]                     -- 8 行目
+      _ = (M : ℂ) * 1 := by rw [mul_comm]                                       -- 9 行目
+      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]                                -- 10 行目
   · have hodd : Odd l := Int.not_even_iff_odd.mp hl
     have hdelta2 : deltaMod (2 * M) (l * (M : ℤ)) 0 = 0 := by
       rw [deltaMod, sub_zero, if_neg]
@@ -357,13 +387,15 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
     calc
       ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
           ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
-            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum
-      _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]
-      _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]
-      _ = 0 - (M : ℂ) := by rw [mul_one]
-      _ = -(M : ℂ) := by rw [zero_sub]
-      _ = (M : ℂ) * (-1) := by ring
-      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]
+            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum              -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
+      _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]       -- 1 行目
+      _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]                                   -- 2 行目
+      _ = 0 - (M : ℂ) := by rw [mul_one]                                        -- 3 行目
+      _ = 0 + (-(M : ℂ)) := by rw [sub_eq_add_neg]                              -- 4 行目 `def_complex_difference`
+      _ = -(M : ℂ) := by rw [zero_add]                                          -- 5 行目
+      _ = (-1) * (M : ℂ) := by rw [neg_one_mul]                                 -- 6 行目 `multiply_by_minus_one`
+      _ = (M : ℂ) * (-1) := by rw [mul_comm]                                    -- 7 行目
+      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]                                -- 8 行目
 
 /-- **原文と同じ `Complex.exp` で書いた `k = lM` の場合**。 -/
 theorem antiperiodic_complex_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
@@ -384,10 +416,18 @@ theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ)
       push_cast
       ring
     · exact hd
-  rw [antiperiodic_exp_sum_delta_difference hM k, deltaMod, deltaMod]
-  simp only [sub_zero, if_neg hk2, if_neg hk]
-  push_cast
-  ring
+  have hdelta2 : deltaMod (2 * M) k 0 = 0 := by rw [deltaMod, sub_zero, if_neg hk2]
+  have hdelta : deltaMod M k 0 = 0 := by rw [deltaMod, sub_zero, if_neg hk]
+  calc ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+      = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 :=
+        antiperiodic_exp_sum_delta_difference hM k                    -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
+    _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 0 := by rw [hdelta2, hdelta]  -- 1 行目
+    _ = 0 - (M : ℂ) * 0 := by rw [mul_zero]                             -- 2 行目
+    _ = (0 : ℂ) - 0 := by rw [mul_zero]                                 -- 3 行目
+    _ = (0 : ℂ) + (-0) := by rw [sub_eq_add_neg]                        -- 4 行目 `def_complex_difference`
+    _ = -(0 : ℂ) := by rw [zero_add]                                    -- 5 行目
+    _ = (-1) * (0 : ℂ) := by rw [neg_one_mul]                           -- 6 行目 `multiply_by_minus_one`
+    _ = 0 := by rw [mul_zero]                                           -- 7 行目
 
 /-- **原文と同じ `Complex.exp` で書いた `M ∤ k` の場合**。 -/
 theorem antiperiodic_complex_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ}

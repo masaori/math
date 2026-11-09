@@ -1159,6 +1159,7 @@ targets=(
   Ising2D.sum_checkPhase
   Ising2D.antiperiodic_exp_sum_dvd
   Ising2D.antiperiodic_exp_sum_not_dvd
+  Ising2D.two_real_inclusion_sub_one
   Ising2D.checkZ
   Ising2D.checkY
   Ising2D.checkPhase_antiperiodic
