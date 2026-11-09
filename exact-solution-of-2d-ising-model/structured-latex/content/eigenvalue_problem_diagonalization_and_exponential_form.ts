@@ -5369,18 +5369,68 @@ g
         ref("euler_formula_cos_sin"),
         " を ",
         math(String.raw`-x`),
-        " にも適用できる）。",
+        " にも適用できる）。以下の分母の ",
+        math(String.raw`2`), " は ", math(String.raw`2_{\mathbb{C}}`),
+        " で、",
+        ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
+        " の証明の前置きのとおり ",
+        ref("complex_numbers_form_a_field"),
+        " の体で ",
+        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`), "、",
+        math(String.raw`i \neq 0_{\mathbb{C}}`), "、",
+        math(String.raw`2_{\mathbb{C}}i \neq 0_{\mathbb{C}}`),
+        " なので、分数は定まる。先に、指数の引数の符号を動かす 2 つの等式を作る。",
+        math(String.raw`i(-x)`),
+        " の ",
+        math(String.raw`-x`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転 ",
+        math(String.raw`-x \in \mathbb{R}`),
+        " の像、",
+        math(String.raw`-ix`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(ix)`),
+        "、",
+        math(String.raw`-i(-x)`),
+        " は ",
+        math(String.raw`-\bigl(i(-x)\bigr)`),
+        " である。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+i(-x)
+&= i\bigl((-1)x\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a = (-1)a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to x\bigr)\\
+&= i\bigl((-1_{\mathbb{C}})x\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to x)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(i(-1_{\mathbb{C}})\bigr)x
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl((-1_{\mathbb{C}})i\bigr)x
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})(ix)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -ix
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to ix)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-i(-x)
+&= -(-ix)
+&&(\because\ \text{上の}\ i(-x) = -ix)\\
+&= ix
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to ix\bigr)
+\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \cos(-x)
 &= \frac{\exp(i(-x)) + \exp(-i(-x))}{2}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -x\ \text{に適用})\\
-&= \frac{\exp(i(-x_{\mathbb C})) + \exp(-i(-x_{\mathbb C}))}{2}
-&&(\because\ (-x)_{\mathbb C} = (-x,0) = -(x,0) = -x_{\mathbb C}\ \text{を 2 箇所へ。}\blkref{inclusion_rr_to_cc}\text{、}\blkref{definition_of_cc})\\
+&= \frac{\exp(-ix) + \exp(-i(-x))}{2}
+&&(\because\ \text{上の}\ i(-x) = -ix)\\
 &= \frac{\exp(-ix) + \exp(ix)}{2}
-&&(\because\ \mathbb{C}\ \text{の四則}\ i(-w) = -iw,\ -i(-w) = iw\ \text{を}\ w = x_{\mathbb C}\ \text{で})\\
+&&(\because\ \text{上の}\ -i(-x) = ix)\\
 &= \frac{\exp(ix) + \exp(-ix)}{2}
-&&(\because\ \mathbb{C}\ \text{の和の可換律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
 &= \cos x
 &&(\because\ \blkref{euler_formula_cos_sin})
 \end{aligned}`),
@@ -5388,10 +5438,38 @@ g
 \cos x + i\sin x
 &= \frac{\exp(ix) + \exp(-ix)}{2} + i\,\frac{\exp(ix) - \exp(-ix)}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin})\\
+&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{i\bigl(\exp(ix) - \exp(-ix)\bigr)}{2i}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ u\tfrac{v}{w} = \tfrac{uv}{w}\ (w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ u \to i,\ v \to \exp(ix) - \exp(-ix),\ w \to 2i\bigr)\\
+&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{\bigl(\exp(ix) - \exp(-ix)\bigr)i}{2i}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{\exp(ix) - \exp(-ix)}{2}
-&&(\because\ \mathbb{C}\ \text{の四則}\ i/(2i) = 1/2)\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{va}{wa} = \tfrac{v}{w}\ (a \neq 0_{\mathbb{C}},\ w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ v \to \exp(ix) - \exp(-ix),\ w \to 2,\ a \to i\bigr)\\
+&= \frac{\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) - \exp(-ix)\bigr)}{2}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{u}{w} + \tfrac{v}{w} = \tfrac{u + v}{w}\ (w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ u \to \exp(ix) + \exp(-ix),\ v \to \exp(ix) - \exp(-ix),\ w \to 2\bigr)\\
+&= \frac{\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)}{2}
+&&(\because\ \blkref{def_complex_difference})\\
+&= \frac{\exp(ix) + \Bigl(\exp(-ix) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(ix) + \Bigl(\bigl(\exp(-ix) + \exp(ix)\bigr) + (-\exp(-ix))\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(ix) + \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + (-\exp(-ix))\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
+&= \frac{\exp(ix) + \Bigl(\exp(ix) + \bigl(\exp(-ix) + (-\exp(-ix))\bigr)\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(ix) + \bigl(\exp(ix) + 0_{\mathbb{C}}\bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= \frac{\exp(ix) + \exp(ix)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&= \frac{1_{\mathbb{C}}\exp(ix) + 1_{\mathbb{C}}\exp(ix)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ右辺から左辺へ})\\
+&= \frac{\bigl(1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\exp(ix)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
+&= \frac{(1 + 1)_{\mathbb{C}}\,\exp(ix)}{2}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
+&= \frac{2\exp(ix)}{2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
 &= \exp(ix)
-&&(\because\ \mathbb{C}\ \text{の四則})
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{2a}{2} = a\ (2 \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(ix)\bigr)
 \end{aligned}`),
       paragraph([
         "第二に、",
@@ -5620,6 +5698,7 @@ g
           "また、「同じ計算」に省略していた共役添字の二本の導出を、各結論の左辺から始まる鎖へ開いた。内容と参照は変えていない。",
         "2026-11-03（全証明の SageMath 検算）: (1) が主張と違う式を述べる euler_formula_cos_sin を exp(i(t+2kπ)) の表示に引いていたので、準備で euler_formula_cos_sin から exp(ix) = cos x + i sin x と cos(−x) = cos x を導く鎖にした。" +
           "「(1) が従う」「成分が書けることが分かる」の散文を γ_1・γ_2・γ・P̌ の鎖に、角度を像の記号 k_R で書き、P̌_{M+1−μ} の主張を行列で明示し、全実数上の cos・sin の 2π 周期性を前提とすることを主張に書いた。主張の中身は変えていない。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の名前だけの根拠「ℂ の四則」3 か所（cos(-x) の鎖の i(-w) = -iw・-i(-w) = iw、cos x + i sin x の鎖の i/(2i) = 1/2 と最後の行）と、1 行に 3 つの等号を使っていた (-x)_C = -x_C の行を、relation_of_gamma_2_theta_tilde の準備の第一と同じ書き方にした。-x ∈ ℝ のまま i(-x) = -ix（6 行）と -i(-x) = ix（2 行）を先に作り、cos(-x) の鎖からそれを引く。cos x + i sin x の鎖は ℂ の体の等式 1 つずつの 17 行にした。値と主張は不変。",
       ],
     },
   },

@@ -1,5 +1,5 @@
 # 対象ラベル: periodicity_of_check_fermi
-# 準備の第一（cos(-x) と exp(ix) の表示）、(1) の γ_1・γ_2 の鎖、(3) の γ_1・γ・P̌ の鎖を、一般の点（不定元）で一行ずつ確かめる。
+# 準備の第一（i(-x) = -ix、-i(-x) = ix、cos(-x) と exp(ix) の表示）、(1) の γ_1・γ_2 の鎖、(3) の γ_1・γ・P̌ の鎖を、一般の点（不定元）で一行ずつ確かめる。
 # 各行は本文に書かれた式から別々に組み、隣り合う行の差が「その行の根拠の関係だけ」で生成したイデアルに入ることを見る。
 # 関係を使う行では、その関係を外すとイデアルに入らないこと（対照）も見る。浮動小数点なし。
 load("_prelude.sage")
@@ -20,7 +20,8 @@ def euler(Cv, Sv, Ep, Emv):
 EUL_x = euler(C, S, E, Ei)
 EUL_s = euler(Cs, Ss, Es, Esi)
 EUL_m = euler(Cm, S, Em, Emi)[:1]          # -x では cos の式だけを使う
-ARG_m = [Em - Ei, Emi - E]                 # ℂ の四則 i(-x) = -ix、-i(-x) = ix（exp の引数が同じ）
+ARG_m1 = [Em - Ei]                         # 準備の i(-x) = -ix（exp の引数が同じ）
+ARG_m2 = [Emi - E]                         # 準備の -i(-x) = ix（exp の引数が同じ）
 PER_cos = [Cs - C]                         # cos の 2π 周期性
 PER_sin = [Ss - S]                         # sin の 2π 周期性
 
@@ -39,20 +40,51 @@ def chain(name, lines, reasons):
         if reasons[j]:
             rep.check(d != 0, f"{name} 第 {j+1} 行 → 第 {j+2} 行の対照: 根拠の関係なしでは一致しない")
 
-# 分数を払う: 本文の (·)/2 は 2 倍して比べる。i/(2i) = 1/2 は K0 の中で確かめる。
-rep.check(I0 / (2 * I0) == K0(1) / 2, "ℂ の四則 i/(2i) = 1/2")
+# ---- 準備の第一: i(-x) = -ix の鎖 6 行と -i(-x) = ix の鎖 2 行（x は QQ(i)[t] の不定元 t。ℝ の元 (-1)x の像は (-1_C)x） ----
+Rt.<t> = PolynomialRing(K0)
+m1c = K0(-1)
+ineg_chain = [I0 * (-t), I0 * ((-1) * t), I0 * (m1c * t), (I0 * m1c) * t, (m1c * I0) * t, m1c * (I0 * t), -(I0 * t)]
+for k in range(len(ineg_chain) - 1):
+    rep.check(ineg_chain[k] == ineg_chain[k + 1], f"準備 i(-x) = -ix の鎖 第 {k+1} 行 = 第 {k+2} 行")
+rep.check(I0 * t != -(I0 * t), "準備 i(-x) = -ix の鎖 否定の対照: ix ≠ -ix")
+nn_chain = [-(I0 * (-t)), -(-(I0 * t)), I0 * t]
+for k in range(len(nn_chain) - 1):
+    rep.check(nn_chain[k] == nn_chain[k + 1], f"準備 -i(-x) = ix の鎖 第 {k+1} 行 = 第 {k+2} 行")
 
 # ---- 準備の第一: cos(-x) の鎖（2 倍した形） ----
 chain("準備 cos(-x) の鎖（2 倍）",
-      [2 * Cm, Em + Emi, Em + Emi, Ei + E, E + Ei, 2 * C],
-      [EUL_m, [], ARG_m, [], EUL_x])
-# 第 2 → 3 行（(-x)_C = -x_C）は exp の引数の書き方を変えるだけで、この多項式環では同じ元。中身は下の対の計算
-rep.check((-QQ(5), QQ(0)) == tuple(-v for v in (QQ(5), QQ(0))), "(-x)_C = (-x,0) = -(x,0)（x = 5 の対で。成分ごとの符号）")
+      [2 * Cm, Em + Emi, Ei + Emi, Ei + E, E + Ei, 2 * C],
+      [EUL_m, ARG_m1, ARG_m2, [], EUL_x])
 
-# ---- 準備の第一: cos x + i sin x = exp(ix)（2 倍した形） ----
-chain("準備 cos x + i sin x の鎖（2 倍）",
-      [2 * (C + I0 * S), (E + Ei) + I0 * (E - Ei) / I0, (E + Ei) + (E - Ei), 2 * E],
-      [EUL_x, [], []])
+# ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 17 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
+Ft = R.fraction_field()
+Ep_, Em_ = Ft(E), Ft(Ei)
+euler_chain = [
+    (Ep_ + Em_) / 2 + I0 * ((Ep_ - Em_) / (2 * I0)),
+    (Ep_ + Em_) / 2 + (I0 * (Ep_ - Em_)) / (2 * I0),       # u(v/w) = (uv)/w
+    (Ep_ + Em_) / 2 + ((Ep_ - Em_) * I0) / (2 * I0),       # 積の可換律
+    (Ep_ + Em_) / 2 + (Ep_ - Em_) / 2,                     # (va)/(wa) = v/w
+    ((Ep_ + Em_) + (Ep_ - Em_)) / 2,                       # u/w + v/w = (u+v)/w
+    ((Ep_ + Em_) + (Ep_ + (-Em_))) / 2,                    # def_complex_difference
+    (Ep_ + (Em_ + (Ep_ + (-Em_)))) / 2,                    # 和の結合律
+    (Ep_ + ((Em_ + Ep_) + (-Em_))) / 2,                    # 和の結合律
+    (Ep_ + ((Ep_ + Em_) + (-Em_))) / 2,                    # 和の可換律
+    (Ep_ + (Ep_ + (Em_ + (-Em_)))) / 2,                    # 和の結合律
+    (Ep_ + (Ep_ + 0)) / 2,                                 # 加法逆元
+    (Ep_ + Ep_) / 2,                                       # 零元
+    (1 * Ep_ + 1 * Ep_) / 2,                               # 積の単位元
+    ((1 + 1) * Ep_) / 2,                                   # 分配律
+    ((QQ(1) + QQ(1)) * Ep_) / 2,                           # real_inclusion_preserves_sum
+    (2 * Ep_) / 2,                                         # ℝ で 1 + 1 = 2
+    Ep_,                                                   # (2a)/2 = a
+]
+for k in range(len(euler_chain) - 1):
+    rep.check(euler_chain[k] == euler_chain[k + 1], f"準備 cos x + i sin x の鎖 第 {k+1} 行 = 第 {k+2} 行")
+# 第 1 行は euler_formula_cos_sin の代入: 2 倍して分母を払った差が EUL_x のイデアルに入る（関係なしでは入らない）
+d_first = 2 * (C + I0 * S) - R(2 * euler_chain[0])
+rep.check(in_ideal(d_first, EUL_x), "準備 cos x + i sin x の鎖 第 1 行は euler_formula_cos_sin の代入（2 倍した差が関係のイデアルに入る）")
+rep.check(d_first != 0, "準備 cos x + i sin x の鎖 第 1 行の対照: 関係なしでは一致しない")
+rep.check((Ep_ - Em_) / 2 != (Ep_ - Em_) / (2 * I0), "準備 cos x + i sin x の鎖 否定の対照: 分母の i だけを落とすと等号が崩れる")
 
 # ---- (1) γ_1 の鎖 ----
 g1 = lambda cosv: c1 * c2s - s1 * s2s * cosv
