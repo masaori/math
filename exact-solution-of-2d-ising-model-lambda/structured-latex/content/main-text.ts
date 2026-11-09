@@ -12658,8 +12658,11 @@ d_A(o)&=\sum_{v\in V}d_A(v)-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ o
                     " にちょうど一辺を持つ。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集合の対称差の個数を二で割った余り}\bigr)\\
-&\equiv d_A(v)+1\pmod 2&&\bigl(\because\ v\in e\bigr)
+d_{A_1}(v)\bmod 2
+&=(d_A(v)+d_{\{e\}}(v))\bmod 2
+&&\bigl(\because\ \text{接続辺集合の対称差の個数を二で割った余り}\bigr)\\
+&=(d_A(v)+1)\bmod 2
+&&\bigl(\because\ v\in e\text{ より }d_{\{e\}}(v)=1\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`d_A(v)`), " の偶奇は零か一である。",
@@ -12889,6 +12892,71 @@ A_i\cap(E\setminus F)
             element: {
               kind: "elementGroup",
               id: "group_of_tools_claim_even_edge_tree_leaf_induction",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "tools_claim_even_edge_leaf_step_invariants",
+                    kind: "claim",
+                    title: { text: "未処理頂点の一回の処理で辺選択と偶数性の不変条件を保つ" },
+                    labels: ["claim_even_edge_leaf_step_invariants"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.Tools.evenEdge_leafStep",
+                      "Ising2DLambda.NecSuf.Tools.incidenceParity_leafStep",
+                    ],
+                    verification: ["sagemath/check/even-edge-leaf-step-invariants"],
+                    statement: [
+                      paragraph([
+                        "有限な頂点集合 ", math(String.raw`V`), " と辺集合 ", math(String.raw`E`),
+                        "、木辺の集合 ", math(String.raw`F\subseteq E`), "、選択辺集合 ",
+                        math(String.raw`A\subseteq E`), "、未処理頂点集合 ",
+                        math(String.raw`U\subseteq V`), " を取る。",
+                        "選択済みの ", math(String.raw`F`), " の各辺は ",
+                        math(String.raw`V\setminus U`), " の頂点に接し、",
+                        "処理済みの各頂点に接する ", math(String.raw`A`),
+                        " の辺数は偶数とする。",
+                        "両端点が ", math(String.raw`U`), " に属する ",
+                        math(String.raw`e\in F`), " と ", math(String.raw`v\in e`),
+                        " を取る。このとき ", math(String.raw`A'=A`), " または ",
+                        math(String.raw`A'=A\mathbin\triangle\{e\}`),
+                        " と選べて、", math(String.raw`A'\subseteq E`),
+                        "、", math(String.raw`v`), " と元から処理済みの頂点での偶数性、",
+                        "選択済みの木辺が ", math(String.raw`U\setminus\{v\}`),
+                        " の二頂点を結ばないこと、木外辺の選択の一致がすべて成り立つ。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("claim_even_edge_leaf_choice"), " により、",
+                        math(String.raw`v`), " の偶数性を満たす ",
+                        math(String.raw`A'\in\{A,A\mathbin\triangle\{e\}\}`),
+                        " を選ぶ。", math(String.raw`e\in E`),
+                        " なので ", math(String.raw`A'\subseteq E`), " である。",
+                      ]),
+                      paragraph([
+                        "元から処理済みの頂点は ", math(String.raw`e`),
+                        " に接しないので、", ref("claim_even_edge_processed_vertex_parity"),
+                        " によりその偶数性は保たれる。新たに処理する ",
+                        math(String.raw`v`), " の偶数性は選び方から従う。",
+                      ]),
+                      paragraph([
+                        "選択済みの木辺 ", math(String.raw`f\ne e`),
+                        " は元から ", math(String.raw`V\setminus U`),
+                        " の頂点に接し、その頂点は ",
+                        math(String.raw`V\setminus(U\setminus\{v\})`),
+                        " にも属する。新たに選ばれうる ", math(String.raw`e`),
+                        " は除いた頂点 ", math(String.raw`v`),
+                        " に接する。従って選択済みの木辺は未処理の二頂点を結ばない。",
+                      ]),
+                      paragraph([
+                        "木外辺の選択は ", ref("claim_tree_edge_toggles_preserve_outside"),
+                        " の一回の場合から一致する。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
               focus: {
                 id: "tools_claim_even_edge_tree_leaf_induction",
                 kind: "claim",

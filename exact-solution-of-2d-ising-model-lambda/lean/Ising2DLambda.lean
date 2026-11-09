@@ -18,6 +18,8 @@ import Ising2DLambda.Tools.TreeInduceRemoveLeaf
 import Ising2DLambda.NecSuf.Tools.TreeInduceRemoveLeaf
 import Ising2DLambda.Tools.TreeEdgeToggleOutside
 import Ising2DLambda.NecSuf.Tools.TreeEdgeToggleOutside
+import Ising2DLambda.Tools.EvenEdgeLeafStep
+import Ising2DLambda.NecSuf.Tools.EvenEdgeLeafStep
 import Ising2DLambda.Tools.RootedTreeHasNonrootLeaf
 import Ising2DLambda.NecSuf.Tools.RootedTreeHasNonrootLeaf
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
