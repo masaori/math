@@ -2063,7 +2063,8 @@ t - \sin t
     ],
     proof: [
       paragraph([
-        "円周率の数値の評価より ",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の数値の評価より ",
         math(String.raw`0 < 3.141592 \leq \pi \leq 3.141593`),
         " である。",
       ]),
@@ -2095,6 +2096,7 @@ t - \sin t
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: 準備の「円周率の数値の評価より」を remark_real_analysis_facts_R3_R4 の参照にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 根拠「π > 0」の 2 行を pi_is_positive の参照にした。値と主張は不変。",
         "2026-11-02: 旧 elementary_sine_bounds が根拠なしで使っていた 9.8696 ≤ π² ≤ 9.8697 を、外部から持ち込む円周率の数値の評価から導く主張にした。",
       ],
@@ -2260,6 +2262,20 @@ c_0
         math(String.raw`2 > 0`),
         " で割って ",
         math(String.raw`0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}`),
+        " である。また ",
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0 < \pi`),
+        " と ",
+        math(String.raw`0 < \tfrac{1}{2}`),
+        "（有理数の大小比較）から、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0 < \tfrac{\pi}{2}`),
         " である。これから次を得る。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -2268,7 +2284,7 @@ c_0
 &\leq \frac{\theta}{2}\cdot\frac{\pi}{2}
 &&(\because\ \tfrac{\theta}{2} \leq \tfrac{\pi}{2}\ \text{の両辺に}\ \tfrac{\theta}{2} \geq 0\ \text{を掛ける})\\
 &\leq \frac{\pi}{2}\cdot\frac{\pi}{2}
-&&(\because\ \tfrac{\theta}{2} \leq \tfrac{\pi}{2}\ \text{の両辺に}\ \tfrac{\pi}{2} > 0\ \text{を掛ける})\\
+&&(\because\ \tfrac{\theta}{2} \leq \tfrac{\pi}{2}\ \text{の両辺に準備の}\ \tfrac{\pi}{2} > 0\ \text{を掛ける})\\
 &= \frac{\pi^2}{4}
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`),
@@ -2306,6 +2322,7 @@ c_0
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 1/2（正の数どうしの積は正。ℝ は順序体 set_and_algebra_notation）から 0 < π/2 を出す文を置き、鎖の根拠「π/2 > 0」をその参照にした。値と主張は不変。",
         "2026-11-02: 旧 elementary_sine_bounds の主張の第二の行を独立の主張にした。(θ/2)² ≤ π²/4 を準備の鎖にした。",
       ],
     },
@@ -3327,10 +3344,50 @@ G'(\theta)
         math(String.raw`G'`),
         " は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続である（微分の公式）。",
         ref("pi_is_positive"),
-        " より ",
-        math(String.raw`\pi > 0`),
+        " の ",
+        math(String.raw`0 < \pi`),
+        " と仮定の ",
+        math(String.raw`0 < a`),
+        " から、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0 < a\pi`),
         "、したがって ",
-        math(String.raw`\tfrac{a\pi}{2} > 0`),
+        math(String.raw`a\pi \neq 0`),
+        " である。",
+        math(String.raw`0 < a\pi`),
+        " と ",
+        math(String.raw`0 < \tfrac{1}{2}`),
+        "（有理数の大小比較）から同じ理由で ",
+        math(String.raw`0 < \tfrac{a\pi}{2}`),
+        " である。",
+        math(String.raw`0 < a\pi`),
+        " と準備の ",
+        math(String.raw`0 < r(\pi)`),
+        " から同じ理由で ",
+        math(String.raw`0 < a\pi\,r(\pi)`),
+        "、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数の逆数は正（同じく順序体）なので ",
+        math(String.raw`0 < \tfrac{1}{a\pi\,r(\pi)}`),
+        "、これと ",
+        math(String.raw`0 < 2`),
+        " の積で ",
+        math(String.raw`0 < \tfrac{2}{a\pi\,r(\pi)}`),
+        " である。仮定の ",
+        math(String.raw`0 < \delta`),
+        " から同じ理由で ",
+        math(String.raw`0 < \delta^2`),
+        "、逆数をとって ",
+        math(String.raw`0 < \tfrac{1}{\delta^2}`),
+        "、これと ",
+        math(String.raw`0 < \pi`),
+        " の積で ",
+        math(String.raw`0 < \tfrac{\pi}{\delta^2}`),
         " である。",
         math(String.raw`r(\pi) \leq \tfrac{a\pi}{2}`),
         " と仮定すると",
@@ -3341,10 +3398,10 @@ r(\pi)^2
 &\leq \frac{a\pi}{2}\cdot r(\pi)
 &&(\because\ \text{仮定の両辺に}\ r(\pi) > 0\ \text{を掛ける})\\
 &\leq \frac{a\pi}{2}\cdot\frac{a\pi}{2}
-&&(\because\ \text{仮定の両辺に}\ \tfrac{a\pi}{2} > 0\ \text{を掛ける})\\
+&&(\because\ \text{仮定の両辺に上の}\ \tfrac{a\pi}{2} > 0\ \text{を掛ける})\\
 &= \frac{a^2\pi^2}{4}\\
 &< \delta^2 + \frac{a^2\pi^2}{4}
-&&(\because\ \delta^2 > 0)\\
+&&(\because\ \text{上の}\ \delta^2 > 0)\\
 &= r(\pi)^2
 &&(\because\ r(\pi)^2 = w(\pi))
 \end{aligned}`),
@@ -3356,9 +3413,9 @@ r(\pi)^2
       displayMath(String.raw`\begin{aligned}
 \frac{1}{r(\pi)}
 &= \frac{a\pi}{2}\cdot\frac{2}{a\pi\,r(\pi)}
-&&(\because\ \mathbb{R}\ \text{の四則。}a\pi \neq 0,\ r(\pi) \neq 0)\\
+&&(\because\ \mathbb{R}\ \text{の四則。上の}\ a\pi \neq 0\ \text{と}\ r(\pi) > 0)\\
 &\leq r(\pi)\cdot\frac{2}{a\pi\,r(\pi)}
-&&(\because\ \tfrac{a\pi}{2} < r(\pi)\ \text{の両辺に正の数}\ \tfrac{2}{a\pi\,r(\pi)}\ \text{を掛ける})\\
+&&(\because\ \tfrac{a\pi}{2} < r(\pi)\ \text{の両辺に上の}\ \tfrac{2}{a\pi\,r(\pi)} > 0\ \text{を掛ける})\\
 &= \frac{2}{a\pi}
 &&(\because\ \text{約分})
 \end{aligned}`),
@@ -3373,7 +3430,7 @@ r(\pi)^2
 &= \frac{\pi}{\delta^2}\cdot\frac{1}{r(\pi)}
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &\leq \frac{\pi}{\delta^2}\cdot\frac{2}{a\pi}
-&&(\because\ \tfrac{1}{r(\pi)} \leq \tfrac{2}{a\pi}\ \text{の両辺に}\ \tfrac{\pi}{\delta^2} > 0\ \text{を掛ける})\\
+&&(\because\ \tfrac{1}{r(\pi)} \leq \tfrac{2}{a\pi}\ \text{の両辺に上の}\ \tfrac{\pi}{\delta^2} > 0\ \text{を掛ける})\\
 &= \frac{2}{a\,\delta^2}
 &&(\because\ \text{約分})
 \end{aligned}`),
@@ -3381,6 +3438,7 @@ r(\pi)^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: π > 0 から出す aπ > 0・aπ ≠ 0・aπ/2 > 0・2/(aπ r(π)) > 0・π/δ² > 0 を、正の数どうしの積と正の数の逆数は正（ℝ は順序体 set_and_algebra_notation）の段を書いて G' の連続性の後の段落に置き、鎖の根拠 5 か所（δ² > 0 を含む）を「上の」で引く形にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 散文の「remark_real_analysis_facts_R3_R4 の円周率の数値の評価より π > 0」を pi_is_positive の参照にした。値と主張は不変。",
         "2026-11-02: 旧 closed_form_log_integral (3) を独立の主張にした。3/2 乗を def_three_halves_power で定め、G' の計算を w'・r' の鎖と 1 行 1 操作の鎖に分け、√(δ² + a²π²/4) ≥ aπ/2 を平方根の単調性ではなく背理法の鎖で示した。",
       ],

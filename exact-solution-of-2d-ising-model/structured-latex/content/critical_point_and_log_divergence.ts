@@ -2310,6 +2310,22 @@ S
         ref("set_and_algebra_notation"),
         "）なので ",
         math(String.raw`0 < 2\pi`),
+        " である。これと、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数の逆数は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）であることから ",
+        math(String.raw`0 < \tfrac{1}{2\pi}`),
+        " である。同じく ",
+        math(String.raw`0 < \pi`),
+        " と ",
+        math(String.raw`0 < 4`),
+        " の積で ",
+        math(String.raw`0 < 4\pi`),
+        "、その逆数で ",
+        math(String.raw`0 < \tfrac{1}{4\pi}`),
         " である。",
         math(String.raw`9.8696 \leq \pi^2`),
         " は ",
@@ -2322,9 +2338,13 @@ S
         math(String.raw`\log 1 = \log 1 + \log 1`),
         "、すなわち ",
         math(String.raw`\log 1 = 0`),
-        " であり、",
+        " である。上の ",
+        math(String.raw`2\pi \geq 6.2831`),
+        " と有理数の大小比較の ",
+        math(String.raw`6.2831 > 1`),
+        " から ",
         math(String.raw`2\pi > 1`),
-        " と ",
+        " であり、これと ",
         ref("real_log_strictly_increasing"),
         " より ",
         math(String.raw`\log(2\pi) > \log 1 = 0`),
@@ -2427,9 +2447,9 @@ G''(\kappa) = \frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^
 &=\left|\frac{1}{4\pi}\int_0^{2\pi}\frac{\partial\gamma}{\partial\kappa}\,d\theta\right|
 && (\because\ \blkref{gamma_derivatives_in_kappa}\text{ と微分積分交換 (R5)})\\
 &\leq\frac{1}{4\pi}\int_0^{2\pi}\left|\frac{\partial\gamma}{\partial\kappa}\right|\,d\theta
-&& (\because\ \text{積分の三角不等式 (R3)})\\
+&& (\because\ \text{積分の三角不等式 (R3) と準備の}\ 0<\tfrac{1}{4\pi})\\
 &\leq\frac{1}{4\pi}\int_0^{2\pi}1\,d\theta
-&& (\because\ \blkref{gamma_derivatives_in_kappa})\\
+&& (\because\ \blkref{gamma_derivatives_in_kappa}\ \text{と準備の}\ 0<\tfrac{1}{4\pi})\\
 &=\frac{1}{4\pi}\cdot 2\pi
 && (\because\ \text{定数関数の積分 (R4)})\\
 &=\frac12
@@ -2837,9 +2857,9 @@ T
       displayMath(String.raw`\begin{aligned}
 \log\frac{\pi}{\delta}
 &=\log\frac1\kappa+\log\pi+\log\frac\kappa\delta
-&& (\because\ \blkref{real_log_of_product})\\
+&& (\because\ \blkref{real_log_of_product}\ \text{と準備の}\ 0<\pi)\\
 &=\log\frac1\kappa+\log(2\pi)+\left(\log\frac\kappa\delta-\log2\right)
-&& (\because\ \blkref{real_log_of_product})\\
+&& (\because\ \blkref{real_log_of_product}\ \text{と準備の}\ 0<2\pi)\\
 &=\log\frac1\kappa+\log(2\pi)+\rho
 && (\because\ \rho\text{ の定義}),\\[2pt]
 |\rho|
@@ -3013,7 +3033,7 @@ T
         String.raw`\begin{aligned}
 \left|G''(\kappa)-\frac{1}{2\pi}\log\frac{1}{\kappa}\right|
 &=\frac{1}{2\pi}\left|2\pi G''(\kappa)-\log\frac{1}{\kappa}\right|
-&&\bigl(\because\ \text{準備の}\ 0<2\pi\bigr)\\
+&&\bigl(\because\ \text{準備の}\ 0<2\pi\ \text{と}\ 0<\tfrac{1}{2\pi}\bigr)\\
 &\leq\frac{6.731}{2\pi}
 &&\bigl(\because\ \text{直前の総合評価}\bigr)\\
 &\leq\frac{6.731}{6.2831}
@@ -3031,12 +3051,13 @@ G''(\kappa)
 &&\bigl(\because\ \text{直前の絶対値評価}\bigr),\\
 \frac{1}{2\pi}\log\frac{1}{|\kappa|}-\frac65
 &\longrightarrow+\infty
-&&\bigl(\because\ \log(1/|\kappa|)\to+\infty,\ \text{準備の}\ 0<2\pi\bigr).
+&&\bigl(\because\ \log(1/|\kappa|)\to+\infty,\ \text{準備の}\ 0<\tfrac{1}{2\pi}\bigr).
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: 準備に、正の数の逆数は正・正の数どうしの積は正（ℝ は順序体 set_and_algebra_notation）を使い、0 < 2π の逆数で 0 < 1/(2π)、0 < π と 0 < 4 の積 0 < 4π の逆数で 0 < 1/(4π) を出す文と、2π ≥ 6.2831 と 6.2831 > 1 から 2π > 1 を出す文を置き、Step 1 の |G'| の鎖の 2 行、Step 6 の log(π/δ) の鎖の 2 行（real_log_of_product の引数の正）、Step 7 の 1/(2π) を外へ出す行と極限の行の根拠をその参照にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 2（ℝ は順序体で、正の数どうしの積は正）から 0 < 2π を出す文を置き、根拠「2π > 0」の 2 か所をその参照にした。値と主張は不変。",
         "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.08 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",
         "2026-11-05（全証明の SageMath 検算）: 平方根を √·^(ℝ≥0) の記法にそろえ、Step 3 で r := √S、t := √(1+S) と置いて r > 0・t ≥ 1 を示し、sinh γ = 2rt（sinh_double_angle_formula と gamma_derivatives_in_kappa (1)）で書き直した（以前の Step 4 は 1/√(S(1+S)) = (1/√S)(1/√(1+S)) を「ℝ の四則」としていた）。Step 4 の各点評価を r, t の鎖に、Step 5 の (S(1+S))^{3/2} = S^{3/2}(1+S)^{3/2}（本文に無い冪法則）を r³t³ の鎖にし、w^{3/2} ≤ S^{3/2} の理由を書いた。T ≥ 0 を示していなかった（Step 7 で |T| ≤ 3.615 に使う）ので足した。Step 6 の κ² log(1/κ) の単調増加は導関数の正から言っており平均値の定理（remark_real_analysis_escape_chapter_E が使わないとした道具）に当たるので、F(s) := −s² log s に (R4)・(R3) を当てる鎖にした。初等関数の値の数値の評価（sinh(1/4)・cosh(1/4)・log cosh(1/4)・cosh(1/2)・log 2・log(2π) の上界）を remark_real_analysis_escape_chapter_E が持ち込むものとして明記し（π ≤ 3.1416・2π ≥ 6.2831 は remark_real_analysis_facts_R3_R4 の π の評価から、log(2π) > 0 は対数の単調性から導いた）、Step 4 の r ≤ cosh(κ/2) と sin²(θ/2) ≤ 1 を根拠付きの準備にし、Step 5・6 の複数の根拠を 1 行で使っていた行を割り、F' の連続性・log(1/κ) > 0・cosh κ ≥ 1 の根拠を書き、cosh の単調性・対数の積の法則・対数の単調性をラベルで引いた。主張と定数は不変。検算は sagemath/check/second_derivative_log_divergence/。",
