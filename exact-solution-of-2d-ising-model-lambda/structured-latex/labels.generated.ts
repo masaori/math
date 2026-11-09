@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "claim_dual_cell_component_boundary",
   "claim_dual_cell_side_confinement",
   "claim_dual_edge_map_bijective",
+  "claim_edge_connected_cell_set_vertex_graph_connected",
   "claim_edge_distinct_crossing_elimination_parity",
   "claim_edge_distinct_smoothing_crossing_parity",
   "claim_edge_distinct_walk_quadratic_sign",

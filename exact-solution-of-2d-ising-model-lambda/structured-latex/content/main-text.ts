@@ -69318,8 +69318,14 @@ T&=U
                             "）。共有辺の一端を ", math(String.raw`w\in\mathbb Z\times\mathbb Z`),
                             " と置く。この端点は両セルの四隅に属する。",
                           ]),
-                          displayMath(String.raw`w\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
-\qquad\bigl(\because\ \blkref{def_cell_vertex_set}\text{ と }\blkref{def_cell_edge_set}\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+w&\in\mathcal V_{\square}(\{p\})
+&&\bigl(\because\ \blkref{def_cell_vertex_set}\text{ と }\blkref{def_cell_edge_set}\bigr)\\
+w&\in\mathcal V_{\square}(\{q\})
+&&\bigl(\because\ \blkref{def_cell_vertex_set}\text{ と }\blkref{def_cell_edge_set}\bigr)\\
+w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
+&&\bigl(\because\ \text{共通部分の定義}\bigr)
+\end{aligned}`),
                           paragraph([
                             "任意の ", math(String.raw`u,v\in\mathcal V_{\square}(\{p,q\})`),
                             " を取る。", ref("claim_single_cell_corners_connected"),
@@ -69333,6 +69339,57 @@ T&=U
                             "路に重複する頂点があれば、閉じた部分を除いて頂点単純な路にできる（",
                             ref("def_vertex_simple_path"),
                             "）。頂点集合は空でないので、", ref("def_finite_graph_connected"),
+                            " により連結である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_edge_connected_cell_set_vertex_graph_connected",
+                        kind: "claim",
+                        title: { text: "辺連結セル集合の頂点辺グラフは連結である" },
+                        labels: ["claim_edge_connected_cell_set_vertex_graph_connected"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.edgeConnectedCellSet_vertexGraphConnected",
+                          "Ising2DLambda.NecSuf.KacWard.connectedCellCorners_connected",
+                          "Ising2DLambda.KacWard.edgeConnectedCellSet_vertexGraphConnected_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/edge-connected-cell-set-vertex-graph-connected"],
+                        statement: [
+                          paragraph([
+                            "空でない有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " が辺連結（", ref("def_edge_connected_cell_set"), "）なら、頂点集合 ",
+                            math(String.raw`\mathcal V_{\square}(S)`), " と辺集合 ",
+                            math(String.raw`\mathcal E_{\square}(S)`),
+                            " からなる有限単純グラフは連結である（", ref("def_finite_graph_connected"), "）。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の頂点 ", math(String.raw`u,v\in\mathcal V_{\square}(S)`),
+                            " を取る。", ref("def_cell_vertex_set"), " により、",
+                            math(String.raw`u\in\mathcal V_{\square}(\{p\})`), " と ",
+                            math(String.raw`v\in\mathcal V_{\square}(\{q\})`),
+                            " を満たすセル ", math(String.raw`p,q\in S`), " がある。",
+                            ref("def_edge_connected_cell_set"), " により、", math(String.raw`p=p_0,p_1,\ldots,p_n=q`),
+                            " という辺隣接列を取る。", math(String.raw`n=0`),
+                            " のときは ", ref("claim_single_cell_corners_connected"),
+                            " で結べる。",
+                          ]),
+                          paragraph([
+                            math(String.raw`n>0`), " のとき、隣り合う各二セルについて ", ref("claim_adjacent_cell_corners_connected"),
+                            " を使う。", math(String.raw`p_i`), " と ", math(String.raw`p_{i+1}`),
+                            " の共通の隅を ", math(String.raw`w_i`),
+                            " とすると、セル内と二セル間の路を順につないで ",
+                            math(String.raw`u`), " から ", math(String.raw`v`),
+                            " への歩道が得られる。各歩道の辺は ",
+                            math(String.raw`\mathcal E_{\square}(S)`), " に属する（", ref("def_cell_edge_set"),
+                            "）。重複する頂点の間の閉部分を除くと頂点単純な路になる（",
+                            ref("def_vertex_simple_path"), "）。", math(String.raw`u,v`),
+                            " は任意で頂点集合は空でないので、", ref("def_finite_graph_connected"),
                             " により連結である。",
                           ]),
                         ],
