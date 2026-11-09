@@ -11290,20 +11290,20 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
 &=\sum_{D\in\{\varnothing\}}c_Db_D&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)\\
 &=c_{\varnothing}b_{\varnothing}&&\bigl(\because\ \text{一項の和}\bigr)\\
 &=1\cdot1&&\bigl(\because\ \blkref{def_perfect_matching_sign},\ \text{空積}\bigr)\\
-&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr).
+&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr)
 \end{aligned}`),
                 paragraph(["空集合の置換は空置換だけで、その符号は一、行列成分の積は空積である。よって"]),
                 displayMath(String.raw`\begin{aligned}
 \det_x(A)
 &=\sum_{\sigma\in\{\operatorname{id}_{\varnothing}\}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\varnothing}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
 &=1\cdot1&&\bigl(\because\ \text{空置換の符号と空積}\bigr)\\
-&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr).
+&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{Pf}(A)^2
 &=1^2&&\bigl(\because\ \operatorname{Pf}(A)=1\bigr)\\
 &=1&&\bigl(\because\ \text{単位元の平方}\bigr)\\
-&=\det_x(A)&&\bigl(\because\ \det_x(A)=1\bigr).
+&=\det_x(A)&&\bigl(\because\ \det_x(A)=1\bigr)
 \end{aligned}`),
               ],
             },
@@ -12548,6 +12548,57 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                   ]),
                   displayMath(String.raw`D=\varnothing\quad(\because\ D\ne\varnothing\text{ なら接続辺数が一かつ偶数の頂点がある})`),
                   displayMath(String.raw`A=B\quad(\because\ A\mathbin\triangle B=\varnothing)`),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_subset_root_parity",
+        labels: [],
+        title: { text: "偶辺集合の根での偶数性" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_subset_root_parity",
+              focus: {
+                id: "tools_claim_even_edge_subset_root_parity",
+                kind: "claim",
+                title: { text: "根以外で偶数なら根でも偶数である" },
+                labels: ["claim_even_edge_subset_root_parity"],
+                habitat: "N",
+                verification: ["sagemath/check/even-edge-root-parity"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " と、相異なる二頂点からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取り、", math(String.raw`o\in V`), " を固定する。",
+                    "辺集合 ", math(String.raw`A\subset E`), " について、根 ", math(String.raw`o`),
+                    " 以外の各頂点に接する ", math(String.raw`A`),
+                    " の辺の本数が偶数なら、根に接する本数も偶数である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "各頂点 ", math(String.raw`v\in V`), " に接する ", math(String.raw`A`),
+                    " の辺の本数を ", math(String.raw`d_A(v)\in\mathbb N`), " とする。",
+                    "各辺は相異なる二端点で一度ずつ数えられる。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{v\in V}d_A(v)&=\sum_{e\in A}2&&\bigl(\because\ \text{頂点と接続辺の組を辺ごとに数え直す}\bigr)\\
+&=2|A|&&\bigl(\because\ \text{定数 }2\text{ の有限和}\bigr)
+\end{aligned}`),
+                  paragraph(["根以外の各項は仮定により偶数なので、"]),
+                  displayMath(String.raw`\begin{aligned}
+d_A(o)&=\sum_{v\in V}d_A(v)-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ o\in V\text{ と有限和の分割}\bigr)\\
+&\equiv 0\pmod 2&&\bigl(\because\ \sum_{v\in V}d_A(v)=2|A|\text{ と根以外の各項の偶数性}\bigr)
+\end{aligned}`),
                 ],
               },
             },
