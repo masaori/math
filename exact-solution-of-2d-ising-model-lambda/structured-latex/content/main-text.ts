@@ -13821,6 +13821,69 @@ A\cap(E\setminus F)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_tree_complement_bijection",
+        labels: [],
+        title: { text: "偶辺集合と木外辺の部分集合の対応" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_tree_complement_bijection",
+              focus: {
+                id: "tools_claim_even_edge_tree_complement_bijection",
+                kind: "claim",
+                title: { text: "偶辺集合と木外辺の部分集合は全単射で対応する" },
+                labels: ["claim_even_edge_tree_complement_bijection"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdge_treeComplementBijection",
+                  "Ising2DLambda.NecSuf.Tools.evenEdge_treeComplementBijection",
+                ],
+                verification: ["sagemath/check/even-edge-tree-complement-bijection"],
+                statement: [
+                  paragraph([
+                    "空でない有限頂点集合 ", math(String.raw`V`),
+                    " と相異なる二頂点からなる辺の有限集合 ", math(String.raw`E`),
+                    " を持つ連結グラフ ", math(String.raw`G=(V,E)`),
+                    " の全域木の辺集合を ", math(String.raw`F\subseteq E`),
+                    " とする。全頂点で接続辺数が偶数である辺集合 ",
+                    math(String.raw`A\subseteq E`), " に ",
+                    math(String.raw`\rho(A):=A\cap(E\setminus F)`),
+                    " を対応させる写像は、偶辺集合の全体から ",
+                    math(String.raw`E\setminus F`), " の部分集合全体への全単射である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の偶辺集合 ", math(String.raw`A\subseteq E`), " について ",
+                    math(String.raw`\rho(A)\subseteq E\setminus F`),
+                    " であるから、写像は定まる。",
+                  ]),
+                  paragraph([
+                    "偶辺集合 ", math(String.raw`A,B\subseteq E`),
+                    " に対して ", math(String.raw`\rho(A)=\rho(B)`),
+                    " とする。", ref("claim_even_edge_subset_tree_complement_injective"), " より",
+                  ]),
+                  displayMath(String.raw`A=B\quad\bigl(\because\ \blkref{claim_even_edge_subset_tree_complement_injective}\text{ と }\rho(A)=\rho(B)\bigr)`),
+                  paragraph([
+                    "任意の ", math(String.raw`C\subseteq E\setminus F`),
+                    " について ", ref("claim_even_edge_tree_extension"),
+                    " より偶辺集合 ", math(String.raw`A\subseteq E`), " が存在して",
+                  ]),
+                  displayMath(String.raw`\rho(A)=A\cap(E\setminus F)=C\quad\bigl(\because\ \blkref{claim_even_edge_tree_extension}\bigr)`),
+                  paragraph(["したがって、この写像は単射かつ全射である。"]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
