@@ -69128,9 +69128,15 @@ e\notin\mathcal E_{\square}(S)
                             "補集合の辺連結路に沿ってこの同値を反復すると、高さ一への所属は補集合上で一定である。",
                             math(String.raw`S\cup T_Z`), " は有限なので、その外のセル ",
                             math(String.raw`q_0`), " を選べる。", math(String.raw`q_0\notin T_Z`),
-                            " だから補集合上の所属は常に偽である。",
+                            " だから補集合上の所属は常に偽である。任意のセル ",
+                            math(String.raw`p\in\mathbb Z\times\mathbb Z`), " について",
                           ]),
-                          displayMath(String.raw`T_Z\subset S\qquad\bigl(\because\ q_0\notin T_Z\text{ と補集合上での所属の一定性}\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+p\notin S&\Longrightarrow p\notin T_Z
+&&\bigl(\because\ q_0\notin T_Z\text{ と補集合上での所属の一定性}\bigr)\\
+T_Z&\subset S
+&&\bigl(\because\ \text{集合の包含の定義}\bigr)
+\end{aligned}`),
                         ],
                       },
                     },
@@ -69489,11 +69495,6 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     title: { text: "有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である" },
                     labels: ["claim_hole_free_cell_set_euler_number_one"],
                     habitat: "Z",
-                    lean: [
-                      "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count",
-                      "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf",
-                      "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf",
-                    ],
                     verification: ["sagemath/check/hole-free-cell-set-euler-number"],
                     statement: [
                       paragraph([
@@ -69512,54 +69513,49 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     proof: [
                       paragraph([
                         "頂点集合 ", math(String.raw`\mathcal V_{\square}(S)`), " と辺集合 ",
-                        math(String.raw`\mathcal E_{\square}(S)`), " をそれぞれ ",
-                        ref("def_cell_vertex_set"), " と ", ref("def_cell_edge_set"),
-                        " のものとし、その元を頂点と辺とする有限平面グラフを ", math(String.raw`G_S`),
-                        " と書く。セルの辺隣接列では、隣り合う二セルが共有する辺の端点を通って両セルの四隅を結べる。",
-                        math(String.raw`S`), " は空でなく辺連結なので、", math(String.raw`G_S`),
-                        " は空でない連結グラフである。格子辺は端点以外では交わらないので、これは交差のない平面グラフである。",
+                        math(String.raw`\mathcal E_{\square}(S)`), " を持つ有限単純グラフを ", math(String.raw`G_S`),
+                        " と書き、その頂点数と辺数を ",
+                        math(String.raw`V_S:=|\mathcal V_{\square}(S)|`), "、",
+                        math(String.raw`E_S:=|\mathcal E_{\square}(S)|`), " と置く（",
+                        ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"), "）。",
+                        ref("claim_edge_connected_cell_set_vertex_graph_connected"),
+                        " により ", math(String.raw`G_S`), " は空でない連結グラフである。",
                       ]),
                       paragraph([
-                        math(String.raw`G_S`), " の面の個数を ", math(String.raw`R_S\in\mathbb N`),
-                        " と書く。各セル ", math(String.raw`x\in S`),
-                        " の四辺はすべて ", math(String.raw`\mathcal E_{\square}(S)`),
-                        " に属するため、その四辺で囲まれた内部は一つの面であり、異なるセルは異なる面を与える。",
-                        "それ以外の面は外側セルからなる。辺隣接する二外側セルの共有辺は ",
-                        math(String.raw`S`), " のどのセルの辺でもないので ",
-                        math(String.raw`\mathcal E_{\square}(S)`),
-                        " に属さず、二セルは同じ面に入る。補集合は辺連結なので、すべての外側セルは一つの面に入り、",
-                        "この面はセル座標を任意に遠くまで進められる外側の面である。したがって",
+                        math(String.raw`G_S`), " の偶辺集合全体を ", math(String.raw`\mathcal E(G_S)`),
+                        " と置く。", ref("claim_cell_boundary_even_edge_bijection"),
+                        " により、", math(String.raw`S`), " の部分集合全体と ",
+                        math(String.raw`\mathcal E(G_S)`), " は全単射である。",
+                        "有限集合の部分集合は二の元の個数乗だけあり、",
+                        ref("claim_even_edge_set_count"), " も適用できるので",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-R_S&=|S|+1
-&&\bigl(\because\ \text{各内側セルが一面を与え、外側の面は一つ}\bigr)
+|\mathcal E(G_S)|&=2^{|S|}
+&&\bigl(\because\ \blkref{claim_cell_boundary_even_edge_bijection}\bigr)\\
+&=2^{E_S+1-V_S}
+&&\bigl(\because\ \blkref{claim_even_edge_set_count}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "である。ここで有限連結平面グラフの Euler の数え上げを ", math(String.raw`G_S`),
-                        " に適用する。その頂点数と辺数を ", math(String.raw`V_S,E_S\in\mathbb N`),
-                        " と書く。連結有限グラフから、閉路を作らない辺だけを残して全頂点を結ぶ木を取る。",
-                        "木は一頂点から始めて新しい頂点を一つ結ぶ辺を一つずつ加えて作れるので、辺数は ",
-                        math(String.raw`V_S-1`), "、面は外側の一つだけである。残りの辺を平面上の格子辺として一つずつ戻すと、",
-                        "各辺は既存の一つの面の内部を二つに分けるので、辺数と面数が同時に一つずつ増える。ゆえに ",
-                        math(String.raw`V_S-E_S+R_S`), " は変わらず、木の場合の値 ", math(String.raw`2`), " に等しい。すなわち",
+                        ref("claim_finite_connected_graph_has_spanning_tree"), " と ",
+                        ref("claim_finite_tree_edge_count"), " により ",
+                        math(String.raw`E_S+1\ge V_S`), " なので、指数の減算は切り捨てを含まない。",
+                        "二の自然数乗は単射だから指数が等しい。整数の等式へ移すと",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-V_S-E_S+R_S&=2
-&&\bigl(\because\ \text{木から格子辺を戻すと辺数と面数が同時に一つずつ増える}\bigr)
+|S|&=E_S+1-V_S
+&&\bigl(\because\ 2\text{ の自然数乗の単射性}\bigr)\\
+V_S-E_S+|S|&=1
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
-                      paragraph(["である。以上を合わせると"]),
+                      paragraph(["である。Euler 数の定義へ代入すると"]),
                       displayMath(String.raw`\begin{aligned}
 \chi_{\square}(S)
 &=\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|
 &&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)\\
-&=V_S-E_S+(R_S-1)
-&&\bigl(\because\ R_S=|S|+1\bigr)\\
-&=(V_S-E_S+R_S)-1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
-&=2-1
-&&\bigl(\because\ V_S-E_S+R_S=2\bigr)\\
+&=V_S-E_S+|S|
+&&\bigl(\because\ V_S,E_S\text{ の定義}\bigr)\\
 &=1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ |S|=E_S+1-V_S\bigr)
 \end{aligned}`),
                       paragraph([
                         "最後に、零巻き付きで一周期の持ち上げ点が二つずつ相異なる閉じた非後退辺列 ",
@@ -69568,7 +69564,7 @@ V_S-E_S+R_S&=2
                         ref("claim_odd_ray_interior_cells_bounded"), "、", ref("claim_interior_cell_set_edge_connected"),
                         "）、その補集合も辺連結（", ref("claim_exterior_cell_set_edge_connected"),
                         "）なので、この主張を ", math(String.raw`S:=\mathcal F_{\rightarrow}(\gamma)`),
-                        " へ適用できる。使った量は有限な頂点・辺・面の個数と整数の四則だけであり、実数体も複素数体も現れない。",
+                        " へ適用できる。使った量は有限集合の個数と整数の四則だけであり、実数体も複素数体も現れない。",
                       ]),
                     ],
                   },

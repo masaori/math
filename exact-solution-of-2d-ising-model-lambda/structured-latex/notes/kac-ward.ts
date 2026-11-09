@@ -136,6 +136,15 @@ export default defineNotes([
     ],
   },
   {
+    id: "note_kac_ward_plane_faces_euler_argument_archived",
+    targets: ["claim_hole_free_cell_set_euler_number_one"],
+    title: { text: "参照用: 平面グラフの面数による Euler 数の旧証明" },
+    body: [
+      paragraph(["旧証明ではセル集合の頂点辺グラフを平面に描き、各セルの内部が別々の面、補集合の辺連結性から外側が一つの面になるとして、面数を ", math(String.raw`R_S=|S|+1`), " と置いた。"]),
+      paragraph(["続いて全域木から残る辺を一本ずつ戻すと面が一つずつ増えるとして、", math(String.raw`V_S-E_S+R_S=2`), " を得ていた。しかし面は平面からグラフを除いた連結成分として定義されておらず、辺が面を分けることにも平面の位相の証明が要る。この経路は採用せず、本文では有限集合の境界写像と偶辺集合の個数だけを使う。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_rotation_phase_product_archived",
     targets: ["claim_reversal_direction_shift"],
     title: { text: "参照用: 反転辺対の回転位相の積" },

@@ -1,9 +1,6 @@
 /-
-「有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である」の
-必要十分版。
-
-格子から切り離すと、必要なのは面数がセル数より一つ多いことと、有限連結
-平面グラフの Euler 等式だけである。
+面数の等式と平面 Euler 等式を仮定した旧経路の補題。
+現在の `claim_hole_free_cell_set_euler_number_one` の必要十分版には数えない。
 -/
 import Mathlib.Tactic
 

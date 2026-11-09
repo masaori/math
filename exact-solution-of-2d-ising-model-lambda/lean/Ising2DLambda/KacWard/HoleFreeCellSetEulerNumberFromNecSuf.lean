@@ -1,11 +1,11 @@
 /-
-具体版が必要十分版の特殊化として得られることの導出。
+面数を仮定した旧経路の導出。現在の本文の証明には対応しない。
 -/
 import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumber
 
 namespace Ising2DLambda.KacWard
 
-/-- `claim_hole_free_cell_set_euler_number_one` を必要十分版から導く。 -/
+/-- 旧経路の補題を必要十分版から導く。 -/
 theorem cellEulerNumber_eq_one_of_region_count_from_necSuf
     (cells : Finset GridCell) (regionCount : ℕ)
     (hregions : regionCount = cells.card + 1)

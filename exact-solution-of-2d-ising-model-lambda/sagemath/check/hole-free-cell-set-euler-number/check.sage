@@ -93,3 +93,54 @@ print(
     f"PASS: vertex-simple closed nonbacktracking walks={checked_walks}, "
     f"interior cells={checked_interior_cells}, Euler number=1, length<=%d" % max_length
 )
+
+
+def exterior_connected(cells):
+    outer = {(r, c) for r in range(-2, 4) for c in range(-2, 4)} - cells
+    seen = {(-2, -2)}
+    stack = [(-2, -2)]
+    while stack:
+        r, c = stack.pop()
+        for q in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+            if q in outer - seen:
+                seen.add(q)
+                stack.append(q)
+    return seen == outer
+
+
+def cell_connected(cells):
+    if not cells:
+        return False
+    start = next(iter(cells))
+    seen = {start}
+    stack = [start]
+    while stack:
+        r, c = stack.pop()
+        for q in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
+            if q in cells - seen:
+                seen.add(q)
+                stack.append(q)
+    return seen == cells
+
+
+base = tuple(product(range(2), repeat=2))
+checked_sets = 0
+for mask in range(1, 1 << len(base)):
+    cells = {base[j] for j in range(len(base)) if mask & (1 << j)}
+    if not cell_connected(cells) or not exterior_connected(cells):
+        continue
+    vertices = set().union(*(cell_vertices(cell) for cell in cells))
+    edges = set().union(*(cell_edges(cell) for cell in cells))
+    even_edge_sets = sum(
+        all(sum(vertex in edge for edge in chosen) % 2 == 0 for vertex in vertices)
+        for chosen in (
+            {edge for j, edge in enumerate(sorted(edges, key=lambda e: sorted(e))) if choice & (1 << j)}
+            for choice in range(1 << len(edges))
+        )
+    )
+    assert even_edge_sets == 2 ** len(cells)
+    assert even_edge_sets == 2 ** (len(edges) + 1 - len(vertices))
+    assert ZZ(len(vertices)) - ZZ(len(edges)) + ZZ(len(cells)) == 1
+    checked_sets += 1
+
+print(f"PASS: connected hole-free cell sets={checked_sets}; both even-edge counts agree")
