@@ -1,8 +1,8 @@
 # <euler_formula_cos_sin>: cos t = (e^{it}+e^{-it})/2, sin t = (e^{it}-e^{-it})/(2i)
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
-load(os.path.join(_dir, "../../_shared/operators.sage"))
-load(os.path.join(_dir, "_prelude.sage"))
+# 読み込みはこのディレクトリからの相対パスで書く（run-all-checks.sh はこのディレクトリへ cd して走らせる）。
+# SageMath 10.9 は __file__ を自分のパッケージの位置にするので、__file__ からはパスを作れない。
+load("../../_shared/operators.sage")
+load("_prelude.sage")
 import numpy as np
 import math
 rng = np.random.default_rng(int(213))
