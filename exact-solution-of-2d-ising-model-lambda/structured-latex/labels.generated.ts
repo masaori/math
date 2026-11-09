@@ -790,6 +790,7 @@ export const ALL_LABELS = [
   "def_finite_permutation_minimal_period",
   "def_finite_permutation_orbit",
   "def_finite_permutation_orbit_length",
+  "def_finite_simple_graph",
   "def_finite_size_scaling_reading",
   "def_first_hit_connecting_staircase",
   "def_fisher_zero_count_in_rational_disc",

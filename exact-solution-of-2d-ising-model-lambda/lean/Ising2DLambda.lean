@@ -1,4 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationOrbitEnumeration
+import Ising2DLambda.Tools.FiniteSimpleGraph
 import Ising2DLambda.Tools.FiniteTreeEdgeCount
 import Ising2DLambda.NecSuf.Tools.FiniteTreeEdgeCount
 import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeaf

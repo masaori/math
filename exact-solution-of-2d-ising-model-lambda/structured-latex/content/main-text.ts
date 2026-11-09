@@ -12320,6 +12320,33 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_simple_graph",
+              focus: {
+                id: "tools_definition_finite_simple_graph",
+                kind: "definition",
+                title: { text: "有限単純グラフ" },
+                labels: ["def_finite_simple_graph"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteSimpleGraph"],
+                statement: [
+                  paragraph([
+                    "有限集合 ", math(String.raw`V`), " を頂点集合とする。",
+                    "各辺は相異なる二頂点 ", math(String.raw`v,w\in V`),
+                    " の順序を持たない組 ", math(String.raw`\{v,w\}`), " である。",
+                    "そのような辺の集合 ", math(String.raw`E`), " を取り、",
+                    math(String.raw`G=(V,E)`), " を有限単純グラフと呼ぶ。",
+                    "自己ループは辺に含めず、同じ二頂点を結ぶ辺は一つだけである。",
+                    "頂点と辺の個数 ", math(String.raw`|V|,|E|`),
+                    " は自然数である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12334,8 +12361,8 @@ S&=(S-T)+T
                 verification: ["sagemath/check/finite-tree-edge-count"],
                 statement: [
                   paragraph([
-                    "空でない有限頂点集合 ", math(String.raw`V`), " と、その二元からなる辺の有限集合 ",
-                    math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
+                    ref("def_finite_simple_graph"), " の空でない頂点集合 ", math(String.raw`V`),
+                    " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
                     " が連結で閉路を持たないなら、",
                   ]),
                   displayMath(String.raw`|E|+1=|V|`),
@@ -12395,8 +12422,8 @@ S&=(S-T)+T
                 verification: ["sagemath/check/nonempty-tree-edge-subset-leaf"],
                 statement: [
                   paragraph([
-                    "有限頂点集合 ", math(String.raw`V`), " と、相異なる二頂点からなる辺の有限集合 ",
-                    math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
+                    ref("def_finite_simple_graph"), " の頂点集合 ", math(String.raw`V`),
+                    " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
                     " が連結で閉路を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
                     " なら、ある頂点 ", math(String.raw`v\in V`),
                     " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
