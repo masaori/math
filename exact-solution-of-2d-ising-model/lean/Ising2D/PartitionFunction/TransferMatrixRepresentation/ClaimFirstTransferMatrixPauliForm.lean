@@ -43,6 +43,7 @@
 具体的な行列 `V_1` の成分定義とパウリ行列表示の突き合わせだからである。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
 
@@ -74,7 +75,7 @@ theorem sum_sigmaZ_sigmaZ_mulVec_basisVec_spin (μ : SpinConf M) :
     (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) *ᵥ basisVec (configBasisIso M μ)
       = (((∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ) : ℝ) : ℂ))
           • basisVec (configBasisIso M μ) := by
-  rw [Matrix.sum_mulVec, Complex.ofReal_sum, Finset.sum_smul]
+  rw [Matrix.sum_mulVec, ← real_inclusion_of_finite_sum_fintype_or_empty, Finset.sum_smul]  -- 2 つ目: `real_inclusion_preserves_finite_sum`
   refine Finset.sum_congr rfl fun m _ => ?_
   rw [sigmaZ_mul_sigmaZ_mulVec_basisVec, sgnC_configBasisIso, sgnC_configBasisIso,
     Complex.ofReal_mul]

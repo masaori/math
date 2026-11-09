@@ -27,6 +27,7 @@
 `trace_projFactorProd` は `Finset.noncommProd`（可換性の証明を引数に取る積）で述べてある（章 009 の `NecSuf.projOn` と同じ扱い）。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
@@ -125,7 +126,7 @@ theorem trace_projFactorProd (S T : Finset (CheckIdx M)) :
 = (2_ℝ^{M_col})_ℂ = ((2_ℝ)_ℂ)^{M_col} = 2^{M_col} = 2^{M_col-0}`。人手の 9 行と 1 対 1 の `calc` に、添字の個数 `#Conf M = 2_ℤ^{M_col}` の
 読み替えの 1 段（人手は和の上端を `2_ℤ^{M_col}` で書くので、Lean だけの段。`DefinitionSectorRayleighSup.lean` と同じ）を足したもの。
 人手の前置きの `2_ℤ^{M_col} ∈ ℤ_{≥1}`（`power_of_two_in_integers_is_at_least_one`）は `hcard`。
-`real_inclusion_preserves_finite_sum` は具体版が無く、既存の使う側と同じく mathlib の `Complex.ofReal_sum` で受ける。 -/
+`real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype`（添字 `Conf M` は空でない）。 -/
 theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0) := by
   have hcard : 1 ≤ Fintype.card (Conf M) := by
     rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M
@@ -133,7 +134,7 @@ theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0)
       = ∑ _l : Conf M, (1 : ℂ) := trace_identity_eq_sum_one        -- `trace_basic_properties` (3)（`n → 2_ℤ^{M_col}`、添字 `k → l`）
     _ = ∑ _l : Conf M, ((1 : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun _ _ => Complex.ofReal_one.symm      -- `1_ℂ` は `(1_ℝ)_ℂ` の略記を `2_ℤ^{M_col}` 個の項へ同時に
-    _ = ((∑ _l : Conf M, (1 : ℝ) : ℝ) : ℂ) := (Complex.ofReal_sum _ _).symm
+    _ = ((∑ _l : Conf M, (1 : ℝ) : ℝ) : ℂ) := real_inclusion_of_finite_sum_fintype _
                                                                      -- `real_inclusion_preserves_finite_sum`（`m → 2_ℤ^{M_col}`、添字 `j → l`、`r_j → 1_ℝ`）
     _ = (((Fintype.card (Conf M) : ℝ) * 1 : ℝ) : ℂ) := by
         rw [finite_sum_of_constant_real_number_fintype hcard]        -- `finite_sum_of_constant_real_number`（`m → 2_ℤ^{M_col}`、`r → 1_ℝ`）

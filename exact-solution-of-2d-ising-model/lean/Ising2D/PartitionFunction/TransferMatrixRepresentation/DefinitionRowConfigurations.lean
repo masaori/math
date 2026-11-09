@@ -26,6 +26,9 @@ abbrev SpinVal : Type := {r : ℝ // r = 1 ∨ r = -1}
 noncomputable instance : Fintype SpinVal :=
   Fintype.subtype {1, -1} (fun r => by simp)
 
+/-- `{-1, 1}` は空でない（`1` が元）。行配位の集合と格子の配位の集合が空でないこと（有限和の添字の集合が空でないこと）に使う。 -/
+instance : Nonempty SpinVal := ⟨⟨1, Or.inl rfl⟩⟩
+
 /-- `{-1, 1}` の元の個数は `2`（`1 ≠ -1`）。 -/
 theorem card_spinVal : Fintype.card SpinVal = 2 := by
   rw [Fintype.card_of_subtype ({1, -1} : Finset ℝ) (fun r => by simp)]

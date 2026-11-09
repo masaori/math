@@ -28,7 +28,7 @@
 - 人手の `def_real_matrix_product`・`def_real_identity_matrix`（実数の行列の積と単位行列）は、Lean の `Matrix ι ι ℝ` の `*` と `1`（成分は `Matrix.one_apply`）である。
 - 人手の `m, n, p ∈ ℤ_{≥1}` と成分の番号は、Lean の添字の型の元である。和を取る添字の型には、`matrix_mul_hasRealEntries` と同じく
   `Fintype` と、人手の `n ≥ 1` に当たる `Nonempty` を置く。
-- 積の鎖の 5 行目の `real_inclusion_preserves_finite_sum` は具体版が無いので、既存の慣行どおり mathlib の `Complex.ofReal_sum` を引く。
+- 積の鎖の 5 行目の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く。
   2 行目・6 行目の `mat_mult` は mathlib の行列の積の定義（成分は `dotProduct`）で `rfl` である。
 
 必要十分版は置かない。主張は `ℝ → ℂ` の包含が和と積を保ち単射であること（`real_inclusion_preserves_product`・
@@ -36,6 +36,7 @@
 引いた主張の側（`NecSuf/ProductOfClosedEntries.lean` ほか）に尽きている。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
 
 namespace Ising2D
@@ -65,7 +66,7 @@ theorem real_matrix_of_real_entry_matrix_preserves_product {α β γ : Type*} [F
     _ = ∑ j, ((realMatrixOfRealEntries A hA i j * realMatrixOfRealEntries B hB j k : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun j _ => real_inclusion_mul _ _               -- `real_inclusion_preserves_product` を `n` 個の項へ
     _ = ((∑ j, realMatrixOfRealEntries A hA i j * realMatrixOfRealEntries B hB j k : ℝ) : ℂ) :=
-        (Complex.ofReal_sum _ _).symm                                        -- `real_inclusion_preserves_finite_sum`（`m → n`）
+        real_inclusion_of_finite_sum_fintype _                               -- `real_inclusion_preserves_finite_sum`（`m → n`）
     _ = (((realMatrixOfRealEntries A hA * realMatrixOfRealEntries B hB) i k : ℝ) : ℂ) := rfl
                                                                              -- `def_real_matrix_product`（`P → A_ℝ`, `Q → B_ℝ`）
 

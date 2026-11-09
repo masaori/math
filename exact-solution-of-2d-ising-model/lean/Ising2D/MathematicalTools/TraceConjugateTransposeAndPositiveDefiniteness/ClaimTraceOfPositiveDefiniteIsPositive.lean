@@ -25,12 +25,13 @@
 - 成分の式との接点は `matrix_mul_apply_sum`（`mat_mult`）・`identity_matrix_apply`（`def_identity_matrix`）・
   `mul_identity_matrix`・`identity_matrix_mul`（`identity_matrix_is_right_unit_of_mat_mult`・`_left_unit_`）・
   `trace_eq_sum_diag`（`def_trace`）である。
-- 人手の `real_inclusion_preserves_finite_sum` には Lean の具体版が無く、mathlib の `Complex.ofReal_sum` を引く。
+- 人手の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く（`1 ≤ n` から添字 `Fin n` は空でない）。
 - `conjugateBilinearValue`・`posDef_conjugateBilinearValue_pos` の添字は有限集合 `ι` で受け取る（人手の `{1,…,n}` は `Fin n`、
   `2^{M_col}` 個の行配位で添字づけた行列（`W_real_is_positive_definite`）は `Conf M`）。和を取るのに有限であることだけを使う。
 - 人手の `n ∈ ℤ_{≥1}` は仮定 `1 ≤ n` で受け取る。`r_1` は添字 `⟨0, _⟩ : Fin n` の `r` である。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
@@ -128,11 +129,12 @@ theorem trace_of_positive_definite_is_positive {n : ℕ} (hn : 1 ≤ n) (A : Mat
   choose r hr hrA using fun k : Fin n => posDef_conjugateBilinearValue_pos hA (standardBasisVec_ne_zero k)
   have hd : ∀ k, A k k = (r k : ℂ) := fun k =>
     (conjugate_bilinear_value_basis_eq_diag A k).symm.trans (hrA k)
+  haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩                                          -- `n ∈ ℤ_{≥1}` なので添字の集合は空でない
   have htr : A.trace = ((∑ k, r k : ℝ) : ℂ) :=
     calc A.trace
         = ∑ k, A k k := trace_eq_sum_diag A                                       -- `def_trace`
       _ = ∑ k, (r k : ℂ) := Finset.sum_congr rfl fun k _ => hd k                  -- `r_k` の取り方を各項へ
-      _ = ((∑ k, r k : ℝ) : ℂ) := (Complex.ofReal_sum _ _).symm                   -- `real_inclusion_preserves_finite_sum`
+      _ = ((∑ k, r k : ℝ) : ℂ) := real_inclusion_of_finite_sum_fintype _          -- `real_inclusion_preserves_finite_sum`
   -- `n ≥ 1` なので `r_1` がある
   have hpos : ∑ k, r k > 0 :=
     calc ∑ k, r k

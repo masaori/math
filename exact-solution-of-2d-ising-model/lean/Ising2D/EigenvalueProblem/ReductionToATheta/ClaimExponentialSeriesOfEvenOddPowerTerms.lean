@@ -51,8 +51,8 @@
 - `def_matrix_sum`・`def_matrix_scalar_multiple`・`def_matrix_difference` は `matrix_sum_apply`・`matrix_smul_apply`・`matrix_sub_apply`、
   `finite_sum_of_complex_sums` は `finite_sum_of_complex_sums`、人手 8 行目の「実数の有限和の分配則」のうち
   共通の因子 `1/2` を外へ出すことと差を分けることは `finite_sum_of_real_scalar_multiples`・`finite_sum_of_real_differences`（いずれも具体版）。
-- `finite_sum_of_matrices_entrywise` と多項の `real_inclusion_preserves_finite_sum` は Lean の具体版が無いので、既存の慣行どおり
-  mathlib の `Matrix.sum_apply`・`Complex.ofReal_sum`。名前だけの根拠「ℂ の有限和の分配則」は `Finset.sum_mul`・`Finset.mul_sum`、
+- `finite_sum_of_matrices_entrywise` は Lean の具体版が無いので、既存の慣行どおり mathlib の `Matrix.sum_apply`。
+  多項の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype`（添字 `Fin (N + 1)`）。名前だけの根拠「ℂ の有限和の分配則」は `Finset.sum_mul`・`Finset.mul_sum`、
   「実数の有限和の分配則」のうち ℝ の和の有限和を分けることは `Finset.sum_add_distrib`（人手のラベルが無い）。
   `def_cosh_sinh` は Lean で定義し直していないので mathlib の `Real.cosh`・`Real.sinh`。
 - 中間目標「部分和」の 9 行目は、人手 8 行目の `(1/2)(…)` を定義の `(…)/2` へ並べ替える `1/2·y = y/2`（実数の四則）を含む。
@@ -66,6 +66,7 @@
 どちらにも必要十分版は置かない。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
@@ -276,8 +277,7 @@ theorem evenOddPartialSum_apply (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c 
                                                               -- 人手 6: ℂ の有限和の分配則（mathlib の `Finset.sum_mul`・`Finset.mul_sum`）
     _ = ((∑ n : Fin (N + 1), evenOddCoeffA x n : ℝ) : ℂ) * A p q
           + (c * ((∑ n : Fin (N + 1), evenOddCoeffB x n : ℝ) : ℂ)) * B p q := by
-        rw [Complex.ofReal_sum, Complex.ofReal_sum]           -- 人手 7: `real_inclusion_preserves_finite_sum` を 2 箇所へ同時適用
-                                                              -- （Lean の具体版は無く、既存の慣行どおり mathlib の `Complex.ofReal_sum`）
+        rw [← real_inclusion_of_finite_sum_fintype, ← real_inclusion_of_finite_sum_fintype]           -- 人手 7: `real_inclusion_preserves_finite_sum` を 2 箇所へ同時適用
     _ = ((1 / 2 * (∑ n : Fin (N + 1), x ^ (n : ℕ) / ((n : ℕ) ! : ℝ)
             + ∑ n : Fin (N + 1), (-x) ^ (n : ℕ) / ((n : ℕ) ! : ℝ)) : ℝ) : ℂ) * A p q
           + (c * ((1 / 2 * (∑ n : Fin (N + 1), x ^ (n : ℕ) / ((n : ℕ) ! : ℝ)

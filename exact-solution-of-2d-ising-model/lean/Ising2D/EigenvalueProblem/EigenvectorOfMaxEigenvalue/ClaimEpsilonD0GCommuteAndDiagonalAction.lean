@@ -29,6 +29,7 @@
 （`H1_plus_in_sigma_z_form` と同じ判断）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
@@ -265,8 +266,9 @@ Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので
 `Matrix.sum_mulVec`・`Finset.sum_smul` を引く（いずれも数ベクトルの版の具体版は無い。`finite_sum_of_scalar_multiples_of_one_matrix` の
 具体版 `finite_sum_smul_one_matrix` とその系 `finite_sum_smul_one_tensorPow` は `Fin (r + 1)` の上の行列の和について述べるので、
 `Finset.filter` の上の数ベクトルの和には使えない）。
-`scalar_multiple_is_associative`・`real_inclusion_preserves_finite_sum` にも Lean の具体版は無く、mathlib の `smul_smul`・
-`Complex.ofReal_sum` を引く。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
+`scalar_multiple_is_associative` にも Lean の具体版は無く、mathlib の `smul_smul` を引く。
+`real_inclusion_preserves_finite_sum` は具体版の `Finset.filter` の上の和の形 `real_inclusion_of_finite_sum_finset` を引く
+（人手は `M_col ≥ 2` だが、Lean の主張は人手の範囲外の `M ≤ 1` も含み、そのとき和は空なので、空の場合を分ける版を経る）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
 
 /-- **人手 `D0_G_diagonal_action` の準備** `(σ^z_aσ^z_b)f_{ι(s)} = ⋯ = (s(a)s(b))_ℂ f_{ι(s)}` の 7 行。
 
@@ -317,7 +319,7 @@ theorem openChainD0_mulVec_basisVec (s : SpinConf M) :
                                                         -- （`r → M_col - 1`、`c_j → (s(j)s(j+1))_ℂ`）
     _ = ((∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
             (s m : ℝ) * (s (nextSite m) : ℝ) : ℝ) : ℂ) • basisVec (configBasisIso M s) := by
-        rw [Complex.ofReal_sum]                         -- `real_inclusion_preserves_finite_sum`
+        rw [← real_inclusion_of_finite_sum_finset]                   -- `real_inclusion_preserves_finite_sum`
                                                         -- （`m → M_col - 1`、`r_j → s(j)s(j+1)`）
 
 /-- **人手 `D0_G_diagonal_action` の `Gf_{ι(s)} = (s(M_col)s(1))_ℂ f_{ι(s)}`** の 8 行。

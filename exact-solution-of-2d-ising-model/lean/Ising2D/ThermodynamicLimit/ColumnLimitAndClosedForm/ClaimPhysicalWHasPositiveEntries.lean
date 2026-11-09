@@ -51,6 +51,7 @@
 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpPositive
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
@@ -104,7 +105,8 @@ theorem sum_sigmaZ_sigmaZ_apply_of_ne {p q : Conf M} (hpq : p ≠ q) :
 
 人手の 7 行のうち 2 行目（`σ^z_{m+1} = σ^z_{m^+}`）と 6 行目（`μ(m+1) = μ(m^+)`）は、Lean では両方を最初から
 `nextSite m` で書くので、添字の読み方であって段は無い。`real_inclusion_preserves_product` は `real_inclusion_mul`、
-`real_inclusion_preserves_finite_sum` は具体版が無く `Complex.ofReal_sum`（既存の慣行どおり）。 -/
+`real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype_or_empty`
+（Lean の主張は `M = 0` も含むので、空の和の場合を分ける版）。 -/
 theorem sum_sigmaZ_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) :
     (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ)
       = ((adjacentSpinProductSum μ : ℝ) : ℂ) :=
@@ -118,7 +120,7 @@ theorem sum_sigmaZ_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) :
     _ = ∑ m : Fin M, (((μ m : ℝ) * (μ (nextSite m) : ℝ) : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun _m _ => real_inclusion_mul _ _ -- `real_inclusion_preserves_product` を各項へ
     _ = ((∑ m : Fin M, (μ m : ℝ) * (μ (nextSite m) : ℝ) : ℝ) : ℂ) :=
-        (Complex.ofReal_sum _ _).symm                         -- `real_inclusion_preserves_finite_sum`
+        real_inclusion_of_finite_sum_fintype_or_empty _       -- `real_inclusion_preserves_finite_sum`
     _ = ((adjacentSpinProductSum μ : ℝ) : ℂ) := rfl           -- `d(μ)` の定義
 
 /-! ## Step 1: `X` と `B := V_1^{1/2} = exp(X)` の成分 -/

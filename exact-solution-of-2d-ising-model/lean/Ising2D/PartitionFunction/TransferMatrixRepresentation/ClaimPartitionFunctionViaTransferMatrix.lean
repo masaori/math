@@ -34,6 +34,7 @@
 （先例 `partition_function_sandwich_and_limit_in_N_row` の `_hK1`）。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionPartitionFunction
 import Ising2D.NecSuf.TracePathSum
 
@@ -69,13 +70,13 @@ theorem rowsToLattice_apply {Nrow : ℕ} (w : Fin Nrow → Conf M) (p : Fin Nrow
 
 /-- **人手 `partition_function_via_transfer_matrix`: `(Z(K_1,K_2))_ℂ = tr((V_1V_2)^{N_row})`。**
 人手の `r_ℂ`（`inclusion_rr_to_cc`）は Lean の `((· : ℝ) : ℂ)`。人手の分配関数との一致の鎖の最後の行
-（包含を和の外へ出す `real_inclusion_preserves_finite_sum`）は、下の `Complex.ofReal_sum` の書き換えに当たる。 -/
+（包含を和の外へ出す `real_inclusion_preserves_finite_sum`）は、下の `real_inclusion_of_finite_sum_fintype`（添字の格子の配位の集合は空でない）の書き換えに当たる。 -/
 theorem partition_function_via_transfer_matrix {K1 K2 : ℝ} (_hK1 : 0 < K1) (_hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ) = ((V1 M K1 * V2 M K2) ^ Nrow).trace := by
   obtain ⟨n, rfl⟩ : ∃ n, Nrow = n + 1 := ⟨Nrow - 1, by omega⟩
   -- 行列の冪の成分とトレースの展開（閉じた道の重みの総和）
-  rw [NecSuf.trace_pow_succ, partitionFunction, Complex.ofReal_sum]
+  rw [NecSuf.trace_pow_succ, partitionFunction, ← real_inclusion_of_finite_sum_fintype]
   symm
   -- `Φ` による添字の付け替え
   refine Fintype.sum_equiv (rowsToLattice (n + 1) M) _ _ fun w => ?_

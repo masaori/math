@@ -21,8 +21,8 @@
 | 主張 `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}` | `trace_of_epsilon_V_plus` |
 
 `S_cosh`・`S_sinh` は Lean では名前を付けず、和 `∑ s : SpinConf M, …` をそのまま書く。
-Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く。二つのトレースの鎖の 3 行目 `real_inclusion_preserves_finite_sum` は
-`Complex.ofReal_sum`、組み立ての鎖の 3 行目 `mat_mult_associative` は `Matrix.mul_assoc` である。組み立ての鎖のほかの根拠は具体版で、分配と括り出しは `TensorPow M` での系
+二つのトレースの鎖の 3 行目 `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く
+（添字 `SpinConf M` は空でない）。Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く。組み立ての鎖の 3 行目 `mat_mult_associative` は `Matrix.mul_assoc` である。組み立ての鎖のほかの根拠は具体版で、分配と括り出しは `TensorPow M` での系
 `add_mul_matrix_tensorPow`・`mul_add_matrix_tensorPow`・`smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`、
 `trace_basic_properties` (1) は `trace_linear`、`real_inclusion_preserves_product`・`real_inclusion_preserves_sum` は
 `real_inclusion_mul`・`real_inclusion_add` である。
@@ -41,6 +41,7 @@ Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く
 （`ClaimTraceEpsilonVPlusMatrixEntries.lean` と同じ扱い。二つのスピン和の一般形は `NecSuf/OpenChainSpinSum.lean` が既に持つ）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusReduction
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
@@ -165,8 +166,8 @@ theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (K1 K2 : ℝ) :
         Finset.sum_congr rfl fun s _ =>
           matExp_openChainD0_mul_epsilon_mul_V2_apply_self K1 K2 s  -- 人手 2: Step 4
     _ = ((∑ s : SpinConf M, Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
-        -- 人手 3: `real_inclusion_preserves_finite_sum`（具体版が無いので既存の慣行どおり `Complex.ofReal_sum`）
-        (Complex.ofReal_sum _ _).symm
+        -- 人手 3: `real_inclusion_preserves_finite_sum`
+        real_inclusion_of_finite_sum_fintype _
     _ = ((Real.exp (-(K2 * M)) * ∑ s : SpinConf M, Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 4: `finite_sum_of_real_scalar_multiples`
         congrArg (fun x : ℝ => (x : ℂ)) (finite_sum_over_spinConf_of_real_scalar_multiples _ _)
@@ -187,8 +188,8 @@ theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM : M ≠ 0) (K1 K2 : �
           matExp_openChainD0_mul_boundaryG_mul_V2_apply_self hM K1 K2 s  -- 人手 2: Step 4
     _ = ((∑ s : SpinConf M, Real.exp (K2 * M)
           * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
-        -- 人手 3: `real_inclusion_preserves_finite_sum`（具体版が無いので既存の慣行どおり `Complex.ofReal_sum`）
-        (Complex.ofReal_sum _ _).symm
+        -- 人手 3: `real_inclusion_preserves_finite_sum`
+        real_inclusion_of_finite_sum_fintype _
     _ = ((Real.exp (K2 * M) * ∑ s : SpinConf M,
           (s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 4: `finite_sum_of_real_scalar_multiples`

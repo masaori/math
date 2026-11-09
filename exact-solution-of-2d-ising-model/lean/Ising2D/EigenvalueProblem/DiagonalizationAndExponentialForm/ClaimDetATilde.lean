@@ -37,6 +37,8 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 
 namespace Ising2D
 
@@ -250,10 +252,10 @@ theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2s
                           -- 上の第 2 の等式の鎖（`gamma1_sq_add_gamma2_mul_thetaTilde`）
       _ = 1 + (r : ℂ) * (r : ℂ) := by rw [sq (r : ℂ)]
                           -- `def_power_of_complex_number` より `z^2 = zz`
-      _ = 1 + ((r * r : ℝ) : ℂ) := by rw [Complex.ofReal_mul r r]
+      _ = 1 + ((r * r : ℝ) : ℂ) := by rw [real_inclusion_mul r r]
                           -- `real_inclusion_preserves_product`
-      _ = ((1 + r * r : ℝ) : ℂ) := by rw [Complex.ofReal_add, Complex.ofReal_one]
-                          -- `real_inclusion_preserves_finite_sum` を `m = 2` で（`1_ℂ` は `1` の像）
+      _ = ((1 + r * r : ℝ) : ℂ) := real_inclusion_add 1 (r * r)
+                          -- `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`）
       _ = ((1 + r ^ 2 : ℝ) : ℂ) := by rw [square_of_real_number_is_product r]
                           -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）を右辺から左辺へ
   exact Complex.ofReal_injective hC

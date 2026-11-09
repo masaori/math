@@ -19,15 +19,15 @@
   （`matrix_add_hasRealEntries` と同じ。`TensorPow M` の行列にもそのまま使う）。和を取る添字の型 `β` には、
   `mat_mult` の和が有限和であることに当たる `Fintype β` と、人手の `n ≥ 1` に当たる `Nonempty β` を置く。
   `n ≥ 1` は、人手の 4 行目が引く `real_inclusion_preserves_finite_sum`（`m → n`）の前提 `m ≥ 1` に当たる
-  （必要十分版でもこの仮定が効く。`NecSuf/ProductOfClosedEntries.lean` の冒頭）。Lean で代わりに引く `Complex.ofReal_sum` は
-  空の和でも成り立つが、人手の鎖に合わせて置く。`m, p ≥ 1` はどの段も使わないので `α`・`γ` には置かない。
+  （必要十分版でもこの仮定が効く。`NecSuf/ProductOfClosedEntries.lean` の冒頭）。具体版 `real_inclusion_of_finite_sum_fintype` もこの仮定を使う。`m, p ≥ 1` はどの段も使わないので `α`・`γ` には置かない。
 - 1 段目の `mat_mult` は mathlib の行列の積の定義（成分は `dotProduct`）で `rfl` である。
-- 4 段目の `real_inclusion_preserves_finite_sum` は具体版が無いので、既存の慣行どおり mathlib の `Complex.ofReal_sum` を引く。
+- 4 段目の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く。
 
 必要十分版は `Ising2D/NecSuf/ProductOfClosedEntries.lean`、具体版をその特殊化として得るのは
 `ClaimProductOfRealEntryMatricesFromNecSuf.lean` である。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixWithRealEntries
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Data.Matrix.Mul
@@ -49,6 +49,6 @@ theorem matrix_mul_hasRealEntries {α β γ : Type*} [Fintype β] [Nonempty β]
     _ = ∑ j, ((s j * t j : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun j _ => real_inclusion_mul (s j) (t j)      -- `real_inclusion_preserves_product`（`a → s_j`, `b → t_j`）を `n` 個の項へ同時に適用
     _ = ((∑ j, s j * t j : ℝ) : ℂ) :=
-        (Complex.ofReal_sum _ _).symm                                       -- `real_inclusion_preserves_finite_sum`（`m → n`, `r_j → s_jt_j`）
+        real_inclusion_of_finite_sum_fintype _                              -- `real_inclusion_preserves_finite_sum`（`m → n`, `r_j → s_jt_j`）
 
 end Ising2D

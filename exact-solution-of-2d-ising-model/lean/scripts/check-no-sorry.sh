@@ -460,6 +460,13 @@ targets=(
   Ising2D.real_inclusion_of_power
   Ising2D.real_inclusion_of_power_of_necSuf
   "Ising2D.NecSuf.map_pow_of_map_one_of_map_mul'"
+  Ising2D.real_inclusion_of_finite_sum_succ
+  Ising2D.real_inclusion_of_finite_sum_fintype
+  Ising2D.real_inclusion_of_finite_sum_fintype_or_empty
+  Ising2D.real_inclusion_of_finite_sum_finset
+  Ising2D.real_inclusion_of_finite_sum_succ_of_necSuf
+  Ising2D.complex_finset_sum_eq_finSumLeft
+  "Ising2D.NecSuf.map_finSumLeft_of_map_add'"
   Ising2D.trace_conj
   Ising2D.trace_similarity_invariant
   Ising2D.trace_of_idempotent

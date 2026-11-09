@@ -26,13 +26,14 @@
   乗法の交換則・結合則は `mul_comm`・`mul_assoc` である。
 - 左単位の 5 行目の `finite_sum_with_single_nonzero_term` は具体版が無いので、既存の慣行どおり mathlib の `Finset.sum_eq_single` を引く
   （仮定の「`j ≠ i` のとき `0_ℂ`」は `hoff` で人手どおりに示す）。3 行目の `real_inclusion_preserves_finite_sum` は
-  `Complex.ofReal_sum`、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`ℝ` の `0·a = 0`・`1·a = a` は `zero_mul`・`one_mul` である。
+  具体版 `real_inclusion_of_finite_sum_fintype`（`i ∈ ι` なので添字の型は空でない）、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`ℝ` の `0·a = 0`・`1·a = a` は `zero_mul`・`one_mul` である。
 
 必要十分版はまだ置いていない。具体版は人手と同じく ℝ の乗法の交換則（結合則の 3 行目・5 行目）を使うが、
 結合則そのものは交換則なしで成り立つはずで、それを必要十分版で確かめるのは残した件である
 （係数が ℂ の左単位には必要十分版 `NecSuf.one_mulVec_eq` がある）。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Data.Matrix.Mul
@@ -88,11 +89,12 @@ theorem real_identity_matrix_is_left_unit_of_real_matrix_vector_product
         = (1 : Matrix ι ι ℝ) i i * x i := rfl                                 -- `r_j := I_ijx_j`（`j → i`）
       _ = 1 * x i := by rw [Matrix.one_apply_eq]                              -- `def_real_identity_matrix`（`s, t → i`）
       _ = x i := one_mul _                                                    -- `1` は ℝ の乗法の単位元
+  haveI : Nonempty ι := ⟨i⟩                                                   -- `i ∈ ι` なので添字の集合は空でない
   apply inclusion_rr_to_cc_is_injective                                       -- `a → (Ix)_i`, `b → x_i`
   calc ((((1 : Matrix ι ι ℝ) *ᵥ x) i : ℝ) : ℂ)
       = ((∑ j, (1 : Matrix ι ι ℝ) i j * x j : ℝ) : ℂ) := rfl                 -- `def_real_matrix_vector_product`（`P → I`）
     _ = ((∑ j, r j : ℝ) : ℂ) := rfl                                           -- `r_j := I_ijx_j` を `n` 個の項へ
-    _ = ∑ j, ((r j : ℝ) : ℂ) := Complex.ofReal_sum _ _                        -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
+    _ = ∑ j, ((r j : ℝ) : ℂ) := (real_inclusion_of_finite_sum_fintype _).symm -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
     _ = ((r i : ℝ) : ℂ) :=
         Finset.sum_eq_single i (fun j _ hj => hoff j hj)
           (fun h => absurd (Finset.mem_univ i) h)                             -- `finite_sum_with_single_nonzero_term`（`n → i`）

@@ -29,7 +29,7 @@
   `def_real_matrix_vector_product` は `*ᵥ`（成分は `dotProduct` で人手の式と `rfl`）である。
 - `row_configuration_numbering_bijective` で `l = ord(t)` と書く段は `ι` の全射性 `(configBasisIso _).surjective` である
   （`mulVec_basisVec_configBasisIso_apply` と同じ扱い）。
-- `real_inclusion_preserves_product` は `real_inclusion_mul`、`real_inclusion_preserves_finite_sum` は具体版が無く `Complex.ofReal_sum`、
+- `real_inclusion_preserves_product` は `real_inclusion_mul`、`real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype`（添字 `Conf M` は空でない）、
   `finite_sum_with_single_nonzero_term` は具体版が無く `Finset.sum_eq_single`、`finite_product_of_complex_ones` は `Finset.prod_const_one`、
   `finite_product_with_zero_factor_is_zero` は `Finset.prod_eq_zero`、`complex_zero_times_is_zero` は `zero_mul`、
   `complex_numbers_form_a_field` の積の単位元は `one_mul` である（いずれも既存の慣行どおり）。
@@ -43,6 +43,7 @@
 `Ising2D/NecSuf/PermMatrix.lean` にあり、`epsilonR_mulVec_apply` はその系である（人手と 1 対 1 なのはこちら）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors
 
 namespace Ising2D
@@ -164,7 +165,7 @@ theorem epsilon_real_permutes_entries_by_spin_flip (n : ℕ) (u : Conf (n + 1) �
       = ((∑ l, epsilonReal n (configBasisIso (n + 1) s) l * u l : ℝ) : ℂ) := rfl
                                                                     -- `def_real_matrix_vector_product`（`i → ord(s)`）
     _ = ((∑ l, r l : ℝ) : ℂ) := rfl                                 -- `y_l` の置き方を `d` 個の項へ
-    _ = ∑ l, ((r l : ℝ) : ℂ) := Complex.ofReal_sum _ _               -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
+    _ = ∑ l, ((r l : ℝ) : ℂ) := (real_inclusion_of_finite_sum_fintype _).symm -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
     _ = ((r (configBasisIso (n + 1) (negSpinConf s)) : ℝ) : ℂ) :=
         Finset.sum_eq_single _ (fun l _ hl => hoff l hl)
           (fun h => absurd (Finset.mem_univ _) h)                   -- `finite_sum_with_single_nonzero_term`（`n → ord(-s)`）

@@ -21,7 +21,8 @@
   `realMatrixOfRealEntries B hB`（`DefinitionRealMatrixOfRealEntryMatrix.lean`）である。
 - 人手の `def_real_matrix_vector_product`・`mat_mult` の行列とベクトルの積は、Lean の `*ᵥ`（成分は `dotProduct` で人手の式と `rfl`）である。
 - 積との交換の 4 行目の `real_inclusion_preserves_product` は具体版 `real_inclusion_mul`（`ClaimRealInclusionPreservesProduct.lean`）を引く。
-  3 行目の `real_inclusion_preserves_finite_sum` だけは具体版が無いので、既存の慣行どおり mathlib の `Complex.ofReal_sum` を引く。
+  3 行目の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype_or_empty`
+  （Lean の主張は添字の型 `β` が空の場合も含むので、空の和の場合を分ける版）を引く。
 
 必要十分版は置かない。単射性の証明が使うのは「成分ごとの等号」と `inclusion_rr_to_cc_is_injective` だけで、後者は
 `DefinitionRealMatrixOfRealEntryMatrix.lean` に書いたとおり取り払える代数の構造を使っていない。積との交換は、
@@ -29,6 +30,7 @@
 `((B_ℝ)_pq)_ℂ = B_pq`）の側に尽きている。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Data.Matrix.Mul
@@ -63,7 +65,7 @@ theorem real_vector_inclusion_intertwines_matrix_vector_product {α β : Type*} 
       = (((realMatrixOfRealEntries B hB *ᵥ x) i : ℝ) : ℂ) := rfl              -- `def_real_vector_inclusion`（`n → m, x → B_ℝx`）
     _ = ((∑ j, realMatrixOfRealEntries B hB i j * x j : ℝ) : ℂ) := rfl       -- `def_real_matrix_vector_product`（`P → B_ℝ`）
     _ = ∑ j, ((realMatrixOfRealEntries B hB i j * x j : ℝ) : ℂ) :=
-        Complex.ofReal_sum _ _                                                -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
+        (real_inclusion_of_finite_sum_fintype_or_empty _).symm               -- `real_inclusion_preserves_finite_sum` を右辺から左辺へ
     _ = ∑ j, ((realMatrixOfRealEntries B hB i j : ℝ) : ℂ) * ((x j : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun j _ => (real_inclusion_mul _ _).symm         -- `real_inclusion_preserves_product` を右辺から左辺へ `n` 個の項へ
     _ = ∑ j, B i j * ((x j : ℝ) : ℂ) :=
