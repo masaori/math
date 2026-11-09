@@ -54,7 +54,7 @@
 
 したがって原文の 6 行の鎖は「線型写像の合成 ↔ 行列の積」という 1 点に集約される。
 `B_1(θ) B_2 B_1(θ) = A(θ)` は別の（純粋に 2×2 行列の）計算であり、
-`Ising2D.B1_mul_B2_mul_B1_eq_AMat` が担当する。
+`Ising2D.factorization_of_A_theta_general`（`EigenvalueProblem/ReductionToATheta/ClaimFactorizationATheta.lean`）が担当する。
 
 ## 記法について
 

@@ -1411,6 +1411,11 @@ targets=(
   Ising2D.actsBy_TConj_V2H2Form_check_fromNecSuf
   Ising2D.actsBy_TConj_V2_check_fromNecSuf
   Ising2D.factorization_of_A_theta_general
+  Ising2D.factorization_of_A_theta_general_of_complex_hyps
+  Ising2D.factorization_of_A_theta_general_of_coupling
+  Ising2D.factorization_real_cosh_of_complex
+  Ising2D.factorization_real_sinh_of_complex
+  Ising2D.factorization_A_diag_as_inclusion
   Ising2D.factorization_of_A_thetaTilde
   Ising2D.factorization_prep_sq_add_sq
   Ising2D.factorization_prep_two_mul_mul
@@ -1424,6 +1429,7 @@ targets=(
   Ising2D.factorization_aux_plus
   Ising2D.factorization_aux_minus
   Ising2D.factorization_prep_C_eq_S_mul_c2
+  Ising2D.factorization_prep_C_eq_S_mul_c2_of_dual
   Ising2D.factorization_B1mat_eq_symbols
   Ising2D.factorization_B2mat_eq_symbols
   Ising2D.factorization_I_mul_I
