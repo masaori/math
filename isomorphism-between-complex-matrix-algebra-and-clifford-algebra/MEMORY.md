@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-09: 「商代数の演算の定義」を四行に割り、商集合の上の加法が代表のとり方によらないこと（ラベル claim_quotient_addition_does_not_depend_on_representatives）を、射影の定義・剰余類の同値・合同が加法と両立することで示した。次は乗法が代表のとり方によらないこと。
+
 - 2026-11-09: 合同がスカラー倍と両立すること（ラベル claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication）を、差を λ∗_A x に組み替える五行の鎖と両側イデアルがスカラー倍で閉じていることで示した。次は商代数の演算の定義。
 
 - 2026-11-09: 合同が乗法と両立すること（ラベル claim_congruence_modulo_two_sided_ideal_is_compatible_with_multiplication）を、差を (x·_A b)+_A(a'·_A y) に組み替える十行の鎖と両側イデアルの左右から掛ける条件・加法で閉じる条件で示した。次は合同がスカラー倍と両立すること。

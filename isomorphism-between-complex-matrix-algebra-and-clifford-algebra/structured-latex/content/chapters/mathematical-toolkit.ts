@@ -8729,4 +8729,122 @@ c\in[b]_I&\iff b\equiv_I c
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_quotient_addition_does_not_depend_on_representatives",
+    kind: "claim",
+    title: { text: "商集合の上の加法は代表のとり方によらない" },
+    labels: ["claim_quotient_addition_does_not_depend_on_representatives"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a',b,b'`),
+        " について、",
+        math(String.raw`\pi_I(a)=\pi_I(a')`),
+        " かつ ",
+        math(String.raw`\pi_I(b)=\pi_I(b')`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\pi_I(a+_A b)=\pi_I(a'+_A b')`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`\pi_I:A\to A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）であり、等号はどれも ",
+        math(String.raw`I`),
+        " を法とする商集合 ",
+        math(String.raw`A/I`),
+        "（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）の元、すなわち ",
+        math(String.raw`A`),
+        " の部分集合としての等号である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a,a',b,b'\in A`),
+        " を ",
+        math(String.raw`\pi_I(a)=\pi_I(a')`),
+        " かつ ",
+        math(String.raw`\pi_I(b)=\pi_I(b')`),
+        " を満たすようにとる。まず ",
+        math(String.raw`[a]_I=[a']_I`),
+        " と ",
+        math(String.raw`[b]_I=[b']_I`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[a]_I&=\pi_I(a)
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=\pi_I(a')
+&&\left(\because\ \text{仮定}\ \pi_I(a)=\pi_I(a')\right)\\
+&=[a']_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right),\\[4pt]
+[b]_I&=\pi_I(b)
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=\pi_I(b')
+&&\left(\because\ \text{仮定}\ \pi_I(b)=\pi_I(b')\right)\\
+&=[b']_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right).
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`[a]_I`),
+        " などは ",
+        math(String.raw`I`),
+        " を法とする剰余類（",
+        ref("def_residue_class_modulo_two_sided_ideal"),
+        "）である。剰余類が等しいことと代表が合同であることの同値（",
+        ref("claim_residue_classes_are_equal_iff_congruent"),
+        "）の ",
+        math(String.raw`\Rightarrow`),
+        " を二つの等式に当てて、",
+        math(String.raw`a\equiv_I a'`),
+        " かつ ",
+        math(String.raw`b\equiv_I b'`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。合同が加法と両立すること（",
+        ref("claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition"),
+        "）により ",
+        math(String.raw`a+_A b\equiv_I a'+_A b'`),
+        " であり、同じ同値（",
+        ref("claim_residue_classes_are_equal_iff_congruent"),
+        "）の ",
+        math(String.raw`\Leftarrow`),
+        " を ",
+        math(String.raw`(a,b):=(a+_A b,\ a'+_A b')`),
+        " に当てて ",
+        math(String.raw`[a+_A b]_I=[a'+_A b']_I`),
+        " である。これを使って、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi_I(a+_A b)&=[a+_A b]_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=[a'+_A b']_I
+&&\left(\because\ [a+_A b]_I=[a'+_A b']_I\right)\\
+&=\pi_I(a'+_A b')
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+  },
 ]);
