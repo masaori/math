@@ -91,6 +91,9 @@
 - `lake build`、`bash scripts/check-no-sorry.sh`、`bash scripts/check-end-to-end.sh`（項目 6 より前は失敗してよい。失敗の理由が
   「定理が無い」であることだけを確かめる）、`bash scripts/check-docs-references.sh`（README と `lean/docs/` が書くパスと名前の実在）を通す。人手証明の正本や SageMath を変えたら、論文側の `npm run check` と
   `node sagemath/tools/verify-check-linkage.ts` も通す。
+- 人手に証明を持つブロックを足したら、同じ回でそのブロックの SageMath の検算を足し、
+  `node sagemath/tools/verify-every-proof-has-check.ts` の未検算の件数が作業の前より増えていないことを確かめる。
+  ゴール台帳の「複素行列版イジング論文の全ての証明に、SageMath の検算が付いている」は、新しく足した主張にも検算が付いていることを求める。
 - 状態台帳と `MEMORY.md` を更新してコミットし、push 前に `git fetch origin && git rebase origin/main` を行い、
   成果コミットの origin/main への包含を `git merge-base --is-ancestor` で確かめてから終える。
 
