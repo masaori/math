@@ -785,6 +785,7 @@ export const ALL_LABELS = [
   "def_finite_free_entropy",
   "def_finite_free_entropy_density",
   "def_finite_graph_connected",
+  "def_finite_graph_cycle",
   "def_finite_lattice_fisher_zeros",
   "def_finite_map_iteration",
   "def_finite_perfect_matching",

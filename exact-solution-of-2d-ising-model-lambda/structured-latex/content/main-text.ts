@@ -12403,6 +12403,37 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_graph_cycle",
+              focus: {
+                id: "tools_definition_finite_graph_cycle",
+                kind: "definition",
+                title: { text: "有限単純グラフの閉路" },
+                labels: ["def_finite_graph_cycle"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteSimpleCycle"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と自然数 ", math(String.raw`m\in\mathbb N_{\ge3}`),
+                    " を取る。頂点列 ", math(String.raw`(v_0,v_1,\ldots,v_m)`),
+                    " の各頂点が ", math(String.raw`V`), " に属し、",
+                    math(String.raw`v_m=v_0`), " であり、相異なる ",
+                    math(String.raw`i,j\in\{0,1,\ldots,m-1\}`),
+                    " に対して ", math(String.raw`v_i\ne v_j`),
+                    " であり、各 ", math(String.raw`i\in\mathbb N`),
+                    " が ", math(String.raw`i<m`), " を満たすたびに ",
+                    math(String.raw`\{v_i,v_{i+1}\}\in E`),
+                    " なら、この頂点列を閉路と呼ぶ。",
+                    "始終点以外の頂点は再訪しない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12419,7 +12450,8 @@ S&=(S-T)+T
                   paragraph([
                     ref("def_finite_simple_graph"), " の空でない頂点集合 ", math(String.raw`V`),
                     " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
-                    " が連結（", ref("def_finite_graph_connected"), "）で閉路を持たないなら、",
+                    " が連結（", ref("def_finite_graph_connected"), "）で ",
+                    ref("def_finite_graph_cycle"), " を持たないなら、",
                   ]),
                   displayMath(String.raw`|E|+1=|V|`),
                   paragraph(["が成り立つ。頂点と辺の個数はいずれも自然数である。"]),
@@ -12481,7 +12513,8 @@ S&=(S-T)+T
                   paragraph([
                     ref("def_finite_simple_graph"), " の頂点集合 ", math(String.raw`V`),
                     " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
-                    " が連結（", ref("def_finite_graph_connected"), "）で閉路を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
+                    " が連結（", ref("def_finite_graph_connected"), "）で ",
+                    ref("def_finite_graph_cycle"), " を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
                     " なら、ある頂点 ", math(String.raw`v\in V`),
                     " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
                   ]),
@@ -12502,7 +12535,7 @@ S&=(S-T)+T
                     " から ", math(String.raw`u`), " までの部分と辺 ", math(String.raw`\{v,u\}`),
                     " が閉路を作り、木が閉路を持たないことに反する。",
                   ]),
-                  displayMath(String.raw`u=w\quad\bigl(\because\ u\text{ は路上にあり、}u\ne w\text{ なら閉路になる}\bigr)`),
+                  displayMath(String.raw`u=w\quad\bigl(\because\ u\text{ は路上にあり、}u\ne w\text{ なら閉路になる}\ \blkref{def_finite_graph_cycle}\bigr)`),
                   paragraph([
                     "辺 ", math(String.raw`\{v,w\}`), " は路の最初の辺なので ",
                     math(String.raw`A`), " に属する。",

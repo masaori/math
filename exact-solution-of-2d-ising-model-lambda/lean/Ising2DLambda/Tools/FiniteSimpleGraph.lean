@@ -13,4 +13,8 @@ abbrev FiniteSimplePath {n : ℕ} (G : FiniteSimpleGraph n) (u v : Fin n) :=
 def FiniteGraphConnected {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
   Nonempty (Fin n) ∧ ∀ u v : Fin n, Nonempty (FiniteSimplePath G u v)
 
+/-- A closed walk with distinct vertices except for its common start and end. -/
+abbrev FiniteSimpleCycle {n : ℕ} (G : FiniteSimpleGraph n) (u : Fin n) :=
+  {p : G.Walk u u // p.IsCycle}
+
 end Ising2DLambda.Tools
