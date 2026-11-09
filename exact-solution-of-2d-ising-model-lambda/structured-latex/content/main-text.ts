@@ -68400,17 +68400,17 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                         proof: [
                           paragraph([
                             "行座標が最大のセル ", math(String.raw`(r,c)\in T`),
-                            " を一つ取る。有限非空集合の整数座標には最大値がある。任意の ",
-                            math(String.raw`(s,d)\in T`), " に対して ", math(String.raw`s\le r`),
-                            " なので ", math(String.raw`(r+1,c)\notin T`), " である。横辺 ",
+                            " を一つ取る。有限非空集合の整数座標には最大値がある。横辺 ",
                             math(String.raw`e:=\{(r+1,c),(r+1,c+1)\}`),
                             " は下側のセル ", math(String.raw`(r,c)`), " の上辺である。",
                           ]),
+                          displayMath(String.raw`\forall(s,d)\in T,\quad s\le r
+\qquad\bigl(\because\ r\text{ は }T\text{ の行座標の最大値}\bigr)`),
                           displayMath(String.raw`\begin{aligned}
 e&\in\mathcal E_{\square}(T)
 &&\bigl(\because\ (r,c)\in T\text{ と }\blkref{def_cell_edge_set}\bigr)\\
 (r+1,c)&\notin T
-&&\bigl(\because\ r\text{ は }T\text{ の行座標の最大値}\bigr)\\
+&&\bigl(\because\ \forall(s,d)\in T,\ s\le r\text{ であり }r+1>r\bigr)\\
 e&\in\mathcal B_{\square}(T)
 &&\bigl(\because\ (r,c)\in T,\ (r+1,c)\notin T,\ \blkref{def_plane_cell_boundary_edge_set}\bigr)
 \end{aligned}`),
