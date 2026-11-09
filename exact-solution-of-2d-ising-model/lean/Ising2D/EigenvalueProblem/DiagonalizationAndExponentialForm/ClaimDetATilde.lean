@@ -39,6 +39,7 @@ import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExponentialSeriesOfEvenOddPowerTerms
 
 namespace Ising2D
 
@@ -51,6 +52,59 @@ theorem IsingParam.c1_sq_sub_s1_sq : P.const.c1 ^ 2 - P.const.s1 ^ 2 = 1 := by
 /-- (ii) `(c_2^*)^2 - (s_2^*)^2 = 1`。 -/
 theorem IsingParam.c2star_sq_sub_s2star_sq : P.const.c2star ^ 2 - P.const.s2star ^ 2 = 1 := by
   simp [IsingParam.const, Real.cosh_sq_sub_sinh_sq]
+
+/-- 実数の 2 乗の像は像の 2 乗: `(c_ℂ)^2 = (c^2)_ℂ`（`c ∈ ℝ`）。人手 `det_A_theta_tilde` の最後の等式の鎖の最初の 3 行
+（`square_of_real_number_is_product`・`real_inclusion_preserves_product`・`def_power_of_complex_number`）を、右辺から左辺へ並べた。 -/
+theorem real_inclusion_sq_via_product (c : ℝ) : (c : ℂ) ^ 2 = ((c ^ 2 : ℝ) : ℂ) :=
+  calc (c : ℂ) ^ 2
+      = (c : ℂ) * (c : ℂ) := sq (c : ℂ)                    -- `def_power_of_complex_number` より `z^2 = zz`
+    _ = ((c * c : ℝ) : ℂ) := real_inclusion_mul c c         -- `real_inclusion_preserves_product`
+    _ = ((c ^ 2 : ℝ) : ℂ) := by rw [square_of_real_number_is_product c]
+                          -- `square_of_real_number_is_product` を右辺から左辺へ
+
+/-- `c_1^2 - s_1^2 = 1` を `ℂ` の式として読んだもの: `(c_1)_ℂ^2 - (s_1)_ℂ^2 = 1_ℂ`。人手の準備の像の読み方
+（積の像は `real_inclusion_preserves_product`、差の像は `def_complex_difference`・`multiply_by_minus_one` による `real_inclusion_sub`）で読む。 -/
+theorem IsingParam.c1_sq_sub_s1_sq_inclusion :
+    (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2 = 1 :=
+  calc (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2
+      = ((P.const.c1 ^ 2 : ℝ) : ℂ) - ((P.const.s1 ^ 2 : ℝ) : ℂ) := by
+        rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product]  -- 2 乗の像は像の 2 乗を 2 箇所へ
+    _ = ((P.const.c1 ^ 2 - P.const.s1 ^ 2 : ℝ) : ℂ) :=
+        real_inclusion_sub _ _                                  -- 準備の差の読み方（差の像は像の差）
+    _ = ((1 : ℝ) : ℂ) := by rw [P.c1_sq_sub_s1_sq]             -- `c_1^2 - s_1^2 = 1`（`cosh_sinh_basic_properties` (2)）
+    _ = 1 := Complex.ofReal_one                                 -- `inclusion_rr_to_cc` の `1_ℂ = (1, 0)`
+
+/-- `(c_2^*)^2 - (s_2^*)^2 = 1` を `ℂ` の式として読んだもの: `(c_2^*)_ℂ^2 - (s_2^*)_ℂ^2 = 1_ℂ`（`c_1^2 - s_1^2 = 1` と同じ読み方）。 -/
+theorem IsingParam.c2star_sq_sub_s2star_sq_inclusion :
+    (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2 = 1 :=
+  calc (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2
+      = ((P.const.c2star ^ 2 : ℝ) : ℂ) - ((P.const.s2star ^ 2 : ℝ) : ℂ) := by
+        rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product]  -- 2 乗の像は像の 2 乗を 2 箇所へ
+    _ = ((P.const.c2star ^ 2 - P.const.s2star ^ 2 : ℝ) : ℂ) :=
+        real_inclusion_sub _ _                                  -- 準備の差の読み方（差の像は像の差）
+    _ = ((1 : ℝ) : ℂ) := by rw [P.c2star_sq_sub_s2star_sq]     -- `(c_2^*)^2 - (s_2^*)^2 = 1`（`cosh_sinh_basic_properties` (2)）
+    _ = 1 := Complex.ofReal_one                                 -- `inclusion_rr_to_cc` の `1_ℂ = (1, 0)`
+
+/-- `c_2s_2^* = c_2^*` を `ℂ` の式として読んだもの: `(c_2)_ℂ (s_2^*)_ℂ = (c_2^*)_ℂ`（`real_inclusion_preserves_product` と `duality_c2_star_eq_s2_star_c2`）。 -/
+theorem c2_mul_s2star_inclusion (K : IsingConst) (hdual : K.c2 * K.s2star = K.c2star) :
+    (K.c2 : ℂ) * (K.s2star : ℂ) = (K.c2star : ℂ) :=
+  calc (K.c2 : ℂ) * (K.s2star : ℂ)
+      = ((K.c2 * K.s2star : ℝ) : ℂ) := real_inclusion_mul _ _  -- `real_inclusion_preserves_product`
+    _ = (K.c2star : ℂ) := by rw [hdual]                        -- `duality_c2_star_eq_s2_star_c2`（`c_2s_2^* = c_2^*`）
+
+/-- `def_gamma1_gamma2_of_theta` の `γ_1(θ) = c_1c_2^* - s_1s_2^*u` を `ℂ` の式として読む:
+実数の積の像は像の積（`real_inclusion_preserves_product`）、差の像は像の差（`real_inclusion_sub`）。 -/
+theorem gamma1_eq_inclusion_form (K : IsingConst) (θ : ℝ) :
+    gamma1 K θ = (K.c1 : ℂ) * (K.c2star : ℂ) - (K.s1 : ℂ) * (K.s2star : ℂ) * (Real.cos θ : ℂ) :=
+  calc gamma1 K θ
+      = ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ) := rfl
+                          -- `def_gamma1_gamma2_of_theta`
+    _ = ((K.c1 * K.c2star : ℝ) : ℂ) - ((K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ) :=
+        (real_inclusion_sub _ _).symm
+                          -- 実数の差の像は像の差を右辺から左辺へ
+    _ = (K.c1 : ℂ) * (K.c2star : ℂ) - (K.s1 : ℂ) * (K.s2star : ℂ) * (Real.cos θ : ℂ) := by
+        rw [← real_inclusion_mul, ← real_inclusion_mul, ← real_inclusion_mul]
+                          -- `real_inclusion_preserves_product` を 3 箇所へ右辺から左辺へ
 
 /-- **人手証明 Step 1**: `det A(θ) = γ_1(θ)^2 + γ_2(θ)γ_2(-θ)`。 -/
 theorem det_AMat_eq_gamma1_sq_add (K : IsingConst) (θ : ℝ) :
@@ -121,20 +175,16 @@ theorem gamma1_sq_add_gamma2_mul_thetaTilde
   set c₂' : ℂ := (P.const.c2star : ℂ)
   set s₂' : ℂ := (P.const.s2star : ℂ)
   set u : ℂ := (Real.cos θ : ℂ)
-  -- Step 0 の (i)(ii)(iii) を ℂ へ埋めたもの
-  have H1 : c₁ ^ 2 - s₁ ^ 2 = 1 := by
-    rw [← Complex.ofReal_pow, ← Complex.ofReal_pow, ← Complex.ofReal_sub,
-      P.c1_sq_sub_s1_sq, Complex.ofReal_one]
-  have H2 : c₂' ^ 2 - s₂' ^ 2 = 1 := by
-    rw [← Complex.ofReal_pow, ← Complex.ofReal_pow, ← Complex.ofReal_sub,
-      P.c2star_sq_sub_s2star_sq, Complex.ofReal_one]
-  have H3 : c₂ * s₂' = c₂' := by rw [← Complex.ofReal_mul, hdual]
+  -- `c_1^2 - s_1^2 = 1`・`(c_2^*)^2 - (s_2^*)^2 = 1`・`c_2s_2^* = c_2^*` を ℂ へ埋めたもの
+  have H1 : c₁ ^ 2 - s₁ ^ 2 = 1 := P.c1_sq_sub_s1_sq_inclusion
+  have H2 : c₂' ^ 2 - s₂' ^ 2 = 1 := P.c2star_sq_sub_s2star_sq_inclusion
+  have H3 : c₂ * s₂' = c₂' := c2_mul_s2star_inclusion P.const hdual
   -- Step 3: 展開
   have hγ₁ : gamma1 P.const θ ^ 2
       = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 :=
     calc gamma1 P.const θ ^ 2
         = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 := by
-          rw [gamma1]; simp only [Complex.ofReal_sub, Complex.ofReal_mul]; rfl  -- 直前の表示の代入
+          rw [gamma1_eq_inclusion_form]  -- `def_gamma1_gamma2_of_theta`（像の積・差は積・差の像）
       _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 := by
           ring                                                             -- 分配則による展開
   have hγ₂ : gamma2 P.const θ * gamma2 P.const (-θ)
@@ -179,19 +229,16 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
     (AMat P.const (thetaTilde M μ)).det = 1 := by
   set θ := thetaTilde M μ with hθ
-  have H1 : (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2 = 1 := by
-    rw [← Complex.ofReal_pow, ← Complex.ofReal_pow, ← Complex.ofReal_sub,
-      P.c1_sq_sub_s1_sq, Complex.ofReal_one]
-  have H2 : (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2 = 1 := by
-    rw [← Complex.ofReal_pow, ← Complex.ofReal_pow, ← Complex.ofReal_sub,
-      P.c2star_sq_sub_s2star_sq, Complex.ofReal_one]
-  have H3 : (P.const.c2 : ℂ) * (P.const.s2star : ℂ) = (P.const.c2star : ℂ) := by
-    rw [← Complex.ofReal_mul, hdual]
+  have H1 : (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2 = 1 := P.c1_sq_sub_s1_sq_inclusion
+  have H2 : (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2 = 1 :=
+    P.c2star_sq_sub_s2star_sq_inclusion
+  have H3 : (P.const.c2 : ℂ) * (P.const.s2star : ℂ) = (P.const.c2star : ℂ) :=
+    c2_mul_s2star_inclusion P.const hdual
   have HPy : (Real.cos θ : ℂ) ^ 2 + (Real.sin θ : ℂ) ^ 2 = 1 := by
-    rw [← Complex.ofReal_pow, ← Complex.ofReal_pow, ← Complex.ofReal_add,
+    rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product, real_inclusion_add,
       Real.cos_sq_add_sin_sq, Complex.ofReal_one]
-  rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form, gamma1]
-  simp only [Complex.ofReal_sub, Complex.ofReal_mul]
+      -- 和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`）
+  rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form, gamma1_eq_inclusion_form]
   linear_combination
     NecSuf.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
       (P.const.c2star : ℂ) (P.const.s2star : ℂ) (Real.cos θ : ℂ) (Real.sin θ : ℂ)
@@ -205,8 +252,14 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
   set r : ℂ := ((absGamma2 P.const θ : ℝ) : ℂ)
   have hC : ((lambdaPlusR P.const θ * lambdaMinusR P.const θ : ℝ) : ℂ) = ((1 : ℝ) : ℂ) :=
     calc ((lambdaPlusR P.const θ * lambdaMinusR P.const θ : ℝ) : ℂ)
-        = (gamma1 P.const θ + r) * (gamma1 P.const θ - r) := by
-          rw [Complex.ofReal_mul, lambdaPlusR_ofReal, lambdaMinusR_ofReal]  -- `eigenvector_of_A_theta_tilde`
+        = ((lambdaPlusR P.const θ : ℝ) : ℂ) * ((lambdaMinusR P.const θ : ℝ) : ℂ) :=
+          (real_inclusion_mul _ _).symm                                  -- `real_inclusion_preserves_product`
+      _ = ((gamma1R P.const θ + absGamma2 P.const θ : ℝ) : ℂ)
+            * ((gamma1R P.const θ - absGamma2 P.const θ : ℝ) : ℂ) := rfl -- `eigenvector_of_A_theta_tilde`
+      _ = (gamma1 P.const θ + r) * (gamma1 P.const θ - r) := by
+          rw [← real_inclusion_add, ← real_inclusion_sub, ← gamma1_eq_ofReal]
+                          -- 準備の像の読み方（和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の
+                          -- `real_inclusion_preserves_sum`）、差の像は `def_complex_difference`・`multiply_by_minus_one`）
       _ = gamma1 P.const θ ^ 2 - r ^ 2 := by ring                          -- 分配則による平方差
       _ = gamma1 P.const θ ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
           rw [gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq, ← sub_eq_add_neg]  -- `ab = -r^2`
@@ -234,7 +287,7 @@ theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2s
     calc ((g ^ 2 : ℝ) : ℂ)
         = ((g * g : ℝ) : ℂ) := by rw [square_of_real_number_is_product g]
                           -- `square_of_real_number_is_product`（`r → γ_1(θ)`）
-      _ = (g : ℂ) * (g : ℂ) := Complex.ofReal_mul g g
+      _ = (g : ℂ) * (g : ℂ) := (real_inclusion_mul g g).symm
                           -- `real_inclusion_preserves_product`
       _ = (g : ℂ) ^ 2 := (sq (g : ℂ)).symm
                           -- `def_power_of_complex_number` より `zz = z^2`

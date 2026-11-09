@@ -58,6 +58,8 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelation
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExponentialSeriesOfEvenOddPowerTerms
 
 namespace Ising2D
 
@@ -76,11 +78,11 @@ noncomputable def lambdaMinusR : ℝ := gamma1R K θ - absGamma2 K θ
 /-- `λ_{±,μ}` は**実数**である（人手証明の statement の `∈ ℝ`）。 -/
 theorem lambdaPlusR_ofReal :
     ((lambdaPlusR K θ : ℝ) : ℂ) = gamma1 K θ + ((absGamma2 K θ : ℝ) : ℂ) := by
-  rw [lambdaPlusR, gamma1_eq_ofReal, Complex.ofReal_add]
+  rw [lambdaPlusR, gamma1_eq_ofReal, real_inclusion_add]  -- 実数の和の像は像の和（`real_inclusion_preserves_finite_sum` を `m = 2` で。2 項の場合の `real_inclusion_preserves_sum`）
 
 theorem lambdaMinusR_ofReal :
     ((lambdaMinusR K θ : ℝ) : ℂ) = gamma1 K θ - ((absGamma2 K θ : ℝ) : ℂ) := by
-  rw [lambdaMinusR, gamma1_eq_ofReal, Complex.ofReal_sub]
+  rw [lambdaMinusR, gamma1_eq_ofReal, real_inclusion_sub]  -- 実数の差の像は像の差（準備の差の読み方: `def_complex_difference`・`multiply_by_minus_one`）
 
 /-! ## 固有ベクトル（人手証明 `eigenvector_of_A_theta_tilde` Step 1・Step 2） -/
 
