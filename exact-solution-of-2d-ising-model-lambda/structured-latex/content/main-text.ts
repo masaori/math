@@ -69168,8 +69168,12 @@ e\notin\mathcal E_{\square}(S)
                             ref("claim_nonempty_plane_cell_set_has_boundary_edge"),
                             "）。ゆえに対称差は空であり、二つの集合は一致する。",
                           ]),
-                          displayMath(String.raw`T\triangle U=\varnothing\quad\Longrightarrow\quad T=U
-\qquad\bigl(\because\ \blkref{claim_nonempty_plane_cell_set_has_boundary_edge}\text{ の対偶と対称差の定義}\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+T\triangle U&=\varnothing
+&&\bigl(\because\ \blkref{claim_nonempty_plane_cell_set_has_boundary_edge}\text{ の対偶}\bigr)\\
+T&=U
+&&\bigl(\because\ T\triangle U=\varnothing\text{ と対称差の定義}\bigr)
+\end{aligned}`),
                         ],
                       },
                     },
