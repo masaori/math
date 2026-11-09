@@ -5,6 +5,9 @@ import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeaf
 import Ising2DLambda.NecSuf.Tools.NonemptyTreeEdgeSubsetLeaf
 import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeafFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeSymmDiff
+import Ising2DLambda.Tools.EvenEdgeRootParity
+import Ising2DLambda.NecSuf.Tools.EvenEdgeRootParity
+import Ising2DLambda.Tools.EvenEdgeRootParityFromNecSuf
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeTreeComplementInjective

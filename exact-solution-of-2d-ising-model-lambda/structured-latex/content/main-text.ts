@@ -12574,6 +12574,11 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                 title: { text: "根以外で偶数なら根でも偶数である" },
                 labels: ["claim_even_edge_subset_root_parity"],
                 habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdgeSubset_root_of_other_even",
+                  "Ising2DLambda.NecSuf.Tools.incidenceParity_root_of_other_even",
+                  "Ising2DLambda.Tools.evenEdgeSubset_root_of_other_even_from_necSuf",
+                ],
                 verification: ["sagemath/check/even-edge-root-parity"],
                 statement: [
                   paragraph([
@@ -12597,7 +12602,8 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                   paragraph(["根以外の各項は仮定により偶数なので、"]),
                   displayMath(String.raw`\begin{aligned}
 d_A(o)&=\sum_{v\in V}d_A(v)-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ o\in V\text{ と有限和の分割}\bigr)\\
-&\equiv 0\pmod 2&&\bigl(\because\ \sum_{v\in V}d_A(v)=2|A|\text{ と根以外の各項の偶数性}\bigr)
+&=2|A|-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ \sum_{v\in V}d_A(v)=2|A|\bigr)\\
+&\equiv 0\pmod 2&&\bigl(\because\ 2|A|\text{ と根以外の各項の偶数性}\bigr)
 \end{aligned}`),
                 ],
               },
