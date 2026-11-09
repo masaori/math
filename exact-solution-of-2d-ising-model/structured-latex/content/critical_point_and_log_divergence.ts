@@ -2297,6 +2297,20 @@ S
         "、",
         math(String.raw`2\pi \geq 6.283184 \geq 6.2831`),
         " である。",
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0 < \pi`),
+        " と ",
+        math(String.raw`0 < 2`),
+        " から、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0 < 2\pi`),
+        " である。",
         math(String.raw`9.8696 \leq \pi^2`),
         " は ",
         ref("pi_squared_numerical_bounds"),
@@ -2999,7 +3013,7 @@ T
         String.raw`\begin{aligned}
 \left|G''(\kappa)-\frac{1}{2\pi}\log\frac{1}{\kappa}\right|
 &=\frac{1}{2\pi}\left|2\pi G''(\kappa)-\log\frac{1}{\kappa}\right|
-&&\bigl(\because\ 2\pi>0\bigr)\\
+&&\bigl(\because\ \text{準備の}\ 0<2\pi\bigr)\\
 &\leq\frac{6.731}{2\pi}
 &&\bigl(\because\ \text{直前の総合評価}\bigr)\\
 &\leq\frac{6.731}{6.2831}
@@ -3017,12 +3031,13 @@ G''(\kappa)
 &&\bigl(\because\ \text{直前の絶対値評価}\bigr),\\
 \frac{1}{2\pi}\log\frac{1}{|\kappa|}-\frac65
 &\longrightarrow+\infty
-&&\bigl(\because\ \log(1/|\kappa|)\to+\infty,\ 2\pi>0\bigr).
+&&\bigl(\because\ \log(1/|\kappa|)\to+\infty,\ \text{準備の}\ 0<2\pi\bigr).
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 2（ℝ は順序体で、正の数どうしの積は正）から 0 < 2π を出す文を置き、根拠「2π > 0」の 2 か所をその参照にした。値と主張は不変。",
         "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.08 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",
         "2026-11-05（全証明の SageMath 検算）: 平方根を √·^(ℝ≥0) の記法にそろえ、Step 3 で r := √S、t := √(1+S) と置いて r > 0・t ≥ 1 を示し、sinh γ = 2rt（sinh_double_angle_formula と gamma_derivatives_in_kappa (1)）で書き直した（以前の Step 4 は 1/√(S(1+S)) = (1/√S)(1/√(1+S)) を「ℝ の四則」としていた）。Step 4 の各点評価を r, t の鎖に、Step 5 の (S(1+S))^{3/2} = S^{3/2}(1+S)^{3/2}（本文に無い冪法則）を r³t³ の鎖にし、w^{3/2} ≤ S^{3/2} の理由を書いた。T ≥ 0 を示していなかった（Step 7 で |T| ≤ 3.615 に使う）ので足した。Step 6 の κ² log(1/κ) の単調増加は導関数の正から言っており平均値の定理（remark_real_analysis_escape_chapter_E が使わないとした道具）に当たるので、F(s) := −s² log s に (R4)・(R3) を当てる鎖にした。初等関数の値の数値の評価（sinh(1/4)・cosh(1/4)・log cosh(1/4)・cosh(1/2)・log 2・log(2π) の上界）を remark_real_analysis_escape_chapter_E が持ち込むものとして明記し（π ≤ 3.1416・2π ≥ 6.2831 は remark_real_analysis_facts_R3_R4 の π の評価から、log(2π) > 0 は対数の単調性から導いた）、Step 4 の r ≤ cosh(κ/2) と sin²(θ/2) ≤ 1 を根拠付きの準備にし、Step 5・6 の複数の根拠を 1 行で使っていた行を割り、F' の連続性・log(1/κ) > 0・cosh κ ≥ 1 の根拠を書き、cosh の単調性・対数の積の法則・対数の単調性をラベルで引いた。主張と定数は不変。検算は sagemath/check/second_derivative_log_divergence/。",
       ],

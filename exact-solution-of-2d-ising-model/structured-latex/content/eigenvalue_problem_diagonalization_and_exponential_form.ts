@@ -2342,7 +2342,7 @@ a(\theta)\,w(\theta)
 &\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k\pi
    \quad (\because \blkref{antiperiodic_exp_sum}\text{ の定義}) \\
 &\iff \exists k \in \mathbb{Z}:\ \frac{2\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k
-   \quad (\because \text{両辺を } \pi > 0 \text{ で割る}) \\
+   \quad (\because \text{両辺を } \pi > 0\ (\blkref{pi_is_positive}) \text{ で割る}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM_{\mathrm{col}}
    \quad (\because \text{両辺を } M_{\mathrm{col}} \neq 0 \text{ 倍する}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\mu - 1 = kM_{\mathrm{col}}
@@ -2426,6 +2426,7 @@ s_1c_2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 鎖の「両辺を π > 0 で割る」の π > 0 を pi_is_positive の参照にした。値と主張は不変。",
         "M = 2..8 の全 μ、および厳密な臨界点 sinh 2K_1 sinh 2K_2 = 1 とその近傍を含む 16 組の (K_1,K_2) で数値確認済み。" +
           "半整数運動量側の |γ_2(θ~_μ)| の最小値は 1.6e-1 で 0 から離れている一方、同じ K で整数運動量 θ = 2π では " +
           "臨界点ちょうどのとき |γ_2| ~ 1e-16（＝0）になる（sagemath/check/048_claim_A_theta_tilde/check_01）。",

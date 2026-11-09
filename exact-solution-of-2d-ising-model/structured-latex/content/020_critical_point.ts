@@ -2140,7 +2140,7 @@ t - \sin t
 \pi^2
 &= \pi \cdot \pi\\
 &\geq 3.141592 \cdot \pi
-&&(\because\ 3.141592 \leq \pi\ \text{の両辺に}\ \pi > 0\ \text{を掛ける})\\
+&&(\because\ 3.141592 \leq \pi\ \text{の両辺に}\ \blkref{pi_is_positive}\ \text{の}\ \pi > 0\ \text{を掛ける})\\
 &\geq 3.141592 \cdot 3.141592
 &&(\because\ 3.141592 \leq \pi\ \text{の両辺に}\ 3.141592 > 0\ \text{を掛ける})\\
 &= 9.869600294464
@@ -2152,7 +2152,7 @@ t - \sin t
 \pi^2
 &= \pi \cdot \pi\\
 &\leq 3.141593 \cdot \pi
-&&(\because\ \pi \leq 3.141593\ \text{の両辺に}\ \pi > 0\ \text{を掛ける})\\
+&&(\because\ \pi \leq 3.141593\ \text{の両辺に}\ \blkref{pi_is_positive}\ \text{の}\ \pi > 0\ \text{を掛ける})\\
 &\leq 3.141593 \cdot 3.141593
 &&(\because\ \pi \leq 3.141593\ \text{の両辺に}\ 3.141593 > 0\ \text{を掛ける})\\
 &= 9.869606577649
@@ -2164,6 +2164,7 @@ t - \sin t
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 根拠「π > 0」の 2 行を pi_is_positive の参照にした。値と主張は不変。",
         "2026-11-02: 旧 elementary_sine_bounds が根拠なしで使っていた 9.8696 ≤ π² ≤ 9.8697 を、外部から持ち込む円周率の数値の評価から導く主張にした。",
       ],
     },
@@ -3393,8 +3394,8 @@ G'(\theta)
       paragraph([
         math(String.raw`G'`),
         " は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続である（微分の公式）。",
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の数値の評価より ",
+        ref("pi_is_positive"),
+        " より ",
         math(String.raw`\pi > 0`),
         "、したがって ",
         math(String.raw`\tfrac{a\pi}{2} > 0`),
@@ -3448,6 +3449,7 @@ r(\pi)^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 散文の「remark_real_analysis_facts_R3_R4 の円周率の数値の評価より π > 0」を pi_is_positive の参照にした。値と主張は不変。",
         "2026-11-02: 旧 closed_form_log_integral (3) を独立の主張にした。3/2 乗を def_three_halves_power で定め、G' の計算を w'・r' の鎖と 1 行 1 操作の鎖に分け、√(δ² + a²π²/4) ≥ aπ/2 を平方根の単調性ではなく背理法の鎖で示した。",
       ],
     },
