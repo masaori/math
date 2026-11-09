@@ -8965,4 +8965,114 @@ c\in[b]_I&\iff b\equiv_I c
       paragraph(["である。"]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_quotient_scalar_multiplication_does_not_depend_on_representatives",
+    kind: "claim",
+    title: { text: "商集合の上のスカラー倍は代表のとり方によらない" },
+    labels: ["claim_quotient_scalar_multiplication_does_not_depend_on_representatives"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " と ",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a'`),
+        " について、",
+        math(String.raw`\pi_I(a)=\pi_I(a')`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\pi_I(\lambda\ast_A a)=\pi_I(\lambda\ast_A a')`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`\pi_I:A\to A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）であり、等号はどれも ",
+        math(String.raw`I`),
+        " を法とする商集合 ",
+        math(String.raw`A/I`),
+        "（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）の元、すなわち ",
+        math(String.raw`A`),
+        " の部分集合としての等号である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " と、",
+        math(String.raw`\pi_I(a)=\pi_I(a')`),
+        " を満たす ",
+        math(String.raw`a,a'\in A`),
+        " をとる。まず ",
+        math(String.raw`[a]_I=[a']_I`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[a]_I&=\pi_I(a)
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=\pi_I(a')
+&&\left(\because\ \text{仮定}\ \pi_I(a)=\pi_I(a')\right)\\
+&=[a']_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right).
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`[a]_I`),
+        " などは ",
+        math(String.raw`I`),
+        " を法とする剰余類（",
+        ref("def_residue_class_modulo_two_sided_ideal"),
+        "）である。剰余類が等しいことと代表が合同であることの同値（",
+        ref("claim_residue_classes_are_equal_iff_congruent"),
+        "）の ",
+        math(String.raw`\Rightarrow`),
+        " をこの等式に当てて、",
+        math(String.raw`a\equiv_I a'`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。合同がスカラー倍と両立すること（",
+        ref("claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication"),
+        "）により ",
+        math(String.raw`\lambda\ast_A a\equiv_I \lambda\ast_A a'`),
+        " であり、同じ同値（",
+        ref("claim_residue_classes_are_equal_iff_congruent"),
+        "）の ",
+        math(String.raw`\Leftarrow`),
+        " を ",
+        math(String.raw`(a,b):=(\lambda\ast_A a,\ \lambda\ast_A a')`),
+        " に当てて ",
+        math(String.raw`[\lambda\ast_A a]_I=[\lambda\ast_A a']_I`),
+        " である。これを使って、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi_I(\lambda\ast_A a)&=[\lambda\ast_A a]_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=[\lambda\ast_A a']_I
+&&\left(\because\ [\lambda\ast_A a]_I=[\lambda\ast_A a']_I\right)\\
+&=\pi_I(\lambda\ast_A a')
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+  },
 ]);
