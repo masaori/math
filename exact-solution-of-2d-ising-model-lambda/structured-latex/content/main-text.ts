@@ -12830,6 +12830,61 @@ d_{A\mathbin\triangle\{e\}}(w)\bmod 2
             },
           },
           {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_tree_edge_toggles_preserve_outside",
+              focus: {
+                id: "tools_claim_tree_edge_toggles_preserve_outside",
+                kind: "claim",
+                title: { text: "木の辺の有限回の切替えは木外辺の選択を保つ" },
+                labels: ["claim_tree_edge_toggles_preserve_outside"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.treeEdge_toggles_outside",
+                  "Ising2DLambda.NecSuf.Tools.toggles_preserve_outside",
+                ],
+                verification: ["sagemath/check/tree-edge-toggles-outside"],
+                statement: [
+                  paragraph([
+                    "有限な辺集合 ", math(String.raw`E`), " と部分集合 ",
+                    math(String.raw`F\subseteq E`), "、初期の辺集合 ",
+                    math(String.raw`A_0\subseteq E`), " を取る。",
+                    "長さ ", math(String.raw`m\in\mathbb N`), " の有限列 ",
+                    math(String.raw`(e_1,\ldots,e_m)`),
+                    " の各辺が ", math(String.raw`F`), " に属し、",
+                    "各 ", math(String.raw`i\in\{1,\ldots,m\}`), " に対して ",
+                    math(String.raw`A_i:=A_{i-1}\mathbin\triangle\{e_i\}`),
+                    " と定めると、", math(String.raw`A_m\cap(E\setminus F)=A_0\cap(E\setminus F)`),
+                    " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず任意の ", math(String.raw`A\subseteq E`), " と ",
+                    math(String.raw`e\in F`), " および辺 ",
+                    math(String.raw`f\in E\setminus F`), " を取る。",
+                    math(String.raw`e\ne f`), " なので、切替えの前後で ",
+                    math(String.raw`f`), " の所属は同じである。従って",
+                  ]),
+                  displayMath(String.raw`(A\mathbin\triangle\{e\})\cap(E\setminus F)=A\cap(E\setminus F)\quad(\because\ e\in F\text{ かつ }e\notin E\setminus F)`),
+                  paragraph([
+                    "この等式を有限列の長さについて帰納的に適用する。",
+                    "空列では ", math(String.raw`A_m=A_0`), " である。",
+                    "任意の ", math(String.raw`i\in\{1,\ldots,m\}`),
+                    " 回目の切替えでは",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+A_i\cap(E\setminus F)
+&=(A_{i-1}\mathbin\triangle\{e_i\})\cap(E\setminus F)&&\bigl(\because\ A_i\text{ の定義}\bigr)\\
+&=A_{i-1}\cap(E\setminus F)&&\bigl(\because\ e_i\in F\text{ と上の一辺の等式}\bigr)\\
+&=A_0\cap(E\setminus F)&&\bigl(\because\ i-1\text{ 回までの帰納法の仮定}\bigr)
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
             role: "primary",
             element: {
               kind: "elementGroup",
@@ -12885,10 +12940,14 @@ d_{A\mathbin\triangle\{e\}}(w)\bmod 2
                     " だけであり、", ref("claim_even_edge_processed_vertex_parity"),
                     " により先に処理した頂点の偶数性は保たれる。",
                     "従って操作中の条件が保たれる。",
+                  ]),
+                  displayMath(String.raw`|U\setminus\{v\}|=|U|-1\quad(\because\ v\in U\text{ と有限集合の個数})`),
+                  paragraph([
                     "未処理の頂点は毎回一つ減るので、有限回で ",
                     math(String.raw`U=\{o\}`), " となる。",
                     "このとき根以外の頂点はすべて処理済みで、接続辺数は偶数である。",
-                    "加えた辺は木の辺だけなので、",
+                    "切り替えた辺は木の辺だけなので、",
+                    ref("claim_tree_edge_toggles_preserve_outside"), " より、",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 A\cap(E\setminus F)
