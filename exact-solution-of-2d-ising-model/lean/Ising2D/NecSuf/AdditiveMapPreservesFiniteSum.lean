@@ -5,6 +5,9 @@
 具体版: `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の
 `real_inclusion_of_finite_sum_succ`（具体版をこのファイルの系として導くのは、同じフォルダの
 `ClaimRealInclusionPreservesFiniteSumFromNecSuf.lean`）。
+同じ手順の具体版に人手 `complex_conjugate_of_sum` の `complex_conjugate_of_finite_sum_succ`
+（`Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`。`f := \overline{(·)}`）もあり、
+その系としての導出は同じフォルダの `ClaimComplexConjugateOfSumFromNecSuf.lean`。
 
 人手の `ι_{ℝ→ℂ}` を、2 つの集合の間の写像 `f : G → H` に置き換える。有限和は `finSumLeft`
 （`Ising2D/NecSuf/AdditiveToMultiplicativeMapOfFiniteSum.lean`。人手の `m ∈ ℤ_{≥1}` は Lean の `r + 1`、

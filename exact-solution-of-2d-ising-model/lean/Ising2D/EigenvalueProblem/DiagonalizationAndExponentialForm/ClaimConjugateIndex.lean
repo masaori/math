@@ -81,7 +81,9 @@ theorem neg_I_mul_real_inclusion_neg (x : ℝ) :
 
 - 人手の `real_inclusion_preserves_finite_sum` を `m = 2` で当てる行（二項の和の像）は、
   2 項の場合の具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_sum`）を右辺から左辺へ当てる。
-- 負の角の Euler の公式 `exp_of_negative_i_real_as_cos_minus_i_sin` の行は、この人手のブロックの具体版が Lean に無いので、
+- 負の角の Euler の公式 `exp_of_negative_i_real_as_cos_minus_i_sin` の行は、具体版 `exp_neg_I_mul_real_eq_cos_sub_I_mul_sin`
+  （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimExpOfNegativeIRealAsCosMinusISin.lean`）が `-(iθ)` の形で述べるのに対し、
+  人手のこの行は `(-i)(2πj_ℝ)_ℂ` の形に直接当てていて `-(i(2πj_ℝ)_ℂ)` への読み替えの行が無い（状態台帳の残り）。それまでは
   `exp(φ i) = cos φ + i sin φ`（`Complex.exp_mul_I`）を `φ = -(2πj)_ℂ` に当て、`cos(-x) = cos x`・`sin(-x) = -sin x` と
   実数の `cos`・`sin` の像（`Complex.ofReal_cos`・`Complex.ofReal_sin`）で書き直す。
 - `cos(2πn_ℝ) = 1_ℝ` は実数の `Real.cos_int_mul_two_pi` である。`sin(2πn_ℝ) = 0_ℝ` は `2πj_ℝ = (2j)_ℝ π` と読み、

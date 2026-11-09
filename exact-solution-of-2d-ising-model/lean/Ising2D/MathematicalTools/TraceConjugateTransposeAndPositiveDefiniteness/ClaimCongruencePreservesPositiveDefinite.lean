@@ -24,8 +24,9 @@
 | 正値性の `Bx = 0` を仮定した 5 行の鎖（背理法） | `mulVec_ne_zero_of_left_inverse` の `calc` の 5 段 |
 | 正値性の最後の 2 行の鎖と `x^*(B^*(AB))x ∈ ℝ_{>0}` | `congruence_preserves_positive_definite` の `calc` の 2 段 |
 
-- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum` には Lean の具体版が無く、同じ主張の mathlib の一段の補題
-  `star_mul'`・`star_sum` を引く。`star_preserves_norm_and_limits` (1) の第 1 式（`(AB)^* = B^*A^*`）は具体版
+- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum` の具体版（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）は `starRingEnd ℂ` の形で、
+  有限和は添字 `Fin (m + 1)` の和である。このファイルは `star` の形で、和の添字が `Fin n`（`n = 0` を含む）なので、まだ同じ主張の mathlib の一段の補題
+  `star_mul'`・`star_sum` を引く（具体版への差し替えは状態台帳の残り）。`star_preserves_norm_and_limits` (1) の第 1 式（`(AB)^* = B^*A^*`）は具体版
   `matrix_conjTranspose_mul`（`ClaimStarPreservesNormAndLimits.lean`）を引く。`mat_mult_associative` も具体版が無いので、既存の慣行どおり `Matrix.mul_assoc`
   （行列と数ベクトルの積では `Matrix.mulVec_mulVec`）を 1 段に 1 回ずつ引く。
 - 人手の鎖の「分配律を項の数だけ繰り返す」「加法の結合律・交換律による有限和の順序の入れ替え」（`complex_numbers_form_a_field`）は、

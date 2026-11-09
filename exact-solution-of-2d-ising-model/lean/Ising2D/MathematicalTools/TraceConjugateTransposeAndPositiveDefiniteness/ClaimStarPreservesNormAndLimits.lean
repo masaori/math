@@ -24,8 +24,10 @@
   （`ClaimRealMultipleOfHermitianIsHermitian.lean` と同じ）。積・和・スカラー倍・差の成分は `mat_mult`・`def_matrix_sum`・
   `def_matrix_scalar_multiple`・`def_matrix_difference` の具体版 `matrix_mul_apply_sum`・`matrix_sum_apply`・`matrix_smul_apply`・`matrix_sub_apply` を引く。
 * 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product`・`complex_conjugate_of_difference`・`abs_of_complex_conjugate`
-  （`structured-latex/content/005_exp_conjugation_proof.ts`）は本文に Lean の具体版が無く、mathlib の `star_sum`・`star_add`（`m = 2`）・
-  `star_mul'`・`star_sub`・`norm_star` を引く（`ClaimCongruencePreservesPositiveDefinite.lean` と同じ扱い）。
+  （`structured-latex/content/005_exp_conjugation_proof.ts`）のうち前の 3 つの具体版は
+  `MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean` にあるが `starRingEnd ℂ` の形で、有限和の添字が `Fin (m + 1)` である。
+  このファイルは `star` の形で添字が `Fin n` なので、まだ mathlib の `star_sum`・`star_add`（`m = 2`）・
+  `star_mul'`・`star_sub`・`norm_star` を引く（`ClaimCongruencePreservesPositiveDefinite.lean` と同じ扱い。差し替えは状態台帳の残り。`abs_of_complex_conjugate` は具体版が無い）。
   `ℂ` の積の可換性（`complex_numbers_form_a_field`）は `mul_comm`、`ℝ` の有限和の順序の入れ替えは本文に主張が無く `Finset.sum_comm` を引く
   （`ClaimTransposePreservesMatrixNormAndLimits.lean` と同じ扱い）。
 * ノルムは mathlib の Frobenius ノルム（`Matrix.frobenius_norm_def`）で、`def_matrix_norm` の行列ノルムと値が一致する。

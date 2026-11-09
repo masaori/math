@@ -33,8 +33,8 @@
 * 部分和の係数 `(1/m!)_ℂ` は Lean では `((m! : ℂ))⁻¹` と書いてある（`expPartialSum`）。8 行のうち 5 行目の
   `complex_conjugate_of_real_inclusion` は、`((m! : ℂ))⁻¹ = ((m! : ℝ)⁻¹)_ℂ`（`inclusion_rr_to_cc` が逆数と自然数の像を保つこと。
   mathlib の `Complex.ofReal_inv`・`Complex.ofReal_natCast`）と書き直してから当てる（`star_inv_factorial`）。
-* 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product` は本文に Lean の具体版が無く、
-  `ClaimStarPreservesNormAndLimits.lean` と同じく mathlib の `star_sum`・`star_mul'` を引く。
+* 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product` の具体版（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）は `starRingEnd ℂ` の形なので、
+  `star` の形のこのファイルは `ClaimStarPreservesNormAndLimits.lean` と同じく、まだ mathlib の `star_sum`・`star_mul'` を引く（差し替えは状態台帳の残り）。
 * `def_exp` (1) の「部分和が `exp(S)` へ収束する」は、`ClaimExpOfSymmetricIsSymmetric.lean` と同じく `matExp_hasSum` の部分和
   `Σ_{m<N}` を `N → N+1` とずらして人手の `Σ_{m=0}^{N}` に合わせる。ノルムは mathlib の Frobenius ノルムで、
   `def_matrix_norm` の行列ノルムと値が一致する。極限の段で `ℝ` へ脱出する（人手の主張に書いてある）。

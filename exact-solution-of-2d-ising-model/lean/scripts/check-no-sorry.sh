@@ -261,6 +261,14 @@ targets=(
   Ising2D.neg_I_mul_eq_neg_of_I_mul
   Ising2D.real_inclusion_cos_neg
   Ising2D.real_inclusion_sin_neg
+  Ising2D.complex_conjugate_of_add
+  Ising2D.complex_conjugate_of_finite_sum_succ
+  Ising2D.complex_conjugate_of_finite_sum_succ_of_necSuf
+  Ising2D.complex_conjugate_of_sum_two
+  Ising2D.complex_conjugate_of_product_eq
+  Ising2D.complex_conjugate_of_neg_one
+  Ising2D.complex_conjugate_of_difference_eq
+  Ising2D.exp_neg_I_mul_real_eq_cos_sub_I_mul_sin
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg
   Ising2D.AMat_eq

@@ -13,7 +13,8 @@
 
 - 人手の共役転置（`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose`（`Aᴴ k l = star (A l k)` が定義から `rfl`）、
   行列のスカラー倍（`def_matrix_scalar_multiple`）は `Matrix` の `•`（`(c • A) k l = c * A k l` が定義から `rfl`）である。
-- `complex_conjugate_of_product` は具体版が無く、mathlib の `star_mul'`（可換な `ℂ` での `\overline{zw} = \overline{z}\,\overline{w}`）を引く。
+- `complex_conjugate_of_product` の具体版 `complex_conjugate_of_product_eq`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）は `starRingEnd ℂ` の形なので、
+  `star` の形のこのファイルはまだ mathlib の `star_mul'`（可換な `ℂ` での `\overline{zw} = \overline{z}\,\overline{w}`）を引く（差し替えは状態台帳の残り）。
 - 人手の添字 `k, l ∈ {1, …, n}` は添字の型 `n` の元である（`DefinitionRealSymmetricComplexMatrix.lean` の注意）。
 
 必要十分版は `Ising2D/NecSuf/StarFixedScalarMultipleOfHermitian.lean`、
