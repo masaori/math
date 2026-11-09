@@ -13877,8 +13877,79 @@ A\cap(E\setminus F)
                     " について ", ref("claim_even_edge_tree_extension"),
                     " より偶辺集合 ", math(String.raw`A\subseteq E`), " が存在して",
                   ]),
-                  displayMath(String.raw`\rho(A)=A\cap(E\setminus F)=C\quad\bigl(\because\ \blkref{claim_even_edge_tree_extension}\bigr)`),
+                  displayMath(String.raw`\begin{aligned}
+\rho(A)&=A\cap(E\setminus F)&&\bigl(\because\ \rho\text{ の定義}\bigr)\\
+&=C&&\bigl(\because\ \blkref{claim_even_edge_tree_extension}\bigr)
+\end{aligned}`),
                   paragraph(["したがって、この写像は単射かつ全射である。"]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_set_count",
+        labels: [],
+        title: { text: "有限連結グラフの偶辺部分集合の個数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_set_count",
+              focus: {
+                id: "tools_claim_even_edge_set_count",
+                kind: "claim",
+                title: { text: "偶辺部分集合の個数は二の辺数引く頂点数足す一乗である" },
+                labels: ["claim_even_edge_set_count"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.finiteConnectedGraph_evenEdgeSet_count",
+                  "Ising2DLambda.NecSuf.Tools.evenEdgeSet_count",
+                  "Ising2DLambda.Tools.finiteConnectedGraph_evenEdgeSet_count_from_necSuf",
+                ],
+                verification: ["sagemath/check/even-edge-set-count"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " の空でない有限頂点集合 ",
+                    math(String.raw`V`), " と辺集合 ", math(String.raw`E`),
+                    " を持つ連結グラフ ", math(String.raw`G=(V,E)`), " を取る。",
+                    "全頂点で接続辺数が偶数である辺集合の全体を ",
+                    math(String.raw`\mathcal E(G):=\{A\subseteq E:\forall v\in V,\ |\{e\in A:v\in e\}|\equiv0\pmod2\}`),
+                    " とする。このとき ",
+                    math(String.raw`|\mathcal E(G)|=2^{|E|+1-|V|}`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_finite_connected_graph_has_spanning_tree"),
+                    " より全域木の辺集合 ", math(String.raw`F\subseteq E`),
+                    " を取る。", ref("claim_finite_tree_edge_count"),
+                    " より、以下の指数の等式が成り立つ。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|E|+1-|V|
+&=|E|+1-(|F|+1)
+&&\bigl(\because\ \blkref{claim_finite_tree_edge_count}\bigr)\\
+&=|E|-|F|\in\mathbb N
+&&\bigl(\because\ F\subseteq E\text{ と自然数の四則}\bigr)
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+|\mathcal E(G)|
+&=|\{C:C\subseteq E\setminus F\}|
+&&\bigl(\because\ \blkref{claim_even_edge_tree_complement_bijection}\bigr)\\
+&=2^{|E\setminus F|}
+&&\bigl(\because\ E\setminus F\text{ の部分集合の数}\bigr)\\
+&=2^{|E|-|F|}
+&&\bigl(\because\ F\subseteq E\text{ と有限集合の差の個数}\bigr)\\
+&=2^{|E|+1-|V|}
+&&\bigl(\because\ \blkref{claim_finite_tree_edge_count}\bigr)
+\end{aligned}`),
                 ],
               },
             },

@@ -124,6 +124,7 @@ export const ALL_LABELS = [
   "claim_even_edge_leaf_choice",
   "claim_even_edge_leaf_step_invariants",
   "claim_even_edge_processed_vertex_parity",
+  "claim_even_edge_set_count",
   "claim_even_edge_subset_root_parity",
   "claim_even_edge_subset_tree_complement_injective",
   "claim_even_edge_symmetric_difference",
