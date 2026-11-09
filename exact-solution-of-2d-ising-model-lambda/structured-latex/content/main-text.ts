@@ -12657,7 +12657,7 @@ d_A(o)&=\sum_{v\in V}d_A(v)-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ o
                     " にちょうど一辺を持つ。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \blkref{claim_even_edge_symmetric_difference}\bigr)\\
+d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集合の対称差の個数を二で割った余り}\bigr)\\
 &\equiv d_A(v)+1\pmod 2&&\bigl(\because\ v\in e\bigr)
 \end{aligned}`),
                   paragraph([
@@ -12666,6 +12666,81 @@ d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \blkref{claim_even
                     "一なら ", math(String.raw`A_1`), " だけが ",
                     math(String.raw`v`), " で偶数になる。",
                   ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_tree_leaf_induction",
+        labels: [],
+        title: { text: "木の葉を除いて根以外の偶数性を作る" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_tree_leaf_induction",
+              focus: {
+                id: "tools_claim_even_edge_tree_leaf_induction",
+                kind: "claim",
+                title: { text: "木外辺の選択から根以外で偶数の辺集合を作る" },
+                labels: ["claim_even_edge_tree_leaf_induction"],
+                habitat: "N",
+                verification: ["sagemath/check/even-edge-tree-leaf-induction"],
+                statement: [
+                  paragraph([
+                    "空でない有限頂点集合 ", math(String.raw`V`),
+                    " と、相異なる二頂点からなる辺の有限集合 ", math(String.raw`E`),
+                    " を持つ連結グラフ ", math(String.raw`G=(V,E)`),
+                    " の全域木の辺集合を ", math(String.raw`F\subset E`),
+                    " とし、根 ", math(String.raw`o\in V`), " を固定する。任意の ",
+                    math(String.raw`C\subset E\setminus F`), " に対し、",
+                    math(String.raw`A\cap(E\setminus F)=C`), " を満たし、",
+                    "根以外の各頂点に接する辺の本数が偶数である辺集合 ",
+                    math(String.raw`A\subset E`), " が存在する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "未処理の頂点集合を ", math(String.raw`U:=V`),
+                    "、選択済みの辺集合を ", math(String.raw`A:=C`), " とする。",
+                    "操作中は、", math(String.raw`U`),
+                    " 上のグラフ ", math(String.raw`(U,\{e\in F:e\subset U\})`),
+                    " が根を含む木であり、",
+                    "選択済みの木の辺は未処理の二頂点を結ばず、",
+                    "処理済みの頂点に接する ", math(String.raw`A`),
+                    " の辺数は偶数である、という条件を保つ。初期状態では明らかである。",
+                  ]),
+                  paragraph([
+                    math(String.raw`|U|>1`), " なら、誘導部分木の最長単純路の両端は葉であり、",
+                    "両端は異なるので少なくとも一方は根ではない。これを ",
+                    math(String.raw`v\in U\setminus\{o\}`), " とする。",
+                    "その葉から未処理の頂点へ伸びる唯一の木の辺を ",
+                    math(String.raw`e_v\in F`), " とする。",
+                    "この辺はまだ選択されていない。",
+                    ref("claim_even_edge_leaf_choice"), " により、",
+                    math(String.raw`e_v`), " の採否を選び、", math(String.raw`v`),
+                    " に接する辺数を偶数にする。", math(String.raw`v`),
+                    " を ", math(String.raw`U`), " から除く。",
+                  ]),
+                  paragraph([
+                    "相異なる残りの二頂点を結ぶ木の路では、葉は内部頂点になれない。",
+                    "従って木の葉を除いた誘導部分グラフは、根を含む連結な木である。",
+                    "新たに加えうる辺は ", math(String.raw`e_v`),
+                    " だけであり、先に処理した頂点には接しない。",
+                    "従って操作中の条件が保たれる。",
+                    "未処理の頂点は毎回一つ減るので、有限回で ",
+                    math(String.raw`U=\{o\}`), " となる。",
+                    "このとき根以外の頂点はすべて処理済みで、接続辺数は偶数である。",
+                    "加えた辺は木の辺だけなので、",
+                  ]),
+                  displayMath(String.raw`A\cap(E\setminus F)=C\quad(\because\ \text{木外辺の所属は操作中に変わらない})`),
                 ],
               },
             },

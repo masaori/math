@@ -124,6 +124,7 @@ export const ALL_LABELS = [
   "claim_even_edge_subset_root_parity",
   "claim_even_edge_subset_tree_complement_injective",
   "claim_even_edge_symmetric_difference",
+  "claim_even_edge_tree_leaf_induction",
   "claim_even_orbit_coloring",
   "claim_even_orbit_minimum_color",
   "claim_even_subgraph_spin_sum",
