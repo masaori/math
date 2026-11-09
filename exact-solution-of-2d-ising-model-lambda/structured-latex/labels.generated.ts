@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_adjacent_cell_corners_connected",
   "claim_adjacent_cells_ray_crossing_difference",
   "claim_admissible_direction_permutation_signs",
   "claim_admissible_direction_permutations",
