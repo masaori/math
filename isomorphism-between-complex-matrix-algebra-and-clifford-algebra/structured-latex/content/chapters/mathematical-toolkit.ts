@@ -8487,4 +8487,161 @@ c\in[b]_I&\iff b\equiv_I c
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_congruence_modulo_two_sided_ideal_is_compatible_with_multiplication",
+    kind: "claim",
+    title: { text: "両側イデアルを法とする合同は乗法と両立する" },
+    labels: ["claim_congruence_modulo_two_sided_ideal_is_compatible_with_multiplication"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a',b,b'`),
+        " について、",
+        math(String.raw`a\equiv_I a'`),
+        " かつ ",
+        math(String.raw`b\equiv_I b'`),
+        " ならば ",
+        math(String.raw`a\cdot_A b\equiv_I a'\cdot_A b'`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a,a',b,b'\in A`),
+        " を ",
+        math(String.raw`a\equiv_I a'`),
+        " かつ ",
+        math(String.raw`b\equiv_I b'`),
+        " を満たすようにとる。",
+        math(String.raw`x:=a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)`),
+        " と ",
+        math(String.raw`y:=b+_A\bigl((-1_{\mathbb{C}})\ast_A b'\bigr)`),
+        " と置く。合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x\in I`),
+        " かつ ",
+        math(String.raw`y\in I`),
+        " である。ℂ-線型空間についての定義・主張は ",
+        math(String.raw`U_{\mathrm{vec}}(A)=(A,+_A,\ast_A,0_A)`),
+        " に、単位元をもつ環についての定義は ",
+        math(String.raw`U_{\mathrm{ring}}(A)=(A,+_A,\cdot_A,0_A,1_A)`),
+        " に当てる（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。",
+        math(String.raw`p:=a'\cdot_A b`),
+        " と置く。乗法 ",
+        math(String.raw`\cdot_A`),
+        " は ",
+        math(String.raw`A\times A\to A`),
+        " の写像なので ",
+        math(String.raw`p\in A`),
+        " である。準備として、",
+        math(String.raw`(-1_{\mathbb{C}})\ast_A p`),
+        " と ",
+        math(String.raw`p`),
+        " の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((-1_{\mathbb{C}})\ast_A p\bigr)+_A p
+&=\bigl((-1_{\mathbb{C}})\ast_A p\bigr)+_A(1_{\mathbb{C}}\ast_A p)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)\ast_A p
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_A p
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=0_{\mathbb{C}}\ast_A p
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_congruence_modulo_two_sided_ideal}\right)\\
+&=0_A
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（ベクトルに}\ p\ \text{を当てる）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph([
+        "これを使って、",
+        math(String.raw`a\cdot_A b`),
+        " から ",
+        math(String.raw`a'\cdot_A b'`),
+        " を引いた元を ",
+        math(String.raw`x\cdot_A b`),
+        " と ",
+        math(String.raw`a'\cdot_A y`),
+        " の和で書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)
+&=\bigl((a\cdot_A b)+_A 0_A\bigr)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\Bigl((a\cdot_A b)+_A\Bigl(\bigl((-1_{\mathbb{C}})\ast_A p\bigr)+_A p\Bigr)\Bigr)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)
+&&\left(\because\ \text{上の準備の等式}\right)\\
+&=\Bigl(\Bigl((a\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A p\bigr)\Bigr)+_A p\Bigr)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\Bigl((a\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A p\bigr)\Bigr)+_A\Bigl(p+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\Bigl((a\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b)\bigr)\Bigr)+_A\Bigl((a'\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)\Bigr)
+&&\left(\because\ p\ \text{の定義}\right)\\
+&=\Bigl((a\cdot_A b)+_A\bigl(((-1_{\mathbb{C}})\ast_A a')\cdot_A b\bigr)\Bigr)+_A\Bigl((a'\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\Bigl((a\cdot_A b)+_A\bigl(((-1_{\mathbb{C}})\ast_A a')\cdot_A b\bigr)\Bigr)+_A\Bigl((a'\cdot_A b)+_A\bigl(a'\cdot_A((-1_{\mathbb{C}})\ast_A b')\bigr)\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\Bigl(\bigl(a+_A((-1_{\mathbb{C}})\ast_A a')\bigr)\cdot_A b\Bigr)+_A\Bigl((a'\cdot_A b)+_A\bigl(a'\cdot_A((-1_{\mathbb{C}})\ast_A b')\bigr)\Bigr)
+&&\left(\because\ \text{分配法則（和に右から掛ける側）。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(a+_A((-1_{\mathbb{C}})\ast_A a')\bigr)\cdot_A b\Bigr)+_A\Bigl(a'\cdot_A\bigl(b+_A((-1_{\mathbb{C}})\ast_A b')\bigr)\Bigr)
+&&\left(\because\ \text{分配法則（和に左から掛ける側）。}\blkref{def_unital_ring}\right)\\
+&=(x\cdot_A b)+_A(a'\cdot_A y)
+&&\left(\because\ x\ \text{と}\ y\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x\in I`),
+        " と ",
+        math(String.raw`b\in A`),
+        " なので、両側イデアルの四つ目の条件（",
+        math(String.raw`A`),
+        " の元を右から掛けても ",
+        math(String.raw`I`),
+        " に入る。",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x\cdot_A b\in I`),
+        " である。",
+        math(String.raw`a'\in A`),
+        " と ",
+        math(String.raw`y\in I`),
+        " なので、両側イデアルの三つ目の条件（",
+        math(String.raw`A`),
+        " の元を左から掛けても ",
+        math(String.raw`I`),
+        " に入る。",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`a'\cdot_A y\in I`),
+        " である。両側イデアルの二つ目の条件（加法で閉じている。",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`(x\cdot_A b)+_A(a'\cdot_A y)\in I`),
+        " である。上の等式により ",
+        math(String.raw`(a\cdot_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'\cdot_A b')\bigr)\in I`),
+        " であり、合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`a\cdot_A b\equiv_I a'\cdot_A b'`),
+        " である。",
+      ]),
+    ],
+  },
 ]);
