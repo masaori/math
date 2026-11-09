@@ -116,17 +116,41 @@ def induction_step(M, Id, D, A, n, mus, es, check):
         tP - tPn,
     ]
     chain(chain_n, f"{lab}: tr(Pň_μk) の鎖", check)
-    # 移項の 2 行
-    check(2 * tPn == tP, f"{lab}: 移項 2 tr(Pň) = tr(P)")
-    half = QQ(1) / 2
-    check(tPn == half * tP, f"{lab}: 移項 tr(Pň) = ½ tr(P)")
-    # 二場合
-    chain([(P * R(mk, 1)).trace(), tPn, half * tP], f"{lab}: e_k=1 の場合", check)
-    chain([(P * R(mk, 0)).trace(), PIminusn, tP - tPn, tP - half * tP, half * tP], f"{lab}: e_k=0 の場合", check)
-    # 最後の 6 行
-    chain([whole.trace(), (P * Rs[-1]).trace(), half * tP,
-           half * QQ(2) ** (M - (k - 1)), half * QQ(2) ** ((M - k) + 1), half * (QQ(2) ** (M - k) * 2), QQ(2) ** (M - k)],
+    # 準備 4（2_C と 2_C^{-1} の計算。2_C, 2_C^{-1} は成分の体の元）
+    F = tP.parent()
+    two = F(2)
+    one = F(1)
+    inv = one / two
+    chain([two, F(QQ(2)), F(QQ(1) + QQ(1)), F(QQ(1)) + F(QQ(1)), one + one], f"{lab}: 準備 4 2_C = 1_C + 1_C", check)
+    chain([inv * two, two * inv, one], f"{lab}: 準備 4 2_C^-1 2_C = 1_C", check)
+    for wname, w in (("tr(Pň)", tPn), ("tr(P)", tP)):
+        chain([two * w, (one + one) * w, one * w + one * w, w + w], f"{lab}: 準備 4 2_C w = w + w (w={wname})", check)
+        chain([w, one * w, (inv * two) * w, inv * (two * w)], f"{lab}: 準備 4 w = 2_C^-1(2_C w) (w={wname})", check)
+        chain([w, inv * (two * w), inv * (w + w), inv * w + inv * w], f"{lab}: 準備 4 w = 2_C^-1 w + 2_C^-1 w (w={wname})", check)
+    # tr(Pň_{μ_k}) = 2_C^{-1} tr(P) の 9 行
+    chain([tPn,
+           inv * (two * tPn),
+           inv * (tPn + tPn),
+           inv * (tPn + (tP - tPn)),
+           inv * (tPn + (tP + (-tPn))),
+           inv * (tPn + ((-tPn) + tP)),
+           inv * ((tPn + (-tPn)) + tP),
+           inv * (F(0) + tP),
+           inv * (tP + F(0)),
+           inv * tP], f"{lab}: tr(Pň) = 2_C^-1 tr(P) の鎖", check)
+    # 二場合（e_k = 1 の 2 行、e_k = 0 の 8 行）
+    chain([(P * R(mk, 1)).trace(), tPn, inv * tP], f"{lab}: e_k=1 の場合", check)
+    h = inv * tP
+    chain([(P * R(mk, 0)).trace(), PIminusn, tP - tPn, tP - h,
+           (h + h) - h, (h + h) + (-h), h + (h + (-h)), h + F(0), h], f"{lab}: e_k=0 の場合", check)
+    # 最後の 9 行（2^m は 2_C^m）
+    p_ = lambda m: two ** m
+    chain([whole.trace(), (P * Rs[-1]).trace(), inv * tP,
+           inv * p_(M - (k - 1)), inv * p_((M - k) + 1), inv * (p_(M - k) * two), inv * (two * p_(M - k)),
+           (inv * two) * p_(M - k), one * p_(M - k), p_(M - k)],
           f"{lab}: 最後の鎖", check)
+    # 否定の対照: 鎖から 2_C^{-1} を落とした tr(Pň) = tr(P) は成り立たない（tr(P) ≠ 0）
+    check(tPn != tP, f"{lab}: 対照 tr(Pň) ≠ tr(P)（2_C^-1 を落とすと崩れる）")
 
 
 def all_sequences(M):

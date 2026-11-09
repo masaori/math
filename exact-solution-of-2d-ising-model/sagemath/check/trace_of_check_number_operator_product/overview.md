@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 - ブロック: `evenEigen_004_claim_trace_of_check_number_operator_product`（相異なる μ_1, …, μ_k ∈ M̌ と e_1, …, e_k ∈ {0,1} について
   tr(R_{μ_1}^{(e_1)} ⋯ R_{μ_k}^{(e_k)}) = 2^{M_col−k}。R_μ^{(1)} := ň_μ、R_μ^{(0)} := I − ň_μ）
-- 範囲: 証明の全ての鎖（基底段階の 3 個の等号、帰納段階の準備 1・準備 2・準備 3、tr(Pň_{μ_k}) の鎖、移項の 2 行、二場合の鎖、最後の鎖）、
+- 範囲: 証明の全ての鎖（基底段階の 3 個の等号、帰納段階の準備 1・準備 2・準備 3、tr(Pň_{μ_k}) の鎖、準備 4、tr(Pň_{μ_k}) = 2_ℂ^{-1} tr(P) の鎖、二場合の鎖、最後の鎖）、
   帰納法の仮定 tr(P) = 2^{M_col−(k−1)}、鎖が引く二つの主張、主張そのもの。
 - 記号: σ(μ) := M_col + 1 − μ、D_μ := ψ̌_μ^†、A_μ := ψ̌_{σ(μ)}、n_μ := D_μA_μ（`def_check_number_operator` の ň_μ）。
 
@@ -25,16 +25,18 @@
 | 準備 2 の ψ̌P = Pψ̌ の鎖（k = 1 と k ≥ 2。`matrix_commuting_with_each_factor_commutes_with_finite_product`） | `induction_step` | 3 |
 | 準備 3 の 10 行（差の書き換え・分配・単位行列・符号の外出し・1 倍・−1 倍・`trace_basic_properties` (1)・ℂ の計算） | `induction_step` | 10 |
 | tr(Pň_{μ_k}) の 8 行（`def_check_number_operator`・`mat_mult_associative`・巡回性・準備 2・`check_number_operator_idempotent` (2)・準備 3） | `induction_step` | 8 |
-| 移項の 2 行 2 tr(Pň) = tr(P)、tr(Pň) = ½ tr(P) | `induction_step` | 2 |
-| 二場合（e_k = 1 の 2 行、e_k = 0 の 4 行） | `induction_step` | 6 |
-| 最後の 6 行 | `induction_step` | 6 |
+| 準備 4（2_ℂ = 1_ℂ + 1_ℂ の 4 行、2_ℂ^{-1}2_ℂ = 1_ℂ の 2 行。w = tr(Pň)、tr(P) のそれぞれで 2_ℂw = w + w・w = 2_ℂ^{-1}(2_ℂw)・w = 2_ℂ^{-1}w + 2_ℂ^{-1}w の各 3 行） | `induction_step` | 24 |
+| tr(Pň) = 2_ℂ^{-1} tr(P) の 9 行 | `induction_step` | 9 |
+| 二場合（e_k = 1 の 2 行、e_k = 0 の 8 行） | `induction_step` | 10 |
+| 最後の 9 行 | `induction_step` | 9 |
+| 否定の対照: 2_ℂ^{-1} を落とした tr(Pň) = tr(P) は成り立たない | `induction_step` | 1 |
 | 鎖が引く主張 `check_number_operator_idempotent` (2) A_μD_μ = I − ň_μ と `check_number_operators_commute` (1) の第 2 式 A_μň_ν = ň_νA_μ（μ ≠ ν） | `assumption_lines` | M_col ごとに M_col^2 件 |
 | 否定コントロール: 添字が重なる列（μ_1 = μ_2 = μ、e_1 = e_2 = 1）では準備 2 の可換性 ψ̌_{σ(μ)}ň_μ = ň_μψ̌_{σ(μ)} も tr(ň_μň_μ) = 2^{M_col−2} も外れる | `negative_controls` | M_col ごとに 2 × M_col 件 |
 
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
-| `check_induction_chains_jordan_wigner_model.sage` | 上の全ての鎖を、鎖が使う仮定を満たす模型（Jordan–Wigner のフェルミ演算子 c_μ。D_μ := c_μ^T、A_μ := c_μ）で、M_col = 2, 3, 4 の相異なる添字の全ての列（k = 1..M_col）と全ての e について `QQ` の行列で確かめる | **PASS** | 鎖の等号 33321 段、帰納法の仮定 722 列、仮定の主張 29 件、否定コントロール 18 件 |
-| `check_with_check_psi.sage` | 本文の ψ̌（`def_check_fermi` の式どおり）で、同じ関数で全ての鎖と、仮定の主張と、主張そのものを確かめる。ň_μ が O でも I でもないこと（等号が自明でないこと）も見る | **PASS** | 結合定数 3 組 × M_col = 2, 3 で 12354/12354 件（1 件が 1 個の等号か 1 つの主張か 1 つの否定コントロール） |
+| `check_induction_chains_jordan_wigner_model.sage` | 上の全ての鎖を、鎖が使う仮定を満たす模型（Jordan–Wigner のフェルミ演算子 c_μ。D_μ := c_μ^T、A_μ := c_μ）で、M_col = 2, 3, 4 の相異なる添字の全ての列（k = 1..M_col）と全ての e について `QQ` の行列で確かめる | **PASS** | 鎖の等号 61479 段、帰納法の仮定 722 列、仮定の主張 29 件、否定コントロール 18 件 |
+| `check_with_check_psi.sage` | 本文の ψ̌（`def_check_fermi` の式どおり）で、同じ関数で全ての鎖と、仮定の主張と、主張そのものを確かめる。ň_μ が O でも I でもないこと（等号が自明でないこと）も見る | **PASS** | 結合定数 3 組 × M_col = 2, 3 で 22884/22884 件（1 件が 1 個の等号か 1 つの主張か 1 つの否定コントロール） |
 
 ## 計算の帰属と範囲
 
@@ -56,6 +58,8 @@
 - 範囲外: 本物の ψ̌ の検算の M_col ≥ 4。M_col = 4 では σ の対が (1,4) と (2,3) の二組になり、r_1 と r_2 の平方根を両方含む体が要るうえ、
   `check_number_operator_idempotent` の overview が記すとおり ψ̌ を作るだけで重い。M_col = 4 の鎖は模型の検算が受け持つ。模型の検算の M_col ≥ 5 も範囲外。
   鎖が使う仮定（本物の ψ̌ の反交換関係）そのものは、M_col = 2..5 で `anticommutator_of_check_psi` の検算の「主張」の行が厳密に確かめている。
+
+- 2026-11-09: 帰納段階の「ℂ の四則」4 か所を準備 4 と体の公理 1 つずつの鎖に書き直したので、移項の 2 行・二場合・最後の鎖を新しい行に合わせ、準備 4 と否定の対照を足した（段数 33321 → 61479、本物の ψ̌ の件数 12354 → 22884）。
 
 ## 由来
 

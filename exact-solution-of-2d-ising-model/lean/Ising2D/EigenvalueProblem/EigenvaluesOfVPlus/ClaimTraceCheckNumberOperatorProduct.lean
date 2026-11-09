@@ -29,6 +29,7 @@
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.NecSuf.FiniteProductLeft
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
@@ -195,29 +196,88 @@ theorem trace_mul_nOp_chain (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν *
     _ = P.trace - (P * F.nOp ν).trace := F.trace_mul_one_sub_nOp_prep3 P ν
                                                                   -- 準備 3
 
-/-- **人手の帰納段階**の移項の 2 行: `2 tr(Pň_{μ_k}) = tr(P)`、`tr(Pň_{μ_k}) = ½ tr(P)`。 -/
-theorem trace_mul_nOp_eq_half (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν * P = P * F.ann ν) :
-    (P * F.nOp ν).trace = (1 / 2 : ℂ) * P.trace := by
-  have h := F.trace_mul_nOp_chain P ν hP
-  have h2 : 2 * (P * F.nOp ν).trace = P.trace := by linear_combination h   -- `ℂ` の四則
-  linear_combination h2 / 2                                                 -- `ℂ` の四則
+/-- **人手の準備 4** の第 1 の鎖（4 行）: `2_ℂ = (2_ℝ)_ℂ = (1_ℝ + 1_ℝ)_ℂ = (1_ℝ)_ℂ + (1_ℝ)_ℂ = 1_ℂ + 1_ℂ`。
+Lean の `(2 : ℂ)` が人手の `2_ℂ := (2_ℝ)_ℂ`、`((r : ℝ) : ℂ)` が `r_ℂ` である。 -/
+theorem two_eq_one_add_one_prep4 : (2 : ℂ) = 1 + 1 :=
+  calc (2 : ℂ)
+      = ((2 : ℝ) : ℂ) := (Complex.ofReal_ofNat 2).symm              -- `2_ℂ` の置き方
+    _ = ((1 + 1 : ℝ) : ℂ) := by rw [one_add_one_eq_two]                            -- `ℝ` で `1 + 1 = 2` を右辺から左辺へ
+    _ = ((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ) := (real_inclusion_add 1 1).symm
+                                                                      -- `real_inclusion_preserves_sum` を右辺から左辺へ
+    _ = 1 + 1 := by rw [Complex.ofReal_one]                           -- `inclusion_rr_to_cc` の略記 `1_ℂ = (1_ℝ)_ℂ` を 2 箇所へ
 
-/-- **人手の帰納段階**の二場合（`e_k = 1` の 2 行、`e_k = 0` の 4 行）: `tr(PR_{μ_k}^{(e_k)}) = ½ tr(P)`。 -/
+/-- **人手の準備 4** の第 2 の鎖（2 行）: `2_ℂ^{-1} 2_ℂ = 2_ℂ 2_ℂ^{-1} = 1_ℂ`。 -/
+theorem inv_two_mul_two_prep4 : (2 : ℂ)⁻¹ * 2 = 1 :=
+  calc (2 : ℂ)⁻¹ * 2
+      = 2 * (2 : ℂ)⁻¹ := mul_comm _ _                                -- `complex_numbers_form_a_field` の積の可換律
+    _ = 1 := mul_inv_cancel₀ two_ne_zero                              -- `complex_numbers_form_a_field` の乗法の逆元
+
+/-- **人手の準備 4** の第 3 の鎖（3 行）: `2_ℂ w = (1_ℂ + 1_ℂ) w = 1_ℂ w + 1_ℂ w = w + w`。 -/
+theorem two_mul_eq_add_prep4 (w : ℂ) : 2 * w = w + w :=
+  calc 2 * w
+      = (1 + 1) * w := by rw [← two_eq_one_add_one_prep4]           -- 上の `2_ℂ = 1_ℂ + 1_ℂ`
+    _ = 1 * w + 1 * w := add_mul _ _ _                                -- `complex_numbers_form_a_field` の分配律
+    _ = w + w := by rw [one_mul]                                      -- `complex_numbers_form_a_field` の積の単位元を 2 箇所へ
+
+/-- **人手の準備 4** の第 4 の鎖（3 行）: `w = 1_ℂ w = (2_ℂ^{-1} 2_ℂ) w = 2_ℂ^{-1}(2_ℂ w)`。 -/
+theorem eq_inv_two_mul_two_mul_prep4 (w : ℂ) : w = (2 : ℂ)⁻¹ * (2 * w) :=
+  calc w
+      = 1 * w := (one_mul w).symm                                     -- `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
+    _ = ((2 : ℂ)⁻¹ * 2) * w := by rw [inv_two_mul_two_prep4]         -- 上の `2_ℂ^{-1} 2_ℂ = 1_ℂ` を右辺から左辺へ
+    _ = (2 : ℂ)⁻¹ * (2 * w) := mul_assoc _ _ _                        -- `complex_numbers_form_a_field` の積の結合律
+
+/-- **人手の準備 4** の第 5 の鎖（3 行）: `w = 2_ℂ^{-1}(2_ℂ w) = 2_ℂ^{-1}(w + w) = 2_ℂ^{-1} w + 2_ℂ^{-1} w`。 -/
+theorem eq_inv_two_mul_add_inv_two_mul_prep4 (w : ℂ) : w = (2 : ℂ)⁻¹ * w + (2 : ℂ)⁻¹ * w :=
+  calc w
+      = (2 : ℂ)⁻¹ * (2 * w) := eq_inv_two_mul_two_mul_prep4 w        -- 直前の鎖
+    _ = (2 : ℂ)⁻¹ * (w + w) := by rw [two_mul_eq_add_prep4]          -- 上の `2_ℂ w = w + w`
+    _ = (2 : ℂ)⁻¹ * w + (2 : ℂ)⁻¹ * w := mul_add _ _ _                -- `complex_numbers_form_a_field` の分配律
+
+/-- **人手の帰納段階**の `tr(Pň_{μ_k}) = 2_ℂ^{-1} tr(P)` の鎖（9 行）。`h` は直前の鎖 `tr(Pň_{μ_k}) = tr(P) - tr(Pň_{μ_k})`。 -/
+theorem trace_mul_nOp_eq_half (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν * P = P * F.ann ν) :
+    (P * F.nOp ν).trace = (2 : ℂ)⁻¹ * P.trace := by
+  have h := F.trace_mul_nOp_chain P ν hP
+  calc (P * F.nOp ν).trace
+      = (2 : ℂ)⁻¹ * (2 * (P * F.nOp ν).trace) := eq_inv_two_mul_two_mul_prep4 _
+                                                                      -- 準備 4 の `w = 2_ℂ^{-1}(2_ℂ w)`
+    _ = (2 : ℂ)⁻¹ * ((P * F.nOp ν).trace + (P * F.nOp ν).trace) := by rw [two_mul_eq_add_prep4]
+                                                                      -- 準備 4 の `2_ℂ w = w + w`
+    _ = (2 : ℂ)⁻¹ * ((P * F.nOp ν).trace + (P.trace - (P * F.nOp ν).trace)) := by rw [← h]
+                                                                      -- 直前の鎖を 2 つ目の `tr(Pň_{μ_k})` へ
+    _ = (2 : ℂ)⁻¹ * ((P * F.nOp ν).trace + (P.trace + (-(P * F.nOp ν).trace))) := by
+          rw [sub_eq_add_neg]                                         -- `def_complex_difference`
+    _ = (2 : ℂ)⁻¹ * ((P * F.nOp ν).trace + ((-(P * F.nOp ν).trace) + P.trace)) := by
+          rw [add_comm P.trace]                                       -- `complex_numbers_form_a_field` の和の可換律
+    _ = (2 : ℂ)⁻¹ * (((P * F.nOp ν).trace + (-(P * F.nOp ν).trace)) + P.trace) := by
+          rw [add_assoc]                                              -- `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+    _ = (2 : ℂ)⁻¹ * (0 + P.trace) := by rw [add_neg_cancel]          -- `complex_numbers_form_a_field` の加法逆元
+    _ = (2 : ℂ)⁻¹ * (P.trace + 0) := by rw [add_comm (0 : ℂ)]        -- `complex_numbers_form_a_field` の和の可換律
+    _ = (2 : ℂ)⁻¹ * P.trace := by rw [add_zero]                      -- `complex_numbers_form_a_field` の零元
+
+/-- **人手の帰納段階**の二場合（`e_k = 1` の 2 行、`e_k = 0` の 8 行）: `tr(PR_{μ_k}^{(e_k)}) = 2_ℂ^{-1} tr(P)`。 -/
 theorem trace_mul_projFactor_eq_half (T : Finset (CheckIdx M)) (P : TensorPow M) (ν : CheckIdx M)
     (hP : F.ann ν * P = P * F.ann ν) :
-    (P * NecSuf.projFactor F.nOp T ν).trace = (1 / 2 : ℂ) * P.trace := by
+    (P * NecSuf.projFactor F.nOp T ν).trace = (2 : ℂ)⁻¹ * P.trace := by
   by_cases hν : ν ∈ T
   · calc (P * NecSuf.projFactor F.nOp T ν).trace
         = (P * F.nOp ν).trace := by rw [NecSuf.projFactor_of_mem hν]   -- `R_{μ_k}^{(1)}` の定義（主張）
-      _ = (1 / 2 : ℂ) * P.trace := F.trace_mul_nOp_eq_half P ν hP       -- 直前の鎖
+      _ = (2 : ℂ)⁻¹ * P.trace := F.trace_mul_nOp_eq_half P ν hP         -- 直前の鎖
   · calc (P * NecSuf.projFactor F.nOp T ν).trace
         = (P * (1 - F.nOp ν)).trace := by rw [NecSuf.projFactor_of_notMem hν]
                                                                        -- `R_{μ_k}^{(0)}` の定義（主張）
       _ = P.trace - (P * F.nOp ν).trace := F.trace_mul_one_sub_nOp_prep3 P ν
                                                                        -- 準備 3
-      _ = P.trace - (1 / 2 : ℂ) * P.trace := by rw [F.trace_mul_nOp_eq_half P ν hP]
+      _ = P.trace - (2 : ℂ)⁻¹ * P.trace := by rw [F.trace_mul_nOp_eq_half P ν hP]
                                                                        -- 直前の鎖
-      _ = (1 / 2 : ℂ) * P.trace := by ring                             -- `ℂ` の四則
+      _ = ((2 : ℂ)⁻¹ * P.trace + (2 : ℂ)⁻¹ * P.trace) - (2 : ℂ)⁻¹ * P.trace := by
+          rw [← eq_inv_two_mul_add_inv_two_mul_prep4 P.trace]
+                                                                       -- 準備 4 の `w = 2_ℂ^{-1} w + 2_ℂ^{-1} w` を 1 つ目の `tr(P)` へ
+      _ = ((2 : ℂ)⁻¹ * P.trace + (2 : ℂ)⁻¹ * P.trace) + (-((2 : ℂ)⁻¹ * P.trace)) := sub_eq_add_neg _ _
+                                                                       -- `def_complex_difference`
+      _ = (2 : ℂ)⁻¹ * P.trace + ((2 : ℂ)⁻¹ * P.trace + (-((2 : ℂ)⁻¹ * P.trace))) := add_assoc _ _ _
+                                                                       -- `complex_numbers_form_a_field` の和の結合律
+      _ = (2 : ℂ)⁻¹ * P.trace + 0 := by rw [add_neg_cancel]           -- `complex_numbers_form_a_field` の加法逆元
+      _ = (2 : ℂ)⁻¹ * P.trace := add_zero _                            -- `complex_numbers_form_a_field` の零元
 
 /-- **原文 `trace_of_check_number_operator_product`**（`k ≥ 1`。人手の帰納法と 1 対 1）:
 相異なる `μ_1, …, μ_k ∈ 𝓜̌` と `e_1, …, e_k ∈ {0,1}` について `tr(∏_{j=1}^{k} R_{μ_j}^{(e_j)}) = 2^{M_col-k}`。
@@ -237,16 +297,22 @@ theorem trace_projFactor_finProdLeft (T : Finset (CheckIdx M)) :
                                                                 -- 準備 1: `def_finite_product_of_matrices`
       _ = (1 * NecSuf.projFactor F.nOp T (μ 0)).trace := by rw [identity_matrix_mul_tensorPow]
                                                                 -- 準備 1: `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
-      _ = (1 / 2 : ℂ) * (1 : TensorPow M).trace := F.trace_mul_projFactor_eq_half T 1 (μ 0) hP
+      _ = (2 : ℂ)⁻¹ * (1 : TensorPow M).trace := F.trace_mul_projFactor_eq_half T 1 (μ 0) hP
                                                                 -- 直前の二場合
-      _ = (1 / 2 : ℂ) * (2 : ℂ) ^ (M - 0) := by rw [trace_identity_base_case]
+      _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ (M - 0) := by rw [trace_identity_base_case]
                                                                 -- 帰納法の仮定（`k = 0`）
-      _ = (1 / 2 : ℂ) * (2 : ℂ) ^ ((M - (0 + 1)) + 1) := by
+      _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ ((M - (0 + 1)) + 1) := by
           rw [show M - 0 = (M - (0 + 1)) + 1 by omega]   -- `M_col - (k - 1) = (M_col - k) + 1`
-      _ = (1 / 2 : ℂ) * ((2 : ℂ) ^ (M - (0 + 1)) * 2) := by
+      _ = (2 : ℂ)⁻¹ * ((2 : ℂ) ^ (M - (0 + 1)) * 2) := by
           rw [pow_succ]
                                                                 -- `def_power_of_complex_number`（`m → M_col - k`）
-      _ = (2 : ℂ) ^ (M - (0 + 1)) := by ring                    -- `ℂ` の四則
+      _ = (2 : ℂ)⁻¹ * (2 * (2 : ℂ) ^ (M - (0 + 1))) := by rw [mul_comm ((2 : ℂ) ^ (M - (0 + 1)))]
+                                                                -- `complex_numbers_form_a_field` の積の可換律
+      _ = ((2 : ℂ)⁻¹ * 2) * (2 : ℂ) ^ (M - (0 + 1)) := (mul_assoc _ _ _).symm
+                                                                -- `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
+      _ = 1 * (2 : ℂ) ^ (M - (0 + 1)) := by rw [inv_two_mul_two_prep4]
+                                                                -- 準備 4 の `2_ℂ^{-1} 2_ℂ = 1_ℂ`
+      _ = (2 : ℂ) ^ (M - (0 + 1)) := one_mul _                    -- `complex_numbers_form_a_field` の積の単位元
   | r + 1, μ, hμ => by
     have hle : r + 1 + 1 ≤ M := by
       simpa [CheckIdx.card] using Fintype.card_le_of_injective μ hμ   -- `k ≤ M_col`
@@ -261,15 +327,21 @@ theorem trace_projFactor_finProdLeft (T : Finset (CheckIdx M)) :
         = (NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (μ (Fin.castSucc j)))
             * NecSuf.projFactor F.nOp T (μ (Fin.last (r + 1)))).trace := by rw [NecSuf.finProdLeft_succ]
                                                                 -- 準備 1: `def_finite_product_of_matrices`（`r → k - 1`）
-      _ = (1 / 2 : ℂ) * (NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (μ (Fin.castSucc j)))).trace :=
+      _ = (2 : ℂ)⁻¹ * (NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (μ (Fin.castSucc j)))).trace :=
           F.trace_mul_projFactor_eq_half T _ _ hP               -- 直前の二場合
-      _ = (1 / 2 : ℂ) * (2 : ℂ) ^ (M - (r + 1)) := by rw [hIH] -- 帰納法の仮定
-      _ = (1 / 2 : ℂ) * (2 : ℂ) ^ ((M - (r + 1 + 1)) + 1) := by
+      _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ (M - (r + 1)) := by rw [hIH] -- 帰納法の仮定
+      _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ ((M - (r + 1 + 1)) + 1) := by
           rw [show M - (r + 1) = (M - (r + 1 + 1)) + 1 by omega]   -- `M_col - (k - 1) = (M_col - k) + 1`
-      _ = (1 / 2 : ℂ) * ((2 : ℂ) ^ (M - (r + 1 + 1)) * 2) := by
+      _ = (2 : ℂ)⁻¹ * ((2 : ℂ) ^ (M - (r + 1 + 1)) * 2) := by
           rw [pow_succ]
                                                                 -- `def_power_of_complex_number`（`m → M_col - k`）
-      _ = (2 : ℂ) ^ (M - (r + 1 + 1)) := by ring                -- `ℂ` の四則
+      _ = (2 : ℂ)⁻¹ * (2 * (2 : ℂ) ^ (M - (r + 1 + 1))) := by rw [mul_comm ((2 : ℂ) ^ (M - (r + 1 + 1)))]
+                                                                -- `complex_numbers_form_a_field` の積の可換律
+      _ = ((2 : ℂ)⁻¹ * 2) * (2 : ℂ) ^ (M - (r + 1 + 1)) := (mul_assoc _ _ _).symm
+                                                                -- `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
+      _ = 1 * (2 : ℂ) ^ (M - (r + 1 + 1)) := by rw [inv_two_mul_two_prep4]
+                                                                -- 準備 4 の `2_ℂ^{-1} 2_ℂ = 1_ℂ`
+      _ = (2 : ℂ) ^ (M - (r + 1 + 1)) := one_mul _                    -- `complex_numbers_form_a_field` の積の単位元
 
 /-- **原文の「とくに」**: `tr(ň_μ) = 2^{M-1}`。 -/
 theorem trace_nOp (i : CheckIdx M) : (F.nOp i).trace = ((2 ^ (M - 1) : ℕ) : ℂ) := by

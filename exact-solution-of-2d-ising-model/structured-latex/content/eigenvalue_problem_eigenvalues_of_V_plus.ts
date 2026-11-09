@@ -2437,7 +2437,13 @@ X\,\check{n}_\nu
         math(String.raw`\prod_{j=1}^{k} R_{\mu_j}^{(e_j)}`),
         "、右辺は ",
         ref("def_power_of_complex_number"),
-        " の冪である（",
+        " の冪で、底の ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）である（",
         math(String.raw`\mu_1,\dots,\mu_k`),
         " は ",
         math(String.raw`\check{\mathcal{M}}`),
@@ -2707,8 +2713,83 @@ X\,\check{n}_\nu
 \end{aligned}`,
       ),
       paragraph([
+        "準備 4（",
+        math(String.raw`2_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`2_{\mathbb{C}}^{-1}`),
+        " の計算）。",
+        math(String.raw`2_{\mathbb{C}} = (2, 0) \neq 0_{\mathbb{C}}`),
+        " なので、",
+        ref("real_inclusion_of_one_half_is_inverse_of_two"),
+        " の前置きのとおり ",
+        math(String.raw`2_{\mathbb{C}}`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の逆元 ",
+        math(String.raw`2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        "（",
+        math(String.raw`2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1} = 1_{\mathbb{C}}`),
+        "）をもつ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2_{\mathbb{C}}
+&= (2_{\mathbb{R}})_{\mathbb{C}}
+   \quad (\because 2_{\mathbb{C}}\ \text{の置き方}) \\
+&= (1_{\mathbb{R}} + 1_{\mathbb{R}})_{\mathbb{C}}
+   \quad (\because \mathbb{R}\ \text{で}\ 1 + 1 = 2\ \text{を右辺から左辺へ}) \\
+&= (1_{\mathbb{R}})_{\mathbb{C}} + (1_{\mathbb{R}})_{\mathbb{C}}
+   \quad \left(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1_{\mathbb{R}},\ b \to 1_{\mathbb{R}})\ \text{を右辺から左辺へ}\right) \\
+&= 1_{\mathbb{C}} + 1_{\mathbb{C}}
+   \quad (\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = (1_{\mathbb{R}})_{\mathbb{C}}\ \text{を 2 箇所へ})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}}
+&= 2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= 1_{\mathbb{C}}
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`w \in \mathbb{C}`), " について"]),
+      displayMath(
+        String.raw`\begin{aligned}
+2_{\mathbb{C}}\,w
+&= \left(1_{\mathbb{C}} + 1_{\mathbb{C}}\right)w
+   \quad (\because \text{上の}\ 2_{\mathbb{C}} = 1_{\mathbb{C}} + 1_{\mathbb{C}}) \\
+&= 1_{\mathbb{C}}\,w + 1_{\mathbb{C}}\,w
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律}) \\
+&= w + w
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+w
+&= 1_{\mathbb{C}}\,w
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}) \\
+&= \left(2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}}\right)w
+   \quad (\because \text{上の}\ 2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}} = 1_{\mathbb{C}}\ \text{を右辺から左辺へ}) \\
+&= 2_{\mathbb{C}}^{-1}\left(2_{\mathbb{C}}\,w\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+w
+&= 2_{\mathbb{C}}^{-1}\left(2_{\mathbb{C}}\,w\right)
+   \quad (\because \text{直前の鎖}) \\
+&= 2_{\mathbb{C}}^{-1}\left(w + w\right)
+   \quad (\because \text{上の}\ 2_{\mathbb{C}}\,w = w + w) \\
+&= 2_{\mathbb{C}}^{-1}w + 2_{\mathbb{C}}^{-1}w
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})
+\end{aligned}`,
+      ),
+      paragraph([
         "まず ",
-        math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k}) = \tfrac12\,\mathrm{tr}(P)`),
+        math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k}) = 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)`),
         " を示す。",
       ]),
       displayMath(
@@ -2732,15 +2813,32 @@ X\,\check{n}_\nu
    \quad (\because \text{準備 3})
 \end{aligned}`,
       ),
-      paragraph(["直前の鎖の両辺に ", math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k})`), " を足し、2 で割ると"]),
+      paragraph([
+        "直前の鎖の等式 ",
+        math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k}) = \mathrm{tr}(P) - \mathrm{tr}(P\check{n}_{\mu_k})`),
+        " を使うと",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
-2\,\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
-&= \mathrm{tr}(P)
-   \quad (\because \mathbb{C}\ \text{の四則}) \\
 \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
-&= \tfrac12\,\mathrm{tr}(P)
-   \quad (\because \mathbb{C}\ \text{の四則})
+&= 2_{\mathbb{C}}^{-1}\left(2_{\mathbb{C}}\,\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)
+   \quad (\because \text{準備 4 の}\ w = 2_{\mathbb{C}}^{-1}(2_{\mathbb{C}}\,w)\ (w \to \mathrm{tr}(P\check{n}_{\mu_k}))) \\
+&= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)
+   \quad (\because \text{準備 4 の}\ 2_{\mathbb{C}}\,w = w + w) \\
+&= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \left(\mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)\right)
+   \quad (\because \text{直前の鎖を 2 つ目の}\ \mathrm{tr}(P\check{n}_{\mu_k})\ \text{へ}) \\
+&= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \left(\mathrm{tr}(P) + \left(-\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)\right)\right)
+   \quad (\because\ \blkref{def_complex_difference}) \\
+&= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \left(\left(-\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right) + \mathrm{tr}(P)\right)\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律}) \\
+&= 2_{\mathbb{C}}^{-1}\left(\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \left(-\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)\right) + \mathrm{tr}(P)\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ}) \\
+&= 2_{\mathbb{C}}^{-1}\left(0_{\mathbb{C}} + \mathrm{tr}(P)\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元}) \\
+&= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}(P) + 0_{\mathbb{C}}\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律}) \\
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})
 \end{aligned}`,
       ),
       paragraph([
@@ -2757,17 +2855,25 @@ X\,\check{n}_\nu
 \mathrm{tr}\!\left(P R_{\mu_k}^{(1)}\right)
 &= \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
    \quad (\because R_{\mu_k}^{(1)}\ \text{の定義（主張）}) \\
-&= \tfrac12\,\mathrm{tr}(P)
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
    \quad (\because \text{直前の鎖}), \\
 \mathrm{tr}\!\left(P R_{\mu_k}^{(0)}\right)
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_k}\right)\right)
    \quad (\because R_{\mu_k}^{(0)}\ \text{の定義（主張）}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
    \quad (\because \text{準備 3}) \\
-&= \mathrm{tr}(P) - \tfrac12\,\mathrm{tr}(P)
+&= \mathrm{tr}(P) - 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
    \quad (\because \text{直前の鎖}) \\
-&= \tfrac12\,\mathrm{tr}(P)
-   \quad (\because \mathbb{C}\ \text{の四則})
+&= \left(2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)\right) - 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
+   \quad (\because \text{準備 4 の}\ w = 2_{\mathbb{C}}^{-1}w + 2_{\mathbb{C}}^{-1}w\ (w \to \mathrm{tr}(P))\ \text{を 1 つ目の}\ \mathrm{tr}(P)\ \text{へ}) \\
+&= \left(2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)\right) + \left(-2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)\right)
+   \quad (\because\ \blkref{def_complex_difference}) \\
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + \left(2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + \left(-2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)\right)\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律}) \\
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + 0_{\mathbb{C}}
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元}) \\
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})
 \end{aligned}`,
       ),
       paragraph(["したがって、いずれの場合も"]),
@@ -2776,16 +2882,22 @@ X\,\check{n}_\nu
 \mathrm{tr}\!\left(\prod_{j=1}^{k} R_{\mu_j}^{(e_j)}\right)
 &= \mathrm{tr}\!\left(P R_{\mu_k}^{(e_k)}\right)
    \quad (\because \text{準備 1}) \\
-&= \tfrac12\,\mathrm{tr}(P)
+&= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
    \quad (\because \text{直前の二場合}) \\
-&= \tfrac12\cdot 2^{M_{\mathrm{col}}-(k-1)}
+&= 2_{\mathbb{C}}^{-1}\,2^{M_{\mathrm{col}}-(k-1)}
    \quad (\because \text{帰納法の仮定}) \\
-&= \tfrac12\cdot 2^{(M_{\mathrm{col}}-k)+1}
+&= 2_{\mathbb{C}}^{-1}\,2^{(M_{\mathrm{col}}-k)+1}
    \quad (\because \mathbb{Z}\ \text{の計算}\ M_{\mathrm{col}}-(k-1) = (M_{\mathrm{col}}-k)+1) \\
-&= \tfrac12\cdot \left(2^{M_{\mathrm{col}}-k}\cdot 2\right)
-   \quad \left(\because\ \blkref{def_power_of_complex_number}\ (z \to 2,\ m \to M_{\mathrm{col}}-k)\right) \\
+&= 2_{\mathbb{C}}^{-1}\left(2^{M_{\mathrm{col}}-k}\,2_{\mathbb{C}}\right)
+   \quad \left(\because\ \blkref{def_power_of_complex_number}\ (z \to 2_{\mathbb{C}},\ m \to M_{\mathrm{col}}-k)\right) \\
+&= 2_{\mathbb{C}}^{-1}\left(2_{\mathbb{C}}\,2^{M_{\mathrm{col}}-k}\right)
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= \left(2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}}\right)2^{M_{\mathrm{col}}-k}
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}) \\
+&= 1_{\mathbb{C}}\,2^{M_{\mathrm{col}}-k}
+   \quad (\because \text{準備 4 の}\ 2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}} = 1_{\mathbb{C}}) \\
 &= 2^{M_{\mathrm{col}}-k}
-   \quad (\because \mathbb{C}\ \text{の四則})
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
 \end{aligned}`,
       ),
       paragraph(["で、", math(String.raw`k`), " で主張が成り立つ。"]),
@@ -2797,6 +2909,7 @@ X\,\check{n}_\nu
         "009 章と違い、因子として ň_μ と I − ň_μ の混在を許す形で述べてある。どちらの因子でも tr(R_μ P) = tr(P)/2 が成り立つので帰納法は 1 段で済み、check_joint_eigenspace_decomposition の tr(Q̌_ε) = 1 を、∏(I − ň) の部分集合展開と二項定理を経ずに k = M の場合として直接得られる（docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 1 に対応。Lean 側の Ising2D.Abstract.two_pow_smul_tau_projOn が同じ構造である）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（ň のみの積について {1,…,M} の全部分集合、残差 ≤ 7.1e-15）。因子が混在する場合は check_02 の tr(Q̌_ε) = 1（k = M、残差 ≤ 1.1e-15）が該当する。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: 証明の名前だけの根拠を、1 行 1 主張のラベル参照の鎖に直した。最初の因子 R_{μ_1} を分けて残りの積 P と可換性を使っていた帰納法を、def_finite_product_of_matrices の左から掛ける形に合わせて最後の因子 R_{μ_k} を分ける形にした（準備 1。k = 1 では P := I）。「ψ̌ は各 ň_{μ_j} と可換で I も任意の行列と可換だから R_{μ_j}^{(e_j)} とも、したがって P とも可換」の散文を、単位行列との積の 2 行・e_j ごとの 3 行（check_number_operators_commute (1)、commuting_with_difference）・matrix_commuting_with_each_factor_commutes_with_finite_product の鎖にした（準備 2。最後の因子を分けたので ψ̌_{M_col+1-μ_k} と P の可換性だけで済み、ň と P の可換性は使わない）。「分配則とトレースの線型性」2 か所を準備 3 の 10 行（差の書き換え・分配・単位行列・符号の外出し・1 倍・−1 倍・trace_basic_properties (1)・ℂ の計算）にし、巡回性の行の前後の結合律を mat_mult_associative の行に分けた。基底段階の tr(I) = 2^{M_col} を trace_basic_properties (3) からの 3 行にし、主張に積が def_finite_product_of_matrices の有限積であること・右辺の冪・k ≤ M_col を書いた。末尾の「積の順序に依らないので、どの因子を μ_1 の位置に置いてもよい」の段落は、帰納法が全ての添字の列について示すので要らなくなり、外した。主張は不変。Lean の具体版は Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft（ClaimTraceCheckNumberOperatorProduct.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_47。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 帰納段階の名前だけの根拠「ℂ の四則」4 か所（移項の 2 行、e_k = 0 の最後の行、最後の鎖の最後の行）を、準備 4（2_C = 1_C + 1_C、2_C^{-1}2_C = 1_C、2_C w = w + w、w = 2_C^{-1}(2_C w)、w = 2_C^{-1}w + 2_C^{-1}w）と ℂ の体の等式 1 つずつの鎖にした。「両辺に足して 2 で割る」の 2 行は tr(Pň) から始まる 9 行の鎖にした。½ を 2_C^{-1} と書き、主張の右辺の冪の底が 2_C であることを主張に書いた。値と主張は不変。基底段階の「1_C を 2^{M_col} 個足した和」は別に扱う。",
       ],
     },
   },

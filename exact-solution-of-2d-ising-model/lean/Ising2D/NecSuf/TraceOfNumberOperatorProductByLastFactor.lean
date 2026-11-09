@@ -16,7 +16,8 @@
 | 準備 2 の `e_j` ごとの鎖 `ann_mul_projFactor_prep2`（各 3 行） | `ann_mul_projFactor`（同じ並び） |
 | 準備 3 `trace_mul_one_sub_nOp_prep3`（10 行） | `tau_mul_one_sub_num`（同じ 10 行） |
 | `tr(Pň_{μ_k})` の 8 行 `trace_mul_nOp_chain` | `tau_mul_num_chain`（同じ 8 行） |
-| 移項の 2 行 `trace_mul_nOp_eq_half` | `tau_mul_num_eq_half` |
+| 準備 4 の第 3〜5 の鎖 `two_mul_eq_add_prep4`・`eq_inv_two_mul_two_mul_prep4`・`eq_inv_two_mul_add_inv_two_mul_prep4` | `two_mul_eq_add_prep4`・`eq_half_mul_two_mul_prep4`・`eq_half_mul_add_half_mul_prep4`（第 1・第 2 の鎖は `K` の数字 `2` の定義と仮定 `hhalf`） |
+| `tr(Pň_{μ_k}) = 2_ℂ^{-1} tr(P)` の 9 行 `trace_mul_nOp_eq_half` | `tau_mul_num_eq_half`（同じ 9 行） |
 | 二場合 `trace_mul_projFactor_eq_half` | `tau_mul_projFactor_eq_half` |
 | 主張 `trace_projFactor_finProdLeft`（2 つの節） | `tau_finProdLeft_projFactor`（同じ 2 つの節） |
 
@@ -30,8 +31,8 @@
   `i ≠ j` で `a_i n_j = n_j a_i`（`hcomm`。`check_number_operators_commute` (1) の第 2 式）だけである。
   `c_i` と `n_j` の可換性（(1) の第 1 式）も、`ň` どうしの可換性（(2)）も使わない（最後の因子を分けたので、`P` の右に `a_k` を通すだけで済む）。
   反交換関係そのもの（`c_i a_i + a_i c_i = 1`）も、`hac` の形でしか使わない。
-* 係数 `K` は環（`Ring K`）で、`half * 2 = 1` を満たす元 `half`（人手の `1/2`）があればよい。体であることも、積の可換性も使わない。
-  `half` は移項の段（`τ(Pn) = τ(P) - τ(Pn)` から `τ(Pn)` を決める段）と最後の `half (2^m 2) = 2^m` に要る。下の `example` は、
+* 係数 `K` は環（`Ring K`）で、`half * 2 = 1` を満たす元 `half`（人手の `2_ℂ^{-1}`）があればよい。体であることも、積の可換性も使わない。
+  `half` は `τ(Pn) = τ(P) - τ(Pn)` から `τ(Pn)` を決める段、`e_k = 0` の段と、最後の `half (2^m 2) = 2^m` に要る。最後の段の積の可換律は、`2` とその冪 `2^m` の可換性だけで足りる。下の `example` は、
   `K = ZMod 2` では `x = t - x` を満たす `x` が `t = 0` で 2 つあり、この段が `τ(Pn)` を決めないことを確かめる（主張そのものの反例ではない）。
 * `hcomm` は準備 2 の `e_j` ごとの鎖の 2 行目（`ann_mul_projFactor`）が引く。最後の因子 `a_k` を前の因子の積 `P` の右へ通すのに使い、
   これが無いと `τ(Pn_k)` の 8 行の 5 行目が書けない。`μ` の単射性は、`hcomm` の前提 `i ≠ j` を前の因子ごとに満たすために要る
@@ -111,20 +112,52 @@ theorem tau_mul_num_chain (τ : A → K) (hlin : ∀ (α β : K) (x y : A), τ (
     _ = τ (P * (1 - num c a k)) := by rw [hac]                       -- `hac`
     _ = τ P - τ (P * num c a k) := tau_mul_one_sub_num τ hlin P _    -- 準備 3
 
+/-- 準備 4 の第 3 の鎖（3 行）: `2 w = (1 + 1) w = 1 w + 1 w = w + w`。具体版の第 1 の鎖 `2_ℂ = 1_ℂ + 1_ℂ`（`ℝ` からの包含を通る 4 行）は、
+`K` では数字 `2` の定義 `1 + 1 = 2` そのものである。 -/
+theorem two_mul_eq_add_prep4 (w : K) : 2 * w = w + w :=
+  calc 2 * w
+      = (1 + 1) * w := by rw [one_add_one_eq_two]                   -- `2 = 1 + 1`
+    _ = 1 * w + 1 * w := add_mul _ _ _                                -- 分配律
+    _ = w + w := by rw [one_mul]                                      -- 積の単位元を 2 箇所へ
+
+/-- 準備 4 の第 4 の鎖（3 行）: `w = 1 w = (half 2) w = half (2 w)`。具体版の第 2 の鎖 `2_ℂ^{-1} 2_ℂ = 1_ℂ`（可換律と逆元）は仮定 `hhalf` である。 -/
+theorem eq_half_mul_two_mul_prep4 (half : K) (hhalf : half * 2 = 1) (w : K) : w = half * (2 * w) :=
+  calc w
+      = 1 * w := (one_mul w).symm                                     -- 積の単位元を右辺から左辺へ
+    _ = (half * 2) * w := by rw [hhalf]                               -- `half 2 = 1` を右辺から左辺へ
+    _ = half * (2 * w) := mul_assoc _ _ _                             -- 積の結合律
+
+/-- 準備 4 の第 5 の鎖（3 行）: `w = half (2 w) = half (w + w) = half w + half w`。 -/
+theorem eq_half_mul_add_half_mul_prep4 (half : K) (hhalf : half * 2 = 1) (w : K) : w = half * w + half * w :=
+  calc w
+      = half * (2 * w) := eq_half_mul_two_mul_prep4 half hhalf w      -- 直前の鎖
+    _ = half * (w + w) := by rw [two_mul_eq_add_prep4]                -- `2 w = w + w`
+    _ = half * w + half * w := mul_add _ _ _                          -- 分配律
+
 omit [DecidableEq ι] in
-/-- 移項の 2 行: `2 τ(Pn_k) = τ(P)`、`τ(Pn_k) = half · τ(P)`。 -/
+/-- `τ(Pn_k) = half · τ(P)` の鎖（具体版 `trace_mul_nOp_eq_half` と同じ 9 行）。 -/
 theorem tau_mul_num_eq_half (τ : A → K) (hlin : ∀ (α β : K) (x y : A), τ (α • x + β • y) = α * τ x + β * τ y)
     (hcyc : ∀ x y : A, τ (x * y) = τ (y * x)) (half : K) (hhalf : half * 2 = 1) (c a : ι → A) (hac : ∀ i, a i * c i = 1 - num c a i)
     (P : A) (k : ι) (hP : a k * P = P * a k) :
     τ (P * num c a k) = half * τ P := by
   have h := tau_mul_num_chain τ hlin hcyc c a hac P k hP
-  have h2 : 2 * τ (P * num c a k) = τ P := by
-    rw [two_mul]; exact (eq_sub_iff_add_eq.mp h)                     -- 移項
   calc τ (P * num c a k)
-      = (half * 2) * τ (P * num c a k) := by rw [hhalf, one_mul]
-    _ = half * τ P := by rw [mul_assoc, h2]                          -- 両辺に `half` を掛ける
+      = half * (2 * τ (P * num c a k)) := eq_half_mul_two_mul_prep4 half hhalf _   -- 準備 4 の `w = half (2 w)`
+    _ = half * (τ (P * num c a k) + τ (P * num c a k)) := by rw [two_mul_eq_add_prep4]
+                                                                      -- 準備 4 の `2 w = w + w`
+    _ = half * (τ (P * num c a k) + (τ P - τ (P * num c a k))) := by rw [← h]
+                                                                      -- 直前の鎖を 2 つ目の `τ(Pn_k)` へ
+    _ = half * (τ (P * num c a k) + (τ P + (-τ (P * num c a k)))) := by rw [sub_eq_add_neg]
+                                                                      -- 差の定義
+    _ = half * (τ (P * num c a k) + ((-τ (P * num c a k)) + τ P)) := by rw [add_comm (τ P)]
+                                                                      -- 和の可換律
+    _ = half * ((τ (P * num c a k) + (-τ (P * num c a k))) + τ P) := by rw [add_assoc]
+                                                                      -- 和の結合律を右辺から左辺へ
+    _ = half * (0 + τ P) := by rw [add_neg_cancel]                    -- 加法逆元
+    _ = half * (τ P + 0) := by rw [add_comm (0 : K)]                  -- 和の可換律
+    _ = half * τ P := by rw [add_zero]                                -- 零元
 
-/-- 二場合: `τ(P R_k^{(e_k)}) = half · τ(P)`。 -/
+/-- 二場合: `τ(P R_k^{(e_k)}) = half · τ(P)`（具体版 `trace_mul_projFactor_eq_half` と同じ行）。 -/
 theorem tau_mul_projFactor_eq_half (τ : A → K) (hlin : ∀ (α β : K) (x y : A), τ (α • x + β • y) = α * τ x + β * τ y)
     (hcyc : ∀ x y : A, τ (x * y) = τ (y * x)) (half : K) (hhalf : half * 2 = 1) (c a : ι → A) (hac : ∀ i, a i * c i = 1 - num c a i)
     (T : Finset ι) (P : A) (k : ι) (hP : a k * P = P * a k) :
@@ -137,13 +170,12 @@ theorem tau_mul_projFactor_eq_half (τ : A → K) (hlin : ∀ (α β : K) (x y :
         = τ (P * (1 - num c a k)) := by rw [projFactor_of_notMem hk]
       _ = τ P - τ (P * num c a k) := tau_mul_one_sub_num τ hlin P _
       _ = τ P - half * τ P := by rw [tau_mul_num_eq_half τ hlin hcyc half hhalf c a hac P k hP]
-      _ = half * τ P := by
-          have hsum : half + half = 1 := by rw [← mul_two, hhalf]      -- `half · 2 = half + half`
-          have hsplit : τ P = half * τ P + half * τ P :=
-            calc τ P = 1 * τ P := (one_mul _).symm
-              _ = (half + half) * τ P := by rw [hsum]
-              _ = half * τ P + half * τ P := add_mul _ _ _
-          rw [sub_eq_iff_eq_add, ← hsplit]                              -- `K` の四則
+      _ = (half * τ P + half * τ P) - half * τ P := by
+          rw [← eq_half_mul_add_half_mul_prep4 half hhalf (τ P)]      -- 準備 4 の `w = half w + half w` を 1 つ目の `τ(P)` へ
+      _ = (half * τ P + half * τ P) + (-(half * τ P)) := sub_eq_add_neg _ _   -- 差の定義
+      _ = half * τ P + (half * τ P + (-(half * τ P))) := add_assoc _ _ _      -- 和の結合律
+      _ = half * τ P + 0 := by rw [add_neg_cancel]                    -- 加法逆元
+      _ = half * τ P := add_zero _                                     -- 零元
 
 variable [Fintype ι]
 
@@ -170,9 +202,12 @@ theorem tau_finProdLeft_projFactor (τ : A → K) (hlin : ∀ (α β : K) (x y :
       _ = half * ((2 : K) ^ (Fintype.card ι - (0 + 1)) * 2) := by
           rw [pow_succ]
                                                                               -- 冪の定義
-      _ = (2 : K) ^ (Fintype.card ι - (0 + 1)) := by
-          rw [pow_mul_comm', ← mul_assoc, hhalf, one_mul]
-                                                                              -- `K` の四則（`2^m 2 = 2 2^m`）
+      _ = half * (2 * (2 : K) ^ (Fintype.card ι - (0 + 1))) := by rw [pow_mul_comm']
+                                                                    -- 積の可換律（`K` では `2` とその冪の可換性 `2^m 2 = 2 2^m` だけを使う）
+      _ = (half * 2) * (2 : K) ^ (Fintype.card ι - (0 + 1)) := (mul_assoc _ _ _).symm
+                                                                    -- 積の結合律を右辺から左辺へ
+      _ = 1 * (2 : K) ^ (Fintype.card ι - (0 + 1)) := by rw [hhalf]    -- `half 2 = 1`
+      _ = (2 : K) ^ (Fintype.card ι - (0 + 1)) := one_mul _            -- 積の単位元
   | r + 1, μ, hμ => by
     have hle : r + 1 + 1 ≤ Fintype.card ι := by
       simpa using Fintype.card_le_of_injective μ hμ               -- `k ≤ |ι|`
@@ -196,9 +231,12 @@ theorem tau_finProdLeft_projFactor (τ : A → K) (hlin : ∀ (α β : K) (x y :
       _ = half * ((2 : K) ^ (Fintype.card ι - (r + 1 + 1)) * 2) := by
           rw [pow_succ]
                                                                     -- 冪の定義
-      _ = (2 : K) ^ (Fintype.card ι - (r + 1 + 1)) := by
-          rw [pow_mul_comm', ← mul_assoc, hhalf, one_mul]
-                                                                    -- `K` の四則（`2^m 2 = 2 2^m`）
+      _ = half * (2 * (2 : K) ^ (Fintype.card ι - (r + 1 + 1))) := by rw [pow_mul_comm']
+                                                                    -- 積の可換律（`K` では `2` とその冪の可換性 `2^m 2 = 2 2^m` だけを使う）
+      _ = (half * 2) * (2 : K) ^ (Fintype.card ι - (r + 1 + 1)) := (mul_assoc _ _ _).symm
+                                                                    -- 積の結合律を右辺から左辺へ
+      _ = 1 * (2 : K) ^ (Fintype.card ι - (r + 1 + 1)) := by rw [hhalf]    -- `half 2 = 1`
+      _ = (2 : K) ^ (Fintype.card ι - (r + 1 + 1)) := one_mul _            -- 積の単位元
 
 /-- 移項の段が `τ(Pn)` を決めないことの確認（主張そのものの反例ではない）: `K = ZMod 2` では `t = 0` について `x = t - x` を満たす `x` が `0` と `1` の 2 つあり、
 移項の段（`τ(Pn) = τ(P) - τ(Pn)` から `τ(Pn)` を決める段）が働かない。 -/
