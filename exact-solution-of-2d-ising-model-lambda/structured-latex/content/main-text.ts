@@ -12794,7 +12794,13 @@ d_{A\mathbin\triangle\{e\}}(w)\bmod 2
                     "このとき根以外の頂点はすべて処理済みで、接続辺数は偶数である。",
                     "加えた辺は木の辺だけなので、",
                   ]),
-                  displayMath(String.raw`A\cap(E\setminus F)=C\quad(\because\ \text{木外辺の所属は操作中に変わらない})`),
+                  displayMath(String.raw`\begin{aligned}
+A\cap(E\setminus F)
+&=C\cap(E\setminus F)
+&&\bigl(\because\ \text{操作中に切り替えた辺はすべて }F\text{ に属する}\bigr)\\
+&=C
+&&\bigl(\because\ C\subseteq E\setminus F\bigr)
+\end{aligned}`),
                 ],
               },
             },
