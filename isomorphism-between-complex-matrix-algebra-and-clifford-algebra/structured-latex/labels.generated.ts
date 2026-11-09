@@ -47,6 +47,7 @@ export const ALL_LABELS = [
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_product_of_matrix_units",
+  "claim_projection_onto_quotient_set_is_surjective",
   "claim_reindexing_linear_combination_by_bijection",
   "claim_residue_classes_are_equal_iff_congruent",
   "claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor",

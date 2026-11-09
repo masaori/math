@@ -11,6 +11,8 @@
 ## 完了済み
 
 
+- 2026-11-09: 商集合への射影が全射であること（ラベル claim_projection_onto_quotient_set_is_surjective）を、商集合の定義で代表をとり π_I(a)=[a]_I=X で示した。次は合同が加法と両立すること。
+
 - 2026-11-09: 商集合への射影の定義（ラベル def_projection_onto_quotient_set、π_I:A→A/I、π_I(a):=[a]_I）を置いた。値が A/I に属することは代表に a 自身をとれば成り立つと本文に書いた。次は射影が全射であること。
 
 - 2026-11-09: 商集合の定義（ラベル def_quotient_set_modulo_two_sided_ideal、A/I:={[a]_I: a∈A}）を置いた。演算は商代数の演算の定義で定め、A から A/I へは射影を通すと本文に書いた。次は射影の定義。
