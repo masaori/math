@@ -13,7 +13,8 @@
   - `TV1_hatZ_hatY_041_claim_gamma2_periodicity`（ラベル `gamma_2_periodicity`）
 - `eigenvalue_problem_diagonalization_and_exponential_form.ts`
   - `def_gamma1_gamma2_of_theta` の `(2,1)` 成分の鎖と、`relation_of_gamma_2_theta_tilde` の証明の
-    「第一に」「第三に」の鎖（`gamma2_neg` とその準備の補題。各段に人手の行を書いた）
+    「第一に」「第二に」「第三に」「第四に」と (1) の鎖（`gamma2_neg`・`gamma2_neg_eq_neg_conj` とその準備の補題。
+    各段に人手の行を書いた）
 
 原文の定義（`θ ∈ ℝ`、原文は `θ ∈ ℂ` だが `cos θ`, `sin θ` の実部虚部分解を使うので実数に限る）:
 
@@ -58,6 +59,8 @@ import Mathlib.RingTheory.RootsOfUnity.Complex
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 
 namespace Ising2D
 
@@ -230,13 +233,211 @@ theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamm
 
 /-! ## `γ_2` の対称性（原文 `relation_of_gamma_2`） -/
 
-/-- 原文 `relation_of_gamma_2`: `γ_2(-θ) = -conj(γ_2(θ))`。 -/
+/-! ### 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の `exp(iθ)` の表示と「第二に」「第四に」「(1)」
+
+人手の複素共役 `def_complex_conjugate` は Lean の `starRingEnd ℂ`（`star` と定義で一致する）である。
+人手 `complex_conjugate_of_sum`・`complex_conjugate_of_product`・`complex_conjugate_of_difference` は具体版が Lean に無いので、
+mathlib の `map_add`・`map_mul`・`map_sub`（`starRingEnd ℂ` が環準同型であること）で受ける。各段は 1 回だけ当てる。
+人手 `multiply_by_minus_one`（`-z := (-1)z`）も具体版が Lean に無く、mathlib の `neg_one_mul` で受ける（このファイルのほかの段と同じ）。 -/
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖: `cos θ + i sin θ = exp(iθ)`（人手の 17 行）。
+分母の `2` は `2_ℂ`（Lean の `(2 : ℂ)`）、`1_ℂ` は `inclusion_rr_to_cc` の像 `(1)_ℂ` の略記で、行き来は略記の読み替えの段で行う。 -/
+theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
+    ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ) = Complex.exp (Complex.I * (θ : ℂ)) := by
+  set eP : ℂ := Complex.exp (Complex.I * (θ : ℂ)) with heP
+  set eM : ℂ := Complex.exp (-(Complex.I * (θ : ℂ))) with heM
+  calc ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ)
+      = (eP + eM) / 2 + Complex.I * ((eP - eM) / (2 * Complex.I)) := by
+        rw [euler_cos_real_inclusion θ, euler_sin_real_inclusion θ]  -- 1 行目: `euler_formula_cos_sin`
+    _ = (eP + eM) / 2 + (Complex.I * (eP - eM)) / (2 * Complex.I) := by
+        rw [mul_div_assoc]                        -- 2 行目: ℂ で `x(y/z) = (xy)/z`（`x → i`, `z → 2i`）
+    _ = (eP + eM) / 2 + ((eP - eM) * Complex.I) / (2 * Complex.I) := by
+        rw [mul_comm Complex.I (eP - eM)]         -- 3 行目: `complex_numbers_form_a_field` の積の可換律
+    _ = (eP + eM) / 2 + (eP - eM) / 2 := by
+        rw [mul_div_mul_right (eP - eM) (2 : ℂ) Complex.I_ne_zero]
+                                                  -- 4 行目: ℂ で `(xa)/(ya) = x/y`（`a → i ≠ 0_ℂ`, `y → 2`）
+    _ = ((eP + eM) + (eP - eM)) / 2 := by
+        rw [← add_div]                        -- 5 行目: ℂ で `x/z + y/z = (x+y)/z`（`z → 2`）
+    _ = ((eP + eM) + (eP + -eM)) / 2 := by
+        rw [sub_eq_add_neg]                       -- 6 行目: `def_complex_difference`
+    _ = (eP + (eM + (eP + -eM))) / 2 := by
+        rw [add_assoc eP eM]                      -- 7 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (eP + ((eM + eP) + -eM)) / 2 := by
+        rw [← add_assoc eM eP]                    -- 8 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (eP + ((eP + eM) + -eM)) / 2 := by
+        rw [add_comm eM eP]                       -- 9 行目: `complex_numbers_form_a_field` の和の可換律
+    _ = (eP + (eP + (eM + -eM))) / 2 := by
+        rw [add_assoc eP eM]                      -- 10 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (eP + (eP + 0)) / 2 := by
+        rw [add_neg_cancel]                       -- 11 行目: `complex_numbers_form_a_field` の加法逆元
+    _ = (eP + eP) / 2 := by
+        rw [add_zero]                             -- 12 行目: `complex_numbers_form_a_field` の零元
+    _ = (1 * eP + 1 * eP) / 2 := by
+        rw [one_mul]                              -- 13 行目: `complex_numbers_form_a_field` の積の単位元を 2 箇所へ右辺から左辺へ
+    _ = ((1 + 1) * eP) / 2 := by
+        rw [add_mul]                              -- 14 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ
+    _ = ((((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ)) * eP) / 2 := by
+        rw [Complex.ofReal_one]                   -- `1_ℂ` を `(1)_ℂ` と読む（`inclusion_rr_to_cc` の略記）
+    _ = ((((1 + 1 : ℝ)) : ℂ) * eP) / 2 := by
+        rw [real_inclusion_add]                   -- 15 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
+    _ = ((((2 : ℝ)) : ℂ) * eP) / 2 := by
+        rw [one_add_one_eq_two]                   -- 16 行目: ℝ で `1 + 1 = 2`
+    _ = ((2 : ℂ) * eP) / 2 := by
+        rw [Complex.ofReal_ofNat]                 -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+    _ = eP := by
+        rw [mul_div_cancel_left₀ eP (two_ne_zero : (2 : ℂ) ≠ 0)]
+                                                  -- 17 行目: ℂ で `(2a)/2 = a`（`2 ≠ 0_ℂ`、`a → exp(iθ)`）
+
+/-- 人手 `exp_of_negative_i_real_as_cos_minus_i_sin`: `exp(-iθ) = cos θ - i sin θ`（`-iθ` は `-(iθ)`）。
+人手のブロックの具体版が Lean に無いので、mathlib の `Complex.exp_mul_I` と `cos`・`sin` の偶奇で受ける。 -/
+theorem exp_neg_I_mul_real_eq_cos_sub_I_mul_sin (θ : ℝ) :
+    Complex.exp (-(Complex.I * (θ : ℂ))) = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
+  rw [show -(Complex.I * (θ : ℂ)) = (-(θ : ℂ)) * Complex.I by ring, Complex.exp_mul_I,
+    Complex.cos_neg, Complex.sin_neg, Complex.ofReal_cos, Complex.ofReal_sin]
+  ring
+
+/-- 人手 `complex_conjugate_of_real_inclusion` を `starRingEnd ℂ` の形で読んだもの（`starRingEnd ℂ z` は `star z` と定義で一致する）。 -/
+theorem conj_real_inclusion (r : ℝ) : (starRingEnd ℂ) (r : ℂ) = (r : ℂ) :=
+  complex_conjugate_of_real_inclusion r
+
+/-- 準備の「`c_1cos θ`・`s_1c_2` も実数の像である」を通した `complex_conjugate_of_real_inclusion`:
+`\overline{a_ℂ b_ℂ} = a_ℂ b_ℂ`。1・3 段目は `real_inclusion_preserves_product` による読み替えで、人手は像の記号を省くので行を持たない。 -/
+theorem conj_real_inclusion_mul (a b : ℝ) :
+    (starRingEnd ℂ) ((a : ℂ) * (b : ℂ)) = (a : ℂ) * (b : ℂ) :=
+  calc (starRingEnd ℂ) ((a : ℂ) * (b : ℂ))
+      = (starRingEnd ℂ) ((a * b : ℝ) : ℂ) := by
+        rw [real_inclusion_mul]                   -- 準備の読み: `real_inclusion_preserves_product`
+    _ = ((a * b : ℝ) : ℂ) := conj_real_inclusion (a * b)
+                                                  -- `complex_conjugate_of_real_inclusion`
+    _ = (a : ℂ) * (b : ℂ) := (real_inclusion_mul a b).symm
+                                                  -- 準備の読み: `real_inclusion_preserves_product`
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\bar i = -i`（人手の 6 行と、略記の読み替えの 1 段）。 -/
+theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
+  calc (starRingEnd ℂ) Complex.I
+      = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+    _ = (⟨0, -1⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+                                                  -- 2 行目: `def_complex_conjugate`
+    _ = (⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ) :=
+        Complex.ext (by simp [Complex.mul_re]) (by simp [Complex.mul_im])
+                                                  -- 3 行目: `definition_of_cc` の積 `((-1)·0 - 0·1, (-1)·1 + 0·0)`
+                                                  -- （成分の ℝ の四則は `simp` で閉じる）
+    _ = ((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ) := rfl     -- 4 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
+    _ = (-1 : ℂ) * (⟨0, 1⟩ : ℂ) := by
+        rw [Complex.ofReal_neg, Complex.ofReal_one] -- `(-1)_ℂ` を `-1_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+    _ = (-1 : ℂ) * Complex.I := rfl               -- 5 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+    _ = -Complex.I := by
+        rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\overline{exp(iθ)} = exp(-iθ)`（人手の 8 行）。 -/
+theorem conj_exp_I_mul_real (θ : ℝ) :
+    (starRingEnd ℂ) (Complex.exp (Complex.I * (θ : ℂ))) = Complex.exp (-(Complex.I * (θ : ℂ))) :=
+  calc (starRingEnd ℂ) (Complex.exp (Complex.I * (θ : ℂ)))
+      = (starRingEnd ℂ) (((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ)) := by
+        rw [real_inclusion_cos_add_I_mul_sin]     -- 1 行目: 上の `exp(iθ)` の表示
+    _ = (starRingEnd ℂ) ((Real.cos θ : ℝ) : ℂ) + (starRingEnd ℂ) (Complex.I * ((Real.sin θ : ℝ) : ℂ)) := by
+        rw [map_add]                              -- 2 行目: `complex_conjugate_of_sum` を `m = 2` で
+    _ = (starRingEnd ℂ) ((Real.cos θ : ℝ) : ℂ)
+          + (starRingEnd ℂ) Complex.I * (starRingEnd ℂ) ((Real.sin θ : ℝ) : ℂ) := by
+        rw [map_mul]                              -- 3 行目: `complex_conjugate_of_product`
+    _ = ((Real.cos θ : ℝ) : ℂ) + (starRingEnd ℂ) Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
+        rw [conj_real_inclusion (Real.cos θ), conj_real_inclusion (Real.sin θ)]
+                                                  -- 4 行目: `complex_conjugate_of_real_inclusion` を 2 箇所へ
+    _ = ((Real.cos θ : ℝ) : ℂ) + (-Complex.I) * ((Real.sin θ : ℝ) : ℂ) := by
+        rw [conj_I_eq_neg_I]                      -- 5 行目: 上の `\bar i = -i`
+    _ = ((Real.cos θ : ℝ) : ℂ) + -(Complex.I * ((Real.sin θ : ℝ) : ℂ)) := by
+        rw [neg_mul]                              -- 6 行目: ℂ で `(-x)y = -(xy)`（`x → i`, `y → sin θ`）
+    _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
+        rw [← sub_eq_add_neg]                     -- 7 行目: `def_complex_difference` を右辺から左辺へ
+    _ = Complex.exp (-(Complex.I * (θ : ℂ))) :=
+        (exp_neg_I_mul_real_eq_cos_sub_I_mul_sin θ).symm
+                                                  -- 8 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第四に」: `\overline{γ_2(θ)} = -γ_2(-θ)`（人手の 18 行）。
+人手の `i exp(iθ) s_2^* (…)` は左から積を取る読みで、Lean の `gamma2` の `((i * e) * s) * X` と同じ括弧である。 -/
+theorem conj_gamma2_eq_neg_gamma2_neg :
+    (starRingEnd ℂ) (gamma2 K θ) = -gamma2 K (-θ) :=
+  calc (starRingEnd ℂ) (gamma2 K θ)
+      = (starRingEnd ℂ) (Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))) :=
+        rfl                                       -- 1 行目: `def_gamma1_gamma2_of_theta`
+    _ = (starRingEnd ℂ) (Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ)) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [map_mul]                              -- 2 行目: `complex_conjugate_of_product`
+    _ = (starRingEnd ℂ) (Complex.I * Complex.exp (Complex.I * (θ : ℂ))) * (starRingEnd ℂ) (K.s2star : ℂ) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [map_mul (starRingEnd ℂ) (Complex.I * Complex.exp (Complex.I * (θ : ℂ)))]
+                                                  -- 3 行目: `complex_conjugate_of_product`
+    _ = (starRingEnd ℂ) Complex.I * (starRingEnd ℂ) (Complex.exp (Complex.I * (θ : ℂ))) *
+          (starRingEnd ℂ) (K.s2star : ℂ) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [map_mul (starRingEnd ℂ) Complex.I (Complex.exp (Complex.I * (θ : ℂ)))]
+                                                  -- 4 行目: `complex_conjugate_of_product`
+    _ = (-Complex.I) * (starRingEnd ℂ) (Complex.exp (Complex.I * (θ : ℂ))) *
+          (starRingEnd ℂ) (K.s2star : ℂ) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [conj_I_eq_neg_I]                      -- 5 行目: 上の `\bar i = -i`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (starRingEnd ℂ) (K.s2star : ℂ) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [conj_exp_I_mul_real]                  -- 6 行目: 上の `\overline{exp(iθ)} = exp(-iθ)`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          (starRingEnd ℂ)
+            ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [conj_real_inclusion K.s2star]         -- 7 行目: `complex_conjugate_of_real_inclusion`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((starRingEnd ℂ) ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ))
+            - (starRingEnd ℂ) ((K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [map_sub]                              -- 8 行目: `complex_conjugate_of_difference`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((starRingEnd ℂ) ((K.c1 : ℂ) * (Real.cos θ : ℂ)) - (starRingEnd ℂ) (Complex.I * (Real.sin θ : ℂ))
+            - (starRingEnd ℂ) ((K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [map_sub (starRingEnd ℂ) ((K.c1 : ℂ) * (Real.cos θ : ℂ))]
+                                                  -- 9 行目: `complex_conjugate_of_difference`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((starRingEnd ℂ) ((K.c1 : ℂ) * (Real.cos θ : ℂ))
+            - (starRingEnd ℂ) Complex.I * (starRingEnd ℂ) (Real.sin θ : ℂ)
+            - (starRingEnd ℂ) ((K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [map_mul (starRingEnd ℂ) Complex.I]    -- 10 行目: `complex_conjugate_of_product`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - (starRingEnd ℂ) Complex.I * (Real.sin θ : ℂ)
+            - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [conj_real_inclusion_mul K.c1 (Real.cos θ), conj_real_inclusion (Real.sin θ),
+          conj_real_inclusion_mul K.s1 K.c2]      -- 11 行目: `complex_conjugate_of_real_inclusion` を 3 箇所へ
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - (-Complex.I) * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [conj_I_eq_neg_I]                      -- 12 行目: 上の `\bar i = -i`
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - (-(Complex.I * (Real.sin θ : ℂ))) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [neg_mul Complex.I (Real.sin θ : ℂ)]   -- 13 行目: ℂ で `(-x)y = -(xy)`（`x → i`, `y → sin θ`）
+    _ = (-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [sub_neg_eq_add]                       -- 14 行目: ℂ で `a - (-b) = a + b`（`a → c_1cos θ`, `b → i sin θ`）
+    _ = (-(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [neg_mul Complex.I (Complex.exp (-(Complex.I * (θ : ℂ))))]
+                                                  -- 15 行目: ℂ で `(-x)y = -(xy)`（`x → i`, `y → exp(-iθ)`）
+    _ = (-(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ))) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [neg_mul (Complex.I * Complex.exp (-(Complex.I * (θ : ℂ)))) (K.s2star : ℂ)]
+                                                  -- 16 行目: ℂ で `(-x)y = -(xy)`（`x → i exp(-iθ)`, `y → s_2^*`）
+    _ = -(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [neg_mul]                              -- 17 行目: ℂ で `(-x)y = -(xy)`（`x → i exp(-iθ) s_2^*`）
+    _ = -gamma2 K (-θ) := by
+        rw [gamma2_neg]                           -- 18 行目: 上の `γ_2(-θ)` の表示（「第三に」）
+
+/-- 原文 `relation_of_gamma_2`（人手 `relation_of_gamma_2_theta_tilde` (1)）: `γ_2(-θ) = -conj(γ_2(θ))`（人手の 2 行）。 -/
 theorem gamma2_neg_eq_neg_conj :
-    gamma2 K (-θ) = -(starRingEnd ℂ) (gamma2 K θ) := by
-  rw [gamma2_neg, gamma2]
-  simp only [map_mul, map_sub, Complex.conj_I, ← Complex.exp_conj, Complex.conj_ofReal]
-  push_cast
-  ring_nf
+    gamma2 K (-θ) = -(starRingEnd ℂ) (gamma2 K θ) :=
+  calc gamma2 K (-θ)
+      = -(-gamma2 K (-θ)) := (neg_neg _).symm     -- 1 行目: ℂ で `-(-z) = z`（`z → γ_2(-θ)`）を右辺から左辺へ
+    _ = -(starRingEnd ℂ) (gamma2 K θ) := by
+        rw [conj_gamma2_eq_neg_gamma2_neg]        -- 2 行目: 上の `\overline{γ_2(θ)} = -γ_2(-θ)`
 
 /-- 原文 `relation_of_gamma_2` の系: `γ_2(θ) γ_2(-θ) = -|γ_2(θ)|^2`（特に非正の実数）。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_normSq :
