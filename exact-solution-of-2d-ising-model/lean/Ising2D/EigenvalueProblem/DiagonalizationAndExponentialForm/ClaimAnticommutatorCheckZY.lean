@@ -23,15 +23,29 @@
 * 第 1〜3 式の証明は原文の一続きの式変形と 1 行ずつ対応する `calc` で書く（第 1・3 式の最後の
   `def_check_index_set` (5) の行は `_of_mem` の形が受け持つ）。
   各行の根拠は行の直前のコメントに原文の `(∵ …)` を写した。
-* 原文の `exp_sum` は `exp(+√-1·2π jk/M)` の和で述べ、`k = -(μ+ν-1)` に適用して
-  `δ^M_{(-(μ+ν-1),0)}` を得る。Lean の位相因子 `expPhase M k = exp(-√-1·2π k/M)` は符号が逆なので、
-  同じ和を `Ising2D.expPhase_sum`（`exp_sum` の形式化）に `k = μ+ν-1` で当てて `δ^M_{(μ+ν-1,0)}` を得る。
-  `M ∣ x ⟺ M ∣ -x` なので二つの `δ` は同じ値であり、次の `def_delta_M` の行で同じ `δ^M_{(μ+ν,1)}` に着く。
+* 第 1・3 式の `scalar_exp_product` → 準備 2 → `exp_sum` の 3 行は、人手の準備 2 の 2 本の鎖
+  （実数の側 `anticomm_exponent_real_chain`、複素数の側 `anticomm_exponent_complex_chain`）を補題として立て、
+  人手の行と 1 段ずつ対応させる。その前後の 2 段は人手の行ではなく読みである:
+  `checkPhase M j λ` を人手の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`）と、
+  `exp_sum` の Lean の形 `expPhase_sum`（`exp(-√-1·2π jk/M)` の和）を人手の読み
+  「左辺の指数 `2πijκ/N` は `i(y_j)_ℂ`」の形に直した `exp_sum_as_I_mul_real`（`k ↦ -κ` で当て、`M ∣ x ⟺ M ∣ -x`）。
+* 指数法則 `scalar_exp_product` の行は、`def_scalar_exp` の具体版が Lean に無いので mathlib の `Complex.exp_add` で表す
+  （`ClaimConjugateIndex.lean` と同じ扱い）。
+* 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では標数 2 でない体の等式（`1/2 + 1/2 = 1`）と `ℤ` からの環準同型が
+  和・符号反転・`1` を保つこと（`π` は任意の元でよく、ℝ の順序・完備性は使わない）、複素数の鎖では可換環への環準同型
+  （包含）が和・積を保つこと（`real_inclusion_add`・`real_inclusion_mul`）と `-1`・`i` の積の計算だけである。
+  2 本の鎖ごとの必要十分版は置かない。主張全体の必要十分版 `acomm_antiperiodic_fourier_clifford` が、位相
+  `exp((-i)(j_ℝθ~_λ)_ℂ)` を `ξ^{j(2λ-1)}` と抽象し、`scalar_exp_product` と準備 2 の 2 本の鎖を `ξ` の冪の指数の足し算
+  `(2μ-1)+(2ν-1) = 2(μ+ν-1)` に吸収しているからである。必要十分版は `ξ` を `e^{-iθ~}` の向きに取り、指数和を
+  `μ+ν-1` に直接当てるので、具体版の `κ = -(μ+ν-1)` と `deltaMod_neg_sub_one` の符号反転の段に当たる段が無い
+  （段の対応はここだけ 1 段ずれる）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 
 namespace Ising2D
 
@@ -51,10 +65,128 @@ theorem sum_sum_smul_two_deltaM_smul_one (c d : Fin M → ℂ) :
   · intro k _ hkj
     rw [deltaM, if_neg (Ne.symm hkj), mul_zero, zero_smul, smul_zero]
 
-/-- `δ^M_{(μ+ν-1, 0)} = δ^M_{(μ+ν, 1)}`（`def_delta_M` の定義による書き換え）。 -/
-theorem deltaMod_sub_one (M : ℕ) (μ ν : ℤ) :
-    deltaMod M (μ + ν - 1) 0 = deltaMod M (μ + ν) 1 := by
+/-- 人手の行 `δ^{(M_col)}_{(κ,0)} = δ^{(M_col)}_{(μ+ν,1)}`（`κ = -((μ+ν)-1)`。`def_delta_M`）:
+`κ - 0 = -((μ+ν)-1)` なので `κ ≡ 0 ⟺ μ+ν ≡ 1 (mod M_col)`。 -/
+theorem deltaMod_neg_sub_one (M : ℕ) (μ ν : ℤ) :
+    deltaMod M (-(μ + ν - 1)) 0 = deltaMod M (μ + ν) 1 := by
   rw [deltaMod, deltaMod, sub_zero]
+  simp only [dvd_neg]
+
+/-- （読み）`checkPhase M j λ` は人手の準備の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` そのもの。
+`checkPhase_eq_exp` の `-(i · j_ℂ · θ~_ℂ)` を、積の像 `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）を
+右辺から左辺へ当てて人手の形に直す（`ClaimConjugateIndex.lean` の `checkPhase_conj'` の 1 段目と同じ読み）。 -/
+theorem checkPhase_eq_exp_neg_I_mul (hM : M ≠ 0) (k l : ℤ) :
+    checkPhase M k l = Complex.exp ((-Complex.I) * (((k : ℝ) * thetaTilde M l : ℝ) : ℂ)) := by
+  rw [checkPhase_eq_exp hM k _, ← real_inclusion_mul, Complex.ofReal_intCast, neg_mul, mul_assoc]
+
+/-- **準備 2 の実数の鎖**: `j_ℝθ~_μ + j_ℝθ~_ν = -(2π j_ℝ κ_ℝ / (M_col)_ℝ)`（`κ = -(μ+ν-1)`）。
+人手の `j` は Lean の `k` である。人手の 20 行に 1 段ずつ対応する（`2π` は Lean では積 `2 * Real.pi`）。 -/
+theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
+    (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
+      = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / (M : ℝ)) :=
+  calc (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
+      = (k : ℝ) * (thetaTilde M μ + thetaTilde M ν) := (mul_add _ _ _).symm  -- ℝ の分配法則
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) - 1 / 2) / (M : ℝ)
+          + 2 * Real.pi * ((ν : ℝ) - 1 / 2) / (M : ℝ)) := by
+        rw [thetaTilde, thetaTilde]                                   -- θ~ の定義を 2 箇所へ
+    _ = (k : ℝ) * ((2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((ν : ℝ) - 1 / 2))
+          / (M : ℝ)) := by
+        rw [← add_div]          -- `(M_col)_ℝ ≠ 0` を分母とする分数の和（Lean の `add_div` は `≠ 0` を要しない）
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((ν : ℝ) - 1 / 2)) / (M : ℝ)) := by
+        rw [← mul_add]                                                -- ℝ の分配法則
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (-(1 / 2))) + ((ν : ℝ) + (-(1 / 2))))
+          / (M : ℝ)) := by
+        rw [sub_eq_add_neg (μ : ℝ), sub_eq_add_neg (ν : ℝ)]           -- 差は加法の逆元の和を 2 箇所へ
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + ((-(1 / 2)) + ((ν : ℝ) + (-(1 / 2)))))
+          / (M : ℝ)) := by
+        rw [add_assoc (μ : ℝ)]                                        -- ℝ の加法の結合律
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (((ν : ℝ) + (-(1 / 2))) + (-(1 / 2))))
+          / (M : ℝ)) := by
+        rw [add_comm (-(1 / 2) : ℝ) ((ν : ℝ) + (-(1 / 2)))]           -- ℝ の加法の交換律
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + ((ν : ℝ) + ((-(1 / 2)) + (-(1 / 2)))))
+          / (M : ℝ)) := by
+        rw [add_assoc (ν : ℝ)]                                        -- ℝ の加法の結合律
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + ((-(1 / 2)) + (-(1 / 2))))
+          / (M : ℝ)) := by
+        rw [← add_assoc (μ : ℝ)]                                      -- ℝ の加法の結合律
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-(1 / 2 + 1 / 2))) / (M : ℝ)) := by
+        rw [neg_add]                                                  -- `(-a)+(-b) = -(a+b)`
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-1)) / (M : ℝ)) := by
+        rw [add_halves]                                               -- `1/2 + 1/2 = 1_ℝ`
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (ν : ℝ) - 1) / (M : ℝ)) := by
+        rw [← sub_eq_add_neg]                                         -- 差は加法の逆元の和
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - 1))) / (M : ℝ)) := by
+        rw [neg_neg]                                                  -- `-(-x) = x`
+    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ)) / (M : ℝ)) := by
+        rw [Int.cast_neg, Int.cast_sub, Int.cast_add, Int.cast_one]   -- `ℤ → ℝ` は和・符号反転・`1` を保つ
+    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ))) / (M : ℝ) :=
+        (mul_div_assoc _ _ _).symm                                    -- `a(b/c) = (ab)/c`
+    _ = (k : ℝ) * (-(2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ))) / (M : ℝ) := by
+        rw [mul_neg (2 * Real.pi)]                                    -- `a(-b) = -(ab)`
+    _ = (-((k : ℝ) * (2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ)))) / (M : ℝ) := by
+        rw [mul_neg (k : ℝ)]                                          -- `a(-b) = -(ab)`
+    _ = (-((k : ℝ) * (2 * Real.pi) * ((-(μ + ν - 1) : ℤ) : ℝ))) / (M : ℝ) := by
+        rw [← mul_assoc (k : ℝ)]                                      -- ℝ の積の結合律
+    _ = (-(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ))) / (M : ℝ) := by
+        rw [mul_comm (k : ℝ) (2 * Real.pi)]                           -- ℝ の積の交換律
+    _ = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / (M : ℝ)) := neg_div _ _
+                                                                      -- `(-a)/c = -(a/c)`
+
+/-- **準備 2 の複素数の鎖**: `(-i)(a)_ℂ + (-i)(b)_ℂ = i(y)_ℂ`（`a + b = -y`。人手では `a = j_ℝθ~_μ`、
+`b = j_ℝθ~_ν`、`y = y_j`、`h` は直前の実数の鎖 `anticomm_exponent_real_chain`）。人手の 14 行に 1 段ずつ対応する。
+2 段目の二項の和の像は具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_finite_sum` を `m = 2` で）、
+5 段目の積の像は `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）を右辺から左辺へ当てる。
+6 段目の `(-1_ℝ)_ℂ = -1_ℂ` は `neg_I_mul_real_inclusion_neg` と同じく、`(-1_ℝ, 0_ℝ)` に `1_ℂ = (1_ℝ, 0_ℝ)` を足すと
+`(0_ℝ, 0_ℝ) = 0_ℂ` になることから示す。 -/
+theorem anticomm_exponent_complex_chain {a b y : ℝ} (h : a + b = -y) :
+    (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ) = Complex.I * (y : ℂ) :=
+  calc (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ)
+      = (-Complex.I) * ((a : ℂ) + (b : ℂ)) := (mul_add _ _ _).symm    -- ℂ の分配法則
+    _ = (-Complex.I) * ((a + b : ℝ) : ℂ) := by
+        rw [real_inclusion_add]                                       -- `real_inclusion_preserves_finite_sum`（m = 2）
+    _ = (-Complex.I) * ((-y : ℝ) : ℂ) := by rw [h]                    -- 直前の実数の鎖
+    _ = (-Complex.I) * (((-1) * y : ℝ) : ℂ) := by rw [neg_one_mul]    -- ℝ で `-x = (-1_ℝ)x`
+    _ = (-Complex.I) * (((-1 : ℝ) : ℂ) * (y : ℂ)) := by
+        rw [real_inclusion_mul]                                       -- `real_inclusion_preserves_product`
+    _ = (-Complex.I) * ((-1 : ℂ) * (y : ℂ)) := by
+        rw [show ((-1 : ℝ) : ℂ) = (-1 : ℂ) from
+          eq_neg_of_add_eq_zero_left
+            (Complex.ext (show (-1 : ℝ) + 1 = 0 from neg_add_cancel 1) (show (0 : ℝ) + 0 = 0 from add_zero 0))]
+                                                                      -- `(-1_ℝ)_ℂ = -1_ℂ`
+    _ = ((-1 : ℂ) * Complex.I) * ((-1 : ℂ) * (y : ℂ)) := by
+        rw [neg_one_mul Complex.I]                                    -- `multiply_by_minus_one`
+    _ = (-1 : ℂ) * (Complex.I * ((-1 : ℂ) * (y : ℂ))) := mul_assoc _ _ _  -- ℂ の積の結合律
+    _ = (-1 : ℂ) * ((Complex.I * (-1 : ℂ)) * (y : ℂ)) := by
+        rw [← mul_assoc Complex.I]                                    -- ℂ の積の結合律
+    _ = (-1 : ℂ) * (((-1 : ℂ) * Complex.I) * (y : ℂ)) := by
+        rw [mul_comm Complex.I (-1 : ℂ)]                              -- ℂ の積の交換律
+    _ = (-1 : ℂ) * ((-1 : ℂ) * (Complex.I * (y : ℂ))) := by
+        rw [mul_assoc (-1 : ℂ) Complex.I]                             -- ℂ の積の結合律
+    _ = ((-1 : ℂ) * (-1 : ℂ)) * (Complex.I * (y : ℂ)) := (mul_assoc _ _ _).symm -- ℂ の積の結合律
+    _ = 1 * (Complex.I * (y : ℂ)) := by
+        rw [neg_one_mul, neg_neg]                  -- `(-1_ℂ)(-1_ℂ) = 1_ℂ`（`(-1)(-1) = -(-1) = 1`）
+    _ = Complex.I * (y : ℂ) := one_mul _                              -- `1_ℂ` は積の単位元
+
+/-- （読み）人手の `exp_sum` を `N` と `κ` で当てた形:
+`∑_{j=1}^{N} exp(i(y_j)_ℂ) = (M_col)_ℂ δ^{(M_col)}_{(κ,0)}`（`y_j = 2π j_ℝ κ_ℝ / (M_col)_ℝ`）。
+人手は「`exp_sum` の左辺の指数 `2πijκ/N` は `i(y_j)_ℂ`」と読む。Lean の `exp_sum` の具体版 `expPhase_sum` は
+`exp(-√-1·2π jk/M)` の和で述べてあるので、`k ↦ -κ` で当て、`M ∣ x ⟺ M ∣ -x` で `δ` を戻す。 -/
+theorem exp_sum_as_I_mul_real (hM : M ≠ 0) (κ : ℤ) :
+    ∑ j : Fin M, Complex.exp (Complex.I
+        * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * (κ : ℝ) / (M : ℝ) : ℝ) : ℂ))
+      = (M : ℂ) * deltaMod M κ 0 := by
+  have hterm : ∀ j : Fin M,
+      Complex.exp (Complex.I
+          * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * (κ : ℝ) / (M : ℝ) : ℝ) : ℂ))
+        = expPhase M (((j : ℕ) + 1 : ℤ) * (-κ)) := by
+    intro j
+    rw [expPhase]
+    congr 1
+    push_cast
+    ring
+  rw [Finset.sum_congr rfl fun j _ => hterm j, expPhase_sum hM (-κ), deltaMod, deltaMod,
+    sub_zero, sub_zero]
+  simp only [dvd_neg]
 
 /-! ## 原文の 3 つの反交換関係（`μ, ν ∈ ℤ` 版） -/
 
@@ -82,25 +214,35 @@ theorem acomm_checkZ_checkZ (hM : M ≠ 0) (μ ν : ℤ) :
           checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((j : ℕ) : ℤ) + 1) ν)
             • (1 : TensorPow M) :=
         sum_sum_smul_two_deltaM_smul_one _ _
-      -- (∵ theorem_exp_product (n = 1))
+      -- （読み）checkPhase M j λ は人手の e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ) そのもの
     _ = (2 * ∑ j : Fin M,
-          expPhase (2 * M) ((((j : ℕ) : ℤ) + 1) * (2 * μ - 1) + (((j : ℕ) : ℤ) + 1) * (2 * ν - 1)))
+          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
+            * Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
-        simp_rw [checkPhase, ← expPhase_add]
-      -- (∵ θ~_μ + θ~_ν = 2π(μ+ν-1)/M)
-    _ = (2 * ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * (μ + ν - 1)))
+        simp_rw [checkPhase_eq_exp_neg_I_mul hM]
+      -- (∵ scalar_exp_product を K = ℂ で各 j へ同時適用。Lean は mathlib の Complex.exp_add)
+    _ = (2 * ∑ j : Fin M,
+          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
+            + (-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+            • (1 : TensorPow M) := by
+        simp_rw [← Complex.exp_add]
+      -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
+    _ = (2 * ∑ j : Fin M,
+          Complex.exp (Complex.I * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
+            * ((-(μ + ν - 1) : ℤ) : ℝ) / (M : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [show (((j : ℕ) : ℤ) + 1) * (2 * μ - 1) + (((j : ℕ) : ℤ) + 1) * (2 * ν - 1)
-            = 2 * ((((j : ℕ) : ℤ) + 1) * (μ + ν - 1)) by ring,
-          expPhase_two_mul hM]
-      -- (∵ exp_sum)
-    _ = (2 * ((M : ℂ) * deltaMod M (μ + ν - 1) 0)) • (1 : TensorPow M) := by
-        rw [expPhase_sum hM]
+        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (((j : ℕ) : ℤ) + 1) μ ν)]
+      -- (∵ exp_sum を N と κ で。準備 2 の読み)
+    _ = (2 * ((M : ℂ) * deltaMod M (-(μ + ν - 1)) 0)) • (1 : TensorPow M) := by
+        rw [exp_sum_as_I_mul_real hM]
       -- (∵ def_delta_M)
+    _ = (2 * ((M : ℂ) * deltaMod M (μ + ν) 1)) • (1 : TensorPow M) := by
+        rw [deltaMod_neg_sub_one]
+      -- (∵ ℂ の積の結合律)
     _ = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
-        rw [deltaMod_sub_one, mul_assoc]
+        rw [mul_assoc]
 
 /-- **原文第 3 式（合同式版）**: `[check(Y)_μ, check(Y)_ν]₊ = 2M δ^M_{(μ+ν,1)} I`。 -/
 theorem acomm_checkY_checkY (hM : M ≠ 0) (μ ν : ℤ) :
@@ -126,25 +268,35 @@ theorem acomm_checkY_checkY (hM : M ≠ 0) (μ ν : ℤ) :
           checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((j : ℕ) : ℤ) + 1) ν)
             • (1 : TensorPow M) :=
         sum_sum_smul_two_deltaM_smul_one _ _
-      -- (∵ theorem_exp_product (n = 1))
+      -- （読み）checkPhase M j λ は人手の e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ) そのもの
     _ = (2 * ∑ j : Fin M,
-          expPhase (2 * M) ((((j : ℕ) : ℤ) + 1) * (2 * μ - 1) + (((j : ℕ) : ℤ) + 1) * (2 * ν - 1)))
+          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
+            * Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
-        simp_rw [checkPhase, ← expPhase_add]
-      -- (∵ θ~_μ + θ~_ν = 2π(μ+ν-1)/M)
-    _ = (2 * ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * (μ + ν - 1)))
+        simp_rw [checkPhase_eq_exp_neg_I_mul hM]
+      -- (∵ scalar_exp_product を K = ℂ で各 j へ同時適用。Lean は mathlib の Complex.exp_add)
+    _ = (2 * ∑ j : Fin M,
+          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
+            + (-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+            • (1 : TensorPow M) := by
+        simp_rw [← Complex.exp_add]
+      -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
+    _ = (2 * ∑ j : Fin M,
+          Complex.exp (Complex.I * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
+            * ((-(μ + ν - 1) : ℤ) : ℝ) / (M : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [show (((j : ℕ) : ℤ) + 1) * (2 * μ - 1) + (((j : ℕ) : ℤ) + 1) * (2 * ν - 1)
-            = 2 * ((((j : ℕ) : ℤ) + 1) * (μ + ν - 1)) by ring,
-          expPhase_two_mul hM]
-      -- (∵ exp_sum)
-    _ = (2 * ((M : ℂ) * deltaMod M (μ + ν - 1) 0)) • (1 : TensorPow M) := by
-        rw [expPhase_sum hM]
+        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (((j : ℕ) : ℤ) + 1) μ ν)]
+      -- (∵ exp_sum を N と κ で。準備 2 の読み)
+    _ = (2 * ((M : ℂ) * deltaMod M (-(μ + ν - 1)) 0)) • (1 : TensorPow M) := by
+        rw [exp_sum_as_I_mul_real hM]
       -- (∵ def_delta_M)
+    _ = (2 * ((M : ℂ) * deltaMod M (μ + ν) 1)) • (1 : TensorPow M) := by
+        rw [deltaMod_neg_sub_one]
+      -- (∵ ℂ の積の結合律)
     _ = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
-        rw [deltaMod_sub_one, mul_assoc]
+        rw [mul_assoc]
 
 /-- **原文第 2 式**: `[check(Z)_μ, check(Y)_ν]₊ = 0`（二重和のすべての項が `0`）。 -/
 theorem acomm_checkZ_checkY (μ ν : ℤ) : acomm (checkZ M μ) (checkY M ν) = 0 := by

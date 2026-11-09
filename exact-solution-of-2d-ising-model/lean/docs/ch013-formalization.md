@@ -62,8 +62,12 @@
 | `Ising2D.checkZ_conj` / `checkY_conj`（`ClaimConjugateIndex.lean`） | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |
 | `Ising2D.sum_sum_smul_two_deltaM_smul_one` | 証明中の行「`1 ≤ j,k ≤ M` では `δ^M_{(j,k)} = 1 ⟺ j = k`」（二重和の `j = k` の項だけが残る） | `anticommutator_of_check_Z_Y` |
-| `Ising2D.deltaMod_sub_one` | 証明中の行 `δ^M_{(μ+ν-1,0)} = δ^M_{(μ+ν,1)}`（`def_delta_M`） | `anticommutator_of_check_Z_Y` |
-| `Ising2D.acomm_checkZ_checkZ` | `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{μ+ν,1} I`（原文の式変形と 1 行ずつ対応する `calc`） | `anticommutator_of_check_Z_Y` |
+| `Ising2D.deltaMod_neg_sub_one` | 証明中の行 `δ^M_{(κ,0)} = δ^M_{(μ+ν,1)}`（`κ = -(μ+ν-1)`。`def_delta_M`） | `anticommutator_of_check_Z_Y` |
+| `Ising2D.checkPhase_eq_exp_neg_I_mul` | 準備の `e_{j,λ} = exp((-i)(j_ℝθ~_λ)_ℂ)` の読み（`checkPhase` を人手の形に直す） | 同上 |
+| `Ising2D.anticomm_exponent_real_chain` | 準備 2 の実数の鎖 `j_ℝθ~_μ + j_ℝθ~_ν = -(2πj_ℝκ_ℝ/(M_col)_ℝ)`（人手の 20 行） | 同上 |
+| `Ising2D.anticomm_exponent_complex_chain` | 準備 2 の複素数の鎖 `(-i)(a)_ℂ + (-i)(b)_ℂ = i(y_j)_ℂ`（人手の 14 行。和の像は `real_inclusion_add`、積の像は `real_inclusion_mul`） | 同上 |
+| `Ising2D.exp_sum_as_I_mul_real` | 準備 2 の読み: `exp_sum` を `N` と `κ` で当てた形 `∑ exp(i(y_j)_ℂ) = (M_col)_ℂ δ^M_{(κ,0)}` | 同上 |
+| `Ising2D.acomm_checkZ_checkZ` | `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{μ+ν,1} I`（原文の式変形と 1 行ずつ対応する `calc`。`scalar_exp_product` → 準備 2 → `exp_sum` の行は上の補題） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.acomm_checkZ_checkY` | `[check(Z)_μ, check(Y)_ν]₊ = 0` | 同上 |
 | `Ising2D.acomm_checkY_checkY` | `[check(Y)_μ, check(Y)_ν]₊ = 2M δ^M_{μ+ν,1} I` | 同上 |
 | `Ising2D.acomm_checkZ_checkZ_of_mem` / `acomm_checkY_checkY_of_mem`（`ClaimAnticommutatorCheckZY.lean`） | 上を `μ,ν ∈ 𝓜̌` で `δ_{ν,M+1-μ}` の形にしたもの（原文の主張そのもの） | 同上 |

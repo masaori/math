@@ -1181,7 +1181,11 @@ targets=(
   Ising2D.checkZ_conj
   Ising2D.checkY_conj
   Ising2D.sum_sum_smul_two_deltaM_smul_one
-  Ising2D.deltaMod_sub_one
+  Ising2D.deltaMod_neg_sub_one
+  Ising2D.checkPhase_eq_exp_neg_I_mul
+  Ising2D.anticomm_exponent_real_chain
+  Ising2D.anticomm_exponent_complex_chain
+  Ising2D.exp_sum_as_I_mul_real
   Ising2D.acomm_checkZ_checkZ
   Ising2D.acomm_checkY_checkY
   Ising2D.acomm_checkZ_checkY
