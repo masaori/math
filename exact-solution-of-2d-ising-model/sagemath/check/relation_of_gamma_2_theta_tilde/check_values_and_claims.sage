@@ -93,15 +93,18 @@ for (Yv, Zv) in COUPLINGS:
                 tick(two_lines[j] == two_lines[j + 1], "(2) の鎖 左辺 = 第 1 行" if j == 0 else f"(2) の鎖 第 {j} 行 = 第 {j+1} 行")
             tick(to_pair(cj(g) * g) == (abs2, AA(0)), "(2) complex_conjugate_times_self: conj(γ)γ = (|γ|^2)_C")
             tick(to_pair(g * gm) == (-abs2, AA(0)), "(2) γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_C")
+            tick((-1) * absg**2 == -(absg**2), "(2) の鎖 最後の行: ((-1)|γ|^2)_C = (-|γ|^2)_C（ℝ で (-1)a = -a の a → |γ|^2）")
+            tick((-1) * absg**2 != absg**2, "(2) の鎖 最後の行 否定の対照: (-1)a を a に取り違えると等号が崩れる（|γ| > 0）")
             tick(g != 0 and absg != 0 and absg > 0, "(2) |γ| ≠ 0、|γ| > 0")
             tick(absg**2 == abs2, "(2) |γ|^2（def_power_of_real_number の冪）は abs_basic_properties (2) の x^2+y^2")
             # 0 < |γ|^2 の鎖 3 行
-            tick(AA(0) == AA(0) * absg, "(2) 0 < |γ|^2 の鎖 第 1 行: 0 = 0·|γ|")
+            tick(AA(0) == AA(0) * absg, "(2) 0 < |γ|^2 の鎖 第 1 行: 0 = 0·|γ|（ℝ で 0·x = 0 の x → |γ| を右辺から左辺へ）")
+            tick(AA(0) * absg != absg, "(2) 0 < |γ|^2 の鎖 第 1 行 否定の対照: 0·x を x に取り違えると 0 にならない（|γ| > 0）")
             tick(AA(0) * absg < absg * absg, "(2) 0 < |γ|^2 の鎖 第 2 行: 0·|γ| < |γ||γ|")
             tick(absg * absg == absg**2, "(2) 0 < |γ|^2 の鎖 第 3 行: |γ||γ| = |γ|^2（square_of_real_number_is_product を右辺から左辺へ）")
             # -|γ|^2 < 0 の鎖 2 行
             tick(-(absg**2) < -AA(0), "(2) -|γ|^2 < 0 の鎖 第 1 行: -|γ|^2 < -0")
-            tick(-AA(0) == AA(0), "(2) -|γ|^2 < 0 の鎖 第 2 行: -0 = 0")
+            tick(-AA(0) == AA(0), "(2) -|γ|^2 < 0 の鎖 第 2 行: -0 = 0（ℝ で -0 = 0）")
             tick(gm != 0, "(2) γ_2(-θ) ≠ 0_C")
             tick(cc_conj(cc_conj(gp)) == gp, "(2) 背理の鎖の二重の共役")
             # (3)
@@ -170,17 +173,22 @@ for (Yv, Zv) in COUPLINGS:
             five_lines = [
                 phi_cartesian((sqrt_aa(r), pi_ / 2 - 0 * pi_)),
                 phi_cartesian((absg, pi_ / 2 - 0 * pi_)),
-                phi_cartesian((absg, pi_ / 2)),
+                phi_cartesian((absg, pi_ / 2 - Ang(0))),     # 0·x = 0 (x → π)
+                phi_cartesian((absg, pi_ / 2)),              # a - 0 = a (a → π/2)
                 (absg * cos_sin(pi_ / 2)[0], absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * 1),
-                (AA(0), absg),
+                (AA(0), absg * 1),                           # x·0 = 0 (x → |γ|)
+                (AA(0), absg),                               # x·1 = x (x → |γ|)
                 cc_mul((AA(0), AA(1)), (absg, AA(0))),
                 cc_mul(to_pair(I_), (absg, AA(0))),
                 cc_mul(to_pair(I_), iota(absg, AA)),
             ]
             for j in range(len(five_lines) - 1):
                 tick(five_lines[j] == five_lines[j + 1], f"(5) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(pi_ / 2 - 0 * pi_ == pi_ / 2 - Ang(0) and pi_ / 2 - Ang(0) == pi_ / 2, "(5) の鎖 角度の 2 行（π/2 - 0·π = π/2 - 0 = π/2）")
+            tick(pi_ / 2 - 1 * pi_ != pi_ / 2, "(5) の鎖 角度 否定の対照: 0·π を 1·π に取り違えると π/2 - π ≠ π/2")
+            tick(absg * 1 != AA(0) and absg * 0 != absg, "(5) の鎖 第 9・10 行 否定の対照: x·0 と x·1 を取り違えると等号が崩れる（|γ| > 0）")
             tick(sqrt_cc_by_definition((-r, AA(0)), (r, pi_)) == five_lines[0], "(5) 第 2 行: sqrt_expansion_via_polar の値が def_sqrt_cc の値と一致")
             tick(to_pair(QQbar(-r).sqrt()) == (AA(0), absg), "(5) 対照: Sage の QQbar の平方根（主値）とも一致")
 

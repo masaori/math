@@ -2800,7 +2800,7 @@ s_1c_2
 &= \left((-1)\left|\gamma_2(\theta)\right|^2\right)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= \left(-\left|\gamma_2(\theta)\right|^2\right)_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-1)a = -a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \left|\gamma_2(\theta)\right|^2\bigr)
 \end{aligned}`),
       paragraph([
         "これが主張 (2) の等式である。次に主張 (2) の不等式、すなわち実数 ",
@@ -2824,7 +2824,7 @@ s_1c_2
       displayMath(String.raw`\begin{aligned}
 0
 &= 0\cdot\left|\gamma_2(\theta)\right|
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
 &< \left|\gamma_2(\theta)\right|\left|\gamma_2(\theta)\right|
 &&(\because\ 0 < \left|\gamma_2(\theta)\right|\ \text{の両辺に正の実数}\ \left|\gamma_2(\theta)\right|\ \text{を掛ける})\\
 &= \left|\gamma_2(\theta)\right|^2
@@ -2835,7 +2835,7 @@ s_1c_2
 &< -0
 &&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺の符号を反転すると向きが変わる})\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`\gamma_2(-\theta) \neq 0_{\mathbb{C}}`),
@@ -2983,6 +2983,8 @@ s_1c_2
         math(String.raw`(r,0)`),
         " の角度 ",
         math(String.raw`0`),
+        " の ",
+        ref("angle_section_existence_uniqueness"),
         " の整数は準備により ",
         math(String.raw`0`),
         " である。主張 (4) の左辺から始める。",
@@ -3028,6 +3030,8 @@ s_1c_2
         math(String.raw`(r,\pi)`),
         " の角度 ",
         math(String.raw`\pi`),
+        " の ",
+        ref("angle_section_existence_uniqueness"),
         " の整数は準備により ",
         math(String.raw`0`),
         " である。主張 (5) の左辺から始める。",
@@ -3040,16 +3044,20 @@ s_1c_2
 &&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,\pi)\ \text{と整数}\ 0\ \text{で})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\right)\right]_{\sim}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \pi\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}\right)\right]_{\sim}\right)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \tfrac{\pi}{2}\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cos\tfrac{\pi}{2},\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
 &&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
 &&(\because\ \text{準備の}\ \cos(\pi/2) = 0)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
 &&(\because\ \text{準備の}\ \sin(\pi/2) = 1)\\
+&= \bigl(0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
 &= \bigl(0,\ \left|\gamma_2(\theta)\right|\bigr)
-&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 1 = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
 &= (0,1)\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積}\ (0\cdot|\gamma_2(\theta)| - 1\cdot 0,\ 0\cdot 0 + 1\cdot|\gamma_2(\theta)|))\\
 &= i\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
@@ -3077,6 +3085,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の 0 < π の鎖（arcsin(0) = 0 を経て π = 2arcsin(1) > 2arcsin(0) = 0）を、zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明から独立させた主張 pi_is_positive の参照にした。arcsin(0) = 0 の鎖は 0 < π の鎖にしか使われていなかったので外した。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3)(4) で 1 行に 2 つ以上の事実を使っていた行を割った。(3) の φ_polar((−r)_C) の鎖の「ℝ の四則」1 行（(−r)^2 = r^2・0^2 = 0・r^2 + 0 = r^2・0/(−r) = 0）を、square_of_real_number_is_product（r → −r）、ℝ で (−a)(−b) = ab（a, b → r）、square_of_real_number_is_product（r → r）を右辺から左辺へ、同（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → r^2。ℝ は体）、ℝ で 0/x = 0（x → −r）の 7 行に割った。(3) の主の鎖は、角度 π の angle_section_existence_uniqueness の整数が 0 であることを鎖の前の段落へ出して s_{[0,2π)} の行の根拠を section_of_angle_representation（θ → π、n → 0）だけにし、π − 2·0·π = π を x·0 = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → π）の 3 行に割った。(4) の −γγ' の鎖の最後 (−1)(−r) = r を (−a)(−b) = ab（a → 1、b → r）と 1·x = x（x → r）の 2 行に、φ_polar(r_C) の鎖の「ℝ の四則」1 行（0^2 = 0・r^2 + 0 = r^2・0/r = 0）を 4 行に割り、次の行の根拠に definition_of_sqrt_r_positive の前提「r ≥ 0 かつ r^2 = r^2」を書いた。(4) の主の鎖の 0/2 − 0·π = 0 を 0/x = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → 0）の 3 行に、「ℝ の四則を 2 箇所へ」を x·1 = x と x·0 = 0（x → |γ_2(θ)|）の 2 行に割った（0/x = 0 の x → 2 に 2 ≠ 0 を添えた）。(3) の φ_polar((−r)_C) の鎖の最後の 0 + a = a の行に「ℝ は体」を添えた。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第五の sin(π/2) の鎖の 1 行目の根拠と前の段落の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、数学的道具立てに足した arcsin_of_one_is_half_pi の参照にした。値と主張は不変。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: (3)(4) の外で 1 行に 2 つ以上の事実を使うか名前だけの根拠だった 5 行を割った。(2) の鎖の最後の「ℝ の四則」を ℝ で (−1)a = −a（a → |γ_2(θ)|^2）に、0 = 0·|γ_2(θ)| の「ℝ の四則」を ℝ で 0·x = 0（x → |γ_2(θ)|）を右辺から左辺へに、−0 = 0 の「ℝ の四則」を ℝ で −0 = 0 に、(5) の π/2 − 0·π = π/2 を 0·x = 0（x → π）と a − 0 = a（a → π/2）の 2 行に、(5) の「ℝ の四則を 2 箇所へ」を x·0 = 0 と x·1 = x（x → |γ_2(θ)|）の 2 行にした（どれも ℝ は体 set_and_algebra_notation を添えた）。(4)(5) の鎖の前の段落の「整数は準備により 0」を、(3) と同じく angle_section_existence_uniqueness を引く書き方に揃えた。値と主張は不変。",
       ],
     },
   },

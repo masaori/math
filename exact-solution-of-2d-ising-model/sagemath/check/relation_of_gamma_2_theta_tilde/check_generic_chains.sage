@@ -170,8 +170,8 @@ rep.check(cc_conj(zero) == zero, "背理の鎖: conj(0_C) = 0_C")
 Pz = (g0, x)   # γ_2(θ)γ_2(-θ) を一般の対で
 rep.check(cc_neg(Pz, Rz) == cc_mul(m1, Pz), "(4) の準備 第 1 行: -z = (-1_C) z")
 rep.check(cc_mul(iz(-1), iz(-r0)) == iz((-1) * (-r0)) and iz((-1) * (-r0)) == iz(r0), "(4) の準備 第 3・4 行: (-1_C)(-r)_C = ((-1)(-r))_C = r_C")
-rep.check(cc_mul((Rz(0), Rz(1)), iz(g0)) == (Rz(0), g0), "(5) 第 9 行: (0,1)(|γ|, 0) = (0, |γ|)")
-rep.check(iz(g0) == (g0, Rz(0)), "(5) 第 11 行: (|γ|, 0) = |γ|_C")
-rep.check(cc_mul(iz(g0), (Rz(1), Rz(0))) == (g0, Rz(0)) and (g0 * 1, g0 * 0) == (g0, 0), "(4) 第 8 行: (|γ|·1, |γ|·0) = (|γ|, 0)")
+rep.check(cc_mul((Rz(0), Rz(1)), iz(g0)) == (Rz(0), g0), "(5) 第 11 行: (0,1)(|γ|, 0) = (0, |γ|)")
+rep.check(iz(g0) == (g0, Rz(0)), "(5) 第 13 行: (|γ|, 0) = |γ|_C")
+rep.check(cc_mul(iz(g0), (Rz(1), Rz(0))) == (g0, Rz(0)) and (g0 * 1, g0 * 0) == (g0, g0 * 0) and (g0, g0 * 0) == (g0, 0), "(4) 第 9〜11 行: (|γ|·1, |γ|·0) = (|γ|, |γ|·0) = (|γ|, 0)")
 
 rep.finish()
