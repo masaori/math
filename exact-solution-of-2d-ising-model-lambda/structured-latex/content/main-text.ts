@@ -13404,7 +13404,7 @@ A_i\cap(E\setminus F)
                   displayMath(String.raw`\begin{aligned}
 A\cap(E\setminus F)
 &=C\cap(E\setminus F)
-&&\bigl(\because\ \text{操作中に切り替えた辺はすべて }F\text{ に属する}\bigr)\\
+&&\bigl(\because\ \blkref{claim_tree_edge_toggles_preserve_outside}\text{ と初期状態 }A=C\bigr)\\
 &=C
 &&\bigl(\because\ C\subseteq E\setminus F\bigr)
 \end{aligned}`),
