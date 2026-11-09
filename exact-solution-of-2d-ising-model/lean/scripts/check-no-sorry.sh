@@ -1432,6 +1432,11 @@ targets=(
   Ising2D.factorization_step1_N12
   Ising2D.factorization_step1_N21
   Ising2D.factorization_step1_N22
+  Ising2D.factorization_neg_I_mul_I
+  Ising2D.factorization_step2_P11
+  Ising2D.factorization_step3_P22
+  Ising2D.factorization_step2_P11_real
+  Ising2D.factorization_step3_P22_real
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.B1mat_col_zero
