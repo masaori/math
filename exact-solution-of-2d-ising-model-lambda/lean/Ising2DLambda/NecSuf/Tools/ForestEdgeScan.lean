@@ -77,4 +77,24 @@ theorem forestEdgeScan_allEdges_reachable {V : Type*} (G : SimpleGraph V)
     (forestEdgeScan G pairs).Reachable u v :=
   forestEdgeScan_inspected_reachable G pairs (u, v) (hcover u v hadj) hadj
 
+/-- A covered finite edge list suffices; the vertex type itself need not be finite. -/
+theorem forestEdgeScan_spanningTree {V : Type*} (G : SimpleGraph V)
+    (pairs : List (V × V)) (hcover : ∀ u v, G.Adj u v → (u, v) ∈ pairs)
+    (hnonempty : Nonempty V) (hconnected : ∀ u v, G.Reachable u v) :
+    (forestEdgeScan G pairs).IsTree := by
+  let T := forestEdgeScan G pairs
+  have hedge : ∀ u v, G.Adj u v → T.Reachable u v := by
+    intro u v huv
+    exact forestEdgeScan_allEdges_reachable G pairs hcover huv
+  have hreach : ∀ u v, G.Reachable u v → T.Reachable u v := by
+    intro u v huv
+    apply huv.elim
+    intro p
+    induction p with
+    | nil => exact Reachable.refl _
+    | cons ha p ih => exact (hedge _ _ ha).trans (ih p.reachable)
+  exact { preconnected := fun u v => hreach u v (hconnected u v)
+          nonempty := hnonempty
+          isAcyclic := (forestEdgeScan_invariant G pairs).1 }
+
 end Ising2DLambda.NecSuf.Tools

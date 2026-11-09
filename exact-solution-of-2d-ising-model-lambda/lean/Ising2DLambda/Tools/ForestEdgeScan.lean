@@ -81,4 +81,36 @@ theorem forestEdgeScan_allEdges_reachable {n : ℕ} (G : FiniteSimpleGraph n)
     (forestEdgeScan G pairs).Reachable u v :=
   forestEdgeScan_inspected_reachable G pairs (u, v) (hcover u v hadj) hadj
 
+/-- Scanning every ordered vertex pair produces a spanning tree of a connected finite graph. -/
+theorem finiteGraphConnected_has_spanningTree {n : ℕ} (G : FiniteSimpleGraph n)
+    (hG : FiniteGraphConnected G) :
+    ∃ T : FiniteSimpleGraph n, FiniteSpanningTree G T := by
+  classical
+  let pairs : List (Fin n × Fin n) := (Finset.univ : Finset (Fin n × Fin n)).toList
+  let T := forestEdgeScan G pairs
+  have hcover : ∀ u v, G.Adj u v → (u, v) ∈ pairs := by
+    intro u v _
+    simp [pairs]
+  have hedge : ∀ u v, G.Adj u v → T.Reachable u v := by
+    intro u v huv
+    exact forestEdgeScan_allEdges_reachable G pairs hcover huv
+  have hreach : ∀ u v, G.Reachable u v → T.Reachable u v := by
+    -- Replace each edge of the original walk by its path in the final forest.
+    intro u v huv
+    apply huv.elim
+    intro p
+    induction p with
+    | nil => exact Reachable.refl _
+    | cons ha p ih => exact (hedge _ _ ha).trans (ih p.reachable)
+  have hconn : FiniteGraphConnected T := by
+    refine ⟨hG.1, ?_⟩
+    intro u v
+    have hr : T.Reachable u v := hreach u v (hG.2 u v).some.1.reachable
+    -- Erasing repeated vertices gives the simple path required by the paper's definition.
+    exact ⟨hr.some.toPath⟩
+  have hinvariant := forestEdgeScan_invariant G pairs
+  refine ⟨T, ⟨⟨hconn, ?_⟩, hinvariant.2⟩⟩
+  intro u ⟨p⟩
+  exact hinvariant.1 p.1 p.2
+
 end Ising2DLambda.Tools

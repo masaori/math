@@ -134,6 +134,7 @@ export const ALL_LABELS = [
   "claim_even_subgraph_spin_sum",
   "claim_exterior_cell_set_edge_connected",
   "claim_finite_cell_set_boundary_winding_zero",
+  "claim_finite_connected_graph_has_spanning_tree",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",
   "claim_finite_map_iterate_add",
