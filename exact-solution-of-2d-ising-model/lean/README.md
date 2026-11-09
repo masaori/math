@@ -790,7 +790,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.gamma2_neg_eq_neg_conj` | `γ_2(-θ) = -conj(γ_2(θ))` | `relation_of_gamma_2` |
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq` | `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2` | 同上 |
 | `Ising2D.gamma2_neg_eq_zero_iff` | `γ_2(-θ) = 0 ⟺ γ_2(θ) = 0` | 同上の系 |
-| `Ising2D.gamma2_add_int_mul_two_pi` | `γ_2` の `2π` 周期性（後段で必須。`DefinitionCheckFermi.lean` が使う） | `periodicity_of_check_fermi` の (1) の `γ_2` 側 |
+| `Ising2D.gamma2_add_two_pi_mul_int` | `γ_2` の `2π` 周期性 `γ_2(θ + 2π k_ℝ) = γ_2(θ)`（人手の 6 行と 1 対 1。`DefinitionCheckFermi.lean` が使う） | `periodicity_of_check_fermi` の (1) の `γ_2` 側 |
 | `Ising2D.gamma2_thetaMu_of_dvd` | `M ∣ μ+ν ⇒ γ_2(θ_ν) = γ_2(-θ_μ)`（整数運動量の経路の `DefinitionFermiPsi.lean` だけが使う） | 参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した `gamma2_theta_M_periodicity`（`γ_2(θ_M) = γ_2(θ_{-M})`）の一般形 |
 | `Ising2D.gamma2_eq_zero_iff` | `γ_2(θ) = 0 ⟺ s_2^* = 0 ∨ (sin θ = 0 ∧ c_1cos θ = s_1c_2)` | `gamma_2_theta_is_0`（**原文は `s_2^* = 0` を落としている**） |
 | `Ising2D.sin_thetaMu_eq_zero_iff` | `sin θ_μ = 0 ⟺ M ∣ 2μ` | 同上（**原文の「⟺ μ = ±M」は不足**） |

@@ -451,25 +451,56 @@ theorem gamma2_neg_eq_zero_iff : gamma2 K (-θ) = 0 ↔ gamma2 K θ = 0 := by
 
 /-! ## `γ_2` の周期性
 
-後段（`δ^M_{μ+ν,0}` の場面で `γ_2(θ_ν) = γ_2(-θ_μ)` を使うところ）で必要になる。
-原文 `TV1_hatZ_hatY_041_claim_gamma2_periodicity` に対応する。 -/
+人手 `periodicity_of_check_fermi` の (1) の `γ_2` 側。後段（`DefinitionCheckFermi.lean` の (2)・(3)、
+整数運動量の経路の `δ^M_{μ+ν,0}` の場面）で使う。 -/
 
-/-- `γ_2` は `2π` 周期（整数倍のずらしで不変）。 -/
-theorem gamma2_add_int_mul_two_pi (k : ℤ) :
-    gamma2 K (θ + k * (2 * Real.pi)) = gamma2 K θ := by
-  have hc : Real.cos (θ + k * (2 * Real.pi)) = Real.cos θ := Real.cos_add_int_mul_two_pi θ k
-  have hs : Real.sin (θ + k * (2 * Real.pi)) = Real.sin θ := Real.sin_add_int_mul_two_pi θ k
-  have he : Complex.exp (Complex.I * ((θ + k * (2 * Real.pi) : ℝ) : ℂ))
-      = Complex.exp (Complex.I * (θ : ℂ)) := by
-    have hsplit : Complex.I * ((θ + k * (2 * Real.pi) : ℝ) : ℂ)
-        = Complex.I * (θ : ℂ) + (k : ℂ) * (2 * (Real.pi : ℂ) * Complex.I) := by
-      push_cast; ring
-    rw [hsplit, Complex.exp_add, Complex.exp_int_mul_two_pi_mul_I, mul_one]
-  rw [gamma2, gamma2, hc, hs, he]
+/-- 人手 `periodicity_of_check_fermi` が前提とする全実数上の `cos` の `2π` 周期性
+（`x ∈ ℝ`、`n ∈ ℤ` について `cos(x + 2π n_ℝ) = cos x`）。人手は全実数上の `cos` を未整備の前提として置くので、
+mathlib の `Real.cos_add_int_mul_two_pi`（角度は `n_ℝ (2π)` の順）で受け、積の順を `2π n_ℝ` に揃える。 -/
+theorem real_cos_add_two_pi_mul_int (x : ℝ) (n : ℤ) :
+    Real.cos (x + 2 * Real.pi * (n : ℝ)) = Real.cos x := by
+  rw [mul_comm (2 * Real.pi) (n : ℝ)]
+  exact Real.cos_add_int_mul_two_pi x n
 
-/-- `γ_2` は `2π` 周期。 -/
+/-- 同じく前提の `sin` の `2π` 周期性（`sin(x + 2π n_ℝ) = sin x`）。 -/
+theorem real_sin_add_two_pi_mul_int (x : ℝ) (n : ℤ) :
+    Real.sin (x + 2 * Real.pi * (n : ℝ)) = Real.sin x := by
+  rw [mul_comm (2 * Real.pi) (n : ℝ)]
+  exact Real.sin_add_int_mul_two_pi x n
+
+/-- 人手 `periodicity_of_check_fermi` (1) の `γ_2` 側: `γ_2(θ + 2π k_ℝ) = γ_2(θ)`（人手の 6 行）。
+2・5 行目の「準備の `exp(ix)` の表示」は、人手の準備の「第一に」の最後の鎖 `cos x + i sin x = exp(ix)`
+（`relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖と同じ 17 行）の具体版 `real_inclusion_cos_add_I_mul_sin` である。 -/
+theorem gamma2_add_two_pi_mul_int (k : ℤ) :
+    gamma2 K (θ + 2 * Real.pi * (k : ℝ)) = gamma2 K θ :=
+  calc gamma2 K (θ + 2 * Real.pi * (k : ℝ))
+      = Complex.I * Complex.exp (Complex.I * ((θ + 2 * Real.pi * (k : ℝ) : ℝ) : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos (θ + 2 * Real.pi * (k : ℝ)) : ℂ)
+            - Complex.I * (Real.sin (θ + 2 * Real.pi * (k : ℝ)) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [gamma2]                               -- 1 行目: `def_gamma1_gamma2_of_theta` を `θ + 2π k_ℝ` に適用
+    _ = Complex.I * (((Real.cos (θ + 2 * Real.pi * (k : ℝ)) : ℝ) : ℂ)
+            + Complex.I * ((Real.sin (θ + 2 * Real.pi * (k : ℝ)) : ℝ) : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos (θ + 2 * Real.pi * (k : ℝ)) : ℂ)
+            - Complex.I * (Real.sin (θ + 2 * Real.pi * (k : ℝ)) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_inclusion_cos_add_I_mul_sin (θ + 2 * Real.pi * (k : ℝ))]
+                                                  -- 2 行目: 準備の `exp(ix)` の表示を `x = θ + 2π k_ℝ` で
+    _ = Complex.I * (((Real.cos θ : ℝ) : ℂ)
+            + Complex.I * ((Real.sin (θ + 2 * Real.pi * (k : ℝ)) : ℝ) : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ)
+            - Complex.I * (Real.sin (θ + 2 * Real.pi * (k : ℝ)) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_cos_add_two_pi_mul_int θ k]      -- 3 行目: `cos` の `2π` 周期性を `n = k` で 2 箇所へ同時適用
+    _ = Complex.I * (((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_sin_add_two_pi_mul_int θ k]      -- 4 行目: `sin` の `2π` 周期性を `n = k` で 2 箇所へ同時適用
+    _ = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_inclusion_cos_add_I_mul_sin θ]   -- 5 行目: 準備の `exp(ix)` の表示を `x = θ` で
+    _ = gamma2 K θ := by
+        rw [gamma2]                               -- 6 行目: `def_gamma1_gamma2_of_theta`
+
+/-- `γ_2` は `2π` 周期（`gamma2_add_two_pi_mul_int` を `k = 1` で）。人手に対応するラベルは無い補助の系。 -/
 theorem gamma2_add_two_pi : gamma2 K (θ + 2 * Real.pi) = gamma2 K θ := by
-  have := gamma2_add_int_mul_two_pi K θ 1
+  have := gamma2_add_two_pi_mul_int K θ 1
   simpa using this
 
 @[simp]
@@ -477,8 +508,10 @@ theorem thetaMu_neg (M : ℕ) (μ : ℤ) : thetaMu M (-μ) = -thetaMu M μ := by
   simp [thetaMu]
   ring
 
+/-- 整数運動量の経路だけが使う（本文に対応するブロックは無く、人手は参照用ノート
+`integer_momentum_route_not_adopted.ts` に退避している）。 -/
 theorem thetaMu_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
-    thetaMu M (μ + k * M) = thetaMu M μ + k * (2 * Real.pi) := by
+    thetaMu M (μ + k * M) = thetaMu M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
   rw [thetaMu, thetaMu]
   push_cast
@@ -487,17 +520,17 @@ theorem thetaMu_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
 /-- `γ_2(θ_{μ+M}) = γ_2(θ_μ)`（`θ_μ` の `M` 周期性）。 -/
 theorem gamma2_thetaMu_add_M (M : ℕ) (hM : M ≠ 0) (μ : ℤ) :
     gamma2 K (thetaMu M (μ + M)) = gamma2 K (thetaMu M μ) := by
-  have h : thetaMu M (μ + M) = thetaMu M μ + (1 : ℤ) * (2 * Real.pi) := by
+  have h : thetaMu M (μ + M) = thetaMu M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
     have := thetaMu_add_int_mul M hM μ 1
     simpa using this
-  rw [h, gamma2_add_int_mul_two_pi]
+  rw [h, gamma2_add_two_pi_mul_int]
 
 /-- **後段で使う形**: `μ + ν ≡ 0 (mod M)` のとき `γ_2(θ_ν) = γ_2(-θ_μ)`。 -/
 theorem gamma2_thetaMu_of_dvd (M : ℕ) (hM : M ≠ 0) (μ ν : ℤ) (h : (M : ℤ) ∣ (μ + ν)) :
     gamma2 K (thetaMu M ν) = gamma2 K (-thetaMu M μ) := by
   obtain ⟨k, hk⟩ := h
   have hν : ν = -μ + k * M := by linear_combination hk
-  rw [hν, thetaMu_add_int_mul M hM (-μ) k, gamma2_add_int_mul_two_pi, thetaMu_neg]
+  rw [hν, thetaMu_add_int_mul M hM (-μ) k, gamma2_add_two_pi_mul_int, thetaMu_neg]
 
 /-! ## `γ_2(θ) = 0` となる条件（原文 `gamma_2_theta_is_0`） -/
 

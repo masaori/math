@@ -266,7 +266,9 @@ targets=(
   Ising2D.gamma2_neg_eq_neg_conj
   Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq
   Ising2D.gamma2_neg_eq_zero_iff
-  Ising2D.gamma2_add_int_mul_two_pi
+  Ising2D.gamma2_add_two_pi_mul_int
+  Ising2D.real_cos_add_two_pi_mul_int
+  Ising2D.real_sin_add_two_pi_mul_int
   Ising2D.gamma2_add_two_pi
   Ising2D.thetaMu_neg
   Ising2D.thetaMu_add_int_mul
@@ -1265,7 +1267,7 @@ targets=(
   Ising2D.NecSuf.lie_carHam_ann
   Ising2D.NecSuf.exp_conj_of_ad_eigen
   Ising2D.NecSuf.exp_conj_of_lie_eigen
-  Ising2D.gamma1_add_int_mul_two_pi
+  Ising2D.gamma1_add_two_pi_mul_int
   Ising2D.thetaTilde_add_int_mul
   Ising2D.gamma1_thetaTilde_conj
   Ising2D.gamma2_thetaTilde_conj

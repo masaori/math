@@ -40,16 +40,22 @@ variable {M : ℕ}
 
 /-! ## `γ_1` の `2π` 周期性（原文 `periodicity_of_check_fermi` (1)）
 
-`γ_2` 側（`gamma2_add_int_mul_two_pi`）は 008 章で済んでいる。 -/
+`γ_2` 側（`gamma2_add_two_pi_mul_int`）は `DefinitionThetaGamma.lean` にある。 -/
 
-/-- 原文 `periodicity_of_check_fermi` (1) の `γ_1` 側: `γ_1(θ + 2kπ) = γ_1(θ)`。 -/
-theorem gamma1_add_int_mul_two_pi (K : IsingConst) (θ : ℝ) (k : ℤ) :
-    gamma1 K (θ + k * (2 * Real.pi)) = gamma1 K θ := by
-  rw [gamma1, gamma1, Real.cos_add_int_mul_two_pi]
+/-- 原文 `periodicity_of_check_fermi` (1) の `γ_1` 側: `γ_1(θ + 2π k_ℝ) = γ_1(θ)`（人手の 3 行）。 -/
+theorem gamma1_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
+    gamma1 K (θ + 2 * Real.pi * (k : ℝ)) = gamma1 K θ :=
+  calc gamma1 K (θ + 2 * Real.pi * (k : ℝ))
+      = ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos (θ + 2 * Real.pi * (k : ℝ)) : ℝ) : ℂ) := by
+        rw [gamma1]                               -- 1 行目: `def_gamma1_gamma2_of_theta` を `θ + 2π k_ℝ` に適用
+    _ = ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ) := by
+        rw [real_cos_add_two_pi_mul_int θ k]      -- 2 行目: `cos` の `2π` 周期性を `n = k` で
+    _ = gamma1 K θ := by
+        rw [gamma1]                               -- 3 行目: `def_gamma1_gamma2_of_theta`
 
-/-- 原文 `periodicity_of_check_fermi` (2): `θ̃_{μ+kM} = θ̃_μ + 2kπ`。 -/
+/-- 原文 `periodicity_of_check_fermi` (2): `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
-    thetaTilde M (μ + k * M) = thetaTilde M μ + k * (2 * Real.pi) := by
+    thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
   rw [thetaTilde, thetaTilde]
   push_cast
@@ -59,42 +65,42 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
 /-- 原文 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`。 -/
 theorem gamma1_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma1 K (thetaTilde M (μ + k * M)) = gamma1 K (thetaTilde M μ) := by
-  rw [thetaTilde_add_int_mul M hM, gamma1_add_int_mul_two_pi]
+  rw [thetaTilde_add_int_mul M hM, gamma1_add_two_pi_mul_int]
 
 /-- 原文 `periodicity_of_check_fermi` (2): `γ_2(θ̃_{μ+kM}) = γ_2(θ̃_μ)`。 -/
 theorem gamma2_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma2 K (thetaTilde M (μ + k * M)) = gamma2 K (thetaTilde M μ) := by
-  rw [thetaTilde_add_int_mul M hM, gamma2_add_int_mul_two_pi]
+  rw [thetaTilde_add_int_mul M hM, gamma2_add_two_pi_mul_int]
 
 /-- 原文 `periodicity_of_check_fermi` (2): `γ_2(-θ̃_{μ+kM}) = γ_2(-θ̃_μ)`。 -/
 theorem gamma2_neg_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma2 K (-thetaTilde M (μ + k * M)) = gamma2 K (-thetaTilde M μ) := by
-  have h : -thetaTilde M (μ + k * M) = -thetaTilde M μ + ((-k : ℤ) : ℝ) * (2 * Real.pi) := by
+  have h : -thetaTilde M (μ + k * M) = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
     rw [thetaTilde_add_int_mul M hM]; push_cast; ring
-  rw [h, gamma2_add_int_mul_two_pi]
+  rw [h, gamma2_add_two_pi_mul_int]
 
 /-! ## 共役添字 `M+1-μ`（原文 `periodicity_of_check_fermi` (3)） -/
 
 /-- 原文 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`。 -/
 theorem gamma2_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (-thetaTilde M μ) := by
-  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + (1 : ℤ) * (2 * Real.pi) := by
+  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
     rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma2_add_int_mul_two_pi]
+  rw [h, gamma2_add_two_pi_mul_int]
 
 /-- 原文 `periodicity_of_check_fermi` (3): `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)`。 -/
 theorem gamma2_neg_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (thetaTilde M μ) := by
-  have h : -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + (-1 : ℤ) * (2 * Real.pi) := by
+  have h : -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
     rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma2_add_int_mul_two_pi]
+  rw [h, gamma2_add_two_pi_mul_int]
 
 /-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`。 -/
 theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1 K (thetaTilde M μ) := by
-  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + (1 : ℤ) * (2 * Real.pi) := by
+  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
     rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma1_add_int_mul_two_pi, gamma1_neg]
+  rw [h, gamma1_add_two_pi_mul_int, gamma1_neg]
 
 /-! ## `r := |γ_2(θ̃_μ)|` -/
 
