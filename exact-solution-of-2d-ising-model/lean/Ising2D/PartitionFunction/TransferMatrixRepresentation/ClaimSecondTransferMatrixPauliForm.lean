@@ -94,23 +94,6 @@ noncomputable def V2PauliForm (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M 
 
 /-! ## 中間目標「`V_2` を `A` のクロネッカー冪で書く」 -/
 
-/-- 人手 `two_by_two_transfer_identity` の略記の取り決めでの `A` の成分 `A_{ij} = (exp(K_2(ς_iς_j)))_ℂ`
-（複素行列の成分に書いた実数 `a` は `a_ℂ`）。Lean の `twoByTwo` は成分を `exp((K_2)_ℂ ς_i ς_j)`（`ς` は `sgnC`）と書くので、
-その読み替え: `complex_exp_of_real_argument`（具体版が無く `Complex.ofReal_exp`）と `real_inclusion_preserves_product`
-（`real_inclusion_mul` を 2 回）。積の並べ方 `((K_2)_ℂ ς_i)ς_j = (K_2)_ℂ(ς_iς_j)` は ℂ の積の結合法則。 -/
-theorem twoByTwo_apply_eq_real_inclusion (K2 : ℝ) (i j : Fin 2) :
-    twoByTwo (K2 : ℂ) i j = ((Real.exp (K2 * (sgn i * sgn j)) : ℝ) : ℂ) :=
-  calc twoByTwo (K2 : ℂ) i j
-      = Complex.exp ((K2 : ℂ) * ((sgn i : ℝ) : ℂ) * ((sgn j : ℝ) : ℂ)) := rfl -- `A` の成分（`ς` は `sgnC`）
-    _ = Complex.exp ((K2 : ℂ) * (((sgn i : ℝ) : ℂ) * ((sgn j : ℝ) : ℂ))) := by
-        rw [mul_assoc]                                                      -- ℂ の積の結合法則
-    _ = Complex.exp ((K2 : ℂ) * ((sgn i * sgn j : ℝ) : ℂ)) := by
-        rw [real_inclusion_mul]                                             -- `real_inclusion_preserves_product`
-    _ = Complex.exp (((K2 * (sgn i * sgn j) : ℝ) : ℂ)) := by
-        rw [real_inclusion_mul]                                             -- `real_inclusion_preserves_product`
-    _ = ((Real.exp (K2 * (sgn i * sgn j)) : ℝ) : ℂ) :=
-        (Complex.ofReal_exp _).symm                                         -- `complex_exp_of_real_argument`
-
 /-- 人手の式変形 `(V_2)_{ord(μ),ord(μ')} = ∏_m A_{i_m j_m} = (A ⊠ ⋯ ⊠ A)_{ord(μ),ord(μ')}` の 7 行。
 
 1〜6 行目は `calc` の 6 段と 1 対 1 である（4 行目 `real_inclusion_preserves_finite_product` は `M_col = 0` も含む Lean の版

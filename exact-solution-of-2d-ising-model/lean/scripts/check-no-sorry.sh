@@ -2682,6 +2682,9 @@ targets=(
   Ising2D.real_inclusion_preserves_finite_product
   Ising2D.real_inclusion_preserves_finite_product_or_empty
   Ising2D.twoByTwo_apply_eq_real_inclusion
+  Ising2D.twoByTwo_eq_real_inclusion
+  Ising2D.exp_real_smul_pauliX
+  Ising2D.sqrt_two_s2_smul_exp_Kstar_pauliX
   Ising2D.NecSuf.finProdLeft_map_of_mul
   Ising2D.real_inclusion_preserves_finite_product_of_necSuf
   Ising2D.complex_finset_prod_eq_finProdLeft
