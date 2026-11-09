@@ -18,10 +18,19 @@ def exp_sym(arg):
         return Ft(Em)
     raise ValueError(arg)
 
-rep.check(I0 * (-t) == -I0 * t and -I0 * (-t) == I0 * t, "ℂ の四則: i(-θ) = -iθ、-i(-θ) = iθ")
+# i(-θ) = -iθ の鎖 4 行と -i(-θ) = iθ の鎖 2 行（θ は QQ(i)[θ] の不定元。ℝ の元 (-1)θ の像は (-1_C)θ）
+m1c = K0(-1)
+ineg_chain = [I0 * (-t), I0 * ((-1) * t), I0 * (m1c * t), (I0 * m1c) * t, (m1c * I0) * t, m1c * (I0 * t), -(I0 * t)]
+for k in range(len(ineg_chain) - 1):
+    rep.check(ineg_chain[k] == ineg_chain[k + 1], f"i(-θ) = -iθ の鎖 第 {k+1} 行 = 第 {k+2} 行")
+rep.check(I0 * t != -(I0 * t), "i(-θ) = -iθ の鎖 否定の対照: iθ ≠ -iθ")
+nn_chain = [-(I0 * (-t)), -(-(I0 * t)), I0 * t]
+for k in range(len(nn_chain) - 1):
+    rep.check(nn_chain[k] == nn_chain[k + 1], f"-i(-θ) = iθ の鎖 第 {k+1} 行 = 第 {k+2} 行")
 cos_chain = [
     (exp_sym(I0 * (-t)) + exp_sym(-I0 * (-t))) / 2,   # euler_formula_cos_sin を -θ に適用
-    (Ft(Em) + Ft(Ep)) / 2,                           # ℂ の四則
+    (Ft(Em) + exp_sym(-(I0 * (-t)))) / 2,             # 上の i(-θ) = -iθ
+    (Ft(Em) + Ft(Ep)) / 2,                           # 上の -i(-θ) = iθ
     (Ft(Ep) + Ft(Em)) / 2,                           # 和の可換律
 ]
 cos_theta = (Ft(Ep) + Ft(Em)) / 2                    # euler_formula_cos_sin
@@ -31,20 +40,37 @@ rep.check(cos_chain[-1] == cos_theta, "cos(-θ) の鎖 最終行 = cos θ")
 
 sin_chain = [
     (exp_sym(I0 * (-t)) - exp_sym(-I0 * (-t))) / (2 * I0),
-    (Ft(Em) - Ft(Ep)) / (2 * I0),
-    -(Ft(Ep) - Ft(Em)) / (2 * I0),
+    (Ft(Em) - exp_sym(-(I0 * (-t)))) / (2 * I0),     # 上の i(-θ) = -iθ
+    (Ft(Em) - Ft(Ep)) / (2 * I0),                    # 上の -i(-θ) = iθ
+    (-(Ft(Ep) - Ft(Em))) / (2 * I0),                 # b - a = -(a - b)
+    -((Ft(Ep) - Ft(Em)) / (2 * I0)),                 # (-x)/y = -(x/y)
 ]
+rep.check(Ft(Em) - Ft(Ep) != Ft(Ep) - Ft(Em), "sin(-θ) の鎖 否定の対照: b - a ≠ a - b")
 sin_theta = (Ft(Ep) - Ft(Em)) / (2 * I0)
 for k in range(len(sin_chain) - 1):
     rep.check(sin_chain[k] == sin_chain[k + 1], f"sin(-θ) の鎖 第 {k+1} 行 = 第 {k+2} 行")
 rep.check(sin_chain[-1] == -sin_theta, "sin(-θ) の鎖 最終行 = -sin θ")
 
 euler_chain = [
-    (Ft(Ep) + Ft(Em)) / 2 + I0 * (Ft(Ep) - Ft(Em)) / (2 * I0),
-    (Ft(Ep) + Ft(Em)) / 2 + (Ft(Ep) - Ft(Em)) / 2,
-    Ft(Ep),
+    (Ft(Ep) + Ft(Em)) / 2 + I0 * ((Ft(Ep) - Ft(Em)) / (2 * I0)),
+    (Ft(Ep) + Ft(Em)) / 2 + (I0 * (Ft(Ep) - Ft(Em))) / (2 * I0),   # x(y/z) = (xy)/z
+    (Ft(Ep) + Ft(Em)) / 2 + ((Ft(Ep) - Ft(Em)) * I0) / (2 * I0),   # 積の可換律
+    (Ft(Ep) + Ft(Em)) / 2 + (Ft(Ep) - Ft(Em)) / 2,                 # (xa)/(ya) = x/y
+    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) - Ft(Em))) / 2,                   # x/z + y/z = (x+y)/z
+    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) + (-Ft(Em)))) / 2,                # def_complex_difference
+    (Ft(Ep) + (Ft(Em) + (Ft(Ep) + (-Ft(Em))))) / 2,                # 和の結合律
+    (Ft(Ep) + ((Ft(Em) + Ft(Ep)) + (-Ft(Em)))) / 2,                # 和の結合律
+    (Ft(Ep) + ((Ft(Ep) + Ft(Em)) + (-Ft(Em)))) / 2,                # 和の可換律
+    (Ft(Ep) + (Ft(Ep) + (Ft(Em) + (-Ft(Em))))) / 2,                # 和の結合律
+    (Ft(Ep) + (Ft(Ep) + 0)) / 2,                                   # 加法逆元
+    (Ft(Ep) + Ft(Ep)) / 2,                                         # 零元
+    (1 * Ft(Ep) + 1 * Ft(Ep)) / 2,                                 # 積の単位元
+    ((1 + 1) * Ft(Ep)) / 2,                                        # 分配律
+    ((QQ(1) + QQ(1)) * Ft(Ep)) / 2,                                # real_inclusion_preserves_sum
+    (2 * Ft(Ep)) / 2,                                              # ℝ で 1 + 1 = 2
+    Ft(Ep),                                                        # (2a)/2 = a
 ]
-rep.check(I0 / (2 * I0) == K0(1) / 2, "i/(2i) = 1/2")
+rep.check((Ft(Ep) - Ft(Em)) / 2 != (Ft(Ep) - Ft(Em)) / (2 * I0), "cos θ + i sin θ の鎖 否定の対照: 分母の i だけを落とすと（分子に i が残ると）等号が崩れる")
 for k in range(len(euler_chain) - 1):
     rep.check(euler_chain[k] == euler_chain[k + 1], f"cos θ + i sin θ の鎖 第 {k+1} 行 = 第 {k+2} 行")
 rep.check(cos_theta + I0 * sin_theta == euler_chain[0], "cos θ + i sin θ の鎖 第 1 行は euler_formula_cos_sin の代入")
@@ -72,7 +98,8 @@ conj_exp_chain = [
     cc_add(cc_conj(ic(c)), cc_mul(cc_conj(I_p), cc_conj(ic(s)))),
     cc_add(ic(c), cc_mul(cc_conj(I_p), ic(s))),
     cc_add(ic(c), cc_mul(cc_neg(I_p, Rcs), ic(s))),
-    cc_sub(ic(c), cc_mul(I_p, ic(s)), Rcs),
+    cc_add(ic(c), cc_neg(cc_mul(I_p, ic(s)), Rcs)),          # (-x)y = -(xy)
+    cc_sub(ic(c), cc_mul(I_p, ic(s)), Rcs),                   # def_complex_difference
 ]
 for k in range(len(conj_exp_chain) - 1):
     rep.check(conj_exp_chain[k] == conj_exp_chain[k + 1], f"conj(exp(iθ)) の鎖 第 {k+1} 行 = 第 {k+2} 行")
@@ -102,9 +129,10 @@ gm_chain = [
     gamma_form(eM, w_minus(cm, sm)),                                                   # 第 1・2 行（exp(i(-θ)) = exp(-iθ) は引数の等号）
     gamma_form(eM, w_minus(cc, sm)),                                                   # cos(-θ) = cos θ
     gamma_form(eM, sub(sub(mul(ig(c1), ig(cc)), mul(Ig, neg(ig(ss)))), mul(ig(s1), ig(c2)))),  # sin(-θ) = -sin θ
-    gamma_form(eM, sub(cc_add(mul(ig(c1), ig(cc)), mul(Ig, ig(ss))), mul(ig(s1), ig(c2)))),    # ℂ の四則
+    gamma_form(eM, sub(sub(mul(ig(c1), ig(cc)), neg(mul(Ig, ig(ss)))), mul(ig(s1), ig(c2)))),  # x(-y) = -(xy)
+    gamma_form(eM, sub(cc_add(mul(ig(c1), ig(cc)), mul(Ig, ig(ss))), mul(ig(s1), ig(c2)))),    # a - (-b) = a + b
 ]
-rels = [[cm - cc], [sm + ss], []]
+rels = [[cm - cc], [sm + ss], [], []]
 for k in range(len(gm_chain) - 1):
     rep.check(in_ideal(gm_chain[k], gm_chain[k + 1], rels[k]), f"γ_2(-θ) の鎖 第 {k+2} 行 = 第 {k+3} 行（法: {rels[k]}）")
     if rels[k]:
@@ -127,8 +155,11 @@ cg_chain = [
     mul(mul(mul(neg(Ig), eM), ig(s2s)), sub(sub(conj(mul(ig(c1), ig(cc))), mul(bar_i, conj(ig(ss)))), conj(mul(ig(s1), ig(c2))))),  # 積の共役
     mul(mul(mul(neg(Ig), eM), ig(s2s)), sub(sub(ig(c1 * cc), mul(bar_i, ig(ss))), ig(s1 * c2))),    # 実数の共役を 3 箇所（積は実数の像）
     mul(mul(mul(neg(Ig), eM), ig(s2s)), sub(sub(ig(c1 * cc), mul(neg(Ig), ig(ss))), ig(s1 * c2))),  # ī = -i
-    mul(mul(mul(neg(Ig), eM), ig(s2s)), w_plus_pos),                                   # ℂ の四則
-    neg(gamma_form(eM, w_plus_pos)),                                                   # ℂ の四則
+    mul(mul(mul(neg(Ig), eM), ig(s2s)), sub(sub(ig(c1 * cc), neg(mul(Ig, ig(ss)))), ig(s1 * c2))),  # (-x)y = -(xy)
+    mul(mul(mul(neg(Ig), eM), ig(s2s)), w_plus_pos),                                   # a - (-b) = a + b
+    mul(mul(neg(mul(Ig, eM)), ig(s2s)), w_plus_pos),                                   # (-x)y = -(xy)（x → i）
+    mul(neg(mul(mul(Ig, eM), ig(s2s))), w_plus_pos),                                   # (-x)y = -(xy)（x → i exp(-iθ)）
+    neg(gamma_form(eM, w_plus_pos)),                                                   # (-x)y = -(xy)（x → i exp(-iθ) s_2^*）
     neg(gamma_minus),                                                                  # γ_2(-θ) の表示
 ]
 cg_rels = {5: [u - p, v + q]}
@@ -143,7 +174,7 @@ rep.check(mul(ig(c1), ig(cc)) == ig(c1 * cc) and mul(ig(s1), ig(c2)) == ig(s1 * 
 Rz.<x, y, g0, r0> = PolynomialRing(QQ)
 iz = lambda a: iota(a, Rz)
 Z_ = (x, y)
-rep.check(cc_neg(cc_neg(Z_, Rz), Rz) == Z_, "(1) 第 1 行: -(-z) = z")
+rep.check(cc_neg(cc_neg(Z_, Rz), Rz) == Z_, "(1) 第 1 行: -(-z) = z（ℂ で -(-z) = z を右辺から左辺へ）")
 abs2 = x**2 + y**2                       # abs_basic_properties (2)
 m1 = iz(-1)
 two_chain = [
@@ -170,8 +201,19 @@ rep.check(cc_conj(zero) == zero, "背理の鎖: conj(0_C) = 0_C")
 Pz = (g0, x)   # γ_2(θ)γ_2(-θ) を一般の対で
 rep.check(cc_neg(Pz, Rz) == cc_mul(m1, Pz), "(4) の準備 第 1 行: -z = (-1_C) z")
 rep.check(cc_mul(iz(-1), iz(-r0)) == iz((-1) * (-r0)) and iz((-1) * (-r0)) == iz(r0), "(4) の準備 第 3・4 行: (-1_C)(-r)_C = ((-1)(-r))_C = r_C")
-rep.check(cc_mul((Rz(0), Rz(1)), iz(g0)) == (Rz(0), g0), "(5) 第 11 行: (0,1)(|γ|, 0) = (0, |γ|)")
-rep.check(iz(g0) == (g0, Rz(0)), "(5) 第 13 行: (|γ|, 0) = |γ|_C")
+five_tail = [
+    (g0 * 0, g0 * 1),
+    (0 * g0, 1 * g0),                      # 積の可換律を 2 成分へ
+    (0 * g0 - 0, 1 * g0),                  # a - 0 = a
+    (0 * g0 - 1 * 0, 1 * g0),              # x·0 = 0（x → 1）
+    (0 * g0 - 1 * 0, 0 + 1 * g0),          # 0 + a = a
+    (0 * g0 - 1 * 0, 0 * 0 + 1 * g0),      # 0·x = 0（x → 0）
+    cc_mul((Rz(0), Rz(1)), iz(g0)),        # definition_of_cc の積
+]
+for k in range(len(five_tail) - 1):
+    rep.check(five_tail[k] == five_tail[k + 1], f"(5) の鎖 (|γ|·0, |γ|·1) から (0,1)(|γ|,0) までの第 {k+1} 段")
+rep.check(cc_mul((Rz(1), Rz(0)), iz(g0)) != (Rz(0), g0), "(5) 否定の対照: (1,0)(|γ|,0) は (0,|γ|) にならない")
+rep.check(iz(g0) == (g0, Rz(0)), "(5) の鎖 最後の行: (|γ|, 0) = |γ|_C")
 rep.check(cc_mul(iz(g0), (Rz(1), Rz(0))) == (g0, Rz(0)) and (g0 * 1, g0 * 0) == (g0, g0 * 0) and (g0, g0 * 0) == (g0, 0), "(4) 第 9〜11 行: (|γ|·1, |γ|·0) = (|γ|, |γ|·0) = (|γ|, 0)")
 
 rep.finish()

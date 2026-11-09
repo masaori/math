@@ -2579,16 +2579,68 @@ s_1c_2
         ref("euler_formula_cos_sin"),
         " を ",
         math(String.raw`-\theta`),
-        " にも適用できる）。",
+        " にも適用できる）。以下の分母の ",
+        math(String.raw`2`), " は ", math(String.raw`2_{\mathbb{C}}`),
+        " で、",
+        ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
+        " の証明の前置きのとおり ",
+        ref("complex_numbers_form_a_field"),
+        " の体で ",
+        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`), "、",
+        math(String.raw`i \neq 0_{\mathbb{C}}`), "、",
+        math(String.raw`2_{\mathbb{C}}i \neq 0_{\mathbb{C}}`),
+        " なので、分数は定まる。先に、指数の引数の符号を動かす 2 つの等式を作る。",
+        math(String.raw`i(-\theta)`),
+        " の ",
+        math(String.raw`-\theta`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転 ",
+        math(String.raw`-\theta \in \mathbb{R}`),
+        " の像、",
+        math(String.raw`-i\theta`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(i\theta)`),
+        "、",
+        math(String.raw`-i(-\theta)`),
+        " は ",
+        math(String.raw`-\bigl(i(-\theta)\bigr)`),
+        " である。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+i(-\theta)
+&= i\bigl((-1)\theta\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a = (-1)a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \theta\bigr)\\
+&= i\bigl((-1_{\mathbb{C}})\theta\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to \theta)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(i(-1_{\mathbb{C}})\bigr)\theta
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl((-1_{\mathbb{C}})i\bigr)\theta
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})(i\theta)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -i\theta
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to i\theta)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-i(-\theta)
+&= -(-i\theta)
+&&(\because\ \text{上の}\ i(-\theta) = -i\theta)\\
+&= i\theta
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to i\theta\bigr)
+\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \cos(-\theta)
 &= \frac{\exp(i(-\theta)) + \exp(-i(-\theta))}{2}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp(-i\theta) + \exp(-i(-\theta))}{2}
+&&(\because\ \text{上の}\ i(-\theta) = -i\theta)\\
 &= \frac{\exp(-i\theta) + \exp(i\theta)}{2}
-&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta,\ -i(-\theta) = i\theta)\\
+&&(\because\ \text{上の}\ -i(-\theta) = i\theta)\\
 &= \frac{\exp(i\theta) + \exp(-i\theta)}{2}
-&&(\because\ \mathbb{C}\ \text{の和の可換律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
 &= \cos\theta
 &&(\because\ \blkref{euler_formula_cos_sin})
 \end{aligned}`),
@@ -2596,10 +2648,14 @@ s_1c_2
 \sin(-\theta)
 &= \frac{\exp(i(-\theta)) - \exp(-i(-\theta))}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp(-i\theta) - \exp(-i(-\theta))}{2i}
+&&(\because\ \text{上の}\ i(-\theta) = -i\theta)\\
 &= \frac{\exp(-i\theta) - \exp(i\theta)}{2i}
-&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta,\ -i(-\theta) = i\theta)\\
+&&(\because\ \text{上の}\ -i(-\theta) = i\theta)\\
+&= \frac{-\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)}{2i}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ b - a = -(a - b)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta),\ b \to \exp(-i\theta)\bigr)\\
 &= -\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
-&&(\because\ \mathbb{C}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{-x}{y} = -\tfrac{x}{y}\ (y \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta) - \exp(-i\theta),\ y \to 2i\bigr)\\
 &= -\sin\theta
 &&(\because\ \blkref{euler_formula_cos_sin})
 \end{aligned}`),
@@ -2607,10 +2663,38 @@ s_1c_2
 \cos\theta + i\sin\theta
 &= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + i\,\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin})\\
+&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{i\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)}{2i}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ x\tfrac{y}{z} = \tfrac{xy}{z}\ (z \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \exp(i\theta) - \exp(-i\theta),\ z \to 2i\bigr)\\
+&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)i}{2i}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{\exp(i\theta) - \exp(-i\theta)}{2}
-&&(\because\ \mathbb{C}\ \text{の四則}\ i/(2i) = 1/2)\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{xa}{ya} = \tfrac{x}{y}\ (a \neq 0_{\mathbb{C}},\ y \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta) - \exp(-i\theta),\ y \to 2,\ a \to i\bigr)\\
+&= \frac{\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)}{2}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{x}{z} + \tfrac{y}{z} = \tfrac{x + y}{z}\ (z \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta) + \exp(-i\theta),\ y \to \exp(i\theta) - \exp(-i\theta),\ z \to 2\bigr)\\
+&= \frac{\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)}{2}
+&&(\because\ \blkref{def_complex_difference})\\
+&= \frac{\exp(i\theta) + \Bigl(\exp(-i\theta) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(i\theta) + \Bigl(\bigl(\exp(-i\theta) + \exp(i\theta)\bigr) + (-\exp(-i\theta))\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(i\theta) + \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + (-\exp(-i\theta))\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
+&= \frac{\exp(i\theta) + \Bigl(\exp(i\theta) + \bigl(\exp(-i\theta) + (-\exp(-i\theta))\bigr)\Bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \frac{\exp(i\theta) + \bigl(\exp(i\theta) + 0_{\mathbb{C}}\bigr)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= \frac{\exp(i\theta) + \exp(i\theta)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&= \frac{1_{\mathbb{C}}\exp(i\theta) + 1_{\mathbb{C}}\exp(i\theta)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ右辺から左辺へ})\\
+&= \frac{\bigl(1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\exp(i\theta)}{2}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
+&= \frac{(1 + 1)_{\mathbb{C}}\,\exp(i\theta)}{2}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
+&= \frac{2\exp(i\theta)}{2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
 &= \exp(i\theta)
-&&(\because\ \mathbb{C}\ \text{の四則})
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{2a}{2} = a\ (2 \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta)\bigr)
 \end{aligned}`),
       paragraph([
         "第二に、",
@@ -2650,8 +2734,10 @@ s_1c_2
 &&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を 2 箇所へ})\\
 &= \cos\theta + (-i)\sin\theta
 &&(\because\ \text{上の}\ \bar i = -i)\\
+&= \cos\theta + \bigl(-(i\sin\theta)\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \sin\theta\bigr)\\
 &= \cos\theta - i\sin\theta
-&&(\because\ \mathbb{C}\ \text{の四則})\\
+&&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
 &= \exp(-i\theta)
 &&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin})
 \end{aligned}`),
@@ -2667,13 +2753,15 @@ s_1c_2
 &= i\,\exp(i(-\theta))\,s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
 &&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ -\theta \in \mathbb{R}\ \text{に適用})\\
 &= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
-&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta)\\
+&&(\because\ \text{上の}\ i(-\theta) = -i\theta)\\
 &= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - i\sin(-\theta) - s_1c_2\bigr)
 &&(\because\ \text{上の}\ \cos(-\theta) = \cos\theta)\\
 &= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - i(-\sin\theta) - s_1c_2\bigr)
 &&(\because\ \text{上の}\ \sin(-\theta) = -\sin\theta)\\
+&= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - \bigl(-(i\sin\theta)\bigr) - s_1c_2\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ x(-y) = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \sin\theta\bigr)\\
 &= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
-&&(\because\ \mathbb{C}\ \text{の四則})
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ a - (-b) = a + b\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to c_1\cos\theta,\ b \to i\sin\theta\bigr)
 \end{aligned}`),
       paragraph([
         "第四に、",
@@ -2706,10 +2794,16 @@ s_1c_2
 &&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を 3 箇所へ})\\
 &= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - (-i)\sin\theta - s_1c_2\bigr)
 &&(\because\ \text{上の}\ \bar i = -i)\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - \bigl(-(i\sin\theta)\bigr) - s_1c_2\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \sin\theta\bigr)\\
 &= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
-&&(\because\ \mathbb{C}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ a - (-b) = a + b\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to c_1\cos\theta,\ b \to i\sin\theta\bigr)\\
+&= \bigl(-(i\,\exp(-i\theta))\bigr)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \exp(-i\theta)\bigr)\\
+&= \bigl(-(i\,\exp(-i\theta)\,s_2^*)\bigr)\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i\,\exp(-i\theta),\ y \to s_2^*\bigr)\\
 &= -\Bigl(i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
-&&(\because\ \mathbb{C}\ \text{の四則})\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i\,\exp(-i\theta)\,s_2^*,\ y \to c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\\
 &= -\gamma_2(-\theta)
 &&(\because\ \text{上の}\ \gamma_2(-\theta)\ \text{の表示})
 \end{aligned}`),
@@ -2774,7 +2868,7 @@ s_1c_2
       displayMath(String.raw`\begin{aligned}
 \gamma_2(-\theta)
 &= -\bigl(-\gamma_2(-\theta)\bigr)
-&&(\because\ \mathbb{C}\ \text{の四則}\ (-1_{\mathbb{C}})(-1_{\mathbb{C}}) = 1_{\mathbb{C}})\\
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to \gamma_2(-\theta)\ \text{を右辺から左辺へ}\bigr)\\
 &= -\overline{\gamma_2(\theta)}
 &&(\because\ \text{上の}\ \overline{\gamma_2(\theta)} = -\gamma_2(-\theta))
 \end{aligned}`),
@@ -2826,14 +2920,14 @@ s_1c_2
 &= 0\cdot\left|\gamma_2(\theta)\right|
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
 &< \left|\gamma_2(\theta)\right|\left|\gamma_2(\theta)\right|
-&&(\because\ 0 < \left|\gamma_2(\theta)\right|\ \text{の両辺に正の実数}\ \left|\gamma_2(\theta)\right|\ \text{を掛ける})\\
+&&(\because\ 0 < \left|\gamma_2(\theta)\right|\ \text{の両辺に正の実数}\ \left|\gamma_2(\theta)\right|\ \text{を掛ける。}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation})\\
 &= \left|\gamma_2(\theta)\right|^2
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 -\left|\gamma_2(\theta)\right|^2
 &< -0
-&&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺の符号を反転すると向きが変わる})\\
+&&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺の符号を反転すると向きが変わる。}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation})\\
 &= 0
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ -0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
@@ -2850,7 +2944,7 @@ s_1c_2
 &= (x,y)
 &&(\because\ \text{成分の置き方})\\
 &= \bigl(x,-(-y)\bigr)
-&&(\because\ \mathbb{R}\ \text{で}\ -(-y) = y)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-a) = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to y\ \text{を右辺から左辺へ}\bigr)\\
 &= \overline{(x,-y)}
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= \overline{\overline{(x,y)}}
@@ -3054,12 +3148,18 @@ s_1c_2
 &&(\because\ \text{準備の}\ \cos(\pi/2) = 0)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
 &&(\because\ \text{準備の}\ \sin(\pi/2) = 1)\\
-&= \bigl(0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
-&= \bigl(0,\ \left|\gamma_2(\theta)\right|\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 1 = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
+&= \bigl(0\cdot \left|\gamma_2(\theta)\right|,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ xy = yx\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\ \text{と}\ y \to 0,\ y \to 1\ \text{を 2 成分へ}\bigr)\\
+&= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 0\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 1\ \text{を第 1 成分の引く側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
+&= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 1\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0\cdot 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 0\ \text{を第 2 成分の足す側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
 &= (0,1)\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
-&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ (0\cdot|\gamma_2(\theta)| - 1\cdot 0,\ 0\cdot 0 + 1\cdot|\gamma_2(\theta)|))\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
 &= i\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
 &&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
 &= i\left|\gamma_2(\theta)\right|_{\mathbb{C}}
@@ -3086,6 +3186,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3)(4) で 1 行に 2 つ以上の事実を使っていた行を割った。(3) の φ_polar((−r)_C) の鎖の「ℝ の四則」1 行（(−r)^2 = r^2・0^2 = 0・r^2 + 0 = r^2・0/(−r) = 0）を、square_of_real_number_is_product（r → −r）、ℝ で (−a)(−b) = ab（a, b → r）、square_of_real_number_is_product（r → r）を右辺から左辺へ、同（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → r^2。ℝ は体）、ℝ で 0/x = 0（x → −r）の 7 行に割った。(3) の主の鎖は、角度 π の angle_section_existence_uniqueness の整数が 0 であることを鎖の前の段落へ出して s_{[0,2π)} の行の根拠を section_of_angle_representation（θ → π、n → 0）だけにし、π − 2·0·π = π を x·0 = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → π）の 3 行に割った。(4) の −γγ' の鎖の最後 (−1)(−r) = r を (−a)(−b) = ab（a → 1、b → r）と 1·x = x（x → r）の 2 行に、φ_polar(r_C) の鎖の「ℝ の四則」1 行（0^2 = 0・r^2 + 0 = r^2・0/r = 0）を 4 行に割り、次の行の根拠に definition_of_sqrt_r_positive の前提「r ≥ 0 かつ r^2 = r^2」を書いた。(4) の主の鎖の 0/2 − 0·π = 0 を 0/x = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → 0）の 3 行に、「ℝ の四則を 2 箇所へ」を x·1 = x と x·0 = 0（x → |γ_2(θ)|）の 2 行に割った（0/x = 0 の x → 2 に 2 ≠ 0 を添えた）。(3) の φ_polar((−r)_C) の鎖の最後の 0 + a = a の行に「ℝ は体」を添えた。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第五の sin(π/2) の鎖の 1 行目の根拠と前の段落の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、数学的道具立てに足した arcsin_of_one_is_half_pi の参照にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: (3)(4) の外で 1 行に 2 つ以上の事実を使うか名前だけの根拠だった 5 行を割った。(2) の鎖の最後の「ℝ の四則」を ℝ で (−1)a = −a（a → |γ_2(θ)|^2）に、0 = 0·|γ_2(θ)| の「ℝ の四則」を ℝ で 0·x = 0（x → |γ_2(θ)|）を右辺から左辺へに、−0 = 0 の「ℝ の四則」を ℝ で −0 = 0 に、(5) の π/2 − 0·π = π/2 を 0·x = 0（x → π）と a − 0 = a（a → π/2）の 2 行に、(5) の「ℝ の四則を 2 箇所へ」を x·0 = 0 と x·1 = x（x → |γ_2(θ)|）の 2 行にした（どれも ℝ は体 set_and_algebra_notation を添えた）。(4)(5) の鎖の前の段落の「整数は準備により 0」を、(3) と同じく angle_section_existence_uniqueness を引く書き方に揃えた。値と主張は不変。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 名前だけの根拠「ℂ の四則」11 か所と 1 行に 2 つの事実を使う行を、ℂ・ℝ の体の等式 1 つずつの行に割った。準備の第一の前に i(−θ) = −iθ（ℝ で −a = (−1)a、real_inclusion_preserves_product、ℂ で x(ay) = a(xy)、multiply_by_minus_one）と −i(−θ) = iθ（ℂ で −(−z) = z）の鎖を置き、cos(−θ)・sin(−θ) の鎖の引数の行を 2 行ずつにし、γ_2(−θ) の表示の鎖の引数の行もこれを引く形にした。sin(−θ) の鎖の符号を外へ出す行、cos θ + i sin θ の鎖の i/(2i) = 1/2 の行と最後の行、conj(exp(iθ)) の鎖の (−i) sin θ の行、γ_2(−θ) の表示と conj(γ_2(θ)) の鎖の −i(−sin θ)・(−i) を外へ出す行、(1) の −(−z) = z、背理の鎖の ℝ で −(−y) = y、(5) の (0,|γ_2(θ)|) = (0,1)(|γ_2(θ)|,0)（definition_of_cc の積の成分の ℝ の事実 4 つ）を割った（ℂ は体 complex_numbers_form_a_field、ℝ は体 set_and_algebra_notation を添えた）。値と主張は不変。",
       ],
     },
   },

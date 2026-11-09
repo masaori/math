@@ -52,6 +52,7 @@ for (Yv, Zv) in COUPLINGS:
                 I_ * Em * k['s2s'] * (k['c1'] * co_m - I_ * si_m - k['s1'] * k['c2']),
                 I_ * Em * k['s2s'] * (k['c1'] * co - I_ * si_m - k['s1'] * k['c2']),
                 I_ * Em * k['s2s'] * (k['c1'] * co - I_ * (-si) - k['s1'] * k['c2']),
+                I_ * Em * k['s2s'] * (k['c1'] * co - (-(I_ * si)) - k['s1'] * k['c2']),
                 I_ * Em * k['s2s'] * wp,
             ]
             tick(gm == gm_lines[0], "γ_2(-θ) の鎖 第 1 行は定義")
@@ -72,7 +73,10 @@ for (Yv, Zv) in COUPLINGS:
                 (-I_) * Em * s2s * (cj(k['c1'] * co) - cj(I_) * cj(si) - cj(k['s1'] * k['c2'])),
                 (-I_) * Em * s2s * (k['c1'] * co - cj(I_) * si - k['s1'] * k['c2']),
                 (-I_) * Em * s2s * (k['c1'] * co - (-I_) * si - k['s1'] * k['c2']),
+                (-I_) * Em * s2s * (k['c1'] * co - (-(I_ * si)) - k['s1'] * k['c2']),
                 (-I_) * Em * s2s * wp,
+                (-(I_ * Em)) * s2s * wp,
+                (-(I_ * Em * s2s)) * wp,
                 -(I_ * Em * s2s * wp),
                 -gm,
             ]
@@ -178,8 +182,11 @@ for (Yv, Zv) in COUPLINGS:
                 (absg * cos_sin(pi_ / 2)[0], absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * 1),
-                (AA(0), absg * 1),                           # x·0 = 0 (x → |γ|)
-                (AA(0), absg),                               # x·1 = x (x → |γ|)
+                (AA(0) * absg, 1 * absg),                    # 積の可換律を 2 成分へ
+                (AA(0) * absg - 0, 1 * absg),                # a - 0 = a
+                (AA(0) * absg - 1 * AA(0), 1 * absg),        # x·0 = 0 (x → 1)
+                (AA(0) * absg - 1 * AA(0), 0 + 1 * absg),    # 0 + a = a
+                (AA(0) * absg - 1 * AA(0), AA(0) * 0 + 1 * absg),      # 0·x = 0 (x → 0)
                 cc_mul((AA(0), AA(1)), (absg, AA(0))),
                 cc_mul(to_pair(I_), (absg, AA(0))),
                 cc_mul(to_pair(I_), iota(absg, AA)),
@@ -188,7 +195,7 @@ for (Yv, Zv) in COUPLINGS:
                 tick(five_lines[j] == five_lines[j + 1], f"(5) の鎖 第 {j+2} 行 = 第 {j+3} 行")
             tick(pi_ / 2 - 0 * pi_ == pi_ / 2 - Ang(0) and pi_ / 2 - Ang(0) == pi_ / 2, "(5) の鎖 角度の 2 行（π/2 - 0·π = π/2 - 0 = π/2）")
             tick(pi_ / 2 - 1 * pi_ != pi_ / 2, "(5) の鎖 角度 否定の対照: 0·π を 1·π に取り違えると π/2 - π ≠ π/2")
-            tick(absg * 1 != AA(0) and absg * 0 != absg, "(5) の鎖 第 9・10 行 否定の対照: x·0 と x·1 を取り違えると等号が崩れる（|γ| > 0）")
+            tick((AA(1) * absg - 0 * AA(0), AA(0) * 0 + 0 * absg) != (AA(0), absg), "(5) の鎖 (0,1)(|γ|,0) の成分 否定の対照: (1,0)(|γ|,0) の成分は (0,|γ|) にならない")
             tick(sqrt_cc_by_definition((-r, AA(0)), (r, pi_)) == five_lines[0], "(5) 第 2 行: sqrt_expansion_via_polar の値が def_sqrt_cc の値と一致")
             tick(to_pair(QQbar(-r).sqrt()) == (AA(0), absg), "(5) 対照: Sage の QQbar の平方根（主値）とも一致")
 
