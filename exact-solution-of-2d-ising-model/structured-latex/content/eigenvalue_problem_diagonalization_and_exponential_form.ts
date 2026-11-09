@@ -840,7 +840,15 @@ P_{m-1}Y_m
         math(String.raw`r\in\mathbb R`),
         "）は ",
         ref("inclusion_rr_to_cc"),
-        " の像である。(2) の証明は全実数上の ",
+        " の像である。(2) の ",
+        math(String.raw`-i(\cdot)_{\mathbb C}`),
+        " は、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を掛けた ",
+        math(String.raw`(-i)\,(\cdot)_{\mathbb C}`),
+        " の意味である。(2) の証明は全実数上の ",
         math(String.raw`\cos,\sin`),
         " の値 ",
         math(String.raw`\cos(2\pi n_{\mathbb R})=1_{\mathbb R}`),
@@ -928,15 +936,21 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         ref("multiply_by_minus_one"),
         "）を ",
         math(String.raw`(-(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}`),
-        " に掛けたものを書き直す。主張と ",
+        " に掛けたものを書き直す。主張の ",
+        math(String.raw`-i(\cdot)_{\mathbb C}`),
+        " は主張に書いたとおりこの ",
+        math(String.raw`-i`),
+        " を掛けたものである。一方 ",
         ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
         " の ",
         math(String.raw`-i\theta_{\mathbb C}`),
-        " も、この ",
-        math(String.raw`-i`),
-        " を掛けた ",
-        math(String.raw`(-i)\,\theta_{\mathbb C}`),
-        " の意味である。",
+        " は、",
+        ref("euler_formula_cos_sin"),
+        " の読みどおり ",
+        math(String.raw`-(i\theta_{\mathbb C})`),
+        " の意味なので、引く前に ",
+        ref("negative_i_times_complex_is_negation_of_i_times"),
+        " で書き換える。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -971,6 +985,8 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
    &&(\because\ \text{準備の第二の鎖}) \\
 &= \exp((-i)(2\pi j_{\mathbb R})_{\mathbb C})\,\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
    &&(\because\ \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で}) \\
+&= \exp\!\left(-\left(i(2\pi j_{\mathbb R})_{\mathbb C}\right)\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (2\pi j_{\mathbb R})_{\mathbb C})\bigr) \\
 &= \left((\cos(2\pi j_{\mathbb R}))_{\mathbb C} - i(\sin(2\pi j_{\mathbb R}))_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
    &&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=2\pi j_{\mathbb R}\text{ で}) \\
 &= \left((1_{\mathbb R})_{\mathbb C} - i(\sin(2\pi j_{\mathbb R}))_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
@@ -1029,6 +1045,8 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
       notes: [
         "2026-09-01 の式変形統一で、二本の式変形鎖の行中にあった根拠 7 行を行末の根拠列（aligned の &&）へ揃え、添字の周期性の二本の等式を同じ形へ開いた。内容・式変形・根拠・ラベル参照は不変である。",
         "2026-11-03（全証明の SageMath 検算）: (2) の主張を像の記号 j_R・(·)_C で書き、全実数上の cos・sin の値を前提とすることを主張に書いた。(2) の証明は、主張と違う式を述べる euler_formula_cos_sin と行列の theorem_exp_product (n=1) を引いていたので、exp_of_negative_i_real_as_cos_minus_i_sin と scalar_exp_product に付け替え、包含の和・積の保存と符号の鎖を置いた。(1) の根拠「ℂ の四則」は実数の計算なので ℝ に直し、像の記号で書き直した。",
+        "2026-11-09（Lean の通しの証明）: (2) の鎖は exp((-i)(2πj_R)_C) に exp_of_negative_i_real_as_cos_minus_i_sin を直接当てていたが、その主張の -iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C) である。" +
+          "準備の文の「exp_of_negative_i_real_as_cos_minus_i_sin の -iθ_C も (-i)θ_C の意味」を直し、negative_i_times_complex_is_negation_of_i_times で -(i(2πj_R)_C) へ書き換える 1 行を足した（15 等号 → 16 等号）。主張 (2) の -i(·)_C が (-i)(·)_C の意味であることは証明の準備の文にしか無かったので、主張に書いた。ほかの行は変えていない。",
       ],
     },
   },

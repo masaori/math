@@ -23,6 +23,8 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 
 namespace Ising2D
 
@@ -75,17 +77,16 @@ theorem neg_I_mul_real_inclusion_neg (x : ℝ) :
 /-- **(2)**: `e^{-ij θ~_{M+1-μ}} = e^{ij θ~_μ}`（`j ∈ ℤ`）。
 
 人手の整数 `j` は Lean の `k` である。右辺の `e^{ij θ~_μ}` は `e^{-i(-j) θ~_μ} = checkPhase M (-j) μ` である。
-本体の `calc` の 2 段目から 16 段目が人手の主張の左辺から始まる鎖の 15 行に 1 段ずつ対応する。
+本体の `calc` の 2 段目から 17 段目が人手の主張の左辺から始まる鎖の 16 行に 1 段ずつ対応する。
 1 段目と最後の段は、`checkPhase` を人手の `exp(-i(j_ℝ θ~)_ℂ)` の形で読む書き換えで、人手の行ではない
 （`checkPhase_eq_exp` は `-(i · k_ℂ · θ~_ℂ)` の形で、人手の `(-i)(j_ℝ θ~)_ℂ` に `real_inclusion_mul` で直す）。
 
 - 人手の `real_inclusion_preserves_finite_sum` を `m = 2` で当てる行（二項の和の像）は、
   2 項の場合の具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_sum`）を右辺から左辺へ当てる。
-- 負の角の Euler の公式 `exp_of_negative_i_real_as_cos_minus_i_sin` の行は、具体版 `exp_neg_I_mul_real_eq_cos_sub_I_mul_sin`
-  （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimExpOfNegativeIRealAsCosMinusISin.lean`）が `-(iθ)` の形で述べるのに対し、
-  人手のこの行は `(-i)(2πj_ℝ)_ℂ` の形に直接当てていて `-(i(2πj_ℝ)_ℂ)` への読み替えの行が無い（状態台帳の残り）。それまでは
-  `exp(φ i) = cos φ + i sin φ`（`Complex.exp_mul_I`）を `φ = -(2πj)_ℂ` に当て、`cos(-x) = cos x`・`sin(-x) = -sin x` と
-  実数の `cos`・`sin` の像（`Complex.ofReal_cos`・`Complex.ofReal_sin`）で書き直す。
+- 人手の `(-i)(2πj_ℝ)_ℂ` を `-(i(2πj_ℝ)_ℂ)` へ読み替える行（`negative_i_times_complex_is_negation_of_i_times`）は具体版
+  `neg_I_mul_eq_neg_of_I_mul`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean`）、
+  続く負の角の Euler の公式 `exp_of_negative_i_real_as_cos_minus_i_sin` の行は具体版 `exp_neg_I_mul_real_eq_cos_sub_I_mul_sin`
+  （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimExpOfNegativeIRealAsCosMinusISin.lean`）を当てる。
 - `cos(2πn_ℝ) = 1_ℝ` は実数の `Real.cos_int_mul_two_pi` である。`sin(2πn_ℝ) = 0_ℝ` は `2πj_ℝ = (2j)_ℝ π` と読み、
   `sin(nπ) = 0`（`Real.sin_int_mul_pi`）を `2j` に当てる。
 - 指数法則 `scalar_exp_product` の行は、`def_scalar_exp` の具体版が Lean に無いので mathlib の `Complex.exp_add` で表す
@@ -118,14 +119,15 @@ theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
     _ = Complex.exp ((-Complex.I) * ((2 * Real.pi * (k : ℝ) : ℝ) : ℂ))
           * Complex.exp (Complex.I * (((k : ℝ) * thetaTilde M μ : ℝ) : ℂ)) :=
         Complex.exp_add _ _
+      -- (∵ negative_i_times_complex_is_negation_of_i_times を z = (2πj_ℝ)_ℂ で)
+    _ = Complex.exp (-(Complex.I * ((2 * Real.pi * (k : ℝ) : ℝ) : ℂ)))
+          * Complex.exp (Complex.I * (((k : ℝ) * thetaTilde M μ : ℝ) : ℂ)) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]
       -- (∵ exp_of_negative_i_real_as_cos_minus_i_sin を θ = 2πj_ℝ で)
     _ = (((Real.cos (2 * Real.pi * (k : ℝ)) : ℝ) : ℂ)
             - Complex.I * ((Real.sin (2 * Real.pi * (k : ℝ)) : ℝ) : ℂ))
           * Complex.exp (Complex.I * (((k : ℝ) * thetaTilde M μ : ℝ) : ℂ)) := by
-        rw [show (-Complex.I) * ((2 * Real.pi * (k : ℝ) : ℝ) : ℂ)
-              = (-((2 * Real.pi * (k : ℝ) : ℝ) : ℂ)) * Complex.I by ring,
-          Complex.exp_mul_I, Complex.cos_neg, Complex.sin_neg, Complex.ofReal_cos, Complex.ofReal_sin]
-        ring
+        rw [exp_neg_I_mul_real_eq_cos_sub_I_mul_sin]
       -- (∵ j ∈ ℤ と全実数上の cos(2πn_ℝ) = 1_ℝ)
     _ = (((1 : ℝ) : ℂ) - Complex.I * ((Real.sin (2 * Real.pi * (k : ℝ)) : ℝ) : ℂ))
           * Complex.exp (Complex.I * (((k : ℝ) * thetaTilde M μ : ℝ) : ℂ)) := by
