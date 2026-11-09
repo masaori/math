@@ -7,6 +7,9 @@ import Ising2DLambda.Tools.NonemptyTreeEdgeSubsetLeafFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
+import Ising2DLambda.Tools.EvenEdgeTreeComplementInjective
+import Ising2DLambda.NecSuf.Tools.EvenEdgeTreeComplementInjective
+import Ising2DLambda.Tools.EvenEdgeTreeComplementInjectiveFromNecSuf
 import Ising2DLambda.KacWard.PlaneDualRayHeightRowSupport
 import Ising2DLambda.KacWard.PlaneDualRayHeightRightBound
 import Ising2DLambda.KacWard.PlaneDualRayHeightLeftBound

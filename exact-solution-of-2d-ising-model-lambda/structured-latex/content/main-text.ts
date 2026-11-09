@@ -12498,6 +12498,63 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_subset_tree_complement_injective",
+        labels: [],
+        title: { text: "偶辺部分集合の木外辺による識別" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_subset_tree_complement_injective",
+              focus: {
+                id: "tools_claim_even_edge_subset_tree_complement_injective",
+                kind: "claim",
+                title: { text: "木外辺が同じ偶辺部分集合は等しい" },
+                labels: ["claim_even_edge_subset_tree_complement_injective"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdgeSubset_treeComplement_injective",
+                  "Ising2DLambda.NecSuf.Tools.evenIncidenceSubset_treeComplement_injective",
+                  "Ising2DLambda.Tools.evenEdgeSubset_treeComplement_injective_from_necSuf",
+                ],
+                verification: ["sagemath/check/even-edge-tree-complement-injective"],
+                statement: [
+                  paragraph([
+                    "有限連結グラフ ", math(String.raw`G=(V,E)`), " の全域木の辺集合を ",
+                    math(String.raw`F\subset E`), " とする。全頂点で接続辺数が偶数の辺集合 ",
+                    math(String.raw`A,B\subset E`), " が ",
+                    math(String.raw`A\cap(E\setminus F)=B\cap(E\setminus F)`),
+                    " を満たせば ", math(String.raw`A=B`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`D:=A\mathbin\triangle B`), " と置く。",
+                    "対称差の所属判定と木外辺での一致から ",
+                    math(String.raw`D\subset F`), " である。",
+                    "また ", ref("claim_even_edge_symmetric_difference"), " より、",
+                    "どの頂点でも ", math(String.raw`D`), " の接続辺数は偶数である。",
+                  ]),
+                  paragraph([
+                    "もし ", math(String.raw`D\ne\varnothing`), " なら、",
+                    ref("claim_nonempty_tree_edge_subset_has_leaf"), " により、",
+                    math(String.raw`D`), " の辺がちょうど一本接する頂点がある。",
+                    "これはその頂点での偶数性に反する。",
+                  ]),
+                  displayMath(String.raw`D=\varnothing\quad(\because\ D\ne\varnothing\text{ なら接続辺数が一かつ偶数の頂点がある})`),
+                  displayMath(String.raw`A=B\quad(\because\ A\mathbin\triangle B=\varnothing)`),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
@@ -86109,7 +86166,7 @@ const chapter_fisher_zero_density = defineSection({
                       math(String.raw`S`),
                       " で",
                     ]),
-                    displayMath(String.raw`\lvert S\rvert=2L^{2}+1`),
+                    displayMath(String.raw`\lvert S\rvert=2L^{2}+1\quad(\because\ S\text{ を指定した個数の相異なる元から選んだ})`),
                     paragraph([
                       "を満たすものがある。一方、",
                       ref("claim_fisher_zero_finset_card_bound"),
