@@ -8382,4 +8382,109 @@ c\in[b]_I&\iff b\equiv_I c
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition",
+    kind: "claim",
+    title: { text: "両側イデアルを法とする合同は加法と両立する" },
+    labels: ["claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a',b,b'`),
+        " について、",
+        math(String.raw`a\equiv_I a'`),
+        " かつ ",
+        math(String.raw`b\equiv_I b'`),
+        " ならば ",
+        math(String.raw`a+_A b\equiv_I a'+_A b'`),
+        " である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a,a',b,b'\in A`),
+        " を ",
+        math(String.raw`a\equiv_I a'`),
+        " かつ ",
+        math(String.raw`b\equiv_I b'`),
+        " を満たすようにとる。",
+        math(String.raw`x:=a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)`),
+        " と ",
+        math(String.raw`y:=b+_A\bigl((-1_{\mathbb{C}})\ast_A b'\bigr)`),
+        " と置く。合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x\in I`),
+        " かつ ",
+        math(String.raw`y\in I`),
+        " である。ℂ-線型空間についての定義は、",
+        math(String.raw`V:=U_{\mathrm{vec}}(A)=(A,+_A,\ast_A,0_A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+        math(String.raw`u:=(-1_{\mathbb{C}})\ast_A a'`),
+        " と ",
+        math(String.raw`v:=(-1_{\mathbb{C}})\ast_A b'`),
+        " と置く。スカラー倍 ",
+        math(String.raw`\ast_A`),
+        " は ",
+        math(String.raw`\mathbb{C}\times A\to A`),
+        " の写像なので ",
+        math(String.raw`u,v\in A`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'+_A b')\bigr)
+&=(a+_A b)+_A\Bigl(\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)+_A\bigl((-1_{\mathbb{C}})\ast_A b'\bigr)\Bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=(a+_A b)+_A(u+_A v)
+&&\left(\because\ u\ \text{と}\ v\ \text{の定義}\right)\\
+&=a+_A\bigl(b+_A(u+_A v)\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=a+_A\bigl((b+_A u)+_A v\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=a+_A\bigl((u+_A b)+_A v\bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=a+_A\bigl(u+_A(b+_A v)\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(a+_A u)+_A(b+_A v)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=x+_A y
+&&\left(\because\ x,\ y,\ u,\ v\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x\in I`),
+        " と ",
+        math(String.raw`y\in I`),
+        " なので、両側イデアルの二つ目の条件（加法で閉じている。",
+        ref("def_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x+_A y\in I`),
+        " である。上の等式により ",
+        math(String.raw`(a+_A b)+_A\bigl((-1_{\mathbb{C}})\ast_A(a'+_A b')\bigr)\in I`),
+        " であり、合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`a+_A b\equiv_I a'+_A b'`),
+        " である。",
+      ]),
+    ],
+  },
 ]);
