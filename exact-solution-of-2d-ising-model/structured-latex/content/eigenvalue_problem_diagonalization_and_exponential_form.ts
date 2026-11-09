@@ -2719,19 +2719,21 @@ s_1c_2
         "・",
         math(String.raw`\cos(\pi/2) = 0`),
         " を確かめる。",
+        ref("arcsin_is_bijection"),
+        " の ",
         math(String.raw`\pi`),
-        " は ",
+        " について ",
         math(String.raw`\arcsin(1) = \pi/2`),
-        " となる実数である（",
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の項。",
+        " である（",
+        ref("arcsin_of_one_is_half_pi"),
+        "。",
         math(String.raw`\pi \in \mathbb{R}`),
         " を使うのは、弧の長さが実数だからである）。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \sin(\pi/2)
 &= \sin(\arcsin(1))
-&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)\\
+&&(\because\ \blkref{arcsin_of_one_is_half_pi})\\
 &= 1
 &&(\because\ \pi/2 = \arcsin(1) \in [-\pi/2,\pi/2]\ (\blkref{arcsin_is_bijection}\ \text{の値域})\ \text{で}\ \blkref{def_sin}\ \text{の}\ y\ \text{はただ一つ。}\arcsin(1) = \pi/2\ \text{なので}\ y = 1)
 \end{aligned}`),
@@ -3074,6 +3076,7 @@ s_1c_2
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3) の φ_polar((−r)_C) の鎖の最後の行（[(r, arctan 0+π)] = [(r, π)]。arctan 0 = 0 と ℝ の 0 + π = π を 1 行で使っていた）を、arctan_zero の行（[(r, 0+π)]）と ℝ で 0 + a = a（a → π）の行の 2 行に割った。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第五の 0 < π の鎖（arcsin(0) = 0 を経て π = 2arcsin(1) > 2arcsin(0) = 0）を、zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明から独立させた主張 pi_is_positive の参照にした。arcsin(0) = 0 の鎖は 0 < π の鎖にしか使われていなかったので外した。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (3)(4) で 1 行に 2 つ以上の事実を使っていた行を割った。(3) の φ_polar((−r)_C) の鎖の「ℝ の四則」1 行（(−r)^2 = r^2・0^2 = 0・r^2 + 0 = r^2・0/(−r) = 0）を、square_of_real_number_is_product（r → −r）、ℝ で (−a)(−b) = ab（a, b → r）、square_of_real_number_is_product（r → r）を右辺から左辺へ、同（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → r^2。ℝ は体）、ℝ で 0/x = 0（x → −r）の 7 行に割った。(3) の主の鎖は、角度 π の angle_section_existence_uniqueness の整数が 0 であることを鎖の前の段落へ出して s_{[0,2π)} の行の根拠を section_of_angle_representation（θ → π、n → 0）だけにし、π − 2·0·π = π を x·0 = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → π）の 3 行に割った。(4) の −γγ' の鎖の最後 (−1)(−r) = r を (−a)(−b) = ab（a → 1、b → r）と 1·x = x（x → r）の 2 行に、φ_polar(r_C) の鎖の「ℝ の四則」1 行（0^2 = 0・r^2 + 0 = r^2・0/r = 0）を 4 行に割り、次の行の根拠に definition_of_sqrt_r_positive の前提「r ≥ 0 かつ r^2 = r^2」を書いた。(4) の主の鎖の 0/2 − 0·π = 0 を 0/x = 0（x → 2）・0·x = 0（x → π）・a − 0 = a（a → 0）の 3 行に、「ℝ の四則を 2 箇所へ」を x·1 = x と x·0 = 0（x → |γ_2(θ)|）の 2 行に割った（0/x = 0 の x → 2 に 2 ≠ 0 を添えた）。(3) の φ_polar((−r)_C) の鎖の最後の 0 + a = a の行に「ℝ は体」を添えた。値と主張は不変。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第五の sin(π/2) の鎖の 1 行目の根拠と前の段落の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、数学的道具立てに足した arcsin_of_one_is_half_pi の参照にした。値と主張は不変。",
       ],
     },
   },

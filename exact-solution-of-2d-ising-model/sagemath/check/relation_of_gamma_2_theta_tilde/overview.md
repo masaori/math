@@ -42,7 +42,7 @@
 
 - 準備の第一の鎖が引く `euler_formula_cos_sin` と、`exp_of_negative_i_real_as_cos_minus_i_sin` は、全実数上の cos・sin（未整備）を前提にしている。
   検算は exp(±iθ) を不定元にした代数的な行と、具体の角度での値を確かめるにとどまる。
-- 準備の第五の `arcsin(1) = π/2` は π の定め方（`remark_real_analysis_facts_R3_R4`）であり、`arcsin_is_bijection` が引く文献に依る。
+- 準備の第五の `arcsin(1) = π/2` は `arcsin_of_one_is_half_pi`（`arcsin_is_bijection` と同じ齋藤微積分 命題 2.1.5 から示す）に依る。
   検算は Sage の記号計算（`arcsin(1) == pi/2`）での一致を見るだけである。
 - exp そのもの（部分和の極限）は扱わない。
 

@@ -55,6 +55,7 @@ export const ALL_LABELS = [
   "antiperiodic_exp_sum",
   "arccosh_properties",
   "arcsin_is_bijection",
+  "arcsin_of_one_is_half_pi",
   "arcsinh_argument_is_positive",
   "arcsinh_argument_times_conjugate_is_one",
   "arcsinh_argument_two_sided_bounds",

@@ -38,11 +38,7 @@ export default defineBlocks([
         " は、実数の区間上の関数の微分と積分を扱うので、次の事実を外部から持ち込む。(R3)(R4) と微分の公式は実数解析の一般の事実であり、正弦・余弦の導関数と円周率の数値の評価は本文の正弦・余弦・円周率についての主張である。円周率の数値の評価は、",
         ref("pi_squared_numerical_bounds"),
         "・",
-        ref("log_integral_two_sided_bounds"),
-        "・",
-        ref("three_halves_power_integral_bound"),
-        "・",
-        ref("sine_integral_two_sided"),
+        ref("second_derivative_log_divergence"),
         " が使う。",
       ]),
       list([
@@ -138,6 +134,8 @@ export default defineBlocks([
           " が齋藤微積分から持ち込んだ ",
           math(String.raw`\pi \in \mathbb{R}`),
           "（",
+          ref("arcsin_of_one_is_half_pi"),
+          " により ",
           math(String.raw`\arcsin(1) = \pi/2`),
           " となる実数、すなわち単位円の弧 ",
           math(String.raw`(1,0)`),
@@ -234,6 +232,7 @@ export default defineBlocks([
       notes: [
         "2026-10-31: 章立ての組み直しで、臨界点の章の注記 remark_real_analysis_escape_chapter_E から、数学的道具立ての章に残った 4 項が使う (R3)(R4) の宣言を、その文面のまま分けて置いた。",
         "2026-11-02: elementary_sine_bounds を分けるときに、証明が使っていた sin・cos の導関数と、根拠なしで使っていた π の数値を、外部から持ち込む事実として足した。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 円周率の項の arcsin(1) = π/2 を、数学的道具立てに足した arcsin_of_one_is_half_pi の参照にした（π の正は数学的道具立てへ移した pi_is_positive が持つ）。円周率の数値の評価を使うブロックの一覧を、いま実際に使う pi_squared_numerical_bounds・second_derivative_log_divergence に直した（three_halves_power_integral_bound・sine_integral_two_sided・log_integral_two_sided_bounds は π > 0 だけを使い、それは pi_is_positive から引く）。",
       ],
     },
   },
@@ -1518,89 +1517,20 @@ t
   },
 
   {
-    id: "critical_claim_pi_is_positive",
-    kind: "claim",
-    title: { tex: String.raw`0 < \pi` },
-    labels: ["pi_is_positive"],
-    statement: [
-      paragraph([
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の項の ",
-        math(String.raw`\pi \in \mathbb{R}`),
-        "（",
-        math(String.raw`\arcsin(1) = \pi/2`),
-        " となる実数）について ",
-        math(String.raw`0 < \pi`),
-        " である（",
-        math(String.raw`\mathbb{R}`),
-        " を使うのは、",
-        math(String.raw`\pi`),
-        " が弧の長さで定まる実数だからである）。",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "準備。以下 ",
-        math(String.raw`-\pi/2`),
-        " は ",
-        math(String.raw`-(\pi/2)`),
-        " を表す。",
-        math(String.raw`-1 \in [-1,0)`),
-        " なので ",
-        ref("def_arcsin"),
-        " の第二の式が使え、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\arcsin(-1)
-&= -\arcsin(-(-1))
-&&(\because\ \blkref{def_arcsin}\ \text{の第二の式の}\ y' \to -1\text{。}-1 \leq -1 < 0)\\
-&= -\arcsin(1)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-a) = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
-&= -\pi/2
-&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
--\pi/2
-&= \arcsin(-1)
-&&(\because\ \text{上の}\ \arcsin(-1)\ \text{の鎖})\\
-&< \arcsin(1)
-&&(\because\ -1 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加の}\ y_1 \to -1,\ y_2 \to 1)\\
-&= \pi/2
-&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)
-\end{aligned}`),
-      paragraph(["本体。主張の左辺から始める。"]),
-      displayMath(String.raw`\begin{aligned}
-0
-&= -\pi/2 + \pi/2
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \pi/2\bigr)\\
-&< \pi/2 + \pi/2
-&&\bigl(\because\ \text{上の}\ -\pi/2 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to \pi/2\bigr)\\
-&= \pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a/2 + a/2 = a\ \text{の}\ a \to \pi\bigr)
-\end{aligned}`),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "2026-11-08: zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明の中の 0 < π の鎖と、relation_of_gamma_2_theta_tilde の準備の第五の 0 < π の鎖（arcsin(0) = 0 を経ていた）が同じ事実を別の道筋で示していたので、前者の鎖を独立の主張にして両方から引く。arcsin(0) を経ずに arcsin(−1) < arcsin(1) から示すので、sine_zero との循環は無い。",
-        "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
-      ],
-    },
-  },
-
-  {
     id: "critical_claim_zero_in_closed_interval_from_minus_half_pi_to_half_pi",
     kind: "claim",
     title: { tex: String.raw`0 \in [-\pi/2,\pi/2]` },
     labels: ["zero_in_closed_interval_from_minus_half_pi_to_half_pi"],
     statement: [
       paragraph([
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の項の ",
+        ref("arcsin_is_bijection"),
+        " の ",
         math(String.raw`\pi \in \mathbb{R}`),
         "（",
+        ref("arcsin_of_one_is_half_pi"),
+        " により ",
         math(String.raw`\arcsin(1) = \pi/2`),
-        " となる実数）について ",
+        "）について ",
         math(String.raw`0 \in [-\pi/2,\pi/2]`),
         "、すなわち ",
         math(String.raw`-\pi/2 \leq 0 \leq \pi/2`),
@@ -1649,6 +1579,7 @@ t
       notes: [
         "2026-11-08: sine_zero（sin 0 の定義域）・arctan_zero の最後の行・relation_of_gamma_2_theta_tilde の準備の第五の arcsin(0) = 0 の鎖（この鎖は後で外した）が、0 ∈ [−π/2,π/2] を根拠なしに使っていたので足した。arcsin(0) を経ずに arcsin(−1) < arcsin(1) から示すので、sine_zero との循環は無い。cosine_zero の 1 行目（def_cos の定義域）も同じ。",
         "2026-11-08: 証明の準備にあった arcsin(−1) = −π/2・−π/2 < π/2・0 < π の 3 本の鎖を独立の主張 pi_is_positive へ移し、0 < π/2 の鎖の根拠をその参照にした。",
+        "2026-11-09: 主張の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、arcsin_is_bijection の π と arcsin_of_one_is_half_pi の参照にした（pi_is_positive と揃えた）。値と主張は不変。",
         "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・sin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
       ],
     },
@@ -3229,9 +3160,9 @@ F(0)
     proof: [
       paragraph([
         "準備。",
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の数値の評価より ",
-        math(String.raw`\pi \geq 3.141592 > 0`),
+        ref("pi_is_positive"),
+        " より ",
+        math(String.raw`\pi > 0`),
         " である。",
         math(String.raw`y := \dfrac{\pi}{2\delta} \in \mathbb{R}_{>0}`),
         " と置くと、",
@@ -3269,6 +3200,7 @@ F(0)
       status: "added",
       notes: [
         "2026-11-02: 旧 closed_form_log_integral (2) の後半（「とくに (1) と合わせて」の積分の評価）を独立の主張にし、代入と 2 倍を (∵) 付きの鎖にした。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の「remark_real_analysis_facts_R3_R4 の円周率の数値の評価より π ≥ 3.141592 > 0」を pi_is_positive の参照にした（使うのは π > 0 だけ）。値と主張は不変。",
       ],
     },
   },
@@ -3661,8 +3593,8 @@ B
     proof: [
       paragraph([
         "準備。",
-        ref("remark_real_analysis_facts_R3_R4"),
-        " の円周率の数値の評価より ",
+        ref("pi_is_positive"),
+        " より ",
         math(String.raw`\pi > 0`),
         "、",
         ref("sine_bound_constant_numerical_bounds"),

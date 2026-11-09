@@ -320,6 +320,168 @@ f(0)
     conversion: { status: "added", notes: ["sin の定義に混在していた外部主張を独立させた。"] },
   },
   {
+    id: "calc_formulae_claim_arcsin_of_one_is_half_pi",
+    kind: "claim",
+    title: { tex: String.raw`\arcsin(1) = \pi/2` },
+    labels: ["arcsin_of_one_is_half_pi"],
+    statement: [
+      paragraph([
+        ref("def_arcsin"),
+        " の ",
+        math(String.raw`\arcsin`),
+        " と ",
+        ref("arcsin_is_bijection"),
+        " の ",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\arcsin(1) = \pi/2`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        ref("def_arcsin"),
+        " の弧の長さと ",
+        math(String.raw`\pi`),
+        " が実数だからである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`f:[0,1]\to\mathbb R`),
+        " を ",
+        ref("def_arcsin"),
+        " の第一の式 ",
+        math(String.raw`f(y):=l(AP)`),
+        " とおく。齋藤微積分 命題 2.1.5 を ",
+        math("f"),
+        " に適用すると、",
+        math("f"),
+        " は狭義単調増加で、",
+        math(String.raw`f([0,1])=[0,\pi/2]`),
+        " である（外部文献に委ねるのはこの二点だけで、",
+        ref("arcsin_is_bijection"),
+        " の証明の準備と同じものである）。",
+        math(String.raw`1\in[0,1]`),
+        " なので ",
+        math(String.raw`f(1)\in f([0,1])=[0,\pi/2]`),
+        "、すなわち ",
+        math(String.raw`0\le f(1)`),
+        " かつ ",
+        math(String.raw`f(1)\le\pi/2`),
+        " である。",
+        math(String.raw`\mathbb R`),
+        " の順序の推移律（",
+        math(String.raw`\mathbb R`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）より ",
+        math(String.raw`0\le\pi/2`),
+        " なので ",
+        math(String.raw`\pi/2\in[0,\pi/2]=f([0,1])`),
+        " であり、",
+        math(String.raw`f(y_1)=\pi/2`),
+        " を満たす ",
+        math(String.raw`y_1\in[0,1]`),
+        " がある。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi/2
+&= f(y_1)
+&&(\because\ y_1\ \text{の取り方})\\
+&\le f(1)
+&&(\because\ y_1 \le 1\ \text{と}\ f\ \text{の狭義単調増加（}y_1 = 1\ \text{なら等号、}y_1 < 1\ \text{なら狭義の不等号）})
+\end{aligned}`),
+      paragraph(["本体。主張の左辺から始める。"]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(1)
+&= f(1)
+&&(\because\ \blkref{def_arcsin}\ \text{の第一の式の}\ y \to 1\text{。}0 \le 1 \le 1)\\
+&= \pi/2
+&&\bigl(\because\ \text{準備の}\ f(1) \le \pi/2\ \text{と}\ \pi/2 \le f(1)\ \text{、}\mathbb{R}\ \text{の順序の反対称律（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09: remark_real_analysis_facts_R3_R4 の円周率の項が「arcsin(1) = π/2 となる実数」として前提にしていた事実を、arcsin_is_bijection と同じ齋藤微積分 命題 2.1.5 から示す主張として数学的道具立てに置いた。pi_is_positive を数学的道具立てへ移すために要る。",
+        "四層のうち記述と SageMath まで。Lean は置かない: 本文の arcsin は弧の長さで定めた関数で、Lean の Real.arcsin・Real.pi とは定義が違い、本文の弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_pi_is_positive",
+    kind: "claim",
+    title: { tex: String.raw`0 < \pi` },
+    labels: ["pi_is_positive"],
+    statement: [
+      paragraph([
+        ref("arcsin_is_bijection"),
+        " の ",
+        math(String.raw`\pi \in \mathbb{R}`),
+        "（",
+        ref("arcsin_of_one_is_half_pi"),
+        " により ",
+        math(String.raw`\arcsin(1) = \pi/2`),
+        "）について ",
+        math(String.raw`0 < \pi`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\pi`),
+        " が弧の長さで定まる実数だからである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。以下 ",
+        math(String.raw`-\pi/2`),
+        " は ",
+        math(String.raw`-(\pi/2)`),
+        " を表す。",
+        math(String.raw`-1 \in [-1,0)`),
+        " なので ",
+        ref("def_arcsin"),
+        " の第二の式が使え、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(-1)
+&= -\arcsin(-(-1))
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式の}\ y' \to -1\text{。}-1 \leq -1 < 0)\\
+&= -\arcsin(1)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(-a) = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
+&= -\pi/2
+&&(\because\ \blkref{arcsin_of_one_is_half_pi})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\pi/2
+&= \arcsin(-1)
+&&(\because\ \text{上の}\ \arcsin(-1)\ \text{の鎖})\\
+&< \arcsin(1)
+&&(\because\ -1 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加の}\ y_1 \to -1,\ y_2 \to 1)\\
+&= \pi/2
+&&(\because\ \blkref{arcsin_of_one_is_half_pi})
+\end{aligned}`),
+      paragraph(["本体。主張の左辺から始める。"]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= -\pi/2 + \pi/2
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \pi/2\bigr)\\
+&< \pi/2 + \pi/2
+&&\bigl(\because\ \text{上の}\ -\pi/2 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to \pi/2\bigr)\\
+&= \pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a/2 + a/2 = a\ \text{の}\ a \to \pi\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-08: zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明の中の 0 < π の鎖と、relation_of_gamma_2_theta_tilde の準備の第五の 0 < π の鎖（arcsin(0) = 0 を経ていた）が同じ事実を別の道筋で示していたので、前者の鎖を独立の主張にして両方から引く。arcsin(0) を経ずに arcsin(−1) < arcsin(1) から示すので、sine_zero との循環は無い。",
+        "2026-11-09: 数学的道具立ての angle_section_existence_uniqueness・sine_integral_two_sided から引けるよう、臨界点の章の冒頭（020_critical_point.ts）から arcsin_is_bijection の直後へ移した。arcsin(1) = π/2 の根拠を remark_real_analysis_facts_R3_R4 の円周率の項から、齋藤微積分 命題 2.1.5 で示す arcsin_of_one_is_half_pi に替えた。鎖の式は不変。",
+        "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_014c_definition_sin",
     kind: "definition",
     origin: { path: "structured-latex/content/000_calculation_formulae_10_19.ts", ordinal: 15 },
@@ -603,9 +765,19 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
       ]),
       paragraph([
         "存在。証明の中で使う記号を先に置く。",
-        math(String.raw`\pi>0`),
-        " より ",
-        math(String.raw`2\pi>0`),
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0<\pi`),
+        " と ",
+        math(String.raw`0<2`),
+        " から、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0<2\pi`),
         " であるから ",
         math(String.raw`t:=\dfrac{\theta}{2\pi}\in\mathbb{R}`),
         " が定まる。アルキメデス性を ",
@@ -685,7 +857,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 &=2\pi\cdot0
 &&(\because\ 0\ \text{との積は}\ 0)\\
 &\le2\pi(t-n)
-&&(\because\ \text{準備の第三の}\ n\le t\ \text{より}\ 0\le t-n\ \text{、および}\ 2\pi>0)\\
+&&(\because\ \text{準備の第三の}\ n\le t\ \text{より}\ 0\le t-n\ \text{、および準備の}\ 0<2\pi)\\
 &=2\pi t-2n\pi
 &&(\because\ \text{分配則})\\
 &=\theta-2n\pi
@@ -701,7 +873,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 &=2\pi(t-n)
 &&(\because\ \text{分配則})\\
 &<2\pi\cdot1
-&&(\because\ \text{準備の第四の}\ t<n+1\ \text{より}\ t-n<1\ \text{、および}\ 2\pi>0)\\
+&&(\because\ \text{準備の第四の}\ t<n+1\ \text{より}\ t-n<1\ \text{、および準備の}\ 0<2\pi)\\
 &=2\pi
 &&(\because\ 1\ \text{との積は変わらない})
 \end{aligned}`),
@@ -743,9 +915,11 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ 0\ \text{を引いても変わらない})
 \end{aligned}`),
       paragraph([
-        "である。各辺を ",
-        math(String.raw`2\pi>0`),
-        " で割って ",
+        "である。各辺を正の数 ",
+        math(String.raw`2\pi`),
+        "（存在の準備の ",
+        math(String.raw`0<2\pi`),
+        "）で割って ",
         math(String.raw`-1<n'-n<1`),
         " を得る。",
         math(String.raw`n'-n\in\mathbb{Z}`),
@@ -773,6 +947,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
           "一意性の側は、原文が 2 つの不等式を辺々引いて -2π<…<2π を 1 行で書いていたのを、" +
           "下からの評価と上からの評価の 2 つの鎖へ分けた（1 行では、どちらの端がどちらの仮定から" +
           "出たのかが書かれない）。各行の末尾へ (∵ …) を付けた。ステップは減らしていない。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 存在の準備の「π>0 より 2π>0」を pi_is_positive の 0<π と ℝ の正の数どうしの積は正（set_and_algebra_notation）から 0<2π を出す形にし、下界・上界の鎖の根拠「2π>0」の 2 か所を「準備の 0<2π」に、一意性の「2π>0 で割って」を存在の準備の 0<2π を引く形にした。値と主張は不変。",
       ],
     },
   },
