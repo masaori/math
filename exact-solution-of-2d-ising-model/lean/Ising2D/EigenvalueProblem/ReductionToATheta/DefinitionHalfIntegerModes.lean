@@ -36,6 +36,7 @@
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 
 namespace Ising2D
 
@@ -59,7 +60,7 @@ noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
 theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 :=
   checkPhase_M hM μ
 
-/-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
+/-- 人手 `half_integer_phase_periodicity` の準備の鎖: `θ~_{μ+M} = θ~_μ + 2π`。 -/
 theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M (μ + (M : ℤ)) = thetaTilde M μ + 2 * Real.pi := by
   have hMR : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hM
@@ -76,40 +77,52 @@ theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
           field_simp
     _ = thetaTilde M μ + 2 * Real.pi := by rw [thetaTilde]
 
-/-- 負角の Euler 公式を、本文と同じ実数の正弦・余弦で書いたもの。 -/
-theorem checkPhase_eq_cos_sub_I_sin (hM : M ≠ 0) (j μ : ℤ) :
-    checkPhase M j μ =
-      (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
-        - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M μ) : ℂ) := by
-  rw [checkPhase_eq_exp hM]
-  rw [show -(Complex.I * (j : ℂ) * (thetaTilde M μ : ℂ)) =
-      ((-((j : ℝ) * thetaTilde M μ) : ℝ) : ℂ) * Complex.I by
-        push_cast
-        ring]
-  rw [Complex.exp_mul_I, ← Complex.ofReal_cos, ← Complex.ofReal_sin,
-    Real.cos_neg, Real.sin_neg]
-  push_cast
-  ring
+/-- （読み）`checkPhase M k l` は人手の `exp(-i(k_ℝ θ~_l)_ℂ)`（`def_half_integer_checkZ`・`def_half_integer_checkY` の係数。
+`-i(·)_ℂ` は `(-i)(·)_ℂ` の読み）そのもの。`checkPhase_eq_exp` の `-(i · k_ℂ · θ~_ℂ)` を、積の像 `real_inclusion_mul`
+（人手 `real_inclusion_preserves_product`）を右辺から左辺へ当てて人手の形に直す。 -/
+theorem checkPhase_eq_exp_neg_I_mul (hM : M ≠ 0) (k l : ℤ) :
+    checkPhase M k l = Complex.exp ((-Complex.I) * (((k : ℝ) * thetaTilde M l : ℝ) : ℂ)) := by
+  rw [checkPhase_eq_exp hM k _, ← real_inclusion_mul, Complex.ofReal_intCast, neg_mul, mul_assoc]
 
-/-- 本文の「角度を `2π` ずらし、Euler 公式と三角関数の周期性を使う」経路で示す位相周期性。 -/
+/-- **`half_integer_phase_periodicity`**: `exp(-i(j_ℝθ~_{μ+M})_ℂ) = exp(-i(j_ℝθ~_μ)_ℂ)`。
+calc の 2〜8 段目が人手の主張の鎖の 6 行に対応する（人手の 3 行目だけが 4・5 段目の 2 段で、ほかは 1 段ずつ）。1 段目と末尾の段は `checkPhase` を人手の
+`exp((-i)(·)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`）である。人手の「上の鎖を 2 箇所へ同時代入」は
+`thetaTilde_period_for_checkZY` と、`j_ℝ(θ~_μ + 2π) = j_ℝθ~_μ + j_ℝ·2π` の ℝ の分配法則の 2 段で受ける
+（人手は分配と積の交換を準備の鎖 `j_ℝθ~_{μ+M} = j_ℝθ~_μ + 2πj_ℝ` で済ませ、Lean は `2πj_ℝ` を `j_ℝ·(2π)` の形のまま
+`Real.cos_add_int_mul_two_pi` に渡す）。 -/
 theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
     checkPhase M j (μ + (M : ℤ)) = checkPhase M j μ := by
   calc
     checkPhase M j (μ + (M : ℤ))
-        = (Real.cos ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ)
+        = Complex.exp ((-Complex.I) * (((j : ℝ) * thetaTilde M (μ + (M : ℤ)) : ℝ) : ℂ)) :=
+          checkPhase_eq_exp_neg_I_mul hM j _
+    -- 人手 1 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (j_ℝθ~_{μ+M})_ℂ`）
+    _ = Complex.exp (-(Complex.I * (((j : ℝ) * thetaTilde M (μ + (M : ℤ)) : ℝ) : ℂ))) := by
+          rw [neg_I_mul_eq_neg_of_I_mul]
+    -- 人手 2 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`（`θ = j_ℝθ~_{μ+M}`）
+    _ = (Real.cos ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ) :=
-          checkPhase_eq_cos_sub_I_sin hM j _
+          exp_neg_I_mul_real_eq_cos_sub_I_mul_sin _
+    -- 人手 3 行目: 上の鎖を 2 箇所へ同時代入
     _ = (Real.cos ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ) := by
           rw [thetaTilde_period_for_checkZY hM]
+    -- 人手 3 行目（続き）: 準備の鎖の ℝ の分配法則
     _ = (Real.cos ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ)
             - Complex.I *
                 (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by
-          ring
+          rw [mul_add]
+    -- 人手 4 行目: `j ∈ ℤ` と `cos, sin` の `2π` 周期性を 2 箇所へ同時適用
     _ = (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M μ) : ℂ) := by
           rw [Real.cos_add_int_mul_two_pi, Real.sin_add_int_mul_two_pi]
-    _ = checkPhase M j μ := (checkPhase_eq_cos_sub_I_sin hM j μ).symm
+    -- 人手 5 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`（`θ = j_ℝθ~_μ`、右辺から左辺へ）
+    _ = Complex.exp (-(Complex.I * (((j : ℝ) * thetaTilde M μ : ℝ) : ℂ))) :=
+          (exp_neg_I_mul_real_eq_cos_sub_I_mul_sin _).symm
+    -- 人手 6 行目: `negative_i_times_complex_is_negation_of_i_times` を右辺から左辺へ
+    _ = Complex.exp ((-Complex.I) * (((j : ℝ) * thetaTilde M μ : ℝ) : ℂ)) := by
+          rw [neg_I_mul_eq_neg_of_I_mul]
+    _ = checkPhase M j μ := (checkPhase_eq_exp_neg_I_mul hM j μ).symm
 
 /-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
 theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = checkZ M μ := by

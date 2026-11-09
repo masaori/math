@@ -26,7 +26,7 @@
 * 第 1・3 式の `scalar_exp_product` → 準備 2 → `exp_sum` の 3 行は、人手の準備 2 の 2 本の鎖
   （実数の側 `anticomm_exponent_real_chain`、複素数の側 `anticomm_exponent_complex_chain`）を補題として立て、
   人手の行と 1 段ずつ対応させる。その前後の 2 段は人手の行ではなく読みである:
-  `checkPhase M j λ` を人手の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`）と、
+  `checkPhase M j λ` を人手の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`。`ReductionToATheta/DefinitionHalfIntegerModes.lean`）と、
   `exp_sum` の Lean の形 `expPhase_sum`（`exp(-√-1·2π jk/M)` の和）を人手の読み
   「左辺の指数 `2πijκ/N` は `i(y_j)_ℂ`」の形に直した `exp_sum_as_I_mul_real`（`k ↦ -κ` で当て、`M ∣ x ⟺ M ∣ -x`）。
 * 指数法則 `scalar_exp_product` の行は、`def_scalar_exp` の具体版が Lean に無いので mathlib の `Complex.exp_add` で表す
@@ -71,13 +71,6 @@ theorem deltaMod_neg_sub_one (M : ℕ) (μ ν : ℤ) :
     deltaMod M (-(μ + ν - 1)) 0 = deltaMod M (μ + ν) 1 := by
   rw [deltaMod, deltaMod, sub_zero]
   simp only [dvd_neg]
-
-/-- （読み）`checkPhase M j λ` は人手の準備の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` そのもの。
-`checkPhase_eq_exp` の `-(i · j_ℂ · θ~_ℂ)` を、積の像 `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）を
-右辺から左辺へ当てて人手の形に直す（`ClaimConjugateIndex.lean` の `checkPhase_conj'` の 1 段目と同じ読み）。 -/
-theorem checkPhase_eq_exp_neg_I_mul (hM : M ≠ 0) (k l : ℤ) :
-    checkPhase M k l = Complex.exp ((-Complex.I) * (((k : ℝ) * thetaTilde M l : ℝ) : ℂ)) := by
-  rw [checkPhase_eq_exp hM k _, ← real_inclusion_mul, Complex.ofReal_intCast, neg_mul, mul_assoc]
 
 /-- **準備 2 の実数の鎖**: `j_ℝθ~_μ + j_ℝθ~_ν = -(2π j_ℝ κ_ℝ / (M_col)_ℝ)`（`κ = -(μ+ν-1)`）。
 人手の `j` は Lean の `k` である。人手の 20 行に 1 段ずつ対応する（`2π` は Lean では積 `2 * Real.pi`）。 -/

@@ -2262,7 +2262,15 @@ k
         math(String.raw`Z_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb C)`),
         " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
         math(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\in\mathbb C`),
-        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+        " を仮定する。指数の ",
+        math(String.raw`-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を掛けた ",
+        math(String.raw`(-i)\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " の意味である。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
       ]),
       displayMath(
         String.raw`\check{Z}_\mu
@@ -2277,6 +2285,7 @@ k
       notes: [
         "旧複合ブロックから、半整数運動量で Fourier 変換した Z 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkZ を割り当てた。",
         "hat Z との係数の比較は意味上の前提ではないため、依存辺には含めていない。複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+        "2026-11-09（Lean の通しの証明）: 指数の -i(j_Rθ̃_μ)_C の読みが書かれていなかった。これを開いて使う anticommutator_of_check_psi・conjugate_index_of_check_Z_Y の読みと同じ (-i)(j_Rθ̃_μ)_C であることを書いた。定義の中身は変えていない。",
       ],
     },
   },
@@ -2319,7 +2328,15 @@ k
         math(String.raw`Y_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb C)`),
         " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
         math(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\in\mathbb C`),
-        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+        " を仮定する。指数の ",
+        math(String.raw`-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を掛けた ",
+        math(String.raw`(-i)\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " の意味である。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
       ]),
       displayMath(
         String.raw`\check{Y}_\mu
@@ -2334,6 +2351,7 @@ k
       notes: [
         "旧複合ブロックから、半整数運動量で Fourier 変換した Y 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkY を割り当てた。",
         "複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+        "2026-11-09（Lean の通しの証明）: 指数の -i(j_Rθ̃_μ)_C の読みが書かれていなかった。これを開いて使う anticommutator_of_check_psi・conjugate_index_of_check_Z_Y の読みと同じ (-i)(j_Rθ̃_μ)_C であることを書いた。定義の中身は変えていない。",
       ],
     },
   },
@@ -2362,7 +2380,19 @@ k
         math(String.raw`r_{\mathbb C}`),
         "（",
         math(String.raw`r\in\mathbb R`),
-        "）を用いる。このとき",
+        "）を用いる。主張の ",
+        math(String.raw`-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を掛けた ",
+        math(String.raw`(-i)\,(\cdot)_{\mathbb C}`),
+        " の意味である（",
+        ref("def_half_integer_checkZ"),
+        "・",
+        ref("def_half_integer_checkY"),
+        " の係数と同じ読み）。このとき",
       ]),
       displayMath(String.raw`\exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}) = -1_{\mathbb C}`),
       paragraph([
@@ -2418,6 +2448,8 @@ k
       displayMath(
         String.raw`\begin{aligned}
 \exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+&=\exp\bigl(-\bigl(i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\bigr)\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z\to((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\bigr) \\
 &=(\cos((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}
 &&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=(M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu\text{ で}\bigr) \\
 &=(\cos(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}-i(\sin(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}
@@ -2461,6 +2493,7 @@ k
         "2026-11-02（全証明の SageMath 検算）: 主張と証明の実数・複素数に像の記号を付け、θ̃_μ の定義の式どおりに角度の鎖を始め、cos(2πμ-π) = -1 と sin(2πμ-π) = 0 を 1 行に束ねていたのを、周期性・偶奇性・特殊値の一行一操作に分けた。負角の Euler 表示は euler_formula_cos_sin の証明の中の式ではなく、主張 exp_of_negative_i_real_as_cos_minus_i_sin を引く。全実数上の cos・sin の性質に依ることを主張に書いた。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 鎖の「cos は偶関数」「sin は奇関数」の 2 行が名前だけの根拠だったので、主張 cos_of_negated_real・sin_of_negated_real（θ → π）の参照にした。" +
           "sin_of_negated_real の右辺は ℂ の符号反転 -(sin π)_ℂ なので、続く行を -(0_R)_ℂ → -0_ℂ → (-1_ℂ)·0_ℂ → 0_ℂ の順に直した（-0_R = 0_R の行が無くなり、-0_ℂ = (-1_ℂ)·0_ℂ と (-1_ℂ)·0_ℂ = 0_ℂ の 2 行が増え、鎖は 15 等号から 16 等号になった）。主張の中身は不変。",
+        "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C)）を引く前に negative_i_times_complex_is_negation_of_i_times で -(i(·)_C) へ書き換える 1 行を足した（16 等号 → 17 等号）。ほかの行は変えていない。",
       ],
     },
   },
@@ -2490,7 +2523,19 @@ k
         math(String.raw`r_{\mathbb C}`),
         "（",
         math(String.raw`r\in\mathbb R`),
-        "）を用いる。このとき",
+        "）を用いる。主張の ",
+        math(String.raw`-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C},\ -i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を掛けた ",
+        math(String.raw`(-i)\,(\cdot)_{\mathbb C}`),
+        " の意味である（",
+        ref("def_half_integer_checkZ"),
+        "・",
+        ref("def_half_integer_checkY"),
+        " の係数と同じ読み）。このとき",
       ]),
       displayMath(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C}) = \exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})`),
       paragraph([
@@ -2550,14 +2595,18 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
       displayMath(
         String.raw`\begin{aligned}
 \exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C})
+&=\exp\bigl(-\bigl(i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C}\bigr)\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z\to(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C})\bigr) \\
 &=(\cos(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}))_{\mathbb C}
 &&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}\text{ で}\bigr) \\
 &=(\cos(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}
 &&\bigl(\because\ \text{上の鎖を 2 箇所へ同時代入}\bigr) \\
 &=(\cos(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}
 &&\bigl(\because\ j\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
+&=\exp\bigl(-\bigl(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\bigr)\bigr)
+&&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_\mu\text{ で（右辺から左辺へ）}\bigr) \\
 &=\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
-&&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_\mu\text{ で}\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z\to(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\text{ を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph(["となる。"]),
@@ -2566,6 +2615,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算）: half_integer_checkZ_periodicity と half_integer_checkY_periodicity の証明が同じ二つの鎖（添字をずらした角度と係数の一致）を重複して持っていたので、係数の一致を一つの主張に切り出した。",
+        "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は -(iθ_C)）を当てる 1 行目の前と末尾の行の後に negative_i_times_complex_is_negation_of_i_times の行を 1 行ずつ足した（4 等号 → 6 等号）。ほかの行は変えていない。",
       ],
     },
   },

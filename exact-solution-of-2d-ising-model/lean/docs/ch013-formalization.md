@@ -42,6 +42,9 @@
 | `Ising2D.checkZ`（`DefinitionHalfIntegerModes.lean`） | `check(Z)_μ` | `def_half_integer_checkZ` |
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
 | `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
+| `Ising2D.thetaTilde_period_for_checkZY` | 準備の鎖 `θ~_{μ+M} = θ~_μ + 2π` | `half_integer_phase_periodicity` |
+| `Ising2D.checkPhase_eq_exp_neg_I_mul` | 定義の係数の読み `exp((-i)(k_ℝθ~_l)_ℂ)`（`checkPhase` を人手の形に直す。`anticommutator_of_check_Z_Y` の準備でも使う） | `def_half_integer_checkZ`・`def_half_integer_checkY` |
+| `Ising2D.checkPhase_period_for_checkZY` | `e^{-ijθ~_{μ+M}} = e^{-ijθ~_μ}`（主張の鎖の 6 行。3 行目だけ 2 段） | `half_integer_phase_periodicity` |
 | `Ising2D.checkZ_period` | `check(Z)_{μ+M} = check(Z)_μ` | `half_integer_checkZ_periodicity` |
 | `Ising2D.checkY_period` | `check(Y)_{μ+M} = check(Y)_μ` | `half_integer_checkY_periodicity` |
 | `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
@@ -63,7 +66,6 @@
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |
 | `Ising2D.sum_sum_smul_two_deltaM_smul_one` | 証明中の行「`1 ≤ j,k ≤ M` では `δ^M_{(j,k)} = 1 ⟺ j = k`」（二重和の `j = k` の項だけが残る） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.deltaMod_neg_sub_one` | 証明中の行 `δ^M_{(κ,0)} = δ^M_{(μ+ν,1)}`（`κ = -(μ+ν-1)`。`def_delta_M`） | `anticommutator_of_check_Z_Y` |
-| `Ising2D.checkPhase_eq_exp_neg_I_mul` | 準備の `e_{j,λ} = exp((-i)(j_ℝθ~_λ)_ℂ)` の読み（`checkPhase` を人手の形に直す） | 同上 |
 | `Ising2D.anticomm_exponent_real_chain` | 準備 2 の実数の鎖 `j_ℝθ~_μ + j_ℝθ~_ν = -(2πj_ℝκ_ℝ/(M_col)_ℝ)`（人手の 20 行） | 同上 |
 | `Ising2D.anticomm_exponent_complex_chain` | 準備 2 の複素数の鎖 `(-i)(a)_ℂ + (-i)(b)_ℂ = i(y_j)_ℂ`（人手の 14 行。和の像は `real_inclusion_add`、積の像は `real_inclusion_mul`） | 同上 |
 | `Ising2D.exp_sum_as_I_mul_real` | 準備 2 の読み: `exp_sum` を `N` と `κ` で当てた形 `∑ exp(i(y_j)_ℂ) = (M_col)_ℂ δ^M_{(κ,0)}` | 同上 |
