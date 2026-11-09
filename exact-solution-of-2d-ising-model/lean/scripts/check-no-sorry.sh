@@ -254,6 +254,12 @@ targets=(
   Ising2D.V2H2FormUnits
   Ising2D.V2H2FormUnits_val
   Ising2D.isUnit_V2H2Form
+  Ising2D.I_mul_real_neg_eq_neg_I_mul
+  Ising2D.neg_I_mul_real_neg_eq_I_mul
+  Ising2D.euler_cos_real_inclusion
+  Ising2D.euler_sin_real_inclusion
+  Ising2D.real_inclusion_cos_neg
+  Ising2D.real_inclusion_sin_neg
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg
   Ising2D.AMat_eq

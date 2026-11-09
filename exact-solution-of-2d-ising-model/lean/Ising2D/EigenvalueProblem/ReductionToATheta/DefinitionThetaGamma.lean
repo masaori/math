@@ -11,6 +11,9 @@
   - `TV1_hatZ_hatY_022_claim_gamma2_theta_is_0`（ラベル `gamma_2_theta_is_0`）
   - `TV1_hatZ_hatY_023_claim_relation_of_gamma2`（ラベル `relation_of_gamma_2`）
   - `TV1_hatZ_hatY_041_claim_gamma2_periodicity`（ラベル `gamma_2_periodicity`）
+- `eigenvalue_problem_diagonalization_and_exponential_form.ts`
+  - `def_gamma1_gamma2_of_theta` の `(2,1)` 成分の鎖と、`relation_of_gamma_2_theta_tilde` の証明の
+    「第一に」「第三に」の鎖（`gamma2_neg` とその準備の補題。各段に人手の行を書いた）
 
 原文の定義（`θ ∈ ℝ`、原文は `θ ∈ ℂ` だが `cos θ`, `sin θ` の実部虚部分解を使うので実数に限る）:
 
@@ -54,6 +57,7 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.RingTheory.RootsOfUnity.Complex
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 
 namespace Ising2D
 
@@ -92,15 +96,125 @@ noncomputable def AMat : Matrix (Fin 2) (Fin 2) ℂ :=
         ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)),
       ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ)]
 
-/-- `γ_2(-θ)` の明示形。原文 `relation_of_gamma_2` の proof 第 1 行。 -/
+/-! ## `γ_2(-θ)` を `θ` の量で書くための準備
+
+人手 `relation_of_gamma_2_theta_tilde` の証明の「第一に」の鎖（`i(-θ) = -iθ`・`-i(-θ) = iθ`・
+`cos(-θ) = cos θ`・`sin(-θ) = -sin θ`）を、行ごとに 1 段の `calc` で置く。
+人手 `def_gamma1_gamma2_of_theta` の `(2,1)` 成分の鎖は、同じ等式を名前だけで根拠にしている。
+
+- 人手の `-iθ` は `multiply_by_minus_one` の `-(iθ)` で、Lean の `-(Complex.I * (θ : ℂ))` である。
+- 人手の `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1` で、Lean では `((-1 : ℝ) : ℂ)` と `-1 : ℂ` の
+  2 つの書き方がある。行き来は略記の読み替えの段（`Complex.ofReal_neg`・`Complex.ofReal_one`）で行う。
+- 分母の `2` は人手どおり `2_ℂ`（Lean の `(2 : ℂ)`）である。 -/
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `i(-θ) = -iθ`（人手の 6 行と、略記の読み替えの 1 段）。 -/
+theorem I_mul_real_neg_eq_neg_I_mul (θ : ℝ) :
+    Complex.I * ((-θ : ℝ) : ℂ) = -(Complex.I * (θ : ℂ)) :=
+  calc Complex.I * ((-θ : ℝ) : ℂ)
+      = Complex.I * (((-1) * θ : ℝ) : ℂ) := by
+        rw [neg_one_mul]                          -- 1 行目: ℝ で `-a = (-1)a`（ℝ は体 `set_and_algebra_notation`、`a → θ`）
+    _ = Complex.I * (((-1 : ℝ) : ℂ) * (θ : ℂ)) := by
+        rw [real_inclusion_mul]                   -- 2 行目: `real_inclusion_preserves_product`（`a → -1`, `b → θ`）を右辺から左辺へ
+    _ = Complex.I * ((-1 : ℂ) * (θ : ℂ)) := by
+        rw [Complex.ofReal_neg, Complex.ofReal_one] -- `(-1)_ℂ` を `-1_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+    _ = (Complex.I * (-1 : ℂ)) * (θ : ℂ) := by
+        rw [mul_assoc]                            -- 3 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = ((-1 : ℂ) * Complex.I) * (θ : ℂ) := by
+        rw [mul_comm Complex.I (-1 : ℂ)]          -- 4 行目: `complex_numbers_form_a_field` の積の可換律
+    _ = (-1 : ℂ) * (Complex.I * (θ : ℂ)) := by
+        rw [mul_assoc]                            -- 5 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = -(Complex.I * (θ : ℂ)) := by
+        rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`（`z → iθ`）を右辺から左辺へ
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `-i(-θ) = iθ`（人手の 2 行）。 -/
+theorem neg_I_mul_real_neg_eq_I_mul (θ : ℝ) :
+    -(Complex.I * ((-θ : ℝ) : ℂ)) = Complex.I * (θ : ℂ) :=
+  calc -(Complex.I * ((-θ : ℝ) : ℂ))
+      = -(-(Complex.I * (θ : ℂ))) := by
+        rw [I_mul_real_neg_eq_neg_I_mul]          -- 1 行目: 上の `i(-θ) = -iθ`
+    _ = Complex.I * (θ : ℂ) := by
+        rw [neg_neg]                              -- 2 行目: ℂ で `-(-z) = z`（`complex_numbers_form_a_field`、`z → iθ`）
+
+/-- 人手 `euler_formula_cos_sin` の第 1 式を、`x ∈ ℝ` の `cos x` を `inclusion_rr_to_cc` の像として読んだ形
+（`cos x = (exp(ix) + exp(-ix))/2`、`-ix` は `-(ix)`）。人手のブロックの具体版が Lean に無いので、mathlib の
+`Complex.ofReal_cos` と `Complex.cos` の定義で受ける（`ClaimFactorizationATheta.lean` の `euler_cos_as_exp` は
+同じ式を `exp((-i)x)`・`2 = (2)_ℂ` で読んだ形）。 -/
+theorem euler_cos_real_inclusion (x : ℝ) :
+    ((Real.cos x : ℝ) : ℂ)
+      = (Complex.exp (Complex.I * (x : ℂ)) + Complex.exp (-(Complex.I * (x : ℂ)))) / 2 := by
+  rw [Complex.ofReal_cos, Complex.cos, neg_mul, mul_comm (x : ℂ) Complex.I]
+
+/-- 人手 `euler_formula_cos_sin` の第 2 式を同じく読んだ形（`sin x = (exp(ix) - exp(-ix))/(2i)`）。
+具体版が Lean に無いので、mathlib の `Complex.ofReal_sin` と `Complex.sin` の定義で受ける。 -/
+theorem euler_sin_real_inclusion (x : ℝ) :
+    ((Real.sin x : ℝ) : ℂ)
+      = (Complex.exp (Complex.I * (x : ℂ)) - Complex.exp (-(Complex.I * (x : ℂ)))) / (2 * Complex.I) := by
+  rw [Complex.ofReal_sin, Complex.sin, neg_mul, mul_comm (x : ℂ) Complex.I]
+  field_simp
+  ring_nf
+  rw [Complex.I_sq]
+  ring
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `cos(-θ) = cos θ`（人手の 5 行）。 -/
+theorem real_inclusion_cos_neg (θ : ℝ) :
+    ((Real.cos (-θ) : ℝ) : ℂ) = ((Real.cos θ : ℝ) : ℂ) :=
+  calc ((Real.cos (-θ) : ℝ) : ℂ)
+      = (Complex.exp (Complex.I * ((-θ : ℝ) : ℂ)) + Complex.exp (-(Complex.I * ((-θ : ℝ) : ℂ)))) / 2 :=
+        euler_cos_real_inclusion (-θ)             -- 1 行目: `euler_formula_cos_sin` を `-θ` に適用
+    _ = (Complex.exp (-(Complex.I * (θ : ℂ))) + Complex.exp (-(Complex.I * ((-θ : ℝ) : ℂ)))) / 2 := by
+        rw [I_mul_real_neg_eq_neg_I_mul θ]        -- 2 行目: 上の `i(-θ) = -iθ`
+    _ = (Complex.exp (-(Complex.I * (θ : ℂ))) + Complex.exp (Complex.I * (θ : ℂ))) / 2 := by
+        rw [neg_I_mul_real_neg_eq_I_mul]          -- 3 行目: 上の `-i(-θ) = iθ`
+    _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2 := by
+        rw [add_comm]                             -- 4 行目: `complex_numbers_form_a_field` の和の可換律
+    _ = ((Real.cos θ : ℝ) : ℂ) :=
+        (euler_cos_real_inclusion θ).symm         -- 5 行目: `euler_formula_cos_sin`
+
+/-- 人手 `relation_of_gamma_2_theta_tilde` の準備の `sin(-θ) = -sin θ`（人手の 6 行）。 -/
+theorem real_inclusion_sin_neg (θ : ℝ) :
+    ((Real.sin (-θ) : ℝ) : ℂ) = -((Real.sin θ : ℝ) : ℂ) :=
+  calc ((Real.sin (-θ) : ℝ) : ℂ)
+      = (Complex.exp (Complex.I * ((-θ : ℝ) : ℂ)) - Complex.exp (-(Complex.I * ((-θ : ℝ) : ℂ))))
+          / (2 * Complex.I) :=
+        euler_sin_real_inclusion (-θ)             -- 1 行目: `euler_formula_cos_sin` を `-θ` に適用
+    _ = (Complex.exp (-(Complex.I * (θ : ℂ))) - Complex.exp (-(Complex.I * ((-θ : ℝ) : ℂ))))
+          / (2 * Complex.I) := by
+        rw [I_mul_real_neg_eq_neg_I_mul θ]        -- 2 行目: 上の `i(-θ) = -iθ`
+    _ = (Complex.exp (-(Complex.I * (θ : ℂ))) - Complex.exp (Complex.I * (θ : ℂ))) / (2 * Complex.I) := by
+        rw [neg_I_mul_real_neg_eq_I_mul]          -- 3 行目: 上の `-i(-θ) = iθ`
+    _ = (-(Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))) / (2 * Complex.I) := by
+        rw [neg_sub]                              -- 4 行目: ℂ で `b - a = -(a - b)`（`complex_numbers_form_a_field`）
+    _ = -((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
+        rw [neg_div]                              -- 5 行目: ℂ で `(-x)/y = -(x/y)`（`complex_numbers_form_a_field`）
+    _ = -((Real.sin θ : ℝ) : ℂ) := by
+        rw [euler_sin_real_inclusion θ]           -- 6 行目: `euler_formula_cos_sin`
+
+/-- `γ_2(-θ)` の明示形。人手 `relation_of_gamma_2_theta_tilde` の証明の「第三に」の 6 行の鎖と 1 段ずつ対応する。
+人手 `def_gamma1_gamma2_of_theta` の `(2,1)` 成分の 4 行の鎖は、同じ計算の 4〜6 行目を 1 行（`sin(-θ) = -sin θ`）に
+まとめている。 -/
 theorem gamma2_neg :
     gamma2 K (-θ) = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
       ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) -
-        (K.s1 : ℂ) * (K.c2 : ℂ)) := by
-  have h : Complex.I * ((-θ : ℝ) : ℂ) = -(Complex.I * (θ : ℂ)) := by push_cast; ring
-  rw [gamma2, h]
-  push_cast [Real.cos_neg, Real.sin_neg]
-  ring
+        (K.s1 : ℂ) * (K.c2 : ℂ)) :=
+  calc gamma2 K (-θ)
+      = Complex.I * Complex.exp (Complex.I * ((-θ : ℝ) : ℂ)) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos (-θ) : ℂ) - Complex.I * (Real.sin (-θ) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :=
+        rfl                                       -- 1 行目: `def_gamma1_gamma2_of_theta` を `-θ ∈ ℝ` に適用
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos (-θ) : ℂ) - Complex.I * (Real.sin (-θ) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [I_mul_real_neg_eq_neg_I_mul]          -- 2 行目: 上の `i(-θ) = -iθ`
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin (-θ) : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_inclusion_cos_neg]               -- 3 行目: 上の `cos(-θ) = cos θ`
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (-(Real.sin θ : ℂ)) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [real_inclusion_sin_neg]               -- 4 行目: 上の `sin(-θ) = -sin θ`
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) - (-(Complex.I * (Real.sin θ : ℂ))) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [mul_neg]                              -- 5 行目: ℂ で `x(-y) = -(xy)`（`x → i`, `y → sin θ`）
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) *
+          ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
+        rw [sub_neg_eq_add]                       -- 6 行目: ℂ で `a - (-b) = a + b`（`a → c_1cos θ`, `b → i sin θ`）
 
 /-- `γ_1` は偶関数（`cos` が偶関数であることによる）。 -/
 @[simp]

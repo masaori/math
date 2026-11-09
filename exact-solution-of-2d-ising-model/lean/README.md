@@ -785,6 +785,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
+| `Ising2D.I_mul_real_neg_eq_neg_I_mul` / `neg_I_mul_real_neg_eq_I_mul` / `real_inclusion_cos_neg` / `real_inclusion_sin_neg` | `i(-θ) = -iθ`・`-i(-θ) = iθ`・`cos(-θ) = cos θ`・`sin(-θ) = -sin θ`（人手の鎖と 1 段ずつの `calc`。`euler_cos_real_inclusion`・`euler_sin_real_inclusion` は人手 `euler_formula_cos_sin` を mathlib で受けた読み） | `relation_of_gamma_2_theta_tilde` の証明の「第一に」 |
+| `Ising2D.gamma2_neg` | `γ_2(-θ) = i exp(-iθ) s_2^*(c_1cos θ + i sin θ - s_1c_2)`（6 段の `calc`） | `relation_of_gamma_2_theta_tilde` の証明の「第三に」、`def_gamma1_gamma2_of_theta` の `(2,1)` 成分 |
 | `Ising2D.gamma2_neg_eq_neg_conj` | `γ_2(-θ) = -conj(γ_2(θ))` | `relation_of_gamma_2` |
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq` | `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2` | 同上 |
 | `Ising2D.gamma2_neg_eq_zero_iff` | `γ_2(-θ) = 0 ⟺ γ_2(θ) = 0` | 同上の系 |
