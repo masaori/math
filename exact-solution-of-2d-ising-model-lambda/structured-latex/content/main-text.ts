@@ -12378,6 +12378,31 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_graph_connected",
+              focus: {
+                id: "tools_definition_finite_graph_connected",
+                kind: "definition",
+                title: { text: "有限単純グラフの連結性" },
+                labels: ["def_finite_graph_connected"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteGraphConnected"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " が連結であるとは、", math(String.raw`V\ne\varnothing`),
+                    " であり、任意の頂点 ", math(String.raw`u,v\in V`),
+                    " について、始点が ", math(String.raw`u`), "、終点が ",
+                    math(String.raw`v`), " の ", ref("def_vertex_simple_path"),
+                    " が存在することをいう。空の頂点集合を持つグラフは連結と呼ばない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12394,7 +12419,7 @@ S&=(S-T)+T
                   paragraph([
                     ref("def_finite_simple_graph"), " の空でない頂点集合 ", math(String.raw`V`),
                     " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
-                    " が連結で閉路を持たないなら、",
+                    " が連結（", ref("def_finite_graph_connected"), "）で閉路を持たないなら、",
                   ]),
                   displayMath(String.raw`|E|+1=|V|`),
                   paragraph(["が成り立つ。頂点と辺の個数はいずれも自然数である。"]),
@@ -12456,7 +12481,7 @@ S&=(S-T)+T
                   paragraph([
                     ref("def_finite_simple_graph"), " の頂点集合 ", math(String.raw`V`),
                     " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
-                    " が連結で閉路を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
+                    " が連結（", ref("def_finite_graph_connected"), "）で閉路を持たず、辺集合 ", math(String.raw`\varnothing\ne A\subset E`),
                     " なら、ある頂点 ", math(String.raw`v\in V`),
                     " に接する ", math(String.raw`A`), " の辺はちょうど一本である。",
                   ]),
@@ -12605,8 +12630,8 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                     math(String.raw`D`), " の辺がちょうど一本接する頂点がある。",
                     "これはその頂点での偶数性に反する。",
                   ]),
-                  displayMath(String.raw`D=\varnothing\quad(\because\ D\ne\varnothing\text{ なら接続辺数が一かつ偶数の頂点がある})`),
-                  displayMath(String.raw`A=B\quad(\because\ A\mathbin\triangle B=\varnothing)`),
+                  displayMath(String.raw`D=\varnothing\quad\bigl(\because\ D\ne\varnothing\text{ なら接続辺数が一かつ偶数の頂点がある}\bigr)`),
+                  displayMath(String.raw`A=B\quad\bigl(\because\ A\mathbin\triangle B=\varnothing\bigr)`),
                 ],
               },
             },

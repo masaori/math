@@ -9,4 +9,8 @@ abbrev FiniteSimpleGraph (n : ℕ) := SimpleGraph (Fin n)
 abbrev FiniteSimplePath {n : ℕ} (G : FiniteSimpleGraph n) (u v : Fin n) :=
   {p : G.Walk u v // p.IsPath}
 
+/-- A graph is connected when it has a vertex and every ordered pair has a simple path. -/
+def FiniteGraphConnected {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
+  Nonempty (Fin n) ∧ ∀ u v : Fin n, Nonempty (FiniteSimplePath G u v)
+
 end Ising2DLambda.Tools
