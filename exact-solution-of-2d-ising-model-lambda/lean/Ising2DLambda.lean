@@ -2,6 +2,8 @@ import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationOrbitEnumeration
 import Ising2DLambda.Tools.FiniteSimpleGraph
 import Ising2DLambda.Tools.ForestAddDisconnectedEdge
 import Ising2DLambda.NecSuf.Tools.ForestAddDisconnectedEdge
+import Ising2DLambda.Tools.ForestEdgeScan
+import Ising2DLambda.NecSuf.Tools.ForestEdgeScan
 import Ising2DLambda.Tools.ConnectedGraphCrossingEdge
 import Ising2DLambda.NecSuf.Tools.ConnectedGraphCrossingEdge
 import Ising2DLambda.Tools.ConnectedGraphCrossingEdgeFromNecSuf

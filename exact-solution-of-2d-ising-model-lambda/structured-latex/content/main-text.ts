@@ -12548,7 +12548,71 @@ S&=(S-T)+T
                     ref("def_vertex_simple_path"), " により ", math(String.raw`(V,F)`),
                     " で両端が結ばれ、仮定に反する。よって閉路は無い。",
                   ]),
-                  displayMath(String.raw`F\cup\{e\}\subseteq E\quad(\because\ F\subseteq E\text{ かつ }e\in E)`),
+                  displayMath(String.raw`\begin{aligned}
+F\cup\{e\}&\subseteq E\cup\{e\}&&\bigl(\because\ F\subseteq E\bigr)\\
+&=E&&\bigl(\because\ e\in E\bigr)
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_forest_edge_scan_invariant",
+              focus: {
+                id: "tools_claim_forest_edge_scan_invariant",
+                kind: "claim",
+                title: { text: "有限回の辺選択は無閉路と辺の包含を保つ" },
+                labels: ["claim_forest_edge_scan_invariant"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.forestEdgeScan_invariant",
+                  "Ising2DLambda.NecSuf.Tools.forestEdgeScan_invariant",
+                ],
+                verification: ["sagemath/check/forest-edge-scan-invariant"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と自然数 ", math(String.raw`m\in\mathbb N`),
+                    "、両端が ", math(String.raw`V`), " に属する頂点対の有限列 ",
+                    math(String.raw`(a_i,b_i)_{i=1}^{m}`), " を取る。",
+                    math(String.raw`F_0:=\varnothing`), " とする。各自然数 ",
+                    math(String.raw`i\in\{1,\ldots,m\}`), " について、",
+                    math(String.raw`\{a_i,b_i\}\in E`), " で両端が ",
+                    math(String.raw`(V,F_{i-1})`), " の路で結ばれないなら、",
+                  ]),
+                  displayMath(String.raw`F_i:=F_{i-1}\cup\{\{a_i,b_i\}\}`),
+                  paragraph(["と定める。この条件が成り立たないなら、"]),
+                  displayMath(String.raw`F_i:=F_{i-1}`),
+                  paragraph(["と定める。"]),
+                  paragraph([
+                    "このとき各 ", math(String.raw`i\in\{0,1,\ldots,m\}`), " について、",
+                    math(String.raw`F_i\subseteq E`), " であり、", math(String.raw`(V,F_i)`),
+                    " に閉路は無い。頂点対は辺でないものや重複を含んでもよい。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "列の長さについて帰納法を使う。", math(String.raw`i=0`), " では ",
+                    math(String.raw`F_0=\varnothing\subseteq E`), " であり、辺が無いので閉路も無い。",
+                  ]),
+                  paragraph([
+                    math(String.raw`F_{i-1}\subseteq E`), " かつ閉路が無いと仮定する。",
+                    "規則の第二の場合には ", math(String.raw`F_i=F_{i-1}`),
+                    " だから二つの性質がそのまま残る。第一の場合には ",
+                    ref("claim_forest_add_disconnected_edge"), " を ",
+                    math(String.raw`e=\{a_i,b_i\}`), " に適用して、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+F_i&=F_{i-1}\cup\{e\}&&\bigl(\because\ \text{辺選択の規則}\bigr)\\
+&\subseteq E&&\bigl(\because\ \blkref{claim_forest_add_disconnected_edge}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "を得て、同じ主張から ", math(String.raw`(V,F_i)`),
+                    " に閉路が無い。以上で帰納法が閉じる。",
+                  ]),
                 ],
               },
             },

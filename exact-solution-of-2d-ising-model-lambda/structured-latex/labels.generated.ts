@@ -157,6 +157,7 @@ export const ALL_LABELS = [
   "claim_fisher_zero_set_nonempty",
   "claim_fixed_or_shift_preserves_orbit",
   "claim_forest_add_disconnected_edge",
+  "claim_forest_edge_scan_invariant",
   "claim_four_part_adjacent_sum",
   "claim_four_part_repeated_difference",
   "claim_fourier_block_fiber_determinant_product",
