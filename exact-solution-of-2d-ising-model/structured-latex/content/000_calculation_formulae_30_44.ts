@@ -213,7 +213,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= y
-&&(\because\ y>0\ \text{なので}\ y\ge 0\ \text{であり}\ y^2=y^2\text{。平方根の一意性})\\
+&&(\because\ y>0\ \text{なので}\ y\ge 0\ \text{であり}\ y^2=y^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to y^2)\ \text{のただ一つの元}\ u\ \text{は}\ y\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
 &&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y>0\ \text{の場合})
 \end{aligned}`,
@@ -234,7 +234,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{(-y)^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ (-y)^2=y^2)\\
 &= -y
-&&(\because\ y<0\ \text{なので}\ -y\ge 0\ \text{であり}\ (-y)^2=(-y)^2\text{。平方根の一意性})\\
+&&(\because\ y<0\ \text{なので}\ -y\ge 0\ \text{であり}\ (-y)^2=(-y)^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to (-y)^2)\ \text{のただ一つの元}\ u\ \text{は}\ -y\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
 &&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y<0\ \text{の場合})
 \end{aligned}`,
@@ -489,6 +489,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y > 0 の場合の √(y^2) = y と x = 0, y < 0 の場合の √((−y)^2) = −y の行の根拠が「平方根の一意性」の名前だけだったので、definition_of_sqrt_r_positive（直前の段落の s・u で書き、s → y^2、s → (−y)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y = 0 の場合の鎖の √0 = 0 の行の根拠（0 ≥ 0・0^2 = 0・平方根の一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "原文（Typst）に対応ブロックは無い。行列ノルムの劣乗法性（labels: matrix_norm_submultiplicativity）の" +
           "証明が K=CC の場合に必要とする絶対値の性質（成分表示・乗法性・三角不等式）を、" +

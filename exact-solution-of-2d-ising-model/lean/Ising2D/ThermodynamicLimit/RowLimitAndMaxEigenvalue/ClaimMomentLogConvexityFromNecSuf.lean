@@ -39,7 +39,7 @@ theorem moment_log_convexity_of_necSuf (W : TensorPow M) (hW : MatrixIsRealSymme
   have hpair := isPdPair_of_matrix hWRsymm hpd
   refine ⟨fun k => ?_, fun k hk => ?_⟩
   · rw [momentWReal_eq_necSuf_moment]
-    exact hpair.moment_pos (ne_zero_of_vecNorm_eq_one hx) k
+    exact hpair.moment_pos (ne_zero_of_unit_norm hx) k
   · obtain ⟨j, rfl⟩ : ∃ j, k = j + 1 := ⟨k - 1, by omega⟩
     have h := hpair.toIsPsdPair.moment_log_convex x j
     rw [show j + 1 - 1 = j by omega, show j + 1 + 1 = j + 2 by omega,

@@ -31,7 +31,7 @@ theorem moment_ge_moment_one_pow_of_necSuf (W : TensorPow M) (hW : MatrixIsRealS
     rw [matBilin_one_apply]
     exact hsq
   intro p
-  have h := hpair.moment_pow_le (ne_zero_of_vecNorm_eq_one hx) hip p
+  have h := hpair.moment_pow_le (ne_zero_of_unit_norm hx) hip p
   rw [momentWReal_eq_necSuf_moment, momentWReal_eq_necSuf_moment, pow_one]
   exact h
 
