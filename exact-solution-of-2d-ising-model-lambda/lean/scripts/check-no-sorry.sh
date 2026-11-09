@@ -2343,6 +2343,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf
   Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count
   Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf
+  Ising2DLambda.KacWard.planeCellBoundary_injective
+  Ising2DLambda.NecSuf.KacWard.boundary_injective_of_symmetric_difference
+  Ising2DLambda.KacWard.planeCellBoundary_injective_from_necSuf
   Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf
   Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning
   Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf

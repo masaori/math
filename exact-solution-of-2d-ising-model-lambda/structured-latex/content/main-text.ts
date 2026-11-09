@@ -69132,6 +69132,48 @@ e\notin\mathcal E_{\square}(S)
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_plane_cell_boundary_injective",
+                        kind: "claim",
+                        title: { text: "有限セル集合の境界辺集合は元のセル集合を一意に定める" },
+                        labels: ["claim_plane_cell_boundary_injective"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.planeCellBoundary_injective",
+                          "Ising2DLambda.NecSuf.KacWard.boundary_injective_of_symmetric_difference",
+                          "Ising2DLambda.KacWard.planeCellBoundary_injective_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/plane-cell-boundary-injective"],
+                        statement: [
+                          paragraph([
+                            "任意の有限セル集合 ", math(String.raw`T,U\subset\mathbb Z\times\mathbb Z`),
+                            " について、境界辺集合（", ref("def_plane_cell_boundary_edge_set"),
+                            "）が一致すれば元のセル集合も一致する。",
+                          ]),
+                          displayMath(String.raw`\mathcal B_{\square}(T)=\mathcal B_{\square}(U)\quad\Longrightarrow\quad T=U`),
+                        ],
+                        proof: [
+                          paragraph(["境界辺集合が一致すると仮定する。対称差を取ると"]),
+                          displayMath(String.raw`\begin{aligned}
+\mathcal B_{\square}(T\triangle U)
+&=\mathcal B_{\square}(T)\triangle\mathcal B_{\square}(U)
+&&\bigl(\because\ \blkref{claim_plane_cell_boundary_preserves_symmetric_difference}\bigr)\\
+&=\varnothing
+&&\bigl(\because\ \mathcal B_{\square}(T)=\mathcal B_{\square}(U)\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`T\triangle U`),
+                            " が空でなければ境界も空でない（",
+                            ref("claim_nonempty_plane_cell_set_has_boundary_edge"),
+                            "）。ゆえに対称差は空であり、二つの集合は一致する。",
+                          ]),
+                          displayMath(String.raw`T\triangle U=\varnothing\quad\Longrightarrow\quad T=U
+\qquad\bigl(\because\ \blkref{claim_nonempty_plane_cell_set_has_boundary_edge}\text{ の対偶と対称差の定義}\bigr)`),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_cell_euler_number",

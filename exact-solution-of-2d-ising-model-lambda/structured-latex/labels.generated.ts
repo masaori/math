@@ -376,6 +376,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_orbit_product",
   "claim_pfaffian_signed_even_subgraph",
   "claim_plane_cell_boundary_even_at_vertex",
+  "claim_plane_cell_boundary_injective",
   "claim_plane_cell_boundary_preserves_symmetric_difference",
   "claim_plane_dual_ray_height_finite_column_support",
   "claim_plane_dual_ray_height_finite_row_support",
