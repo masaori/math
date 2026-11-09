@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "claim_horizontal_twisted_modes_coset",
   "claim_induced_tree_leaf_step",
   "claim_induced_tree_nonroot_leaf",
+  "claim_induced_tree_remove_chosen_leaf",
   "claim_integer_polynomial_qbar_lift_evaluation",
   "claim_integer_sequence_level_crossing",
   "claim_inter_row_shift_invariant",

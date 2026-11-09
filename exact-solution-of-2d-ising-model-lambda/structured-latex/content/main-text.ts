@@ -13253,9 +13253,9 @@ A_i\cap(E\setminus F)
                         ref("claim_even_edge_leaf_choice"), " により、",
                         math(String.raw`v`), " の偶数性を満たす ",
                         math(String.raw`A'\in\{A,A\mathbin\triangle\{e\}\}`),
-                        " を選ぶ。", math(String.raw`e\in E`),
-                        " なので ", math(String.raw`A'\subseteq E`), " である。",
+                        " を選ぶ。",
                       ]),
+                      displayMath(String.raw`A'\subseteq E\quad(\because\ A\subseteq E,\ e\in E\text{ と }A'\in\{A,A\mathbin\triangle\{e\}\})`),
                       paragraph([
                         "元から処理済みの頂点は ", math(String.raw`e`),
                         " に接しないので、", ref("claim_even_edge_processed_vertex_parity"),
@@ -13338,6 +13338,53 @@ A_i\cap(E\setminus F)
                     ],
                   },
                 },
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "tools_claim_induced_tree_remove_chosen_leaf",
+                    kind: "claim",
+                    title: { text: "未処理頂点の誘導部分木から選んだ葉を除いても木である" },
+                    labels: ["claim_induced_tree_remove_chosen_leaf"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.Tools.inducedTree_removeLeaf",
+                      "Ising2DLambda.NecSuf.Tools.inducedTree_removeLeaf",
+                    ],
+                    verification: ["sagemath/check/induced-tree-remove-chosen-leaf"],
+                    statement: [
+                      paragraph([
+                        "有限頂点集合 ", math(String.raw`V`), " 上の木 ",
+                        math(String.raw`T=(V,F)`), " と未処理頂点集合 ",
+                        math(String.raw`U\subseteq V`), "、根 ", math(String.raw`o\in U`),
+                        " を取る。", ref("def_finite_induced_subgraph"), " の ",
+                        math(String.raw`T[U]`), " は木とする。根と異なる葉 ",
+                        math(String.raw`v\in U\setminus\{o\}`), " と、その唯一の隣接頂点 ",
+                        math(String.raw`p\in U`), " を取る。このとき ",
+                        math(String.raw`U':=U\setminus\{v\}`), " 上の誘導部分グラフ ",
+                        math(String.raw`T[U']`), " は根を含む木である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("claim_tree_induce_remove_leaf"), " を木 ",
+                        math(String.raw`T[U]`), " と葉 ", math(String.raw`v`),
+                        " に適用すると、葉を除いたグラフは根を含む木である。",
+                      ]),
+                      paragraph([
+                        ref("def_finite_induced_subgraph"), " により、残った辺集合は次のとおりである。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\{e\in F:e\subseteq U'\}
+&=\{e\in F:e\subseteq U,\ v\notin e\}
+  \quad(\because\ U'=U\setminus\{v\})
+\end{aligned}`),
+                      paragraph([
+                        "したがって、葉を除いたグラフは ", math(String.raw`T[U']`),
+                        " に等しく、根 ", math(String.raw`o\in U'`), " を含む。",
+                      ]),
+                    ],
+                  },
+                },
               ],
               focus: {
                 id: "tools_claim_even_edge_tree_leaf_induction",
@@ -13385,7 +13432,7 @@ A_i\cap(E\setminus F)
                   ]),
                   paragraph([
                     "相異なる残りの二頂点を結ぶ木の路では、葉は内部頂点になれない。",
-                    "従って ", ref("claim_tree_induce_remove_leaf"),
+                    "従って ", ref("claim_induced_tree_remove_chosen_leaf"),
                     " により、葉を除いた誘導部分グラフは根を含む木である。",
                     "新たに加えうる辺は ", math(String.raw`e_v`),
                     " だけであり、", ref("claim_even_edge_processed_vertex_parity"),
