@@ -12416,8 +12416,8 @@ S&=(S-T)+T
                     "もし ", math(String.raw`u\ne w`), " なら、路の ", math(String.raw`v`),
                     " から ", math(String.raw`u`), " までの部分と辺 ", math(String.raw`\{v,u\}`),
                     " が閉路を作り、木が閉路を持たないことに反する。",
-                    "従って ", math(String.raw`u=w`), " である。",
                   ]),
+                  displayMath(String.raw`u=w\quad(\because\ u\text{ は路上にあり、}u\ne w\text{ なら閉路になる})`),
                   paragraph([
                     "辺 ", math(String.raw`\{v,w\}`), " は路の最初の辺なので ",
                     math(String.raw`A`), " に属する。",
