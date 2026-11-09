@@ -1,5 +1,5 @@
 # 対象ラベル: periodicity_of_check_fermi
-# 準備の第一（i(-x) = -ix、-i(-x) = ix、cos(-x) と exp(ix) の表示）、(1) の γ_1・γ_2 の鎖、(3) の γ_1・γ・P̌ の鎖を、一般の点（不定元）で一行ずつ確かめる。
+# 準備の第一（exp(ix) の表示）、第三（cos(-x) = cos x）を使う行、(1) の γ_1・γ_2 の鎖、(3) の γ_1・γ・P̌ の鎖を、一般の点（不定元）で一行ずつ確かめる。
 # 各行は本文に書かれた式から別々に組み、隣り合う行の差が「その行の根拠の関係だけ」で生成したイデアルに入ることを見る。
 # 関係を使う行では、その関係を外すとイデアルに入らないこと（対照）も見る。浮動小数点なし。
 load("_prelude.sage")
@@ -10,8 +10,8 @@ K0.<I0> = QuadraticField(-1)
 # 不定元: c_1, c_2, s_1, c_2^*, s_2^*、
 #  点 x の cos・sin・exp(ix)・exp(-ix)（C, S, E, Ei）、
 #  点 x + 2πk_R の cos・sin・exp(i·)・exp(-i·)（Cs, Ss, Es, Esi）、
-#  点 -x の cos・exp(i·)・exp(-i·)（Cm, Em, Emi）。
-R.<c1, c2, s1, c2s, s2s, C, S, E, Ei, Cs, Ss, Es, Esi, Cm, Em, Emi> = PolynomialRing(K0)
+#  点 -x の cos（Cm）。
+R.<c1, c2, s1, c2s, s2s, C, S, E, Ei, Cs, Ss, Es, Esi, Cm> = PolynomialRing(K0)
 
 def euler(Cv, Sv, Ep, Emv):
     """euler_formula_cos_sin の二つの等式を、分母を払った多項式の関係として（2cos = E + E^{-1}、2i sin = E - E^{-1}）。"""
@@ -19,9 +19,6 @@ def euler(Cv, Sv, Ep, Emv):
 
 EUL_x = euler(C, S, E, Ei)
 EUL_s = euler(Cs, Ss, Es, Esi)
-EUL_m = euler(Cm, S, Em, Emi)[:1]          # -x では cos の式だけを使う
-ARG_m1 = [Em - Ei]                         # 準備の i(-x) = -ix（exp の引数が同じ）
-ARG_m2 = [Emi - E]                         # 準備の -i(-x) = ix（exp の引数が同じ）
 PER_cos = [Cs - C]                         # cos の 2π 周期性
 PER_sin = [Ss - S]                         # sin の 2π 周期性
 
@@ -39,22 +36,6 @@ def chain(name, lines, reasons):
         rep.check(in_ideal(d, reasons[j]), f"{name} 第 {j+1} 行 = 第 {j+2} 行")
         if reasons[j]:
             rep.check(d != 0, f"{name} 第 {j+1} 行 → 第 {j+2} 行の対照: 根拠の関係なしでは一致しない")
-
-# ---- 準備の第一: i(-x) = -ix の鎖 6 行と -i(-x) = ix の鎖 2 行（x は QQ(i)[t] の不定元 t。ℝ の元 (-1)x の像は (-1_C)x） ----
-Rt.<t> = PolynomialRing(K0)
-m1c = K0(-1)
-ineg_chain = [I0 * (-t), I0 * ((-1) * t), I0 * (m1c * t), (I0 * m1c) * t, (m1c * I0) * t, m1c * (I0 * t), -(I0 * t)]
-for k in range(len(ineg_chain) - 1):
-    rep.check(ineg_chain[k] == ineg_chain[k + 1], f"準備 i(-x) = -ix の鎖 第 {k+1} 行 = 第 {k+2} 行")
-rep.check(I0 * t != -(I0 * t), "準備 i(-x) = -ix の鎖 否定の対照: ix ≠ -ix")
-nn_chain = [-(I0 * (-t)), -(-(I0 * t)), I0 * t]
-for k in range(len(nn_chain) - 1):
-    rep.check(nn_chain[k] == nn_chain[k + 1], f"準備 -i(-x) = ix の鎖 第 {k+1} 行 = 第 {k+2} 行")
-
-# ---- 準備の第一: cos(-x) の鎖（2 倍した形） ----
-chain("準備 cos(-x) の鎖（2 倍）",
-      [2 * Cm, Em + Emi, Ei + Emi, Ei + E, E + Ei, 2 * C],
-      [EUL_m, ARG_m1, ARG_m2, [], EUL_x])
 
 # ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 17 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
 Ft = R.fraction_field()
@@ -110,8 +91,9 @@ rep.check(in_ideal(2 * (Es - (Cs + I0 * Ss)), EUL_s) and in_ideal(2 * (E - (C + 
 
 # ---- (3) γ_1(θ~_ν) の鎖（θ = -θ~_μ を x = -θ~_μ と読むと、-θ~_μ + 2π の値は Cs、-θ~_μ の値は Cm、θ~_μ の値は C） ----
 chain("(3) γ_1(θ~_ν) の鎖", [g1(Cs), g1(Cm), g1(Cm), g1(C), g1(C)],
-      [[Cs - Cm], [], [2 * Cm - 2 * C], []])
-# 第 1 → 2 行の根拠は (1)（cos の周期性）、第 3 → 4 行は準備の cos(-x) = cos x（2 倍した関係）
+      [[Cs - Cm], [], [Cm - C], []])
+# 第 1 → 2 行の根拠は (1)（cos の周期性）、第 3 → 4 行は準備の第三の ℝ の等式 cos(-x) = cos x
+# （本文は cos_of_negated_real と inclusion_rr_to_cc_is_injective から作る。cos_of_negated_real の鎖は sagemath/check/cos_of_negated_real/ が確かめる）
 
 # ---- (3) γ(θ~_ν): arccosh は値 γ_1 だけの関数。arccosh を未解釈の関数記号として不定元の上で ----
 Ac = function('arccosh_sym')

@@ -33,6 +33,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 
 namespace Ising2D
 
@@ -162,9 +163,14 @@ theorem gamma2_neg_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     _ = gamma2 K (thetaTilde M μ) := gamma2_add_two_pi_mul_int K (thetaTilde M μ) (-1)
                                                   -- 2 行目: (1) を `θ = θ̃_μ`, `k = -1` で
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`。
-人手の 5 行のうち 1・2 行目は 1 対 1 の段である。3〜5 行目（`def_gamma1_gamma2_of_theta` の展開、
-準備の `cos(-x) = cos x`、`def_gamma1_gamma2_of_theta`）は `gamma1_neg`（mathlib の `Real.cos_neg`）で受けている。 -/
+/-- 人手 `periodicity_of_check_fermi` の準備の第三: `x ∈ ℝ` について ℝ の等式 `cos(-x) = cos x`。
+人手は `cos_of_negated_real`（`θ → x`。具体版 `real_inclusion_cos_neg`）で `(cos(-x))_ℂ = (cos x)_ℂ` を得て、
+`inclusion_rr_to_cc_is_injective`（`a → cos(-x)`, `b → cos x`）を当てる。 -/
+theorem periodicity_prep_cos_neg (x : ℝ) : Real.cos (-x) = Real.cos x :=
+  inclusion_rr_to_cc_is_injective (real_inclusion_cos_neg x)
+
+/-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（人手の 5 行）。
+人手の `γ_1` は ℝ の値で、Lean の `gamma1` はその像（`ℝ → ℂ` の包含）である。 -/
 theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1 K (thetaTilde M μ) :=
   calc gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ))
@@ -172,8 +178,12 @@ theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
         rw [thetaTilde_conj_eq_neg_add_two_pi hM] -- 1 行目: 上の `θ̃_ν` の鎖
     _ = gamma1 K (-thetaTilde M μ) := gamma1_add_two_pi_mul_int K (-thetaTilde M μ) 1
                                                   -- 2 行目: (1) を `θ = -θ̃_μ`, `k = 1` で
-    _ = gamma1 K (thetaTilde M μ) := gamma1_neg K (thetaTilde M μ)
-                                                  -- 3〜5 行目（上の注記）
+    _ = ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos (-thetaTilde M μ) : ℝ) : ℂ) := by
+        rw [gamma1]                               -- 3 行目: `def_gamma1_gamma2_of_theta` を `-θ̃_μ` に適用
+    _ = ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos (thetaTilde M μ) : ℝ) : ℂ) := by
+        rw [periodicity_prep_cos_neg]             -- 4 行目: 準備の第三の `cos(-x) = cos x` を `x = θ̃_μ` で
+    _ = gamma1 K (thetaTilde M μ) := by
+        rw [gamma1]                               -- 5 行目: `def_gamma1_gamma2_of_theta`
 
 /-! ## `r := |γ_2(θ̃_μ)|` -/
 

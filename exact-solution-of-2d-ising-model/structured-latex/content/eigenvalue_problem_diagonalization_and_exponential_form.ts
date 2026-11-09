@@ -5305,7 +5305,11 @@ g
         math(String.raw`\cos, \sin`),
         " の値で書かれ、証明は ",
         ref("euler_formula_cos_sin"),
-        " の二つの等式と ",
+        " の二つの等式、",
+        ref("cos_of_negated_real"),
+        "（これも ",
+        ref("euler_formula_cos_sin"),
+        " に依る）と ",
         math(String.raw`2\pi`),
         " 周期性（",
         math(String.raw`x \in \mathbb{R}`),
@@ -5377,16 +5381,16 @@ g
         "第一に、",
         math(String.raw`x \in \mathbb{R}`),
         " について ",
-        math(String.raw`\cos(-x)`),
-        " と ",
         math(String.raw`\exp(ix)`),
-        " を書く（",
-        math(String.raw`-x \in \mathbb{R}`),
-        " なので ",
+        " を書く。",
+        math(String.raw`-ix`),
+        " は ",
         ref("euler_formula_cos_sin"),
-        " を ",
-        math(String.raw`-x`),
-        " にも適用できる）。以下の分母の ",
+        " の読みのとおり ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(ix)`),
+        " である。以下の分母の ",
         math(String.raw`2`), " は ", math(String.raw`2_{\mathbb{C}}`),
         " で、",
         ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
@@ -5396,61 +5400,8 @@ g
         math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`), "、",
         math(String.raw`i \neq 0_{\mathbb{C}}`), "、",
         math(String.raw`2_{\mathbb{C}}i \neq 0_{\mathbb{C}}`),
-        " なので、分数は定まる。先に、指数の引数の符号を動かす 2 つの等式を作る。",
-        math(String.raw`i(-x)`),
-        " の ",
-        math(String.raw`-x`),
-        " は ",
-        math(String.raw`\mathbb{R}`),
-        " の符号反転 ",
-        math(String.raw`-x \in \mathbb{R}`),
-        " の像、",
-        math(String.raw`-ix`),
-        " は ",
-        ref("multiply_by_minus_one"),
-        " の ",
-        math(String.raw`-(ix)`),
-        "、",
-        math(String.raw`-i(-x)`),
-        " は ",
-        math(String.raw`-\bigl(i(-x)\bigr)`),
-        " である。",
+        " なので、分数は定まる。",
       ]),
-      displayMath(String.raw`\begin{aligned}
-i(-x)
-&= i\bigl((-1)x\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a = (-1)a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to x\bigr)\\
-&= i\bigl((-1_{\mathbb{C}})x\bigr)
-&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to x)\ \text{を右辺から左辺へ}\bigr)\\
-&= \bigl(i(-1_{\mathbb{C}})\bigr)x
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= \bigl((-1_{\mathbb{C}})i\bigr)x
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&= (-1_{\mathbb{C}})(ix)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= -ix
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to ix)\ \text{を右辺から左辺へ}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
--i(-x)
-&= -(-ix)
-&&(\because\ \text{上の}\ i(-x) = -ix)\\
-&= ix
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to ix\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\cos(-x)
-&= \frac{\exp(i(-x)) + \exp(-i(-x))}{2}
-&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -x\ \text{に適用})\\
-&= \frac{\exp(-ix) + \exp(-i(-x))}{2}
-&&(\because\ \text{上の}\ i(-x) = -ix)\\
-&= \frac{\exp(-ix) + \exp(ix)}{2}
-&&(\because\ \text{上の}\ -i(-x) = ix)\\
-&= \frac{\exp(ix) + \exp(-ix)}{2}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
-&= \cos x
-&&(\because\ \blkref{euler_formula_cos_sin})
-\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \cos x + i\sin x
 &= \frac{\exp(ix) + \exp(-ix)}{2} + i\,\frac{\exp(ix) - \exp(-ix)}{2i}
@@ -5510,6 +5461,27 @@ i(-x)
 &= -k_{\mathbb R}
 &&(\because\ \text{零の性質})
 \end{aligned}`),
+      paragraph([
+        "第三に、",
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\mathbb{R}`),
+        " の等式 ",
+        math(String.raw`\cos(-x) = \cos x`),
+        " を作る。",
+        ref("cos_of_negated_real"),
+        "（",
+        math(String.raw`\theta \to x`),
+        "）より ",
+        math(String.raw`(\cos(-x))_{\mathbb{C}} = (\cos x)_{\mathbb{C}}`),
+        " なので、",
+        ref("inclusion_rr_to_cc_is_injective"),
+        "（",
+        math(String.raw`a \to \cos(-x),\ b \to \cos x`),
+        "）より ",
+        math(String.raw`\cos(-x) = \cos x`),
+        " である。",
+      ]),
       paragraph([
         "(1) ",
         math(String.raw`\theta \in \mathbb{R}`),
@@ -5658,7 +5630,7 @@ i(-x)
 &= c_1c_2^* - s_1s_2^*\cos(-\tilde\theta_\mu)
 &&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ -\tilde\theta_\mu\ \text{に適用})\\
 &= c_1c_2^* - s_1s_2^*\cos\tilde\theta_\mu
-&&(\because\ \text{準備の}\ \cos(-x) = \cos x\ \text{を}\ x = \tilde\theta_\mu\ \text{で})\\
+&&(\because\ \text{準備の第三の}\ \cos(-x) = \cos x\ \text{を}\ x = \tilde\theta_\mu\ \text{で})\\
 &= \gamma_1(\tilde\theta_\mu)
 &&(\because\ \blkref{def_gamma1_gamma2_of_theta}),\\[4pt]
 \gamma(\tilde\theta_\nu)
@@ -5716,6 +5688,8 @@ i(-x)
         "2026-11-03（全証明の SageMath 検算）: (1) が主張と違う式を述べる euler_formula_cos_sin を exp(i(t+2kπ)) の表示に引いていたので、準備で euler_formula_cos_sin から exp(ix) = cos x + i sin x と cos(−x) = cos x を導く鎖にした。" +
           "「(1) が従う」「成分が書けることが分かる」の散文を γ_1・γ_2・γ・P̌ の鎖に、角度を像の記号 k_R で書き、P̌_{M+1−μ} の主張を行列で明示し、全実数上の cos・sin の 2π 周期性を前提とすることを主張に書いた。主張の中身は変えていない。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の名前だけの根拠「ℂ の四則」3 か所（cos(-x) の鎖の i(-w) = -iw・-i(-w) = iw、cos x + i sin x の鎖の i/(2i) = 1/2 と最後の行）と、1 行に 3 つの等号を使っていた (-x)_C = -x_C の行を、relation_of_gamma_2_theta_tilde の準備の第一と同じ書き方にした。-x ∈ ℝ のまま i(-x) = -ix（6 行）と -i(-x) = ix（2 行）を先に作り、cos(-x) の鎖からそれを引く。cos x + i sin x の鎖は ℂ の体の等式 1 つずつの 17 行にした。値と主張は不変。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の i(-x) = -ix（6 行）・-i(-x) = ix（2 行）・cos(-x) の 5 行の鎖は、主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real の鎖と同じだった。" +
+          "3 本の鎖を消し、cos(-x) = cos x を cos_of_negated_real と inclusion_rr_to_cc_is_injective から ℝ の等式として作る文（準備の第三）にした（消した鎖は ℂ の等式で終わり、ℝ の γ_1 の鎖へ像の記号を省いて持ち込んでいた）。(3) の γ_1 の鎖の行と主張の中身は不変。",
       ],
     },
   },

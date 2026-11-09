@@ -2371,14 +2371,16 @@ k
         " の性質（",
         math(String.raw`2\pi`),
         " 周期性、",
-        math(String.raw`\cos`),
-        " が偶関数で ",
-        math(String.raw`\sin`),
-        " が奇関数であること、",
         math(String.raw`\cos\pi=-1_{\mathbb R}`),
         "、",
         math(String.raw`\sin\pi=0_{\mathbb R}`),
-        "）を使う。",
+        "）と、",
+        ref("cos_of_negated_real"),
+        "・",
+        ref("sin_of_negated_real"),
+        "（これらも全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " に依る）を使う。",
         ref("def_sin"),
         "・",
         ref("def_cos"),
@@ -2423,17 +2425,19 @@ k
 &=(\cos(-\pi))_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
 &&\bigl(\because\ \mu\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
 &=(\cos\pi)_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
-&&\bigl(\because\ \cos\text{ は偶関数}\bigr) \\
-&=(\cos\pi)_{\mathbb C}-i(-\sin\pi)_{\mathbb C}
-&&\bigl(\because\ \sin\text{ は奇関数}\bigr) \\
-&=(-1_{\mathbb R})_{\mathbb C}-i(-\sin\pi)_{\mathbb C}
+&&\bigl(\because\ \blkref{cos_of_negated_real}\ (\theta\to\pi)\bigr) \\
+&=(\cos\pi)_{\mathbb C}-i\bigl(-(\sin\pi)_{\mathbb C}\bigr)
+&&\bigl(\because\ \blkref{sin_of_negated_real}\ (\theta\to\pi)\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i\bigl(-(\sin\pi)_{\mathbb C}\bigr)
 &&\bigl(\because\ \cos\pi=-1_{\mathbb R}\bigr) \\
-&=(-1_{\mathbb R})_{\mathbb C}-i(-0_{\mathbb R})_{\mathbb C}
+&=(-1_{\mathbb R})_{\mathbb C}-i\bigl(-(0_{\mathbb R})_{\mathbb C}\bigr)
 &&\bigl(\because\ \sin\pi=0_{\mathbb R}\bigr) \\
-&=(-1_{\mathbb R})_{\mathbb C}-i(0_{\mathbb R})_{\mathbb C}
-&&\bigl(\because\ -0_{\mathbb R}=0_{\mathbb R}\bigr) \\
-&=(-1_{\mathbb R})_{\mathbb C}-i\cdot0_{\mathbb C}
+&=(-1_{\mathbb R})_{\mathbb C}-i(-0_{\mathbb C})
 &&\bigl(\because\ (0_{\mathbb R})_{\mathbb C}=(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{complex_numbers_form_a_field}\text{ の零元})\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i\bigl((-1_{\mathbb C})\cdot0_{\mathbb C}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to0_{\mathbb C})\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i\cdot0_{\mathbb C}
+&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}-0_{\mathbb C}
 &&\bigl(\because\ i\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}+(-0_{\mathbb C})
@@ -2455,6 +2459,8 @@ k
       notes: [
         "旧複合ラベル def_half_integer_modes の (1) から、半整数位相の反周期性だけを独立した主張へ分離した。",
         "2026-11-02（全証明の SageMath 検算）: 主張と証明の実数・複素数に像の記号を付け、θ̃_μ の定義の式どおりに角度の鎖を始め、cos(2πμ-π) = -1 と sin(2πμ-π) = 0 を 1 行に束ねていたのを、周期性・偶奇性・特殊値の一行一操作に分けた。負角の Euler 表示は euler_formula_cos_sin の証明の中の式ではなく、主張 exp_of_negative_i_real_as_cos_minus_i_sin を引く。全実数上の cos・sin の性質に依ることを主張に書いた。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 鎖の「cos は偶関数」「sin は奇関数」の 2 行が名前だけの根拠だったので、主張 cos_of_negated_real・sin_of_negated_real（θ → π）の参照にした。" +
+          "sin_of_negated_real の右辺は ℂ の符号反転 -(sin π)_ℂ なので、続く行を -(0_R)_ℂ → -0_ℂ → (-1_ℂ)·0_ℂ → 0_ℂ の順に直した（-0_R = 0_R の行が無くなり、-0_ℂ = (-1_ℂ)·0_ℂ と (-1_ℂ)·0_ℂ = 0_ℂ の 2 行が増え、鎖は 15 等号から 16 等号になった）。主張の中身は不変。",
       ],
     },
   },
