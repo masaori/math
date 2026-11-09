@@ -19,6 +19,10 @@
   `Ising2D.NecSuf.trace_pow_succ`（`tr(A^{n+1})` は閉じた道の重みの総和。任意の可換半環上の行列で成り立つ）。
   人手の行方向の周期規約 `μ^{(N_row+1)} := μ^{(1)}` はそこでの巡回後者 `cycSucc`（= `nextSite`）。
 * 中間目標「指数の積を指数の和へ」→ `Real.exp_sum`。
+* 実数の値の包含（人手 `inclusion_rr_to_cc`）を積の外へ出す段は具体版で書く。「転送行列の積の成分」の鎖の 5 行目の
+  `(exp(…))_ℂ(exp(…))_ℂ = (exp(…)exp(…))_ℂ` は `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）、
+  「指数の積を指数の和へ」の鎖の 2 行目の `Π_{k=1}^{N_row}(exp(…))_ℂ = (Π_{k=1}^{N_row} exp(…))_ℂ` は
+  `real_inclusion_preserves_finite_product`（`m → N_row`）である。mathlib の `Complex.ofReal_mul`・`Complex.ofReal_prod` は使わない。
 * 中間目標「`𝔐^{N_row}` と `𝔖` の全単射」→ `rowsToLattice`（添字 `Conf M` からスピン配置への `ι⁻¹` と、
   行ごとの配置の組 `(μ^{(1)},…,μ^{(N_row)})` から `s(i,j) := μ^{(i)}(j)` への `Φ` の合成）。
   周期規約の整合 (P) は、両方向とも同じ `nextSite` で書いていることから定義どおりに成り立つ。
@@ -35,6 +39,7 @@
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionPartitionFunction
 import Ising2D.NecSuf.TracePathSum
 
@@ -52,7 +57,9 @@ theorem V1_mul_V2_apply (K1 K2 : ℝ) (I J : Conf M) :
     (V1 M K1 * V2 M K2) I J
       = ((Real.exp (∑ m : Fin M,
           (K1 * sgn (I m) * sgn (I (nextSite m)) + K2 * sgn (I m) * sgn (J m))) : ℝ) : ℂ) := by
-  rw [V1_eq_diagonal, Matrix.diagonal_mul, V2_apply, ← Complex.ofReal_mul, ← Real.exp_add,
+  rw [V1_eq_diagonal, Matrix.diagonal_mul, V2_apply,
+    real_inclusion_mul,                                     -- 5 行目: `real_inclusion_preserves_product`
+    ← Real.exp_add,
     Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
   congr 2
   exact Finset.sum_congr rfl fun m _ => by ring
@@ -82,7 +89,8 @@ theorem partition_function_via_transfer_matrix {K1 K2 : ℝ} (_hK1 : 0 < K1) (_h
   refine Fintype.sum_equiv (rowsToLattice (n + 1) M) _ _ fun w => ?_
   -- 転送行列の積の成分を各因子へ代入し、指数の積を指数の和へ
   rw [Finset.prod_congr rfl fun k _ => V1_mul_V2_apply K1 K2 (w k) (w (NecSuf.cycSucc k)),
-    ← Complex.ofReal_prod, ← Real.exp_sum]
+    real_inclusion_preserves_finite_product n,              -- 「指数の積を指数の和へ」2 行目: `real_inclusion_preserves_finite_product`（`m → N_row`）
+    ← Real.exp_sum]
   congr 2
   -- 有限集合 `{1,…,N_row}×{1,…,M_col}` 上の和を二重和として書き直す
   rw [Fintype.sum_prod_type]

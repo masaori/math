@@ -568,7 +568,7 @@ A_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
    \exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)
 &&(\because\ \delta_{\mu=\nu}\ \text{は}\ \nu=\mu\ \text{のときだけ}\ 1\ \text{で他は}\ 0) \\
 &= \exp\!\left(K_1\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu(m+1) + K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)
-&&(\because\ \blkref{theorem_exp_product}\ \text{を}\ n=1,\ K=\mathbb{R}\ \text{へ適用する}) \\
+&&(\because\ \blkref{theorem_exp_product}\ \text{を}\ n=1,\ K=\mathbb{R}\ \text{へ適用する。}\ \mathbb{C}\ \text{の積を実数の積の包含へまとめるのは}\ \blkref{real_inclusion_preserves_product}) \\
 &= \exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} \bigl(K_1\,\mu(m)\mu(m+1) + K_2\,\mu(m)\mu'(m)\bigr)\right)
 &&(\because\ \mathbb{R}\ \text{の分配則と有限和の項別加法})
 \end{aligned}`,
@@ -693,7 +693,7 @@ A_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
 &= \prod_{k=1}^{N_{\mathrm{row}}} \exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)
 &&(\because\ \text{上で示した転送行列の積の成分}) \\
 &= \exp\!\left(\sum_{k=1}^{N_{\mathrm{row}}} \ \sum_{m=1}^{M_{\mathrm{col}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)
-&&(\because\ \text{直前に示した指数の積の法則}) \\
+&&(\because\ \text{直前に示した指数の積の法則。}\ \mathbb{C}\ \text{の積を実数の積の包含へまとめるのは}\ \blkref{real_inclusion_preserves_finite_product}\ (m \to N_{\mathrm{row}}\text{、}r_j \to \text{1 行目の第}\ j\ \text{因子の指数の値})) \\
 &= \exp\!\left(\sum_{\substack{k\in\{1,\dots,N_{\mathrm{row}}\}\\m\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)
 &&(\because\ \text{有限集合}\ \{1,\dots,N_{\mathrm{row}}\}\times\{1,\dots,M_{\mathrm{col}}\}\ \text{上の和を二重和として書き直すこと})
 \end{aligned}`,
@@ -831,7 +831,7 @@ s(i,M_{\mathrm{col}}+1)
 \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)
 &= \sum_{(\mu^{(1)},\dots,\mu^{(N_{\mathrm{row}})}) \in \mathfrak{M}^{N_{\mathrm{row}}}}
    \Bigl(\exp\!\left(\sum_{\substack{k\in\{1,\dots,N_{\mathrm{row}}\}\\m\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,\mu^{(k)}(m)\mu^{(k)}(m+1) + K_2\,\mu^{(k)}(m)\mu^{(k+1)}(m)\bigr)\right)\Bigr)_{\mathbb{C}}
-&&(\because\ \text{上で示したトレースの展開と、直前に示した積の表式。}\ \mathbb{C}\ \text{の積を実数の積の包含へまとめるのは}\ \blkref{real_inclusion_preserves_product}\ \text{を因子ごとに}) \\
+&&(\because\ \text{上で示したトレースの展開と、直前に示した積の表式。}) \\
 &= \sum_{s \in \mathfrak{S}}
    \Bigl(\exp\!\left(\sum_{\substack{i\in\{1,\dots,N_{\mathrm{row}}\}\\j\in\{1,\dots,M_{\mathrm{col}}\}}} \bigl(K_1\,s(i,j)\,s(i,j+1) + K_2\,s(i,j)\,s(i+1,j)\bigr)\right)\Bigr)_{\mathbb{C}}
 &&(\because\ \Phi\ \text{が全単射であることによる添え字の付け替えと}\ (\mathrm{P})) \\
@@ -863,6 +863,7 @@ s(i,M_{\mathrm{col}}+1)
           "周期規約の整合は、延長後の s について s(i,j+1)=μ^{(i)}(j+1), s(i+1,j)=μ^{(i+1)}(j) を端で確かめる形に直した。",
         "2026-09-26: 旧 <partition_function_in_pauli_form>（分配関数をパウリ行列表示の転送行列で書く主張）はこの主張と同一になったため削除し、参照をこの主張へ付け替えた。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張の左辺 Z(K_1,K_2) は def_partition_function_2d_ising で ℝ_{>0} の元、右辺のトレースは ℂ の元で、二つを等号で結んでいた。左辺を inclusion_rr_to_cc の (Z(K_1,K_2))_ℂ と書き、分配関数との一致の鎖の各項を (exp(…))_ℂ と書いて、最後に real_inclusion_preserves_finite_sum で包含を和の外へ出す行を足した（Lean の partition_function_via_transfer_matrix は元から ((Z : ℝ) : ℂ) = tr(…) の形である）。def_transfer_matrix が成分 exp(…) ∈ ℝ_{>0} を ℂ の元として書いていること（ℝ_{>0} ⊂ ℂ の包含の同一視）は、論文全体の実数の帰属の件として残っている。そのため、転送行列の積の成分と指数の積を指数の和へ書く二つの鎖は exp の値を ℂ の元として掛けており、成分を (exp(…))_ℂ と書いて real_inclusion_preserves_product で積の包含へまとめる段は、鎖の 1 行目の根拠に名前で挙げるだけになっている（Lean は ← Complex.ofReal_prod で書いている）。同一視を直すときに段として開く。𝔖 の上の和は本文に定義が無く（有限集合の添字の付け方の件）、1..m に並べて読む。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 実数の値の包含を積の外へ出す根拠の置き場を Lean の段に揃えた。上の 2026-11-06 の記録の「分配関数との一致の鎖の 1 行目に real_inclusion_preserves_product を因子ごとに挙げる」をやめ、N_row 個の因子の積の包含は「指数の積を指数の和へ」の鎖の 2 行目に有限積の real_inclusion_preserves_finite_product（m → N_row）で、2 因子の積の包含は「転送行列の積の成分」の鎖の 5 行目に real_inclusion_preserves_product で挙げた。Lean は ← Complex.ofReal_prod・← Complex.ofReal_mul をやめ、具体版 real_inclusion_preserves_finite_product・real_inclusion_mul を引く。exp の値を ℂ の元として掛けている同一視は残っているので、どちらも根拠に名前で挙げる形のままである。",
       ],
     },
   },
