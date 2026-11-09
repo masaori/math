@@ -12682,6 +12682,59 @@ d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集
         title: { text: "木の葉を除いて根以外の偶数性を作る" },
         children: [
           {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_processed_vertex_parity",
+              focus: {
+                id: "tools_claim_even_edge_processed_vertex_parity",
+                kind: "claim",
+                title: { text: "未処理の二頂点を結ぶ辺の切替えは処理済み頂点の偶数性を変えない" },
+                labels: ["claim_even_edge_processed_vertex_parity"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.edgeParity_toggle_unprocessed",
+                  "Ising2DLambda.NecSuf.Tools.incidenceParity_toggle_unprocessed",
+                  "Ising2DLambda.Tools.edgeParity_toggle_unprocessed_from_necSuf",
+                ],
+                verification: ["sagemath/check/even-edge-processed-vertex-parity"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " の相異なる二頂点からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取る。未処理の頂点集合 ", math(String.raw`U\subseteq V`),
+                    "、辺集合 ", math(String.raw`A\subseteq E`),
+                    "、両端点が ", math(String.raw`U`), " に属する辺 ",
+                    math(String.raw`e\in E`), " を固定する。",
+                    "任意の処理済み頂点 ", math(String.raw`w\in V\setminus U`), " に対し、",
+                    math(String.raw`A\mathbin\triangle\{e\}`),
+                    " の接続辺数の偶奇は ", math(String.raw`A`), " の接続辺数の偶奇に等しい。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "頂点 ", math(String.raw`w\in V\setminus U`), " を固定する。",
+                    "辺 ", math(String.raw`e`), " の両端点は ", math(String.raw`U`),
+                    " に属するので、", math(String.raw`w`), " は ", math(String.raw`e`),
+                    " に接しない。", math(String.raw`d_B(w)`),
+                    " を辺集合 ", math(String.raw`B`), " の ", math(String.raw`w`),
+                    " に接する辺の本数とする。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+d_{A\mathbin\triangle\{e\}}(w)\bmod 2
+&=(d_A(w)+d_{\{e\}}(w))\bmod 2
+&&\bigl(\because\ \text{接続辺集合の対称差の偶奇}\bigr)\\
+&=d_A(w)\bmod 2
+&&\bigl(\because\ w\notin e\text{ より }d_{\{e\}}(w)=0\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "処理済み頂点 ", math(String.raw`w`), " は任意なので、",
+                    "すべての処理済み頂点で偶数性が保たれる。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
             role: "primary",
             element: {
               kind: "elementGroup",
@@ -12733,7 +12786,8 @@ d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集
                     "相異なる残りの二頂点を結ぶ木の路では、葉は内部頂点になれない。",
                     "従って木の葉を除いた誘導部分グラフは、根を含む連結な木である。",
                     "新たに加えうる辺は ", math(String.raw`e_v`),
-                    " だけであり、先に処理した頂点には接しない。",
+                    " だけであり、", ref("claim_even_edge_processed_vertex_parity"),
+                    " により先に処理した頂点の偶数性は保たれる。",
                     "従って操作中の条件が保たれる。",
                     "未処理の頂点は毎回一つ減るので、有限回で ",
                     math(String.raw`U=\{o\}`), " となる。",
