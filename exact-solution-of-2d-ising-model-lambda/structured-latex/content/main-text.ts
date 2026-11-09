@@ -69221,6 +69221,62 @@ T&=U
                             "したがって、この有限集合 ", math(String.raw`T:=T_Z`),
                             " は求める ", math(String.raw`S`), " の部分集合である。",
                           ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathcal B_{\square}(T)
+&=\mathcal B_{\square}(T_Z)
+&&\bigl(\because\ T:=T_Z\bigr)\\
+&=Z
+&&\bigl(\because\ \blkref{claim_plane_dual_ray_height_one_boundary}\bigr)
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_single_cell_corners_connected",
+                        kind: "claim",
+                        title: { text: "一セルの四隅はそのセルの辺で結ばれる" },
+                        labels: ["claim_single_cell_corners_connected"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.cellCorners_connected",
+                          "Ising2DLambda.NecSuf.KacWard.fourCorners_connected",
+                          "Ising2DLambda.KacWard.cellCorners_connected_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/single-cell-corners-connected"],
+                        statement: [
+                          paragraph([
+                            "任意のセル ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
+                            " について、四隅を頂点、四辺を辺とする有限単純グラフは連結である（",
+                            ref("def_finite_graph_connected"), "）。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "四隅を ", math(String.raw`a:=(r,c)`), "、",
+                            math(String.raw`b:=(r,c+1)`), "、",
+                            math(String.raw`p:=(r+1,c)`), "、",
+                            math(String.raw`d:=(r+1,c+1)`), " と置く。",
+                            ref("def_cell_vertex_set"), " より頂点はこの四つであり、",
+                            ref("def_cell_edge_set"), " より次の三辺は全てこのセルの辺である。",
+                          ]),
+                          displayMath(String.raw`\{a,b\}\in\mathcal E_{\square}(\{(r,c)\}),\quad
+\{a,p\}\in\mathcal E_{\square}(\{(r,c)\}),\quad
+\{b,d\}\in\mathcal E_{\square}(\{(r,c)\})
+\qquad\bigl(\because\ \blkref{def_cell_edge_set}\bigr)`),
+                          paragraph([
+                            "整数では ", math(String.raw`r\ne r+1`), " かつ ",
+                            math(String.raw`c\ne c+1`), " なので、四隅は相異なる。",
+                            "異なる二隅の組 ", math(String.raw`\{a,b\},\{a,p\},\{b,d\}`),
+                            " は上の一辺で結べる。残りの組 ", math(String.raw`\{a,d\}`),
+                            " は ", math(String.raw`a,b,d`), "、",
+                            math(String.raw`\{b,p\}`), " は ", math(String.raw`b,a,p`), "、",
+                            math(String.raw`\{p,d\}`), " は ", math(String.raw`p,a,b,d`),
+                            " の頂点重複のない路で結べる（", ref("def_vertex_simple_path"), "）。",
+                            "同じ隅同士には長さ零の路がある。四隅の集合は空でないので、",
+                            ref("def_finite_graph_connected"), " により連結である。",
+                          ]),
                         ],
                       },
                     },

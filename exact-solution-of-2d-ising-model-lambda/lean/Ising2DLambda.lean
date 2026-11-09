@@ -1175,6 +1175,8 @@ import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumber
 import Ising2DLambda.KacWard.PlaneCellBoundaryInjective
 import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundaryInjective
 import Ising2DLambda.KacWard.EvenEdgeSetCellBoundary
+import Ising2DLambda.NecSuf.KacWard.CellCornerConnected
+import Ising2DLambda.KacWard.CellCornerConnected
 import Ising2DLambda.NecSuf.KacWard.BoundaryOfFiniteHeight
 import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumberFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
