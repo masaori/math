@@ -19,9 +19,10 @@
 必要十分版は置かない。`neg_I_mul_eq_neg_of_I_mul` は `multiply_by_minus_one`（`-x = (-1)x`）と積の結合律を 1 回ずつ当てるだけで、
 任意の環で同じ 3 段が通る（`i` であることも ℂ であることも効かない）。取り払える構造をこの説明以上に示す計算が無いので、別のファイルを立てない。
 `euler_cos_real_inclusion`・`euler_sin_real_inclusion` は人手の証明が未整備で、具体版も mathlib で受けているので必要十分版の対象にならない。
-人手 `euler_formula_cos_sin` の証明の準備の `-(iθ_ℂ) = i(-θ)_ℂ` の 6 行は、Lean では `DefinitionThetaGamma.lean` の
-`I_mul_real_neg_eq_neg_I_mul`（人手 `relation_of_gamma_2_theta_tilde` の同じ鎖を逆向きにした形）と鎖の形が同じだが、
+人手 `euler_formula_cos_sin` の証明の準備は、`exp(-iθ) = exp(i(-θ)_ℂ)` の段を人手 `i_times_negated_real_is_negation_of_i_times`
+（具体版は同じフォルダの `ClaimCosSinAndITimesAtNegatedReal.lean` の `I_mul_real_neg_eq_neg_I_mul`）を右辺から左辺へ当てて得る。
 `euler_cos_real_inclusion`・`euler_sin_real_inclusion` はこの補題を経由せず全体を mathlib で受けている（euler の証明の具体版は無い）。
+euler の具体版を人手どおりに書くときは、`ClaimCosSinAndITimesAtNegatedReal.lean` がこのファイルを import しているので、補題の置き場を移す必要がある。
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 

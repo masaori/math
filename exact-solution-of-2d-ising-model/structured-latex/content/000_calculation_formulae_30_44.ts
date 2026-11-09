@@ -2832,174 +2832,6 @@ z
     },
   },
   {
-    id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
-    kind: "theorem",
-    origin: { path: "_old/typst/parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ", ordinal: 45 },
-    title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
-    labels: ["euler_formula_cos_sin"],
-    statement: [
-      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。複素数の exp は行列の exp の章で 1 行 1 列の行列の exp として定める。全実数上への拡張と、以下で使うEuler公式の導出は未整備である。"]),
-      paragraph([math(String.raw`\forall \theta \in \mathbb{R}`)]),
-      displayMath(
-        String.raw`\cos\theta = \frac{\exp(i\theta) + \exp(-i\theta)}{2}`,
-      ),
-      displayMath(
-        String.raw`\sin\theta = \frac{\exp(i\theta) - \exp(-i\theta)}{2i}`,
-      ),
-      paragraph([
-        "二つの等式は ",
-        math(String.raw`\mathbb{C}`),
-        " の等式である。実数 ",
-        math(String.raw`\theta, \cos\theta, \sin\theta`),
-        " は ",
-        ref("inclusion_rr_to_cc"),
-        " の像 ",
-        math(String.raw`\theta_{\mathbb{C}}, (\cos\theta)_{\mathbb{C}}, (\sin\theta)_{\mathbb{C}}`),
-        " として読み、像の記号を省く。",
-        math(String.raw`i\theta`),
-        " は ",
-        math(String.raw`i`),
-        " と ",
-        math(String.raw`\theta_{\mathbb{C}}`),
-        " の積、",
-        math(String.raw`-i\theta`),
-        " は ",
-        ref("multiply_by_minus_one"),
-        " の ",
-        math(String.raw`-(i\theta)`),
-        "、分母の ",
-        math(String.raw`2`),
-        " は ",
-        math(String.raw`2_{\mathbb{C}}`),
-        " である。",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "準備として、Eulerの公式 ",
-        math(String.raw`\exp(i\varphi) = \cos\varphi + i\sin\varphi`),
-        " を ",
-        math(String.raw`\varphi=-\theta`),
-        " で使う形を書いておく。",
-      ]),
-      paragraph([
-        "主張の読みでは ",
-        math(String.raw`-i\theta`),
-        " は ",
-        math(String.raw`-(i\theta_{\mathbb{C}})`),
-        " なので、Eulerの公式の ",
-        math(String.raw`i\varphi`),
-        "（",
-        math(String.raw`\varphi=-\theta`),
-        "）の形 ",
-        math(String.raw`i(-\theta)_{\mathbb{C}}`),
-        " へ書き換えておく。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
--(i\theta_{\mathbb{C}})
-&=(-1_{\mathbb{C}})(i\theta_{\mathbb{C}})
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to i\theta_{\mathbb{C}})\bigr)\\
-&=\bigl((-1_{\mathbb{C}})i\bigr)\theta_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&=\bigl(i(-1_{\mathbb{C}})\bigr)\theta_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&=i\bigl((-1_{\mathbb{C}})\theta_{\mathbb{C}}\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&=i\bigl((-1)\theta\bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to \theta)\bigr)\\
-&=i(-\theta)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-1)a = -a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \theta\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\exp(-i\theta)
-&=\exp\bigl(i(-\theta)_{\mathbb{C}}\bigr)
-&&(\because\ \text{上の}\ -(i\theta_{\mathbb{C}}) = i(-\theta)_{\mathbb{C}})\\
-&=\cos(-\theta) + i\sin(-\theta)
-&&(\because\ \text{Eulerの公式})\\
-&=\cos\theta + i\,(-\sin\theta)
-&&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
-&=\cos\theta - i\sin\theta
-\end{aligned}`),
-      paragraph(["第 1 の等式を示す。"]),
-      displayMath(String.raw`\begin{aligned}
-\cos\theta
-&=\frac{2\cos\theta}{2}\\
-&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
-&&(\because\ i\sin\theta\ \text{を足して引いた})\\
-&=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2}
-&&(\because\ \text{Eulerの公式})\\
-&=\frac{\exp(i\theta) + \exp(-i\theta)}{2}
-&&(\because\ \text{上の準備})
-\end{aligned}`),
-      paragraph([
-        "第 2 の等式を示す。",
-        math(String.raw`2i\neq0`),
-        " なので割ってよい。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\sin\theta
-&=\frac{2i\sin\theta}{2i}\\
-&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
-&&(\because\ \cos\theta\ \text{を足して引いた})\\
-&=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2i}
-&&(\because\ \text{Eulerの公式})\\
-&=\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
-&&(\because\ \text{上の準備})
-\end{aligned}`),
-    ],
-    conversion: {
-      status: "converted",
-      notes: [
-        "式変形の書き方の統一（2026-08-09）。原文は「辺々加えると／辺々引くと」の 1 文で" +
-        "主張の左辺から始まる式変形が 1 行も無かったので、cos θ と sin θ のそれぞれから始まる" +
-        "一続きの鎖（各 4 段）にし、行末へ (∵ …) を付けた。" +
-        "原文が黙って使っていた 2 つ——e^{-iθ} を cos θ - i sin θ に書き換えるのに要る" +
-        "cos の偶性と sin の奇性、および 2i ≠ 0——を明示した。段は増えており、減った段は無い。",
-        "2026-11-09（Lean の通しの証明）: 主張の -iθ が -(iθ) と (-i)θ のどちらかが書かれておらず、Lean に 2 通りの読みがあった。" +
-        "引く側の relation_of_gamma_2_theta_tilde が -(iθ) と読んでいるので、主張の読み（実数は包含の像、-iθ は multiply_by_minus_one の -(iθ)、分母の 2 は 2_ℂ）を主張に書いた。" +
-        "(-i)θ の形で引く factorization_of_A_theta_general は、negative_i_times_complex_is_negation_of_i_times で -(iθ) へ書き換えてから引く。主張の中身は変えていない。" +
-        "証明の準備は Eulerの公式を φ = -θ で使うので、-(iθ) を i(-θ)_ℂ へ書き換える 6 行の鎖と、それを使う 1 行を足した（読みを書いたことで要るようになった段）。",
-      ],
-    },
-  },
-  {
-    id: "calculation_formulae_claim_negative_i_times_complex_is_negation_of_i_times",
-    kind: "claim",
-    title: { tex: String.raw`(-i)z=-(iz)` },
-    labels: ["negative_i_times_complex_is_negation_of_i_times"],
-    statement: [
-      paragraph([
-        math(String.raw`z\in\mathbb C`),
-        " とする。",
-        math(String.raw`-i`),
-        "・",
-        math(String.raw`-(iz)`),
-        " は ",
-        ref("multiply_by_minus_one"),
-        " の符号反転である。このとき",
-      ]),
-      displayMath(String.raw`(-i)z=-(iz)`),
-      paragraph(["が成り立つ。"]),
-    ],
-    proof: [
-      displayMath(String.raw`\begin{aligned}
-(-i)z
-&=\bigl((-1_{\mathbb C})i\bigr)z
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to i)\bigr)\\
-&=(-1_{\mathbb C})(iz)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&=-(iz)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to iz)\ \text{を右辺から左辺へ}\bigr)
-\end{aligned}`),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "2026-11-09（Lean の通しの証明）: factorization_of_A_theta_general は e_- := exp((-i)(θ)_ℂ) と置き、-iθ を -(iθ) と読む euler_formula_cos_sin を引いていた。その間をつなぐ主張として足した。",
-      ],
-    },
-  },
-  {
     id: "calculation_formulae_claim_i_times_negated_real_is_negation_of_i_times",
     kind: "claim",
     title: { tex: String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})` },
@@ -3057,6 +2889,149 @@ i(-\theta)_{\mathbb C}
       notes: [
         "2026-11-09（Lean の通しの証明）: def_gamma1_gamma2_of_theta の (2,1) 成分の鎖が、後ろのブロック relation_of_gamma_2_theta_tilde の証明の中で作る i(-θ) = -iθ を参照なしに根拠にしていた。" +
           "relation_of_gamma_2_theta_tilde の準備の第一の 6 行の鎖を、実数の包含の像を明示してこの主張へ移し、両方のブロックから引く。鎖の中身は変えていない。",
+        "2026-11-09（Lean の通しの証明）: euler_formula_cos_sin の証明の準備にも同じ鎖（逆向き）があったので、このブロックを euler_formula_cos_sin の前へ移し、そこからも引く。主張と証明は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
+    kind: "theorem",
+    origin: { path: "_old/typst/parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ", ordinal: 45 },
+    title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
+    labels: ["euler_formula_cos_sin"],
+    statement: [
+      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。複素数の exp は行列の exp の章で 1 行 1 列の行列の exp として定める。全実数上への拡張と、以下で使うEuler公式の導出は未整備である。"]),
+      paragraph([math(String.raw`\forall \theta \in \mathbb{R}`)]),
+      displayMath(
+        String.raw`\cos\theta = \frac{\exp(i\theta) + \exp(-i\theta)}{2}`,
+      ),
+      displayMath(
+        String.raw`\sin\theta = \frac{\exp(i\theta) - \exp(-i\theta)}{2i}`,
+      ),
+      paragraph([
+        "二つの等式は ",
+        math(String.raw`\mathbb{C}`),
+        " の等式である。実数 ",
+        math(String.raw`\theta, \cos\theta, \sin\theta`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`\theta_{\mathbb{C}}, (\cos\theta)_{\mathbb{C}}, (\sin\theta)_{\mathbb{C}}`),
+        " として読み、像の記号を省く。",
+        math(String.raw`i\theta`),
+        " は ",
+        math(String.raw`i`),
+        " と ",
+        math(String.raw`\theta_{\mathbb{C}}`),
+        " の積、",
+        math(String.raw`-i\theta`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(i\theta)`),
+        "、分母の ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、Eulerの公式 ",
+        math(String.raw`\exp(i\varphi) = \cos\varphi + i\sin\varphi`),
+        " を ",
+        math(String.raw`\varphi=-\theta`),
+        " で使う形を書いておく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\exp(-i\theta)
+&=\exp\bigl(i(-\theta)_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{i_times_negated_real_is_negation_of_i_times}\ \text{を右辺から左辺へ}\bigr)\\
+&=\cos(-\theta) + i\sin(-\theta)
+&&(\because\ \text{Eulerの公式})\\
+&=\cos\theta + i\,(-\sin\theta)
+&&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
+&=\cos\theta - i\sin\theta
+\end{aligned}`),
+      paragraph(["第 1 の等式を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+\cos\theta
+&=\frac{2\cos\theta}{2}\\
+&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ i\sin\theta\ \text{を足して引いた})\\
+&=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{\exp(i\theta) + \exp(-i\theta)}{2}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
+      paragraph([
+        "第 2 の等式を示す。",
+        math(String.raw`2i\neq0`),
+        " なので割ってよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin\theta
+&=\frac{2i\sin\theta}{2i}\\
+&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \cos\theta\ \text{を足して引いた})\\
+&=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2i}
+&&(\because\ \text{Eulerの公式})\\
+&=\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
+&&(\because\ \text{上の準備})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "式変形の書き方の統一（2026-08-09）。原文は「辺々加えると／辺々引くと」の 1 文で" +
+        "主張の左辺から始まる式変形が 1 行も無かったので、cos θ と sin θ のそれぞれから始まる" +
+        "一続きの鎖（各 4 段）にし、行末へ (∵ …) を付けた。" +
+        "原文が黙って使っていた 2 つ——e^{-iθ} を cos θ - i sin θ に書き換えるのに要る" +
+        "cos の偶性と sin の奇性、および 2i ≠ 0——を明示した。段は増えており、減った段は無い。",
+        "2026-11-09（Lean の通しの証明）: 主張の -iθ が -(iθ) と (-i)θ のどちらかが書かれておらず、Lean に 2 通りの読みがあった。" +
+        "引く側の relation_of_gamma_2_theta_tilde が -(iθ) と読んでいるので、主張の読み（実数は包含の像、-iθ は multiply_by_minus_one の -(iθ)、分母の 2 は 2_ℂ）を主張に書いた。" +
+        "(-i)θ の形で引く factorization_of_A_theta_general は、negative_i_times_complex_is_negation_of_i_times で -(iθ) へ書き換えてから引く。主張の中身は変えていない。" +
+        "証明の準備は Eulerの公式を φ = -θ で使うので、-(iθ) を i(-θ)_ℂ へ書き換える 6 行の鎖と、それを使う 1 行を足した（読みを書いたことで要るようになった段）。",
+        "2026-11-09（Lean の通しの証明）: 準備の -(iθ_ℂ) = i(-θ)_ℂ の 6 行の鎖は、主張 i_times_negated_real_is_negation_of_i_times の鎖を逆向きにたどったものと同じだった。" +
+        "その主張をこのブロックの前へ移し、6 行の鎖と前置きの文を消して、exp(-iθ) の鎖の 1 行目の根拠をその主張（右辺から左辺へ）への参照にした。ほかの行は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_negative_i_times_complex_is_negation_of_i_times",
+    kind: "claim",
+    title: { tex: String.raw`(-i)z=-(iz)` },
+    labels: ["negative_i_times_complex_is_negation_of_i_times"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\mathbb C`),
+        " とする。",
+        math(String.raw`-i`),
+        "・",
+        math(String.raw`-(iz)`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`(-i)z=-(iz)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-i)z
+&=\bigl((-1_{\mathbb C})i\bigr)z
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to i)\bigr)\\
+&=(-1_{\mathbb C})(iz)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=-(iz)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to iz)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: factorization_of_A_theta_general は e_- := exp((-i)(θ)_ℂ) と置き、-iθ を -(iθ) と読む euler_formula_cos_sin を引いていた。その間をつなぐ主張として足した。",
       ],
     },
   },
