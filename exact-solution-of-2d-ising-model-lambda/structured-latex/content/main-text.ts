@@ -12896,6 +12896,63 @@ A_i\cap(E\setminus F)
                 {
                   role: "supportingClaim",
                   element: {
+                    id: "tools_claim_finite_rooted_descent",
+                    kind: "claim",
+                    title: { text: "根を残して頂点を一つずつ除く有限下降は根だけに達する" },
+                    labels: ["claim_finite_rooted_descent"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.Tools.finiteRootedDescent",
+                      "Ising2DLambda.NecSuf.Tools.finiteRootedDescent",
+                    ],
+                    verification: ["sagemath/check/finite-rooted-descent"],
+                    statement: [
+                      paragraph([
+                        "有限頂点集合 ", math(String.raw`V`), "、有限辺集合 ", math(String.raw`E`),
+                        "、根 ", math(String.raw`o\in V`), " を固定する。",
+                        "未処理頂点集合 ", math(String.raw`U\subseteq V`),
+                        " と選択辺集合 ", math(String.raw`A\subseteq E`),
+                        " の対についての条件 ", math(String.raw`P(U,A)`), " を取る。",
+                        "任意の ", math(String.raw`P(U,A)`), " を満たす対では ",
+                        math(String.raw`o\in U`), " とし、",
+                        math(String.raw`U\ne\{o\}`), " なら、ある ",
+                        math(String.raw`v\in U\setminus\{o\}`), " と ",
+                        math(String.raw`A'\subseteq E`), " に対し ",
+                        math(String.raw`P(U\setminus\{v\},A')`), " が成り立つとする。",
+                        "このとき任意の ", math(String.raw`U_0\subseteq V`),
+                        " と ", math(String.raw`A_0\subseteq E`),
+                        " で ", math(String.raw`P(U_0,A_0)`), " が成り立てば、",
+                        "ある ", math(String.raw`B\subseteq E`),
+                        " に対して ", math(String.raw`P(\{o\},B)`), " が得られる。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "未処理頂点の個数 ", math(String.raw`|U|\in\mathbb N`),
+                        " に関する強い帰納法を使う。",
+                        math(String.raw`U=\{o\}`), " なら ",
+                        math(String.raw`B=A`), " とすればよい。",
+                        "そうでなければ仮定から ",
+                        math(String.raw`v\in U\setminus\{o\}`),
+                        " と次の選択辺集合 ", math(String.raw`A'`), " が存在する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+|U\setminus\{v\}|
+&=|U|-1&&\bigl(\because\ v\in U\text{ と有限集合の個数}\bigr)\\
+&<|U|&&\bigl(\because\ v\in U\text{ より }|U|>0\bigr)
+\end{aligned}`),
+                      paragraph([
+                        math(String.raw`P(U\setminus\{v\},A')`),
+                        " に帰納法の仮定を適用すると、",
+                        math(String.raw`P(\{o\},B)`),
+                        " を満たす ", math(String.raw`B`), " が得られる。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
                     id: "tools_claim_even_edge_leaf_step_invariants",
                     kind: "claim",
                     title: { text: "未処理頂点の一回の処理で辺選択と偶数性の不変条件を保つ" },
@@ -12951,8 +13008,9 @@ A_i\cap(E\setminus F)
                       ]),
                       paragraph([
                         "木外辺の選択は ", ref("claim_tree_edge_toggles_preserve_outside"),
-                        " の一回の場合から一致する。",
+                        " の一回の場合から",
                       ]),
+                      displayMath(String.raw`A'\cap(E\setminus F)=A\cap(E\setminus F)\quad(\because\ A'=A\text{ または }e\in F\text{ の切替え})`),
                     ],
                   },
                 },
@@ -12986,7 +13044,8 @@ A_i\cap(E\setminus F)
                     " が根を含む木であり、",
                     "選択済みの木の辺は未処理の二頂点を結ばず、",
                     "処理済みの頂点に接する ", math(String.raw`A`),
-                    " の辺数は偶数である、という条件を保つ。初期状態では明らかである。",
+                    " の辺数は偶数である、という条件を ",
+                    math(String.raw`P(U,A)`), " と書いて保つ。初期状態では明らかである。",
                   ]),
                   paragraph([
                     math(String.raw`|U|>1`), " なら、", ref("claim_rooted_tree_nonroot_leaf"),
@@ -13011,7 +13070,8 @@ A_i\cap(E\setminus F)
                   ]),
                   displayMath(String.raw`|U\setminus\{v\}|=|U|-1\quad(\because\ v\in U\text{ と有限集合の個数})`),
                   paragraph([
-                    "未処理の頂点は毎回一つ減るので、有限回で ",
+                    "未処理の頂点は毎回一つ減るので、",
+                    ref("claim_finite_rooted_descent"), " により有限回で ",
                     math(String.raw`U=\{o\}`), " となる。",
                     "このとき根以外の頂点はすべて処理済みで、接続辺数は偶数である。",
                     "切り替えた辺は木の辺だけなので、",

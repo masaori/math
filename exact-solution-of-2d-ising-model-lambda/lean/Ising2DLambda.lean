@@ -22,6 +22,8 @@ import Ising2DLambda.Tools.EvenEdgeLeafStep
 import Ising2DLambda.NecSuf.Tools.EvenEdgeLeafStep
 import Ising2DLambda.Tools.RootedTreeHasNonrootLeaf
 import Ising2DLambda.NecSuf.Tools.RootedTreeHasNonrootLeaf
+import Ising2DLambda.Tools.FiniteRootedDescent
+import Ising2DLambda.NecSuf.Tools.FiniteRootedDescent
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeTreeComplementInjective
