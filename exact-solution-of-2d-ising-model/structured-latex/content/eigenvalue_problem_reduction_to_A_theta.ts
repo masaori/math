@@ -5111,16 +5111,20 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
         "）、",
         math(String.raw`c \in \mathbb{C}`),
         " とする。数の冪は ",
+        math(String.raw`\mathbb{R}`),
+        " では ",
+        ref("def_power_of_real_number"),
+        "、",
+        math(String.raw`\mathbb{C}`),
+        " では ",
+        ref("def_power_of_complex_number"),
+        " による（どちらも ",
         ref("scalar_exp_is_limit_of_partial_sums"),
         " の約束 ",
         math(String.raw`y^{0} := 1`),
         "、",
         math(String.raw`y^{m+1} := y^{m}y`),
-        "（",
-        math(String.raw`\mathbb{R}`),
-        " でも ",
-        math(String.raw`\mathbb{C}`),
-        " でも同じ）、係数と行列の積はスカラー倍（",
+        " と同じ式で定まる）、係数と行列の積はスカラー倍（",
         ref("def_matrix_scalar_multiple"),
         "）、",
         math(String.raw`\cosh, \sinh`),
@@ -5189,47 +5193,7 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
         " とおく。",
       ]),
       paragraph([
-        "準備（冪の像）: ",
-        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
-        " について ",
-        math(String.raw`(x_{\mathbb{C}})^{n} = (x^{n})_{\mathbb{C}}`),
-        " を ",
-        math(String.raw`n`),
-        " の帰納法で示す。",
-        math(String.raw`n = 0`),
-        " では",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(x_{\mathbb{C}})^{0}
-&= 1_{\mathbb{C}}
-&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{C}\ \text{の冪の約束}) \\
-&= (1)_{\mathbb{C}}
-&&(\because \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1)) \\
-&= (x^{0})_{\mathbb{C}}
-&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{R}\ \text{の冪の約束})
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        math(String.raw`(x_{\mathbb{C}})^{n} = (x^{n})_{\mathbb{C}}`),
-        " を仮定すると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(x_{\mathbb{C}})^{n+1}
-&= (x_{\mathbb{C}})^{n}\,x_{\mathbb{C}}
-&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{C}\ \text{の冪の約束}) \\
-&= (x^{n})_{\mathbb{C}}\,x_{\mathbb{C}}
-&&(\because \text{帰納法の仮定}) \\
-&= (x^{n}x)_{\mathbb{C}}
-&&(\because \blkref{real_inclusion_preserves_product}) \\
-&= (x^{n+1})_{\mathbb{C}}
-&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{R}\ \text{の冪の約束})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である。準備（",
+        "準備（",
         math(String.raw`a_n, b_n`),
         " の値）: ",
         math(String.raw`n`),
@@ -5318,7 +5282,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
 &= \Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x_{\mathbb{C}})^{n}\Bigr)A
 &&(\because \blkref{scalar_multiple_is_associative}) \\
 &= \Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x^{n})_{\mathbb{C}}\Bigr)A
-&&(\because \text{準備の冪の像}) \\
+&&(\because \blkref{real_inclusion_preserves_power}\ (r \to x,\ m \to n)\ \text{を右辺から左辺へ}) \\
 &= \Bigl(\frac{1}{n!}\,x^{n}\Bigr)_{\mathbb{C}}A
 &&(\because \blkref{real_inclusion_preserves_product}) \\
 &= (a_n)_{\mathbb{C}}\,A
@@ -5354,7 +5318,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
 &= \Bigl(c\,\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x_{\mathbb{C}})^{n}\Bigr)\Bigr)B
 &&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= \Bigl(c\,\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x^{n})_{\mathbb{C}}\Bigr)\Bigr)B
-&&(\because \text{準備の冪の像}) \\
+&&(\because \blkref{real_inclusion_preserves_power}\ (r \to x,\ m \to n)\ \text{を右辺から左辺へ}) \\
 &= \Bigl(c\,\Bigl(\frac{1}{n!}\,x^{n}\Bigr)_{\mathbb{C}}\Bigr)B
 &&(\because \blkref{real_inclusion_preserves_product}) \\
 &= \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
@@ -5582,6 +5546,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算。sagemath/check/exponential_series_of_even_odd_power_terms/）: extract_taylor_coefficient_of_check_Z_Y の証明が、級数を偶数項と奇数項の二つの級数に分けて n に依らない因子を和の外へ出し、証明の無い sinh_cosh_taylor_series を代入していた（無限和の並べ替えと分割の根拠が無かった）ので、その四つの式に共通の計算を部分和の等式と極限で示すこの主張として切り出した。偶奇の場合分けは a_n・b_n の (x^n ± (-x)^n)/(2·n!) にまとめ、極限は bridge の two_by_two_transfer_identity の証明と同じく E_N(±x) と三角不等式で取る。",
+        "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備（冪の像）(x_C)^n = (x^n)_C の帰納法は real_inclusion_preserves_power と向きが逆なだけの同じ内容だったので外し、中間目標「各項」の 2 か所でその主張を右辺から左辺へ引くようにした。主張の冪の約束を def_power_of_real_number・def_power_of_complex_number の参照にした（式は scalar_exp_is_limit_of_partial_sums の約束と同じ）。値と主張は不変。",
       ],
     },
   },

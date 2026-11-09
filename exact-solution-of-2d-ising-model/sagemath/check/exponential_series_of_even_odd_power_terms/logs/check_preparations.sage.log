@@ -1,66 +1,16 @@
-PASS: 冪の像 n=0: 「(x_C)^0」=「1_C」
-PASS: 冪の像 n=0: 「1_C」=「(1)_C」
-PASS: 冪の像 n=0: 「(1)_C」=「(x^0)_C」
-PASS: 冪の像 n=0→1: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=0→1: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=0→1: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=0→1: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=0: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=1→2: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=1→2: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=1→2: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=1→2: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=1: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=2→3: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=2→3: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=2→3: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=2→3: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=2: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=3→4: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=3→4: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=3→4: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=3→4: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=3: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=4→5: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=4→5: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=4→5: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=4→5: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=4: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=5→6: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=5→6: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=5→6: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=5→6: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=5: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=6→7: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=6→7: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=6→7: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=6→7: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=6: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=7→8: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=7→8: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=7→8: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=7→8: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=7: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=8→9: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=8→9: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=8→9: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=8→9: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=8: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=9→10: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=9→10: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=9→10: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=9→10: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=9: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=10→11: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=10→11: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=10→11: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=10→11: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=10: 帰納法の仮定がその段で成り立つ
-PASS: 冪の像 n=11→12: 「(x_C)^{n+1}」=「(x_C)^n x_C」
-PASS: 冪の像 n=11→12: 「(x_C)^n x_C」=「(x^n)_C x_C（帰納法の仮定）」
-PASS: 冪の像 n=11→12: 「(x^n)_C x_C（帰納法の仮定）」=「(x^n x)_C」
-PASS: 冪の像 n=11→12: 「(x^n x)_C」=「(x^{n+1})_C」
-PASS: 冪の像 n=11: 帰納法の仮定がその段で成り立つ
+PASS: n=0: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=1: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=2: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=3: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=4: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=5: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=6: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=7: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=8: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=9: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=10: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=11: real_inclusion_preserves_power (x^n)_C = (x_C)^n
+PASS: n=12: real_inclusion_preserves_power (x^n)_C = (x_C)^n
 PASS: n=0: 実数の冪 (-x)^n = (-1)^n x^n
 PASS: n=0: 偶数より (-1)^n = 1
 PASS: n=0 偶数 a_n: 「a_n」=「(x^n+(-1)^n x^n)/(2n!)」

@@ -12,7 +12,6 @@
 | 人手 | Lean |
 | --- | --- |
 | 証明の冒頭の `a_n := (x^n + (-x)^n)/(2·n!)`・`b_n := (x^n - (-x)^n)/(2·n!)` | `evenOddCoeffA`・`evenOddCoeffB` |
-| 準備（冪の像）`(x_ℂ)^n = (x^n)_ℂ` の帰納法（`n = 0` の 3 行、`n → n+1` の 4 行） | `real_inclusion_pow` の 2 つの calc |
 | 準備（`a_n, b_n` の値）の `n` 偶数の 3 行 × 2、`n` 奇数の 3 行 × 2 | `evenOddCoeffA_of_even`・`evenOddCoeffB_of_even`・`evenOddCoeffA_of_odd`・`evenOddCoeffB_of_odd` |
 | 準備（実数の差の像）の 6 行 `y_ℂ − z_ℂ = ⋯ = (y − z)_ℂ` | `real_inclusion_sub` の calc の 6 段 |
 | 中間目標「各項」の `n` 偶数の 10 行 | `evenOddTerm_of_even` の calc の 10 段 |
@@ -33,7 +32,9 @@
 | 最後の鎖の 3 行と主張 | `exponential_series_of_even_odd_power_terms` の calc の 3 段 |
 
 根拠の当て方:
-- `scalar_exp_is_limit_of_partial_sums` の冪の約束 `y^0 := 1`・`y^{m+1} := y^m y` は `pow_zero`・`pow_succ`。
+- 主張の冪（`def_power_of_real_number`・`def_power_of_complex_number`。`scalar_exp_is_limit_of_partial_sums` の約束と同じ式）は mathlib の `Monoid` の冪。
+- 中間目標「各項」の偶数の 3 行目と奇数の 6 行目で右辺から左辺へ引く `real_inclusion_preserves_power`（`r → x`、`m → n`）は
+  具体版 `real_inclusion_of_power`（`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesPower.lean`）の逆向き。
 - `real_inclusion_preserves_product` は `real_inclusion_mul`。
 - 人手が「実数の差の像」の 5 行目で 2 項へ当てる `real_inclusion_preserves_finite_sum` は、2 項の場合の
   `real_inclusion_preserves_sum`（`real_inclusion_add`）で当てる。
@@ -65,6 +66,7 @@
 どちらにも必要十分版は置かない。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutative
@@ -91,23 +93,6 @@ noncomputable def evenOddCoeffA (x : ℝ) (n : ℕ) : ℝ := (x ^ n + (-x) ^ n) 
 
 /-- 人手の `b_n := (x^n - (-x)^n)/(2·n!) ∈ ℝ`。 -/
 noncomputable def evenOddCoeffB (x : ℝ) (n : ℕ) : ℝ := (x ^ n - (-x) ^ n) / (2 * (n ! : ℝ))
-
-/-! ## 準備（冪の像） -/
-
-/-- **人手の準備（冪の像）**: `(x_ℂ)^n = (x^n)_ℂ`（`n` に関する帰納法）。 -/
-theorem real_inclusion_pow (x : ℝ) (n : ℕ) : (x : ℂ) ^ n = ((x ^ n : ℝ) : ℂ) := by
-  induction n with
-  | zero =>
-    calc (x : ℂ) ^ 0
-        = 1 := pow_zero _                                     -- `scalar_exp_is_limit_of_partial_sums` の ℂ の冪の約束
-      _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm            -- `inclusion_rr_to_cc` の略記 `1_ℂ = ι_{ℝ→ℂ}(1)`
-      _ = ((x ^ 0 : ℝ) : ℂ) := by rw [pow_zero]               -- `scalar_exp_is_limit_of_partial_sums` の ℝ の冪の約束
-  | succ n ih =>
-    calc (x : ℂ) ^ (n + 1)
-        = (x : ℂ) ^ n * (x : ℂ) := pow_succ _ n               -- ℂ の冪の約束
-      _ = ((x ^ n : ℝ) : ℂ) * (x : ℂ) := by rw [ih]           -- 帰納法の仮定
-      _ = ((x ^ n * x : ℝ) : ℂ) := real_inclusion_mul _ _     -- `real_inclusion_preserves_product`
-      _ = ((x ^ (n + 1) : ℝ) : ℂ) := by rw [← pow_succ]       -- ℝ の冪の約束
 
 /-! ## 準備（`a_n, b_n` の値） -/
 
@@ -183,7 +168,7 @@ theorem evenOddTerm_of_even (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c : �
     _ = (((1 / (n ! : ℝ) : ℝ) : ℂ) * (x : ℂ) ^ n) • A :=
         smul_smul _ _ _                                       -- 人手 2: `scalar_multiple_is_associative`
     _ = (((1 / (n ! : ℝ) : ℝ) : ℂ) * ((x ^ n : ℝ) : ℂ)) • A := by
-        rw [real_inclusion_pow]                               -- 人手 3: 準備の冪の像
+        rw [← real_inclusion_of_power]                        -- 人手 3: `real_inclusion_preserves_power`（`r → x`、`m → n`）を右辺から左辺へ
     _ = ((1 / (n ! : ℝ) * x ^ n : ℝ) : ℂ) • A := by
         rw [real_inclusion_mul]                               -- 人手 4: `real_inclusion_preserves_product`
     _ = ((evenOddCoeffA x n : ℝ) : ℂ) • A := by
@@ -217,7 +202,7 @@ theorem evenOddTerm_of_odd (A B : Matrix (Fin d) (Fin d) ℂ) (x : ℝ) (c : ℂ
     _ = (c * (((1 / (n ! : ℝ) : ℝ) : ℂ) * (x : ℂ) ^ n)) • B := by
         rw [mul_assoc]                                        -- 人手 5: `complex_numbers_form_a_field` の積の結合律
     _ = (c * (((1 / (n ! : ℝ) : ℝ) : ℂ) * ((x ^ n : ℝ) : ℂ))) • B := by
-        rw [real_inclusion_pow]                               -- 人手 6: 準備の冪の像
+        rw [← real_inclusion_of_power]                        -- 人手 6: `real_inclusion_preserves_power`（`r → x`、`m → n`）を右辺から左辺へ
     _ = (c * ((1 / (n ! : ℝ) * x ^ n : ℝ) : ℂ)) • B := by
         rw [real_inclusion_mul]                               -- 人手 7: `real_inclusion_preserves_product`
     _ = (c * ((evenOddCoeffB x n : ℝ) : ℂ)) • B := by

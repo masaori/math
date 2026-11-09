@@ -1,5 +1,5 @@
 # 対象ラベル: exponential_series_of_even_odd_power_terms
-# 証明の三つの準備（冪の像 (x_C)^n = (x^n)_C の帰納法、a_n・b_n の偶奇の値、実数の差の像 y_C - z_C = (y-z)_C）の全行。
+# 証明の二つの準備（a_n・b_n の偶奇の値、実数の差の像 y_C - z_C = (y-z)_C）の全行と、中間目標「各項」で引く real_inclusion_preserves_power の当てはめ。
 # ℂ は definition_of_cc どおり実数の対で持ち（complex_as_real_pairs.sage）、ℝ の量は QQ 上の多項式環の元とする。
 # 不定元での等号は、不定元へ任意の実数を代入しても成り立つ（代入は環準同型）。
 load("_prelude.sage")
@@ -9,22 +9,10 @@ R = PolynomialRing(QQ, 'x')
 x = R.gen()
 xC = iota(x, R)
 
-# 準備（冪の像）: 基底段階 3 行と帰納段階 4 行。(x_C)^n は冪の約束（cc_power）で、x^n は ℝ の冪の約束（rpow）で作る。
-run_chain([
-    ("(x_C)^0", cc_power(xC, 0, R)),
-    ("1_C", iota(1, R)),
-    ("(1)_C", iota(R(1), R)),
-    ("(x^0)_C", iota(rpow(x, 0), R)),
-], "冪の像 n=0")
-for n in range(N_MAX):
-    run_chain([
-        ("(x_C)^{n+1}", cc_power(xC, n + 1, R)),
-        ("(x_C)^n x_C", cc_mul(cc_power(xC, n, R), xC)),
-        ("(x^n)_C x_C（帰納法の仮定）", cc_mul(iota(rpow(x, n), R), xC)),
-        ("(x^n x)_C", iota(rpow(x, n) * x, R)),
-        ("(x^{n+1})_C", iota(rpow(x, n + 1), R)),
-    ], f"冪の像 n={n}→{n+1}")
-    report(cc_power(xC, n, R) == iota(rpow(x, n), R), f"冪の像 n={n}: 帰納法の仮定がその段で成り立つ")
+# 中間目標「各項」の偶数の 3 行目・奇数の 6 行目で右辺から左辺へ引く real_inclusion_preserves_power（r → x、m → n）の当てはめ。
+# 主張そのものの帰納法の行は sagemath/check/real_inclusion_preserves_power/ が確かめる。(x_C)^n は ℂ の冪（cc_power）、x^n は ℝ の冪（rpow）。
+for n in range(N_MAX + 1):
+    report(iota(rpow(x, n), R) == cc_power(xC, n, R), f"n={n}: real_inclusion_preserves_power (x^n)_C = (x_C)^n")
 
 # 準備（a_n, b_n の値）: 偶数・奇数で各 3 行ずつ。
 for n in range(N_MAX + 1):

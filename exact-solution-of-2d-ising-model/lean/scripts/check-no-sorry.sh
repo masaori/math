@@ -1357,7 +1357,6 @@ targets=(
   Ising2D.adPow_G2_checkY_of_odd
   Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum
   Ising2D.NecSuf.hasSum_two_dim_series
-  Ising2D.real_inclusion_pow
   Ising2D.evenOddCoeffA_of_even
   Ising2D.evenOddCoeffB_of_even
   Ising2D.evenOddCoeffA_of_odd
