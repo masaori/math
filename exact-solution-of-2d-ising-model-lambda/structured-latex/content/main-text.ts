@@ -13155,6 +13155,7 @@ A_i\cap(E\setminus F)
                         math(String.raw`V\setminus U`), " の頂点があるが、",
                         "これは両端点が ", math(String.raw`U`), " に属することに反する。",
                       ]),
+                      displayMath(String.raw`e\notin A\quad(\because\ e\in A\text{ なら選択済み木辺の条件と }e\text{ の両端点が }U\text{ に属することが矛盾})`),
                     ],
                   },
                 },
@@ -13456,6 +13457,68 @@ A\cap(E\setminus F)
 &=C
 &&\bigl(\because\ C\subseteq E\setminus F\bigr)
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_tree_extension",
+        labels: [],
+        title: { text: "木外辺の指定から偶辺集合への一意延長" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_tree_extension",
+              focus: {
+                id: "tools_claim_even_edge_tree_extension",
+                kind: "claim",
+                title: { text: "木外辺の指定は偶辺集合へ一意に延長する" },
+                labels: ["claim_even_edge_tree_extension"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdge_treeExtension",
+                  "Ising2DLambda.NecSuf.Tools.evenEdge_treeExtension",
+                ],
+                verification: ["sagemath/check/even-edge-tree-extension"],
+                statement: [
+                  paragraph([
+                    "空でない有限頂点集合 ", math(String.raw`V`),
+                    " と相異なる二頂点からなる辺の有限集合 ", math(String.raw`E`),
+                    " を持つ連結グラフ ", math(String.raw`G=(V,E)`),
+                    " の全域木の辺集合を ", math(String.raw`F\subseteq E`),
+                    " とする。任意の ", math(String.raw`C\subseteq E\setminus F`),
+                    " に対し、全頂点で接続辺数が偶数であり、",
+                    math(String.raw`A\cap(E\setminus F)=C`),
+                    " を満たす辺集合 ", math(String.raw`A\subseteq E`),
+                    " がただ一つ存在する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "根 ", math(String.raw`o\in V`), " を一つ選ぶ。",
+                    ref("claim_even_edge_tree_leaf_induction"),
+                    " より、木外辺の指定を保ち、根以外で偶数の辺集合 ",
+                    math(String.raw`A\subseteq E`), " が存在する。",
+                  ]),
+                  paragraph([
+                    ref("claim_even_edge_subset_root_parity"),
+                    " より、根でも接続辺数は偶数である。従って ",
+                    math(String.raw`A`), " は全頂点で偶数であり、木外辺の指定を保つ。",
+                  ]),
+                  paragraph([
+                    "同じ条件を満たす ", math(String.raw`B\subseteq E`),
+                    " に対し、", ref("claim_even_edge_subset_tree_complement_injective"),
+                    " を ", math(String.raw`A,B`), " に適用して ",
+                    math(String.raw`A=B`), " を得る。",
+                  ]),
                 ],
               },
             },
