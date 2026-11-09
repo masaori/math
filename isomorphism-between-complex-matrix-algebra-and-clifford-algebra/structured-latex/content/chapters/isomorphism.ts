@@ -2065,8 +2065,10 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
 &\quad=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
 &&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&\quad=\delta_{i,j}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ i=j\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\delta_{i,j}\cdot_{\mathbb{C}}\delta_{S,U}
-&&\left(\because\ i=j\ \text{と}\ S=U\ \text{で}\ \delta\ \text{の定義を二つの因子に。}\blkref{def_kronecker_delta}\right)\\
+&&\left(\because\ S=U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\bigl(\delta_{i,j}\ast_{\mathrm{Mat}_{\mathcal{P}_M}}1_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
 &&\left(\because\ (\flat)\right).
 \end{aligned}`),
@@ -2090,16 +2092,20 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &&\left(\because\ \mathrm{D}_1\ \text{が成り立たないので}\ (\star_1)\right)\\
 &\quad=0_{\mathbb{C}}+_{\mathbb{C}}\varsigma(N_j(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
 &&\left(\because\ \mathrm{D}_2\ \text{が成り立つので}\ (\star_2)\right)\\
+&\quad=0_{\mathbb{C}}+_{\mathbb{C}}\varsigma(N_i(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ j=i\right)\\
 &\quad=0_{\mathbb{C}}+_{\mathbb{C}}\varsigma(N_i(S))\cdot_{\mathbb{C}}\varsigma(N_i(S))
-&&\left(\because\ j=i\ \text{と}\ U=S\right)\\
+&&\left(\because\ U=S\right)\\
 &\quad=0_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}
 &&\left(\because\ n:=N_i(S)\ \text{を当てる。}\blkref{claim_sign_of_nonnegative_integer_squares_to_one}\right)\\
 &\quad=1_{\mathbb{C}}
 &&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
 &\quad=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
 &&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&\quad=\delta_{i,j}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ i=j\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\delta_{i,j}\cdot_{\mathbb{C}}\delta_{S,U}
-&&\left(\because\ i=j\ \text{と}\ S=U\ \text{で}\ \delta\ \text{の定義を二つの因子に。}\blkref{def_kronecker_delta}\right)\\
+&&\left(\because\ S=U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\bigl(\delta_{i,j}\ast_{\mathrm{Mat}_{\mathcal{P}_M}}1_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
 &&\left(\because\ (\flat)\right).
 \end{aligned}`),
@@ -2117,14 +2123,18 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
 &\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
 &&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=0_{\mathbb{C}}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ \text{条件が成り立たないので}\ (\star_1)\right)\\
 &\quad=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
-&&\left(\because\ \text{条件が成り立たないので}\ (\star_1)\ \text{と}\ (\star_2)\right)\\
+&&\left(\because\ \text{条件が成り立たないので}\ (\star_2)\right)\\
 &\quad=0_{\mathbb{C}}
 &&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
 &\quad=1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}
 &&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\ \text{との積は}\ 0_{\mathbb{C}}\right)\\
+&\quad=\delta_{i,j}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ i=j\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\delta_{i,j}\cdot_{\mathbb{C}}\delta_{S,U}
-&&\left(\because\ i=j\ \text{と}\ S\neq U\ \text{で}\ \delta\ \text{の定義を二つの因子に。}\blkref{def_kronecker_delta}\right)\\
+&&\left(\because\ S\neq U\ \text{なので}\ \delta\ \text{の定義。}\blkref{def_kronecker_delta}\right)\\
 &\quad=\bigl(\delta_{i,j}\ast_{\mathrm{Mat}_{\mathcal{P}_M}}1_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,U}
 &&\left(\because\ (\flat)\right).
 \end{aligned}`),
@@ -2240,8 +2250,10 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
 &\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
 &&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=0_{\mathbb{C}}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ \text{条件が成り立たないので}\ (\star_1)\right)\\
 &\quad=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
-&&\left(\because\ \text{条件が成り立たないので}\ (\star_1)\ \text{と}\ (\star_2)\right)\\
+&&\left(\because\ \text{条件が成り立たないので}\ (\star_2)\right)\\
 &\quad=0_{\mathbb{C}}
 &&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
 &\quad=0_{\mathbb{C}}\cdot_{\mathbb{C}}\delta_{S,U}
@@ -2293,10 +2305,16 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
 &\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
 &&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\varsigma(N_i(S'))\cdot_{\mathbb{C}}\varsigma(N_j(S'))+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ \text{条件が成り立つので}\ (\star_1)\right)\\
+&\quad=\varsigma(N_i(S'))\cdot_{\mathbb{C}}\varsigma(N_j(S'))+_{\mathbb{C}}\varsigma(N_j(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{条件が成り立つので}\ (\star_2)\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma(N_j(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
-&&\left(\because\ \text{条件が成り立つので}\ (\star_1)\ \text{と}\ (\star_2)\text{、}\alpha,\beta\ \text{の置き方}\right)\\
+&&\left(\because\ \alpha,\beta\ \text{の置き方}\right)\\
+&\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S'\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ S=S'\cup\{i\}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S'\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma\bigl(N_i(S'\cup\{j\})\bigr)
-&&\left(\because\ S=S'\cup\{i\}\ \text{と}\ U=S'\cup\{j\}\right)\\
+&&\left(\because\ U=S'\cup\{j\}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma(N_j(S'))\cdot_{\mathbb{C}}\varsigma\bigl(N_i(S'\cup\{j\})\bigr)
 &&\left(\because\ \text{足す元}\ i\text{、番号}\ j\text{、}i\ge j\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma(N_j(S'))\cdot_{\mathbb{C}}\varsigma\bigl(N_i(S')+1\bigr)
@@ -2332,10 +2350,16 @@ c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i
 &\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}+_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}\\
 &\quad=\bigl(c_i\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_j^{\mathsf T}\bigr)_{S,U}+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
 &&\left(\because\ +_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&\quad=\varsigma(N_i(S'))\cdot_{\mathbb{C}}\varsigma(N_j(S'))+_{\mathbb{C}}\bigl(c_j^{\mathsf T}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_i\bigr)_{S,U}
+&&\left(\because\ \text{条件が成り立つので}\ (\star_1)\right)\\
+&\quad=\varsigma(N_i(S'))\cdot_{\mathbb{C}}\varsigma(N_j(S'))+_{\mathbb{C}}\varsigma(N_j(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ \text{条件が成り立つので}\ (\star_2)\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma(N_j(S))\cdot_{\mathbb{C}}\varsigma(N_i(U))
-&&\left(\because\ \text{条件が成り立つので}\ (\star_1)\ \text{と}\ (\star_2)\text{、}\alpha,\beta\ \text{の置き方}\right)\\
+&&\left(\because\ \alpha,\beta\ \text{の置き方}\right)\\
+&\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S'\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(U))
+&&\left(\because\ S=S'\cup\{i\}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S'\cup\{i\})\bigr)\cdot_{\mathbb{C}}\varsigma\bigl(N_i(S'\cup\{j\})\bigr)
-&&\left(\because\ S=S'\cup\{i\}\ \text{と}\ U=S'\cup\{j\}\right)\\
+&&\left(\because\ U=S'\cup\{j\}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S')+1\bigr)\cdot_{\mathbb{C}}\varsigma\bigl(N_i(S'\cup\{j\})\bigr)
 &&\left(\because\ \text{足す元}\ i\text{、番号}\ j\text{、}i<j\text{。}\blkref{claim_count_below_index_after_adding_one_element}\right)\\
 &\quad=\alpha\cdot_{\mathbb{C}}\beta+_{\mathbb{C}}\varsigma\bigl(N_j(S')+1\bigr)\cdot_{\mathbb{C}}\varsigma(N_i(S'))
@@ -3696,28 +3720,28 @@ N_i(T)
         " を固定し、",
         math(String.raw`(X,U)`),
         " 成分を比べる。",
-        math(String.raw`V\in\mathcal{P}_M`),
+        math(String.raw`Y\in\mathcal{P}_M`),
         " について ",
-        math(String.raw`r_V:=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,V}\in\mathbb{C}`),
+        math(String.raw`r_Y:=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,Y}\in\mathbb{C}`),
         " と置き、各 ",
-        math(String.raw`V\in\mathcal{P}_M`),
+        math(String.raw`Y\in\mathcal{P}_M`),
         " について、和の項を次のように書き直す。",
       ]),
       displayMath(String.raw`\begin{aligned}
-(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{V,U}
-&=(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{V,U}
+(E_{\emptyset,R})_{X,Y}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{Y,U}
+&=(E_{\emptyset,R})_{X,Y}\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{Y,U}
 &&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
-&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,V}\bigr)\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{V,U}
+&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,Y}\bigr)\cdot_{\mathbb{C}}(c_s^{\mathsf T})_{Y,U}
 &&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
-&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,V}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,V}
+&=\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}\delta_{R,Y}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,Y}
 &&\left(\because\ c_s^{\mathsf T}\ \text{の定義。}\blkref{def_annihilation_operator_matrix}\right)\\
-&=\bigl(\delta_{R,V}\cdot_{\mathbb{C}}\delta_{\emptyset,X}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,V}
+&=\bigl(\delta_{R,Y}\cdot_{\mathbb{C}}\delta_{\emptyset,X}\bigr)\cdot_{\mathbb{C}}(c_s)_{U,Y}
 &&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
-&=\delta_{R,V}\cdot_{\mathbb{C}}\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,V}\bigr)
+&=\delta_{R,Y}\cdot_{\mathbb{C}}\bigl(\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,Y}\bigr)
 &&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
-&=\delta_{R,V}\cdot_{\mathbb{C}}r_V
-&&\left(\because\ r_V\ \text{の置き方}\right)\\
-&=\delta_{R,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_V
+&=\delta_{R,Y}\cdot_{\mathbb{C}}r_Y
+&&\left(\because\ r_Y\ \text{の置き方}\right)\\
+&=\delta_{R,Y}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_Y
 &&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
 \end{aligned}`),
       paragraph([
@@ -3727,14 +3751,14 @@ N_i(T)
       ]),
       displayMath(String.raw`\begin{aligned}
 \bigl(E_{\emptyset,R}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}c_s^{\mathsf T}\bigr)_{X,U}
-&=\sum_{V\in\mathcal{P}_M}(E_{\emptyset,R})_{X,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{V,U}
+&=\sum_{Y\in\mathcal{P}_M}(E_{\emptyset,R})_{X,Y}\cdot_{\mathbb{C}^{\mathrm{vec}}}(c_s^{\mathsf T})_{Y,U}
 &&\left(\because\ \cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\ \text{の定義。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
-&=\sum_{V\in\mathcal{P}_M}\delta_{R,V}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_V
-&&\left(\because\ \text{各}\ V\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{Y\in\mathcal{P}_M}\delta_{R,Y}\cdot_{\mathbb{C}^{\mathrm{vec}}}r_Y
+&&\left(\because\ \text{各}\ Y\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
 &=r_R
-&&\left(\because\ \text{主張の}\ x\ \text{に}\ R\text{、和の変数に}\ V\text{、}v_V:=r_V\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ R\text{、和の変数に}\ Y\text{、}v_Y:=r_Y\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
 &=\delta_{\emptyset,X}\cdot_{\mathbb{C}}(c_s)_{U,R}
-&&\left(\because\ r_V\ \text{の置き方で}\ V:=R\right).
+&&\left(\because\ r_Y\ \text{の置き方で}\ Y:=R\right).
 \end{aligned}\qquad(\dagger)`),
       paragraph([
         math(String.raw`U=R\cup\{s\}`),

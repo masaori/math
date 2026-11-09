@@ -7032,9 +7032,9 @@ L^{b}_m
       displayMath(String.raw`\begin{aligned}
 \varphi(1_A)
 &=1_B
-&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right)\\
 &=\psi(1_A)
-&&\left(\because\ \psi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+&&\left(\because\ \psi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right).
 \end{aligned}`),
       paragraph(["加法で閉じていること（",
         math(String.raw`x+_A y\in E`),
@@ -7042,13 +7042,13 @@ L^{b}_m
       displayMath(String.raw`\begin{aligned}
 \varphi(x+_A y)
 &=\varphi(x)+_B\varphi(y)
-&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right)\\
 &=\psi(x)+_B\varphi(y)
 &&\left(\because\ x\in E\right)\\
 &=\psi(x)+_B\psi(y)
 &&\left(\because\ y\in E\right)\\
 &=\psi(x+_A y)
-&&\left(\because\ \psi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+&&\left(\because\ \psi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right).
 \end{aligned}`),
       paragraph(["乗法で閉じていること（",
         math(String.raw`x\cdot_A y\in E`),
@@ -7056,13 +7056,13 @@ L^{b}_m
       displayMath(String.raw`\begin{aligned}
 \varphi(x\cdot_A y)
 &=\varphi(x)\cdot_B\varphi(y)
-&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right)\\
 &=\psi(x)\cdot_B\varphi(y)
 &&\left(\because\ x\in E\right)\\
 &=\psi(x)\cdot_B\psi(y)
 &&\left(\because\ y\in E\right)\\
 &=\psi(x\cdot_A y)
-&&\left(\because\ \psi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+&&\left(\because\ \psi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right).
 \end{aligned}`),
       paragraph(["スカラー倍で閉じていること（",
         math(String.raw`\lambda\ast_A x\in E`),
@@ -7070,11 +7070,11 @@ L^{b}_m
       displayMath(String.raw`\begin{aligned}
 \varphi(\lambda\ast_A x)
 &=\lambda\ast_B\varphi(x)
-&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_linear_map}\right)\\
 &=\lambda\ast_B\psi(x)
 &&\left(\because\ x\in E\right)\\
 &=\psi(\lambda\ast_A x)
-&&\left(\because\ \psi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
+&&\left(\because\ \psi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_linear_map}\right).
 \end{aligned}`),
       paragraph([
         "四条件が満たされたので、",
@@ -7393,10 +7393,6 @@ L^{b}_m
         " の両側イデアルである（",
         ref("def_two_sided_ideal"),
         "）。",
-        math(String.raw`\mathcal{J}_X`),
-        " が空でないこと（たとえば ",
-        math(String.raw`A`),
-        " 自身が属すること）は、この議論では使わない。",
       ]),
     ],
   },
@@ -7473,11 +7469,6 @@ L^{b}_m
         " の任意の元なので、",
         math(String.raw`X\subseteq\langle X\rangle_A`),
         " である（部分集合の定義）。",
-        "この議論は ",
-        math(String.raw`\langle X\rangle_A`),
-        " が両側イデアルであること（",
-        ref("claim_two_sided_ideal_generated_by_subset_is_two_sided_ideal"),
-        "）を使わない。",
       ]),
     ],
   },
@@ -7550,15 +7541,6 @@ L^{b}_m
         " の任意の元なので、",
         math(String.raw`\langle X\rangle_A\subseteq J`),
         " である（部分集合の定義）。",
-        "この議論は ",
-        math(String.raw`\langle X\rangle_A`),
-        " が両側イデアルであること（",
-        ref("claim_two_sided_ideal_generated_by_subset_is_two_sided_ideal"),
-        "）も、",
-        math(String.raw`X`),
-        " を含むこと（",
-        ref("claim_two_sided_ideal_generated_by_subset_contains_subset"),
-        "）も使わない。",
       ]),
     ],
   },
@@ -7680,7 +7662,7 @@ L^{b}_m
       displayMath(String.raw`\begin{aligned}
 \lambda\ast_A x
 &=\lambda\ast_A(1_A\cdot_A x)
-&&\left(\because\ \text{環の組}\ (A,+_A,\cdot_A,0_A,1_A)\ \text{の乗法の単位元。}\blkref{def_complex_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
 &=(\lambda\ast_A 1_A)\cdot_A x
 &&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
 &=a\cdot_A x
@@ -7701,7 +7683,6 @@ L^{b}_m
         " である。上の等式により ",
         math(String.raw`\lambda\ast_A x\in I`),
         " である。",
-        "この議論は、両側イデアルの一つ目・二つ目・四つ目の条件と、スカラー倍と乗法の両立の右の因子を使わない。",
       ]),
     ],
   },
@@ -7768,11 +7749,6 @@ a+_A\bigl((-1_{\mathbb{C}})\ast_A a\bigr)
         "）により ",
         math(String.raw`a\equiv_I a`),
         " である。",
-        "この議論は、両側イデアルの二つ目・三つ目・四つ目の条件と、",
-        math(String.raw`A`),
-        " の乗法 ",
-        math(String.raw`\cdot_A`),
-        " を使わない。",
       ]),
     ],
   },
@@ -7858,11 +7834,6 @@ b+_A\bigl((-1_{\mathbb{C}})\ast_A a\bigr)
         "）により ",
         math(String.raw`b\equiv_I a`),
         " である。",
-        "この議論は、両側イデアルの定義の条件を、スカラー倍で閉じていることを通してだけ使い、",
-        math(String.raw`A`),
-        " の乗法 ",
-        math(String.raw`\cdot_A`),
-        " を直接は使わない。",
       ]),
     ],
   },
@@ -7980,11 +7951,6 @@ a+_A\bigl((-1_{\mathbb{C}})\ast_A c\bigr)
         "）により ",
         math(String.raw`a\equiv_I c`),
         " である。",
-        "この議論は、両側イデアルの一つ目・三つ目・四つ目の条件と、",
-        math(String.raw`A`),
-        " の乗法 ",
-        math(String.raw`\cdot_A`),
-        " を使わない。",
       ]),
     ],
   },
@@ -8192,7 +8158,6 @@ c\in[b]_I&\iff b\equiv_I c
         " の部分集合として ",
         math(String.raw`[a]_I=[b]_I`),
         " である（二つの集合は、互いに他方に含まれるとき等しい）。",
-        "この議論は、合同の定義と両側イデアルの条件を、反射性・対称性・推移性の三つの主張を通してだけ使う。",
       ]),
     ],
   },
