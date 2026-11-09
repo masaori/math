@@ -1532,7 +1532,7 @@ c_2^*
     title: { tex: String.raw`A(\theta) \text{ の定義}` },
     labels: ["def_A_theta"],
     statement: [
-      paragraph([math(String.raw`\theta \in \mathbb{C}`), " について、"]),
+      paragraph([math(String.raw`\theta \in \mathbb{R}`), " について、"]),
       displayMath(
         String.raw`A(\theta) :=
 \begin{pmatrix}
@@ -1542,8 +1542,96 @@ i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) \\
 c_1 c_2^* - s_1 s_2^*\cos\theta
 \end{pmatrix}`,
       ),
+      paragraph([
+        "と定める。",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とし、",
+        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^*`),
+        " は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        " の実数である。",
+        math(String.raw`A(\theta)`),
+        " は ",
+        math(String.raw`2`),
+        " 行 ",
+        math(String.raw`2`),
+        " 列の複素行列で、成分を次のように読む。",
+        math(String.raw`(1,1)`),
+        " 成分と ",
+        math(String.raw`(2,2)`),
+        " 成分は、実数 ",
+        math(String.raw`c_1 c_2^* - s_1 s_2^*\cos\theta \in \mathbb{R}`),
+        " の ",
+        ref("inclusion_rr_to_cc"),
+        " による像である。",
+        math(String.raw`(1,2)`),
+        " 成分と ",
+        math(String.raw`(2,1)`),
+        " 成分は ",
+        math(String.raw`\mathbb{C}`),
+        " の式で、そこに現れる実数 ",
+        math(String.raw`\theta, c_1, s_1, c_2, s_2^*, \cos\theta, \sin\theta`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像として読み、像の記号を省く。",
+        math(String.raw`i\theta`),
+        " は ",
+        math(String.raw`i`),
+        " と ",
+        math(String.raw`\theta_{\mathbb{C}}`),
+        " の積、",
+        math(String.raw`-i\theta`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の読みのとおり ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(i\theta)`),
+        " である。",
+        math(String.raw`(2,1)`),
+        " 成分の先頭の ",
+        math(String.raw`-i`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-i = (-1_{\mathbb{C}})\,i`),
+        " である。",
+        math(String.raw`(1,2)`),
+        " 成分と ",
+        math(String.raw`(2,1)`),
+        " 成分の四つの因子の積は左から順に括る（",
+        math(String.raw`abcd = ((ab)c)d`),
+        "）。",
+        math(String.raw`\theta`),
+        " を ",
+        math(String.raw`\mathbb{R}`),
+        " に取るのは、成分の ",
+        math(String.raw`\cos\theta, \sin\theta`),
+        " が実数の引数を取る ",
+        ref("def_cos"),
+        "・",
+        ref("def_sin"),
+        " の値だからである（",
+        ref("def_cos"),
+        "・",
+        ref("def_sin"),
+        " はいま ",
+        math(String.raw`[-\pi/2, \pi/2]`),
+        " の上だけで定めてあり、全実数の引数への拡張が未整備であることは ",
+        ref("euler_formula_cos_sin"),
+        " の冒頭のとおりである）。",
+      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-11-09（Lean の通しの証明）: θ ∈ ℂ と書きながら成分に実数の cos θ・sin θ を使い、実数の成分を包含の像と書いていなかった。θ ∈ ℝ に直し、" +
+          "(1,1)・(2,2) 成分を実数 c_1c_2^* - s_1s_2^* cos θ の像と読むこと、(1,2)・(2,1) 成分の実数を inclusion_rr_to_cc の像として読むこと、iθ・-iθ の読み、" +
+          "(2,1) 成分の先頭の -i が multiply_by_minus_one の -i であること、四つの因子の積を左から括ることを定義に書いた。" +
+          "def_gamma1_gamma2_of_theta と det_A_theta_tilde の証明がそれぞれ書いていた (2,1) 成分の読みは、この定義への参照にした。" +
+          "factorization_of_A_theta_general の証明は (1,1)・(2,2) 成分を ℂ の式として読んでおり、この定義の読みに合わせる作業が残っている。行列の式は変えていない。",
+      ],
+    },
   },
   {
     id: "evensector_000_remark_overview",
@@ -3685,7 +3773,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " は ",
         ref("def_A_theta"),
         " の（",
-        math(String.raw`\theta \in \mathbb{C}`),
+        math(String.raw`\theta \in \mathbb{R}`),
         " について定義された）行列である。",
       ]),
       paragraph([
@@ -6976,7 +7064,11 @@ P_{21}
 &= (-i) e_- S\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
 &&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
 &= (-i) e_- (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
-&&(\because\ S\ \text{の定義})
+&&(\because\ S\ \text{の定義})\\
+&= (-i) \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr) (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&(\because\ e_-\ \text{の定義})\\
+&= (-i) \exp\bigl(-(i(\theta)_{\mathbb{C}})\bigr) (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (\theta)_{\mathbb{C}})\bigr)
 \end{aligned}`),
       paragraph([
         "これは ",

@@ -694,7 +694,7 @@ theorem factorization_A_diag_as_inclusion (c1 c2star s1 s2star cθ : ℝ) :
 | 「主張の左辺は `mat_mult_associative` により `B_1(θ)(B_2B_1(θ))` に等しい」 | 1 段目（mathlib `Matrix.mul_assoc`） |
 | 証明冒頭の「この記号で `B_1(θ) = …`、`B_2 = …`」 | 2 段目（`factorization_B1mat_eq_symbols`・`factorization_B2mat_eq_symbols`） |
 | 「`= P`、Step 2〜5 で `P` の 4 成分が…」 | 3 段目（`2×2` 行列を 4 成分で書き、Step 2〜5 の `_real` 版を当てる） |
-| Step 2〜5 の末尾「これは `A(θ)` の (i,j) 成分である」 | 4 段目（(1,1)・(2,2) は `factorization_A_diag_as_inclusion`、(2,1) は指数 `(-i)(θ)_ℂ = -(i(θ)_ℂ)`）と 5 段目（`def_A_theta` の定義と仮定 `hc1`〜`hs2star`） | -/
+| Step 2〜5 の末尾「これは `A(θ)` の (i,j) 成分である」 | 4 段目（(1,1)・(2,2) は `factorization_A_diag_as_inclusion`。(2,1) は Step 5 の最後の 2 行（`e_-` の定義を開く行と、指数 `(-i)(θ)_ℂ = -(i(θ)_ℂ)` の行））と 5 段目（`def_A_theta` の定義と仮定 `hc1`〜`hs2star`） | -/
 theorem factorization_of_A_theta_general (K : IsingConst) (K1 K2star θ : ℝ)
     (hc1 : K.c1 = Real.cosh (2 * K1)) (hs1 : K.s1 = Real.sinh (2 * K1))
     (hc2star : K.c2star = Real.cosh (2 * K2star)) (hs2star : K.s2star = Real.sinh (2 * K2star))
@@ -703,7 +703,7 @@ theorem factorization_of_A_theta_general (K : IsingConst) (K1 K2star θ : ℝ)
   have hdual' : Real.sinh (2 * K2star) * K.c2 = Real.cosh (2 * K2star) := by
     rw [← hs2star, ← hc2star, hdual]                               -- `c_2^*`・`s_2^*` の定義（仮定 `hc2star`・`hs2star`）で `hdual` を読み替える
   have hexp : Complex.exp ((-Complex.I) * (θ : ℂ)) = Complex.exp (-(Complex.I * (θ : ℂ))) := by
-    rw [neg_mul]                                                   -- `multiply_by_minus_one` の `(-i)(θ)_ℂ = -(i(θ)_ℂ)`
+    rw [neg_I_mul_eq_neg_of_I_mul]                                 -- `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）
   calc B1mat (K1 : ℂ) (θ : ℂ) * B2mat (K2star : ℂ) * B1mat (K1 : ℂ) (θ : ℂ)
       = B1mat (K1 : ℂ) (θ : ℂ) * (B2mat (K2star : ℂ) * B1mat (K1 : ℂ) (θ : ℂ)) :=
         Matrix.mul_assoc _ _ _                                     -- `mat_mult_associative`

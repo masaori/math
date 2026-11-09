@@ -1909,15 +1909,13 @@ c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
         ref("def_A_theta"),
         " の ",
         math(String.raw`(2,1)`),
-        " 成分の先頭の ",
+        " 成分は、その定義に書いた読みのとおり、先頭の ",
         math(String.raw`-i`),
-        " は ",
+        " を ",
         ref("multiply_by_minus_one"),
         " の ",
         math(String.raw`-i`),
-        " で、四つの因子の積は左から順に括る（",
-        math(String.raw`abcd = ((ab)c)d`),
-        "）。",
+        " とし、四つの因子の積を左から順に括ったものである。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1972,6 +1970,7 @@ A(\theta)_{2,1}
           "sin(-θ) の行が x(-y) = -(xy) と a - (-b) = a + b の 2 段をまとめていた。3 つの等式を主張 i_times_negated_real_is_negation_of_i_times・cos_of_negated_real・sin_of_negated_real として前へ出して引き、" +
           "まとめていた行を 3 行に割った。A(θ)_{2,1} の鎖は、def_A_theta の先頭の -i を multiply_by_minus_one の -i と読み、積を左から括ることを書いて、" +
           "negative_i_times_complex_is_negation_of_i_times と (-x)y = -(xy) の 2 回で -γ_2(-θ) へ着く 5 行にした（以前は「直前の式」の 1 行）。主張は変えていない。",
+        "2026-11-09（Lean の通しの証明）: def_A_theta の (2,1) 成分の先頭の -i の読みと積の括り方を def_A_theta の定義に移し、この証明ではその読みを引くだけにした。鎖は変えていない。",
       ],
     },
   },
@@ -4071,13 +4070,15 @@ u^2 + v^2
         math(String.raw`(2,1)`),
         " 成分を比べて得る（",
         ref("def_A_theta"),
-        " の先頭の ",
-        math(String.raw`-`),
-        " は ",
+        " の ",
+        math(String.raw`(2,1)`),
+        " 成分は、その定義に書いた読みのとおり、先頭の ",
+        math(String.raw`-i`),
+        " を ",
         ref("multiply_by_minus_one"),
         " の ",
-        math(String.raw`-1`),
-        " 倍と読む）。",
+        math(String.raw`-i`),
+        " とし、四つの因子の積を左から順に括ったものである）。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \gamma_2(\theta)
@@ -4094,8 +4095,14 @@ u^2 + v^2
 &&(\because\ \text{上の}\ -(-z) = z)\\
 &= -A(\theta)_{2,1}
 &&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{の}\ (2,1)\ \text{成分})\\
-&= -\Bigl(-\bigl(i\,e_-\,s_2^*(c_1u + iv - s_1c_2)\bigr)\Bigr)
+&= -\Bigl(\Bigl(\bigl((-i)e_-\bigr)s_2^*\Bigr)(c_1u + iv - s_1c_2)\Bigr)
 &&(\because\ \blkref{def_A_theta}\ \text{の}\ (2,1)\ \text{成分})\\
+&= -\Bigl(\Bigl(\bigl(-(i\,e_-)\bigr)s_2^*\Bigr)(c_1u + iv - s_1c_2)\Bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to e_-)\bigr)\\
+&= -\Bigl(\Bigl(-\bigl((i\,e_-)s_2^*\bigr)\Bigr)(c_1u + iv - s_1c_2)\Bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i\,e_-,\ y \to s_2^*\bigr)\\
+&= -\Bigl(-\Bigl(\bigl((i\,e_-)s_2^*\bigr)(c_1u + iv - s_1c_2)\Bigr)\Bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-x)y = -(xy)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to (i\,e_-)s_2^*,\ y \to c_1u + iv - s_1c_2\bigr)\\
 &= i\,e_-\,s_2^*\bigl(c_1u + iv - s_1c_2\bigr)
 &&(\because\ \text{上の}\ -(-z) = z)\\
 &= i\,e_-\,s_2^*\bigl((c_1u - s_1c_2) + iv\bigr)

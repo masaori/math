@@ -160,14 +160,16 @@ CHAINS = {
         ((-i)*(S*em*TRIG_CO_M - s1*S*c2*em), ['C=S*c2']),
         ((-i)*em*S*(c1*co + i*si - s1*c2), []),
         ((-i)*em*s2s*(c1*co + i*si - s1*c2), ['S=s2s']),
+        ((-i)*em*s2s*(c1*co + i*si - s1*c2), []),   # e_- の定義を展開する行（e_- = exp((-i)(θ)_C) のまま。不定元では同じ多項式）
+        ((-i)*emn*s2s*(c1*co + i*si - s1*c2), ['em=emn']),   # negative_i_times_complex_is_negation_of_i_times（z → (θ)_C）
     ],
 }
 
-# def_A_theta の A(θ)（実数の成分を包含の像として読む）
+# def_A_theta の A(θ)（実数の成分を包含の像として読む。(2,1) 成分の exp(-iθ) は定義の読みどおり exp(-(i(θ)_C)) = emn）
 A = matrix(R, 2, 2, [
     c1*c2s - s1*s2s*co,
     i*ep*s2s*(c1*co - i*si - s1*c2),
-    -i*em*s2s*(c1*co + i*si - s1*c2),
+    -i*emn*s2s*(c1*co + i*si - s1*c2),
     c1*c2s - s1*s2s*co,
 ])
 A_ENTRY_OF = {'P_11': A[0, 0], 'P_12': A[0, 1], 'P_21': A[1, 0], 'P_22': A[1, 1]}

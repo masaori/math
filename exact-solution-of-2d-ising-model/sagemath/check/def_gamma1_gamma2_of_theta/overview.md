@@ -33,7 +33,7 @@
 
 - `cos(−θ) = cos θ`・`sin(−θ) = −sin θ` は主張 `cos_of_negated_real`・`sin_of_negated_real` を引く（鎖の検算は `sagemath/check/` のそれぞれのラベルのディレクトリ）。どちらも `euler_formula_cos_sin` を通して全実数上の cos・sin（本文で未整備）に依る。
   この検算はその当てはめを Sage の cos・sin で確かめるにとどまる。
-- `def_A_theta` は θ ∈ ℂ と書きながら成分に実数の cos θ・sin θ を使っている（状態台帳の `factorization_of_A_theta_general` の項）。検算は θ ∈ ℝ で、実数の成分を包含の像として読む。
+- `def_A_theta` は θ ∈ ℝ について定め、(1,1)・(2,2) 成分を実数の式の像、(1,2)・(2,1) 成分を像の ℂ の式と読み、(2,1) 成分の先頭の `-i` を `(-1)i`、四つの因子の積を左から括る、と定義に書いている。検算はこの読みどおりに成分を作る。
 
 ## 実行方法
 

@@ -17,7 +17,8 @@
     （`gamma2_neg`・`gamma2_neg_eq_neg_conj` とその準備の補題。各段に人手の行を書いた。準備の第一から移した
     `i(-θ)`・`-i(-θ)`・`cos(-θ)`・`sin(-θ)` の 4 主張の具体版は `MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimCosSinAndITimesAtNegatedReal.lean`）
 
-原文の定義（`θ ∈ ℝ`、原文は `θ ∈ ℂ` だが `cos θ`, `sin θ` の実部虚部分解を使うので実数に限る）:
+人手の定義（`def_A_theta`・`def_gamma1_gamma2_of_theta` とも `θ ∈ ℝ`。成分の実数の読み、`(2,1)` 成分の先頭の `-i` が
+`multiply_by_minus_one` の `-i` であること、四つの因子の積を左から括ることは `def_A_theta` に書いてある）:
 
   `γ_1(θ) := c_1 c_2^* - s_1 s_2^* cos θ  ∈ ℝ`
   `γ_2(θ) := i e^{iθ} s_2^* (c_1 cos θ - i sin θ - s_1 c_2)  ∈ ℂ`
@@ -95,7 +96,9 @@ noncomputable def gamma2 : ℂ :=
   Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
     ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))
 
-/-- 原文 `def_A_theta` の明示行列そのまま。 -/
+/-- 原文 `def_A_theta` の明示行列そのまま。人手の定義に書いた読みのとおり、`(1,1)`・`(2,2)` 成分は実数
+`c_1c_2^* - s_1s_2^* cos θ` の像、`(1,2)`・`(2,1)` 成分は実数を `ℝ → ℂ` の包含で送った ℂ の式で、
+`(2,1)` 成分の先頭の `-i` は `-Complex.I`、四つの因子の積は左から括る（Lean の `a * b * c * d` は `((a * b) * c) * d`）。 -/
 noncomputable def AMat : Matrix (Fin 2) (Fin 2) ℂ :=
   !![((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ),
       Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
@@ -142,8 +145,8 @@ theorem gamma2_neg :
 theorem gamma1_neg : gamma1 K (-θ) = gamma1 K θ := by
   simp [gamma1, Real.cos_neg]
 
-/-- 人手 `def_gamma1_gamma2_of_theta` の `A(θ)_{2,1}` の 5 行の鎖。`def_A_theta` の先頭の `-i` は `multiply_by_minus_one` の `-i`、
-積は左から括る（Lean の `-Complex.I * e * s * P` は `(((-I) * e) * s) * P` と読まれる）。
+/-- 人手 `def_gamma1_gamma2_of_theta` の `A(θ)_{2,1}` の 5 行の鎖。`def_A_theta` の定義に書いた読みのとおり、先頭の `-i` は
+`multiply_by_minus_one` の `-i`、積は左から括る（Lean の `-Complex.I * e * s * P` は `(((-I) * e) * s) * P` と読まれる）。
 人手の `(-x)y = -(xy)`（ℂ は体）は具体版が Lean に無く、mathlib の `neg_mul` で 1 回ずつ受ける。 -/
 theorem AMat_two_one_eq_neg_gamma2_neg : AMat K θ 1 0 = -gamma2 K (-θ) :=
   calc AMat K θ 1 0
