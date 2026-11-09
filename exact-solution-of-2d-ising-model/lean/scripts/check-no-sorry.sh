@@ -70,6 +70,10 @@ targets=(
   Ising2D.commute_V2_epsProj
   Ising2D.V2Units
   Ising2D.V2Units_eq_V2H2FormUnits
+  Ising2D.V2_prefactor_pos
+  Ising2D.V2_mul_V2Inv
+  Ising2D.V2Inv_mul_V2
+  Ising2D.V2Units_inv_val
   Ising2D.isUnit_V2
   Ising2D.VPlusOfTransfer_eq_VPlus
   Ising2D.TV_V1plusHalfUnits_V2Units

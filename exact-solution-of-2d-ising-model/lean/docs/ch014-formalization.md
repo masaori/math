@@ -20,7 +20,7 @@
 | `Ising2D.H1plus`（章 004）/ `V1plusHalf`（章 010） | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}`（人手の本文は定義を章 004・010 の 1 か所にまとめ、章 014 の重複定義を削除した） | `def_H1_plus` / `def_V1_plus_square_root` |
 | `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版（`V_2` を `V2H2Form M s2 K2star` で書いた一般形） | `def_V_plus` |
 | `Ising2D.VPlusOfTransfer_eq_VPlus` | 人手の `V_2`（`def_transfer_matrix`）で作った `V^{(+)}`（章 010 の `VPlusOfTransfer`）は `VPlus M (sinh 2K_2) K_1 K_2^*` に等しい（`V2_exponential_representation` による） | `def_V_plus` |
-| `Ising2D.V2Units` / `V2Units_eq_V2H2FormUnits` / `isUnit_V2` | 人手の `V_2` の単元と可逆性 | `V2_invertible` |
+| `Ising2D.V2_prefactor_pos` / `V2_mul_V2Inv` / `V2Inv_mul_V2` / `V2Units` / `V2Units_inv_val` / `V2Units_eq_V2H2FormUnits` / `isUnit_V2` | 人手の `V_2` の単元と可逆性（`a > 0`、人手の二つの鎖 `V_2h = I`・`hV_2 = I`、逆元 `(a^{-1})_ℂ exp(-Y)`） | `V2_invertible` |
 | `Ising2D.isUnit_V1plusHalf` | `(V_1^{(+)})^{1/2}` の可逆性 | `V1_plus_half_invertible` |
 | `Ising2D.isUnit_VPlus` | `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
 | `Ising2D.V1_plus_square_root_property`（章 010） | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
@@ -47,9 +47,9 @@
 | `Ising2D.evenOddPartialSum_sub_limit_norm_le_of_necSuf` / `evenOddPartialSum_sub_limit_norm_tendsto_of_necSuf`（`ClaimExponentialSeriesOfEvenOddPowerTermsFromNecSuf.lean`） | ノルムの評価と `ε` の鎖を、必要十分版 `NecSuf.evenOdd_norm_le'`・`NecSuf.evenOdd_err_tendsto'`（`NecSuf/EvenOddSeriesNormEstimate.lean`。元の集合はノルムの三角不等式と斉次性だけ、係数の集合は `‖kl‖ = ‖k‖‖l‖` と絶対値を保つ `ι : ℝ → K` だけ）の特殊化として導いたもの | 同上 |
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp`（`ClaimTActionsOnCheck.lean`） | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式（`def_T_g` → `def_V1_plus_square_root` → `exp(X)^{-1}=exp(-X)` → `exp_X_Y_exp_-X` → (h1.z)(h1.y) の `calc`） | `T_actions_on_check_Z_Y` |
-| `Ising2D.smul_conj_smul_inv_eq` | 第 3・第 4 式の証明の、前因子 `(2s_2)^{M/2}` を打ち消す 2 行（スカラーを左端へ移す・`c c^{-1} = 1`） | 同上 |
+| `Ising2D.smul_conj_smul_inv_eq` | 人手に無い一般化 `V2H2Form` 版の第 3・第 4 式で、前因子 `(2s_2)^{M/2}` を打ち消す段（逆元の係数が複素数の逆数 `c^{-1}`。人手の `V_2` 版は `TConj_V2_checkZ` の中で `real_inclusion_mul` を引く） | 同上 |
 | `Ising2D.TConj_V2H2Form_checkZ` / `..._checkY` | 原文 第 3・第 4 式を `V2H2Form` の単元（一般形）で述べたもの（前因子 `(2s_2)^{M/2}` の相殺つき） | `T_actions_on_check_Z_Y` |
-| `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（人手の `V_2` の単元 `V2Units` について） | 同上 |
+| `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（人手の `V_2` の単元 `V2Units` について。人手の鎖と 1 対 1、係数は `(cosh 2K_2^*)_ℂ` の像） | 同上 |
 | `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性（人手の鎖の 6 行と 1 対 1 の `calc`。分配は `mul_add_matrix_tensorPow`・`add_mul_matrix_tensorPow`、スカラー倍は `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`。これらは添字が `Conf M` の行列なので、添字が `Fin n` の具体版 `mul_add_matrix` などではなく必要十分版の特殊化であり、縮める添字の和は `NecSuf.finite_sum_add'` が `Fintype.equivFin` で番号を付けてから人手と同じ帰納法を使う） | `linearity_of_T` |
 | `Ising2D.linearity_of_T_V1plusHalf` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
 | `Ising2D.linearity_of_T_V2` / `linearity_of_T_V2H2Form` | `T_g` の ℂ 線型性の `V_2`（人手の `V_2`／一般形 `V2H2Form`）への特殊化 | `linearity_of_T_V2` |

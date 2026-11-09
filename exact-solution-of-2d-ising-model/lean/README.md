@@ -766,7 +766,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
 | `Ising2D.V1plusUnits` / `V1plusHalfUnits` / `V2H2FormUnits` | `V_1^{(+)}`, `(V_1^{(+)})^{1/2}`, `V2H2Form` を単元 `(TensorPow M)ˣ` として（`V1pmUnits` / `V1pmHalfUnits` は補助の一般形） | 同上（`V2H2Form` には `s_2 > 0` が要る） |
 | `Ising2D.isUnit_V1plus` / `isUnit_V1plusHalf` / `isUnit_V2H2Form` | 上記の `IsUnit` 版 | 同上（`Ising2D.isUnit_V1plusHalf` は `V1_plus_half_invertible`） |
-| `Ising2D.V2Units` / `Ising2D.isUnit_V2` | **`def_transfer_matrix` の `V_2`** の単元と可逆性（`K_2 > 0`。`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`） | `V2_invertible` |
+| `Ising2D.V2Units` / `Ising2D.isUnit_V2` / `Ising2D.V2Units_inv_val` | **`def_transfer_matrix` の `V_2`** の単元と可逆性と逆元 `(a^{-1})_ℂ exp(-Y)`（`K_2 > 0`。人手の二つの鎖 `V2_mul_V2Inv`・`V2Inv_mul_V2` から作る。`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`） | `V2_invertible` |
 | `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` / `V1PauliForm_eq_jordanWigner` / `V1_in_Z_Y_epsilon` | `V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`（最後が `def_transfer_matrix` の `V_1` について） | `V1_in_Z_Y_epsilon` |
 | `Ising2D.TConj` | `T_g : X ↦ g X g⁻¹` を **ℂ-代数自己同型**として | `def_T_g` |
 | `Ising2D.TConj_linear` / `TConj_trans` | `T_g` の ℂ-線型性、`T_g ∘ T_h = T_{gh}` | `linearity_of_T`, `conjugation_is_ring_homomorphism` (3) |

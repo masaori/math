@@ -40,13 +40,19 @@ Lean の `VPlus M s2 K1 K2star` / `VPlusUnits` / `TVPlus` は、この右辺の�
 （`s2`, `K2star` は独立な引数）で定義した一般化であり、章 014〜018 の定理はこの一般形のまま述べてある。
 人手の `V_2` から作った `V^{(+)}`, `T_{(V^{(+)})}` と一致するのは `s2 = sinh 2K_2`, `K2star = K_2^*` のとき
 （`VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units`）。人手の `V_2` の可逆性
-（`V2_invertible`）は `isUnit_V2`、その単元は `V2Units`。
+（`V2_invertible`）は `isUnit_V2`、その単元は `V2Units`（人手の二つの鎖 `V2_mul_V2Inv`・`V2Inv_mul_V2` から作り、
+逆元は人手の `(a^{-1})_ℂ exp(-Y)`（`V2Units_inv_val`））。
 原文が「`exp(X)` の `1/2` 乗」と書いているものを Lean では最初から `exp(X/2)` としている点も
 既存の定義と同じである（原文もこの章では最初から `exp((i/2)K_1H_1^{(+)})` を定義に採っている）。
 -/
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
 
 namespace Ising2D
 
@@ -80,12 +86,97 @@ theorem isUnit_VPlus {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
 
 /-! ## 人手の `V_2`（`def_transfer_matrix`）で書いた形 -/
 
-/-- 人手の `V_2`（`def_transfer_matrix`、`K_2 > 0`）を単元として。
+/-! ### 人手 `V2_invertible`: `V_2 ∈ R^×` と `V_2^{-1} = (a^{-1})_ℂ exp(-Y)`
+
+人手の `a := (2s_2)^{M_col/2}`（`s_2 = sinh 2K_2`）は Lean の `(2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2)`、
+`Y := (i(K_2^*)_ℂ)H_2` は `(Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M` である（Lean は `a`・`Y` に名前を置かず式で書く）。
+人手の二つの鎖 `V_2h = I`・`hV_2 = I`（`h := (a^{-1})_ℂ exp(-Y)`）を `V2_mul_V2Inv`・`V2Inv_mul_V2` が 1 行ずつ受け持ち、
+単元 `V2Units` はこの `h` を逆元に持つ（人手の「`def_invertible_elements_of_R` の可逆の定義（`g → V_2`, `h → h`）」）。
+人手の 2〜4 行目（`V2_exponential_representation`、`a`・`Y` の置き方）は、Lean では `V2_exponential_representation` の書き換えと
+`V2H2Form` の定義の展開（`rfl`）の 1 段である。`scalar_multiple_is_associative` は Lean の具体版が無く mathlib の `smul_smul` で受ける
+（`VPlus_mul_W` と同じ）。 -/
+
+/-- 人手 `V2_invertible` の `a ∈ ℝ_{>0}`（`def_indexed_hyperbolic_abbreviations` の `s_2 = sinh 2K_2`、
+`def_second_transfer_matrix_prefactor`）。Lean の `a` は `Real.rpow` なので `Real.rpow_pos_of_pos` で作る。
+人手の 2 行の鎖（`s_2` の略記、`def_second_transfer_matrix_prefactor`）と 1 対 1 ではない（`ClaimConstantCEvenSector.lean` の
+準備の `a ∈ ℝ_{>0}` と同じ書き方。状態台帳の残りの件）。 -/
+theorem V2_prefactor_pos {K2 : ℝ} (hK2 : 0 < K2) (M : ℕ) :
+    0 < (2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2) :=
+  Real.rpow_pos_of_pos (by linarith [sinh_two_mul_pos hK2]) _
+
+/-- **人手 `V2_invertible` の 1 本目の鎖**: `V_2h = I`（`h := (a^{-1})_ℂ exp(-Y)`）。人手の 13 行と 1 対 1
+（1 行目（`h` の置き方）は主張が `h` を展開した式なので段を持たず、2〜4 行目は 1 段）。 -/
+theorem V2_mul_V2Inv {K2 : ℝ} (hK2 : 0 < K2) :
+    V2 M K2 * (((((2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ) •
+        matExp (-((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M))) = 1 := by
+  set a : ℝ := (2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2) with ha
+  set Y : TensorPow M := (Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M with hY
+  have hane : a ≠ 0 := ne_of_gt (V2_prefactor_pos hK2 M)
+  calc V2 M K2 * (((a⁻¹ : ℝ) : ℂ) • matExp (-Y))
+      = ((a : ℂ) • matExp Y) * (((a⁻¹ : ℝ) : ℂ) • matExp (-Y)) := by
+        rw [V2_exponential_representation hK2]; rfl
+        -- `V2_exponential_representation`、`a`・`Y` の置き方（`K_2^*`・`a` は `inclusion_rr_to_cc` の像）
+    _ = (a : ℂ) • (matExp Y * (((a⁻¹ : ℝ) : ℂ) • matExp (-Y))) :=
+        smul_mul_matrix_tensorPow _ _ _                    -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (a : ℂ) • (((a⁻¹ : ℝ) : ℂ) • (matExp Y * matExp (-Y))) := by
+        rw [mul_smul_matrix_tensorPow]                     -- `scalar_multiple_factors_out_of_right_factor`
+    _ = ((a : ℂ) * ((a⁻¹ : ℝ) : ℂ)) • (matExp Y * matExp (-Y)) :=
+        smul_smul _ _ _                                    -- `scalar_multiple_is_associative`（mathlib の `smul_smul`）
+    _ = ((a * a⁻¹ : ℝ) : ℂ) • (matExp Y * matExp (-Y)) := by
+        rw [real_inclusion_mul]                            -- `real_inclusion_preserves_product`（`a → a`, `b → a^{-1}`）
+    _ = ((1 : ℝ) : ℂ) • (matExp Y * matExp (-Y)) := by
+        rw [mul_inv_cancel₀ hane]                          -- ℝ で `aa^{-1} = 1`
+    _ = (1 : ℂ) • (matExp Y * matExp (-Y)) := by
+        rw [Complex.ofReal_one]                            -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 1`
+    _ = matExp Y * matExp (-Y) := one_smul_tensorPow _     -- `scalar_multiple_by_one`
+    _ = matExp (-(-Y)) * matExp (-Y) := by
+        rw [neg_neg_tensorPow]                             -- `matrix_double_negation`（`A → Y`）
+    _ = 1 := matExp_neg_mul_matExp_tensorPow _             -- `exp_of_negative_is_left_inverse`（`A → -Y`）
+
+/-- **人手 `V2_invertible` の 2 本目の鎖**: `hV_2 = I`。人手の 12 行と 1 対 1
+（1 行目（`h` の置き方）は主張が `h` を展開した式なので段を持たず、2〜4 行目は 1 段）。 -/
+theorem V2Inv_mul_V2 {K2 : ℝ} (hK2 : 0 < K2) :
+    (((((2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ) •
+        matExp (-((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M))) * V2 M K2 = 1 := by
+  set a : ℝ := (2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2) with ha
+  set Y : TensorPow M := (Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M with hY
+  have hane : a ≠ 0 := ne_of_gt (V2_prefactor_pos hK2 M)
+  calc (((a⁻¹ : ℝ) : ℂ) • matExp (-Y)) * V2 M K2
+      = (((a⁻¹ : ℝ) : ℂ) • matExp (-Y)) * ((a : ℂ) • matExp Y) := by
+        rw [V2_exponential_representation hK2]; rfl
+        -- `V2_exponential_representation`、`a`・`Y` の置き方（`K_2^*`・`a` は `inclusion_rr_to_cc` の像）
+    _ = ((a⁻¹ : ℝ) : ℂ) • (matExp (-Y) * ((a : ℂ) • matExp Y)) :=
+        smul_mul_matrix_tensorPow _ _ _                    -- `scalar_multiple_factors_out_of_left_factor`
+    _ = ((a⁻¹ : ℝ) : ℂ) • ((a : ℂ) • (matExp (-Y) * matExp Y)) := by
+        rw [mul_smul_matrix_tensorPow]                     -- `scalar_multiple_factors_out_of_right_factor`
+    _ = (((a⁻¹ : ℝ) : ℂ) * (a : ℂ)) • (matExp (-Y) * matExp Y) :=
+        smul_smul _ _ _                                    -- `scalar_multiple_is_associative`（mathlib の `smul_smul`）
+    _ = ((a⁻¹ * a : ℝ) : ℂ) • (matExp (-Y) * matExp Y) := by
+        rw [real_inclusion_mul]                            -- `real_inclusion_preserves_product`（`a → a^{-1}`, `b → a`）
+    _ = ((1 : ℝ) : ℂ) • (matExp (-Y) * matExp Y) := by
+        rw [inv_mul_cancel₀ hane]                          -- ℝ で `a^{-1}a = 1`
+    _ = (1 : ℂ) • (matExp (-Y) * matExp Y) := by
+        rw [Complex.ofReal_one]                            -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 1`
+    _ = matExp (-Y) * matExp Y := one_smul_tensorPow _     -- `scalar_multiple_by_one`
+    _ = 1 := matExp_neg_mul_matExp_tensorPow _             -- `exp_of_negative_is_left_inverse`（`A → Y`）
+
+/-- 人手の `V_2`（`def_transfer_matrix`、`K_2 > 0`）を単元として。人手 `V2_invertible` の最後の 2 行のとおり、
+上の二つの積から `def_invertible_elements_of_R` の可逆の定義（`g → V_2`, `h → (a^{-1})_ℂ exp(-Y)`）で作る。
 `V2_exponential_representation` により、`V2H2FormUnits` を `s_2 = sinh 2K_2`, `K_2^*` で評価した単元と
-同じ行列を値にもつ。 -/
-noncomputable def V2Units (M : ℕ) {K2 : ℝ} (hK2 : 0 < K2) : (TensorPow M)ˣ :=
-  (V2H2FormUnits M (sinh_two_mul_pos hK2) ((Kstar K2 : ℝ) : ℂ)).copy (V2 M K2)
-    (V2_exponential_representation hK2) _ rfl
+同じ単元である（`V2Units_eq_V2H2FormUnits`）。 -/
+noncomputable def V2Units (M : ℕ) {K2 : ℝ} (hK2 : 0 < K2) : (TensorPow M)ˣ where
+  val := V2 M K2
+  inv := (((((2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ) •
+    matExp (-((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M)))
+  val_inv := V2_mul_V2Inv hK2
+  inv_val := V2Inv_mul_V2 hK2
+
+/-- **人手 `V2_invertible` の逆元**: `V_2^{-1} = (a^{-1})_ℂ exp(-Y)`（`def_invertible_elements_of_R` の逆元の一意性と記号
+`g^{-1}`。Lean の単元の逆元は `V2Units` の作り方のとおり）。 -/
+theorem V2Units_inv_val {K2 : ℝ} (hK2 : 0 < K2) :
+    (((V2Units M hK2)⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+      = (((((2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2))⁻¹ : ℝ) : ℂ) •
+          matExp (-((Complex.I * ((Kstar K2 : ℝ) : ℂ)) • H2 M))) := rfl
 
 @[simp]
 theorem V2Units_val {K2 : ℝ} (hK2 : 0 < K2) :
