@@ -1415,6 +1415,15 @@ targets=(
   Ising2D.factorization_prep_sq_add_sq
   Ising2D.factorization_prep_two_mul_mul
   Ising2D.factorization_prep_sq_sub_sq
+  Ising2D.euler_cos_as_exp
+  Ising2D.euler_sin_as_exp
+  Ising2D.factorization_prep_exp_mul_exp_neg
+  Ising2D.factorization_prep_exp_add_exp_neg
+  Ising2D.factorization_prep_exp_eq_cos_add_sin
+  Ising2D.factorization_prep_exp_neg_eq_cos_sub_sin
+  Ising2D.factorization_aux_plus
+  Ising2D.factorization_aux_minus
+  Ising2D.factorization_prep_C_eq_S_mul_c2
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.B1mat_col_zero
