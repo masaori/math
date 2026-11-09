@@ -116,14 +116,15 @@ theorem det_AMat_eq_gamma1_sq_add (K : IsingConst) (θ : ℝ) :
         Matrix.det_fin_two_of _ _ _ _                            -- 行列式の定義
     _ = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) := by ring   -- ℂ の積と加法逆元
 
-/-- **人手証明 Step 2 の準備**: `exp(iθ)exp(-iθ) = 1`（`theorem_exp_product` と `theorem_exp_zero`）。 -/
+/-- **人手証明 Step 2 の準備**: `exp(iθ)exp(-iθ) = 1`（`scalar_exp_product` と `scalar_exp_zero` を `K = ℂ` で）。
+人手の準備の `e_- := exp(-iθ)` の `-iθ` は `multiply_by_minus_one` の `-(iθ)` で、ここの `-(I * θ)` と同じ読みである。 -/
 theorem exp_I_mul_exp_neg_I_mul (θ : ℝ) :
     Complex.exp (Complex.I * (θ : ℂ)) * Complex.exp (-(Complex.I * (θ : ℂ))) = 1 :=
   calc Complex.exp (Complex.I * (θ : ℂ)) * Complex.exp (-(Complex.I * (θ : ℂ)))
       = Complex.exp (Complex.I * (θ : ℂ) + -(Complex.I * (θ : ℂ))) :=
-        (Complex.exp_add _ _).symm                               -- `theorem_exp_product`
+        (Complex.exp_add _ _).symm                               -- `scalar_exp_product`（`K = ℂ`）
     _ = Complex.exp 0 := by rw [add_neg_cancel]                  -- `iθ + (-iθ) = 0`
-    _ = 1 := Complex.exp_zero                                    -- `theorem_exp_zero`
+    _ = 1 := Complex.exp_zero                                    -- `scalar_exp_zero`（`K = ℂ`）
 
 /-- **人手証明 Step 2**（鎖の 3 行目まで）:
 `γ_2(θ)γ_2(-θ) = -(s_2^*)^2((c_1u - s_1c_2)^2 + v^2)`。 -/

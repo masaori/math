@@ -45,7 +45,7 @@ rep.check(det_by_definition(Agam) == Agam.det(), "def_det_two_by_two の det = S
 # e_+e_- の鎖の第 4 行（ほぼ自明な行。記録のために残す）: iθ + (-iθ) = 0 を QQ(i)[θ] で
 K0.<i0> = QuadraticField(-1)
 Rt.<t> = PolynomialRing(K0)
-rep.check(i0 * t + (-i0 * t) == 0, "e_+e_- の鎖 第 4 行: iθ + (-iθ) = 0_C")
+rep.check(i0 * t + (-(i0 * t)) == 0, "e_+e_- の鎖 第 4 行: iθ + (-iθ) = 0_C")
 
 # −(−z) = z の鎖 5 行（実数の対で）
 Rxy.<x, y> = PolynomialRing(QQ)
