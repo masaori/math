@@ -17,4 +17,8 @@ def FiniteGraphConnected {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
 abbrev FiniteSimpleCycle {n : ℕ} (G : FiniteSimpleGraph n) (u : Fin n) :=
   {p : G.Walk u u // p.IsCycle}
 
+/-- A connected finite simple graph without a simple cycle. -/
+def FiniteTree {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
+  FiniteGraphConnected G ∧ ∀ u : Fin n, ¬ Nonempty (FiniteSimpleCycle G u)
+
 end Ising2DLambda.Tools

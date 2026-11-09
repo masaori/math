@@ -12434,6 +12434,30 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_tree",
+              focus: {
+                id: "tools_definition_finite_tree",
+                kind: "definition",
+                title: { text: "有限木" },
+                labels: ["def_finite_tree"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteTree"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " が連結（", ref("def_finite_graph_connected"), "）であり、",
+                    "任意の頂点 ", math(String.raw`v\in V`), " を始終点とする ",
+                    ref("def_finite_graph_cycle"), " が存在しないとき、",
+                    math(String.raw`G`), " を木と呼ぶ。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12450,8 +12474,7 @@ S&=(S-T)+T
                   paragraph([
                     ref("def_finite_simple_graph"), " の空でない頂点集合 ", math(String.raw`V`),
                     " と辺集合 ", math(String.raw`E`), " を取る。グラフ ", math(String.raw`(V,E)`),
-                    " が連結（", ref("def_finite_graph_connected"), "）で ",
-                    ref("def_finite_graph_cycle"), " を持たないなら、",
+                    " が木（", ref("def_finite_tree"), "）なら、",
                   ]),
                   displayMath(String.raw`|E|+1=|V|`),
                   paragraph(["が成り立つ。頂点と辺の個数はいずれも自然数である。"]),
@@ -12471,10 +12494,9 @@ S&=(S-T)+T
                     "基点と反対の成分にある端点の路が、その辺から始まる。",
                     "従ってこの対応は全単射である。",
                   ]),
-                  paragraph(["全単射による個数の一致と、空でない有限集合から一点を除く個数より、"]),
-                  displayMath(String.raw`|E|=|V\setminus\{o\}|\qquad\bigl(\because\ \text{上で作った全単射}\bigr)`),
                   displayMath(String.raw`\begin{aligned}
-|E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ |E|=|V\setminus\{o\}|\text{ の両辺に }1\text{ を加える}\bigr)\\
+|E|&=|V\setminus\{o\}|&&\bigl(\because\ \text{上で作った全単射}\bigr)\\
+|E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ \text{直前の等式の両辺に }1\text{ を加える}\bigr)\\
 &=|V|&&\bigl(\because\ o\in V\text{ と有限集合の一点除去}\bigr)
 \end{aligned}`),
                 ],
