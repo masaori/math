@@ -16,6 +16,8 @@ import Ising2DLambda.NecSuf.Tools.EvenEdgeProcessedVertexParity
 import Ising2DLambda.Tools.EvenEdgeProcessedVertexParityFromNecSuf
 import Ising2DLambda.Tools.TreeInduceRemoveLeaf
 import Ising2DLambda.NecSuf.Tools.TreeInduceRemoveLeaf
+import Ising2DLambda.Tools.RootedTreeHasNonrootLeaf
+import Ising2DLambda.NecSuf.Tools.RootedTreeHasNonrootLeaf
 import Ising2DLambda.NecSuf.Tools.EvenEdgeSymmDiff
 import Ising2DLambda.Tools.EvenEdgeSymmDiffFromNecSuf
 import Ising2DLambda.Tools.EvenEdgeTreeComplementInjective

@@ -12356,8 +12356,9 @@ S&=(S-T)+T
                     "従ってこの対応は全単射である。",
                   ]),
                   paragraph(["全単射による個数の一致と、空でない有限集合から一点を除く個数より、"]),
+                  displayMath(String.raw`|E|=|V\setminus\{o\}|\qquad\bigl(\because\ \text{上で作った全単射}\bigr)`),
                   displayMath(String.raw`\begin{aligned}
-|E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ \text{上で作った全単射と両辺への }1\text{ の加算}\bigr)\\
+|E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ |E|=|V\setminus\{o\}|\text{ の両辺に }1\text{ を加える}\bigr)\\
 &=|V|&&\bigl(\because\ o\in V\text{ と有限集合の一点除去}\bigr)
 \end{aligned}`),
                 ],
@@ -12685,6 +12686,55 @@ d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \text{接続辺集
             role: "supporting",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_claim_rooted_tree_nonroot_leaf",
+              focus: {
+                id: "tools_claim_rooted_tree_nonroot_leaf",
+                kind: "claim",
+                title: { text: "根を持つ二頂点以上の有限木には根でない葉がある" },
+                labels: ["claim_rooted_tree_nonroot_leaf"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.rootedTree_has_nonrootLeaf",
+                  "Ising2DLambda.NecSuf.Tools.rootedTree_has_nonrootLeaf",
+                ],
+                verification: ["sagemath/check/rooted-tree-nonroot-leaf"],
+                statement: [
+                  paragraph([
+                    "二頂点以上の有限頂点集合 ", math(String.raw`V`),
+                    " 上の木 ", math(String.raw`T=(V,F)`),
+                    " と根 ", math(String.raw`o\in V`),
+                    " を取る。根と異なる葉 ", math(String.raw`v\in V\setminus\{o\}`),
+                    " が存在する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "木の単純路のうち長さが最大のものを ",
+                    math(String.raw`p`), " とし、その両端を ",
+                    math(String.raw`x,y\in V`), " とする。",
+                    "木は連結で ", math(String.raw`|V|\ge2`),
+                    " なので、", math(String.raw`p`), " の長さは正であり、",
+                    math(String.raw`x\ne y`), " である。",
+                  ]),
+                  paragraph([
+                    "端点 ", math(String.raw`x`),
+                    " の隣接頂点が路の外にあれば、その辺を付けてより長い単純路を作れる。",
+                    "路上の隣接頂点は、木の路の一意性から ",
+                    math(String.raw`p`), " の二番目の頂点に限られる。",
+                    "従って ", math(String.raw`x`), " は葉である。",
+                    "路を逆にして同じ議論を ", math(String.raw`y`),
+                    " に適用すると、", math(String.raw`y`), " も葉である。",
+                    math(String.raw`x\ne y`),
+                    " だから、この二つの葉の少なくとも一方は根と異なる。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_tree_induce_remove_leaf",
               focus: {
                 id: "tools_claim_tree_induce_remove_leaf",
@@ -12816,8 +12866,8 @@ d_{A\mathbin\triangle\{e\}}(w)\bmod 2
                     " の辺数は偶数である、という条件を保つ。初期状態では明らかである。",
                   ]),
                   paragraph([
-                    math(String.raw`|U|>1`), " なら、誘導部分木の最長単純路の両端は葉であり、",
-                    "両端は異なるので少なくとも一方は根ではない。これを ",
+                    math(String.raw`|U|>1`), " なら、", ref("claim_rooted_tree_nonroot_leaf"),
+                    " より根でない葉がある。これを ",
                     math(String.raw`v\in U\setminus\{o\}`), " とする。",
                     "その葉から未処理の頂点へ伸びる唯一の木の辺を ",
                     math(String.raw`e_v\in F`), " とする。",

@@ -560,6 +560,7 @@ export const ALL_LABELS = [
   "claim_root_polynomial_distinct_factorization",
   "claim_root_polynomial_factor_quotient",
   "claim_root_polynomial_remaining_factor_value_ne_zero",
+  "claim_rooted_tree_nonroot_leaf",
   "claim_rotation_phase_as_turning_power",
   "claim_row_config_min_unique",
   "claim_row_config_minimal_period_divides_L",
