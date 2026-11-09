@@ -12099,12 +12099,12 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                   math(String.raw`n:=\min A_g\in\mathbb N`), " と取れる。したがって",
                 ]),
                 displayMath(String.raw`\mathrm{ac}_m(f)\ne0,\quad\mathrm{ac}_n(g)\ne0
-\qquad\bigl(\because\ m\in A_f,\ n\in A_g\bigr),`),
+\qquad\bigl(\because\ m\in A_f,\ n\in A_g\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_i(f)&=0\quad(i\in\mathbb N,\ i<m)
 &&\bigl(\because\ m\text{ の最小性}\bigr)\\
 \mathrm{ac}_j(g)&=0\quad(j\in\mathbb N,\ j<n)
-&&\bigl(\because\ n\text{ の最小性}\bigr).
+&&\bigl(\because\ n\text{ の最小性}\bigr)
 \end{aligned}`),
                 paragraph([
                   "有限集合 ", math(String.raw`B:=\{(i,j)\in\mathbb N^2\mid i+j=m+n\}`),
@@ -12117,7 +12117,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 &=0\cdot\mathrm{ac}_j(g)
 &&\bigl(\because\ \mathrm{ac}_i(f)=0\bigr)\\
 &=0
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr)
 \end{aligned}`),
                 paragraph([
                   math(String.raw`m\le i`), " のときは、もし ", math(String.raw`i=m`),
@@ -12132,14 +12132,14 @@ m+j&<i+j
 m+j&<m+n
 &&\bigl(\because\ i+j=m+n\bigr)\\
 j&<n
-&&\bigl(\because\ \mathbb N\text{ の加法の消去}\bigr),
+&&\bigl(\because\ \mathbb N\text{ の加法の消去}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_i(f)\mathrm{ac}_j(g)
 &=\mathrm{ac}_i(f)\cdot0
 &&\bigl(\because\ \mathrm{ac}_j(g)=0\bigr)\\
 &=0
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr)
 \end{aligned}`),
                 paragraph([
                   "どちらの場合も、", math(String.raw`B`), " の ", math(String.raw`(m,n)`),
@@ -12158,7 +12158,7 @@ j&<n
 &=\mathrm{ac}_m(f)\mathrm{ac}_n(g)
 &&\bigl(\because\ (m,n)\in B\text{ と他の全項が零}\bigr)\\
 &\ne0
-&&\bigl(\because\ \blkref{claim_qbar_no_zero_divisors}\text{ と両係数の非零性}\bigr).
+&&\bigl(\because\ \blkref{claim_qbar_no_zero_divisors}\text{ と両係数の非零性}\bigr)
 \end{aligned}`),
                 paragraph(["一方、仮定からは、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -12166,7 +12166,7 @@ j&<n
 &=\mathrm{ac}_{m+n}(0_{\rm pol})
 &&\bigl(\because\ fg=0_{\rm pol}\bigr)\\
 &=0
-&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の零多項式の係数}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の零多項式の係数}\bigr)
 \end{aligned}`),
                 paragraph([
                   "これは上の非零性に反する。したがって ", math(String.raw`f=0_{\rm pol}`),
@@ -12896,6 +12896,48 @@ A_i\cap(E\setminus F)
                 {
                   role: "supportingClaim",
                   element: {
+                    id: "tools_claim_unprocessed_tree_edge_unselected",
+                    kind: "claim",
+                    title: { text: "未処理の二頂点を結ぶ木辺は未選択である" },
+                    labels: ["claim_unprocessed_tree_edge_unselected"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.Tools.rootedLeafEdge_unselected",
+                      "Ising2DLambda.NecSuf.Tools.unprocessedEdge_unselected",
+                      "Ising2DLambda.Tools.rootedLeafEdge_unselected_from_necSuf",
+                    ],
+                    verification: ["sagemath/check/unprocessed-tree-edge-unselected"],
+                    statement: [
+                      paragraph([
+                        "有限グラフ ", math(String.raw`G=(V,E)`), " の全域木 ",
+                        math(String.raw`T=(V,F)`), " と未処理頂点集合 ",
+                        math(String.raw`U\subseteq V`), "、選択辺集合 ",
+                        math(String.raw`A\subseteq E`), " を取る。",
+                        "選択済みの木辺はすべて ", math(String.raw`V\setminus U`),
+                        " の頂点に接するとする。", math(String.raw`U`),
+                        " 上の誘導部分木で隣接する頂点 ",
+                        math(String.raw`v,p`), " を取り、",
+                        math(String.raw`e:=\{v,p\}`), " と置く。このとき ",
+                        math(String.raw`e\notin A`), " である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "誘導部分木の隣接の定義から ", math(String.raw`e\in F`),
+                        " であり、全域木より ", math(String.raw`e\in E`),
+                        " である。誘導部分木の頂点 ", math(String.raw`v,p`),
+                        " はともに ", math(String.raw`U`), " に属する。",
+                        "仮に ", math(String.raw`e\in A`), " なら、選択済みの木辺の条件から ",
+                        math(String.raw`e`), " の端点に ",
+                        math(String.raw`V\setminus U`), " の頂点があるが、",
+                        "これは両端点が ", math(String.raw`U`), " に属することに反する。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
                     id: "tools_claim_finite_rooted_descent",
                     kind: "claim",
                     title: { text: "根を残して頂点を一つずつ除く有限下降は根だけに達する" },
@@ -13053,7 +13095,7 @@ A_i\cap(E\setminus F)
                     math(String.raw`v\in U\setminus\{o\}`), " とする。",
                     "その葉から未処理の頂点へ伸びる唯一の木の辺を ",
                     math(String.raw`e_v\in F`), " とする。",
-                    "この辺はまだ選択されていない。",
+                    ref("claim_unprocessed_tree_edge_unselected"), " により、この辺はまだ選択されていない。",
                     ref("claim_even_edge_leaf_choice"), " により、",
                     math(String.raw`e_v`), " の採否を選び、", math(String.raw`v`),
                     " に接する辺数を偶数にする。", math(String.raw`v`),
