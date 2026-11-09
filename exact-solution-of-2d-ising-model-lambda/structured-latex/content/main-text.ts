@@ -12483,6 +12483,30 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_induced_subgraph",
+              focus: {
+                id: "tools_definition_finite_induced_subgraph",
+                kind: "definition",
+                title: { text: "頂点部分集合上の誘導部分グラフ" },
+                labels: ["def_finite_induced_subgraph"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteInducedSubgraph"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と頂点部分集合 ", math(String.raw`U\subseteq V`), " を取る。",
+                    math(String.raw`E_U:=\{\{v,w\}\in E\mid v\in U,\ w\in U\}`),
+                    " と置き、", math(String.raw`G[U]:=(U,E_U)`),
+                    " を ", math(String.raw`U`), " 上の誘導部分グラフと呼ぶ。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12920,12 +12944,12 @@ d_{A_1}(v)\bmod 2
                     math(String.raw`T=(V,F)`), " と根 ", math(String.raw`o\in V`),
                     " を取る。根と異なる葉 ", math(String.raw`v\in V\setminus\{o\}`),
                     " を除くと、", math(String.raw`V\setminus\{v\}`),
-                    " 上の誘導部分グラフは根を含む木である。",
+                    " 上の ", ref("def_finite_induced_subgraph"), " は根を含む木である。",
                   ]),
                 ],
                 proof: [
+                  displayMath(String.raw`o\in V\setminus\{v\}\quad(\because\ o\in V\text{ かつ }o\ne v)`),
                   paragraph([
-                    math(String.raw`o\ne v`), " より、根は残る。",
                     "相異なる残りの二頂点 ",
                     math(String.raw`x,y\in V\setminus\{v\}`),
                     " を取る。木 ", math(String.raw`T`),

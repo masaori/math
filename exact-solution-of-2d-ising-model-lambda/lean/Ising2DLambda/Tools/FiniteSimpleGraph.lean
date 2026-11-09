@@ -25,4 +25,8 @@ def FiniteTree {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
 def FiniteSpanningTree {n : ℕ} (G T : FiniteSimpleGraph n) : Prop :=
   FiniteTree T ∧ T ≤ G
 
+/-- Keep exactly the edges whose two endpoints lie in the chosen vertex set. -/
+abbrev FiniteInducedSubgraph {n : ℕ} (G : FiniteSimpleGraph n) (U : Set (Fin n)) :=
+  G.induce U
+
 end Ising2DLambda.Tools
