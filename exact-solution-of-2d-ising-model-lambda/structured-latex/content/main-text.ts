@@ -12595,9 +12595,13 @@ F\cup\{e\}&\subseteq E\cup\{e\}&&\bigl(\because\ F\subseteq E\bigr)\\
                 ],
                 proof: [
                   paragraph([
-                    "列の長さについて帰納法を使う。", math(String.raw`i=0`), " では ",
-                    math(String.raw`F_0=\varnothing\subseteq E`), " であり、辺が無いので閉路も無い。",
+                    "列の長さについて帰納法を使う。", math(String.raw`i=0`), " では",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+F_0&=\varnothing&&\bigl(\because\ \text{辺選択の初期値}\bigr)\\
+&\subseteq E&&\bigl(\because\ \varnothing\text{ は任意の集合に含まれる}\bigr)
+\end{aligned}`),
+                  paragraph(["であり、辺が無いので閉路も無い。"]),
                   paragraph([
                     math(String.raw`F_{i-1}\subseteq E`), " かつ閉路が無いと仮定する。",
                     "規則の第二の場合には ", math(String.raw`F_i=F_{i-1}`),
@@ -12612,6 +12616,64 @@ F_i&=F_{i-1}\cup\{e\}&&\bigl(\because\ \text{辺選択の規則}\bigr)\\
                   paragraph([
                     "を得て、同じ主張から ", math(String.raw`(V,F_i)`),
                     " に閉路が無い。以上で帰納法が閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_forest_edge_scan_all_edges_reachable",
+              focus: {
+                id: "tools_claim_forest_edge_scan_all_edges_reachable",
+                kind: "claim",
+                title: { text: "全ての辺を調べた後は各辺の両端が接続する" },
+                labels: ["claim_forest_edge_scan_all_edges_reachable"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.forestEdgeScan_allEdges_reachable",
+                  "Ising2DLambda.NecSuf.Tools.forestEdgeScan_allEdges_reachable",
+                ],
+                verification: ["sagemath/check/forest-edge-scan-all-edges-reachable"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と、両端が ", math(String.raw`V`), " に属する頂点対の有限列 ",
+                    math(String.raw`(a_i,b_i)_{i=1}^{m}`), " を取る。任意の辺 ",
+                    math(String.raw`\{u,v\}\in E`), " について、順序付き対 ",
+                    math(String.raw`(u,v)`), " がこの列に現れるとする。",
+                    ref("claim_forest_edge_scan_invariant"), " の規則で ",
+                    math(String.raw`F_0,\ldots,F_m`), " を作る。このとき、任意の辺 ",
+                    math(String.raw`\{u,v\}\in E`), " の両端は ",
+                    math(String.raw`(V,F_m)`), " の路で結ばれる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の辺 ", math(String.raw`e=\{u,v\}\in E`), " を固定する。",
+                    "列に ", math(String.raw`(u,v)`), " が現れる位置を ",
+                    math(String.raw`j\in\{1,\ldots,m\}`), " とする。",
+                    "その時点で両端が既に ", math(String.raw`(V,F_{j-1})`),
+                    " の路で結ばれるなら、その路の各辺は ",
+                    math(String.raw`F_{j-1}\subseteq F_j`), " に属する。",
+                    "結ばれないなら辺選択の規則により ",
+                    math(String.raw`e\in F_j`), " であり、一辺の路がある。",
+                  ]),
+                  paragraph([
+                    "各 ", math(String.raw`k\in\{j+1,\ldots,m\}`),
+                    " について、辺選択のどちらの場合も ",
+                  ]),
+                  displayMath(String.raw`F_{k-1}\subseteq F_k\qquad(\because\ \text{辺選択の規則})`),
+                  paragraph([
+                    "である。従って ", math(String.raw`F_j\subseteq F_m`),
+                    " であり、位置 ", math(String.raw`j`),
+                    " で得た路の全ての辺は最後まで残る。",
+                    ref("def_vertex_simple_path"), " により ",
+                    math(String.raw`u,v`), " は ", math(String.raw`(V,F_m)`),
+                    " の路で結ばれる。辺 ", math(String.raw`e`),
+                    " は任意だったので結論を得る。",
                   ]),
                 ],
               },
