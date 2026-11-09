@@ -12710,8 +12710,10 @@ F_i&=F_{i-1}\cup\{e\}&&\bigl(\because\ \text{辺選択の規則}\bigr)\\
                 proof: [
                   paragraph([
                     "頂点集合 ", math(String.raw`V`), " は有限なので、順序付き頂点対の全列挙も有限である。",
-                    ref("claim_forest_edge_scan_invariant"), " より ",
-                    math(String.raw`F_m\subseteq E`), " であり、", math(String.raw`(V,F_m)`),
+                  ]),
+                  displayMath(String.raw`F_m\subseteq E\quad\bigl(\because\ \blkref{claim_forest_edge_scan_invariant}\bigr)`),
+                  paragraph([
+                    ref("claim_forest_edge_scan_invariant"), " より ", math(String.raw`(V,F_m)`),
                     " に閉路は無い。",
                     ref("claim_forest_edge_scan_all_edges_reachable"), " より、",
                     "元の各辺の両端は ", math(String.raw`(V,F_m)`), " の路で結ばれる。",
