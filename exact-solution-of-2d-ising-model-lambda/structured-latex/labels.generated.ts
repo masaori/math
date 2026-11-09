@@ -120,6 +120,7 @@ export const ALL_LABELS = [
   "claim_empty_pfaffian_determinant",
   "claim_even_edge_chain_intersection",
   "claim_even_edge_chain_torus_normal_form",
+  "claim_even_edge_leaf_choice",
   "claim_even_edge_subset_root_parity",
   "claim_even_edge_subset_tree_complement_injective",
   "claim_even_edge_symmetric_difference",

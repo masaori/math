@@ -12612,6 +12612,68 @@ d_A(o)&=\sum_{v\in V}d_A(v)-\sum_{v\in V\setminus\{o\}}d_A(v)&&\bigl(\because\ o
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_even_edge_leaf_choice",
+        labels: [],
+        title: { text: "葉で接続辺の偶数性を決める" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_even_edge_leaf_choice",
+              focus: {
+                id: "tools_claim_even_edge_leaf_choice",
+                kind: "claim",
+                title: { text: "一辺の採否で頂点の接続辺数を一意に偶数にできる" },
+                labels: ["claim_even_edge_leaf_choice"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.Tools.evenEdge_leafChoice",
+                  "Ising2DLambda.NecSuf.Tools.incidenceParity_leafChoice",
+                  "Ising2DLambda.Tools.evenEdge_leafChoice_from_necSuf",
+                ],
+                verification: ["sagemath/check/even-edge-leaf-choice"],
+                statement: [
+                  paragraph([
+                    "有限頂点集合 ", math(String.raw`V`), " と、相異なる二頂点からなる辺の有限集合 ",
+                    math(String.raw`E`), " を取る。頂点 ", math(String.raw`v\in V`),
+                    " に接する辺 ", math(String.raw`e\in E`), " と辺集合 ",
+                    math(String.raw`A\subset E`), " を固定する。",
+                    math(String.raw`A_0:=A`), "、",
+                    math(String.raw`A_1:=A\mathbin\triangle\{e\}`),
+                    " とすると、", math(String.raw`v`), " に接する辺の本数が偶数になる ",
+                    math(String.raw`A_b`), " は ", math(String.raw`b\in\{0,1\}`),
+                    " の中で一意に定まる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`d_A(v)`), " を ", math(String.raw`v`),
+                    " に接する ", math(String.raw`A`), " の辺の本数とする。",
+                    "一辺集合 ", math(String.raw`\{e\}`), " は ", math(String.raw`v`),
+                    " にちょうど一辺を持つ。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+d_{A_1}(v)&\equiv d_A(v)+d_{\{e\}}(v)\pmod 2&&\bigl(\because\ \blkref{claim_even_edge_symmetric_difference}\bigr)\\
+&\equiv d_A(v)+1\pmod 2&&\bigl(\because\ v\in e\bigr)
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`d_A(v)`), " の偶奇は零か一である。",
+                    "零なら ", math(String.raw`A_0`), " だけが、",
+                    "一なら ", math(String.raw`A_1`), " だけが ",
+                    math(String.raw`v`), " で偶数になる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
