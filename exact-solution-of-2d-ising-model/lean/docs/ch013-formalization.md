@@ -55,7 +55,9 @@
 | `Ising2D.dvd_add_sub_one_iff` | (5) `μ+ν ≡ 1 (mod M) ⟺ ν = M+1-μ` | 同上 (5) |
 | `Ising2D.deltaMod_add_one_eq` | (5) のデルタ版 | 同上 (5) |
 | `Ising2D.thetaTilde_conj` | (1) `θ~_{M+1-μ} = 2π - θ~_μ` | `conjugate_index_of_check_Z_Y` |
-| `Ising2D.checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}`（人手の 4 行: (1)・指数法則・Euler の公式・`cos(2πj)=1, sin(2πj)=0`） | 同上 (2) |
+| `Ising2D.conj_index_exponent_real_chain` | (2) の準備の第一の鎖 `j_ℝθ~_{M+1-μ} = 2πj_ℝ + (-(j_ℝθ~_μ))`（人手の 4 行） | 同上 (2) |
+| `Ising2D.neg_I_mul_real_inclusion_neg` | (2) の準備の第二の鎖 `(-i)(-x)_ℂ = i x_ℂ`（人手の 7 行。積の像は `real_inclusion_mul`） | 同上 (2) |
+| `Ising2D.checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}`（主張の左辺からの鎖の 15 行。二項の和の像は `real_inclusion_add`） | 同上 (2) |
 | `Ising2D.checkPhase_conj` | (2) の右辺を `2M` 乗根の位相因子で書いた形 | 同上 (2) |
 | `Ising2D.checkZ_conj` / `checkY_conj`（`ClaimConjugateIndex.lean`） | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |

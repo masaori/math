@@ -1174,6 +1174,8 @@ targets=(
   Ising2D.dvd_add_sub_one_iff
   Ising2D.deltaMod_add_one_eq
   Ising2D.thetaTilde_conj
+  Ising2D.conj_index_exponent_real_chain
+  Ising2D.neg_I_mul_real_inclusion_neg
   "Ising2D.checkPhase_conj'"
   Ising2D.checkPhase_conj
   Ising2D.checkZ_conj
