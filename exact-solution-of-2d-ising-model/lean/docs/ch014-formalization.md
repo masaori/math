@@ -60,6 +60,7 @@
 | `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` / `actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` | 特殊化に使う、運動量の取り方に依らない補題（同じファイル。整数運動量の経路の記録もこれを使う） | 同上 |
 | `Ising2D.factorization_of_A_theta_general`（`ClaimFactorizationATheta.lean`） | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
 | `Ising2D.factorization_of_A_thetaTilde` | 上の `θ = θ~_μ` への特殊化 | 同上（「とくに」） |
+| `Ising2D.factorization_prep_sq_add_sq` / `factorization_prep_two_mul_mul` / `factorization_prep_sq_sub_sq`（同じファイル） | 証明の準備の `a^2 + b^2 = (cosh 2K_1)_ℂ`・`2ab = (sinh 2K_1)_ℂ`・`a^2 - b^2 = 1_ℂ`（人手の行と 1 段ずつの calc。まだ `B1_mul_B2_mul_B1_eq_explicit` から使われていない） | 同上（準備） |
 | `Ising2D.TVPlus_apply_checkZ` / `TVPlus_apply_checkY` | 原文の (z)・(y) の鎖（`def_T_V_plus` → `T_actions_on_check_Z_Y` → `linearity_of_T_V2` → `calc_of_TxT_check_Z_Y`（`B_2`）→ `linearity_of_T_on_check_Z_Y` → `calc_of_TxT_check_Z_Y`（`B_1(θ~)`）の 6 行の `calc`） | `T_V_plus_check_Z_Y` |
 | `Ising2D.B1mat_col_zero` / `B1mat_col_one` / `mulVec_mulVec_col`（`ClaimTVPlusAction.lean`） | (z)・(y) の列ベクトルが `B_1(θ~)` の第 1・第 2 列であること、`B_1(B_2(B_1 の第 j 列))` が `B_1B_2B_1` の第 j 列であること | `def_B1_theta_B2`（最後の鎖の 1 行目） |
 | **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`（(z)・(y) の鎖を 2 列に並べ、`factorization_of_A_thetaTilde` を当てる） | **`T_V_plus_check_Z_Y`** |

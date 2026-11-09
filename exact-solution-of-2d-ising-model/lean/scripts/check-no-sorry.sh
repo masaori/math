@@ -1412,6 +1412,9 @@ targets=(
   Ising2D.actsBy_TConj_V2_check_fromNecSuf
   Ising2D.factorization_of_A_theta_general
   Ising2D.factorization_of_A_thetaTilde
+  Ising2D.factorization_prep_sq_add_sq
+  Ising2D.factorization_prep_two_mul_mul
+  Ising2D.factorization_prep_sq_sub_sq
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.B1mat_col_zero
