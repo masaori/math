@@ -72,35 +72,108 @@ theorem gamma2_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : �
     gamma2 K (thetaTilde M (μ + k * M)) = gamma2 K (thetaTilde M μ) := by
   rw [thetaTilde_add_int_mul M hM, gamma2_add_two_pi_mul_int]
 
-/-- 原文 `periodicity_of_check_fermi` (2): `γ_2(-θ̃_{μ+kM}) = γ_2(-θ̃_μ)`。 -/
+/-- 人手 `periodicity_of_check_fermi` の準備の第二: `k ∈ ℤ` について `(-k)_ℝ = -k_ℝ`（人手の 6 行）。 -/
+theorem periodicity_prep_int_cast_neg (k : ℤ) : ((-k : ℤ) : ℝ) = -(k : ℝ) :=
+  calc ((-k : ℤ) : ℝ)
+      = ((-k : ℤ) : ℝ) + ((k : ℝ) + (-(k : ℝ))) := by
+        rw [add_neg_cancel, add_zero]             -- 1 行目: `k_ℝ + (-k_ℝ) = 0_ℝ` と零の性質
+    _ = (((-k : ℤ) : ℝ) + (k : ℝ)) + (-(k : ℝ)) := (add_assoc _ _ _).symm
+                                                  -- 2 行目: ℝ の加法の結合律
+    _ = (((-k + k : ℤ)) : ℝ) + (-(k : ℝ)) := by
+        rw [Int.cast_add]                         -- 3 行目: `ι_{ℤ→ℝ}` は和を保つ
+    _ = ((0 : ℤ) : ℝ) + (-(k : ℝ)) := by
+        rw [neg_add_cancel]                       -- 4 行目: ℤ で `(-k) + k = 0`
+    _ = (0 : ℝ) + (-(k : ℝ)) := by
+        rw [Int.cast_zero]                        -- 5 行目: `ι_{ℤ→ℝ}` は零を保つ
+    _ = -(k : ℝ) := zero_add _                    -- 6 行目: 零の性質
+
+/-- 人手 `periodicity_of_check_fermi` (2) の第二の鎖: `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行）。 -/
+theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
+    -thetaTilde M (μ + k * M) = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) :=
+  calc -thetaTilde M (μ + k * M)
+      = -(thetaTilde M μ + 2 * Real.pi * (k : ℝ)) := by
+        rw [thetaTilde_add_int_mul M hM]          -- 1 行目: 上の鎖（`thetaTilde_add_int_mul`）
+    _ = (-thetaTilde M μ) + (-(2 * Real.pi * (k : ℝ))) := neg_add _ _
+                                                  -- 2 行目: ℝ で `-(u+v) = (-u)+(-v)`
+    _ = (-thetaTilde M μ) + 2 * Real.pi * (-(k : ℝ)) := by
+        rw [neg_mul_eq_mul_neg]                   -- 3 行目: ℝ で `-(uv) = u(-v)`（`u → 2π`, `v → k_ℝ`）
+    _ = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
+        rw [periodicity_prep_int_cast_neg]        -- 4 行目: 準備の第二
+
+/-- 原文 `periodicity_of_check_fermi` (2): `γ_2(-θ̃_{μ+kM}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_neg_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
-    gamma2 K (-thetaTilde M (μ + k * M)) = gamma2 K (-thetaTilde M μ) := by
-  have h : -thetaTilde M (μ + k * M) = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
-    rw [thetaTilde_add_int_mul M hM]; push_cast; ring
-  rw [h, gamma2_add_two_pi_mul_int]
+    gamma2 K (-thetaTilde M (μ + k * M)) = gamma2 K (-thetaTilde M μ) :=
+  calc gamma2 K (-thetaTilde M (μ + k * M))
+      = gamma2 K (-thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ)) := by
+        rw [neg_thetaTilde_add_int_mul M hM]      -- 1 行目: 上の第二の鎖
+    _ = gamma2 K (-thetaTilde M μ) := gamma2_add_two_pi_mul_int K (-thetaTilde M μ) (-k)
+                                                  -- 2 行目: (1) を `θ = -θ̃_μ`, `-k ∈ ℤ` で
 
 /-! ## 共役添字 `M+1-μ`（原文 `periodicity_of_check_fermi` (3)） -/
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`。 -/
+/-- 人手 `periodicity_of_check_fermi` (3) の `θ̃_ν` の鎖（`ν := M+1-μ`）: `θ̃_ν = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行）。 -/
+theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
+    thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) :=
+  calc thetaTilde M ((M : ℤ) + 1 - μ)
+      = 2 * Real.pi - thetaTilde M μ := thetaTilde_conj hM μ
+                                                  -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
+    _ = 2 * Real.pi + (-thetaTilde M μ) := sub_eq_add_neg _ _
+                                                  -- 2 行目: ℝ の差の定義
+    _ = (-thetaTilde M μ) + 2 * Real.pi := add_comm _ _
+                                                  -- 3 行目: ℝ の加法の交換律
+    _ = (-thetaTilde M μ) + 2 * Real.pi * 1 := by
+        rw [mul_one]                              -- 4 行目: `1_ℝ` は積の単位元
+    _ = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
+        rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+
+/-- 人手 `periodicity_of_check_fermi` (3) の `-θ̃_ν` の鎖: `-θ̃_ν = θ̃_μ + 2π(-1)_ℝ`（人手の 5 行）。
+2 行目の人手の 1 つの恒等式 `-(u-v) = v+(-u)` は、mathlib の `neg_sub`（`-(u-v) = v-u`）と
+`sub_eq_add_neg`（差の定義）を続けて読む。 -/
+theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
+    -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) :=
+  calc -thetaTilde M ((M : ℤ) + 1 - μ)
+      = -(2 * Real.pi - thetaTilde M μ) := by
+        rw [thetaTilde_conj hM μ]                 -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
+    _ = thetaTilde M μ + (-(2 * Real.pi)) := by
+        rw [neg_sub, sub_eq_add_neg]              -- 2 行目: ℝ で `-(u-v) = v+(-u)`
+    _ = thetaTilde M μ + 2 * Real.pi * (-1) := by
+        rw [mul_neg_one]                          -- 3 行目: ℝ で `-u = u(-1_ℝ)`
+    _ = thetaTilde M μ + 2 * Real.pi * (-((1 : ℤ) : ℝ)) := by
+        rw [Int.cast_one]                         -- 4 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+    _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
+        rw [periodicity_prep_int_cast_neg 1]      -- 5 行目: 準備の第二を `k = 1` で
+
+/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (-thetaTilde M μ) := by
-  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
-    rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma2_add_two_pi_mul_int]
+    gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (-thetaTilde M μ) :=
+  calc gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))
+      = gamma2 K (-thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ)) := by
+        rw [thetaTilde_conj_eq_neg_add_two_pi hM] -- 1 行目: 上の `θ̃_ν` の鎖
+    _ = gamma2 K (-thetaTilde M μ) := gamma2_add_two_pi_mul_int K (-thetaTilde M μ) 1
+                                                  -- 2 行目: (1) を `θ = -θ̃_μ`, `k = 1` で
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)`。 -/
+/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_neg_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (thetaTilde M μ) := by
-  have h : -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
-    rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma2_add_two_pi_mul_int]
+    gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (thetaTilde M μ) :=
+  calc gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ))
+      = gamma2 K (thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ)) := by
+        rw [neg_thetaTilde_conj_eq_add_two_pi_neg_one hM]
+                                                  -- 1 行目: 上の `-θ̃_ν` の鎖
+    _ = gamma2 K (thetaTilde M μ) := gamma2_add_two_pi_mul_int K (thetaTilde M μ) (-1)
+                                                  -- 2 行目: (1) を `θ = θ̃_μ`, `k = -1` で
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`。 -/
+/-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`。
+人手の 5 行のうち 1・2 行目は 1 対 1 の段である。3〜5 行目（`def_gamma1_gamma2_of_theta` の展開、
+準備の `cos(-x) = cos x`、`def_gamma1_gamma2_of_theta`）は `gamma1_neg`（mathlib の `Real.cos_neg`）で受けている。 -/
 theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1 K (thetaTilde M μ) := by
-  have h : thetaTilde M ((M : ℤ) + 1 - μ) = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
-    rw [thetaTilde_conj hM]; push_cast; ring
-  rw [h, gamma1_add_two_pi_mul_int, gamma1_neg]
+    gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1 K (thetaTilde M μ) :=
+  calc gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ))
+      = gamma1 K (-thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ)) := by
+        rw [thetaTilde_conj_eq_neg_add_two_pi hM] -- 1 行目: 上の `θ̃_ν` の鎖
+    _ = gamma1 K (-thetaTilde M μ) := gamma1_add_two_pi_mul_int K (-thetaTilde M μ) 1
+                                                  -- 2 行目: (1) を `θ = -θ̃_μ`, `k = 1` で
+    _ = gamma1 K (thetaTilde M μ) := gamma1_neg K (thetaTilde M μ)
+                                                  -- 3〜5 行目（上の注記）
 
 /-! ## `r := |γ_2(θ̃_μ)|` -/
 

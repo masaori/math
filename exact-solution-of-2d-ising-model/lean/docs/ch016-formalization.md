@@ -16,8 +16,12 @@
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.gamma1_add_two_pi_mul_int` | `γ_1(θ + 2π k_ℝ) = γ_1(θ)` | `periodicity_of_check_fermi` (1) |
+| `Ising2D.periodicity_prep_int_cast_neg` | `(-k)_ℝ = -k_ℝ`（人手の 6 行と 1 対 1 の `calc`） | 同 準備の第二 |
 | `Ising2D.thetaTilde_add_int_mul` | `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ` | 同 (2) |
+| `Ising2D.neg_thetaTilde_add_int_mul` | `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行と 1 対 1 の `calc`） | 同 (2) の第二の鎖 |
 | `Ising2D.gamma1_thetaTilde_add_int_mul` / `gamma2_thetaTilde_add_int_mul` / `gamma2_neg_thetaTilde_add_int_mul` | `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)` ほか | 同 (2) |
+| `Ising2D.thetaTilde_conj_eq_neg_add_two_pi` | `θ̃_{M+1-μ} = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `θ̃_ν` の鎖 |
+| `Ising2D.neg_thetaTilde_conj_eq_add_two_pi_neg_one` | `-θ̃_{M+1-μ} = θ̃_μ + 2π(-1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `-θ̃_ν` の鎖 |
 | `Ising2D.gamma2_thetaTilde_conj` | `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma2_neg_thetaTilde_conj` | `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma1_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)` | 同 (3) |
