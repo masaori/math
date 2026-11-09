@@ -8404,7 +8404,7 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
                 paragraph([math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`N:=|\mathcal J|\in\mathbb N`), " と置く。", math(String.raw`k\in\{0,\ldots,N\}`), " に対して ", math(String.raw`v(k):=\sigma^{[k]}(i)\in\mathcal J`), " と定める（", ref("def_finite_map_iteration"), "）。これら ", math(String.raw`N+1`), " 個の値がすべて相異なると仮定する。このとき ", math(String.raw`v`), " は単射なので、有限集合の元を数えると、"]),
                 displayMath(String.raw`\begin{aligned}
 N+1&\le |\mathcal J|&&\bigl(\because\ \text{相異なる }N+1\text{ 個の値が }\mathcal J\text{ に属する}\bigr)\\
-|\mathcal J|&=N&&\bigl(\because\ N\text{ の定義}\bigr)
+&=N&&\bigl(\because\ N\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["となり、自然数の大小に反する。したがって相異なる二つの添字で値が一致する。小さい添字を ", math(String.raw`r`), "、大きい添字を ", math(String.raw`t`), " と書けば、"]),
                 displayMath(String.raw`\begin{aligned}
