@@ -12535,11 +12535,10 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                 proof: [
                   paragraph([
                     math(String.raw`D:=A\mathbin\triangle B`), " と置く。",
-                    "対称差の所属判定と木外辺での一致から ",
-                    math(String.raw`D\subset F`), " である。",
-                    "また ", ref("claim_even_edge_symmetric_difference"), " より、",
+                    ref("claim_even_edge_symmetric_difference"), " より、",
                     "どの頂点でも ", math(String.raw`D`), " の接続辺数は偶数である。",
                   ]),
+                  displayMath(String.raw`D\subset F\qquad\bigl(\because\ D=A\mathbin\triangle B,\ A,B\subset E,\ A\cap(E\setminus F)=B\cap(E\setminus F)\bigr)`),
                   paragraph([
                     "もし ", math(String.raw`D\ne\varnothing`), " なら、",
                     ref("claim_nonempty_tree_edge_subset_has_leaf"), " により、",
