@@ -21,4 +21,8 @@ abbrev FiniteSimpleCycle {n : ℕ} (G : FiniteSimpleGraph n) (u : Fin n) :=
 def FiniteTree {n : ℕ} (G : FiniteSimpleGraph n) : Prop :=
   FiniteGraphConnected G ∧ ∀ u : Fin n, ¬ Nonempty (FiniteSimpleCycle G u)
 
+/-- A spanning tree has the same vertex type and only edges from the ambient graph. -/
+def FiniteSpanningTree {n : ℕ} (G T : FiniteSimpleGraph n) : Prop :=
+  FiniteTree T ∧ T ≤ G
+
 end Ising2DLambda.Tools

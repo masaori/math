@@ -794,6 +794,7 @@ export const ALL_LABELS = [
   "def_finite_permutation_orbit_length",
   "def_finite_simple_graph",
   "def_finite_size_scaling_reading",
+  "def_finite_spanning_tree",
   "def_finite_tree",
   "def_first_hit_connecting_staircase",
   "def_fisher_zero_count_in_rational_disc",

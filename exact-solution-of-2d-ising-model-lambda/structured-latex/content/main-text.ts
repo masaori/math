@@ -12458,6 +12458,31 @@ S&=(S-T)+T
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_tools_definition_finite_spanning_tree",
+              focus: {
+                id: "tools_definition_finite_spanning_tree",
+                kind: "definition",
+                title: { text: "有限グラフの全域木" },
+                labels: ["def_finite_spanning_tree"],
+                habitat: "N",
+                lean: ["Ising2DLambda.Tools.FiniteSpanningTree"],
+                statement: [
+                  paragraph([
+                    ref("def_finite_simple_graph"), " のグラフ ", math(String.raw`G=(V,E)`),
+                    " と、", ref("def_finite_tree"), " の木 ", math(String.raw`T=(V_T,F)`),
+                    " を取る。", math(String.raw`V_T=V`), " かつ ",
+                    math(String.raw`F\subseteq E`), " のとき、", math(String.raw`T`),
+                    " を ", math(String.raw`G`), " の全域木と呼ぶ。",
+                    "頂点集合を共有することと辺集合の包含は、それぞれ別の条件である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_tools_claim_finite_tree_edge_count",
               focus: {
                 id: "tools_claim_finite_tree_edge_count",
@@ -12686,7 +12711,7 @@ A\mathbin\triangle B&\subset A\cup B&&\bigl(\because\ \text{対称差の定義}\
                     "これはその頂点での偶数性に反する。",
                   ]),
                   displayMath(String.raw`D=\varnothing\quad\bigl(\because\ D\ne\varnothing\text{ なら接続辺数が一かつ偶数の頂点がある}\bigr)`),
-                  displayMath(String.raw`A=B\quad\bigl(\because\ A\mathbin\triangle B=\varnothing\bigr)`),
+                  displayMath(String.raw`A=B\quad\bigl(\because\ D=A\mathbin\triangle B\text{ かつ }D=\varnothing\bigr)`),
                 ],
               },
             },
