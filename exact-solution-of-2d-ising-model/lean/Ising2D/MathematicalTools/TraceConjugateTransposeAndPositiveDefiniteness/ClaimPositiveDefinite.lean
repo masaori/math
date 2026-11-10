@@ -48,6 +48,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfHermitianIsHermitian
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimConjugateTransposeOfPauliMatrices
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Mathlib.LinearAlgebra.Matrix.PosDef
@@ -64,17 +65,9 @@ variable {M : ℕ}
 
 /-! ## Pauli 行列の共役転置
 
-Pauli 行列の転置 `pauliX_transpose`・`pauliZ_transpose`・`pauliY_transpose` は、人手 `transpose_of_pauli_x` ほかと 1 対 1 の
-鎖として `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` に置いた。 -/
-
-@[simp] theorem pauliX_conjTranspose : pauliXᴴ = pauliX := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliX]
-
-@[simp] theorem pauliZ_conjTranspose : pauliZᴴ = pauliZ := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliZ]
-
-@[simp] theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliY]
+Pauli 行列と 2 次の単位行列の共役転置 `pauliX_conjTranspose`・`pauliZ_conjTranspose`・`pauliY_conjTranspose`・
+`identity_matrix_two_conjTranspose` は、人手 `conjugate_transpose_of_pauli_x` ほかと 1 対 1 の鎖として
+`ClaimConjugateTransposeOfPauliMatrices.lean` に置いた。 -/
 
 /-! ## `siteProd` の共役転置
 
@@ -125,7 +118,7 @@ theorem Z_conjTranspose (m : Fin M) : (Z m)ᴴ = Z m := by
   · exact pauliX_conjTranspose
   · split
     · exact pauliZ_conjTranspose
-    · exact Matrix.conjTranspose_one
+    · exact identity_matrix_two_conjTranspose
 
 theorem Y_conjTranspose (m : Fin M) : (Y m)ᴴ = Y m := by
   rw [Y, siteProd_conjTranspose]
@@ -136,7 +129,7 @@ theorem Y_conjTranspose (m : Fin M) : (Y m)ᴴ = Y m := by
   · exact pauliX_conjTranspose
   · split
     · exact pauliY_conjTranspose
-    · exact Matrix.conjTranspose_one
+    · exact identity_matrix_two_conjTranspose
 
 theorem Y_transpose (m : Fin M) : (Y m)ᵀ = -(Y m) := by
   rw [Y, siteProd_transpose]

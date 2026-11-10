@@ -98,6 +98,12 @@ targets=(
   Ising2D.kroneckerTensorPowBasis_apply
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
+  Ising2D.identity_matrix_two_conjTranspose
+  Ising2D.pauliX_conjTranspose
+  Ising2D.pauliZ_conjTranspose
+  Ising2D.star_I_eq_neg_I
+  Ising2D.star_neg_I_eq_I
+  Ising2D.pauliY_conjTranspose
   Ising2D.siteProd_conjTranspose_apply
   Ising2D.siteProd_conjTranspose
   Ising2D.siteProd_eq_kroneckerProdOf

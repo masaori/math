@@ -1,6 +1,6 @@
 # 対象ラベル: check_number_operator_is_hermitian
 # 証明の (1)（Z_j^* = Z_j、Y_j^* = Y_j）を、QQ(i)（KG）の行列で厳密に確かめる。
-#  - (σ^a)^* = σ^a（a ∈ {x, y, z}。pauli_matrix_products の成分）。
+#  - (1) で引く主張の値 (σ^a)^* = σ^a（a ∈ {x, y, z}。conjugate_transpose_of_pauli_x/y/z）と I^* = I（conjugate_transpose_of_identity_matrix_of_order_two）の確認。
 #  - (A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^*（def_kronecker (2) の成分の式。A_k は KG の成分の一般の 2 次の行列と Pauli 行列・I）。
 #  - (σ_k^a)^* = σ_k^a（def_site_pauli_matrices）。
 #  - Z_j の鎖 5 行と、Y_j の同じ鎖 5 行（σ_j^z を σ_j^y に替えたもの）。行ごとに括弧の形どおりに mat_mult の成分の式で組む。
@@ -65,13 +65,14 @@ for M in range(1, 6):
     n = 2**M
     sig = {(k, a): site(M, k, a) for k in range(1, M + 1) for a in 'xyz'}
     for (k, a), S in sig.items():
-        # (σ_k^a)^* = (I⊠⋯⊠σ^a⊠⋯⊠I)^* = I^*⊠⋯⊠(σ^a)^*⊠⋯⊠I^* = I⊠⋯⊠σ^a⊠⋯⊠I = σ_k^a
+        # (σ_k^a)^* = (I⊠⋯⊠σ^a⊠⋯⊠I)^* = I^*⊠⋯⊠(σ^a)^*⊠⋯⊠I^* = I⊠⋯⊠(σ^a)^*⊠⋯⊠I = I⊠⋯⊠σ^a⊠⋯⊠I = σ_k^a
         facs = site_factors(M, k, PAULI[a])
         rep.chain([
             ("(σ_k^a)^*", star(S)),
             ("(I⊠⋯⊠σ^a⊠⋯⊠I)^*", star(kron(facs))),
             ("I^*⊠⋯⊠(σ^a)^*⊠⋯⊠I^*", kron([star(F) for F in facs])),
-            ("I⊠⋯⊠σ^a⊠⋯⊠I", kron(facs)),
+            ("I⊠⋯⊠(σ^a)^*⊠⋯⊠I", kron(site_factors(M, k, star(PAULI[a])))),   # conjugate_transpose_of_identity_matrix_of_order_two
+            ("I⊠⋯⊠σ^a⊠⋯⊠I", kron(facs)),                                      # conjugate_transpose_of_pauli_x/y/z
             ("σ_k^a", S),
         ], f"M={M} k={k} a={a}")
     for j in range(1, M + 1):

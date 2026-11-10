@@ -680,6 +680,237 @@ Qv_j
   },
 
   {
+    id: "eigenvalues_of_V_claim_conjugate_transpose_of_identity_matrix_of_order_two",
+    kind: "claim",
+    title: { text: "2 次の単位行列の共役転置" },
+    labels: ["conjugate_transpose_of_identity_matrix_of_order_two"],
+    statement: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）とする。共役転置は ",
+        ref("def_hermitian_positive_definite"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`I^* = I`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+I^*
+&= \begin{pmatrix}\overline{I_{11}}&\overline{I_{21}}\\\overline{I_{12}}&\overline{I_{22}}\end{pmatrix}
+&&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
+&= \begin{pmatrix}\overline{\delta_{11}}&\overline{\delta_{21}}\\\overline{\delta_{12}}&\overline{\delta_{22}}\end{pmatrix}
+&&(\because \blkref{def_identity_matrix} \text{ で } n=2) \\
+&= \begin{pmatrix}\overline{1_{\mathbb{C}}}&\overline{0_{\mathbb{C}}}\\\overline{0_{\mathbb{C}}}&\overline{1_{\mathbb{C}}}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&1_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 1, 0 \text{ で 4 成分へ同時に}) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= I
+&&(\because \blkref{def_identity_matrix} \text{ で } n=2)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「def_identity_matrix の成分 δ_{kl} は実数で δ_{lk} = δ_{kl}」と文で述べていたので、transpose_of_identity_matrix_of_order_two と同じ成分の鎖で示す主張として足した。",
+        "数値検証: sagemath/check/conjugate_transpose_of_identity_matrix_of_order_two/。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_conjugate_transpose_of_pauli_x",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^x \text{ の共役転置}` },
+    labels: ["conjugate_transpose_of_pauli_x"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_hermitian_positive_definite"),
+        " の共役転置に関して",
+      ]),
+      displayMath(String.raw`(\sigma^x)^* = \sigma^x`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^x)^*
+&= \begin{pmatrix}\overline{(\sigma^x)_{11}}&\overline{(\sigma^x)_{21}}\\\overline{(\sigma^x)_{12}}&\overline{(\sigma^x)_{22}}\end{pmatrix}
+&&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
+&= \begin{pmatrix}\overline{0_{\mathbb{C}}}&\overline{1_{\mathbb{C}}}\\\overline{1_{\mathbb{C}}}&\overline{0_{\mathbb{C}}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x \text{ の成分}) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 0, 1 \text{ で 4 成分へ同時に}) \\
+&= \sigma^x
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「pauli_matrix_products の Pauli 行列の成分より (σ^x)^* = σ^x」と文で述べていたので、transpose_of_pauli_x と同じ成分の鎖で示す主張として足した。",
+        "数値検証: sagemath/check/conjugate_transpose_of_pauli_x/。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_conjugate_transpose_of_pauli_z",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^z \text{ の共役転置}` },
+    labels: ["conjugate_transpose_of_pauli_z"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_hermitian_positive_definite"),
+        " の共役転置に関して",
+      ]),
+      displayMath(String.raw`(\sigma^z)^* = \sigma^z`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\sigma^z`),
+        " の成分 ",
+        math(String.raw`-1`),
+        " は ",
+        math(String.raw`(-1)_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        " の略記で ",
+        math(String.raw`r = -1`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^z)^*
+&= \begin{pmatrix}\overline{(\sigma^z)_{11}}&\overline{(\sigma^z)_{21}}\\\overline{(\sigma^z)_{12}}&\overline{(\sigma^z)_{22}}\end{pmatrix}
+&&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
+&= \begin{pmatrix}\overline{1_{\mathbb{C}}}&\overline{0_{\mathbb{C}}}\\\overline{0_{\mathbb{C}}}&\overline{(-1)_{\mathbb{C}}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z \text{ の成分}) \\
+&= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&(-1)_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 1, 0, -1 \text{ で 4 成分へ同時に}) \\
+&= \sigma^z
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「pauli_matrix_products の Pauli 行列の成分より (σ^z)^* = σ^z」と文で述べていたので、transpose_of_pauli_z と同じ成分の鎖で示す主張として足した。",
+        "数値検証: sagemath/check/conjugate_transpose_of_pauli_z/。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_conjugate_transpose_of_pauli_y",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^y \text{ の共役転置}` },
+    labels: ["conjugate_transpose_of_pauli_y"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_hermitian_positive_definite"),
+        " の共役転置に関して",
+      ]),
+      displayMath(String.raw`(\sigma^y)^* = \sigma^y`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`i`),
+        " は ",
+        ref("antiperiodic_exp_sum"),
+        " の前置きの ",
+        math(String.raw`i := (0,1)`),
+        "、",
+        math(String.raw`-i`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の記号である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["準備として ", math(String.raw`\bar i`), " と ", math(String.raw`\overline{-i}`), " を求める。"]),
+      displayMath(String.raw`\begin{aligned}
+\bar i
+&= \overline{(0,1)}
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= (0,-1)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (-1,0)(0,1)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&= (-1_{\mathbb{C}})(0,1)
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
+&= (-1_{\mathbb{C}})\,i
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= -i
+&&(\because\ \blkref{multiply_by_minus_one})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\overline{-i}
+&= \overline{(-1_{\mathbb{C}})\,i}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \overline{(-1_{\mathbb{C}})(0,1)}
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= \overline{(-1,0)(0,1)}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
+&= \overline{(0,-1)}
+&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&= (0,-(-1))
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (0,1)
+&&(\because\ \mathbb{R}\ \text{で}\ -(-1) = 1)\\
+&= i
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))
+\end{aligned}`),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^y)^*
+&= \begin{pmatrix}\overline{(\sigma^y)_{11}}&\overline{(\sigma^y)_{21}}\\\overline{(\sigma^y)_{12}}&\overline{(\sigma^y)_{22}}\end{pmatrix}
+&&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
+&= \begin{pmatrix}\overline{0_{\mathbb{C}}}&\bar i\\\overline{-i}&\overline{0_{\mathbb{C}}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y \text{ の成分}) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&\bar i\\\overline{-i}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 0 \text{ で 2 成分へ同時に}) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&-i\\\overline{-i}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \text{準備の } \bar i = -i) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&-i\\i&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \text{準備の } \overline{-i} = i) \\
+&= \sigma^y
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」と文で述べていたので、transpose_of_pauli_y と同じ成分の鎖で示す主張として足した。準備の \\bar i = -i の 6 行は relation_of_gamma_2_theta_tilde の「第二に」の鎖と同じである。",
+        "数値検証: sagemath/check/conjugate_transpose_of_pauli_y/。",
+      ],
+    },
+  },
+
+  {
     id: "eigenvalues_of_V_definition_real_symmetric_complex_matrix",
     kind: "definition",
     title: { text: "実対称な複素行列" },
