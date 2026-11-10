@@ -110,6 +110,12 @@ targets=(
   Ising2D.sigmaX_conjTranspose
   Ising2D.sigmaY_conjTranspose
   Ising2D.sigmaZ_conjTranspose
+  Ising2D.xString_conjTranspose
+  Ising2D.revSiteProduct_sigmaXAt_conjTranspose
+  Ising2D.commute_xString_of_commute_sigmaX
+  Ising2D.siteOp_mul_xString
+  Ising2D.revSiteProduct_sigmaX_eq_xString
+  Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq
   Ising2D.siteProd_eq_kroneckerProdOf
   Ising2D.siteProd_transpose_of_necSuf
   Ising2D.NecSuf.kroneckerProdOf

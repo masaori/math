@@ -10,7 +10,7 @@
 - `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
 - `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の (1) の証明の中の、
   クロネッカー積の共役転置の成分の鎖（`siteProd_conjTranspose_apply`）
-  と `(σ_k^a)^* = σ_k^a` の鎖（`siteOp_conjTranspose_of_conjTranspose_eq`）
+  と `(σ_k^a)^* = σ_k^a` の鎖（`siteOp_conjTranspose_of_conjTranspose_eq`）と `Z_j^*` の鎖（`jw_conjTranspose_of_siteOp_conjTranspose_eq`。`Z_conjTranspose`・`Y_conjTranspose`）
 
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
 `Matrix.conjTranspose` / `Matrix.IsHermitian` / `Matrix.PosDef` と同じものである。
@@ -148,7 +148,7 @@ theorem sigmaY_conjTranspose (k : Fin M) : (sigmaY k)ᴴ = sigmaY k :=
 theorem sigmaZ_conjTranspose (k : Fin M) : (sigmaZ k)ᴴ = sigmaZ k :=
   siteOp_conjTranspose_of_conjTranspose_eq k pauliZ_conjTranspose   -- 4 行目は `conjugate_transpose_of_pauli_z`
 
-/-! ## `Z_m`, `Y_m` の転置・共役転置 -/
+/-! ## `Z_m`, `Y_m` の転置 -/
 
 theorem Z_transpose (m : Fin M) : (Z m)ᵀ = Z m := by
   rw [Z, siteProd_transpose]
@@ -161,28 +161,6 @@ theorem Z_transpose (m : Fin M) : (Z m)ᵀ = Z m := by
     · exact pauliZ_transpose
     · exact Matrix.transpose_one
 
-theorem Z_conjTranspose (m : Fin M) : (Z m)ᴴ = Z m := by
-  rw [Z, siteProd_conjTranspose]
-  congr 1
-  funext i
-  unfold jwFamily
-  split
-  · exact pauliX_conjTranspose
-  · split
-    · exact pauliZ_conjTranspose
-    · exact identity_matrix_two_conjTranspose
-
-theorem Y_conjTranspose (m : Fin M) : (Y m)ᴴ = Y m := by
-  rw [Y, siteProd_conjTranspose]
-  congr 1
-  funext i
-  unfold jwFamily
-  split
-  · exact pauliX_conjTranspose
-  · split
-    · exact pauliY_conjTranspose
-    · exact identity_matrix_two_conjTranspose
-
 theorem Y_transpose (m : Fin M) : (Y m)ᵀ = -(Y m) := by
   rw [Y, siteProd_transpose]
   have hfam : (fun i => (jwFamily m pauliY i)ᵀ) = jwFamily m (-pauliY) := by
@@ -194,6 +172,136 @@ theorem Y_transpose (m : Fin M) : (Y m)ᵀ = -(Y m) := by
       · exact pauliY_transpose
       · exact Matrix.transpose_one
   rw [hfam, jw_eq_xString_mul, map_neg, Matrix.mul_neg, ← jw_eq_xString_mul]
+
+/-! ## `Z_j^*`, `Y_j^*`
+
+人手 `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の
+(1) の `Z_j^*` の 5 行の鎖と 1 対 1 である。人手は `Y_j` を「`σ_j^z` を `σ_j^y` に替えた同じ計算」とするので、鎖は第 `j` サイトの
+因子 `A` と `hA : (σ_j^A)^* = σ_j^A`（Lean の `siteOp j A`）について 1 回だけ書き（`jw_conjTranspose_of_siteOp_conjTranspose_eq`）、
+`Z_j`・`Y_j` は `A → σ^z`・`A → σ^y` として得る。
+
+人手の左から順の積 `σ_1^x⋯σ_{j-1}^x` は Lean の `xString M (j-1)`（`xString_succ` が `P_{r+1} = P_rσ_{r+1}^x`）、
+`(XW)^* = W^*X^*` の反復適用で現れる逆順の積 `B_{j-1}⋯B_1` は `revSiteProduct B (j-1)`（`B` は人手のサイト `i+1` の因子を Lean の `i` に置く族）である。
+反復適用は `r` についての帰納法（`xString_conjTranspose`）、`distinct_site_pauli_matrices_commute` の反復適用は
+「人手の `σ_{i+1}^x`（Lean のサイト `i < r`）のどれとも可換な行列は `P_r` と可換」（`commute_xString_of_commute_sigmaX`）の帰納法で、それを人手の `σ_j^A`（Lean のサイト `j`）と
+人手の `σ_{r+1}^x`（Lean のサイト `r`）に当てる（`siteOp_mul_xString`・`revSiteProduct_sigmaX_eq_xString`）。人手の `j ∈ {1, …, M_col}` は Lean の 0 始まりの `j : Fin M` で、人手の `j-1` が Lean の `(j : ℕ)` である。 -/
+
+/-- 人手のサイト `i+1` の `σ^x`（Lean の 0 始まりのサイト `i`）。`i ≥ M` では使わない（`I` を置く）。 -/
+noncomputable def sigmaXAt (M : ℕ) (i : ℕ) : TensorPow M :=
+  if h : i < M then sigmaX ⟨i, h⟩ else 1
+
+theorem sigmaXAt_of_lt {i : ℕ} (h : i < M) : sigmaXAt M i = sigmaX ⟨i, h⟩ := by
+  rw [sigmaXAt, dif_pos h]
+
+/-- 逆順の積 `B_r ⋯ B_1`（人手の 1 始まりの添字。Lean の族では `B (r-1) * ⋯ * B 0`）。空の積は `I`。 -/
+noncomputable def revSiteProduct (B : ℕ → TensorPow M) : ℕ → TensorPow M
+  | 0 => 1
+  | r + 1 => B r * revSiteProduct B r
+
+/-- **人手 `(σ_1^x⋯σ_r^x)^* = (σ_r^x)^*⋯(σ_1^x)^*`**: `star_preserves_norm_and_limits` (1) の `(XW)^* = W^*X^*` の反復適用（`r` の帰納法）。 -/
+theorem xString_conjTranspose : ∀ r : ℕ, r ≤ M →
+    (xString M r)ᴴ = revSiteProduct (fun i => (sigmaXAt M i)ᴴ) r
+  | 0, _ =>
+    calc (xString M 0)ᴴ
+        = (1 : TensorPow M)ᴴ := by rw [xString_zero]           -- 空の積は `I`
+      _ = 1 := identity_conjTranspose_tensorPow                  -- `I^* = I`
+      _ = revSiteProduct (fun i => (sigmaXAt M i)ᴴ) 0 := rfl     -- 空の積は `I`
+  | r + 1, h =>
+    calc (xString M (r + 1))ᴴ
+        = (xString M r * sigmaX ⟨r, h⟩)ᴴ := by rw [xString_succ r h]   -- `P_{r+1} = P_rσ_{r+1}^x`
+      _ = (sigmaX ⟨r, h⟩)ᴴ * (xString M r)ᴴ :=
+          conjTranspose_mul_tensorPow _ _                                -- `star_preserves_norm_and_limits` (1) の `(XW)^* = W^*X^*`
+      _ = (sigmaXAt M r)ᴴ * revSiteProduct (fun i => (sigmaXAt M i)ᴴ) r := by
+          rw [xString_conjTranspose r (Nat.le_of_succ_le h), sigmaXAt_of_lt h]   -- 帰納法の仮定
+      _ = revSiteProduct (fun i => (sigmaXAt M i)ᴴ) (r + 1) := rfl
+
+/-- 人手の「各因子へ `(σ_i^x)^* = σ_i^x`」（`sigmaX_conjTranspose` を逆順の積の全ての因子へ同時に。`r` の帰納法で因子を 1 つずつ書き換える）。 -/
+theorem revSiteProduct_sigmaXAt_conjTranspose : ∀ r : ℕ, r ≤ M →
+    revSiteProduct (fun i => (sigmaXAt M i)ᴴ) r = revSiteProduct (sigmaXAt M) r
+  | 0, _ => rfl                                                              -- 空の積は `I`
+  | r + 1, h =>
+    calc revSiteProduct (fun i => (sigmaXAt M i)ᴴ) (r + 1)
+        = (sigmaX ⟨r, h⟩)ᴴ * revSiteProduct (fun i => (sigmaXAt M i)ᴴ) r := by
+          show (sigmaXAt M r)ᴴ * _ = _; rw [sigmaXAt_of_lt h]                -- 逆順の積の定義
+      _ = sigmaX ⟨r, h⟩ * revSiteProduct (fun i => (sigmaXAt M i)ᴴ) r := by
+          rw [sigmaX_conjTranspose]                       -- `(σ_k^a)^* = σ_k^a`（`a = x`）
+      _ = sigmaX ⟨r, h⟩ * revSiteProduct (sigmaXAt M) r := by
+          rw [revSiteProduct_sigmaXAt_conjTranspose r (Nat.le_of_succ_le h)]   -- 帰納法の仮定
+      _ = revSiteProduct (sigmaXAt M) (r + 1) := by
+          show _ = sigmaXAt M r * _; rw [sigmaXAt_of_lt h]                   -- 逆順の積の定義
+
+/-- 人手 `distinct_site_pauli_matrices_commute` の反復適用の本体: `σ_{i+1}^x`（`i < r`）のどれとも可換な `A` は `P_r` と可換（`r` の帰納法）。 -/
+theorem commute_xString_of_commute_sigmaX (A : TensorPow M) :
+    ∀ r : ℕ, ∀ hr : r ≤ M, (∀ i : ℕ, ∀ hi : i < r, A * sigmaX ⟨i, by omega⟩ = sigmaX ⟨i, by omega⟩ * A) →
+      A * xString M r = xString M r * A
+  | 0, _, _ => by
+    rw [xString_zero, mul_identity_matrix_tensorPow, identity_matrix_mul_tensorPow]
+    -- `AI = A = IA`（`identity_matrix_is_right_unit_of_mat_mult`・`identity_matrix_is_left_unit_of_mat_mult` にあたる）
+  | r + 1, h, hc =>
+    calc A * xString M (r + 1)
+        = A * (xString M r * sigmaX ⟨r, h⟩) := by rw [xString_succ r h]   -- `P_{r+1} = P_rσ_{r+1}^x`
+      _ = (A * xString M r) * sigmaX ⟨r, h⟩ := (mul_assoc _ _ _).symm      -- `mat_mult_associative` にあたる
+      _ = (xString M r * A) * sigmaX ⟨r, h⟩ := by
+          rw [commute_xString_of_commute_sigmaX A r (Nat.le_of_succ_le h)
+            (fun i hi => hc i (Nat.lt_succ_of_lt hi))]                       -- 帰納法の仮定
+      _ = xString M r * (A * sigmaX ⟨r, h⟩) := mul_assoc _ _ _               -- `mat_mult_associative` にあたる
+      _ = xString M r * (sigmaX ⟨r, h⟩ * A) := by rw [hc r (Nat.lt_succ_self r)]   -- `A` と `σ_{r+1}^x` の可換性
+      _ = (xString M r * sigmaX ⟨r, h⟩) * A := (mul_assoc _ _ _).symm      -- `mat_mult_associative` にあたる
+      _ = xString M (r + 1) * A := by rw [xString_succ r h]                  -- `P_{r+1} = P_rσ_{r+1}^x`
+
+/-- 人手の「`σ_j^a` を `σ_1^x⋯σ_{j-1}^x` の右へ移す」（人手の添字）: `distinct_site_pauli_matrices_commute`（Lean のサイト `j` と `i < j`。人手のサイト `j+1` と `i+1 ≤ j`）の反復適用。 -/
+theorem siteOp_mul_xString (j : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    siteOp j A * xString M (j : ℕ) = xString M (j : ℕ) * siteOp j A :=
+  commute_xString_of_commute_sigmaX (siteOp j A) (j : ℕ) (Nat.le_of_lt j.isLt)
+    (fun i hi => siteOp_mul_comm (Fin.ne_of_val_ne (by simp only; omega)) A pauliX)
+                                                          -- `distinct_site_pauli_matrices_commute`（Lean のサイト `j ≠ i`）
+
+/-- 人手の「`σ_r^x⋯σ_1^x = σ_1^x⋯σ_r^x`」（人手の添字）: `distinct_site_pauli_matrices_commute`（Lean のサイト `r` と `i < r`。人手のサイト `r+1` と `i+1 ≤ r`）の反復適用（`r` の帰納法）。 -/
+theorem revSiteProduct_sigmaX_eq_xString : ∀ r : ℕ, r ≤ M →
+    revSiteProduct (sigmaXAt M) r = xString M r
+  | 0, _ => by rw [xString_zero]; rfl                                        -- 空の積は `I`
+  | r + 1, h =>
+    calc revSiteProduct (sigmaXAt M) (r + 1)
+        = sigmaX ⟨r, h⟩ * revSiteProduct (sigmaXAt M) r := by
+          show sigmaXAt M r * _ = _; rw [sigmaXAt_of_lt h]                   -- 逆順の積の定義
+      _ = sigmaX ⟨r, h⟩ * xString M r := by
+          rw [revSiteProduct_sigmaX_eq_xString r (Nat.le_of_succ_le h)]     -- 帰納法の仮定
+      _ = xString M r * sigmaX ⟨r, h⟩ :=
+          commute_xString_of_commute_sigmaX (sigmaX ⟨r, h⟩) r (Nat.le_of_succ_le h)
+            (fun i hi => siteOp_mul_comm (Fin.ne_of_val_ne (by simp only; omega)) pauliX pauliX)
+                                                          -- `distinct_site_pauli_matrices_commute`（Lean のサイト `r ≠ i`）
+      _ = xString M (r + 1) := (xString_succ r h).symm                       -- `P_{r+1} = P_rσ_{r+1}^x`
+
+/-- **人手 `check_number_operator_is_hermitian` の (1) の `Z_j^*` の 5 行の鎖**（第 `j` サイトの因子 `A` と `(σ_j^A)^* = σ_j^A` について。
+`Z_j` は `A → σ^z`、`Y_j` は `A → σ^y`）。 -/
+theorem jw_conjTranspose_of_siteOp_conjTranspose_eq (j : Fin M) {A : Matrix (Fin 2) (Fin 2) ℂ}
+    (hA : (siteOp j A)ᴴ = siteOp j A) :
+    (xString M (j : ℕ) * siteOp j A)ᴴ = xString M (j : ℕ) * siteOp j A :=
+  calc (xString M (j : ℕ) * siteOp j A)ᴴ
+      = (siteOp j A)ᴴ * revSiteProduct (fun i => (sigmaXAt M i)ᴴ) (j : ℕ) := by
+        rw [conjTranspose_mul_tensorPow, xString_conjTranspose (j : ℕ) (Nat.le_of_lt j.isLt)]
+                                                          -- `star_preserves_norm_and_limits` (1) の `(XW)^* = W^*X^*` の反復適用
+    _ = siteOp j A * revSiteProduct (sigmaXAt M) (j : ℕ) := by
+        rw [hA, revSiteProduct_sigmaXAt_conjTranspose (j : ℕ) (Nat.le_of_lt j.isLt)]   -- `(σ_k^a)^* = σ_k^a`
+    _ = xString M (j : ℕ) * siteOp j A := by
+        rw [revSiteProduct_sigmaX_eq_xString (j : ℕ) (Nat.le_of_lt j.isLt), siteOp_mul_xString]
+                                                          -- `distinct_site_pauli_matrices_commute` の反復適用
+
+/-- **人手 `check_number_operator_is_hermitian` の (1) の `Z_j^* = Z_j`**。 -/
+theorem Z_conjTranspose (m : Fin M) : (Z m)ᴴ = Z m :=
+  calc (Z m)ᴴ
+      = (xString M (m : ℕ) * siteOp m pauliZ)ᴴ := by rw [Z_eq_xString_mul]; rfl   -- `def_jordan_wigner_Z_matrices`
+    _ = xString M (m : ℕ) * siteOp m pauliZ :=
+        jw_conjTranspose_of_siteOp_conjTranspose_eq m (sigmaZ_conjTranspose m)     -- 2〜4 行目（`A → σ^z`）
+    _ = Z m := by rw [Z_eq_xString_mul]; rfl                                       -- `def_jordan_wigner_Z_matrices`
+
+/-- **人手 `check_number_operator_is_hermitian` の (1) の `Y_j^* = Y_j`**（`σ_j^z` を `σ_j^y` に替えた同じ計算）。 -/
+theorem Y_conjTranspose (m : Fin M) : (Y m)ᴴ = Y m :=
+  calc (Y m)ᴴ
+      = (xString M (m : ℕ) * siteOp m pauliY)ᴴ := by rw [Y_eq_xString_mul]; rfl   -- `def_jordan_wigner_Y_matrices`
+    _ = xString M (m : ℕ) * siteOp m pauliY :=
+        jw_conjTranspose_of_siteOp_conjTranspose_eq m (sigmaY_conjTranspose m)     -- 2〜4 行目（`A → σ^y`）
+    _ = Y m := by rw [Y_eq_xString_mul]; rfl                                       -- `def_jordan_wigner_Y_matrices`
 
 /-! ## `H_1^{(±)}`, `H_2` の反エルミート性・転置対称性 -/
 

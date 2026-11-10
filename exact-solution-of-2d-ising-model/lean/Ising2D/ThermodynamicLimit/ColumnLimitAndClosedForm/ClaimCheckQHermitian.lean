@@ -13,7 +13,7 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
-| (1) `Z_j^* = Z_j`, `Y_j^* = Y_j` | `Ising2D.Z_conjTranspose` / `Y_conjTranspose`（章 009 で証明済み。証明の中のクロネッカー積の共役転置の 5 行の鎖は `Ising2D.siteProd_conjTranspose_apply`、`(σ_k^a)^* = σ_k^a` の 5 行の鎖は `Ising2D.siteOp_conjTranspose_of_conjTranspose_eq`（`a = x, y, z` は `sigmaX_conjTranspose`・`sigmaY_conjTranspose`・`sigmaZ_conjTranspose`）（どれも `ClaimPositiveDefinite.lean`）。`Z_j^*` の鎖とはまだ 1 対 1 でない） |
+| (1) `Z_j^* = Z_j`, `Y_j^* = Y_j` | `Ising2D.Z_conjTranspose` / `Y_conjTranspose`（章 009 で証明済み。証明の中のクロネッカー積の共役転置の 5 行の鎖は `Ising2D.siteProd_conjTranspose_apply`、`(σ_k^a)^* = σ_k^a` の 5 行の鎖は `Ising2D.siteOp_conjTranspose_of_conjTranspose_eq`（`a = x, y, z` は `sigmaX_conjTranspose`・`sigmaY_conjTranspose`・`sigmaZ_conjTranspose`）（どれも `ClaimPositiveDefinite.lean`）。`Z_j^*` の 5 行の鎖は `Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq`（`(XW)^* = W^*X^*` の反復適用は `Ising2D.xString_conjTranspose`、各因子の `(σ_i^x)^* = σ_i^x` は `Ising2D.revSiteProduct_sigmaXAt_conjTranspose`、`distinct_site_pauli_matrices_commute` の反復適用は `Ising2D.commute_xString_of_commute_sigmaX`・`Ising2D.siteOp_mul_xString`・`Ising2D.revSiteProduct_sigmaX_eq_xString`。`Y_j` は `A → σ^y`）） |
 | (2) `Ž_μ^* = Ž_{M+1-μ}`, `Y̌_μ^* = Y̌_{M+1-μ}` | `Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose` |
 | (3) `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` | `CheckFermi.hstar`（章 016 からの入力） |
 | (4) `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` |
