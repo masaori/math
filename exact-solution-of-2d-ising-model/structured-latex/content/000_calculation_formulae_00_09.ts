@@ -88,6 +88,44 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_definition_real_difference",
+    kind: "definition",
+    title: { text: "実数の差" },
+    labels: ["def_real_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`y, z \in \mathbb{R}`),
+        " について、差 ",
+        math(String.raw`y - z \in \mathbb{R}`),
+        " を",
+      ]),
+      displayMath(String.raw`y - z := y + (-z)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`-z`),
+        " は、",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " における ",
+        math(String.raw`z`),
+        " の加法の逆元（",
+        math(String.raw`z + (-z) = 0_{\mathbb{R}}`),
+        " を満たす ",
+        math(String.raw`\mathbb{R}`),
+        " の元。体の加法の逆元はただ一つに定まる）であり、和は ",
+        math(String.raw`+_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の差は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、差を定めるブロックが無かった（def_A_theta の (1,1)・(2,2) 成分の差、real_inclusion_preserves_difference の右辺など）。ℂ の def_complex_difference と同じ形で足し、ℝ の差を最初に使う definition_of_cc より前（set_and_algebra_notation の直後）に置いた。符号反転は、本文の ℝ の計算（cos_of_negated_real の準備など）が加法の逆元として読んでいるので、ℂ の multiply_by_minus_one のように (-1) 倍で定めず、順序体の加法の逆元とした。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_000c0_claim_positive_real_square_injective",
     kind: "claim",
     title: { text: "正の実数の二乗の一意性" },
@@ -3995,6 +4033,8 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
         ref("inclusion_rr_to_cc"),
         " の略記、左辺の差は ",
         ref("def_complex_difference"),
+        " の差、右辺の差は ",
+        ref("def_real_difference"),
         " の差である。",
       ]),
     ],
@@ -4011,14 +4051,17 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= \bigl(y + (-1)\,z\bigr)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_sum})\\
+&= \bigl(y + (-z)\bigr)_{\mathbb{C}}
+&&(\because\ \text{実数の四則（順序体}\ \mathbb{R}\ \text{で}\ (-1)\,z\ \text{は}\ z\ \text{の加法の逆元}\ -z\text{）})\\
 &= (y - z)_{\mathbb{C}}
-&&(\because\ \text{実数の四則})
+&&(\because\ \blkref{def_real_difference}\ \text{を右辺から左辺へ})
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。exponential_series_of_even_odd_power_terms の証明の準備にあった同じ 6 行の鎖を主張にし、factorization_of_A_theta_general の Step 2・3 の末尾（ℂ の式を def_A_theta の (1,1)・(2,2) 成分の実数の像へ移す段）からも引けるようにした。準備の 5 行目の根拠「real_inclusion_preserves_finite_sum を 2 項へ当てた」は、2 項の場合そのものの real_inclusion_preserves_sum にした。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 右辺の差を def_real_difference の差と書き、最後の行「実数の四則」（y + (-1)z = y - z）を、(-1)z を加法の逆元 -z にする行と def_real_difference を右辺から左辺へ当てる行に割った（6 等号から 7 等号）。",
       ],
     },
   },

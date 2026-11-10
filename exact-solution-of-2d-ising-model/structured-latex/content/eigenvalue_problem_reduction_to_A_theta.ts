@@ -1610,7 +1610,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         " の積を左から括った ",
         math(String.raw`(c_1 c_2^*) - \bigl((s_1 s_2^*)\cos\theta\bigr)`),
         " であり、差は ",
-        math(String.raw`\mathbb{R}`),
+        ref("def_real_difference"),
         " の差である。",
         math(String.raw`(1,2)`),
         " 成分と ",
@@ -1663,6 +1663,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
           "def_gamma1_gamma2_of_theta と det_A_theta_tilde の証明がそれぞれ書いていた (2,1) 成分の読みは、この定義への参照にした。" +
           "factorization_of_A_theta_general の証明は (1,1)・(2,2) 成分を ℂ の式として読んでおり、この定義の読みに合わせる作業が残っている。行列の式は変えていない。",
         "2026-11-10（Lean の通しの証明）: (1,1)・(2,2) 成分の実数の積と差の括り方、(1,2)・(2,1) 成分の第四の因子の括り方と、その差・和・積・exp の出典（def_complex_difference・definition_of_cc・def_scalar_exp の係数を ℂ としたもの）を定義に書いた。行列の式は変えていない。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: (1,1)・(2,2) 成分の実数の差の出典を、新しく足した def_real_difference にした。",
       ],
     },
   },

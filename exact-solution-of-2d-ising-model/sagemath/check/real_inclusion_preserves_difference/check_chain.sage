@@ -1,6 +1,6 @@
 # 対象ラベル: real_inclusion_preserves_difference
-# 証明の七つの項（六つの等号）:
-#   y_C - z_C = y_C + (-z_C) = y_C + (-1_C) z_C = y_C + (-1)_C z_C = y_C + ((-1)z)_C = (y + (-1)z)_C = (y - z)_C
+# 証明の八つの項（七つの等号）:
+#   y_C - z_C = y_C + (-z_C) = y_C + (-1_C) z_C = y_C + (-1)_C z_C = y_C + ((-1)z)_C = (y + (-1)z)_C = (y + (-z))_C = (y - z)_C
 # ℂ は definition_of_cc どおり実数の対で持ち（complex_as_real_pairs.sage）、y, z を QQ 上の多項式環の不定元に置く。
 # 不定元の多項式の等号は厳密に決まり、任意の実数を代入しても保たれる（代入は環準同型）。帰属: QQ[y,z]。
 load("../../_shared/complex_as_real_pairs.sage")
@@ -21,7 +21,8 @@ lines = [
     ("y_C + (-1)_C z_C", cc_add(yC, cc_mul(iota(S(-1), S), zC))),  # inclusion_rr_to_cc の -1_C = (-1)_C
     ("y_C + ((-1)z)_C", cc_add(yC, iota((-1) * z, S))),        # real_inclusion_preserves_product
     ("(y + (-1)z)_C", iota(y + (-1) * z, S)),                  # real_inclusion_preserves_sum
-    ("(y - z)_C", iota(y - z, S)),                             # 実数の四則
+    ("(y + (-z))_C", iota(y + (-z), S)),                       # 実数の四則（(-1)z は z の加法の逆元 -z）
+    ("(y - z)_C", iota(y - z, S)),                             # def_real_difference を右辺から左辺へ
 ]
 for (n0, v0), (n1, v1) in zip(lines, lines[1:]):
     report(v0 == v1, f"「{n0}」=「{n1}」")

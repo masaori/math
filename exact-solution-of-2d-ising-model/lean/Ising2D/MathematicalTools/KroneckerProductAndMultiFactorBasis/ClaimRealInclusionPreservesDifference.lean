@@ -8,14 +8,15 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 6 行の鎖 `y_ℂ − z_ℂ = ⋯ = (y − z)_ℂ` | `real_inclusion_sub` の `calc` の 6 段 |
+| 7 行の鎖 `y_ℂ − z_ℂ = ⋯ = (y − z)_ℂ` | `real_inclusion_sub` の `calc` の 7 段 |
 
 - 人手の `r_ℂ := (r, 0)` は Lean の `(r : ℂ)`（`Complex.ofReal r`）である。
 - 1 段目の `def_complex_difference`（`z - w := z + (-w)`）は mathlib の `sub_eq_add_neg`、2 段目の `multiply_by_minus_one`（`-z := (-1_ℂ)z`）は `neg_one_mul` で受ける。
 - 3 段目の `-1_ℂ = (-1)_ℂ` は `inclusion_rr_to_cc` の略記なので、`Complex.ofReal_neg`・`Complex.ofReal_one` で読む。
 - `real_inclusion_preserves_product` は具体版 `real_inclusion_mul`、`real_inclusion_preserves_sum` は具体版 `real_inclusion_add`。
+- 6 段目の実数の四則（`(-1)z` は `z` の加法の逆元 `-z`）は `neg_one_mul`、7 段目の `def_real_difference`（`y - z := y + (-z)`）は `sub_eq_add_neg` で受ける。
 
-具体的な 2 つの実数の計算であり、使う構造は ℂ の差・符号反転の定義と包含の積・和の保存だけなので、必要十分版は置かない
+具体的な 2 つの実数の計算であり、使う構造は ℂ の差・符号反転の定義、ℝ の差の定義と包含の積・和の保存だけなので、必要十分版は置かない
 （`real_inclusion_preserves_product` の `real_inclusion_mul`、`real_inclusion_preserves_sum` の `real_inclusion_add` と同じ扱い）。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
@@ -23,7 +24,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 
 namespace Ising2D
 
-/-- **人手 `real_inclusion_preserves_difference`**: `y_ℂ − z_ℂ = (y − z)_ℂ`（`y, z ∈ ℝ`）。人手の 6 行と calc の 6 段が 1 対 1 である。 -/
+/-- **人手 `real_inclusion_preserves_difference`**: `y_ℂ − z_ℂ = (y − z)_ℂ`（`y, z ∈ ℝ`）。人手の 7 行と calc の 7 段が 1 対 1 である。 -/
 theorem real_inclusion_sub (y z : ℝ) : (y : ℂ) - (z : ℂ) = ((y - z : ℝ) : ℂ) :=
   calc (y : ℂ) - (z : ℂ)
       = (y : ℂ) + -(z : ℂ) := sub_eq_add_neg _ _              -- `def_complex_difference`
@@ -33,6 +34,7 @@ theorem real_inclusion_sub (y z : ℝ) : (y : ℂ) - (z : ℂ) = ((y - z : ℝ) 
     _ = (y : ℂ) + (((-1) * z : ℝ) : ℂ) := by
         rw [real_inclusion_mul]                               -- `real_inclusion_preserves_product`
     _ = ((y + (-1) * z : ℝ) : ℂ) := real_inclusion_add _ _    -- `real_inclusion_preserves_sum`
-    _ = ((y - z : ℝ) : ℂ) := by congr 1; ring                 -- 実数の四則（ℝ の式 `y + (-1)z = y - z`）
+    _ = ((y + -z : ℝ) : ℂ) := by rw [neg_one_mul]               -- 実数の四則（`(-1)z` は `z` の加法の逆元 `-z`）
+    _ = ((y - z : ℝ) : ℂ) := by rw [← sub_eq_add_neg]           -- `def_real_difference` を右辺から左辺へ
 
 end Ising2D

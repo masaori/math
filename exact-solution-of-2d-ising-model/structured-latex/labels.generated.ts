@@ -236,6 +236,7 @@ export const ALL_LABELS = [
   "def_rayleigh_sup",
   "def_real_absolute_value",
   "def_real_bilinear_value",
+  "def_real_difference",
   "def_real_factor_of_pauli_y",
   "def_real_identity_matrix",
   "def_real_imag_parts",
