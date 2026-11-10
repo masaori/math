@@ -70298,8 +70298,10 @@ E&=E_{\mathrm{int}}+B
 4
 &=4(V-E+F)
 &&\bigl(\because\ V-E+F=1\bigr)\\
+&=4(v_1+v_2+v_3+v_4)-4E+4F
+&&\bigl(\because\ V=v_1+v_2+v_3+v_4\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-2(4F+B)+4F
-&&\bigl(\because\ V=v_1+v_2+v_3+v_4,\ 2E=4F+B\bigr)\\
+&&\bigl(\because\ 2E=4F+B\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2B
 &&\bigl(\because\ 4F=v_1+2v_2+3v_3+4v_4\text{ と }\mathbb Z\text{ の四則}\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2(v_1+v_2+v_3)

@@ -7,6 +7,45 @@ import Ising2DLambda.KacWard.OneSidedClosureProjectionWindingFromWalk
 
 namespace Ising2DLambda.KacWard
 
+/-- Count incidences between the four edges of each interior cell and the
+edges of the actual closed walk's interior cell complex. -/
+theorem interiorCellsOfWalk_edgeIncidence_sum {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    (∑ e ∈ cellEdges cells,
+      (cells.filter (fun x => e ∈ edgesOfCell x)).card) = 4 * cells.card := by
+  classical
+  dsimp only
+  let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+  change (∑ e ∈ cellEdges cells,
+    (cells.filter (fun x => e ∈ edgesOfCell x)).card) = 4 * cells.card
+  calc
+    (∑ e ∈ cellEdges cells,
+      (cells.filter (fun x => e ∈ edgesOfCell x)).card) =
+        ∑ e ∈ cellEdges cells, ∑ x ∈ cells,
+          if e ∈ edgesOfCell x then 1 else 0 := by
+            simp only [Finset.card_filter]
+    _ = ∑ x ∈ cells, ∑ e ∈ cellEdges cells,
+          if e ∈ edgesOfCell x then 1 else 0 := by
+            rw [Finset.sum_comm]
+    _ = ∑ x ∈ cells, (edgesOfCell x).card := by
+          apply Finset.sum_congr rfl
+          intro x hx
+          rw [← Finset.sum_subset (show edgesOfCell x ⊆ cellEdges cells by
+            intro e he
+            exact Finset.mem_biUnion.mpr ⟨x, hx, he⟩)]
+          · simp
+          · intro e he hex
+            simp [hex]
+    _ = 4 * cells.card := by
+          have hcard (x : GridCell) : (edgesOfCell x).card = 4 := by
+            rcases x with ⟨r, c⟩
+            simp [edgesOfCell]
+          simp [hcard, mul_comm]
+
 /-- Count vertex incidences in the interior cells of an actual closed walk. -/
 theorem interiorCellsOfWalk_vertexIncidence_sum {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
