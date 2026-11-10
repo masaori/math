@@ -16,8 +16,8 @@ namespace Ising2D
 /-- 必要十分版の仮定 `hneg` を `ℂ` で与える（人手の `multiply_by_minus_one`）。 -/
 theorem complex_neg_eq_neg_one_mul (x : ℂ) : -x = (-1) * x := (neg_one_mul x).symm
 
-/-- 必要十分版の仮定 `hmm` を `ℂ` で与える（人手の `definition_of_cc` の積）。 -/
-theorem complex_neg_one_mul_neg_one : (-1 : ℂ) * (-1) = 1 := by norm_num
+/-- 必要十分版の仮定 `hmm` を `ℂ` で与える（人手の `minus_one_times_minus_one_is_one_in_cc`）。 -/
+theorem complex_neg_one_mul_neg_one : (-1 : ℂ) * (-1) = 1 := complex_minus_one_mul_minus_one
 
 /-- `neg_neg_matrix` を `NecSuf.neg_neg_matrix'`（係数 `ℂ`）の特殊化として得る。 -/
 theorem neg_neg_matrix_of_necSuf {m n : ℕ} (A : Matrix (Fin m) (Fin n) ℂ) : -(-A) = A :=

@@ -458,6 +458,7 @@ export const ALL_LABELS = [
   "max_eigenvector_in_even_sector",
   "max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus",
   "maximum_value_of_real_family_is_unique",
+  "minus_one_times_minus_one_is_one_in_cc",
   "moment_log_convexity",
   "monoid_of_polar_representation",
   "moving_one_factor_of_finite_product_to_the_end",

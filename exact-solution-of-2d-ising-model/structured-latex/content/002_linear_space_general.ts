@@ -1464,7 +1464,7 @@ X - O
 &= \bigl((-1_{\mathbb{C}})\,(-1_{\mathbb{C}})\bigr)\,A_{ij}
 &&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= 1_{\mathbb{C}}\,A_{ij}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-1_{\mathbb{C}})(-1_{\mathbb{C}})=1_{\mathbb{C}}\text{。}\blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
 &= A_{ij}
 &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`),

@@ -12,10 +12,12 @@
 * `(i, j)` 成分の鎖を人手の 6 行の順に辿り、最後に「全ての成分が一致する」で行列の等号にする。
 * 成分の式との接点は `ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の `matrix_neg_apply`（`def_matrix_negation`）である。
 * 人手の `-z := (-1_ℂ)·z`（`multiply_by_minus_one`）は、Lean の `ℂ` の符号反転が積で定義されていないので `neg_one_mul` で出す。
-  `ℂ` の積の結合律は `mul_assoc`、`(-1_ℂ)(-1_ℂ) = 1_ℂ`（`definition_of_cc` の積）は `norm_num`、`1_ℂ` が積の単位元であることは `one_mul` で出す。
+  `ℂ` の積の結合律は `mul_assoc`、`(-1_ℂ)(-1_ℂ) = 1_ℂ` は人手 `minus_one_times_minus_one_is_one_in_cc` の具体版
+  `complex_minus_one_mul_minus_one`、`1_ℂ` が積の単位元であることは `one_mul` で出す。
 * 人手の `m, n ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す（成分が無いだけで、主張はそのまま成り立つ）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 
 namespace Ising2D
 
@@ -29,7 +31,7 @@ theorem neg_neg_matrix_apply {m n : ℕ} (A : Matrix (Fin m) (Fin n) ℂ) (i : F
     _ = -(-A i j) := by rw [matrix_neg_apply]                                -- `def_matrix_negation`
     _ = (-1) * ((-1) * A i j) := by rw [neg_one_mul, neg_one_mul]            -- `multiply_by_minus_one`（2 か所へ同時適用）
     _ = ((-1) * (-1)) * A i j := (mul_assoc _ _ _).symm                      -- `ℂ` の積の結合律
-    _ = 1 * A i j := by norm_num                                             -- `(-1_ℂ)(-1_ℂ) = 1_ℂ`（`definition_of_cc` の積）
+    _ = 1 * A i j := by rw [complex_minus_one_mul_minus_one]                 -- `minus_one_times_minus_one_is_one_in_cc`
     _ = A i j := one_mul _                                                   -- `1_ℂ` は積の単位元
 
 /-- **`matrix_double_negation`**: `-(-A) = A`。 -/

@@ -3978,6 +3978,51 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
     },
   },
   {
+    id: "calc_formulae_claim_minus_one_times_minus_one_is_one_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(-1_{\mathbb{C}})(-1_{\mathbb{C}})=1_{\mathbb{C}}` },
+    labels: ["minus_one_times_minus_one_is_one_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r = -1`),
+        "、",
+        math(String.raw`1_{\mathbb{C}}`),
+        " は同じ略記の ",
+        math(String.raw`r = 1`),
+        " である。左辺の積は ",
+        ref("definition_of_cc"),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`(-1_{\mathbb{C}})(-1_{\mathbb{C}}) = 1_{\mathbb{C}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-1_{\mathbb{C}})(-1_{\mathbb{C}})
+&= (-1)_{\mathbb{C}}\,(-1)_{\mathbb{C}}
+&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)\\
+&= \bigl((-1)(-1)\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to -1)\bigr)\\
+&= (1)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-1)(-1) = 1\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 1\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_double_negation の鎖と V1_in_Z_Y_epsilon の Step 0 が ℂ の (-1_ℂ)(-1_ℂ) = 1_ℂ を definition_of_cc の積の名前で根拠にしており、exp_of_negative_i_real_as_cos_minus_i_sin の 2 行目を割るにも -(-b) = b に要るので、主張にして引けるようにした。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_009_sqrt_minus_one",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/009_definition_sqrt_minus_1.typ", ordinal: 10 },

@@ -19,7 +19,7 @@ for m in DIMS:
                     body_neg_scalar(body_neg_scalar(A[i, j])),  # def_matrix_negation
                     mo * (mo * A[i, j]),                    # multiply_by_minus_one（2 か所）
                     (mo * mo) * A[i, j],                    # C の積の結合律
-                    P(1) * A[i, j],                         # (-1)(-1) = 1
+                    P(1) * A[i, j],                         # (-1)(-1) = 1（minus_one_times_minus_one_is_one_in_cc）
                     A[i, j],                                # 1 は積の単位元
                 ]
                 for t in range(len(chain) - 1):
