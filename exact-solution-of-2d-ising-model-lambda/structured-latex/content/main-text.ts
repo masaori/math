@@ -70316,14 +70316,18 @@ E&=E_{\mathrm{int}}+B
                       ]),
                       displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma)
-&=v_1-v_3=4
-&&\bigl(\because\ \text{一方の巡回方向と直前の等式}\bigr),
+&=v_1-v_3
+&&\bigl(\because\ \text{一方の巡回方向}\bigr)\\
+&=4
+&&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}
 \qquad\text{または}\qquad
 \begin{aligned}
 t_{\circ}(\gamma)
-&=-(v_1-v_3)=-4
-&&\bigl(\because\ \text{逆の巡回方向と直前の等式}\bigr).
+&=-(v_1-v_3)
+&&\bigl(\because\ \text{逆の巡回方向}\bigr)\\
+&=-4
+&&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
                       paragraph([
                         "ゆえに ", math(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`),

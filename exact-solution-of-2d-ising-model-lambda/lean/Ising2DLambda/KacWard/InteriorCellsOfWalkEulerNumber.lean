@@ -1,11 +1,102 @@
 import Ising2DLambda.KacWard.CellEulerNumberFromEvenEdgeCounts
 import Ising2DLambda.KacWard.CellVertexIncidenceCount
+import Ising2DLambda.KacWard.PlaneCellBoundary
 import Ising2DLambda.KacWard.OddRayInteriorCellsFromWalkFinite
 import Ising2DLambda.KacWard.InteriorCellSetEdgeConnected
 import Ising2DLambda.KacWard.ExteriorCellReachesOuterCoreFromWalk
 import Ising2DLambda.KacWard.OneSidedClosureProjectionWindingFromWalk
 
 namespace Ising2DLambda.KacWard
+
+/-- A horizontal grid edge meets precisely the selected cells above and below it. -/
+theorem horizontalEdge_cellIncidence_count (cells : Finset GridCell) (r c : ℤ) :
+    (cells.filter (fun x => (false, (r, c)) ∈ edgesOfCell x)).card =
+      (if (r, c) ∈ cells then 1 else 0) +
+        (if (r - 1, c) ∈ cells then 1 else 0) := by
+  classical
+  have hfilter : cells.filter (fun x => (false, (r, c)) ∈ edgesOfCell x) =
+      ({(r, c), (r - 1, c)} : Finset GridCell) ∩ cells := by
+    ext ⟨i, j⟩
+    simp [edgesOfCell, Prod.mk.injEq]
+    constructor
+    · rintro ⟨hmem, h⟩
+      constructor
+      · rcases h with h | h <;> omega
+      · exact hmem
+    · rintro ⟨h, hmem⟩
+      constructor
+      · exact hmem
+      · rcases h with h | h <;> omega
+  rw [hfilter]
+  have hne : (r, c) ≠ (r - 1, c) := by
+    intro h
+    have := congrArg Prod.fst h
+    omega
+  by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r - 1, c) ∈ cells <;>
+    simp [ha, hb, hne]
+
+/-- A vertical grid edge meets precisely the selected cells on either side. -/
+theorem verticalEdge_cellIncidence_count (cells : Finset GridCell) (r c : ℤ) :
+    (cells.filter (fun x => (true, (r, c)) ∈ edgesOfCell x)).card =
+      (if (r, c) ∈ cells then 1 else 0) +
+        (if (r, c - 1) ∈ cells then 1 else 0) := by
+  classical
+  have hfilter : cells.filter (fun x => (true, (r, c)) ∈ edgesOfCell x) =
+      ({(r, c), (r, c - 1)} : Finset GridCell) ∩ cells := by
+    ext ⟨i, j⟩
+    simp [edgesOfCell, Prod.mk.injEq]
+    constructor
+    · rintro ⟨hmem, h⟩
+      constructor
+      · rcases h with h | h <;> omega
+      · exact hmem
+    · rintro ⟨h, hmem⟩
+      constructor
+      · exact hmem
+      · rcases h with h | h <;> omega
+  rw [hfilter]
+  have hne : (r, c) ≠ (r, c - 1) := by
+    intro h
+    have := congrArg Prod.snd h
+    omega
+  by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r, c - 1) ∈ cells <;>
+    simp [ha, hb, hne]
+
+/-- Exactly one selected cell meets a boundary edge. -/
+theorem edge_cellIncidence_eq_one_iff_boundary (cells : Finset GridCell)
+    (e : GridEdge) :
+    (cells.filter (fun x => e ∈ edgesOfCell x)).card = 1 ↔
+      e ∈ planeCellBoundary cells := by
+  rcases e with ⟨b, ⟨r, c⟩⟩
+  cases b
+  · rw [horizontalEdge_cellIncidence_count]
+    simp only [planeCellBoundary, Finset.mem_filter, horizontalEdge_mem_cellEdges_iff,
+      Bool.false_eq_true, ↓reduceIte]
+    by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r - 1, c) ∈ cells <;>
+      simp [ha, hb]
+  · rw [verticalEdge_cellIncidence_count]
+    simp only [planeCellBoundary, Finset.mem_filter, verticalEdge_mem_cellEdges_iff,
+      ↓reduceIte]
+    by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r, c - 1) ∈ cells <;>
+      simp [ha, hb]
+
+/-- Exactly two selected cells meet an interior edge of the cell complex. -/
+theorem edge_cellIncidence_eq_two_iff_interior (cells : Finset GridCell)
+    (e : GridEdge) :
+    (cells.filter (fun x => e ∈ edgesOfCell x)).card = 2 ↔
+      e ∈ cellEdges cells \ planeCellBoundary cells := by
+  rcases e with ⟨b, ⟨r, c⟩⟩
+  cases b
+  · rw [horizontalEdge_cellIncidence_count]
+    simp only [Finset.mem_sdiff, planeCellBoundary, Finset.mem_filter,
+      horizontalEdge_mem_cellEdges_iff, Bool.false_eq_true, ↓reduceIte]
+    by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r - 1, c) ∈ cells <;>
+      simp [ha, hb]
+  · rw [verticalEdge_cellIncidence_count]
+    simp only [Finset.mem_sdiff, planeCellBoundary, Finset.mem_filter,
+      verticalEdge_mem_cellEdges_iff, ↓reduceIte]
+    by_cases ha : (r, c) ∈ cells <;> by_cases hb : (r, c - 1) ∈ cells <;>
+      simp [ha, hb]
 
 /-- Count incidences between the four edges of each interior cell and the
 edges of the actual closed walk's interior cell complex. -/
@@ -45,6 +136,24 @@ theorem interiorCellsOfWalk_edgeIncidence_sum {L m : ℕ} [NeZero L]
             rcases x with ⟨r, c⟩
             simp [edgesOfCell]
           simp [hcard, mul_comm]
+
+/-- The boundary and interior edges of an actual closed walk's interior cell
+complex have one and two incident cells, respectively. -/
+theorem interiorCellsOfWalk_edgeIncidence_classification {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    ∀ e : GridEdge,
+      ((cells.filter (fun x => e ∈ edgesOfCell x)).card = 1 ↔
+        e ∈ planeCellBoundary cells) ∧
+      ((cells.filter (fun x => e ∈ edgesOfCell x)).card = 2 ↔
+        e ∈ cellEdges cells \ planeCellBoundary cells) := by
+  dsimp only
+  intro e
+  exact ⟨edge_cellIncidence_eq_one_iff_boundary _ e,
+    edge_cellIncidence_eq_two_iff_interior _ e⟩
 
 /-- Count vertex incidences in the interior cells of an actual closed walk. -/
 theorem interiorCellsOfWalk_vertexIncidence_sum {L m : ℕ} [NeZero L]
