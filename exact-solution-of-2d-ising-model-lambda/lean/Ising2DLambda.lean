@@ -1189,6 +1189,7 @@ import Ising2DLambda.NecSuf.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.NecSuf.KacWard.ConnectedCellCorners
 import Ising2DLambda.KacWard.ConnectedCellCorners
+import Ising2DLambda.KacWard.CellVertexGraphConnected
 import Ising2DLambda.NecSuf.KacWard.BoundaryOfFiniteHeight
 import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumberFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded

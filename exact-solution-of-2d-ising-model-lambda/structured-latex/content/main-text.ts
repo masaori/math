@@ -69713,8 +69713,10 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                         habitat: "Z",
                         lean: [
                           "Ising2DLambda.KacWard.edgeConnectedCellSet_vertexGraphConnected",
+                          "Ising2DLambda.KacWard.edgeConnectedCellSet_actualVertexGraphConnected",
                           "Ising2DLambda.NecSuf.KacWard.connectedCellCorners_connected",
                           "Ising2DLambda.KacWard.edgeConnectedCellSet_vertexGraphConnected_from_necSuf",
+                          "Ising2DLambda.KacWard.edgeConnectedCellSet_actualVertexGraphConnected_from_necSuf",
                         ],
                         verification: ["sagemath/check/edge-connected-cell-set-vertex-graph-connected"],
                         statement: [
@@ -69906,21 +69908,15 @@ V_S&=|F_S|+1
                       displayMath(String.raw`|S|=E_S+1-V_S
 \qquad\bigl(\because\ 2\text{ の自然数乗の単射性}\bigr)`),
                       displayMath(String.raw`\begin{aligned}
-V_S-E_S+|S|
-&=V_S-E_S+(E_S+1-V_S)
-&&\bigl(\because\ |S|=E_S+1-V_S\bigr)\\
-&=1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
-\end{aligned}`),
-                      paragraph(["である。Euler 数の定義へ代入すると"]),
-                      displayMath(String.raw`\begin{aligned}
 \chi_{\square}(S)
 &=\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|
 &&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)\\
 &=V_S-E_S+|S|
 &&\bigl(\because\ V_S,E_S\text{ の定義}\bigr)\\
+&=V_S-E_S+(E_S+1-V_S)
+&&\bigl(\because\ |S|=E_S+1-V_S\bigr)\\
 &=1
-&&\bigl(\because\ |S|=E_S+1-V_S\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "最後に、零巻き付きで一周期の持ち上げ点が二つずつ相異なる閉じた非後退辺列 ",
