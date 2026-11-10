@@ -68776,11 +68776,9 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                             " は ", math(String.raw`A`), " と ", math(String.raw`\theta_S(A)`),
                             " の接続辺数の偶奇が一致することを示す。",
                           ]),
-                          displayMath(String.raw`\begin{aligned}
-\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
-&\Longleftrightarrow\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
-&&\bigl(\because\ \blkref{claim_cell_graph_incident_edge_parity_preserved}\bigr)
-\end{aligned}`),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
+\Longleftrightarrow\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
+\qquad\bigl(\because\ \blkref{claim_cell_graph_incident_edge_parity_preserved}\bigr)`),
                           paragraph([
                             "格子頂点 ", math(String.raw`v\notin\mathcal V_{\square}(S)`),
                             " には ", math(String.raw`A`), " の辺は接続しない（",

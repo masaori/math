@@ -54,6 +54,8 @@ fi
 targets=(
   Ising2DLambda.KacWard.cellGridEvenEdge_iff_encoded
   Ising2DLambda.KacWard.cellGridEvenEdge_card_encoded
+  Ising2DLambda.KacWard.cellSubset_graphEvenEdge_card
+  Ising2DLambda.NecSuf.KacWard.cell_subset_graph_even_edge_card
   Ising2DLambda.KacWard.cellVertexStep_graphAdj
   Ising2DLambda.KacWard.edgeConnectedCellSet_actualVertexGraphConnected
   Ising2DLambda.KacWard.edgeConnectedCellSet_actualVertexGraphConnected_from_necSuf
