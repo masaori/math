@@ -1,4 +1,4 @@
   第 1 等号の両辺の指数が、実数の対の有理関数体で厳密に一致する（対照: 符号を落とすと崩れる）
-  M = 2..8、μ = -2M..2M で、鎖の 17 等号が QQbar で厳密に成り立つ
-  Arb の cos・sin で、周期性（μ を半整数にずらすと崩れる）・cos_of_negated_real・sin_of_negated_real・cos π = -1・sin π = 0 の行が重なる
+  M = 2..8、μ = -2M..2M で、鎖の 18 等号が QQbar で厳密に成り立つ
+  Arb の cos・sin で、周期性（cos は π、sin は π/2 ずらすと崩れる）・cos_of_negated_real・sin_of_negated_real・cos π = -1・sin π = 0 の行が重なる
 RESULT: PASS

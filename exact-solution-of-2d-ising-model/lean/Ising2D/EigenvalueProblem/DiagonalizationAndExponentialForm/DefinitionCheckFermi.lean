@@ -54,13 +54,13 @@ theorem gamma1_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
     _ = gamma1 K θ := by
         rw [gamma1]                               -- 3 行目: `def_gamma1_gamma2_of_theta`
 
-/-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 8 行）。
+/-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 12 行）。
 
 人手の `(M_col)_ℝ` は、Lean では分母が `ℕ → ℝ` の像 `(M : ℝ)`（`thetaTilde` の定義）で、
 分子の `(kM_col)_ℝ` の因子は `ℤ → ℝ` の像 `((M : ℤ) : ℝ)` である。3 行目で積の像を分けるときに、
 この二つの像が一致すること（`Int.cast_natCast`）を同じ段で当てて、以後どちらも `(M : ℝ)` と書く。
-人手の `2πk_ℝ(M_col)_ℝ` は、5 行目の分配法則が作る形どおり `2π(k_ℝ(M_col)_ℝ)` と括る。
-8 行目の約分はこの括りに対する `a(bc)/c = ab` で、`mul_div_assoc` と `mul_div_cancel_right₀` の 2 つの書き換えで当てる。 -/
+人手の `2πk_ℝ(M_col)_ℝ` は、9 行目の分配法則が作る形どおり `2π(k_ℝ(M_col)_ℝ)` と括る。
+12 行目の約分はこの括りに対する `a(bc)/c = ab` で、`mul_div_assoc` と `mul_div_cancel_right₀` の 2 つの書き換えで当てる。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
@@ -71,17 +71,25 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
         rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
     _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * (M : ℝ)) - 1 / 2) / M := by
         rw [Int.cast_mul, Int.cast_natCast]       -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
+    _ = 2 * Real.pi * (((k : ℝ) * (M : ℝ) + (μ : ℝ)) - 1 / 2) / M := by
+        rw [add_comm (μ : ℝ)]                     -- 4 行目: ℝ の加法の交換律
+    _ = 2 * Real.pi * (((k : ℝ) * (M : ℝ) + (μ : ℝ)) + (-(1 / 2))) / M := by
+        rw [sub_eq_add_neg]                       -- 5 行目: ℝ の差の定義
+    _ = 2 * Real.pi * ((k : ℝ) * (M : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / M := by
+        rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
+    _ = 2 * Real.pi * ((k : ℝ) * (M : ℝ) + ((μ : ℝ) - 1 / 2)) / M := by
+        rw [← sub_eq_add_neg]                     -- 7 行目: ℝ の差の定義を右辺から左辺へ
     _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * (M : ℝ)) / M := by
-        rw [add_sub_right_comm]                   -- 4 行目: ℝ の加法の結合律と交換律（`(a+b)-c = (a-c)+b`）
+        rw [add_comm ((k : ℝ) * (M : ℝ))]         -- 8 行目: ℝ の加法の交換律
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * (M : ℝ))) / M := by
-        rw [mul_add]                              -- 5 行目: ℝ の分配法則
+        rw [mul_add]                              -- 9 行目: ℝ の分配法則
     _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M :=
-        add_div _ _ _                             -- 6 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
+        add_div _ _ _                             -- 10 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
     _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M := rfl
-                                                  -- 7 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
+                                                  -- 11 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
         rw [mul_div_assoc, mul_div_cancel_right₀ _ hM']
-                                                  -- 8 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
+                                                  -- 12 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
 
 /-- 原文 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`。 -/
 theorem gamma1_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
@@ -93,20 +101,21 @@ theorem gamma2_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : �
     gamma2 K (thetaTilde M (μ + k * M)) = gamma2 K (thetaTilde M μ) := by
   rw [thetaTilde_add_int_mul M hM, gamma2_add_two_pi_mul_int]
 
-/-- 人手 `periodicity_of_check_fermi` の準備の第二: `k ∈ ℤ` について `(-k)_ℝ = -k_ℝ`（人手の 6 行）。 -/
+/-- 人手 `periodicity_of_check_fermi` の準備の第二: `k ∈ ℤ` について `(-k)_ℝ = -k_ℝ`（人手の 7 行）。 -/
 theorem periodicity_prep_int_cast_neg (k : ℤ) : ((-k : ℤ) : ℝ) = -(k : ℝ) :=
   calc ((-k : ℤ) : ℝ)
-      = ((-k : ℤ) : ℝ) + ((k : ℝ) + (-(k : ℝ))) := by
-        rw [add_neg_cancel, add_zero]             -- 1 行目: `k_ℝ + (-k_ℝ) = 0_ℝ` と零の性質
+      = ((-k : ℤ) : ℝ) + 0 := (add_zero _).symm   -- 1 行目: `0_ℝ` は ℝ の和の単位元
+    _ = ((-k : ℤ) : ℝ) + ((k : ℝ) + (-(k : ℝ))) := by
+        rw [add_neg_cancel]                       -- 2 行目: ℝ の加法逆元 `k_ℝ + (-k_ℝ) = 0_ℝ`
     _ = (((-k : ℤ) : ℝ) + (k : ℝ)) + (-(k : ℝ)) := (add_assoc _ _ _).symm
-                                                  -- 2 行目: ℝ の加法の結合律
+                                                  -- 3 行目: ℝ の加法の結合律
     _ = (((-k + k : ℤ)) : ℝ) + (-(k : ℝ)) := by
-        rw [Int.cast_add]                         -- 3 行目: `ι_{ℤ→ℝ}` は和を保つ
+        rw [Int.cast_add]                         -- 4 行目: `ι_{ℤ→ℝ}` は和を保つ
     _ = ((0 : ℤ) : ℝ) + (-(k : ℝ)) := by
-        rw [neg_add_cancel]                       -- 4 行目: ℤ で `(-k) + k = 0`
+        rw [neg_add_cancel]                       -- 5 行目: ℤ で `(-k) + k = 0`
     _ = (0 : ℝ) + (-(k : ℝ)) := by
-        rw [Int.cast_zero]                        -- 5 行目: `ι_{ℤ→ℝ}` は零を保つ
-    _ = -(k : ℝ) := zero_add _                    -- 6 行目: 零の性質
+        rw [Int.cast_zero]                        -- 6 行目: `ι_{ℤ→ℝ}` は零を保つ
+    _ = -(k : ℝ) := zero_add _                    -- 7 行目: `0_ℝ` は ℝ の和の単位元
 
 /-- 人手 `periodicity_of_check_fermi` (2) の第二の鎖: `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行）。 -/
 theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :

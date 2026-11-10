@@ -22,7 +22,11 @@ chain2 = [
     2 * PI * ((mu + kk * MM) - h) / MM,              # θ~ の定義を μ+kM で（像 (μ+kM)_R）
     2 * PI * ((mu + (kk * MM)) - h) / MM,            # ι は和を保つ
     2 * PI * ((mu + kk * MM) - h) / MM,              # ι は積を保つ
-    2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の結合律と交換律
+    2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律
+    2 * PI * ((kk * MM + mu) + (-h)) / MM,           # 差の定義
+    2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律
+    2 * PI * (kk * MM + (mu - h)) / MM,              # 差の定義を右辺から左辺へ
+    2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の交換律
     (2 * PI * (mu - h) + 2 * PI * kk * MM) / MM,     # 分配法則
     2 * PI * (mu - h) / MM + 2 * PI * kk * MM / MM,  # 分数の和
     tt(mu) + 2 * PI * kk * MM / MM,                  # θ~_μ の定義
@@ -72,10 +76,10 @@ rep.check(tt(MM + 1 - mu) != (-tt(mu)) + PI, "(3) 対照: θ~_ν ≠ -θ~_μ + �
 iota = lambda a: QQ(a)
 ok = True
 for k in range(-30, 31):
-    lines = [iota(-k), iota(-k) + (iota(k) + (-iota(k))), (iota(-k) + iota(k)) + (-iota(k)),
+    lines = [iota(-k), iota(-k) + QQ(0), iota(-k) + (iota(k) + (-iota(k))), (iota(-k) + iota(k)) + (-iota(k)),
              iota((-k) + k) + (-iota(k)), iota(0) + (-iota(k)), QQ(0) + (-iota(k)), -iota(k)]
     ok = ok and all(lines[j] == lines[j + 1] for j in range(len(lines) - 1))
-rep.check(ok, "準備の第二 (-k)_R の鎖 6 等号（k = -30..30）")
+rep.check(ok, "準備の第二 (-k)_R の鎖 7 等号（k = -30..30）")
 ok = all(iota(a + b) == iota(a) + iota(b) and iota(a * b) == iota(a) * iota(b) for a in range(-12, 13) for b in range(-12, 13))
 rep.check(ok and iota(1) == 1 and iota(0) == 0, "ι は和・積・単位元・零を保つ（-12..12）")
 
@@ -90,6 +94,10 @@ for M in M_RANGE:
                 T(m + k * M),
                 2 * ((QQ(m) + QQ(k * M)) - h) / M,
                 2 * ((QQ(m) + QQ(k) * QQ(M)) - h) / M,
+                2 * ((QQ(k) * QQ(M) + QQ(m)) - h) / M,
+                2 * ((QQ(k) * QQ(M) + QQ(m)) + (-h)) / M,
+                2 * (QQ(k) * QQ(M) + (QQ(m) + (-h))) / M,
+                2 * (QQ(k) * QQ(M) + (QQ(m) - h)) / M,
                 2 * ((QQ(m) - h) + QQ(k) * QQ(M)) / M,
                 (2 * (QQ(m) - h) + 2 * QQ(k) * QQ(M)) / M,
                 2 * (QQ(m) - h) / M + 2 * QQ(k) * QQ(M) / M,

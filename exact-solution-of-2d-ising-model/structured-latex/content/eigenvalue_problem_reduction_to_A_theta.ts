@@ -2470,8 +2470,10 @@ k
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr)\\
 &=2\pi\mu_{\mathbb R}-2\pi\cdot\tfrac12
 &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&=2\pi\mu_{\mathbb R}-(\pi\cdot2)\cdot\tfrac12
+&&\bigl(\because\ \mathbb R\text{ の積の交換律}\ (2\pi=\pi\cdot2)\bigr)\\
 &=2\pi\mu_{\mathbb R}-\pi\left(2\cdot\tfrac12\right)
-&&\bigl(\because\ \mathbb R\text{ の積の結合律と交換律}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の積の結合律}\bigr)\\
 &=2\pi\mu_{\mathbb R}-\pi
 &&\bigl(\because\ 2\cdot\tfrac12=1\bigr)\\
 &=-\pi+2\pi\mu_{\mathbb R}
@@ -2487,8 +2489,10 @@ k
 &&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=(M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu\text{ で}\bigr) \\
 &=(\cos(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}-i(\sin(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}
 &&\bigl(\because\ \text{上の鎖を 2 箇所へ同時代入}\bigr) \\
+&=(\cos(-\pi))_{\mathbb C}-i(\sin(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}
+&&\bigl(\because\ \mu\in\mathbb Z\text{ と }\cos\text{ の }2\pi\text{ 周期性}\ (x\to-\pi,\ n\to\mu)\bigr) \\
 &=(\cos(-\pi))_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
-&&\bigl(\because\ \mu\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
+&&\bigl(\because\ \mu\in\mathbb Z\text{ と }\sin\text{ の }2\pi\text{ 周期性}\ (x\to-\pi,\ n\to\mu)\bigr) \\
 &=(\cos\pi)_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
 &&\bigl(\because\ \blkref{cos_of_negated_real}\ (\theta\to\pi)\bigr) \\
 &=(\cos\pi)_{\mathbb C}-i\bigl(-(\sin\pi)_{\mathbb C}\bigr)
@@ -2527,6 +2531,7 @@ k
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 鎖の「cos は偶関数」「sin は奇関数」の 2 行が名前だけの根拠だったので、主張 cos_of_negated_real・sin_of_negated_real（θ → π）の参照にした。" +
           "sin_of_negated_real の右辺は ℂ の符号反転 -(sin π)_ℂ なので、続く行を -(0_R)_ℂ → -0_ℂ → (-1_ℂ)·0_ℂ → 0_ℂ の順に直した（-0_R = 0_R の行が無くなり、-0_ℂ = (-1_ℂ)·0_ℂ と (-1_ℂ)·0_ℂ = 0_ℂ の 2 行が増え、鎖は 15 等号から 16 等号になった）。主張の中身は不変。",
         "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C)）を引く前に negative_i_times_complex_is_negation_of_i_times で -(i(·)_C) へ書き換える 1 行を足した（16 等号 → 17 等号）。ほかの行は変えていない。",
+        "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。角度の鎖の「ℝ の積の結合律と交換律」を、積の交換律（2π = π·2）と積の結合律の 2 行に（6 等号 → 7 等号）、主鎖の「cos,sin の 2π 周期性を 2 箇所へ同時適用」を、cos の周期性と sin の周期性の 2 行に（17 等号 → 18 等号）した。主張の中身は不変。",
       ],
     },
   },

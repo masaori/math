@@ -6,8 +6,8 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - ブロック: `evenfermi_002_claim_periodicity`（γ_1, γ_2 の 2π 周期性と共役添字 M_col+1-μ）
-- 範囲: 準備の第一の cos x + i sin x の 17 等号、第二の (-k)_R の 6 等号、第三の ℝ の等式 cos(-x) = cos x（`cos_of_negated_real` と `inclusion_rr_to_cc_is_injective` から作る）、(1) の γ_1 の 3 等号と γ_2 の 6 等号、
-  (2) の θ̃_{μ+kM} の 8 等号・-θ̃_{μ+kM} の 4 等号・γ の三つの 2 等号、(3) の θ̃_ν の 5 等号・-θ̃_ν の 5 等号・γ_2 の二つの 2 等号・
+- 範囲: 準備の第一の cos x + i sin x の 17 等号、第二の (-k)_R の 7 等号、第三の ℝ の等式 cos(-x) = cos x（`cos_of_negated_real` と `inclusion_rr_to_cc_is_injective` から作る）、(1) の γ_1 の 3 等号と γ_2 の 6 等号、
+  (2) の θ̃_{μ+kM} の 12 等号・-θ̃_{μ+kM} の 4 等号・γ の三つの 2 等号、(3) の θ̃_ν の 5 等号・-θ̃_ν の 5 等号・γ_2 の二つの 2 等号・
   γ_1 の 5 等号・γ の 3 等号・P̌_ν の 3 等号、主張
 
 ## 証明の行との対応
@@ -15,10 +15,10 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備の第一: cos x + i sin x = exp(ix) の鎖 | `check_generic_chains.sage` | exp(±ix) を有理関数体の元にして 17 本の等号の右辺 17 行を別々に組み、隣と比べる。左辺 cos x + i sin x と第 1 行の比較は 2 倍して分母を払った差が euler の関係のイデアルに入る（関係なしでは入らない）。対照: 分母の i だけを落とすと等号が崩れる | **PASS** | 成り立つ |
-| 準備の第二: (-k)_R = -k_R の 6 等号 | `check_angle_chains.sage` | ι_{Z→R} を ZZ → QQ の埋め込みで持ち、k = -30..30 で各行を比べる。ι が和・積・単位元・零を保つことも見る | **PASS** | 成り立つ |
+| 準備の第二: (-k)_R = -k_R の 7 等号 | `check_angle_chains.sage` | ι_{Z→R} を ZZ → QQ の埋め込みで持ち、k = -30..30 で各行を比べる。ι が和・積・単位元・零を保つことも見る | **PASS** | 成り立つ |
 | 準備の第三: ℝ の等式 cos(-x) = cos x | `check_values_and_claims.sage` | 本文は鎖を持たず、`cos_of_negated_real`（鎖は `sagemath/check/cos_of_negated_real/`）と `inclusion_rr_to_cc_is_injective` を当てる。具体値の照合は作り方で自明（下記）で、中身は `cos_of_negated_real` の検算が担う | **PASS** | 成り立つ |
 | (1) γ_1(θ+2πk_R) の鎖、γ_2(θ+2πk_R) の鎖 | `check_generic_chains.sage`・`check_values_and_claims.sage` | 一般の点: 各行の差が「cos の周期性」「sin の周期性」「準備の exp(ix) の表示」のうちその行の根拠だけのイデアルに入る（対照つき。exp の表示が euler の関係から出ることも確かめる）。具体値: 結合定数 4 組 × M_col = 2..8、θ = ±θ̃_m（m = -M..2M）、k = -3..3 で円分体 Q(ζ_{4M}) の中で各行 | **PASS** | 成り立つ |
-| (2) θ̃_{μ+kM} の 8 等号、-θ̃_{μ+kM} の 4 等号 | `check_angle_chains.sage` | π・μ_R・k_R・(M)_R を不定元にした ℚ 上の有理関数体で各行を別々に組み隣と比べる。M = 2..8、μ = -2M..3M、k = -3..3 で θ/π ∈ QQ として各行。対照: θ̃_{μ+kM} ≠ θ̃_μ + kπ | **PASS** | 成り立つ |
+| (2) θ̃_{μ+kM} の 12 等号、-θ̃_{μ+kM} の 4 等号 | `check_angle_chains.sage` | π・μ_R・k_R・(M)_R を不定元にした ℚ 上の有理関数体で各行を別々に組み隣と比べる。M = 2..8、μ = -2M..3M、k = -3..3 で θ/π ∈ QQ として各行。対照: θ̃_{μ+kM} ≠ θ̃_μ + kπ | **PASS** | 成り立つ |
 | (2) γ_1(θ̃_{μ+kM})・γ_2(±θ̃_{μ+kM}) の各 2 等号 | `check_values_and_claims.sage` | 結合定数 4 組 × M_col = 2..8 × μ = -2M..3M × k = -3..3 で、中間の値 γ(θ̃_μ ± 2πk) を含めて円分体で | **PASS** | 成り立つ |
 | (3) θ̃_ν・-θ̃_ν の鎖（ν = M+1-μ） | `check_angle_chains.sage` | 有理関数体で各行と `conjugate_index_of_check_Z_Y` (1)。M = 2..8 の全 μ ∈ M̌ で ν ∈ M̌ と各行。対照: θ̃_ν ≠ -θ̃_μ + π | **PASS** | 成り立つ |
 | (3) γ_2(θ̃_ν)・γ_2(-θ̃_ν)・γ_1(θ̃_ν) の鎖 | `check_generic_chains.sage`・`check_values_and_claims.sage` | γ_1 の鎖は一般の点で各行の根拠のイデアル（周期性、準備の ℝ の等式 cos(-x) = cos x）。具体値は結合定数 4 組 × M_col = 2..8 の全 μ ∈ M̌ で各行を円分体で。対照: γ_2(θ̃_ν) ≠ γ_2(θ̃_μ) | **PASS** | 成り立つ |
@@ -35,7 +35,7 @@
   - 具体値の準備の二つ（cos(-x) = cos x、cos x + i sin x = exp(ix)）は、`Angle` が cos・sin を exp(±iθ) から euler の式で作るので恒等式になる（cos(-x) の中身は `sagemath/check/cos_of_negated_real/`、exp(ix) の表示の中身は一般の点の `check_generic_chains.sage` が担う）。
   - 準備の cos x + i sin x の鎖の各行は、多項式環・有理関数体の中ではどれも同じ元になる。行ごとの比較は本文の書き写しの確認で、中身を担うのは否定の対照と、cos x + i sin x の左辺と第 1 行のイデアルの検査である。
   - 定義を当てる行（(1) の γ_1・γ_2 の鎖の最初と最後、(3) の γ_1 の鎖の定義の行、P̌_ν の第 1 行）は、左辺を定義の式そのもので持つ。
-  - `check_angle_chains.sage` の ι が和・積・単位元を保つ行と準備の第二を使う行は、有理関数体の上では両辺が同じ式になる（整数の具体の点が担う）。
+  - `check_angle_chains.sage` の ι が和・積・単位元を保つ行と準備の第二を使う行は、有理関数体の上では両辺が同じ式になる（整数の具体の点が担う）。θ̃_{μ+kM} の鎖の加法の交換律・差の定義・結合律の 5 行も、有理関数体・QQ の上では両辺が同じ元になり、行の書き写しの確認である。
   - γ の鎖は arccosh が γ_1 の値だけの関数であることを使うだけで、検算は代入が通ることを確かめるだけである。
 - 対照は、γ_2(θ̃_μ) ≠ γ_2(-θ̃_μ) の組でだけ数える。
 - 範囲外: 具体値で M_col ≥ 9、|k| ≥ 4。

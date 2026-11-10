@@ -5464,8 +5464,10 @@ g
       ]),
       displayMath(String.raw`\begin{aligned}
 (-k)_{\mathbb R}
+&= (-k)_{\mathbb R} + 0_{\mathbb R}
+&&(\because\ 0_{\mathbb R}\ \text{は}\ \mathbb{R}\ \text{の和の単位元})\\
 &= (-k)_{\mathbb R} + \bigl(k_{\mathbb R} + (-k_{\mathbb R})\bigr)
-&&(\because\ k_{\mathbb R} + (-k_{\mathbb R}) = 0_{\mathbb R}\ \text{と零の性質})\\
+&&(\because\ \mathbb{R}\ \text{の加法逆元}\ k_{\mathbb R} + (-k_{\mathbb R}) = 0_{\mathbb R})\\
 &= \bigl((-k)_{\mathbb R} + k_{\mathbb R}\bigr) + (-k_{\mathbb R})
 &&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
 &= \bigl((-k) + k\bigr)_{\mathbb R} + (-k_{\mathbb R})
@@ -5475,7 +5477,7 @@ g
 &= 0_{\mathbb R} + (-k_{\mathbb R})
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は零を保つ})\\
 &= -k_{\mathbb R}
-&&(\because\ \text{零の性質})
+&&(\because\ 0_{\mathbb R}\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
 \end{aligned}`),
       paragraph([
         "第三に、",
@@ -5550,8 +5552,16 @@ g
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は和を保つ})\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は積を保つ})\\
+&= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の差の定義})\\
+&= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
+&= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の差の定義を右辺から左辺へ})\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の加法の結合律と交換律})\\
+&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
 &= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の分配法則})\\
 &= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -5706,6 +5716,7 @@ g
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の名前だけの根拠「ℂ の四則」3 か所（cos(-x) の鎖の i(-w) = -iw・-i(-w) = iw、cos x + i sin x の鎖の i/(2i) = 1/2 と最後の行）と、1 行に 3 つの等号を使っていた (-x)_C = -x_C の行を、relation_of_gamma_2_theta_tilde の準備の第一と同じ書き方にした。-x ∈ ℝ のまま i(-x) = -ix（6 行）と -i(-x) = ix（2 行）を先に作り、cos(-x) の鎖からそれを引く。cos x + i sin x の鎖は ℂ の体の等式 1 つずつの 17 行にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の i(-x) = -ix（6 行）・-i(-x) = ix（2 行）・cos(-x) の 5 行の鎖は、主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real の鎖と同じだった。" +
           "3 本の鎖を消し、cos(-x) = cos x を cos_of_negated_real と inclusion_rr_to_cc_is_injective から ℝ の等式として作る文（準備の第三）にした（消した鎖は ℂ の等式で終わり、ℝ の γ_1 の鎖へ像の記号を省いて持ち込んでいた）。(3) の γ_1 の鎖の行と主張の中身は不変。",
+        "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。準備の第二の「k_R + (-k_R) = 0_R と零の性質」を、和の単位元の行と加法逆元の行に（6 等号 → 7 等号）、(2) の θ~_{μ+kM} の鎖の「ℝ の加法の結合律と交換律」を、交換律・差の定義・結合律・差の定義（右辺から左辺へ）・交換律の 5 行に（8 等号 → 12 等号）した。主張の中身は不変。",
       ],
     },
   },

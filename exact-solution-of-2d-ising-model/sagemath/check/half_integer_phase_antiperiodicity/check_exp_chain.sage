@@ -1,5 +1,5 @@
 # 対象ラベル: half_integer_phase_antiperiodicity
-# 主張の左辺から -1_C までの 17 等号の鎖を一行ずつ確かめる。M = 2..8、μ = -2M..2M。
+# 主張の左辺から -1_C までの 18 等号の鎖を一行ずつ確かめる。M = 2..8、μ = -2M..2M。
 # 厳密: 各行の cos・sin の値は、その行に書かれた角度（2π × 有理数）の cos2pi・sin2pi（AA）として作り、
 #   ℂ の元は QQbar で持つ。第 0 行の exp は E（1 の冪根）で持つ。隣の行を QQbar で厳密に比べる。
 # 独立の確かめ: 全実数上の cos・sin の性質を使う行（周期性・cos_of_negated_real・sin_of_negated_real・cos π・sin π）は、Arb の cos・sin
@@ -8,7 +8,8 @@
 # 第 1 等号（negative_i_times_complex_is_negation_of_i_times を z = ((M)_R θ̃_μ)_C で）は、両辺の exp の中の
 #   (-i)((M)_R θ̃_μ)_C と -(i((M)_R θ̃_μ)_C) を、π・μ・M を不定元にした有理関数体の上の実数の対として組み、一致を見る
 #   （E の値の比較は同じ 1 の冪根なので自明）。
-# 対照: 周期性の行で μ を半整数にずらす（角度に π を足す）と崩れる。第 1 等号で符号を落とすと崩れる。
+# 対照: cos の周期性の行で μ を半整数にずらす（角度に π を足す）と崩れる。sin の周期性の行で角度に π/2 を足すと崩れる
+#   （sin は π ずらしでは sin(-π) = 0 のままで崩れない）。第 1 等号で符号を落とすと崩れる。
 load("../../_shared/complex_as_real_pairs.sage")
 load("../../_shared/half_integer_phase_exact.sage")
 F = ANGLE_FIELD
@@ -44,6 +45,7 @@ for M in range(2, 9):
             ("exp(-(i((M)_R θ̃_μ)_C))", E(-q0)),
             ("cos((M)θ̃) - i sin((M)θ̃)", CS(q0)),
             ("cos(-π+2πμ) - i sin(-π+2πμ)", CS(q2)),
+            ("cos(-π) - i sin(-π+2πμ)", to_C(cos2pi(-h)) - i_ * to_C(sin2pi(q2))),
             ("cos(-π) - i sin(-π)", to_C(cos2pi(-h)) - i_ * to_C(sin2pi(-h))),
             ("cos π - i sin(-π)", to_C(cos2pi(h)) - i_ * to_C(sin2pi(-h))),
             ("cos π - i(-(sin π)_C)", to_C(cos2pi(h)) - i_ * (-to_C(sin2pi(h)))),
@@ -63,9 +65,10 @@ for M in range(2, 9):
         # 周期性・cos_of_negated_real・sin_of_negated_real・特殊値の行を Arb で独立に
         assert arb_cos2pi(q2).overlaps(arb_cos2pi(-h)) and arb_sin2pi(q2).overlaps(arb_sin2pi(-h))
         assert not arb_cos2pi(q2 + h).overlaps(arb_cos2pi(-h))
+        assert not arb_sin2pi(q2 + QQ(1) / 4).overlaps(arb_sin2pi(-h))
 assert arb_cos2pi(-h).overlaps(arb_cos2pi(h))
 assert arb_sin2pi(-h).overlaps(-arb_sin2pi(h))
 assert arb_cos2pi(h).overlaps(RB(-1)) and arb_sin2pi(h).overlaps(RB(0))
-print("  M = 2..8、μ = -2M..2M で、鎖の 17 等号が QQbar で厳密に成り立つ")
-print("  Arb の cos・sin で、周期性（μ を半整数にずらすと崩れる）・cos_of_negated_real・sin_of_negated_real・cos π = -1・sin π = 0 の行が重なる")
+print("  M = 2..8、μ = -2M..2M で、鎖の 18 等号が QQbar で厳密に成り立つ")
+print("  Arb の cos・sin で、周期性（cos は π、sin は π/2 ずらすと崩れる）・cos_of_negated_real・sin_of_negated_real・cos π = -1・sin π = 0 の行が重なる")
 print("RESULT: PASS")
