@@ -3933,7 +3933,7 @@ ii
 &= (-1, 0)
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &= -1_{\mathbb{C}}
-&&(\because\ \blkref{inclusion_rr_to_cc})
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{を右辺から左辺へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 e_+e_-
@@ -3959,7 +3959,7 @@ e_+e_-
 &= xx + \Bigl((iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &= xx + \Bigl((iy)x + \bigl(-((iy)x)\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
-&&(\because\ \blkref{multiply_by_minus_one})\\
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
 &= xx + 0_{\mathbb{C}} + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
 &= xx + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
@@ -3969,11 +3969,11 @@ e_+e_-
 &= xx + (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})(yy)\bigr)
 &&(\because\ \text{上の}\ ii = -1_{\mathbb{C}})\\
 &= xx + \bigl(-(-(yy))\bigr)
-&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ右辺から左辺へ})\\
 &= xx + yy
 &&(\because\ \text{上の}\ -(-z) = z)\\
 &= x^2 + y^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ})
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ右辺から左辺へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 (x - y)^2
@@ -4025,7 +4025,7 @@ u + iv
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
 &= \bigl((e_+ + e_-) + (e_+ - e_-)\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律}\ \text{を右辺から左辺へ})\\
 &= \Bigl((e_+ + e_-) + \bigl(e_+ + (-e_-)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{def_complex_difference})\\
 &= \Bigl(e_+ + e_+ + \bigl(e_- + (-e_-)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
@@ -4035,9 +4035,9 @@ u + iv
 &= \bigl(e_+ + e_+\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
 &= \bigl(1_{\mathbb{C}}e_+ + 1_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\ \text{を右辺から左辺へ})\\
 &= \bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})e_+\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律}\ \text{を右辺から左辺へ})\\
 &= \bigl((1 + 1)_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
 &= \bigl(2_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
@@ -4052,9 +4052,9 @@ u + iv
       displayMath(String.raw`\begin{aligned}
 u^2 + v^2
 &= (u - iv)(u + iv)
-&&(\because\ \text{上の}\ (x - iy)(x + iy) = x^2 + y^2\ \text{を}\ x = u,\ y = v\ \text{で})\\
+&&(\because\ \text{上の}\ (x - iy)(x + iy) = x^2 + y^2\ \text{を}\ x = u,\ y = v\ \text{で右辺から左辺へ})\\
 &= e_-\,(u + iv)
-&&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin})\\
+&&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\ \text{を右辺から左辺へ})\\
 &= e_-\,e_+
 &&(\because\ \text{上の}\ u + iv = e_+)\\
 &= e_+e_-
