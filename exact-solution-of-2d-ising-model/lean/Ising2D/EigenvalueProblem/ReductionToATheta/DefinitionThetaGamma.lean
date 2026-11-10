@@ -98,7 +98,12 @@ noncomputable def gamma2 : ℂ :=
 
 /-- 原文 `def_A_theta` の明示行列そのまま。人手の定義に書いた読みのとおり、`(1,1)`・`(2,2)` 成分は実数
 `c_1c_2^* - s_1s_2^* cos θ` の像、`(1,2)`・`(2,1)` 成分は実数を `ℝ → ℂ` の包含で送った ℂ の式で、
-`(2,1)` 成分の先頭の `-i` は `-Complex.I`、四つの因子の積は左から括る（Lean の `a * b * c * d` は `((a * b) * c) * d`）。 -/
+`(2,1)` 成分の先頭の `-i` は `-Complex.I`、四つの因子の積は左から括る（Lean の `a * b * c * d` は `((a * b) * c) * d`）。
+`(1,1)`・`(2,2)` 成分の実数は `(c_1c_2^*) - ((s_1s_2^*) cos θ)`（ℝ の積は左から括り、差は ℝ の差）、
+`(1,2)`・`(2,1)` 成分の第四の因子は `((c_1 cos θ) ∓ (i sin θ)) - (s_1c_2)`（差は人手 `def_complex_difference`、
+和と積は `definition_of_cc`）で、Lean の `a - b - c`・`a + b - c` も左から括る（Lean の ℂ の差は mathlib の定義で、
+人手の `z + (-w)` とは `sub_eq_add_neg` で等しい）。`exp` は人手 `def_scalar_exp` の `K = ℂ` の
+`exp`（Lean では `Complex.exp`）である。 -/
 noncomputable def AMat : Matrix (Fin 2) (Fin 2) ℂ :=
   !![((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ),
       Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
