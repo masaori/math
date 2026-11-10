@@ -2609,8 +2609,16 @@ k
 &&\bigl(\because\ \tilde\theta\text{ の定義を }\mu+M_{\mathrm{col}}\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((\mu_{\mathbb R}+(M_{\mathrm{col}})_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ}\bigr)\\
+&=\frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)\\
+&=\frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&=\frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr)\\
+&=\frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)\\
 &=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
 &=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -2640,8 +2648,10 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
 &&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}\text{ で}\bigr) \\
 &=(\cos(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}
 &&\bigl(\because\ \text{上の鎖を 2 箇所へ同時代入}\bigr) \\
+&=(\cos(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}
+&&\bigl(\because\ j\in\mathbb Z\text{ と }\cos\text{ の }2\pi\text{ 周期性}\ (x\to j_{\mathbb R}\tilde\theta_\mu,\ n\to j)\bigr) \\
 &=(\cos(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}
-&&\bigl(\because\ j\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
+&&\bigl(\because\ j\in\mathbb Z\text{ と }\sin\text{ の }2\pi\text{ 周期性}\ (x\to j_{\mathbb R}\tilde\theta_\mu,\ n\to j)\bigr) \\
 &=\exp\bigl(-\bigl(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\bigr)\bigr)
 &&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_\mu\text{ で（右辺から左辺へ）}\bigr) \\
 &=\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
@@ -2655,6 +2665,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
       notes: [
         "2026-11-02（全証明の SageMath 検算）: half_integer_checkZ_periodicity と half_integer_checkY_periodicity の証明が同じ二つの鎖（添字をずらした角度と係数の一致）を重複して持っていたので、係数の一致を一つの主張に切り出した。",
         "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は -(iθ_C)）を当てる 1 行目の前と末尾の行の後に negative_i_times_complex_is_negation_of_i_times の行を 1 行ずつ足した（4 等号 → 6 等号）。ほかの行は変えていない。",
+        "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。角度の鎖の「ℝ の加法の結合律と交換律」を、交換律・差の定義（def_real_difference）・結合律・差の定義（右辺から左辺へ）・交換律の 5 行に（7 等号 → 11 等号）、主鎖の「cos,sin の 2π 周期性を 2 箇所へ同時適用」を、cos の周期性と sin の周期性の 2 行に（6 等号 → 7 等号）した。主張の中身は不変。",
       ],
     },
   },

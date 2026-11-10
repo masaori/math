@@ -42,9 +42,9 @@
 | `Ising2D.checkZ`（`DefinitionHalfIntegerModes.lean`） | `check(Z)_μ` | `def_half_integer_checkZ` |
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
 | `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
-| `Ising2D.thetaTilde_period_for_checkZY` | 準備の鎖 `θ~_{μ+M} = θ~_μ + 2π` | `half_integer_phase_periodicity` |
+| `Ising2D.thetaTilde_period_for_checkZY` | 準備の鎖 `θ~_{μ+M} = θ~_μ + 2π`（人手の 11 行と 1 段ずつ） | `half_integer_phase_periodicity` |
 | `Ising2D.checkPhase_eq_exp_neg_I_mul` | 定義の係数の読み `exp((-i)(k_ℝθ~_l)_ℂ)`（`checkPhase` を人手の形に直す。`anticommutator_of_check_Z_Y` の準備でも使う） | `def_half_integer_checkZ`・`def_half_integer_checkY` |
-| `Ising2D.checkPhase_period_for_checkZY` | `e^{-ijθ~_{μ+M}} = e^{-ijθ~_μ}`（主張の鎖の 6 行。3 行目だけ 2 段） | `half_integer_phase_periodicity` |
+| `Ising2D.checkPhase_period_for_checkZY` | `e^{-ijθ~_{μ+M}} = e^{-ijθ~_μ}`（主張の鎖の 7 行。3 行目だけ 2 段） | `half_integer_phase_periodicity` |
 | `Ising2D.checkZ_period` | `check(Z)_{μ+M} = check(Z)_μ` | `half_integer_checkZ_periodicity` |
 | `Ising2D.checkY_period` | `check(Y)_{μ+M} = check(Y)_μ` | `half_integer_checkY_periodicity` |
 | `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |

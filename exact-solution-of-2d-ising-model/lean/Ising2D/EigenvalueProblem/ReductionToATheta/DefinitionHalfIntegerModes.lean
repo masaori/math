@@ -60,22 +60,33 @@ noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
 theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 :=
   checkPhase_M hM μ
 
-/-- 人手 `half_integer_phase_periodicity` の準備の鎖: `θ~_{μ+M} = θ~_μ + 2π`。 -/
+/-- 人手 `half_integer_phase_periodicity` の準備の鎖: `θ~_{μ+M} = θ~_μ + 2π`（人手の 11 行と 1 段ずつ対応）。 -/
 theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M (μ + (M : ℤ)) = thetaTilde M μ + 2 * Real.pi := by
-  have hMR : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hM
-  calc
-    thetaTilde M (μ + (M : ℤ))
-        = 2 * Real.pi * (((μ : ℝ) + M) - 1 / 2) / M := by
-            rw [thetaTilde]
-            push_cast
-            rfl
-    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * M) / M := by ring
-    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + (2 * Real.pi * M) / M := by
-          rw [add_div]
-    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi := by
-          field_simp
-    _ = thetaTilde M μ + 2 * Real.pi := by rw [thetaTilde, Int.cast_natCast]
+  have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
+  calc thetaTilde M (μ + (M : ℤ))
+      = 2 * Real.pi * (((μ + (M : ℤ) : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
+                                                  -- 1 行目: `θ~` の定義を `μ+M_col` で（`antiperiodic_exp_sum`）
+    _ = 2 * Real.pi * (((μ : ℝ) + ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+        rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
+    _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+        rw [add_comm (μ : ℝ)]                     -- 3 行目: ℝ の加法の交換律
+    _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
+        rw [sub_eq_add_neg]                       -- 4 行目: `def_real_difference`
+    _ = 2 * Real.pi * (((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
+        rw [add_assoc]                            -- 5 行目: ℝ の加法の結合律
+    _ = 2 * Real.pi * (((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
+        rw [← sub_eq_add_neg]                     -- 6 行目: `def_real_difference` を右辺から左辺へ
+    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
+        rw [add_comm ((M : ℤ) : ℝ)]               -- 7 行目: ℝ の加法の交換律
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
+        rw [mul_add]                              -- 8 行目: ℝ の分配法則
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) :=
+        add_div _ _ _                             -- 9 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
+    _ = thetaTilde M μ + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) := rfl
+                                                  -- 10 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
+    _ = thetaTilde M μ + 2 * Real.pi := by
+        rw [mul_div_cancel_right₀ _ hM']          -- 11 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
 
 /-- （読み）`checkPhase M k l` は人手の `exp(-i(k_ℝ θ~_l)_ℂ)`（`def_half_integer_checkZ`・`def_half_integer_checkY` の係数。
 `-i(·)_ℂ` は `(-i)(·)_ℂ` の読み）そのもの。`checkPhase_eq_exp` の `-(i · k_ℂ · θ~_ℂ)` を、積の像 `real_inclusion_mul`
@@ -85,7 +96,7 @@ theorem checkPhase_eq_exp_neg_I_mul (hM : M ≠ 0) (k l : ℤ) :
   rw [checkPhase_eq_exp hM k _, ← real_inclusion_mul, Complex.ofReal_intCast, neg_mul, mul_assoc]
 
 /-- **`half_integer_phase_periodicity`**: `exp(-i(j_ℝθ~_{μ+M})_ℂ) = exp(-i(j_ℝθ~_μ)_ℂ)`。
-calc の 2〜8 段目が人手の主張の鎖の 6 行に対応する（人手の 3 行目だけが 4・5 段目の 2 段で、ほかは 1 段ずつ）。1 段目と末尾の段は `checkPhase` を人手の
+calc の 2〜9 段目が人手の主張の鎖の 7 行に対応する（人手の 3 行目だけが 4・5 段目の 2 段で、ほかは 1 段ずつ）。1 段目と末尾の段は `checkPhase` を人手の
 `exp((-i)(·)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`）である。人手の「上の鎖を 2 箇所へ同時代入」は
 `thetaTilde_period_for_checkZY` と、`j_ℝ(θ~_μ + 2π) = j_ℝθ~_μ + j_ℝ·2π` の ℝ の分配法則の 2 段で受ける
 （人手は分配と積の交換を準備の鎖 `j_ℝθ~_{μ+M} = j_ℝθ~_μ + 2πj_ℝ` で済ませ、Lean は `2πj_ℝ` を `j_ℝ·(2π)` の形のまま
@@ -112,14 +123,19 @@ theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
             - Complex.I *
                 (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by
           rw [mul_add]
-    -- 人手 4 行目: `j ∈ ℤ` と `cos, sin` の `2π` 周期性を 2 箇所へ同時適用
+    -- 人手 4 行目: `j ∈ ℤ` と `cos` の `2π` 周期性（`x → j_ℝθ~_μ`、`n → j`）
+    _ = (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
+            - Complex.I *
+                (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by
+          rw [Real.cos_add_int_mul_two_pi]
+    -- 人手 5 行目: `j ∈ ℤ` と `sin` の `2π` 周期性（`x → j_ℝθ~_μ`、`n → j`）
     _ = (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M μ) : ℂ) := by
-          rw [Real.cos_add_int_mul_two_pi, Real.sin_add_int_mul_two_pi]
-    -- 人手 5 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`（`θ = j_ℝθ~_μ`、右辺から左辺へ）
+          rw [Real.sin_add_int_mul_two_pi]
+    -- 人手 6 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`（`θ = j_ℝθ~_μ`、右辺から左辺へ）
     _ = Complex.exp (-(Complex.I * (((j : ℝ) * thetaTilde M μ : ℝ) : ℂ))) :=
           (exp_neg_I_mul_real_eq_cos_sub_I_mul_sin _).symm
-    -- 人手 6 行目: `negative_i_times_complex_is_negation_of_i_times` を右辺から左辺へ
+    -- 人手 7 行目: `negative_i_times_complex_is_negation_of_i_times` を右辺から左辺へ
     _ = Complex.exp ((-Complex.I) * (((j : ℝ) * thetaTilde M μ : ℝ) : ℂ)) := by
           rw [neg_I_mul_eq_neg_of_I_mul]
     _ = checkPhase M j μ := (checkPhase_eq_exp_neg_I_mul hM j μ).symm
