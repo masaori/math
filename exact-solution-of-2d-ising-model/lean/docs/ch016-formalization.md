@@ -15,17 +15,17 @@
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.gamma1_add_two_pi_mul_int` | `γ_1(θ + 2π k_ℝ) = γ_1(θ)` | `periodicity_of_check_fermi` (1) |
+| `Ising2D.gamma1R_add_two_pi_mul_int` | `γ_1(θ + 2π k_ℝ) = γ_1(θ)`（ℝ の値。人手の 3 行と 1 対 1 の `calc`） | `periodicity_of_check_fermi` (1) |
 | `Ising2D.periodicity_prep_int_cast_neg` | `(-k)_ℝ = -k_ℝ`（人手の 7 行と 1 対 1 の `calc`） | 同 準備の第二 |
 | `Ising2D.periodicity_prep_cos_neg` | ℝ の等式 `cos(-x) = cos x`（`cos_of_negated_real` の具体版 `real_inclusion_cos_neg` と `inclusion_rr_to_cc_is_injective`） | 同 準備の第三 |
 | `Ising2D.thetaTilde_add_int_mul` | `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 12 行と 1 対 1 の `calc`） | 同 (2) の第一の鎖 |
 | `Ising2D.neg_thetaTilde_add_int_mul` | `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行と 1 対 1 の `calc`） | 同 (2) の第二の鎖 |
-| `Ising2D.gamma1_thetaTilde_add_int_mul` / `gamma2_thetaTilde_add_int_mul` / `gamma2_neg_thetaTilde_add_int_mul` | `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)` ほか | 同 (2) |
+| `Ising2D.gamma1R_thetaTilde_add_int_mul` / `gamma2_thetaTilde_add_int_mul` / `gamma2_neg_thetaTilde_add_int_mul` | `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`（ℝ の値。人手の 2 行と 1 対 1 の `calc`）ほか | 同 (2) |
 | `Ising2D.thetaTilde_conj_eq_neg_add_two_pi` | `θ̃_{M+1-μ} = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `θ̃_ν` の鎖 |
 | `Ising2D.neg_thetaTilde_conj_eq_add_two_pi_neg_one` | `-θ̃_{M+1-μ} = θ̃_μ + 2π(-1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `-θ̃_ν` の鎖 |
 | `Ising2D.gamma2_thetaTilde_conj` | `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma2_neg_thetaTilde_conj` | `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)` | 同 (3) |
-| `Ising2D.gamma1_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) |
+| `Ising2D.gamma1R_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（ℝ の値。人手の 5 行と 1 対 1 の `calc`） | 同 (3) |
 | `Ising2D.checkR` | `r_μ := \|γ_2(θ̃_μ)\|` | `def_check_fermi` の係数 |
 | `Ising2D.checkR_sq` | `(r_μ:ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))`（**無条件**） | 同（分枝が要らないことの核） |
 | `Ising2D.checkR_conj` | `r_{M+1-μ} = r_μ`（人手の準備 5 の `r_ν` の 13 行の鎖と 1 対 1 の `calc`） | `anticommutator_of_check_psi` 準備 5 |
@@ -81,7 +81,6 @@
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.gamma1R_thetaTilde_conj` | `γ_1` の共役添字不変性（実数版） | `periodicity_of_check_fermi` (3) |
 | `Ising2D.gammaTilde_conj` / `gammaTildeC_conj` | `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 同 (3) の `γ` 版 |
 | `Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex` | 仮定 `hga` が無条件に成り立つこと | 015 章 `gamma_2_theta_tilde_nonzero` |
 | `Ising2D.lambdaPlusR_eq_exp_gammaTildeC` / `lambdaMinusR_eq_exp_gammaTildeC` | 仮定 `hlamPlus` / `hlamMinus`（`λ_{±,μ} = e^{±γ(θ̃_μ)}`）が（双対関係の下で）無条件に成り立つこと | 015 章 `lambda_eq_exp_gamma_theta_tilde` |

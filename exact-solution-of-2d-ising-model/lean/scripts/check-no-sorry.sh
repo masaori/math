@@ -1291,9 +1291,10 @@ targets=(
   Ising2D.NecSuf.lie_carHam_ann
   Ising2D.NecSuf.exp_conj_of_ad_eigen
   Ising2D.NecSuf.exp_conj_of_lie_eigen
-  Ising2D.gamma1_add_two_pi_mul_int
+  Ising2D.gamma1R_add_two_pi_mul_int
   Ising2D.thetaTilde_add_int_mul
-  Ising2D.gamma1_thetaTilde_conj
+  Ising2D.gamma1R_thetaTilde_add_int_mul
+  Ising2D.gamma1R_thetaTilde_conj
   Ising2D.gamma2_thetaTilde_conj
   Ising2D.gamma2_neg_thetaTilde_conj
   Ising2D.checkR_sq
@@ -2294,7 +2295,6 @@ targets=(
   Ising2D.checkR_eq_absGamma2
   Ising2D.checkPsiDag_eq_checkPmat_col
   Ising2D.checkPsi_eq_checkPmat_col
-  Ising2D.gamma1R_thetaTilde_conj
   Ising2D.gammaTilde_conj
   Ising2D.gammaTildeC_conj
   Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex

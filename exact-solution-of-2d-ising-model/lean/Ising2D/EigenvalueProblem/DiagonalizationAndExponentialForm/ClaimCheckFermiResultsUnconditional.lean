@@ -43,13 +43,6 @@ variable (P : IsingParam)
 noncomputable def gammaTildeC (P : IsingParam) (M : ℕ) : ℤ → ℂ :=
   fun μ => ((gammaTilde P M μ : ℝ) : ℂ)
 
-/-- `γ_1` の共役添字不変性（実数版）。 -/
-theorem gamma1R_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    gamma1R K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1R K (thetaTilde M μ) := by
-  have h := gamma1_thetaTilde_conj K hM μ
-  rw [gamma1_eq_ofReal, gamma1_eq_ofReal] at h
-  exact_mod_cast h
-
 /-- **原文 `periodicity_of_check_fermi` (3) の `γ` 版**: `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)`。
 
 `γ = arcosh ∘ γ_1` は `γ_1` の値だけで決まるので、`γ_1` の共役添字不変性から従う。 -/
