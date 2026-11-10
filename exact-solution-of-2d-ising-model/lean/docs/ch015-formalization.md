@@ -62,7 +62,7 @@
 | `Ising2D.gamma1_sq_add_gamma2_mul_chain_second_half`（`ClaimDetATilde.lean`） | 前半の 8 項の和から、`u` の 1 次の項の相殺・くくり出し・(i)(ii) の代入で `1` まで運ぶ（人手の 30〜57 行と 1 対 1） | 同 第 2 の等式の鎖の後半 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 の等式の鎖 |
 | `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（人手の ℂ の中の 13 行の鎖と 1 対 1） | 同 最終式 |
-| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1`（人手の ℂ の中の 22 行の鎖と 1 対 1、対の第 1 成分の比較） | 同 第 3 の等式の鎖 |
+| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1`（人手の ℂ の中の 23 行の鎖と 1 対 1、対の第 1 成分の比較） | 同 第 3 の等式の鎖 |
 | `Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos` | `r > 0` から `r^2 > 0`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の準備の第二の含意の鎖 |
 | `Ising2D.one_lt_gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 > 1`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の `g^2` の鎖 |
 | `Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one` | `0 < γ_1`・`γ_1 ≤ 1` なら `γ_1^2 ≤ 1`（人手の 4 行と 1 対 1） | 同 背理の鎖 |

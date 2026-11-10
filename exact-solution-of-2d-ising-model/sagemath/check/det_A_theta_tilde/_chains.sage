@@ -243,7 +243,8 @@ CH_lam = [
     L(LP * LM),
     L(LP * LM),
     L((G1 + RR_) * (G1 - RR_), 'lam'),
-    L((G1 + RR_) * (G1 - RR_)),
+    L((G1 + RR_) * (G1 - RR_)),                # (γ_1(θ)_C + r_C)(γ_1(θ) - r)_C: 像は一般の点では同じ式（和の像は check_generic_chains.sage で）
+    L((G1 + RR_) * (G1 - RR_)),                # 差の像（同上）
     L((G1 + RR_) * (G1 + (-RR_))),
     L((G1 * G1 + RR_ * G1) + (G1 * (-RR_) + RR_ * (-RR_))),
     L(G1 * G1 + (RR_ * G1 + (G1 * (-RR_) + RR_ * (-RR_)))),

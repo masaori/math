@@ -3844,22 +3844,12 @@ A(\tilde\theta_\mu)
         "）、",
         math(String.raw`x_{\mathbb{C}} + y_{\mathbb{C}} = (x+y)_{\mathbb{C}}`),
         "（",
-        ref("real_inclusion_preserves_finite_sum"),
-        " を ",
-        math(String.raw`m = 2`),
-        " で）であり、差は ",
-        ref("def_complex_difference"),
-        " により ",
-        math(String.raw`-1_{\mathbb{C}}`),
-        " 倍（",
-        ref("multiply_by_minus_one"),
-        "。",
-        math(String.raw`-1_{\mathbb{C}}`),
-        " は ",
-        ref("inclusion_rr_to_cc"),
-        " の略記 ",
-        math(String.raw`(-1)_{\mathbb{C}}`),
-        "）の和なので、実数の和・差・積の像は像の和・差・積である。",
+        ref("real_inclusion_preserves_sum"),
+        "）、",
+        math(String.raw`x_{\mathbb{C}} - y_{\mathbb{C}} = (x-y)_{\mathbb{C}}`),
+        "（",
+        ref("real_inclusion_preserves_difference"),
+        "）なので、実数の和・差・積の像は像の和・差・積である。",
         math(String.raw`\mathbb{C}`),
         " の和と積の結合律・可換律・分配律・単位元・零元・加法逆元・乗法の逆元は ",
         ref("complex_numbers_form_a_field"),
@@ -4382,8 +4372,10 @@ c_2s_2^*
 &&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ})\\
 &= \bigl(\gamma_1(\theta) + r\bigr)_{\mathbb{C}}\,\bigl(\gamma_1(\theta) - r\bigr)_{\mathbb{C}}
 &&(\because\ \blkref{eigenvector_of_A_theta_tilde})\\
+&= \bigl(\gamma_1(\theta)_{\mathbb{C}} + r_{\mathbb{C}}\bigr)\bigl(\gamma_1(\theta) - r\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to \gamma_1(\theta),\ b \to r)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) - r\bigr)
-&&(\because\ \text{準備の像の読み方（和・差の像は像の和・差。以下この鎖では}\ \gamma_1(\theta)\ \text{の像の記号を省き、}\ r\ \text{の像の記号は書き戻す行の直前まで省く）})\\
+&&\bigl(\because\ \blkref{real_inclusion_preserves_difference}\ (y \to \gamma_1(\theta),\ z \to r)\ \text{を右辺から左辺へ。この行から}\ \gamma_1(\theta)\ \text{の像の記号を省き、}\ r\ \text{の像の記号は書き戻す行の直前まで省く}\bigr)\\
 &= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) + (-r)\bigr)
 &&(\because\ \blkref{def_complex_difference})\\
 &= \bigl(\gamma_1(\theta)\gamma_1(\theta) + r\gamma_1(\theta)\bigr) + \bigl(\gamma_1(\theta)(-r) + r(-r)\bigr)
@@ -4494,6 +4486,7 @@ c_2s_2^*
           "第 3・第 4 の等式は ℂ の中で示してから inclusion_rr_to_cc の対の第 1 成分で ℝ の等式に戻した。主張に、どの等式が ℂ と ℝ のどちらのものかを書いた（中身は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の最後の等式の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 γ_1(θ̃_μ)^2・|γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）と書いた。最後の等式の鎖の第 2 行と第 13 行（左辺だけの行を第 1 行と数える）の名前だけの根拠「ℝ の冪 x^2 = xx」「ℝ の冪 xx = x^2」を square_of_real_number_is_product（r → γ_1(θ)、r → |γ_2(θ)| を右辺から左辺へ）の参照にした（中身は不変）。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の e_− := exp(−iθ) の −iθ が euler_formula_cos_sin・exp_of_negative_i_real_as_cos_minus_i_sin・def_A_theta と同じく multiply_by_minus_one の −(iθ) であることを書いた（e_+e_− の鎖の加法逆元の行・u^2 + v^2 の鎖・γ_2(−θ) の鎖がこの読みに乗っている。中身は不変）。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 準備の像の読み方の和・差を、名前だけの言い換え（和は real_inclusion_preserves_finite_sum を m = 2 で、差は def_complex_difference・multiply_by_minus_one）から主張 real_inclusion_preserves_sum・real_inclusion_preserves_difference の参照にした。第 3 の等式の鎖の 4 行目「準備の像の読み方（和・差の像は像の和・差）」は 2 つの主張を 1 行で当てていたので、和の行と差の行の 2 行に割った（22 行から 23 行）。主張・値は不変。",
       ],
     },
   },

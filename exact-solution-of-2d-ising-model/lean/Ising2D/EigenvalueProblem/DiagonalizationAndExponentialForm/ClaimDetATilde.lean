@@ -73,14 +73,14 @@ theorem real_inclusion_sq_via_product (c : ℝ) : (c : ℂ) ^ 2 = ((c ^ 2 : ℝ)
                           -- `square_of_real_number_is_product` を右辺から左辺へ
 
 /-- `c_1^2 - s_1^2 = 1` を `ℂ` の式として読んだもの: `(c_1)_ℂ^2 - (s_1)_ℂ^2 = 1_ℂ`。人手の準備の像の読み方
-（積の像は `real_inclusion_preserves_product`、差の像は `def_complex_difference`・`multiply_by_minus_one` による `real_inclusion_sub`）で読む。 -/
+（積の像は `real_inclusion_preserves_product`、差の像は `real_inclusion_preserves_difference`（具体版 `real_inclusion_sub`））で読む。 -/
 theorem IsingParam.c1_sq_sub_s1_sq_inclusion :
     (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2 = 1 :=
   calc (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2
       = ((P.const.c1 ^ 2 : ℝ) : ℂ) - ((P.const.s1 ^ 2 : ℝ) : ℂ) := by
         rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product]  -- 2 乗の像は像の 2 乗を 2 箇所へ
     _ = ((P.const.c1 ^ 2 - P.const.s1 ^ 2 : ℝ) : ℂ) :=
-        real_inclusion_sub _ _                                  -- 準備の差の読み方（差の像は像の差）
+        real_inclusion_sub _ _                                  -- 準備の像の読み方の差: `real_inclusion_preserves_difference`
     _ = ((1 : ℝ) : ℂ) := by rw [P.c1_sq_sub_s1_sq]             -- `c_1^2 - s_1^2 = 1`（`cosh_sinh_basic_properties` (2)）
     _ = 1 := Complex.ofReal_one                                 -- `inclusion_rr_to_cc` の `1_ℂ = (1, 0)`
 
@@ -91,7 +91,7 @@ theorem IsingParam.c2star_sq_sub_s2star_sq_inclusion :
       = ((P.const.c2star ^ 2 : ℝ) : ℂ) - ((P.const.s2star ^ 2 : ℝ) : ℂ) := by
         rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product]  -- 2 乗の像は像の 2 乗を 2 箇所へ
     _ = ((P.const.c2star ^ 2 - P.const.s2star ^ 2 : ℝ) : ℂ) :=
-        real_inclusion_sub _ _                                  -- 準備の差の読み方（差の像は像の差）
+        real_inclusion_sub _ _                                  -- 準備の像の読み方の差: `real_inclusion_preserves_difference`
     _ = ((1 : ℝ) : ℂ) := by rw [P.c2star_sq_sub_s2star_sq]     -- `(c_2^*)^2 - (s_2^*)^2 = 1`（`cosh_sinh_basic_properties` (2)）
     _ = 1 := Complex.ofReal_one                                 -- `inclusion_rr_to_cc` の `1_ℂ = (1, 0)`
 
@@ -766,7 +766,7 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
   have HPy : (Real.cos θ : ℂ) ^ 2 + (Real.sin θ : ℂ) ^ 2 = 1 := by
     rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product, real_inclusion_add,
       Real.cos_sq_add_sin_sq, Complex.ofReal_one]
-      -- 和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`）
+      -- 準備の像の読み方の和: `real_inclusion_preserves_sum`
   rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form P.const θ _ rfl, gamma1_eq_inclusion_form]
   linear_combination
     NecSuf.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
@@ -774,10 +774,10 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
       HPy H1 H2 H3
 
 /-- **人手証明 `det_A_theta_tilde` の第 3 式**: `λ_{+,μ} λ_{-,μ} = 1`。
-人手の「まず ℂ の中で」の 22 行の鎖（左辺だけの行を 1 行目と数える）と 1 段ずつの `calc` で `((λ_+λ_- : ℝ) : ℂ) = ((1 : ℝ) : ℂ)` を示し、
+人手の「まず ℂ の中で」の 23 行の鎖（左辺だけの行を 1 行目と数える）と 1 段ずつの `calc` で `((λ_+λ_- : ℝ) : ℂ) = ((1 : ℝ) : ℂ)` を示し、
 `inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で ℝ の等式に戻す。
-`A := |γ_2(θ)|`（人手の `r`）とし、人手が像の記号を省く `γ_1(θ)`（4 行目以降）・`r`（4〜14 行）は `gamma1 P.const θ`・`(A : ℂ)` である。
-21 行目で引く (2) の Lean の形 `gamma2_mul_gamma2_neg_eq_neg_absSq` は右辺が `-((A^2 : ℝ) : ℂ)` で、人手の (2) の右辺
+`A := |γ_2(θ)|`（人手の `r`）とし、人手が像の記号を省く `γ_1(θ)`（5 行目以降）・`r`（5〜15 行）は `gamma1 P.const θ`・`(A : ℂ)` である。
+22 行目で引く (2) の Lean の形 `gamma2_mul_gamma2_neg_eq_neg_absSq` は右辺が `-((A^2 : ℝ) : ℂ)` で、人手の (2) の右辺
 `(-A^2)_ℂ` と符号反転の置き場が違う。その差を `Complex.ofReal_neg` で埋めている（(2) の Lean の形を人手に揃える件として状態台帳に残す）。 -/
 theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) :
@@ -792,54 +792,57 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
                           -- 2 行目: `real_inclusion_preserves_product` を右辺から左辺へ
       _ = ((gamma1R P.const θ + A : ℝ) : ℂ) * ((gamma1R P.const θ - A : ℝ) : ℂ) := rfl
                           -- 3 行目: `eigenvector_of_A_theta_tilde`
+      _ = ((gamma1R P.const θ : ℂ) + (A : ℂ)) * ((gamma1R P.const θ - A : ℝ) : ℂ) := by
+          rw [← real_inclusion_add]
+                          -- 4 行目: `real_inclusion_preserves_sum`（`a → γ_1(θ)`、`b → r`）を右辺から左辺へ
       _ = (g + (A : ℂ)) * (g - (A : ℂ)) := by
-          rw [← real_inclusion_add, ← real_inclusion_sub, hg, ← gamma1_eq_ofReal]
-                          -- 4 行目: 準備の像の読み方（和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の
-                          -- `real_inclusion_preserves_sum`）、差の像は `def_complex_difference`・`multiply_by_minus_one`）
+          rw [← real_inclusion_sub, hg, ← gamma1_eq_ofReal]
+                          -- 5 行目: `real_inclusion_preserves_difference`（`y → γ_1(θ)`、`z → r`）を右辺から左辺へ。
+                          -- この行から `γ_1(θ)` の像 `(gamma1R : ℂ)` を `g`（`gamma1_eq_ofReal`）と書く
       _ = (g + (A : ℂ)) * (g + (-(A : ℂ))) := by rw [sub_eq_add_neg]
-                          -- 5 行目: `def_complex_difference`
+                          -- 6 行目: `def_complex_difference`
       _ = (g * g + (A : ℂ) * g) + (g * (-(A : ℂ)) + (A : ℂ) * (-(A : ℂ))) := by
           rw [mul_add, add_mul, add_mul]
-                          -- 6 行目: `complex_numbers_form_a_field` の分配律（外側に 1 回、続けて内側の 2 箇所へ）
+                          -- 7 行目: `complex_numbers_form_a_field` の分配律（外側に 1 回、続けて内側の 2 箇所へ）
       _ = g * g + ((A : ℂ) * g + (g * (-(A : ℂ)) + (A : ℂ) * (-(A : ℂ)))) := add_assoc _ _ _
-                          -- 7 行目: `complex_numbers_form_a_field` の和の結合律
+                          -- 8 行目: `complex_numbers_form_a_field` の和の結合律
       _ = g * g + (((A : ℂ) * g + g * (-(A : ℂ))) + (A : ℂ) * (-(A : ℂ))) := by
           rw [← add_assoc ((A : ℂ) * g)]
-                          -- 8 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+                          -- 9 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
       _ = g * g + (((A : ℂ) * g + g * ((-1) * (A : ℂ))) + (A : ℂ) * ((-1) * (A : ℂ))) := by
           rw [neg_one_mul]
-                          -- 9 行目: `multiply_by_minus_one` を 2 箇所へ
+                          -- 10 行目: `multiply_by_minus_one` を 2 箇所へ
       _ = g * g + (((A : ℂ) * g + (-1) * ((A : ℂ) * g)) + (-1) * ((A : ℂ) * (A : ℂ))) := by
           rw [mul_left_comm g (-1 : ℂ) (A : ℂ), mul_comm g (A : ℂ), mul_left_comm (A : ℂ) (-1 : ℂ) (A : ℂ)]
-                          -- 10 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+                          -- 11 行目: `complex_numbers_form_a_field` の積の結合律・可換律
       _ = g * g + (((A : ℂ) * g + (-((A : ℂ) * g))) + (-((A : ℂ) * (A : ℂ)))) := by
           rw [neg_one_mul, neg_one_mul]
-                          -- 11 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
+                          -- 12 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
       _ = g * g + (0 + (-((A : ℂ) * (A : ℂ)))) := by rw [add_neg_cancel]
-                          -- 12 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 13 行目: `complex_numbers_form_a_field` の加法逆元
       _ = (g * g + 0) + (-((A : ℂ) * (A : ℂ))) := (add_assoc _ _ _).symm
-                          -- 13 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+                          -- 14 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
       _ = g * g + (-((A : ℂ) * (A : ℂ))) := by rw [add_zero]
-                          -- 14 行目: `complex_numbers_form_a_field` の零元
+                          -- 15 行目: `complex_numbers_form_a_field` の零元
       _ = g * g + (-((A * A : ℝ) : ℂ)) := by rw [real_inclusion_mul]
-                          -- 15 行目: `real_inclusion_preserves_product`
+                          -- 16 行目: `real_inclusion_preserves_product`
       _ = g * g + (-((A ^ 2 : ℝ) : ℂ)) := by rw [square_of_real_number_is_product A]
-                          -- 16 行目: `square_of_real_number_is_product` を右辺から左辺へ
+                          -- 17 行目: `square_of_real_number_is_product` を右辺から左辺へ
       _ = g * g + (-1) * ((A ^ 2 : ℝ) : ℂ) := by rw [neg_one_mul]
-                          -- 17 行目: `multiply_by_minus_one`
+                          -- 18 行目: `multiply_by_minus_one`
       _ = g * g + (((-1) * A ^ 2 : ℝ) : ℂ) := by
           rw [← real_inclusion_mul, Complex.ofReal_neg, Complex.ofReal_one]
-                          -- 18 行目: `real_inclusion_preserves_product`（`-1_ℂ` は略記 `(-1)_ℂ`）
+                          -- 19 行目: `real_inclusion_preserves_product`（`-1_ℂ` は略記 `(-1)_ℂ`）
       _ = g * g + ((-(A ^ 2) : ℝ) : ℂ) := by rw [neg_one_mul]
-                          -- 19 行目: ℝ の四則 `(-1)x = -x`
+                          -- 20 行目: ℝ の四則 `(-1)x = -x`
       _ = g ^ 2 + ((-(A ^ 2) : ℝ) : ℂ) := by rw [sq g]
-                          -- 20 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+                          -- 21 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
       _ = g ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
           rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg]
-                          -- 21 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ（Lean の (2) の右辺 `-((A^2 : ℝ) : ℂ)` との
+                          -- 22 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ（Lean の (2) の右辺 `-((A^2 : ℝ) : ℂ)` との
                           -- 差は `Complex.ofReal_neg`。上の docstring の件）
       _ = 1 := gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ
-                          -- 22 行目: 上の第 2 の等式の鎖
+                          -- 23 行目: 上の第 2 の等式の鎖
       _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm
                           -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `(1)_ℂ`（対の比較の 3・4 行目への橋渡し）
   exact Complex.ofReal_injective hC
