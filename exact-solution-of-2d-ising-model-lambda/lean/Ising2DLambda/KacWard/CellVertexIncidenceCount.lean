@@ -7,6 +7,10 @@ namespace Ising2DLambda.KacWard
 def vertexCellIncidenceCount (cells : Finset GridCell) (v : GridVertex) : ℕ :=
   (cells.filter (fun x => v ∈ verticesOfCell x)).card
 
+/-- Vertices meeting exactly `k` selected cells. -/
+def verticesWithIncidence (cells : Finset GridCell) (k : ℕ) : Finset GridVertex :=
+  (cellVertices cells).filter (fun v => vertexCellIncidenceCount cells v = k)
+
 /-- A grid vertex belongs to at most the four cells in its quadrants. -/
 theorem vertexCellIncidenceCount_le_four (cells : Finset GridCell)
     (v : GridVertex) : vertexCellIncidenceCount cells v ≤ 4 := by
@@ -74,5 +78,35 @@ theorem cellVertexIncidence_sum (cells : Finset GridCell) :
             rcases x with ⟨r, c⟩
             simp [verticesOfCell]
           simp [hcard, mul_comm]
+
+/-- Split the vertex incidence sum according to its four possible values. -/
+theorem cellVertexIncidence_sum_by_class (cells : Finset GridCell) :
+    (∑ v ∈ cellVertices cells, vertexCellIncidenceCount cells v) =
+      (verticesWithIncidence cells 1).card +
+      2 * (verticesWithIncidence cells 2).card +
+      3 * (verticesWithIncidence cells 3).card +
+      4 * (verticesWithIncidence cells 4).card := by
+  classical
+  let A := cellVertices cells
+  let n := vertexCellIncidenceCount cells
+  have hpoint (v : GridVertex) (hv : v ∈ A) :
+      n v = (if n v = 1 then 1 else 0) +
+        (if n v = 2 then 2 else 0) +
+        (if n v = 3 then 3 else 0) +
+        (if n v = 4 then 4 else 0) := by
+    rcases vertexCellIncidenceCount_one_to_four cells v hv with h | h | h | h <;>
+      simp [n, h]
+  calc
+    (∑ v ∈ A, n v) = ∑ v ∈ A,
+        ((if n v = 1 then 1 else 0) + (if n v = 2 then 2 else 0) +
+          (if n v = 3 then 3 else 0) + (if n v = 4 then 4 else 0)) := by
+          apply Finset.sum_congr rfl
+          exact hpoint
+    _ = (verticesWithIncidence cells 1).card +
+        2 * (verticesWithIncidence cells 2).card +
+        3 * (verticesWithIncidence cells 3).card +
+        4 * (verticesWithIncidence cells 4).card := by
+          simp [Finset.sum_add_distrib, verticesWithIncidence, A, n,
+            Finset.sum_ite, mul_comm]
 
 end Ising2DLambda.KacWard

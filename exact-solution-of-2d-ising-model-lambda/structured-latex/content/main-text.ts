@@ -70210,8 +70210,12 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                     lean: [
                       "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_edgeIncidence_boundary_interior",
+                      "Ising2DLambda.KacWard.cellVertexIncidence_sum_by_class",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_vertexIncidence_by_class",
                       "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.edgeIncidence_sum_partition",
+                      "Ising2DLambda.NecSuf.KacWard.finiteWeightedSum_fourClasses",
+                      "Ising2DLambda.KacWard.cellVertexIncidence_sum_by_class_from_necSuf",
                       "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf",
                     ],
                     verification: [
@@ -70279,13 +70283,13 @@ P_m(\gamma)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 V&=v_1+v_2+v_3+v_4
-&&\bigl(\because\ \text{頂点を接する単位正方形の個数で分割}\bigr),\\
+&&\bigl(\because\ \text{頂点を接する単位正方形の個数で分割}\bigr)\\
 B&=v_1+v_2+v_3
-&&\bigl(\because\ \text{境界は一つの単純閉路}\bigr),\\
+&&\bigl(\because\ \text{境界は一つの単純閉路}\bigr)\\
 4F&=v_1+2v_2+3v_3+4v_4
-&&\bigl(\because\ \text{単位正方形とその頂点の接続を二通りに数える}\bigr),\\
+&&\bigl(\because\ \text{単位正方形とその頂点の接続を二通りに数える}\bigr)\\
 4F&=2E_{\mathrm{int}}+B
-&&\bigl(\because\ \text{単位正方形とその辺の接続を二通りに数える}\bigr),\\
+&&\bigl(\because\ \text{単位正方形とその辺の接続を二通りに数える}\bigr)\\
 E&=E_{\mathrm{int}}+B
 &&\bigl(\because\ \text{辺を内部辺と境界辺に分割}\bigr)
 \end{aligned}`),

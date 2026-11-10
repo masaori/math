@@ -36,4 +36,35 @@ theorem finiteIncidence_sum_four {Object Marker : Type*}
               exact hfour x hx
             _ = 4 * objects.card := by simp [mul_comm]
 
+/-- Partition a finite weighted sum when every weight is one of four values. -/
+theorem finiteWeightedSum_fourClasses {V : Type*} [DecidableEq V]
+    (vertices : Finset V) (weight : V → ℕ)
+    (hclass : ∀ v ∈ vertices,
+      weight v = 1 ∨ weight v = 2 ∨ weight v = 3 ∨ weight v = 4) :
+    (∑ v ∈ vertices, weight v) =
+      (vertices.filter (fun v => weight v = 1)).card +
+      2 * (vertices.filter (fun v => weight v = 2)).card +
+      3 * (vertices.filter (fun v => weight v = 3)).card +
+      4 * (vertices.filter (fun v => weight v = 4)).card := by
+  classical
+  have hpoint (v : V) (hv : v ∈ vertices) :
+      weight v = (if weight v = 1 then 1 else 0) +
+        (if weight v = 2 then 2 else 0) +
+        (if weight v = 3 then 3 else 0) +
+        (if weight v = 4 then 4 else 0) := by
+    rcases hclass v hv with h | h | h | h <;> simp [h]
+  calc
+    (∑ v ∈ vertices, weight v) = ∑ v ∈ vertices,
+        ((if weight v = 1 then 1 else 0) +
+          (if weight v = 2 then 2 else 0) +
+          (if weight v = 3 then 3 else 0) +
+          (if weight v = 4 then 4 else 0)) := by
+          apply Finset.sum_congr rfl
+          exact hpoint
+    _ = (vertices.filter (fun v => weight v = 1)).card +
+        2 * (vertices.filter (fun v => weight v = 2)).card +
+        3 * (vertices.filter (fun v => weight v = 3)).card +
+        4 * (vertices.filter (fun v => weight v = 4)).card := by
+          simp [Finset.sum_add_distrib, Finset.sum_ite, mul_comm]
+
 end Ising2DLambda.NecSuf.KacWard

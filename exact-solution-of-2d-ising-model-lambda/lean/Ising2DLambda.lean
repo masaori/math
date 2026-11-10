@@ -1212,6 +1212,7 @@ import Ising2DLambda.NecSuf.KacWard.PlaneSimplePolygonCyclicTurning
 import Ising2DLambda.KacWard.PlaneSimplePolygonCyclicTurning
 import Ising2DLambda.NecSuf.KacWard.CellVertexIncidenceCount
 import Ising2DLambda.KacWard.CellVertexIncidenceCount
+import Ising2DLambda.KacWard.CellVertexIncidenceCountFromNecSuf
 import Ising2DLambda.KacWard.PlaneSimplePolygonCyclicTurningFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftDistinct
 import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct

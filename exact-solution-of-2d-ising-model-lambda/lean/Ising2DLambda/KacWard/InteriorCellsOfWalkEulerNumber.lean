@@ -217,6 +217,27 @@ theorem interiorCellsOfWalk_vertexIncidence_sum {L m : ℕ} [NeZero L]
     (∑ v ∈ cellVertices cells, vertexCellIncidenceCount cells v) = 4 * cells.card := by
   exact cellVertexIncidence_sum _
 
+/-- The incidence sum of an actual walk's interior cells is the weighted
+number of vertices in each of its four incidence classes. -/
+theorem interiorCellsOfWalk_vertexIncidence_by_class {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    4 * cells.card =
+      (verticesWithIncidence cells 1).card +
+      2 * (verticesWithIncidence cells 2).card +
+      3 * (verticesWithIncidence cells 3).card +
+      4 * (verticesWithIncidence cells 4).card := by
+  dsimp only
+  calc
+    4 * (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset.card =
+        ∑ v ∈ cellVertices (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset,
+          vertexCellIncidenceCount (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset v :=
+      (interiorCellsOfWalk_vertexIncidence_sum γ hγ hh hv).symm
+    _ = _ := cellVertexIncidence_sum_by_class _
+
 /-- The interior cells of an actual simple zero-winding closed walk satisfy the
 cell Euler identity. -/
 theorem interiorCellsOfWalk_eulerNumber_eq_one {L m : ℕ} [NeZero L]
