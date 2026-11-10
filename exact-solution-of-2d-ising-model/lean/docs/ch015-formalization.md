@@ -53,16 +53,16 @@
 | `Ising2D.AMat_mul_checkPmat` | `A P̌ = P̌ Ď` | 同 Step 2 |
 | **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** Step 4 |
 | `Ising2D.charPoly_factor_thetaTilde_of_necSuf` / `det_AMat_sub_smul_eq_zero_iff_of_necSuf` / `eigenvalue_AMat_iff_of_necSuf` / `lambdaPlusR_ne_lambdaMinusR_of_necSuf` / `det_checkPmat_of_necSuf` / `det_checkPmat_ne_zero_of_necSuf` / `AMat_mulVec_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mulVec_smul_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mul_checkPmat_of_necSuf` / `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`） | `_of_necSuf` を除いた名前の具体版と同じ主張を、必要十分版 `NecSuf/TwoByTwoSkew.lean` の系として導出した版 | `eigenvector_of_A_theta_tilde` Step 1・Step 2、`diagonalization_check_P_D` Step 2〜4 |
-| `Ising2D.det_AMat_eq_gamma1_sq_add` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)` | `det_A_theta_tilde` Step 1 |
+| `Ising2D.det_AMat_eq_gamma1_sq_add` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)`（人手の 1〜9 行と 1 対 1） | `det_A_theta_tilde` の第 1 の等式の鎖 |
 | `Ising2D.real_inclusion_sq_via_product` / `Ising2D.IsingParam.c1_sq_sub_s1_sq_inclusion` / `Ising2D.IsingParam.c2star_sq_sub_s2star_sq_inclusion` / `Ising2D.c2_mul_s2star_inclusion` / `Ising2D.gamma1_eq_inclusion_form`（`ClaimDetATilde.lean`） | 第三の ℝ の関係三つと `γ_1 = c_1c_2^* - s_1s_2^*u` を ℂ の式として読んだもの（積・差の像は `real_inclusion_mul`・`real_inclusion_sub`、2 乗は `square_of_real_number_is_product` と積の像） | 同 準備の像の読み方（2 乗は `det_A_theta_tilde` の最後の等式の鎖の最初の 3 行と同じ経路） |
-| `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form`（`ClaimDetATilde.lean`） | `exp(iθ)exp(-iθ) = 1` と `γ_2(θ)γ_2(-θ) = -((s_2^*)^2(a_0^2 + v^2))` | 同 Step 2 |
-| `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
+| `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form`（`ClaimDetATilde.lean`） | `exp(iθ)exp(-iθ) = 1` と `γ_2(θ)γ_2(-θ) = -((s_2^*)^2(a_0^2 + v^2))` | 同 第一の準備の `e_+e_- = 1_ℂ` の鎖と第二の準備の積の鎖 |
+| `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1`（第 1 の等式の鎖の 10 行目で第 2 の等式の鎖を当てる） | `det_A_theta_tilde` |
 | `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_chain_first_half`（`ClaimDetATilde.lean`） | `γ_1^2 + γ_2γ_2(-θ)` を (iii) で `c_2` を消した 8 項の和まで運ぶ（人手の 1〜29 行と 1 対 1） | 同 第 2 の等式の鎖の前半 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_chain_second_half`（`ClaimDetATilde.lean`） | 前半の 8 項の和から、`u` の 1 次の項の相殺・くくり出し・(i)(ii) の代入で `1` まで運ぶ（人手の 30〜57 行と 1 対 1） | 同 第 2 の等式の鎖の後半 |
-| `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式（Step 3〜5） |
+| `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 の等式の鎖 |
 | `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（人手の ℂ の中の 13 行の鎖と 1 対 1） | 同 最終式 |
-| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式（Step 6） |
+| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1`（人手の ℂ の中の 22 行の鎖と 1 対 1、対の第 1 成分の比較） | 同 第 3 の等式の鎖 |
 | `Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos` | `r > 0` から `r^2 > 0`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の準備の第二の含意の鎖 |
 | `Ising2D.one_lt_gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 > 1`（人手の 3 行と 1 対 1） | `gamma1_gt_1_theta_tilde` の `g^2` の鎖 |
 | `Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one` | `0 < γ_1`・`γ_1 ≤ 1` なら `γ_1^2 ≤ 1`（人手の 4 行と 1 対 1） | 同 背理の鎖 |

@@ -4361,14 +4361,12 @@ c_2s_2^*
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
-&= \gamma_1(\theta)\gamma_1(\theta) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
-&&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + 1_{\mathbb{C}}\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \gamma_2(\theta)\gamma_2(-\theta)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= 1
 &&(\because\ \text{上の第 2 の等式の鎖})
 \end{aligned}`),
@@ -4380,7 +4378,7 @@ c_2s_2^*
         "、",
         ref("relation_of_gamma_2_theta_tilde"),
         " (2) より ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r^2`),
+        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = (-r^2)_{\mathbb{C}}`),
         " である。まず ",
         math(String.raw`\mathbb{C}`),
         " の中で",
@@ -4388,23 +4386,45 @@ c_2s_2^*
       displayMath(String.raw`\begin{aligned}
 (\lambda_{+,\mu}\lambda_{-,\mu})_{\mathbb{C}}
 &= (\lambda_{+,\mu})_{\mathbb{C}}\,(\lambda_{-,\mu})_{\mathbb{C}}
-&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ})\\
 &= \bigl(\gamma_1(\theta) + r\bigr)_{\mathbb{C}}\,\bigl(\gamma_1(\theta) - r\bigr)_{\mathbb{C}}
 &&(\because\ \blkref{eigenvector_of_A_theta_tilde})\\
 &= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) - r\bigr)
-&&(\because\ \text{準備の像の読み方（和・差の像は像の和・差。以下この鎖では像の記号を省く）})\\
-&= \gamma_1(\theta)\gamma_1(\theta) - \gamma_1(\theta)r + r\gamma_1(\theta) - rr
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
-&= \gamma_1(\theta)\gamma_1(\theta) - r\gamma_1(\theta) + r\gamma_1(\theta) - rr
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&= \gamma_1(\theta)\gamma_1(\theta) - rr
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元と零元})\\
-&= \gamma_1(\theta)^2 - r^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 2 箇所へ})\\
-&= \gamma_1(\theta)^2 + \bigl(-r^2\bigr)
+&&(\because\ \text{準備の像の読み方（和・差の像は像の和・差。以下この鎖では}\ \gamma_1(\theta)\ \text{の像の記号を省き、}\ r\ \text{の像の記号は書き戻す行の直前まで省く）})\\
+&= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) + (-r)\bigr)
 &&(\because\ \blkref{def_complex_difference})\\
+&= \bigl(\gamma_1(\theta)\gamma_1(\theta) + r\gamma_1(\theta)\bigr) + \bigl(\gamma_1(\theta)(-r) + r(-r)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律（外側に 1 回、続けて内側の 2 箇所へ）})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(r\gamma_1(\theta) + \bigl(\gamma_1(\theta)(-r) + r(-r)\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\bigl(r\gamma_1(\theta) + \gamma_1(\theta)(-r)\bigr) + r(-r)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\bigl(r\gamma_1(\theta) + \gamma_1(\theta)\bigl((-1_{\mathbb{C}})r\bigr)\bigr) + r\bigl((-1_{\mathbb{C}})r\bigr)\Bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\bigl(r\gamma_1(\theta) + (-1_{\mathbb{C}})\bigl(r\gamma_1(\theta)\bigr)\bigr) + (-1_{\mathbb{C}})(rr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\Bigl(r\gamma_1(\theta) + \bigl(-\bigl(r\gamma_1(\theta)\bigr)\bigr)\Bigr) + \bigl(-(rr)\bigr)\Bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ右辺から左辺へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl(0_{\mathbb{C}} + (-(rr))\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= \bigl(\gamma_1(\theta)\gamma_1(\theta) + 0_{\mathbb{C}}\bigr) + \bigl(-(rr)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl(-(rr)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(-\bigl((rr)_{\mathbb{C}}\bigr)\Bigr)
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{。この行から}\ r\ \text{の像の記号を書き戻す})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(-\bigl((r^2)_{\mathbb{C}}\bigr)\Bigr)
+&&(\because\ \blkref{square_of_real_number_is_product}\ \text{を右辺から左辺へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + (-1_{\mathbb{C}})(r^2)_{\mathbb{C}}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl((-1)r^2\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{（}-1_{\mathbb{C}}\ \text{は略記}\ (-1)_{\mathbb{C}}\text{）})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl(-r^2\bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の四則}\ (-1)x = -x)\\
+&= \gamma_1(\theta)^2 + \bigl(-r^2\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2))\\
+&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2)\ \text{を右辺から左辺へ})\\
 &= 1_{\mathbb{C}}
 &&(\because\ \text{上の第 2 の等式の鎖})
 \end{aligned}`),

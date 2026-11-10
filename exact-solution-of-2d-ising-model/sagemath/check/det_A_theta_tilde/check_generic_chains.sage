@@ -76,4 +76,18 @@ rep.check(cc_add(iota(rr, Rab), iota(a, Rab)) == iota(rr + a, Rab) and cc_mul(io
           "準備の像の読み方: 実数の和・積の像は像の和・積")
 rep.check(cc_sub(iota(rr, Rab), iota(a, Rab), Rab) == iota(rr - a, Rab), "準備の像の読み方: 実数の差の像は像の差（def_complex_difference）")
 
+# 第 3 の等式の鎖の 14〜19 行（r の像の書き戻し。g := γ_1(θ)γ_1(θ) は対の不定元 (g1, g2) で持つ）
+Rgr.<g1, g2, rq> = PolynomialRing(QQ)
+gg = (g1, g2)
+lam_tail = [
+    cc_add(gg, cc_mul(iota(-1, Rgr), cc_mul(iota(rq, Rgr), iota(rq, Rgr)))),   # 14 行目: g + (-(r_C r_C))（-w = (-1_C)w）
+    cc_add(gg, cc_mul(iota(-1, Rgr), iota(rq * rq, Rgr))),                     # 15 行目: real_inclusion_preserves_product
+    cc_add(gg, cc_mul(iota(-1, Rgr), iota(rq**2, Rgr))),                       # 16 行目: square_of_real_number_is_product を右辺から左辺へ
+    cc_add(gg, cc_mul(iota(-1, Rgr), iota(rq**2, Rgr))),                       # 17 行目: multiply_by_minus_one。−w := (−1_C)w は定義なので、対では 16 行目と同じ式（形だけの検査）
+    cc_add(gg, iota((-1) * rq**2, Rgr)),                                       # 18 行目: real_inclusion_preserves_product
+    cc_add(gg, iota(-(rq**2), Rgr)),                                           # 19 行目: ℝ の四則 (-1)x = -x
+]
+for k in range(1, len(lam_tail)):
+    rep.check(lam_tail[k - 1] == lam_tail[k], f"第 3 の等式の鎖（対で）第 {k+13} 行 = 第 {k+14} 行")
+
 rep.finish()

@@ -13,23 +13,27 @@
 
 ## 形式化の方針
 
-* 人手証明の Step 0〜Step 6 を 1 つずつ置く。`θ := θ~_μ`、`u := cos θ`、`v := sin θ` は
-  `ℂ` へ埋めた `(Real.cos θ : ℂ)`・`(Real.sin θ : ℂ)` で書く（`γ_1, γ_2` が `ℂ` の元として定義されているため）。
-  * Step 0: (i)(ii) は `IsingParam.c1_sq_sub_s1_sq`・`IsingParam.c2star_sq_sub_s2star_sq`、
-    (iii) は引数 `hdual`。
-  * Step 1: `det_AMat_eq_gamma1_sq_add`。
-  * Step 2: 人手の第一の準備の 7 本の鎖 `-(-z) = z`・`ii = -1_ℂ`・`e_+e_- = 1_ℂ`・`(x - iy)(x + iy) = x^2 + y^2`・
-    `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`・`u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は、人手の行と 1 段ずつの `calc` の `complex_neg_neg_chain`・
+* 人手証明は、準備（像の読み方）、第一の準備の 7 本の鎖、第二の準備の 3 本の鎖、第三の準備（三つの双曲線の関係）、
+  主張の左辺から始まる 4 本の鎖（第 2・第 1・第 3・最後の等式）から成る。鎖ごとに、人手の行と 1 段ずつの `calc` を置く。
+  `θ := θ~_μ`、`u := cos θ`、`v := sin θ` は `ℂ` へ埋めた `(Real.cos θ : ℂ)`・`(Real.sin θ : ℂ)` で書く
+  （`γ_1, γ_2` が `ℂ` の元として定義されているため）。
+  * 第三の準備の三つの双曲線の関係: `c_1^2 - s_1^2 = 1` は `IsingParam.c1_sq_sub_s1_sq`（`ℂ` の式として `IsingParam.c1_sq_sub_s1_sq_inclusion`）、
+    `(c_2^*)^2 - (s_2^*)^2 = 1` は `IsingParam.c2star_sq_sub_s2star_sq`（同 `IsingParam.c2star_sq_sub_s2star_sq_inclusion`）、
+    `c_2 s_2^* = c_2^*` は引数 `hdual`（`ℂ` の式として `c2_mul_s2star_inclusion`）。
+  * 第一の準備の 7 本の鎖 `-(-z) = z`・`ii = -1_ℂ`・`e_+e_- = 1_ℂ`・`(x - iy)(x + iy) = x^2 + y^2`・
+    `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`・`u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は `complex_neg_neg_chain`・
     `complex_I_mul_I_chain`・`exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_sub_sq_chain`・
-    `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である。人手の第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は、人手の 3・9・10 行と 1 段ずつの `calc` の
-    `gamma2_a0_form`・`gamma2_neg_a0_form`・`gamma2_mul_gamma2_neg_sin_form` である。
-  * Step 3〜5: 人手の第 2 の等式の鎖。1〜29 行（展開と (iii) による `c_2` の消去）は人手の行と 1 段ずつの `calc` の
-    `gamma1_sq_add_gamma2_mul_chain_first_half`、30〜57 行（`u` の 1 次の項の相殺、くくり出し、(i)(ii) の代入）は人手の行と
-    1 段ずつの `calc` の `gamma1_sq_add_gamma2_mul_chain_second_half` である。
-  * Step 6: `lambda_mul_lambda_thetaTilde`。最後の `γ_1^2 = 1 + r^2` は `gamma1R_sq_thetaTilde`。
+    `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である。
+  * 第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は `gamma2_a0_form`・`gamma2_neg_a0_form`・`gamma2_mul_gamma2_neg_sin_form` である。
+  * 第 2 の等式の鎖: 1〜29 行（展開と `c_2s_2^* = c_2^*` による `c_2` の消去）は `gamma1_sq_add_gamma2_mul_chain_first_half`、
+    30〜57 行（`u` の 1 次の項の相殺、くくり出し、双曲線の関係の代入）は `gamma1_sq_add_gamma2_mul_chain_second_half`、
+    鎖全体は `gamma1_sq_add_gamma2_mul_thetaTilde` である。
+  * 第 1 の等式の鎖: 1〜9 行は `det_AMat_eq_gamma1_sq_add`、10 行目（上の第 2 の等式の鎖）を当てた主張は `det_AMat_thetaTilde_eq_one`。
+  * 第 3 の等式の鎖と対の比較は `lambda_mul_lambda_thetaTilde`。
+  * 最後の等式 `γ_1^2 = 1 + r^2` は `gamma1R_sq_thetaTilde`。
 * **双対関係が要る。** `det A(θ) = 1` は `A(θ)` の定義だけからは出ず、
   (iii) `c_2 s_2^* = c_2^*`（双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` の帰結）が要る。
-  人手証明 Step 0 は (iii) を `duality_c2_star_eq_s2_star_c2` として引用している。
+  人手証明の第三の準備は (iii) を `duality_c2_star_eq_s2_star_c2` として引用している。
   本章の定理は (iii) を引数 `hdual` に取る形のまま置く。
   `IsingParam` の上では (iii) は定理 `IsingParam.c2_mul_s2star_eq_c2star`
   （`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
@@ -45,6 +49,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 
 namespace Ising2D
 
@@ -111,15 +116,31 @@ theorem gamma1_eq_inclusion_form (K : IsingConst) (θ : ℝ) :
         rw [← real_inclusion_mul, ← real_inclusion_mul, ← real_inclusion_mul]
                           -- `real_inclusion_preserves_product` を 3 箇所へ右辺から左辺へ
 
-/-- **人手証明 Step 1**: `det A(θ) = γ_1(θ)^2 + γ_2(θ)γ_2(-θ)`。 -/
+/-- **人手証明 `det_A_theta_tilde` の第 1 の等式の鎖の 1〜9 行**（人手の 10 行のうち、最後の「上の第 2 の等式の鎖」の行を除く）:
+`det A(θ) = γ_1(θ)^2 + γ_2(θ)γ_2(-θ)`。最後の行は `det_AMat_thetaTilde_eq_one` で `gamma1_sq_add_gamma2_mul_thetaTilde` を当てる。 -/
 theorem det_AMat_eq_gamma1_sq_add (K : IsingConst) (θ : ℝ) :
     (AMat K θ).det = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) :=
   calc (AMat K θ).det
       = (!![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamma1 K θ]
-          : Matrix (Fin 2) (Fin 2) ℂ).det := by rw [AMat_eq]     -- `def_gamma1_gamma2_of_theta`
-    _ = gamma1 K θ * gamma1 K θ - gamma2 K θ * (-gamma2 K (-θ)) :=
-        Matrix.det_fin_two_of _ _ _ _                            -- 行列式の定義
-    _ = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) := by ring   -- ℂ の積と加法逆元
+          : Matrix (Fin 2) (Fin 2) ℂ).det := by rw [AMat_eq]
+                          -- 2 行目: `def_gamma1_gamma2_of_theta`
+    _ = gamma1 K θ * gamma1 K θ - gamma2 K θ * (-gamma2 K (-θ)) := det_two_by_two_def _
+                          -- 3 行目: `def_det_two_by_two`
+    _ = gamma1 K θ * gamma1 K θ + (-(gamma2 K θ * (-gamma2 K (-θ)))) := sub_eq_add_neg _ _
+                          -- 4 行目: `def_complex_difference`
+    _ = gamma1 K θ * gamma1 K θ + (-1) * (gamma2 K θ * ((-1) * gamma2 K (-θ))) := by
+        rw [neg_one_mul, neg_one_mul]
+                          -- 5 行目: `multiply_by_minus_one` を 2 箇所へ
+    _ = gamma1 K θ * gamma1 K θ + ((-1) * (-1)) * (gamma2 K θ * gamma2 K (-θ)) := by
+        rw [mul_left_comm (gamma2 K θ) (-1 : ℂ), ← mul_assoc]
+                          -- 6 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = gamma1 K θ * gamma1 K θ + 1 * (gamma2 K θ * gamma2 K (-θ)) := by
+        rw [complex_minus_one_mul_minus_one]
+                          -- 7 行目: `minus_one_times_minus_one_is_one_in_cc`
+    _ = gamma1 K θ * gamma1 K θ + gamma2 K θ * gamma2 K (-θ) := by rw [one_mul]
+                          -- 8 行目: `complex_numbers_form_a_field` の積の単位元
+    _ = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) := by rw [sq]
+                          -- 9 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `e_+e_- = 1_ℂ`**（人手の 4 行）。
 人手の準備の `e_- := exp(-iθ)` の `-iθ` は `multiply_by_minus_one` の `-(iθ)` で、ここの `-(I * θ)` と同じ読みである。 -/
@@ -724,8 +745,9 @@ theorem gamma1_sq_add_gamma2_mul_thetaTilde
         gamma1_sq_add_gamma2_mul_chain_second_half _ _ _ _ _
           P.c1_sq_sub_s1_sq_inclusion P.c2star_sq_sub_s2star_sq_inclusion          -- 人手の 30〜57 行
 
-/-- **人手証明 `det_A_theta_tilde` の第 1 式**: `det A(θ~_μ) = 1`（Step 1 と Step 5）。
-仮定 `hdual` は人手証明 Step 0 の (iii) `c_2 s_2^* = c_2^*`（双対関係の帰結）。 -/
+/-- **人手証明 `det_A_theta_tilde` の第 1 式**: `det A(θ~_μ) = 1`（第 1 の等式の鎖の 1〜9 行 `det_AMat_eq_gamma1_sq_add` と、
+10 行目「上の第 2 の等式の鎖」`gamma1_sq_add_gamma2_mul_thetaTilde`）。
+仮定 `hdual` は人手の第三の準備の三つ目の双曲線の関係 `c_2 s_2^* = c_2^*`（`duality_c2_star_eq_s2_star_c2`）。 -/
 theorem det_AMat_thetaTilde_eq_one (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) : (AMat P.const (thetaTilde M μ)).det = 1 := by
   rw [det_AMat_eq_gamma1_sq_add, gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ]
@@ -751,28 +773,77 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
       (P.const.c2star : ℂ) (P.const.s2star : ℂ) (Real.cos θ : ℂ) (Real.sin θ : ℂ)
       HPy H1 H2 H3
 
-/-- **人手証明 Step 6**: `λ_{+,μ} λ_{-,μ} = 1`（`det_A_theta_tilde` の第 3 式）。 -/
+/-- **人手証明 `det_A_theta_tilde` の第 3 式**: `λ_{+,μ} λ_{-,μ} = 1`。
+人手の「まず ℂ の中で」の 22 行の鎖（左辺だけの行を 1 行目と数える）と 1 段ずつの `calc` で `((λ_+λ_- : ℝ) : ℂ) = ((1 : ℝ) : ℂ)` を示し、
+`inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で ℝ の等式に戻す。
+`A := |γ_2(θ)|`（人手の `r`）とし、人手が像の記号を省く `γ_1(θ)`（4 行目以降）・`r`（4〜14 行）は `gamma1 P.const θ`・`(A : ℂ)` である。
+21 行目で引く (2) の Lean の形 `gamma2_mul_gamma2_neg_eq_neg_absSq` は右辺が `-((A^2 : ℝ) : ℂ)` で、人手の (2) の右辺
+`(-A^2)_ℂ` と符号反転の置き場が違う。その差を `Complex.ofReal_neg` で埋めている（(2) の Lean の形を人手に揃える件として状態台帳に残す）。 -/
 theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) :
     lambdaPlusR P.const (thetaTilde M μ) * lambdaMinusR P.const (thetaTilde M μ) = 1 := by
   set θ := thetaTilde M μ
-  set r : ℂ := ((absGamma2 P.const θ : ℝ) : ℂ)
+  set A : ℝ := absGamma2 P.const θ with hA
+  set g : ℂ := gamma1 P.const θ with hg
   have hC : ((lambdaPlusR P.const θ * lambdaMinusR P.const θ : ℝ) : ℂ) = ((1 : ℝ) : ℂ) :=
     calc ((lambdaPlusR P.const θ * lambdaMinusR P.const θ : ℝ) : ℂ)
         = ((lambdaPlusR P.const θ : ℝ) : ℂ) * ((lambdaMinusR P.const θ : ℝ) : ℂ) :=
-          (real_inclusion_mul _ _).symm                                  -- `real_inclusion_preserves_product`
-      _ = ((gamma1R P.const θ + absGamma2 P.const θ : ℝ) : ℂ)
-            * ((gamma1R P.const θ - absGamma2 P.const θ : ℝ) : ℂ) := rfl -- `eigenvector_of_A_theta_tilde`
-      _ = (gamma1 P.const θ + r) * (gamma1 P.const θ - r) := by
-          rw [← real_inclusion_add, ← real_inclusion_sub, ← gamma1_eq_ofReal]
-                          -- 準備の像の読み方（和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の
+          (real_inclusion_mul _ _).symm
+                          -- 2 行目: `real_inclusion_preserves_product` を右辺から左辺へ
+      _ = ((gamma1R P.const θ + A : ℝ) : ℂ) * ((gamma1R P.const θ - A : ℝ) : ℂ) := rfl
+                          -- 3 行目: `eigenvector_of_A_theta_tilde`
+      _ = (g + (A : ℂ)) * (g - (A : ℂ)) := by
+          rw [← real_inclusion_add, ← real_inclusion_sub, hg, ← gamma1_eq_ofReal]
+                          -- 4 行目: 準備の像の読み方（和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の
                           -- `real_inclusion_preserves_sum`）、差の像は `def_complex_difference`・`multiply_by_minus_one`）
-      _ = gamma1 P.const θ ^ 2 - r ^ 2 := by ring                          -- 分配則による平方差
-      _ = gamma1 P.const θ ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
-          rw [gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq, ← sub_eq_add_neg]  -- `ab = -r^2`
-      _ = 1 := gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ              -- Step 5
+      _ = (g + (A : ℂ)) * (g + (-(A : ℂ))) := by rw [sub_eq_add_neg]
+                          -- 5 行目: `def_complex_difference`
+      _ = (g * g + (A : ℂ) * g) + (g * (-(A : ℂ)) + (A : ℂ) * (-(A : ℂ))) := by
+          rw [mul_add, add_mul, add_mul]
+                          -- 6 行目: `complex_numbers_form_a_field` の分配律（外側に 1 回、続けて内側の 2 箇所へ）
+      _ = g * g + ((A : ℂ) * g + (g * (-(A : ℂ)) + (A : ℂ) * (-(A : ℂ)))) := add_assoc _ _ _
+                          -- 7 行目: `complex_numbers_form_a_field` の和の結合律
+      _ = g * g + (((A : ℂ) * g + g * (-(A : ℂ))) + (A : ℂ) * (-(A : ℂ))) := by
+          rw [← add_assoc ((A : ℂ) * g)]
+                          -- 8 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+      _ = g * g + (((A : ℂ) * g + g * ((-1) * (A : ℂ))) + (A : ℂ) * ((-1) * (A : ℂ))) := by
+          rw [neg_one_mul]
+                          -- 9 行目: `multiply_by_minus_one` を 2 箇所へ
+      _ = g * g + (((A : ℂ) * g + (-1) * ((A : ℂ) * g)) + (-1) * ((A : ℂ) * (A : ℂ))) := by
+          rw [mul_left_comm g (-1 : ℂ) (A : ℂ), mul_comm g (A : ℂ), mul_left_comm (A : ℂ) (-1 : ℂ) (A : ℂ)]
+                          -- 10 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+      _ = g * g + (((A : ℂ) * g + (-((A : ℂ) * g))) + (-((A : ℂ) * (A : ℂ)))) := by
+          rw [neg_one_mul, neg_one_mul]
+                          -- 11 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
+      _ = g * g + (0 + (-((A : ℂ) * (A : ℂ)))) := by rw [add_neg_cancel]
+                          -- 12 行目: `complex_numbers_form_a_field` の加法逆元
+      _ = (g * g + 0) + (-((A : ℂ) * (A : ℂ))) := (add_assoc _ _ _).symm
+                          -- 13 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+      _ = g * g + (-((A : ℂ) * (A : ℂ))) := by rw [add_zero]
+                          -- 14 行目: `complex_numbers_form_a_field` の零元
+      _ = g * g + (-((A * A : ℝ) : ℂ)) := by rw [real_inclusion_mul]
+                          -- 15 行目: `real_inclusion_preserves_product`
+      _ = g * g + (-((A ^ 2 : ℝ) : ℂ)) := by rw [square_of_real_number_is_product A]
+                          -- 16 行目: `square_of_real_number_is_product` を右辺から左辺へ
+      _ = g * g + (-1) * ((A ^ 2 : ℝ) : ℂ) := by rw [neg_one_mul]
+                          -- 17 行目: `multiply_by_minus_one`
+      _ = g * g + (((-1) * A ^ 2 : ℝ) : ℂ) := by
+          rw [← real_inclusion_mul, Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 18 行目: `real_inclusion_preserves_product`（`-1_ℂ` は略記 `(-1)_ℂ`）
+      _ = g * g + ((-(A ^ 2) : ℝ) : ℂ) := by rw [neg_one_mul]
+                          -- 19 行目: ℝ の四則 `(-1)x = -x`
+      _ = g ^ 2 + ((-(A ^ 2) : ℝ) : ℂ) := by rw [sq g]
+                          -- 20 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+      _ = g ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
+          rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg]
+                          -- 21 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ（Lean の (2) の右辺 `-((A^2 : ℝ) : ℂ)` との
+                          -- 差は `Complex.ofReal_neg`。上の docstring の件）
+      _ = 1 := gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ
+                          -- 22 行目: 上の第 2 の等式の鎖
       _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm
+                          -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `(1)_ℂ`（対の比較の 3・4 行目への橋渡し）
   exact Complex.ofReal_injective hC
+                          -- `definition_of_cc` の台集合 `ℝ^2` の元の第 1 成分の比較
 
 /-- **人手証明 `det_A_theta_tilde` の最後の式**: `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（実数の等式）。
 
