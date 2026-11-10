@@ -163,6 +163,7 @@ export const ALL_LABELS = [
   "def_check_number_operator",
   "def_complex_conjugate",
   "def_complex_difference",
+  "def_complex_quotient",
   "def_complex_to_unit_circle",
   "def_config_basis_iso",
   "def_conjugate_bilinear_value",

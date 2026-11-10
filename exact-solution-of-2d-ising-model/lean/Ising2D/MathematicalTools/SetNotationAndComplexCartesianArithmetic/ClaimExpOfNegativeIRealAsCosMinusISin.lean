@@ -4,7 +4,7 @@
 対応する人手証明（正本は `structured-latex/content/000_calculation_formulae_30_44.ts`）:
 - `calculation_formulae_claim_exp_of_negative_i_real_as_cos_minus_i_sin`（ラベル `exp_of_negative_i_real_as_cos_minus_i_sin`）
 
-`exp_neg_I_mul_real_eq_cos_sub_I_mul_sin` は人手の主鎖の 6 行と 1 段ずつの `calc` である。
+`exp_neg_I_mul_real_eq_cos_sub_I_mul_sin` は人手の主鎖の 22 行と 1 段ずつの `calc` である。
 - 人手の `-iθ_ℂ` は `euler_formula_cos_sin` の読みのとおり `-(iθ_ℂ)`（Lean の `-(Complex.I * (θ : ℂ))`）、
   分母の `2` は `2_ℂ`（Lean の `(2 : ℂ)`）である。人手の `a`・`b` は `set` で置く。
 - 人手 `euler_formula_cos_sin` の読み `euler_cos_real_inclusion`・`euler_sin_real_inclusion` は同じフォルダの
@@ -18,9 +18,12 @@
   `complex_numbers_form_a_field` の各公理は mathlib の `mul_add`・`add_mul`・`mul_assoc`・`one_mul`・`add_assoc`・`add_comm`・
   `add_neg_cancel`・`add_zero` を 1 段に 1 つずつ当てる。`(-1_ℂ)(-1_ℂ) = 1_ℂ` は `complex_minus_one_mul_minus_one`、
   `real_inclusion_preserves_sum` は `real_inclusion_add` である。
-- 主鎖の 3 行目の分配法則は mathlib の `sub_div`、
-  1 行目の `2_ℂ ≠ 0_ℂ` による分数の操作は mathlib の `mul_div_cancel_left₀`、5 行目の `i ≠ 0_ℂ` による分数の操作は
-  `mul_div_assoc'`・`mul_comm`・`mul_div_mul_left` の 3 つの書き換えを人手の 1 行の中で当てる。
+- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は mathlib の `div_eq_mul_inv`、`multiplicative_group_of_cc` の逆元
+  （`w^{-1}w = 1_ℂ`・`ww^{-1} = 1_ℂ`）は `inv_mul_cancel₀`・`mul_inv_cancel₀` で受ける（Lean の `ℂ` の商と逆元は mathlib の定義なので、
+  人手の定義の式はこの等式で読む）。前置きの `2_ℂ, i ≠ 0_ℂ` は `two_ne_zero`・`Complex.I_ne_zero`、`2_ℂi ≠ 0_ℂ` は
+  `exp_neg_I_prep_two_mul_I_ne_zero`（`mul_ne_zero`。人手の「`ℂ^×` の群の積」）である。
+- 人手の準備の第三の鎖（`i(2_ℂi)^{-1} = 2_ℂ^{-1}`、6 行）は `exp_neg_I_prep_I_mul_inv_two_mul_I` で、人手の行と 1 段ずつの `calc` である。
+  `complex_numbers_form_a_field` の積の公理は mathlib の `one_mul`・`mul_one`・`mul_assoc`・`mul_comm` を 1 段に 1 つずつ当てる。
 
 必要十分版は置かない。人手の証明は未整備の `euler_formula_cos_sin`（mathlib で受けている）を前提とし、
 残る段は体の四則を 1 回ずつ当てるだけである。
@@ -78,24 +81,77 @@ theorem exp_neg_I_prep_add_sub_sub (a b : ℂ) : (a + b) - (a - b) = 2 * b :=
     _ = 2 * b := by rw [exp_neg_I_prep_one_add_one]
                                       -- 17 行目: 準備の第一の鎖
 
-/-- **人手 `exp_of_negative_i_real_as_cos_minus_i_sin`**: `exp(-iθ_ℂ) = (cos θ)_ℂ - i(sin θ)_ℂ`（`-iθ` は `-(iθ)`、人手の 6 行）。 -/
+/-- 人手 `exp_of_negative_i_real_as_cos_minus_i_sin` の前置きの `2_ℂi ∈ ℂ^×`（`2_ℂ, i ∈ ℂ^×` と `multiplicative_group_of_cc` の群の積）。 -/
+theorem exp_neg_I_prep_two_mul_I_ne_zero : (2 : ℂ) * Complex.I ≠ 0 :=
+  mul_ne_zero two_ne_zero Complex.I_ne_zero
+
+/-- 人手 `exp_of_negative_i_real_as_cos_minus_i_sin` の準備の第三の鎖（6 行）: `i(2_ℂi)^{-1} = 2_ℂ^{-1}`。 -/
+theorem exp_neg_I_prep_I_mul_inv_two_mul_I : Complex.I * ((2 : ℂ) * Complex.I)⁻¹ = (2 : ℂ)⁻¹ :=
+  calc Complex.I * ((2 : ℂ) * Complex.I)⁻¹
+      = 1 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := (one_mul _).symm
+                                      -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
+    _ = ((2 : ℂ)⁻¹ * 2) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := by
+        rw [inv_mul_cancel₀ (two_ne_zero : (2 : ℂ) ≠ 0)]
+                                      -- 2 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）を右辺から左辺へ
+    _ = (2 : ℂ)⁻¹ * (2 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹)) := mul_assoc _ _ _
+                                      -- 3 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (2 : ℂ)⁻¹ * (((2 : ℂ) * Complex.I) * ((2 : ℂ) * Complex.I)⁻¹) := by
+        rw [← mul_assoc (2 : ℂ) Complex.I]
+                                      -- 4 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (2 : ℂ)⁻¹ * 1 := by rw [mul_inv_cancel₀ exp_neg_I_prep_two_mul_I_ne_zero]
+                                      -- 5 行目: `multiplicative_group_of_cc` の逆元（`2_ℂi ∈ ℂ^×`）
+    _ = (2 : ℂ)⁻¹ := mul_one _
+                                      -- 6 行目: `complex_numbers_form_a_field` の積の単位元
+
+/-- **人手 `exp_of_negative_i_real_as_cos_minus_i_sin`**: `exp(-iθ_ℂ) = (cos θ)_ℂ - i(sin θ)_ℂ`（`-iθ` は `-(iθ)`、人手の主鎖の 22 行）。 -/
 theorem exp_neg_I_mul_real_eq_cos_sub_I_mul_sin (θ : ℝ) :
     Complex.exp (-(Complex.I * (θ : ℂ))) = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
   set a : ℂ := Complex.exp (Complex.I * (θ : ℂ))
   set b : ℂ := Complex.exp (-(Complex.I * (θ : ℂ)))
   calc b
-      = (2 * b) / 2 := (mul_div_cancel_left₀ b (two_ne_zero : (2 : ℂ) ≠ 0)).symm
-                                                  -- 1 行目: `2_ℂ ≠ 0_ℂ`（`complex_numbers_form_a_field`）
-    _ = ((a + b) - (a - b)) / 2 := by
-        rw [exp_neg_I_prep_add_sub_sub a b]       -- 2 行目: 準備の第二の鎖を右辺から左辺へ
-    _ = (a + b) / 2 - (a - b) / 2 := by
-        rw [sub_div]                              -- 3 行目: 分配法則（`complex_numbers_form_a_field`）
-    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) / 2 := by
-        rw [euler_cos_real_inclusion θ]           -- 4 行目: `euler_formula_cos_sin` の第 1 の等式
+      = 1 * b := (one_mul b).symm
+                                                  -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
+    _ = ((2 : ℂ)⁻¹ * 2) * b := by rw [inv_mul_cancel₀ (two_ne_zero : (2 : ℂ) ≠ 0)]
+                                                  -- 2 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）を右辺から左辺へ
+    _ = (2 : ℂ)⁻¹ * (2 * b) := mul_assoc _ _ _
+                                                  -- 3 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (2 * b) * (2 : ℂ)⁻¹ := mul_comm _ _
+                                                  -- 4 行目: `complex_numbers_form_a_field` の積の可換律
+    _ = (2 * b) / 2 := (div_eq_mul_inv _ _).symm
+                                                  -- 5 行目: `def_complex_quotient`（`z → 2_ℂb`, `w → 2_ℂ`）を右辺から左辺へ
+    _ = ((a + b) - (a - b)) / 2 := by rw [exp_neg_I_prep_add_sub_sub a b]
+                                                  -- 6 行目: 準備の第二の鎖を右辺から左辺へ
+    _ = ((a + b) - (a - b)) * (2 : ℂ)⁻¹ := div_eq_mul_inv _ _
+                                                  -- 7 行目: `def_complex_quotient`（`z → (a+b)-(a-b)`, `w → 2_ℂ`）
+    _ = ((a + b) + (-(a - b))) * (2 : ℂ)⁻¹ := by rw [sub_eq_add_neg (a + b) (a - b)]
+                                                  -- 8 行目: `def_complex_difference`（`z → a+b`, `w → a-b`）
+    _ = (a + b) * (2 : ℂ)⁻¹ + (-(a - b)) * (2 : ℂ)⁻¹ := add_mul _ _ _
+                                                  -- 9 行目: `complex_numbers_form_a_field` の右からの分配律
+    _ = (a + b) * (2 : ℂ)⁻¹ + ((-1) * (a - b)) * (2 : ℂ)⁻¹ := by rw [neg_one_mul (a - b)]
+                                                  -- 10 行目: `multiply_by_minus_one`（`z → a-b`）
+    _ = (a + b) * (2 : ℂ)⁻¹ + (-1) * ((a - b) * (2 : ℂ)⁻¹) := by rw [mul_assoc (-1 : ℂ) (a - b)]
+                                                  -- 11 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (a + b) * (2 : ℂ)⁻¹ + (-((a - b) * (2 : ℂ)⁻¹)) := by rw [neg_one_mul ((a - b) * (2 : ℂ)⁻¹)]
+                                                  -- 12 行目: `multiply_by_minus_one`（`z → (a-b)2_ℂ^{-1}`）を右辺から左辺へ
+    _ = (a + b) * (2 : ℂ)⁻¹ - (a - b) * (2 : ℂ)⁻¹ := (sub_eq_add_neg _ _).symm
+                                                  -- 13 行目: `def_complex_difference` を右辺から左辺へ
+    _ = (a + b) / 2 - (a - b) / 2 := by rw [div_eq_mul_inv (a + b), div_eq_mul_inv (a - b)]
+                                                  -- 14 行目: `def_complex_quotient` を 2 か所へ右辺から左辺へ
+    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) / 2 := by rw [euler_cos_real_inclusion θ]
+                                                  -- 15 行目: `euler_formula_cos_sin` の第 1 の等式を右辺から左辺へ
+    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) * (2 : ℂ)⁻¹ := by rw [div_eq_mul_inv (a - b)]
+                                                  -- 16 行目: `def_complex_quotient`（`z → a-b`, `w → 2_ℂ`）
+    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := by
+        rw [exp_neg_I_prep_I_mul_inv_two_mul_I]   -- 17 行目: 準備の第三の鎖を右辺から左辺へ
+    _ = ((Real.cos θ : ℝ) : ℂ) - ((a - b) * Complex.I) * ((2 : ℂ) * Complex.I)⁻¹ := by
+        rw [mul_assoc (a - b) Complex.I]          -- 18 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = ((Real.cos θ : ℝ) : ℂ) - (Complex.I * (a - b)) * ((2 : ℂ) * Complex.I)⁻¹ := by
+        rw [mul_comm (a - b) Complex.I]           -- 19 行目: `complex_numbers_form_a_field` の積の可換律
+    _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((a - b) * ((2 : ℂ) * Complex.I)⁻¹) := by
+        rw [mul_assoc Complex.I (a - b)]          -- 20 行目: `complex_numbers_form_a_field` の積の結合律
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((a - b) / (2 * Complex.I)) := by
-        rw [mul_div_assoc', mul_comm (2 : ℂ) Complex.I, mul_div_mul_left (a - b) (2 : ℂ) Complex.I_ne_zero]
-                                                  -- 5 行目: `i ≠ 0_ℂ`（`complex_numbers_form_a_field`）
+        rw [div_eq_mul_inv (a - b)]               -- 21 行目: `def_complex_quotient`（`z → a-b`, `w → 2_ℂi`）を右辺から左辺へ
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
-        rw [euler_sin_real_inclusion θ]           -- 6 行目: `euler_formula_cos_sin` の第 2 の等式
+        rw [euler_sin_real_inclusion θ]           -- 22 行目: `euler_formula_cos_sin` の第 2 の等式を右辺から左辺へ
 
 end Ising2D

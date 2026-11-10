@@ -1381,6 +1381,52 @@ b
     },
   },
   {
+    id: "calc_formulae_definition_complex_quotient",
+    kind: "definition",
+    title: { text: "複素数の商" },
+    labels: ["def_complex_quotient"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        "、",
+        math(String.raw`w \in \mathbb{C}^{\times}`),
+        "（",
+        math(String.raw`w \neq 0_{\mathbb{C}}`),
+        "）について、商 ",
+        math(String.raw`\dfrac{z}{w} \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`\frac{z}{w} := z\,w^{-1}`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`w^{-1}`),
+        " は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元、積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+        math(String.raw`z = 1_{\mathbb{C}}`),
+        " のとき、",
+        math(String.raw`\dfrac{1_{\mathbb{C}}}{w} = 1_{\mathbb{C}}\,w^{-1} = w^{-1}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の積の単位元）であり、",
+        ref("multiplicative_group_of_cc"),
+        " の記法 ",
+        math(String.raw`w^{-1} = 1/w`),
+        " と一致する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。ℂ の分数は本文全体で使われていたが、定めるブロックが無く、" +
+          "exp_of_negative_i_real_as_cos_minus_i_sin の主鎖が「2_C ≠ 0_C による分数」「分配法則」「i ≠ 0_C による分数」を 1 行で当てていた。" +
+          "一ステップ一定理に割るために足した（multiplicative_group_of_cc の 1/z = z^{-1} とは、1_C z^{-1} = z^{-1} で一致する）。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_inclusion_of_one_half_is_inverse_of_two",
     kind: "claim",
     title: { tex: String.raw`\bigl(\tfrac12\bigr)_{\mathbb{C}} = 2_{\mathbb{C}}^{-1}` },
