@@ -85,8 +85,12 @@ theorem expPhase_two_mul_neg_half (hM : M ≠ 0) : expPhase (2 * M) (-(M : ℤ))
 
 /-! ## 半整数運動量 `θ~_μ` と位相因子 `check` -/
 
-/-- **原文の `θ~_μ := 2π(μ - 1/2)/M ∈ ℝ`**。 -/
-noncomputable def thetaTilde (M : ℕ) (μ : ℤ) : ℝ := 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M
+/-- **原文の `θ~_μ := 2π(μ_ℝ - 1/2)/(M_col)_ℝ ∈ ℝ`**。
+
+原文の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、`M_col = ι_{ℕ→ℤ}(M_ℕ)` である。
+Lean の `M : ℕ` は `M_ℕ` を表すので、分母は `ℕ → ℤ → ℝ` の像 `((M : ℤ) : ℝ)` と書く
+（`ℕ → ℝ` の直接の像 `(M : ℝ)` は原文に無い写像である）。 -/
+noncomputable def thetaTilde (M : ℕ) (μ : ℤ) : ℝ := 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
 
 /-- **原文の位相因子 `e^{-i k θ~_μ}`**。`2M` 乗根の**奇数**周波数 `k(2μ-1)` である。 -/
 noncomputable def checkPhase (M : ℕ) (k μ : ℤ) : ℂ := expPhase (2 * M) (k * (2 * μ - 1))

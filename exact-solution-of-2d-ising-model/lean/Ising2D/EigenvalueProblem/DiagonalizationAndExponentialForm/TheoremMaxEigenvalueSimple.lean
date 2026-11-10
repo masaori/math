@@ -99,7 +99,7 @@ theorem sum_checkIdx {β : Type*} [AddCommMonoid β] (f : ℤ → β) (M : ℕ) 
   exact Finset.sum_image fun x _ y _ hxy => checkIdxFinset_injOn hxy
 
 /-- 代表点の一致: `t^{(M)}_μ` を `δ = 1/2` で取ったものが `θ~_μ` である
-（人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含を付け替える）。 -/
+（人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含と、分母の `(M : ℝ)`（`tagPoint`）と `((M : ℤ) : ℝ)`（`thetaTilde`）を付け替える）。 -/
 theorem tagPoint_half_eq_thetaTilde (M : ℕ) (k : ℕ) :
     tagPoint (1 / 2) M (k + 1) = thetaTilde M ((k : ℤ) + 1) := by
   unfold tagPoint thetaTilde
@@ -143,17 +143,17 @@ theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
                                                         -- `eigenvalues_of_V_plus` (2)
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M,
-              gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / M)) := rfl
+              gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))) := rfl
                                                         -- `antiperiodic_exp_sum` の `θ~_μ` の定義を各項へ同時適用
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1))) := by
-        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / M)
+        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))
             = gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1)) := fun j => by
           rw [tagPoint_half_eq_thetaTilde M j]
           rfl
         simp only [h]
                                                         -- `def_Theta_delta_M`（`δ → 1/2`）を右辺から左辺へ、各項へ同時適用
-                                                        -- （人手の `μ ∈ ℤ` の包含 `μ_ℝ` と、`tagPoint` の `ℕ` の添字の包含の付け替えは `tagPoint_half_eq_thetaTilde`）
+                                                        -- （人手の `μ ∈ ℤ` の包含 `μ_ℝ` と、`tagPoint` の `ℕ` の添字の包含と分母の像の付け替えは `tagPoint_half_eq_thetaTilde`）
     _ = LambdaM P (1 / 2) M := by
         rw [LambdaM, sum_Icc_one_gammaFn_tagPoint_eq_sum_fin]
                                                         -- `def_Lambda_delta_M`（`δ → 1/2`）を右辺から左辺へ

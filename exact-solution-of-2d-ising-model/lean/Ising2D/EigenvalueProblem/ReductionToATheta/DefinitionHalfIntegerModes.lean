@@ -75,7 +75,7 @@ theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
           rw [add_div]
     _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi := by
           field_simp
-    _ = thetaTilde M μ + 2 * Real.pi := by rw [thetaTilde]
+    _ = thetaTilde M μ + 2 * Real.pi := by rw [thetaTilde, Int.cast_natCast]
 
 /-- （読み）`checkPhase M k l` は人手の `exp(-i(k_ℝ θ~_l)_ℂ)`（`def_half_integer_checkZ`・`def_half_integer_checkY` の係数。
 `-i(·)_ℂ` は `(-i)(·)_ℂ` の読み）そのもの。`checkPhase_eq_exp` の `-(i · k_ℂ · θ~_ℂ)` を、積の像 `real_inclusion_mul`

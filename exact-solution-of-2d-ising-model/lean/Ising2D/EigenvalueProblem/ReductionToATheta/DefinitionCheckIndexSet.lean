@@ -38,7 +38,7 @@ theorem checkIndex_iff (M : ℕ) (μ : ℤ) : CheckIndex M μ ↔ (1 ≤ μ ∧ 
 /-- 原文の `θ~_ν - θ~_μ = (2π/M)(ν - μ)`。 -/
 theorem thetaTilde_sub (M : ℕ) (μ ν : ℤ) :
     thetaTilde M ν - thetaTilde M μ = 2 * Real.pi * ((ν : ℝ) - (μ : ℝ)) / M := by
-  rw [thetaTilde, thetaTilde]
+  rw [thetaTilde, thetaTilde, Int.cast_natCast]
   ring
 
 /-- **(1) 前半**: `μ ≠ ν` なら `θ~_μ ≠ θ~_ν`（`μ, ν ∈ ℤ` 全体で成り立つ）。 -/
@@ -65,7 +65,7 @@ theorem thetaTilde_pos (hM : M ≠ 0) {μ : ℤ} (hμ : CheckIndex M μ) : 0 < t
   have hMR : (0 : ℝ) < (M : ℝ) := by exact_mod_cast Nat.pos_of_ne_zero hM
   have h1 : (1 : ℝ) ≤ (μ : ℝ) := by exact_mod_cast hμ.1
   have hpi : 0 < Real.pi := Real.pi_pos
-  rw [thetaTilde]
+  rw [thetaTilde, Int.cast_natCast]
   apply div_pos _ hMR
   nlinarith
 
@@ -75,7 +75,7 @@ theorem thetaTilde_lt_two_pi (hM : M ≠ 0) {μ : ℤ} (hμ : CheckIndex M μ) :
   have hMR : (0 : ℝ) < (M : ℝ) := by exact_mod_cast Nat.pos_of_ne_zero hM
   have h2 : (μ : ℝ) ≤ (M : ℝ) := by exact_mod_cast hμ.2
   have hpi : 0 < Real.pi := Real.pi_pos
-  rw [thetaTilde, div_lt_iff₀ hMR]
+  rw [thetaTilde, Int.cast_natCast, div_lt_iff₀ hMR]
   nlinarith
 
 /-! ## (2) 共役添字の閉性 -/
@@ -102,7 +102,7 @@ theorem thetaTilde_of_self_conj (hM : M ≠ 0) {μ : ℤ} (h : 2 * μ = (M : ℤ
   have hMR : (M : ℝ) ≠ 0 := by
     exact_mod_cast Nat.cast_ne_zero.mpr hM
   have hR : 2 * (μ : ℝ) = (M : ℝ) + 1 := by exact_mod_cast h
-  rw [thetaTilde]
+  rw [thetaTilde, Int.cast_natCast]
   field_simp
   linarith
 

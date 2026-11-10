@@ -8,8 +8,8 @@
 
 ## 形式化の方針
 
-* 原文の定義は行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) := (Ž_μ, Y̌_μ) P̌_μ` である。本ファイルは、
-  原文が「すなわち」として与えている**明示式**
+* 人手の定義は行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) := (Ž_μ, Y̌_μ) P̌_μ` である。本ファイルは、
+  人手が「すなわち」として与えている**明示式**
 
       ψ̌_μ^† := (-r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ
       ψ̌_μ   := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ
@@ -20,10 +20,10 @@
   行ベクトル記法との一致は `ClaimCommutationVPlusCheckPsi.lean` の `checkPsi_row_eq_rowMul_checkPmat` で確かめる。
 * `r := |γ_2(θ̃_μ)|` は `Real.sqrt (Complex.normSq (γ_2(θ̃_μ)))` で表す。
   **008 章の `ψ` と違い、平方根の分枝を選ぶ仮定（`hbr`）が要らない**のはこのためである
-  （原文 `anticommutator_of_check_psi` の Step 1 の指摘そのもの）。
+  （人手 `anticommutator_of_check_psi` の Step 1 の指摘そのもの）。
   `r` は非負実数として一意に定まり、`(r : ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))` が無条件に成り立つ
   （`checkR_sq`）。
-* 原文が statement へ格上げしている「定義が意味をもつ条件」`γ_2(θ̃_μ) ≠ 0`
+* 人手が statement へ格上げしている「定義が意味をもつ条件」`γ_2(θ̃_μ) ≠ 0`
   （015 章の `gamma_2_theta_tilde_nonzero`）は、各定理の仮定
   `hga : gamma2 K (thetaTilde M μ) ≠ 0` として明示する。
   **015 章がこれを無条件に閉じれば、本章の仮定はそのまま消える。**
@@ -39,11 +39,11 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-! ## `γ_1` の `2π` 周期性（原文 `periodicity_of_check_fermi` (1)）
+/-! ## `γ_1` の `2π` 周期性（人手 `periodicity_of_check_fermi` (1)）
 
 `γ_2` 側（`gamma2_add_two_pi_mul_int`）は `DefinitionThetaGamma.lean` にある。 -/
 
-/-- 原文 `periodicity_of_check_fermi` (1) の `γ_1` 側: `γ_1(θ + 2π k_ℝ) = γ_1(θ)`（人手の 3 行）。 -/
+/-- 人手 `periodicity_of_check_fermi` (1) の `γ_1` 側: `γ_1(θ + 2π k_ℝ) = γ_1(θ)`（人手の 3 行）。 -/
 theorem gamma1_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
     gamma1 K (θ + 2 * Real.pi * (k : ℝ)) = gamma1 K θ :=
   calc gamma1 K (θ + 2 * Real.pi * (k : ℝ))
@@ -56,47 +56,46 @@ theorem gamma1_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
 
 /-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 12 行）。
 
-人手の `(M_col)_ℝ` は、Lean では分母が `ℕ → ℝ` の像 `(M : ℝ)`（`thetaTilde` の定義）で、
-分子の `(kM_col)_ℝ` の因子は `ℤ → ℝ` の像 `((M : ℤ) : ℝ)` である。3 行目で積の像を分けるときに、
-この二つの像が一致すること（`Int.cast_natCast`）を同じ段で当てて、以後どちらも `(M : ℝ)` と書く。
+人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、Lean では `((M : ℤ) : ℝ)` と書く
+（`thetaTilde` の分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。
 人手の `2πk_ℝ(M_col)_ℝ` は、9 行目の分配法則が作る形どおり `2π(k_ℝ(M_col)_ℝ)` と括る。
 12 行目の約分はこの括りに対する `a(bc)/c = ab` で、`mul_div_assoc` と `mul_div_cancel_right₀` の 2 つの書き換えで当てる。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
-  have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
+  have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
   calc thetaTilde M (μ + k * M)
-      = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / M := rfl
+      = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ̃` の定義を `μ+kM_col` で（`antiperiodic_exp_sum`）
-    _ = 2 * Real.pi * (((μ : ℝ) + ((k * M : ℤ) : ℝ)) - 1 / 2) / M := by
+    _ = 2 * Real.pi * (((μ : ℝ) + ((k * M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
-    _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * (M : ℝ)) - 1 / 2) / M := by
-        rw [Int.cast_mul, Int.cast_natCast]       -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
-    _ = 2 * Real.pi * (((k : ℝ) * (M : ℝ) + (μ : ℝ)) - 1 / 2) / M := by
+    _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+        rw [Int.cast_mul]                         -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
+    _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ)]                     -- 4 行目: ℝ の加法の交換律
-    _ = 2 * Real.pi * (((k : ℝ) * (M : ℝ) + (μ : ℝ)) + (-(1 / 2))) / M := by
+    _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg]                       -- 5 行目: ℝ の差の定義
-    _ = 2 * Real.pi * ((k : ℝ) * (M : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / M := by
+    _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
-    _ = 2 * Real.pi * ((k : ℝ) * (M : ℝ) + ((μ : ℝ) - 1 / 2)) / M := by
+    _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg]                     -- 7 行目: ℝ の差の定義を右辺から左辺へ
-    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * (M : ℝ)) / M := by
-        rw [add_comm ((k : ℝ) * (M : ℝ))]         -- 8 行目: ℝ の加法の交換律
-    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * (M : ℝ))) / M := by
+    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
+        rw [add_comm ((k : ℝ) * ((M : ℤ) : ℝ))]         -- 8 行目: ℝ の加法の交換律
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [mul_add]                              -- 9 行目: ℝ の分配法則
-    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M :=
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) :=
         add_div _ _ _                             -- 10 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
-    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M := rfl
+    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := rfl
                                                   -- 11 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
         rw [mul_div_assoc, mul_div_cancel_right₀ _ hM']
                                                   -- 12 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
 
-/-- 原文 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`。 -/
+/-- 人手 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`。 -/
 theorem gamma1_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma1 K (thetaTilde M (μ + k * M)) = gamma1 K (thetaTilde M μ) := by
   rw [thetaTilde_add_int_mul M hM, gamma1_add_two_pi_mul_int]
 
-/-- 原文 `periodicity_of_check_fermi` (2): `γ_2(θ̃_{μ+kM}) = γ_2(θ̃_μ)`。 -/
+/-- 人手 `periodicity_of_check_fermi` (2): `γ_2(θ̃_{μ+kM}) = γ_2(θ̃_μ)`。 -/
 theorem gamma2_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma2 K (thetaTilde M (μ + k * M)) = gamma2 K (thetaTilde M μ) := by
   rw [thetaTilde_add_int_mul M hM, gamma2_add_two_pi_mul_int]
@@ -130,7 +129,7 @@ theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
         rw [periodicity_prep_int_cast_neg]        -- 4 行目: 準備の第二
 
-/-- 原文 `periodicity_of_check_fermi` (2): `γ_2(-θ̃_{μ+kM}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
+/-- 人手 `periodicity_of_check_fermi` (2): `γ_2(-θ̃_{μ+kM}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_neg_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
     gamma2 K (-thetaTilde M (μ + k * M)) = gamma2 K (-thetaTilde M μ) :=
   calc gamma2 K (-thetaTilde M (μ + k * M))
@@ -139,7 +138,7 @@ theorem gamma2_neg_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k 
     _ = gamma2 K (-thetaTilde M μ) := gamma2_add_two_pi_mul_int K (-thetaTilde M μ) (-k)
                                                   -- 2 行目: (1) を `θ = -θ̃_μ`, `-k ∈ ℤ` で
 
-/-! ## 共役添字 `M+1-μ`（原文 `periodicity_of_check_fermi` (3)） -/
+/-! ## 共役添字 `M+1-μ`（人手 `periodicity_of_check_fermi` (3)） -/
 
 /-- 人手 `periodicity_of_check_fermi` (3) の `θ̃_ν` の鎖（`ν := M+1-μ`）: `θ̃_ν = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行）。 -/
 theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
@@ -173,7 +172,7 @@ theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
     _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
         rw [periodicity_prep_int_cast_neg 1]      -- 5 行目: 準備の第二を `k = 1` で
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
+/-- 人手 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (-thetaTilde M μ) :=
   calc gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))
@@ -182,7 +181,7 @@ theorem gamma2_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     _ = gamma2 K (-thetaTilde M μ) := gamma2_add_two_pi_mul_int K (-thetaTilde M μ) 1
                                                   -- 2 行目: (1) を `θ = -θ̃_μ`, `k = 1` で
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)`（人手の 2 行）。 -/
+/-- 人手 `periodicity_of_check_fermi` (3): `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_neg_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ)) = gamma2 K (thetaTilde M μ) :=
   calc gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ))
@@ -198,7 +197,7 @@ theorem gamma2_neg_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 theorem periodicity_prep_cos_neg (x : ℝ) : Real.cos (-x) = Real.cos x :=
   inclusion_rr_to_cc_is_injective (real_inclusion_cos_neg x)
 
-/-- 原文 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（人手の 5 行）。
+/-- 人手 `periodicity_of_check_fermi` (3): `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（人手の 5 行）。
 人手の `γ_1` は ℝ の値で、Lean の `gamma1` はその像（`ℝ → ℂ` の包含）である。 -/
 theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     gamma1 K (thetaTilde M ((M : ℤ) + 1 - μ)) = gamma1 K (thetaTilde M μ) :=
@@ -216,7 +215,7 @@ theorem gamma1_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 
 /-! ## `r := |γ_2(θ̃_μ)|` -/
 
-/-- 原文 `def_check_fermi` の `r := |γ_2(θ̃_μ)| ∈ ℝ_{≥0}`。
+/-- 人手 `def_check_fermi` の `r := |γ_2(θ̃_μ)| ∈ ℝ_{≥0}`。
 
 **008 章の `ψ` と違い、これは平方根の分枝を選ばない量である。** -/
 noncomputable def checkR (K : IsingConst) (M : ℕ) (μ : ℤ) : ℝ :=
@@ -250,7 +249,7 @@ theorem sqrt_normSq_mk_eq_sqrt_sq_add_sq (x y : ℝ) :
     Real.sqrt (Complex.normSq ⟨x, y⟩) = Real.sqrt (x ^ 2 + y ^ 2) := by
   rw [Complex.normSq_mk, ← square_of_real_number_is_product x, ← square_of_real_number_is_product y]
 
-/-- 原文 `anticommutator_of_check_psi` の準備 5 の `r_ν` の鎖: `r_{M+1-μ} = r_μ`。
+/-- 人手 `anticommutator_of_check_psi` の準備 5 の `r_ν` の鎖: `r_{M+1-μ} = r_μ`。
 
 人手の 13 行の鎖と 1 対 1 の `calc` である（`a_μ = (x, y)`、`x := a_μ.re`、`y := a_μ.im`）。
 `|·|` は `√(normSq ·)` で表す（`checkR` の定義）ので、`abs_basic_properties` (1) の 2 行は
@@ -293,9 +292,9 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
                                                     -- `abs_basic_properties` (1)（`a_μ = (x, y)`）
     _ = checkR K M μ := rfl                         -- `r_μ` の定義
 
-/-! ## `√M`（原文 `def_check_fermi` の係数の分母） -/
+/-! ## `√M`（人手 `def_check_fermi` の係数の分母） -/
 
-/-- 原文 `def_check_fermi` の `√M`（`M ∈ ℕ` の実数の平方根）を ℂ の元として。 -/
+/-- 人手 `def_check_fermi` の `√M`（`M ∈ ℕ` の実数の平方根）を ℂ の元として。 -/
 noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
 
 /-- `M ≠ 0` のとき `√M ≠ 0`（`def_check_fermi` の係数の分母が 0 でないこと。
@@ -310,30 +309,30 @@ theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) := by
   have : Real.sqrt M ^ 2 = (M : ℝ) := Real.sq_sqrt (by positivity)
   simp only [sqrtM, ← Complex.ofReal_pow, this, Complex.ofReal_natCast]
 
-/-! ## `ψ̌_μ^†`, `ψ̌_μ` の定義（原文 `def_check_fermi`） -/
+/-! ## `ψ̌_μ^†`, `ψ̌_μ` の定義（人手 `def_check_fermi`） -/
 
-/-- 原文 `def_check_fermi` の `Ž_μ` の係数 `p_μ := -r_μ/(2√M γ_2(-θ̃_μ))`。 -/
+/-- 人手 `def_check_fermi` の `Ž_μ` の係数 `p_μ := -r_μ/(2√M γ_2(-θ̃_μ))`。 -/
 noncomputable def checkP (K : IsingConst) (M : ℕ) (μ : ℤ) : ℂ :=
   -((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
 
-/-- 原文 `def_check_fermi` の `Y̌_μ` の係数 `q := 1/(2√M)`（`μ` に依らない）。 -/
+/-- 人手 `def_check_fermi` の `Y̌_μ` の係数 `q := 1/(2√M)`（`μ` に依らない）。 -/
 noncomputable def checkQ (M : ℕ) : ℂ := 1 / (2 * sqrtM M)
 
-/-- **原文 `def_check_fermi`**: `ψ̌_μ^† := (-r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。 -/
+/-- **人手 `def_check_fermi`**: `ψ̌_μ^† := (-r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。 -/
 noncomputable def checkPsiDag (K : IsingConst) (M : ℕ) (μ : ℤ) : TensorPow M :=
   checkP K M μ • checkZ M μ + checkQ M • checkY M μ
 
-/-- **原文 `def_check_fermi`**: `ψ̌_μ := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。 -/
+/-- **人手 `def_check_fermi`**: `ψ̌_μ := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。 -/
 noncomputable def checkPsi (K : IsingConst) (M : ℕ) (μ : ℤ) : TensorPow M :=
   (-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ
 
-/-- 原文の「すなわち」の明示式との一致（`ψ̌^†` 側）。 -/
+/-- 人手の「すなわち」の明示式との一致（`ψ̌^†` 側）。 -/
 theorem checkPsiDag_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
     checkPsiDag K M μ
       = (-((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)))
           • checkZ M μ + (1 / (2 * sqrtM M)) • checkY M μ := rfl
 
-/-- 原文の「すなわち」の明示式との一致（`ψ̌` 側）。 -/
+/-- 人手の「すなわち」の明示式との一致（`ψ̌` 側）。 -/
 theorem checkPsi_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
     checkPsi K M μ
       = (((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)))
