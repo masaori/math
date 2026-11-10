@@ -68342,6 +68342,48 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_grid_edge_endpoint_encoding_injective",
+                        kind: "claim",
+                        title: { text: "格子辺の端点集合は向きと始点を一意に決める" },
+                        labels: ["claim_grid_edge_endpoint_encoding_injective"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/grid-edge-endpoint-encoding-injective"],
+                        lean: [
+                          "Ising2DLambda.KacWard.gridEdgeEndpoints_injective",
+                          "Ising2DLambda.NecSuf.KacWard.coordinateEdgeEndpoints_injective",
+                        ],
+                        statement: [
+                          paragraph([
+                            "各 ", math(String.raw`(d,r,c)\in\{0,1\}\times\mathbb Z\times\mathbb Z`),
+                            " の端点集合を次で定める（", ref("def_cell_edge_set"), "）。",
+                          ]),
+                          displayMath(String.raw`\operatorname{end}_{\square}(0,r,c):=\{(r,c),(r,c+1)\},\qquad
+\operatorname{end}_{\square}(1,r,c):=\{(r,c),(r+1,c)\}`),
+                          paragraph([
+                            "任意の ", math(String.raw`(d,r,c),(d',s,t)\in\{0,1\}\times\mathbb Z\times\mathbb Z`),
+                            " に対し、", math(String.raw`\operatorname{end}_{\square}(d,r,c)=\operatorname{end}_{\square}(d',s,t)`),
+                            " ならば ", math(String.raw`(d,r,c)=(d',s,t)`), " である。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "横辺の端点の第一座標はともに ", math(String.raw`r`),
+                            " であり、縦辺の端点の第一座標は ",
+                            math(String.raw`r,r+1`), " で相異なる。したがって端点集合が等しい二辺の向きは同じである。",
+                          ]),
+                          paragraph([
+                            "横辺どうしでは端点の第一座標から ", math(String.raw`r=s`),
+                            "、第二座標の小さい方から ", math(String.raw`c=t`),
+                            " を得る。縦辺どうしでは端点の第二座標から ", math(String.raw`c=t`),
+                            "、第一座標の小さい方から ", math(String.raw`r=s`),
+                            " を得る。いずれも整数の順序と ", math(String.raw`x<x+1`), " による。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_plane_cell_boundary_edge_set",

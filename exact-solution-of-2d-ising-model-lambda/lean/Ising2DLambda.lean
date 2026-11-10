@@ -1179,6 +1179,8 @@ import Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection
 import Ising2DLambda.NecSuf.KacWard.CellBoundaryEvenEdgeBijection
 import Ising2DLambda.NecSuf.KacWard.CellCornerConnected
 import Ising2DLambda.KacWard.CellCornerConnected
+import Ising2DLambda.NecSuf.KacWard.GridEdgeEndpointsInjective
+import Ising2DLambda.KacWard.GridEdgeEndpointsInjective
 import Ising2DLambda.NecSuf.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.NecSuf.KacWard.ConnectedCellCorners
