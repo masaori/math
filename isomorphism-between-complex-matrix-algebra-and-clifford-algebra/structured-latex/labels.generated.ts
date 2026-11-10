@@ -103,6 +103,7 @@ export const ALL_LABELS = [
   "def_ordered_sum_in_complex_numbers",
   "def_power_set_of_first_m_positive_integers",
   "def_projection_onto_quotient_set",
+  "def_quotient_algebra_operations",
   "def_quotient_set_modulo_two_sided_ideal",
   "def_residue_class_modulo_two_sided_ideal",
   "def_ring_homomorphism",

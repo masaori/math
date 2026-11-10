@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-10: 商代数の演算の定義（ラベル def_quotient_algebra_operations）を置いた。代表を射影の全射性でとり、π_I の値で加法・乗法・スカラー倍・零元・単位元を定め、代表によらないことは三つの主張を引いた。次は商代数が ℂ-代数であること。
 - 2026-11-09: 商集合の上のスカラー倍が代表のとり方によらないこと（ラベル claim_quotient_scalar_multiplication_does_not_depend_on_representatives）を、乗法の主張と同じ形で、合同がスカラー倍と両立することを引いて示した。次は商代数の演算の定義。
 - 2026-11-09: 商集合の上の乗法が代表のとり方によらないこと（ラベル claim_quotient_multiplication_does_not_depend_on_representatives）を、加法の主張と同じ形で、合同が乗法と両立することを引いて示した。次はスカラー倍が代表のとり方によらないこと。
 
