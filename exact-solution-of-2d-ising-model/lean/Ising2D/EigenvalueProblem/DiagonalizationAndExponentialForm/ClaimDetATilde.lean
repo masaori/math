@@ -23,10 +23,9 @@
     `complex_I_mul_I_chain`・`exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_sub_sq_chain`・
     `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である。人手の第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は、人手の 3・9・10 行と 1 段ずつの `calc` の
     `gamma2_a0_form`・`gamma2_neg_a0_form`・`gamma2_mul_gamma2_neg_sin_form` である。
-    `gamma2_mul_gamma2_neg_cos_form` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える。`v^2 = 1 - u^2`）を先取りした形で、鎖の Lean（`gamma1_sq_add_gamma2_mul_chain_first_half`）は使わない。
   * Step 3〜5: 人手の第 2 の等式の鎖。1〜29 行（展開と (iii) による `c_2` の消去）は人手の行と 1 段ずつの `calc` の
-    `gamma1_sq_add_gamma2_mul_chain_first_half`、30 行目以降（相殺と (i)(ii)）は `gamma1_sq_add_gamma2_mul_thetaTilde` の中の
-    `ring` と (i)(ii) の代入である。
+    `gamma1_sq_add_gamma2_mul_chain_first_half`、30〜57 行（`u` の 1 次の項の相殺、くくり出し、(i)(ii) の代入）は人手の行と
+    1 段ずつの `calc` の `gamma1_sq_add_gamma2_mul_chain_second_half` である。
   * Step 6: `lambda_mul_lambda_thetaTilde`。最後の `γ_1^2 = 1 + r^2` は `gamma1R_sq_thetaTilde`。
 * **双対関係が要る。** `det A(θ) = 1` は `A(θ)` の定義だけからは出ず、
   (iii) `c_2 s_2^* = c_2^*`（双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` の帰結）が要る。
@@ -387,15 +386,12 @@ theorem gamma2_neg_a0_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
                           -- 9 行目: `a_0` の定義（`ha` を右辺から左辺へ）
 
 /-- **人手証明 `det_A_theta_tilde` の第二の準備の `γ_2(θ)γ_2(-θ)` の鎖**（人手の 10 行）:
-`γ_2(θ)γ_2(-θ) = -((s_2^*)^2(a_0^2 + v^2))`。 -/
-theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) :
+`γ_2(θ)γ_2(-θ) = -((s_2^*)^2(a_0^2 + v^2))`。`a_0` は `gamma2_a0_form` と同じく定義を仮定 `ha` で受ける。 -/
+theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
+    (ha : a₀ = (K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :
     gamma2 K θ * gamma2 K (-θ)
-      = -((K.s2star : ℂ) ^ 2 *
-          (((K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) ^ 2
-            + (Real.sin θ : ℂ) ^ 2)) := by
-  set u : ℂ := (Real.cos θ : ℂ)
+      = -((K.s2star : ℂ) ^ 2 * (a₀ ^ 2 + (Real.sin θ : ℂ) ^ 2)) := by
   set v : ℂ := (Real.sin θ : ℂ)
-  set a₀ : ℂ := (K.c1 : ℂ) * u - (K.s1 : ℂ) * (K.c2 : ℂ) with ha
   set ep : ℂ := Complex.exp (Complex.I * (θ : ℂ)) with hep
   set em : ℂ := Complex.exp (-(Complex.I * (θ : ℂ))) with hem
   set s : ℂ := (K.s2star : ℂ)
@@ -427,19 +423,6 @@ theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) :
                           -- 9 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
     _ = -(s ^ 2 * (a₀ ^ 2 + v ^ 2)) := neg_one_mul _
                           -- 10 行目: `multiply_by_minus_one`
-
-/-- **人手証明 Step 2**（鎖の最後の行）:
-`γ_2(θ)γ_2(-θ) = -(s_2^*)^2((c_1u - s_1c_2)^2 + 1 - u^2)`。
-`v^2 = 1 - u^2` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える）の根拠「上の `u^2 + v^2 = 1_ℂ` を移項した `v^2 = 1 - u^2`」で、
-`cos_sq_add_sin_sq_complex_chain`（人手の `u^2 + v^2` の鎖）を移項して得る。 -/
-theorem gamma2_mul_gamma2_neg_cos_form (K : IsingConst) (θ : ℝ) :
-    gamma2 K θ * gamma2 K (-θ)
-      = -((K.s2star : ℂ) ^ 2 *
-          (((K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) ^ 2
-            + 1 - (Real.cos θ : ℂ) ^ 2)) := by
-  have hv : (Real.sin θ : ℂ) ^ 2 = 1 - (Real.cos θ : ℂ) ^ 2 :=
-    eq_sub_of_add_eq' (cos_sq_add_sin_sq_complex_chain θ)   -- `u^2 + v^2 = 1_ℂ` を移項
-  rw [gamma2_mul_gamma2_neg_sin_form, hv, add_sub_assoc]
 
 /-- **人手証明 `det_A_theta_tilde` の第 2 の等式の鎖の前半**（人手の 1〜29 行。左辺だけの行は数えず、等号の行を 1 行目から数える。SageMath の overview は左辺だけの行を第 1 行と数えるので、同じ行の番号が 1 つ大きい）:
 `γ_1(θ)^2 + γ_2(θ)γ_2(-θ)` を、`c_2` を (iii) `c_2s_2^* = c_2^*` で消した 8 項の和まで運ぶ。
@@ -474,9 +457,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
         rw [gamma1_eq_inclusion_form]
                           -- 1 行目: `def_gamma1_gamma2_of_theta`（`gamma1_eq_inclusion_form`）
     _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 + -(s₂' ^ 2 * (a₀ ^ 2 + v ^ 2)) := by
-        rw [gamma2_mul_gamma2_neg_sin_form, ← ha]
-                          -- 2 行目: 上の `γ_2(θ)γ_2(-θ)` の鎖（`gamma2_mul_gamma2_neg_sin_form`。
-                          -- その主張は `a_0` を開いた形で書いてあるので、`ha` で `a_0` に畳み直す）
+        rw [gamma2_mul_gamma2_neg_sin_form K θ a₀ ha]
+                          -- 2 行目: 上の `γ_2(θ)γ_2(-θ)` の鎖（`gamma2_mul_gamma2_neg_sin_form`）
     _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + v ^ 2) := (sub_eq_add_neg _ _).symm
                           -- 3 行目: `def_complex_difference` を右辺から左辺へ
     _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + (1 - u ^ 2)) := by rw [hv]
@@ -603,34 +585,144 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
         rw [mul_right_comm (2 * c₁) s₁ c₂']
                           -- 29 行目: `complex_numbers_form_a_field` の積の結合律・可換律
 
+/-- **人手証明 `det_A_theta_tilde` の第 2 の等式の鎖の後半**（人手の 30〜57 行。行の数え方は前半と同じ）:
+前半の 8 項の和から、`u` の 1 次の項の相殺、`(c_2^*)^2`・`(s_2^*)^2u^2` でのくくり出し、(i)(ii) の代入を経て `1` まで運ぶ。
+(i) `c_1^2 - s_1^2 = 1`、(ii) `(c_2^*)^2 - (s_2^*)^2 = 1` は `ℂ` の式として仮定 `H1`・`H2` で受ける。
+人手の `-1_ℂ` は Lean の `(-1 : ℂ)`（略記 `(-1)_ℂ`）、`1_ℂ`・`0_ℂ` は `(1 : ℂ)`・`(0 : ℂ)` である。積と和は人手の読みのとおり左から括る。
+人手の「和の結合律・可換律」（32・36 行目）は `ac_rfl`、差の定義（30 行目）・`-1` 倍（31 行目）・「積の結合律」（38 行目）・
+「和の結合律」（39 行目）・分配律（40 行目）は、その補題だけの `simp only`（同じ定理を複数箇所へ当てる）で受ける。 -/
+theorem gamma1_sq_add_gamma2_mul_chain_second_half (c₁ s₁ c₂' s₂' u : ℂ)
+    (H1 : c₁ ^ 2 - s₁ ^ 2 = 1) (H2 : c₂' ^ 2 - s₂' ^ 2 = 1) :
+    c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+      - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * c₂' * s₁ * s₂' * u
+      - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 = 1 :=
+  calc c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+      - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * c₂' * s₁ * s₂' * u
+      - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2
+    _ = c₁ ^ 2 * c₂' ^ 2 + -(2 * c₁ * c₂' * s₁ * s₂' * u) + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + -(c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + (2 * c₁ * c₂' * s₁ * s₂' * u)
+          + -(s₁ ^ 2 * c₂' ^ 2) + -s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        simp only [sub_eq_add_neg]
+                          -- 30 行目: `def_complex_difference` を 4 箇所へ
+    _ = c₁ ^ 2 * c₂' ^ 2 + (-1) * (2 * c₁ * c₂' * s₁ * s₂' * u) + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + (2 * c₁ * c₂' * s₁ * s₂' * u)
+          + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        simp only [neg_one_mul]
+                          -- 31 行目: `multiply_by_minus_one` を 4 箇所へ（右辺の 4 つの `(-1)z` を `-z` に戻して一致させる）
+    _ = c₁ ^ 2 * c₂' ^ 2 + ((-1) * (2 * c₁ * c₂' * s₁ * s₂' * u) + (2 * c₁ * c₂' * s₁ * s₂' * u)) + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
+          + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        ac_rfl
+                          -- 32 行目: `complex_numbers_form_a_field` の和の結合律・可換律
+    _ = c₁ ^ 2 * c₂' ^ 2 + (-(2 * c₁ * c₂' * s₁ * s₂' * u) + (2 * c₁ * c₂' * s₁ * s₂' * u)) + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
+          + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [neg_one_mul (2 * c₁ * c₂' * s₁ * s₂' * u)]
+                          -- 33 行目: `multiply_by_minus_one` を右辺から左辺へ
+    _ = c₁ ^ 2 * c₂' ^ 2 + 0 + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
+          + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [neg_add_cancel (2 * c₁ * c₂' * s₁ * s₂' * u)]
+                          -- 34 行目: `complex_numbers_form_a_field` の加法逆元
+    _ = c₁ ^ 2 * c₂' ^ 2 + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
+          + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [add_zero (c₁ ^ 2 * c₂' ^ 2)]
+                          -- 35 行目: `complex_numbers_form_a_field` の零元
+    _ = c₁ ^ 2 * c₂' ^ 2 + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2
+          + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + s₂' ^ 2 * u ^ 2 := by
+        ac_rfl
+                          -- 36 行目: `complex_numbers_form_a_field` の和の結合律・可換律
+    _ = c₁ ^ 2 * c₂' ^ 2 + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2
+          + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + 1 * (s₂' ^ 2 * u ^ 2) := by
+        rw [one_mul (s₂' ^ 2 * u ^ 2)]
+                          -- 37 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
+    _ = c₁ ^ 2 * c₂' ^ 2 + ((-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + s₁ ^ 2 * (s₂' ^ 2 * u ^ 2) + ((-1) * c₁ ^ 2) * (s₂' ^ 2 * u ^ 2) + 1 * (s₂' ^ 2 * u ^ 2) := by
+        simp only [mul_assoc]
+                          -- 38 行目: `complex_numbers_form_a_field` の積の結合律を 3 箇所へ（`c_1^2(s_2^*)^2u^2` の項には 2 回）
+    _ = c₁ ^ 2 * c₂' ^ 2 + ((-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + (s₁ ^ 2 * (s₂' ^ 2 * u ^ 2) + ((-1) * c₁ ^ 2) * (s₂' ^ 2 * u ^ 2) + 1 * (s₂' ^ 2 * u ^ 2)) := by
+        simp only [add_assoc]
+                          -- 39 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + (s₁ ^ 2 + (-1) * c₁ ^ 2 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        simp only [add_mul]
+                          -- 40 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ（`(c_2^*)^2` の 2 項に 1 回、`(s_2^*)^2u^2` の 3 項に 2 回）
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * c₁ ^ 2 + s₁ ^ 2 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [add_comm (s₁ ^ 2) ((-1) * c₁ ^ 2)]
+                          -- 41 行目: `complex_numbers_form_a_field` の和の可換律
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * c₁ ^ 2 + 1 * s₁ ^ 2 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [one_mul (s₁ ^ 2)]
+                          -- 42 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * c₁ ^ 2 + (((-1) * (-1) : ℝ) : ℂ) * s₁ ^ 2 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [show ((-1) * (-1) : ℝ) = 1 by norm_num, Complex.ofReal_one]
+                          -- 43 行目: ℝ の四則 `1 = (-1)(-1)`（`1_ℂ` は略記 `(1)_ℂ`）
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * c₁ ^ 2 + ((-1) * (-1)) * s₁ ^ 2 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [← real_inclusion_mul (-1) (-1), Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 44 行目: `real_inclusion_preserves_product` を右辺から左辺へ（`-1_ℂ` は略記 `(-1)_ℂ`）
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * c₁ ^ 2 + (-1) * ((-1) * s₁ ^ 2) + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [mul_assoc (-1 : ℂ) (-1) (s₁ ^ 2)]
+                          -- 45 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (c₁ ^ 2 + (-1) * s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * (c₁ ^ 2 + (-1) * s₁ ^ 2) + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [mul_add (-1 : ℂ) (c₁ ^ 2) ((-1) * s₁ ^ 2)]
+                          -- 46 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ
+    _ = (c₁ ^ 2 + -s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * (c₁ ^ 2 + -s₁ ^ 2) + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [neg_one_mul (s₁ ^ 2)]
+                          -- 47 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
+    _ = (c₁ ^ 2 - s₁ ^ 2) * c₂' ^ 2 + (-1) * s₂' ^ 2
+          + ((-1) * (c₁ ^ 2 - s₁ ^ 2) + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [← sub_eq_add_neg (c₁ ^ 2) (s₁ ^ 2)]
+                          -- 48 行目: `def_complex_difference` を 2 箇所へ右辺から左辺へ
+    _ = 1 * c₂' ^ 2 + (-1) * s₂' ^ 2 + ((-1) * 1 + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [H1]
+                          -- 49 行目: 上の `c_1^2 - s_1^2 = 1` を 2 箇所へ（`IsingParam.c1_sq_sub_s1_sq_inclusion`）
+    _ = c₂' ^ 2 + (-1) * s₂' ^ 2 + ((-1) + 1) * (s₂' ^ 2 * u ^ 2) := by
+        rw [one_mul (c₂' ^ 2), mul_one (-1 : ℂ)]
+                          -- 50 行目: `complex_numbers_form_a_field` の積の単位元を 2 箇所へ
+    _ = c₂' ^ 2 + (-1) * s₂' ^ 2 + (((-1) + 1 : ℝ) : ℂ) * (s₂' ^ 2 * u ^ 2) := by
+        rw [← real_inclusion_add (-1) 1, Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 51 行目: `real_inclusion_preserves_sum`（`a → -1, b → 1`）
+    _ = c₂' ^ 2 + (-1) * s₂' ^ 2 + ((0 : ℝ) : ℂ) * (s₂' ^ 2 * u ^ 2) := by
+        rw [show ((-1) + 1 : ℝ) = 0 by norm_num]
+                          -- 52 行目: ℝ の四則 `(-1) + 1 = 0`
+    _ = c₂' ^ 2 + (-1) * s₂' ^ 2 + 0 := by
+        rw [Complex.ofReal_zero, zero_mul (s₂' ^ 2 * u ^ 2)]
+                          -- 53 行目: `complex_zero_times_is_zero`（`0_ℂ` は略記 `(0)_ℂ`。具体版が無く `zero_mul`）
+    _ = c₂' ^ 2 + (-1) * s₂' ^ 2 := by
+        rw [add_zero]
+                          -- 54 行目: `complex_numbers_form_a_field` の零元
+    _ = c₂' ^ 2 + -s₂' ^ 2 := by
+        rw [neg_one_mul (s₂' ^ 2)]
+                          -- 55 行目: `multiply_by_minus_one` を右辺から左辺へ
+    _ = c₂' ^ 2 - s₂' ^ 2 := by
+        rw [← sub_eq_add_neg]
+                          -- 56 行目: `def_complex_difference` を右辺から左辺へ
+    _ = 1 := H2
+                          -- 57 行目: 上の `(c_2^*)^2 - (s_2^*)^2 = 1`（`IsingParam.c2star_sq_sub_s2star_sq_inclusion`）
+
 /-- **人手証明 `det_A_theta_tilde` の第 2 式**（第 2 の等式の鎖）: `γ_1^2 + γ_2(θ~)γ_2(-θ~) = 1`。
-人手の 1〜29 行は `gamma1_sq_add_gamma2_mul_chain_first_half`。30 行目以降（`u` の 1 次の項の相殺から結論まで）は
-まだ人手の行と 1 対 1 でなく、`ring` と (i)(ii) の代入で閉じている。 -/
+人手の 1〜29 行は `gamma1_sq_add_gamma2_mul_chain_first_half`、30〜57 行は `gamma1_sq_add_gamma2_mul_chain_second_half` である。 -/
 theorem gamma1_sq_add_gamma2_mul_thetaTilde
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
     gamma1 P.const (thetaTilde M μ) ^ 2
-      + gamma2 P.const (thetaTilde M μ) * gamma2 P.const (-thetaTilde M μ) = 1 := by
-  set θ := thetaTilde M μ
-  -- `c_1^2 - s_1^2 = 1`・`(c_2^*)^2 - (s_2^*)^2 = 1` を ℂ へ埋めたもの
-  have H1 := P.c1_sq_sub_s1_sq_inclusion
-  have H2 := P.c2star_sq_sub_s2star_sq_inclusion
-  set c₁ : ℂ := (P.const.c1 : ℂ)
-  set s₁ : ℂ := (P.const.s1 : ℂ)
-  set c₂ : ℂ := (P.const.c2 : ℂ)
-  set c₂' : ℂ := (P.const.c2star : ℂ)
-  set s₂' : ℂ := (P.const.s2star : ℂ)
-  set u : ℂ := (Real.cos θ : ℂ)
-  have H1' : s₁ ^ 2 - c₁ ^ 2 + 1 = 0 := by linear_combination -H1
-  calc gamma1 P.const θ ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)
-      = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
-          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * c₂' * s₁ * s₂' * u
-          - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 :=
-        gamma1_sq_add_gamma2_mul_chain_first_half P.const θ hdual _ rfl   -- 人手の 1〜29 行
-    _ = (c₁ ^ 2 - s₁ ^ 2) * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 * (s₁ ^ 2 - c₁ ^ 2 + 1) := by
-        ring                                     -- `u` の 1 次の項の相殺と同類項の整理
-    _ = (c₁ ^ 2 - s₁ ^ 2) * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 * 0 := by rw [H1']  -- (i)
-    _ = 1 * c₂' ^ 2 - s₂' ^ 2 := by rw [H1, mul_zero, add_zero]                     -- (i)
-    _ = 1 := by rw [one_mul, H2]                                                    -- (ii)
+      + gamma2 P.const (thetaTilde M μ) * gamma2 P.const (-thetaTilde M μ) = 1 :=
+  calc gamma1 P.const (thetaTilde M μ) ^ 2
+        + gamma2 P.const (thetaTilde M μ) * gamma2 P.const (-thetaTilde M μ)
+      = (P.const.c1 : ℂ) ^ 2 * (P.const.c2star : ℂ) ^ 2
+          - 2 * (P.const.c1 : ℂ) * (P.const.c2star : ℂ) * (P.const.s1 : ℂ) * (P.const.s2star : ℂ)
+              * (Real.cos (thetaTilde M μ) : ℂ)
+          + (P.const.s1 : ℂ) ^ 2 * (P.const.s2star : ℂ) ^ 2 * (Real.cos (thetaTilde M μ) : ℂ) ^ 2
+          - (P.const.c1 : ℂ) ^ 2 * (P.const.s2star : ℂ) ^ 2 * (Real.cos (thetaTilde M μ) : ℂ) ^ 2
+          + 2 * (P.const.c1 : ℂ) * (P.const.c2star : ℂ) * (P.const.s1 : ℂ) * (P.const.s2star : ℂ)
+              * (Real.cos (thetaTilde M μ) : ℂ)
+          - (P.const.s1 : ℂ) ^ 2 * (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2
+          + (P.const.s2star : ℂ) ^ 2 * (Real.cos (thetaTilde M μ) : ℂ) ^ 2 :=
+        gamma1_sq_add_gamma2_mul_chain_first_half P.const (thetaTilde M μ) hdual _ rfl   -- 人手の 1〜29 行
+    _ = 1 :=
+        gamma1_sq_add_gamma2_mul_chain_second_half _ _ _ _ _
+          P.c1_sq_sub_s1_sq_inclusion P.c2star_sq_sub_s2star_sq_inclusion          -- 人手の 30〜57 行
 
 /-- **人手証明 `det_A_theta_tilde` の第 1 式**: `det A(θ~_μ) = 1`（Step 1 と Step 5）。
 仮定 `hdual` は人手証明 Step 0 の (iii) `c_2 s_2^* = c_2^*`（双対関係の帰結）。 -/
@@ -653,7 +745,7 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
     rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product, real_inclusion_add,
       Real.cos_sq_add_sin_sq, Complex.ofReal_one]
       -- 和の像は `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`）
-  rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form, gamma1_eq_inclusion_form]
+  rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form P.const θ _ rfl, gamma1_eq_inclusion_form]
   linear_combination
     NecSuf.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
       (P.const.c2star : ℂ) (P.const.s2star : ℂ) (Real.cos θ : ℂ) (Real.sin θ : ℂ)
