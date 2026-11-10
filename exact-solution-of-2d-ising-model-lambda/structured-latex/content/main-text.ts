@@ -68785,6 +68785,10 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                             "格子頂点 ", math(String.raw`v\notin\mathcal V_{\square}(S)`),
                             " には ", math(String.raw`A`), " の辺は接続しない（",
                             ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）。",
+                          ]),
+                          displayMath(String.raw`\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}=\varnothing
+\qquad\bigl(\because\ \blkref{claim_cell_edge_endpoints_belong_to_cell_vertices},\ v\notin\mathcal V_{\square}(S)\bigr)`),
+                          paragraph([
                             "従って全格子頂点で偶数という条件は、", math(String.raw`G_S`),
                             " の全頂点で偶数という条件と同値である。",
                           ]),
