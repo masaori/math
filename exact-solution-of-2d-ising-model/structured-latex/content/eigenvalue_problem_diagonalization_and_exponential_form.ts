@@ -1284,28 +1284,10 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
 &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で二項の和の形に開く}\bigr) \\
 &= (-i)\left(-y_j\right)_{\mathbb C}
 &&(\because\ \text{直前の実数の鎖}) \\
-&= (-i)\left((-1_{\mathbb R})y_j\right)_{\mathbb C}
-&&(\because\ \mathbb R\text{ で }-x=(-1_{\mathbb R})x) \\
-&= (-i)\left((-1_{\mathbb R})_{\mathbb C}\,(y_j)_{\mathbb C}\right)
-&&(\because\ \blkref{real_inclusion_preserves_product}) \\
-&= (-i)\left((-1_{\mathbb C})\,(y_j)_{\mathbb C}\right)
-&&\bigl(\because\ (-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ の和},\ \blkref{complex_numbers_form_a_field})\bigr) \\
-&= \left((-1_{\mathbb C})\,i\right)\left((-1_{\mathbb C})\,(y_j)_{\mathbb C}\right)
-&&(\because\ \blkref{multiply_by_minus_one}) \\
-&= (-1_{\mathbb C})\left(i\left((-1_{\mathbb C})(y_j)_{\mathbb C}\right)\right)
-&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
-&= (-1_{\mathbb C})\left(\left(i(-1_{\mathbb C})\right)(y_j)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
-&= (-1_{\mathbb C})\left(\left((-1_{\mathbb C})i\right)(y_j)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}) \\
-&= (-1_{\mathbb C})\left((-1_{\mathbb C})\left(i\,(y_j)_{\mathbb C}\right)\right)
-&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
-&= \left((-1_{\mathbb C})(-1_{\mathbb C})\right)\left(i\,(y_j)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
-&= 1_{\mathbb C}\left(i\,(y_j)_{\mathbb C}\right)
-&&(\because\ (-1_{\mathbb C})(-1_{\mathbb C})=1_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})) \\
+&= -\left(i\left(-y_j\right)_{\mathbb C}\right)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (-y_j)_{\mathbb C})\bigr) \\
 &= i\,(y_j)_{\mathbb C}
-&&(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field}))
+&&\bigl(\because\ \blkref{negation_of_i_times_negated_real_is_i_times}\ (\theta \to y_j)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1447,6 +1429,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
       notes: [
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03（全証明の SageMath 検算）: 主張に像の記号と、2M_col δ I・0 が何の元かを書いた（中身は不変）。証明は、名前だけの根拠「反交換子の ℂ 双線型性」を新しい主張 anticommutator_of_finite_sums_of_scalar_multiples・finite_sum_of_scalar_multiples_of_one_matrix への参照に、行列の theorem_exp_product (n=1) を scalar_exp_product に付け替え、二重和から j = k の項を残す段を準備 1 と finite_sum_with_single_nonzero_term に、θ̃_μ + θ̃_ν の書き換えと exp_sum の指数への読み替えを準備 2 の鎖に分け、第 3 式を省略せずに書いた。",
+        "2026-11-10（Lean の通しの証明）: 準備 2 の複素数の鎖の (-i)(-y_j)_C から i(y_j)_C までの 11 行（-y_j を (-1_R)y_j に開き、-1_C と i の積を結合律・交換律で並べ替える鎖）を、主張 negative_i_times_complex_is_negation_of_i_times（z → (-y_j)_C）と negation_of_i_times_negated_real_is_i_times（θ → y_j）の 2 行に替えた。鎖の両端は変えていない。",
       ],
     },
   },

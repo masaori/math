@@ -4,8 +4,8 @@
 #   1/2 は QQ の元、κ_R = -(μ_R + ν_R - 1_R) は ι_{Z→R} が和・零・単位元を保つことによる像の式。
 #   κ_R をこの式で作るので、κ_R を置く行（-(-(μ+ν-1)) = -κ_R）の比較は作り方で自明である。
 #   有理関数体は結合律・交換律で並べ替えた式を同じ元にするので、並べ替えだけの行の比較も中身を持たない。
-# - 複素数の鎖（14 等号）: ℂ を本文どおり実数の対で持ち（complex_as_real_pairs.sage）、同じ有理関数体の上で各行を組み、隣と比べる。
-#   -1_C は 1_C + w = 0_C の解として作り、(-1_R)_C と比べる。
+# - 複素数の鎖（5 等号）: ℂ を本文どおり実数の対で持ち（complex_as_real_pairs.sage）、同じ有理関数体の上で各行を組み、隣と比べる。
+#   -1_C は 1_C + w = 0_C の解として作り、-i := (-1_C)i を組むのに使う。
 # 対照: θ̃ の定義の 1/2 を落とすと（整数運動量）、実数の鎖の右辺 -(2πjκ/M) と一致しない。
 load("../../_shared/complex_as_real_pairs.sage")
 
@@ -52,7 +52,7 @@ oneF = iota(1, F)
 # -1_C を 1_C + w = 0_C の解 w = (w0, w1) として作る（実部・虚部の一次方程式 1 + w0 = 0、0 + w1 = 0）
 minus_one = (F(-1) - F(0), F(0) - F(0))
 assert cc_add(oneF, minus_one) == (F(0), F(0))
-assert minus_one == iota(-1, F)                 # (-1_R)_C = -1_C
+assert minus_one == iota(-1, F)                 # cc_neg が使う (-1_R)_C と同じ -1_C であること
 minus_i = cc_mul(minus_one, iF)                 # multiply_by_minus_one: -i := (-1_C)i
 xm, xn = j * th(mu), j * th(nu)
 cx_lines = [
@@ -60,23 +60,13 @@ cx_lines = [
     cc_mul(minus_i, cc_add(iota(xm, F), iota(xn, F))),
     cc_mul(minus_i, iota(xm + xn, F)),
     cc_mul(minus_i, iota(-y, F)),
-    cc_mul(minus_i, iota((-1) * y, F)),
-    cc_mul(minus_i, cc_mul(iota(-1, F), iota(y, F))),
-    cc_mul(minus_i, cc_mul(minus_one, iota(y, F))),
-    cc_mul(cc_mul(minus_one, iF), cc_mul(minus_one, iota(y, F))),
-    cc_mul(minus_one, cc_mul(iF, cc_mul(minus_one, iota(y, F)))),
-    cc_mul(minus_one, cc_mul(cc_mul(iF, minus_one), iota(y, F))),
-    cc_mul(minus_one, cc_mul(cc_mul(minus_one, iF), iota(y, F))),
-    cc_mul(minus_one, cc_mul(minus_one, cc_mul(iF, iota(y, F)))),
-    cc_mul(cc_mul(minus_one, minus_one), cc_mul(iF, iota(y, F))),
-    cc_mul(oneF, cc_mul(iF, iota(y, F))),
+    cc_neg(cc_mul(iF, iota(-y, F)), F),           # negative_i_times_complex_is_negation_of_i_times（z → (-y_j)_C）
     cc_mul(iF, iota(y, F)),
 ]
-assert len(cx_lines) == 15   # 証明の 14 等号
+assert len(cx_lines) == 6    # 証明の 5 等号
 for t in range(len(cx_lines) - 1):
     assert cx_lines[t] == cx_lines[t + 1], ("complex", t)
-assert cc_mul(minus_one, minus_one) == oneF
 # 対照: 符号を落とした (-i)(y_j)_C は i(y_j)_C と違う
 assert cc_mul(minus_i, iota(y, F)) != cx_lines[-1]
-print("  complex chain: 14 equalities hold on real pairs over QQ(pi, mu, nu, M, j)")
+print("  complex chain: 5 equalities hold on real pairs over QQ(pi, mu, nu, M, j)")
 print("RESULT: PASS")

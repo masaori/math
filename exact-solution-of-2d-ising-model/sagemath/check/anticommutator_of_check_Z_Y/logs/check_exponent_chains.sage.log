@@ -1,3 +1,3 @@
   real chain: 20 equalities hold in QQ(pi, mu, nu, M, j)
-  complex chain: 14 equalities hold on real pairs over QQ(pi, mu, nu, M, j)
+  complex chain: 5 equalities hold on real pairs over QQ(pi, mu, nu, M, j)
 RESULT: PASS

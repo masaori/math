@@ -33,7 +33,7 @@
   （`ClaimConjugateIndex.lean` と同じ扱い）。
 * 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では標数 2 でない体の等式（`1/2 + 1/2 = 1`）と `ℤ` からの環準同型が
   和・符号反転・`1` を保つこと（`π` は任意の元でよく、ℝ の順序・完備性は使わない）、複素数の鎖では可換環への環準同型
-  （包含）が和・積を保つこと（`real_inclusion_add`・`real_inclusion_mul`）と `-1`・`i` の積の計算だけである。
+  （包含）が和・積を保つこと（`real_inclusion_add` と、`neg_I_mul_real_neg_eq_I_mul` が使う `real_inclusion_mul`）と、`-1`・`i` の積の計算（`neg_I_mul_eq_neg_of_I_mul`・`neg_I_mul_real_neg_eq_I_mul` が持つ）だけである。
   2 本の鎖ごとの必要十分版は置かない。主張全体の必要十分版 `acomm_antiperiodic_fourier_clifford` が、位相
   `exp((-i)(j_ℝθ~_λ)_ℂ)` を `ξ^{j(2λ-1)}` と抽象し、`scalar_exp_product` と準備 2 の 2 本の鎖を `ξ` の冪の指数の足し算
   `(2μ-1)+(2ν-1) = 2(μ+ν-1)` に吸収しているからである。必要十分版は `ξ` を `e^{-iθ~}` の向きに取り、指数和を
@@ -44,8 +44,8 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugat
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimCosSinAndITimesAtNegatedReal
 
 namespace Ising2D
 
@@ -126,11 +126,10 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
                                                                       -- `(-a)/c = -(a/c)`
 
 /-- **準備 2 の複素数の鎖**: `(-i)(a)_ℂ + (-i)(b)_ℂ = i(y)_ℂ`（`a + b = -y`。人手では `a = j_ℝθ~_μ`、
-`b = j_ℝθ~_ν`、`y = y_j`、`h` は直前の実数の鎖 `anticomm_exponent_real_chain`）。人手の 14 行に 1 段ずつ対応する。
+`b = j_ℝθ~_ν`、`y = y_j`、`h` は直前の実数の鎖 `anticomm_exponent_real_chain`）。人手の 5 行に 1 段ずつ対応する。
 2 段目の二項の和の像は具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_finite_sum` を `m = 2` で）、
-5 段目の積の像は `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）を右辺から左辺へ当てる。
-6 段目の `(-1_ℝ)_ℂ = -1_ℂ` は `neg_I_mul_real_inclusion_neg` と同じく、`(-1_ℝ, 0_ℝ)` に `1_ℂ = (1_ℝ, 0_ℝ)` を足すと
-`(0_ℝ, 0_ℝ) = 0_ℂ` になることから示す。 -/
+4 段目は `neg_I_mul_eq_neg_of_I_mul`（人手 `negative_i_times_complex_is_negation_of_i_times`、`z → (-y_j)_ℂ`）、
+5 段目は `neg_I_mul_real_neg_eq_I_mul`（人手 `negation_of_i_times_negated_real_is_i_times`、`θ → y_j`）である。 -/
 theorem anticomm_exponent_complex_chain {a b y : ℝ} (h : a + b = -y) :
     (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ) = Complex.I * (y : ℂ) :=
   calc (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ)
@@ -138,27 +137,10 @@ theorem anticomm_exponent_complex_chain {a b y : ℝ} (h : a + b = -y) :
     _ = (-Complex.I) * ((a + b : ℝ) : ℂ) := by
         rw [real_inclusion_add]                                       -- `real_inclusion_preserves_finite_sum`（m = 2）
     _ = (-Complex.I) * ((-y : ℝ) : ℂ) := by rw [h]                    -- 直前の実数の鎖
-    _ = (-Complex.I) * (((-1) * y : ℝ) : ℂ) := by rw [neg_one_mul]    -- ℝ で `-x = (-1_ℝ)x`
-    _ = (-Complex.I) * (((-1 : ℝ) : ℂ) * (y : ℂ)) := by
-        rw [real_inclusion_mul]                                       -- `real_inclusion_preserves_product`
-    _ = (-Complex.I) * ((-1 : ℂ) * (y : ℂ)) := by
-        rw [show ((-1 : ℝ) : ℂ) = (-1 : ℂ) from
-          eq_neg_of_add_eq_zero_left
-            (Complex.ext (show (-1 : ℝ) + 1 = 0 from neg_add_cancel 1) (show (0 : ℝ) + 0 = 0 from add_zero 0))]
-                                                                      -- `(-1_ℝ)_ℂ = -1_ℂ`
-    _ = ((-1 : ℂ) * Complex.I) * ((-1 : ℂ) * (y : ℂ)) := by
-        rw [neg_one_mul Complex.I]                                    -- `multiply_by_minus_one`
-    _ = (-1 : ℂ) * (Complex.I * ((-1 : ℂ) * (y : ℂ))) := mul_assoc _ _ _  -- ℂ の積の結合律
-    _ = (-1 : ℂ) * ((Complex.I * (-1 : ℂ)) * (y : ℂ)) := by
-        rw [← mul_assoc Complex.I]                                    -- ℂ の積の結合律
-    _ = (-1 : ℂ) * (((-1 : ℂ) * Complex.I) * (y : ℂ)) := by
-        rw [mul_comm Complex.I (-1 : ℂ)]                              -- ℂ の積の交換律
-    _ = (-1 : ℂ) * ((-1 : ℂ) * (Complex.I * (y : ℂ))) := by
-        rw [mul_assoc (-1 : ℂ) Complex.I]                             -- ℂ の積の結合律
-    _ = ((-1 : ℂ) * (-1 : ℂ)) * (Complex.I * (y : ℂ)) := (mul_assoc _ _ _).symm -- ℂ の積の結合律
-    _ = 1 * (Complex.I * (y : ℂ)) := by
-        rw [neg_one_mul, neg_neg]                  -- `(-1_ℂ)(-1_ℂ) = 1_ℂ`（`(-1)(-1) = -(-1) = 1`）
-    _ = Complex.I * (y : ℂ) := one_mul _                              -- `1_ℂ` は積の単位元
+    _ = -(Complex.I * ((-y : ℝ) : ℂ)) :=
+        neg_I_mul_eq_neg_of_I_mul _                                   -- `negative_i_times_complex_is_negation_of_i_times`（`z → (-y_j)_ℂ`）
+    _ = Complex.I * (y : ℂ) :=
+        neg_I_mul_real_neg_eq_I_mul y                                 -- `negation_of_i_times_negated_real_is_i_times`（`θ → y_j`）
 
 /-- （読み）人手の `exp_sum` を `N` と `κ` で当てた形:
 `∑_{j=1}^{N} exp(i(y_j)_ℂ) = (M_col)_ℂ δ^{(M_col)}_{(κ,0)}`（`y_j = 2π j_ℝ κ_ℝ / (M_col)_ℝ`）。
