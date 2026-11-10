@@ -25,7 +25,7 @@ lines = [
 ]
 v = [x for _, x in lines]
 assert v[0] == v[1] and v[1] == v[2] and v[2] == v[3]
-print("  第 1〜3 等号（2b/2、四則、分配法則）: 恒等的に等しい")
+print("  第 1〜3 等号（2b/2、準備の第二の鎖の参照、分配法則）: 恒等的に等しい")
 d4 = v[3] - v[4]
 assert d4 != 0 and d4 == (a + b) / two - c
 assert d4.numerator().subs(c=(a + b) / two) == 0

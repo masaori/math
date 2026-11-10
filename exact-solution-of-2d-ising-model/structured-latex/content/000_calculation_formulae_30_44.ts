@@ -3284,14 +3284,76 @@ i(-\theta)_{\mathbb C}
         math(String.raw`i\neq0_{\mathbb C}`),
         " なので ",
         math(String.raw`2_{\mathbb C}i\neq0_{\mathbb C}`),
-        " であり、以下の分数は定まる。主張の左辺から",
+        " であり、以下の分数は定まる。",
+        math(String.raw`1_{\mathbb C},2_{\mathbb C},-1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=1,2,-1`),
+        " である。",
+        math(String.raw`0_{\mathbb C}=(0,0)\in\mathbb C`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の加法の単位元である。準備の第一の鎖:",
       ]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb C}+1_{\mathbb C}
+&=(1)_{\mathbb C}+(1)_{\mathbb C}
+&&\bigl(\because\ 1_{\mathbb C}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb C}\ \text{の}\ r=1\ \text{を 2 か所へ}\bigr)\\
+&=(1+1)_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a\to1,\ b\to1)\bigr)\\
+&=(2)_{\mathbb C}
+&&\bigl(\because\ \mathbb R\ \text{で}\ 1+1=2\bigr)\\
+&=2_{\mathbb C}
+&&\bigl(\because\ 2_{\mathbb C}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb C}\ \text{の}\ r=2\bigr)
+\end{aligned}`),
+      paragraph(["準備の第二の鎖:"]),
+      displayMath(String.raw`\begin{aligned}
+(a+b)-(a-b)
+&=(a+b)+\bigl(-(a-b)\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a+b,\ w\to a-b)\bigr)\\
+&=(a+b)+\Bigl(-\bigl(a+(-b)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a,\ w\to b)\bigr)\\
+&=(a+b)+(-1_{\mathbb C})\bigl(a+(-b)\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a+(-b))\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+(-1_{\mathbb C})(-b)\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の左からの分配律}\bigr)\\
+&=(a+b)+\Bigl((-1_{\mathbb C})a+(-1_{\mathbb C})\bigl((-1_{\mathbb C})b\bigr)\Bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to b)\bigr)\\
+&=(a+b)+\Bigl((-1_{\mathbb C})a+\bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)b\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+1_{\mathbb C}b\bigr)
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+b\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)\\
+&=(a+b)+\bigl((-a)+b\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a)\ \text{を右辺から左辺へ}\bigr)\\
+&=\bigl((a+b)+(-a)\bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
+&=\bigl((b+a)+(-a)\bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律}\bigr)\\
+&=\Bigl(b+\bigl(a+(-a)\bigr)\Bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
+&=(b+0_{\mathbb C})+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元（その直後の段落で}\ -a=(-1_{\mathbb C})a\ \text{が加法の逆元と一致すると示してある）}\bigr)\\
+&=b+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
+&=1_{\mathbb C}b+1_{\mathbb C}b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 か所へ右辺から左辺へ}\bigr)\\
+&=(1_{\mathbb C}+1_{\mathbb C})b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}b
+&&(\because\ \text{準備の第一の鎖})
+\end{aligned}`),
+      paragraph(["主張の左辺から"]),
       displayMath(String.raw`\begin{aligned}
 b
 &=\frac{2_{\mathbb C}b}{2_{\mathbb C}}
 &&\bigl(\because\ 2_{\mathbb C}\neq0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=\frac{(a+b)-(a-b)}{2_{\mathbb C}}
-&&\bigl(\because\ \mathbb C\text{ の四則}\ (\blkref{complex_numbers_form_a_field},\ \blkref{def_complex_difference})\bigr)\\
+&&(\because\ \text{準備の第二の鎖を右辺から左辺へ})\\
 &=\frac{a+b}{2_{\mathbb C}}-\frac{a-b}{2_{\mathbb C}}
 &&\bigl(\because\ \text{分配法則}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=(\cos\theta)_{\mathbb C}-\frac{a-b}{2_{\mathbb C}}
@@ -3307,6 +3369,7 @@ b
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算）: 半整数運動量の位相の主張が「euler_formula_cos_sin の証明冒頭で導いた exp(-ix) = cos x - i sin x」を根拠にしていた。証明の中の式はラベルで引けないので、euler_formula_cos_sin の主張から導く形で独立した主張にした。",
+        "2026-11-10（Lean の通しの証明）: 2 行目の根拠「ℂ の四則」は 2_ℂb = (a+b)-(a-b) を 1 行で述べていたので、一ステップ一定理により準備の二つの鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行、(a+b)-(a-b) = 2_ℂb の 17 行）に割り、主鎖の 2 行目はその参照にした。主鎖のほかの行は変えていない。",
       ],
     },
   },
