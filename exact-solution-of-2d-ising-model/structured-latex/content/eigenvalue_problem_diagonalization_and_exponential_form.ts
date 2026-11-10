@@ -763,8 +763,20 @@ P_{m-1}Y_m
 &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((1_{\mathbb R}-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&=\frac{2\pi\left(1_{\mathbb R}+\left((-\mu_{\mathbb R})+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr)\\
+&=\frac{2\pi\left(1_{\mathbb R}+\left(\left(-\tfrac12\right)+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)\\
+&=\frac{2\pi\left(\left(1_{\mathbb R}+\left(-\tfrac12\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の結合律を右辺から左辺へ}\bigr)\\
+&=\frac{2\pi\left(\left(1_{\mathbb R}-\tfrac12\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left((1_{\mathbb R}-\tfrac12)-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left(\tfrac12-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr)\\
 &=\frac{2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -782,6 +794,7 @@ P_{m-1}Y_m
       notes: [
         "旧複合ラベルは、後続参照の意味を保つため、共役添字恒等式だけを述べる残余主張に残した。",
         "2026-11-03（全証明の SageMath 検算）: 鎖を antiperiodic_exp_sum の像の記号 μ_R・(M_col)_R で書き直し、整数から実数への包含が差と単位元を保つ行を分けた（主張は不変）。",
+        "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた「ℝ の加法の結合律と交換律」の行を、差の定義（def_real_difference）2 行・結合律・交換律・結合律（右辺から左辺へ）・差の定義（右辺から左辺へ）2 行の 7 行に割った（8 等号 → 14 等号）。主張の中身は不変。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
       ],
     },

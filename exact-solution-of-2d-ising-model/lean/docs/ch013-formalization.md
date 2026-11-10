@@ -47,7 +47,7 @@
 | `Ising2D.checkPhase_period_for_checkZY` | `e^{-ijθ~_{μ+M}} = e^{-ijθ~_μ}`（主張の鎖の 7 行。3 行目だけ 2 段） | `half_integer_phase_periodicity` |
 | `Ising2D.checkZ_period` | `check(Z)_{μ+M} = check(Z)_μ` | `half_integer_checkZ_periodicity` |
 | `Ising2D.checkY_period` | `check(Y)_{μ+M} = check(Y)_μ` | `half_integer_checkY_periodicity` |
-| `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
+| `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ`（人手の 14 行と 1 段ずつ） | `def_half_integer_modes` (3) |
 | `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | `def_half_integer_modes` (3) |
 | `Ising2D.CheckIndex` | `μ ∈ 𝓜̌ = {1,…,M}` | `def_check_index_set` |
 | `Ising2D.thetaTilde_ne` | (1) `μ ≠ ν ⟹ θ~_μ ≠ θ~_ν` | 同上 (1) |
