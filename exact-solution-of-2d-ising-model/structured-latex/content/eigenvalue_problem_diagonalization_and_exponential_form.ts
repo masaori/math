@@ -902,18 +902,36 @@ P_{m-1}Y_m
 \tilde\theta_{M_{\mathrm{col}}+1-\mu}
 &= \frac{2\pi\left((M_{\mathrm{col}}+1-\mu)_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \tilde\theta\text{ の定義を }M_{\mathrm{col}}+1-\mu\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr) \\
-&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので和と差を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
-&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&= \frac{2\pi\left(\left(\iota_{\mathbb Z\to\mathbb R}(M_{\mathrm{col}}+1)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
-&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}-\tfrac12\right)-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr) \\
-&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\tfrac12-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \blkref{def_real_difference}\bigr) \\
+&= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \blkref{def_real_difference}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+\left((-\mu_{\mathbb R})+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+\left(\left(-\tfrac12\right)+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr) \\
+&= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+\left(-\tfrac12\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律を右辺から左辺へ}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}+\left(-\tfrac12\right)\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}-\tfrac12\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\tfrac12\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\tfrac12+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\tfrac12-\mu_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \mathbb R\text{ の加法の結合律（差は加法の逆元の和）}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\text{（}-(a-b)=-a+b\text{）と、差は加法の逆元の和}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
 &= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}-2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr) \\
 &= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1060,6 +1078,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-03（全証明の SageMath 検算）: (2) の主張を像の記号 j_R・(·)_C で書き、全実数上の cos・sin の値を前提とすることを主張に書いた。(2) の証明は、主張と違う式を述べる euler_formula_cos_sin と行列の theorem_exp_product (n=1) を引いていたので、exp_of_negative_i_real_as_cos_minus_i_sin と scalar_exp_product に付け替え、包含の和・積の保存と符号の鎖を置いた。(1) の根拠「ℂ の四則」は実数の計算なので ℝ に直し、像の記号で書き直した。",
         "2026-11-09（Lean の通しの証明）: (2) の鎖は exp((-i)(2πj_R)_C) に exp_of_negative_i_real_as_cos_minus_i_sin を直接当てていたが、その主張の -iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C) である。" +
           "準備の文の「exp_of_negative_i_real_as_cos_minus_i_sin の -iθ_C も (-i)θ_C の意味」を直し、negative_i_times_complex_is_negation_of_i_times で -(i(2πj_R)_C) へ書き換える 1 行を足した（15 等号 → 16 等号）。主張 (2) の -i(·)_C が (-i)(·)_C の意味であることは証明の準備の文にしか無かったので、主張に書いた。ほかの行は変えていない。",
+        "2026-11-10（Lean の通しの証明）: (1) の鎖の、1 行に 2 つ以上の事実を当てていた行（「和と差を保つ」「ℝ の加法の結合律と交換律」「結合律（差は加法の逆元の和）」「½ - μ_R = -(μ_R - ½) と、差は加法の逆元の和」）を、差の定義（def_real_difference）・結合律・交換律を 1 行ずつ当てる形に割った（11 等号 → 20 等号）。主張の中身は不変。",
       ],
     },
   },
