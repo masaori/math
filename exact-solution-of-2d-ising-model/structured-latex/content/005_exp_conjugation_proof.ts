@@ -144,8 +144,12 @@ export default defineBlocks([
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= \bigl(xu - (-y)(-v),\ -(xv + yu)\bigr)
 &&(\because\ \mathbb{R}\ \text{で}\ (-y)(-v) = yv)\\
+&= \bigl(xu - (-y)(-v),\ (-(xv)) + (-(yu))\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ -(xv + yu) = (-(xv)) + (-(yu)))\\
+&= \bigl(xu - (-y)(-v),\ x(-v) + (-(yu))\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ -(xv) = x(-v))\\
 &= \bigl(xu - (-y)(-v),\ x(-v) + (-y)u\bigr)
-&&(\because\ \mathbb{R}\ \text{で}\ x(-v) + (-y)u = -(xv + yu))\\
+&&(\because\ \mathbb{R}\ \text{で}\ -(yu) = (-y)u)\\
 &= (x,-y)\,(u,-v)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \overline{z}\,\overline{w}

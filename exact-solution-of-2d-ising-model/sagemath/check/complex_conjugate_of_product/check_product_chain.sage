@@ -1,5 +1,5 @@
 # 対象ラベル: complex_conjugate_of_product
-# 鎖の 6 行を一行ずつ。ℂ を本文 definition_of_cc どおり実数の対で持つ（_shared/complex_as_real_pairs.sage）。
+# 鎖の 8 行を一行ずつ。ℂ を本文 definition_of_cc どおり実数の対で持つ（_shared/complex_as_real_pairs.sage）。
 # x, y, u, v は QQ 上の多項式環の不定元。比べる側は QQ(i) 係数の多項式 x + i y と Sage の係数の共役。
 load("../../_shared/complex_as_real_pairs.sage")
 
@@ -13,7 +13,9 @@ lines = [
     cc_conj((x*u - y*v, x*v + y*u)),               # conj((xu - yv, xv + yu))   (definition_of_cc の積)
     (x*u - y*v, -(x*v + y*u)),                     # (xu - yv, -(xv + yu))     (def_complex_conjugate)
     (x*u - (-y)*(-v), -(x*v + y*u)),               # (-y)(-v) = yv
-    (x*u - (-y)*(-v), x*(-v) + (-y)*u),            # x(-v) + (-y)u = -(xv + yu)
+    (x*u - (-y)*(-v), (-(x*v)) + (-(y*u))),        # -(xv + yu) = (-(xv)) + (-(yu))
+    (x*u - (-y)*(-v), x*(-v) + (-(y*u))),          # -(xv) = x(-v)
+    (x*u - (-y)*(-v), x*(-v) + (-y)*u),            # -(yu) = (-y)u
     cc_mul((x, -y), (u, -v)),                      # (x,-y)(u,-v)               (definition_of_cc の積)
     cc_mul(cc_conj(z), cc_conj(w)),                # conj z conj w              (def_complex_conjugate)
 ]
@@ -25,7 +27,7 @@ PK = PolynomialRing(K, ['x', 'y', 'u', 'v'])
 g = lambda q: PK(q[0]) + i_K * PK(q[1])
 assert g(lines[0]) == (g(z) * g(w)).map_coefficients(lambda c: c.conjugate())
 assert g(lines[-1]) == g(z).map_coefficients(lambda c: c.conjugate()) * g(w).map_coefficients(lambda c: c.conjugate())
-print("鎖の 6 個の等号と、両端の Sage の共役との一致を不定元で確かめた")
+print("鎖の 8 個の等号と、両端の Sage の共役との一致を不定元で確かめた")
 
 set_random_seed(7)
 for _ in range(20):
