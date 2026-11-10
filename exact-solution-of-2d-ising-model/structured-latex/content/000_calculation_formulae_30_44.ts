@@ -3309,18 +3309,6 @@ i(-\theta)_{\mathbb C}
         " の加法の単位元である。準備の第一の鎖:",
       ]),
       displayMath(String.raw`\begin{aligned}
-1_{\mathbb C}+1_{\mathbb C}
-&=(1)_{\mathbb C}+(1)_{\mathbb C}
-&&\bigl(\because\ 1_{\mathbb C}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb C}\ \text{の}\ r=1\ \text{を 2 か所へ}\bigr)\\
-&=(1+1)_{\mathbb C}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a\to1,\ b\to1)\bigr)\\
-&=(2)_{\mathbb C}
-&&\bigl(\because\ \mathbb R\ \text{で}\ 1+1=2\bigr)\\
-&=2_{\mathbb C}
-&&\bigl(\because\ 2_{\mathbb C}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb C}\ \text{の}\ r=2\bigr)
-\end{aligned}`),
-      paragraph(["準備の第二の鎖:"]),
-      displayMath(String.raw`\begin{aligned}
 (a+b)-(a-b)
 &=(a+b)+\bigl(-(a-b)\bigr)
 &&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a+b,\ w\to a-b)\bigr)\\
@@ -3355,9 +3343,9 @@ i(-\theta)_{\mathbb C}
 &=(1_{\mathbb C}+1_{\mathbb C})b
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ}\bigr)\\
 &=2_{\mathbb C}b
-&&(\because\ \text{準備の第一の鎖})
+&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
 \end{aligned}`),
-      paragraph(["準備の第三の鎖:"]),
+      paragraph(["準備の第二の鎖:"]),
       displayMath(String.raw`\begin{aligned}
 i\,(2_{\mathbb C}i)^{-1}
 &=1_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
@@ -3387,7 +3375,7 @@ b
 &=\frac{2_{\mathbb C}b}{2_{\mathbb C}}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to2_{\mathbb C}b,\ w\to2_{\mathbb C})\ \text{を右辺から左辺へ}\bigr)\\
 &=\frac{(a+b)-(a-b)}{2_{\mathbb C}}
-&&(\because\ \text{準備の第二の鎖を右辺から左辺へ})\\
+&&(\because\ \text{準備の第一の鎖を右辺から左辺へ})\\
 &=\bigl((a+b)-(a-b)\bigr)2_{\mathbb C}^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to(a+b)-(a-b),\ w\to2_{\mathbb C})\bigr)\\
 &=\Bigl((a+b)+\bigl(-(a-b)\bigr)\Bigr)2_{\mathbb C}^{-1}
@@ -3409,7 +3397,7 @@ b
 &=(\cos\theta)_{\mathbb C}-(a-b)\,2_{\mathbb C}^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to a-b,\ w\to2_{\mathbb C})\bigr)\\
 &=(\cos\theta)_{\mathbb C}-(a-b)\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
-&&(\because\ \text{準備の第三の鎖を右辺から左辺へ})\\
+&&(\because\ \text{準備の第二の鎖を右辺から左辺へ})\\
 &=(\cos\theta)_{\mathbb C}-\bigl((a-b)\,i\bigr)(2_{\mathbb C}i)^{-1}
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
 &=(\cos\theta)_{\mathbb C}-\bigl(i\,(a-b)\bigr)(2_{\mathbb C}i)^{-1}
@@ -3429,6 +3417,7 @@ b
         "2026-11-02（全証明の SageMath 検算）: 半整数運動量の位相の主張が「euler_formula_cos_sin の証明冒頭で導いた exp(-ix) = cos x - i sin x」を根拠にしていた。証明の中の式はラベルで引けないので、euler_formula_cos_sin の主張から導く形で独立した主張にした。",
         "2026-11-10（Lean の通しの証明）: 2 行目の根拠「ℂ の四則」は 2_ℂb = (a+b)-(a-b) を 1 行で述べていたので、一ステップ一定理により準備の二つの鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行、(a+b)-(a-b) = 2_ℂb の 17 行）に割り、主鎖の 2 行目はその参照にした。主鎖のほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: 主鎖の 1 行目（2_C ≠ 0_C による分数）・3 行目（分配法則）・5 行目（i ≠ 0_C による分数）が複数の操作を 1 行で当てていたので、一ステップ一定理により、商の定義 def_complex_quotient（このとき足した）・乗法群の逆元・体の公理を 1 行に 1 つずつ当てる行に割った（主鎖は 22 行）。5 行目の i(2_C i)^{-1} = 2_C^{-1} は準備の第三の鎖（6 行）にした。前置きの 2_C, i ≠ 0_C に理由を書いた。",
+        "2026-11-10（Lean の通しの証明）: 準備の第一の鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行）をほかの証明の準備と同じ鎖なので主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。準備の鎖はこれで二つになり、(a+b)-(a-b) = 2_ℂb を第一の鎖、i(2_ℂi)^{-1} = 2_ℂ^{-1} を第二の鎖と呼ぶ。",
       ],
     },
   },

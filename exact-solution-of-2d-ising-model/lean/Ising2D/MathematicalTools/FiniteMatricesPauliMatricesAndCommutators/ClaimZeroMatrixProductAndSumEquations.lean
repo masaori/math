@@ -14,7 +14,8 @@
 * `zero_matrix_is_left_zero_of_mat_mult` の成分の鎖の 5 行は、`zero_matrix_mul_apply` の `calc` の 5 段と 1 対 1 である。
   `0_ℂ z = 0_ℂ`（`complex_zero_times_is_zero`）は `zero_mul`、`Σ_{j=1}^{n} 0_ℂ = 0_ℂ`（`finite_sum_of_complex_zeros`）は
   `Finset.sum_const_zero` で出す（どちらも人手の主張に Lean の具体版が無い。`identity_matrix_mul_apply` と同じ扱い）。
-* `matrix_sum_with_itself_zero_implies_zero` の準備の `2_ℂ := ι(2)` は `complexTwo`、`1_ℂ + 1_ℂ = 2_ℂ` の 4 行の鎖は `one_add_one_eq_complexTwo` の 4 段、
+* `matrix_sum_with_itself_zero_implies_zero` の準備の `2_ℂ := ι(2)` は `complexTwo`、成分の鎖の 4 行目が引く `one_plus_one_is_two_in_cc`
+  は、具体版 `complex_one_add_one` を `complexTwo` の書き方へ読む `one_add_one_eq_complexTwo`、
   `2_ℂ ≠ 0_ℂ` の鎖は `complexTwo_ne_zero`、逆元 `2_ℂ^{-1}` の取り方（`complex_numbers_form_a_field` の逆元の存在）は `inv_mul_cancel₀` である。
   成分の鎖の 11 行は `matrix_eq_zero_of_add_self_eq_zero_apply` の 11 段と 1 対 1 である。
 * `matrix_summand_from_sum_equation` の成分の鎖の 8 行は `matrix_eq_sub_of_add_eq_apply` の 8 段と 1 対 1 である。
@@ -24,6 +25,7 @@
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
 
 namespace Ising2D
 
@@ -47,15 +49,14 @@ theorem zero_matrix_mul {m n p : ℕ} (B : Matrix (Fin n) (Fin p) ℂ) :
 /-- 人手 `matrix_sum_with_itself_zero_implies_zero` の証明の `2_ℂ := ι_{ℝ→ℂ}(2) = (2, 0)`（`inclusion_rr_to_cc` の略記）。 -/
 def complexTwo : ℂ := ⟨2, 0⟩
 
-/-- `matrix_sum_with_itself_zero_implies_zero` の準備の第 1 の鎖: `1_ℂ + 1_ℂ = 2_ℂ`。 -/
+/-- `one_plus_one_is_two_in_cc`（`1_ℂ + 1_ℂ = 2_ℂ`）を、右辺の `2_ℂ` を `complexTwo := (2, 0)` と書いて読んだもの。
+人手では同じ記号 `2_ℂ` なので、略記の読み替えの段だけを足す。 -/
 theorem one_add_one_eq_complexTwo : (1 : ℂ) + 1 = complexTwo :=
   calc (1 : ℂ) + 1
-      = (⟨1, 0⟩ : ℂ) + ⟨1, 0⟩ := rfl                                  -- `inclusion_rr_to_cc`
-    _ = ⟨1 + 1, 0 + 0⟩ := rfl                                         -- `definition_of_cc` の和
-    _ = ⟨2, 0⟩ := by norm_num                                         -- `ℝ` の四則
-    _ = complexTwo := rfl                                             -- `inclusion_rr_to_cc`
+      = ((2 : ℝ) : ℂ) := complex_one_add_one_eq_ofReal_two              -- `one_plus_one_is_two_in_cc`（`2_ℂ` は略記 `r_ℂ` の `r = 2`）
+    _ = complexTwo := rfl                                             -- `inclusion_rr_to_cc`: `ι(2) = (2, 0)`
 
-/-- `matrix_sum_with_itself_zero_implies_zero` の準備の第 2 の鎖: `2_ℂ = (2,0) ≠ (0,0) = 0_ℂ`（第 1 成分が `ℝ` で `2 ≠ 0`）。 -/
+/-- `matrix_sum_with_itself_zero_implies_zero` の準備の鎖: `2_ℂ = (2,0) ≠ (0,0) = 0_ℂ`（第 1 成分が `ℝ` で `2 ≠ 0`）。 -/
 theorem complexTwo_ne_zero : complexTwo ≠ 0 := by
   intro h
   have h2 : (2 : ℝ) = 0 := congrArg Complex.re h
@@ -69,7 +70,7 @@ theorem matrix_eq_zero_of_add_self_eq_zero_apply {m p : ℕ} (X : Matrix (Fin m)
     _ = (complexTwo⁻¹ * complexTwo) * X i k := by
           rw [inv_mul_cancel₀ complexTwo_ne_zero]                                  -- `2_ℂ^{-1}` の取り方
     _ = complexTwo⁻¹ * (complexTwo * X i k) := mul_assoc _ _ _                     -- 積の結合律
-    _ = complexTwo⁻¹ * ((1 + 1) * X i k) := by rw [one_add_one_eq_complexTwo]     -- 準備の鎖 `1_ℂ + 1_ℂ = 2_ℂ` を右辺から左辺へ
+    _ = complexTwo⁻¹ * ((1 + 1) * X i k) := by rw [one_add_one_eq_complexTwo]     -- `one_plus_one_is_two_in_cc` を右辺から左辺へ
     _ = complexTwo⁻¹ * (1 * X i k + 1 * X i k) := by rw [add_mul]                 -- 分配律
     _ = complexTwo⁻¹ * (X i k + X i k) := by rw [one_mul]                          -- `1_ℂ` は積の単位元（2 か所）
     _ = complexTwo⁻¹ * (X + X) i k := by rw [matrix_sum_apply]                     -- `def_matrix_sum`

@@ -4068,6 +4068,51 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
     },
   },
   {
+    id: "calc_formulae_claim_one_plus_one_is_two_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`1_{\mathbb{C}}+1_{\mathbb{C}}=2_{\mathbb{C}}` },
+    labels: ["one_plus_one_is_two_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`1_{\mathbb{C}}`),
+        "・",
+        math(String.raw`2_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r = 1`),
+        "・",
+        math(String.raw`r = 2`),
+        " である。左辺の和は ",
+        ref("definition_of_cc"),
+        " の和である。このとき",
+      ]),
+      displayMath(String.raw`1_{\mathbb{C}} + 1_{\mathbb{C}} = 2_{\mathbb{C}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}} + 1_{\mathbb{C}}
+&= (1)_{\mathbb{C}} + (1)_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 1\ \text{を 2 か所へ}\bigr)\\
+&= (1 + 1)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
+&= (2)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&= 2_{\mathbb{C}}
+&&\bigl(\because\ 2_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 2\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_sum_with_itself_zero_implies_zero・V1_plus_square_root_property・trace_of_check_number_operator_product・exp_of_negative_i_real_as_cos_minus_i_sin の証明の準備が同じ 4 行の鎖をそれぞれ置いていたので、minus_one_times_minus_one_is_one_in_cc と同じく主張にして引けるようにした。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_009_sqrt_minus_one",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/009_definition_sqrt_minus_1.typ", ordinal: 10 },

@@ -1,8 +1,8 @@
 # 対象ラベル: exp_of_negative_i_real_as_cos_minus_i_sin
-# 証明の準備の三つの鎖を一行ずつ確かめる。
-#   第一の鎖（4 行）: 1_C + 1_C = (1)_C + (1)_C = (1+1)_C = (2)_C = 2_C
-#   第二の鎖（17 行）: (a+b) - (a-b) = … = 2_C b
-#   第三の鎖（6 行）: i(2_C i)^{-1} = … = 2_C^{-1}（逆元は multiplicative_group_of_cc の証明の逆元の式
+# 証明の準備の二つの鎖を一行ずつ確かめる（1_C + 1_C = 2_C は主張 one_plus_one_is_two_in_cc の参照で、
+# その鎖は sagemath/check/one_plus_one_is_two_in_cc/ が確かめる）。
+#   第一の鎖（17 行）: (a+b) - (a-b) = … = 2_C b
+#   第二の鎖（6 行）: i(2_C i)^{-1} = … = 2_C^{-1}（逆元は multiplicative_group_of_cc の証明の逆元の式
 #   w^{-1} := (x/(x^2+y^2), -y/(x^2+y^2))。2_C = (2,0)、i = (0,1) なので成分は QQ）
 # ℂ を実数の対として持ち（definition_of_cc）、和・積は definition_of_cc の式、r_C := (r, 0)（inclusion_rr_to_cc）、
 # -z := (-1_C) z（multiply_by_minus_one）、z - w := z + (-w)（def_complex_difference）を、それぞれ書いた関数で作る。
@@ -38,17 +38,6 @@ def sub(z, w):
 a = (a0, a1)
 b = (b0, b1)
 
-first = [
-    add(one, one),                      # 1_C + 1_C
-    add(incl(1), incl(1)),              # (1)_C + (1)_C
-    incl(QQ(1) + QQ(1)),                # (1+1)_C               real_inclusion_preserves_sum
-    incl(2),                            # (2)_C                 ℝ で 1+1 = 2
-    two,                                # 2_C
-]
-for k in range(len(first) - 1):
-    assert first[k] == first[k + 1], ("first", k)
-print(f"  第一の鎖: {len(first)} 項が QQ の対で一致する")
-
 second = [
     sub(add(a, b), sub(a, b)),                                          # (a+b) - (a-b)
     add(add(a, b), neg(sub(a, b))),                                     # (a+b) + (-(a-b))
@@ -67,12 +56,12 @@ second = [
     add(b, b),                                                          # 加法の単位元
     add(mul(one, b), mul(one, b)),                                      # 積の単位元（右辺から左辺へ）
     mul(add(one, one), b),                                              # 右からの分配律（右辺から左辺へ）
-    mul(two, b),                                                        # 準備の第一の鎖
+    mul(two, b),                                                        # one_plus_one_is_two_in_cc
 ]
 assert len(second) == 18
 for k in range(len(second) - 1):
     assert second[k] == second[k + 1], ("second", k)
-print(f"  第二の鎖: {len(second)} 項（17 等号）が QQ[a0,a1,b0,b1] の対で恒等的に一致する")
+print(f"  第一の鎖: {len(second)} 項（17 等号）が QQ[a0,a1,b0,b1] の対で恒等的に一致する")
 
 # 対照: 7 行目の根拠を (-1_C)(-1_C) = -1_C に替えると鎖が切れる
 bad = add(add(a, b), add(mul(m1, a), mul(m1, b)))
@@ -102,8 +91,8 @@ third = [
 assert len(third) == 7
 for k in range(len(third) - 1):
     assert third[k] == third[k + 1], ("third", k)
-print(f"  第三の鎖: {len(third)} 項（6 等号）が QQ の対で一致する（2_C^{{-1}} = {inv(two)}）")
+print(f"  第二の鎖: {len(third)} 項（6 等号）が QQ の対で一致する（2_C^{{-1}} = {inv(two)}）")
 # 対照: 2 行目で 2_C^{-1} 2_C を 2_C に替えると鎖が切れる
 assert mul(two, mul(iC, inv(mul(two, iC)))) != third[1]
-print("  対照: 第三の鎖の 2 行目で 2_C^{-1}2_C を 2_C に替えると等号が成り立たない")
+print("  対照: 第二の鎖の 2 行目で 2_C^{-1}2_C を 2_C に替えると等号が成り立たない")
 print("RESULT: PASS")

@@ -16,7 +16,7 @@
 | 準備 2 の `e_j` ごとの鎖 `ann_mul_projFactor_prep2`（各 3 行） | `ann_mul_projFactor`（同じ並び） |
 | 準備 3 `trace_mul_one_sub_nOp_prep3`（10 行） | `tau_mul_one_sub_num`（同じ 10 行） |
 | `tr(Pň_{μ_k})` の 8 行 `trace_mul_nOp_chain` | `tau_mul_num_chain`（同じ 8 行） |
-| 準備 4 の第 3〜5 の鎖 `two_mul_eq_add_prep4`・`eq_inv_two_mul_two_mul_prep4`・`eq_inv_two_mul_add_inv_two_mul_prep4` | `two_mul_eq_add_prep4`・`eq_half_mul_two_mul_prep4`・`eq_half_mul_add_half_mul_prep4`（第 1・第 2 の鎖は `K` の数字 `2` の定義と仮定 `hhalf`） |
+| 準備 4 の第 2〜4 の鎖 `two_mul_eq_add_prep4`・`eq_inv_two_mul_two_mul_prep4`・`eq_inv_two_mul_add_inv_two_mul_prep4` | `two_mul_eq_add_prep4`・`eq_half_mul_two_mul_prep4`・`eq_half_mul_add_half_mul_prep4`（第 2 の鎖が引く `one_plus_one_is_two_in_cc` は `K` の数字 `2` の定義、第 1 の鎖は仮定 `hhalf`） |
 | `tr(Pň_{μ_k}) = 2_ℂ^{-1} tr(P)` の 9 行 `trace_mul_nOp_eq_half` | `tau_mul_num_eq_half`（同じ 9 行） |
 | 二場合 `trace_mul_projFactor_eq_half` | `tau_mul_projFactor_eq_half` |
 | 主張 `trace_projFactor_finProdLeft`（2 つの節） | `tau_finProdLeft_projFactor`（同じ 2 つの節） |
@@ -112,22 +112,22 @@ theorem tau_mul_num_chain (τ : A → K) (hlin : ∀ (α β : K) (x y : A), τ (
     _ = τ (P * (1 - num c a k)) := by rw [hac]                       -- `hac`
     _ = τ P - τ (P * num c a k) := tau_mul_one_sub_num τ hlin P _    -- 準備 3
 
-/-- 準備 4 の第 3 の鎖（3 行）: `2 w = (1 + 1) w = 1 w + 1 w = w + w`。具体版の第 1 の鎖 `2_ℂ = 1_ℂ + 1_ℂ`（`ℝ` からの包含を通る 4 行）は、
-`K` では数字 `2` の定義 `1 + 1 = 2` そのものである。 -/
+/-- 準備 4 の第 2 の鎖（3 行）: `2 w = (1 + 1) w = 1 w + 1 w = w + w`。具体版の 1 行目が引く `one_plus_one_is_two_in_cc`
+（`complex_one_add_one`。`ℝ` からの包含を通る 4 行）は、`K` では数字 `2` の定義 `1 + 1 = 2` そのものである。 -/
 theorem two_mul_eq_add_prep4 (w : K) : 2 * w = w + w :=
   calc 2 * w
       = (1 + 1) * w := by rw [one_add_one_eq_two]                   -- `2 = 1 + 1`
     _ = 1 * w + 1 * w := add_mul _ _ _                                -- 分配律
     _ = w + w := by rw [one_mul]                                      -- 積の単位元を 2 箇所へ
 
-/-- 準備 4 の第 4 の鎖（3 行）: `w = 1 w = (half 2) w = half (2 w)`。具体版の第 2 の鎖 `2_ℂ^{-1} 2_ℂ = 1_ℂ`（可換律と逆元）は仮定 `hhalf` である。 -/
+/-- 準備 4 の第 3 の鎖（3 行）: `w = 1 w = (half 2) w = half (2 w)`。具体版の第 1 の鎖 `2_ℂ^{-1} 2_ℂ = 1_ℂ`（可換律と逆元）は仮定 `hhalf` である。 -/
 theorem eq_half_mul_two_mul_prep4 (half : K) (hhalf : half * 2 = 1) (w : K) : w = half * (2 * w) :=
   calc w
       = 1 * w := (one_mul w).symm                                     -- 積の単位元を右辺から左辺へ
     _ = (half * 2) * w := by rw [hhalf]                               -- `half 2 = 1` を右辺から左辺へ
     _ = half * (2 * w) := mul_assoc _ _ _                             -- 積の結合律
 
-/-- 準備 4 の第 5 の鎖（3 行）: `w = half (2 w) = half (w + w) = half w + half w`。 -/
+/-- 準備 4 の第 4 の鎖（3 行）: `w = half (2 w) = half (w + w) = half w + half w`。 -/
 theorem eq_half_mul_add_half_mul_prep4 (half : K) (hhalf : half * 2 = 1) (w : K) : w = half * w + half * w :=
   calc w
       = half * (2 * w) := eq_half_mul_two_mul_prep4 half hhalf w      -- 直前の鎖

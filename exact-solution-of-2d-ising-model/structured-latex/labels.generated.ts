@@ -481,6 +481,7 @@ export const ALL_LABELS = [
   "norm_of_normalized_real_vector_is_one",
   "norm_of_vector_of_absolute_values_equals_norm",
   "norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four",
+  "one_plus_one_is_two_in_cc",
   "onsager_exact_solution",
   "onsager_free_energy_expression",
   "open_chain_endpoint_product_sum",

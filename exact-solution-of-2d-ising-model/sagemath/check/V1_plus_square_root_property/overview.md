@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 - ブロック: `bridge_claim_V1_pm_square_root_squares_to_V1_pm`（((V_1^{(+)})^{1/2})^2 = V_1^{(+)}、A^2 := AA。(V_1^{(+)})^{1/2} は def_V1_plus_square_root、V_1^{(+)} は def_V1_plus）
-- 範囲: 証明の準備（XX = XX、1_ℂ + 1_ℂ = 2_ℂ の 4 行、c + c = iκ の 10 行）と主張の鎖（9 行）の全ての行と、行の根拠に引いた主張の個々の場合と、主張。
+- 範囲: 証明の準備（XX = XX、c + c = iκ の 10 行。1_ℂ + 1_ℂ = 2_ℂ は主張 `one_plus_one_is_two_in_cc` の参照で、その鎖は `sagemath/check/one_plus_one_is_two_in_cc/` が確かめる）と主張の鎖（9 行）の全ての行と、行の根拠に引いた主張の個々の場合と、主張。
 
 ## 組み方
 
@@ -24,9 +24,7 @@
 | 証明の行 | 検算 | 確かめ方 |
 |---|---|---|
 | 準備 XX = XX（等号の反射律） | `check_chain.sage` | 厳密（QQ(i)[κ]）。M_col = 2..5 |
-| 準備 1_ℂ + 1_ℂ = 2_ℂ の 1 行目（1_ℂ = ι(1_ℝ)） | `check_chain.sage` | 厳密。1_ℂ = (1,0) と ι(1_ℝ) = (1_ℝ, 0) はどちらも同じ対なので、この行は定義を読んだ一致を見るだけである |
-| 同 2 行目（real_inclusion_preserves_sum） | `check_chain.sage` | 厳密。根拠も別に確かめる |
-| 同 3・4 行目（ℝ で 1+1 = 2、2_ℂ の定義） | `check_chain.sage` | 厳密 |
+| 準備 c + c = iκ の 5 行目が引く one_plus_one_is_two_in_cc（1_ℂ + 1_ℂ = 2_ℂ） | `check_chain.sage` | 厳密。引いた等式を対の和で確かめる |
 | 準備 c + c = iκ の 1 行目（c の定義） | `check_chain.sage` | 厳密（κ は不定元） |
 | 同 2・4 行目（分配律） | `check_chain.sage` | 厳密 |
 | 同 3・10 行目（1_ℂ は積の単位元） | `check_chain.sage` | 厳密 |

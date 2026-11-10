@@ -1,5 +1,5 @@
 # 対象ラベル: V1_plus_square_root_property（((V_1^{(+)})^{1/2})^2 = V_1^{(+)}、A^2 := AA）
-# 証明の準備（XX = XX、1_C + 1_C = 2_C の 4 行、c + c = iκ の 10 行）と主張の鎖（9 行）の全ての行を、
+# 証明の準備（XX = XX、c + c = iκ の 10 行）と主張の鎖（9 行）の全ての行を、
 # 行に書かれた形のとおりに組んで隣どうしを比べる。
 #   - 係数の行と、exp の中身の行列の行は、κ := (K_1)_C を不定元にした KG[κ]（KG = QQ(i)）で厳密に、M_col = 2..5。
 #   - exp を含む行（冪の定義・def_V1_plus_square_root・theorem_exp_product・V1_plus_exponential_representation）は、
@@ -18,17 +18,10 @@ inv2 = KG(2)**(-1)                                          # complex_numbers_fo
 rep.check(KG(2) * inv2 == KG(1) and inv2 * KG(2) == KG(1), "2_C 2_C^{-1} = 2_C^{-1} 2_C = 1_C")
 rep.check(iota(QQ(1) / 2) == inv2, "real_inclusion_of_one_half_is_inverse_of_two: (1/2)_C = 2_C^{-1}")
 
-# ---- 準備: 1_C + 1_C = 2_C（definition_of_cc の加法と inclusion_rr_to_cc）
+# ---- c + c = iκ の 5 行目が引く one_plus_one_is_two_in_cc（その鎖は sagemath/check/one_plus_one_is_two_in_cc/）
 one_C = KG([1, 0])
-two_C = iota(2)                                             # 2_C := (2_R)_C
-L = [("1_C + 1_C", cc_add_pairs(one_C, one_C)),
-     ("(1_R)_C + (1_R)_C", cc_add_pairs(iota(1), iota(1))),
-     ("(1_R + 1_R)_C", iota(QQ(1) + QQ(1))),
-     ("(2_R)_C", iota(2)),
-     ("2_C", two_C)]
-rep.chain(L, "準備 1_C + 1_C = 2_C")
-rep.check(one_C == iota(1), "1_C = (1,0) = ι(1_R)")
-rep.check(cc_add_pairs(iota(1), iota(1)) == iota(1 + 1), "real_inclusion_preserves_sum (a, b → 1)")
+two_C = iota(2)                                             # 2_C := (2_R)_C（def_V1_plus_square_root）
+rep.check(cc_add_pairs(one_C, one_C) == two_C, "one_plus_one_is_two_in_cc: 1_C + 1_C = 2_C")
 
 # ---- 準備: c + c = iκ（κ は不定元）
 c = (i * inv2) * kappa

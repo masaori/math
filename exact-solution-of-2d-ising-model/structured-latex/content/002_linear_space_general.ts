@@ -4051,17 +4051,6 @@ X\prod_{j=1}^{r+1} A_j
         " の略記である。",
       ]),
       displayMath(String.raw`\begin{aligned}
-1_{\mathbb{C}} + 1_{\mathbb{C}}
-&= (1,0) + (1,0)
-&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
-&= (1+1,\ 0+0)
-&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の和}\bigr)\\
-&= (2,0)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
-&= 2_{\mathbb{C}}
-&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
 2_{\mathbb{C}}
 &= (2,0)
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
@@ -4096,7 +4085,7 @@ X_{ik}
 &= 2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\,X_{ik}\bigr)
 &&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= 2_{\mathbb{C}}^{-1}\bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})\,X_{ik}\bigr)
-&&(\because\ \text{上の鎖}\ 1_{\mathbb{C}} + 1_{\mathbb{C}} = 2_{\mathbb{C}}\ \text{を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\ \text{を右辺から左辺へ}\bigr)\\
 &= 2_{\mathbb{C}}^{-1}\bigl(1_{\mathbb{C}}\,X_{ik} + 1_{\mathbb{C}}\,X_{ik}\bigr)
 &&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= 2_{\mathbb{C}}^{-1}\bigl(X_{ik} + X_{ik}\bigr)
@@ -4118,6 +4107,7 @@ X_{ik}
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (1) が「同じ項の和」で X + X を 2X とし、行列に「ℂ の四則」を当てて ½ を掛けていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_zero_of_add_self_eq_zero（ClaimZeroMatrixProductAndSumEquations.lean）。",
+        "2026-11-10（Lean の通しの証明）: 準備の 1_ℂ+1_ℂ = 2_ℂ の 4 行の鎖を、同じ鎖を置いていたほかの証明と合わせて主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。",
       ],
     },
   },

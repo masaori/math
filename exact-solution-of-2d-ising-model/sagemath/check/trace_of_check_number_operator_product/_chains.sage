@@ -154,7 +154,7 @@ def induction_step(M, Id, D, A, n, mus, es, check):
     two = F(2)
     one = F(1)
     inv = one / two
-    chain([two, F(QQ(2)), F(QQ(1) + QQ(1)), F(QQ(1)) + F(QQ(1)), one + one], f"{lab}: 準備 4 2_C = 1_C + 1_C", check)
+    check(one + one == two, f"{lab}: 準備 4 が引く one_plus_one_is_two_in_cc 1_C + 1_C = 2_C")
     chain([inv * two, two * inv, one], f"{lab}: 準備 4 2_C^-1 2_C = 1_C", check)
     for wname, w in (("tr(Pň)", tPn), ("tr(P)", tP)):
         chain([two * w, (one + one) * w, one * w + one * w, w + w], f"{lab}: 準備 4 2_C w = w + w (w={wname})", check)

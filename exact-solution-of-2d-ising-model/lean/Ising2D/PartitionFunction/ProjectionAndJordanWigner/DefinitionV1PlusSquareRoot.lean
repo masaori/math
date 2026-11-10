@@ -24,8 +24,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 準備の `1_ℂ + 1_ℂ = 2_ℂ` の 4 行 | `one_add_one_eq_two_complex` の 3 段（4 行目 `2_ℂ := (2_ℝ)_ℂ` は Lean の `((2 : ℝ) : ℂ)` そのもので段が要らない） |
-| 準備の `c + c = iκ` の 10 行 | `c_add_c_eq_I_mul` の 10 段 |
+| 準備の `c + c = iκ` の 10 行 | `c_add_c_eq_I_mul` の 10 段（5 行目の `one_plus_one_is_two_in_cc` は `complex_one_add_one_eq_ofReal_two`。人手の `2_ℂ` は `def_V1_plus_square_root` の `(2_ℝ)_ℂ` で、Lean の `((2 : ℝ) : ℂ)`） |
 | 主張の 9 行 `((V_1^{(+)})^{1/2})^2 = ⋯ = V_1^{(+)}` | `V1_plus_square_root_property` の 9 段 |
 
 - 人手の `κ := (K_1)_ℂ` は、Lean の `K1 : ℂ` がはじめから複素数なので `κ = K1` と置くだけである。
@@ -47,7 +46,7 @@
 `Matrix.exp_add_of_commute` そのものであり、残りは具体的な二つの数 `c + c` の計算と二項の有限和の展開で、ほどく構造が無い。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionOfOneHalfIsInverseOfTwo
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
 
@@ -65,16 +64,6 @@ noncomputable def V1plusHalf (M : ℕ) (K1 : ℂ) : TensorPow M :=
 /-- `(V_1^{(+)})^{1/2}` は一般形 `V1pmHalf` の `η = -1`。 -/
 theorem V1plusHalf_eq_V1pmHalf (K1 : ℂ) : V1plusHalf M K1 = V1pmHalf M K1 (-1) := rfl
 
-/-- **人手 `V1_plus_square_root_property` の準備**: `1_ℂ + 1_ℂ = 2_ℂ`（`2_ℂ := (2_ℝ)_ℂ`）。 -/
-theorem one_add_one_eq_two_complex : (1 : ℂ) + 1 = ((2 : ℝ) : ℂ) :=
-  calc (1 : ℂ) + 1
-      = ((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ) := by
-        rw [Complex.ofReal_one]                         -- `1_ℂ = (1,0) = ι(1_ℝ)`（`complex_numbers_form_a_field`・`inclusion_rr_to_cc`）を 2 箇所へ
-    _ = ((1 + 1 : ℝ) : ℂ) := real_inclusion_add 1 1     -- `real_inclusion_preserves_sum`（`a, b → 1_ℝ`）
-    _ = ((2 : ℝ) : ℂ) := by
-        rw [show (1 + 1 : ℝ) = 2 by norm_num]           -- ℝ で `1 + 1 = 2`
-                                                        -- 人手の 4 行目 `(2_ℝ)_ℂ = 2_ℂ` は、Lean の `2_ℂ` が `((2 : ℝ) : ℂ)` そのものなので段が要らない
-
 /-- **人手 `V1_plus_square_root_property` の準備**: `c := (i·2_ℂ^{-1})κ` について `c + c = iκ` の 10 行。 -/
 theorem c_add_c_eq_I_mul (κ c : ℂ) (hc : c = (Complex.I * ((2 : ℝ) : ℂ)⁻¹) * κ) :
     c + c = Complex.I * κ :=
@@ -88,7 +77,7 @@ theorem c_add_c_eq_I_mul (κ c : ℂ) (hc : c = (Complex.I * ((2 : ℝ) : ℂ)�
     _ = (Complex.I * ((2 : ℝ) : ℂ)⁻¹) * (κ * (1 + 1)) := by
         rw [mul_add κ]                                  -- 分配律
     _ = (Complex.I * ((2 : ℝ) : ℂ)⁻¹) * (κ * ((2 : ℝ) : ℂ)) := by
-        rw [one_add_one_eq_two_complex]                 -- 上の `1_ℂ + 1_ℂ = 2_ℂ`
+        rw [complex_one_add_one_eq_ofReal_two]          -- `one_plus_one_is_two_in_cc`（`2_ℂ` は `def_V1_plus_square_root` の `(2_ℝ)_ℂ`）
     _ = (Complex.I * ((2 : ℝ) : ℂ)⁻¹) * (((2 : ℝ) : ℂ) * κ) := by
         rw [mul_comm κ]                                 -- 積の可換律
     _ = Complex.I * (((2 : ℝ) : ℂ)⁻¹ * (((2 : ℝ) : ℂ) * κ)) := mul_assoc _ _ _

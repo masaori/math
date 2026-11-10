@@ -1,5 +1,6 @@
 # 対象ラベル: matrix_sum_with_itself_zero_implies_zero（X + X = O ⇒ X = O）
-# 準備の鎖 1_C + 1_C = (1,0) + (1,0) = (1+1, 0+0) = (2,0) = 2_C と 2_C ≠ 0_C を実数の組で確かめ、
+# 成分の鎖が引く one_plus_one_is_two_in_cc（1_C + 1_C = 2_C。その鎖は sagemath/check/one_plus_one_is_two_in_cc/）と、
+# 準備の 2_C ≠ 0_C を実数の組で確かめ、
 # 成分の 11 行の鎖を、各行に書かれた式どおりに組んで隣り合う項が等しいことを確かめる。
 # 仮定 X + X = O を使う行（(X + X)_ik → O_ik）以外は不定元の X で確かめ、
 # 仮定の行は、仮定を満たす X（成分が零）でだけ成り立ち、不定元の X では成り立たないこと（否定コントロール）を確かめる。
@@ -13,13 +14,7 @@ def cc_add(z, w):
 one = (QQ(1), QQ(0))                 # 1_C = ι(1) = (1,0)（inclusion_rr_to_cc）
 two_C = (QQ(2), QQ(0))               # 2_C := ι(2) = (2,0)（inclusion_rr_to_cc の略記）
 zero_C = (QQ(0), QQ(0))              # 0_C = (0,0)
-prep = [cc_add(one, one),                       # 1_C + 1_C
-        cc_add((QQ(1), QQ(0)), (QQ(1), QQ(0))), # (1,0) + (1,0)
-        (QQ(1) + 1, QQ(0) + 0),                 # (1+1, 0+0)
-        (QQ(2), QQ(0)),                         # (2,0)
-        two_C]                                  # 2_C
-for t in range(len(prep) - 1):
-    assert prep[t] == prep[t + 1]
+assert cc_add(one, one) == two_C                 # one_plus_one_is_two_in_cc
 assert two_C[0] != zero_C[0] and two_C != zero_C    # 2_C = (2,0) ≠ (0,0) = 0_C（第 1 成分 2 ≠ 0）
 
 K.<ii> = QuadraticField(-1)
@@ -32,7 +27,7 @@ for m in [1, 2, 3]:
         X = matrix(P, m, p, P.gens())
         O = matrix(P, m, p, lambda i, k: P(0))     # def_zero_matrix
         two = P(2)                                  # 2_C = ι(2)
-        assert P(1) + P(1) == two                   # 準備の鎖
+        assert P(1) + P(1) == two                   # one_plus_one_is_two_in_cc
         two_inv = P(K(1) / K(2))                    # 2_C^{-1}
         assert two_inv * two == 1
         XX = body_sum(X, X)                         # def_matrix_sum
@@ -44,7 +39,7 @@ for m in [1, 2, 3]:
                     (1 * x, False),                                     # 1_C は積の単位元
                     ((two_inv * two) * x, False),                       # 2_C^{-1} の取り方
                     (two_inv * (two * x), False),                       # 積の結合律
-                    (two_inv * ((P(1) + P(1)) * x), False),             # 1_C + 1_C = 2_C を右辺から左辺へ
+                    (two_inv * ((P(1) + P(1)) * x), False),             # one_plus_one_is_two_in_cc を右辺から左辺へ
                     (two_inv * (1 * x + 1 * x), False),                 # 分配律
                     (two_inv * (x + x), False),                         # 1_C は積の単位元（2 か所）
                     (two_inv * XX[i, k], False),                        # def_matrix_sum

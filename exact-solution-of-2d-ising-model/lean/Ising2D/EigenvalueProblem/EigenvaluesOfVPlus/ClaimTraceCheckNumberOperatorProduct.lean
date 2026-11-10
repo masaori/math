@@ -33,7 +33,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.FiniteProductLeft
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
@@ -215,37 +215,27 @@ theorem trace_mul_nOp_chain (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν *
     _ = P.trace - (P * F.nOp ν).trace := F.trace_mul_one_sub_nOp_prep3 P ν
                                                                   -- 準備 3
 
-/-- **人手の準備 4** の第 1 の鎖（4 行）: `2_ℂ = (2_ℝ)_ℂ = (1_ℝ + 1_ℝ)_ℂ = (1_ℝ)_ℂ + (1_ℝ)_ℂ = 1_ℂ + 1_ℂ`。
-Lean の `(2 : ℂ)` が人手の `2_ℂ := (2_ℝ)_ℂ`、`((r : ℝ) : ℂ)` が `r_ℂ` である。 -/
-theorem two_eq_one_add_one_prep4 : (2 : ℂ) = 1 + 1 :=
-  calc (2 : ℂ)
-      = ((2 : ℝ) : ℂ) := (Complex.ofReal_ofNat 2).symm              -- `2_ℂ` の置き方
-    _ = ((1 + 1 : ℝ) : ℂ) := by rw [one_add_one_eq_two]                            -- `ℝ` で `1 + 1 = 2` を右辺から左辺へ
-    _ = ((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ) := (real_inclusion_add 1 1).symm
-                                                                      -- `real_inclusion_preserves_sum` を右辺から左辺へ
-    _ = 1 + 1 := by rw [Complex.ofReal_one]                           -- `inclusion_rr_to_cc` の略記 `1_ℂ = (1_ℝ)_ℂ` を 2 箇所へ
-
-/-- **人手の準備 4** の第 2 の鎖（2 行）: `2_ℂ^{-1} 2_ℂ = 2_ℂ 2_ℂ^{-1} = 1_ℂ`。 -/
+/-- **人手の準備 4** の第 1 の鎖（2 行）: `2_ℂ^{-1} 2_ℂ = 2_ℂ 2_ℂ^{-1} = 1_ℂ`。 -/
 theorem inv_two_mul_two_prep4 : (2 : ℂ)⁻¹ * 2 = 1 :=
   calc (2 : ℂ)⁻¹ * 2
       = 2 * (2 : ℂ)⁻¹ := mul_comm _ _                                -- `complex_numbers_form_a_field` の積の可換律
     _ = 1 := mul_inv_cancel₀ two_ne_zero                              -- `complex_numbers_form_a_field` の乗法の逆元
 
-/-- **人手の準備 4** の第 3 の鎖（3 行）: `2_ℂ w = (1_ℂ + 1_ℂ) w = 1_ℂ w + 1_ℂ w = w + w`。 -/
+/-- **人手の準備 4** の第 2 の鎖（3 行）: `2_ℂ w = (1_ℂ + 1_ℂ) w = 1_ℂ w + 1_ℂ w = w + w`。 -/
 theorem two_mul_eq_add_prep4 (w : ℂ) : 2 * w = w + w :=
   calc 2 * w
-      = (1 + 1) * w := by rw [← two_eq_one_add_one_prep4]           -- 上の `2_ℂ = 1_ℂ + 1_ℂ`
+      = (1 + 1) * w := by rw [complex_one_add_one]                  -- `one_plus_one_is_two_in_cc` を右辺から左辺へ
     _ = 1 * w + 1 * w := add_mul _ _ _                                -- `complex_numbers_form_a_field` の分配律
     _ = w + w := by rw [one_mul]                                      -- `complex_numbers_form_a_field` の積の単位元を 2 箇所へ
 
-/-- **人手の準備 4** の第 4 の鎖（3 行）: `w = 1_ℂ w = (2_ℂ^{-1} 2_ℂ) w = 2_ℂ^{-1}(2_ℂ w)`。 -/
+/-- **人手の準備 4** の第 3 の鎖（3 行）: `w = 1_ℂ w = (2_ℂ^{-1} 2_ℂ) w = 2_ℂ^{-1}(2_ℂ w)`。 -/
 theorem eq_inv_two_mul_two_mul_prep4 (w : ℂ) : w = (2 : ℂ)⁻¹ * (2 * w) :=
   calc w
       = 1 * w := (one_mul w).symm                                     -- `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
     _ = ((2 : ℂ)⁻¹ * 2) * w := by rw [inv_two_mul_two_prep4]         -- 上の `2_ℂ^{-1} 2_ℂ = 1_ℂ` を右辺から左辺へ
     _ = (2 : ℂ)⁻¹ * (2 * w) := mul_assoc _ _ _                        -- `complex_numbers_form_a_field` の積の結合律
 
-/-- **人手の準備 4** の第 5 の鎖（3 行）: `w = 2_ℂ^{-1}(2_ℂ w) = 2_ℂ^{-1}(w + w) = 2_ℂ^{-1} w + 2_ℂ^{-1} w`。 -/
+/-- **人手の準備 4** の第 4 の鎖（3 行）: `w = 2_ℂ^{-1}(2_ℂ w) = 2_ℂ^{-1}(w + w) = 2_ℂ^{-1} w + 2_ℂ^{-1} w`。 -/
 theorem eq_inv_two_mul_add_inv_two_mul_prep4 (w : ℂ) : w = (2 : ℂ)⁻¹ * w + (2 : ℂ)⁻¹ * w :=
   calc w
       = (2 : ℂ)⁻¹ * (2 * w) := eq_inv_two_mul_two_mul_prep4 w        -- 直前の鎖
