@@ -68733,6 +68733,10 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
 &&\bigl(\because\ e_1,e_2,e_3,e_4\text{ は相異なる}\bigr)
 \end{aligned}`),
                           paragraph(["整数の等号を二で割った剰余へ移すと、主張の同値を得る。"]),
+                          displayMath(String.raw`\sum_{i=1}^{4}\mathbf 1_A(e_i)\equiv0\pmod2
+\Longleftrightarrow
+\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
+\qquad\bigl(\because\ \text{直前の整数の等号}\bigr)`),
                         ],
                       },
                     },
