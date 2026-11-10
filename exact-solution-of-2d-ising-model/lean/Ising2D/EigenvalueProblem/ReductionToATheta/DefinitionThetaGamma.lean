@@ -1,16 +1,16 @@
 /-
 # `θ_μ`, `γ_1(θ)`, `γ_2(θ)`, `A(θ)` の定義とその基本性質
 
-対応する人手証明（正本は `structured-latex/content/`）:
-- `008_TV1_hatZ_hatY_part1.mjs`
-  - `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`。章立ての組み直しで
-    `eigenvalue_problem_reduction_to_A_theta.ts` へ移った）
-  - `TV1_hatZ_hatY_019_definition_theta_mu`（ラベル `def_theta_mu`）
-  - `TV1_hatZ_hatY_020_definition_gamma1_gamma2`（ラベル無し）
-- `008_TV1_hatZ_hatY_part2.mjs`
-  - `TV1_hatZ_hatY_022_claim_gamma2_theta_is_0`（ラベル `gamma_2_theta_is_0`）
-  - `TV1_hatZ_hatY_023_claim_relation_of_gamma2`（ラベル `relation_of_gamma_2`）
-  - `TV1_hatZ_hatY_041_claim_gamma2_periodicity`（ラベル `gamma_2_periodicity`）
+対応する人手証明（正本は `structured-latex/content/`。整数運動量の経路の項目は本文から参照用ノートへ退避してある）:
+- `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`
+  - `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）
+- 参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts`（整数運動量の経路。本文から退避した。
+  ノートの各項目の id の末尾が、本文にあったときのブロックの id である）
+  - `TV1_hatZ_hatY_019_definition_theta_mu`（本文にあったときのラベル `def_theta_mu`）
+  - `TV1_hatZ_hatY_020_definition_gamma1_gamma2`（本文にあったときもラベル無し）
+  - `TV1_hatZ_hatY_022_claim_gamma2_theta_is_0`（本文にあったときのラベル `gamma_2_theta_is_0`）
+  - `TV1_hatZ_hatY_023_claim_relation_of_gamma2`（本文にあったときのラベル `relation_of_gamma_2`）
+  - `TV1_hatZ_hatY_041_claim_gamma2_periodicity`（本文にあったときのラベル `gamma2_theta_M_periodicity`）
 - `eigenvalue_problem_diagonalization_and_exponential_form.ts`
   - `def_gamma1_gamma2_of_theta` の主張と `(2,1)` 成分の 2 本の鎖（`AMat_eq`・`AMat_two_one_eq_neg_gamma2_neg`・`gamma2_neg`）
   - `relation_of_gamma_2_theta_tilde` の証明の「第一に」の `exp(iθ)` の鎖、「第二に」「第三に」「第四に」と (1) の鎖
@@ -47,13 +47,13 @@
    無関係に `γ_2 ≡ 0` である。定義だけから言える同値は
    `γ_2(θ) = 0 ⟺ s_2^* = 0 ∨ (sin θ = 0 ∧ c_1cos θ - s_1c_2 = 0)`（`gamma2_eq_zero_iff`）で、
    原文の形は `s_2^* ≠ 0` の下でのみ成り立つ（`gamma2_eq_zero_iff_of_s2star_ne_zero`）。
-   → **本セッションと並行して原文側が修正済み**（現在の当該ブロックは
-   `K_1, K_2 ∈ ℝ_{>0}` を前提に置いており、そこから `s_2^* = sinh(2K_2^*) > 0` が従う）。
+   → **本セッションと並行して原文側が修正済み**（当該ブロックは本文にあったときに
+   `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、そこから `s_2^* = sinh(2K_2^*) > 0` が従う。参照用ノートにもその形のまま在る）。
 2. **`gamma_2_theta_is_0` の同値 `sin θ_μ = 0 ⟺ μ = ±M` が単独では偽だった。**
    `θ_μ = 2πμ/M` に対し `sin θ_μ = 0 ⟺ M ∣ 2μ` であり（`sin_thetaMu_eq_zero_iff`）、
    `ℳ = {-M,…,-1,1,…,M}` の範囲では `M` が偶数のとき `μ = ±M/2`（`θ_μ = ±π`）も該当する。
-   → **これも並行して原文側が修正済み**（現在は「連立条件全体としての同値」であること、
-   `μ = ±M/2` が `c_2s_1 = -c_1 < 0` と `c_1, s_1, c_2 > 0` の矛盾で排除されることが明記された）。
+   → **これも並行して原文側が修正済み**（本文にあったときに「連立条件全体としての同値」であること、
+   `μ = ±M/2` が `c_2s_1 = -c_1 < 0` と `c_1, s_1, c_2 > 0` の矛盾で排除されることが明記され、参照用ノートにもその形のまま在る）。
    Lean 側の `sin_thetaMu_eq_zero_iff` はその機械的な裏づけとして残す。
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
