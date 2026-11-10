@@ -13674,13 +13674,13 @@ A_i\cap(E\setminus F)
                       displayMath(String.raw`\begin{aligned}
 \{e\in F:e\subseteq U'\}
 &=\{e\in F:e\subseteq U,\ v\notin e\}
-  \quad(\because\ U'=U\setminus\{v\})
+&&\bigl(\because\ U'=U\setminus\{v\}\bigr)
 \end{aligned}`),
                       paragraph([
                         "したがって、葉を除いたグラフは ", math(String.raw`T[U']`),
                         " に等しい。根の所属は次のとおりである。",
                       ]),
-                      displayMath(String.raw`o\in U'=U\setminus\{v\}\quad(\because\ o\in U\text{ かつ }o\ne v)`),
+                      displayMath(String.raw`o\in U'=U\setminus\{v\}\qquad\bigl(\because\ o\in U\text{ かつ }o\ne v\bigr)`),
                     ],
                   },
                 },
