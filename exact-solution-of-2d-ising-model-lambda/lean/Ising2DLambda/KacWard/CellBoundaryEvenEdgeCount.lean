@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection
+import Ising2DLambda.NecSuf.KacWard.CellBoundaryEvenEdgeCount
 import Mathlib.Data.Finset.Powerset
 import Mathlib.Tactic
 
@@ -24,5 +25,14 @@ theorem cellBoundary_evenEdge_count (cells : Finset GridCell)
     Fintype.card {T : Finset GridCell // T ⊆ cells} = cells.powerset.card := by
       simpa [Finset.mem_powerset] using (Fintype.card_coe cells.powerset)
     _ = 2 ^ cells.card := Finset.card_powerset cells
+
+/-- The abstract count specializes to the planar cell boundary bijection. -/
+theorem cellBoundary_evenEdge_count_from_necSuf (cells : Finset GridCell)
+    (hconnected : EdgeConnectedCellSet (↑cells : Set GridCell)ᶜ) :
+    Nat.card {E : Finset GridEdge // IsEvenCellEdgeSubset cells E} =
+      2 ^ cells.card := by
+  exact Ising2DLambda.NecSuf.KacWard.boundary_even_edge_count
+    cells (IsEvenCellEdgeSubset cells) _
+    (cellBoundary_evenEdge_bijective_from_necSuf cells hconnected)
 
 end Ising2DLambda.KacWard
