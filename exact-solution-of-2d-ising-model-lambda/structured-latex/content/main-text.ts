@@ -78777,7 +78777,7 @@ c(\gamma)\bmod2
 &=\zeta_8^{\,t_{\circ}(\gamma)+D}
 &&\bigl(\because\ D\text{ の定義}\bigr)\\
 &=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma)}
-&&\bigl(\because\ D/4\equiv1+I_L(C_A,C_B)\pmod2,\ \zeta_8^4=-1\bigr).
+&&\bigl(\because\ D/4\equiv1+I_L(C_A,C_B)\pmod2,\ \zeta_8^4=-1\bigr)
 \end{aligned}`),
                       paragraph(["符号を両辺に掛ければ求める等式になる。四方向の有限な場合分けと代数的数の整数冪だけを使った。"]),
                     ],

@@ -15,6 +15,7 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
 
+set_option maxHeartbeats 1000000 in
 /-- `claim_boundary_vertex_diagonal_contact_excluded` の具体版。 -/
 theorem boundaryVertex_diagonalContactExcluded
     (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ)
@@ -39,40 +40,63 @@ theorem boundaryVertex_diagonalContactExcluded
   have hc1 : c1 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hc2 : c2 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hc3 : c3 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
-  apply diagonal_cell_pairs_excluded_necSuf c0 c1 c2 c3 hc0 hc1 hc2 hc3
-  by_cases hv : ∃ j, j < n ∧ row j = a ∧ col j = b
-  · left
-    rcases hv with ⟨j, hj, hrow, hcol⟩
-    simpa [hrow, hcol] using
-      vertexSurroundingCells_formParityArcs n row col j hj hclosedRow hclosedCol hunit
-        hdistinct (by simpa [hrow, hcol] using hleft)
-        (by simpa [hrow, hcol] using hright)
-        (by simpa [hrow, hcol] using hdown)
-        (by simpa [hrow, hcol] using hup)
-  · right
-    have hvisit0 : vertexVisitCount n row col a b = 0 := by
-      unfold vertexVisitCount
-      apply Finset.sum_eq_zero
-      intro k hk
-      have hklt : k < n := Finset.mem_range.mp hk
-      simp only [ite_eq_right_iff]
-      intro hpoint
-      exact False.elim (hv ⟨k, hklt, hpoint⟩)
-    have hsum := vertexIncidentEdgeTraversal_even
-      n row col a b hunit hclosedRow hclosedCol
-    have hleft0 : verticalEdgeTraversalCount n row col (a - 1) b = 0 := by omega
-    have hright0 : verticalEdgeTraversalCount n row col a b = 0 := by omega
-    have hdown0 : horizontalEdgeTraversalCount n row col a (b - 1) = 0 := by omega
-    have hup0 : horizontalEdgeTraversalCount n row col a b = 0 := by omega
-    have h01 := rightRayCrossingCount_adjacent n row col (a - 1) (b - 1)
-    have h12 := verticallyAdjacentCells_boundaryParity
-      n row col (a - 1) b hclosedRow hclosedCol hunit
-    have h23 := rightRayCrossingCount_adjacent n row col a (b - 1)
-    have h30 := verticallyAdjacentCells_boundaryParity
-      n row col (a - 1) (b - 1) hclosedRow hclosedCol hunit
-    simp only [Int.sub_add_cancel] at h01 h12 h23 h30
-    change c0 = c1 ∧ c1 = c2 ∧ c2 = c3
-    simp [hleft0, hright0, hdown0, hup0] at h01 h12 h23 h30
+  have hshape : FourCellsFormParityArcs c0 c1 c2 c3 ∨
+      (c0 = c1 ∧ c1 = c2 ∧ c2 = c3) := by
+    by_cases hv : ∃ j, j < n ∧ row j = a ∧ col j = b
+    · left
+      rcases hv with ⟨j, hj, hrow, hcol⟩
+      simpa [hrow, hcol] using
+        vertexSurroundingCells_formParityArcs n row col j hj hclosedRow hclosedCol hunit
+          hdistinct (by simpa [hrow, hcol] using hleft)
+          (by simpa [hrow, hcol] using hright)
+          (by simpa [hrow, hcol] using hdown)
+          (by simpa [hrow, hcol] using hup)
+    · right
+      have hvisit0 : vertexVisitCount n row col a b = 0 := by
+        unfold vertexVisitCount
+        apply Finset.sum_eq_zero
+        intro k hk
+        have hklt : k < n := Finset.mem_range.mp hk
+        simp only [ite_eq_right_iff]
+        intro hpoint
+        exact False.elim (hv ⟨k, hklt, hpoint⟩)
+      have hsum := vertexIncidentEdgeTraversal_even
+        n row col a b hunit hclosedRow hclosedCol
+      have hleft0 : verticalEdgeTraversalCount n row col (a - 1) b = 0 := by omega
+      have hright0 : verticalEdgeTraversalCount n row col a b = 0 := by omega
+      have hdown0 : horizontalEdgeTraversalCount n row col a (b - 1) = 0 := by omega
+      have hup0 : horizontalEdgeTraversalCount n row col a b = 0 := by omega
+      have h01 := rightRayCrossingCount_adjacent n row col (a - 1) (b - 1)
+      have h12 := verticallyAdjacentCells_boundaryParity
+        n row col (a - 1) b hclosedRow hclosedCol hunit
+      have h23 := rightRayCrossingCount_adjacent n row col a (b - 1)
+      have h30 := verticallyAdjacentCells_boundaryParity
+        n row col (a - 1) (b - 1) hclosedRow hclosedCol hunit
+      simp only [Int.sub_add_cancel] at h01 h12 h23 h30
+      change c0 = c1 ∧ c1 = c2 ∧ c2 = c3
+      simp [hleft0, hright0, hdown0, hup0] at h01 h12 h23 h30
+      omega
+  change DiagonalCellPairsExcluded c0 c1 c2 c3
+  unfold DiagonalCellPairsExcluded
+  unfold FourCellsFormParityArcs at hshape
+  rcases hshape with ⟨htransitions, hnonzero, hnotall⟩ | ⟨h01, h12, h23⟩
+  · constructor
+    · intro hdiag
+      rcases hdiag with ⟨h0, h1, h2, h3⟩
+      norm_num [h0, h1, h2, h3] at htransitions
+    constructor
+    · intro hdiag
+      rcases hdiag with ⟨h0, h1, h2, h3⟩
+      norm_num [h0, h1, h2, h3] at htransitions
+    intro htwo
+    omega
+  · constructor
+    · intro hdiag
+      omega
+    constructor
+    · intro hdiag
+      omega
+    intro htwo
     omega
 
 end Ising2DLambda.KacWard
