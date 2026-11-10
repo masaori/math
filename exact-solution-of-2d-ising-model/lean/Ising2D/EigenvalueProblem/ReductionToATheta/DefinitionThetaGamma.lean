@@ -10,6 +10,7 @@
   - `TV1_hatZ_hatY_020_definition_gamma1_gamma2`（本文にあったときもラベル無し）
   - `TV1_hatZ_hatY_022_claim_gamma2_theta_is_0`（本文にあったときのラベル `gamma_2_theta_is_0`）
   - `TV1_hatZ_hatY_023_claim_relation_of_gamma2`（本文にあったときのラベル `relation_of_gamma_2`）
+  - `TV1_hatZ_hatY_027_claim_eigenvector_A_theta`（本文にあったときのラベル `eigenvector_of_A_theta`。`gamma2_neg_eq_zero_iff` の docstring が名指しする）
   - `TV1_hatZ_hatY_041_claim_gamma2_periodicity`（本文にあったときのラベル `gamma2_theta_M_periodicity`）
 - `eigenvalue_problem_diagonalization_and_exponential_form.ts`
   - `def_gamma1_gamma2_of_theta` の主張と `(2,1)` 成分の 2 本の鎖（`AMat_eq`・`AMat_two_one_eq_neg_gamma2_neg`・`gamma2_neg`）
@@ -34,7 +35,7 @@
   代数関係だけである。したがって 5 個の実数パラメータを束ねた `IsingConst` を導入し、
   必要な関係（`c_1^2 - s_1^2 = 1` など）は**そのつど仮定として明示する**。
   これにより「どの結論がどの関係に依存するか」が形式化の側で可視化される。
-* 添字 `μ` は原文の `ℳ := {-M, …, -1, 1, …, M}` に限らず `ℤ` 全体で扱う
+* 添字 `μ` は整数運動量の経路（参照用ノート）の `ℳ := {-M, …, -1, 1, …, M}` に限らず `ℤ` 全体で扱う
   （`θ_μ` の定義式は全 `μ ∈ ℤ` で意味を持つ。`RoutesNotAdopted/IntegerMomentum/DefinitionHatZHatY.lean` の `hatZ`/`hatY` と同じ方針）。
 * `A(θ)` は原文 `def_A_theta` の**明示行列そのまま**を定義とし、
   `AMat_eq` で `!![γ_1(θ), γ_2(θ); -γ_2(-θ), γ_1(θ)]` に等しいことを証明する
@@ -85,15 +86,16 @@ structure IsingConst where
 
 variable (K : IsingConst) (θ : ℝ)
 
-/-- 原文 `θ_μ := 2πμ/M`（`def_theta_mu`）。 -/
+/-- `θ_μ := 2πμ/M`。人手は本文に無く、参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_019_definition_theta_mu` の項目（本文にあったときのラベル `def_theta_mu`）に退避してある。
+整数運動量の経路（`RoutesNotAdopted/IntegerMomentum/`）だけが使う。 -/
 noncomputable def thetaMu (M : ℕ) (μ : ℤ) : ℝ := 2 * Real.pi * μ / M
 
-/-- 原文 `γ_1(θ) := c_1 c_2^* - s_1 s_2^* cos θ ∈ ℝ` の `ℝ → ℂ` の包含による像 `(γ_1(θ))_ℂ`。
+/-- 人手 `def_gamma1_gamma2_of_theta` の `γ_1(θ) := c_1 c_2^* - s_1 s_2^* cos θ ∈ ℝ` の `ℝ → ℂ` の包含による像 `(γ_1(θ))_ℂ`。
 人手 `def_gamma1_gamma2_of_theta` の主張の行列の `(1,1)`・`(2,2)` 成分は、`def_A_theta` の読みと同じくこの像である。
 人手の実数 `γ_1(θ) ∈ ℝ` そのものは `gamma1R`（`ClaimGamma1LowerBound.lean`）で、`gamma1_eq_ofReal` が `gamma1 = ↑gamma1R` を述べる。 -/
 noncomputable def gamma1 : ℂ := ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ)
 
-/-- 原文 `γ_2(θ) := i e^{iθ} s_2^* (c_1 cos θ - i sin θ - s_1 c_2)`。 -/
+/-- 人手 `def_gamma1_gamma2_of_theta` の `γ_2(θ) := i e^{iθ} s_2^* (c_1 cos θ - i sin θ - s_1 c_2)`。 -/
 noncomputable def gamma2 : ℂ :=
   Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) *
     ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))
@@ -177,7 +179,10 @@ theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamm
   · exact AMat_two_one_eq_neg_gamma2_neg K θ      -- `(2,1)` 成分
   · rfl                                           -- `(2,2)` 成分: 実数 `γ_1(θ)` の像（`def_A_theta` の読み）。定義そのもの
 
-/-! ## `γ_2` の対称性（原文 `relation_of_gamma_2`） -/
+/-! ## `γ_2` の対称性
+
+本文の対応は `relation_of_gamma_2_theta_tilde`。本文にあったときのラベル `relation_of_gamma_2` の項目（`θ_μ` について述べた形）は
+参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_023_claim_relation_of_gamma2` の項目に退避してある。 -/
 
 /-! ### 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の `exp(iθ)` の表示と「第二に」「第四に」「(1)」
 
@@ -372,7 +377,9 @@ theorem conj_gamma2_eq_neg_gamma2_neg :
     _ = -gamma2 K (-θ) := by
         rw [gamma2_neg]                           -- 18 行目: 上の `γ_2(-θ)` の表示（「第三に」）
 
-/-- 原文 `relation_of_gamma_2`（人手 `relation_of_gamma_2_theta_tilde` (1)）: `γ_2(-θ) = -conj(γ_2(θ))`（人手の 2 行）。 -/
+/-- 人手 `relation_of_gamma_2_theta_tilde` (1) の証明の鎖（人手の略記 `θ := θ~_μ` のもと）: `γ_2(-θ) = -conj(γ_2(θ))`（人手の 2 行）。
+主張 (1) の具体版は `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRelationGamma2Tilde.lean` の `gamma2_neg_thetaTilde_eq`（この定理の特殊化）。
+参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_023_claim_relation_of_gamma2` の項目（本文にあったときのラベル `relation_of_gamma_2`）の前半も同じ形である。 -/
 theorem gamma2_neg_eq_neg_conj :
     gamma2 K (-θ) = -(starRingEnd ℂ) (gamma2 K θ) :=
   calc gamma2 K (-θ)
@@ -380,13 +387,18 @@ theorem gamma2_neg_eq_neg_conj :
     _ = -(starRingEnd ℂ) (gamma2 K θ) := by
         rw [conj_gamma2_eq_neg_gamma2_neg]        -- 2 行目: 上の `\overline{γ_2(θ)} = -γ_2(-θ)`
 
-/-- 原文 `relation_of_gamma_2` の系: `γ_2(θ) γ_2(-θ) = -|γ_2(θ)|^2`（特に非正の実数）。 -/
+/-- `γ_2(θ) γ_2(-θ) = -|γ_2(θ)|^2`（`|γ_2(θ)|^2` は `Complex.normSq`）。人手は本文に無く、参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_023_claim_relation_of_gamma2` の項目
+（本文にあったときのラベル `relation_of_gamma_2`）の「ゆえに」の行である。本文の対応する主張 `relation_of_gamma_2_theta_tilde` (2) の具体版は
+`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRelationGamma2Tilde.lean` の `gamma2_mul_gamma2_neg_eq_neg_absSq`。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_normSq :
     gamma2 K θ * gamma2 K (-θ) = -((Complex.normSq (gamma2 K θ) : ℝ) : ℂ) := by
   rw [gamma2_neg_eq_neg_conj]
   rw [mul_neg, Complex.mul_conj]
 
-/-- `γ_2(θ) = 0 ⟺ γ_2(-θ) = 0`（原文 `eigenvector_of_A_theta` の場合分け 1) で使われている）。 -/
+/-- `γ_2(θ) = 0 ⟺ γ_2(-θ) = 0`。人手に対応するラベルは無い補助の系。参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_027_claim_eigenvector_A_theta` の項目
+（本文にあったときのラベル `eigenvector_of_A_theta`）の場合分け 1) で使われていた。
+本文の経路では、`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma2TildeNonzero.lean` の `gamma2_neg_thetaTilde_ne_zero`
+（人手 `gamma_2_theta_tilde_nonzero` の主張の末尾が「後で共役関係から導く」とした `γ_2(-θ~_μ) ≠ 0`。人手はそれを `relation_of_gamma_2_theta_tilde` の主張の末尾で示す）と `ClaimAnticommutatorCheckPsi.lean`・`DefinitionCheckFermi.lean` が使う。 -/
 theorem gamma2_neg_eq_zero_iff : gamma2 K (-θ) = 0 ↔ gamma2 K θ = 0 := by
   rw [gamma2_neg_eq_neg_conj, neg_eq_zero, map_eq_zero]
 
@@ -473,9 +485,14 @@ theorem gamma2_thetaMu_of_dvd (M : ℕ) (hM : M ≠ 0) (μ ν : ℤ) (h : (M : �
   have hν : ν = -μ + k * M := by linear_combination hk
   rw [hν, thetaMu_add_int_mul M hM (-μ) k, gamma2_add_two_pi_mul_int, thetaMu_neg]
 
-/-! ## `γ_2(θ) = 0` となる条件（原文 `gamma_2_theta_is_0`） -/
+/-! ## `γ_2(θ) = 0` となる条件
 
-/-- **原文 `gamma_2_theta_is_0` の修正版**。原文は `s_2^* = 0` の場合を落としている。 -/
+人手は本文に無く、参照用ノート `integer_momentum_route_not_adopted.ts` の id の末尾が `TV1_hatZ_hatY_022_claim_gamma2_theta_is_0` の項目（本文にあったときのラベル `gamma_2_theta_is_0`）に退避してある。
+以下の「修正前の原文」は、このブロックが本文にあったときに直す前の版を指す。ノートの項目は直した後の形で、
+冒頭の「形式化の過程で見つかった原文の問題」の二件はどちらも解消している。 -/
+
+/-- **修正前の原文 `gamma_2_theta_is_0` の修正版**。修正前の原文は `s_2^* = 0` の場合を落としていた
+（冒頭の「原文の問題」の「`s_2^* ≠ 0` を暗黙に仮定していた」件）。 -/
 theorem gamma2_eq_zero_iff :
     gamma2 K θ = 0 ↔
       K.s2star = 0 ∨ (Real.sin θ = 0 ∧ K.c1 * Real.cos θ - K.s1 * K.c2 = 0) := by
@@ -495,14 +512,15 @@ theorem gamma2_eq_zero_iff :
   rw [gamma2, mul_eq_zero, mul_eq_zero]
   simp only [hIe, false_or, Complex.ofReal_eq_zero, hX]
 
-/-- `s_2^* ≠ 0` の下では原文の書き方どおりになる。 -/
+/-- `s_2^* ≠ 0` の下では修正前の原文の書き方どおりになる。 -/
 theorem gamma2_eq_zero_iff_of_s2star_ne_zero (hs : K.s2star ≠ 0) :
     gamma2 K θ = 0 ↔ (Real.sin θ = 0 ∧ K.c1 * Real.cos θ - K.s1 * K.c2 = 0) := by
   rw [gamma2_eq_zero_iff]
   simp [hs]
 
-/-- **原文 `gamma_2_theta_is_0` の最後の同値の修正版**:
-`sin θ_μ = 0 ⟺ M ∣ 2μ`。原文の「`⟺ μ = ±M`」は `M` が偶数のときの `μ = ±M/2` を落としている。 -/
+/-- **修正前の原文 `gamma_2_theta_is_0` の最後の同値の修正版**:
+`sin θ_μ = 0 ⟺ M ∣ 2μ`。修正前の原文の「`⟺ μ = ±M`」は `M` が偶数のときの `μ = ±M/2` を落としていた
+（ノートの項目は連立条件全体の同値として `μ = ±M/2` を除いている）。 -/
 theorem sin_thetaMu_eq_zero_iff (M : ℕ) (hM : M ≠ 0) (μ : ℤ) :
     Real.sin (thetaMu M μ) = 0 ↔ (M : ℤ) ∣ 2 * μ := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
