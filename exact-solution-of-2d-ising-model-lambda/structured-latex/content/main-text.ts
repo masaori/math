@@ -70074,6 +70074,7 @@ V_S&=|F_S|+1
                     verification: ["sagemath/check/no-diagonal-only-contact"],
                     lean: [
                       "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded",
+                      "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded_ofWalk",
                       "Ising2DLambda.NecSuf.KacWard.diagonal_cell_pairs_excluded_necSuf",
                       "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded_from_necSuf",
                     ],
@@ -91020,7 +91021,7 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
                       "、狭義順序の枝では ", ref("def_real_algebraic_strict_order"),
                       " の証人）で",
                     ]),
-                    displayMath(String.raw`2\cdot(u\cdot u)+2\cdot(v\cdot v)-(u+v)\cdot(u+v)=g\cdot g`),
+                    displayMath(String.raw`2\cdot(u\cdot u)+2\cdot(v\cdot v)-(u+v)\cdot(u+v)=g\cdot g\qquad\bigl(\because\ \blkref{claim_square_of_sum_le_twice_sum_of_squares},\ \blkref{def_real_algebraic_nonstrict_order}\bigr)`),
                     paragraph([
                       "と書ける。", ref("claim_two_is_square_in_real_closed"),
                       " により、零元でない ", math(String.raw`t\in R`), " で ",
