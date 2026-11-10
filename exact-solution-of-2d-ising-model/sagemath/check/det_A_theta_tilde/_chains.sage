@@ -19,6 +19,8 @@ REL = {
     'A21gamma':  [A21 + G2M],                                  # def_gamma1_gamma2_of_theta の (2,1) 成分 -γ_2(-θ)
     'A21def':    [A21 + I * EM * S2S * (C1 * U + I * V - S1 * C2)],  # def_A_theta の (2,1) 成分
     'g2form':    [G2 - I * EP * S2S * (A0 - I * V), G2M - I * EM * S2S * (A0 + I * V)],  # 上の γ_2(±θ) の表示
+    'g2form_p':  [G2 - I * EP * S2S * (A0 - I * V)],           # 上の γ_2(θ) の表示
+    'g2form_m':  [G2M - I * EM * S2S * (A0 + I * V)],          # 上の γ_2(-θ) の表示
     'g2prod':    [G2 * G2M + S2S**2 * (A0**2 + V**2)],         # 上の γ_2(θ)γ_2(-θ) の鎖
     'hyp_i':     [C1**2 - S1**2 - 1],                          # 上の c_1^2 - s_1^2 = 1
     'hyp_ii':    [C2S**2 - S2S**2 - 1],                        # 上の (c_2^*)^2 - (s_2^*)^2 = 1
@@ -99,7 +101,7 @@ CH_uv = [
     L(1, 'ee'),
 ]
 
-# ---- 準備の第二: γ_2(θ)（3 個の等号）・γ_2(-θ)（6 個）・積（9 個） ----
+# ---- 準備の第二: γ_2(θ)（3 個の等号）・γ_2(-θ)（9 個）・積（10 個） ----
 CH_g2 = [
     L(G2),
     L(I * EP * S2S * (C1 * U - I * V - S1 * C2), 'g2def'),
@@ -120,7 +122,8 @@ CH_g2m = [
 ]
 CH_prod = [
     L(G2 * G2M),
-    L((I * EP * S2S * (A0 - I * V)) * (I * EM * S2S * (A0 + I * V)), 'g2form'),
+    L((I * EP * S2S * (A0 - I * V)) * G2M, 'g2form_p'),
+    L((I * EP * S2S * (A0 - I * V)) * (I * EM * S2S * (A0 + I * V)), 'g2form_m'),
     L((I * I) * (EP * EM) * (S2S * S2S) * ((A0 - I * V) * (A0 + I * V))),
     L((-1) * (EP * EM) * (S2S * S2S) * ((A0 - I * V) * (A0 + I * V)), 'ii'),
     L((-1) * 1 * (S2S * S2S) * ((A0 - I * V) * (A0 + I * V)), 'ee'),

@@ -4127,8 +4127,10 @@ u^2 + v^2
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \gamma_2(\theta)\gamma_2(-\theta)
+&= \bigl(i\,e_+\,s_2^*(a_0 - iv)\bigr)\gamma_2(-\theta)
+&&(\because\ \text{上の}\ \gamma_2(\theta)\ \text{の表示})\\
 &= \bigl(i\,e_+\,s_2^*(a_0 - iv)\bigr)\bigl(i\,e_-\,s_2^*(a_0 + iv)\bigr)
-&&(\because\ \text{上の}\ \gamma_2(\theta)\ \text{と}\ \gamma_2(-\theta)\ \text{の表示})\\
+&&(\because\ \text{上の}\ \gamma_2(-\theta)\ \text{の表示})\\
 &= (ii)(e_+e_-)(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= (-1_{\mathbb{C}})(e_+e_-)(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
@@ -4142,7 +4144,7 @@ u^2 + v^2
 &= (-1_{\mathbb{C}})\Bigl((s_2^*s_2^*)\bigl(a_0^2 + v^2\bigr)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
 &= (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= -\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
 &&(\because\ \blkref{multiply_by_minus_one})
 \end{aligned}`),

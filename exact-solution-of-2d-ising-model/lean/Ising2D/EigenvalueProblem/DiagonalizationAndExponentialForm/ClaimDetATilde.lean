@@ -22,8 +22,8 @@
     `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`・`u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は、人手の行と 1 段ずつの `calc` の `complex_neg_neg_chain`・
     `complex_I_mul_I_chain`・`exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_sub_sq_chain`・
     `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である（第 2 の等式の鎖はまだ
-    `complex_sub_sq_chain` を使わず、`ring` で展開している）。続く `γ_2(θ)`・`γ_2(-θ)`・積の鎖は `gamma2_mul_gamma2_neg_sin_form` が受けるが、
-    人手の行と 1 対 1 ではない（`hminus` は `gamma2_neg` と `ring`、calc の 1 行目は `ring`、最後の行は `linear_combination`）。
+    `complex_sub_sq_chain` を使わず、`ring` で展開している）。人手の第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は、人手の 3・9・10 行と 1 段ずつの `calc` の
+    `gamma2_a0_form`・`gamma2_neg_a0_form`・`gamma2_mul_gamma2_neg_sin_form` である。
     `gamma2_mul_gamma2_neg_cos_form` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える。`v^2 = 1 - u^2`）を先取りした形である。
   * Step 3〜5: `gamma1_sq_add_gamma2_mul_thetaTilde` の中の鎖（Step 3 の 2 式・Step 4 の (iii) による
     `c_2` の消去・Step 5 の (i)(ii)）。
@@ -325,8 +325,69 @@ theorem cos_sq_add_sin_sq_complex_chain (θ : ℝ) :
     _ = 1 := exp_I_mul_exp_neg_I_mul θ
                           -- 5 行目: 上の `e_+e_- = 1_ℂ`（`exp_I_mul_exp_neg_I_mul`）
 
-/-- **人手証明 Step 2**（鎖の 3 行目まで）:
-`γ_2(θ)γ_2(-θ) = -(s_2^*)^2((c_1u - s_1c_2)^2 + v^2)`。 -/
+/-- **人手証明 `det_A_theta_tilde` の第二の準備の `γ_2(θ)` の鎖**（人手の 3 行）:
+`γ_2(θ) = i e_+ s_2^*(a_0 - iv)`。`a_0 := c_1u - s_1c_2` は、人手の前置きの読み（実数の和・差・積の像は像の和・差・積）の
+とおり、`ℂ` へ埋めた `c_1, u, s_1, c_2` の式で書き、定義を仮定 `ha` で受ける。 -/
+theorem gamma2_a0_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
+    (ha : a₀ = (K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :
+    gamma2 K θ
+      = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) * (a₀ - Complex.I * (Real.sin θ : ℂ)) :=
+  calc gamma2 K θ
+      = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ)
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) - Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := rfl
+                          -- 1 行目: `def_gamma1_gamma2_of_theta`
+    _ = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ)
+          * (((K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) - Complex.I * (Real.sin θ : ℂ)) := by
+        rw [sub_right_comm]
+                          -- 2 行目: `complex_numbers_form_a_field` の和の結合律・可換律
+                          -- （差は `def_complex_difference` の `z + (-w)`。mathlib の `sub_right_comm` は `a - b - c = a - c - b`）
+    _ = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) * (a₀ - Complex.I * (Real.sin θ : ℂ)) := by
+        rw [← ha]
+                          -- 3 行目: `a_0` の定義（`ha` を右辺から左辺へ）
+
+/-- **人手証明 `det_A_theta_tilde` の第二の準備の `γ_2(-θ)` の鎖**（人手の 9 行）:
+`γ_2(-θ) = i e_- s_2^*(a_0 + iv)`。`A(θ)_{2,1}` の積は `def_A_theta` の読みのとおり左から括る
+（Lean の `-Complex.I * e * s * P` は `(((-I) * e) * s) * P`）。人手の `(-x)y = -(xy)`（ℂ は体）は具体版が Lean に無く、
+`AMat_two_one_eq_neg_gamma2_neg` と同じく mathlib の `neg_mul` で 1 回ずつ受ける。 -/
+theorem gamma2_neg_a0_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
+    (ha : a₀ = (K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :
+    gamma2 K (-θ)
+      = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) * (a₀ + Complex.I * (Real.sin θ : ℂ)) :=
+  calc gamma2 K (-θ)
+      = -(-gamma2 K (-θ)) := (complex_neg_neg_chain _).symm
+                          -- 1 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）を右辺から左辺へ
+    _ = -(AMat K θ 1 0) := by rw [AMat_two_one_eq_neg_gamma2_neg]
+                          -- 2 行目: `def_gamma1_gamma2_of_theta` の `(2,1)` 成分（`AMat_two_one_eq_neg_gamma2_neg` を右辺から左辺へ）
+    _ = -((-Complex.I) * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ)
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))) := rfl
+                          -- 3 行目: `def_A_theta` の `(2,1)` 成分
+    _ = -((-(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))))) * (K.s2star : ℂ)
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]
+                          -- 4 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → e_-`）
+    _ = -((-(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ)))
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ))) := by
+        rw [neg_mul (Complex.I * Complex.exp (-(Complex.I * (θ : ℂ)))) (K.s2star : ℂ)]
+                          -- 5 行目: ℂ で `(-x)y = -(xy)`（`x → ie_-`, `y → s_2^*`）
+    _ = -(-(Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ)
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)))) := by
+        rw [neg_mul (Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ))]
+                          -- 6 行目: ℂ で `(-x)y = -(xy)`（`x → (ie_-)s_2^*`, `y → c_1u + iv - s_1c_2`）
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ)
+          * ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :=
+        complex_neg_neg_chain _
+                          -- 7 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ)
+          * (((K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) + Complex.I * (Real.sin θ : ℂ)) := by
+        rw [add_sub_right_comm]
+                          -- 8 行目: `complex_numbers_form_a_field` の和の結合律・可換律
+                          -- （差は `def_complex_difference` の `z + (-w)`。mathlib の `add_sub_right_comm` は `a + b - c = a - c + b`）
+    _ = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) * (a₀ + Complex.I * (Real.sin θ : ℂ)) := by
+        rw [← ha]
+                          -- 9 行目: `a_0` の定義（`ha` を右辺から左辺へ）
+
+/-- **人手証明 `det_A_theta_tilde` の第二の準備の `γ_2(θ)γ_2(-θ)` の鎖**（人手の 10 行）:
+`γ_2(θ)γ_2(-θ) = -((s_2^*)^2(a_0^2 + v^2))`。 -/
 theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) :
     gamma2 K θ * gamma2 K (-θ)
       = -((K.s2star : ℂ) ^ 2 *
@@ -334,23 +395,38 @@ theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) :
             + (Real.sin θ : ℂ) ^ 2)) := by
   set u : ℂ := (Real.cos θ : ℂ)
   set v : ℂ := (Real.sin θ : ℂ)
-  set a₀ : ℂ := (K.c1 : ℂ) * u - (K.s1 : ℂ) * (K.c2 : ℂ)
-  -- `def_gamma1_gamma2_of_theta` の 2 式を `a_0 ∓ iv` の形で書いたもの
-  have hplus : gamma2 K θ
-      = Complex.I * Complex.exp (Complex.I * (θ : ℂ)) * (K.s2star : ℂ) * (a₀ - Complex.I * v) := by
-    rw [gamma2]; ring
-  have hminus : gamma2 K (-θ)
-      = Complex.I * Complex.exp (-(Complex.I * (θ : ℂ))) * (K.s2star : ℂ) * (a₀ + Complex.I * v) := by
-    rw [gamma2_neg]; ring
+  set a₀ : ℂ := (K.c1 : ℂ) * u - (K.s1 : ℂ) * (K.c2 : ℂ) with ha
+  set ep : ℂ := Complex.exp (Complex.I * (θ : ℂ)) with hep
+  set em : ℂ := Complex.exp (-(Complex.I * (θ : ℂ))) with hem
+  set s : ℂ := (K.s2star : ℂ)
   calc gamma2 K θ * gamma2 K (-θ)
-      = (Complex.I * Complex.I)
-          * (Complex.exp (Complex.I * (θ : ℂ)) * Complex.exp (-(Complex.I * (θ : ℂ))))
-          * (K.s2star : ℂ) ^ 2 * (a₀ - Complex.I * v) * (a₀ + Complex.I * v) := by
-        rw [hplus, hminus]; ring                                  -- 直前の 2 式と積の可換性
-    _ = (-1) * 1 * (K.s2star : ℂ) ^ 2 * (a₀ - Complex.I * v) * (a₀ + Complex.I * v) := by
-        rw [Complex.I_mul_I, exp_I_mul_exp_neg_I_mul]      -- `i·i = -1` と `exp(iθ)exp(-iθ) = 1`
-    _ = -((K.s2star : ℂ) ^ 2 * (a₀ ^ 2 + v ^ 2)) := by
-        linear_combination (K.s2star : ℂ) ^ 2 * v ^ 2 * Complex.I_sq  -- `(a_0-iv)(a_0+iv) = a_0^2+v^2`
+      = (Complex.I * ep * s * (a₀ - Complex.I * v)) * gamma2 K (-θ) := by
+        rw [gamma2_a0_form K θ a₀ ha]
+                          -- 1 行目: 上の `γ_2(θ)` の表示（`gamma2_a0_form`）
+    _ = (Complex.I * ep * s * (a₀ - Complex.I * v)) * (Complex.I * em * s * (a₀ + Complex.I * v)) := by
+        rw [gamma2_neg_a0_form K θ a₀ ha]
+                          -- 2 行目: 上の `γ_2(-θ)` の表示（`gamma2_neg_a0_form`）
+    _ = (Complex.I * Complex.I) * (ep * em) * (s * s) * ((a₀ - Complex.I * v) * (a₀ + Complex.I * v)) := by
+        rw [mul_mul_mul_comm (Complex.I * ep * s) (a₀ - Complex.I * v) (Complex.I * em * s),
+          mul_mul_mul_comm (Complex.I * ep) s (Complex.I * em) s,
+          mul_mul_mul_comm Complex.I ep Complex.I em]
+                          -- 3 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = (-1) * (ep * em) * (s * s) * ((a₀ - Complex.I * v) * (a₀ + Complex.I * v)) := by
+        rw [complex_I_mul_I_chain]
+                          -- 4 行目: 上の `ii = -1_ℂ`（`complex_I_mul_I_chain`）
+    _ = (-1) * 1 * (s * s) * ((a₀ - Complex.I * v) * (a₀ + Complex.I * v)) := by
+        rw [hep, hem, exp_I_mul_exp_neg_I_mul]
+                          -- 5 行目: 上の `e_+e_- = 1_ℂ`（`exp_I_mul_exp_neg_I_mul`）
+    _ = (-1) * (s * s) * ((a₀ - Complex.I * v) * (a₀ + Complex.I * v)) := by rw [mul_one (-1 : ℂ)]
+                          -- 6 行目: `complex_numbers_form_a_field` の積の単位元
+    _ = (-1) * (s * s) * (a₀ ^ 2 + v ^ 2) := by rw [complex_sub_I_mul_mul_add_I_mul]
+                          -- 7 行目: 上の `(x - iy)(x + iy) = x^2 + y^2` を `x = a_0, y = v` で
+    _ = (-1) * ((s * s) * (a₀ ^ 2 + v ^ 2)) := mul_assoc _ _ _
+                          -- 8 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = (-1) * (s ^ 2 * (a₀ ^ 2 + v ^ 2)) := by rw [← sq s]
+                          -- 9 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+    _ = -(s ^ 2 * (a₀ ^ 2 + v ^ 2)) := neg_one_mul _
+                          -- 10 行目: `multiply_by_minus_one`
 
 /-- **人手証明 Step 2**（鎖の最後の行）:
 `γ_2(θ)γ_2(-θ) = -(s_2^*)^2((c_1u - s_1c_2)^2 + 1 - u^2)`。
