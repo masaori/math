@@ -68318,7 +68318,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                         title: { text: "セル集合の辺集合" },
                         labels: ["def_cell_edge_set"],
                         habitat: "Z",
-                        lean: ["Ising2DLambda.KacWard.cellEdges"],
+                        lean: ["Ising2DLambda.KacWard.cellEdgeEndpointSets"],
                         statement: [
                           paragraph([
                             "セル ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
@@ -68378,8 +68378,14 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                             "、第二座標の小さい方から ", math(String.raw`c=t`),
                             " を得る。縦辺どうしでは端点の第二座標から ", math(String.raw`c=t`),
                             "、第一座標の小さい方から ", math(String.raw`r=s`),
-                            " を得る。いずれも整数の順序と ", math(String.raw`x<x+1`), " による。",
+                            " を得る。いずれも整数の順序と ", math(String.raw`x<x+1`), " による。したがって両辺の符号化は一致する。",
                           ]),
+                          displayMath(String.raw`\begin{aligned}
+(d,r,c)
+&=(d,s,c)&&\bigl(\because\ r=s\bigr)\\
+&=(d,s,t)&&\bigl(\because\ c=t\bigr)\\
+&=(d',s,t)&&\bigl(\because\ d=d'\bigr)
+\end{aligned}`),
                         ],
                       },
                     },
@@ -68420,6 +68426,110 @@ e
 &\subset\mathcal V_{\square}(\{(r,c)\})\quad(\because\ \text{四辺の端点の列挙})\\
 &\subset\mathcal V_{\square}(S)\quad(\because\ (r,c)\in S,\ \blkref{def_cell_vertex_set})
 \end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_encoded_cell_edge_set",
+                        kind: "definition",
+                        title: { text: "セル集合の符号化格子辺" },
+                        labels: ["def_encoded_cell_edge_set"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.cellEdges"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の符号化格子辺集合 ", math(String.raw`\widetilde{\mathcal E}_{\square}(S)`),
+                            " を、各 ", math(String.raw`(r,c)\in S`), " から ",
+                            math(String.raw`(0,r,c),(0,r+1,c),(1,r,c),(1,r,c+1)`),
+                            " を集めた集合と定める。元は ",
+                            math(String.raw`\{0,1\}\times\mathbb Z\times\mathbb Z`),
+                            " に属する。各セルの寄与は四つなので有限である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_cell_vertex_graph",
+                        kind: "definition",
+                        title: { text: "セル集合の頂点辺グラフ" },
+                        labels: ["def_cell_vertex_graph"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.cellVertexGraph"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の有限単純グラフ ", math(String.raw`G_S`),
+                            " の頂点集合を ", math(String.raw`\mathcal V_{\square}(S)`),
+                            " とする（", ref("def_cell_vertex_set"), "）。相異なる頂点 ",
+                            math(String.raw`u,v\in\mathcal V_{\square}(S)`),
+                            " が隣接する条件を次で定める。",
+                          ]),
+                          displayMath(String.raw`u\sim_{G_S}v\quad\Longleftrightarrow\quad
+\{u,v\}\in\mathcal E_{\square}(S)`),
+                          paragraph([
+                            "各辺の両端は頂点集合に属する（", ref("claim_cell_edge_endpoints_belong_to_cell_vertices"),
+                            "）。", ref("def_cell_edge_set"), " の各辺は相異なる二点の集合なので、",
+                            math(String.raw`G_S`), " にループはない。辺は二元集合であるため隣接関係は対称である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_vertex_graph_edge_image",
+                        kind: "claim",
+                        title: { text: "セル集合の頂点辺グラフの辺は格子辺の端点集合の像である" },
+                        labels: ["claim_cell_vertex_graph_edge_image"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/cell-vertex-graph-edge-image"],
+                        lean: [
+                          "Ising2DLambda.KacWard.cellVertexGraph_edgeFinset",
+                          "Ising2DLambda.KacWard.cellVertexGraph_edge_endpoint_image",
+                          "Ising2DLambda.NecSuf.KacWard.finiteGraph_edgeSet_of_endpoint_image",
+                          "Ising2DLambda.KacWard.cellVertexGraph_edgeFinset_from_necSuf",
+                        ],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " に対し、", ref("def_encoded_cell_edge_set"), " の符号化辺集合と、",
+                            math(String.raw`\operatorname{end}_{\square}`),
+                            " は ", ref("claim_grid_edge_endpoint_encoding_injective"),
+                            " で定めた端点集合写像である。このとき ", ref("def_cell_vertex_graph"),
+                            " の辺集合は次を満たす。",
+                          ]),
+                          displayMath(String.raw`E(G_S)=\{\operatorname{end}_{\square}(e)\mid e\in\widetilde{\mathcal E}_{\square}(S)\}=\mathcal E_{\square}(S)`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の ", math(String.raw`e\in\widetilde{\mathcal E}_{\square}(S)`),
+                            " を取る。", math(String.raw`e`), " はある ",
+                            math(String.raw`(r,c)\in S`), " に由来する四つの符号化辺の一つである。",
+                            ref("claim_grid_edge_endpoint_encoding_injective"), " の端点集合の式を各辺に適用すると、",
+                            ref("def_cell_edge_set"), " の四辺を順に得る。したがって像は ",
+                            math(String.raw`\mathcal E_{\square}(S)`), " に含まれる。",
+                          ]),
+                          paragraph([
+                            "逆に任意の ", math(String.raw`a\in\mathcal E_{\square}(S)`),
+                            " を取る。", ref("def_cell_edge_set"), " より、", math(String.raw`a`),
+                            " はある ", math(String.raw`(r,c)\in S`),
+                            " の四辺の一つである。対応する符号化辺 ",
+                            math(String.raw`(0,r,c),(0,r+1,c),(1,r,c),(1,r,c+1)`),
+                            " のいずれかを選ぶと、その端点集合は ", math(String.raw`a`),
+                            " に等しい（", ref("claim_grid_edge_endpoint_encoding_injective"), "）。",
+                            "よって像と ", math(String.raw`\mathcal E_{\square}(S)`), " は等しい。",
+                          ]),
+                          paragraph([
+                            "辺の端点は ", ref("claim_cell_edge_endpoints_belong_to_cell_vertices"),
+                            " により頂点集合に属する。", ref("def_cell_vertex_graph"),
+                            " の隣接条件より、", math(String.raw`G_S`),
+                            " の辺集合も ", math(String.raw`\mathcal E_{\square}(S)`), " に等しい。",
+                          ]),
                         ],
                       },
                     },
@@ -69455,7 +69565,8 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                             " が辺連結（", ref("def_edge_connected_cell_set"), "）なら、頂点集合 ",
                             math(String.raw`\mathcal V_{\square}(S)`), " と辺集合 ",
                             math(String.raw`\mathcal E_{\square}(S)`),
-                            " からなる有限単純グラフは連結である（", ref("def_finite_graph_connected"), "）。",
+                            " からなる有限単純グラフ（", ref("def_cell_vertex_graph"),
+                            "）は連結である（", ref("def_finite_graph_connected"), "）。",
                           ]),
                         ],
                         proof: [
@@ -69594,12 +69705,11 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     ],
                     proof: [
                       paragraph([
-                        "頂点集合 ", math(String.raw`\mathcal V_{\square}(S)`), " と辺集合 ",
-                        math(String.raw`\mathcal E_{\square}(S)`), " を持つ有限単純グラフを ", math(String.raw`G_S`),
-                        " と書き、その頂点数と辺数を ",
+                        ref("def_cell_vertex_graph"), " の有限単純グラフ ", math(String.raw`G_S`),
+                        " の頂点数と辺数を ",
                         math(String.raw`V_S:=|\mathcal V_{\square}(S)|`), "、",
                         math(String.raw`E_S:=|\mathcal E_{\square}(S)|`), " と置く（",
-                        ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"), "）。",
+                        ref("def_cell_vertex_set"), "、", ref("claim_cell_vertex_graph_edge_image"), "）。",
                         ref("claim_edge_connected_cell_set_vertex_graph_connected"),
                         " により ", math(String.raw`G_S`), " は空でない連結グラフである。",
                       ]),

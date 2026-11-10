@@ -1183,6 +1183,8 @@ import Ising2DLambda.NecSuf.KacWard.GridEdgeEndpointsInjective
 import Ising2DLambda.KacWard.GridEdgeEndpointsInjective
 import Ising2DLambda.NecSuf.KacWard.GridEdgeEndpointsInCellVertices
 import Ising2DLambda.KacWard.GridEdgeEndpointsInCellVertices
+import Ising2DLambda.NecSuf.KacWard.CellVertexGraph
+import Ising2DLambda.KacWard.CellVertexGraph
 import Ising2DLambda.NecSuf.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.KacWard.AdjacentCellCornersConnected
 import Ising2DLambda.NecSuf.KacWard.ConnectedCellCorners
