@@ -69960,6 +69960,7 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     verification: ["sagemath/check/hole-free-cell-set-euler-number"],
                     lean: [
                       "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_actual_even_edge_counts",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_eulerNumber_eq_one",
                       "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_even_edge_counts",
                     ],
                     statement: [
@@ -70143,7 +70144,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
 &=2\cdot0
 &&\bigl(\because\ P_k(\gamma)=(a,b)\text{ を満たす }k\text{ が存在しない}\bigr)\\
 &=0
-&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr).
+&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。四つの項はいずれも自然数（", ref("def_vertical_edge_traversal_count"), "、",
