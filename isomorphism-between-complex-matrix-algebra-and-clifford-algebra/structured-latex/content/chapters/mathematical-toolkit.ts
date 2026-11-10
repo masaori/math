@@ -9870,4 +9870,135 @@ X\cdot_{A/I}(Y+_{A/I}Z)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_quotient_algebra_is_complex_algebra",
+    kind: "claim",
+    title: { text: "商集合の上の演算の組は ℂ-代数である（商代数）" },
+    labels: ["claim_quotient_algebra_is_complex_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、組",
+      ]),
+      displayMath(String.raw`(A/I,+_{A/I},\cdot_{A/I},\ast_{A/I},0_{A/I},1_{A/I})`),
+      paragraph([
+        "は ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）である。ここで ",
+        math(String.raw`A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）、",
+        math(String.raw`+_{A/I},\ \cdot_{A/I},\ \ast_{A/I},\ 0_{A/I},\ 1_{A/I}`),
+        " は商集合の上の加法・乗法・スカラー倍・零元・単位元（",
+        ref("def_quotient_algebra_operations"),
+        "）である。この ℂ-代数を ",
+        math(String.raw`I`),
+        " を法とする商代数と呼び、組と同じ記号 ",
+        math(String.raw`A/I`),
+        " で書く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）の四つの条件を順に確かめる。",
+      ]),
+      paragraph([
+        "一つ目の条件。組 ",
+        math(String.raw`(A/I,+_{A/I},\cdot_{A/I},0_{A/I},1_{A/I})`),
+        " は、商集合の上の演算の組が単位元をもつ環であること（",
+        ref("claim_quotient_set_operations_form_unital_ring"),
+        "）により、単位元をもつ環である。",
+      ]),
+      paragraph([
+        "二つ目の条件。組 ",
+        math(String.raw`(A/I,+_{A/I},\ast_{A/I},0_{A/I})`),
+        " は、商集合の上の演算の組が ℂ-線型空間であること（",
+        ref("claim_quotient_set_operations_form_complex_vector_space"),
+        "）により、ℂ-線型空間である。",
+      ]),
+      paragraph([
+        "残りはスカラー倍と乗法の両立の二つの条件である。",
+        math(String.raw`\pi_I:A\to A/I`),
+        " を ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）とする。",
+        math(String.raw`X,Y`),
+        " を ",
+        math(String.raw`A/I`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とし、射影が全射であること（",
+        ref("claim_projection_onto_quotient_set_is_surjective"),
+        "）により ",
+        math(String.raw`\pi_I(a)=X`),
+        "、",
+        math(String.raw`\pi_I(b)=Y`),
+        " を満たす ",
+        math(String.raw`A`),
+        " の元 ",
+        math(String.raw`a,b`),
+        " をとる。",
+      ]),
+      paragraph(["スカラー倍と乗法の両立、左の因子。"]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\ast_{A/I}(X\cdot_{A/I}Y)
+&=\lambda\ast_{A/I}\bigl(\pi_I(a)\cdot_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\lambda\ast_{A/I}\pi_I(a\cdot_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(\lambda\ast_A(a\cdot_A b)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((\lambda\ast_A a)\cdot_A b\bigr)
+&&\left(\because\ A\ \text{のスカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\pi_I(\lambda\ast_A a)\cdot_{A/I}\pi_I(b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\right)\\
+&=\bigl(\lambda\ast_{A/I}\pi_I(a)\bigr)\cdot_{A/I}\pi_I(b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\right)\\
+&=(\lambda\ast_{A/I}X)\cdot_{A/I}Y
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍と乗法の両立、右の因子。"]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\ast_{A/I}(X\cdot_{A/I}Y)
+&=\lambda\ast_{A/I}\bigl(\pi_I(a)\cdot_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\lambda\ast_{A/I}\pi_I(a\cdot_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(\lambda\ast_A(a\cdot_A b)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(a\cdot_A(\lambda\ast_A b)\bigr)
+&&\left(\because\ A\ \text{のスカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\pi_I(a)\cdot_{A/I}\pi_I(\lambda\ast_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\right)\\
+&=\pi_I(a)\cdot_{A/I}\bigl(\lambda\ast_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\right)\\
+&=X\cdot_{A/I}(\lambda\ast_{A/I}Y)
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの条件がすべて成り立つので、組 ",
+        math(String.raw`(A/I,+_{A/I},\cdot_{A/I},\ast_{A/I},0_{A/I},1_{A/I})`),
+        " は ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）である。",
+      ]),
+    ],
+  },
 ]);
