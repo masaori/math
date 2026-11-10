@@ -1170,8 +1170,8 @@ import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundary
 import Ising2DLambda.KacWard.PlaneCellBoundaryFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.CellComplexOneCellIncrement
 import Ising2DLambda.KacWard.CellComplexOneCellIncrementFromNecSuf
-import Ising2DLambda.NecSuf.KacWard.HoleFreeCellSetEulerNumber
-import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumber
+import Ising2DLambda.NecSuf.KacWard.CellEulerNumberFromEvenEdgeCounts
+import Ising2DLambda.KacWard.CellEulerNumberFromEvenEdgeCounts
 import Ising2DLambda.KacWard.PlaneCellBoundaryInjective
 import Ising2DLambda.NecSuf.KacWard.PlaneCellBoundaryInjective
 import Ising2DLambda.KacWard.EvenEdgeSetCellBoundary
@@ -1203,7 +1203,6 @@ import Ising2DLambda.NecSuf.KacWard.ConnectedCellCorners
 import Ising2DLambda.KacWard.ConnectedCellCorners
 import Ising2DLambda.KacWard.CellVertexGraphConnected
 import Ising2DLambda.NecSuf.KacWard.BoundaryOfFiniteHeight
-import Ising2DLambda.KacWard.HoleFreeCellSetEulerNumberFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcluded
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcludedFromNecSuf

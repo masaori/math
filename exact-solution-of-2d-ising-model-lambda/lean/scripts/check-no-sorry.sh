@@ -2347,9 +2347,8 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.cellComplex_oneCellIncrement_necSuf
   Ising2DLambda.KacWard.cellEulerNumber_insert
   Ising2DLambda.KacWard.cellEulerNumber_insert_from_necSuf
-  Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf
-  Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count
-  Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_even_edge_counts
+  Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_actual_even_edge_counts
   Ising2DLambda.KacWard.planeCellBoundary_injective
   Ising2DLambda.NecSuf.KacWard.boundary_injective_of_symmetric_difference
   Ising2DLambda.KacWard.planeCellBoundary_injective_from_necSuf

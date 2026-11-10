@@ -69958,6 +69958,10 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     labels: ["claim_hole_free_cell_set_euler_number_one"],
                     habitat: "Z",
                     verification: ["sagemath/check/hole-free-cell-set-euler-number"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_actual_even_edge_counts",
+                      "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_even_edge_counts",
+                    ],
                     statement: [
                       paragraph([
                         "空でない有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
