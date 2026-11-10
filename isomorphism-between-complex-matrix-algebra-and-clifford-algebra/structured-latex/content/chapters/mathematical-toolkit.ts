@@ -9700,4 +9700,174 @@ X\cdot_{A/I}(Y+_{A/I}Z)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_quotient_set_operations_form_complex_vector_space",
+    kind: "claim",
+    title: { text: "商集合の上の演算の組は ℂ-線型空間である" },
+    labels: ["claim_quotient_set_operations_form_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、組",
+      ]),
+      displayMath(String.raw`(A/I,+_{A/I},\ast_{A/I},0_{A/I})`),
+      paragraph([
+        "は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。ここで ",
+        math(String.raw`A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）、",
+        math(String.raw`+_{A/I},\ \ast_{A/I},\ 0_{A/I}`),
+        " は商集合の上の加法・スカラー倍・零元（",
+        ref("def_quotient_algebra_operations"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "商集合の上の演算の定義（",
+        ref("def_quotient_algebra_operations"),
+        "）により、",
+        math(String.raw`+_{A/I}`),
+        " は ",
+        math(String.raw`A/I\times A/I\to A/I`),
+        " の写像、",
+        math(String.raw`\ast_{A/I}`),
+        " は ",
+        math(String.raw`\mathbb{C}\times A/I\to A/I`),
+        " の写像、",
+        math(String.raw`0_{A/I}`),
+        " は ",
+        math(String.raw`A/I`),
+        " の元である。残りは ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件である。",
+      ]),
+      paragraph([
+        "加法の結合法則・加法の交換法則・加法の単位元・加法の逆元の四つの条件は、単位元をもつ環（",
+        ref("def_unital_ring"),
+        "）の同じ名前の四つの条件と、同じ ",
+        math(String.raw`+_{A/I}`),
+        " と ",
+        math(String.raw`0_{A/I}`),
+        " についての同じ式である。商集合の上の演算の組が単位元をもつ環であること（",
+        ref("claim_quotient_set_operations_form_unital_ring"),
+        "）により、この四つは成り立つ。",
+      ]),
+      paragraph([
+        "残りはスカラー倍についての四つの条件である。",
+        math(String.raw`\pi_I:A\to A/I`),
+        " を ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）とする。",
+        math(String.raw`X,Y`),
+        " を ",
+        math(String.raw`A/I`),
+        " の任意の元、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とし、射影が全射であること（",
+        ref("claim_projection_onto_quotient_set_is_surjective"),
+        "）により ",
+        math(String.raw`\pi_I(a)=X`),
+        "、",
+        math(String.raw`\pi_I(b)=Y`),
+        " を満たす ",
+        math(String.raw`A`),
+        " の元 ",
+        math(String.raw`a,b`),
+        " をとる。",
+        math(String.raw`A`),
+        " の線型空間の公理は、",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+      ]),
+      paragraph(["スカラー倍の結合法則。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\cdot_{\mathbb{C}}\mu)\ast_{A/I}X
+&=(\lambda\cdot_{\mathbb{C}}\mu)\ast_{A/I}\pi_I(a)
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I\bigl((\lambda\cdot_{\mathbb{C}}\mu)\ast_A a\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(\lambda\ast_A(\mu\ast_A a)\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の結合法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\ast_{A/I}\pi_I(\mu\ast_A a)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\right)\\
+&=\lambda\ast_{A/I}\bigl(\mu\ast_{A/I}\pi_I(a)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\right)\\
+&=\lambda\ast_{A/I}(\mu\ast_{A/I}X)
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\ast_{A/I}X
+&=1_{\mathbb{C}}\ast_{A/I}\pi_I(a)
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I(1_{\mathbb{C}}\ast_A a)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(a)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_complex_vector_space}\right)\\
+&=X
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則。"]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\ast_{A/I}(X+_{A/I}Y)
+&=\lambda\ast_{A/I}\bigl(\pi_I(a)+_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\lambda\ast_{A/I}\pi_I(a+_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(\lambda\ast_A(a+_A b)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((\lambda\ast_A a)+_A(\lambda\ast_A b)\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のベクトルの加法についての分配法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_complex_vector_space}\right)\\
+&=\pi_I(\lambda\ast_A a)+_{A/I}\pi_I(\lambda\ast_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\bigl(\lambda\ast_{A/I}\pi_I(a)\bigr)+_{A/I}\bigl(\lambda\ast_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を二つの項に}\right)\\
+&=(\lambda\ast_{A/I}X)+_{A/I}(\lambda\ast_{A/I}Y)
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda+_{\mathbb{C}}\mu)\ast_{A/I}X
+&=(\lambda+_{\mathbb{C}}\mu)\ast_{A/I}\pi_I(a)
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I\bigl((\lambda+_{\mathbb{C}}\mu)\ast_A a\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((\lambda\ast_A a)+_A(\mu\ast_A a)\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラーの加法についての分配法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_complex_vector_space}\right)\\
+&=\pi_I(\lambda\ast_A a)+_{A/I}\pi_I(\mu\ast_A a)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\bigl(\lambda\ast_{A/I}\pi_I(a)\bigr)+_{A/I}\bigl(\mu\ast_{A/I}\pi_I(a)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\ \text{を二つの項に}\right)\\
+&=(\lambda\ast_{A/I}X)+_{A/I}(\mu\ast_{A/I}X)
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件がすべて成り立つので、組 ",
+        math(String.raw`(A/I,+_{A/I},\ast_{A/I},0_{A/I})`),
+        " は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+  },
 ]);

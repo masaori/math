@@ -57,6 +57,7 @@ export const ALL_LABELS = [
   "claim_quotient_addition_does_not_depend_on_representatives",
   "claim_quotient_multiplication_does_not_depend_on_representatives",
   "claim_quotient_scalar_multiplication_does_not_depend_on_representatives",
+  "claim_quotient_set_operations_form_complex_vector_space",
   "claim_quotient_set_operations_form_unital_ring",
   "claim_reindexing_linear_combination_by_bijection",
   "claim_residue_classes_are_equal_iff_congruent",
