@@ -131,4 +131,31 @@ theorem cellVertexGraph_edge_endpoint_image (cells : Finset GridCell) :
       Finset.mem_image.mpr ⟨e, Finset.mem_attach _ _, rfl⟩,
       cellGraphEdge_endpointSet cells e⟩
 
+/-- Restricting the edge correspondence to a selected set preserves each
+vertex's incident-edge count and therefore its parity. -/
+theorem cellGraphEdge_incident_card (cells : Finset GridCell)
+    (A : Finset (cellEdges cells)) (v : cellVertices cells) :
+    (A.filter (fun e => v.1 ∈ gridEdgeEndpoints e.1)).card =
+      ((A.image (cellGraphEdgeEquiv cells)).filter
+        (fun edge => v ∈ edge.1)).card := by
+  classical
+  rw [Finset.filter_image]
+  have hfilter :
+      (A.filter (fun e => v ∈ (cellGraphEdgeEquiv cells e).1)) =
+        A.filter (fun e => v.1 ∈ gridEdgeEndpoints e.1) := by
+    ext e
+    simp only [Finset.mem_filter]
+    have hinc : v ∈ (cellGraphEdgeEquiv cells e).1 ↔
+        v.1 ∈ gridEdgeEndpoints e.1 :=
+      cellGraphEdge_incident_iff cells e v
+    simp [hinc]
+  rw [hfilter, Finset.card_image_of_injective _ (cellGraphEdgeEquiv cells).injective]
+
+theorem cellGraphEdge_incident_even_iff (cells : Finset GridCell)
+    (A : Finset (cellEdges cells)) (v : cellVertices cells) :
+    Even (A.filter (fun e => v.1 ∈ gridEdgeEndpoints e.1)).card ↔
+      Even ((A.image (cellGraphEdgeEquiv cells)).filter
+        (fun edge => v ∈ edge.1)).card := by
+  rw [cellGraphEdge_incident_card]
+
 end Ising2DLambda.KacWard

@@ -60,4 +60,22 @@ noncomputable def finiteGraph_edgeEquiv_of_injective
     obtain ⟨e, _, he⟩ := Finset.mem_image.mp hmem
     exact ⟨e, Subtype.ext he⟩
 
+/-- An edge equivalence preserving incidence preserves the number of selected
+edges incident to each vertex. -/
+theorem incident_edge_card_of_equiv
+    {E F V : Type*} [DecidableEq E] [DecidableEq F]
+    (edgeEquiv : E ≃ F) (A : Finset E) (v : V)
+    (sourceIncident : V → E → Prop) (targetIncident : V → F → Prop)
+    [DecidablePred (sourceIncident v)] [DecidablePred (targetIncident v)]
+    (hinc : ∀ e, sourceIncident v e ↔ targetIncident v (edgeEquiv e)) :
+    (A.filter (sourceIncident v)).card =
+      ((A.image edgeEquiv).filter (targetIncident v)).card := by
+  rw [Finset.filter_image]
+  have hfilter :
+      (A.filter fun e => targetIncident v (edgeEquiv e)) =
+        A.filter (sourceIncident v) := by
+    ext e
+    simp [hinc e]
+  rw [hfilter, Finset.card_image_of_injective _ edgeEquiv.injective]
+
 end Ising2DLambda.NecSuf.KacWard

@@ -13936,9 +13936,12 @@ A\cap(E\setminus F)
 |E|+1-|V|
 &=|E|+1-(|F|+1)
 &&\bigl(\because\ \blkref{claim_finite_tree_edge_count}\bigr)\\
-&=|E|-|F|\in\mathbb N
-&&\bigl(\because\ F\subseteq E\text{ と自然数の四則}\bigr)
+&=|E|-|F|
+&&\bigl(\because\ \mathbb N\text{ の四則}\bigr)\\
+&=|E\setminus F|
+&&\bigl(\because\ F\subseteq E\text{ と有限集合の差の個数}\bigr)
 \end{aligned}`),
+                  displayMath(String.raw`|E\setminus F|\in\mathbb N\qquad\bigl(\because\ \blkref{def_cardinality_notation}\bigr)`),
                   displayMath(String.raw`\begin{aligned}
 |\mathcal E(G)|
 &=|\{C:C\subseteq E\setminus F\}|
@@ -68628,6 +68631,62 @@ e&=f
 v\in\theta_S(e)
 &\Longleftrightarrow v\in\operatorname{end}_{\square}(e)
 &&\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{def_cell_vertex_set}\bigr)
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_graph_incident_edge_parity_preserved",
+                        kind: "claim",
+                        title: { text: "部分辺集合の各頂点での接続辺数の偶奇はグラフ辺への対応で保たれる" },
+                        labels: ["claim_cell_graph_incident_edge_parity_preserved"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/cell-graph-incident-edge-parity-preserved"],
+                        lean: [
+                          "Ising2DLambda.KacWard.cellGraphEdge_incident_card",
+                          "Ising2DLambda.KacWard.cellGraphEdge_incident_even_iff",
+                          "Ising2DLambda.NecSuf.KacWard.incident_edge_card_of_equiv",
+                        ],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            "、部分集合 ", math(String.raw`A\subset\widetilde{\mathcal E}_{\square}(S)`),
+                            "、頂点 ", math(String.raw`v\in\mathcal V_{\square}(S)`),
+                            " を取る。", ref("claim_cell_graph_edge_bijection"), " の写像による像を ",
+                            math(String.raw`\theta_S(A):=\{\theta_S(e)\mid e\in A\}`),
+                            " と書く。このとき接続辺数は等しい。",
+                          ]),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
+=\left|\{g\in\theta_S(A)\mid v\in g\}\right|`),
+                          paragraph(["したがって、左辺が偶数であることと右辺が偶数であることは同値である。"]),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_cell_graph_edge_bijection"), " より ", math(String.raw`\theta_S`),
+                            " は全単射であり、", math(String.raw`A`), " への制限は ",
+                            math(String.raw`A`), " から ", math(String.raw`\theta_S(A)`), " への全単射である。",
+                          ]),
+                          paragraph([
+                            ref("claim_cell_graph_edge_incidence_preserved"), " を各 ",
+                            math(String.raw`e\in A`), " に適用すると、制限した写像は接続辺どうしを対応させる。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
+&\Longleftrightarrow e\in A\text{ かつ }v\in\operatorname{end}_{\square}(e)
+&&\bigl(\because\ \text{集合の所属条件}\bigr)\\
+&\Longleftrightarrow \theta_S(e)\in\theta_S(A)\text{ かつ }v\in\theta_S(e)
+&&\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{claim_cell_graph_edge_incidence_preserved}\bigr)
+\end{aligned}`),
+                          paragraph(["有限集合の全単射によって接続辺数は等しい。整数の偶奇にも同じ等号を適用する。"]),
+                          displayMath(String.raw`\begin{aligned}
+\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
+&=\left|\{g\in\theta_S(A)\mid v\in g\}\right|
+&&\bigl(\because\ \text{上の制限した全単射}\bigr)\\
+\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
+&\Longleftrightarrow\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
+&&\bigl(\because\ \text{直前の整数の等号}\bigr)
 \end{aligned}`),
                         ],
                       },
