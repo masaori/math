@@ -68527,8 +68527,61 @@ e
                           paragraph([
                             "辺の端点は ", ref("claim_cell_edge_endpoints_belong_to_cell_vertices"),
                             " により頂点集合に属する。", ref("def_cell_vertex_graph"),
-                            " の隣接条件より、", math(String.raw`G_S`),
-                            " の辺集合も ", math(String.raw`\mathcal E_{\square}(S)`), " に等しい。",
+                            " の隣接条件を適用する。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+E(G_S)
+&=\{\operatorname{end}_{\square}(e)\mid e\in\widetilde{\mathcal E}_{\square}(S)\}
+&&\bigl(\because\ \blkref{def_cell_vertex_graph},\ \blkref{claim_cell_edge_endpoints_belong_to_cell_vertices}\bigr)\\
+&=\mathcal E_{\square}(S)
+&&\bigl(\because\ \blkref{def_cell_edge_set},\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_graph_edge_bijection",
+                        kind: "claim",
+                        title: { text: "符号化格子辺と頂点辺グラフの辺は一対一に対応する" },
+                        labels: ["claim_cell_graph_edge_bijection"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/cell-graph-edge-bijection"],
+                        lean: [
+                          "Ising2DLambda.KacWard.cellGraphEdge_injective",
+                          "Ising2DLambda.KacWard.cellGraphEdgeEquiv",
+                          "Ising2DLambda.NecSuf.KacWard.finiteGraph_edgeEquiv_of_injective",
+                        ],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の符号化格子辺集合 ", math(String.raw`\widetilde{\mathcal E}_{\square}(S)`),
+                            " から頂点辺グラフ ", math(String.raw`G_S`),
+                            " の辺集合への写像を ",
+                            math(String.raw`\theta_S(e):=\operatorname{end}_{\square}(e)`),
+                            " と定める（", ref("def_encoded_cell_edge_set"), "、", ref("def_cell_vertex_graph"),
+                            "）。この写像は全単射である。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の ", math(String.raw`e,f\in\widetilde{\mathcal E}_{\square}(S)`),
+                            " について ", math(String.raw`\theta_S(e)=\theta_S(f)`),
+                            " と仮定する。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\operatorname{end}_{\square}(e)
+&=\operatorname{end}_{\square}(f)
+&&\bigl(\because\ \theta_S(e)=\theta_S(f),\ \theta_S\text{ の定義}\bigr)\\
+e&=f
+&&\bigl(\because\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "よって ", math(String.raw`\theta_S`), " は単射である。",
+                            ref("claim_cell_vertex_graph_edge_image"),
+                            " により像は ", math(String.raw`E(G_S)`),
+                            " の全体だから全射でもある。",
                           ]),
                         ],
                       },

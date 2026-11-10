@@ -30,6 +30,7 @@ export const ALL_LABELS = [
   "claim_cell_boundary_vertex_balance",
   "claim_cell_boundary_winding_zero",
   "claim_cell_edge_endpoints_belong_to_cell_vertices",
+  "claim_cell_graph_edge_bijection",
   "claim_cell_set_boundary_coefficients",
   "claim_cell_vertex_graph_edge_image",
   "claim_closed_walk_bijection",

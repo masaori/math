@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.GridEdgeEndpointsInCellVertices
+import Ising2DLambda.KacWard.GridEdgeEndpointsInjective
 import Ising2DLambda.NecSuf.KacWard.CellVertexGraph
 import Mathlib.Combinatorics.SimpleGraph.Finite
 import Mathlib.Tactic
@@ -24,6 +25,15 @@ theorem cellGraphEdge_endpointSet (cells : Finset GridCell) (e : cellEdges cells
     (cellGraphEdge cells e).toFinset.image Subtype.val = gridEdgeEndpoints e.1 := by
   rcases e with ⟨⟨b, r, c⟩, he⟩
   cases b <;> simp [cellGraphEdge, Sym2.toFinset_mk_eq, gridEdgeEndpoints]
+
+/-- Distinct coordinate encoded grid edges remain distinct as graph edges. -/
+theorem cellGraphEdge_injective (cells : Finset GridCell) :
+    Function.Injective (cellGraphEdge cells) := by
+  intro e f h
+  have hsets := congrArg (fun edge : Sym2 (cellVertices cells) =>
+    edge.toFinset.image Subtype.val) h
+  rw [cellGraphEdge_endpointSet, cellGraphEdge_endpointSet] at hsets
+  exact Subtype.ext (gridEdgeEndpoints_injective hsets)
 
 /-- The simple graph whose vertices are precisely the corners of the cells. -/
 def cellVertexGraph (cells : Finset GridCell) : SimpleGraph (cellVertices cells) :=
@@ -53,6 +63,24 @@ theorem cellVertexGraph_edgeFinset (cells : Finset GridCell) :
     rcases Finset.mem_image.mp h with ⟨g, _, rfl⟩
     exact ⟨Finset.mem_image.mpr ⟨g, Finset.mem_attach _ _, rfl⟩,
       cellGraphEdge_not_diag cells g⟩
+
+/-- Coordinate encoded cell edges and graph edges correspond one to one. -/
+noncomputable def cellGraphEdgeEquiv (cells : Finset GridCell) :
+    cellEdges cells ≃ (cellVertexGraph cells).edgeFinset :=
+  Equiv.ofBijective
+    (fun e => (⟨cellGraphEdge cells e,
+      (cellVertexGraph_edgeFinset cells).symm ▸
+        Finset.mem_image.mpr ⟨e, Finset.mem_attach _ _, rfl⟩⟩ :
+        (cellVertexGraph cells).edgeFinset))
+    (by
+      constructor
+      · intro e f h
+        exact cellGraphEdge_injective cells (congrArg Subtype.val h)
+      · intro edge
+        obtain ⟨edge, hmem⟩ := edge
+        rw [cellVertexGraph_edgeFinset] at hmem
+        obtain ⟨e, _, he⟩ := Finset.mem_image.mp hmem
+        exact ⟨e, Subtype.ext he⟩)
 
 theorem cellVertexGraph_edgeFinset_from_necSuf (cells : Finset GridCell) :
     (cellVertexGraph cells).edgeFinset =
