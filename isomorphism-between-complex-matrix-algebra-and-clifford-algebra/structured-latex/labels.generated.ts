@@ -55,6 +55,7 @@ export const ALL_LABELS = [
   "claim_projection_onto_quotient_set_preserves_addition",
   "claim_projection_onto_quotient_set_preserves_multiplication",
   "claim_projection_onto_quotient_set_preserves_scalar_multiplication",
+  "claim_projection_onto_quotient_set_sends_ideal_elements_to_zero",
   "claim_quotient_addition_does_not_depend_on_representatives",
   "claim_quotient_algebra_is_complex_algebra",
   "claim_quotient_multiplication_does_not_depend_on_representatives",

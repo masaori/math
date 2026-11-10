@@ -10101,4 +10101,113 @@ X\cdot_{A/I}(Y+_{A/I}Z)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_projection_onto_quotient_set_sends_ideal_elements_to_zero",
+    kind: "claim",
+    title: { text: "商集合への射影は両側イデアルの元を零へ移す" },
+    labels: ["claim_projection_onto_quotient_set_sends_ideal_elements_to_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、",
+        math(String.raw`I`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について",
+      ]),
+      displayMath(String.raw`\pi_I(x)=0_{A/I}`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`\pi_I:A\to A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）、",
+        math(String.raw`0_{A/I}`),
+        " は商集合の上の演算の零元（",
+        ref("def_quotient_algebra_operations"),
+        "）であり、等号は ",
+        math(String.raw`I`),
+        " を法とする商集合 ",
+        math(String.raw`A/I`),
+        "（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）の元、すなわち ",
+        math(String.raw`A`),
+        " の部分集合としての等号である。",
+        math(String.raw`I`),
+        " は ",
+        math(String.raw`A`),
+        " の部分集合なので、",
+        math(String.raw`x`),
+        " は ",
+        math(String.raw`A`),
+        " の元でもあり、",
+        math(String.raw`\pi_I(x)`),
+        " は定まる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x\in I`),
+        " をとる。ℂ-線型空間についての定義・主張は、",
+        math(String.raw`V:=U_{\mathrm{vec}}(A)=(A,+_A,\ast_A,0_A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+        math(String.raw`x`),
+        " が ",
+        math(String.raw`I`),
+        " を法として ",
+        math(String.raw`0_A`),
+        " と合同であることを先に示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
+&=x+_A 0_A
+&&\left(\because\ \text{零ベクトルのスカラー倍は零ベクトル（}\lambda=-1_{\mathbb{C}}\text{）。}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&=x
+&&\left(\because\ 0_A\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "仮定 ",
+        math(String.raw`x\in I`),
+        " と上の等式により ",
+        math(String.raw`x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)\in I`),
+        " であり、合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "。",
+        math(String.raw`a`),
+        " に ",
+        math(String.raw`x`),
+        "、",
+        math(String.raw`b`),
+        " に ",
+        math(String.raw`0_A`),
+        " を当てる）により ",
+        math(String.raw`x\equiv_I 0_A`),
+        " である。これを使って、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi_I(x)&=[x]_I
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=[0_A]_I
+&&\left(\because\ x\equiv_I 0_A\ \text{と、剰余類が等しいことと代表が合同であることの同値の}\ \Leftarrow\ \text{（}a\ \text{に}\ x\text{、}b\ \text{に}\ 0_A\ \text{を当てる）。}\blkref{claim_residue_classes_are_equal_iff_congruent}\right)\\
+&=\pi_I(0_A)
+&&\left(\because\ \blkref{def_projection_onto_quotient_set}\right)\\
+&=0_{A/I}
+&&\left(\because\ \blkref{def_quotient_algebra_operations}\ \text{の零元}\ 0_{A/I}:=\pi_I(0_A)\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+  },
 ]);

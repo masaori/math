@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-10: 商集合への射影は両側イデアルの元を零へ移すこと（ラベル claim_projection_onto_quotient_set_sends_ideal_elements_to_zero）を示した。x≡_I 0_A を合同の定義で示し、剰余類の同値と零元の定義 0_{A/I}:=π_I(0_A) で π_I(x)=0_{A/I} を導いた。次は商代数の普遍性。
 - 2026-11-10: 商代数への射影が ℂ-代数の準同型であること（ラベル claim_projection_onto_quotient_algebra_is_algebra_homomorphism）を示した。射影が加法・乗法・スカラー倍を保つ三つの主張と、単位元の定義 1_{A/I}:=π_I(1_A) で四つの等式を確かめた。次は射影は両側イデアルの元を零へ移すこと
 - 2026-11-10: 商集合の上の演算の組が ℂ-代数であること（ラベル claim_quotient_algebra_is_complex_algebra）を示し、I を法とする商代数と名付けた。スカラー倍と乗法の両立は代表をとって A の両立の条件を移す鎖で示した。次は射影が ℂ-代数の準同型であること。
 - 2026-11-10: 商集合の上の演算の組が ℂ-線型空間であること（ラベル claim_quotient_set_operations_form_complex_vector_space）を示した。加法の四条件は環であることの主張を引き、スカラー倍の四条件は代表をとって U_vec(A) の公理を移す鎖で示した。次は商代数が ℂ-代数であること。
