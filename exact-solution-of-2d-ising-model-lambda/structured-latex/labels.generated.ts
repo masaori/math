@@ -187,6 +187,7 @@ export const ALL_LABELS = [
   "claim_global_spin_reversal_preserves_broken_edge",
   "claim_gluing_restriction_family",
   "claim_grid_edge_endpoint_encoding_injective",
+  "claim_grid_incident_four_edge_parity",
   "claim_height_one_boundary_all_edges_parity",
   "claim_height_one_boundary_horizontal_internal_parity",
   "claim_height_one_boundary_horizontal_seam_parity",

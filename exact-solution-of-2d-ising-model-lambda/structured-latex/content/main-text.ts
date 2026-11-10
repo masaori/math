@@ -68680,14 +68680,59 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
 &&\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{claim_cell_graph_edge_incidence_preserved}\bigr)
 \end{aligned}`),
                           paragraph(["有限集合の全単射によって接続辺数は等しい。整数の偶奇にも同じ等号を適用する。"]),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
+=\left|\{g\in\theta_S(A)\mid v\in g\}\right|
+\qquad\bigl(\because\ \text{上の制限した全単射}\bigr)`),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
+\Longleftrightarrow\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
+\qquad\bigl(\because\ \text{直前の整数の等号}\bigr)`),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_grid_incident_four_edge_parity",
+                        kind: "claim",
+                        title: { text: "格子頂点の四方向の偶奇条件は接続辺数の偶数性に等しい" },
+                        labels: ["claim_grid_incident_four_edge_parity"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.gridIncidentEven_iff",
+                          "Ising2DLambda.NecSuf.KacWard.fourEdgeMembershipParity",
+                          "Ising2DLambda.KacWard.gridIncidentEven_iff_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/grid-incident-four-edge-parity"],
+                        statement: [
+                          paragraph([
+                            "有限な符号化格子辺集合 ", math(String.raw`A\subset\{0,1\}\times\mathbb Z\times\mathbb Z`),
+                            " と頂点 ", math(String.raw`v=(r,c)\in\mathbb Z\times\mathbb Z`),
+                            " を取る。四つの接続候補を ",
+                            math(String.raw`e_1=(0,r,c),\ e_2=(0,r,c-1),\ e_3=(1,r,c),\ e_4=(1,r-1,c)`),
+                            " と書く。指示数 ", math(String.raw`\mathbf 1_A(e)\in\{0,1\}`),
+                            " は ", math(String.raw`e\in A`), " のとき一、それ以外で零と定める。すると次は同値である。",
+                          ]),
+                          displayMath(String.raw`\sum_{i=1}^{4}\mathbf 1_A(e_i)=0\quad(\bmod 2)
+\quad\Longleftrightarrow\quad
+\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2`),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("claim_grid_edge_endpoint_encoding_injective"),
+                            " の端点式より、", math(String.raw`v`),
+                            " に接続する符号化辺は ", math(String.raw`e_1,e_2,e_3,e_4`),
+                            " に限る。四つは相異なる。横辺と縦辺は最初の成分が異なり、",
+                            math(String.raw`c\ne c-1`), " かつ ", math(String.raw`r\ne r-1`), " である。",
+                          ]),
                           displayMath(String.raw`\begin{aligned}
+\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}
+&=A\cap\{e_1,e_2,e_3,e_4\}
+&&\bigl(\because\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)\\
 \left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
-&=\left|\{g\in\theta_S(A)\mid v\in g\}\right|
-&&\bigl(\because\ \text{上の制限した全単射}\bigr)\\
-\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
-&\Longleftrightarrow\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
-&&\bigl(\because\ \text{直前の整数の等号}\bigr)
+&=\sum_{i=1}^{4}\mathbf 1_A(e_i)
+&&\bigl(\because\ e_1,e_2,e_3,e_4\text{ は相異なる}\bigr)
 \end{aligned}`),
+                          paragraph(["整数の等号を二で割った剰余へ移すと、主張の同値を得る。"]),
                         ],
                       },
                     },
