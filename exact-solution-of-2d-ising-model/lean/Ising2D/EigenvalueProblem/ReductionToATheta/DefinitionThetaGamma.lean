@@ -140,11 +140,6 @@ theorem gamma2_neg :
           ((K.c1 : ℂ) * (Real.cos θ : ℂ) + Complex.I * (Real.sin θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) := by
         rw [sub_neg_eq_add]                       -- 6 行目: ℂ で `a - (-b) = a + b`（`a → c_1cos θ`, `b → i sin θ`）
 
-/-- `γ_1` は偶関数（`cos` が偶関数であることによる）。 -/
-@[simp]
-theorem gamma1_neg : gamma1 K (-θ) = gamma1 K θ := by
-  simp [gamma1, Real.cos_neg]
-
 /-- 人手 `def_gamma1_gamma2_of_theta` の `A(θ)_{2,1}` の 5 行の鎖。`def_A_theta` の定義に書いた読みのとおり、先頭の `-i` は
 `multiply_by_minus_one` の `-i`、積は左から括る（Lean の `-Complex.I * e * s * P` は `(((-I) * e) * s) * P` と読まれる）。
 人手の `(-x)y = -(xy)`（ℂ は体）は具体版が Lean に無く、mathlib の `neg_mul` で 1 回ずつ受ける。 -/

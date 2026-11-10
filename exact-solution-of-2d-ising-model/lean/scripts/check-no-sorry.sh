@@ -278,7 +278,6 @@ targets=(
   Ising2D.complex_conjugate_star_sum_conf
   Ising2D.exp_neg_I_mul_real_eq_cos_sub_I_mul_sin
   Ising2D.gamma2_neg
-  Ising2D.gamma1_neg
   Ising2D.AMat_eq
   Ising2D.AMat_two_one_eq_neg_gamma2_neg
   Ising2D.gamma2_neg_eq_neg_conj
