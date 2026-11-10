@@ -10210,4 +10210,120 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
       paragraph(["である。"]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_homomorphism_vanishing_on_ideal_takes_equal_values_on_congruent_elements",
+    kind: "claim",
+    title: { text: "両側イデアルの元を零へ移す準同型は、合同な元に同じ値をとる" },
+    labels: ["claim_homomorphism_vanishing_on_ideal_takes_equal_values_on_congruent_elements"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " と ",
+        math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。",
+        math(String.raw`\varphi:A\to B`),
+        " を ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）とし、",
+        math(String.raw`I`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`\varphi(x)=0_B`),
+        " であるとする。このとき、",
+        math(String.raw`A`),
+        " の任意の元 ",
+        math(String.raw`a,a'`),
+        " について、",
+        math(String.raw`a\equiv_I a'`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\varphi(a)=\varphi(a')`),
+      paragraph([
+        "である。ここで ",
+        math(String.raw`\equiv_I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする合同（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）であり、等号は ",
+        math(String.raw`B`),
+        " の元としての等号である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a,a'\in A`),
+        " を ",
+        math(String.raw`a\equiv_I a'`),
+        " を満たすようにとる。",
+        math(String.raw`x:=a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)`),
+        " と置く。合同の定義（",
+        ref("def_congruence_modulo_two_sided_ideal"),
+        "）により ",
+        math(String.raw`x\in I`),
+        " であり、仮定により ",
+        math(String.raw`\varphi(x)=0_B`),
+        " である。ℂ-線型空間についての定義・主張は、",
+        math(String.raw`U_{\mathrm{vec}}(B)=(B,+_B,\ast_B,0_B)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。準備として、",
+        math(String.raw`y:=\varphi(a')\in B`),
+        " と置き、",
+        math(String.raw`(-1_{\mathbb{C}})\ast_B y`),
+        " と ",
+        math(String.raw`y`),
+        " の和を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((-1_{\mathbb{C}})\ast_B y\bigr)+_B y
+&=\bigl((-1_{\mathbb{C}})\ast_B y\bigr)+_B(1_{\mathbb{C}}\ast_B y)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)\ast_B y
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_B y
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=0_{\mathbb{C}}\ast_B y
+&&\left(\because\ -1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元。}\blkref{def_congruence_modulo_two_sided_ideal}\right)\\
+&=0_B
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（その主張の}\ x\ \text{に}\ y\ \text{を当てる）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph(["これを使って、"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(a)
+&=\varphi(a)+_B 0_B
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\varphi(a)+_B\Bigl(\bigl((-1_{\mathbb{C}})\ast_B y\bigr)+_B y\Bigr)
+&&\left(\because\ \text{上の準備の等式}\right)\\
+&=\Bigl(\varphi(a)+_B\bigl((-1_{\mathbb{C}})\ast_B y\bigr)\Bigr)+_B y
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\Bigl(\varphi(a)+_B\bigl((-1_{\mathbb{C}})\ast_B\varphi(a')\bigr)\Bigr)+_B y
+&&\left(\because\ y\ \text{の定義}\right)\\
+&=\Bigl(\varphi(a)+_B\varphi\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)\Bigr)+_B y
+&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_linear_map}\right)\\
+&=\varphi\Bigl(a+_A\bigl((-1_{\mathbb{C}})\ast_A a'\bigr)\Bigr)+_B y
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_linear_map}\right)\\
+&=\varphi(x)+_B y
+&&\left(\because\ x\ \text{の定義}\right)\\
+&=0_B+_B y
+&&\left(\because\ x\in I\ \text{と仮定}\right)\\
+&=y+_B 0_B
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=y
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\varphi(a')
+&&\left(\because\ y\ \text{の定義}\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+  },
 ]);
