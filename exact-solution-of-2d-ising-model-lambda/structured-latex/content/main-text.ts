@@ -68741,6 +68741,64 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_graph_even_edge_bijection",
+                        kind: "claim",
+                        title: { text: "格子の偶辺集合全体は頂点辺グラフの偶辺集合全体に対応する" },
+                        labels: ["claim_cell_graph_even_edge_bijection"],
+                        habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.cellGraphEdge_even_iff",
+                          "Ising2DLambda.KacWard.cellGraphEvenEdge_bijective",
+                          "Ising2DLambda.NecSuf.KacWard.subsetProperty_bijective_of_edgeEquiv",
+                          "Ising2DLambda.KacWard.cellGraphEvenEdge_bijective_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/cell-graph-even-edge-bijection"],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " の符号化辺集合の部分集合 ", math(String.raw`A\subset\widetilde{\mathcal E}_{\square}(S)`),
+                            " を取る。", ref("claim_cell_graph_edge_bijection"), " の写像 ",
+                            math(String.raw`\theta_S`), " を用いる。", ref("def_cell_vertex_graph"),
+                            " の頂点辺グラフ ", math(String.raw`G_S`),
+                            " について、偶辺集合全体を次で定める。",
+                          ]),
+                          displayMath(String.raw`\mathcal E(G_S):=\{B\subset E(G_S):\forall v\in\mathcal V_{\square}(S),\ |\{g\in B:v\in g\}|\equiv0\pmod2\}`),
+                          paragraph([
+                            "全格子頂点での接続辺数が偶数である ", math(String.raw`A`),
+                            " の全体から ", math(String.raw`\mathcal E(G_S)`),
+                            " へ、次の写像は全単射である。",
+                          ]),
+                          displayMath(String.raw`\theta_S(A):=\{\theta_S(e)\mid e\in A\}`),
+                        ],
+                        proof: [
+                          paragraph([
+                            "任意の ", math(String.raw`v\in\mathcal V_{\square}(S)`),
+                            " で、", ref("claim_cell_graph_incident_edge_parity_preserved"),
+                            " は ", math(String.raw`A`), " と ", math(String.raw`\theta_S(A)`),
+                            " の接続辺数の偶奇が一致することを示す。",
+                          ]),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|\equiv0\pmod2
+\Longleftrightarrow
+\left|\{g\in\theta_S(A)\mid v\in g\}\right|\equiv0\pmod2
+\qquad\bigl(\because\ \blkref{claim_cell_graph_incident_edge_parity_preserved}\bigr)`),
+                          paragraph([
+                            "格子頂点 ", math(String.raw`v\notin\mathcal V_{\square}(S)`),
+                            " には ", math(String.raw`A`), " の辺は接続しない（",
+                            ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）。",
+                            "従って全格子頂点で偶数という条件は、", math(String.raw`G_S`),
+                            " の全頂点で偶数という条件と同値である。",
+                          ]),
+                          paragraph([
+                            ref("claim_cell_graph_edge_bijection"), " により ",
+                            math(String.raw`\theta_S`), " は辺集合上の全単射である。",
+                            "辺集合の部分集合への写像とその逆写像を取れば全単射となり、上の同値により偶辺集合だけに制限できる。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_plane_cell_boundary_edge_set",
@@ -69924,15 +69982,18 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                       ]),
                       paragraph([
                         math(String.raw`G_S`), " の偶辺集合全体を ", math(String.raw`\mathcal E(G_S)`),
-                        " と置く。", ref("claim_cell_boundary_even_edge_bijection"),
-                        " により、", math(String.raw`S`), " の部分集合全体と ",
+                        " と置く。", ref("claim_cell_boundary_even_edge_bijection"), " と ",
+                        ref("claim_cell_graph_even_edge_bijection"),
+                        " を合成する。端点集合で記した格子辺は ", ref("claim_grid_edge_endpoint_encoding_injective"),
+                        " と ", ref("claim_cell_vertex_graph_edge_image"), " により符号化辺へ一意に戻せる。",
+                        "従って ", math(String.raw`S`), " の部分集合全体と ",
                         math(String.raw`\mathcal E(G_S)`), " は全単射である。",
                         "有限集合の部分集合は二の元の個数乗だけあり、",
                         ref("claim_even_edge_set_count"), " も適用できるので",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 |\mathcal E(G_S)|&=\bigl|\{T:T\subset S\}\bigr|
-&&\bigl(\because\ \blkref{claim_cell_boundary_even_edge_bijection}\bigr)\\
+&&\bigl(\because\ \blkref{claim_cell_boundary_even_edge_bijection},\ \blkref{claim_cell_graph_even_edge_bijection}\bigr)\\
 &=2^{|S|}
 &&\bigl(\because\ \text{有限集合の部分集合の個数}\bigr)\\
 &=2^{E_S+1-V_S}

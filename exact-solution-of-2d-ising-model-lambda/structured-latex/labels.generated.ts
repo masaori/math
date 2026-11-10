@@ -32,6 +32,7 @@ export const ALL_LABELS = [
   "claim_cell_edge_endpoints_belong_to_cell_vertices",
   "claim_cell_graph_edge_bijection",
   "claim_cell_graph_edge_incidence_preserved",
+  "claim_cell_graph_even_edge_bijection",
   "claim_cell_graph_incident_edge_parity_preserved",
   "claim_cell_set_boundary_coefficients",
   "claim_cell_vertex_graph_edge_image",
