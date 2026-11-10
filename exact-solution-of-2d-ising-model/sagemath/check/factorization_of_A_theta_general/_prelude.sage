@@ -121,6 +121,11 @@ CHAINS = {
         (C*c1 - S*s1*co, ['2ab=s1']),
         (c2s*c1 - s2s*s1*co, ['C=c2s', 'S=s2s']),
         (c1*c2s - s1*s2s*co, []),
+        # 末尾の 3 行（real_inclusion_preserves_product を 2 箇所へ、同じく 1 箇所へ、real_inclusion_preserves_difference）は
+        # 実数の像を動かすだけで、像を不定元に置くこの環では同じ多項式になる。像の区別は check_diagonal_entries_as_real_image.sage が見る。
+        (c1*c2s - s1*s2s*co, []),
+        (c1*c2s - s1*s2s*co, []),
+        (c1*c2s - s1*s2s*co, []),
     ],
     'P_22': [
         (P[1, 1], None),
@@ -135,6 +140,11 @@ CHAINS = {
         (C*c1 - S*(2*a*b)*co, []),
         (C*c1 - S*s1*co, ['2ab=s1']),
         (c2s*c1 - s2s*s1*co, ['C=c2s', 'S=s2s']),
+        (c1*c2s - s1*s2s*co, []),
+        # 末尾の 3 行（real_inclusion_preserves_product を 2 箇所へ、同じく 1 箇所へ、real_inclusion_preserves_difference）は
+        # 実数の像を動かすだけで、像を不定元に置くこの環では同じ多項式になる。像の区別は check_diagonal_entries_as_real_image.sage が見る。
+        (c1*c2s - s1*s2s*co, []),
+        (c1*c2s - s1*s2s*co, []),
         (c1*c2s - s1*s2s*co, []),
     ],
     'P_12': [

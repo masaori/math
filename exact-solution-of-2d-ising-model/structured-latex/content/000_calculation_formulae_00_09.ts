@@ -3978,6 +3978,51 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
     },
   },
   {
+    id: "calc_formulae_claim_real_inclusion_preserves_difference",
+    kind: "claim",
+    title: { text: "実数の差の包含は包含の差に等しい" },
+    labels: ["real_inclusion_preserves_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`y, z \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`y_{\mathbb{C}} - z_{\mathbb{C}} = (y - z)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、左辺の差は ",
+        ref("def_complex_difference"),
+        " の差である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+y_{\mathbb{C}} - z_{\mathbb{C}}
+&= y_{\mathbb{C}} + \bigl(-z_{\mathbb{C}}\bigr)
+&&(\because\ \blkref{def_complex_difference})\\
+&= y_{\mathbb{C}} + (-1_{\mathbb{C}})\,z_{\mathbb{C}}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= y_{\mathbb{C}} + (-1)_{\mathbb{C}}\,z_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}})\\
+&= y_{\mathbb{C}} + \bigl((-1)\,z\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(y + (-1)\,z\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_sum})\\
+&= (y - z)_{\mathbb{C}}
+&&(\because\ \text{実数の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。exponential_series_of_even_odd_power_terms の証明の準備にあった同じ 6 行の鎖を主張にし、factorization_of_A_theta_general の Step 2・3 の末尾（ℂ の式を def_A_theta の (1,1)・(2,2) 成分の実数の像へ移す段）からも引けるようにした。準備の 5 行目の根拠「real_inclusion_preserves_finite_sum を 2 項へ当てた」は、2 項の場合そのものの real_inclusion_preserves_sum にした。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_minus_one_times_minus_one_is_one_in_cc",
     kind: "claim",
     title: { tex: String.raw`(-1_{\mathbb{C}})(-1_{\mathbb{C}})=1_{\mathbb{C}}` },

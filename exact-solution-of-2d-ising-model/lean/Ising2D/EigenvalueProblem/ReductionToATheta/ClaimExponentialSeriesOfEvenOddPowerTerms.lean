@@ -13,7 +13,6 @@
 | --- | --- |
 | 証明の冒頭の `a_n := (x^n + (-x)^n)/(2·n!)`・`b_n := (x^n - (-x)^n)/(2·n!)` | `evenOddCoeffA`・`evenOddCoeffB` |
 | 準備（`a_n, b_n` の値）の `n` 偶数の 3 行 × 2、`n` 奇数の 3 行 × 2 | `evenOddCoeffA_of_even`・`evenOddCoeffB_of_even`・`evenOddCoeffA_of_odd`・`evenOddCoeffB_of_odd` |
-| 準備（実数の差の像）の 6 行 `y_ℂ − z_ℂ = ⋯ = (y − z)_ℂ` | `real_inclusion_sub` の calc の 6 段 |
 | 中間目標「各項」の `n` 偶数の 10 行 | `evenOddTerm_of_even` の calc の 10 段 |
 | 中間目標「各項」の `n` 奇数の 12 行 | `evenOddTerm_of_odd` の calc の 12 段 |
 | 中間目標「各項」の偶数と奇数の 2 つの場合をまとめたもの | `evenOddTerm` |
@@ -36,8 +35,8 @@
 - 中間目標「各項」の偶数の 3 行目と奇数の 6 行目で右辺から左辺へ引く `real_inclusion_preserves_power`（`r → x`、`m → n`）は
   具体版 `real_inclusion_of_power`（`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesPower.lean`）の逆向き。
 - `real_inclusion_preserves_product` は `real_inclusion_mul`。
-- 人手が「実数の差の像」の 5 行目で 2 項へ当てる `real_inclusion_preserves_finite_sum` は、2 項の場合の
-  `real_inclusion_preserves_sum`（`real_inclusion_add`）で当てる。
+- 中間目標「差」で 2 箇所へ同時に当てる `real_inclusion_preserves_difference` は具体版 `real_inclusion_sub`
+  （`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesDifference.lean`）。
 - `def_complex_difference`・`multiply_by_minus_one`・`complex_times_zero_is_zero` と `complex_numbers_form_a_field` の
   積の結合律・可換律は Lean の具体版が無いので、既存の慣行どおり mathlib の `sub_eq_add_neg`・`neg_one_mul`・`mul_zero`・
   `mul_assoc`・`mul_comm` である。`scalar_multiple_is_associative` も同じく `smul_smul`。
@@ -68,7 +67,7 @@
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutative
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSum
@@ -138,20 +137,6 @@ theorem evenOddCoeffB_of_odd (x : ℝ) {n : ℕ} (hn : Odd n) :
     _ = x ^ n / (n ! : ℝ) := by
         have h : (n ! : ℝ) ≠ 0 := by exact_mod_cast n.factorial_ne_zero
         field_simp; ring                                      -- 実数の四則
-
-/-! ## 準備（実数の差の像） -/
-
-/-- **人手の準備（実数の差の像）**: `y_ℂ − z_ℂ = (y − z)_ℂ`。人手の 6 行と calc の 6 段が 1 対 1 である。 -/
-theorem real_inclusion_sub (y z : ℝ) : (y : ℂ) - (z : ℂ) = ((y - z : ℝ) : ℂ) :=
-  calc (y : ℂ) - (z : ℂ)
-      = (y : ℂ) + -(z : ℂ) := sub_eq_add_neg _ _              -- `def_complex_difference`
-    _ = (y : ℂ) + (-1 : ℂ) * (z : ℂ) := by rw [neg_one_mul]   -- `multiply_by_minus_one`
-    _ = (y : ℂ) + ((-1 : ℝ) : ℂ) * (z : ℂ) := by
-        rw [Complex.ofReal_neg, Complex.ofReal_one]           -- `inclusion_rr_to_cc` の `-1_ℂ = ι_{ℝ→ℂ}(-1) = (-1)_ℂ`
-    _ = (y : ℂ) + (((-1) * z : ℝ) : ℂ) := by
-        rw [real_inclusion_mul]                               -- `real_inclusion_preserves_product`
-    _ = ((y + (-1) * z : ℝ) : ℂ) := real_inclusion_add _ _    -- `real_inclusion_preserves_finite_sum` を 2 項へ（`real_inclusion_preserves_sum`）
-    _ = ((y - z : ℝ) : ℂ) := by congr 1; ring                 -- 実数の四則（ℝ の式 `y + (-1)z = y - z`）
 
 /-! ## 中間目標「各項」 -/
 
@@ -348,7 +333,7 @@ theorem evenOddPartialSum_sub_limit_apply (A B : Matrix (Fin d) (Fin d) ℂ) (x 
         ring                                                  -- 人手 6: ℂ の四則
     _ = ((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ) * A p q
           + (c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)) * B p q := by
-        rw [real_inclusion_sub, real_inclusion_sub]           -- 人手 7: 準備の実数の差の像を 2 箇所へ同時適用
+        rw [real_inclusion_sub, real_inclusion_sub]           -- 人手 7: `real_inclusion_preserves_difference` を 2 箇所へ同時適用
     _ = (((evenOddAlpha x N - Real.cosh x : ℝ) : ℂ) • A) p q
           + ((c * ((evenOddBeta x N - Real.sinh x : ℝ) : ℂ)) • B) p q := by
         rw [matrix_smul_apply, matrix_smul_apply]             -- 人手 8: `def_matrix_scalar_multiple`

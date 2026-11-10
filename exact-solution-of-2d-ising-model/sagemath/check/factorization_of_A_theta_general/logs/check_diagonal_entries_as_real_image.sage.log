@@ -1,0 +1,6 @@
+PASS: Step 2・3 の末尾: 「(c_1)_C(c_2^*)_C - (s_1)_C(s_2^*)_C(cos θ)_C」=「(c_1c_2^*)_C - (s_1s_2^*)_C(cos θ)_C」
+PASS: Step 2・3 の末尾: 「(c_1c_2^*)_C - (s_1s_2^*)_C(cos θ)_C」=「(c_1c_2^*)_C - (s_1s_2^* cos θ)_C」
+PASS: Step 2・3 の末尾: 「(c_1c_2^*)_C - (s_1s_2^* cos θ)_C」=「(c_1c_2^* - s_1s_2^* cos θ)_C」
+PASS: 終点 = def_A_theta の (1,1)・(2,2) 成分 (c_1c_2^* - s_1s_2^* cos θ)_C（虚部 0）
+PASS: 対照: c_2^* の位置に虚部 1 の数を置くと実数の像にならない
+RESULT: PASS

@@ -1,0 +1,11 @@
+PASS: 「y_C - z_C」=「y_C + (-z_C)」
+PASS: 「y_C + (-z_C)」=「y_C + (-1_C) z_C」
+PASS: 「y_C + (-1_C) z_C」=「y_C + (-1)_C z_C」
+PASS: 「y_C + (-1)_C z_C」=「y_C + ((-1)z)_C」
+PASS: 「y_C + ((-1)z)_C」=「(y + (-1)z)_C」
+PASS: 「(y + (-1)z)_C」=「(y - z)_C」
+PASS: 主張 y_C - z_C = (y - z)_C
+PASS: 独立な経路: QQ(i)[Y,Z] の差の実部が Y - Z、虚部が 0
+PASS: 対照: y_C - z_C ≠ (y + z)_C
+PASS: 対照: 虚部が 1 の数から引くと実数の像にならない
+RESULT: PASS

@@ -5386,28 +5386,6 @@ b_n
 &&(\because \text{実数の四則})
 \end{aligned}`,
       ),
-      paragraph([
-        "である。準備（実数の差の像）: ",
-        math(String.raw`y, z \in \mathbb{R}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-y_{\mathbb{C}} - z_{\mathbb{C}}
-&= y_{\mathbb{C}} + \bigl(-z_{\mathbb{C}}\bigr)
-&&(\because \blkref{def_complex_difference}) \\
-&= y_{\mathbb{C}} + (-1_{\mathbb{C}})\,z_{\mathbb{C}}
-&&(\because \blkref{multiply_by_minus_one}) \\
-&= y_{\mathbb{C}} + (-1)_{\mathbb{C}}\,z_{\mathbb{C}}
-&&(\because \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}}) \\
-&= y_{\mathbb{C}} + \bigl((-1)\,z\bigr)_{\mathbb{C}}
-&&(\because \blkref{real_inclusion_preserves_product}) \\
-&= \bigl(y + (-1)\,z\bigr)_{\mathbb{C}}
-&&(\because \blkref{real_inclusion_preserves_finite_sum}\ \text{を 2 項へ当てた}) \\
-&= (y - z)_{\mathbb{C}}
-&&(\because \text{実数の四則})
-\end{aligned}`,
-      ),
       paragraph(["である。"]),
       paragraph([
         "中間目標: 各項。",
@@ -5539,7 +5517,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
  + \Bigl(c\,\bigl((\beta_N)_{\mathbb{C}} - (\sinh x)_{\mathbb{C}}\bigr)\Bigr)B_{pq}
 &&(\because \mathbb{C}\ \text{の四則}) \\
 &= (\alpha_N - \cosh x)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B_{pq}
-&&(\because \text{準備の実数の差の像を 2 箇所へ同時適用}) \\
+&&(\because \blkref{real_inclusion_preserves_difference}\ \text{を 2 箇所へ同時適用}) \\
 &= \bigl((\alpha_N - \cosh x)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= \Bigl((\alpha_N - \cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
@@ -5691,6 +5669,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
       notes: [
         "2026-11-02（全証明の SageMath 検算。sagemath/check/exponential_series_of_even_odd_power_terms/）: extract_taylor_coefficient_of_check_Z_Y の証明が、級数を偶数項と奇数項の二つの級数に分けて n に依らない因子を和の外へ出し、証明の無い sinh_cosh_taylor_series を代入していた（無限和の並べ替えと分割の根拠が無かった）ので、その四つの式に共通の計算を部分和の等式と極限で示すこの主張として切り出した。偶奇の場合分けは a_n・b_n の (x^n ± (-x)^n)/(2·n!) にまとめ、極限は bridge の two_by_two_transfer_identity の証明と同じく E_N(±x) と三角不等式で取る。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備（冪の像）(x_C)^n = (x^n)_C の帰納法は real_inclusion_preserves_power と向きが逆なだけの同じ内容だったので外し、中間目標「各項」の 2 か所でその主張を右辺から左辺へ引くようにした。主張の冪の約束を def_power_of_real_number・def_power_of_complex_number の参照にした（式は scalar_exp_is_limit_of_partial_sums の約束と同じ）。値と主張は不変。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 準備（実数の差の像）の 6 行の鎖を主張 real_inclusion_preserves_difference として切り出し、中間目標「差」の 1 か所でその主張を引くようにした。鎖の中身・値と主張は不変。",
       ],
     },
   },
@@ -6797,15 +6776,19 @@ e_- := \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr) \in \mathbb{C}
         math(String.raw`(-i)(\theta)_{\mathbb{C}}`),
         " である）。",
         math(String.raw`A(\theta)`),
-        "（",
+        " の成分は ",
         ref("def_A_theta"),
-        "）の成分に現れる実数 ",
-        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^*, \cos\theta, \sin\theta`),
-        " は、",
+        " の読みのとおりで、(1,1) 成分と (2,2) 成分は実数の ",
         ref("inclusion_rr_to_cc"),
-        " による像として ",
+        " による像、(1,2) 成分と (2,1) 成分は実数の像を ",
         math(String.raw`\mathbb{C}`),
-        " の演算にかける。",
+        " の演算にかけた式である。Step 2・3 の末尾の 3 行に現れる三つの因子の積 ",
+        math(String.raw`(s_1)_{\mathbb{C}}(s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`s_1 s_2^*\cos\theta \in \mathbb{R}`),
+        " は左から括る（",
+        math(String.raw`xyw = (xy)w`),
+        "）。",
         math(String.raw`\mathbb{R}`),
         " を使うのは、",
         math(String.raw`\cosh, \sinh`),
@@ -7029,7 +7012,13 @@ P_{11}
 &= (c_2^*)_{\mathbb{C}} (c_1)_{\mathbb{C}} - (s_2^*)_{\mathbb{C}}(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
 &&(\because\ C, S\ \text{の定義を 2 箇所へ})\\
 &= (c_1)_{\mathbb{C}}(c_2^*)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
-&&(\because\ \mathbb{C}\ \text{の積の交換律})
+&&(\because\ \mathbb{C}\ \text{の積の交換律})\\
+&= (c_1 c_2^*)_{\mathbb{C}} - (s_1 s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
+&= (c_1 c_2^*)_{\mathbb{C}} - (s_1 s_2^*\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= (c_1 c_2^* - s_1 s_2^*\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_difference})
 \end{aligned}`),
       paragraph([
         "これは ",
@@ -7064,7 +7053,13 @@ P_{22}
 &= (c_2^*)_{\mathbb{C}} (c_1)_{\mathbb{C}} - (s_2^*)_{\mathbb{C}}(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
 &&(\because\ C, S\ \text{の定義を 2 箇所へ})\\
 &= (c_1)_{\mathbb{C}}(c_2^*)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
-&&(\because\ \mathbb{C}\ \text{の積の交換律})
+&&(\because\ \mathbb{C}\ \text{の積の交換律})\\
+&= (c_1 c_2^*)_{\mathbb{C}} - (s_1 s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
+&= (c_1 c_2^*)_{\mathbb{C}} - (s_1 s_2^*\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= (c_1 c_2^* - s_1 s_2^*\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_difference})
 \end{aligned}`),
       paragraph([
         "これは ",
@@ -7161,6 +7156,7 @@ P_{21}
         "2026-08-19 の式変形統一で、Step 5 の「Step 4 とまったく同じ計算（θ → -θ）」に畳まれていた補助的な等式の導出と P_21 の整理を、Step 4 と同形の一続きの鎖（補助等式 5 段と P_21 の 6 段）へ開いた。内容・参照は変えていない。",
         "2026-11-02（全証明の SageMath 検算）: a, b, C, S と e_± := exp(±i(θ)_C) を ℂ の元として置き直し、A(θ) の実数の成分を包含の像として読んだ。本文に無かった「cosh_sinh_basic_properties の倍角公式」の参照を cosh_addition_formula・sinh_double_angle_formula と包含の積・和の保存に、行列の theorem_exp_product (n=1) を scalar_exp_product・scalar_exp_zero に付け替え、e_± = cos θ ± i sin θ を euler_formula_cos_sin から導く行を置いた。Step 4・5 の exp(±2iθ) を e_±e_± のまま扱い、Step 6 に積の結合律を引いた。主張の中身は不変。検算は sagemath/check/factorization_of_A_theta_general/。",
         "2026-11-09（Lean の通しの証明）: euler_formula_cos_sin は -iθ を -(iθ) と読む。e_- := exp((-i)(θ)_ℂ) と置いたまま引いていた準備の 5〜7 本目に、e_± の定義を展開する行と、negative_i_times_complex_is_negation_of_i_times で exp((-i)(θ)_ℂ) を exp(-(i(θ)_ℂ)) へ書き換える行を 1 行ずつ足した。主張と記号の置き方は変えていない。",
+        "2026-11-10（Lean の通しの証明）: Step 2・3 の鎖は ℂ の式 (c_1)_ℂ(c_2^*)_ℂ - (s_1)_ℂ(s_2^*)_ℂ(cos θ)_ℂ で止めて def_A_theta の (1,1)・(2,2) 成分（実数の像）だと言っていたので、real_inclusion_preserves_product を 2 行、real_inclusion_preserves_difference を 1 行足して実数の像まで運んだ。証明冒頭の「A(θ) の成分に現れる実数は像として ℂ の演算にかける」を def_A_theta の読みへの参照にし、末尾の 3 行の三つの因子の積を左から括ることを書いた。主張は不変。",
       ],
     },
   },

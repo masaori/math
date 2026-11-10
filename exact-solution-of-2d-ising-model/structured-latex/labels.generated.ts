@@ -536,6 +536,7 @@ export const ALL_LABELS = [
   "real_factor_of_pauli_y_has_real_entries",
   "real_identity_matrix_is_left_unit_of_real_matrix_vector_product",
   "real_inclusion_of_one_half_is_inverse_of_two",
+  "real_inclusion_preserves_difference",
   "real_inclusion_preserves_finite_product",
   "real_inclusion_preserves_finite_sum",
   "real_inclusion_preserves_power",

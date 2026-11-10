@@ -1,5 +1,5 @@
 # 対象ラベル: exponential_series_of_even_odd_power_terms
-# 証明の二つの準備（a_n・b_n の偶奇の値、実数の差の像 y_C - z_C = (y-z)_C）の全行と、中間目標「各項」で引く real_inclusion_preserves_power の当てはめ。
+# 証明の準備（a_n・b_n の偶奇の値）の全行と、中間目標「各項」で引く real_inclusion_preserves_power の当てはめ。
 # ℂ は definition_of_cc どおり実数の対で持ち（complex_as_real_pairs.sage）、ℝ の量は QQ 上の多項式環の元とする。
 # 不定元での等号は、不定元へ任意の実数を代入しても成り立つ（代入は環準同型）。
 load("_prelude.sage")
@@ -37,18 +37,4 @@ for n in range(N_MAX + 1):
     if n >= 1:
         report((n % 2 == 0 and a_def != 0) or (n % 2 == 1 and b_def != 0), f"n={n}: 対照 a_n・b_n の偶奇を取り違えると 0 でない")
 
-# 準備（実数の差の像）: 6 行。
-S = PolynomialRing(QQ, ['y', 'z'])
-y, z = S.gens()
-yC, zC = iota(y, S), iota(z, S)
-run_chain([
-    ("y_C - z_C", cc_sub(yC, zC, S)),
-    ("y_C + (-z_C)", cc_add(yC, cc_neg(zC, S))),
-    ("y_C + (-1_C) z_C", cc_add(yC, cc_mul(iota(-1, S), zC))),
-    ("y_C + (-1)_C z_C", cc_add(yC, cc_mul(iota(S(-1), S), zC))),
-    ("y_C + ((-1)z)_C", cc_add(yC, iota((-1) * z, S))),
-    ("(y + (-1)z)_C", iota(y + (-1) * z, S)),
-    ("(y - z)_C", iota(y - z, S)),
-], "実数の差の像")
-report(cc_sub(yC, zC, S) != iota(y + z, S), "対照: y_C - z_C ≠ (y+z)_C")
 print("RESULT: PASS")

@@ -127,11 +127,4 @@ PASS: n=12 偶数 b_n: 「b_n」=「(x^n-(-1)^n x^n)/(2n!)」
 PASS: n=12 偶数 b_n: 「(x^n-(-1)^n x^n)/(2n!)」=「(x^n-x^n)/(2n!)」
 PASS: n=12 偶数 b_n: 「(x^n-x^n)/(2n!)」=「0」
 PASS: n=12: 対照 a_n・b_n の偶奇を取り違えると 0 でない
-PASS: 実数の差の像: 「y_C - z_C」=「y_C + (-z_C)」
-PASS: 実数の差の像: 「y_C + (-z_C)」=「y_C + (-1_C) z_C」
-PASS: 実数の差の像: 「y_C + (-1_C) z_C」=「y_C + (-1)_C z_C」
-PASS: 実数の差の像: 「y_C + (-1)_C z_C」=「y_C + ((-1)z)_C」
-PASS: 実数の差の像: 「y_C + ((-1)z)_C」=「(y + (-1)z)_C」
-PASS: 実数の差の像: 「(y + (-1)z)_C」=「(y - z)_C」
-PASS: 対照: y_C - z_C ≠ (y+z)_C
 RESULT: PASS

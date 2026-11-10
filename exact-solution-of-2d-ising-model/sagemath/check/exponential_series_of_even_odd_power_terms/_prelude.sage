@@ -1,7 +1,7 @@
 # 対象ラベル: exponential_series_of_even_odd_power_terms
 # 共通の準備: hyperbolic_by_definition.sage（本文の実数の exp を囲むボール。one_by_one_matrix.sage の GAUSSIAN = QQ(i) も読む）、
 # matrix_operations_by_definition.sage・matrix_negation_and_difference_by_definition.sage（行列の和・スカラー倍・差を本文の成分の式で組む）、
-# complex_as_real_pairs.sage（definition_of_cc の ℂ を実数の対で持つ。real_inclusion_preserves_power の当てはめと実数の差の像を、包含 r ↦ (r, 0) を区別して確かめる）。
+# complex_as_real_pairs.sage（definition_of_cc の ℂ を実数の対で持つ。real_inclusion_preserves_power・real_inclusion_preserves_difference の当てはめを、包含 r ↦ (r, 0) を区別して確かめる）。
 load("../../_shared/hyperbolic_by_definition.sage")
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
