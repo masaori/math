@@ -30,14 +30,40 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-- **(1)**: `θ~_{M+1-μ} = 2π - θ~_μ`。 -/
+/-- **(1)**: `θ~_{M+1-μ} = 2π - θ~_μ`（人手の 11 行に 1 段ずつ対応する）。
+
+人手の `(M_col)_ℝ` は、Lean では分母が `ℕ → ℝ` の像 `(M : ℝ)`（`thetaTilde` の定義）で、
+分子の `(M_col+1-μ)_ℝ` から分けた因子は `ℤ → ℝ` の像 `((M : ℤ) : ℝ)` である。2 行目で和と差の像を分けるときに、
+この二つの像が一致すること（`Int.cast_natCast`）を同じ段で当てて、以後どちらも `(M : ℝ)` と書く。
+人手の `a+b-c` は `(a+b)-c` と左から括る（Lean の `+`・`-` の括りと同じ）。 -/
 theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M ((M : ℤ) + 1 - μ) = 2 * Real.pi - thetaTilde M μ := by
   have hMR : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hM
-  rw [thetaTilde, thetaTilde]
-  push_cast
-  field_simp
-  ring
+  calc thetaTilde M ((M : ℤ) + 1 - μ)
+      = 2 * Real.pi * ((((M : ℤ) + 1 - μ : ℤ) : ℝ) - 1 / 2) / M := rfl
+          -- 1 行目: `θ~` の定義を `M_col+1-μ ∈ ℤ` で（`antiperiodic_exp_sum`）
+    _ = 2 * Real.pi * (((M : ℝ) + ((1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / M := by
+        rw [Int.cast_sub, Int.cast_add, Int.cast_natCast]
+          -- 2 行目: `ι_{ℤ→ℝ}` は和と零を保つので和と差を保つ
+    _ = 2 * Real.pi * (((M : ℝ) + 1 - (μ : ℝ)) - 1 / 2) / M := by
+        rw [Int.cast_one]                         -- 3 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+    _ = 2 * Real.pi * ((M : ℝ) + (1 - 1 / 2) - (μ : ℝ)) / M := by
+        rw [sub_right_comm, add_sub_assoc]
+          -- 4 行目: ℝ の加法の結合律と交換律（`(a-b)-c = (a-c)-b`、`(a+b)-c = a+(b-c)`）
+    _ = 2 * Real.pi * ((M : ℝ) + 1 / 2 - (μ : ℝ)) / M := by
+        rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]  -- 5 行目: `1_ℝ - ½ = ½`
+    _ = 2 * Real.pi * ((M : ℝ) + (1 / 2 - (μ : ℝ))) / M := by
+        rw [add_sub_assoc]                        -- 6 行目: ℝ の加法の結合律（差は加法の逆元の和）
+    _ = 2 * Real.pi * ((M : ℝ) - ((μ : ℝ) - 1 / 2)) / M := by
+        rw [← neg_sub (μ : ℝ) (1 / 2), ← sub_eq_add_neg]
+          -- 7 行目: ℝ で `½ - μ_ℝ = -(μ_ℝ - ½)` と、差は加法の逆元の和
+    _ = (2 * Real.pi * (M : ℝ) - 2 * Real.pi * ((μ : ℝ) - 1 / 2)) / M := by
+        rw [mul_sub]                              -- 8 行目: ℝ の分配法則
+    _ = 2 * Real.pi * (M : ℝ) / M - 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M :=
+        sub_div _ _ _                             -- 9 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の差
+    _ = 2 * Real.pi - 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M := by
+        rw [mul_div_cancel_right₀ _ hMR]          -- 10 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
+    _ = 2 * Real.pi - thetaTilde M μ := rfl      -- 11 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
 
 /-- **(2) の準備の第一の鎖**（実数の側）: `j_ℝ θ~_{M+1-μ} = 2π j_ℝ + (-(j_ℝ θ~_μ))`。
 人手の 4 行（直前の (1)、ℝ の分配法則、ℝ の積の交換律、ℝ の差は加法の逆元の和）に 1 段ずつ対応する。 -/

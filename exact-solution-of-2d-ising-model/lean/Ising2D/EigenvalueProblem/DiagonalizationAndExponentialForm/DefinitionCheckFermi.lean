@@ -54,14 +54,34 @@ theorem gamma1_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
     _ = gamma1 K θ := by
         rw [gamma1]                               -- 3 行目: `def_gamma1_gamma2_of_theta`
 
-/-- 原文 `periodicity_of_check_fermi` (2): `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`。 -/
+/-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 8 行）。
+
+人手の `(M_col)_ℝ` は、Lean では分母が `ℕ → ℝ` の像 `(M : ℝ)`（`thetaTilde` の定義）で、
+分子の `(kM_col)_ℝ` の因子は `ℤ → ℝ` の像 `((M : ℤ) : ℝ)` である。3 行目で積の像を分けるときに、
+この二つの像が一致すること（`Int.cast_natCast`）を同じ段で当てて、以後どちらも `(M : ℝ)` と書く。
+人手の `2πk_ℝ(M_col)_ℝ` は、5 行目の分配法則が作る形どおり `2π(k_ℝ(M_col)_ℝ)` と括る。
+8 行目の約分はこの括りに対する `a(bc)/c = ab` で、`mul_div_assoc` と `mul_div_cancel_right₀` の 2 つの書き換えで当てる。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  rw [thetaTilde, thetaTilde]
-  push_cast
-  field_simp
-  ring
+  calc thetaTilde M (μ + k * M)
+      = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / M := rfl
+                                                  -- 1 行目: `θ̃` の定義を `μ+kM_col` で（`antiperiodic_exp_sum`）
+    _ = 2 * Real.pi * (((μ : ℝ) + ((k * M : ℤ) : ℝ)) - 1 / 2) / M := by
+        rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
+    _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * (M : ℝ)) - 1 / 2) / M := by
+        rw [Int.cast_mul, Int.cast_natCast]       -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
+    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * (M : ℝ)) / M := by
+        rw [add_sub_right_comm]                   -- 4 行目: ℝ の加法の結合律と交換律（`(a+b)-c = (a-c)+b`）
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * (M : ℝ))) / M := by
+        rw [mul_add]                              -- 5 行目: ℝ の分配法則
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M :=
+        add_div _ _ _                             -- 6 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
+    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * (M : ℝ)) / M := rfl
+                                                  -- 7 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
+    _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
+        rw [mul_div_assoc, mul_div_cancel_right₀ _ hM']
+                                                  -- 8 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
 
 /-- 原文 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`。 -/
 theorem gamma1_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :
