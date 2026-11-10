@@ -69581,8 +69581,18 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
 \end{aligned}`),
                       paragraph([
                         ref("claim_finite_connected_graph_has_spanning_tree"), " と ",
-                        ref("claim_finite_tree_edge_count"), " により ",
-                        math(String.raw`E_S+1\ge V_S`), " なので、指数の減算は切り捨てを含まない。",
+                        ref("claim_finite_tree_edge_count"), " により、",
+                        math(String.raw`G_S`), " の全域木の辺集合 ",
+                        math(String.raw`F_S\subseteq\mathcal E_{\square}(S)`), " を取れば",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+V_S&=|F_S|+1
+&&\bigl(\because\ \blkref{claim_finite_tree_edge_count}\bigr)\\
+&\le E_S+1
+&&\bigl(\because\ F_S\subseteq\mathcal E_{\square}(S)\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。指数の減算は切り捨てを含まない。",
                         "二の自然数乗は単射だから指数が等しい。整数の等式へ移すと",
                       ]),
                       displayMath(String.raw`\begin{aligned}
