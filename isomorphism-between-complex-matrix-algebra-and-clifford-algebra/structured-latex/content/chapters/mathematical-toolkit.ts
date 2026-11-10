@@ -9440,4 +9440,251 @@ X\cdot_{A/I}Y&:=\pi_I(a\cdot_A b),\\
       paragraph(["である。"]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_quotient_set_operations_form_unital_ring",
+    kind: "claim",
+    title: { text: "商集合の上の演算の組は単位元をもつ環である" },
+    labels: ["claim_quotient_set_operations_form_unital_ring"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。このとき、組",
+      ]),
+      displayMath(String.raw`(A/I,+_{A/I},\cdot_{A/I},0_{A/I},1_{A/I})`),
+      paragraph([
+        "は単位元をもつ環（",
+        ref("def_unital_ring"),
+        "）である。ここで ",
+        math(String.raw`A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合（",
+        ref("def_quotient_set_modulo_two_sided_ideal"),
+        "）、",
+        math(String.raw`+_{A/I},\ \cdot_{A/I},\ 0_{A/I},\ 1_{A/I}`),
+        " は商集合の上の加法・乗法・零元・単位元（",
+        ref("def_quotient_algebra_operations"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "商集合の上の演算の定義（",
+        ref("def_quotient_algebra_operations"),
+        "）により、",
+        math(String.raw`+_{A/I}`),
+        " と ",
+        math(String.raw`\cdot_{A/I}`),
+        " は ",
+        math(String.raw`A/I\times A/I\to A/I`),
+        " の写像、",
+        math(String.raw`0_{A/I}`),
+        " と ",
+        math(String.raw`1_{A/I}`),
+        " は ",
+        math(String.raw`A/I`),
+        " の元である。残りは単位元をもつ環（",
+        ref("def_unital_ring"),
+        "）の七つの条件である。",
+        math(String.raw`\pi_I:A\to A/I`),
+        " を ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）とする。",
+        math(String.raw`X,Y,Z`),
+        " を ",
+        math(String.raw`A/I`),
+        " の任意の元とし、射影が全射であること（",
+        ref("claim_projection_onto_quotient_set_is_surjective"),
+        "）により ",
+        math(String.raw`\pi_I(a)=X`),
+        "、",
+        math(String.raw`\pi_I(b)=Y`),
+        "、",
+        math(String.raw`\pi_I(c)=Z`),
+        " を満たす ",
+        math(String.raw`A`),
+        " の元 ",
+        math(String.raw`a,b,c`),
+        " をとる。",
+        math(String.raw`A`),
+        " の環の公理は、",
+        math(String.raw`U_{\mathrm{ring}}(A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）に当てる。",
+      ]),
+      paragraph(["加法の結合法則。"]),
+      displayMath(String.raw`\begin{aligned}
+(X+_{A/I}Y)+_{A/I}Z
+&=\bigl(\pi_I(a)+_{A/I}\pi_I(b)\bigr)+_{A/I}\pi_I(c)
+&&\left(\because\ a,b,c\ \text{のとり方}\right)\\
+&=\pi_I(a+_A b)+_{A/I}\pi_I(c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((a+_A b)+_A c\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(a+_A(b+_A c)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の結合法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=\pi_I(a)+_{A/I}\pi_I(b+_A c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\pi_I(a)+_{A/I}\bigl(\pi_I(b)+_{A/I}\pi_I(c)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=X+_{A/I}(Y+_{A/I}Z)
+&&\left(\because\ a,b,c\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則。"]),
+      displayMath(String.raw`\begin{aligned}
+X+_{A/I}Y
+&=\pi_I(a)+_{A/I}\pi_I(b)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\pi_I(a+_A b)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(b+_A a)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の交換法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=\pi_I(b)+_{A/I}\pi_I(a)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=Y+_{A/I}X
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元。"]),
+      displayMath(String.raw`\begin{aligned}
+X+_{A/I}0_{A/I}
+&=\pi_I(a)+_{A/I}0_{A/I}
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I(a)+_{A/I}\pi_I(0_A)
+&&\left(\because\ 0_{A/I}\ \text{の定義。}\blkref{def_quotient_algebra_operations}\right)\\
+&=\pi_I(a+_A 0_A)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(a)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の単位元。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=X
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元。",
+        math(String.raw`U_{\mathrm{ring}}(A)`),
+        " の加法の逆元の条件（",
+        ref("def_unital_ring"),
+        "）により、",
+        math(String.raw`a+_A a'=0_A`),
+        " を満たす ",
+        math(String.raw`a'\in A`),
+        " がある。",
+        math(String.raw`X':=\pi_I(a')`),
+        " と置くと、",
+        math(String.raw`X'`),
+        " は ",
+        math(String.raw`\pi_I`),
+        " の値なので ",
+        math(String.raw`A/I`),
+        " の元であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X+_{A/I}X'
+&=\pi_I(a)+_{A/I}X'
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I(a)+_{A/I}\pi_I(a')
+&&\left(\because\ X'\ \text{の定義}\right)\\
+&=\pi_I(a+_A a')
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(0_A)
+&&\left(\because\ a'\ \text{のとり方}\right)\\
+&=0_{A/I}
+&&\left(\because\ 0_{A/I}\ \text{の定義。}\blkref{def_quotient_algebra_operations}\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph(["乗法の結合法則。"]),
+      displayMath(String.raw`\begin{aligned}
+(X\cdot_{A/I}Y)\cdot_{A/I}Z
+&=\bigl(\pi_I(a)\cdot_{A/I}\pi_I(b)\bigr)\cdot_{A/I}\pi_I(c)
+&&\left(\because\ a,b,c\ \text{のとり方}\right)\\
+&=\pi_I(a\cdot_A b)\cdot_{A/I}\pi_I(c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((a\cdot_A b)\cdot_A c\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(a\cdot_A(b\cdot_A c)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=\pi_I(a)\cdot_{A/I}\pi_I(b\cdot_A c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\right)\\
+&=\pi_I(a)\cdot_{A/I}\bigl(\pi_I(b)\cdot_{A/I}\pi_I(c)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\right)\\
+&=X\cdot_{A/I}(Y\cdot_{A/I}Z)
+&&\left(\because\ a,b,c\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["乗法の単位元。"]),
+      displayMath(String.raw`\begin{aligned}
+X\cdot_{A/I}1_{A/I}
+&=\pi_I(a)\cdot_{A/I}1_{A/I}
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I(a)\cdot_{A/I}\pi_I(1_A)
+&&\left(\because\ 1_{A/I}\ \text{の定義。}\blkref{def_quotient_algebra_operations}\right)\\
+&=\pi_I(a\cdot_A 1_A)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(a)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=X
+&&\left(\because\ a\ \text{のとり方}\right),\\[4pt]
+1_{A/I}\cdot_{A/I}X
+&=1_{A/I}\cdot_{A/I}\pi_I(a)
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\pi_I(1_A)\cdot_{A/I}\pi_I(a)
+&&\left(\because\ 1_{A/I}\ \text{の定義。}\blkref{def_quotient_algebra_operations}\right)\\
+&=\pi_I(1_A\cdot_A a)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I(a)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=X
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["分配法則。"]),
+      displayMath(String.raw`\begin{aligned}
+X\cdot_{A/I}(Y+_{A/I}Z)
+&=\pi_I(a)\cdot_{A/I}\bigl(\pi_I(b)+_{A/I}\pi_I(c)\bigr)
+&&\left(\because\ a,b,c\ \text{のとり方}\right)\\
+&=\pi_I(a)\cdot_{A/I}\pi_I(b+_A c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl(a\cdot_A(b+_A c)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((a\cdot_A b)+_A(a\cdot_A c)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（左の因子が共通）。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=\pi_I(a\cdot_A b)+_{A/I}\pi_I(a\cdot_A c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\bigl(\pi_I(a)\cdot_{A/I}\pi_I(b)\bigr)+_{A/I}\bigl(\pi_I(a)\cdot_{A/I}\pi_I(c)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を二つの項に}\right)\\
+&=(X\cdot_{A/I}Y)+_{A/I}(X\cdot_{A/I}Z)
+&&\left(\because\ a,b,c\ \text{のとり方}\right),\\[4pt]
+(X+_{A/I}Y)\cdot_{A/I}Z
+&=\bigl(\pi_I(a)+_{A/I}\pi_I(b)\bigr)\cdot_{A/I}\pi_I(c)
+&&\left(\because\ a,b,c\ \text{のとり方}\right)\\
+&=\pi_I(a+_A b)\cdot_{A/I}\pi_I(c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((a+_A b)\cdot_A c\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を右辺から左辺へ}\right)\\
+&=\pi_I\bigl((a\cdot_A c)+_A(b\cdot_A c)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（右の因子が共通）。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{def_unital_ring}\right)\\
+&=\pi_I(a\cdot_A c)+_{A/I}\pi_I(b\cdot_A c)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\bigl(\pi_I(a)\cdot_{A/I}\pi_I(c)\bigr)+_{A/I}\bigl(\pi_I(b)\cdot_{A/I}\pi_I(c)\bigr)
+&&\left(\because\ \blkref{claim_projection_onto_quotient_set_preserves_multiplication}\ \text{を二つの項に}\right)\\
+&=(X\cdot_{A/I}Z)+_{A/I}(Y\cdot_{A/I}Z)
+&&\left(\because\ a,b,c\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph([
+        "七つの条件がすべて成り立つので、組 ",
+        math(String.raw`(A/I,+_{A/I},\cdot_{A/I},0_{A/I},1_{A/I})`),
+        " は単位元をもつ環（",
+        ref("def_unital_ring"),
+        "）である。",
+      ]),
+    ],
+  },
 ]);

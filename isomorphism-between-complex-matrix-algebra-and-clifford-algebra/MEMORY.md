@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-10: 商集合の上の演算の組が単位元をもつ環であること（ラベル claim_quotient_set_operations_form_unital_ring）を、代表をとって射影が加法・乗法を保つことで π_I の中へ畳み、U_ring(A) の七つの公理を移す鎖で示した。次は商集合の上の演算の組が ℂ-線型空間であること。
+
 - 2026-11-10: 商集合への射影がスカラー倍を保つこと（ラベル claim_projection_onto_quotient_set_preserves_scalar_multiplication）を、商代数の演算の定義の代表に a 自身をとる二行の鎖で示した。次は商集合の上の演算の組が単位元をもつ環であること。
 - 2026-11-10: 商集合への射影が乗法を保つこと（ラベル claim_projection_onto_quotient_set_preserves_multiplication）を、加法の主張と同じく商代数の演算の定義の代表に a,b 自身をとる二行の鎖で示した。次は射影がスカラー倍を保つこと。
 - 2026-11-10: 台帳の「商代数が ℂ-代数であること」を六行に割り、商集合への射影が加法を保つこと（ラベル claim_projection_onto_quotient_set_preserves_addition）を、商代数の演算の定義の代表に a,b 自身をとる二行の鎖で示した。次は射影が乗法を保つこと。
