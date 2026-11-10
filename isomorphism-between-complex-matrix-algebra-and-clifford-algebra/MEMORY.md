@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-10: 商集合への射影がスカラー倍を保つこと（ラベル claim_projection_onto_quotient_set_preserves_scalar_multiplication）を、商代数の演算の定義の代表に a 自身をとる二行の鎖で示した。次は商集合の上の演算の組が単位元をもつ環であること。
 - 2026-11-10: 商集合への射影が乗法を保つこと（ラベル claim_projection_onto_quotient_set_preserves_multiplication）を、加法の主張と同じく商代数の演算の定義の代表に a,b 自身をとる二行の鎖で示した。次は射影がスカラー倍を保つこと。
 - 2026-11-10: 台帳の「商代数が ℂ-代数であること」を六行に割り、商集合への射影が加法を保つこと（ラベル claim_projection_onto_quotient_set_preserves_addition）を、商代数の演算の定義の代表に a,b 自身をとる二行の鎖で示した。次は射影が乗法を保つこと。
 - 2026-11-10: 商代数の演算の定義（ラベル def_quotient_algebra_operations）を置いた。代表を射影の全射性でとり、π_I の値で加法・乗法・スカラー倍・零元・単位元を定め、代表によらないことは三つの主張を引いた。次は商代数が ℂ-代数であること。

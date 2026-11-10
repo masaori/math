@@ -53,6 +53,7 @@ export const ALL_LABELS = [
   "claim_projection_onto_quotient_set_is_surjective",
   "claim_projection_onto_quotient_set_preserves_addition",
   "claim_projection_onto_quotient_set_preserves_multiplication",
+  "claim_projection_onto_quotient_set_preserves_scalar_multiplication",
   "claim_quotient_addition_does_not_depend_on_representatives",
   "claim_quotient_multiplication_does_not_depend_on_representatives",
   "claim_quotient_scalar_multiplication_does_not_depend_on_representatives",
