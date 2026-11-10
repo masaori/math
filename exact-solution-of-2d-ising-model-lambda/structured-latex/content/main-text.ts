@@ -90193,7 +90193,8 @@ const chapter_critical_exponent = defineSection({
                           " だから、ある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
                           " が存在して",
                         ]),
-                        displayMath(String.raw`d_{1}(L)=\mathrm{dsq}_{c}(\xi)`),
+                        displayMath(String.raw`d_{1}(L)=\mathrm{dsq}_{c}(\xi)
+\qquad\bigl(\because\ \blkref{def_leading_distance},\ d_{1}(L)\in D_L\bigr)`),
                         paragraph([
                           "である。まず ", math(String.raw`d_{1}(L)\ne0`), " を背理法で示す。",
                           math(String.raw`d_{1}(L)=0`), " と仮定すると、",
