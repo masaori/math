@@ -13912,6 +13912,7 @@ A\cap(E\setminus F)
                   "Ising2DLambda.Tools.finiteConnectedGraph_evenEdgeSet_count",
                   "Ising2DLambda.NecSuf.Tools.evenEdgeSet_count",
                   "Ising2DLambda.Tools.finiteConnectedGraph_evenEdgeSet_count_from_necSuf",
+                  "Ising2DLambda.KacWard.cellVertexGraph_evenEdgeSubset_count",
                 ],
                 verification: ["sagemath/check/even-edge-set-count"],
                 statement: [
@@ -68627,11 +68628,9 @@ e&=f
                             "頂点集合は整数座標の集合の部分集合なので、この二元集合の二点は元の端点と同じである（",
                             ref("def_cell_vertex_set"), "）。",
                           ]),
-                          displayMath(String.raw`\begin{aligned}
-v\in\theta_S(e)
-&\Longleftrightarrow v\in\operatorname{end}_{\square}(e)
-&&\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{def_cell_vertex_set}\bigr)
-\end{aligned}`),
+                          displayMath(String.raw`v\in\theta_S(e)
+\Longleftrightarrow v\in\operatorname{end}_{\square}(e)
+\qquad\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{def_cell_vertex_set}\bigr)`),
                         ],
                       },
                     },

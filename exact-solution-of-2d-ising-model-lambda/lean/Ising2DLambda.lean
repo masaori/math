@@ -1188,6 +1188,7 @@ import Ising2DLambda.KacWard.CellVertexGraph
 import Ising2DLambda.KacWard.CellGridIncidentParity
 import Ising2DLambda.KacWard.CellGraphEvenEdgeBijection
 import Ising2DLambda.KacWard.CellGraphEdgeSubsetCorrespondence
+import Ising2DLambda.KacWard.CellGraphEvenEdgeCount
 import Ising2DLambda.KacWard.CellBoundaryEvenEdgeCount
 import Ising2DLambda.KacWard.CellGraphEvenEdgeCountFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.CellBoundaryEvenEdgeCount
