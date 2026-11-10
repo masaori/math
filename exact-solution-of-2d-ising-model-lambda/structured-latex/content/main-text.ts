@@ -90773,7 +90773,7 @@ s+1
                           ref("claim_real_algebraic_order_trichotomy"), " を ", math(String.raw`x_c`),
                           " と ", math(String.raw`(k+1)/N`), " に適用すると、否定した場合を除く残りから",
                         ]),
-                        displayMath(String.raw`\frac{k+1}{N}<_R x_c\quad\text{または}\quad\frac{k+1}{N}=x_c`),
+                        displayMath(String.raw`\frac{k+1}{N}<_R x_c\quad\text{または}\quad\frac{k+1}{N}=x_c\qquad\bigl(\because\ \blkref{claim_real_algebraic_order_trichotomy}\text{ と背理法の仮定}\bigr)`),
                         paragraph([
                           "となる。したがって ", math(String.raw`(k+1)/N\le_Rx_c`), " であり、既に示した ",
                           math(String.raw`k+1\le N`), " と合わせて ", math(String.raw`k+1\in S_N`),
