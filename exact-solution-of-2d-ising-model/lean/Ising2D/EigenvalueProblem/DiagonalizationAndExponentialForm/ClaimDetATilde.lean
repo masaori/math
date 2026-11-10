@@ -187,7 +187,7 @@ theorem complex_I_mul_I_chain : Complex.I * Complex.I = -1 :=
     _ = -1 := by rw [show (⟨-1, 0⟩ : ℂ) = ((-1 : ℝ) : ℂ) from rfl, Complex.ofReal_neg, Complex.ofReal_one]
                           -- 4 行目: `inclusion_rr_to_cc` を右辺から左辺へ（`-1_ℂ` は略記 `(-1)_ℂ`）
 
-/-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - iy)(x + iy) = x^2 + y^2`**（`x, y ∈ ℂ`、人手の 13 行）。 -/
+/-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - iy)(x + iy) = x^2 + y^2`**（`x, y ∈ ℂ`、人手の 14 行）。 -/
 theorem complex_sub_I_mul_mul_add_I_mul (x y : ℂ) :
     (x - Complex.I * y) * (x + Complex.I * y) = x ^ 2 + y ^ 2 :=
   calc (x - Complex.I * y) * (x + Complex.I * y)
@@ -195,40 +195,44 @@ theorem complex_sub_I_mul_mul_add_I_mul (x y : ℂ) :
                           -- 1 行目: `def_complex_difference`
     _ = (x + (-1) * (Complex.I * y)) * (x + Complex.I * y) := by rw [neg_one_mul]
                           -- 2 行目: `multiply_by_minus_one`
+    _ = (x * x + x * (Complex.I * y)) + (((-1) * (Complex.I * y)) * x
+          + ((-1) * (Complex.I * y)) * (Complex.I * y)) := by
+        rw [add_mul, mul_add, mul_add]
+                          -- 3 行目: `complex_numbers_form_a_field` の分配律
     _ = x * x + x * (Complex.I * y) + ((-1) * (Complex.I * y)) * x
           + ((-1) * (Complex.I * y)) * (Complex.I * y) := by
-        rw [add_mul, mul_add, mul_add, ← add_assoc]
-                          -- 3 行目: `complex_numbers_form_a_field` の分配律
+        rw [← add_assoc]
+                          -- 4 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
     _ = x * x + (Complex.I * y) * x + (-1) * ((Complex.I * y) * x)
           + (-1) * ((Complex.I * y) * (Complex.I * y)) := by
         rw [mul_comm x (Complex.I * y), mul_assoc (-1) (Complex.I * y) x,
           mul_assoc (-1) (Complex.I * y) (Complex.I * y)]
-                          -- 4 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+                          -- 5 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = x * x + ((Complex.I * y) * x + (-1) * ((Complex.I * y) * x))
           + (-1) * ((Complex.I * y) * (Complex.I * y)) := by
         rw [add_assoc (x * x) ((Complex.I * y) * x)]
-                          -- 5 行目: `complex_numbers_form_a_field` の和の結合律
+                          -- 6 行目: `complex_numbers_form_a_field` の和の結合律
     _ = x * x + ((Complex.I * y) * x + (-((Complex.I * y) * x)))
           + (-1) * ((Complex.I * y) * (Complex.I * y)) := by
         rw [neg_one_mul ((Complex.I * y) * x)]
-                          -- 6 行目: `multiply_by_minus_one` を右辺から左辺へ
+                          -- 7 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = x * x + 0 + (-1) * ((Complex.I * y) * (Complex.I * y)) := by rw [add_neg_cancel]
-                          -- 7 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 8 行目: `complex_numbers_form_a_field` の加法逆元
     _ = x * x + (-1) * ((Complex.I * y) * (Complex.I * y)) := by rw [add_zero]
-                          -- 8 行目: `complex_numbers_form_a_field` の零元
+                          -- 9 行目: `complex_numbers_form_a_field` の零元
     _ = x * x + (-1) * ((Complex.I * Complex.I) * (y * y)) := by
         rw [mul_mul_mul_comm Complex.I y Complex.I y]
-                          -- 9 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+                          -- 10 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = x * x + (-1) * ((-1) * (y * y)) := by rw [complex_I_mul_I_chain]
-                          -- 10 行目: 上の `ii = -1_ℂ`（`complex_I_mul_I_chain`）
+                          -- 11 行目: 上の `ii = -1_ℂ`（`complex_I_mul_I_chain`）
     _ = x * x + (-(-(y * y))) := by rw [neg_one_mul (y * y), neg_one_mul (-(y * y))]
-                          -- 11 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
+                          -- 12 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
     _ = x * x + y * y := by rw [complex_neg_neg_chain]
-                          -- 12 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）
+                          -- 13 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）
     _ = x ^ 2 + y ^ 2 := by rw [sq x, sq y]
-                          -- 13 行目: `def_power_of_complex_number` より `z^2 = zz` を 2 箇所へ右辺から左辺へ
+                          -- 14 行目: `def_power_of_complex_number` より `z^2 = zz` を 2 箇所へ右辺から左辺へ
 
-/-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`**（`x, y ∈ ℂ`、人手の 15 行）。 -/
+/-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`**（`x, y ∈ ℂ`、人手の 17 行）。 -/
 theorem complex_sub_sq_chain (x y : ℂ) :
     (x - y) ^ 2 = x ^ 2 - 2 * (x * y) + y ^ 2 :=
   calc (x - y) ^ 2
@@ -238,38 +242,44 @@ theorem complex_sub_sq_chain (x y : ℂ) :
                           -- 2 行目: `def_complex_difference` を 2 箇所へ
     _ = (x + (-1) * y) * (x + (-1) * y) := by rw [neg_one_mul]
                           -- 3 行目: `multiply_by_minus_one` を 2 箇所へ
-    _ = x * x + x * ((-1) * y) + ((-1) * y) * x + ((-1) * y) * ((-1) * y) := by
-        rw [add_mul, mul_add, mul_add, ← add_assoc]
+    _ = (x * x + x * ((-1) * y)) + (((-1) * y) * x + ((-1) * y) * ((-1) * y)) := by
+        rw [add_mul, mul_add, mul_add]
                           -- 4 行目: `complex_numbers_form_a_field` の分配律
+    _ = x * x + x * ((-1) * y) + ((-1) * y) * x + ((-1) * y) * ((-1) * y) := by
+        rw [← add_assoc]
+                          -- 5 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
     _ = x * x + (-1) * (x * y) + (-1) * (x * y) + ((-1) * (-1)) * (y * y) := by
         rw [mul_comm ((-1) * y) x, mul_left_comm x (-1) y, mul_mul_mul_comm (-1) y (-1) y]
-                          -- 5 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+                          -- 6 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = x * x + ((-1) * (x * y) + (-1) * (x * y)) + ((-1) * (-1)) * (y * y) := by
+        rw [add_assoc (x * x) ((-1) * (x * y))]
+                          -- 7 行目: `complex_numbers_form_a_field` の和の結合律
     _ = x * x + ((-1) + (-1)) * (x * y) + ((-1) * (-1)) * (y * y) := by
-        rw [add_assoc (x * x) ((-1) * (x * y)), ← add_mul (-1 : ℂ) (-1) (x * y)]
-                          -- 6 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ
+        rw [← add_mul (-1 : ℂ) (-1) (x * y)]
+                          -- 8 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ
     _ = x * x + (((-1) + (-1) : ℝ) : ℂ) * (x * y) + ((-1) * (-1)) * (y * y) := by
         rw [← real_inclusion_add, Complex.ofReal_neg, Complex.ofReal_one]
-                          -- 7 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`。`-1_ℂ` は略記 `(-1)_ℂ`）
+                          -- 9 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`。`-1_ℂ` は略記 `(-1)_ℂ`）
     _ = x * x + (((-1) + (-1) : ℝ) : ℂ) * (x * y) + (((-1) * (-1) : ℝ) : ℂ) * (y * y) := by
         rw [← real_inclusion_mul (-1) (-1), Complex.ofReal_neg, Complex.ofReal_one]
-                          -- 8 行目: `real_inclusion_preserves_product`
+                          -- 10 行目: `real_inclusion_preserves_product`
     _ = x * x + (((-1) * 2 : ℝ) : ℂ) * (x * y) + 1 * (y * y) := by
         rw [show ((-1) + (-1) : ℝ) = (-1) * 2 by norm_num, show ((-1) * (-1) : ℝ) = 1 by norm_num,
           Complex.ofReal_one]
-                          -- 9 行目: ℝ の四則を 2 箇所へ（`1_ℂ` は略記 `(1)_ℂ`）
+                          -- 11 行目: ℝ の四則を 2 箇所へ（`1_ℂ` は略記 `(1)_ℂ`）
     _ = x * x + ((-1) * 2) * (x * y) + 1 * (y * y) := by
         rw [← real_inclusion_mul (-1) 2, Complex.ofReal_neg, Complex.ofReal_one, Complex.ofReal_ofNat]
-                          -- 10 行目: `real_inclusion_preserves_product` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
+                          -- 12 行目: `real_inclusion_preserves_product` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
     _ = x * x + (-1) * (2 * (x * y)) + 1 * (y * y) := by rw [mul_assoc (-1 : ℂ) 2 (x * y)]
-                          -- 11 行目: `complex_numbers_form_a_field` の積の結合律
+                          -- 13 行目: `complex_numbers_form_a_field` の積の結合律
     _ = x * x + (-1) * (2 * (x * y)) + y * y := by rw [one_mul (y * y)]
-                          -- 12 行目: `complex_numbers_form_a_field` の積の単位元
+                          -- 14 行目: `complex_numbers_form_a_field` の積の単位元
     _ = x * x + (-(2 * (x * y))) + y * y := by rw [neg_one_mul (2 * (x * y))]
-                          -- 13 行目: `multiply_by_minus_one` を右辺から左辺へ
+                          -- 15 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = x * x - 2 * (x * y) + y * y := by rw [← sub_eq_add_neg]
-                          -- 14 行目: `def_complex_difference` を右辺から左辺へ
+                          -- 16 行目: `def_complex_difference` を右辺から左辺へ
     _ = x ^ 2 - 2 * (x * y) + y ^ 2 := by rw [sq x, sq y]
-                          -- 15 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz` を 2 箇所へ右辺から左辺へ
+                          -- 17 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz` を 2 箇所へ右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `u + iv = e_+`**（`u = (cos θ)_ℂ`、`v = (sin θ)_ℂ`、
 `e_+ = exp(iθ)`、人手の 19 行）。`e_- = exp(-iθ)` の `-iθ` は `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）。 -/

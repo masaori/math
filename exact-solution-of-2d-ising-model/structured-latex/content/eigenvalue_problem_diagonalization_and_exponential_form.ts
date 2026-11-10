@@ -4024,8 +4024,10 @@ e_+e_-
 &&(\because\ \blkref{def_complex_difference})\\
 &= \bigl(x + (-1_{\mathbb{C}})(iy)\bigr)(x + iy)
 &&(\because\ \blkref{multiply_by_minus_one})\\
-&= xx + x(iy) + \bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)
+&= \bigl(xx + x(iy)\bigr) + \Bigl(\bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= xx + x(iy) + \bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= xx + (iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= xx + \Bigl((iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
@@ -4055,10 +4057,14 @@ e_+e_-
 &&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
 &= \bigl(x + (-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
-&= xx + x\bigl((-1_{\mathbb{C}})y\bigr) + \bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)
+&= \Bigl(xx + x\bigl((-1_{\mathbb{C}})y\bigr)\Bigr) + \Bigl(\bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= xx + x\bigl((-1_{\mathbb{C}})y\bigr) + \bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= xx + (-1_{\mathbb{C}})(xy) + (-1_{\mathbb{C}})(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= xx + \bigl((-1_{\mathbb{C}})(xy) + (-1_{\mathbb{C}})(xy)\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &= xx + \bigl((-1_{\mathbb{C}}) + (-1_{\mathbb{C}})\bigr)(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
 &= xx + \bigl((-1) + (-1)\bigr)_{\mathbb{C}}(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
@@ -4576,6 +4582,7 @@ c_2s_2^*
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 主張の最後の等式の |γ_2(θ̃_μ)| を def_abs_arg の絶対値、二乗 γ_1(θ̃_μ)^2・|γ_2(θ̃_μ)|^2 を def_power_of_real_number の冪（m = 2）と書いた。最後の等式の鎖の第 2 行と第 13 行（左辺だけの行を第 1 行と数える）の名前だけの根拠「ℝ の冪 x^2 = xx」「ℝ の冪 xx = x^2」を square_of_real_number_is_product（r → γ_1(θ)、r → |γ_2(θ)| を右辺から左辺へ）の参照にした（中身は不変）。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の e_− := exp(−iθ) の −iθ が euler_formula_cos_sin・exp_of_negative_i_real_as_cos_minus_i_sin・def_A_theta と同じく multiply_by_minus_one の −(iθ) であることを書いた（e_+e_− の鎖の加法逆元の行・u^2 + v^2 の鎖・γ_2(−θ) の鎖がこの読みに乗っている。中身は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 準備の像の読み方の和・差を、名前だけの言い換え（和は real_inclusion_preserves_finite_sum を m = 2 で、差は def_complex_difference・multiply_by_minus_one）から主張 real_inclusion_preserves_sum・real_inclusion_preserves_difference の参照にした。第 3 の等式の鎖の 4 行目「準備の像の読み方（和・差の像は像の和・差）」は 2 つの主張を 1 行で当てていたので、和の行と差の行の 2 行に割った（22 行から 23 行）。主張・値は不変。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 第一の準備の (x − iy)(x + iy) の鎖と (x − y)^2 の鎖で、根拠を「分配律」だけにしていた行が左から括った 4 項の和にするのに和の結合律も当てていたので、分配律の行と和の結合律を右辺から左辺へ当てる行に割った。(x − y)^2 の鎖の「分配律を右辺から左辺へ」の行も xx + A + A を xx + (A + A) に括り直していたので、和の結合律の行を前に置いた（13 等号から 14 等号、15 等号から 17 等号）。主張・値は不変。",
       ],
     },
   },
