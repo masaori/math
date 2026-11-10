@@ -3904,7 +3904,7 @@ A(\tilde\theta_\mu)
         " についての ",
         math(String.raw`(x - iy)(x + iy) = x^2 + y^2`),
         " と ",
-        math(String.raw`(x - y)^2 = x^2 - 2_{\mathbb{C}}xy + y^2`),
+        math(String.raw`(x - y)^2 = x^2 - 2_{\mathbb{C}}(xy) + y^2`),
         "、",
         math(String.raw`u + iv = e_+`),
         "、",
@@ -3978,7 +3978,7 @@ e_+e_-
       displayMath(String.raw`\begin{aligned}
 (x - y)^2
 &= (x - y)(x - y)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz)\\
 &= \bigl(x + (-y)\bigr)\bigl(x + (-y)\bigr)
 &&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
 &= \bigl(x + (-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
@@ -3988,7 +3988,7 @@ e_+e_-
 &= xx + (-1_{\mathbb{C}})(xy) + (-1_{\mathbb{C}})(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= xx + \bigl((-1_{\mathbb{C}}) + (-1_{\mathbb{C}})\bigr)(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
 &= xx + \bigl((-1) + (-1)\bigr)_{\mathbb{C}}(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
 &&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
 &= xx + \bigl((-1) + (-1)\bigr)_{\mathbb{C}}(xy) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}(yy)
@@ -3996,17 +3996,17 @@ e_+e_-
 &= xx + \bigl((-1)\cdot 2\bigr)_{\mathbb{C}}(xy) + 1_{\mathbb{C}}(yy)
 &&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
 &= xx + \bigl((-1_{\mathbb{C}})\,2_{\mathbb{C}}\bigr)(xy) + 1_{\mathbb{C}}(yy)
-&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ})\\
 &= xx + (-1_{\mathbb{C}})\bigl(2_{\mathbb{C}}(xy)\bigr) + 1_{\mathbb{C}}(yy)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
 &= xx + (-1_{\mathbb{C}})\bigl(2_{\mathbb{C}}(xy)\bigr) + yy
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
-&= xx + \bigl(-(2_{\mathbb{C}}xy)\bigr) + yy
-&&(\because\ \blkref{multiply_by_minus_one})\\
-&= xx - 2_{\mathbb{C}}xy + yy
-&&(\because\ \blkref{def_complex_difference})\\
-&= x^2 - 2_{\mathbb{C}}xy + y^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 2 箇所へ})
+&= xx + \bigl(-\bigl(2_{\mathbb{C}}(xy)\bigr)\bigr) + yy
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
+&= xx - 2_{\mathbb{C}}(xy) + yy
+&&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= x^2 - 2_{\mathbb{C}}(xy) + y^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ右辺から左辺へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 u + iv
@@ -4201,7 +4201,7 @@ c_2s_2^*
 &&(\because\ a_0\ \text{の定義})\\
 &\quad= (c_1c_2^*)^2 - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)^2 \\
 &\qquad\quad - (s_2^*)^2\bigl((c_1u)^2 - 2(c_1u)(s_1c_2) + (s_1c_2)^2 + 1 - u^2\bigr)
-&&(\because\ \text{上の}\ (x - y)^2 = x^2 - 2xy + y^2\ \text{を 2 箇所へ})\\
+&&(\because\ \text{上の}\ (x - y)^2 = x^2 - 2_{\mathbb{C}}(xy) + y^2\ \text{を 2 箇所へ})\\
 &\quad= (c_1c_2^*)(c_1c_2^*) - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)(s_1s_2^*u) \\
 &\qquad\quad - (s_2^*s_2^*)\bigl((c_1u)(c_1u) - 2(c_1u)(s_1c_2) + (s_1c_2)(s_1c_2) + 1 - uu\bigr)
 &&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\

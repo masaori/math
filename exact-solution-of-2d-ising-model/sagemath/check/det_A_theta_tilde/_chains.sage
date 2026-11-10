@@ -63,9 +63,9 @@ CH_sq = [
     L(XX * XX + (m1 * 2) * (XX * YY) + 1 * (YY * YY)),
     L(XX * XX + m1 * (2 * (XX * YY)) + 1 * (YY * YY)),
     L(XX * XX + m1 * (2 * (XX * YY)) + YY * YY),
-    L(XX * XX + (-(2 * XX * YY)) + YY * YY),
-    L(XX * XX - 2 * XX * YY + YY * YY),
-    L(XX**2 - 2 * XX * YY + YY**2),
+    L(XX * XX + (-(2 * (XX * YY))) + YY * YY),
+    L(XX * XX - 2 * (XX * YY) + YY * YY),
+    L(XX**2 - 2 * (XX * YY) + YY**2),
 ]
 h = Fg(1) / 2
 CH_upiv = [

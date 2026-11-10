@@ -18,10 +18,11 @@
   * Step 0: (i)(ii) は `IsingParam.c1_sq_sub_s1_sq`・`IsingParam.c2star_sq_sub_s2star_sq`、
     (iii) は引数 `hdual`。
   * Step 1: `det_AMat_eq_gamma1_sq_add`。
-  * Step 2: 人手の第一の準備の 7 本の鎖のうち `(x - y)^2` 以外の 6 本 `-(-z) = z`・`ii = -1_ℂ`・`e_+e_- = 1_ℂ`・`(x - iy)(x + iy) = x^2 + y^2`・
-    `u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は、人手の行と 1 段ずつの `calc` の `complex_neg_neg_chain`・`complex_I_mul_I_chain`・
-    `exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain`
-    である（`(x - y)^2` の鎖は具体版がまだ無い）。続く `γ_2(θ)`・`γ_2(-θ)`・積の鎖は `gamma2_mul_gamma2_neg_sin_form` が受けるが、
+  * Step 2: 人手の第一の準備の 7 本の鎖 `-(-z) = z`・`ii = -1_ℂ`・`e_+e_- = 1_ℂ`・`(x - iy)(x + iy) = x^2 + y^2`・
+    `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`・`u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は、人手の行と 1 段ずつの `calc` の `complex_neg_neg_chain`・
+    `complex_I_mul_I_chain`・`exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_sub_sq_chain`・
+    `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である（第 2 の等式の鎖はまだ
+    `complex_sub_sq_chain` を使わず、`ring` で展開している）。続く `γ_2(θ)`・`γ_2(-θ)`・積の鎖は `gamma2_mul_gamma2_neg_sin_form` が受けるが、
     人手の行と 1 対 1 ではない（`hminus` は `gamma2_neg` と `ring`、calc の 1 行目は `ring`、最後の行は `linear_combination`）。
     `gamma2_mul_gamma2_neg_cos_form` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える。`v^2 = 1 - u^2`）を先取りした形である。
   * Step 3〜5: `gamma1_sq_add_gamma2_mul_thetaTilde` の中の鎖（Step 3 の 2 式・Step 4 の (iii) による
@@ -206,6 +207,49 @@ theorem complex_sub_I_mul_mul_add_I_mul (x y : ℂ) :
                           -- 12 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）
     _ = x ^ 2 + y ^ 2 := by rw [sq x, sq y]
                           -- 13 行目: `def_power_of_complex_number` より `z^2 = zz` を 2 箇所へ右辺から左辺へ
+
+/-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`**（`x, y ∈ ℂ`、人手の 15 行）。 -/
+theorem complex_sub_sq_chain (x y : ℂ) :
+    (x - y) ^ 2 = x ^ 2 - 2 * (x * y) + y ^ 2 :=
+  calc (x - y) ^ 2
+      = (x - y) * (x - y) := sq (x - y)
+                          -- 1 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz`
+    _ = (x + (-y)) * (x + (-y)) := by rw [sub_eq_add_neg]
+                          -- 2 行目: `def_complex_difference` を 2 箇所へ
+    _ = (x + (-1) * y) * (x + (-1) * y) := by rw [neg_one_mul]
+                          -- 3 行目: `multiply_by_minus_one` を 2 箇所へ
+    _ = x * x + x * ((-1) * y) + ((-1) * y) * x + ((-1) * y) * ((-1) * y) := by
+        rw [add_mul, mul_add, mul_add, ← add_assoc]
+                          -- 4 行目: `complex_numbers_form_a_field` の分配律
+    _ = x * x + (-1) * (x * y) + (-1) * (x * y) + ((-1) * (-1)) * (y * y) := by
+        rw [mul_comm ((-1) * y) x, mul_left_comm x (-1) y, mul_mul_mul_comm (-1) y (-1) y]
+                          -- 5 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = x * x + ((-1) + (-1)) * (x * y) + ((-1) * (-1)) * (y * y) := by
+        rw [add_assoc (x * x) ((-1) * (x * y)), ← add_mul (-1 : ℂ) (-1) (x * y)]
+                          -- 6 行目: `complex_numbers_form_a_field` の分配律を右辺から左辺へ
+    _ = x * x + (((-1) + (-1) : ℝ) : ℂ) * (x * y) + ((-1) * (-1)) * (y * y) := by
+        rw [← real_inclusion_add, Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 7 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`。`-1_ℂ` は略記 `(-1)_ℂ`）
+    _ = x * x + (((-1) + (-1) : ℝ) : ℂ) * (x * y) + (((-1) * (-1) : ℝ) : ℂ) * (y * y) := by
+        rw [← real_inclusion_mul (-1) (-1), Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 8 行目: `real_inclusion_preserves_product`
+    _ = x * x + (((-1) * 2 : ℝ) : ℂ) * (x * y) + 1 * (y * y) := by
+        rw [show ((-1) + (-1) : ℝ) = (-1) * 2 by norm_num, show ((-1) * (-1) : ℝ) = 1 by norm_num,
+          Complex.ofReal_one]
+                          -- 9 行目: ℝ の四則を 2 箇所へ（`1_ℂ` は略記 `(1)_ℂ`）
+    _ = x * x + ((-1) * 2) * (x * y) + 1 * (y * y) := by
+        rw [← real_inclusion_mul (-1) 2, Complex.ofReal_neg, Complex.ofReal_one, Complex.ofReal_ofNat]
+                          -- 10 行目: `real_inclusion_preserves_product` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
+    _ = x * x + (-1) * (2 * (x * y)) + 1 * (y * y) := by rw [mul_assoc (-1 : ℂ) 2 (x * y)]
+                          -- 11 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = x * x + (-1) * (2 * (x * y)) + y * y := by rw [one_mul (y * y)]
+                          -- 12 行目: `complex_numbers_form_a_field` の積の単位元
+    _ = x * x + (-(2 * (x * y))) + y * y := by rw [neg_one_mul (2 * (x * y))]
+                          -- 13 行目: `multiply_by_minus_one` を右辺から左辺へ
+    _ = x * x - 2 * (x * y) + y * y := by rw [← sub_eq_add_neg]
+                          -- 14 行目: `def_complex_difference` を右辺から左辺へ
+    _ = x ^ 2 - 2 * (x * y) + y ^ 2 := by rw [sq x, sq y]
+                          -- 15 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz` を 2 箇所へ右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `u + iv = e_+`**（`u = (cos θ)_ℂ`、`v = (sin θ)_ℂ`、
 `e_+ = exp(iθ)`、人手の 19 行）。`e_- = exp(-iθ)` の `-iθ` は `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）。 -/
