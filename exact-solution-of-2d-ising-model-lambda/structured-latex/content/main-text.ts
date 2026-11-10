@@ -70283,9 +70283,15 @@ B&=v_1+v_2+v_3
 4F&=2E_{\mathrm{int}}+B
 &&\bigl(\because\ \text{単位正方形とその辺の接続を二通りに数える}\bigr),\\
 E&=E_{\mathrm{int}}+B
-&&\bigl(\because\ \text{辺を内部辺と境界辺に分割}\bigr),\\
-2E&=4F+B
-&&\bigl(\because\ \text{直前の二等式と }\mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \text{辺を内部辺と境界辺に分割}\bigr)
+\end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
+2E&=2(E_{\mathrm{int}}+B)
+&&\bigl(\because\ E=E_{\mathrm{int}}+B\bigr)\\
+&=(2E_{\mathrm{int}}+B)+B
+&&\bigl(\because\ \mathbb Z\text{ の分配則と結合律}\bigr)\\
+&=4F+B
+&&\bigl(\because\ 4F=2E_{\mathrm{int}}+B\bigr)
 \end{aligned}`),
                       paragraph(["である。よって"]),
                       displayMath(String.raw`\begin{aligned}
