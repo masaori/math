@@ -51,6 +51,7 @@ export const ALL_LABELS = [
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_product_of_matrix_units",
   "claim_projection_onto_quotient_set_is_surjective",
+  "claim_projection_onto_quotient_set_preserves_addition",
   "claim_quotient_addition_does_not_depend_on_representatives",
   "claim_quotient_multiplication_does_not_depend_on_representatives",
   "claim_quotient_scalar_multiplication_does_not_depend_on_representatives",
