@@ -33,12 +33,13 @@ REL = {
 def L(e, *rels):
     return (Fg(e), list(rels))
 
-# ---- 準備の第一: (x - iy)(x + iy)（14 個の等号）・(x - y)^2（17 個）・u + iv = e_+（19 個）・u^2 + v^2 = 1_C（5 個） ----
+# ---- 準備の第一: (x - iy)(x + iy)（15 個の等号）・(x - y)^2（18 個）・u + iv = e_+（19 個）・u^2 + v^2 = 1_C（5 個） ----
 m1 = Fg(-1)   # -1_C
 CH_conj = [
     L((XX - I * YY) * (XX + I * YY)),
     L((XX + (-(I * YY))) * (XX + I * YY)),
     L((XX + m1 * (I * YY)) * (XX + I * YY)),
+    L(XX * (XX + I * YY) + (m1 * (I * YY)) * (XX + I * YY)),
     L((XX * XX + XX * (I * YY)) + ((m1 * (I * YY)) * XX + (m1 * (I * YY)) * (I * YY))),
     L(XX * XX + XX * (I * YY) + (m1 * (I * YY)) * XX + (m1 * (I * YY)) * (I * YY)),
     L(XX * XX + (I * YY) * XX + m1 * ((I * YY) * XX) + m1 * ((I * YY) * (I * YY))),
@@ -57,6 +58,7 @@ CH_sq = [
     L((XX - YY) * (XX - YY)),
     L((XX + (-YY)) * (XX + (-YY))),
     L((XX + m1 * YY) * (XX + m1 * YY)),
+    L(XX * (XX + m1 * YY) + (m1 * YY) * (XX + m1 * YY)),
     L((XX * XX + XX * (m1 * YY)) + ((m1 * YY) * XX + (m1 * YY) * (m1 * YY))),
     L(XX * XX + XX * (m1 * YY) + (m1 * YY) * XX + (m1 * YY) * (m1 * YY)),
     L(XX * XX + m1 * (XX * YY) + m1 * (XX * YY) + (m1 * m1) * (YY * YY)),
@@ -249,6 +251,7 @@ CH_lam = [
     L((G1 + RR_) * (G1 - RR_)),                # (γ_1(θ)_C + r_C)(γ_1(θ) - r)_C: 像は一般の点では同じ式（和の像は check_generic_chains.sage で）
     L((G1 + RR_) * (G1 - RR_)),                # 差の像（同上）
     L((G1 + RR_) * (G1 + (-RR_))),
+    L((G1 + RR_) * G1 + (G1 + RR_) * (-RR_)),
     L((G1 * G1 + RR_ * G1) + (G1 * (-RR_) + RR_ * (-RR_))),
     L(G1 * G1 + (RR_ * G1 + (G1 * (-RR_) + RR_ * (-RR_)))),
     L(G1 * G1 + ((RR_ * G1 + G1 * (-RR_)) + RR_ * (-RR_))),

@@ -4024,8 +4024,10 @@ e_+e_-
 &&(\because\ \blkref{def_complex_difference})\\
 &= \bigl(x + (-1_{\mathbb{C}})(iy)\bigr)(x + iy)
 &&(\because\ \blkref{multiply_by_minus_one})\\
+&= x(x + iy) + \bigl((-1_{\mathbb{C}})(iy)\bigr)(x + iy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律（外側の積へ）})\\
 &= \bigl(xx + x(iy)\bigr) + \Bigl(\bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を 2 箇所へ（内側の積へ）})\\
 &= xx + x(iy) + \bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= xx + (iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
@@ -4057,8 +4059,10 @@ e_+e_-
 &&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
 &= \bigl(x + (-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= x\bigl(x + (-1_{\mathbb{C}})y\bigr) + \bigl((-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律（外側の積へ）})\\
 &= \Bigl(xx + x\bigl((-1_{\mathbb{C}})y\bigr)\Bigr) + \Bigl(\bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を 2 箇所へ（内側の積へ）})\\
 &= xx + x\bigl((-1_{\mathbb{C}})y\bigr) + \bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= xx + (-1_{\mathbb{C}})(xy) + (-1_{\mathbb{C}})(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
@@ -4473,8 +4477,10 @@ c_2s_2^*
 &&\bigl(\because\ \blkref{real_inclusion_preserves_difference}\ (y \to \gamma_1(\theta),\ z \to r)\ \text{を右辺から左辺へ。この行から}\ \gamma_1(\theta)\ \text{の像の記号を省き、}\ r\ \text{の像の記号は書き戻す行の直前まで省く}\bigr)\\
 &= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) + (-r)\bigr)
 &&(\because\ \blkref{def_complex_difference})\\
+&= \bigl(\gamma_1(\theta) + r\bigr)\gamma_1(\theta) + \bigl(\gamma_1(\theta) + r\bigr)(-r)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律（外側の積へ）})\\
 &= \bigl(\gamma_1(\theta)\gamma_1(\theta) + r\gamma_1(\theta)\bigr) + \bigl(\gamma_1(\theta)(-r) + r(-r)\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律（外側に 1 回、続けて内側の 2 箇所へ）})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を 2 箇所へ（内側の積へ）})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(r\gamma_1(\theta) + \bigl(\gamma_1(\theta)(-r) + r(-r)\bigr)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\bigl(r\gamma_1(\theta) + \gamma_1(\theta)(-r)\bigr) + r(-r)\Bigr)
@@ -4583,6 +4589,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 第一の準備の (x − iy)(x + iy) の鎖と (x − y)^2 の鎖で、根拠を「分配律」だけにしていた行が左から括った 4 項の和にするのに和の結合律も当てていたので、分配律の行と和の結合律を右辺から左辺へ当てる行に割った。(x − y)^2 の鎖の「分配律を右辺から左辺へ」の行も xx + A + A を xx + (A + A) に括り直していたので、和の結合律の行を前に置いた（13 等号から 14 等号、15 等号から 17 等号）。主張・値は不変。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 冪の行の根拠「def_power_of_complex_number より z^2 = (1_ℂz)z = zz」「同 z^2 = zz」「同 zz = z^2」は、冪の定義の 3 つの式と積の単位元を 1 行で当てていたので、新しく足した主張 square_of_complex_number_is_product（z^2 = zz）の参照にした（zz = z^2 は「右辺から左辺へ」と書いた。12 行。第 2 の等式の鎖の 10・12 行目に箇所数（6 箇所・11 箇所）を書いた。主張・値は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 最後の等式の鎖は relation_of_gamma_2_theta_tilde (2) を ℂ の −(r_ℂ)^2 の形で当てていたが、(2) の右辺は実数 −r^2 の像 (−r^2)_ℂ である。零元の後を、0_ℂ = (0)_ℂ、ℝ の加法逆元 −r^2 + r^2 = 0 を右辺から左辺へ、real_inclusion_preserves_sum を右辺から左辺へ、(2) を右辺から左辺へ、の順にして (2) をその形のまま当て、末尾を 1_ℂ + (r^2)_ℂ = (1 + r^2)_ℂ（real_inclusion_preserves_sum）にした（13 行 → 12 行）。第 3 行の real_inclusion_preserves_product、零元の行、和の結合律の行に「右辺から左辺へ」を書いた。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: (x − iy)(x + iy) の鎖・(x − y)^2 の鎖・第 3 の等式の ℂ の中の鎖で、分配律を外側の積に当ててから内側の 2 つの積へ当てるのを 1 行に書いていた。内側の積は外側に当てた後に現れるので同じ定理の同時の適用ではない。外側の積へ当てる行と、内側の 2 箇所へ同時に当てる行の 2 行に割った（左辺の行を含めて (x − iy)(x + iy) の鎖は 15 行から 16 行、(x − y)^2 の鎖は 18 行から 19 行、第 3 の等式の鎖は 23 行から 24 行。中身は不変）。",
       ],
     },
   },
