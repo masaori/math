@@ -261,7 +261,7 @@ theorem conj_real_inclusion_mul (a b : ℝ) :
 /-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\bar i = -i`（人手の 6 行と、略記の読み替えの 1 段）。 -/
 theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
   calc (starRingEnd ℂ) Complex.I
-      = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+      = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = (⟨0, -1⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                   -- 2 行目: `def_complex_conjugate`
     _ = (⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ) :=
@@ -271,7 +271,7 @@ theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
     _ = ((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ) := rfl     -- 4 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
     _ = (-1 : ℂ) * (⟨0, 1⟩ : ℂ) := by
         rw [Complex.ofReal_neg, Complex.ofReal_one] -- `(-1)_ℂ` を `-1_ℂ` と書く（`inclusion_rr_to_cc` の略記）
-    _ = (-1 : ℂ) * Complex.I := rfl               -- 5 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+    _ = (-1 : ℂ) * Complex.I := rfl               -- 5 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = -Complex.I := by
         rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`
 

@@ -111,7 +111,7 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
   calc star (-Complex.I)
       = star ((-1 : ℂ) * Complex.I) := by
         rw [neg_one_mul]                                       -- 1 行目: `multiply_by_minus_one`
-    _ = star ((-1 : ℂ) * (⟨0, 1⟩ : ℂ)) := rfl                 -- 2 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+    _ = star ((-1 : ℂ) * (⟨0, 1⟩ : ℂ)) := rfl                 -- 2 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = star (((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ)) := by
         rw [real_inclusion_neg_one_abbrev]                     -- 3 行目の読み: `-1_ℂ` を `(-1)_ℂ` と読む（`inclusion_rr_to_cc` の略記）
     _ = star ((⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ)) := rfl            -- 3 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
@@ -124,7 +124,7 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
     _ = (⟨0, -(-1)⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                                -- 5 行目: `def_complex_conjugate`
     _ = (⟨0, 1⟩ : ℂ) := by rw [neg_neg]                       -- 6 行目: ℝ で `-(-1) = 1`
-    _ = Complex.I := rfl                                       -- 7 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+    _ = Complex.I := rfl                                       -- 7 行目: `def_imaginary_unit` の `i := (0,1)`
 
 /-- 人手 `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`。 -/
 @[simp]

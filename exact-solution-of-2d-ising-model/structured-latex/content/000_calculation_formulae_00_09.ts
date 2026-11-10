@@ -1065,6 +1065,32 @@ T_B(X - W)
     ],
   },
   {
+    id: "calc_formulae_definition_imaginary_unit",
+    kind: "definition",
+    title: { tex: String.raw`\text{虚数単位}` },
+    labels: ["def_imaginary_unit"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " の実数の零元 ",
+        math(String.raw`0_{\mathbb{R}}`),
+        " と単位元 ",
+        math(String.raw`1_{\mathbb{R}}`),
+        " を使い、",
+        ref("definition_of_cc"),
+        " の元",
+      ]),
+      displayMath(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
+      paragraph(["を虚数単位と呼ぶ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。虚数単位を定めるブロックが計算公式の章に無く、antiperiodic_exp_sum ほかの主張の前置きが各自で i := (0,1) を置き、conjugate_transpose_of_pauli_y などの前の章の証明が後ろの章の antiperiodic_exp_sum の前置きを根拠に引いていたので足した。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_007_inclusion_rr_to_cc",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/007_definition_RRからCCへの包含写像.typ", ordinal: 8 },

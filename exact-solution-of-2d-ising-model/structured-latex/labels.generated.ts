@@ -203,6 +203,7 @@ export const ALL_LABELS = [
   "def_half_integer_modes",
   "def_hermitian_positive_definite",
   "def_identity_matrix",
+  "def_imaginary_unit",
   "def_index_skipping_map",
   "def_indexed_hyperbolic_abbreviations",
   "def_inverse_trig_functions",

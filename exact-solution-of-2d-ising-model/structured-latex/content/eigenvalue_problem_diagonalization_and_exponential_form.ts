@@ -2790,9 +2790,7 @@ s_1c_2
         "第二に、",
         math(String.raw`i = (0,1)`),
         "（",
-        ref("antiperiodic_exp_sum"),
-        " の前置きの ",
-        math(String.raw`i`),
+        ref("def_imaginary_unit"),
         "）の複素共役と、",
         math(String.raw`\exp(i\theta)`),
         " の複素共役を求める。",
@@ -2800,7 +2798,7 @@ s_1c_2
       displayMath(String.raw`\begin{aligned}
 \bar i
 &= \overline{(0,1)}
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= (0,-1)
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (-1,0)(0,1)
@@ -2808,7 +2806,7 @@ s_1c_2
 &= (-1_{\mathbb{C}})(0,1)
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
 &= (-1_{\mathbb{C}})\,i
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= -i
 &&(\because\ \blkref{multiply_by_minus_one})
 \end{aligned}`),
@@ -3251,7 +3249,7 @@ s_1c_2
 &= (0,1)\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
 &= i\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= i\left|\gamma_2(\theta)\right|_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -3279,6 +3277,7 @@ s_1c_2
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 名前だけの根拠「ℂ の四則」11 か所と 1 行に 2 つの事実を使う行を、ℂ・ℝ の体の等式 1 つずつの行に割った。準備の第一の前に i(−θ) = −iθ（ℝ で −a = (−1)a、real_inclusion_preserves_product、ℂ で x(ay) = a(xy)、multiply_by_minus_one）と −i(−θ) = iθ（ℂ で −(−z) = z）の鎖を置き、cos(−θ)・sin(−θ) の鎖の引数の行を 2 行ずつにし、γ_2(−θ) の表示の鎖の引数の行もこれを引く形にした。sin(−θ) の鎖の符号を外へ出す行、cos θ + i sin θ の鎖の i/(2i) = 1/2 の行と最後の行、conj(exp(iθ)) の鎖の (−i) sin θ の行、γ_2(−θ) の表示と conj(γ_2(θ)) の鎖の −i(−sin θ)・(−i) を外へ出す行、(1) の −(−z) = z、背理の鎖の ℝ で −(−y) = y、(5) の (0,|γ_2(θ)|) = (0,1)(|γ_2(θ)|,0)（definition_of_cc の積の成分の ℝ の事実 4 つ）を割った（ℂ は体 complex_numbers_form_a_field、ℝ は体 set_and_algebra_notation を添えた）。値と主張は不変。",
         "2026-11-09（Lean の通しの証明）: 準備の第一の i(-θ) = -iθ・-i(-θ) = iθ・cos(-θ) = cos θ・sin(-θ) = -sin θ の 4 本の鎖を、def_gamma1_gamma2_of_theta からも引けるよう" +
           "主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real・sin_of_negated_real として前へ移し、第三の鎖の根拠をそれらへの参照にした。主張と残りの鎖は変えていない。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
       ],
     },
   },
@@ -3895,10 +3894,10 @@ A(\tilde\theta_\mu)
         "（",
         ref("def_abs_arg"),
         "）とおく。",
-        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}})`),
+        math(String.raw`i = (0_{\mathbb{R}}, 1_{\mathbb{R}})`),
         " は ",
-        ref("antiperiodic_exp_sum"),
-        " の前置きの虚数単位、",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
         math(String.raw`e_+ := \exp(i\theta) \in \mathbb{C}`),
         "・",
         math(String.raw`e_- := \exp(-i\theta) \in \mathbb{C}`),
@@ -3999,7 +3998,7 @@ A(\tilde\theta_\mu)
       displayMath(String.raw`\begin{aligned}
 ii
 &= (0,1)(0,1)
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= (0\cdot 0 - 1\cdot 1,\ 0\cdot 1 + 1\cdot 0)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= (-1, 0)
@@ -4590,6 +4589,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 冪の行の根拠「def_power_of_complex_number より z^2 = (1_ℂz)z = zz」「同 z^2 = zz」「同 zz = z^2」は、冪の定義の 3 つの式と積の単位元を 1 行で当てていたので、新しく足した主張 square_of_complex_number_is_product（z^2 = zz）の参照にした（zz = z^2 は「右辺から左辺へ」と書いた。12 行。第 2 の等式の鎖の 10・12 行目に箇所数（6 箇所・11 箇所）を書いた。主張・値は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 最後の等式の鎖は relation_of_gamma_2_theta_tilde (2) を ℂ の −(r_ℂ)^2 の形で当てていたが、(2) の右辺は実数 −r^2 の像 (−r^2)_ℂ である。零元の後を、0_ℂ = (0)_ℂ、ℝ の加法逆元 −r^2 + r^2 = 0 を右辺から左辺へ、real_inclusion_preserves_sum を右辺から左辺へ、(2) を右辺から左辺へ、の順にして (2) をその形のまま当て、末尾を 1_ℂ + (r^2)_ℂ = (1 + r^2)_ℂ（real_inclusion_preserves_sum）にした（13 行 → 12 行）。第 3 行の real_inclusion_preserves_product、零元の行、和の結合律の行に「右辺から左辺へ」を書いた。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (x − iy)(x + iy) の鎖・(x − y)^2 の鎖・第 3 の等式の ℂ の中の鎖で、分配律を外側の積に当ててから内側の 2 つの積へ当てるのを 1 行に書いていた。内側の積は外側に当てた後に現れるので同じ定理の同時の適用ではない。外側の積へ当てる行と、内側の 2 箇所へ同時に当てる行の 2 行に割った（左辺の行を含めて (x − iy)(x + iy) の鎖は 15 行から 16 行、(x − y)^2 の鎖は 18 行から 19 行、第 3 の等式の鎖は 23 行から 24 行。中身は不変）。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
       ],
     },
   },

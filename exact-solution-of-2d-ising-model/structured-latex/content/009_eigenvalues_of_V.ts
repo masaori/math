@@ -839,10 +839,8 @@ I^*
         "が成り立つ。",
         math(String.raw`i`),
         " は ",
-        ref("antiperiodic_exp_sum"),
-        " の前置きの ",
-        math(String.raw`i := (0,1)`),
-        "、",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
         math(String.raw`-i`),
         " は ",
         ref("multiply_by_minus_one"),
@@ -854,7 +852,7 @@ I^*
       displayMath(String.raw`\begin{aligned}
 \bar i
 &= \overline{(0,1)}
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= (0,-1)
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (-1,0)(0,1)
@@ -862,7 +860,7 @@ I^*
 &= (-1_{\mathbb{C}})(0,1)
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
 &= (-1_{\mathbb{C}})\,i
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= -i
 &&(\because\ \blkref{multiply_by_minus_one})
 \end{aligned}`),
@@ -871,7 +869,7 @@ I^*
 &= \overline{(-1_{\mathbb{C}})\,i}
 &&(\because\ \blkref{multiply_by_minus_one})\\
 &= \overline{(-1_{\mathbb{C}})(0,1)}
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&&(\because\ \blkref{def_imaginary_unit})\\
 &= \overline{(-1,0)(0,1)}
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
 &= \overline{(0,-1)}
@@ -881,7 +879,7 @@ I^*
 &= (0,1)
 &&(\because\ \mathbb{R}\ \text{で}\ -(-1) = 1)\\
 &= i
-&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))
+&&(\because\ \blkref{def_imaginary_unit})
 \end{aligned}`),
       displayMath(
         String.raw`\begin{aligned}
@@ -906,6 +904,7 @@ I^*
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」と文で述べていたので、transpose_of_pauli_y と同じ成分の鎖で示す主張として足した。準備の \\bar i = -i の 6 行は relation_of_gamma_2_theta_tilde の「第二に」の鎖と同じである。",
         "数値検証: sagemath/check/conjugate_transpose_of_pauli_y/。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
       ],
     },
   },

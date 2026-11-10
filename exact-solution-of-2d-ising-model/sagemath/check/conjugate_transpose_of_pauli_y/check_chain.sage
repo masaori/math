@@ -2,14 +2,14 @@
 # 準備の 2 本の鎖 conj i = -i（6 行）、conj(-i) = i（7 行）と、主の 6 行の鎖
 #   (σ^y)^* = (conj σ_11 conj σ_21; conj σ_12 conj σ_22) = (conj 0_C conj i; conj(-i) conj 0_C) = (0_C conj i; conj(-i) 0_C)
 #   = (0_C -i; conj(-i) 0_C) = (0_C -i; i 0_C) = σ^y を 1 行ずつ確かめる。
-# ℂ は definition_of_cc どおり QQ の対、i := (0,1)（antiperiodic_exp_sum の前置き）、-z := (-1_C) z（multiply_by_minus_one）、
+# ℂ は definition_of_cc どおり QQ の対、i := (0,1)（def_imaginary_unit）、-z := (-1_C) z（multiply_by_minus_one）、
 # 共役転置は def_hermitian_positive_definite（body_star）、複素共役は def_complex_conjugate。
 # body_star は Sage の conjugate_transpose（QQ(i)）と一致することを見てから使う。
 # 対照: 共役を落とした転置 (σ^y)^⊤ は σ^y と異なる（-σ^y になる）。
 load("../../_shared/hermitian_forms_by_definition.sage")
 R = QQ
 z0, z1, zm1 = iota(0, R), iota(1, R), iota(-1, R)
-i_pair = (R(0), R(1))                     # antiperiodic_exp_sum の前置きの i := (0,1)
+i_pair = (R(0), R(1))                     # def_imaginary_unit の i := (0,1)
 mi_pair = cc_neg(i_pair, R)               # multiply_by_minus_one の -i := (-1_C) i
 
 

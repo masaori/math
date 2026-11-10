@@ -180,7 +180,7 @@ theorem complex_neg_neg_chain (z : ℂ) : -(-z) = z :=
 theorem complex_I_mul_I_chain : Complex.I * Complex.I = -1 :=
   calc Complex.I * Complex.I
       = (⟨0, 1⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl
-                          -- 1 行目: `antiperiodic_exp_sum` の前置きの `i := (0,1)`
+                          -- 1 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = (⟨0 * 0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := rfl
                           -- 2 行目: `definition_of_cc` の積
     _ = (⟨-1, 0⟩ : ℂ) := by norm_num

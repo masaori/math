@@ -8,7 +8,7 @@
 load("../../_shared/hermitian_forms_by_definition.sage")
 R = QQ
 z0, z1, zm1 = iota(0, R), iota(1, R), iota(-1, R)
-i_pair = (R(0), R(1))                     # antiperiodic_exp_sum の前置きの i := (0,1)
+i_pair = (R(0), R(1))                     # def_imaginary_unit の i := (0,1)
 mi_pair = cc_neg(i_pair, R)               # multiply_by_minus_one の -i := (-1_C) i
 
 
