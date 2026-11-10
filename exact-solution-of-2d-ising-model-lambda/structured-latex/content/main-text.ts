@@ -69530,8 +69530,10 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                         ref("claim_even_edge_set_count"), " も適用できるので",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-|\mathcal E(G_S)|&=2^{|S|}
+|\mathcal E(G_S)|&=\bigl|\{T:T\subset S\}\bigr|
 &&\bigl(\because\ \blkref{claim_cell_boundary_even_edge_bijection}\bigr)\\
+&=2^{|S|}
+&&\bigl(\because\ \text{有限集合の部分集合の個数}\bigr)\\
 &=2^{E_S+1-V_S}
 &&\bigl(\because\ \blkref{claim_even_edge_set_count}\bigr)
 \end{aligned}`),
