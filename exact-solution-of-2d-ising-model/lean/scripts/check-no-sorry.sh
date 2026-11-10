@@ -2712,6 +2712,8 @@ targets=(
   Ising2D.square_of_real_number_is_product
   "Ising2D.NecSuf.sq_eq_mul_self'"
   Ising2D.square_of_real_number_is_product_of_necSuf
+  Ising2D.square_of_complex_number_is_product
+  Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products
   "Ising2D.NecSuf.finProdLeft_mul'"
   Ising2D.finite_product_of_real_products_of_necSuf

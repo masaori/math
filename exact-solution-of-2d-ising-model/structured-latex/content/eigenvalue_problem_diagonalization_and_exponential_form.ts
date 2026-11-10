@@ -4047,12 +4047,12 @@ e_+e_-
 &= xx + yy
 &&(\because\ \text{上の}\ -(-z) = z)\\
 &= x^2 + y^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ右辺から左辺へ})
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を 2 箇所へ右辺から左辺へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 (x - y)^2
 &= (x - y)(x - y)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz)\\
 &= \bigl(x + (-y)\bigr)\bigl(x + (-y)\bigr)
 &&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
 &= \bigl(x + (-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
@@ -4084,7 +4084,7 @@ e_+e_-
 &= xx - 2_{\mathbb{C}}(xy) + yy
 &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
 &= x^2 - 2_{\mathbb{C}}(xy) + y^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ右辺から左辺へ})
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を 2 箇所へ右辺から左辺へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 u + iv
@@ -4222,7 +4222,7 @@ u^2 + v^2
 &= (-1_{\mathbb{C}})\Bigl((s_2^*s_2^*)\bigl(a_0^2 + v^2\bigr)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
 &= (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= -\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
 &&(\because\ \blkref{multiply_by_minus_one})
 \end{aligned}`),
@@ -4290,13 +4290,13 @@ c_2s_2^*
 &&(\because\ \text{上の}\ (x - y)^2 = x^2 - 2_{\mathbb{C}}(xy) + y^2\ \text{を 2 箇所へ})\\
 &\quad= (c_1c_2^*)(c_1c_2^*) - 2_{\mathbb{C}}\bigl((c_1c_2^*)(s_1s_2^*u)\bigr) + (s_1s_2^*u)(s_1s_2^*u) \\
 &\qquad\quad - (s_2^*s_2^*)\Bigl((c_1u)(c_1u) - 2_{\mathbb{C}}\bigl((c_1u)(s_1c_2)\bigr) + (s_1c_2)(s_1c_2) + 1 - uu\Bigr)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を 6 箇所へ})\\
 &\quad= (c_1c_1)(c_2^*c_2^*) - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + (s_1s_1)(s_2^*s_2^*)(uu) \\
 &\qquad\quad - (s_2^*s_2^*)\bigl((c_1c_1)(uu) - 2_{\mathbb{C}}c_1s_1c_2u + (s_1s_1)(c_2c_2) + 1 - uu\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad - (s_2^*)^2\bigl(c_1^2u^2 - 2_{\mathbb{C}}c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\bigr)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を 11 箇所へ右辺から左辺へ})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad + \Bigl(-\bigl((s_2^*)^2(c_1^2u^2 - 2_{\mathbb{C}}c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2)\bigr)\Bigr)
 &&(\because\ \blkref{def_complex_difference})\\
@@ -4334,13 +4334,13 @@ c_2s_2^*
 &&(\because\ \blkref{def_complex_difference}\ \text{を 3 箇所へ右辺から左辺へ})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1c_2(s_2^*s_2^*)u - s_1^2(c_2c_2)(s_2^*s_2^*) - (s_2^*)^2 + (s_2^*)^2u^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 3 箇所へ})\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を 3 箇所へ})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1(c_2s_2^*)s_2^*u - s_1^2\bigl((c_2s_2^*)(c_2s_2^*)\bigr) - (s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1(c_2s_2^*)s_2^*u - s_1^2(c_2s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
 &\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1c_2^*s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \text{上の}\ c_2s_2^* = c_2^*\ \text{を 2 箇所へ})\\
@@ -4444,7 +4444,7 @@ c_2s_2^*
 &= \gamma_1(\theta)\gamma_1(\theta) + \gamma_2(\theta)\gamma_2(-\theta)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= 1
 &&(\because\ \text{上の第 2 の等式の鎖})
 \end{aligned}`),
@@ -4502,7 +4502,7 @@ c_2s_2^*
 &= \gamma_1(\theta)\gamma_1(\theta) + \bigl(-r^2\bigr)_{\mathbb{C}}
 &&(\because\ \mathbb{R}\ \text{の四則}\ (-1)x = -x)\\
 &= \gamma_1(\theta)^2 + \bigl(-r^2\bigr)_{\mathbb{C}}
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を右辺から左辺へ})\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
 &&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2)\ \text{を右辺から左辺へ})\\
 &= 1_{\mathbb{C}}
@@ -4537,7 +4537,7 @@ c_2s_2^*
 &= \gamma_1(\theta)_{\mathbb{C}}\,\gamma_1(\theta)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= \bigl(\gamma_1(\theta)_{\mathbb{C}}\bigr)^2
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= \gamma_1(\theta)^2 + 0_{\mathbb{C}}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元。以下この鎖では像の記号を省き、最後の 4 行で書き戻す})\\
 &= \gamma_1(\theta)^2 + \bigl(-r^2 + r^2\bigr)
@@ -4549,7 +4549,7 @@ c_2s_2^*
 &= 1_{\mathbb{C}} + \bigl(r_{\mathbb{C}}\bigr)^2
 &&(\because\ \text{上の第 2 の等式の鎖})\\
 &= 1_{\mathbb{C}} + r_{\mathbb{C}}\,r_{\mathbb{C}}
-&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz)\\
 &= 1_{\mathbb{C}} + (rr)_{\mathbb{C}}
 &&(\because\ \blkref{real_inclusion_preserves_product})\\
 &= (1 + rr)_{\mathbb{C}}
@@ -4583,6 +4583,7 @@ c_2s_2^*
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の e_− := exp(−iθ) の −iθ が euler_formula_cos_sin・exp_of_negative_i_real_as_cos_minus_i_sin・def_A_theta と同じく multiply_by_minus_one の −(iθ) であることを書いた（e_+e_− の鎖の加法逆元の行・u^2 + v^2 の鎖・γ_2(−θ) の鎖がこの読みに乗っている。中身は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 準備の像の読み方の和・差を、名前だけの言い換え（和は real_inclusion_preserves_finite_sum を m = 2 で、差は def_complex_difference・multiply_by_minus_one）から主張 real_inclusion_preserves_sum・real_inclusion_preserves_difference の参照にした。第 3 の等式の鎖の 4 行目「準備の像の読み方（和・差の像は像の和・差）」は 2 つの主張を 1 行で当てていたので、和の行と差の行の 2 行に割った（22 行から 23 行）。主張・値は不変。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 第一の準備の (x − iy)(x + iy) の鎖と (x − y)^2 の鎖で、根拠を「分配律」だけにしていた行が左から括った 4 項の和にするのに和の結合律も当てていたので、分配律の行と和の結合律を右辺から左辺へ当てる行に割った。(x − y)^2 の鎖の「分配律を右辺から左辺へ」の行も xx + A + A を xx + (A + A) に括り直していたので、和の結合律の行を前に置いた（13 等号から 14 等号、15 等号から 17 等号）。主張・値は不変。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 冪の行の根拠「def_power_of_complex_number より z^2 = (1_ℂz)z = zz」「同 z^2 = zz」「同 zz = z^2」は、冪の定義の 3 つの式と積の単位元を 1 行で当てていたので、新しく足した主張 square_of_complex_number_is_product（z^2 = zz）の参照にした（zz = z^2 は「右辺から左辺へ」と書いた。12 行。第 2 の等式の鎖の 10・12 行目に箇所数（6 箇所・11 箇所）を書いた。主張・値は不変）。",
       ],
     },
   },

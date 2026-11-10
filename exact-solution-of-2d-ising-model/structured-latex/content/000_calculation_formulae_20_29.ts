@@ -2230,6 +2230,47 @@ z^{m+1} := z^m\, z`),
     },
   },
   {
+    id: "calculation_formulae_claim_square_of_complex_number_is_product",
+    kind: "claim",
+    title: { text: "複素数の二乗は、その複素数を二つ掛けた積に等しい" },
+    labels: ["square_of_complex_number_is_product"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " とする。二乗 ",
+        math(String.raw`z^2`),
+        " は ",
+        ref("def_power_of_complex_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）、積は ",
+        ref("definition_of_cc"),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`z^2 = z\,z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+z^2
+&= z^1\,z
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m\, z\ (m \to 1)\bigr)\\
+&= (z^0\,z)\,z
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m\, z\ (m \to 0)\bigr)\\
+&= (1_{\mathbb{C}}\,z)\,z
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\bigr)\\
+&= z\,z
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。det_A_theta_tilde の鎖の冪の行が「def_power_of_complex_number より z^2 = (1_ℂz)z = zz」と、冪の定義の 3 つの式と積の単位元を 1 行で当てていたので、主張として切り出して引くようにした。square_of_real_number_is_product と同じ 4 行の鎖にした。Lean は Ising2D.square_of_complex_number_is_product（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSquareOfComplexNumberIsProduct.lean）。数値検証: sagemath/check/square_of_complex_number_is_product/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_finite_product_with_zero_factor_is_zero",
     kind: "claim",
     title: { text: "0 の因子を持つ複素数の有限積は 0" },

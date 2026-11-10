@@ -45,6 +45,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfComplexNumberIsProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
@@ -64,10 +65,10 @@ theorem IsingParam.c2star_sq_sub_s2star_sq : P.const.c2star ^ 2 - P.const.s2star
   simp [IsingParam.const, Real.cosh_sq_sub_sinh_sq]
 
 /-- 実数の 2 乗の像は像の 2 乗: `(c_ℂ)^2 = (c^2)_ℂ`（`c ∈ ℝ`）。人手 `det_A_theta_tilde` の最後の等式の鎖の最初の 3 行
-（`square_of_real_number_is_product`・`real_inclusion_preserves_product`・`def_power_of_complex_number`）を、右辺から左辺へ並べた。 -/
+（`square_of_real_number_is_product`・`real_inclusion_preserves_product`・`square_of_complex_number_is_product`）を、右辺から左辺へ並べた。 -/
 theorem real_inclusion_sq_via_product (c : ℝ) : (c : ℂ) ^ 2 = ((c ^ 2 : ℝ) : ℂ) :=
   calc (c : ℂ) ^ 2
-      = (c : ℂ) * (c : ℂ) := sq (c : ℂ)                    -- `def_power_of_complex_number` より `z^2 = zz`
+      = (c : ℂ) * (c : ℂ) := square_of_complex_number_is_product (c : ℂ)  -- `square_of_complex_number_is_product` の `z^2 = zz`
     _ = ((c * c : ℝ) : ℂ) := real_inclusion_mul c c         -- `real_inclusion_preserves_product`
     _ = ((c ^ 2 : ℝ) : ℂ) := by rw [square_of_real_number_is_product c]
                           -- `square_of_real_number_is_product` を右辺から左辺へ
@@ -139,8 +140,8 @@ theorem det_AMat_eq_gamma1_sq_add (K : IsingConst) (θ : ℝ) :
                           -- 7 行目: `minus_one_times_minus_one_is_one_in_cc`
     _ = gamma1 K θ * gamma1 K θ + gamma2 K θ * gamma2 K (-θ) := by rw [one_mul]
                           -- 8 行目: `complex_numbers_form_a_field` の積の単位元
-    _ = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) := by rw [sq]
-                          -- 9 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+    _ = gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ) := by rw [square_of_complex_number_is_product]
+                          -- 9 行目: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `e_+e_- = 1_ℂ`**（人手の 4 行）。
 人手の準備の `e_- := exp(-iθ)` の `-iθ` は `multiply_by_minus_one` の `-(iθ)` で、ここの `-(I * θ)` と同じ読みである。 -/
@@ -229,15 +230,15 @@ theorem complex_sub_I_mul_mul_add_I_mul (x y : ℂ) :
                           -- 12 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
     _ = x * x + y * y := by rw [complex_neg_neg_chain]
                           -- 13 行目: 上の `-(-z) = z`（`complex_neg_neg_chain`）
-    _ = x ^ 2 + y ^ 2 := by rw [sq x, sq y]
-                          -- 14 行目: `def_power_of_complex_number` より `z^2 = zz` を 2 箇所へ右辺から左辺へ
+    _ = x ^ 2 + y ^ 2 := by rw [square_of_complex_number_is_product x, square_of_complex_number_is_product y]
+                          -- 14 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 2 箇所へ右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`**（`x, y ∈ ℂ`、人手の 17 行）。 -/
 theorem complex_sub_sq_chain (x y : ℂ) :
     (x - y) ^ 2 = x ^ 2 - 2 * (x * y) + y ^ 2 :=
   calc (x - y) ^ 2
-      = (x - y) * (x - y) := sq (x - y)
-                          -- 1 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz`
+      = (x - y) * (x - y) := square_of_complex_number_is_product (x - y)
+                          -- 1 行目: `square_of_complex_number_is_product` の `z^2 = zz`
     _ = (x + (-y)) * (x + (-y)) := by rw [sub_eq_add_neg]
                           -- 2 行目: `def_complex_difference` を 2 箇所へ
     _ = (x + (-1) * y) * (x + (-1) * y) := by rw [neg_one_mul]
@@ -278,8 +279,8 @@ theorem complex_sub_sq_chain (x y : ℂ) :
                           -- 15 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = x * x - 2 * (x * y) + y * y := by rw [← sub_eq_add_neg]
                           -- 16 行目: `def_complex_difference` を右辺から左辺へ
-    _ = x ^ 2 - 2 * (x * y) + y ^ 2 := by rw [sq x, sq y]
-                          -- 17 行目: `def_power_of_complex_number` より `z^2 = (1_ℂz)z = zz` を 2 箇所へ右辺から左辺へ
+    _ = x ^ 2 - 2 * (x * y) + y ^ 2 := by rw [square_of_complex_number_is_product x, square_of_complex_number_is_product y]
+                          -- 17 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 2 箇所へ右辺から左辺へ
 
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `u + iv = e_+`**（`u = (cos θ)_ℂ`、`v = (sin θ)_ℂ`、
 `e_+ = exp(iθ)`、人手の 19 行）。`e_- = exp(-iθ)` の `-iθ` は `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）。 -/
@@ -450,8 +451,8 @@ theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
                           -- 7 行目: 上の `(x - iy)(x + iy) = x^2 + y^2` を `x = a_0, y = v` で
     _ = (-1) * ((s * s) * (a₀ ^ 2 + v ^ 2)) := mul_assoc _ _ _
                           -- 8 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = (-1) * (s ^ 2 * (a₀ ^ 2 + v ^ 2)) := by rw [← sq s]
-                          -- 9 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+    _ = (-1) * (s ^ 2 * (a₀ ^ 2 + v ^ 2)) := by rw [← square_of_complex_number_is_product s]
+                          -- 9 行目: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
     _ = -(s ^ 2 * (a₀ ^ 2 + v ^ 2)) := neg_one_mul _
                           -- 10 行目: `multiply_by_minus_one`
 
@@ -481,8 +482,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
   set s₂' : ℂ := (K.s2star : ℂ)
   set u : ℂ := (Real.cos θ : ℂ)
   set v : ℂ := (Real.sin θ : ℂ)
-  have hsq_s2star_term : 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u = 2 * c₁ * s₁ * c₂ * (s₂' * s₂') * u := by rw [sq s₂']
-  have hsq_c2_s2star_term : s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 = s₁ ^ 2 * (c₂ * c₂) * (s₂' * s₂') := by rw [sq c₂, sq s₂']
+  have hsq_s2star_term : 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u = 2 * c₁ * s₁ * c₂ * (s₂' * s₂') * u := by rw [square_of_complex_number_is_product s₂']
+  have hsq_c2_s2star_term : s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 = s₁ ^ 2 * (c₂ * c₂) * (s₂' * s₂') := by rw [square_of_complex_number_is_product c₂, square_of_complex_number_is_product s₂']
   calc gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ)
       = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 + gamma2 K θ * gamma2 K (-θ) := by
         rw [gamma1_eq_inclusion_form]
@@ -513,8 +514,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
     _ = (c₁ * c₂') * (c₁ * c₂') - 2 * ((c₁ * c₂') * (s₁ * s₂' * u)) + (s₁ * s₂' * u) * (s₁ * s₂' * u)
           - (s₂' * s₂') * ((c₁ * u) * (c₁ * u) - 2 * ((c₁ * u) * (s₁ * c₂)) + (s₁ * c₂) * (s₁ * c₂)
               + 1 - u * u) := by
-        simp only [sq]
-                          -- 10 行目: `def_power_of_complex_number` より `z^2 = zz`
+        simp only [square_of_complex_number_is_product]
+                          -- 10 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 6 箇所へ
     _ = (c₁ * c₁) * (c₂' * c₂') - 2 * c₁ * c₂' * s₁ * s₂' * u + (s₁ * s₁) * (s₂' * s₂') * (u * u)
           - (s₂' * s₂') * ((c₁ * c₁) * (u * u) - 2 * c₁ * s₁ * c₂ * u + (s₁ * s₁) * (c₂ * c₂)
               + 1 - u * u) := by
@@ -522,8 +523,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
                           -- 11 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
           - s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 - 2 * c₁ * s₁ * c₂ * u + s₁ ^ 2 * c₂ ^ 2 + 1 - u ^ 2) := by
-        rw [← sq c₁, ← sq c₂', ← sq s₁, ← sq s₂', ← sq u, ← sq c₂]
-                          -- 12 行目: `def_power_of_complex_number` より `zz = z^2`
+        rw [← square_of_complex_number_is_product c₁, ← square_of_complex_number_is_product c₂', ← square_of_complex_number_is_product s₁, ← square_of_complex_number_is_product s₂', ← square_of_complex_number_is_product u, ← square_of_complex_number_is_product c₂]
+                          -- 12 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 11 箇所へ右辺から左辺へ
     _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
           + -(s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 - 2 * c₁ * s₁ * c₂ * u + s₁ ^ 2 * c₂ ^ 2 + 1 - u ^ 2)) :=
         sub_eq_add_neg _ _
@@ -594,7 +595,7 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
           - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂ * (s₂' * s₂') * u
           - s₁ ^ 2 * (c₂ * c₂) * (s₂' * s₂') - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
         rw [hsq_s2star_term, hsq_c2_s2star_term]
-                          -- 25 行目: `def_power_of_complex_number` より `z^2 = zz` を 3 箇所へ（`hsq_s2star_term`・`hsq_c2_s2star_term`）
+                          -- 25 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 3 箇所へ（`hsq_s2star_term`・`hsq_c2_s2star_term`）
     _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
           - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * (c₂ * s₂') * s₂' * u
           - s₁ ^ 2 * ((c₂ * s₂') * (c₂ * s₂')) - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
@@ -603,8 +604,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
     _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
           - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * (c₂ * s₂') * s₂' * u
           - s₁ ^ 2 * (c₂ * s₂') ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
-        rw [← sq (c₂ * s₂')]
-                          -- 27 行目: `def_power_of_complex_number` より `zz = z^2`
+        rw [← square_of_complex_number_is_product (c₂ * s₂')]
+                          -- 27 行目: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
     _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
           - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂' * s₂' * u
           - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
@@ -845,8 +846,8 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
                           -- 19 行目: `real_inclusion_preserves_product`（`-1_ℂ` は略記 `(-1)_ℂ`）
       _ = g * g + ((-(A ^ 2) : ℝ) : ℂ) := by rw [neg_one_mul]
                           -- 20 行目: ℝ の四則 `(-1)x = -x`
-      _ = g ^ 2 + ((-(A ^ 2) : ℝ) : ℂ) := by rw [sq g]
-                          -- 21 行目: `def_power_of_complex_number` より `z^2 = zz` を右辺から左辺へ
+      _ = g ^ 2 + ((-(A ^ 2) : ℝ) : ℂ) := by rw [square_of_complex_number_is_product g]
+                          -- 21 行目: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
       _ = g ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
           rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg]
                           -- 22 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ（Lean の (2) の右辺 `-((A^2 : ℝ) : ℂ)` との
@@ -880,8 +881,8 @@ theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2s
                           -- `square_of_real_number_is_product`（`r → γ_1(θ)`）
       _ = (g : ℂ) * (g : ℂ) := (real_inclusion_mul g g).symm
                           -- `real_inclusion_preserves_product`
-      _ = (g : ℂ) ^ 2 := (sq (g : ℂ)).symm
-                          -- `def_power_of_complex_number` より `zz = z^2`
+      _ = (g : ℂ) ^ 2 := (square_of_complex_number_is_product (g : ℂ)).symm
+                          -- `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
       _ = (g : ℂ) ^ 2 + 0 := (add_zero _).symm
                           -- `complex_numbers_form_a_field` の零元
       _ = (g : ℂ) ^ 2 + (-((r : ℂ)) ^ 2 + (r : ℂ) ^ 2) := by rw [neg_add_cancel]
@@ -894,8 +895,8 @@ theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2s
                           -- `complex_numbers_form_a_field` の和の結合律
       _ = 1 + (r : ℂ) ^ 2 := by rw [hsecond]
                           -- 上の第 2 の等式の鎖（`gamma1_sq_add_gamma2_mul_thetaTilde`）
-      _ = 1 + (r : ℂ) * (r : ℂ) := by rw [sq (r : ℂ)]
-                          -- `def_power_of_complex_number` より `z^2 = zz`
+      _ = 1 + (r : ℂ) * (r : ℂ) := by rw [square_of_complex_number_is_product (r : ℂ)]
+                          -- `square_of_complex_number_is_product` の `z^2 = zz`
       _ = 1 + ((r * r : ℝ) : ℂ) := by rw [real_inclusion_mul r r]
                           -- `real_inclusion_preserves_product`
       _ = ((1 + r * r : ℝ) : ℂ) := real_inclusion_add 1 (r * r)

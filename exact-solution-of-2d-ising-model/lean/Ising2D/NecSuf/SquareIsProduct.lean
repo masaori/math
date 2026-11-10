@@ -4,6 +4,9 @@
 具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSquareOfRealNumberIsProduct.lean`
 （人手 `square_of_real_number_is_product`）。具体版をこのファイルの系として導くのは
 `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSquareOfRealNumberIsProductFromNecSuf.lean`。
+複素数の具体版 `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSquareOfComplexNumberIsProduct.lean`
+（人手 `square_of_complex_number_is_product`）も同じ手順で、`R := ℂ` の系として
+`Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSquareOfComplexNumberIsProductFromNecSuf.lean` で導く。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
@@ -12,7 +15,7 @@
 ## 何が効いているか / 効いていないか
 
 - 効くのは、冪の定義の 2 つの式と、`1` が左からの乗法の単位元であること（4 段目）だけである。
-  積の結合則・可換則、和、順序、実数であることは効いていない。
+  積の結合則・可換則、和、順序、実数・複素数であることは効いていない。
 - `Monoid R` は mathlib の冪 `^`（`Monoid.npow`）と、その定義の式 `pow_zero`・`pow_succ` を使うためだけに要る
   （`PowerOfOneIsOne.lean` と同じ事情）。
 -/
@@ -20,7 +23,7 @@ import Mathlib.Algebra.Group.Defs
 
 namespace Ising2D.NecSuf
 
-/-- **`square_of_real_number_is_product`** の必要十分版: `r^2 = r r`。 -/
+/-- **`square_of_real_number_is_product`**・**`square_of_complex_number_is_product`** の必要十分版: `r^2 = r r`。 -/
 theorem sq_eq_mul_self' {R : Type*} [Monoid R] (r : R) : r ^ 2 = r * r :=
   calc r ^ 2
       = r ^ 1 * r := pow_succ r 1                                             -- `a^{m+1} = a^m a`（`m → 1`）
