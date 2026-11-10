@@ -164,10 +164,10 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
       paragraph([
         ref("def_transfer_matrix_symbols"),
         " の記号のもとで、",
-        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
-        "（",
-        ref("definition_of_cc"),
-        " の台集合の元、虚数単位）とする。",
+        math(String.raw`i \in \mathbb{C}`),
+        " を ",
+        ref("def_imaginary_unit"),
+        " の虚数単位とする。",
         math(String.raw`K_1, K_2^* \in \mathbb{R}`),
         "（",
         ref("def_transfer_matrix_symbols"),
@@ -225,7 +225,7 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
 &= (-1)\cdot(i\cdot i)
    \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
 &= (-1)\cdot(-1)
-   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{def_imaginary_unit}\ \text{の}\ i=(0,1)\ \text{と}\ \blkref{definition_of_cc}\ \text{の積}) \\
 &= 1
    \quad (\because \mathbb{C}\ \text{で}\ (-1)\cdot(-1)=1\text{。}\blkref{definition_of_cc}\ \text{の積})
 \end{aligned}`,
@@ -831,7 +831,7 @@ G
 &= (i\cdot i)\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
    \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to i,\ b \to i,\ A \to R^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes R^{y})\right) \\
 &= (-1_{\mathbb{C}})\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
-   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{def_imaginary_unit}\ \text{の}\ i=(0,1)\ \text{と}\ \blkref{definition_of_cc}\ \text{の積}) \\
 &= (-1)_{\mathbb{C}}\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
    \quad (\because \blkref{inclusion_rr_to_cc} \text{ の略記 } -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1))
 \end{aligned}`,

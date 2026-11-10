@@ -1814,8 +1814,10 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         "さらに、",
         math(String.raw`\pi\in\mathbb R`),
         " を円周率、",
-        math(String.raw`i:=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
-        " を虚数単位とする。複素数の差、零元、単位元、逆元には ",
+        math(String.raw`i\in\mathbb C`),
+        " を ",
+        ref("def_imaginary_unit"),
+        " の虚数単位とする。複素数の差、零元、単位元、逆元には ",
         ref("complex_numbers_form_a_field"),
         " の体構造を用いる。とくに ",
         math(String.raw`-1_{\mathbb C}\ne0_{\mathbb C}`),
@@ -2283,6 +2285,8 @@ k
         " の ",
         math(String.raw`\mathbb C`),
         " と ",
+        ref("def_imaginary_unit"),
+        " の ",
         math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
         " である。",
       ]),
@@ -2349,6 +2353,8 @@ k
         " の ",
         math(String.raw`\mathbb C`),
         " と ",
+        ref("def_imaginary_unit"),
+        " の ",
         math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
         " である。",
       ]),
@@ -3146,7 +3152,11 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
         ref("def_H1_plus"),
         " の定義により ",
         math(String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`),
-        "）、",
+        "、",
+        math(String.raw`i \in \mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位）、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4896,8 +4906,10 @@ F_{n+1}
         "）は ",
         ref("nesting_of_commutator_of_H_and_check_Z"),
         " のものとする。",
-        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
-        " を虚数単位、",
+        math(String.raw`i \in \mathbb{C}`),
+        " を ",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
         math(String.raw`-i := (-1_{\mathbb{C}})\,i`),
         "（",
         ref("multiply_by_minus_one"),
@@ -4999,7 +5011,7 @@ F_{n+1}
       displayMath(String.raw`\begin{aligned}
 i\,i
 &= (0_{\mathbb{R}}, 1_{\mathbb{R}})(0_{\mathbb{R}}, 1_{\mathbb{R}})
-&&\bigl(\because\ i\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_imaginary_unit}\bigr)\\
 &= \bigl(0_{\mathbb{R}}0_{\mathbb{R}} - 1_{\mathbb{R}}1_{\mathbb{R}},\ 0_{\mathbb{R}}1_{\mathbb{R}} + 1_{\mathbb{R}}0_{\mathbb{R}}\bigr)
 &&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
 &= (-1_{\mathbb{R}}, 0_{\mathbb{R}})
@@ -6563,6 +6575,14 @@ T_{V_2}\!\left(a\check Z_\mu+b\check Y_\mu\right)
         math(String.raw`\exp`),
         "（",
         ref("def_scalar_exp"),
+        "）、",
+        ref("def_imaginary_unit"),
+        " の虚数単位 ",
+        math(String.raw`i \in \mathbb{C}`),
+        " と ",
+        math(String.raw`-i := (-1_{\mathbb{C}})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
         "）を用いて",
       ]),
       displayMath(

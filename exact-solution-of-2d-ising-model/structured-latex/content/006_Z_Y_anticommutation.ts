@@ -27,7 +27,15 @@ export default defineBlocks([
 I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 \ \in\mathrm{Mat}(2,\mathbb{C})`,
       ),
-      paragraph(["とする。このとき ", math(String.raw`\mathrm{Mat}(2,\mathbb{C})`), " の中で"]),
+      paragraph([
+        "とする（",
+        math(String.raw`i \in \mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位）。このとき ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の中で",
+      ]),
       displayMath(
         String.raw`\sigma^x\sigma^x = \sigma^y\sigma^y = \sigma^z\sigma^z = I,`,
       ),
@@ -50,7 +58,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= -(i\cdot i)
 &&(\because \mathbb{C} \text{ の乗法と符号の計算}) \\
 &= -(-1)
-&&(\because i\cdot i=-1) \\
+&&(\because i\cdot i=-1\text{。}\blkref{def_imaginary_unit}\text{ の } i = (0_{\mathbb{R}}, 1_{\mathbb{R}})\text{ と }\blkref{definition_of_cc}\text{ の積}) \\
 &= 1
 &&(\because \mathbb{C} \text{ の符号の計算})
 \end{aligned}`,
@@ -248,7 +256,9 @@ i\cdot(-i)
         ref("pauli_matrix_products"),
         " の ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
-        " と虚数単位 ",
+        " と、",
+        ref("def_imaginary_unit"),
+        " の虚数単位 ",
         math(String.raw`i \in \mathbb{C}`),
         " について、",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
@@ -300,7 +310,9 @@ i\cdot(-i)
         ref("pauli_matrix_products"),
         " の ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
-        " と虚数単位 ",
+        " と、",
+        ref("def_imaginary_unit"),
+        " の虚数単位 ",
         math(String.raw`i \in \mathbb{C}`),
         " について、",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
@@ -715,10 +727,10 @@ I
         " の ",
         math(String.raw`R^y`),
         " について、",
-        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
-        "（",
-        ref("definition_of_cc"),
-        " の台集合の元、虚数単位）とすると",
+        ref("def_imaginary_unit"),
+        " の虚数単位 ",
+        math(String.raw`i \in \mathbb{C}`),
+        " を使うと",
       ]),
       displayMath(String.raw`\sigma^y = i R^y`),
       paragraph([

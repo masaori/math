@@ -3547,7 +3547,11 @@ v^\top W_{\mathbb{R}}v
 I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ),
       paragraph([
-        "とする。",
+        "とする（",
+        math(String.raw`i\in\mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位）。",
         ref("def_site_pauli_matrices"),
         " のとおり ",
         math(String.raw`\sigma_k^a`),
@@ -3613,7 +3617,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 &=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot(-i)
 &&(\because\ \sigma^x_{12}=1,\ \sigma^y_{12}=-i,\ I_{12}=\sigma^z_{12}=0)\\
 &=\frac{a_{12}+a_{21}}{2}+\frac{a_{12}-a_{21}}{2}
-&&(\because\ i\cdot(-i)=1)\\
+&&(\because\ i\cdot(-i)=1\text{。}\blkref{multiply_by_minus_one}\text{ の } -i=(-1_{\mathbb{C}})i\text{、}\blkref{def_imaginary_unit}\text{ の } i=(0,1)\text{ と }\blkref{definition_of_cc}\text{ の積})\\
 &=\frac{2a_{12}}{2}
 &&(\because\ \text{同分母の和})\\
 &=a_{12}
@@ -3622,7 +3626,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 &=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot i
 &&(\because\ \sigma^x_{21}=1,\ \sigma^y_{21}=i,\ I_{21}=\sigma^z_{21}=0)\\
 &=\frac{a_{12}+a_{21}}{2}-\frac{a_{12}-a_{21}}{2}
-&&(\because\ i\cdot i=-1)\\
+&&(\because\ i\cdot i=-1\text{。}\blkref{def_imaginary_unit}\text{ の } i=(0,1)\text{ と }\blkref{definition_of_cc}\text{ の積})\\
 &=\frac{2a_{21}}{2}
 &&(\because\ \text{同分母の差})\\
 &=a_{21}
@@ -4775,8 +4779,10 @@ x^\top W_{\mathbb{R}}x
         " である。",
       ]),
       paragraph([
-        math(String.raw`i := (0,1) \in \mathbb{C}`),
-        " とし、",
+        math(String.raw`i \in \mathbb{C}`),
+        " を ",
+        ref("def_imaginary_unit"),
+        " の虚数単位とし、",
         math(String.raw`p := q + \overline{q}`),
         "、",
         math(String.raw`p' := i\left(q - \overline{q}\right)`),

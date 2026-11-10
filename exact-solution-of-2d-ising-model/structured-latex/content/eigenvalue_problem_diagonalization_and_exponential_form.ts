@@ -447,7 +447,11 @@ t
         math(String.raw`\sigma^y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}`),
         "、",
         math(String.raw`\sigma^z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}`),
-        " とする。",
+        " とする（",
+        math(String.raw`i \in \mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位）。",
         math(String.raw`\sigma_k^x, \sigma_k^y, \sigma_k^z`),
         " は ",
         ref("def_transfer_matrix_symbols"),
@@ -2339,7 +2343,7 @@ w(\theta) &:= (c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i\,(\sin\theta)_{\ma
         String.raw`\begin{aligned}
 w(\theta)
 &= (c_1,0)(\cos\theta,0) + (-1,0)\bigl((0,1)(\sin\theta,0)\bigr) + (-1,0)\bigl((s_1,0)(c_2,0)\bigr)
-   \quad (\because w(\theta)\text{ の定義、}\blkref{inclusion_rr_to_cc}\text{、}i = (0,1)\text{、}\blkref{def_complex_difference}\text{、}\blkref{multiply_by_minus_one}) \\
+   \quad (\because w(\theta)\text{ の定義、}\blkref{inclusion_rr_to_cc}\text{、}\blkref{def_imaginary_unit}\ (i = (0,1))\text{、}\blkref{def_complex_difference}\text{、}\blkref{multiply_by_minus_one}) \\
 &= (c_1\cos\theta, 0) + (-1,0)(0, \sin\theta) + (-1,0)(s_1c_2, 0)
    \quad (\because \blkref{definition_of_cc}\text{ の積を三か所に}) \\
 &= (c_1\cos\theta, 0) + (0, -\sin\theta) + (-s_1c_2, 0)
