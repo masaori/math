@@ -94,7 +94,7 @@ theorem gamma2_mul_conj_eq_absGamma2_sq :
 /-- `relation_of_gamma_2_theta_tilde` (2) を `ab = -r^2` の形で書いたもの。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq :
     gamma2 K θ * gamma2 K (-θ) = -((absGamma2 K θ : ℝ) : ℂ) ^ 2 := by
-  rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_pow]
+  rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg, Complex.ofReal_pow]
 
 /-- **人手証明 Step 1 の準備**: 因数分解の恒等式
 `(λ - (g_1+r))(λ - (g_1-r)) = λ^2 - 2g_1λ + (g_1^2 - r^2)`。 -/

@@ -788,8 +788,7 @@ theorem det_AMat_thetaTilde_eq_one_of_necSuf
 人手の「まず ℂ の中で」の 23 行の鎖（左辺だけの行を 1 行目と数える）と 1 段ずつの `calc` で `((λ_+λ_- : ℝ) : ℂ) = ((1 : ℝ) : ℂ)` を示し、
 `inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で ℝ の等式に戻す。
 `A := |γ_2(θ)|`（人手の `r`）とし、人手が像の記号を省く `γ_1(θ)`（5 行目以降）・`r`（5〜15 行）は `gamma1 P.const θ`・`(A : ℂ)` である。
-22 行目で引く (2) の Lean の形 `gamma2_mul_gamma2_neg_eq_neg_absSq` は右辺が `-((A^2 : ℝ) : ℂ)` で、人手の (2) の右辺
-`(-A^2)_ℂ` と符号反転の置き場が違う。その差を `Complex.ofReal_neg` で埋めている（(2) の Lean の形を人手に揃える件として状態台帳に残す）。 -/
+22 行目で引く (2) の Lean の形 `gamma2_mul_gamma2_neg_eq_neg_absSq` の右辺は人手と同じ `(-A^2)_ℂ` である。 -/
 theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) :
     lambdaPlusR P.const (thetaTilde M μ) * lambdaMinusR P.const (thetaTilde M μ) = 1 := by
@@ -849,9 +848,8 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
       _ = g ^ 2 + ((-(A ^ 2) : ℝ) : ℂ) := by rw [square_of_complex_number_is_product g]
                           -- 21 行目: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
       _ = g ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ) := by
-          rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg]
-                          -- 22 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ（Lean の (2) の右辺 `-((A^2 : ℝ) : ℂ)` との
-                          -- 差は `Complex.ofReal_neg`。上の docstring の件）
+          rw [gamma2_mul_gamma2_neg_eq_neg_absSq]
+                          -- 22 行目: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ
       _ = 1 := gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ
                           -- 23 行目: 上の第 2 の等式の鎖
       _ = ((1 : ℝ) : ℂ) := Complex.ofReal_one.symm
@@ -861,11 +859,11 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
 
 /-- **人手証明 `det_A_theta_tilde` の最後の式**: `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（実数の等式）。
 
-人手の「まず ℂ の中で」の 13 行の鎖と 1 対 1 の `calc` で `((γ_1^2 : ℝ) : ℂ) = ((1 + r^2 : ℝ) : ℂ)` を示し、
-`inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で ℝ の等式に戻す。
-人手が像の記号を省く第 6〜8 行（左辺だけの行を第 1 行と数える）の `r^2` は `((r : ℂ))^2`（`r_ℂ` の ℂ の冪）である。
-第 7 行の `relation_of_gamma_2_theta_tilde` (2) は、`γ_2(θ)γ_2(-θ) = -((r : ℂ))^2` の形の
-`gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` で受ける。 -/
+人手の「まず ℂ の中で」の 12 行の鎖（左辺だけの行を第 1 行と数える）と 1 対 1 の `calc` で
+`((γ_1^2 : ℝ) : ℂ) = ((1 + r^2 : ℝ) : ℂ)` を示し、`inclusion_rr_to_cc` の対の第 1 成分の比較（`Complex.ofReal_injective`）で
+ℝ の等式に戻す。人手が像の記号を省く第 5〜10 行の `γ_1(θ)^2` は `((g : ℂ))^2`（`γ_1(θ)_ℂ` の ℂ の冪）である。
+第 9 行の `relation_of_gamma_2_theta_tilde` (2) は、人手の (2) と同じ形 `γ_2(θ)γ_2(-θ) = (-r^2)_ℂ` の
+`gamma2_mul_gamma2_neg_eq_neg_absSq` で受ける。 -/
 theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) :
     gamma1R P.const (thetaTilde M μ) ^ 2 = 1 + absGamma2 P.const (thetaTilde M μ) ^ 2 := by
@@ -878,31 +876,30 @@ theorem gamma1R_sq_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.const.c2s
   have hC : ((g ^ 2 : ℝ) : ℂ) = ((1 + r ^ 2 : ℝ) : ℂ) :=
     calc ((g ^ 2 : ℝ) : ℂ)
         = ((g * g : ℝ) : ℂ) := by rw [square_of_real_number_is_product g]
-                          -- `square_of_real_number_is_product`（`r → γ_1(θ)`）
+                          -- 第 2 行: `square_of_real_number_is_product`（`r → γ_1(θ)`）
       _ = (g : ℂ) * (g : ℂ) := (real_inclusion_mul g g).symm
-                          -- `real_inclusion_preserves_product`
+                          -- 第 3 行: `real_inclusion_preserves_product` を右辺から左辺へ
       _ = (g : ℂ) ^ 2 := (square_of_complex_number_is_product (g : ℂ)).symm
-                          -- `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
+                          -- 第 4 行: `square_of_complex_number_is_product` の `z^2 = zz` を右辺から左辺へ
       _ = (g : ℂ) ^ 2 + 0 := (add_zero _).symm
-                          -- `complex_numbers_form_a_field` の零元
-      _ = (g : ℂ) ^ 2 + (-((r : ℂ)) ^ 2 + (r : ℂ) ^ 2) := by rw [neg_add_cancel]
-                          -- `complex_numbers_form_a_field` の加法逆元
-      _ = (g : ℂ) ^ 2 + (gamma2 P.const θ * gamma2 P.const (-θ) + (r : ℂ) ^ 2) := by
-          rw [gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq]
-                          -- `relation_of_gamma_2_theta_tilde` (2)
-      _ = ((g : ℂ) ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)) + (r : ℂ) ^ 2 :=
+                          -- 第 5 行: `complex_numbers_form_a_field` の零元を右辺から左辺へ
+      _ = (g : ℂ) ^ 2 + ((0 : ℝ) : ℂ) := by rw [Complex.ofReal_zero]
+                          -- 第 6 行: `inclusion_rr_to_cc` の略記 `0_ℂ = (0)_ℂ`
+      _ = (g : ℂ) ^ 2 + ((-(r ^ 2) + r ^ 2 : ℝ) : ℂ) := by rw [neg_add_cancel]
+                          -- 第 7 行: ℝ の加法逆元 `-a + a = 0`（`a → r^2`）を右辺から左辺へ
+      _ = (g : ℂ) ^ 2 + (((-(r ^ 2) : ℝ) : ℂ) + ((r ^ 2 : ℝ) : ℂ)) := by
+          rw [real_inclusion_add]
+                          -- 第 8 行: `real_inclusion_preserves_sum`（`a → -r^2`、`b → r^2`）を右辺から左辺へ
+      _ = (g : ℂ) ^ 2 + (gamma2 P.const θ * gamma2 P.const (-θ) + ((r ^ 2 : ℝ) : ℂ)) := by
+          rw [gamma2_mul_gamma2_neg_eq_neg_absSq]
+                          -- 第 9 行: `relation_of_gamma_2_theta_tilde` (2) を右辺から左辺へ
+      _ = ((g : ℂ) ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)) + ((r ^ 2 : ℝ) : ℂ) :=
           (add_assoc _ _ _).symm
-                          -- `complex_numbers_form_a_field` の和の結合律
-      _ = 1 + (r : ℂ) ^ 2 := by rw [hsecond]
-                          -- 上の第 2 の等式の鎖（`gamma1_sq_add_gamma2_mul_thetaTilde`）
-      _ = 1 + (r : ℂ) * (r : ℂ) := by rw [square_of_complex_number_is_product (r : ℂ)]
-                          -- `square_of_complex_number_is_product` の `z^2 = zz`
-      _ = 1 + ((r * r : ℝ) : ℂ) := by rw [real_inclusion_mul r r]
-                          -- `real_inclusion_preserves_product`
-      _ = ((1 + r * r : ℝ) : ℂ) := real_inclusion_add 1 (r * r)
-                          -- `real_inclusion_preserves_finite_sum` を `m = 2` で（2 項の場合の `real_inclusion_preserves_sum`）
-      _ = ((1 + r ^ 2 : ℝ) : ℂ) := by rw [square_of_real_number_is_product r]
-                          -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）を右辺から左辺へ
+                          -- 第 10 行: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+      _ = 1 + ((r ^ 2 : ℝ) : ℂ) := by rw [hsecond]
+                          -- 第 11 行: 上の第 2 の等式の鎖（`gamma1_sq_add_gamma2_mul_thetaTilde`）
+      _ = ((1 + r ^ 2 : ℝ) : ℂ) := real_inclusion_add 1 (r ^ 2)
+                          -- 第 12 行: `real_inclusion_preserves_sum`（`a → 1`、`b → r^2`。`1_ℂ` は略記 `(1)_ℂ`）
   exact Complex.ofReal_injective hC
 
 /-! ## `γ_1(θ~_μ) > 1`（人手証明 `gamma1_gt_1_theta_tilde`）

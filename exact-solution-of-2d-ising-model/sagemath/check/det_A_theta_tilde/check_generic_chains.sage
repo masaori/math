@@ -71,7 +71,11 @@ for k in range(1, len(ii_chain)):
 # 第 3・最後の等式の対の比較: (a, 0) = a_C、1_C = (1, 0)、(1 + r^2)_C = 1_C + (r^2)_C
 Rab.<a, rr> = PolynomialRing(QQ)
 rep.check(iota(a, Rab) == (a, Rab(0)) and iota(1, Rab) == (Rab(1), Rab(0)), "inclusion_rr_to_cc: a_C = (a, 0)、1_C = (1, 0)")
-rep.check(cc_add(iota(1, Rab), cc_mul(iota(rr, Rab), iota(rr, Rab))) == iota(1 + rr**2, Rab), "準備の像の読み方: 1_C + r_C r_C = (1 + r^2)_C")
+rep.check(iota(0, Rab) == (Rab(0), Rab(0)), "inclusion_rr_to_cc の略記: 0_C = (0)_C（最後の等式の鎖の第 6 行）")
+rep.check(iota(-rr**2 + rr**2, Rab) == iota(0, Rab), "ℝ の加法逆元: (-r^2 + r^2)_C = (0)_C（最後の等式の鎖の第 7 行）")
+rep.check(cc_add(iota(-rr**2, Rab), iota(rr**2, Rab)) == iota(-rr**2 + rr**2, Rab), "real_inclusion_preserves_sum: (-r^2)_C + (r^2)_C = (-r^2 + r^2)_C（最後の等式の鎖の第 8 行）")
+rep.check(cc_add(iota(1, Rab), iota(rr**2, Rab)) == iota(1 + rr**2, Rab), "real_inclusion_preserves_sum: 1_C + (r^2)_C = (1 + r^2)_C（最後の等式の鎖の第 12 行）")
+rep.check(cc_mul(iota(a, Rab), iota(a, Rab)) == iota(a * a, Rab), "real_inclusion_preserves_product: a_C a_C = (aa)_C（最後の等式の鎖の第 3 行）")
 rep.check(cc_add(iota(rr, Rab), iota(a, Rab)) == iota(rr + a, Rab) and cc_mul(iota(rr, Rab), iota(a, Rab)) == iota(rr * a, Rab),
           "real_inclusion_preserves_sum・real_inclusion_preserves_product: 実数の和・積の像は像の和・積（第 3 の等式の鎖の第 4 行の和の像）")
 rep.check(cc_sub(iota(rr, Rab), iota(a, Rab), Rab) == iota(rr - a, Rab), "real_inclusion_preserves_difference: 実数の差の像は像の差（第 3 の等式の鎖の第 5 行）")

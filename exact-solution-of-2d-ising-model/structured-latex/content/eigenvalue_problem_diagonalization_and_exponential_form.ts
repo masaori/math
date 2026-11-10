@@ -4535,27 +4535,25 @@ c_2s_2^*
 &= \bigl(\gamma_1(\theta)\gamma_1(\theta)\bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \gamma_1(\theta))\bigr)\\
 &= \gamma_1(\theta)_{\mathbb{C}}\,\gamma_1(\theta)_{\mathbb{C}}
-&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ})\\
 &= \bigl(\gamma_1(\theta)_{\mathbb{C}}\bigr)^2
 &&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz\ \text{を右辺から左辺へ})\\
 &= \gamma_1(\theta)^2 + 0_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元。以下この鎖では像の記号を省き、最後の 4 行で書き戻す})\\
-&= \gamma_1(\theta)^2 + \bigl(-r^2 + r^2\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
-&= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + r^2\bigr)
-&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2))\\
-&= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + r^2
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= 1_{\mathbb{C}} + \bigl(r_{\mathbb{C}}\bigr)^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元を右辺から左辺へ。以下この鎖では}\ \gamma_1(\theta)\ \text{の像の記号を省き、}\gamma_1(\theta)^2\ \text{は}\ \bigl(\gamma_1(\theta)_{\mathbb{C}}\bigr)^2\ \text{の略記とする})\\
+&= \gamma_1(\theta)^2 + (0)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = (0)_{\mathbb{C}}\bigr)\\
+&= \gamma_1(\theta)^2 + \bigl(-r^2 + r^2\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ -a + a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to r^2\ \text{を右辺から左辺へ}\bigr)\\
+&= \gamma_1(\theta)^2 + \bigl((-r^2)_{\mathbb{C}} + (r^2)_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to -r^2,\ b \to r^2)\ \text{を右辺から左辺へ}\bigr)\\
+&= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + (r^2)_{\mathbb{C}}\bigr)
+&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2)\ \text{を右辺から左辺へ})\\
+&= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + (r^2)_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= 1_{\mathbb{C}} + (r^2)_{\mathbb{C}}
 &&(\because\ \text{上の第 2 の等式の鎖})\\
-&= 1_{\mathbb{C}} + r_{\mathbb{C}}\,r_{\mathbb{C}}
-&&(\because\ \blkref{square_of_complex_number_is_product}\ \text{の}\ z^2 = zz)\\
-&= 1_{\mathbb{C}} + (rr)_{\mathbb{C}}
-&&(\because\ \blkref{real_inclusion_preserves_product})\\
-&= (1 + rr)_{\mathbb{C}}
-&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
 &= \bigl(1 + r^2\bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to r^2)\text{。}1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (1)_{\mathbb{C}}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、第 3 の等式と同じく ",
@@ -4584,6 +4582,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 準備の像の読み方の和・差を、名前だけの言い換え（和は real_inclusion_preserves_finite_sum を m = 2 で、差は def_complex_difference・multiply_by_minus_one）から主張 real_inclusion_preserves_sum・real_inclusion_preserves_difference の参照にした。第 3 の等式の鎖の 4 行目「準備の像の読み方（和・差の像は像の和・差）」は 2 つの主張を 1 行で当てていたので、和の行と差の行の 2 行に割った（22 行から 23 行）。主張・値は不変。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 第一の準備の (x − iy)(x + iy) の鎖と (x − y)^2 の鎖で、根拠を「分配律」だけにしていた行が左から括った 4 項の和にするのに和の結合律も当てていたので、分配律の行と和の結合律を右辺から左辺へ当てる行に割った。(x − y)^2 の鎖の「分配律を右辺から左辺へ」の行も xx + A + A を xx + (A + A) に括り直していたので、和の結合律の行を前に置いた（13 等号から 14 等号、15 等号から 17 等号）。主張・値は不変。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 冪の行の根拠「def_power_of_complex_number より z^2 = (1_ℂz)z = zz」「同 z^2 = zz」「同 zz = z^2」は、冪の定義の 3 つの式と積の単位元を 1 行で当てていたので、新しく足した主張 square_of_complex_number_is_product（z^2 = zz）の参照にした（zz = z^2 は「右辺から左辺へ」と書いた。12 行。第 2 の等式の鎖の 10・12 行目に箇所数（6 箇所・11 箇所）を書いた。主張・値は不変）。",
+        "2026-11-10（Lean の通しの証明のゴールラインの確認）: 最後の等式の鎖は relation_of_gamma_2_theta_tilde (2) を ℂ の −(r_ℂ)^2 の形で当てていたが、(2) の右辺は実数 −r^2 の像 (−r^2)_ℂ である。零元の後を、0_ℂ = (0)_ℂ、ℝ の加法逆元 −r^2 + r^2 = 0 を右辺から左辺へ、real_inclusion_preserves_sum を右辺から左辺へ、(2) を右辺から左辺へ、の順にして (2) をその形のまま当て、末尾を 1_ℂ + (r^2)_ℂ = (1 + r^2)_ℂ（real_inclusion_preserves_sum）にした（13 行 → 12 行）。第 3 行の real_inclusion_preserves_product、零元の行、和の結合律の行に「右辺から左辺へ」を書いた。",
       ],
     },
   },

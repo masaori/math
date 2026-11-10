@@ -272,17 +272,16 @@ CH_lam = [
 CH_last = [
     L(G1**2),
     L(G1 * G1),
-    L(G1 * G1),
+    L(G1 * G1),                                # γ_1_C γ_1_C: 像は一般の点では同じ式（積の像は check_generic_chains.sage で）
     L(G1**2),
     L(G1**2 + 0),
-    L(G1**2 + (-RR_**2 + RR_**2)),
+    L(G1**2 + 0),                              # (0)_C: 略記（対で check_generic_chains.sage）
+    L(G1**2 + (-RR_**2 + RR_**2)),             # (-r^2 + r^2)_C: ℝ の加法逆元を右辺から左辺へ
+    L(G1**2 + ((-RR_**2) + RR_**2)),           # (-r^2)_C + (r^2)_C: 和の像（対で check_generic_chains.sage）
     L(G1**2 + (G2 * G2M + RR_**2), 'rel2'),
     L((G1**2 + G2 * G2M) + RR_**2),
     L(1 + RR_**2, 'second'),
-    L(1 + RR_ * RR_),
-    L(1 + RR_ * RR_),
-    L(1 + RR_ * RR_),
-    L(1 + RR_**2),
+    L(1 + RR_**2),                             # (1 + r^2)_C: 和の像（対で check_generic_chains.sage）
 ]
 
 CHAINS = [

@@ -55,10 +55,13 @@ theorem gamma2_neg_thetaTilde_eq (M : ℕ) (μ : ℤ) :
     gamma2 K (-thetaTilde M μ) = -(starRingEnd ℂ) (gamma2 K (thetaTilde M μ)) :=
   gamma2_neg_eq_neg_conj K (thetaTilde M μ)
 
-/-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2`。必要十分版 `NecSuf.mul_of_eq_neg_conj` の系。 -/
+/-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_ℂ`（右辺は実数 `-|γ_2(θ)|^2` の像。人手の (2) と同じ形）。
+必要十分版 `NecSuf.mul_of_eq_neg_conj` の系。必要十分版の右辺 `-((normSq : ℝ) : ℂ)` の符号反転を
+像の中へ入れるのは `Complex.ofReal_neg`（人手の (2) の鎖の 8・9 行目が `real_inclusion_preserves_product` と
+ℝ の `(-1)a = -a` で行う、ℂ の符号反転から実数の符号反転の像への書き換え）。人手の 9 行の鎖と 1 対 1 の形にする件は状態台帳の (cl14)。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_absSq :
-    gamma2 K θ * gamma2 K (-θ) = -((absGamma2 K θ ^ 2 : ℝ) : ℂ) := by
-  rw [absGamma2_sq]
+    gamma2 K θ * gamma2 K (-θ) = ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) := by
+  rw [Complex.ofReal_neg, absGamma2_sq]
   exact NecSuf.mul_of_eq_neg_conj (gamma2_neg_eq_neg_conj K θ)
 
 /-- **人手証明 (4)**: `(|γ_2(θ)|)^2 = -γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。 -/
