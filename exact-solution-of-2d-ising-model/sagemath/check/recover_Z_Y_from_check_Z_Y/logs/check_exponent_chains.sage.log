@@ -1,3 +1,3 @@
-  real chain: 5 equalities hold in QQ(x, j, k)
-  complex chain: 8 equalities hold on real pairs over QQ(x, j, k)
+  real chain: 4 equalities hold in QQ(x, j, k)
+  complex chain: 5 equalities hold on real pairs over QQ(x, j, k)
 RESULT: PASS

@@ -86,8 +86,8 @@
 | `Ising2D.lie_H2_checkZ` | (C) `[H_2, check(Z)_μ] = -2 check(Y)_μ` | 同上 |
 | `Ising2D.lie_H2_checkY` | (D) `[H_2, check(Y)_μ] = 2 check(Z)_μ` | 同上 |
 | `Ising2D.checkPhase_neg_eq_exp_I_mul`（`ClaimRecoverZYFromCheckZY.lean`） | 準備の `f_{j,λ} = exp(i(j_ℝθ~_λ)_ℂ)` の読み（`checkPhase M (-j) λ` を人手の形に直す） | `recover_Z_Y_from_check_Z_Y` |
-| `Ising2D.recover_exponent_real_chain` | 準備 2 の実数の鎖 `j_ℝx + (-1_ℝ)(k_ℝx) = (j_ℤ-k_ℤ)_ℝ x`（人手の 5 行） | 同上 |
-| `Ising2D.recover_exponent_complex_chain` | 準備 2 の複素数の鎖 `i(j_ℝx)_ℂ + (-i)(k_ℝx)_ℂ = i((j_ℤ-k_ℤ)_ℝx)_ℂ`（人手の 8 行。積の像は `real_inclusion_mul`、和の像は `real_inclusion_add`） | 同上 |
+| `Ising2D.recover_exponent_real_chain` | 準備 2 の実数の鎖 `j_ℝx + (-(k_ℝx)) = (j_ℤ-k_ℤ)_ℝ x`（人手の 4 行） | 同上 |
+| `Ising2D.recover_exponent_complex_chain` | 準備 2 の複素数の鎖 `i(j_ℝx)_ℂ + (-i)(k_ℝx)_ℂ = i((j_ℤ-k_ℤ)_ℝx)_ℂ`（人手の 5 行。`(-i)z = -(iz)` は `neg_I_mul_eq_neg_of_I_mul`、`i(-θ)_ℂ = -(iθ_ℂ)` は `I_mul_real_neg_eq_neg_I_mul`、和の像は `real_inclusion_add`） | 同上 |
 | `Ising2D.exp_I_mul_int_mul_real` | `exp(i(n_ℝx)_ℂ) = exp(i n_ℂ x_ℂ)` の読み（和を `antiperiodic_exp_sum` の Lean の形へ直す） | 同上 |
 | `Ising2D.recover_off_diagonal_term` | 準備 1（`k ≠ j` の項は `O`） | 同上 |
 | `Ising2D.inverse_dft_check` | 反周期的離散フーリエ逆変換（任意の族に対する形。人手の第 1 式の鎖と 1 段ずつ対応する calc） | 同上 |

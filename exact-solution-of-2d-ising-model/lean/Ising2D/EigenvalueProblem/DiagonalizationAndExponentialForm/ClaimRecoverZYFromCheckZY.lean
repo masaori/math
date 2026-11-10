@@ -37,9 +37,10 @@
   `finite_sum_of_scalar_multiples`・`scalar_multiple_is_associative`・`finite_double_sum_of_matrices_interchange`・
   `finite_sum_of_scalar_multiples_of_one_matrix`・`finite_sum_of_matrices_with_single_nonzero_term` の行も具体版が無く、
   mathlib の `Finset.smul_sum`・`smul_smul`・`Finset.sum_comm`・`Finset.sum_smul`・`Finset.sum_eq_single_of_mem` で表す。
-* 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では環の等式（積の結合律、`(-1)y = -y`、分配法則、差は加法の逆元の和。可換性は使わない）と
-  `ℤ` からの環準同型が差を保つこと（`x` は任意の実数でよく、ℝ の順序・完備性は使わない）、複素数の鎖では可換環への環準同型
-  （包含）が和・積を保つこと（`real_inclusion_add`・`real_inclusion_mul`）と `-1`・`i` の積の計算（交換律を 1 回使う）だけである。
+* 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では環の等式（`-(yx) = (-y)x`、分配法則、差は加法の逆元の和。可換性は使わない）と
+  `ℤ` からの環準同型が差を保つこと（`x` は任意の実数でよく、ℝ の順序・完備性は使わない）、複素数の鎖では `(-i)z = -(iz)` と
+  `i(-θ)_ℂ = -(iθ_ℂ)`（既存の主張の具体版 2 本。後者の中で ℂ の積の交換律を 1 回と、包含が積を保つこと
+  `real_inclusion_mul` を使う）、分配法則、包含が和を保つこと（`real_inclusion_add`）だけである。
   2 本の鎖ごとの必要十分版は置かない。主張全体の必要十分版 `inverse_dft_antiperiodic` が、位相を `ξ` の冪と抽象し、
   読みの段（`checkPhase` を `exp` の形に直す段）と `scalar_exp_product` と準備 2 の 2 本の鎖を `ξ` の冪の指数の足し算
   1 段に吸収しているからである（具体版の calc の 3 段が必要十分版の 1 段に当たる。ほかの段は同じ順で対応する）。
@@ -49,6 +50,7 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticomm
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimCosSinAndITimesAtNegatedReal
 
 namespace Ising2D
 
@@ -61,42 +63,31 @@ theorem checkPhase_neg_eq_exp_I_mul (hM : M ≠ 0) (k l : ℤ) :
     checkPhase M (-k) l = Complex.exp (Complex.I * (((k : ℝ) * thetaTilde M l : ℝ) : ℂ)) := by
   rw [checkPhase_eq_exp_neg_I_mul hM, Int.cast_neg, neg_mul (k : ℝ), neg_I_mul_real_inclusion_neg]
 
-/-- **準備 2 の実数の鎖**: `j_ℝx + (-1_ℝ)(k_ℝx) = (j_ℤ - k_ℤ)_ℝ x`。
-人手の `j`・`k` は Lean の `k`・`l`（`ℤ` の元。人手の `j_ℝ = (j_ℤ)_ℝ`）。人手の 5 行に 1 段ずつ対応する。 -/
+/-- **準備 2 の実数の鎖**: `j_ℝx + (-(k_ℝx)) = (j_ℤ - k_ℤ)_ℝ x`。
+人手の `j`・`k` は Lean の `k`・`l`（`ℤ` の元。人手の `j_ℝ = (j_ℤ)_ℝ`）。人手の 4 行に 1 段ずつ対応する。 -/
 theorem recover_exponent_real_chain (k l : ℤ) (x : ℝ) :
-    (k : ℝ) * x + (-1) * ((l : ℝ) * x) = ((k - l : ℤ) : ℝ) * x :=
-  calc (k : ℝ) * x + (-1) * ((l : ℝ) * x)
-      = (k : ℝ) * x + ((-1) * (l : ℝ)) * x := by rw [mul_assoc (-1 : ℝ)]   -- ℝ の積の結合律
-    _ = (k : ℝ) * x + (-(l : ℝ)) * x := by rw [neg_one_mul]                -- ℝ で `(-1_ℝ)y = -y`
+    (k : ℝ) * x + (-((l : ℝ) * x)) = ((k - l : ℤ) : ℝ) * x :=
+  calc (k : ℝ) * x + (-((l : ℝ) * x))
+      = (k : ℝ) * x + (-(l : ℝ)) * x := by rw [neg_mul]                     -- ℝ で `-(ab) = (-a)b`
     _ = ((k : ℝ) + (-(l : ℝ))) * x := (add_mul _ _ _).symm                  -- ℝ の分配法則
     _ = ((k : ℝ) - (l : ℝ)) * x := by rw [← sub_eq_add_neg]                 -- ℝ の差は加法の逆元の和
     _ = ((k - l : ℤ) : ℝ) * x := by rw [Int.cast_sub]                       -- `ℤ → ℝ` は差を保つ
 
-/-- **準備 2 の複素数の鎖**: `i(a)_ℂ + (-i)(b)_ℂ = i(c)_ℂ`（`a + (-1_ℝ)b = c`。人手では `a = j_ℝx`、`b = k_ℝx`、
-`c = (j_ℤ - k_ℤ)_ℝ x`、`h` は直前の実数の鎖 `recover_exponent_real_chain`）。人手の 8 行に 1 段ずつ対応する。
-5 段目の `(-1_ℝ)_ℂ = -1_ℂ` は `neg_I_mul_real_inclusion_neg` と同じく、`(-1_ℝ, 0_ℝ)` に `1_ℂ = (1_ℝ, 0_ℝ)` を足すと
-`(0_ℝ, 0_ℝ) = 0_ℂ` になることから示す。6 段目の積の像は具体版 `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）、
-7 段目の二項の和の像は具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_finite_sum` を `m = 2` で）を、人手と同じ向き
-（左辺から右辺へ）に当てる。 -/
-theorem recover_exponent_complex_chain {a b c : ℝ} (h : a + (-1) * b = c) :
+/-- **準備 2 の複素数の鎖**: `i(a)_ℂ + (-i)(b)_ℂ = i(c)_ℂ`（`a + (-b) = c`。人手では `a = j_ℝx`、`b = k_ℝx`、
+`c = (j_ℤ - k_ℤ)_ℝ x`、`h` は直前の実数の鎖 `recover_exponent_real_chain`）。人手の 5 行に 1 段ずつ対応する。
+1 段目は具体版 `neg_I_mul_eq_neg_of_I_mul`（人手 `negative_i_times_complex_is_negation_of_i_times`、`z → b_ℂ`）、
+2 段目は具体版 `I_mul_real_neg_eq_neg_I_mul`（人手 `i_times_negated_real_is_negation_of_i_times`、`θ → b`）を右辺から左辺へ、
+4 段目の二項の和の像は具体版 `real_inclusion_add`（人手 `real_inclusion_preserves_sum`）を、人手と同じ向きに当てる。 -/
+theorem recover_exponent_complex_chain {a b c : ℝ} (h : a + (-b) = c) :
     Complex.I * (a : ℂ) + (-Complex.I) * (b : ℂ) = Complex.I * (c : ℂ) :=
   calc Complex.I * (a : ℂ) + (-Complex.I) * (b : ℂ)
-      = Complex.I * (a : ℂ) + ((-1 : ℂ) * Complex.I) * (b : ℂ) := by
-        rw [neg_one_mul Complex.I]                                            -- `multiply_by_minus_one`
-    _ = Complex.I * (a : ℂ) + (Complex.I * (-1 : ℂ)) * (b : ℂ) := by
-        rw [mul_comm (-1 : ℂ) Complex.I]                                      -- ℂ の積の交換律
-    _ = Complex.I * (a : ℂ) + Complex.I * ((-1 : ℂ) * (b : ℂ)) := by
-        rw [mul_assoc Complex.I]                                              -- ℂ の積の結合律
-    _ = Complex.I * ((a : ℂ) + (-1 : ℂ) * (b : ℂ)) := (mul_add _ _ _).symm    -- ℂ の分配法則
-    _ = Complex.I * ((a : ℂ) + ((-1 : ℝ) : ℂ) * (b : ℂ)) := by
-        rw [show ((-1 : ℝ) : ℂ) = (-1 : ℂ) from
-          eq_neg_of_add_eq_zero_left
-            (Complex.ext (show (-1 : ℝ) + 1 = 0 from neg_add_cancel 1) (show (0 : ℝ) + 0 = 0 from add_zero 0))]
-                                                                              -- `(-1_ℝ)_ℂ = -1_ℂ`
-    _ = Complex.I * ((a : ℂ) + (((-1) * b : ℝ) : ℂ)) := by
-        rw [real_inclusion_mul]                                               -- `real_inclusion_preserves_product`
-    _ = Complex.I * ((a + (-1) * b : ℝ) : ℂ) := by
-        rw [real_inclusion_add]                                               -- `real_inclusion_preserves_finite_sum`（m = 2）
+      = Complex.I * (a : ℂ) + (-(Complex.I * (b : ℂ))) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]                                        -- `negative_i_times_complex_is_negation_of_i_times`
+    _ = Complex.I * (a : ℂ) + Complex.I * ((-b : ℝ) : ℂ) := by
+        rw [I_mul_real_neg_eq_neg_I_mul]                                      -- `i_times_negated_real_is_negation_of_i_times`（右辺から左辺へ）
+    _ = Complex.I * ((a : ℂ) + ((-b : ℝ) : ℂ)) := (mul_add _ _ _).symm        -- ℂ の分配法則
+    _ = Complex.I * ((a + (-b) : ℝ) : ℂ) := by
+        rw [real_inclusion_add]                                               -- `real_inclusion_preserves_sum`
     _ = Complex.I * (c : ℂ) := by rw [h]                                      -- 直前の実数の鎖
 
 /-- （読み）`exp(i(n_ℝ x)_ℂ) = exp(i n_ℂ x_ℂ)`（`n ∈ ℤ`、`x ∈ ℝ`）。人手の和 `∑ exp(i((n)_ℝ θ~_μ)_ℂ)` を、

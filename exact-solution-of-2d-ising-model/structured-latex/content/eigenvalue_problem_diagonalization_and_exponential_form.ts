@@ -1602,11 +1602,9 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-j_{\mathbb R}x + (-1_{\mathbb R})(k_{\mathbb R}x)
-&= j_{\mathbb R}x + \left((-1_{\mathbb R})k_{\mathbb R}\right)x
-&&(\because\ \mathbb R\text{ の積の結合律}) \\
+j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)
 &= j_{\mathbb R}x + \left(-k_{\mathbb R}\right)x
-&&(\because\ \mathbb R\text{ で }(-1_{\mathbb R})y=-y) \\
+&&(\because\ \mathbb R\text{ で }-(ab)=(-a)b\ (a \to k_{\mathbb R},\ b \to x)) \\
 &= \left(j_{\mathbb R} + \left(-k_{\mathbb R}\right)\right)x
 &&(\because\ \mathbb R\text{ の分配法則}) \\
 &= \left(j_{\mathbb R} - k_{\mathbb R}\right)x
@@ -1619,20 +1617,14 @@ j_{\mathbb R}x + (-1_{\mathbb R})(k_{\mathbb R}x)
       displayMath(
         String.raw`\begin{aligned}
 i\,(j_{\mathbb R}x)_{\mathbb C} + (-i)(k_{\mathbb R}x)_{\mathbb C}
-&= i\,(j_{\mathbb R}x)_{\mathbb C} + \left((-1_{\mathbb C})\,i\right)(k_{\mathbb R}x)_{\mathbb C}
-&&(\because\ \blkref{multiply_by_minus_one}) \\
-&= i\,(j_{\mathbb R}x)_{\mathbb C} + \left(i\,(-1_{\mathbb C})\right)(k_{\mathbb R}x)_{\mathbb C}
-&&(\because\ \mathbb C\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}) \\
-&= i\,(j_{\mathbb R}x)_{\mathbb C} + i\left((-1_{\mathbb C})(k_{\mathbb R}x)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
-&= i\left((j_{\mathbb R}x)_{\mathbb C} + (-1_{\mathbb C})(k_{\mathbb R}x)_{\mathbb C}\right)
+&= i\,(j_{\mathbb R}x)_{\mathbb C} + \left(-\left(i\,(k_{\mathbb R}x)_{\mathbb C}\right)\right)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (k_{\mathbb R}x)_{\mathbb C})\bigr) \\
+&= i\,(j_{\mathbb R}x)_{\mathbb C} + i\left(-(k_{\mathbb R}x)\right)_{\mathbb C}
+&&\bigl(\because\ \blkref{i_times_negated_real_is_negation_of_i_times}\ (\theta \to k_{\mathbb R}x)\text{ を右辺から左辺へ}\bigr) \\
+&= i\left((j_{\mathbb R}x)_{\mathbb C} + \left(-(k_{\mathbb R}x)\right)_{\mathbb C}\right)
 &&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
-&= i\left((j_{\mathbb R}x)_{\mathbb C} + (-1_{\mathbb R})_{\mathbb C}(k_{\mathbb R}x)_{\mathbb C}\right)
-&&\bigl(\because\ (-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ の和},\ \blkref{complex_numbers_form_a_field})\bigr) \\
-&= i\left((j_{\mathbb R}x)_{\mathbb C} + \left((-1_{\mathbb R})(k_{\mathbb R}x)\right)_{\mathbb C}\right)
-&&(\because\ \blkref{real_inclusion_preserves_product}) \\
-&= i\left(j_{\mathbb R}x + (-1_{\mathbb R})(k_{\mathbb R}x)\right)_{\mathbb C}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で二項の和の形に開く}\bigr) \\
+&= i\left(j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)\right)_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to j_{\mathbb R}x,\ b \to -(k_{\mathbb R}x))\bigr) \\
 &= i\left((j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x\right)_{\mathbb C}
 &&(\because\ \text{直前の実数の鎖})
 \end{aligned}`,
@@ -1764,6 +1756,7 @@ c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
         "2026-08-31 の式変形統一で、準備の散文に埋まっていた j-k=0=0M を、整数の減法と乗法を一つずつ適用する二段の鎖へ開いた。内容・参照は変えていない。",
         "2026-08-31 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 14 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・参照は変えていない。",
         "2026-11-03（全証明の SageMath 検算）: 主張に像の記号（j_Z・j_R・μ_Z）と (M_col)_C^{-1} の存在、exp・積・和の出所を書き、定義どおりスカラーを左に置いて主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を Z_Y_generate_algebra の (i)〜(iv) で述べ直した。証明は、行列の theorem_exp_product (n=1) を scalar_exp_product に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を finite_sum_of_scalar_multiples・新しい主張 finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term に付け替え、指数の和を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。",
+        "2026-11-10（Lean の通しの証明）: 準備 2 の複素数の鎖が -i の積（multiply_by_minus_one・交換律・結合律）と (-1_R)_C = -1_C をその場で開いていた 4 行を、negative_i_times_complex_is_negation_of_i_times（z → (k_R x)_C）と i_times_negated_real_is_negation_of_i_times（θ → k_R x）の参照 2 行に替えた。二項の和の像は real_inclusion_preserves_finite_sum の m = 2 から real_inclusion_preserves_sum にした（8 等号から 5 等号）。実数の鎖は左辺を j_R x + (-(k_R x)) にし、(-1_R)(k_R x) を開く 2 行を ℝ の -(yx) = (-y)x の 1 行にした（5 等号から 4 等号）。両端と第 1・2 式は不変。",
       ],
     },
   },
