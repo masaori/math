@@ -26,6 +26,28 @@ theorem cellGraphEdge_endpointSet (cells : Finset GridCell) (e : cellEdges cells
   rcases e with ⟨⟨b, r, c⟩, he⟩
   cases b <;> simp [cellGraphEdge, Sym2.toFinset_mk_eq, gridEdgeEndpoints]
 
+/-- The encoded edge and its graph edge meet the same grid vertex. -/
+theorem cellGraphEdge_incident_iff (cells : Finset GridCell)
+    (e : cellEdges cells) (v : cellVertices cells) :
+    v ∈ cellGraphEdge cells e ↔ v.1 ∈ gridEdgeEndpoints e.1 := by
+  constructor
+  · intro hv
+    rw [← cellGraphEdge_endpointSet]
+    exact Finset.mem_image.mpr ⟨v, by simpa using hv, rfl⟩
+  · intro hv
+    rw [← cellGraphEdge_endpointSet] at hv
+    obtain ⟨w, hw, heq⟩ := Finset.mem_image.mp hv
+    have h : w = v := Subtype.ext heq
+    subst w
+    simpa using hw
+
+theorem cellGraphEdge_incident_iff_from_necSuf (cells : Finset GridCell)
+    (e : cellEdges cells) (v : cellVertices cells) :
+    v ∈ cellGraphEdge cells e ↔ v.1 ∈ gridEdgeEndpoints e.1 := by
+  rw [← cellGraphEdge_endpointSet]
+  exact Ising2DLambda.NecSuf.KacWard.endpoint_incidence_iff_of_subtype
+    (cellGraphEdge cells e) v
+
 /-- Distinct coordinate encoded grid edges remain distinct as graph edges. -/
 theorem cellGraphEdge_injective (cells : Finset GridCell) :
     Function.Injective (cellGraphEdge cells) := by

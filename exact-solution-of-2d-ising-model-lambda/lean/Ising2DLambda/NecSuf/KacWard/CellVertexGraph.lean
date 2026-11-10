@@ -3,6 +3,20 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.NecSuf.KacWard
 
+/-- Restricting an endpoint pair to a vertex subset preserves incidence. -/
+theorem endpoint_incidence_iff_of_subtype
+    {V : Type*} [DecidableEq V] {vertices : Finset V}
+    (edge : Sym2 vertices) (v : vertices) :
+    v ∈ edge ↔ v.1 ∈ edge.toFinset.image Subtype.val := by
+  constructor
+  · intro hv
+    exact Finset.mem_image.mpr ⟨v, by simpa using hv, rfl⟩
+  · intro hv
+    obtain ⟨w, hw, heq⟩ := Finset.mem_image.mp hv
+    have h : w = v := Subtype.ext heq
+    subst w
+    simpa using hw
+
 /-- A loopless endpoint map on a finite edge index set yields exactly its image as graph edges. -/
 theorem finiteGraph_edgeSet_of_endpoint_image
     {V E : Type*} [Fintype V] [Fintype E] [DecidableEq V] [DecidableEq E]

@@ -68580,9 +68580,55 @@ e&=f
                           paragraph([
                             "よって ", math(String.raw`\theta_S`), " は単射である。",
                             ref("claim_cell_vertex_graph_edge_image"),
-                            " により像は ", math(String.raw`E(G_S)`),
-                            " の全体だから全射でもある。",
+                            " により像は次に等しい。",
                           ]),
+                          displayMath(String.raw`\{\theta_S(e)\mid e\in\widetilde{\mathcal E}_{\square}(S)\}
+=E(G_S)\qquad\bigl(\because\ \blkref{claim_cell_vertex_graph_edge_image}\bigr)`),
+                          paragraph(["したがって ", math(String.raw`\theta_S`), " は全射である。"]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_graph_edge_incidence_preserved",
+                        kind: "claim",
+                        title: { text: "格子辺からグラフ辺への対応は頂点との接続を保つ" },
+                        labels: ["claim_cell_graph_edge_incidence_preserved"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/cell-graph-edge-incidence-preserved"],
+                        lean: [
+                          "Ising2DLambda.KacWard.cellGraphEdge_incident_iff",
+                          "Ising2DLambda.NecSuf.KacWard.endpoint_incidence_iff_of_subtype",
+                          "Ising2DLambda.KacWard.cellGraphEdge_incident_iff_from_necSuf",
+                        ],
+                        statement: [
+                          paragraph([
+                            "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            "、符号化辺 ", math(String.raw`e\in\widetilde{\mathcal E}_{\square}(S)`),
+                            "、頂点 ", math(String.raw`v\in\mathcal V_{\square}(S)`),
+                            " に対し、", ref("claim_cell_graph_edge_bijection"),
+                            " の写像 ", math(String.raw`\theta_S`), " は次を満たす。",
+                          ]),
+                          displayMath(String.raw`v\in\theta_S(e)\quad\Longleftrightarrow\quad v\in\operatorname{end}_{\square}(e)`),
+                          paragraph([
+                            "左辺の所属はグラフ辺への接続、右辺の所属は格子辺の端点であることを表す（",
+                            ref("def_cell_vertex_graph"), "、", ref("claim_grid_edge_endpoint_encoding_injective"), "）。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            math(String.raw`\theta_S(e)`), " は ", math(String.raw`\operatorname{end}_{\square}(e)`),
+                            " の両端点を ", math(String.raw`\mathcal V_{\square}(S)`),
+                            " の元として記した二元集合である（", ref("claim_cell_graph_edge_bijection"), "）。",
+                            "頂点集合は整数座標の集合の部分集合なので、この二元集合の二点は元の端点と同じである（",
+                            ref("def_cell_vertex_set"), "）。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+v\in\theta_S(e)
+&\Longleftrightarrow v\in\operatorname{end}_{\square}(e)
+&&\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{def_cell_vertex_set}\bigr)
+\end{aligned}`),
                         ],
                       },
                     },
