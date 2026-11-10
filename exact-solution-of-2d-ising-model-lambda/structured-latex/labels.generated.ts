@@ -29,6 +29,7 @@ export const ALL_LABELS = [
   "claim_cell_boundary_two_edge_propagation",
   "claim_cell_boundary_vertex_balance",
   "claim_cell_boundary_winding_zero",
+  "claim_cell_edge_endpoints_belong_to_cell_vertices",
   "claim_cell_set_boundary_coefficients",
   "claim_closed_walk_bijection",
   "claim_closed_walk_four_edge_parity",

@@ -68384,6 +68384,46 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                       },
                     },
                     {
+                      role: "supportingClaim",
+                      element: {
+                        id: "kac_ward_claim_cell_edge_endpoints_belong_to_cell_vertices",
+                        kind: "claim",
+                        title: { text: "セル集合の各辺の端点はその頂点集合に属する" },
+                        labels: ["claim_cell_edge_endpoints_belong_to_cell_vertices"],
+                        habitat: "Z",
+                        verification: ["sagemath/check/cell-edge-endpoints-belong-to-vertices"],
+                        lean: [
+                          "Ising2DLambda.KacWard.gridEdgeEndpoints_subset_cellVertices",
+                          "Ising2DLambda.NecSuf.KacWard.endpoints_subset_vertices_of_local_inclusion",
+                        ],
+                        statement: [
+                          paragraph([
+                            "任意の有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                            " と任意の辺 ", math(String.raw`e\in\mathcal E_{\square}(S)`),
+                            " について、", math(String.raw`e\subset\mathcal V_{\square}(S)`),
+                            " が成り立つ（", ref("def_cell_edge_set"), "、", ref("def_cell_vertex_set"), "）。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "辺 ", math(String.raw`e`), " が ", math(String.raw`\mathcal E_{\square}(S)`),
+                            " に属するので、あるセル ", math(String.raw`(r,c)\in S`),
+                            " の四辺の一つである（", ref("def_cell_edge_set"), "）。",
+                          ]),
+                          paragraph([
+                            "四辺の各端点は ", math(String.raw`(r,c),(r,c+1),(r+1,c),(r+1,c+1)`),
+                            " のいずれかなので ", math(String.raw`e\subset\mathcal V_{\square}(\{(r,c)\})`),
+                            " である（", ref("def_cell_edge_set"), "、", ref("def_cell_vertex_set"), "）。",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+e
+&\subset\mathcal V_{\square}(\{(r,c)\})\quad(\because\ \text{四辺の端点の列挙})\\
+&\subset\mathcal V_{\square}(S)\quad(\because\ (r,c)\in S,\ \blkref{def_cell_vertex_set})
+\end{aligned}`),
+                        ],
+                      },
+                    },
+                    {
                       role: "prerequisiteDefinition",
                       element: {
                         id: "kac_ward_definition_plane_cell_boundary_edge_set",
@@ -69595,10 +69635,13 @@ V_S&=|F_S|+1
                         "である。指数の減算は切り捨てを含まない。",
                         "二の自然数乗は単射だから指数が等しい。整数の等式へ移すと",
                       ]),
+                      displayMath(String.raw`|S|=E_S+1-V_S
+\qquad\bigl(\because\ 2\text{ の自然数乗の単射性}\bigr)`),
                       displayMath(String.raw`\begin{aligned}
-|S|&=E_S+1-V_S
-&&\bigl(\because\ 2\text{ の自然数乗の単射性}\bigr)\\
-V_S-E_S+|S|&=1
+V_S-E_S+|S|
+&=V_S-E_S+(E_S+1-V_S)
+&&\bigl(\because\ |S|=E_S+1-V_S\bigr)\\
+&=1
 &&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph(["である。Euler 数の定義へ代入すると"]),
