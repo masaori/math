@@ -21,12 +21,12 @@
   * Step 2: 人手の第一の準備の 7 本の鎖 `-(-z) = z`・`ii = -1_ℂ`・`e_+e_- = 1_ℂ`・`(x - iy)(x + iy) = x^2 + y^2`・
     `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`・`u + iv = e_+`・`u^2 + v^2 = 1_ℂ` は、人手の行と 1 段ずつの `calc` の `complex_neg_neg_chain`・
     `complex_I_mul_I_chain`・`exp_I_mul_exp_neg_I_mul`・`complex_sub_I_mul_mul_add_I_mul`・`complex_sub_sq_chain`・
-    `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である（第 2 の等式の鎖はまだ
-    `complex_sub_sq_chain` を使わず、`ring` で展開している）。人手の第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は、人手の 3・9・10 行と 1 段ずつの `calc` の
+    `complex_cos_add_I_mul_sin_chain`・`cos_sq_add_sin_sq_complex_chain` である。人手の第二の準備の `γ_2(θ)`・`γ_2(-θ)`・積の 3 本の鎖は、人手の 3・9・10 行と 1 段ずつの `calc` の
     `gamma2_a0_form`・`gamma2_neg_a0_form`・`gamma2_mul_gamma2_neg_sin_form` である。
-    `gamma2_mul_gamma2_neg_cos_form` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える。`v^2 = 1 - u^2`）を先取りした形である。
-  * Step 3〜5: `gamma1_sq_add_gamma2_mul_thetaTilde` の中の鎖（Step 3 の 2 式・Step 4 の (iii) による
-    `c_2` の消去・Step 5 の (i)(ii)）。
+    `gamma2_mul_gamma2_neg_cos_form` は人手の第 2 の等式の鎖の第 5 行（左辺だけの行を第 1 行と数える。`v^2 = 1 - u^2`）を先取りした形で、鎖の Lean（`gamma1_sq_add_gamma2_mul_chain_first_half`）は使わない。
+  * Step 3〜5: 人手の第 2 の等式の鎖。1〜29 行（展開と (iii) による `c_2` の消去）は人手の行と 1 段ずつの `calc` の
+    `gamma1_sq_add_gamma2_mul_chain_first_half`、30 行目以降（相殺と (i)(ii)）は `gamma1_sq_add_gamma2_mul_thetaTilde` の中の
+    `ring` と (i)(ii) の代入である。
   * Step 6: `lambda_mul_lambda_thetaTilde`。最後の `γ_1^2 = 1 + r^2` は `gamma1R_sq_thetaTilde`。
 * **双対関係が要る。** `det A(θ) = 1` は `A(θ)` の定義だけからは出ず、
   (iii) `c_2 s_2^* = c_2^*`（双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` の帰結）が要る。
@@ -441,56 +441,193 @@ theorem gamma2_mul_gamma2_neg_cos_form (K : IsingConst) (θ : ℝ) :
     eq_sub_of_add_eq' (cos_sq_add_sin_sq_complex_chain θ)   -- `u^2 + v^2 = 1_ℂ` を移項
   rw [gamma2_mul_gamma2_neg_sin_form, hv, add_sub_assoc]
 
-/-- **人手証明 `det_A_theta_tilde` の第 2 式**（Step 3〜Step 5）: `γ_1^2 + γ_2(θ~)γ_2(-θ~) = 1`。 -/
+/-- **人手証明 `det_A_theta_tilde` の第 2 の等式の鎖の前半**（人手の 1〜29 行。左辺だけの行は数えず、等号の行を 1 行目から数える。SageMath の overview は左辺だけの行を第 1 行と数えるので、同じ行の番号が 1 つ大きい）:
+`γ_1(θ)^2 + γ_2(θ)γ_2(-θ)` を、`c_2` を (iii) `c_2s_2^* = c_2^*` で消した 8 項の和まで運ぶ。
+`a_0` は `gamma2_a0_form` と同じく、`ℂ` へ埋めた `c_1, u, s_1, c_2` の式とし、定義を仮定 `ha` で受ける。
+人手の `2_ℂ` は Lean の数字 `(2 : ℂ)`、`-1_ℂ` は `(-1 : ℂ)`（略記 `(-1)_ℂ`）である。
+積は人手の読みのとおり左から括る（`2_ℂc_1c_2^*s_1s_2^*u` は `((((2c_1)c_2^*)s_1)s_2^*)u`）。 -/
+theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
+    (hdual : K.c2 * K.s2star = K.c2star) (a₀ : ℂ)
+    (ha : a₀ = (K.c1 : ℂ) * (Real.cos θ : ℂ) - (K.s1 : ℂ) * (K.c2 : ℂ)) :
+    gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ)
+      = (K.c1 : ℂ) ^ 2 * (K.c2star : ℂ) ^ 2
+          - 2 * (K.c1 : ℂ) * (K.c2star : ℂ) * (K.s1 : ℂ) * (K.s2star : ℂ) * (Real.cos θ : ℂ)
+          + (K.s1 : ℂ) ^ 2 * (K.s2star : ℂ) ^ 2 * (Real.cos θ : ℂ) ^ 2
+          - (K.c1 : ℂ) ^ 2 * (K.s2star : ℂ) ^ 2 * (Real.cos θ : ℂ) ^ 2
+          + 2 * (K.c1 : ℂ) * (K.c2star : ℂ) * (K.s1 : ℂ) * (K.s2star : ℂ) * (Real.cos θ : ℂ)
+          - (K.s1 : ℂ) ^ 2 * (K.c2star : ℂ) ^ 2 - (K.s2star : ℂ) ^ 2
+          + (K.s2star : ℂ) ^ 2 * (Real.cos θ : ℂ) ^ 2 := by
+  have H3 : (K.c2 : ℂ) * (K.s2star : ℂ) = (K.c2star : ℂ) := c2_mul_s2star_inclusion K hdual
+  have hv : (Real.sin θ : ℂ) ^ 2 = 1 - (Real.cos θ : ℂ) ^ 2 :=
+    eq_sub_of_add_eq' (cos_sq_add_sin_sq_complex_chain θ)   -- `u^2 + v^2 = 1_ℂ` を移項
+  set c₁ : ℂ := (K.c1 : ℂ)
+  set s₁ : ℂ := (K.s1 : ℂ)
+  set c₂ : ℂ := (K.c2 : ℂ)
+  set c₂' : ℂ := (K.c2star : ℂ)
+  set s₂' : ℂ := (K.s2star : ℂ)
+  set u : ℂ := (Real.cos θ : ℂ)
+  set v : ℂ := (Real.sin θ : ℂ)
+  have hsq_s2star_term : 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u = 2 * c₁ * s₁ * c₂ * (s₂' * s₂') * u := by rw [sq s₂']
+  have hsq_c2_s2star_term : s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 = s₁ ^ 2 * (c₂ * c₂) * (s₂' * s₂') := by rw [sq c₂, sq s₂']
+  calc gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ)
+      = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 + gamma2 K θ * gamma2 K (-θ) := by
+        rw [gamma1_eq_inclusion_form]
+                          -- 1 行目: `def_gamma1_gamma2_of_theta`（`gamma1_eq_inclusion_form`）
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 + -(s₂' ^ 2 * (a₀ ^ 2 + v ^ 2)) := by
+        rw [gamma2_mul_gamma2_neg_sin_form, ← ha]
+                          -- 2 行目: 上の `γ_2(θ)γ_2(-θ)` の鎖（`gamma2_mul_gamma2_neg_sin_form`。
+                          -- その主張は `a_0` を開いた形で書いてあるので、`ha` で `a_0` に畳み直す）
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + v ^ 2) := (sub_eq_add_neg _ _).symm
+                          -- 3 行目: `def_complex_difference` を右辺から左辺へ
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + (1 - u ^ 2)) := by rw [hv]
+                          -- 4 行目: 上の `u^2 + v^2 = 1_ℂ` を移項した `v^2 = 1 - u^2`
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + (1 + -u ^ 2)) := by
+        rw [sub_eq_add_neg (1 : ℂ) (u ^ 2)]
+                          -- 5 行目: `def_complex_difference`
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + 1 + -u ^ 2) := by
+        rw [← add_assoc (a₀ ^ 2) 1 (-u ^ 2)]
+                          -- 6 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * (a₀ ^ 2 + 1 - u ^ 2) := by
+        rw [← sub_eq_add_neg (a₀ ^ 2 + 1) (u ^ 2)]
+                          -- 7 行目: `def_complex_difference` を右辺から左辺へ
+    _ = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 - s₂' ^ 2 * ((c₁ * u - s₁ * c₂) ^ 2 + 1 - u ^ 2) := by
+        rw [ha]
+                          -- 8 行目: `a_0` の定義
+    _ = (c₁ * c₂') ^ 2 - 2 * ((c₁ * c₂') * (s₁ * s₂' * u)) + (s₁ * s₂' * u) ^ 2
+          - s₂' ^ 2 * ((c₁ * u) ^ 2 - 2 * ((c₁ * u) * (s₁ * c₂)) + (s₁ * c₂) ^ 2 + 1 - u ^ 2) := by
+        rw [complex_sub_sq_chain (c₁ * c₂') (s₁ * s₂' * u), complex_sub_sq_chain (c₁ * u) (s₁ * c₂)]
+                          -- 9 行目: 上の `(x - y)^2 = x^2 - 2_ℂ(xy) + y^2`（`complex_sub_sq_chain`）を 2 箇所へ
+    _ = (c₁ * c₂') * (c₁ * c₂') - 2 * ((c₁ * c₂') * (s₁ * s₂' * u)) + (s₁ * s₂' * u) * (s₁ * s₂' * u)
+          - (s₂' * s₂') * ((c₁ * u) * (c₁ * u) - 2 * ((c₁ * u) * (s₁ * c₂)) + (s₁ * c₂) * (s₁ * c₂)
+              + 1 - u * u) := by
+        simp only [sq]
+                          -- 10 行目: `def_power_of_complex_number` より `z^2 = zz`
+    _ = (c₁ * c₁) * (c₂' * c₂') - 2 * c₁ * c₂' * s₁ * s₂' * u + (s₁ * s₁) * (s₂' * s₂') * (u * u)
+          - (s₂' * s₂') * ((c₁ * c₁) * (u * u) - 2 * c₁ * s₁ * c₂ * u + (s₁ * s₁) * (c₂ * c₂)
+              + 1 - u * u) := by
+        ac_rfl
+                          -- 11 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 - 2 * c₁ * s₁ * c₂ * u + s₁ ^ 2 * c₂ ^ 2 + 1 - u ^ 2) := by
+        rw [← sq c₁, ← sq c₂', ← sq s₁, ← sq s₂', ← sq u, ← sq c₂]
+                          -- 12 行目: `def_power_of_complex_number` より `zz = z^2`
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + -(s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 - 2 * c₁ * s₁ * c₂ * u + s₁ ^ 2 * c₂ ^ 2 + 1 - u ^ 2)) :=
+        sub_eq_add_neg _ _
+                          -- 13 行目: `def_complex_difference`
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + -(s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 + -(2 * c₁ * s₁ * c₂ * u) + s₁ ^ 2 * c₂ ^ 2 + 1 + -u ^ 2)) := by
+        rw [sub_eq_add_neg (c₁ ^ 2 * u ^ 2) (2 * c₁ * s₁ * c₂ * u),
+          sub_eq_add_neg (c₁ ^ 2 * u ^ 2 + -(2 * c₁ * s₁ * c₂ * u) + s₁ ^ 2 * c₂ ^ 2 + 1) (u ^ 2)]
+                          -- 14 行目: `def_complex_difference` を 2 箇所へ
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 + (-1) * (2 * c₁ * s₁ * c₂ * u) + s₁ ^ 2 * c₂ ^ 2 + 1
+              + (-1) * u ^ 2)) := by
+        simp only [neg_one_mul]
+                          -- 15 行目: `multiply_by_minus_one` を 3 箇所へ（右辺の 3 つの `(-1)z` を `-z` に戻して一致させる）
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + ((-1) * (s₂' ^ 2 * (c₁ ^ 2 * u ^ 2)) + (-1) * (s₂' ^ 2 * ((-1) * (2 * c₁ * s₁ * c₂ * u)))
+              + (-1) * (s₂' ^ 2 * (s₁ ^ 2 * c₂ ^ 2)) + (-1) * (s₂' ^ 2 * 1)
+              + (-1) * (s₂' ^ 2 * ((-1) * u ^ 2))) := by
+        simp only [mul_add]
+                          -- 16 行目: `complex_numbers_form_a_field` の分配律
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (s₂' ^ 2 * (c₁ ^ 2 * u ^ 2)) + (-1) * (s₂' ^ 2 * ((-1) * (2 * c₁ * s₁ * c₂ * u)))
+          + (-1) * (s₂' ^ 2 * (s₁ ^ 2 * c₂ ^ 2)) + (-1) * (s₂' ^ 2 * 1)
+          + (-1) * (s₂' ^ 2 * ((-1) * u ^ 2)) := by
+        simp only [← add_assoc]
+                          -- 17 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + ((-1) * (-1)) * (2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u)
+          + (-1) * (s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + (-1) * (s₂' ^ 2 * 1)
+          + ((-1) * (-1)) * (s₂' ^ 2 * u ^ 2) := by
+        ac_rfl
+                          -- 18 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + ((-1) * (-1)) * (2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u)
+          + (-1) * (s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + (-1) * s₂' ^ 2
+          + ((-1) * (-1)) * (s₂' ^ 2 * u ^ 2) := by
+        rw [mul_one (s₂' ^ 2)]
+                          -- 19 行目: `complex_numbers_form_a_field` の積の単位元
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + (((-1) * (-1) : ℝ) : ℂ) * (2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u)
+          + (-1) * (s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + (-1) * s₂' ^ 2
+          + (((-1) * (-1) : ℝ) : ℂ) * (s₂' ^ 2 * u ^ 2) := by
+        rw [← real_inclusion_mul (-1) (-1), Complex.ofReal_neg, Complex.ofReal_one]
+                          -- 20 行目: `real_inclusion_preserves_product` を 2 箇所へ（`-1_ℂ` は略記 `(-1)_ℂ`）
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + 1 * (2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u)
+          + (-1) * (s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + (-1) * s₂' ^ 2
+          + 1 * (s₂' ^ 2 * u ^ 2) := by
+        rw [show ((-1) * (-1) : ℝ) = 1 by norm_num, Complex.ofReal_one]
+                          -- 21 行目: ℝ の四則を 2 箇所へ（`1_ℂ` は略記 `(1)_ℂ`）
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
+          + (-1) * (s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + (-1) * s₂' ^ 2
+          + s₂' ^ 2 * u ^ 2 := by
+        rw [one_mul (2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u), one_mul (s₂' ^ 2 * u ^ 2)]
+                          -- 22 行目: `complex_numbers_form_a_field` の積の単位元を 2 箇所へ
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          + -(c₁ ^ 2 * s₂' ^ 2 * u ^ 2) + 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
+          + -(s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2) + -s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        simp only [neg_one_mul]
+                          -- 23 行目: `multiply_by_minus_one` を 3 箇所へ右辺から左辺へ
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
+          - s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        simp only [← sub_eq_add_neg]
+                          -- 24 行目: `def_complex_difference` を 3 箇所へ右辺から左辺へ
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂ * (s₂' * s₂') * u
+          - s₁ ^ 2 * (c₂ * c₂) * (s₂' * s₂') - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [hsq_s2star_term, hsq_c2_s2star_term]
+                          -- 25 行目: `def_power_of_complex_number` より `z^2 = zz` を 3 箇所へ（`hsq_s2star_term`・`hsq_c2_s2star_term`）
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * (c₂ * s₂') * s₂' * u
+          - s₁ ^ 2 * ((c₂ * s₂') * (c₂ * s₂')) - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        ac_rfl
+                          -- 26 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * (c₂ * s₂') * s₂' * u
+          - s₁ ^ 2 * (c₂ * s₂') ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [← sq (c₂ * s₂')]
+                          -- 27 行目: `def_power_of_complex_number` より `zz = z^2`
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂' * s₂' * u
+          - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [H3]
+                          -- 28 行目: 上の `c_2s_2^* = c_2^*`（`c2_mul_s2star_inclusion`）を 2 箇所へ
+    _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * c₂' * s₁ * s₂' * u
+          - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
+        rw [mul_right_comm (2 * c₁) s₁ c₂']
+                          -- 29 行目: `complex_numbers_form_a_field` の積の結合律・可換律
+
+/-- **人手証明 `det_A_theta_tilde` の第 2 式**（第 2 の等式の鎖）: `γ_1^2 + γ_2(θ~)γ_2(-θ~) = 1`。
+人手の 1〜29 行は `gamma1_sq_add_gamma2_mul_chain_first_half`。30 行目以降（`u` の 1 次の項の相殺から結論まで）は
+まだ人手の行と 1 対 1 でなく、`ring` と (i)(ii) の代入で閉じている。 -/
 theorem gamma1_sq_add_gamma2_mul_thetaTilde
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
     gamma1 P.const (thetaTilde M μ) ^ 2
       + gamma2 P.const (thetaTilde M μ) * gamma2 P.const (-thetaTilde M μ) = 1 := by
   set θ := thetaTilde M μ
+  -- `c_1^2 - s_1^2 = 1`・`(c_2^*)^2 - (s_2^*)^2 = 1` を ℂ へ埋めたもの
+  have H1 := P.c1_sq_sub_s1_sq_inclusion
+  have H2 := P.c2star_sq_sub_s2star_sq_inclusion
   set c₁ : ℂ := (P.const.c1 : ℂ)
   set s₁ : ℂ := (P.const.s1 : ℂ)
   set c₂ : ℂ := (P.const.c2 : ℂ)
   set c₂' : ℂ := (P.const.c2star : ℂ)
   set s₂' : ℂ := (P.const.s2star : ℂ)
   set u : ℂ := (Real.cos θ : ℂ)
-  -- `c_1^2 - s_1^2 = 1`・`(c_2^*)^2 - (s_2^*)^2 = 1`・`c_2s_2^* = c_2^*` を ℂ へ埋めたもの
-  have H1 : c₁ ^ 2 - s₁ ^ 2 = 1 := P.c1_sq_sub_s1_sq_inclusion
-  have H2 : c₂' ^ 2 - s₂' ^ 2 = 1 := P.c2star_sq_sub_s2star_sq_inclusion
-  have H3 : c₂ * s₂' = c₂' := c2_mul_s2star_inclusion P.const hdual
-  -- Step 3: 展開
-  have hγ₁ : gamma1 P.const θ ^ 2
-      = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 :=
-    calc gamma1 P.const θ ^ 2
-        = (c₁ * c₂' - s₁ * s₂' * u) ^ 2 := by
-          rw [gamma1_eq_inclusion_form]  -- `def_gamma1_gamma2_of_theta`（像の積・差は積・差の像）
-      _ = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 := by
-          ring                                                             -- 分配則による展開
-  have hγ₂ : gamma2 P.const θ * gamma2 P.const (-θ)
-      = -c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
-          - s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 :=
-    calc gamma2 P.const θ * gamma2 P.const (-θ)
-        = -(s₂' ^ 2 * (c₁ ^ 2 * u ^ 2 - 2 * c₁ * s₁ * c₂ * u + s₁ ^ 2 * c₂ ^ 2 + 1 - u ^ 2)) := by
-          rw [gamma2_mul_gamma2_neg_cos_form]; ring   -- Step 2 の最終式で `(c_1u - s_1c_2)^2` を展開
-      _ = -c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
-            - s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by ring  -- 分配則
-  -- Step 4: (iii) による `c_2` の消去
-  have h4a : 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u = 2 * c₁ * s₁ * c₂' * s₂' * u :=
-    calc 2 * c₁ * s₁ * c₂ * s₂' ^ 2 * u
-        = 2 * c₁ * s₁ * (c₂ * s₂') * s₂' * u := by ring    -- 積の結合律と可換律
-      _ = 2 * c₁ * s₁ * c₂' * s₂' * u := by rw [H3]       -- (iii)
-  have h4b : s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2 = s₁ ^ 2 * c₂' ^ 2 :=
-    calc s₁ ^ 2 * c₂ ^ 2 * s₂' ^ 2
-        = s₁ ^ 2 * (c₂ * s₂') ^ 2 := by ring                -- 積の結合律と可換律
-      _ = s₁ ^ 2 * c₂' ^ 2 := by rw [H3]                   -- (iii)
   have H1' : s₁ ^ 2 - c₁ ^ 2 + 1 = 0 := by linear_combination -H1
   calc gamma1 P.const θ ^ 2 + gamma2 P.const θ * gamma2 P.const (-θ)
-      = (c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2)
-          + (-c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * s₁ * c₂' * s₂' * u
-              - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2) := by
-        rw [hγ₁, hγ₂, h4a, h4b]                              -- Step 3 の 2 式と Step 4 の代入
+      = c₁ ^ 2 * c₂' ^ 2 - 2 * c₁ * c₂' * s₁ * s₂' * u + s₁ ^ 2 * s₂' ^ 2 * u ^ 2
+          - c₁ ^ 2 * s₂' ^ 2 * u ^ 2 + 2 * c₁ * c₂' * s₁ * s₂' * u
+          - s₁ ^ 2 * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 :=
+        gamma1_sq_add_gamma2_mul_chain_first_half P.const θ hdual _ rfl   -- 人手の 1〜29 行
     _ = (c₁ ^ 2 - s₁ ^ 2) * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 * (s₁ ^ 2 - c₁ ^ 2 + 1) := by
         ring                                     -- `u` の 1 次の項の相殺と同類項の整理
-    -- Step 5: (i)(ii) による結論
     _ = (c₁ ^ 2 - s₁ ^ 2) * c₂' ^ 2 - s₂' ^ 2 + s₂' ^ 2 * u ^ 2 * 0 := by rw [H1']  -- (i)
     _ = 1 * c₂' ^ 2 - s₂' ^ 2 := by rw [H1, mul_zero, add_zero]                     -- (i)
     _ = 1 := by rw [one_mul, H2]                                                    -- (ii)

@@ -58,6 +58,7 @@
 | `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form` / `gamma2_mul_gamma2_neg_cos_form`（`ClaimDetATilde.lean`） | `exp(iθ)exp(-iθ) = 1` と `γ_2γ_2(-θ)` の実部表示 | 同 Step 2 |
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
 | `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
+| `Ising2D.gamma1_sq_add_gamma2_mul_chain_first_half`（`ClaimDetATilde.lean`） | `γ_1^2 + γ_2γ_2(-θ)` を (iii) で `c_2` を消した 8 項の和まで運ぶ（人手の 1〜29 行と 1 対 1） | 同 第 2 の等式の鎖の前半 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式（Step 3〜5） |
 | `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2`（人手の ℂ の中の 13 行の鎖と 1 対 1） | 同 最終式 |
 | `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式（Step 6） |

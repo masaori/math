@@ -4197,72 +4197,88 @@ c_2s_2^*
 &&(\because\ \text{上の}\ \gamma_2(\theta)\gamma_2(-\theta)\ \text{の鎖})\\
 &\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + v^2\bigr)
 &&(\because\ \blkref{def_complex_difference})\\
-&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + 1 - u^2\bigr)
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + (1 - u^2)\bigr)
 &&(\because\ \text{上の}\ u^2 + v^2 = 1_{\mathbb{C}}\ \text{を移項した}\ v^2 = 1 - u^2)\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\Bigl(a_0^2 + \bigl(1 + (-u^2)\bigr)\Bigr)
+&&(\because\ \blkref{def_complex_difference})\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + 1 + (-u^2)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + 1 - u^2\bigr)
+&&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
 &\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl((c_1u - s_1c_2)^2 + 1 - u^2\bigr)
 &&(\because\ a_0\ \text{の定義})\\
-&\quad= (c_1c_2^*)^2 - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)^2 \\
-&\qquad\quad - (s_2^*)^2\bigl((c_1u)^2 - 2(c_1u)(s_1c_2) + (s_1c_2)^2 + 1 - u^2\bigr)
+&\quad= (c_1c_2^*)^2 - 2_{\mathbb{C}}\bigl((c_1c_2^*)(s_1s_2^*u)\bigr) + (s_1s_2^*u)^2 \\
+&\qquad\quad - (s_2^*)^2\Bigl((c_1u)^2 - 2_{\mathbb{C}}\bigl((c_1u)(s_1c_2)\bigr) + (s_1c_2)^2 + 1 - u^2\Bigr)
 &&(\because\ \text{上の}\ (x - y)^2 = x^2 - 2_{\mathbb{C}}(xy) + y^2\ \text{を 2 箇所へ})\\
-&\quad= (c_1c_2^*)(c_1c_2^*) - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)(s_1s_2^*u) \\
-&\qquad\quad - (s_2^*s_2^*)\bigl((c_1u)(c_1u) - 2(c_1u)(s_1c_2) + (s_1c_2)(s_1c_2) + 1 - uu\bigr)
+&\quad= (c_1c_2^*)(c_1c_2^*) - 2_{\mathbb{C}}\bigl((c_1c_2^*)(s_1s_2^*u)\bigr) + (s_1s_2^*u)(s_1s_2^*u) \\
+&\qquad\quad - (s_2^*s_2^*)\Bigl((c_1u)(c_1u) - 2_{\mathbb{C}}\bigl((c_1u)(s_1c_2)\bigr) + (s_1c_2)(s_1c_2) + 1 - uu\Bigr)
 &&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
-&\quad= (c_1c_1)(c_2^*c_2^*) - 2c_1c_2^*s_1s_2^*u + (s_1s_1)(s_2^*s_2^*)(uu) \\
-&\qquad\quad - (s_2^*s_2^*)\bigl((c_1c_1)(uu) - 2c_1s_1c_2u + (s_1s_1)(c_2c_2) + 1 - uu\bigr)
+&\quad= (c_1c_1)(c_2^*c_2^*) - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + (s_1s_1)(s_2^*s_2^*)(uu) \\
+&\qquad\quad - (s_2^*s_2^*)\bigl((c_1c_1)(uu) - 2_{\mathbb{C}}c_1s_1c_2u + (s_1s_1)(c_2c_2) + 1 - uu\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad - (s_2^*)^2\bigl(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\bigr)
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - (s_2^*)^2\bigl(c_1^2u^2 - 2_{\mathbb{C}}c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\bigr)
 &&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad + \Bigl(-\bigl((s_2^*)^2(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2)\bigr)\Bigr)
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + \Bigl(-\bigl((s_2^*)^2(c_1^2u^2 - 2_{\mathbb{C}}c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2)\bigr)\Bigr)
 &&(\because\ \blkref{def_complex_difference})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad + \Bigl(-\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-(2c_1s_1c_2u)) + s_1^2c_2^2 + 1 + (-u^2)\bigr)\Bigr)\Bigr)
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + \Bigl(-\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-(2_{\mathbb{C}}c_1s_1c_2u)) + s_1^2c_2^2 + 1 + (-u^2)\bigr)\Bigr)\Bigr)
 &&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-1_{\mathbb{C}})(2c_1s_1c_2u) + s_1^2c_2^2 + 1 + (-1_{\mathbb{C}})u^2\bigr)\Bigr)
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-1_{\mathbb{C}})(2_{\mathbb{C}}c_1s_1c_2u) + s_1^2c_2^2 + 1 + (-1_{\mathbb{C}})u^2\bigr)\Bigr)
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 3 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl((s_2^*)^2c_1^2u^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2(-1_{\mathbb{C}})(2c_1s_1c_2u)\bigr) \\
-&\qquad\quad + (-1_{\mathbb{C}})\bigl((s_2^*)^2s_1^2c_2^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2(-1_{\mathbb{C}})u^2\bigr)
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + \Bigl((-1_{\mathbb{C}})\bigl((s_2^*)^2(c_1^2u^2)\bigr) + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl((-1_{\mathbb{C}})(2_{\mathbb{C}}c_1s_1c_2u)\bigr)\Bigr) \\
+&\qquad\qquad + (-1_{\mathbb{C}})\bigl((s_2^*)^2(s_1^2c_2^2)\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl((-1_{\mathbb{C}})u^2\bigr)\Bigr)\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl((s_2^*)^2(c_1^2u^2)\bigr) + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl((-1_{\mathbb{C}})(2_{\mathbb{C}}c_1s_1c_2u)\bigr)\Bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl((s_2^*)^2(s_1^2c_2^2)\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl((-1_{\mathbb{C}})u^2\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl((s_2^*)^2u^2\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl((s_2^*)^2u^2\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl(2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
 &&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 1_{\mathbb{C}}\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 1_{\mathbb{C}}\bigl(2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + 1_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
 &&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2c_1s_1c_2(s_2^*)^2u \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2c_1s_1c_2(s_2^*)^2u + \bigl(-(s_1^2c_2^2(s_2^*)^2)\bigr) + \bigl(-(s_2^*)^2\bigr) + (s_2^*)^2u^2
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u + \bigl(-(s_1^2c_2^2(s_2^*)^2)\bigr) + \bigl(-(s_2^*)^2\bigr) + (s_2^*)^2u^2
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 3 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 - c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2(s_2^*)^2u - s_1^2c_2^2(s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1c_2(s_2^*)^2u - s_1^2c_2^2(s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{def_complex_difference}\ \text{を 3 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1s_1(c_2s_2^*)s_2^*u - s_1^2(c_2s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1c_2(s_2^*s_2^*)u - s_1^2(c_2c_2)(s_2^*s_2^*) - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 3 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1(c_2s_2^*)s_2^*u - s_1^2\bigl((c_2s_2^*)(c_2s_2^*)\bigr) - (s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2^*s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1(c_2s_2^*)s_2^*u - s_1^2(c_2s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1s_1c_2^*s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \text{上の}\ c_2s_2^* = c_2^*\ \text{を 2 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
-&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1c_2^*s_1s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&\quad= c_1^2(c_2^*)^2 + \bigl(-(2c_1c_2^*s_1s_2^*u)\bigr) + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2c_1c_2^*s_1s_2^*u \\
+&\quad= c_1^2(c_2^*)^2 - 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 + \bigl(-(2_{\mathbb{C}}c_1c_2^*s_1s_2^*u)\bigr) + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u \\
 &\qquad\quad + \bigl(-(s_1^2(c_2^*)^2)\bigr) + \bigl(-(s_2^*)^2\bigr) + (s_2^*)^2u^2
 &&(\because\ \blkref{def_complex_difference}\ \text{を 4 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 + (-1_{\mathbb{C}})(2c_1c_2^*s_1s_2^*u) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2c_1c_2^*s_1s_2^*u \\
+&\quad= c_1^2(c_2^*)^2 + (-1_{\mathbb{C}})(2_{\mathbb{C}}c_1c_2^*s_1s_2^*u) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 4 箇所へ})\\
-&\quad= c_1^2(c_2^*)^2 + \bigl((-1_{\mathbb{C}})(2c_1c_2^*s_1s_2^*u) + 2c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
+&\quad= c_1^2(c_2^*)^2 + \bigl((-1_{\mathbb{C}})(2_{\mathbb{C}}c_1c_2^*s_1s_2^*u) + 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
-&\quad= c_1^2(c_2^*)^2 + \bigl(-(2c_1c_2^*s_1s_2^*u) + 2c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
+&\quad= c_1^2(c_2^*)^2 + \bigl(-(2_{\mathbb{C}}c_1c_2^*s_1s_2^*u) + 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
 &\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{multiply_by_minus_one})\\
 &\quad= c_1^2(c_2^*)^2 + 0_{\mathbb{C}} + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr)

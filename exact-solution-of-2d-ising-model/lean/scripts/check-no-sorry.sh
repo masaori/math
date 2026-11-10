@@ -2109,6 +2109,7 @@ targets=(
   Ising2D.IsingParam.c2star_sq_sub_s2star_sq_inclusion
   Ising2D.c2_mul_s2star_inclusion
   Ising2D.gamma1_eq_inclusion_form
+  Ising2D.gamma1_sq_add_gamma2_mul_chain_first_half
   Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde
   Ising2D.det_AMat_thetaTilde_eq_one
   Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf
