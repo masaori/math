@@ -68724,14 +68724,12 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                             " に限る。四つは相異なる。横辺と縦辺は最初の成分が異なり、",
                             math(String.raw`c\ne c-1`), " かつ ", math(String.raw`r\ne r-1`), " である。",
                           ]),
-                          displayMath(String.raw`\begin{aligned}
-\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}
-&=A\cap\{e_1,e_2,e_3,e_4\}
-&&\bigl(\because\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)\\
-\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
-&=\sum_{i=1}^{4}\mathbf 1_A(e_i)
-&&\bigl(\because\ e_1,e_2,e_3,e_4\text{ は相異なる}\bigr)
-\end{aligned}`),
+                          displayMath(String.raw`\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}
+=A\cap\{e_1,e_2,e_3,e_4\}
+\qquad\bigl(\because\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)`),
+                          displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
+=\sum_{i=1}^{4}\mathbf 1_A(e_i)
+\qquad\bigl(\because\ \text{直前の集合の等号と }e_1,e_2,e_3,e_4\text{ の相異性}\bigr)`),
                           paragraph(["整数の等号を二で割った剰余へ移すと、主張の同値を得る。"]),
                           displayMath(String.raw`\sum_{i=1}^{4}\mathbf 1_A(e_i)\equiv0\pmod2
 \Longleftrightarrow
