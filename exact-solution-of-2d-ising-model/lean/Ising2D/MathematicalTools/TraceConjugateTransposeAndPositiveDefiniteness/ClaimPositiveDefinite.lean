@@ -8,6 +8,8 @@
 - `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）の、反可換性による別の論法の補助だけ
   （人手の主張の具体版は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）
 - `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
+- `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の (1) の証明の中の、
+  クロネッカー積の共役転置の成分の鎖（`siteProd_conjTranspose_apply`）
 
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
 `Matrix.conjTranspose` / `Matrix.IsHermitian` / `Matrix.PosDef` と同じものである。
@@ -46,6 +48,8 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfHermitianIsHermitian
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -75,14 +79,29 @@ Pauli 行列の転置 `pauliX_transpose`・`pauliZ_transpose`・`pauliY_transpos
 /-! ## `siteProd` の共役転置
 
 転置 `siteProd_transpose`（人手 `kronecker_transpose`）は、人手の成分の鎖と 1 対 1 の `calc` として
-`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean` に置いた。 -/
+`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean` に置いた。
+共役転置は、人手 `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の
+(1) の証明の中の成分の鎖（5 行）と 1 対 1 である。人手のクロネッカー積 `A_1⊠⋯⊠A_M` は Lean の `siteProd M x` で、添字は
+`Conf M` なので番号付け `ν` は現れない（`siteProd_transpose_apply` と同じ）。人手は `M_col ≥ 2` で述べるが、鎖はどの `M` でも同じである
+（`M ≤ 1` の段は `complex_conjugate_star_finite_prod` の中にある）。 -/
 
+/-- **人手 `check_number_operator_is_hermitian` の (1) の成分の鎖**: `((A_1⊠⋯⊠A_M)^*)_{I,J} = (A_1^*⊠⋯⊠A_M^*)_{I,J}`。 -/
+theorem siteProd_conjTranspose_apply (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (s t : Conf M) :
+    (siteProd M x)ᴴ s t = siteProd M (fun k => (x k)ᴴ) s t :=
+  calc (siteProd M x)ᴴ s t
+      = star (siteProd M x t s) := rfl                                      -- `def_hermitian_positive_definite`
+    _ = star (∏ k : Fin M, x k (t k) (s k)) := by
+        rw [siteProd_apply]                                                 -- `def_kronecker` (2)
+    _ = ∏ k : Fin M, star (x k (t k) (s k)) :=
+        complex_conjugate_star_finite_prod M _                              -- `complex_conjugate_of_product` の反復適用
+    _ = ∏ k : Fin M, (x k)ᴴ (s k) (t k) := rfl                              -- `def_hermitian_positive_definite` を各因子へ
+    _ = siteProd M (fun k => (x k)ᴴ) s t :=
+        (siteProd_apply M (fun k => (x k)ᴴ) s t).symm                      -- `def_kronecker` (2)
+
+/-- **人手 `check_number_operator_is_hermitian` の (1) の `(A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^*`**（全ての成分が等しい）。 -/
 theorem siteProd_conjTranspose (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
-    (siteProd M x)ᴴ = siteProd M (fun i => (x i)ᴴ) := by
-  ext s t
-  show star (siteProd M x t s) = ∏ i, star (x i (t i) (s i))
-  rw [siteProd_apply]
-  exact map_prod (starRingEnd ℂ) _ _
+    (siteProd M x)ᴴ = siteProd M (fun k => (x k)ᴴ) :=
+  Matrix.ext (siteProd_conjTranspose_apply x)   -- 両辺のすべての成分が一致する
 
 /-! ## `Z_m`, `Y_m` の転置・共役転置 -/
 
@@ -184,11 +203,18 @@ theorem H2_transpose : (H2 M)ᵀ = H2 M := by
   rw [H2, Matrix.transpose_sum]
   exact Finset.sum_congr rfl fun m _ => transpose_Z_mul_Y m
 
+/-- 補助: `c` が実（`\bar c = c`）なら `\overline{ic} = -(ic)`。人手の主張ではなく、下の補助 `S1_isHermitian`・
+`S2_isHermitian_by_anticommutation` だけが使う。人手の主張の具体版を当てるのは 1 段目（`complex_conjugate_of_product`）と
+3 段目（`\bar i = -i`）で、ほかは `star` の読み替え・仮定・`(-x)y = -(xy)` の段である。 -/
 private theorem star_I_mul {c : ℂ} (hc : star c = c) :
-    star (Complex.I * c) = -(Complex.I * c) := by
-  have hI : star Complex.I = -Complex.I := by simp [Complex.star_def]
-  rw [star_mul', hI, hc]
-  ring
+    star (Complex.I * c) = -(Complex.I * c) :=
+  calc star (Complex.I * c)
+      = star Complex.I * star c := complex_conjugate_star_mul _ _   -- `complex_conjugate_of_product`
+    _ = (starRingEnd ℂ) Complex.I * star c := rfl                   -- `star` を `starRingEnd ℂ` と読む
+    _ = (-Complex.I) * star c := by
+        rw [conj_I_eq_neg_I]                                        -- `relation_of_gamma_2_theta_tilde` の `\bar i = -i`
+    _ = (-Complex.I) * c := by rw [hc]                              -- 仮定 `\bar c = c`
+    _ = -(Complex.I * c) := neg_mul _ _                             -- `(-x)y = -(xy)`
 
 /-- 補助: 一般形 `i K_1 H1 M η`（`η` 実）はエルミート。 -/
 theorem S1_isHermitian {K1 η : ℂ} (hK1 : star K1 = K1) (hη : star η = η) :

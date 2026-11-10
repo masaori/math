@@ -18,14 +18,21 @@
 | `complex_conjugate_of_sum` の `m = n` | `complex_conjugate_star_finite_sum`（`n = m + 1` で `complex_conjugate_of_finite_sum_succ`） |
 | `complex_conjugate_of_sum` の `m = N`（添字 `0, …, N − 1`） | `complex_conjugate_star_sum_range`（添字の付け替え `Finset.sum_range` と `complex_conjugate_star_finite_sum`） |
 | `complex_conjugate_of_sum` の `m = 2^M`（添字 `Conf M`） | `complex_conjugate_star_sum_conf`（添字の付け替え `finFunctionFinEquiv` と `complex_conjugate_star_finite_sum`） |
+| `complex_conjugate_of_product` の反復適用（`M` 個の因子の有限積） | `complex_conjugate_star_finite_prod`（`def_finite_product_of_complex_numbers` で末尾の因子を外し、1 段ごとに `complex_conjugate_star_mul` を 1 回） |
 
 - `star z` と `(starRingEnd ℂ) z` は定義で同じ値である（mathlib の `starRingEnd_apply` が `rfl`）。読み替えの段は `rfl`。
 - 人手の `m ∈ ℤ_{≥1}` に対し、使う側の `Fin n` は `n = 0` を含む。`n = 0` の段（両辺とも空の和）は人手証明の外で、
   空の和 `Σ_{j ∈ ∅} = 0`（mathlib の `Fin.sum_univ_zero`）と `\overline{0_ℂ} = 0_ℂ`（`complex_conjugate_star_zero`）で閉じる。
   `complex_conjugate_star_zero` は `complex_conjugate_of_neg_one` の 4 行と同じ段の並び（`inclusion_rr_to_cc` の `r_ℂ = (r, 0)`、
-  `def_complex_conjugate`、ℝ で `-0 = 0`、`inclusion_rr_to_cc`）で `r = 0` について示す。同じ値は人手 `complex_conjugate_of_real_inclusion`
-  の `r = 0` でもあるが、その具体版（`TraceConjugateTransposeAndPositiveDefiniteness/ClaimRealSymmetricMatrixIsHermitian.lean`）を
-  このフォルダから import すると章の向きが逆になるので、ここで書く。
+  `def_complex_conjugate`、ℝ で `-0 = 0`、`inclusion_rr_to_cc`）で `r = 0` について示す。
+  有限積も同じく、`n = 0`（両辺とも空の積）は人手証明の外で、空の積 `∏_{j ∈ ∅} = 1_ℂ`（mathlib の `Fin.prod_univ_zero`）と
+  `\overline{1_ℂ} = 1_ℂ`（`complex_conjugate_star_one`。`complex_conjugate_star_zero` と同じ段の並びで `r = 1`）で閉じる。
+  `\overline{0_ℂ} = 0_ℂ`・`\overline{1_ℂ} = 1_ℂ` は人手 `complex_conjugate_of_real_inclusion` の `r = 0`・`r = 1` でもあるが、その具体版
+  （`TraceConjugateTransposeAndPositiveDefiniteness/ClaimRealSymmetricMatrixIsHermitian.lean`）をこのフォルダから import すると
+  章の向きが逆になるので、ここで書く。
+- 有限積 `∏_{j=1}^{m} z_j` は人手 `def_finite_product_of_complex_numbers`（`∏_{j=1}^{1} z_j := z_1`、
+  `∏_{j=1}^{m+1} z_j := (∏_{j=1}^{m} z_j) z_{m+1}`）で、Lean の `Fin m` の積との行き来は `Fin.prod_univ_one`・`Fin.prod_univ_castSucc`
+  で行う（`finite_product_of_real_inclusions_is_real` と同じ）。
 - 人手の添字 `0, …, N` の和（`def_exp` の部分和）は、`Finset.range (N + 1)` の和である（`complex_conjugate_star_sum_range` の `N → N + 1`）。`def_finite_sum_of_complex_numbers` の
   添字 `1, …, m` の和（Lean の `Fin (m + 1)` の和）との行き来は、mathlib の `Finset.sum_range`（`Σ_{m ∈ range n} f m = Σ_{i : Fin n} f i`）
   で行う（添字の付け方そのものは状態台帳の「有限和の添字の付け方」の件）。
@@ -78,6 +85,44 @@ theorem complex_conjugate_star_zero : star (0 : ℂ) = 0 :=
     _ = (⟨0, 0⟩ : ℂ) := by rw [neg_zero]                        -- ℝ で `-0 = 0`
     _ = (((0 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 0`）
     _ = 0 := rfl                                                -- `(0)_ℂ` を `0_ℂ` と書く
+
+/-- `\overline{1_ℂ} = 1_ℂ`（空の積の段だけで使う。`complex_conjugate_star_zero` と同じ段の並びで `r = 1`）。 -/
+theorem complex_conjugate_star_one : star (1 : ℂ) = 1 :=
+  calc star (1 : ℂ)
+      = (starRingEnd ℂ) (((1 : ℝ)) : ℂ) :=
+        rfl                                                     -- `star` を `starRingEnd ℂ` と、`1_ℂ` を `(1)_ℂ` と読む
+    _ = (starRingEnd ℂ) (⟨1, 0⟩ : ℂ) := rfl                     -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）
+    _ = (⟨1, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+                                                                -- `def_complex_conjugate`
+    _ = (⟨1, 0⟩ : ℂ) := by rw [neg_zero]                        -- ℝ で `-0 = 0`
+    _ = (((1 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）
+    _ = 1 := rfl                                                -- `(1)_ℂ` を `1_ℂ` と書く
+
+/-- `star` の形・添字 `Fin n` の `\overline{∏_j z_j} = ∏_j \overline{z_j}`（人手 `complex_conjugate_of_product` の反復適用）。
+`n + 2` の段は、`def_finite_product_of_complex_numbers` で末尾の因子と残りの積に分けて `complex_conjugate_of_product` を 1 回当て、
+残りの積に同じ主張（`n + 1`）を当てる。`n = 1` は `def_finite_product_of_complex_numbers` の `m = 1`、
+`n = 0`（両辺とも空の積）は人手証明の外の段。 -/
+theorem complex_conjugate_star_finite_prod : ∀ (n : ℕ) (z : Fin n → ℂ), star (∏ j, z j) = ∏ j, star (z j)
+  | 0, z =>
+    calc star (∏ j : Fin 0, z j)
+        = star (1 : ℂ) := by rw [Fin.prod_univ_zero]            -- 空の積は `1_ℂ`
+      _ = 1 := complex_conjugate_star_one                        -- `\overline{1_ℂ} = 1_ℂ`
+      _ = ∏ j : Fin 0, star (z j) := (Fin.prod_univ_zero _).symm -- 空の積は `1_ℂ`
+  | 1, z =>
+    calc star (∏ j : Fin 1, z j)
+        = star (z 0) := by rw [Fin.prod_univ_one]               -- `def_finite_product_of_complex_numbers`（`m = 1`）
+      _ = ∏ j : Fin 1, star (z j) :=
+          (Fin.prod_univ_one (fun j => star (z j))).symm        -- `def_finite_product_of_complex_numbers`（`m = 1`）
+  | n + 2, z =>
+    calc star (∏ j : Fin (n + 2), z j)
+        = star ((∏ j : Fin (n + 1), z (Fin.castSucc j)) * z (Fin.last (n + 1))) := by
+          rw [Fin.prod_univ_castSucc]                           -- `def_finite_product_of_complex_numbers`（`m → n + 1`）
+      _ = star (∏ j : Fin (n + 1), z (Fin.castSucc j)) * star (z (Fin.last (n + 1))) :=
+          complex_conjugate_star_mul _ _                        -- `complex_conjugate_of_product`
+      _ = (∏ j : Fin (n + 1), star (z (Fin.castSucc j))) * star (z (Fin.last (n + 1))) := by
+          rw [complex_conjugate_star_finite_prod (n + 1)]       -- 残りの積に同じ主張（`n + 1`）
+      _ = ∏ j : Fin (n + 2), star (z j) :=
+          (Fin.prod_univ_castSucc (fun j => star (z j))).symm   -- `def_finite_product_of_complex_numbers`（`m → n + 1`）、右辺から左辺へ
 
 /-- `star` の形・添字 `Fin n` の `\overline{Σ_j z_j} = Σ_j \overline{z_j}`（人手 `complex_conjugate_of_sum` の `m = n`）。
 `n = m + 1` は具体版 `complex_conjugate_of_finite_sum_succ`、`n = 0`（両辺とも空の和）は人手証明の外の段。 -/

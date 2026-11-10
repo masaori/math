@@ -147,7 +147,7 @@
 | --- | --- | --- |
 | `Ising2D.expPhase_conj` / `checkPhase_conj_star` | `conj(e^{−2πik/M}) = e^{2πik/M}` と半整数位相の共役 | (2) の計算 |
 | **`Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`** | **`Ž_μ^* = Ž_{M+1−μ}`, `Y̌_μ^* = Y̌_{M+1−μ}`** | **(2)（無条件）** |
-| `Ising2D.Z_conjTranspose` / `Y_conjTranspose` | `Z_j^* = Z_j`, `Y_j^* = Y_j` | (1)（章 009 で証明済み） |
+| `Ising2D.Z_conjTranspose` / `Y_conjTranspose` | `Z_j^* = Z_j`, `Y_j^* = Y_j` | (1)（章 009 で証明済み。証明の中のクロネッカー積の共役転置の 5 行の鎖は `Ising2D.siteProd_conjTranspose_apply`） |
 | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` | `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | (4)（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`） |
 | `EvenSectorBridge.quad_Qproj` | `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | (4) の帰結（`TheoremCPlusEqualsLambda.lean`） |
 

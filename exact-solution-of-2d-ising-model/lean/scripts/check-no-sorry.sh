@@ -98,6 +98,8 @@ targets=(
   Ising2D.kroneckerTensorPowBasis_apply
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
+  Ising2D.siteProd_conjTranspose_apply
+  Ising2D.siteProd_conjTranspose
   Ising2D.siteProd_eq_kroneckerProdOf
   Ising2D.siteProd_transpose_of_necSuf
   Ising2D.NecSuf.kroneckerProdOf
@@ -273,6 +275,8 @@ targets=(
   Ising2D.complex_conjugate_star_add
   Ising2D.complex_conjugate_star_sub
   Ising2D.complex_conjugate_star_zero
+  Ising2D.complex_conjugate_star_one
+  Ising2D.complex_conjugate_star_finite_prod
   Ising2D.complex_conjugate_star_finite_sum
   Ising2D.complex_conjugate_star_sum_range
   Ising2D.complex_conjugate_star_sum_conf

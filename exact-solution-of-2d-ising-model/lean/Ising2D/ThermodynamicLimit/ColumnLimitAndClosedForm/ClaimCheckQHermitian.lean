@@ -13,7 +13,7 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
-| (1) `Z_j^* = Z_j`, `Y_j^* = Y_j` | `Ising2D.Z_conjTranspose` / `Y_conjTranspose`（章 009 で証明済み） |
+| (1) `Z_j^* = Z_j`, `Y_j^* = Y_j` | `Ising2D.Z_conjTranspose` / `Y_conjTranspose`（章 009 で証明済み。証明の中のクロネッカー積の共役転置の 5 行の鎖は `Ising2D.siteProd_conjTranspose_apply`（`ClaimPositiveDefinite.lean`）） |
 | (2) `Ž_μ^* = Ž_{M+1-μ}`, `Y̌_μ^* = Y̌_{M+1-μ}` | `Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose` |
 | (3) `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` | `CheckFermi.hstar`（章 016 からの入力） |
 | (4) `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` |
