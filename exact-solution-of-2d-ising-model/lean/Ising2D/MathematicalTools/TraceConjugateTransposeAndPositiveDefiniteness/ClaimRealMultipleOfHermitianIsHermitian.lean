@@ -13,14 +13,15 @@
 
 - 人手の共役転置（`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose`（`Aᴴ k l = star (A l k)` が定義から `rfl`）、
   行列のスカラー倍（`def_matrix_scalar_multiple`）は `Matrix` の `•`（`(c • A) k l = c * A k l` が定義から `rfl`）である。
-- `complex_conjugate_of_product` の具体版 `complex_conjugate_of_product_eq`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）は `starRingEnd ℂ` の形なので、
-  `star` の形のこのファイルはまだ mathlib の `star_mul'`（可換な `ℂ` での `\overline{zw} = \overline{z}\,\overline{w}`）を引く（差し替えは状態台帳の残り）。
+- `complex_conjugate_of_product` は、具体版 `complex_conjugate_of_product_eq` を `star` の形へ読み替えた `complex_conjugate_star_mul`
+  （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を引く。
 - 人手の添字 `k, l ∈ {1, …, n}` は添字の型 `n` の元である（`DefinitionRealSymmetricComplexMatrix.lean` の注意）。
 
 必要十分版は `Ising2D/NecSuf/StarFixedScalarMultipleOfHermitian.lean`、
 具体版をその特殊化として得るのは `ClaimRealMultipleOfHermitianIsHermitianFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 
 namespace Ising2D
 
@@ -34,7 +35,7 @@ theorem real_multiple_isHermitian {n : Type*} (α : ℝ) {A : Matrix n n ℂ} (h
   calc ((α : ℂ) • A)ᴴ k l
       = star (((α : ℂ) • A) l k) := rfl                                     -- `def_hermitian_positive_definite` の共役転置
     _ = star ((α : ℂ) * A l k) := rfl                                       -- `def_matrix_scalar_multiple`
-    _ = star (α : ℂ) * star (A l k) := star_mul' _ _                        -- `complex_conjugate_of_product`
+    _ = star (α : ℂ) * star (A l k) := complex_conjugate_star_mul _ _       -- `complex_conjugate_of_product`
     _ = (α : ℂ) * star (A l k) := by rw [complex_conjugate_of_real_inclusion] -- `complex_conjugate_of_real_inclusion`
     _ = (α : ℂ) * Aᴴ k l := rfl                                             -- `def_hermitian_positive_definite` の共役転置
     _ = (α : ℂ) * A k l := by rw [hA.eq]                                    -- `A^* = A`

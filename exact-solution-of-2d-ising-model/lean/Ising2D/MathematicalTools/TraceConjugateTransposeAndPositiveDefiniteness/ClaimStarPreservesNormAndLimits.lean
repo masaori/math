@@ -24,10 +24,10 @@
   （`ClaimRealMultipleOfHermitianIsHermitian.lean` と同じ）。積・和・スカラー倍・差の成分は `mat_mult`・`def_matrix_sum`・
   `def_matrix_scalar_multiple`・`def_matrix_difference` の具体版 `matrix_mul_apply_sum`・`matrix_sum_apply`・`matrix_smul_apply`・`matrix_sub_apply` を引く。
 * 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product`・`complex_conjugate_of_difference`・`abs_of_complex_conjugate`
-  （`structured-latex/content/005_exp_conjugation_proof.ts`）のうち前の 3 つの具体版は
-  `MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean` にあるが `starRingEnd ℂ` の形で、有限和の添字が `Fin (m + 1)` である。
-  このファイルは `star` の形で添字が `Fin n` なので、まだ mathlib の `star_sum`・`star_add`（`m = 2`）・
-  `star_mul'`・`star_sub`・`norm_star` を引く（`ClaimCongruencePreservesPositiveDefinite.lean` と同じ扱い。差し替えは状態台帳の残り。`abs_of_complex_conjugate` は具体版が無い）。
+  （`structured-latex/content/005_exp_conjugation_proof.ts`）のうち前の 3 つは、具体版を `star` の形・添字 `Fin n` へ読み替えた
+  `complex_conjugate_star_finite_sum`・`complex_conjugate_star_add`（`m = 2`）・`complex_conjugate_star_mul`・`complex_conjugate_star_sub`
+  （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を引く。
+  `abs_of_complex_conjugate` は具体版が無く、mathlib の `norm_star` を引く。
   `ℂ` の積の可換性（`complex_numbers_form_a_field`）は `mul_comm`、`ℝ` の有限和の順序の入れ替えは本文に主張が無く `Finset.sum_comm` を引く
   （`ClaimTransposePreservesMatrixNormAndLimits.lean` と同じ扱い）。
 * ノルムは mathlib の Frobenius ノルム（`Matrix.frobenius_norm_def`）で、`def_matrix_norm` の行列ノルムと値が一致する。
@@ -35,9 +35,9 @@
 * 人手の `n ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す（成分が無いか和が空なだけで、主張はそのまま成り立つ）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
-import Mathlib.Algebra.Star.BigOperators
 import Mathlib.Analysis.Matrix.Normed
 import Mathlib.Analysis.Complex.Basic
 
@@ -54,9 +54,9 @@ theorem matrix_conjTranspose_mul_apply {n : ℕ} (A B : Matrix (Fin n) (Fin n) �
   calc (A * B)ᴴ k l
       = star ((A * B) l k) := rfl                                             -- `def_hermitian_positive_definite`
     _ = star (∑ j, A l j * B j k) := by rw [matrix_mul_apply_sum]             -- `mat_mult`
-    _ = ∑ j, star (A l j * B j k) := star_sum _ _                             -- `complex_conjugate_of_sum` の `m = n`
+    _ = ∑ j, star (A l j * B j k) := complex_conjugate_star_finite_sum _ _    -- `complex_conjugate_of_sum` の `m = n`
     _ = ∑ j, star (A l j) * star (B j k) := by
-        simp only [star_mul']                                                 -- `complex_conjugate_of_product` を各項へ
+        simp only [complex_conjugate_star_mul]                                -- `complex_conjugate_of_product` を各項へ
     _ = ∑ j, star (B j k) * star (A l j) :=
         Finset.sum_congr rfl fun _ _ => mul_comm _ _                          -- 積の可換性を各項へ（`complex_numbers_form_a_field`）
     _ = ∑ j, Bᴴ k j * Aᴴ j l := rfl                                           -- `def_hermitian_positive_definite` を各項へ
@@ -76,9 +76,10 @@ theorem matrix_conjTranspose_add_smul_apply {n : ℕ} (α β : ℂ) (A B : Matri
     _ = star ((α • A) l k + (β • B) l k) := by rw [matrix_sum_apply]          -- `def_matrix_sum`
     _ = star (α * A l k + β * B l k) := by
         rw [matrix_smul_apply, matrix_smul_apply]                             -- `def_matrix_scalar_multiple`（2 項へ同時に）
-    _ = star (α * A l k) + star (β * B l k) := star_add _ _                   -- `complex_conjugate_of_sum` の `m = 2`
+    _ = star (α * A l k) + star (β * B l k) :=
+        complex_conjugate_star_add _ _                                        -- `complex_conjugate_of_sum` の `m = 2`
     _ = star α * star (A l k) + star β * star (B l k) := by
-        rw [star_mul', star_mul']                                             -- `complex_conjugate_of_product` を各項へ
+        rw [complex_conjugate_star_mul, complex_conjugate_star_mul]           -- `complex_conjugate_of_product` を各項へ
     _ = star α * Aᴴ k l + star β * Bᴴ k l := rfl                              -- `def_hermitian_positive_definite` を各項へ
     _ = (star α • Aᴴ) k l + (star β • Bᴴ) k l := by
         rw [matrix_smul_apply, matrix_smul_apply]                             -- `def_matrix_scalar_multiple`（2 項へ同時に）
@@ -108,7 +109,7 @@ theorem matrix_conjTranspose_sub_apply {n : ℕ} (AN A : Matrix (Fin n) (Fin n) 
   calc (ANᴴ - Aᴴ) k l
       = ANᴴ k l - Aᴴ k l := matrix_sub_apply _ _ _ _                          -- `def_matrix_difference`
     _ = star (AN l k) - star (A l k) := rfl                                   -- `def_hermitian_positive_definite` を各項へ
-    _ = star (AN l k - A l k) := (star_sub _ _).symm                          -- `complex_conjugate_of_difference`
+    _ = star (AN l k - A l k) := (complex_conjugate_star_sub _ _).symm        -- `complex_conjugate_of_difference`
     _ = star ((AN - A) l k) := by rw [matrix_sub_apply]                       -- `def_matrix_difference`
     _ = (AN - A)ᴴ k l := rfl                                                  -- `def_hermitian_positive_definite`
 

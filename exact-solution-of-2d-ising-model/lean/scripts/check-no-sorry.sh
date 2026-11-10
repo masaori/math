@@ -268,6 +268,13 @@ targets=(
   Ising2D.complex_conjugate_of_product_eq
   Ising2D.complex_conjugate_of_neg_one
   Ising2D.complex_conjugate_of_difference_eq
+  Ising2D.complex_conjugate_star_mul
+  Ising2D.complex_conjugate_star_add
+  Ising2D.complex_conjugate_star_sub
+  Ising2D.complex_conjugate_star_zero
+  Ising2D.complex_conjugate_star_finite_sum
+  Ising2D.complex_conjugate_star_sum_range
+  Ising2D.complex_conjugate_star_sum_conf
   Ising2D.exp_neg_I_mul_real_eq_cos_sub_I_mul_sin
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg

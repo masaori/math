@@ -27,7 +27,7 @@ open scoped ComplexOrder
 theorem positive_real_multiple_preserves_positive_definite_of_necSuf' {ι : Type*} [Fintype ι] [DecidableEq ι]
     {A : Matrix ι ι ℂ} (hA : A.PosDef) {α : ℝ} (hα : 0 < α) : ((α : ℂ) • A).PosDef :=
   posDef_of_conjBilin'_pos
-    (NecSuf.star_fixed_smul_isHermitian (fun a => star_mul' _ a) (complex_conjugate_of_real_inclusion α)
+    (NecSuf.star_fixed_smul_isHermitian (complex_conjugate_star_mul _) (complex_conjugate_of_real_inclusion α)
       hA.isHermitian.eq)
     (NecSuf.smul_preserves_pos' realInclusionAddHom (fun a b => real_inclusion_mul a b) hα
       (fun y => mul_comm y _) (posDef_conjBilin'_pos hA))

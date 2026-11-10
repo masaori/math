@@ -33,14 +33,15 @@
 * 部分和の係数 `(1/m!)_ℂ` は Lean では `((m! : ℂ))⁻¹` と書いてある（`expPartialSum`）。8 行のうち 5 行目の
   `complex_conjugate_of_real_inclusion` は、`((m! : ℂ))⁻¹ = ((m! : ℝ)⁻¹)_ℂ`（`inclusion_rr_to_cc` が逆数と自然数の像を保つこと。
   mathlib の `Complex.ofReal_inv`・`Complex.ofReal_natCast`）と書き直してから当てる（`star_inv_factorial`）。
-* 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product` の具体版（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）は `starRingEnd ℂ` の形なので、
-  `star` の形のこのファイルは `ClaimStarPreservesNormAndLimits.lean` と同じく、まだ mathlib の `star_sum`・`star_mul'` を引く（差し替えは状態台帳の残り）。
+* 複素共役の性質 `complex_conjugate_of_sum`・`complex_conjugate_of_product` は、具体版を `star` の形と添字 `0, …, N`（`Finset.range (N + 1)`）へ
+  読み替えた `complex_conjugate_star_sum_range`（`N → N + 1`）・`complex_conjugate_star_mul`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を引く。
 * `def_exp` (1) の「部分和が `exp(S)` へ収束する」は、`ClaimExpOfSymmetricIsSymmetric.lean` と同じく `matExp_hasSum` の部分和
   `Σ_{m<N}` を `N → N+1` とずらして人手の `Σ_{m=0}^{N}` に合わせる。ノルムは mathlib の Frobenius ノルムで、
   `def_matrix_norm` の行列ノルムと値が一致する。極限の段で `ℝ` へ脱出する（人手の主張に書いてある）。
 * 極限の一意性（人手 `matrix_norm_triangle_inequality` (4)）は、本文に Lean の具体版が無く、
   `ClaimExpOfSymmetricIsSymmetric.lean` と同じく mathlib の `tendsto_nhds_unique` を引く。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfSymmetricIsSymmetric
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
@@ -111,9 +112,9 @@ theorem expPartialSum_conjTranspose_apply (S : TensorPow M) (hS : Sᴴ = S) (N :
     _ = star (∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m) l k) := by
         rw [expPartialSum_apply]                                                             -- `(E_N)_{lk}` の成分の式
     _ = ∑ m ∈ Finset.range (N + 1), star (((m.factorial : ℂ))⁻¹ * (S ^ m) l k) :=
-        star_sum _ _                                                                         -- `complex_conjugate_of_sum` の `m = N+1`
+        complex_conjugate_star_sum_range (N + 1) _                                           -- `complex_conjugate_of_sum` の `m = N+1`
     _ = ∑ m ∈ Finset.range (N + 1), star ((m.factorial : ℂ))⁻¹ * star ((S ^ m) l k) := by
-        simp only [star_mul']                                                                -- `complex_conjugate_of_product` を各項へ
+        simp only [complex_conjugate_star_mul]                                               -- `complex_conjugate_of_product` を各項へ
     _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * star ((S ^ m) l k) := by
         simp only [star_inv_factorial]                                                       -- `complex_conjugate_of_real_inclusion` を各項へ
     _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m)ᴴ k l := rfl              -- `def_hermitian_positive_definite` を各項へ
