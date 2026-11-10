@@ -106,6 +106,10 @@ targets=(
   Ising2D.pauliY_conjTranspose
   Ising2D.siteProd_conjTranspose_apply
   Ising2D.siteProd_conjTranspose
+  Ising2D.siteOp_conjTranspose_of_conjTranspose_eq
+  Ising2D.sigmaX_conjTranspose
+  Ising2D.sigmaY_conjTranspose
+  Ising2D.sigmaZ_conjTranspose
   Ising2D.siteProd_eq_kroneckerProdOf
   Ising2D.siteProd_transpose_of_necSuf
   Ising2D.NecSuf.kroneckerProdOf

@@ -10,6 +10,7 @@
 - `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
 - `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の (1) の証明の中の、
   クロネッカー積の共役転置の成分の鎖（`siteProd_conjTranspose_apply`）
+  と `(σ_k^a)^* = σ_k^a` の鎖（`siteOp_conjTranspose_of_conjTranspose_eq`）
 
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
 `Matrix.conjTranspose` / `Matrix.IsHermitian` / `Matrix.PosDef` と同じものである。
@@ -95,6 +96,57 @@ theorem siteProd_conjTranspose_apply (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) 
 theorem siteProd_conjTranspose (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
     (siteProd M x)ᴴ = siteProd M (fun k => (x k)ᴴ) :=
   Matrix.ext (siteProd_conjTranspose_apply x)   -- 両辺のすべての成分が一致する
+
+/-! ## `σ_k^a` の共役転置
+
+人手 `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の
+(1) の `(σ_k^a)^* = σ_k^a` の 5 行の鎖と 1 対 1 である。人手の因子の並び `I⊠⋯⊠σ^a⊠⋯⊠I` は、`sigmaX_transpose`
+（`EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）と同じく `siteProd` に入れる因子の族を `ite` で書く。
+`def_site_pauli_matrices`（`siteOp`）は `Function.update` で書いてあるので、`siteProd_conjTranspose` の段と最後の段で
+因子の族の書き方（`Function.update` と `ite`）を揃える（等式の変形ではなく書き方の違いだけ）。
+人手の 4 行目は「`a` に応じて `conjugate_transpose_of_pauli_x`・`_y`・`_z` のどれか 1 つ」なので、鎖は第 `k` 因子 `A` と
+その共役転置の等式 `hA : A^* = A` について 1 回だけ書き、`a = x, y, z` の 3 つは `hA` にそれぞれの主張を渡して得る。 -/
+
+/-- **人手 `check_number_operator_is_hermitian` の (1) の `(σ_k^a)^* = σ_k^a` の 5 行の鎖**（人手の `k ∈ {1, …, M_col}` は Lean の 0 始まりの `k : Fin M`。第 `k` 因子 `A` で、`A^* = A` を 4 行目に使う）。 -/
+theorem siteOp_conjTranspose_of_conjTranspose_eq (k : Fin M) {A : Matrix (Fin 2) (Fin 2) ℂ} (hA : Aᴴ = A) :
+    (siteOp k A)ᴴ = siteOp k A := by
+  have hform : ∀ B : Matrix (Fin 2) (Fin 2) ℂ,
+      Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k B = fun l => if l = k then B else 1 := by
+    intro B
+    funext l
+    by_cases h : l = k
+    · rw [h, Function.update_self, if_pos rfl]
+    · rw [Function.update_of_ne h, if_neg h]; rfl
+  calc
+    (siteOp k A)ᴴ
+        = (siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A))ᴴ := rfl
+                                                        -- `def_site_pauli_matrices`
+    _ = siteProd M (fun l => if l = k then Aᴴ else (1 : Matrix (Fin 2) (Fin 2) ℂ)ᴴ) := by
+      rw [siteProd_conjTranspose, hform]                -- 直前の式（`siteProd_conjTranspose`。`M → M_col`, `A_k → A`, `A_l → I`（`l ≠ k`））
+      congr 1
+      funext l
+      dsimp only
+      by_cases h : l = k
+      · rw [if_pos h, if_pos h]
+      · rw [if_neg h, if_neg h]
+    _ = siteProd M (fun l => if l = k then Aᴴ else 1) := by
+      rw [identity_matrix_two_conjTranspose]            -- `conjugate_transpose_of_identity_matrix_of_order_two`（第 `k` 因子以外の因子へ同時に）
+    _ = siteProd M (fun l => if l = k then A else 1) := by
+      rw [hA]                                           -- `a` に応じて `conjugate_transpose_of_pauli_x`・`_y`・`_z` のどれか 1 つ
+    _ = siteOp k A := by
+      rw [← hform]; rfl                                 -- `def_site_pauli_matrices`
+
+/-- 人手 `check_number_operator_is_hermitian` の (1) の `(σ_k^x)^* = σ_k^x`（`a = x`）。 -/
+theorem sigmaX_conjTranspose (k : Fin M) : (sigmaX k)ᴴ = sigmaX k :=
+  siteOp_conjTranspose_of_conjTranspose_eq k pauliX_conjTranspose   -- 4 行目は `conjugate_transpose_of_pauli_x`
+
+/-- 人手 `check_number_operator_is_hermitian` の (1) の `(σ_k^y)^* = σ_k^y`（`a = y`）。 -/
+theorem sigmaY_conjTranspose (k : Fin M) : (sigmaY k)ᴴ = sigmaY k :=
+  siteOp_conjTranspose_of_conjTranspose_eq k pauliY_conjTranspose   -- 4 行目は `conjugate_transpose_of_pauli_y`
+
+/-- 人手 `check_number_operator_is_hermitian` の (1) の `(σ_k^z)^* = σ_k^z`（`a = z`）。 -/
+theorem sigmaZ_conjTranspose (k : Fin M) : (sigmaZ k)ᴴ = sigmaZ k :=
+  siteOp_conjTranspose_of_conjTranspose_eq k pauliZ_conjTranspose   -- 4 行目は `conjugate_transpose_of_pauli_z`
 
 /-! ## `Z_m`, `Y_m` の転置・共役転置 -/
 
