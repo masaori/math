@@ -72479,7 +72479,7 @@ P_n(\gamma)
 &=P_0(\gamma)+W_n-W_0
 &&\bigl(\because\ \text{上で示した等式の }k=n\text{ の場合}\bigr)\\
 &=P_0(\gamma)
-&&\bigl(\because\ W_n=W_0\bigr).
+&&\bigl(\because\ W_n=W_0\bigr)
 \end{aligned}`),
                       paragraph([
                         ref("claim_plane_lift_endpoint_winding"), " とこの等式を合わせると",
@@ -72489,7 +72489,7 @@ P_n(\gamma)
 &=P_n(\gamma)-P_0(\gamma)
 &&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\text{ と }\mathbb Z\times\mathbb Z\text{ の四則}\bigr)\\
 &=(0,0)
-&&\bigl(\because\ P_n(\gamma)=P_0(\gamma)\bigr).
+&&\bigl(\because\ P_n(\gamma)=P_0(\gamma)\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`L\ge1`), " なので ", math(String.raw`L\ne0`),

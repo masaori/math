@@ -1,10 +1,21 @@
 import Ising2DLambda.KacWard.CellEulerNumberFromEvenEdgeCounts
+import Ising2DLambda.KacWard.CellVertexIncidenceCount
 import Ising2DLambda.KacWard.OddRayInteriorCellsFromWalkFinite
 import Ising2DLambda.KacWard.InteriorCellSetEdgeConnected
 import Ising2DLambda.KacWard.ExteriorCellReachesOuterCoreFromWalk
 import Ising2DLambda.KacWard.OneSidedClosureProjectionWindingFromWalk
 
 namespace Ising2DLambda.KacWard
+
+/-- Count vertex incidences in the interior cells of an actual closed walk. -/
+theorem interiorCellsOfWalk_vertexIncidence_sum {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    (∑ v ∈ cellVertices cells, vertexCellIncidenceCount cells v) = 4 * cells.card := by
+  exact cellVertexIncidence_sum _
 
 /-- The interior cells of an actual simple zero-winding closed walk satisfy the
 cell Euler identity. -/
