@@ -2,6 +2,7 @@ import Ising2DLambda.KacWard.CellEulerNumberFromEvenEdgeCounts
 import Ising2DLambda.KacWard.OddRayInteriorCellsFromWalkFinite
 import Ising2DLambda.KacWard.InteriorCellSetEdgeConnected
 import Ising2DLambda.KacWard.ExteriorCellReachesOuterCoreFromWalk
+import Ising2DLambda.KacWard.OneSidedClosureProjectionWindingFromWalk
 
 namespace Ising2DLambda.KacWard
 
@@ -25,5 +26,34 @@ theorem interiorCellsOfWalk_eulerNumber_eq_one {L m : ℕ} [NeZero L]
     exact ⟨x, by simpa only [Set.Finite.mem_toFinset] using hx⟩
   · simpa only [hset] using hinside.2
   · simpa only [hset] using houtside.2
+
+/-- The Euler identity applies to the interior cells of the actual one-sided
+closure, with the cut point shared by simplicity and zero winding. -/
+theorem oneSidedClosureProjectionFromWalk_interior_eulerNumber_eq_one
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hcontact : contactPairCount γ hγ = 0)
+    (hwind : (horizontalDirectedWindingNumber γ,
+      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
+    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
+      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+      let N := oneSidedClosureLength (m + 1) L
+        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
+        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
+      ∃ (hΓ : closedNonbacktrackingWalk Γ)
+        (hh : horizontalDirectedWindingNumber Γ = 0)
+        (hv : verticalDirectedWindingNumber Γ = 0),
+        cellEulerNumber (oddRayInteriorCellsOfWalk_finite Γ hΓ hh hv).toFinset = 1 := by
+  obtain ⟨k₀, hsimpleZero⟩ :=
+    oneSidedClosureProjectionFromWalk_simple_zero_winding γ hγ hcontact hwind
+  refine ⟨k₀, ?_⟩
+  intro t c ht hc
+  have hp := hsimpleZero t c ht hc
+  dsimp only at hp ⊢
+  exact ⟨hp.2.1, hp.2.2.2, hp.2.2.1,
+    interiorCellsOfWalk_eulerNumber_eq_one _ hp.2.1 hp.2.2.2 hp.2.2.1 hp.1⟩
 
 end Ising2DLambda.KacWard

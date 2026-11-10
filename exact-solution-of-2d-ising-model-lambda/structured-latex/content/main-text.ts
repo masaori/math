@@ -69961,6 +69961,7 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     lean: [
                       "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_actual_even_edge_counts",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_eulerNumber_eq_one",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_eulerNumber_eq_one",
                       "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_even_edge_counts",
                     ],
                     statement: [
