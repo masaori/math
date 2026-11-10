@@ -88,7 +88,9 @@ variable (K : IsingConst) (θ : ℝ)
 /-- 原文 `θ_μ := 2πμ/M`（`def_theta_mu`）。 -/
 noncomputable def thetaMu (M : ℕ) (μ : ℤ) : ℝ := 2 * Real.pi * μ / M
 
-/-- 原文 `γ_1(θ) := c_1 c_2^* - s_1 s_2^* cos θ`。実数だが `A(θ)` の成分として使うので `ℂ` へ埋める。 -/
+/-- 原文 `γ_1(θ) := c_1 c_2^* - s_1 s_2^* cos θ ∈ ℝ` の `ℝ → ℂ` の包含による像 `(γ_1(θ))_ℂ`。
+人手 `def_gamma1_gamma2_of_theta` の主張の行列の `(1,1)`・`(2,2)` 成分は、`def_A_theta` の読みと同じくこの像である。
+人手の実数 `γ_1(θ) ∈ ℝ` そのものは `gamma1R`（`ClaimGamma1LowerBound.lean`）で、`gamma1_eq_ofReal` が `gamma1 = ↑gamma1R` を述べる。 -/
 noncomputable def gamma1 : ℂ := ((K.c1 * K.c2star - K.s1 * K.s2star * Real.cos θ : ℝ) : ℂ)
 
 /-- 原文 `γ_2(θ) := i e^{iθ} s_2^* (c_1 cos θ - i sin θ - s_1 c_2)`。 -/
@@ -166,14 +168,14 @@ theorem AMat_two_one_eq_neg_gamma2_neg : AMat K θ 1 0 = -gamma2 K (-θ) :=
         rw [gamma2_neg]                           -- 5 行目: 上の `γ_2(-θ)` の鎖を右辺から左辺へ
 
 /-- 人手 `def_gamma1_gamma2_of_theta` の主張 `A(θ) = !![γ_1(θ), γ_2(θ); -γ_2(-θ), γ_1(θ)]`。
-`(1,1)`・`(1,2)`・`(2,2)` 成分は人手どおり定義そのもの（`rfl`）、`(2,1)` 成分は `AMat_two_one_eq_neg_gamma2_neg`。 -/
+`(1,1)`・`(2,2)` 成分（実数 `γ_1(θ)` の像）と `(1,2)` 成分は人手どおり定義そのもの（`rfl`）、`(2,1)` 成分は `AMat_two_one_eq_neg_gamma2_neg`。 -/
 theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamma1 K θ] := by
   ext i j
   fin_cases i <;> fin_cases j
-  · rfl                                           -- `(1,1)` 成分: `γ_1(θ)` の定義そのもの
+  · rfl                                           -- `(1,1)` 成分: 実数 `γ_1(θ)` の像（`def_A_theta` の読み）。定義そのもの
   · rfl                                           -- `(1,2)` 成分: `γ_2(θ)` の定義そのもの
   · exact AMat_two_one_eq_neg_gamma2_neg K θ      -- `(2,1)` 成分
-  · rfl                                           -- `(2,2)` 成分: `γ_1(θ)` の定義そのもの
+  · rfl                                           -- `(2,2)` 成分: 実数 `γ_1(θ)` の像（`def_A_theta` の読み）。定義そのもの
 
 /-! ## `γ_2` の対称性（原文 `relation_of_gamma_2`） -/
 
