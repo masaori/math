@@ -155,6 +155,58 @@ theorem interiorCellsOfWalk_edgeIncidence_classification {L m : ℕ} [NeZero L]
   exact ⟨edge_cellIncidence_eq_one_iff_boundary _ e,
     edge_cellIncidence_eq_two_iff_interior _ e⟩
 
+/-- The cell-edge incidence total splits into one contribution per boundary edge
+and two per interior edge of the actual walk's interior cell complex. -/
+theorem interiorCellsOfWalk_edgeIncidence_boundary_interior {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    4 * cells.card =
+      (planeCellBoundary cells).card +
+        2 * (cellEdges cells \ planeCellBoundary cells).card := by
+  classical
+  dsimp only
+  let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+  change 4 * cells.card =
+    (planeCellBoundary cells).card +
+      2 * (cellEdges cells \ planeCellBoundary cells).card
+  have hboundary : planeCellBoundary cells ⊆ cellEdges cells :=
+    Finset.filter_subset _ _
+  have hsplit :
+      (∑ e ∈ cellEdges cells,
+        (cells.filter (fun x => e ∈ edgesOfCell x)).card) =
+        (∑ e ∈ planeCellBoundary cells,
+          (cells.filter (fun x => e ∈ edgesOfCell x)).card) +
+        (∑ e ∈ cellEdges cells \ planeCellBoundary cells,
+          (cells.filter (fun x => e ∈ edgesOfCell x)).card) := by
+    rw [← Finset.sum_sdiff hboundary, add_comm]
+  have hboundarySum :
+      (∑ e ∈ planeCellBoundary cells,
+        (cells.filter (fun x => e ∈ edgesOfCell x)).card) =
+        (planeCellBoundary cells).card := by
+    calc
+      _ = ∑ _e ∈ planeCellBoundary cells, (1 : ℕ) :=
+        Finset.sum_congr rfl (fun e he =>
+          (edge_cellIncidence_eq_one_iff_boundary cells e).2 he)
+      _ = (planeCellBoundary cells).card := by simp
+  have hinteriorSum :
+      (∑ e ∈ cellEdges cells \ planeCellBoundary cells,
+        (cells.filter (fun x => e ∈ edgesOfCell x)).card) =
+        2 * (cellEdges cells \ planeCellBoundary cells).card := by
+    calc
+      _ = ∑ _e ∈ cellEdges cells \ planeCellBoundary cells, (2 : ℕ) :=
+        Finset.sum_congr rfl (fun e he =>
+          (edge_cellIncidence_eq_two_iff_interior cells e).2 he)
+      _ = 2 * (cellEdges cells \ planeCellBoundary cells).card := by
+        simp [mul_comm]
+  have htotal := interiorCellsOfWalk_edgeIncidence_sum γ hγ hh hv
+  change (∑ e ∈ cellEdges cells,
+    (cells.filter (fun x => e ∈ edgesOfCell x)).card) = 4 * cells.card at htotal
+  rw [hsplit, hboundarySum, hinteriorSum] at htotal
+  exact htotal.symm
+
 /-- Count vertex incidences in the interior cells of an actual closed walk. -/
 theorem interiorCellsOfWalk_vertexIncidence_sum {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)

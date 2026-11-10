@@ -52383,7 +52383,8 @@ Z^{\mathrm{op}}_{a+c,b}(q)
                           math(String.raw`0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b`),
                           " に対する自然数冪の順序から",
                         ]),
-                        displayMath(String.raw`q^b\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le1`),
+                        displayMath(String.raw`q^b\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le1
+\qquad\bigl(\because\ 0<q\le1\text{ と }0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b\text{ から自然数冪の順序}\bigr)`),
                         paragraph([
                           "である。各 ",
                           math(String.raw`q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}`),
@@ -52416,7 +52417,8 @@ q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}
                           math(String.raw`1\le q`),
                           " の場合は自然数冪の順序が",
                         ]),
-                        displayMath(String.raw`1\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le q^b`),
+                        displayMath(String.raw`1\le q^{\,s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)}\le q^b
+\qquad\bigl(\because\ 1\le q\text{ と }0\le s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)\le b\text{ から自然数冪の順序}\bigr)`),
                         paragraph([
                           "となる。同じ項ごとの乗法、有限和、上の積への分解を順に適用すると、第二の場合の二つの不等式を得る。",
                         ]),
@@ -70207,7 +70209,9 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_edgeIncidence_boundary_interior",
                       "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.edgeIncidence_sum_partition",
                       "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf",
                     ],
                     verification: [
