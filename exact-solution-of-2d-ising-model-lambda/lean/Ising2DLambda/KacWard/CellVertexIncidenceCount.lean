@@ -7,6 +7,47 @@ namespace Ising2DLambda.KacWard
 def vertexCellIncidenceCount (cells : Finset GridCell) (v : GridVertex) : ℕ :=
   (cells.filter (fun x => v ∈ verticesOfCell x)).card
 
+/-- A grid vertex belongs to at most the four cells in its quadrants. -/
+theorem vertexCellIncidenceCount_le_four (cells : Finset GridCell)
+    (v : GridVertex) : vertexCellIncidenceCount cells v ≤ 4 := by
+  classical
+  rcases v with ⟨r, c⟩
+  have hsubset :
+      cells.filter (fun x => (r, c) ∈ verticesOfCell x) ⊆
+        ({(r, c), (r - 1, c), (r, c - 1), (r - 1, c - 1)} : Finset GridCell) := by
+    intro x hx
+    rcases x with ⟨i, j⟩
+    simp only [Finset.mem_filter] at hx
+    simp only [verticesOfCell, Finset.mem_insert, Finset.mem_singleton,
+      Prod.mk.injEq] at hx ⊢
+    rcases hx.2 with h | h | h | h <;> omega
+  have hcard :
+      ({(r, c), (r - 1, c), (r, c - 1), (r - 1, c - 1)} :
+        Finset GridCell).card ≤ 4 := by
+    have h₁ := Finset.card_insert_le (r, c)
+      ({(r - 1, c), (r, c - 1), (r - 1, c - 1)} : Finset GridCell)
+    have h₂ := Finset.card_insert_le (r - 1, c)
+      ({(r, c - 1), (r - 1, c - 1)} : Finset GridCell)
+    have h₃ := Finset.card_insert_le (r, c - 1)
+      ({(r - 1, c - 1)} : Finset GridCell)
+    simp only [Finset.card_singleton] at h₃
+    omega
+  exact (Finset.card_le_card hsubset).trans hcard
+
+/-- Every vertex of the cell complex meets one, two, three, or four cells. -/
+theorem vertexCellIncidenceCount_one_to_four (cells : Finset GridCell)
+    (v : GridVertex) (hv : v ∈ cellVertices cells) :
+    vertexCellIncidenceCount cells v = 1 ∨
+      vertexCellIncidenceCount cells v = 2 ∨
+      vertexCellIncidenceCount cells v = 3 ∨
+      vertexCellIncidenceCount cells v = 4 := by
+  have hpositive : 0 < vertexCellIncidenceCount cells v := by
+    obtain ⟨x, hx, hvertex⟩ := Finset.mem_biUnion.mp hv
+    apply Finset.card_pos.mpr
+    exact ⟨x, Finset.mem_filter.mpr ⟨hx, hvertex⟩⟩
+  have hbounded := vertexCellIncidenceCount_le_four cells v
+  omega
+
 /-- Count incidences between the cells and vertices of a finite cell set in
 both orders. -/
 theorem cellVertexIncidence_sum (cells : Finset GridCell) :

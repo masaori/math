@@ -67474,7 +67474,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
 +\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
 &&\bigl(\because\ P_m(\gamma)=P_0(\gamma)\text{（}\blkref{claim_plane_lift_endpoint_winding}\text{ と零巻き付き）による端の付け替え}\bigr)\\
 &=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \mathbb N\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。右辺は自然数の二倍なので偶数であり、四つの通過回数のうち奇数のものの本数は偶数である",
