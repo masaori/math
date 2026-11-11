@@ -3572,78 +3572,48 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " の ",
         math(String.raw`\mathbb{C}`),
-        "-基底である。任意の ",
+        "-基底である（",
+        ref("Z_Y_generate_algebra"),
+        " の証明の Step 3 の前半）。そこでは、上と同じ ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
+        " と ",
+        math(String.raw`I=I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " について、任意の ",
         math(String.raw`A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\mathrm{Mat}(2,\mathbb{C})`),
-        " に対して",
+        " が",
       ]),
       displayMath(
-        String.raw`A=\frac{a_{11}+a_{22}}{2}I
-+\frac{a_{12}+a_{21}}{2}\sigma^x
-+\frac{i(a_{12}-a_{21})}{2}\sigma^y
-+\frac{a_{11}-a_{22}}{2}\sigma^z
-\quad (\because \text{成分比較})`,
+        String.raw`A = \kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z,\qquad
+\kappa_0 := \frac{a_{11}+a_{22}}{2_{\mathbb{C}}},\ \kappa_x := \frac{a_{12}+a_{21}}{2_{\mathbb{C}}},\ \kappa_y := \frac{i(a_{12}-a_{21})}{2_{\mathbb{C}}},\ \kappa_z := \frac{a_{11}-a_{22}}{2_{\mathbb{C}}} \in \mathbb{C}`,
       ),
       paragraph([
-        "が成り立つ。右辺の 4 つの成分を 1 つずつ計算すると、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\left(\frac{a_{11}+a_{22}}{2}I
-+\frac{a_{12}+a_{21}}{2}\sigma^x
-+\frac{i(a_{12}-a_{21})}{2}\sigma^y
-+\frac{a_{11}-a_{22}}{2}\sigma^z\right)_{11}
-&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot 1
-&&(\because\ I_{11}=\sigma^z_{11}=1,\ \sigma^x_{11}=\sigma^y_{11}=0)\\
-&=\frac{a_{11}+a_{22}}{2}+\frac{a_{11}-a_{22}}{2}
-&&(\because\ \text{1 を掛けても変わらない})\\
-&=\frac{2a_{11}}{2}
-&&(\because\ \text{同分母の和})\\
-&=a_{11}
-&&(\because\ \text{約分})
-\end{aligned}`),
-      paragraph([
-        "であり、同じ計算を残りの 3 つの成分について行うと、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-(\cdots)_{22}
-&=\frac{a_{11}+a_{22}}{2}\cdot 1+\frac{a_{11}-a_{22}}{2}\cdot(-1)
-&&(\because\ I_{22}=1,\ \sigma^z_{22}=-1,\ \sigma^x_{22}=\sigma^y_{22}=0)\\
-&=\frac{a_{11}+a_{22}}{2}-\frac{a_{11}-a_{22}}{2}
-&&(\because\ (-1)\ \text{を掛けることは符号を変えること})\\
-&=\frac{2a_{22}}{2}
-&&(\because\ \text{同分母の差})\\
-&=a_{22}
-&&(\because\ \text{約分})\\[1ex]
-(\cdots)_{12}
-&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot(-i)
-&&(\because\ \sigma^x_{12}=1,\ \sigma^y_{12}=-i,\ I_{12}=\sigma^z_{12}=0)\\
-&=\frac{a_{12}+a_{21}}{2}+\frac{a_{12}-a_{21}}{2}
-&&(\because\ i\cdot(-i)=1\text{。}\blkref{multiply_by_minus_one}\text{ の } -i=(-1_{\mathbb{C}})i\text{、}\blkref{def_imaginary_unit}\text{ の } i=(0,1)\text{ と }\blkref{definition_of_cc}\text{ の積})\\
-&=\frac{2a_{12}}{2}
-&&(\because\ \text{同分母の和})\\
-&=a_{12}
-&&(\because\ \text{約分})\\[1ex]
-(\cdots)_{21}
-&=\frac{a_{12}+a_{21}}{2}\cdot 1+\frac{i(a_{12}-a_{21})}{2}\cdot i
-&&(\because\ \sigma^x_{21}=1,\ \sigma^y_{21}=i,\ I_{21}=\sigma^z_{21}=0)\\
-&=\frac{a_{12}+a_{21}}{2}-\frac{a_{12}-a_{21}}{2}
-&&(\because\ i\cdot i=-1\text{。}\blkref{def_imaginary_unit}\text{ の } i=(0,1)\text{ と }\blkref{definition_of_cc}\text{ の積})\\
-&=\frac{2a_{21}}{2}
-&&(\because\ \text{同分母の差})\\
-&=a_{21}
-&&(\because\ \text{約分})
-\end{aligned}`),
-      paragraph([
-        "となる（",
-        math(String.raw`(\cdots)`),
-        " は上と同じ右辺の行列である）。よって ",
-        math(String.raw`\mathcal{B}`),
+        "と書けることを示している。",
+        math(String.raw`2_{\mathbb{C}}`),
         " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " を張り、",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
-        " であるから ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r=2`),
+        " で、",
+        math(String.raw`2_{\mathbb{C}}=(2,0)\neq(0,0)=0_{\mathbb{C}}`),
+        " なので ",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり、4 つの分数は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`w\to2_{\mathbb{C}}`),
+        "）である。そこではこの展開を右辺の 4 成分の鎖で示し、",
         math(String.raw`\mathcal{B}`),
-        " は基底である。以下",
+        " が ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " を張ることと ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
+        " から ",
+        math(String.raw`\mathcal{B}`),
+        " が基底であることを導いている。以下",
       ]),
       displayMath(
         String.raw`e_1:=I,\quad e_2:=\sigma^x,\quad e_3:=\sigma^y,\quad e_4:=\sigma^z`,
@@ -3911,6 +3881,7 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         "2026-09-02 の式変形統一で、Step 3 の二本の鎖に行中の \\quad (\\because …) で置かれていた根拠 5 行を、" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が引く check_number_operator_is_hermitian の証明がこの主張を使う）。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 1 の A の展開と 4 成分の鎖（分母の 2 を「同分母の和・差」「約分」で処理し、商の読みが書かれていなかった）を、同じ展開を κ_0・κ_x・κ_y・κ_z と def_complex_quotient の商で一ステップずつ開いた Z_Y_generate_algebra の証明の Step 3 の前半の参照に替えた。B が基底であるという Step 1 の結論と、e_1〜e_4 の番号付けは不変。",
       ],
     },
   },
