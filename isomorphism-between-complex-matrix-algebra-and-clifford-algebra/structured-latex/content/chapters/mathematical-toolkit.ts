@@ -4087,262 +4087,6 @@ h(x)
     ],
   },
   {
-    id: "mathematical_toolkit_claim_basis_of_direct_sum_of_two_vector_spaces",
-    kind: "claim",
-    title: { text: "二つの基底を埋め込み写像で移して並べた族は、直和の基底である" },
-    labels: ["claim_basis_of_direct_sum_of_two_vector_spaces"],
-    statement: [
-      paragraph([
-        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
-        " と ",
-        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
-        " を ℂ-線型空間（",
-        ref("def_complex_vector_space"),
-        "）とし、",
-        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
-        " をその直和（",
-        ref("def_direct_sum_of_two_vector_spaces"),
-        "）とする。直和は ℂ-線型空間である（",
-        ref("claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"),
-        "）。",
-        math(String.raw`\mathrm{in}_1:V_1\to V_1\oplus V_2`),
-        " と ",
-        math(String.raw`\mathrm{in}_2:V_2\to V_1\oplus V_2`),
-        " を成分への埋め込み写像（",
-        ref("def_embedding_into_first_component_of_direct_sum"),
-        "、",
-        ref("def_embedding_into_second_component_of_direct_sum"),
-        "）とする。",
-      ]),
-      paragraph([
-        math(String.raw`n,n'\in\mathbb{Z}_{\ge 0}`),
-        " とし、",
-        math(String.raw`b:\{1,\dots,n\}\to V_1`),
-        " を ",
-        math(String.raw`V_1`),
-        " の基底、",
-        math(String.raw`b':\{1,\dots,n'\}\to V_2`),
-        " を ",
-        math(String.raw`V_2`),
-        " の基底（",
-        ref("def_basis"),
-        "）とし、",
-        math(String.raw`b_i:=b(i)`),
-        "、",
-        math(String.raw`b'_j:=b'(j)`),
-        " と書く。",
-        math(String.raw`\{1,\dots,n+n'\}`),
-        " の各元は、",
-        math(String.raw`i\in\{1,\dots,n\}`),
-        " であるか、ただ一つの ",
-        math(String.raw`j\in\{1,\dots,n'\}`),
-        " によって ",
-        math(String.raw`n+j`),
-        " と書けるかのどちらか一方である。そこで ",
-        math(String.raw`V_1\oplus V_2`),
-        " の元の番号付けた族（",
-        ref("def_linear_independence"),
-        "）",
-        math(String.raw`c:\{1,\dots,n+n'\}\to V_1\oplus V_2`),
-        " を次で定め、",
-        math(String.raw`c_k:=c(k)`),
-        " と書く。",
-      ]),
-      list([
-        [
-          math(String.raw`c(i):=\mathrm{in}_1(b_i)`),
-          "（",
-          math(String.raw`i\in\{1,\dots,n\}`),
-          "）",
-        ],
-        [
-          math(String.raw`c(n+j):=\mathrm{in}_2(b'_j)`),
-          "（",
-          math(String.raw`j\in\{1,\dots,n'\}`),
-          "）",
-        ],
-      ]),
-      paragraph([
-        "このとき、",
-        math(String.raw`c`),
-        " は ",
-        math(String.raw`V_1\oplus V_2`),
-        " の基底である。",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "準備として、",
-        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
-        " について ",
-        math(String.raw`\mathrm{id}_m:\{1,\dots,m\}\to\{1,\dots,m\}`),
-        " を恒等写像とする。",
-        math(String.raw`\mathrm{id}_m`),
-        " は単射かつ全射なので、",
-        math(String.raw`(m,\mathrm{id}_m)`),
-        " は有限集合 ",
-        math(String.raw`\{1,\dots,m\}`),
-        " の番号付けである（",
-        ref("def_numbering_of_finite_set"),
-        "）。",
-      ]),
-      paragraph([
-        "次に、",
-        math(String.raw`\{1,\dots,n+n'\}`),
-        " の各元 ",
-        math(String.raw`k`),
-        " に ",
-        math(String.raw`\mathbb{C}`),
-        " の元 ",
-        math(String.raw`\kappa_k`),
-        " が一つずつ与えられているとき、次の等式（以下、成分の等式と呼ぶ）が成り立つことを示す。",
-      ]),
-      displayMath(String.raw`\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)`),
-      displayMath(String.raw`\begin{aligned}
-&\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k\\
-&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1\oplus V_2}c_i\right)+_{V_1\oplus V_2}\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_1\oplus V_2}c_{n+j}\right)
-&&\left(\because\ \blkref{claim_splitting_linear_combination_into_first_and_last_terms}\right)\\
-&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1\oplus V_2}\mathrm{in}_1(b_i)\right)+_{V_1\oplus V_2}\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_1\oplus V_2}\mathrm{in}_2(b'_j)\right)
-&&\left(\because\ c\ \text{の定義}\right)\\
-&\quad=\left(\sum_{i\in\{1,\dots,n\}}\kappa_i\cdot_{V_1\oplus V_2}\mathrm{in}_1(b_i)\right)+_{V_1\oplus V_2}\left(\sum_{j\in\{1,\dots,n'\}}\kappa_{n+j}\cdot_{V_1\oplus V_2}\mathrm{in}_2(b'_j)\right)
-&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,\mathrm{id}_n),\ (n',\mathrm{id}_{n'})\ \text{で}\right)\\
-&\quad=\mathrm{in}_1\left(\sum_{i\in\{1,\dots,n\}}\kappa_i\cdot_{V_1}b_i\right)+_{V_1\oplus V_2}\mathrm{in}_2\left(\sum_{j\in\{1,\dots,n'\}}\kappa_{n+j}\cdot_{V_2}b'_j\right)
-&&\left(\because\ \mathrm{in}_1,\mathrm{in}_2\ \text{は線型写像。}\blkref{claim_embedding_into_first_component_is_linear_map}\text{、}\blkref{claim_embedding_into_second_component_is_linear_map}\text{、}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
-&\quad=\mathrm{in}_1\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i\right)+_{V_1\oplus V_2}\mathrm{in}_2\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
-&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,\mathrm{id}_n),\ (n',\mathrm{id}_{n'})\ \text{で}\right)\\
-&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
-&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right).
-\end{aligned}`),
-      paragraph([
-        "（一次独立）",
-        math(String.raw`\{1,\dots,n+n'\}`),
-        " の各元 ",
-        math(String.raw`k`),
-        " に ",
-        math(String.raw`\mathbb{C}`),
-        " の元 ",
-        math(String.raw`\kappa_k`),
-        " が与えられていて ",
-        math(String.raw`\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k=0_{V_1\oplus V_2}`),
-        " を満たすとする。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
-&=\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k
-&&\left(\because\ \text{成分の等式}\right)\\
-&=0_{V_1\oplus V_2}
-&&\left(\because\ \kappa_k\ \text{についての仮定}\right)\\
-&=(0_{V_1},\ 0_{V_2})
-&&\left(\because\ \text{成分ごとの零。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
-\end{aligned}`),
-      paragraph([
-        "二つの組が等しいので成分ごとに等しく、",
-        math(String.raw`\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i=0_{V_1}`),
-        " かつ ",
-        math(String.raw`\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j=0_{V_2}`),
-        " である。",
-        math(String.raw`b`),
-        " は一次独立なので、すべての ",
-        math(String.raw`i\in\{1,\dots,n\}`),
-        " について ",
-        math(String.raw`\kappa_i=0_{\mathbb{C}}`),
-        " である。",
-        math(String.raw`b'`),
-        " は一次独立なので（係数を ",
-        math(String.raw`j\mapsto\kappa_{n+j}`),
-        " として ",
-        ref("def_linear_independence"),
-        " を当てる）、すべての ",
-        math(String.raw`j\in\{1,\dots,n'\}`),
-        " について ",
-        math(String.raw`\kappa_{n+j}=0_{\mathbb{C}}`),
-        " である（",
-        ref("def_basis"),
-        "）。",
-        math(String.raw`\{1,\dots,n+n'\}`),
-        " の各元は ",
-        math(String.raw`i`),
-        " か ",
-        math(String.raw`n+j`),
-        " の形なので、すべての ",
-        math(String.raw`k\in\{1,\dots,n+n'\}`),
-        " について ",
-        math(String.raw`\kappa_k=0_{\mathbb{C}}`),
-        " であり、",
-        math(String.raw`c`),
-        " は一次独立である（",
-        ref("def_linear_independence"),
-        "）。",
-      ]),
-      paragraph([
-        "（張ること）",
-        math(String.raw`V_1\oplus V_2`),
-        " の元は組なので（",
-        ref("def_direct_sum_of_two_vector_spaces"),
-        "）、",
-        math(String.raw`x_1\in V_1`),
-        "、",
-        math(String.raw`x_2\in V_2`),
-        " による元 ",
-        math(String.raw`(x_1,x_2)`),
-        " を任意に取る。",
-        math(String.raw`b`),
-        " と ",
-        math(String.raw`b'`),
-        " は張るので（",
-        ref("def_basis"),
-        "、",
-        ref("def_spanning_family"),
-        "）、",
-        math(String.raw`\mu_i\in\mathbb{C}`),
-        "（",
-        math(String.raw`i\in\{1,\dots,n\}`),
-        "）で ",
-        math(String.raw`\sum_{i=1}^{n}\mu_i\cdot_{V_1}b_i=x_1`),
-        " を満たすものと、",
-        math(String.raw`\nu_j\in\mathbb{C}`),
-        "（",
-        math(String.raw`j\in\{1,\dots,n'\}`),
-        "）で ",
-        math(String.raw`\sum_{j=1}^{n'}\nu_j\cdot_{V_2}b'_j=x_2`),
-        " を満たすものを取る。",
-        math(String.raw`\kappa_i:=\mu_i`),
-        "（",
-        math(String.raw`i\in\{1,\dots,n\}`),
-        "）、",
-        math(String.raw`\kappa_{n+j}:=\nu_j`),
-        "（",
-        math(String.raw`j\in\{1,\dots,n'\}`),
-        "）と置く。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k
-&=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
-&&\left(\because\ \text{成分の等式}\right)\\
-&=\left(\sum_{i=1}^{n}\mu_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\nu_j\cdot_{V_2}b'_j\right)
-&&\left(\because\ \kappa_k\ \text{の定義}\right)\\
-&=(x_1,\ x_2)
-&&\left(\because\ \mu_i,\ \nu_j\ \text{の取り方}\right).
-\end{aligned}`),
-      paragraph([
-        math(String.raw`(x_1,x_2)`),
-        " は任意だったので、",
-        math(String.raw`c`),
-        " は ",
-        math(String.raw`V_1\oplus V_2`),
-        " を線型結合で張る（",
-        ref("def_spanning_family"),
-        "）。一次独立と合わせて、",
-        math(String.raw`c`),
-        " は ",
-        math(String.raw`V_1\oplus V_2`),
-        " の基底である（",
-        ref("def_basis"),
-        "）。",
-      ]),
-    ],
-  },
-  {
     id: "mathematical_toolkit_definition_complex_numbers_as_complex_vector_space",
     kind: "definition",
     title: { text: "ℂ に ℂ-線型空間の構造を与える組" },
@@ -11366,25 +11110,6 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`B`),
         " の元としての等号である。",
       ]),
-      paragraph([
-        "誘導される写像 ",
-        math(String.raw`\overline{\varphi}`),
-        " は ℂ-代数の準同型であり（",
-        ref("claim_induced_map_is_algebra_homomorphism"),
-        "）、",
-        math(String.raw`\overline{\varphi}\circ\pi_I=\varphi`),
-        " を満たす（",
-        ref("claim_induced_map_composed_with_projection_is_original_homomorphism"),
-        "）。したがって、射影との合成が ",
-        math(String.raw`\varphi`),
-        " になる ",
-        math(String.raw`A/I`),
-        " から ",
-        math(String.raw`B`),
-        " への ℂ-代数の準同型は、",
-        math(String.raw`\overline{\varphi}`),
-        " ただ一つである。これを商代数の普遍性と呼ぶ。",
-      ]),
     ],
     proof: [
       paragraph([
@@ -11425,6 +11150,268 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
     ],
   },
   {
+    id: "mathematical_toolkit_claim_basis_of_direct_sum_of_two_vector_spaces",
+    kind: "claim",
+    title: { text: "二つの基底を埋め込み写像で移して並べた族は、直和の基底である" },
+    labels: ["claim_basis_of_direct_sum_of_two_vector_spaces"],
+    statement: [
+      paragraph([
+        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
+        " と ",
+        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とし、",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " をその直和（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）とする。直和は ℂ-線型空間である（",
+        ref("claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"),
+        "）。",
+        math(String.raw`\mathrm{in}_1:V_1\to V_1\oplus V_2`),
+        " と ",
+        math(String.raw`\mathrm{in}_2:V_2\to V_1\oplus V_2`),
+        " を成分への埋め込み写像（",
+        ref("def_embedding_into_first_component_of_direct_sum"),
+        "、",
+        ref("def_embedding_into_second_component_of_direct_sum"),
+        "）とする。",
+      ]),
+      paragraph([
+        math(String.raw`n,n'\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`b:\{1,\dots,n\}\to V_1`),
+        " を ",
+        math(String.raw`V_1`),
+        " の基底、",
+        math(String.raw`b':\{1,\dots,n'\}\to V_2`),
+        " を ",
+        math(String.raw`V_2`),
+        " の基底（",
+        ref("def_basis"),
+        "）とし、",
+        math(String.raw`b_i:=b(i)`),
+        "、",
+        math(String.raw`b'_j:=b'(j)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n+n'\}`),
+        " の各元は、",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        " であるか、ただ一つの ",
+        math(String.raw`j\in\{1,\dots,n'\}`),
+        " によって ",
+        math(String.raw`n+j`),
+        " と書けるかのどちらか一方である。そこで ",
+        math(String.raw`V_1\oplus V_2`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）",
+        math(String.raw`c:\{1,\dots,n+n'\}\to V_1\oplus V_2`),
+        " を次で定め、",
+        math(String.raw`c_k:=c(k)`),
+        " と書く。",
+      ]),
+      list([
+        [
+          math(String.raw`c(i):=\mathrm{in}_1(b_i)`),
+          "（",
+          math(String.raw`i\in\{1,\dots,n\}`),
+          "）",
+        ],
+        [
+          math(String.raw`c(n+j):=\mathrm{in}_2(b'_j)`),
+          "（",
+          math(String.raw`j\in\{1,\dots,n'\}`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "このとき、",
+        math(String.raw`c`),
+        " は ",
+        math(String.raw`V_1\oplus V_2`),
+        " の基底である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`m\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`\mathrm{id}_m:\{1,\dots,m\}\to\{1,\dots,m\}`),
+        " を恒等写像とする。",
+        math(String.raw`\mathrm{id}_m`),
+        " は単射かつ全射なので、",
+        math(String.raw`(m,\mathrm{id}_m)`),
+        " は有限集合 ",
+        math(String.raw`\{1,\dots,m\}`),
+        " の番号付けである（",
+        ref("def_numbering_of_finite_set"),
+        "）。",
+      ]),
+      paragraph([
+        "次に、",
+        math(String.raw`\{1,\dots,n+n'\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\kappa_k`),
+        " が一つずつ与えられているとき、次の等式（以下、成分の等式と呼ぶ）が成り立つことを示す。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)`),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k\\
+&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1\oplus V_2}c_i\right)+_{V_1\oplus V_2}\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_1\oplus V_2}c_{n+j}\right)
+&&\left(\because\ \blkref{claim_splitting_linear_combination_into_first_and_last_terms}\right)\\
+&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1\oplus V_2}\mathrm{in}_1(b_i)\right)+_{V_1\oplus V_2}\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_1\oplus V_2}\mathrm{in}_2(b'_j)\right)
+&&\left(\because\ c\ \text{の定義}\right)\\
+&\quad=\left(\sum_{i\in\{1,\dots,n\}}\kappa_i\cdot_{V_1\oplus V_2}\mathrm{in}_1(b_i)\right)+_{V_1\oplus V_2}\left(\sum_{j\in\{1,\dots,n'\}}\kappa_{n+j}\cdot_{V_1\oplus V_2}\mathrm{in}_2(b'_j)\right)
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,\mathrm{id}_n),\ (n',\mathrm{id}_{n'})\ \text{で}\right)\\
+&\quad=\mathrm{in}_1\left(\sum_{i\in\{1,\dots,n\}}\kappa_i\cdot_{V_1}b_i\right)+_{V_1\oplus V_2}\mathrm{in}_2\left(\sum_{j\in\{1,\dots,n'\}}\kappa_{n+j}\cdot_{V_2}b'_j\right)
+&&\left(\because\ \mathrm{in}_1,\mathrm{in}_2\ \text{は線型写像。}\blkref{claim_embedding_into_first_component_is_linear_map}\text{、}\blkref{claim_embedding_into_second_component_is_linear_map}\text{、}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
+&\quad=\mathrm{in}_1\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i\right)+_{V_1\oplus V_2}\mathrm{in}_2\left(\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,\mathrm{id}_n),\ (n',\mathrm{id}_{n'})\ \text{で}\right)\\
+&\quad=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right).
+\end{aligned}`),
+      paragraph([
+        "（一次独立）",
+        math(String.raw`\{1,\dots,n+n'\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\kappa_k`),
+        " が与えられていて ",
+        math(String.raw`\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k=0_{V_1\oplus V_2}`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
+&=\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k
+&&\left(\because\ \text{成分の等式}\right)\\
+&=0_{V_1\oplus V_2}
+&&\left(\because\ \kappa_k\ \text{についての仮定}\right)\\
+&=(0_{V_1},\ 0_{V_2})
+&&\left(\because\ \text{成分ごとの零。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの組が等しいので成分ごとに等しく、",
+        math(String.raw`\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i=0_{V_1}`),
+        " かつ ",
+        math(String.raw`\sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j=0_{V_2}`),
+        " である。",
+        math(String.raw`b`),
+        " は一次独立なので（",
+        ref("def_basis"),
+        "。係数を ",
+        math(String.raw`i\mapsto\kappa_i`),
+        " として ",
+        ref("def_linear_independence"),
+        " を当てる）、すべての ",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\kappa_i=0_{\mathbb{C}}`),
+        " である。",
+        math(String.raw`b'`),
+        " は一次独立なので（",
+        ref("def_basis"),
+        "。係数を ",
+        math(String.raw`j\mapsto\kappa_{n+j}`),
+        " として ",
+        ref("def_linear_independence"),
+        " を当てる）、すべての ",
+        math(String.raw`j\in\{1,\dots,n'\}`),
+        " について ",
+        math(String.raw`\kappa_{n+j}=0_{\mathbb{C}}`),
+        " である。",
+        math(String.raw`\{1,\dots,n+n'\}`),
+        " の各元は ",
+        math(String.raw`i`),
+        " か ",
+        math(String.raw`n+j`),
+        " の形なので、すべての ",
+        math(String.raw`k\in\{1,\dots,n+n'\}`),
+        " について ",
+        math(String.raw`\kappa_k=0_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`c`),
+        " は一次独立である（",
+        ref("def_linear_independence"),
+        "）。",
+      ]),
+      paragraph([
+        "（張ること）",
+        math(String.raw`V_1\oplus V_2`),
+        " の元は組なので（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、",
+        math(String.raw`x_1\in V_1`),
+        "、",
+        math(String.raw`x_2\in V_2`),
+        " による元 ",
+        math(String.raw`(x_1,x_2)`),
+        " を任意に取る。",
+        math(String.raw`b`),
+        " と ",
+        math(String.raw`b'`),
+        " は張るので（",
+        ref("def_basis"),
+        "、",
+        ref("def_spanning_family"),
+        "）、",
+        math(String.raw`\mu_i\in\mathbb{C}`),
+        "（",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        "）で ",
+        math(String.raw`\sum_{i=1}^{n}\mu_i\cdot_{V_1}b_i=x_1`),
+        " を満たすものと、",
+        math(String.raw`\nu_j\in\mathbb{C}`),
+        "（",
+        math(String.raw`j\in\{1,\dots,n'\}`),
+        "）で ",
+        math(String.raw`\sum_{j=1}^{n'}\nu_j\cdot_{V_2}b'_j=x_2`),
+        " を満たすものを取る。",
+        math(String.raw`\kappa_i:=\mu_i`),
+        "（",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        "）、",
+        math(String.raw`\kappa_{n+j}:=\nu_j`),
+        "（",
+        math(String.raw`j\in\{1,\dots,n'\}`),
+        "）と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n+n'}\kappa_k\cdot_{V_1\oplus V_2}c_k
+&=\left(\sum_{i=1}^{n}\kappa_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\kappa_{n+j}\cdot_{V_2}b'_j\right)
+&&\left(\because\ \text{成分の等式}\right)\\
+&=\left(\sum_{i=1}^{n}\mu_i\cdot_{V_1}b_i,\ \sum_{j=1}^{n'}\nu_j\cdot_{V_2}b'_j\right)
+&&\left(\because\ \kappa_k\ \text{の定義}\right)\\
+&=(x_1,\ x_2)
+&&\left(\because\ \mu_i,\ \nu_j\ \text{の取り方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`(x_1,x_2)`),
+        " は任意だったので、",
+        math(String.raw`c`),
+        " は ",
+        math(String.raw`V_1\oplus V_2`),
+        " を線型結合で張る（",
+        ref("def_spanning_family"),
+        "）。一次独立と合わせて、",
+        math(String.raw`c`),
+        " は ",
+        math(String.raw`V_1\oplus V_2`),
+        " の基底である（",
+        ref("def_basis"),
+        "）。",
+      ]),
+    ],
+  },
+  {
     id: "mathematical_toolkit_tensor_product_heading",
     kind: "heading",
     level: 2,
@@ -11432,15 +11419,13 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
     labels: [],
   },
   {
-    id: "mathematical_toolkit_definition_k_multilinear_map",
+    id: "mathematical_toolkit_definition_tuples_of_vector_space_elements",
     kind: "definition",
-    title: { text: "k 重線型写像" },
-    labels: ["def_k_multilinear_map"],
+    title: { text: "線型空間の元の k 個の組" },
+    labels: ["def_tuples_of_vector_space_elements"],
     statement: [
       paragraph([
         math(String.raw`(V,+_V,\cdot_V,0_V)`),
-        " と ",
-        math(String.raw`(U,+_U,\cdot_U,0_U)`),
         " を ℂ-線型空間（",
         ref("def_complex_vector_space"),
         "）とし、",
@@ -11455,7 +11440,17 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`V`),
         " の元の ",
         math(String.raw`k`),
-        " 個の組と呼ぶ（",
+        " 個の組と呼ぶ。",
+        math(String.raw`v\in V^{\{1,\dots,k\}}`),
+        " と ",
+        math(String.raw`s\in\{1,\dots,k\}`),
+        " について、",
+        math(String.raw`v(s)\in V`),
+        " を ",
+        math(String.raw`v`),
+        " の第 ",
+        math(String.raw`s`),
+        " 成分と呼ぶ（",
         math(String.raw`k=0`),
         " のとき ",
         math(String.raw`\{1,\dots,k\}`),
@@ -11463,17 +11458,33 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`V^{\{1,\dots,k\}}`),
         " の元は空集合からの写像ただ一つである）。",
       ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_tuple_with_one_component_replaced",
+    kind: "definition",
+    title: { text: "一つの成分を置き換えた組" },
+    labels: ["def_tuple_with_one_component_replaced"],
+    statement: [
       paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とし、",
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " とする。",
         math(String.raw`v\in V^{\{1,\dots,k\}}`),
-        "、",
+        "（",
+        ref("def_tuples_of_vector_space_elements"),
+        "）、",
         math(String.raw`r\in\{1,\dots,k\}`),
         "、",
         math(String.raw`x\in V`),
         " について、",
         math(String.raw`v`),
-        " の ",
+        " の第 ",
         math(String.raw`r`),
-        " 番目の成分を ",
+        " 成分を ",
         math(String.raw`x`),
         " に置き換えた組 ",
         math(String.raw`v[r\mapsto x]\in V^{\{1,\dots,k\}}`),
@@ -11490,10 +11501,27 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
           "）",
         ],
       ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_k_multilinear_map",
+    kind: "definition",
+    title: { text: "k 重線型写像" },
+    labels: ["def_k_multilinear_map"],
+    statement: [
       paragraph([
-        "写像 ",
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " と ",
+        math(String.raw`(U,+_U,\cdot_U,0_U)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とし、",
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " とする。写像 ",
         math(String.raw`h:V^{\{1,\dots,k\}}\to U`),
-        " が次をすべて満たすとき、",
+        "（",
+        ref("def_tuples_of_vector_space_elements"),
+        "）が次をすべて満たすとき、",
         math(String.raw`h`),
         " を ",
         math(String.raw`V`),
@@ -11517,7 +11545,13 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`\lambda`),
         " は ",
         math(String.raw`\mathbb{C}`),
-        " の任意の元を表す。",
+        " の任意の元を表し、",
+        math(String.raw`v[r\mapsto x]`),
+        " は第 ",
+        math(String.raw`r`),
+        " 成分を置き換えた組（",
+        ref("def_tuple_with_one_component_replaced"),
+        "）である。",
       ]),
       list([
         [
@@ -11534,21 +11568,6 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         ],
       ]),
       paragraph([
-        "二つの条件は、",
-        math(String.raw`v`),
-        " と ",
-        math(String.raw`r`),
-        " を固定して ",
-        math(String.raw`x`),
-        " に ",
-        math(String.raw`h\bigl(v[r\mapsto x]\bigr)`),
-        " を対応させる ",
-        math(String.raw`V`),
-        " から ",
-        math(String.raw`U`),
-        " への写像が線型写像（",
-        ref("def_linear_map"),
-        "）であることと同じである。",
         math(String.raw`k=0`),
         " のときは ",
         math(String.raw`r`),
@@ -11629,14 +11648,67 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         "この条件を ",
         math(String.raw`k`),
         " 重テンソル積の普遍性と呼ぶ。",
-        math(String.raw`V`),
-        " の元の組は写像 ",
-        math(String.raw`\{1,\dots,k\}\to V`),
-        " として一度に書くので、二つの線型空間のテンソル積を繰り返して作る括弧 ",
-        math(String.raw`(V\otimes V)\otimes V`),
-        "、",
-        math(String.raw`V\otimes(V\otimes V)`),
-        " はどこにも現れない。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_set_of_maps_between_initial_segments",
+    kind: "definition",
+    title: { text: "{1,…,k} から {1,…,n} への写像全体の集合" },
+    labels: ["def_set_of_maps_between_initial_segments"],
+    statement: [
+      paragraph([
+        math(String.raw`n,k\in\mathbb{Z}_{\ge 0}`),
+        " について、",
+        math(String.raw`\{1,\dots,k\}`),
+        " から ",
+        math(String.raw`\{1,\dots,n\}`),
+        " への写像全体の集合を ",
+        math(String.raw`X_{n,k}:=\{1,\dots,n\}^{\{1,\dots,k\}}`),
+        " と書く。",
+        math(String.raw`X_{n,k}`),
+        " の二元 ",
+        math(String.raw`x,y`),
+        " が等しいとは、すべての ",
+        math(String.raw`s\in\{1,\dots,k\}`),
+        " について ",
+        math(String.raw`x(s)=y(s)`),
+        " であることである。",
+        math(String.raw`k=0`),
+        " のとき ",
+        math(String.raw`\{1,\dots,0\}`),
+        " は空集合であり、",
+        math(String.raw`X_{n,0}`),
+        " の元は空集合からの写像ただ一つである。それを ",
+        math(String.raw`\varnothing_n`),
+        " と書く。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_power_of_nonnegative_integer",
+    kind: "definition",
+    title: { text: "非負整数の冪" },
+    labels: ["def_power_of_nonnegative_integer"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とする。",
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " について、整数 ",
+        math(String.raw`n^k\in\mathbb{Z}_{\ge 0}`),
+        " を ",
+        math(String.raw`k`),
+        " についての帰納法で次のように定める。",
+      ]),
+      list([
+        [math(String.raw`n^0:=1`)],
+        [
+          math(String.raw`n^k:=n\cdot n^{k-1}`),
+          "（",
+          math(String.raw`k\ge 1`),
+          "）",
+        ],
       ]),
     ],
   },
@@ -11650,32 +11722,13 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
         " とする。",
         math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
-        " について、",
-        math(String.raw`\{1,\dots,k\}`),
-        " から ",
-        math(String.raw`\{1,\dots,n\}`),
-        " への写像全体の集合を ",
-        math(String.raw`X_{n,k}:=\{1,\dots,n\}^{\{1,\dots,k\}}`),
-        " と書き、整数 ",
-        math(String.raw`n^k\in\mathbb{Z}_{\ge 0}`),
-        " を ",
-        math(String.raw`n^0:=1`),
-        "、",
-        math(String.raw`n^k:=n\cdot n^{k-1}`),
-        "（",
-        math(String.raw`k\ge 1`),
-        "）で帰納的に定める。",
-        math(String.raw`k=0`),
-        " のとき ",
-        math(String.raw`X_{n,0}`),
-        " の元は空集合からの写像ただ一つであり、それを ",
-        math(String.raw`\varnothing_n`),
-        " と書く。",
-      ]),
-      paragraph([
-        "写像 ",
+        " について、写像 ",
         math(String.raw`\eta_{n,k}:\{1,\dots,n^k\}\to X_{n,k}`),
-        " を、",
+        "（",
+        ref("def_power_of_nonnegative_integer"),
+        "、",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）を、",
         math(String.raw`k`),
         " についての帰納法で次のように定める。",
       ]),
@@ -11684,22 +11737,22 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
           math(String.raw`k=0`),
           " のとき、",
           math(String.raw`\{1,\dots,n^0\}=\{1\}`),
-          " であり、",
+          " であり（",
+          ref("def_power_of_nonnegative_integer"),
+          "）、",
           math(String.raw`\eta_{n,0}(1):=\varnothing_n`),
           " とする。",
         ],
         [
           math(String.raw`k\ge 1`),
           " のとき、",
-          math(String.raw`h:=n^{k-1}`),
-          " と置く。",
           math(String.raw`m\in\{1,\dots,n^k\}`),
           " について、",
-          math(String.raw`m=(a-1)\cdot h+r`),
+          math(String.raw`m=(a-1)\cdot n^{k-1}+r`),
           " を満たす ",
           math(String.raw`a\in\{1,\dots,n\}`),
           " と ",
-          math(String.raw`r\in\{1,\dots,h\}`),
+          math(String.raw`r\in\{1,\dots,n^{k-1}\}`),
           " の組がただ一つあり（下で確かめる）、",
           math(String.raw`\eta_{n,k}(m)\in X_{n,k}`),
           " を ",
@@ -11717,40 +11770,101 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`(a,r)`),
         " の存在と一意性を確かめる。",
         math(String.raw`m\in\{1,\dots,n^k\}`),
-        " があるので ",
-        math(String.raw`1\le n^k=n\cdot h`),
-        " であり、",
-        math(String.raw`h\ge 1`),
-        " かつ ",
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&\le m
+&&\left(\because\ m\in\{1,\dots,n^k\}\right)\\
+&\le n^k
+&&\left(\because\ m\in\{1,\dots,n^k\}\right)\\
+&=n\cdot n^{k-1}
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n`),
+        " と ",
+        math(String.raw`n^{k-1}`),
+        " は非負整数で、どちらかが ",
+        math(String.raw`0`),
+        " なら積は ",
+        math(String.raw`0`),
+        " なので、",
         math(String.raw`n\ge 1`),
+        " かつ ",
+        math(String.raw`n^{k-1}\ge 1`),
         " である。",
         math(String.raw`\mathbb{Z}`),
-        " の中の余りのある割り算により、",
-        math(String.raw`m-1=q\cdot h+\rho`),
+        " の中の余りのある割り算（割る数 ",
+        math(String.raw`n^{k-1}\ge 1`),
+        "）により、",
+        math(String.raw`m-1=q\cdot n^{k-1}+\rho`),
         " を満たす ",
         math(String.raw`q\in\mathbb{Z}_{\ge 0}`),
         " と ",
-        math(String.raw`\rho\in\{0,\dots,h-1\}`),
-        " がただ一つある。",
-        math(String.raw`q\cdot h\le m-1\le n\cdot h-1<n\cdot h`),
+        math(String.raw`\rho\in\{0,\dots,n^{k-1}-1\}`),
+        " がただ一つある（",
+        math(String.raw`m-1\ge 0`),
         " なので ",
+        math(String.raw`q\ge 0`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q\cdot n^{k-1}
+&\le q\cdot n^{k-1}+\rho
+&&\left(\because\ \rho\ge 0\right)\\
+&=m-1
+&&\left(\because\ q,\ \rho\ \text{の取り方}\right)\\
+&\le n^k-1
+&&\left(\because\ m\le n^k\right)\\
+&=n\cdot n^{k-1}-1
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\right)\\
+&<n\cdot n^{k-1}.
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n^{k-1}\ge 1`),
+        " なので、",
+        math(String.raw`q\cdot n^{k-1}<n\cdot n^{k-1}`),
+        " から ",
+        math(String.raw`q<n`),
+        "、すなわち ",
         math(String.raw`q\le n-1`),
-        " であり、",
+        " である。",
         math(String.raw`a:=q+1\in\{1,\dots,n\}`),
         "、",
-        math(String.raw`r:=\rho+1\in\{1,\dots,h\}`),
-        " は ",
-        math(String.raw`m=(a-1)\cdot h+r`),
-        " を満たす。逆に ",
+        math(String.raw`r:=\rho+1\in\{1,\dots,n^{k-1}\}`),
+        " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a-1)\cdot n^{k-1}+r
+&=q\cdot n^{k-1}+(\rho+1)
+&&\left(\because\ a=q+1,\ r=\rho+1\right)\\
+&=(q\cdot n^{k-1}+\rho)+1
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&=(m-1)+1
+&&\left(\because\ q,\ \rho\ \text{の取り方}\right)\\
+&=m.
+\end{aligned}`),
+      paragraph([
+        "逆に ",
         math(String.raw`a'\in\{1,\dots,n\}`),
         "、",
-        math(String.raw`r'\in\{1,\dots,h\}`),
+        math(String.raw`r'\in\{1,\dots,n^{k-1}\}`),
         " が ",
-        math(String.raw`m=(a'-1)\cdot h+r'`),
-        " を満たせば、",
-        math(String.raw`m-1=(a'-1)\cdot h+(r'-1)`),
+        math(String.raw`m=(a'-1)\cdot n^{k-1}+r'`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m-1
+&=\bigl((a'-1)\cdot n^{k-1}+r'\bigr)-1
+&&\left(\because\ m=(a'-1)\cdot n^{k-1}+r'\right)\\
+&=(a'-1)\cdot n^{k-1}+(r'-1)
+&&\left(\because\ \text{加法の結合法則}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`a'-1\in\mathbb{Z}_{\ge 0}`),
         " かつ ",
-        math(String.raw`0\le r'-1\le h-1`),
+        math(String.raw`r'-1\in\{0,\dots,n^{k-1}-1\}`),
         " なので、割り算の一意性から ",
         math(String.raw`a'-1=q`),
         "、",
@@ -11769,16 +11883,6 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`\{1,\dots,n\}`),
         " の元を一つずつ与える。",
       ]),
-      paragraph([
-        math(String.raw`(n^k,\eta_{n,k})`),
-        " が ",
-        math(String.raw`X_{n,k}`),
-        " の番号付け（",
-        ref("def_numbering_of_finite_set"),
-        "）であること、すなわち ",
-        math(String.raw`\eta_{n,k}`),
-        " が単射かつ全射であることは、この定義では主張しない。次の主張で示す。",
-      ]),
     ],
   },
   {
@@ -11791,13 +11895,17 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`n,k\in\mathbb{Z}_{\ge 0}`),
         " とし、",
         math(String.raw`X_{n,k}`),
-        "、",
+        "（",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）、",
         math(String.raw`n^k`),
-        "、",
+        "（",
+        ref("def_power_of_nonnegative_integer"),
+        "）、",
         math(String.raw`\eta_{n,k}:\{1,\dots,n^k\}\to X_{n,k}`),
-        " を ",
+        "（",
         ref("def_base_n_numbering_of_maps"),
-        " のものとする。このとき組 ",
+        "）をとる。このとき組 ",
         math(String.raw`(n^k,\eta_{n,k})`),
         " は ",
         math(String.raw`X_{n,k}`),
@@ -11819,20 +11927,16 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         ref("def_numbering_of_finite_set"),
         "）を満たすことを示す。",
         math(String.raw`X_{n,k}`),
-        " の二元 ",
-        math(String.raw`x,y`),
-        " の等しさは、すべての ",
-        math(String.raw`s\in\{1,\dots,k\}`),
-        " について ",
-        math(String.raw`x(s)=y(s)`),
-        " であること（写像の等しさ）で確かめる。",
+        " の二元の等しさは、",
+        ref("def_set_of_maps_between_initial_segments"),
+        " のとおり各点の値で確かめる。",
       ]),
       paragraph([
         math(String.raw`k=0`),
         " のとき。",
         math(String.raw`\{1,\dots,n^0\}=\{1\}`),
         " である（",
-        ref("def_base_n_numbering_of_maps"),
+        ref("def_power_of_nonnegative_integer"),
         "）。単射の条件: ",
         math(String.raw`m,m'\in\{1\}`),
         " なら ",
@@ -11841,7 +11945,9 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         math(String.raw`X_{n,0}`),
         " の元は ",
         math(String.raw`\varnothing_n`),
-        " ただ一つであり、",
+        " ただ一つであり（",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）、",
         math(String.raw`\eta_{n,0}(1)=\varnothing_n`),
         " である（",
         ref("def_base_n_numbering_of_maps"),
@@ -11854,8 +11960,6 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         " が ",
         math(String.raw`X_{n,k-1}`),
         " の番号付けであると仮定する（帰納法の仮定）。",
-        math(String.raw`h:=n^{k-1}`),
-        " と置き、",
         math(String.raw`m\in\{1,\dots,n^k\}`),
         " について ",
         ref("def_base_n_numbering_of_maps"),
@@ -11864,9 +11968,9 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
         " と書く。すなわち ",
         math(String.raw`a_m\in\{1,\dots,n\}`),
         "、",
-        math(String.raw`r_m\in\{1,\dots,h\}`),
+        math(String.raw`r_m\in\{1,\dots,n^{k-1}\}`),
         "、",
-        math(String.raw`m=(a_m-1)\cdot h+r_m`),
+        math(String.raw`m=(a_m-1)\cdot n^{k-1}+r_m`),
         " である。",
       ]),
       paragraph([
@@ -11903,15 +12007,17 @@ a_m
         math(String.raw`X_{n,k-1}`),
         " の元として ",
         math(String.raw`\eta_{n,k-1}(r_m)=\eta_{n,k-1}(r_{m'})`),
-        " であり、帰納法の仮定の単射の条件から ",
+        " であり（",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）、帰納法の仮定の単射の条件から ",
         math(String.raw`r_m=r_{m'}`),
         " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 m
-&=(a_m-1)\cdot h+r_m
+&=(a_m-1)\cdot n^{k-1}+r_m
 &&\left(\because\ (a_m,r_m)\ \text{の取り方}\right)\\
-&=(a_{m'}-1)\cdot h+r_{m'}
+&=(a_{m'}-1)\cdot n^{k-1}+r_{m'}
 &&\left(\because\ a_m=a_{m'},\ r_m=r_{m'}\right)\\
 &=m'
 &&\left(\because\ (a_{m'},r_{m'})\ \text{の取り方}\right).
@@ -11930,30 +12036,70 @@ m
         "）と置く。帰納法の仮定の全射の条件から、",
         math(String.raw`\eta_{n,k-1}(r)=x'`),
         " を満たす ",
-        math(String.raw`r\in\{1,\dots,h\}`),
+        math(String.raw`r\in\{1,\dots,n^{k-1}\}`),
         " がある。",
-        math(String.raw`m:=(a-1)\cdot h+r`),
-        " と置く（",
-        math(String.raw`\mathbb{Z}`),
-        " の中の積と和）。",
-        math(String.raw`1\le r\le m\le(n-1)\cdot h+h=n\cdot h=n^k`),
-        " なので ",
+        math(String.raw`m:=(a-1)\cdot n^{k-1}+r`),
+        " と置く。",
         math(String.raw`m\in\{1,\dots,n^k\}`),
-        " であり、",
+        " であることを確かめる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&\le r
+&&\left(\because\ r\in\{1,\dots,n^{k-1}\}\right)\\
+&\le (a-1)\cdot n^{k-1}+r
+&&\left(\because\ a-1\ge 0,\ n^{k-1}\ge 0\right)\\
+&=m
+&&\left(\because\ m\ \text{の定義}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+m
+&=(a-1)\cdot n^{k-1}+r
+&&\left(\because\ m\ \text{の定義}\right)\\
+&\le (n-1)\cdot n^{k-1}+r
+&&\left(\because\ a\le n,\ n^{k-1}\ge 0\right)\\
+&\le (n-1)\cdot n^{k-1}+n^{k-1}
+&&\left(\because\ r\le n^{k-1}\right)\\
+&=n\cdot n^{k-1}
+&&\left(\because\ \text{分配法則}\right)\\
+&=n^k
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\right).
+\end{aligned}`),
+      paragraph([
         ref("def_base_n_numbering_of_maps"),
         " の組の一意性から ",
         math(String.raw`(a_m,r_m)=(a,r)`),
         " である。",
         math(String.raw`s\in\{1,\dots,k-1\}`),
-        " について ",
-        math(String.raw`\eta_{n,k}(m)(s)=\eta_{n,k-1}(r)(s)=x'(s)=x(s)`),
-        "、また ",
-        math(String.raw`\eta_{n,k}(m)(k)=a=x(k)`),
-        " である（",
-        ref("def_base_n_numbering_of_maps"),
-        "）。よって ",
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\eta_{n,k}(m)(s)
+&=\eta_{n,k-1}(r_m)(s)
+&&\left(\because\ \eta_{n,k}\ \text{の定義。}\blkref{def_base_n_numbering_of_maps}\right)\\
+&=\eta_{n,k-1}(r)(s)
+&&\left(\because\ r_m=r\right)\\
+&=x'(s)
+&&\left(\because\ r\ \text{の取り方}\ \eta_{n,k-1}(r)=x'\right)\\
+&=x(s)
+&&\left(\because\ x'\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph(["また、"]),
+      displayMath(String.raw`\begin{aligned}
+\eta_{n,k}(m)(k)
+&=a_m
+&&\left(\because\ \eta_{n,k}\ \text{の定義。}\blkref{def_base_n_numbering_of_maps}\right)\\
+&=a
+&&\left(\because\ a_m=a\right)\\
+&=x(k)
+&&\left(\because\ a\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "よって ",
         math(String.raw`\eta_{n,k}(m)=x`),
-        " である。",
+        " である（",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）。",
       ]),
       paragraph([
         "以上で、すべての ",
@@ -12245,9 +12391,7 @@ m
         math(String.raw`\mathbb{C}`),
         " の中の番号順の積と呼び、",
         math(String.raw`\prod_{\mathbb{C},\,r=1}^{k}\alpha_r`),
-        " と書く。積は番号 ",
-        math(String.raw`1,\dots,k`),
-        " の順に左から掛けていく一つの式として定めており、積の順序によらないことはここでは主張しない。",
+        " と書く。",
       ]),
     ],
   },
@@ -12326,18 +12470,40 @@ m
         math(String.raw`m<r`),
         " のとき、",
         math(String.raw`m-1<r`),
-        " かつ ",
+        " なので帰納法の仮定から ",
+        math(String.raw`P_{m-1}=P'_{m-1}=P''_{m-1}`),
+        " であり、",
         math(String.raw`m\neq r`),
-        " なので、",
-        math(String.raw`P_m=P_{m-1}\cdot_{\mathbb{C}}\alpha_m=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m=P'_m`),
-        " であり、同じく ",
-        math(String.raw`P_m=P''_m`),
-        " である（定義と帰納法の仮定と ",
+        " なので ",
         math(String.raw`\alpha_m=\alpha'_m=\alpha''_m`),
-        "）。",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ P_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\ P_{m-1}=P'_{m-1}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m
+&&\left(\because\ \alpha_m=\alpha'_m\right)\\
+&=P'_m
+&&\left(\because\ P'_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ P_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P''_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\ P_{m-1}=P''_{m-1}\right)\\
+&=P''_{m-1}\cdot_{\mathbb{C}}\alpha''_m
+&&\left(\because\ \alpha_m=\alpha''_m\right)\\
+&=P''_m
+&&\left(\because\ P''_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
         math(String.raw`m=r`),
         " のとき、",
-        math(String.raw`m-1<r`),
+        math(String.raw`m-1=r-1<r`),
         " なので帰納法の仮定から ",
         math(String.raw`P_{r-1}=P'_{r-1}=P''_{r-1}`),
         " である。",
@@ -12464,18 +12630,35 @@ P_m
         " とし、",
         math(String.raw`m-1`),
         " について主張が成り立つとする（帰納法の仮定）。",
+      ]),
+      paragraph([
         math(String.raw`m<r`),
         " のとき、",
         math(String.raw`m-1<r`),
-        " かつ ",
+        " なので帰納法の仮定から ",
+        math(String.raw`P_{m-1}=P'_{m-1}`),
+        " であり、",
         math(String.raw`m\neq r`),
-        " なので、",
-        math(String.raw`P_m=P_{m-1}\cdot_{\mathbb{C}}\alpha_m=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m=P'_m`),
-        " である（定義と帰納法の仮定と ",
+        " なので ",
         math(String.raw`\alpha_m=\alpha'_m`),
-        "）。",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ P_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\ P_{m-1}=P'_{m-1}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m
+&&\left(\because\ \alpha_m=\alpha'_m\right)\\
+&=P'_m
+&&\left(\because\ P'_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
         math(String.raw`m=r`),
-        " のとき、帰納法の仮定から ",
+        " のとき、",
+        math(String.raw`m-1=r-1<r`),
+        " なので帰納法の仮定から ",
         math(String.raw`P_{r-1}=P'_{r-1}`),
         " である。",
       ]),
@@ -12556,7 +12739,7 @@ P_m
         " とする。",
         math(String.raw`X:=X_{n,k}=\{1,\dots,n\}^{\{1,\dots,k\}}`),
         "（",
-        ref("def_base_n_numbering_of_maps"),
+        ref("def_set_of_maps_between_initial_segments"),
         "）と置き、",
         math(String.raw`T:=\mathbb{C}^X`),
         " を各点ごとの演算による ℂ-線型空間（",
@@ -12718,7 +12901,7 @@ P_m
         " 成分はどれも ",
         math(String.raw`v(s)`),
         " なので（",
-        ref("def_k_multilinear_map"),
+        ref("def_tuple_with_one_component_replaced"),
         "）、",
         math(String.raw`\alpha_s=\alpha'_s=\alpha''_s=\gamma_s`),
         " である。",
@@ -12728,20 +12911,20 @@ P_m
       displayMath(String.raw`\begin{aligned}
 \alpha_r
 &=\beta^{b}_{x(r)}(y+_V z)
-&&\left(\because\ v[r\mapsto y+_V z](r)=y+_V z\text{。}\blkref{def_k_multilinear_map}\right)\\
+&&\left(\because\ v[r\mapsto y+_V z](r)=y+_V z\text{。}\blkref{def_tuple_with_one_component_replaced}\right)\\
 &=\beta^{b}_{x(r)}(y)+_{\mathbb{C}}\beta^{b}_{x(r)}(z)
 &&\left(\because\ \beta^{b}_{x(r)}\ \text{は線型形式。}\blkref{claim_coordinate_map_is_linear_form}\text{、}\blkref{def_linear_form}\right)\\
 &=\alpha'_r+_{\mathbb{C}}\alpha''_r
-&&\left(\because\ \alpha'_r,\ \alpha''_r\ \text{の定義と}\ \blkref{def_k_multilinear_map}\right).
+&&\left(\because\ \alpha'_r,\ \alpha''_r\ \text{の定義と}\ \blkref{def_tuple_with_one_component_replaced}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \gamma_r
 &=\beta^{b}_{x(r)}(\lambda\cdot_V y)
-&&\left(\because\ v[r\mapsto \lambda\cdot_V y](r)=\lambda\cdot_V y\text{。}\blkref{def_k_multilinear_map}\right)\\
+&&\left(\because\ v[r\mapsto \lambda\cdot_V y](r)=\lambda\cdot_V y\text{。}\blkref{def_tuple_with_one_component_replaced}\right)\\
 &=\lambda\cdot_{\mathbb{C}}\beta^{b}_{x(r)}(y)
 &&\left(\because\ \beta^{b}_{x(r)}\ \text{は線型形式。}\blkref{claim_coordinate_map_is_linear_form}\text{、}\blkref{def_linear_form}\right)\\
 &=\lambda\cdot_{\mathbb{C}}\alpha'_r
-&&\left(\because\ \alpha'_r\ \text{の定義と}\ \blkref{def_k_multilinear_map}\right).
+&&\left(\because\ \alpha'_r\ \text{の定義と}\ \blkref{def_tuple_with_one_component_replaced}\right).
 \end{aligned}`),
       paragraph(["加法を保つこと："]),
       displayMath(String.raw`\begin{aligned}
@@ -13407,7 +13590,7 @@ P_m
         " を満たすものを取る。",
         math(String.raw`v[j\mapsto v(j)]=v`),
         " である（",
-        ref("def_k_multilinear_map"),
+        ref("def_tuple_with_one_component_replaced"),
         "）。各 ",
         math(String.raw`i`),
         " について ",
@@ -13432,6 +13615,8 @@ P_m
         math(String.raw`U`),
         " への線型写像である（",
         ref("def_k_multilinear_map"),
+        "、",
+        ref("def_linear_map"),
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
