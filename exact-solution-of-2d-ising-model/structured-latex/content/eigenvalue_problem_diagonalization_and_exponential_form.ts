@@ -1270,16 +1270,28 @@ R_{22}
    &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\bigr) \\
-&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
-&= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}-2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&= \Bigl(2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \blkref{def_real_quotient}\bigr) \\
+&= \Bigl(2\pi(M_{\mathrm{col}})_{\mathbb R}+2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
    &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr) \\
-&= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の差}\bigr) \\
-&= 2\pi-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr) \\
+&= \Bigl(2\pi(M_{\mathrm{col}})_{\mathbb R}\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \mathbb R\text{ の右からの分配律}\bigr) \\
+&= 2\pi\Bigl((M_{\mathrm{col}})_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}^{-1}\Bigr)+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \mathbb R\text{ の乗法の結合律}\bigr) \\
+&= 2\pi\,1_{\mathbb R}+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \blkref{def_real_quotient}\text{ の乗法の逆元}\ ((M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R})\bigr) \\
+&= 2\pi+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \mathbb R\text{ の乗法の単位元}\bigr) \\
+&= 2\pi+\Bigl(-\bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\bigr)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+   &&\bigl(\because\ \mathbb R\text{ で }a(-b)=-(ab)\bigr) \\
+&= 2\pi+\Bigl(-\Bigl(\bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}\Bigr)\Bigr)
+   &&\bigl(\because\ \mathbb R\text{ で }(-a)b=-(ab)\bigr) \\
+&= 2\pi+\left(-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
+   &&\bigl(\because\ \blkref{def_real_quotient}\text{ を右辺から左辺へ}\bigr) \\
+&= 2\pi+\left(-\tilde\theta_\mu\right)
+   &&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= 2\pi - \tilde\theta_\mu
-   &&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr)
+   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1419,6 +1431,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-09（Lean の通しの証明）: (2) の鎖は exp((-i)(2πj_R)_C) に exp_of_negative_i_real_as_cos_minus_i_sin を直接当てていたが、その主張の -iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C) である。" +
           "準備の文の「exp_of_negative_i_real_as_cos_minus_i_sin の -iθ_C も (-i)θ_C の意味」を直し、negative_i_times_complex_is_negation_of_i_times で -(i(2πj_R)_C) へ書き換える 1 行を足した（15 等号 → 16 等号）。主張 (2) の -i(·)_C が (-i)(·)_C の意味であることは証明の準備の文にしか無かったので、主張に書いた。ほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: (1) の鎖の、1 行に 2 つ以上の事実を当てていた行（「和と差を保つ」「ℝ の加法の結合律と交換律」「結合律（差は加法の逆元の和）」「½ - μ_R = -(μ_R - ½) と、差は加法の逆元の和」）を、差の定義（def_real_difference）・結合律・交換律を 1 行ずつ当てる形に割った（11 等号 → 20 等号）。主張の中身は不変。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: (1) の鎖の末尾の、def_real_difference を右辺から左辺へ当てて (M_col)_ℝ - (μ_ℝ - ½) に戻す行・「ℝ の分配法則」（差に対する分配）・「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の差」「(M_col)_ℝ ≠ 0_ℝ による約分」・θ̃_μ の定義の 5 行を、def_real_quotient の商 y/z = y z^{-1} で開き、def_real_quotient・ℝ の分配法則（和に対する）・右からの分配律・乗法の結合律・乗法の逆元・乗法の単位元・a(-b) = -(ab)・(-a)b = -(ab)・def_real_quotient を右辺から左辺へ・θ̃_μ の定義・def_real_difference を右辺から左辺への 11 行にした（20 等号 → 26 等号）。主張は不変。",
       ],
     },
   },
