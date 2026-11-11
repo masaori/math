@@ -3684,7 +3684,51 @@ A(\theta)(cv)
 \qquad
 \check{D}_\mu := \begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu}\end{pmatrix}`,
       ),
-      paragraph(["とおく。このとき"]),
+      paragraph([
+        "とおく。",
+        math(String.raw`c`),
+        " と ",
+        math(String.raw`\check{P}_\mu`),
+        " の成分の分数は ",
+        ref("def_complex_quotient"),
+        " の商 ",
+        math(String.raw`z/w = z\,w^{-1}`),
+        " である。分母の ",
+        math(String.raw`2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)`),
+        "・",
+        math(String.raw`2\sqrt{M_{\mathrm{col}}}`),
+        " は ",
+        math(String.raw`\bigl(2_{\mathbb{C}}\,(\sqrt{M_{\mathrm{col}}})_{\mathbb{C}}\bigr)\,\gamma_2(-\tilde\theta_\mu)`),
+        "・",
+        math(String.raw`2_{\mathbb{C}}\,(\sqrt{M_{\mathrm{col}}})_{\mathbb{C}}`),
+        "（",
+        math(String.raw`\sqrt{M_{\mathrm{col}}} \in \mathbb{R}`),
+        " は ",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        " の平方根、",
+        math(String.raw`x_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、",
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}`),
+        "）、分子の ",
+        math(String.raw`-\left|\gamma_2(\tilde\theta_\mu)\right|`),
+        "・",
+        math(String.raw`+\left|\gamma_2(\tilde\theta_\mu)\right|`),
+        "・",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`-\left(\left|\gamma_2(\tilde\theta_\mu)\right|_{\mathbb{C}}\right)`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）・",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|_{\mathbb{C}}`),
+        "・",
+        math(String.raw`1_{\mathbb{C}}`),
+        " である。分母が ",
+        math(String.raw`\mathbb{C}^{\times}`),
+        " に属することは証明の Step 1 で示す。このとき",
+      ]),
       displayMath(
         String.raw`\det\check{P}_\mu
 = \frac{-\left|\gamma_2(\tilde\theta_\mu)\right|}{2M_{\mathrm{col}}\,\gamma_2(-\tilde\theta_\mu)} \neq 0_{\mathbb{C}},
@@ -3704,7 +3748,27 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         math(String.raw`b := \gamma_2(-\tilde\theta_\mu)`),
         "、",
         math(String.raw`r := |a|`),
-        " を使う。",
+        " を使う（",
+        math(String.raw`\check{P}_\mu`),
+        " の成分の分子の ",
+        math(String.raw`\mp r`),
+        " は ",
+        math(String.raw`\mp r_{\mathbb{C}}`),
+        " である）。また ",
+        math(String.raw`s := (\sqrt{M_{\mathrm{col}}})_{\mathbb{C}} \in \mathbb{C}`),
+        "、",
+        math(String.raw`u := 2_{\mathbb{C}}\,s \in \mathbb{C}`),
+        "、",
+        math(String.raw`d := u\,b \in \mathbb{C}`),
+        " とおく。statement の分母 ",
+        math(String.raw`2\sqrt{M_{\mathrm{col}}}`),
+        "・",
+        math(String.raw`2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)`),
+        " は ",
+        math(String.raw`u`),
+        "・",
+        math(String.raw`d`),
+        " である。",
       ]),
       paragraph([
         "Step 1（各成分が定まること）。",
@@ -3712,39 +3776,133 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         " と ",
         ref("relation_of_gamma_2_theta_tilde"),
         " より ",
-        math(String.raw`a \neq 0`),
+        math(String.raw`a \neq 0_{\mathbb{C}}`),
         " かつ ",
-        math(String.raw`b \neq 0`),
+        math(String.raw`b \neq 0_{\mathbb{C}}`),
         "。また ",
         math(String.raw`M_{\mathrm{col}} \geq 2`),
         " より ",
         math(String.raw`\sqrt{M_{\mathrm{col}}} > 0`),
         "（",
         ref("sqrt_nonnegative_existence_uniqueness"),
-        "）。よって分母 ",
-        math(String.raw`2\sqrt{M_{\mathrm{col}}}\,b \neq 0`),
+        "）であり、",
+        math(String.raw`s = (\sqrt{M_{\mathrm{col}}},\,0) \neq (0,0)`),
+        "、",
+        math(String.raw`2_{\mathbb{C}} = (2,0) \neq (0,0)`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。どちらも第 1 成分が ",
+        math(String.raw`0`),
+        " でない）。よって ",
+        math(String.raw`2_{\mathbb{C}},\ s,\ b \in \mathbb{C}^{\times}`),
         " であり、",
-        math(String.raw`c := \dfrac{1}{2\sqrt{M_{\mathrm{col}}}\,b} \in \mathbb{C}^\times`),
-        " が定まって ",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`u = 2_{\mathbb{C}}\,s \in \mathbb{C}^{\times}`),
+        "、",
+        math(String.raw`d = u\,b \in \mathbb{C}^{\times}`),
+        "。したがって ",
+        ref("def_complex_quotient"),
+        " の商 ",
+        math(String.raw`c := 1_{\mathbb{C}}/d = 1_{\mathbb{C}}\,d^{-1}`),
+        " と ",
         math(String.raw`\check{P}_\mu`),
-        " の 4 成分はすべて定まる。",
+        " の 4 成分 ",
+        math(String.raw`(-r_{\mathbb{C}})/d`),
+        "、",
+        math(String.raw`r_{\mathbb{C}}/d`),
+        "、",
+        math(String.raw`1_{\mathbb{C}}/u`),
+        "、",
+        math(String.raw`1_{\mathbb{C}}/u`),
+        " はすべて定まる。",
+        math(String.raw`c = 1_{\mathbb{C}}\,d^{-1}`),
+        "（",
+        ref("def_complex_quotient"),
+        "）",
+        math(String.raw`= d^{-1}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の積の単位元）は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元なので ",
+        math(String.raw`c \in \mathbb{C}^{\times}`),
+        " である。",
       ]),
       paragraph([
         "Step 2（2 つの列が固有ベクトルであること）。",
         ref("eigenvector_of_A_theta_tilde"),
         " の ",
         math(String.raw`v_{\pm,\mu} = c(\mp r,\ b)^{\mathsf{T}}`),
-        " に上の ",
-        math(String.raw`c`),
-        " を代入すると、第 2 成分は次の鎖で定まる。",
+        " の ",
+        math(String.raw`\mp r`),
+        " は ",
+        math(String.raw`\mp r_{\mathbb{C}}`),
+        "（",
+        math(String.raw`-r_{\mathbb{C}}`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        "）であり、",
+        math(String.raw`c(\mp r_{\mathbb{C}},\ b)^{\mathsf{T}}`),
+        " の成分は ",
+        math(String.raw`c(\mp r_{\mathbb{C}})`),
+        "・",
+        math(String.raw`cb`),
+        " である。第 1 成分は、",
+        math(String.raw`x \in \mathbb{C}`),
+        " についての次の鎖を ",
+        math(String.raw`x \to -r_{\mathbb{C}}`),
+        "・",
+        math(String.raw`x \to r_{\mathbb{C}}`),
+        " に当てて定まる。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-cb
-&= \frac{1}{2\sqrt{M_{\mathrm{col}}}\,b}\,b
-   \quad (\because c\text{ の定義}) \\
-&= \frac{1}{2\sqrt{M_{\mathrm{col}}}}
-   \quad (\because b\ne0\text{ と }\mathbb{C}\text{ の四則})
+c\,x
+&= \frac{1_{\mathbb{C}}}{d}\,x
+   &&(\because\ c\ \text{の定義})\\
+&= \bigl(1_{\mathbb{C}}\,d^{-1}\bigr)\,x
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to 1_{\mathbb{C}},\ w \to d)\bigr)\\
+&= d^{-1}\,x
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= x\,d^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \frac{x}{d}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to x,\ w \to d)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "第 2 成分は次の鎖で定まる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c\,b
+&= \frac{1_{\mathbb{C}}}{d}\,b
+   &&(\because\ c\ \text{の定義})\\
+&= \bigl(1_{\mathbb{C}}\,d^{-1}\bigr)\,b
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to 1_{\mathbb{C}},\ w \to d)\bigr)\\
+&= d^{-1}\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= 1_{\mathbb{C}}\bigl(d^{-1}\,b\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl(u^{-1}u\bigr)\bigl(d^{-1}\,b\bigr)
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (u \in \mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&= u^{-1}\Bigl(u\bigl(d^{-1}\,b\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= u^{-1}\Bigl(\bigl(u\,d^{-1}\bigr)b\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= u^{-1}\Bigl(\bigl(d^{-1}u\bigr)b\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= u^{-1}\Bigl(d^{-1}\bigl(u\,b\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= u^{-1}\bigl(d^{-1}d\bigr)
+   &&(\because\ d\ \text{の定義を右辺から左辺へ})\\
+&= u^{-1}\,1_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (d \in \mathbb{C}^{\times})\bigr)\\
+&= 1_{\mathbb{C}}\,u^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \frac{1_{\mathbb{C}}}{u}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to 1_{\mathbb{C}},\ w \to u)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -3835,6 +3993,9 @@ A(\tilde\theta_\mu)
         "2026-08-19 の式変形統一で、固有ベクトルの第 2 成分の約分、行列式の同類項の統合、対角化の右乗を、" +
           "それぞれ主張の左辺から始まる一続きの鎖と行末根拠へ開いた。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-11（Lean の通しの証明）: statement に、c と P̌_μ の成分の分数が def_complex_quotient の商で、分母が (2_C (√M_col)_C) γ_2(−θ~_μ)・2_C (√M_col)_C、分子が −|γ_2|_C・|γ_2|_C・1_C であることを書いた。" +
+          "証明の前置きに s・u・d を置き、Step 1 の「分母 ≠ 0」を inclusion_rr_to_cc の成分の比較と multiplicative_group_of_cc の群の積で示し、Step 2 の第 1 成分 c(∓r_C) = (∓r_C)/d を 5 行の鎖で、" +
+          "第 2 成分の「b ≠ 0 と C の四則」の 1 行を z w^{-1} に開いた 13 行の鎖 c b = 1_C/u にした（体の公理と逆元を 1 行に 1 つずつ）。Step 3 は変えていない。値と主張は不変。",
       ],
     },
   },

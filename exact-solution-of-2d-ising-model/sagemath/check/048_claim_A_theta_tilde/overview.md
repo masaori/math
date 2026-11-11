@@ -58,6 +58,7 @@ A(θ)   = [[γ_1(θ), γ_2(θ)], [−γ_2(−θ), γ_1(θ)]]
 | 03 | check_03_eigen_and_diagonalization.sage | 特性方程式、固有ベクトル `A v_± = λ_± v_±`、Sage の固有値集合との一致、`det P̌_μ` の明示式、`A = P̌ Ď P̌^{-1}` | PASS | 残差 ≤ 2e-12、`min|det P̌| = 6.25e-2` |
 | 04 | check_04_det_and_gamma1.sage | `det A(θ~) = 1`、`γ_1² + γ_2γ_2(−) = 1`、`λ_+λ_- = 1`、`γ_1² − 1 = |γ_2|²`、`min(γ_1 − 1) > 0` | PASS | 残差 ≤ 1.4e-12、`min(γ_1 − 1) ≥ 1.3e-2` |
 | 05 | check_05_gamma_and_exp.sage | `cosh γ = γ_1`、`sinh γ = |γ_2|`、`λ_± = e^{±γ}`、`min γ(θ~_μ) > 0`、`cosh 0 = 1` の鎖の各行（厳密）。対比として整数運動量 `θ = 2π` の `γ` も表示 | PASS | 残差 ≤ 1e-12、`min γ(θ~_μ) ≥ 3.0e-1` |
+| 06 | check_06_quotient_chains.sage | `diagonalization_check_P_D` の Step 1（`√M_col > 0`、`2_ℂ = (2,0)` の第 1 成分、一般の点で `u, d ≠ 0`）と Step 2 の商の鎖（第 1 成分 `c x = x/d` の 5 行、第 2 成分 `c b = 1_ℂ/u` の 13 行。`def_complex_quotient` の `z w^{-1}` と体の公理・逆元を 1 行に 1 つずつ）。`s, b, x` を不定元にした QQ(i) 上の有理関数体で一行ずつ。実際の値の `u ≠ 0`（M_col = 2..8）、否定の対照 3 件（`cb ≠ d^{-1}`、`(ub)^{-1} ≠ u^{-1}b`、`cb ≠ u`） | PASS | 40/40、厳密 |
 
 ## 備考
 

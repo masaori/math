@@ -160,3 +160,47 @@ RESULT: PASS
   K1=0.05, K2=0.1 (s1*s2=0.02016717304): gamma_1(2pi) = 4.594332754191, gamma(2pi) = 2.206e+00
   K1=0.3, K2=5 (s1*s2=7011.614161): gamma_1(2pi) = 1.185407415073, gamma(2pi) = 5.999e-01
 RESULT: PASS
+
+##### check_06_quotient_chains.sage（2026-11-11 / 10.9 / Linux）
+PASS c x の鎖 第 1 行 = 第 2 行
+PASS c x の鎖 第 2 行 = 第 3 行
+PASS c x の鎖 第 3 行 = 第 4 行
+PASS c x の鎖 第 4 行 = 第 5 行
+PASS c x の鎖 第 5 行 = 第 6 行
+PASS c b の鎖 第 1 行 = 第 2 行
+PASS c b の鎖 第 2 行 = 第 3 行
+PASS c b の鎖 第 3 行 = 第 4 行
+PASS c b の鎖 第 4 行 = 第 5 行
+PASS c b の鎖 第 5 行 = 第 6 行
+PASS c b の鎖 第 6 行 = 第 7 行
+PASS c b の鎖 第 7 行 = 第 8 行
+PASS c b の鎖 第 8 行 = 第 9 行
+PASS c b の鎖 第 9 行 = 第 10 行
+PASS c b の鎖 第 10 行 = 第 11 行
+PASS c b の鎖 第 11 行 = 第 12 行
+PASS c b の鎖 第 12 行 = 第 13 行
+PASS c b の鎖 第 13 行 = 第 14 行
+PASS c b の鎖は 13 行（等号 13 個）
+PASS 否定の対照: c b は d^{-1} ではない（b を約さずに残すと崩れる）
+PASS 否定の対照: (u b)^{-1} は u^{-1} b ではない
+PASS 否定の対照: c b は u ではない（逆元を取り忘れると崩れる）
+PASS 第 1 成分: x -> -r_C・x -> r_C のどちらでも c x = x/d
+PASS 第 2 成分: c b = 1_C / u（P̌ の第 2 行の成分）
+PASS M_col = 2: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 3: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 4: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 5: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 6: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 7: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS M_col = 8: √M_col > 0 かつ (√M_col)^2 = M_col（AA）
+PASS 2_C = (2, 0) の第 1 成分 2 ≠ 0
+PASS M_col = 2: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 3: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 4: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 5: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 6: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 7: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS M_col = 8: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
+PASS 一般の点で u ≠ 0、d ≠ 0、c d = 1_C（c は d の逆元）
+-- diagonalization_check_P_D の商の鎖: 40/40 PASS
+RESULT: PASS
