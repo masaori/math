@@ -1092,6 +1092,8 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingCyclicTurningInvarianceWalk
 import Ising2DLambda.KacWard.SmoothingCyclicTurningInvarianceWalk
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitSeamParity
 import Ising2DLambda.KacWard.SmoothingSplitSeamParity
+import Ising2DLambda.NecSuf.KacWard.SmoothingSplitWalkSeamParity
+import Ising2DLambda.KacWard.SmoothingSplitWalkSeamParity
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingPartition
 import Ising2DLambda.KacWard.SmoothingSplitCrossingPartition
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitMutualCrossing
