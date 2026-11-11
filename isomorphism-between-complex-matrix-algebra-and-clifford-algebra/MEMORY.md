@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-11: 射影との合成が元の準同型になる商代数からの準同型はただ一つであること（ラベル claim_homomorphism_from_quotient_algebra_composing_with_projection_is_unique）を、代表をとって ψ∘π_I=φ=φ̄∘π_I で値を比べる鎖で示し、商代数の普遍性と名付けた。次は k 重線型写像の定義。
 - 2026-11-11: 誘導される写像が ℂ-代数の準同型であること（ラベル claim_induced_map_is_algebra_homomorphism）を、代表をとって射影が演算を保つことと φ̄∘π_I=φ で φ の演算の保存へ移す鎖で示した。次は射影との合成が φ になる準同型の一意性。
 - 2026-11-11: 誘導される写像と射影の合成が元の準同型であること（ラベル claim_induced_map_composed_with_projection_is_original_homomorphism）を、誘導される写像の定義の代表に a 自身をとる二行の鎖で示した。次は誘導される写像が ℂ-代数の準同型であること。
 - 2026-11-11: 両側イデアルの元を零へ移す準同型が商代数の上に誘導する写像 φ̄:A/I→B（ラベル def_map_induced_on_quotient_algebra）を定義し、代表のとり方によらないことを剰余類の同値と前の主張で本文に示した。次は φ̄∘π_I=φ。
