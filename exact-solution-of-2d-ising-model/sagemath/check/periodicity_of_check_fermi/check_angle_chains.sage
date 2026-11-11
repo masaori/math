@@ -27,15 +27,22 @@ chain2 = [
     2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律
     2 * PI * (kk * MM + (mu - h)) / MM,              # 差の定義を右辺から左辺へ
     2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の交換律
-    (2 * PI * (mu - h) + 2 * PI * kk * MM) / MM,     # 分配法則
-    2 * PI * (mu - h) / MM + 2 * PI * kk * MM / MM,  # 分数の和
-    tt(mu) + 2 * PI * kk * MM / MM,                  # θ~_μ の定義
-    tt(mu) + 2 * PI * kk,                            # 約分
+    (2 * PI * (mu - h) + 2 * PI * (kk * MM)) / MM,   # 分配法則
+    (2 * PI * (mu - h) + 2 * PI * (kk * MM)) * MM**(-1),             # def_real_quotient
+    (2 * PI * (mu - h)) * MM**(-1) + (2 * PI * (kk * MM)) * MM**(-1),  # 右からの分配律
+    2 * PI * (mu - h) / MM + (2 * PI * (kk * MM)) * MM**(-1),        # def_real_quotient を右辺から左辺へ
+    tt(mu) + (2 * PI * (kk * MM)) * MM**(-1),        # θ~_μ の定義
+    tt(mu) + ((2 * PI * kk) * MM) * MM**(-1),        # 乗法の結合律を右辺から左辺へ
+    tt(mu) + (2 * PI * kk) * (MM * MM**(-1)),        # 乗法の結合律
+    tt(mu) + (2 * PI * kk) * 1,                      # 乗法の逆元（(M)_R ≠ 0）
+    tt(mu) + 2 * PI * kk,                            # 乗法の単位元
 ]
+rep.check(len(chain2) == 17, "(2) θ~_(μ+kM) の鎖は 17 行")
 for j in range(len(chain2) - 1):
     rep.check(chain2[j] == chain2[j + 1], f"(2) θ~_(μ+kM) の鎖 第 {j+1} 行 = 第 {j+2} 行")
 rep.check(chain2[0] == tt(mu + kk * MM), "(2) θ~_(μ+kM) の鎖 第 1 行は θ~ の定義")
 rep.check(tt(mu + kk * MM) != tt(mu) + PI * kk, "(2) 対照: θ~_(μ+kM) ≠ θ~_μ + kπ")
+rep.check(MM * MM**(-1) == 1 and MM * MM**(-1) != MM, "(2) 乗法の逆元の行: (M)_R (M)_R^(-1) = 1_R（対照: (M)_R とは違う）")
 
 neg2 = [
     -(tt(mu) + 2 * PI * kk),
@@ -99,9 +106,14 @@ for M in M_RANGE:
                 2 * (QQ(k) * QQ(M) + (QQ(m) + (-h))) / M,
                 2 * (QQ(k) * QQ(M) + (QQ(m) - h)) / M,
                 2 * ((QQ(m) - h) + QQ(k) * QQ(M)) / M,
-                (2 * (QQ(m) - h) + 2 * QQ(k) * QQ(M)) / M,
-                2 * (QQ(m) - h) / M + 2 * QQ(k) * QQ(M) / M,
-                T(m) + 2 * QQ(k) * QQ(M) / M,
+                (2 * (QQ(m) - h) + 2 * (QQ(k) * QQ(M))) / M,
+                (2 * (QQ(m) - h) + 2 * (QQ(k) * QQ(M))) * QQ(M)**(-1),
+                (2 * (QQ(m) - h)) * QQ(M)**(-1) + (2 * (QQ(k) * QQ(M))) * QQ(M)**(-1),
+                2 * (QQ(m) - h) / M + (2 * (QQ(k) * QQ(M))) * QQ(M)**(-1),
+                T(m) + (2 * (QQ(k) * QQ(M))) * QQ(M)**(-1),
+                T(m) + ((2 * QQ(k)) * QQ(M)) * QQ(M)**(-1),
+                T(m) + (2 * QQ(k)) * (QQ(M) * QQ(M)**(-1)),
+                T(m) + (2 * QQ(k)) * 1,
                 T(m) + 2 * QQ(k),
             ]
             negs = [-(T(m) + 2 * QQ(k)), (-T(m)) + (-(2 * QQ(k))), (-T(m)) + 2 * (-QQ(k)), (-T(m)) + 2 * QQ(-k)]

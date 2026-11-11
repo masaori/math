@@ -58,12 +58,13 @@ theorem gamma1R_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
     _ = gamma1R K θ := by
         rw [gamma1R]                              -- 3 行目: `def_gamma1_gamma2_of_theta`
 
-/-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 12 行）。
+/-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 17 行）。
 
 人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、Lean では `((M : ℤ) : ℝ)` と書く
 （`thetaTilde` の分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。
-人手の `2πk_ℝ(M_col)_ℝ` は、9 行目の分配法則が作る形どおり `2π(k_ℝ(M_col)_ℝ)` と括る。
-12 行目の約分はこの括りに対する `a(bc)/c = ab` で、`mul_div_assoc` と `mul_div_cancel_right₀` の 2 つの書き換えで当てる。 -/
+人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。9 行目の分配法則が作る形は `2π(k_ℝ(M_col)_ℝ)` である。
+人手 `def_real_quotient`（`y/z := y z^{-1}`）は mathlib の `div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は
+`mul_inv_cancel₀` で受ける。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
@@ -77,22 +78,35 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ)]                     -- 4 行目: ℝ の加法の交換律
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
-        rw [sub_eq_add_neg]                       -- 5 行目: ℝ の差の定義
+        rw [sub_eq_add_neg]                       -- 5 行目: `def_real_difference`
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
-        rw [← sub_eq_add_neg]                     -- 7 行目: ℝ の差の定義を右辺から左辺へ
+        rw [← sub_eq_add_neg]                     -- 7 行目: `def_real_difference` を右辺から左辺へ
     _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [add_comm ((k : ℝ) * ((M : ℤ) : ℝ))]         -- 8 行目: ℝ の加法の交換律
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [mul_add]                              -- 9 行目: ℝ の分配法則
-    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) :=
-        add_div _ _ _                             -- 10 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
-    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := rfl
-                                                  -- 11 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) * ((M : ℤ) : ℝ)⁻¹ := by
+        rw [div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)))]
+                                                  -- 10 行目: `def_real_quotient`
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹
+          + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
+        rw [add_mul]                              -- 11 行目: ℝ の右からの分配律
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
+          + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
+        rw [← div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2))]
+                                                  -- 12 行目: `def_real_quotient` を右辺から左辺へ
+    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := rfl
+                                                  -- 13 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
+    _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * ((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹ := by
+        rw [← mul_assoc (2 * Real.pi) (k : ℝ)]   -- 14 行目: ℝ の乗法の結合律を右辺から左辺へ
+    _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * (((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹) := by
+        rw [mul_assoc (2 * Real.pi * (k : ℝ))]   -- 15 行目: ℝ の乗法の結合律
+    _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * 1 := by
+        rw [mul_inv_cancel₀ hM']                  -- 16 行目: `def_real_quotient` の乗法の逆元（`(M_col)_ℝ ≠ 0_ℝ`）
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
-        rw [mul_div_assoc, mul_div_cancel_right₀ _ hM']
-                                                  -- 12 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
+        rw [mul_one]                              -- 17 行目: ℝ の乗法の単位元
 
 /-- 人手 `periodicity_of_check_fermi` (2): `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`（人手の 2 行。ℝ の値なので `gamma1R` の上で書く）。 -/
 theorem gamma1R_thetaTilde_add_int_mul (K : IsingConst) (hM : M ≠ 0) (μ k : ℤ) :

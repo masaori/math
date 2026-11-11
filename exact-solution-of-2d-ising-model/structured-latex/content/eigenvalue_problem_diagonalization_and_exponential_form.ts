@@ -6499,21 +6499,31 @@ g
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の差の定義})\\
+&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の差の定義を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
-&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の分配法則})\\
-&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\ \text{を分母とする分数の和})\\
-&= \tilde\theta_\mu+\frac{2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&= \Bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+&&\bigl(\because\ \blkref{def_real_quotient}\bigr)\\
+&= \Bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}+\Bigl(2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+&&(\because\ \mathbb{R}\ \text{の右からの分配律})\\
+&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\Bigl(2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+&&\bigl(\because\ \blkref{def_real_quotient}\ \text{を右辺から左辺へ}\bigr)\\
+&= \tilde\theta_\mu+\Bigl(2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
 &&(\because\ \tilde\theta_\mu\ \text{の定義。}\blkref{antiperiodic_exp_sum})\\
+&= \tilde\theta_\mu+\Bigl(\left(2\pi k_{\mathbb R}\right)(M_{\mathrm{col}})_{\mathbb R}\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
+&&(\because\ \mathbb{R}\ \text{の乗法の結合律を右辺から左辺へ})\\
+&= \tilde\theta_\mu+\left(2\pi k_{\mathbb R}\right)\Bigl((M_{\mathrm{col}})_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}^{-1}\Bigr)
+&&(\because\ \mathbb{R}\ \text{の乗法の結合律})\\
+&= \tilde\theta_\mu+\left(2\pi k_{\mathbb R}\right)1_{\mathbb R}
+&&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ ((M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R})\bigr)\\
 &= \tilde\theta_\mu+2\pi k_{\mathbb R}
-&&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\ \text{による約分})
+&&(\because\ \mathbb{R}\ \text{の乗法の単位元})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 -\tilde\theta_{\mu+kM_{\mathrm{col}}}
@@ -6662,6 +6672,7 @@ g
           "3 本の鎖を消し、cos(-x) = cos x を cos_of_negated_real と inclusion_rr_to_cc_is_injective から ℝ の等式として作る文（準備の第三）にした（消した鎖は ℂ の等式で終わり、ℝ の γ_1 の鎖へ像の記号を省いて持ち込んでいた）。(3) の γ_1 の鎖の行と主張の中身は不変。",
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。準備の第二の「k_R + (-k_R) = 0_R と零の性質」を、和の単位元の行と加法逆元の行に（6 等号 → 7 等号）、(2) の θ~_{μ+kM} の鎖の「ℝ の加法の結合律と交換律」を、交換律・差の定義・結合律・差の定義（右辺から左辺へ）・交換律の 5 行に（8 等号 → 12 等号）した。主張の中身は不変。",
         "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos x + i sin x の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: (2) の θ̃_{μ+kM} の鎖の「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の和」「(M_col)_ℝ ≠ 0_ℝ による約分」の 2 行とその間の θ̃_μ の定義の行の 3 行を、新しく足した def_real_quotient の商 y/z = y z^{-1} で開き、def_real_quotient・ℝ の右からの分配律・def_real_quotient を右辺から左辺へ・θ̃_μ の定義・ℝ の乗法の結合律（向きつき 2 行）・乗法の逆元・乗法の単位元の 8 行にした（12 行 → 17 行）。分配法則の行の 2π k_ℝ (M_col)_ℝ は、分配法則が作る形どおり 2π(k_ℝ (M_col)_ℝ) と括った。同じ鎖の 5・7 行目の「ℝ の差の定義」は def_real_difference の参照にした。主張は不変。",
       ],
     },
   },

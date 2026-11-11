@@ -18,7 +18,7 @@
 | `Ising2D.gamma1R_add_two_pi_mul_int` | `γ_1(θ + 2π k_ℝ) = γ_1(θ)`（ℝ の値。人手の 3 行と 1 対 1 の `calc`） | `periodicity_of_check_fermi` (1) |
 | `Ising2D.periodicity_prep_int_cast_neg` | `(-k)_ℝ = -k_ℝ`（人手の 7 行と 1 対 1 の `calc`） | 同 準備の第二 |
 | `Ising2D.periodicity_prep_cos_neg` | ℝ の等式 `cos(-x) = cos x`（`cos_of_negated_real` の具体版 `real_inclusion_cos_neg` と `inclusion_rr_to_cc_is_injective`） | 同 準備の第三 |
-| `Ising2D.thetaTilde_add_int_mul` | `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 12 行と 1 対 1 の `calc`） | 同 (2) の第一の鎖 |
+| `Ising2D.thetaTilde_add_int_mul` | `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 17 行と 1 対 1 の `calc`） | 同 (2) の第一の鎖 |
 | `Ising2D.neg_thetaTilde_add_int_mul` | `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行と 1 対 1 の `calc`） | 同 (2) の第二の鎖 |
 | `Ising2D.gamma1R_thetaTilde_add_int_mul` / `gamma2_thetaTilde_add_int_mul` / `gamma2_neg_thetaTilde_add_int_mul` | `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`（ℝ の値。人手の 2 行と 1 対 1 の `calc`）ほか | 同 (2) |
 | `Ising2D.thetaTilde_conj_eq_neg_add_two_pi` | `θ̃_{M+1-μ} = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `θ̃_ν` の鎖 |
