@@ -13,6 +13,10 @@ for a, b, c, d in product((False, True), repeat=4):
     outgoing_exposed = (b != c, c != d, a != d, a != b)
     assert incoming_exposed[incoming]
     assert outgoing_exposed[outgoing]
+    incoming_sides = ((a, d), (b, a), (c, b), (d, c))
+    outgoing_sides = ((b, c), (c, d), (d, a), (a, b))
+    assert incoming_sides[incoming] == (True, False)
+    assert outgoing_sides[outgoing] == (True, False)
     incoming_side = (3, 0, 1, 2)[incoming]
     outgoing_side = (1, 2, 3, 0)[outgoing]
     assert incoming_side != outgoing_side

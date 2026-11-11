@@ -40,6 +40,22 @@ theorem local_directions_exposed (a b c d : Bool)
     simp_all [localCellCount, incomingExposed, outgoingExposed,
       localIncoming, localOutgoing] <;> decide
 
+/-- Each selected direction has a selected cell on its left and an unselected
+cell on its right. The boundary condition excludes the empty and full patterns. -/
+theorem local_directions_selected_left (a b c d : Bool)
+    (hboundary : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3) :
+    (if localIncoming a b c d = 0 then a = true ∧ d = false
+      else if localIncoming a b c d = 1 then b = true ∧ a = false
+      else if localIncoming a b c d = 2 then c = true ∧ b = false
+      else d = true ∧ c = false) ∧
+    (if localOutgoing a b c d = 0 then b = true ∧ c = false
+      else if localOutgoing a b c d = 1 then c = true ∧ d = false
+      else if localOutgoing a b c d = 2 then d = true ∧ a = false
+      else a = true ∧ b = false) := by
+  cases a <;> cases b <;> cases c <;> cases d <;>
+    simp_all [localCellCount, localIncoming, localOutgoing] <;> decide
+
 /-- The incoming edge touches the west, north, east, or south side. -/
 def incomingSide (direction : ZMod 4) : Fin 4 :=
   if direction = 0 then 3 else if direction = 1 then 0

@@ -70223,6 +70223,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.NecSuf.KacWard.local_turn_by_cell_count",
                       "Ising2DLambda.KacWard.cellBoundary_local_edges_ne",
                       "Ising2DLambda.NecSuf.KacWard.local_incoming_outgoing_sides_ne",
+                      "Ising2DLambda.KacWard.cellBoundary_local_directions_selected_left",
+                      "Ising2DLambda.NecSuf.KacWard.local_directions_selected_left",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70379,7 +70381,7 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                       displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma)
 &=v_1-v_3
-&&\bigl(\because\ \text{一方の巡回方向}\bigr)\\
+&&\bigl(\because\ \text{内側セルを右に置く巡回方向}\bigr)\\
 &=4
 &&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}
@@ -70387,7 +70389,7 @@ t_{\circ}(\gamma)
 \begin{aligned}
 t_{\circ}(\gamma)
 &=-(v_1-v_3)
-&&\bigl(\because\ \text{逆の巡回方向}\bigr)\\
+&&\bigl(\because\ \text{内側セルを左に置く巡回方向}\bigr)\\
 &=-4
 &&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),

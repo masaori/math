@@ -58,6 +58,32 @@ theorem cellBoundary_local_directions_mem (cells : Finset GridCell) (r c : ℤ)
       show (3 : ZMod 4) ≠ 1 by decide,
       show (3 : ZMod 4) ≠ 2 by decide]
 
+/-- The four-cell direction table orients both exposed edges with selected
+cells on their left and unselected cells on their right. -/
+theorem cellBoundary_local_directions_selected_left (cells : Finset GridCell) (r c : ℤ)
+    (hv : (r, c) ∈ cellBoundaryVertices cells) :
+    (if cellBoundaryIncoming cells r c = 0 then
+        (r - 1, c - 1) ∈ cells ∧ (r, c - 1) ∉ cells
+      else if cellBoundaryIncoming cells r c = 1 then
+        (r - 1, c) ∈ cells ∧ (r - 1, c - 1) ∉ cells
+      else if cellBoundaryIncoming cells r c = 2 then
+        (r, c) ∈ cells ∧ (r - 1, c) ∉ cells
+      else (r, c - 1) ∈ cells ∧ (r, c) ∉ cells) ∧
+    (if cellBoundaryOutgoing cells r c = 0 then
+        (r - 1, c) ∈ cells ∧ (r, c) ∉ cells
+      else if cellBoundaryOutgoing cells r c = 1 then
+        (r, c) ∈ cells ∧ (r, c - 1) ∉ cells
+      else if cellBoundaryOutgoing cells r c = 2 then
+        (r, c - 1) ∈ cells ∧ (r - 1, c - 1) ∉ cells
+      else (r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells) := by
+  have hcount := (cellBoundaryVertices_iff_incidence_one_to_three cells r c).mp hv
+  rw [vertexCellIncidenceCount_quadrants] at hcount
+  by_cases ha : (r - 1, c - 1) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c) ∈ cells <;>
+    by_cases hd : (r, c - 1) ∈ cells <;>
+    simp_all [cellBoundaryIncoming, cellBoundaryOutgoing] <;> decide
+
 /-- The entering and leaving boundary edges at a non-diagonal vertex are distinct. -/
 theorem cellBoundary_local_edges_ne (cells : Finset GridCell) (r c : ℤ)
     (hv : (r, c) ∈ cellBoundaryVertices cells)
