@@ -7849,6 +7849,90 @@ L^{b}_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_kernel_of_algebra_homomorphism_is_two_sided_ideal",
+    kind: "claim",
+    title: { text: "ℂ-代数の準同型が零へ移す元の全体は両側イデアルである" },
+    labels: ["claim_kernel_of_algebra_homomorphism_is_two_sided_ideal"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " と ", math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`), " を ℂ-代数（",
+        ref("def_complex_algebra"), "）、", math(String.raw`\varphi:A\to B`), " を ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"),
+        "）とし、", math(String.raw`A`), " の部分集合 ", math(String.raw`K_\varphi`), " を次で定める。",
+      ]),
+      displayMath(String.raw`K_\varphi:=\{\,x\in A:\ \varphi(x)=0_B\,\}`),
+      paragraph([
+        "このとき ", math(String.raw`K_\varphi`), " は ", math(String.raw`A`), " の両側イデアル（", ref("def_two_sided_ideal"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", math(String.raw`B`), " の任意の元 ", math(String.raw`c`), " について ", math(String.raw`c\cdot_B 0_B=0_B`), " と ",
+        math(String.raw`0_B\cdot_B c=0_B`), " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c\cdot_B 0_B
+&=c\cdot_B\bigl(0_{\mathbb{C}}\ast_B 0_B\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{で}\ 0_{\mathbb{C}}\ast_B 0_B=0_B\text{。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\ast_B\bigl(c\cdot_B 0_B\bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=0_B
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right),
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0_B\cdot_B c
+&=\bigl(0_{\mathbb{C}}\ast_B 0_B\bigr)\cdot_B c
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\ast_B\bigl(0_B\cdot_B c\bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=0_B
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph([
+        "両側イデアルの四条件を確かめる。", math(String.raw`x,y`), " を ", math(String.raw`K_\varphi`), " の任意の元、", math(String.raw`a`),
+        " を ", math(String.raw`A`), " の任意の元とする。", math(String.raw`x\in K_\varphi`), " と ", math(String.raw`y\in K_\varphi`), " は ",
+        math(String.raw`\varphi(x)=0_B`), " と ", math(String.raw`\varphi(y)=0_B`), " のことである。",
+      ]),
+      paragraph([
+        "（加法の単位元を含むこと）", math(String.raw`\varphi`), " は ", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(B)`), " への線型写像なので（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）、",
+        math(String.raw`\varphi(0_A)=0_B`), " である（", ref("claim_linear_map_sends_zero_to_zero"), "）。",
+      ]),
+      paragraph(["（加法で閉じていること）"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(x+_A y)
+&=\varphi(x)+_B\varphi(y)
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=0_B+_B 0_B
+&&\left(\because\ x,y\in K_\varphi\right)\\
+&=0_B
+&&\left(\because\ 0_B\ \text{は}\ U_{\mathrm{vec}}(B)\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["（左から掛けて閉じていること）"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(a\cdot_A x)
+&=\varphi(a)\cdot_B\varphi(x)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\varphi(a)\cdot_B 0_B
+&&\left(\because\ x\in K_\varphi\right)\\
+&=0_B
+&&\left(\because\ \text{準備の一つ目の等式で}\ c:=\varphi(a)\right).
+\end{aligned}`),
+      paragraph(["（右から掛けて閉じていること）"]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(x\cdot_A a)
+&=\varphi(x)\cdot_B\varphi(a)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=0_B\cdot_B\varphi(a)
+&&\left(\because\ x\in K_\varphi\right)\\
+&=0_B
+&&\left(\because\ \text{準備の二つ目の等式で}\ c:=\varphi(a)\right).
+\end{aligned}`),
+      paragraph([
+        "四条件が満たされたので、", math(String.raw`K_\varphi`), " は ", math(String.raw`A`), " の両側イデアルである（", ref("def_two_sided_ideal"), "）。",
+      ]),
+    ],
+  },
+  {
     id: "mathematical_toolkit_definition_congruence_modulo_two_sided_ideal",
     kind: "definition",
     title: { text: "両側イデアルを法とする合同" },

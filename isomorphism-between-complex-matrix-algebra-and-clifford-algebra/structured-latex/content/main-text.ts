@@ -9,6 +9,7 @@
 
 import mathematicalToolkit from "./chapters/mathematical-toolkit.ts";
 import complexMatrixAlgebra from "./chapters/complex-matrix-algebra.ts";
+import cliffordAlgebra from "./chapters/clifford-algebra.ts";
 import isomorphism from "./chapters/isomorphism.ts";
 
-export default [...mathematicalToolkit, ...complexMatrixAlgebra, ...isomorphism] as const;
+export default [...mathematicalToolkit, ...complexMatrixAlgebra, ...cliffordAlgebra, ...isomorphism] as const;
