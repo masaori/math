@@ -48,9 +48,11 @@
 | `Ising2D.checkPmat` / `checkDmat` / `checkC` | 人手証明の `P̌_μ`, `Ď_μ`, 任意定数 `c` | `diagonalization_check_P_D` |
 | `Ising2D.sqrtM_ne_zero`（`DefinitionCheckFermi.lean`。`def_check_fermi` と同じ `√M`） | `√M ≠ 0` | 同 Step 1 |
 | `Ising2D.checkU_ne_zero` / `checkD_ne_zero` | `u := 2_ℂ s ∈ ℂ^×`、`d := u b ∈ ℂ^×`（`s := (√M)_ℂ`。群の積） | `diagonalization_check_P_D` Step 1 |
+| `Ising2D.checkC_eq_inv` / `checkC_ne_zero` | `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）、`c ∈ ℂ^×`（逆元） | 同 Step 1 |
 | `Ising2D.checkC_mul` / `checkC_mul_b` / `checkPmat_col_pos` / `checkPmat_col_neg` | `c x = x/d`（5 行）、`cb = 1/(2√M)`（13 行。どちらも `def_complex_quotient` の `z w^{-1}` で 1 段ずつ）、`P̌` の列が `v_{±,μ}` | 同 Step 2 |
-| `Ising2D.det_checkPmat` | `det P̌_μ = -|γ_2|/(2M γ_2(-θ~_μ))` | 同 Step 3 |
-| `Ising2D.det_checkPmat_ne_zero` | `det P̌_μ ≠ 0`（可逆性） | 同 Step 3 |
+| `Ising2D.sqrtM_mul_sqrtM` / `checkM_ne_zero` / `checkW_ne_zero` / `one_add_one_eq_two_complex` / `checkD_mul_checkU` | 前置き (a) `s s = ℓ`（5 行）、(b) `ℓ, q ∈ ℂ^×`（群の積）、(c) `1_ℂ + 1_ℂ = 2_ℂ`（4 行）、(d) `d u = 2_ℂ q`（12 行）。`ℓ := (ι_{ℤ→ℝ}(M))_ℂ`、`q := (2_ℂ ℓ) b` | 同 Step 3 の前置き |
+| `Ising2D.det_checkPmat_eq_mul_inv` / `det_checkPmat` | `det P̌_μ = (-ρ) q^{-1}`（1〜28 行）、`= (-ρ)/q = -|γ_2|/(2M γ_2(-θ~_μ))`（29 行目。`def_complex_quotient`・`def_complex_difference`・`multiply_by_minus_one`・体の公理・逆元で 1 段ずつ） | 同 Step 3 |
+| `Ising2D.det_checkPmat_ne_zero` | `det P̌_μ ≠ 0`（`ρ`・`-1_ℂ` の第 1 成分と群の積・逆元） | 同 Step 3 |
 | `Ising2D.AMat_mul_checkPmat` | `A P̌ = P̌ Ď` | 同 Step 2 |
 | **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** Step 4 |
 | `Ising2D.charPoly_factor_thetaTilde_of_necSuf` / `det_AMat_sub_smul_eq_zero_iff_of_necSuf` / `eigenvalue_AMat_iff_of_necSuf` / `lambdaPlusR_ne_lambdaMinusR_of_necSuf` / `det_checkPmat_of_necSuf` / `det_checkPmat_ne_zero_of_necSuf` / `AMat_mulVec_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mulVec_smul_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mul_checkPmat_of_necSuf` / `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`） | `_of_necSuf` を除いた名前の具体版と同じ主張を、必要十分版 `NecSuf/TwoByTwoSkew.lean` の系として導出した版 | `eigenvector_of_A_theta_tilde` Step 1・Step 2、`diagonalization_check_P_D` Step 2〜4 |

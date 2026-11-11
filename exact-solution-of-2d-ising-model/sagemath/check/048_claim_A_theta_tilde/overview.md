@@ -59,6 +59,7 @@ A(θ)   = [[γ_1(θ), γ_2(θ)], [−γ_2(−θ), γ_1(θ)]]
 | 04 | check_04_det_and_gamma1.sage | `det A(θ~) = 1`、`γ_1² + γ_2γ_2(−) = 1`、`λ_+λ_- = 1`、`γ_1² − 1 = |γ_2|²`、`min(γ_1 − 1) > 0` | PASS | 残差 ≤ 1.4e-12、`min(γ_1 − 1) ≥ 1.3e-2` |
 | 05 | check_05_gamma_and_exp.sage | `cosh γ = γ_1`、`sinh γ = |γ_2|`、`λ_± = e^{±γ}`、`min γ(θ~_μ) > 0`、`cosh 0 = 1` の鎖の各行（厳密）。対比として整数運動量 `θ = 2π` の `γ` も表示 | PASS | 残差 ≤ 1e-12、`min γ(θ~_μ) ≥ 3.0e-1` |
 | 06 | check_06_quotient_chains.sage | `diagonalization_check_P_D` の Step 1（`√M_col > 0`、`2_ℂ = (2,0)` の第 1 成分、一般の点で `u, d ≠ 0`）と Step 2 の商の鎖（第 1 成分 `c x = x/d` の 5 行、第 2 成分 `c b = 1_ℂ/u` の 13 行。`def_complex_quotient` の `z w^{-1}` と体の公理・逆元を 1 行に 1 つずつ）。`s, b, x` を不定元にした QQ(i) 上の有理関数体で一行ずつ。実際の値の `u ≠ 0`（M_col = 2..8）、否定の対照 3 件（`cb ≠ d^{-1}`、`(ub)^{-1} ≠ u^{-1}b`、`cb ≠ u`） | PASS | 40/40、厳密 |
+| 07 | check_07_det_chain.sage | `diagonalization_check_P_D` の Step 1 の `c = 1_ℂ/d = 1_ℂd^{-1} = d^{-1}`（3 行）、Step 3 の前置き (a) `s s = ℓ`（5 行。実際の `M_col = 2..8` で `AA`/`QQbar`）・(b) `ℓ, 2_ℂℓ, q ≠ 0`・(c) `1_ℂ + 1_ℂ = 2_ℂ`（4 行）・(d) `d u = 2_ℂ q`（12 行）と、`det P̌_μ = (-ρ)/q` の 29 行の鎖（`def_complex_quotient`・`def_complex_difference`・`multiply_by_minus_one`・体の公理・逆元を 1 行に 1 つずつ）。鎖は `s, b, ρ` を不定元にした QQ(i) 上の有理関数体で `ℓ = s s` と置いて一行ずつ。否定の対照 3 件（`(-ρ)/(4ℓb)`、符号、`du ≠ q`）、`b = -conj(a)`・`r = |a| = |b|` を満たす値での `det ≠ 0`（M_col = 2..8 の 35 組） | PASS | 160/160、厳密 |
 
 ## 備考
 

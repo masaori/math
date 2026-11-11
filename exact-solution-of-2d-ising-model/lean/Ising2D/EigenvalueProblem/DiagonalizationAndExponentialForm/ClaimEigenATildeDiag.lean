@@ -43,12 +43,17 @@
 * `diagonalization_check_P_D` Step 1: `s = (√M)_ℂ ≠ 0_ℂ` は `def_check_fermi` と同じ `√M`（`sqrtM`）についての
   `sqrtM_ne_zero`（`DefinitionCheckFermi.lean`）を引く。`2_ℂ = (2,0) ≠ 0_ℂ` は成分の比較の `exp_neg_I_prep_two_ne_zero`。
   `u := 2_ℂ s ∈ ℂ^×`・`d := u b ∈ ℂ^×`（群の積）は `checkU_ne_zero`・`checkD_ne_zero`［置かない］。
+  `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）は `checkC_eq_inv`、`c ∈ ℂ^×` は `checkC_ne_zero`［置かない］。
   `P̌_μ`・`c` もこの `sqrtM` で書き、分数は `def_complex_quotient` の商（`div_eq_mul_inv` で開く）と読む。
 * `diagonalization_check_P_D` Step 2: 第 1 成分の 5 行の鎖 `checkC_mul`（`c x = x/d`）、第 2 成分の 13 行の鎖 `checkC_mul_b`
   （どちらも人手と 1 段ずつの `calc`）、列が `v_{±,μ}` に一致すること
   `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、列ごとに見た `A P̌ = P̌ Ď` の
   `AMat_mul_checkPmat`［`skew2_mul_of_cols`］。
-* `diagonalization_check_P_D` Step 3: `det P̌` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`］。
+* `diagonalization_check_P_D` Step 3: 前置き (a) `s s = ℓ` の `sqrtM_mul_sqrtM`（5 行）、(b) `ℓ, q ∈ ℂ^×` の
+  `checkM_ne_zero`・`checkW_ne_zero`、(c) `1_ℂ + 1_ℂ = 2_ℂ` の `one_add_one_eq_two_complex`（4 行）、(d) `d u = 2_ℂ q` の
+  `checkD_mul_checkU`（12 行）［置かない］。`det P̌` の 29 行の鎖は 28 行目までの `det_checkPmat_eq_mul_inv` と 29 行目の
+  `det_checkPmat`（人手と 1 段ずつの `calc`）、`ρ`・`-1_ℂ` の第 1 成分の比較と群の積・逆元による `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`。
+  必要十分版は列の形 `c(∓s, b)` から環の四則で値を出す別の経路のまま］。
 * `diagonalization_check_P_D` Step 4: 右から `P̌⁻¹` を掛ける鎖
   `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`［`eq_conj_of_mul_eq`］。
 * 人手証明にあった Step 3（固有空間が 1 次元で、固有ベクトルは `v_{±,μ}` の `ℂ^×` 倍に限ること）は後段で使われないので、
@@ -445,38 +450,197 @@ theorem AMat_mul_checkPmat (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) 
     simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul] at h
     simp [Matrix.mul_apply, Fin.sum_univ_two, checkDmat, h, mul_comm]
 
-/-- **人手証明 Step 3**: `det P̌_μ = -|γ_2(θ~_μ)|/(2M γ_2(-θ~_μ))`。 -/
+/-- **人手証明 Step 3 の前置き (a)**: `s s = ℓ`（`s := (√M)_ℂ`、`ℓ := (ι_{ℤ→ℝ}(M))_ℂ`。5 行）。
+Lean の `ℓ` は `ℕ` からの直接のキャスト `(M : ℂ)` なので、5 行目は人手の「`ℓ` の定義」を、
+`ℝ` を経る合成 `((M : ℝ) : ℂ)` と直接のキャストの一致 `Complex.ofReal_natCast` の 1 段で受ける。 -/
+theorem sqrtM_mul_sqrtM (M : ℕ) : sqrtM M * sqrtM M = (M : ℂ) := by
+  calc sqrtM M * sqrtM M
+      = ((Real.sqrt M : ℝ) : ℂ) * ((Real.sqrt M : ℝ) : ℂ) := rfl
+                                        -- 1 行目: `s` の定義
+    _ = ((Real.sqrt M * Real.sqrt M : ℝ) : ℂ) := (Complex.ofReal_mul _ _).symm
+                                        -- 2 行目: `real_inclusion_preserves_product`（`a, b → √M`）
+    _ = ((Real.sqrt M ^ 2 : ℝ) : ℂ) := by rw [sq]
+                                        -- 3 行目: `square_of_real_number_is_product`（`r → √M`）を右辺から左辺へ
+    _ = (((M : ℝ)) : ℂ) := by rw [Real.sq_sqrt (Nat.cast_nonneg M)]
+                                        -- 4 行目: `definition_of_sqrt_r_positive` の `y^2 = x`
+    _ = (M : ℂ) := Complex.ofReal_natCast M
+                                        -- 5 行目: `ℓ` の定義（`ι_{ℤ→ℝ}` と `inclusion_rr_to_cc` の合成）
+
+/-- **人手証明 Step 3 の前置き (b)**: `ℓ ∈ ℂ^×`（(a) の `ℓ = s s` と `s ∈ ℂ^×`、`multiplicative_group_of_cc` の群の積）。 -/
+theorem checkM_ne_zero {M : ℕ} (hM : M ≠ 0) : (M : ℂ) ≠ 0 := by
+  rw [← sqrtM_mul_sqrtM M]
+  exact mul_ne_zero (sqrtM_ne_zero hM) (sqrtM_ne_zero hM)
+
+/-- **人手証明 Step 3 の前置き (b)**: `q := (2_ℂ ℓ) b ∈ ℂ^×`（`multiplicative_group_of_cc` の群の積）。 -/
+theorem checkW_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ) ≠ 0 :=
+  mul_ne_zero (mul_ne_zero exp_neg_I_prep_two_ne_zero (checkM_ne_zero hM))
+    (gamma2_neg_thetaTilde_ne_zero P hM μ)
+
+/-- **人手証明 Step 3 の前置き (c)**: `1_ℂ + 1_ℂ = 2_ℂ`（4 行）。 -/
+theorem one_add_one_eq_two_complex : (1 : ℂ) + 1 = 2 := by
+  calc (1 : ℂ) + 1
+      = ((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ) := by rw [Complex.ofReal_one]
+                                        -- 1 行目: `inclusion_rr_to_cc` の略記 `1_ℂ = (1)_ℂ` を 2 か所へ
+    _ = ((1 + 1 : ℝ) : ℂ) := (Complex.ofReal_add 1 1).symm
+                                        -- 2 行目: `real_inclusion_preserves_sum`（`a, b → 1`）
+    _ = ((2 : ℝ) : ℂ) := by rw [one_add_one_eq_two]
+                                        -- 3 行目: `ℝ` で `1 + 1 = 2`
+    _ = 2 := Complex.ofReal_ofNat 2
+                                        -- 4 行目: `2_ℂ = (2_ℝ)_ℂ`
+
+/-- **人手証明 Step 3 の前置き (d)**: `d u = 2_ℂ q`（`u := 2_ℂ s`、`d := u b`、`q := (2_ℂ ℓ) b`。12 行）。 -/
+theorem checkD_mul_checkU (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    (2 * sqrtM M * gamma2 K (-thetaTilde M μ)) * (2 * sqrtM M)
+      = 2 * (2 * (M : ℂ) * gamma2 K (-thetaTilde M μ)) := by
+  set s : ℂ := sqrtM M with hs
+  set b : ℂ := gamma2 K (-thetaTilde M μ) with hb
+  set u : ℂ := 2 * s with hu
+  set d : ℂ := u * b with hd
+  set q : ℂ := 2 * (M : ℂ) * b with hq
+  calc d * u
+      = (u * b) * u := by rw [hd]               -- 1 行目: `d` の定義
+    _ = u * (b * u) := mul_assoc _ _ _          -- 2 行目: 積の結合律
+    _ = u * (u * b) := by rw [mul_comm b u]     -- 3 行目: 積の可換律
+    _ = (u * u) * b := (mul_assoc _ _ _).symm   -- 4 行目: 積の結合律を右辺から左辺へ
+    _ = ((2 * s) * (2 * s)) * b := by rw [hu]   -- 5 行目: `u` の定義を 2 か所へ
+    _ = (2 * (s * (2 * s))) * b := by rw [mul_assoc (2 : ℂ) s (2 * s)]
+                                                -- 6 行目: 積の結合律
+    _ = (2 * ((s * 2) * s)) * b := by rw [← mul_assoc s (2 : ℂ) s]
+                                                -- 7 行目: 積の結合律を右辺から左辺へ
+    _ = (2 * ((2 * s) * s)) * b := by rw [mul_comm s (2 : ℂ)]
+                                                -- 8 行目: 積の可換律
+    _ = (2 * (2 * (s * s))) * b := by rw [mul_assoc (2 : ℂ) s s]
+                                                -- 9 行目: 積の結合律
+    _ = (2 * (2 * (M : ℂ))) * b := by rw [hs, sqrtM_mul_sqrtM M]
+                                                -- 10 行目: 前置き (a)
+    _ = 2 * ((2 * (M : ℂ)) * b) := mul_assoc _ _ _
+                                                -- 11 行目: 積の結合律
+    _ = 2 * q := by rw [hq]                     -- 12 行目: `q` の定義を右辺から左辺へ
+
+/-- **人手証明 Step 1**: `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）。 -/
+theorem checkC_eq_inv (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    checkC K M μ = (2 * sqrtM M * gamma2 K (-thetaTilde M μ))⁻¹ := by
+  set d : ℂ := 2 * sqrtM M * gamma2 K (-thetaTilde M μ) with hd
+  calc checkC K M μ
+      = 1 / d := rfl                    -- 1 行目: `c` の定義
+    _ = 1 * d⁻¹ := div_eq_mul_inv _ _   -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
+    _ = d⁻¹ := one_mul _                -- 3 行目: `complex_numbers_form_a_field` の積の単位元
+
+/-- **人手証明 Step 1**: `c ∈ ℂ^×`（`c = d^{-1}` は `multiplicative_group_of_cc` の逆元）。 -/
+theorem checkC_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    checkC P.const M μ ≠ 0 := by
+  rw [checkC_eq_inv]
+  exact inv_ne_zero (checkD_ne_zero P hM μ)
+
+/-- **人手証明 Step 3 の鎖の 1〜28 行目**: `det P̌_μ = (-ρ) q^{-1}`（`ρ := r_ℂ`、`q := (2_ℂ ℓ) b`）。
+人手の det ≠ 0 の段落が「鎖の最後から 2 行目」として引く形。 -/
+theorem det_checkPmat_eq_mul_inv (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    (checkPmat P.const M μ).det
+      = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) *
+          (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ))⁻¹ := by
+  have hdu := checkD_mul_checkU P.const M μ
+  have hu0 : (2 : ℂ) * sqrtM M ≠ 0 := checkU_ne_zero hM
+  have hd0 := checkD_ne_zero P hM μ
+  have hq0 := checkW_ne_zero P hM μ
+  set ρ : ℂ := ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) with hρ
+  set u : ℂ := 2 * sqrtM M with hu
+  set d : ℂ := u * gamma2 P.const (-thetaTilde M μ) with hd
+  set q : ℂ := 2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ) with hq
+  calc (checkPmat P.const M μ).det
+      = (-ρ / d) * (1 / u) - (ρ / d) * (1 / u) :=
+        Matrix.det_fin_two_of _ _ _ _
+                                        -- 1 行目: `def_det_two_by_two`（`B → P̌_μ`）
+    _ = ((-ρ) * d⁻¹) * (1 * u⁻¹) - (ρ * d⁻¹) * (1 * u⁻¹) := by
+        simp only [div_eq_mul_inv]      -- 2 行目: `def_complex_quotient` を 4 か所へ
+    _ = ((-ρ) * d⁻¹) * u⁻¹ - (ρ * d⁻¹) * u⁻¹ := by
+        simp only [one_mul]             -- 3 行目: 積の単位元を 2 か所へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) - ρ * (d⁻¹ * u⁻¹) := by
+        rw [mul_assoc (-ρ), mul_assoc ρ]
+                                        -- 4 行目: 積の結合律を 2 か所へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + -(ρ * (d⁻¹ * u⁻¹)) := sub_eq_add_neg _ _
+                                        -- 5 行目: `def_complex_difference`
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + (-1) * (ρ * (d⁻¹ * u⁻¹)) := by
+        rw [neg_one_mul]                -- 6 行目: `multiply_by_minus_one`
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + ((-1) * ρ) * (d⁻¹ * u⁻¹) := by
+        rw [mul_assoc (-1 : ℂ) ρ]       -- 7 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + (-ρ) * (d⁻¹ * u⁻¹) := by
+        rw [neg_one_mul]                -- 8 行目: `multiply_by_minus_one` を右辺から左辺へ
+    _ = 1 * ((-ρ) * (d⁻¹ * u⁻¹)) + 1 * ((-ρ) * (d⁻¹ * u⁻¹)) := by
+        rw [one_mul]                    -- 9 行目: 積の単位元を右辺から左辺へ 2 か所へ
+    _ = (1 + 1) * ((-ρ) * (d⁻¹ * u⁻¹)) := (add_mul _ _ _).symm
+                                        -- 10 行目: 右からの分配律を右辺から左辺へ
+    _ = 2 * ((-ρ) * (d⁻¹ * u⁻¹)) := by
+        rw [one_add_one_eq_two_complex] -- 11 行目: 前置き (c)
+    _ = (2 * (-ρ)) * (d⁻¹ * u⁻¹) := (mul_assoc _ _ _).symm
+                                        -- 12 行目: 積の結合律を右辺から左辺へ
+    _ = ((-ρ) * 2) * (d⁻¹ * u⁻¹) := by
+        rw [mul_comm (2 : ℂ) (-ρ)]      -- 13 行目: 積の可換律
+    _ = (-ρ) * (2 * (d⁻¹ * u⁻¹)) := mul_assoc _ _ _
+                                        -- 14 行目: 積の結合律
+    _ = (-ρ) * (1 * (2 * (d⁻¹ * u⁻¹))) := by
+        rw [one_mul]                    -- 15 行目: 積の単位元を右辺から左辺へ
+    _ = (-ρ) * ((q⁻¹ * q) * (2 * (d⁻¹ * u⁻¹))) := by
+        rw [inv_mul_cancel₀ hq0]        -- 16 行目: `multiplicative_group_of_cc` の逆元（`q ∈ ℂ^×`）を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (q * (2 * (d⁻¹ * u⁻¹)))) := by
+        rw [mul_assoc q⁻¹ q]            -- 17 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * ((q * 2) * (d⁻¹ * u⁻¹))) := by
+        rw [mul_assoc q (2 : ℂ)]        -- 18 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * ((2 * q) * (d⁻¹ * u⁻¹))) := by
+        rw [mul_comm q (2 : ℂ)]         -- 19 行目: 積の可換律
+    _ = (-ρ) * (q⁻¹ * ((d * u) * (d⁻¹ * u⁻¹))) := by
+        rw [hdu]                        -- 20 行目: 前置き (d) を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (d * (u * (d⁻¹ * u⁻¹)))) := by
+        rw [mul_assoc d u]              -- 21 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * (d * ((u * d⁻¹) * u⁻¹))) := by
+        rw [mul_assoc u d⁻¹]            -- 22 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (d * ((d⁻¹ * u) * u⁻¹))) := by
+        rw [mul_comm u d⁻¹]             -- 23 行目: 積の可換律
+    _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * (u * u⁻¹)))) := by
+        rw [mul_assoc d⁻¹ u]            -- 24 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * 1))) := by
+        rw [mul_inv_cancel₀ hu0]        -- 25 行目: `multiplicative_group_of_cc` の逆元（`u ∈ ℂ^×`）
+    _ = (-ρ) * (q⁻¹ * (d * d⁻¹)) := by
+        rw [mul_one]                    -- 26 行目: 積の単位元
+    _ = (-ρ) * (q⁻¹ * 1) := by
+        rw [mul_inv_cancel₀ hd0]        -- 27 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
+    _ = (-ρ) * q⁻¹ := by
+        rw [mul_one]                    -- 28 行目: 積の単位元
+
+/-- **人手証明 Step 3**: `det P̌_μ = (-ρ)/q = -|γ_2(θ~_μ)|/(2M γ_2(-θ~_μ))`（29 行。28 行目までは `det_checkPmat_eq_mul_inv`）。 -/
 theorem det_checkPmat (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     (checkPmat P.const M μ).det
       = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) /
           (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) := by
-  set r : ℂ := ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ)
-  set b := gamma2 P.const (-thetaTilde M μ)
-  set s : ℂ := sqrtM M
-  have hs : s ≠ 0 := sqrtM_ne_zero hM
-  have hb : b ≠ 0 := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hM' : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  have hsq : (2 * s) ^ 2 = 4 * (M : ℂ) := by
-    rw [mul_pow, sqrtM_sq]; ring
-  calc (checkPmat P.const M μ).det
-      = (-r / (2 * s * b)) * (1 / (2 * s)) - (r / (2 * s * b)) * (1 / (2 * s)) :=
-        Matrix.det_fin_two_of _ _ _ _                                  -- 行列式の定義
-    _ = -r / (4 * M * b) - r / (4 * M * b) := by
-        rw [← hsq]; field_simp                                        -- `(2√M)^2 = 4M`
-    _ = -r / (4 * M * b) + -r / (4 * M * b) := by ring                -- ℂ の四則
-    _ = 2 * (-r / (4 * M * b)) := by ring                             -- 同類項の統合
-    _ = -r / (2 * M * b) := by field_simp; ring                       -- `2M ≠ 0` と ℂ の四則
+  rw [det_checkPmat_eq_mul_inv P hM μ]  -- 1〜28 行目
+  exact (div_eq_mul_inv _ _).symm       -- 29 行目: `def_complex_quotient`（`z → -ρ`, `w → q`）を右辺から左辺へ
 
-/-- **人手証明 Step 3 の結論**: `det P̌_μ ≠ 0`（`r > 0`、`2M ≠ 0`、`b ≠ 0` と零因子が無いこと）。 -/
+/-- **人手証明 Step 3 の結論**: `det P̌_μ ≠ 0_ℂ`（`ρ = (r,0)`・`-1_ℂ = (-1,0)` の第 1 成分が 0 でないことと、
+`multiplicative_group_of_cc` の群の積・逆元）。 -/
 theorem det_checkPmat_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     (checkPmat P.const M μ).det ≠ 0 := by
-  have hr : ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) ≠ 0 := by
-    simp only [ne_eq, Complex.ofReal_eq_zero]
-    exact ne_of_gt (absGamma2_thetaTilde_pos P hM μ)
-  have hb := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hM' : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  rw [det_checkPmat P hM μ]
-  exact div_ne_zero (neg_ne_zero.2 hr) (mul_ne_zero (mul_ne_zero two_ne_zero hM') hb)
+  have hr : 0 < absGamma2 P.const (thetaTilde M μ) := absGamma2_thetaTilde_pos P hM μ
+                                        -- `relation_of_gamma_2_theta_tilde` (4) の `r > 0`
+  have hρ : ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) ≠ 0 := by
+    intro h
+    have hre := congrArg Complex.re h   -- 仮定 `ρ = 0_ℂ` の第 1 成分
+    rw [Complex.ofReal_re, Complex.zero_re] at hre
+                                        -- `inclusion_rr_to_cc`: `ρ = (r, 0)`、`0_ℂ = (0, 0)` の第 1 成分
+    exact ne_of_gt hr hre               -- 第 1 成分が `ℝ` で `r ≠ 0`
+  have hm1 : (-1 : ℂ) ≠ 0 := by
+    intro h
+    have h' : ((-1 : ℝ) : ℂ) = 0 := by rw [Complex.ofReal_neg, Complex.ofReal_one]; exact h
+                                        -- `-1_ℂ` は略記 `r_ℂ` の `r = -1`
+    have hre := congrArg Complex.re h'  -- 仮定 `-1_ℂ = 0_ℂ` の第 1 成分
+    rw [Complex.ofReal_re, Complex.zero_re] at hre
+                                        -- `inclusion_rr_to_cc`: `-1_ℂ = (-1, 0)`、`0_ℂ = (0, 0)` の第 1 成分
+    exact absurd hre (by norm_num)      -- 第 1 成分が `ℝ` で `-1 ≠ 0`
+  have hnegρ : -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) ≠ 0 := by
+    rw [← neg_one_mul]                  -- `multiply_by_minus_one`: `-ρ = (-1_ℂ) ρ`
+    exact mul_ne_zero hm1 hρ            -- 群の積
+  rw [det_checkPmat_eq_mul_inv P hM μ]  -- 鎖の最後から 2 行目 `(-ρ) q^{-1}`
+  exact mul_ne_zero hnegρ (inv_ne_zero (checkW_ne_zero P hM μ))
+                                        -- `q^{-1} ∈ ℂ^×`（逆元）と群の積
 
 /-- **人手証明 `diagonalization_check_P_D`**（Step 4）: `A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（**場合分けなし**）。 -/
 theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv

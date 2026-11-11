@@ -204,3 +204,167 @@ PASS M_col = 8: 実際の値で u = 2_C (√M_col)_C ≠ 0（QQbar）
 PASS 一般の点で u ≠ 0、d ≠ 0、c d = 1_C（c は d の逆元）
 -- diagonalization_check_P_D の商の鎖: 40/40 PASS
 RESULT: PASS
+
+##### check_07_det_chain.sage（2026-11-11 / 10.9 / Linux）
+PASS Step 1 の c の鎖 第 1 行 = 第 2 行
+PASS Step 1 の c の鎖 第 2 行 = 第 3 行
+PASS Step 1 の c の鎖 第 3 行 = 第 4 行
+PASS (a) M_col = 2: 第 1 行 = 第 2 行
+PASS (a) M_col = 2: 第 2 行 = 第 3 行
+PASS (a) M_col = 2: 第 3 行 = 第 4 行
+PASS (a) M_col = 2: 第 4 行 = 第 5 行
+PASS (a) M_col = 2: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 3: 第 1 行 = 第 2 行
+PASS (a) M_col = 3: 第 2 行 = 第 3 行
+PASS (a) M_col = 3: 第 3 行 = 第 4 行
+PASS (a) M_col = 3: 第 4 行 = 第 5 行
+PASS (a) M_col = 3: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 4: 第 1 行 = 第 2 行
+PASS (a) M_col = 4: 第 2 行 = 第 3 行
+PASS (a) M_col = 4: 第 3 行 = 第 4 行
+PASS (a) M_col = 4: 第 4 行 = 第 5 行
+PASS (a) M_col = 4: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 5: 第 1 行 = 第 2 行
+PASS (a) M_col = 5: 第 2 行 = 第 3 行
+PASS (a) M_col = 5: 第 3 行 = 第 4 行
+PASS (a) M_col = 5: 第 4 行 = 第 5 行
+PASS (a) M_col = 5: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 6: 第 1 行 = 第 2 行
+PASS (a) M_col = 6: 第 2 行 = 第 3 行
+PASS (a) M_col = 6: 第 3 行 = 第 4 行
+PASS (a) M_col = 6: 第 4 行 = 第 5 行
+PASS (a) M_col = 6: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 7: 第 1 行 = 第 2 行
+PASS (a) M_col = 7: 第 2 行 = 第 3 行
+PASS (a) M_col = 7: 第 3 行 = 第 4 行
+PASS (a) M_col = 7: 第 4 行 = 第 5 行
+PASS (a) M_col = 7: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (a) M_col = 8: 第 1 行 = 第 2 行
+PASS (a) M_col = 8: 第 2 行 = 第 3 行
+PASS (a) M_col = 8: 第 3 行 = 第 4 行
+PASS (a) M_col = 8: 第 4 行 = 第 5 行
+PASS (a) M_col = 8: √ の中 ι(M_col) ≥ 1 ≥ 0、√ の値 ≥ 0
+PASS (b) 一般の点で ℓ = s s ≠ 0、2_C ℓ ≠ 0、q ≠ 0
+PASS (c) 1+1=2 の鎖 第 1 行 = 第 2 行
+PASS (c) 1+1=2 の鎖 第 2 行 = 第 3 行
+PASS (c) 1+1=2 の鎖 第 3 行 = 第 4 行
+PASS (c) 1+1=2 の鎖 第 4 行 = 第 5 行
+PASS (d) d u の鎖 第 1 行 = 第 2 行
+PASS (d) d u の鎖 第 2 行 = 第 3 行
+PASS (d) d u の鎖 第 3 行 = 第 4 行
+PASS (d) d u の鎖 第 4 行 = 第 5 行
+PASS (d) d u の鎖 第 5 行 = 第 6 行
+PASS (d) d u の鎖 第 6 行 = 第 7 行
+PASS (d) d u の鎖 第 7 行 = 第 8 行
+PASS (d) d u の鎖 第 8 行 = 第 9 行
+PASS (d) d u の鎖 第 9 行 = 第 10 行
+PASS (d) d u の鎖 第 10 行 = 第 11 行
+PASS (d) d u の鎖 第 11 行 = 第 12 行
+PASS (d) d u の鎖 第 12 行 = 第 13 行
+PASS (d) の鎖は 12 行
+PASS Step 3 の det の鎖 第 1 行 = 第 2 行
+PASS Step 3 の det の鎖 第 2 行 = 第 3 行
+PASS Step 3 の det の鎖 第 3 行 = 第 4 行
+PASS Step 3 の det の鎖 第 4 行 = 第 5 行
+PASS Step 3 の det の鎖 第 5 行 = 第 6 行
+PASS Step 3 の det の鎖 第 6 行 = 第 7 行
+PASS Step 3 の det の鎖 第 7 行 = 第 8 行
+PASS Step 3 の det の鎖 第 8 行 = 第 9 行
+PASS Step 3 の det の鎖 第 9 行 = 第 10 行
+PASS Step 3 の det の鎖 第 10 行 = 第 11 行
+PASS Step 3 の det の鎖 第 11 行 = 第 12 行
+PASS Step 3 の det の鎖 第 12 行 = 第 13 行
+PASS Step 3 の det の鎖 第 13 行 = 第 14 行
+PASS Step 3 の det の鎖 第 14 行 = 第 15 行
+PASS Step 3 の det の鎖 第 15 行 = 第 16 行
+PASS Step 3 の det の鎖 第 16 行 = 第 17 行
+PASS Step 3 の det の鎖 第 17 行 = 第 18 行
+PASS Step 3 の det の鎖 第 18 行 = 第 19 行
+PASS Step 3 の det の鎖 第 19 行 = 第 20 行
+PASS Step 3 の det の鎖 第 20 行 = 第 21 行
+PASS Step 3 の det の鎖 第 21 行 = 第 22 行
+PASS Step 3 の det の鎖 第 22 行 = 第 23 行
+PASS Step 3 の det の鎖 第 23 行 = 第 24 行
+PASS Step 3 の det の鎖 第 24 行 = 第 25 行
+PASS Step 3 の det の鎖 第 25 行 = 第 26 行
+PASS Step 3 の det の鎖 第 26 行 = 第 27 行
+PASS Step 3 の det の鎖 第 27 行 = 第 28 行
+PASS Step 3 の det の鎖 第 28 行 = 第 29 行
+PASS Step 3 の det の鎖 第 29 行 = 第 30 行
+PASS Step 3 の鎖は 29 行（先頭は det の定義の形）
+PASS 否定の対照: det は (-ρ)/(4 ℓ b) ではない
+PASS 否定の対照: det は ρ/q ではない（符号）
+PASS 否定の対照: d u は q ではない（2_C が残る）
+PASS M_col = 2, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 2, a = 4*I0 + 3
+PASS M_col = 2, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 2, a = 12*I0 + 5
+PASS M_col = 2, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 2, a = 1
+PASS M_col = 2, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 2, a = -2*I0
+PASS M_col = 2, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 2, a = 6*I0 - 8
+PASS M_col = 3, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 3, a = 4*I0 + 3
+PASS M_col = 3, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 3, a = 12*I0 + 5
+PASS M_col = 3, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 3, a = 1
+PASS M_col = 3, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 3, a = -2*I0
+PASS M_col = 3, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 3, a = 6*I0 - 8
+PASS M_col = 4, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 4, a = 4*I0 + 3
+PASS M_col = 4, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 4, a = 12*I0 + 5
+PASS M_col = 4, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 4, a = 1
+PASS M_col = 4, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 4, a = -2*I0
+PASS M_col = 4, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 4, a = 6*I0 - 8
+PASS M_col = 5, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 5, a = 4*I0 + 3
+PASS M_col = 5, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 5, a = 12*I0 + 5
+PASS M_col = 5, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 5, a = 1
+PASS M_col = 5, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 5, a = -2*I0
+PASS M_col = 5, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 5, a = 6*I0 - 8
+PASS M_col = 6, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 6, a = 4*I0 + 3
+PASS M_col = 6, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 6, a = 12*I0 + 5
+PASS M_col = 6, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 6, a = 1
+PASS M_col = 6, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 6, a = -2*I0
+PASS M_col = 6, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 6, a = 6*I0 - 8
+PASS M_col = 7, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 7, a = 4*I0 + 3
+PASS M_col = 7, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 7, a = 12*I0 + 5
+PASS M_col = 7, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 7, a = 1
+PASS M_col = 7, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 7, a = -2*I0
+PASS M_col = 7, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 7, a = 6*I0 - 8
+PASS M_col = 8, a = 4*I0 + 3: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 8, a = 4*I0 + 3
+PASS M_col = 8, a = 12*I0 + 5: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 8, a = 12*I0 + 5
+PASS M_col = 8, a = 1: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 8, a = 1
+PASS M_col = 8, a = -2*I0: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 8, a = -2*I0
+PASS M_col = 8, a = 6*I0 - 8: r = |a| = |b| > 0
+PASS det ≠ 0: M_col = 8, a = 6*I0 - 8
+PASS -1_C = (-1, 0) の第 1 成分 -1 ≠ 0
+-- diagonalization_check_P_D の Step 1・Step 3 の鎖: 160/160 PASS
+RESULT: PASS

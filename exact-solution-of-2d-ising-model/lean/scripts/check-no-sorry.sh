@@ -2109,6 +2109,14 @@ targets=(
   Ising2D.checkC_mul_b
   Ising2D.checkPmat_col_pos
   Ising2D.checkPmat_col_neg
+  Ising2D.checkC_eq_inv
+  Ising2D.checkC_ne_zero
+  Ising2D.sqrtM_mul_sqrtM
+  Ising2D.checkM_ne_zero
+  Ising2D.checkW_ne_zero
+  Ising2D.one_add_one_eq_two_complex
+  Ising2D.checkD_mul_checkU
+  Ising2D.det_checkPmat_eq_mul_inv
   Ising2D.det_checkPmat
   Ising2D.det_checkPmat_ne_zero
   Ising2D.AMat_mul_checkPmat

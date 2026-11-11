@@ -3704,8 +3704,18 @@ A(\theta)(cv)
         "（",
         math(String.raw`\sqrt{M_{\mathrm{col}}} \in \mathbb{R}`),
         " は ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}}) \in \mathbb{R}_{\geq 0}`),
+        "（",
+        ref("inclusion_zz_to_rr"),
+        "。",
+        ref("inclusion_zz_to_rr_of_positive_is_at_least_one"),
+        " より ",
+        math(String.raw`\geq 1`),
+        "）の ",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根（",
         ref("sqrt_nonnegative_existence_uniqueness"),
-        " の平方根、",
+        "）、",
         math(String.raw`x_{\mathbb{C}}`),
         " は ",
         ref("inclusion_rr_to_cc"),
@@ -3736,7 +3746,21 @@ A(\theta)(cv)
 A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
       ),
       paragraph([
-        "が成り立つ。",
+        "が成り立つ。行列式の右辺の分数も ",
+        ref("def_complex_quotient"),
+        " の商で、分母の ",
+        math(String.raw`2M_{\mathrm{col}}\,\gamma_2(-\tilde\theta_\mu)`),
+        " は ",
+        math(String.raw`\bigl(2_{\mathbb{C}}\,\ell\bigr)\,\gamma_2(-\tilde\theta_\mu)`),
+        "（",
+        math(String.raw`\ell := \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\bigr)_{\mathbb{C}} \in \mathbb{C}`),
+        "）、分子は ",
+        math(String.raw`-\left(\left|\gamma_2(\tilde\theta_\mu)\right|_{\mathbb{C}}\right)`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）である。この分母が ",
+        math(String.raw`\mathbb{C}^{\times}`),
+        " に属することは証明の Step 3 で示す。",
       ]),
     ],
     proof: [
@@ -3816,19 +3840,26 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         "、",
         math(String.raw`1_{\mathbb{C}}/u`),
         " はすべて定まる。",
-        math(String.raw`c = 1_{\mathbb{C}}\,d^{-1}`),
-        "（",
-        ref("def_complex_quotient"),
-        "）",
-        math(String.raw`= d^{-1}`),
-        "（",
-        ref("complex_numbers_form_a_field"),
-        " の積の単位元）は ",
+        math(String.raw`c`),
+        " は次の鎖で ",
         ref("multiplicative_group_of_cc"),
-        " の逆元なので ",
+        " の逆元 ",
+        math(String.raw`d^{-1} \in \mathbb{C}^{\times}`),
+        " に等しいので、",
         math(String.raw`c \in \mathbb{C}^{\times}`),
         " である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c
+&= \frac{1_{\mathbb{C}}}{d}
+   &&(\because\ c\ \text{の定義})\\
+&= 1_{\mathbb{C}}\,d^{-1}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to 1_{\mathbb{C}},\ w \to d)\bigr)\\
+&= d^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（2 つの列が固有ベクトルであること）。",
         ref("eigenvector_of_A_theta_tilde"),
@@ -3843,12 +3874,18 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         " は ",
         ref("multiply_by_minus_one"),
         "）であり、",
-        math(String.raw`c(\mp r_{\mathbb{C}},\ b)^{\mathsf{T}}`),
+        math(String.raw`c(\mp r_{\mathbb{C}},\ b)^{\mathsf{T}} \in \mathrm{Mat}(2,1,\mathbb{C})`),
         " の成分は ",
         math(String.raw`c(\mp r_{\mathbb{C}})`),
         "・",
         math(String.raw`cb`),
-        " である。第 1 成分は、",
+        " である（",
+        ref("def_matrix_scalar_multiple"),
+        " の ",
+        math(String.raw`(aA)_{ij} := a\,A_{ij}`),
+        " を ",
+        math(String.raw`m \to 2,\ n \to 1,\ a \to c`),
+        " で）。第 1 成分は、",
         math(String.raw`x \in \mathbb{C}`),
         " についての次の鎖を ",
         math(String.raw`x \to -r_{\mathbb{C}}`),
@@ -3926,39 +3963,209 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
       paragraph([
         "Step 3（",
         math(String.raw`\det\check{P}_\mu`),
-        "）。",
+        "）。記号 ",
+        math(String.raw`\rho := r_{\mathbb{C}} \in \mathbb{C}`),
+        "、",
+        math(String.raw`\ell := \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\bigr)_{\mathbb{C}} \in \mathbb{C}`),
+        "、",
+        math(String.raw`q := \bigl(2_{\mathbb{C}}\,\ell\bigr)\,b \in \mathbb{C}`),
+        " を置く。statement の行列式の右辺の分子は ",
+        math(String.raw`-\rho`),
+        "、分母は ",
+        math(String.raw`q`),
+        " である。先に次の 4 つを作る。",
+      ]),
+      paragraph([
+        "(a) ",
+        math(String.raw`s\,s = \ell`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s\,s
+&= \bigl(\sqrt{M_{\mathrm{col}}}\bigr)_{\mathbb{C}}\bigl(\sqrt{M_{\mathrm{col}}}\bigr)_{\mathbb{C}}
+   &&(\because\ s\ \text{の定義})\\
+&= \bigl(\sqrt{M_{\mathrm{col}}}\,\sqrt{M_{\mathrm{col}}}\bigr)_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \sqrt{M_{\mathrm{col}}},\ b \to \sqrt{M_{\mathrm{col}}})\bigr)\\
+&= \Bigl(\bigl(\sqrt{M_{\mathrm{col}}}\bigr)^2\Bigr)_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \sqrt{M_{\mathrm{col}}})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})\bigr)_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ (x \to \iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}}))\ \text{の}\ y^2 = x\bigr)\\
+&= \ell
+   &&(\because\ \ell\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(b) ",
+        math(String.raw`\ell,\ 2_{\mathbb{C}}\,\ell,\ q \in \mathbb{C}^{\times}`),
+        "。Step 1 の ",
+        math(String.raw`s,\ 2_{\mathbb{C}},\ b \in \mathbb{C}^{\times}`),
+        " と ",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`s\,s \in \mathbb{C}^{\times}`),
+        "、(a) より ",
+        math(String.raw`\ell = s\,s \in \mathbb{C}^{\times}`),
+        "、同じ群の積で ",
+        math(String.raw`2_{\mathbb{C}}\,\ell \in \mathbb{C}^{\times}`),
+        "、",
+        math(String.raw`q = \bigl(2_{\mathbb{C}}\,\ell\bigr)\,b \in \mathbb{C}^{\times}`),
+        "。",
+      ]),
+      paragraph([
+        "(c) ",
+        math(String.raw`1_{\mathbb{C}} + 1_{\mathbb{C}} = 2_{\mathbb{C}}`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}} + 1_{\mathbb{C}}
+&= (1)_{\mathbb{C}} + (1)_{\mathbb{C}}
+   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = (1)_{\mathbb{C}}\ \text{を 2 か所へ})\\
+&= (1 + 1)_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
+&= (2)_{\mathbb{C}}
+   &&(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2)\\
+&= 2_{\mathbb{C}}
+   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(d) ",
+        math(String.raw`d\,u = 2_{\mathbb{C}}\,q`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+d\,u
+&= (u\,b)\,u
+   &&(\because\ d\ \text{の定義})\\
+&= u\,(b\,u)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= u\,(u\,b)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (u\,u)\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((2_{\mathbb{C}}\,s)(2_{\mathbb{C}}\,s)\bigr)\,b
+   &&(\because\ u\ \text{の定義を 2 か所へ})\\
+&= \Bigl(2_{\mathbb{C}}\bigl(s\,(2_{\mathbb{C}}\,s)\bigr)\Bigr)\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \Bigl(2_{\mathbb{C}}\bigl((s\,2_{\mathbb{C}})\,s\bigr)\Bigr)\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \Bigl(2_{\mathbb{C}}\bigl((2_{\mathbb{C}}\,s)\,s\bigr)\Bigr)\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \Bigl(2_{\mathbb{C}}\bigl(2_{\mathbb{C}}\,(s\,s)\bigr)\Bigr)\,b
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(2_{\mathbb{C}}\,(2_{\mathbb{C}}\,\ell)\bigr)\,b
+   &&(\because\ \text{(a)})\\
+&= 2_{\mathbb{C}}\bigl((2_{\mathbb{C}}\,\ell)\,b\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= 2_{\mathbb{C}}\,q
+   &&(\because\ q\ \text{の定義を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
         ref("def_det_two_by_two"),
-        " より",
+        " から始めて、",
+        math(String.raw`\check{P}_\mu`),
+        " の成分 ",
+        math(String.raw`\check{P}_{11} = (-\rho)/d`),
+        "、",
+        math(String.raw`\check{P}_{12} = \rho/d`),
+        "、",
+        math(String.raw`\check{P}_{21} = \check{P}_{22} = 1_{\mathbb{C}}/u`),
+        " について次の鎖を得る。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \det\check{P}_\mu
-&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
- - \frac{+r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
-   \quad (\because \blkref{def_det_two_by_two}) \\
-&= \frac{-r}{4M_{\mathrm{col}}\,b} - \frac{+r}{4M_{\mathrm{col}}\,b}
-   \quad \left(\because \left(2\sqrt{M_{\mathrm{col}}}\right)^2 = 4M_{\mathrm{col}}\right) \\
-&= \frac{-r}{4M_{\mathrm{col}}\,b} + \frac{-r}{4M_{\mathrm{col}}\,b}
-   \quad (\because -\tfrac{+r}{4M_{\mathrm{col}}\,b}=\tfrac{-r}{4M_{\mathrm{col}}\,b}\text{。}\mathbb{C}\text{ の四則}) \\
-&= 2\cdot\frac{-r}{4M_{\mathrm{col}}\,b}
-   \quad (\because \text{同類項の統合}) \\
-&= \frac{-r}{2M_{\mathrm{col}}\,b}
-   \quad (\because 2M_{\mathrm{col}}\ne0\text{ と }\mathbb{C}\text{ の四則})
+&= \frac{-\rho}{d}\,\frac{1_{\mathbb{C}}}{u} - \frac{\rho}{d}\,\frac{1_{\mathbb{C}}}{u}
+   &&\bigl(\because\ \blkref{def_det_two_by_two}\ (B \to \check{P}_\mu)\bigr)\\
+&= \bigl((-\rho)\,d^{-1}\bigr)\bigl(1_{\mathbb{C}}\,u^{-1}\bigr) - \bigl(\rho\,d^{-1}\bigr)\bigl(1_{\mathbb{C}}\,u^{-1}\bigr)
+   &&(\because\ \blkref{def_complex_quotient}\ \text{を 4 か所へ})\\
+&= \bigl((-\rho)\,d^{-1}\bigr)\,u^{-1} - \bigl(\rho\,d^{-1}\bigr)\,u^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 か所へ})\\
+&= (-\rho)\bigl(d^{-1}u^{-1}\bigr) - \rho\bigl(d^{-1}u^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を 2 か所へ})\\
+&= (-\rho)\bigl(d^{-1}u^{-1}\bigr) + \Bigl(-\bigl(\rho\,(d^{-1}u^{-1})\bigr)\Bigr)
+   &&(\because\ \blkref{def_complex_difference})\\
+&= (-\rho)\bigl(d^{-1}u^{-1}\bigr) + (-1_{\mathbb{C}})\bigl(\rho\,(d^{-1}u^{-1})\bigr)
+   &&(\because\ \blkref{multiply_by_minus_one})\\
+&= (-\rho)\bigl(d^{-1}u^{-1}\bigr) + \bigl((-1_{\mathbb{C}})\,\rho\bigr)\bigl(d^{-1}u^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= (-\rho)\bigl(d^{-1}u^{-1}\bigr) + (-\rho)\bigl(d^{-1}u^{-1}\bigr)
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
+&= 1_{\mathbb{C}}\Bigl((-\rho)\bigl(d^{-1}u^{-1}\bigr)\Bigr) + 1_{\mathbb{C}}\Bigl((-\rho)\bigl(d^{-1}u^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ 2 か所へ})\\
+&= \bigl(1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\Bigl((-\rho)\bigl(d^{-1}u^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= 2_{\mathbb{C}}\Bigl((-\rho)\bigl(d^{-1}u^{-1}\bigr)\Bigr)
+   &&(\because\ \text{(c)})\\
+&= \bigl(2_{\mathbb{C}}\,(-\rho)\bigr)\bigl(d^{-1}u^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((-\rho)\,2_{\mathbb{C}}\bigr)\bigl(d^{-1}u^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-\rho)\Bigl(2_{\mathbb{C}}\bigl(d^{-1}u^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-\rho)\Bigl(1_{\mathbb{C}}\Bigl(2_{\mathbb{C}}\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= (-\rho)\Bigl(\bigl(q^{-1}q\bigr)\Bigl(2_{\mathbb{C}}\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (q \in \mathbb{C}^{\times}\text{。(b)})\ \text{を右辺から左辺へ}\bigr)\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(q\Bigl(2_{\mathbb{C}}\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(\bigl(q\,2_{\mathbb{C}}\bigr)\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(\bigl(2_{\mathbb{C}}\,q\bigr)\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(\bigl(d\,u\bigr)\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)
+   &&(\because\ \text{(d) を右辺から左辺へ})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(d\Bigl(u\bigl(d^{-1}u^{-1}\bigr)\Bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(d\Bigl(\bigl(u\,d^{-1}\bigr)u^{-1}\Bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(d\Bigl(\bigl(d^{-1}u\bigr)u^{-1}\Bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(d\Bigl(d^{-1}\bigl(u\,u^{-1}\bigr)\Bigr)\Bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-\rho)\Bigl(q^{-1}\Bigl(d\bigl(d^{-1}\,1_{\mathbb{C}}\bigr)\Bigr)\Bigr)
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (u \in \mathbb{C}^{\times})\bigr)\\
+&= (-\rho)\Bigl(q^{-1}\bigl(d\,d^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= (-\rho)\bigl(q^{-1}\,1_{\mathbb{C}}\bigr)
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (d \in \mathbb{C}^{\times})\bigr)\\
+&= (-\rho)\,q^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \frac{-\rho}{q}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to -\rho,\ w \to q)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`r > 0`),
-        "、",
-        math(String.raw`2M_{\mathrm{col}} \neq 0`),
-        "、",
-        math(String.raw`b \neq 0`),
-        " と ",
-        math(String.raw`\mathbb{C}`),
-        " が零因子を持たないこと（",
-        ref("complex_numbers_form_a_field"),
-        "）から ",
+        ref("relation_of_gamma_2_theta_tilde"),
+        " (4) の ",
+        math(String.raw`r = \left|\gamma_2(\tilde\theta_\mu)\right| > 0`),
+        " より ",
+        math(String.raw`\rho = (r,0) \neq (0,0)`),
+        "、また ",
+        math(String.raw`-1_{\mathbb{C}} = (-1,0) \neq (0,0)`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。どちらも第 1 成分が ",
+        math(String.raw`0`),
+        " でない）。よって ",
+        math(String.raw`\rho,\ -1_{\mathbb{C}} \in \mathbb{C}^{\times}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`-\rho = (-1_{\mathbb{C}})\,\rho \in \mathbb{C}^{\times}`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）、同じ群の逆元で ",
+        math(String.raw`q^{-1} \in \mathbb{C}^{\times}`),
+        "（(b)）、群の積で ",
+        math(String.raw`\det\check{P}_\mu = (-\rho)\,q^{-1} \in \mathbb{C}^{\times}`),
+        "（上の鎖の最後から 2 行目）。すなわち ",
         math(String.raw`\det\check{P}_\mu \neq 0_{\mathbb{C}}`),
-        "。",
+        " である。",
       ]),
       paragraph([
         "Step 4（対角化）。",
@@ -3996,6 +4203,9 @@ A(\tilde\theta_\mu)
         "2026-11-11（Lean の通しの証明）: statement に、c と P̌_μ の成分の分数が def_complex_quotient の商で、分母が (2_C (√M_col)_C) γ_2(−θ~_μ)・2_C (√M_col)_C、分子が −|γ_2|_C・|γ_2|_C・1_C であることを書いた。" +
           "証明の前置きに s・u・d を置き、Step 1 の「分母 ≠ 0」を inclusion_rr_to_cc の成分の比較と multiplicative_group_of_cc の群の積で示し、Step 2 の第 1 成分 c(∓r_C) = (∓r_C)/d を 5 行の鎖で、" +
           "第 2 成分の「b ≠ 0 と C の四則」の 1 行を z w^{-1} に開いた 13 行の鎖 c b = 1_C/u にした（体の公理と逆元を 1 行に 1 つずつ）。Step 3 は変えていない。値と主張は不変。",
+        "2026-11-11（Lean の通しの証明、続き）: statement に、行列式の右辺の分数が def_complex_quotient の商で、分母が (2_C ℓ) γ_2(−θ~_μ)（ℓ := (ι_{Z→R}(M_col))_C）、分子が −|γ_2|_C であることと、√M_col の根号の中が ι_{Z→R}(M_col) であることを書いた。" +
+          "Step 3 の「(2√M)^2 = 4M」「C の四則」「同類項の統合」「2M ≠ 0 と C の四則」の 5 行を、前置き (a) s s = ℓ（5 行）・(b) ℓ, 2_C ℓ, q ∈ C^×・(c) 1_C + 1_C = 2_C（4 行）・(d) d u = 2_C q（12 行）と、det P̌_μ = (−ρ)/q の 29 行の鎖（商・差の定義・multiply_by_minus_one・体の公理・逆元を 1 行に 1 つずつ）にし、det ≠ 0 を零因子の無さから群の積に替えた。" +
+          "Step 1 の c = 1_C d^{-1} = d^{-1} を整列した鎖にし、Step 2 の列ベクトルのスカラー倍の成分に def_matrix_scalar_multiple を引いた。値と主張は不変。",
       ],
     },
   },
