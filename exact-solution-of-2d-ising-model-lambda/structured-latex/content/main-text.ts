@@ -78335,6 +78335,13 @@ const chapter_kac_ward_pfaffian_torus_formula = defineSection({
                     title: { text: "巻き付き二次符号の積と交差形式" },
                     labels: ["claim_torus_quadratic_sign_polarization"],
                     habitat: "Z",
+                    lean: [
+                      "Ising2DLambda.KacWard.torusQuadraticParity_polarization",
+                      "Ising2DLambda.KacWard.torusQuadraticSign_polarization",
+                      "Ising2DLambda.NecSuf.KacWard.quadraticForm_polarization_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.quadraticSign_polarization_necSuf",
+                      "Ising2DLambda.KacWard.torusQuadraticSign_polarization_from_necSuf",
+                    ],
                     verification: ["sagemath/check/torus-quadratic-sign-polarization"],
                     statement: [
                       paragraph([
