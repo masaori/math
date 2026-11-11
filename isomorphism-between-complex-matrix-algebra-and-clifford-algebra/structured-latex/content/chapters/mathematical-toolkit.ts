@@ -12473,4 +12473,254 @@ P_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_definition_construction_of_k_fold_tensor_product",
+    kind: "definition",
+    title: { text: "基底の座標による k 重テンソル積の構成" },
+    labels: ["def_construction_of_k_fold_tensor_product"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の基底（",
+        ref("def_basis"),
+        "）、",
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " とする。",
+        math(String.raw`X:=X_{n,k}=\{1,\dots,n\}^{\{1,\dots,k\}}`),
+        "（",
+        ref("def_base_n_numbering_of_maps"),
+        "）と置き、",
+        math(String.raw`T:=\mathbb{C}^X`),
+        " を各点ごとの演算による ℂ-線型空間（",
+        ref("def_complex_valued_maps_on_set"),
+        "、",
+        ref("claim_complex_valued_maps_on_set_form_complex_vector_space"),
+        "）とする。",
+      ]),
+      paragraph([
+        "写像 ",
+        math(String.raw`\tau:V^{\{1,\dots,k\}}\to T`),
+        "（",
+        math(String.raw`V^{\{1,\dots,k\}}`),
+        " は ",
+        ref("def_k_multilinear_map"),
+        " の組の集合）を、",
+        math(String.raw`v\in V^{\{1,\dots,k\}}`),
+        " と ",
+        math(String.raw`x\in X`),
+        " について、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の積（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）で次のように定める。",
+      ]),
+      displayMath(String.raw`\tau(v)(x):=\prod_{\mathbb{C},\,r=1}^{k}\beta^{b}_{x(r)}\bigl(v(r)\bigr)`),
+      paragraph([
+        "ここで ",
+        math(String.raw`\beta^{b}_{i}:V\to\mathbb{C}`),
+        "（",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        "）は基底 ",
+        math(String.raw`b`),
+        " についての第 ",
+        math(String.raw`i`),
+        " 座標の写像（",
+        ref("claim_coordinate_map_is_linear_form"),
+        "）である。",
+        math(String.raw`k\ge 1`),
+        " で ",
+        math(String.raw`x\in X`),
+        " があれば ",
+        math(String.raw`x(1)\in\{1,\dots,n\}`),
+        " なので ",
+        math(String.raw`n\ge 1`),
+        " であり、座標の写像が定まる。",
+        math(String.raw`k=0`),
+        " のときは右辺は空の積 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " であり、座標の写像を使わない。右辺は ",
+        math(String.raw`x\in X`),
+        " ごとに ",
+        math(String.raw`\mathbb{C}`),
+        " の元を一つ定めるので、",
+        math(String.raw`\tau(v)`),
+        " は ",
+        math(String.raw`T`),
+        " の元として一つに決まる。",
+      ]),
+      paragraph([
+        "組 ",
+        math(String.raw`(T,\tau)`),
+        " を、基底 ",
+        math(String.raw`b`),
+        " の座標による ",
+        math(String.raw`V`),
+        " の ",
+        math(String.raw`k`),
+        " 重テンソル積の構成と呼び、",
+        math(String.raw`V^{\otimes_b k}:=T`),
+        "、",
+        math(String.raw`\tau_{b,k}:=\tau`),
+        " とも書く。",
+        math(String.raw`\tau`),
+        " が ",
+        math(String.raw`k`),
+        " 重線型写像であることと、",
+        math(String.raw`(T,\tau)`),
+        " が ",
+        math(String.raw`k`),
+        " 重テンソル積（",
+        ref("def_k_fold_tensor_product"),
+        "）であることは、この定義では主張しない。後の主張で示す。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_coordinate_product_map_is_k_multilinear",
+    kind: "claim",
+    title: { text: "基底の座標の積で定めた写像は k 重線型写像である" },
+    labels: ["claim_coordinate_product_map_is_k_multilinear"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`b`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`X`),
+        "、",
+        math(String.raw`T`),
+        "、",
+        math(String.raw`\tau`),
+        " を ",
+        ref("def_construction_of_k_fold_tensor_product"),
+        " のものとする。このとき ",
+        math(String.raw`\tau:V^{\{1,\dots,k\}}\to T`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`T`),
+        " への ",
+        math(String.raw`k`),
+        " 重線型写像（",
+        ref("def_k_multilinear_map"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k=0`),
+        " のときは条件が無い（",
+        ref("def_k_multilinear_map"),
+        "）。",
+        math(String.raw`k\ge 1`),
+        " とし、",
+        math(String.raw`v\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,k\}`),
+        "、",
+        math(String.raw`y,z\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る。",
+        math(String.raw`T`),
+        " の元の等しさは各 ",
+        math(String.raw`x\in X`),
+        " での値の等しさなので（",
+        ref("def_complex_valued_maps_on_set"),
+        "）、",
+        math(String.raw`x\in X`),
+        " を任意に取る。",
+        math(String.raw`s\in\{1,\dots,k\}`),
+        " について ",
+        math(String.raw`\mathbb{C}`),
+        " の元を次で置く。",
+      ]),
+      list([
+        [math(String.raw`\alpha_s:=\beta^{b}_{x(s)}\bigl(v[r\mapsto y+_V z](s)\bigr)`)],
+        [math(String.raw`\alpha'_s:=\beta^{b}_{x(s)}\bigl(v[r\mapsto y](s)\bigr)`)],
+        [math(String.raw`\alpha''_s:=\beta^{b}_{x(s)}\bigl(v[r\mapsto z](s)\bigr)`)],
+        [math(String.raw`\gamma_s:=\beta^{b}_{x(s)}\bigl(v[r\mapsto \lambda\cdot_V y](s)\bigr)`)],
+      ]),
+      paragraph([
+        math(String.raw`s\neq r`),
+        " のとき、四つの組の第 ",
+        math(String.raw`s`),
+        " 成分はどれも ",
+        math(String.raw`v(s)`),
+        " なので（",
+        ref("def_k_multilinear_map"),
+        "）、",
+        math(String.raw`\alpha_s=\alpha'_s=\alpha''_s=\gamma_s`),
+        " である。",
+        math(String.raw`s=r`),
+        " では次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_r
+&=\beta^{b}_{x(r)}(y+_V z)
+&&\left(\because\ v[r\mapsto y+_V z](r)=y+_V z\text{。}\blkref{def_k_multilinear_map}\right)\\
+&=\beta^{b}_{x(r)}(y)+_{\mathbb{C}}\beta^{b}_{x(r)}(z)
+&&\left(\because\ \beta^{b}_{x(r)}\ \text{は線型形式。}\blkref{claim_coordinate_map_is_linear_form}\text{、}\blkref{def_linear_form}\right)\\
+&=\alpha'_r+_{\mathbb{C}}\alpha''_r
+&&\left(\because\ \alpha'_r,\ \alpha''_r\ \text{の定義と}\ \blkref{def_k_multilinear_map}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_r
+&=\beta^{b}_{x(r)}(\lambda\cdot_V y)
+&&\left(\because\ v[r\mapsto \lambda\cdot_V y](r)=\lambda\cdot_V y\text{。}\blkref{def_k_multilinear_map}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\beta^{b}_{x(r)}(y)
+&&\left(\because\ \beta^{b}_{x(r)}\ \text{は線型形式。}\blkref{claim_coordinate_map_is_linear_form}\text{、}\blkref{def_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\alpha'_r
+&&\left(\because\ \alpha'_r\ \text{の定義と}\ \blkref{def_k_multilinear_map}\right).
+\end{aligned}`),
+      paragraph(["加法を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\tau\bigl(v[r\mapsto y+_V z]\bigr)(x)
+&=\prod_{\mathbb{C},\,s=1}^{k}\alpha_s
+&&\left(\because\ \tau\ \text{の定義。}\blkref{def_construction_of_k_fold_tensor_product}\right)\\
+&=\left(\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s\right)+_{\mathbb{C}}\left(\prod_{\mathbb{C},\,s=1}^{k}\alpha''_s\right)
+&&\left(\because\ \blkref{claim_ordered_product_is_additive_in_one_factor}\right)\\
+&=\tau\bigl(v[r\mapsto y]\bigr)(x)+_{\mathbb{C}}\tau\bigl(v[r\mapsto z]\bigr)(x)
+&&\left(\because\ \tau\ \text{の定義を二か所に適用。}\blkref{def_construction_of_k_fold_tensor_product}\right)\\
+&=\Bigl(\tau\bigl(v[r\mapsto y]\bigr)+_{T}\tau\bigl(v[r\mapsto z]\bigr)\Bigr)(x)
+&&\left(\because\ +_{T}=+_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\tau\bigl(v[r\mapsto \lambda\cdot_V y]\bigr)(x)
+&=\prod_{\mathbb{C},\,s=1}^{k}\gamma_s
+&&\left(\because\ \tau\ \text{の定義。}\blkref{def_construction_of_k_fold_tensor_product}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s
+&&\left(\because\ \blkref{claim_ordered_product_is_homogeneous_in_one_factor}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\tau\bigl(v[r\mapsto y]\bigr)(x)
+&&\left(\because\ \tau\ \text{の定義。}\blkref{def_construction_of_k_fold_tensor_product}\right)\\
+&=\Bigl(\lambda\cdot_{T}\tau\bigl(v[r\mapsto y]\bigr)\Bigr)(x)
+&&\left(\because\ \cdot_{T}=\cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x\in X`),
+        " は任意だったので、",
+        math(String.raw`T`),
+        " の元として二つの条件の等式が成り立ち（",
+        ref("def_complex_valued_maps_on_set"),
+        "）、",
+        math(String.raw`\tau`),
+        " は ",
+        math(String.raw`k`),
+        " 重線型写像である（",
+        ref("def_k_multilinear_map"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
