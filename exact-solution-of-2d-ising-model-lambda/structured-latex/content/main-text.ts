@@ -62599,9 +62599,12 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
                     habitat: "Z",
                     verification: ["sagemath/check/smoothing-straight-visit-count"],
                     lean: [
-                      "Ising2DLambda.KacWard.smoothing_split_turning_sum",
-                      "Ising2DLambda.NecSuf.KacWard.interval_split_sum_necSuf",
-                      "Ising2DLambda.KacWard.smoothing_split_turning_sum_from_necSuf",
+                      "Ising2DLambda.KacWard.smoothedSplitWalkA_cyclicTotalTurning",
+                      "Ising2DLambda.KacWard.smoothedSplitWalkB_cyclicTotalTurning",
+                      "Ising2DLambda.KacWard.smoothing_split_walk_turning_sum",
+                      "Ising2DLambda.NecSuf.KacWard.segment_cyclic_sum_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.split_cyclic_sum_necSuf",
+                      "Ising2DLambda.KacWard.smoothing_split_walk_turning_sum_from_necSuf",
                     ],
                     statement: [
                       paragraph([
