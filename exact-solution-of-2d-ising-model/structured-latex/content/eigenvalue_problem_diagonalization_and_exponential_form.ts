@@ -4310,17 +4310,49 @@ c\,b
         math(String.raw`v_{+,\mu}, v_{-,\mu}`),
         " はそれぞれ ",
         math(String.raw`\check{P}_\mu`),
-        " の第 1 列・第 2 列に一致する。行列の積を列ごとに見れば",
+        " の第 1 列・第 2 列に一致する。すなわち ",
+        ref("mat_columnwise"),
+        " の列に並べた行列の記法で ",
+        math(String.raw`\check{P}_\mu = \left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right]`),
+        " である（両辺の ",
+        math(String.raw`(j,k)`),
+        " 成分が上の 2 つの鎖で一致する）。また ",
+        math(String.raw`\check{D}_\mu`),
+        " は対角行列（",
+        ref("def_diagonal_matrix"),
+        "。非対角成分が ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "）で、対角成分は ",
+        math(String.raw`(\check{D}_\mu)_{11} = \lambda_{+,\mu}`),
+        "・",
+        math(String.raw`(\check{D}_\mu)_{22} = \lambda_{-,\mu}`),
+        " である（",
+        math(String.raw`\lambda_{\pm,\mu} \in \mathbb{R}`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の元として書くのは ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`(\lambda_{\pm,\mu})_{\mathbb{C}}`),
+        " である。鎖の ",
+        math(String.raw`\lambda_{\pm,\mu}v_{\pm,\mu}`),
+        " も同じ）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 A(\tilde\theta_\mu)\,\check{P}_\mu
-&= \left(A(\tilde\theta_\mu)v_{+,\mu}\ \ A(\tilde\theta_\mu)v_{-,\mu}\right)
-   \quad (\because \text{行列の積を列ごとに見た}) \\
-&= \left(\lambda_{+,\mu}v_{+,\mu}\ \ \lambda_{-,\mu}v_{-,\mu}\right)
-   \quad (\because \blkref{eigenvector_of_A_theta_tilde}\text{ を 2 列へ同時適用}) \\
+&= A(\tilde\theta_\mu)\left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right]
+   &&(\because\ \check{P}_\mu = \left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right])\\
+&= \left[\,A(\tilde\theta_\mu)v_{+,\mu}\ \ A(\tilde\theta_\mu)v_{-,\mu}\,\right]
+   &&\bigl(\because\ \blkref{mat_columnwise}\ (m, n, p \to 2,\ A \to A(\tilde\theta_\mu),\ b_1 \to v_{+,\mu},\ b_2 \to v_{-,\mu})\bigr)\\
+&= \left[\,\lambda_{+,\mu}v_{+,\mu}\ \ \lambda_{-,\mu}v_{-,\mu}\,\right]
+   &&(\because\ \blkref{eigenvector_of_A_theta_tilde}\ \text{を 2 列へ同時適用})\\
+&= \left[\,(\check{D}_\mu)_{11}\,v_{+,\mu}\ \ (\check{D}_\mu)_{22}\,v_{-,\mu}\,\right]
+   &&(\because\ \check{D}_\mu\ \text{の定義（statement）を右辺から左辺へ 2 か所へ同時適用})\\
+&= \left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right]\check{D}_\mu
+   &&\bigl(\because\ \blkref{column_matrix_times_diagonal_matrix_scales_columns}\ (n, p \to 2,\ b_1 \to v_{+,\mu},\ b_2 \to v_{-,\mu},\ D \to \check{D}_\mu)\ \text{を右辺から左辺へ}\bigr)\\
 &= \check{P}_\mu\,\check{D}_\mu
-   \quad (\because \check{D}_\mu = \mathrm{diag}(\lambda_{+,\mu}, \lambda_{-,\mu}) \text{ の右乗が列ごとのスカラー倍})
+   &&(\because\ \check{P}_\mu = \left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right]\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -4605,6 +4637,7 @@ A(\tilde\theta_\mu)
           "Step 4 の鎖の 1 行目の根拠「P̌P̌^{-1} = I と積の単位元」（2 つの事実）を identity_matrix_is_right_unit_of_mat_mult と def_invertible_elements_of_R の g g^{-1} = I の 2 行に割り、" +
           "2 行目の「行列の積の結合則」を mat_mult_associative の参照にし、最後の行「行列の積の結合則」（右辺の読み方であって結合則ではない）を消した（4 行の鎖）。値と主張は不変。",
         "2026-11-11（Lean の通しの証明、続き）: Step 4 冒頭の「det P̌_μ ≠ 0 より P̌_μ は可逆」の根拠が本文に無かったので、主張 two_sided_inverse_of_two_by_two_with_nonzero_det（det ≠ 0 なら (det)^{-1} adj が両側逆元）を足して引き、def_invertible_elements_of_R の可逆の定義と逆元の一意性で P̌_μ ∈ R^× と P̌_μ^{-1} = (det P̌_μ)^{-1} adj P̌_μ を出した。値と主張は不変。",
+        "2026-11-11（Lean の通しの証明、続き）: Step 2 の A P̌ = P̌ Ď の 3 行（根拠「行列の積を列ごとに見た」「Ď の右乗が列ごとのスカラー倍」がラベルを引いていなかった）を、P̌ = [v_+ v_-]（mat_columnwise の記法）と Ď が対角行列（def_diagonal_matrix）であることを前置きに書き、mat_columnwise・eigenvector_of_A_theta_tilde・新しく足した主張 column_matrix_times_diagonal_matrix_scales_columns を引く 6 行の鎖にした（λ_± を (Ď)_kk へ書き換える行を独立させた）。値と主張は不変。",
       ],
     },
   },

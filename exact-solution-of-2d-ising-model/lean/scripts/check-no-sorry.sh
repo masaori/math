@@ -1563,6 +1563,7 @@ targets=(
   Ising2D.NecSuf.skew2_mulVec_pos
   Ising2D.NecSuf.skew2_mulVec_neg
   Ising2D.NecSuf.mulVec_smul_of_mulVec_eq
+  Ising2D.NecSuf.skew2_diag_offdiag
   Ising2D.NecSuf.skew2_mul_of_cols
   Ising2D.NecSuf.eq_conj_of_mul_eq
   Ising2D.NecSuf.gamma_det_identity
@@ -1808,6 +1809,11 @@ targets=(
   Ising2D.matrix_mul_columns_of_necSuf
   Ising2D.mul_columns_tensorPow
   Ising2D.NecSuf.mul_cols_eq_cols_mulVec
+  Ising2D.column_entry_mul_offdiag_eq_zero
+  Ising2D.cols_mul_diagonal_matrix
+  Ising2D.cols_mul_diagonal_matrix_of_necSuf
+  Ising2D.NecSuf.col_entry_mul_offdiag_eq_zero
+  Ising2D.NecSuf.cols_mul_diagonal_eq_cols_smul
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow
@@ -2144,6 +2150,10 @@ targets=(
   Ising2D.det_checkPmat_eq_mul_inv
   Ising2D.det_checkPmat
   Ising2D.det_checkPmat_ne_zero
+  Ising2D.checkLambdas
+  Ising2D.checkPmat_eq_cols
+  Ising2D.checkDmat_offdiag
+  Ising2D.AMat_mulVec_checkCols
   Ising2D.AMat_mul_checkPmat
   Ising2D.adjTwo
   Ising2D.mul_two_apply

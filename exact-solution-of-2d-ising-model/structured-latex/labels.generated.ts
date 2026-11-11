@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "check_number_operator_is_hermitian",
   "check_number_operators_commute",
   "closed_form_log_integral",
+  "column_matrix_times_diagonal_matrix_scales_columns",
   "commutation_V_plus_check_psi",
   "commutator_of_H_and_check_Z_Y",
   "commutator_of_scalar_multiples",

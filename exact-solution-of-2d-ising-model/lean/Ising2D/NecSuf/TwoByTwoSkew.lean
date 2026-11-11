@@ -26,7 +26,9 @@
 * `eigenvector_of_A_theta_tilde` Step 2: 成分ごとの鎖 `AMat_mulVec_eigen_pos`・`AMat_mulVec_eigen_neg` ↔
   `skew2_mulVec_pos`・`skew2_mulVec_neg`、`c` 倍の鎖 `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg` ↔
   `mulVec_smul_of_mulVec_eq`。
-* `diagonalization_check_P_D` Step 2: 列ごとに見た `A P̌ = P̌ Ď` の `AMat_mul_checkPmat` ↔ `skew2_mul_of_cols`。
+* `diagonalization_check_P_D` Step 2: 前置きの `Ď` が対角行列であること `checkDmat_offdiag` ↔ `skew2_diag_offdiag`、
+  6 行の鎖 `AMat_mul_checkPmat` ↔ `skew2_mul_of_cols`（同じ 6 段。`P̌ = [v_+ v_-]` の `checkPmat_eq_cols` は列の仮定 `hcol0`・`hcol1` から
+  同じ形で作り、列ごとの作用は `NecSuf/MatColumnwise.lean`、対角行列の右乗は `NecSuf/ColumnMatrixTimesDiagonalMatrix.lean`）。
 * `diagonalization_check_P_D` Step 3: `det P̌_μ` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero` ↔ `det_of_cols`・`det_of_cols_ne_zero`
   （具体版は `c = 1/(2√M b)` を代入した成分で計算し、必要十分版は列を `c(∓s, b)` のまま計算する）。
 * `diagonalization_check_P_D` Step 4: `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` ↔ `eq_conj_of_mul_eq`。
@@ -61,6 +63,9 @@
   `b = -ā` は固有ベクトルであることの第 2 成分に効いていない。人手証明・具体版の第 2 成分も
   同じ 6 行（`b` のまま括り出す）である。
 
+対角化の Step 2 の前置き `skew2_diag_offdiag`（`diag(g+s, g-s)` の非対角成分が `0`）は、ファイル全体の `CommRing R` を受けているが、
+使うのは `0` があること（`Zero`）と行列の記法だけである。
+
 対角化 `A = P D P⁻¹` の Step 4 の鎖に効いているのは、`P` の右逆元 `Q`（`P Q = I`）があることと、
 積の単位元・結合律だけである（`eq_conj_of_mul_eq`。モノイドで述べる）。人手証明 `diagonalization_check_P_D` は
 Step 3 の `det P̌_μ ≠ 0` から `two_sided_inverse_of_two_by_two_with_nonzero_det` で逆元を構成しており、
@@ -72,6 +77,8 @@ import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.FinCases
 import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
 import Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
+import Ising2D.NecSuf.MatColumnwise
+import Ising2D.NecSuf.ColumnMatrixTimesDiagonalMatrix
 
 namespace Ising2D.NecSuf
 
@@ -249,30 +256,49 @@ theorem mulVec_smul_of_mulVec_eq {S : Type*} [CommSemiring S] {n : Type*} [Finty
     _ = c • (l • v) := by rw [h]                   -- `A v = l v` の代入
     _ = l • (c • v) := smul_comm _ _ _             -- 積の可換性とスカラー倍の結合
 
+/-- **対角化の Step 2 の前置き**（具体版 `checkDmat_offdiag`）: `diag(g+s, g-s)` は対角行列（非対角成分が `0`）。 -/
+theorem skew2_diag_offdiag (g s : R) :
+    ∀ k l, k ≠ l → (!![g + s, 0; 0, g - s] : Matrix (Fin 2) (Fin 2) R) k l = 0 := by
+  intro k l hkl
+  fin_cases k <;> fin_cases l
+  · exact absurd rfl hkl
+  · rfl
+  · rfl
+  · exact absurd rfl hkl
+
 /-- **対角化の Step 2**（具体版 `AMat_mul_checkPmat`）: `P` の列が `c(-s, b)` と `c(s, b)` なら
-`A P = P diag(g+s, g-s)`。列ごとに見て、Step 2 を 2 列へ同時適用する。 -/
+`A P = P diag(g+s, g-s)`。具体版と同じ 6 段: `P = [v_+ v_-]`、列ごとの作用（`mul_cols_eq_cols_mulVec`）、
+固有ベクトルの式を 2 列へ同時適用、`g ± s` を対角成分へ書き換え、対角行列の右乗（`cols_mul_diagonal_eq_cols_smul`）を右辺から左辺へ、`P = [v_+ v_-]` を戻す。 -/
 theorem skew2_mul_of_cols (g a b s c : R) (hab : a * b = -s ^ 2) {P : Matrix (Fin 2) (Fin 2) R}
     (hcol0 : (fun k => P k 0) = c • ![-s, b]) (hcol1 : (fun k => P k 1) = c • ![s, b]) :
     !![g, a; -b, g] * P = P * !![g + s, 0; 0, g - s] := by
-  -- 列 `j` の `A (c v_±) = (g ± s) (c v_±)`
-  have h0 : !![g, a; -b, g] *ᵥ (fun k => P k 0) = (g + s) • (fun k => P k 0) := by
-    rw [hcol0, mulVec_smul_of_mulVec_eq (skew2_mulVec_pos g a b s hab)]
-  have h1 : !![g, a; -b, g] *ᵥ (fun k => P k 1) = (g - s) • (fun k => P k 1) := by
-    rw [hcol1, mulVec_smul_of_mulVec_eq (skew2_mulVec_neg g a b s hab)]
-  ext i j
-  fin_cases j
-  · -- 第 1 列: `diag(g+s, g-s)` の右乗は第 1 列の `g + s` 倍
-    have h := congrFun h0 i
-    simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul] at h
-    show (!![g, a; -b, g] * P) i 0 = (P * !![g + s, 0; 0, g - s]) i 0
-    rw [Matrix.mul_apply, h]
-    simp [Matrix.mul_apply, Fin.sum_univ_two, mul_comm]
-  · -- 第 2 列: `diag(g+s, g-s)` の右乗は第 2 列の `g - s` 倍
-    have h := congrFun h1 i
-    simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul] at h
-    show (!![g, a; -b, g] * P) i 1 = (P * !![g + s, 0; 0, g - s]) i 1
-    rw [Matrix.mul_apply, h]
-    simp [Matrix.mul_apply, Fin.sum_univ_two, mul_comm]
+  set v : Fin 2 → Fin 2 → R := ![c • ![-s, b], c • ![s, b]] with hv
+  -- 前置き（具体版 `checkPmat_eq_cols`）: `P = [v_+ v_-]`
+  have hP : P = Matrix.of (fun j k => v k j) := by
+    ext j k
+    fin_cases k
+    · exact congrFun hcol0 j
+    · exact congrFun hcol1 j
+  -- 具体版 `AMat_mulVec_checkCols`: 列 `k` の `A (c v_±) = (g ± s) (c v_±)` を 2 列へ同時に当てる
+  have heig : Matrix.of (fun i k => (!![g, a; -b, g] *ᵥ v k) i)
+      = Matrix.of (fun i k => (![g + s, g - s] k • v k) i) := by
+    ext i k
+    fin_cases k
+    · exact congrFun (mulVec_smul_of_mulVec_eq (skew2_mulVec_pos g a b s hab) c) i
+    · exact congrFun (mulVec_smul_of_mulVec_eq (skew2_mulVec_neg g a b s hab) c) i
+  calc !![g, a; -b, g] * P
+      = !![g, a; -b, g] * Matrix.of (fun j k => v k j) := by rw [hP]      -- 1 段目: `P = [v_+ v_-]`
+    _ = Matrix.of (fun i k => (!![g, a; -b, g] *ᵥ v k) i) :=
+        mul_cols_eq_cols_mulVec _ _                                        -- 2 段目: 列ごとの作用
+    _ = Matrix.of (fun i k => (![g + s, g - s] k • v k) i) :=
+        heig                                                               -- 3 段目: 2 列へ同時適用
+    _ = Matrix.of (fun i k => ((!![g + s, 0; 0, g - s] : Matrix (Fin 2) (Fin 2) R) k k • v k) i) := by
+        ext i k
+        fin_cases k <;> rfl                                                -- 4 段目: 対角成分の書き換え
+    _ = Matrix.of (fun j k => v k j) * !![g + s, 0; 0, g - s] :=
+        (cols_mul_diagonal_eq_cols_smul _ _ (skew2_diag_offdiag g s) (fun x => mul_zero x) mul_comm).symm
+                                                                           -- 5 段目: 対角行列の右乗を右辺から左辺へ
+    _ = P * !![g + s, 0; 0, g - s] := by rw [hP]                          -- 6 段目: `P = [v_+ v_-]` を戻す
 
 /-- **対角化の Step 3**（具体版 `det_checkPmat`）: 列が `c(-s, b)` と `c(s, b)` の行列の行列式は `-2c^2 s b`。 -/
 theorem det_of_cols (s b c : R) {P : Matrix (Fin 2) (Fin 2) R}

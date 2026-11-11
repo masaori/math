@@ -189,6 +189,89 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
   },
 
   {
+    id: "transfer_matrix_claim_column_matrix_times_diagonal_matrix_scales_columns",
+    kind: "claim",
+    title: { text: "列に並べた行列に対角行列を右から掛けると、各列が対角成分倍になる" },
+    labels: ["column_matrix_times_diagonal_matrix_scales_columns"],
+    statement: [
+      paragraph([
+        math(String.raw`n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`b_1,\dots,b_p \in \mathbb{C}^n`),
+        "、",
+        math(String.raw`D \in \mathrm{Mat}(p,\mathbb{C})`),
+        " を対角行列（",
+        ref("def_diagonal_matrix"),
+        "）とする。",
+        math(String.raw`\left[\,b_1\ \cdots\ b_p\,\right] \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " は ",
+        ref("mat_columnwise"),
+        " の列に並べた行列（第 ",
+        math(String.raw`k`),
+        " 列の第 ",
+        math(String.raw`j`),
+        " 成分が ",
+        math(String.raw`(b_k)_j`),
+        "）、積は ",
+        ref("mat_mult"),
+        "、",
+        math(String.raw`D_{kk}\,b_k \in \mathbb{C}^n`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍である。このとき",
+      ]),
+      displayMath(String.raw`\left[\,b_1\ \cdots\ b_p\,\right] D
+= \left[\,D_{11}\,b_1\ \cdots\ D_{pp}\,b_p\,\right]`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(n,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。先に、",
+        math(String.raw`j \neq k`),
+        " である ",
+        math(String.raw`j \in \{1,\dots,p\}`),
+        " について次を作る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(b_j)_i\,D_{jk}
+&= (b_j)_i\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_diagonal_matrix}\ (n \to p,\ k \to j,\ l \to k)\ \text{の}\ j \neq k \Rightarrow D_{jk} = 0_{\mathbb{C}}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to (b_j)_i)\bigr)
+\end{aligned}`),
+      paragraph(["これを使って、"]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\left[\,b_1\ \cdots\ b_p\,\right] D\Bigr)_{ik}
+&= \sum_{j=1}^{p} \Bigl(\left[\,b_1\ \cdots\ b_p\,\right]\Bigr)_{ij}\,D_{jk}
+&&\bigl(\because\ \blkref{mat_mult}\ (m \to n,\ n \to p,\ p \to p,\ A \to \left[\,b_1\ \cdots\ b_p\,\right],\ B \to D)\ \text{の積の成分}\bigr)\\
+&= \sum_{j=1}^{p} (b_j)_i\,D_{jk}
+&&\bigl(\because\ \blkref{mat_columnwise}\ \text{の列に並べた行列の成分の定め方を各項へ}\bigr)\\
+&= (b_k)_i\,D_{kk}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to p,\ n \to k,\ z_j \to (b_j)_i\,D_{jk})\ \text{と上の}\ j \neq k\ \text{の項}\bigr)\\
+&= D_{kk}\,(b_k)_i
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \bigl(D_{kk}\,b_k\bigr)_i
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ (m \to n,\ n \to 1,\ a \to D_{kk},\ A \to b_k,\ (i, j) \to (i, 1))\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\left[\,D_{11}\,b_1\ \cdots\ D_{pp}\,b_p\,\right]\Bigr)_{ik}
+&&\bigl(\because\ \blkref{mat_columnwise}\ \text{の列に並べた行列の成分の定め方を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11: 原文（Typst）に対応ブロックは無い。diagonalization_check_P_D の Step 2 の最後の行が「Ď の右乗が列ごとのスカラー倍」を名前だけで根拠にしていたので、引けるように足した。",
+      ],
+    },
+  },
+
+  {
     id: "bridge_003_claim_exp_of_diagonal",
     kind: "claim",
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 5 },

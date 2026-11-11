@@ -557,3 +557,197 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 否定の対照 P̌^{-1} Ď P̌ �
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 否定の対照 A P̌ ≠ Ď P̌
 -- diagonalization_check_P_D の Step 4 の鎖: 185/185 PASS
 RESULT: PASS
+
+##### check_diagonalization_step2_column_chain.sage（2026-11-11 / 10.9 / Linux）
+PASS (a) 一般の点: 前置き P̌ = [v_+ v_-]
+PASS (a) 一般の点: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (a) 一般の点: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (a) 一般の点 の鎖 第 1 行 = 第 2 行
+PASS (a) 一般の点 の鎖 第 2 行 = 第 3 行
+PASS (a) 一般の点 の鎖 第 3 行 = 第 4 行
+PASS (a) 一般の点 の鎖 第 4 行 = 第 5 行
+PASS (a) 一般の点 の鎖 第 5 行 = 第 6 行
+PASS (a) 一般の点 の鎖 第 6 行 = 第 7 行
+PASS (a) 一般の点: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 前置き P̌ = [v_+ v_-]
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 前置き Ď は対角行列で (Ď)_11 = λ_+、(Ď)_22 = λ_-
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: eigenvector_of_A_theta_tilde（A v_± = λ_± v_±）
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 1 行 = 第 2 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 2 行 = 第 3 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 3 行 = 第 4 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 4 行 = 第 5 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 5 行 = 第 6 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 6 行 = 第 7 行
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 否定の対照 [v_- v_+] Ď ≠ A[v_- v_+]
+-- diagonalization_check_P_D の Step 2 の鎖: 190/190 PASS
+RESULT: PASS

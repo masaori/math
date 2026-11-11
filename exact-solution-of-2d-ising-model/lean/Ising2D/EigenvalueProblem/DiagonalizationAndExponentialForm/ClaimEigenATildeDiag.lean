@@ -47,8 +47,12 @@
   `P̌_μ`・`c` もこの `sqrtM` で書き、分数は `def_complex_quotient` の商（`div_eq_mul_inv` で開く）と読む。
 * `diagonalization_check_P_D` Step 2: 第 1 成分の 5 行の鎖 `checkC_mul`（`c x = x/d`）、第 2 成分の 13 行の鎖 `checkC_mul_b`
   （どちらも人手と 1 段ずつの `calc`）、列が `v_{±,μ}` に一致すること
-  `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、列ごとに見た `A P̌ = P̌ Ď` の
-  `AMat_mul_checkPmat`［`skew2_mul_of_cols`］。
+  `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、前置きの `P̌ = [v_+ v_-]`（`mat_columnwise` の記法）の
+  `checkPmat_eq_cols`［`skew2_mul_of_cols` の中の `hP`］と `Ď` が対角行列であることの `checkDmat_offdiag`［`skew2_diag_offdiag`］、
+  6 行の鎖 `A P̌ = A[v_+ v_-] = [Av_+ Av_-] = [λ_+v_+ λ_-v_-] = [Ď_{11}v_+ Ď_{22}v_-] = [v_+ v_-]Ď = P̌Ď` の
+  `AMat_mul_checkPmat`（1 段ずつの `calc`。2 行目は `ClaimMatColumnwise.lean` の `matrix_mul_columns`（`mat_columnwise`）、
+  3 行目は 2 列へ同時に当てた `AMat_mulVec_checkCols`［`skew2_mul_of_cols` の中の `heig`］、4 行目は `Ď` の定義の `rfl`、5 行目は `ClaimColumnMatrixTimesDiagonalMatrix.lean` の
+  `cols_mul_diagonal_matrix`（`column_matrix_times_diagonal_matrix_scales_columns`））［`skew2_mul_of_cols`。同じ 6 段］。
 * `diagonalization_check_P_D` Step 3: 前置き (a) `s s = ℓ` の `sqrtM_mul_sqrtM`（5 行）、(b) `ℓ, q ∈ ℂ^×` の
   `checkM_ne_zero`・`checkW_ne_zero`、(c) `1_ℂ + 1_ℂ = 2_ℂ` の `one_add_one_eq_two_complex`（4 行）、(d) `d u = 2_ℂ q` の
   `checkD_mul_checkU`（12 行）［置かない］。`det P̌` の 29 行の鎖は 28 行目までの `det_checkPmat_eq_mul_inv` と 29 行目の
@@ -72,6 +76,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTwoSidedInverseOfTwoByTwo
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatColumnwise
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimColumnMatrixTimesDiagonalMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 
@@ -433,28 +439,65 @@ theorem checkPmat_col_neg (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   · show (1 : ℂ) / (2 * sqrtM M) = checkC P.const M μ * gamma2 P.const (-thetaTilde M μ)
     rw [checkC_mul_b P hM μ]
 
-/-- **人手証明 Step 2**: `A(θ~_μ) P̌_μ = P̌_μ Ď_μ`（行列の積を列ごとに見て、
-`eigenvector_of_A_theta_tilde` を 2 列へ同時適用する）。 -/
+/-- 人手証明 Step 2 の `v_{+,μ}`・`v_{-,μ}` を並べた列の族（第 `k` 列が `v_{±,μ} = c(∓r, b)`）。 -/
+noncomputable def checkCols (K : IsingConst) (M : ℕ) (μ : ℤ) : Fin 2 → Fin 2 → ℂ :=
+  ![checkC K M μ • ![-((absGamma2 K (thetaTilde M μ) : ℝ) : ℂ), gamma2 K (-thetaTilde M μ)],
+    checkC K M μ • ![((absGamma2 K (thetaTilde M μ) : ℝ) : ℂ), gamma2 K (-thetaTilde M μ)]]
+
+/-- **人手証明 Step 2 の前置き**: `P̌_μ = [v_{+,μ} v_{-,μ}]`（`mat_columnwise` の列に並べた行列。両辺の `(j, k)` 成分は
+`checkPmat_col_pos`・`checkPmat_col_neg` で一致する）。 -/
+theorem checkPmat_eq_cols (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    checkPmat P.const M μ = Matrix.of (fun j k => checkCols P.const M μ k j) := by
+  ext j k
+  fin_cases k
+  · exact congrFun (checkPmat_col_pos P hM μ) j
+  · exact congrFun (checkPmat_col_neg P hM μ) j
+
+/-- **人手証明 Step 2 の前置き**: `Ď_μ` は対角行列（`def_diagonal_matrix`。非対角成分が `0`）。
+対角成分 `(Ď_μ)_{11} = λ_{+,μ}`・`(Ď_μ)_{22} = λ_{-,μ}` は `checkDmat` の定義そのもの（`rfl`）である。 -/
+theorem checkDmat_offdiag (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    ∀ k l, k ≠ l → checkDmat K M μ k l = 0 := by
+  intro k l hkl
+  fin_cases k <;> fin_cases l
+  · exact absurd rfl hkl
+  · rfl
+  · rfl
+  · exact absurd rfl hkl
+
+/-- 人手証明 Step 2 の `λ_{+,μ}`・`λ_{-,μ}` を並べた族（`(λ_{±,μ})_ℂ`）。 -/
+noncomputable def checkLambdas (K : IsingConst) (M : ℕ) (μ : ℤ) : Fin 2 → ℂ :=
+  ![((lambdaPlusR K (thetaTilde M μ) : ℝ) : ℂ), ((lambdaMinusR K (thetaTilde M μ) : ℝ) : ℂ)]
+
+/-- **人手証明 Step 2 の 3 行目**: `eigenvector_of_A_theta_tilde` を 2 列へ同時適用した
+`[A v_{+,μ}  A v_{-,μ}] = [λ_{+,μ} v_{+,μ}  λ_{-,μ} v_{-,μ}]`。 -/
+theorem AMat_mulVec_checkCols (P : IsingParam) (M : ℕ) (μ : ℤ) :
+    Matrix.of (fun i k => (AMat P.const (thetaTilde M μ) *ᵥ checkCols P.const M μ k) i)
+      = Matrix.of (fun i k => (checkLambdas P.const M μ k • checkCols P.const M μ k) i) := by
+  ext i k
+  fin_cases k
+  · exact congrFun (AMat_mulVec_smul_eigen_pos (K := P.const) (θ := thetaTilde M μ) (checkC P.const M μ)) i
+  · exact congrFun (AMat_mulVec_smul_eigen_neg (K := P.const) (θ := thetaTilde M μ) (checkC P.const M μ)) i
+
+/-- **人手証明 Step 2**: `A(θ~_μ) P̌_μ = P̌_μ Ď_μ`（6 行。人手と 1 段ずつの `calc`）。 -/
 theorem AMat_mul_checkPmat (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     AMat P.const (thetaTilde M μ) * checkPmat P.const M μ
       = checkPmat P.const M μ * checkDmat P.const M μ := by
-  -- 列 `j` の `A(θ) (c v_±) = λ_± (c v_±)`（スカラー倍は積の外へ出る）
-  have hcol0 : AMat P.const (thetaTilde M μ) *ᵥ (fun k => checkPmat P.const M μ k 0)
-      = ((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ) • (fun k => checkPmat P.const M μ k 0) := by
-    rw [checkPmat_col_pos P hM μ, AMat_mulVec_smul_eigen_pos]
-  have hcol1 : AMat P.const (thetaTilde M μ) *ᵥ (fun k => checkPmat P.const M μ k 1)
-      = ((lambdaMinusR P.const (thetaTilde M μ) : ℝ) : ℂ) • (fun k => checkPmat P.const M μ k 1) := by
-    rw [checkPmat_col_neg P hM μ, AMat_mulVec_smul_eigen_neg]
-  ext i j
-  fin_cases j
-  · -- 第 1 列: `Ď` の右乗は第 1 列の `λ_+` 倍
-    have h := congrFun hcol0 i
-    simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul] at h
-    simp [Matrix.mul_apply, Fin.sum_univ_two, checkDmat, h, mul_comm]
-  · -- 第 2 列: `Ď` の右乗は第 2 列の `λ_-` 倍
-    have h := congrFun hcol1 i
-    simp only [Matrix.mulVec, dotProduct, Pi.smul_apply, smul_eq_mul] at h
-    simp [Matrix.mul_apply, Fin.sum_univ_two, checkDmat, h, mul_comm]
+  calc AMat P.const (thetaTilde M μ) * checkPmat P.const M μ
+      = AMat P.const (thetaTilde M μ) * Matrix.of (fun j k => checkCols P.const M μ k j) := by
+        rw [checkPmat_eq_cols P hM μ]           -- 1 行目: `P̌_μ = [v_{+,μ} v_{-,μ}]`
+    _ = Matrix.of (fun i k => (AMat P.const (thetaTilde M μ) *ᵥ checkCols P.const M μ k) i) :=
+        matrix_mul_columns _ _                  -- 2 行目: `mat_columnwise`（`m, n, p → 2`）
+    _ = Matrix.of (fun i k => (checkLambdas P.const M μ k • checkCols P.const M μ k) i) :=
+        AMat_mulVec_checkCols P M μ             -- 3 行目: `eigenvector_of_A_theta_tilde` を 2 列へ同時適用
+    _ = Matrix.of (fun i k => (checkDmat P.const M μ k k • checkCols P.const M μ k) i) := by
+        ext i k
+        fin_cases k <;> rfl                     -- 4 行目: `Ď_μ` の定義（`(Ď_μ)_{kk} = λ_{±,μ}`）を右辺から左辺へ
+    _ = Matrix.of (fun j k => checkCols P.const M μ k j) * checkDmat P.const M μ :=
+        (cols_mul_diagonal_matrix _ _ (checkDmat_offdiag P.const M μ)).symm
+                                                -- 5 行目: `column_matrix_times_diagonal_matrix_scales_columns`
+                                                --   （`n, p → 2`、`D → Ď_μ`）を右辺から左辺へ
+    _ = checkPmat P.const M μ * checkDmat P.const M μ := by
+        rw [checkPmat_eq_cols P hM μ]           -- 6 行目: `P̌_μ = [v_{+,μ} v_{-,μ}]` を右辺から左辺へ
 
 /-- **人手証明 Step 3 の前置き (a)**: `s s = ℓ`（`s := (√M)_ℂ`、`ℓ := (ι_{ℤ→ℝ}(M))_ℂ`。5 行）。
 Lean の `ℓ` は `ℕ` からの直接のキャスト `(M : ℂ)` なので、5 行目は人手の「`ℓ` の定義」を、
