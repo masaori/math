@@ -31514,7 +31514,7 @@ z&=z\cdot1
                         displayMath(String.raw`\begin{aligned}
 \bigl(\mathrm{Ev}_{\xi}(U)\bigr)^{L}
 &=\mathrm{Ev}_{\xi}\bigl(U^{L}\bigr)
-&&(\because\ \blkref{claim_qbar_matrix_eval_pow}\text{。}\ L\ge1\ \text{は}\ \blkref{def_lattice})\\
+&&(\because\ \blkref{claim_qbar_matrix_eval_pow}\text{、}\ L\ge1\ \text{は}\ \blkref{def_lattice})\\
 &=\mathrm{Ev}_{\xi}(I)
 &&(\because\ \blkref{theorem_shift_matrix_order})\\
 &=I^{\overline{\mathbb{Q}}}_L
@@ -70366,6 +70366,9 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq_from_necSuf",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_adjacent_interior_side_eq",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_period_seam_interior_side_eq",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_interior_side_constant",
+                      "Ising2DLambda.NecSuf.KacWard.finite_adjacent_side_constant",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_interior_side_constant_from_necSuf",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
@@ -70566,6 +70569,10 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`3`), " である。上の方向表によれば、この辺の西側セルは内側、東側セルは外側であり、",
                         "北端では同じ二セルが入辺の左右になる。北端の入方向は表の一意性により ",
                         math(String.raw`3`), " である。",
+                      ]),
+                      paragraph([
+                        "各歩の内側が左か右かを真偽値で記す。内部の隣接二歩では四セルの表と二歩不帰還性により真偽値が等しく、",
+                        "最後と最初の二歩も零巻き付きによる端点一致を使って等しい。最初の歩から有限回の帰納法で全歩の真偽値は等しい。",
                       ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),
