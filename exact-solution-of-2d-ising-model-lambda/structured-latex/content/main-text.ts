@@ -680,8 +680,10 @@ v_p(a)-v_p(b)
 &&\bigl(\because\ \blkref{claim_log_additive}\text{ と }q^{\,k},q\in\mathbb{Q}_{>0}\bigr)\\
 &=k\,\log q+\log q
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=k\,\log q+1\,\log q
+&&\bigl(\because\ \Lambda\ \text{の整数倍の定義}\bigr)\\
 &=(k+1)\,\log q
-&&\bigl(\because\ \Lambda\ \text{の整数倍の定義と }\mathbb{Z}\ \text{の分配則}\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配則}\bigr)
 \end{aligned}`),
                         paragraph([
                           "となる。したがって k=0 の場合と合わせて、すべての ",
@@ -70252,6 +70254,8 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.local_east_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundary_west_outgoing_matches_next_incoming",
                       "Ising2DLambda.NecSuf.KacWard.local_west_outgoing_matches_next_incoming",
+                      "Ising2DLambda.KacWard.cellBoundary_south_outgoing_matches_next_incoming",
+                      "Ising2DLambda.NecSuf.KacWard.local_south_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70419,6 +70423,12 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`2`), " である。上の方向表によれば、この辺の南側セルは内側、北側セルは外側であり、",
                         "西端では同じ二セルが入辺の左右になる。西端の入方向は表の一意性により ",
                         math(String.raw`2`), " である。",
+                      ]),
+                      paragraph([
+                        "南へ進む境界辺の北端で内側セルを左に置く出方向は ",
+                        math(String.raw`1`), " である。上の方向表によれば、この辺の東側セルは内側、西側セルは外側であり、",
+                        "南端では同じ二セルが入辺の左右になる。南端の入方向は表の一意性により ",
+                        math(String.raw`1`), " である。",
                       ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),

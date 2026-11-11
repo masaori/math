@@ -125,6 +125,26 @@ theorem local_west_outgoing_matches_next_incoming
     hdiag₁ hdiag₂ htarget (by simpa using hside)
   simpa using hunique.symm
 
+/-- Across a southward boundary edge, the outgoing direction at its north end
+is the incoming direction at its south end. -/
+theorem local_south_outgoing_matches_next_incoming
+    (a b c d e f : Bool)
+    (hsource : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3)
+    (htarget : localCellCount d c e f = 1 ∨
+      localCellCount d c e f = 2 ∨ localCellCount d c e f = 3)
+    (hdiag₁ : ¬ (d = true ∧ c = false ∧ e = true ∧ f = false))
+    (hdiag₂ : ¬ (d = false ∧ c = true ∧ e = false ∧ f = true))
+    (hout : localOutgoing a b c d = 1) :
+    localIncoming d c e f = 1 := by
+  have hleft := (local_directions_selected_left a b c d hsource).2
+  rw [hout] at hleft
+  have hside : c = true ∧ d = false := by
+    simpa [show (1 : ZMod 4) ≠ 0 by decide] using hleft
+  have hunique := local_incoming_unique d c e f (1 : Fin 4)
+    hdiag₁ hdiag₂ htarget (by simpa using hside)
+  simpa using hunique.symm
+
 /-- The incoming edge touches the west, north, east, or south side. -/
 def incomingSide (direction : ZMod 4) : Fin 4 :=
   if direction = 0 then 3 else if direction = 1 then 0

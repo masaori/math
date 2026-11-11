@@ -14,7 +14,7 @@
 
 import os
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = os.path.abspath('sagemath/check/free-entropy-additivity')
 load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 
