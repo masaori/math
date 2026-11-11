@@ -2,6 +2,8 @@ import Ising2DLambda.KacWard.AdjacentCellsBoundaryParity
 import Ising2DLambda.KacWard.PlaneCellBoundary
 import Ising2DLambda.KacWard.OddRayInteriorCellsFromWalkFinite
 import Ising2DLambda.KacWard.WalkSideInteriorBandConnected
+import Ising2DLambda.KacWard.WalkVerticalBoundaryParity
+import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -60,5 +62,59 @@ theorem horizontalEdge_oddRay_boundary_ofWalk
   intro a b
   simp only [Set.Finite.mem_toFinset, oddRayInteriorCellsOfWalk, Set.mem_setOf_eq]
   rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+
+/-- Every step of a simple closed lifted walk is an edge of its interior-cell boundary. -/
+theorem vertexSimpleWalk_step_mem_interiorBoundary
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (j : ℕ) (hj : j < m + 1) :
+    let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+    let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
+    let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+    (row (j + 1) = row j + 1 ∧ col (j + 1) = col j ∧
+      (true, (row j, col j)) ∈ planeCellBoundary cells) ∨
+    (row (j + 1) = row j - 1 ∧ col (j + 1) = col j ∧
+      (true, (row j - 1, col j)) ∈ planeCellBoundary cells) ∨
+    (row (j + 1) = row j ∧ col (j + 1) = col j + 1 ∧
+      (false, (row j, col j)) ∈ planeCellBoundary cells) ∨
+    (row (j + 1) = row j ∧ col (j + 1) = col j - 1 ∧
+      (false, (row j, col j - 1)) ∈ planeCellBoundary cells) := by
+  dsimp only
+  let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+  let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
+  have hle := walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one
+    γ hγ hh hv hdistinct j hj
+  have hstep := walkStep_edgeTraversal_one (m + 1) row col j hj
+    (walkSideInteriorBandFromWalk_coordinate_unit γ) hle
+  rcases hstep with h | h | h | h
+  · have ho : Odd (verticalEdgeTraversalCount (m + 1) row col (row j) (col j)) := by
+      simp [h.2.2]
+    exact Or.inl ⟨h.1, h.2.1, by
+      simpa only [sub_add_cancel] using
+        (verticalEdge_oddRay_boundary_ofWalk γ hγ hh hv (row j) (col j - 1)
+          (by simpa [row, col] using ho))⟩
+  · have ho : Odd (verticalEdgeTraversalCount (m + 1) row col (row j - 1) (col j)) := by
+      simp [h.2.2]
+    exact Or.inr (Or.inl ⟨h.1, h.2.1, by
+      simpa only [sub_add_cancel] using
+        (verticalEdge_oddRay_boundary_ofWalk γ hγ hh hv (row j - 1) (col j - 1)
+          (by simpa [row, col] using ho))⟩)
+  · have ho : Odd (horizontalEdgeTraversalCount (m + 1) row col (row j) (col j)) := by
+      simp [h.2.2]
+    exact Or.inr (Or.inr (Or.inl ⟨h.1, h.2.1, by
+      simpa only [sub_add_cancel] using
+        (horizontalEdge_oddRay_boundary_ofWalk γ hγ hh hv (row j - 1) (col j)
+          (by simpa [row, col] using ho))⟩))
+  · have ho : Odd (horizontalEdgeTraversalCount (m + 1) row col (row j) (col j - 1)) := by
+      simp [h.2.2]
+    exact Or.inr (Or.inr (Or.inr ⟨h.1, h.2.1, by
+      simpa only [sub_add_cancel] using
+        (horizontalEdge_oddRay_boundary_ofWalk γ hγ hh hv (row j - 1) (col j - 1)
+          (by simpa [row, col] using ho))⟩))
 
 end Ising2DLambda.KacWard

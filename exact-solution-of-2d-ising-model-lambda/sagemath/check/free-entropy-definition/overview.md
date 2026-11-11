@@ -43,7 +43,7 @@ sage sagemath/check/free-entropy-definition/check.sage
 
 | 項目 | 状態 |
 | --- | --- |
-| 実行 | 2026-08-08 実行（SageMath, `/usr/local/bin/sage`） |
+| 実行 | 2026-11-11 再実行（SageMath） |
 | 結果 | 全アサーション成立（$L=1,2,3$、有理点 5 個、表示の全対） |
 
 $q=1/2$ での出力:

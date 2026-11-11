@@ -382,8 +382,10 @@ v_p(mn)&=0
                         paragraph(["両辺は 1 以上の整数の積なので、1 以上の整数である。"]),
                         displayMath(String.raw`\begin{aligned}
 v_p(a)-v_p(b)
-&=v_p(a)+v_p(b')-v_p(b)-v_p(b')
+&=v_p(a)-v_p(b)+v_p(b')-v_p(b')
 &&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr)\\
+&=v_p(a)+v_p(b')-v_p(b)-v_p(b')
+&&\bigl(\because\ \mathbb Z\text{ の加法の可換性と結合性}\bigr)\\
 &=v_p(ab')-v_p(b)-v_p(b')
 &&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
 &=v_p(a'b)-v_p(b)-v_p(b')
@@ -67791,6 +67793,8 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                       "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_distinct_positive",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_step_mem_interiorBoundary",
+                      "Ising2DLambda.NecSuf.KacWard.simple_step_boundary_of_four_cases",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
