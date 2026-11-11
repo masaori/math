@@ -26,7 +26,7 @@ chain = [
     (exp_sym_any(I0 * (-t)) - exp_sym_any(-(I0 * (-t)))) / (2 * I0),   # euler_formula_cos_sin を -θ に適用
     (exp_sym(-(I0 * t)) - exp_sym_any(-(I0 * (-t)))) / (2 * I0),      # i_times_negated_real_is_negation_of_i_times
     (exp_sym(-(I0 * t)) - exp_sym(I0 * t)) / (2 * I0),                # negation_of_i_times_negated_real_is_i_times
-    (-(Ft(Ep) - Ft(Em))) / (2 * I0),                                  # b - a = -(a - b)
+    (-(Ft(Ep) - Ft(Em))) / (2 * I0),                                  # reversed_difference_is_negation_of_difference_in_cc
     (-(Ft(Ep) - Ft(Em))) * (2 * I0)**(-1),                            # def_complex_quotient
     (Ft(-1) * (Ft(Ep) - Ft(Em))) * (2 * I0)**(-1),                    # multiply_by_minus_one
     Ft(-1) * ((Ft(Ep) - Ft(Em)) * (2 * I0)**(-1)),                    # 積の結合律

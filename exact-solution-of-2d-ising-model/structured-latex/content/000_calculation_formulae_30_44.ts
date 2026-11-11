@@ -2835,6 +2835,118 @@ z
     },
   },
   {
+    id: "calculation_formulae_claim_double_negation_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`-(-z)=z` },
+    labels: ["double_negation_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\mathbb C`),
+        " とする。",
+        math(String.raw`-z`),
+        "・",
+        math(String.raw`-(-z)`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`-(-z)=z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`-1_{\mathbb C},1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=-1,1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-(-z)
+&=(-1_{\mathbb C})(-z)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to-z)\bigr)\\
+&=(-1_{\mathbb C})\bigl((-1_{\mathbb C})z\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to z)\bigr)\\
+&=\bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)z
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
+&=1_{\mathbb C}z
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
+&=z
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。negation_of_i_times_negated_real_is_i_times の 2 行目が「ℂ で -(-z) = z（ℂ は体）」と体であることだけを根拠にしていたので、multiply_by_minus_one・積の結合律・minus_one_times_minus_one_is_one_in_cc・積の単位元を 1 行に 1 つずつ当てる主張にして引けるようにした。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_reversed_difference_is_negation_of_difference_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`b-a=-(a-b)` },
+    labels: ["reversed_difference_is_negation_of_difference_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb C`),
+        " とする。差は ",
+        ref("def_complex_difference"),
+        " の差、",
+        math(String.raw`-(a-b)`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`b-a=-(a-b)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`-1_{\mathbb C},1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=-1,1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b-a
+&=b+(-a)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to b,\ w\to a)\bigr)\\
+&=(-a)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律}\bigr)\\
+&=(-a)+1_{\mathbb C}b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&=(-a)+\bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)b
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\ \text{を右辺から左辺へ}\bigr)\\
+&=(-a)+(-1_{\mathbb C})\bigl((-1_{\mathbb C})b\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&=(-a)+(-1_{\mathbb C})(-b)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to b)\ \text{を右辺から左辺へ}\bigr)\\
+&=(-1_{\mathbb C})a+(-1_{\mathbb C})(-b)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a)\bigr)\\
+&=(-1_{\mathbb C})\bigl(a+(-b)\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の左からの分配律を右辺から左辺へ}\bigr)\\
+&=-\bigl(a+(-b)\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a+(-b))\ \text{を右辺から左辺へ}\bigr)\\
+&=-(a-b)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a,\ w\to b)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。sin_of_negated_real の 4 行目が「ℂ で b - a = -(a - b)（ℂ は体）」と体であることだけを根拠にしていたので、def_complex_difference・multiply_by_minus_one・体の公理・minus_one_times_minus_one_is_one_in_cc を 1 行に 1 つずつ当てる主張にして引けるようにした。加法の逆元は使っていない。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_i_times_negated_real_is_negation_of_i_times",
     kind: "claim",
     title: { tex: String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})` },
@@ -3117,13 +3229,14 @@ i(-\theta)_{\mathbb C}
 &= -\bigl(-(i\theta_{\mathbb C})\bigr)
 &&(\because\ \blkref{i_times_negated_real_is_negation_of_i_times})\\
 &= i\theta_{\mathbb C}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ -(-z) = z\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ z \to i\theta_{\mathbb C}\bigr)
+&&\bigl(\because\ \blkref{double_negation_in_cc}\ (z \to i\theta_{\mathbb C})\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の -i(-θ) = iθ の 2 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない。",
+        "2026-11-11（Lean の通しの証明）: 2 行目の根拠「ℂ で -(-z) = z（ℂ は体）」を主張 double_negation_in_cc（z → iθ_ℂ）の参照に替えた。鎖の式は変えていない。",
       ],
     },
   },
@@ -3304,7 +3417,7 @@ i(-\theta)_{\mathbb C}
 &= \frac{\exp\bigl(-(i\theta_{\mathbb C})\bigr) - \exp(i\theta_{\mathbb C})}{2i}
 &&(\because\ \blkref{negation_of_i_times_negated_real_is_i_times})\\
 &= \frac{-\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)}{2i}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ b - a = -(a - b)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta_{\mathbb C}),\ b \to \exp(-(i\theta_{\mathbb C}))\bigr)\\
+&&\bigl(\because\ \blkref{reversed_difference_is_negation_of_difference_in_cc}\ (a \to \exp(i\theta_{\mathbb C}),\ b \to \exp(-(i\theta_{\mathbb C})))\bigr)\\
 &= \Bigl(-\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)\Bigr)(2i)^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to-(\exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C}))),\ w\to2i)\bigr)\\
 &= \Bigl((-1_{\mathbb C})\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)\Bigr)(2i)^{-1}
@@ -3324,6 +3437,7 @@ i(-\theta)_{\mathbb C}
       notes: [
         "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の sin(-θ) の 6 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない（実数の包含の像と -(iθ) の括弧を明示した）。",
         "2026-11-11（Lean の通しの証明）: 前置きの「分数は定まる」に def_complex_quotient の商（w → 2_ℂ i）の参照を足した。鎖の 5 行目「ℂ は体なので (-x)/y = -(x/y)」を、def_complex_quotient・multiply_by_minus_one・積の結合律・multiply_by_minus_one（右辺から左辺へ）・def_complex_quotient（右辺から左辺へ）の 5 行に割った（鎖は 10 行になった）。前置きの 2_ℂ = (2,0) に inclusion_rr_to_cc の像であることを書き添えた。ほかの行は変えていない。",
+        "2026-11-11（Lean の通しの証明）: 4 行目の根拠「ℂ で b - a = -(a - b)（ℂ は体）」を主張 reversed_difference_is_negation_of_difference_in_cc（a → exp(iθ_ℂ)、b → exp(-(iθ_ℂ))）の参照に替えた。鎖の式は変えていない。",
       ],
     },
   },

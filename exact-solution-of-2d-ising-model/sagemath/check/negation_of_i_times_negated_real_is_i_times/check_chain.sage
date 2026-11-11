@@ -9,7 +9,7 @@ t = R.gen()                              # θ_C
 chain = [
     -(i * (-t)),                         # -(i(-θ)_C)
     -(-(i * t)),                         # -(-(iθ_C))            i_times_negated_real_is_negation_of_i_times
-    i * t,                               # iθ_C                  ℂ で -(-z) = z
+    i * t,                               # iθ_C                  double_negation_in_cc (z -> iθ_C)
 ]
 for k in range(len(chain) - 1):
     assert chain[k] == chain[k + 1], k

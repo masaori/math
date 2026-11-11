@@ -275,6 +275,12 @@ targets=(
   Ising2D.isUnit_V2H2Form
   Ising2D.I_mul_real_neg_eq_neg_I_mul
   Ising2D.complex_minus_one_mul_minus_one
+  Ising2D.complex_double_negation
+  Ising2D.complex_reversed_difference
+  Ising2D.complex_double_negation_of_necSuf
+  Ising2D.complex_reversed_difference_of_necSuf
+  "Ising2D.NecSuf.double_negation'"
+  "Ising2D.NecSuf.reversed_difference'"
   Ising2D.complex_one_add_one
   Ising2D.complex_one_add_one_eq_ofReal_two
   Ising2D.neg_I_mul_real_neg_eq_I_mul
