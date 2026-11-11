@@ -11910,4 +11910,236 @@ m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_definition_complex_valued_maps_on_set",
+    kind: "definition",
+    title: { text: "集合上の ℂ 値写像の集合と各点ごとの演算" },
+    labels: ["def_complex_valued_maps_on_set"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を集合とする。",
+        math(String.raw`X`),
+        " から ",
+        math(String.raw`\mathbb{C}`),
+        " への写像全体の集合を ",
+        math(String.raw`\mathbb{C}^X`),
+        " と書く。",
+        math(String.raw`A,B\in\mathbb{C}^X`),
+        " が等しいとは、写像として等しいこと、すなわちすべての ",
+        math(String.raw`x\in X`),
+        " について ",
+        math(String.raw`A(x)=B(x)`),
+        " であることである。",
+      ]),
+      paragraph([
+        "写像 ",
+        math(String.raw`+_{\mathbb{C}^X}:\mathbb{C}^X\times\mathbb{C}^X\to\mathbb{C}^X`),
+        "、",
+        math(String.raw`\cdot_{\mathbb{C}^X}:\mathbb{C}\times\mathbb{C}^X\to\mathbb{C}^X`),
+        " と元 ",
+        math(String.raw`0_{\mathbb{C}^X}\in\mathbb{C}^X`),
+        " を、",
+        math(String.raw`A,B\in\mathbb{C}^X`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        "、",
+        math(String.raw`x\in X`),
+        " での値で次のように定める。",
+      ]),
+      list([
+        [math(String.raw`(A+_{\mathbb{C}^X}B)(x):=A(x)+_{\mathbb{C}}B(x)`), "（各点ごとの和）"],
+        [math(String.raw`(\lambda\cdot_{\mathbb{C}^X}A)(x):=\lambda\cdot_{\mathbb{C}}A(x)`), "（各点ごとのスカラー倍）"],
+        [math(String.raw`0_{\mathbb{C}^X}(x):=0_{\mathbb{C}}`), "（零写像）"],
+      ]),
+      paragraph([
+        "三つの右辺はどれも ",
+        math(String.raw`x\in X`),
+        " ごとに ",
+        math(String.raw`\mathbb{C}`),
+        " の元を一つ定めるので、左辺は ",
+        math(String.raw`\mathbb{C}^X`),
+        " の元として一つに決まる。演算には ",
+        math(String.raw`\mathbb{C}^X`),
+        " を添字で書き、値の側の ",
+        math(String.raw`\mathbb{C}`),
+        " の演算 ",
+        math(String.raw`+_{\mathbb{C}},\ \cdot_{\mathbb{C}}`),
+        " と区別する。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_complex_valued_maps_form_complex_vector_space",
+    kind: "claim",
+    title: { text: "集合上の ℂ 値写像の集合は、各点ごとの和とスカラー倍で ℂ-線型空間である" },
+    labels: ["claim_complex_valued_maps_on_set_form_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を集合とする。組 ",
+        math(String.raw`(\mathbb{C}^X,+_{\mathbb{C}^X},\cdot_{\mathbb{C}^X},0_{\mathbb{C}^X})`),
+        "（",
+        ref("def_complex_valued_maps_on_set"),
+        "）は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A,B,C`),
+        " を ",
+        math(String.raw`\mathbb{C}^X`),
+        " の任意の元、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。どの条件も ",
+        math(String.raw`\mathbb{C}^X`),
+        " の二つの元の等式であり、",
+        math(String.raw`\mathbb{C}^X`),
+        " の二つの元が等しいことは、すべての ",
+        math(String.raw`x\in X`),
+        " について ",
+        math(String.raw`x`),
+        " での値どうしが ",
+        math(String.raw`\mathbb{C}`),
+        " の元として等しいことである（",
+        ref("def_complex_valued_maps_on_set"),
+        "）。以下の各式変形は、",
+        math(String.raw`x\in X`),
+        " を任意に固定した ",
+        math(String.raw`\mathbb{C}`),
+        " の中の等式の連なりである。",
+      ]),
+      paragraph(["加法の結合法則 ", math(String.raw`(A+_{\mathbb{C}^X}B)+_{\mathbb{C}^X}C=A+_{\mathbb{C}^X}(B+_{\mathbb{C}^X}C)`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A+_{\mathbb{C}^X}B)+_{\mathbb{C}^X}C\bigr)(x)
+&=(A+_{\mathbb{C}^X}B)(x)+_{\mathbb{C}}C(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=(A(x)+_{\mathbb{C}}B(x))+_{\mathbb{C}}C(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=A(x)+_{\mathbb{C}}(B(x)+_{\mathbb{C}}C(x))
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=A(x)+_{\mathbb{C}}(B+_{\mathbb{C}^X}C)(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\bigl(A+_{\mathbb{C}^X}(B+_{\mathbb{C}^X}C)\bigr)(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則 ", math(String.raw`A+_{\mathbb{C}^X}B=B+_{\mathbb{C}^X}A`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathbb{C}^X}B)(x)
+&=A(x)+_{\mathbb{C}}B(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=B(x)+_{\mathbb{C}}A(x)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=(B+_{\mathbb{C}^X}A)(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元 ", math(String.raw`A+_{\mathbb{C}^X}0_{\mathbb{C}^X}=A`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathbb{C}^X}0_{\mathbb{C}^X})(x)
+&=A(x)+_{\mathbb{C}}(0_{\mathbb{C}^X})(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=A(x)+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=A(x)
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元は次のとおりである。",
+        math(String.raw`\mathbb{C}`),
+        " の各元は ",
+        math(String.raw`\mathbb{C}`),
+        " の加法の逆元をただ一つもつので、",
+        math(String.raw`a\in\mathbb{C}`),
+        " の加法の逆元を ",
+        math(String.raw`-_{\mathbb{C}}a\in\mathbb{C}`),
+        " と書く（",
+        math(String.raw`a+_{\mathbb{C}}(-_{\mathbb{C}}a)=0_{\mathbb{C}}`),
+        "）。写像 ",
+        math(String.raw`A':X\to\mathbb{C}`),
+        " を ",
+        math(String.raw`A'(x):=-_{\mathbb{C}}A(x)`),
+        "（",
+        math(String.raw`x\in X`),
+        "）で定めると、",
+        math(String.raw`A'\in\mathbb{C}^X`),
+        " であり（",
+        ref("def_complex_valued_maps_on_set"),
+        "）、",
+        math(String.raw`A+_{\mathbb{C}^X}A'=0_{\mathbb{C}^X}`),
+        " を満たす。これは、すべての ",
+        math(String.raw`x\in X`),
+        " について次の値の等式が成り立つことである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A+_{\mathbb{C}^X}A')(x)
+&=A(x)+_{\mathbb{C}}A'(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=A(x)+_{\mathbb{C}}(-_{\mathbb{C}}A(x))
+&&\left(\because\ A'\ \text{の定義}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ -_{\mathbb{C}}A(x)\ \text{は}\ A(x)\ \text{の}\ \mathbb{C}\ \text{の加法の逆元}\right)\\
+&=(0_{\mathbb{C}^X})(x)
+&&\left(\because\ 0_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則 ", math(String.raw`(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^X}A=\lambda\cdot_{\mathbb{C}^X}(\mu\cdot_{\mathbb{C}^X}A)`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^X}A\bigr)(x)
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}A(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}A(x))
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{\mathbb{C}^X}A)(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}^X}(\mu\cdot_{\mathbb{C}^X}A)\bigr)(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元 ", math(String.raw`1_{\mathbb{C}}\cdot_{\mathbb{C}^X}A=A`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+(1_{\mathbb{C}}\cdot_{\mathbb{C}^X}A)(x)
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}A(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=A(x)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則 ", math(String.raw`\lambda\cdot_{\mathbb{C}^X}(A+_{\mathbb{C}^X}B)=(\lambda\cdot_{\mathbb{C}^X}A)+_{\mathbb{C}^X}(\lambda\cdot_{\mathbb{C}^X}B)`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\lambda\cdot_{\mathbb{C}^X}(A+_{\mathbb{C}^X}B)\bigr)(x)
+&=\lambda\cdot_{\mathbb{C}}(A+_{\mathbb{C}^X}B)(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(A(x)+_{\mathbb{C}}B(x))
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}A(x))+_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}}B(x))
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}^X}A)(x)+_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}^X}B)(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義を二か所に適用。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\bigl((\lambda\cdot_{\mathbb{C}^X}A)+_{\mathbb{C}^X}(\lambda\cdot_{\mathbb{C}^X}B)\bigr)(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則 ", math(String.raw`(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^X}A=(\lambda\cdot_{\mathbb{C}^X}A)+_{\mathbb{C}^X}(\mu\cdot_{\mathbb{C}^X}A)`), " は、すべての ", math(String.raw`x\in X`), " について次の値の等式が成り立つことである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^X}A\bigr)(x)
+&=(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}A(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}A(x))+_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}A(x))
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}^X}A)(x)+_{\mathbb{C}}(\mu\cdot_{\mathbb{C}^X}A)(x)
+&&\left(\because\ \cdot_{\mathbb{C}^X}\ \text{の定義を二か所に適用。}\blkref{def_complex_valued_maps_on_set}\right)\\
+&=\bigl((\lambda\cdot_{\mathbb{C}^X}A)+_{\mathbb{C}^X}(\mu\cdot_{\mathbb{C}^X}A)\bigr)(x)
+&&\left(\because\ +_{\mathbb{C}^X}\ \text{の定義。}\blkref{def_complex_valued_maps_on_set}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件が満たされたので、組 ",
+        math(String.raw`(\mathbb{C}^X,+_{\mathbb{C}^X},\cdot_{\mathbb{C}^X},0_{\mathbb{C}^X})`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
