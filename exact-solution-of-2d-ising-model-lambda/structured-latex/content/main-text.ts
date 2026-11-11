@@ -62819,7 +62819,7 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
                     verification: ["sagemath/check/smoothing-straight-visit-count"],
                     lean: [
                       "Ising2DLambda.KacWard.smoothing_split_crossing_partition",
-                      "Ising2DLambda.NecSuf.KacWard.three_way_filter_card_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.smoothing_split_crossing_partition_necSuf",
                       "Ising2DLambda.KacWard.smoothing_split_crossing_partition_from_necSuf",
                     ],
                     statement: [
