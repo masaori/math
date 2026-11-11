@@ -78447,6 +78447,18 @@ H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)`),
                     title: { text: "正方形境界との交差数は零で基本周回は一度交差する" },
                     labels: ["claim_even_edge_chain_intersection"],
                     habitat: "N",
+                    lean: [
+                      "Ising2DLambda.KacWard.coefficientIntersection_squareBoundary_left",
+                      "Ising2DLambda.KacWard.coefficientIntersection_squareBoundary_right",
+                      "Ising2DLambda.KacWard.coefficientIntersection_row_row",
+                      "Ising2DLambda.KacWard.coefficientIntersection_column_column",
+                      "Ising2DLambda.KacWard.coefficientIntersection_row_column",
+                      "Ising2DLambda.KacWard.coefficientIntersection_column_row",
+                      "Ising2DLambda.KacWard.coefficientIntersection_eq_cutParity",
+                      "Ising2DLambda.KacWard.evenEdgeChainIntersection_eq_cutParity",
+                      "Ising2DLambda.NecSuf.KacWard.ringCoefficientIntersection_eq_cutParity",
+                      "Ising2DLambda.KacWard.coefficientIntersection_eq_cutParity_from_necSuf",
+                    ],
                     verification: ["sagemath/check/even-edge-chain-intersection"],
                     statement: [
                       paragraph([
