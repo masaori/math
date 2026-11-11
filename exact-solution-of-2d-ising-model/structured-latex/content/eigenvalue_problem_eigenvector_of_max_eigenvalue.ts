@@ -3064,7 +3064,17 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         ref("inclusion_rr_to_cc"),
         " の略記）、",
         math(String.raw`c := \tfrac{i}{2}\kappa = \bigl(i\,2_{\mathbb{C}}^{-1}\bigr)\kappa \in \mathbb{C}`),
-        "、",
+        "（",
+        math(String.raw`\tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1}`),
+        " は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`z\to i,\ w\to2_{\mathbb{C}}`),
+        "）。",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        " は ",
+        ref("def_V1_plus_square_root"),
+        " の読みに書いてある）、",
         math(String.raw`X := cH_1^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " とおく（",
         ref("def_V1_plus_square_root"),
@@ -3079,11 +3089,13 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         math(String.raw`c`),
         " を二つ足すと ",
         math(String.raw`i\kappa`),
-        " になる（以下の結合律・可換律・分配律・単位元・逆元は ",
+        " になる（以下の結合律・可換律・分配律・単位元は ",
         ref("complex_numbers_form_a_field"),
         " の ",
         math(String.raw`\mathbb{C}`),
-        " の体の公理である）。",
+        " の体の公理、逆元は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元である）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3105,7 +3117,7 @@ c+c
 &=i\bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\kappa\bigr)
 &&\left(\because\ \text{積の結合律}\right)\\
 &=i\bigl(1_{\mathbb{C}}\kappa\bigr)
-&&\left(\because\ 2_{\mathbb{C}}^{-1}\ \text{は}\ 2_{\mathbb{C}}\neq 0_{\mathbb{C}}\ \text{の逆元}\right)\\
+&&\left(\because\ 2_{\mathbb{C}}^{-1}\ \text{は}\ 2_{\mathbb{C}}\in\mathbb{C}^{\times}\ \text{の逆元。}\blkref{multiplicative_group_of_cc}\right)\\
 &=i\kappa
 &&\left(\because\ 1_{\mathbb{C}}\ \text{は積の単位元}\right).
 \end{aligned}`,
@@ -3154,6 +3166,7 @@ c+c
         "式変形の書き方の統一（2026-09-03）: 計算前の参照一覧を削り、既に各式変形行の行末にある \\blkref だけを残した。内容・式変形・根拠・参照は不変である。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ主張の重複ブロック（旧ラベル <V1_plus_square_root_property>）と統合し、ラベルを <V1_plus_square_root_property> に一本化した（旧ラベル <V1_pm_square_root_squares_to_V1_pm> は廃止）。",
         "2026-11-04（全証明の SageMath 検算）: 主張文に M_col ∈ ℤ_{≥2} と A^2 := AA を書いた。証明の「X の定義と同類項の加法」の一行を、c := (i 2_ℂ^{-1})(K_1)_ℂ を二つ足すと i(K_1)_ℂ になる準備の鎖（1_ℂ + 1_ℂ = 2_ℂ を含む）と、def_finite_sum_of_matrices・finite_sum_of_scalar_multiples_of_one_matrix（r = 2）・def_finite_sum_of_complex_numbers の行に分け、冪の定義の行を足した（主張は不変）。数値検証: sagemath/check/V1_plus_square_root_property/。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の c の i/2 = i·2_C^{-1} を def_complex_quotient（z→i, w→2_C）の参照にし、2_C^{-1}2_C = 1_C の行の逆元と、鎖の前の段落の逆元の出典を multiplicative_group_of_cc の参照にした。鎖の式は変えていない。",
         "2026-11-10（Lean の通しの証明）: 準備の 1_ℂ+1_ℂ = 2_ℂ の 4 行の鎖を、同じ鎖を置いていたほかの証明と合わせて主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。",
       ],
     },

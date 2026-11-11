@@ -28,6 +28,9 @@
 `calc` の最初の行は、人手が `[\tfrac{i}{2}K_1H_1^{(+)}, …]` と書く生成子を `α = i/2`、`X = K_1H_1^{(+)}` に
 分ける書き直し（`((1/2)·i·K_1)H = (i/2)(K_1H)`）で、人手では記法の読み方に当たる。
 人手の `2^{-n}` は `(2^n)^{-1}` と書く。
+人手の `i/2` は `def_complex_quotient` の商 `i·2_ℂ^{-1}`（`z→i, w→2_ℂ`）で、Lean は `(1/2 : ℂ) * i` と書く。
+Lean の `1/2 : ℂ` は同じ定義の商（`z→1_ℂ, w→2_ℂ`）で、`one_div` が定義に書いてある `1_ℂ/w = w^{-1}` に当たる。
+人手の `i·2_ℂ^{-1}` と Lean の `2⁻¹·i` の並びの違いは、`half_I_pow` では冪を取った後の `mul_comm` で吸収する。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimNestedCommutator
 

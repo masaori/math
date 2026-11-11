@@ -3279,24 +3279,32 @@ P^{(+)} f
       ),
       paragraph([
         "と定める。ここで ",
-        math(String.raw`\tfrac{i}{2}`),
-        " は ",
-        math(String.raw`i\,2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
-        "（",
         math(String.raw`i`),
         " は ",
         ref("def_imaginary_unit"),
-        " の虚数単位、",
-        math(String.raw`2_{\mathbb{C}}^{-1}`),
+        " の虚数単位である。",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり、",
+        math(String.raw`\tfrac{i}{2}`),
         " は ",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
-        " の ",
-        ref("complex_numbers_form_a_field"),
-        " の逆元。",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`z\to i,\ w\to2_{\mathbb{C}}`),
+        "）",
+        math(String.raw`\tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        " である（",
         ref("cosh_sinh_coefficient_conversion_for_check"),
         " の ",
         math(String.raw`\tfrac{i}{2}`),
-        " と同じ）を表し、",
+        " と同じ）。",
         math(String.raw`r_{\mathbb{C}}`),
         " を ",
         ref("inclusion_rr_to_cc"),
@@ -3316,6 +3324,7 @@ P^{(+)} f
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: i/2 の読みを、各自で置いていた i·2_C^{-1} から def_complex_quotient の商（z→i, w→2_C）の参照に替え、2_C ∈ C^× を inclusion_rr_to_cc・multiplicative_group_of_cc で書いた。定めた行列は変えていない。",
         "2026-11-04（Lean の通しの証明のゴールラインの確認）: i/2 の読み（i·2_C^{-1}。cosh_sinh_coefficient_conversion_for_check と同じ）と、(i/2)K_1H_1^{(+)} を ℂ の元 (i/2)(K_1)_C によるスカラー倍と読むことを書いた（V_plus_is_positive_definite の鎖が引く）。定めた行列は変えていない。",
         "もとの可換性の主張で未定義のまま使われていた (V_1^{(\pm)})^{1/2} を、1 ブロック 1 定義に従って独立させた。二乗が V_1^{(\pm)} に等しいことは後続の平方根の主張で証明する。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ行列の重複定義（exp((i/2)K_1H_1^{(+)}) の形）を削除してこのブロックを唯一の定義とし、式をその形にそろえた。ラベルを <def_V1_pm_square_root> から <def_V1_plus_square_root> に改めた。",
@@ -4118,7 +4127,7 @@ Bf
 &=\exp\!\left(\Bigl(\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)f
   &&(\because\ \blkref{real_inclusion_of_one_half_is_inverse_of_two})\\
 &=\exp\!\left(\Bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\Bigr)H_1^{(+)}\right)f
-  &&(\because\ \blkref{def_V1_plus_square_root}\ \text{の読み}\ \tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1})\\
+  &&(\because\ \blkref{def_complex_quotient}\ (z\to i,\ w\to2_{\mathbb{C}})\ \text{を右辺から左辺へ。}2_{\mathbb{C}}\in\mathbb{C}^{\times}\ \text{は}\ \blkref{def_V1_plus_square_root}\ \text{の読み})\\
 &=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)f
   &&(\because\ \blkref{def_V1_plus_square_root}\ \text{の読み（}\mathbb{C}\ \text{の元}\ \tfrac{i}{2}(K_1)_{\mathbb{C}}\ \text{によるスカラー倍）})\\
 &=Cf
@@ -4176,6 +4185,7 @@ WP
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 第一の鎖の i·2_C^{-1} を i/2 に戻す行の根拠を、def_V1_plus_square_root の読みから def_complex_quotient（z→i, w→2_C。右辺から左辺へ）の参照に替えた。鎖の式は変えていない。",
         "2026-11-04（Lean の通しの証明のゴールラインの確認）: 第一の鎖の局所の置き方 i/2 := i·(1/2) をやめ、def_V1_plus_square_root の i/2 = i·2_C^{-1} の読みへ、real_inclusion_preserves_product・ℂ の積の結合律・real_inclusion_of_one_half_is_inverse_of_two・def_V1_plus_square_root の 2 つの読みの 5 行でつないだ（後ろから 3〜6 行目は包含を (·)_C で書く）。主張は変えていない。",
         "セクター射影子による表示を上限の最大値分解から分離した。Lean の具体版は PhysicalSymTransferBridge.lean の Ising2D.symmetrized_transfer_matrix_on_sectors で、2026-11-02 に書き直す前の人手証明（九段）の形のままであり、新しい鎖と 1 対 1 ではない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。V^{(+)} の定義の参照先を <def_V_plus> にし、射影子の像の参照を <epsilon_projector_properties> (2) に直した。",

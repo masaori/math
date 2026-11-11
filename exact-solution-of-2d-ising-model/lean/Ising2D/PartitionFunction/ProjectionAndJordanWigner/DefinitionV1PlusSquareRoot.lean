@@ -31,15 +31,16 @@
 - 人手の `c`・`X`・`c_1, c_2` は、`c = i·2_ℂ^{-1}κ`・`X = cH_1^{(+)}` の等式を持つ変数として置き、「`c` の定義」「`X` の定義」の行を
   その等式による書き換えの段にした。`c_1, c_2` は `![c, c] : Fin 2 → ℂ` の 2 つの成分で、`c_1 = c_2 = c` は定義から（`rfl`）出る。
 - 準備の `XX = XX`（等号の反射律）は `Commute.refl`。
-- 主張の 2 行目の `def_V1_plus_square_root` は、Lean の定義の係数 `(1/2 : ℂ) * √-1 * K_1` を人手の読み `i·2_ℂ^{-1}` へ直す
+- 主張の 2 行目の `def_V1_plus_square_root` は、Lean の定義の係数 `(1/2 : ℂ) * √-1 * K_1` を人手の読み
+  `i/2 = i·2_ℂ^{-1}`（`def_complex_quotient`、`z→i, w→2_ℂ`）へ直す
   `V1plusHalf_coeff_eq` を通す（Lean の `(1 / 2 : ℂ)` を `((1/2 : ℝ) : ℂ)` と読み、`real_inclusion_of_one_half_is_inverse_of_two`
   と積の可換律で `i·2_ℂ^{-1}` にする）。定義の係数を人手の形に替えるのは状態台帳の別の件である。
 - `theorem_exp_product` は Lean の具体版が無く、ほかのファイルと同じく mathlib の `Matrix.exp_add_of_commute` を引く。
 - `def_finite_sum_of_matrices`・`def_finite_sum_of_complex_numbers` の `r = 1` と `r + 1 = 2` の段は、ほかのファイルと同じく
   `Fin.sum_univ_castSucc`・`Fin.sum_univ_one` で出す。`finite_sum_of_scalar_multiples_of_one_matrix`（`r → 2`）は
   `TensorPow M` の系 `finite_sum_smul_one_tensorPow`（人手の `r` は Lean の `r + 1`）。
-- `ℂ` の体の公理（`complex_numbers_form_a_field`）は mathlib の `mul_add`・`mul_one`・`mul_comm`・`mul_assoc`・`inv_mul_cancel₀`・`one_mul`。
-  `2_ℂ ≠ 0_ℂ` は `real_inclusion_two_ne_zero`。
+- `ℂ` の体の公理（`complex_numbers_form_a_field`）は mathlib の `mul_add`・`mul_one`・`mul_comm`・`mul_assoc`・`one_mul`。
+  `2_ℂ ∈ ℂ^×` の逆元の性質 `2_ℂ^{-1}2_ℂ = 1_ℂ`（`multiplicative_group_of_cc`）は `inv_mul_cancel₀`、`2_ℂ ≠ 0_ℂ` は `real_inclusion_two_ne_zero`。
 - 人手の主張の前置き `M_col ≥ 2` は証明で使わないので、Lean の主張は `M` に条件を付けない。
 
 必要十分版は置かない。平方根性の核「可換な `X, X` について `exp X exp X = exp(X+X)`」は mathlib の
@@ -55,7 +56,7 @@ namespace Ising2D
 variable {M : ℕ}
 
 /-- **人手本文 `def_V1_plus_square_root`**: `(V_1^{(+)})^{1/2} := exp((i/2) K_1 H_1^{(+)})`。
-人手は `i/2 := i·2_ℂ^{-1}` とし、`(i/2)K_1H_1^{(+)}` を `ℂ` の元 `(i/2)(K_1)_ℂ` によるスカラー倍と読む。
+人手は `i/2` を `def_complex_quotient` の商 `i·2_ℂ^{-1}`（`z→i, w→2_ℂ`）と読み、`(i/2)K_1H_1^{(+)}` を `ℂ` の元 `(i/2)(K_1)_ℂ` によるスカラー倍と読む。
 Lean は係数を `(1 / 2 : ℂ) * Complex.I * K1` と書き、`K1 : ℂ` なので包含は書かない。Lean の `(1 / 2 : ℂ)` は人手の
 `(1/2)_ℂ = 2_ℂ^{-1}`（`real_inclusion_of_one_half_is_inverse_of_two`）に当たり、並びは `((1/2)_ℂ i)K_1` で人手と交換律の分だけ違う。 -/
 noncomputable def V1plusHalf (M : ℕ) (K1 : ℂ) : TensorPow M :=
@@ -85,7 +86,7 @@ theorem c_add_c_eq_I_mul (κ c : ℂ) (hc : c = (Complex.I * ((2 : ℝ) : ℂ)�
     _ = Complex.I * ((((2 : ℝ) : ℂ)⁻¹ * ((2 : ℝ) : ℂ)) * κ) := by
         rw [mul_assoc]                                  -- 積の結合律
     _ = Complex.I * (1 * κ) := by
-        rw [inv_mul_cancel₀ real_inclusion_two_ne_zero] -- `2_ℂ^{-1}` は `2_ℂ ≠ 0_ℂ` の逆元
+        rw [inv_mul_cancel₀ real_inclusion_two_ne_zero] -- `2_ℂ^{-1}` は `2_ℂ ∈ ℂ^×` の逆元（`multiplicative_group_of_cc`）
     _ = Complex.I * κ := by
         rw [one_mul]                                    -- `1_ℂ` は積の単位元
 
@@ -116,7 +117,7 @@ theorem V1_plus_square_root_property (K1 : ℂ) :
       = V1plusHalf M K1 * V1plusHalf M K1 := sq _       -- `A^2 := AA`
     _ = matExp X * matExp X := by
         rw [V1plusHalf, V1plusHalf_coeff_eq, ← hc, ← hX]
-                                                        -- `def_V1_plus_square_root`（係数の読み `i/2 := i·2_ℂ^{-1}` は `V1plusHalf_coeff_eq`）と `c`・`X` の定義を 2 箇所へ
+                                                        -- `def_V1_plus_square_root`（係数の読み `i/2 = i·2_ℂ^{-1}`（`def_complex_quotient`）は `V1plusHalf_coeff_eq`）と `c`・`X` の定義を 2 箇所へ
     _ = matExp (X + X) := (Matrix.exp_add_of_commute X X hXX).symm
                                                         -- `theorem_exp_product`（`n → 2^{M_col}`、`K → ℂ`、`A, B → X`）と準備の `XX = XX`
     _ = matExp (c • H1plus M + c • H1plus M) := by

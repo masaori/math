@@ -4914,20 +4914,32 @@ F_{n+1}
         "（",
         ref("multiply_by_minus_one"),
         "）とし、",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
-        " の逆元 ",
-        math(String.raw`2_{\mathbb{C}}^{-1}`),
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
         "（",
-        ref("complex_numbers_form_a_field"),
-        "）で ",
-        math(String.raw`\tfrac{i}{2} := i\,2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
-        " と書く。冪は ",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり、",
+        math(String.raw`\tfrac{i}{2} \in \mathbb{C}`),
+        " は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`z\to i,\ w\to2_{\mathbb{C}}`),
+        "）",
+        math(String.raw`\tfrac{i}{2} = i\,2_{\mathbb{C}}^{-1}`),
+        " である。冪は ",
         ref("scalar_exp_is_limit_of_partial_sums"),
         " の約束 ",
         math(String.raw`x^{0} := 1_{\mathbb{C}}`),
         "、",
         math(String.raw`x^{m+1} := x^{m}x`),
-        " による。この主張の係数に現れる ",
+        " による。この主張の係数と、その証明の式（証明の (",
+        math(String.raw`\dagger`),
+        ") を含む）に現れる ",
         math(String.raw`2`),
         " は ",
         math(String.raw`2_{\mathbb{C}}`),
@@ -5056,11 +5068,11 @@ i\,i
 &= \bigl(i^{m}k^{m}\bigr)\Bigl(\tfrac{i}{2}(2k)\Bigr)
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \bigl(i^{m}k^{m}\bigr)\Bigl(\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(2_{\mathbb{C}}k)\Bigr)
-&&\bigl(\because\ \tfrac{i}{2} := i\,2_{\mathbb{C}}^{-1}\bigr)\\
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to i,\ w\to2_{\mathbb{C}})\text{。}2k\text{ の }2\text{ は主張の前置きのとおり }2_{\mathbb{C}}\bigr)\\
 &= \bigl(i^{m}k^{m}\bigr)\Bigl(\bigl(i\,(2_{\mathbb{C}}^{-1}2_{\mathbb{C}})\bigr)k\Bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl(i^{m}k^{m}\bigr)\bigl((i\,1_{\mathbb{C}})k\bigr)
-&&\bigl(\because\ 2_{\mathbb{C}}^{-1}\text{ は }2_{\mathbb{C}}\text{ の逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ 2_{\mathbb{C}}^{-1}\text{ は }2_{\mathbb{C}}\in\mathbb{C}^{\times}\text{ の逆元。}\blkref{multiplicative_group_of_cc}\bigr)\\
 &= \bigl(i^{m}k^{m}\bigr)(ik)
 &&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl(i^{m}i\bigr)\bigl(k^{m}k\bigr)
@@ -5291,6 +5303,7 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 前置きで各自に置いていた i/2 := i·2_C^{-1} を def_complex_quotient の商（z→i, w→2_C）の参照に替え、2_C ∈ C^× を inclusion_rr_to_cc・multiplicative_group_of_cc で書いた。帰納段階の i/2 を開く行の根拠を def_complex_quotient に、2_C^{-1}2_C = 1_C の行の逆元を multiplicative_group_of_cc にした。主張と鎖の式は変えていない。",
         "008 章の cosh_sinh_coefficient_conversion と同一形の計算を半整数運動量について繰り返したもの。用いる補題 1・補題 2 は θ にも Z,Y にも依存しない純代数的な主張なので、そのまま同じものを使える。",
         "M=2,3,4,5、μ=1..M、n=0..8 で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage の scaled 列）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
