@@ -41,6 +41,7 @@
 ## 進め方
 
 - 証明の積み上げは連続実行「クリフォード代数の同型: 証明の積み上げ」が、
-  [runbook](docs/tasks/proof-runbook.md) と [状態台帳](docs/tasks/proof-state.md) に従って一単位ずつ進める。
+  [runbook](docs/tasks/proof-runbook.md) と [状態台帳](docs/tasks/proof-state.md) に従って、前回が終わるとすぐ次を始め、
+  一回の実行で60分のあいだ台帳の行を上から順に進める。
 - 方向性と台帳の順序は、毎日の定時実行「クリフォード代数の同型: 研究管理」が決め、
   論文の HTML を https://hexcomp-artifacts.web.app/masaori/math/clifford-matrix-isomorphism/ へ公開し直し、Slack へ報告する。
