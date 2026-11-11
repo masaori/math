@@ -12779,8 +12779,8 @@ F_i&=F_{i-1}\cup\{e\}&&\bigl(\because\ \text{辺選択の規則}\bigr)\\
                     "基点と反対の成分にある端点の路が、その辺から始まる。",
                     "従ってこの対応は全単射である。",
                   ]),
+                  displayMath(String.raw`|E|=|V\setminus\{o\}|\quad\bigl(\because\ \text{上で作った全単射}\bigr)`),
                   displayMath(String.raw`\begin{aligned}
-|E|&=|V\setminus\{o\}|&&\bigl(\because\ \text{上で作った全単射}\bigr)\\
 |E|+1&=|V\setminus\{o\}|+1&&\bigl(\because\ \text{直前の等式の両辺に }1\text{ を加える}\bigr)\\
 &=|V|&&\bigl(\because\ o\in V\text{ と有限集合の一点除去}\bigr)
 \end{aligned}`),

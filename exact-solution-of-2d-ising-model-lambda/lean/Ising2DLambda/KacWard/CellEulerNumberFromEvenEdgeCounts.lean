@@ -1,5 +1,7 @@
 import Ising2DLambda.KacWard.CellSubsetGraphEvenEdgeCount
 import Ising2DLambda.KacWard.CellGraphEvenEdgeCount
+import Ising2DLambda.Tools.ForestEdgeScan
+import Ising2DLambda.Tools.FiniteTreeEdgeCount
 import Mathlib.Data.Finset.Powerset
 import Mathlib.Tactic
 
@@ -63,12 +65,42 @@ theorem cellEulerNumber_eq_one_of_actual_even_edge_counts
     Nat.pow_right_injective (by decide : 1 < 2) hpowers
   have hG := edgeConnectedCellSet_actualVertexGraphConnected
     cells hnonempty hconnected
-  have hbound := hG.card_vert_le_card_edgeSet_add_one
+  -- Enumerate the actual cell-corner vertices before applying the finite-graph construction.
+  let G := cellVertexGraph cells
+  let n := Fintype.card (cellVertices cells)
+  let e : cellVertices cells ≃ Fin n := Fintype.equivFin (cellVertices cells)
+  let H : SimpleGraph (Fin n) := G.comap e.symm
+  let iso : G ≃g H := (SimpleGraph.Iso.comap e.symm G).symm
+  have hH : Ising2DLambda.Tools.FiniteGraphConnected H := by
+    constructor
+    · exact ⟨e (Classical.choice hG.nonempty)⟩
+    · intro u v
+      have hw := hG.preconnected (e.symm u) (e.symm v)
+      have hwH : H.Reachable u v := by
+        obtain ⟨w⟩ := hw
+        have h := w.map iso.toHom
+        simpa [iso, H] using h.reachable
+      exact ⟨hwH.some.toPath, hwH.some.toPath.isPath⟩
+  obtain ⟨T, hT⟩ := Ising2DLambda.Tools.finiteGraphConnected_has_spanningTree H hH
+  have hTree : T.IsTree := by
+    refine { connected := ?_, isAcyclic := ?_ }
+    · refine { preconnected := ?_, nonempty := hH.1 }
+      intro u v
+      exact (hT.1.1.2 u v).some.1.reachable
+    · intro u p hp
+      exact hT.1.2 u ⟨p, hp⟩
+  have hTreeCount := Ising2DLambda.Tools.finiteTree_edge_count n T hTree
+  -- The spanning tree has no more edges than the cell-corner graph.
+  have hTreeSubset : T.edgeFinset ⊆ H.edgeFinset :=
+    SimpleGraph.edgeFinset_mono hT.2
+  have hTreeBound : n ≤ H.edgeFinset.card + 1 := by
+    have hle := Finset.card_le_card hTreeSubset
+    omega
   have hvertices : (cellVertices cells).card ≤ (cellEdges cells).card + 1 := by
-    rw [Nat.card_eq_fintype_card (α := (cellVertices cells)),
-      Nat.card_eq_fintype_card (α := (cellVertexGraph cells).edgeSet),
-      ← SimpleGraph.edgeFinset_card, Fintype.card_coe, hedges] at hbound
-    exact hbound
+    have hEdges : H.edgeFinset.card = (cellEdges cells).card := by
+      rw [← iso.card_edgeFinset_eq]
+      exact hedges
+    simpa [n, Fintype.card_coe, hEdges] using hTreeBound
   unfold cellEulerNumber
   omega
 
