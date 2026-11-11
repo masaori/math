@@ -12142,4 +12142,335 @@ m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_definition_ordered_product_in_complex_numbers",
+    kind: "definition",
+    title: { text: "ℂ の中の番号順の積" },
+    labels: ["def_ordered_product_in_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`\{1,\dots,k\}`),
+        " の各元 ",
+        math(String.raw`r`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\alpha_r`),
+        " が一つずつ与えられているとする（",
+        math(String.raw`k=0`),
+        " のときは何も与えられていない）。",
+        math(String.raw`m\in\{0,1,\dots,k\}`),
+        " について、",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`P_m`),
+        " を次で帰納的に定める。",
+      ]),
+      list([
+        [math(String.raw`P_0:=1_{\mathbb{C}}`)],
+        [
+          math(String.raw`P_m:=P_{m-1}\cdot_{\mathbb{C}}\alpha_m`),
+          "（",
+          math(String.raw`1\le m\le k`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        math(String.raw`P_k`),
+        " を ",
+        math(String.raw`\alpha_1,\dots,\alpha_k`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の積と呼び、",
+        math(String.raw`\prod_{\mathbb{C},\,r=1}^{k}\alpha_r`),
+        " と書く。積は番号 ",
+        math(String.raw`1,\dots,k`),
+        " の順に左から掛けていく一つの式として定めており、積の順序によらないことはここでは主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_ordered_product_is_additive_in_one_factor",
+    kind: "claim",
+    title: { text: "ℂ の中の番号順の積は、一つの因子についての和を積の和へ移す" },
+    labels: ["claim_ordered_product_is_additive_in_one_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,k\}`),
+        " とし、",
+        math(String.raw`\{1,\dots,k\}`),
+        " の各元 ",
+        math(String.raw`s`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\alpha_s,\ \alpha'_s,\ \alpha''_s`),
+        " が一つずつ与えられていて、次を満たすとする。",
+      ]),
+      list([
+        [
+          math(String.raw`s\neq r`),
+          " のとき ",
+          math(String.raw`\alpha_s=\alpha'_s=\alpha''_s`),
+        ],
+        [math(String.raw`\alpha_r=\alpha'_r+_{\mathbb{C}}\alpha''_r`)],
+      ]),
+      paragraph([
+        "このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の積（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=\left(\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s\right)+_{\mathbb{C}}\left(\prod_{\mathbb{C},\,s=1}^{k}\alpha''_s\right)`),
+    ],
+    proof: [
+      paragraph([
+        "三つの積について番号順の積の定義（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）が帰納的に定める元を、順に ",
+        math(String.raw`P_m,\ P'_m,\ P''_m\in\mathbb{C}`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,k\}`),
+        "）と書く。",
+        math(String.raw`m`),
+        " についての帰納法で、",
+        math(String.raw`m<r`),
+        " なら ",
+        math(String.raw`P_m=P'_m=P''_m`),
+        "、",
+        math(String.raw`m\ge r`),
+        " なら ",
+        math(String.raw`P_m=P'_m+_{\mathbb{C}}P''_m`),
+        " であることを示す。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき、",
+        math(String.raw`0<r`),
+        " であり、",
+        math(String.raw`P_0=1_{\mathbb{C}}=P'_0=P''_0`),
+        " である（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）。",
+        math(String.raw`1\le m\le k`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について主張が成り立つとする（帰納法の仮定）。",
+      ]),
+      paragraph([
+        math(String.raw`m<r`),
+        " のとき、",
+        math(String.raw`m-1<r`),
+        " かつ ",
+        math(String.raw`m\neq r`),
+        " なので、",
+        math(String.raw`P_m=P_{m-1}\cdot_{\mathbb{C}}\alpha_m=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m=P'_m`),
+        " であり、同じく ",
+        math(String.raw`P_m=P''_m`),
+        " である（定義と帰納法の仮定と ",
+        math(String.raw`\alpha_m=\alpha'_m=\alpha''_m`),
+        "）。",
+        math(String.raw`m=r`),
+        " のとき、",
+        math(String.raw`m-1<r`),
+        " なので帰納法の仮定から ",
+        math(String.raw`P_{r-1}=P'_{r-1}=P''_{r-1}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_r
+&=P_{r-1}\cdot_{\mathbb{C}}\alpha_r
+&&\left(\because\ P_r\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P_{r-1}\cdot_{\mathbb{C}}(\alpha'_r+_{\mathbb{C}}\alpha''_r)
+&&\left(\because\ \alpha_r=\alpha'_r+_{\mathbb{C}}\alpha''_r\right)\\
+&=(P_{r-1}\cdot_{\mathbb{C}}\alpha'_r)+_{\mathbb{C}}(P_{r-1}\cdot_{\mathbb{C}}\alpha''_r)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(P'_{r-1}\cdot_{\mathbb{C}}\alpha'_r)+_{\mathbb{C}}(P''_{r-1}\cdot_{\mathbb{C}}\alpha''_r)
+&&\left(\because\ \text{帰納法の仮定}\ P_{r-1}=P'_{r-1}=P''_{r-1}\right)\\
+&=P'_r+_{\mathbb{C}}P''_r
+&&\left(\because\ P'_r,\ P''_r\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m>r`),
+        " のとき、",
+        math(String.raw`m-1\ge r`),
+        " なので帰納法の仮定から ",
+        math(String.raw`P_{m-1}=P'_{m-1}+_{\mathbb{C}}P''_{m-1}`),
+        " であり、",
+        math(String.raw`m\neq r`),
+        " なので ",
+        math(String.raw`\alpha_m=\alpha'_m=\alpha''_m`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ P_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=(P'_{m-1}+_{\mathbb{C}}P''_{m-1})\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=(P'_{m-1}\cdot_{\mathbb{C}}\alpha_m)+_{\mathbb{C}}(P''_{m-1}\cdot_{\mathbb{C}}\alpha_m)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m)+_{\mathbb{C}}(P''_{m-1}\cdot_{\mathbb{C}}\alpha''_m)
+&&\left(\because\ \alpha_m=\alpha'_m=\alpha''_m\right)\\
+&=P'_m+_{\mathbb{C}}P''_m
+&&\left(\because\ P'_m,\ P''_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r\le k`),
+        " なので、これを ",
+        math(String.raw`m=k`),
+        " で使うと ",
+        math(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=P_k=P'_k+_{\mathbb{C}}P''_k`),
+        " であり、右辺は主張の右辺である（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_ordered_product_is_homogeneous_in_one_factor",
+    kind: "claim",
+    title: { text: "ℂ の中の番号順の積は、一つの因子のスカラー倍を積のスカラー倍へ移す" },
+    labels: ["claim_ordered_product_is_homogeneous_in_one_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,k\}`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " とし、",
+        math(String.raw`\{1,\dots,k\}`),
+        " の各元 ",
+        math(String.raw`s`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\alpha_s,\ \alpha'_s`),
+        " が一つずつ与えられていて、次を満たすとする。",
+      ]),
+      list([
+        [
+          math(String.raw`s\neq r`),
+          " のとき ",
+          math(String.raw`\alpha_s=\alpha'_s`),
+        ],
+        [math(String.raw`\alpha_r=\lambda\cdot_{\mathbb{C}}\alpha'_r`)],
+      ]),
+      paragraph([
+        "このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の積（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=\lambda\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s`),
+    ],
+    proof: [
+      paragraph([
+        "二つの積について番号順の積の定義（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）が帰納的に定める元を、順に ",
+        math(String.raw`P_m,\ P'_m\in\mathbb{C}`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,k\}`),
+        "）と書く。",
+        math(String.raw`m`),
+        " についての帰納法で、",
+        math(String.raw`m<r`),
+        " なら ",
+        math(String.raw`P_m=P'_m`),
+        "、",
+        math(String.raw`m\ge r`),
+        " なら ",
+        math(String.raw`P_m=\lambda\cdot_{\mathbb{C}}P'_m`),
+        " であることを示す。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき、",
+        math(String.raw`0<r`),
+        " であり、",
+        math(String.raw`P_0=1_{\mathbb{C}}=P'_0`),
+        " である（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）。",
+        math(String.raw`1\le m\le k`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について主張が成り立つとする（帰納法の仮定）。",
+        math(String.raw`m<r`),
+        " のとき、",
+        math(String.raw`m-1<r`),
+        " かつ ",
+        math(String.raw`m\neq r`),
+        " なので、",
+        math(String.raw`P_m=P_{m-1}\cdot_{\mathbb{C}}\alpha_m=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m=P'_m`),
+        " である（定義と帰納法の仮定と ",
+        math(String.raw`\alpha_m=\alpha'_m`),
+        "）。",
+        math(String.raw`m=r`),
+        " のとき、帰納法の仮定から ",
+        math(String.raw`P_{r-1}=P'_{r-1}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_r
+&=P_{r-1}\cdot_{\mathbb{C}}\alpha_r
+&&\left(\because\ P_r\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P_{r-1}\cdot_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}}\alpha'_r)
+&&\left(\because\ \alpha_r=\lambda\cdot_{\mathbb{C}}\alpha'_r\right)\\
+&=(P_{r-1}\cdot_{\mathbb{C}}\lambda)\cdot_{\mathbb{C}}\alpha'_r
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}P_{r-1})\cdot_{\mathbb{C}}\alpha'_r
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(P_{r-1}\cdot_{\mathbb{C}}\alpha'_r)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(P'_{r-1}\cdot_{\mathbb{C}}\alpha'_r)
+&&\left(\because\ \text{帰納法の仮定}\ P_{r-1}=P'_{r-1}\right)\\
+&=\lambda\cdot_{\mathbb{C}}P'_r
+&&\left(\because\ P'_r\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m>r`),
+        " のとき、",
+        math(String.raw`m-1\ge r`),
+        " なので帰納法の仮定から ",
+        math(String.raw`P_{m-1}=\lambda\cdot_{\mathbb{C}}P'_{m-1}`),
+        " であり、",
+        math(String.raw`m\neq r`),
+        " なので ",
+        math(String.raw`\alpha_m=\alpha'_m`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ P_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}P'_{m-1})\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(P'_{m-1}\cdot_{\mathbb{C}}\alpha_m)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m)
+&&\left(\because\ \alpha_m=\alpha'_m\right)\\
+&=\lambda\cdot_{\mathbb{C}}P'_m
+&&\left(\because\ P'_m\ \text{の定義。}\blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r\le k`),
+        " なので、これを ",
+        math(String.raw`m=k`),
+        " で使うと ",
+        math(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=P_k=\lambda\cdot_{\mathbb{C}}P'_k`),
+        " であり、右辺は主張の右辺である（",
+        ref("def_ordered_product_in_complex_numbers"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
