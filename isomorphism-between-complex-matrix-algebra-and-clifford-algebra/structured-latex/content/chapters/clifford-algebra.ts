@@ -151,6 +151,95 @@ export default defineBlocks([
     ],
   },
   {
+    id: "clifford_algebra_claim_anticommutator_of_generator_images_is_polarization",
+    kind: "claim",
+    title: { text: "線型空間の二元の像の反交換子は、偏極の値の単位元倍である" },
+    labels: ["claim_anticommutator_of_clifford_generator_images_is_polarization"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), "、", math(String.raw`q`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), " を ",
+        ref("def_clifford_generator_map"), " のもの、", math(String.raw`B_q`), " を ", math(String.raw`q`), " の偏極（",
+        ref("def_polarization_of_map_to_complex_numbers"), "）とする。このとき、すべての ", math(String.raw`x,y\in V`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\gamma(x)\cdot_{\mathrm{Cl}(V,q)}\gamma(y)+_{\mathrm{Cl}(V,q)}\gamma(y)\cdot_{\mathrm{Cl}(V,q)}\gamma(x)=B_q(x,y)\ast_{\mathrm{Cl}(V,q)}1_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置く。", math(String.raw`A`), " は ℂ-代数である（", ref("def_clifford_algebra"), "）。",
+        math(String.raw`A`), " の加法と乗法についての等式は ", math(String.raw`U_{\mathrm{ring}}(A)`), " の公理（", ref("def_unital_ring"),
+        "）、加法とスカラー倍についての等式は ", math(String.raw`U_{\mathrm{vec}}(A)`), " の公理（", ref("def_complex_vector_space"), "）であり（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"), "）、", math(String.raw`\cdot_A`), " は ", math(String.raw`+_A`),
+        " より先に結合させる。次の元を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s&:=\gamma(x)\cdot_A\gamma(y)+_A\gamma(y)\cdot_A\gamma(x)\in A,\\
+u&:=\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\in A,\\
+\beta&:=B_q(x,y)\in\mathbb{C}.
+\end{aligned}`),
+      paragraph([
+        "加法の逆元の存在（", ref("def_unital_ring"), "）により、", math(String.raw`u+_A u'=0_A`), " を満たす ", math(String.raw`u'\in A`),
+        " を一つ選ぶ。まず ", math(String.raw`\gamma(x+_V y)`), " の平方を開く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\gamma(x+_V y)\cdot_A\gamma(x+_V y)\\
+&\quad=\bigl(\gamma(x)+_A\gamma(y)\bigr)\cdot_A\bigl(\gamma(x)+_A\gamma(y)\bigr)
+&&\left(\because\ \gamma\ \text{は加法を保つ（二か所に適用）。}\blkref{claim_clifford_generator_map_is_linear_map}\text{、}\blkref{def_linear_map}\right)\\
+&\quad=\gamma(x)\cdot_A\bigl(\gamma(x)+_A\gamma(y)\bigr)+_A\gamma(y)\cdot_A\bigl(\gamma(x)+_A\gamma(y)\bigr)
+&&\left(\because\ \text{左の因子の和についての分配法則}\right)\\
+&\quad=\bigl(\gamma(x)\cdot_A\gamma(x)+_A\gamma(x)\cdot_A\gamma(y)\bigr)+_A\bigl(\gamma(y)\cdot_A\gamma(x)+_A\gamma(y)\cdot_A\gamma(y)\bigr)
+&&\left(\because\ \text{右の因子の和についての分配法則（二か所に適用）}\right)\\
+&\quad=\Bigl(\bigl(q(x)\ast_A 1_A\bigr)+_A\gamma(x)\cdot_A\gamma(y)\Bigr)+_A\Bigl(\gamma(y)\cdot_A\gamma(x)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_square_of_clifford_generator}\ \text{を二か所に適用}\right)\\
+&\quad=\bigl(q(x)\ast_A 1_A\bigr)+_A\Bigl(\gamma(x)\cdot_A\gamma(y)+_A\Bigl(\gamma(y)\cdot_A\gamma(x)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&\quad=\bigl(q(x)\ast_A 1_A\bigr)+_A\Bigl(\bigl(\gamma(x)\cdot_A\gamma(y)+_A\gamma(y)\cdot_A\gamma(x)\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&\quad=\bigl(q(x)\ast_A 1_A\bigr)+_A\Bigl(s+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)
+&&\left(\because\ s\ \text{の定義}\right)\\
+&\quad=\bigl(q(x)\ast_A 1_A\bigr)+_A\Bigl(\bigl(q(y)\ast_A 1_A\bigr)+_A s\Bigr)
+&&\left(\because\ \text{加法の交換法則}\right)\\
+&\quad=\Bigl(\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)+_A s
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&\quad=u+_A s
+&&\left(\because\ u\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph(["これを使って主張の左辺を開く。"]),
+      displayMath(String.raw`\begin{aligned}
+s
+&=s+_A 0_A
+&&\left(\because\ 0_A\ \text{は加法の単位元}\right)\\
+&=s+_A\bigl(u+_A u'\bigr)
+&&\left(\because\ u'\ \text{の選び方}\right)\\
+&=\bigl(s+_A u\bigr)+_A u'
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&=\bigl(u+_A s\bigr)+_A u'
+&&\left(\because\ \text{加法の交換法則}\right)\\
+&=\gamma(x+_V y)\cdot_A\gamma(x+_V y)+_A u'
+&&\left(\because\ \text{上の式}\right)\\
+&=\bigl(q(x+_V y)\ast_A 1_A\bigr)+_A u'
+&&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
+&=\Bigl(\bigl((q(x)+_{\mathbb{C}}q(y))+_{\mathbb{C}}\beta\bigr)\ast_A 1_A\Bigr)+_A u'
+&&\left(\because\ \text{偏極の等式と}\ \beta\ \text{の定義。}\blkref{claim_polarization_identity}\right)\\
+&=\Bigl(\bigl((q(x)+_{\mathbb{C}}q(y))\ast_A 1_A\bigr)+_A\bigl(\beta\ast_A 1_A\bigr)\Bigr)+_A u'
+&&\left(\because\ \text{スカラーの加法についての分配法則}\right)\\
+&=\Bigl(\Bigl(\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)+_A\bigl(\beta\ast_A 1_A\bigr)\Bigr)+_A u'
+&&\left(\because\ \text{スカラーの加法についての分配法則}\right)\\
+&=\Bigl(u+_A\bigl(\beta\ast_A 1_A\bigr)\Bigr)+_A u'
+&&\left(\because\ u\ \text{の定義}\right)\\
+&=\Bigl(\bigl(\beta\ast_A 1_A\bigr)+_A u\Bigr)+_A u'
+&&\left(\because\ \text{加法の交換法則}\right)\\
+&=\bigl(\beta\ast_A 1_A\bigr)+_A\bigl(u+_A u'\bigr)
+&&\left(\because\ \text{加法の結合法則}\right)\\
+&=\bigl(\beta\ast_A 1_A\bigr)+_A 0_A
+&&\left(\because\ u'\ \text{の選び方}\right)\\
+&=\beta\ast_A 1_A
+&&\left(\because\ 0_A\ \text{は加法の単位元}\right)\\
+&=B_q(x,y)\ast_A 1_A
+&&\left(\because\ \beta\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "clifford_algebra_claim_image_of_generator_map_generates_clifford_algebra",
     kind: "claim",
     title: { text: "線型空間の像はクリフォード代数を生成する" },
@@ -271,6 +360,248 @@ export default defineBlocks([
         ref("claim_image_of_clifford_generator_map_generates_clifford_algebra"), "）、", ref("claim_homomorphisms_agreeing_on_generators_are_equal"),
         " により ", math(String.raw`\Phi=\Phi'`), " である。",
       ]),
+    ],
+  },
+  {
+    id: "clifford_algebra_split_quadratic_space_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "分裂した二次空間のクリフォード代数の生成元" },
+    labels: [],
+  },
+  {
+    id: "clifford_algebra_definition_clifford_algebra_of_split_quadratic_space",
+    kind: "definition",
+    title: { text: "分裂した二次空間のクリフォード代数" },
+    labels: ["def_clifford_algebra_of_split_quadratic_space"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`(W,+_W,\cdot_W,0_W)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、",
+        math(String.raw`w:\{1,\dots,M\}\to W`), " を ", math(String.raw`W`), " の基底（", ref("def_basis"), "）、", math(String.raw`f:\{1,\dots,M\}\to W^{*}`),
+        " を基底 ", math(String.raw`w`), " の双対基底（", ref("def_dual_basis"), "。存在は ", ref("claim_coordinate_maps_form_dual_basis"), "）とし、",
+        math(String.raw`i\in\{1,\dots,M\}`), " について ", math(String.raw`w_i:=w(i)\in W`), "、", math(String.raw`f_i:=f(i)\in W^{*}`), " と書く。",
+        math(String.raw`f`), " は一次独立で（", ref("claim_dual_basis_is_linearly_independent"), "）", math(String.raw`W^{*}`), " を張るので（",
+        ref("claim_dual_basis_spans_dual_space"), "）、", math(String.raw`W^{*}`), " の基底である（", ref("def_basis"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`W\oplus W^{*}`), " を ", math(String.raw`W`), " と ", math(String.raw`W^{*}`), " の直和（", ref("def_direct_sum_of_two_vector_spaces"),
+        "）、", math(String.raw`q_W`), " を ", ref("def_split_quadratic_form"), " の写像とし、", math(String.raw`V:=W\oplus W^{*}`), "、", math(String.raw`q:=q_W`),
+        " と置く。", math(String.raw`q`), " は ", math(String.raw`V`), " 上の二次形式である（", ref("claim_split_quadratic_form_is_quadratic_form"), "）。",
+        math(String.raw`c:\{1,\dots,2M\}\to V`), " を、", ref("claim_basis_of_direct_sum_of_two_vector_spaces"), " で ", math(String.raw`V_1:=W`), "、",
+        math(String.raw`V_2:=W^{*}`), "、", math(String.raw`n=n':=M`), "、", math(String.raw`b:=w`), "、", math(String.raw`b':=f`), " としたときの ",
+        math(String.raw`V`), " の基底とする。",
+      ]),
+      paragraph([
+        math(String.raw`\mathrm{Cl}(V,q)`), " を、基底 ", math(String.raw`c`), " で構成した ", math(String.raw`(V,q)`), " のクリフォード代数（",
+        ref("def_clifford_ideal"), "、", ref("def_clifford_algebra"), "）とし、", math(String.raw`\gamma:V\to\mathrm{Cl}(V,q)`), " を ",
+        ref("def_clifford_generator_map"), " の写像、", math(String.raw`\mathrm{in}_1:W\to V`), " と ", math(String.raw`\mathrm{in}_2:W^{*}\to V`),
+        " を直和の成分への埋め込み写像（", ref("def_embedding_into_first_component_of_direct_sum"), "、", ref("def_embedding_into_second_component_of_direct_sum"),
+        "）とする。", math(String.raw`(V,q)`), " を分裂した二次空間、", math(String.raw`\mathrm{Cl}(V,q)`), " をそのクリフォード代数と呼ぶ。",
+      ]),
+    ],
+  },
+  {
+    id: "clifford_algebra_definition_creation_generator",
+    kind: "definition",
+    title: { text: "分裂した二次空間のクリフォード代数の、生成作用素にあたる元" },
+    labels: ["def_creation_generator_of_split_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`w_i`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), "、", math(String.raw`\mathrm{in}_1`),
+        " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のものとする。", math(String.raw`i\in\{1,\dots,M\}`), " について、",
+        math(String.raw`\mathrm{Cl}(V,q)`), " の元 ", math(String.raw`a^{\dagger}_i`), " を次で定める。",
+      ]),
+      displayMath(String.raw`a^{\dagger}_i:=\gamma\bigl(\mathrm{in}_1(w_i)\bigr)\in\mathrm{Cl}(V,q)`),
+      paragraph([
+        math(String.raw`w_i`), " は ", math(String.raw`W`), " の元で、", math(String.raw`V`), " の元ではない。", math(String.raw`\gamma`), " に渡す前に ",
+        math(String.raw`\mathrm{in}_1`), " で ", math(String.raw`V`), " の元 ", math(String.raw`(w_i,0_{W^{*}})`), " にする。",
+      ]),
+    ],
+  },
+  {
+    id: "clifford_algebra_definition_annihilation_generator",
+    kind: "definition",
+    title: { text: "分裂した二次空間のクリフォード代数の、消滅作用素にあたる元" },
+    labels: ["def_annihilation_generator_of_split_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`f_i`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), "、", math(String.raw`\mathrm{in}_2`),
+        " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のものとする。", math(String.raw`i\in\{1,\dots,M\}`), " について、",
+        math(String.raw`\mathrm{Cl}(V,q)`), " の元 ", math(String.raw`a_i`), " を次で定める。",
+      ]),
+      displayMath(String.raw`a_i:=\gamma\bigl(\mathrm{in}_2(f_i)\bigr)\in\mathrm{Cl}(V,q)`),
+      paragraph([
+        math(String.raw`f_i`), " は ", math(String.raw`W^{*}`), " の元で、", math(String.raw`V`), " の元ではない。", math(String.raw`\gamma`), " に渡す前に ",
+        math(String.raw`\mathrm{in}_2`), " で ", math(String.raw`V`), " の元 ", math(String.raw`(0_W,f_i)`), " にする。",
+      ]),
+    ],
+  },
+  {
+    id: "clifford_algebra_claim_annihilation_and_creation_generators_anticommute",
+    kind: "claim",
+    title: { text: "消滅作用素にあたる元と生成作用素にあたる元の反交換関係" },
+    labels: ["claim_annihilation_and_creation_generators_anticommute"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、",
+        math(String.raw`a^{\dagger}_j`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ",
+        ref("def_annihilation_generator_of_split_clifford_algebra"), " のものとし、", math(String.raw`\delta_{i,j}\in\mathbb{C}`), " を ",
+        math(String.raw`\{1,\dots,M\}`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）とする。このとき、すべての ",
+        math(String.raw`i,j\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`a_i\cdot_{\mathrm{Cl}(V,q)}a^{\dagger}_j+_{\mathrm{Cl}(V,q)}a^{\dagger}_j\cdot_{\mathrm{Cl}(V,q)}a_i=\delta_{i,j}\ast_{\mathrm{Cl}(V,q)}1_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置き、", math(String.raw`z_W:W\to\mathbb{C}`), " を ", ref("claim_zero_map_is_linear_form"), " の零写像とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&a_i\cdot_A a^{\dagger}_j+_A a^{\dagger}_j\cdot_A a_i\\
+&\quad=\gamma\bigl(\mathrm{in}_2(f_i)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_1(w_j)\bigr)+_A\gamma\bigl(\mathrm{in}_1(w_j)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_2(f_i)\bigr)
+&&\left(\because\ \blkref{def_annihilation_generator_of_split_clifford_algebra}\text{、}\blkref{def_creation_generator_of_split_clifford_algebra}\ \text{を二か所ずつに適用}\right)\\
+&\quad=B_q\bigl(\mathrm{in}_2(f_i),\ \mathrm{in}_1(w_j)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_anticommutator_of_clifford_generator_images_is_polarization}\right)\\
+&\quad=B_q\bigl((0_W,\ f_i),\ (w_j,\ 0_{W^{*}})\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{def_embedding_into_second_component_of_direct_sum}\text{、}\blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&\quad=\bigl(f_i(w_j)+_{\mathbb{C}}0_{W^{*}}(0_W)\bigr)\ast_A 1_A
+&&\left(\because\ q=q_W\text{。}\blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&\quad=\bigl(\delta_{i,j}+_{\mathbb{C}}0_{W^{*}}(0_W)\bigr)\ast_A 1_A
+&&\left(\because\ f\ \text{は}\ w\ \text{の双対基底。}\blkref{def_dual_basis}\right)\\
+&\quad=\bigl(\delta_{i,j}+_{\mathbb{C}}z_W(0_W)\bigr)\ast_A 1_A
+&&\left(\because\ 0_{W^{*}}:=z_W\text{。}\blkref{def_dual_space}\right)\\
+&\quad=\bigl(\delta_{i,j}+_{\mathbb{C}}0_{\mathbb{C}}\bigr)\ast_A 1_A
+&&\left(\because\ z_W\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right)\\
+&\quad=\delta_{i,j}\ast_A 1_A
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "clifford_algebra_claim_creation_generators_anticommute",
+    kind: "claim",
+    title: { text: "生成作用素にあたる元どうしの反交換関係" },
+    labels: ["claim_creation_generators_anticommute"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、",
+        math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), " のものとする。このとき、すべての ",
+        math(String.raw`i,j\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`a^{\dagger}_i\cdot_{\mathrm{Cl}(V,q)}a^{\dagger}_j+_{\mathrm{Cl}(V,q)}a^{\dagger}_j\cdot_{\mathrm{Cl}(V,q)}a^{\dagger}_i=0_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置き、", math(String.raw`z_W:W\to\mathbb{C}`), " を ", ref("claim_zero_map_is_linear_form"), " の零写像とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&a^{\dagger}_i\cdot_A a^{\dagger}_j+_A a^{\dagger}_j\cdot_A a^{\dagger}_i\\
+&\quad=\gamma\bigl(\mathrm{in}_1(w_i)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_1(w_j)\bigr)+_A\gamma\bigl(\mathrm{in}_1(w_j)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_1(w_i)\bigr)
+&&\left(\because\ \blkref{def_creation_generator_of_split_clifford_algebra}\ \text{を四か所に適用}\right)\\
+&\quad=B_q\bigl(\mathrm{in}_1(w_i),\ \mathrm{in}_1(w_j)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_anticommutator_of_clifford_generator_images_is_polarization}\right)\\
+&\quad=B_q\bigl((w_i,\ 0_{W^{*}}),\ (w_j,\ 0_{W^{*}})\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{def_embedding_into_first_component_of_direct_sum}\ \text{を二か所に適用}\right)\\
+&\quad=\bigl(0_{W^{*}}(w_j)+_{\mathbb{C}}0_{W^{*}}(w_i)\bigr)\ast_A 1_A
+&&\left(\because\ q=q_W\text{。}\blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&\quad=\bigl(z_W(w_j)+_{\mathbb{C}}z_W(w_i)\bigr)\ast_A 1_A
+&&\left(\because\ 0_{W^{*}}:=z_W\ \text{を二か所に適用。}\blkref{def_dual_space}\right)\\
+&\quad=\bigl(0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}\bigr)\ast_A 1_A
+&&\left(\because\ z_W\ \text{の定義を二か所に適用。}\blkref{claim_zero_map_is_linear_form}\right)\\
+&\quad=0_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&\quad=0_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{で零のスカラー倍は零ベクトル。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "clifford_algebra_claim_annihilation_generators_anticommute",
+    kind: "claim",
+    title: { text: "消滅作用素にあたる元どうしの反交換関係" },
+    labels: ["claim_annihilation_generators_anticommute"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、",
+        math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " のものとする。このとき、すべての ",
+        math(String.raw`i,j\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`a_i\cdot_{\mathrm{Cl}(V,q)}a_j+_{\mathrm{Cl}(V,q)}a_j\cdot_{\mathrm{Cl}(V,q)}a_i=0_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置く。"]),
+      displayMath(String.raw`\begin{aligned}
+&a_i\cdot_A a_j+_A a_j\cdot_A a_i\\
+&\quad=\gamma\bigl(\mathrm{in}_2(f_i)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_2(f_j)\bigr)+_A\gamma\bigl(\mathrm{in}_2(f_j)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_2(f_i)\bigr)
+&&\left(\because\ \blkref{def_annihilation_generator_of_split_clifford_algebra}\ \text{を四か所に適用}\right)\\
+&\quad=B_q\bigl(\mathrm{in}_2(f_i),\ \mathrm{in}_2(f_j)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_anticommutator_of_clifford_generator_images_is_polarization}\right)\\
+&\quad=B_q\bigl((0_W,\ f_i),\ (0_W,\ f_j)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{def_embedding_into_second_component_of_direct_sum}\ \text{を二か所に適用}\right)\\
+&\quad=\bigl(f_i(0_W)+_{\mathbb{C}}f_j(0_W)\bigr)\ast_A 1_A
+&&\left(\because\ q=q_W\text{。}\blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&\quad=\bigl(0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}\bigr)\ast_A 1_A
+&&\left(\because\ f_i,\ f_j\ \text{は線型形式（二か所に適用）。}\blkref{def_dual_space}\text{、}\blkref{claim_linear_form_sends_zero_vector_to_zero}\right)\\
+&\quad=0_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&\quad=0_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{で零のスカラー倍は零ベクトル。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "clifford_algebra_claim_square_of_creation_generator_is_zero",
+    kind: "claim",
+    title: { text: "生成作用素にあたる元の平方は零である" },
+    labels: ["claim_square_of_creation_generator_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、",
+        math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), " のものとする。このとき、すべての ",
+        math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`a^{\dagger}_i\cdot_{\mathrm{Cl}(V,q)}a^{\dagger}_i=0_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置く。"]),
+      displayMath(String.raw`\begin{aligned}
+a^{\dagger}_i\cdot_A a^{\dagger}_i
+&=\gamma\bigl(\mathrm{in}_1(w_i)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_1(w_i)\bigr)
+&&\left(\because\ \blkref{def_creation_generator_of_split_clifford_algebra}\ \text{を二か所に適用}\right)\\
+&=q\bigl(\mathrm{in}_1(w_i)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
+&=0_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ q=q_W\text{。}\blkref{claim_split_quadratic_form_vanishes_on_first_component}\right)\\
+&=0_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{で零のスカラー倍は零ベクトル。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "clifford_algebra_claim_square_of_annihilation_generator_is_zero",
+    kind: "claim",
+    title: { text: "消滅作用素にあたる元の平方は零である" },
+    labels: ["claim_square_of_annihilation_generator_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、",
+        math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " のものとする。このとき、すべての ",
+        math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`a_i\cdot_{\mathrm{Cl}(V,q)}a_i=0_{\mathrm{Cl}(V,q)}`),
+    ],
+    proof: [
+      paragraph([math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置く。"]),
+      displayMath(String.raw`\begin{aligned}
+a_i\cdot_A a_i
+&=\gamma\bigl(\mathrm{in}_2(f_i)\bigr)\cdot_A\gamma\bigl(\mathrm{in}_2(f_i)\bigr)
+&&\left(\because\ \blkref{def_annihilation_generator_of_split_clifford_algebra}\ \text{を二か所に適用}\right)\\
+&=q\bigl(\mathrm{in}_2(f_i)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
+&=0_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ q=q_W\text{。}\blkref{claim_split_quadratic_form_vanishes_on_second_component}\right)\\
+&=0_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{で零のスカラー倍は零ベクトル。}\blkref{def_underlying_ring_and_vector_space_of_algebra}\text{、}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
     ],
   },
 ]);

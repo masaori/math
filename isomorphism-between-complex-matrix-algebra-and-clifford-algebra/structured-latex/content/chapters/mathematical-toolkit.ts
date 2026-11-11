@@ -1211,6 +1211,30 @@ z_V(\lambda\cdot_V x)
     ],
   },
   {
+    id: "mathematical_toolkit_claim_linear_form_sends_zero_vector_to_zero",
+    kind: "claim",
+    title: { text: "線型形式は零ベクトルを 0 へ移す" },
+    labels: ["claim_linear_form_sends_zero_vector_to_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`g:V\to\mathbb{C}`),
+        " を ", math(String.raw`V`), " 上の線型形式（", ref("def_linear_form"), "）とする。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`g(0_V)=0_{\mathbb{C}}`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+g(0_V)
+&=g(0_{\mathbb{C}}\cdot_V 0_V)
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}g(0_V)
+&&\left(\because\ g\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ g(0_V)\in\mathbb{C}\ \text{と}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}g(0_V)=0_{\mathbb{C}}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_sum_of_linear_combinations_of_same_family",
     kind: "claim",
     title: { text: "同じ族の二つの線型結合の和は、係数ごとの和による線型結合である" },
@@ -17953,6 +17977,61 @@ g\bigl(\lambda\cdot_{W\oplus W^{*}}(w,f)\bigr)
         "二つの条件が満たされたので、", math(String.raw`g`), " は ", math(String.raw`W\oplus W^{*}`), " 上の線型形式であり（", ref("def_linear_form"),
         "）、", math(String.raw`(w',f')`), " は任意だったので、", math(String.raw`q_W`), " は二次形式の二つの条件を満たす（", ref("def_quadratic_form"), "）。",
       ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_split_quadratic_form_vanishes_on_first_component",
+    kind: "claim",
+    title: { text: "対による二次の写像は、第一成分への埋め込みの像で 0 になる" },
+    labels: ["claim_split_quadratic_form_vanishes_on_first_component"],
+    statement: [
+      paragraph([
+        math(String.raw`W`), "、", math(String.raw`W^{*}`), "、", math(String.raw`q_W`), " を ", ref("def_split_quadratic_form"), " のもの、",
+        math(String.raw`\mathrm{in}_1:W\to W\oplus W^{*}`), " を直和の第一成分への埋め込み写像（", ref("def_embedding_into_first_component_of_direct_sum"),
+        "）とする。このとき、すべての ", math(String.raw`w\in W`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`q_W\bigl(\mathrm{in}_1(w)\bigr)=0_{\mathbb{C}}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z_W:W\to\mathbb{C}`), " を ", ref("claim_zero_map_is_linear_form"), " の零写像とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q_W\bigl(\mathrm{in}_1(w)\bigr)
+&=q_W\bigl((w,\ 0_{W^{*}})\bigr)
+&&\left(\because\ \blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&=0_{W^{*}}(w)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right)\\
+&=z_W(w)
+&&\left(\because\ 0_{W^{*}}:=z_W\text{。}\blkref{def_dual_space}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ z_W\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_split_quadratic_form_vanishes_on_second_component",
+    kind: "claim",
+    title: { text: "対による二次の写像は、第二成分への埋め込みの像で 0 になる" },
+    labels: ["claim_split_quadratic_form_vanishes_on_second_component"],
+    statement: [
+      paragraph([
+        math(String.raw`W`), "、", math(String.raw`W^{*}`), "、", math(String.raw`q_W`), " を ", ref("def_split_quadratic_form"), " のもの、",
+        math(String.raw`\mathrm{in}_2:W^{*}\to W\oplus W^{*}`), " を直和の第二成分への埋め込み写像（", ref("def_embedding_into_second_component_of_direct_sum"),
+        "）とする。このとき、すべての ", math(String.raw`g\in W^{*}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`q_W\bigl(\mathrm{in}_2(g)\bigr)=0_{\mathbb{C}}`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+q_W\bigl(\mathrm{in}_2(g)\bigr)
+&=q_W\bigl((0_W,\ g)\bigr)
+&&\left(\because\ \blkref{def_embedding_into_second_component_of_direct_sum}\right)\\
+&=g(0_W)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ g\ \text{は}\ W\ \text{上の線型形式。}\blkref{def_dual_space}\text{、}\blkref{claim_linear_form_sends_zero_vector_to_zero}\right).
+\end{aligned}`),
     ],
   },
 ]);
