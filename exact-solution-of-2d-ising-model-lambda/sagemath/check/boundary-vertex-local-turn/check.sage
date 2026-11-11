@@ -17,6 +17,10 @@ for a, b, c, d in product((False, True), repeat=4):
     outgoing_sides = ((b, c), (c, d), (d, a), (a, b))
     assert incoming_sides[incoming] == (True, False)
     assert outgoing_sides[outgoing] == (True, False)
+    assert [direction for direction in range(4)
+            if incoming_sides[direction] == (True, False)] == [incoming]
+    assert [direction for direction in range(4)
+            if outgoing_sides[direction] == (True, False)] == [outgoing]
     incoming_side = (3, 0, 1, 2)[incoming]
     outgoing_side = (1, 2, 3, 0)[outgoing]
     assert incoming_side != outgoing_side

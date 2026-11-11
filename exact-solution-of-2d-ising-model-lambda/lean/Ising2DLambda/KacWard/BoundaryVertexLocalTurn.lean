@@ -84,6 +84,57 @@ theorem cellBoundary_local_directions_selected_left (cells : Finset GridCell) (r
     by_cases hd : (r, c - 1) ∈ cells <;>
     simp_all [cellBoundaryIncoming, cellBoundaryOutgoing] <;> decide
 
+/-- At a non-diagonal boundary vertex, any entering direction with an interior
+cell on its left is the direction selected by the local four-cell rule. -/
+theorem cellBoundary_incoming_unique (cells : Finset GridCell) (r c : ℤ)
+    (direction : Fin 4)
+    (hv : (r, c) ∈ cellBoundaryVertices cells)
+    (hdiag₁ : ¬ ((r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells ∧
+      (r, c) ∈ cells ∧ (r, c - 1) ∉ cells))
+    (hdiag₂ : ¬ ((r - 1, c - 1) ∉ cells ∧ (r - 1, c) ∈ cells ∧
+      (r, c) ∉ cells ∧ (r, c - 1) ∈ cells))
+    (hleft : if direction.val = 0 then
+        (r - 1, c - 1) ∈ cells ∧ (r, c - 1) ∉ cells
+      else if direction.val = 1 then
+        (r - 1, c) ∈ cells ∧ (r - 1, c - 1) ∉ cells
+      else if direction.val = 2 then
+        (r, c) ∈ cells ∧ (r - 1, c) ∉ cells
+      else (r, c - 1) ∈ cells ∧ (r, c) ∉ cells) :
+    (direction.val : ZMod 4) = cellBoundaryIncoming cells r c := by
+  have hcount := (cellBoundaryVertices_iff_incidence_one_to_three cells r c).mp hv
+  rw [vertexCellIncidenceCount_quadrants] at hcount
+  fin_cases direction <;>
+    by_cases ha : (r - 1, c - 1) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c) ∈ cells <;>
+    by_cases hd : (r, c - 1) ∈ cells <;>
+    simp_all [cellBoundaryIncoming]
+
+/-- The corresponding statement for a direction leaving the vertex. -/
+theorem cellBoundary_outgoing_unique (cells : Finset GridCell) (r c : ℤ)
+    (direction : Fin 4)
+    (hv : (r, c) ∈ cellBoundaryVertices cells)
+    (hdiag₁ : ¬ ((r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells ∧
+      (r, c) ∈ cells ∧ (r, c - 1) ∉ cells))
+    (hdiag₂ : ¬ ((r - 1, c - 1) ∉ cells ∧ (r - 1, c) ∈ cells ∧
+      (r, c) ∉ cells ∧ (r, c - 1) ∈ cells))
+    (hleft : if direction.val = 0 then
+        (r - 1, c) ∈ cells ∧ (r, c) ∉ cells
+      else if direction.val = 1 then
+        (r, c) ∈ cells ∧ (r, c - 1) ∉ cells
+      else if direction.val = 2 then
+        (r, c - 1) ∈ cells ∧ (r - 1, c - 1) ∉ cells
+      else (r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells) :
+    (direction.val : ZMod 4) = cellBoundaryOutgoing cells r c := by
+  have hcount := (cellBoundaryVertices_iff_incidence_one_to_three cells r c).mp hv
+  rw [vertexCellIncidenceCount_quadrants] at hcount
+  fin_cases direction <;>
+    by_cases ha : (r - 1, c - 1) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c) ∈ cells <;>
+    by_cases hd : (r, c - 1) ∈ cells <;>
+    simp_all [cellBoundaryOutgoing]
+
 /-- The entering and leaving boundary edges at a non-diagonal vertex are distinct. -/
 theorem cellBoundary_local_edges_ne (cells : Finset GridCell) (r c : ℤ)
     (hv : (r, c) ∈ cellBoundaryVertices cells)

@@ -70124,9 +70124,17 @@ I_{a,b}\ne\{C_1,C_3\}`),
                         math(String.raw`\{C_0,C_2\}`), " と ", math(String.raw`\{C_1,C_3\}`),
                         " は二元集合なので、これらが ", math(String.raw`I_{a,b}`),
                         " に一致しうるのは ", math(String.raw`q=2`), " の場合だけである。",
-                        math(String.raw`q=2`), " の弧は ",
-                        math(String.raw`\{C_s,C_{s+1}\}`),
-                        " の形であり、その二つの添字の差は ", math(String.raw`4`), " を法として ",
+                        math(String.raw`q=2`), " の場合は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+I_{a,b}
+&=\{C_s,C_{s+1},\ldots,C_{s+q-1}\}
+&&\bigl(\because\ \blkref{claim_vertex_surrounding_cells_form_parity_arcs}\bigr)\\
+&=\{C_s,C_{s+1}\}
+&&\bigl(\because\ q=2\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "であり、その二つの添字の差は ", math(String.raw`4`), " を法として ",
                         math(String.raw`1`), " である。一方 ",
                         math(String.raw`\{C_0,C_2\}`), " と ", math(String.raw`\{C_1,C_3\}`),
                         " の二つの添字の差は ", math(String.raw`4`), " を法として ",
@@ -70225,6 +70233,10 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.NecSuf.KacWard.local_incoming_outgoing_sides_ne",
                       "Ising2DLambda.KacWard.cellBoundary_local_directions_selected_left",
                       "Ising2DLambda.NecSuf.KacWard.local_directions_selected_left",
+                      "Ising2DLambda.KacWard.cellBoundary_incoming_unique",
+                      "Ising2DLambda.KacWard.cellBoundary_outgoing_unique",
+                      "Ising2DLambda.NecSuf.KacWard.local_incoming_unique",
+                      "Ising2DLambda.NecSuf.KacWard.local_outgoing_unique",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70371,6 +70383,16 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
 0011&2&2&2\\0110&2&1&1\\1001&2&3&3\\1100&2&0&0\\
 0111&3&1&2\\1011&3&2&3\\1101&3&3&0\\1110&3&0&1
 \end{array}`),
+                      paragraph([
+                        "各行で、入辺の内側セルが左、外側セルが右になる方向は表の ",
+                        math(String.raw`d_{\mathrm{in}}`),
+                        " だけであり、出辺についても表の ",
+                        math(String.raw`d_{\mathrm{out}}`),
+                        " だけである。四方向をそれぞれ調べると、ほかの方向では左右のセルが逆か、",
+                        "両側がともに内側または外側になる。対角二セル配置は既に除外した（",
+                        ref("claim_boundary_vertex_diagonal_contact_excluded"),
+                        "）。この一意性だけでは実際の歩道の巡回方向は決まらない。",
+                      ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),
                         "）を適用すると、内側セルを左に置く向きでは接続数一・二・三の回転数がそれぞれ ",

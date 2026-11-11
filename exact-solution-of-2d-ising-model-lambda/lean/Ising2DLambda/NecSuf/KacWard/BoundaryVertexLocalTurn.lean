@@ -56,6 +56,35 @@ theorem local_directions_selected_left (a b c d : Bool)
   cases a <;> cases b <;> cases c <;> cases d <;>
     simp_all [localCellCount, localIncoming, localOutgoing] <;> decide
 
+/-- At a non-diagonal boundary vertex, an entering direction with a selected
+cell on its left is the direction selected by the four-cell rule. -/
+theorem local_incoming_unique (a b c d : Bool) (direction : Fin 4)
+    (hdiag₁ : ¬ (a = true ∧ b = false ∧ c = true ∧ d = false))
+    (hdiag₂ : ¬ (a = false ∧ b = true ∧ c = false ∧ d = true))
+    (hboundary : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3)
+    (hleft : if direction.val = 0 then a = true ∧ d = false
+      else if direction.val = 1 then b = true ∧ a = false
+      else if direction.val = 2 then c = true ∧ b = false
+      else d = true ∧ c = false) :
+    (direction.val : ZMod 4) = localIncoming a b c d := by
+  fin_cases direction <;> cases a <;> cases b <;> cases c <;> cases d <;>
+    simp_all [localCellCount, localIncoming]
+
+/-- The same uniqueness holds for a leaving direction. -/
+theorem local_outgoing_unique (a b c d : Bool) (direction : Fin 4)
+    (hdiag₁ : ¬ (a = true ∧ b = false ∧ c = true ∧ d = false))
+    (hdiag₂ : ¬ (a = false ∧ b = true ∧ c = false ∧ d = true))
+    (hboundary : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3)
+    (hleft : if direction.val = 0 then b = true ∧ c = false
+      else if direction.val = 1 then c = true ∧ d = false
+      else if direction.val = 2 then d = true ∧ a = false
+      else a = true ∧ b = false) :
+    (direction.val : ZMod 4) = localOutgoing a b c d := by
+  fin_cases direction <;> cases a <;> cases b <;> cases c <;> cases d <;>
+    simp_all [localCellCount, localOutgoing]
+
 /-- The incoming edge touches the west, north, east, or south side. -/
 def incomingSide (direction : ZMod 4) : Fin 4 :=
   if direction = 0 then 3 else if direction = 1 then 0
