@@ -288,6 +288,9 @@ targets=(
   Ising2D.complex_conjugate_of_sum_two
   Ising2D.complex_conjugate_of_product_eq
   Ising2D.complex_conjugate_of_neg_one
+  Ising2D.complex_conjugate_ne_zero
+  Ising2D.complex_conjugate_mul_complex_conjugate_inv
+  Ising2D.complex_conjugate_of_inverse
   Ising2D.complex_conjugate_of_difference_eq
   Ising2D.complex_conjugate_star_mul
   Ising2D.complex_conjugate_star_add
@@ -2821,6 +2824,12 @@ targets=(
   Ising2D.finrank_range_Qproj_univ
   Ising2D.star_checkQ
   Ising2D.star_two_mul_sqrtM
+  Ising2D.star_neg_real_inclusion
+  Ising2D.star_gamma2_neg_thetaTilde
+  Ising2D.star_checkD
+  Ising2D.check_hermitian_prep_neg_one_ne_zero
+  Ising2D.check_hermitian_prep_neg_one_mul_inv
+  Ising2D.check_hermitian_prep_inv_neg_one_mul
   Ising2D.star_checkP
   Ising2D.checkPsiDag_conjTranspose
   Ising2D.checkFermiOf

@@ -101,6 +101,7 @@ export const ALL_LABELS = [
   "commuting_with_finite_sum",
   "commuting_with_scalar_multiple",
   "complex_conjugate_of_difference",
+  "complex_conjugate_of_inverse",
   "complex_conjugate_of_product",
   "complex_conjugate_of_real_inclusion",
   "complex_conjugate_of_sum",

@@ -315,6 +315,106 @@ export default defineBlocks([
   },
 
   {
+    id: "exp_conjugation_claim_complex_conjugate_of_inverse",
+    kind: "claim",
+    title: { text: "逆元の複素共役は複素共役の逆元" },
+    labels: ["complex_conjugate_of_inverse"],
+    statement: [
+      paragraph([
+        math(String.raw`w \in \mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）について、",
+        math(String.raw`\overline{w} \in \mathbb{C}^{\times}`),
+        " であり（したがって右辺の逆元は定まる）",
+      ]),
+      displayMath(String.raw`\overline{w^{-1}} = \bigl(\overline{w}\bigr)^{-1}`),
+      paragraph([
+        "が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、逆元は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元、積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備（",
+        math(String.raw`\overline{w} \in \mathbb{C}^{\times}`),
+        "）。",
+        math(String.raw`w = (x,y)`),
+        "（",
+        math(String.raw`x,y \in \mathbb{R}`),
+        "）と書くと、",
+        ref("def_complex_conjugate"),
+        " より ",
+        math(String.raw`\overline{w} = (x,-y)`),
+        " である。",
+        math(String.raw`\overline{w} = (0,0)`),
+        " と仮定すると、",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb{R}^2`),
+        " の元の等号は成分ごとなので ",
+        math(String.raw`x = 0`),
+        " かつ ",
+        math(String.raw`-y = 0`),
+        "、よって ",
+        math(String.raw`\mathbb{R}`),
+        " で ",
+        math(String.raw`y = -(-y) = -0 = 0`),
+        " となり ",
+        math(String.raw`w = (0,0)`),
+        " である。これは ",
+        math(String.raw`w \in \mathbb{C}^{\times} = \mathbb{C}\setminus\{(0,0)\}`),
+        " に反する。したがって ",
+        math(String.raw`\overline{w} \in \mathbb{C}^{\times}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の逆元 ",
+        math(String.raw`\bigl(\overline{w}\bigr)^{-1}`),
+        " が定まる。",
+      ]),
+      paragraph([
+        "準備（",
+        math(String.raw`\overline{w}\;\overline{w^{-1}} = 1_{\mathbb{C}}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{w}\;\overline{w^{-1}}
+&= \overline{w\,w^{-1}}
+&&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to w,\ w \to w^{-1}\ \text{を同時に})\ \text{を右辺から左辺へ}\bigr)\\
+&= \overline{1_{\mathbb{C}}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (w \in \mathbb{C}^{\times})\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to 1)\bigr)
+\end{aligned}`),
+      paragraph(["これを使うと"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{w^{-1}}
+&= 1_{\mathbb{C}}\,\overline{w^{-1}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \Bigl(\bigl(\overline{w}\bigr)^{-1}\,\overline{w}\Bigr)\,\overline{w^{-1}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (\overline{w} \in \mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\overline{w}\bigr)^{-1}\Bigl(\overline{w}\;\overline{w^{-1}}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\overline{w}\bigr)^{-1}\,1_{\mathbb{C}}
+&&(\because\ \text{準備の}\ \overline{w}\;\overline{w^{-1}} = 1_{\mathbb{C}})\\
+&= \bigl(\overline{w}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian (3) の conj(α_μ) の鎖が「\\overline{z^{-1}} = (\\bar z)^{-1}」を根拠なしに使っていたので、主張のブロックに切り出した。",
+      ],
+    },
+  },
+
+  {
     id: "exp_conjugation_claim_complex_conjugate_times_self",
     kind: "claim",
     title: { text: "複素共役と自分自身の積は絶対値の二乗の包含" },

@@ -4104,36 +4104,242 @@ Z_j^*
 = \left|\gamma_2(\tilde\theta_\nu)\right| \in \mathbb{R}_{>0}`),
         "（",
         ref("gamma_2_theta_tilde_nonzero"),
-        "）と書けて",
+        "）と書ける。さらに ",
+        math(String.raw`s := (\sqrt{M_{\mathrm{col}}})_{\mathbb{C}}`),
+        "、",
+        math(String.raw`u := 2_{\mathbb{C}}\,s`),
+        "、",
+        math(String.raw`b_\mu := \gamma_2(-\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`b_\nu := \gamma_2(-\tilde\theta_\nu)`),
+        "、",
+        math(String.raw`d_\mu := u\,b_\mu`),
+        "、",
+        math(String.raw`d_\nu := u\,b_\nu`),
+        "（いずれも ",
+        math(String.raw`\mathbb{C}`),
+        " の元。",
+        math(String.raw`x_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）とおく。",
+        ref("def_check_fermi"),
+        " の「この定義は意味をもつ」の段落の読みにより、",
+        math(String.raw`\alpha_\mu`),
+        "・",
+        math(String.raw`\alpha_\nu`),
+        " の分数は ",
+        ref("def_complex_quotient"),
+        " の商で、",
+        math(String.raw`\alpha_\mu = \dfrac{-(r_{\mathbb{C}})}{d_\mu}`),
+        "、",
+        math(String.raw`\alpha_\nu = \dfrac{-(r_{\mathbb{C}})}{d_\nu}`),
+        " である（分子は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-(r_{\mathbb{C}})`),
+        " で、上で見た ",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\nu)\right| = r`),
+        " により ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\nu`),
+        " で同じ元である）。",
+        ref("diagonalization_check_P_D"),
+        " の証明の Step 1 を ",
+        math(String.raw`\mu`),
+        " と ",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        "（(2) で見た）に当てて、",
+        math(String.raw`u,\ d_\mu,\ d_\nu \in \mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）である。",
+      ]),
+      paragraph([
+        "準備 (a)（",
+        math(String.raw`\overline{-(r_{\mathbb{C}})} = -(r_{\mathbb{C}})`),
+        "）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\overline{\alpha_\mu}
-&= \overline{\left(\frac{-r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)}\right)}
-   \quad (\because \alpha_\mu \text{ の定義}) \\
-&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\,\overline{\gamma_2(-\tilde\theta_\mu)}}
-   \quad \left(\because r, 2\sqrt{M_{\mathrm{col}}} \in \mathbb{R} \text{ と }
-   \overline{z^{-1}} = \left(\bar z\right)^{-1}\right) \\
-&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\left(-\gamma_2(\tilde\theta_\mu)\right)}
-   \quad \left(\because \blkref{relation_of_gamma_2_theta_tilde}\text{ (1) を }
-   \overline{\gamma_2(-\tilde\theta_\mu)} = -\gamma_2(\tilde\theta_\mu)
-   \text{ の形で使う}\right) \\
-&= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)} \\
-&= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)}
-   \quad (\because \blkref{periodicity_of_check_fermi}\text{ (3)}) \\
-&= -\alpha_\nu
-   \quad (\because \alpha_\nu \text{ の定義と }
-   \left|\gamma_2(\tilde\theta_\nu)\right| = r)
+\overline{-(r_{\mathbb{C}})}
+&= \overline{(-1_{\mathbb{C}})\,r_{\mathbb{C}}}
+   &&(\because\ \blkref{multiply_by_minus_one})\\
+&= \overline{-1_{\mathbb{C}}}\;\overline{r_{\mathbb{C}}}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to -1_{\mathbb{C}},\ w \to r_{\mathbb{C}})\bigr)\\
+&= (-1_{\mathbb{C}})\,\overline{r_{\mathbb{C}}}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to -1\text{。}-1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1)\bigr)\\
+&= (-1_{\mathbb{C}})\,r_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to r)\bigr)\\
+&= -(r_{\mathbb{C}})
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
-        "（3 段目で使った ",
-        math(String.raw`\overline{\gamma_2(-\tilde\theta_\mu)} = -\gamma_2(\tilde\theta_\mu)`),
-        " は、",
-        ref("relation_of_gamma_2_theta_tilde"),
-        " (1) の両辺の複素共役を取り ",
-        math(String.raw`\overline{\overline{z}} = z`),
-        " を使ったものである。）これを使うと",
+        "準備 (b)（",
+        math(String.raw`\overline{u} = u`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\overline{u}
+&= \overline{2_{\mathbb{C}}\,s}
+   &&(\because\ u\ \text{の定義})\\
+&= \overline{2_{\mathbb{C}}}\;\overline{s}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to 2_{\mathbb{C}},\ w \to s)\bigr)\\
+&= 2_{\mathbb{C}}\,\overline{s}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to 2)\bigr)\\
+&= 2_{\mathbb{C}}\,s
+   &&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to \sqrt{M_{\mathrm{col}}})\bigr)\\
+&= u
+   &&(\because\ u\ \text{の定義を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 (c)（",
+        math(String.raw`\overline{d_\mu} = (-1_{\mathbb{C}})\,d_\nu`),
+        "）。まず ",
+        math(String.raw`\overline{b_\mu}`),
+        " を求める。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\overline{b_\mu}
+&= \overline{\gamma_2(-\tilde\theta_\mu)}
+   &&(\because\ b_\mu\ \text{の定義})\\
+&= \overline{\gamma_2(\tilde\theta_\nu)}
+   &&\bigl(\because\ \blkref{periodicity_of_check_fermi}\ \text{(3) の}\ \gamma_2(\tilde\theta_\nu) = \gamma_2(-\tilde\theta_\mu)\ \text{を右辺から左辺へ}\bigr)\\
+&= 1_{\mathbb{C}}\,\overline{\gamma_2(\tilde\theta_\nu)}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\,\overline{\gamma_2(\tilde\theta_\nu)}
+   &&(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\ \text{を右辺から左辺へ})\\
+&= (-1_{\mathbb{C}})\Bigl((-1_{\mathbb{C}})\,\overline{\gamma_2(\tilde\theta_\nu)}\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\Bigl(-\overline{\gamma_2(\tilde\theta_\nu)}\Bigr)
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
+&= (-1_{\mathbb{C}})\,\gamma_2(-\tilde\theta_\nu)
+   &&\bigl(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ \text{(1)}\ (\mu \to \nu)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-1_{\mathbb{C}})\,\gamma_2(\tilde\theta_\mu)
+   &&\bigl(\because\ \blkref{periodicity_of_check_fermi}\ \text{(3) の}\ \gamma_2(-\tilde\theta_\nu) = \gamma_2(\tilde\theta_\mu)\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["これを使うと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\overline{d_\mu}
+&= \overline{u\,b_\mu}
+   &&(\because\ d_\mu\ \text{の定義})\\
+&= \overline{u}\;\overline{b_\mu}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to u,\ w \to b_\mu)\bigr)\\
+&= u\,\overline{b_\mu}
+   &&(\because\ \text{準備 (b)})\\
+&= u\bigl((-1_{\mathbb{C}})\,\gamma_2(\tilde\theta_\mu)\bigr)
+   &&(\because\ \text{上の}\ \overline{b_\mu}\ \text{の鎖})\\
+&= \bigl(u\,(-1_{\mathbb{C}})\bigr)\,\gamma_2(\tilde\theta_\mu)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}})\,u\bigr)\,\gamma_2(\tilde\theta_\mu)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\bigl(u\,\gamma_2(\tilde\theta_\mu)\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\bigl(u\,\gamma_2(-\tilde\theta_\nu)\bigr)
+   &&\bigl(\because\ \blkref{periodicity_of_check_fermi}\ \text{(3) の}\ \gamma_2(-\tilde\theta_\nu) = \gamma_2(\tilde\theta_\mu)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-1_{\mathbb{C}})\,(u\,b_\nu)
+   &&(\because\ b_\nu\ \text{の定義を右辺から左辺へ})\\
+&= (-1_{\mathbb{C}})\,d_\nu
+   &&(\because\ d_\nu\ \text{の定義を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 (d)（",
+        math(String.raw`\bigl((-1_{\mathbb{C}})\,d_\nu\bigr)^{-1} = (-1_{\mathbb{C}})\,d_\nu^{-1}`),
+        "）。",
+        math(String.raw`-1_{\mathbb{C}} = (-1,0) \neq (0,0)`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`0`),
+        " でない）なので ",
+        math(String.raw`-1_{\mathbb{C}} \in \mathbb{C}^{\times}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`t := (-1_{\mathbb{C}})\,d_\nu \in \mathbb{C}^{\times}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+t\,\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)
+&= \bigl((-1_{\mathbb{C}})\,d_\nu\bigr)\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)
+   &&(\because\ t\ \text{の定義})\\
+&= (-1_{\mathbb{C}})\Bigl(d_\nu\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\Bigl(\bigl(d_\nu\,(-1_{\mathbb{C}})\bigr)\,d_\nu^{-1}\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= (-1_{\mathbb{C}})\Bigl(\bigl((-1_{\mathbb{C}})\,d_\nu\bigr)\,d_\nu^{-1}\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\Bigl((-1_{\mathbb{C}})\bigl(d_\nu\,d_\nu^{-1}\bigr)\Bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(d_\nu\,d_\nu^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= 1_{\mathbb{C}}\,\bigl(d_\nu\,d_\nu^{-1}\bigr)
+   &&(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc})\\
+&= 1_{\mathbb{C}}\,1_{\mathbb{C}}
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (d_\nu \in \mathbb{C}^{\times})\bigr)\\
+&= 1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`,
+      ),
+      paragraph(["これを使うと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+t^{-1}
+&= t^{-1}\,1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= t^{-1}\Bigl(t\,\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)\Bigr)
+   &&(\because\ \text{上の鎖を右辺から左辺へ})\\
+&= \bigl(t^{-1}\,t\bigr)\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= 1_{\mathbb{C}}\,\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)
+   &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (t \in \mathbb{C}^{\times})\bigr)\\
+&= (-1_{\mathbb{C}})\,d_\nu^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`,
+      ),
+      paragraph(["以上から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\overline{\alpha_\mu}
+&= \overline{\left(\frac{-(r_{\mathbb{C}})}{d_\mu}\right)}
+   &&(\because\ \text{前置きの}\ \alpha_\mu = (-(r_{\mathbb{C}}))/d_\mu)\\
+&= \overline{(-(r_{\mathbb{C}}))\,d_\mu^{-1}}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to -(r_{\mathbb{C}}),\ w \to d_\mu)\bigr)\\
+&= \overline{-(r_{\mathbb{C}})}\;\overline{d_\mu^{-1}}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to -(r_{\mathbb{C}}),\ w \to d_\mu^{-1})\bigr)\\
+&= (-(r_{\mathbb{C}}))\,\overline{d_\mu^{-1}}
+   &&(\because\ \text{準備 (a)})\\
+&= (-(r_{\mathbb{C}}))\bigl(\overline{d_\mu}\bigr)^{-1}
+   &&\bigl(\because\ \blkref{complex_conjugate_of_inverse}\ (w \to d_\mu)\bigr)\\
+&= (-(r_{\mathbb{C}}))\bigl((-1_{\mathbb{C}})\,d_\nu\bigr)^{-1}
+   &&(\because\ \text{準備 (c)})\\
+&= (-(r_{\mathbb{C}}))\bigl((-1_{\mathbb{C}})\,d_\nu^{-1}\bigr)
+   &&(\because\ \text{準備 (d)})\\
+&= \bigl((-(r_{\mathbb{C}}))(-1_{\mathbb{C}})\bigr)\,d_\nu^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}})(-(r_{\mathbb{C}}))\bigr)\,d_\nu^{-1}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\bigl((-(r_{\mathbb{C}}))\,d_\nu^{-1}\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\,\frac{-(r_{\mathbb{C}})}{d_\nu}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to -(r_{\mathbb{C}}),\ w \to d_\nu)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-1_{\mathbb{C}})\,\alpha_\nu
+   &&(\because\ \text{前置きの}\ \alpha_\nu = (-(r_{\mathbb{C}}))/d_\nu\ \text{を右辺から左辺へ})\\
+&= -\alpha_\nu
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。これを使うと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4263,6 +4469,7 @@ x^*\check{Q}_\epsilon x
         "c_+(M) ≤ Λ̌_max を示すのに必要なのは「Q̌_ε がエルミートな冪等行列であること」だけである。これがあれば x^*V^{(+)}x = Σ_ε Λ̌_ε ‖Q̌_ε x‖² と書けて、スペクトル定理（実対称行列の対角化可能性）を持ち出さずに Rayleigh 商の上限が押さえられる。011 章が「固有値の存在を使わない」方針を取っているのと整合する。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（(ψ̌_μ^†)^* = ψ̌_{M+1−μ}、ň_μ, Q̌_ε のエルミート性、残差 ≤ 1.2e-14）。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が (4) を引く）。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: (3) の conj(α_μ) = −α_ν の鎖を開いた。もとの 6 行は、商を逆元の積と黙って読む行と「\\overline{z^{-1}} = (\\bar z)^{-1}」「r, 2√M_col ∈ ℝ」を根拠にする行、根拠の無い符号の行を含んでいた。diagonalization_check_P_D の前置きの s・u・d を μ と ν について置き（d_μ := u b_μ、d_ν := u b_ν）、def_check_fermi の読みで α_μ = (−r_C)/d_μ、α_ν = (−r_C)/d_ν とし、準備 (a) conj(−r_C) = −r_C、(b) conj(u) = u、(c) conj(d_μ) = (−1_C) d_ν（relation_of_gamma_2_theta_tilde (1) を ν で、periodicity_of_check_fermi (3)、minus_one_times_minus_one_is_one_in_cc）、(d) ((−1_C) d_ν)^{-1} = (−1_C) d_ν^{-1} と 13 行の主鎖にした。逆元の共役は新しく足した主張 complex_conjugate_of_inverse を引く。「3 段目で使った…」の段落（conj(conj z) = z を名前だけで使っていた）は不要になったので消した。主張と (ψ̌_μ^†)^* の鎖は不変。",
         "2026-11-05: 全証明の SageMath 検算（sagemath/check/check_number_operator_is_hermitian/）を付けたときに根拠を直した（計算と主張は不変）。Pauli 行列の成分の出典を pauli_matrix_products に、(A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^* の出典を kronecker_product_rule (2)（I⊠⋯⊠I = I の主張）から def_kronecker (2) の成分の鎖に、(σ_k^a)^* = σ_k^a を def_site_pauli_matrices の鎖に、相異なるサイトの因子の可換性を kronecker_product_rule (1) から distinct_site_pauli_matrices_commute に、Z_j・Y_j の定義を def_transfer_matrix_symbols から def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices に、Ž_μ・Y̌_μ の定義を def_half_integer_modes（θ̃ の共役添字恒等式のラベル）から def_half_integer_checkZ・def_half_integer_checkY に、ň_μ の定義を def_check_fermi から def_check_number_operator に直した。(XW)^* = W^*X^* と転置共役の線型性を star_preserves_norm_and_limits (1) で、結びの鎖を、数ベクトルの共役転置（本文に定義が無い）を経ない成分の鎖に書き直した（def_conjugate_bilinear_value・mat_mult・complex_conjugate_of_product・complex_conjugate_of_sum・complex_conjugate_times_self・real_inclusion_preserves_finite_sum・definition_of_sqrt_r_positive・def_matrix_norm）。Q̌_ε の鎖の (I−ň_μ)^* と因子の可換性の根拠を足した。名前だけの根拠（\\text{…}）を \\blkref に直した。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (1) の証明で Pauli 行列と 2 次の単位行列の共役転置を文で述べていた箇所（「Pauli 行列の成分より」「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」「δ_{kl} は実数で δ_{lk} = δ_{kl}」）を外し、(σ_k^a)^* の鎖の 3 行目（σ^a と I の共役転置を 1 行で当てていた）を、成分の鎖で示す主張 conjugate_transpose_of_identity_matrix_of_order_two（I の因子へ同時に）の行と conjugate_transpose_of_pauli_x・conjugate_transpose_of_pauli_y・conjugate_transpose_of_pauli_z（009_eigenvalues_of_V.ts）の行に割った（4 → 5 等号）。計算と主張は不変。",
       ],
