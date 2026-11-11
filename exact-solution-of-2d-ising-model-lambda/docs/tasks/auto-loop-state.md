@@ -22,6 +22,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
+| Onsager 閉形式への接続 | 穴の無いセル集合の Euler 数の具体版で頂点数の上界を本文の全域木から得る | 未着手 | 具体版 `cellEulerNumber_eq_one_of_actual_even_edge_counts` は $V_S\le E_S+1$ を mathlib の `SimpleGraph.Connected.card_vert_le_card_edgeSet_add_one` で済ませている。本文はこの一行を全域木の存在（`claim_finite_connected_graph_has_spanning_tree`）と木の辺数（`claim_finite_tree_edge_count`）で示すので、具体版も `Ising2DLambda.Tools.finiteGraphConnected_has_spanningTree` と `finiteTree_edge_count` を呼んで本文と一対一にする（2026-11-11 の研究管理）。必要十分版も同じ手順か確かめる。 |
 | Onsager 閉形式への接続 | 北向き境界辺の局所入出方向を隣接頂点間で一致させる | 未着手 | 共有二セルの内外判定を北向き辺へ適用する。 |
 | Onsager 閉形式への接続 | 実際の単純閉歩道の有向二辺を四セルの入出方向に同定する | 記述・SageMath 済。局所方向の境界辺性・相異性・内側を左に置く条件と一意性、隣接頂点の東・西・南向きの一致は Lean 二版済。歩道全体との同定は未着手 | 各歩が内側セル集合の境界辺であることを示し、巡回方向の一貫性と局所の一意性で各訪問頂点を同定する。 |
 | Onsager 閉形式への接続 | 頂点ごとの局所回転数を巡回総回転数へ足し上げる | 記述・SageMath 済。Lean は未着手 | 接続数一・二・三の和から巡回総回転数を求め、方向反転の一歩の符号定理を使う。 |
