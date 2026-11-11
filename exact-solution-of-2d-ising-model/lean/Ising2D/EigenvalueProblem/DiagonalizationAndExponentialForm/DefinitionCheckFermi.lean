@@ -23,10 +23,12 @@
   （人手 `anticommutator_of_check_psi` の Step 1 の指摘そのもの）。
   `r` は非負実数として一意に定まり、`(r : ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))` が無条件に成り立つ
   （`checkR_sq`）。
-* 人手が statement へ格上げしている「定義が意味をもつ条件」`γ_2(θ̃_μ) ≠ 0`
-  （015 章の `gamma_2_theta_tilde_nonzero`）は、各定理の仮定
-  `hga : gamma2 K (thetaTilde M μ) ≠ 0` として明示する。
-  **015 章がこれを無条件に閉じれば、本章の仮定はそのまま消える。**
+* 人手の「定義が意味をもつ」段落は、係数の分母 `u := 2_ℂ s`・`d := u b` が `ℂ^×` に属することを
+  `diagonalization_check_P_D` Step 1 から引く（Lean では `checkU_ne_zero`・`checkD_ne_zero`、`ClaimEigenATildeDiag.lean`。
+  Lean の割り算は分母 `0` でも値を返すので、定義そのものに仮定は要らない）。`r > 0`（人手は `relation_of_gamma_2_theta_tilde` (4)）を
+  使う定理は、`γ_2(θ̃_μ) ≠ 0`（`gamma_2_theta_tilde_nonzero`）を仮定
+  `hga : gamma2 K (thetaTilde M μ) ≠ 0` として受け取る（`checkR_pos`・`checkR_ne_zero`）。
+  `gamma_2_theta_tilde_nonzero` の無条件版 `gamma2_thetaTilde_ne_zero` で `hga` を落とした版は `ClaimCheckFermiResultsUnconditional.lean` に置く。
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
@@ -303,11 +305,27 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 /-- 人手 `def_check_fermi` の `√M`（`M ∈ ℕ` の実数の平方根）を ℂ の元として。 -/
 noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
 
-/-- `M ≠ 0` のとき `√M ≠ 0`（`def_check_fermi` の係数の分母が 0 でないこと。
-`diagonalization_check_P_D` Step 1 の `√M > 0` もこれを引く）。 -/
+/-- 人手 `diagonalization_check_P_D` Step 1 の `s = (√M_col, 0) ≠ (0, 0)`（`inclusion_rr_to_cc`。第 1 成分が `0` でない）。
+`def_check_fermi` の係数の分母 `u`・`d` が `ℂ^×` に属すること（`checkU_ne_zero`・`checkD_ne_zero`）はこれを引く。
+
+人手の 2 段に 1 段ずつ対応させる。
+1. `M_col ≥ 2` より `√M_col > 0`（Lean では `M ≠ 0` から `Real.sqrt_pos`。この段の人手の根拠は状態台帳の (d4c44m) で扱う）。
+2. `s = 0_ℂ` を仮定すると第 1 成分が `√M_col = 0` になり 1 と矛盾する（`definition_of_cc` の等号は成分ごと、
+   `inclusion_rr_to_cc` の第 1 成分は `√M_col`）。 -/
 theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
-  simp only [sqrtM, ne_eq, Complex.ofReal_eq_zero]
-  exact Real.sqrt_ne_zero'.2 (by exact_mod_cast Nat.pos_of_ne_zero hM)
+  have hpos : 0 < Real.sqrt M := Real.sqrt_pos.2 (Nat.cast_pos.2 (Nat.pos_of_ne_zero hM))
+                                      -- 段 1: `√M_col > 0`
+  intro h
+  have hre : (sqrtM M).re = (0 : ℂ).re := congrArg Complex.re h
+                                      -- 仮定 `s = 0_ℂ` の第 1 成分（`definition_of_cc` の `ℝ^2` の元の等号は成分ごと）
+  have h0 : Real.sqrt M = 0 :=
+    calc Real.sqrt M
+        = ((Real.sqrt M : ℝ) : ℂ).re := (Complex.ofReal_re _).symm
+                                      -- `inclusion_rr_to_cc`: `s = (√M_col, 0)` の第 1 成分を右辺から左辺へ
+      _ = (sqrtM M).re := rfl         -- `s` の定義
+      _ = (0 : ℂ).re := hre           -- 仮定の第 1 成分
+      _ = 0 := Complex.zero_re        -- `0_ℂ = (0, 0)` の第 1 成分
+  exact hpos.ne' h0                   -- 段 2: 第 1 成分 `√M_col` は `0` でない
 
 /-- `(√M)^2 = M`。 -/
 @[simp]
