@@ -3130,6 +3130,103 @@ h(x)
     ],
   },
   {
+    id: "mathematical_toolkit_claim_dual_basis_is_linearly_independent",
+    kind: "claim",
+    title: { text: "双対基底は一次独立である" },
+    labels: ["claim_dual_basis_is_linearly_independent"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の基底（",
+        ref("def_basis"),
+        "）、",
+        math(String.raw`f:\{1,\dots,n\}\to V^{*}`),
+        " を ",
+        math(String.raw`b`),
+        " の双対基底（",
+        ref("def_dual_basis"),
+        "）とする。",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`b_k:=b(k)\in V`),
+        "、",
+        math(String.raw`f_k:=f(k)\in V^{*}`),
+        " と書く。このとき、",
+        math(String.raw`f`),
+        " は ℂ-線型空間 ",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        "（",
+        ref("def_dual_space"),
+        "、",
+        ref("claim_dual_space_is_complex_vector_space"),
+        "）の元の番号付けた族として一次独立（",
+        ref("def_linear_independence"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられていて、",
+        math(String.raw`V^{*}`),
+        " の中の線型結合（",
+        ref("def_linear_combination"),
+        "）が ",
+        math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_{V^{*}}f_k=0_{V^{*}}`),
+        " を満たすとする。",
+        math(String.raw`j\in\{1,\dots,n\}`),
+        " を任意に取る（このとき ",
+        math(String.raw`n\ge 1`),
+        " である）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_j
+&=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}\delta_{k,j}
+&&\left(\because\ \alpha_k:=\lambda_k\ \text{として、デルタを掛けた和は第}\ j\ \text{項。}\blkref{claim_ordered_sum_with_kronecker_delta_picks_term}\right)\\
+&=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}f_k(b_j)
+&&\left(\because\ \text{各}\ k\ \text{で双対基底の条件}\ f_k(b_j)=\delta_{k,j}\text{。}\blkref{def_dual_basis}\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_{V^{*}}f_k\right)(b_j)
+&&\left(\because\ \text{双対空間の元の線型結合の値（}x=b_j\text{）。}\blkref{claim_value_of_linear_combination_in_dual_space}\right)\\
+&=0_{V^{*}}(b_j)
+&&\left(\because\ \lambda_k\ \text{についての仮定}\right)\\
+&=z_V(b_j)
+&&\left(\because\ 0_{V^{*}}:=z_V\text{。}\blkref{def_dual_space}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ z_V\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j`),
+        " は任意だったので、すべての ",
+        math(String.raw`j\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\lambda_j=0_{\mathbb{C}}`),
+        " である（",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`\{1,\dots,n\}`),
+        " が空集合なので空に成り立つ）。したがって ",
+        math(String.raw`f`),
+        " は一次独立である（",
+        ref("def_linear_independence"),
+        "）。",
+      ]),
+    ],
+  },
+  {
     id: "mathematical_toolkit_definition_direct_sum_of_two_vector_spaces",
     kind: "definition",
     title: { text: "二つの ℂ-線型空間の直和" },

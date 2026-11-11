@@ -24,6 +24,7 @@ export const ALL_LABELS = [
   "claim_decomposition_of_identity_matrix_into_matrix_units",
   "claim_direct_sum_element_is_sum_of_embedded_components",
   "claim_direct_sum_of_two_vector_spaces_is_complex_vector_space",
+  "claim_dual_basis_is_linearly_independent",
   "claim_dual_basis_spans_dual_space",
   "claim_dual_space_is_complex_vector_space",
   "claim_embedding_into_first_component_is_linear_map",
