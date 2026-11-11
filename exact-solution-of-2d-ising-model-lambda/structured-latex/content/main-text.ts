@@ -15021,21 +15021,21 @@ Z_L(q)
                     displayMath(String.raw`\begin{aligned}
 \Phi_L(1)
 &=\log Z_L(1)
-&&(\because\ \blkref{def_finite_free_entropy}\text{、}1\in\mathbb{Q}_{>0})\\
+&&\bigl(\because\ \blkref{def_finite_free_entropy}\text{、}1\in\mathbb{Q}_{>0}\bigr)\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\cdot1^{\,m}\Bigr)
-&&(\because\ \blkref{claim_coefficient_representation}\text{、代入は環準同型})\\
+&&\bigl(\because\ \blkref{claim_coefficient_representation}\text{、代入は環準同型}\bigr)\\
 &=\log\Bigl(\sum_{m=0}^{2L^2}\Omega_L(m)\Bigr)
-&&(\because\ 1^{\,m}=1)\\
+&&\bigl(\because\ 1^{\,m}=1\bigr)\\
 &=\log\bigl(2^{L^2}\bigr)
-&&(\because\ \blkref{claim_coefficient_sum})\\
+&&\bigl(\because\ \blkref{claim_coefficient_sum}\bigr)\\
 &=L^2\,\log 2
-&&(\because\ \blkref{claim_log_power}\text{、}2\in\mathbb{Q}_{>0},\ L^2\in\mathbb{N})\\
+&&\bigl(\because\ \blkref{claim_log_power}\text{、}2\in\mathbb{Q}_{>0},\ L^2\in\mathbb{N}\bigr)\\
 &=L^2\sum_{p:\ w_p(2)\ne0}w_p(2)\,\ell_p
-&&(\because\ \blkref{def_rational_log})\\
+&&\bigl(\because\ \blkref{def_rational_log}\bigr)\\
 &=L^2\sum_{p:\ v_p(2)\ne0}v_p(2)\,\ell_p
-&&(\because\ w_p(2)=v_p(2)-v_p(1),\ v_p(1)=0)\\
+&&\bigl(\because\ w_p(2)=v_p(2)-v_p(1),\ v_p(1)=0\bigr)\\
 &=L^2\,\ell_2
-&&(\because\ 2\text{ は素数なので }v_2(2)=1,\ p\ne2\ \Rightarrow\ v_p(2)=0)
+&&\bigl(\because\ 2\text{ は素数なので }v_2(2)=1,\ p\ne2\ \Rightarrow\ v_p(2)=0\bigr)
 \end{aligned}`),
                     paragraph([
                       "以上は有限和の数え上げ、整数の演算、素因数分解だけからなり、実数体も複素数体も現れない。",
@@ -70250,6 +70250,8 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.local_outgoing_unique",
                       "Ising2DLambda.KacWard.cellBoundary_east_outgoing_matches_next_incoming",
                       "Ising2DLambda.NecSuf.KacWard.local_east_outgoing_matches_next_incoming",
+                      "Ising2DLambda.KacWard.cellBoundary_west_outgoing_matches_next_incoming",
+                      "Ising2DLambda.NecSuf.KacWard.local_west_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70411,6 +70413,12 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`0`), " である。上の方向表によれば、この辺の北側セルは内側、南側セルは外側であり、",
                         "東端では同じ二セルが入辺の左右になる。東端の入方向は表の一意性により ",
                         math(String.raw`0`), " である。",
+                      ]),
+                      paragraph([
+                        "西へ進む境界辺の東端で内側セルを左に置く出方向は ",
+                        math(String.raw`2`), " である。上の方向表によれば、この辺の南側セルは内側、北側セルは外側であり、",
+                        "西端では同じ二セルが入辺の左右になる。西端の入方向は表の一意性により ",
+                        math(String.raw`2`), " である。",
                       ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),

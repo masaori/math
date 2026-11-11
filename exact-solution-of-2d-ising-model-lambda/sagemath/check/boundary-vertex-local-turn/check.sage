@@ -49,4 +49,22 @@ for a, b, c, d, e, f in product((False, True), repeat=6):
     east_checked += 1
 
 assert east_checked > 0
-print(f"RESULT: PASS; {checked} local configurations and {east_checked} east-adjacent pairs")
+
+west_checked = 0
+for a, b, c, d, e, f in product((False, True), repeat=6):
+    source = (a, b, c, d)
+    target = (e, a, d, f)
+    if any(sum(ZZ(x) for x in cells) not in (1, 2, 3)
+           or (cells[0] and cells[2] and not cells[1] and not cells[3])
+           or (cells[1] and cells[3] and not cells[0] and not cells[2])
+           for cells in (source, target)):
+        continue
+    outgoing = 0 if b and not c else 1 if c and not d else 2 if d and not a else 3
+    if outgoing != 2:
+        continue
+    incoming_at_west = 2 if d and not a else 3 if f and not d else 0 if e and not f else 1
+    assert incoming_at_west == 2
+    west_checked += 1
+
+assert west_checked > 0
+print(f"RESULT: PASS; {checked} local configurations, {east_checked} east-adjacent pairs, and {west_checked} west-adjacent pairs")
