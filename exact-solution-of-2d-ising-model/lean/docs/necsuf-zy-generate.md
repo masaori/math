@@ -81,7 +81,7 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 1. **`Ising2D.span_pauli_eq_top`**:
    `{I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を ℂ-加群として張る。
-   中身は既存の `Ising2D.matrix_two_decomp`（原文 Step 3 の成分比較の式）そのもの。
+   中身は既存の `Ising2D.matrix_two_decomp`（原文 Step 3 の展開の式。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`）そのもの。
    ここは **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
 2. **`Ising2D.siteProdHom`**: `siteProd` を `MonoidHom` として束ねたもの。
    材料は既存の `siteProd_one` と `siteProd_mul` だけ。

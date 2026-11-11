@@ -659,14 +659,349 @@ P_{m-1}Y_m
         " の ",
         math(String.raw`\mathbb{C}`),
         " 上の基底である。実際、任意の ",
-        math(String.raw`A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}`),
-        " に対し",
+        math(String.raw`A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\mathrm{Mat}(2,\mathbb{C})`),
+        "（",
+        math(String.raw`a_{11},a_{12},a_{21},a_{22}\in\mathbb{C}`),
+        "）に対し、係数",
       ]),
       displayMath(
-        String.raw`A = \frac{a_{11}+a_{22}}{2}I_{\mathrm{Mat}(2,\mathbb{C})} + \frac{a_{12}+a_{21}}{2}\sigma^x + \frac{i(a_{12}-a_{21})}{2}\sigma^y + \frac{a_{11}-a_{22}}{2}\sigma^z \quad (\because \text{成分比較})`,
+        String.raw`\kappa_0 := \frac{a_{11}+a_{22}}{2_{\mathbb{C}}},\quad \kappa_x := \frac{a_{12}+a_{21}}{2_{\mathbb{C}}},\quad \kappa_y := \frac{i(a_{12}-a_{21})}{2_{\mathbb{C}}},\quad \kappa_z := \frac{a_{11}-a_{22}}{2_{\mathbb{C}}} \in \mathbb{C}`,
       ),
       paragraph([
-        " が成り立つので ",
+        "を置く。",
+        math(String.raw`2_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r=2`),
+        " である。",
+        math(String.raw`2_{\mathbb{C}}=(2,0)\neq(0,0)=0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり、4 つの分数は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`w\to2_{\mathbb{C}}`),
+        "）、差は ",
+        ref("def_complex_difference"),
+        " の差である。Pauli 行列の成分の ",
+        math(String.raw`0, 1, -1`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}, 1_{\mathbb{C}}, -1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`-i`),
+        "・",
+        math(String.raw`-z`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`(-1_{\mathbb{C}})i`),
+        "・",
+        math(String.raw`(-1_{\mathbb{C}})z`),
+        " である。示すのは",
+      ]),
+      displayMath(
+        String.raw`A = \kappa_0 I_{\mathrm{Mat}(2,\mathbb{C})} + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z`,
+      ),
+      paragraph([
+        "（右辺の和は左から結ぶ）である。準備として、",
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について次の (a)〜(g) を置く。体の公理（積の可換律・結合律・単位元、加法の可換律・結合律・単位元、分配律）は ",
+        ref("complex_numbers_form_a_field"),
+        " のものである。",
+      ]),
+      displayMath(String.raw`\text{(a)}\quad \begin{aligned}
+(2_{\mathbb{C}}z)\,2_{\mathbb{C}}^{-1}
+&= (z\,2_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の可換律})\\
+&= z\,(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1})
+&&(\because\ \text{積の結合律})\\
+&= z\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
+&= z
+&&(\because\ \text{積の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\text{(b)}\quad \begin{aligned}
+z + z
+&= 1_{\mathbb{C}}z + 1_{\mathbb{C}}z
+&&(\because\ \text{積の単位元を 2 か所へ右辺から左辺へ})\\
+&= (1_{\mathbb{C}} + 1_{\mathbb{C}})\,z
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= 2_{\mathbb{C}}z
+&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(c)}\quad \begin{aligned}
+z + (-z)
+&= z + (-1_{\mathbb{C}})z
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= 1_{\mathbb{C}}z + (-1_{\mathbb{C}})z
+&&(\because\ \text{積の単位元を右辺から左辺へ})\\
+&= \bigl(1_{\mathbb{C}} + (-1_{\mathbb{C}})\bigr)\,z
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= \bigl((1)_{\mathbb{C}} + (-1)_{\mathbb{C}}\bigr)\,z
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{・}\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 1\ \text{・}\ r = -1\bigr)\\
+&= \bigl(1 + (-1)\bigr)_{\mathbb{C}}\,z
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to -1)\bigr)\\
+&= (0)_{\mathbb{C}}\,z
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + (-1) = 0\bigr)\\
+&= 0_{\mathbb{C}}\,z
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 0\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(d)}\quad \begin{aligned}
+(z + w) + (z - w)
+&= (z + w) + \bigl(z + (-w)\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= z + \Bigl(w + \bigl(z + (-w)\bigr)\Bigr)
+&&(\because\ \text{加法の結合律})\\
+&= z + \bigl((w + z) + (-w)\bigr)
+&&(\because\ \text{加法の結合律を右辺から左辺へ})\\
+&= z + \bigl((z + w) + (-w)\bigr)
+&&(\because\ \text{加法の可換律})\\
+&= z + \Bigl(z + \bigl(w + (-w)\bigr)\Bigr)
+&&(\because\ \text{加法の結合律})\\
+&= z + (z + 0_{\mathbb{C}})
+&&(\because\ \text{(c)}\ (z \to w))\\
+&= z + z
+&&(\because\ \text{加法の単位元})\\
+&= 2_{\mathbb{C}}z
+&&(\because\ \text{(b)})
+\end{aligned}`),
+      displayMath(String.raw`\text{(e)}\quad \begin{aligned}
+(z + w) - (z - w)
+&= (z + w) + \bigl(-(z - w)\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z \to z + w,\ w \to z - w)\bigr)\\
+&= (z + w) + \Bigl(-\bigl(z + (-w)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= (z + w) + (-1_{\mathbb{C}})\bigl(z + (-w)\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to z + (-w))\bigr)\\
+&= (z + w) + \bigl((-1_{\mathbb{C}})z + (-1_{\mathbb{C}})(-w)\bigr)
+&&(\because\ \text{分配律})\\
+&= (z + w) + \bigl((-z) + (-1_{\mathbb{C}})(-w)\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= (z + w) + \Bigl((-z) + (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})w\bigr)\Bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to w)\bigr)\\
+&= (z + w) + \Bigl((-z) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)w\Bigr)
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (z + w) + \bigl((-z) + 1_{\mathbb{C}}w\bigr)
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
+&= (z + w) + \bigl((-z) + w\bigr)
+&&(\because\ \text{積の単位元})\\
+&= (w + z) + \bigl((-z) + w\bigr)
+&&(\because\ \text{加法の可換律})\\
+&= w + \Bigl(z + \bigl((-z) + w\bigr)\Bigr)
+&&(\because\ \text{加法の結合律})\\
+&= w + \Bigl(\bigl(z + (-z)\bigr) + w\Bigr)
+&&(\because\ \text{加法の結合律を右辺から左辺へ})\\
+&= w + (0_{\mathbb{C}} + w)
+&&(\because\ \text{(c)})\\
+&= w + w
+&&(\because\ \text{加法の単位元})\\
+&= 2_{\mathbb{C}}w
+&&(\because\ \text{(b)}\ (z \to w))
+\end{aligned}`),
+      displayMath(String.raw`\text{(f)}\quad \begin{aligned}
+ii
+&= (0,1)(0,1)
+&&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
+&= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= (-1,0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= -1_{\mathbb{C}}
+&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(g)}\quad \begin{aligned}
+(-i)\,i
+&= -(ii)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to i)\bigr)\\
+&= -(-1_{\mathbb{C}})
+&&(\because\ \text{(f)})\\
+&= (-1_{\mathbb{C}})(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -1_{\mathbb{C}})\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)
+\end{aligned}`),
+      paragraph([
+        "右辺を ",
+        math(String.raw`R := \kappa_0 I_{\mathrm{Mat}(2,\mathbb{C})} + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z`),
+        " とおき（",
+        math(String.raw`I = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " は Step 1 の略記）、",
+        math(String.raw`R`),
+        " の 4 つの成分を求める。Pauli 行列の成分の行は証明の冒頭の ",
+        math(String.raw`\sigma^x, \sigma^y, \sigma^z`),
+        " の定義である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+R_{11}
+&= \bigl(\kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z\bigr)_{11}
+&&(\because\ R\ \text{の定義})\\
+&= \bigl(((\kappa_0 I)_{11} + (\kappa_x\sigma^x)_{11}) + (\kappa_y\sigma^y)_{11}\bigr) + (\kappa_z\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((\kappa_0 I_{11} + \kappa_x(\sigma^x)_{11}) + \kappa_y(\sigma^y)_{11}\bigr) + \kappa_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((\kappa_0 \delta_{11} + \kappa_x(\sigma^x)_{11}) + \kappa_y(\sigma^y)_{11}\bigr) + \kappa_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{11}) + \kappa_y(\sigma^y)_{11}\bigr) + \kappa_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
+&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \kappa_0 1_{\mathbb{C}} + \kappa_z 1_{\mathbb{C}}
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= \kappa_0 + \kappa_z
+&&(\because\ \text{積の単位元を 2 か所へ})\\
+&= \frac{a_{11} + a_{22}}{2_{\mathbb{C}}} + \frac{a_{11} - a_{22}}{2_{\mathbb{C}}}
+&&(\because\ \kappa_0,\ \kappa_z\ \text{の定義})\\
+&= (a_{11} + a_{22})\,2_{\mathbb{C}}^{-1} + (a_{11} - a_{22})\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{def_complex_quotient}\ \text{を 2 か所へ}\bigr)\\
+&= \bigl((a_{11} + a_{22}) + (a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= (2_{\mathbb{C}}a_{11})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(d)}\ (z \to a_{11},\ w \to a_{22}))\\
+&= a_{11}
+&&(\because\ \text{(a)}\ (z \to a_{11}))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+R_{12}
+&= \bigl(\kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z\bigr)_{12}
+&&(\because\ R\ \text{の定義})\\
+&= \bigl(((\kappa_0 I)_{12} + (\kappa_x\sigma^x)_{12}) + (\kappa_y\sigma^y)_{12}\bigr) + (\kappa_z\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((\kappa_0 I_{12} + \kappa_x(\sigma^x)_{12}) + \kappa_y(\sigma^y)_{12}\bigr) + \kappa_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((\kappa_0 \delta_{12} + \kappa_x(\sigma^x)_{12}) + \kappa_y(\sigma^y)_{12}\bigr) + \kappa_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{12}) + \kappa_y(\sigma^y)_{12}\bigr) + \kappa_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + \kappa_z 0_{\mathbb{C}}
+&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
+&= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \kappa_x 1_{\mathbb{C}} + \kappa_y(-i)
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= \kappa_x + \kappa_y(-i)
+&&(\because\ \text{積の単位元})\\
+&= \frac{a_{12} + a_{21}}{2_{\mathbb{C}}} + \frac{i(a_{12} - a_{21})}{2_{\mathbb{C}}}(-i)
+&&(\because\ \kappa_x,\ \kappa_y\ \text{の定義})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((i(a_{12} - a_{21}))\,2_{\mathbb{C}}^{-1}\bigr)(-i)
+&&\bigl(\because\ \blkref{def_complex_quotient}\ \text{を 2 か所へ}\bigr)\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + (-i)\bigl((i(a_{12} - a_{21}))\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ \text{積の可換律})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((-i)(i(a_{12} - a_{21}))\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(((-i)\,i)(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(1_{\mathbb{C}}(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(g)})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + (a_{12} - a_{21})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の単位元})\\
+&= \bigl((a_{12} + a_{21}) + (a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= (2_{\mathbb{C}}a_{12})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(d)}\ (z \to a_{12},\ w \to a_{21}))\\
+&= a_{12}
+&&(\because\ \text{(a)}\ (z \to a_{12}))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+R_{21}
+&= \bigl(\kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z\bigr)_{21}
+&&(\because\ R\ \text{の定義})\\
+&= \bigl(((\kappa_0 I)_{21} + (\kappa_x\sigma^x)_{21}) + (\kappa_y\sigma^y)_{21}\bigr) + (\kappa_z\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((\kappa_0 I_{21} + \kappa_x(\sigma^x)_{21}) + \kappa_y(\sigma^y)_{21}\bigr) + \kappa_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((\kappa_0 \delta_{21} + \kappa_x(\sigma^x)_{21}) + \kappa_y(\sigma^y)_{21}\bigr) + \kappa_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{21}) + \kappa_y(\sigma^y)_{21}\bigr) + \kappa_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + \kappa_z 0_{\mathbb{C}}
+&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
+&= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \kappa_x 1_{\mathbb{C}} + \kappa_y\,i
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= \kappa_x + \kappa_y\,i
+&&(\because\ \text{積の単位元})\\
+&= \frac{a_{12} + a_{21}}{2_{\mathbb{C}}} + \frac{i(a_{12} - a_{21})}{2_{\mathbb{C}}}\,i
+&&(\because\ \kappa_x,\ \kappa_y\ \text{の定義})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((i(a_{12} - a_{21}))\,2_{\mathbb{C}}^{-1}\bigr)\,i
+&&\bigl(\because\ \blkref{def_complex_quotient}\ \text{を 2 か所へ}\bigr)\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + i\bigl((i(a_{12} - a_{21}))\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ \text{積の可換律})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(i(i(a_{12} - a_{21}))\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((ii)(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((-1_{\mathbb{C}})(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(f)})\\
+&= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(-(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl((a_{12} + a_{21}) + \bigl(-(a_{12} - a_{21})\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= \bigl((a_{12} + a_{21}) - (a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&= (2_{\mathbb{C}}a_{21})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(e)}\ (z \to a_{12},\ w \to a_{21}))\\
+&= a_{21}
+&&(\because\ \text{(a)}\ (z \to a_{21}))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+R_{22}
+&= \bigl(\kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z\bigr)_{22}
+&&(\because\ R\ \text{の定義})\\
+&= \bigl(((\kappa_0 I)_{22} + (\kappa_x\sigma^x)_{22}) + (\kappa_y\sigma^y)_{22}\bigr) + (\kappa_z\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((\kappa_0 I_{22} + \kappa_x(\sigma^x)_{22}) + \kappa_y(\sigma^y)_{22}\bigr) + \kappa_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((\kappa_0 \delta_{22} + \kappa_x(\sigma^x)_{22}) + \kappa_y(\sigma^y)_{22}\bigr) + \kappa_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{22}) + \kappa_y(\sigma^y)_{22}\bigr) + \kappa_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
+&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
+&= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \kappa_0 1_{\mathbb{C}} + \kappa_z(-1_{\mathbb{C}})
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= \kappa_0 + \kappa_z(-1_{\mathbb{C}})
+&&(\because\ \text{積の単位元})\\
+&= \kappa_0 + (-1_{\mathbb{C}})\kappa_z
+&&(\because\ \text{積の可換律})\\
+&= \frac{a_{11} + a_{22}}{2_{\mathbb{C}}} + (-1_{\mathbb{C}})\frac{a_{11} - a_{22}}{2_{\mathbb{C}}}
+&&(\because\ \kappa_0,\ \kappa_z\ \text{の定義})\\
+&= (a_{11} + a_{22})\,2_{\mathbb{C}}^{-1} + (-1_{\mathbb{C}})\bigl((a_{11} - a_{22})\,2_{\mathbb{C}}^{-1}\bigr)
+&&\bigl(\because\ \blkref{def_complex_quotient}\ \text{を 2 か所へ}\bigr)\\
+&= (a_{11} + a_{22})\,2_{\mathbb{C}}^{-1} + \bigl((-1_{\mathbb{C}})(a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{積の結合律を右辺から左辺へ})\\
+&= (a_{11} + a_{22})\,2_{\mathbb{C}}^{-1} + \bigl(-(a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl((a_{11} + a_{22}) + \bigl(-(a_{11} - a_{22})\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{分配律を右辺から左辺へ})\\
+&= \bigl((a_{11} + a_{22}) - (a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&= (2_{\mathbb{C}}a_{22})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(e)}\ (z \to a_{11},\ w \to a_{22}))\\
+&= a_{22}
+&&(\because\ \text{(a)}\ (z \to a_{22}))
+\end{aligned}`),
+      paragraph([
+        "4 つの成分が ",
+        math(String.raw`A`),
+        " の成分に等しいので、行列の等号は成分ごとであることから ",
+        math(String.raw`A = R`),
+        " が成り立つ。よって ",
         math(String.raw`\mathcal{B}`),
         " は張り、",
         math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
@@ -722,6 +1057,7 @@ P_{m-1}Y_m
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 3 の A の展開の 1 行（根拠「成分比較」）の係数の分母 2 を 2_ℂ と読み、2_ℂ ∈ ℂ^×（inclusion_rr_to_cc の第 1 成分の比較）と、4 つの分数が def_complex_quotient の商（w → 2_ℂ）であることを書いた。係数に κ_0・κ_x・κ_y・κ_z と名前を付け、準備 (a)〜(g)（(2_ℂz)2_ℂ^{-1} = z、z + z = 2_ℂz、z + (−z) = 0_ℂ、(z+w)+(z−w) = 2_ℂz、(z+w)−(z−w) = 2_ℂw、ii = −1_ℂ、(−i)i = 1_ℂ）を置き、右辺の 4 成分がそれぞれ a_{11}・a_{12}・a_{21}・a_{22} になることを、体の公理と定義を 1 行に 1 つずつ当てる鎖にした（各鎖は R の定義・def_matrix_sum・def_matrix_scalar_multiple の 3 行で始まり、κ の定義を代入する行を置いてから def_complex_quotient で開く）。主張と展開の式は不変。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "タイトルと statement にあった多元環の一般論の語彙（「環として生成する」「C 上の単位的結合多元環」" +
           "「S を含む最小の C-部分多元環」）を、「和・スカラー倍・積で閉じた最小の集合」という具体的な" +
