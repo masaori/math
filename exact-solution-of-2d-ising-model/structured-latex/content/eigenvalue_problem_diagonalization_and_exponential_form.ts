@@ -6572,10 +6572,10 @@ g
 -\tilde\theta_{\mu+kM_{\mathrm{col}}}
 &= -\left(\tilde\theta_\mu+2\pi k_{\mathbb R}\right)
 &&(\because\ \text{上の鎖})\\
-&= \left(-\tilde\theta_\mu\right)+\left(-2\pi k_{\mathbb R}\right)
-&&(\because\ \mathbb{R}\ \text{で}\ -(u+v) = (-u)+(-v))\\
+&= \left(-\tilde\theta_\mu\right)+\left(-\left(2\pi k_{\mathbb R}\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(p+q) = (-p)+(-q)\ (p \to \tilde\theta_\mu,\ q \to 2\pi k_{\mathbb R})\bigr)\\
 &= \left(-\tilde\theta_\mu\right)+2\pi\left(-k_{\mathbb R}\right)
-&&(\because\ \mathbb{R}\ \text{で}\ -(uv) = u(-v))\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(pq) = p(-q)\ (p \to 2\pi,\ q \to k_{\mathbb R})\bigr)\\
 &= \left(-\tilde\theta_\mu\right)+2\pi(-k)_{\mathbb R}
 &&(\because\ \text{準備の第二})
 \end{aligned}`),
@@ -6624,10 +6624,10 @@ g
 -\tilde\theta_\nu
 &= -\left(2\pi - \tilde\theta_\mu\right)
 &&(\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1))\\
-&= \tilde\theta_\mu + \left(-2\pi\right)
-&&(\because\ \mathbb{R}\ \text{で}\ -(u-v) = v+(-u))\\
+&= \tilde\theta_\mu + \left(-\left(2\pi\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(p-q) = q+(-p)\ (p \to 2\pi,\ q \to \tilde\theta_\mu)\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-1_{\mathbb R}\right)
-&&(\because\ \mathbb{R}\ \text{で}\ -u = u(-1_{\mathbb R}))\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -p = p(-1_{\mathbb R})\ (p \to 2\pi)\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-(1)_{\mathbb R}\right)
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は単位元を保つ})\\
 &= \tilde\theta_\mu + 2\pi\,(-1)_{\mathbb R}
@@ -6751,6 +6751,7 @@ d_\nu
         "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos x + i sin x の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (2) の θ̃_{μ+kM} の鎖の「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の和」「(M_col)_ℝ ≠ 0_ℝ による約分」の 2 行とその間の θ̃_μ の定義の行の 3 行を、新しく足した def_real_quotient の商 y/z = y z^{-1} で開き、def_real_quotient・ℝ の右からの分配律・def_real_quotient を右辺から左辺へ・θ̃_μ の定義・ℝ の乗法の結合律（向きつき 2 行）・乗法の逆元・乗法の単位元の 8 行にした（12 行 → 17 行）。分配法則の行の 2π k_ℝ (M_col)_ℝ は、分配法則が作る形どおり 2π(k_ℝ (M_col)_ℝ) と括った。同じ鎖の 5・7 行目の「ℝ の差の定義」は def_real_difference の参照にした。主張は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (3) の P̌_{M+1−μ} の成分の分数が def_complex_quotient の商で、分母が (2_ℂ(√M_col)_ℂ)γ_2(θ̃_μ)・2_ℂ(√M_col)_ℂ、分子が −|γ_2(−θ̃_μ)|_ℂ・|γ_2(−θ̃_μ)|_ℂ・1_ℂ であることを主張に書き、証明の最後の段落に、P̌_ν の分母 d_ν := uγ_2(−θ̃_ν)・u が diagonalization_check_P_D の Step 1 を ν で読んで ℂ^× に属し、鎖の 3 行目の分母 uγ_2(θ̃_μ) が d_ν に等しいことを 2 行の鎖で書いた。鎖と主張の値は不変。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: (2)(3) の根拠の欄の ℝ の一般の恒等式の変数を u, v から p, q に替え、各行に代入を添えた（(3) の「最後に」で始まる段落で置いた u := 2_ℂ(√M_col)_ℂ と文字が重なっていたため）。(2) の第二の鎖の 2 行目の -(2πk_ℝ) と (3) の −θ̃_ν の鎖の 2 行目の -(2π) に括弧を補った。主張と値は不変。",
       ],
     },
   },

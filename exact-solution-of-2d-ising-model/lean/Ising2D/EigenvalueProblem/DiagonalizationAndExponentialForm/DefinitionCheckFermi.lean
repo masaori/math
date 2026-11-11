@@ -145,9 +145,9 @@ theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
       = -(thetaTilde M μ + 2 * Real.pi * (k : ℝ)) := by
         rw [thetaTilde_add_int_mul M hM]          -- 1 行目: 上の鎖（`thetaTilde_add_int_mul`）
     _ = (-thetaTilde M μ) + (-(2 * Real.pi * (k : ℝ))) := neg_add _ _
-                                                  -- 2 行目: ℝ で `-(u+v) = (-u)+(-v)`
+                                                  -- 2 行目: ℝ で `-(p+q) = (-p)+(-q)`（`p → θ̃_μ`, `q → 2πk_ℝ`）
     _ = (-thetaTilde M μ) + 2 * Real.pi * (-(k : ℝ)) := by
-        rw [neg_mul_eq_mul_neg]                   -- 3 行目: ℝ で `-(uv) = u(-v)`（`u → 2π`, `v → k_ℝ`）
+        rw [neg_mul_eq_mul_neg]                   -- 3 行目: ℝ で `-(pq) = p(-q)`（`p → 2π`, `q → k_ℝ`）
     _ = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
         rw [periodicity_prep_int_cast_neg]        -- 4 行目: 準備の第二
 
@@ -178,7 +178,7 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
         rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
 
 /-- 人手 `periodicity_of_check_fermi` (3) の `-θ̃_ν` の鎖: `-θ̃_ν = θ̃_μ + 2π(-1)_ℝ`（人手の 5 行）。
-2 行目の人手の 1 つの恒等式 `-(u-v) = v+(-u)` は、mathlib の `neg_sub`（`-(u-v) = v-u`）と
+2 行目の人手の 1 つの恒等式 `-(p-q) = q+(-p)` は、mathlib の `neg_sub`（`-(p-q) = q-p`）と
 `sub_eq_add_neg`（差の定義）を続けて読む。 -/
 theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
     -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) :=
@@ -186,9 +186,9 @@ theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
       = -(2 * Real.pi - thetaTilde M μ) := by
         rw [thetaTilde_conj hM μ]                 -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
     _ = thetaTilde M μ + (-(2 * Real.pi)) := by
-        rw [neg_sub, sub_eq_add_neg]              -- 2 行目: ℝ で `-(u-v) = v+(-u)`
+        rw [neg_sub, sub_eq_add_neg]              -- 2 行目: ℝ で `-(p-q) = q+(-p)`（`p → 2π`, `q → θ̃_μ`）
     _ = thetaTilde M μ + 2 * Real.pi * (-1) := by
-        rw [mul_neg_one]                          -- 3 行目: ℝ で `-u = u(-1_ℝ)`
+        rw [mul_neg_one]                          -- 3 行目: ℝ で `-p = p(-1_ℝ)`（`p → 2π`）
     _ = thetaTilde M μ + 2 * Real.pi * (-((1 : ℤ) : ℝ)) := by
         rw [Int.cast_one]                         -- 4 行目: `ι_{ℤ→ℝ}` は単位元を保つ
     _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
