@@ -13852,4 +13852,1813 @@ g(F)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_tensor_algebra_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "テンソル代数" },
+    labels: [],
+  },
+  {
+    id: "mathematical_toolkit_definition_direct_sum_of_family_of_vector_spaces",
+    kind: "definition",
+    title: { text: "番号付けた ℂ-線型空間の族の直和の集合" },
+    labels: ["def_direct_sum_of_family_of_vector_spaces"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`(E_j,+_{E_j},\cdot_{E_j},0_{E_j})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とする。各 ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " に ",
+        math(String.raw`E_j`),
+        " の元 ",
+        math(String.raw`x_j`),
+        " を一つずつ与える族 ",
+        math(String.raw`x=(x_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " のうち、次の条件を満たすもの全体の集合を ",
+        math(String.raw`D:=\bigoplus_{j\in\mathbb{Z}_{\ge 0}}E_j`),
+        " と書く。",
+      ]),
+      list([
+        [
+          math(String.raw`N\in\mathbb{Z}_{\ge 0}`),
+          " が存在して、",
+          math(String.raw`j>N`),
+          " を満たすすべての ",
+          math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+          " について ",
+          math(String.raw`x_j=0_{E_j}`),
+          " である（有限個を除いて零）。",
+        ],
+      ]),
+      paragraph([
+        "この条件を満たす ",
+        math(String.raw`N`),
+        " を ",
+        math(String.raw`x`),
+        " の零の境と呼ぶ。",
+        math(String.raw`x_j\in E_j`),
+        " を ",
+        math(String.raw`x`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分と呼び、",
+        math(String.raw`D`),
+        " の元を表す式 ",
+        math(String.raw`w`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分を ",
+        math(String.raw`(w)_j`),
+        " とも書く。",
+        math(String.raw`D`),
+        " の二つの元 ",
+        math(String.raw`x`),
+        " と ",
+        math(String.raw`y`),
+        " が等しいとは、すべての ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`E_j`),
+        " の等式 ",
+        math(String.raw`x_j=y_j`),
+        " が成り立つことである。",
+      ]),
+      paragraph([
+        math(String.raw`E_j`),
+        " は ",
+        math(String.raw`D`),
+        " の部分集合ではない。",
+        math(String.raw`E_j`),
+        " の元から ",
+        math(String.raw`D`),
+        " の元を作るときは、名前を付けた埋め込み写像（",
+        ref("def_embedding_into_component_of_direct_sum_of_family"),
+        "）を通す。",
+        math(String.raw`D`),
+        " の上の加法・スカラー倍・零は ",
+        ref("def_operations_on_direct_sum_of_family_of_vector_spaces"),
+        " で定める。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_componentwise_sum_lies_in_direct_sum_of_family",
+    kind: "claim",
+    title: { text: "直和の二つの元の成分ごとの和は、直和の元である" },
+    labels: ["claim_componentwise_sum_lies_in_direct_sum_of_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " と ",
+        math(String.raw`D`),
+        " を ",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        " のものとし、",
+        math(String.raw`x,y\in D`),
+        " とする。このとき、各 ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " に ",
+        math(String.raw`x_j+_{E_j}y_j\in E_j`),
+        " を与える族 ",
+        math(String.raw`(x_j+_{E_j}y_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " は ",
+        math(String.raw`D`),
+        " の元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`N_x\in\mathbb{Z}_{\ge 0}`),
+        " を ",
+        math(String.raw`x`),
+        " の零の境、",
+        math(String.raw`N_y\in\mathbb{Z}_{\ge 0}`),
+        " を ",
+        math(String.raw`y`),
+        " の零の境とし（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）、",
+        math(String.raw`N:=\max(N_x,N_y)\in\mathbb{Z}_{\ge 0}`),
+        " と置く。",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " が ",
+        math(String.raw`j>N`),
+        " を満たすとする。このとき ",
+        math(String.raw`j>N_x`),
+        " かつ ",
+        math(String.raw`j>N_y`),
+        " なので、",
+        math(String.raw`x_j=0_{E_j}`),
+        " かつ ",
+        math(String.raw`y_j=0_{E_j}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x_j+_{E_j}y_j
+&=0_{E_j}+_{E_j}y_j
+&&\left(\because\ x_j=0_{E_j}\right)\\
+&=0_{E_j}+_{E_j}0_{E_j}
+&&\left(\because\ y_j=0_{E_j}\right)\\
+&=0_{E_j}
+&&\left(\because\ E_j\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`N`),
+        " は族 ",
+        math(String.raw`(x_j+_{E_j}y_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " の零の境の条件を満たし、この族は ",
+        math(String.raw`D`),
+        " の元である（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_componentwise_scalar_multiple_lies_in_direct_sum_of_family",
+    kind: "claim",
+    title: { text: "直和の元の成分ごとのスカラー倍は、直和の元である" },
+    labels: ["claim_componentwise_scalar_multiple_lies_in_direct_sum_of_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " と ",
+        math(String.raw`D`),
+        " を ",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        " のものとし、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        "、",
+        math(String.raw`x\in D`),
+        " とする。このとき、各 ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " に ",
+        math(String.raw`\lambda\cdot_{E_j}x_j\in E_j`),
+        " を与える族 ",
+        math(String.raw`(\lambda\cdot_{E_j}x_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " は ",
+        math(String.raw`D`),
+        " の元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`N\in\mathbb{Z}_{\ge 0}`),
+        " を ",
+        math(String.raw`x`),
+        " の零の境とする（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）。",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " が ",
+        math(String.raw`j>N`),
+        " を満たすとき、",
+        math(String.raw`x_j=0_{E_j}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\cdot_{E_j}x_j
+&=\lambda\cdot_{E_j}0_{E_j}
+&&\left(\because\ x_j=0_{E_j}\right)\\
+&=0_{E_j}
+&&\left(\because\ \text{零ベクトルのスカラー倍（}V=E_j\text{）。}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`N`),
+        " は族 ",
+        math(String.raw`(\lambda\cdot_{E_j}x_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " の零の境の条件を満たし、この族は ",
+        math(String.raw`D`),
+        " の元である（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_operations_on_direct_sum_of_family_of_vector_spaces",
+    kind: "definition",
+    title: { text: "番号付けた ℂ-線型空間の族の直和の演算" },
+    labels: ["def_operations_on_direct_sum_of_family_of_vector_spaces"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " と ",
+        math(String.raw`D=\bigoplus_{j\in\mathbb{Z}_{\ge 0}}E_j`),
+        " を ",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        " のものとする。写像 ",
+        math(String.raw`+_D:D\times D\to D`),
+        " と ",
+        math(String.raw`\cdot_D:\mathbb{C}\times D\to D`),
+        "、元 ",
+        math(String.raw`0_D\in D`),
+        " を次で定める。以下、",
+        math(String.raw`x,y`),
+        " は ",
+        math(String.raw`D`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元を表す。",
+      ]),
+      list([
+        [
+          math(String.raw`x+_D y:=(x_j+_{E_j}y_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+          "（成分ごとの加法。右辺が ",
+          math(String.raw`D`),
+          " の元であることは ",
+          ref("claim_componentwise_sum_lies_in_direct_sum_of_family"),
+          "）",
+        ],
+        [
+          math(String.raw`\lambda\cdot_D x:=(\lambda\cdot_{E_j}x_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+          "（成分ごとのスカラー倍。右辺が ",
+          math(String.raw`D`),
+          " の元であることは ",
+          ref("claim_componentwise_scalar_multiple_lies_in_direct_sum_of_family"),
+          "）",
+        ],
+        [
+          math(String.raw`0_D:=(0_{E_j})_{j\in\mathbb{Z}_{\ge 0}}`),
+          "（成分ごとの零。すべての成分が零なので ",
+          math(String.raw`0`),
+          " が零の境の条件を満たし、右辺は ",
+          math(String.raw`D`),
+          " の元である）",
+        ],
+      ]),
+      paragraph([
+        "すなわち、すべての ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`(x+_D y)_j=x_j+_{E_j}y_j`),
+        "、",
+        math(String.raw`(\lambda\cdot_D x)_j=\lambda\cdot_{E_j}x_j`),
+        "、",
+        math(String.raw`(0_D)_j=0_{E_j}`),
+        " である。組 ",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        " を族 ",
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " の直和と呼ぶ。この組が ℂ-線型空間であることは、この定義では主張しない（",
+        ref("claim_direct_sum_of_family_of_vector_spaces_is_complex_vector_space"),
+        " で示す）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_direct_sum_of_family_of_vector_spaces_is_complex_vector_space",
+    kind: "claim",
+    title: { text: "番号付けた ℂ-線型空間の族の直和は ℂ-線型空間である" },
+    labels: ["claim_direct_sum_of_family_of_vector_spaces_is_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " を ",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        " のもの、",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        " をその直和（",
+        ref("def_operations_on_direct_sum_of_family_of_vector_spaces"),
+        "）とする。このとき組 ",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        " は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y,z`),
+        " を ",
+        math(String.raw`D`),
+        " の任意の元、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。どの条件も ",
+        math(String.raw`D`),
+        " の二つの元の等式であり、",
+        math(String.raw`D`),
+        " の二つの元が等しいことは、すべての ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " について第 ",
+        math(String.raw`j`),
+        " 成分どうしの ",
+        math(String.raw`E_j`),
+        " の等式が成り立つことである（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）。以下、",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " を任意に取り、第 ",
+        math(String.raw`j`),
+        " 成分の等式を示す。",
+      ]),
+      paragraph(["加法の結合法則："]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((x+_D y)+_D z\bigr)_j
+&=(x+_D y)_j+_{E_j}z_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=(x_j+_{E_j}y_j)+_{E_j}z_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=x_j+_{E_j}(y_j+_{E_j}z_j)
+&&\left(\because\ E_j\ \text{の加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=x_j+_{E_j}(y+_D z)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\bigl(x+_D(y+_D z)\bigr)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則："]),
+      displayMath(String.raw`\begin{aligned}
+(x+_D y)_j
+&=x_j+_{E_j}y_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=y_j+_{E_j}x_j
+&&\left(\because\ E_j\ \text{の加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=(y+_D x)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元："]),
+      displayMath(String.raw`\begin{aligned}
+(x+_D 0_D)_j
+&=x_j+_{E_j}(0_D)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=x_j+_{E_j}0_{E_j}
+&&\left(\because\ 0_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=x_j
+&&\left(\because\ E_j\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元：",
+        math(String.raw`x':=(-1_{\mathbb{C}})\cdot_D x\in D`),
+        " と置く（",
+        ref("def_operations_on_direct_sum_of_family_of_vector_spaces"),
+        "）。",
+        math(String.raw`x+_D x'=0_D`),
+        " であることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x+_D x')_j
+&=x_j+_{E_j}x'_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=x_j+_{E_j}(-1_{\mathbb{C}})\cdot_{E_j}x_j
+&&\left(\because\ x'\ \text{と}\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=1_{\mathbb{C}}\cdot_{E_j}x_j+_{E_j}(-1_{\mathbb{C}})\cdot_{E_j}x_j
+&&\left(\because\ E_j\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{E_j}x_j
+&&\left(\because\ E_j\ \text{のスカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_{E_j}x_j
+&&\left(\because\ 1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})=0_{\mathbb{C}}\right)\\
+&=0_{E_j}
+&&\left(\because\ \text{零のスカラー倍（}V=E_j\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=(0_D)_j
+&&\left(\because\ 0_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則："]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda\cdot_{\mathbb{C}}\mu)\cdot_D x\bigr)_j
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{E_j}x_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\lambda\cdot_{E_j}(\mu\cdot_{E_j}x_j)
+&&\left(\because\ E_j\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\cdot_{E_j}(\mu\cdot_D x)_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_D(\mu\cdot_D x)\bigr)_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元："]),
+      displayMath(String.raw`\begin{aligned}
+(1_{\mathbb{C}}\cdot_D x)_j
+&=1_{\mathbb{C}}\cdot_{E_j}x_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=x_j
+&&\left(\because\ E_j\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則："]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\lambda\cdot_D(x+_D y)\bigr)_j
+&=\lambda\cdot_{E_j}(x+_D y)_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\lambda\cdot_{E_j}(x_j+_{E_j}y_j)
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\lambda\cdot_{E_j}x_j+_{E_j}\lambda\cdot_{E_j}y_j
+&&\left(\because\ E_j\ \text{のベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\cdot_D x)_j+_{E_j}(\lambda\cdot_D y)_j
+&&\left(\because\ \cdot_D\ \text{の定義を二か所に適用。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=(\lambda\cdot_D x+_D\lambda\cdot_D y)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則："]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda+_{\mathbb{C}}\mu)\cdot_D x\bigr)_j
+&=(\lambda+_{\mathbb{C}}\mu)\cdot_{E_j}x_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\lambda\cdot_{E_j}x_j+_{E_j}\mu\cdot_{E_j}x_j
+&&\left(\because\ E_j\ \text{のスカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\cdot_D x)_j+_{E_j}(\mu\cdot_D x)_j
+&&\left(\because\ \cdot_D\ \text{の定義を二か所に適用。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=(\lambda\cdot_D x+_D\mu\cdot_D x)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j`),
+        " は任意だったので、八つの条件が ",
+        math(String.raw`D`),
+        " の等式として満たされ（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）、組 ",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_embedding_into_component_of_direct_sum_of_family",
+    kind: "definition",
+    title: { text: "番号付けた族の直和の成分への埋め込み写像" },
+    labels: ["def_embedding_into_component_of_direct_sum_of_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        " を ",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        " のもの、",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        " をその直和（",
+        ref("def_operations_on_direct_sum_of_family_of_vector_spaces"),
+        "）とし、",
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`),
+        " とする。写像 ",
+        math(String.raw`\mathrm{emb}_k:E_k\to D`),
+        " を、",
+        math(String.raw`y\in E_k`),
+        " について次で定め、直和の第 ",
+        math(String.raw`k`),
+        " 成分への埋め込み写像と呼ぶ。",
+      ]),
+      list([
+        [math(String.raw`\bigl(\mathrm{emb}_k(y)\bigr)_k:=y`)],
+        [
+          math(String.raw`\bigl(\mathrm{emb}_k(y)\bigr)_j:=0_{E_j}`),
+          "（",
+          math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+          "、",
+          math(String.raw`j\neq k`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "第 ",
+        math(String.raw`k`),
+        " 成分 ",
+        math(String.raw`y`),
+        " は ",
+        math(String.raw`E_k`),
+        " の元、",
+        math(String.raw`j\neq k`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分 ",
+        math(String.raw`0_{E_j}`),
+        " は ",
+        math(String.raw`E_j`),
+        " の元である。",
+        math(String.raw`j>k`),
+        " ならば ",
+        math(String.raw`j\neq k`),
+        " なので第 ",
+        math(String.raw`j`),
+        " 成分は ",
+        math(String.raw`0_{E_j}`),
+        " であり、",
+        math(String.raw`k`),
+        " が零の境の条件を満たす。したがって右辺の族は ",
+        math(String.raw`D`),
+        " の元であり（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）、",
+        math(String.raw`\mathrm{emb}_k`),
+        " は値域を ",
+        math(String.raw`D`),
+        " とする写像として定まる。",
+        math(String.raw`E_k`),
+        " の元 ",
+        math(String.raw`y`),
+        " と ",
+        math(String.raw`D`),
+        " の元 ",
+        math(String.raw`\mathrm{emb}_k(y)`),
+        " は別の集合の元であり、記号を使い回さない。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_embedding_into_component_of_direct_sum_of_family_is_linear_map",
+    kind: "claim",
+    title: { text: "番号付けた族の直和の成分への埋め込み写像は線型写像である" },
+    labels: ["claim_embedding_into_component_of_direct_sum_of_family_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`(E_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`(D,+_D,\cdot_D,0_D)`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`\mathrm{emb}_k:E_k\to D`),
+        " を ",
+        ref("def_embedding_into_component_of_direct_sum_of_family"),
+        " のものとする。",
+        math(String.raw`D`),
+        " は ℂ-線型空間である（",
+        ref("claim_direct_sum_of_family_of_vector_spaces_is_complex_vector_space"),
+        "）。このとき ",
+        math(String.raw`\mathrm{emb}_k`),
+        " は ",
+        math(String.raw`E_k`),
+        " から ",
+        math(String.raw`D`),
+        " への線型写像（",
+        ref("def_linear_map"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`y,z`),
+        " を ",
+        math(String.raw`E_k`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とし、",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " を任意に取る。",
+        math(String.raw`D`),
+        " の元の等しさは各成分の等しさなので（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）、第 ",
+        math(String.raw`j`),
+        " 成分を比べる。",
+      ]),
+      paragraph([
+        "加法を保つこと（",
+        math(String.raw`j=k`),
+        " のとき）：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{emb}_k(y+_{E_k}z)\bigr)_k
+&=y+_{E_k}z
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\bigl(\mathrm{emb}_k(y)\bigr)_k+_{E_k}\bigl(\mathrm{emb}_k(z)\bigr)_k
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義を二か所に適用。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\bigl(\mathrm{emb}_k(y)+_D\mathrm{emb}_k(z)\bigr)_k
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "加法を保つこと（",
+        math(String.raw`j\neq k`),
+        " のとき）：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{emb}_k(y+_{E_k}z)\bigr)_j
+&=0_{E_j}
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=0_{E_j}+_{E_j}0_{E_j}
+&&\left(\because\ E_j\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(\mathrm{emb}_k(y)\bigr)_j+_{E_j}\bigl(\mathrm{emb}_k(z)\bigr)_j
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義を二か所に適用。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\bigl(\mathrm{emb}_k(y)+_D\mathrm{emb}_k(z)\bigr)_j
+&&\left(\because\ +_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "スカラー倍を保つこと（",
+        math(String.raw`j=k`),
+        " のとき）：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{emb}_k(\lambda\cdot_{E_k}y)\bigr)_k
+&=\lambda\cdot_{E_k}y
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\lambda\cdot_{E_k}\bigl(\mathrm{emb}_k(y)\bigr)_k
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\bigl(\lambda\cdot_D\mathrm{emb}_k(y)\bigr)_k
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "スカラー倍を保つこと（",
+        math(String.raw`j\neq k`),
+        " のとき）：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathrm{emb}_k(\lambda\cdot_{E_k}y)\bigr)_j
+&=0_{E_j}
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\lambda\cdot_{E_j}0_{E_j}
+&&\left(\because\ \text{零ベクトルのスカラー倍（}V=E_j\text{）。}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&=\lambda\cdot_{E_j}\bigl(\mathrm{emb}_k(y)\bigr)_j
+&&\left(\because\ \mathrm{emb}_k\ \text{の定義。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=\bigl(\lambda\cdot_D\mathrm{emb}_k(y)\bigr)_j
+&&\left(\because\ \cdot_D\ \text{の定義。}\blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j`),
+        " は任意だったので、",
+        math(String.raw`\mathrm{emb}_k(y+_{E_k}z)=\mathrm{emb}_k(y)+_D\mathrm{emb}_k(z)`),
+        " と ",
+        math(String.raw`\mathrm{emb}_k(\lambda\cdot_{E_k}y)=\lambda\cdot_D\mathrm{emb}_k(y)`),
+        " が成り立ち（",
+        ref("def_direct_sum_of_family_of_vector_spaces"),
+        "）、",
+        math(String.raw`\mathrm{emb}_k`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_concatenation_of_tuples",
+    kind: "definition",
+    title: { text: "二つの組をつなげた組" },
+    labels: ["def_concatenation_of_tuples"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とし、",
+        math(String.raw`k,l\in\mathbb{Z}_{\ge 0}`),
+        " とする。写像 ",
+        math(String.raw`\mathrm{cat}_{k,l}:V^{\{1,\dots,k\}}\times V^{\{1,\dots,l\}}\to V^{\{1,\dots,k+l\}}`),
+        "（",
+        ref("def_tuples_of_vector_space_elements"),
+        "）を、",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "、",
+        math(String.raw`s\in\{1,\dots,k+l\}`),
+        " について次で定め、",
+        math(String.raw`\mathrm{cat}_{k,l}(u,u')`),
+        " を ",
+        math(String.raw`u`),
+        " と ",
+        math(String.raw`u'`),
+        " をつなげた組と呼ぶ。",
+      ]),
+      list([
+        [
+          math(String.raw`\mathrm{cat}_{k,l}(u,u')(s):=u(s)`),
+          "（",
+          math(String.raw`1\le s\le k`),
+          " のとき）",
+        ],
+        [
+          math(String.raw`\mathrm{cat}_{k,l}(u,u')(s):=u'(s-k)`),
+          "（",
+          math(String.raw`k+1\le s\le k+l`),
+          " のとき）",
+        ],
+      ]),
+      paragraph([
+        math(String.raw`\{1,\dots,k+l\}`),
+        " の各元はちょうど一方の場合に入る。二つ目の場合は ",
+        math(String.raw`1\le s-k\le l`),
+        " なので ",
+        math(String.raw`u'(s-k)`),
+        " が定まる。どちらの値も ",
+        math(String.raw`V`),
+        " の元なので、",
+        math(String.raw`\mathrm{cat}_{k,l}(u,u')`),
+        " は ",
+        math(String.raw`V^{\{1,\dots,k+l\}}`),
+        " の元として一つに決まる。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_concatenation_commutes_with_replacing_component_of_first_tuple",
+    kind: "claim",
+    title: { text: "前の組の成分を置き換えてからつなげた組は、つなげた組の同じ番号の成分を置き換えた組である" },
+    labels: ["claim_concatenation_commutes_with_replacing_component_of_first_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " を ",
+        ref("def_concatenation_of_tuples"),
+        " のものとし、",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,k\}`),
+        "、",
+        math(String.raw`x\in V`),
+        " とする。このとき次が成り立つ（",
+        math(String.raw`[r\mapsto x]`),
+        " は ",
+        ref("def_tuple_with_one_component_replaced"),
+        "）。",
+      ]),
+      displayMath(String.raw`\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)=\mathrm{cat}_{k,l}(u,u')[r\mapsto x]`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ",
+        math(String.raw`V^{\{1,\dots,k+l\}}`),
+        " の元、すなわち写像なので、",
+        math(String.raw`s\in\{1,\dots,k+l\}`),
+        " を任意に取り、",
+        math(String.raw`s`),
+        " での値を比べる。",
+        math(String.raw`r\le k`),
+        " なので、",
+        math(String.raw`s=r`),
+        "、",
+        math(String.raw`s\le k`),
+        " かつ ",
+        math(String.raw`s\neq r`),
+        "、",
+        math(String.raw`s\ge k+1`),
+        "（このとき ",
+        math(String.raw`s\neq r`),
+        "）の三つの場合に分ける。",
+      ]),
+      paragraph([math(String.raw`s=r`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)(r)
+&=u[r\mapsto x](r)
+&&\left(\because\ 1\le r\le k\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=x
+&&\left(\because\ \blkref{def_tuple_with_one_component_replaced}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[r\mapsto x](r)
+&&\left(\because\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`s\le k`), " かつ ", math(String.raw`s\neq r`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)(s)
+&=u[r\mapsto x](s)
+&&\left(\because\ 1\le s\le k\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=u(s)
+&&\left(\because\ s\neq r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')(s)
+&&\left(\because\ 1\le s\le k\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[r\mapsto x](s)
+&&\left(\because\ s\neq r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`s\ge k+1`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)(s)
+&=u'(s-k)
+&&\left(\because\ k+1\le s\le k+l\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')(s)
+&&\left(\because\ k+1\le s\le k+l\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[r\mapsto x](s)
+&&\left(\because\ s\neq r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`s`),
+        " は任意だったので、両辺は写像として等しい。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_concatenation_commutes_with_replacing_component_of_second_tuple",
+    kind: "claim",
+    title: { text: "後ろの組の成分を置き換えてからつなげた組は、つなげた組の番号をずらした成分を置き換えた組である" },
+    labels: ["claim_concatenation_commutes_with_replacing_component_of_second_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " を ",
+        ref("def_concatenation_of_tuples"),
+        " のものとし、",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,l\}`),
+        "、",
+        math(String.raw`x\in V`),
+        " とする。このとき ",
+        math(String.raw`k+r\in\{1,\dots,k+l\}`),
+        " であり、次が成り立つ（",
+        math(String.raw`[r\mapsto x]`),
+        " は ",
+        ref("def_tuple_with_one_component_replaced"),
+        "）。",
+      ]),
+      displayMath(String.raw`\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)=\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x]`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`1\le r\le l`),
+        " から ",
+        math(String.raw`k+1\le k+r\le k+l`),
+        " である。",
+        math(String.raw`s\in\{1,\dots,k+l\}`),
+        " を任意に取り、",
+        math(String.raw`s=k+r`),
+        "、",
+        math(String.raw`s\le k`),
+        "（このとき ",
+        math(String.raw`s\neq k+r`),
+        "）、",
+        math(String.raw`s\ge k+1`),
+        " かつ ",
+        math(String.raw`s\neq k+r`),
+        " の三つの場合に分けて ",
+        math(String.raw`s`),
+        " での値を比べる。",
+      ]),
+      paragraph([math(String.raw`s=k+r`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)(k+r)
+&=u'[r\mapsto x]\bigl((k+r)-k\bigr)
+&&\left(\because\ k+1\le k+r\le k+l\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=u'[r\mapsto x](r)
+&&\left(\because\ (k+r)-k=r\right)\\
+&=x
+&&\left(\because\ \blkref{def_tuple_with_one_component_replaced}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x](k+r)
+&&\left(\because\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`s\le k`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)(s)
+&=u(s)
+&&\left(\because\ 1\le s\le k\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')(s)
+&&\left(\because\ 1\le s\le k\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x](s)
+&&\left(\because\ s\neq k+r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`s\ge k+1`), " かつ ", math(String.raw`s\neq k+r`), " のとき（",
+        math(String.raw`s-k\neq r`), "）："]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)(s)
+&=u'[r\mapsto x](s-k)
+&&\left(\because\ k+1\le s\le k+l\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=u'(s-k)
+&&\left(\because\ s-k\neq r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')(s)
+&&\left(\because\ k+1\le s\le k+l\ \text{と}\ \blkref{def_concatenation_of_tuples}\right)\\
+&=\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x](s)
+&&\left(\because\ s\neq k+r\ \text{と}\ \blkref{def_tuple_with_one_component_replaced}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`s`),
+        " は任意だったので、両辺は写像として等しい。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_fixing_second_tuple_of_multilinear_map_gives_multilinear_map",
+    kind: "claim",
+    title: { text: "k+l 重線型写像に後ろの組を固定して入れた写像は k 重線型写像である" },
+    labels: ["claim_fixing_second_tuple_of_multilinear_map_gives_multilinear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " を ",
+        ref("def_concatenation_of_tuples"),
+        " のもの、",
+        math(String.raw`(U,+_U,\cdot_U,0_U)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`g:V^{\{1,\dots,k+l\}}\to U`),
+        " を ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`U`),
+        " への ",
+        math(String.raw`k+l`),
+        " 重線型写像（",
+        ref("def_k_multilinear_map"),
+        "）、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        " とする。写像 ",
+        math(String.raw`g_{\bullet,u'}:V^{\{1,\dots,k\}}\to U`),
+        " を ",
+        math(String.raw`g_{\bullet,u'}(u):=g\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)`),
+        " で定める。このとき ",
+        math(String.raw`g_{\bullet,u'}`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`U`),
+        " への ",
+        math(String.raw`k`),
+        " 重線型写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,k\}`),
+        "、",
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る（",
+        math(String.raw`k=0`),
+        " のときは条件が無い）。",
+        math(String.raw`r\in\{1,\dots,k+l\}`),
+        " でもある。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_{\bullet,u'}\bigl(u[r\mapsto x+_V y]\bigr)
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u[r\mapsto x+_V y],u'\bigr)\Bigr)
+&&\left(\because\ g_{\bullet,u'}\ \text{の定義}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[r\mapsto x+_V y]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_first_tuple}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[r\mapsto x]\bigr)+_U g\bigl(\mathrm{cat}_{k,l}(u,u')[r\mapsto y]\bigr)
+&&\left(\because\ g\ \text{は第}\ r\ \text{成分について加法を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)\Bigr)+_U g\Bigl(\mathrm{cat}_{k,l}\bigl(u[r\mapsto y],u'\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_first_tuple}\ \text{を二か所に適用}\right)\\
+&=g_{\bullet,u'}\bigl(u[r\mapsto x]\bigr)+_U g_{\bullet,u'}\bigl(u[r\mapsto y]\bigr)
+&&\left(\because\ g_{\bullet,u'}\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+g_{\bullet,u'}\bigl(u[r\mapsto \lambda\cdot_V x]\bigr)
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u[r\mapsto \lambda\cdot_V x],u'\bigr)\Bigr)
+&&\left(\because\ g_{\bullet,u'}\ \text{の定義}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[r\mapsto \lambda\cdot_V x]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_first_tuple}\right)\\
+&=\lambda\cdot_U g\bigl(\mathrm{cat}_{k,l}(u,u')[r\mapsto x]\bigr)
+&&\left(\because\ g\ \text{は第}\ r\ \text{成分についてスカラー倍を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=\lambda\cdot_U g\Bigl(\mathrm{cat}_{k,l}\bigl(u[r\mapsto x],u'\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_first_tuple}\right)\\
+&=\lambda\cdot_U g_{\bullet,u'}\bigl(u[r\mapsto x]\bigr)
+&&\left(\because\ g_{\bullet,u'}\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_fixing_first_tuple_of_multilinear_map_gives_multilinear_map",
+    kind: "claim",
+    title: { text: "k+l 重線型写像に前の組を固定して入れた写像は l 重線型写像である" },
+    labels: ["claim_fixing_first_tuple_of_multilinear_map_gives_multilinear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " を ",
+        ref("def_concatenation_of_tuples"),
+        " のもの、",
+        math(String.raw`(U,+_U,\cdot_U,0_U)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`g:V^{\{1,\dots,k+l\}}\to U`),
+        " を ",
+        math(String.raw`k+l`),
+        " 重線型写像（",
+        ref("def_k_multilinear_map"),
+        "）、",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        " とする。写像 ",
+        math(String.raw`g_{u,\bullet}:V^{\{1,\dots,l\}}\to U`),
+        " を ",
+        math(String.raw`g_{u,\bullet}(u'):=g\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)`),
+        " で定める。このとき ",
+        math(String.raw`g_{u,\bullet}`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`U`),
+        " への ",
+        math(String.raw`l`),
+        " 重線型写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,l\}`),
+        "、",
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る（",
+        math(String.raw`l=0`),
+        " のときは条件が無い）。",
+        math(String.raw`k+r\in\{1,\dots,k+l\}`),
+        " である（",
+        ref("claim_concatenation_commutes_with_replacing_component_of_second_tuple"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_{u,\bullet}\bigl(u'[r\mapsto x+_V y]\bigr)
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x+_V y]\bigr)\Bigr)
+&&\left(\because\ g_{u,\bullet}\ \text{の定義}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x+_V y]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x]\bigr)+_U g\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto y]\bigr)
+&&\left(\because\ g\ \text{は第}\ k+r\ \text{成分について加法を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)\Bigr)+_U g\Bigl(\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto y]\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\ \text{を二か所に適用}\right)\\
+&=g_{u,\bullet}\bigl(u'[r\mapsto x]\bigr)+_U g_{u,\bullet}\bigl(u'[r\mapsto y]\bigr)
+&&\left(\because\ g_{u,\bullet}\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+g_{u,\bullet}\bigl(u'[r\mapsto \lambda\cdot_V x]\bigr)
+&=g\Bigl(\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto \lambda\cdot_V x]\bigr)\Bigr)
+&&\left(\because\ g_{u,\bullet}\ \text{の定義}\right)\\
+&=g\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto \lambda\cdot_V x]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=\lambda\cdot_U g\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x]\bigr)
+&&\left(\because\ g\ \text{は第}\ k+r\ \text{成分についてスカラー倍を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=\lambda\cdot_U g\Bigl(\mathrm{cat}_{k,l}\bigl(u,u'[r\mapsto x]\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=\lambda\cdot_U g_{u,\bullet}\bigl(u'[r\mapsto x]\bigr)
+&&\left(\because\ g_{u,\bullet}\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_pointwise_sum_of_linear_maps_is_linear_map",
+    kind: "claim",
+    title: { text: "二つの線型写像の各点ごとの和は線型写像である" },
+    labels: ["claim_pointwise_sum_of_linear_maps_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " と ",
+        math(String.raw`(U,+_U,\cdot_U,0_U)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`f,g:V\to U`),
+        " を線型写像（",
+        ref("def_linear_map"),
+        "）とする。写像 ",
+        math(String.raw`f\boxplus g:V\to U`),
+        " を ",
+        math(String.raw`(f\boxplus g)(x):=f(x)+_U g(x)`),
+        "（",
+        math(String.raw`x\in V`),
+        "）で定める。このとき ",
+        math(String.raw`f\boxplus g`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`U`),
+        " への線型写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(f\boxplus g)(x+_V y)
+&=f(x+_V y)+_U g(x+_V y)
+&&\left(\because\ f\boxplus g\ \text{の定義}\right)\\
+&=\bigl(f(x)+_U f(y)\bigr)+_U g(x+_V y)
+&&\left(\because\ f\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=\bigl(f(x)+_U f(y)\bigr)+_U\bigl(g(x)+_U g(y)\bigr)
+&&\left(\because\ g\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=f(x)+_U\Bigl(f(y)+_U\bigl(g(x)+_U g(y)\bigr)\Bigr)
+&&\left(\because\ U\ \text{の加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=f(x)+_U\Bigl(\bigl(f(y)+_U g(x)\bigr)+_U g(y)\Bigr)
+&&\left(\because\ U\ \text{の加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=f(x)+_U\Bigl(\bigl(g(x)+_U f(y)\bigr)+_U g(y)\Bigr)
+&&\left(\because\ U\ \text{の加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=f(x)+_U\Bigl(g(x)+_U\bigl(f(y)+_U g(y)\bigr)\Bigr)
+&&\left(\because\ U\ \text{の加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(f(x)+_U g(x)\bigr)+_U\bigl(f(y)+_U g(y)\bigr)
+&&\left(\because\ U\ \text{の加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(f\boxplus g)(x)+_U(f\boxplus g)(y)
+&&\left(\because\ f\boxplus g\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(f\boxplus g)(\lambda\cdot_V x)
+&=f(\lambda\cdot_V x)+_U g(\lambda\cdot_V x)
+&&\left(\because\ f\boxplus g\ \text{の定義}\right)\\
+&=\lambda\cdot_U f(x)+_U g(\lambda\cdot_V x)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=\lambda\cdot_U f(x)+_U\lambda\cdot_U g(x)
+&&\left(\because\ g\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=\lambda\cdot_U\bigl(f(x)+_U g(x)\bigr)
+&&\left(\because\ U\ \text{のベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\cdot_U(f\boxplus g)(x)
+&&\left(\because\ f\boxplus g\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`f\boxplus g`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_pointwise_scalar_multiple_of_linear_map_is_linear_map",
+    kind: "claim",
+    title: { text: "線型写像の各点ごとのスカラー倍は線型写像である" },
+    labels: ["claim_pointwise_scalar_multiple_of_linear_map_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " と ",
+        math(String.raw`(U,+_U,\cdot_U,0_U)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`f:V\to U`),
+        " を線型写像（",
+        ref("def_linear_map"),
+        "）、",
+        math(String.raw`\mu\in\mathbb{C}`),
+        " とする。写像 ",
+        math(String.raw`\mu\boxdot f:V\to U`),
+        " を ",
+        math(String.raw`(\mu\boxdot f)(x):=\mu\cdot_U f(x)`),
+        "（",
+        math(String.raw`x\in V`),
+        "）で定める。このとき ",
+        math(String.raw`\mu\boxdot f`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`U`),
+        " への線型写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\mu\boxdot f)(x+_V y)
+&=\mu\cdot_U f(x+_V y)
+&&\left(\because\ \mu\boxdot f\ \text{の定義}\right)\\
+&=\mu\cdot_U\bigl(f(x)+_U f(y)\bigr)
+&&\left(\because\ f\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=\mu\cdot_U f(x)+_U\mu\cdot_U f(y)
+&&\left(\because\ U\ \text{のベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\mu\boxdot f)(x)+_U(\mu\boxdot f)(y)
+&&\left(\because\ \mu\boxdot f\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(\mu\boxdot f)(\lambda\cdot_V x)
+&=\mu\cdot_U f(\lambda\cdot_V x)
+&&\left(\because\ \mu\boxdot f\ \text{の定義}\right)\\
+&=\mu\cdot_U\bigl(\lambda\cdot_U f(x)\bigr)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=(\mu\cdot_{\mathbb{C}}\lambda)\cdot_U f(x)
+&&\left(\because\ U\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_U f(x)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\lambda\cdot_U\bigl(\mu\cdot_U f(x)\bigr)
+&&\left(\because\ U\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\cdot_U(\mu\boxdot f)(x)
+&&\left(\because\ \mu\boxdot f\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`\mu\boxdot f`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_linear_map_appending_fixed_tuple",
+    kind: "definition",
+    title: { text: "後ろに固定した組をつなげることが k 重テンソル積の上に定める線型写像" },
+    labels: ["def_linear_map_appending_fixed_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とし、各 ",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`(T_j,\tau_j)`),
+        " を ",
+        math(String.raw`V`),
+        " の ",
+        math(String.raw`j`),
+        " 重テンソル積（",
+        ref("def_k_fold_tensor_product"),
+        "）とする。",
+        math(String.raw`k,l\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        " とする。",
+      ]),
+      paragraph([
+        math(String.raw`\tau_{k+l}:V^{\{1,\dots,k+l\}}\to T_{k+l}`),
+        " は ",
+        math(String.raw`k+l`),
+        " 重線型写像なので、",
+        math(String.raw`(\tau_{k+l})_{\bullet,u'}(u):=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)`),
+        "（",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "。",
+        ref("def_concatenation_of_tuples"),
+        "）で定まる写像 ",
+        math(String.raw`(\tau_{k+l})_{\bullet,u'}:V^{\{1,\dots,k\}}\to T_{k+l}`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`T_{k+l}`),
+        " への ",
+        math(String.raw`k`),
+        " 重線型写像である（",
+        ref("claim_fixing_second_tuple_of_multilinear_map_gives_multilinear_map"),
+        " を ",
+        math(String.raw`U=T_{k+l}`),
+        "、",
+        math(String.raw`g=\tau_{k+l}`),
+        " で）。",
+        math(String.raw`(T_k,\tau_k)`),
+        " の ",
+        math(String.raw`k`),
+        " 重テンソル積の普遍性（",
+        ref("def_k_fold_tensor_product"),
+        "）を ",
+        math(String.raw`U=T_{k+l}`),
+        "、",
+        math(String.raw`h=(\tau_{k+l})_{\bullet,u'}`),
+        " に当てると、線型写像 ",
+        math(String.raw`T_k\to T_{k+l}`),
+        " で、すべての ",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        " について次を満たすものがただ一つ存在する。これを ",
+        math(String.raw`\rho_{u'}:T_k\to T_{k+l}`),
+        " と書き、後ろに ",
+        math(String.raw`u'`),
+        " をつなげる線型写像と呼ぶ。",
+      ]),
+      displayMath(String.raw`\rho_{u'}\bigl(\tau_k(u)\bigr)=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)`),
+      paragraph([
+        math(String.raw`\rho_{u'}`),
+        " は ",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " にもよるが、記号には ",
+        math(String.raw`u'`),
+        " だけを添える。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_appending_map_value_is_multilinear_in_appended_tuple",
+    kind: "claim",
+    title: { text: "テンソルを一つ固定すると、後ろにつなげる組についての値は l 重線型写像である" },
+    labels: ["claim_appending_map_value_is_multilinear_in_appended_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        "、",
+        math(String.raw`\rho_{u'}`),
+        "（",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "）を ",
+        ref("def_linear_map_appending_fixed_tuple"),
+        " のものとし、",
+        math(String.raw`F\in T_k`),
+        " とする。写像 ",
+        math(String.raw`\rho_{\bullet}(F):V^{\{1,\dots,l\}}\to T_{k+l}`),
+        " を ",
+        math(String.raw`\rho_{\bullet}(F)(u'):=\rho_{u'}(F)`),
+        " で定める。このとき ",
+        math(String.raw`\rho_{\bullet}(F)`),
+        " は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`T_{k+l}`),
+        " への ",
+        math(String.raw`l`),
+        " 重線型写像（",
+        ref("def_k_multilinear_map"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,l\}`),
+        "、",
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る（",
+        math(String.raw`l=0`),
+        " のときは条件が無い）。",
+        math(String.raw`V^{\{1,\dots,l\}}`),
+        " の元を ",
+        math(String.raw`a:=u'[r\mapsto x+_V y]`),
+        "、",
+        math(String.raw`b:=u'[r\mapsto x]`),
+        "、",
+        math(String.raw`c:=u'[r\mapsto y]`),
+        "、",
+        math(String.raw`d:=u'[r\mapsto \lambda\cdot_V x]`),
+        " と置く（",
+        ref("def_tuple_with_one_component_replaced"),
+        "）。",
+        math(String.raw`T_{k+l}`),
+        " は ℂ-線型空間であり（",
+        ref("def_k_fold_tensor_product"),
+        "）、",
+        math(String.raw`\rho_b`),
+        "、",
+        math(String.raw`\rho_c`),
+        " は線型写像なので、",
+        math(String.raw`\rho_b\boxplus\rho_c:T_k\to T_{k+l}`),
+        " と ",
+        math(String.raw`\lambda\boxdot\rho_b:T_k\to T_{k+l}`),
+        " は線型写像である（",
+        ref("claim_pointwise_sum_of_linear_maps_is_linear_map"),
+        "、",
+        ref("claim_pointwise_scalar_multiple_of_linear_map_is_linear_map"),
+        "）。",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\rho_b\boxplus\rho_c)\bigl(\tau_k(u)\bigr)
+&=\rho_b\bigl(\tau_k(u)\bigr)+_{T_{k+l}}\rho_c\bigl(\tau_k(u)\bigr)
+&&\left(\because\ \rho_b\boxplus\rho_c\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_maps_is_linear_map}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,b)\bigr)+_{T_{k+l}}\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,c)\bigr)
+&&\left(\because\ \rho_b,\ \rho_c\ \text{の性質を二か所に適用。}\blkref{def_linear_map_appending_fixed_tuple}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x]\bigr)+_{T_{k+l}}\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto y]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\ \text{を二か所に適用}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x+_V y]\bigr)
+&&\left(\because\ \tau_{k+l}\ \text{は第}\ k+r\ \text{成分について加法を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,a)\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=(\tau_{k+l})_{\bullet,a}(u)
+&&\left(\because\ (\tau_{k+l})_{\bullet,a}\ \text{の定義。}\blkref{def_linear_map_appending_fixed_tuple}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\boxdot\rho_b)\bigl(\tau_k(u)\bigr)
+&=\lambda\cdot_{T_{k+l}}\rho_b\bigl(\tau_k(u)\bigr)
+&&\left(\because\ \lambda\boxdot\rho_b\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_map_is_linear_map}\right)\\
+&=\lambda\cdot_{T_{k+l}}\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,b)\bigr)
+&&\left(\because\ \rho_b\ \text{の性質。}\blkref{def_linear_map_appending_fixed_tuple}\right)\\
+&=\lambda\cdot_{T_{k+l}}\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto x]\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')[k+r\mapsto \lambda\cdot_V x]\bigr)
+&&\left(\because\ \tau_{k+l}\ \text{は第}\ k+r\ \text{成分についてスカラー倍を保つ。}\blkref{def_k_multilinear_map}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,d)\bigr)
+&&\left(\because\ \blkref{claim_concatenation_commutes_with_replacing_component_of_second_tuple}\right)\\
+&=(\tau_{k+l})_{\bullet,d}(u)
+&&\left(\because\ (\tau_{k+l})_{\bullet,d}\ \text{の定義。}\blkref{def_linear_map_appending_fixed_tuple}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって線型写像 ",
+        math(String.raw`\rho_b\boxplus\rho_c`),
+        " と ",
+        math(String.raw`\rho_a`),
+        " はどちらも、",
+        math(String.raw`\tau_k`),
+        " と合成すると ",
+        math(String.raw`(\tau_{k+l})_{\bullet,a}`),
+        " になる（",
+        math(String.raw`\rho_a`),
+        " については ",
+        ref("def_linear_map_appending_fixed_tuple"),
+        "）。",
+        math(String.raw`(T_k,\tau_k)`),
+        " の普遍性の一意性（",
+        ref("def_k_fold_tensor_product"),
+        "）から ",
+        math(String.raw`\rho_b\boxplus\rho_c=\rho_a`),
+        " である。同じく ",
+        math(String.raw`\lambda\boxdot\rho_b`),
+        " と ",
+        math(String.raw`\rho_d`),
+        " はどちらも ",
+        math(String.raw`\tau_k`),
+        " と合成すると ",
+        math(String.raw`(\tau_{k+l})_{\bullet,d}`),
+        " になるので、",
+        math(String.raw`\lambda\boxdot\rho_b=\rho_d`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\bullet}(F)\bigl(u'[r\mapsto x+_V y]\bigr)
+&=\rho_a(F)
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ a\ \text{の定義}\right)\\
+&=(\rho_b\boxplus\rho_c)(F)
+&&\left(\because\ \rho_a=\rho_b\boxplus\rho_c\right)\\
+&=\rho_b(F)+_{T_{k+l}}\rho_c(F)
+&&\left(\because\ \rho_b\boxplus\rho_c\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_maps_is_linear_map}\right)\\
+&=\rho_{\bullet}(F)\bigl(u'[r\mapsto x]\bigr)+_{T_{k+l}}\rho_{\bullet}(F)\bigl(u'[r\mapsto y]\bigr)
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b,\ c\ \text{の定義}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\rho_{\bullet}(F)\bigl(u'[r\mapsto \lambda\cdot_V x]\bigr)
+&=\rho_d(F)
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ d\ \text{の定義}\right)\\
+&=(\lambda\boxdot\rho_b)(F)
+&&\left(\because\ \rho_d=\lambda\boxdot\rho_b\right)\\
+&=\lambda\cdot_{T_{k+l}}\rho_b(F)
+&&\left(\because\ \lambda\boxdot\rho_b\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_map_is_linear_map}\right)\\
+&=\lambda\cdot_{T_{k+l}}\rho_{\bullet}(F)\bigl(u'[r\mapsto x]\bigr)
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_product_of_tensors",
+    kind: "definition",
+    title: { text: "k 重テンソル積の元と l 重テンソル積の元の積" },
+    labels: ["def_product_of_tensors"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        " を ",
+        ref("def_linear_map_appending_fixed_tuple"),
+        " のものとし、",
+        math(String.raw`F\in T_k`),
+        " とする。",
+        math(String.raw`\rho_{\bullet}(F):V^{\{1,\dots,l\}}\to T_{k+l}`),
+        " は ",
+        math(String.raw`l`),
+        " 重線型写像である（",
+        ref("claim_appending_map_value_is_multilinear_in_appended_tuple"),
+        "）。",
+        math(String.raw`(T_l,\tau_l)`),
+        " の ",
+        math(String.raw`l`),
+        " 重テンソル積の普遍性（",
+        ref("def_k_fold_tensor_product"),
+        "）を ",
+        math(String.raw`U=T_{k+l}`),
+        "、",
+        math(String.raw`h=\rho_{\bullet}(F)`),
+        " に当てると、線型写像 ",
+        math(String.raw`T_l\to T_{k+l}`),
+        " で、すべての ",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        " について次を満たすものがただ一つ存在する。これを ",
+        math(String.raw`\theta_F:T_l\to T_{k+l}`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`\theta_F\bigl(\tau_l(u')\bigr)=\rho_{u'}(F)`),
+      paragraph([
+        "写像 ",
+        math(String.raw`m_{k,l}:T_k\times T_l\to T_{k+l}`),
+        " を次で定め、",
+        math(String.raw`m_{k,l}(F,G)`),
+        " を ",
+        math(String.raw`F`),
+        " と ",
+        math(String.raw`G`),
+        " のテンソルの積と呼ぶ。",
+      ]),
+      displayMath(String.raw`m_{k,l}(F,G):=\theta_F(G)\qquad(F\in T_k,\ G\in T_l)`),
+      paragraph([
+        "この定義は ",
+        math(String.raw`V`),
+        " の基底も、",
+        math(String.raw`T_j`),
+        " の作り方も使わず、",
+        math(String.raw`k`),
+        " 重・",
+        math(String.raw`l`),
+        " 重テンソル積の普遍性と、",
+        math(String.raw`\tau_{k+l}`),
+        " が ",
+        math(String.raw`k+l`),
+        " 重線型写像であることだけを使う。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_product_of_pure_tensors_is_pure_tensor_of_concatenation",
+    kind: "claim",
+    title: { text: "組の像どうしのテンソルの積は、つなげた組の像である" },
+    labels: ["claim_product_of_pure_tensors_is_pure_tensor_of_concatenation"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        "、",
+        math(String.raw`m_{k,l}`),
+        " を ",
+        ref("def_product_of_tensors"),
+        " のものとし、",
+        math(String.raw`u\in V^{\{1,\dots,k\}}`),
+        "、",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        " とする。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`m_{k,l}\bigl(\tau_k(u),\tau_l(u')\bigr)=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+m_{k,l}\bigl(\tau_k(u),\tau_l(u')\bigr)
+&=\theta_{\tau_k(u)}\bigl(\tau_l(u')\bigr)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right)\\
+&=\rho_{u'}\bigl(\tau_k(u)\bigr)
+&&\left(\because\ \theta_{\tau_k(u)}\ \text{の性質。}\blkref{def_product_of_tensors}\right)\\
+&=\tau_{k+l}\bigl(\mathrm{cat}_{k,l}(u,u')\bigr)
+&&\left(\because\ \rho_{u'}\ \text{の性質。}\blkref{def_linear_map_appending_fixed_tuple}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_product_of_tensors_is_linear_in_second_factor",
+    kind: "claim",
+    title: { text: "テンソルの積は後ろの因子について線型である" },
+    labels: ["claim_product_of_tensors_is_linear_in_second_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        "、",
+        math(String.raw`m_{k,l}`),
+        " を ",
+        ref("def_product_of_tensors"),
+        " のものとし、",
+        math(String.raw`F\in T_k`),
+        " とする。このとき、",
+        math(String.raw`G,G'\in T_l`),
+        " と ",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`m_{k,l}(F,G+_{T_l}G')=m_{k,l}(F,G)+_{T_{k+l}}m_{k,l}(F,G')`)],
+        [math(String.raw`m_{k,l}(F,\lambda\cdot_{T_l}G)=\lambda\cdot_{T_{k+l}}m_{k,l}(F,G)`)],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta_F:T_l\to T_{k+l}`),
+        " は線型写像である（",
+        ref("def_product_of_tensors"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_{k,l}(F,G+_{T_l}G')
+&=\theta_F(G+_{T_l}G')
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right)\\
+&=\theta_F(G)+_{T_{k+l}}\theta_F(G')
+&&\left(\because\ \theta_F\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=m_{k,l}(F,G)+_{T_{k+l}}m_{k,l}(F,G')
+&&\left(\because\ m_{k,l}\ \text{の定義を二か所に適用。}\blkref{def_product_of_tensors}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+m_{k,l}(F,\lambda\cdot_{T_l}G)
+&=\theta_F(\lambda\cdot_{T_l}G)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right)\\
+&=\lambda\cdot_{T_{k+l}}\theta_F(G)
+&&\left(\because\ \theta_F\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=\lambda\cdot_{T_{k+l}}m_{k,l}(F,G)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_product_of_tensors_is_linear_in_first_factor",
+    kind: "claim",
+    title: { text: "テンソルの積は前の因子について線型である" },
+    labels: ["claim_product_of_tensors_is_linear_in_first_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
+        "、",
+        math(String.raw`m_{k,l}`),
+        " を ",
+        ref("def_product_of_tensors"),
+        " のものとし、",
+        math(String.raw`G\in T_l`),
+        " とする。このとき、",
+        math(String.raw`F,F'\in T_k`),
+        " と ",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`m_{k,l}(F+_{T_k}F',G)=m_{k,l}(F,G)+_{T_{k+l}}m_{k,l}(F',G)`)],
+        [math(String.raw`m_{k,l}(\lambda\cdot_{T_k}F,G)=\lambda\cdot_{T_{k+l}}m_{k,l}(F,G)`)],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta_F`),
+        "、",
+        math(String.raw`\theta_{F'}`),
+        " は線型写像 ",
+        math(String.raw`T_l\to T_{k+l}`),
+        " なので（",
+        ref("def_product_of_tensors"),
+        "）、",
+        math(String.raw`\theta_F\boxplus\theta_{F'}`),
+        " と ",
+        math(String.raw`\lambda\boxdot\theta_F`),
+        " は線型写像である（",
+        ref("claim_pointwise_sum_of_linear_maps_is_linear_map"),
+        "、",
+        ref("claim_pointwise_scalar_multiple_of_linear_map_is_linear_map"),
+        "）。",
+        math(String.raw`u'\in V^{\{1,\dots,l\}}`),
+        " を任意に取る。各 ",
+        math(String.raw`\rho_{u'}`),
+        " は線型写像である（",
+        ref("def_linear_map_appending_fixed_tuple"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\theta_F\boxplus\theta_{F'})\bigl(\tau_l(u')\bigr)
+&=\theta_F\bigl(\tau_l(u')\bigr)+_{T_{k+l}}\theta_{F'}\bigl(\tau_l(u')\bigr)
+&&\left(\because\ \theta_F\boxplus\theta_{F'}\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_maps_is_linear_map}\right)\\
+&=\rho_{u'}(F)+_{T_{k+l}}\rho_{u'}(F')
+&&\left(\because\ \theta_F,\ \theta_{F'}\ \text{の性質を二か所に適用。}\blkref{def_product_of_tensors}\right)\\
+&=\rho_{u'}(F+_{T_k}F')
+&&\left(\because\ \rho_{u'}\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=\rho_{\bullet}(F+_{T_k}F')(u')
+&&\left(\because\ \rho_{\bullet}(F+_{T_k}F')\ \text{の定義。}\blkref{claim_appending_map_value_is_multilinear_in_appended_tuple}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\boxdot\theta_F)\bigl(\tau_l(u')\bigr)
+&=\lambda\cdot_{T_{k+l}}\theta_F\bigl(\tau_l(u')\bigr)
+&&\left(\because\ \lambda\boxdot\theta_F\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_map_is_linear_map}\right)\\
+&=\lambda\cdot_{T_{k+l}}\rho_{u'}(F)
+&&\left(\because\ \theta_F\ \text{の性質。}\blkref{def_product_of_tensors}\right)\\
+&=\rho_{u'}(\lambda\cdot_{T_k}F)
+&&\left(\because\ \rho_{u'}\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=\rho_{\bullet}(\lambda\cdot_{T_k}F)(u')
+&&\left(\because\ \rho_{\bullet}(\lambda\cdot_{T_k}F)\ \text{の定義。}\blkref{claim_appending_map_value_is_multilinear_in_appended_tuple}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって線型写像 ",
+        math(String.raw`\theta_F\boxplus\theta_{F'}`),
+        " と ",
+        math(String.raw`\theta_{F+_{T_k}F'}`),
+        " はどちらも、",
+        math(String.raw`\tau_l`),
+        " と合成すると ",
+        math(String.raw`\rho_{\bullet}(F+_{T_k}F')`),
+        " になる（",
+        math(String.raw`\theta_{F+_{T_k}F'}`),
+        " については ",
+        ref("def_product_of_tensors"),
+        "）。",
+        math(String.raw`(T_l,\tau_l)`),
+        " の普遍性の一意性（",
+        ref("def_k_fold_tensor_product"),
+        "）から ",
+        math(String.raw`\theta_F\boxplus\theta_{F'}=\theta_{F+_{T_k}F'}`),
+        " である。同じく ",
+        math(String.raw`\lambda\boxdot\theta_F`),
+        " と ",
+        math(String.raw`\theta_{\lambda\cdot_{T_k}F}`),
+        " はどちらも ",
+        math(String.raw`\tau_l`),
+        " と合成すると ",
+        math(String.raw`\rho_{\bullet}(\lambda\cdot_{T_k}F)`),
+        " になるので、",
+        math(String.raw`\lambda\boxdot\theta_F=\theta_{\lambda\cdot_{T_k}F}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_{k,l}(F+_{T_k}F',G)
+&=\theta_{F+_{T_k}F'}(G)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right)\\
+&=(\theta_F\boxplus\theta_{F'})(G)
+&&\left(\because\ \theta_{F+_{T_k}F'}=\theta_F\boxplus\theta_{F'}\right)\\
+&=\theta_F(G)+_{T_{k+l}}\theta_{F'}(G)
+&&\left(\because\ \theta_F\boxplus\theta_{F'}\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_maps_is_linear_map}\right)\\
+&=m_{k,l}(F,G)+_{T_{k+l}}m_{k,l}(F',G)
+&&\left(\because\ m_{k,l}\ \text{の定義を二か所に適用。}\blkref{def_product_of_tensors}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+m_{k,l}(\lambda\cdot_{T_k}F,G)
+&=\theta_{\lambda\cdot_{T_k}F}(G)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right)\\
+&=(\lambda\boxdot\theta_F)(G)
+&&\left(\because\ \theta_{\lambda\cdot_{T_k}F}=\lambda\boxdot\theta_F\right)\\
+&=\lambda\cdot_{T_{k+l}}\theta_F(G)
+&&\left(\because\ \lambda\boxdot\theta_F\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_map_is_linear_map}\right)\\
+&=\lambda\cdot_{T_{k+l}}m_{k,l}(F,G)
+&&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
