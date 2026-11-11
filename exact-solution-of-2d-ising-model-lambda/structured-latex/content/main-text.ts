@@ -60788,7 +60788,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e_1)+0
 &&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(0)
-&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元}\ \blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))
 &&\bigl(\because\ \blkref{def_total_turning}\text{ の空和の約束}\bigr)
 \end{aligned}`),
@@ -60807,7 +60807,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma'))+\pi_4(\tau(\vec e_{m-1},\vec e_m))
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma')+\tau(\vec e_{m-1},\vec e_m))
-&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4\text{ の加法性}\ \blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))
 &&\bigl(\because\ \blkref{def_total_turning}\text{ の有限和から末尾の項を分離}\bigr)
 \end{aligned}`),
@@ -70362,6 +70362,7 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_side_propagation_necSuf",
                       "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq_from_necSuf",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_adjacent_interior_side_eq",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",

@@ -1235,6 +1235,7 @@ import Ising2DLambda.KacWard.BoundaryVertexLocalTurn
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexSidePropagation
 import Ising2DLambda.KacWard.BoundaryVertexSidePropagation
 import Ising2DLambda.KacWard.BoundaryVertexSidePropagationFromNecSuf
+import Ising2DLambda.KacWard.WalkConsecutiveInteriorSides
 import Ising2DLambda.NecSuf.KacWard.CellVertexIncidenceCount
 import Ising2DLambda.KacWard.CellVertexIncidenceCount
 import Ising2DLambda.KacWard.CellVertexIncidenceCountFromNecSuf
