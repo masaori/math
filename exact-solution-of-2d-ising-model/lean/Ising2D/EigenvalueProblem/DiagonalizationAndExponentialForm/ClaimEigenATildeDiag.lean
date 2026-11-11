@@ -41,7 +41,7 @@
   `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`［置かない］、`c ∈ ℂ^×` 倍の鎖
   `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`［`mulVec_smul_of_mulVec_eq`］。
 * `diagonalization_check_P_D` Step 1: `s = (√M)_ℂ ≠ 0_ℂ` は `def_check_fermi` と同じ `√M`（`sqrtM`）についての
-  `sqrtM_ne_zero`（`DefinitionCheckFermi.lean`）を引く。`2_ℂ = (2,0) ≠ 0_ℂ` は成分の比較の `exp_neg_I_prep_two_ne_zero`。
+  `sqrtM_ne_zero`（`DefinitionCheckFermi.lean`）を引く。`2_ℂ = (2,0) ≠ 0_ℂ` は成分の比較の `complex_two_ne_zero_by_re`。
   `u := 2_ℂ s ∈ ℂ^×`・`d := u b ∈ ℂ^×`（群の積）は `checkU_ne_zero`・`checkD_ne_zero`［置かない］。
   `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）は `checkC_eq_inv`、`c ∈ ℂ^×` は `checkC_ne_zero`［置かない］。
   `P̌_μ`・`c` もこの `sqrtM` で書き、分数は `def_complex_quotient` の商（`div_eq_mul_inv` で開く）と読む。
@@ -343,7 +343,7 @@ noncomputable def checkC (K : IsingConst) (M : ℕ) (μ : ℤ) : ℂ :=
 
 /-- **人手証明 Step 1**: `u = 2_ℂ s ∈ ℂ^×`（`2_ℂ = (2,0) ≠ 0_ℂ`・`s ≠ 0_ℂ` と `multiplicative_group_of_cc` の群の積）。 -/
 theorem checkU_ne_zero {M : ℕ} (hM : M ≠ 0) : (2 : ℂ) * sqrtM M ≠ 0 :=
-  mul_ne_zero exp_neg_I_prep_two_ne_zero (sqrtM_ne_zero hM)
+  mul_ne_zero complex_two_ne_zero_by_re (sqrtM_ne_zero hM)
 
 /-- **人手証明 Step 1**: `d = u b ∈ ℂ^×`（`b ≠ 0_ℂ` と `multiplicative_group_of_cc` の群の積）。 -/
 theorem checkD_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
@@ -474,7 +474,7 @@ theorem checkM_ne_zero {M : ℕ} (hM : M ≠ 0) : (M : ℂ) ≠ 0 := by
 /-- **人手証明 Step 3 の前置き (b)**: `q := (2_ℂ ℓ) b ∈ ℂ^×`（`multiplicative_group_of_cc` の群の積）。 -/
 theorem checkW_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ) ≠ 0 :=
-  mul_ne_zero (mul_ne_zero exp_neg_I_prep_two_ne_zero (checkM_ne_zero hM))
+  mul_ne_zero (mul_ne_zero complex_two_ne_zero_by_re (checkM_ne_zero hM))
     (gamma2_neg_thetaTilde_ne_zero P hM μ)
 
 /-- **人手証明 Step 3 の前置き (c)**: `1_ℂ + 1_ℂ = 2_ℂ`（4 行）。 -/

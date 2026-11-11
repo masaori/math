@@ -397,6 +397,7 @@ export const ALL_LABELS = [
   "half_integer_phase_periodicity",
   "hermitian_and_transpose_invariant_matrix_is_real_symmetric",
   "iH_is_real_symmetric",
+  "i_times_inverse_of_two_i_is_inverse_of_two_in_cc",
   "i_times_negated_real_is_negation_of_i_times",
   "identity_matrix_is_left_unit_of_mat_mult",
   "identity_matrix_is_positive_definite",

@@ -37,7 +37,7 @@ def chain(name, lines, reasons):
         if reasons[j]:
             rep.check(d != 0, f"{name} 第 {j+1} 行 → 第 {j+2} 行の対照: 根拠の関係なしでは一致しない")
 
-# ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 27 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
+# ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 22 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
 Ft = R.fraction_field()
 Ep_, Em_ = Ft(E), Ft(Ei)
 T2 = Ft(2)
@@ -49,12 +49,7 @@ euler_chain = [
     (Ep_ + Em_) * T2i + (I0 * (Ep_ - Em_)) * T2Ii,                 # 積の結合律（右辺から左辺へ）
     (Ep_ + Em_) * T2i + ((Ep_ - Em_) * I0) * T2Ii,                 # 積の可換律
     (Ep_ + Em_) * T2i + (Ep_ - Em_) * (I0 * T2Ii),                 # 積の結合律
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (1 * (I0 * T2Ii)),           # 積の単位元（右辺から左辺へ）
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * ((T2i * T2) * (I0 * T2Ii)),  # multiplicative_group_of_cc の逆元 2_C（右辺から左辺へ）
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * (T2 * (I0 * T2Ii))),  # 積の結合律
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * ((T2 * I0) * T2Ii)),  # 積の結合律（右辺から左辺へ）
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * 1),                   # multiplicative_group_of_cc の逆元 2_C i
-    (Ep_ + Em_) * T2i + (Ep_ - Em_) * T2i,                         # 積の単位元
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * T2i,                         # i_times_inverse_of_two_i_is_inverse_of_two_in_cc
     ((Ep_ + Em_) + (Ep_ - Em_)) * T2i,                             # 右からの分配律（右辺から左辺へ）
     ((Ep_ + Em_) + (Ep_ + (-Em_))) * T2i,                          # def_complex_difference
     (Ep_ + (Em_ + (Ep_ + (-Em_)))) * T2i,                          # 和の結合律

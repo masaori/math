@@ -1,8 +1,7 @@
-# 対象ラベル: exp_of_negative_i_real_as_cos_minus_i_sin
-# 証明の準備の鎖を一行ずつ確かめる（(a+b) - (a-b) = 2_C b は主張 sum_minus_difference_is_twice_second_in_cc の参照で、
-# その鎖は sagemath/check/sum_minus_difference_is_twice_second_in_cc/ が確かめる）。
-#   準備の鎖（6 行）: i(2_C i)^{-1} = … = 2_C^{-1}（逆元は multiplicative_group_of_cc の証明の逆元の式
-#   w^{-1} := (x/(x^2+y^2), -y/(x^2+y^2))。2_C = (2,0)、i = (0,1) なので成分は QQ）
+# 対象ラベル: i_times_inverse_of_two_i_is_inverse_of_two_in_cc
+# 主張の前置き（2_C, i, 2_C i ∈ ℂ^×）と証明の鎖（6 行）を一行ずつ確かめる:
+#   i(2_C i)^{-1} = 1_C(i(2_C i)^{-1}) = (2_C^{-1}2_C)(i(2_C i)^{-1}) = … = 2_C^{-1}
+#   逆元は multiplicative_group_of_cc の証明の逆元の式 w^{-1} := (x/(x^2+y^2), -y/(x^2+y^2))。2_C = (2,0)、i = (0,1) なので成分は QQ。
 # ℂ を実数の対として持ち（definition_of_cc）、積は definition_of_cc の式、r_C := (r, 0)（inclusion_rr_to_cc）を、それぞれ書いた関数で作る。
 # 帰属: 成分は QQ の元。ℝ への脱出はない。
 
@@ -27,9 +26,9 @@ def inv(z):
     return (z[0] / n, -z[1] / n)
 
 iC = (R(0), R(1))      # i = (0, 1)
-assert two != zero and iC != zero and mul(two, iC) != zero   # 前置き: 2_C, i, 2_C i ∈ ℂ^×
+assert two != zero and iC != zero and mul(two, iC) != zero   # 主張の前置き: 2_C, i, 2_C i ∈ ℂ^×
 assert mul(inv(two), two) == one and mul(mul(two, iC), inv(mul(two, iC))) == one
-third = [
+chain = [
     mul(iC, inv(mul(two, iC))),                                   # i (2_C i)^{-1}
     mul(one, mul(iC, inv(mul(two, iC)))),                         # 積の単位元（右辺から左辺へ）
     mul(mul(inv(two), two), mul(iC, inv(mul(two, iC)))),          # 逆元（2_C）を右辺から左辺へ
@@ -38,11 +37,11 @@ third = [
     mul(inv(two), one),                                           # 逆元（2_C i）
     inv(two),                                                     # 積の単位元
 ]
-assert len(third) == 7
-for k in range(len(third) - 1):
-    assert third[k] == third[k + 1], ("third", k)
-print(f"  準備の鎖: {len(third)} 項（6 等号）が QQ の対で一致する（2_C^{{-1}} = {inv(two)}）")
+assert len(chain) == 7
+for k in range(len(chain) - 1):
+    assert chain[k] == chain[k + 1], ("chain", k)
+print(f"  証明の鎖: {len(chain)} 項（6 等号）が QQ の対で一致する（2_C^{{-1}} = {inv(two)}）")
 # 対照: 2 行目で 2_C^{-1} 2_C を 2_C に替えると鎖が切れる
-assert mul(two, mul(iC, inv(mul(two, iC)))) != third[1]
-print("  対照: 準備の鎖の 2 行目で 2_C^{-1}2_C を 2_C に替えると等号が成り立たない")
+assert mul(two, mul(iC, inv(mul(two, iC)))) != chain[1]
+print("  対照: 証明の鎖の 2 行目で 2_C^{-1}2_C を 2_C に替えると等号が成り立たない")
 print("RESULT: PASS")

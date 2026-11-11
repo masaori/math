@@ -3124,18 +3124,8 @@ s_1c_2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(1_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
-&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
-&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl((2_{\mathbb{C}}i)\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
-&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\bigl(2_{\mathbb{C}}^{-1}\,1_{\mathbb{C}}\bigr)
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}i\in\mathbb{C}^{\times})\bigr)\\
 &= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&&(\because\ \blkref{i_times_inverse_of_two_i_is_inverse_of_two_in_cc})\\
 &= \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
 &= \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
@@ -3662,6 +3652,7 @@ s_1c_2
           "主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real・sin_of_negated_real として前へ移し、第三の鎖の根拠をそれらへの参照にした。主張と残りの鎖は変えていない。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
         "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos θ + i sin θ の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の第一の cos θ + i sin θ の鎖の 6〜11 行目（i(2_ℂi)^{-1} = 2_ℂ^{-1} を積の単位元・逆元・結合律で示す 6 行）を、exp_of_negative_i_real_as_cos_minus_i_sin・periodicity_of_check_fermi と同じ鎖なので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照 1 行にした（27 行 → 22 行）。値と主張は不変。",
       ],
     },
   },
@@ -6397,18 +6388,8 @@ g
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(1_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
-&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
-&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl((2_{\mathbb{C}}i)\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
-&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\bigl(2_{\mathbb{C}}^{-1}\,1_{\mathbb{C}}\bigr)
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}i\in\mathbb{C}^{\times})\bigr)\\
 &= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&&(\because\ \blkref{i_times_inverse_of_two_i_is_inverse_of_two_in_cc})\\
 &= \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
 &= \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
@@ -6753,6 +6734,7 @@ d_\nu
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (3) の P̌_{M+1−μ} の成分の分数が def_complex_quotient の商で、分母が (2_ℂ(√M_col)_ℂ)γ_2(θ̃_μ)・2_ℂ(√M_col)_ℂ、分子が −|γ_2(−θ̃_μ)|_ℂ・|γ_2(−θ̃_μ)|_ℂ・1_ℂ であることを主張に書き、証明の最後の段落に、P̌_ν の分母 d_ν := uγ_2(−θ̃_ν)・u が diagonalization_check_P_D の Step 1 を ν で読んで ℂ^× に属し、鎖の 3 行目の分母 uγ_2(θ̃_μ) が d_ν に等しいことを 2 行の鎖で書いた。鎖と主張の値は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (2)(3) の根拠の欄の ℝ の一般の恒等式の変数を u, v から p, q に替え、各行に代入を添えた（(3) の「最後に」で始まる段落で置いた u := 2_ℂ(√M_col)_ℂ と文字が重なっていたため）。(2) の第二の鎖の 2 行目の -(2πk_ℝ) と (3) の −θ̃_ν の鎖の 2 行目の -(2π) に括弧を補った。主張と値は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 主張の前置きの整数の像の記号の文字を a から j に替えた（j_ℝ := ι_{ℤ→ℝ}(j)、j ∈ ℤ。antiperiodic_exp_sum の a_ℝ := ι_{ℤ→ℝ}(a) と同じ記号で、束縛する文字だけが違う）。証明の根拠の欄で引く real_inclusion_preserves_sum（a → 1, b → 1）・inclusion_rr_to_cc_is_injective（a → cos(-x), b → cos x）の ℝ の変数 a と文字が重なっていた。主張・証明の式と値は不変。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の第一の cos x + i sin x の鎖の 6〜11 行目（i(2_ℂi)^{-1} = 2_ℂ^{-1} を積の単位元・逆元・結合律で示す 6 行）を、exp_of_negative_i_real_as_cos_minus_i_sin・relation_of_gamma_2_theta_tilde と同じ鎖なので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照 1 行にした（27 行 → 22 行）。値と主張は不変。",
       ],
     },
   },

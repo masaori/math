@@ -55,7 +55,7 @@ for k in range(len(v) - 1):
     if k in (EUL1, EUL2):
         continue
     assert v[k] == v[k + 1], ("main", k)
-print("  第 1〜14・16〜21 等号（積の単位元・逆元・結合律・可換律・商の定義・差の定義・分配律・-1 倍、sum_minus_difference_is_twice_second_in_cc と準備の鎖の参照）: 恒等的に等しい")
+print("  第 1〜14・16〜21 等号（積の単位元・逆元・結合律・可換律・商の定義・差の定義・分配律・-1 倍、sum_minus_difference_is_twice_second_in_cc と i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照）: 恒等的に等しい")
 d15 = v[EUL1] - v[EUL1 + 1]
 assert d15 != 0 and d15 == quot(a + b, two) - c
 assert d15.numerator().subs(c=(a + b) / two) == 0

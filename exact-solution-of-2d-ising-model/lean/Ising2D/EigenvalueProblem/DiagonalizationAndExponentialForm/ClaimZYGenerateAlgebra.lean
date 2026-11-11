@@ -100,14 +100,14 @@ theorem sigmaX_mem_adjoin (k : Fin M) : sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M
 `κ_z := (a₁₁−a₂₂)/2_ℂ` を `def_complex_quotient` の商（`w → 2_ℂ`）と読み、準備 (a)〜(g) を置いてから、
 右辺 `R` の 4 成分の鎖を書く。以下の補題はその準備と 4 本の鎖を 1 行ずつ辿る（人手の添字 `1, 2` は Lean では `0, 1`）。
 Lean の `z / 2` は `div_eq_mul_inv`（`def_complex_quotient`）で `z * 2⁻¹` に開く。`2_ℂ ∈ ℂ^×` は
-`exp_neg_I_prep_two_ne_zero`（`inclusion_rr_to_cc` の第 1 成分の比較）である。 -/
+`complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）である。 -/
 
 /-- 人手 Step 3 の準備 (a): `(2_ℂ z) 2_ℂ^{-1} = z`。 -/
 theorem zy_prep_two_mul_mul_inv_two (z : ℂ) : (2 * z) * 2⁻¹ = z := by
   calc (2 * z) * 2⁻¹
       = (z * 2) * 2⁻¹ := by rw [mul_comm 2 z]                         -- 積の可換律
     _ = z * (2 * 2⁻¹) := mul_assoc _ _ _                              -- 積の結合律
-    _ = z * 1 := by rw [mul_inv_cancel₀ exp_neg_I_prep_two_ne_zero]   -- `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
+    _ = z * 1 := by rw [mul_inv_cancel₀ complex_two_ne_zero_by_re]   -- `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
     _ = z := mul_one z                                                -- 積の単位元
 
 /-- 人手 Step 3 の準備 (b): `z + z = 2_ℂ z`。 -/

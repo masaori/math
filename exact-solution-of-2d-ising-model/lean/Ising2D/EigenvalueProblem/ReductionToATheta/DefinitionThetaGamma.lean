@@ -194,19 +194,19 @@ theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamm
 `exp_neg_I_mul_real_eq_cos_sub_I_mul_sin` である。
 人手 `multiply_by_minus_one`（`-z := (-1)z`）も具体版が Lean に無く、mathlib の `neg_one_mul` で受ける（このファイルのほかの段と同じ）。 -/
 
-/-- 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖: `cos θ + i sin θ = exp(iθ)`（人手の 27 行）。
-人手 `periodicity_of_check_fermi` の準備の第一の鎖（`θ` を `x` と書いた同じ 27 行）もこの補題で受ける。
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖: `cos θ + i sin θ = exp(iθ)`（人手の 22 行）。
+人手 `periodicity_of_check_fermi` の準備の第一の鎖（`θ` を `x` と書いた同じ 22 行）もこの補題で受ける。
 分母の `2`・`2i` は `2_ℂ`・`2_ℂi`（Lean の `(2 : ℂ)`・`(2 : ℂ) * Complex.I`）、`1_ℂ` は `inclusion_rr_to_cc` の像 `(1)_ℂ` の略記で、
 行き来は略記の読み替えの段で行う。人手 `def_complex_quotient`（`z/w := zw^{-1}`）は mathlib の `div_eq_mul_inv`、
-`multiplicative_group_of_cc` の逆元（`w^{-1}w = 1_ℂ`・`ww^{-1} = 1_ℂ`）は `inv_mul_cancel₀`・`mul_inv_cancel₀` で受け、
-`euler_formula_cos_sin` の主張の `2_ℂ ∈ ℂ^×`（成分の比較）は `exp_neg_I_prep_two_ne_zero`、`2_ℂi ∈ ℂ^×`（`2_ℂ, i ∈ ℂ^×` と `multiplicative_group_of_cc` の群の積）は
-`exp_neg_I_prep_two_mul_I_ne_zero` である。 -/
+`multiplicative_group_of_cc` の逆元（`ww^{-1} = 1_ℂ`）は `mul_inv_cancel₀` で受け、
+`euler_formula_cos_sin` の主張の `2_ℂ ∈ ℂ^×`（成分の比較）は `complex_two_ne_zero_by_re` である。
+6 行目の人手 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc`（`i(2_ℂi)^{-1} = 2_ℂ^{-1}`）は `complex_I_mul_inv_two_mul_I`
+（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean`）である。 -/
 theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
     ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ) = Complex.exp (Complex.I * (θ : ℂ)) := by
   set eP : ℂ := Complex.exp (Complex.I * (θ : ℂ)) with heP
   set eM : ℂ := Complex.exp (-(Complex.I * (θ : ℂ))) with heM
-  have h2 : (2 : ℂ) ≠ 0 := exp_neg_I_prep_two_ne_zero
-  have h2I : (2 : ℂ) * Complex.I ≠ 0 := exp_neg_I_prep_two_mul_I_ne_zero
+  have h2 : (2 : ℂ) ≠ 0 := complex_two_ne_zero_by_re
   calc ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ)
       = (eP + eM) / 2 + Complex.I * ((eP - eM) / (2 * Complex.I)) := by
         rw [euler_cos_real_inclusion θ, euler_sin_real_inclusion θ]  -- 1 行目: `euler_formula_cos_sin`
@@ -218,57 +218,44 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
         rw [mul_comm Complex.I (eP - eM)]         -- 4 行目: `complex_numbers_form_a_field` の積の可換律
     _ = (eP + eM) * (2 : ℂ)⁻¹ + (eP - eM) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := by
         rw [mul_assoc (eP - eM) Complex.I]        -- 5 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = (eP + eM) * (2 : ℂ)⁻¹ + (eP - eM) * (1 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹)) := by
-        rw [one_mul]                              -- 6 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
-    _ = (eP + eM) * (2 : ℂ)⁻¹ +
-          (eP - eM) * (((2 : ℂ)⁻¹ * 2) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹)) := by
-        rw [inv_mul_cancel₀ h2]                   -- 7 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）を右辺から左辺へ
-    _ = (eP + eM) * (2 : ℂ)⁻¹ +
-          (eP - eM) * ((2 : ℂ)⁻¹ * (2 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹))) := by
-        rw [mul_assoc ((2 : ℂ)⁻¹) 2]              -- 8 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = (eP + eM) * (2 : ℂ)⁻¹ +
-          (eP - eM) * ((2 : ℂ)⁻¹ * (((2 : ℂ) * Complex.I) * ((2 : ℂ) * Complex.I)⁻¹)) := by
-        rw [← mul_assoc (2 : ℂ) Complex.I]        -- 9 行目: `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
-    _ = (eP + eM) * (2 : ℂ)⁻¹ + (eP - eM) * ((2 : ℂ)⁻¹ * 1) := by
-        rw [mul_inv_cancel₀ h2I]                  -- 10 行目: `multiplicative_group_of_cc` の逆元（`2_ℂi ∈ ℂ^×`）
     _ = (eP + eM) * (2 : ℂ)⁻¹ + (eP - eM) * (2 : ℂ)⁻¹ := by
-        rw [mul_one]                              -- 11 行目: `complex_numbers_form_a_field` の積の単位元
+        rw [complex_I_mul_inv_two_mul_I]          -- 6 行目: `i_times_inverse_of_two_i_is_inverse_of_two_in_cc`
     _ = ((eP + eM) + (eP - eM)) * (2 : ℂ)⁻¹ := by
-        rw [← add_mul]                            -- 12 行目: `complex_numbers_form_a_field` の右からの分配律を右辺から左辺へ
+        rw [← add_mul]                            -- 7 行目: `complex_numbers_form_a_field` の右からの分配律を右辺から左辺へ
     _ = ((eP + eM) + (eP + -eM)) * (2 : ℂ)⁻¹ := by
-        rw [sub_eq_add_neg]                       -- 13 行目: `def_complex_difference`
+        rw [sub_eq_add_neg]                       -- 8 行目: `def_complex_difference`
     _ = (eP + (eM + (eP + -eM))) * (2 : ℂ)⁻¹ := by
-        rw [add_assoc eP eM]                      -- 14 行目: `complex_numbers_form_a_field` の和の結合律
+        rw [add_assoc eP eM]                      -- 9 行目: `complex_numbers_form_a_field` の和の結合律
     _ = (eP + ((eM + eP) + -eM)) * (2 : ℂ)⁻¹ := by
-        rw [← add_assoc eM eP]                    -- 15 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+        rw [← add_assoc eM eP]                    -- 10 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
     _ = (eP + ((eP + eM) + -eM)) * (2 : ℂ)⁻¹ := by
-        rw [add_comm eM eP]                       -- 16 行目: `complex_numbers_form_a_field` の和の可換律
+        rw [add_comm eM eP]                       -- 11 行目: `complex_numbers_form_a_field` の和の可換律
     _ = (eP + (eP + (eM + -eM))) * (2 : ℂ)⁻¹ := by
-        rw [add_assoc eP eM]                      -- 17 行目: `complex_numbers_form_a_field` の和の結合律
+        rw [add_assoc eP eM]                      -- 12 行目: `complex_numbers_form_a_field` の和の結合律
     _ = (eP + (eP + 0)) * (2 : ℂ)⁻¹ := by
-        rw [add_neg_cancel]                       -- 18 行目: `complex_numbers_form_a_field` の加法逆元
+        rw [add_neg_cancel]                       -- 13 行目: `complex_numbers_form_a_field` の加法逆元
     _ = (eP + eP) * (2 : ℂ)⁻¹ := by
-        rw [add_zero]                             -- 19 行目: `complex_numbers_form_a_field` の零元
+        rw [add_zero]                             -- 14 行目: `complex_numbers_form_a_field` の零元
     _ = (1 * eP + 1 * eP) * (2 : ℂ)⁻¹ := by
-        rw [one_mul]                              -- 20 行目: `complex_numbers_form_a_field` の積の単位元を 2 箇所へ右辺から左辺へ
+        rw [one_mul]                              -- 15 行目: `complex_numbers_form_a_field` の積の単位元を 2 箇所へ右辺から左辺へ
     _ = ((1 + 1) * eP) * (2 : ℂ)⁻¹ := by
-        rw [add_mul (1 : ℂ) 1 eP]                 -- 21 行目: `complex_numbers_form_a_field` の右からの分配律を右辺から左辺へ
+        rw [add_mul (1 : ℂ) 1 eP]                 -- 16 行目: `complex_numbers_form_a_field` の右からの分配律を右辺から左辺へ
     _ = ((((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ)) * eP) * (2 : ℂ)⁻¹ := by
         rw [Complex.ofReal_one]                   -- `1_ℂ` を `(1)_ℂ` と読む（`inclusion_rr_to_cc` の略記）
     _ = ((((1 + 1 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
-        rw [real_inclusion_add]                   -- 22 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
+        rw [real_inclusion_add]                   -- 17 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
     _ = ((((2 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
-        rw [one_add_one_eq_two]                   -- 23 行目: ℝ で `1 + 1 = 2`
+        rw [one_add_one_eq_two]                   -- 18 行目: ℝ で `1 + 1 = 2`
     _ = ((2 : ℂ) * eP) * (2 : ℂ)⁻¹ := by
         rw [Complex.ofReal_ofNat]                 -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = (eP * (2 : ℂ)) * (2 : ℂ)⁻¹ := by
-        rw [mul_comm (2 : ℂ) eP]                  -- 24 行目: `complex_numbers_form_a_field` の積の可換律
+        rw [mul_comm (2 : ℂ) eP]                  -- 19 行目: `complex_numbers_form_a_field` の積の可換律
     _ = eP * ((2 : ℂ) * (2 : ℂ)⁻¹) := by
-        rw [mul_assoc eP]                         -- 25 行目: `complex_numbers_form_a_field` の積の結合律
+        rw [mul_assoc eP]                         -- 20 行目: `complex_numbers_form_a_field` の積の結合律
     _ = eP * 1 := by
-        rw [mul_inv_cancel₀ h2]                   -- 26 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
+        rw [mul_inv_cancel₀ h2]                   -- 21 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
     _ = eP := by
-        rw [mul_one]                              -- 27 行目: `complex_numbers_form_a_field` の積の単位元
+        rw [mul_one]                              -- 22 行目: `complex_numbers_form_a_field` の積の単位元
 
 /-- 人手 `complex_conjugate_of_real_inclusion` を `starRingEnd ℂ` の形で読んだもの（`starRingEnd ℂ z` は `star z` と定義で一致する）。 -/
 theorem conj_real_inclusion (r : ℝ) : (starRingEnd ℂ) (r : ℂ) = (r : ℂ) :=
@@ -451,7 +438,7 @@ theorem real_sin_add_two_pi_mul_int (x : ℝ) (n : ℤ) :
 
 /-- 人手 `periodicity_of_check_fermi` (1) の `γ_2` 側: `γ_2(θ + 2π k_ℝ) = γ_2(θ)`（人手の 6 行）。
 2・5 行目の「準備の `exp(ix)` の表示」は、人手の準備の「第一に」の最後の鎖 `cos x + i sin x = exp(ix)`
-（`relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖と同じ 27 行）の具体版 `real_inclusion_cos_add_I_mul_sin` である。 -/
+（`relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖と同じ 22 行）の具体版 `real_inclusion_cos_add_I_mul_sin` である。 -/
 theorem gamma2_add_two_pi_mul_int (k : ℤ) :
     gamma2 K (θ + 2 * Real.pi * (k : ℝ)) = gamma2 K θ :=
   calc gamma2 K (θ + 2 * Real.pi * (k : ℝ))

@@ -3621,6 +3621,82 @@ i(-\theta)_{\mathbb C}
     },
   },
   {
+    id: "calculation_formulae_claim_i_times_inverse_of_two_i_is_inverse_of_two_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`i\,(2_{\mathbb C}i)^{-1}=2_{\mathbb C}^{-1}` },
+    labels: ["i_times_inverse_of_two_i_is_inverse_of_two_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`i`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
+        math(String.raw`2_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=2`),
+        " である。",
+        math(String.raw`2_{\mathbb C}=(2_{\mathbb R})_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）、",
+        math(String.raw`i=(0,1)\neq0_{\mathbb C}`),
+        "（",
+        ref("def_imaginary_unit"),
+        "。第 2 成分が ",
+        math(String.raw`1\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb C},i\in\mathbb C^{\times}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`2_{\mathbb C}i\in\mathbb C^{\times}`),
+        " である。",
+        math(String.raw`2_{\mathbb C}^{-1},(2_{\mathbb C}i)^{-1}\in\mathbb C`),
+        " は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元である。このとき",
+      ]),
+      displayMath(String.raw`i\,(2_{\mathbb C}i)^{-1}=2_{\mathbb C}^{-1}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`1_{\mathbb C}`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の積の単位元である。主張の左辺から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+i\,(2_{\mathbb C}i)^{-1}
+&=1_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&=\bigl(2_{\mathbb C}^{-1}2_{\mathbb C}\bigr)\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}\in\mathbb C^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}^{-1}\Bigl(2_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&=2_{\mathbb C}^{-1}\bigl((2_{\mathbb C}i)(2_{\mathbb C}i)^{-1}\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}^{-1}1_{\mathbb C}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}i\in\mathbb C^{\times})\bigr)\\
+&=2_{\mathbb C}^{-1}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["となる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。同じ 6 行の鎖が exp_of_negative_i_real_as_cos_minus_i_sin の準備の鎖と、relation_of_gamma_2_theta_tilde・periodicity_of_check_fermi の準備の第一の cos + i sin の鎖の中に重複していたので、主張にして 3 か所から引くようにした（one_plus_one_is_two_in_cc・sum_minus_difference_is_twice_second_in_cc と同じ扱い）。鎖の行と根拠は exp_of_negative_i_real_as_cos_minus_i_sin の準備の鎖のまま運んだ。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_exp_of_negative_i_real_as_cos_minus_i_sin",
     kind: "claim",
     title: { tex: String.raw`\exp(-i\theta_{\mathbb C})=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}` },
@@ -3694,23 +3770,8 @@ i(-\theta)_{\mathbb C}
         math(String.raw`r_{\mathbb C}`),
         " の ",
         math(String.raw`r=1,2,-1`),
-        " である。準備の鎖:",
+        " である。",
       ]),
-      displayMath(String.raw`\begin{aligned}
-i\,(2_{\mathbb C}i)^{-1}
-&=1_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
-&=\bigl(2_{\mathbb C}^{-1}2_{\mathbb C}\bigr)\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}\in\mathbb C^{\times})\ \text{を右辺から左辺へ}\bigr)\\
-&=2_{\mathbb C}^{-1}\Bigl(2_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)\Bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
-&=2_{\mathbb C}^{-1}\bigl((2_{\mathbb C}i)(2_{\mathbb C}i)^{-1}\bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
-&=2_{\mathbb C}^{-1}1_{\mathbb C}
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}i\in\mathbb C^{\times})\bigr)\\
-&=2_{\mathbb C}^{-1}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
-\end{aligned}`),
       paragraph(["主張の左辺から"]),
       displayMath(String.raw`\begin{aligned}
 b
@@ -3747,7 +3808,7 @@ b
 &=(\cos\theta)_{\mathbb C}-(a-b)\,2_{\mathbb C}^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to a-b,\ w\to2_{\mathbb C})\bigr)\\
 &=(\cos\theta)_{\mathbb C}-(a-b)\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
-&&(\because\ \text{準備の鎖を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{i_times_inverse_of_two_i_is_inverse_of_two_in_cc}\ \text{を右辺から左辺へ}\bigr)\\
 &=(\cos\theta)_{\mathbb C}-\bigl((a-b)\,i\bigr)(2_{\mathbb C}i)^{-1}
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
 &=(\cos\theta)_{\mathbb C}-\bigl(i\,(a-b)\bigr)(2_{\mathbb C}i)^{-1}
@@ -3770,6 +3831,7 @@ b
         "2026-11-10（Lean の通しの証明）: 準備の第一の鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行）をほかの証明の準備と同じ鎖なので主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。準備の鎖はこれで二つになり、(a+b)-(a-b) = 2_ℂb を第一の鎖、i(2_ℂi)^{-1} = 2_ℂ^{-1} を第二の鎖と呼ぶ。",
         "2026-11-11（Lean の通しの証明）: 準備の第一の鎖（(a+b)-(a-b) = 2_ℂb の 17 行）を、euler_formula_cos_sin の第 2 の等式の鎖も同じ等式を要るので主張 sum_minus_difference_is_twice_second_in_cc へ移し、主鎖の 6 行目をその参照（右辺から左辺へ）にした。準備の鎖は i(2_ℂi)^{-1} = 2_ℂ^{-1} の一つになり、前置きから 0_ℂ の文を除いた。主鎖のほかの行は変えていない。準備の鎖の 4 行目と主鎖の 18 行目は積の結合律を右辺から左辺へ当てているので、根拠にその向きを書き添えた。",
         "2026-11-11（Lean の通しの証明）: 前置きの 2_ℂ = (2,0) に、inclusion_rr_to_cc の像 (2_ℝ)_ℂ であることとその参照を書き添えた（euler_formula_cos_sin・cos_of_negated_real・sin_of_negated_real と揃えた）。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の鎖 i(2_ℂi)^{-1} = 2_ℂ^{-1}（6 行）を、relation_of_gamma_2_theta_tilde・periodicity_of_check_fermi の準備の第一にも同じ鎖があるので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc へ移し、主鎖の 17 行目の根拠をその参照（右辺から左辺へ）にした。主鎖の式は変えていない。",
       ],
     },
   },

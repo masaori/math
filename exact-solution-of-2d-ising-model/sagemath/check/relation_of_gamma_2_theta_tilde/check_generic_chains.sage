@@ -24,12 +24,7 @@ euler_chain = [
     (Ft(Ep) + Ft(Em)) * T2i + (I0 * (Ft(Ep) - Ft(Em))) * T2Ii,                 # 積の結合律（右辺から左辺へ）
     (Ft(Ep) + Ft(Em)) * T2i + ((Ft(Ep) - Ft(Em)) * I0) * T2Ii,                 # 積の可換律
     (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (I0 * T2Ii),                 # 積の結合律
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (1 * (I0 * T2Ii)),           # 積の単位元（右辺から左辺へ）
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * ((T2i * T2) * (I0 * T2Ii)),  # multiplicative_group_of_cc の逆元 2_C（右辺から左辺へ）
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * (T2 * (I0 * T2Ii))),  # 積の結合律
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * ((T2 * I0) * T2Ii)),  # 積の結合律（右辺から左辺へ）
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * 1),                   # multiplicative_group_of_cc の逆元 2_C i
-    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * T2i,                         # 積の単位元
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * T2i,                         # i_times_inverse_of_two_i_is_inverse_of_two_in_cc
     ((Ft(Ep) + Ft(Em)) + (Ft(Ep) - Ft(Em))) * T2i,                             # 右からの分配律（右辺から左辺へ）
     ((Ft(Ep) + Ft(Em)) + (Ft(Ep) + (-Ft(Em)))) * T2i,                          # def_complex_difference
     (Ft(Ep) + (Ft(Em) + (Ft(Ep) + (-Ft(Em))))) * T2i,                          # 和の結合律

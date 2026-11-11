@@ -1,4 +1,4 @@
-  第 1〜14・16〜21 等号（積の単位元・逆元・結合律・可換律・商の定義・差の定義・分配律・-1 倍、sum_minus_difference_is_twice_second_in_cc と準備の鎖の参照）: 恒等的に等しい
+  第 1〜14・16〜21 等号（積の単位元・逆元・結合律・可換律・商の定義・差の定義・分配律・-1 倍、sum_minus_difference_is_twice_second_in_cc と i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照）: 恒等的に等しい
   第 15 等号: 差は (a+b)/2 - c で、euler_formula_cos_sin の第 1 の等式を代入すると 0（代入しなければ 0 でない）
   第 22 等号: 差は i(s - (a-b)/(2i)) で、euler_formula_cos_sin の第 2 の等式を代入すると 0（代入しなければ 0 でない）
   対照: 第 2 等号の 2^{-1}2 を 2、第 17 等号の i(2i)^{-1} を i に替えると等号が成り立たない
