@@ -1,10 +1,7 @@
 # 対象ラベル: claim_leading_distance_positive
 # 帰属: ZZ[x] / QQbar / AA の厳密計算。浮動小数点を使わない。
 
-import os
-
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+load('sagemath/_shared/defs.sage')
 
 
 def main():

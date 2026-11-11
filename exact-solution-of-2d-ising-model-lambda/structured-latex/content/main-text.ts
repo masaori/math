@@ -70219,6 +70219,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
+                      "Ising2DLambda.KacWard.cellBoundary_turn_by_incidence",
+                      "Ising2DLambda.NecSuf.KacWard.local_turn_by_cell_count",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70236,6 +70238,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "sagemath/check/lift-point-distinct-cycle-turning",
                       "sagemath/check/no-diagonal-only-contact",
                       "sagemath/check/step-turning-reversal",
+                      "sagemath/check/boundary-vertex-local-turn",
                     ],
                     statement: [
                       paragraph([
@@ -70350,7 +70353,22 @@ E&=E_{\mathrm{int}}+B
 &&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "となる。多角形を一方の向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
+                        "となる。頂点の北西・北東・南東・南西の四セルが内側にあるかを順に ",
+                        math(String.raw`a,b,c,d\in\{0,1\}`), " で表す。内側セルを左に置く境界の入出方向を ",
+                        math(String.raw`d_{\mathrm{in}},d_{\mathrm{out}}\in\mathbb Z/4\mathbb Z`),
+                        " とすると、対角二セル配置と空・全占有を除いた全配置は次の通りである。方向番号は東・南・西・北を順に ",
+                        math(String.raw`0,1,2,3`), " とする（", ref("def_oriented_edge_direction"), "）。",
+                      ]),
+                      displayMath(String.raw`\begin{array}{c|c|c|c}
+abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
+0001&1&3&2\\0010&1&2&1\\0100&1&1&0\\1000&1&0&3\\
+0011&2&2&2\\0110&2&1&1\\1001&2&3&3\\1100&2&0&0\\
+0111&3&1&2\\1011&3&2&3\\1101&3&3&0\\1110&3&0&1
+\end{array}`),
+                      paragraph([
+                        "表の各行に一歩の回転数の定義（", ref("def_step_turning"),
+                        "）を適用すると、内側セルを左に置く向きでは接続数一・二・三の回転数がそれぞれ ",
+                        math(String.raw`-1,0,1`), " になる。内側セルを右に置く向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
                         "、凹頂点では ", math(String.raw`-1`), "、直進頂点では ", math(String.raw`0`),
                         " であり、逆向きに巡ると各曲がりの符号が反転する（", ref("def_step_turning"), "）。したがって",
                       ]),
@@ -90295,12 +90313,12 @@ d_{1}(L)-0
 &=d_{1}(L)
 &&(\because\ R\text{ の四則})\\
 &=w\cdot w
-&&(\because\ \text{上の等式})
+&&(\because\ \text{上の等式})\\
+&>_{R}0
+&&(\because\ w\in R,\ w\ne0,\ \blkref{def_real_algebraic_strict_order})
 \end{aligned}`),
                         paragraph([
-                          "であり、", math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`),
-                          " だから、", ref("def_real_algebraic_strict_order"), " により ",
-                          math(String.raw`0<_{R}d_{1}(L)`), " である。全過程は ",
+                          "であり、", math(String.raw`0<_{R}d_{1}(L)`), " である。全過程は ",
                           math(String.raw`\overline{\mathbb{Q}}`), " とその部分体 ", math(String.raw`R`),
                           " の中で閉じ、実数体も複素数体も現れない。",
                         ]),
