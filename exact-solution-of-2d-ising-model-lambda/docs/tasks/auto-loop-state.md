@@ -6,12 +6,11 @@
 
 ## 現在地
 
+- **2026-11-11（並列の連続実行）、横断の平滑化が循環総回転数を保つことを実際の閉歩道について Lean 具体版と必要十分版で示し、二本の閉歩道の循環総回転数の和を $t_{\circ}(\gamma)$ まで閉じた。** 並列の表の次は、平滑化の二本の切断線偶奇の和を実際の閉歩道へ当てはめることを扱う。
 - **2026-11-11（連続実行）、共有頂点での四セルの配置について、異なる二つの境界辺では内側セルの左右が反転しないことを Lean 二版で示した。** 次は実際の単純閉歩道の隣接二歩へ局所補題を適用する。
-
 - **2026-11-11（並列の連続実行）、平滑化の二本の循環総回転数の和を、実際の閉歩道について平滑化後の循環総回転数 $t_{\mathrm{sm}}(\gamma;k,l)$ に等しいところまで Lean 具体版と必要十分版で示した。** 並列の表の次は、平滑化が循環総回転数を保つことを実際の閉歩道へ当てはめ、和の主張を $t_{\circ}(\gamma)$ まで閉じる。
 - **2026-11-11（並列の連続実行）、横断消去の帰納法の行を五つの論法に割り、先頭の「平滑化で分けた二本の横断数の和は元より小さい」を実際の閉歩道について Lean 具体版と必要十分版で示した。** 並列の表の次は、平滑化の二本の循環総回転数の和を実際の閉歩道へ当てはめることを扱う。
 - **2026-11-11（連続実行）、実際の単純閉歩道の各歩で内側セルが左右どちらにあるかを Lean 具体版で判定した。** 次は全周での巡回方向の一貫性を扱う。
-- **2026-11-11（連続実行）、実際の単純閉歩道の各歩を内側セル集合の境界辺へ Lean 二版で接続した。** 次は巡回方向の一貫性を扱う。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -45,10 +44,9 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 平滑化が循環総回転数を保つことを実際の閉歩道へ当てはめ、二本の循環総回転数の和を閉じる | 記述・SageMath 済。Lean 二版は $t_{\mathrm{sm}}(\gamma;k,l)$ までの段が実際の閉歩道で済み | `claim_smoothing_split_turning_sum` の最後の行 $t_{\mathrm{sm}}(\gamma;k,l)=t_{\circ}(\gamma)$（`claim_smoothing_cyclic_turning_invariance`）。その具体版 `smoothing_cyclic_turning_invariance` は局所データ `LocalVisit` の列について述べ、組み替えの回転差を仮定 `hrec` で受ける。実際の閉歩道について `smoothedCyclicTotalTurning γ hγ k l = cyclicTotalTurning γ hγ` を、横断の二通過の直進性と `reconnection_turning_difference` を引いて示し、`smoothing_split_walk_turning_sum`（`KacWard/SmoothingSplitWalkTurningSum.lean`）と合成して本文ブロックの `lean:` に足す。`smoothing_cyclic_turning_invariance` 自身の委譲（例外の台帳）は主経路の行「具体版の必要十分版への委譲を外す」が扱う。 |
 | Onsager 閉形式への接続 | 平滑化の二本の切断線偶奇の和を実際の閉歩道へ当てはめる | 記述・SageMath 済。Lean 二版は添字を自然数で読む辺列についてだけ済み | `claim_smoothing_split_seam_parity`。具体版 `smoothing_split_seam_parity` は上の行と同じ形で例外の台帳に在る。実際の二本の切断線偶奇について置き換える。 |
 | Onsager 閉形式への接続 | 交差形式は辺の台の互いに素な合併に分配する | 記述済。Lean 二版は未着手 | `claim_edge_distinct_crossing_elimination_parity` の証明の「交差形式の分配」の一行。`evenEdgeChainIntersection` の両引数について、互いに素な有限辺集合の合併が和になることを示す。 |
-| Onsager 閉形式への接続 | 横断消去の帰納法の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_edge_distinct_crossing_elimination_parity`（横断消去は位相と切断線偶奇と交差形式を保つ）。横断数の整礎帰納法そのもの。上の三行と、済んだ「平滑化で分けた二本の横断数の和は元より小さい」の実際の閉歩道の具体版 `smoothing_split_crossing_descent`、一回の平滑化の合成 `edge_distinct_smoothing_crossing_parity` を引く。 |
+| Onsager 閉形式への接続 | 横断消去の帰納法の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_edge_distinct_crossing_elimination_parity`（横断消去は位相と切断線偶奇と交差形式を保つ）。横断数の整礎帰納法そのもの。上の二行と、済んだ「平滑化で分けた二本の横断数の和は元より小さい」の実際の閉歩道の具体版 `smoothing_split_crossing_descent`、二本の循環総回転数の和の具体版 `closedWalk_smoothing_split_turning_sum`、一回の平滑化の合成 `edge_distinct_smoothing_crossing_parity` を引く。 |
 | Onsager 閉形式への接続 | 巻き付き二次符号の積と交差形式・接触点分割の三件の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_torus_quadratic_sign_polarization`（巻き付き二次符号の積と交差形式）、`claim_crossing_free_contact_split_children`（横断のない閉歩道を接触点で分けても各子に横断は生じない）→ `claim_crossing_free_contact_split_phase`（接触点分割の回転位相は交差形式で更新される）→ `claim_crossing_free_contact_elimination_phase`（横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される）。 |
 | Onsager 閉形式への接続 | マッチングの符号と基準マッチングの四件の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_alternating_cycle_gauge_ratio`（短い対と基準の長い対の対角変換因子の比）、`claim_reference_matching_constant_term`（基準マッチングの長い標識の項は一である）、`claim_alternating_cycle_matching_sign`（交互閉路ごとの向き直しが二つのマッチングの符号比を与える）、`claim_tagged_matching_cycle_weight`（非零項は閉歩道ごとのねじれ・回転位相の積に分かれる）。 |
 | Onsager 閉形式への接続 | 平方恒等式に依存しない実数体への脱出と有限 Fourier 分解の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | 2026-11-11 に主経路の表から移した。 到達点四つの閉包の中で、依存を辿っても平方恒等式・有限トーラス公式に届かない 22 件（2026-11-04 の研究管理が `ref()` と `\blkref{}` の走査で確かめた）。依存の順に、実閉部分体の有理上下界 → Archimedes 性 → 有理挟み込み → 有理下切断の上限 → 下切断の上限による実現写像の有理数上での一致・加法・乗法・狭義順序 → 複素実現の加法・乗法・単射性 → 横・縦モードの複素根集合への包含 → 各モード集合と複素根集合の全単射 → 直積全単射、と、1 の冪根の逆元の共役 → 有理点での分散因子の正値性、逆元操作による分散因子の不変性 → モード軌道の大きさ、角の対数関数の連続性、下組の上限と実数極限、複素根の角表示、および到達点「分散因子の最小値は自己双対点で零になる」（`claim_dispersion_minimum_self_dual_point`）。具体版は実際の実閉部分体のデータと今回接続した実現写像の定義について述べる。一つの主張ごとに進め、行を割るときはこの備考を書き換える。 |
@@ -60,11 +58,11 @@
 
 ## レビュー記録
 
+- 2026-11-11: 「接続の組み替えの回転差は −4, 0, 4 に限る」の Lean 具体版 `reconnection_turning_difference` は回転 `Turn` と方向番号 `ZMod 4` の値を仮定で受け、実際の向き付き辺について述べていなかった（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の四つの接続について同じ証明を書いた `edge_reconnection_turning_difference` を足し、本文ブロックの `lean:` に登録した。
 - 2026-11-11: 「二本の閉歩道の循環総回転数の和は元の循環総回転数に等しい」の本文の証明の最後の行は「横断の平滑化は循環総回転数を保つ」を引くが、その Lean 具体版 `smoothing_cyclic_turning_invariance` は局所データ `LocalVisit` の列について述べ、組み替えの回転差を仮定 `hrec` で受けている（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の閉歩道への当てはめを並列の表の先頭の行にした。
 - 2026-11-11: 「平滑化で分けた二本の横断数の和は元より小さい」の Lean 具体版は四つの自然数と分割・更新の等式を仮定で受け、実際の閉歩道について述べていなかった（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」と「仮定が主張の中身を受け取っていないか」）。実際の閉歩道の具体版に置き換えた（並列の表の割り直した先頭の行そのもの）。
 - 2026-11-11: 実際の単純閉歩道の各歩の境界辺性と本文を照合し、四方向の添字と境界辺の位置が一致することを確かめた。
 - 2026-11-11: 「平滑化後の横断数は二軸の直進通過数によって更新される」の Lean 具体版 `smoothing_crossing_number_update` は局所データ `LocalVisit` の列について述べ、実際の閉歩道について述べていなかった（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の閉歩道への当てはめ `closedWalk_smoothing_crossing_number_update` を書き、合成の行の `lean:` に登録した（並列の表の先頭の行そのもの）。`smoothing_crossing_number_update` 自身の必要十分版への委譲は例外の台帳に残り、主経路の行「具体版の必要十分版への委譲を外す」が扱う。
-- 2026-11-11: 本文の混合横断数の定義（`def_split_mutual_crossing_number`。添字対 $A\times B$、終点の一致・二つの直進・軸の相異）と Lean の `splitMutualCrossingNumber` を照合し、修正不要だった。
 
 ## 式変形の書き方の統一
 
@@ -77,8 +75,8 @@
 
 ## 前進の記録
 
+- 2026-11-11: 並列の表の先頭「平滑化が循環総回転数を保つことを実際の閉歩道へ当てはめ、二本の循環総回転数の和を閉じる」を済ませ、行を消した。具体版 `closedWalk_smoothing_cyclic_turning_invariance`（`KacWard/SmoothingCyclicTurningInvarianceWalk.lean`）は本文と同じ順に、横断の直進性（第一の準備）、四つの接続（交換分は `swappedExit_mem_nonbacktrackingSuccessors`）への組み替えの回転差の適用、値域から新二項の和が零、二項を分けた有限和、巡回後続による循環総回転数の書き直しで示し、必要十分版を呼ばない。仮定は横断だけで、本文の $k<l$ は使わない。必要十分版の仮定は、方向の値が `AddCancelCommMonoid`、`π : ℤ →+ G`、`π(D)=0` なら $4\mid D$、回転数の値域 $\{0,1,-1\}$、接続での方向の前進、四つの接続と旧二項の直進性だけである。`smoothing_split_walk_turning_sum` との合成 `closedWalk_smoothing_split_turning_sum` を `claim_smoothing_split_turning_sum` の `lean:` に足した。局所データ版の旧具体版 `smoothing_cyclic_turning_invariance` を本文の `lean:` から外し、例外の台帳の行を消した。
 - 2026-11-11: 主経路の先頭を、共有頂点での有限四セルの局所論法・実際の隣接二歩への適用・全周への帰納の三つに割った。対角接触を除き入出辺が異なれば内側の左右は反転しない局所補題を、セル集合についての具体版 `boundaryVertex_consecutive_sides_eq` と四つの真偽値だけの必要十分版 `boundary_vertex_side_propagation_necSuf` で示し、特殊化の導出版も置いた。実際の閉歩道への適用は次の行に残す。
 - 2026-11-11: 並列の表の先頭「平滑化の二本の循環総回転数の和を実際の閉歩道へ当てはめる」を、二つの準備と合併の段（$t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)=t_{\mathrm{sm}}(\gamma;k,l)$）と、最後の行の不変性 $t_{\mathrm{sm}}(\gamma;k,l)=t_{\circ}(\gamma)$ の当てはめの二つの論法に割った（後者は方向番号による組み替えの回転差の議論で、有限和の分割とは別である）。前者を示した。具体版（`KacWard/SmoothingSplitWalkTurningSum.lean`）は実際の二本 `smoothedSplitWalkA`・`smoothedSplitWalkB` について、各位置の一歩が位置の写像の指す添字の項 $\tau(\vec e_r,\vec f_r)$ に等しいこと（内部は選んだ二添字に当たらないので元の後続、閉じる一歩は付け替えた出辺）、位置の写像の単射性と像による和の移し替え、$A$ と補集合の和の合併で示し、必要十分版を呼ばない。必要十分版 `split_cyclic_sum_necSuf` の仮定は、加法可換モノイドの値、有限の添字、二本の位置の写像の単射性と像が $A$・補集合であることだけである。旧具体版 `smoothing_split_turning_sum`（ℕ 添字）を本文ブロックの `lean:` から外し、例外の台帳の行を消した（旧具体版は接触点分割の回転数更新の具体版が引くので残した）。
 - 2026-11-11: 並列の表の先頭「横断消去の帰納法の Lean 二版」を、横断数の減少・循環総回転数の和・切断線偶奇の和・交差形式の分配・帰納法本体の五つの論法に割った（減少・和・分配は実際の閉歩道への当てはめと有限和の分配で、帰納法とは別の論法である）。減少を示した。具体版 `smoothing_split_crossing_descent`（`KacWard/SmoothingSplitCrossingDescent.lean`）は実際の二本 `smoothedSplitWalkA`・`smoothedSplitWalkB` について、本文と同じく横断の二通過がそれぞれ一つの軸の直進通過であること（`crossing_vertexAxisStraightVisitCount_pos`。辺の標識の相異は仮定しない）、分割等式、更新式から自然数の順序で結論を出す。必要十分版の軸の値域の仮定は「相異なる二元があればどの元もそのどちらかに等しい」だけである。旧具体版（四つの自然数を仮定で受け必要十分版に委ねていた）を置き換え、例外の台帳の行を消した。
 - 2026-11-11: 巡回方向の一貫性を「各歩の内側セルの側」と「全周への伝播」に割った。前者は境界辺性を実際の閉歩道の各歩に適用し、四方向ごとに隣接二セルの片方だけが内側にあることを Lean 具体版で示した。必要十分版では二つの Bool の相異と左右の選択が同値であることを示し、SageMath で単純閉路 704 本の 6672 歩を検査した。
-- 2026-11-11: 実際の単純閉歩道の各歩を四方向に分け、訪問点に接する四辺の通過回数が高々一である結果と、当該歩の寄与が正であることから、その辺の通過回数を一とした。縦・横の奇数回通過の境界辺定理を各歩に適用する Lean 具体版と、四方向の同じ論法の必要十分版を示した。

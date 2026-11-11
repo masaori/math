@@ -61001,6 +61001,8 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                         "Ising2DLambda.KacWard.reconnection_turning_difference",
                         "Ising2DLambda.NecSuf.KacWard.dvd_four_bounded_mem_necSuf",
                         "Ising2DLambda.KacWard.reconnection_turning_difference_from_necSuf",
+                        "Ising2DLambda.KacWard.edge_reconnection_turning_difference",
+                        "Ising2DLambda.NecSuf.KacWard.reconnection_turning_difference_walk_necSuf",
                       ],
                       statement: [
                         paragraph([
@@ -62234,9 +62236,12 @@ c(\gamma)+1
                     habitat: "Z",
                     verification: ["sagemath/check/smoothing-straight-visit-count"],
                     lean: [
-                      "Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance",
+                      "Ising2DLambda.KacWard.closedWalk_smoothing_cyclic_turning_invariance",
+                      "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_successor",
+                      "Ising2DLambda.NecSuf.KacWard.smoothing_cyclic_turning_invariance_walk_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.cyclicTotalTurning_eq_sum_cyclicSuccessor_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.two_point_preserved_sum_necSuf",
-                      "Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance_from_necSuf",
+                      "Ising2DLambda.KacWard.closedWalk_smoothing_cyclic_turning_invariance_from_necSuf",
                     ],
                     statement: [
                       paragraph([
@@ -62607,6 +62612,7 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
                       "Ising2DLambda.NecSuf.KacWard.segment_cyclic_sum_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.split_cyclic_sum_necSuf",
                       "Ising2DLambda.KacWard.smoothing_split_walk_turning_sum_from_necSuf",
+                      "Ising2DLambda.KacWard.closedWalk_smoothing_split_turning_sum",
                     ],
                     statement: [
                       paragraph([
