@@ -83,9 +83,18 @@ theorem sq_I_mul_absOf_eq_mul (h : w = -(starRingEnd ℂ) z) :
     _ = (-1) * (-(z * w)) := by rw [hI, hr]
     _ = z * w := by ring
 
-/-- **必要十分版**: `z ≠ 0` なら `|z| > 0`。狭義の不等号が要るのはここだけ。 -/
-theorem absOf_pos (hz : z ≠ 0) : 0 < Real.sqrt (Complex.normSq z) :=
-  Real.sqrt_pos.2 ((Complex.normSq_pos).2 hz)
+/-- **必要十分版**: `z ≠ 0` なら `|z| > 0`。狭義の不等号が要るのはここだけ。
+具体版 `absGamma2_pos_of_ne_zero` と同じ 3 段（`|z| ≥ 0`、`abs_basic_properties` (3) で `|z| ≠ 0`、順序で `> 0`）。
+`w = -conj z` は使わない。主張は ℂ の上の特定の写像 `|·| = √(normSq ·)` の値についての主張で、段 2 が
+`abs_basic_properties` (3)（この写像の零点が `0_ℂ` だけであること）を使うので、ℂ と `|·|` から抽象度を上げる余地が無い。
+具体版から取り除けたのは `γ_2` の具体形と `θ̃_μ` だけである。 -/
+theorem absOf_pos (hz : z ≠ 0) : 0 < Real.sqrt (Complex.normSq z) := by
+  have h0 : 0 ≤ Real.sqrt (Complex.normSq z) := Real.sqrt_nonneg _   -- 段 1: `def_abs_arg`
+  have hne : Real.sqrt (Complex.normSq z) ≠ 0 := by                  -- 段 2: `abs_basic_properties` (3)
+    intro h
+    apply hz
+    exact Complex.normSq_eq_zero.1 (le_antisymm (Real.sqrt_eq_zero'.1 h) (Complex.normSq_nonneg z))
+  exact lt_of_le_of_ne h0 (Ne.symm hne)                               -- 段 3: ℝ の順序
 
 section StrictNegativity
 

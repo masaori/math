@@ -1814,6 +1814,11 @@ targets=(
   Ising2D.cols_mul_diagonal_matrix_of_necSuf
   Ising2D.NecSuf.col_entry_mul_offdiag_eq_zero
   Ising2D.NecSuf.cols_mul_diagonal_eq_cols_smul
+  Ising2D.sqrt_of_positive_real_is_positive
+  Ising2D.sqrt_of_positive_real_is_positive_of_necSuf
+  Ising2D.NecSuf.pos_of_nonneg_of_sq_eq_pos
+  Ising2D.absGamma2_pos_of_ne_zero
+  Ising2D.absGamma2_pos_of_ne_zero_of_necSuf
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow

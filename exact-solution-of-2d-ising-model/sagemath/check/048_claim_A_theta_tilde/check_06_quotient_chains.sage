@@ -68,8 +68,11 @@ check(c * b == one / u, "第 2 成分: c b = 1_C / u（P̌ の第 2 行の成分
 
 # ---- Step 1: s = (√M, 0)、2_C = (2, 0) の第 1 成分が 0 でないこと（M_col = 2..8 で厳密に） ----
 for M in range(2, 9):
+    check(ZZ(M) >= 2 and ZZ(2) >= 1, f"M_col = {M}: M_col ≥ 2 ≥ 1（ℤ の順序）")
+    iM = QQ(ZZ(M))
+    check(iM >= 1 and QQ(1) > 0, f"M_col = {M}: ι(M_col) ≥ 1_R > 0（inclusion_zz_to_rr_of_positive_is_at_least_one と順序）")
     sq = AA(M).sqrt()
-    check(sq > 0 and sq^2 == M, f"M_col = {M}: √M_col > 0 かつ (√M_col)^2 = M_col（AA）")
+    check(sq > 0 and sq^2 == M, f"M_col = {M}: √M_col > 0 かつ (√M_col)^2 = M_col（sqrt_of_positive_real_is_positive、AA）")
 check(QQ(2) != 0, "2_C = (2, 0) の第 1 成分 2 ≠ 0")
 for M in range(2, 9):
     sv = QQbar(AA(M).sqrt())

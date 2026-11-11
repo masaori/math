@@ -28,7 +28,8 @@
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_absSq` | (2) `γ_2(θ~)γ_2(-θ~) = (-|γ_2|^2)_ℂ`（右辺は実数 `-|γ_2|^2` の像） | 同 (2) |
 | `Ising2D.sq_absGamma2` | (4) `(|γ_2|)^2 = -γ_2(θ~)γ_2(-θ~)` | 同 (4) |
 | `Ising2D.sq_I_absGamma2` | (5) `(i|γ_2|)^2 = γ_2(θ~)γ_2(-θ~)` | 同 (5) |
-| `Ising2D.absGamma2_thetaTilde_pos` | `|γ_2(θ~_μ)| > 0` | 同 (2)(4) の狭義部分 |
+| `Ising2D.absGamma2_pos_of_ne_zero` | `γ_2(θ) ≠ 0` なら `|γ_2(θ)| > 0`（人手の (2) の狭義部分の前置きの 3 段: `def_abs_arg`、`abs_basic_properties` (3)、ℝ の順序。導出は `Ising2D.absGamma2_pos_of_ne_zero_of_necSuf`（`NecSuf.absOf_pos` から）） | 同 (4) の `|γ_2| > 0` |
+| `Ising2D.absGamma2_thetaTilde_pos` | `|γ_2(θ~_μ)| > 0`（`absGamma2_pos_of_ne_zero` を `gamma_2_theta_tilde_nonzero` に当てたもの） | 同 (4) |
 | `Ising2D.absGamma2_thetaTilde_sq_pos` | `0 < |γ_2(θ~_μ)|^2`（人手の 3 行の鎖と 1 対 1 の `calc`） | 同 (2) の狭義部分 |
 | `Ising2D.neg_absGamma2_thetaTilde_sq_neg` | `-|γ_2(θ~_μ)|^2 < 0`（人手の 2 行の鎖と 1 対 1 の `calc`） | 同 (2) の狭義部分 |
 | `Ising2D.absGamma2_thetaTilde_sq_pos_of_necSuf` / `neg_absGamma2_thetaTilde_sq_neg_of_necSuf`（`ClaimRelationGamma2TildeFromNecSuf.lean`） | 上の 2 つを必要十分版 `NecSuf.sq_pos_of_pos_chain`・`neg_neg_of_pos_chain` の `R := ℝ` の特殊化として導出した版 | 同 (2) の狭義部分 |
@@ -48,7 +49,7 @@
 | `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg`（`ClaimEigenATildeDiag.lean`） | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
 | `Ising2D.lambdaPlusR_ne_lambdaMinusR` | `λ_+ ≠ λ_-`（固有値の分離） | 同 Step 1 末尾 |
 | `Ising2D.checkPmat` / `checkDmat` / `checkC` | 人手証明の `P̌_μ`, `Ď_μ`, 任意定数 `c` | `diagonalization_check_P_D` |
-| `Ising2D.sqrtM_ne_zero`（`DefinitionCheckFermi.lean`。`def_check_fermi` と同じ `√M`） | `s = (√M, 0) ≠ (0, 0)`（`√M > 0` と第 1 成分の比較） | 同 Step 1 |
+| `Ising2D.sqrtM_ne_zero`（`DefinitionCheckFermi.lean`。`def_check_fermi` と同じ `√M`） | `s = (√M, 0) ≠ (0, 0)`（段 1 の `√M > 0` は `inclusion_zz_to_rr_of_positive_is_at_least_one` の `ι(M) ≥ 1 > 0` と `sqrt_of_positive_real_is_positive`、段 2 は第 1 成分の比較） | 同 Step 1 |
 | `Ising2D.checkU_ne_zero` / `checkD_ne_zero` | `u := 2_ℂ s ∈ ℂ^×`、`d := u b ∈ ℂ^×`（`s := (√M)_ℂ`。群の積） | `diagonalization_check_P_D` Step 1 |
 | `Ising2D.checkC_eq_inv` / `checkC_ne_zero` | `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）、`c ∈ ℂ^×`（逆元） | 同 Step 1 |
 | `Ising2D.checkC_mul` / `checkC_mul_b` / `checkPmat_col_pos` / `checkPmat_col_neg` | `c x = x/d`（5 行）、`cb = 1/(2√M)`（13 行。どちらも `def_complex_quotient` の `z w^{-1}` で 1 段ずつ）、`P̌` の列が `v_{±,μ}` | 同 Step 2 |
@@ -89,7 +90,7 @@
 | ファイル | Lean の名前 | 内容 |
 | --- | --- | --- |
 | `OddModePhase.lean` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `N·θ = mπ`（`m` 奇数）かつ `sin θ = 0` なら `cos θ = -1` |
-| `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
+| `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | 前の 4 つは `w = -conj z` だけから出る帰結。`absOf_pos`（`z ≠ 0` なら `|z| > 0`）は `w = -conj z` を使わない |
 | `TwoByTwoSkew.lean` | `NecSuf.skew2_factor_identity` / `skew2_charPoly` / `skew2_charPoly_factor` / `skew2_det_eq_zero_iff` / `skew2_eigenvalue_iff` / `skew2_eigenvalues_ne` / `skew2_mulVec_pos` / `skew2_mulVec_neg` / `mulVec_smul_of_mulVec_eq` / `skew2_diag_offdiag` / `skew2_mul_of_cols` / `det_of_cols` / `det_of_cols_ne_zero` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**。固有値が `g ± s` に限る段と `det P ≠ 0` の段は零因子が無いこと、`λ_+ ≠ λ_-` と `det P ≠ 0` は `2s ≠ 0`。Step 4 の `eq_conj_of_mul_eq` はモノイドと右逆元 `P Q = I` だけ）。具体版の Step と 1 つずつ対応する |
 | `TwoByTwoKernelAndDeterminant.lean` | `NecSuf.det_mul_vec_zero_of_mulVec` / `det_mul_vec_one_of_mulVec` / `det_eq_zero_of_mulVec_eq_zero` / `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` / `exists_ne_zero_mulVec_eq_zero_iff_det` | 2×2 行列が 0 でないベクトルを 0 へ送る ⟺ `det = 0`（「⇒」は**零因子の無い可換環**、「⇐」は 0 でない可換環） |
 | `TwoByTwoAdjugateInverse.lean` | `NecSuf.adjTwo'` / `mul_adjTwo'` / `adjTwo_mul'` / `mul_smul_adjTwo_of_mul_det'` / `smul_adjTwo_mul_of_mul_det'` | 2×2 の余因子行列と両側逆元（**可換環**。両側逆元には `det` の左逆元 `u`（`u det = 1`）が在ることだけが効き、体であることは効かない） |

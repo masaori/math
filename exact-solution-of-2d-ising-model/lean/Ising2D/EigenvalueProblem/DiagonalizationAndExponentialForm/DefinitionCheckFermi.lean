@@ -25,7 +25,7 @@
   （`checkR_sq`）。
 * 人手の「定義が意味をもつ」段落は、係数の分母 `u := 2_ℂ s`・`d := u b` が `ℂ^×` に属することを
   `diagonalization_check_P_D` Step 1 から引く（Lean では `checkU_ne_zero`・`checkD_ne_zero`、`ClaimEigenATildeDiag.lean`。
-  Lean の割り算は分母 `0` でも値を返すので、定義そのものに仮定は要らない）。`r > 0`（人手は `relation_of_gamma_2_theta_tilde` (4)）を
+  Lean の割り算は分母 `0` でも値を返すので、定義そのものに仮定は要らない）。`r > 0`（人手は `relation_of_gamma_2_theta_tilde` (4)。Lean は `absGamma2_pos_of_ne_zero`）を
   使う定理は、`γ_2(θ̃_μ) ≠ 0`（`gamma_2_theta_tilde_nonzero`）を仮定
   `hga : gamma2 K (thetaTilde M μ) ≠ 0` として受け取る（`checkR_pos`・`checkR_ne_zero`）。
   `gamma_2_theta_tilde_nonzero` の無条件版 `gamma2_thetaTilde_ne_zero` で `hga` を落とした版は `ClaimCheckFermiResultsUnconditional.lean` に置く。
@@ -37,6 +37,9 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugat
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
 
 namespace Ising2D
 
@@ -256,9 +259,12 @@ theorem checkR_sq (K : IsingConst) (M : ℕ) (μ : ℤ) :
   rw [gamma2_mul_gamma2_neg_eq_neg_normSq, neg_neg, checkR, ← Complex.ofReal_pow,
     Real.sq_sqrt (Complex.normSq_nonneg _)]
 
+/-- 人手 `def_check_fermi` の `r > 0`（人手は `relation_of_gamma_2_theta_tilde` (4) の `|γ_2(θ̃_μ)| > 0`）。
+`r` は `|γ_2(θ̃_μ)|` と定義から一致する（`checkR` と `absGamma2` は同じ `√(normSq ·)`）ので、
+(4) の `|γ_2(θ)| > 0` の具体版 `absGamma2_pos_of_ne_zero`（`ClaimRelationGamma2Tilde.lean`）をそのまま引く。 -/
 theorem checkR_pos (K : IsingConst) (M : ℕ) {μ : ℤ}
     (hga : gamma2 K (thetaTilde M μ) ≠ 0) : 0 < checkR K M μ :=
-  Real.sqrt_pos.2 ((Complex.normSq_pos).2 hga)
+  absGamma2_pos_of_ne_zero K (thetaTilde M μ) hga
 
 theorem checkR_ne_zero (K : IsingConst) (M : ℕ) {μ : ℤ}
     (hga : gamma2 K (thetaTilde M μ) ≠ 0) : ((checkR K M μ : ℝ) : ℂ) ≠ 0 := by
@@ -323,12 +329,17 @@ noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
 `def_check_fermi` の係数の分母 `u`・`d` が `ℂ^×` に属すること（`checkU_ne_zero`・`checkD_ne_zero`）はこれを引く。
 
 人手の 2 段に 1 段ずつ対応させる。
-1. `M_col ≥ 2` より `√M_col > 0`（Lean では `M ≠ 0` から `Real.sqrt_pos`。この段の人手の根拠は状態台帳の (d4c44m) で扱う）。
+1. `M_col ≥ 2 ≥ 1` なので `ι(M_col) ≥ 1 > 0`（`inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → M_col`）と ℝ の順序。
+   Lean は `M_col ≥ 2` を使う側から `M ≠ 0` で受け取り、`1 ≤ M` を出す）、`sqrt_of_positive_real_is_positive`（`x → ι(M_col)`）より `√M_col > 0`。
 2. `s = 0_ℂ` を仮定すると第 1 成分が `√M_col = 0` になり 1 と矛盾する（`definition_of_cc` の等号は成分ごと、
    `inclusion_rr_to_cc` の第 1 成分は `√M_col`）。 -/
 theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
-  have hpos : 0 < Real.sqrt M := Real.sqrt_pos.2 (Nat.cast_pos.2 (Nat.pos_of_ne_zero hM))
-                                      -- 段 1: `√M_col > 0`
+  have hM1 : 1 ≤ M := Nat.one_le_iff_ne_zero.2 hM
+                                      -- 段 1: `M_col ≥ 1`（ℕ の順序）
+  have hMpos : (0 : ℝ) < M := lt_of_lt_of_le one_pos (inclusion_zz_to_rr_of_positive_is_at_least_one M hM1)
+                                      -- 段 1: `ι(M_col) ≥ 1 > 0`（`inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → M_col`）と ℝ の順序）
+  have hpos : 0 < Real.sqrt M := sqrt_of_positive_real_is_positive M hMpos
+                                      -- 段 1: `√M_col > 0`（`sqrt_of_positive_real_is_positive`（`x → ι(M_col)`））
   intro h
   have hre : (sqrtM M).re = (0 : ℂ).re := congrArg Complex.re h
                                       -- 仮定 `s = 0_ℂ` の第 1 成分（`definition_of_cc` の `ℝ^2` の元の等号は成分ごと）

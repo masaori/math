@@ -2159,6 +2159,102 @@ a^{m+1}\, b^{m+1}
     },
   },
   {
+    id: "calculation_formulae_claim_sqrt_of_positive_real_is_positive",
+    kind: "claim",
+    title: { text: "正の実数の平方根は正" },
+    labels: ["sqrt_of_positive_real_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}_{>0}`),
+        " について ",
+        math(String.raw`x \in \mathbb{R}_{\ge 0}`),
+        " であり、",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根について",
+      ]),
+      displayMath(String.raw`\sqrt{x}^{(\mathbb{R}_{\ge 0})} > 0`),
+      paragraph(["が成り立つ。", math(String.raw`>`), " は ", math(String.raw`\mathbb{R}`), " の順序である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x > 0`),
+        " なので ",
+        math(String.raw`x \ge 0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序で ",
+        math(String.raw`x \ge 0`),
+        " は ",
+        math(String.raw`x > 0`),
+        " または ",
+        math(String.raw`x = 0`),
+        " のこと）であり、",
+        math(String.raw`y := \sqrt{x}^{(\mathbb{R}_{\ge 0})} \in \mathbb{R}`),
+        " が定まる。",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`y \ge 0`),
+        " かつ ",
+        math(String.raw`y^2 = x`),
+        " である（二乗 ",
+        math(String.raw`y^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "））。",
+        math(String.raw`y \neq 0`),
+        " を背理法で示す。",
+        math(String.raw`y = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= y^2
+&&\bigl(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ \text{を右辺から左辺へ}\bigr)\\
+&= 0^2
+&&(\because\ \text{仮定}\ y = 0)\\
+&= 0\cdot 0
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
+&= 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`x > 0`),
+        " に反する（",
+        math(String.raw`x = 0`),
+        " なら ",
+        math(String.raw`x > 0`),
+        " は ",
+        math(String.raw`0 > 0`),
+        " となり、",
+        math(String.raw`\mathbb{R}`),
+        " の順序 ",
+        math(String.raw`<`),
+        " の非反射律に反する）。よって ",
+        math(String.raw`y \neq 0`),
+        " である。",
+        math(String.raw`y \ge 0`),
+        " は ",
+        math(String.raw`y > 0`),
+        " または ",
+        math(String.raw`y = 0`),
+        " のことなので（",
+        math(String.raw`\mathbb{R}`),
+        " の順序）、",
+        math(String.raw`\sqrt{x}^{(\mathbb{R}_{\ge 0})} = y > 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。diagonalization_check_P_D の Step 1 が「M_col ≥ 2 より √M_col > 0」の根拠に sqrt_nonnegative_existence_uniqueness（存在と一意性だけを述べる）を引いていたので、正であることを引けるよう足した。Lean は Ising2D.sqrt_of_positive_real_is_positive（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSqrtOfPositiveRealIsPositive.lean）。数値検証: sagemath/check/sqrt_of_positive_real_is_positive/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（sqrt_of_real_zero_is_zero と同じ扱い）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inclusion_preserves_finite_product",
     kind: "claim",
     title: { text: "実数の有限積の包含は包含の有限積に等しい" },

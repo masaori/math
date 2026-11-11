@@ -74,10 +74,26 @@ theorem sq_I_absGamma2 :
     (Complex.I * ((absGamma2 K θ : ℝ) : ℂ)) ^ 2 = gamma2 K θ * gamma2 K (-θ) :=
   NecSuf.sq_I_mul_absOf_eq_mul (gamma2_neg_eq_neg_conj K θ)
 
-/-- **人手証明 (2) の狭義部分**: `γ_2(θ~_μ) ≠ 0` より `|γ_2(θ~_μ)| > 0`。 -/
+/-- **人手証明 (4) の `|γ_2(θ)| > 0`**（人手はこれを (2) の狭義部分の前置きで示す）: `γ_2(θ) ≠ 0_ℂ` なら `|γ_2(θ)| > 0`。
+人手の 3 段に 1 段ずつ対応させる。
+1. `|γ_2(θ)| ∈ ℝ_{≥0}`（`def_abs_arg`）: `absGamma2_nonneg`。
+2. `γ_2(θ) ≠ 0_ℂ` と `abs_basic_properties` (3)（`|z| = 0 ⟺ z = 0_ℂ`）より `|γ_2(θ)| ≠ 0`。Lean の `|·|` は `√(normSq ·)` なので、
+   (3) の「`|z| = 0` なら `z = 0_ℂ`」は `Real.sqrt_eq_zero'`（`√t = 0 ⟺ t ≤ 0`）・`Complex.normSq_nonneg`・`Complex.normSq_eq_zero` で読む。
+3. `≥ 0` かつ `≠ 0` なので `> 0`（ℝ の順序）。
+必要十分版 `NecSuf.absOf_pos`（`NecSuf/NegConjPair.lean`）も同じ 3 段である。 -/
+theorem absGamma2_pos_of_ne_zero (hga : gamma2 K θ ≠ 0) : 0 < absGamma2 K θ := by
+  have h0 : 0 ≤ absGamma2 K θ := absGamma2_nonneg K θ        -- 段 1: `def_abs_arg`
+  have hne : absGamma2 K θ ≠ 0 := by                          -- 段 2: `abs_basic_properties` (3)
+    intro h
+    apply hga
+    have hle : Complex.normSq (gamma2 K θ) ≤ 0 := Real.sqrt_eq_zero'.1 h
+    exact Complex.normSq_eq_zero.1 (le_antisymm hle (Complex.normSq_nonneg _))
+  exact lt_of_le_of_ne h0 (Ne.symm hne)                       -- 段 3: ℝ の順序
+
+/-- **人手証明 (4) の `|γ_2(θ~_μ)| > 0`**: `gamma_2_theta_tilde_nonzero` の `γ_2(θ~_μ) ≠ 0` に `absGamma2_pos_of_ne_zero` を当てる。 -/
 theorem absGamma2_thetaTilde_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     0 < absGamma2 P.const (thetaTilde M μ) :=
-  NecSuf.absOf_pos (gamma2_thetaTilde_ne_zero P hM μ)
+  absGamma2_pos_of_ne_zero P.const (thetaTilde M μ) (gamma2_thetaTilde_ne_zero P hM μ)
 
 /-- **人手証明 (2) の狭義部分の第一の鎖**: `0 < |γ_2(θ~_μ)|^2`（人手の 3 行の鎖と 1 対 1 の `calc`）。 -/
 theorem absGamma2_thetaTilde_sq_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
