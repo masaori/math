@@ -78768,6 +78768,18 @@ c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
                     labels: ["claim_edge_distinct_smoothing_crossing_parity"],
                     habitat: "N",
                     verification: ["sagemath/check/edge-distinct-smoothing-crossing-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.edge_distinct_smoothing_crossing_parity",
+                      "Ising2DLambda.NecSuf.KacWard.edge_distinct_smoothing_crossing_parity_necSuf",
+                      "Ising2DLambda.KacWard.edge_distinct_smoothing_crossing_parity_from_necSuf",
+                      "Ising2DLambda.KacWard.crossing_vertexAxisStraightVisitCount_eq_one",
+                      "Ising2DLambda.NecSuf.KacWard.crossing_straightVisitCount_eq_one",
+                      "Ising2DLambda.KacWard.crossing_vertexAxisStraightVisitCount_eq_one_from_necSuf",
+                      "Ising2DLambda.KacWard.closedWalk_smoothing_crossing_number_update",
+                      "Ising2DLambda.KacWard.splitMutualCrossingNumber_eq_closedWalkMutualCrossingNumber",
+                      "Ising2DLambda.NecSuf.KacWard.splitMutualCrossingNumber_eq_closedWalkMutual_necSuf",
+                      "Ising2DLambda.KacWard.splitMutualCrossingNumber_eq_closedWalkMutualCrossingNumber_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なる閉じた非後退辺列 ",
