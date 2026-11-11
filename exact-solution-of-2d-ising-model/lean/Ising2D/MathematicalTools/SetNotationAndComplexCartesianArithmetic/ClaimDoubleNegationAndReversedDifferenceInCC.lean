@@ -6,6 +6,9 @@
 - `calculation_formulae_claim_reversed_difference_is_negation_of_difference_in_cc`
   （ラベル **`reversed_difference_is_negation_of_difference_in_cc`**）
 
+人手では `anticommutator_of_check_psi` の準備 4 の (iii) も `double_negation_in_cc` を引くが、
+Lean の `ClaimAnticommutatorCheckPsi.lean` は準備 4 を 1 段ずつは形式化していないので、そこに対応する参照は無い。
+
 ## 人手証明との対応
 
 `complex_double_negation`（人手 `double_negation_in_cc` の 5 行）:

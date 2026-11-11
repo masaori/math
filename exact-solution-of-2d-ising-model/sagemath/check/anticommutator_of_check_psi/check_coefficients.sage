@@ -87,25 +87,23 @@ rep.check(x * x + y**2 == x**2 + y**2, "r_ν の鎖 square_of_real_number_is_pro
 
 
 # ---------------- 準備 4（ℂ の符号と逆元の規則）----------------
-# 一般の点では各行が有理関数として同じ元になる（体の公理だけの変形）。具体値で、ℂ を本文どおり実数の対で持って
-# (i) の成分の行を、L の元 z, w の組で (ii)〜(ix) の各行を確かめる。
-m1 = (QQ(-1), QQ(0))
-cc_mul = lambda p, q: (p[0] * q[0] - p[1] * q[1], p[0] * q[1] + p[1] * q[0])   # definition_of_cc の積
-rep.check(cc_mul(m1, m1) == ((-1) * (-1) - 0 * 0, (-1) * 0 + 0 * (-1)) == (QQ(1), QQ(0)), "準備 4 (i) の成分の行")
+# 一般の点では各行が有理関数として同じ元になる（体の公理だけの変形）。具体値で、L の元 z, w の組で (i)〜(viii) の各行を確かめる。
+# (i)〜(iii) は主張（complex_times_negation_is_negation_of_product_in_cc・negation_times_complex_is_negation_of_product_in_cc・
+# double_negation_in_cc）を引く 1 等号で、その鎖はそれぞれのラベルのフォルダの検算が確かめる。
 L8 = CyclotomicField(8, 'z'); z8 = L8.gen()
 samples = [L8(3), L8(-2) + z8, z8**3 - 5 * z8, L8(1) / 7 + z8**2]
 mo = L8(-1)
 for zz in samples:
     for ww in samples:
-        ok = (zz * (mo * ww) == mo * (zz * ww)                                         # (ii)
-              and (mo * zz) * ww == mo * (zz * ww)                                     # (iii)
-              and mo * (mo * zz) == (mo * mo) * zz == zz                               # (iv)
-              and (mo * zz) * (mo * ww) == mo * (zz * (mo * ww)) == mo * (mo * (zz * ww)) == zz * ww   # (v)
-              and (zz * ww) * (zz**-1 * ww**-1) == (zz * zz**-1) * (ww * ww**-1) == 1   # (vi)
-              and (mo * zz) * (mo * zz**-1) == zz * zz**-1 == 1                        # (vii)
-              and zz * ww != 0 and (zz * ww)**-1 == zz**-1 * ww**-1                    # (viii)
-              and mo * zz != 0 and (mo * zz)**-1 == mo * zz**-1)                       # (ix)
-        rep.check(ok, f"準備 4 (ii)〜(ix) z={zz} w={ww}", quiet=True)
+        ok = (zz * (mo * ww) == mo * (zz * ww)                                         # (i)
+              and (mo * zz) * ww == mo * (zz * ww)                                     # (ii)
+              and mo * (mo * zz) == zz                                                 # (iii)
+              and (mo * zz) * (mo * ww) == mo * (zz * (mo * ww)) == mo * (mo * (zz * ww)) == zz * ww   # (iv)
+              and (zz * ww) * (zz**-1 * ww**-1) == (zz * zz**-1) * (ww * ww**-1) == 1   # (v)
+              and (mo * zz) * (mo * zz**-1) == zz * zz**-1 == 1                        # (vi)
+              and zz * ww != 0 and (zz * ww)**-1 == zz**-1 * ww**-1                    # (vii)
+              and mo * zz != 0 and (mo * zz)**-1 == mo * zz**-1)                       # (viii)
+        rep.check(ok, f"準備 4 (i)〜(viii) z={zz} w={ww}", quiet=True)
 
 # ---------------- 具体値 ----------------
 for M in range(2, 7):

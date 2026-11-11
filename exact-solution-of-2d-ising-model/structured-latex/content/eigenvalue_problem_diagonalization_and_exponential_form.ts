@@ -7094,45 +7094,24 @@ h := 1_{\mathbb C}\,t^{-1}`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-&\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})
-= (-1_{\mathbb R}, 0_{\mathbb R})(-1_{\mathbb R}, 0_{\mathbb R})
-&&\bigl(\because\ -1_{\mathbb C} = (-1_{\mathbb R})_{\mathbb C}\ (\blkref{inclusion_rr_to_cc})\bigr)\\
-&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
-= \bigl((-1_{\mathbb R})(-1_{\mathbb R}) - 0_{\mathbb R}0_{\mathbb R},\ (-1_{\mathbb R})0_{\mathbb R} + 0_{\mathbb R}(-1_{\mathbb R})\bigr)
-&&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
-&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
-= (1_{\mathbb R}, 0_{\mathbb R})
-&&(\because\ \mathbb{R}\text{ の四則})\\
-&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
-= 1_{\mathbb C}
-&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr),\\[4pt]
-&\text{(ii)}\quad z(-w)
+&\text{(i)}\quad z(-w)
 = -(zw)
 &&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\bigr),\\[4pt]
-&\text{(iii)}\quad (-z)w
+&\text{(ii)}\quad (-z)w
 = -(zw)
 &&\bigl(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\bigr),\\[4pt]
-&\text{(iv)}\quad -(-z)
-= (-1_{\mathbb C})\bigl((-1_{\mathbb C})z\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\text{ を 2 箇所へ同時適用}\bigr)\\
-&\phantom{\text{(iv)}\quad -(-z)}
-= \bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)z
-&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
-&\phantom{\text{(iv)}\quad -(-z)}
-= 1_{\mathbb C}\,z
-&&(\because\ \text{(i)})\\
-&\phantom{\text{(iv)}\quad -(-z)}
+&\text{(iii)}\quad -(-z)
 = z
-&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
-&\text{(v)}\quad (-z)(-w)
+&&\bigl(\because\ \blkref{double_negation_in_cc}\bigr),\\[4pt]
+&\text{(iv)}\quad (-z)(-w)
 = -\bigl(z(-w)\bigr)
-&&(\because\ \text{(iii)})\\
-&\phantom{\text{(v)}\quad (-z)(-w)}
-= -\bigl(-(zw)\bigr)
 &&(\because\ \text{(ii)})\\
-&\phantom{\text{(v)}\quad (-z)(-w)}
+&\phantom{\text{(iv)}\quad (-z)(-w)}
+= -\bigl(-(zw)\bigr)
+&&(\because\ \text{(i)})\\
+&\phantom{\text{(iv)}\quad (-z)(-w)}
 = zw
-&&(\because\ \text{(iv)})
+&&(\because\ \text{(iii)})
 \end{aligned}`,
       ),
       paragraph([
@@ -7146,19 +7125,19 @@ h := 1_{\mathbb C}\,t^{-1}`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-&\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)
+&\text{(v)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)
 = \bigl(zz^{-1}\bigr)\bigl(ww^{-1}\bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
-&\phantom{\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
+&\phantom{\text{(v)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
 = 1_{\mathbb C}1_{\mathbb C}
 &&\bigl(\because\ \text{逆元を 2 箇所へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
-&\phantom{\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
+&\phantom{\text{(v)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
 = 1_{\mathbb C}
 &&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
-&\text{(vii)}\quad (-z)\bigl(-(z^{-1})\bigr)
+&\text{(vi)}\quad (-z)\bigl(-(z^{-1})\bigr)
 = zz^{-1}
-&&(\because\ \text{(v)})\\
-&\phantom{\text{(vii)}\quad (-z)\bigl(-(z^{-1})\bigr)}
+&&(\because\ \text{(iv)})\\
+&\phantom{\text{(vi)}\quad (-z)\bigl(-(z^{-1})\bigr)}
 = 1_{\mathbb C}
 &&\bigl(\because\ \text{逆元。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`,
@@ -7196,11 +7175,11 @@ h := 1_{\mathbb C}\,t^{-1}`,
         ref("complex_numbers_form_a_field"),
         "）より ",
         math(String.raw`x^{-1} = y`),
-        " である。これを (vi)・(vii) に当てて、",
+        " である。これを (v)・(vi) に当てて、",
       ]),
       displayMath(
-        String.raw`\text{(viii)}\quad zw \neq 0_{\mathbb C},\quad (zw)^{-1} = z^{-1}w^{-1},\qquad
-\text{(ix)}\quad -z \neq 0_{\mathbb C},\quad (-z)^{-1} = -(z^{-1})`,
+        String.raw`\text{(vii)}\quad zw \neq 0_{\mathbb C},\quad (zw)^{-1} = z^{-1}w^{-1},\qquad
+\text{(viii)}\quad -z \neq 0_{\mathbb C},\quad (-z)^{-1} = -(z^{-1})`,
       ),
       paragraph([
         "を得る。",
@@ -7332,7 +7311,7 @@ d_\mu d_\nu
 &= (t\,t)\bigl(-(\rho\rho)\bigr)
 &&(\because\ \text{上の }b_\mu b_\nu = -(\rho\rho))\\
 &= -\bigl((t\,t)(\rho\rho)\bigr)
-&&(\because\ \text{準備 4 (ii)})
+&&(\because\ \text{準備 4 (i)})
 \end{aligned}`,
       ),
       paragraph([
@@ -7344,7 +7323,7 @@ d_\mu d_\nu
         ref("inclusion_rr_to_cc"),
         "）、また ",
         math(String.raw`t \neq 0_{\mathbb C}`),
-        " なので、準備 4 (viii) により ",
+        " なので、準備 4 (vii) により ",
         math(String.raw`t\,t`),
         "、",
         math(String.raw`\rho\rho`),
@@ -7352,7 +7331,7 @@ d_\mu d_\nu
         math(String.raw`(t\,t)(\rho\rho)`),
         " は ",
         math(String.raw`0_{\mathbb C}`),
-        " でなく、準備 4 (ix) により ",
+        " でなく、準備 4 (viii) により ",
         math(String.raw`-\bigl((t\,t)(\rho\rho)\bigr) \neq 0_{\mathbb C}`),
         " である。",
         math(String.raw`d_\mu^{-1}d_\nu^{-1}`),
@@ -7362,13 +7341,13 @@ d_\mu d_\nu
         String.raw`\begin{aligned}
 d_\mu^{-1}d_\nu^{-1}
 &= (d_\mu d_\nu)^{-1}
-&&\bigl(\because\ \text{準備 4 (viii) を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \text{準備 4 (vii) を右辺から左辺へ}\bigr)\\
 &= \Bigl(-\bigl((t\,t)(\rho\rho)\bigr)\Bigr)^{-1}
 &&(\because\ \text{上の }d_\mu d_\nu = -((tt)(\rho\rho)))\\
 &= -\Bigl(\bigl((t\,t)(\rho\rho)\bigr)^{-1}\Bigr)
-&&\bigl(\because\ \text{準備 4 (ix)}\bigr)\\
+&&\bigl(\because\ \text{準備 4 (viii)}\bigr)\\
 &= -\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)
-&&\bigl(\because\ \text{準備 4 (viii)}\bigr)
+&&\bigl(\because\ \text{準備 4 (vii)}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -7382,11 +7361,11 @@ u^{-}_\mu u^{-}_\nu
 &= \bigl((-\rho)(-\rho)\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= (\rho\rho)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
-&&(\because\ \text{準備 4 (v)})\\
+&&(\because\ \text{準備 4 (iv)})\\
 &= (\rho\rho)\Bigl(-\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
 &&(\because\ \text{上の }d_\mu^{-1}d_\nu^{-1}\text{ の鎖})\\
 &= -\Bigl((\rho\rho)\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
-&&(\because\ \text{準備 4 (ii)})\\
+&&(\because\ \text{準備 4 (i)})\\
 &= -\Bigl((t\,t)^{-1}\bigl((\rho\rho)(\rho\rho)^{-1}\bigr)\Bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= -\bigl((t\,t)^{-1}1_{\mathbb C}\bigr)
@@ -7401,7 +7380,7 @@ u^{+}_\mu u^{+}_\nu
 &= (\rho\rho)\Bigl(-\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
 &&(\because\ \text{上の }d_\mu^{-1}d_\nu^{-1}\text{ の鎖})\\
 &= -\Bigl((\rho\rho)\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
-&&(\because\ \text{準備 4 (ii)})\\
+&&(\because\ \text{準備 4 (i)})\\
 &= -\Bigl((t\,t)^{-1}\bigl((\rho\rho)(\rho\rho)^{-1}\bigr)\Bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= -\bigl((t\,t)^{-1}1_{\mathbb C}\bigr)
@@ -7414,20 +7393,20 @@ u^{-}_\mu u^{+}_\nu
 &= \bigl((-\rho)\rho\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl(-(\rho\rho)\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
-&&(\because\ \text{準備 4 (iii)})\\
+&&(\because\ \text{準備 4 (ii)})\\
 &= -\bigl((\rho\rho)(d_\mu^{-1}d_\nu^{-1})\bigr)
-&&(\because\ \text{準備 4 (iii)})\\
+&&(\because\ \text{準備 4 (ii)})\\
 &= -\Bigl(-\bigl((t\,t)^{-1}\bigr)\Bigr)
 &&\bigl(\because\ u^{+}_\mu u^{+}_\nu\text{ の鎖の第 2 行から最後の行までの等号 }(\rho\rho)(d_\mu^{-1}d_\nu^{-1}) = -((tt)^{-1})\bigr)\\
 &= (t\,t)^{-1}
-&&(\because\ \text{準備 4 (iv)}),\\[4pt]
+&&(\because\ \text{準備 4 (iii)}),\\[4pt]
 h\,h
 &= \bigl(1_{\mathbb C}t^{-1}\bigr)\bigl(1_{\mathbb C}t^{-1}\bigr)
 &&(\because\ h\text{ の定義})\\
 &= t^{-1}t^{-1}
 &&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元を 2 箇所へ同時適用}\bigr)\\
 &= (t\,t)^{-1}
-&&\bigl(\because\ \text{準備 4 (viii) を右辺から左辺へ}\bigr)
+&&\bigl(\because\ \text{準備 4 (vii) を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -7603,6 +7582,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明）: 準備 4 の -(-z) = z をその場の 4 行の鎖（multiply_by_minus_one・積の結合律・(−1_C)(−1_C) = 1_C・積の単位元）で示していたのを、主張 double_negation_in_cc の参照 1 行にした。(−1_C)(−1_C) = 1_C を示していた旧 (i) はこの鎖からしか引かれていなかったので消し、旧 (ii)〜(ix) を (i)〜(viii) に繰り上げた（前の記録の (ii)・(iii) はいまの (i)・(ii)）。値と主張は不変。",
         "2026-11-11（Lean の通しの証明）: 準備 4 の (ii) z(−w) = −(zw)・(iii) (−z)w = −(zw) をその場の 3 行の鎖で示していた（(ii) の 2 行目は積の結合律と可換律を 1 行で使っていた）のを、主張 complex_times_negation_is_negation_of_product_in_cc・negation_times_complex_is_negation_of_product_in_cc の参照にした。値と主張は不変。",
         "2026-11-11（Lean の通しの証明）: 前置きで各自に置いていた商 z/w := zw^{-1} を、def_complex_quotient の参照に替えた。",
         "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +

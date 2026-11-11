@@ -64,11 +64,10 @@ PASS r_ν の鎖 definition_of_cc の積の行（一般の点）
 PASS r_ν の鎖 square_of_real_number_is_product (r → -x) の行（一般の点）
 PASS r_ν の鎖 (-a)(-b) = ab の行（一般の点）
 PASS r_ν の鎖 square_of_real_number_is_product (r → x) の行（一般の点）
-PASS 準備 4 (i) の成分の行
 M=2 済み
 M=3 済み
 M=4 済み
 M=5 済み
 M=6 済み
--- anticommutator_of_check_psi: 準備 4・準備 5 の係数の鎖: 1674/1674 PASS
+-- anticommutator_of_check_psi: 準備 4・準備 5 の係数の鎖: 1673/1673 PASS
 RESULT: PASS

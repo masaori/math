@@ -2983,7 +2983,7 @@ z(-w)
     conversion: {
       status: "added",
       notes: [
-        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_times_adjugate_two_by_two の証明の準備 (a) と、anticommutator_of_check_psi の証明の準備 4 (ii) が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/complex_times_negation_is_negation_of_product_in_cc/。",
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_times_adjugate_two_by_two の証明の準備 (a) と、anticommutator_of_check_psi の証明の準備 4 (ii)（同じ日の繰り上げで今の (i)）が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/complex_times_negation_is_negation_of_product_in_cc/。",
       ],
     },
   },
@@ -3020,7 +3020,7 @@ z(-w)
     conversion: {
       status: "added",
       notes: [
-        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。adjugate_times_matrix_two_by_two の証明の準備 (b) と、anticommutator_of_check_psi の証明の準備 4 (iii) が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/negation_times_complex_is_negation_of_product_in_cc/。",
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。adjugate_times_matrix_two_by_two の証明の準備 (b) と、anticommutator_of_check_psi の証明の準備 4 (iii)（同じ日の繰り上げで今の (ii)）が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/negation_times_complex_is_negation_of_product_in_cc/。",
       ],
     },
   },

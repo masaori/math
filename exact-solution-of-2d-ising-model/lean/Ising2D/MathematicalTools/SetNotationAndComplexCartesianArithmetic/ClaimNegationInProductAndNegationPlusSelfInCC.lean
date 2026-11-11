@@ -9,7 +9,7 @@
 - `calculation_formulae_claim_negation_plus_self_is_zero_in_cc`（ラベル **`negation_plus_self_is_zero_in_cc`**）
 
 Lean でこれらを引くのは `ClaimTwoSidedInverseOfTwoByTwo.lean` の成分の鎖（人手 `matrix_times_adjugate_two_by_two`・
-`adjugate_times_matrix_two_by_two`）である。人手では `anticommutator_of_check_psi` の準備 4 の (ii)・(iii) も前の 2 つを引くが、
+`adjugate_times_matrix_two_by_two`）である。人手では `anticommutator_of_check_psi` の準備 4 の (i)・(ii) も前の 2 つを引くが、
 Lean の `ClaimAnticommutatorCheckPsi.lean` は準備 4 を 1 段ずつは形式化していないので、そこに対応する参照は無い。
 
 ## 人手証明との対応
