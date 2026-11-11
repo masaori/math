@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_annihilation_operator_matrices_anticommute",
+  "claim_basis_of_direct_sum_of_two_vector_spaces",
   "claim_binary_numbering_is_numbering_of_power_set",
   "claim_complex_numbers_as_vector_space_is_complex_vector_space",
   "claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition",
