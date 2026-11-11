@@ -70019,7 +70019,7 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
 V_S&=|F_S|+1
 &&\bigl(\because\ \blkref{claim_finite_tree_edge_count}\bigr)\\
 &\le E_S+1
-&&\bigl(\because\ F_S\subseteq\mathcal E_{\square}(S)\bigr)
+&&\bigl(\because\ F_S\subseteq\mathcal E_{\square}(S)\text{ と有限集合の個数の単調性}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。指数の減算は切り捨てを含まない。",
@@ -70214,7 +70214,10 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.cellVertexIncidence_sum_by_class",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_vertexIncidence_by_class",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_iff_incidence_one_to_three",
+                      "Ising2DLambda.KacWard.cellBoundaryVertices_two_incident_edges",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_two_incident_edges",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_incidence_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_vertex_two_changes",
                       "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.edgeIncidence_sum_partition",
                       "Ising2DLambda.NecSuf.KacWard.finiteWeightedSum_fourClasses",
@@ -70224,6 +70227,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                     verification: [
                       "sagemath/check/vertex-simple-cycle-turning",
                       "sagemath/check/lift-point-distinct-cycle-turning",
+                      "sagemath/check/no-diagonal-only-contact",
                     ],
                     statement: [
                       paragraph([

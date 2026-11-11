@@ -60,4 +60,27 @@ theorem cellBoundaryVertices_iff_incidence_one_to_three
     vertical_boundary_iff, vertical_boundary_iff]
   exact (vertexCellIncidenceCount_boundary_criterion cells r c).symm
 
+/-- At a boundary vertex with no diagonal pair, exactly two of the four
+incident grid edges lie in the cell boundary. -/
+theorem cellBoundaryVertices_two_incident_edges
+    (cells : Finset GridCell) (r c : ℤ)
+    (hv : (r, c) ∈ cellBoundaryVertices cells)
+    (hdiag₁ : ¬ ((r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells ∧
+      (r, c) ∈ cells ∧ (r, c - 1) ∉ cells))
+    (hdiag₂ : ¬ ((r - 1, c - 1) ∉ cells ∧ (r - 1, c) ∈ cells ∧
+      (r, c) ∉ cells ∧ (r, c - 1) ∈ cells)) :
+    (if (false, (r, c)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (false, (r, c - 1)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (true, (r, c)) ∈ planeCellBoundary cells then 1 else 0) +
+      (if (true, (r - 1, c)) ∈ planeCellBoundary cells then 1 else 0) = 2 := by
+  have hcount := (cellBoundaryVertices_iff_incidence_one_to_three cells r c).mp hv
+  rw [vertexCellIncidenceCount_quadrants] at hcount
+  simp only [planeCellBoundary, Finset.mem_filter, horizontalEdge_mem_cellEdges_iff,
+    verticalEdge_mem_cellEdges_iff, Bool.false_eq_true, ↓reduceIte]
+  by_cases h₀ : (r - 1, c - 1) ∈ cells <;>
+    by_cases h₁ : (r - 1, c) ∈ cells <;>
+    by_cases h₂ : (r, c) ∈ cells <;>
+    by_cases h₃ : (r, c - 1) ∈ cells <;>
+    simp_all
+
 end Ising2DLambda.KacWard

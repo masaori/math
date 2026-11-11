@@ -1,4 +1,4 @@
-# 対象ラベル: claim_boundary_vertex_diagonal_contact_excluded
+# 対象ラベル: claim_boundary_vertex_diagonal_contact_excluded, claim_plane_simple_polygon_cyclic_turning
 #
 # 一周期の持ち上げ点が二つずつ相異なる零巻き付きの閉じた非後退単位格子歩について、
 # 任意の格子点に接する四セルのうち
@@ -72,6 +72,12 @@ for length in range(4, max_length + 1):
                 interior_flags = tuple(is_interior(cell) for cell in surrounding)
                 assert interior_flags != (True, False, True, False), (points, a, b)
                 assert interior_flags != (False, True, False, True), (points, a, b)
+                if 0 < sum(interior_flags) < 4:
+                    boundary_edges = sum(
+                        interior_flags[index] != interior_flags[(index + 1) % 4]
+                        for index in range(4)
+                    )
+                    assert boundary_edges == 2, (points, a, b, interior_flags)
                 checked_vertices += 1
 
         checked_walks += 1
@@ -92,7 +98,7 @@ for size in torus_sizes:
 
 print(
     f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
-    f"lattice vertices={checked_vertices}, no diagonal-only interior pair, length<=%d, " % max_length
+    f"lattice vertices={checked_vertices}, no diagonal-only interior pair, two incident boundary edges, length<=%d, " % max_length
     + "walks with n_ct>0 after projection: "
     + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)
 )
