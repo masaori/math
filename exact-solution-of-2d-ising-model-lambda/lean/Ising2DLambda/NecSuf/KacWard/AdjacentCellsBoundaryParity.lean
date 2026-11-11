@@ -34,4 +34,14 @@ theorem boundary_three_part_parity_necSuf
   rcases heven with ⟨q, hq⟩
   omega
 
+/-- An odd shared-edge count makes exactly one adjacent cell parity odd. -/
+theorem odd_shared_edge_separates_cells_necSuf
+    (lower upper shared : ℕ)
+    (hparity : (lower + upper) % 2 = shared % 2)
+    (hodd : Odd shared) :
+    (Odd lower ∧ ¬ Odd upper) ∨ (¬ Odd lower ∧ Odd upper) := by
+  simp only [Nat.odd_iff]
+  have hshared := Nat.odd_iff.mp hodd
+  omega
+
 end Ising2DLambda.NecSuf.KacWard

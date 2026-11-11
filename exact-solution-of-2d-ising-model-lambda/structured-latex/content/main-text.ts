@@ -67348,7 +67348,10 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
                     verification: ["sagemath/check/adjacent-cells-boundary-parity"],
                     lean: [
                       "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity",
+                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary",
+                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary_ofWalk",
                       "Ising2DLambda.NecSuf.KacWard.boundary_three_part_parity_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.odd_shared_edge_separates_cells_necSuf",
                       "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity_from_necSuf",
                     ],
                     statement: [
@@ -67392,10 +67395,10 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
                       displayMath(String.raw`\begin{aligned}
 N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)+H_{r+1,c}(\gamma)
 &\equiv0\pmod2
-&&\bigl(\because\ \text{上の端点数の偶奇と三種類への互いに素な分割}\bigr),\\
+&&\bigl(\because\ \text{上の端点数の偶奇と三種類への互いに素な分割}\bigr)\\
 N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
 &\equiv H_{r+1,c}(\gamma)\pmod2
-&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr)
 \end{aligned}`),
                       paragraph([
                         "後半の同値は最後の合同式を読むだけである。使ったのは有限な辺列の端点の数え上げと奇偶だけであり、",
