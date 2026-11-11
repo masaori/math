@@ -860,13 +860,82 @@ u
         "場合 2: ",
         math(String.raw`\|B\|>0`),
         " のとき。",
-        math(String.raw`\displaystyle t:=\frac{\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}\in\mathbb{C}`),
-        " とおく（",
-        math(String.raw`\|B\|^2>0`),
-        " なので ",
-        ref("complex_numbers_form_a_field"),
-        " により逆元が存在する）。(2)(1) を展開すると",
+        math(String.raw`\beta:=\|B\|^2\in\mathbb{R}`),
+        " とおき、",
+        math(String.raw`\beta_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記とする。",
+        math(String.raw`\|B\|>0`),
+        " より ",
+        math(String.raw`\beta=\|B\|\,\|B\|>0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正）なので ",
+        math(String.raw`\beta\neq 0`),
+        " であり、",
+        ref("real_inclusion_preserves_inverse"),
+        "（",
+        math(String.raw`r \to \beta`),
+        "）により ",
+        math(String.raw`\beta_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        " かつ ",
+        math(String.raw`\bigl(\beta^{-1}\bigr)_{\mathbb{C}}=\bigl(\beta_{\mathbb{C}}\bigr)^{-1}`),
+        " である。",
+        ref("def_complex_quotient"),
+        "（",
+        math(String.raw`z \to \overline{u},\ w \to \beta_{\mathbb{C}}`),
+        "）により",
       ]),
+      displayMath(String.raw`t:=\frac{\overline{u}}{\beta_{\mathbb{C}}}=\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\in\mathbb{C}`),
+      paragraph([
+        "とおく。",
+        math(String.raw`q:=|u|^2/\|B\|^2\in\mathbb{R}`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の商。",
+        math(String.raw`\|B\|^2=\beta\neq 0`),
+        "）とおく。",
+      ]),
+      paragraph([
+        "準備（",
+        math(String.raw`\overline{t}=u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{t}
+&= \overline{\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}}
+&&(\because\ t\ \text{の定義})\\
+&= \overline{\overline{u}}\;\overline{\bigl(\beta_{\mathbb{C}}\bigr)^{-1}}
+&&\bigl(\because\ \blkref{complex_conjugate_of_product}\ (z \to \overline{u},\ w \to (\beta_{\mathbb{C}})^{-1})\bigr)\\
+&= u\,\overline{\bigl(\beta_{\mathbb{C}}\bigr)^{-1}}
+&&(\because\ \text{Step 0 の}\ \overline{\overline{z}}=z\ (z \to u))\\
+&= u\,\bigl(\overline{\beta_{\mathbb{C}}}\bigr)^{-1}
+&&(\because\ \blkref{complex_conjugate_of_inverse}\ (w \to \beta_{\mathbb{C}}))\\
+&= u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ (r \to \beta))
+\end{aligned}`),
+      paragraph([
+        "準備（",
+        math(String.raw`(\overline{u}\,u)\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}=q_{\mathbb{C}}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\overline{u}\,u)\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&= \bigl(|u|^2\bigr)_{\mathbb{C}}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_conjugate_times_self}\ (z \to u))\\
+&= \bigl(|u|^2\bigr)_{\mathbb{C}}\,\bigl(\beta^{-1}\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_inverse}\ (r \to \beta)\ \text{を右辺から左辺へ})\\
+&= \bigl(|u|^2\,\beta^{-1}\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to |u|^2,\ b \to \beta^{-1}))\\
+&= \bigl(|u|^2\,(\|B\|^2)^{-1}\bigr)_{\mathbb{C}}
+&&(\because\ \beta\ \text{の定義})\\
+&= \Bigl(\frac{|u|^2}{\|B\|^2}\Bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の商}\ x/y = x\,y^{-1}\ \text{を右辺から左辺へ})\\
+&= q_{\mathbb{C}}
+&&(\because\ q\ \text{の定義})
+\end{aligned}`),
+      paragraph(["(2)(1) を展開すると"]),
       displayMath(
         String.raw`\begin{aligned}
 0 &\le \left\|A-tB\right\|^2 \\
@@ -881,48 +950,97 @@ u
 \end{aligned}`,
       ),
       paragraph(["三つの積の項を順に計算すると"]),
-      displayMath(
-        String.raw`\begin{aligned}
--t\langle A,B\rangle
-&= -\frac{\overline{u}\,u}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because t \text{ の定義と、} u \text{ の定義 } \langle A,B\rangle=u \text{ の代入}) \\
-&= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}}) \\
-&= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと}) \\
--\overline{t}\langle B,A\rangle
-&= -\frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \text{Step 0 と } \overline{\left(\|B\|^2\right)_{\mathbb{C}}}=\left(\|B\|^2\right)_{\mathbb{C}} \text{ による } \overline{t}=u/\left(\|B\|^2\right)_{\mathbb{C}} \text{ と、(1) の } \langle B,A\rangle=\overline{u} \text{ の代入}) \\
-&= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}} \text{ と } \mathbb{C} \text{ の乗法の可換性}) \\
-&= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと}) \\
+      displayMath(String.raw`\begin{aligned}
+t\langle A,B\rangle
+&= t\,u
+&&(\because\ u\ \text{の定義})\\
+&= \Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\,u
+&&(\because\ t\ \text{の定義})\\
+&= \overline{u}\,\Bigl(\bigl(\beta_{\mathbb{C}}\bigr)^{-1}u\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \overline{u}\,\Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (\overline{u}\,u)\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= q_{\mathbb{C}}
+&&(\because\ \text{準備の}\ (\overline{u}\,u)\,(\beta_{\mathbb{C}})^{-1}=q_{\mathbb{C}})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\overline{t}\langle B,A\rangle
+&= \overline{t}\;\overline{\langle A,B\rangle}
+&&(\because\ \text{(1)})\\
+&= \overline{t}\;\overline{u}
+&&(\because\ u\ \text{の定義})\\
+&= \Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\,\overline{u}
+&&(\because\ \text{準備の}\ \overline{t}=u\,(\beta_{\mathbb{C}})^{-1})\\
+&= u\,\Bigl(\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\overline{u}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= u\,\Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (u\,\overline{u})\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (\overline{u}\,u)\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= q_{\mathbb{C}}
+&&(\because\ \text{準備の}\ (\overline{u}\,u)\,(\beta_{\mathbb{C}})^{-1}=q_{\mathbb{C}})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
 \overline{t}\,t\,\langle B,B\rangle
-&= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}\left(\|B\|^2\right)_{\mathbb{C}}}
-   \cdot\left(\|B\|^2\right)_{\mathbb{C}}
-   \quad (\because \overline{t},\ t \text{ の定義と、(3) の } \langle B,B\rangle=\left(\|B\|^2\right)_{\mathbb{C}} \text{ の代入}) \\
-&= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \left(\|B\|^2\right)_{\mathbb{C}}\ne 0_{\mathbb{C}} \text{ による約分}) \\
-&= \frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}} \text{ と } \mathbb{C} \text{ の乗法の可換性}) \\
-&= \left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと})
-\end{aligned}`,
-      ),
+&= \bigl(\overline{t}\,t\bigr)\,\bigl(\|B\|^2\bigr)_{\mathbb{C}}
+&&(\because\ \text{(3)}\ (A \to B)\ \text{の}\ \langle B,B\rangle=(\|B\|^2)_{\mathbb{C}})\\
+&= \bigl(\overline{t}\,t\bigr)\,\beta_{\mathbb{C}}
+&&(\because\ \beta\ \text{の定義})\\
+&= \Bigl(\overline{t}\,\Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\Bigr)\,\beta_{\mathbb{C}}
+&&(\because\ t\ \text{の定義})\\
+&= \Bigl(\Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\Bigr)\,\beta_{\mathbb{C}}
+&&(\because\ \text{準備の}\ \overline{t}=u\,(\beta_{\mathbb{C}})^{-1})\\
+&= \Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\Bigl(\Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\,\beta_{\mathbb{C}}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\Bigl(\overline{u}\,\Bigl(\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\beta_{\mathbb{C}}\Bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\bigl(\overline{u}\,1_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (\beta_{\mathbb{C}} \in \mathbb{C}^{\times})\bigr)\\
+&= \Bigl(u\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)\,\overline{u}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= u\,\Bigl(\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\overline{u}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= u\,\Bigl(\overline{u}\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (u\,\overline{u})\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (\overline{u}\,u)\,\bigl(\beta_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= q_{\mathbb{C}}
+&&(\because\ \text{準備の}\ (\overline{u}\,u)\,(\beta_{\mathbb{C}})^{-1}=q_{\mathbb{C}})
+\end{aligned}`),
       paragraph(["となり、合わせて"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(\left\|A-tB\right\|^2\right)_{\mathbb{C}}
-&= \left(\|A\|^2\right)_{\mathbb{C}}
-   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   +\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \text{(3) の } \langle A,A\rangle=\left(\|A\|^2\right)_{\mathbb{C}} \text{ と直前の三つの計算を展開式へ代入}) \\
-&= \left(\|A\|^2\right)_{\mathbb{C}}
-   -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \mathbb{C} \text{ の加法の結合律と加法逆元}) \\
+&= \langle A,A\rangle-t\langle A,B\rangle-\overline{t}\langle B,A\rangle+\overline{t}\,t\,\langle B,B\rangle
+&&(\because\ \text{上の展開式})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}-t\langle A,B\rangle-\overline{t}\langle B,A\rangle+\overline{t}\,t\,\langle B,B\rangle
+&&(\because\ \text{(3) の}\ \langle A,A\rangle=\left(\|A\|^2\right)_{\mathbb{C}})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}-q_{\mathbb{C}}-\overline{t}\langle B,A\rangle+\overline{t}\,t\,\langle B,B\rangle
+&&(\because\ \text{直前の}\ t\langle A,B\rangle\ \text{の鎖})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}-q_{\mathbb{C}}-q_{\mathbb{C}}+\overline{t}\,t\,\langle B,B\rangle
+&&(\because\ \text{直前の}\ \overline{t}\langle B,A\rangle\ \text{の鎖})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}-q_{\mathbb{C}}-q_{\mathbb{C}}+q_{\mathbb{C}}
+&&(\because\ \text{直前の}\ \overline{t}\,t\,\langle B,B\rangle\ \text{の鎖})\\
+&= \Bigl(\Bigl(\left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+q_{\mathbb{C}}
+&&(\because\ \blkref{def_complex_difference}\ \text{を 2 か所へ})\\
+&= \Bigl(\left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+\Bigl(\bigl(-q_{\mathbb{C}}\bigr)+q_{\mathbb{C}}\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律})\\
+&= \Bigl(\left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+0_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元（}(\mathbb{C},+)\ \text{は可換群）})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元})\\
+&= \left(\|A\|^2\right)_{\mathbb{C}}-q_{\mathbb{C}}
+&&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= \left(\|A\|^2-q\right)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_difference}\ (y \to \|A\|^2,\ z \to q))\\
 &= \left(\|A\|^2-\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が減法を保つこと})
+&&(\because\ q\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1075,6 +1193,7 @@ u+\overline{u}
           "いた代入根拠（(1) の ⟨B,A⟩=ū、(3) の ⟨B,B⟩・⟨A,A⟩、Step 0 による t̄ の表示）を、" +
           "それぞれを使う式変形行の行末の (∵ …) へ移した。内容・式変形・根拠は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 5 と Step 6 で名前だけで根拠にしていた「ι_{ℝ→ℂ} の単射性」の 2 か所を、inclusion_rr_to_cc_is_injective への参照（a・b の当てはめ付き）に替えた。内容は変えていない。",
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の t := ū/(‖B‖²)_ℂ を β := ‖B‖² と def_complex_quotient で t = ū(β_ℂ)^{-1} と開き、β_ℂ ∈ ℂ^× と (β^{-1})_ℂ = (β_ℂ)^{-1} を新しい主張 real_inclusion_preserves_inverse から取った。三つの積の項の鎖の「約分」「ι_{ℝ→ℂ} が積と逆元を保つこと」「Step 0 による t̄ の表示」を、準備 t̄ = u(β_ℂ)^{-1}（complex_conjugate_of_product・complex_conjugate_of_inverse・complex_conjugate_of_real_inclusion）と準備 (ūu)(β_ℂ)^{-1} = q_ℂ（complex_conjugate_times_self・real_inclusion_preserves_product。q := |u|²/‖B‖²）と、積の結合律・可換律・逆元・単位元の 1 段ずつに開いた。三つの項の鎖は符号を付けない t⟨A,B⟩・t̄⟨B,A⟩・t̄t⟨B,B⟩ から始め、合わせる鎖は展開式の右辺から 1 行に 1 つずつ代入し、「ℂ の加法の結合律と加法逆元」を def_complex_difference と complex_numbers_form_a_field の結合律・加法逆元・単位元の行に、「ι_{ℝ→ℂ} が減法を保つこと」を real_inclusion_preserves_difference にした。主張と Step 5 の結論は変えていない。",
       ],
     },
   },

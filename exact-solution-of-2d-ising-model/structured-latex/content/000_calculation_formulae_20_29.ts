@@ -1482,6 +1482,94 @@ b
     },
   },
   {
+    id: "calc_formulae_claim_real_inclusion_preserves_inverse",
+    kind: "claim",
+    title: { tex: String.raw`\bigl(r^{-1}\bigr)_{\mathbb{C}} = \bigl(r_{\mathbb{C}}\bigr)^{-1}` },
+    labels: ["real_inclusion_preserves_inverse"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{R}`),
+        "、",
+        math(String.raw`r \neq 0`),
+        " とし、",
+        math(String.raw`r^{-1} \in \mathbb{R}`),
+        " を ",
+        math(String.raw`r`),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の逆数（",
+        math(String.raw`\mathbb{R}`),
+        " は体 ",
+        ref("set_and_algebra_notation"),
+        "）とする。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。このとき ",
+        math(String.raw`r_{\mathbb{C}} \in \mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり（したがって右辺の逆元は定まる）",
+      ]),
+      displayMath(String.raw`\bigl(r^{-1}\bigr)_{\mathbb{C}} = \bigl(r_{\mathbb{C}}\bigr)^{-1}`),
+      paragraph([
+        "が成り立つ。右辺の逆元は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備（",
+        math(String.raw`r_{\mathbb{C}} \in \mathbb{C}^{\times}`),
+        "）。",
+        ref("inclusion_rr_to_cc"),
+        " より ",
+        math(String.raw`r_{\mathbb{C}} = (r, 0)`),
+        " である。",
+        math(String.raw`(r, 0) = (0, 0)`),
+        " と仮定すると、",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb{R}^2`),
+        " の元の等号は成分ごとなので ",
+        math(String.raw`r = 0`),
+        " となり、",
+        math(String.raw`r \neq 0`),
+        " に反する。したがって ",
+        math(String.raw`r_{\mathbb{C}} \in \mathbb{C}^{\times} = \mathbb{C}\setminus\{(0,0)\}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の逆元 ",
+        math(String.raw`\bigl(r_{\mathbb{C}}\bigr)^{-1}`),
+        " が定まる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(r^{-1}\bigr)_{\mathbb{C}}
+&= \bigl(r^{-1}\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl(r^{-1}\bigr)_{\mathbb{C}}\Bigl(r_{\mathbb{C}}\,\bigl(r_{\mathbb{C}}\bigr)^{-1}\Bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (r_{\mathbb{C}} \in \mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\bigl(r^{-1}\bigr)_{\mathbb{C}}\,r_{\mathbb{C}}\Bigr)\bigl(r_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(r^{-1} r\bigr)_{\mathbb{C}}\,\bigl(r_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to r^{-1},\ b \to r))\\
+&= (1)_{\mathbb{C}}\,\bigl(r_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \mathbb{R}\ \text{で}\ r^{-1} r = 1\ (r \neq 0))\\
+&= 1_{\mathbb{C}}\,\bigl(r_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = (1)_{\mathbb{C}})\\
+&= \bigl(r_{\mathbb{C}}\bigr)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。frobenius_inner_product_axioms の Step 5 場合 2 が「ι_{ℝ→ℂ} が積と逆元を保つこと」を名前だけで根拠にしていたので、逆元の側を主張にした（積の側は real_inclusion_preserves_product）。real_inclusion_of_one_half_is_inverse_of_two と同じ鎖を一般の r ≠ 0 で書いた。Lean の具体版は Ising2D.real_inclusion_inv。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

@@ -548,6 +548,7 @@ export const ALL_LABELS = [
   "real_inclusion_preserves_difference",
   "real_inclusion_preserves_finite_product",
   "real_inclusion_preserves_finite_sum",
+  "real_inclusion_preserves_inverse",
   "real_inclusion_preserves_power",
   "real_inclusion_preserves_product",
   "real_inclusion_preserves_sum",
