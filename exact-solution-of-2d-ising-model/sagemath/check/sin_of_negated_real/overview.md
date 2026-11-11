@@ -12,7 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 鎖の六行 | `check_chain.sage` | 各行を書かれた式どおりに組み、隣り合う行が有理関数として等しく、最終行が `euler_formula_cos_sin` の `(sin θ)_C` の式の符号反転に等しい。否定の対照: `b − a ≠ a − b`、符号を落とした `(sin θ)_C` とは一致しない | **PASS** | 厳密 |
+| 鎖の十行 | `check_chain.sage` | 各行を書かれた式どおりに組み（5〜9 行目の商は `def_complex_quotient` どおり `x (2i)^{-1}` と組む）、隣り合う行が有理関数として等しく、最終行が `euler_formula_cos_sin` の `(sin θ)_C` の式の符号反転に等しい。否定の対照: `b − a ≠ a − b`、符号を落とした `(sin θ)_C` とは一致しない | **PASS** | 厳密 |
 
 ## 計算の帰属と範囲
 
@@ -28,4 +28,4 @@
 bash sagemath/tools/run-all-checks.sh sin_of_negated_real
 ```
 
-`sage` が PATH に無いときは `~/micromamba/envs/sage/bin/sage` を PATH に足す。実行ログは `logs/` に保存する（2026-11-09）。
+`sage` が PATH に無いときは `~/micromamba/envs/sage/bin/sage` を PATH に足す。実行ログは `logs/` に保存する（2026-11-11）。

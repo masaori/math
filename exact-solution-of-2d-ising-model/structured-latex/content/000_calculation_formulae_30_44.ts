@@ -2942,7 +2942,39 @@ i(-\theta)_{\mathbb C}
         math(String.raw`2`),
         " は ",
         math(String.raw`2_{\mathbb{C}}`),
+        "、分母の ",
+        math(String.raw`2i`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`i`),
+        " の積 ",
+        math(String.raw`2_{\mathbb{C}}i`),
         " である。",
+        math(String.raw`2_{\mathbb C}=(2_{\mathbb R})_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）、",
+        math(String.raw`i=(0,1)\neq0_{\mathbb C}`),
+        "（",
+        ref("def_imaginary_unit"),
+        "。第 2 成分が ",
+        math(String.raw`1\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb C},i\in\mathbb C^{\times}`),
+        " であり、",
+        ref("multiplicative_group_of_cc"),
+        " の群の積で ",
+        math(String.raw`2_{\mathbb C}i\in\mathbb C^{\times}`),
+        " である。二つの分数は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`w\to2_{\mathbb C}`),
+        "、",
+        math(String.raw`w\to2_{\mathbb C}i`),
+        "）である。",
       ]),
     ],
     proof: [
@@ -2966,27 +2998,41 @@ i(-\theta)_{\mathbb C}
       paragraph(["第 1 の等式を示す。"]),
       displayMath(String.raw`\begin{aligned}
 \cos\theta
-&=\frac{2\cos\theta}{2}\\
-&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
+&=1_{\mathbb C}\cos\theta
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&=\bigl(2_{\mathbb C}^{-1}2_{\mathbb C}\bigr)\cos\theta
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}\in\mathbb C^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}^{-1}\bigl(2_{\mathbb C}\cos\theta\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&=\bigl(2_{\mathbb C}\cos\theta\bigr)2_{\mathbb C}^{-1}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}\bigr)\\
+&=\frac{2_{\mathbb C}\cos\theta}{2_{\mathbb C}}
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to2_{\mathbb C}\cos\theta,\ w\to2_{\mathbb C})\ \text{を右辺から左辺へ}\bigr)\\
+&=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2_{\mathbb C}}
 &&(\because\ i\sin\theta\ \text{を足して引いた})\\
-&=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2}
+&=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2_{\mathbb C}}
 &&(\because\ \text{Eulerの公式})\\
-&=\frac{\exp(i\theta) + \exp(-i\theta)}{2}
+&=\frac{\exp(i\theta) + \exp(-i\theta)}{2_{\mathbb C}}
 &&(\because\ \text{上の準備})
 \end{aligned}`),
-      paragraph([
-        "第 2 の等式を示す。",
-        math(String.raw`2i\neq0`),
-        " なので割ってよい。",
-      ]),
+      paragraph(["第 2 の等式を示す。"]),
       displayMath(String.raw`\begin{aligned}
 \sin\theta
-&=\frac{2i\sin\theta}{2i}\\
-&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
+&=1_{\mathbb C}\sin\theta
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&=\bigl((2_{\mathbb C}i)^{-1}(2_{\mathbb C}i)\bigr)\sin\theta
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}i\in\mathbb C^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&=(2_{\mathbb C}i)^{-1}\bigl((2_{\mathbb C}i)\sin\theta\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&=\bigl((2_{\mathbb C}i)\sin\theta\bigr)(2_{\mathbb C}i)^{-1}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}\bigr)\\
+&=\frac{(2_{\mathbb C}i)\sin\theta}{2_{\mathbb C}i}
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to(2_{\mathbb C}i)\sin\theta,\ w\to2_{\mathbb C}i)\ \text{を右辺から左辺へ}\bigr)\\
+&=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2_{\mathbb C}i}
 &&(\because\ \cos\theta\ \text{を足して引いた})\\
-&=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2i}
+&=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2_{\mathbb C}i}
 &&(\because\ \text{Eulerの公式})\\
-&=\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
+&=\frac{\exp(i\theta) - \exp(-i\theta)}{2_{\mathbb C}i}
 &&(\because\ \text{上の準備})
 \end{aligned}`),
     ],
@@ -3004,6 +3050,8 @@ i(-\theta)_{\mathbb C}
         "証明の準備は Eulerの公式を φ = -θ で使うので、-(iθ) を i(-θ)_ℂ へ書き換える 6 行の鎖と、それを使う 1 行を足した（読みを書いたことで要るようになった段）。",
         "2026-11-09（Lean の通しの証明）: 準備の -(iθ_ℂ) = i(-θ)_ℂ の 6 行の鎖は、主張 i_times_negated_real_is_negation_of_i_times の鎖を逆向きにたどったものと同じだった。" +
         "その主張をこのブロックの前へ移し、6 行の鎖と前置きの文を消して、exp(-iθ) の鎖の 1 行目の根拠をその主張（右辺から左辺へ）への参照にした。ほかの行は変えていない。",
+        "2026-11-11（Lean の通しの証明）: 主張の分母 2・2i を def_complex_quotient の商（w → 2_ℂ、w → 2_ℂ i）と読むこと、2_ℂ（inclusion_rr_to_cc の像 (2_ℝ)_ℂ）・i・2_ℂ i が ℂ^× の元であることを主張に書いた（証明の「2i ≠ 0 なので割ってよい」の文はこれに替えて消した）。" +
+        "根拠の無かった cos θ = (2cos θ)/2・sin θ = (2i sin θ)/(2i) の 1 行ずつを、積の単位元・multiplicative_group_of_cc の逆元・積の結合律・可換律・def_complex_quotient（右辺から左辺へ）の 5 行ずつに割り、証明の分母を 2_ℂ・2_ℂ i と書いた。ほかの行は変えていない。",
       ],
     },
   },
@@ -3124,11 +3172,19 @@ i(-\theta)_{\mathbb C}
         ref("euler_formula_cos_sin"),
         " の読みのとおり ",
         math(String.raw`2_{\mathbb C}`),
-        " で、",
-        ref("complex_numbers_form_a_field"),
-        " の体で ",
-        math(String.raw`2_{\mathbb C}\neq0_{\mathbb C}`),
-        " なので分数は定まる。",
+        " である。",
+        math(String.raw`2_{\mathbb C}=(2_{\mathbb R})_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
+        math(String.raw`2\neq0`),
+        "）なので ",
+        math(String.raw`2_{\mathbb C}\in\mathbb C^{\times}`),
+        " であり、分数は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`w\to2_{\mathbb C}`),
+        "）として定まる。",
         math(String.raw`-\theta\in\mathbb R`),
         " なので ",
         ref("euler_formula_cos_sin"),
@@ -3154,6 +3210,7 @@ i(-\theta)_{\mathbb C}
       status: "added",
       notes: [
         "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の cos(-θ) の 5 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない（実数の包含の像と -(iθ) の括弧を明示した）。",
+        "2026-11-11（Lean の通しの証明）: 前置きの「体で 2_ℂ ≠ 0_ℂ なので分数は定まる」を、2_ℂ = (2_ℝ)_ℂ = (2,0) ≠ (0,0)（inclusion_rr_to_cc）の成分の比較と def_complex_quotient の商（w → 2_ℂ）の参照に替えた。鎖は変えていない。",
       ],
     },
   },
@@ -3207,8 +3264,10 @@ i(-\theta)_{\mathbb C}
         " の読みのとおり ",
         math(String.raw`2_{\mathbb C}`),
         " である。",
-        math(String.raw`2_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
-        "（第 1 成分が ",
+        math(String.raw`2_{\mathbb C}=(2_{\mathbb R})_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
         math(String.raw`2\neq0`),
         "）、",
         math(String.raw`i=(0,1)\neq0_{\mathbb C}`),
@@ -3224,7 +3283,11 @@ i(-\theta)_{\mathbb C}
         math(String.raw`2_{\mathbb C}i\in\mathbb C^{\times}`),
         "、すなわち ",
         math(String.raw`2_{\mathbb C}i\neq0_{\mathbb C}`),
-        " である。したがって分数は定まる。",
+        " である。したがって分数は ",
+        ref("def_complex_quotient"),
+        " の商（",
+        math(String.raw`w\to2_{\mathbb C}i`),
+        "）として定まる。",
         math(String.raw`-\theta\in\mathbb R`),
         " なので ",
         ref("euler_formula_cos_sin"),
@@ -3242,8 +3305,16 @@ i(-\theta)_{\mathbb C}
 &&(\because\ \blkref{negation_of_i_times_negated_real_is_i_times})\\
 &= \frac{-\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)}{2i}
 &&\bigl(\because\ \mathbb{C}\ \text{で}\ b - a = -(a - b)\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta_{\mathbb C}),\ b \to \exp(-(i\theta_{\mathbb C}))\bigr)\\
+&= \Bigl(-\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)\Bigr)(2i)^{-1}
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to-(\exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C}))),\ w\to2i)\bigr)\\
+&= \Bigl((-1_{\mathbb C})\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)\Bigr)(2i)^{-1}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to\exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C})))\bigr)\\
+&= (-1_{\mathbb C})\Bigl(\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)(2i)^{-1}\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&= -\Bigl(\Bigl(\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)\Bigr)(2i)^{-1}\Bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to(\exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C})))(2i)^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &= -\frac{\exp(i\theta_{\mathbb C}) - \exp\bigl(-(i\theta_{\mathbb C})\bigr)}{2i}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{-x}{y} = -\tfrac{x}{y}\ (y \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C})),\ y \to 2i\bigr)\\
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to\exp(i\theta_{\mathbb C}) - \exp(-(i\theta_{\mathbb C})),\ w\to2i)\ \text{を右辺から左辺へ}\bigr)\\
 &= -(\sin\theta)_{\mathbb C}
 &&(\because\ \blkref{euler_formula_cos_sin})
 \end{aligned}`),
@@ -3252,6 +3323,7 @@ i(-\theta)_{\mathbb C}
       status: "added",
       notes: [
         "2026-11-09（Lean の通しの証明）: relation_of_gamma_2_theta_tilde の準備の第一の sin(-θ) の 6 行の鎖を、i_times_negated_real_is_negation_of_i_times と同じ理由でこの主張へ移した。鎖の中身は変えていない（実数の包含の像と -(iθ) の括弧を明示した）。",
+        "2026-11-11（Lean の通しの証明）: 前置きの「分数は定まる」に def_complex_quotient の商（w → 2_ℂ i）の参照を足した。鎖の 5 行目「ℂ は体なので (-x)/y = -(x/y)」を、def_complex_quotient・multiply_by_minus_one・積の結合律・multiply_by_minus_one（右辺から左辺へ）・def_complex_quotient（右辺から左辺へ）の 5 行に割った（鎖は 10 行になった）。前置きの 2_ℂ = (2,0) に inclusion_rr_to_cc の像であることを書き添えた。ほかの行は変えていない。",
       ],
     },
   },
@@ -3300,8 +3372,10 @@ i(-\theta)_{\mathbb C}
         "、",
         math(String.raw`b:=\exp(-i\theta_{\mathbb C})\in\mathbb C`),
         " とおく。",
-        math(String.raw`2_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
-        "（第 1 成分が ",
+        math(String.raw`2_{\mathbb C}=(2_{\mathbb R})_{\mathbb C}=(2,0)\neq(0,0)=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。第 1 成分が ",
         math(String.raw`2\neq0`),
         "）、",
         math(String.raw`i=(0,1)\neq0_{\mathbb C}`),
@@ -3443,6 +3517,7 @@ b
         "2026-11-10（Lean の通しの証明）: 2 行目の根拠「ℂ の四則」は 2_ℂb = (a+b)-(a-b) を 1 行で述べていたので、一ステップ一定理により準備の二つの鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行、(a+b)-(a-b) = 2_ℂb の 17 行）に割り、主鎖の 2 行目はその参照にした。主鎖のほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: 主鎖の 1 行目（2_C ≠ 0_C による分数）・3 行目（分配法則）・5 行目（i ≠ 0_C による分数）が複数の操作を 1 行で当てていたので、一ステップ一定理により、商の定義 def_complex_quotient（このとき足した）・乗法群の逆元・体の公理を 1 行に 1 つずつ当てる行に割った（主鎖は 22 行）。5 行目の i(2_C i)^{-1} = 2_C^{-1} は準備の第三の鎖（6 行）にした。前置きの 2_C, i ≠ 0_C に理由を書いた。",
         "2026-11-10（Lean の通しの証明）: 準備の第一の鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行）をほかの証明の準備と同じ鎖なので主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。準備の鎖はこれで二つになり、(a+b)-(a-b) = 2_ℂb を第一の鎖、i(2_ℂi)^{-1} = 2_ℂ^{-1} を第二の鎖と呼ぶ。",
+        "2026-11-11（Lean の通しの証明）: 前置きの 2_ℂ = (2,0) に、inclusion_rr_to_cc の像 (2_ℝ)_ℂ であることとその参照を書き添えた（euler_formula_cos_sin・cos_of_negated_real・sin_of_negated_real と揃えた）。",
       ],
     },
   },

@@ -7,7 +7,8 @@
   （ラベル `negative_i_times_complex_is_negation_of_i_times`）
 
 人手 `euler_formula_cos_sin` は主張の読みを次のとおり定める: 実数 `θ, cos θ, sin θ` は `inclusion_rr_to_cc` の像、
-`-iθ` は `multiply_by_minus_one` の `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）、分母の `2` は `2_ℂ`（Lean の `(2 : ℂ)`）。
+`-iθ` は `multiply_by_minus_one` の `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）、分母の `2` は `2_ℂ`（Lean の `(2 : ℂ)`）、
+`2i` は `2_ℂ i`（Lean の `2 * Complex.I`）。二つの分数は `def_complex_quotient`（`z/w := zw^{-1}`）の商で、Lean の `/` である。
 人手は全実数上の `cos`・`sin` と Euler の公式の導出を未整備としており、具体版が無いので、
 `euler_cos_real_inclusion`・`euler_sin_real_inclusion` は mathlib の `Complex.ofReal_cos`・`Complex.ofReal_sin` と
 `Complex.cos`・`Complex.sin` の定義で受ける。

@@ -27,7 +27,11 @@ chain = [
     (exp_sym(-(I0 * t)) - exp_sym_any(-(I0 * (-t)))) / (2 * I0),      # i_times_negated_real_is_negation_of_i_times
     (exp_sym(-(I0 * t)) - exp_sym(I0 * t)) / (2 * I0),                # negation_of_i_times_negated_real_is_i_times
     (-(Ft(Ep) - Ft(Em))) / (2 * I0),                                  # b - a = -(a - b)
-    -((Ft(Ep) - Ft(Em)) / (2 * I0)),                                  # (-x)/y = -(x/y)
+    (-(Ft(Ep) - Ft(Em))) * (2 * I0)**(-1),                            # def_complex_quotient
+    (Ft(-1) * (Ft(Ep) - Ft(Em))) * (2 * I0)**(-1),                    # multiply_by_minus_one
+    Ft(-1) * ((Ft(Ep) - Ft(Em)) * (2 * I0)**(-1)),                    # 積の結合律
+    -((Ft(Ep) - Ft(Em)) * (2 * I0)**(-1)),                            # multiply_by_minus_one を右辺から左辺へ
+    -((Ft(Ep) - Ft(Em)) / (2 * I0)),                                  # def_complex_quotient を右辺から左辺へ
 ]
 sin_theta = (Ft(Ep) - Ft(Em)) / (2 * I0)                              # euler_formula_cos_sin
 for k in range(len(chain) - 1):
@@ -35,5 +39,5 @@ for k in range(len(chain) - 1):
 assert chain[-1] == -sin_theta                                        # 最終行 = -(sin θ)_C
 assert Ft(Em) - Ft(Ep) != Ft(Ep) - Ft(Em)                             # 対照: b - a ≠ a - b
 assert chain[0] != sin_theta                                          # 対照: 符号を落とすと一致しない
-print("checked the 6-line chain over QQ(i)(θ, Ep, Em)")
+print("checked the 10-line chain over QQ(i)(θ, Ep, Em)")
 print("RESULT: PASS")

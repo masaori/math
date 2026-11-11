@@ -14,8 +14,9 @@
 - 分母の `2` は人手どおり `2_ℂ`（Lean の `(2 : ℂ)`）である。
 - 人手 `euler_formula_cos_sin` の読み `euler_cos_real_inclusion`・`euler_sin_real_inclusion` は
   同じフォルダの `ClaimEulerFormulaCosSin.lean` にある（人手が未整備のため mathlib で受けている）。
-- 人手 `multiply_by_minus_one`・`complex_numbers_form_a_field` の性質（`-(-z) = z`・`b - a = -(a - b)`・`(-x)/y = -(x/y)`）は
-  具体版が Lean に無く、mathlib の `neg_one_mul`・`neg_neg`・`neg_sub`・`neg_div` で 1 段ずつ受ける。
+- 人手 `multiply_by_minus_one`・`complex_numbers_form_a_field` の性質（`-z = (-1)z`・`-(-z) = z`・`b - a = -(a - b)`・積の結合律）は
+  具体版が Lean に無く、mathlib の `neg_one_mul`・`neg_neg`・`neg_sub`・`mul_assoc` で 1 段ずつ受ける。
+- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は Lean の `/` で、`div_eq_mul_inv` で受ける。
 
 必要十分版は置かない。`I_mul_real_neg_eq_neg_I_mul`・`neg_I_mul_real_neg_eq_I_mul` は積の結合律・可換律と `-x = (-1)x`、
 `-(-z) = z` を 1 回ずつ当てるだけで、可換環で同じ段が通る（取り払える構造をこの説明以上に示す計算が無い）。
@@ -70,7 +71,7 @@ theorem real_inclusion_cos_neg (θ : ℝ) :
     _ = ((Real.cos θ : ℝ) : ℂ) :=
         (euler_cos_real_inclusion θ).symm         -- 5 行目: `euler_formula_cos_sin`
 
-/-- 人手 `sin_of_negated_real`: `(sin(-θ))_ℂ = -(sin θ)_ℂ`（人手の 6 行）。 -/
+/-- 人手 `sin_of_negated_real`: `(sin(-θ))_ℂ = -(sin θ)_ℂ`（人手の 10 行）。 -/
 theorem real_inclusion_sin_neg (θ : ℝ) :
     ((Real.sin (-θ) : ℝ) : ℂ) = -((Real.sin θ : ℝ) : ℂ) :=
   calc ((Real.sin (-θ) : ℝ) : ℂ)
@@ -84,9 +85,19 @@ theorem real_inclusion_sin_neg (θ : ℝ) :
         rw [neg_I_mul_real_neg_eq_I_mul]          -- 3 行目: `negation_of_i_times_negated_real_is_i_times`
     _ = (-(Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))) / (2 * Complex.I) := by
         rw [neg_sub]                              -- 4 行目: ℂ で `b - a = -(a - b)`（`complex_numbers_form_a_field`）
+    _ = (-(Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))) * (2 * Complex.I)⁻¹ := by
+        rw [div_eq_mul_inv]                       -- 5 行目: `def_complex_quotient`（`z → -(…)`, `w → 2i`）
+    _ = ((-1 : ℂ) * (Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))))
+          * (2 * Complex.I)⁻¹ := by
+        rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`（`z → exp(iθ) - exp(-(iθ))`）
+    _ = (-1 : ℂ) * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))
+          * (2 * Complex.I)⁻¹) := by
+        rw [mul_assoc]                            -- 7 行目: `complex_numbers_form_a_field` の積の結合律
+    _ = -((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) * (2 * Complex.I)⁻¹) := by
+        rw [neg_one_mul]                          -- 8 行目: `multiply_by_minus_one`（`z → (…)(2i)^{-1}`）を右辺から左辺へ
     _ = -((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
-        rw [neg_div]                              -- 5 行目: ℂ で `(-x)/y = -(x/y)`（`complex_numbers_form_a_field`）
+        rw [div_eq_mul_inv]                       -- 9 行目: `def_complex_quotient`（`z → exp(iθ) - exp(-(iθ))`, `w → 2i`）を右辺から左辺へ
     _ = -((Real.sin θ : ℝ) : ℂ) := by
-        rw [euler_sin_real_inclusion θ]           -- 6 行目: `euler_formula_cos_sin`
+        rw [euler_sin_real_inclusion θ]           -- 10 行目: `euler_formula_cos_sin`
 
 end Ising2D
