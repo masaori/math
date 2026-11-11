@@ -5,7 +5,7 @@
 ## いまの状態（2026-11-11 の連続実行）
 
 - **積み上げを二本にした（2026-11-11、人の指示「ゴールに向かうために工夫をして」）**: 到達点に要る Lean の無い主張 57 件のうち、一側閉包の正負四の欠けに依存しない 36 件が、委譲の外し 54 件の後ろで順番待ちになっていた。台帳に表「並列の積み上げが受け持つもの」を足して 36 件を移し、連続実行「可算二次元イジング: 証明の積み上げ（並列）」が受け持つ。主経路は「残っているもの」の表だけを進める（runbook「二本の積み上げ」）。残りは `node structured-latex/tools/count-goal-lean-remaining.ts` で数え、推移を `docs/tasks/goal-lean-remaining.tsv` に残す。
-- **並列の積み上げの次の前進**: 接触点分割の二件（回転位相の更新と、横断のない閉歩道の回転位相の還元）の Lean 二版（台帳の表「並列の積み上げが受け持つもの」の先頭）。各子に横断が生じないことは具体版 `crossing_free_contact_split_children` と必要十分版 `contact_split_child_crossing_free` で閉じ、本文ブロックの `lean:` に登録した。
+- **並列の積み上げの次の前進**: 接触点分割の帰納法（横断のない閉歩道の回転位相の還元、`claim_crossing_free_contact_elimination_phase`）の Lean 二版（台帳の表「並列の積み上げが受け持つもの」の先頭）。一回の分割の部品のうち、各子に横断が生じないこと（`crossing_free_contact_split_children`）と回転位相の更新（`crossing_free_contact_split_phase`）は Lean 二版で閉じ、本文ブロックの `lean:` に登録した。
 - **次の前進**: 実際の単純閉歩道の内側の側が全周で一定であることは Lean 二版まで済んだ。次は各訪問頂点の入出方向を同定する。
 - **研究管理（2026-11-11）**: 経路は変えない。Euler 数の新しい具体版が $V_S\le E_S+1$ を mathlib の `SimpleGraph.Connected.card_vert_le_card_edgeSet_add_one` で済ませていて本文（全域木の存在と木の辺数）と一対一でないので、台帳の先頭に行「穴の無いセル集合の Euler 数の具体版で頂点数の上界を本文の全域木から得る」を置いた。北向きの共有辺はその次。
 - **連続実行（2026-11-10）**: 四頂点とセルの接続数を二通りに数える等式を、Lean 具体版と必要十分版で示した。
@@ -35,6 +35,7 @@
 
 ## 直近の記録
 
+2026-11-11（並列）: 接触点分割の回転位相は交差形式で更新されること（`claim_crossing_free_contact_split_phase`）を、方向番号の四つ組の有限な場合分けによる表（`contact_local_table`）、実際の二本の回転数差（`contact_split_walk_turning_update`）、混合横断数の指示関数（`contact_split_index_mutual_crossing_eq_indicator`）と交差形式への移し替えで Lean 具体版に、回転数の $\mathrm{turn}(0)=0$・$\mathrm{turn}(3)=-\mathrm{turn}(1)$ と零を除いた群の位相だけを仮定する必要十分版に示し、`lean:` に登録した。`claim_contact_split_turning_update` に実際の閉歩道についての具体版を足した。
 2026-11-11（連続実行）: 実際の単純閉歩道の内側の側が全周で一定であることを、有限帰納法の Lean 具体版と必要十分版で示した。
 
 2026-11-11（並列）: 横断のない閉歩道を接触点で分けても各子に横断が生じないこと（`claim_crossing_free_contact_split_children`）を、接触頂点の四半辺を二通過が使い尽くすことと、他の添字で出辺が元と同じことによる元の横断への読み替えで Lean 具体版と必要十分版に示し、`lean:` に登録した。本文の証明に半辺の議論を書き足した。並列の表の先頭行を割り、残りは接触点分割の二件。
