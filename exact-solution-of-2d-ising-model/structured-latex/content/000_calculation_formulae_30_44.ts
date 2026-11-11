@@ -3013,6 +3013,176 @@ i(-\theta)_{\mathbb C}
     },
   },
   {
+    id: "calculation_formulae_claim_sum_plus_difference_is_twice_first_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(a+b)+(a-b)=2_{\mathbb C}a` },
+    labels: ["sum_plus_difference_is_twice_first_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb C`),
+        " とする。差は ",
+        ref("def_complex_difference"),
+        " の差、",
+        math(String.raw`2_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=2`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`(a+b)+(a-b)=2_{\mathbb C}a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=1`),
+        "、",
+        math(String.raw`-b`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転、",
+        math(String.raw`0_{\mathbb C}=(0,0)\in\mathbb C`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の加法の単位元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+b)+(a-b)
+&=(a+b)+\bigl(a+(-b)\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a,\ w\to b)\bigr)\\
+&=\bigl((a+b)+a\bigr)+(-b)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律を右辺から左辺へ}\bigr)\\
+&=\bigl(a+(b+a)\bigr)+(-b)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
+&=\bigl(a+(a+b)\bigr)+(-b)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律}\bigr)\\
+&=\bigl((a+a)+b\bigr)+(-b)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律を右辺から左辺へ}\bigr)\\
+&=(a+a)+\bigl(b+(-b)\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
+&=(a+a)+0_{\mathbb C}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元（その直後の段落で}\ -b=(-1_{\mathbb C})b\ \text{が加法の逆元と一致すると示してある）}\bigr)\\
+&=a+a
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
+&=1_{\mathbb C}a+1_{\mathbb C}a
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 か所へ右辺から左辺へ}\bigr)\\
+&=(1_{\mathbb C}+1_{\mathbb C})a
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}a
+&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。euler_formula_cos_sin の第 1 の等式の鎖が 2_ℂ cos θ = (cos θ + i sin θ) + (cos θ - i sin θ) を「i sin θ を足して引いた」の 1 行で当てていたので、def_complex_difference・体の公理・one_plus_one_is_two_in_cc を 1 行に 1 つずつ当てる主張にして引けるようにした。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_sum_minus_difference_is_twice_second_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(a+b)-(a-b)=2_{\mathbb C}b` },
+    labels: ["sum_minus_difference_is_twice_second_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb C`),
+        " とする。差は ",
+        ref("def_complex_difference"),
+        " の差、",
+        math(String.raw`2_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=2`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`(a+b)-(a-b)=2_{\mathbb C}b`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`1_{\mathbb C},-1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=1,-1`),
+        "、",
+        math(String.raw`-(a-b)`),
+        "・",
+        math(String.raw`-(a+(-b))`),
+        "・",
+        math(String.raw`-a`),
+        "・",
+        math(String.raw`-b`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転、",
+        math(String.raw`0_{\mathbb C}=(0,0)\in\mathbb C`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の加法の単位元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+b)-(a-b)
+&=(a+b)+\bigl(-(a-b)\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a+b,\ w\to a-b)\bigr)\\
+&=(a+b)+\Bigl(-\bigl(a+(-b)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a,\ w\to b)\bigr)\\
+&=(a+b)+(-1_{\mathbb C})\bigl(a+(-b)\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a+(-b))\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+(-1_{\mathbb C})(-b)\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の左からの分配律}\bigr)\\
+&=(a+b)+\Bigl((-1_{\mathbb C})a+(-1_{\mathbb C})\bigl((-1_{\mathbb C})b\bigr)\Bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to b)\bigr)\\
+&=(a+b)+\Bigl((-1_{\mathbb C})a+\bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)b\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+1_{\mathbb C}b\bigr)
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
+&=(a+b)+\bigl((-1_{\mathbb C})a+b\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)\\
+&=(a+b)+\bigl((-a)+b\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a)\ \text{を右辺から左辺へ}\bigr)\\
+&=\bigl((a+b)+(-a)\bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律を右辺から左辺へ}\bigr)\\
+&=\bigl((b+a)+(-a)\bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律}\bigr)\\
+&=\Bigl(b+\bigl(a+(-a)\bigr)\Bigr)+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
+&=(b+0_{\mathbb C})+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元（その直後の段落で}\ -a=(-1_{\mathbb C})a\ \text{が加法の逆元と一致すると示してある）}\bigr)\\
+&=b+b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
+&=1_{\mathbb C}b+1_{\mathbb C}b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 か所へ右辺から左辺へ}\bigr)\\
+&=(1_{\mathbb C}+1_{\mathbb C})b
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb C}b
+&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。euler_formula_cos_sin の第 2 の等式の鎖が 2_ℂ(i sin θ) = (cos θ + i sin θ) - (cos θ - i sin θ) を「cos θ を足して引いた」の 1 行で当てていた。" +
+          "同じ等式は exp_of_negative_i_real_as_cos_minus_i_sin の準備の第一の鎖（17 行）が示していたので、その鎖をこの主張へ移し、両方のブロックから引く。" +
+          "鎖の式は変えていない。6 行目と 10 行目は積・加法の結合律を右辺から左辺へ当てているので、根拠にその向きを書き添えた。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
     kind: "theorem",
     origin: { path: "_old/typst/parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ", ordinal: 45 },
@@ -3105,7 +3275,10 @@ i(-\theta)_{\mathbb C}
 &&(\because\ \text{Eulerの公式})\\
 &=\cos\theta + i\,(-\sin\theta)
 &&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
+&=\cos\theta + \bigl(-(i\sin\theta)\bigr)
+&&\bigl(\because\ \blkref{i_times_negated_real_is_negation_of_i_times}\ (\theta\to\sin\theta)\bigr)\\
 &=\cos\theta - i\sin\theta
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to\cos\theta,\ w\to i\sin\theta)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph(["第 1 の等式を示す。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3121,7 +3294,7 @@ i(-\theta)_{\mathbb C}
 &=\frac{2_{\mathbb C}\cos\theta}{2_{\mathbb C}}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to2_{\mathbb C}\cos\theta,\ w\to2_{\mathbb C})\ \text{を右辺から左辺へ}\bigr)\\
 &=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2_{\mathbb C}}
-&&(\because\ i\sin\theta\ \text{を足して引いた})\\
+&&\bigl(\because\ \blkref{sum_plus_difference_is_twice_first_in_cc}\ (a\to\cos\theta,\ b\to i\sin\theta)\ \text{を右辺から左辺へ}\bigr)\\
 &=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2_{\mathbb C}}
 &&(\because\ \text{Eulerの公式})\\
 &=\frac{\exp(i\theta) + \exp(-i\theta)}{2_{\mathbb C}}
@@ -3140,8 +3313,10 @@ i(-\theta)_{\mathbb C}
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}\bigr)\\
 &=\frac{(2_{\mathbb C}i)\sin\theta}{2_{\mathbb C}i}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to(2_{\mathbb C}i)\sin\theta,\ w\to2_{\mathbb C}i)\ \text{を右辺から左辺へ}\bigr)\\
+&=\frac{2_{\mathbb C}(i\sin\theta)}{2_{\mathbb C}i}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
 &=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2_{\mathbb C}i}
-&&(\because\ \cos\theta\ \text{を足して引いた})\\
+&&\bigl(\because\ \blkref{sum_minus_difference_is_twice_second_in_cc}\ (a\to\cos\theta,\ b\to i\sin\theta)\ \text{を右辺から左辺へ}\bigr)\\
 &=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2_{\mathbb C}i}
 &&(\because\ \text{Eulerの公式})\\
 &=\frac{\exp(i\theta) - \exp(-i\theta)}{2_{\mathbb C}i}
@@ -3164,6 +3339,10 @@ i(-\theta)_{\mathbb C}
         "その主張をこのブロックの前へ移し、6 行の鎖と前置きの文を消して、exp(-iθ) の鎖の 1 行目の根拠をその主張（右辺から左辺へ）への参照にした。ほかの行は変えていない。",
         "2026-11-11（Lean の通しの証明）: 主張の分母 2・2i を def_complex_quotient の商（w → 2_ℂ、w → 2_ℂ i）と読むこと、2_ℂ（inclusion_rr_to_cc の像 (2_ℝ)_ℂ）・i・2_ℂ i が ℂ^× の元であることを主張に書いた（証明の「2i ≠ 0 なので割ってよい」の文はこれに替えて消した）。" +
         "根拠の無かった cos θ = (2cos θ)/2・sin θ = (2i sin θ)/(2i) の 1 行ずつを、積の単位元・multiplicative_group_of_cc の逆元・積の結合律・可換律・def_complex_quotient（右辺から左辺へ）の 5 行ずつに割り、証明の分母を 2_ℂ・2_ℂ i と書いた。ほかの行は変えていない。",
+        "2026-11-11（Lean の通しの証明）: 準備の鎖の最後の行 cos θ + i(-sin θ) = cos θ - i sin θ に根拠が無かったので、i_times_negated_real_is_negation_of_i_times（θ → sin θ）と def_complex_difference（右辺から左辺へ）の 2 行に割った。" +
+          "第 1 の等式の鎖の「i sin θ を足して引いた」の行を主張 sum_plus_difference_is_twice_first_in_cc（a → cos θ、b → i sin θ）を右辺から左辺へ引く行にし、" +
+          "第 2 の等式の鎖の「cos θ を足して引いた」の行を、積の結合律で (2_ℂ i)sin θ を 2_ℂ(i sin θ) にする行と、主張 sum_minus_difference_is_twice_second_in_cc（同じ置き換え）を右辺から左辺へ引く行の 2 行に割った。" +
+          "cos の偶性・sin の奇性と Euler の公式を名前だけで引く行は、全実数上の cos・sin が未整備なので変えていない。",
       ],
     },
   },
@@ -3515,50 +3694,8 @@ i(-\theta)_{\mathbb C}
         math(String.raw`r_{\mathbb C}`),
         " の ",
         math(String.raw`r=1,2,-1`),
-        " である。",
-        math(String.raw`0_{\mathbb C}=(0,0)\in\mathbb C`),
-        " は ",
-        ref("complex_numbers_form_a_field"),
-        " の加法の単位元である。準備の第一の鎖:",
+        " である。準備の鎖:",
       ]),
-      displayMath(String.raw`\begin{aligned}
-(a+b)-(a-b)
-&=(a+b)+\bigl(-(a-b)\bigr)
-&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a+b,\ w\to a-b)\bigr)\\
-&=(a+b)+\Bigl(-\bigl(a+(-b)\bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_complex_difference}\ (z\to a,\ w\to b)\bigr)\\
-&=(a+b)+(-1_{\mathbb C})\bigl(a+(-b)\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a+(-b))\bigr)\\
-&=(a+b)+\bigl((-1_{\mathbb C})a+(-1_{\mathbb C})(-b)\bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の左からの分配律}\bigr)\\
-&=(a+b)+\Bigl((-1_{\mathbb C})a+(-1_{\mathbb C})\bigl((-1_{\mathbb C})b\bigr)\Bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to b)\bigr)\\
-&=(a+b)+\Bigl((-1_{\mathbb C})a+\bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)b\Bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
-&=(a+b)+\bigl((-1_{\mathbb C})a+1_{\mathbb C}b\bigr)
-&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
-&=(a+b)+\bigl((-1_{\mathbb C})a+b\bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)\\
-&=(a+b)+\bigl((-a)+b\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to a)\ \text{を右辺から左辺へ}\bigr)\\
-&=\bigl((a+b)+(-a)\bigr)+b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
-&=\bigl((b+a)+(-a)\bigr)+b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律}\bigr)\\
-&=\Bigl(b+\bigl(a+(-a)\bigr)\Bigr)+b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律}\bigr)\\
-&=(b+0_{\mathbb C})+b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元（その直後の段落で}\ -a=(-1_{\mathbb C})a\ \text{が加法の逆元と一致すると示してある）}\bigr)\\
-&=b+b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
-&=1_{\mathbb C}b+1_{\mathbb C}b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 か所へ右辺から左辺へ}\bigr)\\
-&=(1_{\mathbb C}+1_{\mathbb C})b
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ}\bigr)\\
-&=2_{\mathbb C}b
-&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
-\end{aligned}`),
-      paragraph(["準備の第二の鎖:"]),
       displayMath(String.raw`\begin{aligned}
 i\,(2_{\mathbb C}i)^{-1}
 &=1_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
@@ -3568,7 +3705,7 @@ i\,(2_{\mathbb C}i)^{-1}
 &=2_{\mathbb C}^{-1}\Bigl(2_{\mathbb C}\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)\Bigr)
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
 &=2_{\mathbb C}^{-1}\bigl((2_{\mathbb C}i)(2_{\mathbb C}i)^{-1}\bigr)
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
 &=2_{\mathbb C}^{-1}1_{\mathbb C}
 &&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb C}i\in\mathbb C^{\times})\bigr)\\
 &=2_{\mathbb C}^{-1}
@@ -3588,7 +3725,7 @@ b
 &=\frac{2_{\mathbb C}b}{2_{\mathbb C}}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to2_{\mathbb C}b,\ w\to2_{\mathbb C})\ \text{を右辺から左辺へ}\bigr)\\
 &=\frac{(a+b)-(a-b)}{2_{\mathbb C}}
-&&(\because\ \text{準備の第一の鎖を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{sum_minus_difference_is_twice_second_in_cc}\ \text{を右辺から左辺へ}\bigr)\\
 &=\bigl((a+b)-(a-b)\bigr)2_{\mathbb C}^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to(a+b)-(a-b),\ w\to2_{\mathbb C})\bigr)\\
 &=\Bigl((a+b)+\bigl(-(a-b)\bigr)\Bigr)2_{\mathbb C}^{-1}
@@ -3610,9 +3747,9 @@ b
 &=(\cos\theta)_{\mathbb C}-(a-b)\,2_{\mathbb C}^{-1}
 &&\bigl(\because\ \blkref{def_complex_quotient}\ (z\to a-b,\ w\to2_{\mathbb C})\bigr)\\
 &=(\cos\theta)_{\mathbb C}-(a-b)\bigl(i\,(2_{\mathbb C}i)^{-1}\bigr)
-&&(\because\ \text{準備の第二の鎖を右辺から左辺へ})\\
+&&(\because\ \text{準備の鎖を右辺から左辺へ})\\
 &=(\cos\theta)_{\mathbb C}-\bigl((a-b)\,i\bigr)(2_{\mathbb C}i)^{-1}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ}\bigr)\\
 &=(\cos\theta)_{\mathbb C}-\bigl(i\,(a-b)\bigr)(2_{\mathbb C}i)^{-1}
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}\bigr)\\
 &=(\cos\theta)_{\mathbb C}-i\bigl((a-b)(2_{\mathbb C}i)^{-1}\bigr)
@@ -3631,6 +3768,7 @@ b
         "2026-11-10（Lean の通しの証明）: 2 行目の根拠「ℂ の四則」は 2_ℂb = (a+b)-(a-b) を 1 行で述べていたので、一ステップ一定理により準備の二つの鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行、(a+b)-(a-b) = 2_ℂb の 17 行）に割り、主鎖の 2 行目はその参照にした。主鎖のほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: 主鎖の 1 行目（2_C ≠ 0_C による分数）・3 行目（分配法則）・5 行目（i ≠ 0_C による分数）が複数の操作を 1 行で当てていたので、一ステップ一定理により、商の定義 def_complex_quotient（このとき足した）・乗法群の逆元・体の公理を 1 行に 1 つずつ当てる行に割った（主鎖は 22 行）。5 行目の i(2_C i)^{-1} = 2_C^{-1} は準備の第三の鎖（6 行）にした。前置きの 2_C, i ≠ 0_C に理由を書いた。",
         "2026-11-10（Lean の通しの証明）: 準備の第一の鎖（1_ℂ+1_ℂ = 2_ℂ の 4 行）をほかの証明の準備と同じ鎖なので主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。準備の鎖はこれで二つになり、(a+b)-(a-b) = 2_ℂb を第一の鎖、i(2_ℂi)^{-1} = 2_ℂ^{-1} を第二の鎖と呼ぶ。",
+        "2026-11-11（Lean の通しの証明）: 準備の第一の鎖（(a+b)-(a-b) = 2_ℂb の 17 行）を、euler_formula_cos_sin の第 2 の等式の鎖も同じ等式を要るので主張 sum_minus_difference_is_twice_second_in_cc へ移し、主鎖の 6 行目をその参照（右辺から左辺へ）にした。準備の鎖は i(2_ℂi)^{-1} = 2_ℂ^{-1} の一つになり、前置きから 0_ℂ の文を除いた。主鎖のほかの行は変えていない。準備の鎖の 4 行目と主鎖の 18 行目は積の結合律を右辺から左辺へ当てているので、根拠にその向きを書き添えた。",
         "2026-11-11（Lean の通しの証明）: 前置きの 2_ℂ = (2,0) に、inclusion_rr_to_cc の像 (2_ℝ)_ℂ であることとその参照を書き添えた（euler_formula_cos_sin・cos_of_negated_real・sin_of_negated_real と揃えた）。",
       ],
     },

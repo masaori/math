@@ -281,6 +281,12 @@ targets=(
   Ising2D.complex_reversed_difference_of_necSuf
   "Ising2D.NecSuf.double_negation'"
   "Ising2D.NecSuf.reversed_difference'"
+  Ising2D.complex_sum_add_difference
+  Ising2D.complex_sum_sub_difference
+  Ising2D.complex_sum_add_difference_of_necSuf
+  Ising2D.complex_sum_sub_difference_of_necSuf
+  "Ising2D.NecSuf.sum_add_difference'"
+  "Ising2D.NecSuf.sum_sub_difference'"
   Ising2D.complex_one_add_one
   Ising2D.complex_one_add_one_eq_ofReal_two
   Ising2D.neg_I_mul_real_neg_eq_I_mul

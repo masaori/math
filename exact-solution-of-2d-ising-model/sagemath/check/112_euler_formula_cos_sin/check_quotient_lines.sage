@@ -31,7 +31,7 @@ def check_chain(x, w):
 
 assert check_chain(Ft(c), two) == Ft(c)
 assert check_chain(Ft(s), two_i) == Ft(s)
-# 次の行（分子を Euler の公式の形へ書き換える行）の分子と同じ値であることも確かめる
+# 6 行目（sin 側は積の結合律の行の後の 7 行目）の分子 (cos θ + i sin θ) ± (cos θ - i sin θ) と同じ値であることも確かめる
 Ep = Ft(c) + Ft(I0) * Ft(s)                                 # cos θ + i sin θ
 Em = Ft(c) - Ft(I0) * Ft(s)                                 # cos θ - i sin θ
 assert quotient(two * Ft(c), two) == quotient(Ep + Em, two)
