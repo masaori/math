@@ -1511,6 +1511,160 @@ L^{\lambda}_m+_V L^{\mu}_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_splitting_linear_combination_into_first_and_last_terms",
+    kind: "claim",
+    title: { text: "線型結合は、前の n 項の線型結合と後ろの n' 項の線型結合の和である" },
+    labels: ["claim_splitting_linear_combination_into_first_and_last_terms"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n,n'\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`\{1,\dots,n+n'\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`x_k`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられているとする。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n+n'}\lambda_k\cdot_V x_k=\left(\sum_{k=1}^{n}\lambda_k\cdot_V x_k\right)+_V\left(\sum_{j=1}^{n'}\lambda_{n+j}\cdot_V x_{n+j}\right)`),
+      paragraph([
+        "右辺の一つ目の和は、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " に ",
+        math(String.raw`x_k`),
+        " と ",
+        math(String.raw`\lambda_k`),
+        " を与える族の線型結合であり、二つ目の和は、",
+        math(String.raw`j\in\{1,\dots,n'\}`),
+        " に ",
+        math(String.raw`x_{n+j}`),
+        " と ",
+        math(String.raw`\lambda_{n+j}`),
+        " を与える族の線型結合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "左辺の線型結合について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める元を ",
+        math(String.raw`L_m\in V`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n+n'\}`),
+        "）、右辺の二つ目の線型結合について定める元を ",
+        math(String.raw`L'_m\in V`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n'\}`),
+        "）と書く。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L_0:=0_V`),
+          "、",
+          math(String.raw`L_m:=L_{m-1}+_V(\lambda_m\cdot_V x_m)`),
+          "（",
+          math(String.raw`1\le m\le n+n'`),
+          "）",
+        ],
+        [
+          math(String.raw`L'_0:=0_V`),
+          "、",
+          math(String.raw`L'_m:=L'_{m-1}+_V(\lambda_{n+m}\cdot_V x_{n+m})`),
+          "（",
+          math(String.raw`1\le m\le n'`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "右辺の一つ目の線型結合について線型結合の定義が定める元は、",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " で ",
+        math(String.raw`L_m`),
+        " と同じ式（",
+        math(String.raw`L_0:=0_V`),
+        "、",
+        math(String.raw`L_m:=L_{m-1}+_V(\lambda_m\cdot_V x_m)`),
+        "）で定まるので、",
+        math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V x_k=L_n`),
+        " である。また ",
+        math(String.raw`\sum_{k=1}^{n+n'}\lambda_k\cdot_V x_k=L_{n+n'}`),
+        "、",
+        math(String.raw`\sum_{j=1}^{n'}\lambda_{n+j}\cdot_V x_{n+j}=L'_{n'}`),
+        " である。",
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`m\in\{0,1,\dots,n'\}`),
+        " について ",
+        math(String.raw`L_{n+m}=L_n+_V L'_m`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+      ]),
+      paragraph([math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+L_{n+0}
+&=L_n
+&&\left(\because\ n+0=n\right)\\
+&=L_n+_V 0_V
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=L_n+_V L'_0
+&&\left(\because\ L'_0\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n'`),
+        " とし、",
+        math(String.raw`L_{n+m-1}=L_n+_V L'_{m-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`1\le n+m\le n+n'`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_{n+m}
+&=L_{n+m-1}+_V(\lambda_{n+m}\cdot_V x_{n+m})
+&&\left(\because\ L_{n+m}\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=(L_n+_V L'_{m-1})+_V(\lambda_{n+m}\cdot_V x_{n+m})
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L_n+_V\bigl(L'_{m-1}+_V(\lambda_{n+m}\cdot_V x_{n+m})\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L_n+_V L'_m
+&&\left(\because\ L'_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n'\}`),
+        " について ",
+        math(String.raw`L_{n+m}=L_n+_V L'_m`),
+        " が示された。これを ",
+        math(String.raw`m=n'`),
+        " で使い、主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n+n'}\lambda_k\cdot_V x_k
+&=L_{n+n'}
+&&\left(\because\ L_m\ \text{の定め方。}\blkref{def_linear_combination}\right)\\
+&=L_n+_V L'_{n'}
+&&\left(\because\ \text{上の帰納法の}\ m=n'\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V x_k\right)+_V L'_{n'}
+&&\left(\because\ \text{一つ目の線型結合は}\ L_n\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V x_k\right)+_V\left(\sum_{j=1}^{n'}\lambda_{n+j}\cdot_V x_{n+j}\right)
+&&\left(\because\ L'_m\ \text{の定め方。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_uniqueness_of_coefficients_of_linear_combination",
     kind: "claim",
     title: { text: "一次独立な族による線型結合の係数の一意性" },
