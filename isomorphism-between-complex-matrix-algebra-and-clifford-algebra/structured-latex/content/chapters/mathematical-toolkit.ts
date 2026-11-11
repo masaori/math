@@ -10557,4 +10557,172 @@ x+_A\bigl((-1_{\mathbb{C}})\ast_A 0_A\bigr)
       paragraph(["である。"]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_induced_map_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "誘導される写像は ℂ-代数の準同型である" },
+    labels: ["claim_induced_map_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`),
+        " と ",
+        math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`),
+        " を ℂ-代数（",
+        ref("def_complex_algebra"),
+        "）とし、",
+        math(String.raw`I`),
+        " を ",
+        math(String.raw`A`),
+        " の両側イデアル（",
+        ref("def_two_sided_ideal"),
+        "）とする。",
+        math(String.raw`\varphi:A\to B`),
+        " を ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）とし、",
+        math(String.raw`I`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について ",
+        math(String.raw`\varphi(x)=0_B`),
+        " であるとする。このとき、",
+        math(String.raw`\varphi`),
+        " が ",
+        math(String.raw`I`),
+        " を法とする商代数の上に誘導する写像 ",
+        math(String.raw`\overline{\varphi}:A/I\to B`),
+        "（",
+        ref("def_map_induced_on_quotient_algebra"),
+        "）は、",
+        math(String.raw`I`),
+        " を法とする商代数 ",
+        math(String.raw`(A/I,+_{A/I},\cdot_{A/I},\ast_{A/I},0_{A/I},1_{A/I})`),
+        "（",
+        ref("claim_quotient_algebra_is_complex_algebra"),
+        "）から ",
+        math(String.raw`B`),
+        " への ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "始域の組が ℂ-代数であることは ",
+        ref("claim_quotient_algebra_is_complex_algebra"),
+        " で示されている。",
+        ref("def_complex_algebra_homomorphism"),
+        " の二つの条件を、",
+        ref("def_ring_homomorphism"),
+        " と ",
+        ref("def_linear_map"),
+        " の定義に従って書き出した四つの等式を確かめる。",
+        math(String.raw`X,Y`),
+        " を ",
+        math(String.raw`A/I`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。射影が全射であること（",
+        ref("claim_projection_onto_quotient_set_is_surjective"),
+        "）により、",
+        math(String.raw`\pi_I(a)=X`),
+        " を満たす ",
+        math(String.raw`a\in A`),
+        " と、",
+        math(String.raw`\pi_I(b)=Y`),
+        " を満たす ",
+        math(String.raw`b\in A`),
+        " をとる。ここで ",
+        math(String.raw`\pi_I:A\to A/I`),
+        " は ",
+        math(String.raw`I`),
+        " を法とする商集合への射影（",
+        ref("def_projection_onto_quotient_set"),
+        "）である。",
+      ]),
+      paragraph(["加法を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\varphi}(X+_{A/I}Y)
+&=\overline{\varphi}\bigl(\pi_I(a)+_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\overline{\varphi}\bigl(\pi_I(a+_A b)\bigr)
+&&\left(\because\ \text{射影は加法を保つ。}\blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
+&=\varphi(a+_A b)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\varphi(a)+_B\varphi(b)
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right)\\
+&=\overline{\varphi}\bigl(\pi_I(a)\bigr)+_B\overline{\varphi}\bigl(\pi_I(b)\bigr)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\overline{\varphi}(X)+_B\overline{\varphi}(Y)
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["乗法を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\varphi}(X\cdot_{A/I}Y)
+&=\overline{\varphi}\bigl(\pi_I(a)\cdot_{A/I}\pi_I(b)\bigr)
+&&\left(\because\ a,b\ \text{のとり方}\right)\\
+&=\overline{\varphi}\bigl(\pi_I(a\cdot_A b)\bigr)
+&&\left(\because\ \text{射影は乗法を保つ。}\blkref{claim_projection_onto_quotient_set_preserves_multiplication}\right)\\
+&=\varphi(a\cdot_A b)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\varphi(a)\cdot_B\varphi(b)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right)\\
+&=\overline{\varphi}\bigl(\pi_I(a)\bigr)\cdot_B\overline{\varphi}\bigl(\pi_I(b)\bigr)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\overline{\varphi}(X)\cdot_B\overline{\varphi}(Y)
+&&\left(\because\ a,b\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph(["乗法の単位元を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\varphi}(1_{A/I})
+&=\overline{\varphi}\bigl(\pi_I(1_A)\bigr)
+&&\left(\because\ \blkref{def_quotient_algebra_operations}\ \text{の単位元}\ 1_{A/I}:=\pi_I(1_A)\right)\\
+&=\varphi(1_A)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=1_B
+&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_ring_homomorphism}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\varphi}(\lambda\ast_{A/I}X)
+&=\overline{\varphi}\bigl(\lambda\ast_{A/I}\pi_I(a)\bigr)
+&&\left(\because\ a\ \text{のとり方}\right)\\
+&=\overline{\varphi}\bigl(\pi_I(\lambda\ast_A a)\bigr)
+&&\left(\because\ \text{射影はスカラー倍を保つ。}\blkref{claim_projection_onto_quotient_set_preserves_scalar_multiplication}\right)\\
+&=\varphi(\lambda\ast_A a)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\lambda\ast_B\varphi(a)
+&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\text{、}\blkref{def_linear_map}\right)\\
+&=\lambda\ast_B\overline{\varphi}\bigl(\pi_I(a)\bigr)
+&&\left(\because\ \overline{\varphi}\circ\pi_I=\varphi\text{。}\blkref{claim_induced_map_composed_with_projection_is_original_homomorphism}\right)\\
+&=\lambda\ast_B\overline{\varphi}(X)
+&&\left(\because\ a\ \text{のとり方}\right).
+\end{aligned}`),
+      paragraph([
+        "加法・乗法・乗法の単位元を保つので、",
+        math(String.raw`\overline{\varphi}`),
+        " は環の組 ",
+        math(String.raw`(A/I,+_{A/I},\cdot_{A/I},0_{A/I},1_{A/I})`),
+        " から環の組 ",
+        math(String.raw`(B,+_B,\cdot_B,0_B,1_B)`),
+        " への環の準同型（",
+        ref("def_ring_homomorphism"),
+        "）である。加法・スカラー倍を保つので、",
+        math(String.raw`\overline{\varphi}`),
+        " は線型空間の組 ",
+        math(String.raw`(A/I,+_{A/I},\ast_{A/I},0_{A/I})`),
+        " から線型空間の組 ",
+        math(String.raw`(B,+_B,\ast_B,0_B)`),
+        " への線型写像（",
+        ref("def_linear_map"),
+        "）である。したがって ",
+        math(String.raw`\overline{\varphi}`),
+        " は ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）である。",
+      ]),
+    ],
+  },
 ]);
