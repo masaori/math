@@ -1376,8 +1376,10 @@ N\lambda\le_{\Lambda}N\mu`),
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \operatorname{rat}_{\Lambda}((N+1)\lambda)
-&=\operatorname{rat}_{\Lambda}(N\lambda+\lambda)
+&=\operatorname{rat}_{\Lambda}(N\lambda+1\lambda)
 &&\bigl(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義と }\mathbb{Z}\text{ の分配則}\bigr)\\
+&=\operatorname{rat}_{\Lambda}(N\lambda+\lambda)
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の一倍の定義}\bigr)\\
 &=\operatorname{rat}_{\Lambda}(N\lambda)\operatorname{rat}_{\Lambda}(\lambda)
 &&\bigl(\because\ \blkref{claim_rational_of_log_additive}\bigr)\\
 &=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}\operatorname{rat}_{\Lambda}(\lambda)
@@ -70349,6 +70351,8 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.cellBoundaryVertices_iff_incidence_one_to_three",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_two_incident_edges",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_two_incident_edges",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_step_interior_side",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_step_interior_side",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",

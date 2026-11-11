@@ -18,6 +18,7 @@ direction_number = {
 }
 max_length = 10
 checked_walks = 0
+checked_steps = 0
 turning_values = set()
 torus_sizes = (ZZ(1), ZZ(2), ZZ(3))
 contact_walks = {size: 0 for size in torus_sizes}
@@ -46,6 +47,16 @@ def cyclic_total_turning(step_sequence):
     return total
 
 
+def interior_cell(points, cell):
+    row, col = cell
+    crossings = ZZ(0)
+    for start, end in zip(points, points[1:]):
+        if (start[1] == end[1] and start[1] > col
+                and min(start[0], end[0]) <= row < max(start[0], end[0])):
+            crossings += 1
+    return crossings % 2 == 1
+
+
 for length in range(4, max_length + 1):
     for step_sequence in product(steps, repeat=length):
         if sum(step[0] for step in step_sequence) != 0:
@@ -60,6 +71,21 @@ for length in range(4, max_length + 1):
             points.append(add(points[-1], step))
         if len(set(points[:-1])) != length:
             continue
+
+        for index, (dr, dc) in enumerate(step_sequence):
+            row, col = points[index]
+            if (dr, dc) == (1, 0):
+                left_cell, right_cell = (row, col), (row, col - 1)
+            elif (dr, dc) == (-1, 0):
+                left_cell, right_cell = (row - 1, col - 1), (row - 1, col)
+            elif (dr, dc) == (0, 1):
+                left_cell, right_cell = (row - 1, col), (row, col)
+            else:
+                left_cell, right_cell = (row, col - 1), (row - 1, col - 1)
+            assert interior_cell(points, left_cell) != interior_cell(points, right_cell), (
+                step_sequence, index
+            )
+            checked_steps += 1
 
         turning = cyclic_total_turning(step_sequence)
         assert turning in (ZZ(4), ZZ(-4)), (step_sequence, turning)
@@ -82,7 +108,7 @@ for size in torus_sizes:
     assert contact_walks[size] > 0
 
 print(
-    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
+    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, steps with one interior adjacent cell={checked_steps}, "
     f"cyclic total turning in {{+4,-4}} (both attained), length<=%d, " % max_length
     + "walks with n_ct>0 after projection: "
     + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)

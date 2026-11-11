@@ -1137,6 +1137,8 @@ import Ising2DLambda.KacWard.AdjacentCellsBoundaryParityFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.WalkVerticalBoundaryParity
 import Ising2DLambda.KacWard.WalkVerticalBoundaryParity
 import Ising2DLambda.KacWard.WalkHorizontalBoundaryParity
+import Ising2DLambda.KacWard.WalkStepInteriorSide
+import Ising2DLambda.NecSuf.KacWard.WalkStepInteriorSide
 import Ising2DLambda.NecSuf.KacWard.InteriorCellsReachOddVerticalEdge
 import Ising2DLambda.KacWard.InteriorCellsReachOddVerticalEdge
 import Ising2DLambda.KacWard.InteriorCellsReachOddVerticalEdgeFromNecSuf
