@@ -78874,6 +78874,15 @@ c(\gamma)+1
                     labels: ["claim_edge_distinct_crossing_elimination_parity"],
                     habitat: "Z",
                     verification: ["sagemath/check/edge-distinct-crossing-elimination-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.edge_distinct_crossing_elimination_parity",
+                      "Ising2DLambda.KacWard.evenEdgeChainIntersection_chainListUnion",
+                      "Ising2DLambda.KacWard.evenEdgeChainIntersection_biUnion",
+                      "Ising2DLambda.NecSuf.KacWard.crossing_elimination_family_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.finiteChainIntersection_biUnion_necSuf",
+                      "Ising2DLambda.KacWard.edge_distinct_crossing_elimination_parity_from_necSuf",
+                      "Ising2DLambda.KacWard.evenEdgeChainIntersection_biUnion_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なる閉じた非後退辺列 ",
