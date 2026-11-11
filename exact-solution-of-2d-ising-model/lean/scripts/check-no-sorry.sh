@@ -300,6 +300,9 @@ targets=(
   Ising2D.complex_conjugate_star_sum_conf
   Ising2D.exp_neg_I_mul_real_eq_cos_sub_I_mul_sin
   Ising2D.exp_neg_I_prep_I_mul_inv_two_mul_I
+  Ising2D.exp_neg_I_prep_two_ne_zero
+  Ising2D.exp_neg_I_prep_I_ne_zero
+  Ising2D.exp_neg_I_prep_two_mul_I_ne_zero
   Ising2D.gamma2_neg
   Ising2D.AMat_eq
   Ising2D.AMat_two_one_eq_neg_gamma2_neg
