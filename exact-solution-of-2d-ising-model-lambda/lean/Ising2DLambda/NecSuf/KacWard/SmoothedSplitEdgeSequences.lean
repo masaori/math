@@ -10,7 +10,7 @@ def smoothingIndexSequenceA {m : ℕ} (k l : Fin (m + 1)) : List (Fin (m + 1)) :
 /-- The ordered indices after `l`, followed by the indices through `k`. -/
 def smoothingIndexSequenceB {m : ℕ} (k l : Fin (m + 1)) : List (Fin (m + 1)) :=
   (Finset.univ.filter fun r => l < r).sort (· ≤ ·) ++
-    (Finset.univ.filter fun r => 0 < r ∧ r ≤ k).sort (· ≤ ·)
+    (Finset.univ.filter fun r => r ≤ k).sort (· ≤ ·)
 
 def smoothedSplitEdgeSequenceA {E : Type*} {m : ℕ}
     (γ : Fin (m + 1) → E) (k l : Fin (m + 1)) : List E :=
@@ -28,13 +28,26 @@ theorem smoothingIndexSequenceB_mem {m : ℕ} (k l r : Fin (m + 1)) :
     r ∈ smoothingIndexSequenceB k l ↔ r ∈ smoothingIndexBlockB k l := by
   rw [smoothingIndexBlockB_membership]
   simp [smoothingIndexSequenceB]
-  have h0 : (0 : Fin (m + 1)) ≤ l := Fin.zero_le l
+  omega
+
+theorem smoothingIndexSequenceA_nodup {m : ℕ} (k l : Fin (m + 1)) :
+    (smoothingIndexSequenceA k l).Nodup :=
+  Finset.sort_nodup _ _
+
+/-- The second sequence lists each index of block `B` once; this uses `k < l`. -/
+theorem smoothingIndexSequenceB_nodup {m : ℕ} {k l : Fin (m + 1)} (hkl : k < l) :
+    (smoothingIndexSequenceB k l).Nodup := by
+  rw [smoothingIndexSequenceB, List.nodup_append]
+  refine ⟨Finset.sort_nodup _ _, Finset.sort_nodup _ _, ?_⟩
+  intro a ha b hb hab
+  subst hab
+  simp at ha hb
   omega
 
 theorem smoothingIndexSequences_nonempty {m : ℕ}
-    {k l : Fin (m + 1)} (hk : 0 < k) (hkl : k < l) :
+    {k l : Fin (m + 1)} (hkl : k < l) :
     smoothingIndexSequenceA k l ≠ [] ∧ smoothingIndexSequenceB k l ≠ [] := by
-  have h := smoothingIndexBlocks_nonempty hk hkl
+  have h := smoothingIndexBlocks_nonempty hkl
   constructor
   · intro he
     have hl : l ∈ smoothingIndexSequenceA k l :=

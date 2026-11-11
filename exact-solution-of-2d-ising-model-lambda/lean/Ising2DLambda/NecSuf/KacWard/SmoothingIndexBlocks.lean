@@ -6,20 +6,27 @@ namespace Ising2DLambda.NecSuf.KacWard
 def smoothingIndexBlockA {m : ℕ} (k l : Fin (m + 1)) : Set (Fin (m + 1)) :=
   {r | k < r ∧ r ≤ l}
 
-/-- The complementary indices inside `I_m = {1, ..., m}`. -/
+/-- Every walk index outside the first block. -/
 def smoothingIndexBlockB {m : ℕ} (k l : Fin (m + 1)) : Set (Fin (m + 1)) :=
-  {r | 0 < r ∧ r ∉ smoothingIndexBlockA k l}
+  {r | r ∉ smoothingIndexBlockA k l}
 
 theorem smoothingIndexBlockB_membership {m : ℕ} (k l r : Fin (m + 1)) :
-    r ∈ smoothingIndexBlockB k l ↔ 0 < r ∧ (r ≤ k ∨ l < r) := by
-  change (0 < r ∧ ¬ (k < r ∧ r ≤ l)) ↔ _
+    r ∈ smoothingIndexBlockB k l ↔ r ≤ k ∨ l < r := by
+  change ¬ (k < r ∧ r ≤ l) ↔ _
   omega
 
-theorem smoothingIndexBlocks_nonempty {m : ℕ} {k l : Fin (m + 1)}
-    (hk : 0 < k) (hkl : k < l) :
+/-- The two blocks partition all walk indices. -/
+theorem smoothingIndexBlocks_partition {m : ℕ} (k l r : Fin (m + 1)) :
+    (r ∈ smoothingIndexBlockA k l ∧ r ∉ smoothingIndexBlockB k l) ∨
+      (r ∉ smoothingIndexBlockA k l ∧ r ∈ smoothingIndexBlockB k l) := by
+  by_cases h : r ∈ smoothingIndexBlockA k l
+  · exact Or.inl ⟨h, fun hB => hB h⟩
+  · exact Or.inr ⟨h, h⟩
+
+theorem smoothingIndexBlocks_nonempty {m : ℕ} {k l : Fin (m + 1)} (hkl : k < l) :
     l ∈ smoothingIndexBlockA k l ∧ k ∈ smoothingIndexBlockB k l := by
   constructor
   · exact ⟨hkl, le_refl l⟩
-  · exact ⟨hk, fun h => (not_lt_of_ge (le_refl k)) h.1⟩
+  · exact fun h => (not_lt_of_ge (le_refl k)) h.1
 
 end Ising2DLambda.NecSuf.KacWard
