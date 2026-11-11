@@ -78276,6 +78276,12 @@ q_{a,b}(h,v)
                     title: { text: "偶辺鎖は正方形境界と二つの基本周回に分解できる" },
                     labels: ["claim_even_edge_chain_torus_normal_form"],
                     habitat: "N",
+                    lean: [
+                      "Ising2DLambda.KacWard.evenEdgeChain_torusNormalForm",
+                      "Ising2DLambda.KacWard.evenEdgeChain_torusNormalForm_of_finset",
+                      "Ising2DLambda.NecSuf.KacWard.ringEvenEdgeChain_torusNormalForm",
+                      "Ising2DLambda.KacWard.evenEdgeChain_torusNormalForm_from_necSuf",
+                    ],
                     verification: ["sagemath/check/even-edge-chain-torus-normal-form"],
                     statement: [
                       paragraph([
