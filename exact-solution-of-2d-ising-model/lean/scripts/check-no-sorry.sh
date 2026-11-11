@@ -281,6 +281,13 @@ targets=(
   Ising2D.complex_reversed_difference_of_necSuf
   "Ising2D.NecSuf.double_negation'"
   "Ising2D.NecSuf.reversed_difference'"
+  Ising2D.mul_neg_eq_neg_mul_complex_of_necSuf
+  Ising2D.neg_mul_eq_neg_mul_complex_of_necSuf
+  Ising2D.neg_add_self_complex_of_necSuf
+  Ising2D.complex_neg_one_add_one
+  "Ising2D.NecSuf.mul_neg_eq_neg_mul_of_neg_one'"
+  "Ising2D.NecSuf.neg_mul_eq_neg_mul_of_neg_one'"
+  "Ising2D.NecSuf.neg_add_self_of_neg_one'"
   Ising2D.complex_sum_add_difference
   Ising2D.complex_sum_sub_difference
   Ising2D.complex_sum_add_difference_of_necSuf
@@ -2152,10 +2159,10 @@ targets=(
   Ising2D.mul_adjTwo_of_necSuf
   Ising2D.adjTwo_mul_of_necSuf
   Ising2D.two_sided_inverse_of_two_by_two_of_necSuf
-  Ising2D.NecSuf.mul_adjTwo'
-  Ising2D.NecSuf.adjTwo_mul'
-  Ising2D.NecSuf.mul_smul_adjTwo_of_mul_det'
-  Ising2D.NecSuf.smul_adjTwo_mul_of_mul_det'
+  "Ising2D.NecSuf.mul_adjTwo'"
+  "Ising2D.NecSuf.adjTwo_mul'"
+  "Ising2D.NecSuf.mul_smul_adjTwo_of_mul_det'"
+  "Ising2D.NecSuf.smul_adjTwo_mul_of_mul_det'"
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
   Ising2D.lambdaPlusR_ofReal
   Ising2D.lambdaMinusR_ofReal

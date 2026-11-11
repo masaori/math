@@ -8,9 +8,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| 準備 (a) `mul_neg_eq_neg_mul_complex`（`-w = (-1)w` → 結合律 → 可換律 → 結合律 → `(-1)(zw) = -(zw)`） | `mul_neg_eq_neg_mul'` |
-| 準備 (b) `neg_mul_eq_neg_mul_complex`（`-z = (-1)z` → 結合律 → `(-1)(zw) = -(zw)`） | `neg_mul_eq_neg_mul'` |
-| 準備 (c) `neg_add_self_complex`（`-x = (-1)x` → `x = 1x` → 分配律 → `(-1)+1 = 0` → `0x = 0`） | `neg_add_self'` |
+| 成分の鎖が引く `mul_neg_eq_neg_mul_complex`・`neg_mul_eq_neg_mul_complex`・`neg_add_self_complex`（人手 `complex_times_negation_is_negation_of_product_in_cc`・`negation_times_complex_is_negation_of_product_in_cc`・`negation_plus_self_is_zero_in_cc`） | `mul_neg_eq_neg_mul'`・`neg_mul_eq_neg_mul'`・`neg_add_self'`（`NegationInProductAndNegationPlusSelf.lean` の必要十分版の可換環での特殊化） |
 | `mul_adjTwo_apply_*`・`mul_adjTwo` | `mul_adjTwo'` |
 | `adjTwo_mul_apply_*`・`adjTwo_mul` | `adjTwo_mul'` |
 | `mul_detInv_smul_adjTwo`・`detInv_smul_adjTwo_mul`（スカラー倍を積の外へ → 上の主張 → スカラー倍の結合 → `u det = 1` → `1 I = I`） | `mul_smul_adjTwo_of_mul_det'`・`smul_adjTwo_mul_of_mul_det'` |
@@ -18,15 +16,15 @@
 ## 何が効いているか / 効いていないか
 
 - 係数は可換環 `R` である。行列式 `Matrix.det` の定義そのものが `CommRing` を要求するので、これより弱くはできない。
-  加えて証明の中でも乗法の可換則が効いている（成分の鎖の `B_{12}B_{11} = B_{11}B_{12}` などの段と、準備 (a) の
-  `z(-1) = (-1)z` の段）。
+  加えて証明の中でも乗法の可換則が効いている（成分の鎖の `B_{12}B_{11} = B_{11}B_{12}` などの段）。成分の鎖が引く
+  `z(-w) = -(zw)`・`(-z)w = -(zw)`・`(-x) + x = 0` で何が効いているかは `NegationInProductAndNegationPlusSelf.lean` に書いた。
 - 両側逆元に要るのは、`det B` の左逆元 `u`（`u · det B = 1`）が在ることだけである。体であること、`det B ≠ 0` から
   逆元を作ることは効いていない（具体版では `ℂ` が体なので `u := (det B)^{-1}` が取れる）。可換なので左逆元は右逆元でもあり、
   `B h = I` と `h B = I` の両方に同じ `u` で足りる。
 - `u · det B = 1` は外せない。`u = 0` とすると、0 でない環では `B (0 · adj B) = 0 ≠ I` となる。
 - 具体版との段の違いは次の 3 つで、どれも具体版の定義（`ℂ` の成分、Lean で置いたクロネッカーのデルタ、スカラー倍の成分の補題）を
-  経由するかどうかだけの違いである。準備 (c) の `(-1) + 1 = 0` は、具体版では `ℂ` の成分の等式
-  `(-1,0) + (1,0) = (0,0)` で出す 4 段で、必要十分版では成分を持たないので環の公理（加法の逆元）の 1 段で出す。
+  経由するかどうかだけの違いである。`(-x) + x = 0` の `(-1) + 1 = 0` は、具体版では `ℂ` の成分の等式
+  `(-1,0) + (1,0) = (0,0)` で出す 4 段で、ここでは成分を持たないので環の公理（加法の逆元）の 1 段で `hsum` に渡す。
   単位行列の成分は、具体版の `kroneckerDelta_self`（`kroneckerDelta_of_ne`）→ `identity_matrix_apply` の 2 段を
   `one_apply_eq'`（`one_apply_ne''`）の 1 段で出す。スカラー倍の成分は、具体版の `matrix_smul_apply` を定義の展開（`rfl`）で出す。
   ほかの段は具体版と同じである。
@@ -36,6 +34,7 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Data.Matrix.Mul
 import Mathlib.Data.Fin.VecNotation
 import Mathlib.Tactic.FinCases
+import Ising2D.NecSuf.NegationInProductAndNegationPlusSelf
 
 namespace Ising2D.NecSuf
 
@@ -51,27 +50,17 @@ theorem mul_two_apply' (A B : Matrix (Fin 2) (Fin 2) R) (i k : Fin 2) :
     (A * B) i k = A i 0 * B 0 k + A i 1 * B 1 k := by
   rw [Matrix.mul_apply, Fin.sum_univ_two]
 
+/-- `z(-w) = -(zw)`: `NecSuf.mul_neg_eq_neg_mul_of_neg_one'` の可換環での特殊化。 -/
 theorem mul_neg_eq_neg_mul' (z w : R) : z * (-w) = -(z * w) :=
-  calc z * (-w)
-      = z * ((-1) * w) := by rw [neg_one_mul]
-    _ = (z * (-1)) * w := (mul_assoc _ _ _).symm
-    _ = ((-1) * z) * w := by rw [mul_comm z (-1)]   -- 乗法の可換則が効く
-    _ = (-1) * (z * w) := mul_assoc _ _ _
-    _ = -(z * w) := neg_one_mul _
+  mul_neg_eq_neg_mul_of_neg_one' (fun x => (neg_one_mul x).symm) (fun x => mul_comm x (-1)) z w
 
+/-- `(-z)w = -(zw)`: `NecSuf.neg_mul_eq_neg_mul_of_neg_one'` の可換環での特殊化。 -/
 theorem neg_mul_eq_neg_mul' (z w : R) : (-z) * w = -(z * w) :=
-  calc (-z) * w
-      = ((-1) * z) * w := by rw [neg_one_mul]
-    _ = (-1) * (z * w) := mul_assoc _ _ _
-    _ = -(z * w) := neg_one_mul _
+  neg_mul_eq_neg_mul_of_neg_one' (fun x => (neg_one_mul x).symm) z w
 
+/-- `(-x) + x = 0`: `NecSuf.neg_add_self_of_neg_one'` の可換環での特殊化（`(-1) + 1 = 0` は加法の逆元）。 -/
 theorem neg_add_self' (x : R) : (-x) + x = 0 :=
-  calc (-x) + x
-      = (-1) * x + x := by rw [neg_one_mul]
-    _ = (-1) * x + 1 * x := by rw [one_mul]
-    _ = ((-1) + 1) * x := (add_mul _ _ _).symm
-    _ = 0 * x := by rw [neg_add_cancel]   -- 加法の逆元（具体版では成分の等式の 4 段）
-    _ = 0 := zero_mul _
+  neg_add_self_of_neg_one' (fun y => (neg_one_mul y).symm) one_mul (neg_add_cancel 1) zero_mul x
 
 theorem det_two' (B : Matrix (Fin 2) (Fin 2) R) : B.det = B 0 0 * B 1 1 - B 0 1 * B 1 0 :=
   Matrix.det_fin_two B

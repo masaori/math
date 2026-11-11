@@ -7,13 +7,13 @@
 - ファイル: `structured-latex/content/000_calculation_formulae_45_46.ts`
   （ブロック `finite_matrix_claim_matrix_times_adjugate_two_by_two`）
 - 主張: `B ∈ Mat(2,ℂ)` について `B (adj B) = (det B) I_{Mat(2,ℂ)}`（`adj B` は `def_adjugate_two_by_two`）
-- 範囲: 証明の準備 (a)・(c) の鎖と、4 つの成分の鎖の各行。
+- 範囲: 4 つの成分の鎖の各行。成分の鎖が引く `complex_times_negation_is_negation_of_product_in_cc`・`negation_plus_self_is_zero_in_cc` の鎖は、それぞれのラベルのフォルダの検算が確かめる（2026-11-11 に準備 (a)・(c) を主張へ移した）。
 
 ## チェック一覧
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---------|---------|-----------|------|
-| check_steps.sage | 準備 (a) `z(−w) = −(zw)` の 5 行、(c) `(−x)+x = 0` の 8 行（`(−1,0)+(1,0) = (0,0)` を含む）。成分 (1,1)・(1,2)・(2,1)・(2,2) の鎖（9・9・10・11 行）の各行が `QQ[B11, B12, B21, B22]` の多項式として一致すること。否定コントロール: 非対角成分の符号を落とした行列では成り立たない | PASS | すべて厳密に一致 |
+| check_steps.sage | 成分 (1,1)・(1,2)・(2,1)・(2,2) の鎖（9・9・10・11 行）の各行が `QQ[B11, B12, B21, B22]` の多項式として一致すること。否定コントロール: 非対角成分の符号を落とした行列では成り立たない | PASS | すべて厳密に一致 |
 
 ## 備考
 

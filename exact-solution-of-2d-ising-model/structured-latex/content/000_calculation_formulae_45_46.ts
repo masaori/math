@@ -944,49 +944,6 @@ T_B(I)
     ],
     proof: [
       paragraph([
-        "準備として、",
-        math(String.raw`z, w, x \in \mathbb{C}`),
-        " について次の (a)・(c) を示す。",
-        math(String.raw`-w`),
-        " などは ",
-        ref("multiply_by_minus_one"),
-        " による。",
-      ]),
-      paragraph(["(a) ", math(String.raw`z(-w) = -(zw)`), "。"]),
-      displayMath(String.raw`\begin{aligned}
-z(-w)
-&= z\bigl((-1_{\mathbb{C}})\,w\bigr)
-   &&(\because\ \blkref{multiply_by_minus_one})\\
-&= \bigl(z\,(-1_{\mathbb{C}})\bigr)\,w
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
-&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&= (-1_{\mathbb{C}})\,(zw)
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= -(zw)
-   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
-\end{aligned}`),
-      paragraph(["(c) ", math(String.raw`(-x) + x = 0_{\mathbb{C}}`), "。"]),
-      displayMath(String.raw`\begin{aligned}
-(-x) + x
-&= (-1_{\mathbb{C}})\,x + x
-   &&(\because\ \blkref{multiply_by_minus_one})\\
-&= (-1_{\mathbb{C}})\,x + 1_{\mathbb{C}}\,x
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
-&= \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)\,x
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
-&= \bigl((-1,0) + (1,0)\bigr)\,x
-   &&(\because\ \blkref{inclusion_rr_to_cc})\\
-&= (-1+1,\ 0+0)\,x
-   &&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
-&= (0,0)\,x
-   &&(\because\ \mathbb{R}\ \text{の四則})\\
-&= 0_{\mathbb{C}}\,x
-   &&(\because\ \blkref{inclusion_rr_to_cc})\\
-&= 0_{\mathbb{C}}
-   &&(\because\ \blkref{complex_zero_times_is_zero})
-\end{aligned}`),
-      paragraph([
         "両辺はともに ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " の元なので、4 つの成分が一致することを示せばよい。",
@@ -998,7 +955,7 @@ z(-w)
 &= B_{11}B_{22} + B_{12}(-B_{21})
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
-   &&(\because\ \text{(a)}\ (z \to B_{12},\ w \to B_{21}))\\
+   &&(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to B_{12},\ w \to B_{21}))\\
 &= B_{11}B_{22} - B_{12}B_{21}
    &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
 &= \det B
@@ -1019,11 +976,11 @@ z(-w)
 &= B_{11}(-B_{12}) + B_{12}B_{11}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= \bigl(-(B_{11}B_{12})\bigr) + B_{12}B_{11}
-   &&(\because\ \text{(a)}\ (z \to B_{11},\ w \to B_{12}))\\
+   &&(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to B_{11},\ w \to B_{12}))\\
 &= \bigl(-(B_{11}B_{12})\bigr) + B_{11}B_{12}
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= 0_{\mathbb{C}}
-   &&(\because\ \text{(c)}\ (x \to B_{11}B_{12}))\\
+   &&(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to B_{11}B_{12}))\\
 &= (\det B)\,0_{\mathbb{C}}
    &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
 &= (\det B)\,\delta_{12}
@@ -1040,13 +997,13 @@ z(-w)
 &= B_{21}B_{22} + B_{22}(-B_{21})
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= B_{21}B_{22} + \bigl(-(B_{22}B_{21})\bigr)
-   &&(\because\ \text{(a)}\ (z \to B_{22},\ w \to B_{21}))\\
+   &&(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to B_{22},\ w \to B_{21}))\\
 &= B_{21}B_{22} + \bigl(-(B_{21}B_{22})\bigr)
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \bigl(-(B_{21}B_{22})\bigr) + B_{21}B_{22}
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
 &= 0_{\mathbb{C}}
-   &&(\because\ \text{(c)}\ (x \to B_{21}B_{22}))\\
+   &&(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to B_{21}B_{22}))\\
 &= (\det B)\,0_{\mathbb{C}}
    &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
 &= (\det B)\,\delta_{21}
@@ -1063,7 +1020,7 @@ z(-w)
 &= B_{21}(-B_{12}) + B_{22}B_{11}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= \bigl(-(B_{21}B_{12})\bigr) + B_{22}B_{11}
-   &&(\because\ \text{(a)}\ (z \to B_{21},\ w \to B_{12}))\\
+   &&(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to B_{21},\ w \to B_{12}))\\
 &= B_{22}B_{11} + \bigl(-(B_{21}B_{12})\bigr)
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
 &= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
@@ -1087,6 +1044,7 @@ z(-w)
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明）: two_sided_inverse_of_two_by_two_with_nonzero_det の右逆元の側の準備として足した。数値検証: sagemath/check/matrix_times_adjugate_two_by_two/。",
+        "2026-11-11（Lean の通しの証明）: 準備 (a)・(c) を主張 complex_times_negation_is_negation_of_product_in_cc・negation_plus_self_is_zero_in_cc（000_calculation_formulae_30_44.ts）へ移し、成分の鎖から引くようにした。値と主張は不変。",
       ],
     },
   },
@@ -1121,32 +1079,7 @@ z(-w)
     ],
     proof: [
       paragraph([
-        "準備として、",
-        math(String.raw`z, w \in \mathbb{C}`),
-        " について次の (b) を示す。",
-        math(String.raw`-z`),
-        " などは ",
-        ref("multiply_by_minus_one"),
-        " による。",
-      ]),
-      paragraph(["(b) ", math(String.raw`(-z)\,w = -(zw)`), "。"]),
-      displayMath(String.raw`\begin{aligned}
-(-z)\,w
-&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
-   &&(\because\ \blkref{multiply_by_minus_one})\\
-&= (-1_{\mathbb{C}})\,(zw)
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
-&= -(zw)
-   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
-\end{aligned}`),
-      paragraph([
-        "また ",
-        ref("matrix_times_adjugate_two_by_two"),
-        " の証明の準備 (c) ",
-        math(String.raw`(-x) + x = 0_{\mathbb{C}}`),
-        "（",
-        math(String.raw`x \in \mathbb{C}`),
-        "）を使う。両辺はともに ",
+        "両辺はともに ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " の元なので、4 つの成分が一致することを示せばよい。",
       ]),
@@ -1157,7 +1090,7 @@ z(-w)
 &= B_{22}B_{11} + (-B_{12})\,B_{21}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= B_{22}B_{11} + \bigl(-(B_{12}B_{21})\bigr)
-   &&(\because\ \text{(b)}\ (z \to B_{12},\ w \to B_{21}))\\
+   &&(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to B_{12},\ w \to B_{21}))\\
 &= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= B_{11}B_{22} - B_{12}B_{21}
@@ -1180,13 +1113,13 @@ z(-w)
 &= B_{22}B_{12} + (-B_{12})\,B_{22}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= B_{22}B_{12} + \bigl(-(B_{12}B_{22})\bigr)
-   &&(\because\ \text{(b)}\ (z \to B_{12},\ w \to B_{22}))\\
+   &&(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to B_{12},\ w \to B_{22}))\\
 &= B_{22}B_{12} + \bigl(-(B_{22}B_{12})\bigr)
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \bigl(-(B_{22}B_{12})\bigr) + B_{22}B_{12}
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
 &= 0_{\mathbb{C}}
-   &&(\because\ \text{(c)}\ (x \to B_{22}B_{12}))\\
+   &&(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to B_{22}B_{12}))\\
 &= (\det B)\,0_{\mathbb{C}}
    &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
 &= (\det B)\,\delta_{12}
@@ -1203,11 +1136,11 @@ z(-w)
 &= (-B_{21})\,B_{11} + B_{11}B_{21}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= \bigl(-(B_{21}B_{11})\bigr) + B_{11}B_{21}
-   &&(\because\ \text{(b)}\ (z \to B_{21},\ w \to B_{11}))\\
+   &&(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to B_{21},\ w \to B_{11}))\\
 &= \bigl(-(B_{21}B_{11})\bigr) + B_{21}B_{11}
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= 0_{\mathbb{C}}
-   &&(\because\ \text{(c)}\ (x \to B_{21}B_{11}))\\
+   &&(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to B_{21}B_{11}))\\
 &= (\det B)\,0_{\mathbb{C}}
    &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
 &= (\det B)\,\delta_{21}
@@ -1224,7 +1157,7 @@ z(-w)
 &= (-B_{21})\,B_{12} + B_{11}B_{22}
    &&(\because\ \blkref{def_adjugate_two_by_two})\\
 &= \bigl(-(B_{21}B_{12})\bigr) + B_{11}B_{22}
-   &&(\because\ \text{(b)}\ (z \to B_{21},\ w \to B_{12}))\\
+   &&(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to B_{21},\ w \to B_{12}))\\
 &= B_{11}B_{22} + \bigl(-(B_{21}B_{12})\bigr)
    &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
 &= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
@@ -1248,6 +1181,7 @@ z(-w)
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明）: two_sided_inverse_of_two_by_two_with_nonzero_det の左逆元の側の準備として足した。数値検証: sagemath/check/adjugate_times_matrix_two_by_two/。",
+        "2026-11-11（Lean の通しの証明）: 準備 (b) と、matrix_times_adjugate_two_by_two の準備 (c) を引いていた行を、主張 negation_times_complex_is_negation_of_product_in_cc・negation_plus_self_is_zero_in_cc（000_calculation_formulae_30_44.ts）の参照にした。値と主張は不変。",
       ],
     },
   },

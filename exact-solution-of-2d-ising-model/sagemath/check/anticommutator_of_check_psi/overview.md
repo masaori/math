@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - ブロック: `evenfermi_003_claim_anticommutator`（ψ̌ の反交換関係）
 - 範囲: 準備の ψ̌ の書き直し（2 等号）、準備 1（4 等号）、準備 2（13 等号）、準備 3（4 等号と 2 等号）、
-  準備 4 の (i)〜(vii)（4・3・3・4・3・3・2 等号）と (viii)(ix)、
+  準備 4 の (i)〜(vii)（4・1・1・4・3・3・2 等号。(ii)・(iii) は 2026-11-11 から `complex_times_negation_is_negation_of_product_in_cc`・`negation_times_complex_is_negation_of_product_in_cc` を引く 1 等号で、その鎖はそれぞれのラベルのフォルダの検算が確かめる）と (viii)(ix)、
   準備 5 の a_ν・b_ν（各 3 等号）・r_ν（13 等号）・b_μ b_ν（8 等号）・t t（7 等号）・d_μ d_ν（4 等号）・d_μ^{-1}d_ν^{-1}（4 等号）・
   u^-u^-（8 等号）・u^+u^+（7 等号）・u^-u^+（6 等号）・h h（3 等号）・二つの和（各 2 等号）・(u^-u^+ + hh)ω（11 等号）、
   主張の三つの式の鎖（各 2 等号と、場合ごとに 1〜3 等号）、主張

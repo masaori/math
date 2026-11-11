@@ -1,0 +1,39 @@
+# 対象ラベル: negation_times_complex_is_negation_of_product_in_cc
+# 証明の三行の鎖の四つの項:
+#   (-z)w = ((-1_C)z)w = (-1_C)(zw) = -(zw)
+# ℂ を実数の対として持ち（definition_of_cc）、対の積は definition_of_cc の式で作る。r_C := (r, 0)（inclusion_rr_to_cc）。
+# 符号反転は multiply_by_minus_one の定義どおり (-1_C) との積として組む。
+# z = (a, b), w = (c, d) の成分は QQ 上の多項式環の不定元（任意の実数を代入しても等号は保たれる）。
+# 帰属: 成分はすべて QQ[a, b, c, d] の元。浮動小数点と RR / CC への脱出はない。
+P.<a, b, c, d> = PolynomialRing(QQ)
+
+def incl(r):
+    return (P(r), P(0))
+
+def pair_add(z, w):
+    return (z[0] + w[0], z[1] + w[1])
+
+def pair_mul(z, w):
+    return (z[0] * w[0] - z[1] * w[1], z[0] * w[1] + z[1] * w[0])
+
+minus_one_C = incl(-1)
+one_C = incl(1)
+zero_C = incl(0)
+
+def neg(z):
+    """multiply_by_minus_one: -z := (-1_C) z。"""
+    return pair_mul(minus_one_C, z)
+
+z = (a, b); w = (c, d)
+chain = [
+    pair_mul(neg(z), w),                                  # (-z)w
+    pair_mul(pair_mul(minus_one_C, z), w),                # ((-1_C)z)w        multiply_by_minus_one (z -> z)
+    pair_mul(minus_one_C, pair_mul(z, w)),                # (-1_C)(zw)        積の結合律
+    neg(pair_mul(z, w)),                                  # -(zw)             multiply_by_minus_one (z -> zw) を右辺から左辺へ
+]
+for k in range(len(chain) - 1):
+    assert chain[k] == chain[k + 1], k
+# 対照: 符号を落とした zw とは一致しない
+assert chain[0] != pair_mul(z, w)
+print("checked the chain of 4 terms over QQ[a, b, c, d] pairs")
+print("RESULT: PASS")

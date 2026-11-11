@@ -2947,6 +2947,145 @@ b-a
     },
   },
   {
+    id: "calculation_formulae_claim_complex_times_negation_is_negation_of_product_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`z(-w)=-(zw)` },
+    labels: ["complex_times_negation_is_negation_of_product_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`z,w\in\mathbb C`),
+        " とする。",
+        math(String.raw`-w`),
+        "・",
+        math(String.raw`-(zw)`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`z(-w)=-(zw)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+z(-w)
+&= z\bigl((-1_{\mathbb{C}})\,w\bigr)
+   &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to w)\bigr)\\
+&= \bigl(z\,(-1_{\mathbb{C}})\bigr)\,w
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\,(zw)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -(zw)
+   &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to zw)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_times_adjugate_two_by_two の証明の準備 (a) と、anticommutator_of_check_psi の証明の準備 4 (ii) が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/complex_times_negation_is_negation_of_product_in_cc/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_negation_times_complex_is_negation_of_product_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(-z)w=-(zw)` },
+    labels: ["negation_times_complex_is_negation_of_product_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`z,w\in\mathbb C`),
+        " とする。",
+        math(String.raw`-z`),
+        "・",
+        math(String.raw`-(zw)`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転である。このとき",
+      ]),
+      displayMath(String.raw`(-z)\,w=-(zw)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-z)\,w
+&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
+   &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to z)\bigr)\\
+&= (-1_{\mathbb{C}})\,(zw)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -(zw)
+   &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to zw)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。adjugate_times_matrix_two_by_two の証明の準備 (b) と、anticommutator_of_check_psi の証明の準備 4 (iii) が同じ等式をそれぞれの場で示していたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/negation_times_complex_is_negation_of_product_in_cc/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_negation_plus_self_is_zero_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(-x)+x=0_{\mathbb C}` },
+    labels: ["negation_plus_self_is_zero_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`x\in\mathbb C`),
+        " とする。",
+        math(String.raw`-x`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転、",
+        math(String.raw`0_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(0,0)`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`(-x)+x=0_{\mathbb C}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`-1_{\mathbb C},1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=-1,1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-x) + x
+&= (-1_{\mathbb{C}})\,x + x
+   &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to x)\bigr)\\
+&= (-1_{\mathbb{C}})\,x + 1_{\mathbb{C}}\,x
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)\,x
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \bigl((-1,0) + (1,0)\bigr)\,x
+   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{を 2 箇所へ同時適用})\\
+&= (-1+1,\ 0+0)\,x
+   &&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (0,0)\,x
+   &&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 0_{\mathbb{C}}\,x
+   &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{を右辺から左辺へ})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_zero_times_is_zero})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_times_adjugate_two_by_two の証明の準備 (c) にあり、adjugate_times_matrix_two_by_two がその準備を引いていたので、1 つの主張にして両方から引くようにした。数値検証: sagemath/check/negation_plus_self_is_zero_in_cc/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_i_times_negated_real_is_negation_of_i_times",
     kind: "claim",
     title: { tex: String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})` },

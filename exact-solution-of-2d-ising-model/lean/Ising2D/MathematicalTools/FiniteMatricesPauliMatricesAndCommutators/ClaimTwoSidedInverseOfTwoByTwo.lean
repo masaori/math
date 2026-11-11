@@ -15,10 +15,12 @@
 
 * 添字: Lean の `Fin 2` の `0, 1` が人手の添字 `1, 2` に当たる（`B 0 1` が人手の `B_{12}`）。
 * `def_adjugate_two_by_two`: `adjTwo`。成分の `-B_{12}` は Lean の `ℂ` の符号反転で、人手の `multiply_by_minus_one` の
-  `-w := (-1_ℂ) w` とは `neg_one_mul` の 1 段でつながる（準備 (a)・(b)・(c) の 1 段目）。
+  `-w := (-1_ℂ) w` とは `neg_one_mul` の 1 段でつながる（成分の鎖が引く下の 3 つの主張の 1 段目）。
 * `mat_mult` の 2×2 の成分 `(AB)_{ik} = A_{i1}B_{1k} + A_{i2}B_{2k}`: `mul_two_apply`（`matrix_mul_apply_sum` と 2 項の和）。
-* 準備 (a) `z(-w) = -(zw)` の 5 行: `mul_neg_eq_neg_mul_complex`。(b) `(-z)w = -(zw)` の 3 行: `neg_mul_eq_neg_mul_complex`。
-  (c) `(-x) + x = 0_ℂ` の 8 行: `neg_add_self_complex`（`(-1,0) + (1,0) = (-1+1, 0+0) = (0,0)` の 3 段は成分の等式）。
+* 成分の鎖が引く `complex_times_negation_is_negation_of_product_in_cc`（`z(-w) = -(zw)`）・
+  `negation_times_complex_is_negation_of_product_in_cc`（`(-z)w = -(zw)`）・`negation_plus_self_is_zero_in_cc`（`(-x) + x = 0_ℂ`）は、
+  `SetNotationAndComplexCartesianArithmetic/ClaimNegationInProductAndNegationPlusSelfInCC.lean` の
+  `mul_neg_eq_neg_mul_complex`・`neg_mul_eq_neg_mul_complex`・`neg_add_self_complex` である。
 * `matrix_times_adjugate_two_by_two`: 4 つの成分の鎖 `mul_adjTwo_apply_00`・`_01`・`_10`・`_11`（人手の 9・9・10・11 行と
   1 段ずつの `calc`）と `mul_adjTwo`（全ての成分が一致する）。
 * `adjugate_times_matrix_two_by_two`: `adjTwo_mul_apply_00`・`_01`・`_10`・`_11`（10・10・9・11 行）と `adjTwo_mul`。
@@ -36,6 +38,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOne
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -50,35 +53,6 @@ theorem mul_two_apply (A B : Matrix (Fin 2) (Fin 2) ℂ) (i k : Fin 2) :
     (A * B) i k = A i 0 * B 0 k + A i 1 * B 1 k := by
   rw [matrix_mul_apply_sum, Fin.sum_univ_two]
 
-/-- 準備 (a): `z(-w) = -(zw)`。 -/
-theorem mul_neg_eq_neg_mul_complex (z w : ℂ) : z * (-w) = -(z * w) :=
-  calc z * (-w)
-      = z * ((-1) * w) := by rw [neg_one_mul]   -- `multiply_by_minus_one`
-    _ = (z * (-1)) * w := (mul_assoc _ _ _).symm  -- 積の結合律を右辺から左辺へ
-    _ = ((-1) * z) * w := by rw [mul_comm z (-1)] -- 積の可換律
-    _ = (-1) * (z * w) := mul_assoc _ _ _         -- 積の結合律
-    _ = -(z * w) := neg_one_mul _                 -- `multiply_by_minus_one` を右辺から左辺へ
-
-/-- 準備 (b): `(-z)w = -(zw)`。 -/
-theorem neg_mul_eq_neg_mul_complex (z w : ℂ) : (-z) * w = -(z * w) :=
-  calc (-z) * w
-      = ((-1) * z) * w := by rw [neg_one_mul]     -- `multiply_by_minus_one`
-    _ = (-1) * (z * w) := mul_assoc _ _ _         -- 積の結合律
-    _ = -(z * w) := neg_one_mul _                 -- `multiply_by_minus_one` を右辺から左辺へ
-
-/-- 準備 (c): `(-x) + x = 0_ℂ`。 -/
-theorem neg_add_self_complex (x : ℂ) : (-x) + x = 0 :=
-  calc (-x) + x
-      = (-1) * x + x := by rw [neg_one_mul]                       -- `multiply_by_minus_one`
-    _ = (-1) * x + 1 * x := by rw [one_mul]                       -- 積の単位元を右辺から左辺へ
-    _ = ((-1) + 1) * x := (add_mul _ _ _).symm                    -- 右からの分配律を右辺から左辺へ
-    _ = ((⟨-1, 0⟩ : ℂ) + ⟨1, 0⟩) * x := by
-        congr 2 <;> apply Complex.ext <;> simp                    -- `inclusion_rr_to_cc`
-    _ = (⟨-1 + 1, 0 + 0⟩ : ℂ) * x := rfl                          -- `definition_of_cc` の和
-    _ = (⟨0, 0⟩ : ℂ) * x := by norm_num                           -- `ℝ` の四則
-    _ = 0 * x := rfl                                              -- `inclusion_rr_to_cc`
-    _ = 0 := zero_mul _                                           -- `complex_zero_times_is_zero`
-
 /-! ## `matrix_times_adjugate_two_by_two`: `B (adj B) = (det B) I` -/
 
 theorem mul_adjTwo_apply_00 (B : Matrix (Fin 2) (Fin 2) ℂ) :
@@ -86,7 +60,7 @@ theorem mul_adjTwo_apply_00 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (B * adjTwo B) 0 0
       = B 0 0 * adjTwo B 0 0 + B 0 1 * adjTwo B 1 0 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 0 0 * B 1 1 + B 0 1 * (-B 1 0) := rfl                                -- `def_adjugate_two_by_two`
-    _ = B 0 0 * B 1 1 + (-(B 0 1 * B 1 0)) := by rw [mul_neg_eq_neg_mul_complex] -- (a)
+    _ = B 0 0 * B 1 1 + (-(B 0 1 * B 1 0)) := by rw [mul_neg_eq_neg_mul_complex] -- `complex_times_negation_is_negation_of_product_in_cc`
     _ = B 0 0 * B 1 1 - B 0 1 * B 1 0 := (sub_eq_add_neg _ _).symm             -- `def_complex_difference` を右辺から左辺へ
     _ = B.det := (det_two_by_two_def B).symm                                   -- `def_det_two_by_two` を右辺から左辺へ
     _ = B.det * 1 := (mul_one _).symm                                          -- 積の単位元を右辺から左辺へ
@@ -100,9 +74,9 @@ theorem mul_adjTwo_apply_01 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (B * adjTwo B) 0 1
       = B 0 0 * adjTwo B 0 1 + B 0 1 * adjTwo B 1 1 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 0 0 * (-B 0 1) + B 0 1 * B 0 0 := rfl                                -- `def_adjugate_two_by_two`
-    _ = (-(B 0 0 * B 0 1)) + B 0 1 * B 0 0 := by rw [mul_neg_eq_neg_mul_complex] -- (a)
+    _ = (-(B 0 0 * B 0 1)) + B 0 1 * B 0 0 := by rw [mul_neg_eq_neg_mul_complex] -- `complex_times_negation_is_negation_of_product_in_cc`
     _ = (-(B 0 0 * B 0 1)) + B 0 0 * B 0 1 := by rw [mul_comm (B 0 1) (B 0 0)] -- 積の可換律
-    _ = 0 := neg_add_self_complex _                                            -- (c)
+    _ = 0 := neg_add_self_complex _                                            -- `negation_plus_self_is_zero_in_cc`
     _ = B.det * 0 := (mul_zero _).symm                                         -- `complex_times_zero_is_zero` を右辺から左辺へ
     _ = B.det * kroneckerDelta (0 : Fin 2) 1 := by rw [kroneckerDelta_of_ne (by decide)] -- `def_kronecker_delta` を右辺から左辺へ
     _ = B.det * (1 : Matrix (Fin 2) (Fin 2) ℂ) 0 1 := by rw [identity_matrix_apply] -- `def_identity_matrix` を右辺から左辺へ
@@ -114,10 +88,10 @@ theorem mul_adjTwo_apply_10 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (B * adjTwo B) 1 0
       = B 1 0 * adjTwo B 0 0 + B 1 1 * adjTwo B 1 0 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 1 0 * B 1 1 + B 1 1 * (-B 1 0) := rfl                                -- `def_adjugate_two_by_two`
-    _ = B 1 0 * B 1 1 + (-(B 1 1 * B 1 0)) := by rw [mul_neg_eq_neg_mul_complex] -- (a)
+    _ = B 1 0 * B 1 1 + (-(B 1 1 * B 1 0)) := by rw [mul_neg_eq_neg_mul_complex] -- `complex_times_negation_is_negation_of_product_in_cc`
     _ = B 1 0 * B 1 1 + (-(B 1 0 * B 1 1)) := by rw [mul_comm (B 1 1) (B 1 0)] -- 積の可換律
     _ = (-(B 1 0 * B 1 1)) + B 1 0 * B 1 1 := add_comm _ _                     -- 加法の可換律
-    _ = 0 := neg_add_self_complex _                                            -- (c)
+    _ = 0 := neg_add_self_complex _                                            -- `negation_plus_self_is_zero_in_cc`
     _ = B.det * 0 := (mul_zero _).symm                                         -- `complex_times_zero_is_zero` を右辺から左辺へ
     _ = B.det * kroneckerDelta (1 : Fin 2) 0 := by rw [kroneckerDelta_of_ne (by decide)] -- `def_kronecker_delta` を右辺から左辺へ
     _ = B.det * (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 0 := by rw [identity_matrix_apply] -- `def_identity_matrix` を右辺から左辺へ
@@ -129,7 +103,7 @@ theorem mul_adjTwo_apply_11 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (B * adjTwo B) 1 1
       = B 1 0 * adjTwo B 0 1 + B 1 1 * adjTwo B 1 1 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 1 0 * (-B 0 1) + B 1 1 * B 0 0 := rfl                                -- `def_adjugate_two_by_two`
-    _ = (-(B 1 0 * B 0 1)) + B 1 1 * B 0 0 := by rw [mul_neg_eq_neg_mul_complex] -- (a)
+    _ = (-(B 1 0 * B 0 1)) + B 1 1 * B 0 0 := by rw [mul_neg_eq_neg_mul_complex] -- `complex_times_negation_is_negation_of_product_in_cc`
     _ = B 1 1 * B 0 0 + (-(B 1 0 * B 0 1)) := add_comm _ _                     -- 加法の可換律
     _ = B 0 0 * B 1 1 + (-(B 0 1 * B 1 0)) := by
         rw [mul_comm (B 1 1) (B 0 0), mul_comm (B 1 0) (B 0 1)]               -- 積の可換律を 2 か所へ
@@ -158,7 +132,7 @@ theorem adjTwo_mul_apply_00 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (adjTwo B * B) 0 0
       = adjTwo B 0 0 * B 0 0 + adjTwo B 0 1 * B 1 0 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 1 1 * B 0 0 + (-B 0 1) * B 1 0 := rfl                                -- `def_adjugate_two_by_two`
-    _ = B 1 1 * B 0 0 + (-(B 0 1 * B 1 0)) := by rw [neg_mul_eq_neg_mul_complex] -- (b)
+    _ = B 1 1 * B 0 0 + (-(B 0 1 * B 1 0)) := by rw [neg_mul_eq_neg_mul_complex] -- `negation_times_complex_is_negation_of_product_in_cc`
     _ = B 0 0 * B 1 1 + (-(B 0 1 * B 1 0)) := by rw [mul_comm (B 1 1) (B 0 0)] -- 積の可換律
     _ = B 0 0 * B 1 1 - B 0 1 * B 1 0 := (sub_eq_add_neg _ _).symm             -- `def_complex_difference` を右辺から左辺へ
     _ = B.det := (det_two_by_two_def B).symm                                   -- `def_det_two_by_two` を右辺から左辺へ
@@ -173,10 +147,10 @@ theorem adjTwo_mul_apply_01 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (adjTwo B * B) 0 1
       = adjTwo B 0 0 * B 0 1 + adjTwo B 0 1 * B 1 1 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = B 1 1 * B 0 1 + (-B 0 1) * B 1 1 := rfl                                -- `def_adjugate_two_by_two`
-    _ = B 1 1 * B 0 1 + (-(B 0 1 * B 1 1)) := by rw [neg_mul_eq_neg_mul_complex] -- (b)
+    _ = B 1 1 * B 0 1 + (-(B 0 1 * B 1 1)) := by rw [neg_mul_eq_neg_mul_complex] -- `negation_times_complex_is_negation_of_product_in_cc`
     _ = B 1 1 * B 0 1 + (-(B 1 1 * B 0 1)) := by rw [mul_comm (B 0 1) (B 1 1)] -- 積の可換律
     _ = (-(B 1 1 * B 0 1)) + B 1 1 * B 0 1 := add_comm _ _                     -- 加法の可換律
-    _ = 0 := neg_add_self_complex _                                            -- (c)
+    _ = 0 := neg_add_self_complex _                                            -- `negation_plus_self_is_zero_in_cc`
     _ = B.det * 0 := (mul_zero _).symm                                         -- `complex_times_zero_is_zero` を右辺から左辺へ
     _ = B.det * kroneckerDelta (0 : Fin 2) 1 := by rw [kroneckerDelta_of_ne (by decide)] -- `def_kronecker_delta` を右辺から左辺へ
     _ = B.det * (1 : Matrix (Fin 2) (Fin 2) ℂ) 0 1 := by rw [identity_matrix_apply] -- `def_identity_matrix` を右辺から左辺へ
@@ -188,9 +162,9 @@ theorem adjTwo_mul_apply_10 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (adjTwo B * B) 1 0
       = adjTwo B 1 0 * B 0 0 + adjTwo B 1 1 * B 1 0 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = (-B 1 0) * B 0 0 + B 0 0 * B 1 0 := rfl                                -- `def_adjugate_two_by_two`
-    _ = (-(B 1 0 * B 0 0)) + B 0 0 * B 1 0 := by rw [neg_mul_eq_neg_mul_complex] -- (b)
+    _ = (-(B 1 0 * B 0 0)) + B 0 0 * B 1 0 := by rw [neg_mul_eq_neg_mul_complex] -- `negation_times_complex_is_negation_of_product_in_cc`
     _ = (-(B 1 0 * B 0 0)) + B 1 0 * B 0 0 := by rw [mul_comm (B 0 0) (B 1 0)] -- 積の可換律
-    _ = 0 := neg_add_self_complex _                                            -- (c)
+    _ = 0 := neg_add_self_complex _                                            -- `negation_plus_self_is_zero_in_cc`
     _ = B.det * 0 := (mul_zero _).symm                                         -- `complex_times_zero_is_zero` を右辺から左辺へ
     _ = B.det * kroneckerDelta (1 : Fin 2) 0 := by rw [kroneckerDelta_of_ne (by decide)] -- `def_kronecker_delta` を右辺から左辺へ
     _ = B.det * (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 0 := by rw [identity_matrix_apply] -- `def_identity_matrix` を右辺から左辺へ
@@ -202,7 +176,7 @@ theorem adjTwo_mul_apply_11 (B : Matrix (Fin 2) (Fin 2) ℂ) :
   calc (adjTwo B * B) 1 1
       = adjTwo B 1 0 * B 0 1 + adjTwo B 1 1 * B 1 1 := mul_two_apply _ _ _ _   -- `mat_mult`
     _ = (-B 1 0) * B 0 1 + B 0 0 * B 1 1 := rfl                                -- `def_adjugate_two_by_two`
-    _ = (-(B 1 0 * B 0 1)) + B 0 0 * B 1 1 := by rw [neg_mul_eq_neg_mul_complex] -- (b)
+    _ = (-(B 1 0 * B 0 1)) + B 0 0 * B 1 1 := by rw [neg_mul_eq_neg_mul_complex] -- `negation_times_complex_is_negation_of_product_in_cc`
     _ = B 0 0 * B 1 1 + (-(B 1 0 * B 0 1)) := add_comm _ _                     -- 加法の可換律
     _ = B 0 0 * B 1 1 + (-(B 0 1 * B 1 0)) := by rw [mul_comm (B 1 0) (B 0 1)] -- 積の可換律
     _ = B 0 0 * B 1 1 - B 0 1 * B 1 0 := (sub_eq_add_neg _ _).symm             -- `def_complex_difference` を右辺から左辺へ

@@ -1,7 +1,7 @@
 # adjugate_times_matrix_two_by_two（(adj B) B = (det B) I）の証明の各行の検算。
-# 成分は多項式環 QQ[B11, B12, B21, B22, z, w] の元として扱う（浮動小数点は使わない）。
+# 成分は多項式環 QQ[B11, B12, B21, B22] の元として扱う（浮動小数点は使わない）。
 
-R.<B11, B12, B21, B22, z, w> = PolynomialRing(QQ)
+R.<B11, B12, B21, B22> = PolynomialRing(QQ)
 m1 = -1                                         # (-1_ℂ)。multiply_by_minus_one
 neg = lambda u: m1 * u
 B = matrix(R, [[B11, B12], [B21, B22]])
@@ -10,10 +10,8 @@ detB = B11*B22 - B12*B21                              # def_det_two_by_two
 I2 = identity_matrix(R, 2)
 delta = lambda i, j: R(1) if i == j else R(0)         # def_kronecker_delta
 
-# 準備 (b) (-z)w = -(zw) の 3 行
-b_chain = [neg(z)*w, (m1*z)*w, m1*(z*w), neg(z*w)]
-assert all(t == b_chain[0] for t in b_chain), "(b)"
-print("準備 (b): 各行が一致")
+# 準備 (b)・(c) は主張 negation_times_complex_is_negation_of_product_in_cc・negation_plus_self_is_zero_in_cc に移した
+# （検算は sagemath/check/ の同名のフォルダ）。ここでは成分の鎖の各行だけを確かめる。
 
 P = adjB * B
 S = detB * I2

@@ -1,8 +1,8 @@
 # matrix_times_adjugate_two_by_two（B adj B = (det B) I）の証明の各行の検算。
-# 成分は多項式環 QQ[B11, B12, B21, B22, z, w, x] の元として扱う（浮動小数点は使わない）。
+# 成分は多項式環 QQ[B11, B12, B21, B22] の元として扱う（浮動小数点は使わない）。
 # QQ[...] の乗法は可換なので、ℂ の体の公理（結合律・可換律・単位元・分配律）で移り合う行どうしは多項式として一致する。
 
-R.<B11, B12, B21, B22, z, w, x> = PolynomialRing(QQ)
+R.<B11, B12, B21, B22> = PolynomialRing(QQ)
 m1 = -1                                         # (-1_ℂ)。multiply_by_minus_one: -u := (-1_ℂ) u
 neg = lambda u: m1 * u
 B = matrix(R, [[B11, B12], [B21, B22]])
@@ -11,14 +11,8 @@ detB = B11*B22 - B12*B21                              # def_det_two_by_two
 I2 = identity_matrix(R, 2)                            # def_identity_matrix（δ_ij）
 delta = lambda i, j: R(1) if i == j else R(0)         # def_kronecker_delta
 
-# 準備 (a) z(-w) = -(zw) の 5 行
-a_chain = [z*neg(w), z*(m1*w), (z*m1)*w, (m1*z)*w, m1*(z*w), neg(z*w)]
-assert all(t == a_chain[0] for t in a_chain), "(a)"
-# 準備 (c) (-x) + x = 0 の 8 行。(−1,0)+(1,0) = (−1+1, 0+0) = (0,0) は ℝ の四則
-assert (-1 + 1, 0 + 0) == (0, 0)
-c_chain = [neg(x) + x, m1*x + x, m1*x + 1*x, (m1 + 1)*x, 0*x, R(0)]
-assert all(t == c_chain[0] for t in c_chain) and c_chain[0] == 0, "(c)"
-print("準備 (a)・(c): 各行が一致")
+# 準備 (a)・(c) は主張 complex_times_negation_is_negation_of_product_in_cc・negation_plus_self_is_zero_in_cc に移した
+# （検算は sagemath/check/ の同名のフォルダ）。ここでは成分の鎖の各行だけを確かめる。
 
 P = B * adjB
 S = detB * I2

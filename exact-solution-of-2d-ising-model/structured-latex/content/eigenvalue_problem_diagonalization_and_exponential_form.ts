@@ -7107,23 +7107,11 @@ h := 1_{\mathbb C}\,t^{-1}`,
 = 1_{\mathbb C}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr),\\[4pt]
 &\text{(ii)}\quad z(-w)
-= z\bigl((-1_{\mathbb C})w\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
-&\phantom{\text{(ii)}\quad z(-w)}
-= (-1_{\mathbb C})(zw)
-&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
-&\phantom{\text{(ii)}\quad z(-w)}
 = -(zw)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr),\\[4pt]
+&&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\bigr),\\[4pt]
 &\text{(iii)}\quad (-z)w
-= \bigl((-1_{\mathbb C})z\bigr)w
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
-&\phantom{\text{(iii)}\quad (-z)w}
-= (-1_{\mathbb C})(zw)
-&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
-&\phantom{\text{(iii)}\quad (-z)w}
 = -(zw)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr),\\[4pt]
+&&\bigl(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\bigr),\\[4pt]
 &\text{(iv)}\quad -(-z)
 = (-1_{\mathbb C})\bigl((-1_{\mathbb C})z\bigr)
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\text{ を 2 箇所へ同時適用}\bigr)\\
@@ -7615,6 +7603,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明）: 準備 4 の (ii) z(−w) = −(zw)・(iii) (−z)w = −(zw) をその場の 3 行の鎖で示していた（(ii) の 2 行目は積の結合律と可換律を 1 行で使っていた）のを、主張 complex_times_negation_is_negation_of_product_in_cc・negation_times_complex_is_negation_of_product_in_cc の参照にした。値と主張は不変。",
         "2026-11-11（Lean の通しの証明）: 前置きで各自に置いていた商 z/w := zw^{-1} を、def_complex_quotient の参照に替えた。",
         "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +
           "係数が |γ_2|（非負実数）で書かれることにより絶対値の計算 1 行に置き換わった。",
