@@ -301,7 +301,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
                           -- 1 行目: `euler_formula_cos_sin` を 2 箇所へ
     _ = (ep + em) * (2 : ℂ)⁻¹ + Complex.I * ((ep - em) * (2 * Complex.I)⁻¹) := by
         rw [div_eq_mul_inv, div_eq_mul_inv]
-                          -- 2 行目: 準備の商 `z/w := zw^{-1}` を 2 箇所へ
+                          -- 2 行目: `def_complex_quotient`（`z/w := zw^{-1}`）を 2 箇所へ（`div_eq_mul_inv`）
     _ = (ep + em) * (2 : ℂ)⁻¹ + (ep - em) * (Complex.I * (2 * Complex.I)⁻¹) := by
         rw [mul_left_comm Complex.I (ep - em)]
                           -- 3 行目: `complex_numbers_form_a_field` の積の結合律・可換律

@@ -3949,9 +3949,13 @@ A(\tilde\theta_\mu)
         math(String.raw`w \neq 0_{\mathbb{C}}`),
         " について ",
         math(String.raw`w^{-1}`),
-        " はその乗法の逆元、商は ",
-        math(String.raw`z/w := z\,w^{-1}`),
-        " とする。",
+        " はその乗法の逆元（",
+        ref("multiplicative_group_of_cc"),
+        " の逆元と同じ元）、商は ",
+        ref("def_complex_quotient"),
+        " の ",
+        math(String.raw`z/w = z\,w^{-1}`),
+        " である。",
         math(String.raw`2_{\mathbb{C}} = (2,0)`),
         "、",
         math(String.raw`i = (0,1)`),
@@ -4098,7 +4102,7 @@ u + iv
 &= \frac{e_+ + e_-}{2} + i\,\frac{e_+ - e_-}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin}\ \text{を 2 箇所へ})\\
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + i\bigl((e_+ - e_-)(2_{\mathbb{C}}i)^{-1}\bigr)
-&&(\because\ \text{準備の商}\ z/w := zw^{-1}\ \text{を 2 箇所へ})\\
+&&(\because\ \blkref{def_complex_quotient}\ (z\to e_+ + e_-,\ w\to2_{\mathbb{C}}),\ (z\to e_+ - e_-,\ w\to2_{\mathbb{C}}i))\\
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(i\,(2_{\mathbb{C}}^{-1}i^{-1})\bigr)
@@ -4577,6 +4581,7 @@ c_2s_2^*
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明）: 前置きで各自に置いていた商 z/w := zw^{-1} と、u + iv の鎖の 2 行目の根拠「準備の商」を、def_complex_quotient の参照（置換つき）に替えた。",
         "det_A_theta（008 章）の Step 0〜Step 6 と同じ計算である。θ_μ 固有の性質は使われておらず、" +
           "θ ∈ R の恒等式として成立することを本文で明示した。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_04（残差 ≤ 1.4e-12）。式変形の各行の厳密な検算は sagemath/check/det_A_theta_tilde/。",
@@ -5976,9 +5981,13 @@ d_\lambda := t\,b_\lambda \in \mathbb{C}`,
         math(String.raw`w^{-1}`),
         " は ",
         ref("complex_numbers_form_a_field"),
-        " のもので、商を ",
-        math(String.raw`z/w := z\,w^{-1}`),
-        " と書く。",
+        " のもの（",
+        ref("multiplicative_group_of_cc"),
+        " の逆元と同じ元）で、商は ",
+        ref("def_complex_quotient"),
+        " の ",
+        math(String.raw`z/w = z\,w^{-1}`),
+        " である。",
         math(String.raw`-z := (-1_{\mathbb C})z`),
         " は ",
         ref("multiply_by_minus_one"),
@@ -6668,6 +6677,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
     conversion: {
       status: "added",
       notes: [
+        "2026-11-11（Lean の通しの証明）: 前置きで各自に置いていた商 z/w := zw^{-1} を、def_complex_quotient の参照に替えた。",
         "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +
           "係数が |γ_2|（非負実数）で書かれることにより絶対値の計算 1 行に置き換わった。",
         "数値検証: sagemath/check/anticommutator_of_check_psi/（証明の各行。厳密計算）。旧い sagemath/check/049_claim_even_sector_fermions/check_02 は主張だけを浮動小数点で確かめたもの。",

@@ -756,8 +756,10 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
         " は商 ",
         math(String.raw`z_1/z_2`),
         " が定まるために要る（",
-        ref("multiplicative_group_of_cc"),
-        "）。",
+        ref("def_complex_quotient"),
+        " は ",
+        math(String.raw`z_2 \in \mathbb{C}^{\times}`),
+        " で商を定める）。",
         math(String.raw`r_1 \neq 0`),
         " も落とせない。たとえば ",
         math(String.raw`z_1 = 0`),
@@ -876,7 +878,7 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}\!\left(\frac{z_1}{z_2}\right)
 &= \arg^{[0,2\pi)}(z_1 z_2^{-1})
-&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z\text{。}\blkref{multiplicative_group_of_cc})\\
+&&(\because\ \blkref{def_complex_quotient}\ (z\to z_1,\ w\to z_2))\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2^{-1}))\right)
 &&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義。}\blkref{def_abs_arg})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2^{-1}))\right)
@@ -959,6 +961,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-11（Lean の通しの証明）: z_1/z_2 = z_1 z_2^{-1} の根拠を、multiplicative_group_of_cc の記法 z^{-1} = 1/z（一般の z_1/z_2 を覆わない）から def_complex_quotient に替え、主張の r_2 ≠ 0 が要る理由の参照も同じ定義にした。",
         "原文は証明が「積の場合と同様の計算による」の一文と、途中の式 1 本と、" +
           "「場合分けして結論を得る」の一文だけで、計算の中身が書かれていなかった。" +
           "積の場合と同じ形の一続きの鎖へ書き下し、各行の末尾へ (∵ …) を付けた。" +
