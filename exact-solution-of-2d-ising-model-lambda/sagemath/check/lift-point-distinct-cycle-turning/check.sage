@@ -72,6 +72,7 @@ for length in range(4, max_length + 1):
         if len(set(points[:-1])) != length:
             continue
 
+        walk_sides = []
         for index, (dr, dc) in enumerate(step_sequence):
             row, col = points[index]
             if (dr, dc) == (1, 0):
@@ -85,7 +86,9 @@ for length in range(4, max_length + 1):
             assert interior_cell(points, left_cell) != interior_cell(points, right_cell), (
                 step_sequence, index
             )
+            walk_sides.append(interior_cell(points, left_cell))
             checked_steps += 1
+        assert all(side == walk_sides[0] for side in walk_sides), step_sequence
 
         turning = cyclic_total_turning(step_sequence)
         assert turning in (ZZ(4), ZZ(-4)), (step_sequence, turning)

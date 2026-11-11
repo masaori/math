@@ -47225,7 +47225,7 @@ const chapter_zero_pinching = defineSection({
 \mathrm{Ev}^{F}_{q}(Z_L)&\ne0_{\overline{\mathbb Q}}
 &&\bigl(\because\ Z_L(q)\in\mathbb Q_{>0},\ \blkref{def_algebraic_numbers}\text{ の部分体の零元}\bigr)\\
 q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathbb Q}}
-&&\bigl(\because\ \blkref{def_finite_lattice_fisher_zeros}\bigr).
+&&\bigl(\because\ \blkref{def_finite_lattice_fisher_zeros}\bigr)
 \end{aligned}`),
                     paragraph([
                       "第一行と第二行から ", math(String.raw`q\notin\mathcal F_L`), " である。全過程は有理数と代数的数の有限和・有限積・順序比較だけで閉じ、",
@@ -70353,6 +70353,9 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_two_incident_edges",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_step_interior_side",
                       "Ising2DLambda.NecSuf.KacWard.boundary_step_interior_side",
+                      "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_vertex_side_propagation_necSuf",
+                      "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq_from_necSuf",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
