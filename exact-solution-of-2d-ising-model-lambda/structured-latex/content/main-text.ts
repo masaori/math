@@ -62956,8 +62956,11 @@ c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
                     habitat: "N",
                     verification: ["sagemath/check/smoothing-straight-visit-count"],
                     lean: [
+                      "Ising2DLambda.KacWard.crossing_vertexAxisStraightVisitCount_pos",
                       "Ising2DLambda.KacWard.smoothing_split_crossing_descent",
+                      "Ising2DLambda.NecSuf.KacWard.crossing_straightVisitCount_pos_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.smoothing_split_crossing_descent_necSuf",
+                      "Ising2DLambda.KacWard.crossing_vertexAxisStraightVisitCount_pos_from_necSuf",
                       "Ising2DLambda.KacWard.smoothing_split_crossing_descent_from_necSuf",
                     ],
                     statement: [
