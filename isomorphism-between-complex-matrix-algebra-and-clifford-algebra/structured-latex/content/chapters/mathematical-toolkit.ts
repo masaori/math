@@ -17572,4 +17572,303 @@ F\bigl(\iota(v)\bigr)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_quadratic_form_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "二次形式" },
+    labels: [],
+  },
+  {
+    id: "mathematical_toolkit_definition_polarization_of_map_to_complex_numbers",
+    kind: "definition",
+    title: { text: "ℂ への写像の偏極" },
+    labels: ["def_polarization_of_map_to_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`q:V\to\mathbb{C}`),
+        " を写像とする。", math(String.raw`a\in\mathbb{C}`), " の加法の逆元を ", math(String.raw`-_{\mathbb{C}}a\in\mathbb{C}`), " と書く（",
+        math(String.raw`a+_{\mathbb{C}}(-_{\mathbb{C}}a)=0_{\mathbb{C}}`), "）。写像 ", math(String.raw`B_q:V\times V\to\mathbb{C}`),
+        " を次で定め、", math(String.raw`q`), " の偏極と呼ぶ。",
+      ]),
+      displayMath(String.raw`B_q(x,y):=\Bigl(q(x+_V y)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(x)\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(y)\bigr)\qquad(x,y\in V)`),
+      paragraph([
+        "右辺の ", math(String.raw`x+_V y`), " は ", math(String.raw`V`), " の元であり、", math(String.raw`q`), " の三つの値とその加法の逆元、それらの ",
+        math(String.raw`\mathbb{C}`), " の中の和は ", math(String.raw`\mathbb{C}`), " の元である。これにより ", math(String.raw`B_q`),
+        " は値域を ", math(String.raw`\mathbb{C}`), " とする写像として定まる。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_quadratic_form",
+    kind: "definition",
+    title: { text: "二次形式" },
+    labels: ["def_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）とする。写像 ", math(String.raw`q:V\to\mathbb{C}`),
+        " が次の二つを満たすとき、", math(String.raw`q`), " を ", math(String.raw`V`), " 上の二次形式と呼ぶ。", math(String.raw`B_q`), " は ",
+        math(String.raw`q`), " の偏極（", ref("def_polarization_of_map_to_complex_numbers"), "）である。",
+      ]),
+      list([
+        [math(String.raw`q(\lambda\cdot_V x)=\lambda\cdot_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}q(x)\bigr)`), "（", math(String.raw`x\in V`), "、",
+          math(String.raw`\lambda\in\mathbb{C}`), "）"],
+        ["各 ", math(String.raw`y\in V`), " について、写像 ", math(String.raw`B_q(\bullet,y):V\to\mathbb{C}`), "、", math(String.raw`x\mapsto B_q(x,y)`),
+          " は ", math(String.raw`V`), " 上の線型形式（", ref("def_linear_form"), "）である"],
+      ]),
+      paragraph([
+        math(String.raw`q`), " が二次形式のとき、", math(String.raw`B_q`), " を ", math(String.raw`q`), " に付随する双線型形式と呼ぶ。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_polarization_identity",
+    kind: "claim",
+    title: { text: "偏極の等式" },
+    labels: ["claim_polarization_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`q:V\to\mathbb{C}`),
+        " を写像、", math(String.raw`B_q`), " をその偏極（", ref("def_polarization_of_map_to_complex_numbers"), "）とする。このとき、すべての ",
+        math(String.raw`x,y\in V`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\bigl(q(x)+_{\mathbb{C}}q(y)\bigr)+_{\mathbb{C}}B_q(x,y)=q(x+_V y)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=q(x)`), "、", math(String.raw`b:=q(y)`), "、", math(String.raw`c:=q(x+_V y)`), " と置く。", math(String.raw`a,b,c\in\mathbb{C}`),
+        " であり、", math(String.raw`B_q(x,y)=\bigl(c+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)+_{\mathbb{C}}(-_{\mathbb{C}}b)`), " である（",
+        ref("def_polarization_of_map_to_complex_numbers"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a+_{\mathbb{C}}b\bigr)+_{\mathbb{C}}B_q(x,y)
+&=\bigl(a+_{\mathbb{C}}b\bigr)+_{\mathbb{C}}\Bigl(\bigl(c+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)+_{\mathbb{C}}(-_{\mathbb{C}}b)\Bigr)
+&&\left(\because\ \blkref{def_polarization_of_map_to_complex_numbers}\right)\\
+&=\bigl(a+_{\mathbb{C}}b\bigr)+_{\mathbb{C}}\Bigl(c+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}b)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\bigl(a+_{\mathbb{C}}b\bigr)+_{\mathbb{C}}\Bigl(\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}b)\bigr)+_{\mathbb{C}}c\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=\Bigl(\bigl(a+_{\mathbb{C}}b\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}b)\bigr)\Bigr)+_{\mathbb{C}}c
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\Bigl(a+_{\mathbb{C}}\Bigl(b+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}b)\bigr)\Bigr)\Bigr)+_{\mathbb{C}}c
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\Bigl(a+_{\mathbb{C}}\Bigl(b+_{\mathbb{C}}\bigl((-_{\mathbb{C}}b)+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)\Bigr)\Bigr)+_{\mathbb{C}}c
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=\Bigl(a+_{\mathbb{C}}\Bigl(\bigl(b+_{\mathbb{C}}(-_{\mathbb{C}}b)\bigr)+_{\mathbb{C}}(-_{\mathbb{C}}a)\Bigr)\Bigr)+_{\mathbb{C}}c
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\Bigl(a+_{\mathbb{C}}\bigl(0_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)\Bigr)+_{\mathbb{C}}c
+&&\left(\because\ -_{\mathbb{C}}b\ \text{は}\ b\ \text{の加法の逆元}\right)\\
+&=\bigl(a+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)+_{\mathbb{C}}c
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}c
+&&\left(\because\ -_{\mathbb{C}}a\ \text{は}\ a\ \text{の加法の逆元}\right)\\
+&=c
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=q(x+_V y)
+&&\left(\because\ c\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_polarization_is_symmetric",
+    kind: "claim",
+    title: { text: "偏極は二つの引数の入れ替えで変わらない" },
+    labels: ["claim_polarization_is_symmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`q:V\to\mathbb{C}`),
+        " を写像、", math(String.raw`B_q`), " をその偏極（", ref("def_polarization_of_map_to_complex_numbers"), "）とする。このとき、すべての ",
+        math(String.raw`x,y\in V`), " について ", math(String.raw`B_q(x,y)=B_q(y,x)`), " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+B_q(x,y)
+&=\Bigl(q(x+_V y)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(x)\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(y)\bigr)
+&&\left(\because\ \blkref{def_polarization_of_map_to_complex_numbers}\right)\\
+&=\Bigl(q(y+_V x)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(x)\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(y)\bigr)
+&&\left(\because\ V\ \text{の加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=q(y+_V x)+_{\mathbb{C}}\Bigl(\bigl(-_{\mathbb{C}}q(x)\bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(y)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=q(y+_V x)+_{\mathbb{C}}\Bigl(\bigl(-_{\mathbb{C}}q(y)\bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(x)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=\Bigl(q(y+_V x)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(y)\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=B_q(y,x)
+&&\left(\because\ \blkref{def_polarization_of_map_to_complex_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_nondegenerate_quadratic_form",
+    kind: "definition",
+    title: { text: "非退化な二次形式" },
+    labels: ["def_nondegenerate_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`q`), " を ", math(String.raw`V`),
+        " 上の二次形式（", ref("def_quadratic_form"), "）、", math(String.raw`B_q`), " をそれに付随する双線型形式とする。次を満たすとき、",
+        math(String.raw`q`), " は非退化であるという。",
+      ]),
+      list([
+        [math(String.raw`x\in V`), " が、すべての ", math(String.raw`y\in V`), " について ", math(String.raw`B_q(x,y)=0_{\mathbb{C}}`), " を満たすならば、",
+          math(String.raw`x=0_V`), " である"],
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_isometry_of_quadratic_spaces",
+    kind: "definition",
+    title: { text: "等長写像" },
+    labels: ["def_isometry_of_quadratic_spaces"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " と ", math(String.raw`(V',+_{V'},\cdot_{V'},0_{V'})`), " を ℂ-線型空間（", ref("def_complex_vector_space"),
+        "）、", math(String.raw`q`), " を ", math(String.raw`V`), " 上の二次形式、", math(String.raw`q'`), " を ", math(String.raw`V'`),
+        " 上の二次形式（", ref("def_quadratic_form"), "）とする。線型写像（", ref("def_linear_map"), "）", math(String.raw`\theta:V\to V'`),
+        " が、すべての ", math(String.raw`x\in V`), " について ", math(String.raw`q'\bigl(\theta(x)\bigr)=q(x)`), " を満たすとき、",
+        math(String.raw`\theta`), " を ", math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`), " への等長写像と呼ぶ。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_split_quadratic_form",
+    kind: "definition",
+    title: { text: "線型空間とその双対空間の直和の上の、対による二次の写像" },
+    labels: ["def_split_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(W,+_W,\cdot_W,0_W)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、",
+        math(String.raw`(W^{*},+_{W^{*}},\cdot_{W^{*}},0_{W^{*}})`), " をその双対空間（", ref("def_dual_space"), "、",
+        ref("claim_dual_space_is_complex_vector_space"), "）、", math(String.raw`W\oplus W^{*}`), " をこの二つの直和（",
+        ref("def_direct_sum_of_two_vector_spaces"), "、", ref("claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"),
+        "）とする。写像 ", math(String.raw`q_W:W\oplus W^{*}\to\mathbb{C}`), " を次で定める。",
+      ]),
+      displayMath(String.raw`q_W\bigl((w,f)\bigr):=f(w)\qquad(w\in W,\ f\in W^{*})`),
+      paragraph([
+        math(String.raw`W\oplus W^{*}`), " の元は ", math(String.raw`w\in W`), " と ", math(String.raw`f\in W^{*}`), " の順序対 ", math(String.raw`(w,f)`),
+        " であり（", ref("def_direct_sum_of_two_vector_spaces"), "）、", math(String.raw`f`), " は ", math(String.raw`W`), " 上の線型形式なので ",
+        math(String.raw`f(w)\in\mathbb{C}`), " である（", ref("def_dual_space"), "、", ref("def_linear_form"), "）。これにより ",
+        math(String.raw`q_W`), " は値域を ", math(String.raw`\mathbb{C}`), " とする写像として定まる。", math(String.raw`q_W`),
+        " が二次形式であることは、この定義では主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_value_of_polarization_of_split_quadratic_form",
+    kind: "claim",
+    title: { text: "対による二次の写像の偏極の値" },
+    labels: ["claim_value_of_polarization_of_split_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`W`), "、", math(String.raw`W^{*}`), "、", math(String.raw`q_W`), " を ", ref("def_split_quadratic_form"), " のもの、",
+        math(String.raw`B_{q_W}`), " を ", math(String.raw`q_W`), " の偏極（", ref("def_polarization_of_map_to_complex_numbers"),
+        "）とする。このとき、すべての ", math(String.raw`w,w'\in W`), "、", math(String.raw`f,f'\in W^{*}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`B_{q_W}\bigl((w,f),(w',f')\bigr)=f(w')+_{\mathbb{C}}f'(w)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=f(w)`), "、", math(String.raw`b:=f(w')`), "、", math(String.raw`c:=f'(w)`), "、", math(String.raw`d:=f'(w')`),
+        " と置く。どれも ", math(String.raw`\mathbb{C}`), " の元である（", ref("def_linear_form"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&B_{q_W}\bigl((w,f),(w',f')\bigr)\\
+&=\Bigl(q_W\bigl((w,f)+_{W\oplus W^{*}}(w',f')\bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q_W((w,f))\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q_W((w',f'))\bigr)
+&&\left(\because\ \blkref{def_polarization_of_map_to_complex_numbers}\right)\\
+&=\Bigl(q_W\bigl((w+_W w',\ f+_{W^{*}}f')\bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q_W((w,f))\bigr)\Bigr)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}q_W((w',f'))\bigr)
+&&\left(\because\ \text{直和の加法。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\Bigl(\bigl(f+_{W^{*}}f'\bigr)(w+_W w')+_{\mathbb{C}}(-_{\mathbb{C}}a)\Bigr)+_{\mathbb{C}}(-_{\mathbb{C}}d)
+&&\left(\because\ q_W\ \text{の定義を三か所に適用。}\blkref{def_split_quadratic_form}\right)\\
+&=\Bigl(\bigl(f(w+_W w')+_{\mathbb{C}}f'(w+_W w')\bigr)+_{\mathbb{C}}(-_{\mathbb{C}}a)\Bigr)+_{\mathbb{C}}(-_{\mathbb{C}}d)
+&&\left(\because\ +_{W^{*}}\ \text{は各点ごとの和。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\Bigl(\bigl((a+_{\mathbb{C}}b)+_{\mathbb{C}}(c+_{\mathbb{C}}d)\bigr)+_{\mathbb{C}}(-_{\mathbb{C}}a)\Bigr)+_{\mathbb{C}}(-_{\mathbb{C}}d)
+&&\left(\because\ f,\ f'\ \text{は加法を保つ（二か所に適用）。}\blkref{def_linear_form}\right)\\
+&=\bigl((a+_{\mathbb{C}}b)+_{\mathbb{C}}(c+_{\mathbb{C}}d)\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}d)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\bigl((b+_{\mathbb{C}}c)+_{\mathbb{C}}(a+_{\mathbb{C}}d)\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}d)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則と交換法則による項の並べ替え}\right)\\
+&=(b+_{\mathbb{C}}c)+_{\mathbb{C}}\Bigl((a+_{\mathbb{C}}d)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}a)+_{\mathbb{C}}(-_{\mathbb{C}}d)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=(b+_{\mathbb{C}}c)+_{\mathbb{C}}\Bigl(\bigl(a+_{\mathbb{C}}(-_{\mathbb{C}}a)\bigr)+_{\mathbb{C}}\bigl(d+_{\mathbb{C}}(-_{\mathbb{C}}d)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則と交換法則による項の並べ替え}\right)\\
+&=(b+_{\mathbb{C}}c)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{加法の逆元を二か所に適用}\right)\\
+&=b+_{\mathbb{C}}c
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元（二か所に適用）}\right)\\
+&=f(w')+_{\mathbb{C}}f'(w)
+&&\left(\because\ b,\ c\ \text{の定義}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_split_quadratic_form_is_quadratic_form",
+    kind: "claim",
+    title: { text: "対による二次の写像は二次形式である" },
+    labels: ["claim_split_quadratic_form_is_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`W`), "、", math(String.raw`W^{*}`), "、", math(String.raw`q_W`), " を ", ref("def_split_quadratic_form"), " のものとする。このとき ",
+        math(String.raw`q_W`), " は ", math(String.raw`W\oplus W^{*}`), " 上の二次形式（", ref("def_quadratic_form"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "（一つ目の条件）", math(String.raw`w\in W`), "、", math(String.raw`f\in W^{*}`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q_W\bigl(\lambda\cdot_{W\oplus W^{*}}(w,f)\bigr)
+&=q_W\bigl((\lambda\cdot_W w,\ \lambda\cdot_{W^{*}}f)\bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{W^{*}}f\bigr)(\lambda\cdot_W w)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}f(\lambda\cdot_W w)
+&&\left(\because\ \cdot_{W^{*}}\ \text{は各点ごとのスカラー倍。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}f(w)\bigr)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\Bigl(\lambda\cdot_{\mathbb{C}}q_W\bigl((w,f)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right).
+\end{aligned}`),
+      paragraph([
+        "（二つ目の条件）", math(String.raw`(w',f')\in W\oplus W^{*}`), " を固定し、", math(String.raw`g:=B_{q_W}\bigl(\bullet,(w',f')\bigr)`),
+        " と置く。", math(String.raw`(w_1,f_1),(w_2,f_2),(w,f)\in W\oplus W^{*}`), "、", math(String.raw`\lambda\in\mathbb{C}`),
+        " を任意に取る。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g\bigl((w_1,f_1)+_{W\oplus W^{*}}(w_2,f_2)\bigr)
+&=g\bigl((w_1+_W w_2,\ f_1+_{W^{*}}f_2)\bigr)
+&&\left(\because\ \text{直和の加法。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(f_1+_{W^{*}}f_2\bigr)(w')+_{\mathbb{C}}f'(w_1+_W w_2)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&=\bigl(f_1(w')+_{\mathbb{C}}f_2(w')\bigr)+_{\mathbb{C}}f'(w_1+_W w_2)
+&&\left(\because\ +_{W^{*}}\ \text{は各点ごとの和。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\bigl(f_1(w')+_{\mathbb{C}}f_2(w')\bigr)+_{\mathbb{C}}\bigl(f'(w_1)+_{\mathbb{C}}f'(w_2)\bigr)
+&&\left(\because\ f'\ \text{は加法を保つ。}\blkref{def_linear_form}\right)\\
+&=\bigl(f_1(w')+_{\mathbb{C}}f'(w_1)\bigr)+_{\mathbb{C}}\bigl(f_2(w')+_{\mathbb{C}}f'(w_2)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則と交換法則による項の並べ替え}\right)\\
+&=g\bigl((w_1,f_1)\bigr)+_{\mathbb{C}}g\bigl((w_2,f_2)\bigr)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\ \text{を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+g\bigl(\lambda\cdot_{W\oplus W^{*}}(w,f)\bigr)
+&=g\bigl((\lambda\cdot_W w,\ \lambda\cdot_{W^{*}}f)\bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{W^{*}}f\bigr)(w')+_{\mathbb{C}}f'(\lambda\cdot_W w)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(w')\bigr)+_{\mathbb{C}}f'(\lambda\cdot_W w)
+&&\left(\because\ \cdot_{W^{*}}\ \text{は各点ごとのスカラー倍。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(w')\bigr)+_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}f'(w)\bigr)
+&&\left(\because\ f'\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(f(w')+_{\mathbb{C}}f'(w)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}g\bigl((w,f)\bigr)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、", math(String.raw`g`), " は ", math(String.raw`W\oplus W^{*}`), " 上の線型形式であり（", ref("def_linear_form"),
+        "）、", math(String.raw`(w',f')`), " は任意だったので、", math(String.raw`q_W`), " は二次形式の二つの条件を満たす（", ref("def_quadratic_form"), "）。",
+      ]),
+    ],
+  },
 ]);
