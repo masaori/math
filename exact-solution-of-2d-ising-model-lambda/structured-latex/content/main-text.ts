@@ -70217,6 +70217,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.cellBoundaryVertices_two_incident_edges",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_two_incident_edges",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
+                      "Ising2DLambda.KacWard.stepTurning_reversed_pair",
+                      "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70233,6 +70235,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "sagemath/check/vertex-simple-cycle-turning",
                       "sagemath/check/lift-point-distinct-cycle-turning",
                       "sagemath/check/no-diagonal-only-contact",
+                      "sagemath/check/step-turning-reversal",
                     ],
                     statement: [
                       paragraph([
@@ -70349,7 +70352,7 @@ E&=E_{\mathrm{int}}+B
                       paragraph([
                         "となる。多角形を一方の向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
                         "、凹頂点では ", math(String.raw`-1`), "、直進頂点では ", math(String.raw`0`),
-                        " であり、逆向きに巡ると三つの符号が反転する（", ref("def_step_turning"), "）。したがって",
+                        " であり、逆向きに巡ると各曲がりの符号が反転する（", ref("def_step_turning"), "）。したがって",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma)
@@ -88393,7 +88396,7 @@ const chapter_fisher_zero_density = defineSection({
                       ref("def_finite_lattice_fisher_zeros"),
                       "）は有限集合であり、",
                     ]),
-                    displayMath(String.raw`\lvert\mathcal{F}_{L}\rvert\le2L^{2}`),
+                    displayMath(String.raw`\lvert\mathcal{F}_{L}\rvert\le2L^{2}\quad(\because\ \blkref{claim_fisher_zero_finset_card_bound}\text{ を有限集合 }\mathcal{F}_{L}\text{ に適用})`),
                     paragraph([
                       "である（",
                       math(String.raw`\lvert\mathcal{F}_{L}\rvert\in\mathbb{N}`),
