@@ -237,6 +237,42 @@ theorem cellBoundary_south_outgoing_matches_next_incoming
     htarget hdiag₁' hdiag₂' hside'
   simpa using hunique.symm
 
+/-- A northward boundary edge leaving `(r,c)` enters `(r-1,c)` with the
+same direction when the target has no diagonal cell contact. -/
+theorem cellBoundary_north_outgoing_matches_next_incoming
+    (cells : Finset GridCell) (r c : ℤ)
+    (hsource : (r, c) ∈ cellBoundaryVertices cells)
+    (htarget : (r - 1, c) ∈ cellBoundaryVertices cells)
+    (hdiag₁ : ¬ ((r - 2, c - 1) ∈ cells ∧ (r - 2, c) ∉ cells ∧
+      (r - 1, c) ∈ cells ∧ (r - 1, c - 1) ∉ cells))
+    (hdiag₂ : ¬ ((r - 2, c - 1) ∉ cells ∧ (r - 2, c) ∈ cells ∧
+      (r - 1, c) ∉ cells ∧ (r - 1, c - 1) ∈ cells))
+    (hout : cellBoundaryOutgoing cells r c = 3) :
+    cellBoundaryIncoming cells (r - 1) c = 3 := by
+  have hleft := (cellBoundary_local_directions_selected_left cells r c hsource).2
+  rw [hout] at hleft
+  have hside : (r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells := by
+    simpa [show (3 : ZMod 4) ≠ 0 by decide,
+      show (3 : ZMod 4) ≠ 1 by decide,
+      show (3 : ZMod 4) ≠ 2 by decide] using hleft
+  have hdiag₁' : ¬ ((r - 1 - 1, c - 1) ∈ cells ∧
+      (r - 1 - 1, c) ∉ cells ∧ (r - 1, c) ∈ cells ∧
+      (r - 1, c - 1) ∉ cells) := by convert hdiag₁ using 1 <;> ring
+  have hdiag₂' : ¬ ((r - 1 - 1, c - 1) ∉ cells ∧
+      (r - 1 - 1, c) ∈ cells ∧ (r - 1, c) ∉ cells ∧
+      (r - 1, c - 1) ∈ cells) := by convert hdiag₂ using 1 <;> ring
+  have hside' : (if (3 : Fin 4).val = 0 then
+      (r - 1 - 1, c - 1) ∈ cells ∧ (r - 1, c - 1) ∉ cells
+      else if (3 : Fin 4).val = 1 then
+        (r - 1 - 1, c) ∈ cells ∧ (r - 1 - 1, c - 1) ∉ cells
+      else if (3 : Fin 4).val = 2 then
+        (r - 1, c) ∈ cells ∧ (r - 1 - 1, c) ∉ cells
+      else (r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells) := by
+    simpa using hside
+  have hunique := cellBoundary_incoming_unique cells (r - 1) c (3 : Fin 4)
+    htarget hdiag₁' hdiag₂' hside'
+  simpa using hunique.symm
+
 /-- The entering and leaving boundary edges at a non-diagonal vertex are distinct. -/
 theorem cellBoundary_local_edges_ne (cells : Finset GridCell) (r c : ℤ)
     (hv : (r, c) ∈ cellBoundaryVertices cells)

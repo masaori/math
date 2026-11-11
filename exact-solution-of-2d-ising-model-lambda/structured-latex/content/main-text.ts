@@ -11895,7 +11895,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 &=\prod_{(a,b)\in E_{\mathcal D_\tau}}A_{a,b}
 &&\bigl(\because\ \blkref{claim_matching_pair_first_enumeration}\text{ と有限積の並べ替え}\bigr)\\
 &=b_{\mathcal D_\tau}
-&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)
 \end{aligned}`),
                 paragraph([ref("claim_matching_pair_second_enumeration"), " により第二の列も ", math(String.raw`E_{\mathcal D_\upsilon}`), " を重複なく列挙する。同じ有限積の等号を適用して、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -11903,7 +11903,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 &=\prod_{(a,b)\in E_{\mathcal D_\upsilon}}A_{a,b}
 &&\bigl(\because\ \blkref{claim_matching_pair_second_enumeration}\text{ と有限積の並べ替え}\bigr)\\
 &=b_{\mathcal D_\upsilon}
-&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)
 \end{aligned}`),
                 paragraph(["空集合でも両列挙は空列であり、各等号は空積 ", math(String.raw`1\in\overline{\mathbb Q}[x]`), " の等号になる。有限集合と代数的数係数多項式だけを用い、実数体への脱出はない。"]),
               ],
@@ -70256,6 +70256,8 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.local_west_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundary_south_outgoing_matches_next_incoming",
                       "Ising2DLambda.NecSuf.KacWard.local_south_outgoing_matches_next_incoming",
+                      "Ising2DLambda.KacWard.cellBoundary_north_outgoing_matches_next_incoming",
+                      "Ising2DLambda.NecSuf.KacWard.local_north_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70429,6 +70431,12 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`1`), " である。上の方向表によれば、この辺の東側セルは内側、西側セルは外側であり、",
                         "南端では同じ二セルが入辺の左右になる。南端の入方向は表の一意性により ",
                         math(String.raw`1`), " である。",
+                      ]),
+                      paragraph([
+                        "北へ進む境界辺の南端で内側セルを左に置く出方向は ",
+                        math(String.raw`3`), " である。上の方向表によれば、この辺の西側セルは内側、東側セルは外側であり、",
+                        "北端では同じ二セルが入辺の左右になる。北端の入方向は表の一意性により ",
+                        math(String.raw`3`), " である。",
                       ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),
