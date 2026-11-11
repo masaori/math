@@ -67218,10 +67218,62 @@ N_{r,c}^{\rightarrow}(\gamma)
 &=V_{r,c+1}(\gamma)+N_{r,c+1}^{\rightarrow}(\gamma)
 &&\bigl(\because\ \blkref{def_vertical_edge_traversal_count}\text{ と }\blkref{def_right_ray_vertical_crossing_count}\bigr)
 \end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
+N_{r,c}^{\rightarrow}(\gamma)\bmod 2
+&=\bigl(N_{r,c+1}^{\rightarrow}(\gamma)+V_{r,c+1}(\gamma)\bigr)\bmod 2
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
+&=\bigl(N_{r,c+1}^{\rightarrow}(\gamma)\bmod 2+V_{r,c+1}(\gamma)\bmod 2\bigr)\bmod 2
+&&\bigl(\because\ \mathbb Z\text{ の剰余加法}\bigr)
+\end{aligned}`),
                       paragraph([
-                        "後半は前半の等式の両辺の奇偶を比べれば従う（",
-                        math(String.raw`\mathbb Z`), " の偶奇）。",
+                        "後半の奇偶の同値はこの式から従う。",
                         "使ったのは有限集合の分割と数え上げだけであり、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertical_walk_edge_odd_boundary",
+                  focus: {
+                    id: "kac_ward_claim_vertical_walk_edge_odd_boundary",
+                    kind: "claim",
+                    title: { text: "奇数回通る縦辺は内側セル集合の境界辺である" },
+                    labels: ["claim_vertical_walk_edge_odd_boundary"],
+                    habitat: "N",
+                    verification: ["sagemath/check/adjacent-cells-ray-crossing-difference"],
+                    lean: [
+                      "Ising2DLambda.KacWard.verticalEdge_oddRay_boundary",
+                      "Ising2DLambda.KacWard.verticalEdge_oddRay_boundary_ofWalk",
+                      "Ising2DLambda.NecSuf.KacWard.odd_traversal_separates_cells",
+                    ],
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma`), " の平面持ち上げについて、",
+                        "有限な内側セル集合を ", math(String.raw`\mathcal F_{\rightarrow}(\gamma)`),
+                        " とする（", ref("def_odd_ray_interior_cells"), "、",
+                        ref("claim_odd_ray_interior_cells_bounded"), "）。任意の ",
+                        math(String.raw`r,c\in\mathbb Z`), " に対し、縦辺 ",
+                        math(String.raw`\{(r,c+1),(r+1,c+1)\}`),
+                        " の通過回数が奇数なら、この辺は ",
+                        math(String.raw`\mathcal F_{\rightarrow}(\gamma)`),
+                        " の境界辺である。",
+                      ]),
+                    ],
+                    proof: [
+                      displayMath(String.raw`\begin{aligned}
+N_{r,c}^{\rightarrow}(\gamma)\bmod 2
+&=\bigl(N_{r,c+1}^{\rightarrow}(\gamma)+V_{r,c+1}(\gamma)\bigr)\bmod 2
+&&\bigl(\because\ \blkref{claim_adjacent_cells_ray_crossing_difference}\bigr)\\
+&\ne N_{r,c+1}^{\rightarrow}(\gamma)\bmod 2
+&&\bigl(\because\ V_{r,c+1}(\gamma)\text{ は奇数}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "二つの隣接セルのうち、交差数が奇数のものだけが内側セル集合に属する（",
+                        ref("def_odd_ray_interior_cells"), "）。したがって共有縦辺は内外を分け、",
+                        "境界辺の定義（", ref("def_plane_cell_boundary_edge_set"), "）を満たす。",
                       ]),
                     ],
                   },

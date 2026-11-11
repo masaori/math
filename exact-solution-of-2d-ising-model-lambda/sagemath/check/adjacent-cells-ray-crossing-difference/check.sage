@@ -1,5 +1,6 @@
 # 対象ラベル: claim_adjacent_cells_ray_crossing_difference /
-# def_vertical_edge_traversal_count / def_right_ray_vertical_crossing_count
+# def_vertical_edge_traversal_count / def_right_ray_vertical_crossing_count /
+# claim_vertical_walk_edge_odd_boundary
 #
 # 閉じた単位格子歩について、横に隣り合う単位正方形の右半直線交差数の差が
 # 二つの正方形が共有する縦辺の通過回数に等しいこと
@@ -55,6 +56,8 @@ for length in range(1, max_length + 1):
                 right = right_ray_crossing_count(points, ZZ(row), ZZ(col) + 1)
                 shared = vertical_edge_traversal_count(points, ZZ(row), ZZ(col) + 1)
                 assert left == right + shared, (points, row, col, left, right, shared)
+                if shared % 2 == 1:
+                    assert (left % 2) != (right % 2), (points, row, col)
                 checked_pairs += 1
 
         checked_walks += 1

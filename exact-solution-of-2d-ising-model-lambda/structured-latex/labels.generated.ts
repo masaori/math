@@ -735,6 +735,7 @@ export const ALL_LABELS = [
   "claim_vertex_surrounding_cells_form_parity_arcs",
   "claim_vertical_seam_parity_equals_row",
   "claim_vertical_twisted_modes_coset",
+  "claim_vertical_walk_edge_odd_boundary",
   "claim_vertically_adjacent_cells_boundary_parity",
   "claim_walk_direction_difference",
   "claim_walk_equals_cell_boundary_winding_zero",
