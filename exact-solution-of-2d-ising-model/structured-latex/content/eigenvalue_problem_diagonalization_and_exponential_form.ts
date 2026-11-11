@@ -4102,6 +4102,29 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         math(String.raw`\mathbb{C}^{\times}`),
         " に属することは証明の Step 3 で示す。",
       ]),
+      paragraph([
+        "右の等式の ",
+        math(String.raw`\check{P}_\mu^{-1}`),
+        " は、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C}) = \mathrm{Mat}(2^{1},\mathbb{C})`),
+        " を ",
+        ref("def_invertible_elements_of_R"),
+        "（",
+        math(String.raw`M \to 1`),
+        "）の ",
+        math(String.raw`R`),
+        " と読んだときの ",
+        math(String.raw`\check{P}_\mu \in R^{\times}`),
+        " の逆元であり、右辺の ",
+        math(String.raw`\check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`),
+        " は ",
+        math(String.raw`\bigl(\check{P}_\mu\check{D}_\mu\bigr)\check{P}_\mu^{-1}`),
+        " と読む（",
+        ref("mat_conj"),
+        " の ",
+        math(String.raw`BAB^{-1}`),
+        " と同じ読み方）。",
+      ]),
     ],
     proof: [
       paragraph([
@@ -4511,23 +4534,41 @@ d\,u
         "Step 4（対角化）。",
         math(String.raw`\det\check{P}_\mu \neq 0`),
         " より ",
+        math(String.raw`\check{P}_\mu`),
+        " は可逆で ",
+        math(String.raw`\check{P}_\mu \in R^{\times}`),
+        "（",
+        math(String.raw`R`),
+        "・",
+        math(String.raw`R^{\times}`),
+        " は ",
+        ref("def_invertible_elements_of_R"),
+        " を ",
+        math(String.raw`M \to 1`),
+        " で読んだもの）であり、その逆元 ",
         math(String.raw`\check{P}_\mu^{-1}`),
-        " が存在するので、Step 2 の両辺に右から掛けて ",
-        "次の鎖を得る。",
+        " は ",
+        math(String.raw`\check{P}_\mu\check{P}_\mu^{-1} = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " を満たす。主張の左辺から始めて、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 A(\tilde\theta_\mu)
+&= A(\tilde\theta_\mu)\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m \to 2,\ n \to 2,\ A \to A(\tilde\theta_\mu))\ \text{を右辺から左辺へ}\bigr) \\
 &= A(\tilde\theta_\mu)\left(\check{P}_\mu\check{P}_\mu^{-1}\right)
-   \quad (\because \check{P}_\mu\check{P}_\mu^{-1}=I\text{ と積の単位元}) \\
+   &&\bigl(\because\ \blkref{def_invertible_elements_of_R}\ (M \to 1,\ g \to \check{P}_\mu)\ \text{の}\ gg^{-1} = I\ \text{を右辺から左辺へ}\bigr) \\
 &= \left(A(\tilde\theta_\mu)\check{P}_\mu\right)\check{P}_\mu^{-1}
-   \quad (\because \text{行列の積の結合則}) \\
+   &&\bigl(\because\ \blkref{mat_mult_associative}\ (m, n, p, q \to 2,\ A \to A(\tilde\theta_\mu),\ B \to \check{P}_\mu,\ C \to \check{P}_\mu^{-1})\ \text{を右辺から左辺へ}\bigr) \\
 &= \left(\check{P}_\mu\check{D}_\mu\right)\check{P}_\mu^{-1}
-   \quad (\because \text{Step 2}) \\
-&= \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}
-   \quad (\because \text{行列の積の結合則})
+   &&\bigl(\because\ \text{Step 2 の}\ A(\tilde\theta_\mu)\check{P}_\mu = \check{P}_\mu\check{D}_\mu\bigr)
 \end{aligned}`,
       ),
+      paragraph([
+        "であり、最後の辺は主張の右辺 ",
+        math(String.raw`\check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`),
+        " の読み方そのものである。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -4546,6 +4587,9 @@ A(\tilde\theta_\mu)
         "2026-11-11（Lean の通しの証明、続き）: statement に、行列式の右辺の分数が def_complex_quotient の商で、分母が (2_C ℓ) γ_2(−θ~_μ)（ℓ := (ι_{Z→R}(M_col))_C）、分子が −|γ_2|_C であることと、√M_col の根号の中が ι_{Z→R}(M_col) であることを書いた。" +
           "Step 3 の「(2√M)^2 = 4M」「C の四則」「同類項の統合」「2M ≠ 0 と C の四則」の 5 行を、前置き (a) s s = ℓ（5 行）・(b) ℓ, 2_C ℓ, q ∈ C^×・(c) 1_C + 1_C = 2_C（4 行）・(d) d u = 2_C q（12 行）と、det P̌_μ = (−ρ)/q の 29 行の鎖（商・差の定義・multiply_by_minus_one・体の公理・逆元を 1 行に 1 つずつ）にし、det ≠ 0 を零因子の無さから群の積に替えた。" +
           "Step 1 の c = 1_C d^{-1} = d^{-1} を整列した鎖にし、Step 2 の列ベクトルのスカラー倍の成分に def_matrix_scalar_multiple を引いた。値と主張は不変。",
+        "2026-11-11（Lean の通しの証明、続き）: statement に、P̌_μ^{-1} が def_invertible_elements_of_R（M → 1）の逆元で、P̌_μ Ď_μ P̌_μ^{-1} を (P̌_μ Ď_μ) P̌_μ^{-1} と読むこと（mat_conj と同じ）を書いた。" +
+          "Step 4 の鎖の 1 行目の根拠「P̌P̌^{-1} = I と積の単位元」（2 つの事実）を identity_matrix_is_right_unit_of_mat_mult と def_invertible_elements_of_R の g g^{-1} = I の 2 行に割り、" +
+          "2 行目の「行列の積の結合則」を mat_mult_associative の参照にし、最後の行「行列の積の結合則」（右辺の読み方であって結合則ではない）を消した（4 行の鎖）。値と主張は不変。",
       ],
     },
   },

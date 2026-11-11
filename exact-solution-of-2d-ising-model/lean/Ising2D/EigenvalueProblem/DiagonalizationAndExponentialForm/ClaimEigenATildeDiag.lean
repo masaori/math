@@ -54,7 +54,8 @@
   `checkD_mul_checkU`（12 行）［置かない］。`det P̌` の 29 行の鎖は 28 行目までの `det_checkPmat_eq_mul_inv` と 29 行目の
   `det_checkPmat`（人手と 1 段ずつの `calc`）、`ρ`・`-1_ℂ` の第 1 成分の比較と群の積・逆元による `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`。
   必要十分版は列の形 `c(∓s, b)` から環の四則で値を出す別の経路のまま］。
-* `diagonalization_check_P_D` Step 4: 右から `P̌⁻¹` を掛ける鎖
+* `diagonalization_check_P_D` Step 4: 右から `P̌⁻¹` を掛ける 4 行の鎖（`identity_matrix_is_right_unit_of_mat_mult`
+  （`mul_identity_matrix`）・`def_invertible_elements_of_R` の `g g^{-1} = I`・`mat_mult_associative`・Step 2）と 1 段ずつの `calc`
   `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`［`eq_conj_of_mul_eq`］。
 * 人手証明にあった Step 3（固有空間が 1 次元で、固有ベクトルは `v_{±,μ}` の `ℂ^×` 倍に限ること）は後段で使われないので、
   本文から参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避されている。形式化していない。
@@ -66,6 +67,7 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelation
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 
@@ -642,19 +644,31 @@ theorem det_checkPmat_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : �
   exact mul_ne_zero hnegρ (inv_ne_zero (checkW_ne_zero P hM μ))
                                         -- `q^{-1} ∈ ℂ^×`（逆元）と群の積
 
-/-- **人手証明 `diagonalization_check_P_D`**（Step 4）: `A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（**場合分けなし**）。 -/
+/-- **人手証明 `diagonalization_check_P_D`**（Step 4）: `A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（**場合分けなし**）。
+
+人手の 4 行の鎖と 1 段ずつの `calc` である。人手の `P̌_μ^{-1}` は `def_invertible_elements_of_R`（`M → 1`）の逆元、すなわち
+`P̌_μ h = I` かつ `h P̌_μ = I` を満たすただ 1 つの `h` で、`det P̌_μ ≠ 0` のとき mathlib の `(checkPmat …)⁻¹`
+（`Matrix.mul_nonsing_inv`・`Matrix.nonsing_inv_mul` がこの 2 つの等式を与える）がその `h` である。
+人手の右辺 `P̌_μ Ď_μ P̌_μ^{-1}` は `(P̌_μ Ď_μ) P̌_μ^{-1}` と読み（statement）、Lean の積は左結合なので鎖の最後の辺がそのまま右辺である。
+`mat_mult_associative` は具体版が無く、既存の慣行どおり mathlib の `Matrix.mul_assoc` を引く。 -/
 theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
     (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     AMat P.const (thetaTilde M μ)
       = checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹ := by
   have hdet : IsUnit (checkPmat P.const M μ).det :=
-    isUnit_iff_ne_zero.2 (det_checkPmat_ne_zero P hM μ)
+    isUnit_iff_ne_zero.2 (det_checkPmat_ne_zero P hM μ)   -- Step 3 の `det P̌_μ ≠ 0`
   calc AMat P.const (thetaTilde M μ)
-      = AMat P.const (thetaTilde M μ) * (checkPmat P.const M μ * (checkPmat P.const M μ)⁻¹) := by
-        rw [Matrix.mul_nonsing_inv _ hdet, Matrix.mul_one]           -- `P̌ P̌⁻¹ = I`
+      = AMat P.const (thetaTilde M μ) * 1 :=
+        (mul_identity_matrix _).symm
+          -- 1 行目: `identity_matrix_is_right_unit_of_mat_mult`（`m → 2`、`n → 2`、`A → A(θ~_μ)`）を右辺から左辺へ
+    _ = AMat P.const (thetaTilde M μ) * (checkPmat P.const M μ * (checkPmat P.const M μ)⁻¹) := by
+        rw [Matrix.mul_nonsing_inv _ hdet]
+          -- 2 行目: `def_invertible_elements_of_R`（`M → 1`、`g → P̌_μ`）の `g g^{-1} = I` を右辺から左辺へ
     _ = (AMat P.const (thetaTilde M μ) * checkPmat P.const M μ) * (checkPmat P.const M μ)⁻¹ :=
-        (Matrix.mul_assoc _ _ _).symm                                 -- 積の結合則
+        (Matrix.mul_assoc _ _ _).symm
+          -- 3 行目: `mat_mult_associative`（`A → A(θ~_μ)`、`B → P̌_μ`、`C → P̌_μ^{-1}`）を右辺から左辺へ
     _ = (checkPmat P.const M μ * checkDmat P.const M μ) * (checkPmat P.const M μ)⁻¹ := by
-        rw [AMat_mul_checkPmat P hM μ]                                 -- Step 2
+        rw [AMat_mul_checkPmat P hM μ]
+          -- 4 行目: Step 2 の `A(θ~_μ) P̌_μ = P̌_μ Ď_μ`
 
 end Ising2D

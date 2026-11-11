@@ -303,13 +303,14 @@ theorem det_of_cols_ne_zero [NoZeroDivisors R] (s b c : R) {P : Matrix (Fin 2) (
 
 /-- **対角化の Step 4**（具体版 `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`）:
 `A P = P D` かつ `det P` が単元なら `A = P D P⁻¹`。
-右から `P⁻¹` を掛けて `P P⁻¹ = I` で消す具体版の鎖と同じである。
+`A` から始めて `A = A I = A(P P⁻¹) = (A P) P⁻¹ = (P D) P⁻¹` とつなぐ、具体版の 4 行の鎖と同じ手順である。
 **この形は 2×2 であることすら使っていない**（任意の有限型の添字でよい）。 -/
 theorem eq_conj_of_mul_eq {n : Type*} [DecidableEq n] [Fintype n]
     {A P D : Matrix n n R} (h : A * P = P * D) (hP : IsUnit P.det) :
     A = P * D * P⁻¹ :=
-  calc A = A * (P * P⁻¹) := by rw [Matrix.mul_nonsing_inv _ hP, Matrix.mul_one]  -- `P P⁻¹ = I`
-    _ = (A * P) * P⁻¹ := (Matrix.mul_assoc _ _ _).symm                            -- 積の結合則
-    _ = (P * D) * P⁻¹ := by rw [h]                                                -- Step 2
+  calc A = A * 1 := (Matrix.mul_one A).symm                                      -- 具体版 1 行目: 単位行列は右単位元
+    _ = A * (P * P⁻¹) := by rw [Matrix.mul_nonsing_inv _ hP]                      -- 具体版 2 行目: `P P⁻¹ = I`
+    _ = (A * P) * P⁻¹ := (Matrix.mul_assoc _ _ _).symm                            -- 具体版 3 行目: 積の結合則
+    _ = (P * D) * P⁻¹ := by rw [h]                                                -- 具体版 4 行目: Step 2
 
 end Ising2D.NecSuf
