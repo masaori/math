@@ -2726,16 +2726,26 @@ s_1c_2
         " の ",
         math(String.raw`-(i\theta)`),
         " である。以下の分母の ",
-        math(String.raw`2`), " は ", math(String.raw`2_{\mathbb{C}}`),
+        math(String.raw`2`), "・", math(String.raw`2i`),
+        " は、",
+        ref("euler_formula_cos_sin"),
+        " の読みのとおり ",
+        math(String.raw`2_{\mathbb{C}}`), "・", math(String.raw`2_{\mathbb{C}}i`),
         " で、",
-        ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
-        " の証明の前置きのとおり ",
-        ref("complex_numbers_form_a_field"),
-        " の体で ",
-        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`), "、",
-        math(String.raw`i \neq 0_{\mathbb{C}}`), "、",
-        math(String.raw`2_{\mathbb{C}}i \neq 0_{\mathbb{C}}`),
-        " なので、分数は定まる。",
+        math(String.raw`2_{\mathbb{C}},\ i,\ 2_{\mathbb{C}}i \in \mathbb{C}^{\times}`),
+        "（",
+        ref("euler_formula_cos_sin"),
+        " の主張に書いた成分の比較と ",
+        ref("multiplicative_group_of_cc"),
+        " の群の積）であり、二つの分数は ",
+        ref("def_complex_quotient"),
+        " の商 ",
+        math(String.raw`z/w = z\,w^{-1}`),
+        " である。",
+        math(String.raw`w^{-1}`),
+        " は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元である。",
         math(String.raw`\theta`),
         " を ",
         math(String.raw`-\theta`),
@@ -2757,38 +2767,58 @@ s_1c_2
 \cos\theta + i\sin\theta
 &= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + i\,\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin})\\
-&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{i\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)}{2i}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ x\tfrac{y}{z} = \tfrac{xy}{z}\ (z \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to i,\ y \to \exp(i\theta) - \exp(-i\theta),\ z \to 2i\bigr)\\
-&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)i}{2i}
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + i\Bigl(\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\,(2_{\mathbb{C}}i)^{-1}\Bigr)
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to \exp(i\theta) + \exp(-i\theta),\ w \to 2_{\mathbb{C}}),\ (z \to \exp(i\theta) - \exp(-i\theta),\ w \to 2_{\mathbb{C}}i)\bigr)\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(i\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\bigr)\,(2_{\mathbb{C}}i)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\,i\bigr)\,(2_{\mathbb{C}}i)^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{\exp(i\theta) - \exp(-i\theta)}{2}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{xa}{ya} = \tfrac{x}{y}\ (a \neq 0_{\mathbb{C}},\ y \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta) - \exp(-i\theta),\ y \to 2,\ a \to i\bigr)\\
-&= \frac{\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)}{2}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{x}{z} + \tfrac{y}{z} = \tfrac{x + y}{z}\ (z \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ x \to \exp(i\theta) + \exp(-i\theta),\ y \to \exp(i\theta) - \exp(-i\theta),\ z \to 2\bigr)\\
-&= \frac{\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)}{2}
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(1_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl((2_{\mathbb{C}}i)\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\bigl(2_{\mathbb{C}}^{-1}\,1_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}i\in\mathbb{C}^{\times})\bigr)\\
+&= \bigl(\exp(i\theta) + \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) - \exp(-i\theta)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{def_complex_difference})\\
-&= \frac{\exp(i\theta) + \Bigl(\exp(-i\theta) + \bigl(\exp(i\theta) + (-\exp(-i\theta))\bigr)\Bigr)}{2}
+&= \Bigl(\exp(i\theta) + \bigl(\exp(-i\theta) + (\exp(i\theta) + (-\exp(-i\theta)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(i\theta) + \Bigl(\bigl(\exp(-i\theta) + \exp(i\theta)\bigr) + (-\exp(-i\theta))\Bigr)}{2}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(i\theta) + \Bigl(\bigl(\exp(i\theta) + \exp(-i\theta)\bigr) + (-\exp(-i\theta))\Bigr)}{2}
+&= \Bigl(\exp(i\theta) + \bigl((\exp(-i\theta) + \exp(i\theta)) + (-\exp(-i\theta))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= \Bigl(\exp(i\theta) + \bigl((\exp(i\theta) + \exp(-i\theta)) + (-\exp(-i\theta))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
-&= \frac{\exp(i\theta) + \Bigl(\exp(i\theta) + \bigl(\exp(-i\theta) + (-\exp(-i\theta))\bigr)\Bigr)}{2}
+&= \Bigl(\exp(i\theta) + \bigl(\exp(i\theta) + (\exp(-i\theta) + (-\exp(-i\theta)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(i\theta) + \bigl(\exp(i\theta) + 0_{\mathbb{C}}\bigr)}{2}
+&= \bigl(\exp(i\theta) + (\exp(i\theta) + 0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
-&= \frac{\exp(i\theta) + \exp(i\theta)}{2}
+&= \bigl(\exp(i\theta) + \exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
-&= \frac{1_{\mathbb{C}}\exp(i\theta) + 1_{\mathbb{C}}\exp(i\theta)}{2}
+&= \bigl(1_{\mathbb{C}}\exp(i\theta) + 1_{\mathbb{C}}\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ右辺から左辺へ})\\
-&= \frac{\bigl(1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\exp(i\theta)}{2}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
-&= \frac{(1 + 1)_{\mathbb{C}}\,\exp(i\theta)}{2}
+&= \bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \bigl((1 + 1)_{\mathbb{C}}\,\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
-&= \frac{2\exp(i\theta)}{2}
+&= \bigl(2_{\mathbb{C}}\,\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&= \bigl(\exp(i\theta)\,2_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \exp(i\theta)\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \exp(i\theta)\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
 &= \exp(i\theta)
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{2a}{2} = a\ (2 \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(i\theta)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
 \end{aligned}`),
       paragraph([
         "第二に、",
@@ -3282,6 +3312,7 @@ s_1c_2
         "2026-11-09（Lean の通しの証明）: 準備の第一の i(-θ) = -iθ・-i(-θ) = iθ・cos(-θ) = cos θ・sin(-θ) = -sin θ の 4 本の鎖を、def_gamma1_gamma2_of_theta からも引けるよう" +
           "主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real・sin_of_negated_real として前へ移し、第三の鎖の根拠をそれらへの参照にした。主張と残りの鎖は変えていない。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
+        "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos θ + i sin θ の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
       ],
     },
   },
@@ -5546,53 +5577,83 @@ g
         " の ",
         math(String.raw`-(ix)`),
         " である。以下の分母の ",
-        math(String.raw`2`), " は ", math(String.raw`2_{\mathbb{C}}`),
+        math(String.raw`2`), "・", math(String.raw`2i`),
+        " は、",
+        ref("euler_formula_cos_sin"),
+        " の読みのとおり ",
+        math(String.raw`2_{\mathbb{C}}`), "・", math(String.raw`2_{\mathbb{C}}i`),
         " で、",
-        ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
-        " の証明の前置きのとおり ",
-        ref("complex_numbers_form_a_field"),
-        " の体で ",
-        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`), "、",
-        math(String.raw`i \neq 0_{\mathbb{C}}`), "、",
-        math(String.raw`2_{\mathbb{C}}i \neq 0_{\mathbb{C}}`),
-        " なので、分数は定まる。",
+        math(String.raw`2_{\mathbb{C}},\ i,\ 2_{\mathbb{C}}i \in \mathbb{C}^{\times}`),
+        "（",
+        ref("euler_formula_cos_sin"),
+        " の主張に書いた成分の比較と ",
+        ref("multiplicative_group_of_cc"),
+        " の群の積）であり、二つの分数は ",
+        ref("def_complex_quotient"),
+        " の商 ",
+        math(String.raw`z/w = z\,w^{-1}`),
+        " である。",
+        math(String.raw`w^{-1}`),
+        " は ",
+        ref("multiplicative_group_of_cc"),
+        " の逆元である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \cos x + i\sin x
 &= \frac{\exp(ix) + \exp(-ix)}{2} + i\,\frac{\exp(ix) - \exp(-ix)}{2i}
 &&(\because\ \blkref{euler_formula_cos_sin})\\
-&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{i\bigl(\exp(ix) - \exp(-ix)\bigr)}{2i}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ u\tfrac{v}{w} = \tfrac{uv}{w}\ (w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ u \to i,\ v \to \exp(ix) - \exp(-ix),\ w \to 2i\bigr)\\
-&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{\bigl(\exp(ix) - \exp(-ix)\bigr)i}{2i}
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + i\Bigl(\bigl(\exp(ix) - \exp(-ix)\bigr)\,(2_{\mathbb{C}}i)^{-1}\Bigr)
+&&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to \exp(ix) + \exp(-ix),\ w \to 2_{\mathbb{C}}),\ (z \to \exp(ix) - \exp(-ix),\ w \to 2_{\mathbb{C}}i)\bigr)\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(i\bigl(\exp(ix) - \exp(-ix)\bigr)\bigr)\,(2_{\mathbb{C}}i)^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\bigl(\exp(ix) - \exp(-ix)\bigr)\,i\bigr)\,(2_{\mathbb{C}}i)^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
-&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{\exp(ix) - \exp(-ix)}{2}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{va}{wa} = \tfrac{v}{w}\ (a \neq 0_{\mathbb{C}},\ w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ v \to \exp(ix) - \exp(-ix),\ w \to 2,\ a \to i\bigr)\\
-&= \frac{\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) - \exp(-ix)\bigr)}{2}
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{u}{w} + \tfrac{v}{w} = \tfrac{u + v}{w}\ (w \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ u \to \exp(ix) + \exp(-ix),\ v \to \exp(ix) - \exp(-ix),\ w \to 2\bigr)\\
-&= \frac{\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)}{2}
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(1_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(\bigl(2_{\mathbb{C}}^{-1}2_{\mathbb{C}}\bigr)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigl(2_{\mathbb{C}}^{-1}\bigl((2_{\mathbb{C}}i)\,(2_{\mathbb{C}}i)^{-1}\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\bigl(2_{\mathbb{C}}^{-1}\,1_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}i\in\mathbb{C}^{\times})\bigr)\\
+&= \bigl(\exp(ix) + \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1} + \bigl(\exp(ix) - \exp(-ix)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) - \exp(-ix)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{def_complex_difference})\\
-&= \frac{\exp(ix) + \Bigl(\exp(-ix) + \bigl(\exp(ix) + (-\exp(-ix))\bigr)\Bigr)}{2}
+&= \Bigl(\exp(ix) + \bigl(\exp(-ix) + (\exp(ix) + (-\exp(-ix)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(ix) + \Bigl(\bigl(\exp(-ix) + \exp(ix)\bigr) + (-\exp(-ix))\Bigr)}{2}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(ix) + \Bigl(\bigl(\exp(ix) + \exp(-ix)\bigr) + (-\exp(-ix))\Bigr)}{2}
+&= \Bigl(\exp(ix) + \bigl((\exp(-ix) + \exp(ix)) + (-\exp(-ix))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= \Bigl(\exp(ix) + \bigl((\exp(ix) + \exp(-ix)) + (-\exp(-ix))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
-&= \frac{\exp(ix) + \Bigl(\exp(ix) + \bigl(\exp(-ix) + (-\exp(-ix))\bigr)\Bigr)}{2}
+&= \Bigl(\exp(ix) + \bigl(\exp(ix) + (\exp(-ix) + (-\exp(-ix)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
-&= \frac{\exp(ix) + \bigl(\exp(ix) + 0_{\mathbb{C}}\bigr)}{2}
+&= \bigl(\exp(ix) + (\exp(ix) + 0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
-&= \frac{\exp(ix) + \exp(ix)}{2}
+&= \bigl(\exp(ix) + \exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
-&= \frac{1_{\mathbb{C}}\exp(ix) + 1_{\mathbb{C}}\exp(ix)}{2}
+&= \bigl(1_{\mathbb{C}}\exp(ix) + 1_{\mathbb{C}}\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ右辺から左辺へ})\\
-&= \frac{\bigl(1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\exp(ix)}{2}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ})\\
-&= \frac{(1 + 1)_{\mathbb{C}}\,\exp(ix)}{2}
+&= \bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \bigl((1 + 1)_{\mathbb{C}}\,\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
-&= \frac{2\exp(ix)}{2}
+&= \bigl(2_{\mathbb{C}}\,\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&= \bigl(\exp(ix)\,2_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \exp(ix)\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \exp(ix)\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
 &= \exp(ix)
-&&\bigl(\because\ \mathbb{C}\ \text{で}\ \tfrac{2a}{2} = a\ (2 \neq 0_{\mathbb{C}})\ \text{（}\mathbb{C}\ \text{は体 }\blkref{complex_numbers_form_a_field}\text{）}\text{の}\ a \to \exp(ix)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
 \end{aligned}`),
       paragraph([
         "第二に、",
@@ -5856,6 +5917,7 @@ g
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備の第一の i(-x) = -ix（6 行）・-i(-x) = ix（2 行）・cos(-x) の 5 行の鎖は、主張 i_times_negated_real_is_negation_of_i_times・negation_of_i_times_negated_real_is_i_times・cos_of_negated_real の鎖と同じだった。" +
           "3 本の鎖を消し、cos(-x) = cos x を cos_of_negated_real と inclusion_rr_to_cc_is_injective から ℝ の等式として作る文（準備の第三）にした（消した鎖は ℂ の等式で終わり、ℝ の γ_1 の鎖へ像の記号を省いて持ち込んでいた）。(3) の γ_1 の鎖の行と主張の中身は不変。",
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。準備の第二の「k_R + (-k_R) = 0_R と零の性質」を、和の単位元の行と加法逆元の行に（6 等号 → 7 等号）、(2) の θ~_{μ+kM} の鎖の「ℝ の加法の結合律と交換律」を、交換律・差の定義・結合律・差の定義（右辺から左辺へ）・交換律の 5 行に（8 等号 → 12 等号）した。主張の中身は不変。",
+        "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos x + i sin x の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
       ],
     },
   },

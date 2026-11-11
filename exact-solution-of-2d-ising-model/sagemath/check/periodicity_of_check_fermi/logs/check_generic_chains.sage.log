@@ -1,4 +1,5 @@
 == periodicity_of_check_fermi: 一般の点での鎖
+PASS 準備 cos x + i sin x の鎖 否定の対照: i(2_C i)^{-1} = 2_C^{-1} だが (2_C i)^{-1} は 2_C^{-1} i ではない（逆元の取り違えを見分ける）
 PASS 準備 cos x + i sin x の鎖 第 1 行 = 第 2 行
 PASS 準備 cos x + i sin x の鎖 第 2 行 = 第 3 行
 PASS 準備 cos x + i sin x の鎖 第 3 行 = 第 4 行
@@ -15,6 +16,16 @@ PASS 準備 cos x + i sin x の鎖 第 13 行 = 第 14 行
 PASS 準備 cos x + i sin x の鎖 第 14 行 = 第 15 行
 PASS 準備 cos x + i sin x の鎖 第 15 行 = 第 16 行
 PASS 準備 cos x + i sin x の鎖 第 16 行 = 第 17 行
+PASS 準備 cos x + i sin x の鎖 第 17 行 = 第 18 行
+PASS 準備 cos x + i sin x の鎖 第 18 行 = 第 19 行
+PASS 準備 cos x + i sin x の鎖 第 19 行 = 第 20 行
+PASS 準備 cos x + i sin x の鎖 第 20 行 = 第 21 行
+PASS 準備 cos x + i sin x の鎖 第 21 行 = 第 22 行
+PASS 準備 cos x + i sin x の鎖 第 22 行 = 第 23 行
+PASS 準備 cos x + i sin x の鎖 第 23 行 = 第 24 行
+PASS 準備 cos x + i sin x の鎖 第 24 行 = 第 25 行
+PASS 準備 cos x + i sin x の鎖 第 25 行 = 第 26 行
+PASS 準備 cos x + i sin x の鎖 第 26 行 = 第 27 行
 PASS 準備 cos x + i sin x の鎖 第 1 行は euler_formula_cos_sin の代入（2 倍した差が関係のイデアルに入る）
 PASS 準備 cos x + i sin x の鎖 第 1 行の対照: 関係なしでは一致しない
 PASS 準備 cos x + i sin x の鎖 否定の対照: 分母の i だけを落とすと等号が崩れる
@@ -43,5 +54,5 @@ PASS (3) P̌_ν の鎖 第 1 → 2 行: |γ_2(θ~_ν)| = |γ_2(-θ~_μ)| を 2 �
 PASS (3) P̌_ν の鎖 第 2 → 3 行: γ_2(-θ~_ν) = γ_2(θ~_μ) を 2 箇所へ代入
 PASS (3) P̌_ν の鎖の対照: 代入なしでは別の行列
 PASS (3) P̌_ν の最終行は、P̌_μ の式で γ_2(θ~_μ) ↔ γ_2(-θ~_μ)（|·| も）を入れ替えた行列に等しい
--- periodicity_of_check_fermi: 一般の点での鎖: 44/44 PASS
+-- periodicity_of_check_fermi: 一般の点での鎖: 55/55 PASS
 RESULT: PASS

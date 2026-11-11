@@ -14,7 +14,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 準備の第一: cos θ + i sin θ の鎖 17 行（i(−θ)・−i(−θ)・cos(−θ)・sin(−θ) の鎖は主張 `i_times_negated_real_is_negation_of_i_times`・`negation_of_i_times_negated_real_is_i_times`・`cos_of_negated_real`・`sin_of_negated_real` へ移り、検算はそれぞれのラベルのディレクトリにある） | `check_generic_chains.sage` | exp(±iθ) を不定元にした QQ(i) 上の有理関数体で一行ずつ（否定の対照: 分母の i だけを落とすと崩れる） | **PASS** | 厳密 |
+| 準備の第一: cos θ + i sin θ の鎖 27 行（分数は def_complex_quotient の zw^{-1} に開き、逆元は multiplicative_group_of_cc）（i(−θ)・−i(−θ)・cos(−θ)・sin(−θ) の鎖は主張 `i_times_negated_real_is_negation_of_i_times`・`negation_of_i_times_negated_real_is_i_times`・`cos_of_negated_real`・`sin_of_negated_real` へ移り、検算はそれぞれのラベルのディレクトリにある） | `check_generic_chains.sage` | exp(±iθ) を不定元にした QQ(i) 上の有理関数体で一行ずつ（否定の対照: 分母の i だけを落とすと崩れる。逆元の対照: (2_C i)^{-1} ≠ 2_C^{-1} i） | **PASS** | 厳密 |
 | 同（具体値） | `check_values_and_claims.sage` | 円分体で cos(−θ) = cos θ・sin(−θ) = −sin θ・exp(i(−θ)) = exp(−iθ)・cos θ + i sin θ = exp(iθ)、Euler の式の cos・sin が Sage 組み込みの cos・sin（QQbar）と一致 | **PASS** | 厳密 |
 | 準備の第二: ī = −i の鎖 6 行（i := (0,1) は `def_imaginary_unit`） | `check_generic_chains.sage` | ℂ を QQ の対で持ち、共役・積・包含・−1 倍を定義どおりに | **PASS** | 厳密 |
 | 準備の第二: conj(exp(iθ)) = exp(−iθ) の鎖 8 行 | `check_generic_chains.sage`、`check_values_and_claims.sage` | cos θ・sin θ を QQ[c, s] の不定元にした対で 7 行（(−i) sin θ = −(i sin θ) と差の定義を 1 行ずつ）、最終行は exp_of_negative_i_real_as_cos_minus_i_sin の右辺 (c, −s)。具体値で円分体の共役と def_complex_conjugate の対の共役の両方 | **PASS** | 厳密 |

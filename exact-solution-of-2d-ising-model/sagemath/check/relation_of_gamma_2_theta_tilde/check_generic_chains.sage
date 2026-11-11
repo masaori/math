@@ -15,25 +15,39 @@ Ft = Rt.fraction_field()
 cos_theta = (Ft(Ep) + Ft(Em)) / 2                    # euler_formula_cos_sin
 sin_theta = (Ft(Ep) - Ft(Em)) / (2 * I0)
 
+T2 = Ft(2)
+T2i = T2^-1                                          # multiplicative_group_of_cc の 2_C の逆元
+T2Ii = (T2 * I0)^-1                                  # 2_C i の逆元
 euler_chain = [
-    (Ft(Ep) + Ft(Em)) / 2 + I0 * ((Ft(Ep) - Ft(Em)) / (2 * I0)),
-    (Ft(Ep) + Ft(Em)) / 2 + (I0 * (Ft(Ep) - Ft(Em))) / (2 * I0),   # x(y/z) = (xy)/z
-    (Ft(Ep) + Ft(Em)) / 2 + ((Ft(Ep) - Ft(Em)) * I0) / (2 * I0),   # 積の可換律
-    (Ft(Ep) + Ft(Em)) / 2 + (Ft(Ep) - Ft(Em)) / 2,                 # (xa)/(ya) = x/y
-    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) - Ft(Em))) / 2,                   # x/z + y/z = (x+y)/z
-    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) + (-Ft(Em)))) / 2,                # def_complex_difference
-    (Ft(Ep) + (Ft(Em) + (Ft(Ep) + (-Ft(Em))))) / 2,                # 和の結合律
-    (Ft(Ep) + ((Ft(Em) + Ft(Ep)) + (-Ft(Em)))) / 2,                # 和の結合律
-    (Ft(Ep) + ((Ft(Ep) + Ft(Em)) + (-Ft(Em)))) / 2,                # 和の可換律
-    (Ft(Ep) + (Ft(Ep) + (Ft(Em) + (-Ft(Em))))) / 2,                # 和の結合律
-    (Ft(Ep) + (Ft(Ep) + 0)) / 2,                                   # 加法逆元
-    (Ft(Ep) + Ft(Ep)) / 2,                                         # 零元
-    (1 * Ft(Ep) + 1 * Ft(Ep)) / 2,                                 # 積の単位元
-    ((1 + 1) * Ft(Ep)) / 2,                                        # 分配律
-    ((QQ(1) + QQ(1)) * Ft(Ep)) / 2,                                # real_inclusion_preserves_sum
-    (2 * Ft(Ep)) / 2,                                              # ℝ で 1 + 1 = 2
-    Ft(Ep),                                                        # (2a)/2 = a
+    (Ft(Ep) + Ft(Em)) / 2 + I0 * ((Ft(Ep) - Ft(Em)) / (2 * I0)),               # euler_formula_cos_sin
+    (Ft(Ep) + Ft(Em)) * T2i + I0 * ((Ft(Ep) - Ft(Em)) * T2Ii),                 # def_complex_quotient を 2 箇所へ
+    (Ft(Ep) + Ft(Em)) * T2i + (I0 * (Ft(Ep) - Ft(Em))) * T2Ii,                 # 積の結合律（右辺から左辺へ）
+    (Ft(Ep) + Ft(Em)) * T2i + ((Ft(Ep) - Ft(Em)) * I0) * T2Ii,                 # 積の可換律
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (I0 * T2Ii),                 # 積の結合律
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (1 * (I0 * T2Ii)),           # 積の単位元（右辺から左辺へ）
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * ((T2i * T2) * (I0 * T2Ii)),  # multiplicative_group_of_cc の逆元 2_C（右辺から左辺へ）
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * (T2 * (I0 * T2Ii))),  # 積の結合律
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * ((T2 * I0) * T2Ii)),  # 積の結合律（右辺から左辺へ）
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * (T2i * 1),                   # multiplicative_group_of_cc の逆元 2_C i
+    (Ft(Ep) + Ft(Em)) * T2i + (Ft(Ep) - Ft(Em)) * T2i,                         # 積の単位元
+    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) - Ft(Em))) * T2i,                             # 右からの分配律（右辺から左辺へ）
+    ((Ft(Ep) + Ft(Em)) + (Ft(Ep) + (-Ft(Em)))) * T2i,                          # def_complex_difference
+    (Ft(Ep) + (Ft(Em) + (Ft(Ep) + (-Ft(Em))))) * T2i,                          # 和の結合律
+    (Ft(Ep) + ((Ft(Em) + Ft(Ep)) + (-Ft(Em)))) * T2i,                          # 和の結合律（右辺から左辺へ）
+    (Ft(Ep) + ((Ft(Ep) + Ft(Em)) + (-Ft(Em)))) * T2i,                          # 和の可換律
+    (Ft(Ep) + (Ft(Ep) + (Ft(Em) + (-Ft(Em))))) * T2i,                          # 和の結合律
+    (Ft(Ep) + (Ft(Ep) + 0)) * T2i,                                             # 加法逆元
+    (Ft(Ep) + Ft(Ep)) * T2i,                                                   # 零元
+    (1 * Ft(Ep) + 1 * Ft(Ep)) * T2i,                                           # 積の単位元を 2 箇所へ（右辺から左辺へ）
+    ((1 + 1) * Ft(Ep)) * T2i,                                                  # 右からの分配律（右辺から左辺へ）
+    ((QQ(1) + QQ(1)) * Ft(Ep)) * T2i,                                          # real_inclusion_preserves_sum
+    (T2 * Ft(Ep)) * T2i,                                                       # ℝ で 1 + 1 = 2
+    (Ft(Ep) * T2) * T2i,                                                       # 積の可換律
+    Ft(Ep) * (T2 * T2i),                                                       # 積の結合律
+    Ft(Ep) * 1,                                                                # multiplicative_group_of_cc の逆元 2_C
+    Ft(Ep),                                                                    # 積の単位元
 ]
+rep.check(I0 * T2Ii == T2i and T2Ii != T2i * I0, "cos θ + i sin θ の鎖 否定の対照: i(2_C i)^{-1} = 2_C^{-1} だが (2_C i)^{-1} は 2_C^{-1} i ではない（逆元の取り違えを見分ける）")
 rep.check((Ft(Ep) - Ft(Em)) / 2 != (Ft(Ep) - Ft(Em)) / (2 * I0), "cos θ + i sin θ の鎖 否定の対照: 分母の i だけを落とすと（分子に i が残ると）等号が崩れる")
 for k in range(len(euler_chain) - 1):
     rep.check(euler_chain[k] == euler_chain[k + 1], f"cos θ + i sin θ の鎖 第 {k+1} 行 = 第 {k+2} 行")

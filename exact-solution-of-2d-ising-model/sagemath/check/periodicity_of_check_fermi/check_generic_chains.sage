@@ -37,28 +37,42 @@ def chain(name, lines, reasons):
         if reasons[j]:
             rep.check(d != 0, f"{name} 第 {j+1} 行 → 第 {j+2} 行の対照: 根拠の関係なしでは一致しない")
 
-# ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 17 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
+# ---- 準備の第一: cos x + i sin x = exp(ix) の鎖 27 行（exp(±ix) を有理関数体の元にして各行を別々に組む） ----
 Ft = R.fraction_field()
 Ep_, Em_ = Ft(E), Ft(Ei)
+T2 = Ft(2)
+T2i = T2^-1                                          # multiplicative_group_of_cc の 2_C の逆元
+T2Ii = (T2 * I0)^-1                                  # 2_C i の逆元
 euler_chain = [
-    (Ep_ + Em_) / 2 + I0 * ((Ep_ - Em_) / (2 * I0)),
-    (Ep_ + Em_) / 2 + (I0 * (Ep_ - Em_)) / (2 * I0),       # u(v/w) = (uv)/w
-    (Ep_ + Em_) / 2 + ((Ep_ - Em_) * I0) / (2 * I0),       # 積の可換律
-    (Ep_ + Em_) / 2 + (Ep_ - Em_) / 2,                     # (va)/(wa) = v/w
-    ((Ep_ + Em_) + (Ep_ - Em_)) / 2,                       # u/w + v/w = (u+v)/w
-    ((Ep_ + Em_) + (Ep_ + (-Em_))) / 2,                    # def_complex_difference
-    (Ep_ + (Em_ + (Ep_ + (-Em_)))) / 2,                    # 和の結合律
-    (Ep_ + ((Em_ + Ep_) + (-Em_))) / 2,                    # 和の結合律
-    (Ep_ + ((Ep_ + Em_) + (-Em_))) / 2,                    # 和の可換律
-    (Ep_ + (Ep_ + (Em_ + (-Em_)))) / 2,                    # 和の結合律
-    (Ep_ + (Ep_ + 0)) / 2,                                 # 加法逆元
-    (Ep_ + Ep_) / 2,                                       # 零元
-    (1 * Ep_ + 1 * Ep_) / 2,                               # 積の単位元
-    ((1 + 1) * Ep_) / 2,                                   # 分配律
-    ((QQ(1) + QQ(1)) * Ep_) / 2,                           # real_inclusion_preserves_sum
-    (2 * Ep_) / 2,                                         # ℝ で 1 + 1 = 2
-    Ep_,                                                   # (2a)/2 = a
+    (Ep_ + Em_) / 2 + I0 * ((Ep_ - Em_) / (2 * I0)),               # euler_formula_cos_sin
+    (Ep_ + Em_) * T2i + I0 * ((Ep_ - Em_) * T2Ii),                 # def_complex_quotient を 2 箇所へ
+    (Ep_ + Em_) * T2i + (I0 * (Ep_ - Em_)) * T2Ii,                 # 積の結合律（右辺から左辺へ）
+    (Ep_ + Em_) * T2i + ((Ep_ - Em_) * I0) * T2Ii,                 # 積の可換律
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (I0 * T2Ii),                 # 積の結合律
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (1 * (I0 * T2Ii)),           # 積の単位元（右辺から左辺へ）
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * ((T2i * T2) * (I0 * T2Ii)),  # multiplicative_group_of_cc の逆元 2_C（右辺から左辺へ）
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * (T2 * (I0 * T2Ii))),  # 積の結合律
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * ((T2 * I0) * T2Ii)),  # 積の結合律（右辺から左辺へ）
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * (T2i * 1),                   # multiplicative_group_of_cc の逆元 2_C i
+    (Ep_ + Em_) * T2i + (Ep_ - Em_) * T2i,                         # 積の単位元
+    ((Ep_ + Em_) + (Ep_ - Em_)) * T2i,                             # 右からの分配律（右辺から左辺へ）
+    ((Ep_ + Em_) + (Ep_ + (-Em_))) * T2i,                          # def_complex_difference
+    (Ep_ + (Em_ + (Ep_ + (-Em_)))) * T2i,                          # 和の結合律
+    (Ep_ + ((Em_ + Ep_) + (-Em_))) * T2i,                          # 和の結合律（右辺から左辺へ）
+    (Ep_ + ((Ep_ + Em_) + (-Em_))) * T2i,                          # 和の可換律
+    (Ep_ + (Ep_ + (Em_ + (-Em_)))) * T2i,                          # 和の結合律
+    (Ep_ + (Ep_ + 0)) * T2i,                                       # 加法逆元
+    (Ep_ + Ep_) * T2i,                                             # 零元
+    (1 * Ep_ + 1 * Ep_) * T2i,                                     # 積の単位元を 2 箇所へ（右辺から左辺へ）
+    ((1 + 1) * Ep_) * T2i,                                         # 右からの分配律（右辺から左辺へ）
+    ((QQ(1) + QQ(1)) * Ep_) * T2i,                                 # real_inclusion_preserves_sum
+    (T2 * Ep_) * T2i,                                              # ℝ で 1 + 1 = 2
+    (Ep_ * T2) * T2i,                                              # 積の可換律
+    Ep_ * (T2 * T2i),                                              # 積の結合律
+    Ep_ * 1,                                                       # multiplicative_group_of_cc の逆元 2_C
+    Ep_,                                                           # 積の単位元
 ]
+rep.check(I0 * T2Ii == T2i and T2Ii != T2i * I0, "準備 cos x + i sin x の鎖 否定の対照: i(2_C i)^{-1} = 2_C^{-1} だが (2_C i)^{-1} は 2_C^{-1} i ではない（逆元の取り違えを見分ける）")
 for k in range(len(euler_chain) - 1):
     rep.check(euler_chain[k] == euler_chain[k + 1], f"準備 cos x + i sin x の鎖 第 {k+1} 行 = 第 {k+2} 行")
 # 第 1 行は euler_formula_cos_sin の代入: 2 倍して分母を払った差が EUL_x のイデアルに入る（関係なしでは入らない）
