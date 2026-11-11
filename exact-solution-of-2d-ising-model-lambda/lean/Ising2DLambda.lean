@@ -1206,6 +1206,8 @@ import Ising2DLambda.NecSuf.KacWard.BoundaryOfFiniteHeight
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcluded
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcludedOfWalk
+import Ising2DLambda.KacWard.CellBoundaryVertices
+import Ising2DLambda.NecSuf.KacWard.BoundaryVertexIncidence
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcludedFromNecSuf
 import Ising2DLambda.KacWard.DirectionGateCrossingTurning
 import Ising2DLambda.NecSuf.KacWard.DirectionAxis

@@ -11,6 +11,61 @@ def vertexCellIncidenceCount (cells : Finset GridCell) (v : GridVertex) : ℕ :=
 def verticesWithIncidence (cells : Finset GridCell) (k : ℕ) : Finset GridVertex :=
   (cellVertices cells).filter (fun v => vertexCellIncidenceCount cells v = k)
 
+/-- The cells incident to a lattice vertex are precisely its four quadrants. -/
+theorem vertexCellIncidenceCount_quadrants (cells : Finset GridCell) (r c : ℤ) :
+    vertexCellIncidenceCount cells (r, c) =
+      (if (r, c) ∈ cells then 1 else 0) +
+      (if (r - 1, c) ∈ cells then 1 else 0) +
+      (if (r, c - 1) ∈ cells then 1 else 0) +
+      (if (r - 1, c - 1) ∈ cells then 1 else 0) := by
+  classical
+  have hfilter :
+      cells.filter (fun x => (r, c) ∈ verticesOfCell x) =
+        ({(r, c), (r - 1, c), (r, c - 1), (r - 1, c - 1)} : Finset GridCell) ∩ cells := by
+    ext ⟨i, j⟩
+    simp only [Finset.mem_filter, Finset.mem_inter, verticesOfCell,
+      Finset.mem_insert, Finset.mem_singleton, Prod.mk.injEq]
+    constructor
+    · rintro ⟨hmem, h⟩
+      constructor
+      · rcases h with h | h | h | h <;> omega
+      · exact hmem
+    · rintro ⟨h, hmem⟩
+      constructor
+      · exact hmem
+      · rcases h with h | h | h | h <;> omega
+  rw [vertexCellIncidenceCount, hfilter]
+  have h₁ : (r, c) ≠ (r - 1, c) := by intro h; have := congrArg Prod.fst h; omega
+  have h₂ : (r, c) ≠ (r, c - 1) := by intro h; have := congrArg Prod.snd h; omega
+  have h₃ : (r, c) ≠ (r - 1, c - 1) := by intro h; have := congrArg Prod.fst h; omega
+  have h₄ : (r - 1, c) ≠ (r, c - 1) := by intro h; have := congrArg Prod.fst h; omega
+  have h₅ : (r - 1, c) ≠ (r - 1, c - 1) := by intro h; have := congrArg Prod.snd h; omega
+  have h₆ : (r, c - 1) ≠ (r - 1, c - 1) := by intro h; have := congrArg Prod.fst h; omega
+  rw [Finset.inter_insert]
+  by_cases ha : (r, c) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c - 1) ∈ cells <;>
+    by_cases hd : (r - 1, c - 1) ∈ cells <;>
+    simp [ha, hb, hc, hd, h₁, h₂, h₃, h₄, h₅, h₆]
+
+/-- A vertex meets one to three cells exactly when one of its four incident
+grid edges separates selected and unselected cells. -/
+theorem vertexCellIncidenceCount_boundary_criterion
+    (cells : Finset GridCell) (r c : ℤ) :
+    (vertexCellIncidenceCount cells (r, c) = 1 ∨
+      vertexCellIncidenceCount cells (r, c) = 2 ∨
+      vertexCellIncidenceCount cells (r, c) = 3) ↔
+      ¬ ((r, c) ∈ cells ↔ (r - 1, c) ∈ cells) ∨
+      ¬ ((r, c - 1) ∈ cells ↔ (r - 1, c - 1) ∈ cells) ∨
+      ¬ ((r, c) ∈ cells ↔ (r, c - 1) ∈ cells) ∨
+      ¬ ((r - 1, c) ∈ cells ↔ (r - 1, c - 1) ∈ cells) := by
+  rw [vertexCellIncidenceCount_quadrants]
+  by_cases ha : (r, c) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c - 1) ∈ cells <;>
+    by_cases hd : (r - 1, c - 1) ∈ cells <;>
+    simp [ha, hb, hc, hd]
+
 /-- A grid vertex belongs to at most the four cells in its quadrants. -/
 theorem vertexCellIncidenceCount_le_four (cells : Finset GridCell)
     (v : GridVertex) : vertexCellIncidenceCount cells v ≤ 4 := by

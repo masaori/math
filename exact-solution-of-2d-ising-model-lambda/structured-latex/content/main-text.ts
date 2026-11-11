@@ -70213,6 +70213,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_edgeIncidence_boundary_interior",
                       "Ising2DLambda.KacWard.cellVertexIncidence_sum_by_class",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_vertexIncidence_by_class",
+                      "Ising2DLambda.KacWard.cellBoundaryVertices_iff_incidence_one_to_three",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_vertex_incidence_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.edgeIncidence_sum_partition",
                       "Ising2DLambda.NecSuf.KacWard.finiteWeightedSum_fourClasses",
@@ -70311,8 +70313,10 @@ E&=E_{\mathrm{int}}+B
 &&\bigl(\because\ V=v_1+v_2+v_3+v_4\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-2(4F+B)+4F
 &&\bigl(\because\ 2E=4F+B\bigr)\\
+&=4(v_1+v_2+v_3+v_4)-4F-2B
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2B
-&&\bigl(\because\ 4F=v_1+2v_2+3v_3+4v_4\text{ と }\mathbb Z\text{ の四則}\bigr)\\
+&&\bigl(\because\ 4F=v_1+2v_2+3v_3+4v_4\bigr)\\
 &=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2(v_1+v_2+v_3)
 &&\bigl(\because\ B=v_1+v_2+v_3\bigr)\\
 &=v_1-v_3
