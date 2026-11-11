@@ -40,6 +40,27 @@ theorem local_directions_exposed (a b c d : Bool)
     simp_all [localCellCount, incomingExposed, outgoingExposed,
       localIncoming, localOutgoing] <;> decide
 
+/-- The incoming edge touches the west, north, east, or south side. -/
+def incomingSide (direction : ZMod 4) : Fin 4 :=
+  if direction = 0 then 3 else if direction = 1 then 0
+  else if direction = 2 then 1 else 2
+
+/-- The outgoing edge touches the east, south, west, or north side. -/
+def outgoingSide (direction : ZMod 4) : Fin 4 :=
+  if direction = 0 then 1 else if direction = 1 then 2
+  else if direction = 2 then 3 else 0
+
+theorem local_incoming_outgoing_sides_ne (a b c d : Bool)
+    (hdiag₁ : ¬ (a = true ∧ b = false ∧ c = true ∧ d = false))
+    (hdiag₂ : ¬ (a = false ∧ b = true ∧ c = false ∧ d = true))
+    (hboundary : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3) :
+    incomingSide (localIncoming a b c d) ≠
+      outgoingSide (localOutgoing a b c d) := by
+  cases a <;> cases b <;> cases c <;> cases d <;>
+    simp_all [localCellCount, incomingSide, outgoingSide,
+      localIncoming, localOutgoing] <;> decide
+
 def localTurn (a b c d : Bool) : ℤ :=
   if localOutgoing a b c d - localIncoming a b c d = (1 : ZMod 4) then 1
   else if localOutgoing a b c d - localIncoming a b c d = (-1 : ZMod 4) then -1

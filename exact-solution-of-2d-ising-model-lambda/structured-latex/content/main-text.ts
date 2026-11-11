@@ -70221,6 +70221,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
                       "Ising2DLambda.KacWard.cellBoundary_turn_by_incidence",
                       "Ising2DLambda.NecSuf.KacWard.local_turn_by_cell_count",
+                      "Ising2DLambda.KacWard.cellBoundary_local_edges_ne",
+                      "Ising2DLambda.NecSuf.KacWard.local_incoming_outgoing_sides_ne",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70311,6 +70313,8 @@ P_m(\gamma)
 &&\bigl(\because\ \text{境界辺とその端点の接続を二通りに数える}\bigr)\\
 &=\sum_{v\in\mathcal V_{\partial}}2
 &&\bigl(\because\ \blkref{claim_boundary_vertex_diagonal_contact_excluded}\text{ と四セルの巡回順}\bigr)\\
+&=2|\mathcal V_{\partial}|
+&&\bigl(\because\ \text{有限集合上の定数和}\bigr)\\
 &=2(v_1+v_2+v_3)
 &&\bigl(\because\ \mathcal V_{\partial}\text{ を接するセル数で分割する}\bigr)
 \end{aligned}`),

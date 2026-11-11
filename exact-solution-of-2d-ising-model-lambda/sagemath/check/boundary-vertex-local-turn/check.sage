@@ -13,6 +13,9 @@ for a, b, c, d in product((False, True), repeat=4):
     outgoing_exposed = (b != c, c != d, a != d, a != b)
     assert incoming_exposed[incoming]
     assert outgoing_exposed[outgoing]
+    incoming_side = (3, 0, 1, 2)[incoming]
+    outgoing_side = (1, 2, 3, 0)[outgoing]
+    assert incoming_side != outgoing_side
     difference = (outgoing - incoming) % 4
     turn = ZZ(1) if difference == 1 else ZZ(-1) if difference == 3 else ZZ(0)
     expected = ZZ(-1) if count == 1 else ZZ(1) if count == 3 else ZZ(0)

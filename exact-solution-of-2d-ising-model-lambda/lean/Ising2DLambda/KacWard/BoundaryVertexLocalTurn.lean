@@ -58,6 +58,31 @@ theorem cellBoundary_local_directions_mem (cells : Finset GridCell) (r c : ℤ)
       show (3 : ZMod 4) ≠ 1 by decide,
       show (3 : ZMod 4) ≠ 2 by decide]
 
+/-- The entering and leaving boundary edges at a non-diagonal vertex are distinct. -/
+theorem cellBoundary_local_edges_ne (cells : Finset GridCell) (r c : ℤ)
+    (hv : (r, c) ∈ cellBoundaryVertices cells)
+    (hdiag₁ : ¬ ((r - 1, c - 1) ∈ cells ∧ (r - 1, c) ∉ cells ∧
+      (r, c) ∈ cells ∧ (r, c - 1) ∉ cells))
+    (hdiag₂ : ¬ ((r - 1, c - 1) ∉ cells ∧ (r - 1, c) ∈ cells ∧
+      (r, c) ∉ cells ∧ (r, c - 1) ∈ cells)) :
+    cellBoundaryIncomingEdge r c (cellBoundaryIncoming cells r c) ≠
+      cellBoundaryOutgoingEdge r c (cellBoundaryOutgoing cells r c) := by
+  have hcount := (cellBoundaryVertices_iff_incidence_one_to_three cells r c).mp hv
+  rw [vertexCellIncidenceCount_quadrants] at hcount
+  by_cases ha : (r - 1, c - 1) ∈ cells <;>
+    by_cases hb : (r - 1, c) ∈ cells <;>
+    by_cases hc : (r, c) ∈ cells <;>
+    by_cases hd : (r, c - 1) ∈ cells <;>
+    simp_all [cellBoundaryIncomingEdge, cellBoundaryOutgoingEdge,
+      cellBoundaryIncoming, cellBoundaryOutgoing,
+      ZMod.val_one_eq_one_mod, ZMod.val_two_eq_two_mod, ZMod.val_ofNat,
+      show (1 : ZMod 4) ≠ 0 by decide,
+      show (2 : ZMod 4) ≠ 0 by decide,
+      show (2 : ZMod 4) ≠ 1 by decide,
+      show (3 : ZMod 4) ≠ 0 by decide,
+      show (3 : ZMod 4) ≠ 1 by decide,
+      show (3 : ZMod 4) ≠ 2 by decide] <;> omega
+
 /-- The local turn at a boundary vertex is minus one, zero, or one according
 to whether one, two, or three cells meet there. -/
 theorem cellBoundary_turn_by_incidence (cells : Finset GridCell) (r c : ℤ)
