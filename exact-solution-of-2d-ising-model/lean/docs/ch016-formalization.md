@@ -26,6 +26,7 @@
 | `Ising2D.gamma2_thetaTilde_conj` | `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma2_neg_thetaTilde_conj` | `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma1R_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（ℝ の値。人手の 5 行と 1 対 1 の `calc`） | 同 (3) |
+| `Ising2D.checkPmat_conj` / `checkPmat_conj_denominator_ne_zero`（`ClaimCheckPmatConjugateIndex.lean`） | `P̌_{M+1-μ}` は `P̌_μ` の式の `γ_2(θ̃_μ)` と `γ_2(-θ̃_μ)` を入れ替えたもの（人手の 3 行と 1 対 1 の `calc`）、主張の分母 `u γ_2(θ̃_μ)` は `d_ν = u γ_2(-θ̃_ν)` と同じ元で `ℂ^×` に属する（`diagonalization_check_P_D` Step 1 の `checkD_ne_zero` を `ν` で。下の行の分母 `u` は `checkU_ne_zero`） | 同 (3) の `P̌_{M_col+1-μ}` |
 | `Ising2D.checkR` | `r_μ := \|γ_2(θ̃_μ)\|` | `def_check_fermi` の係数 |
 | `Ising2D.checkR_sq` | `(r_μ:ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))`（**無条件**） | 同（分枝が要らないことの核） |
 | `Ising2D.checkR_conj` | `r_{M+1-μ} = r_μ`（人手の準備 5 の `r_ν` の 13 行の鎖と 1 対 1 の `calc`） | `anticommutator_of_check_psi` 準備 5 |
@@ -113,6 +114,7 @@
 | `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
 | `action_of_T_check_Vprime_on_check_psi` Step 1〜2'（準備 5 を含む） | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
 | `action_of_T_check_Vprime_on_check_psi` Step 3〜6 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
+| `periodicity_of_check_fermi` (3) の `P̌_{M_col+1-μ}` | `Ising2D.checkPmat_conj` / `checkPmat_conj_denominator_ne_zero`（`ClaimCheckPmatConjugateIndex.lean`） | 置かない（必要十分版の要否）。鎖の 2 行目・3 行目は等しい元の代入だけで、代入先の演算（`\|·\|`・積・商）のどの性質も使わないので、抽象度を上げて取り除ける構造が無い |
 | `commutation_V_plus_check_psi` | `Ising2D.rowApply_checkPsi_row` ほか（`ClaimCommutationVPlusCheckPsi.lean`） | 置かない。結合律 `rowMul_rowMul` と Step 1 の `rowApply_rowMul` は具体版の時点で任意の `ℂ` 加群について述べてあり、Step 2 の残りは具体的な `P̌_μ`・`Ď_μ` による対角化の代入だけで、抽象度を上げて取り除ける構造が無い |
 | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1・Step 3 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` / `eq_on_checkZY_of_eq_on_checkPsi`（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`。必要十分版からの導出は `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` / `eq_on_checkZY_of_eq_on_checkPsi_of_necSuf`、`ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean`） | `Ising2D.NecSuf.eq_rowMul2_of_rowMul2_eq` / `NecSuf.linear_eq_on_of_rowMul2_eq`（係数は可換半環、台はその上の任意の加群。`NecSuf/RowVectorRightInverse.lean`、新規） |
 

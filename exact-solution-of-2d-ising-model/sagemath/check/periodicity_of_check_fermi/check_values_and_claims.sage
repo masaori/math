@@ -89,6 +89,10 @@ for M in M_RANGE:
             def Pmat(rabs, bottom):
                 return matrix(Fr2, [[-rabs / (2 * sM * bottom), rabs / (2 * sM * bottom)], [1 / (2 * sM), 1 / (2 * sM)]])
             P_lines = [Pmat(r_nu, gamma2(NuN, k)), Pmat(r_b, gamma2(NuN, k)), Pmat(r_b, a_)]
+            # 主張の分母: u γ_2(θ~_μ) は d_ν = u γ_2(-θ~_ν) と同じ元（u = 2√M_col ≠ 0 は sM ≠ 0 の不定元で、γ_2 の因子を F で比べる）。
+            # γ_2(θ~_μ) ≠ 0 なので分母は ℂ^× に属する（diagonalization_check_P_D の Step 1 を ν で）。
+            # u = 2√M_col ∈ ℂ^× はここでは不定元 sM の式なので確かめず、diagonalization_check_P_D 側の検算に任せる
+            T(2 * sM * gamma2(NuN, k) == 2 * sM * a_ and a_ != 0 and gamma2(NuN, k) != 0, "(3) 主張の分母 u γ_2(θ~_μ) = d_ν ∈ ℂ^×（γ_2(-θ~_ν) = γ_2(θ~_μ) ≠ 0）")
             T(P_lines[0].subs({r_nu: r_b}) == P_lines[1], "(3) P̌_ν の鎖 第 1 → 2 行（|γ_2(θ~_ν)| = |γ_2(-θ~_μ)| を代入）")
             T(P_lines[1] == P_lines[2], "(3) P̌_ν の鎖 第 2 → 3 行（γ_2(-θ~_ν) = γ_2(θ~_μ) を F で）")
             # 対照: 入れ替えない P̌_μ（|γ_2(θ~_μ)| = |γ_2(-θ~_μ)| は relation_of_gamma_2_theta_tilde (1)）とは、γ_2(θ~_μ) ≠ γ_2(-θ~_μ) のとき一致しない

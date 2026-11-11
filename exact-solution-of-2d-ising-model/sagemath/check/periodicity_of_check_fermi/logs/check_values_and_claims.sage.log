@@ -11,11 +11,12 @@ PASS (3) γ_1(θ~_ν) ∈ ℝ_{≥1}（arccosh の定義域）（140 件）
 PASS (3) γ_1(θ~_ν) の鎖の各行（140 件）
 PASS (3) γ_2(-θ~_ν) の鎖（140 件）
 PASS (3) γ_2(θ~_ν) の鎖（140 件）
+PASS (3) 主張の分母 u γ_2(θ~_μ) = d_ν ∈ ℂ^×（γ_2(-θ~_ν) = γ_2(θ~_μ) ≠ 0）（140 件）
 PASS (3) 対照: P̌_ν ≠ P̌_μ（γ_2(θ~_μ) ≠ γ_2(-θ~_μ) のとき）（128 件）
 PASS (3) 対照: γ_2(θ~_ν) ≠ γ_2(θ~_μ)（γ_2(θ~_μ) ≠ γ_2(-θ~_μ) のとき）（128 件）
 PASS Sage の記号の cos・sin(qπ + 2kπ) を QQbar に落とすと円分体の cos・sin θ と一致（784 件）
 PASS 円分体: cos・sin(θ + 2πk) = cos・sin θ（784 件）
 PASS 準備: cos x + i sin x = exp(ix)（784 件）
 PASS 準備: cos(-x) = cos x（784 件）
--- periodicity_of_check_fermi: 具体の値と主張: 18/18 PASS
+-- periodicity_of_check_fermi: 具体の値と主張: 19/19 PASS
 RESULT: PASS

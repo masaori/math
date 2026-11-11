@@ -1332,6 +1332,8 @@ targets=(
   Ising2D.gamma1R_thetaTilde_conj
   Ising2D.gamma2_thetaTilde_conj
   Ising2D.gamma2_neg_thetaTilde_conj
+  Ising2D.checkPmat_conj
+  Ising2D.checkPmat_conj_denominator_ne_zero
   Ising2D.checkR_sq
   Ising2D.checkR_conj
   Ising2D.sqrtM
