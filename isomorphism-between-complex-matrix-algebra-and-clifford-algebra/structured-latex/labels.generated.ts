@@ -105,6 +105,7 @@ export const ALL_LABELS = [
   "def_linear_form",
   "def_linear_independence",
   "def_linear_map",
+  "def_map_induced_on_quotient_algebra",
   "def_matrices_indexed_by_finite_set",
   "def_matrix_unit",
   "def_numbering_of_finite_set",

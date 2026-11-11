@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-11: 両側イデアルの元を零へ移す準同型が商代数の上に誘導する写像 φ̄:A/I→B（ラベル def_map_induced_on_quotient_algebra）を定義し、代表のとり方によらないことを剰余類の同値と前の主張で本文に示した。次は φ̄∘π_I=φ。
 - 2026-11-10: 台帳の「商代数の普遍性」を五行に割り、両側イデアルの元を零へ移す準同型は合同な元に同じ値をとること（ラベル claim_homomorphism_vanishing_on_ideal_takes_equal_values_on_congruent_elements）を、φ(a) から φ(x)+_B φ(a') を経て φ(a') へ着く鎖で示した。次は誘導される写像の定義。
 - 2026-11-10: 商集合への射影は両側イデアルの元を零へ移すこと（ラベル claim_projection_onto_quotient_set_sends_ideal_elements_to_zero）を示した。x≡_I 0_A を合同の定義で示し、剰余類の同値と零元の定義 0_{A/I}:=π_I(0_A) で π_I(x)=0_{A/I} を導いた。次は商代数の普遍性。
 - 2026-11-10: 商代数への射影が ℂ-代数の準同型であること（ラベル claim_projection_onto_quotient_algebra_is_algebra_homomorphism）を示した。射影が加法・乗法・スカラー倍を保つ三つの主張と、単位元の定義 1_{A/I}:=π_I(1_A) で四つの等式を確かめた。次は射影は両側イデアルの元を零へ移すこと
