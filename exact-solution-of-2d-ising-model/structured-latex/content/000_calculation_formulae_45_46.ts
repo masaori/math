@@ -881,4 +881,456 @@ T_B(I)
       ],
     },
   },
+  {
+    id: "finite_matrix_definition_adjugate_two_by_two",
+    kind: "definition",
+    title: { tex: String.raw`2 \times 2 \text{ 行列の余因子行列}` },
+    labels: ["def_adjugate_two_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、その余因子行列 ",
+        math(String.raw`\operatorname{adj} B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`\operatorname{adj} B := \begin{pmatrix} B_{22} & -B_{12} \\ -B_{21} & B_{11} \end{pmatrix}`),
+      paragraph([
+        "で定める。成分の ",
+        math(String.raw`-B_{12}`),
+        "・",
+        math(String.raw`-B_{21}`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " による。この論文で余因子行列を使うのは ",
+        math(String.raw`2 \times 2`),
+        " 行列に対してだけである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: diagonalization_check_P_D の Step 4 が「det P̌_μ ≠ 0 より P̌_μ は可逆」を根拠なしに使っていたので、逆元を具体的に書くために足した。一般の n×n の余因子行列は使わない。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_matrix_times_adjugate_two_by_two",
+    kind: "claim",
+    title: { tex: String.raw`2 \times 2 \text{ 行列に右から余因子行列を掛けると行列式倍の単位行列になる}` },
+    labels: ["matrix_times_adjugate_two_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+      ]),
+      displayMath(String.raw`B\,(\operatorname{adj} B) = (\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\operatorname{adj} B`),
+        " は ",
+        ref("def_adjugate_two_by_two"),
+        "、",
+        math(String.raw`\det B`),
+        " は ",
+        ref("def_det_two_by_two"),
+        "、積は ",
+        ref("mat_mult"),
+        "、単位行列は ",
+        ref("def_identity_matrix"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`z, w, x \in \mathbb{C}`),
+        " について次の (a)・(c) を示す。",
+        math(String.raw`-w`),
+        " などは ",
+        ref("multiply_by_minus_one"),
+        " による。",
+      ]),
+      paragraph(["(a) ", math(String.raw`z(-w) = -(zw)`), "。"]),
+      displayMath(String.raw`\begin{aligned}
+z(-w)
+&= z\bigl((-1_{\mathbb{C}})\,w\bigr)
+   &&(\because\ \blkref{multiply_by_minus_one})\\
+&= \bigl(z\,(-1_{\mathbb{C}})\bigr)\,w
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\,(zw)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -(zw)
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["(c) ", math(String.raw`(-x) + x = 0_{\mathbb{C}}`), "。"]),
+      displayMath(String.raw`\begin{aligned}
+(-x) + x
+&= (-1_{\mathbb{C}})\,x + x
+   &&(\because\ \blkref{multiply_by_minus_one})\\
+&= (-1_{\mathbb{C}})\,x + 1_{\mathbb{C}}\,x
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)\,x
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
+&= \bigl((-1,0) + (1,0)\bigr)\,x
+   &&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (-1+1,\ 0+0)\,x
+   &&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (0,0)\,x
+   &&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 0_{\mathbb{C}}\,x
+   &&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_zero_times_is_zero})
+\end{aligned}`),
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の元なので、4 つの成分が一致することを示せばよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(B\,(\operatorname{adj} B)\bigr)_{11}
+&= B_{11}(\operatorname{adj} B)_{11} + B_{12}(\operatorname{adj} B)_{21}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{11}B_{22} + B_{12}(-B_{21})
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
+   &&(\because\ \text{(a)}\ (z \to B_{12},\ w \to B_{21}))\\
+&= B_{11}B_{22} - B_{12}B_{21}
+   &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= \det B
+   &&(\because\ \blkref{def_det_two_by_two}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= (\det B)\,\delta_{11}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{11}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{11}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(B\,(\operatorname{adj} B)\bigr)_{12}
+&= B_{11}(\operatorname{adj} B)_{12} + B_{12}(\operatorname{adj} B)_{22}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{11}(-B_{12}) + B_{12}B_{11}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= \bigl(-(B_{11}B_{12})\bigr) + B_{12}B_{11}
+   &&(\because\ \text{(a)}\ (z \to B_{11},\ w \to B_{12}))\\
+&= \bigl(-(B_{11}B_{12})\bigr) + B_{11}B_{12}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \text{(c)}\ (x \to B_{11}B_{12}))\\
+&= (\det B)\,0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\delta_{12}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{12}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{12}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(B\,(\operatorname{adj} B)\bigr)_{21}
+&= B_{21}(\operatorname{adj} B)_{11} + B_{22}(\operatorname{adj} B)_{21}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{21}B_{22} + B_{22}(-B_{21})
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= B_{21}B_{22} + \bigl(-(B_{22}B_{21})\bigr)
+   &&(\because\ \text{(a)}\ (z \to B_{22},\ w \to B_{21}))\\
+&= B_{21}B_{22} + \bigl(-(B_{21}B_{22})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \bigl(-(B_{21}B_{22})\bigr) + B_{21}B_{22}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \text{(c)}\ (x \to B_{21}B_{22}))\\
+&= (\det B)\,0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\delta_{21}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{21}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{21}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl(B\,(\operatorname{adj} B)\bigr)_{22}
+&= B_{21}(\operatorname{adj} B)_{12} + B_{22}(\operatorname{adj} B)_{22}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{21}(-B_{12}) + B_{22}B_{11}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= \bigl(-(B_{21}B_{12})\bigr) + B_{22}B_{11}
+   &&(\because\ \text{(a)}\ (z \to B_{21},\ w \to B_{12}))\\
+&= B_{22}B_{11} + \bigl(-(B_{21}B_{12})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
+&= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律を 2 か所へ})\\
+&= B_{11}B_{22} - B_{12}B_{21}
+   &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= \det B
+   &&(\because\ \blkref{def_det_two_by_two}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= (\det B)\,\delta_{22}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{22}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{22}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["よって 4 つの成分がすべて一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: two_sided_inverse_of_two_by_two_with_nonzero_det の右逆元の側の準備として足した。数値検証: sagemath/check/matrix_times_adjugate_two_by_two/。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_adjugate_times_matrix_two_by_two",
+    kind: "claim",
+    title: { tex: String.raw`2 \times 2 \text{ 行列に左から余因子行列を掛けると行列式倍の単位行列になる}` },
+    labels: ["adjugate_times_matrix_two_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+      ]),
+      displayMath(String.raw`(\operatorname{adj} B)\,B = (\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\operatorname{adj} B`),
+        " は ",
+        ref("def_adjugate_two_by_two"),
+        "、",
+        math(String.raw`\det B`),
+        " は ",
+        ref("def_det_two_by_two"),
+        "、積は ",
+        ref("mat_mult"),
+        "、単位行列は ",
+        ref("def_identity_matrix"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について次の (b) を示す。",
+        math(String.raw`-z`),
+        " などは ",
+        ref("multiply_by_minus_one"),
+        " による。",
+      ]),
+      paragraph(["(b) ", math(String.raw`(-z)\,w = -(zw)`), "。"]),
+      displayMath(String.raw`\begin{aligned}
+(-z)\,w
+&= \bigl((-1_{\mathbb{C}})\,z\bigr)\,w
+   &&(\because\ \blkref{multiply_by_minus_one})\\
+&= (-1_{\mathbb{C}})\,(zw)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= -(zw)
+   &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "また ",
+        ref("matrix_times_adjugate_two_by_two"),
+        " の証明の準備 (c) ",
+        math(String.raw`(-x) + x = 0_{\mathbb{C}}`),
+        "（",
+        math(String.raw`x \in \mathbb{C}`),
+        "）を使う。両辺はともに ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の元なので、4 つの成分が一致することを示せばよい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\operatorname{adj} B)\,B\bigr)_{11}
+&= (\operatorname{adj} B)_{11}B_{11} + (\operatorname{adj} B)_{12}B_{21}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{22}B_{11} + (-B_{12})\,B_{21}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= B_{22}B_{11} + \bigl(-(B_{12}B_{21})\bigr)
+   &&(\because\ \text{(b)}\ (z \to B_{12},\ w \to B_{21}))\\
+&= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= B_{11}B_{22} - B_{12}B_{21}
+   &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= \det B
+   &&(\because\ \blkref{def_det_two_by_two}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= (\det B)\,\delta_{11}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{11}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{11}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\operatorname{adj} B)\,B\bigr)_{12}
+&= (\operatorname{adj} B)_{11}B_{12} + (\operatorname{adj} B)_{12}B_{22}
+   &&(\because\ \blkref{mat_mult})\\
+&= B_{22}B_{12} + (-B_{12})\,B_{22}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= B_{22}B_{12} + \bigl(-(B_{12}B_{22})\bigr)
+   &&(\because\ \text{(b)}\ (z \to B_{12},\ w \to B_{22}))\\
+&= B_{22}B_{12} + \bigl(-(B_{22}B_{12})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \bigl(-(B_{22}B_{12})\bigr) + B_{22}B_{12}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \text{(c)}\ (x \to B_{22}B_{12}))\\
+&= (\det B)\,0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\delta_{12}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{12}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{12}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\operatorname{adj} B)\,B\bigr)_{21}
+&= (\operatorname{adj} B)_{21}B_{11} + (\operatorname{adj} B)_{22}B_{21}
+   &&(\because\ \blkref{mat_mult})\\
+&= (-B_{21})\,B_{11} + B_{11}B_{21}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= \bigl(-(B_{21}B_{11})\bigr) + B_{11}B_{21}
+   &&(\because\ \text{(b)}\ (z \to B_{21},\ w \to B_{11}))\\
+&= \bigl(-(B_{21}B_{11})\bigr) + B_{21}B_{11}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= 0_{\mathbb{C}}
+   &&(\because\ \text{(c)}\ (x \to B_{21}B_{11}))\\
+&= (\det B)\,0_{\mathbb{C}}
+   &&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\delta_{21}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{21}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{21}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\operatorname{adj} B)\,B\bigr)_{22}
+&= (\operatorname{adj} B)_{21}B_{12} + (\operatorname{adj} B)_{22}B_{22}
+   &&(\because\ \blkref{mat_mult})\\
+&= (-B_{21})\,B_{12} + B_{11}B_{22}
+   &&(\because\ \blkref{def_adjugate_two_by_two})\\
+&= \bigl(-(B_{21}B_{12})\bigr) + B_{11}B_{22}
+   &&(\because\ \text{(b)}\ (z \to B_{21},\ w \to B_{12}))\\
+&= B_{11}B_{22} + \bigl(-(B_{21}B_{12})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の可換律})\\
+&= B_{11}B_{22} + \bigl(-(B_{12}B_{21})\bigr)
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= B_{11}B_{22} - B_{12}B_{21}
+   &&(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ})\\
+&= \det B
+   &&(\because\ \blkref{def_det_two_by_two}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,1_{\mathbb{C}}
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ})\\
+&= (\det B)\,\delta_{22}
+   &&(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ})\\
+&= (\det B)\,\bigl(I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{22}
+   &&(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ})\\
+&= \bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)_{22}
+   &&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["よって 4 つの成分がすべて一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: two_sided_inverse_of_two_by_two_with_nonzero_det の左逆元の側の準備として足した。数値検証: sagemath/check/adjugate_times_matrix_two_by_two/。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_two_sided_inverse_of_two_by_two_with_nonzero_det",
+    kind: "claim",
+    title: { tex: String.raw`\text{行列式が } 0 \text{ でない } 2 \times 2 \text{ 行列の両側逆元}` },
+    labels: ["two_sided_inverse_of_two_by_two_with_nonzero_det"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " が ",
+        math(String.raw`\det B \neq 0_{\mathbb{C}}`),
+        "（",
+        ref("def_det_two_by_two"),
+        "）を満たすとする。すなわち ",
+        math(String.raw`\det B \in \mathbb{C}^{\times}`),
+        "（",
+        ref("multiplicative_group_of_cc"),
+        "）であり、その逆元を ",
+        math(String.raw`(\det B)^{-1} \in \mathbb{C}^{\times}`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`h := (\det B)^{-1}\,(\operatorname{adj} B) \in \mathrm{Mat}(2,\mathbb{C})`),
+      paragraph([
+        "（",
+        math(String.raw`\operatorname{adj} B`),
+        " は ",
+        ref("def_adjugate_two_by_two"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "）と置くと、",
+      ]),
+      displayMath(String.raw`B\,h = I_{\mathrm{Mat}(2,\mathbb{C})} \quad\text{かつ}\quad h\,B = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+      paragraph([
+        "が成り立つ。すなわち ",
+        math(String.raw`h`),
+        " は ",
+        math(String.raw`B`),
+        " の両側逆元である。積は ",
+        ref("mat_mult"),
+        "、単位行列は ",
+        ref("def_identity_matrix"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+B\,h
+&= B\bigl((\det B)^{-1}\,(\operatorname{adj} B)\bigr)
+   &&(\because\ h\ \text{の定義})\\
+&= (\det B)^{-1}\bigl(B\,(\operatorname{adj} B)\bigr)
+   &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m, n, p \to 2,\ a \to (\det B)^{-1},\ \text{補題の}\ (A, B) \to (B,\ \operatorname{adj} B))\bigr)\\
+&= (\det B)^{-1}\bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)
+   &&(\because\ \blkref{matrix_times_adjugate_two_by_two})\\
+&= \bigl((\det B)^{-1}\det B\bigr)\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (m, n \to 2,\ a \to (\det B)^{-1},\ b \to \det B,\ A \to I_{\mathrm{Mat}(2,\mathbb{C})})\bigr)\\
+&= 1_{\mathbb{C}}\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (\det B \in \mathbb{C}^{\times}))\\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (m, n \to 2,\ A \to I_{\mathrm{Mat}(2,\mathbb{C})})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+h\,B
+&= \bigl((\det B)^{-1}\,(\operatorname{adj} B)\bigr)\,B
+   &&(\because\ h\ \text{の定義})\\
+&= (\det B)^{-1}\bigl((\operatorname{adj} B)\,B\bigr)
+   &&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m, n, p \to 2,\ a \to (\det B)^{-1},\ \text{補題の}\ (A, B) \to (\operatorname{adj} B,\ B))\bigr)\\
+&= (\det B)^{-1}\bigl((\det B)\,I_{\mathrm{Mat}(2,\mathbb{C})}\bigr)
+   &&(\because\ \blkref{adjugate_times_matrix_two_by_two})\\
+&= \bigl((\det B)^{-1}\det B\bigr)\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (m, n \to 2,\ a \to (\det B)^{-1},\ b \to \det B,\ A \to I_{\mathrm{Mat}(2,\mathbb{C})})\bigr)\\
+&= 1_{\mathbb{C}}\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (\det B \in \mathbb{C}^{\times}))\\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}
+   &&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (m, n \to 2,\ A \to I_{\mathrm{Mat}(2,\mathbb{C})})\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-11（Lean の通しの証明）: diagonalization_check_P_D の Step 4 が「det P̌_μ ≠ 0 より P̌_μ は可逆」を根拠なしに使っていたので足した。def_invertible_elements_of_R（M → 1）の可逆の定義の h をこの主張で与える。一般の n×n の行列式の理論（余因子展開・乗法性）は使わず、2×2 の成分計算だけで示す。数値検証: sagemath/check/two_sided_inverse_of_two_by_two_with_nonzero_det/。",
+      ],
+    },
+  },
 ]);

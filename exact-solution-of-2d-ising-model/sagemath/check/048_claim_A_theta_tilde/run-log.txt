@@ -376,6 +376,7 @@ PASS (a) 一般の点の 1〜3 行目 第 1 行 = 第 2 行
 PASS (a) 一般の点の 1〜3 行目 第 2 行 = 第 3 行
 PASS (a) 一般の点の 1〜3 行目 第 3 行 = 第 4 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1 の鎖 第 2 行 = 第 3 行
@@ -385,6 +386,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2 の鎖 第 2 行 = 第 3 行
@@ -394,6 +396,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=2, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1 の鎖 第 2 行 = 第 3 行
@@ -403,6 +406,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2 の鎖 第 2 行 = 第 3 行
@@ -412,6 +416,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3 の鎖 第 2 行 = 第 3 行
@@ -421,6 +426,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=3, μ=3: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1 の鎖 第 2 行 = 第 3 行
@@ -430,6 +436,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2 の鎖 第 2 行 = 第 3 行
@@ -439,6 +446,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3 の鎖 第 2 行 = 第 3 行
@@ -448,6 +456,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=3: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: det P̌ ≠ 0
+PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4 の鎖 第 2 行 = 第 3 行
@@ -457,6 +466,7 @@ PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=3, e^(2K2)=2, M_col=4, μ=4: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1 の鎖 第 2 行 = 第 3 行
@@ -466,6 +476,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2 の鎖 第 2 行 = 第 3 行
@@ -475,6 +486,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=2, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1 の鎖 第 2 行 = 第 3 行
@@ -484,6 +496,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2 の鎖 第 2 行 = 第 3 行
@@ -493,6 +506,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3 の鎖 第 2 行 = 第 3 行
@@ -502,6 +516,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=3, μ=3: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1 の鎖 第 2 行 = 第 3 行
@@ -511,6 +526,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=1: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2 の鎖 第 2 行 = 第 3 行
@@ -520,6 +536,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=2: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3 の鎖 第 2 行 = 第 3 行
@@ -529,6 +546,7 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 最後の辺 (P̌Ď)P̌^{-1} と S
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=3: 否定の対照 A P̌ ≠ Ď P̌
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: det P̌ ≠ 0
+PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 1 行 = 第 2 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 2 行 = 第 3 行
@@ -537,5 +555,5 @@ PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4 の鎖 第 4 行 = 第 5 行
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 最後の辺 (P̌Ď)P̌^{-1} と Sage の左結合の積 P̌*Ď*P̌^{-1} が同じ式（読み方の確認で、新しい数学的内容は無い）
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 否定の対照 P̌^{-1} Ď P̌ ≠ A
 PASS (b) e^(2K1)=2, e^(2K2)=5, M_col=4, μ=4: 否定の対照 A P̌ ≠ Ď P̌
--- diagonalization_check_P_D の Step 4 の鎖: 167/167 PASS
+-- diagonalization_check_P_D の Step 4 の鎖: 185/185 PASS
 RESULT: PASS

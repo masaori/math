@@ -1,0 +1,4 @@
+Bh の鎖 6 行・hB の鎖 6 行: 有理関数体で一致
+QQ[i] の全数 6561 個: det ≠ 0 の 5888 個で Bh = hB = I（Sage の逆行列とも一致）、det = 0 の 673 個で B adj B = 0
+否定コントロール: adj B だけでは B adj B ≠ I
+ALL PASS

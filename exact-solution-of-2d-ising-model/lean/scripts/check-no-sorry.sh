@@ -2138,6 +2138,24 @@ targets=(
   Ising2D.det_checkPmat
   Ising2D.det_checkPmat_ne_zero
   Ising2D.AMat_mul_checkPmat
+  Ising2D.adjTwo
+  Ising2D.mul_two_apply
+  Ising2D.mul_neg_eq_neg_mul_complex
+  Ising2D.neg_mul_eq_neg_mul_complex
+  Ising2D.neg_add_self_complex
+  Ising2D.mul_adjTwo
+  Ising2D.adjTwo_mul
+  Ising2D.mul_detInv_smul_adjTwo
+  Ising2D.detInv_smul_adjTwo_mul
+  Ising2D.two_sided_inverse_of_two_by_two
+  Ising2D.inv_eq_detInv_smul_adjTwo
+  Ising2D.mul_adjTwo_of_necSuf
+  Ising2D.adjTwo_mul_of_necSuf
+  Ising2D.two_sided_inverse_of_two_by_two_of_necSuf
+  Ising2D.NecSuf.mul_adjTwo'
+  Ising2D.NecSuf.adjTwo_mul'
+  Ising2D.NecSuf.mul_smul_adjTwo_of_mul_det'
+  Ising2D.NecSuf.smul_adjTwo_mul_of_mul_det'
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
   Ising2D.lambdaPlusR_ofReal
   Ising2D.lambdaMinusR_ofReal

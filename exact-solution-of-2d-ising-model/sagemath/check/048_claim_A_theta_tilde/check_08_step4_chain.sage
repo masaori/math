@@ -70,6 +70,8 @@ for (x1, y2) in [(3, 2), (2, 5)]:
             tag = f"(b) e^(2K1)={x1}, e^(2K2)={y2}, M_col={M}, μ={mu}"
             check(P.det() != 0, tag + ": det P̌ ≠ 0")
             Pinv = P.inverse()
+            adjP = matrix([[P[1,1], -P[0,1]], [-P[1,0], P[0,0]]])
+            check(Pinv == P.det()^-1 * adjP, tag + ": Step 4 冒頭の P̌^{-1} = (det P̌)^{-1} adj P̌（two_sided_inverse_of_two_by_two_with_nonzero_det）")
             check(P * Pinv == I2 and Pinv * P == I2, tag + ": P̌ P̌^{-1} = I かつ P̌^{-1} P̌ = I")
             lines = [A, A * I2, A * (P * Pinv), (A * P) * Pinv, (P * D) * Pinv]
             chain_check(lines, tag + " の鎖")
