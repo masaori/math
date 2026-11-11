@@ -61,12 +61,13 @@
   `b = -ā` は固有ベクトルであることの第 2 成分に効いていない。人手証明・具体版の第 2 成分も
   同じ 6 行（`b` のまま括り出す）である。
 
-対角化 `A = P D P⁻¹` については、可逆性（`det P` が単元であること）が別途要る。
-人手証明 `diagonalization_check_P_D` は Step 3 で `det P̌_μ ≠ 0` を確かめており、
-必要十分版ではそれが `IsUnit P.det` の仮定として明示される。
+対角化 `A = P D P⁻¹` の Step 4 の鎖に効いているのは、`P` の右逆元 `Q`（`P Q = I`）があることと、
+積の単位元・結合律だけである（`eq_conj_of_mul_eq`。モノイドで述べる）。人手証明 `diagonalization_check_P_D` は
+Step 3 の `det P̌_μ ≠ 0` から `two_sided_inverse_of_two_by_two_with_nonzero_det` で逆元を構成しており、
+導出側では、具体版の 2 段目と同じ補題で出した `P̌ P̌^{-1} = I` を仮定 `hQ` に渡す。行列式も、係数の可換性も、
+左逆元も、この鎖には効いていない。
 -/
 import Mathlib.LinearAlgebra.Matrix.Notation
-import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.FinCases
 import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
@@ -302,15 +303,22 @@ theorem det_of_cols_ne_zero [NoZeroDivisors R] (s b c : R) {P : Matrix (Fin 2) (
   exact mul_ne_zero (mul_ne_zero hs (pow_ne_zero 2 hc)) hb
 
 /-- **対角化の Step 4**（具体版 `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`）:
-`A P = P D` かつ `det P` が単元なら `A = P D P⁻¹`。
-`A` から始めて `A = A I = A(P P⁻¹) = (A P) P⁻¹ = (P D) P⁻¹` とつなぐ、具体版の 4 行の鎖と同じ手順である。
-**この形は 2×2 であることすら使っていない**（任意の有限型の添字でよい）。 -/
-theorem eq_conj_of_mul_eq {n : Type*} [DecidableEq n] [Fintype n]
-    {A P D : Matrix n n R} (h : A * P = P * D) (hP : IsUnit P.det) :
-    A = P * D * P⁻¹ :=
-  calc A = A * 1 := (Matrix.mul_one A).symm                                      -- 具体版 1 行目: 単位行列は右単位元
-    _ = A * (P * P⁻¹) := by rw [Matrix.mul_nonsing_inv _ hP]                      -- 具体版 2 行目: `P P⁻¹ = I`
-    _ = (A * P) * P⁻¹ := (Matrix.mul_assoc _ _ _).symm                            -- 具体版 3 行目: 積の結合則
-    _ = (P * D) * P⁻¹ := by rw [h]                                                -- 具体版 4 行目: Step 2
+`A P = P D` かつ `P Q = I` なら `A = P D Q`。
+`A` から始めて `A = A I = A(P Q) = (A P) Q = (P D) Q` とつなぐ、具体版の 4 行の鎖と同じ手順である。
+具体版は `Q → P̌_μ^{-1}` で、2 段目の `P̌_μ P̌_μ^{-1} = I` を `inv_eq_detInv_smul_adjTwo`・`mul_detInv_smul_adjTwo`
+（人手 `two_sided_inverse_of_two_by_two_with_nonzero_det`）から出す。ここではその等式を仮定 `hQ` として受ける。
+
+効いているのは積の右単位元（1 段目）・結合律（3 段目）と `hQ`（2 段目）だけなので、**モノイドで述べる**。
+行列であることも、2×2 であることも、係数が環であることも、`det P` が単元であることも効いていない。
+`Q` が左逆元であること（`Q P = I`）も使わない（人手の `P̌_μ^{-1}` は両側逆元だが、この鎖が引くのは `g g^{-1} = I` の側だけ）。
+`Monoid` は左単位元 `1 x = x` も含むが、この鎖は使わない（Lean の標準の型クラスに右単位元と結合律だけのものが無いので含めている）。
+`hQ` は外せない: 行列のモノイドで `P = 0`、`D = 0`、`Q = 0`、`A = I` とすると `A P = P D` なのに `A ≠ P D Q`。 -/
+theorem eq_conj_of_mul_eq {G : Type*} [Monoid G]
+    {A P D Q : G} (h : A * P = P * D) (hQ : P * Q = 1) :
+    A = P * D * Q :=
+  calc A = A * 1 := (mul_one A).symm                                             -- 具体版 1 行目: 単位元は右単位元
+    _ = A * (P * Q) := by rw [hQ]                                                 -- 具体版 2 行目: `P P^{-1} = I`
+    _ = (A * P) * Q := (mul_assoc _ _ _).symm                                     -- 具体版 3 行目: 積の結合則
+    _ = (P * D) * Q := by rw [h]                                                  -- 具体版 4 行目: Step 2
 
 end Ising2D.NecSuf

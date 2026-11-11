@@ -16,6 +16,8 @@
 `b = -ā` と `a ā = r^2` の 2 段は渡していない（`a b = -r^2` 自体は上流で `b = -ā` から導かれている）。
 `λ_+ ≠ λ_-` と `det P̌_μ ≠ 0` には `2r ≠ 0`（`r > 0` から）、`det P̌_μ` には列が `c v_{±,μ}` であること
 （`checkPmat_col_pos`・`checkPmat_col_neg`）と `c = 1/(2√M b)`、`(√M)^2 = M` を渡す。
+Step 4 には、具体版の 2 段目と同じ `inv_eq_detInv_smul_adjTwo`・`mul_detInv_smul_adjTwo`（人手
+`two_sided_inverse_of_two_by_two_with_nonzero_det`）で出した `P̌_μ P̌_μ⁻¹ = I` を渡す。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.TwoByTwoSkew
@@ -117,12 +119,19 @@ theorem det_checkPmat_ne_zero_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0
     (mul_ne_zero two_ne_zero hr) hc hb
 
 /-- **`AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`（`diagonalization_check_P_D` Step 4）を
-`NecSuf.eq_conj_of_mul_eq` の特殊化として導いたもの**。 -/
+`NecSuf.eq_conj_of_mul_eq` の特殊化として導いたもの**。
+
+モノイドを `Matrix (Fin 2) (Fin 2) ℂ`、`Q` を mathlib の逆行列 `P̌_μ⁻¹` とし、仮定 `P̌_μ P̌_μ⁻¹ = I` には
+具体版の 2 段目と同じく、`P̌_μ⁻¹ = (det P̌_μ)^{-1} adj P̌_μ`（`inv_eq_detInv_smul_adjTwo`、人手の逆元の一意性）と
+`P̌_μ ((det P̌_μ)^{-1} adj P̌_μ) = I`（`mul_detInv_smul_adjTwo`、人手 `two_sided_inverse_of_two_by_two_with_nonzero_det`）を渡す。
+`det P̌_μ ≠ 0` は `det_checkPmat_ne_zero_of_necSuf`（Step 3）から取る。 -/
 theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf
     (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     AMat P.const (thetaTilde M μ)
-      = checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹ :=
-  NecSuf.eq_conj_of_mul_eq (AMat_mul_checkPmat_of_necSuf P hM μ)
-    (isUnit_iff_ne_zero.2 (det_checkPmat_ne_zero_of_necSuf P hM μ))
+      = checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹ := by
+  have hdet : (checkPmat P.const M μ).det ≠ 0 := det_checkPmat_ne_zero_of_necSuf P hM μ
+  have hQ : checkPmat P.const M μ * (checkPmat P.const M μ)⁻¹ = 1 := by
+    rw [inv_eq_detInv_smul_adjTwo _ hdet, mul_detInv_smul_adjTwo _ hdet]
+  exact NecSuf.eq_conj_of_mul_eq (AMat_mul_checkPmat_of_necSuf P hM μ) hQ
 
 end Ising2D
