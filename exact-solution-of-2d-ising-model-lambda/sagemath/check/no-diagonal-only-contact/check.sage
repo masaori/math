@@ -60,6 +60,34 @@ for length in range(4, max_length + 1):
         def is_interior(cell):
             return right_ray_crossing_count(points, cell) % 2 == 1
 
+        interior_cells = {
+            (ZZ(r), ZZ(c))
+            for r in range(row_min, row_max)
+            for c in range(col_min, col_max)
+            if is_interior((ZZ(r), ZZ(c)))
+        }
+        boundary_edge_set = set()
+        for r, c in interior_cells:
+            for edge in ((False, (r, c)), (False, (r + 1, c)),
+                         (True, (r, c)), (True, (r, c + 1))):
+                if edge in boundary_edge_set:
+                    boundary_edge_set.remove(edge)
+                else:
+                    boundary_edge_set.add(edge)
+        boundary_vertex_set = set()
+        for vertical, (r, c) in boundary_edge_set:
+            boundary_vertex_set.add((r, c))
+            boundary_vertex_set.add((r + 1, c) if vertical else (r, c + 1))
+        assert len(boundary_vertex_set) == len(boundary_edge_set), points
+        assert boundary_vertex_set == set(points[:-1]), points
+        walk_edge_set = {
+            (False, (start[0], min(start[1], finish[1])))
+            if start[0] == finish[0]
+            else (True, (min(start[0], finish[0]), start[1]))
+            for start, finish in zip(points[:-1], points[1:])
+        }
+        assert boundary_edge_set == walk_edge_set, points
+
         # 内側セルは外接長方形内に限られるので、格子点は長方形を 1 だけ広げた窓で尽くせる。
         for a in range(row_min - 1, row_max + 2):
             for b in range(col_min - 1, col_max + 2):

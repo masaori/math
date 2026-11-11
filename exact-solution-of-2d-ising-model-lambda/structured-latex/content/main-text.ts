@@ -70216,6 +70216,11 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.cellBoundaryVertices_iff_incidence_one_to_three",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_two_incident_edges",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_two_incident_edges",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
+                      "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
+                      "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
+                      "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_boundary_card_from_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_incidence_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_two_changes",
                       "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
@@ -70286,13 +70291,28 @@ P_m(\gamma)
                         "したがって、", math(String.raw`v_1,v_2,v_3`),
                         " はそれぞれ凸頂点・直進頂点・凹頂点の個数であり、", math(String.raw`v_4`),
                         " は内部頂点の個数である。境界辺数を ", math(String.raw`B`),
-                        "、内部辺数を ", math(String.raw`E_{\mathrm{int}}`), " と置くと",
+                        "、内部辺数を ", math(String.raw`E_{\mathrm{int}}`), " と置く。",
+                        "境界頂点集合を ",
+                        math(String.raw`\mathcal V_{\partial}:=\bigcup_{e\in\mathcal B_{\square}(\mathcal F)}e`),
+                        " と書く（", ref("def_plane_cell_boundary_edge_set"), "）。",
+                        "各境界辺は相異なる二端点を持ち、対角二セル配置が無いので各境界頂点には境界辺が二本接する。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+2B
+&=\sum_{e\in\mathcal B_{\square}(\mathcal F)}|e|
+&&\bigl(\because\ \blkref{def_cell_edge_set}\text{ の各辺は二元集合}\bigr)\\
+&=\sum_{v\in\mathcal V_{\partial}}\bigl|\{e\in\mathcal B_{\square}(\mathcal F):v\in e\}\bigr|
+&&\bigl(\because\ \text{境界辺とその端点の接続を二通りに数える}\bigr)\\
+&=\sum_{v\in\mathcal V_{\partial}}2
+&&\bigl(\because\ \blkref{claim_boundary_vertex_diagonal_contact_excluded}\text{ と四セルの巡回順}\bigr)\\
+&=2(v_1+v_2+v_3)
+&&\bigl(\because\ \mathcal V_{\partial}\text{ を接するセル数で分割する}\bigr)
+\end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 V&=v_1+v_2+v_3+v_4
 &&\bigl(\because\ \text{頂点を接する単位正方形の個数で分割}\bigr)\\
 B&=v_1+v_2+v_3
-&&\bigl(\because\ \text{境界は一つの単純閉路}\bigr)\\
+&&\bigl(\because\ 2B=2(v_1+v_2+v_3)\text{ と}\ \mathbb N\text{ の消去律}\bigr)\\
 4F&=v_1+2v_2+3v_3+4v_4
 &&\bigl(\because\ \text{単位正方形とその頂点の接続を二通りに数える}\bigr)\\
 4F&=2E_{\mathrm{int}}+B
@@ -90016,7 +90036,8 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           ref("claim_qbar_root_multiplicity_ge_one_iff_root"),
                           " の右から左への含意により",
                         ]),
-                        displayMath(String.raw`1\le\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)`),
+                        displayMath(String.raw`1\le\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
+\qquad\bigl(\because\ \blkref{claim_partition_polynomial_qbar_lift_nonzero_coeff_bound},\ \blkref{claim_qbar_root_multiplicity_ge_one_iff_root}\bigr)`),
                         paragraph(["である。これで準備が済んだ。主張の左辺から始める。"]),
                         displayMath(String.raw`\begin{aligned}
 N_{L}(c,r)
