@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-11（並列の連続実行）、平滑化の混合横断数が二本の閉歩道の混合横断数に等しいことを、実際の閉歩道について Lean 具体版と必要十分版で示した。** 並列の表の次は、平滑化で横断数の偶奇が交差形式に分かれることの合成の Lean 二版を扱う。
 - **2026-11-11（連続実行）、横辺の奇数回通過から内側セル集合の境界辺性を Lean 二版で接続した。** 次は各歩の通過回数一を使って、実際の単純閉歩道の全歩を境界辺へ同定する。
 - **2026-11-11（並列の連続実行）、平滑化後の横断数が二本の閉歩道の横断数と混合横断数の和であることを、実際の閉歩道について Lean 具体版と必要十分版で示した。** 並列の表の次は、平滑化の混合横断数が二本の閉歩道の混合横断数に等しいことの Lean 二版を扱う。
 - **2026-11-11（並列の連続実行）、平滑化で分かれる二本を `Fin` 添字の閉じた非後退辺列として定め、平滑化後の出辺が非後退接続であることと二本の閉性を Lean 具体版と必要十分版で示した。** 並列の表の次は、平滑化後の横断数を二本の横断数と混合横断数に分けることの Lean 二版を扱う。
 - **2026-11-11（連続実行）、奇数回通る縦辺が実際の閉歩道の内側セル集合の境界辺になることを記述・SageMath・Lean 二版で示した。** 次は横辺を扱う。
-- **2026-11-11（並列の連続実行）、平滑化の添字ブロックと二本の辺列の Lean 定義が添字零を落としていたのを直した。** 並列の表の次は、平滑化で分かれる二本を閉歩道として持ち、横断数を分けることの Lean 二版を扱う。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -44,8 +44,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 平滑化の混合横断数が二本の閉歩道の混合横断数に等しいことの Lean 二版 | 未着手 | `splitMutualCrossingNumber γ hγ k l` が `closedWalkMutualCrossingNumber (smoothedSplitWalkA …) (smoothedSplitWalkB …)` に等しいこと。二本の通過の後続辺は平滑化後の出辺であること（終辺は付け替えた接続）を使い、位置の対と添字の対 $A\times B$ の全単射で数える。 |
-| Onsager 閉形式への接続 | 平滑化で横断数の偶奇が交差形式に分かれることの合成の Lean 二版 | 未着手 | `claim_edge_distinct_smoothing_crossing_parity`。直進通過数が各軸一であること（済: `crossing_vertexAxisStraightVisitCount_eq_one`、`KacWard/EdgeDistinctCrossingStraightVisits.lean`）、`smoothing_crossing_number_update` の実際の歩道への当てはめ、上の行の分割、`closedWalkMutualCrossingNumber_eq_intersection` を自然数の等式から法二へ合成し、本文ブロックの `lean:` に第一段の名前も合わせて登録する。 |
+| Onsager 閉形式への接続 | 平滑化で横断数の偶奇が交差形式に分かれることの合成の Lean 二版 | 未着手 | `claim_edge_distinct_smoothing_crossing_parity`。直進通過数が各軸一であること（済: `crossing_vertexAxisStraightVisitCount_eq_one`、`KacWard/EdgeDistinctCrossingStraightVisits.lean`）、`smoothing_crossing_number_update` の実際の歩道への当てはめ、分割（済: `smoothing_split_crossing_partition`、`KacWard/SmoothingSplitCrossingPartition.lean`）、混合横断数の一致（済: `splitMutualCrossingNumber_eq_closedWalkMutualCrossingNumber`、`KacWard/SmoothingSplitMutualCrossing.lean`）、`closedWalkMutualCrossingNumber_eq_intersection` を自然数の等式から法二へ合成し、本文ブロックの `lean:` に第一段の名前も合わせて登録する。 |
 | Onsager 閉形式への接続 | 横断消去の帰納法の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_edge_distinct_crossing_elimination_parity`（横断消去は位相と切断線偶奇と交差形式を保つ）。 |
 | Onsager 閉形式への接続 | 巻き付き二次符号の積と交差形式・接触点分割の三件の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_torus_quadratic_sign_polarization`（巻き付き二次符号の積と交差形式）、`claim_crossing_free_contact_split_children`（横断のない閉歩道を接触点で分けても各子に横断は生じない）→ `claim_crossing_free_contact_split_phase`（接触点分割の回転位相は交差形式で更新される）→ `claim_crossing_free_contact_elimination_phase`（横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される）。 |
 | Onsager 閉形式への接続 | マッチングの符号と基準マッチングの四件の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_alternating_cycle_gauge_ratio`（短い対と基準の長い対の対角変換因子の比）、`claim_reference_matching_constant_term`（基準マッチングの長い標識の項は一である）、`claim_alternating_cycle_matching_sign`（交互閉路ごとの向き直しが二つのマッチングの符号比を与える）、`claim_tagged_matching_cycle_weight`（非零項は閉歩道ごとのねじれ・回転位相の積に分かれる）。 |
@@ -58,11 +57,11 @@
 
 ## レビュー記録
 
+- 2026-11-11: 本文の混合横断数の定義（`def_split_mutual_crossing_number`。添字対 $A\times B$、終点の一致・二つの直進・軸の相異）と Lean の `splitMutualCrossingNumber` を照合し、修正不要だった。
 - 2026-11-11: 「平滑化後の横断数は二本の閉歩道の横断数と混合横断数の和である」の旧 Lean 具体版は ℕ 添字の辺列について三分割の個数だけを述べ、必要十分版の `three_way_filter_card_necSuf` に委ねていた（例外の台帳に載っていた。レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の閉歩道の具体版に置き換え、例外の台帳の行を消した（並列の表の先頭の行そのもの）。
 - 2026-11-11: 「横断の平滑化は二本の閉じた非後退辺列に分ける」の Lean 具体版 `smoothing_split_closed_connections` は ℕ 添字の辺列と接続を仮定で受ける形で、実際の閉歩道について述べていなかった（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の閉歩道の具体版 `smoothedSplitWalkA_closed`・`smoothedSplitWalkB_closed` を足して `lean:` に登録した（並列の表の先頭の行そのもの）。
 - 2026-11-11: 北向き共有辺の Lean 証明と本文の方向表を照合し、修正不要だった。
 - 2026-11-11: 平滑化の添字ブロックの Lean 定義を本文の $B=I_m\setminus A$ と照合し、ブロック $B$ の条件 `0 < r` が添字零を落としていたので補集合の定義へ直した（並列の表の先頭の行そのもの）。
-- 2026-11-11: 平滑化の添字ブロック・二本の辺列・混合横断数の Lean 定義（`smoothingIndexBlockA/B`・`smoothedSplitEdgeSequenceA/B`・`splitMutualCrossingNumber`）は `Fin (m + 1)` の添字 0 をどちらのブロックにも入れておらず、本文の $I_m=\{1,\ldots,m\}$ の分割を添字 $0,\ldots,m$ の歩道へ写し損ねている（二本の辺数の和が $m$ で、歩道の辺数 $m+1$ に足りない）。直す行を並列の表へ足した。
 
 ## 式変形の書き方の統一
 
@@ -74,9 +73,8 @@
 
 ## 前進の記録
 
+- 2026-11-11: 平滑化の混合横断数が二本の閉歩道の混合横断数に等しいことを Lean 二版で示し、並列の表の行を消した。具体版 `splitMutualCrossingNumber_eq_closedWalkMutualCrossingNumber`（`KacWard/SmoothingSplitMutualCrossing.lean`）は、本文「二本の各通過は元の添字の平滑化後の通過と一致する。従って同じ添字対を数える」と一対一で、位置の対 $(i,j)$ を添字の対 $(p_A(i),p_B(j))$ へ送る全単射で数える。必要十分版の仮定は、平滑化後の各出辺が接続であることと `k < l` だけである。本文に独立のブロックが無いので、`lean:` へは合成の行で `claim_edge_distinct_smoothing_crossing_parity` に登録する。
 - 2026-11-11: 単純閉歩道の全体同定は境界辺性・巡回方向・各頂点の同定の三論法なので割った。上下のセルを分ける横辺の通過奇偶を、実際の閉歩道の内側セル集合へ Lean 具体版で接続し、偶奇だけの必要十分版も示した。
 - 2026-11-11: 平滑化後の横断数の分割を Lean 二版で示し、並列の表の行を消した。具体版は本文の三つの準備と一対一である（`C^sm` の三分割、`p_A` の単調な全単射による `c(γ_A)=|C_AA|`、`p_B` による順序なし二元集合の全単射による `c(γ_B)=|C_BB|`、混合対を `A` 側が第一成分になるよう置き直す全単射）。二本の各位置の後続が平滑化後の出辺であることは `smoothedSplitWalkA_successor`・`smoothedSplitWalkB_successor` で示した。必要十分版の仮定は、平滑化後の各出辺が接続であること（二本の横断は接続の条件を含むので要る）と `k < l` だけである。
 - 2026-11-11: 並列の表の先頭「平滑化で分かれる二本を閉歩道として持ち、横断数を分けること」を、二本を閉歩道として定めること・横断数の分割・混合横断数の一致の三行に割った（定義と閉性・数え上げの全単射・半辺の対応は別の論法である）。第一段を Lean 二版で示した。具体版は剰余で添字を読む区間 `closedWalkSegment` で二本 `smoothedSplitWalkA`・`smoothedSplitWalkB` を定め、位置から添字への写像が単射で像がブロック $A$・$B$ であること、付け替えた接続の非後退性（`smoothedExitEdge_mem_nonbacktrackingSuccessors`）、二本の閉性を示した。必要十分版の仮定は、付け替えの非後退性では反転の方向の移動・その移動が軸を保つこと・直進が方向を保つことで、区間の閉性では各通過の接続と区間の終辺から始辺への接続だけである。
 - 2026-11-11: 歩道との同定を縦辺・横辺・各歩への適用・方向同定に割り、奇数回通る縦辺の境界辺性を四層で示した。
-- 2026-11-11: 平滑化の添字ブロックと二本の辺列の Lean 定義を直し、並列の表の行を消した。Lean の添字と本文の一始まりの添字の対応を全単射 `closedWalkTextIndexEquiv` で置き、$B$ を $A$ の補集合とした。二つのブロックが全添字を分割すること、二本の添字列が各ブロックを一度ずつ尽くすこと（`smoothingIndexSequenceA_nodup`・`smoothingIndexSequenceB_nodup`）を具体版と必要十分版で示した。非空性の仮定 `0 < k` は不要になった。
-- 2026-11-11: 並列の表の先頭「平滑化で横断数の偶奇が交差形式に分かれること」を、直進通過数・添字ブロックの直し・二本の閉歩道としての分割・合成の四行に割った。一つの論法に収まらず、二本の辺列を閉歩道として持つ Lean の定義がまだ無いためである。第一段の具体版 `crossing_vertexAxisStraightVisitCount_eq_one`（`KacWard/EdgeDistinctCrossingStraightVisits.lean`）と必要十分版を書いた。本文ブロックの `lean:` へは合成の行で登録する（部分だけ登録すると Lean の無い主張の数え上げから外れる）。
