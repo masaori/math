@@ -27186,13 +27186,13 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
                         displayMath(String.raw`\begin{aligned}
 \Psi^{O,\tau_0}_{e-1}(\tau)
 &=\Psi^{O,\tau_0}_{e-1}\bigl(S^{[r]}(\tau_0)\bigr)
-&&(\because\ \text{上の式変形})\\
+&&(\because\ \tau=S^{[r]}(\tau_0))\\
 &=S^{[r+1]}(\tau_0)
-&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 1 の場合。}\ e-1<e,\ r<e)\\
+&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 1 の場合と}\ e-1<e,\ r<e)\\
 &=S\bigl(S^{[r]}(\tau_0)\bigr)
 &&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
 &=S(\tau)
-&&(\because\ \text{上の式変形})\\
+&&(\because\ \tau=S^{[r]}(\tau_0))\\
 &=\bigl(S\!\restriction_{O}\bigr)(\tau)
 &&(\because\ \blkref{def_orbit_restriction})
 \end{aligned}`),
@@ -27203,9 +27203,9 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
                         displayMath(String.raw`\begin{aligned}
 \Psi^{O,\tau_0}_{e-1}(\tau)
 &=\Psi^{O,\tau_0}_{e-1}\bigl(S^{[r]}(\tau_0)\bigr)
-&&(\because\ \text{上の式変形})\\
+&&(\because\ \tau=S^{[r]}(\tau_0))\\
 &=\tau_0
-&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 2 の場合。}\ e-1<e,\ r<e)\\
+&&(\because\ \blkref{claim_orbit_transposition_composite_values}\ \text{の第 2 の場合と}\ e-1<e,\ r<e)\\
 &=S^{[e]}(\tau_0)
 &&(\because\ \blkref{claim_row_config_shift_period_divides}\ \text{と}\ e\mid e)\\
 &=S^{[r+1]}(\tau_0)
@@ -27213,7 +27213,7 @@ S^{[r]}(\tau_0)   & (r>k\ \text{のとき})
 &=S\bigl(S^{[r]}(\tau_0)\bigr)
 &&(\because\ \blkref{def_row_config_shift_iterate}\ \text{の}\ S^{[k+1]}=S\circ S^{[k]})\\
 &=S(\tau)
-&&(\because\ \text{上の式変形})\\
+&&(\because\ \tau=S^{[r]}(\tau_0))\\
 &=\bigl(S\!\restriction_{O}\bigr)(\tau)
 &&(\because\ \blkref{def_orbit_restriction})
 \end{aligned}`),

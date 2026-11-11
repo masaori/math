@@ -15,6 +15,31 @@ def localIncoming (a b c d : Bool) : ZMod 4 :=
 def localOutgoing (a b c d : Bool) : ZMod 4 :=
   if b && !c then 0 else if c && !d then 1 else if d && !a then 2 else 3
 
+/-- Whether the edge entering from a direction separates selected and
+unselected cells. -/
+def incomingExposed (a b c d : Bool) (direction : ZMod 4) : Prop :=
+  if direction = 0 then a ≠ d
+  else if direction = 1 then a ≠ b
+  else if direction = 2 then b ≠ c
+  else c ≠ d
+
+/-- Whether the edge leaving in a direction separates selected and
+unselected cells. -/
+def outgoingExposed (a b c d : Bool) (direction : ZMod 4) : Prop :=
+  if direction = 0 then b ≠ c
+  else if direction = 1 then c ≠ d
+  else if direction = 2 then a ≠ d
+  else a ≠ b
+
+theorem local_directions_exposed (a b c d : Bool)
+    (hboundary : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3) :
+    incomingExposed a b c d (localIncoming a b c d) ∧
+      outgoingExposed a b c d (localOutgoing a b c d) := by
+  cases a <;> cases b <;> cases c <;> cases d <;>
+    simp_all [localCellCount, incomingExposed, outgoingExposed,
+      localIncoming, localOutgoing] <;> decide
+
 def localTurn (a b c d : Bool) : ℤ :=
   if localOutgoing a b c d - localIncoming a b c d = (1 : ZMod 4) then 1
   else if localOutgoing a b c d - localIncoming a b c d = (-1 : ZMod 4) then -1

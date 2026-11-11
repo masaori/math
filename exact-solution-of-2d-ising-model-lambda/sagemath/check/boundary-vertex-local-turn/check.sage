@@ -9,6 +9,10 @@ for a, b, c, d in product((False, True), repeat=4):
         continue
     incoming = 2 if c and not b else 3 if d and not c else 0 if a and not d else 1
     outgoing = 0 if b and not c else 1 if c and not d else 2 if d and not a else 3
+    incoming_exposed = (a != d, a != b, b != c, c != d)
+    outgoing_exposed = (b != c, c != d, a != d, a != b)
+    assert incoming_exposed[incoming]
+    assert outgoing_exposed[outgoing]
     difference = (outgoing - incoming) % 4
     turn = ZZ(1) if difference == 1 else ZZ(-1) if difference == 3 else ZZ(0)
     expected = ZZ(-1) if count == 1 else ZZ(1) if count == 3 else ZZ(0)
