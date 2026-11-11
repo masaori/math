@@ -54,6 +54,7 @@ fi
 targets=(
   Ising2DLambda.KacWard.vertexSimpleWalk_consecutive_interior_sides_eq
   Ising2DLambda.KacWard.vertexSimpleWalk_adjacent_interior_side_eq
+  Ising2DLambda.KacWard.vertexSimpleWalk_period_seam_interior_side_eq
   Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq
   Ising2DLambda.NecSuf.KacWard.boundary_vertex_side_propagation_necSuf
   Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq_from_necSuf

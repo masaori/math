@@ -230,4 +230,107 @@ theorem vertexSimpleWalk_adjacent_interior_side_eq
     (Classical.choose hfirst) (Classical.choose hsecond)
     (Classical.choose_spec hfirst) (Classical.choose_spec hsecond)
 
+/-- The last and first actual steps have the same interior side at the
+period seam. -/
+theorem vertexSimpleWalk_period_seam_interior_side_eq
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    Classical.choose
+        (vertexSimpleWalk_step_interior_side γ hγ hh hv hdistinct m (by omega)) =
+      Classical.choose
+        (vertexSimpleWalk_step_interior_side γ hγ hh hv hdistinct 0 (by omega)) := by
+  classical
+  let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+  let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
+  let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+  let hlast := vertexSimpleWalk_step_interior_side γ hγ hh hv hdistinct m (by omega)
+  let hfirst := vertexSimpleWalk_step_interior_side γ hγ hh hv hdistinct 0 (by omega)
+  have hend : planeLift γ (Fin.last (m + 1)) = planeLift γ 0 := by
+    simpa [hh, hv, Prod.add_def] using planeLift_endpoint_winding γ hγ
+  have hlastIndex : Fin.ofNat (m + 2) (m + 1) = Fin.last (m + 1) := by
+    apply Fin.ext
+    simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : m + 1 < m + 2)]
+  have hzeroIndex : Fin.ofNat (m + 2) 0 = 0 := by
+    apply Fin.ext
+    simp [Fin.ofNat]
+  have hprevIndex : Fin.ofNat (m + 2) m = (Fin.last m).castSucc := by
+    apply Fin.ext
+    simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : m < m + 2)]
+  have hnextIndex : Fin.ofNat (m + 2) 1 = Fin.succ (0 : Fin (m + 1)) := by
+    apply Fin.ext
+    simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : 1 < m + 2)]
+  have hrow : row (m + 1) = row 0 := by
+    simpa only [row, hlastIndex, hzeroIndex] using congrArg Prod.fst hend
+  have hcol : col (m + 1) = col 0 := by
+    simpa only [col, hlastIndex, hzeroIndex] using congrArg Prod.snd hend
+  have hnoReturn : (row m, col m) ≠ (row 1, col 1) := by
+    have h := walkSideInteriorBandFromWalk_no_cyclic_two_step_return γ hγ hh hv
+    simpa only [row, col, hprevIndex, hnextIndex] using h
+  have hbit (n : ℕ) : (if Odd n then (1 : ℕ) else 0) = n % 2 := by
+    by_cases h : Odd n
+    · simp [h, Nat.odd_iff.mp h]
+    · have hzero : n % 2 = 0 := by
+        have hlt := Nat.mod_lt n (by omega : 0 < 2)
+        have hone : n % 2 ≠ 1 := fun he => h (Nat.odd_iff.mpr he)
+        omega
+      simp [h, hzero]
+  have hcell (a b : ℤ) :
+      (if (a, b) ∈ cells then (1 : ℕ) else 0) =
+        rightRayVerticalCrossingCount γ hγ a b % 2 := by
+    simp only [cells, Set.Finite.mem_toFinset, oddRayInteriorCellsOfWalk,
+      Set.mem_setOf_eq]
+    exact hbit _
+  have hdiag := boundaryVertex_diagonalContactExcluded_ofWalk
+    γ hγ hh hv hdistinct (row 0) (col 0)
+  rw [← hcell (row 0 - 1) (col 0 - 1),
+    ← hcell (row 0 - 1) (col 0),
+    ← hcell (row 0) (col 0),
+    ← hcell (row 0) (col 0 - 1)] at hdiag
+  have hdiag₁ : ¬ ((row 0 - 1, col 0 - 1) ∈ cells ∧
+      (row 0 - 1, col 0) ∉ cells ∧ (row 0, col 0) ∈ cells ∧
+      (row 0, col 0 - 1) ∉ cells) := by
+    intro h
+    exact hdiag.1 (by simp [h.1, h.2.1, h.2.2.1, h.2.2.2])
+  have hdiag₂ : ¬ ((row 0 - 1, col 0 - 1) ∉ cells ∧
+      (row 0 - 1, col 0) ∈ cells ∧ (row 0, col 0) ∉ cells ∧
+      (row 0, col 0 - 1) ∈ cells) := by
+    intro h
+    exact hdiag.2.1 (by simp [h.1, h.2.1, h.2.2.1, h.2.2.2])
+  have hstepLast := Classical.choose_spec hlast
+  have hstepFirst := Classical.choose_spec hfirst
+  change (row (m + 1) = row m + 1 ∧ col (m + 1) = col m ∧
+      ((row m, col m) ∈ cells ↔ Classical.choose hlast = true) ∧
+      ((row m, col m - 1) ∈ cells ↔ Classical.choose hlast = false)) ∨
+    (row (m + 1) = row m - 1 ∧ col (m + 1) = col m ∧
+      ((row m - 1, col m - 1) ∈ cells ↔ Classical.choose hlast = true) ∧
+      ((row m - 1, col m) ∈ cells ↔ Classical.choose hlast = false)) ∨
+    (row (m + 1) = row m ∧ col (m + 1) = col m + 1 ∧
+      ((row m - 1, col m) ∈ cells ↔ Classical.choose hlast = true) ∧
+      ((row m, col m) ∈ cells ↔ Classical.choose hlast = false)) ∨
+    (row (m + 1) = row m ∧ col (m + 1) = col m - 1 ∧
+      ((row m, col m - 1) ∈ cells ↔ Classical.choose hlast = true) ∧
+      ((row m - 1, col m - 1) ∈ cells ↔ Classical.choose hlast = false)) at hstepLast
+  change (row 1 = row 0 + 1 ∧ col 1 = col 0 ∧
+      ((row 0, col 0) ∈ cells ↔ Classical.choose hfirst = true) ∧
+      ((row 0, col 0 - 1) ∈ cells ↔ Classical.choose hfirst = false)) ∨
+    (row 1 = row 0 - 1 ∧ col 1 = col 0 ∧
+      ((row 0 - 1, col 0 - 1) ∈ cells ↔ Classical.choose hfirst = true) ∧
+      ((row 0 - 1, col 0) ∈ cells ↔ Classical.choose hfirst = false)) ∨
+    (row 1 = row 0 ∧ col 1 = col 0 + 1 ∧
+      ((row 0 - 1, col 0) ∈ cells ↔ Classical.choose hfirst = true) ∧
+      ((row 0, col 0) ∈ cells ↔ Classical.choose hfirst = false)) ∨
+    (row 1 = row 0 ∧ col 1 = col 0 - 1 ∧
+      ((row 0, col 0 - 1) ∈ cells ↔ Classical.choose hfirst = true) ∧
+      ((row 0 - 1, col 0 - 1) ∈ cells ↔ Classical.choose hfirst = false)) at hstepFirst
+  exact gridConsecutiveInteriorSides_eq cells
+    (row m) (col m) (row 0) (col 0) (row 1) (col 1)
+    (Classical.choose hlast) (Classical.choose hfirst)
+    (by simpa only [hrow, hcol] using hstepLast) hstepFirst
+    hnoReturn hdiag₁ hdiag₂
+
 end Ising2DLambda.KacWard

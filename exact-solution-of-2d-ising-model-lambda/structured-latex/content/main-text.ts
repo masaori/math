@@ -8462,8 +8462,8 @@ r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr)
                 displayMath(String.raw`d\in K_\sigma(i)\qquad\bigl(\because\ \blkref{claim_finite_permutation_positive_return}\text{ の正の帰還}\bigr)`),
                 paragraph(["なので、この集合は空でない。自然数の整列性によりその最小元が存在する。それを ", math(String.raw`p_\sigma(i):=\min K_\sigma(i)\in\mathbb N`), " と書き、始点 ", math(String.raw`i`), " の正の最小周期と呼ぶ。所属と最小性をそれぞれ書くと、"]),
                 displayMath(String.raw`\begin{aligned}
-0&<p_\sigma(i)&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の正値条件}\bigr),\\
-\sigma^{[p_\sigma(i)]}(i)&=i&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の帰還条件}\bigr).
+0&<p_\sigma(i)&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の正値条件}\bigr)\\
+\sigma^{[p_\sigma(i)]}(i)&=i&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の帰還条件}\bigr)
 \end{aligned}`),
                 paragraph(["さらに、任意の ", math(String.raw`n\in\mathbb N`), " について、"]),
                 displayMath(String.raw`0<n\ \text{かつ}\ \sigma^{[n]}(i)=i\quad\Longrightarrow\quad p_\sigma(i)\le n
@@ -70365,6 +70365,7 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_side_propagation_necSuf",
                       "Ising2DLambda.KacWard.boundaryVertex_consecutive_sides_eq_from_necSuf",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_adjacent_interior_side_eq",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_period_seam_interior_side_eq",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",
                       "Ising2DLambda.NecSuf.KacWard.reversed_pair_turn_sign_necSuf",
