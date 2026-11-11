@@ -85,6 +85,25 @@ theorem local_outgoing_unique (a b c d : Bool) (direction : Fin 4)
   fin_cases direction <;> cases a <;> cases b <;> cases c <;> cases d <;>
     simp_all [localCellCount, localOutgoing]
 
+/-- Across an eastward boundary edge, the outgoing direction at its west end
+is the incoming direction at its east end. -/
+theorem local_east_outgoing_matches_next_incoming
+    (a b c d e f : Bool)
+    (hsource : localCellCount a b c d = 1 ∨
+      localCellCount a b c d = 2 ∨ localCellCount a b c d = 3)
+    (htarget : localCellCount b e f c = 1 ∨
+      localCellCount b e f c = 2 ∨ localCellCount b e f c = 3)
+    (hdiag₁ : ¬ (b = true ∧ e = false ∧ f = true ∧ c = false))
+    (hdiag₂ : ¬ (b = false ∧ e = true ∧ f = false ∧ c = true))
+    (hout : localOutgoing a b c d = 0) :
+    localIncoming b e f c = 0 := by
+  have hleft := (local_directions_selected_left a b c d hsource).2
+  rw [hout] at hleft
+  have hside : b = true ∧ c = false := by simpa using hleft
+  have hunique := local_incoming_unique b e f c (0 : Fin 4)
+    hdiag₁ hdiag₂ htarget (by simpa using hside)
+  simpa using hunique.symm
+
 /-- The incoming edge touches the west, north, east, or south side. -/
 def incomingSide (direction : ZMod 4) : Fin 4 :=
   if direction = 0 then 3 else if direction = 1 then 0

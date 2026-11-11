@@ -70160,9 +70160,20 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
 \end{aligned}`),
                       paragraph([
                         "である。四つの項はいずれも自然数（", ref("def_vertical_edge_traversal_count"), "、",
-                        ref("def_horizontal_edge_traversal_count"),
-                        "）なので、いずれも ", math(String.raw`0`),
-                        " に等しく、とくに偶数である。巡回順に並べた四辺",
+                        ref("def_horizontal_edge_traversal_count"), "）なので、上の和が零であることから",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+V_{a-1,b}(\gamma)&=0
+&&\bigl(\because\ \text{非負な四項の和が零}\bigr)\\
+V_{a,b}(\gamma)&=0
+&&\bigl(\because\ \text{非負な四項の和が零}\bigr)\\
+H_{a,b-1}(\gamma)&=0
+&&\bigl(\because\ \text{非負な四項の和が零}\bigr)\\
+H_{a,b}(\gamma)&=0
+&&\bigl(\because\ \text{非負な四項の和が零}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "を得る。いずれも偶数である。巡回順に並べた四辺",
                       ]),
                       displayMath(String.raw`\{(a-1,b),(a,b)\},\quad
 \{(a,b),(a,b+1)\},\quad
@@ -70237,6 +70248,8 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                       "Ising2DLambda.KacWard.cellBoundary_outgoing_unique",
                       "Ising2DLambda.NecSuf.KacWard.local_incoming_unique",
                       "Ising2DLambda.NecSuf.KacWard.local_outgoing_unique",
+                      "Ising2DLambda.KacWard.cellBoundary_east_outgoing_matches_next_incoming",
+                      "Ising2DLambda.NecSuf.KacWard.local_east_outgoing_matches_next_incoming",
                       "Ising2DLambda.KacWard.cellBoundaryVertices_card_eq_incidenceClasses",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryEdge_card_eq_incidenceClasses",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertex_edge_count_necSuf",
@@ -70392,6 +70405,12 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         "両側がともに内側または外側になる。対角二セル配置は既に除外した（",
                         ref("claim_boundary_vertex_diagonal_contact_excluded"),
                         "）。この一意性だけでは実際の歩道の巡回方向は決まらない。",
+                      ]),
+                      paragraph([
+                        "東へ進む境界辺の西端で内側セルを左に置く出方向は ",
+                        math(String.raw`0`), " である。上の方向表によれば、この辺の北側セルは内側、南側セルは外側であり、",
+                        "東端では同じ二セルが入辺の左右になる。東端の入方向は表の一意性により ",
+                        math(String.raw`0`), " である。",
                       ]),
                       paragraph([
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),

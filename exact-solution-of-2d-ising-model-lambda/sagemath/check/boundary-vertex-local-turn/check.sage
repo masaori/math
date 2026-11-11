@@ -31,4 +31,22 @@ for a, b, c, d in product((False, True), repeat=4):
     checked += 1
 
 assert checked == 12
-print("RESULT: PASS; all 12 admissible four-cell configurations")
+
+east_checked = 0
+for a, b, c, d, e, f in product((False, True), repeat=6):
+    source = (a, b, c, d)
+    target = (b, e, f, c)
+    if any(sum(ZZ(x) for x in cells) not in (1, 2, 3)
+           or (cells[0] and cells[2] and not cells[1] and not cells[3])
+           or (cells[1] and cells[3] and not cells[0] and not cells[2])
+           for cells in (source, target)):
+        continue
+    outgoing = 0 if b and not c else 1 if c and not d else 2 if d and not a else 3
+    if outgoing != 0:
+        continue
+    incoming_at_east = 2 if f and not e else 3 if c and not f else 0 if b and not c else 1
+    assert incoming_at_east == 0
+    east_checked += 1
+
+assert east_checked > 0
+print(f"RESULT: PASS; {checked} local configurations and {east_checked} east-adjacent pairs")
