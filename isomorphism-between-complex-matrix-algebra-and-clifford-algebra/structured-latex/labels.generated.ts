@@ -35,6 +35,7 @@ export const ALL_LABELS = [
   "claim_homomorphisms_agreeing_on_generators_are_equal",
   "claim_identity_matrix_is_left_unit_of_matrix_product",
   "claim_identity_matrix_is_right_unit_of_matrix_product",
+  "claim_induced_map_composed_with_projection_is_original_homomorphism",
   "claim_interchange_of_double_sum_over_finite_sets",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
   "claim_linear_map_maps_sum_over_finite_set_to_sum_of_values",

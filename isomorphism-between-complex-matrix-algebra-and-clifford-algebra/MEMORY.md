@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-11: 誘導される写像と射影の合成が元の準同型であること（ラベル claim_induced_map_composed_with_projection_is_original_homomorphism）を、誘導される写像の定義の代表に a 自身をとる二行の鎖で示した。次は誘導される写像が ℂ-代数の準同型であること。
 - 2026-11-11: 両側イデアルの元を零へ移す準同型が商代数の上に誘導する写像 φ̄:A/I→B（ラベル def_map_induced_on_quotient_algebra）を定義し、代表のとり方によらないことを剰余類の同値と前の主張で本文に示した。次は φ̄∘π_I=φ。
 - 2026-11-10: 台帳の「商代数の普遍性」を五行に割り、両側イデアルの元を零へ移す準同型は合同な元に同じ値をとること（ラベル claim_homomorphism_vanishing_on_ideal_takes_equal_values_on_congruent_elements）を、φ(a) から φ(x)+_B φ(a') を経て φ(a') へ着く鎖で示した。次は誘導される写像の定義。
 - 2026-11-10: 商集合への射影は両側イデアルの元を零へ移すこと（ラベル claim_projection_onto_quotient_set_sends_ideal_elements_to_zero）を示した。x≡_I 0_A を合同の定義で示し、剰余類の同値と零元の定義 0_{A/I}:=π_I(0_A) で π_I(x)=0_{A/I} を導いた。次は商代数の普遍性。
