@@ -17557,6 +17557,146 @@ L_m\cdot_A L_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_ordered_product_in_algebra_with_one_factor_singled_out",
+    kind: "claim",
+    title: { text: "代数の中の番号順の積は、一つの因子の前の積と、その因子と後ろの積の積との積である" },
+    labels: ["claim_ordered_product_in_algebra_with_one_factor_singled_out"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 1}`), "、",
+        math(String.raw`p\in\{1,\dots,n\}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`s`), " に ", math(String.raw`A`),
+        " の元 ", math(String.raw`x_s`), " が一つずつ与えられているとする。このとき、代数の中の番号順の積（", ref("def_ordered_product_in_algebra"),
+        "）について次が成り立つ。右辺の前の積は族を ", math(String.raw`\{1,\dots,p-1\}`), " に制限した族の積、後ろの積は ",
+        math(String.raw`r\in\{1,\dots,n-p\}`), " に ", math(String.raw`x_{p+r}`), " を与える族の積である。",
+      ]),
+      displayMath(String.raw`\prod_{A,\,s=1}^{n}x_s=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(x_p\cdot_A\prod_{A,\,r=1}^{n-p}x_{p+r}\right)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t\in\{1,\dots,n-p+1\}`), " について ", math(String.raw`u_t:=x_{p-1+t}`), " と置く。", math(String.raw`r\in\{1,\dots,n-p\}`),
+        " について ", math(String.raw`u_{1+r}=x_{p+r}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{A,\,s=1}^{n}x_s
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(\prod_{A,\,t=1}^{n-p+1}u_t\right)
+&&\left(\because\ k:=p-1\text{、}l:=n-p+1\text{。}\blkref{claim_ordered_product_in_algebra_splits_into_first_and_last_factors}\right)\\
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(\left(\prod_{A,\,t=1}^{1}u_t\right)\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
+&&\left(\because\ \text{族}\ u\ \text{に}\ k:=1\text{、}l:=n-p\ \text{で当てる。}\blkref{claim_ordered_product_in_algebra_splits_into_first_and_last_factors}\right)\\
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(\left(1_A\cdot_A u_1\right)\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\ \text{と}\ \Pi_1\right)\\
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(u_1\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(x_p\cdot_A\prod_{A,\,r=1}^{n-p}x_{p+r}\right)
+&&\left(\because\ u_1=x_p\text{、}u_{1+r}=x_{p+r}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_element_commuting_with_each_factor_commutes_with_ordered_product",
+    kind: "claim",
+    title: { text: "番号順の積のどの因子とも交換する代数の元は、その積と交換する" },
+    labels: ["claim_element_commuting_with_each_factor_commutes_with_ordered_product"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`u\in A`), "、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`),
+        " の元 ", math(String.raw`x_k`), " が一つずつ与えられていて、すべての ", math(String.raw`k\in\{1,\dots,n\}`), " について ",
+        math(String.raw`u\cdot_A x_k=x_k\cdot_A u`), " が成り立つとする。このとき、代数の中の番号順の積（", ref("def_ordered_product_in_algebra"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`u\cdot_A\prod_{A,\,k=1}^{n}x_k=\left(\prod_{A,\,k=1}^{n}x_k\right)\cdot_A u`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Pi_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`), "）を ", ref("def_ordered_product_in_algebra"), " の部分積とする（",
+        math(String.raw`\Pi_0=1_A`), "、", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A x_m`), "）。すべての ", math(String.raw`m`), " について ",
+        math(String.raw`u\cdot_A\Pi_m=\Pi_m\cdot_A u`), " を ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=n`),
+        " の場合が主張である。", math(String.raw`m=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u\cdot_A\Pi_0
+&=u\cdot_A 1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=u
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=1_A\cdot_A u
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\Pi_0\cdot_A u
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`1\le m\le n`), " とし、", math(String.raw`u\cdot_A\Pi_{m-1}=\Pi_{m-1}\cdot_A u`), " を仮定する（帰納法の仮定）。"]),
+      displayMath(String.raw`\begin{aligned}
+u\cdot_A\Pi_m
+&=u\cdot_A\bigl(\Pi_{m-1}\cdot_A x_m\bigr)
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\bigl(u\cdot_A\Pi_{m-1}\bigr)\cdot_A x_m
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(\Pi_{m-1}\cdot_A u\bigr)\cdot_A x_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Pi_{m-1}\cdot_A\bigl(u\cdot_A x_m\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Pi_{m-1}\cdot_A\bigl(x_m\cdot_A u\bigr)
+&&\left(\because\ \text{仮定を}\ k:=m\ \text{に当てる}\right)\\
+&=\bigl(\Pi_{m-1}\cdot_A x_m\bigr)\cdot_A u
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Pi_m\cdot_A u
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_anticommuting_elements_swap_with_sign",
+    kind: "claim",
+    title: { text: "反交換する代数の二元の積は、順序を入れ替えた積の (-1) 倍である" },
+    labels: ["claim_anticommuting_elements_swap_with_sign"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）とし、", math(String.raw`-1_{\mathbb{C}}`), " を ",
+        math(String.raw`1_{\mathbb{C}}`), " の ", math(String.raw`\mathbb{C}`), " の加法の逆元（", math(String.raw`1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})=0_{\mathbb{C}}`),
+        " を満たす ", math(String.raw`\mathbb{C}`), " の元）とする。", math(String.raw`p,q\in A`), " が ", math(String.raw`p\cdot_A q+_A q\cdot_A p=0_A`),
+        " を満たすとき、次が成り立つ。",
+      ]),
+      displayMath(String.raw`p\cdot_A q=(-1_{\mathbb{C}})\ast_A(q\cdot_A p)`),
+    ],
+    proof: [
+      paragraph([
+        "準備。", math(String.raw`r:=q\cdot_A p\in A`), " と置く。", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）の加法は ", math(String.raw`U_{\mathrm{ring}}(A)`), " の加法と同じ ", math(String.raw`+_A`), " である（", ref("def_complex_algebra"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r+_A(-1_{\mathbb{C}})\ast_A r
+&=1_{\mathbb{C}}\ast_A r+_A(-1_{\mathbb{C}})\ast_A r
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_A r
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\ast_A r
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定め方}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph(["本題。"]),
+      displayMath(String.raw`\begin{aligned}
+p\cdot_A q
+&=p\cdot_A q+_A 0_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=p\cdot_A q+_A\bigl(r+_A(-1_{\mathbb{C}})\ast_A r\bigr)
+&&\left(\because\ \text{準備}\right)\\
+&=\bigl(p\cdot_A q+_A r\bigr)+_A(-1_{\mathbb{C}})\ast_A r
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(p\cdot_A q+_A q\cdot_A p\bigr)+_A(-1_{\mathbb{C}})\ast_A r
+&&\left(\because\ r\ \text{の置き方}\right)\\
+&=0_A+_A(-1_{\mathbb{C}})\ast_A r
+&&\left(\because\ \text{仮定}\right)\\
+&=(-1_{\mathbb{C}})\ast_A r+_A 0_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=(-1_{\mathbb{C}})\ast_A r
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=(-1_{\mathbb{C}})\ast_A(q\cdot_A p)
+&&\left(\because\ r\ \text{の置き方}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_definition_ordered_product_of_values_of_linear_map_on_tuple",
     kind: "definition",
     title: { text: "組の成分の線型写像による値の、代数の中の番号順の積" },
