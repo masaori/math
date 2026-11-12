@@ -1591,6 +1591,91 @@ A_{x,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{z,y}
     ],
   },
   {
+    id: "complex_matrix_algebra_claim_matrix_is_double_sum_of_entries_times_matrix_units",
+    kind: "claim",
+    title: { text: "行列は、成分を係数にした行列単位の和である" },
+    labels: ["claim_matrix_is_double_sum_of_entries_times_matrix_units"],
+    statement: [
+      paragraph([
+        math(String.raw`X`), " を有限集合（", ref("def_numbering_of_finite_set"), "）、", math(String.raw`F\in\mathrm{Mat}_X(\mathbb{C})`), "（",
+        ref("def_matrices_indexed_by_finite_set"), "）とする。ℂ-線型空間 ", math(String.raw`(\mathrm{Mat}_X(\mathbb{C}),+_{\mathrm{Mat}_X},\ast_{\mathrm{Mat}_X},0_{\mathrm{Mat}_X})`),
+        "（", ref("claim_matrices_indexed_by_finite_set_form_complex_vector_space"), "）の中の有限集合 ", math(String.raw`X`), " の上の和（", ref("def_sum_over_finite_set"),
+        "）と行列単位 ", math(String.raw`E_{x,y}`), "（", ref("def_matrix_unit"), "）について、次が成り立つ。",
+      ]),
+      displayMath(String.raw`F=\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}\left(\sum_{y\in X}F_{x,y}\ast_{\mathrm{Mat}_X}E_{x,y}\right)`),
+      paragraph([
+        "内側の和は、", math(String.raw`x`), " を固定して ", math(String.raw`y\in X`), " に係数 ", math(String.raw`F_{x,y}\in\mathbb{C}`), " と元 ", math(String.raw`E_{x,y}`),
+        " を与えた族の和であり、外側の和は、", math(String.raw`x\in X`), " にその内側の和と係数 ", math(String.raw`1_{\mathbb{C}}`), " を与えた族の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ", math(String.raw`\mathrm{Mat}_X(\mathbb{C})`), " の元なので、すべての ", math(String.raw`p,q\in X`), " について ", math(String.raw`(p,q)`),
+        " 成分どうしが ", math(String.raw`\mathbb{C}`), " の元として等しいことを示せばよい（", ref("def_matrices_indexed_by_finite_set"), "）。", math(String.raw`p,q\in X`),
+        " を任意に固定し、", math(String.raw`(p,q)`), " 成分を取り出す線型写像 ", math(String.raw`\mathrm{ent}_{p,q}:\mathrm{Mat}_X(\mathbb{C})\to\mathbb{C}^{\mathrm{vec}}`), "（",
+        ref("claim_matrix_entry_map_is_linear_map"), "）を使う。", math(String.raw`\mathrm{Mat}_X(\mathbb{C})`), " の中の和のほかは、和はすべて ℂ-線型空間 ",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`), "（", ref("def_complex_numbers_as_complex_vector_space"), "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"), "）の中の有限集合 ", math(String.raw`X`), " の上の和であり、値は ", math(String.raw`\mathbb{C}`),
+        " の元である。", math(String.raw`\delta`), " は ", math(String.raw`X`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）である。",
+      ]),
+      paragraph(["準備の一つ目。", math(String.raw`x,y\in X`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+F_{x,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(E_{x,y})
+&=F_{x,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}(E_{x,y})_{p,q}
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義。}\blkref{claim_matrix_entry_map_is_linear_map}\right)\\
+&=F_{x,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{y,q}\bigr)
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
+&=F_{x,y}\cdot_{\mathbb{C}}\bigl(\delta_{x,p}\cdot_{\mathbb{C}}\delta_{y,q}\bigr)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)\cdot_{\mathbb{C}}\delta_{y,q}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\delta_{y,q}\cdot_{\mathbb{C}}\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{q,y}\cdot_{\mathbb{C}}\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&&\left(\because\ y=q\ \text{と}\ q=y\ \text{は同値なので、場合分けが一致する。}\blkref{def_kronecker_delta}\right)\\
+&=\delta_{q,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "準備の二つ目。", math(String.raw`x\in X`), " について、", ref("claim_sum_over_finite_set_with_kronecker_delta_picks_term"), " を、固定する元に ", math(String.raw`q`),
+        "、和の変数に ", math(String.raw`y`), "、", math(String.raw`y`), " に与える元に ", math(String.raw`F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}`), " を当てて、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{y\in X}\delta_{q,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)=F_{x,q}\cdot_{\mathbb{C}}\delta_{x,p}`),
+      paragraph(["準備の三つ目。", math(String.raw`x\in X`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(F_{x,q}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(F_{x,q}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=F_{x,q}\cdot_{\mathbb{C}}\delta_{x,p}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{x,p}\cdot_{\mathbb{C}}F_{x,q}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{p,x}\cdot_{\mathbb{C}}F_{x,q}
+&&\left(\because\ x=p\ \text{と}\ p=x\ \text{は同値なので、場合分けが一致する。}\blkref{def_kronecker_delta}\right)\\
+&=\delta_{p,x}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_{x,q}
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+F_{p,q}
+&=\sum_{x\in X}\delta_{p,x}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_{x,q}
+&&\left(\because\ \text{固定する元に}\ p\text{、和の変数に}\ x\text{、}x\ \text{に与える元に}\ F_{x,q}\ \text{を当てて、右辺から左辺へ読む。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(F_{x,q}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)
+&&\left(\because\ \text{各}\ x\ \text{で準備の三つ目。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{y\in X}\delta_{q,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(F_{x,y}\cdot_{\mathbb{C}}\delta_{x,p}\bigr)\right)
+&&\left(\because\ \text{各}\ x\ \text{で準備の二つ目。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{y\in X}F_{x,y}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{p,q}(E_{x,y})\right)
+&&\left(\because\ \text{各}\ x,y\ \text{で準備の一つ目。}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\mathrm{ent}_{p,q}\left(\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}\left(\sum_{y\in X}F_{x,y}\ast_{\mathrm{Mat}_X}E_{x,y}\right)\right)
+&&\left(\because\ f:=\mathrm{ent}_{p,q}\text{、}Y:=X\text{、}\lambda_{x,y}:=F_{x,y}\text{、}v_{x,y}:=E_{x,y}\text{。}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\left(\sum_{x\in X}1_{\mathbb{C}}\ast_{\mathrm{Mat}_X}\left(\sum_{y\in X}F_{x,y}\ast_{\mathrm{Mat}_X}E_{x,y}\right)\right)_{p,q}
+&&\left(\because\ \mathrm{ent}_{p,q}\ \text{の定義。}\blkref{claim_matrix_entry_map_is_linear_map}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in X`), " は任意だったので、主張の等式が成り立つ（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
     id: "complex_matrix_algebra_definition_power_set_of_first_m_positive_integers",
     kind: "definition",
     title: { text: "{1,…,M} の部分集合全体の集合" },

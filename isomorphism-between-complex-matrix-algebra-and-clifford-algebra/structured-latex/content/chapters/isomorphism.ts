@@ -6049,4 +6049,987 @@ Q^{T,U}_m
 \end{aligned}`),
     ],
   },
+  {
+    id: "isomorphism_homomorphism_from_matrix_algebra_to_clifford_algebra_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "行列環からクリフォード代数への準同型" },
+    labels: [],
+  },
+  {
+    id: "isomorphism_definition_matrix_unit_element_of_split_clifford_algebra",
+    kind: "definition",
+    title: { text: "行列単位にあたる元" },
+    labels: ["def_matrix_unit_element_of_split_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_S`), " を ",
+        ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`a_T`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、",
+        math(String.raw`P`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。",
+        math(String.raw`S,T\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）について、", math(String.raw`A`), " の元 ", math(String.raw`e_{S,T}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`e_{S,T}:=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_T`),
+      paragraph([
+        math(String.raw`e_{S,T}`), " を行列単位にあたる元と呼ぶ。", math(String.raw`e_{S,T}`), " は ", math(String.raw`A`), " の元であり、", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元である行列単位 ", math(String.raw`E_{S,T}`), "（", ref("def_matrix_unit"), "）とは別の記号である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_product_of_matrix_unit_elements_of_split_clifford_algebra",
+    kind: "claim",
+    title: { text: "行列単位にあたる元の積の規則" },
+    labels: ["claim_product_of_matrix_unit_elements_of_split_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"), " のものとし、",
+        math(String.raw`\delta_{T,U}`), " を集合 ", math(String.raw`\mathcal{P}_M`), " の上のクロネッカーのデルタ（", ref("def_kronecker_delta"), "）とする。すべての ",
+        math(String.raw`S,T,U,R\in\mathcal{P}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`e_{S,T}\cdot_A e_{U,R}=\delta_{T,U}\ast_A e_{S,R}`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+e_{S,T}\cdot_A e_{U,R}
+&=\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_T\Bigr)\cdot_A\Bigl(\bigl(a^{\dagger}_U\cdot_A P\bigr)\cdot_A a_R\Bigr)
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\Bigl(a_T\cdot_A\Bigl(\bigl(a^{\dagger}_U\cdot_A P\bigr)\cdot_A a_R\Bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\Bigl(\Bigl(a_T\cdot_A\bigl(a^{\dagger}_U\cdot_A P\bigr)\Bigr)\cdot_A a_R\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\Bigl(\Bigl(\bigl(a_T\cdot_A a^{\dagger}_U\bigr)\cdot_A P\Bigr)\cdot_A a_R\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\Bigl(\bigl(a_T\cdot_A a^{\dagger}_U\bigr)\cdot_A P\Bigr)\Bigr)\cdot_A a_R
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(a^{\dagger}_S\cdot_A\Bigl(P\cdot_A\Bigl(\bigl(a_T\cdot_A a^{\dagger}_U\bigr)\cdot_A P\Bigr)\Bigr)\Bigr)\cdot_A a_R
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(a^{\dagger}_S\cdot_A\Bigl(\Bigl(P\cdot_A\bigl(a_T\cdot_A a^{\dagger}_U\bigr)\Bigr)\cdot_A P\Bigr)\Bigr)\cdot_A a_R
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(a^{\dagger}_S\cdot_A\bigl(\delta_{T,U}\ast_A P\bigr)\Bigr)\cdot_A a_R
+&&\left(\because\ \blkref{claim_vacuum_element_sandwich_of_annihilation_and_creation_products}\right)\\
+&=\Bigl(\delta_{T,U}\ast_A\bigl(a^{\dagger}_S\cdot_A P\bigr)\Bigr)\cdot_A a_R
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\delta_{T,U}\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_R\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\delta_{T,U}\ast_A e_{S,R}
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_from_matrix_algebra_to_clifford_algebra",
+    kind: "definition",
+    title: { text: "行列環からクリフォード代数への写像" },
+    labels: ["def_homomorphism_from_matrix_algebra_to_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"),
+        " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "（", ref("def_matrices_indexed_by_finite_set"), "。", math(String.raw`\mathcal{P}_M`),
+        " が有限集合であることは ", ref("claim_binary_numbering_is_numbering_of_power_set"), "）と書く。写像 ", math(String.raw`\Psi:B\to A`), " を、", math(String.raw`F\in B`),
+        " について、", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の有限集合の上の和（",
+        ref("def_sum_over_finite_set"), "）で次のように定める。",
+      ]),
+      displayMath(String.raw`\Psi(F):=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\right)`),
+      paragraph([
+        "内側の和は、", math(String.raw`S`), " を固定して ", math(String.raw`T\in\mathcal{P}_M`), " に係数 ", math(String.raw`F_{S,T}\in\mathbb{C}`), " と元 ",
+        math(String.raw`e_{S,T}\in A`), " を与えた族の和であり、外側の和は、", math(String.raw`S\in\mathcal{P}_M`), " にその内側の和と係数 ", math(String.raw`1_{\mathbb{C}}`),
+        " を与えた族の和である。どちらの和も ", math(String.raw`\mathcal{P}_M`), " の番号付けの取り方によらず ", math(String.raw`A`), " の元として一つに決まる（",
+        ref("def_sum_over_finite_set"), "）ので、", math(String.raw`\Psi(F)`), " は ", math(String.raw`A`), " の元として一つに決まる。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への写像は線型写像である" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`A`), "、", math(String.raw`B`), "、", math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " のものとする。",
+        math(String.raw`\Psi`), " は ℂ-線型空間 ", math(String.raw`(B,+_B,\ast_B,0_B)`), "（", ref("claim_matrices_indexed_by_finite_set_form_complex_vector_space"), "。",
+        math(String.raw`+_B,\ \ast_B,\ 0_B`), " は ", ref("def_matrices_indexed_by_finite_set"), " の ", math(String.raw`+_{\mathrm{Mat}_{\mathcal{P}_M}},\ \ast_{\mathrm{Mat}_{\mathcal{P}_M}},\ 0_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+        "）から ", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）への線型写像（", ref("def_linear_map"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`F,G\in B`), "、", math(String.raw`\rho\in\mathbb{C}`), " を任意にとる。和はすべて ", math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合 ",
+        math(String.raw`\mathcal{P}_M`), " の上の和である。準備として次の三つが成り立つ。",
+      ]),
+      paragraph([
+        "（イ）", math(String.raw`S\in\mathcal{P}_M`), " について、", ref("claim_sum_of_sums_over_finite_set_with_same_family"), " を ", math(String.raw`X:=\mathcal{P}_M`), "、",
+        math(String.raw`v_T:=e_{S,T}`), "、", math(String.raw`\lambda_T:=F_{S,T}`), "、", math(String.raw`\mu_T:=G_{S,T}`), " に当て、右辺から左辺へ読んで、",
+        math(String.raw`\sum_{T\in\mathcal{P}_M}(F_{S,T}+_{\mathbb{C}}G_{S,T})\ast_A e_{S,T}=\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)+_A\Bigl(\sum_{T\in\mathcal{P}_M}G_{S,T}\ast_A e_{S,T}\Bigr)`),
+        "。",
+      ]),
+      paragraph([
+        "（ロ）", math(String.raw`S\in\mathcal{P}_M`), " について、", ref("claim_scalar_multiple_of_sum_over_finite_set"), " を ", math(String.raw`X:=\mathcal{P}_M`), "、",
+        math(String.raw`v_T:=e_{S,T}`), "、", math(String.raw`\lambda_T:=F_{S,T}`), " に当て、右辺から左辺へ読んで、",
+        math(String.raw`\sum_{T\in\mathcal{P}_M}(\rho\cdot_{\mathbb{C}}F_{S,T})\ast_A e_{S,T}=\rho\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)`), "。",
+      ]),
+      paragraph(["（ハ）", math(String.raw`a\in A`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\ast_A(\rho\ast_A a)
+&=(1_{\mathbb{C}}\cdot_{\mathbb{C}}\rho)\ast_A a
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(\rho\cdot_{\mathbb{C}}1_{\mathbb{C}})\ast_A a
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Psi(F+_B G)
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(F+_B G)_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(F_{S,T}+_{\mathbb{C}}G_{S,T})\ast_A e_{S,T}\right)
+&&\left(\because\ \text{行列の和の定義。}\blkref{def_matrices_indexed_by_finite_set}\text{、}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)+_A\Bigl(\sum_{T\in\mathcal{P}_M}G_{S,T}\ast_A e_{S,T}\Bigr)\right)
+&&\left(\because\ \text{各}\ S\ \text{で（イ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)\right)+_A\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}G_{S,T}\ast_A e_{S,T}\Bigr)\right)
+&&\left(\because\ \lambda_S:=1_{\mathbb{C}}\ \text{として右辺から左辺へ読む。}\blkref{claim_sum_of_sums_over_finite_set_with_same_coefficients}\right)\\
+&=\Psi(F)+_A\Psi(G)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right),\\[4pt]
+\Psi(\rho\ast_B F)
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(\rho\ast_B F)_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(\rho\cdot_{\mathbb{C}}F_{S,T})\ast_A e_{S,T}\right)
+&&\left(\because\ \text{行列のスカラー倍の定義。}\blkref{def_matrices_indexed_by_finite_set}\text{、}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\rho\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)\right)
+&&\left(\because\ \text{各}\ S\ \text{で（ロ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{S\in\mathcal{P}_M}(\rho\cdot_{\mathbb{C}}1_{\mathbb{C}})\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)
+&&\left(\because\ \text{各}\ S\ \text{で（ハ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\rho\ast_A\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)\right)
+&&\left(\because\ \lambda_S:=1_{\mathbb{C}}\ \text{として右辺から左辺へ読む。}\blkref{claim_scalar_multiple_of_sum_over_finite_set}\right)\\
+&=\rho\ast_A\Psi(F)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの等式は線型写像の二つの条件（", ref("def_linear_map"), "）である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_matrix_unit",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への写像は、行列単位を行列単位にあたる元へ移す" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_matrix_unit"],
+    statement: [
+      paragraph([
+        math(String.raw`A`), "、", math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), "、", math(String.raw`e_{S,T}`), " を ",
+        ref("def_matrix_unit_element_of_split_clifford_algebra"), " のものとし、", math(String.raw`E_{S,T}\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " を行列単位（",
+        ref("def_matrix_unit"), "）とする。すべての ", math(String.raw`S,T\in\mathcal{P}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi(E_{S,T})=e_{S,T}`),
+    ],
+    proof: [
+      paragraph([
+        "和はすべて ", math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合 ", math(String.raw`\mathcal{P}_M`), " の上の和、", math(String.raw`\delta`), " は ",
+        math(String.raw`\mathcal{P}_M`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）である。準備として次の三つが成り立つ。",
+      ]),
+      paragraph(["（イ）", math(String.raw`S',T'\in\mathcal{P}_M`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+(E_{S,T})_{S',T'}\ast_A e_{S',T'}
+&=\bigl(\delta_{S,S'}\cdot_{\mathbb{C}}\delta_{T,T'}\bigr)\ast_A e_{S',T'}
+&&\left(\because\ \text{行列単位の定義。}\blkref{def_matrix_unit}\right)\\
+&=\bigl(\delta_{T,T'}\cdot_{\mathbb{C}}\delta_{S,S'}\bigr)\ast_A e_{S',T'}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\delta_{T,T'}\ast_A\bigl(\delta_{S,S'}\ast_A e_{S',T'}\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "（ロ）", math(String.raw`S'\in\mathcal{P}_M`), " について、", ref("claim_sum_over_finite_set_with_kronecker_delta_picks_term"), " を、主張の ", math(String.raw`x`), " に ",
+        math(String.raw`T`), "、和の変数に ", math(String.raw`T'`), "、", math(String.raw`v_{T'}:=\delta_{S,S'}\ast_A e_{S',T'}`), " を当てて、",
+        math(String.raw`\sum_{T'\in\mathcal{P}_M}\delta_{T,T'}\ast_A\bigl(\delta_{S,S'}\ast_A e_{S',T'}\bigr)=\delta_{S,S'}\ast_A e_{S',T}`), "。",
+      ]),
+      paragraph(["（ハ）", math(String.raw`S'\in\mathcal{P}_M`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\ast_A\bigl(\delta_{S,S'}\ast_A e_{S',T}\bigr)
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}\delta_{S,S'}\bigr)\ast_A e_{S',T}
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\delta_{S,S'}\ast_A e_{S',T}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Psi(E_{S,T})
+&=\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T'\in\mathcal{P}_M}(E_{S,T})_{S',T'}\ast_A e_{S',T'}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T'\in\mathcal{P}_M}\delta_{T,T'}\ast_A\bigl(\delta_{S,S'}\ast_A e_{S',T'}\bigr)\right)
+&&\left(\because\ \text{各}\ S',T'\ \text{で（イ）。}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\bigl(\delta_{S,S'}\ast_A e_{S',T}\bigr)
+&&\left(\because\ \text{各}\ S'\ \text{で（ロ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{S'\in\mathcal{P}_M}\delta_{S,S'}\ast_A e_{S',T}
+&&\left(\because\ \text{各}\ S'\ \text{で（ハ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=e_{S,T}
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ S\text{、和の変数に}\ S'\text{、}v_{S'}:=e_{S',T}\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_preserves_product_of_matrix_units",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への写像は、行列単位どうしの積を保つ" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_preserves_product_of_matrix_units"],
+    statement: [
+      paragraph([
+        math(String.raw`A`), "、", math(String.raw`B`), "、", math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " のものとし、",
+        math(String.raw`E_{S,T}\in B`), " を行列単位（", ref("def_matrix_unit"), "）、", math(String.raw`\cdot_B`), " を行列の積（", ref("def_matrices_indexed_by_finite_set"),
+        "）とする。すべての ", math(String.raw`S,T,U,R\in\mathcal{P}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi\bigl(E_{S,T}\cdot_B E_{U,R}\bigr)=\Psi(E_{S,T})\cdot_A\Psi(E_{U,R})`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\delta_{T,U}`), " は ", math(String.raw`\mathcal{P}_M`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）、",
+        math(String.raw`e_{S,T}`), " は ", ref("def_matrix_unit_element_of_split_clifford_algebra"), " のものである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi\bigl(E_{S,T}\cdot_B E_{U,R}\bigr)
+&=\Psi\bigl(\delta_{T,U}\ast_B E_{S,R}\bigr)
+&&\left(\because\ X:=\mathcal{P}_M\text{。}\blkref{claim_product_of_matrix_units}\right)\\
+&=\delta_{T,U}\ast_A\Psi(E_{S,R})
+&&\left(\because\ \Psi\ \text{はスカラー倍を保つ。}\blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map}\right)\\
+&=\delta_{T,U}\ast_A e_{S,R}
+&&\left(\because\ \blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_matrix_unit}\right)\\
+&=e_{S,T}\cdot_A e_{U,R}
+&&\left(\because\ \blkref{claim_product_of_matrix_unit_elements_of_split_clifford_algebra}\right)\\
+&=\Psi(E_{S,T})\cdot_A\Psi(E_{U,R})
+&&\left(\because\ \blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_matrix_unit}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への写像は ℂ-代数の準同型である" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`A`), "、", math(String.raw`B`), "、", math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " のものとする。",
+        math(String.raw`\Psi`), " は ℂ-代数 ", math(String.raw`B`), "（", ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"), "）から ℂ-代数 ", math(String.raw`A`),
+        "（", ref("def_clifford_algebra"), "）への ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B`), " の演算と単位元を ", math(String.raw`+_B,\ \cdot_B,\ \ast_B,\ 1_B`), " と書く（", ref("def_matrices_indexed_by_finite_set"), "）。",
+        math(String.raw`B`), " の中の和は ", math(String.raw`U_{\mathrm{vec}}(B)`), "、", math(String.raw`A`), " の中の和は ", math(String.raw`U_{\mathrm{vec}}(A)`),
+        "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の有限集合 ", math(String.raw`\mathcal{P}_M`), " の上の和である。", math(String.raw`e_{S,T}`), " は ",
+        ref("def_matrix_unit_element_of_split_clifford_algebra"), " のもの、", math(String.raw`E_{S,T}\in B`), " は行列単位（", ref("def_matrix_unit"), "）、",
+        math(String.raw`\delta`), " は ", math(String.raw`\mathcal{P}_M`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）である。",
+        math(String.raw`B`), " と ", math(String.raw`A`), " で元を左から・右から掛ける写像は線型写像である（", ref("claim_left_multiplication_in_algebra_is_linear_map"), "、",
+        ref("claim_right_multiplication_in_algebra_is_linear_map"), "）。", math(String.raw`\Psi`), " は加法とスカラー倍を保つ（",
+        ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map"), "）ので、残りは乗法の単位元と乗法を保つことである。",
+      ]),
+      paragraph([
+        "（イ）乗法の単位元。", math(String.raw`S\in\mathcal{P}_M`), " について、", ref("claim_sum_over_finite_set_with_kronecker_delta_picks_term"), " を、主張の ",
+        math(String.raw`x`), " に ", math(String.raw`S`), "、和の変数に ", math(String.raw`T`), "、", math(String.raw`v_T:=e_{S,T}`), " を当てて、",
+        math(String.raw`\sum_{T\in\mathcal{P}_M}\delta_{S,T}\ast_A e_{S,T}=e_{S,S}`), " が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi(1_B)
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(1_B)_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}\delta_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \text{単位行列の定義。}\blkref{def_matrices_indexed_by_finite_set}\text{、}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A e_{S,S}
+&&\left(\because\ \text{各}\ S\ \text{で上の等式。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)
+&&\left(\because\ \text{各}\ S\ \text{で}\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\text{。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=1_A
+&&\left(\because\ \blkref{claim_decomposition_of_unity_in_split_clifford_algebra}\right).
+\end{aligned}`),
+      paragraph([
+        "（ロ）行列単位を左に置いた積。", math(String.raw`S,T\in\mathcal{P}_M`), " と ", math(String.raw`G\in B`), " について次が成り立つ。和の変数は ",
+        math(String.raw`S',T'\in\mathcal{P}_M`), " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi\bigl(E_{S,T}\cdot_B G\bigr)
+&=\Psi\left(E_{S,T}\cdot_B\left(\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_B E_{S',T'}\Bigr)\right)\right)
+&&\left(\because\ F:=G\text{、}X:=\mathcal{P}_M\text{。}\blkref{claim_matrix_is_double_sum_of_entries_times_matrix_units}\right)\\
+&=\Psi\left(\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_B\bigl(E_{S,T}\cdot_B E_{S',T'}\bigr)\Bigr)\right)
+&&\left(\because\ f:=E_{S,T}\cdot_B\bullet\text{。}\blkref{claim_left_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_A\Psi\bigl(E_{S,T}\cdot_B E_{S',T'}\bigr)\Bigr)
+&&\left(\because\ f:=\Psi\text{。}\blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_A\bigl(\Psi(E_{S,T})\cdot_A\Psi(E_{S',T'})\bigr)\Bigr)
+&&\left(\because\ \text{各}\ S',T'\ \text{で}\ \blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_preserves_product_of_matrix_units}\text{。}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\Psi(E_{S,T})\cdot_A\left(\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_A\Psi(E_{S',T'})\Bigr)\right)
+&&\left(\because\ f:=\Psi(E_{S,T})\cdot_A\bullet\ \text{として右辺から左辺へ読む。}\blkref{claim_left_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\Psi(E_{S,T})\cdot_A\Psi\left(\sum_{S'\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T'\in\mathcal{P}_M}G_{S',T'}\ast_B E_{S',T'}\Bigr)\right)
+&&\left(\because\ f:=\Psi\ \text{として右辺から左辺へ読む。}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\Psi(E_{S,T})\cdot_A\Psi(G)
+&&\left(\because\ F:=G\text{。}\blkref{claim_matrix_is_double_sum_of_entries_times_matrix_units}\right).
+\end{aligned}`),
+      paragraph(["（ハ）乗法。", math(String.raw`F,G\in B`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\Psi\bigl(F\cdot_B G\bigr)
+&=\Psi\left(\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_B E_{S,T}\Bigr)\right)\cdot_B G\right)
+&&\left(\because\ X:=\mathcal{P}_M\text{。}\blkref{claim_matrix_is_double_sum_of_entries_times_matrix_units}\right)\\
+&=\Psi\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_B\bigl(E_{S,T}\cdot_B G\bigr)\Bigr)\right)
+&&\left(\because\ f:=\bullet\cdot_B G\text{。}\blkref{claim_right_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A\Psi\bigl(E_{S,T}\cdot_B G\bigr)\Bigr)
+&&\left(\because\ f:=\Psi\text{。}\blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A\bigl(\Psi(E_{S,T})\cdot_A\Psi(G)\bigr)\Bigr)
+&&\left(\because\ \text{各}\ S,T\ \text{で（ロ）。}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A\Psi(E_{S,T})\Bigr)\right)\cdot_A\Psi(G)
+&&\left(\because\ f:=\bullet\cdot_A\Psi(G)\ \text{として右辺から左辺へ読む。}\blkref{claim_right_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\Psi\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_B E_{S,T}\Bigr)\right)\cdot_A\Psi(G)
+&&\left(\because\ f:=\Psi\ \text{として右辺から左辺へ読む。}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\Psi(F)\cdot_A\Psi(G)
+&&\left(\because\ \blkref{claim_matrix_is_double_sum_of_entries_times_matrix_units}\right).
+\end{aligned}`),
+      paragraph([
+        "加法を保つこと（", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map"), "）と（ハ）と（イ）により、", math(String.raw`\Psi`), " は ",
+        math(String.raw`U_{\mathrm{ring}}(B)`), " から ", math(String.raw`U_{\mathrm{ring}}(A)`), " への環の準同型（", ref("def_ring_homomorphism"), "）であり、",
+        ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_linear_map"), " により ", math(String.raw`U_{\mathrm{vec}}(B)`), " から ", math(String.raw`U_{\mathrm{vec}}(A)`),
+        " への線型写像である。したがって ", math(String.raw`\Psi`), " は ℂ-代数の準同型である（", ref("def_complex_algebra_homomorphism"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_mutually_inverse_homomorphisms_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "二つの準同型が互いに逆であること" },
+    labels: [],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_to_matrix_algebra_on_matrix_unit_element",
+    kind: "claim",
+    title: { text: "行列環への準同型は、行列単位にあたる元を行列単位へ移す" },
+    labels: ["claim_homomorphism_to_matrix_algebra_on_matrix_unit_element"],
+    statement: [
+      paragraph([
+        math(String.raw`\Phi`), " を ", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), " の準同型、", math(String.raw`e_{S,T}`), " を ",
+        ref("def_matrix_unit_element_of_split_clifford_algebra"), " のもの、", math(String.raw`E_{S,T}\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " を行列単位（",
+        ref("def_matrix_unit"), "）とする。すべての ", math(String.raw`S,T\in\mathcal{P}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Phi(e_{S,T})=E_{S,T}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と置く。", math(String.raw`y^{S}_t`), " を ",
+        ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{T}_t`), " と ", math(String.raw`w^{T}_k`), " を ",
+        ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"),
+        " のものとする。", math(String.raw`t\in\{1,\dots,M\}`), " について、", math(String.raw`B`), " の元 ", math(String.raw`Y_t`), " を ", math(String.raw`t\in S`), " なら ",
+        math(String.raw`Y_t:=c_t`), "、", math(String.raw`t\notin S`), " なら ", math(String.raw`Y_t:=1_B`), " と定め、", math(String.raw`Z_t`), " を ",
+        math(String.raw`t\in T`), " なら ", math(String.raw`Z_t:=c_t^{\mathsf T}`), "、", math(String.raw`t\notin T`), " なら ", math(String.raw`Z_t:=1_B`),
+        " と定める（", math(String.raw`c_t`), " は ", ref("def_creation_operator_matrix"), "、", math(String.raw`c_t^{\mathsf T}`), " は ",
+        ref("def_annihilation_operator_matrix"), " のもの）。", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`W_k:=Z_{M+1-k}`), " と置く。準備として次の四つが成り立つ。",
+      ]),
+      paragraph(["（イ）", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`\Phi(y^{S}_t)=Y_t`), " と ", math(String.raw`\Phi(z^{T}_t)=Z_t`), " が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\Phi(y^{S}_t)
+&=\Phi(a^{\dagger}_t)
+&&\left(\because\ t\in S\text{。}\blkref{def_ordered_product_of_selected_creation_generators}\right)\\
+&=c_t
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix}\right)\\
+&=Y_t
+&&\left(\because\ t\in S\ \text{のときの}\ Y_t\ \text{の定め方}\right),\\[4pt]
+\Phi(y^{S}_t)
+&=\Phi(1_A)
+&&\left(\because\ t\notin S\text{。}\blkref{def_ordered_product_of_selected_creation_generators}\right)\\
+&=1_B
+&&\left(\because\ \Phi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=Y_t
+&&\left(\because\ t\notin S\ \text{のときの}\ Y_t\ \text{の定め方}\right),\\[4pt]
+\Phi(z^{T}_t)
+&=\Phi(a_t)
+&&\left(\because\ t\in T\text{。}\blkref{def_reverse_ordered_product_of_selected_annihilation_generators}\right)\\
+&=c_t^{\mathsf T}
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix}\right)\\
+&=Z_t
+&&\left(\because\ t\in T\ \text{のときの}\ Z_t\ \text{の定め方}\right),\\[4pt]
+\Phi(z^{T}_t)
+&=\Phi(1_A)
+&&\left(\because\ t\notin T\text{。}\blkref{def_reverse_ordered_product_of_selected_annihilation_generators}\right)\\
+&=1_B
+&&\left(\because\ \Phi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=Z_t
+&&\left(\because\ t\notin T\ \text{のときの}\ Z_t\ \text{の定め方}\right).
+\end{aligned}`),
+      paragraph(["さらに ", math(String.raw`k\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\Phi(w^{T}_k)
+&=\Phi(z^{T}_{M+1-k})
+&&\left(\because\ \blkref{def_reverse_ordered_product_of_selected_annihilation_generators}\right)\\
+&=Z_{M+1-k}
+&&\left(\because\ \text{（イ）}\right)\\
+&=W_k
+&&\left(\because\ W_k\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph(["（ロ）", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\Phi(x_i)
+&=\Phi\bigl(a_i\cdot_A a^{\dagger}_i\bigr)
+&&\left(\because\ \blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=\Phi(a_i)\cdot_B\Phi(a^{\dagger}_i)
+&&\left(\because\ \Phi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=c_i^{\mathsf T}\cdot_B c_i
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix}\text{、}\blkref{claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix}\right).
+\end{aligned}`),
+      paragraph(["（ハ）三つの番号順の積の像。"]),
+      displayMath(String.raw`\begin{aligned}
+\Phi\bigl(a^{\dagger}_S\bigr)
+&=\Phi\left(\prod_{A,\,t=1}^{M}y^{S}_t\right)
+&&\left(\because\ \blkref{def_ordered_product_of_selected_creation_generators}\right)\\
+&=\prod_{B,\,t=1}^{M}\Phi(y^{S}_t)
+&&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
+&=\prod_{B,\,t=1}^{M}Y_t
+&&\left(\because\ \text{各}\ t\ \text{で（イ）。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right),\\[4pt]
+\Phi(P)
+&=\Phi\left(\prod_{A,\,i=1}^{M}x_i\right)
+&&\left(\because\ \blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=\prod_{B,\,i=1}^{M}\Phi(x_i)
+&&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
+&=\prod_{B,\,i=1}^{M}\bigl(c_i^{\mathsf T}\cdot_B c_i\bigr)
+&&\left(\because\ \text{各}\ i\ \text{で（ロ）。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right)\\
+&=E_{\emptyset,\emptyset}
+&&\left(\because\ \blkref{claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit}\right),\\[4pt]
+\Phi(a_T)
+&=\Phi\left(\prod_{A,\,k=1}^{M}w^{T}_k\right)
+&&\left(\because\ \blkref{def_reverse_ordered_product_of_selected_annihilation_generators}\right)\\
+&=\prod_{B,\,k=1}^{M}\Phi(w^{T}_k)
+&&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
+&=\prod_{B,\,k=1}^{M}W_k
+&&\left(\because\ \text{各}\ k\ \text{で（イ）の後の等式。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right).
+\end{aligned}`),
+      paragraph(["（ニ）", math(String.raw`E_{S,\emptyset}`), " に ", math(String.raw`E_{\emptyset,\emptyset}`), " を右から掛けても変わらない。"]),
+      displayMath(String.raw`\begin{aligned}
+E_{S,\emptyset}\cdot_B E_{\emptyset,\emptyset}
+&=\delta_{\emptyset,\emptyset}\ast_B E_{S,\emptyset}
+&&\left(\because\ X:=\mathcal{P}_M\text{。}\blkref{claim_product_of_matrix_units}\right)\\
+&=1_{\mathbb{C}}\ast_B E_{S,\emptyset}
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=E_{S,\emptyset}
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Phi(e_{S,T})
+&=\Phi\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_T\Bigr)
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right)\\
+&=\Phi\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_B\Phi(a_T)
+&&\left(\because\ \Phi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\Bigl(\Phi\bigl(a^{\dagger}_S\bigr)\cdot_B\Phi(P)\Bigr)\cdot_B\Phi(a_T)
+&&\left(\because\ \Phi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\Bigl(\Bigl(\prod_{B,\,t=1}^{M}Y_t\Bigr)\cdot_B\Phi(P)\Bigr)\cdot_B\Phi(a_T)
+&&\left(\because\ \text{（ハ）の一つ目}\right)\\
+&=\left(\Bigl(\prod_{B,\,t=1}^{M}Y_t\Bigr)\cdot_B E_{\emptyset,\emptyset}\right)\cdot_B\Phi(a_T)
+&&\left(\because\ \text{（ハ）の二つ目}\right)\\
+&=\left(\Bigl(\prod_{B,\,t=1}^{M}Y_t\Bigr)\cdot_B E_{\emptyset,\emptyset}\right)\cdot_B\Bigl(\prod_{B,\,k=1}^{M}W_k\Bigr)
+&&\left(\because\ \text{（ハ）の三つ目}\right)\\
+&=E_{S,\emptyset}\cdot_B\Bigl(\prod_{B,\,k=1}^{M}W_k\Bigr)
+&&\left(\because\ y_t:=Y_t\text{。}\blkref{claim_ordered_product_of_selected_creation_matrices_times_vacuum_matrix_unit}\right)\\
+&=\bigl(E_{S,\emptyset}\cdot_B E_{\emptyset,\emptyset}\bigr)\cdot_B\Bigl(\prod_{B,\,k=1}^{M}W_k\Bigr)
+&&\left(\because\ \text{（ニ）}\right)\\
+&=E_{S,\emptyset}\cdot_B\left(E_{\emptyset,\emptyset}\cdot_B\Bigl(\prod_{B,\,k=1}^{M}W_k\Bigr)\right)
+&&\left(\because\ U_{\mathrm{ring}}(B)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=E_{S,\emptyset}\cdot_B E_{\emptyset,T}
+&&\left(\because\ z_t:=Z_t\text{、}w_k:=W_k\text{。}\blkref{claim_vacuum_matrix_unit_times_reverse_ordered_product_of_selected_annihilation_matrices}\right)\\
+&=\delta_{\emptyset,\emptyset}\ast_B E_{S,T}
+&&\left(\because\ X:=\mathcal{P}_M\text{。}\blkref{claim_product_of_matrix_units}\right)\\
+&=1_{\mathbb{C}}\ast_B E_{S,T}
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=E_{S,T}
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への準同型のあとに行列環への準同型を合成すると、恒等写像になる" },
+    labels: ["claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`\Phi`), " を ", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "、", math(String.raw`\Psi`), " を ",
+        ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と書く。すべての ", math(String.raw`F\in B`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Phi\bigl(\Psi(F)\bigr)=F`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置く。", math(String.raw`\Phi`), " は ℂ-代数の準同型なので、", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(B)`), " への線型写像である（", ref("def_complex_algebra_homomorphism"), "、", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。", math(String.raw`e_{S,T}`), " は ", ref("def_matrix_unit_element_of_split_clifford_algebra"), " のものである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi\bigl(\Psi(F)\bigr)
+&=\Phi\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A e_{S,T}\Bigr)\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_B\Phi(e_{S,T})\Bigr)
+&&\left(\because\ f:=\Phi\text{。}\blkref{claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_B\Bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_B E_{S,T}\Bigr)
+&&\left(\because\ \text{各}\ S,T\ \text{で}\ \blkref{claim_homomorphism_to_matrix_algebra_on_matrix_unit_element}\text{。}\blkref{claim_double_sums_over_finite_sets_with_equal_terms_are_equal}\right)\\
+&=F
+&&\left(\because\ X:=\mathcal{P}_M\text{。}\blkref{claim_matrix_is_double_sum_of_entries_times_matrix_units}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_column_sum_of_creation_operator_matrix_entries_times_matrix_unit_elements",
+    kind: "claim",
+    title: { text: "生成作用素の行列の一つの列の成分を係数にした、行列単位にあたる元の和" },
+    labels: ["claim_column_sum_of_creation_operator_matrix_entries_times_matrix_unit_elements"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"), "、",
+        math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), " のもの、", math(String.raw`c_i`), " を生成作用素の行列（",
+        ref("def_creation_operator_matrix"), "）とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " と ", math(String.raw`T\in\mathcal{P}_M`), " について、",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合の上の和（", ref("def_sum_over_finite_set"), "）で次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{S\in\mathcal{P}_M}(c_i)_{S,T}\ast_A e_{S,T}=a^{\dagger}_i\cdot_A e_{T,T}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a^{\dagger}_T`), " は ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`a_T`), " は ",
+        ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`P`), " は ", ref("def_vacuum_element_of_split_clifford_algebra"),
+        " のもの、", math(String.raw`\delta`), " は ", math(String.raw`\mathcal{P}_M`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）である。",
+        math(String.raw`i\notin T`), " と ", math(String.raw`i\in T`), " のどちらか一方だけが成り立つ（", ref("def_power_set_of_first_m_positive_integers"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`i\notin T`), " のとき。", math(String.raw`\sigma:=\varsigma(N_i(T))\in\mathbb{C}`), "（", ref("def_count_of_subset_elements_below_index"), "、",
+        ref("def_sign_of_nonnegative_integer"), "）と置く。（イ）", math(String.raw`S\in\mathcal{P}_M`), " について ",
+        math(String.raw`(c_i)_{S,T}\ast_A e_{S,T}=\delta_{T\cup\{i\},S}\ast_A(\sigma\ast_A e_{S,T})`), " が成り立つ。", math(String.raw`S=T\cup\{i\}`),
+        " のときと ", math(String.raw`S\neq T\cup\{i\}`), " のときに分ける。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i)_{S,T}\ast_A e_{S,T}
+&=\sigma\ast_A e_{S,T}
+&&\left(\because\ i\notin T\ \text{かつ}\ S=T\cup\{i\}\text{。}\blkref{def_creation_operator_matrix}\right)\\
+&=1_{\mathbb{C}}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\delta_{T\cup\{i\},S}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ T\cup\{i\}=S\text{。}\blkref{def_kronecker_delta}\right),\\[4pt]
+(c_i)_{S,T}\ast_A e_{S,T}
+&=0_{\mathbb{C}}\ast_A e_{S,T}
+&&\left(\because\ S\neq T\cup\{i\}\ \text{なので条件が成り立たない。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=\delta_{T\cup\{i\},S}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ T\cup\{i\}\neq S\text{。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph(["（ロ）右辺は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+a^{\dagger}_i\cdot_A e_{T,T}
+&=a^{\dagger}_i\cdot_A\Bigl(\bigl(a^{\dagger}_T\cdot_A P\bigr)\cdot_A a_T\Bigr)
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right)\\
+&=\Bigl(a^{\dagger}_i\cdot_A\bigl(a^{\dagger}_T\cdot_A P\bigr)\Bigr)\cdot_A a_T
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(a^{\dagger}_i\cdot_A a^{\dagger}_T\bigr)\cdot_A P\Bigr)\cdot_A a_T
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(\sigma\ast_A a^{\dagger}_{T\cup\{i\}}\bigr)\cdot_A P\Bigr)\cdot_A a_T
+&&\left(\because\ i\notin T\text{。}\blkref{claim_creation_generator_times_ordered_creation_product_without_index}\right)\\
+&=\Bigl(\sigma\ast_A\bigl(a^{\dagger}_{T\cup\{i\}}\cdot_A P\bigr)\Bigr)\cdot_A a_T
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\sigma\ast_A\Bigl(\bigl(a^{\dagger}_{T\cup\{i\}}\cdot_A P\bigr)\cdot_A a_T\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\sigma\ast_A e_{T\cup\{i\},T}
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sum_{S\in\mathcal{P}_M}(c_i)_{S,T}\ast_A e_{S,T}
+&=\sum_{S\in\mathcal{P}_M}\delta_{T\cup\{i\},S}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ \text{各}\ S\ \text{で（イ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sigma\ast_A e_{T\cup\{i\},T}
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ T\cup\{i\}\text{、和の変数に}\ S\text{、}v_S:=\sigma\ast_A e_{S,T}\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=a^{\dagger}_i\cdot_A e_{T,T}
+&&\left(\because\ \text{（ロ）}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i\in T`), " のとき。（ハ）", math(String.raw`S\in\mathcal{P}_M`), " について、条件「", math(String.raw`i\notin T`), " かつ ",
+        math(String.raw`S=T\cup\{i\}`), "」が成り立たないので、", math(String.raw`(c_i)_{S,T}\ast_A e_{S,T}=0_{\mathbb{C}}\ast_A e_{S,T}=0_A`), " である（",
+        ref("def_creation_operator_matrix"), "、", ref("claim_zero_scalar_multiple_is_zero_vector"), "）。（ニ）", math(String.raw`y\in A`), " について ",
+        math(String.raw`0_A\cdot_A y=0_A`), " である。右から ", math(String.raw`y`), " を掛ける写像が線型写像であり（", ref("claim_right_multiplication_in_algebra_is_linear_map"),
+        "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{S\in\mathcal{P}_M}(c_i)_{S,T}\ast_A e_{S,T}
+&=0_A
+&&\left(\because\ \text{各}\ S\ \text{で（ハ）。}\blkref{claim_sum_over_finite_set_of_zero_terms_is_zero}\right)\\
+&=0_A\cdot_A a_T
+&&\left(\because\ \text{（ニ）}\right)\\
+&=\bigl(0_A\cdot_A P\bigr)\cdot_A a_T
+&&\left(\because\ \text{（ニ）}\right)\\
+&=\Bigl(\bigl(a^{\dagger}_i\cdot_A a^{\dagger}_T\bigr)\cdot_A P\Bigr)\cdot_A a_T
+&&\left(\because\ i\in T\text{。}\blkref{claim_creation_generator_times_ordered_creation_product_with_index_is_zero}\right)\\
+&=\Bigl(a^{\dagger}_i\cdot_A\bigl(a^{\dagger}_T\cdot_A P\bigr)\Bigr)\cdot_A a_T
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a^{\dagger}_i\cdot_A\Bigl(\bigl(a^{\dagger}_T\cdot_A P\bigr)\cdot_A a_T\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a^{\dagger}_i\cdot_A e_{T,T}
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_creation_operator_matrix",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への準同型は、生成作用素の行列を生成作用素にあたる元へ移す" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_creation_operator_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), "、", math(String.raw`a^{\dagger}_i`), " を ",
+        ref("def_creation_generator_of_split_clifford_algebra"), " のもの、", math(String.raw`c_i`), " を生成作用素の行列（", ref("def_creation_operator_matrix"),
+        "）とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi(c_i)=a^{\dagger}_i`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置き、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"), "、",
+        math(String.raw`a^{\dagger}_T`), "・", math(String.raw`a_T`), "・", math(String.raw`P`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "・",
+        ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "・", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。和はすべて ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合 ", math(String.raw`\mathcal{P}_M`), " の上の和である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi(c_i)
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(c_i)_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{S\in\mathcal{P}_M}(c_i)_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ X:=Y:=\mathcal{P}_M\text{、}\lambda_{S,T}:=(c_i)_{S,T}\text{、}v_{S,T}:=e_{S,T}\text{。}\blkref{claim_interchange_of_double_sum_over_finite_sets}\right)\\
+&=\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\bigl(a^{\dagger}_i\cdot_A e_{T,T}\bigr)
+&&\left(\because\ \text{各}\ T\ \text{で}\ \blkref{claim_column_sum_of_creation_operator_matrix_entries_times_matrix_unit_elements}\text{。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=a^{\dagger}_i\cdot_A\left(\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A e_{T,T}\right)
+&&\left(\because\ f:=a^{\dagger}_i\cdot_A\bullet\ \text{として右辺から左辺へ読む。}\blkref{claim_left_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
+&=a^{\dagger}_i\cdot_A\left(\sum_{T\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\bigl(a^{\dagger}_T\cdot_A P\bigr)\cdot_A a_T\Bigr)\right)
+&&\left(\because\ \text{各}\ T\ \text{で}\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\text{。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=a^{\dagger}_i\cdot_A 1_A
+&&\left(\because\ \text{和の変数を}\ T\ \text{と書いた}\ \blkref{claim_decomposition_of_unity_in_split_clifford_algebra}\right)\\
+&=a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_row_sum_of_annihilation_operator_matrix_entries_times_matrix_unit_elements",
+    kind: "claim",
+    title: { text: "消滅作用素の行列の一つの行の成分を係数にした、行列単位にあたる元の和" },
+    labels: ["claim_row_sum_of_annihilation_operator_matrix_entries_times_matrix_unit_elements"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"), "、",
+        math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " のもの、", math(String.raw`c_i^{\mathsf T}`), " を消滅作用素の行列（",
+        ref("def_annihilation_operator_matrix"), "）とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " と ", math(String.raw`S\in\mathcal{P}_M`), " について、",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合の上の和（", ref("def_sum_over_finite_set"), "）で次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{T\in\mathcal{P}_M}(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}=e_{S,S}\cdot_A a_i`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a^{\dagger}_S`), " は ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`a_S`), " は ",
+        ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`P`), " は ", ref("def_vacuum_element_of_split_clifford_algebra"),
+        " のもの、", math(String.raw`\delta`), " は ", math(String.raw`\mathcal{P}_M`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"), "）である。",
+        math(String.raw`T\in\mathcal{P}_M`), " について ", math(String.raw`(c_i^{\mathsf T})_{S,T}=(c_i)_{T,S}`), " であり（", ref("def_annihilation_operator_matrix"),
+        "）、", math(String.raw`(c_i)_{T,S}`), " は、", math(String.raw`i\notin S`), " かつ ", math(String.raw`T=S\cup\{i\}`), " なら ", math(String.raw`\varsigma(N_i(S))`),
+        "、それ以外なら ", math(String.raw`0_{\mathbb{C}}`), " である（", ref("def_creation_operator_matrix"), "）。", math(String.raw`i\notin S`), " と ",
+        math(String.raw`i\in S`), " のどちらか一方だけが成り立つ（", ref("def_power_set_of_first_m_positive_integers"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`i\notin S`), " のとき。", math(String.raw`\sigma:=\varsigma(N_i(S))\in\mathbb{C}`), "（", ref("def_count_of_subset_elements_below_index"), "、",
+        ref("def_sign_of_nonnegative_integer"), "）と置く。（イ）", math(String.raw`T\in\mathcal{P}_M`), " について ",
+        math(String.raw`(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}=\delta_{S\cup\{i\},T}\ast_A(\sigma\ast_A e_{S,T})`), " が成り立つ。", math(String.raw`T=S\cup\{i\}`),
+        " のときと ", math(String.raw`T\neq S\cup\{i\}`), " のときに分ける。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}
+&=(c_i)_{T,S}\ast_A e_{S,T}
+&&\left(\because\ \blkref{def_annihilation_operator_matrix}\right)\\
+&=\sigma\ast_A e_{S,T}
+&&\left(\because\ i\notin S\ \text{かつ}\ T=S\cup\{i\}\text{。}\blkref{def_creation_operator_matrix}\right)\\
+&=1_{\mathbb{C}}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\delta_{S\cup\{i\},T}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ S\cup\{i\}=T\text{。}\blkref{def_kronecker_delta}\right),\\[4pt]
+(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}
+&=(c_i)_{T,S}\ast_A e_{S,T}
+&&\left(\because\ \blkref{def_annihilation_operator_matrix}\right)\\
+&=0_{\mathbb{C}}\ast_A e_{S,T}
+&&\left(\because\ T\neq S\cup\{i\}\ \text{なので条件が成り立たない。}\blkref{def_creation_operator_matrix}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=\delta_{S\cup\{i\},T}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ S\cup\{i\}\neq T\text{。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph(["（ロ）右辺は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+e_{S,S}\cdot_A a_i
+&=\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)\cdot_A a_i
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\bigl(a_S\cdot_A a_i\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\bigl(\sigma\ast_A a_{S\cup\{i\}}\bigr)
+&&\left(\because\ i\notin S\text{。}\blkref{claim_reverse_ordered_annihilation_product_times_annihilation_generator_without_index}\right)\\
+&=\sigma\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_{S\cup\{i\}}\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\sigma\ast_A e_{S,S\cup\{i\}}
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sum_{T\in\mathcal{P}_M}(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}
+&=\sum_{T\in\mathcal{P}_M}\delta_{S\cup\{i\},T}\ast_A(\sigma\ast_A e_{S,T})
+&&\left(\because\ \text{各}\ T\ \text{で（イ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sigma\ast_A e_{S,S\cup\{i\}}
+&&\left(\because\ \text{主張の}\ x\ \text{に}\ S\cup\{i\}\text{、和の変数に}\ T\text{、}v_T:=\sigma\ast_A e_{S,T}\ \text{を当てる。}\blkref{claim_sum_over_finite_set_with_kronecker_delta_picks_term}\right)\\
+&=e_{S,S}\cdot_A a_i
+&&\left(\because\ \text{（ロ）}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i\in S`), " のとき。（ハ）", math(String.raw`T\in\mathcal{P}_M`), " について、", math(String.raw`(c_i)_{T,S}`), " の条件「",
+        math(String.raw`i\notin S`), " かつ ", math(String.raw`T=S\cup\{i\}`), "」が成り立たないので、",
+        math(String.raw`(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}=(c_i)_{T,S}\ast_A e_{S,T}=0_{\mathbb{C}}\ast_A e_{S,T}=0_A`), " である（", ref("def_annihilation_operator_matrix"), "、",
+        ref("def_creation_operator_matrix"), "、", ref("claim_zero_scalar_multiple_is_zero_vector"), "）。（ニ）", math(String.raw`y\in A`), " について ",
+        math(String.raw`y\cdot_A 0_A=0_A`), " である。左から ", math(String.raw`y`), " を掛ける写像が線型写像であり（", ref("claim_left_multiplication_in_algebra_is_linear_map"),
+        "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{T\in\mathcal{P}_M}(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}
+&=0_A
+&&\left(\because\ \text{各}\ T\ \text{で（ハ）。}\blkref{claim_sum_over_finite_set_of_zero_terms_is_zero}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A 0_A
+&&\left(\because\ \text{（ニ）}\right)\\
+&=\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A\bigl(a_S\cdot_A a_i\bigr)
+&&\left(\because\ i\in S\text{。}\blkref{claim_reverse_ordered_annihilation_product_times_annihilation_generator_with_index_is_zero}\right)\\
+&=\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)\cdot_A a_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=e_{S,S}\cdot_A a_i
+&&\left(\because\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_annihilation_operator_matrix",
+    kind: "claim",
+    title: { text: "行列環からクリフォード代数への準同型は、消滅作用素の行列を消滅作用素にあたる元へ移す" },
+    labels: ["claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_annihilation_operator_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`\Psi`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), "、", math(String.raw`a_i`), " を ",
+        ref("def_annihilation_generator_of_split_clifford_algebra"), " のもの、", math(String.raw`c_i^{\mathsf T}`), " を消滅作用素の行列（", ref("def_annihilation_operator_matrix"),
+        "）とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi(c_i^{\mathsf T})=a_i`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置き、", math(String.raw`e_{S,T}`), " を ", ref("def_matrix_unit_element_of_split_clifford_algebra"), "、",
+        math(String.raw`a^{\dagger}_S`), "・", math(String.raw`a_S`), "・", math(String.raw`P`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "・",
+        ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "・", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。和はすべて ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " の中の有限集合 ", math(String.raw`\mathcal{P}_M`), " の上の和である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi(c_i^{\mathsf T})
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\left(\sum_{T\in\mathcal{P}_M}(c_i^{\mathsf T})_{S,T}\ast_A e_{S,T}\right)
+&&\left(\because\ \blkref{def_homomorphism_from_matrix_algebra_to_clifford_algebra}\right)\\
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\bigl(e_{S,S}\cdot_A a_i\bigr)
+&&\left(\because\ \text{各}\ S\ \text{で}\ \blkref{claim_row_sum_of_annihilation_operator_matrix_entries_times_matrix_unit_elements}\text{。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A e_{S,S}\right)\cdot_A a_i
+&&\left(\because\ f:=\bullet\cdot_A a_i\ \text{として右辺から左辺へ読む。}\blkref{claim_right_multiplication_in_algebra_is_linear_map}\text{、}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
+&=\left(\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)\right)\cdot_A a_i
+&&\left(\because\ \text{各}\ S\ \text{で}\ \blkref{def_matrix_unit_element_of_split_clifford_algebra}\text{。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=1_A\cdot_A a_i
+&&\left(\because\ \blkref{claim_decomposition_of_unity_in_split_clifford_algebra}\right)\\
+&=a_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_clifford_generator_of_split_space_is_linear_combination_of_creation_and_annihilation_generators",
+    kind: "claim",
+    title: { text: "分裂した二次空間の元の像は、生成作用素にあたる元と消滅作用素にあたる元の線型結合である" },
+    labels: ["claim_clifford_generator_of_split_space_is_linear_combination_of_creation_and_annihilation_generators"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`W`), "、", math(String.raw`w`), "、", math(String.raw`f`), "、", math(String.raw`V`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、",
+        math(String.raw`\gamma`), "、", math(String.raw`\mathrm{in}_1`), "、", math(String.raw`\mathrm{in}_2`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"),
+        " のもの、", math(String.raw`a^{\dagger}_k`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_k`), " を ",
+        ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`\beta^{w}_k:W\to\mathbb{C}`),
+        " を ", math(String.raw`w`), " についての第 ", math(String.raw`k`), " 座標の写像（", ref("claim_coordinate_map_is_linear_form"), "）とする。すべての ",
+        math(String.raw`x\in W`), " と ", math(String.raw`g\in W^{*}`), " について、", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）の中の線型結合（", ref("def_linear_combination"), "）で次が成り立つ。",
+      ]),
+      displayMath(String.raw`\gamma\bigl((x,g)\bigr)=\left(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\right)+_A\left(\sum_{k=1}^{M}g(w_k)\ast_A a_k\right)`),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", math(String.raw`\gamma\circ\mathrm{in}_1:W\to U_{\mathrm{vec}}(A)`), " と ", math(String.raw`\gamma\circ\mathrm{in}_2:W^{*}\to U_{\mathrm{vec}}(A)`),
+        " は線型写像である。", math(String.raw`\mathrm{in}_1`), " と ", math(String.raw`\mathrm{in}_2`), " が線型写像であり（", ref("claim_embedding_into_first_component_is_linear_map"),
+        "、", ref("claim_embedding_into_second_component_is_linear_map"), "）、", math(String.raw`\gamma`), " が線型写像であり（", ref("claim_clifford_generator_map_is_linear_map"),
+        "）、線型写像の合成は線型写像だからである（", ref("claim_composition_of_linear_maps_is_linear_map"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma\bigl(\mathrm{in}_1(x)\bigr)
+&=(\gamma\circ\mathrm{in}_1)(x)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=(\gamma\circ\mathrm{in}_1)\left(\sum_{k=1}^{M}\beta^{w}_k(x)\cdot_W w_k\right)
+&&\left(\because\ V:=W\text{、}n:=M\text{、}b:=w\text{。}\blkref{claim_coordinate_map_is_linear_form}\right)\\
+&=\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A(\gamma\circ\mathrm{in}_1)(w_k)
+&&\left(\because\ f:=\gamma\circ\mathrm{in}_1\text{。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A\gamma\bigl(\mathrm{in}_1(w_k)\bigr)
+&&\left(\because\ \text{各}\ k\ \text{で合成の定義。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k
+&&\left(\because\ \text{各}\ k\ \text{で}\ \blkref{def_creation_generator_of_split_clifford_algebra}\text{。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right),\\[4pt]
+\gamma\bigl(\mathrm{in}_2(g)\bigr)
+&=(\gamma\circ\mathrm{in}_2)(g)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=(\gamma\circ\mathrm{in}_2)\left(\sum_{k=1}^{M}g(w_k)\cdot_{W^{*}}f_k\right)
+&&\left(\because\ V:=W\text{、}n:=M\text{、}b:=w\text{。}\blkref{claim_dual_basis_spans_dual_space}\right)\\
+&=\sum_{k=1}^{M}g(w_k)\ast_A(\gamma\circ\mathrm{in}_2)(f_k)
+&&\left(\because\ f:=\gamma\circ\mathrm{in}_2\text{。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\sum_{k=1}^{M}g(w_k)\ast_A\gamma\bigl(\mathrm{in}_2(f_k)\bigr)
+&&\left(\because\ \text{各}\ k\ \text{で合成の定義。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\sum_{k=1}^{M}g(w_k)\ast_A a_k
+&&\left(\because\ \text{各}\ k\ \text{で}\ \blkref{def_annihilation_generator_of_split_clifford_algebra}\text{。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma\bigl((x,g)\bigr)
+&=\gamma\bigl(\mathrm{in}_1(x)+_V\mathrm{in}_2(g)\bigr)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right)\\
+&=\gamma\bigl(\mathrm{in}_1(x)\bigr)+_A\gamma\bigl(\mathrm{in}_2(g)\bigr)
+&&\left(\because\ \gamma\ \text{は加法を保つ。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
+&=\left(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\right)+_A\gamma\bigl(\mathrm{in}_2(g)\bigr)
+&&\left(\because\ \text{準備の一つ目の等式}\right)\\
+&=\left(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\right)+_A\left(\sum_{k=1}^{M}g(w_k)\ast_A a_k\right)
+&&\left(\because\ \text{準備の二つ目の等式}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity",
+    kind: "claim",
+    title: { text: "クリフォード代数から行列環への準同型のあとに行列環からクリフォード代数への準同型を合成すると、恒等写像になる" },
+    labels: ["claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`\Phi`), " を ", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "、", math(String.raw`\Psi`), " を ",
+        ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " のものとし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。すべての ", math(String.raw`a\in A`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Psi\bigl(\Phi(a)\bigr)=a`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と置く。", math(String.raw`\Phi`), " は ", math(String.raw`A`), " から ", math(String.raw`B`), " への、",
+        math(String.raw`\Psi`), " は ", math(String.raw`B`), " から ", math(String.raw`A`), " への ℂ-代数の準同型である（", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        "、", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "）。したがって合成 ", math(String.raw`\Psi\circ\Phi:A\to A`),
+        " は ℂ-代数の準同型であり（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）、", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像である（", ref("def_complex_algebra_homomorphism"), "、", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。恒等写像 ", math(String.raw`\mathrm{id}_A`), " も ℂ-代数の準同型である（", ref("claim_identity_map_is_algebra_homomorphism"), "）。",
+        math(String.raw`\gamma(V)`), " は ", math(String.raw`A`), " を生成する（", ref("claim_image_of_clifford_generator_map_generates_clifford_algebra"), "）ので、",
+        ref("claim_homomorphisms_agreeing_on_generators_are_equal"), " を ", math(String.raw`\varphi:=\Psi\circ\Phi`), "、", math(String.raw`\psi:=\mathrm{id}_A`), "、",
+        math(String.raw`X:=\gamma(V)`), " に当てれば、すべての ", math(String.raw`v\in V`), " について ", math(String.raw`(\Psi\circ\Phi)(\gamma(v))=\mathrm{id}_A(\gamma(v))`),
+        " を示せば主張が従う。",
+      ]),
+      paragraph(["準備として、", math(String.raw`k\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+(\Psi\circ\Phi)\bigl(a^{\dagger}_k\bigr)
+&=\Psi\bigl(\Phi(a^{\dagger}_k)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\Psi(c_k)
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix}\right)\\
+&=a^{\dagger}_k
+&&\left(\because\ \blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_creation_operator_matrix}\right),\\[4pt]
+(\Psi\circ\Phi)(a_k)
+&=\Psi\bigl(\Phi(a_k)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\Psi(c_k^{\mathsf T})
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix}\right)\\
+&=a_k
+&&\left(\because\ \blkref{claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_annihilation_operator_matrix}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`v\in V`), " をとる。", math(String.raw`V=W\oplus W^{*}`), " の元は順序対なので、", math(String.raw`v=(x,g)`), " となる ", math(String.raw`x\in W`), " と ",
+        math(String.raw`g\in W^{*}`), " がある（", ref("def_direct_sum_of_two_vector_spaces"), "）。", math(String.raw`\beta^{w}_k`), " は ",
+        ref("claim_clifford_generator_of_split_space_is_linear_combination_of_creation_and_annihilation_generators"), " のものである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\Psi\circ\Phi)\bigl(\gamma((x,g))\bigr)
+&=(\Psi\circ\Phi)\left(\Bigl(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\Bigr)+_A\Bigl(\sum_{k=1}^{M}g(w_k)\ast_A a_k\Bigr)\right)
+&&\left(\because\ \blkref{claim_clifford_generator_of_split_space_is_linear_combination_of_creation_and_annihilation_generators}\right)\\
+&=(\Psi\circ\Phi)\Bigl(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\Bigr)+_A(\Psi\circ\Phi)\Bigl(\sum_{k=1}^{M}g(w_k)\ast_A a_k\Bigr)
+&&\left(\because\ \Psi\circ\Phi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\Bigl(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A(\Psi\circ\Phi)(a^{\dagger}_k)\Bigr)+_A\Bigl(\sum_{k=1}^{M}g(w_k)\ast_A(\Psi\circ\Phi)(a_k)\Bigr)
+&&\left(\because\ f:=\Psi\circ\Phi\ \text{を二つの線型結合に当てる。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\Bigl(\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A a^{\dagger}_k\Bigr)+_A\Bigl(\sum_{k=1}^{M}g(w_k)\ast_A a_k\Bigr)
+&&\left(\because\ \text{各}\ k\ \text{で準備。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\gamma\bigl((x,g)\bigr)
+&&\left(\because\ \blkref{claim_clifford_generator_of_split_space_is_linear_combination_of_creation_and_annihilation_generators}\right)\\
+&=\mathrm{id}_A\bigl(\gamma((x,g))\bigr)
+&&\left(\because\ \mathrm{id}_A\ \text{の定義。}\blkref{claim_identity_map_is_algebra_homomorphism}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ", ref("claim_homomorphisms_agreeing_on_generators_are_equal"), " により ", math(String.raw`\Psi\circ\Phi=\mathrm{id}_A`), " であり、すべての ",
+        math(String.raw`a\in A`), " について ", math(String.raw`\Psi(\Phi(a))=(\Psi\circ\Phi)(a)=\mathrm{id}_A(a)=a`), " である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_clifford_algebra_of_split_quadratic_space_is_isomorphic_to_matrix_algebra",
+    kind: "theorem",
+    title: { text: "主定理：分裂した二次空間のクリフォード代数と行列環の同型" },
+    labels: ["theorem_clifford_algebra_of_split_quadratic_space_is_isomorphic_to_matrix_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`W`), " を ℂ-線型空間、", math(String.raw`w_1,\dots,w_M`), " をその基底、", math(String.raw`f_1,\dots,f_M`),
+        " を双対基底とし、", math(String.raw`V:=W\oplus W^{*}`), "、", math(String.raw`q((x,g)):=g(x)`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`),
+        "、", math(String.raw`a^{\dagger}_i:=\gamma(\mathrm{in}_1(w_i))`), "、", math(String.raw`a_i:=\gamma(\mathrm{in}_2(f_i))`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"),
+        "、", ref("def_creation_generator_of_split_clifford_algebra"), "、", ref("def_annihilation_generator_of_split_clifford_algebra"), " のものとし、",
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`\varphi:V\to B`), " を ", ref("def_matrix_valued_map_on_split_quadratic_space"), " の写像、", math(String.raw`c_i`), " を生成作用素の行列（", ref("def_creation_operator_matrix"),
+        "）、", math(String.raw`c_i^{\mathsf T}`), " を消滅作用素の行列（", ref("def_annihilation_operator_matrix"), "）、", math(String.raw`a^{\dagger}_S`), "・", math(String.raw`a_T`), "・",
+        math(String.raw`P`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "・", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "・",
+        ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。", math(String.raw`\Phi:A\to B`), " を、", math(String.raw`\Phi\circ\gamma=\varphi`), " を満たすただ一つの ℂ-代数の準同型（", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        "。", math(String.raw`\Phi(a^{\dagger}_i)=c_i`), "、", math(String.raw`\Phi(a_i)=c_i^{\mathsf T}`), " を満たす。", ref("claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix"), "、",
+        ref("claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix"), "）、", math(String.raw`\Psi:B\to A`), " を、",
+        math(String.raw`F\in B`), " に ", math(String.raw`\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\bigl(\sum_{T\in\mathcal{P}_M}F_{S,T}\ast_A((a^{\dagger}_S\cdot_A P)\cdot_A a_T)\bigr)`),
+        " を与える写像（", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), "）とする。このとき次が成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\Phi`), " と ", math(String.raw`\Psi`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"],
+        [
+          "すべての ", math(String.raw`a\in A`), " について ", math(String.raw`\Psi(\Phi(a))=a`), " であり、すべての ", math(String.raw`F\in B`), " について ",
+          math(String.raw`\Phi(\Psi(F))=F`), " である。",
+        ],
+      ]),
+      paragraph([
+        "したがって ", math(String.raw`\Phi`), " は全単射であり、その逆写像は ", math(String.raw`\Psi`), " である。すなわち ", math(String.raw`\Phi`), " と ", math(String.raw`\Psi`),
+        " は互いに逆な ℂ-代数の準同型である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Phi`), " は ℂ-代数の準同型であり（", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "）、", math(String.raw`\Psi`), " は ℂ-代数の準同型である（",
+        ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "）。", math(String.raw`\Psi(\Phi(a))=a`), " は ",
+        ref("claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity"), "、", math(String.raw`\Phi(\Psi(F))=F`), " は ",
+        ref("claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity"), " である。",
+      ]),
+      paragraph([
+        "単射であること。", math(String.raw`a,b\in A`), " が ", math(String.raw`\Phi(a)=\Phi(b)`), " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a
+&=\Psi\bigl(\Phi(a)\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity}\right)\\
+&=\Psi\bigl(\Phi(b)\bigr)
+&&\left(\because\ \Phi(a)=\Phi(b)\right)\\
+&=b
+&&\left(\because\ \blkref{claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity}\right).
+\end{aligned}`),
+      paragraph([
+        "全射であること。", math(String.raw`F\in B`), " について、", math(String.raw`\Psi(F)\in A`), " は ", math(String.raw`\Phi(\Psi(F))=F`), " を満たす（",
+        ref("claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity"), "）。",
+      ]),
+      paragraph([
+        "したがって ", math(String.raw`\Phi`), " は全単射である。", math(String.raw`\Phi`), " の逆写像を ", math(String.raw`\Phi^{-1}:B\to A`), "（", math(String.raw`\Phi^{-1}(F)`),
+        " は ", math(String.raw`\Phi(a)=F`), " を満たすただ一つの ", math(String.raw`a\in A`), "）とすると、", math(String.raw`F\in B`), " について ", math(String.raw`\Psi(F)`),
+        " は ", math(String.raw`\Phi(\Psi(F))=F`), " を満たすので、", math(String.raw`\Phi^{-1}(F)=\Psi(F)`), " である。すなわち ", math(String.raw`\Phi^{-1}=\Psi`), " である。",
+      ]),
+    ],
+  },
 ]);

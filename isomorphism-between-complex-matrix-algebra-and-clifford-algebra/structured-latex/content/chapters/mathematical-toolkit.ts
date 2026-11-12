@@ -6919,6 +6919,78 @@ L^{b}_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_double_sums_over_finite_sets_with_equal_terms_are_equal",
+    kind: "claim",
+    title: { text: "項がすべて等しい、有限集合の上の和を項にもつ二つの有限集合の上の和は等しい" },
+    labels: ["claim_double_sums_over_finite_sets_with_equal_terms_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`X`), " と ", math(String.raw`Y`),
+        " を有限集合（", ref("def_numbering_of_finite_set"), "）とし、", math(String.raw`X`), " の元 ", math(String.raw`x`), " と ", math(String.raw`Y`), " の元 ",
+        math(String.raw`y`), " の組ごとに、", math(String.raw`V`), " の元 ", math(String.raw`v_{x,y},\ u_{x,y}`), " と ", math(String.raw`\mathbb{C}`), " の元 ",
+        math(String.raw`\lambda_{x,y},\ \mu_{x,y}`), " が一つずつ与えられていて、すべての ", math(String.raw`x\in X`), "、", math(String.raw`y\in Y`), " について ",
+        math(String.raw`\lambda_{x,y}\cdot_V v_{x,y}=\mu_{x,y}\cdot_V u_{x,y}`), " が成り立つとする。このとき、有限集合の上の和（", ref("def_sum_over_finite_set"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\right)=\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\mu_{x,y}\cdot_V u_{x,y}\right)`),
+      paragraph([
+        "内側の和は、", math(String.raw`x`), " を固定して ", math(String.raw`Y`), " の各元 ", math(String.raw`y`), " に係数と元を与えた族の和であり、外側の和は、",
+        math(String.raw`X`), " の各元 ", math(String.raw`x`), " にその内側の和と係数 ", math(String.raw`1_{\mathbb{C}}`), " を与えた族の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、各 ", math(String.raw`x\in X`), " について ", math(String.raw`\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}=\sum_{y\in Y}\mu_{x,y}\cdot_V u_{x,y}`),
+        " が成り立つ。", ref("claim_sum_over_finite_set_depends_only_on_terms"), " を、有限集合 ", math(String.raw`Y`), " と、", math(String.raw`y\in Y`), " に ",
+        math(String.raw`v_{x,y},\ u_{x,y},\ \lambda_{x,y},\ \mu_{x,y}`), " を与える族に当てる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\right)
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\mu_{x,y}\cdot_V u_{x,y}\right)
+&&\left(\because\ \text{各}\ x\ \text{で準備。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values",
+    kind: "claim",
+    title: { text: "線型写像は、有限集合の上の和を項にもつ有限集合の上の和を、値の同じ形の和へ移す" },
+    labels: ["claim_linear_map_maps_double_sum_over_finite_sets_to_double_sum_of_values"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " と ", math(String.raw`(U,+_U,\cdot_U,0_U)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、",
+        math(String.raw`f:V\to U`), " を線型写像（", ref("def_linear_map"), "）、", math(String.raw`X`), " と ", math(String.raw`Y`), " を有限集合（",
+        ref("def_numbering_of_finite_set"), "）とし、", math(String.raw`X`), " の元 ", math(String.raw`x`), " と ", math(String.raw`Y`), " の元 ", math(String.raw`y`),
+        " の組ごとに、", math(String.raw`V`), " の元 ", math(String.raw`v_{x,y}`), " と ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\lambda_{x,y}`),
+        " が一つずつ与えられているとする。このとき、有限集合の上の和（", ref("def_sum_over_finite_set"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\right)\right)=\sum_{x\in X}1_{\mathbb{C}}\cdot_U\left(\sum_{y\in Y}\lambda_{x,y}\cdot_U f(v_{x,y})\right)`),
+      paragraph(["左辺の二つの和は ", math(String.raw`V`), " の中の和、右辺の二つの和は ", math(String.raw`U`), " の中の和である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x\in X`), " について ", math(String.raw`s_x:=\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\in V`), " と置く。準備として、各 ", math(String.raw`x\in X`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f(s_x)
+&=f\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\right)
+&&\left(\because\ s_x\ \text{の置き方}\right)\\
+&=\sum_{y\in Y}\lambda_{x,y}\cdot_U f(v_{x,y})
+&&\left(\because\ \text{有限集合}\ Y\text{、}v_y:=v_{x,y}\text{、}\lambda_y:=\lambda_{x,y}\ \text{として当てる。}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}\right)\right)
+&=f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V s_x\right)
+&&\left(\because\ s_x\ \text{の置き方}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_U f(s_x)
+&&\left(\because\ \lambda_x:=1_{\mathbb{C}}\text{、}v_x:=s_x\ \text{として当てる。}\blkref{claim_linear_map_maps_sum_over_finite_set_to_sum_of_values}\right)\\
+&=\sum_{x\in X}1_{\mathbb{C}}\cdot_U\left(\sum_{y\in Y}\lambda_{x,y}\cdot_U f(v_{x,y})\right)
+&&\left(\because\ \text{各}\ x\ \text{で準備。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_algebra_heading",
     kind: "heading",
     level: 2,
@@ -7574,6 +7646,162 @@ L^{b}_m
         " の定義により ",
         math(String.raw`\varphi(a)=\psi(a)`),
         " である。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "ℂ-代数の準同型の合成は ℂ-代数の準同型である" },
+    labels: ["claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), "、", math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`), "、", math(String.raw`(C,+_C,\cdot_C,\ast_C,0_C,1_C)`),
+        " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`\varphi:A\to B`), " と ", math(String.raw`\psi:B\to C`), " を ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"), "）とする。合成 ", math(String.raw`\psi\circ\varphi:A\to C`), "（", math(String.raw`(\psi\circ\varphi)(x):=\psi\bigl(\varphi(x)\bigr)`),
+        "）は、", math(String.raw`A`), " から ", math(String.raw`C`), " への ℂ-代数の準同型である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`x,y\in A`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意にとる。"]),
+      displayMath(String.raw`\begin{aligned}
+(\psi\circ\varphi)(x+_A y)
+&=\psi\bigl(\varphi(x+_A y)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\psi\bigl(\varphi(x)+_B\varphi(y)\bigr)
+&&\left(\because\ \varphi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\psi\bigl(\varphi(x)\bigr)+_C\psi\bigl(\varphi(y)\bigr)
+&&\left(\because\ \psi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=(\psi\circ\varphi)(x)+_C(\psi\circ\varphi)(y)
+&&\left(\because\ \text{合成の定義}\right),\\[4pt]
+(\psi\circ\varphi)(x\cdot_A y)
+&=\psi\bigl(\varphi(x\cdot_A y)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\psi\bigl(\varphi(x)\cdot_B\varphi(y)\bigr)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\psi\bigl(\varphi(x)\bigr)\cdot_C\psi\bigl(\varphi(y)\bigr)
+&&\left(\because\ \psi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=(\psi\circ\varphi)(x)\cdot_C(\psi\circ\varphi)(y)
+&&\left(\because\ \text{合成の定義}\right),\\[4pt]
+(\psi\circ\varphi)(1_A)
+&=\psi\bigl(\varphi(1_A)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\psi(1_B)
+&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=1_C
+&&\left(\because\ \psi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right),\\[4pt]
+(\psi\circ\varphi)(\lambda\ast_A x)
+&=\psi\bigl(\varphi(\lambda\ast_A x)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\psi\bigl(\lambda\ast_B\varphi(x)\bigr)
+&&\left(\because\ \varphi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\lambda\ast_C\psi\bigl(\varphi(x)\bigr)
+&&\left(\because\ \psi\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\lambda\ast_C(\psi\circ\varphi)(x)
+&&\left(\because\ \text{合成の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "一つ目から三つ目の等式により、", math(String.raw`\psi\circ\varphi`), " は ", math(String.raw`U_{\mathrm{ring}}(A)`), " から ", math(String.raw`U_{\mathrm{ring}}(C)`),
+        " への環の準同型（", ref("def_ring_homomorphism"), "）であり、一つ目と四つ目の等式により、", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(C)`), " への線型写像（", ref("def_linear_map"), "）である（", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。したがって ", math(String.raw`\psi\circ\varphi`), " は ℂ-代数の準同型である（", ref("def_complex_algebra_homomorphism"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_identity_map_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "恒等写像は ℂ-代数の準同型である" },
+    labels: ["claim_identity_map_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）とし、写像 ", math(String.raw`\mathrm{id}_A:A\to A`), " を ",
+        math(String.raw`\mathrm{id}_A(x):=x`), " で定める。このとき ", math(String.raw`\mathrm{id}_A`), " は ", math(String.raw`A`), " から ", math(String.raw`A`),
+        " への ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`x,y\in A`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意にとる。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{id}_A(x+_A y)
+&=x+_A y
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right)\\
+&=\mathrm{id}_A(x)+_A\mathrm{id}_A(y)
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right),\\[4pt]
+\mathrm{id}_A(x\cdot_A y)
+&=x\cdot_A y
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right)\\
+&=\mathrm{id}_A(x)\cdot_A\mathrm{id}_A(y)
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right),\\[4pt]
+\mathrm{id}_A(1_A)
+&=1_A
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right),\\[4pt]
+\mathrm{id}_A(\lambda\ast_A x)
+&=\lambda\ast_A x
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right)\\
+&=\lambda\ast_A\mathrm{id}_A(x)
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "一つ目から三つ目の等式により、", math(String.raw`\mathrm{id}_A`), " は ", math(String.raw`U_{\mathrm{ring}}(A)`), " から ", math(String.raw`U_{\mathrm{ring}}(A)`),
+        " への環の準同型（", ref("def_ring_homomorphism"), "）であり、一つ目と四つ目の等式により、", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像（", ref("def_linear_map"), "）である（", ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。したがって ", math(String.raw`\mathrm{id}_A`), " は ℂ-代数の準同型である（", ref("def_complex_algebra_homomorphism"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_algebra_homomorphism_maps_ordered_product_to_ordered_product",
+    kind: "claim",
+    title: { text: "ℂ-代数の準同型は、番号順の積を値の番号順の積へ移す" },
+    labels: ["claim_algebra_homomorphism_maps_ordered_product_to_ordered_product"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " と ", math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、",
+        math(String.raw`\varphi:A\to B`), " を ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), " とし、",
+        math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`), " の元 ", math(String.raw`x_k`),
+        " が一つずつ与えられているとする。このとき、番号順の積（", ref("def_ordered_product_in_algebra"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\varphi\left(\prod_{A,\,k=1}^{n}x_k\right)=\prod_{B,\,k=1}^{n}\varphi(x_k)`),
+      paragraph([
+        "右辺は、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`B`), " の元 ", math(String.raw`\varphi(x_k)`),
+        " を与えた族の、", math(String.raw`B`), " の中の番号順の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m\in\{0,1,\dots,n\}`), " について、", math(String.raw`\Pi^{A}_m`), " を ", math(String.raw`x_1,\dots,x_n`), " の ", math(String.raw`A`),
+        " の中の部分積、", math(String.raw`\Pi^{B}_m`), " を ", math(String.raw`\varphi(x_1),\dots,\varphi(x_n)`), " の ", math(String.raw`B`),
+        " の中の部分積とする（", ref("def_ordered_product_in_algebra"), "）。", math(String.raw`\varphi(\Pi^{A}_m)=\Pi^{B}_m`), " を ", math(String.raw`m`),
+        " についての帰納法で示す。", math(String.raw`m=0`), " のとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\Pi^{A}_0)
+&=\varphi(1_A)
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=1_B
+&&\left(\because\ \varphi\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\Pi^{B}_0
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m\in\{1,\dots,n\}`), " とし、", math(String.raw`\varphi(\Pi^{A}_{m-1})=\Pi^{B}_{m-1}`), " が成り立つとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi(\Pi^{A}_m)
+&=\varphi\bigl(\Pi^{A}_{m-1}\cdot_A x_m\bigr)
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\varphi(\Pi^{A}_{m-1})\cdot_B\varphi(x_m)
+&&\left(\because\ \varphi\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=\Pi^{B}_{m-1}\cdot_B\varphi(x_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Pi^{B}_m
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([
+        "したがってすべての ", math(String.raw`m\in\{0,1,\dots,n\}`), " について ", math(String.raw`\varphi(\Pi^{A}_m)=\Pi^{B}_m`), " である。", math(String.raw`m:=n`),
+        " とすると、", math(String.raw`\Pi^{A}_n=\prod_{A,\,k=1}^{n}x_k`), "、", math(String.raw`\Pi^{B}_n=\prod_{B,\,k=1}^{n}\varphi(x_k)`), " なので（",
+        ref("def_ordered_product_in_algebra"), "）主張が従う。",
       ]),
     ],
   },
