@@ -14,8 +14,9 @@
 `a b = -s^2`（`gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq`、人手 `relation_of_gamma_2_theta_tilde` (2)）
 を渡すことだけである。仮定として渡す `γ_2` の関係は `a b = -r^2` だけで、具体版の Step 2 が経る
 `b = -ā` と `a ā = r^2` の 2 段は渡していない（`a b = -r^2` 自体は上流で `b = -ā` から導かれている）。
-`λ_+ ≠ λ_-` と `det P̌_μ ≠ 0` には `2r ≠ 0`（`r > 0` から）、`det P̌_μ` には列が `c v_{±,μ}` であること
-（`checkPmat_col_pos`・`checkPmat_col_neg`）と `c = 1/(2√M b)`、`(√M)^2 = M` を渡す。
+`λ_+ ≠ λ_-` には `2r ≠ 0`（`r > 0` から）を渡す。`det P̌_μ` には、略記 `ρ := r_ℂ`、`u := 2_ℂ s`、`d := u b`、
+`q := (2_ℂ ℓ) b` について `u, d ∈ ℂ^×`（具体版の Step 1）と前置き (d) `d u = 2 q` を、`det P̌_μ ≠ 0` にはさらに
+`ρ ≠ 0`（`r > 0` から）を渡す。
 Step 4 には、具体版の 2 段目と同じ `inv_eq_detInv_smul_adjTwo`・`mul_detInv_smul_adjTwo`（人手
 `two_sided_inverse_of_two_by_two_with_nonzero_det`）で出した `P̌_μ P̌_μ⁻¹ = I` を渡す。
 -/
@@ -91,32 +92,38 @@ theorem AMat_mul_checkPmat_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (
     (gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq P.const (thetaTilde M μ))
     (checkPmat_col_pos P hM μ) (checkPmat_col_neg P hM μ)
 
-/-- **`det_checkPmat`（`diagonalization_check_P_D` Step 3）を `NecSuf.det_of_cols` の特殊化として導いたもの**。
-必要十分版の値 `-2c^2 r b` に `c = 1/(2√M b)` と `(√M)^2 = M` を入れると具体版の値になる。 -/
+/-- **`det_checkPmat_eq_mul_inv`（`diagonalization_check_P_D` Step 3 の鎖の 1〜28 行目）を
+`NecSuf.det_of_quotient_entries_eq_mul_inv` の特殊化として導いたもの**（渡すものは下の `det_checkPmat_of_necSuf` と同じ）。 -/
+theorem det_checkPmat_eq_mul_inv_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
+    (checkPmat P.const M μ).det
+      = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) *
+          (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ))⁻¹ :=
+  NecSuf.det_of_quotient_entries_eq_mul_inv _ _ _ _ (checkU_ne_zero hM) (checkD_ne_zero P hM μ)
+    (checkD_mul_checkU P.const M μ)
+
+/-- **`det_checkPmat`（`diagonalization_check_P_D` Step 3）を `NecSuf.det_of_quotient_entries` の特殊化として導いたもの**。
+体を `ℂ`、`ρ := r_ℂ`、`u := 2_ℂ s`、`d := u b`、`q := (2_ℂ ℓ) b` とし、`u, d ∈ ℂ^×` に具体版の Step 1
+（`checkU_ne_zero`・`checkD_ne_zero`）を、`d u = 2 q` に具体版の前置き (d)（`checkD_mul_checkU`）を渡す。
+`P̌_μ` の成分は `checkPmat` の定義そのものである。 -/
 theorem det_checkPmat_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     (checkPmat P.const M μ).det
       = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) /
-          (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) := by
-  have hb := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hs := sqrtM_ne_zero hM
-  have hM' : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  have hsq : sqrtM M ^ 2 = (M : ℂ) := sqrtM_sq M
-  rw [NecSuf.det_of_cols _ _ _ (checkPmat_col_pos P hM μ) (checkPmat_col_neg P hM μ), checkC]
-  field_simp
-  rw [hsq]
-  ring
+          (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) :=
+  NecSuf.det_of_quotient_entries _ _ _ _ (checkU_ne_zero hM) (checkD_ne_zero P hM μ)
+    (checkD_mul_checkU P.const M μ)
 
-/-- **`det_checkPmat_ne_zero`（`diagonalization_check_P_D` Step 3 の結論）を `NecSuf.det_of_cols_ne_zero` の特殊化として導いたもの**。 -/
+/-- **`det_checkPmat_ne_zero`（`diagonalization_check_P_D` Step 3 の結論）を `NecSuf.det_of_quotient_entries_ne_zero` の特殊化として導いたもの**。
+`ρ ≠ 0` には、具体版と同じく `r > 0`（`absGamma2_thetaTilde_pos`、人手 `relation_of_gamma_2_theta_tilde` (4)）と
+`ρ = (r, 0)` の第 1 成分の比較を渡す。 -/
 theorem det_checkPmat_ne_zero_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     (checkPmat P.const M μ).det ≠ 0 := by
-  have hb := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hr : ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) ≠ 0 := by
-    simp only [ne_eq, Complex.ofReal_eq_zero]
-    exact ne_of_gt (absGamma2_thetaTilde_pos P hM μ)
-  have hc : checkC P.const M μ ≠ 0 :=
-    one_div_ne_zero (mul_ne_zero (mul_ne_zero two_ne_zero (sqrtM_ne_zero hM)) hb)
-  exact NecSuf.det_of_cols_ne_zero _ _ _ (checkPmat_col_pos P hM μ) (checkPmat_col_neg P hM μ)
-    (mul_ne_zero two_ne_zero hr) hc hb
+  have hρ : ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) ≠ 0 := by
+    intro h
+    have hre := congrArg Complex.re h
+    rw [Complex.ofReal_re, Complex.zero_re] at hre
+    exact ne_of_gt (absGamma2_thetaTilde_pos P hM μ) hre
+  exact NecSuf.det_of_quotient_entries_ne_zero _ _ _ _ (checkU_ne_zero hM) (checkD_ne_zero P hM μ)
+    (checkD_mul_checkU P.const M μ) hρ
 
 /-- **`AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`（`diagonalization_check_P_D` Step 4）を
 `NecSuf.eq_conj_of_mul_eq` の特殊化として導いたもの**。

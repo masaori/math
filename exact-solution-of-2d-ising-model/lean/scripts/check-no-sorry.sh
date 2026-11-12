@@ -1558,8 +1558,9 @@ targets=(
   Ising2D.NecSuf.skew2_det_eq_zero_iff
   Ising2D.NecSuf.skew2_eigenvalue_iff
   Ising2D.NecSuf.skew2_eigenvalues_ne
-  Ising2D.NecSuf.det_of_cols
-  Ising2D.NecSuf.det_of_cols_ne_zero
+  Ising2D.NecSuf.det_of_quotient_entries_eq_mul_inv
+  Ising2D.NecSuf.det_of_quotient_entries
+  Ising2D.NecSuf.det_of_quotient_entries_ne_zero
   Ising2D.NecSuf.skew2_mulVec_pos
   Ising2D.NecSuf.skew2_mulVec_neg
   Ising2D.NecSuf.mulVec_smul_of_mulVec_eq
@@ -2184,6 +2185,7 @@ targets=(
   Ising2D.charPoly_factor_thetaTilde_of_necSuf
   Ising2D.eigenvalue_AMat_iff_of_necSuf
   Ising2D.lambdaPlusR_ne_lambdaMinusR_of_necSuf
+  Ising2D.det_checkPmat_eq_mul_inv_of_necSuf
   Ising2D.det_checkPmat_of_necSuf
   Ising2D.det_checkPmat_ne_zero_of_necSuf
   Ising2D.det_AMat_sub_smul_eq_zero_iff_of_necSuf

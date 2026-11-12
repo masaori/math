@@ -29,8 +29,9 @@
 * `diagonalization_check_P_D` Step 2: 前置きの `Ď` が対角行列であること `checkDmat_offdiag` ↔ `skew2_diag_offdiag`、
   6 行の鎖 `AMat_mul_checkPmat` ↔ `skew2_mul_of_cols`（同じ 6 段。`P̌ = [v_+ v_-]` の `checkPmat_eq_cols` は列の仮定 `hcol0`・`hcol1` から
   同じ形で作り、列ごとの作用は `NecSuf/MatColumnwise.lean`、対角行列の右乗は `NecSuf/ColumnMatrixTimesDiagonalMatrix.lean`）。
-* `diagonalization_check_P_D` Step 3: `det P̌_μ` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero` ↔ `det_of_cols`・`det_of_cols_ne_zero`
-  （具体版は `c = 1/(2√M b)` を代入した成分で計算し、必要十分版は列を `c(∓s, b)` のまま計算する）。
+* `diagonalization_check_P_D` Step 3: `det P̌_μ` の 29 行の鎖 `det_checkPmat_eq_mul_inv`（1〜28 行目）・`det_checkPmat` と
+  `det_checkPmat_ne_zero` ↔ `det_of_quotient_entries_eq_mul_inv`・`det_of_quotient_entries`・`det_of_quotient_entries_ne_zero`
+  （同じ 29 行。具体版の略記 `ρ, u, d, q` を体の任意の元とし、前置き (d) `d u = 2 q` を仮定で受ける）。
 * `diagonalization_check_P_D` Step 4: `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` ↔ `eq_conj_of_mul_eq`。
 * 必要十分版を置かない段: Step 2 の `v_± ≠ 0`（第 2 成分が `b ≠ 0` であることの 1 行）と、
   `diagonalization_check_P_D` Step 1・Step 2 の `√M ≠ 0` と `c b = 1/(2√M)`（`c` を具体的に選んだことの確認）。
@@ -42,14 +43,16 @@
 
 * **行列が `!![g, a; -b, g]` の形（対角成分が等しい）であること**
 * **`a b = -s^2` を満たす `s` が係数環に取れること**
-* 固有値が `g ± s` に限るという段（`skew2_det_eq_zero_iff`・`skew2_eigenvalue_iff`）と `det P ≠ 0` の段だけは、
+* 固有値が `g ± s` に限るという段（`skew2_det_eq_zero_iff`・`skew2_eigenvalue_iff`）だけは、
   **係数環に零因子が無いこと**（`skew2_eigenvalue_iff` はさらに `0 ≠ 1`）
-* 2 つの固有値が異なること（`skew2_eigenvalues_ne`）と `det P ≠ 0` には、**`2 s ≠ 0`**
+* 2 つの固有値が異なること（`skew2_eigenvalues_ne`）には、**`2 s ≠ 0`**
   （具体版は `r > 0` という実数の順序を使うが、効いているのは `2 s ≠ 0` だけである。
   標数 2 の環、例えば `ZMod 2` で `g = 0`、`a = b = s = 1` とすると `ab = -s^2` なのに `g + s = g - s` となり、
   `P` の 2 列も一致して対角化できない）
 
-だけである。**係数は任意の可換環でよい。** 複素数であることも、`γ_1` が実数であることも、
+だけである。**係数は任意の可換環でよい。** ただし対角化の Step 3（`det P̌_μ` の 29 行の鎖）は、具体版が成分の分数
+`-ρ/d` などを `/` のまま計算するので、その段だけは**体**で述べる（`det_of_quotient_entries_eq_mul_inv` の docstring）。
+そこに効いているのは `u, d ≠ 0`、`d u = 2 q`、（`det P ≠ 0` には）`ρ ≠ 0` だけである。複素数であることも、`γ_1` が実数であることも、
 `γ_2` の具体形も、`θ` が半整数運動量であることも、`|γ_2|` が絶対値であることも効いていない。
 人手証明が `√(-γ_2γ_2(-θ))` として導入する量は、ここでは「`a b = -s^2` を満たす元 `s`」
 という仮定だけに退化する（分岐の選択は `s` と `-s` の交換にすぎない）。
@@ -300,33 +303,122 @@ theorem skew2_mul_of_cols (g a b s c : R) (hab : a * b = -s ^ 2) {P : Matrix (Fi
                                                                            -- 5 段目: 対角行列の右乗を右辺から左辺へ
     _ = P * !![g + s, 0; 0, g - s] := by rw [hP]                          -- 6 段目: `P = [v_+ v_-]` を戻す
 
-/-- **対角化の Step 3**（具体版 `det_checkPmat`）: 列が `c(-s, b)` と `c(s, b)` の行列の行列式は `-2c^2 s b`。 -/
-theorem det_of_cols (s b c : R) {P : Matrix (Fin 2) (Fin 2) R}
-    (hcol0 : (fun k => P k 0) = c • ![-s, b]) (hcol1 : (fun k => P k 1) = c • ![s, b]) :
-    P.det = -(2 * c ^ 2 * s * b) := by
-  have h00 : P 0 0 = c * (-s) := by simpa using congrFun hcol0 0
-  have h10 : P 1 0 = c * b := by simpa using congrFun hcol0 1
-  have h01 : P 0 1 = c * s := by simpa using congrFun hcol1 0
-  have h11 : P 1 1 = c * b := by simpa using congrFun hcol1 1
-  calc P.det
-      = P 0 0 * P 1 1 - P 0 1 * P 1 0 := Matrix.det_fin_two P                 -- 行列式の定義
-    _ = (c * (-s)) * (c * b) - (c * s) * (c * b) := by rw [h00, h11, h01, h10] -- 列の成分
-    _ = -(c ^ 2 * s * b) - c ^ 2 * s * b := by ring                            -- 環の四則
-    _ = -(2 * c ^ 2 * s * b) := by ring                                        -- 同類項の統合
+/-- **対角化の Step 3 の鎖の 1〜28 行目**（具体版 `det_checkPmat_eq_mul_inv`）:
+成分が `-ρ/d, ρ/d; 1/u, 1/u` の行列の行列式は `(-ρ) q^{-1}`。具体版の 28 行と 1 段ずつ同じ `calc` である。
 
-/-- **対角化の Step 3 の結論**（具体版 `det_checkPmat_ne_zero`）: `2 s ≠ 0`、`c ≠ 0`、`b ≠ 0` と零因子が無いことから
-`det P ≠ 0`。具体版は値 `(-ρ) q^{-1}`（`q := (2_ℂ ℓ) b`）について、`ρ ≠ 0`・`-1_ℂ ≠ 0` と `2_ℂ`・`ℓ`・`b ≠ 0` から
-群の積で示す（0 でない元の積が 0 でないことを使う点は同じ）。
+具体版の略記 `ρ := r_ℂ`、`u := 2_ℂ s`、`d := u b`、`q := (2_ℂ ℓ) b` を、ここでは任意の元 `ρ, u, d, q` とし、
+具体版が前置き (d) として示す `d u = 2 q` を仮定 `hdu` で受ける。前置き (c) `1 + 1 = 2`（11 行目）は体の
+`one_add_one_eq_two` である。
 
-`NoZeroDivisors R` は「0 でない元の積は 0 でない」の段（`mul_ne_zero`）に使う。これを外すと通らない
-（例えば `ZMod 4` で `s = b = 1`、`c = 2` とすると `2s ≠ 0`、`c ≠ 0`、`b ≠ 0` なのに `det P = -8 = 0`）。 -/
-theorem det_of_cols_ne_zero [NoZeroDivisors R] (s b c : R) {P : Matrix (Fin 2) (Fin 2) R}
-    (hcol0 : (fun k => P k 0) = c • ![-s, b]) (hcol1 : (fun k => P k 1) = c • ![s, b])
-    (hs : 2 * s ≠ 0) (hc : c ≠ 0) (hb : b ≠ 0) : P.det ≠ 0 := by
-  rw [det_of_cols s b c hcol0 hcol1]
-  have h : 2 * c ^ 2 * s * b = (2 * s) * c ^ 2 * b := by ring
-  rw [h, neg_ne_zero]
-  exact mul_ne_zero (mul_ne_zero hs (pow_ne_zero 2 hc)) hb
+仮定について:
+* `hu`（25 行目の `u u^{-1} = 1`）と `hd`（27 行目の `d d^{-1} = 1`）は外すと通らない。`ZMod 2` で
+  `ρ = d = q = 1`、`u = 0` とすると `d u = 0 = 2 q` なのに、`1/0 = 0` から左辺は `0`、右辺は `1` である。
+  `ρ = u = q = 1`、`d = 0` でも同じく左辺は `0`、右辺は `1` である。
+  この反例は標数 2 と Lean の `x/0 = 0` の規約に依る。標数が 2 でない体では、`u = 0` か `d = 0` なら `d u = 2 q` から
+  `q = 0` が出て両辺とも `0` なので、主張だけなら外せる。`hu`・`hd` が要るのは、25 行目・27 行目の段を通すためである。
+  逆に標数 2 の体では `d u ≠ 0 = 2 q` となり、`hu`・`hd`・`hdu` は同時には成り立たない（この主張は標数 2 では空である）。
+* 具体版が前置き (b) の群の積で示す `q ≠ 0`（16 行目の `q^{-1} q = 1`）は仮定しない。`d u = 2 q` と
+  `d, u ≠ 0` から `2 q ≠ 0`、したがって `q ≠ 0` が出る。具体版で `q ≠ 0` が `2_ℂ`・`ℓ`・`b` の各々から
+  出ていることは、この鎖には効いていない。
+* 係数は**体**（`Field`）とする。使うのは、`/` が逆元との積であること（`def_complex_quotient`）、`u, d, q` の逆元、
+  積の可換律・結合律・単位元、和の分配律、`-` と `-1` 倍の関係、`1 + 1 = 2` である。0 でない元すべてに逆元が
+  あることは `u, d, q` の 3 つにしか使わないが、可換環に `/` と一部の元の逆元だけを足す標準の型クラスは無いので、
+  `Field` で述べる。`ℂ` であることも、`ρ` が実数であることも、`d = u b` の分解も、`ℓ = s s` も効いていない。 -/
+theorem det_of_quotient_entries_eq_mul_inv {F : Type*} [Field F] (ρ u d q : F)
+    (hu : u ≠ 0) (hd : d ≠ 0) (hdu : d * u = 2 * q) :
+    (!![-ρ / d, ρ / d; 1 / u, 1 / u] : Matrix (Fin 2) (Fin 2) F).det = (-ρ) * q⁻¹ := by
+  have hq0 : q ≠ 0 := right_ne_zero_of_mul (hdu ▸ mul_ne_zero hd hu)
+                                        -- `2 q = d u ≠ 0`（具体版は前置き (b) の群の積）
+  calc (!![-ρ / d, ρ / d; 1 / u, 1 / u] : Matrix (Fin 2) (Fin 2) F).det
+      = (-ρ / d) * (1 / u) - (ρ / d) * (1 / u) :=
+        Matrix.det_fin_two_of _ _ _ _
+                                        -- 1 行目: `def_det_two_by_two`
+    _ = ((-ρ) * d⁻¹) * (1 * u⁻¹) - (ρ * d⁻¹) * (1 * u⁻¹) := by
+        simp only [div_eq_mul_inv]      -- 2 行目: `def_complex_quotient` を 4 か所へ
+    _ = ((-ρ) * d⁻¹) * u⁻¹ - (ρ * d⁻¹) * u⁻¹ := by
+        simp only [one_mul]             -- 3 行目: 積の単位元を 2 か所へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) - ρ * (d⁻¹ * u⁻¹) := by
+        rw [mul_assoc (-ρ), mul_assoc ρ]
+                                        -- 4 行目: 積の結合律を 2 か所へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + -(ρ * (d⁻¹ * u⁻¹)) := sub_eq_add_neg _ _
+                                        -- 5 行目: `def_complex_difference`
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + (-1) * (ρ * (d⁻¹ * u⁻¹)) := by
+        rw [neg_one_mul]                -- 6 行目: `multiply_by_minus_one`
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + ((-1) * ρ) * (d⁻¹ * u⁻¹) := by
+        rw [mul_assoc (-1 : F) ρ]       -- 7 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (d⁻¹ * u⁻¹) + (-ρ) * (d⁻¹ * u⁻¹) := by
+        rw [neg_one_mul]                -- 8 行目: `multiply_by_minus_one` を右辺から左辺へ
+    _ = 1 * ((-ρ) * (d⁻¹ * u⁻¹)) + 1 * ((-ρ) * (d⁻¹ * u⁻¹)) := by
+        rw [one_mul]                    -- 9 行目: 積の単位元を右辺から左辺へ 2 か所へ
+    _ = (1 + 1) * ((-ρ) * (d⁻¹ * u⁻¹)) := (add_mul _ _ _).symm
+                                        -- 10 行目: 右からの分配律を右辺から左辺へ
+    _ = 2 * ((-ρ) * (d⁻¹ * u⁻¹)) := by
+        rw [one_add_one_eq_two]         -- 11 行目: 前置き (c)
+    _ = (2 * (-ρ)) * (d⁻¹ * u⁻¹) := (mul_assoc _ _ _).symm
+                                        -- 12 行目: 積の結合律を右辺から左辺へ
+    _ = ((-ρ) * 2) * (d⁻¹ * u⁻¹) := by
+        rw [mul_comm (2 : F) (-ρ)]      -- 13 行目: 積の可換律
+    _ = (-ρ) * (2 * (d⁻¹ * u⁻¹)) := mul_assoc _ _ _
+                                        -- 14 行目: 積の結合律
+    _ = (-ρ) * (1 * (2 * (d⁻¹ * u⁻¹))) := by
+        rw [one_mul]                    -- 15 行目: 積の単位元を右辺から左辺へ
+    _ = (-ρ) * ((q⁻¹ * q) * (2 * (d⁻¹ * u⁻¹))) := by
+        rw [inv_mul_cancel₀ hq0]        -- 16 行目: `q` の逆元を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (q * (2 * (d⁻¹ * u⁻¹)))) := by
+        rw [mul_assoc q⁻¹ q]            -- 17 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * ((q * 2) * (d⁻¹ * u⁻¹))) := by
+        rw [mul_assoc q (2 : F)]        -- 18 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * ((2 * q) * (d⁻¹ * u⁻¹))) := by
+        rw [mul_comm q (2 : F)]         -- 19 行目: 積の可換律
+    _ = (-ρ) * (q⁻¹ * ((d * u) * (d⁻¹ * u⁻¹))) := by
+        rw [hdu]                        -- 20 行目: 前置き (d)（仮定 `hdu`）を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (d * (u * (d⁻¹ * u⁻¹)))) := by
+        rw [mul_assoc d u]              -- 21 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * (d * ((u * d⁻¹) * u⁻¹))) := by
+        rw [mul_assoc u d⁻¹]            -- 22 行目: 積の結合律を右辺から左辺へ
+    _ = (-ρ) * (q⁻¹ * (d * ((d⁻¹ * u) * u⁻¹))) := by
+        rw [mul_comm u d⁻¹]             -- 23 行目: 積の可換律
+    _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * (u * u⁻¹)))) := by
+        rw [mul_assoc d⁻¹ u]            -- 24 行目: 積の結合律
+    _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * 1))) := by
+        rw [mul_inv_cancel₀ hu]         -- 25 行目: `u` の逆元
+    _ = (-ρ) * (q⁻¹ * (d * d⁻¹)) := by
+        rw [mul_one]                    -- 26 行目: 積の単位元
+    _ = (-ρ) * (q⁻¹ * 1) := by
+        rw [mul_inv_cancel₀ hd]         -- 27 行目: `d` の逆元
+    _ = (-ρ) * q⁻¹ := by
+        rw [mul_one]                    -- 28 行目: 積の単位元
+
+/-- **対角化の Step 3**（具体版 `det_checkPmat`）: 成分が `-ρ/d, ρ/d; 1/u, 1/u` の行列の行列式は `(-ρ)/q`
+（29 行。28 行目までは `det_of_quotient_entries_eq_mul_inv`）。 -/
+theorem det_of_quotient_entries {F : Type*} [Field F] (ρ u d q : F)
+    (hu : u ≠ 0) (hd : d ≠ 0) (hdu : d * u = 2 * q) :
+    (!![-ρ / d, ρ / d; 1 / u, 1 / u] : Matrix (Fin 2) (Fin 2) F).det = (-ρ) / q := by
+  rw [det_of_quotient_entries_eq_mul_inv ρ u d q hu hd hdu]  -- 1〜28 行目
+  exact (div_eq_mul_inv _ _).symm       -- 29 行目: `def_complex_quotient`（`z → -ρ`, `w → q`）を右辺から左辺へ
+
+/-- **対角化の Step 3 の結論**（具体版 `det_checkPmat_ne_zero`）: `ρ ≠ 0` なら `det P ≠ 0`。
+具体版と同じく、鎖の最後から 2 行目 `(-ρ) q^{-1}` について、`-ρ = (-1) ρ`（`multiply_by_minus_one`）と
+`-1 ≠ 0`・`ρ ≠ 0` の積、`q^{-1} ≠ 0`（逆元）の積で示す。具体版は `-1_ℂ ≠ 0`・`ρ ≠ 0` を `ℂ` の第 1 成分の比較で、
+`ρ ≠ 0` を `r > 0` から出す。ここでは `-1 ≠ 0` は体の `1 ≠ 0` から、`ρ ≠ 0` は仮定 `hρ` で受ける
+（`ρ` が正の実数であることは効いていない）。`q ≠ 0` は上と同じく `d u = 2 q` と `d, u ≠ 0` から出す。
+
+`hρ` は外すと通らない（`ρ = 0` なら左辺の行列の第 1 行が `0` で `det P = 0`）。`hu`・`hd` も、この主張では
+どの体でも外すと通らない（`1/0 = 0`・`ρ/0 = 0` の規約のもとで、`u = 0` なら第 2 行、`d = 0` なら第 1 行が `0`）。 -/
+theorem det_of_quotient_entries_ne_zero {F : Type*} [Field F] (ρ u d q : F)
+    (hu : u ≠ 0) (hd : d ≠ 0) (hdu : d * u = 2 * q) (hρ : ρ ≠ 0) :
+    (!![-ρ / d, ρ / d; 1 / u, 1 / u] : Matrix (Fin 2) (Fin 2) F).det ≠ 0 := by
+  have hq0 : q ≠ 0 := right_ne_zero_of_mul (hdu ▸ mul_ne_zero hd hu)
+                                        -- `2 q = d u ≠ 0`
+  have hm1 : (-1 : F) ≠ 0 := neg_ne_zero.mpr one_ne_zero
+                                        -- `-1 ≠ 0`（体の `1 ≠ 0`）
+  have hnegρ : -ρ ≠ 0 := by
+    rw [← neg_one_mul]                  -- `multiply_by_minus_one`: `-ρ = (-1) ρ`
+    exact mul_ne_zero hm1 hρ            -- 0 でない元の積
+  rw [det_of_quotient_entries_eq_mul_inv ρ u d q hu hd hdu]
+                                        -- 鎖の最後から 2 行目 `(-ρ) q^{-1}`
+  exact mul_ne_zero hnegρ (inv_ne_zero hq0)
+                                        -- `q^{-1} ≠ 0`（逆元）と 0 でない元の積
 
 /-- **対角化の Step 4**（具体版 `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`）:
 `A P = P D` かつ `P Q = I` なら `A = P D Q`。

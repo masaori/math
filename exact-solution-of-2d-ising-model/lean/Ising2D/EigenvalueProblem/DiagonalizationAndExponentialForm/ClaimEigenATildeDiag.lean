@@ -56,8 +56,8 @@
 * `diagonalization_check_P_D` Step 3: 前置き (a) `s s = ℓ` の `sqrtM_mul_sqrtM`（5 行）、(b) `ℓ, q ∈ ℂ^×` の
   `checkM_ne_zero`・`checkW_ne_zero`、(c) `1_ℂ + 1_ℂ = 2_ℂ` の `one_add_one_eq_two_complex`（4 行）、(d) `d u = 2_ℂ q` の
   `checkD_mul_checkU`（12 行）［置かない］。`det P̌` の 29 行の鎖は 28 行目までの `det_checkPmat_eq_mul_inv` と 29 行目の
-  `det_checkPmat`（人手と 1 段ずつの `calc`）、`ρ`・`-1_ℂ` の第 1 成分の比較と群の積・逆元による `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`。
-  必要十分版は列の形 `c(∓s, b)` から環の四則で値を出す別の経路のまま］。
+  `det_checkPmat`（人手と 1 段ずつの `calc`）、`ρ`・`-1_ℂ` の第 1 成分の比較と群の積・逆元による `det_checkPmat_ne_zero`［`det_of_quotient_entries_eq_mul_inv`・`det_of_quotient_entries`・
+  `det_of_quotient_entries_ne_zero`。同じ 29 行で、`ρ, u, d, q` を体の任意の元とし (d) を仮定で受ける］。
 * `diagonalization_check_P_D` Step 4: 冒頭の「`P̌_μ ∈ R^×` で `P̌_μ^{-1} = (det P̌_μ)^{-1} adj P̌_μ`」は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTwoSidedInverseOfTwoByTwo.lean` の
   `inv_eq_detInv_smul_adjTwo`・`mul_detInv_smul_adjTwo`（人手 `two_sided_inverse_of_two_by_two_with_nonzero_det`）。
