@@ -35206,7 +35206,7 @@ w^{\,1}
 &=\mathrm{ac}_i(t)-\mathrm{ac}_i(\widehat{w})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
 &=0-0
-&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{。}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
+&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{、}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
 &=0
 &&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
 \end{aligned}`),
@@ -35227,13 +35227,13 @@ w^{\,1}
 &=\mathrm{ac}_0(t-\widehat{w})\cdot 0
 +\mathrm{ac}_1(t-\widehat{w})\cdot 0
 +\sum_{i=2}^{k}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{k-i}(C)
-&&(\because\ k>m+1\ \text{より}\ k>m\ \text{かつ}\ k-1>m\text{。本主張の係数の仮定を 2 箇所へ同時に当てる})\\
+&&(\because\ k>m+1\ \text{より}\ k>m\ \text{かつ}\ k-1>m\text{、本主張の係数の仮定を 2 箇所へ同時に当てる})\\
 &=\mathrm{ac}_0(t-\widehat{w})\cdot 0
 +\mathrm{ac}_1(t-\widehat{w})\cdot 0
 +\sum_{i=2}^{k}0\cdot\mathrm{ac}_{k-i}(C)
 &&(\because\ \text{準備で計算した一次式の係数を各項へ同時に当てる})\\
 &=0+0+\sum_{i=2}^{k}0
-&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零。各箇所へ同時に当てる})\\
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零、各箇所へ同時に当てる})\\
 &=0
 &&(\because\ \overline{\mathbb{Q}}\ \text{の零元の有限和と零元との和})
 \end{aligned}`),
@@ -86065,6 +86065,14 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                 habitat: "C",
                 realEscape: "複素実現した有限モードを複素指数関数で表示するため、指数評価として複素数体へ脱出する。固定した代数的原始根の像は指定しない。",
                 verification: ["sagemath/check/twisted-modes-complex-roots-bijection"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn",
+                  "Ising2DLambda.RealEscape.complexRootSet_eq_candidates",
+                  "Ising2DLambda.NecSuf.RealEscape.bijOn_rootSet_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn_from_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
@@ -86094,8 +86102,21 @@ e_{L,c,k}^{L}
 \end{aligned}`),
                   paragraph([
                     "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " である。",
-                    "もし ", math(String.raw`e_{L,c,j}=e_{L,c,k}`), " なら、複素指数関数の周期性から ",
-                    math(String.raw`(j-k)/L\in\mathbb Z`), " となる。",
+                    math(String.raw`j,k\in\{0,\ldots,L-1\}`), " が ",
+                    math(String.raw`e_{L,c,j}=e_{L,c,k}`), " を満たすとする。",
+                    "複素指数関数の周期性（", math(String.raw`s,t\in\mathbb C`), " が ",
+                    math(String.raw`\exp(s)=\exp(t)`), " を満たすなら、ある ",
+                    math(String.raw`n\in\mathbb Z`), " で ", math(String.raw`s=t+2\pi i n`),
+                    "）を ", math(String.raw`s=2\pi i(j+c/2)/L`), "、",
+                    math(String.raw`t=2\pi i(k+c/2)/L`), " に当てて ",
+                    math(String.raw`n\in\mathbb Z`), " を取ると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathbb C\text{ の四則}\bigr)\\
+&=\frac{L}{2\pi i}\left(\frac{2\pi i(k+c/2)}{L}+2\pi i n\right)-\frac c2&&\bigl(\because\ \text{周期性から取った }n\bigr)\\
+&=k+nL&&\bigl(\because\ \mathbb C\text{ の四則}\bigr).
+\end{aligned}`),
+                  paragraph([
                     math(String.raw`0\le j,k<L`), " より、差の範囲は次の式鎖で分かる。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
@@ -86103,15 +86124,20 @@ e_{L,c,k}^{L}
 &<L&&\bigl(\because\ j<L,\ k\ge0\bigr).
 \end{aligned}`),
                   paragraph([
-                    "従って ", math(String.raw`-1<(j-k)/L<1`),
-                    " であり、この区間に属する整数は零だけなので ", math(String.raw`j=k`),
-                    " である。よってこれらは相異なる ",
+                    math(String.raw`j-k=nL`), " なので ", math(String.raw`-L<nL<L`),
+                    " であり、", math(String.raw`L>0`), " で割って ", math(String.raw`-1<n<1`),
+                    " である。この区間に属する整数は零だけなので ", math(String.raw`n=0`),
+                    "、", math(String.raw`j=k+0L=k`), " である。よってこれらは相異なる ",
                     math(String.raw`L`), " 個の根である。",
                   ]),
                   paragraph([
                     math(String.raw`X^L-(-1)^c\in\mathbb C[X]`), " は零でない次数 ",
                     math(String.raw`L`), " の多項式なので、異なる複素根を ",
-                    math(String.raw`L`), " 個より多く持たない。従って ",
+                    math(String.raw`L`), " 個より多く持たない。従って ", math(String.raw`E_{L,c}`),
+                    " は有限集合で、元は ", math(String.raw`L`), " 個以下である。",
+                    math(String.raw`\{e_{L,c,k}\mid 0\le k<L\}`), " は ", math(String.raw`E_{L,c}`),
+                    " の部分集合で ", math(String.raw`L`), " 個の元を持つ。",
+                    "有限集合の部分集合の元の個数が全体の元の個数以上なら、部分集合は全体に一致する。従って ",
                     math(String.raw`E_{L,c}=\{e_{L,c,k}\mid 0\le k<L\}`), " かつ ",
                     math(String.raw`|E_{L,c}|=L`), " である。",
                   ]),
@@ -86121,8 +86147,13 @@ e_{L,c,k}^{L}
                     " に含まれる。", ref("claim_complex_realization_injective"),
                     " により二つとも単射である。", ref("claim_twisted_mode_sets_card"),
                     " により各定義域は ", math(String.raw`L`), " 個の元を持つ。",
-                    "像は ", math(String.raw`E_{L,c}`), " と同じ ", math(String.raw`L`),
-                    " 個の元を持つので全射であり、各制限写像は全単射である。",
+                    "単射なので、像 ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\mathcal U_a)`),
+                    " は定義域と同じ ", math(String.raw`L`), " 個の元を持ち、",
+                    math(String.raw`|E_{L,a}|=L`), " である。有限集合 ", math(String.raw`E_{L,a}`),
+                    " の部分集合が全体と同じ個数の元を持つので、像は ", math(String.raw`E_{L,a}`),
+                    " に一致し、制限写像は全射である。", math(String.raw`\mathcal W_b`),
+                    " と ", math(String.raw`E_{L,b}`), " についても同じである。",
+                    "従って各制限写像は全単射である。",
                   ]),
                 ],
               },
