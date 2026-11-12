@@ -408,8 +408,8 @@ theorem siteOp_mem_adjoin (k : Fin M) (B : Matrix (Fin 2) (Fin 2) ℂ) :
 
 /-- 単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` は、各因子をサイト作用素として含む部分多元環に属する。
 
-原文 Step 3 の「`σ_1^{a_1} ⋯ σ_M^{a_M} = e_1 ⊗ ⋯ ⊗ e_M`」（異サイト因子の積公式の反復）に対応。
-Lean ではサイトの有限集合 `s` に関する帰納法で書く。 -/
+人手 Step 3 後半の「`E_k := I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（第 `k` 因子だけが `e_k`）について `E_1 ⋯ E_M = e_1 ⊠ ⋯ ⊠ e_M`」
+（`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` についての帰納法）に対応する。Lean は有限集合 `s` についての帰納法で書く。`E_k` は Lean の `siteOp k (x k)`。 -/
 theorem siteProd_mem (A : Subalgebra ℂ (TensorPow M)) (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ)
     (h : ∀ k, siteOp k (x k) ∈ A) : siteProd M x ∈ A := by
   classical

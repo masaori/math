@@ -1013,26 +1013,115 @@ R_{22}
         ref("tensor_basis"),
         " (2) を基底 ",
         math(String.raw`\mathcal{B}`),
-        " に適用した）。一方、各 ",
-        math(String.raw`e_1\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}}`),
-        " について、各 ",
+        " に適用した）。一方、",
+        math(String.raw`e_1,\dots,e_{M_{\mathrm{col}}}\in\mathcal{B}`),
+        " を取り、各 ",
+        math(String.raw`k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について第 ",
         math(String.raw`k`),
-        " で ",
-        math(String.raw`\sigma_k^{a_k}:=I\boxtimes\cdots\boxtimes\overbrace{e_k}^{k\text{th}}\boxtimes\cdots\boxtimes I`),
-        " とおくと、Step 1 の異サイト積公式を繰り返して",
+        " 因子だけを ",
+        math(String.raw`e_k`),
+        " にした行列",
       ]),
       displayMath(
-        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_{M_{\mathrm{col}}}^{a_{M_{\mathrm{col}}}} = e_1\boxtimes e_2\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}} \quad (\because \text{クロネッカー積の積の規則})`,
+        String.raw`E_k := I\boxtimes\cdots\boxtimes\overbrace{e_k}^{k\text{th}}\boxtimes\cdots\boxtimes I \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
-        "Step 2 より各 ",
-        math(String.raw`\sigma_k^{a_k}\in\mathcal{A}`),
-        "（",
-        math(String.raw`I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\in\mathcal{A}`),
-        " も含む）であり、",
+        "を置く（",
+        ref("def_kronecker"),
+        " のクロネッカー積）。各 ",
+        math(String.raw`E_k`),
+        " は ",
         math(String.raw`\mathcal{A}`),
-        " は積について閉じるから ",
-        math(String.raw`e_1\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}} = \sigma_1^{a_1}\cdots\sigma_{M_{\mathrm{col}}}^{a_{M_{\mathrm{col}}}}\in\mathcal{A}`),
+        " に属する。",
+        math(String.raw`e_k = I`),
+        " のときは ",
+        math(String.raw`E_k = I\boxtimes\cdots\boxtimes I = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "（",
+        ref("kronecker_product_rule"),
+        " (2)）であり、(ii) により ",
+        math(String.raw`E_k\in\mathcal{A}`),
+        "。",
+        math(String.raw`e_k = \sigma^x,\ \sigma^y,\ \sigma^z`),
+        " のときはそれぞれ ",
+        math(String.raw`E_k = \sigma_k^x,\ \sigma_k^y,\ \sigma_k^z`),
+        "（",
+        ref("def_site_pauli_matrices"),
+        "）であり、Step 2 により ",
+        math(String.raw`E_k\in\mathcal{A}`),
+        "。積 ",
+        math(String.raw`E_1E_2\cdots E_{M_{\mathrm{col}}} := \prod_{j=1}^{M_{\mathrm{col}}} E_j`),
+        " は ",
+        ref("def_finite_product_of_matrices"),
+        " の左から順に掛けた積、すなわち ",
+        math(String.raw`P_1 := E_1`),
+        "、",
+        math(String.raw`P_{s+1} := P_s\,E_{s+1}`),
+        "（",
+        math(String.raw`1 \leq s < M_{\mathrm{col}}`),
+        "）で定めた ",
+        math(String.raw`P_{M_{\mathrm{col}}}`),
+        " である。",
+        math(String.raw`s \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について「",
+        math(String.raw`P_s = e_1\boxtimes\cdots\boxtimes e_s\boxtimes I\boxtimes\cdots\boxtimes I`),
+        "（",
+        math(String.raw`I`),
+        " は ",
+        math(String.raw`M_{\mathrm{col}}-s`),
+        " 個。",
+        math(String.raw`s = M_{\mathrm{col}}`),
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）かつ ",
+        math(String.raw`P_s\in\mathcal{A}`),
+        "」を ",
+        math(String.raw`s`),
+        " についての帰納法で示す。",
+        math(String.raw`s = 1`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_1
+&= E_1
+&&(\because\ P_1\ \text{の定義})\\
+&= e_1\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ E_1\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`P_1 = E_1\in\mathcal{A}`),
+        "。",
+        math(String.raw`s < M_{\mathrm{col}}`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{s+1}
+&= P_s\,E_{s+1}
+&&(\because\ P_{s+1}\ \text{の定義})\\
+&= \Bigl(e_1\boxtimes\cdots\boxtimes e_s\boxtimes\overbrace{I}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
+   \Bigl(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{e_{s+1}}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
+&&(\because\ \text{帰納法の仮定と}\ E_{s+1}\ \text{の定義})\\
+&= (e_1I)\boxtimes\cdots\boxtimes(e_sI)\boxtimes(Ie_{s+1})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{kronecker_product_rule}\ (1))\\
+&= e_1\boxtimes\cdots\boxtimes e_s\boxtimes(Ie_{s+1})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を第}\ 1\ \text{から第}\ s\ \text{因子へ同時に適用})\\
+&= e_1\boxtimes\cdots\boxtimes e_s\boxtimes e_{s+1}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to e_{s+1}))\\
+&= e_1\boxtimes\cdots\boxtimes e_{s+1}\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to I)\ \text{を第}\ s+2\ \text{以降の因子へ同時に適用})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`P_s\in\mathcal{A}`),
+        "（帰納法の仮定）と ",
+        math(String.raw`E_{s+1}\in\mathcal{A}`),
+        " と (iv) から ",
+        math(String.raw`P_{s+1} = P_sE_{s+1}\in\mathcal{A}`),
+        "。",
+        math(String.raw`s = M_{\mathrm{col}}`),
+        " として ",
+        math(String.raw`e_1\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}} = P_{M_{\mathrm{col}}}\in\mathcal{A}`),
         "。よって ",
         math(String.raw`\mathcal{B}^{\boxtimes M_{\mathrm{col}}}\subseteq\mathcal{A}`),
         "。",
@@ -1057,6 +1146,7 @@ R_{22}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 の後半で、定義の無い添字 a_k を持つ σ_k^{a_k} を第 k 因子だけを e_k にした行列と呼んでいた（a_k は展開の成分 a_{11} などと文字も重なっていた）。これを E_k := I⊠⋯⊠e_k⊠⋯⊠I と置き直し、e_k = I なら kronecker_product_rule (2) と (ii)、e_k = σ^x・σ^y・σ^z なら def_site_pauli_matrices と Step 2 で E_k ∈ 𝒜 となることを場合ごとに書いた。積 E_1⋯E_M = e_1⊠⋯⊠e_M の 1 行（根拠「クロネッカー積の積の規則」、前置きは「Step 1 の異サイト積公式を繰り返して」）を、def_finite_product_of_matrices の P_1 := E_1・P_{s+1} := P_s E_{s+1} についての帰納法（site_pauli_prefix_product_kronecker_form の証明と同じ形。帰納の一段は kronecker_product_rule (1)・右単位・左単位 2 回の 6 行）にし、同じ帰納法で P_s ∈ 𝒜 を (iv) から示した。主張と論法は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 3 の A の展開の 1 行（根拠「成分比較」）の係数の分母 2 を 2_ℂ と読み、2_ℂ ∈ ℂ^×（inclusion_rr_to_cc の第 1 成分の比較）と、4 つの分数が def_complex_quotient の商（w → 2_ℂ）であることを書いた。係数に κ_0・κ_x・κ_y・κ_z と名前を付け、準備 (a)〜(g)（(2_ℂz)2_ℂ^{-1} = z、z + z = 2_ℂz、z + (−z) = 0_ℂ、(z+w)+(z−w) = 2_ℂz、(z+w)−(z−w) = 2_ℂw、ii = −1_ℂ、(−i)i = 1_ℂ）を置き、右辺の 4 成分がそれぞれ a_{11}・a_{12}・a_{21}・a_{22} になることを、体の公理と定義を 1 行に 1 つずつ当てる鎖にした（各鎖は R の定義・def_matrix_sum・def_matrix_scalar_multiple の 3 行で始まり、κ の定義を代入する行を置いてから def_complex_quotient で開く）。主張と展開の式は不変。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "タイトルと statement にあった多元環の一般論の語彙（「環として生成する」「C 上の単位的結合多元環」" +

@@ -75,7 +75,8 @@ noncomputable def kroneckerTensorPowBasis :
   NecSuf.basisOfLinearEquiv (matTensorPowBasis M) (tensorPowAlgEquiv M).toLinearEquiv
 
 /-- 移送した基底の像は、各サイトに行列単位を載せた積 `siteProd` である
-（人手証明 Step 3 後半の `σ_1^{a_1} ⋯ σ_M^{a_M} = e_1 ⊗ ⋯ ⊗ e_M` に対応）。 -/
+（人手 `Z_Y_generate_algebra` の Step 3 後半の `E_1 ⋯ E_M = e_1 ⊠ ⋯ ⊠ e_M` と形は同じだが、
+ここでの各因子は行列単位で、人手の `{I, σ^x, σ^y, σ^z}` の元ではない）。 -/
 @[simp]
 theorem kroneckerTensorPowBasis_apply (p : Fin M → Fin 2 × Fin 2) :
     kroneckerTensorPowBasis M p
