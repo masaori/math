@@ -33586,9 +33586,9 @@ a & (j=k)\\
 &=\mathrm{aev}_{w}\Bigl(\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}\Bigr)
 &&(\because\ \blkref{claim_qbar_poly_monomial_decomposition})\\
 &=\sum_{k=0}^{n}\mathrm{aev}_{w}\bigl(\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}\bigr)
-&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は和を保つ。有限和へ繰り返し当てる})\\
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は和を保つ、有限和へ繰り返し当てる})\\
 &=\sum_{k=0}^{n}\mathrm{aev}_{w}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{aev}_{w}\bigl(t^{\,k}\bigr)
-&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は積を保つ。各項へ同時に当てる})\\
+&&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{より}\ \mathrm{aev}_{w}\ \text{は積を保つ、各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot\mathrm{aev}_{w}\bigl(t^{\,k}\bigr)
 &&(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{w}(\widehat{a})=a\ \text{を各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot w^{\,k}
@@ -85063,8 +85063,13 @@ t&<_R a&&(\because\ t\in C_a\text{ と }C_a\text{ の定義})\\
                 title: { text: "下切断による実現写像は加法を保つ" },
                 labels: ["claim_cut_realization_preserves_addition"],
                 habitat: "R",
-                realEscape: "有理下切断の実数上限で定めた二つの実現像と和の実現像を実数体で比較する。",
+                realEscape: "有理下切断の実数上限で定めた二つの実現像と和の実現像を実数体で比較する。比較には実数における有理数の稠密性を用いる。",
                 verification: ["sagemath/check/cut-realization-preserves-addition"],
+                lean: [
+                  "Ising2DLambda.RealEscape.cutRealization_preserves_addition",
+                  "Ising2DLambda.NecSuf.RealEscape.cutRealization_preserves_addition_necSuf",
+                  "Ising2DLambda.RealEscape.cutRealization_preserves_addition_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の ", math(String.raw`a,b\in R`), " について、",
@@ -85080,35 +85085,76 @@ t&<_R a&&(\because\ t\in C_a\text{ と }C_a\text{ の定義})\\
                 ],
                 proof: [
                   paragraph([
-                    "任意の ", math(String.raw`x\in R`), " と ",
+                    "切断の挟み込み。任意の ", math(String.raw`x\in R`), " と ",
                     math(String.raw`r,s\in\mathbb Q`), " が ",
-                    math(String.raw`r<_R x<_R s`), " を満たすとする。",
-                    ref("claim_real_algebraic_lower_cut_has_supremum"), " の下切断では ",
-                    math(String.raw`r\in C_x`), " なので、上限の定義から ",
+                    math(String.raw`r<_R x<_R s`), " を満たすとき、",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(r)\le\rho_{R\to\mathbb R}(x)\le\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " であることを示す。",
+                    ref("claim_real_algebraic_lower_cut_has_supremum"), " と ",
+                    ref("def_real_algebraic_cut_realization"), " により、",
+                    math(String.raw`\rho_{R\to\mathbb R}(x)`), " は下切断 ",
+                    math(String.raw`C_x`), " の像 ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(C_x)`),
+                    " の最小上界である。",
+                    math(String.raw`r\in C_x`), " なので上界であることから ",
                     math(String.raw`\iota_{\mathbb Q\to\mathbb R}(r)\le\rho_{R\to\mathbb R}(x)`),
-                    " である。任意の ", math(String.raw`t\in C_x`), " について ",
-                    math(String.raw`t<_R x<_R s`), " だから、",
-                    ref("claim_real_algebraic_order_transitive"), " より ",
+                    " である。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`t\in C_x`), " を取る。",
+                    math(String.raw`t<_R x`), " と ", math(String.raw`x<_R s`), " から ",
+                    ref("claim_real_algebraic_order_transitive"), " により ",
                     math(String.raw`t<_R s`), " である。",
                     "有理数として ", math(String.raw`s<t`), " なら、",
-                    ref("claim_positive_rational_positive_in_real_closed"),
-                    " を ", math(String.raw`t-s\in\mathbb Q_{>0}`),
-                    " に適用して ", math(String.raw`s<_R t`),
-                    " となり、順序の推移律と非反射性に反する。",
-                    math(String.raw`s=t`), " も非反射性に反する。",
-                    "有理数の三分律より ", math(String.raw`t<s`), " となる。",
-                    ref("def_real_logarithm"), " の包含写像は順序を保つので ",
-                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(s)`),
-                    " は切断の像の上界である。従って",
+                    math(String.raw`t-s\in\mathbb Q_{>0}`), " に ",
+                    ref("claim_positive_rational_positive_in_real_closed"), " を当てて ",
+                    math(String.raw`0<_R t-s`), " であり、",
+                    ref("def_real_algebraic_strict_order"), " により（",
+                    math(String.raw`(t-s)-0=t-s`), " の平方の証人がそのまま使える）",
+                    math(String.raw`s<_R t`), " である。",
+                    math(String.raw`t<_R s`), " と合わせて ",
+                    ref("claim_real_algebraic_order_transitive"), " により ",
+                    math(String.raw`t<_R t`), " となり、",
+                    ref("claim_real_algebraic_order_trichotomy"), " で「",
+                    math(String.raw`t<_R t`), "」と「", math(String.raw`t=t`),
+                    "」が同時に成り立つことになって排他性に反する。",
+                    math(String.raw`s=t`), " なら ", math(String.raw`t<_R s`), " は ",
+                    math(String.raw`t<_R t`), " であり、同じく排他性に反する。",
+                    "有理数の三分律から ", math(String.raw`t<s`), " である。",
+                    ref("def_real_logarithm"), " の包含写像は順序 ",
+                    math(String.raw`\le`), " を保つので ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(t)\le\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " であり、", math(String.raw`\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " は像 ", math(String.raw`\iota_{\mathbb Q\to\mathbb R}(C_x)`),
+                    " の上界である。", math(String.raw`\rho_{R\to\mathbb R}(x)`),
+                    " は最小上界なので ",
+                    math(String.raw`\rho_{R\to\mathbb R}(x)\le\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " である。",
+                  ]),
+                  paragraph([
+                    "加法移送。任意の ", math(String.raw`u,v,w\in R`), " が ",
+                    math(String.raw`u<_R v`), " を満たすとする。",
+                    ref("def_real_algebraic_strict_order"), " により、零でない ",
+                    math(String.raw`z\in R`), " が存在して ",
+                    math(String.raw`v-u=z\cdot z`), " である。このとき",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\iota_{\mathbb Q\to\mathbb R}(r)
-&\le\rho_{R\to\mathbb R}(x)
-&&(\because\ r\in C_x\text{、}\blkref{claim_real_algebraic_lower_cut_has_supremum}\text{ と }\blkref{def_real_algebraic_cut_realization}\text{ の上限の性質})\\
-\rho_{R\to\mathbb R}(x)
-&\le\iota_{\mathbb Q\to\mathbb R}(s)
-&&(\because\ \blkref{def_real_logarithm}\text{ の順序保存で }s\text{ は切断の像の上界、}\blkref{def_real_algebraic_cut_realization})
+(v+w)-(u+w)
+&=v-u
+&&(\because\ R\text{ の加法}\text{（}w\text{ が相殺する）})\\
+&=z\cdot z
+&&(\because\ \blkref{def_real_algebraic_strict_order}),\\
+(w+v)-(w+u)
+&=v-u
+&&(\because\ R\text{ の加法}\text{（}w\text{ が相殺する）})\\
+&=z\cdot z
+&&(\because\ \blkref{def_real_algebraic_strict_order})
 \end{aligned}`),
+                  paragraph([
+                    "なので、", ref("def_real_algebraic_strict_order"), " により ",
+                    math(String.raw`u+w<_R v+w`), " かつ ",
+                    math(String.raw`w+u<_R w+v`), " である。",
+                  ]),
                   paragraph([
                     math(String.raw`\varepsilon\in\mathbb Q_{>0}`), " を任意に取る。",
                     ref("claim_real_algebraic_rational_pinching"), " を ",
@@ -85119,14 +85165,30 @@ t&<_R a&&(\because\ t\in C_a\text{ と }C_a\text{ の定義})\\
                     math(String.raw`0<s_b-r_b<\varepsilon`),
                     " を満たす有理数 ",
                     math(String.raw`r_a,s_a,r_b,s_b\in\mathbb Q`), " を取る。",
-                    ref("def_real_algebraic_strict_order"),
-                    " によれば不等式への同じ元の加算は差を変えない。",
-                    "二つの不等式を加算し、",
-                    ref("claim_real_algebraic_order_transitive"), " を適用すると",
+                    ref("claim_rationals_are_real_algebraic"),
+                    " により有理数はすべて ", math(String.raw`R`),
+                    " の元であり、", math(String.raw`R`), " は ",
+                    math(String.raw`\overline{\mathbb Q}`), " の部分体なので、有理数の和 ",
+                    math(String.raw`r_a+r_b`), "・", math(String.raw`s_a+s_b`),
+                    " は ", math(String.raw`R`), " の加法による和と一致する。",
+                    "加法移送と ", ref("claim_real_algebraic_order_transitive"), " により",
                   ]),
-                  displayMath(String.raw`r_a+r_b<_R a+b<_R s_a+s_b\quad(\because\ \blkref{def_real_algebraic_strict_order}\text{ の加法移送と }\blkref{claim_real_algebraic_order_transitive})`),
+                  displayMath(String.raw`\begin{aligned}
+r_a+r_b&<_R a+r_b
+&&(\because\ r_a<_R a\text{ に }w:=r_b\text{ を右から足す加法移送})\\
+a+r_b&<_R a+b
+&&(\because\ r_b<_R b\text{ に }w:=a\text{ を左から足す加法移送})\\
+r_a+r_b&<_R a+b
+&&(\because\ \blkref{claim_real_algebraic_order_transitive}),\\
+a+b&<_R a+s_b
+&&(\because\ b<_R s_b\text{ に }w:=a\text{ を左から足す加法移送})\\
+a+s_b&<_R s_a+s_b
+&&(\because\ a<_R s_a\text{ に }w:=s_b\text{ を右から足す加法移送})\\
+a+b&<_R s_a+s_b
+&&(\because\ \blkref{claim_real_algebraic_order_transitive})
+\end{aligned}`),
                   paragraph([
-                    "初めに示した切断の挟み込みを ",
+                    "である。切断の挟み込みを ",
                     math(String.raw`a,b,a+b`), " に適用する。",
                     ref("def_real_logarithm"), " の包含写像は有理数の加法を保つので、",
                     math(String.raw`A:=\iota_{\mathbb Q\to\mathbb R}(r_a+r_b)\in\mathbb R`),
@@ -85142,19 +85204,35 @@ A&\le\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b)\le B
 B-A&=\iota_{\mathbb Q\to\mathbb R}((s_a-r_a)+(s_b-r_b))
 &&(\because\ \blkref{def_real_logarithm}\text{ の加法性と有理数の四則})\\
 &<\iota_{\mathbb Q\to\mathbb R}(2\varepsilon)
-&&(\because\ s_a-r_a<\varepsilon,\ s_b-r_b<\varepsilon\text{ と順序保存}).
+&&(\because\ s_a-r_a<\varepsilon,\ s_b-r_b<\varepsilon\text{ と }\blkref{def_real_logarithm}\text{ の順序保存と単射性}).
 \end{aligned}`),
                   paragraph([
-                    "二つの実数 ",
-                    math(String.raw`\rho_{R\to\mathbb R}(a+b)`), " と ",
-                    math(String.raw`\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b)`),
-                    " はともに ", math(String.raw`[A,B]\subset\mathbb R`),
-                    " にある。従って両者の差の絶対値は ",
-                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(2\varepsilon)`),
-                    " より小さい。これが任意の正の有理数 ",
-                    math(String.raw`\varepsilon`),
-                    " について成り立つ。実数内で正の有理数が零へ近づけることから差は零である。",
-                    "この最後の結論は実数の Archimedes 性を使う実数体への脱出である。",
+                    math(String.raw`d:=\bigl|\rho_{R\to\mathbb R}(a+b)-(\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b))\bigr|\in\mathbb R`),
+                    " と置く。二つの実数はともに区間 ",
+                    math(String.raw`[A,B]\subset\mathbb R`),
+                    " にあるので、任意の ", math(String.raw`\varepsilon\in\mathbb Q_{>0}`),
+                    " について ",
+                    math(String.raw`d\le B-A<\iota_{\mathbb Q\to\mathbb R}(2\varepsilon)`),
+                    " である。", math(String.raw`0<d`), " と仮定する。",
+                    "実数内の有理数の稠密性（実数体への脱出）により、",
+                    math(String.raw`0<\iota_{\mathbb Q\to\mathbb R}(q)<d`),
+                    " を満たす ", math(String.raw`q\in\mathbb Q`), " がある。",
+                    ref("def_real_logarithm"), " の包含写像の順序保存と単射性から ",
+                    math(String.raw`q\in\mathbb Q_{>0}`), " である。",
+                    math(String.raw`\varepsilon:=q/2\in\mathbb Q_{>0}`), " と置くと",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+d&<\iota_{\mathbb Q\to\mathbb R}(2\cdot(q/2))
+&&(\because\ \text{上の評価を }\varepsilon:=q/2\text{ に当てる})\\
+&=\iota_{\mathbb Q\to\mathbb R}(q)
+&&(\because\ \mathbb Q\text{ の四則})\\
+&<d
+&&(\because\ q\text{ の取り方})
+\end{aligned}`),
+                  paragraph([
+                    "となり、実数の順序の非反射性に反する。実数の三分律と ",
+                    math(String.raw`0\le d`), " から ", math(String.raw`d=0`),
+                    " であり、主張の等式が成り立つ。",
                   ]),
                 ],
               },
