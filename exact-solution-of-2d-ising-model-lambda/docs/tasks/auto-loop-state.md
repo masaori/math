@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-12（連続実行）、内側セルを右に置く実際の単純閉歩道の入方向を四セル表に Lean 具体版で同定した。** 次は局所回転数を巡回総回転数へ足し上げる。
 - **2026-11-12（並列の連続実行）、非零項の閉歩道ごとの重み（`claim_tagged_matching_cycle_weight`）の二段目として、実際の交互閉路の対を射影した閉歩道の辺で読む段を Lean 具体版と必要十分版で示した。** 並列の表の次は、閉路ごとの合成と本文ブロックへの登録である。
 - **2026-11-12（並列の連続実行）、非零項の閉歩道ごとの重み（`claim_tagged_matching_cycle_weight`）を三つの論法に割り、項を任意の向きの対の列で書き直す段（向き直し）を Lean 具体版と必要十分版で示した。** 並列の表の次は、実際の交互閉路の対を閉歩道の辺で読む段を扱う。
 - **2026-11-12（連続実行）、内側セルを左に置く実際の単純閉歩道の入方向を四セル表に Lean 具体版で同定した。** 次は右に置く場合の入方向を同定する。
 - **2026-11-12（並列の連続実行）、交互閉路による符号比較（`claim_alternating_cycle_matching_sign`）の実際の交互閉路への接続の段を Lean 具体版と必要十分版で示し、語の符号の段と組にして本文ブロックの `lean:` に登録した。** 並列の表の次は、非零項の閉歩道ごとの重み（`claim_tagged_matching_cycle_weight`）を扱う。
-- **2026-11-12（並列の連続実行）、交互閉路による符号比較（`claim_alternating_cycle_matching_sign`）を語の符号の段と実際の交互閉路への接続の段に割り、前者（閉路ごとの巡回移動と各対の向き直しによる符号の等式）を Lean 具体版と必要十分版で示した。** 並列の表の次は、実際の交互閉路が語の符号の段の前提を満たすことを示し、両者を組にして `lean:` に登録する。
 
 
 
@@ -24,7 +24,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 内側セルを右に置く実際の単純閉歩道の入方向を四セル表に同定する | 記述・SageMath 済。左に置く場合の Lean 具体版は済。右に置く場合は未着手 | 右側の各歩の終点において、出方向の反転と四セル表の入方向を接続する。 |
 | Onsager 閉形式への接続 | 頂点ごとの局所回転数を巡回総回転数へ足し上げる | 記述・SageMath 済。Lean は未着手 | 接続数一・二・三の和から巡回総回転数を求め、方向反転の一歩の符号定理を使う。 |
 | Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
@@ -53,11 +52,11 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
 
+- 2026-11-12: 内側セルを左に置く実際の歩道の入方向の本文と Lean 具体版を照合し、終点の境界頂点性、対角二セル配置の排除、四方向の次頂点への接続が一致し、修正不要と確かめた。
 - 2026-11-12: 「非零項は閉歩道ごとのねじれ・回転位相の積に分かれる」の本文の証明の冒頭（短い標識の対を $(\iota(\vec e_{C,r-1}),\vec e_{C,r})$、基準の長い標識の対を $(\vec e_{C,r},\iota(\vec e_{C,r}))$ の向きで取ること、活動点の外の長い対が基準項と一致すること）を、閉歩道の辺による読みの Lean 具体版と照合した。$w_r=\iota(c(2r))$ と置くと $(c(2r),c(2r+1))=(\iota(w_r),w_{r+1})$、$(c(2r+1),c(2r+2))=(w_{r+1},\iota(w_{r+1}))$ で、添字を一つずらせば本文の対になること、$w$ が射影した閉歩道の非後退性の補題と同じ辺列であることを確かめた（本文に直すものは無かった）。
 - 2026-11-12: 「非零項は閉歩道ごとのねじれ・回転位相の積に分かれる」の本文の証明の主鎖の二行目（昇順への向き直し）と、証明冒頭の「各対を辞書式の昇順へ直す符号は $\alpha_D(C),\alpha_0(C)$」を、向き直しの Lean 具体版と照合した。長い寄与・短い寄与の向きを変えたときの符号反転が反対称化した端末行列の係数の反対称性から出ること、閉路の短い対を点列の順 $(c(2r),c(2r+1))$ で読むと η の積が `cycleShortOrientation` に一致することを確かめた（本文に直すものは無かった）。
 - 2026-11-12: 四セル表の出方向から次頂点の入方向へ進む本文の四方向の議論を、既存の各方向の Lean 補題と照合し、修正不要と確かめた。
 - 2026-11-12: 「交互閉路ごとの向き直しが二つのマッチングの符号比を与える」の本文の証明の最初の二段落（閉路の点集合が互いに素で全活動点を覆うこと、活動点以外の $D$ の対が $\mathcal D_0$ の対と一致すること、第一色から始めた点列の偶数位置から $D$ の対・奇数位置から $\mathcal D_0$ の対へ進むこと）を、接続の段の Lean 具体版と照合した。第一色の点として各閉路の最小元を取れば本文の点列になり、$\alpha_D(C)$・$\alpha_0(C)$ は第一色の始点の取り方に依らないことも確かめた（本文に直すものは無かった）。
-- 2026-11-12: 「交互閉路ごとの向き直しが二つのマッチングの符号比を与える」の本文の証明のうち、端点列の符号の三つの式鎖（閉路ごとの巡回移動、向き直しの等式の両側への適用、平方が一であることによる整理）を Lean 具体版と一行ずつ照合した。各閉路の巡回移動の符号 $(-1)^{2k_C-1}$ が隣接交換 $2k_C-1$ 回で得られること、共通対は昇順なので向きの符号が一であることも具体版の各段と一致した（本文に直すものは無かった）。
 
 ## 式変形の書き方の統一
 
@@ -69,8 +68,8 @@
 
 ## 前進の記録
 
+- 2026-11-12: 内側セルを右に置く実際の単純閉歩道の各歩について、終点が境界頂点であることと対角二セル配置の排除を使い、四方向の内外セルの配置から終点の四セル表の出方向が実際の入方向の逆向きであると Lean 具体版で示した。必要十分版の方向一意性は既存。本文ブロックの lean に登録した。
 - 2026-11-12: 並列の表の先頭「非零項の重み: 実際の交互閉路の対を閉歩道の辺で読む」を済ませ、行を消した。具体版（`KacWard/TaggedCyclePairWalk.lean`）は実際の非零項 $(D,T)$ について、閉路の長さ $k_C$（`taggedCycleLength`）と射影した閉歩道 $w_r=\iota(c(2r))$（`taggedCycleWalk`）を定め、最小元から読んだ閉路の対が $(\iota(w_r),w_{r+1})$ で $w_{k_C}=w_0$ であること（`taggedCycle_pairs_walk`。奇数回目の一歩が $\mathcal D_0$ の相手すなわち反転であることから）、点の $D$ の対が短い標識を持つことと活動点であることの同値（`ascendingMatePair_mem_iff_active`。`taggedDifference_active_iff_short` と `shortUnderlyingPairs_iff` から）、閉路の対は $T$ の短い対で（`taggedCycle_pairs_short`）共通対は $T$ の外の反転対であること（`taggedCommonPairs_long`）、閉路の対の列と共通対の列を連結した向き直しの列 $l$（`taggedOrientationList`）の完全性・各対が $D$ の対であること・$\prod_l\eta=\prod_C\alpha_D(C)$ を示し、項の寄与の積を $C(\prod_l\eta)\cdot\prod_C\prod_{r<k_C}\mathsf S(\iota(w_r),w_{r+1})\cdot\prod_{\text{共通対}}\mathsf L$ と書く（`taggedMatchingTerm_cycleWalk`）。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/TaggedCyclePairWalk.lean`）は、閉歩道の辺による読みを任意の型の対合と奇数番目の次の点がその像である点列だけで、寄与の読み分けを向きを変えると負になる二つの写像・完全列挙・閉路の対の昇順が $t$ に在ること・共通対の昇順が $t$ に無いことだけで示す。導出版は `TaggedCyclePairWalkFromNecSuf.lean`。SageMath の既存の検証（式変形 33,888 件・標識付き完全マッチング 224 件）を再実行して通した。
 - 2026-11-12: 並列の表の先頭「非零項は閉歩道ごとのねじれ・回転位相の積に分かれることの Lean 二版」を、向き直し・実際の閉路の対と閉歩道の辺の対応・閉路ごとの合成の三つの論法に割り、向き直しを済ませた。具体版（`KacWard/TaggedMatchingTermOrientation.lean`）は実際の長い標識・短い標識の寄与について、対の向きを変えると符号を変えること（`gaugedLongContribution_swap`・`gaugedShortContribution_swap`。`gaugeLongCoefficient_skew`・`gaugeShortCoefficient_skew` から）、昇順へ直した対の寄与が η と向き付き対の寄与の積であること（`taggedContribution_ascendingPair`）、長い対の積と短い対の積を標識で読む一つの積へまとめること（`taggedMatchingTerm_labelledProduct`）を示し、$D$ の対を任意の向きで並べた列 $l$ について項の寄与の積が $C(\prod_l\eta)\cdot\prod_l(\text{向き付きの寄与})$ であること（`taggedMatchingTerm_oriented`）を得る。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/TaggedMatchingTermOrientation.lean`）は任意の有限線型順序の対から可換環への二つの写像で、向きを変えると負になることと、標識の集合が昇順対の部分集合であること、列の端点列が完全列挙で各対が $D$ の対であることだけを仮定する。導出版は `TaggedMatchingTermOrientationFromNecSuf.lean`。本文の主張の一段なので、`lean:` への登録は三つの段を組にして行う。SageMath の既存の検証（式変形 33,888 件・標識付き完全マッチング 224 件）を再実行して通した。
 - 2026-11-12: 入方向の同定を内側セルが左の場合と右の場合に割り、左の場合を済ませた。実際の歩道の終点が境界頂点であること、終点の対角二セル配置の排除、四方向の出方向と次の入方向の一致を Lean 具体版で示し、本文ブロックに登録した。右の場合は次の行に残した。
 - 2026-11-12: 並列の表の先頭のうち、交互閉路による符号比較（`claim_alternating_cycle_matching_sign`）の実際の交互閉路への接続の段を済ませ、語の符号の段と組にして本文ブロックの `lean:` に登録した。具体版（`KacWard/TaggedAlternatingCycleMatchingSign.lean`）は実際の標識付き完全マッチング $(D,T)$ について、閉路の点列を交互成分の最小元 $m$ からの反復 $c(r)=\sigma^{[r]}(m)$（周期未満）で、閉路の集合を最小元の集合で、共通対を活動点でない $e<\mathrm{mate}_D(e)$ の昇順の列で定め（`taggedCyclePoints`・`taggedCycleMinima`・`taggedCycleWords`・`taggedCommonPairs`）、活動点でない点で二つの相手が一致し相手も活動点でないこと（`inactive_mate_eq_reference`。`taggedDifference_incident_iff` から）、最小元が第一色に属し反復の色が回数の偶奇で決まること、周期が正で偶数であること、偶数位置から $D$ の対・巡回移動後に $\mathcal D_0$ の対へ進むこと、閉路の点の相異と閉路どうしの交わりの無さと全点の被覆（`taggedCycleWords_complete`）を示し、語の符号の段へ渡して $\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)=(-1)^{|\mathcal C|}\prod_C\alpha_D(C)\alpha_0(C)$（`taggedAlternatingCycles_matching_sign`）を得る。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/TaggedAlternatingCycleMatchingSign.lean`）は任意の有限線型順序と完全マッチング $D,D_0$、部分集合 $A$ 上で値が $D,D_0$ の相手である二つの不動点のない対合、$A$ の外で二つの相手が一致すること、端点列の値の隣接交換での符号反転と $\operatorname{sgn}_F(D)^2=1$ だけを仮定する。導出版は `TaggedAlternatingCycleMatchingSignFromNecSuf.lean`。SageMath の既存の検証（224 件）を再実行して通した。
-- 2026-11-12: 並列の表の先頭「マッチングの符号と基準マッチングの二件」のうち `claim_alternating_cycle_matching_sign` を、端点列の符号の論法（巡回移動と向き直し）と、実際の交互閉路（`claim_tagged_difference_cycle_cover`）が閉路の点列と共通対の列を与える論法とに割り、前者を済ませた。具体版（`KacWard/AlternatingCycleMatchingSign.lean`）は実際の完全マッチング $D$ と基準完全マッチング $\mathcal D_0$（`referenceLongMatching`）、辞書式順序について、閉路の点列の列と昇順の共通対の列を受け取り、各閉路を二つずつ区切った対が $D$ の対、一つ左へ巡回移動して区切った対が $\mathcal D_0$ の対であることを前提に、一文字を後ろへ送る隣接交換（`matchingWordSign_move_back`）による巡回移動の符号（`matchingWordSign_rotate_one`）、閉路ごとの積 $\varepsilon(W_0)=(-1)^{|\mathcal C|}\varepsilon(W_D)$（`matchingWordSign_rotate_cycles`）、向き直しの等式（`orientedPairWord_sign`。既存の `matchingOrientationSignAux` を第一端点の集合で使い、列挙独立性で $\operatorname{sgn}$ へ移す。そのため同補題の `private` を外した）、二つ目の式鎖（`alternatingCycleWords_sign_relation`）、主張（`alternatingCycleWords_matching_sign`）を順に示す。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/AlternatingCycleMatchingSign.lean`）は、端点列の値を完全列挙の隣接交換で負になる任意の可換環値の写像 $F$ とし、$\mathcal D_0$ を任意の完全マッチングにし、閉路が空でなく偶数長であることと $\operatorname{sgn}_F(D)^2=1$ だけを仮定する（$\operatorname{sgn}_F(\mathcal D_0)^2=1$ は使わない）。導出版は `AlternatingCycleMatchingSignFromNecSuf.lean`。閉路の点列を仮定で受けるので、本文ブロックの `lean:` へは実際の交互閉路への接続と組で登録する（runbook のレビュー観点）。SageMath の既存の検証（224 件）を再実行して通した。

@@ -70375,6 +70375,7 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_of_interior_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_of_interior_right",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_of_interior_left",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_of_interior_right",
                       "Ising2DLambda.NecSuf.KacWard.finite_adjacent_side_constant",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_interior_side_constant_from_necSuf",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
