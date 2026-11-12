@@ -212,11 +212,12 @@ for (x, y) in COUPLINGS:
             ], f"{tag}: 準備 (e) の鎖")
             rep.eq(psi_nu, body_sum(body_scalar(r_nu / (2 * sg_nu * b_nu), Zn), body_scalar(beta, Yn)),
                    f"{tag}: def_check_fermi（μ → ν）ψ̌_ν = (r_ν/(2√M b_ν))Ž_ν + βY̌_ν")
-            # (ψ̌_μ^†)^* の 5 行
+            # (ψ̌_μ^†)^* の 7 行
             rep.chain([
                 ("(ψ̌_μ^†)^*", star(dag)),
                 ("(α_μŽ_μ + βY̌_μ)^*", star(body_sum(body_scalar(alpha, Zm), body_scalar(beta, Ym)))),
                 ("conj(α_μ)Ž_μ^* + conj(β)Y̌_μ^*", body_sum(body_scalar(c(alpha), star(Zm)), body_scalar(c(beta), star(Ym)))),
+                ("conj(α_μ)Ž_ν + conj(β)Y̌_ν", body_sum(body_scalar(c(alpha), Zn), body_scalar(c(beta), Yn))),
                 ("conj(α_μ)Ž_ν + βY̌_ν", body_sum(body_scalar(c(alpha), Zn), body_scalar(beta, Yn))),
                 ("-α_νŽ_ν + βY̌_ν", body_sum(body_scalar(-alpha_nu, Zn), body_scalar(beta, Yn))),
                 ("(r_C/d_ν)Ž_ν + βY̌_ν", body_sum(body_scalar(r / d_nu, Zn), body_scalar(beta, Yn))),

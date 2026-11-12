@@ -219,10 +219,11 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
 
 /-! ## `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` -/
 
-/-- **原文 `check_number_operator_is_hermitian` (3)**: `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（人手の鎖 6 行）。
+/-- **原文 `check_number_operator_is_hermitian` (3)**: `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（人手の鎖 7 行）。
 
 `Ising2D.CheckFermi` の場 `hstar` を埋める補題である。
-5 行目は人手の準備 (e)（`r_ℂ/d_ν = -α_ν`）を右辺から左辺へ当てる段で、Lean では `checkPPlus_eq_neg_checkP`（`ν` で）を引く。 -/
+4 行目の `star_checkQ` は `complex_conjugate_of_real_inclusion`（`r → β`）に当たる（`β` と `checkQ` の `ℂ` の商との一致を人手の鎖に合わせることは状態台帳の (d4c44o4) で扱う）。
+6 行目は人手の準備 (e)（`r_ℂ/d_ν = -α_ν`）を右辺から左辺へ当てる段で、Lean では `checkPPlus_eq_neg_checkP`（`ν` で）を引く。 -/
 theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
     (checkPsiDag P.const M μ)ᴴ = checkPsi P.const M ((M : ℤ) + 1 - μ) :=
   calc (checkPsiDag P.const M μ)ᴴ
@@ -232,17 +233,20 @@ theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
         conjTranspose_add_smul_tensorPow _ _ _ _
                                       -- 2 行目: `star_preserves_norm_and_limits` (1) の `(αA + βB)^* = \overline{α}A^* + \overline{β}B^*`
     _ = star (checkP P.const M μ) • checkZ M ((M : ℤ) + 1 - μ)
+          + star (checkQ M) • checkY M ((M : ℤ) + 1 - μ) := by
+        rw [checkZ_conjTranspose hM, checkY_conjTranspose hM]
+                                      -- 3 行目: (2) の `Ž_μ^* = Ž_ν` と `Y̌_μ^* = Y̌_ν`
+    _ = star (checkP P.const M μ) • checkZ M ((M : ℤ) + 1 - μ)
           + checkQ M • checkY M ((M : ℤ) + 1 - μ) := by
-        rw [checkZ_conjTranspose hM, checkY_conjTranspose hM, star_checkQ M]
-                                      -- 3 行目: (2)（`Ž_μ^* = Ž_ν`・`Y̌_μ^* = Y̌_ν`）と `β ∈ ℝ`
+        rw [star_checkQ M]            -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → β`）
     _ = (-checkP P.const M ((M : ℤ) + 1 - μ)) • checkZ M ((M : ℤ) + 1 - μ)
           + checkQ M • checkY M ((M : ℤ) + 1 - μ) := by
-        rw [star_checkP P hM μ]       -- 4 行目: `\overline{α_μ} = -α_ν`
+        rw [star_checkP P hM μ]       -- 5 行目: `\overline{α_μ} = -α_ν`
     _ = checkPPlus P.const M ((M : ℤ) + 1 - μ) • checkZ M ((M : ℤ) + 1 - μ)
           + checkQ M • checkY M ((M : ℤ) + 1 - μ) := by
-        rw [checkPPlus_eq_neg_checkP] -- 5 行目: 準備 (e)（`r_ℂ/d_ν = -α_ν`）を右辺から左辺へ
+        rw [checkPPlus_eq_neg_checkP] -- 6 行目: 準備 (e)（`r_ℂ/d_ν = -α_ν`）を右辺から左辺へ
     _ = checkPsi P.const M ((M : ℤ) + 1 - μ) := rfl
-                                      -- 6 行目: `def_check_fermi`（`μ → ν`）
+                                      -- 7 行目: `def_check_fermi`（`μ → ν`）
 
 /-! ## `CheckFermi` のインスタンス -/
 
