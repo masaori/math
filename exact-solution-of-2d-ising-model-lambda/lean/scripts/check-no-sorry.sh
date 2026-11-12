@@ -2424,6 +2424,9 @@ targets=(
   Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference
   Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference_from_necSuf
   Ising2DLambda.KacWard.directionPairTurning_eq_turnValue
+  Ising2DLambda.KacWard.cellBoundary_turn_sum
+  Ising2DLambda.KacWard.interiorCellsOfWalk_boundary_turn_sum
+  Ising2DLambda.NecSuf.KacWard.boundary_turn_sum
   Ising2DLambda.KacWard.projectedUnitStep_direction
   Ising2DLambda.KacWard.unitStepDirection_turning
   Ising2DLambda.KacWard.projectedUnitStep_turning

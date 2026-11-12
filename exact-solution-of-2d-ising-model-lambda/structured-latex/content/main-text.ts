@@ -32524,13 +32524,13 @@ z^{\,L+1}&=z^{L}\,z
 &=\sum_{j=1}^{L}z^{\,L-j+1}\,a_{j}
 &&(\because\ k\mapsto k+1\ \text{が}\ \{0,\dots,L-1\}\ \text{から}\ \{1,\dots,L\}\ \text{への全単射で、対応する項が等しい})\\
 &=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z^{\,1}\,a_{L}
-&&(\because\ \text{有限和から}\ j=L\ \text{の 1 項を分ける。}\ L-L+1=1)\\
+&&(\because\ \text{有限和から}\ j=L\ \text{の 1 項を分け、}\ L-L+1=1)\\
 &=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z\,a_{0}
 &&(\because\ \text{準備 2、および}\ z^{1}=z)\\
 &=\Bigl(\sum_{j=1}^{L-1}z^{\,L-j+1}\,a_{j}\Bigr)+z^{\,L+1}\,a_{0}
 &&(\because\ \text{準備 3})\\
 &=\sum_{k=0}^{L-1}z^{\,L-k+1}\,a_{k}
-&&(\because\ \text{有限和へ}\ k=0\ \text{の 1 項を戻す。}\ L-0+1=L+1)\\
+&&(\because\ \text{有限和へ}\ k=0\ \text{の 1 項を戻し、}\ L-0+1=L+1)\\
 &=\sum_{k=0}^{L-1}z\,\bigl(z^{\,L-k}\,a_{k}\bigr)
 &&(\because\ z^{\,L-k+1}=z^{\,L-k}z\ \text{と積の可換則})\\
 &=z\,\sum_{k=0}^{L-1}z^{\,L-k}\,a_{k}
