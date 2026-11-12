@@ -49397,6 +49397,11 @@ B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
                 title: { text: "実閉部分体の元は任意の有理幅で挟める" },
                 labels: ["claim_real_algebraic_rational_pinching"],
                 habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.CriticalExponent.realAlgebraic_rational_pinching",
+                  "Ising2DLambda.NecSuf.CriticalExponent.rational_pinching_necSuf",
+                  "Ising2DLambda.CriticalExponent.realAlgebraic_rational_pinching_from_necSuf",
+                ],
                 verification: ["sagemath/check/real-algebraic-rational-pinching"],
                 statement: [paragraph([
                   "任意の ", math(String.raw`a\in R`), " と ",
@@ -49417,6 +49422,8 @@ B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
                     math(String.raw`n:=2f+1\in\mathbb N_{>0}`), " と置く。",
                     math(String.raw`\mathbb Q\subseteq R`), " は ",
                     ref("claim_rationals_are_real_algebraic"), " による。",
+                    math(String.raw`\le_R`), " は ", ref("def_real_algebraic_nonstrict_order"),
+                    " の順序である。有理数の順序で",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 0&<2/n&&(\because\ n=2f+1>0)\\
@@ -49427,43 +49434,65 @@ B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
 \end{aligned}`),
                   paragraph([
                     math(String.raw`J:=\{j\in\mathbb Z:-Mn\le j\le Mn,\ j/n\le_R a\}`),
-                    " と置く。", math(String.raw`J`), " は有限である。",
-                    math(String.raw`-M<_R a`), " より ",
-                    math(String.raw`-Mn\in J`), " なので空でない。",
-                    "よって最大元 ", math(String.raw`j_0:=\max J\in\mathbb Z`),
-                    " がある。", math(String.raw`j_0/n\le_R a<_R M`),
-                    " から ", math(String.raw`j_0<Mn`),
-                    "（有理数の順序と ",
-                    ref("claim_positive_rational_positive_in_real_closed"),
-                    "）である。従って ", math(String.raw`j_0+1\le Mn`),
-                    " であり、最大性から ", math(String.raw`a<_R(j_0+1)/n`),
-                    " となる。",
+                    " と置く。", math(String.raw`J`), " は有限集合 ",
+                    math(String.raw`\{-Mn,\dots,Mn\}`), " の部分集合である。",
+                    math(String.raw`(-Mn)/n=-M`), " と ", math(String.raw`-M<_R a`),
+                    " より ", math(String.raw`-Mn\in J`), " なので空でない。",
+                    "よって最大元 ", math(String.raw`j_0:=\max J\in\mathbb Z`), " がある。",
+                  ]),
+                  paragraph([
+                    math(String.raw`j_0\ne Mn`), " である。", math(String.raw`j_0=Mn`),
+                    " と仮定すると ", math(String.raw`j_0/n=M`), " なので ",
+                    math(String.raw`M\le_R a`), " である。", math(String.raw`M<_R a`),
+                    " なら ", ref("claim_real_algebraic_order_transitive"), " を ",
+                    math(String.raw`M<_R a<_R M`), " に当てて ", math(String.raw`M<_R M`),
+                    "、", math(String.raw`M=a`), " なら ", math(String.raw`a<_R M`),
+                    " がそのまま ", math(String.raw`M<_R M`), " である。どちらも ",
+                    ref("claim_real_algebraic_order_trichotomy"), " の排他性（",
+                    math(String.raw`M<_R M`), " と ", math(String.raw`M=M`),
+                    " は同時に成り立たない）に反する。",
+                    math(String.raw`j_0\le Mn`), " と合わせて ",
+                    math(String.raw`-Mn\le j_0<j_0+1\le Mn`), " である。",
                   ]),
                   paragraph([
                     math(String.raw`r:=(j_0-1)/n\in\mathbb Q`), "、",
-                    math(String.raw`s:=(j_0+1)/n\in\mathbb Q`),
-                    " と置く。", math(String.raw`1/n>0`),
-                    " を有理数から ", math(String.raw`R`),
-                    " の順序へ移すと、",
+                    math(String.raw`s:=(j_0+1)/n\in\mathbb Q`), " と置く。",
+                    math(String.raw`j_0+1>j_0`), " と ", math(String.raw`j_0`),
+                    " の最大性から ", math(String.raw`j_0+1\notin J`),
+                    " であり、", math(String.raw`j_0+1`), " は区間に入るので ",
+                    math(String.raw`s\le_R a`), " は成り立たない。",
+                    ref("claim_real_algebraic_order_trichotomy"), " を ",
+                    math(String.raw`a,s`), " に当てると、", math(String.raw`a=s`),
+                    " と ", math(String.raw`s<_R a`), " はどちらも ",
+                    math(String.raw`s\le_R a`), " を与えるので、",
+                    math(String.raw`a<_R s`), " である。",
+                  ]),
+                  paragraph([
+                    "左端は、",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-r&<_R j_0/n&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }1/n\text{ に適用})\\
-&\le_R a&&(\because\ j_0\in J),\\
-a&<_R s&&(\because\ J\text{ の最大性}),\\
+0&<_R1/n&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }1/n\in\mathbb Q_{>0}\text{ に適用})\\
+&=j_0/n-r&&(\because\ r=(j_0-1)/n\text{ と }\mathbb Q\text{ の四則})
+\end{aligned}`),
+                  paragraph([
+                    "と ", ref("def_real_algebraic_strict_order"), " から ",
+                    math(String.raw`r<_R j_0/n`), " である。", math(String.raw`j_0\in J`),
+                    " より ", math(String.raw`j_0/n\le_R a`), " であり、",
+                    math(String.raw`j_0/n<_R a`), " なら ",
+                    ref("claim_real_algebraic_order_transitive"), " を ",
+                    math(String.raw`r<_R j_0/n<_R a`), " に当てて、",
+                    math(String.raw`j_0/n=a`), " なら書き換えて、",
+                    math(String.raw`r<_R a`), " を得る。幅は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
 s-r&=2/n&&(\because\ r,s\text{ の定義と }\mathbb Q\text{ の四則})\\
-&<\varepsilon&&(\because\ n=2f+1,\ \varepsilon=e/f,\ e\ge1).
+&<\varepsilon&&(\because\ \text{上の }2/n<\varepsilon)
 \end{aligned}`),
                   paragraph([
-                    "幅の正値性は、",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-0&<2/n&&(\because\ n=2f+1>0)\\
-&=s-r&&(\because\ r,s\text{ の定義と }\mathbb Q\text{ の四則}).
-\end{aligned}`),
-                  paragraph([
+                    "であり、", math(String.raw`0<2/n=s-r`), " である。",
                     "構成は有限集合と ", math(String.raw`\mathbb Q`), "、",
                     math(String.raw`R\subset\overline{\mathbb Q}`),
-                    " の順序だけを用いる。",
+                    " の四則と順序だけを用いる。",
                   ]),
                 ],
               },
