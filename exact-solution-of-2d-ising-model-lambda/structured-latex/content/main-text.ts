@@ -35846,7 +35846,7 @@ F_{m+1}
 &=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
 &=0+0
-&&(\because\ k>n\ \text{より}\ k\ne n\ \text{かつ}\ k\ge1\text{。}\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
+&&(\because\ k>n\ \text{より}\ k\ne n\ \text{かつ}\ k\ge1\text{、}\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{と}\ \blkref{def_qbar_constant_embedding})\\
 &=0
 &&(\because\ \text{零元との和})
 \end{aligned}`),
@@ -83705,6 +83705,11 @@ q(1-q^2)
                 labels: ["claim_mode_inversion_orbit_cardinality"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/mode-inversion-orbit-cardinality"],
+                lean: [
+                  "Ising2DLambda.KacWard.mode_inversion_orbit_cardinality",
+                  "Ising2DLambda.NecSuf.KacWard.mode_inversion_orbit_cardinality_necSuf",
+                  "Ising2DLambda.KacWard.mode_inversion_orbit_cardinality_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
@@ -83723,39 +83728,57 @@ q(1-q^2)
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_dispersion_inversion_invariant"), " の証明により、",
+                    ref("claim_dispersion_inversion_invariant"), " により ",
                     math(String.raw`\varpi^{-1}\in\mathcal U_a`), " と ",
                     math(String.raw`\varsigma^{-1}\in\mathcal W_b`),
-                    " であり、四点はいずれも同じモード集合に属する。",
-                    math(String.raw`z\in\{\varpi,\varsigma\}`), " を一つ取る。",
-                    "各成分は非零であり、体 ", math(String.raw`\overline{\mathbb Q}`), " の中で",
+                    " が定まる（同主張の証明で ", math(String.raw`\varpi\ne0`), "、",
+                    math(String.raw`\varsigma\ne0`), " を示してある）。従って四点はいずれも ",
+                    math(String.raw`\mathcal U_a\times\mathcal W_b`), " に属する。",
+                    math(String.raw`z\in\{\varpi,\varsigma\}`), " を一つ取ると ",
+                    math(String.raw`z\ne0`), " であり、体 ", math(String.raw`\overline{\mathbb Q}`), " の中で",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 z=z^{-1}
+&\Longleftrightarrow z\cdot z=z\cdot z^{-1}
+&&\bigl(\because\ z\ne0\text{ なので }z\text{ を掛ける操作は }z^{-1}\text{ を掛ける操作で戻せる}\bigr)\\
 &\Longleftrightarrow z^2=1
-&&\bigl(\because\ z\ne0\text{ と }\overline{\mathbb Q}\text{ の乗法}\bigr)\\
+&&\bigl(\because\ z\cdot z^{-1}=1\bigr)\\
 &\Longleftrightarrow (z-1)(z+1)=0
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
 &\Longleftrightarrow z\in\{1,-1\}
 &&\bigl(\because\ \overline{\mathbb Q}\text{ は整域}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "横成分の集合 ", math(String.raw`\{\varpi,\varpi^{-1}\}`),
-                    " と縦成分の集合 ", math(String.raw`\{\varsigma,\varsigma^{-1}\}`),
-                    " はそれぞれ一元または二元である。軌道はこの二集合の直積なので、",
+                    math(String.raw`n(z):=|\{z,z^{-1}\}|\in\mathbb N`), " と置く。列挙した二元が等しいかどうかで",
                   ]),
+                  displayMath(String.raw`n(z)=\begin{cases}1&(z=z^{-1}),\\2&(z\ne z^{-1})\end{cases}`),
+                  paragraph(["である。軌道の元数は"]),
                   displayMath(String.raw`\begin{aligned}
 |O(\varpi,\varsigma)|
 &=|\{\varpi,\varpi^{-1}\}\times\{\varsigma,\varsigma^{-1}\}|
 &&\bigl(\because\ O\text{ の定義}\bigr)\\
-&=|\{\varpi,\varpi^{-1}\}|\,|\{\varsigma,\varsigma^{-1}\}|
-&&\bigl(\because\ \text{有限集合の直積の元数}\bigr)
+&=|\{\varpi,\varpi^{-1}\}|\cdot|\{\varsigma,\varsigma^{-1}\}|
+&&\bigl(\because\ \text{有限集合の直積の元数}\bigr)\\
+&=n(\varpi)\cdot n(\varsigma)
+&&\bigl(\because\ n\text{ の定義}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "二つの因子はそれぞれ一または二なので、積は一、二、四のいずれかである。",
-                    "積が一となるのは両成分がそれぞれ逆元に等しい場合に限る。",
-                    "上の同値を両成分へ適用すると、表示した条件を得る。",
+                    "であり、", math(String.raw`n(\varpi),n(\varsigma)\in\{1,2\}`), " の四通りは ",
+                    math(String.raw`1\cdot1=1`), "、", math(String.raw`1\cdot2=2`), "、",
+                    math(String.raw`2\cdot1=2`), "、", math(String.raw`2\cdot2=4`),
+                    " なので ", math(String.raw`|O(\varpi,\varsigma)|\in\{1,2,4\}`), " である。さらに",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+|O(\varpi,\varsigma)|=1
+&\Longleftrightarrow n(\varpi)\cdot n(\varsigma)=1
+&&\bigl(\because\ \text{上の元数の式}\bigr)\\
+&\Longleftrightarrow n(\varpi)=1\text{ かつ }n(\varsigma)=1
+&&\bigl(\because\ \text{上の四通り}\bigr)\\
+&\Longleftrightarrow \varpi=\varpi^{-1}\text{ かつ }\varsigma=\varsigma^{-1}
+&&\bigl(\because\ n\text{ の場合分け}\bigr)\\
+&\Longleftrightarrow \varpi,\varsigma\in\{1,-1\}
+&&\bigl(\because\ \text{上の同値を }z:=\varpi\text{ と }z:=\varsigma\text{ に適用}\bigr).
+\end{aligned}`),
                 ],
               },
             },
