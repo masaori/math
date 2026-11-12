@@ -34248,7 +34248,7 @@ f
 &=w^{\,n}+\mathrm{aev}_{w}(\widehat{-1})
 &&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
 &=w^{\,n}+(-1)
-&&(\because\ \blkref{def_qbar_poly_evaluation}\text{。}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
+&&(\because\ \blkref{def_qbar_poly_evaluation}\text{、}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
 &=1+(-1)
 &&(\because\ w^{\,n}=1)\\
 &=0
@@ -85890,6 +85890,11 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                 habitat: "C",
                 realEscape: "実閉部分体の実現写像の単射性を、複素数の実部と虚部を通じて代数的数の二係数表示へ移す。",
                 verification: ["sagemath/check/complex-realization-injective"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_injective",
+                  "Ising2DLambda.NecSuf.RealEscape.complexRealization_injective_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_injective_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     ref("def_complex_algebraic_realization"), " の写像 ",
@@ -85918,11 +85923,32 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
 &&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "複素数の実部と虚部の一意性から ",
-                    math(String.raw`\rho_{R\to\mathbb R}(a)=\rho_{R\to\mathbb R}(c)`),
-                    " および ",
-                    math(String.raw`\rho_{R\to\mathbb R}(b)=\rho_{R\to\mathbb R}(d)`),
-                    " である。", ref("claim_cut_realization_preserves_strict_order"),
+                    math(String.raw`\rho_{R\to\mathbb R}(a),\rho_{R\to\mathbb R}(b),\rho_{R\to\mathbb R}(c),\rho_{R\to\mathbb R}(d)\in\mathbb R`),
+                    " なので、複素数 ", math(String.raw`z\in\mathbb C`),
+                    " の実部 ", math(String.raw`\operatorname{Re}z\in\mathbb R`),
+                    " と虚部 ", math(String.raw`\operatorname{Im}z\in\mathbb R`),
+                    " を取り出すと次が成り立つ。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(a)
+&=\operatorname{Re}\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
+&&\bigl(\because\ \mathbb C\text{ の実部の定義}\bigr)\\
+&=\operatorname{Re}\bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \text{上の等式}\bigr)\\
+&=\rho_{R\to\mathbb R}(c)
+&&\bigl(\because\ \mathbb C\text{ の実部の定義}\bigr),
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(b)
+&=\operatorname{Im}\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
+&&\bigl(\because\ \mathbb C\text{ の虚部の定義}\bigr)\\
+&=\operatorname{Im}\bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \text{上の等式}\bigr)\\
+&=\rho_{R\to\mathbb R}(d)
+&&\bigl(\because\ \mathbb C\text{ の虚部の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_cut_realization_preserves_strict_order"),
                     " の単射性より ", math(String.raw`a=c`), " および ",
                     math(String.raw`b=d`), " となる。従って",
                   ]),
