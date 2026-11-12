@@ -6,6 +6,7 @@
 
 ## 現在地
 
+- **2026-11-12（連続実行）、実際の閉歩道の巡回総回転数を各出発辺の一歩の回転数の有限和へ展開した。** 次はこの和を境界頂点の有限和へ対応させる。
 - **2026-11-12（並列の連続実行）、下切断の上限による実現写像が有理数上で包含写像に一致すること（`claim_cut_realization_agrees_on_rationals`）を Lean 具体版と必要十分版で示し、本文の証明に欠けていた狭義順序の定義・三分法の排他性の引用と、最小上界の一意性による結論を足した。** 並列の表の次は、下切断の上限による実現写像が加法を保つことである。
 - **2026-11-12（並列の連続実行）、実閉部分体の元の有理下切断が実数上限を持つこと（`claim_real_algebraic_lower_cut_has_supremum`）を Lean 具体版と必要十分版で示し、本文の証明に欠けていた狭義順序の定義・推移律・三分法の排他性の引用を足した。** 並列の表の次は、下切断の上限による実現写像が有理数上で包含写像に一致することである。
 - **2026-11-12（並列の連続実行）、実閉部分体の元の任意の有理幅での挟み込み（`claim_real_algebraic_rational_pinching`）を Lean 具体版と必要十分版で示し、本文の証明に欠けていた三分法・推移律の引用を足した。** 並列の表の次は、実閉部分体の元の有理下切断の上限である。
@@ -24,7 +25,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 頂点ごとの局所回転数を巡回総回転数へ足し上げる | 記述・SageMath 済。Lean は未着手 | 接続数一・二・三の和から巡回総回転数を求め、方向反転の一歩の符号定理を使う。 |
+| Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を対応させる | 記述・SageMath 済。Lean は未着手 | 巡回総回転数を各出発辺の有限和へ展開する Lean 二版は済んだ。次は持ち上げ点と境界頂点の全単射、歩道の左右による方向表、方向反転の一歩の符号定理を使い、境界頂点の有限和と同定する。 |
 | Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
 | Onsager 閉形式への接続 | 頂点単純閉路の循環総回転数は切断線偶奇で決まる | 記述・SageMath 済。Lean 二版は未着手 | 零巻き付きと非零巻き付きの結果を切断線偶奇へ接続する。切断線偶奇が零の場合は、上の行「切断線偶奇が零の頂点単純閉路の巻き付きは零である」を引く（原始性を経由しない）。 |
@@ -53,6 +54,7 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
 
+- 2026-11-12: 巡回総回転数の定義と一歩の回転数を照合し、末辺から始辺への項が一度だけ加わることを確認した（修正不要）。
 - 2026-11-12: 「下切断による実現写像は有理数をそのまま実現する」の本文の証明が、$0<_Rq-r$ から $r<_Rq$ を出す狭義順序の定義（`def_real_algebraic_strict_order`）を引かず、$r<_Rr$ を退ける根拠を本文に節の無い「狭義順序の非反射性」としていた。前者を引き、後者を三分法の排他性（`claim_real_algebraic_order_trichotomy`）へ直した。包含写像が狭義順序を保ち反映することを `def_real_logarithm` の $\le$ の保存と単射性から出す段、$\iota(q)$ が最小上界であることと前の主張の上限が最小上界であることから一意性で等号を得る段を明示した（主張は不変）。SageMath を新しい各行に合わせて書き直した（2,190 件、否定の対照 333 件）。
 - 2026-11-12: 「実閉部分体の元の有理下切断は実数上限を持つ」の本文の証明が、$s<t$ の場合を「$s<_Rt$ となり矛盾する」、$s=t$ の場合を「$t<_Rs$ に反する」とだけ書き、$0<_Rt-s$ から $s<_Rt$ を出す狭義順序の定義、$t<_Rs$ と合わせて $t<_Rt$ を出す推移律、$t<_Rt$ を退ける三分法の排他性（`claim_real_algebraic_order_trichotomy`）を引いていなかった。三つを引く形へ書き直し、包含写像による $\iota(t)<\iota(s)$ の根拠を「順序を保つ単射」と書いた（`def_real_logarithm` は $\le$ の保存と単射性を述べる。主張と $\varepsilon:=1$ の挟み込みは不変）。SageMath を新しい各行に合わせて書き直した（1,249 件、否定の対照 397 件）。
 - 2026-11-12: 「実閉部分体の元は任意の有理幅で挟める」の本文の証明が、$j_0<Mn$ を「有理数の順序と正の有理数の正値性」だけで出し（実際には推移律と三分法の排他性が要る）、最大性から $a<_R(j_0+1)/n$ を出す段で三分法を、$r<_Rj_0/n\le_Ra$ から $r<_Ra$ を出す段で推移律を引いていなかった。$j_0=Mn$ なら $M\le_Ra<_RM$ から $M<_RM$ となり三分法の排他性に反すること、$a,s$ に三分法を当てて $s\le_Ra$ でないことから $a<_Rs$ を出すこと、$j_0/n\le_Ra$ の二つの場合で推移律か書き換えにより $r<_Ra$ を得ることを明示する形へ書き直した（主張と $n=2f+1$、$r,s$ は不変）。SageMath を新しい各行に合わせて書き直した（199 件、否定の対照 13 件）。
@@ -69,6 +71,7 @@
 
 ## 前進の記録
 
+- 2026-11-12: 局所回転数を巡回総回転数へ足す行を、巡回和への添字変換と境界頂点への対応へ分けた。巡回和への添字変換を実際の閉歩道の具体版と任意の有限辺列の必要十分版で示した。本文の巡回総回転数の定義と同じ、内部の隣接二辺の和に末辺から始辺への一項を加える式を、各出発辺の和に書き直した。境界頂点への対応は次の行に残した。
 - 2026-11-12: 並列の表の先頭の行の五件目、下切断の上限による実現写像の有理数上での一致（`claim_cut_realization_agrees_on_rationals`）を済ませた。具体版（`RealEscape/CutRealizationAgreesOnRationals.lean`）は実際の実閉部分体のデータについて、$r<q\Rightarrow r<_Rq$（`realAlgebraic_rat_lt_of_lt`）、前の主張の具体版の `realAlgebraic_lowerCut_lt_of_lt` による逆向き、下切断の同値（`mem_realAlgebraicLowerCutImage_rat`）、上界性、稠密性（`exists_rat_btwn`。ここが脱出）による最小性（`realAlgebraicLowerCutImage_rat_isLUB`）を示し、前の主張の具体版が与える最小上界との一意性で $\rho(q)=\iota(q)$ を得る（`cutRealization_agrees_on_rationals`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/CutRealizationAgreesOnRationals.lean`）は前の主張と同じ推移律・非反射性・有理数の順序の保存の三つだけを仮定し、前の主張に渡す挟み込みは $q-1<q<q+1$ から作るので仮定に置かない。導出版は `CutRealizationAgreesOnRationalsFromNecSuf.lean`。到達点に要る Lean の無い主張は 40 件から 39 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の四件目、実閉部分体の元の有理下切断の実数上限（`claim_real_algebraic_lower_cut_has_supremum`）を済ませた。具体版（`RealEscape/RealAlgebraicLowerCutSupremum.lean`）は実際の実閉部分体のデータについて、下切断の像 `realAlgebraicLowerCutImage` を置き、$\varepsilon:=1$ の挟み込みの具体版から $r,s$ を取って非空性（`realAlgebraicLowerCutImage_nonempty`）、推移律と三分法の排他性（`realAlgebraicLt_irrefl`）と正の有理数の正値性で $t<s$（`realAlgebraic_lowerCut_lt_of_lt`）、包含写像で上界（`realAlgebraicLowerCutImage_bddAbove`）を示し、実数の完備性（`Real.isLUB_sSup`。ここが脱出）で `realAlgebraicCutRealization` が最小上界であることを得る（`realAlgebraic_lower_cut_has_supremum`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/RealAlgebraicLowerCutSupremum.lean`）は集合・有理数の写像・関係について、推移律・非反射性・有理数の順序の保存の三つだけを仮定し、挟み込みを幅を使わない下側と上側の存在としてこの元についての仮定で受ける（加法・乗法・三分法の網羅性は使わない）。導出版は `RealAlgebraicLowerCutSupremumFromNecSuf.lean`。到達点に要る Lean の無い主張は 41 件から 40 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の三件目、実閉部分体の元の任意の有理幅での挟み込み（`claim_real_algebraic_rational_pinching`）を済ませた。具体版（`CriticalExponent/RealAlgebraicRationalPinching.lean`）は実際の実閉部分体のデータについて、Archimedes 性の具体版から $M$ を取り、$0<2/n<\varepsilon$（`rational_two_div_succ_lt`）、$J$ を区間の有限集合の部分集合として作って最大元 $j_0$ を取り、三分法の排他性と推移律で $j_0\ne Mn$（`realAlgebraic_not_le_of_lt`）、三分法で $a<_Rs$（`realAlgebraic_lt_of_not_le`）、狭義順序の定義と推移律で $r<_Ra$（`realAlgebraic_lt_of_lt_of_le`）を本文と同じ順で示す（`realAlgebraic_rational_pinching`）。必要十分版を呼ばない。必要十分版（`NecSuf/CriticalExponent/RealAlgebraicRationalPinching.lean`）は標数零の可除環と「正」の述語について、正の和が正、正の有理数が正、零は正でない、各元は正・零・負のいずれか、の四つだけを仮定し、Archimedes 性をこの元についての仮定で受ける（積・可換性・平方は使わない）。導出版は `RealAlgebraicRationalPinchingFromNecSuf.lean`。到達点に要る Lean の無い主張は 42 件から 41 件になった（`count-goal-lean-remaining.ts`）。

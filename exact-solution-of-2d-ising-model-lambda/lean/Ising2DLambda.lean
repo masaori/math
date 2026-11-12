@@ -1236,6 +1236,8 @@ import Ising2DLambda.NecSuf.KacWard.BoundaryVertexLocalTurn
 import Ising2DLambda.KacWard.BoundaryVertexLocalTurn
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexTurnSum
 import Ising2DLambda.KacWard.BoundaryVertexTurnSum
+import Ising2DLambda.NecSuf.KacWard.CyclicTurningAsStepSum
+import Ising2DLambda.KacWard.CyclicTurningAsStepSum
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexSidePropagation
 import Ising2DLambda.KacWard.BoundaryVertexSidePropagation
 import Ising2DLambda.KacWard.BoundaryVertexSidePropagationFromNecSuf
