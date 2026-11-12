@@ -180,7 +180,7 @@ theorem zy_prep_neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
     _ = (-1) * (-1) := (neg_one_mul (-1)).symm                          -- `multiply_by_minus_one`（`z → −1_ℂ`）
     _ = 1 := complex_minus_one_mul_minus_one                            -- `minus_one_times_minus_one_is_one_in_cc`
 
-/-- 人手の証明の冒頭の Pauli 行列の成分。 -/
+/-- 人手 `pauli_matrix_products` で定めた Pauli 行列の成分（人手の証明の冒頭がこの定めを引く）。 -/
 theorem pauliX_apply_00 : pauliX 0 0 = 0 := rfl
 theorem pauliX_apply_01 : pauliX 0 1 = 1 := rfl
 theorem pauliX_apply_10 : pauliX 1 0 = 1 := rfl
@@ -228,7 +228,7 @@ theorem pauliDecompRhs_apply_00 (a b c d : ℂ) : pauliDecompRhs a b c d 0 0 = a
           + kappaY b c * pauliY 0 0) + kappaZ a d * pauliZ 0 0 := by
           rw [kroneckerDelta_self]                                      -- `def_kronecker_delta`
     _ = ((kappa0 a d * 1 + kappaX b c * 0) + kappaY b c * 0) + kappaZ a d * 1 := by
-          rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `σ^x, σ^y, σ^z` の `(1,1)` 成分
+          rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `pauli_matrix_products` の `σ^x, σ^y, σ^z` の `(1,1)` 成分
     _ = ((kappa0 a d * 1 + 0) + 0) + kappaZ a d * 1 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = kappa0 a d * 1 + kappaZ a d * 1 := by
@@ -261,7 +261,7 @@ theorem pauliDecompRhs_apply_01 (a b c d : ℂ) : pauliDecompRhs a b c d 0 1 = b
           + kappaY b c * pauliY 0 1) + kappaZ a d * pauliZ 0 1 := by
           rw [kroneckerDelta_of_ne (by decide)]                         -- `def_kronecker_delta`
     _ = ((kappa0 a d * 0 + kappaX b c * 1) + kappaY b c * (-Complex.I)) + kappaZ a d * 0 := by
-          rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `σ^x, σ^y, σ^z` の `(1,2)` 成分
+          rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `pauli_matrix_products` の `σ^x, σ^y, σ^z` の `(1,2)` 成分
     _ = ((0 + kappaX b c * 1) + kappaY b c * (-Complex.I)) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = kappaX b c * 1 + kappaY b c * (-Complex.I) := by
@@ -303,7 +303,7 @@ theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c
           + kappaY b c * pauliY 1 0) + kappaZ a d * pauliZ 1 0 := by
           rw [kroneckerDelta_of_ne (by decide)]                         -- `def_kronecker_delta`
     _ = ((kappa0 a d * 0 + kappaX b c * 1) + kappaY b c * Complex.I) + kappaZ a d * 0 := by
-          rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `σ^x, σ^y, σ^z` の `(2,1)` 成分
+          rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `pauli_matrix_products` の `σ^x, σ^y, σ^z` の `(2,1)` 成分
     _ = ((0 + kappaX b c * 1) + kappaY b c * Complex.I) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = kappaX b c * 1 + kappaY b c * Complex.I := by
@@ -346,7 +346,7 @@ theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d
           + kappaY b c * pauliY 1 1) + kappaZ a d * pauliZ 1 1 := by
           rw [kroneckerDelta_self]                                      -- `def_kronecker_delta`
     _ = ((kappa0 a d * 1 + kappaX b c * 0) + kappaY b c * 0) + kappaZ a d * (-1) := by
-          rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `σ^x, σ^y, σ^z` の `(2,2)` 成分
+          rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `pauli_matrix_products` の `σ^x, σ^y, σ^z` の `(2,2)` 成分
     _ = ((kappa0 a d * 1 + 0) + 0) + kappaZ a d * (-1) := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = kappa0 a d * 1 + kappaZ a d * (-1) := by

@@ -433,31 +433,29 @@ t
       paragraph([
         "以下、",
         math(String.raw`\sigma^x, \sigma^y, \sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
-        " を標準的な Pauli 行列 ",
-        math(String.raw`\sigma^x=\begin{pmatrix}0&1\\1&0\end{pmatrix}`),
-        "、",
-        math(String.raw`\sigma^y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}`),
-        "、",
-        math(String.raw`\sigma^z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}`),
-        " とする（",
+        " は ",
+        ref("pauli_matrix_products"),
+        " で定めた二次の Pauli 行列とし、",
         math(String.raw`i \in \mathbb{C}`),
         " は ",
         ref("def_imaginary_unit"),
-        " の虚数単位）。",
-        math(String.raw`\sigma_k^x, \sigma_k^y, \sigma_k^z`),
-        " は ",
-        ref("def_transfer_matrix_symbols"),
-        " のとおり、第 ",
+        " の虚数単位とする。",
+        math(String.raw`\sigma_k^x, \sigma_k^y, \sigma_k^z \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`1\leq k\leq M_{\mathrm{col}}`),
+        "）は ",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列、すなわち第 ",
         math(String.raw`k`),
         " 番目の因子（サイト）のみが対応する Pauli 行列で、他の因子はすべて ",
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " であるものとする。",
+        " であるクロネッカー積とする。",
       ]),
       paragraph(["Step 1: 単一サイトの Pauli 行列の積公式。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^x
-&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \sigma^x \text{ の定義}) \\
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^x) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
 &= I_{\mathrm{Mat}(2,\mathbb{C})} \quad (\because \text{単位行列の定義})
 \end{aligned}`,
@@ -465,10 +463,10 @@ t
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^z
-&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \quad (\because \sigma^y,\ \sigma^z \text{ の定義}) \\
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^y,\ \sigma^z) \\
 &= \begin{pmatrix}0&i\\i&0\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
 &= i\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \text{スカラー倍の成分計算}) \\
-&= i\,\sigma^x \quad (\because \sigma^x \text{ の定義})
+&= i\,\sigma^x \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
 \end{aligned}`,
       ),
       paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す。"]),
@@ -499,7 +497,7 @@ t
       displayMath(
         String.raw`\begin{aligned}
 \sigma_k^a \sigma_k^b
-&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \sigma_k^a,\ \sigma_k^b \text{ の定義の代入}) \\
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_k^a,\ \sigma_k^b) \\
 &= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes(II) \quad (\because \text{クロネッカー積の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes I \quad (\because II=I)
 \end{aligned}`,
@@ -520,10 +518,10 @@ t
       displayMath(
         String.raw`\begin{aligned}
 \sigma_k^a \sigma_l^b
-&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \sigma_k^a,\ \sigma_l^b \text{ の定義の代入}) \\
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_k^a,\ \sigma_l^b) \\
 &= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I \quad (\because \text{クロネッカー積の積の規則}) \\
 &= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma_l^b \sigma_k^a \quad (\because \sigma_l^b, \sigma_k^a \text{ の定義（第 } l \text{ 因子・第 } k \text{ 因子のみが非自明）})
+&= \sigma_l^b \sigma_k^a \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_l^b,\ \sigma_k^a \text{（第 } l \text{ 因子・第 } k \text{ 因子のみが非自明）})
 \end{aligned}`,
       ),
       paragraph([
@@ -830,9 +828,11 @@ ii
         math(String.raw`I = I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " は Step 1 の略記）、",
         math(String.raw`R`),
-        " の 4 つの成分を求める。Pauli 行列の成分の行は証明の冒頭の ",
+        " の 4 つの成分を求める。Pauli 行列の成分の行は ",
+        ref("pauli_matrix_products"),
+        " で定めた ",
         math(String.raw`\sigma^x, \sigma^y, \sigma^z`),
-        " の定義である。",
+        " の成分である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 R_{11}
@@ -847,7 +847,7 @@ R_{11}
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{11}) + \kappa_y(\sigma^y)_{11}\bigr) + \kappa_z(\sigma^z)_{11}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
-&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_0 1_{\mathbb{C}} + \kappa_z 1_{\mathbb{C}}
@@ -878,7 +878,7 @@ R_{12}
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{12}) + \kappa_y(\sigma^y)_{12}\bigr) + \kappa_z(\sigma^z)_{12}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + \kappa_z 0_{\mathbb{C}}
-&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y(-i)
@@ -919,7 +919,7 @@ R_{21}
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{21}) + \kappa_y(\sigma^y)_{21}\bigr) + \kappa_z(\sigma^z)_{21}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + \kappa_z 0_{\mathbb{C}}
-&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y\,i
@@ -962,7 +962,7 @@ R_{22}
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{22}) + \kappa_y(\sigma^y)_{22}\bigr) + \kappa_z(\sigma^z)_{22}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
-&&(\because\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_0 1_{\mathbb{C}} + \kappa_z(-1_{\mathbb{C}})
@@ -1138,6 +1138,7 @@ P_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: 証明の冒頭が二次の Pauli 行列を pauli_matrix_products を引かずに成分で置き直し、σ_k^a の出典を def_transfer_matrix_symbols としていた（Step 3 は def_site_pauli_matrices を引く）。冒頭を pauli_matrix_products の σ^x, σ^y, σ^z と def_site_pauli_matrices の σ_k^a を引く形にし（i ∈ ℂ が def_imaginary_unit の虚数単位であることの宣言は残した）、Step 1 の鎖の根拠「σ^x の定義」「σ^y, σ^z の定義」と、クロネッカー積へ持ち上げる 2 つの鎖の根拠「σ_k^a, σ_k^b の定義の代入」などを同じ 2 つのラベル参照に替えた。Step 3 の地の文「Pauli 行列の成分の行は証明の冒頭の σ^x, σ^y, σ^z の定義である」と R の 4 成分の鎖の根拠「σ^x, σ^y, σ^z の (i,j) 成分」も pauli_matrix_products を引く形にした。主張と計算は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 主張の括弧書き「def_kronecker の同一視により Mat(2^M,ℂ) = Mat(2^M,ℂ) であり」を含む括弧書きを削った。もとは「Mat(2,ℂ)^{⊗M} = Mat(2^M,ℂ)」という抽象テンソル冪との同一視で、⊗ を具体的なクロネッカー積 ⊠ へ一括で置き換えたときに両辺が同じ集合の等式になり何も述べなくなっていた（「〜とみなす」を書かない規律にも触れていた）。括弧書きの残り「S の元はいずれも 2^M 次の複素行列である」は、同じ文の頭で def_transfer_matrix_symbols を引いて Z, Y ∈ Mat(2^M,ℂ) と書いていることの繰り返しなので、括弧書きごと削った。主張の中身は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 の後半で、定義の無い添字 a_k を持つ σ_k^{a_k} を第 k 因子だけを e_k にした行列と呼んでいた（a_k は展開の成分 a_{11} などと文字も重なっていた）。これを E_k := I⊠⋯⊠e_k⊠⋯⊠I と置き直し、e_k = I なら kronecker_product_rule (2) と (ii)、e_k = σ^x・σ^y・σ^z なら def_site_pauli_matrices と Step 2 で E_k ∈ 𝒜 となることを場合ごとに書いた。積 E_1⋯E_M = e_1⊠⋯⊠e_M の 1 行（根拠「クロネッカー積の積の規則」、前置きは「Step 1 の異サイト積公式を繰り返して」）を、def_finite_product_of_matrices の P_1 := E_1・P_{s+1} := P_s E_{s+1} についての帰納法（site_pauli_prefix_product_kronecker_form の証明と同じ形。帰納の一段は kronecker_product_rule (1)・右単位・左単位 2 回の 6 行）にし、同じ帰納法で P_s ∈ 𝒜 を (iv) から示した。主張と論法は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 3 の A の展開の 1 行（根拠「成分比較」）の係数の分母 2 を 2_ℂ と読み、2_ℂ ∈ ℂ^×（inclusion_rr_to_cc の第 1 成分の比較）と、4 つの分数が def_complex_quotient の商（w → 2_ℂ）であることを書いた。係数に κ_0・κ_x・κ_y・κ_z と名前を付け、準備 (a)〜(g)（(2_ℂz)2_ℂ^{-1} = z、z + z = 2_ℂz、z + (−z) = 0_ℂ、(z+w)+(z−w) = 2_ℂz、(z+w)−(z−w) = 2_ℂw、ii = −1_ℂ、(−i)i = 1_ℂ）を置き、右辺の 4 成分がそれぞれ a_{11}・a_{12}・a_{21}・a_{22} になることを、体の公理と定義を 1 行に 1 つずつ当てる鎖にした（各鎖は R の定義・def_matrix_sum・def_matrix_scalar_multiple の 3 行で始まり、κ の定義を代入する行を置いてから def_complex_quotient で開く）。主張と展開の式は不変。",
