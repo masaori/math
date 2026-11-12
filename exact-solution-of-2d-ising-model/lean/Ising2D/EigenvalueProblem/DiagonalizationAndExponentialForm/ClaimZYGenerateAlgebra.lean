@@ -16,18 +16,17 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | --- | --- |
 | Step 1（準備 (f)・(g)、第 1〜4 式、`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` の鎖、異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`（準備 (f)・(g)）、`pauliX_mul_pauliX`（第 1 式。`pauli_matrix_products`）・`pauliY_mul_pauliZ`（第 2 式）・`pauliX_eq`（第 3 式）・`siteOp_mul_same`（第 4 式）・`sigmaX_mul_self`・`sigmaX_eq`（各鎖と 1 段ずつの `calc`）、`siteOp_mul_comm`（`distinct_site_pauli_matrices_commute`） |
 | Step 2（帰納法で `σ^x_m, σ^y_m, σ^z_m ∈ 𝒜`） | `xString_mem_adjoin`, `sigmaX_mem_adjoin` ほか |
-| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底） | 準備 (a)〜(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`（(f)・(g) は Step 1 の行）、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
-| Step 3 前半の結び（`𝓑` は張り、`dim Mat(2,ℂ) = 4 = #𝓑` より基底） | `top_le_span_pauliFamily`・`finrank_mat2_eq_four`・`pauliBasis`（「張り、元数が次元に等しい族は基底」は mathlib の `basisOfTopLeSpanOfCardEqFinrank` に委ねる） |
-| Step 3 後半（`𝓑^{⊠M}` は基底。`<tensor_basis>` (2) を `𝓑` に適用） | `kroneckerTensorPowBasisOf M pauliBasis`（`TheoremTensorBasisFromNecSuf.lean`。mathlib の `Basis.piTensorProduct` を移したもので、人手 `<tensor_basis>` の Step 4 と 1 対 1 でない） |
+| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` を張る） | 準備 (a)〜(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`（(f)・(g) は Step 1 の行）、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
+| Step 3 前半の結び（`𝓑` は `Mat(2,ℂ)` を張る） | `pauliFamily_spans`（`matrix_two_decomp` の係数を並べる） |
+| Step 3 後半（`𝓑^{⊠M}` は `Mat(2^M,ℂ)` を張る。`<kronecker_family_of_spanning_family_spans>` を `𝓑` に適用） | `kronecker_family_of_spanning_family_spans pauliFamily pauliFamily_spans`（`ClaimKroneckerFamilyOfSpanningFamilySpans.lean`） |
 | Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
 | Step 3 後半（`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法で `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`、`s = M_col` で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteFactorPrefixProduct`（`P_s`）・`siteFactorPrefixProduct_eq_and_mem`（`s = 1` の 2 行と一段の 6 行の鎖）・`siteProd_mem`（`s = M_col`） |
-| Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`） | `Z_Y_generate_algebra` |
+| Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`。`𝒜` は ℂ-線型結合について閉じる） | `Z_Y_generate_algebra` |
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.TheoremTensorBasisFromNecSuf
-import Mathlib.LinearAlgebra.Dimension.OrzechProperty
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
 
 namespace Ising2D
 
@@ -373,35 +372,14 @@ theorem matrix_two_decomp (B : Matrix (Fin 2) (Fin 2) ℂ) :
 noncomputable def pauliFamily : Fin 4 → Matrix (Fin 2) (Fin 2) ℂ :=
   ![1, pauliX, pauliY, pauliZ]
 
-/-- 人手 Step 3 の「よって `𝓑` は張り」: 任意の `A ∈ Mat(2, ℂ)` は展開の式 `matrix_two_decomp` で
-`𝓑` の ℂ-線型結合に書ける。 -/
-theorem top_le_span_pauliFamily :
-    (⊤ : Submodule ℂ (Matrix (Fin 2) (Fin 2) ℂ)) ≤ Submodule.span ℂ (Set.range pauliFamily) := by
-  intro A _
-  rw [matrix_two_decomp A]
-  refine add_mem (add_mem (add_mem ?_ ?_) ?_) ?_
-  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩)
-  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨1, rfl⟩)
-  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨2, rfl⟩)
-  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨3, rfl⟩)
-
-/-- 人手 Step 3 の `dim_ℂ Mat(2, ℂ) = 4`（人手は根拠を書いていない）。Lean は行列単位の基底
-`NecSuf.matrixUnitBasis`（`<tensor_basis>` (1) の `M = 1` に当たる成分比較で作った基底）の元数
-`#({1,2} × {1,2}) = 4` を使う。 -/
-theorem finrank_mat2_eq_four : Module.finrank ℂ (Matrix (Fin 2) (Fin 2) ℂ) = 4 := by
-  rw [Module.finrank_eq_card_basis (NecSuf.matrixUnitBasis ℂ (Fin 2))]
-  rfl
-
-/-- 人手 Step 3 の「`dim_ℂ Mat(2,ℂ) = 4 = #𝓑` より基底である」（人手は根拠を書いていない）。
-Lean は「全体を張り、元数が次元に等しい族は基底」（人手 `<tensor_basis>` の証明の Step 3 (b) と同じ事実）を
-mathlib の `basisOfTopLeSpanOfCardEqFinrank` で使い、自前には証明していない。 -/
-noncomputable def pauliBasis : Module.Basis (Fin 4) ℂ (Matrix (Fin 2) (Fin 2) ℂ) :=
-  basisOfTopLeSpanOfCardEqFinrank pauliFamily top_le_span_pauliFamily
-    (by rw [finrank_mat2_eq_four]; rfl)
-
-@[simp]
-theorem coe_pauliBasis : ⇑pauliBasis = pauliFamily :=
-  coe_basisOfTopLeSpanOfCardEqFinrank _ _ _
+/-- 人手 Step 3 の「よって `𝓑` は `Mat(2,ℂ)` を ℂ 上張る」: 任意の `A ∈ Mat(2, ℂ)` は展開の式 `matrix_two_decomp` の
+係数 `κ_0, κ_x, κ_y, κ_z` で `𝓑` の ℂ-線型結合に書ける（`<kronecker_family_of_spanning_family_spans>` の仮定の形）。 -/
+theorem pauliFamily_spans (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    ∃ c : Fin 4 → ℂ, A = ∑ a, c a • pauliFamily a := by
+  refine ⟨![(A 0 0 + A 1 1) / 2, (A 0 1 + A 1 0) / 2, (Complex.I * (A 0 1 - A 1 0)) / 2,
+    (A 0 0 - A 1 1) / 2], ?_⟩
+  rw [Fin.sum_univ_four]
+  exact matrix_two_decomp A
 
 /-! ## Step 3 後半: `e_1 ⊠ ⋯ ⊠ e_M` は `𝒜` に属する -/
 
@@ -532,22 +510,16 @@ theorem siteOp_pauliFamily_mem_adjoin (k : Fin M) (j : Fin 4) :
 /-- **`<Z_Y_generate_algebra>` の形式化**:
 `{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2^M, ℂ)` 全体である。
 
-人手 Step 3 の結びと同じく、`𝓑^{⊠M}`（`<tensor_basis>` (2) を `𝓑` に適用した基底）の元
+人手 Step 3 の結びと同じく、`𝓑^{⊠M}` が `Mat(2^M, ℂ)` を張ること（`<kronecker_family_of_spanning_family_spans>` を
+`𝓑` に適用した `kronecker_family_of_spanning_family_spans pauliFamily pauliFamily_spans`）と、その元
 `e_1 ⊠ ⋯ ⊠ e_M` がすべて `𝒜` に入ること（`siteProd_mem` と `siteOp_pauliFamily_mem_adjoin`）から、
 `Mat(2^M, ℂ) = span_ℂ(𝓑^{⊠M}) ⊆ 𝒜`（`𝒜` は ℂ-線型結合について閉じる）を得る。 -/
 theorem Z_Y_generate_algebra (M : ℕ) : Algebra.adjoin ℂ (ZYSet M) = ⊤ := by
-  have hbasis : ∀ p : Fin M → Fin 4,
-      kroneckerTensorPowBasisOf M pauliBasis p ∈ Algebra.adjoin ℂ (ZYSet M) := by
-    intro p
-    rw [kroneckerTensorPowBasisOf_apply, coe_pauliBasis]                -- `e_1 ⊠ ⋯ ⊠ e_M`
-    exact siteProd_mem _ _ fun k => siteOp_pauliFamily_mem_adjoin k (p k)
-  have hle : Submodule.span ℂ (Set.range (kroneckerTensorPowBasisOf M pauliBasis)) ≤
-      Subalgebra.toSubmodule (Algebra.adjoin ℂ (ZYSet M)) := by
-    rw [Submodule.span_le]
-    rintro _ ⟨p, rfl⟩
-    exact hbasis p
-  rw [(kroneckerTensorPowBasisOf M pauliBasis).span_eq] at hle          -- `Mat(2^M,ℂ) = span(𝓑^{⊠M})`
-  refine eq_top_iff.2 fun v _ => ?_
-  exact hle (Submodule.mem_top)
+  refine eq_top_iff.2 fun X _ => ?_
+  obtain ⟨d, hd⟩ := kronecker_family_of_spanning_family_spans pauliFamily pauliFamily_spans X
+                                                                        -- `Mat(2^M,ℂ) = span(𝓑^{⊠M})`
+  rw [hd]
+  exact Subalgebra.sum_mem _ fun p _ => Subalgebra.smul_mem _
+    (siteProd_mem _ _ fun k => siteOp_pauliFamily_mem_adjoin k (p k)) _  -- `𝒜` は ℂ-線型結合について閉じる
 
 end Ising2D

@@ -99,6 +99,17 @@ targets=(
   Ising2D.kroneckerTensorPowBasis_apply
   Ising2D.kroneckerTensorPowBasisOf
   Ising2D.kroneckerTensorPowBasisOf_apply
+  Ising2D.linComb_mem_kroneckerFamilyCombinations
+  Ising2D.siteProd_update_sum_smul
+  Ising2D.siteProd_mem_kroneckerFamilyCombinations
+  Ising2D.E_eq_siteProd_single
+  Ising2D.kronecker_family_of_spanning_family_spans
+  Ising2D.NecSuf.linComb_mem_familyCombinations
+  Ising2D.NecSuf.map_mem_familyCombinations
+  Ising2D.NecSuf.mem_familyCombinations_of_spanning
+  Ising2D.eq_sum_siteProd_single
+  Ising2D.span_kroneckerFamily_eq_top_of_necSuf
+  Ising2D.kronecker_family_of_spanning_family_spans_of_necSuf
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
   Ising2D.identity_matrix_two_conjTranspose
@@ -218,10 +229,7 @@ targets=(
   Ising2D.acomm_Z_Z_clifford
   Ising2D.acomm_Y_Y_clifford
   Ising2D.matrix_two_decomp
-  Ising2D.top_le_span_pauliFamily
-  Ising2D.finrank_mat2_eq_four
-  Ising2D.pauliBasis
-  Ising2D.coe_pauliBasis
+  Ising2D.pauliFamily_spans
   Ising2D.siteOp_pauliFamily_mem_adjoin
   Ising2D.siteFactorPrefixProduct_eq_and_mem
   Ising2D.siteProd_mem

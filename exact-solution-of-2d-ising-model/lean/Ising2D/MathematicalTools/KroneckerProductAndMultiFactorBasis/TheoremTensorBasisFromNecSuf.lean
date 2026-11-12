@@ -25,7 +25,8 @@
 抽象テンソル冪 `AbstractTensorPow M` 側の基底 `matTensorPowBasis` も、
 基底の移送 `NecSuf.basisOfLinearEquiv` で Kronecker 表現へ運べる
 （`kroneckerTensorPowBasis`）。同じ移送を `Mat(2,ℂ)` の任意の基底で行ったものが `<tensor_basis>` (2) の
-`kroneckerTensorPowBasisOf` で、`<Z_Y_generate_algebra>` Step 3 後半が `𝓑 = {I, σ^x, σ^y, σ^z}` で使う。
+`kroneckerTensorPowBasisOf` である（`<Z_Y_generate_algebra>` は張ることだけを使うので、これではなく
+`ClaimKroneckerFamilyOfSpanningFamilySpans.lean` を引く）。
 -/
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Representation
@@ -96,7 +97,7 @@ theorem kroneckerTensorPowBasis_apply (p : Fin M → Fin 2 × Fin 2) :
 mathlib の `Basis.piTensorProduct` の特殊化で、人手 `<tensor_basis>` の Step 4
 （行列単位を `b` で展開し、`kronecker_multilinear` を因子ごとに当て、元数と次元の一致で基底とする）
 の 1 対 1 の形式化ではない。添字の型 `ι` を任意にしたのは、移送元の `tensorPowBasis` が任意の添字で述べられているためで、
-`<Z_Y_generate_algebra>` は `ι = Fin 4` で使う。 -/
+人手 (2) の `𝓑 = {b_1, …, b_4}` は `ι = Fin 4` に当たる。 -/
 noncomputable def kroneckerTensorPowBasisOf {ι : Type*} (b : Basis ι ℂ (Matrix (Fin 2) (Fin 2) ℂ)) :
     Basis (Fin M → ι) ℂ (TensorPow M) :=
   NecSuf.basisOfLinearEquiv (tensorPowBasis M b) (tensorPowAlgEquiv M).toLinearEquiv

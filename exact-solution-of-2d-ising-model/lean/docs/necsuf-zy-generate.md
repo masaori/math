@@ -78,36 +78,37 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 `ClaimZYGenerateAlgebraFromNecSuf.lean` で必要十分版に渡すために補ったのは 3 つだけである。
 
-1. **基底 `kroneckerTensorPowBasisOf M pauliBasis`**（具体版と共有）:
-   `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` の基底であること（`Ising2D.pauliBasis`。張ることは
-   `Ising2D.matrix_two_decomp`（原文 Step 3 の展開の式。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`）、
-   次元 4 は `finrank_mat2_eq_four`）と、`<tensor_basis>` (2) を `𝓑` に当てた `𝓑^{⊠M}` が
-   `Mat(2^M, ℂ)` の基底であること（`Ising2D.kroneckerTensorPowBasisOf`）。必要十分版へ渡すのは、その族が全体を張ることだけである。
-   `pauliBasis` が張ることには **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
-   `kroneckerTensorPowBasisOf` は `Mat(2, ℂ)` の任意の基底で成り立つ。
+1. **`𝓑^{⊠M}` が全体を張ること `span_kroneckerFamily_eq_top_of_necSuf pauliFamily pauliFamily_spans`**:
+   `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を張ること（`Ising2D.pauliFamily_spans`。係数は
+   `Ising2D.matrix_two_decomp`（原文 Step 3 の展開の式。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`））と、
+   `<kronecker_family_of_spanning_family_spans>` を `𝓑` に当てた `𝓑^{⊠M}` が `Mat(2^M, ℂ)` を張ること
+   （その必要十分版 `NecSuf.mem_familyCombinations_of_spanning` からの導出。`lean/docs/` には別の記録を置かず、必要十分版のファイル冒頭に書いた）。
+   `𝓑` が張ることには **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
+   クロネッカー積の族が張ることは、`Mat(2, ℂ)` を張る任意の族で成り立つ。
 2. **`Ising2D.siteProdHom`**: `siteProd` を積を保つ写像（`MulHom`）として束ねたもの。
    材料は既存の `siteProd_mul` だけ。`M = 0`（人手に現れない場合）は必要十分版の `0 < n` を満たさないので、
    導出の `siteProd_mem_of_necSuf` は具体版と同じく `siteProd_one` と (ii) で別に閉じる。
 3. **`Ising2D.siteOp_pauliFamily_mem_adjoin_of_necSuf`**: 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること。
    `e_k = I` なら `siteOp_one`、`e_k = σ^x, σ^y, σ^z` なら Step 2 の必要十分版の結論。
 
-言い換えると、原文の証明のうち **複素 2×2 行列に依存しているのは「1 サイトの基底の取り方」と
-「その基底のクロネッカー積が基底であること」だけ**であり、Step 2 の帰納法と Step 3 の
-「基底を含むから全体」「`e_1 ⊠ ⋯ ⊠ e_M` は `E_k` の積で作れる」はいずれも一般論である。
+言い換えると、原文の証明のうち **複素 2×2 行列に依存しているのは「1 サイトで張る族の取り方」だけ**であり、
+「張る族のクロネッカー積の族が張ること」、Step 2 の帰納法、Step 3 の
+「張る集合を含むから全体」「`e_1 ⊠ ⋯ ⊠ e_M` は `E_k` の積で作れる」はいずれも一般論である。
 
 ---
 
 ## 3. 具体版が過剰な構造を要求していないかの検査（README 4 節の目的）
 
-必要十分版を書く過程で、具体版が不要な性質に依存している箇所は、下の 1 点目（基底であることを経由する）を除いて見つからなかった。
+必要十分版を書く過程で、具体版が不要な性質に依存している箇所は、下の 1 点目（基底であることを経由していた。2026-11-12 に直した）を除いて見つからなかった。
 具体版 `Z_Y_generate_algebra` の各ステップは、必要十分版の仮定へ対応する
 （ステップの対応表は具体版 `ClaimZYGenerateAlgebra.lean` の冒頭コメント）。
 
-ただし次の 3 点は「必要十分版のほうが仮定が弱い」ことが分かった。
+次の 3 点は「必要十分版のほうが仮定が弱い」ことが分かった（1 点目は 2026-11-12 に具体版・人手を直したので、いまは差が無い）。
 
-* 具体版の Step 3 は人手どおり `𝓑^{⊠M}` が**基底**であることを経由する（`finrank_mat2_eq_four`・
+* 具体版の Step 3 は人手どおり `𝓑^{⊠M}` が**基底**であることを経由していた（`finrank_mat2_eq_four`・
   `basisOfTopLeSpanOfCardEqFinrank`・`Basis.piTensorProduct`）。しかし必要十分版 `NecSuf.eq_top_of_span_eq_top` が
-  使うのは、その族が全体を**張る**ことだけである。人手 Step 3 の「基底である」も、結論には「張る」で足りる。
+  使うのは、その族が全体を**張る**ことだけである。2026-11-12 に人手 Step 3 を「張る」で結ぶ形へ直し
+  （`<kronecker_family_of_spanning_family_spans>` を足して引く）、具体版も同じ形にした。
 
 * 具体版 `Ising2D.siteProd_mem` は `Subalgebra ℂ (TensorPow M)` を相手にしているが、
   必要十分版 `NecSuf.map_mem_of_mulSingle_mem` は**部分半群**で足りる
@@ -120,12 +121,9 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 ## 4. 抽象化できなかった部分と、その理由
 
-* **`matrix_two_decomp`（1 サイトの基底分解）**: これは `Mat(2, ℂ)` の具体的な事実であり、
-  抽象化すると「4 次元代数に基底がある」という内容の無い主張になる。必要十分版へは
-  基底 `pauliBasis` の形で渡すのが限界で、その証明は具体計算のまま残る。
-* **`kroneckerTensorPowBasisOf`（`𝓑^{⊠M}` が基底）**: 人手 `<tensor_basis>` (2) のクロネッカー積の形。
-  Lean は抽象テンソル冪の基底（mathlib の `Basis.piTensorProduct`）を `tensorPowAlgEquiv` で移して得ており、
-  ここでは分離せず具体版を再利用した。
+* **`matrix_two_decomp`（1 サイトの分解）**: これは `Mat(2, ℂ)` の具体的な事実であり、
+  抽象化すると「4 元の族が張る」という内容の無い主張になる。必要十分版へは
+  張ることを述べる `pauliFamily_spans` の形で渡すのが限界で、その証明は具体計算のまま残る。
 
 ---
 

@@ -16,14 +16,14 @@
 
 ## 特殊化で埋めた「具体的な部分」
 
-必要十分版に渡す具体的な部分は次の 3 つである（1 は具体版のファイルと `TheoremTensorBasisFromNecSuf.lean` の定義を使う）。
+必要十分版に渡す具体的な部分は次の 3 つである（1 は具体版の `ClaimZYGenerateAlgebra.lean` と
+`ClaimKroneckerFamilyOfSpanningFamilySpansFromNecSuf.lean` を使う）。
 このうち複素 2×2 行列に依存しているのは 1 の `𝓑` が `Mat(2, ℂ)` を張ること（`matrix_two_decomp`）だけで、
-`<tensor_basis>` (2) は `Mat(2, ℂ)` の任意の基底で、3 は `siteOp_one` と Step 2 だけで成り立つ。
+`<kronecker_family_of_spanning_family_spans>` は `Mat(2, ℂ)` を張る任意の 4 元の族で、3 は `siteOp_one` と Step 2 だけで成り立つ。
 
-1. `kroneckerTensorPowBasisOf M pauliBasis`（具体版の `ClaimZYGenerateAlgebra.lean` と
-   `TheoremTensorBasisFromNecSuf.lean`）: `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` の基底であること
-   （原文 Step 3 前半の成分比較 `matrix_two_decomp` と `dim Mat(2,ℂ) = 4`）と、
-   `<tensor_basis>` (2) を `𝓑` に適用した `𝓑^{⊠M}` が `Mat(2^M, ℂ)` の基底であること。
+1. `span_kroneckerFamily_eq_top_of_necSuf pauliFamily pauliFamily_spans`: `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を張ること
+   （原文 Step 3 前半の成分比較 `matrix_two_decomp`）と、`<kronecker_family_of_spanning_family_spans>` を `𝓑` に適用した
+   `𝓑^{⊠M}` が `Mat(2^M, ℂ)` を張ること（その必要十分版 `NecSuf.mem_familyCombinations_of_spanning` からの導出）。
 2. `siteProdHom`: クロネッカー積 `siteProd` が積を保つこと（`siteProd_mul`。`kronecker_product_rule` (1)）。
    必要十分版の帰納法は `P_1 := E_1` から始まるので `siteProd_one` は要らない。
    ただし `M = 0`（人手に現れない場合）は必要十分版の `0 < n` を満たさないので、具体版と同じく
@@ -43,6 +43,7 @@ Step 2（Jordan–Wigner 文字列の帰納法）は、`P_m P_m = I` から得�
 -/
 import Ising2D.NecSuf.GeneratedByBasis
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpansFromNecSuf
 
 namespace Ising2D
 
@@ -166,14 +167,14 @@ theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
 /-- **`<Z_Y_generate_algebra>` を必要十分版から導出した形**:
 `{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2^M, ℂ)` 全体である。
 
-具体版 `Ising2D.Z_Y_generate_algebra` と**同じ形の主張**で、具体版と同じく基底 `𝓑^{⊠M}` の元
+具体版 `Ising2D.Z_Y_generate_algebra` と**同じ形の主張**で、具体版と同じく `Mat(2^M, ℂ)` を張る `𝓑^{⊠M}` の元
 `e_1 ⊠ ⋯ ⊠ e_M` が `𝒜` に入ることから結論する。論法は `NecSuf/GeneratedByBasis.lean` の
 必要十分版（`eq_top_of_span_eq_top`・`map_mem_of_mulSingle_mem`・`string_mem`・`local_mem`）に委ねている。
-必要十分版へ渡すのは `𝓑^{⊠M}` が全体を張ること（`Basis.span_eq`）だけで、基底であること（線型独立性）は使わない。 -/
+必要十分版へ渡すのは `𝓑^{⊠M}` が全体を張ること（`<kronecker_family_of_spanning_family_spans>` の必要十分版からの導出
+`span_kroneckerFamily_eq_top_of_necSuf`）だけである。 -/
 theorem Z_Y_generate_algebra_of_necSuf (M : ℕ) : Algebra.adjoin ℂ (ZYSet M) = ⊤ := by
-  refine NecSuf.eq_top_of_span_eq_top _ ?_ (kroneckerTensorPowBasisOf M pauliBasis).span_eq
+  refine NecSuf.eq_top_of_span_eq_top _ ?_ (span_kroneckerFamily_eq_top_of_necSuf pauliFamily pauliFamily_spans)
   rintro _ ⟨p, rfl⟩
-  rw [kroneckerTensorPowBasisOf_apply, coe_pauliBasis]
   exact siteProd_mem_of_necSuf _ _ fun k => siteOp_pauliFamily_mem_adjoin_of_necSuf k (p k)
 
 end Ising2D
