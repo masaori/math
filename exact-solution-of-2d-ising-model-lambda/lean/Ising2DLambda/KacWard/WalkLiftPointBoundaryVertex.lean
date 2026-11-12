@@ -1,5 +1,6 @@
 import Ising2DLambda.KacWard.WalkHorizontalBoundaryParity
 import Ising2DLambda.KacWard.CellBoundaryVertices
+import Ising2DLambda.NecSuf.KacWard.WalkLiftPointBoundaryVertex
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -96,4 +97,66 @@ theorem interiorCellsOfWalk_boundaryEdge_odd_traversal
     change verticalEdgeTraversalCount (m + 1) row col r c % 2 = 1
     omega
 
+/-- Every edge of the actual interior-cell boundary is traversed at a
+departure position of the lifted walk. -/
+theorem interiorCellsOfWalk_boundaryEdge_has_departure
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (edge : GridEdge)
+    (hedge : edge ∈ planeCellBoundary
+      (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset) :
+    ∃ j : Fin (m + 1),
+      let p := planeLift γ j.castSucc
+      let q := planeLift γ j.succ
+      p ∈ gridEdgeEndpoints edge ∧ q ∈ gridEdgeEndpoints edge := by
+  let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+  let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
+  have hunit : IsUnitGridWalk (m + 1) row col :=
+    walkSideInteriorBandFromWalk_coordinate_unit γ
+  have hodd := interiorCellsOfWalk_boundaryEdge_odd_traversal γ hγ hh hv edge hedge
+  rcases edge with ⟨axis, ⟨r, c⟩⟩
+  cases axis
+  · change Odd (horizontalEdgeTraversalCount (m + 1) row col r c) at hodd
+    obtain ⟨k, hk, hselected⟩ :=
+      Ising2DLambda.NecSuf.KacWard.exists_position_of_odd_count
+        (m + 1) (fun k => crossesColLevel col c k ∧ row k = r) hodd
+    refine ⟨⟨k, hk⟩, ?_⟩
+    have hindex : Fin.ofNat (m + 2) k = (⟨k, hk⟩ : Fin (m + 1)).castSucc := by
+      apply Fin.ext
+      simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : k < m + 2)]
+    have hnext : Fin.ofNat (m + 2) (k + 1) = (⟨k, hk⟩ : Fin (m + 1)).succ := by
+      apply Fin.ext
+      simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : k + 1 < m + 2)]
+    have hrow : row (k + 1) = r := by
+      rcases hunit k hk with h | h | h | h <;>
+        rcases hselected.1 with hc | hc <;> omega
+    rw [← hindex, ← hnext]
+    change (row k, col k) ∈ gridEdgeEndpoints (false, (r, c)) ∧
+      (row (k + 1), col (k + 1)) ∈ gridEdgeEndpoints (false, (r, c))
+    rcases hselected.1 with hforward | hbackward
+    · simp [gridEdgeEndpoints, hselected.2, hrow, hforward.1, hforward.2]
+    · simp [gridEdgeEndpoints, hselected.2, hrow, hbackward.1, hbackward.2]
+  · change Odd (verticalEdgeTraversalCount (m + 1) row col r c) at hodd
+    obtain ⟨k, hk, hselected⟩ :=
+      Ising2DLambda.NecSuf.KacWard.exists_position_of_odd_count
+        (m + 1) (fun k => crossesRowLevel row r k ∧ col k = c) hodd
+    refine ⟨⟨k, hk⟩, ?_⟩
+    have hindex : Fin.ofNat (m + 2) k = (⟨k, hk⟩ : Fin (m + 1)).castSucc := by
+      apply Fin.ext
+      simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : k < m + 2)]
+    have hnext : Fin.ofNat (m + 2) (k + 1) = (⟨k, hk⟩ : Fin (m + 1)).succ := by
+      apply Fin.ext
+      simp [Fin.ofNat, Nat.mod_eq_of_lt (by omega : k + 1 < m + 2)]
+    have hcol : col (k + 1) = c := by
+      rcases hunit k hk with h | h | h | h <;>
+        rcases hselected.1 with hc | hc <;> omega
+    rw [← hindex, ← hnext]
+    change (row k, col k) ∈ gridEdgeEndpoints (true, (r, c)) ∧
+      (row (k + 1), col (k + 1)) ∈ gridEdgeEndpoints (true, (r, c))
+    rcases hselected.1 with hforward | hbackward
+    · simp [gridEdgeEndpoints, hselected.2, hcol, hforward.1, hforward.2]
+    · simp [gridEdgeEndpoints, hselected.2, hcol, hbackward.1, hbackward.2]
 end Ising2DLambda.KacWard
