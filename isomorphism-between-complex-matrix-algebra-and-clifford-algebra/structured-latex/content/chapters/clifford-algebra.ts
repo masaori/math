@@ -178,7 +178,7 @@ u&:=\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\in A,\\
 \end{aligned}`),
       paragraph([
         "加法の逆元の存在（", ref("def_unital_ring"), "）により、", math(String.raw`u+_A u'=0_A`), " を満たす ", math(String.raw`u'\in A`),
-        " を一つ選ぶ。まず ", math(String.raw`\gamma(x+_V y)`), " の平方を開く。",
+        " を一つ選ぶ。次の等式を、平方の展開の等式と呼ぶ。",
       ]),
       displayMath(String.raw`\begin{aligned}
 &\gamma(x+_V y)\cdot_A\gamma(x+_V y)\\
@@ -203,7 +203,6 @@ u&:=\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\in A,\\
 &\quad=u+_A s
 &&\left(\because\ u\ \text{の定義}\right).
 \end{aligned}`),
-      paragraph(["これを使って主張の左辺を開く。"]),
       displayMath(String.raw`\begin{aligned}
 s
 &=s+_A 0_A
@@ -215,11 +214,13 @@ s
 &=\bigl(u+_A s\bigr)+_A u'
 &&\left(\because\ \text{加法の交換法則}\right)\\
 &=\gamma(x+_V y)\cdot_A\gamma(x+_V y)+_A u'
-&&\left(\because\ \text{上の式}\right)\\
+&&\left(\because\ \text{平方の展開の等式}\right)\\
 &=\bigl(q(x+_V y)\ast_A 1_A\bigr)+_A u'
 &&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
+&=\Bigl(\bigl((q(x)+_{\mathbb{C}}q(y))+_{\mathbb{C}}B_q(x,y)\bigr)\ast_A 1_A\Bigr)+_A u'
+&&\left(\because\ \blkref{claim_polarization_identity}\ \text{を右辺から左辺へ読む}\right)\\
 &=\Bigl(\bigl((q(x)+_{\mathbb{C}}q(y))+_{\mathbb{C}}\beta\bigr)\ast_A 1_A\Bigr)+_A u'
-&&\left(\because\ \text{偏極の等式と}\ \beta\ \text{の定義。}\blkref{claim_polarization_identity}\right)\\
+&&\left(\because\ \beta\ \text{の定義}\right)\\
 &=\Bigl(\bigl((q(x)+_{\mathbb{C}}q(y))\ast_A 1_A\bigr)+_A\bigl(\beta\ast_A 1_A\bigr)\Bigr)+_A u'
 &&\left(\because\ \text{スカラーの加法についての分配法則}\right)\\
 &=\Bigl(\Bigl(\bigl(q(x)\ast_A 1_A\bigr)+_A\bigl(q(y)\ast_A 1_A\bigr)\Bigr)+_A\bigl(\beta\ast_A 1_A\bigr)\Bigr)+_A u'
@@ -259,23 +260,31 @@ s
       paragraph([
         math(String.raw`B'`), " が ", math(String.raw`T(V)`), " の部分代数の四条件を満たすことを示す。", math(String.raw`x,y`), " を ",
         math(String.raw`B'`), " の任意の元、", math(String.raw`\lambda`), " を ", math(String.raw`\mathbb{C}`), " の任意の元とする。",
-        math(String.raw`\pi_{I_q}`), " が単位元・加法・乗法・スカラー倍を保つこと（", ref("claim_projection_onto_quotient_algebra_is_algebra_homomorphism"),
-        "、", ref("def_complex_algebra_homomorphism"), "）と、", math(String.raw`B`), " が部分代数であることから、次の四つが成り立つ。",
+        math(String.raw`\pi_{I_q}`), " は ℂ-代数の準同型なので（", ref("claim_projection_onto_quotient_algebra_is_algebra_homomorphism"),
+        "）、次の四つの等式が成り立つ。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\pi_{I_q}\bigl(1_{T(V)}\bigr)&=1_{\mathrm{Cl}(V,q)}\in B,\\
-\pi_{I_q}\bigl(x+_{T(V)}y\bigr)&=\pi_{I_q}(x)+_{\mathrm{Cl}(V,q)}\pi_{I_q}(y)\in B,\\
-\pi_{I_q}\bigl(x\cdot_{T(V)}y\bigr)&=\pi_{I_q}(x)\cdot_{\mathrm{Cl}(V,q)}\pi_{I_q}(y)\in B,\\
-\pi_{I_q}\bigl(\lambda\ast_{T(V)}x\bigr)&=\lambda\ast_{\mathrm{Cl}(V,q)}\pi_{I_q}(x)\in B.
+\pi_{I_q}\bigl(1_{T(V)}\bigr)&=1_{\mathrm{Cl}(V,q)}
+&&\left(\because\ \text{乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right),\\
+\pi_{I_q}\bigl(x+_{T(V)}y\bigr)&=\pi_{I_q}(x)+_{\mathrm{Cl}(V,q)}\pi_{I_q}(y)
+&&\left(\because\ \text{加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right),\\
+\pi_{I_q}\bigl(x\cdot_{T(V)}y\bigr)&=\pi_{I_q}(x)\cdot_{\mathrm{Cl}(V,q)}\pi_{I_q}(y)
+&&\left(\because\ \text{乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right),\\
+\pi_{I_q}\bigl(\lambda\ast_{T(V)}x\bigr)&=\lambda\ast_{\mathrm{Cl}(V,q)}\pi_{I_q}(x)
+&&\left(\because\ \text{スカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right).
 \end{aligned}`),
+      paragraph([
+        math(String.raw`x,y\in B'`), " なので ", math(String.raw`\pi_{I_q}(x),\pi_{I_q}(y)\in B`), " であり、", math(String.raw`B`),
+        " は部分代数なので（", ref("def_subalgebra"), "）、四つの等式の右辺はどれも ", math(String.raw`B`), " の元である。",
+      ]),
       paragraph([
         "したがって ", math(String.raw`1_{T(V)}`), "、", math(String.raw`x+_{T(V)}y`), "、", math(String.raw`x\cdot_{T(V)}y`), "、",
         math(String.raw`\lambda\ast_{T(V)}x`), " は ", math(String.raw`B'`), " の元であり、", math(String.raw`B'`), " は ", math(String.raw`T(V)`),
         " の部分代数である（", ref("def_subalgebra"), "）。",
       ]),
       paragraph([
-        "任意の ", math(String.raw`v\in V`), " について ", math(String.raw`\pi_{I_q}(\iota(v))=\gamma(v)\in B`), " なので（", ref("def_clifford_generator_map"),
-        "）、", math(String.raw`\iota(V)\subseteq B'`), " である。", math(String.raw`\iota(V)`), " は ", math(String.raw`T(V)`), " を生成するので（",
+        "任意の ", math(String.raw`v\in V`), " について ", math(String.raw`\pi_{I_q}(\iota(v))=\gamma(v)`), " であり（", ref("def_clifford_generator_map"),
+        "）、", math(String.raw`\gamma(v)\in B`), " なので（", math(String.raw`\gamma(V)\subseteq B`), "）、", math(String.raw`\iota(V)\subseteq B'`), " である。", math(String.raw`\iota(V)`), " は ", math(String.raw`T(V)`), " を生成するので（",
         ref("claim_image_of_embedding_generates_tensor_algebra"), "）、", math(String.raw`B'=T(V)`), " である（", ref("def_subset_generates_algebra"), "）。",
       ]),
       paragraph([
@@ -323,8 +332,10 @@ s
 &&\left(\because\ F\ \text{はスカラー倍を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
 &\quad=\bigl(f(v)\cdot_A f(v)\bigr)+_A\bigl((-_{\mathbb{C}}\lambda)\ast_A 1_A\bigr)
 &&\left(\because\ F\ \text{は乗法の単位元を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&\quad=\bigl(q(v)\ast_A 1_A\bigr)+_A\bigl((-_{\mathbb{C}}\lambda)\ast_A 1_A\bigr)
+&&\left(\because\ f\ \text{についての仮定}\right)\\
 &\quad=\bigl(\lambda\ast_A 1_A\bigr)+_A\bigl((-_{\mathbb{C}}\lambda)\ast_A 1_A\bigr)
-&&\left(\because\ f\ \text{についての仮定と}\ \lambda\ \text{の定義}\right)\\
+&&\left(\because\ \lambda\ \text{の定義}\right)\\
 &\quad=\bigl(\lambda+_{\mathbb{C}}(-_{\mathbb{C}}\lambda)\bigr)\ast_A 1_A
 &&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
 &\quad=0_{\mathbb{C}}\ast_A 1_A
@@ -355,8 +366,17 @@ s
       paragraph([
         "（一意性）", math(String.raw`\Phi,\Phi'`), " を、", math(String.raw`\Phi\circ\gamma=f`), "、", math(String.raw`\Phi'\circ\gamma=f`),
         " を満たす ", math(String.raw`\mathrm{Cl}(V,q)`), " から ", math(String.raw`A`), " への ℂ-代数の準同型とする。", math(String.raw`\gamma(V)`),
-        " の任意の元は ", math(String.raw`v\in V`), " によって ", math(String.raw`\gamma(v)`), " と書け、", math(String.raw`\Phi(\gamma(v))=f(v)=\Phi'(\gamma(v))`),
-        " である。", math(String.raw`\gamma(V)`), " は ", math(String.raw`\mathrm{Cl}(V,q)`), " を生成するので（",
+        " の任意の元は ", math(String.raw`v\in V`), " によって ", math(String.raw`\gamma(v)`), " と書け、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi\bigl(\gamma(v)\bigr)
+&=f(v)
+&&\left(\because\ \Phi\circ\gamma=f\right)\\
+&=\Phi'\bigl(\gamma(v)\bigr)
+&&\left(\because\ \Phi'\circ\gamma=f\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\gamma(V)`), " は ", math(String.raw`\mathrm{Cl}(V,q)`), " を生成するので（",
         ref("claim_image_of_clifford_generator_map_generates_clifford_algebra"), "）、", ref("claim_homomorphisms_agreeing_on_generators_are_equal"),
         " により ", math(String.raw`\Phi=\Phi'`), " である。",
       ]),
@@ -380,8 +400,7 @@ s
         math(String.raw`w:\{1,\dots,M\}\to W`), " を ", math(String.raw`W`), " の基底（", ref("def_basis"), "）、", math(String.raw`f:\{1,\dots,M\}\to W^{*}`),
         " を基底 ", math(String.raw`w`), " の双対基底（", ref("def_dual_basis"), "。存在は ", ref("claim_coordinate_maps_form_dual_basis"), "）とし、",
         math(String.raw`i\in\{1,\dots,M\}`), " について ", math(String.raw`w_i:=w(i)\in W`), "、", math(String.raw`f_i:=f(i)\in W^{*}`), " と書く。",
-        math(String.raw`f`), " は一次独立で（", ref("claim_dual_basis_is_linearly_independent"), "）", math(String.raw`W^{*}`), " を張るので（",
-        ref("claim_dual_basis_spans_dual_space"), "）、", math(String.raw`W^{*}`), " の基底である（", ref("def_basis"), "）。",
+        math(String.raw`f`), " は ", math(String.raw`W^{*}`), " の基底である（", ref("claim_dual_basis_is_basis_of_dual_space"), "）。",
       ]),
       paragraph([
         math(String.raw`W\oplus W^{*}`), " を ", math(String.raw`W`), " と ", math(String.raw`W^{*}`), " の直和（", ref("def_direct_sum_of_two_vector_spaces"),

@@ -19,7 +19,7 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
-
+import notes_mathematical_toolkit from './notes/mathematical-toolkit.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -28,7 +28,9 @@ export type AllBlocks = [
 ]
 
 /** 全ノート。 */
-export type AllNotes = []
+export type AllNotes = [
+  ...typeof notes_mathematical_toolkit,
+]
 
 type AllBlockIds = BlockIdsOf<AllBlocks>
 type AllNoteIds = NoteIdsOf<AllNotes>
