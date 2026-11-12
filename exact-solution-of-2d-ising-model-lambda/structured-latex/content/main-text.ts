@@ -760,8 +760,10 @@ v_p(ab')
 &&\bigl(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\quad\blkref{def_rational_log}\bigr)\\
 &=\bigl(v_p(a')-v_p(b')+v_p(b)\bigr)+v_p(b')
 &&\bigl(\because\ \blkref{def_rational_log}\text{ の }w_p(q')=v_p(a')-v_p(b')\bigr)\\
+&=v_p(a')+v_p(b)-v_p(b')+v_p(b')
+&&\bigl(\because\ \mathbb{Z}\text{ の加法の結合則・可換則}\bigr)\\
 &=v_p(a')+v_p(b)
-&&\bigl(\because\ \mathbb{Z}\text{ の加法の結合則・可換則と }-v_p(b')+v_p(b')=0\bigr)\\
+&&\bigl(\because\ -v_p(b')+v_p(b')=0\bigr)\\
 &=v_p(a'b)
 &&\bigl(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性}\bigr)
 \end{aligned}`),
