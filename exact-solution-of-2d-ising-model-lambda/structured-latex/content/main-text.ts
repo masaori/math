@@ -51436,13 +51436,13 @@ b(\sigma_{+})
 &=q^{0}
 &&(\because\ \text{冪の指数 }0\text{ の約束 }q^{0}=1)\\
 &=q^{\,b(\sigma_{+})}
-&&(\because\ b(\sigma_{+})=0\text{。}\blkref{claim_constant_plus_breaks_no_bond})\\
+&&(\because\ b(\sigma_{+})=0\text{、}\blkref{claim_constant_plus_breaks_no_bond})\\
 &\le q^{\,b(\sigma_{+})}+\sum_{\sigma\in\Sigma_L\setminus\{\sigma_{+}\}}q^{\,b(\sigma)}
-&&(\because\ \text{加えた和は正の有理数の有限和なので }0\le\text{（準備。}\mathbb{Q}\text{ の順序は加法と両立する）})\\
+&&(\because\ \text{加えた和は正の有理数の有限和なので }0\le\text{（準備、}\mathbb{Q}\text{ の順序は加法と両立する）})\\
 &=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
 &&(\because\ \sigma_{+}\in\Sigma_L\text{（}\blkref{def_constant_plus_configuration}\text{）なので分離した 1 項を有限和へ戻せる})\\
 &=Z_L(q)
-&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_partition_polynomial})
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す、}\blkref{def_partition_polynomial})
 \end{aligned}`),
                         paragraph([
                           "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。",
@@ -86507,76 +86507,191 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 habitat: "mixed",
                 realEscape: "指数評価。複素実現したモードを複素指数関数で角表示し、実現した分散因子を実数の余弦で表す。",
                 verification: ["sagemath/check/dispersion-angle-realization"],
+                lean: [
+                  "Ising2DLambda.RealEscape.modeAngle",
+                  "Ising2DLambda.RealEscape.complexRootCandidate_eq_exp_modeAngle",
+                  "Ising2DLambda.RealEscape.twistedMode_add_inv_decomposition",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_inv_eq_exp_neg",
+                  "Ising2DLambda.RealEscape.cutRealization_two_mul_eq_two_cos",
+                  "Ising2DLambda.RealEscape.dispersion_angle_realization",
+                  "Ising2DLambda.NecSuf.RealEscape.dispersion_angle_realization_necSuf",
+                  "Ising2DLambda.RealEscape.dispersion_angle_realization_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
                     math(String.raw`(a,b)\in\mathcal S`), "、有理点 ", math(String.raw`q\in\mathbb Q`),
                     "（", math(String.raw`0<q<1`), "）を取る。", ref("claim_twisted_mode_product_bijection"),
-                    " の全単射について、", math(String.raw`\Theta_{L,a,b}(\varpi,\varsigma)=(e_{L,a,k},e_{L,b,l})`),
-                    " となる ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " の写像について",
+                  ]),
+                  displayMath(String.raw`\Theta_{L,a,b}(\varpi,\varsigma)
+=\left(\exp\!\left(\frac{2\pi i(k+a/2)}{L}\right),\ \exp\!\left(\frac{2\pi i(l+b/2)}{L}\right)\right)`),
+                  paragraph([
+                    "となる ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
                     " と ", math(String.raw`k,l\in\{0,\ldots,L-1\}`), " を取る。角を",
                   ]),
-                  displayMath(String.raw`\theta_1:=\frac{2\pi(k+a/2)}{L},\qquad
-\theta_2:=\frac{2\pi(l+b/2)}{L}`),
-                  paragraph(["と定める。", ref("claim_dispersion_positive_at_rational_point"), " により分散因子の値は ", math(String.raw`R`), " に属する。このとき、", ref("def_real_algebraic_cut_realization"), " の実現写像について"]),
+                  displayMath(String.raw`\theta_1:=\frac{2\pi(k+a/2)}{L}\in\mathbb R,\qquad
+\theta_2:=\frac{2\pi(l+b/2)}{L}\in\mathbb R`),
+                  paragraph([
+                    "と定め、", ref("def_real_logarithm"), " の包含写像で ",
+                    math(String.raw`r:=\iota_{\mathbb Q\to\mathbb R}(q)\in\mathbb R`), " と置く。",
+                    ref("claim_dispersion_positive_at_rational_point"), " により分散因子の値 ",
+                    math(String.raw`\Delta(q;\varpi,\varsigma)`), " は ", math(String.raw`R`),
+                    " に属する。このとき、", ref("def_real_algebraic_cut_realization"), " の実現写像について",
+                  ]),
                   displayMath(String.raw`\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
-=(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)`),
-                  paragraph(["が成り立つ。右辺の有理係数は実数への標準埋込みによる値とする。"]),
+=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
+                  paragraph(["が成り立つ。"]),
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_twisted_modes_complex_roots_bijection"), " と ",
-                    ref("claim_twisted_mode_product_bijection"), " により、角の組は全モードの組を重複なく走る。",
-                    ref("claim_complex_realization_preserves_multiplication"),
-                    " により複素実現は逆元を保つ。複素指数関数の加法法則と Euler の公式から",
+                    "複素数 ", math(String.raw`z=u+iv`), "（", math(String.raw`u,v\in\mathbb R`),
+                    "）の実部を ", math(String.raw`\operatorname{Re}(z):=u\in\mathbb R`),
+                    " と書く。実数 ", math(String.raw`t\in\mathbb R`),
+                    " について使う複素指数関数と実余弦・実正弦の性質は、加法法則 ",
+                    math(String.raw`\exp(s)\exp(s')=\exp(s+s')`), "（", math(String.raw`s,s'\in\mathbb C`),
+                    "）、", math(String.raw`\exp(0)=1`), "、Euler の公式 ",
+                    math(String.raw`\exp(it)=\cos t+i\sin t`), "、偶奇 ",
+                    math(String.raw`\cos(-t)=\cos t`), "・", math(String.raw`\sin(-t)=-\sin t`),
+                    " の四つだけである。組 ", math(String.raw`(z,w)\in\mathbb C\times\mathbb C`),
+                    " の第一成分と第二成分を ", math(String.raw`\mathrm{pr}_1(z,w):=z`), "、",
+                    math(String.raw`\mathrm{pr}_2(z,w):=w`), " と書く。",
+                  ]),
+                  paragraph([
+                    "証明の中だけで使う記号を置く。", ref("claim_twisted_modes_are_double_roots"),
+                    " により ", math(String.raw`\varpi,\varsigma\in\mu_{2L}`), "（",
+                    ref("def_root_of_unity_set"), "）である。", ref("def_real_closed_subfield"),
+                    " の一意表示により ", math(String.raw`\varpi=\alpha+\beta\omega`), "、",
+                    math(String.raw`\varsigma=\gamma+\delta\omega`), "（",
+                    math(String.raw`\alpha,\beta,\gamma,\delta\in R`), "）と書ける。",
+                    ref("claim_root_of_unity_inverse_is_real_closed_conjugate"),
+                    " を指数 ", math(String.raw`2L`), " で二つのモードへ適用すると ",
+                    math(String.raw`\varpi^{-1}=\alpha-\beta\omega`), "、",
+                    math(String.raw`\varsigma^{-1}=\gamma-\delta\omega`), " である。",
+                    math(String.raw`\varpi=0`), " と仮定すると",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})
-&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+1&=\varpi^{2L}&&\bigl(\because\ \varpi\in\mu_{2L}\bigr)\\
+&=0^{2L}&&\bigl(\because\ \varpi=0\bigr)\\
+&=0&&\bigl(\because\ 2L\ge1\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり矛盾するので、", math(String.raw`\varpi\ne0`), "、すなわち ",
+                    math(String.raw`\varpi\varpi^{-1}=1`), " である。",
+                    "和の係数表示は次のとおりである。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\varpi+\varpi^{-1}
+&=(\alpha+\beta\omega)+(\alpha-\beta\omega)
+&&\bigl(\because\ \varpi\text{ と }\varpi^{-1}\text{ の表示}\bigr)\\
+&=2\alpha
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=2\alpha+0\cdot\omega
+&&\bigl(\because\ 0\cdot\omega=0\bigr),\\[4pt]
+\varsigma+\varsigma^{-1}
+&=(\gamma+\delta\omega)+(\gamma-\delta\omega)
+&&\bigl(\because\ \varsigma\text{ と }\varsigma^{-1}\text{ の表示}\bigr)\\
+&=2\gamma
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=2\gamma+0\cdot\omega
+&&\bigl(\because\ 0\cdot\omega=0\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`R`), " は部分体なので ", math(String.raw`2\alpha,2\gamma,0\in R`),
+                    " であり、これらが ", ref("def_real_closed_subfield"), " の一意表示である。",
+                    "有理数 ", math(String.raw`m:=(1+q^2)^2\in\mathbb Q`), " と ",
+                    math(String.raw`n:=q(1-q^2)\in\mathbb Q`), " を置く（",
+                    ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`m,n\in R`), "）。",
+                  ]),
+                  paragraph(["横方向のモードの複素実現は次のとおりである。"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)
+&=\mathrm{pr}_1\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)
+&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の }\Theta_{L,a,b}\text{ の定義と }\mathrm{pr}_1\text{ の定義}\bigr)\\
+&=\exp\!\left(\frac{2\pi i(k+a/2)}{L}\right)
+&&\bigl(\because\ \Theta_{L,a,b}(\varpi,\varsigma)\text{ の仮定}\bigr)\\
+&=\exp(i\theta_1)
+&&\bigl(\because\ \theta_1\text{ の定義}\bigr),\\[4pt]
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&=1\cdot\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \mathbb C\text{ の単位元}\bigr)\\
+&=\exp(0)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \exp(0)=1\bigr)\\
+&=\exp(-i\theta_1+i\theta_1)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \mathbb C\text{ の加法}\bigr)\\
+&=\exp(-i\theta_1)\exp(i\theta_1)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \text{加法法則}\bigr)\\
+&=\exp(-i\theta_1)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)=\exp(i\theta_1)\bigr)\\
+&=\exp(-i\theta_1)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi\varpi^{-1})
+&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\bigr)\\
+&=\exp(-i\theta_1)\,\rho_{\overline{\mathbb Q}\to\mathbb C}(1)
+&&\bigl(\because\ \varpi\varpi^{-1}=1\bigr)\\
+&=\exp(-i\theta_1)
+&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\text{ の単位元保存}\bigr).
+\end{aligned}`),
+                  paragraph(["これを使うと、実現した和の余弦表示は次のとおりである。"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(2\alpha)
+&=\operatorname{Re}\bigl(\rho_{R\to\mathbb R}(2\alpha)+i\rho_{R\to\mathbb R}(0)\bigr)
+&&\bigl(\because\ \operatorname{Re}\text{ の定義}\bigr)\\
+&=\operatorname{Re}\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(2\alpha+0\cdot\omega)\bigr)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=\operatorname{Re}\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})\bigr)
+&&\bigl(\because\ \varpi+\varpi^{-1}\text{ の係数表示}\bigr)\\
+&=\operatorname{Re}\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})\bigr)
 &&\bigl(\because\ \blkref{claim_complex_realization_preserves_addition}\bigr)\\
-&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)^{-1}
-&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\text{ と単位元保存}\bigr)\\
-&=e^{i\theta_1}+(e^{i\theta_1})^{-1}
-&&\bigl(\because\ \Theta_{L,a,b}(\varpi,\varsigma)=(e_{L,a,k},e_{L,b,l})\text{ と角の定義}\bigr)\\
-&=e^{i\theta_1}+e^{-i\theta_1}
-&&\bigl(\because\ e^{i\theta_1}e^{-i\theta_1}=e^0=1\bigr)\\
+&=\operatorname{Re}\bigl(\exp(i\theta_1)+\exp(-i\theta_1)\bigr)
+&&\bigl(\because\ \text{上の二つの複素実現}\bigr)\\
+&=\operatorname{Re}\bigl((\cos\theta_1+i\sin\theta_1)+(\cos(-\theta_1)+i\sin(-\theta_1))\bigr)
+&&\bigl(\because\ \text{Euler の公式}\bigr)\\
+&=\operatorname{Re}\bigl((\cos\theta_1+i\sin\theta_1)+(\cos\theta_1-i\sin\theta_1)\bigr)
+&&\bigl(\because\ \text{余弦・正弦の偶奇}\bigr)\\
+&=\operatorname{Re}\bigl(2\cos\theta_1+i\cdot0\bigr)
+&&\bigl(\because\ \mathbb C\text{ の四則}\bigr)\\
 &=2\cos\theta_1
-&&\bigl(\because\ e^{it}=\cos t+i\sin t\bigr).
+&&\bigl(\because\ \operatorname{Re}\text{ の定義}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "縦方向も同じ計算を ", math(String.raw`\varsigma,\theta_2`),
-                    " に適用する。", ref("def_complex_algebraic_realization"),
-                    " により ", math(String.raw`R`), " 上の複素実現は実現写像 ",
-                    math(String.raw`\rho_{R\to\mathbb R}`), " と一致するので、",
+                    "縦方向も同じ二つの式鎖を ", math(String.raw`\varsigma,\gamma,l,b,\theta_2`),
+                    " と第二成分 ", math(String.raw`\mathrm{pr}_2`), " に適用して ",
+                    math(String.raw`\rho_{R\to\mathbb R}(2\gamma)=2\cos\theta_2`), " を得る。",
+                    "分散因子の値を ", math(String.raw`R`), " の元として書き直す。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})
-&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})
-&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
-&=2\cos\theta_1&&\bigl(\because\ \text{上の計算}\bigr),\\
-\rho_{R\to\mathbb R}(\varsigma+\varsigma^{-1})
-&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma+\varsigma^{-1})
-&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
-&=2\cos\theta_2&&\bigl(\because\ \text{縦方向の同じ計算}\bigr).
+\Delta(q;\varpi,\varsigma)
+&=(1+q^2)^2-q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\text{ を }x:=q\text{ で評価}\bigr)\\
+&=m-n(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ m,n\text{ の定義}\bigr)\\
+&=m-n(2\alpha+2\gamma)
+&&\bigl(\because\ \varpi+\varpi^{-1}\text{ と }\varsigma+\varsigma^{-1}\text{ の係数表示}\bigr).
 \end{aligned}`),
                   paragraph([
-                    ref("def_dispersion_polynomial"), " の多項式へ ", math(String.raw`x:=q`),
-                    " を代入し、実現写像の加法・乗法保存と有理数上の一致を各項に適用すると",
+                    math(String.raw`w:=n(2\alpha+2\gamma)\in R`), " と置く。従って",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
-&=\rho_{R\to\mathbb R}\bigl((1+q^2)^2-q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\bigr)
-&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
-&=\rho_{R\to\mathbb R}((1+q^2)^2)-\rho_{R\to\mathbb R}\bigl(q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\bigr)
-&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\text{ と負号の保存}\bigr)\\
-&=\rho_{R\to\mathbb R}((1+q^2)^2)-\rho_{R\to\mathbb R}(q(1-q^2))\rho_{R\to\mathbb R}(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
-&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
-&=(1+q^2)^2-q(1-q^2)\rho_{R\to\mathbb R}(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
-&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
-&=(1+q^2)^2-q(1-q^2)\bigl(\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})+\rho_{R\to\mathbb R}(\varsigma+\varsigma^{-1})\bigr)
+&=\rho_{R\to\mathbb R}(m-w)
+&&\bigl(\because\ \text{上の書き直し}\bigr)\\
+&=\rho_{R\to\mathbb R}(m-w)+\rho_{R\to\mathbb R}(w)-\rho_{R\to\mathbb R}(w)
+&&\bigl(\because\ \mathbb R\text{ の加法}\bigr)\\
+&=\rho_{R\to\mathbb R}((m-w)+w)-\rho_{R\to\mathbb R}(w)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
-&=(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)
-&&\bigl(\because\ \text{上の二つの余弦表示}\bigr).
+&=\rho_{R\to\mathbb R}(m)-\rho_{R\to\mathbb R}(w)
+&&\bigl(\because\ R\text{ の加法}\bigr)\\
+&=\rho_{R\to\mathbb R}(m)-\rho_{R\to\mathbb R}(n)\,\rho_{R\to\mathbb R}(2\alpha+2\gamma)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=\rho_{R\to\mathbb R}(m)-\rho_{R\to\mathbb R}(n)\bigl(\rho_{R\to\mathbb R}(2\alpha)+\rho_{R\to\mathbb R}(2\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\iota_{\mathbb Q\to\mathbb R}(m)-\iota_{\mathbb Q\to\mathbb R}(n)\bigl(\rho_{R\to\mathbb R}(2\alpha)+\rho_{R\to\mathbb R}(2\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を }m,n\text{ に適用}\bigr)\\
+&=\iota_{\mathbb Q\to\mathbb R}(m)-\iota_{\mathbb Q\to\mathbb R}(n)(2\cos\theta_1+2\cos\theta_2)
+&&\bigl(\because\ \text{二つの余弦表示}\bigr)\\
+&=(1+r^2)^2-r(1-r^2)(2\cos\theta_1+2\cos\theta_2)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の包含写像は加法・乗法を保つ}\bigr)\\
+&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr).
 \end{aligned}`),
                 ],
               },
