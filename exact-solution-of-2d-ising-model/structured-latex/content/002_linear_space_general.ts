@@ -7378,6 +7378,631 @@ A_1\boxtimes\cdots\boxtimes A_M
     },
   },
   {
+    id: "linear_space_general_claim_kronecker_family_of_independent_family_is_independent",
+    kind: "claim",
+    title: { text: "線型独立な族のクロネッカー積の族は線型独立" },
+    labels: ["kronecker_family_of_independent_family_is_independent"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、記号は ",
+        ref("def_kronecker"),
+        " のものとする。",
+        math(String.raw`b_1,b_2,b_3,b_4 \in \mathrm{Mat}(2,\mathbb{C})`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " 上線型独立、すなわち ",
+        math(String.raw`c_1,c_2,c_3,c_4 \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{a=1}^{4} c_a b_a = O`),
+        " を満たすならば ",
+        math(String.raw`c_1 = c_2 = c_3 = c_4 = 0_{\mathbb{C}}`),
+        " であるとする。",
+        math(String.raw`\mathcal{P} := \{1,2,3,4\}^M`),
+        "、",
+        math(String.raw`N := 4^M`),
+        " とし、",
+        math(String.raw`\pi : \{1,\dots,N\} \to \mathcal{P}`),
+        " を任意の全単射として ",
+        math(String.raw`\pi(q) = (\pi(q)_1,\dots,\pi(q)_M)`),
+        " と書き",
+      ]),
+      displayMath(
+        String.raw`F_q := b_{\pi(q)_1}\boxtimes\cdots\boxtimes b_{\pi(q)_M} \in \mathrm{Mat}(2^M,\mathbb{C}) \qquad (q \in \{1,\dots,N\})`,
+      ),
+      paragraph([
+        "とおく（",
+        math(String.raw`\mathcal{P}`),
+        "・",
+        math(String.raw`\pi`),
+        "・",
+        math(String.raw`F_q`),
+        " の置き方は ",
+        ref("kronecker_family_of_spanning_family_spans"),
+        " と同じ）。このとき族 ",
+        math(String.raw`(F_q)_{q\in\{1,\dots,N\}}`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " 上線型独立である。すなわち ",
+        math(String.raw`d_1,\dots,d_N \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{q=1}^{N} d_q F_q = O`),
+        " を満たすならば、すべての ",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`d_q = 0_{\mathbb{C}}`),
+        " である。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`d_1,\dots,d_N \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{q=1}^{N} d_q F_q = O`),
+        " を満たすとする。証明の中だけで使う記号を次のように置く。",
+        math(String.raw`s \in \{0,1,\dots,M\}`),
+        " について、",
+        math(String.raw`\{1,2\}^{s}`),
+        " は ",
+        math(String.raw`\{1,2\}`),
+        " の元の ",
+        math(String.raw`s`),
+        " 個組の全体、",
+        math(String.raw`\{1,2,3,4\}^{M-s}`),
+        " は ",
+        math(String.raw`\{1,2,3,4\}`),
+        " の元の ",
+        math(String.raw`M-s`),
+        " 個組 ",
+        math(String.raw`\tau = (\tau_{s+1},\dots,\tau_M)`),
+        "（成分の番号は ",
+        math(String.raw`s+1`),
+        " から ",
+        math(String.raw`M`),
+        "）の全体とする。",
+        math(String.raw`0`),
+        " 個組の集合は空の組 ",
+        math(String.raw`()`),
+        " だけを元にもつ。",
+        math(String.raw`\{1,2\}^{M} = \mathcal{I}_M`),
+        " である。",
+      ]),
+      paragraph([
+        "(a) ",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        "、",
+        math(String.raw`U = (u_1,\dots,u_s),\ V = (v_1,\dots,v_s) \in \{1,2\}^{s}`),
+        " について ",
+        math(String.raw`P^{(s)}_q(U,V) \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`P^{(0)}_q((),()) := 1_{\mathbb{C}},
+\qquad
+P^{(s)}_q(U,V) := \prod_{k=1}^{s}\bigl(b_{\pi(q)_k}\bigr)_{u_kv_k}\quad (s \geq 1)`,
+      ),
+      paragraph([
+        "と定める（有限積は ",
+        ref("def_finite_product_of_complex_numbers"),
+        "）。",
+        math(String.raw`s \in \{1,\dots,M\}`),
+        "、",
+        math(String.raw`U' = (u_1,\dots,u_{s-1}),\ V' = (v_1,\dots,v_{s-1}) \in \{1,2\}^{s-1}`),
+        "、",
+        math(String.raw`u, v \in \{1,2\}`),
+        " について ",
+        math(String.raw`(U',u) := (u_1,\dots,u_{s-1},u)`),
+        "、",
+        math(String.raw`(V',v) := (v_1,\dots,v_{s-1},v)`),
+        " と書くと",
+      ]),
+      displayMath(
+        String.raw`P^{(s)}_q((U',u),(V',v)) = P^{(s-1)}_q(U',V')\,\bigl(b_{\pi(q)_s}\bigr)_{uv}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`s \geq 2`),
+        " では、",
+        math(String.raw`u_s := u`),
+        "、",
+        math(String.raw`v_s := v`),
+        " として",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P^{(s)}_q((U',u),(V',v))
+&= \prod_{k=1}^{s}\bigl(b_{\pi(q)_k}\bigr)_{u_kv_k}
+&&\bigl(\because\ P^{(s)}_q\ \text{の定義}\bigr)\\
+&= \Bigl(\prod_{k=1}^{s-1}\bigl(b_{\pi(q)_k}\bigr)_{u_kv_k}\Bigr)\bigl(b_{\pi(q)_s}\bigr)_{uv}
+&&\bigl(\because\ \blkref{def_finite_product_of_complex_numbers}\ (m \to s-1,\ z_j \to (b_{\pi(q)_j})_{u_jv_j})\bigr)\\
+&= P^{(s-1)}_q(U',V')\,\bigl(b_{\pi(q)_s}\bigr)_{uv}
+&&\bigl(\because\ P^{(s-1)}_q\ \text{の定義を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`s = 1`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P^{(1)}_q((u),(v))
+&= \prod_{k=1}^{1}\bigl(b_{\pi(q)_k}\bigr)_{u_kv_k}
+&&\bigl(\because\ P^{(1)}_q\ \text{の定義}\ (u_1 := u,\ v_1 := v)\bigr)\\
+&= \bigl(b_{\pi(q)_1}\bigr)_{uv}
+&&\bigl(\because\ \blkref{def_finite_product_of_complex_numbers}\ \text{の}\ m = 1\ \text{の式}\bigr)\\
+&= 1_{\mathbb{C}}\,\bigl(b_{\pi(q)_1}\bigr)_{uv}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&= P^{(0)}_q((),())\,\bigl(b_{\pi(q)_1}\bigr)_{uv}
+&&\bigl(\because\ P^{(0)}_q\ \text{の定義を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。この式を (R) と呼ぶ。",
+      ]),
+      paragraph([
+        "(b) ",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        " と ",
+        math(String.raw`\tau \in \{1,2,3,4\}^{M-s}`),
+        " について ",
+        math(String.raw`\chi^{(s)}_q(\tau) \in \mathbb{C}`),
+        " を、",
+        math(String.raw`s`),
+        " を ",
+        math(String.raw`M`),
+        " から下げる帰納法で",
+      ]),
+      displayMath(
+        String.raw`\chi^{(M)}_q(()) := 1_{\mathbb{C}},
+\qquad
+\chi^{(s-1)}_q((a,\tau')) := \delta_{\pi(q)_s\,a}\,\chi^{(s)}_q(\tau')
+\quad (s \in \{1,\dots,M\},\ a \in \{1,2,3,4\},\ \tau' \in \{1,2,3,4\}^{M-s})`,
+      ),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`(a,\tau') := (a,\tau'_{s+1},\dots,\tau'_M) \in \{1,2,3,4\}^{M-s+1}`),
+        "（成分の番号は ",
+        math(String.raw`s`),
+        " から ",
+        math(String.raw`M`),
+        "）であり、",
+        math(String.raw`\{1,2,3,4\}^{M-s+1}`),
+        " の元はどれもただ一通りにこの形に書ける。",
+        math(String.raw`\delta`),
+        " は ",
+        ref("def_kronecker_delta"),
+        "（",
+        math(String.raw`n \to 4`),
+        "）である。",
+      ]),
+      paragraph([
+        "(c) ",
+        math(String.raw`s \in \{0,1,\dots,M\}`),
+        " について主張 ",
+        math(String.raw`A(s)`),
+        " を次で定める（左辺の和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "）。",
+      ]),
+      list([
+        [
+          math(String.raw`A(s)`),
+          ": すべての ",
+          math(String.raw`U, V \in \{1,2\}^{s}`),
+          " と ",
+          math(String.raw`\tau \in \{1,2,3,4\}^{M-s}`),
+          " について ",
+          math(String.raw`\sum_{q=1}^{N} d_q\Bigl(P^{(s)}_q(U,V)\,\chi^{(s)}_q(\tau)\Bigr) = 0_{\mathbb{C}}`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`A(M)`),
+        " が成り立つ。",
+        math(String.raw`U = (u_1,\dots,u_M),\ V = (v_1,\dots,v_M) \in \mathcal{I}_M`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{q=1}^{N} d_q\Bigl(P^{(M)}_q(U,V)\,\chi^{(M)}_q(())\Bigr)
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(M)}_q(U,V)\,1_{\mathbb{C}}\Bigr)
+&&\bigl(\because\ \chi^{(M)}_q\ \text{の定義を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\,P^{(M)}_q(U,V)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\prod_{k=1}^{M}\bigl(b_{\pi(q)_k}\bigr)_{u_kv_k}
+&&\bigl(\because\ P^{(M)}_q\ \text{の定義を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\,\bigl(F_q\bigr)_{\nu(U),\nu(V)}
+&&\bigl(\because\ \blkref{def_kronecker}\ (2)\ (A_k \to b_{\pi(q)_k},\ I \to U,\ J \to V)\ \text{を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} \bigl(d_qF_q\bigr)_{\nu(U),\nu(V)}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \Bigl(\sum_{q=1}^{N} d_qF_q\Bigr)_{\nu(U),\nu(V)}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\ (m, n \to 2^M,\ r \to N,\ X_j \to d_jF_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= O_{\nu(U),\nu(V)}
+&&\bigl(\because\ \textstyle\sum_{q=1}^{N} d_qF_q = O\ \text{の仮定}\bigr)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{def_zero_matrix})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\{1,2,3,4\}^{0}`),
+        " の元は ",
+        math(String.raw`()`),
+        " だけなので ",
+        math(String.raw`A(M)`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`s \in \{1,\dots,M\}`),
+        " について、",
+        math(String.raw`A(s)`),
+        " が成り立てば ",
+        math(String.raw`A(s-1)`),
+        " が成り立つ。",
+        math(String.raw`U', V' \in \{1,2\}^{s-1}`),
+        " と ",
+        math(String.raw`\tau' \in \{1,2,3,4\}^{M-s}`),
+        " を固定し、",
+      ]),
+      displayMath(
+        String.raw`w_q := d_q\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s)}_q(\tau')\Bigr) \in \mathbb{C}\quad (q \in \{1,\dots,N\}),
+\qquad
+B := \sum_{q=1}^{N} w_q\,b_{\pi(q)_s} \in \mathrm{Mat}(2,\mathbb{C})`,
+      ),
+      paragraph([
+        "とおく。",
+      ]),
+      paragraph([
+        "(2a) ",
+        math(String.raw`B = O`),
+        "。",
+        math(String.raw`u, v \in \{1,2\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_{uv}
+&= \Bigl(\sum_{q=1}^{N} w_q\,b_{\pi(q)_s}\Bigr)_{uv}
+&&(\because\ B\ \text{の定義})\\
+&= \sum_{q=1}^{N} \bigl(w_q\,b_{\pi(q)_s}\bigr)_{uv}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\ (m, n \to 2,\ r \to N,\ X_j \to w_jb_{\pi(j)_s})\bigr)\\
+&= \sum_{q=1}^{N} w_q\bigl(b_{\pi(q)_s}\bigr)_{uv}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} \Bigl(d_q\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s)}_q(\tau')\Bigr)\Bigr)\bigl(b_{\pi(q)_s}\bigr)_{uv}
+&&\bigl(\because\ w_q\ \text{の定義を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s)}_q(\tau')\Bigr)\bigl(b_{\pi(q)_s}\bigr)_{uv}\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(s-1)}_q(U',V')\Bigl(\chi^{(s)}_q(\tau')\bigl(b_{\pi(q)_s}\bigr)_{uv}\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(s-1)}_q(U',V')\Bigl(\bigl(b_{\pi(q)_s}\bigr)_{uv}\,\chi^{(s)}_q(\tau')\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(\Bigl(P^{(s-1)}_q(U',V')\bigl(b_{\pi(q)_s}\bigr)_{uv}\Bigr)\chi^{(s)}_q(\tau')\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(s)}_q((U',u),(V',v))\,\chi^{(s)}_q(\tau')\Bigr)
+&&\bigl(\because\ \text{(R) を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ A(s)\ (U \to (U',u),\ V \to (V',v),\ \tau \to \tau')\bigr)\\
+&= O_{uv}
+&&\bigl(\because\ \blkref{def_zero_matrix}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`u, v \in \{1,2\}`),
+        " は任意なので ",
+        math(String.raw`B`),
+        " と ",
+        math(String.raw`O`),
+        " の 4 つの成分がすべて一致し、",
+        math(String.raw`B = O`),
+        "。",
+      ]),
+      paragraph([
+        "(2b) ",
+        math(String.raw`B = \sum_{a=1}^{4}\Bigl(\sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a}\Bigr)b_a`),
+        "。",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        " を固定する。",
+        math(String.raw`a \neq \pi(q)_s`),
+        " のすべての ",
+        math(String.raw`a \in \{1,2,3,4\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\pi(q)_s\,a}\,b_a
+&= 0_{\mathbb{C}}\,b_a
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (n \to 4)\bigr)\\
+&= O
+&&(\because\ \blkref{zero_scalar_multiple_is_zero_matrix})
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+b_{\pi(q)_s}
+&= 1_{\mathbb{C}}\,b_{\pi(q)_s}
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= \delta_{\pi(q)_s\,\pi(q)_s}\,b_{\pi(q)_s}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (n \to 4)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{a=1}^{4}\delta_{\pi(q)_s\,a}\,b_a
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (\text{このブロックの}\ m, n \to 2,\ r \to 4,\ X_a \to \delta_{\pi(q)_s\,a}b_a,\ \text{このブロックの}\ q \to \pi(q)_s)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（最後の行の前提「",
+        math(String.raw`a \neq \pi(q)_s`),
+        " なら ",
+        math(String.raw`\delta_{\pi(q)_s\,a}b_a = O`),
+        "」は、この鎖の前に置いた式）。これを使って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B
+&= \sum_{q=1}^{N} w_q\,b_{\pi(q)_s}
+&&(\because\ B\ \text{の定義})\\
+&= \sum_{q=1}^{N} w_q\Bigl(\sum_{a=1}^{4}\delta_{\pi(q)_s\,a}\,b_a\Bigr)
+&&\bigl(\because\ \text{上の}\ b_{\pi(q)_s}\ \text{の表示を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N}\sum_{a=1}^{4} w_q\bigl(\delta_{\pi(q)_s\,a}\,b_a\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\ (\text{このブロックの}\ m, n \to 2,\ r \to 4,\ c \to w_q,\ X_j \to \delta_{\pi(q)_s\,j}b_j)\ \text{を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N}\sum_{a=1}^{4}\bigl(w_q\,\delta_{\pi(q)_s\,a}\bigr)b_a
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (\text{このブロックの}\ a \to w_q,\ b \to \delta_{\pi(q)_s\,a},\ A \to b_a)\ \text{を各項へ同時に適用}\bigr)\\
+&= \sum_{a=1}^{4}\sum_{q=1}^{N}\bigl(w_q\,\delta_{\pi(q)_s\,a}\bigr)b_a
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\ (\text{このブロックの}\ m, n \to 2,\ r \to N,\ s \to 4,\ \text{添字}\ a \to q,\ b \to a)\bigr)\\
+&= \sum_{a=1}^{4}\Bigl(\sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a}\Bigr)b_a
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m, n \to 2,\ r \to N)\ \text{を各}\ a\ \text{へ同時に適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "(2c) (2a) と (2b) より ",
+        math(String.raw`\sum_{a=1}^{4}\Bigl(\sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a}\Bigr)b_a = O`),
+        " である。",
+        math(String.raw`b_1,\dots,b_4`),
+        " の線型独立性の仮定（",
+        math(String.raw`c_a \to \sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a}`),
+        "）より、すべての ",
+        math(String.raw`a \in \{1,2,3,4\}`),
+        " について ",
+        math(String.raw`\sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a} = 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        "(2d) ",
+        math(String.raw`a \in \{1,2,3,4\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{q=1}^{N} d_q\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s-1)}_q((a,\tau'))\Bigr)
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(s-1)}_q(U',V')\Bigl(\delta_{\pi(q)_s\,a}\,\chi^{(s)}_q(\tau')\Bigr)\Bigr)
+&&\bigl(\because\ \chi^{(s-1)}_q\ \text{の定義を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(s-1)}_q(U',V')\Bigl(\chi^{(s)}_q(\tau')\,\delta_{\pi(q)_s\,a}\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律を各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s)}_q(\tau')\Bigr)\delta_{\pi(q)_s\,a}\Bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} \Bigl(d_q\Bigl(P^{(s-1)}_q(U',V')\,\chi^{(s)}_q(\tau')\Bigr)\Bigr)\delta_{\pi(q)_s\,a}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= \sum_{q=1}^{N} w_q\,\delta_{\pi(q)_s\,a}
+&&\bigl(\because\ w_q\ \text{の定義を右辺から左辺へ、各}\ q\ \text{へ同時に適用}\bigr)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \text{(2c)})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`U', V' \in \{1,2\}^{s-1}`),
+        "、",
+        math(String.raw`\tau'`),
+        "、",
+        math(String.raw`a`),
+        " は任意で、",
+        math(String.raw`\{1,2,3,4\}^{M-s+1}`),
+        " の元はどれも ",
+        math(String.raw`(a,\tau')`),
+        " の形なので、",
+        math(String.raw`A(s-1)`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`A(0)`),
+        "。Step 1 と Step 2 から、",
+        math(String.raw`s`),
+        " を ",
+        math(String.raw`M`),
+        " から ",
+        math(String.raw`0`),
+        " まで下げる帰納法で ",
+        math(String.raw`A(0)`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "Step 4: ",
+        math(String.raw`\chi^{(s)}_q`),
+        " の値。",
+        math(String.raw`s \in \{0,1,\dots,M\}`),
+        "、",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        "、",
+        math(String.raw`\tau \in \{1,2,3,4\}^{M-s}`),
+        " について、次の主張 ",
+        math(String.raw`E(s)`),
+        " を ",
+        math(String.raw`s`),
+        " を ",
+        math(String.raw`M`),
+        " から下げる帰納法で示す。",
+      ]),
+      list([
+        [
+          math(String.raw`E(s)`),
+          ": ",
+          math(String.raw`s < k \leq M`),
+          " のすべての ",
+          math(String.raw`k`),
+          " で ",
+          math(String.raw`\pi(q)_k = \tau_k`),
+          " ならば ",
+          math(String.raw`\chi^{(s)}_q(\tau) = 1_{\mathbb{C}}`),
+          "、そうでなければ ",
+          math(String.raw`\chi^{(s)}_q(\tau) = 0_{\mathbb{C}}`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        math(String.raw`s = M`),
+        " のとき、",
+        math(String.raw`M < k \leq M`),
+        " となる ",
+        math(String.raw`k`),
+        " は無く条件は空であり、",
+        math(String.raw`\chi^{(M)}_q(()) = 1_{\mathbb{C}}`),
+        "（",
+        math(String.raw`\chi^{(M)}_q`),
+        " の定義）。",
+        math(String.raw`E(s)`),
+        " が成り立つとし、",
+        math(String.raw`(a,\tau') \in \{1,2,3,4\}^{M-s+1}`),
+        " を取る。",
+        math(String.raw`\pi(q)_s = a`),
+        " かつ ",
+        math(String.raw`s < k \leq M`),
+        " のすべての ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`\pi(q)_k = \tau'_k`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi^{(s-1)}_q((a,\tau'))
+&= \delta_{\pi(q)_s\,a}\,\chi^{(s)}_q(\tau')
+&&\bigl(\because\ \chi^{(s-1)}_q\ \text{の定義}\bigr)\\
+&= 1_{\mathbb{C}}\,\chi^{(s)}_q(\tau')
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (n \to 4)\ \text{と}\ \pi(q)_s = a\bigr)\\
+&= 1_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定}\ E(s)\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\pi(q)_s \neq a`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi^{(s-1)}_q((a,\tau'))
+&= \delta_{\pi(q)_s\,a}\,\chi^{(s)}_q(\tau')
+&&\bigl(\because\ \chi^{(s-1)}_q\ \text{の定義}\bigr)\\
+&= 0_{\mathbb{C}}\,\chi^{(s)}_q(\tau')
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (n \to 4)\ \text{と}\ \pi(q)_s \neq a\bigr)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_zero_times_is_zero})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\pi(q)_s = a`),
+        " で、",
+        math(String.raw`s < k \leq M`),
+        " のある ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`\pi(q)_k \neq \tau'_k`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi^{(s-1)}_q((a,\tau'))
+&= \delta_{\pi(q)_s\,a}\,\chi^{(s)}_q(\tau')
+&&\bigl(\because\ \chi^{(s-1)}_q\ \text{の定義}\bigr)\\
+&= \delta_{\pi(q)_s\,a}\,0_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定}\ E(s)\bigr)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`(a,\tau')`),
+        " の第 ",
+        math(String.raw`s`),
+        " 成分は ",
+        math(String.raw`a`),
+        "、第 ",
+        math(String.raw`k`),
+        " 成分（",
+        math(String.raw`s < k \leq M`),
+        "）は ",
+        math(String.raw`\tau'_k`),
+        " なので、三つの場合を合わせて ",
+        math(String.raw`E(s-1)`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        "Step 5: 結論。",
+        math(String.raw`q_0 \in \{1,\dots,N\}`),
+        " を任意に取る。",
+        math(String.raw`E(0)`),
+        "（",
+        math(String.raw`\tau \to \pi(q_0)`),
+        "）より、",
+        math(String.raw`\pi(q) = \pi(q_0)`),
+        " ならば ",
+        math(String.raw`\chi^{(0)}_q(\pi(q_0)) = 1_{\mathbb{C}}`),
+        "、そうでなければ ",
+        math(String.raw`\chi^{(0)}_q(\pi(q_0)) = 0_{\mathbb{C}}`),
+        "。",
+        math(String.raw`\pi`),
+        " は単射なので、",
+        math(String.raw`\pi(q) = \pi(q_0)`),
+        " は ",
+        math(String.raw`q = q_0`),
+        " と同値である。よって ",
+        math(String.raw`q \neq q_0`),
+        " のすべての ",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+d_q\Bigl(P^{(0)}_q((),())\,\chi^{(0)}_q(\pi(q_0))\Bigr)
+&= d_q\Bigl(P^{(0)}_q((),())\,0_{\mathbb{C}}\Bigr)
+&&\bigl(\because\ E(0)\ \text{と}\ q \neq q_0\bigr)\\
+&= d_q\,0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+d_{q_0}
+&= d_{q_0}\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&= d_{q_0}\bigl(1_{\mathbb{C}}\,1_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\bigr)\\
+&= d_{q_0}\Bigl(P^{(0)}_{q_0}((),())\,1_{\mathbb{C}}\Bigr)
+&&\bigl(\because\ P^{(0)}_{q_0}\ \text{の定義を右辺から左辺へ}\bigr)\\
+&= d_{q_0}\Bigl(P^{(0)}_{q_0}((),())\,\chi^{(0)}_{q_0}(\pi(q_0))\Bigr)
+&&\bigl(\because\ E(0)\ (q \to q_0,\ \tau \to \pi(q_0))\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{q=1}^{N} d_q\Bigl(P^{(0)}_q((),())\,\chi^{(0)}_q(\pi(q_0))\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to N,\ z_j \to d_j(P^{(0)}_j((),())\,\chi^{(0)}_j(\pi(q_0))),\ n \to q_0)\ \text{と上の}\ q \neq q_0\ \text{の項を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 3 の}\ A(0)\ (U, V \to (),\ \tau \to \pi(q_0))\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q_0`),
+        " は任意なので、すべての ",
+        math(String.raw`q \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`d_q = 0_{\mathbb{C}}`),
+        "。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。tensor_basis (2) の証明の Step 4 は、族 (b_{a_1}⊠⋯⊠b_{a_M}) が張り、元数が次元 4^M に等しいことから、その証明の Step 3 (b) で基底と結んでいた。Step 3 (b) の前提の (a)「張る有限族の元数は次元以上」は本文で証明されておらず、" +
+          "それを証明する代わりに線型独立性を直接示す（README 3 節の「より初等的な書き方で済むならそちらを採る」）と決めたので、線型独立性を成分の比較とサイトについての帰納法で示す主張として足した。kronecker_family_of_spanning_family_spans と同じ記号で書いた。数値検証: sagemath/check/kronecker_family_of_independent_family_is_independent/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_002_claim_scalar_identity_commutes",
     kind: "claim",
     origin: { path: "_old/typst/parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ", ordinal: 2 },

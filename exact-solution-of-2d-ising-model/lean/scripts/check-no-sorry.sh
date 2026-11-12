@@ -110,6 +110,20 @@ targets=(
   Ising2D.eq_sum_siteProd_single
   Ising2D.span_kroneckerFamily_eq_top_of_necSuf
   Ising2D.kronecker_family_of_spanning_family_spans_of_necSuf
+  Ising2D.prefixEntryProduct_succ
+  Ising2D.prefixEntryProduct_update_of_le
+  Ising2D.prefixEntryProduct_eq_prod
+  Ising2D.suffixLetterIndicator_of_le
+  Ising2D.suffixLetterIndicator_of_lt
+  Ising2D.suffixLetterIndicator_update_of_lt
+  Ising2D.independenceStatement_top
+  Ising2D.matrix_eq_sum_delta_smul
+  Ising2D.independenceStep_B_eq_zero
+  Ising2D.independenceStep_B_eq_sum
+  Ising2D.independenceStatement_pred
+  Ising2D.independenceStatement_zero
+  Ising2D.suffixLetterIndicator_eq
+  Ising2D.kronecker_family_of_independent_family_is_independent
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
   Ising2D.identity_matrix_two_conjTranspose

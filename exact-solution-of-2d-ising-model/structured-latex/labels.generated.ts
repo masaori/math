@@ -427,6 +427,7 @@ export const ALL_LABELS = [
   "isotropic_gamma_in_kappa",
   "isotropic_kappa_equals_kappa_of_K",
   "kappa_of_K_basic",
+  "kronecker_family_of_independent_family_is_independent",
   "kronecker_family_of_spanning_family_spans",
   "kronecker_multilinear",
   "kronecker_of_real_entry_matrices_has_real_entries",
