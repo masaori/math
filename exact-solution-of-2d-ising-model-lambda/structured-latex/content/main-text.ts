@@ -35694,7 +35694,7 @@ F_{m+1}
 &=\mathrm{ac}_l\bigl((t-\widehat{w(j)})A\bigr)
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})\\
 &=0
-&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を}\ C=A\text{、係数の上界}\ j-1\ \text{へ当てる。帰納法の仮定と}\ l>j=(j-1)+1\ \text{による})
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を}\ C=A\text{、係数の上界}\ j-1\ \text{へ当てる、帰納法の仮定と}\ l>j=(j-1)+1\ \text{による})
 \end{aligned}`),
                         paragraph([
                           "これで 2 つの場合が尽くされ、帰納法が閉じた。この議論に実数体も複素数体も現れない。",
@@ -83540,6 +83540,13 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
                 labels: ["claim_dispersion_positive_at_rational_point"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/dispersion-positive-at-rational-point"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_positive_at_rationalPoint",
+                  "Ising2DLambda.KacWard.two_sub_rootOfUnity_sub_inv_eq_square",
+                  "Ising2DLambda.KacWard.rational_selfDual_ne_zero",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_positive_at_rationalPoint_necSuf",
+                  "Ising2DLambda.KacWard.dispersion_positive_at_rationalPoint_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
@@ -83555,60 +83562,107 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_root_of_unity_inverse_is_real_closed_conjugate"), " により、",
+                    ref("claim_twisted_modes_are_double_roots"), " により ",
+                    math(String.raw`\varpi,\varsigma\in\mu_{2L}`), " であり、",
+                    math(String.raw`2L\in\mathbb N_{\ge1}`), " である。",
+                    ref("def_real_closed_subfield"), " の一意表示により ",
                     math(String.raw`\varpi=\alpha+\beta\omega`), "、",
-                    math(String.raw`\varsigma=\gamma+\delta\omega`),
-                    " と一意に書ける（", math(String.raw`\alpha,\beta,\gamma,\delta\in R`),
-                    "）。各モードは ", ref("def_horizontal_twisted_modes"), " と ",
-                    ref("def_vertical_twisted_modes"), " により 1 の冪根である。",
+                    math(String.raw`\varsigma=\gamma+\delta\omega`), " と書ける（",
+                    math(String.raw`\alpha,\beta,\gamma,\delta\in R`), "）。",
+                    ref("claim_root_of_unity_inverse_is_real_closed_conjugate"),
+                    " を指数 ", math(String.raw`2L`), " で二つのモードへ適用すると",
+                  ]),
+                  displayMath(String.raw`\alpha^2+\beta^2=1,\quad\varpi^{-1}=\alpha-\beta\omega,\qquad
+\gamma^2+\delta^2=1,\quad\varsigma^{-1}=\gamma-\delta\omega.`),
+                  paragraph([
+                    ref("claim_real_closed_sum_of_two_squares_is_square"), " により、",
+                    math(String.raw`(1-\alpha)^2+\beta^2=c_\varpi\cdot c_\varpi`), "、",
+                    math(String.raw`(1-\gamma)^2+\delta^2=c_\varsigma\cdot c_\varsigma`), "、",
+                    math(String.raw`c_\varpi\cdot c_\varpi+c_\varsigma\cdot c_\varsigma=e\cdot e`),
+                    " を満たす ", math(String.raw`c_\varpi,c_\varsigma,e\in R`), " を取る。",
+                    "有理数 ", math(String.raw`r:=q(1-q)(1+q)\in\mathbb Q`), " は ",
+                    math(String.raw`\mathbb Q`), " の正の元 ", math(String.raw`q`), "、",
+                    math(String.raw`1-q`), "、", math(String.raw`1+q`), " の積なので ",
+                    math(String.raw`0<r`), " である。",
+                    ref("claim_positive_rational_positive_in_real_closed"), " により ",
+                    math(String.raw`0<_Rr`), " なので、", ref("def_real_algebraic_strict_order"),
+                    " により ", math(String.raw`r=s\cdot s`), " を満たす ",
+                    math(String.raw`s\in R`), "、", math(String.raw`s\ne0`), " を取る。",
+                    math(String.raw`p:=q^2+2q-1\in\mathbb Q`), " と置く（",
+                    ref("claim_rationals_are_real_algebraic"), " により ",
+                    math(String.raw`q,r,p\in R`), "）。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 2-\varpi-\varpi^{-1}
 &=2-(\alpha+\beta\omega)-(\alpha-\beta\omega)
-&&\bigl(\because\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
+&&\bigl(\because\ \varpi\text{ の表示と }\blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
 &=2-2\alpha
-&&\bigl(\because\ R\text{ の加法}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=1-2\alpha+(\alpha^2+\beta^2)
+&&\bigl(\because\ \alpha^2+\beta^2=1\bigr)\\
 &=(1-\alpha)^2+\beta^2
-&&\bigl(\because\ \alpha^2+\beta^2=1,\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr).
-\end{aligned}`),
-                  paragraph([
-                    ref("claim_real_closed_sum_of_two_squares_is_square"), " により最後の和は ",
-                    math(String.raw`R`), " の平方なので ",
-                    math(String.raw`0\le_R2-\varpi-\varpi^{-1}`), "（",
-                    ref("def_real_algebraic_nonstrict_order"), "）。同じ計算で ",
-                    math(String.raw`0\le_R2-\varsigma-\varsigma^{-1}`), " である。",
-                    math(String.raw`0<q<1`), " より",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=c_\varpi\cdot c_\varpi
+&&\bigl(\because\ c_\varpi\text{ の取り方}\bigr),\\[4pt]
+2-\varsigma-\varsigma^{-1}
+&=2-(\gamma+\delta\omega)-(\gamma-\delta\omega)
+&&\bigl(\because\ \varsigma\text{ の表示と }\blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
+&=2-2\gamma
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=1-2\gamma+(\gamma^2+\delta^2)
+&&\bigl(\because\ \gamma^2+\delta^2=1\bigr)\\
+&=(1-\gamma)^2+\delta^2
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=c_\varsigma\cdot c_\varsigma
+&&\bigl(\because\ c_\varsigma\text{ の取り方}\bigr),\\[4pt]
 q(1-q^2)
 &=q(1-q)(1+q)
 &&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
-&>_R0
-&&\bigl(\because\ 0<q<1\text{ と順序体の正元の積}\bigr).
+&=r
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=s\cdot s
+&&\bigl(\because\ s\text{ の取り方}\bigr).
 \end{aligned}`),
-                  paragraph([ref("claim_dispersion_positive_decomposition"), " から"]),
+                  paragraph(["この三つを ", ref("claim_dispersion_positive_decomposition"), " へ代入する。"]),
                   displayMath(String.raw`\begin{aligned}
-\Delta(q;\varpi,\varsigma)-(q^2+2q-1)^2
+\Delta(q;\varpi,\varsigma)-p^2
 &=q(1-q^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
-&&\bigl(\because\ \blkref{claim_dispersion_positive_decomposition}\text{ を }x:=q\text{ で評価}\bigr)\\
-&\ge_R0
-&&\bigl(\because\ R\text{ の順序と非負元の積・和}\bigr).
+&&\bigl(\because\ \blkref{claim_dispersion_positive_decomposition}\text{ を }x:=q\text{ で評価},\ p\text{ の定義}\bigr)\\
+&=(s\cdot s)(c_\varpi\cdot c_\varpi+c_\varsigma\cdot c_\varsigma)
+&&\bigl(\because\ \text{上の三つの式}\bigr)\\
+&=(s\cdot s)(e\cdot e)
+&&\bigl(\because\ e\text{ の取り方}\bigr)\\
+&=(se)\cdot(se)
+&&\bigl(\because\ R\text{ の乗法の結合法則と交換法則}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "残る平方が零でないことを有理数の中で示す。仮に ",
-                    math(String.raw`q^2+2q-1=0`), " とすると",
+                    math(String.raw`p^2`), " と ", math(String.raw`se`), " は ",
+                    math(String.raw`R`), " の元であり、", math(String.raw`R`),
+                    " は部分体なので ", math(String.raw`\Delta(q;\varpi,\varsigma)=p^2+(se)\cdot(se)\in R`),
+                    " である。", math(String.raw`se\ne0`), " なら ",
+                    ref("def_real_algebraic_strict_order"), " により ",
+                    math(String.raw`p^2<_R\Delta(q;\varpi,\varsigma)`), "、",
+                    math(String.raw`se=0`), " なら ", math(String.raw`p^2=\Delta(q;\varpi,\varsigma)`),
+                    " であり、どちらの場合も ", ref("def_real_algebraic_nonstrict_order"),
+                    " により ", math(String.raw`p^2\le_R\Delta(q;\varpi,\varsigma)`), " である。",
                   ]),
+                  paragraph(["残る ", math(String.raw`p\ne0`), " を有理数の中で示す。仮に ",
+                    math(String.raw`p=0`), " とすると"]),
                   displayMath(String.raw`\begin{aligned}
-(q+1)^2&=2
-&&\bigl(\because\ q^2+2q-1=0\text{ と }\mathbb Q\text{ の分配律}\bigr)\\
-(q+1)^2&\ne2
-&&\bigl(\because\ q+1\in\mathbb Q,\ \blkref{claim_no_rational_square_two}\bigr).
+(q+1)\cdot(q+1)
+&=q^2+2q+1
+&&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
+&=p+2
+&&\bigl(\because\ p\text{ の定義}\bigr)\\
+&=2
+&&\bigl(\because\ p=0\bigr)
 \end{aligned}`),
                   paragraph([
-                    "矛盾する。従って ", math(String.raw`q^2+2q-1\ne0`),
-                    " であり、その平方は ",
-                    ref("def_real_algebraic_strict_order"), " により正である。",
-                    "先の非負性と順序の推移性から主張を得る。",
+                    "となり、", math(String.raw`q+1\in\mathbb Q`), " なので ",
+                    ref("claim_no_rational_square_two"), " に反する。従って ",
+                    math(String.raw`p\ne0`), " であり、", math(String.raw`p^2-0=p\cdot p`),
+                    " だから ", ref("def_real_algebraic_strict_order"), " により ",
+                    math(String.raw`0<_Rp^2`), " である。",
                   ]),
                 ],
               },
