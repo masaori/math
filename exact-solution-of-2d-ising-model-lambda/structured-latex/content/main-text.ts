@@ -35068,7 +35068,7 @@ w^{\,1}
 &=\mathrm{ac}_i(t)-\mathrm{ac}_i(\widehat{w})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数と加法の逆元})\\
 &=0-0
-&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{。}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
+&&(\because\ i\ne1\ \text{なので}\ \mathrm{ac}_i(t)=0\text{、}\ i\ge1\ \text{なので}\ \blkref{def_qbar_constant_embedding}\ \text{より}\ \mathrm{ac}_i(\widehat{w})=0)\\
 &=0
 &&(\because\ \overline{\mathbb{Q}}\ \text{の零元との差})
 \end{aligned}`),
@@ -35085,7 +35085,7 @@ w^{\,1}
 &=\mathrm{ac}_0(t-\widehat{w})\cdot\mathrm{ac}_{m+1}(C)
 +\mathrm{ac}_1(t-\widehat{w})\cdot\mathrm{ac}_{m}(C)
 +\sum_{i=2}^{m+1}\mathrm{ac}_i(t-\widehat{w})\cdot\mathrm{ac}_{m+1-i}(C)
-&&(\because\ \text{有限和から番号}\ 0,1\ \text{の項を取り出す。}\ m=0\ \text{のとき第 3 の和は空で零元})\\
+&&(\because\ \text{有限和から番号}\ 0,1\ \text{の項を取り出す、}\ m=0\ \text{のとき第 3 の和は空で零元})\\
 &=(-w)\cdot\mathrm{ac}_{m+1}(C)+1\cdot\mathrm{ac}_{m}(C)
 +\sum_{i=2}^{m+1}0\cdot\mathrm{ac}_{m+1-i}(C)
 &&(\because\ \text{準備で計算した一次式の係数を各項へ同時に当てる})\\
@@ -85975,6 +85975,13 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                 habitat: "C",
                 realEscape: "代数的数の有限モードを複素実現し、冪の等式を複素数の等式として読む。指数表示はまだ使わない。",
                 verification: ["sagemath/check/complex-realization-twisted-mode-roots"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontalMode_pow",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_verticalMode_pow",
+                  "Ising2DLambda.NecSuf.RealEscape.complexRealization_root_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontalMode_pow_from_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_verticalMode_pow_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
