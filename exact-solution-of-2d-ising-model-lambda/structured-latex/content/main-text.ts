@@ -35507,9 +35507,9 @@ F_{m+1}
 &=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
 &=0+\mathrm{ac}_k(\widehat{-1})
-&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n<k\ \text{より}\ k\ne n)\\
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{、}\ n<k\ \text{より}\ k\ne n)\\
 &=0+0
-&&(\because\ \blkref{def_qbar_constant_embedding}\text{。}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{、}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
 &=0
 &&(\because\ \text{零元との和})
 \end{aligned}`),
@@ -35525,7 +35525,7 @@ F_{m+1}
 &=w^{\,n}+\mathrm{aev}_{w}(\widehat{-1})
 &&(\because\ \blkref{claim_qbar_evaluation_indeterminate_pow})\\
 &=w^{\,n}+(-1)
-&&(\because\ \blkref{def_qbar_poly_evaluation}\text{。}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
+&&(\because\ \blkref{def_qbar_poly_evaluation}\text{、}\ \mathrm{aev}_{w}(\widehat{a})=a)\\
 &=1+(-1)
 &&(\because\ w^{\,n}=1)\\
 &=0
@@ -35553,7 +35553,7 @@ F_{m+1}
 &=f
 &&(\because\ \text{本主張の仮定}\ f=(t-\widehat{w})B)\\
 &=(t-\widehat{w})g
-&&(\because\ \blkref{claim_qbar_factor_theorem}\text{。準備の 2 つの検査による})
+&&(\because\ \blkref{claim_qbar_factor_theorem}\text{、準備の 2 つの検査による})
 \end{aligned}`),
                         paragraph([
                           "この等式と、", math(String.raw`B`), " の係数の仮定（本主張の仮定）および ",
@@ -83348,6 +83348,15 @@ D^{a,b}_L(x)
                 title: { text: "1 の冪根の逆元は実閉部分体上の共役である" },
                 labels: ["claim_root_of_unity_inverse_is_real_closed_conjugate"],
                 habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.rootOfUnity_inverse_realClosedConj",
+                  "Ising2DLambda.KacWard.realClosedConj_add",
+                  "Ising2DLambda.KacWard.realClosedConj_mul",
+                  "Ising2DLambda.KacWard.realClosedConj_of_mem",
+                  "Ising2DLambda.KacWard.realClosedConj_bijective",
+                  "Ising2DLambda.NecSuf.KacWard.rootOfUnity_inverse_conj_necSuf",
+                  "Ising2DLambda.KacWard.rootOfUnity_inverse_realClosedConj_from_necSuf",
+                ],
                 verification: ["sagemath/check/root-of-unity-real-closed-conjugate"],
                 statement: [
                   paragraph([
@@ -83410,36 +83419,108 @@ D^{a,b}_L(x)
                   paragraph(["従って、この写像は全単射である。加法・乗法と単位元を保つので体の自己同型である。"]),
                   paragraph([
                     math(String.raw`N:=\zeta\operatorname{conj}_R(\zeta)`),
-                    " と置く。", ref("claim_real_closed_sum_of_two_squares_is_square"),
-                    " により ", math(String.raw`N`), " は ", math(String.raw`R`),
-                    " の平方であり、", ref("def_real_algebraic_nonstrict_order"),
-                    " により ", math(String.raw`0\le_R N`), " である。",
+                    " と置く。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 N&=(\alpha+\beta\omega)(\alpha-\beta\omega)
 &&\bigl(\because\ N\text{ と }\operatorname{conj}_R\text{ の定義}\bigr)\\
 &=\alpha^2+\beta^2
 &&\bigl(\because\ \omega^2=-1\text{ と分配律}\bigr),\\
-N^n&=\zeta^n\operatorname{conj}_R(\zeta^n)
-&&\bigl(\because\ \operatorname{conj}_R\text{ の乗法保存と冪の法則}\bigr)\\
+N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
+&&\bigl(\because\ N\text{ の定義}\bigr)\\
+&=\zeta^n\operatorname{conj}_R(\zeta)^n
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の可換性}\bigr)\\
+&=\zeta^n\operatorname{conj}_R(\zeta^n)
+&&\bigl(\because\ \operatorname{conj}_R\text{ の乗法保存を }n\text{ 個の因子に適用}\bigr)\\
+&=1\cdot\operatorname{conj}_R(1)
+&&\bigl(\because\ \zeta\in\mu_n,\ \blkref{def_root_of_unity_set}\bigr)\\
 &=1
-&&\bigl(\because\ \zeta\in\mu_n\text{ と }\operatorname{conj}_R(1)=1\bigr).
+&&\bigl(\because\ 1\in R\text{ と }\operatorname{conj}_R(r)=r\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`n\ge1`), " なので ", math(String.raw`N^n=1`),
-                    " から ", math(String.raw`N\ne0`), " である。順序体 ", math(String.raw`R`),
-                    " で ", math(String.raw`N>_R1`), " なら、正元を掛ける操作の単調性を ",
-                    math(String.raw`n`), " 回適用して ", math(String.raw`N^n>_R1`),
-                    " となる。", math(String.raw`0<_RN<_R1`),
-                    " なら同様に ", math(String.raw`N^n<_R1`),
-                    " となる。いずれも ", math(String.raw`N^n=1`),
-                    " と矛盾するから ", math(String.raw`N=1`), " である。",
+                    "よって ", math(String.raw`N=\alpha^2+\beta^2\in R`), " かつ ",
+                    math(String.raw`N^n=1`), " である。", ref("claim_real_closed_sum_of_two_squares_is_square"),
+                    " により、ある ", math(String.raw`c\in R`), " が存在して ",
+                    math(String.raw`N=c\cdot c`), " となる。", math(String.raw`c=0`),
+                    " なら ", math(String.raw`N=0`), " で、", math(String.raw`n\ge1`),
+                    " から ", math(String.raw`N^n=0\ne1`), " となり矛盾するので ",
+                    math(String.raw`c\ne0`), " である。",
+                  ]),
+                  paragraph([
+                    ref("claim_real_algebraic_order_trichotomy"), " により、",
+                    math(String.raw`1<_RN`), "、", math(String.raw`1=N`), "、",
+                    math(String.raw`N<_R1`), " のちょうど一つが成り立つ。",
+                    math(String.raw`1<_RN`), " と仮定する。", ref("def_real_algebraic_strict_order"),
+                    " により、ある零元でない ", math(String.raw`s\in R`), " が存在して ",
+                    math(String.raw`N-1=s\cdot s`), " である。",
+                    math(String.raw`m\in\mathbb N_{\ge1}`), " についての帰納法で ",
+                    math(String.raw`1<_RN^m`), " を示す。", math(String.raw`m=1`),
+                    " は仮定そのものである。", math(String.raw`1<_RN^m`),
+                    " とし、零元でない ", math(String.raw`u\in R`), " で ",
+                    math(String.raw`N^m-1=u\cdot u`), " と書く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(N^{m+1}-1)-(N-1)
+&=N^{m+1}-N
+&&\bigl(\because\ R\text{ の加法}\bigr)\\
+&=N(N^m-1)
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=(c\cdot c)(u\cdot u)
+&&\bigl(\because\ N=c\cdot c,\ N^m-1=u\cdot u\bigr)\\
+&=(cu)\cdot(cu)
+&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`R`), " は体なので ", math(String.raw`cu\ne0`),
+                    " であり、", ref("def_real_algebraic_strict_order"), " により ",
+                    math(String.raw`N-1<_RN^{m+1}-1`), " である。",
+                    math(String.raw`(N-1)-0=s\cdot s`), " から ", math(String.raw`0<_RN-1`),
+                    " であり、", ref("claim_real_algebraic_order_transitive"), " により ",
+                    math(String.raw`0<_RN^{m+1}-1`), "、すなわち ",
+                    math(String.raw`(N^{m+1}-1)-0=N^{m+1}-1`), " から ",
+                    math(String.raw`1<_RN^{m+1}`), " である。",
+                    math(String.raw`m=n`), " とすると ", math(String.raw`1<_RN^n=1`),
+                    " となり、ある零元でない ", math(String.raw`w\in R`), " で ",
+                    math(String.raw`0=1-1=w\cdot w`), " となる。体 ", math(String.raw`R`),
+                    " でこれは ", math(String.raw`w=0`), " を与えて矛盾する。",
+                  ]),
+                  paragraph([
+                    math(String.raw`N<_R1`), " と仮定する。零元でない ", math(String.raw`s\in R`),
+                    " で ", math(String.raw`1-N=s\cdot s`), " と書き、同じ帰納法で ",
+                    math(String.raw`N^m<_R1`), " を示す。", math(String.raw`N^m<_R1`),
+                    " とし、零元でない ", math(String.raw`u\in R`), " で ",
+                    math(String.raw`1-N^m=u\cdot u`), " と書く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(1-N^{m+1})-(1-N)
+&=N-N^{m+1}
+&&\bigl(\because\ R\text{ の加法}\bigr)\\
+&=N(1-N^m)
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=(c\cdot c)(u\cdot u)
+&&\bigl(\because\ N=c\cdot c,\ 1-N^m=u\cdot u\bigr)\\
+&=(cu)\cdot(cu)
+&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "前の場合と同じく ", ref("def_real_algebraic_strict_order"), " と ",
+                    ref("claim_real_algebraic_order_transitive"), " により ",
+                    math(String.raw`0<_R1-N^{m+1}`), "、すなわち ",
+                    math(String.raw`N^{m+1}<_R1`), " である。", math(String.raw`m=n`),
+                    " とすると ", math(String.raw`1=N^n<_R1`),
+                    " となり、前の場合と同じく矛盾する。従って ", math(String.raw`N=1`), " である。",
+                    math(String.raw`\zeta^n=1`), " と ", math(String.raw`n\ge1`), " から ",
+                    math(String.raw`\zeta\ne0`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \alpha^2+\beta^2&=N&&\bigl(\because\ N\text{ の計算}\bigr)\\
-&=1&&\bigl(\because\ \text{上の順序による結論}\bigr),\\
-\zeta^{-1}&=\operatorname{conj}_R(\zeta)
-&&\bigl(\because\ \zeta\operatorname{conj}_R(\zeta)=N=1\bigr)\\
+&=1&&\bigl(\because\ \text{三分法による結論}\bigr),\\
+\zeta^{-1}&=\zeta^{-1}N
+&&\bigl(\because\ N=1\bigr)\\
+&=\zeta^{-1}(\zeta\operatorname{conj}_R(\zeta))
+&&\bigl(\because\ N\text{ の定義}\bigr)\\
+&=\operatorname{conj}_R(\zeta)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の結合法則と }\zeta^{-1}\zeta=1\bigr)\\
 &=\alpha-\beta\omega
 &&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr).
 \end{aligned}`),
