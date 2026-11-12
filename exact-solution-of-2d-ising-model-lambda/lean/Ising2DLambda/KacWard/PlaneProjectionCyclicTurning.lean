@@ -30,6 +30,12 @@ def unitStepDirection (u : ℤ × ℤ) : ZMod 4 :=
 def directionPairTurning (a b : ZMod 4) : ℤ :=
   if b - a = 1 then 1 else if b - a = -1 then -1 else 0
 
+/-- Reversing both directions and their order changes the sign of a local turn. -/
+theorem directionPairTurning_reversed (a b : ZMod 4) :
+    directionPairTurning (b + 2) (a + 2) = -directionPairTurning a b := by
+  fin_cases a <;> fin_cases b <;>
+    decide
+
 theorem directionPairTurning_eq_turnValue (a : ZMod 4) (turn : Turn) :
     directionPairTurning a (a + (turnValue turn : ZMod 4)) = turnValue turn := by
   fin_cases a <;> cases turn <;> decide
