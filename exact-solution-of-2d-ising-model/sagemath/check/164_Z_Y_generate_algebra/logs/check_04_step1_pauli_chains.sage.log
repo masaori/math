@@ -1,0 +1,310 @@
+PASS 第 1 式: σ^xσ^x = I_Mat(2,C)
+PASS 第 2 式 σ^yσ^z 第 1 行 = 第 2 行
+PASS 第 2 式 σ^yσ^z 第 2 行 = 第 3 行
+PASS 第 2 式 σ^yσ^z 第 3 行 = 第 4 行
+PASS 第 2 式 σ^yσ^z 第 4 行 = 第 5 行
+PASS 第 2 式 σ^yσ^z 第 5 行 = 第 6 行
+PASS 第 2 式 σ^yσ^z 第 6 行 = 第 7 行
+PASS 第 2 式 σ^yσ^z 第 7 行 = 第 8 行
+PASS 第 2 式 σ^yσ^z 第 8 行 = 第 9 行
+PASS 第 2 式 σ^yσ^z 第 9 行 = 第 10 行
+PASS 第 2 式 σ^yσ^z 第 10 行 = 第 11 行
+PASS 第 2 式 σ^yσ^z 第 11 行 = 第 12 行
+PASS 第 2 式 σ^yσ^z 第 12 行 = 第 13 行
+PASS 第 2 式 σ^yσ^z 第 13 行 = 第 14 行
+PASS 第 2 式の 2 行目の根拠: mat_mult の成分の和
+PASS 第 2 式の 3 行目の根拠: complex_zero_times_is_zero (z → 1, 0, -1)
+PASS 第 2 式の 4 行目の根拠: 加法の単位元
+PASS 第 2 式の 5 行目の根拠: 積の可換律
+PASS 第 2 式の 6 行目の根拠: complex_zero_times_is_zero (z → -i)
+PASS 第 2 式の 7 行目の根拠: multiply_by_minus_one (z → -i)
+PASS 第 2 式の 8 行目の根拠: double_negation_in_cc (z → i)
+PASS 第 2 式の 9〜11 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元
+PASS 準備 (g) の結論 (-i)i = 1_C
+PASS 第 3 式 σ^x 第 1 行 = 第 2 行
+PASS 第 3 式 σ^x 第 2 行 = 第 3 行
+PASS 第 3 式 σ^x 第 3 行 = 第 4 行
+PASS 第 3 式 σ^x 第 4 行 = 第 5 行
+PASS 第 4 式 M=1 k=1 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=1 k=1 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=1 k=1 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=1 k=1 a=z b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=1 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=1 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=1 a=z b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=2 k=2 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=2 k=2 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=2 k=2 a=z b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=1 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=1 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=1 a=z b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=2 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=2 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=2 a=z b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=x b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=x b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=x b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=x b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=x b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=x b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=x b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=x b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=x b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=y b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=y b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=y b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=y b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=y b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=y b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=y b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=y b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=y b=z 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=z b=x 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=z b=x 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=z b=x 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=z b=y 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=z b=y 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=z b=y 第 3 行 = 第 4 行
+PASS 第 4 式 M=3 k=3 a=z b=z 第 1 行 = 第 2 行
+PASS 第 4 式 M=3 k=3 a=z b=z 第 2 行 = 第 3 行
+PASS 第 4 式 M=3 k=3 a=z b=z 第 3 行 = 第 4 行
+PASS σ_k^xσ_k^x M=1 k=1 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=1 k=1 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=1 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=1 k=1 第 1 行 = 第 2 行
+PASS σ_k^x M=1 k=1 第 2 行 = 第 3 行
+PASS σ_k^x M=1 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=1 k=1 第 4 行 = 第 5 行
+PASS σ_k^xσ_k^x M=2 k=1 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=2 k=1 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=2 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=2 k=1 第 1 行 = 第 2 行
+PASS σ_k^x M=2 k=1 第 2 行 = 第 3 行
+PASS σ_k^x M=2 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=2 k=1 第 4 行 = 第 5 行
+PASS σ_k^xσ_k^x M=2 k=2 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=2 k=2 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=2 k=2 第 3 行 = 第 4 行
+PASS σ_k^x M=2 k=2 第 1 行 = 第 2 行
+PASS σ_k^x M=2 k=2 第 2 行 = 第 3 行
+PASS σ_k^x M=2 k=2 第 3 行 = 第 4 行
+PASS σ_k^x M=2 k=2 第 4 行 = 第 5 行
+PASS σ_k^xσ_k^x M=3 k=1 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=3 k=1 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=3 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=1 第 1 行 = 第 2 行
+PASS σ_k^x M=3 k=1 第 2 行 = 第 3 行
+PASS σ_k^x M=3 k=1 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=1 第 4 行 = 第 5 行
+PASS σ_k^xσ_k^x M=3 k=2 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=3 k=2 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=3 k=2 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=2 第 1 行 = 第 2 行
+PASS σ_k^x M=3 k=2 第 2 行 = 第 3 行
+PASS σ_k^x M=3 k=2 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=2 第 4 行 = 第 5 行
+PASS σ_k^xσ_k^x M=3 k=3 第 1 行 = 第 2 行
+PASS σ_k^xσ_k^x M=3 k=3 第 2 行 = 第 3 行
+PASS σ_k^xσ_k^x M=3 k=3 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=3 第 1 行 = 第 2 行
+PASS σ_k^x M=3 k=3 第 2 行 = 第 3 行
+PASS σ_k^x M=3 k=3 第 3 行 = 第 4 行
+PASS σ_k^x M=3 k=3 第 4 行 = 第 5 行
+PASS 異サイトの可換性 M=2 k=1 l=2 a=x b=x
+PASS 異サイトの可換性 M=2 k=1 l=2 a=x b=y
+PASS 異サイトの可換性 M=2 k=1 l=2 a=x b=z
+PASS 異サイトの可換性 M=2 k=1 l=2 a=y b=x
+PASS 異サイトの可換性 M=2 k=1 l=2 a=y b=y
+PASS 異サイトの可換性 M=2 k=1 l=2 a=y b=z
+PASS 異サイトの可換性 M=2 k=1 l=2 a=z b=x
+PASS 異サイトの可換性 M=2 k=1 l=2 a=z b=y
+PASS 異サイトの可換性 M=2 k=1 l=2 a=z b=z
+PASS 異サイトの可換性 M=2 k=2 l=1 a=x b=x
+PASS 異サイトの可換性 M=2 k=2 l=1 a=x b=y
+PASS 異サイトの可換性 M=2 k=2 l=1 a=x b=z
+PASS 異サイトの可換性 M=2 k=2 l=1 a=y b=x
+PASS 異サイトの可換性 M=2 k=2 l=1 a=y b=y
+PASS 異サイトの可換性 M=2 k=2 l=1 a=y b=z
+PASS 異サイトの可換性 M=2 k=2 l=1 a=z b=x
+PASS 異サイトの可換性 M=2 k=2 l=1 a=z b=y
+PASS 異サイトの可換性 M=2 k=2 l=1 a=z b=z
+PASS 異サイトの可換性 M=3 k=1 l=2 a=x b=x
+PASS 異サイトの可換性 M=3 k=1 l=2 a=x b=y
+PASS 異サイトの可換性 M=3 k=1 l=2 a=x b=z
+PASS 異サイトの可換性 M=3 k=1 l=2 a=y b=x
+PASS 異サイトの可換性 M=3 k=1 l=2 a=y b=y
+PASS 異サイトの可換性 M=3 k=1 l=2 a=y b=z
+PASS 異サイトの可換性 M=3 k=1 l=2 a=z b=x
+PASS 異サイトの可換性 M=3 k=1 l=2 a=z b=y
+PASS 異サイトの可換性 M=3 k=1 l=2 a=z b=z
+PASS 異サイトの可換性 M=3 k=1 l=3 a=x b=x
+PASS 異サイトの可換性 M=3 k=1 l=3 a=x b=y
+PASS 異サイトの可換性 M=3 k=1 l=3 a=x b=z
+PASS 異サイトの可換性 M=3 k=1 l=3 a=y b=x
+PASS 異サイトの可換性 M=3 k=1 l=3 a=y b=y
+PASS 異サイトの可換性 M=3 k=1 l=3 a=y b=z
+PASS 異サイトの可換性 M=3 k=1 l=3 a=z b=x
+PASS 異サイトの可換性 M=3 k=1 l=3 a=z b=y
+PASS 異サイトの可換性 M=3 k=1 l=3 a=z b=z
+PASS 異サイトの可換性 M=3 k=2 l=1 a=x b=x
+PASS 異サイトの可換性 M=3 k=2 l=1 a=x b=y
+PASS 異サイトの可換性 M=3 k=2 l=1 a=x b=z
+PASS 異サイトの可換性 M=3 k=2 l=1 a=y b=x
+PASS 異サイトの可換性 M=3 k=2 l=1 a=y b=y
+PASS 異サイトの可換性 M=3 k=2 l=1 a=y b=z
+PASS 異サイトの可換性 M=3 k=2 l=1 a=z b=x
+PASS 異サイトの可換性 M=3 k=2 l=1 a=z b=y
+PASS 異サイトの可換性 M=3 k=2 l=1 a=z b=z
+PASS 異サイトの可換性 M=3 k=2 l=3 a=x b=x
+PASS 異サイトの可換性 M=3 k=2 l=3 a=x b=y
+PASS 異サイトの可換性 M=3 k=2 l=3 a=x b=z
+PASS 異サイトの可換性 M=3 k=2 l=3 a=y b=x
+PASS 異サイトの可換性 M=3 k=2 l=3 a=y b=y
+PASS 異サイトの可換性 M=3 k=2 l=3 a=y b=z
+PASS 異サイトの可換性 M=3 k=2 l=3 a=z b=x
+PASS 異サイトの可換性 M=3 k=2 l=3 a=z b=y
+PASS 異サイトの可換性 M=3 k=2 l=3 a=z b=z
+PASS 異サイトの可換性 M=3 k=3 l=1 a=x b=x
+PASS 異サイトの可換性 M=3 k=3 l=1 a=x b=y
+PASS 異サイトの可換性 M=3 k=3 l=1 a=x b=z
+PASS 異サイトの可換性 M=3 k=3 l=1 a=y b=x
+PASS 異サイトの可換性 M=3 k=3 l=1 a=y b=y
+PASS 異サイトの可換性 M=3 k=3 l=1 a=y b=z
+PASS 異サイトの可換性 M=3 k=3 l=1 a=z b=x
+PASS 異サイトの可換性 M=3 k=3 l=1 a=z b=y
+PASS 異サイトの可換性 M=3 k=3 l=1 a=z b=z
+PASS 異サイトの可換性 M=3 k=3 l=2 a=x b=x
+PASS 異サイトの可換性 M=3 k=3 l=2 a=x b=y
+PASS 異サイトの可換性 M=3 k=3 l=2 a=x b=z
+PASS 異サイトの可換性 M=3 k=3 l=2 a=y b=x
+PASS 異サイトの可換性 M=3 k=3 l=2 a=y b=y
+PASS 異サイトの可換性 M=3 k=3 l=2 a=y b=z
+PASS 異サイトの可換性 M=3 k=3 l=2 a=z b=x
+PASS 異サイトの可換性 M=3 k=3 l=2 a=z b=y
+PASS 異サイトの可換性 M=3 k=3 l=2 a=z b=z
+PASS 否定の対照: 第 2 式の係数を -i にすると成り立たない
+PASS 否定の対照: 第 3 式の係数を i にすると成り立たない
+PASS 否定の対照: (-i)(-1) を -i と読み違えると 5 行目以降が成り立たない
+PASS 否定の対照: 第 4 式の積の因子を別のサイトに置くと成り立たない
+PASS 否定の対照: 同じサイトの σ^y と σ^z は可換ではない
+-- Z_Y_generate_algebra の Step 1 の鎖: 308/308 PASS
+RESULT: PASS

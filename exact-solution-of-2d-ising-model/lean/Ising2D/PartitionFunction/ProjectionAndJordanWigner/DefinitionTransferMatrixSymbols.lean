@@ -54,6 +54,9 @@ import Ising2D.Representation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimTensorCommutationFromAllSites
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 
 namespace Ising2D
 
@@ -256,15 +259,75 @@ theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
     -- 上で計算した σ^z σ^y
     _ = -(pauliZ * pauliY) := by rw [pauliZ_mul_pauliY_entries]
 
-/-- 原文 Step 1 の `σ^y σ^z = √-1 σ^x`。 -/
-theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+/-- 人手 `Z_Y_generate_algebra`（`eigenvalue_problem_diagonalization_and_exponential_form.ts`）の Step 1 の準備 (f): `ii = −1_ℂ`（人手の 4 行）。
+Step 3 の `R_{12}`・`R_{21}` の鎖も使う。 -/
+theorem zy_prep_I_mul_I : Complex.I * Complex.I = -1 :=
+  calc Complex.I * Complex.I
+      = (⟨0, 1⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl                             -- `def_imaginary_unit` を 2 か所へ
+    _ = (⟨0 * 0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := rfl                   -- `definition_of_cc` の積
+    _ = (⟨-1, 0⟩ : ℂ) := by norm_num                                  -- `ℝ` の四則
+    _ = -1 := by
+          rw [show (⟨-1, 0⟩ : ℂ) = ((-1 : ℝ) : ℂ) from rfl, Complex.ofReal_neg, Complex.ofReal_one]
+                                                                      -- `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1`
 
-/-- 原文 Step 1 の `σ^x = -√-1 σ^y σ^z`。 -/
+/-- 人手 `Z_Y_generate_algebra` の Step 1 の準備 (g): `(−i) i = 1_ℂ`。Step 1 の第 3 式 `pauliX_eq` と Step 3 の `R_{12}` の鎖が使う。 -/
+theorem zy_prep_neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
+  calc (-Complex.I) * Complex.I
+      = -(Complex.I * Complex.I) := neg_I_mul_eq_neg_of_I_mul _         -- `negative_i_times_complex_is_negation_of_i_times`（`z → i`）
+    _ = -(-1) := by rw [zy_prep_I_mul_I]                                -- (f)
+    _ = (-1) * (-1) := (neg_one_mul (-1)).symm                          -- `multiply_by_minus_one`（`z → −1_ℂ`）
+    _ = 1 := complex_minus_one_mul_minus_one                            -- `minus_one_times_minus_one_is_one_in_cc`
+
+/-- 人手 `Z_Y_generate_algebra` の Step 1 の第 2 式 `σ^yσ^z = iσ^x`。人手の鎖の 14 行と 1 段ずつ対応する。 -/
+theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
+  calc
+    -- `pauli_matrix_products` の σ^y, σ^z
+    pauliY * pauliZ = !![0, -Complex.I; Complex.I, 0] * !![1, 0; 0, -1] := rfl
+    -- `mat_mult`
+    _ = !![0 * 1 + (-Complex.I) * 0, 0 * 0 + (-Complex.I) * (-1);
+          Complex.I * 1 + 0 * 0, Complex.I * 0 + 0 * (-1)] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
+    -- `complex_zero_times_is_zero`（`z → 1, 0, 0, -1`）を 4 か所へ
+    _ = !![0 + (-Complex.I) * 0, 0 + (-Complex.I) * (-1);
+          Complex.I * 1 + 0, Complex.I * 0 + 0] := by simp only [zero_mul]
+    -- 加法の単位元を 4 か所へ
+    _ = !![(-Complex.I) * 0, (-Complex.I) * (-1); Complex.I * 1, Complex.I * 0] := by
+      simp only [zero_add, add_zero]
+    -- 積の可換律を 2 か所へ
+    _ = !![0 * (-Complex.I), (-1) * (-Complex.I); Complex.I * 1, Complex.I * 0] := by
+      rw [mul_comm (-Complex.I) 0, mul_comm (-Complex.I) (-1)]
+    -- `complex_zero_times_is_zero`（`z → -i`）
+    _ = !![0, (-1) * (-Complex.I); Complex.I * 1, Complex.I * 0] := by rw [zero_mul]
+    -- `multiply_by_minus_one`（`z → -i`）を右辺から左辺へ
+    _ = !![0, -(-Complex.I); Complex.I * 1, Complex.I * 0] := by rw [neg_one_mul]
+    -- `double_negation_in_cc`（`z → i`）
+    _ = !![0, Complex.I; Complex.I * 1, Complex.I * 0] := by rw [neg_neg]
+    -- `complex_zero_times_is_zero`（`z → i`）を右辺から左辺へ
+    _ = !![0 * Complex.I, Complex.I; Complex.I * 1, Complex.I * 0] := by rw [zero_mul]
+    -- 積の可換律
+    _ = !![Complex.I * 0, Complex.I; Complex.I * 1, Complex.I * 0] := by rw [mul_comm (0 : ℂ) Complex.I]
+    -- 積の単位元を右辺から左辺へ
+    _ = !![Complex.I * 0, Complex.I * 1; Complex.I * 1, Complex.I * 0] := by rw [mul_one]
+    -- `def_matrix_scalar_multiple` を右辺から左辺へ
+    _ = Complex.I • !![0, 1; 1, 0] := by
+      ext i j
+      rw [matrix_smul_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products` の σ^x
+    _ = Complex.I • pauliX := rfl
+
+/-- 人手 `Z_Y_generate_algebra` の Step 1 の第 3 式 `σ^x = (-i)(σ^yσ^z)`。人手の鎖の 4 行と 1 段ずつ対応する。 -/
 theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
-  rw [pauliY_mul_pauliZ, smul_smul, neg_mul, Complex.I_mul_I, neg_neg, one_smul]
+  calc pauliX
+      = (1 : ℂ) • pauliX := (matrix_one_smul pauliX).symm
+                                                        -- `scalar_multiple_by_one`（`A → σ^x`）を右辺から左辺へ
+    _ = ((-Complex.I) * Complex.I) • pauliX := by rw [zy_prep_neg_I_mul_I]
+                                                        -- (g) を右辺から左辺へ
+    _ = (-Complex.I) • (Complex.I • pauliX) := (smul_smul _ _ _).symm
+                                                        -- `scalar_multiple_is_associative`（`a → -i`, `b → i`, `A → σ^x`）を右辺から左辺へ。具体版が無いので mathlib の `smul_smul`
+    _ = (-Complex.I) • (pauliY * pauliZ) := by rw [pauliY_mul_pauliZ]
+                                                        -- 第 2 式を右辺から左辺へ
 
 /-- `σ^z σ^y = -i σ^x`。人手 `V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と `V2_in_Z_Y` の Step 0 の鎖
 （`partition_function_projection_and_jordan_wigner.ts`）と `iH_is_real_symmetric` の Step 0 の第 1 の鎖
@@ -421,14 +484,27 @@ theorem siteOp_one (k : Fin M) : siteOp k (1 : Matrix (Fin 2) (Fin 2) ℂ) = 1 :
     funext i; by_cases h : i = k <;> simp [h]
   rw [h, siteProd_one]
 
-/-- 同じサイトの積は、そのサイトの `Mat(2, ℂ)` の積になる
-（原文 Step 1 の `σ_k^a σ_k^b = I ⊗ ⋯ ⊗ (σ^a σ^b) ⊗ ⋯ ⊗ I`）。 -/
+/-- 同じサイトの積は、そのサイトの `Mat(2, ℂ)` の積になる（人手 `Z_Y_generate_algebra` の Step 1 の第 4 式
+`σ_k^a σ_k^b = I ⊠ ⋯ ⊠ (σ^a σ^b) ⊠ ⋯ ⊠ I`）。人手は `σ^a, σ^b` で述べ、証明は Pauli 行列の性質を使わないので、
+Lean は `A, B ∈ Mat(2, ℂ)` で述べる。人手の鎖の 3 行と 1 段ずつ対応する。 -/
 theorem siteOp_mul_same (k : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
     siteOp k A * siteOp k B = siteOp k (A * B) := by
-  rw [siteOp_apply, siteOp_apply, siteOp_apply, ← siteProd_mul]
-  congr 1
-  funext i
-  by_cases h : i = k <;> simp [Pi.mul_apply, h]
+  calc siteOp k A * siteOp k B
+      = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A)
+          * siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k B) := rfl
+                                                        -- `def_site_pauli_matrices` の `σ_k^a`・`σ_k^b`
+    _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A
+          * Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k B) := (siteProd_mul M _ _).symm
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k (A * B)) := by
+      -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → I`）を第 `k` 因子以外の各因子へ
+      congr 1
+      funext i
+      by_cases h : i = k
+      · rw [h, Pi.mul_apply, Function.update_self, Function.update_self, Function.update_self]
+      · rw [Pi.mul_apply, Function.update_of_ne h, Function.update_of_ne h, Function.update_of_ne h, Pi.one_apply]
+        exact identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)
+    _ = siteOp k (A * B) := rfl                         -- `siteOp` の定義
 
 /-- **人手 `distinct_site_pauli_matrices_commute`**（`structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 相異なるサイト `k ≠ l` に置いた作用素は可換。人手は `A → σ^a`、`B → σ^b`（`a, b ∈ {x, y, z}`）で述べ、証明は Pauli 行列の性質を使わないので、
@@ -481,14 +557,30 @@ noncomputable def sigmaY (k : Fin M) : TensorPow M := siteOp k pauliY
 /-- 原文の `σ^z_k`。 -/
 noncomputable def sigmaZ (k : Fin M) : TensorPow M := siteOp k pauliZ
 
-/-- `σ^x_k σ^x_k = I`（原文 Step 1）。 -/
+/-- `σ^x_k σ^x_k = I`（人手 `Z_Y_generate_algebra` の Step 1 の `σ_k^xσ_k^x` の鎖の 3 行）。 -/
 @[simp]
 theorem sigmaX_mul_self (k : Fin M) : sigmaX k * sigmaX k = 1 := by
-  rw [sigmaX, siteOp_mul_same, pauliX_mul_pauliX, siteOp_one]
+  calc sigmaX k * sigmaX k
+      = siteOp k (pauliX * pauliX) := siteOp_mul_same k pauliX pauliX
+                                                        -- 第 4 式（`a, b → x`）
+    _ = siteOp k (1 : Matrix (Fin 2) (Fin 2) ℂ) := by rw [pauliX_mul_pauliX]
+                                                        -- 第 1 式
+    _ = 1 := siteOp_one k                               -- `kronecker_product_rule` (2)
 
-/-- `σ^x_k = -√-1 σ^y_k σ^z_k`（原文 Step 1 の持ち上げ）。 -/
+/-- `σ^x_k = (-i)(σ^y_k σ^z_k)`（人手 `Z_Y_generate_algebra` の Step 1 の `σ_k^x` の鎖の 4 行）。 -/
 theorem sigmaX_eq (k : Fin M) : sigmaX k = (-Complex.I) • (sigmaY k * sigmaZ k) := by
-  rw [sigmaY, sigmaZ, siteOp_mul_same, sigmaX, ← map_smul, ← pauliX_eq]
+  calc sigmaX k
+      = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k pauliX) := rfl
+                                                        -- `def_site_pauli_matrices` の `σ_k^x`
+    _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k
+          ((-Complex.I) • (pauliY * pauliZ))) := by rw [← pauliX_eq]
+                                                        -- 第 3 式
+    _ = (-Complex.I) • siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k
+          (pauliY * pauliZ)) := (siteProd M).map_update_smul _ k (-Complex.I) (pauliY * pauliZ)
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → k`, `c → -i`, `A_k → σ^yσ^z`, `i ≠ k` の `A_i → I`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+    _ = (-Complex.I) • (sigmaY k * sigmaZ k) := by
+      rw [sigmaY, sigmaZ, siteOp_mul_same, siteOp_apply]
+                                                        -- 第 4 式（`a → y`, `b → z`）を右辺から左辺へ
 
 end SiteOp
 

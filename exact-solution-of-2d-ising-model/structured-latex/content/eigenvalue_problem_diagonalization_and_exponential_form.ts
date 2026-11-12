@@ -451,79 +451,157 @@ t
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " であるクロネッカー積とする。",
       ]),
-      paragraph(["Step 1: 単一サイトの Pauli 行列の積公式。"]),
+      paragraph([
+        "Step 1: 単一サイトの Pauli 行列の積公式。Pauli 行列の成分の ",
+        math(String.raw`0, 1, -1`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}, 1_{\mathbb{C}}, -1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`-z`),
+        "（",
+        math(String.raw`z\in\mathbb{C}`),
+        "）は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`(-1_{\mathbb{C}})z`),
+        " であり、体の公理（積の可換律・単位元、加法の単位元）は ",
+        ref("complex_numbers_form_a_field"),
+        " のものである。準備として、",
+        math(String.raw`\mathbb{C}`),
+        " の中で次の (f)・(g) を置く（Step 3 でも使う。(a)〜(e) は Step 3 で置く）。",
+      ]),
+      displayMath(String.raw`\text{(f)}\quad \begin{aligned}
+ii
+&= (0,1)(0,1)
+&&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
+&= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= (-1,0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= -1_{\mathbb{C}}
+&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(g)}\quad \begin{aligned}
+(-i)\,i
+&= -(ii)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to i)\bigr)\\
+&= -(-1_{\mathbb{C}})
+&&(\because\ \text{(f)})\\
+&= (-1_{\mathbb{C}})(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -1_{\mathbb{C}})\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)
+\end{aligned}`),
+      paragraph(["第 1 式は ", ref("pauli_matrix_products"), " の一つである。"]),
       displayMath(
-        String.raw`\begin{aligned}
-\sigma^x\sigma^x
-&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^x) \\
-&= \begin{pmatrix}1&0\\0&1\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
-&= I_{\mathrm{Mat}(2,\mathbb{C})} \quad (\because \text{単位行列の定義})
-\end{aligned}`,
+        String.raw`\sigma^x\sigma^x = I_{\mathrm{Mat}(2,\mathbb{C})} \qquad (\because\ \blkref{pauli_matrix_products})`,
       ),
+      paragraph(["第 2 式を成分から求める。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^z
-&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^y,\ \sigma^z) \\
-&= \begin{pmatrix}0&i\\i&0\end{pmatrix} \quad (\because \text{行列の積の成分計算}) \\
-&= i\begin{pmatrix}0&1\\1&0\end{pmatrix} \quad (\because \text{スカラー倍の成分計算}) \\
-&= i\,\sigma^x \quad (\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^y,\ \sigma^z\bigr)\\
+&= \begin{pmatrix}0\cdot1+(-i)\cdot0&0\cdot0+(-i)(-1)\\i\cdot1+0\cdot0&i\cdot0+0\cdot(-1)\end{pmatrix}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&= \begin{pmatrix}0+(-i)\cdot0&0+(-i)(-1)\\i\cdot1+0&i\cdot0+0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 1,\ 0,\ 0,\ -1)\ \text{を 4 か所へ}\bigr)\\
+&= \begin{pmatrix}(-i)\cdot0&(-i)(-1)\\i\cdot1&i\cdot0\end{pmatrix}
+&&(\because\ \text{加法の単位元を 4 か所へ})\\
+&= \begin{pmatrix}0\cdot(-i)&(-1)(-i)\\i\cdot1&i\cdot0\end{pmatrix}
+&&(\because\ \text{積の可換律を 2 か所へ})\\
+&= \begin{pmatrix}0&(-1)(-i)\\i\cdot1&i\cdot0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to -i)\bigr)\\
+&= \begin{pmatrix}0&-(-i)\\i\cdot1&i\cdot0\end{pmatrix}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -i)\ \text{を右辺から左辺へ}\bigr)\\
+&= \begin{pmatrix}0&i\\i\cdot1&i\cdot0\end{pmatrix}
+&&\bigl(\because\ \blkref{double_negation_in_cc}\ (z \to i)\bigr)\\
+&= \begin{pmatrix}0\cdot i&i\\i\cdot1&i\cdot0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to i)\ \text{を右辺から左辺へ}\bigr)\\
+&= \begin{pmatrix}i\cdot0&i\\i\cdot1&i\cdot0\end{pmatrix}
+&&(\because\ \text{積の可換律})\\
+&= \begin{pmatrix}i\cdot0&i\cdot1\\i\cdot1&i\cdot0\end{pmatrix}
+&&(\because\ \text{積の単位元を右辺から左辺へ})\\
+&= i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ}\bigr)\\
+&= i\,\sigma^x
+&&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\bigr)
 \end{aligned}`,
       ),
-      paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す。"]),
+      paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す（第 3 式）。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x
-&= 1\cdot\sigma^x \quad (\because 1 \text{ は積の単位元}) \\
-&= ((-i)\,i)\,\sigma^x \quad (\because (-i)\,i = 1) \\
-&= -i\,(i\,\sigma^x) \quad (\because \text{スカラー倍の結合則}) \\
-&= -i\,\sigma^y\sigma^z \quad (\because \text{第 2 式 } \sigma^y\sigma^z = i\,\sigma^x)
+&= 1_{\mathbb{C}}\,\sigma^x
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (A \to \sigma^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((-i)\,i\bigr)\,\sigma^x
+&&(\because\ \text{(g) を右辺から左辺へ})\\
+&= (-i)\bigl(i\,\sigma^x\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a \to -i,\ b \to i,\ A \to \sigma^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-i)\bigl(\sigma^y\sigma^z\bigr)
+&&(\because\ \text{第 2 式を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
         "これらをクロネッカー積へ持ち上げる。",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の積は各因子ごとの積であり ",
-        math(String.raw`(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}})(B_1\boxtimes\cdots\boxtimes B_{M_{\mathrm{col}}}) = (A_1 B_1)\boxtimes\cdots\boxtimes(A_{M_{\mathrm{col}}} B_{M_{\mathrm{col}}})`),
-        "（",
-        ref("kronecker_product_rule"),
-        " (1)）。第 ",
+        math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        math(String.raw`1\leq k\leq M_{\mathrm{col}}`),
+        " と ",
+        math(String.raw`a, b\in\{x,y,z\}`),
+        " について、第 ",
         math(String.raw`k`),
         " 因子のみが非自明な ",
         math(String.raw`\sigma_k^a`),
-        " どうしの積は（",
-        math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        "）",
+        " どうしの積は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma_k^a \sigma_k^b
-&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_k^a,\ \sigma_k^b) \\
-&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes(II) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes I \quad (\because II=I)
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{k\text{th}}\boxtimes\cdots\boxtimes I)
+&&\bigl(\because\ \blkref{def_site_pauli_matrices}\ \text{の}\ \sigma_k^a,\ \sigma_k^b\bigr)\\
+&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
+&&\bigl(\because\ \blkref{kronecker_product_rule}\ \text{(1)}\bigr)\\
+&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^b)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m, n \to 2,\ A \to I)\ \text{を第}\ k\ \text{因子以外の各因子へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である（第 4 式）。第 1 式・第 3 式を持ち上げる。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_k^x \sigma_k^x
+&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&(\because\ \text{第 4 式}\ (a, b \to x))\\
+&= I\boxtimes\cdots\boxtimes\overbrace{I}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&(\because\ \text{第 1 式})\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{kronecker_product_rule}\ \text{(2)}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_k^x
+&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \blkref{def_site_pauli_matrices}\ \text{の}\ \sigma_k^x\bigr)\\
+&= I\boxtimes\cdots\boxtimes\overbrace{\bigl((-i)(\sigma^y\sigma^z)\bigr)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&&(\because\ \text{第 3 式})\\
+&= (-i)\bigl(I\boxtimes\cdots\boxtimes\overbrace{(\sigma^y\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes I\bigr)
+&&\bigl(\because\ \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (j \to k,\ c \to -i,\ A_k \to \sigma^y\sigma^z,\ i \neq k\ \text{の}\ A_i \to I)\bigr)\\
+&= (-i)\bigl(\sigma_k^y\sigma_k^z\bigr)
+&&(\because\ \text{第 4 式}\ (a \to y,\ b \to z)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
-        "これより ",
-        math(String.raw`\sigma_k^x\sigma_k^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
-        "、",
-        math(String.raw`\sigma_k^x = -i\,\sigma_k^y\sigma_k^z`),
-        " を得る。また異なるサイト ",
+        "また異なるサイト ",
         math(String.raw`k\neq l`),
         " の ",
         math(String.raw`\sigma_k^a, \sigma_l^b`),
         " は可換である（",
-        math(String.raw`k<l`),
-        " として）。",
+        ref("distinct_site_pauli_matrices_commute"),
+        "（",
+        math(String.raw`j \to k,\ k \to l`),
+        "））。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma_k^a \sigma_l^b
-&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_k^a,\ \sigma_l^b) \\
-&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I \quad (\because \text{クロネッカー積の積の規則}) \\
-&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^b}^{l\text{th}}\boxtimes\cdots\boxtimes I)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= \sigma_l^b \sigma_k^a \quad (\because \blkref{def_site_pauli_matrices} \text{ の } \sigma_l^b,\ \sigma_k^a \text{（第 } l \text{ 因子・第 } k \text{ 因子のみが非自明）})
-\end{aligned}`,
-      ),
       paragraph([
         "Step 2: ",
         math(String.raw`\mathcal{A}`),
@@ -546,8 +624,8 @@ t
       displayMath(
         String.raw`\begin{aligned}
 \sigma_1^x
-&= -i\,\sigma_1^y\sigma_1^z \quad (\because \text{Step 1 の } \sigma_k^x = -i\,\sigma_k^y\sigma_k^z \text{ を } k=1 \text{ に取る}) \\
-&= -i\,Y_1 Z_1 \quad (\because \sigma_1^y = Y_1, \ \sigma_1^z = Z_1)
+&= (-i)\bigl(\sigma_1^y\sigma_1^z\bigr) \quad (\because \text{Step 1 の } \sigma_k^x = (-i)(\sigma_k^y\sigma_k^z) \text{ を } k=1 \text{ に取る}) \\
+&= (-i)\bigl(Y_1 Z_1\bigr) \quad (\because \sigma_1^y = Y_1, \ \sigma_1^z = Z_1)
 \end{aligned}`,
       ),
       paragraph([
@@ -626,7 +704,7 @@ P_{m-1}Y_m
         " は積について閉じるから ",
         math(String.raw`\sigma_m^y = P_{m-1}Y_m\in\mathcal{A}`),
         "。さらに Step 1 より ",
-        math(String.raw`\sigma_m^x = -i\,\sigma_m^y\sigma_m^z`),
+        math(String.raw`\sigma_m^x = (-i)(\sigma_m^y\sigma_m^z)`),
         " であり、",
         math(String.raw`\mathcal{A}`),
         " は積とスカラー倍について閉じるから ",
@@ -704,7 +782,7 @@ P_{m-1}Y_m
       paragraph([
         "（右辺の和は左から結ぶ）である。準備として、",
         math(String.raw`z, w \in \mathbb{C}`),
-        " について次の (a)〜(g) を置く。体の公理（積の可換律・結合律・単位元、加法の可換律・結合律・単位元、分配律）は ",
+        " について次の (a)〜(e) を置く（(f)・(g) は Step 1 で置いた）。体の公理（積の可換律・結合律・単位元、加法の可換律・結合律・単位元、分配律）は ",
         ref("complex_numbers_form_a_field"),
         " のものである。",
       ]),
@@ -798,28 +876,6 @@ z + (-z)
 &&(\because\ \text{加法の単位元})\\
 &= 2_{\mathbb{C}}w
 &&(\because\ \text{(b)}\ (z \to w))
-\end{aligned}`),
-      displayMath(String.raw`\text{(f)}\quad \begin{aligned}
-ii
-&= (0,1)(0,1)
-&&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
-&= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
-&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
-&= (-1,0)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
-&= -1_{\mathbb{C}}
-&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\text{(g)}\quad \begin{aligned}
-(-i)\,i
-&= -(ii)
-&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to i)\bigr)\\
-&= -(-1_{\mathbb{C}})
-&&(\because\ \text{(f)})\\
-&= (-1_{\mathbb{C}})(-1_{\mathbb{C}})
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -1_{\mathbb{C}})\bigr)\\
-&= 1_{\mathbb{C}}
-&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)
 \end{aligned}`),
       paragraph([
         "右辺を ",
@@ -1138,6 +1194,7 @@ P_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 の鎖がラベルの無い根拠（「行列の積の成分計算」「単位行列の定義」「スカラー倍の成分計算」「1 は積の単位元」「(−i)i = 1」「スカラー倍の結合則」「クロネッカー積の積の規則」「II=I」）で書かれ、σ_k^xσ_k^x = I と σ_k^x = −iσ_k^yσ_k^z の持ち上げは「これより得る」の地の文だけだった（Step 2 の引用も (−i)(σ_k^yσ_k^z) の形に揃えた）。σ^xσ^x = I は pauli_matrix_products を引く 1 行に、σ^yσ^z = iσ^x は mat_mult の和の形から complex_zero_times_is_zero・加法の単位元・積の可換律・multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple を 1 行に 1 つずつ当てる鎖に、σ^x = (−i)(σ^yσ^z) は scalar_multiple_by_one・(g)・scalar_multiple_is_associative の鎖に、σ_k^aσ_k^b の持ち上げは kronecker_product_rule (1) と identity_matrix_is_left_unit_of_mat_mult の鎖にし、σ_k^xσ_k^x = I（kronecker_product_rule (2)）と σ_k^x = (−i)(σ_k^yσ_k^z)（kronecker_multilinear）の鎖を足した。異サイトの可換性の鎖（根拠「クロネッカー積の積の規則」で単位行列との積を暗に処理していた）は distinct_site_pauli_matrices_commute の参照に替えた。(−i)i = 1_ℂ を引くため、Step 3 の準備 (f)（ii = −1_ℂ）・(g)（(−i)i = 1_ℂ）を Step 1 の冒頭へ移した（中身は不変）。主張と論法は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 証明の冒頭が二次の Pauli 行列を pauli_matrix_products を引かずに成分で置き直し、σ_k^a の出典を def_transfer_matrix_symbols としていた（Step 3 は def_site_pauli_matrices を引く）。冒頭を pauli_matrix_products の σ^x, σ^y, σ^z と def_site_pauli_matrices の σ_k^a を引く形にし（i ∈ ℂ が def_imaginary_unit の虚数単位であることの宣言は残した）、Step 1 の鎖の根拠「σ^x の定義」「σ^y, σ^z の定義」と、クロネッカー積へ持ち上げる 2 つの鎖の根拠「σ_k^a, σ_k^b の定義の代入」などを同じ 2 つのラベル参照に替えた。Step 3 の地の文「Pauli 行列の成分の行は証明の冒頭の σ^x, σ^y, σ^z の定義である」と R の 4 成分の鎖の根拠「σ^x, σ^y, σ^z の (i,j) 成分」も pauli_matrix_products を引く形にした。主張と計算は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 主張の括弧書き「def_kronecker の同一視により Mat(2^M,ℂ) = Mat(2^M,ℂ) であり」を含む括弧書きを削った。もとは「Mat(2,ℂ)^{⊗M} = Mat(2^M,ℂ)」という抽象テンソル冪との同一視で、⊗ を具体的なクロネッカー積 ⊠ へ一括で置き換えたときに両辺が同じ集合の等式になり何も述べなくなっていた（「〜とみなす」を書かない規律にも触れていた）。括弧書きの残り「S の元はいずれも 2^M 次の複素行列である」は、同じ文の頭で def_transfer_matrix_symbols を引いて Z, Y ∈ Mat(2^M,ℂ) と書いていることの繰り返しなので、括弧書きごと削った。主張の中身は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 の後半で、定義の無い添字 a_k を持つ σ_k^{a_k} を第 k 因子だけを e_k にした行列と呼んでいた（a_k は展開の成分 a_{11} などと文字も重なっていた）。これを E_k := I⊠⋯⊠e_k⊠⋯⊠I と置き直し、e_k = I なら kronecker_product_rule (2) と (ii)、e_k = σ^x・σ^y・σ^z なら def_site_pauli_matrices と Step 2 で E_k ∈ 𝒜 となることを場合ごとに書いた。積 E_1⋯E_M = e_1⊠⋯⊠e_M の 1 行（根拠「クロネッカー積の積の規則」、前置きは「Step 1 の異サイト積公式を繰り返して」）を、def_finite_product_of_matrices の P_1 := E_1・P_{s+1} := P_s E_{s+1} についての帰納法（site_pauli_prefix_product_kronecker_form の証明と同じ形。帰納の一段は kronecker_product_rule (1)・右単位・左単位 2 回の 6 行）にし、同じ帰納法で P_s ∈ 𝒜 を (iv) から示した。主張と論法は不変。",

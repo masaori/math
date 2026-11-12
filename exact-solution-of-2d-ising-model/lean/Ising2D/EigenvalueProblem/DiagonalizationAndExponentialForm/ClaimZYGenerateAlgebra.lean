@@ -14,9 +14,9 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 
 | 原文 | Lean |
 | --- | --- |
-| Step 1（単一サイトの積公式・異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `pauli*`, `siteOp_mul_same`, `siteOp_mul_comm` |
+| Step 1（準備 (f)・(g)、第 1〜4 式、`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` の鎖、異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`（準備 (f)・(g)）、`pauliX_mul_pauliX`（第 1 式。`pauli_matrix_products`）・`pauliY_mul_pauliZ`（第 2 式）・`pauliX_eq`（第 3 式）・`siteOp_mul_same`（第 4 式）・`sigmaX_mul_self`・`sigmaX_eq`（各鎖と 1 段ずつの `calc`）、`siteOp_mul_comm`（`distinct_site_pauli_matrices_commute`） |
 | Step 2（帰納法で `σ^x_m, σ^y_m, σ^z_m ∈ 𝒜`） | `xString_mem_adjoin`, `sigmaX_mem_adjoin` ほか |
-| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底） | 準備 (a)〜(g) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`・`zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
+| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底） | 準備 (a)〜(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`（(f)・(g) は Step 1 の行）、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
 | Step 3 前半の結び（`𝓑` は張り、`dim Mat(2,ℂ) = 4 = #𝓑` より基底） | `top_le_span_pauliFamily`・`finrank_mat2_eq_four`・`pauliBasis`（「張り、元数が次元に等しい族は基底」は mathlib の `basisOfTopLeSpanOfCardEqFinrank` に委ねる） |
 | Step 3 後半（`𝓑^{⊠M}` は基底。`<tensor_basis>` (2) を `𝓑` に適用） | `kroneckerTensorPowBasisOf M pauliBasis`（`TheoremTensorBasisFromNecSuf.lean`。mathlib の `Basis.piTensorProduct` を移したもので、人手 `<tensor_basis>` の Step 4 と 1 対 1 でない） |
 | Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
@@ -98,7 +98,8 @@ theorem sigmaX_mem_adjoin (k : Fin M) : sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M
 /-! ## Step 3 前半: `{I, σ^x, σ^y, σ^z}` は `Mat(2, ℂ)` の基底
 
 人手証明の Step 3 は、係数 `κ_0 := (a₁₁+a₂₂)/2_ℂ`・`κ_x := (a₁₂+a₂₁)/2_ℂ`・`κ_y := (i(a₁₂−a₂₁))/2_ℂ`・
-`κ_z := (a₁₁−a₂₂)/2_ℂ` を `def_complex_quotient` の商（`w → 2_ℂ`）と読み、準備 (a)〜(g) を置いてから、
+`κ_z := (a₁₁−a₂₂)/2_ℂ` を `def_complex_quotient` の商（`w → 2_ℂ`）と読み、準備 (a)〜(e) を置いてから
+（(f)・(g) は Step 1 で置く。Lean は `DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`）、
 右辺 `R` の 4 成分の鎖を書く。以下の補題はその準備と 4 本の鎖を 1 行ずつ辿る（人手の添字 `1, 2` は Lean では `0, 1`）。
 Lean の `z / 2` は `div_eq_mul_inv`（`def_complex_quotient`）で `z * 2⁻¹` に開く。`2_ℂ ∈ ℂ^×` は
 `complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）である。 -/
@@ -162,23 +163,6 @@ theorem zy_prep_sum_sub_diff (z w : ℂ) : (z + w) - (z - w) = 2 * w := by
     _ = w + w := by rw [zero_add]                                     -- 加法の単位元
     _ = 2 * w := zy_prep_add_self w                                   -- (b)（`z → w`）
 
-/-- 人手 Step 3 の準備 (f): `ii = −1_ℂ`（人手の 4 行）。 -/
-theorem zy_prep_I_mul_I : Complex.I * Complex.I = -1 :=
-  calc Complex.I * Complex.I
-      = (⟨0, 1⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl                             -- `def_imaginary_unit` を 2 か所へ
-    _ = (⟨0 * 0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := rfl                   -- `definition_of_cc` の積
-    _ = (⟨-1, 0⟩ : ℂ) := by norm_num                                  -- `ℝ` の四則
-    _ = -1 := by
-          rw [show (⟨-1, 0⟩ : ℂ) = ((-1 : ℝ) : ℂ) from rfl, Complex.ofReal_neg, Complex.ofReal_one]
-                                                                      -- `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1`
-
-/-- 人手 Step 3 の準備 (g): `(−i) i = 1_ℂ`。 -/
-theorem zy_prep_neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
-  calc (-Complex.I) * Complex.I
-      = -(Complex.I * Complex.I) := neg_I_mul_eq_neg_of_I_mul _         -- `negative_i_times_complex_is_negation_of_i_times`（`z → i`）
-    _ = -(-1) := by rw [zy_prep_I_mul_I]                                -- (f)
-    _ = (-1) * (-1) := (neg_one_mul (-1)).symm                          -- `multiply_by_minus_one`（`z → −1_ℂ`）
-    _ = 1 := complex_minus_one_mul_minus_one                            -- `minus_one_times_minus_one_is_one_in_cc`
 
 /-- 人手 `pauli_matrix_products` で定めた Pauli 行列の成分（人手の証明の冒頭がこの定めを引く）。 -/
 theorem pauliX_apply_00 : pauliX 0 0 = 0 := rfl

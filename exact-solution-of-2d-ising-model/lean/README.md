@@ -741,17 +741,17 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.Conjugation.matrix_conj_*` | 一般の環の版を `Matrix.inv` の記法で述べた版（人手と 1 対 1 ではない。1 対 1 は上の `conj_*_matrix`） | 原文の記法に寄せた版 |
 | `Ising2D.acomm` / `Ising2D.commutator_via_anticommutators` | `[a b, c] = a [b,c]₊ - [a,c]₊ b`（任意の環） | `<commutator_via_anticommutators>` |
 | `Ising2D.matrix_commutator_via_anticommutators` | 同上を `Mat(n, ℂ)` で述べた版 | 同上 |
-| `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係 | `<Z_Y_generate_algebra>` Step 1 |
+| `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係（`Z_Y_generate_algebra` の Step 1 の第 2 式・第 3 式は `pauliY_mul_pauliZ`・`pauliX_eq`、準備 (f)・(g) は `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`） | `<pauli_matrix_products>`、`<Z_Y_generate_algebra>` Step 1 |
 | `Ising2D.siteOp` | `I ⊗ ⋯ ⊗ A(k) ⊗ ⋯ ⊗ I`（`Mat(2,ℂ) →ₗ[ℂ] TensorPow M`） | `<def_transfer_matrix_symbols>` の `σ^a_k` |
 | `Ising2D.sigmaX/sigmaY/sigmaZ` | `σ^x_k, σ^y_k, σ^z_k` | 同上 |
-| `Ising2D.siteOp_mul_same` / `siteOp_mul_comm` | 同サイトの積・異サイトの可換性 | `<Z_Y_generate_algebra>` Step 1、異サイトの可換性は `distinct_site_pauli_matrices_commute` |
+| `Ising2D.siteOp_mul_same` / `siteOp_mul_comm` / `sigmaX_mul_self` / `sigmaX_eq` | 同サイトの積（Step 1 の第 4 式）・異サイトの可換性・`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` | `<Z_Y_generate_algebra>` Step 1、異サイトの可換性は `distinct_site_pauli_matrices_commute` |
 | `Ising2D.Z` / `Ising2D.Y` / `Ising2D.epsilon` | Jordan–Wigner 文字列 `Z_m`, `Y_m` と `ε` | `<def_transfer_matrix_symbols>` |
 | `Ising2D.Z_eq_xString_mul` / `Y_eq_xString_mul` | `Z_m = (σ^x_1⋯σ^x_{m-1}) σ^z_m` 等 | 同上 |
 | `Ising2D.siteProd_anticomm_of_single_site` | 1 サイトだけ反可換 ⇒ テンソル積は反交換 | `<anticommutator_of_Z_and_Y>` の計算の一般化 |
 | `Ising2D.anticomm_Z_Z` | `[Z_μ, Z_ν]₊ = 2 I δ^M_{(μ,ν)}` | `<anticommutator_of_Z_and_Y>` 第 1 式 |
 | `Ising2D.anticomm_Z_Y` | `[Z_μ, Y_ν]₊ = 0` | 同 第 2 式（**原文は TODO**） |
 | `Ising2D.anticomm_Y_Y` | `[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}` | 同 第 3 式（**原文は TODO**） |
-| `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開（係数は `/2_ℂ` の商。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`、準備は `zy_prep_*`） | `<Z_Y_generate_algebra>` Step 3 の準備 (a)〜(g) と `R_{11}`〜`R_{22}` の鎖 |
+| `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開（係数は `/2_ℂ` の商。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`、準備は `zy_prep_*`） | `<Z_Y_generate_algebra>` Step 3 の準備 (a)〜(e)（(f)・(g) は Step 1）と `R_{11}`〜`R_{22}` の鎖 |
 | `Ising2D.pauliBasis` | `𝓑 = {I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底（張ることは `top_le_span_pauliFamily`、次元 4 は `finrank_mat2_eq_four`） | `<Z_Y_generate_algebra>` Step 3 前半の結び |
 | `Ising2D.kroneckerTensorPowBasisOf` | `Mat(2,ℂ)` の基底 `b` のクロネッカー積 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M` の基底（mathlib の `Basis.piTensorProduct` を移したもので、人手 Step 4 と 1 対 1 でない） | `<tensor_basis>` (2) |
 | `Ising2D.siteOp_pauliFamily_mem_adjoin` | 各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（`e_k ∈ 𝓑`）は `𝒜` に属する | `<Z_Y_generate_algebra>` Step 3 後半 |
