@@ -18,8 +18,8 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | Step 2 の準備の `P_0 := I`・`P_r := P_{r-1}σ_r^x` | `sigmaXPrefixProduct`（`DefinitionTransferMatrixSymbols.lean`）・`sigmaXPrefixProduct_succ_of_lt` |
 | Step 2 の準備の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`（`r = 1` の 4 行と一段の 3 行） | `sigmaXFamily`（Lean の `sigmaXFamily r` の因子は `σ_1^x, …, σ_{r+1}^x`。人手の `r` は Lean の `r + 1`）・`sigmaXPrefixProduct_eq_finiteMatrixProduct`（積は `def_finite_product_of_matrices` の具体版 `finiteMatrixProduct` を `ι := Conf M` で使う） |
 | Step 2 の準備の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`（`r` の帰納法） | `sigmaX_mul_sigmaXPrefixProduct_comm`・`sigmaXPrefixProduct_mul_self` |
-| Step 2 の `Z_m = P_{m-1}σ_m^z`・`Y_m = P_{m-1}σ_m^y` の 4 行の鎖 | 1 対 1 ではない（`Z_eq_sigmaXPrefixProduct_mul`・`Y_eq_sigmaXPrefixProduct_mul`。Lean の `Z`・`Y` はクロネッカー積で定義） |
-| Step 2 の `P_{m-1}Z_m = σ_m^z`・`P_{m-1}Y_m = σ_m^y` の 4 行の鎖 | `sigmaZ_eq_sigmaXPrefixProduct_mul`・`sigmaY_eq_sigmaXPrefixProduct_mul` |
+| Step 2 の `Z_m = P_{m-1}σ_m^z`・`Y_m = P_{m-1}σ_m^y` の 4 行の鎖（`m ≥ 2`） | `Z_eq_sigmaXPrefixProduct_mul`・`Y_eq_sigmaXPrefixProduct_mul`（`calc` の 4 段。1 行目は `Z_eq_finiteMatrixProduct`・`Y_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）、3 行目は `jwFactor` の定義、4 行目は `sigmaXPrefixProduct_eq_finiteMatrixProduct`） |
+| Step 2 の `P_{m-1}Z_m = σ_m^z`・`P_{m-1}Y_m = σ_m^y` の 4 行の鎖（`m ≥ 2`） | `sigmaZ_eq_sigmaXPrefixProduct_mul`・`sigmaY_eq_sigmaXPrefixProduct_mul` |
 | Step 2 の `m` の帰納法（仮定は `σ_1^x, …, σ_{m-1}^x ∈ 𝒜`）、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法、`σ_m^z, σ_m^y, σ_m^x ∈ 𝒜` | `sigma_mem_adjoin_all`・`sigma_mem_adjoin_first_site`（`m = 1`。`sigmaZ_zero_eq_Z`・`sigmaY_zero_eq_Y`）・`sigmaXPrefixProduct_mem_adjoin`・`sigma_mem_adjoin_of_previous_sigmaX`（`m ≥ 2`）、`sigmaX_mem_adjoin` ほか |
 | Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` を張る） | 準備 (a)〜(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`（(f)・(g) は Step 1 の行）、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
 | Step 3 前半の結び（`𝓑` は `Mat(2,ℂ)` を張る） | `pauliFamily_spans`（`matrix_two_decomp` の係数を並べる） |
@@ -29,6 +29,7 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`。`𝒜` は ℂ-線型結合について閉じる） | `Z_Y_generate_algebra` |
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSitePauliPrefixProductKroneckerForm
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
@@ -162,44 +163,84 @@ theorem sigmaXPrefixProduct_mul_self : ∀ r : ℕ, r ≤ M → sigmaXPrefixProd
                                   -- `identity_matrix_is_right_unit_of_mat_mult`（`A → P_r`）
       _ = 1 := ih                                                   -- 帰納法の仮定
 
-/-- 人手 Step 2 の `Z_m = P_{m-1}σ_m^z`。人手の `m` は Lean の `k + 1` で、人手の `P_{m-1}` は `sigmaXPrefixProduct M k`。
-人手は `def_jordan_wigner_Z_matrices` の積を `def_finite_product_of_matrices` で読む 4 行の鎖（と積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`。
-Lean は `sigmaXPrefixProduct_eq_finiteMatrixProduct`）で示す。Lean の `Z` が人手の積 `∏_{j=1}^{m}F_j^{(z)}` に等しいことは
-`Z_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つが、ここはまだその鎖と 1 対 1 ではない
-（既存の `Z_eq_xString_mul` と `sigmaXPrefixProduct_eq_xString` で閉じる。状態台帳の件 (cl3c3j8n2d3d4c44p11c)）。 -/
-theorem Z_eq_sigmaXPrefixProduct_mul (k : Fin M) : Z k = sigmaXPrefixProduct M (k : ℕ) * sigmaZ k := by
-  rw [Z_eq_xString_mul, sigmaXPrefixProduct_eq_xString _ (le_of_lt k.isLt)]
+/-- 人手 Step 2 の `Z_m = P_{m-1}σ_m^z`（`m ≥ 2`）。人手の `m` は Lean の `r + 2`（`k = ⟨r + 1, h⟩`）で、人手の `P_{m-1}` は
+`sigmaXPrefixProduct M (r + 1)`。人手の 4 行の鎖と 1 段ずつの `calc`:
+`def_jordan_wigner_Z_matrices` の積 `∏_{j=1}^{m}F_j^{(z)}`（Lean の `Z` が人手の積に等しいことは `Z_eq_finiteMatrixProduct`）、
+`def_finite_product_of_matrices` の漸化式（`r → m-1`。`finiteMatrixProduct_succ`）、`F_j^{(z)}` の定義（`jwFactor`。`j < m` なら `σ_j^x`、
+`j = m` なら `σ_m^z`）、積の表示（`r → m-1`。`sigmaXPrefixProduct_eq_finiteMatrixProduct`）を右辺から左辺へ。
+人手の `m = 1` はこの鎖を使わず `Z_1 := σ_1^z`（`sigmaZ_zero_eq_Z`）で扱うので、Lean も `m ≥ 2` だけで述べる。 -/
+theorem Z_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
+    Z (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * sigmaZ ⟨r + 1, h⟩ :=
+  calc Z (⟨r + 1, h⟩ : Fin M)
+      = finiteMatrixProduct (r + 1) (jwFactor (⟨r + 1, h⟩ : Fin M) pauliZ) :=
+        Z_eq_finiteMatrixProduct _                                -- `def_jordan_wigner_Z_matrices`
+    _ = finiteMatrixProduct r (fun j => jwFactor (⟨r + 1, h⟩ : Fin M) pauliZ (Fin.castSucc j))
+          * jwFactor (⟨r + 1, h⟩ : Fin M) pauliZ (Fin.last (r + 1)) :=
+        finiteMatrixProduct_succ r _                              -- `def_finite_product_of_matrices` の漸化式（`r → m-1`）
+    _ = finiteMatrixProduct r (sigmaXFamily r (Nat.lt_of_succ_lt h)) * sigmaZ ⟨r + 1, h⟩ := by
+        -- `F_j^{(z)}` の定義（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^z`）
+        congr 1
+        · congr 1
+          funext j
+          rw [jwFactor, dif_pos (show ((Fin.castSucc j : Fin (r + 2)) : ℕ) < r + 1 from j.isLt)]
+          rfl
+        · rw [jwFactor, dif_neg (show ¬((Fin.last (r + 1) : Fin (r + 2)) : ℕ) < r + 1 from lt_irrefl _)]
+          rfl
+    _ = sigmaXPrefixProduct M (r + 1) * sigmaZ ⟨r + 1, h⟩ := by
+        rw [sigmaXPrefixProduct_eq_finiteMatrixProduct r (Nat.lt_of_succ_lt h)]
+                                  -- 積の表示（`r → m-1`）を右辺から左辺へ
 
-/-- 人手 Step 2 の `Y_m = P_{m-1}σ_m^y`（`Z_eq_sigmaXPrefixProduct_mul` と同じ扱い）。 -/
-theorem Y_eq_sigmaXPrefixProduct_mul (k : Fin M) : Y k = sigmaXPrefixProduct M (k : ℕ) * sigmaY k := by
-  rw [Y_eq_xString_mul, sigmaXPrefixProduct_eq_xString _ (le_of_lt k.isLt)]
+/-- 人手 Step 2 の `Y_m = P_{m-1}σ_m^y`（`m ≥ 2`）。`Z_eq_sigmaXPrefixProduct_mul` と同じ 4 行の鎖で、
+`def_jordan_wigner_Y_matrices`（`Y_eq_finiteMatrixProduct`）と `F_j^{(y)}` の定義を引く。 -/
+theorem Y_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
+    Y (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * sigmaY ⟨r + 1, h⟩ :=
+  calc Y (⟨r + 1, h⟩ : Fin M)
+      = finiteMatrixProduct (r + 1) (jwFactor (⟨r + 1, h⟩ : Fin M) pauliY) :=
+        Y_eq_finiteMatrixProduct _                                -- `def_jordan_wigner_Y_matrices`
+    _ = finiteMatrixProduct r (fun j => jwFactor (⟨r + 1, h⟩ : Fin M) pauliY (Fin.castSucc j))
+          * jwFactor (⟨r + 1, h⟩ : Fin M) pauliY (Fin.last (r + 1)) :=
+        finiteMatrixProduct_succ r _                              -- `def_finite_product_of_matrices` の漸化式（`r → m-1`）
+    _ = finiteMatrixProduct r (sigmaXFamily r (Nat.lt_of_succ_lt h)) * sigmaY ⟨r + 1, h⟩ := by
+        -- `F_j^{(y)}` の定義（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^y`）
+        congr 1
+        · congr 1
+          funext j
+          rw [jwFactor, dif_pos (show ((Fin.castSucc j : Fin (r + 2)) : ℕ) < r + 1 from j.isLt)]
+          rfl
+        · rw [jwFactor, dif_neg (show ¬((Fin.last (r + 1) : Fin (r + 2)) : ℕ) < r + 1 from lt_irrefl _)]
+          rfl
+    _ = sigmaXPrefixProduct M (r + 1) * sigmaY ⟨r + 1, h⟩ := by
+        rw [sigmaXPrefixProduct_eq_finiteMatrixProduct r (Nat.lt_of_succ_lt h)]
+                                  -- 積の表示（`r → m-1`）を右辺から左辺へ
 
-/-- 原文 Step 2 の `σ^z_m = P_{m-1} Z_m`（人手の `P_{m-1}Z_m` の 4 行の鎖を右辺から左辺へ読む）。 -/
-theorem sigmaZ_eq_sigmaXPrefixProduct_mul (k : Fin M) : sigmaZ k = sigmaXPrefixProduct M (k : ℕ) * Z k := by
+/-- 原文 Step 2 の `σ^z_m = P_{m-1} Z_m`（`m ≥ 2`。人手の `P_{m-1}Z_m` の 4 行の鎖を右辺から左辺へ読む）。 -/
+theorem sigmaZ_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
+    sigmaZ (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * Z ⟨r + 1, h⟩ := by
   symm
-  calc sigmaXPrefixProduct M (k : ℕ) * Z k
-      = sigmaXPrefixProduct M (k : ℕ) * (sigmaXPrefixProduct M (k : ℕ) * sigmaZ k) := by
+  calc sigmaXPrefixProduct M (r + 1) * Z ⟨r + 1, h⟩
+      = sigmaXPrefixProduct M (r + 1) * (sigmaXPrefixProduct M (r + 1) * sigmaZ ⟨r + 1, h⟩) := by
         rw [Z_eq_sigmaXPrefixProduct_mul]                           -- 直前の `Z_m = P_{m-1}σ_m^z`
-    _ = (sigmaXPrefixProduct M (k : ℕ) * sigmaXPrefixProduct M (k : ℕ)) * sigmaZ k :=
+    _ = (sigmaXPrefixProduct M (r + 1) * sigmaXPrefixProduct M (r + 1)) * sigmaZ ⟨r + 1, h⟩ :=
         (mul_assoc _ _ _).symm
                                   -- `mat_mult_associative`（`A, B → P_{m-1}`, `C → σ_m^z`）を右辺から左辺へ
-    _ = (1 : TensorPow M) * sigmaZ k := by
-        rw [sigmaXPrefixProduct_mul_self (k : ℕ) (le_of_lt k.isLt)] -- 二乗の式（`r → m-1`）
-    _ = sigmaZ k := identity_matrix_mul_tensorPow (sigmaZ k)
+    _ = (1 : TensorPow M) * sigmaZ ⟨r + 1, h⟩ := by
+        rw [sigmaXPrefixProduct_mul_self (r + 1) (le_of_lt h)]      -- 二乗の式（`r → m-1`）
+    _ = sigmaZ ⟨r + 1, h⟩ := identity_matrix_mul_tensorPow _
                                   -- `identity_matrix_is_left_unit_of_mat_mult`（`A → σ_m^z`）
 
-/-- 原文 Step 2 の `σ^y_m = P_{m-1} Y_m`（人手の `P_{m-1}Y_m` の 4 行の鎖を右辺から左辺へ読む）。 -/
-theorem sigmaY_eq_sigmaXPrefixProduct_mul (k : Fin M) : sigmaY k = sigmaXPrefixProduct M (k : ℕ) * Y k := by
+/-- 原文 Step 2 の `σ^y_m = P_{m-1} Y_m`（`m ≥ 2`。人手の `P_{m-1}Y_m` の 4 行の鎖を右辺から左辺へ読む）。 -/
+theorem sigmaY_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
+    sigmaY (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * Y ⟨r + 1, h⟩ := by
   symm
-  calc sigmaXPrefixProduct M (k : ℕ) * Y k
-      = sigmaXPrefixProduct M (k : ℕ) * (sigmaXPrefixProduct M (k : ℕ) * sigmaY k) := by
+  calc sigmaXPrefixProduct M (r + 1) * Y ⟨r + 1, h⟩
+      = sigmaXPrefixProduct M (r + 1) * (sigmaXPrefixProduct M (r + 1) * sigmaY ⟨r + 1, h⟩) := by
         rw [Y_eq_sigmaXPrefixProduct_mul]                           -- 直前の `Y_m = P_{m-1}σ_m^y`
-    _ = (sigmaXPrefixProduct M (k : ℕ) * sigmaXPrefixProduct M (k : ℕ)) * sigmaY k :=
+    _ = (sigmaXPrefixProduct M (r + 1) * sigmaXPrefixProduct M (r + 1)) * sigmaY ⟨r + 1, h⟩ :=
         (mul_assoc _ _ _).symm
                                   -- `mat_mult_associative`（`A, B → P_{m-1}`, `C → σ_m^y`）を右辺から左辺へ
-    _ = (1 : TensorPow M) * sigmaY k := by
-        rw [sigmaXPrefixProduct_mul_self (k : ℕ) (le_of_lt k.isLt)] -- 二乗の式（`r → m-1`）
-    _ = sigmaY k := identity_matrix_mul_tensorPow (sigmaY k)
+    _ = (1 : TensorPow M) * sigmaY ⟨r + 1, h⟩ := by
+        rw [sigmaXPrefixProduct_mul_self (r + 1) (le_of_lt h)]      -- 二乗の式（`r → m-1`）
+    _ = sigmaY ⟨r + 1, h⟩ := identity_matrix_mul_tensorPow _
                                   -- `identity_matrix_is_left_unit_of_mat_mult`（`A → σ_m^y`）
 
 /-- 人手 Step 2 の `m ≥ 2` の段の「`P_0 ∈ 𝒜` は (ii)、`P_{r-1} ∈ 𝒜` なら `σ_r^x ∈ 𝒜` と (iv) で `P_r ∈ 𝒜`」の `r` の帰納法。
@@ -215,20 +256,21 @@ theorem sigmaXPrefixProduct_mem_adjoin (r : ℕ) (hr : r ≤ M)
       exact mul_mem (ih (le_of_lt hrM) (fun j hj => h j (Nat.lt_succ_of_lt hj)))
         (h ⟨r, hrM⟩ (Nat.lt_succ_self r))                           -- 帰納法の仮定・`σ_{r+1}^x ∈ 𝒜` と (iv)
 
-/-- 人手 Step 2 の外側の帰納法の一段: `σ_1^x, …, σ_{m-1}^x ∈ 𝒜` なら `σ_m^z, σ_m^y, σ_m^x ∈ 𝒜`。
-人手の `m` は Lean の `k + 1`（人手のこの段は `m ≥ 2`。`k = 0` でも型は通るが、`sigma_mem_adjoin_all` は `m = 1` を
-`sigma_mem_adjoin_first_site` で扱う）。`σ_m^z = P_{m-1}Z_m`・`σ_m^y = P_{m-1}Y_m` と (iv)、`σ_m^x = (-i)(σ_m^yσ_m^z)`（Step 1）と (iii)(iv)。 -/
-theorem sigma_mem_adjoin_of_previous_sigmaX (k : Fin M)
-    (h : ∀ j : Fin M, (j : ℕ) < (k : ℕ) → sigmaX j ∈ Algebra.adjoin ℂ (ZYSet M)) :
-    sigmaZ k ∈ Algebra.adjoin ℂ (ZYSet M) ∧ sigmaY k ∈ Algebra.adjoin ℂ (ZYSet M) ∧
-      sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M) := by
-  have hP := sigmaXPrefixProduct_mem_adjoin (k : ℕ) (le_of_lt k.isLt) h   -- `P_{m-1} ∈ 𝒜`
-  have hZ : sigmaZ k ∈ Algebra.adjoin ℂ (ZYSet M) := by
+/-- 人手 Step 2 の外側の帰納法の一段（`m ≥ 2`）: `σ_1^x, …, σ_{m-1}^x ∈ 𝒜` なら `σ_m^z, σ_m^y, σ_m^x ∈ 𝒜`。
+人手の `m` は Lean の `r + 2`（`k = ⟨r + 1, h⟩`）。人手の `m = 1` は `sigma_mem_adjoin_first_site` で扱う。
+`σ_m^z = P_{m-1}Z_m`・`σ_m^y = P_{m-1}Y_m` と (iv)、`σ_m^x = (-i)(σ_m^yσ_m^z)`（Step 1）と (iii)(iv)。 -/
+theorem sigma_mem_adjoin_of_previous_sigmaX (r : ℕ) (h : r + 1 < M)
+    (hprev : ∀ j : Fin M, (j : ℕ) < r + 1 → sigmaX j ∈ Algebra.adjoin ℂ (ZYSet M)) :
+    sigmaZ (⟨r + 1, h⟩ : Fin M) ∈ Algebra.adjoin ℂ (ZYSet M) ∧
+      sigmaY (⟨r + 1, h⟩ : Fin M) ∈ Algebra.adjoin ℂ (ZYSet M) ∧
+      sigmaX (⟨r + 1, h⟩ : Fin M) ∈ Algebra.adjoin ℂ (ZYSet M) := by
+  have hP := sigmaXPrefixProduct_mem_adjoin (r + 1) (le_of_lt h) hprev   -- `P_{m-1} ∈ 𝒜`
+  have hZ : sigmaZ (⟨r + 1, h⟩ : Fin M) ∈ Algebra.adjoin ℂ (ZYSet M) := by
     rw [sigmaZ_eq_sigmaXPrefixProduct_mul]
-    exact mul_mem hP (Z_mem_adjoin k)                               -- `σ_m^z = P_{m-1}Z_m ∈ 𝒜`
-  have hY : sigmaY k ∈ Algebra.adjoin ℂ (ZYSet M) := by
+    exact mul_mem hP (Z_mem_adjoin _)                               -- `σ_m^z = P_{m-1}Z_m ∈ 𝒜`
+  have hY : sigmaY (⟨r + 1, h⟩ : Fin M) ∈ Algebra.adjoin ℂ (ZYSet M) := by
     rw [sigmaY_eq_sigmaXPrefixProduct_mul]
-    exact mul_mem hP (Y_mem_adjoin k)                               -- `σ_m^y = P_{m-1}Y_m ∈ 𝒜`
+    exact mul_mem hP (Y_mem_adjoin _)                               -- `σ_m^y = P_{m-1}Y_m ∈ 𝒜`
   refine ⟨hZ, hY, ?_⟩
   rw [sigmaX_eq]
   exact Subalgebra.smul_mem _ (mul_mem hY hZ) _                     -- `σ_m^x = (-i)(σ_m^yσ_m^z) ∈ 𝒜`
@@ -277,7 +319,7 @@ theorem sigma_mem_adjoin_all : ∀ n : ℕ, ∀ hn : n < M,
       intro hn
       rcases n with _ | n
       · exact sigma_mem_adjoin_first_site hn
-      · exact sigma_mem_adjoin_of_previous_sigmaX ⟨n + 1, hn⟩
+      · exact sigma_mem_adjoin_of_previous_sigmaX n hn
           (fun j hj => (ih j hj j.isLt).2.2)
 
 theorem sigmaZ_mem_adjoin (k : Fin M) : sigmaZ k ∈ Algebra.adjoin ℂ (ZYSet M) :=

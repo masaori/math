@@ -120,17 +120,18 @@ theorem sigmaXPrefixProduct_eq_finiteMatrixProduct_of_necSuf (r : ℕ) (h : r < 
     (by rw [sigmaXNat, dif_pos (lt_of_le_of_lt (Nat.zero_le r) h), identity_matrix_mul_tensorPow])
     r h
 
-/-- 人手 Step 2 の `σ^z_m = P_{m-1}Z_m` を、二乗の式の必要十分版から得た形（鎖は具体版 `sigmaZ_eq_sigmaXPrefixProduct_mul` と同じ）。 -/
-theorem sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf (k : Fin M) :
-    sigmaZ k = sigmaXPrefixProduct M (k : ℕ) * Z k := by
+/-- 人手 Step 2 の `σ^z_m = P_{m-1}Z_m`（`m ≥ 2`。人手の `m` は Lean の `r + 2`）を、二乗の式の必要十分版から得た形
+（鎖は具体版 `sigmaZ_eq_sigmaXPrefixProduct_mul` と同じ）。 -/
+theorem sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf (r : ℕ) (h : r + 1 < M) :
+    sigmaZ (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * Z ⟨r + 1, h⟩ := by
   rw [Z_eq_sigmaXPrefixProduct_mul, ← mul_assoc,
-    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt k.isLt), identity_matrix_mul_tensorPow]
+    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt h), identity_matrix_mul_tensorPow]
 
-/-- 人手 Step 2 の `σ^y_m = P_{m-1}Y_m` を、二乗の式の必要十分版から得た形。 -/
-theorem sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf (k : Fin M) :
-    sigmaY k = sigmaXPrefixProduct M (k : ℕ) * Y k := by
+/-- 人手 Step 2 の `σ^y_m = P_{m-1}Y_m`（`m ≥ 2`）を、二乗の式の必要十分版から得た形。 -/
+theorem sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf (r : ℕ) (h : r + 1 < M) :
+    sigmaY (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * Y ⟨r + 1, h⟩ := by
   rw [Y_eq_sigmaXPrefixProduct_mul, ← mul_assoc,
-    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt k.isLt), identity_matrix_mul_tensorPow]
+    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt h), identity_matrix_mul_tensorPow]
 
 /-- **人手 Step 2 の `P_{m-1} ∈ 𝒜` の `r` の帰納法を必要十分版 `NecSuf.string_mem_of_previous` の特殊化として導出した形**
 （具体版は `sigmaXPrefixProduct_mem_adjoin`。部分モノイドとしての `𝒜` に渡す）。 -/
@@ -152,8 +153,20 @@ theorem sigma_mem_adjoin_of_necSuf (k : Fin M) :
   have h := NecSuf.local_mem (S := Algebra.adjoin ℂ (ZYSet M)) (p := sigmaXPrefixProduct M)
     (z := ZNat M) (y := YNat M) (zl := sigmaZNat M) (yl := sigmaYNat M) (xl := sigmaXNat M)
     (r := -Complex.I) (N := M) rfl
-    (by intro n hn; rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf])
-    (by intro n hn; rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf])
+    (by
+      -- `n = 0` は人手の `m = 1` の `Z_1 := σ_1^z`（`sigmaZ_zero_eq_Z`）に `P_0 = I` を左から掛けたもの
+      intro n hn
+      rcases n with _ | n
+      · rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_zero_eq_Z hn]
+        exact (identity_matrix_mul_tensorPow _).symm
+      · rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf])
+    (by
+      -- `n = 0` は人手の `m = 1` の `Y_1 := σ_1^y`（`sigmaY_zero_eq_Y`）に `P_0 = I` を左から掛けたもの
+      intro n hn
+      rcases n with _ | n
+      · rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_zero_eq_Y hn]
+        exact (identity_matrix_mul_tensorPow _).symm
+      · rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf])
     (by intro n hn; rw [sigmaXNat, dif_pos hn, sigmaYNat, dif_pos hn, sigmaZNat, dif_pos hn,
       sigmaX_eq])
     (fun _ _ => rfl)
