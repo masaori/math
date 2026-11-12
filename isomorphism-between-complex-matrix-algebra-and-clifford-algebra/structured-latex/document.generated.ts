@@ -19,6 +19,7 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
+import notes_isomorphism from './notes/isomorphism.ts'
 import notes_mathematical_toolkit from './notes/mathematical-toolkit.ts'
 
 
@@ -29,6 +30,7 @@ export type AllBlocks = [
 
 /** 全ノート。 */
 export type AllNotes = [
+  ...typeof notes_isomorphism,
   ...typeof notes_mathematical_toolkit,
 ]
 
