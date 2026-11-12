@@ -1,11 +1,11 @@
 /-
-# `Z, Y` は `Mat(2, ℂ)^{⊗M}` を環として生成する
+# `Z, Y` は `Mat(2^M, ℂ)` を環として生成する
 
 対応する人手証明:
-`parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` (`<Z_Y_generate_algebra>`)
+`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の `Z_Y_generate_algebra`
 
 原文の主張: `S = {Z_1, …, Z_M, Y_1, …, Y_M}` を含む最小の ℂ-部分多元環 `𝒜` は
-`Mat(2, ℂ)^{⊗M}` 全体に一致する。
+`Mat(2^M, ℂ)` 全体に一致する。
 
 Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Algebra.adjoin ℂ S`
 （`Subalgebra ℂ (TensorPow M)`）とし、結論を `Algebra.adjoin ℂ (ZYSet M) = ⊤` と述べる。
@@ -421,7 +421,7 @@ theorem coe_pauliBasis : ⇑pauliBasis = pauliFamily :=
 
 /-! ## Step 3 後半: `e_1 ⊠ ⋯ ⊠ e_M` は `𝒜` に属する -/
 
-/-- 単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` は、各因子をサイト作用素として含む部分多元環に属する。
+/-- クロネッカー積 `A_1 ⊠ ⋯ ⊠ A_M` は、各因子をサイト作用素として含む部分多元環に属する。
 
 人手 Step 3 後半の「`E_k := I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（第 `k` 因子だけが `e_k`）について `E_1 ⋯ E_M = e_1 ⊠ ⋯ ⊠ e_M`」
 （`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` についての帰納法）と結論は同じだが、**経路が違う**: Lean は単位行列から始める有限集合 `s` についての帰納法で、`E_k` を左から掛け、一段を `Function.update` の `simp` で閉じる（人手は右から掛け、一段を `kronecker_product_rule` (1) と単位の 6 行で示す。状態台帳の件）。`E_k` は Lean の `siteOp k (x k)`。 -/
@@ -471,7 +471,7 @@ theorem siteOp_pauliFamily_mem_adjoin (k : Fin M) (j : Fin 4) :
 /-! ## 結論 -/
 
 /-- **`<Z_Y_generate_algebra>` の形式化**:
-`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2, ℂ)^{⊗M}` 全体である。
+`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2^M, ℂ)` 全体である。
 
 人手 Step 3 の結びと同じく、`𝓑^{⊠M}`（`<tensor_basis>` (2) を `𝓑` に適用した基底）の元
 `e_1 ⊠ ⋯ ⊠ e_M` がすべて `𝒜` に入ること（`siteProd_mem` と `siteOp_pauliFamily_mem_adjoin`）から、

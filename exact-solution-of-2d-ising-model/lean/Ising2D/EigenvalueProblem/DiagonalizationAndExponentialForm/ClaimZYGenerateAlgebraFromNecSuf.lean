@@ -2,7 +2,7 @@
 # `<Z_Y_generate_algebra>` — 具体版を必要十分版の特殊化として導出する
 
 対応する人手証明:
-`parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` (`<Z_Y_generate_algebra>`)
+`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の `Z_Y_generate_algebra`
 
 ## このファイルの位置づけ（README のゴール設定 4 節「2 本立て」）
 
@@ -145,7 +145,7 @@ theorem siteProdHom_mulSingle (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
   rfl
 
 /-- **必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の特殊化**:
-単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` は、各因子をサイト作用素として含む部分多元環に属する
+クロネッカー積 `A_1 ⊠ ⋯ ⊠ A_M` は、各因子をサイト作用素として含む部分多元環に属する
 （具体版の `Ising2D.siteProd_mem` と同じ主張。帰納法は必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の中にある）。 -/
 theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (h : ∀ k, siteOp k (x k) ∈ A) :
@@ -157,7 +157,7 @@ theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
 /-! ## 結論 -/
 
 /-- **`<Z_Y_generate_algebra>` を必要十分版から導出した形**:
-`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2, ℂ)^{⊗M}` 全体である。
+`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2^M, ℂ)` 全体である。
 
 具体版 `Ising2D.Z_Y_generate_algebra` と**同じ形の主張**で、具体版と同じく基底 `𝓑^{⊠M}` の元
 `e_1 ⊠ ⋯ ⊠ e_M` が `𝒜` に入ることから結論する。論法は `NecSuf/GeneratedByBasis.lean` の

@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 
-- 範囲: Z,Y の生成する部分多元環が Mat(2,C)^{⊗M} 全体（次元 4^M）。Step 3 の 2 次の行列の展開の鎖（check_02）。Step 3 後半の `E_k` の場合分けと積 `E_1⋯E_M = e_1⊠⋯⊠e_M` の鎖（check_03）
+- 範囲: Z,Y の生成する部分多元環が Mat(2^M,C) 全体（次元 4^M）。Step 3 の 2 次の行列の展開の鎖（check_02）。Step 3 後半の `E_k` の場合分けと積 `E_1⋯E_M = e_1⊠⋯⊠e_M` の鎖（check_03）
 
 語を長さ順に生成し、張る空間の次元がどの深さで 4^M に達するかを記録する。対比として **Z だけでは全体を生成しない**ことも確認しており、生成集合に Y が必要であることが分かる。
 

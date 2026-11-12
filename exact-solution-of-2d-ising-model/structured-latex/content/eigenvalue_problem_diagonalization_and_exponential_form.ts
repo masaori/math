@@ -366,15 +366,7 @@ t
         math(String.raw`Z_1,\dots,Z_{M_{\mathrm{col}}}, Y_1,\dots,Y_{M_{\mathrm{col}}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " について、集合 ",
         math(String.raw`S := \{Z_1,\dots,Z_{M_{\mathrm{col}}}, Y_1,\dots,Y_{M_{\mathrm{col}}}\}`),
-        " を考える（",
-        ref("def_kronecker"),
-        " の同一視により ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}) = \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " であり、",
-        math(String.raw`S`),
-        " の元はいずれも ",
-        math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 次の複素行列である）。",
+        " を考える。",
       ]),
       paragraph([
         math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
@@ -1146,6 +1138,7 @@ P_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: 主張の括弧書き「def_kronecker の同一視により Mat(2^M,ℂ) = Mat(2^M,ℂ) であり」を含む括弧書きを削った。もとは「Mat(2,ℂ)^{⊗M} = Mat(2^M,ℂ)」という抽象テンソル冪との同一視で、⊗ を具体的なクロネッカー積 ⊠ へ一括で置き換えたときに両辺が同じ集合の等式になり何も述べなくなっていた（「〜とみなす」を書かない規律にも触れていた）。括弧書きの残り「S の元はいずれも 2^M 次の複素行列である」は、同じ文の頭で def_transfer_matrix_symbols を引いて Z, Y ∈ Mat(2^M,ℂ) と書いていることの繰り返しなので、括弧書きごと削った。主張の中身は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 の後半で、定義の無い添字 a_k を持つ σ_k^{a_k} を第 k 因子だけを e_k にした行列と呼んでいた（a_k は展開の成分 a_{11} などと文字も重なっていた）。これを E_k := I⊠⋯⊠e_k⊠⋯⊠I と置き直し、e_k = I なら kronecker_product_rule (2) と (ii)、e_k = σ^x・σ^y・σ^z なら def_site_pauli_matrices と Step 2 で E_k ∈ 𝒜 となることを場合ごとに書いた。積 E_1⋯E_M = e_1⊠⋯⊠e_M の 1 行（根拠「クロネッカー積の積の規則」、前置きは「Step 1 の異サイト積公式を繰り返して」）を、def_finite_product_of_matrices の P_1 := E_1・P_{s+1} := P_s E_{s+1} についての帰納法（site_pauli_prefix_product_kronecker_form の証明と同じ形。帰納の一段は kronecker_product_rule (1)・右単位・左単位 2 回の 6 行）にし、同じ帰納法で P_s ∈ 𝒜 を (iv) から示した。主張と論法は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 3 の A の展開の 1 行（根拠「成分比較」）の係数の分母 2 を 2_ℂ と読み、2_ℂ ∈ ℂ^×（inclusion_rr_to_cc の第 1 成分の比較）と、4 つの分数が def_complex_quotient の商（w → 2_ℂ）であることを書いた。係数に κ_0・κ_x・κ_y・κ_z と名前を付け、準備 (a)〜(g)（(2_ℂz)2_ℂ^{-1} = z、z + z = 2_ℂz、z + (−z) = 0_ℂ、(z+w)+(z−w) = 2_ℂz、(z+w)−(z−w) = 2_ℂw、ii = −1_ℂ、(−i)i = 1_ℂ）を置き、右辺の 4 成分がそれぞれ a_{11}・a_{12}・a_{21}・a_{22} になることを、体の公理と定義を 1 行に 1 つずつ当てる鎖にした（各鎖は R の定義・def_matrix_sum・def_matrix_scalar_multiple の 3 行で始まり、κ の定義を代入する行を置いてから def_complex_quotient で開く）。主張と展開の式は不変。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
