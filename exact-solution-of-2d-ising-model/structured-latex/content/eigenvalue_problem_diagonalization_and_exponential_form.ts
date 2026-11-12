@@ -607,7 +607,146 @@ ii
         math(String.raw`\mathcal{A}`),
         " が各 ",
         math(String.raw`\sigma_k^x, \sigma_k^y, \sigma_k^z`),
-        " を含むこと。各 ",
+        " を含むこと。準備として、",
+        math(String.raw`r\in\{0,1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`P_r\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を ",
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "、",
+        math(String.raw`P_r:=P_{r-1}\sigma_r^x\ (1\leq r\leq M_{\mathrm{col}})`),
+        " で定め、次の積の表示・可換の式・二乗の式を ",
+        math(String.raw`r`),
+        " についての帰納法で示す。積は ",
+        ref("def_finite_product_of_matrices"),
+        " の左から順に掛けた積である。積の表示は、",
+        math(String.raw`r\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`P_r=\prod_{j=1}^{r}\sigma_j^x`),
+        " である。",
+        math(String.raw`r=1`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_1
+&= P_0\sigma_1^x
+&&(\because\ P_1\ \text{の定義})\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_1^x
+&&(\because\ P_0\ \text{の定義})\\
+&= \sigma_1^x
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \sigma_1^x)\bigr)\\
+&= \prod_{j=1}^{1}\sigma_j^x
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の初項を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\leq r<M_{\mathrm{col}}`),
+        " とし、",
+        math(String.raw`r`),
+        " で積の表示が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{r+1}
+&= P_r\sigma_{r+1}^x
+&&(\because\ P_{r+1}\ \text{の定義})\\
+&= \Bigl(\prod_{j=1}^{r}\sigma_j^x\Bigr)\sigma_{r+1}^x
+&&(\because\ \text{帰納法の仮定})\\
+&= \prod_{j=1}^{r+1}\sigma_j^x
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の漸化式を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "可換の式は、",
+        math(String.raw`k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " と ",
+        math(String.raw`r\in\{0,\dots,k-1\}`),
+        " について ",
+        math(String.raw`\sigma_k^xP_r=P_r\sigma_k^x`),
+        " である。",
+        math(String.raw`r=0`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_k^xP_0
+&= \sigma_k^xI_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&(\because\ P_0\ \text{の定義})\\
+&= \sigma_k^x
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (A \to \sigma_k^x)\bigr)\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_k^x
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \sigma_k^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= P_0\sigma_k^x
+&&(\because\ P_0\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r+1\leq k-1`),
+        " とし、",
+        math(String.raw`r`),
+        " で可換の式が成り立つとする。",
+        math(String.raw`r+1\neq k`),
+        " であるから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_k^xP_{r+1}
+&= \sigma_k^x\bigl(P_r\sigma_{r+1}^x\bigr)
+&&(\because\ P_{r+1}\ \text{の定義})\\
+&= \bigl(\sigma_k^xP_r\bigr)\sigma_{r+1}^x
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to \sigma_k^x,\ B \to P_r,\ C \to \sigma_{r+1}^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(P_r\sigma_k^x\bigr)\sigma_{r+1}^x
+&&(\because\ \text{帰納法の仮定})\\
+&= P_r\bigl(\sigma_k^x\sigma_{r+1}^x\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to P_r,\ B \to \sigma_k^x,\ C \to \sigma_{r+1}^x)\bigr)\\
+&= P_r\bigl(\sigma_{r+1}^x\sigma_k^x\bigr)
+&&\bigl(\because\ \blkref{distinct_site_pauli_matrices_commute}\ (j \to k,\ k \to r+1,\ a, b \to x)\bigr)\\
+&= \bigl(P_r\sigma_{r+1}^x\bigr)\sigma_k^x
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to P_r,\ B \to \sigma_{r+1}^x,\ C \to \sigma_k^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= P_{r+1}\sigma_k^x
+&&(\because\ P_{r+1}\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "二乗の式は、",
+        math(String.raw`r\in\{0,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`P_rP_r=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        " である。",
+        math(String.raw`r=0`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_0P_0
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&(\because\ P_0\ \text{の定義を 2 か所へ})\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})})\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r+1\leq M_{\mathrm{col}}`),
+        " とし、",
+        math(String.raw`r`),
+        " で二乗の式が成り立つとする。",
+        math(String.raw`r\leq (r+1)-1`),
+        " であるから可換の式（",
+        math(String.raw`k \to r+1`),
+        "）が使えて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{r+1}P_{r+1}
+&= \bigl(P_r\sigma_{r+1}^x\bigr)\bigl(P_r\sigma_{r+1}^x\bigr)
+&&(\because\ P_{r+1}\ \text{の定義を 2 か所へ})\\
+&= P_r\Bigl(\sigma_{r+1}^x\bigl(P_r\sigma_{r+1}^x\bigr)\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to P_r,\ B \to \sigma_{r+1}^x,\ C \to P_r\sigma_{r+1}^x)\bigr)\\
+&= P_r\Bigl(\bigl(\sigma_{r+1}^xP_r\bigr)\sigma_{r+1}^x\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to \sigma_{r+1}^x,\ B \to P_r,\ C \to \sigma_{r+1}^x)\ \text{を右辺から左辺へ}\bigr)\\
+&= P_r\Bigl(\bigl(P_r\sigma_{r+1}^x\bigr)\sigma_{r+1}^x\Bigr)
+&&(\because\ \text{可換の式}\ (k \to r+1))\\
+&= P_r\Bigl(P_r\bigl(\sigma_{r+1}^x\sigma_{r+1}^x\bigr)\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A \to P_r,\ B \to \sigma_{r+1}^x,\ C \to \sigma_{r+1}^x)\bigr)\\
+&= P_r\bigl(P_rI_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\bigr)
+&&(\because\ \text{Step 1 の}\ \sigma_k^x\sigma_k^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\ (k \to r+1))\\
+&= P_rP_r
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (A \to P_r)\bigr)\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`),
+      paragraph([
+        "以上の準備のもとで、各 ",
         math(String.raw`m`),
         " について「",
         math(String.raw`\sigma_1^x,\dots,\sigma_{m-1}^x \in \mathcal{A}`),
@@ -615,7 +754,17 @@ ii
         math(String.raw`m`),
         " に関する帰納法で示す。",
         math(String.raw`m=1`),
-        " のとき ",
+        " のとき、",
+        ref("def_jordan_wigner_Z_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`m=1`),
+        " の規約より ",
+        math(String.raw`\sigma_1^z=Z_1`),
+        "・",
+        math(String.raw`\sigma_1^y=Y_1`),
+        " であり、(i) より ",
         math(String.raw`\sigma_1^z=Z_1\in\mathcal{A}`),
         "、",
         math(String.raw`\sigma_1^y=Y_1\in\mathcal{A}`),
@@ -624,15 +773,17 @@ ii
       displayMath(
         String.raw`\begin{aligned}
 \sigma_1^x
-&= (-i)\bigl(\sigma_1^y\sigma_1^z\bigr) \quad (\because \text{Step 1 の } \sigma_k^x = (-i)(\sigma_k^y\sigma_k^z) \text{ を } k=1 \text{ に取る}) \\
-&= (-i)\bigl(Y_1 Z_1\bigr) \quad (\because \sigma_1^y = Y_1, \ \sigma_1^z = Z_1)
+&= (-i)\bigl(\sigma_1^y\sigma_1^z\bigr)
+&&(\because\ \text{Step 1 の}\ \sigma_k^x = (-i)(\sigma_k^y\sigma_k^z)\ (k \to 1))\\
+&= (-i)\bigl(Y_1 Z_1\bigr)
+&&\bigl(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ Y_1 := \sigma_1^y,\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ Z_1 := \sigma_1^z\bigr)
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`Y_1, Z_1\in\mathcal{A}`),
         " かつ ",
         math(String.raw`\mathcal{A}`),
-        " は積とスカラー倍について閉じるから ",
+        " は (iii)(iv) により積とスカラー倍について閉じるから ",
         math(String.raw`\sigma_1^x\in\mathcal{A}`),
         "。",
       ]),
@@ -641,73 +792,116 @@ ii
         " とし ",
         math(String.raw`\sigma_1^x,\dots,\sigma_{m-1}^x\in\mathcal{A}`),
         " を仮定する。",
-        math(String.raw`P_{m-1}:=\sigma_1^x\sigma_2^x\cdots\sigma_{m-1}^x`),
-        " とおくと ",
-        math(String.raw`P_{m-1}\in\mathcal{A}`),
-        "（",
-        math(String.raw`m=1`),
-        " では空積 ",
-        math(String.raw`P_0:=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
-        "）。異サイトの可換性と ",
-        math(String.raw`\sigma_k^x\sigma_k^x=I`),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-P_{m-1}P_{m-1}
-&= (\sigma_1^x\cdots\sigma_{m-1}^x)(\sigma_1^x\cdots\sigma_{m-1}^x) \quad (\because P_{m-1} \text{ の定義}) \\
-&= (\sigma_1^x\sigma_1^x)(\sigma_2^x\sigma_2^x)\cdots(\sigma_{m-1}^x\sigma_{m-1}^x) \quad (\because \text{異サイトの可換性}) \\
-&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})} \quad (\because \sigma_k^x\sigma_k^x=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})})
-\end{aligned}`,
-      ),
-      paragraph([
-        "ゆえに ",
-        math(String.raw`P_{m-1}`),
-        " は可逆で ",
-        math(String.raw`P_{m-1}^{-1}=P_{m-1}\in\mathcal{A}`),
-        "。定義より ",
-        math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z = P_{m-1}\sigma_m^z`),
+        math(String.raw`P_0\in\mathcal{A}`),
+        " は (ii) により、",
+        math(String.raw`1\leq r\leq m-1`),
+        " で ",
+        math(String.raw`P_{r-1}\in\mathcal{A}`),
+        " ならば、外側の帰納法の仮定の ",
+        math(String.raw`\sigma_r^x\in\mathcal{A}`),
+        " と (iv) により ",
+        math(String.raw`P_r=P_{r-1}\sigma_r^x\in\mathcal{A}`),
         " であるから、",
+        math(String.raw`r`),
+        " についての帰納法で ",
+        math(String.raw`P_{m-1}\in\mathcal{A}`),
+        "。",
+        math(String.raw`j\in\{1,\dots,m\}`),
+        " について ",
+        math(String.raw`F_j^{(z)}:=\sigma_j^x\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\ (j<m)`),
+        "、",
+        math(String.raw`F_m^{(z)}:=\sigma_m^z`),
+        " と置くと、",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の ",
+        math(String.raw`Z_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
+        " は ",
+        ref("def_finite_product_of_matrices"),
+        " の積 ",
+        math(String.raw`\prod_{j=1}^{m}F_j^{(z)}`),
+        " であり、",
+        math(String.raw`m-1\geq 1`),
+        " であるから",
       ]),
+      displayMath(String.raw`\begin{aligned}
+Z_m
+&= \prod_{j=1}^{m}F_j^{(z)}
+&&\bigl(\because\ \blkref{def_jordan_wigner_Z_matrices}\bigr)\\
+&= \Bigl(\prod_{j=1}^{m-1}F_j^{(z)}\Bigr)F_m^{(z)}
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の漸化式}\ (r \to m-1)\bigr)\\
+&= \Bigl(\prod_{j=1}^{m-1}\sigma_j^x\Bigr)\sigma_m^z
+&&(\because\ F_j^{(z)}\ \text{の定義})\\
+&= P_{m-1}\sigma_m^z
+&&(\because\ \text{積の表示}\ (r \to m-1)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 P_{m-1}Z_m
-&= P_{m-1}P_{m-1}\sigma_m^z \quad (\because Z_m = P_{m-1}\sigma_m^z) \\
-&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_m^z \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}) \\
-&= \sigma_m^z \quad (\because I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})} \text{ は積の単位元})
+&= P_{m-1}\bigl(P_{m-1}\sigma_m^z\bigr)
+&&(\because\ \text{直前の}\ Z_m = P_{m-1}\sigma_m^z)\\
+&= \bigl(P_{m-1}P_{m-1}\bigr)\sigma_m^z
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A, B \to P_{m-1},\ C \to \sigma_m^z)\ \text{を右辺から左辺へ}\bigr)\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_m^z
+&&(\because\ \text{二乗の式}\ (r \to m-1))\\
+&= \sigma_m^z
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \sigma_m^z)\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`P_{m-1}, Z_m\in\mathcal{A}`),
-        " かつ ",
-        math(String.raw`\mathcal{A}`),
-        " は積について閉じるから ",
+        math(String.raw`P_{m-1}\in\mathcal{A}`),
+        "、(i) より ",
+        math(String.raw`Z_m\in\mathcal{A}`),
+        " であり、(iv) により ",
         math(String.raw`\sigma_m^z = P_{m-1}Z_m\in\mathcal{A}`),
         "。",
         math(String.raw`\sigma_m^y`),
-        " についても同じ形の鎖が書ける。定義より ",
-        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y = P_{m-1}\sigma_m^y`),
-        " であるから、",
+        " についても同じ形の鎖が書ける。",
+        math(String.raw`F_j^{(y)}:=\sigma_j^x\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\ (j<m)`),
+        "、",
+        math(String.raw`F_m^{(y)}:=\sigma_m^y`),
+        " と置くと、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
+        " は積 ",
+        math(String.raw`\prod_{j=1}^{m}F_j^{(y)}`),
+        " であるから",
       ]),
+      displayMath(String.raw`\begin{aligned}
+Y_m
+&= \prod_{j=1}^{m}F_j^{(y)}
+&&\bigl(\because\ \blkref{def_jordan_wigner_Y_matrices}\bigr)\\
+&= \Bigl(\prod_{j=1}^{m-1}F_j^{(y)}\Bigr)F_m^{(y)}
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の漸化式}\ (r \to m-1)\bigr)\\
+&= \Bigl(\prod_{j=1}^{m-1}\sigma_j^x\Bigr)\sigma_m^y
+&&(\because\ F_j^{(y)}\ \text{の定義})\\
+&= P_{m-1}\sigma_m^y
+&&(\because\ \text{積の表示}\ (r \to m-1)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 P_{m-1}Y_m
-&= P_{m-1}P_{m-1}\sigma_m^y \quad (\because Y_m = P_{m-1}\sigma_m^y) \\
-&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_m^y \quad (\because P_{m-1}P_{m-1}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}) \\
-&= \sigma_m^y \quad (\because I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})} \text{ は積の単位元})
+&= P_{m-1}\bigl(P_{m-1}\sigma_m^y\bigr)
+&&(\because\ \text{直前の}\ Y_m = P_{m-1}\sigma_m^y)\\
+&= \bigl(P_{m-1}P_{m-1}\bigr)\sigma_m^y
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (A, B \to P_{m-1},\ C \to \sigma_m^y)\ \text{を右辺から左辺へ}\bigr)\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\sigma_m^y
+&&(\because\ \text{二乗の式}\ (r \to m-1))\\
+&= \sigma_m^y
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \sigma_m^y)\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`P_{m-1}, Y_m\in\mathcal{A}`),
-        " かつ ",
-        math(String.raw`\mathcal{A}`),
-        " は積について閉じるから ",
+        math(String.raw`P_{m-1}\in\mathcal{A}`),
+        "、(i) より ",
+        math(String.raw`Y_m\in\mathcal{A}`),
+        " であり、(iv) により ",
         math(String.raw`\sigma_m^y = P_{m-1}Y_m\in\mathcal{A}`),
         "。さらに Step 1 より ",
         math(String.raw`\sigma_m^x = (-i)(\sigma_m^y\sigma_m^z)`),
-        " であり、",
-        math(String.raw`\mathcal{A}`),
-        " は積とスカラー倍について閉じるから ",
+        " であり、(iii)(iv) により ",
         math(String.raw`\sigma_m^x\in\mathcal{A}`),
         "。よって ",
         math(String.raw`\sigma_m^x,\sigma_m^y,\sigma_m^z\in\mathcal{A}`),
@@ -1229,6 +1423,7 @@ P_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 2 の P_{m-1}P_{m-1} = I は「異サイトの可換性」の 1 行で因子を並べ替えており、途中が書かれていなかった。Step 2 の冒頭に P_0 := I・P_r := P_{r-1}σ_r^x を置き、積の表示 P_r = ∏_{j=1}^{r} σ_j^x（def_finite_product_of_matrices）、可換の式 σ_k^xP_r = P_rσ_k^x（r < k）と二乗の式 P_rP_r = I を r の帰納法の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・distinct_site_pauli_matrices_commute・Step 1 の σ_k^xσ_k^x = I）で示した。P_{m-1}Z_m・P_{m-1}Y_m の鎖に結合則の行を足し、名前だけの「I は積の単位元」を identity_matrix_is_left_unit_of_mat_mult の参照に替え、Z_m = P_{m-1}σ_m^z・Y_m = P_{m-1}σ_m^y を def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の積を def_finite_product_of_matrices で読む 4 行の鎖にした。使われていなかった「P_{m-1} は可逆で P_{m-1}^{-1} = P_{m-1}」の文を消した（主張は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 は 𝓑 = {I, σ^x, σ^y, σ^z} のクロネッカー積の族が Mat(2^M,C) を張ることだけを使うのに、「dim Mat(2,C) = 4 = #𝓑 より基底」（根拠が書かれていなかった）と tensor_basis (2)（張る族の元数が次元に等しければ基底であることに依り、その前提の「張る有限族の元数は次元以上」は本文で証明されていない）を経由していた。𝓑 が張ることを示したところで止め、新しく足した kronecker_family_of_spanning_family_spans で 𝓑^{⊠M} が張ることを得て、結びの「基底であるから」を「張るから」にした。主張は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 の鎖がラベルの無い根拠（「行列の積の成分計算」「単位行列の定義」「スカラー倍の成分計算」「1 は積の単位元」「(−i)i = 1」「スカラー倍の結合則」「クロネッカー積の積の規則」「II=I」）で書かれ、σ_k^xσ_k^x = I と σ_k^x = −iσ_k^yσ_k^z の持ち上げは「これより得る」の地の文だけだった（Step 2 の引用も (−i)(σ_k^yσ_k^z) の形に揃えた）。σ^xσ^x = I は pauli_matrix_products を引く 1 行に、σ^yσ^z = iσ^x は mat_mult の和の形から complex_zero_times_is_zero・加法の単位元・積の可換律・multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple を 1 行に 1 つずつ当てる鎖に、σ^x = (−i)(σ^yσ^z) は scalar_multiple_by_one・(g)・scalar_multiple_is_associative の鎖に、σ_k^aσ_k^b の持ち上げは kronecker_product_rule (1) と identity_matrix_is_left_unit_of_mat_mult の鎖にし、σ_k^xσ_k^x = I（kronecker_product_rule (2)）と σ_k^x = (−i)(σ_k^yσ_k^z)（kronecker_multilinear）の鎖を足した。異サイトの可換性の鎖（根拠「クロネッカー積の積の規則」で単位行列との積を暗に処理していた）は distinct_site_pauli_matrices_commute の参照に替えた。(−i)i = 1_ℂ を引くため、Step 3 の準備 (f)（ii = −1_ℂ）・(g)（(−i)i = 1_ℂ）を Step 1 の冒頭へ移した（中身は不変）。主張と論法は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 証明の冒頭が二次の Pauli 行列を pauli_matrix_products を引かずに成分で置き直し、σ_k^a の出典を def_transfer_matrix_symbols としていた（Step 3 は def_site_pauli_matrices を引く）。冒頭を pauli_matrix_products の σ^x, σ^y, σ^z と def_site_pauli_matrices の σ_k^a を引く形にし（i ∈ ℂ が def_imaginary_unit の虚数単位であることの宣言は残した）、Step 1 の鎖の根拠「σ^x の定義」「σ^y, σ^z の定義」と、クロネッカー積へ持ち上げる 2 つの鎖の根拠「σ_k^a, σ_k^b の定義の代入」などを同じ 2 つのラベル参照に替えた。Step 3 の地の文「Pauli 行列の成分の行は証明の冒頭の σ^x, σ^y, σ^z の定義である」と R の 4 成分の鎖の根拠「σ^x, σ^y, σ^z の (i,j) 成分」も pauli_matrix_products を引く形にした。主張と計算は不変。",

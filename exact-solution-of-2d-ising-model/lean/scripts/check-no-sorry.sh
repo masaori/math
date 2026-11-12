@@ -231,15 +231,36 @@ targets=(
   Ising2D.matrix_two_decomp
   Ising2D.pauliFamily_spans
   Ising2D.siteOp_pauliFamily_mem_adjoin
+  Ising2D.sigmaXPrefixProduct_succ_of_lt
+  Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm
+  Ising2D.sigmaXPrefixProduct_mul_self
+  Ising2D.Z_eq_sigmaXPrefixProduct_mul
+  Ising2D.sigmaXPrefixProduct_mem_adjoin
+  Ising2D.sigma_mem_adjoin_of_previous_sigmaX
+  Ising2D.sigmaZ_zero_eq_Z
+  Ising2D.sigmaY_zero_eq_Y
+  Ising2D.sigma_mem_adjoin_first_site
+  Ising2D.sigma_mem_adjoin_all
+  Ising2D.Y_eq_sigmaXPrefixProduct_mul
+  Ising2D.sigmaZ_eq_sigmaXPrefixProduct_mul
+  Ising2D.sigmaY_eq_sigmaXPrefixProduct_mul
   Ising2D.siteFactorPrefixProduct_eq_and_mem
   Ising2D.siteProd_mem
   Ising2D.Z_Y_generate_algebra
   Ising2D.NecSuf.eq_top_of_span_eq_top
   Ising2D.NecSuf.map_mem_of_mulSingle_mem
   Ising2D.NecSuf.prefixProduct_eq_and_mem
+  Ising2D.NecSuf.string_mem_of_previous
+  Ising2D.NecSuf.local_mem_of_previous
   Ising2D.NecSuf.string_mem
+  Ising2D.NecSuf.xl_mul_string_comm
+  Ising2D.NecSuf.string_mul_self
   Ising2D.NecSuf.local_mem
-  Ising2D.xString_mem_adjoin_of_necSuf
+  Ising2D.sigmaXPrefixProduct_mul_self_of_necSuf
+  Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm_of_necSuf
+  Ising2D.sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf
+  Ising2D.sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf
+  Ising2D.sigmaXPrefixProduct_mem_adjoin_of_necSuf
   Ising2D.sigma_mem_adjoin_of_necSuf
   Ising2D.siteOp_pauliFamily_mem_adjoin_of_necSuf
   Ising2D.siteProd_mem_of_necSuf

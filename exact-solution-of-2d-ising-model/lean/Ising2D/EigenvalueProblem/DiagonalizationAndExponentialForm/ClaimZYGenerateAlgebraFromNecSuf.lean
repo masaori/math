@@ -9,7 +9,7 @@
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
 | **具体版** | `Ising2D.Z_Y_generate_algebra`（`ClaimZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
-| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、`Fin n` 添字の直積への積を保つ写像（`0 < n`）、全体を張る集合 |
+| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem`（中は `string_mem_of_previous`・`local_mem_of_previous`）/ `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、モノイドでの `x n * x n = 1` と相異なる番号どうしの可換性、`Fin n` 添字の直積への積を保つ写像（`0 < n`）、全体を張る集合 |
 
 本ファイルは、同じ結論 `Algebra.adjoin ℂ (ZYSet M) = ⊤` を
 **必要十分版だけを論法として使って**導き直す（`Z_Y_generate_algebra_of_necSuf`）。
@@ -32,8 +32,9 @@
    `e_k = σ^x, σ^y, σ^z` なら `σ_k^x, σ_k^y, σ_k^z` の定義と、Step 2 の必要十分版の結論。
 
 Step 2（Jordan–Wigner 文字列の帰納法）は、`P_m P_m = I` から得られる分解
-`σ^z_m = P_m Z_m`, `σ^y_m = P_m Y_m` と漸化式 `P_{m+1} = P_m σ^x_m` を渡すだけで、
-帰納法そのものは必要十分版 `NecSuf.string_mem` が担う。
+`σ^z_m = P_m Z_m`, `σ^y_m = P_m Y_m` と漸化式 `P_{m+1} = P_m σ^x_m`（`P_m` は具体版と同じ `sigmaXPrefixProduct`）を渡すだけで、
+帰納法そのもの（外側の累積帰納法と `P_{m-1} ∈ 𝒜` の `r` の帰納法）は必要十分版 `NecSuf.local_mem`・`NecSuf.string_mem_of_previous` が担う。`P_m P_m = I`（人手 Step 2 の二乗の式）も
+必要十分版 `NecSuf.string_mul_self` から導く（`sigmaXPrefixProduct_mul_self_of_necSuf`）。
 
 ## 必要十分版へ渡すための ℕ 添字化
 
@@ -73,39 +74,72 @@ noncomputable def sigmaXNat (M : ℕ) (n : ℕ) : TensorPow M :=
 
 /-! ## Step 2 を必要十分版から導出する -/
 
-/-- **原文 Step 2（`P_m ∈ 𝒜`）を必要十分版 `NecSuf.string_mem` の特殊化として導出した形**。 -/
-theorem xString_mem_adjoin_of_necSuf (n : ℕ) (hn : n ≤ M) :
-    xString M n ∈ Algebra.adjoin ℂ (ZYSet M) := by
-  refine NecSuf.string_mem (S := Algebra.adjoin ℂ (ZYSet M)) (p := xString M)
-    (z := ZNat M) (y := YNat M) (zl := sigmaZNat M) (yl := sigmaYNat M) (xl := sigmaXNat M)
-    (r := -Complex.I) (N := M) (xString_zero) ?_ ?_ ?_ ?_ ?_ ?_ n hn
-  · intro k hk
-    rw [sigmaZNat, dif_pos hk, ZNat, dif_pos hk, sigmaZ_eq_xString_mul]
-  · intro k hk
-    rw [sigmaYNat, dif_pos hk, YNat, dif_pos hk, sigmaY_eq_xString_mul]
-  · intro k hk
-    rw [sigmaXNat, dif_pos hk, sigmaYNat, dif_pos hk, sigmaZNat, dif_pos hk, sigmaX_eq]
-  · intro k hk
-    rw [sigmaXNat, dif_pos hk, xString_succ k hk]
-  · intro k hk
-    rw [ZNat, dif_pos hk]
-    exact Z_mem_adjoin _
-  · intro k hk
-    rw [YNat, dif_pos hk]
-    exact Y_mem_adjoin _
+/-- **人手 Step 2 の二乗の式 `P_rP_r = I` を必要十分版 `NecSuf.string_mul_self` の特殊化として導出した形**
+（具体版は `sigmaXPrefixProduct_mul_self`）。渡すのは `P_0 = I`・`P_{r+1} = P_rσ_{r+1}^x`（`sigmaXPrefixProduct` の定義そのもの。`sigmaXNat` と同じ `if` の形なので `rfl`）、
+Step 1 の `σ_k^xσ_k^x = I`（`sigmaX_mul_self`）、相異なるサイトの可換性（`siteOp_mul_comm`）だけである。 -/
+theorem sigmaXPrefixProduct_mul_self_of_necSuf (r : ℕ) (hr : r ≤ M) :
+    sigmaXPrefixProduct M r * sigmaXPrefixProduct M r = 1 :=
+  NecSuf.string_mul_self (p := sigmaXPrefixProduct M) (x := sigmaXNat M) (N := M) rfl
+    (fun _ _ => rfl)
+    (fun n hn => by rw [sigmaXNat, dif_pos hn, sigmaX_mul_self])
+    (fun k n hk hnk => by
+      have hne : (⟨k, hk⟩ : Fin M) ≠ ⟨n, lt_trans hnk hk⟩ :=
+        fun he => absurd (Fin.mk.inj_iff.mp he) (by omega)
+      rw [sigmaXNat, dif_pos hk, sigmaXNat, dif_pos (lt_trans hnk hk), sigmaX, sigmaX,
+        siteOp_mul_comm hne])
+    r hr
 
-/-- 必要十分版 `NecSuf.local_mem` の特殊化: `σ^z_k, σ^y_k, σ^x_k ∈ 𝒜`。 -/
+/-- **人手 Step 2 の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）を必要十分版 `NecSuf.xl_mul_string_comm` の特殊化として導出した形**
+（具体版は `sigmaX_mul_sigmaXPrefixProduct_comm`）。 -/
+theorem sigmaX_mul_sigmaXPrefixProduct_comm_of_necSuf (k : Fin M) (r : ℕ) (hr : r ≤ (k : ℕ)) :
+    sigmaX k * sigmaXPrefixProduct M r = sigmaXPrefixProduct M r * sigmaX k := by
+  have h := NecSuf.xl_mul_string_comm (p := sigmaXPrefixProduct M) (x := sigmaXNat M) (N := M) rfl
+    (fun _ _ => rfl)
+    (fun k' n hk hnk => by
+      have hne : (⟨k', hk⟩ : Fin M) ≠ ⟨n, lt_trans hnk hk⟩ :=
+        fun he => absurd (Fin.mk.inj_iff.mp he) (by omega)
+      rw [sigmaXNat, dif_pos hk, sigmaXNat, dif_pos (lt_trans hnk hk), sigmaX, sigmaX,
+        siteOp_mul_comm hne])
+    (k : ℕ) k.isLt r hr
+  rwa [sigmaXNat, dif_pos k.isLt] at h
+
+/-- 人手 Step 2 の `σ^z_m = P_{m-1}Z_m` を、二乗の式の必要十分版から得た形（鎖は具体版 `sigmaZ_eq_sigmaXPrefixProduct_mul` と同じ）。 -/
+theorem sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf (k : Fin M) :
+    sigmaZ k = sigmaXPrefixProduct M (k : ℕ) * Z k := by
+  rw [Z_eq_sigmaXPrefixProduct_mul, ← mul_assoc,
+    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt k.isLt), identity_matrix_mul_tensorPow]
+
+/-- 人手 Step 2 の `σ^y_m = P_{m-1}Y_m` を、二乗の式の必要十分版から得た形。 -/
+theorem sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf (k : Fin M) :
+    sigmaY k = sigmaXPrefixProduct M (k : ℕ) * Y k := by
+  rw [Y_eq_sigmaXPrefixProduct_mul, ← mul_assoc,
+    sigmaXPrefixProduct_mul_self_of_necSuf _ (le_of_lt k.isLt), identity_matrix_mul_tensorPow]
+
+/-- **人手 Step 2 の `P_{m-1} ∈ 𝒜` の `r` の帰納法を必要十分版 `NecSuf.string_mem_of_previous` の特殊化として導出した形**
+（具体版は `sigmaXPrefixProduct_mem_adjoin`。部分モノイドとしての `𝒜` に渡す）。 -/
+theorem sigmaXPrefixProduct_mem_adjoin_of_necSuf (r : ℕ) (hr : r ≤ M)
+    (h : ∀ j : Fin M, (j : ℕ) < r → sigmaX j ∈ Algebra.adjoin ℂ (ZYSet M)) :
+    sigmaXPrefixProduct M r ∈ Algebra.adjoin ℂ (ZYSet M) :=
+  NecSuf.string_mem_of_previous (S := (Algebra.adjoin ℂ (ZYSet M)).toSubsemiring.toSubmonoid)
+    (p := sigmaXPrefixProduct M) (xl := sigmaXNat M) (N := M) rfl (fun _ _ => rfl) r hr
+    (fun j hj => by
+      have hjM : j < M := lt_of_lt_of_le hj hr
+      show sigmaXNat M j ∈ Algebra.adjoin ℂ (ZYSet M)
+      rw [sigmaXNat, dif_pos hjM]
+      exact h ⟨j, hjM⟩ hj)
+
+/-- 必要十分版 `NecSuf.local_mem` の特殊化: `σ^z_k, σ^y_k, σ^x_k ∈ 𝒜`（`p` は具体版と同じ `sigmaXPrefixProduct`）。 -/
 theorem sigma_mem_adjoin_of_necSuf (k : Fin M) :
     sigmaZ k ∈ Algebra.adjoin ℂ (ZYSet M) ∧ sigmaY k ∈ Algebra.adjoin ℂ (ZYSet M) ∧
       sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M) := by
-  have h := NecSuf.local_mem (S := Algebra.adjoin ℂ (ZYSet M)) (p := xString M)
+  have h := NecSuf.local_mem (S := Algebra.adjoin ℂ (ZYSet M)) (p := sigmaXPrefixProduct M)
     (z := ZNat M) (y := YNat M) (zl := sigmaZNat M) (yl := sigmaYNat M) (xl := sigmaXNat M)
-    (r := -Complex.I) (N := M) (xString_zero)
-    (by intro n hn; rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_eq_xString_mul])
-    (by intro n hn; rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_eq_xString_mul])
+    (r := -Complex.I) (N := M) rfl
+    (by intro n hn; rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf])
+    (by intro n hn; rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf])
     (by intro n hn; rw [sigmaXNat, dif_pos hn, sigmaYNat, dif_pos hn, sigmaZNat, dif_pos hn,
       sigmaX_eq])
-    (by intro n hn; rw [sigmaXNat, dif_pos hn, xString_succ n hn])
+    (fun _ _ => rfl)
     (by intro n hn; rw [ZNat, dif_pos hn]; exact Z_mem_adjoin _)
     (by intro n hn; rw [YNat, dif_pos hn]; exact Y_mem_adjoin _)
     (k : ℕ) k.isLt

@@ -1,0 +1,213 @@
+PASS M=1 積の表示 r=1 第 1 行 = 第 2 行
+PASS M=1 積の表示 r=1 第 2 行 = 第 3 行
+PASS M=1 積の表示 r=1 第 3 行 = 第 4 行
+PASS M=1 積の表示 r=1 第 4 行 = 第 5 行
+PASS M=1 k=1 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=1 k=1 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=1 k=1 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=1 k=1 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=1 二乗の式 r=0 第 1 行 = 第 2 行
+PASS M=1 二乗の式 r=0 第 2 行 = 第 3 行
+PASS M=1 二乗の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=1 二乗の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=1 二乗の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=1 二乗の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=1 二乗の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=1 二乗の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=1 二乗の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=1 二乗の式 一段 r=0 第 8 行 = 第 9 行
+PASS M=1 r=0: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=2 積の表示 r=1 第 1 行 = 第 2 行
+PASS M=2 積の表示 r=1 第 2 行 = 第 3 行
+PASS M=2 積の表示 r=1 第 3 行 = 第 4 行
+PASS M=2 積の表示 r=1 第 4 行 = 第 5 行
+PASS M=2 積の表示 一段 r=1 第 1 行 = 第 2 行
+PASS M=2 積の表示 一段 r=1 第 2 行 = 第 3 行
+PASS M=2 積の表示 一段 r=1 第 3 行 = 第 4 行
+PASS M=2 r=1: 帰納法の仮定（積の表示）
+PASS M=2 k=1 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=2 k=1 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=2 k=1 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=2 k=1 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=2 k=2 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=2 k=2 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=2 k=2 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=2 k=2 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=2 k=2 r=0: r+1 ≠ k
+PASS M=2 k=2 可換の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=2 k=2 可換の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=2 k=2 可換の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=2 k=2 可換の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=2 k=2 可換の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=2 k=2 可換の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=2 k=2 可換の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=2 k=2 r=0: 帰納法の仮定（可換の式）
+PASS M=2 k=2 r=0: 引いた distinct_site_pauli_matrices_commute の場合
+PASS M=2 二乗の式 r=0 第 1 行 = 第 2 行
+PASS M=2 二乗の式 r=0 第 2 行 = 第 3 行
+PASS M=2 二乗の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=2 二乗の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=2 二乗の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=2 二乗の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=2 二乗の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=2 二乗の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=2 二乗の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=2 二乗の式 一段 r=0 第 8 行 = 第 9 行
+PASS M=2 r=0: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=2 二乗の式 一段 r=1 第 1 行 = 第 2 行
+PASS M=2 二乗の式 一段 r=1 第 2 行 = 第 3 行
+PASS M=2 二乗の式 一段 r=1 第 3 行 = 第 4 行
+PASS M=2 二乗の式 一段 r=1 第 4 行 = 第 5 行
+PASS M=2 二乗の式 一段 r=1 第 5 行 = 第 6 行
+PASS M=2 二乗の式 一段 r=1 第 6 行 = 第 7 行
+PASS M=2 二乗の式 一段 r=1 第 7 行 = 第 8 行
+PASS M=2 二乗の式 一段 r=1 第 8 行 = 第 9 行
+PASS M=2 r=1: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=2 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=2 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=2 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=2 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=2 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=2 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=2 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=2 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=2 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=2 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=2 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=2 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=2 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=2 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=2 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=2 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=3 積の表示 r=1 第 1 行 = 第 2 行
+PASS M=3 積の表示 r=1 第 2 行 = 第 3 行
+PASS M=3 積の表示 r=1 第 3 行 = 第 4 行
+PASS M=3 積の表示 r=1 第 4 行 = 第 5 行
+PASS M=3 積の表示 一段 r=1 第 1 行 = 第 2 行
+PASS M=3 積の表示 一段 r=1 第 2 行 = 第 3 行
+PASS M=3 積の表示 一段 r=1 第 3 行 = 第 4 行
+PASS M=3 r=1: 帰納法の仮定（積の表示）
+PASS M=3 積の表示 一段 r=2 第 1 行 = 第 2 行
+PASS M=3 積の表示 一段 r=2 第 2 行 = 第 3 行
+PASS M=3 積の表示 一段 r=2 第 3 行 = 第 4 行
+PASS M=3 r=2: 帰納法の仮定（積の表示）
+PASS M=3 k=1 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=3 k=1 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=3 k=1 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=3 k=1 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=3 k=2 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=3 k=2 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=3 k=2 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=3 k=2 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=3 k=2 r=0: r+1 ≠ k
+PASS M=3 k=2 可換の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=3 k=2 可換の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=3 k=2 可換の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=3 k=2 可換の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=3 k=2 可換の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=3 k=2 可換の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=3 k=2 可換の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=3 k=2 r=0: 帰納法の仮定（可換の式）
+PASS M=3 k=2 r=0: 引いた distinct_site_pauli_matrices_commute の場合
+PASS M=3 k=3 可換の式 r=0 第 1 行 = 第 2 行
+PASS M=3 k=3 可換の式 r=0 第 2 行 = 第 3 行
+PASS M=3 k=3 可換の式 r=0 第 3 行 = 第 4 行
+PASS M=3 k=3 可換の式 r=0 第 4 行 = 第 5 行
+PASS M=3 k=3 r=0: r+1 ≠ k
+PASS M=3 k=3 可換の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=3 k=3 可換の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=3 k=3 可換の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=3 k=3 可換の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=3 k=3 可換の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=3 k=3 可換の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=3 k=3 可換の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=3 k=3 r=0: 帰納法の仮定（可換の式）
+PASS M=3 k=3 r=0: 引いた distinct_site_pauli_matrices_commute の場合
+PASS M=3 k=3 r=1: r+1 ≠ k
+PASS M=3 k=3 可換の式 一段 r=1 第 1 行 = 第 2 行
+PASS M=3 k=3 可換の式 一段 r=1 第 2 行 = 第 3 行
+PASS M=3 k=3 可換の式 一段 r=1 第 3 行 = 第 4 行
+PASS M=3 k=3 可換の式 一段 r=1 第 4 行 = 第 5 行
+PASS M=3 k=3 可換の式 一段 r=1 第 5 行 = 第 6 行
+PASS M=3 k=3 可換の式 一段 r=1 第 6 行 = 第 7 行
+PASS M=3 k=3 可換の式 一段 r=1 第 7 行 = 第 8 行
+PASS M=3 k=3 r=1: 帰納法の仮定（可換の式）
+PASS M=3 k=3 r=1: 引いた distinct_site_pauli_matrices_commute の場合
+PASS M=3 二乗の式 r=0 第 1 行 = 第 2 行
+PASS M=3 二乗の式 r=0 第 2 行 = 第 3 行
+PASS M=3 二乗の式 一段 r=0 第 1 行 = 第 2 行
+PASS M=3 二乗の式 一段 r=0 第 2 行 = 第 3 行
+PASS M=3 二乗の式 一段 r=0 第 3 行 = 第 4 行
+PASS M=3 二乗の式 一段 r=0 第 4 行 = 第 5 行
+PASS M=3 二乗の式 一段 r=0 第 5 行 = 第 6 行
+PASS M=3 二乗の式 一段 r=0 第 6 行 = 第 7 行
+PASS M=3 二乗の式 一段 r=0 第 7 行 = 第 8 行
+PASS M=3 二乗の式 一段 r=0 第 8 行 = 第 9 行
+PASS M=3 r=0: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=3 二乗の式 一段 r=1 第 1 行 = 第 2 行
+PASS M=3 二乗の式 一段 r=1 第 2 行 = 第 3 行
+PASS M=3 二乗の式 一段 r=1 第 3 行 = 第 4 行
+PASS M=3 二乗の式 一段 r=1 第 4 行 = 第 5 行
+PASS M=3 二乗の式 一段 r=1 第 5 行 = 第 6 行
+PASS M=3 二乗の式 一段 r=1 第 6 行 = 第 7 行
+PASS M=3 二乗の式 一段 r=1 第 7 行 = 第 8 行
+PASS M=3 二乗の式 一段 r=1 第 8 行 = 第 9 行
+PASS M=3 r=1: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=3 二乗の式 一段 r=2 第 1 行 = 第 2 行
+PASS M=3 二乗の式 一段 r=2 第 2 行 = 第 3 行
+PASS M=3 二乗の式 一段 r=2 第 3 行 = 第 4 行
+PASS M=3 二乗の式 一段 r=2 第 4 行 = 第 5 行
+PASS M=3 二乗の式 一段 r=2 第 5 行 = 第 6 行
+PASS M=3 二乗の式 一段 r=2 第 6 行 = 第 7 行
+PASS M=3 二乗の式 一段 r=2 第 7 行 = 第 8 行
+PASS M=3 二乗の式 一段 r=2 第 8 行 = 第 9 行
+PASS M=3 r=2: 引いた Step 1 の σ_k^xσ_k^x = I（k → r+1）
+PASS M=3 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=3 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=3 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=3 m=2 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=3 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=3 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=3 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=3 m=2 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=3 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=3 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=3 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=3 m=2 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=3 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=3 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=3 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=3 m=2 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=3 m=3 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=3 m=3 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=3 m=3 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=3 m=3 σ^z: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=3 m=3 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=3 m=3 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=3 m=3 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=3 m=3 P_(m-1)·(σ^z の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=3 m=3 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 1 行 = 第 2 行
+PASS M=3 m=3 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 2 行 = 第 3 行
+PASS M=3 m=3 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 3 行 = 第 4 行
+PASS M=3 m=3 σ^y: Jordan–Wigner 行列 = P_(m-1)σ_m 第 4 行 = 第 5 行
+PASS M=3 m=3 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 1 行 = 第 2 行
+PASS M=3 m=3 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 2 行 = 第 3 行
+PASS M=3 m=3 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 3 行 = 第 4 行
+PASS M=3 m=3 P_(m-1)·(σ^y の Jordan–Wigner 行列) 第 4 行 = 第 5 行
+PASS M=1: Z_1 = σ_1^z
+PASS M=1: Y_1 = σ_1^y
+PASS M=1 m=1 の σ_1^x 第 1 行 = 第 2 行
+PASS M=1 m=1 の σ_1^x 第 2 行 = 第 3 行
+PASS M=2: Z_1 = σ_1^z
+PASS M=2: Y_1 = σ_1^y
+PASS M=2 m=1 の σ_1^x 第 1 行 = 第 2 行
+PASS M=2 m=1 の σ_1^x 第 2 行 = 第 3 行
+PASS M=3: Z_1 = σ_1^z
+PASS M=3: Y_1 = σ_1^y
+PASS M=3 m=1 の σ_1^x 第 1 行 = 第 2 行
+PASS M=3 m=1 の σ_1^x 第 2 行 = 第 3 行
+PASS 否定の対照: 可換の式を同じサイトの σ^x と σ^z に当てると成り立たない
+PASS 否定の対照: P_1 の代わりに P_2 を掛けると σ_2^z に戻らない（P_(m-1) の添字を誤る）
+PASS 否定の対照: 可換でない 2 つの対合（同じサイトの σ^x と σ^z）の積では二乗の式が成り立たない（可換性の仮定を外すと偽になる例）
+-- Z_Y_generate_algebra の Step 2 の鎖: 211/211 PASS
+RESULT: PASS

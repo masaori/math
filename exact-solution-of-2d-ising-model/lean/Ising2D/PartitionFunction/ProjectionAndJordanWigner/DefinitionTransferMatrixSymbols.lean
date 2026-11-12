@@ -655,7 +655,8 @@ theorem xString_succ (m : ℕ) (h : m < M) :
     rw [if_neg (by omega : ¬ ((i : ℕ) < m + 1)), if_neg (by omega : ¬ ((i : ℕ) < m)),
       if_neg hne, mul_one]
 
-/-- `P_m P_m = I`（原文 Step 2 の `P_{m-1} P_{m-1} = I`）。 -/
+/-- `P_m P_m = I` を、クロネッカー積の因子ごとに `σ^xσ^x = I` を当てて示した形。
+人手 `Z_Y_generate_algebra` Step 2 の二乗の式の鎖と 1 対 1 の具体版は `sigmaXPrefixProduct_mul_self`（`ClaimZYGenerateAlgebra.lean`）。 -/
 @[simp]
 theorem xString_mul_self (m : ℕ) : xString M m * xString M m = 1 := by
   rw [xString, ← siteProd_mul]

@@ -6,7 +6,7 @@
 | | ファイル | 主要定理 |
 | --- | --- | --- |
 | 具体版 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` | `Ising2D.Z_Y_generate_algebra` |
-| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top` |
+| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top` |
 | 具体版の再導出 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebraFromNecSuf.lean` | `Ising2D.Z_Y_generate_algebra_of_necSuf` |
 
 この文書は、必要十分版を実際に書いて `lake build` を通した結果として判明したことだけを書く
@@ -47,6 +47,8 @@
 
 ### (c) Step 2（Jordan–Wigner 文字列の帰納法） — `NecSuf.string_mem` / `NecSuf.local_mem`
 
+手順は具体版（`sigma_mem_adjoin_all`・`sigma_mem_adjoin_first_site`・`sigma_mem_adjoin_of_previous_sigmaX`・`sigmaXPrefixProduct_mem_adjoin`）と同じで、外側を累積帰納法（仮定は `j < n` の `xl j ∈ S`）にし、`n = 0` は `zl 0 = z 0`・`yl 0 = y 0`（`p 0 = 1`）を読む枝、`n ≥ 1` はその中で `p n ∈ S` を `r` の帰納法で出す（`string_mem_of_previous`・`local_mem_of_previous`・`local_mem`）。`string_mem_of_previous` は `S` が部分モノイドであることだけを使う。
+
 **抽象化できた。** 仮定は次の形の漸化式と分解だけである（`R` は任意の可換半環）。
 
 ```
@@ -71,6 +73,23 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
   裏返した後の形（`zl n = p n * z n`）を仮定にとれば、以降どこにも対合性は現れない。
   対合性が効くのは「生成元の分解を局所元の分解へ変換する」1 箇所だけである。
 * **反交換関係は Step 2 の主張には全く効いていない。** 必要十分版の仮定に反交換関係は無い。
+
+### (d) Step 2 の準備（可換の式と二乗の式） — `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self`
+
+人手 Step 2 の `P_0 := I`・`P_r := P_{r-1}σ_r^x` について、可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と
+二乗の式 `P_rP_r = I` を同じ帰納法で示す（具体版は `Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm`・`Ising2D.sigmaXPrefixProduct_mul_self`）。
+仮定は次だけである。
+
+```
+[Monoid A]
+p 0 = 1
+p (n+1) = p n * x n                       -- P_{n+1} = P_n σ^x_{n+1}（0 始まり）
+x n * x n = 1                             -- σ^xσ^x = I
+n < k → x k * x n = x n * x k             -- 相異なる番号どうしの可換性（等式が対称なので n < k の形で書く）
+```
+
+* 使う代数の構造は結合則と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない（結合則を外すと偽になるかは確かめていない）。
+* `x n * x n = 1` も可換性も削れない（ファイルの節の冒頭に反例を書いた）。
 
 ---
 
@@ -113,9 +132,9 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 * 具体版 `Ising2D.siteProd_mem` は `Subalgebra ℂ (TensorPow M)` を相手にしているが、
   必要十分版 `NecSuf.map_mem_of_mulSingle_mem` は**部分半群**で足りる
   （加法もスカラー倍も単位元も不要）。
-* 具体版 Step 2 は `xString_mul_self`（`P_m P_m = I`）を帰納法の中で使う形に見えるが、
+* 具体版 Step 2 は `sigmaXPrefixProduct_mul_self`（`P_m P_m = I`）を帰納法の中で使う形に見えるが、
   実際には分解 `σ^z_m = P_m Z_m` を作る前処理でしか使っておらず、
-  帰納法本体は対合性なしで回る。
+  帰納法本体は対合性なしで回る。その `P_m P_m = I` 自体に効くのは (d) の仮定だけである。
 
 ---
 
@@ -136,22 +155,28 @@ lake build
 bash scripts/check-no-sorry.sh
 ```
 
-実行結果（2026-07-31 時点、`lake build` は 2990 ジョブすべて成功、`check-no-sorry.sh` は exit 0）:
+実行結果（2026-11-12 時点、`lake build` は 3446 ジョブすべて成功、`check-no-sorry.sh` は exit 0）:
 
 ```
-'Ising2D.NecSuf.string_mem' does not depend on any axioms
+'Ising2D.NecSuf.string_mem_of_previous' does not depend on any axioms
+'Ising2D.NecSuf.local_mem_of_previous' does not depend on any axioms
 'Ising2D.NecSuf.local_mem' does not depend on any axioms
+'Ising2D.NecSuf.string_mem' does not depend on any axioms
+'Ising2D.NecSuf.xl_mul_string_comm' does not depend on any axioms
+'Ising2D.NecSuf.string_mul_self' does not depend on any axioms
 'Ising2D.NecSuf.map_mem_of_mulSingle_mem' depends on axioms: [propext, Quot.sound]
 'Ising2D.Z_Y_generate_algebra_of_necSuf' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-Step 2 の必要十分版（`string_mem` / `local_mem`）が**公理に一切依存しない**ことは、
+（Step 2 の 6 行は 2026-11-12 に、累積帰納法の三段・可換の式・二乗の式へ組み直した後に `#print axioms` で取った出力。
+`map_mem_of_mulSingle_mem` の行は同じ日に `P_s` の帰納法へ書き直した後の出力。）
+
+Step 2 の必要十分版（`string_mem_of_previous` / `local_mem_of_previous` / `local_mem` / `string_mem` / `xl_mul_string_comm` / `string_mul_self`）が**公理に一切依存しない**ことは、
 上の「Step 2 に効いているのは漸化式と分解の形だけ」という主張の独立した裏づけになる
 （選択公理も命題外延性も使わずに証明が閉じている）。
 `map_mem_of_mulSingle_mem` が `Classical.choice` を使わないことも同様で、
-`P_s` の帰納法と、`φ` が積を保つことだけで閉じていることを示している
-（`map_mem_of_mulSingle_mem` の行は 2026-11-12 に `P_s` の帰納法へ書き直した後に確かめた出力）。
+`P_s` の帰納法と、`φ` が積を保つことだけで閉じていることを示している。
 
 `scripts/check-no-sorry.sh` の `targets` には本作業で追加した主要宣言
-（`NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.prefixProduct_eq_and_mem`, `NecSuf.map_mem_of_mulSingle_mem`,
+（`NecSuf.string_mem_of_previous`, `NecSuf.local_mem_of_previous`, `NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.xl_mul_string_comm`, `NecSuf.string_mul_self`, `NecSuf.prefixProduct_eq_and_mem`, `NecSuf.map_mem_of_mulSingle_mem`,
 `NecSuf.eq_top_of_span_eq_top`, `Ising2D.Z_Y_generate_algebra_of_necSuf` ほか）を登録済み。

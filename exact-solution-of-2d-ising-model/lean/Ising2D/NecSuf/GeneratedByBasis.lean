@@ -20,22 +20,24 @@
 | --- | --- | --- |
 | Step 3「全体を張る集合を全部含むから全体」 | `eq_top_of_span_eq_top` | 可換半環上の代数と部分多元環（＝積で閉じた部分加群）だけ |
 | Step 3 後半「`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
-| Step 2「Jordan–Wigner 文字列の帰納法」 | `string_mem`, `local_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
+| Step 2「Jordan–Wigner 文字列の帰納法」（外側の累積帰納法と、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法） | `string_mem_of_previous`, `local_mem_of_previous`, `local_mem`, `string_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
+| Step 2 の準備「可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`」 | `xl_mul_string_comm`, `string_mul_self` | モノイドであること、`x n * x n = 1`、相異なる番号どうしの可換性（下の節の冒頭） |
 
 ### 効いていないもの（一次情報: 下の証明が使っている補題がすべて）
 
 * **行列であること**: どの証明にも行列の成分・行列積・転置は現れない。
 * **係数が ℂ であること**: `R` は任意の可換半環でよい。`Complex.I` に相当する係数は
-  `string_mem` の `r : R` として抽象化されており、その値は一切使われない
+  `local_mem_of_previous`・`local_mem` の `r : R` として抽象化されており、その値は一切使われない
   （`Subalgebra.smul_mem` にそのまま渡すだけ）。
 * **テンソル積であること**: `map_mem_of_mulSingle_mem` が使うのは
   「サイトごとの元を並べた族へ積を保つ写像を適用する」ことだけで、
   クロネッカー積の成分公式も、サイト間の可換性も使わない。
   `φ` が単位元を保つことも、`A` の結合律も使わない（人手の帰納法は `P_1 := E_1` から始まり、
   `P_{s+1} := P_sE_{s+1}` と右から 1 つずつ掛けるだけなので、積の付け替えが起きない）。
-* **Pauli 行列の関係式**: `σ^x = -√-1 σ^y σ^z`、`P_m P_m = I`、反交換関係のいずれも仮定に現れない。
+* **Pauli 行列の関係式**: `string_mem`・`local_mem` の仮定には `σ^x = -√-1 σ^y σ^z`、`P_m P_m = I`、反交換関係のいずれも現れない。
   `string_mem` は「`σ^z_m = P_m Z_m`」という**分解の形**しか使わない
-  （具体版は `P_m P_m = I` からこの分解を導くが、分解を仮定してしまえば対合性は不要である）。
+  （具体版は `P_m P_m = I` からこの分解を導く。その `P_m P_m = I` の必要十分版が `string_mul_self` で、
+  使うのは `σ^xσ^x = I` と相異なる番号どうしの可換性だけである）。
 * **各サイトの次元が 2 であること**: どこにも 2 は現れない。
 * **各サイトの `N i` が同じであること**: `N i`（`MulOneClass`）はサイトごとに違ってよい。
   ただし添字は `Fin n` に固定し、その順序を使う（人手の `P_s` は第 `1` から第 `s` 因子という並びで定めるため）。
@@ -205,6 +207,26 @@ end SiteProduct
 
 添字は原文どおり `0, 1, …, N` の範囲に制限する（具体版のサイト数 `M` に当たる）。 -/
 
+section PrefixMem
+
+variable {A : Type*} [Monoid A] {S : Submonoid A} {p xl : ℕ → A} {N : ℕ}
+
+/-- **原文 Step 2 の `P_{m-1} ∈ 𝒜` の `r` の帰納法（必要十分版）**: `j < r` の `xl j` が `S` に属するなら `p r ∈ S`。
+具体版 `Ising2D.sigmaXPrefixProduct_mem_adjoin` と同じ手順（`p 0 = 1` と `one_mem`、`p (r+1) = p r * xl r` と `mul_mem`）。
+使うのは `S` が単位元と積で閉じること（部分モノイド）と漸化式だけで、加法もスカラー倍も使わない。 -/
+theorem string_mem_of_previous (hp0 : p 0 = 1) (hp : ∀ n, n < N → p (n + 1) = p n * xl n)
+    (r : ℕ) (hr : r ≤ N) (h : ∀ j, j < r → xl j ∈ S) : p r ∈ S := by
+  induction r with
+  | zero =>
+      rw [hp0]
+      exact one_mem S
+  | succ r ih =>
+      have hrN : r < N := hr
+      rw [hp r hrN]
+      exact mul_mem (ih (le_of_lt hrN) (fun j hj => h j (Nat.lt_succ_of_lt hj))) (h r (Nat.lt_succ_self r))
+
+end PrefixMem
+
 section StringInduction
 
 variable {R A : Type*} [CommSemiring R] [Semiring A] [Algebra R A]
@@ -219,30 +241,12 @@ variable (hy : ∀ n, n < N → y n ∈ S)
 
 include hp0 hzl hyl hxl hp hz hy
 
-/-- **原文 Step 2 の帰納法（必要十分版）**: 文字列 `p n` は部分多元環 `S` に属する。 -/
-theorem string_mem : ∀ n, n ≤ N → p n ∈ S := by
-  intro n
-  induction n with
-  | zero =>
-      intro _
-      rw [hp0]
-      exact one_mem S
-  | succ n ih =>
-      intro hn
-      have hnN : n < N := hn
-      have hpn : p n ∈ S := ih (le_of_lt hnN)
-      have hzln : zl n ∈ S := by
-        rw [hzl n hnN]; exact mul_mem hpn (hz n hnN)
-      have hyln : yl n ∈ S := by
-        rw [hyl n hnN]; exact mul_mem hpn (hy n hnN)
-      have hxln : xl n ∈ S := by
-        rw [hxl n hnN]; exact Subalgebra.smul_mem _ (mul_mem hyln hzln) _
-      rw [hp n hnN]
-      exact mul_mem hpn hxln
-
-/-- **原文 Step 2 の結論（必要十分版）**: 局所元 `σ^z_n, σ^y_n, σ^x_n` はすべて `S` に属する。 -/
-theorem local_mem (n : ℕ) (hn : n < N) : zl n ∈ S ∧ yl n ∈ S ∧ xl n ∈ S := by
-  have hpn : p n ∈ S := string_mem hp0 hzl hyl hxl hp hz hy n (le_of_lt hn)
+/-- **原文 Step 2 の外側の帰納法の一段（必要十分版）**: `j < n` の `xl j` が `S` に属するなら `zl n, yl n, xl n ∈ S`。
+具体版 `Ising2D.sigma_mem_adjoin_of_previous_sigmaX` と同じ手順。 -/
+theorem local_mem_of_previous (n : ℕ) (hn : n < N) (h : ∀ j, j < n → xl j ∈ S) :
+    zl n ∈ S ∧ yl n ∈ S ∧ xl n ∈ S := by
+  have hpn : p n ∈ S :=
+    string_mem_of_previous (S := S.toSubsemiring.toSubmonoid) hp0 hp n (le_of_lt hn) h
   have hzln : zl n ∈ S := by
     rw [hzl n hn]; exact mul_mem hpn (hz n hn)
   have hyln : yl n ∈ S := by
@@ -251,7 +255,106 @@ theorem local_mem (n : ℕ) (hn : n < N) : zl n ∈ S ∧ yl n ∈ S ∧ xl n �
   rw [hxl n hn]
   exact Subalgebra.smul_mem _ (mul_mem hyln hzln) _
 
+/-- **原文 Step 2 の結論（必要十分版）**: 外側の累積帰納法で、局所元 `σ^z_n, σ^y_n, σ^x_n` はすべて `S` に属する。
+具体版 `Ising2D.sigma_mem_adjoin_all` と同じ手順（`n = 0` は具体版 `sigma_mem_adjoin_first_site` と同じく
+`zl 0 = z 0`・`yl 0 = y 0` を読む枝、`n ≥ 1` は `local_mem_of_previous`）。 -/
+theorem local_mem : ∀ n : ℕ, n < N → zl n ∈ S ∧ yl n ∈ S ∧ xl n ∈ S := by
+  intro n
+  induction n using Nat.strong_induction_on with
+  | _ n ih =>
+      intro hn
+      rcases n with _ | n
+      · -- 人手の `m = 1`: `zl 0 = z 0`・`yl 0 = y 0`（`p 0 = 1`）と `xl 0 = r • (yl 0 * zl 0)`
+        have hz0 : zl 0 = z 0 := by rw [hzl 0 hn, hp0, one_mul]
+        have hy0 : yl 0 = y 0 := by rw [hyl 0 hn, hp0, one_mul]
+        have hzm : zl 0 ∈ S := by rw [hz0]; exact hz 0 hn
+        have hym : yl 0 ∈ S := by rw [hy0]; exact hy 0 hn
+        refine ⟨hzm, hym, ?_⟩
+        rw [hxl 0 hn]
+        exact Subalgebra.smul_mem _ (mul_mem hym hzm) _
+      · exact local_mem_of_previous hp0 hzl hyl hxl hp hz hy (n + 1) hn
+          (fun j hj => (ih j hj (lt_trans hj hn)).2.2)
+
+/-- 文字列 `p n` は部分多元環 `S` に属する（`string_mem_of_previous` に `local_mem` の結論を渡したもの）。 -/
+theorem string_mem (n : ℕ) (hn : n ≤ N) : p n ∈ S :=
+  string_mem_of_previous (S := S.toSubsemiring.toSubmonoid) hp0 hp n hn
+    (fun j hj => (local_mem hp0 hzl hyl hxl hp hz hy j (lt_of_lt_of_le hj hn)).2.2)
+
 end StringInduction
+
+/-! ## Step 2 の準備: 可換の式と二乗の式
+
+人手 Step 2 の `P_0 := I`・`P_r := P_{r-1}σ_r^x` に対する可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と
+二乗の式 `P_rP_r = I` を、同じ帰納法のまま取り出す。添字は 0 始まりで、人手の `σ_{r+1}^x` が `x r`、
+人手の `P_r` が `p r` である（人手の `k` は `k + 1`、条件 `r ≤ k - 1` は `r ≤ k`）。
+
+使うのは次だけである。
+* `A` が**モノイド**であること: 結合則（`mat_mult_associative` の段）と単位元の両側の単位性
+  （`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult` の段）。
+  加法・スカラー倍・`A` の乗法の可換性は使わない。
+* `x n * x n = 1`（人手 Step 1 の `σ_k^xσ_k^x = I`）。
+* 相異なる番号どうしの可換性 `x k * x n = x n * x k`（`distinct_site_pauli_matrices_commute` の段。等式が `k` と `n` について対称なので、
+  `n < k` の形で書いた）。
+
+削れないもの: `x n * x n = 1` を外すと `N = 1` の `x 0 = 2`（`A = ℕ` の乗法）で `p 1 * p 1 = 4 ≠ 1` となり偽になる。
+可換性を外すと、`x 0 * x 0 = x 1 * x 1 = 1` で可換でない 2 元（3 文字の置換の 2 つの互換）で `p 2 * p 2 = (x 0 * x 1)^2 ≠ 1` となり偽になる。
+結合則は鎖の括弧の付け替えの段（`mat_mult_associative` の段）そのものに使うので、`Monoid` の構造として仮定する。
+外すと偽になるかは確かめていない（状態台帳の件 (cl3c3j8n2d3d4c44p14)）。 -/
+
+section StringSquare
+
+variable {A : Type*} [Monoid A] {p x : ℕ → A} {N : ℕ}
+variable (hp0 : p 0 = 1)
+variable (hp : ∀ n, n < N → p (n + 1) = p n * x n)
+
+include hp0 hp
+
+/-- **人手 Step 2 の可換の式（必要十分版）**: `k < N` と `r ≤ k` について `x k * p r = p r * x k`。
+`r = 0` の 4 行と一段の 7 行は具体版 `Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm` と同じ順。 -/
+theorem xl_mul_string_comm (hcomm : ∀ k n, k < N → n < k → x k * x n = x n * x k)
+    (k : ℕ) (hk : k < N) : ∀ r : ℕ, r ≤ k → x k * p r = p r * x k
+  | 0, _ =>
+    calc x k * p 0
+        = x k * 1 := by rw [hp0]                  -- `P_0` の定義
+      _ = x k := mul_one _                         -- 右の単位元
+      _ = 1 * x k := (one_mul _).symm              -- 左の単位元を右辺から左辺へ
+      _ = p 0 * x k := by rw [hp0]                 -- `P_0` の定義を右辺から左辺へ
+  | r + 1, hr => by
+    have hrN : r < N := lt_of_lt_of_le (Nat.lt_of_succ_le hr) (le_of_lt hk)
+    have ih := xl_mul_string_comm hcomm k hk r (Nat.le_of_succ_le hr)
+    calc x k * p (r + 1)
+        = x k * (p r * x r) := by rw [hp r hrN]    -- `P_{r+1}` の定義
+      _ = (x k * p r) * x r := (mul_assoc _ _ _).symm      -- 結合則を右辺から左辺へ
+      _ = (p r * x k) * x r := by rw [ih]                 -- 帰納法の仮定
+      _ = p r * (x k * x r) := mul_assoc _ _ _             -- 結合則
+      _ = p r * (x r * x k) := by rw [hcomm k r hk (Nat.lt_of_succ_le hr)]  -- 相異なる番号どうしの可換性
+      _ = (p r * x r) * x k := (mul_assoc _ _ _).symm      -- 結合則を右辺から左辺へ
+      _ = p (r + 1) * x k := by rw [hp r hrN]              -- `P_{r+1}` の定義を右辺から左辺へ
+
+/-- **人手 Step 2 の二乗の式（必要十分版）**: `r ≤ N` について `p r * p r = 1`。
+`r = 0` の 2 行と一段の 8 行は具体版 `Ising2D.sigmaXPrefixProduct_mul_self` と同じ順。 -/
+theorem string_mul_self (hxx : ∀ n, n < N → x n * x n = 1)
+    (hcomm : ∀ k n, k < N → n < k → x k * x n = x n * x k) :
+    ∀ r : ℕ, r ≤ N → p r * p r = 1
+  | 0, _ =>
+    calc p 0 * p 0
+        = 1 * 1 := by rw [hp0]                     -- `P_0` の定義を 2 か所へ
+      _ = 1 := one_mul _                            -- 左の単位元
+  | r + 1, hr => by
+    have hrN : r < N := Nat.lt_of_succ_le hr
+    have ih := string_mul_self hxx hcomm r (le_of_lt hrN)
+    have hc := xl_mul_string_comm hp0 hp hcomm r hrN r le_rfl
+    calc p (r + 1) * p (r + 1)
+        = (p r * x r) * (p r * x r) := by rw [hp r hrN]   -- `P_{r+1}` の定義を 2 か所へ
+      _ = p r * (x r * (p r * x r)) := mul_assoc _ _ _     -- 結合則
+      _ = p r * ((x r * p r) * x r) := by rw [mul_assoc (x r)]  -- 結合則を右辺から左辺へ
+      _ = p r * ((p r * x r) * x r) := by rw [hc]          -- 可換の式（人手の `k → r+1`）
+      _ = p r * (p r * (x r * x r)) := by rw [mul_assoc (p r) (x r)]  -- 結合則
+      _ = p r * (p r * 1) := by rw [hxx r hrN]             -- `x r * x r = 1`
+      _ = p r * p r := by rw [mul_one]                     -- 右の単位元
+      _ = 1 := ih                                          -- 帰納法の仮定
+
+end StringSquare
 
 end NecSuf
 end Ising2D
