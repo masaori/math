@@ -79430,6 +79430,19 @@ n_{\mathrm{ct}}(\gamma_A)
                     labels: ["claim_reference_matching_constant_term"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/reference-matching-constant-term"],
+                    lean: [
+                      "Ising2DLambda.KacWard.referenceLongMatching_orientedPairs",
+                      "Ising2DLambda.KacWard.referenceLongEnumeration_spec",
+                      "Ising2DLambda.KacWard.referenceLongPairWord_eq_base",
+                      "Ising2DLambda.KacWard.sign_identity_eq_one",
+                      "Ising2DLambda.KacWard.referenceLongMatching_sign",
+                      "Ising2DLambda.KacWard.referenceLong_gaugePairWeight",
+                      "Ising2DLambda.KacWard.referenceLong_longContribution",
+                      "Ising2DLambda.KacWard.referenceMatching_constantTerm",
+                      "Ising2DLambda.NecSuf.KacWard.ascending_enumeration_sign_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.reference_pair_weight_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.reference_term_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
