@@ -1,5 +1,7 @@
 ## 直近の記録から移したもの
 
+2026-11-12（並列）: 横断のない閉歩道の回転位相を頂点単純閉路族へ還元する接触点分割の帰納法（`claim_crossing_free_contact_elimination_phase`）を、接触対数についての整礎帰納法で Lean 具体版と必要十分版で示した。接触対数の減少は実際の二本について、子の接触対を両方が同じ添字区間に属する元の接触対へ一対一に送って示した（`contact_split_walks_pair_descent`）。本文の基底に通過頂点の相異の根拠、帰納段に子の辺の標識の相異を書き足した。
+
 2026-11-11（並列）: 接触点分割の回転位相は交差形式で更新されること（`claim_crossing_free_contact_split_phase`）を、方向番号の四つ組の有限な場合分けによる表（`contact_local_table`）、実際の二本の回転数差（`contact_split_walk_turning_update`）、混合横断数の指示関数（`contact_split_index_mutual_crossing_eq_indicator`）と交差形式への移し替えで Lean 具体版に、回転数の $\mathrm{turn}(0)=0$・$\mathrm{turn}(3)=-\mathrm{turn}(1)$ と零を除いた群の位相だけを仮定する必要十分版に示し、`lean:` に登録した。`claim_contact_split_turning_update` に実際の閉歩道についての具体版を足した。
 
 2026-11-11（連続実行）: 内側セルを左に置く実際の単純閉歩道の出方向を、歩道の境界辺性・対角二セル配置の排除・四セル表の方向一意性から四方向とも Lean 具体版で同定した。必要十分版の局所方向一意性は既存。

@@ -13,7 +13,7 @@
   sgn(D) sgn(𝒟₀) の三等号                                `alternatingCycleWords_matching_sign`
 
 閉路の点列は仮定で受ける。実際の交互閉路（claim_tagged_difference_cycle_cover）がこの仮定を満たすことは
-台帳の次の行で示し、両者を組にして本文ブロックの `lean:` に登録する。
+`TaggedAlternatingCycleMatchingSign.lean` が示す。
 必要十分版は呼ばない。住処は有限集合と ℤ で、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.ReferenceMatchingConstantTerm
