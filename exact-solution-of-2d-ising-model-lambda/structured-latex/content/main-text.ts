@@ -53159,7 +53159,7 @@ q^{(k-1)(ka)}\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
                         displayMath(String.raw`\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
 \le\bigl(Z^{\mathrm{op}}_{ka,a}(q)\bigr)^k
 \le\left(\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
-\quad\bigl(\because\ \text{準備（自然数冪についての帰納法）。底は正}\bigr)`),
+\quad\bigl(\because\ \text{準備（自然数冪についての帰納法）、底は正}\bigr)`),
                         paragraph([
                           "を得る。第二座標方向の反復接合評価（",
                           ref("claim_open_rectangle_iterated_gluing_second_rational"),
@@ -83050,6 +83050,11 @@ D^{a,b}_L(x)
                 labels: ["claim_dispersion_inversion_invariant"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/dispersion-inversion-invariant"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_inversion_invariant",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_inversion_invariant_necSuf",
+                  "Ising2DLambda.KacWard.dispersion_inversion_invariant_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
@@ -83063,24 +83068,44 @@ D^{a,b}_L(x)
                 ],
                 proof: [
                   paragraph([
-                    ref("def_horizontal_twisted_modes"), " より ",
-                    math(String.raw`\varpi^L=(-1)^a\ne0`), " なので ",
-                    math(String.raw`\varpi\ne0`), " である。同様に ",
-                    ref("def_vertical_twisted_modes"), " より ",
-                    math(String.raw`\varsigma\ne0`), " である。まず逆元の冪を計算する。",
+                    math(String.raw`\varpi\ne0`), " を示す。", math(String.raw`\varpi=0`),
+                    " と仮定すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(-1)^a
+&=\varpi^L&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\bigr)\\
+&=0^L&&\bigl(\because\ \varpi=0\bigr)\\
+&=0&&\bigl(\because\ L\ge1\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり、", math(String.raw`(-1)^a\in\{1,-1\}`), " が零でないことに反する。従って ",
+                    math(String.raw`\varpi\ne0`), "。", math(String.raw`\varsigma=0`), " と仮定すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(-1)^b
+&=\varsigma^L&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&=0^L&&\bigl(\because\ \varsigma=0\bigr)\\
+&=0&&\bigl(\because\ L\ge1\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり同じく矛盾するので ", math(String.raw`\varsigma\ne0`),
+                    "。従って逆元 ", math(String.raw`\varpi^{-1},\varsigma^{-1}\in\overline{\mathbb Q}`),
+                    " が定まり、",
+                    math(String.raw`\varpi\cdot\varpi^{-1}=1`), "、",
+                    math(String.raw`\varsigma\cdot\varsigma^{-1}=1`), " を満たす。逆元の冪は",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 (\varpi^{-1})^L
 &=(\varpi^L)^{-1}&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
 &=((-1)^a)^{-1}&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\bigr)\\
-&=(-1)^a&&\bigl(\because\ a\in\{0,1\}\bigr).
+&=(-1)^a&&\bigl(\because\ (-1)^a\cdot(-1)^a=1\bigr).
 \end{aligned}`),
                   paragraph(["従って ", math(String.raw`\varpi^{-1}\in\mathcal U_a`), "（", ref("def_horizontal_twisted_modes"), "）。縦の成分でも"]),
                   displayMath(String.raw`\begin{aligned}
 (\varsigma^{-1})^L
 &=(\varsigma^L)^{-1}&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
 &=((-1)^b)^{-1}&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
-&=(-1)^b&&\bigl(\because\ b\in\{0,1\}\bigr).
+&=(-1)^b&&\bigl(\because\ (-1)^b\cdot(-1)^b=1\bigr).
 \end{aligned}`),
                   paragraph(["従って ", math(String.raw`\varsigma^{-1}\in\mathcal W_b`), "（", ref("def_vertical_twisted_modes"), "）。分散因子は横の逆元操作について"]),
                   displayMath(String.raw`\begin{aligned}
@@ -83088,7 +83113,7 @@ D^{a,b}_L(x)
 &=(1+x^2)^2-x(1-x^2)(\varpi^{-1}+(\varpi^{-1})^{-1}+\varsigma+\varsigma^{-1})
 &&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
 &=(1+x^2)^2-x(1-x^2)(\varpi^{-1}+\varpi+\varsigma+\varsigma^{-1})
-&&\bigl(\because\ (\varpi^{-1})^{-1}=\varpi\bigr)\\
+&&\bigl(\because\ \varpi\cdot\varpi^{-1}=1\text{ より }\varpi^{-1}\text{ の逆元は }\varpi\bigr)\\
 &=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr)\\
 &=\Delta(x;\varpi,\varsigma)
@@ -83100,7 +83125,7 @@ D^{a,b}_L(x)
 &=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma^{-1}+(\varsigma^{-1})^{-1})
 &&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
 &=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma^{-1}+\varsigma)
-&&\bigl(\because\ (\varsigma^{-1})^{-1}=\varsigma\bigr)\\
+&&\bigl(\because\ \varsigma\cdot\varsigma^{-1}=1\text{ より }\varsigma^{-1}\text{ の逆元は }\varsigma\bigr)\\
 &=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr)\\
 &=\Delta(x;\varpi,\varsigma)
