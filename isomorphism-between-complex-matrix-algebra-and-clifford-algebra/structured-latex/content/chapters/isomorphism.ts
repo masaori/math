@@ -8544,4 +8544,1361 @@ B_q(e'_{k+1},e'_r)
       ]),
     ],
   },
+  {
+    id: "isomorphism_claim_existence_of_square_root_in_complex_numbers",
+    kind: "claim",
+    title: { text: "ℂ の元は ℂ の中に平方根をもつ" },
+    labels: ["claim_existence_of_square_root_in_complex_numbers"],
+    statement: [
+      paragraph([
+        "すべての ", math(String.raw`z\in\mathbb{C}`), " について、", math(String.raw`s\cdot_{\mathbb{C}}s=z`), " を満たす ", math(String.raw`s\in\mathbb{C}`),
+        " が存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "この主張は ", math(String.raw`\mathbb{C}`), " の四則だけからは示せないので、", math(String.raw`\mathbb{R}`), " と ", math(String.raw`\mathbb{C}`), " の次の二つの事実を使う（",
+        math(String.raw`\mathbb{R}`), " への脱出。理由は二つ目の性質が ", math(String.raw`\mathbb{R}`), " の完備性に依ることである）。", math(String.raw`\mathbb{R}`),
+        " の中の加法・乗法・順序・除法は添字を付けずに書く。",
+      ]),
+      list([
+        [
+          "写像 ", math(String.raw`\rho:\mathbb{R}\to\mathbb{C}`), "（実数を ", math(String.raw`\mathbb{C}`), " の元へ送る写像）と元 ", math(String.raw`\mathrm{i}\in\mathbb{C}`),
+          " があり、すべての ", math(String.raw`x,y\in\mathbb{R}`), " について ", math(String.raw`\rho(x+y)=\rho(x)+_{\mathbb{C}}\rho(y)`), "、",
+          math(String.raw`\rho(xy)=\rho(x)\cdot_{\mathbb{C}}\rho(y)`), " を満たし、", math(String.raw`\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}`),
+          " を満たす。", math(String.raw`\mathbb{C}`), " の各元 ", math(String.raw`z`), " は、実数 ", math(String.raw`a,b`), " によって ",
+          math(String.raw`z=\rho(a)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\rho(b)`), " と書ける。",
+        ],
+        [
+          "0 以上の実数 ", math(String.raw`t`), " について、", math(String.raw`uu=t`), " を満たす 0 以上の実数 ", math(String.raw`u`),
+          " が存在する。これは ", math(String.raw`\mathbb{R}`), " の完備性（上に有界な空でない部分集合が上限をもつこと）から示される性質である。この ",
+          math(String.raw`u`), " を ", math(String.raw`\sqrt{t}`), " と書く。",
+        ],
+      ]),
+      paragraph([
+        math(String.raw`\rho`), " が加法を保つので、", math(String.raw`x\in\mathbb{R}`), " について ", math(String.raw`\rho(-x)=-_{\mathbb{C}}\rho(x)`),
+        " である（", math(String.raw`\rho(0)=\rho(0+0)`), " と ", math(String.raw`\rho(0+0)=\rho(0)+_{\mathbb{C}}\rho(0)`), " から ",
+        math(String.raw`\rho(0)=0_{\mathbb{C}}`), "、", math(String.raw`\rho(x)+_{\mathbb{C}}\rho(-x)=\rho(x+(-x))`), " と ", math(String.raw`\rho(x+(-x))=\rho(0)`), " から）。", math(String.raw`z\in\mathbb{C}`), " を任意に取り、実数 ", math(String.raw`a,b`), " で ",
+        math(String.raw`z=\rho(a)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\rho(b)`), " と書く。まず、次の二つを満たす実数 ", math(String.raw`u,v`),
+        " があることを示す。これを (★) と呼ぶ。",
+      ]),
+      displayMath(String.raw`uu-vv=a,\qquad 2uv=b`),
+      paragraph([
+        "（", math(String.raw`b=0`), "、", math(String.raw`a\ge 0`), " の場合）", math(String.raw`u:=\sqrt{a}`), "、", math(String.raw`v:=0`), " と置くと、",
+        math(String.raw`uu=a`), "、", math(String.raw`vv=0`), " より ", math(String.raw`uu-vv=a`), " であり、", math(String.raw`v=0`), " より ", math(String.raw`2uv=0`), "、これは ", math(String.raw`b`), " に等しい。",
+      ]),
+      paragraph([
+        "（", math(String.raw`b=0`), "、", math(String.raw`a<0`), " の場合）", math(String.raw`-a>0`), " なので ", math(String.raw`u:=0`), "、",
+        math(String.raw`v:=\sqrt{-a}`), " と置くと、", math(String.raw`uu=0`), "、", math(String.raw`vv=-a`), " より ", math(String.raw`uu-vv=a`), " であり、", math(String.raw`u=0`), " より ", math(String.raw`2uv=0`), "、これは ", math(String.raw`b`), " に等しい。",
+      ]),
+      paragraph([
+        "（", math(String.raw`b\neq 0`), " の場合）", math(String.raw`aa+bb\ge 0`), " なので ", math(String.raw`r:=\sqrt{aa+bb}`), " と置く。", math(String.raw`r\ge 0`),
+        "、", math(String.raw`rr=aa+bb`), " であり、", math(String.raw`b\neq 0`), " より ", math(String.raw`bb>0`), " なので ", math(String.raw`rr>aa`), " である。",
+        math(String.raw`r+a>0`), " を示す。", math(String.raw`a\ge 0`), " なら、", math(String.raw`rr>aa\ge 0`), " より ", math(String.raw`r\neq 0`), " なので ",
+        math(String.raw`r>0`), " であり、", math(String.raw`r+a\ge r>0`), " である。", math(String.raw`a<0`), " なら ", math(String.raw`-a>0`), " であり、仮に ",
+        math(String.raw`r\le -a`), " とすると、", math(String.raw`0\le r`), " と合わせて ", math(String.raw`rr\le(-a)(-a)`), " となり、", math(String.raw`(-a)(-a)=aa`), " なので ", math(String.raw`rr\le aa`), " となって ", math(String.raw`rr>aa`),
+        " に反するので、", math(String.raw`r>-a`), "、すなわち ", math(String.raw`r+a>0`), " である。",
+      ]),
+      paragraph([
+        math(String.raw`(r+a)/2>0`), " なので ", math(String.raw`u:=\sqrt{(r+a)/2}`), " と置く。", math(String.raw`uu=(r+a)/2>0`), " なので ", math(String.raw`u\neq 0`),
+        " であり、", math(String.raw`v:=b/(2u)`), " と置ける。このとき ", math(String.raw`2uv=b`), " である（", math(String.raw`v`), " の定義と ", math(String.raw`2u\neq 0`), " での約分）。また次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+uu-vv
+&=\frac{r+a}{2}-\frac{b}{2u}\cdot\frac{b}{2u}
+&&\left(\because\ u,\ v\ \text{の定義}\right)\\
+&=\frac{r+a}{2}-\frac{bb}{4\,uu}
+&&\left(\because\ \text{分数の積}\right)\\
+&=\frac{r+a}{2}-\frac{bb}{4\cdot\frac{r+a}{2}}
+&&\left(\because\ uu=(r+a)/2\right)\\
+&=\frac{r+a}{2}-\frac{bb}{2(r+a)}
+&&\left(\because\ 4\cdot\tfrac{r+a}{2}=2(r+a)\right)\\
+&=\frac{(r+a)(r+a)-bb}{2(r+a)}
+&&\left(\because\ \text{通分}\right)\\
+&=\frac{rr+2ar+aa-bb}{2(r+a)}
+&&\left(\because\ \text{展開}\right)\\
+&=\frac{(aa+bb)+2ar+aa-bb}{2(r+a)}
+&&\left(\because\ rr=aa+bb\right)\\
+&=\frac{2a(r+a)}{2(r+a)}
+&&\left(\because\ \text{同類項をまとめる}\right)\\
+&=a
+&&\left(\because\ 2(r+a)\neq 0\ \text{で約分}\right).
+\end{aligned}`),
+      paragraph([
+        "これで (★) が示された。", math(String.raw`A:=\rho(u)`), "、", math(String.raw`B:=\rho(v)`), "、", math(String.raw`s:=A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}B\in\mathbb{C}`),
+        " と置くと、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s\cdot_{\mathbb{C}}s
+&=(A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}B)\cdot_{\mathbb{C}}(A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}B)
+&&\left(\because\ s,\ A,\ B\ \text{の定義}\right)\\
+&=A\cdot_{\mathbb{C}}(A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}B)+_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}B)\cdot_{\mathbb{C}}(A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}B)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=\bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}A\cdot_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}B)\bigr)+_{\mathbb{C}}\bigl((\mathrm{i}\cdot_{\mathbb{C}}B)\cdot_{\mathbb{C}}A+_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}B)\cdot_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}B)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則（二か所に適用）}\right)\\
+&=\bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}(A\cdot_{\mathbb{C}}B)\bigr)+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}A)+_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}B)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則と交換法則（三か所に適用）}\right)\\
+&=\bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}(A\cdot_{\mathbb{C}}B)\bigr)+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}A)+_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}B)\bigr)
+&&\left(\because\ \mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}\right)\\
+&=\bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}(A\cdot_{\mathbb{C}}B)\bigr)+_{\mathbb{C}}\Bigl(\mathrm{i}\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}A)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}(B\cdot_{\mathbb{C}}B)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ (-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}z=-_{\mathbb{C}}z\right)\\
+&=\Bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}\bigl(-_{\mathbb{C}}(B\cdot_{\mathbb{C}}B)\bigr)\Bigr)+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{\mathbb{C}}(A\cdot_{\mathbb{C}}B)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}(B\cdot_{\mathbb{C}}A)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則と交換法則}\right)\\
+&=\Bigl(A\cdot_{\mathbb{C}}A+_{\mathbb{C}}\bigl(-_{\mathbb{C}}(B\cdot_{\mathbb{C}}B)\bigr)\Bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl(A\cdot_{\mathbb{C}}B+_{\mathbb{C}}B\cdot_{\mathbb{C}}A\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=\Bigl(\rho(uu)+_{\mathbb{C}}\bigl(-_{\mathbb{C}}\rho(vv)\bigr)\Bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl(\rho(uv)+_{\mathbb{C}}\rho(vu)\bigr)
+&&\left(\because\ \rho\ \text{は乗法を保つ（四か所に適用）}\right)\\
+&=\bigl(\rho(uu)+_{\mathbb{C}}\rho(-vv)\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl(\rho(uv)+_{\mathbb{C}}\rho(vu)\bigr)
+&&\left(\because\ \rho(-x)=-_{\mathbb{C}}\rho(x)\right)\\
+&=\bigl(\rho(uu)+_{\mathbb{C}}\rho(-vv)\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\rho(uv+vu)
+&&\left(\because\ \rho\ \text{は加法を保つ}\right)\\
+&=\rho(uu-vv)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\rho(2uv)
+&&\left(\because\ \rho\ \text{は加法を保つ。}uv+vu=2uv\right)\\
+&=\rho(a)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\rho(b)
+&&\left(\because\ (\bigstar)\right)\\
+&=z
+&&\left(\because\ a,\ b\ \text{の取り方}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_nonzero_scalar_multiples_of_basis_members_form_basis",
+    kind: "claim",
+    title: { text: "基底の各元を 0 でないスカラーで倍した族は基底である" },
+    labels: ["claim_nonzero_scalar_multiples_of_basis_members_form_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`), " を ", math(String.raw`V`), " の基底（", ref("def_basis"), "）とし、", math(String.raw`b_k:=b(k)`),
+        " と書く。", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`t_k\in\mathbb{C}`), " が一つずつ与えられ、すべての ",
+        math(String.raw`k`), " について ", math(String.raw`t_k\neq 0_{\mathbb{C}}`), " であるとする。番号付けた族 ", math(String.raw`b':\{1,\dots,n\}\to V`), " を ",
+        math(String.raw`b'_k:=t_k\cdot_V b_k`), " で定める。このとき ", math(String.raw`b'`), " は ", math(String.raw`V`), " の基底である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "各 ", math(String.raw`k`), " について、", math(String.raw`t_k`), " の ", math(String.raw`\mathbb{C}`), " の中の乗法の逆元を ", math(String.raw`t_k^{-1}`), " と書く（",
+        math(String.raw`t_k\neq 0_{\mathbb{C}}`), " なので存在する）。",
+      ]),
+      paragraph([
+        "（一次独立）", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\nu_k\in\mathbb{C}`), " が与えられ、",
+        math(String.raw`\sum_{k=1}^{n}\nu_k\cdot_V b'_k=0_V`), " が成り立つとする。準備として、各 ", math(String.raw`k`), " について次の等式を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_k\cdot_V b'_k
+&=\nu_k\cdot_V(t_k\cdot_V b_k)
+&&\left(\because\ b'\ \text{の定義}\right)\\
+&=(\nu_k\cdot_{\mathbb{C}}t_k)\cdot_V b_k
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0_V
+&=\sum_{k=1}^{n}\nu_k\cdot_V b'_k
+&&\left(\because\ \text{仮定}\right)\\
+&=\sum_{k=1}^{n}(\nu_k\cdot_{\mathbb{C}}t_k)\cdot_V b_k
+&&\left(\because\ \text{準備の等式を各項に適用。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`b`), " は一次独立なので（", ref("def_basis"), "）、すべての ", math(String.raw`k`), " について ", math(String.raw`\nu_k\cdot_{\mathbb{C}}t_k=0_{\mathbb{C}}`),
+        " である（", ref("def_linear_independence"), "）。したがって次が成り立ち、", math(String.raw`b'`), " は一次独立である（", ref("def_linear_independence"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_k
+&=\nu_k\cdot_{\mathbb{C}}(t_k\cdot_{\mathbb{C}}t_k^{-1})
+&&\left(\because\ t_k^{-1}\ \text{は}\ t_k\ \text{の乗法の逆元}\right)\\
+&=(\nu_k\cdot_{\mathbb{C}}t_k)\cdot_{\mathbb{C}}t_k^{-1}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}t_k^{-1}
+&&\left(\because\ \nu_k\cdot_{\mathbb{C}}t_k=0_{\mathbb{C}}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "（張る）", math(String.raw`x\in V`), " を任意に取る。", math(String.raw`b`), " は ", math(String.raw`V`), " を張るので（", ref("def_basis"), "）、",
+        math(String.raw`\sum_{k=1}^{n}\mu_k\cdot_V b_k=x`), " を満たす ", math(String.raw`\mu_k\in\mathbb{C}`), " が取れる（", ref("def_spanning_family"), "）。",
+        math(String.raw`\lambda_k:=\mu_k\cdot_{\mathbb{C}}t_k^{-1}`), " と置く。準備として、各 ", math(String.raw`k`), " について次の等式を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_k\cdot_V b'_k
+&=(\mu_k\cdot_{\mathbb{C}}t_k^{-1})\cdot_V(t_k\cdot_V b_k)
+&&\left(\because\ \lambda_k,\ b'_k\ \text{の定義}\right)\\
+&=\bigl((\mu_k\cdot_{\mathbb{C}}t_k^{-1})\cdot_{\mathbb{C}}t_k\bigr)\cdot_V b_k
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(\mu_k\cdot_{\mathbb{C}}(t_k^{-1}\cdot_{\mathbb{C}}t_k)\bigr)\cdot_V b_k
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(\mu_k\cdot_{\mathbb{C}}1_{\mathbb{C}})\cdot_V b_k
+&&\left(\because\ t_k^{-1}\ \text{は}\ t_k\ \text{の乗法の逆元}\right)\\
+&=\mu_k\cdot_V b_k
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}\lambda_k\cdot_V b'_k
+&=\sum_{k=1}^{n}\mu_k\cdot_V b_k
+&&\left(\because\ \text{準備の等式を各項に適用。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=x
+&&\left(\because\ \mu_k\ \text{の取り方}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`b'`), " は ", math(String.raw`V`), " を張る（", ref("def_spanning_family"), "）。二つを合わせて ", math(String.raw`b'`), " は基底である（",
+        ref("def_basis"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_existence_of_orthonormal_basis_for_nondegenerate_quadratic_form",
+    kind: "claim",
+    title: { text: "基底をもつ ℂ-線型空間の上の非退化な二次形式には、どの元での値も 1 の直交基底がある" },
+    labels: ["claim_existence_of_orthonormal_basis_for_nondegenerate_quadratic_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`), " を ", math(String.raw`V`), " の基底（", ref("def_basis"), "）、", math(String.raw`q`), " を ", math(String.raw`V`),
+        " 上の非退化な二次形式（", ref("def_nondegenerate_quadratic_form"), "）、", math(String.raw`B_q`), " をそれに付随する双線型形式とする。このとき、",
+        math(String.raw`V`), " の基底 ", math(String.raw`e:\{1,\dots,n\}\to V`), "（", math(String.raw`e_i:=e(i)`), "）であって、次の二つを満たすものが存在する。",
+      ]),
+      list([
+        [math(String.raw`i,j\in\{1,\dots,n\}`), "、", math(String.raw`i\neq j`), " ならば ", math(String.raw`B_q(e_i,e_j)=0_{\mathbb{C}}`)],
+        [math(String.raw`i\in\{1,\dots,n\}`), " ならば ", math(String.raw`q(e_i)=1_{\mathbb{C}}`)],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_existence_of_orthogonal_basis_for_nondegenerate_quadratic_form"), " により、", math(String.raw`V`), " の基底 ", math(String.raw`\tilde e:\{1,\dots,n\}\to V`),
+        " で、", math(String.raw`i\neq j`), " なら ", math(String.raw`B_q(\tilde e_i,\tilde e_j)=0_{\mathbb{C}}`), "、すべての ", math(String.raw`i`), " について ",
+        math(String.raw`q(\tilde e_i)\neq 0_{\mathbb{C}}`), " を満たすものがある。各 ", math(String.raw`k\in\{1,\dots,n\}`), " について、",
+        math(String.raw`s_k\cdot_{\mathbb{C}}s_k=q(\tilde e_k)`), " を満たす ", math(String.raw`s_k\in\mathbb{C}`), " を一つ選ぶ（",
+        ref("claim_existence_of_square_root_in_complex_numbers"), "）。", math(String.raw`s_k=0_{\mathbb{C}}`), " なら ", math(String.raw`q(\tilde e_k)=0_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}`), " であり、", math(String.raw`\mathbb{C}`),
+        " の中で ", math(String.raw`0_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}`), " なので ", math(String.raw`q(\tilde e_k)=0_{\mathbb{C}}`), " となって矛盾するので、", math(String.raw`s_k\neq 0_{\mathbb{C}}`), " である。", math(String.raw`t_k:=s_k^{-1}`), "（", math(String.raw`\mathbb{C}`),
+        " の中の乗法の逆元）と置くと、", math(String.raw`t_k\cdot_{\mathbb{C}}s_k=1_{\mathbb{C}}\neq 0_{\mathbb{C}}`), " なので ", math(String.raw`t_k\neq 0_{\mathbb{C}}`),
+        " である。", math(String.raw`e_k:=t_k\cdot_V\tilde e_k`), " と置くと、", math(String.raw`e`), " は ", math(String.raw`V`), " の基底である（",
+        ref("claim_nonzero_scalar_multiples_of_basis_members_form_basis"), "）。",
+      ]),
+      paragraph(["（値が 1 であること）", math(String.raw`i\in\{1,\dots,n\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+q(e_i)
+&=q(t_i\cdot_V\tilde e_i)
+&&\left(\because\ e_i\ \text{の定義}\right)\\
+&=t_i\cdot_{\mathbb{C}}\bigl(t_i\cdot_{\mathbb{C}}q(\tilde e_i)\bigr)
+&&\left(\because\ \blkref{def_quadratic_form}\ \text{の一つ目の条件}\right)\\
+&=t_i\cdot_{\mathbb{C}}\bigl(t_i\cdot_{\mathbb{C}}(s_i\cdot_{\mathbb{C}}s_i)\bigr)
+&&\left(\because\ s_i\ \text{の取り方}\right)\\
+&=(t_i\cdot_{\mathbb{C}}s_i)\cdot_{\mathbb{C}}(t_i\cdot_{\mathbb{C}}s_i)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則と交換法則}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ t_i\ \text{は}\ s_i\ \text{の乗法の逆元}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph(["（直交すること）", math(String.raw`i,j\in\{1,\dots,n\}`), "、", math(String.raw`i\neq j`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+B_q(e_i,e_j)
+&=B_q(t_i\cdot_V\tilde e_i,\ t_j\cdot_V\tilde e_j)
+&&\left(\because\ e_i,\ e_j\ \text{の定義}\right)\\
+&=t_i\cdot_{\mathbb{C}}B_q(\tilde e_i,\ t_j\cdot_V\tilde e_j)
+&&\left(\because\ B_q(\bullet,t_j\cdot_V\tilde e_j)\ \text{は線型形式。}\blkref{def_quadratic_form}\text{、}\blkref{def_linear_form}\right)\\
+&=t_i\cdot_{\mathbb{C}}\bigl(t_j\cdot_{\mathbb{C}}B_q(\tilde e_i,\tilde e_j)\bigr)
+&&\left(\because\ B_q(\tilde e_i,\bullet)\ \text{は線型形式。}\blkref{claim_polarization_of_quadratic_form_is_linear_in_second_argument}\text{、}\blkref{def_linear_form}\right)\\
+&=t_i\cdot_{\mathbb{C}}(t_j\cdot_{\mathbb{C}}0_{\mathbb{C}})
+&&\left(\because\ \tilde e\ \text{の取り方と}\ i\neq j\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ z\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\ \text{（二か所に適用）}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_quadratic_form_of_linear_combination_of_orthogonal_family",
+    kind: "claim",
+    title: { text: "互いに直交する族の線型結合での二次形式の値は、係数の平方と値の積の和である" },
+    labels: ["claim_quadratic_form_of_linear_combination_of_orthogonal_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`q`), " を ", math(String.raw`V`),
+        " 上の二次形式（", ref("def_quadratic_form"), "）、", math(String.raw`B_q`), " をそれに付随する双線型形式、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), "、",
+        math(String.raw`e:\{1,\dots,n\}\to V`), " を ", math(String.raw`V`), " の元の番号付けた族（", ref("def_linear_independence"), "）とし、",
+        math(String.raw`e_k:=e(k)`), " と書く。", math(String.raw`i,j\in\{1,\dots,n\}`), "、", math(String.raw`i\neq j`), " ならば ",
+        math(String.raw`B_q(e_i,e_j)=0_{\mathbb{C}}`), " であるとする。", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ",
+        math(String.raw`\nu_k\in\mathbb{C}`), " が一つずつ与えられているとする。このとき、線型結合（", ref("def_linear_combination"), "）と ",
+        math(String.raw`\mathbb{C}`), " の中の番号順の和（", ref("def_ordered_sum_in_complex_numbers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`q\left(\sum_{k=1}^{n}\nu_k\cdot_V e_k\right)=\sum_{\mathbb{C},\,k=1}^{n}\nu_k\cdot_{\mathbb{C}}\bigl(\nu_k\cdot_{\mathbb{C}}q(e_k)\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m\in\{0,1,\dots,n\}`), " について、", ref("def_linear_combination"), " が帰納的に定める ", math(String.raw`V`), " の元を ", math(String.raw`G_m`),
+        "、", math(String.raw`\alpha_k:=\nu_k\cdot_{\mathbb{C}}(\nu_k\cdot_{\mathbb{C}}q(e_k))`), " について ", ref("def_ordered_sum_in_complex_numbers"),
+        " が帰納的に定める ", math(String.raw`\mathbb{C}`), " の元を ", math(String.raw`S_m`), " とする。主張は ", math(String.raw`q(G_n)=S_n`), " である。",
+        "準備として、次の二つを置く。",
+      ]),
+      paragraph(["一つ目は ", math(String.raw`q(0_V)=0_{\mathbb{C}}`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+q(0_V)
+&=q(0_{\mathbb{C}}\cdot_V 0_V)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}q(0_V)\bigr)
+&&\left(\because\ \blkref{def_quadratic_form}\ \text{の一つ目の条件}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "二つ目は、", math(String.raw`m\in\{1,\dots,n\}`), " と ", math(String.raw`j\in\{0,1,\dots,m-1\}`), " について ", math(String.raw`B_q(G_j,e_m)=0_{\mathbb{C}}`),
+        " であることである。", math(String.raw`m`), " を固定し、", math(String.raw`j`), " についての帰納法で示す。", math(String.raw`B_q(\bullet,e_m)`), " は ",
+        math(String.raw`V`), " 上の線型形式である（", ref("def_quadratic_form"), "）。", math(String.raw`j=0`), " のときは ",
+        math(String.raw`G_0=0_V`), " であり（", ref("def_linear_combination"), "）、", math(String.raw`B_q(0_V,e_m)=0_{\mathbb{C}}`), " なので（", ref("claim_linear_form_sends_zero_vector_to_zero"),
+        "）、", math(String.raw`B_q(G_0,e_m)=0_{\mathbb{C}}`), " である。", math(String.raw`1\le j\le m-1`), " で ", math(String.raw`B_q(G_{j-1},e_m)=0_{\mathbb{C}}`), " とすると、", math(String.raw`j\neq m`), " なので次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_q(G_j,e_m)
+&=B_q\bigl(G_{j-1}+_V\nu_j\cdot_V e_j,\ e_m\bigr)
+&&\left(\because\ \blkref{def_linear_combination}\right)\\
+&=B_q(G_{j-1},e_m)+_{\mathbb{C}}\nu_j\cdot_{\mathbb{C}}B_q(e_j,e_m)
+&&\left(\because\ B_q(\bullet,e_m)\ \text{は加法とスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}\nu_j\cdot_{\mathbb{C}}B_q(e_j,e_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}\nu_j\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ j\neq m\ \text{なので主張の仮定}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ z\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\ \text{と加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`q(G_m)=S_m`), " を ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のときは、", math(String.raw`G_0=0_V`), "、",
+        math(String.raw`S_0=0_{\mathbb{C}}`), " と一つ目の準備の等式から成り立つ。", math(String.raw`1\le m\le n`), " で ", math(String.raw`q(G_{m-1})=S_{m-1}`),
+        " とすると次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q(G_m)
+&=q\bigl(G_{m-1}+_V\nu_m\cdot_V e_m\bigr)
+&&\left(\because\ \blkref{def_linear_combination}\right)\\
+&=\Bigl(q(G_{m-1})+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}\bigl(\nu_m\cdot_{\mathbb{C}}q(e_m)\bigr)\Bigr)+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}B_q(G_{m-1},e_m)
+&&\left(\because\ \blkref{claim_quadratic_form_at_sum_with_scalar_multiple}\right)\\
+&=\Bigl(S_{m-1}+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}\bigl(\nu_m\cdot_{\mathbb{C}}q(e_m)\bigr)\Bigr)+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}B_q(G_{m-1},e_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\bigl(S_{m-1}+_{\mathbb{C}}\alpha_m\bigr)+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}B_q(G_{m-1},e_m)
+&&\left(\because\ \alpha_m\ \text{の定義}\right)\\
+&=\bigl(S_{m-1}+_{\mathbb{C}}\alpha_m\bigr)+_{\mathbb{C}}\nu_m\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \text{二つ目の準備の等式で}\ j:=m-1\right)\\
+&=S_{m-1}+_{\mathbb{C}}\alpha_m
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ z\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\ \text{と加法の単位元}\right)\\
+&=S_m
+&&\left(\because\ \blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=n`), " とすれば、", math(String.raw`G_n=\sum_{k=1}^{n}\nu_k\cdot_V e_k`), "、", math(String.raw`S_n=\sum_{\mathbb{C},\,k=1}^{n}\alpha_k`),
+        " なので主張が成り立つ。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_rearranging_sum_of_two_sums_in_vector_space",
+    kind: "claim",
+    title: { text: "二つの和の和は、項を入れ替えた二つの和の和に等しい" },
+    labels: ["claim_rearranging_sum_of_two_sums_in_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）とする。すべての ", math(String.raw`x_1,x_2,y_1,y_2\in V`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`(x_1+_V x_2)+_V(y_1+_V y_2)=(x_1+_V y_1)+_V(x_2+_V y_2)`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(x_1+_V x_2)+_V(y_1+_V y_2)
+&=x_1+_V\bigl(x_2+_V(y_1+_V y_2)\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=x_1+_V\bigl((x_2+_V y_1)+_V y_2\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=x_1+_V\bigl((y_1+_V x_2)+_V y_2\bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=x_1+_V\bigl(y_1+_V(x_2+_V y_2)\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=(x_1+_V y_1)+_V(x_2+_V y_2)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_map_by_coordinates_and_family",
+    kind: "definition",
+    title: { text: "基底の座標を係数にした、族の線型結合の写像" },
+    labels: ["def_map_by_coordinates_and_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " と ", math(String.raw`(U,+_U,\cdot_U,0_U)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`b:\{1,\dots,n\}\to V`), " を ", math(String.raw`V`), " の基底（", ref("def_basis"), "）、",
+        math(String.raw`u:\{1,\dots,n\}\to U`), " を ", math(String.raw`U`), " の元の番号付けた族（", ref("def_linear_independence"), "）とし、",
+        math(String.raw`b_k:=b(k)`), "、", math(String.raw`u_k:=u(k)`), " と書く。", math(String.raw`k\in\{1,\dots,n\}`), " について、", math(String.raw`\beta^{b}_k:V\to\mathbb{C}`),
+        " を ", math(String.raw`b`), " についての第 ", math(String.raw`k`), " 座標の写像（", ref("claim_coordinate_map_is_linear_form"), "）とする。写像 ",
+        math(String.raw`L_{b,u}:V\to U`), " を次で定める。",
+      ]),
+      displayMath(String.raw`L_{b,u}(x):=\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_U u_k\qquad(x\in V)`),
+      paragraph([
+        "右辺は ", math(String.raw`U`), " の中の線型結合（", ref("def_linear_combination"), "）であり、", math(String.raw`\beta^{b}_k(x)\in\mathbb{C}`), " なので ",
+        math(String.raw`U`), " の元を一つ定める。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_by_coordinates_and_family_is_linear_map",
+    kind: "claim",
+    title: { text: "基底の座標を係数にした、族の線型結合の写像は線型写像である" },
+    labels: ["claim_map_by_coordinates_and_family_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), "、", math(String.raw`U`), "、", math(String.raw`b`), "、", math(String.raw`u`), "、", math(String.raw`L_{b,u}`), " を ",
+        ref("def_map_by_coordinates_and_family"), " のものとする。このとき ", math(String.raw`L_{b,u}`), " は ", math(String.raw`V`), " から ", math(String.raw`U`),
+        " への線型写像（", ref("def_linear_map"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y\in V`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意に取る。各 ", math(String.raw`\beta^{b}_k`), " は ", math(String.raw`V`),
+        " 上の線型形式なので（", ref("claim_coordinate_map_is_linear_form"), "）、各 ", math(String.raw`k`), " について ",
+        math(String.raw`\beta^{b}_k(x+_V y)=\beta^{b}_k(x)+_{\mathbb{C}}\beta^{b}_k(y)`), "、", math(String.raw`\beta^{b}_k(\lambda\cdot_V x)=\lambda\cdot_{\mathbb{C}}\beta^{b}_k(x)`),
+        " である（", ref("def_linear_form"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_{b,u}(x+_V y)
+&=\sum_{k=1}^{n}\beta^{b}_k(x+_V y)\cdot_U u_k
+&&\left(\because\ \blkref{def_map_by_coordinates_and_family}\right)\\
+&=\sum_{k=1}^{n}\bigl(\beta^{b}_k(x)+_{\mathbb{C}}\beta^{b}_k(y)\bigr)\cdot_U u_k
+&&\left(\because\ \beta^{b}_k\ \text{は加法を保つ（各項に適用）。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\left(\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_U u_k\right)+_U\left(\sum_{k=1}^{n}\beta^{b}_k(y)\cdot_U u_k\right)
+&&\left(\because\ \blkref{claim_sum_of_linear_combinations_of_same_family}\right)\\
+&=L_{b,u}(x)+_U L_{b,u}(y)
+&&\left(\because\ \blkref{def_map_by_coordinates_and_family}\ \text{を二か所に適用}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+L_{b,u}(\lambda\cdot_V x)
+&=\sum_{k=1}^{n}\beta^{b}_k(\lambda\cdot_V x)\cdot_U u_k
+&&\left(\because\ \blkref{def_map_by_coordinates_and_family}\right)\\
+&=\sum_{k=1}^{n}\bigl(\lambda\cdot_{\mathbb{C}}\beta^{b}_k(x)\bigr)\cdot_U u_k
+&&\left(\because\ \beta^{b}_k\ \text{はスカラー倍を保つ（各項に適用）。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\lambda\cdot_U\left(\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_U u_k\right)
+&&\left(\because\ \blkref{claim_scalar_multiple_of_linear_combination}\right)\\
+&=\lambda\cdot_U L_{b,u}(x)
+&&\left(\because\ \blkref{def_map_by_coordinates_and_family}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_by_coordinates_and_family_sends_basis_member_to_family_member",
+    kind: "claim",
+    title: { text: "基底の座標を係数にした、族の線型結合の写像は、基底の第 j 元を族の第 j 元へ移す" },
+    labels: ["claim_map_by_coordinates_and_family_sends_basis_member_to_family_member"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), "、", math(String.raw`U`), "、", math(String.raw`n`), "、", math(String.raw`b`), "、", math(String.raw`u`), "、", math(String.raw`L_{b,u}`), " を ",
+        ref("def_map_by_coordinates_and_family"), " のものとする。このとき、すべての ", math(String.raw`j\in\{1,\dots,n\}`), " について ",
+        math(String.raw`L_{b,u}(b_j)=u_j`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\delta_{k,j}\in\mathbb{C}`), " を ", math(String.raw`\{1,\dots,n\}`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"),
+        "）とする。座標の写像の族 ", math(String.raw`\beta^{b}`), " は ", math(String.raw`b`), " の双対基底なので（", ref("claim_coordinate_maps_form_dual_basis"),
+        "）、各 ", math(String.raw`k`), " について ", math(String.raw`\beta^{b}_k(b_j)=\delta_{k,j}`), " である（", ref("def_dual_basis"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_{b,u}(b_j)
+&=\sum_{k=1}^{n}\beta^{b}_k(b_j)\cdot_U u_k
+&&\left(\because\ \blkref{def_map_by_coordinates_and_family}\right)\\
+&=\sum_{k=1}^{n}\delta_{k,j}\cdot_U u_k
+&&\left(\because\ \beta^{b}_k(b_j)=\delta_{k,j}\ \text{を各項に適用。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=u_j
+&&\left(\because\ \blkref{claim_family_member_is_kronecker_delta_linear_combination}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_linear_map_fixing_basis_members_is_identity",
+    kind: "claim",
+    title: { text: "基底のどの元も動かさない線型写像は、どの元も動かさない" },
+    labels: ["claim_linear_map_fixing_basis_members_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 1}`), "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`), " を ", math(String.raw`V`), " の基底（", ref("def_basis"), "）とし、", math(String.raw`b_k:=b(k)`), " と書く。",
+        math(String.raw`F:V\to V`), " を線型写像（", ref("def_linear_map"), "）とし、すべての ", math(String.raw`k\in\{1,\dots,n\}`), " について ",
+        math(String.raw`F(b_k)=b_k`), " であるとする。このとき、すべての ", math(String.raw`x\in V`), " について ", math(String.raw`F(x)=x`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\beta^{b}_k`), " を ", math(String.raw`b`), " についての第 ", math(String.raw`k`), " 座標の写像（", ref("claim_coordinate_map_is_linear_form"), "）とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F(x)
+&=F\left(\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V b_k\right)
+&&\left(\because\ \text{座標の写像の性質。}\blkref{claim_coordinate_map_is_linear_form}\right)\\
+&=\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V F(b_k)
+&&\left(\because\ \blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V b_k
+&&\left(\because\ F(b_k)=b_k\ \text{を各項に適用。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=x
+&&\left(\because\ \text{座標の写像の性質。}\blkref{claim_coordinate_map_is_linear_form}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_linear_right_inverse_of_isometry_is_isometry",
+    kind: "claim",
+    title: { text: "等長写像の右逆写像である線型写像は、等長写像である" },
+    labels: ["claim_linear_right_inverse_of_isometry_is_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " と ", math(String.raw`(V',+_{V'},\cdot_{V'},0_{V'})`), " を ℂ-線型空間（", ref("def_complex_vector_space"),
+        "）、", math(String.raw`q`), " を ", math(String.raw`V`), " 上の二次形式、", math(String.raw`q'`), " を ", math(String.raw`V'`), " 上の二次形式（",
+        ref("def_quadratic_form"), "）、", math(String.raw`\theta:V\to V'`), " を ", math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`), " への等長写像（",
+        ref("def_isometry_of_quadratic_spaces"), "）、", math(String.raw`\theta':V'\to V`), " を線型写像（", ref("def_linear_map"), "）とし、すべての ",
+        math(String.raw`y\in V'`), " について ", math(String.raw`\theta(\theta'(y))=y`), " であるとする。このとき ", math(String.raw`\theta'`), " は ",
+        math(String.raw`(V',q')`), " から ", math(String.raw`(V,q)`), " への等長写像である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`y\in V'`), " を任意に取る。"]),
+      displayMath(String.raw`\begin{aligned}
+q\bigl(\theta'(y)\bigr)
+&=q'\Bigl(\theta\bigl(\theta'(y)\bigr)\Bigr)
+&&\left(\because\ \theta\ \text{は等長写像。}\blkref{def_isometry_of_quadratic_spaces}\right)\\
+&=q'(y)
+&&\left(\because\ \theta(\theta'(y))=y\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\theta'`), " は線型写像なので、", math(String.raw`(V',q')`), " から ", math(String.raw`(V,q)`), " への等長写像である（",
+        ref("def_isometry_of_quadratic_spaces"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_existence_and_uniqueness_of_homomorphism_of_clifford_algebras_induced_by_isometry",
+    kind: "claim",
+    title: { text: "等長写像が誘導するクリフォード代数の準同型の存在と一意性" },
+    labels: ["claim_existence_and_uniqueness_of_homomorphism_of_clifford_algebras_induced_by_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " と ", math(String.raw`(V',+_{V'},\cdot_{V'},0_{V'})`), " を ℂ-線型空間（", ref("def_complex_vector_space"),
+        "）、", math(String.raw`n,n'\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`b:\{1,\dots,n\}\to V`), " と ", math(String.raw`b':\{1,\dots,n'\}\to V'`),
+        " を基底（", ref("def_basis"), "）、", math(String.raw`q`), " を ", math(String.raw`V`), " 上の二次形式、", math(String.raw`q'`), " を ", math(String.raw`V'`),
+        " 上の二次形式（", ref("def_quadratic_form"), "）とする。", math(String.raw`\mathrm{Cl}(V,q)`), " を基底 ", math(String.raw`b`), " で、",
+        math(String.raw`\mathrm{Cl}(V',q')`), " を基底 ", math(String.raw`b'`), " で構成したクリフォード代数（", ref("def_clifford_ideal"), "、",
+        ref("def_clifford_algebra"), "）、", math(String.raw`\gamma:V\to\mathrm{Cl}(V,q)`), " と ", math(String.raw`\gamma':V'\to\mathrm{Cl}(V',q')`), " を ",
+        ref("def_clifford_generator_map"), " の写像とする。", math(String.raw`\theta:V\to V'`), " を ", math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`),
+        " への等長写像（", ref("def_isometry_of_quadratic_spaces"), "）とする。このとき、", math(String.raw`\mathrm{Cl}(V,q)`), " から ", math(String.raw`\mathrm{Cl}(V',q')`),
+        " への ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）", math(String.raw`\Theta`), " で、", math(String.raw`V`), " から ",
+        math(String.raw`\mathrm{Cl}(V',q')`), " への写像として ", math(String.raw`\Theta\circ\gamma=\gamma'\circ\theta`), " を満たすものが、ただ一つ存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "クリフォード代数の普遍性（", ref("claim_universal_property_of_clifford_algebra"), "）の代数に ", math(String.raw`A:=\mathrm{Cl}(V',q')`), "、線型写像に ",
+        math(String.raw`g:=\gamma'\circ\theta`), " を当てる。", math(String.raw`A`), " は ℂ-代数である（", ref("def_clifford_algebra"), "）。", math(String.raw`\theta`),
+        " は線型写像であり（", ref("def_isometry_of_quadratic_spaces"), "）、", math(String.raw`\gamma'`), " は ", math(String.raw`V'`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像なので（", ref("claim_clifford_generator_map_is_linear_map"), "）、", math(String.raw`g`), " は ",
+        math(String.raw`V`), " から ", math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像である（", ref("claim_composition_of_linear_maps_is_linear_map"), "）。",
+        math(String.raw`v\in V`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g(v)\cdot_A g(v)
+&=\gamma'\bigl(\theta(v)\bigr)\cdot_A\gamma'\bigl(\theta(v)\bigr)
+&&\left(\because\ g\ \text{の定義}\right)\\
+&=q'\bigl(\theta(v)\bigr)\ast_A 1_A
+&&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
+&=q(v)\ast_A 1_A
+&&\left(\because\ \theta\ \text{は等長写像。}\blkref{def_isometry_of_quadratic_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "普遍性の仮定がすべて満たされたので、", math(String.raw`\Theta\circ\gamma=g=\gamma'\circ\theta`), " を満たす ℂ-代数の準同型 ", math(String.raw`\Theta`),
+        " がただ一つ存在する。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_of_clifford_algebras_induced_by_isometry",
+    kind: "definition",
+    title: { text: "等長写像が誘導するクリフォード代数の準同型" },
+    labels: ["def_homomorphism_of_clifford_algebras_induced_by_isometry"],
+    statement: [
+      paragraph([
+        ref("claim_existence_and_uniqueness_of_homomorphism_of_clifford_algebras_induced_by_isometry"), " の状況で、", math(String.raw`\Theta\circ\gamma=\gamma'\circ\theta`), " を満たすただ一つの ℂ-代数の準同型 ", math(String.raw`\Theta`), " を ",
+        math(String.raw`\mathrm{Cl}(\theta):\mathrm{Cl}(V,q)\to\mathrm{Cl}(V',q')`), " と書き、等長写像 ", math(String.raw`\theta`), " が誘導する準同型と呼ぶ。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphisms_induced_by_inverse_isometries_compose_to_identity",
+    kind: "claim",
+    title: { text: "逆向きの等長写像が誘導する準同型を続けると、恒等写像になる" },
+    labels: ["claim_homomorphisms_induced_by_inverse_isometries_compose_to_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), "、", math(String.raw`V'`), "、", math(String.raw`b`), "、", math(String.raw`b'`), "、", math(String.raw`q`), "、", math(String.raw`q'`), "、",
+        math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\mathrm{Cl}(V',q')`), "、", math(String.raw`\gamma`), "、", math(String.raw`\gamma'`), " を ",
+        ref("claim_existence_and_uniqueness_of_homomorphism_of_clifford_algebras_induced_by_isometry"), " のものとする。", math(String.raw`\sigma:V\to V'`), " を ",
+        math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`), " への等長写像、", math(String.raw`\tau:V'\to V`), " を ", math(String.raw`(V',q')`), " から ",
+        math(String.raw`(V,q)`), " への等長写像（", ref("def_isometry_of_quadratic_spaces"), "）とし、すべての ", math(String.raw`x\in V`), " について ",
+        math(String.raw`\tau(\sigma(x))=x`), " であるとする。", math(String.raw`\mathrm{Cl}(\sigma)`), " と ", math(String.raw`\mathrm{Cl}(\tau)`), " を、",
+        math(String.raw`\sigma`), " と ", math(String.raw`\tau`), " が誘導する準同型（", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"),
+        "）とする。このとき、すべての ", math(String.raw`a\in\mathrm{Cl}(V,q)`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathrm{Cl}(\tau)\bigl(\mathrm{Cl}(\sigma)(a)\bigr)=a`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と置き、", math(String.raw`\Xi:=\mathrm{Cl}(\tau)\circ\mathrm{Cl}(\sigma):A\to A`), " とする。", math(String.raw`\Xi`),
+        " は ℂ-代数の準同型である（", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "、",
+        ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`\mathrm{id}_A`), " も ℂ-代数の準同型である（",
+        ref("claim_identity_map_is_algebra_homomorphism"), "）。", math(String.raw`v\in V`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Xi\bigl(\gamma(v)\bigr)
+&=\mathrm{Cl}(\tau)\Bigl(\mathrm{Cl}(\sigma)\bigl(\gamma(v)\bigr)\Bigr)
+&&\left(\because\ \Xi\ \text{の定義}\right)\\
+&=\mathrm{Cl}(\tau)\Bigl(\gamma'\bigl(\sigma(v)\bigr)\Bigr)
+&&\left(\because\ \mathrm{Cl}(\sigma)\circ\gamma=\gamma'\circ\sigma\text{。}\blkref{def_homomorphism_of_clifford_algebras_induced_by_isometry}\right)\\
+&=\gamma\Bigl(\tau\bigl(\sigma(v)\bigr)\Bigr)
+&&\left(\because\ \mathrm{Cl}(\tau)\circ\gamma'=\gamma\circ\tau\text{。}\blkref{def_homomorphism_of_clifford_algebras_induced_by_isometry}\right)\\
+&=\gamma(v)
+&&\left(\because\ \tau(\sigma(v))=v\right)\\
+&=\mathrm{id}_A\bigl(\gamma(v)\bigr)
+&&\left(\because\ \mathrm{id}_A\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "クリフォード代数の普遍性（", ref("claim_universal_property_of_clifford_algebra"), "）の代数に ", math(String.raw`A`), "、線型写像に ", math(String.raw`\gamma`),
+        " を当てる。", math(String.raw`\gamma`), " は ", math(String.raw`V`), " から ", math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像であり（",
+        ref("claim_clifford_generator_map_is_linear_map"), "）、すべての ", math(String.raw`v\in V`), " について ", math(String.raw`\gamma(v)\cdot_A\gamma(v)=q(v)\ast_A 1_A`),
+        " である（", ref("claim_square_of_clifford_generator"), "）。普遍性により、", math(String.raw`\Upsilon\circ\gamma=\gamma`), " を満たす ℂ-代数の準同型 ",
+        math(String.raw`\Upsilon:A\to A`), " はただ一つである。上の等式から ", math(String.raw`\Xi`), " と ", math(String.raw`\mathrm{id}_A`), " はどちらもこれを満たすので、",
+        math(String.raw`\Xi=\mathrm{id}_A`), " である。", math(String.raw`\Xi`), " の定義により、これは主張の等式である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_setting_of_general_even_dimensional_corollary",
+    kind: "definition",
+    title: { text: "一般の偶数次元の系で固定する記号" },
+    labels: ["def_setting_of_general_even_dimensional_corollary"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`W`), "、", math(String.raw`w`), "、", math(String.raw`w_k`), "、", math(String.raw`f`), "、", math(String.raw`f_k`), "、",
+        math(String.raw`V=W\oplus W^{*}`), "、", math(String.raw`q=q_W`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), "、",
+        math(String.raw`\mathrm{in}_1`), "、", math(String.raw`\mathrm{in}_2`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のものとし、",
+        math(String.raw`B_q`), " を ", math(String.raw`q`), " に付随する双線型形式とする。同じ定義が基底 ", math(String.raw`c`), " と呼ぶ ", math(String.raw`V`),
+        " の基底を、生成作用素の行列との区別のため、ここでは ", math(String.raw`d:\{1,\dots,2M\}\to V`), " と書く。", math(String.raw`\{1,\dots,2M\}`),
+        " の各元は、", math(String.raw`m\in\{1,\dots,M\}`), " であるか、ただ一つの ", math(String.raw`m\in\{1,\dots,M\}`), " によって ", math(String.raw`M+m`),
+        " と書けるかのどちらか一方であり、", math(String.raw`d_m=\mathrm{in}_1(w_m)`), "、", math(String.raw`d_{M+m}=\mathrm{in}_2(f_m)`), " である（",
+        ref("claim_basis_of_direct_sum_of_two_vector_spaces"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`(Y,+_Y,\cdot_Y,0_Y)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`b^{Y}:\{1,\dots,2M\}\to Y`), " を ",
+        math(String.raw`Y`), " の基底（", ref("def_basis"), "）、", math(String.raw`Q`), " を ", math(String.raw`Y`), " 上の非退化な二次形式（",
+        ref("def_nondegenerate_quadratic_form"), "）、", math(String.raw`B_Q`), " をそれに付随する双線型形式とする。", math(String.raw`\mathrm{Cl}(Y,Q)`), " を基底 ",
+        math(String.raw`b^{Y}`), " で構成した ", math(String.raw`(Y,Q)`), " のクリフォード代数（", ref("def_clifford_ideal"), "、", ref("def_clifford_algebra"), "）、",
+        math(String.raw`\gamma_Y:Y\to\mathrm{Cl}(Y,Q)`), " を ", ref("def_clifford_generator_map"), " の写像とする。",
+      ]),
+      paragraph([
+        math(String.raw`e:\{1,\dots,2M\}\to Y`), "（", math(String.raw`e_k:=e(k)`), "）を、", math(String.raw`k\neq l`), " なら ", math(String.raw`B_Q(e_k,e_l)=0_{\mathbb{C}}`),
+        "、すべての ", math(String.raw`k`), " について ", math(String.raw`Q(e_k)=1_{\mathbb{C}}`), " を満たす ", math(String.raw`Y`), " の基底とし、一つ固定する（存在は ",
+        ref("claim_existence_of_orthonormal_basis_for_nondegenerate_quadratic_form"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`z`), " の加法の逆元を ", math(String.raw`-_{\mathbb{C}}z`), " と書く。", ref("claim_existence_of_square_root_in_complex_numbers"),
+        " で ", math(String.raw`z:=-_{\mathbb{C}}1_{\mathbb{C}}`), " としたときの ", math(String.raw`s`), " を一つ選んで固定し、", math(String.raw`\mathrm{i}\in\mathbb{C}`), " と書く。すなわち ",
+        math(String.raw`\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}`), " である。", math(String.raw`\mathbb{C}`),
+        " の中で ", math(String.raw`1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}\neq 0_{\mathbb{C}}`), " なので、その乗法の逆元を ",
+        math(String.raw`h:=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\in\mathbb{C}`), " と書く。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_negative_imaginary_unit_times_imaginary_unit_is_one",
+    kind: "claim",
+    title: { text: "虚数単位の加法の逆元と虚数単位の積は 1 である" },
+    labels: ["claim_negative_imaginary_unit_times_imaginary_unit_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathrm{i}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のものとする。", math(String.raw`\mathbb{C}`), " の中で ",
+        math(String.raw`(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}=1_{\mathbb{C}}`), " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}
+&=-_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i})
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ (-_{\mathbb{C}}z)\cdot_{\mathbb{C}}z'=-_{\mathbb{C}}(z\cdot_{\mathbb{C}}z')\right)\\
+&=-_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})
+&&\left(\because\ \mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ -_{\mathbb{C}}(-_{\mathbb{C}}z)=z\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_family_in_split_space_for_isometry",
+    kind: "definition",
+    title: { text: "直交基底の行き先にする、分裂した二次空間の元の族" },
+    labels: ["def_family_in_split_space_for_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`w_m`), "、", math(String.raw`f_m`), "、", math(String.raw`V`), "、", math(String.raw`\mathrm{i}`), " を ",
+        ref("def_setting_of_general_even_dimensional_corollary"), " のものとする。", math(String.raw`V`), " の元の番号付けた族 ", math(String.raw`u:\{1,\dots,2M\}\to V`),
+        "（", math(String.raw`u_k:=u(k)`), "）を次で定める（", math(String.raw`m\in\{1,\dots,M\}`), "）。",
+      ]),
+      displayMath(String.raw`u_m:=(w_m,\ f_m),\qquad u_{M+m}:=\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)`),
+      paragraph([
+        "どちらも ", math(String.raw`W`), " の元と ", math(String.raw`W^{*}`), " の元の順序対であり、", math(String.raw`V=W\oplus W^{*}`), " の元である（",
+        ref("def_direct_sum_of_two_vector_spaces"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_quadratic_form_on_family_in_split_space_is_one",
+    kind: "claim",
+    title: { text: "分裂した二次空間の族のどの元でも、二次形式の値は 1 である" },
+    labels: ["claim_quadratic_form_on_family_in_split_space_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`q`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のもの、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"),
+        " の族とする。すべての ", math(String.raw`k\in\{1,\dots,2M\}`), " について ", math(String.raw`q(u_k)=1_{\mathbb{C}}`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\delta_{m,m'}\in\mathbb{C}`), " を ", math(String.raw`\{1,\dots,M\}`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"),
+        "）とする。", math(String.raw`f`), " は ", math(String.raw`w`), " の双対基底なので ", math(String.raw`f_m(w_{m'})=\delta_{m,m'}`), " である（",
+        ref("def_dual_basis"), "）。", math(String.raw`k=m\in\{1,\dots,M\}`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q(u_m)
+&=q_W\bigl((w_m,\ f_m)\bigr)
+&&\left(\because\ q=q_W\ \text{と}\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=f_m(w_m)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right)\\
+&=\delta_{m,m}
+&&\left(\because\ \blkref{def_dual_basis}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`k=M+m`), "（", math(String.raw`m\in\{1,\dots,M\}`), "）のとき："]),
+      displayMath(String.raw`\begin{aligned}
+q(u_{M+m})
+&=q_W\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)\Bigr)
+&&\left(\because\ q=q_W\ \text{と}\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=\bigl(\mathrm{i}\cdot_{W^{*}}f_m\bigr)\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)
+&&\left(\because\ \blkref{def_split_quadratic_form}\right)\\
+&=\mathrm{i}\cdot_{\mathbb{C}}f_m\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)
+&&\left(\because\ \cdot_{W^{*}}\ \text{は各点ごとのスカラー倍。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}f_m(w_m)\bigr)
+&&\left(\because\ f_m\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\delta_{m,m}\bigr)
+&&\left(\because\ \blkref{def_dual_basis}\right)\\
+&=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \blkref{claim_negative_imaginary_unit_times_imaginary_unit_is_one}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_family_in_split_space_is_orthogonal",
+    kind: "claim",
+    title: { text: "分裂した二次空間の族の異なる二元は直交する" },
+    labels: ["claim_family_in_split_space_is_orthogonal"],
+    statement: [
+      paragraph([
+        math(String.raw`B_q`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のもの、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"),
+        " の族とする。", math(String.raw`k,l\in\{1,\dots,2M\}`), "、", math(String.raw`k\neq l`), " ならば ", math(String.raw`B_q(u_k,u_l)=0_{\mathbb{C}}`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\delta_{m,m'}\in\mathbb{C}`), " を ", math(String.raw`\{1,\dots,M\}`), " の二元についてのクロネッカーのデルタ（", ref("def_kronecker_delta"),
+        "）とする。", math(String.raw`f_m(w_{m'})=\delta_{m,m'}`), " であり（", ref("def_dual_basis"), "）、", math(String.raw`\delta_{m,m'}`), " の値は ",
+        math(String.raw`m=m'`), " かどうかだけで決まるので ", math(String.raw`\delta_{m',m}=\delta_{m,m'}`), " である（", ref("def_kronecker_delta"), "）。",
+        math(String.raw`q=q_W`), " なので、", ref("claim_value_of_polarization_of_split_quadratic_form"), " により、", math(String.raw`x,x'\in W`), "、",
+        math(String.raw`g,g'\in W^{*}`), " について ", math(String.raw`B_q((x,g),(x',g'))=g(x')+_{\mathbb{C}}g'(x)`), " である。", math(String.raw`k`), " と ",
+        math(String.raw`l`), " の形で四つの場合に分ける（", math(String.raw`m,m'\in\{1,\dots,M\}`), "）。",
+      ]),
+      paragraph(["（", math(String.raw`k=m`), "、", math(String.raw`l=m'`), "、", math(String.raw`m\neq m'`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+B_q(u_m,u_{m'})
+&=B_q\bigl((w_m,\ f_m),\ (w_{m'},\ f_{m'})\bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=f_m(w_{m'})+_{\mathbb{C}}f_{m'}(w_m)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&=\delta_{m,m'}+_{\mathbb{C}}\delta_{m',m}
+&&\left(\because\ \blkref{def_dual_basis}\ \text{を二か所に適用}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ m\neq m'\text{。}\blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph(["（", math(String.raw`k=m`), "、", math(String.raw`l=M+m'`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+B_q(u_m,u_{M+m'})
+&=B_q\Bigl((w_m,\ f_m),\ \bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_{m'},\ \mathrm{i}\cdot_{W^{*}}f_{m'}\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=f_m\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_{m'}\bigr)+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{W^{*}}f_{m'}\bigr)(w_m)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}f_m(w_{m'})+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{W^{*}}f_{m'}\bigr)(w_m)
+&&\left(\because\ f_m\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}f_m(w_{m'})+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}f_{m'}(w_m)
+&&\left(\because\ \cdot_{W^{*}}\ \text{は各点ごとのスカラー倍。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\delta_{m,m'}+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\delta_{m',m}
+&&\left(\because\ \blkref{def_dual_basis}\ \text{を二か所に適用}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\delta_{m,m'}+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\delta_{m,m'}
+&&\left(\because\ \delta_{m',m}=\delta_{m,m'}\right)\\
+&=\bigl((-_{\mathbb{C}}\mathrm{i})+_{\mathbb{C}}\mathrm{i}\bigr)\cdot_{\mathbb{C}}\delta_{m,m'}
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\delta_{m,m'}
+&&\left(\because\ -_{\mathbb{C}}\mathrm{i}\ \text{は}\ \mathrm{i}\ \text{の加法の逆元}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "（", math(String.raw`k=M+m`), "、", math(String.raw`l=m'`), " の場合）", math(String.raw`B_q`), " は二つの引数の入れ替えで変わらないので（",
+        ref("claim_polarization_is_symmetric"), "）、", math(String.raw`B_q(u_{M+m},u_{m'})=B_q(u_{m'},u_{M+m})`), " であり、これは一つ前の場合で ",
+        math(String.raw`m`), " と ", math(String.raw`m'`), " を入れ替えたものなので ", math(String.raw`0_{\mathbb{C}}`), " である。",
+      ]),
+      paragraph(["（", math(String.raw`k=M+m`), "、", math(String.raw`l=M+m'`), "、", math(String.raw`m\neq m'`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+&B_q(u_{M+m},u_{M+m'})\\
+&\quad=B_q\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr),\ \bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_{m'},\ \mathrm{i}\cdot_{W^{*}}f_{m'}\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&\quad=\bigl(\mathrm{i}\cdot_{W^{*}}f_m\bigr)\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_{m'}\bigr)+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{W^{*}}f_{m'}\bigr)\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)
+&&\left(\because\ \blkref{claim_value_of_polarization_of_split_quadratic_form}\right)\\
+&\quad=\mathrm{i}\cdot_{\mathbb{C}}f_m\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_{m'}\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}f_{m'}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)
+&&\left(\because\ \cdot_{W^{*}}\ \text{は各点ごとのスカラー倍（二か所に適用）。}\blkref{def_dual_space}\text{、}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&\quad=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}f_m(w_{m'})\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}f_{m'}(w_m)\bigr)
+&&\left(\because\ f_m,\ f_{m'}\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&\quad=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\delta_{m,m'}\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\delta_{m',m}\bigr)
+&&\left(\because\ \blkref{def_dual_basis}\ \text{を二か所に適用}\right)\\
+&\quad=\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ m\neq m'\text{。}\blkref{def_kronecker_delta}\right)\\
+&\quad=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ z\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\ \text{と加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k\neq l`), " である組 ", math(String.raw`(k,l)`), " はこの四つの場合のどれか一つに入るので、主張が成り立つ。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_map_to_split_quadratic_space",
+    kind: "definition",
+    title: { text: "一般の非退化な二次空間から分裂した二次空間への写像" },
+    labels: ["def_map_to_split_quadratic_space"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`V`), "、", math(String.raw`Y`), "、", math(String.raw`e`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のもの、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"), " の族とする。写像 ", math(String.raw`\theta:Y\to V`), " を、基底 ",
+        math(String.raw`e`), " の座標を係数にした族 ", math(String.raw`u`), " の線型結合の写像 ", math(String.raw`\theta:=L_{e,u}`), "（", ref("def_map_by_coordinates_and_family"),
+        "）とする。すなわち、", math(String.raw`\beta^{e}_k`), " を ", math(String.raw`e`), " についての第 ", math(String.raw`k`), " 座標の写像（",
+        ref("claim_coordinate_map_is_linear_form"), "）として次である。",
+      ]),
+      displayMath(String.raw`\theta(x)=\sum_{k=1}^{2M}\beta^{e}_k(x)\cdot_V u_k\qquad(x\in Y)`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_to_split_quadratic_space_is_isometry",
+    kind: "claim",
+    title: { text: "一般の非退化な二次空間から分裂した二次空間への写像は等長写像である" },
+    labels: ["claim_map_to_split_quadratic_space_is_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`V`), "、", math(String.raw`q`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のもの、", math(String.raw`\theta`), " を ", ref("def_map_to_split_quadratic_space"), " の写像とする。", math(String.raw`\theta`), " は ", math(String.raw`(Y,Q)`),
+        " から ", math(String.raw`(V,q)`), " への等長写像（", ref("def_isometry_of_quadratic_spaces"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta`), " は線型写像である（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）。", math(String.raw`x\in Y`), " を任意に取り、",
+        math(String.raw`\nu_k:=\beta^{e}_k(x)\in\mathbb{C}`), " と置く。", math(String.raw`u`), " の異なる二元は ", math(String.raw`B_q`), " について直交し（",
+        ref("claim_family_in_split_space_is_orthogonal"), "）、", math(String.raw`e`), " の異なる二元は ", math(String.raw`B_Q`), " について直交する（",
+        ref("def_setting_of_general_even_dimensional_corollary"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q\bigl(\theta(x)\bigr)
+&=q\left(\sum_{k=1}^{2M}\nu_k\cdot_V u_k\right)
+&&\left(\because\ \blkref{def_map_to_split_quadratic_space}\right)\\
+&=\sum_{\mathbb{C},\,k=1}^{2M}\nu_k\cdot_{\mathbb{C}}\bigl(\nu_k\cdot_{\mathbb{C}}q(u_k)\bigr)
+&&\left(\because\ \blkref{claim_quadratic_form_of_linear_combination_of_orthogonal_family}\right)\\
+&=\sum_{\mathbb{C},\,k=1}^{2M}\nu_k\cdot_{\mathbb{C}}\bigl(\nu_k\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \blkref{claim_quadratic_form_on_family_in_split_space_is_one}\ \text{を各項に適用}\right)\\
+&=\sum_{\mathbb{C},\,k=1}^{2M}\nu_k\cdot_{\mathbb{C}}\bigl(\nu_k\cdot_{\mathbb{C}}Q(e_k)\bigr)
+&&\left(\because\ Q(e_k)=1_{\mathbb{C}}\ \text{を各項に適用。}\blkref{def_setting_of_general_even_dimensional_corollary}\right)\\
+&=Q\left(\sum_{k=1}^{2M}\nu_k\cdot_Y e_k\right)
+&&\left(\because\ \blkref{claim_quadratic_form_of_linear_combination_of_orthogonal_family}\right)\\
+&=Q(x)
+&&\left(\because\ \text{座標の写像の性質。}\blkref{claim_coordinate_map_is_linear_form}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_family_in_general_space_for_inverse_isometry",
+    kind: "definition",
+    title: { text: "逆写像で行き先にする、一般の非退化な二次空間の元の族" },
+    labels: ["def_family_in_general_space_for_inverse_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`Y`), "、", math(String.raw`e`), "、", math(String.raw`\mathrm{i}`), "、", math(String.raw`h`), " を ",
+        ref("def_setting_of_general_even_dimensional_corollary"), " のものとする。", math(String.raw`Y`), " の元の番号付けた族 ", math(String.raw`v:\{1,\dots,2M\}\to Y`),
+        "（", math(String.raw`v_k:=v(k)`), "）を次で定める（", math(String.raw`m\in\{1,\dots,M\}`), "）。",
+      ]),
+      displayMath(String.raw`v_m:=h\cdot_Y\bigl(e_m+_Y\mathrm{i}\cdot_Y e_{M+m}\bigr),\qquad v_{M+m}:=h\cdot_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e_{M+m}\bigr)`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_map_from_split_quadratic_space",
+    kind: "definition",
+    title: { text: "分裂した二次空間から一般の非退化な二次空間への写像" },
+    labels: ["def_map_from_split_quadratic_space"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`V`), "、", math(String.raw`d`), "、", math(String.raw`Y`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のもの、", math(String.raw`v`), " を ", ref("def_family_in_general_space_for_inverse_isometry"), " の族とする。", math(String.raw`d`), " は ", math(String.raw`V`),
+        " の基底である（", ref("claim_basis_of_direct_sum_of_two_vector_spaces"), "）。写像 ", math(String.raw`\theta':V\to Y`), " を、基底 ", math(String.raw`d`),
+        " の座標を係数にした族 ", math(String.raw`v`), " の線型結合の写像 ", math(String.raw`\theta':=L_{d,v}`), "（", ref("def_map_by_coordinates_and_family"),
+        "）とする。すなわち、", math(String.raw`\beta^{d}_l`), " を ", math(String.raw`d`), " についての第 ", math(String.raw`l`), " 座標の写像（",
+        ref("claim_coordinate_map_is_linear_form"), "）として次である。",
+      ]),
+      displayMath(String.raw`\theta'(y)=\sum_{l=1}^{2M}\beta^{d}_l(y)\cdot_Y v_l\qquad(y\in V)`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_from_split_quadratic_space_sends_family_to_orthonormal_basis",
+    kind: "claim",
+    title: { text: "分裂した二次空間からの写像は、族 u の各元を直交基底の同じ番号の元へ移す" },
+    labels: ["claim_map_from_split_quadratic_space_sends_family_to_orthonormal_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`e`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の基底、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"),
+        " の族、", math(String.raw`\theta'`), " を ", ref("def_map_from_split_quadratic_space"), " の写像とする。すべての ", math(String.raw`k\in\{1,\dots,2M\}`), " について ",
+        math(String.raw`\theta'(u_k)=e_k`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta'`), " は線型写像であり（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）、すべての ", math(String.raw`l`), " について ",
+        math(String.raw`\theta'(d_l)=v_l`), " である（", ref("claim_map_by_coordinates_and_family_sends_basis_member_to_family_member"), "）。", math(String.raw`m\in\{1,\dots,M\}`),
+        " を固定し、", math(String.raw`e':=e_{M+m}`), " と書く。準備として、", math(String.raw`\mathbb{C}`), " の中の次の四つの等式を置く。一つ目は ",
+        math(String.raw`(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}=1_{\mathbb{C}}`), "（", ref("claim_negative_imaginary_unit_times_imaginary_unit_is_one"), "）、二つ目は ",
+        math(String.raw`\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})=1_{\mathbb{C}}`), "（一つ目と ", math(String.raw`\mathbb{C}`), " の乗法の交換法則）である。三つ目と四つ目は次である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}h
+&=\bigl((-_{\mathbb{C}}\mathrm{i})+_{\mathbb{C}}\mathrm{i}\bigr)\cdot_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}h
+&&\left(\because\ -_{\mathbb{C}}\mathrm{i}\ \text{は}\ \mathrm{i}\ \text{の加法の逆元}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right),
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_{\mathbb{C}}\mathrm{i}+_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})
+&=\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}\bigr)\cdot_{\mathbb{C}}h+_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則と交換法則}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}h+_{\mathbb{C}}1_{\mathbb{C}}\cdot_{\mathbb{C}}h
+&&\left(\because\ \text{一つ目と二つ目の準備の等式}\right)\\
+&=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      paragraph(["（", math(String.raw`k=m`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+u_m
+&=(w_m,\ f_m)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=\mathrm{in}_1(w_m)+_V\mathrm{in}_2(f_m)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right)\\
+&=d_m+_V d_{M+m}
+&&\left(\because\ \blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\theta'(u_m)
+&=\theta'(d_m+_V d_{M+m})
+&&\left(\because\ \text{上の}\ u_m\ \text{の表示}\right)\\
+&=\theta'(d_m)+_Y\theta'(d_{M+m})
+&&\left(\because\ \theta'\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
+&=v_m+_Y v_{M+m}
+&&\left(\because\ \theta'(d_l)=v_l\ \text{を二か所に適用}\right)\\
+&=h\cdot_Y\bigl(e_m+_Y\mathrm{i}\cdot_Y e'\bigr)+_Y h\cdot_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)
+&&\left(\because\ \blkref{def_family_in_general_space_for_inverse_isometry}\right)\\
+&=h\cdot_Y\Bigl(\bigl(e_m+_Y\mathrm{i}\cdot_Y e'\bigr)+_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=h\cdot_Y\Bigl(\bigl(e_m+_Y e_m\bigr)+_Y\bigl(\mathrm{i}\cdot_Y e'+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_rearranging_sum_of_two_sums_in_vector_space}\right)\\
+&=h\cdot_Y\Bigl(\bigl(1_{\mathbb{C}}\cdot_Y e_m+_Y 1_{\mathbb{C}}\cdot_Y e_m\bigr)+_Y\bigl(\mathrm{i}\cdot_Y e'+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \text{スカラー倍の単位元（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&=h\cdot_Y\Bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_Y e_m+_Y\bigl(\mathrm{i}+_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_Y e'\Bigr)
+&&\left(\because\ \text{スカラーの加法についての分配法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&=h\cdot_Y\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_Y e_m+_Y 0_{\mathbb{C}}\cdot_Y e'\bigr)
+&&\left(\because\ -_{\mathbb{C}}\mathrm{i}\ \text{は}\ \mathrm{i}\ \text{の加法の逆元}\right)\\
+&=h\cdot_Y\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_Y e_m+_Y 0_Y\bigr)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=h\cdot_Y\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_Y e_m\bigr)
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\cdot_Y e_m
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=1_{\mathbb{C}}\cdot_Y e_m
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\right)\\
+&=e_m
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "（", math(String.raw`k=M+m`), " の場合）", math(String.raw`\mathrm{in}_1`), " と ", math(String.raw`\mathrm{in}_2`), " は線型写像なので（",
+        ref("claim_embedding_into_first_component_is_linear_map"), "、", ref("claim_embedding_into_second_component_is_linear_map"), "）、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u_{M+m}
+&=\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=\mathrm{in}_1\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)+_V\mathrm{in}_2\bigl(\mathrm{i}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_V\mathrm{in}_1(w_m)+_V\mathrm{i}\cdot_V\mathrm{in}_2(f_m)
+&&\left(\because\ \mathrm{in}_1,\ \mathrm{in}_2\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&=(-_{\mathbb{C}}\mathrm{i})\cdot_V d_m+_V\mathrm{i}\cdot_V d_{M+m}
+&&\left(\because\ \blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+&\theta'(u_{M+m})\\
+&\quad=\theta'\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_V d_m+_V\mathrm{i}\cdot_V d_{M+m}\bigr)
+&&\left(\because\ \text{上の}\ u_{M+m}\ \text{の表示}\right)\\
+&\quad=(-_{\mathbb{C}}\mathrm{i})\cdot_Y\theta'(d_m)+_Y\mathrm{i}\cdot_Y\theta'(d_{M+m})
+&&\left(\because\ \theta'\ \text{は加法とスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
+&\quad=(-_{\mathbb{C}}\mathrm{i})\cdot_Y v_m+_Y\mathrm{i}\cdot_Y v_{M+m}
+&&\left(\because\ \theta'(d_l)=v_l\ \text{を二か所に適用}\right)\\
+&\quad=(-_{\mathbb{C}}\mathrm{i})\cdot_Y\Bigl(h\cdot_Y\bigl(e_m+_Y\mathrm{i}\cdot_Y e'\bigr)\Bigr)+_Y\mathrm{i}\cdot_Y\Bigl(h\cdot_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_general_space_for_inverse_isometry}\right)\\
+&\quad=\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_Y\bigl(e_m+_Y\mathrm{i}\cdot_Y e'\bigr)+_Y(\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)
+&&\left(\because\ \text{スカラー倍の結合法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_Y e_m+_Y\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_Y(\mathrm{i}\cdot_Y e')\Bigr)
++_Y\Bigl((\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_Y e_m+_Y(\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_Y\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_Y e_m+_Y\bigl(((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}\mathrm{i}\bigr)\cdot_Y e'\Bigr)
++_Y\Bigl((\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_Y e_m+_Y\bigl((\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_Y e'\Bigr)
+&&\left(\because\ \text{スカラー倍の結合法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h\bigr)\cdot_Y e_m+_Y(\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_Y e_m\Bigr)
++_Y\Bigl(\bigl(((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}\mathrm{i}\bigr)\cdot_Y e'+_Y\bigl((\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_Y e'\Bigr)
+&&\left(\because\ \blkref{claim_rearranging_sum_of_two_sums_in_vector_space}\right)\\
+&\quad=\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h+_{\mathbb{C}}\mathrm{i}\cdot_{\mathbb{C}}h\bigr)\cdot_Y e_m
++_Y\bigl(((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}\mathrm{i}+_{\mathbb{C}}(\mathrm{i}\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_Y e'
+&&\left(\because\ \text{スカラーの加法についての分配法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=0_{\mathbb{C}}\cdot_Y e_m+_Y 1_{\mathbb{C}}\cdot_Y e'
+&&\left(\because\ \text{三つ目と四つ目の準備の等式}\right)\\
+&\quad=0_Y+_Y 1_{\mathbb{C}}\cdot_Y e'
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&\quad=0_Y+_Y e'
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&\quad=e'+_Y 0_Y
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&\quad=e'
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`e'=e_{M+m}`), " なので、", math(String.raw`\theta'(u_{M+m})=e_{M+m}`), " である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_to_split_quadratic_space_sends_family_to_basis",
+    kind: "claim",
+    title: { text: "分裂した二次空間への写像は、族 v の各元を基底 d の同じ番号の元へ移す" },
+    labels: ["claim_map_to_split_quadratic_space_sends_family_to_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`d`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の基底、", math(String.raw`v`), " を ",
+        ref("def_family_in_general_space_for_inverse_isometry"), " の族、", math(String.raw`\theta`), " を ", ref("def_map_to_split_quadratic_space"),
+        " の写像とする。すべての ", math(String.raw`l\in\{1,\dots,2M\}`), " について ", math(String.raw`\theta(v_l)=d_l`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta`), " は線型写像であり（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）、すべての ", math(String.raw`k`), " について ",
+        math(String.raw`\theta(e_k)=u_k`), " である（", ref("claim_map_by_coordinates_and_family_sends_basis_member_to_family_member"), "）。", math(String.raw`m\in\{1,\dots,M\}`),
+        " を固定し、", math(String.raw`e':=e_{M+m}`), " と書く。", math(String.raw`\mathbb{C}`), " の中で ", math(String.raw`(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}=1_{\mathbb{C}}`),
+        " であり（", ref("claim_negative_imaginary_unit_times_imaginary_unit_is_one"), "）、", math(String.raw`\mathbb{C}`), " の乗法の交換法則により ",
+        math(String.raw`\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})=1_{\mathbb{C}}`), " である。また次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})
+&=-_{\mathbb{C}}\bigl(\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ (-_{\mathbb{C}}z)\cdot_{\mathbb{C}}z'=-_{\mathbb{C}}(z\cdot_{\mathbb{C}}z')\right)\\
+&=-_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})=1_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph(["（", math(String.raw`l=m`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+&\theta(v_m)\\
+&\quad=\theta\Bigl(h\cdot_Y\bigl(e_m+_Y\mathrm{i}\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_general_space_for_inverse_isometry}\right)\\
+&\quad=h\cdot_V\bigl(\theta(e_m)+_V\mathrm{i}\cdot_V\theta(e')\bigr)
+&&\left(\because\ \theta\ \text{はスカラー倍と加法を保つ。}\blkref{def_linear_map}\right)\\
+&\quad=h\cdot_V\bigl(u_m+_V\mathrm{i}\cdot_V u_{M+m}\bigr)
+&&\left(\because\ \theta(e_k)=u_k\ \text{を二か所に適用}\right)\\
+&\quad=h\cdot_V\Bigl((w_m,\ f_m)+_V\mathrm{i}\cdot_V\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&\quad=h\cdot_V\Bigl((w_m,\ f_m)+_V\bigl(\mathrm{i}\cdot_W((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m),\ \mathrm{i}\cdot_{W^{*}}(\mathrm{i}\cdot_{W^{*}}f_m)\bigr)\Bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=h\cdot_V\bigl(w_m+_W\mathrm{i}\cdot_W((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m),\ f_m+_{W^{*}}\mathrm{i}\cdot_{W^{*}}(\mathrm{i}\cdot_{W^{*}}f_m)\bigr)
+&&\left(\because\ \text{直和の加法。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=h\cdot_V\Bigl(w_m+_W\bigl(\mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_W w_m,\ f_m+_{W^{*}}(\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i})\cdot_{W^{*}}f_m\Bigr)
+&&\left(\because\ \text{スカラー倍の結合法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\bigl(w_m+_W 1_{\mathbb{C}}\cdot_W w_m,\ f_m+_{W^{*}}(\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i})\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \mathrm{i}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})=1_{\mathbb{C}}\right)\\
+&\quad=h\cdot_V\bigl(w_m+_W 1_{\mathbb{C}}\cdot_W w_m,\ f_m+_{W^{*}}(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}\right)\\
+&\quad=h\cdot_V\bigl(1_{\mathbb{C}}\cdot_W w_m+_W 1_{\mathbb{C}}\cdot_W w_m,\ 1_{\mathbb{C}}\cdot_{W^{*}}f_m+_{W^{*}}(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \text{スカラー倍の単位元（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\Bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ \bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)\cdot_{W^{*}}f_m\Bigr)
+&&\left(\because\ \text{スカラーの加法についての分配法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ 0_{\mathbb{C}}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ -_{\mathbb{C}}1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元}\right)\\
+&\quad=h\cdot_V\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ 0_{W^{*}}\bigr)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&\quad=\bigl(h\cdot_W((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m),\ h\cdot_{W^{*}}0_{W^{*}}\bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=\bigl((h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}))\cdot_W w_m,\ h\cdot_{W^{*}}0_{W^{*}}\bigr)
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\bigl((h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}))\cdot_W w_m,\ 0_{W^{*}}\bigr)
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&\quad=\bigl(1_{\mathbb{C}}\cdot_W w_m,\ 0_{W^{*}}\bigr)
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right)\\
+&\quad=(w_m,\ 0_{W^{*}})
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\mathrm{in}_1(w_m)
+&&\left(\because\ \blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&\quad=d_m
+&&\left(\because\ \blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      paragraph(["（", math(String.raw`l=M+m`), " の場合）"]),
+      displayMath(String.raw`\begin{aligned}
+&\theta(v_{M+m})\\
+&\quad=\theta\Bigl(h\cdot_Y\bigl(e_m+_Y(-_{\mathbb{C}}\mathrm{i})\cdot_Y e'\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_general_space_for_inverse_isometry}\right)\\
+&\quad=h\cdot_V\bigl(\theta(e_m)+_V(-_{\mathbb{C}}\mathrm{i})\cdot_V\theta(e')\bigr)
+&&\left(\because\ \theta\ \text{はスカラー倍と加法を保つ。}\blkref{def_linear_map}\right)\\
+&\quad=h\cdot_V\bigl(u_m+_V(-_{\mathbb{C}}\mathrm{i})\cdot_V u_{M+m}\bigr)
+&&\left(\because\ \theta(e_k)=u_k\ \text{を二か所に適用}\right)\\
+&\quad=h\cdot_V\Bigl((w_m,\ f_m)+_V(-_{\mathbb{C}}\mathrm{i})\cdot_V\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&\quad=h\cdot_V\Bigl((w_m,\ f_m)+_V\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m),\ (-_{\mathbb{C}}\mathrm{i})\cdot_{W^{*}}(\mathrm{i}\cdot_{W^{*}}f_m)\bigr)\Bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=h\cdot_V\bigl(w_m+_W(-_{\mathbb{C}}\mathrm{i})\cdot_W((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m),\ f_m+_{W^{*}}(-_{\mathbb{C}}\mathrm{i})\cdot_{W^{*}}(\mathrm{i}\cdot_{W^{*}}f_m)\bigr)
+&&\left(\because\ \text{直和の加法。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=h\cdot_V\Bigl(w_m+_W\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)\cdot_W w_m,\ f_m+_{W^{*}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}\bigr)\cdot_{W^{*}}f_m\Bigr)
+&&\left(\because\ \text{スカラー倍の結合法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\Bigl(w_m+_W(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ f_m+_{W^{*}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}\mathrm{i}\bigr)\cdot_{W^{*}}f_m\Bigr)
+&&\left(\because\ \text{上の等式}\right)\\
+&\quad=h\cdot_V\bigl(w_m+_W(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ f_m+_{W^{*}}1_{\mathbb{C}}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \blkref{claim_negative_imaginary_unit_times_imaginary_unit_is_one}\right)\\
+&\quad=h\cdot_V\bigl(1_{\mathbb{C}}\cdot_W w_m+_W(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_W w_m,\ 1_{\mathbb{C}}\cdot_{W^{*}}f_m+_{W^{*}}1_{\mathbb{C}}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \text{スカラー倍の単位元（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\Bigl(\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)\cdot_W w_m,\ (1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m\Bigr)
+&&\left(\because\ \text{スカラーの加法についての分配法則（二か所に適用）。}\blkref{def_complex_vector_space}\right)\\
+&\quad=h\cdot_V\bigl(0_{\mathbb{C}}\cdot_W w_m,\ (1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ -_{\mathbb{C}}1_{\mathbb{C}}\ \text{は}\ 1_{\mathbb{C}}\ \text{の加法の逆元}\right)\\
+&\quad=h\cdot_V\bigl(0_W,\ (1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&\quad=\bigl(h\cdot_W 0_W,\ h\cdot_{W^{*}}((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m)\bigr)
+&&\left(\because\ \text{直和のスカラー倍。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&\quad=\bigl(0_W,\ h\cdot_{W^{*}}((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{W^{*}}f_m)\bigr)
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&\quad=\bigl(0_W,\ (h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}))\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\bigl(0_W,\ 1_{\mathbb{C}}\cdot_{W^{*}}f_m\bigr)
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right)\\
+&\quad=(0_W,\ f_m)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&\quad=\mathrm{in}_2(f_m)
+&&\left(\because\ \blkref{def_embedding_into_second_component_of_direct_sum}\right)\\
+&\quad=d_{M+m}
+&&\left(\because\ \blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_from_split_after_map_to_split_is_identity",
+    kind: "claim",
+    title: { text: "分裂した二次空間へ移してから戻すと、一般の非退化な二次空間のどの元も変わらない" },
+    labels: ["claim_map_from_split_after_map_to_split_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`Y`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のもの、", math(String.raw`\theta`), " を ", ref("def_map_to_split_quadratic_space"),
+        "、", math(String.raw`\theta'`), " を ", ref("def_map_from_split_quadratic_space"), " の写像とする。すべての ", math(String.raw`x\in Y`), " について ",
+        math(String.raw`\theta'(\theta(x))=x`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta`), " と ", math(String.raw`\theta'`), " は線型写像なので（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）、合成 ",
+        math(String.raw`\theta'\circ\theta:Y\to Y`), " は線型写像である（", ref("claim_composition_of_linear_maps_is_linear_map"), "）。", math(String.raw`k\in\{1,\dots,2M\}`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\theta'\circ\theta)(e_k)
+&=\theta'\bigl(\theta(e_k)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\theta'(u_k)
+&&\left(\because\ \blkref{claim_map_by_coordinates_and_family_sends_basis_member_to_family_member}\right)\\
+&=e_k
+&&\left(\because\ \blkref{claim_map_from_split_quadratic_space_sends_family_to_orthonormal_basis}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`e`), " は ", math(String.raw`Y`), " の基底なので（", ref("def_setting_of_general_even_dimensional_corollary"), "）、",
+        ref("claim_linear_map_fixing_basis_members_is_identity"), " により、すべての ", math(String.raw`x\in Y`), " について ", math(String.raw`\theta'(\theta(x))=x`),
+        " である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_to_split_after_map_from_split_is_identity",
+    kind: "claim",
+    title: { text: "一般の非退化な二次空間へ移してから戻すと、分裂した二次空間のどの元も変わらない" },
+    labels: ["claim_map_to_split_after_map_from_split_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のもの、", math(String.raw`\theta`), " を ", ref("def_map_to_split_quadratic_space"),
+        "、", math(String.raw`\theta'`), " を ", ref("def_map_from_split_quadratic_space"), " の写像とする。すべての ", math(String.raw`y\in V`), " について ",
+        math(String.raw`\theta(\theta'(y))=y`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta`), " と ", math(String.raw`\theta'`), " は線型写像なので（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）、合成 ",
+        math(String.raw`\theta\circ\theta':V\to V`), " は線型写像である（", ref("claim_composition_of_linear_maps_is_linear_map"), "）。", math(String.raw`l\in\{1,\dots,2M\}`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\theta\circ\theta')(d_l)
+&=\theta\bigl(\theta'(d_l)\bigr)
+&&\left(\because\ \text{合成の定義}\right)\\
+&=\theta(v_l)
+&&\left(\because\ \blkref{claim_map_by_coordinates_and_family_sends_basis_member_to_family_member}\right)\\
+&=d_l
+&&\left(\because\ \blkref{claim_map_to_split_quadratic_space_sends_family_to_basis}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`d`), " は ", math(String.raw`V`), " の基底なので（", ref("claim_basis_of_direct_sum_of_two_vector_spaces"), "）、",
+        ref("claim_linear_map_fixing_basis_members_is_identity"), " により、すべての ", math(String.raw`y\in V`), " について ", math(String.raw`\theta(\theta'(y))=y`),
+        " である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_map_from_split_quadratic_space_is_isometry",
+    kind: "claim",
+    title: { text: "分裂した二次空間から一般の非退化な二次空間への写像は等長写像である" },
+    labels: ["claim_map_from_split_quadratic_space_is_isometry"],
+    statement: [
+      paragraph([
+        math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`V`), "、", math(String.raw`q`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のもの、", math(String.raw`\theta'`), " を ", ref("def_map_from_split_quadratic_space"), " の写像とする。", math(String.raw`\theta'`), " は ", math(String.raw`(V,q)`),
+        " から ", math(String.raw`(Y,Q)`), " への等長写像（", ref("def_isometry_of_quadratic_spaces"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\theta`), " は ", math(String.raw`(Y,Q)`), " から ", math(String.raw`(V,q)`), " への等長写像であり（", ref("claim_map_to_split_quadratic_space_is_isometry"),
+        "）、", math(String.raw`\theta'`), " は線型写像であり（", ref("claim_map_by_coordinates_and_family_is_linear_map"), "）、すべての ", math(String.raw`y\in V`),
+        " について ", math(String.raw`\theta(\theta'(y))=y`), " である（", ref("claim_map_to_split_after_map_from_split_is_identity"), "）。",
+        ref("claim_linear_right_inverse_of_isometry_is_isometry"), " により、", math(String.raw`\theta'`), " は ", math(String.raw`(V,q)`), " から ", math(String.raw`(Y,Q)`),
+        " への等長写像である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra",
+    kind: "theorem",
+    title: { text: "系：一般の偶数次元の非退化な二次空間のクリフォード代数と行列環の同型" },
+    labels: ["theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`(Y,+_Y,\cdot_Y,0_Y)`), " を ", math(String.raw`2M`), " 個の元からなる基底 ", math(String.raw`b^{Y}`),
+        " をもつ ℂ-線型空間、", math(String.raw`Q`), " を ", math(String.raw`Y`), " 上の非退化な二次形式、", math(String.raw`\mathrm{Cl}(Y,Q)`), " を基底 ", math(String.raw`b^{Y}`),
+        " で構成したクリフォード代数とし、", math(String.raw`W`), " を ", math(String.raw`M`), " 個の元からなる基底 ", math(String.raw`w`), " をもつ ℂ-線型空間、",
+        math(String.raw`V:=W\oplus W^{*}`), "、", math(String.raw`q:=q_W`), " とする。これらと ", math(String.raw`e`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。",
+      ]),
+      paragraph([
+        math(String.raw`\Phi:\mathrm{Cl}(V,q)\to B`), " と ", math(String.raw`\Psi:B\to\mathrm{Cl}(V,q)`), " を主定理（",
+        ref("theorem_clifford_algebra_of_split_quadratic_space_is_isomorphic_to_matrix_algebra"), "）の互いに逆な ℂ-代数の準同型（", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        "、", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), "）とする。", math(String.raw`\theta:Y\to V`), " を ", ref("def_map_to_split_quadratic_space"), "、",
+        math(String.raw`\theta':V\to Y`), " を ", ref("def_map_from_split_quadratic_space"), " の写像とする。これらは等長写像なので（",
+        ref("claim_map_to_split_quadratic_space_is_isometry"), "、", ref("claim_map_from_split_quadratic_space_is_isometry"), "）、誘導する準同型 ",
+        math(String.raw`\mathrm{Cl}(\theta):\mathrm{Cl}(Y,Q)\to\mathrm{Cl}(V,q)`), " と ", math(String.raw`\mathrm{Cl}(\theta'):\mathrm{Cl}(V,q)\to\mathrm{Cl}(Y,Q)`), " が定まる（",
+        ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "）。写像 ", math(String.raw`\Phi_Y:\mathrm{Cl}(Y,Q)\to B`), " と ",
+        math(String.raw`\Psi_Y:B\to\mathrm{Cl}(Y,Q)`), " を次で定める。",
+      ]),
+      displayMath(String.raw`\Phi_Y:=\Phi\circ\mathrm{Cl}(\theta),\qquad\Psi_Y:=\mathrm{Cl}(\theta')\circ\Psi`),
+      paragraph(["このとき次が成り立つ。"]),
+      list([
+        [math(String.raw`\Phi_Y`), " と ", math(String.raw`\Psi_Y`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"],
+        [
+          "すべての ", math(String.raw`a\in\mathrm{Cl}(Y,Q)`), " について ", math(String.raw`\Psi_Y(\Phi_Y(a))=a`), " であり、すべての ", math(String.raw`F\in B`), " について ",
+          math(String.raw`\Phi_Y(\Psi_Y(F))=F`), " である。",
+        ],
+      ]),
+      paragraph([
+        "したがって ", math(String.raw`\Phi_Y`), " は全単射であり、その逆写像は ", math(String.raw`\Psi_Y`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Phi`), "・", math(String.raw`\Psi`), "・", math(String.raw`\mathrm{Cl}(\theta)`), "・", math(String.raw`\mathrm{Cl}(\theta')`), " は ℂ-代数の準同型なので（",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "、", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "、",
+        ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "）、その合成 ", math(String.raw`\Phi_Y`), " と ", math(String.raw`\Psi_Y`), " は ℂ-代数の準同型である（",
+        ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`\theta'(\theta(x))=x`), "（", math(String.raw`x\in Y`), "。", ref("claim_map_from_split_after_map_to_split_is_identity"), "）と ",
+        math(String.raw`\theta(\theta'(y))=y`), "（", math(String.raw`y\in V`), "。", ref("claim_map_to_split_after_map_from_split_is_identity"), "）から、次の二つの等式が出る。一つ目は、",
+        ref("claim_homomorphisms_induced_by_inverse_isometries_compose_to_identity"), " の二つの空間に ", math(String.raw`(Y,Q)`), " と ", math(String.raw`(V,q)`), " をこの順に、",
+        math(String.raw`\sigma`), " に ", math(String.raw`\theta`), "、", math(String.raw`\tau`), " に ", math(String.raw`\theta'`), " を当てて得る、すべての ",
+        math(String.raw`a\in\mathrm{Cl}(Y,Q)`), " についての ", math(String.raw`\mathrm{Cl}(\theta')(\mathrm{Cl}(\theta)(a))=a`), " である。二つ目は、同じ主張の二つの空間に ",
+        math(String.raw`(V,q)`), " と ", math(String.raw`(Y,Q)`), " をこの順に、", math(String.raw`\sigma`), " に ", math(String.raw`\theta'`), "、", math(String.raw`\tau`), " に ",
+        math(String.raw`\theta`), " を当てて得る、すべての ", math(String.raw`X\in\mathrm{Cl}(V,q)`), " についての ", math(String.raw`\mathrm{Cl}(\theta)(\mathrm{Cl}(\theta')(X))=X`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Psi_Y\bigl(\Phi_Y(a)\bigr)
+&=\mathrm{Cl}(\theta')\Bigl(\Psi\Bigl(\Phi\bigl(\mathrm{Cl}(\theta)(a)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \Phi_Y,\ \Psi_Y\ \text{の定義}\right)\\
+&=\mathrm{Cl}(\theta')\bigl(\mathrm{Cl}(\theta)(a)\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity}\right)\\
+&=a
+&&\left(\because\ \text{上の一つ目の等式}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Phi_Y\bigl(\Psi_Y(F)\bigr)
+&=\Phi\Bigl(\mathrm{Cl}(\theta)\Bigl(\mathrm{Cl}(\theta')\bigl(\Psi(F)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \Phi_Y,\ \Psi_Y\ \text{の定義}\right)\\
+&=\Phi\bigl(\Psi(F)\bigr)
+&&\left(\because\ \text{上の二つ目の等式で}\ X:=\Psi(F)\right)\\
+&=F
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity}\right).
+\end{aligned}`),
+      paragraph([
+        "単射であること。", math(String.raw`a,a'\in\mathrm{Cl}(Y,Q)`), " が ", math(String.raw`\Phi_Y(a)=\Phi_Y(a')`), " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a
+&=\Psi_Y\bigl(\Phi_Y(a)\bigr)
+&&\left(\because\ \text{一つ目の式変形}\right)\\
+&=\Psi_Y\bigl(\Phi_Y(a')\bigr)
+&&\left(\because\ \Phi_Y(a)=\Phi_Y(a')\right)\\
+&=a'
+&&\left(\because\ \text{一つ目の式変形}\right).
+\end{aligned}`),
+      paragraph([
+        "全射であること。", math(String.raw`F\in B`), " について ", math(String.raw`\Psi_Y(F)`), " は ", math(String.raw`\Phi_Y(\Psi_Y(F))=F`), " を満たす。したがって ",
+        math(String.raw`\Phi_Y`), " は全単射である。", math(String.raw`\Phi_Y`), " の逆写像を ", math(String.raw`\Phi_Y^{-1}:B\to\mathrm{Cl}(Y,Q)`), "（", math(String.raw`F`), " に ",
+        math(String.raw`\Phi_Y(a)=F`), " を満たすただ一つの ", math(String.raw`a`), " を与える写像）とすると、", math(String.raw`\Psi_Y(F)`), " はこの条件を満たすので、",
+        math(String.raw`\Phi_Y^{-1}(F)=\Psi_Y(F)`), " である。",
+      ]),
+    ],
+  },
 ]);
