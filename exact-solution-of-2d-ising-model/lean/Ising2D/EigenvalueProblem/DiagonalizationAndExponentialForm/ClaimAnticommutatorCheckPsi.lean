@@ -22,7 +22,9 @@
 `acomm_checkZ_checkY` / `acomm_checkY_checkZ` / `acomm_checkY_checkY_of_mem`（013 章）で、
 `D = 2M δ_{ν,M+1-μ}` である。整数運動量の `D = 2M δ^M_{μ+ν,0}` と**形が違うだけ**で、
 必要十分版の仮定の形（「反交換子がスカラー倍の `1`」）は変わらない。
-したがって**必要十分版はそのまま流用でき、書き換えは一切要らなかった**。
+したがって**必要十分版はそのまま流用でき、必要十分版の側の書き換えは一切要らなかった**。
+`ψ̌_μ` の定義は人手どおり `Ž_μ` の係数を `r_ℂ/d`（`checkPPlus`）とするので、必要十分版が仮定する
+`(-p) z + q y` の形へは `checkPsi_eq_neg_checkP` で読み替えて渡す。
 
 ## 008 章との差（原文 Step 1 の指摘の機械的裏づけ）
 
@@ -112,6 +114,9 @@ theorem checkPsi_car (K : IsingConst) (hM : M ≠ 0) {μ ν : ℤ}
       field_simp
       norm_num
     · rw [hδ, if_neg h]; ring
+  rw [checkPsi_eq_neg_checkP, checkPsi_eq_neg_checkP]
+                                      -- 必要十分版の `(-p) z + q y` の形へ渡すための読み替えで、人手の段ではない
+                                      -- （人手は `u^+ := ρ d^{-1}` のまま計算する。具体版の 1 対 1 化は状態台帳の (cl13)）
   exact NecSuf.car_of_coeffs (checkP K M μ) (checkQ M) (checkP K M ν) (checkQ M)
     (2 * (M : ℂ) * δ) δ (checkZ M μ) (checkY M μ) (checkZ M ν) (checkY M ν)
     (acomm_checkZ_checkZ_of_mem hM hμ hν) (acomm_checkZ_checkY μ ν)

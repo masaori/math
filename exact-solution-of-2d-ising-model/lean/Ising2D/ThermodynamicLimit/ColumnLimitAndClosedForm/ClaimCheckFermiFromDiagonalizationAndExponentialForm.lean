@@ -220,10 +220,12 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
 
 /-- **原文 `check_number_operator_is_hermitian` (3)**: `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`。
 
-`Ising2D.CheckFermi` の場 `hstar` を埋める補題である。 -/
+`Ising2D.CheckFermi` の場 `hstar` を埋める補題である。
+人手の鎖の最後の行「`-α_ν Ž_ν + β Y̌_ν = ψ̌_ν`（`def_check_fermi`）」は、`ψ̌_ν` の `Ž_ν` の係数 `r_ℂ/d_ν` を `-α_ν` と読む段で、
+Lean では `checkPsi_eq_neg_checkP`（`checkPPlus_eq_neg_checkP`）を引く。 -/
 theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
     (checkPsiDag P.const M μ)ᴴ = checkPsi P.const M ((M : ℤ) + 1 - μ) := by
-  rw [checkPsiDag, checkPsi, Matrix.conjTranspose_add, Matrix.conjTranspose_smul,
+  rw [checkPsiDag, checkPsi_eq_neg_checkP, Matrix.conjTranspose_add, Matrix.conjTranspose_smul,
     Matrix.conjTranspose_smul, checkZ_conjTranspose hM, checkY_conjTranspose hM,
     star_checkP P hM μ, star_checkQ M]
 
@@ -237,7 +239,7 @@ noncomputable def checkFermiOf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) : Check
   cre j := checkPsiDag P.const M (checkIdx M j)
   ann j := checkPsi P.const M ((M : ℤ) + 1 - checkIdx M j)
   hcre j := ⟨checkIdx M j, checkP P.const M (checkIdx M j), checkQ M, rfl⟩
-  hann j := ⟨(M : ℤ) + 1 - checkIdx M j, -checkP P.const M ((M : ℤ) + 1 - checkIdx M j),
+  hann j := ⟨(M : ℤ) + 1 - checkIdx M j, checkPPlus P.const M ((M : ℤ) + 1 - checkIdx M j),
     checkQ M, rfl⟩
   acomm_cre_cre i j := by
     have h := (checkPsi_car' P hM (checkIndex_checkIdx M i) (checkIndex_checkIdx M j)).1

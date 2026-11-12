@@ -1348,6 +1348,8 @@ targets=(
   Ising2D.sqrtM_sq
   Ising2D.checkPsiDag_eq
   Ising2D.checkPsi_eq
+  Ising2D.checkPPlus_eq_neg_checkP
+  Ising2D.checkPsi_eq_neg_checkP
   Ising2D.checkPsi_car
   Ising2D.acomm_checkPsiDag_checkPsiDag
   Ising2D.acomm_checkPsiDag_checkPsi

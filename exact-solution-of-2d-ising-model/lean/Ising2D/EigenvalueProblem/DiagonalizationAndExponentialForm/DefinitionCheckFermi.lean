@@ -40,6 +40,8 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionR
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -364,6 +366,12 @@ theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) := by
 noncomputable def checkP (K : IsingConst) (M : ℕ) (μ : ℤ) : ℂ :=
   -((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
 
+/-- 人手 `def_check_fermi` の `ψ̌_μ` の `Ž_μ` の係数 `+r_μ/(2√M γ_2(-θ̃_μ))`。
+人手の「定義が意味をもつ」段落のとおり、分子 `+r` は `r_ℂ`、分母は `d := u b`（`u := 2_ℂ s`、`s := (√M_col)_ℂ`）で、
+商は `def_complex_quotient` の `z/w = z w^{-1}`（Lean の `/`）である。 -/
+noncomputable def checkPPlus (K : IsingConst) (M : ℕ) (μ : ℤ) : ℂ :=
+  ((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
+
 /-- 人手 `def_check_fermi` の `Y̌_μ` の係数 `q := 1/(2√M)`（`μ` に依らない）。 -/
 noncomputable def checkQ (M : ℕ) : ℂ := 1 / (2 * sqrtM M)
 
@@ -371,9 +379,10 @@ noncomputable def checkQ (M : ℕ) : ℂ := 1 / (2 * sqrtM M)
 noncomputable def checkPsiDag (K : IsingConst) (M : ℕ) (μ : ℤ) : TensorPow M :=
   checkP K M μ • checkZ M μ + checkQ M • checkY M μ
 
-/-- **人手 `def_check_fermi`**: `ψ̌_μ := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。 -/
+/-- **人手 `def_check_fermi`**: `ψ̌_μ := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ`。
+`Ž_μ` の係数は人手の定義式どおり `checkPPlus`（`r_ℂ/d`）で、`ψ̌_μ^†` の係数 `checkP` の符号を反転したものとしては定義しない。 -/
 noncomputable def checkPsi (K : IsingConst) (M : ℕ) (μ : ℤ) : TensorPow M :=
-  (-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ
+  checkPPlus K M μ • checkZ M μ + checkQ M • checkY M μ
 
 /-- 人手の「すなわち」の明示式との一致（`ψ̌^†` 側）。 -/
 theorem checkPsiDag_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
@@ -381,13 +390,37 @@ theorem checkPsiDag_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
       = (-((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)))
           • checkZ M μ + (1 / (2 * sqrtM M)) • checkY M μ := rfl
 
-/-- 人手の「すなわち」の明示式との一致（`ψ̌` 側）。 -/
+/-- 人手の「すなわち」の明示式との一致（`ψ̌` 側）。定義が人手の式そのものなので `rfl` である。 -/
 theorem checkPsi_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
     checkPsi K M μ
       = (((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)))
-          • checkZ M μ + (1 / (2 * sqrtM M)) • checkY M μ := by
-  rw [checkPsi, checkP, checkQ]
-  congr 2
-  rw [neg_div, neg_neg]
+          • checkZ M μ + (1 / (2 * sqrtM M)) • checkY M μ := rfl
+
+/-- `ψ̌_μ` の `Ž_μ` の係数は `ψ̌_μ^†` の係数の符号反転である: `r_ℂ/d = -((-(r_ℂ))/d)`。
+
+人手の本文はこの等式を 1 つのブロックとしては立てていない。`check_number_operator_is_hermitian` (3) は
+`ψ̌_ν = -α_ν Ž_ν + β Y̌_ν` を `def_check_fermi` だけを根拠に書いており、その読み替えに当たる。
+Lean の下流（`ψ̌` を `(-p_μ) Ž_μ + q Y̌_μ` の形で使う定理）はこの補題を通して受け取る。
+鎖の各行は人手の定義か主張を 1 つずつ引く（`d := 2_ℂ s b`）。 -/
+theorem checkPPlus_eq_neg_checkP (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    checkPPlus K M μ = -checkP K M μ :=
+  calc checkPPlus K M μ
+      = ((checkR K M μ : ℝ) : ℂ) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)) := rfl
+                                      -- 1 行目: `checkPPlus` の定義（`def_check_fermi` の `ψ̌_μ` の係数）
+    _ = ((checkR K M μ : ℝ) : ℂ) * (2 * sqrtM M * gamma2 K (-thetaTilde M μ))⁻¹ :=
+        div_eq_mul_inv _ _            -- 2 行目: `def_complex_quotient`（`z → r_ℂ`, `w → d`）
+    _ = (-(-((checkR K M μ : ℝ) : ℂ))) * (2 * sqrtM M * gamma2 K (-thetaTilde M μ))⁻¹ := by
+        rw [complex_double_negation]  -- 3 行目: `double_negation_in_cc`（`z → r_ℂ`）を右辺から左辺へ
+    _ = -((-((checkR K M μ : ℝ) : ℂ)) * (2 * sqrtM M * gamma2 K (-thetaTilde M μ))⁻¹) :=
+        neg_mul_eq_neg_mul_complex _ _
+                                      -- 4 行目: `negation_times_complex_is_negation_of_product_in_cc`（`z → -(r_ℂ)`, `w → d^{-1}`）
+    _ = -((-((checkR K M μ : ℝ) : ℂ)) / (2 * sqrtM M * gamma2 K (-thetaTilde M μ))) := by
+        rw [← div_eq_mul_inv]         -- 5 行目: `def_complex_quotient`（`z → -(r_ℂ)`, `w → d`）を右辺から左辺へ
+    _ = -checkP K M μ := rfl          -- 6 行目: `checkP` の定義（`def_check_fermi` の `ψ̌_μ^†` の係数）
+
+/-- `ψ̌_μ = (-p_μ) Ž_μ + q Y̌_μ`（`checkPPlus_eq_neg_checkP` を `Ž_μ` の係数へ当てただけ）。 -/
+theorem checkPsi_eq_neg_checkP (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    checkPsi K M μ = (-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ := by
+  rw [checkPsi, checkPPlus_eq_neg_checkP]
 
 end Ising2D

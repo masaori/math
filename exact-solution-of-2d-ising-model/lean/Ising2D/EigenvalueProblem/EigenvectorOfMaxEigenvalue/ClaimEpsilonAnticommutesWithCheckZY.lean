@@ -174,14 +174,14 @@ theorem epsilon_anticomm_checkPsiDag (K : IsingConst) (M : ℕ) (μ : ℤ) :
     _ = -(checkPsiDag K M μ * epsilon M) := rfl
                                                         -- `def_check_fermi`
 
-/-- **人手証明 (3)**: `ε ψ̌_μ = −ψ̌_μ ε`（係数は `p = −checkP`、`q = checkQ`。段の対応は
+/-- **人手証明 (3)**: `ε ψ̌_μ = −ψ̌_μ ε`（係数は `p = checkPPlus`（人手 `def_check_fermi` の `+r/(2√M b)`）、`q = checkQ`。段の対応は
 `epsilon_anticomm_checkPsiDag` と同じ）。 -/
 theorem epsilon_anticomm_checkPsi (K : IsingConst) (M : ℕ) (μ : ℤ) :
     epsilon M * checkPsi K M μ = -(checkPsi K M μ * epsilon M) := by
   calc epsilon M * checkPsi K M μ
-      = epsilon M * ((-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ) := rfl
+      = epsilon M * (checkPPlus K M μ • checkZ M μ + checkQ M • checkY M μ) := rfl
                                                         -- `def_check_fermi`
-    _ = -(((-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ) * epsilon M) :=
+    _ = -((checkPPlus K M μ • checkZ M μ + checkQ M • checkY M μ) * epsilon M) :=
         epsilon_anticomm_two_term _ _ _ _ (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ)
                                                         -- 人手の鎖の 2〜8 行目
     _ = -(checkPsi K M μ * epsilon M) := rfl

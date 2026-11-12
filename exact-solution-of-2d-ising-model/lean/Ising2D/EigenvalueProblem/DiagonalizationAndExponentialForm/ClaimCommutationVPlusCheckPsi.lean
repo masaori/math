@@ -94,7 +94,7 @@ theorem checkPsiDag_eq_checkPmat_col (K : IsingConst) (M : ℕ) (μ : ℤ) :
 theorem checkPsi_eq_checkPmat_col (K : IsingConst) (M : ℕ) (μ : ℤ) :
     checkPsi K M μ
       = checkPmat K M μ 0 1 • checkZ M μ + checkPmat K M μ 1 1 • checkY M μ := by
-  simp [checkPsi, checkP, checkQ, checkPmat, sqrtM, checkR_eq_absGamma2, neg_div]
+  simp [checkPsi, checkPPlus, checkQ, checkPmat, sqrtM, checkR_eq_absGamma2]
 
 /-- **`def_check_fermi`**: `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ`（上の 2 列を並べたもの）。 -/
 theorem checkPsi_row_eq_rowMul_checkPmat (K : IsingConst) (M : ℕ) (μ : ℤ) :

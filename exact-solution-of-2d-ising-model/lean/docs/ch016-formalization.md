@@ -33,7 +33,8 @@
 | `Ising2D.sqrt_normSq_mk_eq_sqrt_sq_add_sq` | `√(normSq (x, y)) = √(x^2 + y^2)`（`checkR` の表し方で読んだ `abs_basic_properties` (1)） | `abs_basic_properties` (1) |
 | `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として、`M ≠ 0` なら `s = (√M, 0) ≠ (0, 0)`（`√M > 0` は `inclusion_zz_to_rr_of_positive_is_at_least_one` と `sqrt_of_positive_real_is_positive`、続けて第 1 成分の比較）、`(√M)^2 = M` | `def_check_fermi` の係数の分母（分母 `u`・`d` が `ℂ^×` に属することは `diagonalization_check_P_D` Step 1） |
 | `Ising2D.checkPsiDag` / `Ising2D.checkPsi` | `ψ̌_μ^†`, `ψ̌_μ` | **`def_check_fermi`** |
-| `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致 | 同（検算） |
+| `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致（`ψ̌_μ` の `Ž_μ` の係数は人手どおり `checkPPlus = r_ℂ/d` で、どちらも `rfl`） | 同（検算） |
+| `Ising2D.checkPPlus_eq_neg_checkP` / `checkPsi_eq_neg_checkP` | `r_ℂ/d = -((-(r_ℂ))/d)`（`def_complex_quotient`・`double_negation_in_cc`・`negation_times_complex_is_negation_of_product_in_cc` を 1 段ずつ引く 6 行の `calc`）と、それを当てた `ψ̌_μ = (-p_μ) Ž_μ + q Y̌_μ`。人手は独立のブロックとして立てていない | `check_number_operator_is_hermitian` (3) の最後の行（`-α_ν Ž_ν + β Y̌_ν = ψ̌_ν`）、`anticommutator_of_check_psi` の必要十分版への受け渡し |
 | `Ising2D.checkP_mul_checkP_conj` | `p_μ p_{M+1-μ} = -1/(4M)` | `anticommutator_of_check_psi` Step 1 |
 | `Ising2D.checkQ_mul_checkQ` | `q^2 = 1/(4M)` | 同 |
 | `Ising2D.checkPsi_car` | CAR 3 式（必要十分版の系として導出） | **`anticommutator_of_check_psi`** |
@@ -127,6 +128,8 @@
   Step 3 で写像について効いているのは線型性だけで、共役であることも可逆であることも効いていない。
 
 - **008 章の必要十分版 CAR（`NecSuf.car_of_coeffs`）は半整数運動量でも一字一句そのまま使えた。**
+  ただし `ψ̌_μ` の定義は人手どおり `Ž_μ` の係数を `r_ℂ/d` とするので、必要十分版が仮定する `(-p) z + q y` の形へは
+  `checkPsi_eq_neg_checkP` を通して渡す（必要十分版の側は書き換えていない）。
   必要十分版が要求するのは「反交換子がスカラー倍の `1` になること」と「係数についてのスカラー恒等式 2 本」
   だけで、対の条件が `μ+ν ≡ 0 (mod M)` から `ν = M+1-μ` へ変わっても、
   そこは `D` と `δ` の中身が変わるだけである。整数運動量／半整数運動量の違いは
