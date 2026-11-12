@@ -21,6 +21,7 @@
 本ファイルで証明する（`checkPsiDag_conjTranspose`）。`star_checkP` は人手 `check_number_operator_is_hermitian` (3) の
 `\overline{α_μ} = -α_ν` の主鎖 13 行と準備 (a)〜(d) に 1 段ずつ対応し、`complex_conjugate_of_inverse`・`checkD_ne_zero`・
 `gamma2_neg_thetaTilde_eq`・`gamma2_thetaTilde_conj`・`gamma2_neg_thetaTilde_conj` を使う。これが**噛み合わせのための橋渡し補題**である。
+`star_checkQ` は同じ (3) の準備 (f)（`\overline{β} = β`、`β = 1_ℂ/u`）の 8 行に 1 段ずつ対応し（`1_ℂ` を略記 `r_ℂ` の `r = 1` と読み替える 2 段を挟む）、`complex_conjugate_of_inverse`・`checkU_ne_zero`・準備 (b) の `star_two_mul_sqrtM` を使う。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckQHermitian
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCheckFermiResultsUnconditional
@@ -35,12 +36,6 @@ variable {M : ℕ}
 
 /-! ## 係数の複素共役 -/
 
-/-- `q = 1/(2√M)` は実数なので共役で不変。 -/
-theorem star_checkQ (M : ℕ) : star (checkQ M) = checkQ M := by
-  have h : checkQ M = ((1 / (2 * Real.sqrt M) : ℝ) : ℂ) := by
-    rw [checkQ, sqrtM]; push_cast; ring
-  rw [h, Complex.star_def, Complex.conj_ofReal]
-
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (b): `\overline{u} = u`（`u := 2_ℂ s`、`s := (√M_col)_ℂ`。人手の 5 行）。 -/
 theorem star_two_mul_sqrtM (M : ℕ) : (starRingEnd ℂ) (2 * sqrtM M) = 2 * sqrtM M :=
   calc (starRingEnd ℂ) (2 * sqrtM M)
@@ -54,6 +49,34 @@ theorem star_two_mul_sqrtM (M : ℕ) : (starRingEnd ℂ) (2 * sqrtM M) = 2 * sqr
                                       -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → √M_col`。`s` の定義）
     _ = 2 * sqrtM M := by rw [Complex.ofReal_ofNat]
                                       -- 略記の読み替え（5 行目の `u` の定義は `rfl`）
+
+/-- 人手 `check_number_operator_is_hermitian` (3) の準備 (f): `\overline{β} = β`
+（前置きの `β = 1_ℂ/u`、`u := 2_ℂ s`。`def_check_fermi` の `Y̌_μ` の係数の読みで、Lean の `checkQ` の定義。人手の 8 行に、略記の読み替えの 2 段を挟む）。
+引数 `hM` は `u ∈ ℂ^×`（`checkU_ne_zero`、人手の `diagonalization_check_P_D` Step 1）に要り、
+`complex_conjugate_of_inverse`（`w → u`）がそれを仮定に取るからである。 -/
+theorem star_checkQ (hM : M ≠ 0) : star (checkQ M) = checkQ M :=
+  calc star (checkQ M)
+      = (starRingEnd ℂ) (1 / (2 * sqrtM M)) := rfl
+                                      -- 1 行目: 前置きの `β = 1_ℂ/u`（Lean の `checkQ` の定義）
+    _ = (starRingEnd ℂ) (1 * (2 * sqrtM M)⁻¹) := by rw [div_eq_mul_inv]
+                                      -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）
+    _ = (starRingEnd ℂ) 1 * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := complex_conjugate_of_product_eq _ _
+                                      -- 3 行目: `complex_conjugate_of_product`（`z → 1_ℂ`, `w → u^{-1}`）
+    _ = (starRingEnd ℂ) ((1 : ℝ) : ℂ) * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
+                                      -- `1_ℂ` は略記 `r_ℂ` の `r = 1`（`inclusion_rr_to_cc`）
+    _ = ((1 : ℝ) : ℂ) * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [conj_real_inclusion 1]
+                                      -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → 1`）
+    _ = 1 * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
+                                      -- 略記の読み替え
+    _ = 1 * ((starRingEnd ℂ) (2 * sqrtM M))⁻¹ := by
+        rw [complex_conjugate_of_inverse (checkU_ne_zero hM)]
+                                      -- 5 行目: `complex_conjugate_of_inverse`（`w → u`）
+    _ = 1 * (2 * sqrtM M)⁻¹ := by rw [star_two_mul_sqrtM]
+                                      -- 6 行目: 準備 (b)
+    _ = 1 / (2 * sqrtM M) := by rw [div_eq_mul_inv]
+                                      -- 7 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）を右辺から左辺へ
+    _ = checkQ M := rfl
+                                      -- 8 行目: 前置きの `β = 1_ℂ/u` を右辺から左辺へ
 
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (a): `r ∈ ℝ` について `\overline{-(r_ℂ)} = -(r_ℂ)`（人手の 5 行）。 -/
 theorem star_neg_real_inclusion (r : ℝ) : (starRingEnd ℂ) (-(r : ℂ)) = -(r : ℂ) :=
@@ -222,7 +245,7 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
 /-- **原文 `check_number_operator_is_hermitian` (3)**: `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（人手の鎖 7 行）。
 
 `Ising2D.CheckFermi` の場 `hstar` を埋める補題である。
-4 行目の `star_checkQ` は `complex_conjugate_of_real_inclusion`（`r → β`）に当たる（`β` と `checkQ` の `ℂ` の商との一致を人手の鎖に合わせることは状態台帳の (d4c44o4) で扱う）。
+4 行目は人手の準備 (f)（`\overline{β} = β`。`β = 1_ℂ/u` は Lean の `checkQ`）で、Lean では `star_checkQ` を引く。
 6 行目は人手の準備 (e)（`r_ℂ/d_ν = -α_ν`）を右辺から左辺へ当てる段で、Lean では `checkPPlus_eq_neg_checkP`（`ν` で）を引く。 -/
 theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
     (checkPsiDag P.const M μ)ᴴ = checkPsi P.const M ((M : ℤ) + 1 - μ) :=
@@ -238,7 +261,7 @@ theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
                                       -- 3 行目: (2) の `Ž_μ^* = Ž_ν` と `Y̌_μ^* = Y̌_ν`
     _ = star (checkP P.const M μ) • checkZ M ((M : ℤ) + 1 - μ)
           + checkQ M • checkY M ((M : ℤ) + 1 - μ) := by
-        rw [star_checkQ M]            -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → β`）
+        rw [star_checkQ hM]           -- 4 行目: 準備 (f)（`\overline{β} = β`）
     _ = (-checkP P.const M ((M : ℤ) + 1 - μ)) • checkZ M ((M : ℤ) + 1 - μ)
           + checkQ M • checkY M ((M : ℤ) + 1 - μ) := by
         rw [star_checkP P hM μ]       -- 5 行目: `\overline{α_μ} = -α_ν`

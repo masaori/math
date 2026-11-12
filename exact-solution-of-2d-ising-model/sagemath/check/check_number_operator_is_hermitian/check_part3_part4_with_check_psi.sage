@@ -103,7 +103,6 @@ for (x, y) in COUPLINGS:
             alpha = (-r) / (2 * sg * b)
             alpha_nu = (-r_nu) / (2 * sg_nu * b_nu)
             beta = 1 / (2 * sg)
-            rep.eq(c(beta), beta, f"{tag}: β は実数")
             Zm, Ym = s.Z, s.Y
             Zn, Yn = tr(t.Z), tr(t.Y)
             dag = st.dag[mu]
@@ -201,6 +200,21 @@ for (x, y) in COUPLINGS:
                 ("-α_ν", -alpha_nu),
             ], f"{tag}: conj(α_μ) の主鎖")
             rep.eq(c(d_mu**(-1)), c(d_mu)**(-1), f"{tag}: complex_conjugate_of_inverse（w → d_μ）")
+            # 準備 (f) の 8 行: conj(β) = β（β = 1_C/u は def_check_fermi の Y̌ の係数の読み）
+            rep.eq(beta, E(1) / u, f"{tag}: def_check_fermi の読み β = 1_C/u")
+            rep.eq(1 / (2 * sg_nu), E(1) / u, f"{tag}: ν の Y̌_ν の係数も 1_C/u")
+            rep.chain([
+                ("conj(β)", c(beta)),
+                ("conj(1_C/u)", c(E(1) / u)),
+                ("conj(1_C u^{-1})", c(E(1) * u**(-1))),
+                ("conj(1_C) conj(u^{-1})", c(E(1)) * c(u**(-1))),
+                ("1_C conj(u^{-1})", E(1) * c(u**(-1))),
+                ("1_C (conj u)^{-1}", E(1) * c(u)**(-1)),
+                ("1_C u^{-1}", E(1) * u**(-1)),
+                ("1_C/u", E(1) / u),
+                ("β", beta),
+            ], f"{tag}: 準備 (f) の鎖")
+            rep.eq(c(u**(-1)), c(u)**(-1), f"{tag}: complex_conjugate_of_inverse（w → u）")
             # 準備 (e) の 5 行: r_C/d_ν = -α_ν（def_check_fermi の ψ̌_ν の Ž_ν の係数）
             rep.chain([
                 ("r_C/d_ν", r / d_nu),
