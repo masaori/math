@@ -1918,3 +1918,6 @@ import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSignFromNecSuf
 import Ising2DLambda.KacWard.TaggedMatchingTermOrientation
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermOrientation
 import Ising2DLambda.KacWard.TaggedMatchingTermOrientationFromNecSuf
+import Ising2DLambda.KacWard.TaggedCyclePairWalk
+import Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk
+import Ising2DLambda.KacWard.TaggedCyclePairWalkFromNecSuf
