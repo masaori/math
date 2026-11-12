@@ -34206,7 +34206,7 @@ f
 &=\mathrm{ac}_0(t^{\,n})+\mathrm{ac}_0(\widehat{-1})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
 &=0+\mathrm{ac}_0(\widehat{-1})
-&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n\ge1\ \text{より}\ 0\ne n)\\
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{、}\ n\ge1\ \text{より}\ 0\ne n)\\
 &=0+(-1)
 &&(\because\ \blkref{def_qbar_constant_embedding})\\
 &=-1
@@ -34229,9 +34229,9 @@ f
 &=\mathrm{ac}_k(t^{\,n})+\mathrm{ac}_k(\widehat{-1})
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
 &=0+\mathrm{ac}_k(\widehat{-1})
-&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{。}\ n<k\ \text{より}\ k\ne n)\\
+&&(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\text{、}\ n<k\ \text{より}\ k\ne n)\\
 &=0+0
-&&(\because\ \blkref{def_qbar_constant_embedding}\text{。}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{、}\ n<k\ \text{と}\ n\ge1\ \text{より}\ k\ge1)\\
 &=0
 &&(\because\ \text{零元との和})
 \end{aligned}`),
@@ -85777,6 +85777,15 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                 habitat: "C",
                 realEscape: "代数的数の二係数表示を複素数の実部と虚部へ送り、乗法と単位元を比較する。",
                 verification: ["sagemath/check/complex-realization-preserves-multiplication"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_product_decomposition",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_preserves_multiplication",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_one",
+                  "Ising2DLambda.NecSuf.RealEscape.complexRealization_preserves_multiplication_necSuf",
+                  "Ising2DLambda.NecSuf.RealEscape.complexRealization_one_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_preserves_multiplication_from_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_one_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の ", math(String.raw`\xi,\eta\in\overline{\mathbb Q}`),
@@ -85798,7 +85807,8 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                   displayMath(String.raw`\begin{aligned}
 \xi\eta
 &=(a+b\omega)(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
-&=ac+ad\omega+bc\omega+bd\omega^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr)\\
+&=ac+a(d\omega)+(b\omega)c+(b\omega)(d\omega)&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr)\\
+&=ac+ad\omega+bc\omega+bd\omega^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の結合法則と交換法則}\bigr)\\
 &=ac+ad\omega+bc\omega-bd&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\bigr)\\
 &=(ac-bd)+ad\omega+bc\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の結合法則と交換法則}\bigr)\\
 &=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr).
@@ -85837,6 +85847,11 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
  +i\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)
  +i^2\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
 &&\bigl(\because\ i^2=-1\bigr)\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
+ +\rho_{R\to\mathbb R}(a)\bigl(i\rho_{R\to\mathbb R}(d)\bigr)
+ +\bigl(i\rho_{R\to\mathbb R}(b)\bigr)\rho_{R\to\mathbb R}(c)
+ +\bigl(i\rho_{R\to\mathbb R}(b)\bigr)\bigl(i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \mathbb C\text{ の乗法の結合法則と交換法則}\bigr)\\
 &=\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
  \bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
 &&\bigl(\because\ \mathbb C\text{ の分配法則}\bigr)\\
