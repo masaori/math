@@ -281,6 +281,12 @@ targets=(
   Ising2D.NecSuf.local_mem
   Ising2D.sigmaXPrefixProduct_mul_self_of_necSuf
   Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct_of_necSuf
+  Ising2D.site_pauli_prefix_product_kronecker_form
+  Ising2D.jw_eq_finiteMatrixProduct
+  Ising2D.Z_eq_finiteMatrixProduct
+  Ising2D.Y_eq_finiteMatrixProduct
+  Ising2D.NecSuf.prefix_product_eq_map_prefixFamily
+  Ising2D.site_pauli_prefix_product_kronecker_form_of_necSuf
   Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm_of_necSuf
   Ising2D.sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf
   Ising2D.sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf

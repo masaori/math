@@ -103,7 +103,8 @@ Lean のサイトの添字は 0 始まりで、人手のサイト `m` は値が 
 
 人手の 1 行目（`def_jordan_wigner_Y_matrices`）と 2 行目（`site_pauli_prefix_product_kronecker_form`）は、Lean では
 `Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので `rfl` である（`Z_mul_Y_same` と同じ。Lean の `Y` が
-人手の積の形と一致することは `Y_eq_xString_mul` が持つ。`site_pauli_prefix_product_kronecker_form` の Lean の具体版は無い）。
+人手の積 `∏_{j=1}^{m}F_j^{(y)}` に等しいことは、`site_pauli_prefix_product_kronecker_form` の具体版を使う `Y_eq_finiteMatrixProduct`
+（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つ）。
 人手は `m ≤ M_col - 1` に限るが、Lean の等式は全ての `m` で成り立つので仮定を置かない。 -/
 theorem Y_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) := rfl
 

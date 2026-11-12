@@ -164,8 +164,9 @@ theorem sigmaXPrefixProduct_mul_self : ∀ r : ℕ, r ≤ M → sigmaXPrefixProd
 
 /-- 人手 Step 2 の `Z_m = P_{m-1}σ_m^z`。人手の `m` は Lean の `k + 1` で、人手の `P_{m-1}` は `sigmaXPrefixProduct M k`。
 人手は `def_jordan_wigner_Z_matrices` の積を `def_finite_product_of_matrices` で読む 4 行の鎖（と積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`。
-Lean は `sigmaXPrefixProduct_eq_finiteMatrixProduct`）で示すが、Lean の `Z` はクロネッカー積 `siteProd` で定義されていて行列の有限積で書かれていないので、
-この鎖と 1 対 1 ではない（既存の `Z_eq_xString_mul` と `sigmaXPrefixProduct_eq_xString` で閉じる。状態台帳の件 (cl3c3j8n2d3d4c44p11b)・(cl3c3j8n2d3d4c44p11c)）。 -/
+Lean は `sigmaXPrefixProduct_eq_finiteMatrixProduct`）で示す。Lean の `Z` が人手の積 `∏_{j=1}^{m}F_j^{(z)}` に等しいことは
+`Z_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つが、ここはまだその鎖と 1 対 1 ではない
+（既存の `Z_eq_xString_mul` と `sigmaXPrefixProduct_eq_xString` で閉じる。状態台帳の件 (cl3c3j8n2d3d4c44p11c)）。 -/
 theorem Z_eq_sigmaXPrefixProduct_mul (k : Fin M) : Z k = sigmaXPrefixProduct M (k : ℕ) * sigmaZ k := by
   rw [Z_eq_xString_mul, sigmaXPrefixProduct_eq_xString _ (le_of_lt k.isLt)]
 

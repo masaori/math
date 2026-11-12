@@ -769,8 +769,8 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
 
 人手との対応: 人手の準備の `Z_m`・`Y_m` のクロネッカー積表示（`def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices` と
 `site_pauli_prefix_product_kronecker_form`）は、Lean では `Z`・`Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
-`calc` の 1・2 段は `rfl` である（Lean の `Z`・`Y` が人手の積の形と一致することは、`Z_eq_xString_mul`・`Y_eq_xString_mul`（`Z_m = P_{m-1}σ_m^z`）と `xString_succ`（`P_{r+1} = P_rσ_{r+1}^x`）を合わせて得られる。
-`site_pauli_prefix_product_kronecker_form` の Lean の具体版は無い）。
+`calc` の 1・2 段は `rfl` である（Lean の `Z`・`Y` が人手の積 `∏_{j=1}^{m}F_j^{(z)}`・`∏_{j=1}^{m}F_j^{(y)}` に等しいことは、
+`site_pauli_prefix_product_kronecker_form` の具体版を使う `Z_eq_finiteMatrixProduct`・`Y_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つ）。
 人手の `m` は Lean の `m`（0 始まり）で、人手の「第 `1` から第 `m-1` 因子」「第 `m+1` 以降の因子」は Lean の `i < m`・`m < i` である。 -/
 theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
   calc
