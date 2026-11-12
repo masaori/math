@@ -22,6 +22,7 @@
 | Step 3 後半「`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
 | Step 2「Jordan–Wigner 文字列の帰納法」（外側の累積帰納法と、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法） | `string_mem_of_previous`, `local_mem_of_previous`, `local_mem`, `string_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
 | Step 2 の準備「可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`」 | `xl_mul_string_comm`, `string_mul_self` | モノイドであること、`x n * x n = 1`、相異なる番号どうしの可換性（下の節の冒頭） |
+| Step 2 の準備「積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`」 | `string_eq_finProdLeft` | 二項演算 `*` と元 `1`、`1 * x 0 = x 0` だけ（結合則・単位元のほかの性質は使わない。下の節の冒頭） |
 
 ### 効いていないもの（一次情報: 下の証明が使っている補題がすべて）
 
@@ -54,6 +55,7 @@ import Mathlib.Algebra.Group.Subsemigroup.Basic
 import Mathlib.LinearAlgebra.Basis.Basic
 import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.LinearAlgebra.Span.Basic
+import Ising2D.NecSuf.FiniteProductLeft
 
 namespace Ising2D
 namespace NecSuf
@@ -355,6 +357,43 @@ theorem string_mul_self (hxx : ∀ n, n < N → x n * x n = 1)
       _ = 1 := ih                                          -- 帰納法の仮定
 
 end StringSquare
+
+/-! ## Step 2 の準備: 積の表示
+
+人手 Step 2 の `P_0 := I`・`P_r := P_{r-1}σ_r^x` に対する積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`（`r ≥ 1`）を、同じ帰納法のまま取り出す。
+添字は 0 始まりで、人手の `σ_{r+1}^x` が `x r`、人手の `P_r` が `p r`、人手の `∏_{j=1}^{r+1}` が `finProdLeft r` である。
+
+使うのは次だけである。
+* 二項演算 `*` と元 `1`（`P_0 := I` と漸化式を書くため）。結合則は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛けるので、括弧の付け替えが起きない）。
+* `1 * x 0 = x 0`（`r = 1` の段の `identity_matrix_is_left_unit_of_mat_mult`（`A → σ_1^x`））。`1` が `x 0` 以外の元の左の単位元であること、
+  右の単位元であることは使わない。
+
+削れないもの: `1 * x 0 = x 0` は、`0 < N` のとき主張の `r = 0` の場合 `p 1 = finProdLeft 0 x`、すなわち
+`1 * x 0 = x 0`（`p 1 = p 0 * x 0 = 1 * x 0` と `finProdLeft 0 x = x 0`）そのものなので、外せない。
+`N = 0` のときは主張が空で、この仮定も使わない（具体版は `r < M` の範囲だけを述べ、`M = 0` で `σ_1^x` が無いのと同じ）。 -/
+
+section StringProduct
+
+variable {A : Type*} [Mul A] [One A] {p x : ℕ → A} {N : ℕ}
+
+/-- **人手 Step 2 の積の表示（必要十分版）**: `r < N` について `p (r + 1) = finProdLeft r (fun j => x j)`。
+`r = 0`（人手の `r = 1`）の 4 行と一段の 3 行は具体版 `Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct` と同じ順。 -/
+theorem string_eq_finProdLeft (hp0 : p 0 = 1) (hp : ∀ n, n < N → p (n + 1) = p n * x n)
+    (h1 : 1 * x 0 = x 0) : ∀ r : ℕ, r < N → p (r + 1) = finProdLeft r (fun j => x j)
+  | 0, hN =>
+    calc p (0 + 1)
+        = p 0 * x 0 := hp 0 hN                    -- `P_1` の定義
+      _ = 1 * x 0 := by rw [hp0]                   -- `P_0` の定義
+      _ = x 0 := h1                                -- `1 * x 0 = x 0`
+      _ = finProdLeft 0 (fun j => x j) := by rw [finProdLeft_zero]; rfl   -- 有限積の初項を右辺から左辺へ
+  | r + 1, hN =>
+    calc p (r + 1 + 1)
+        = p (r + 1) * x (r + 1) := hp (r + 1) hN   -- `P_{r+1}` の定義
+      _ = finProdLeft r (fun j => x j) * x (r + 1) := by
+          rw [string_eq_finProdLeft hp0 hp h1 r (Nat.lt_of_succ_lt hN)]   -- 帰納法の仮定
+      _ = finProdLeft (r + 1) (fun j => x j) := by rw [finProdLeft_succ]; rfl   -- 有限積の漸化式を右辺から左辺へ
+
+end StringProduct
 
 end NecSuf
 end Ising2D

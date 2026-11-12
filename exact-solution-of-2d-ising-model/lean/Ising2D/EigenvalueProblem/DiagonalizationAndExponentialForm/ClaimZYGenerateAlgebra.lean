@@ -16,7 +16,7 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | --- | --- |
 | Step 1（準備 (f)・(g)、第 1〜4 式、`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` の鎖、異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`（準備 (f)・(g)）、`pauliX_mul_pauliX`（第 1 式。`pauli_matrix_products`）・`pauliY_mul_pauliZ`（第 2 式）・`pauliX_eq`（第 3 式）・`siteOp_mul_same`（第 4 式）・`sigmaX_mul_self`・`sigmaX_eq`（各鎖と 1 段ずつの `calc`）、`siteOp_mul_comm`（`distinct_site_pauli_matrices_commute`） |
 | Step 2 の準備の `P_0 := I`・`P_r := P_{r-1}σ_r^x` | `sigmaXPrefixProduct`（`DefinitionTransferMatrixSymbols.lean`）・`sigmaXPrefixProduct_succ_of_lt` |
-| Step 2 の準備の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x` | 無い（行列の有限積 `finiteMatrixProduct` は添字が `Fin n` に固定されていて、添字が `Conf M` の `TensorPow M` に使えない） |
+| Step 2 の準備の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`（`r = 1` の 4 行と一段の 3 行） | `sigmaXFamily`（Lean の `sigmaXFamily r` の因子は `σ_1^x, …, σ_{r+1}^x`。人手の `r` は Lean の `r + 1`）・`sigmaXPrefixProduct_eq_finiteMatrixProduct`（積は `def_finite_product_of_matrices` の具体版 `finiteMatrixProduct` を `ι := Conf M` で使う） |
 | Step 2 の準備の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`（`r` の帰納法） | `sigmaX_mul_sigmaXPrefixProduct_comm`・`sigmaXPrefixProduct_mul_self` |
 | Step 2 の `Z_m = P_{m-1}σ_m^z`・`Y_m = P_{m-1}σ_m^y` の 4 行の鎖 | 1 対 1 ではない（`Z_eq_sigmaXPrefixProduct_mul`・`Y_eq_sigmaXPrefixProduct_mul`。Lean の `Z`・`Y` はクロネッカー積で定義） |
 | Step 2 の `P_{m-1}Z_m = σ_m^z`・`P_{m-1}Y_m = σ_m^y` の 4 行の鎖 | `sigmaZ_eq_sigmaXPrefixProduct_mul`・`sigmaY_eq_sigmaXPrefixProduct_mul` |
@@ -33,6 +33,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimE
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
 
 namespace Ising2D
 
@@ -62,6 +63,35 @@ theorem Y_mem_adjoin (m : Fin M) : Y m ∈ Algebra.adjoin ℂ (ZYSet M) :=
 theorem sigmaXPrefixProduct_succ_of_lt (r : ℕ) (h : r < M) :
     sigmaXPrefixProduct M (r + 1) = sigmaXPrefixProduct M r * sigmaX ⟨r, h⟩ := by
   rw [sigmaXPrefixProduct, dif_pos h]
+
+/-- 人手 Step 2 の積の表示の右辺の因子 `σ_1^x, …, σ_{r+1}^x`（人手の `r + 1 ≤ M_col` は Lean の `r < M`）。
+Lean の 0 始まりの `j : Fin (r + 1)` が人手の `σ_{j+1}^x` で、`def_finite_product_of_matrices` の `A_{j+1}` は Lean の `A j` である。 -/
+noncomputable def sigmaXFamily (r : ℕ) (h : r < M) : Fin (r + 1) → TensorPow M :=
+  fun j => sigmaX ⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) h⟩
+
+/-- **人手 Step 2 の準備の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`**（`r ∈ {1, …, M_col}`。人手の `r` は Lean の `r + 1`）。
+積は `def_finite_product_of_matrices` の左から順に掛けた積で、具体版 `finiteMatrixProduct`（添字の型 `ι := Conf M`）である。
+`r = 1` の 4 行と、一段の 3 行の鎖と 1 段ずつの `calc`。
+`r + 1` の段の最後の行（`def_finite_product_of_matrices` の漸化式を右辺から左辺へ）の、因子の並びを `Fin.castSucc` で読み替える部分は
+`sigmaXFamily` の定義どおりの読み替え（`rfl`）である。 -/
+theorem sigmaXPrefixProduct_eq_finiteMatrixProduct :
+    ∀ (r : ℕ) (h : r < M), sigmaXPrefixProduct M (r + 1) = finiteMatrixProduct r (sigmaXFamily r h)
+  | 0, h =>
+    calc sigmaXPrefixProduct M (0 + 1)
+        = sigmaXPrefixProduct M 0 * sigmaX ⟨0, h⟩ :=
+          sigmaXPrefixProduct_succ_of_lt 0 h                      -- `P_1` の定義
+      _ = (1 : TensorPow M) * sigmaX ⟨0, h⟩ := rfl                 -- `P_0` の定義
+      _ = sigmaX ⟨0, h⟩ := identity_matrix_mul_tensorPow _         -- `identity_matrix_is_left_unit_of_mat_mult`（`A → σ_1^x`）
+      _ = finiteMatrixProduct 0 (sigmaXFamily 0 h) := by
+          rw [finiteMatrixProduct_zero]; rfl                       -- `def_finite_product_of_matrices` の初項を右辺から左辺へ
+  | r + 1, h =>
+    calc sigmaXPrefixProduct M (r + 1 + 1)
+        = sigmaXPrefixProduct M (r + 1) * sigmaX ⟨r + 1, h⟩ :=
+          sigmaXPrefixProduct_succ_of_lt (r + 1) h                 -- `P_{r+1}` の定義
+      _ = finiteMatrixProduct r (sigmaXFamily r (Nat.lt_of_succ_lt h)) * sigmaX ⟨r + 1, h⟩ := by
+          rw [sigmaXPrefixProduct_eq_finiteMatrixProduct r (Nat.lt_of_succ_lt h)]   -- 帰納法の仮定
+      _ = finiteMatrixProduct (r + 1) (sigmaXFamily (r + 1) h) := by
+          rw [finiteMatrixProduct_succ]; rfl                       -- `def_finite_product_of_matrices` の漸化式を右辺から左辺へ
 
 /-- 人手 Step 2 の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r ∈ {0, …, k-1}`）。
 人手の 1 始まりのサイト `k` は Lean の `k : Fin M`（0 始まり）の `k + 1` なので、人手の `r ≤ k - 1` は Lean の `r ≤ k`。
@@ -133,9 +163,9 @@ theorem sigmaXPrefixProduct_mul_self : ∀ r : ℕ, r ≤ M → sigmaXPrefixProd
       _ = 1 := ih                                                   -- 帰納法の仮定
 
 /-- 人手 Step 2 の `Z_m = P_{m-1}σ_m^z`。人手の `m` は Lean の `k + 1` で、人手の `P_{m-1}` は `sigmaXPrefixProduct M k`。
-人手は `def_jordan_wigner_Z_matrices` の積を `def_finite_product_of_matrices` で読む 4 行の鎖（と積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`）で示すが、
-Lean の `Z` はクロネッカー積 `siteProd` で定義されていて行列の有限積で書かれていないので、この鎖と 1 対 1 ではない
-（既存の `Z_eq_xString_mul` と `sigmaXPrefixProduct_eq_xString` で閉じる。状態台帳に件として残す）。 -/
+人手は `def_jordan_wigner_Z_matrices` の積を `def_finite_product_of_matrices` で読む 4 行の鎖（と積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`。
+Lean は `sigmaXPrefixProduct_eq_finiteMatrixProduct`）で示すが、Lean の `Z` はクロネッカー積 `siteProd` で定義されていて行列の有限積で書かれていないので、
+この鎖と 1 対 1 ではない（既存の `Z_eq_xString_mul` と `sigmaXPrefixProduct_eq_xString` で閉じる。状態台帳の件 (cl3c3j8n2d3d4c44p11b)・(cl3c3j8n2d3d4c44p11c)）。 -/
 theorem Z_eq_sigmaXPrefixProduct_mul (k : Fin M) : Z k = sigmaXPrefixProduct M (k : ℕ) * sigmaZ k := by
   rw [Z_eq_xString_mul, sigmaXPrefixProduct_eq_xString _ (le_of_lt k.isLt)]
 

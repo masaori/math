@@ -6,7 +6,7 @@
 | | ファイル | 主要定理 |
 | --- | --- | --- |
 | 具体版 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` | `Ising2D.Z_Y_generate_algebra` |
-| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top` |
+| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.string_eq_finProdLeft` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top` |
 | 具体版の再導出 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebraFromNecSuf.lean` | `Ising2D.Z_Y_generate_algebra_of_necSuf` |
 
 この文書は、必要十分版を実際に書いて `lake build` を通した結果として判明したことだけを書く
@@ -91,6 +91,22 @@ n < k → x k * x n = x n * x k             -- 相異なる番号どうしの可
 * 使う代数の構造は結合則と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない（結合則を外すと偽になるかは確かめていない）。
 * `x n * x n = 1` も可換性も削れない（ファイルの節の冒頭に反例を書いた）。
 
+### (e) Step 2 の準備（積の表示） — `NecSuf.string_eq_finProdLeft`
+
+人手 Step 2 の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`（`r ≥ 1`）を同じ帰納法で示す（具体版は `Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct`、
+導出は `Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct_of_necSuf`）。仮定は次だけである。
+
+```
+[Mul A] [One A]
+p 0 = 1
+p (n+1) = p n * x n                       -- P_{n+1} = P_n σ^x_{n+1}（0 始まり）
+1 * x 0 = x 0                             -- r = 1 の段の左の単位元（A → σ_1^x）
+```
+
+* 結合則は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛ける）。
+* `1 * x 0 = x 0` は主張の `r = 0`（人手の `r = 1`）の場合そのものなので削れない。
+* `N = 0` のときは主張が空で、`1 * x 0 = x 0` も使わない。
+
 ---
 
 ## 2. 具体版で埋める必要が残ったもの（＝本当に複素 2×2 行列が要るところ）
@@ -164,12 +180,14 @@ bash scripts/check-no-sorry.sh
 'Ising2D.NecSuf.string_mem' does not depend on any axioms
 'Ising2D.NecSuf.xl_mul_string_comm' does not depend on any axioms
 'Ising2D.NecSuf.string_mul_self' does not depend on any axioms
+'Ising2D.NecSuf.string_eq_finProdLeft' depends on axioms: [propext]
 'Ising2D.NecSuf.map_mem_of_mulSingle_mem' depends on axioms: [propext, Quot.sound]
 'Ising2D.Z_Y_generate_algebra_of_necSuf' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
 （Step 2 の 6 行は 2026-11-12 に、累積帰納法の三段・可換の式・二乗の式へ組み直した後に `#print axioms` で取った出力。
-`map_mem_of_mulSingle_mem` の行は同じ日に `P_s` の帰納法へ書き直した後の出力。）
+`map_mem_of_mulSingle_mem` の行は同じ日に `P_s` の帰納法へ書き直した後の出力。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
+`propext` は有限積の初項・漸化式を右辺から左辺へ読む段の `rw` から入る。選択公理は使わない。）
 
 Step 2 の必要十分版（`string_mem_of_previous` / `local_mem_of_previous` / `local_mem` / `string_mem` / `xl_mul_string_comm` / `string_mul_self`）が**公理に一切依存しない**ことは、
 上の「Step 2 に効いているのは漸化式と分解の形だけ」という主張の独立した裏づけになる

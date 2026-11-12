@@ -117,8 +117,8 @@ theorem trace_projFactorProd (S T : Finset (CheckIdx M)) :
 人手の証明（`k` についての帰納法。帰納段階は最後の因子 `R_{μ_k}^{(e_k)}` を分ける）の各鎖を、同じ順の `calc` で置く。
 人手の `k ∈ ℤ_{≥1}` が Lean の `r + 1`、相異なる添字の列 `μ_1, …, μ_k` が単射 `μ : Fin (r + 1) → 𝓜̌`（人手の `μ_j` が Lean の `μ (j - 1)`）、
 `e_j` は `μ_j ∈ T` かどうか（`R_{μ_j}^{(e_j)}` が `NecSuf.projFactor F.nOp T (μ (j - 1))`）である。積は人手の
-`def_finite_product_of_matrices` の左から掛ける積 `NecSuf.finProdLeft`（`TensorPow M` の添字は `Conf M` で、具体版の `finiteMatrixProduct` は
-添字が `Fin n` の行列について述べてあるため、`Qproj_eq_finProdLeft` と同じくこちらを使う）。人手の `ψ̌_μ^†` が `F.cre μ`、`ψ̌_{M_col+1-μ}` が
+`def_finite_product_of_matrices` の左から掛ける積で、`Qproj_eq_finProdLeft` と同じく必要十分版の `NecSuf.finProdLeft`（`R := TensorPow M`）で書いてある
+（具体版 `finiteMatrixProduct` は添字の型を一般にしてあり `ι := Conf M` で使えるので、そちらへ移すことは状態台帳の件 (cl3c3j8n2d3d4c44p19)）。人手の `ψ̌_μ^†` が `F.cre μ`、`ψ̌_{M_col+1-μ}` が
 `F.ann μ`、`ň_μ = ψ̌_μ^†ψ̌_{M_col+1-μ}` が `F.nOp_def` である。`mat_mult_associative` の行は、ほかのファイルと同じく mathlib の
 `Matrix.mul_assoc` で受ける（人手 `mat_mult_associative` の具体版が無い）。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
 

@@ -5,8 +5,9 @@
 `R := Mat(n,ℂ)` の特殊化として得る。`h := mul_identity_matrix 1`（人手の `identity_matrix_is_right_unit_of_mat_mult` の `A → I`）を渡す。
 人手のラベルは `def_finite_product_of_matrices`・`finite_product_of_identity_matrices`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。`TensorPow M` の有限積は `NecSuf.finProdLeft`（`R := TensorPow M`）である。
+有限積の定義 `finiteMatrixProduct` は添字の型 `ι` を一般にしてあるので、`finiteMatrixProduct_eq_finProdLeft` は `R := Matrix ι ι ℂ` の特殊化である。
+`finite_product_of_identity_matrices` の `TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版の
+`finite_product_of_identity_matrices` は人手どおり添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないためである。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
@@ -14,9 +15,9 @@ import Ising2D.NecSuf.FiniteProductLeft
 
 namespace Ising2D
 
-/-- 具体版の有限積 `finiteMatrixProduct` は、必要十分版 `NecSuf.finProdLeft` の `R := Mat(n,ℂ)` の場合である（2 つの節が一致する）。 -/
-theorem finiteMatrixProduct_eq_finProdLeft {n : ℕ} :
-    ∀ (r : ℕ) (A : Fin (r + 1) → Matrix (Fin n) (Fin n) ℂ), finiteMatrixProduct r A = NecSuf.finProdLeft r A
+/-- 具体版の有限積 `finiteMatrixProduct` は、必要十分版 `NecSuf.finProdLeft` の `R := Matrix ι ι ℂ` の場合である（2 つの節が一致する）。 -/
+theorem finiteMatrixProduct_eq_finProdLeft {ι : Type*} [Fintype ι] :
+    ∀ (r : ℕ) (A : Fin (r + 1) → Matrix ι ι ℂ), finiteMatrixProduct r A = NecSuf.finProdLeft r A
   | 0, _ => rfl
   | r + 1, A => by
     rw [finiteMatrixProduct_succ, NecSuf.finProdLeft_succ, finiteMatrixProduct_eq_finProdLeft r]

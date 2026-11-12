@@ -9,7 +9,7 @@
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
 | **具体版** | `Ising2D.Z_Y_generate_algebra`（`ClaimZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
-| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem`（中は `string_mem_of_previous`・`local_mem_of_previous`）/ `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、モノイドでの `x n * x n = 1` と相異なる番号どうしの可換性、`Fin n` 添字の直積への積を保つ写像（`0 < n`）、全体を張る集合 |
+| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem`（中は `string_mem_of_previous`・`local_mem_of_previous`）/ `NecSuf.xl_mul_string_comm` / `NecSuf.string_mul_self` / `NecSuf.string_eq_finProdLeft` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、モノイドでの `x n * x n = 1` と相異なる番号どうしの可換性、積の表示は `*` と `1` と `1 * x 0 = x 0` だけ、`Fin n` 添字の直積への積を保つ写像（`0 < n`）、全体を張る集合 |
 
 本ファイルは、同じ結論 `Algebra.adjoin ℂ (ZYSet M) = ⊤` を
 **必要十分版だけを論法として使って**導き直す（`Z_Y_generate_algebra_of_necSuf`）。
@@ -45,6 +45,7 @@ Step 2（Jordan–Wigner 文字列の帰納法）は、`P_m P_m = I` から得�
 import Ising2D.NecSuf.GeneratedByBasis
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpansFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesFromNecSuf
 
 namespace Ising2D
 
@@ -102,6 +103,22 @@ theorem sigmaX_mul_sigmaXPrefixProduct_comm_of_necSuf (k : Fin M) (r : ℕ) (hr 
         siteOp_mul_comm hne])
     (k : ℕ) k.isLt r hr
   rwa [sigmaXNat, dif_pos k.isLt] at h
+
+/-- **人手 Step 2 の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x` を必要十分版 `NecSuf.string_eq_finProdLeft` の特殊化として導出した形**
+（具体版は `sigmaXPrefixProduct_eq_finiteMatrixProduct`）。渡すのは `P_0 = I`・`P_{r+1} = P_rσ_{r+1}^x`（`rfl`）と
+`identity_matrix_is_left_unit_of_mat_mult`（`identity_matrix_mul_tensorPow`）の `A → σ_1^x` だけで、有限積は
+`finiteMatrixProduct_eq_finProdLeft`（`ι := Conf M`）で必要十分版の `NecSuf.finProdLeft` へ読み替える。 -/
+theorem sigmaXPrefixProduct_eq_finiteMatrixProduct_of_necSuf (r : ℕ) (h : r < M) :
+    sigmaXPrefixProduct M (r + 1) = finiteMatrixProduct r (sigmaXFamily r h) := by
+  have hfam : sigmaXFamily r h = fun j : Fin (r + 1) => sigmaXNat M j := by
+    funext j
+    rw [sigmaXNat, dif_pos (lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) h)]
+    rfl
+  rw [finiteMatrixProduct_eq_finProdLeft, hfam]
+  exact NecSuf.string_eq_finProdLeft (p := sigmaXPrefixProduct M) (x := sigmaXNat M) (N := M) rfl
+    (fun _ _ => rfl)
+    (by rw [sigmaXNat, dif_pos (lt_of_le_of_lt (Nat.zero_le r) h), identity_matrix_mul_tensorPow])
+    r h
 
 /-- 人手 Step 2 の `σ^z_m = P_{m-1}Z_m` を、二乗の式の必要十分版から得た形（鎖は具体版 `sigmaZ_eq_sigmaXPrefixProduct_mul` と同じ）。 -/
 theorem sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf (k : Fin M) :

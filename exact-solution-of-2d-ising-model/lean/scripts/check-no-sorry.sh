@@ -253,6 +253,7 @@ targets=(
   Ising2D.pauliFamily_spans
   Ising2D.siteOp_pauliFamily_mem_adjoin
   Ising2D.sigmaXPrefixProduct_succ_of_lt
+  Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct
   Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm
   Ising2D.sigmaXPrefixProduct_mul_self
   Ising2D.Z_eq_sigmaXPrefixProduct_mul
@@ -276,8 +277,10 @@ targets=(
   Ising2D.NecSuf.string_mem
   Ising2D.NecSuf.xl_mul_string_comm
   Ising2D.NecSuf.string_mul_self
+  Ising2D.NecSuf.string_eq_finProdLeft
   Ising2D.NecSuf.local_mem
   Ising2D.sigmaXPrefixProduct_mul_self_of_necSuf
+  Ising2D.sigmaXPrefixProduct_eq_finiteMatrixProduct_of_necSuf
   Ising2D.sigmaX_mul_sigmaXPrefixProduct_comm_of_necSuf
   Ising2D.sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf
   Ising2D.sigmaY_eq_sigmaXPrefixProduct_mul_of_necSuf

@@ -10,7 +10,10 @@
 
 ## 人手証明との対応
 
-* 人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。Lean の `finiteMatrixProduct r A`（因子 `A : Fin (r + 1) → Mat(n,ℂ)`）は人手の `∏_{j=1}^{r+1} A_j` で、人手の `A_j` が Lean の `A (j - 1)` である。
+* 行列の添字は一般の有限型 `ι` にしてある。人手の `Mat(n,ℂ)` は `ι := Fin n`、人手の `Mat(2^{M_col},ℂ)` は `ι := Conf M`（`TensorPow M`）である。
+  人手の定義は行列の次数を固定しないので、添字の型を一つに決めないことで両方へそのまま当てる。
+  `finite_product_of_identity_matrices` は人手どおり `Mat(n,ℂ)`（`ι := Fin n`）について述べる。
+* 人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。Lean の `finiteMatrixProduct r A`（因子 `A : Fin (r + 1) → Matrix ι ι ℂ`）は人手の `∏_{j=1}^{r+1} A_j` で、人手の `A_j` が Lean の `A (j - 1)` である。
   定義の 2 つの式は `finiteMatrixProduct` の 2 つの節で、`finiteMatrixProduct_zero`・`finiteMatrixProduct_succ` として引く。
   mathlib の `List.prod`（右から畳み込み、空の積は `1`）は人手の定義と形が違うので使わない。
 * `finite_product_of_identity_matrices` の帰納法の 2 つの鎖（`r = 1` の 1 行、`r → r + 1` の 3 行）は、同じ名前の定理の 2 つの節の `calc` と 1 対 1 である。
@@ -22,17 +25,18 @@ namespace Ising2D
 
 open Matrix
 
-/-- **`def_finite_product_of_matrices`**: `r + 1` 個の `Mat(n,ℂ)` の元を左から順に掛ける。 -/
-def finiteMatrixProduct {n : ℕ} : (r : ℕ) → (Fin (r + 1) → Matrix (Fin n) (Fin n) ℂ) → Matrix (Fin n) (Fin n) ℂ
+/-- **`def_finite_product_of_matrices`**: `r + 1` 個の正方行列（添字の型 `ι`、成分は `ℂ`）を左から順に掛ける。 -/
+def finiteMatrixProduct {ι : Type*} [Fintype ι] :
+    (r : ℕ) → (Fin (r + 1) → Matrix ι ι ℂ) → Matrix ι ι ℂ
   | 0, A => A 0
   | r + 1, A => finiteMatrixProduct r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))
 
 /-- `def_finite_product_of_matrices` の 1 つ目の式: `∏_{j=1}^{1} A_j := A_1`。 -/
-theorem finiteMatrixProduct_zero {n : ℕ} (A : Fin 1 → Matrix (Fin n) (Fin n) ℂ) :
+theorem finiteMatrixProduct_zero {ι : Type*} [Fintype ι] (A : Fin 1 → Matrix ι ι ℂ) :
     finiteMatrixProduct 0 A = A 0 := rfl
 
 /-- `def_finite_product_of_matrices` の 2 つ目の式: `∏_{j=1}^{r+2} A_j := (∏_{j=1}^{r+1} A_j) A_{r+2}`（人手の `r` は Lean の `r + 1`）。 -/
-theorem finiteMatrixProduct_succ {n : ℕ} (r : ℕ) (A : Fin (r + 2) → Matrix (Fin n) (Fin n) ℂ) :
+theorem finiteMatrixProduct_succ {ι : Type*} [Fintype ι] (r : ℕ) (A : Fin (r + 2) → Matrix ι ι ℂ) :
     finiteMatrixProduct (r + 1) A
       = finiteMatrixProduct r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1)) := rfl
 
