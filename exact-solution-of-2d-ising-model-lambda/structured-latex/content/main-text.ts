@@ -59887,7 +59887,7 @@ Q^{a,b}_L
 &&\bigl(\because\ \blkref{def_torus_homology_sector}\text{ により }A\in\mathcal E^{c,d}_L\text{ なら }\varepsilon_{L,\mathrm{h}}(A)=c,\ \varepsilon_{L,\mathrm{v}}(A)=d\bigr)\\
 &=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}
 (-1)^{(1+a)c+(1+b)d+cd}\sum_{A\in\mathcal E^{c,d}_L}x^{\,|A|}
-&&\bigl(\because\ \mathbb{Z}[x]\text{ の分配則。係数は }A\text{ に依らない}\bigr)\\
+&&\bigl(\because\ \mathbb{Z}[x]\text{ の分配則、係数は }A\text{ に依らない}\bigr)\\
 &=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}
 (-1)^{(1+a)c+(1+b)d+cd}\cdot G^{c,d}_L
 &&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
