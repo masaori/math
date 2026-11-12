@@ -170,7 +170,7 @@ theorem Z_firstSite_kronecker_form (hM : M ≠ 0) :
     Z (firstSite M hM) = siteProd M (Function.update 1 (firstSite M hM) pauliZ) :=
   calc
     Z (firstSite M hM) = sigmaZ (firstSite M hM) := Z_zero (Nat.pos_of_ne_zero hM)
-                                                        -- `def_jordan_wigner_Z_matrices`（`m = 1`）。人手は `Z_1 := σ_1^z` を定義の場合分けで置くが、Lean の `Z` は一様な定義なので、その場合分けは導いた補題 `Z_zero` に当たる
+                                                        -- `def_jordan_wigner_Z_matrices`（`m = 1`）。人手は `Z_1 = σ_1^z` を有限積の `r = 1` の場合として導き、Lean はそれを補題 `Z_zero` で受ける
     _ = siteProd M (Function.update 1 (firstSite M hM) pauliZ) := rfl
                                                         -- `def_site_pauli_matrices`
 

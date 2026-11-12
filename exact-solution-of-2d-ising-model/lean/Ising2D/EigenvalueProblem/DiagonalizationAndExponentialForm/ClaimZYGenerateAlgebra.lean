@@ -166,9 +166,9 @@ theorem sigmaXPrefixProduct_mul_self : ∀ r : ℕ, r ≤ M → sigmaXPrefixProd
 /-- 人手 Step 2 の `Z_m = P_{m-1}σ_m^z`（`m ≥ 2`）。人手の `m` は Lean の `r + 2`（`k = ⟨r + 1, h⟩`）で、人手の `P_{m-1}` は
 `sigmaXPrefixProduct M (r + 1)`。人手の 4 行の鎖と 1 段ずつの `calc`:
 `def_jordan_wigner_Z_matrices` の積 `∏_{j=1}^{m}F_j^{(z)}`（Lean の `Z` が人手の積に等しいことは `Z_eq_finiteMatrixProduct`）、
-`def_finite_product_of_matrices` の漸化式（`r → m-1`。`finiteMatrixProduct_succ`）、`F_j^{(z)}` の定義（`jwFactor`。`j < m` なら `σ_j^x`、
+`def_finite_product_of_matrices` の漸化式（`r → m-1`。`finiteMatrixProduct_succ`）、`def_jordan_wigner_Z_matrices` の `F_j^{(z)}`（`jwFactor`。`j < m` なら `σ_j^x`、
 `j = m` なら `σ_m^z`）、積の表示（`r → m-1`。`sigmaXPrefixProduct_eq_finiteMatrixProduct`）を右辺から左辺へ。
-人手の `m = 1` はこの鎖を使わず `Z_1 := σ_1^z`（`sigmaZ_zero_eq_Z`）で扱うので、Lean も `m ≥ 2` だけで述べる。 -/
+人手の `m = 1` はこの鎖を使わず `def_jordan_wigner_Z_matrices` の `m = 1` の場合の `Z_1 = σ_1^z`（`sigmaZ_zero_eq_Z`）で扱うので、Lean も `m ≥ 2` だけで述べる。 -/
 theorem Z_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
     Z (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * sigmaZ ⟨r + 1, h⟩ :=
   calc Z (⟨r + 1, h⟩ : Fin M)
@@ -178,7 +178,7 @@ theorem Z_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
           * jwFactor (⟨r + 1, h⟩ : Fin M) pauliZ (Fin.last (r + 1)) :=
         finiteMatrixProduct_succ r _                              -- `def_finite_product_of_matrices` の漸化式（`r → m-1`）
     _ = finiteMatrixProduct r (sigmaXFamily r (Nat.lt_of_succ_lt h)) * sigmaZ ⟨r + 1, h⟩ := by
-        -- `F_j^{(z)}` の定義（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^z`）
+        -- `def_jordan_wigner_Z_matrices` の `F_j^{(z)}`（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^z`）
         congr 1
         · congr 1
           funext j
@@ -191,7 +191,7 @@ theorem Z_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
                                   -- 積の表示（`r → m-1`）を右辺から左辺へ
 
 /-- 人手 Step 2 の `Y_m = P_{m-1}σ_m^y`（`m ≥ 2`）。`Z_eq_sigmaXPrefixProduct_mul` と同じ 4 行の鎖で、
-`def_jordan_wigner_Y_matrices`（`Y_eq_finiteMatrixProduct`）と `F_j^{(y)}` の定義を引く。 -/
+`def_jordan_wigner_Y_matrices`（`Y_eq_finiteMatrixProduct`）とその定義の `F_j^{(y)}` を引く。 -/
 theorem Y_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
     Y (⟨r + 1, h⟩ : Fin M) = sigmaXPrefixProduct M (r + 1) * sigmaY ⟨r + 1, h⟩ :=
   calc Y (⟨r + 1, h⟩ : Fin M)
@@ -201,7 +201,7 @@ theorem Y_eq_sigmaXPrefixProduct_mul (r : ℕ) (h : r + 1 < M) :
           * jwFactor (⟨r + 1, h⟩ : Fin M) pauliY (Fin.last (r + 1)) :=
         finiteMatrixProduct_succ r _                              -- `def_finite_product_of_matrices` の漸化式（`r → m-1`）
     _ = finiteMatrixProduct r (sigmaXFamily r (Nat.lt_of_succ_lt h)) * sigmaY ⟨r + 1, h⟩ := by
-        -- `F_j^{(y)}` の定義（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^y`）
+        -- `def_jordan_wigner_Y_matrices` の `F_j^{(y)}`（`j < m` なら `σ_j^x`、`j = m` なら `σ_m^y`）
         congr 1
         · congr 1
           funext j
@@ -275,20 +275,31 @@ theorem sigma_mem_adjoin_of_previous_sigmaX (r : ℕ) (h : r + 1 < M)
   rw [sigmaX_eq]
   exact Subalgebra.smul_mem _ (mul_mem hY hZ) _                     -- `σ_m^x = (-i)(σ_m^yσ_m^z) ∈ 𝒜`
 
-/-- 人手 Step 2 の `m = 1` の段の `σ_1^z = Z_1`（`def_jordan_wigner_Z_matrices` の `m = 1` は左側の積が空で `Z_1 := σ_1^z`）。
-Lean の 0 始まりで `Z ⟨0, _⟩ = sigmaZ ⟨0, _⟩`（`jwFamily` の `i < 0` は偽なので `siteOp` の族と同じ）。 -/
-theorem sigmaZ_zero_eq_Z (h : 0 < M) : sigmaZ (⟨0, h⟩ : Fin M) = Z ⟨0, h⟩ := by
-  rw [sigmaZ, siteOp_apply, Z]
-  congr 1
-  funext i
-  simp [jwFamily, Function.update_apply]
+/-- 人手 Step 2 の `m = 1` の段の `σ_1^z = Z_1`。人手 `def_jordan_wigner_Z_matrices` の `m = 1` の場合の 3 段
+（`F_1^{(z)} = σ_1^z`（`F_m^{(z)}` の定義で `m = 1`）、`def_finite_product_of_matrices` の `r = 1` の式 `∏_{j=1}^{1}F_j^{(z)} = F_1^{(z)}`、
+`Z_1 = ∏_{j=1}^{1}F_j^{(z)}`）を、`σ_1^z` から右へ読む `calc`。Lean の 0 始まりで `sigmaZ ⟨0, _⟩ = Z ⟨0, _⟩`。 -/
+theorem sigmaZ_zero_eq_Z (h : 0 < M) : sigmaZ (⟨0, h⟩ : Fin M) = Z ⟨0, h⟩ :=
+  calc sigmaZ (⟨0, h⟩ : Fin M)
+      = jwFactor (⟨0, h⟩ : Fin M) pauliZ 0 := by
+        -- `F_m^{(z)}` の定義（`m = 1`。`j = m` の因子は `σ_m^z`）を右辺から左辺へ
+        rw [jwFactor, dif_neg (show ¬(((0 : Fin 1) : ℕ) < ((⟨0, h⟩ : Fin M) : ℕ)) from lt_irrefl 0)]
+        rfl
+    _ = finiteMatrixProduct 0 (jwFactor (⟨0, h⟩ : Fin M) pauliZ) :=
+        (finiteMatrixProduct_zero _).symm                      -- `def_finite_product_of_matrices` の `r = 1` の式を右辺から左辺へ
+    _ = Z ⟨0, h⟩ := (Z_eq_finiteMatrixProduct (⟨0, h⟩ : Fin M)).symm        -- `def_jordan_wigner_Z_matrices`（`m = 1`）を右辺から左辺へ
 
-/-- 人手 Step 2 の `m = 1` の段の `σ_1^y = Y_1`（`def_jordan_wigner_Y_matrices` の `Y_1 := σ_1^y`）。 -/
-theorem sigmaY_zero_eq_Y (h : 0 < M) : sigmaY (⟨0, h⟩ : Fin M) = Y ⟨0, h⟩ := by
-  rw [sigmaY, siteOp_apply, Y]
-  congr 1
-  funext i
-  simp [jwFamily, Function.update_apply]
+/-- 人手 Step 2 の `m = 1` の段の `σ_1^y = Y_1`。人手 `def_jordan_wigner_Y_matrices` の `m = 1` の場合の 3 段
+（`F_1^{(y)} = σ_1^y`（`F_m^{(y)}` の定義で `m = 1`）、`def_finite_product_of_matrices` の `r = 1` の式 `∏_{j=1}^{1}F_j^{(y)} = F_1^{(y)}`、
+`Y_1 = ∏_{j=1}^{1}F_j^{(y)}`）を、`σ_1^y` から右へ読む `calc`。Lean の 0 始まりで `sigmaY ⟨0, _⟩ = Y ⟨0, _⟩`。 -/
+theorem sigmaY_zero_eq_Y (h : 0 < M) : sigmaY (⟨0, h⟩ : Fin M) = Y ⟨0, h⟩ :=
+  calc sigmaY (⟨0, h⟩ : Fin M)
+      = jwFactor (⟨0, h⟩ : Fin M) pauliY 0 := by
+        -- `F_m^{(y)}` の定義（`m = 1`。`j = m` の因子は `σ_m^y`）を右辺から左辺へ
+        rw [jwFactor, dif_neg (show ¬(((0 : Fin 1) : ℕ) < ((⟨0, h⟩ : Fin M) : ℕ)) from lt_irrefl 0)]
+        rfl
+    _ = finiteMatrixProduct 0 (jwFactor (⟨0, h⟩ : Fin M) pauliY) :=
+        (finiteMatrixProduct_zero _).symm                      -- `def_finite_product_of_matrices` の `r = 1` の式を右辺から左辺へ
+    _ = Y ⟨0, h⟩ := (Y_eq_finiteMatrixProduct (⟨0, h⟩ : Fin M)).symm        -- `def_jordan_wigner_Y_matrices`（`m = 1`）を右辺から左辺へ
 
 /-- 人手 Step 2 の `m = 1` の段: `σ_1^z = Z_1 ∈ 𝒜`・`σ_1^y = Y_1 ∈ 𝒜` と、`σ_1^x` の 2 行の鎖
 （Step 1 の `σ_k^x = (-i)(σ_k^yσ_k^z)` を `k = 1` に取る、`σ_1^y = Y_1`・`σ_1^z = Z_1`）と (iii)(iv)。 -/

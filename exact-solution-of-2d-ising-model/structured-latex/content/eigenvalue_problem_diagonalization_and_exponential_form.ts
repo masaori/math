@@ -760,7 +760,11 @@ P_{r+1}P_{r+1}
         ref("def_jordan_wigner_Y_matrices"),
         " の ",
         math(String.raw`m=1`),
-        " の規約より ",
+        " の場合（",
+        ref("def_finite_product_of_matrices"),
+        " の ",
+        math(String.raw`r=1`),
+        "）より ",
         math(String.raw`\sigma_1^z=Z_1`),
         "・",
         math(String.raw`\sigma_1^y=Y_1`),
@@ -776,7 +780,7 @@ P_{r+1}P_{r+1}
 &= (-i)\bigl(\sigma_1^y\sigma_1^z\bigr)
 &&(\because\ \text{Step 1 の}\ \sigma_k^x = (-i)(\sigma_k^y\sigma_k^z)\ (k \to 1))\\
 &= (-i)\bigl(Y_1 Z_1\bigr)
-&&\bigl(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ Y_1 := \sigma_1^y,\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ Z_1 := \sigma_1^z\bigr)
+&&\bigl(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ Y_1 = \sigma_1^y,\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ Z_1 = \sigma_1^z\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -806,14 +810,12 @@ P_{r+1}P_{r+1}
         " についての帰納法で ",
         math(String.raw`P_{m-1}\in\mathcal{A}`),
         "。",
-        math(String.raw`j\in\{1,\dots,m\}`),
-        " について ",
-        math(String.raw`F_j^{(z)}:=\sigma_j^x\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\ (j<m)`),
-        "、",
-        math(String.raw`F_m^{(z)}:=\sigma_m^z`),
-        " と置くと、",
         ref("def_jordan_wigner_Z_matrices"),
-        " の ",
+        " の因子 ",
+        math(String.raw`F_j^{(z)}=\sigma_j^x\ (j<m)`),
+        "、",
+        math(String.raw`F_m^{(z)}=\sigma_m^z`),
+        " を用いる。同じ定義により ",
         math(String.raw`Z_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
         " は ",
         ref("def_finite_product_of_matrices"),
@@ -830,7 +832,7 @@ Z_m
 &= \Bigl(\prod_{j=1}^{m-1}F_j^{(z)}\Bigr)F_m^{(z)}
 &&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の漸化式}\ (r \to m-1)\bigr)\\
 &= \Bigl(\prod_{j=1}^{m-1}\sigma_j^x\Bigr)\sigma_m^z
-&&(\because\ F_j^{(z)}\ \text{の定義})\\
+&&\bigl(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_j^{(z)}\bigr)\\
 &= P_{m-1}\sigma_m^z
 &&(\because\ \text{積の表示}\ (r \to m-1)\ \text{を右辺から左辺へ})
 \end{aligned}`),
@@ -857,12 +859,12 @@ P_{m-1}Z_m
         "。",
         math(String.raw`\sigma_m^y`),
         " についても同じ形の鎖が書ける。",
-        math(String.raw`F_j^{(y)}:=\sigma_j^x\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\ (j<m)`),
-        "、",
-        math(String.raw`F_m^{(y)}:=\sigma_m^y`),
-        " と置くと、",
         ref("def_jordan_wigner_Y_matrices"),
-        " の ",
+        " の因子 ",
+        math(String.raw`F_j^{(y)}=\sigma_j^x\ (j<m)`),
+        "、",
+        math(String.raw`F_m^{(y)}=\sigma_m^y`),
+        " を用いると、同じ定義により ",
         math(String.raw`Y_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
         " は積 ",
         math(String.raw`\prod_{j=1}^{m}F_j^{(y)}`),
@@ -875,7 +877,7 @@ Y_m
 &= \Bigl(\prod_{j=1}^{m-1}F_j^{(y)}\Bigr)F_m^{(y)}
 &&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ \text{の漸化式}\ (r \to m-1)\bigr)\\
 &= \Bigl(\prod_{j=1}^{m-1}\sigma_j^x\Bigr)\sigma_m^y
-&&(\because\ F_j^{(y)}\ \text{の定義})\\
+&&\bigl(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_j^{(y)}\bigr)\\
 &= P_{m-1}\sigma_m^y
 &&(\because\ \text{積の表示}\ (r \to m-1)\ \text{を右辺から左辺へ})
 \end{aligned}`),

@@ -6,7 +6,7 @@
 `projection_claim_site_pauli_prefix_product_kronecker_form`）。
 同じファイルで、Lean の `Z`・`Y`（クロネッカー積 `siteProd` で定義）が人手の定義
 `def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices` の行列の有限積 `∏_{j=1}^{m}F_j^{(z)}`・`∏_{j=1}^{m}F_j^{(y)}`
-（`F_j^{(z)}`・`F_j^{(y)}` は人手 `Z_Y_generate_algebra` Step 2 の因子）に等しいことを示す。
+（因子 `F_j^{(z)}`・`F_j^{(y)}` と積の読み方は同じ 2 つの定義が定める）に等しいことを示す。
 
 **必要十分版**: `Ising2D/NecSuf/SitePauliPrefixProductKroneckerForm.lean`。具体版をその系として導くのは
 `ClaimSitePauliPrefixProductKroneckerFormFromNecSuf.lean`。
@@ -129,7 +129,7 @@ theorem site_pauli_prefix_product_kronecker_form :
 
 /-! ## Lean の `Z`・`Y` は人手の定義の行列の有限積に等しい -/
 
-/-- 人手 `Z_Y_generate_algebra` Step 2 の因子 `F_j^{(z)}`（`A = σ^z`）・`F_j^{(y)}`（`A = σ^y`）:
+/-- 人手 `def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices` の因子 `F_j^{(z)}`（`A = σ^z`）・`F_j^{(y)}`（`A = σ^y`）:
 `j < m` なら `σ_j^x`、`j = m` なら `σ_m^{A}`（人手の `m` は Lean の `m + 1`。Lean の 0 始まりの `j` が人手の `F_{j+1}`）。 -/
 noncomputable def jwFactor (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) : Fin ((m : ℕ) + 1) → TensorPow M :=
   fun j => if hj : (j : ℕ) < (m : ℕ) then sigmaX ⟨(j : ℕ), lt_trans hj m.isLt⟩ else siteOp m A
@@ -157,7 +157,7 @@ theorem jw_eq_finiteMatrixProduct (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
         (site_pauli_prefix_product_kronecker_form (m : ℕ) m.isLt (jwLetter m A)).symm
                                                         -- `site_pauli_prefix_product_kronecker_form`（`r → m`, `a_1 = ⋯ = a_{m-1} = x`, `a_m = A`）を右辺から左辺へ
     _ = finiteMatrixProduct (m : ℕ) (jwFactor m A) := by
-        -- `F_j` の定義（`σ_j^x = siteOp j σ^x`、`σ_m^{A} = siteOp m A`。`def_site_pauli_matrices`）
+        -- `F_j` の定義（`def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices`。`σ_j^x = siteOp j σ^x`、`σ_m^{A} = siteOp m A` は `def_site_pauli_matrices`）
         congr 1
         funext j
         by_cases hj : (j : ℕ) < (m : ℕ)

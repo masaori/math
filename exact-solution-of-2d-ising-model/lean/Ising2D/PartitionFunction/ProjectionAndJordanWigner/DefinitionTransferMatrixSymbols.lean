@@ -31,7 +31,7 @@ Pauli 行列の積の 6 式（`pauliX_mul_pauliX`・`pauliY_mul_pauliY`・`pauli
 原文はサイトを `1, …, M` で番号づけるが、Lean では `Fin M`（`0, …, M-1`）を使う。
 対応は `原文の m` ↔ `Lean の ⟨m-1, _⟩`。したがって原文の `Z_1 = σ^z_1`（空の文字列）は
 Lean では `Z 0 = sigmaZ 0` にあたり、`xString` の値が `1` になることで自動的に満たされる
-（原文が場合分けとして書いている `Z_1 := σ^z_1` は、Lean では特別扱い不要）。
+（旧 Typst の原文が場合分けとして書いている `Z_1 := σ^z_1` は、Lean では特別扱い不要。いまの人手 `def_jordan_wigner_Z_matrices` も場合分けを置かず、`Z_1 = σ_1^z` を有限積の `r = 1` の場合として導く）。
 
 原文の `Z_{M+1} := Z_1`（周期性）は `Fin M` 上では添字の巡回そのものなので、
 定義としては現れない（必要になる箇所で `Fin M` の演算として扱う）。
@@ -619,11 +619,11 @@ theorem jwFamily_of_gt {m i : Fin M} {A : Matrix (Fin 2) (Fin 2) ℂ}
   have h2 : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
   simp [jwFamily, h1, h2]
 
-/-- 原文の `Z_m := σ^x_1 ⋯ σ^x_{m-1} σ^z_m`（`Z_1 := σ^z_1`）。
+/-- 旧 Typst の原文の `Z_m := σ^x_1 ⋯ σ^x_{m-1} σ^z_m`（`Z_1 := σ^z_1`）。
 Lean の添字は 0 始まりで、`Z 0 = σ^z_0` が原文の `Z_1` にあたる。 -/
 noncomputable def Z (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliZ)
 
-/-- 原文の `Y_m := σ^x_1 ⋯ σ^x_{m-1} σ^y_m`（`Y_1 := σ^y_1`）。 -/
+/-- 旧 Typst の原文の `Y_m := σ^x_1 ⋯ σ^x_{m-1} σ^y_m`（`Y_1 := σ^y_1`）。 -/
 noncomputable def Y (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliY)
 
 /-- Jordan–Wigner 文字列。人手の 1 始まりのサイトで `P_m = σ^x_1 ⋯ σ^x_m`（Lean の 0 始まりの添字で `i < m` なるサイト全部）。
@@ -739,7 +739,7 @@ theorem Y_eq_xString_mul (m : Fin M) : Y m = xString M (m : ℕ) * sigmaY m := b
     _ = xString M (m : ℕ) * sigmaY m := rfl
 
 /-- 原文の `Z_1 = σ^z_1`（Lean の添字では `Z 0 = σ^z_0`）。
-原文では場合分けで与えているが、`xString` の空積が `I` になるので自動的に従う。 -/
+旧 Typst の原文では場合分けで与えている（いまの人手は有限積の `r = 1` の場合として導く）が、`xString` の空積が `I` になるので自動的に従う。 -/
 theorem Z_zero (h : 0 < M) : Z (⟨0, h⟩ : Fin M) = sigmaZ ⟨0, h⟩ := by
   rw [Z_eq_xString_mul]
   simp

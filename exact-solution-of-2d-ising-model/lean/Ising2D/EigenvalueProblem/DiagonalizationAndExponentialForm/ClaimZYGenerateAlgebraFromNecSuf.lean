@@ -154,14 +154,14 @@ theorem sigma_mem_adjoin_of_necSuf (k : Fin M) :
     (z := ZNat M) (y := YNat M) (zl := sigmaZNat M) (yl := sigmaYNat M) (xl := sigmaXNat M)
     (r := -Complex.I) (N := M) rfl
     (by
-      -- `n = 0` は人手の `m = 1` の `Z_1 := σ_1^z`（`sigmaZ_zero_eq_Z`）に `P_0 = I` を左から掛けたもの
+      -- `n = 0` は人手の `m = 1` の `Z_1 = σ_1^z`（`def_jordan_wigner_Z_matrices` の `m = 1` の場合。`sigmaZ_zero_eq_Z`）に `P_0 = I` を左から掛けたもの
       intro n hn
       rcases n with _ | n
       · rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_zero_eq_Z hn]
         exact (identity_matrix_mul_tensorPow _).symm
       · rw [sigmaZNat, dif_pos hn, ZNat, dif_pos hn, sigmaZ_eq_sigmaXPrefixProduct_mul_of_necSuf])
     (by
-      -- `n = 0` は人手の `m = 1` の `Y_1 := σ_1^y`（`sigmaY_zero_eq_Y`）に `P_0 = I` を左から掛けたもの
+      -- `n = 0` は人手の `m = 1` の `Y_1 = σ_1^y`（`def_jordan_wigner_Y_matrices` の `m = 1` の場合。`sigmaY_zero_eq_Y`）に `P_0 = I` を左から掛けたもの
       intro n hn
       rcases n with _ | n
       · rw [sigmaYNat, dif_pos hn, YNat, dif_pos hn, sigmaY_zero_eq_Y hn]
