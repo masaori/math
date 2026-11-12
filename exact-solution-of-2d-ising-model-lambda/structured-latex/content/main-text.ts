@@ -49335,7 +49335,12 @@ p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
                     title: { text: "実閉部分体の順序は Archimedes 性を持つ" },
                     labels: ["claim_real_algebraic_archimedean"],
                     habitat: "Qbar",
-                    verification: ["sagemath/check/real-algebraic-rational-pinching"],
+                    lean: [
+                      "Ising2DLambda.CriticalExponent.realAlgebraic_archimedean",
+                      "Ising2DLambda.NecSuf.CriticalExponent.archimedean_necSuf",
+                      "Ising2DLambda.CriticalExponent.realAlgebraic_archimedean_from_necSuf",
+                    ],
+                    verification: ["sagemath/check/real-algebraic-archimedean"],
                     statement: [paragraph([
                       "任意の ", math(String.raw`a\in R`), " に対し、ある ",
                       math(String.raw`N\in\mathbb N_{>0}`), " が存在して ",
@@ -49350,7 +49355,8 @@ p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
                         math(String.raw`B\in\mathbb Q_{>0}`), " を取る。",
                         math(String.raw`B=h/k`), "、", math(String.raw`h,k\in\mathbb N_{>0}`),
                         " と書き、", math(String.raw`N:=h+1\in\mathbb N_{>0}`),
-                        " と置く。有理数の順序で",
+                        " と置く。有理数は ", ref("claim_rationals_are_real_algebraic"),
+                        " により ", math(String.raw`R`), " の元でもある。有理数の順序で",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
@@ -49358,16 +49364,29 @@ B&=h/k&&\bigl(\because\ B=h/k\text{ の表示}\bigr)\\
 &<N&&\bigl(\because\ N=h+1\text{ と有理数の順序}\bigr)
 \end{aligned}`),
                       paragraph([
-                        ref("claim_positive_rational_positive_in_real_closed"),
+                        "であり、", ref("claim_positive_rational_positive_in_real_closed"),
                         " を差 ", math(String.raw`N-B\in\mathbb Q_{>0}`),
-                        " に適用すると ", math(String.raw`B<_R N`), " となる。",
+                        " に適用すると ", math(String.raw`0<_R N-B`), " となる。また",
+                      ]),
+                      displayMath(String.raw`(-B)-(-N)=N-B\qquad(\because\ \mathbb Q\text{ の四則})`),
+                      paragraph([
+                        "なので、", ref("def_real_algebraic_strict_order"),
+                        " により次の四つの不等式が成り立つ。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
--N&<_R-B&&(\because\ B<_R N\text{ の加法逆元による順序反転})\\
+-N&<_R-B&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\text{ と }0<_R(-B)-(-N)\bigr)\\
 &<_R a&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
 &<_R B&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
-&<_R N&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }N-B\text{ に適用})
+&<_R N&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\text{ と }0<_R N-B\bigr)
 \end{aligned}`),
+                      paragraph([
+                        ref("claim_real_algebraic_order_transitive"), " を ",
+                        math(String.raw`-N<_R-B<_R a`), " と ",
+                        math(String.raw`a<_R B<_R N`), " に当てて、",
+                        math(String.raw`-N<_R a`), " と ", math(String.raw`a<_R N`),
+                        " を得る。議論は ", math(String.raw`\mathbb Q`), " と ",
+                        math(String.raw`R\subset\overline{\mathbb Q}`), " の四則と順序で閉じる。",
+                      ]),
                     ],
                   },
                 },

@@ -1,4 +1,4 @@
-# 対象ラベル: claim_real_algebraic_archimedean, claim_real_algebraic_rational_pinching
+# 対象ラベル: claim_real_algebraic_rational_pinching
 R.<X> = PolynomialRing(QQ)
 examples = [
     (X^2 - 2, QQ(1)),
