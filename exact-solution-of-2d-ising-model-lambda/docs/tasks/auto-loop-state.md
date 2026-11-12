@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-12（並列の連続実行）、横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元されること（`claim_crossing_free_contact_elimination_phase`）を、接触対数についての整礎帰納法で Lean 具体版と必要十分版で示し、本文ブロックの `lean:` に登録した。** 並列の表の次は、マッチングの符号と基準マッチングの四件を扱う。
 - **2026-11-11（並列の連続実行）、接触点分割の回転位相は交差形式で更新されること（`claim_crossing_free_contact_split_phase`）を Lean 具体版と必要十分版で示し、本文ブロックの `lean:` に登録した。** 並列の表の次は、横断のない閉歩道の回転位相の還元（接触点分割の帰納法）を扱う。
 - **2026-11-11（連続実行）、実際の単純閉歩道の内側の側が全周で一定であることを Lean 二版で示した。** 次は各訪問頂点の入出方向を同定する。
 - **2026-11-11（並列の連続実行）、横断のない閉歩道を接触点で分けても各子に横断が生じないこと（`claim_crossing_free_contact_split_children`）を Lean 具体版と必要十分版で示し、本文ブロックの `lean:` に登録した。** 並列の表の次は、接触点分割の回転位相の更新と、横断のない閉歩道の回転位相の還元の二件を扱う。
 - **2026-11-11（並列の連続実行）、巻き付き二次符号の積と交差形式（`claim_torus_quadratic_sign_polarization`）を Lean 具体版と必要十分版で示し、本文ブロックの `lean:` に登録した。** 並列の表の次は、接触点分割の三件を扱う。
-- **2026-11-11（並列の連続実行）、横断消去の帰納法（横断数についての整礎帰納法そのもの）を Lean 具体版と必要十分版で示し、本文ブロックの `lean:` に登録した。** 並列の表の次は、巻き付き二次符号の積と交差形式・接触点分割の三件を扱う。
 
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
@@ -43,7 +43,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 接触点分割の帰納法の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_crossing_free_contact_elimination_phase`（横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される）。接触対数についての整礎帰納法。一回の分割の三つの部品は Lean 二版まで済んでいる: 各子に横断が生じないこと（`crossing_free_contact_split_children`）、回転位相の更新（2026-11-11、`crossing_free_contact_split_phase`。二本は `smoothedSplitWalkA`・`smoothedSplitWalkB`、閉性は `contactSplitWalkA_closed`・`contactSplitWalkB_closed`）、接触対数の減少（`claim_contact_split_pair_descent`）。切断線偶奇・台の分割は平滑化の場合の具体版（`smoothedSplitWalks_support_disjoint` など）と同じ添字区間で引ける。族の扱いは横断消去の帰納法の具体版（族をリストで表す）に倣う。 |
 | Onsager 閉形式への接続 | マッチングの符号と基準マッチングの四件の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | `claim_alternating_cycle_gauge_ratio`（短い対と基準の長い対の対角変換因子の比）、`claim_reference_matching_constant_term`（基準マッチングの長い標識の項は一である）、`claim_alternating_cycle_matching_sign`（交互閉路ごとの向き直しが二つのマッチングの符号比を与える）、`claim_tagged_matching_cycle_weight`（非零項は閉歩道ごとのねじれ・回転位相の積に分かれる）。 |
 | Onsager 閉形式への接続 | 平方恒等式に依存しない実数体への脱出と有限 Fourier 分解の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | 2026-11-11 に主経路の表から移した。 到達点四つの閉包の中で、依存を辿っても平方恒等式・有限トーラス公式に届かない 22 件（2026-11-04 の研究管理が `ref()` と `\blkref{}` の走査で確かめた）。依存の順に、実閉部分体の有理上下界 → Archimedes 性 → 有理挟み込み → 有理下切断の上限 → 下切断の上限による実現写像の有理数上での一致・加法・乗法・狭義順序 → 複素実現の加法・乗法・単射性 → 横・縦モードの複素根集合への包含 → 各モード集合と複素根集合の全単射 → 直積全単射、と、1 の冪根の逆元の共役 → 有理点での分散因子の正値性、逆元操作による分散因子の不変性 → モード軌道の大きさ、角の対数関数の連続性、下組の上限と実数極限、複素根の角表示、および到達点「分散因子の最小値は自己双対点で零になる」（`claim_dispersion_minimum_self_dual_point`）。具体版は実際の実閉部分体のデータと今回接続した実現写像の定義について述べる。一つの主張ごとに進め、行を割るときはこの備考を書き換える。 |
 
@@ -54,11 +53,11 @@
 
 ## レビュー記録
 
+- 2026-11-12: 「横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される」の本文の証明を Lean 具体版と照合した。結論は各子の通過頂点が相異なることを含むのに、基底 $n_{\mathrm{ct}}(\gamma)=0$ でその根拠を書いていなかった。また帰納法を子へ当てるには子の辺の標識が相異なることが要るのに、帰納段で述べていなかった（レビュー観点「一ステップ一定理」）。基底に `claim_zero_contact_iff_distinct_pass_vertices` による通過頂点の相異を、帰納段に二本の項が元の項を重複なく並べたものであることによる辺の標識の相異を書き足した。
 - 2026-11-11: 「接触点分割の回転位相は交差形式で更新される」の本文の証明を Lean 具体版と照合した。表の四行・各行の回転差・混合横断の値・$D/4\equiv1+I_L(C_A,C_B)$ の式鎖が具体版の各段と一致することを確かめた（本文に直すものは無かった）。その証明が引く「接触点分割の循環総回転数のずれは交換した二接続の回転数差に等しい」の Lean 具体版 `contact_split_turning_update` は ℕ 添字の辺列と後続写像を仮定で受け、実際の閉歩道について述べていなかった（レビュー観点「Lean 具体版が本文の具体的な対象について述べているか」）。実際の二本について示した `contact_split_walk_turning_update` を足し、本文ブロックの `lean:` に登録した。
 - 2026-11-11: 実際の閉歩道の隣接二歩と周期端の左右一致の Lean 具体版を、四方向の内側セルと非後退性・対角接触の除外に照合し、修正不要と確かめた。
 - 2026-11-11: 「横断のない閉歩道を接触点で分けても各子に横断は生じない」の本文の証明は「辺の標識が相異なるので接触頂点の通過は選んだ二つだけである」を根拠なしに述べていた（レビュー観点「一ステップ一定理」）。一つの通過の二半辺の相異（非後退）、相異なる通過が半辺を共有しないこと（台の辺の相異性）、頂点の半辺と四つの方向番号の一対一対応（`claim_vertex_port_bijection`）から四半辺を使い尽くす議論に書き直し、子の添字区間がどちらの接触添字を含むかと、他の頂点で出辺が元と同じことも本文に書いた。
 - 2026-11-11: 「巻き付き二次符号の積と交差形式」の本文の証明を Lean 具体版と一行ずつ照合した。指数の式鎖（定義・偶奇の代入・分配律・交換律と結合律・定義）と符号の式鎖（定義・合同式・整数指数の加法則・定義）の各行の根拠が具体版の calc の各段と一致することを確かめた（直すものは無かった）。
-- 2026-11-11: 「横断消去の帰納法は位相と切断線偶奇と交差形式を保つ」の本文の証明を Lean 具体版と一行ずつ照合した。基底・横断する添字の選択・二本の台の分割・各子の横断数の減少・族の連結・回転数・切断線偶奇・交差形式の分配・横断数の各行の根拠が、引いている本文ブロックと一致することを確かめた（直すものは無かった）。
 
 ## 式変形の書き方の統一
 
@@ -70,8 +69,8 @@
 
 ## 前進の記録
 
+- 2026-11-12: 並列の表の先頭「接触点分割の帰納法の Lean 二版」を済ませ、行を消した。具体版（`KacWard/CrossingFreeContactEliminationPhase.lean`）は族を `ClosedNonbacktrackingWalkData` のリストで表し（横断消去の帰納法の具体版と同じ）、接触対数についての整礎帰納法で、基底は自分自身の一項の族（通過頂点の相異は `contactPairCount_eq_zero_iff_pass_vertices_injective`）、帰納段は接触対の選択（`exists_contact_pair_of_contactPairCount_pos`）、両子の横断の不在（`crossing_free_contact_split_children`）、接触対数の減少、二本への帰納法の仮定、族の連結を順に示し、切断線偶奇は `closedWalk_smoothing_split_seam_parity`、位相は `crossing_free_contact_split_phase` と $(-1)$ の冪の指数の $\mathbb F_2$ での加法（`neg_one_pow_zmod_two_val_add`）で閉じる。接触対数の減少は既存の具体版 `contact_split_pair_descent` が ℕ 添字の写像を仮定で受けていたので、実際の二本について、子の接触対を両方が同じ添字区間に属する元の接触対へ一対一に送り（`contactPairCount_reindex`）、選んだ接触対が混合部分に属することから示した `contact_split_walks_pair_descent` を足し、`claim_contact_split_pair_descent` の `lean:` にも登録した。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/CrossingFreeContactEliminationPhase.lean`）の仮定は、横断消去の必要十分版と同じ台・交差形式・読みの仮定に、位相の住処の可換モノイド、符号 $\sigma$ の加法から積への準同型性と $\sigma(0)=1$ を加えたものだけで、$1+1=0$ は使わない。導出版は `CrossingFreeContactEliminationPhaseFromNecSuf.lean`。SageMath の既存の検証（接触点分割 960 件・帰納法 528 件）を再実行して通した。
 - 2026-11-11: 並列の表の先頭「接触点分割の二件の Lean 二版」のうち、回転位相の更新（`claim_crossing_free_contact_split_phase`）を済ませ、行を「接触点分割の帰納法の Lean 二版」にした。具体版（`KacWard/CrossingFreeContactSplitPhase.lean`）は本文の順に、接触頂点の四半辺の相異を方向番号の六つの不等式にまとめ（`contact_halfEdge_directions_ne`）、元の二通過がともに直進して軸が異なることを横断数零から除き（`contact_not_straight_straight`）、方向番号の四つ組 $4^4$ 通りの有限な場合分けで本文の表（回転差 $0$ なら分割後の二通過が横断、$\pm4$ なら横断しない）を示す（`contact_local_table`）。回転差は `claim_contact_split_turning_update` を実際の二本へ当てた `contact_split_walk_turning_update`、二本の混合横断数は位置の対を元の添字の対へ送る全単射（`contact_split_mutual_crossing_eq_index`）と接触頂点の通過が二つだけであること・他の頂点では元の横断になることによる指示関数（`contact_split_index_mutual_crossing_eq_indicator`）で表し、`closedWalkMutualCrossingNumber_eq_intersection` で交差形式へ移し、$\zeta_8^4=-1$ で位相の等式を得る（`crossing_free_contact_split_phase`）。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/CrossingFreeContactSplitPhase.lean`）の仮定は、方向番号の差だけで決まる回転数で $\mathrm{turn}(0)=0$ と $\mathrm{turn}(3)=-\mathrm{turn}(1)$（$\mathrm{turn}(1)=1$ は使わない）、隣と異なり向かいと等しい軸、零を除いて群をなす位相の住処（積の可換性は使わない）と $s=z^{4\,\mathrm{turn}(1)}$ の $s^2=1$（回転差 $+4$ の型でだけ要る）だけである。導出版は `CrossingFreeContactSplitPhaseFromNecSuf.lean`。SageMath の既存の検証（接触点分割 960 件）を再実行して通した。
 - 2026-11-11: 実際の単純閉歩道で隣接二歩の左右一致を最初の歩から有限帰納法で全歩へ伝播し、周期端の一致も接続した。Lean 具体版は実際の歩道と内側セル集合を対象とし、必要十分版は任意の型の有限列の隣接一致だけを使う。導出版と本文の説明も登録した。
 - 2026-11-11: 並列の表の先頭「接触点分割の三件の Lean 二版」を、子に横断が生じないこと（接触頂点の通過の数え上げと元の横断への読み替えの論法）と、回転位相の更新・還元の二件に割り、前者を済ませた。具体版（`KacWard/CrossingFreeContactSplitChildren.lean`）は実際の閉歩道について、交換した二接続の非後退（`contactSwappedExit_mem_nonbacktrackingSuccessors`）から二本の閉性、一つの通過の二半辺の相異（`pass_halfEdges_ne`）と半辺を共有する通過の一致（`pass_shared_halfEdge_eq`）から接触頂点の通過が二つだけであること（`contact_vertex_passes`）、子の添字の像が二つの接触添字を同時に含まないことと、他の添字で出辺が元と同じことによる元の横断への読み替え（`contact_split_child_original_crossing`）を順に示し、$c(\gamma_A)=c(\gamma_B)=0$（`crossing_free_contact_split_children`）を得る。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/CrossingFreeContactSplitChildren.lean`）の仮定は、方向を `ZMod 4` に置いた半辺の使用、半辺を共有する通過の一致、一つの通過の二半辺の相異、元の横断の対称性、子の横断が相異なる二添字の同じ頂点の通過であること、接触頂点の外で元の横断であること、子の添字の像が二つの接触添字を同時に含まないことだけで、横断の中身（直進・軸）は使わない。導出版は `CrossingFreeContactSplitChildrenFromNecSuf.lean`。SageMath の既存の検証（接触点分割 960 件）を再実行して通した。
 - 2026-11-11: 並列の表の先頭「巻き付き二次符号の積と交差形式・接触点分割の三件の Lean 二版」を、二次符号の加法則（$\{0,1\}$ 上の多項式の展開だけの論法）と接触点分割の三件（閉歩道の分割の論法）に割り、前者を済ませた。具体版（`KacWard/TorusQuadraticSignPolarization.lean`）は本文と同じ二つの式鎖で、`torusQuadraticParity_polarization`（定義・偶奇の代入・`&&` の `xor` への分配・交換律と結合律・定義）と `torusQuadraticSign_polarization`（定義・指数の式鎖・整数指数の加法則・定義。右端は本文どおり整数の指数 $(-1)^{h_1v_2+h_2v_1}$）を示し、必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/QuadraticSignPolarization.lean`）の仮定は、指数の住処の二つの演算について加法の交換律・結合律と積の左右の分配律、任意の一次係数 $\alpha,\beta$、加法を積へ移す写像 $\sigma$ だけである（零・単位元・積の交換律と結合律・$1+1=0$・値の積の結合律は使わない）。導出版は `TorusQuadraticSignPolarizationFromNecSuf.lean`。SageMath の既存の検証（64 通り）を再実行して通した。
-- 2026-11-11: 平面持ち上げの終点と始点を零巻き付きから一致させ、周期端の二歩不帰還と対角接触の除外を四セル補題へ適用した。実際の最終歩と初歩の左右一致を Lean 具体版で示し、本文の主張へ登録した。必要十分版は既存の四セル配置の補題である。

@@ -63437,6 +63437,8 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
               verification: ["sagemath/check/edge-simple-contact-split"],
               lean: [
                 "Ising2DLambda.KacWard.contact_split_pair_descent",
+                "Ising2DLambda.KacWard.contactPairCount_reindex",
+                "Ising2DLambda.KacWard.contact_split_walks_pair_descent",
                 "Ising2DLambda.NecSuf.KacWard.exclusive_split_witness_descent_necSuf",
                 "Ising2DLambda.KacWard.contact_split_pair_descent_from_necSuf",
               ],
@@ -79199,6 +79201,18 @@ c(\gamma)\bmod2
                     labels: ["claim_crossing_free_contact_elimination_phase"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/crossing-free-contact-elimination-phase"],
+                    lean: [
+                      "Ising2DLambda.KacWard.orderedIndexPair",
+                      "Ising2DLambda.KacWard.contactPairCount_reindex",
+                      "Ising2DLambda.KacWard.contactPairCount_eq_card",
+                      "Ising2DLambda.KacWard.contact_split_walks_pair_descent",
+                      "Ising2DLambda.KacWard.neg_one_pow_zmod_two_val_add",
+                      "Ising2DLambda.KacWard.exists_contact_pair_of_contactPairCount_pos",
+                      "Ising2DLambda.KacWard.ContactEliminationFamily",
+                      "Ising2DLambda.KacWard.crossing_free_contact_elimination_phase",
+                      "Ising2DLambda.NecSuf.KacWard.contact_elimination_family_necSuf",
+                      "Ising2DLambda.KacWard.crossing_free_contact_elimination_phase_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なり ",
@@ -79226,6 +79240,9 @@ c(\gamma)\bmod2
                         "（", ref("def_contact_pair_count"), "）の整礎帰納法を使う。",
                         math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら ",
                         math(String.raw`n=1,\ \delta_1=\gamma`), " と取る。",
+                        "接触対数が零なので、", ref("claim_zero_contact_iff_distinct_pass_vertices"),
+                        " により ", math(String.raw`\gamma`), " の通過する頂点は相異なる。",
+                        "無向辺の標識が相異なることと横断を持たないことは仮定である。",
                         "台と切断線偶奇は同じであり、交差形式の和は空、符号の指数は零である。",
                       ]),
                       paragraph([
@@ -79233,6 +79250,7 @@ c(\gamma)\bmod2
                         math(String.raw`k<l`), " を一つ選び、", ref("claim_edge_simple_contact_split"),
                         " の二本を ", math(String.raw`\gamma_A,\gamma_B`), "、その台を ",
                         math(String.raw`C_A,C_B`), " とする。二本の台は互いに素で元の台を尽くす。",
+                        "二本の項はどちらも元の辺列の項を重複なく並べたものなので、各子の無向辺の標識も相異なる。",
                         ref("claim_crossing_free_contact_split_children"), " により両子の横断数は零である。",
                         "接触対数について両子それぞれに",
                       ]),
