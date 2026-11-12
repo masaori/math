@@ -7,8 +7,8 @@ open scoped Classical
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
-/-- 完全マッチングの対を一つずつ処理する。既処理の端点は前置列に残す。 -/
-private theorem matchingOrientationSignAux (S : Set J) (l : List (J × J)) :
+/-- 完全マッチングの対を一つずつ処理する。既処理の端点は前置列に残す。任意の列挙に使う。 -/
+theorem matchingOrientationSignAux (S : Set J) (l : List (J × J)) :
     ∀ u : List J, IsCompleteWord (u ++ matchingPairWord l) →
       matchingWordSign (u ++ l.flatMap (fun p =>
         if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) =
