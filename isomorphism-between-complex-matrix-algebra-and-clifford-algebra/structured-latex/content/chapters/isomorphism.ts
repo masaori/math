@@ -7284,4 +7284,478 @@ a
       ]),
     ],
   },
+  {
+    id: "isomorphism_basis_of_matrix_unit_elements_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "系：行列単位にあたる元はクリフォード代数の基底をなす" },
+    labels: [],
+  },
+  {
+    id: "isomorphism_definition_family_of_matrix_unit_elements_numbered_by_pairs",
+    kind: "definition",
+    title: { text: "部分集合の組の番号付けで番号付けた、行列単位にあたる元の族" },
+    labels: ["def_family_of_matrix_unit_elements_numbered_by_pairs"],
+    statement: [
+      paragraph([
+        math(String.raw`M`),
+        "、",
+        math(String.raw`\mathrm{Cl}(V,q)`),
+        " を ",
+        ref("def_clifford_algebra_of_split_quadratic_space"),
+        " のもの、",
+        math(String.raw`\mathcal{E}_{S,T}`),
+        " を ",
+        ref("def_matrix_unit_element_of_split_clifford_algebra"),
+        " のもの、",
+        math(String.raw`N_M`),
+        " と ",
+        math(String.raw`p_M:\{1,\dots,N_M\}\to\mathcal{P}_M\times\mathcal{P}_M`),
+        " を ",
+        ref("def_numbering_of_pairs_of_subsets"),
+        " のものとし、",
+        math(String.raw`A:=\mathrm{Cl}(V,q)`),
+        " と書く。",
+        math(String.raw`m\in\{1,\dots,N_M\}`),
+        " について、",
+        math(String.raw`S_m,T_m\in\mathcal{P}_M`),
+        " を ",
+        math(String.raw`p_M(m)=(S_m,T_m)`),
+        " で定め（順序対の第一成分と第二成分）、族 ",
+        math(String.raw`b:\{1,\dots,N_M\}\to A`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`b_m:=b(m):=\mathcal{E}_{S_m,T_m}`),
+      paragraph([
+        math(String.raw`b`),
+        " は ℂ-線型空間 ",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        "（",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）である。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_entry_of_image_of_linear_combination_of_matrix_unit_elements",
+    kind: "claim",
+    title: { text: "行列単位にあたる元の線型結合の、行列環への像の成分は係数である" },
+    labels: ["claim_entry_of_image_of_linear_combination_of_matrix_unit_elements"],
+    statement: [
+      paragraph([
+        math(String.raw`\Phi`),
+        " を ",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        " の準同型、",
+        math(String.raw`N_M`),
+        "、",
+        math(String.raw`S_m`),
+        "、",
+        math(String.raw`T_m`),
+        "、",
+        math(String.raw`b`),
+        " を ",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        " のものとし、",
+        math(String.raw`A:=\mathrm{Cl}(V,q)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,N_M\}`),
+        " の各元 ",
+        math(String.raw`m`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_m`),
+        " が一つずつ与えられているとする。すべての ",
+        math(String.raw`j\in\{1,\dots,N_M\}`),
+        " について、",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        " の中の線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Phi\left(\sum_{m=1}^{N_M}\lambda_m\ast_A b_m\right)_{S_j,T_j}=\lambda_j`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と置く。",
+        math(String.raw`\Phi`),
+        " は ℂ-代数の準同型なので、",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        " から ",
+        math(String.raw`U_{\mathrm{vec}}(B)`),
+        " への線型写像である（",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        "、",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        "）。",
+        math(String.raw`\mathrm{ent}_{S_j,T_j}:B\to\mathbb{C}^{\mathrm{vec}}`),
+        " は線型写像である（",
+        ref("claim_matrix_entry_map_is_linear_map"),
+        "）。",
+        math(String.raw`\delta_{m,j}\in\mathbb{C}`),
+        " は ",
+        math(String.raw`\{1,\dots,N_M\}`),
+        " の二元のクロネッカーのデルタ（",
+        ref("def_kronecker_delta"),
+        "）である。準備として、",
+        math(String.raw`m\in\{1,\dots,N_M\}`),
+        " について次の二つを示す。",
+      ]),
+      paragraph([
+        "（イ）",
+        math(String.raw`\Phi(b_m)=E_{S_m,T_m}`),
+        "。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi(b_m)
+&=\Phi(\mathcal{E}_{S_m,T_m})
+&&\left(\because\ \blkref{def_family_of_matrix_unit_elements_numbered_by_pairs}\right)\\
+&=E_{S_m,T_m}
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_on_matrix_unit_element}\right).
+\end{aligned}`),
+      paragraph([
+        "（ロ）",
+        math(String.raw`(E_{S_m,T_m})_{S_j,T_j}=\delta_{m,j}`),
+        "。",
+        math(String.raw`m=j`),
+        " のとき、",
+        math(String.raw`S_m=S_j`),
+        " かつ ",
+        math(String.raw`T_m=T_j`),
+        " である。",
+        math(String.raw`m\neq j`),
+        " のとき、",
+        math(String.raw`(N_M,p_M)`),
+        " は番号付けなので（",
+        ref("claim_numbering_of_pairs_of_subsets_is_numbering"),
+        "）、単射の条件（",
+        ref("def_numbering_of_finite_set"),
+        "）から ",
+        math(String.raw`p_M(m)\neq p_M(j)`),
+        "、すなわち ",
+        math(String.raw`S_m\neq S_j`),
+        " または ",
+        math(String.raw`T_m\neq T_j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(E_{S_m,T_m})_{S_j,T_j}
+&=\delta_{S_m,S_j}\cdot_{\mathbb{C}}\delta_{T_m,T_j}
+&&\left(\because\ \blkref{def_matrix_unit}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ m=j\ \text{のとき}\ S_m=S_j,\ T_m=T_j\text{。}\blkref{def_kronecker_delta}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\delta_{m,j}
+&&\left(\because\ m=j\text{。}\blkref{def_kronecker_delta}\right),\\[4pt]
+(E_{S_m,T_m})_{S_j,T_j}
+&=\delta_{S_m,S_j}\cdot_{\mathbb{C}}\delta_{T_m,T_j}
+&&\left(\because\ \blkref{def_matrix_unit}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\delta_{T_m,T_j}
+&&\left(\because\ m\neq j\ \text{かつ}\ S_m\neq S_j\ \text{のとき。}\blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right)\\
+&=\delta_{m,j}
+&&\left(\because\ m\neq j\text{。}\blkref{def_kronecker_delta}\right),\\[4pt]
+(E_{S_m,T_m})_{S_j,T_j}
+&=\delta_{S_m,S_j}\cdot_{\mathbb{C}}\delta_{T_m,T_j}
+&&\left(\because\ \blkref{def_matrix_unit}\right)\\
+&=\delta_{S_m,S_j}\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ m\neq j\ \text{かつ}\ T_m\neq T_j\ \text{のとき。}\blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ z\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=\delta_{m,j}
+&&\left(\because\ m\neq j\text{。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m\neq j`),
+        " のときは ",
+        math(String.raw`S_m\neq S_j`),
+        " か ",
+        math(String.raw`T_m\neq T_j`),
+        " の少なくとも一方が成り立つので、二つ目か三つ目の式変形のどちらかが当たる。",
+      ]),
+      paragraph([
+        "主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi\left(\sum_{m=1}^{N_M}\lambda_m\ast_A b_m\right)_{S_j,T_j}
+&=\mathrm{ent}_{S_j,T_j}\left(\Phi\left(\sum_{m=1}^{N_M}\lambda_m\ast_A b_m\right)\right)
+&&\left(\because\ \mathrm{ent}_{S_j,T_j}\ \text{の定義。}\blkref{claim_matrix_entry_map_is_linear_map}\right)\\
+&=\mathrm{ent}_{S_j,T_j}\left(\sum_{m=1}^{N_M}\lambda_m\ast_B\Phi(b_m)\right)
+&&\left(\because\ \text{線型写像}\ \Phi\ \text{に。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\mathrm{ent}_{S_j,T_j}\left(\sum_{m=1}^{N_M}\lambda_m\ast_B E_{S_m,T_m}\right)
+&&\left(\because\ \text{各}\ m\ \text{で（イ）。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\sum_{m=1}^{N_M}\lambda_m\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathrm{ent}_{S_j,T_j}(E_{S_m,T_m})
+&&\left(\because\ \text{線型写像}\ \mathrm{ent}_{S_j,T_j}\ \text{に。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\sum_{m=1}^{N_M}\lambda_m\cdot_{\mathbb{C}^{\mathrm{vec}}}\delta_{m,j}
+&&\left(\because\ \text{各}\ m\ \text{で}\ \mathrm{ent}_{S_j,T_j}\ \text{の定義と（ロ）。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\sum_{m=1}^{N_M}\delta_{m,j}\cdot_{\mathbb{C}^{\mathrm{vec}}}\lambda_m
+&&\left(\because\ \text{各}\ m\ \text{で}\ \lambda_m\cdot_{\mathbb{C}}\delta_{m,j}=\delta_{m,j}\cdot_{\mathbb{C}}\lambda_m\text{。}\blkref{def_complex_numbers_as_complex_vector_space}\text{、}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\lambda_j
+&&\left(\because\ V:=\mathbb{C}^{\mathrm{vec}}\text{、}n:=N_M\ge 1\text{、}b_k:=\lambda_k\ \text{に。}\blkref{claim_family_member_is_kronecker_delta_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " は ℂ-線型空間であり（",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"),
+        "）、",
+        math(String.raw`N_M\ge 1`),
+        " は ",
+        ref("def_numbering_of_pairs_of_subsets"),
+        " で確かめた。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_family_of_matrix_unit_elements_is_linearly_independent",
+    kind: "claim",
+    title: { text: "行列単位にあたる元の族は一次独立である" },
+    labels: ["claim_family_of_matrix_unit_elements_is_linearly_independent"],
+    statement: [
+      paragraph([
+        math(String.raw`b:\{1,\dots,N_M\}\to\mathrm{Cl}(V,q)`),
+        " を ",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        " の族とする。",
+        math(String.raw`b`),
+        " は ℂ-線型空間 ",
+        math(String.raw`U_{\mathrm{vec}}(\mathrm{Cl}(V,q))`),
+        " の中で一次独立（",
+        ref("def_linear_independence"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`),
+        "、",
+        math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と置き、",
+        math(String.raw`\Phi`),
+        " を ",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        " の準同型とする。",
+        math(String.raw`\{1,\dots,N_M\}`),
+        " の各元 ",
+        math(String.raw`m`),
+        " に ",
+        math(String.raw`\lambda_m\in\mathbb{C}`),
+        " が与えられ、",
+        math(String.raw`\sum_{m=1}^{N_M}\lambda_m\ast_A b_m=0_A`),
+        " が成り立つとする。",
+        math(String.raw`j\in\{1,\dots,N_M\}`),
+        " をとり、",
+        math(String.raw`S_j,T_j`),
+        " を ",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        " のものとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_j
+&=\Phi\left(\sum_{m=1}^{N_M}\lambda_m\ast_A b_m\right)_{S_j,T_j}
+&&\left(\because\ \blkref{claim_entry_of_image_of_linear_combination_of_matrix_unit_elements}\ \text{を右辺から左辺へ読む}\right)\\
+&=\Phi(0_A)_{S_j,T_j}
+&&\left(\because\ \text{仮定}\right)\\
+&=(0_B)_{S_j,T_j}
+&&\left(\because\ \Phi\ \text{は}\ U_{\mathrm{vec}}(A)\ \text{から}\ U_{\mathrm{vec}}(B)\ \text{への線型写像。}\blkref{claim_linear_map_sends_zero_to_zero}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \text{零行列。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j`),
+        " は任意だったので、すべての ",
+        math(String.raw`j\in\{1,\dots,N_M\}`),
+        " について ",
+        math(String.raw`\lambda_j=0_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`b`),
+        " は一次独立である（",
+        ref("def_linear_independence"),
+        "）。",
+        math(String.raw`\Phi`),
+        " が線型写像であることは ",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        " と ",
+        ref("def_underlying_ring_and_vector_space_of_algebra"),
+        " による。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_family_of_matrix_unit_elements_spans_clifford_algebra",
+    kind: "claim",
+    title: { text: "行列単位にあたる元の族はクリフォード代数を線型結合で張る" },
+    labels: ["claim_family_of_matrix_unit_elements_spans_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`\Phi`),
+        " を ",
+        ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"),
+        " の準同型、",
+        math(String.raw`N_M`),
+        "、",
+        math(String.raw`S_m`),
+        "、",
+        math(String.raw`T_m`),
+        "、",
+        math(String.raw`b`),
+        " を ",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        " のものとし、",
+        math(String.raw`A:=\mathrm{Cl}(V,q)`),
+        " と書く。すべての ",
+        math(String.raw`x\in A`),
+        " について、",
+        math(String.raw`\lambda_m:=\Phi(x)_{S_m,T_m}\in\mathbb{C}`),
+        "（",
+        math(String.raw`m\in\{1,\dots,N_M\}`),
+        "）と置くと次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{m=1}^{N_M}\lambda_m\ast_A b_m=x`),
+      paragraph([
+        "したがって ",
+        math(String.raw`b`),
+        " は ",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        " を線型結合で張る（",
+        ref("def_spanning_family"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Psi`),
+        " を ",
+        ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"),
+        " の写像とし、",
+        math(String.raw`y:=\sum_{m=1}^{N_M}\lambda_m\ast_A b_m\in A`),
+        " と置く。まず ",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元として ",
+        math(String.raw`\Phi(y)=\Phi(x)`),
+        " を示す。",
+        math(String.raw`(S,T)\in\mathcal{P}_M\times\mathcal{P}_M`),
+        " をとる。",
+        math(String.raw`(N_M,p_M)`),
+        " は ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の番号付けなので（",
+        ref("claim_numbering_of_pairs_of_subsets_is_numbering"),
+        "）、",
+        math(String.raw`j:=p_M^{-1}((S,T))\in\{1,\dots,N_M\}`),
+        " は ",
+        math(String.raw`p_M(j)=(S,T)`),
+        "、すなわち ",
+        math(String.raw`S_j=S`),
+        " かつ ",
+        math(String.raw`T_j=T`),
+        " を満たす（",
+        ref("def_numbering_of_finite_set"),
+        "、",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi(y)_{S,T}
+&=\Phi(y)_{S_j,T_j}
+&&\left(\because\ S=S_j,\ T=T_j\right)\\
+&=\lambda_j
+&&\left(\because\ y\ \text{の置き方と}\ \blkref{claim_entry_of_image_of_linear_combination_of_matrix_unit_elements}\right)\\
+&=\Phi(x)_{S_j,T_j}
+&&\left(\because\ \lambda_j\ \text{の置き方}\right)\\
+&=\Phi(x)_{S,T}
+&&\left(\because\ S_j=S,\ T_j=T\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`(S,T)`),
+        " は任意だったので ",
+        math(String.raw`\Phi(y)=\Phi(x)`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{m=1}^{N_M}\lambda_m\ast_A b_m
+&=y
+&&\left(\because\ y\ \text{の置き方}\right)\\
+&=\Psi\bigl(\Phi(y)\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity}\right)\\
+&=\Psi\bigl(\Phi(x)\bigr)
+&&\left(\because\ \Phi(y)=\Phi(x)\right)\\
+&=x
+&&\left(\because\ \blkref{claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x\in A`),
+        " は任意だったので、",
+        math(String.raw`b`),
+        " は ",
+        math(String.raw`U_{\mathrm{vec}}(A)`),
+        " を線型結合で張る（",
+        ref("def_spanning_family"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_matrix_unit_elements_form_basis_of_clifford_algebra",
+    kind: "theorem",
+    title: { text: "系：行列単位にあたる元の族は、分裂した二次空間のクリフォード代数の基底である" },
+    labels: ["theorem_matrix_unit_elements_form_basis_of_clifford_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`\mathrm{Cl}(V,q)`),
+        " を ",
+        ref("def_clifford_algebra_of_split_quadratic_space"),
+        " の分裂した二次空間のクリフォード代数、",
+        math(String.raw`\mathcal{E}_{S,T}`),
+        " を ",
+        ref("def_matrix_unit_element_of_split_clifford_algebra"),
+        " の行列単位にあたる元、",
+        math(String.raw`N_M=(2^M)^2`),
+        " と ",
+        math(String.raw`p_M(m)=(S_m,T_m)`),
+        " を ",
+        ref("def_numbering_of_pairs_of_subsets"),
+        " の ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の番号付け（",
+        ref("claim_numbering_of_pairs_of_subsets_is_numbering"),
+        "）とする。族 ",
+        math(String.raw`b:\{1,\dots,N_M\}\to\mathrm{Cl}(V,q)`),
+        "、",
+        math(String.raw`b_m:=\mathcal{E}_{S_m,T_m}`),
+        "（",
+        ref("def_family_of_matrix_unit_elements_numbered_by_pairs"),
+        "）は、ℂ-線型空間 ",
+        math(String.raw`U_{\mathrm{vec}}(\mathrm{Cl}(V,q))`),
+        " の基底（",
+        ref("def_basis"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`b`),
+        " は一次独立であり（",
+        ref("claim_family_of_matrix_unit_elements_is_linearly_independent"),
+        "）、",
+        math(String.raw`U_{\mathrm{vec}}(\mathrm{Cl}(V,q))`),
+        " を線型結合で張る（",
+        ref("claim_family_of_matrix_unit_elements_spans_clifford_algebra"),
+        "）。したがって ",
+        math(String.raw`b`),
+        " は基底である（",
+        ref("def_basis"),
+        "）。",
+      ]),
+    ],
+  },
 ]);

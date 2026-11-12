@@ -2204,4 +2204,759 @@ t\in e_{M-1}(k-h)
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_definition_numbering_of_pairs_of_subsets",
+    kind: "definition",
+    title: { text: "{1,…,M} の部分集合の組全体の番号付けの写像" },
+    labels: ["def_numbering_of_pairs_of_subsets"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`2^M\in\mathbb{Z}_{\ge 1}`),
+        " と ",
+        math(String.raw`e_M:\{1,\dots,2^M\}\to\mathcal{P}_M`),
+        " を ",
+        ref("def_binary_numbering_of_power_set"),
+        " のものとする。整数 ",
+        math(String.raw`N_M:=(2^M)^2`),
+        " を ",
+        ref("def_power_of_nonnegative_integer"),
+        " の冪（",
+        math(String.raw`n:=2^M`),
+        "、",
+        math(String.raw`k:=2`),
+        "）で定め、",
+        math(String.raw`\eta:=\eta_{2^M,2}:\{1,\dots,N_M\}\to X_{2^M,2}`),
+        " を ",
+        ref("def_base_n_numbering_of_maps"),
+        " の写像とする（",
+        math(String.raw`X_{2^M,2}`),
+        " は ",
+        ref("def_set_of_maps_between_initial_segments"),
+        " の集合）。写像 ",
+        math(String.raw`p_M:\{1,\dots,N_M\}\to\mathcal{P}_M\times\mathcal{P}_M`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`p_M(m):=\Bigl(e_M\bigl(\eta(m)(1)\bigr),\ e_M\bigl(\eta(m)(2)\bigr)\Bigr)`),
+      paragraph([
+        math(String.raw`m\in\{1,\dots,N_M\}`),
+        " について ",
+        math(String.raw`\eta(m)`),
+        " は写像 ",
+        math(String.raw`\{1,2\}\to\{1,\dots,2^M\}`),
+        " なので、",
+        math(String.raw`\eta(m)(1)`),
+        " と ",
+        math(String.raw`\eta(m)(2)`),
+        " は ",
+        math(String.raw`e_M`),
+        " の定義域の元であり、右辺は ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の元（",
+        math(String.raw`\mathcal{P}_M`),
+        " の二つの元の順序対）として一つに決まる。",
+        math(String.raw`2^M\ge 1`),
+        " なので ",
+        math(String.raw`N_M=2^M\cdot(2^M\cdot 1)\ge 1`),
+        " である（",
+        ref("def_power_of_nonnegative_integer"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_numbering_of_pairs_of_subsets_is_numbering",
+    kind: "claim",
+    title: { text: "部分集合の組全体の番号付けの写像は番号付けを与え、部分集合の組全体は有限集合である" },
+    labels: ["claim_numbering_of_pairs_of_subsets_is_numbering"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`N_M`),
+        " と ",
+        math(String.raw`p_M:\{1,\dots,N_M\}\to\mathcal{P}_M\times\mathcal{P}_M`),
+        " を ",
+        ref("def_numbering_of_pairs_of_subsets"),
+        " のものとする。このとき組 ",
+        math(String.raw`(N_M,p_M)`),
+        " は ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の番号付け（",
+        ref("def_numbering_of_finite_set"),
+        "）である。したがって ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " は有限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\eta:=\eta_{2^M,2}`),
+        " と書く。",
+        math(String.raw`(2^M,e_M)`),
+        " は ",
+        math(String.raw`\mathcal{P}_M`),
+        " の番号付けであり（",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）、",
+        math(String.raw`(N_M,\eta)`),
+        " は ",
+        math(String.raw`X_{2^M,2}`),
+        " の番号付けである（",
+        ref("claim_base_n_numbering_is_numbering_of_maps"),
+        " で ",
+        math(String.raw`n:=2^M`),
+        "、",
+        math(String.raw`k:=2`),
+        "）。",
+        math(String.raw`e_M^{-1}:\mathcal{P}_M\to\{1,\dots,2^M\}`),
+        " と ",
+        math(String.raw`\eta^{-1}:X_{2^M,2}\to\{1,\dots,N_M\}`),
+        " をそれぞれの逆写像とする（",
+        ref("def_numbering_of_finite_set"),
+        "）。",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の二つの元 ",
+        math(String.raw`(S,T)`),
+        " と ",
+        math(String.raw`(S',T')`),
+        " が等しいとは、",
+        math(String.raw`S=S'`),
+        " かつ ",
+        math(String.raw`T=T'`),
+        " であることである（順序対の等しさ）。",
+      ]),
+      paragraph([
+        "単射の条件を示す。",
+        math(String.raw`m,m'\in\{1,\dots,N_M\}`),
+        " が ",
+        math(String.raw`p_M(m)=p_M(m')`),
+        " を満たすとする。順序対の等しさから、",
+        math(String.raw`s\in\{1,2\}`),
+        " のそれぞれについて ",
+        math(String.raw`e_M(\eta(m)(s))=e_M(\eta(m')(s))`),
+        " であり（",
+        ref("def_numbering_of_pairs_of_subsets"),
+        "）、",
+        math(String.raw`e_M`),
+        " の単射の条件から ",
+        math(String.raw`\eta(m)(s)=\eta(m')(s)`),
+        " である。これがすべての ",
+        math(String.raw`s\in\{1,2\}`),
+        " で成り立つので、",
+        math(String.raw`X_{2^M,2}`),
+        " の元として ",
+        math(String.raw`\eta(m)=\eta(m')`),
+        " であり（",
+        ref("def_set_of_maps_between_initial_segments"),
+        "）、",
+        math(String.raw`\eta`),
+        " の単射の条件から ",
+        math(String.raw`m=m'`),
+        " である。",
+      ]),
+      paragraph([
+        "全射の条件を示す。",
+        math(String.raw`(S,T)\in\mathcal{P}_M\times\mathcal{P}_M`),
+        " をとる。写像 ",
+        math(String.raw`x:\{1,2\}\to\{1,\dots,2^M\}`),
+        " を ",
+        math(String.raw`x(1):=e_M^{-1}(S)`),
+        "、",
+        math(String.raw`x(2):=e_M^{-1}(T)`),
+        " で定めると ",
+        math(String.raw`x\in X_{2^M,2}`),
+        " であり、",
+        math(String.raw`m:=\eta^{-1}(x)\in\{1,\dots,N_M\}`),
+        " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p_M(m)
+&=\Bigl(e_M\bigl(\eta(m)(1)\bigr),\ e_M\bigl(\eta(m)(2)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_pairs_of_subsets}\right)\\
+&=\Bigl(e_M\bigl(\eta(\eta^{-1}(x))(1)\bigr),\ e_M\bigl(\eta(\eta^{-1}(x))(2)\bigr)\Bigr)
+&&\left(\because\ m=\eta^{-1}(x)\right)\\
+&=\bigl(e_M(x(1)),\ e_M(x(2))\bigr)
+&&\left(\because\ \eta(\eta^{-1}(x))=x\text{。}\blkref{def_numbering_of_finite_set}\right)\\
+&=\bigl(e_M(e_M^{-1}(S)),\ e_M(e_M^{-1}(T))\bigr)
+&&\left(\because\ x\ \text{の定め方}\right)\\
+&=(S,T)
+&&\left(\because\ e_M(e_M^{-1}(U))=U\ \text{を}\ U:=S,T\ \text{に。}\blkref{def_numbering_of_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で ",
+        math(String.raw`(N_M,p_M)`),
+        " は ",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " の番号付けであり、",
+        math(String.raw`\mathcal{P}_M\times\mathcal{P}_M`),
+        " は有限集合である（",
+        ref("def_numbering_of_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_reindexing_of_matrices_by_numbering",
+    kind: "definition",
+    title: { text: "番号付けによる行列の添字の付け替え" },
+    labels: ["def_reindexing_of_matrices_by_numbering"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        " を有限集合、",
+        math(String.raw`(n,e)`),
+        " をその番号付け（",
+        ref("def_numbering_of_finite_set"),
+        "）とする。",
+        math(String.raw`\mathrm{id}_n:\{1,\dots,n\}\to\{1,\dots,n\}`),
+        " を恒等写像とすると、",
+        math(String.raw`(n,\mathrm{id}_n)`),
+        " は ",
+        math(String.raw`\{1,\dots,n\}`),
+        " の番号付けなので（",
+        ref("def_numbering_of_finite_set"),
+        "）、",
+        math(String.raw`\{1,\dots,n\}`),
+        " は有限集合であり、",
+        math(String.raw`\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        "（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）が定まる。写像 ",
+        math(String.raw`\nu_e:\mathrm{Mat}_X(\mathbb{C})\to\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        " を、",
+        math(String.raw`F\in\mathrm{Mat}_X(\mathbb{C})`),
+        " と ",
+        math(String.raw`k,l\in\{1,\dots,n\}`),
+        " についての成分で次のように定める。",
+      ]),
+      displayMath(String.raw`\nu_e(F)_{k,l}:=F_{e(k),e(l)}`),
+      paragraph([
+        math(String.raw`e(k),e(l)\in X`),
+        " なので右辺は ",
+        math(String.raw`F`),
+        " の成分で ",
+        math(String.raw`\mathbb{C}`),
+        " の元であり、",
+        math(String.raw`\nu_e(F)`),
+        " は写像 ",
+        math(String.raw`\{1,\dots,n\}\times\{1,\dots,n\}\to\mathbb{C}`),
+        " として一つに決まる。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_reindexing_of_matrices_by_inverse_numbering",
+    kind: "definition",
+    title: { text: "番号付けの逆写像による行列の添字の付け替え" },
+    labels: ["def_reindexing_of_matrices_by_inverse_numbering"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        "、",
+        math(String.raw`(n,e)`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        " のものとし、",
+        math(String.raw`e^{-1}:X\to\{1,\dots,n\}`),
+        " を ",
+        math(String.raw`e`),
+        " の逆写像（",
+        ref("def_numbering_of_finite_set"),
+        "）とする。写像 ",
+        math(String.raw`\mu_e:\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})\to\mathrm{Mat}_X(\mathbb{C})`),
+        " を、",
+        math(String.raw`G\in\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        " と ",
+        math(String.raw`x,y\in X`),
+        " についての成分で次のように定める。",
+      ]),
+      displayMath(String.raw`\mu_e(G)_{x,y}:=G_{e^{-1}(x),e^{-1}(y)}`),
+      paragraph([
+        math(String.raw`e^{-1}(x),e^{-1}(y)\in\{1,\dots,n\}`),
+        " なので右辺は ",
+        math(String.raw`G`),
+        " の成分で ",
+        math(String.raw`\mathbb{C}`),
+        " の元であり、",
+        math(String.raw`\mu_e(G)`),
+        " は写像 ",
+        math(String.raw`X\times X\to\mathbb{C}`),
+        " として一つに決まる。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "番号付けによる行列の添字の付け替えは ℂ-代数の準同型である" },
+    labels: ["claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        "、",
+        math(String.raw`(n,e)`),
+        "、",
+        math(String.raw`\nu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        " のものとし、",
+        math(String.raw`B:=\mathrm{Mat}_X(\mathbb{C})`),
+        "、",
+        math(String.raw`B':=\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        " と書く。",
+        math(String.raw`B`),
+        " と ",
+        math(String.raw`B'`),
+        " は ℂ-代数であり（",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"),
+        "）、",
+        math(String.raw`\nu_e:B\to B'`),
+        " は ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`X`),
+        " と ",
+        math(String.raw`\{1,\dots,n\}`),
+        " は有限集合なので（",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        "）、",
+        ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"),
+        " により ",
+        math(String.raw`B`),
+        " と ",
+        math(String.raw`B'`),
+        " は ℂ-代数である。",
+        ref("def_complex_algebra_homomorphism"),
+        " に書き出した四つの等式を示す。行列の等しさは成分の等しさなので（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）、",
+        math(String.raw`F,G\in B`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        "、",
+        math(String.raw`k,l\in\{1,\dots,n\}`),
+        " について両辺の ",
+        math(String.raw`(k,l)`),
+        " 成分が等しいことを示す。",
+      ]),
+      paragraph(["加法を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\nu_e(F+_B G)_{k,l}
+&=(F+_B G)_{e(k),e(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=F_{e(k),e(l)}+_{\mathbb{C}}G_{e(k),e(l)}
+&&\left(\because\ \text{行列の和。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\nu_e(F)_{k,l}+_{\mathbb{C}}\nu_e(G)_{k,l}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=\bigl(\nu_e(F)+_{B'}\nu_e(G)\bigr)_{k,l}
+&&\left(\because\ \text{行列の和。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["乗法を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\nu_e(F\cdot_B G)_{k,l}
+&=(F\cdot_B G)_{e(k),e(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=\sum_{z\in X}F_{e(k),z}\cdot_{\mathbb{C}^{\mathrm{vec}}}G_{z,e(l)}
+&&\left(\because\ \text{行列の積。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{j=1}^{n}F_{e(k),e(j)}\cdot_{\mathbb{C}^{\mathrm{vec}}}G_{e(j),e(l)}
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,e)\ \text{で}\right)\\
+&=\sum_{j=1}^{n}\nu_e(F)_{k,j}\cdot_{\mathbb{C}^{\mathrm{vec}}}\nu_e(G)_{j,l}
+&&\left(\because\ \text{各}\ j\ \text{で}\ \blkref{def_reindexing_of_matrices_by_numbering}\text{。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=\sum_{j\in\{1,\dots,n\}}\nu_e(F)_{k,j}\cdot_{\mathbb{C}^{\mathrm{vec}}}\nu_e(G)_{j,l}
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を番号付け}\ (n,\mathrm{id}_n)\ \text{で、右辺から左辺へ読む}\right)\\
+&=\bigl(\nu_e(F)\cdot_{B'}\nu_e(G)\bigr)_{k,l}
+&&\left(\because\ \text{行列の積。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "乗法の単位元を保つこと。",
+        math(String.raw`e`),
+        " は写像なので ",
+        math(String.raw`k=l`),
+        " なら ",
+        math(String.raw`e(k)=e(l)`),
+        " であり、",
+        math(String.raw`e`),
+        " の単射の条件から ",
+        math(String.raw`e(k)=e(l)`),
+        " なら ",
+        math(String.raw`k=l`),
+        " である（",
+        ref("def_numbering_of_finite_set"),
+        "）。したがって ",
+        math(String.raw`X`),
+        " の中の ",
+        math(String.raw`e(k)=e(l)`),
+        " と ",
+        math(String.raw`\{1,\dots,n\}`),
+        " の中の ",
+        math(String.raw`k=l`),
+        " は同値であり、二つのクロネッカーのデルタは等しい（",
+        ref("def_kronecker_delta"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_e(1_B)_{k,l}
+&=(1_B)_{e(k),e(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=\delta_{e(k),e(l)}
+&&\left(\because\ \text{単位行列。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\delta_{k,l}
+&&\left(\because\ e(k)=e(l)\ \text{と}\ k=l\ \text{は同値。}\blkref{def_kronecker_delta}\right)\\
+&=(1_{B'})_{k,l}
+&&\left(\because\ \text{単位行列。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つこと。"]),
+      displayMath(String.raw`\begin{aligned}
+\nu_e(\lambda\ast_B F)_{k,l}
+&=(\lambda\ast_B F)_{e(k),e(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=\lambda\cdot_{\mathbb{C}}F_{e(k),e(l)}
+&&\left(\because\ \text{行列のスカラー倍。}\blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\nu_e(F)_{k,l}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=\bigl(\lambda\ast_{B'}\nu_e(F)\bigr)_{k,l}
+&&\left(\because\ \text{行列のスカラー倍。}\blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの等式がすべての ",
+        math(String.raw`k,l`),
+        " で成り立つので、",
+        math(String.raw`\nu_e`),
+        " は加法・乗法・乗法の単位元・スカラー倍を保つ。すなわち ",
+        math(String.raw`\nu_e`),
+        " は環の準同型（",
+        ref("def_ring_homomorphism"),
+        "）かつ線型写像（",
+        ref("def_linear_map"),
+        "）であり、ℂ-代数の準同型である（",
+        ref("def_complex_algebra_homomorphism"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_inverse_reindexing_after_reindexing_of_matrices_is_identity",
+    kind: "claim",
+    title: { text: "番号付けで付け替えた行列を逆写像で付け替え直すと、元の行列に戻る" },
+    labels: ["claim_inverse_reindexing_after_reindexing_of_matrices_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        "、",
+        math(String.raw`(n,e)`),
+        "、",
+        math(String.raw`\nu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        "、",
+        math(String.raw`\mu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_inverse_numbering"),
+        " のものとする。すべての ",
+        math(String.raw`F\in\mathrm{Mat}_X(\mathbb{C})`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mu_e\bigl(\nu_e(F)\bigr)=F`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y\in X`),
+        " をとる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu_e\bigl(\nu_e(F)\bigr)_{x,y}
+&=\nu_e(F)_{e^{-1}(x),e^{-1}(y)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_inverse_numbering}\right)\\
+&=F_{e(e^{-1}(x)),e(e^{-1}(y))}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=F_{x,y}
+&&\left(\because\ e(e^{-1}(u))=u\ \text{を}\ u:=x,y\ \text{に。}\blkref{def_numbering_of_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x,y\in X`),
+        " は任意だったので、行列として ",
+        math(String.raw`\mu_e(\nu_e(F))=F`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_reindexing_after_inverse_reindexing_of_matrices_is_identity",
+    kind: "claim",
+    title: { text: "逆写像で付け替えた行列を番号付けで付け替え直すと、元の行列に戻る" },
+    labels: ["claim_reindexing_after_inverse_reindexing_of_matrices_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        "、",
+        math(String.raw`(n,e)`),
+        "、",
+        math(String.raw`\nu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        "、",
+        math(String.raw`\mu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_inverse_numbering"),
+        " のものとする。すべての ",
+        math(String.raw`G\in\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\nu_e\bigl(\mu_e(G)\bigr)=G`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k,l\in\{1,\dots,n\}`),
+        " をとる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_e\bigl(\mu_e(G)\bigr)_{k,l}
+&=\mu_e(G)_{e(k),e(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering}\right)\\
+&=G_{e^{-1}(e(k)),e^{-1}(e(l))}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_inverse_numbering}\right)\\
+&=G_{k,l}
+&&\left(\because\ e^{-1}(e(j))=j\ \text{を}\ j:=k,l\ \text{に。}\blkref{def_numbering_of_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k,l`),
+        " は任意だったので、行列として ",
+        math(String.raw`\nu_e(\mu_e(G))=G`),
+        " である（",
+        ref("def_matrices_indexed_by_finite_set"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "番号付けの逆写像による行列の添字の付け替えは ℂ-代数の準同型である" },
+    labels: ["claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`X`),
+        "、",
+        math(String.raw`(n,e)`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        "、",
+        math(String.raw`\mu_e`),
+        " を ",
+        ref("def_reindexing_of_matrices_by_inverse_numbering"),
+        " のものとし、",
+        math(String.raw`B:=\mathrm{Mat}_X(\mathbb{C})`),
+        "、",
+        math(String.raw`B':=\mathrm{Mat}_{\{1,\dots,n\}}(\mathbb{C})`),
+        " と書く。",
+        math(String.raw`\mu_e:B'\to B`),
+        " は ℂ-代数の準同型（",
+        ref("def_complex_algebra_homomorphism"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B`),
+        " と ",
+        math(String.raw`B'`),
+        " は ℂ-代数であり、",
+        math(String.raw`\nu_e:B\to B'`),
+        " は ℂ-代数の準同型である（",
+        ref("claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"),
+        "）。",
+        math(String.raw`G,H\in B'`),
+        "、",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " をとり、",
+        ref("def_complex_algebra_homomorphism"),
+        " に書き出した四つの等式を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu_e(G+_{B'}H)
+&=\mu_e\Bigl(\nu_e\bigl(\mu_e(G)\bigr)+_{B'}\nu_e\bigl(\mu_e(H)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_reindexing_after_inverse_reindexing_of_matrices_is_identity}\ \text{を}\ G,H\ \text{に}\right)\\
+&=\mu_e\Bigl(\nu_e\bigl(\mu_e(G)+_B\mu_e(H)\bigr)\Bigr)
+&&\left(\because\ \nu_e\ \text{は加法を保つ。}\blkref{claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism}\right)\\
+&=\mu_e(G)+_B\mu_e(H)
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right),\\[4pt]
+\mu_e(G\cdot_{B'}H)
+&=\mu_e\Bigl(\nu_e\bigl(\mu_e(G)\bigr)\cdot_{B'}\nu_e\bigl(\mu_e(H)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_reindexing_after_inverse_reindexing_of_matrices_is_identity}\ \text{を}\ G,H\ \text{に}\right)\\
+&=\mu_e\Bigl(\nu_e\bigl(\mu_e(G)\cdot_B\mu_e(H)\bigr)\Bigr)
+&&\left(\because\ \nu_e\ \text{は乗法を保つ。}\blkref{claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism}\right)\\
+&=\mu_e(G)\cdot_B\mu_e(H)
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right),\\[4pt]
+\mu_e(1_{B'})
+&=\mu_e\bigl(\nu_e(1_B)\bigr)
+&&\left(\because\ \nu_e\ \text{は乗法の単位元を保つ。}\blkref{claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism}\right)\\
+&=1_B
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right),\\[4pt]
+\mu_e(\lambda\ast_{B'}G)
+&=\mu_e\Bigl(\lambda\ast_{B'}\nu_e\bigl(\mu_e(G)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_reindexing_after_inverse_reindexing_of_matrices_is_identity}\right)\\
+&=\mu_e\Bigl(\nu_e\bigl(\lambda\ast_B\mu_e(G)\bigr)\Bigr)
+&&\left(\because\ \nu_e\ \text{はスカラー倍を保つ。}\blkref{claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism}\right)\\
+&=\lambda\ast_B\mu_e(G)
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\mu_e`),
+        " は環の準同型（",
+        ref("def_ring_homomorphism"),
+        "）かつ線型写像（",
+        ref("def_linear_map"),
+        "）であり、ℂ-代数の準同型である（",
+        ref("def_complex_algebra_homomorphism"),
+        "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_theorem_binary_numbering_gives_isomorphism_of_matrix_algebras",
+    kind: "theorem",
+    title: { text: "系：2 進の番号付けによる、部分集合全体で添字づけた行列環と番号で添字づけた行列環の同型" },
+    labels: ["theorem_binary_numbering_gives_isomorphism_of_matrix_algebras"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`2^M`),
+        " と ",
+        math(String.raw`e_M:\{1,\dots,2^M\}\to\mathcal{P}_M`),
+        " を ",
+        ref("def_binary_numbering_of_power_set"),
+        " のものとする。",
+        math(String.raw`(2^M,e_M)`),
+        " は ",
+        math(String.raw`\mathcal{P}_M`),
+        " の番号付けである（",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）。",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        " と ",
+        ref("def_reindexing_of_matrices_by_inverse_numbering"),
+        " を ",
+        math(String.raw`X:=\mathcal{P}_M`),
+        "、",
+        math(String.raw`(n,e):=(2^M,e_M)`),
+        " に当てた写像を",
+      ]),
+      displayMath(String.raw`\nu_{e_M}:\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})\to\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C}),\quad \nu_{e_M}(F)_{k,l}=F_{e_M(k),e_M(l)},`),
+      displayMath(String.raw`\mu_{e_M}:\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})\to\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C}),\quad \mu_{e_M}(G)_{S,T}=G_{e_M^{-1}(S),e_M^{-1}(T)}`),
+      paragraph([
+        "とする。このとき次が成り立つ。",
+      ]),
+      list([
+        [
+          math(String.raw`\nu_{e_M}`),
+          " と ",
+          math(String.raw`\mu_{e_M}`),
+          " はどちらも ℂ-代数の準同型（",
+          ref("def_complex_algebra_homomorphism"),
+          "）である。",
+        ],
+        [
+          "すべての ",
+          math(String.raw`F\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+          " について ",
+          math(String.raw`\mu_{e_M}(\nu_{e_M}(F))=F`),
+          " であり、すべての ",
+          math(String.raw`G\in\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`),
+          " について ",
+          math(String.raw`\nu_{e_M}(\mu_{e_M}(G))=G`),
+          " である。",
+        ],
+      ]),
+      paragraph([
+        "したがって ",
+        math(String.raw`\nu_{e_M}`),
+        " は全単射であり、その逆写像は ",
+        math(String.raw`\mu_{e_M}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`X:=\mathcal{P}_M`),
+        "、",
+        math(String.raw`(n,e):=(2^M,e_M)`),
+        " は ",
+        ref("def_reindexing_of_matrices_by_numbering"),
+        " の仮定（有限集合とその番号付け）を満たす（",
+        ref("claim_binary_numbering_is_numbering_of_power_set"),
+        "）。",
+        math(String.raw`\nu_{e_M}`),
+        " が ℂ-代数の準同型であることは ",
+        ref("claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"),
+        "、",
+        math(String.raw`\mu_{e_M}`),
+        " が ℂ-代数の準同型であることは ",
+        ref("claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism"),
+        "、",
+        math(String.raw`\mu_{e_M}(\nu_{e_M}(F))=F`),
+        " は ",
+        ref("claim_inverse_reindexing_after_reindexing_of_matrices_is_identity"),
+        "、",
+        math(String.raw`\nu_{e_M}(\mu_{e_M}(G))=G`),
+        " は ",
+        ref("claim_reindexing_after_inverse_reindexing_of_matrices_is_identity"),
+        " である。",
+      ]),
+      paragraph([
+        "単射であること。",
+        math(String.raw`F,F'\in\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " が ",
+        math(String.raw`\nu_{e_M}(F)=\nu_{e_M}(F')`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right)\\
+&=\mu_{e_M}\bigl(\nu_{e_M}(F')\bigr)
+&&\left(\because\ \nu_{e_M}(F)=\nu_{e_M}(F')\right)\\
+&=F'
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right).
+\end{aligned}`),
+      paragraph([
+        "全射であること。",
+        math(String.raw`G\in\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`),
+        " について、",
+        math(String.raw`\mu_{e_M}(G)`),
+        " は ",
+        math(String.raw`\nu_{e_M}(\mu_{e_M}(G))=G`),
+        " を満たす（",
+        ref("claim_reindexing_after_inverse_reindexing_of_matrices_is_identity"),
+        "）。",
+      ]),
+      paragraph([
+        "したがって ",
+        math(String.raw`\nu_{e_M}`),
+        " は全単射である。",
+        math(String.raw`G`),
+        " について ",
+        math(String.raw`\nu_{e_M}(F)=G`),
+        " を満たすただ一つの ",
+        math(String.raw`F`),
+        " は、",
+        math(String.raw`\mu_{e_M}(G)`),
+        " が ",
+        math(String.raw`\nu_{e_M}(\mu_{e_M}(G))=G`),
+        " を満たすので ",
+        math(String.raw`\mu_{e_M}(G)`),
+        " であり、逆写像は ",
+        math(String.raw`\mu_{e_M}`),
+        " である。",
+      ]),
+    ],
+  },
 ]);
