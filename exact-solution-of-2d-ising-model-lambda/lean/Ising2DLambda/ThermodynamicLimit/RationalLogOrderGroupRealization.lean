@@ -8,10 +8,11 @@
   乗法を加法へ移す log_ℝ(uv) = log_ℝ(u) + log_ℝ(v)               `realLog_mul`
   狭義単調 u < v ⇒ log_ℝ(u) < log_ℝ(v)                          `realLog_lt_realLog`
   u ≤ v ⇒ log_ℝ(u) ≤ log_ℝ(v)                                   `realLog_le_realLog`
+  正の実数上で連続（連続な正値関数との合成が連続）               `realLog_comp_continuous`
   ρ_ℝ(μ) := Σ_{p ∈ supp μ} ι_{ℚ→ℝ}(μ(p)) · log_ℝ(ι_{ℚ→ℝ}(p))     `realizeRational`（`Finsupp.sum` は台に渡る和）
 
 ここが本文で初めて ℝ を呼び出す箇所である（脱出理由: 実対数）。`ι_{ℚ→ℝ}` は Lean の型強制 `(r : ℝ)`。
-実対数について使うのは mathlib の `Real.log_mul`・`Real.log_lt_log` だけで、級数・微分・完備性は使わない。
+実対数について使うのは mathlib の `Real.log_mul`・`Real.log_lt_log`・`Continuous.log` だけで、級数・微分・完備性は使わない。
 -/
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Ising2DLambda.ThermodynamicLimit.RationalLogOrderGroup
@@ -41,6 +42,13 @@ theorem realLog_le_realLog (u v : PositiveReal) (huv : u.1 ≤ v.1) :
   · exact le_of_lt (realLog_lt_realLog u v h)
   · unfold realLog
     rw [h]
+
+/-- 連続性: `log_ℝ` は正の実数上で連続なので、連続で値が正の関数 `g` との合成 `log_ℝ ∘ g` は連続である。 -/
+theorem realLog_comp_continuous {X : Type*} [TopologicalSpace X] (g : X → ℝ)
+    (hpos : ∀ x, 0 < g x) (hg : Continuous g) :
+    Continuous (fun x => realLog ⟨g x, hpos x⟩) := by
+  unfold realLog
+  exact hg.log fun x => ne_of_gt (hpos x)
 
 /-- 素数 `p` を `ι_{ℚ→ℝ}` で読んだ正の実数。 -/
 def primePositiveReal (p : Nat.Primes) : PositiveReal :=

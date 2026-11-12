@@ -49124,11 +49124,11 @@ e\cdot e
                         displayMath(String.raw`\begin{aligned}
 q
 &=a\cdot b^{-1}
-&&(\because\ \text{準備の表示 }q=a/b\text{。}\mathbb{Q}\text{ の除法の定義})\\
+&&(\because\ \text{準備の表示 }q=a/b\text{、}\mathbb{Q}\text{ の除法の定義})\\
 &=(c\cdot c)\cdot(d\cdot d)^{-1}
 &&(\because\ \text{帰納法で得た表示 }a=c\cdot c,\ b=d\cdot d)\\
 &=(c\cdot c)\cdot(d^{-1}\cdot d^{-1})
-&&(\because\ \text{積の逆元は逆元の積。}R\text{ の四則})\\
+&&(\because\ \text{積の逆元は逆元の積、}R\text{ の四則})\\
 &=(c\cdot d^{-1})\cdot(c\cdot d^{-1})
 &&(\because\ R\text{ の積の可換律と結合律})\\
 &=w\cdot w
@@ -84933,6 +84933,7 @@ const chapter_real_escape = defineSection({
                     "Ising2DLambda.ThermodynamicLimit.realLog_mul",
                     "Ising2DLambda.ThermodynamicLimit.realLog_lt_realLog",
                     "Ising2DLambda.ThermodynamicLimit.realLog_le_realLog",
+                    "Ising2DLambda.ThermodynamicLimit.realLog_comp_continuous",
                   ],
                   statement: [
                     paragraph([
@@ -86592,6 +86593,11 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 habitat: "R",
                 realEscape: "実対数。可算側の有理点を実数へ埋め込み、全ての実数の角で正となる分散式に実対数を適用する。連続性は実数体の位相で述べる。",
                 verification: ["sagemath/check/dispersion-angle-log-continuity"],
+                lean: [
+                  "Ising2DLambda.RealEscape.dispersion_angle_log_continuous",
+                  "Ising2DLambda.NecSuf.RealEscape.dispersion_angle_log_continuous_necSuf",
+                  "Ising2DLambda.RealEscape.dispersion_angle_log_continuous_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`),
@@ -86609,49 +86615,93 @@ f_q(\theta_1,\theta_2):=\log_{\mathbb R}B_q(\theta_1,\theta_2)`),
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_no_rational_square_two"), " により ",
-                    math(String.raw`q^2+2q-1\ne0`), " である。実際、", math(String.raw`q^2+2q-1=0`),
+                    "証明の中だけで使う記号として ", math(String.raw`p:=q^2+2q-1\in\mathbb Q`),
+                    " と、", math(String.raw`\theta_1,\theta_2\in\mathbb R`), " に対して ",
+                    math(String.raw`c_j:=\cos\theta_j\in\mathbb R`), "（", math(String.raw`j\in\{1,2\}`),
+                    "）を置く。実余弦について使う性質は ", math(String.raw`c_j\le1`),
+                    " と連続性の二つだけである。",
+                  ]),
+                  paragraph([
+                    math(String.raw`p\ne0`), " を示す。", math(String.raw`p=0`),
                     " を仮定すると、次の式鎖を得る。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-(q+1)^2
+(q+1)(q+1)
 &=q^2+2q+1
 &&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
 &=(q^2+2q-1)+2
 &&\bigl(\because\ \mathbb Q\text{ の四則}\bigr)\\
 &=0+2
-&&\bigl(\because\ q^2+2q-1=0\bigr)\\
+&&\bigl(\because\ p=q^2+2q-1=0\bigr)\\
 &=2
 &&\bigl(\because\ \mathbb Q\text{ の加法}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "これは ", math(String.raw`q+1\in\mathbb Q`), " と ",
-                    ref("claim_no_rational_square_two"), " に矛盾する。", ref("def_real_logarithm"),
-                    " の包含写像は単射で四則と順序を保つので、",
-                    math(String.raw`(r^2+2r-1)^2>0`), " である。",
+                    "これは ", math(String.raw`q+1\in\mathbb Q`), " について ",
+                    ref("claim_no_rational_square_two"), " に矛盾する。従って ",
+                    math(String.raw`p\ne0`), " である。",
                   ]),
                   paragraph([
-                    "任意の ", math(String.raw`\theta_1,\theta_2\in\mathbb R`),
-                    " について、実余弦の値域 ", math(String.raw`-1\le\cos\theta_j\le1`),
-                    "（", math(String.raw`j\in\{1,2\}`), "）と ", math(String.raw`0<r<1`),
-                    " を使う。",
+                    ref("def_real_logarithm"), " の包含写像 ", math(String.raw`\iota_{\mathbb Q\to\mathbb R}`),
+                    " は順序を保つので、", math(String.raw`0<q<1`), " から ",
+                    math(String.raw`0=\iota_{\mathbb Q\to\mathbb R}(0)<r<\iota_{\mathbb Q\to\mathbb R}(1)=1`),
+                    " である。同じ写像は四則を保ち単射なので、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+r^2+2r-1
+&=\iota_{\mathbb Q\to\mathbb R}(q)^2+2\iota_{\mathbb Q\to\mathbb R}(q)-1
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=\iota_{\mathbb Q\to\mathbb R}(q^2+2q-1)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の包含写像は四則を保つ}\bigr)\\
+&=\iota_{\mathbb Q\to\mathbb R}(p)
+&&\bigl(\because\ p\text{ の定義}\bigr)\\
+&\ne\iota_{\mathbb Q\to\mathbb R}(0)
+&&\bigl(\because\ p\ne0\text{、}\blkref{def_real_logarithm}\text{ の包含写像は単射}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の包含写像は零を保つ}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "であり、零でない実数の平方は正なので ", math(String.raw`(r^2+2r-1)^2>0`),
+                    " である。また ", math(String.raw`1-r^2=(1-r)(1+r)`), " と ",
+                    math(String.raw`0<r<1`), " から ", math(String.raw`1-r^2>0`), "、従って ",
+                    math(String.raw`2r(1-r^2)>0`), " である。任意の ",
+                    math(String.raw`\theta_1,\theta_2\in\mathbb R`), " について、次の式鎖を得る。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 B_q(\theta_1,\theta_2)-(r^2+2r-1)^2
-&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)-(r^2+2r-1)^2
-&&\bigl(\because\ B_q\text{ の定義}\bigr)\\
-&=2r(1-r^2)\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
+&=(1+r^2)^2-2r(1-r^2)(c_1+c_2)-(r^2+2r-1)^2
+&&\bigl(\because\ B_q\text{ の定義と }c_1,c_2\text{ の定義}\bigr)\\
+&=\bigl((1+r^2)-(r^2+2r-1)\bigr)\bigl((1+r^2)+(r^2+2r-1)\bigr)-2r(1-r^2)(c_1+c_2)
+&&\bigl(\because\ \mathbb R\text{ の平方の差 }u^2-v^2=(u-v)(u+v)\text{、加法の交換律}\bigr)\\
+&=(2-2r)(2r^2+2r)-2r(1-r^2)(c_1+c_2)
+&&\bigl(\because\ \mathbb R\text{ の加法}\bigr)\\
+&=4r(1-r^2)-2r(1-r^2)(c_1+c_2)
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
+&=2r(1-r^2)\bigl((1-c_1)+(1-c_2)\bigr)
 &&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &\ge0
-&&\bigl(\because\ 0<r<1,\ \cos\theta_1\le1,\ \cos\theta_2\le1\bigr)
+&&\bigl(\because\ 2r(1-r^2)>0\text{、}c_1\le1\text{、}c_2\le1\text{ と、正の実数と非負の実数の積は非負}\bigr)
+\end{aligned}`),
+                  paragraph(["従って、次の式鎖を得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+B_q(\theta_1,\theta_2)
+&=\bigl(B_q(\theta_1,\theta_2)-(r^2+2r-1)^2\bigr)+(r^2+2r-1)^2
+&&\bigl(\because\ \mathbb R\text{ の加法}\bigr)\\
+&\ge0+(r^2+2r-1)^2
+&&\bigl(\because\ \text{上の式鎖}\bigr)\\
+&=(r^2+2r-1)^2
+&&\bigl(\because\ \mathbb R\text{ の加法}\bigr)\\
+&>0
+&&\bigl(\because\ r^2+2r-1\ne0\bigr)
 \end{aligned}`),
                   paragraph([
-                    "従って ", math(String.raw`B_q(\theta_1,\theta_2)\ge(r^2+2r-1)^2>0`),
-                    " であり、", ref("def_real_logarithm"), " の実対数は全域で定まる。",
-                    "実余弦の連続性と実数の四則の連続性から ", math(String.raw`B_q`),
-                    " は ", math(String.raw`\mathbb R^2`), " 上連続である。",
-                    ref("def_real_logarithm"), " の実対数の連続性を合成して ",
-                    math(String.raw`f_q`), " も連続である。",
+                    "よって ", ref("def_real_logarithm"), " の実対数 ",
+                    math(String.raw`\log_{\mathbb R}B_q(\theta_1,\theta_2)`), " は全ての ",
+                    math(String.raw`(\theta_1,\theta_2)\in\mathbb R^2`), " で定まる。",
+                    "実余弦の連続性と実数の四則の連続性から ", math(String.raw`B_q:\mathbb R^2\to\mathbb R`),
+                    " は連続である。", ref("def_real_logarithm"), " の実対数は正の実数の上で連続なので、値が正の連続関数 ",
+                    math(String.raw`B_q`), " との合成 ", math(String.raw`f_q=\log_{\mathbb R}\circ B_q`),
+                    " も連続である。",
                   ]),
                 ],
               },
