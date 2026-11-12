@@ -1535,6 +1535,142 @@ L^{\lambda}_m+_V L^{\mu}_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_linear_combinations_with_equal_terms_are_equal",
+    kind: "claim",
+    title: { text: "項ごとに等しい二つの線型結合は等しい" },
+    labels: ["claim_linear_combinations_with_equal_terms_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`V`), " の元 ", math(String.raw`x_k,\ y_k`),
+        " と ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\lambda_k,\ \mu_k`), " が一つずつ与えられ、すべての ", math(String.raw`k\in\{1,\dots,n\}`),
+        " について ", math(String.raw`\lambda_k\cdot_V x_k=\mu_k\cdot_V y_k`), " が成り立つとする。このとき、線型結合（", ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V x_k=\sum_{k=1}^{n}\mu_k\cdot_V y_k`),
+    ],
+    proof: [
+      paragraph([
+        "線型結合の定義（", ref("def_linear_combination"), "）が二つの族について帰納的に定める ", math(String.raw`V`), " の元を、順に ",
+        math(String.raw`L^{\lambda}_m`), "、", math(String.raw`L^{\mu}_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`), "）と書く。すなわち ",
+        math(String.raw`L^{\lambda}_0:=0_V`), "、", math(String.raw`L^{\lambda}_m:=L^{\lambda}_{m-1}+_V(\lambda_m\cdot_V x_m)`), "、",
+        math(String.raw`L^{\mu}_0:=0_V`), "、", math(String.raw`L^{\mu}_m:=L^{\mu}_{m-1}+_V(\mu_m\cdot_V y_m)`), "（", math(String.raw`1\le m\le n`),
+        "）である。すべての ", math(String.raw`m`), " について ", math(String.raw`L^{\lambda}_m=L^{\mu}_m`), " であることを ", math(String.raw`m`),
+        " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。",
+        math(String.raw`m=0`), " のとき、", math(String.raw`L^{\lambda}_0=0_V=L^{\mu}_0`), " である（", ref("def_linear_combination"), "）。",
+        math(String.raw`1\le m\le n`), " とし、", math(String.raw`L^{\lambda}_{m-1}=L^{\mu}_{m-1}`), " を仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^{\lambda}_m
+&=L^{\lambda}_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ L^{\lambda}_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{\mu}_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L^{\mu}_{m-1}+_V(\mu_m\cdot_V y_m)
+&&\left(\because\ \text{仮定}\ \lambda_m\cdot_V x_m=\mu_m\cdot_V y_m\right)\\
+&=L^{\mu}_m
+&&\left(\because\ L^{\mu}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_linear_combination_of_zero_terms_is_zero",
+    kind: "claim",
+    title: { text: "どの項も零ベクトルである線型結合は零ベクトルである" },
+    labels: ["claim_linear_combination_of_zero_terms_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`V`), " の元 ", math(String.raw`x_k`),
+        " と ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\lambda_k`), " が一つずつ与えられ、すべての ", math(String.raw`k\in\{1,\dots,n\}`),
+        " について ", math(String.raw`\lambda_k\cdot_V x_k=0_V`), " が成り立つとする。このとき、線型結合（", ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V x_k=0_V`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`), "）を線型結合の定義（", ref("def_linear_combination"),
+        "）の部分和とする。すべての ", math(String.raw`m`), " について ", math(String.raw`L_m=0_V`), " であることを ", math(String.raw`m`),
+        " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。", math(String.raw`m=0`), " のとき、", math(String.raw`L_0=0_V`),
+        " である（", ref("def_linear_combination"), "）。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}=0_V`),
+        " を仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_V+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=0_V+_V 0_V
+&&\left(\because\ \text{仮定}\ \lambda_m\cdot_V x_m=0_V\right)\\
+&=0_V
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_sum_of_linear_combinations_with_same_coefficients",
+    kind: "claim",
+    title: { text: "同じ係数の二つの線型結合の和は、族の元ごとの和の線型結合である" },
+    labels: ["claim_sum_of_linear_combinations_with_same_coefficients"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`), " を ℂ-線型空間（", ref("def_complex_vector_space"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`V`), " の元 ", math(String.raw`x_k,\ y_k`),
+        " と ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\lambda_k`), " が一つずつ与えられているとする。このとき、線型結合（",
+        ref("def_linear_combination"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\left(\sum_{k=1}^{n}\lambda_k\cdot_V x_k\right)+_V\left(\sum_{k=1}^{n}\lambda_k\cdot_V y_k\right)=\sum_{k=1}^{n}\lambda_k\cdot_V(x_k+_V y_k)`),
+    ],
+    proof: [
+      paragraph([
+        "線型結合の定義（", ref("def_linear_combination"), "）が三つの族について帰納的に定める ", math(String.raw`V`), " の元を、順に ",
+        math(String.raw`L^{x}_m`), "、", math(String.raw`L^{y}_m`), "、", math(String.raw`L^{x+y}_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）と書く。すなわち ", math(String.raw`L^{x}_0=L^{y}_0=L^{x+y}_0:=0_V`), "、", math(String.raw`L^{x}_m:=L^{x}_{m-1}+_V(\lambda_m\cdot_V x_m)`), "、",
+        math(String.raw`L^{y}_m:=L^{y}_{m-1}+_V(\lambda_m\cdot_V y_m)`), "、", math(String.raw`L^{x+y}_m:=L^{x+y}_{m-1}+_V\bigl(\lambda_m\cdot_V(x_m+_V y_m)\bigr)`),
+        "（", math(String.raw`1\le m\le n`), "）である。すべての ", math(String.raw`m`), " について ", math(String.raw`L^{x}_m+_V L^{y}_m=L^{x+y}_m`),
+        " であることを ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。", math(String.raw`m=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^{x}_0+_V L^{y}_0
+&=0_V+_V 0_V
+&&\left(\because\ L^{x}_0,\ L^{y}_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_V
+&&\left(\because\ \text{加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x+y}_0
+&&\left(\because\ L^{x+y}_0\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`), " とし、", math(String.raw`L^{x}_{m-1}+_V L^{y}_{m-1}=L^{x+y}_{m-1}`), " を仮定する（帰納法の仮定）。",
+        math(String.raw`V`), " の元 ", math(String.raw`c:=\lambda_m\cdot_V x_m`), " と ", math(String.raw`d:=\lambda_m\cdot_V y_m`), " を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^{x}_m+_V L^{y}_m
+&=\bigl(L^{x}_{m-1}+_V c\bigr)+_V\bigl(L^{y}_{m-1}+_V d\bigr)
+&&\left(\because\ L^{x}_m,\ L^{y}_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{x}_{m-1}+_V\Bigl(c+_V\bigl(L^{y}_{m-1}+_V d\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x}_{m-1}+_V\Bigl(\bigl(c+_V L^{y}_{m-1}\bigr)+_V d\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x}_{m-1}+_V\Bigl(\bigl(L^{y}_{m-1}+_V c\bigr)+_V d\Bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x}_{m-1}+_V\Bigl(L^{y}_{m-1}+_V\bigl(c+_V d\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(L^{x}_{m-1}+_V L^{y}_{m-1}\bigr)+_V\bigl(c+_V d\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x+y}_{m-1}+_V\bigl(c+_V d\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L^{x+y}_{m-1}+_V\bigl((\lambda_m\cdot_V x_m)+_V(\lambda_m\cdot_V y_m)\bigr)
+&&\left(\because\ c,\ d\ \text{の置き方}\right)\\
+&=L^{x+y}_{m-1}+_V\bigl(\lambda_m\cdot_V(x_m+_V y_m)\bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{x+y}_m
+&&\left(\because\ L^{x+y}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_splitting_linear_combination_into_first_and_last_terms",
     kind: "claim",
     title: { text: "線型結合は、前の n 項の線型結合と後ろの n' 項の線型結合の和である" },
@@ -17084,6 +17220,142 @@ x\star_D 1_D
         ref("def_unital_ring"), "）であり、", math(String.raw`(\lambda\ast_A x)\cdot_A a=\lambda\ast_A(x\cdot_A a)`),
         " はスカラー倍と乗法の両立の左の因子の条件（", ref("def_complex_algebra"), "）である。二つの条件が満たされたので線型写像である（",
         ref("def_linear_map"), "）。"]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_anticommutator_with_linear_combination_in_algebra",
+    kind: "claim",
+    title: { text: "代数の中の線型結合と一つの元の反交換子は、項ごとの反交換子の線型結合である" },
+    labels: ["claim_anticommutator_with_linear_combination_in_algebra"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`a\in A`), "、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`l`), " に ", math(String.raw`A`),
+        " の元 ", math(String.raw`r_l`), " と ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\mu_l`), " が一つずつ与えられているとする。",
+        math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の線型結合（", ref("def_linear_combination"),
+        "）を ", math(String.raw`R:=\sum_{l=1}^{n}\mu_l\ast_A r_l`), " と置く。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`R\cdot_A a+_A a\cdot_A R=\sum_{l=1}^{n}\mu_l\ast_A\bigl(r_l\cdot_A a+_A a\cdot_A r_l\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        "写像 ", math(String.raw`\bullet\cdot_A a`), " と ", math(String.raw`a\cdot_A\bullet`), " は ", math(String.raw`U_{\mathrm{vec}}(A)`), " から ",
+        math(String.raw`U_{\mathrm{vec}}(A)`), " への線型写像である（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "、",
+        ref("claim_left_multiplication_in_algebra_is_linear_map"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+R\cdot_A a+_A a\cdot_A R
+&=\left(\sum_{l=1}^{n}\mu_l\ast_A(r_l\cdot_A a)\right)+_A a\cdot_A R
+&&\left(\because\ f:=\bullet\cdot_A a\ \text{に当てる。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\left(\sum_{l=1}^{n}\mu_l\ast_A(r_l\cdot_A a)\right)+_A\left(\sum_{l=1}^{n}\mu_l\ast_A(a\cdot_A r_l)\right)
+&&\left(\because\ f:=a\cdot_A\bullet\ \text{に当てる。}\blkref{claim_linear_map_maps_linear_combination_to_linear_combination_of_values}\right)\\
+&=\sum_{l=1}^{n}\mu_l\ast_A\bigl(r_l\cdot_A a+_A a\cdot_A r_l\bigr)
+&&\left(\because\ x_l:=r_l\cdot_A a\text{、}y_l:=a\cdot_A r_l\text{。}\blkref{claim_sum_of_linear_combinations_with_same_coefficients}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_square_of_linear_combination_of_anticommuting_square_zero_elements",
+    kind: "claim",
+    title: { text: "平方が零で互いに反交換する代数の元の線型結合は、平方が零である" },
+    labels: ["claim_square_of_linear_combination_of_anticommuting_square_zero_elements_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`), " の元 ", math(String.raw`p_k`), " と ",
+        math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\lambda_k`), " が一つずつ与えられているとする。", math(String.raw`p`), " は次の二つを満たすとする。",
+      ]),
+      list([
+        ["すべての ", math(String.raw`k\in\{1,\dots,n\}`), " について ", math(String.raw`p_k\cdot_A p_k=0_A`), "。"],
+        [
+          math(String.raw`k\neq l`), " であるすべての ", math(String.raw`k,l\in\{1,\dots,n\}`), " について ",
+          math(String.raw`p_k\cdot_A p_l+_A p_l\cdot_A p_k=0_A`), "。",
+        ],
+      ]),
+      paragraph([
+        "このとき、", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の線型結合（",
+        ref("def_linear_combination"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\left(\sum_{k=1}^{n}\lambda_k\ast_A p_k\right)\cdot_A\left(\sum_{k=1}^{n}\lambda_k\ast_A p_k\right)=0_A`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`), "）を線型結合の定義（", ref("def_linear_combination"),
+        "）の部分和とする（", math(String.raw`L_0=0_A`), "、", math(String.raw`L_m=L_{m-1}+_A(\lambda_m\ast_A p_m)`), "）。部分和の式は番号 ",
+        math(String.raw`m`), " までの項だけで定まるので、", math(String.raw`L_m`), " は、族を ", math(String.raw`\{1,\dots,m\}`), " に制限した線型結合 ",
+        math(String.raw`\sum_{k=1}^{m}\lambda_k\ast_A p_k`), " と同じ元である。すべての ", math(String.raw`m`), " について ", math(String.raw`L_m\cdot_A L_m=0_A`),
+        " であることを ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。",
+      ]),
+      paragraph([
+        "準備。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`e:=\lambda_m\ast_A p_m\in A`), " と置く。", math(String.raw`k\in\{1,\dots,m-1\}`),
+        " については ", math(String.raw`k\neq m`), " なので、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda_k\ast_A\bigl(p_k\cdot_A e+_A e\cdot_A p_k\bigr)
+&=\lambda_k\ast_A\bigl(p_k\cdot_A(\lambda_m\ast_A p_m)+_A(\lambda_m\ast_A p_m)\cdot_A p_k\bigr)
+&&\left(\because\ e\ \text{の置き方}\right)\\
+&=\lambda_k\ast_A\Bigl(\lambda_m\ast_A(p_k\cdot_A p_m)+_A(\lambda_m\ast_A p_m)\cdot_A p_k\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\lambda_k\ast_A\Bigl(\lambda_m\ast_A(p_k\cdot_A p_m)+_A\lambda_m\ast_A(p_m\cdot_A p_k)\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\lambda_k\ast_A\Bigl(\lambda_m\ast_A\bigl(p_k\cdot_A p_m+_A p_m\cdot_A p_k\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda_k\ast_A(\lambda_m\ast_A 0_A)
+&&\left(\because\ \text{二つ目の仮定。}k\neq m\right)\\
+&=\lambda_k\ast_A 0_A
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph(["したがって次が成り立つ（", math(String.raw`\star`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+L_{m-1}\cdot_A e+_A e\cdot_A L_{m-1}
+&=\sum_{k=1}^{m-1}\lambda_k\ast_A\bigl(p_k\cdot_A e+_A e\cdot_A p_k\bigr)
+&&\left(\because\ n:=m-1\text{、}r:=p\text{、}\mu:=\lambda\text{、}a:=e\text{。}\blkref{claim_anticommutator_with_linear_combination_in_algebra}\right)\\
+&=0_A
+&&\left(\because\ \text{上の等式で各項が}\ 0_A\text{。}\blkref{claim_linear_combination_of_zero_terms_is_zero}\right).
+\end{aligned}`),
+      paragraph([
+        "本題。", math(String.raw`m=0`), " のとき、", math(String.raw`L_0\cdot_A L_0=0_A\cdot_A 0_A=0_A`), " である（", math(String.raw`L_0=0_A`),
+        "。写像 ", math(String.raw`0_A\cdot_A\bullet`), " は線型写像なので零を零へ移す。", ref("claim_left_multiplication_in_algebra_is_linear_map"), "、",
+        ref("claim_linear_map_sends_zero_to_zero"), "）。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}\cdot_A L_{m-1}=0_A`),
+        " を仮定する（帰納法の仮定）。", math(String.raw`e`), " は準備のものとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m\cdot_A L_m
+&=\bigl(L_{m-1}+_A e\bigr)\cdot_A\bigl(L_{m-1}+_A e\bigr)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L_{m-1}\cdot_A\bigl(L_{m-1}+_A e\bigr)+_A e\cdot_A\bigl(L_{m-1}+_A e\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（左の因子の和）。}\blkref{def_unital_ring}\right)\\
+&=\bigl(L_{m-1}\cdot_A L_{m-1}+_A L_{m-1}\cdot_A e\bigr)+_A\bigl(e\cdot_A L_{m-1}+_A e\cdot_A e\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（右の因子の和）を二か所に適用。}\blkref{def_unital_ring}\right)\\
+&=\bigl(0_A+_A L_{m-1}\cdot_A e\bigr)+_A\bigl(e\cdot_A L_{m-1}+_A e\cdot_A e\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\bigl(L_{m-1}\cdot_A e+_A 0_A\bigr)+_A\bigl(e\cdot_A L_{m-1}+_A e\cdot_A e\bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=L_{m-1}\cdot_A e+_A\bigl(e\cdot_A L_{m-1}+_A e\cdot_A e\bigr)
+&&\left(\because\ \text{加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\bigl(L_{m-1}\cdot_A e+_A e\cdot_A L_{m-1}\bigr)+_A e\cdot_A e
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=0_A+_A e\cdot_A e
+&&\left(\because\ (\star)\right)\\
+&=e\cdot_A e+_A 0_A
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=e\cdot_A e
+&&\left(\because\ \text{加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=(\lambda_m\ast_A p_m)\cdot_A(\lambda_m\ast_A p_m)
+&&\left(\because\ e\ \text{の置き方}\right)\\
+&=\lambda_m\ast_A\bigl(p_m\cdot_A(\lambda_m\ast_A p_m)\bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=\lambda_m\ast_A\bigl(\lambda_m\ast_A(p_m\cdot_A p_m)\bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\lambda_m\ast_A(\lambda_m\ast_A 0_A)
+&&\left(\because\ \text{一つ目の仮定}\right)\\
+&=\lambda_m\ast_A 0_A
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right).
+\end{aligned}`),
     ],
   },
   {
