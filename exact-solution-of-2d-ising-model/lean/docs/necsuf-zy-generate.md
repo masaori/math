@@ -88,8 +88,11 @@ x n * x n = 1                             -- σ^xσ^x = I
 n < k → x k * x n = x n * x k             -- 相異なる番号どうしの可換性（等式が対称なので n < k の形で書く）
 ```
 
-* 使う代数の構造は結合則と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない（結合則を外すと偽になるかは確かめていない）。
+* 使う代数の構造は結合則と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない。
 * `x n * x n = 1` も可換性も削れない（ファイルの節の冒頭に反例を書いた）。
+* 結合則も削れない。`Monoid` を単位的マグマ `MulOneClass` に替えると、ほかの仮定を全部残しても両方の主張が偽になる。
+  反例は 6 元の単位的マグマ `NecSuf.SixElementUnitalMagma`（`N = 3`、`x 0, x 1, x 2 = a, b, c`、`p 2 = d`、`c d = e ≠ 1 = d c`、`d d = e`）で、
+  `NecSuf.xl_mul_string_comm_false_without_assoc`・`NecSuf.string_mul_self_false_without_assoc` が、主張の `Monoid` を `MulOneClass` に替えた全称命題の否定を示す。
 
 ### (e) Step 2 の準備（積の表示） — `NecSuf.string_eq_finProdLeft`
 
@@ -183,10 +186,12 @@ bash scripts/check-no-sorry.sh
 'Ising2D.NecSuf.string_eq_finProdLeft' depends on axioms: [propext]
 'Ising2D.NecSuf.map_mem_of_mulSingle_mem' depends on axioms: [propext, Quot.sound]
 'Ising2D.Z_Y_generate_algebra_of_necSuf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Ising2D.NecSuf.xl_mul_string_comm_false_without_assoc' depends on axioms: [propext]
+'Ising2D.NecSuf.string_mul_self_false_without_assoc' depends on axioms: [propext]
 ```
 
 （Step 2 の 6 行は 2026-11-12 に、累積帰納法の三段・可換の式・二乗の式へ組み直した後に `#print axioms` で取った出力。
-`map_mem_of_mulSingle_mem` の行は同じ日に `P_s`（いまの `Q_s`）の帰納法へ書き直した後の出力。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
+`map_mem_of_mulSingle_mem` の行は同じ日に `P_s`（いまの `Q_s`）の帰納法へ書き直した後の出力。結合則を外した反例の 2 行は同じ日に反例を足した後の出力で、`propext` は積の表を `decide` で確かめる段から入る。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
 `propext` は有限積の初項・漸化式を右辺から左辺へ読む段の `rw` から入る。選択公理は使わない。）
 
 Step 2 の必要十分版（`string_mem_of_previous` / `local_mem_of_previous` / `local_mem` / `string_mem` / `xl_mul_string_comm` / `string_mul_self`）が**公理に一切依存しない**ことは、

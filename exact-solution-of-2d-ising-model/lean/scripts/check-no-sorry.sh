@@ -277,6 +277,8 @@ targets=(
   Ising2D.NecSuf.string_mem
   Ising2D.NecSuf.xl_mul_string_comm
   Ising2D.NecSuf.string_mul_self
+  Ising2D.NecSuf.xl_mul_string_comm_false_without_assoc
+  Ising2D.NecSuf.string_mul_self_false_without_assoc
   Ising2D.NecSuf.string_eq_finProdLeft
   Ising2D.NecSuf.local_mem
   Ising2D.sigmaXPrefixProduct_mul_self_of_necSuf

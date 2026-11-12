@@ -300,8 +300,11 @@ end StringInduction
 
 削れないもの: `x n * x n = 1` を外すと `N = 1` の `x 0 = 2`（`A = ℕ` の乗法）で `p 1 * p 1 = 4 ≠ 1` となり偽になる。
 可換性を外すと、`x 0 * x 0 = x 1 * x 1 = 1` で可換でない 2 元（3 文字の置換の 2 つの互換）で `p 2 * p 2 = (x 0 * x 1)^2 ≠ 1` となり偽になる。
-結合則は鎖の括弧の付け替えの段（`mat_mult_associative` の段）そのものに使うので、`Monoid` の構造として仮定する。
-外すと偽になるかは確かめていない（状態台帳の件 (cl3c3j8n2d3d4c44p14)）。 -/
+結合則を外して単位的マグマ（`MulOneClass`）にすると、ほかの仮定を全部残しても両方とも偽になる。
+反例は下の節の 6 元の単位的マグマ `SixElementUnitalMagma` で、`N = 3`、`x 0, x 1, x 2` を相異なる 3 元とし、
+`p 2 = (1 * x 0) * x 1` が `x 2` と可換でなく、`p 2 * p 2 ≠ 1` となるように積を決める
+（`xl_mul_string_comm_false_without_assoc`・`string_mul_self_false_without_assoc`）。
+したがって結合則は `Monoid` の構造として仮定する。 -/
 
 section StringSquare
 
@@ -357,6 +360,113 @@ theorem string_mul_self (hxx : ∀ n, n < N → x n * x n = 1)
       _ = 1 := ih                                          -- 帰納法の仮定
 
 end StringSquare
+
+/-! ## 結合則を外した反例
+
+上の節の可換の式 `xl_mul_string_comm` と二乗の式 `string_mul_self` から、`Monoid` を単位的マグマ `MulOneClass`
+（単位元の両側の単位性だけを持ち、結合則を持たない）に替えると、ほかの仮定（`p 0 = 1`、漸化式、`x n * x n = 1`、
+相異なる番号どうしの可換性）を全部残しても主張が偽になることを、6 元の単位的マグマで示す。
+
+元は `1, a, b, c, d, e` で、積の表は次のとおり（`1` の行と列は単位元の規則）。
+* `a a = b b = c c = 1`（`x n * x n = 1`）。
+* `a b = b a = d`。`a c = c a = 1`、`b c = c b = 1`（相異なる番号どうしの可換性）。
+* `c d = e`、`d c = 1`（`x 2 = c` が `p 2 = d` と可換でない）。
+* `d d = e`（`p 2 * p 2 ≠ 1`）。
+* ほかはすべて `1`。
+
+`x 0 = a`、`x 1 = b`、`x 2 = c` とすると `p 2 = (1 a) b = d` であり、`x 2 * p 2 = c d = e`、`p 2 * x 2 = d c = 1`、
+`p 2 * p 2 = d d = e` である。結合則は `(c a) b = 1 b = b` と `c (a b) = c d = e` で破れている
+（`not_associative`）。これは `xl_mul_string_comm` の一段の
+「結合則を右辺から左辺へ」の段 `x k * (p r * x r) = (x k * p r) * x r`（`k = 2`、`r = 1`、`p 1 = a`）が、ここで偽になることと同じである。 -/
+
+section NonassociativeCounterexample
+
+/-- 反例に使う 6 元の集合。 -/
+inductive SixElementUnitalMagma
+  | one | a | b | c | d | e
+  deriving DecidableEq
+
+namespace SixElementUnitalMagma
+
+/-- 積の表（節の冒頭の表）。最初の 2 行が `1` の行と列で、`1` が両側の単位元であることを与える。 -/
+def mul : SixElementUnitalMagma → SixElementUnitalMagma → SixElementUnitalMagma
+  | one, y => y
+  | y, one => y
+  | a, a => one
+  | b, b => one
+  | c, c => one
+  | a, b => d
+  | b, a => d
+  | c, d => e
+  | d, d => e
+  | _, _ => one
+
+/-- 単位的マグマの構造。単位元の両側の単位性は 6 元を 1 つずつ確かめる。 -/
+instance : MulOneClass SixElementUnitalMagma where
+  mul := mul
+  one := one
+  one_mul y := by cases y <;> rfl
+  mul_one y := by cases y <;> rfl
+
+/-- 生成元の列 `x 0 = a`、`x 1 = b`、`x 2 = c`（`3` 以上は `1` で、主張には現れない）。 -/
+def generator : ℕ → SixElementUnitalMagma
+  | 0 => a
+  | 1 => b
+  | 2 => c
+  | _ => one
+
+/-- 文字列 `p 0 = 1`、`p (n + 1) = p n * x n`。 -/
+def prefixString : ℕ → SixElementUnitalMagma
+  | 0 => 1
+  | n + 1 => prefixString n * generator n
+
+/-- この単位的マグマは結合的でない: `(c a) b ≠ c (a b)`。 -/
+theorem not_associative : (c * a) * b ≠ c * (a * b) := by decide
+
+/-- 反例の列が `N = 3` で `xl_mul_string_comm`・`string_mul_self` の仮定を全部満たすこと。 -/
+theorem prefixString_hypotheses :
+    prefixString 0 = 1 ∧
+    (∀ n, n < 3 → prefixString (n + 1) = prefixString n * generator n) ∧
+    (∀ n, n < 3 → generator n * generator n = 1) ∧
+    (∀ k n, k < 3 → n < k → generator k * generator n = generator n * generator k) := by
+  refine ⟨rfl, fun n _ => rfl, ?_, ?_⟩
+  · decide   -- `n = 0, 1, 2` の 3 通り: `a a = b b = c c = 1`
+  · intro k n hk hn
+    -- `(k, n) = (1, 0), (2, 0), (2, 1)` の 3 通り: `b a = a b`、`c a = a c`、`c b = b c`
+    have hall : ∀ k, k < 3 → ∀ n, n < k →
+        generator k * generator n = generator n * generator k := by decide
+    exact hall k hk n hn
+
+end SixElementUnitalMagma
+
+open SixElementUnitalMagma in
+/-- **可換の式は結合則なしでは偽**: `xl_mul_string_comm` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
+（`N = 3`、`k = 2`、`r = 2` で `x 2 * p 2 = e ≠ 1 = p 2 * x 2`）。 -/
+theorem xl_mul_string_comm_false_without_assoc :
+    ¬ ∀ (A : Type) [MulOneClass A] (p x : ℕ → A) (N : ℕ), p 0 = 1 →
+      (∀ n, n < N → p (n + 1) = p n * x n) →
+      (∀ k n, k < N → n < k → x k * x n = x n * x k) →
+      ∀ k, k < N → ∀ r, r ≤ k → x k * p r = p r * x k := by
+  intro h
+  obtain ⟨hp0, hp, -, hcomm⟩ := prefixString_hypotheses
+  have hfalse := h SixElementUnitalMagma prefixString generator 3 hp0 hp hcomm 2 (by decide) 2 le_rfl
+  exact absurd hfalse (by decide)
+
+open SixElementUnitalMagma in
+/-- **二乗の式は結合則なしでは偽**: `string_mul_self` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
+（`N = 3`、`r = 2` で `p 2 * p 2 = e ≠ 1`）。 -/
+theorem string_mul_self_false_without_assoc :
+    ¬ ∀ (A : Type) [MulOneClass A] (p x : ℕ → A) (N : ℕ), p 0 = 1 →
+      (∀ n, n < N → p (n + 1) = p n * x n) →
+      (∀ n, n < N → x n * x n = 1) →
+      (∀ k n, k < N → n < k → x k * x n = x n * x k) →
+      ∀ r, r ≤ N → p r * p r = 1 := by
+  intro h
+  obtain ⟨hp0, hp, hxx, hcomm⟩ := prefixString_hypotheses
+  have hfalse := h SixElementUnitalMagma prefixString generator 3 hp0 hp hxx hcomm 2 (by decide)
+  exact absurd hfalse (by decide)
+
+end NonassociativeCounterexample
 
 /-! ## Step 2 の準備: 積の表示
 
