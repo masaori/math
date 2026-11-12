@@ -1921,3 +1921,6 @@ import Ising2DLambda.KacWard.TaggedMatchingTermOrientationFromNecSuf
 import Ising2DLambda.KacWard.TaggedCyclePairWalk
 import Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk
 import Ising2DLambda.KacWard.TaggedCyclePairWalkFromNecSuf
+import Ising2DLambda.KacWard.TaggedMatchingCycleWeight
+import Ising2DLambda.NecSuf.KacWard.TaggedMatchingCycleWeight
+import Ising2DLambda.KacWard.TaggedMatchingCycleWeightFromNecSuf
