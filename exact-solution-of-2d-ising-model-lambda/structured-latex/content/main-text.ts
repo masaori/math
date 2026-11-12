@@ -79593,6 +79593,16 @@ M_{\mathcal D_0,\varnothing}(x)
                     labels: ["claim_alternating_cycle_gauge_ratio"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/alternating-cycle-gauge-ratio"],
+                    lean: [
+                      "Ising2DLambda.KacWard.diagonalGaugeInverseWeight_eq_inv",
+                      "Ising2DLambda.KacWard.diagonalGaugeWeight_reversal_ratio_sq",
+                      "Ising2DLambda.KacWard.prod_fin_cyclic_pred",
+                      "Ising2DLambda.KacWard.alternating_cycle_gauge_ratio_quotient",
+                      "Ising2DLambda.KacWard.alternating_cycle_gauge_ratio",
+                      "Ising2DLambda.KacWard.closedWalk_gauge_ratio",
+                      "Ising2DLambda.NecSuf.KacWard.cycle_gauge_ratio_necSuf",
+                      "Ising2DLambda.KacWard.alternating_cycle_gauge_ratio_from_necSuf",
+                    ],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路一つを固定する。", ref("claim_projected_edge_cycle_nonbacktracking"), " の閉歩道を ", math(String.raw`\gamma=(\vec e_0,\ldots,\vec e_{k-1})`), " と書き、添字は ", math(String.raw`\mathbb Z/k\mathbb Z`), " で読む。", math(String.raw`k\in\mathbb N_{>0}`), " である。閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{r-1}),\vec e_r)`), "、基準マッチングの長い標識の対を ", math(String.raw`(\vec e_r,\iota(\vec e_r))`), " の向きで取る。", ref("def_gauged_terminal_matrix"), " の重みについて、"]),
                       displayMath(String.raw`\prod_{r\in\mathbb Z/k\mathbb Z}
