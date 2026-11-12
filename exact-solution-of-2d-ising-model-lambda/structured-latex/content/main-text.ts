@@ -30772,7 +30772,7 @@ const chapter_algebraic_eigenvalue = defineSection({
 &=\bigl(\kappa(1)\bigr)(\xi)
 &&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau=\tau'\ \text{の場合})\\
 &=1
-&&(\because\ \text{代入が単位元を単位元へ送ること}\ \blkref{def_partition_polynomial}\text{。}\ \kappa(1)\ \text{が}\ \mathbb{Z}[x]\ \text{の単位元であることは}\ \blkref{def_constant_polynomial})\\
+&&(\because\ \text{代入が単位元を単位元へ送ること}\ \blkref{def_partition_polynomial}\text{、}\ \kappa(1)\ \text{が}\ \mathbb{Z}[x]\ \text{の単位元であることは}\ \blkref{def_constant_polynomial})\\
 &=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}
 &&(\because\ \blkref{def_qbar_identity_matrix}\ \text{の}\ \tau'=\tau\ \text{の場合})
 \end{aligned}`),
@@ -30787,7 +30787,7 @@ const chapter_algebraic_eigenvalue = defineSection({
 &=\bigl(\kappa(0)\bigr)(\xi)
 &&(\because\ \blkref{def_identity_matrix}\ \text{の}\ \tau\ne\tau'\ \text{の場合})\\
 &=0
-&&(\because\ \text{代入が零元を零元へ送ること}\ \blkref{def_partition_polynomial}\text{。}\ \kappa(0)\ \text{が}\ \mathbb{Z}[x]\ \text{の零元であることは}\ \blkref{def_constant_polynomial})\\
+&&(\because\ \text{代入が零元を零元へ送ること}\ \blkref{def_partition_polynomial}\text{、}\ \kappa(0)\ \text{が}\ \mathbb{Z}[x]\ \text{の零元であることは}\ \blkref{def_constant_polynomial})\\
 &=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}
 &&(\because\ \blkref{def_qbar_identity_matrix}\ \text{の}\ \tau'\ne\tau\ \text{の場合})
 \end{aligned}`),
