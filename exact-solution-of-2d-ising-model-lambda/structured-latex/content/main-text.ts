@@ -49159,6 +49159,11 @@ q-0&=q&&(\because\ R\text{ の加法})\\
                 title: { text: "実閉部分体の各元は有理数で上下から挟める" },
                 labels: ["claim_real_algebraic_rational_bounds"],
                 habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.CriticalExponent.realAlgebraic_rational_bounds",
+                  "Ising2DLambda.NecSuf.CriticalExponent.rational_bounds_necSuf",
+                  "Ising2DLambda.CriticalExponent.realAlgebraic_rational_bounds_from_necSuf",
+                ],
                 verification: ["sagemath/check/real-algebraic-rational-bounds"],
                 statement: [
                   paragraph([
@@ -49177,59 +49182,121 @@ q-0&=q&&(\because\ R\text{ の加法})\\
                     " を取り、", math(String.raw`p(a)=0`),
                     " とする。", math(String.raw`d\in\mathbb N`),
                     " は次数、", math(String.raw`c_d\ne0`),
-                    " とする。定数多項式は零点を持たないから ", math(String.raw`d\ge1`),
-                    " である。", math(String.raw`S:=\sum_{j=0}^{d-1}|c_j/c_d|\in\mathbb Q_{\ge0}`),
-                    "、", math(String.raw`B:=1+S\in\mathbb Q_{>0}`),
-                    " と置く。ここで絶対値は有理数の絶対値である。",
+                    " とする。定数多項式 ", math(String.raw`c_0\ne0`),
+                    " は零点を持たないから ", math(String.raw`d\ge1`),
+                    " である。", math(String.raw`j\in\{0,\dots,d-1\}`), " について ",
+                    math(String.raw`\alpha_j:=c_j/c_d\in\mathbb Q`), "、",
+                    math(String.raw`S:=\sum_{j=0}^{d-1}|\alpha_j|\in\mathbb Q_{\ge0}`), "、",
+                    math(String.raw`B:=1+S\in\mathbb Q_{>0}`),
+                    " と置く。絶対値は有理数の絶対値である。有理数は ",
+                    ref("claim_rationals_are_real_algebraic"), " により ",
+                    math(String.raw`R`), " の元でもある。",
                   ]),
                   paragraph([
-                    "まず ", math(String.raw`x\in R`), " が ",
-                    math(String.raw`B\le_R x`), " を満たすとする。",
-                    ref("claim_positive_rational_positive_in_real_closed"),
-                    " により ", math(String.raw`0<_R B`),
-                    " なので ", math(String.raw`0<_R x`),
-                    " かつ ", math(String.raw`1\le_R x`), " である。",
-                    "有理係数と ", math(String.raw`R`),
-                    " の順序の整合性、および正の元の積の単調性から、",
+                    "以下 ", math(String.raw`u,v\in R`), " とし、", math(String.raw`\le_R`),
+                    " は ", ref("def_real_algebraic_nonstrict_order"),
+                    " の順序である。使う順序の事実は次の五つである。",
+                  ]),
+                  paragraph([
+                    "(i) ", math(String.raw`u<_Rv`), " と ", math(String.raw`0<_Rv-u`),
+                    " は同じ条件である（", ref("def_real_algebraic_strict_order"), " で ",
+                    math(String.raw`(v-u)-0=v-u`), "）。同じく ", math(String.raw`u\le_Rv`),
+                    " と ", math(String.raw`0\le_Rv-u`), " も同じ条件である。",
+                  ]),
+                  paragraph([
+                    "(ii) ", math(String.raw`0<_Ru`), " かつ ", math(String.raw`0<_Rv`),
+                    " なら ", math(String.raw`0<_Ru+v`), " である。", math(String.raw`(u+v)-u=v`),
+                    " と ", math(String.raw`0<_Rv`), " から ", math(String.raw`u<_Ru+v`),
+                    " となり、", ref("claim_real_algebraic_order_transitive"), " を ",
+                    math(String.raw`0<_Ru<_Ru+v`), " に当てる。一方が零なら和は他方に等しいので、",
+                    math(String.raw`0<_Ru`), "・", math(String.raw`0\le_Rv`), " なら ",
+                    math(String.raw`0<_Ru+v`), "、", math(String.raw`0\le_Ru`), "・",
+                    math(String.raw`0\le_Rv`), " なら ", math(String.raw`0\le_Ru+v`),
+                    " である。有限和へ反復して、非負の元の有限和は非負である。",
+                  ]),
+                  paragraph([
+                    "(iii) ", math(String.raw`u-0=s\cdot s`), "、", math(String.raw`v-0=t\cdot t`),
+                    "（", math(String.raw`s,t\in R\setminus\{0\}`), "）なら ",
+                    math(String.raw`uv-0=(st)\cdot(st)`), " かつ ", math(String.raw`st\ne0`),
+                    "（", math(String.raw`R`), " は体で零因子を持たない）なので、正の元の積は正である。",
+                    "一方が零なら積は零なので、非負の元の積は非負である。",
+                  ]),
+                  paragraph([
+                    "(iv) ", math(String.raw`q\in\mathbb Q`), "、", math(String.raw`0<q`),
+                    " なら ", math(String.raw`0<_Rq`), " である（",
+                    ref("claim_positive_rational_positive_in_real_closed"), "）。よって ",
+                    math(String.raw`0\le q`), " なら ", math(String.raw`0\le_Rq`), " である。",
+                  ]),
+                  paragraph([
+                    "(v) ", math(String.raw`0<_Ru`), " なら ", math(String.raw`u\ne0`),
+                    " である（", ref("claim_real_algebraic_order_trichotomy"), " で ",
+                    math(String.raw`0<_Ru`), " と ", math(String.raw`0=u`),
+                    " は同時に成り立たない）。",
+                  ]),
+                  paragraph([
+                    "まず ", math(String.raw`x\in R`), " が ", math(String.raw`B\le_Rx`),
+                    " を満たすとする。(i) より ", math(String.raw`0\le_Rx-B`),
+                    " である。次の三つの等式に (iv) の ", math(String.raw`0\le_RS`), "・",
+                    math(String.raw`0<_R1`), " と (ii) を当てて、",
+                    math(String.raw`0\le_Rx-1`), "、", math(String.raw`0<_Rx-S`), "、",
+                    math(String.raw`0<_Rx`), " を順に得る。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\left|\sum_{j=0}^{d-1}(c_j/c_d)x^j\right|_R
-&\le_R\sum_{j=0}^{d-1}|c_j/c_d|x^j
-&&\bigl(\because\ \text{順序体の三角不等式}\bigr)\\
-&\le_R\sum_{j=0}^{d-1}|c_j/c_d|x^{d-1}
-&&\bigl(\because\ 1\le_R x,\ 0\le j<d\bigr)\\
-&=Sx^{d-1}
-&&\bigl(\because\ S\text{ の定義と分配律}\bigr)\\
-&<_R x^d
-&&\bigl(\because\ S<B\le_R x,\ 0<_R x^{d-1}\bigr).
+x-1&=(x-B)+S&&(\because\ B=1+S)\\
+x-S&=1+(x-B)&&(\because\ B=1+S)\\
+x&=(x-S)+S&&(\because\ \text{加法の逆元})
 \end{aligned}`),
                   paragraph([
-                    "ここで ", math(String.raw`|\cdot|_R`),
-                    " は順序 ", math(String.raw`\le_R`),
-                    " で定める絶対値である。上の評価を代入すると",
+                    "(iii) の帰納法で、任意の ", math(String.raw`m\in\mathbb N`), " について ",
+                    math(String.raw`0<_Rx^m`), " である（", math(String.raw`x^0=1`),
+                    " には (iv)）。また ", math(String.raw`x^0-1=0`), " と",
+                  ]),
+                  displayMath(String.raw`x^{m+1}-1=x(x^m-1)+(x-1)\qquad(\because\ \text{分配律})`),
+                  paragraph([
+                    "に (ii)(iii) を当てる帰納法で、任意の ", math(String.raw`m\in\mathbb N`),
+                    " について ", math(String.raw`0\le_Rx^m-1`), " である。",
+                    math(String.raw`j\in\{0,\dots,d-1\}`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|\alpha_j|x^{d-1}+\alpha_jx^j
+&=|\alpha_j|x^jx^{d-1-j}+\alpha_jx^j
+&&(\because\ x^{d-1}=x^jx^{d-1-j})\\
+&=|\alpha_j|x^j(x^{d-1-j}-1)+(|\alpha_j|+\alpha_j)x^j
+&&(\because\ \text{分配律})
+\end{aligned}`),
+                  paragraph([
+                    "であり、", math(String.raw`0\le|\alpha_j|`), " と ",
+                    math(String.raw`0\le|\alpha_j|+\alpha_j`),
+                    " は有理数の不等式なので、(iv)(iii)(ii) により ",
+                    math(String.raw`0\le_R|\alpha_j|x^{d-1}+\alpha_jx^j`), " である。主鎖は",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 p(x)/c_d
-&=x^d+\sum_{j=0}^{d-1}(c_j/c_d)x^j
-&&\bigl(\because\ p\text{ の定義と }c_d\ne0\bigr)\\
-&\ge_R x^d-\left|\sum_{j=0}^{d-1}(c_j/c_d)x^j\right|_R
-&&\bigl(\because\ \text{順序体の絶対値の定義}\bigr)\\
-&\ge_R x^d-Sx^{d-1}
-&&\bigl(\because\ \text{上の残余項の評価}\bigr)\\
+&=x^d+\sum_{j=0}^{d-1}\alpha_jx^j
+&&\bigl(\because\ p\text{ の定義と }\alpha_j=c_j/c_d\bigr)\\
+&=x^{d-1}(x-S)+\sum_{j=0}^{d-1}\bigl(|\alpha_j|x^{d-1}+\alpha_jx^j\bigr)
+&&\bigl(\because\ S\text{ の定義と分配律}\bigr)\\
 &>_R0
-&&\bigl(\because\ Sx^{d-1}<_R x^d\bigr).
+&&\bigl(\because\ \text{(iii) で }0<_Rx^{d-1}(x-S)\text{、各項の非負性と (ii)}\bigr)
 \end{aligned}`),
-                  paragraph([math(String.raw`c_d\ne0`), " だから ", math(String.raw`p(x)\ne0`), " である。"]),
                   paragraph([
-                    math(String.raw`B\le_R a`), " なら直前の結論を ",
+                    "である。(v) より ", math(String.raw`p(x)/c_d\ne0`), " であり、",
+                    math(String.raw`c_d\ne0`), " だから ", math(String.raw`p(x)\ne0`),
+                    " である。ここまでの論証が使ったのは、",
+                    math(String.raw`d\ge1`), "、", math(String.raw`c_d\ne0`), "、",
+                    math(String.raw`S`), " の定義だけである。",
+                  ]),
+                  paragraph([
+                    math(String.raw`a=B`), " または ", math(String.raw`B<_Ra`),
+                    " なら ", math(String.raw`B\le_Ra`), " なので、直前の結論を ",
                     math(String.raw`x=a`), " に適用して ", math(String.raw`p(a)\ne0`),
                     " となり矛盾する。", ref("claim_real_algebraic_order_trichotomy"),
                     " より ", math(String.raw`a<_R B`), " を得る。",
                   ]),
                   paragraph([
                     "負側には ", math(String.raw`p(-X)=\sum_{j=0}^{d}(-1)^jc_jX^j`),
-                    " を用いる。その最高次係数は零でなく、係数比の絶対値の和は ",
-                    math(String.raw`S`), " である。",
+                    " を用いる。その次数は ", math(String.raw`d\ge1`),
+                    "、最高次係数 ", math(String.raw`(-1)^dc_d`), " は零でなく、",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
@@ -49241,8 +49308,11 @@ p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
                   paragraph([
                     "上の正側の論証を根 ", math(String.raw`-a`),
                     " に適用して ", math(String.raw`-a<_R B`),
-                    " を得る。順序体の加法単調性により ",
-                    math(String.raw`-B<_R a`),
+                    " を得る。(i) より ", math(String.raw`0<_RB-(-a)`), " であり、",
+                  ]),
+                  displayMath(String.raw`a-(-B)=B-(-a)\qquad(\because\ \text{加法の可換則と結合則})`),
+                  paragraph([
+                    "なので (i) より ", math(String.raw`-B<_R a`),
                     " である。議論は ", math(String.raw`\mathbb Q`),
                     " と ", math(String.raw`R\subset\overline{\mathbb Q}`),
                     " の四則・有限和・順序で閉じる。",
