@@ -1991,6 +1991,7 @@ targets=(
   Ising2D.matrix_conjTranspose_norm_of_necSuf
   Ising2D.matrix_conjTranspose_tendsto_of_necSuf
   Ising2D.conjTranspose_mul_tensorPow
+  Ising2D.conjTranspose_add_smul_tensorPow
   Ising2D.conjTranspose_tendsto_tensorPow
   "Ising2D.NecSuf.conjTranspose_mul_matrix_apply'"
   "Ising2D.NecSuf.conjTranspose_mul_matrix'"

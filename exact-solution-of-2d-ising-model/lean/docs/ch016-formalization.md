@@ -34,7 +34,7 @@
 | `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として、`M ≠ 0` なら `s = (√M, 0) ≠ (0, 0)`（`√M > 0` は `inclusion_zz_to_rr_of_positive_is_at_least_one` と `sqrt_of_positive_real_is_positive`、続けて第 1 成分の比較）、`(√M)^2 = M` | `def_check_fermi` の係数の分母（分母 `u`・`d` が `ℂ^×` に属することは `diagonalization_check_P_D` Step 1） |
 | `Ising2D.checkPsiDag` / `Ising2D.checkPsi` | `ψ̌_μ^†`, `ψ̌_μ` | **`def_check_fermi`** |
 | `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致（`ψ̌_μ` の `Ž_μ` の係数は人手どおり `checkPPlus = r_ℂ/d` で、どちらも `rfl`） | 同（検算） |
-| `Ising2D.checkPPlus_eq_neg_checkP` / `checkPsi_eq_neg_checkP` | `r_ℂ/d = -((-(r_ℂ))/d)`（`def_complex_quotient`・`double_negation_in_cc`・`negation_times_complex_is_negation_of_product_in_cc` を 1 段ずつ引く 6 行の `calc`）と、それを当てた `ψ̌_μ = (-p_μ) Ž_μ + q Y̌_μ`。人手は独立のブロックとして立てていない | `check_number_operator_is_hermitian` (3) の最後の行（`-α_ν Ž_ν + β Y̌_ν = ψ̌_ν`）、`anticommutator_of_check_psi` の必要十分版への受け渡し |
+| `Ising2D.checkPPlus_eq_neg_checkP` / `checkPsi_eq_neg_checkP` | `r_ℂ/d = -((-(r_ℂ))/d)`（`def_complex_quotient`・`double_negation_in_cc`・`negation_times_complex_is_negation_of_product_in_cc` を 1 段ずつ引く 6 行の `calc`）と、それを当てた `ψ̌_μ = (-p_μ) Ž_μ + q Y̌_μ` | `check_number_operator_is_hermitian` (3) の準備 (e)（`r_ℂ/d_ν = -α_ν` の 5 行。(3) の鎖の 5 行目が右辺から左辺へ引く）、`anticommutator_of_check_psi` の必要十分版への受け渡し |
 | `Ising2D.checkP_mul_checkP_conj` | `p_μ p_{M+1-μ} = -1/(4M)` | `anticommutator_of_check_psi` Step 1 |
 | `Ising2D.checkQ_mul_checkQ` | `q^2 = 1/(4M)` | 同 |
 | `Ising2D.checkPsi_car` | CAR 3 式（必要十分版の系として導出） | **`anticommutator_of_check_psi`** |

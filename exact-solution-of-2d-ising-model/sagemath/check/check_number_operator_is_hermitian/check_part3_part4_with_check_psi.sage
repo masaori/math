@@ -201,6 +201,17 @@ for (x, y) in COUPLINGS:
                 ("-α_ν", -alpha_nu),
             ], f"{tag}: conj(α_μ) の主鎖")
             rep.eq(c(d_mu**(-1)), c(d_mu)**(-1), f"{tag}: complex_conjugate_of_inverse（w → d_μ）")
+            # 準備 (e) の 5 行: r_C/d_ν = -α_ν（def_check_fermi の ψ̌_ν の Ž_ν の係数）
+            rep.chain([
+                ("r_C/d_ν", r / d_nu),
+                ("r_C d_ν^{-1}", r * d_nu**(-1)),
+                ("(-(-(r_C))) d_ν^{-1}", (-(-r)) * d_nu**(-1)),
+                ("-((-r_C) d_ν^{-1})", -((-r) * d_nu**(-1))),
+                ("-((-r_C)/d_ν)", -((-r) / d_nu)),
+                ("-α_ν", -alpha_nu),
+            ], f"{tag}: 準備 (e) の鎖")
+            rep.eq(psi_nu, body_sum(body_scalar(r_nu / (2 * sg_nu * b_nu), Zn), body_scalar(beta, Yn)),
+                   f"{tag}: def_check_fermi（μ → ν）ψ̌_ν = (r_ν/(2√M b_ν))Ž_ν + βY̌_ν")
             # (ψ̌_μ^†)^* の 5 行
             rep.chain([
                 ("(ψ̌_μ^†)^*", star(dag)),
@@ -208,6 +219,7 @@ for (x, y) in COUPLINGS:
                 ("conj(α_μ)Ž_μ^* + conj(β)Y̌_μ^*", body_sum(body_scalar(c(alpha), star(Zm)), body_scalar(c(beta), star(Ym)))),
                 ("conj(α_μ)Ž_ν + βY̌_ν", body_sum(body_scalar(c(alpha), Zn), body_scalar(beta, Yn))),
                 ("-α_νŽ_ν + βY̌_ν", body_sum(body_scalar(-alpha_nu, Zn), body_scalar(beta, Yn))),
+                ("(r_C/d_ν)Ž_ν + βY̌_ν", body_sum(body_scalar(r / d_nu, Zn), body_scalar(beta, Yn))),
                 ("ψ̌_ν", psi_nu),
             ], f"{tag}: (3) の鎖")
             # (4) の準備: (ψ̌_ν)^* = ψ̌_μ^†（(3) の転置共役と (X^*)^* = X）
@@ -226,6 +238,7 @@ for (x, y) in COUPLINGS:
             if nu_ != mu:
                 rep.neq(star(dag), dag, f"{tag}: ψ̌_μ^† はエルミートでない")
                 rep.neq(c(alpha), alpha_nu, f"{tag}: conj(α_μ) は α_ν でない（符号が要る）")
+            rep.neq(r / d_nu, alpha_nu, f"{tag}: r_C/d_ν は α_ν でない（準備 (e) の符号が要る）")
             transpose_differs = transpose_differs or (body_transpose(nm) != nm)
             nmu[mu] = nm
         rep.control(transpose_differs, f"(x,y)=({x},{y}) M={M}: ある ň_μ は転置だけ（複素共役なし）では動く（複素共役が要る）")

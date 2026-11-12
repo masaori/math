@@ -398,10 +398,9 @@ theorem checkPsi_eq (K : IsingConst) (M : ℕ) (μ : ℤ) :
 
 /-- `ψ̌_μ` の `Ž_μ` の係数は `ψ̌_μ^†` の係数の符号反転である: `r_ℂ/d = -((-(r_ℂ))/d)`。
 
-人手の本文はこの等式を 1 つのブロックとしては立てていない。`check_number_operator_is_hermitian` (3) は
-`ψ̌_ν = -α_ν Ž_ν + β Y̌_ν` を `def_check_fermi` だけを根拠に書いており、その読み替えに当たる。
-Lean の下流（`ψ̌` を `(-p_μ) Ž_μ + q Y̌_μ` の形で使う定理）はこの補題を通して受け取る。
-鎖の各行は人手の定義か主張を 1 つずつ引く（`d := 2_ℂ s b`）。 -/
+人手 `check_number_operator_is_hermitian` (3) の準備 (e)（`r_ℂ/d_ν = -α_ν`、人手の 5 行。人手は `ν` で述べる）に当たる。
+1 行目は Lean の定義の展開（`def_check_fermi` の `ψ̌_ν` の係数の読み）、2〜5 行目が人手の 1〜4 行目、6 行目が人手の 5 行目（前置きの `α_ν` の読み。Lean では `checkP` の定義の展開）である。
+Lean の下流（`ψ̌` を `(-p_μ) Ž_μ + q Y̌_μ` の形で使う定理）もこの補題を通して受け取る（`d := 2_ℂ s b`）。 -/
 theorem checkPPlus_eq_neg_checkP (K : IsingConst) (M : ℕ) (μ : ℤ) :
     checkPPlus K M μ = -checkP K M μ :=
   calc checkPPlus K M μ

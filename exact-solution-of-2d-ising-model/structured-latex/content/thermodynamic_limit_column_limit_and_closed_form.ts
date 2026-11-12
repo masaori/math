@@ -4084,7 +4084,13 @@ Z_j^*
 \check\psi_\nu = -\alpha_\nu\check{Z}_\nu + \beta\check{Y}_\nu`,
       ),
       paragraph([
-        "である。まず ",
+        "である（",
+        math(String.raw`\check\psi_\nu`),
+        " の ",
+        math(String.raw`\check{Z}_\nu`),
+        " の係数を ",
+        math(String.raw`-\alpha_\nu`),
+        " と書けることは、下の準備 (e) で示す）。まず ",
         math(String.raw`\overline{\alpha_\mu} = -\alpha_\nu`),
         " を示す。",
         ref("relation_of_gamma_2_theta_tilde"),
@@ -4338,9 +4344,44 @@ t^{-1}
    &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
+      paragraph(["である。"]),
       paragraph([
-        "である。これを使うと",
+        "準備 (e)（",
+        math(String.raw`\dfrac{r_{\mathbb{C}}}{d_\nu} = -\alpha_\nu`),
+        "。左辺は ",
+        ref("def_check_fermi"),
+        " の ",
+        math(String.raw`\check\psi_\nu`),
+        " の ",
+        math(String.raw`\check{Z}_\nu`),
+        " の係数で、その読みにより ",
+        ref("def_complex_quotient"),
+        " の商である。分子は上で見た ",
+        math(String.raw`\left|\gamma_2(\tilde\theta_\nu)\right| = r`),
+        " により ",
+        math(String.raw`r_{\mathbb{C}}`),
+        "、分母は ",
+        math(String.raw`d_\nu`),
+        " である。この等式は下の ",
+        math(String.raw`\left(\check\psi_\mu^\dagger\right)^*`),
+        " の鎖の 5 行目で使う）。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{r_{\mathbb{C}}}{d_\nu}
+&= r_{\mathbb{C}}\,d_\nu^{-1}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to r_{\mathbb{C}},\ w \to d_\nu)\bigr)\\
+&= \bigl(-(-(r_{\mathbb{C}}))\bigr)\,d_\nu^{-1}
+   &&\bigl(\because\ \blkref{double_negation_in_cc}\ (z \to r_{\mathbb{C}})\ \text{を右辺から左辺へ}\bigr)\\
+&= -\bigl((-(r_{\mathbb{C}}))\,d_\nu^{-1}\bigr)
+   &&\bigl(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to -(r_{\mathbb{C}}),\ w \to d_\nu^{-1})\bigr)\\
+&= -\frac{-(r_{\mathbb{C}})}{d_\nu}
+   &&\bigl(\because\ \blkref{def_complex_quotient}\ (z \to -(r_{\mathbb{C}}),\ w \to d_\nu)\ \text{を右辺から左辺へ}\bigr)\\
+&= -\alpha_\nu
+   &&(\because\ \text{前置きの}\ \alpha_\nu = (-(r_{\mathbb{C}}))/d_\nu\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph(["これらを使うと"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(\check\psi_\mu^\dagger\right)^*
@@ -4352,8 +4393,10 @@ t^{-1}
    \quad (\because \text{(2) と } \beta \in \mathbb{R}) \\
 &= -\alpha_\nu\check{Z}_\nu + \beta\check{Y}_\nu
    \quad \left(\because \overline{\alpha_\mu} = -\alpha_\nu\right) \\
+&= \frac{r_{\mathbb{C}}}{d_\nu}\,\check{Z}_\nu + \beta\check{Y}_\nu
+   \quad (\because \text{準備 (e) を右辺から左辺へ}) \\
 &= \check\psi_\nu
-   \quad (\because \blkref{def_check_fermi})
+   \quad (\because \blkref{def_check_fermi}\ (\mu \to \nu))
 \end{aligned}`,
       ),
       paragraph([
@@ -4470,6 +4513,7 @@ x^*\check{Q}_\epsilon x
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（(ψ̌_μ^†)^* = ψ̌_{M+1−μ}、ň_μ, Q̌_ε のエルミート性、残差 ≤ 1.2e-14）。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が (4) を引く）。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (3) の conj(α_μ) = −α_ν の鎖を開いた。もとの 6 行は、商を逆元の積と黙って読む行と「\\overline{z^{-1}} = (\\bar z)^{-1}」「r, 2√M_col ∈ ℝ」を根拠にする行、根拠の無い符号の行を含んでいた。diagonalization_check_P_D の前置きの s・u・d を μ と ν について置き（d_μ := u b_μ、d_ν := u b_ν）、def_check_fermi の読みで α_μ = (−r_C)/d_μ、α_ν = (−r_C)/d_ν とし、準備 (a) conj(−r_C) = −r_C、(b) conj(u) = u、(c) conj(d_μ) = (−1_C) d_ν（relation_of_gamma_2_theta_tilde (1) を ν で、periodicity_of_check_fermi (3)、minus_one_times_minus_one_is_one_in_cc）、(d) ((−1_C) d_ν)^{-1} = (−1_C) d_ν^{-1} と 13 行の主鎖にした。逆元の共役は新しく足した主張 complex_conjugate_of_inverse を引く。「3 段目で使った…」の段落（conj(conj z) = z を名前だけで使っていた）は不要になったので消した。主張と (ψ̌_μ^†)^* の鎖は不変。",
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: (3) の (ψ̌_μ^†)^* の鎖の最後の行「−α_νŽ_ν + βY̌_ν = ψ̌_ν」は def_check_fermi だけを根拠にしていたが、def_check_fermi の ψ̌_ν の Ž_ν の係数は r_ℂ/d_ν で、−α_ν との一致が書かれていなかった。準備 (e)（r_ℂ/d_ν = −α_ν。def_complex_quotient・double_negation_in_cc・negation_times_complex_is_negation_of_product_in_cc・def_complex_quotient・α_ν の読みの 5 行）を conj(α_μ) = −α_ν の主鎖の後・(ψ̌_μ^†)^* の鎖の前に足し（分子が r_ℂ・分母が d_ν である理由を添えた）、鎖の最後を「準備 (e) を右辺から左辺へ」と「def_check_fermi (μ → ν)」の 2 行に割った。主張は不変。",
         "2026-11-05: 全証明の SageMath 検算（sagemath/check/check_number_operator_is_hermitian/）を付けたときに根拠を直した（計算と主張は不変）。Pauli 行列の成分の出典を pauli_matrix_products に、(A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^* の出典を kronecker_product_rule (2)（I⊠⋯⊠I = I の主張）から def_kronecker (2) の成分の鎖に、(σ_k^a)^* = σ_k^a を def_site_pauli_matrices の鎖に、相異なるサイトの因子の可換性を kronecker_product_rule (1) から distinct_site_pauli_matrices_commute に、Z_j・Y_j の定義を def_transfer_matrix_symbols から def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices に、Ž_μ・Y̌_μ の定義を def_half_integer_modes（θ̃ の共役添字恒等式のラベル）から def_half_integer_checkZ・def_half_integer_checkY に、ň_μ の定義を def_check_fermi から def_check_number_operator に直した。(XW)^* = W^*X^* と転置共役の線型性を star_preserves_norm_and_limits (1) で、結びの鎖を、数ベクトルの共役転置（本文に定義が無い）を経ない成分の鎖に書き直した（def_conjugate_bilinear_value・mat_mult・complex_conjugate_of_product・complex_conjugate_of_sum・complex_conjugate_times_self・real_inclusion_preserves_finite_sum・definition_of_sqrt_r_positive・def_matrix_norm）。Q̌_ε の鎖の (I−ň_μ)^* と因子の可換性の根拠を足した。名前だけの根拠（\\text{…}）を \\blkref に直した。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (1) の証明で Pauli 行列と 2 次の単位行列の共役転置を文で述べていた箇所（「Pauli 行列の成分より」「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」「δ_{kl} は実数で δ_{lk} = δ_{kl}」）を外し、(σ_k^a)^* の鎖の 3 行目（σ^a と I の共役転置を 1 行で当てていた）を、成分の鎖で示す主張 conjugate_transpose_of_identity_matrix_of_order_two（I の因子へ同時に）の行と conjugate_transpose_of_pauli_x・conjugate_transpose_of_pauli_y・conjugate_transpose_of_pauli_z（009_eigenvalues_of_V.ts）の行に割った（4 → 5 等号）。計算と主張は不変。",
       ],
