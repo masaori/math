@@ -16,7 +16,7 @@
 | `F_q := b_{π(q)_1} ⊠ ⋯ ⊠ b_{π(q)_M}` | `kroneckerFamily b p` |
 | `𝒮 := {Σ_q d_q F_q}` | `kroneckerFamilyCombinations b` |
 | Step 1（`𝒮` は ℂ-線型結合について閉じる。5 行の鎖） | `linComb_mem_kroneckerFamilyCombinations`（`calc` の 5 段） |
-| Step 2 の `kronecker_multilinear`（`j → s+1, r → 4, B_a → b_a`） | `siteProd_update_sum_smul`（Lean の具体版は無いので `siteProd` の多重線型性） |
+| Step 2 の `kronecker_multilinear`（`j → s+1, r → 4, B_a → b_a`） | `siteProd_update_sum_smul`（`ClaimKroneckerMultilinear.lean` の具体版） |
 | Step 2（`C(s)` の帰納法。`s = 0` の 5 行の鎖と一段の 2 行の鎖） | `siteProd_mem_kroneckerFamilyCombinations` |
 | Step 3 の `E_{I,J} = E_{i_1j_1} ⊠ ⋯ ⊠ E_{i_Mj_M}`（`tensor_basis` の定義と、その Step 2 の行列単位であること） | `E_eq_siteProd_single` |
 | Step 3（`tensor_basis` (1) の展開、`C(M)`、Step 1 で結ぶ） | `kronecker_family_of_spanning_family_spans` |
@@ -25,6 +25,7 @@
 具体版をその特殊化として得る導出は `ClaimKroneckerFamilyOfSpanningFamilySpansFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.TheoremTensorBasisFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
 
@@ -58,16 +59,6 @@ theorem linComb_mem_kroneckerFamilyCombinations (b : Fin 4 → Matrix (Fin 2) (F
         Finset.sum_comm                                                   -- `finite_double_sum_of_matrices_interchange`
     _ = ∑ p, (∑ a ∈ t, κ a * d a p) • kroneckerFamily b p := by
         simp_rw [Finset.sum_smul]                                         -- `finite_sum_of_scalar_multiples_of_one_matrix` を各 `q` へ
-
-/-- 人手 Step 2 が引く `kronecker_multilinear`（`j` 番目の因子を `Σ_a c_a B_a` に置いたクロネッカー積の展開）。
-`kronecker_multilinear` の Lean の具体版は無いので、`siteProd` の多重線型性
-（`MultilinearMap.map_update_sum`・`MultilinearMap.map_update_smul`）を当てる。 -/
-theorem siteProd_update_sum_smul (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (j : Fin M)
-    {ι : Type*} (t : Finset ι) (c : ι → ℂ) (B : ι → Matrix (Fin 2) (Fin 2) ℂ) :
-    siteProd M (Function.update x j (∑ a ∈ t, c a • B a))
-      = ∑ a ∈ t, c a • siteProd M (Function.update x j (B a)) := by
-  rw [MultilinearMap.map_update_sum]
-  exact Finset.sum_congr rfl fun a _ => (siteProd M).map_update_smul x j (c a) (B a)
 
 /-- 人手 Step 2: `s ∈ {0, …, M}` についての帰納法で示す `C(s)`:
 `s < k ≤ M` のすべての `k` で `X_k ∈ {b_1, …, b_4}` ならば `X_1 ⊠ ⋯ ⊠ X_M ∈ 𝒮`。

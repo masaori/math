@@ -135,6 +135,27 @@ targets=(
   Ising2D.NecSuf.kroneckerProdOf
   Ising2D.NecSuf.kroneckerProdOf_transpose_apply
   Ising2D.NecSuf.kroneckerProdOf_transpose
+  Ising2D.siteProd_update_apply
+  Ising2D.siteProd_update_sum_smul_apply
+  Ising2D.siteProd_update_sum_smul
+  Ising2D.siteProd_update_smul
+  Ising2D.vecKron_update_apply
+  Ising2D.vecKron_update_sum_smul_apply
+  Ising2D.vecKron_update_sum_smul
+  Ising2D.vecKron_update_smul
+  Ising2D.vecKron_eq_vecKronOf
+  Ising2D.siteProd_update_sum_smul_of_necSuf
+  Ising2D.siteProd_update_smul_of_necSuf
+  Ising2D.vecKron_update_sum_smul_of_necSuf
+  Ising2D.vecKron_update_smul_of_necSuf
+  Ising2D.NecSuf.kroneckerProdOf_update_apply
+  Ising2D.NecSuf.kroneckerProdOf_update_sum_smul_apply
+  Ising2D.NecSuf.kroneckerProdOf_update_sum_smul
+  Ising2D.NecSuf.kroneckerProdOf_update_smul
+  Ising2D.NecSuf.vecKronOf_update_apply
+  Ising2D.NecSuf.vecKronOf_update_sum_smul_apply
+  Ising2D.NecSuf.vecKronOf_update_sum_smul
+  Ising2D.NecSuf.vecKronOf_update_smul
   # --- 数学的道具立て「有限行列・Pauli行列・交換子」（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/。必要十分版は NecSuf/ScalarCentral.lean）---
   Ising2D.scalar_identity_commutes
   Ising2D.scalar_identity_commutes_of_necSuf

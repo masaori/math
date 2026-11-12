@@ -57,6 +57,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimTensor
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
 
@@ -576,8 +577,8 @@ theorem sigmaX_eq (k : Fin M) : sigmaX k = (-Complex.I) • (sigmaY k * sigmaZ k
           ((-Complex.I) • (pauliY * pauliZ))) := by rw [← pauliX_eq]
                                                         -- 第 3 式
     _ = (-Complex.I) • siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k
-          (pauliY * pauliZ)) := (siteProd M).map_update_smul _ k (-Complex.I) (pauliY * pauliZ)
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → k`, `c → -i`, `A_k → σ^yσ^z`, `i ≠ k` の `A_i → I`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+          (pauliY * pauliZ)) := siteProd_update_smul _ k (-Complex.I) (pauliY * pauliZ)
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → k`, `c → -i`, `A_k → σ^yσ^z`, `i ≠ k` の `A_i → I`）。具体版 `siteProd_update_smul`
     _ = (-Complex.I) • (sigmaY k * sigmaZ k) := by
       rw [sigmaY, sigmaZ, siteOp_mul_same, siteOp_apply]
                                                         -- 第 4 式（`a → y`, `b → z`）を右辺から左辺へ
@@ -808,8 +809,8 @@ theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
     _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m ((-Complex.I) • pauliX)) := by
       rw [pauliZ_mul_pauliY]                            -- Step 0 の `σ^zσ^y = (-i)σ^x`
     _ = (-Complex.I) • siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliX) :=
-      (siteProd M).map_update_smul _ m (-Complex.I) pauliX
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^x`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+      siteProd_update_smul _ m (-Complex.I) pauliX
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^x`）。具体版 `siteProd_update_smul`
     _ = (-Complex.I) • sigmaX m := rfl                  -- `def_site_pauli_matrices`（`k → m`, `a → x`）
 
 /-- `σ^x_m = √-1 Z_m Y_m`（上の言い換え）。 -/

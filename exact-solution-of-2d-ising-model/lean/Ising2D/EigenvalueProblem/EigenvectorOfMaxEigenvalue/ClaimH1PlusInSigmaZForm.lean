@@ -29,6 +29,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
 
@@ -218,7 +219,7 @@ theorem sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker (hM : 2 ≤ M) :
 人手の準備 3 の 11 行の鎖 `i(Y_mZ_{m+1}) = ⋯ = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`）。添字の読み替えは準備 1 と同じである。 -/
 
 /-- 人手 `kronecker_multilinear` の `r = 1` の式（`j → m`）を、第 `m` 因子を `if` で書いた族について述べたもの。
-`kronecker_multilinear` の Lean の具体版は無いので、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回使う。
+`kronecker_multilinear` の `r = 1` の場合の具体版 `siteProd_update_smul`（`ClaimKroneckerMultilinear.lean`）を 1 回使う。
 族を `Function.update` で書き直す段は、因子の並びの書き方（`ite` と `Function.update`）を揃えるだけである。 -/
 theorem siteProd_ite_smul (m : Fin M) (c : ℂ) (A : Matrix (Fin 2) (Fin 2) ℂ)
     (G : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
@@ -231,7 +232,7 @@ theorem siteProd_ite_smul (m : Fin M) (c : ℂ) (A : Matrix (Fin 2) (Fin 2) ℂ)
     funext i
     rw [Function.update_apply]
   rw [hc, h1]
-  exact (siteProd M).map_update_smul G m c A
+  exact siteProd_update_smul G m c A
 
 /-- **人手の準備 3**: `i(Y_mZ_{m+1}) = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`）。人手の 11 行と `calc` の 11 段が 1 対 1 に対応する。
 
@@ -318,7 +319,7 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
 
 /-- 人手 `kronecker_multilinear` の `r = 1` の式（`j → m`）を、族の外側の `if` が別のサイト `m'` を取り、
 第 `m` 因子が内側の `if` にある族について述べたもの（`m ≠ m'`）。`siteProd_ite_smul` と同じく、
-`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回使う。族を `Function.update` で書き直す段は、
+具体版 `siteProd_update_smul`（`ClaimKroneckerMultilinear.lean`）を 1 回使う。族を `Function.update` で書き直す段は、
 因子の並びの書き方を揃えるだけである。仮定 `m ≠ m'` は、第 `m` 因子を取り出すときに外側の `if`（`i = m'`）が成り立たないことを言うのに使う。 -/
 theorem siteProd_ite_ite_smul (m' m : Fin M) (hne : m ≠ m') (c : ℂ) (B A : Matrix (Fin 2) (Fin 2) ℂ)
     (G : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
@@ -340,7 +341,7 @@ theorem siteProd_ite_ite_smul (m' m : Fin M) (hne : m ≠ m') (c : ℂ) (B A : M
     · simp only [h, ↓reduceIte]
   rw [hc]
   conv_rhs => rw [h1]
-  exact (siteProd M).map_update_smul _ m c A
+  exact siteProd_update_smul _ m c A
 
 /-- **人手の準備 4**: `-(i(Y_{M_col}Z_1)) = εG`（`M_col ≥ 2`）。人手の 17 行と `calc` の 17 段が 1 対 1 に対応する。 -/
 theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :

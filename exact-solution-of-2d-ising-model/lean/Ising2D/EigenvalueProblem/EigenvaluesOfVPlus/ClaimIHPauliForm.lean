@@ -70,6 +70,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimSumsOf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimHermitianAndTransposeInvariantMatrixIsRealSymmetric
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
 
@@ -222,8 +223,8 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
       rw [pauliY_mul_pauliX_eq]                         -- Step 0 の `σ^yσ^x = (-i)σ^z`
     _ = (-Complex.I) • siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
           (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) :=
-      (siteProd (r + 2)).map_update_smul _ (Fin.castSucc m) (-Complex.I) pauliZ
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^z`, `A_{m+1} → σ^z`, `A_k → I`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+      siteProd_update_smul _ (Fin.castSucc m) (-Complex.I) pauliZ
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^z`, `A_{m+1} → σ^z`, `A_k → I`）。具体版 `siteProd_update_smul`
     _ = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
       rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker]    -- 準備の `σ^z_mσ^z_{m+1}` の表示
 
@@ -291,8 +292,8 @@ theorem Y_last_mul_Z_zero (r : ℕ) :
         · rw [Function.update_of_ne h0, if_neg h0, if_neg h0]
       rw [hupd ((-Complex.I) • pauliY)]
       conv_rhs => rw [hupd pauliY]
-      exact (siteProd (r + 2)).map_update_smul _ 0 (-Complex.I) pauliY
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`M → M_col`, `j → 1`, `c → -i`, `A_1 → σ^y`, `A_k → σ^x`（`2 ≤ k ≤ M_col-1`）, `A_{M_col} → σ^y`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+      exact siteProd_update_smul _ 0 (-Complex.I) pauliY
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`M → M_col`, `j → 1`, `c → -i`, `A_1 → σ^y`, `A_k → σ^x`（`2 ≤ k ≤ M_col-1`）, `A_{M_col} → σ^y`）。具体版 `siteProd_update_smul`
     _ = (-Complex.I) • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
       congr 2                                           -- 準備の `G` の表示（`boundaryYXYFamily` の `∨` と `ite` の書き方の違いだけ）
       funext i
@@ -516,13 +517,13 @@ theorem boundaryYXY_transpose (r : ℕ) :
     _ = (-1 : ℂ) • siteProd (r + 2) (F pauliY ((-1 : ℂ) • pauliY)) := by
       rw [hupd0 ((-1 : ℂ) • pauliY) pauliY ((-1 : ℂ) • pauliY)]
       conv_rhs => rw [hupd0 pauliY pauliY ((-1 : ℂ) • pauliY)]
-      exact (siteProd (r + 2)).map_update_smul _ 0 (-1 : ℂ) pauliY
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → -1_ℂ`, `A_1 → σ^y`, `A_k → σ^x`, `A_{M_col} → (-1_ℂ)σ^y`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+      exact siteProd_update_smul _ 0 (-1 : ℂ) pauliY
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → -1_ℂ`, `A_1 → σ^y`, `A_k → σ^x`, `A_{M_col} → (-1_ℂ)σ^y`）。具体版 `siteProd_update_smul`
     _ = (-1 : ℂ) • ((-1 : ℂ) • siteProd (r + 2) (F pauliY pauliY)) := by
       rw [hupdl pauliY ((-1 : ℂ) • pauliY) pauliY]
       conv_rhs => rw [hupdl pauliY pauliY pauliY]
       congr 1
-      exact (siteProd (r + 2)).map_update_smul _ (Fin.last (r + 1)) (-1 : ℂ) pauliY
+      exact siteProd_update_smul _ (Fin.last (r + 1)) (-1 : ℂ) pauliY
                                                         -- `kronecker_multilinear` の `r = 1` の場合（`j → M_col`, `c → -1_ℂ`, `A_1 → σ^y`, `A_k → σ^x`, `A_{M_col} → σ^y`）。同上
     _ = ((-1 : ℂ) * (-1)) • siteProd (r + 2) (F pauliY pauliY) :=
       smul_smul _ _ _                                   -- `scalar_multiple_is_associative`（`a, b → -1_ℂ`。Lean の具体版は無く、mathlib の `smul_smul`）
@@ -565,13 +566,13 @@ theorem boundaryYXY_eq_neg_one_smul_real (r : ℕ) :
     _ = Complex.I • siteProd (r + 2) (F pauliYReal (Complex.I • pauliYReal)) := by
       rw [hupd0 (Complex.I • pauliYReal) pauliYReal (Complex.I • pauliYReal)]
       conv_rhs => rw [hupd0 pauliYReal pauliYReal (Complex.I • pauliYReal)]
-      exact (siteProd (r + 2)).map_update_smul _ 0 Complex.I pauliYReal
-                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → i`, `A_1 → R^y`, `A_k → σ^x`, `A_{M_col} → iR^y`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回（`boundaryYXY_transpose` と同じ）
+      exact siteProd_update_smul _ 0 Complex.I pauliYReal
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → i`, `A_1 → R^y`, `A_k → σ^x`, `A_{M_col} → iR^y`）。具体版 `siteProd_update_smul`（`boundaryYXY_transpose` と同じ）
     _ = Complex.I • (Complex.I • siteProd (r + 2) (F pauliYReal pauliYReal)) := by
       rw [hupdl pauliYReal (Complex.I • pauliYReal) pauliYReal]
       conv_rhs => rw [hupdl pauliYReal pauliYReal pauliYReal]
       congr 1
-      exact (siteProd (r + 2)).map_update_smul _ (Fin.last (r + 1)) Complex.I pauliYReal
+      exact siteProd_update_smul _ (Fin.last (r + 1)) Complex.I pauliYReal
                                                         -- `kronecker_multilinear` の `r = 1` の場合（`j → M_col`, `c → i`, `A_1 → R^y`, `A_k → σ^x`, `A_{M_col} → R^y`）。同上
     _ = (Complex.I * Complex.I) • siteProd (r + 2) (F pauliYReal pauliYReal) :=
       smul_smul _ _ _                                   -- `scalar_multiple_is_associative`（`a, b → i`。Lean の具体版は無く、mathlib の `smul_smul`）

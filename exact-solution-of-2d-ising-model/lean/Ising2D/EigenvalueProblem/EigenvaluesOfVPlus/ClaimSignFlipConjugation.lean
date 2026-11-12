@@ -40,6 +40,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
 
@@ -326,8 +327,8 @@ theorem siteOp_mul_of_anticomm (k : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) (h
         rw [neg_eq_neg_one_smul_matrix (B * A)]
                                                         -- `negation_is_scalar_multiple_by_minus_one`
     _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (B * A)) :=
-        (siteProd M).map_update_smul _ k (-1 : ℂ) (B * A)
-                                                        -- `kronecker_multilinear`（第 `k` 因子についての線型性。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回）
+        siteProd_update_smul _ k (-1 : ℂ) (B * A)
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → k`, `c → -1_ℂ`, `A_k → BA`, `i ≠ k` の `A_i → I`）。具体版 `siteProd_update_smul`
     _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (B * A)) := by
         rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
