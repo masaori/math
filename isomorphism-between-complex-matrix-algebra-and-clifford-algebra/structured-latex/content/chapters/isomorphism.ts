@@ -5219,4 +5219,834 @@ a_T\cdot_A a_i
 \end{aligned}`),
     ],
   },
+  {
+    id: "isomorphism_global_identities_in_clifford_algebra_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "クリフォード代数の中の大域的な等式" },
+    labels: [],
+  },
+  {
+    id: "isomorphism_claim_annihilation_generator_commutes_with_other_number_reversed_pair",
+    kind: "claim",
+    title: { text: "消滅作用素にあたる元は、番号の違う生成と消滅の積と交換する" },
+    labels: ["claim_annihilation_generator_commutes_with_other_number_reversed_pair"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`i\neq j`), " であるすべての ", math(String.raw`i,j\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`a_i\cdot_A\bigl(a^{\dagger}_j\cdot_A a_j\bigr)=\bigl(a^{\dagger}_j\cdot_A a_j\bigr)\cdot_A a_i`),
+    ],
+    proof: [
+      paragraph([math(String.raw`-1_{\mathbb{C}}`), " は ", ref("claim_anticommuting_elements_swap_with_sign"), " のものである。準備として、", math(String.raw`i\neq j`), " なので ", math(String.raw`\delta_{i,j}=0_{\mathbb{C}}`), "（", ref("def_kronecker_delta"), "）であり、次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+a_i\cdot_A a^{\dagger}_j+_A a^{\dagger}_j\cdot_A a_i
+&=\delta_{i,j}\ast_A 1_A
+&&\left(\because\ \blkref{claim_annihilation_and_creation_generators_anticommute}\right)\\
+&=0_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ i\neq j\text{。}\blkref{def_kronecker_delta}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a_i\cdot_A\bigl(a^{\dagger}_j\cdot_A a_j\bigr)
+&=\bigl(a_i\cdot_A a^{\dagger}_j\bigr)\cdot_A a_j
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl((-1_{\mathbb{C}})\ast_A(a^{\dagger}_j\cdot_A a_i)\bigr)\cdot_A a_j
+&&\left(\because\ p:=a_i\text{、}q:=a^{\dagger}_j\text{。準備。}\blkref{claim_anticommuting_elements_swap_with_sign}\right)\\
+&=(-1_{\mathbb{C}})\ast_A\bigl((a^{\dagger}_j\cdot_A a_i)\cdot_A a_j\bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
+&=(-1_{\mathbb{C}})\ast_A\bigl(a^{\dagger}_j\cdot_A(a_i\cdot_A a_j)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(-1_{\mathbb{C}})\ast_A\Bigl(a^{\dagger}_j\cdot_A\bigl((-1_{\mathbb{C}})\ast_A(a_j\cdot_A a_i)\bigr)\Bigr)
+&&\left(\because\ p:=a_i\text{、}q:=a_j\text{。}\blkref{claim_annihilation_generators_anticommute}\text{、}\blkref{claim_anticommuting_elements_swap_with_sign}\right)\\
+&=(-1_{\mathbb{C}})\ast_A\Bigl((-1_{\mathbb{C}})\ast_A\bigl(a^{\dagger}_j\cdot_A(a_j\cdot_A a_i)\bigr)\Bigr)
+&&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\ast_A\bigl(a^{\dagger}_j\cdot_A(a_j\cdot_A a_i)\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=1_{\mathbb{C}}\ast_A\bigl(a^{\dagger}_j\cdot_A(a_j\cdot_A a_i)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の計算}\ (-1_{\mathbb{C}})\cdot_{\mathbb{C}}(-1_{\mathbb{C}})=1_{\mathbb{C}}\right)\\
+&=a^{\dagger}_j\cdot_A(a_j\cdot_A a_i)
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(a^{\dagger}_j\cdot_A a_j\bigr)\cdot_A a_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_factors_with_different_numbers_commute",
+    kind: "claim",
+    title: { text: "番号の違う消滅と生成の積どうしは交換する" },
+    labels: ["claim_vacuum_factors_with_different_numbers_commute"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。", math(String.raw`i\neq j`), " であるすべての ", math(String.raw`i,j\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`x_i\cdot_A x_j=x_j\cdot_A x_i`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+x_i\cdot_A x_j
+&=\bigl(a_i\cdot_A a^{\dagger}_i\bigr)\cdot_A x_j
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A x_j\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_i\cdot_A\bigl(x_j\cdot_A a^{\dagger}_i\bigr)
+&&\left(\because\ i\neq j\text{。}\blkref{claim_creation_generator_commutes_with_other_number_pair}\right)\\
+&=\bigl(a_i\cdot_A x_j\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(x_j\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ i\neq j\text{。}\blkref{claim_annihilation_generator_commutes_with_other_number_pair}\right)\\
+&=x_j\cdot_A\bigl(a_i\cdot_A a^{\dagger}_i\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=x_j\cdot_A x_i
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator",
+    kind: "claim",
+    title: { text: "消滅と生成の積に同じ番号の消滅作用素にあたる元を右から掛けると、その消滅作用素にあたる元になる" },
+    labels: ["claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`x_i\cdot_A a_i=a_i`),
+    ],
+    proof: [
+      paragraph(["準備。積 ", math(String.raw`0_A\cdot_A w`), " と ", math(String.raw`w\cdot_A 0_A`), "（", math(String.raw`w\in A`), "）が ", math(String.raw`0_A`), " であることは、右から ", math(String.raw`w`), " を掛ける写像と左から ", math(String.raw`w`), " を掛ける写像が線型写像であり（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "、", ref("claim_left_multiplication_in_algebra_is_linear_map"), "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。"]),
+      displayMath(String.raw`\begin{aligned}
+x_i\cdot_A a_i
+&=\bigl(a_i\cdot_A a^{\dagger}_i\bigr)\cdot_A a_i
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)+_A 0_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=0_A+_A\Bigl(a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(0_A\cdot_A a^{\dagger}_i\bigr)+_A\Bigl(a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ \text{準備（右から}\ a^{\dagger}_i\ \text{を掛ける写像）}\right)\\
+&=\bigl((a_i\cdot_A a_i)\cdot_A a^{\dagger}_i\bigr)+_A\Bigl(a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_square_of_annihilation_generator_is_zero}\right)\\
+&=\Bigl(a_i\cdot_A\bigl(a_i\cdot_A a^{\dagger}_i\bigr)\Bigr)+_A\Bigl(a_i\cdot_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_i\cdot_A\Bigl(\bigl(a_i\cdot_A a^{\dagger}_i\bigr)+_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（左の因子が共通）。}\blkref{def_unital_ring}\right)\\
+&=a_i\cdot_A\bigl(\delta_{i,i}\ast_A 1_A\bigr)
+&&\left(\because\ j:=i\text{。}\blkref{claim_annihilation_and_creation_generators_anticommute}\right)\\
+&=a_i\cdot_A\bigl(1_{\mathbb{C}}\ast_A 1_A\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=a_i\cdot_A 1_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=a_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_creation_generator_times_vacuum_factor_is_creation_generator",
+    kind: "claim",
+    title: { text: "消滅と生成の積に同じ番号の生成作用素にあたる元を左から掛けると、その生成作用素にあたる元になる" },
+    labels: ["claim_creation_generator_times_vacuum_factor_is_creation_generator"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`a^{\dagger}_i\cdot_A x_i=a^{\dagger}_i`),
+    ],
+    proof: [
+      paragraph(["準備。積 ", math(String.raw`0_A\cdot_A w`), " と ", math(String.raw`w\cdot_A 0_A`), "（", math(String.raw`w\in A`), "）が ", math(String.raw`0_A`), " であることは、右から ", math(String.raw`w`), " を掛ける写像と左から ", math(String.raw`w`), " を掛ける写像が線型写像であり（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "、", ref("claim_left_multiplication_in_algebra_is_linear_map"), "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。"]),
+      displayMath(String.raw`\begin{aligned}
+a^{\dagger}_i\cdot_A x_i
+&=a^{\dagger}_i\cdot_A\bigl(a_i\cdot_A a^{\dagger}_i\bigr)
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i\Bigr)+_A 0_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=0_A+_A\Bigl(\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(a_i\cdot_A 0_A\bigr)+_A\Bigl(\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i\Bigr)
+&&\left(\because\ \text{準備（左から}\ a_i\ \text{を掛ける写像）}\right)\\
+&=\bigl(a_i\cdot_A(a^{\dagger}_i\cdot_A a^{\dagger}_i)\bigr)+_A\Bigl(\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i\Bigr)
+&&\left(\because\ \blkref{claim_square_of_creation_generator_is_zero}\right)\\
+&=\Bigl(\bigl(a_i\cdot_A a^{\dagger}_i\bigr)\cdot_A a^{\dagger}_i\Bigr)+_A\Bigl(\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\bigl(a_i\cdot_A a^{\dagger}_i\bigr)+_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の分配法則（右の因子が共通）。}\blkref{def_unital_ring}\right)\\
+&=\bigl(\delta_{i,i}\ast_A 1_A\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ j:=i\text{。}\blkref{claim_annihilation_and_creation_generators_anticommute}\right)\\
+&=\bigl(1_{\mathbb{C}}\ast_A 1_A\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=1_A\cdot_A a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_factor_is_idempotent",
+    kind: "claim",
+    title: { text: "消滅と生成の積の自分自身との積は、もとの積である" },
+    labels: ["claim_vacuum_factor_is_idempotent"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`x_i\cdot_A x_i=x_i`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+x_i\cdot_A x_i
+&=x_i\cdot_A\bigl(a_i\cdot_A a^{\dagger}_i\bigr)
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=\bigl(x_i\cdot_A a_i\bigr)\cdot_A a^{\dagger}_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_i\cdot_A a^{\dagger}_i
+&&\left(\because\ \blkref{claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator}\right)\\
+&=x_i
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_initial_reverse_ordered_product_of_selected_annihilation_generators",
+    kind: "definition",
+    title: { text: "部分集合の元のうち番号が m 以下のものの、消滅作用素にあたる元の番号の逆順の積" },
+    labels: ["def_initial_reverse_ordered_product_of_selected_annihilation_generators"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）とし、", math(String.raw`z^{T}_t`), "（", math(String.raw`t\in\{1,\dots,M\}`), "）を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のものとする。", math(String.raw`m\in\{0,1,\dots,M\}`), " と ", math(String.raw`k\in\{1,\dots,m\}`), " について ", math(String.raw`m+1-k\in\{1,\dots,m\}`), " なので、", math(String.raw`k`), " に ", math(String.raw`z^{T}_{m+1-k}`), " を与える族が定まる。", math(String.raw`A`), " の元 ", math(String.raw`a_{T,\le m}`), " を、その族の ", math(String.raw`A`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）で次のように定める。"]),
+      displayMath(String.raw`a_{T,\le m}:=\prod_{A,\,k=1}^{m}z^{T}_{m+1-k}`),
+      paragraph([math(String.raw`a_{T,\le m}`), " は ", math(String.raw`z^{T}_m,\dots,z^{T}_1`), " をこの順に左から右へ掛けた積である。", math(String.raw`a_{T,\le 0}=1_A`), " である（", ref("def_ordered_product_in_algebra"), "）。", math(String.raw`m=M`), " のとき、族 ", math(String.raw`k\mapsto z^{T}_{M+1-k}`), " は ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " の族 ", math(String.raw`w^{T}_k`), " と同じ族なので、", math(String.raw`a_{T,\le M}=a_T`), " である。"]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_initial_ordered_product_of_selected_creation_generators",
+    kind: "definition",
+    title: { text: "部分集合の元のうち番号が m 以下のものの、生成作用素にあたる元の番号順の積" },
+    labels: ["def_initial_ordered_product_of_selected_creation_generators"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`U\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）とし、", math(String.raw`y^{U}_t`), "（", math(String.raw`t\in\{1,\dots,M\}`), "）を ", ref("def_ordered_product_of_selected_creation_generators"), " のものとする。", math(String.raw`m\in\{0,1,\dots,M\}`), " について、", math(String.raw`A`), " の元 ", math(String.raw`a^{\dagger}_{U,\le m}`), " を、族を ", math(String.raw`\{1,\dots,m\}`), " に制限した ", math(String.raw`A`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）で次のように定める。"]),
+      displayMath(String.raw`a^{\dagger}_{U,\le m}:=\prod_{A,\,t=1}^{m}y^{U}_t`),
+      paragraph(["部分積の式は番号 ", math(String.raw`m`), " までの因子だけで定まるので、", math(String.raw`a^{\dagger}_{U,\le m}`), " は ", ref("def_ordered_product_of_selected_creation_generators"), " の積の部分積 ", math(String.raw`\Pi_m`), " と同じ元である。したがって ", math(String.raw`a^{\dagger}_{U,\le 0}=1_A`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`a^{\dagger}_{U,\le m}=a^{\dagger}_{U,\le m-1}\cdot_A y^{U}_m`), "、", math(String.raw`a^{\dagger}_{U,\le M}=a^{\dagger}_U`), " である（", ref("def_ordered_product_in_algebra"), "）。"]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_initial_part_of_vacuum_element",
+    kind: "definition",
+    title: { text: "真空への射影にあたる元の、番号が m 以下の因子の積" },
+    labels: ["def_initial_part_of_vacuum_element"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。", math(String.raw`m\in\{0,1,\dots,M\}`), " について、", math(String.raw`A`), " の元 ", math(String.raw`P_{\le m}`), " を、族を ", math(String.raw`\{1,\dots,m\}`), " に制限した ", math(String.raw`A`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）で次のように定める。"]),
+      displayMath(String.raw`P_{\le m}:=\prod_{A,\,i=1}^{m}x_i`),
+      paragraph([math(String.raw`P_{\le m}`), " は ", ref("def_vacuum_element_of_split_clifford_algebra"), " の積の部分積 ", math(String.raw`\Pi_m`), " と同じ元である。したがって ", math(String.raw`P_{\le 0}=1_A`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`P_{\le m}=P_{\le m-1}\cdot_A x_m`), "、", math(String.raw`P_{\le M}=P`), " である（", ref("def_ordered_product_in_algebra"), "）。"]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_vacuum_sandwich_of_initial_parts",
+    kind: "definition",
+    title: { text: "番号が m 以下の部分の消滅と生成の積を、真空への射影にあたる元の番号が m 以下の因子の積で挟んだ元" },
+    labels: ["def_vacuum_sandwich_of_initial_parts"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), "、", math(String.raw`m\in\{0,1,\dots,M\}`), " とし、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), " のものとする。", math(String.raw`A`), " の元 ", math(String.raw`Q^{T,U}_m`), " を次で定める。"]),
+      displayMath(String.raw`Q^{T,U}_m:=\Bigl(P_{\le m}\cdot_A\bigl(a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}\bigr)\Bigr)\cdot_A P_{\le m}`),
+      paragraph([math(String.raw`m=M`), " のとき、", math(String.raw`a_{T,\le M}=a_T`), "、", math(String.raw`a^{\dagger}_{U,\le M}=a^{\dagger}_U`), "、", math(String.raw`P_{\le M}=P`), "（", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "）なので、", math(String.raw`Q^{T,U}_M=\bigl(P\cdot_A(a_T\cdot_A a^{\dagger}_U)\bigr)\cdot_A P`), " である。"]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_initial_reverse_ordered_annihilation_product_splits_off_last_number",
+    kind: "claim",
+    title: { text: "番号が m 以下の消滅の逆順の積は、番号 m の因子と、番号が m-1 以下の消滅の逆順の積との積である" },
+    labels: ["claim_initial_reverse_ordered_annihilation_product_splits_off_last_number"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T\in\mathcal{P}_M`), " とし、", math(String.raw`z^{T}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), " のものとする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`a_{T,\le m}=z^{T}_m\cdot_A a_{T,\le m-1}`),
+    ],
+    proof: [
+      paragraph([math(String.raw`s\in\{1,\dots,m\}`), " について ", math(String.raw`w_s:=z^{T}_{m+1-s}`), " と置く。", math(String.raw`w_1=z^{T}_m`), " であり、", math(String.raw`r\in\{1,\dots,m-1\}`), " について ", math(String.raw`w_{1+r}=z^{T}_{m-r}=z^{T}_{(m-1)+1-r}`), " なので、族 ", math(String.raw`r\mapsto w_{1+r}`), " は ", math(String.raw`a_{T,\le m-1}`), " を定める族と同じ族である。"]),
+      displayMath(String.raw`\begin{aligned}
+a_{T,\le m}
+&=\prod_{A,\,s=1}^{m}w_s
+&&\left(\because\ \blkref{def_initial_reverse_ordered_product_of_selected_annihilation_generators}\right)\\
+&=\left(\prod_{A,\,s=1}^{1}w_s\right)\cdot_A\left(\prod_{A,\,r=1}^{m-1}w_{1+r}\right)
+&&\left(\because\ k:=1\text{、}l:=m-1\text{。}\blkref{claim_ordered_product_in_algebra_splits_into_first_and_last_factors}\right)\\
+&=\bigl(1_A\cdot_A w_1\bigr)\cdot_A\left(\prod_{A,\,r=1}^{m-1}w_{1+r}\right)
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=w_1\cdot_A\left(\prod_{A,\,r=1}^{m-1}w_{1+r}\right)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=z^{T}_m\cdot_A\left(\prod_{A,\,r=1}^{m-1}z^{T}_{(m-1)+1-r}\right)
+&&\left(\because\ w_1=z^{T}_m\text{、}w_{1+r}=z^{T}_{(m-1)+1-r}\right)\\
+&=z^{T}_m\cdot_A a_{T,\le m-1}
+&&\left(\because\ \blkref{def_initial_reverse_ordered_product_of_selected_annihilation_generators}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_factor_commutes_with_lower_initial_parts",
+    kind: "claim",
+    title: { text: "番号 m の消滅と生成の積は、番号が m-1 以下の部分の消滅と生成の積と交換する" },
+    labels: ["claim_vacuum_factor_commutes_with_lower_initial_parts"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`x_m\cdot_A\bigl(a_{T,\le m-1}\cdot_A a^{\dagger}_{U,\le m-1}\bigr)=\bigl(a_{T,\le m-1}\cdot_A a^{\dagger}_{U,\le m-1}\bigr)\cdot_A x_m`),
+    ],
+    proof: [
+      paragraph([math(String.raw`\alpha:=a_{T,\le m-1}`), "、", math(String.raw`\kappa:=a^{\dagger}_{U,\le m-1}`), " と置き、", math(String.raw`y^{U}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{T}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`1_A`), " はどの元とも交換する（", math(String.raw`x_m\cdot_A 1_A=x_m=1_A\cdot_A x_m`), "。", ref("def_unital_ring"), " の乗法の単位元）。", math(String.raw`t\in\{1,\dots,m-1\}`), " とする。", math(String.raw`t\in T`), " なら ", math(String.raw`z^{T}_t=a_t`), " であり、", math(String.raw`t\neq m`), " なので ", math(String.raw`a_t\cdot_A x_m=x_m\cdot_A a_t`), " である（", ref("claim_annihilation_generator_commutes_with_other_number_pair"), " の ", math(String.raw`i,j`), " に ", math(String.raw`t,m`), " を当てる）。", math(String.raw`t\notin T`), " なら ", math(String.raw`z^{T}_t=1_A`), " である。どちらでも ", math(String.raw`x_m\cdot_A z^{T}_t=z^{T}_t\cdot_A x_m`), " である。同じく ", math(String.raw`y^{U}_t`), " は ", math(String.raw`a^{\dagger}_t`), " か ", math(String.raw`1_A`), " であり、", math(String.raw`x_m\cdot_A y^{U}_t=y^{U}_t\cdot_A x_m`), " である（", ref("claim_creation_generator_commutes_with_other_number_pair"), " の ", math(String.raw`i,j`), " に ", math(String.raw`t,m`), " を当てる）。", math(String.raw`\alpha`), " の因子は ", math(String.raw`z^{T}_{m-k}`), "（", math(String.raw`k\in\{1,\dots,m-1\}`), "、", math(String.raw`m-k\in\{1,\dots,m-1\}`), "）、", math(String.raw`\kappa`), " の因子は ", math(String.raw`y^{U}_t`), "（", math(String.raw`t\in\{1,\dots,m-1\}`), "）なので、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=x_m`), " と二つの族に当てて、", math(String.raw`x_m\cdot_A\alpha=\alpha\cdot_A x_m`), "、", math(String.raw`x_m\cdot_A\kappa=\kappa\cdot_A x_m`), " が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+x_m\cdot_A(\alpha\cdot_A\kappa)
+&=(x_m\cdot_A\alpha)\cdot_A\kappa
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(\alpha\cdot_A x_m)\cdot_A\kappa
+&&\left(\because\ x_m\cdot_A\alpha=\alpha\cdot_A x_m\right)\\
+&=\alpha\cdot_A(x_m\cdot_A\kappa)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\alpha\cdot_A(\kappa\cdot_A x_m)
+&&\left(\because\ x_m\cdot_A\kappa=\kappa\cdot_A x_m\right)\\
+&=(\alpha\cdot_A\kappa)\cdot_A x_m
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_sandwich_vanishes_when_last_number_is_in_exactly_one_subset",
+    kind: "claim",
+    title: { text: "番号 m がちょうど一方の部分集合に入るとき、番号が m 以下の部分を真空の因子で挟んだ元は零である" },
+    labels: ["claim_vacuum_sandwich_vanishes_when_last_number_is_in_exactly_one_subset"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), "、", math(String.raw`m\in\{1,\dots,M\}`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。「", math(String.raw`m\in T`), " かつ ", math(String.raw`m\notin U`), "」か「", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\in U`), "」が成り立つとき、次が成り立つ。"]),
+      displayMath(String.raw`Q^{T,U}_m=0_A`),
+    ],
+    proof: [
+      paragraph([math(String.raw`x:=x_m`), "、", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`\alpha:=a_{T,\le m-1}`), "、", math(String.raw`\kappa:=a^{\dagger}_{U,\le m-1}`), "、", math(String.raw`G:=\alpha\cdot_A\kappa`), " と置き、", math(String.raw`y^{U}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{T}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`z:=z^{T}_m`), "、", math(String.raw`y:=y^{U}_m`), " と置く。準備として次の四つが成り立つ。（イ）", math(String.raw`P_{\le m}=P'\cdot_A x`), " であり（", ref("def_initial_part_of_vacuum_element"), "）、", math(String.raw`j\in\{1,\dots,m-1\}`), " なら ", math(String.raw`j\neq m`), " なので ", math(String.raw`x\cdot_A x_j=x_j\cdot_A x`), " であるから（", ref("claim_vacuum_factors_with_different_numbers_commute"), "）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=x`), " と族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて ", math(String.raw`x\cdot_A P'=P'\cdot_A x`), " である。（ロ）", math(String.raw`x\cdot_A G=G\cdot_A x`), " である（", ref("claim_vacuum_factor_commutes_with_lower_initial_parts"), "）。（ハ）次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A a^{\dagger}_{U,\le m}
+&&\left(\because\ \blkref{claim_initial_reverse_ordered_annihilation_product_splits_off_last_number}\right)\\
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A\bigl(\kappa\cdot_A y\bigr)
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\right)\\
+&=z\cdot_A\bigl(\alpha\cdot_A(\kappa\cdot_A y)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A\bigl((\alpha\cdot_A\kappa)\cdot_A y\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A(G\cdot_A y)
+&&\left(\because\ G\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph(["（ニ）積 ", math(String.raw`0_A\cdot_A w`), " と ", math(String.raw`w\cdot_A 0_A`), "（", math(String.raw`w\in A`), "）が ", math(String.raw`0_A`), " であることは、右から ", math(String.raw`w`), " を掛ける写像と左から ", math(String.raw`w`), " を掛ける写像が線型写像であり（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "、", ref("claim_left_multiplication_in_algebra_is_linear_map"), "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。"]),
+      paragraph([math(String.raw`m\in T`), " かつ ", math(String.raw`m\notin U`), " のとき、", math(String.raw`z=a_m`), "、", math(String.raw`y=1_A`), " である（", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_ordered_product_of_selected_creation_generators"), "）。（ハ）と ", ref("def_unital_ring"), " の乗法の単位元により ", math(String.raw`a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=a_m\cdot_A(G\cdot_A 1_A)=a_m\cdot_A G`), " である。また次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+a_m\cdot_A x
+&=a_m\cdot_A(a_m\cdot_A a^{\dagger}_m)
+&&\left(\because\ x=x_m\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=(a_m\cdot_A a_m)\cdot_A a^{\dagger}_m
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=0_A\cdot_A a^{\dagger}_m
+&&\left(\because\ \blkref{claim_square_of_annihilation_generator_is_zero}\right)\\
+&=0_A
+&&\left(\because\ \text{（ニ）}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=\bigl(P_{\le m}\cdot_A(a_m\cdot_A G)\bigr)\cdot_A P_{\le m}
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、}a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=a_m\cdot_A G\right)\\
+&=\bigl((P'\cdot_A x)\cdot_A(a_m\cdot_A G)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（イ）の}\ P_{\le m}=P'\cdot_A x\ \text{を二か所に適用}\right)\\
+&=\Bigl(P'\cdot_A\bigl(x\cdot_A(a_m\cdot_A G)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(P'\cdot_A\bigl((x\cdot_A a_m)\cdot_A G\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(P'\cdot_A(a_m\cdot_A G)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \blkref{claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator}\right)\\
+&=P'\cdot_A\bigl((a_m\cdot_A G)\cdot_A(P'\cdot_A x)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=P'\cdot_A\bigl((a_m\cdot_A G)\cdot_A(x\cdot_A P')\bigr)
+&&\left(\because\ \text{（イ）}\right)\\
+&=P'\cdot_A\Bigl(a_m\cdot_A\bigl(G\cdot_A(x\cdot_A P')\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=P'\cdot_A\Bigl(a_m\cdot_A\bigl((G\cdot_A x)\cdot_A P'\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=P'\cdot_A\Bigl(a_m\cdot_A\bigl((x\cdot_A G)\cdot_A P'\bigr)\Bigr)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=P'\cdot_A\Bigl(a_m\cdot_A\bigl(x\cdot_A(G\cdot_A P')\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=P'\cdot_A\bigl((a_m\cdot_A x)\cdot_A(G\cdot_A P')\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=P'\cdot_A\bigl(0_A\cdot_A(G\cdot_A P')\bigr)
+&&\left(\because\ a_m\cdot_A x=0_A\right)\\
+&=P'\cdot_A 0_A
+&&\left(\because\ \text{（ニ）}\right)\\
+&=0_A
+&&\left(\because\ \text{（ニ）}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`m\notin T`), " かつ ", math(String.raw`m\in U`), " のとき、", math(String.raw`z=1_A`), "、", math(String.raw`y=a^{\dagger}_m`), " である。（ハ）と ", ref("def_unital_ring"), " の乗法の単位元により ", math(String.raw`a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=1_A\cdot_A(G\cdot_A a^{\dagger}_m)=G\cdot_A a^{\dagger}_m`), " である。また次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+x\cdot_A a^{\dagger}_m
+&=(a_m\cdot_A a^{\dagger}_m)\cdot_A a^{\dagger}_m
+&&\left(\because\ x=x_m\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=a_m\cdot_A(a^{\dagger}_m\cdot_A a^{\dagger}_m)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A 0_A
+&&\left(\because\ \blkref{claim_square_of_creation_generator_is_zero}\right)\\
+&=0_A
+&&\left(\because\ \text{（ニ）}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=\bigl(P_{\le m}\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\cdot_A P_{\le m}
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、}a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=G\cdot_A a^{\dagger}_m\right)\\
+&=\bigl((P'\cdot_A x)\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（イ）の}\ P_{\le m}=P'\cdot_A x\ \text{を二か所に適用}\right)\\
+&=\Bigl(P'\cdot_A\bigl(x\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(P'\cdot_A\bigl((x\cdot_A G)\cdot_A a^{\dagger}_m\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(P'\cdot_A\bigl((G\cdot_A x)\cdot_A a^{\dagger}_m\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=\Bigl(P'\cdot_A\bigl(G\cdot_A(x\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(P'\cdot_A(G\cdot_A 0_A)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ x\cdot_A a^{\dagger}_m=0_A\right)\\
+&=\bigl(P'\cdot_A 0_A\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（ニ）}\right)\\
+&=0_A\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（ニ）}\right)\\
+&=0_A
+&&\left(\because\ \text{（ニ）}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_sandwich_when_last_number_is_in_neither_subset",
+    kind: "claim",
+    title: { text: "番号 m がどちらの部分集合にも入らないとき、番号が m 以下の部分を真空の因子で挟んだ元は、m-1 以下の部分の元に番号 m の因子を右から掛けたものである" },
+    labels: ["claim_vacuum_sandwich_when_last_number_is_in_neither_subset"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), "、", math(String.raw`m\in\{1,\dots,M\}`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\notin U`), " のとき、次が成り立つ。"]),
+      displayMath(String.raw`Q^{T,U}_m=Q^{T,U}_{m-1}\cdot_A x_m`),
+    ],
+    proof: [
+      paragraph([math(String.raw`x:=x_m`), "、", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`\alpha:=a_{T,\le m-1}`), "、", math(String.raw`\kappa:=a^{\dagger}_{U,\le m-1}`), "、", math(String.raw`G:=\alpha\cdot_A\kappa`), " と置き、", math(String.raw`y^{U}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{T}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`z:=z^{T}_m`), "、", math(String.raw`y:=y^{U}_m`), " と置く。準備として次の三つが成り立つ。（イ）", math(String.raw`P_{\le m}=P'\cdot_A x`), " であり（", ref("def_initial_part_of_vacuum_element"), "）、", math(String.raw`j\in\{1,\dots,m-1\}`), " なら ", math(String.raw`j\neq m`), " なので ", math(String.raw`x\cdot_A x_j=x_j\cdot_A x`), " であるから（", ref("claim_vacuum_factors_with_different_numbers_commute"), "）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=x`), " と族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて ", math(String.raw`x\cdot_A P'=P'\cdot_A x`), " である。（ロ）", math(String.raw`x\cdot_A G=G\cdot_A x`), " である（", ref("claim_vacuum_factor_commutes_with_lower_initial_parts"), "）。（ハ）次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A a^{\dagger}_{U,\le m}
+&&\left(\because\ \blkref{claim_initial_reverse_ordered_annihilation_product_splits_off_last_number}\right)\\
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A\bigl(\kappa\cdot_A y\bigr)
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\right)\\
+&=z\cdot_A\bigl(\alpha\cdot_A(\kappa\cdot_A y)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A\bigl((\alpha\cdot_A\kappa)\cdot_A y\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A(G\cdot_A y)
+&&\left(\because\ G\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`m\notin T`), "、", math(String.raw`m\notin U`), " なので ", math(String.raw`z=1_A`), "、", math(String.raw`y=1_A`), " である（", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_ordered_product_of_selected_creation_generators"), "）。（ハ）と ", ref("def_unital_ring"), " の乗法の単位元（二回）により ", math(String.raw`a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=1_A\cdot_A(G\cdot_A 1_A)=G`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=\bigl(P_{\le m}\cdot_A G\bigr)\cdot_A P_{\le m}
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、}a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=G\right)\\
+&=\bigl((P'\cdot_A x)\cdot_A G\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（イ）の}\ P_{\le m}=P'\cdot_A x\ \text{を二か所に適用}\right)\\
+&=\bigl(P'\cdot_A(x\cdot_A G)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl(P'\cdot_A(G\cdot_A x)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=\bigl((P'\cdot_A G)\cdot_A x\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl((P'\cdot_A G)\cdot_A x\bigr)\cdot_A(x\cdot_A P')
+&&\left(\because\ \text{（イ）}\right)\\
+&=(P'\cdot_A G)\cdot_A\bigl(x\cdot_A(x\cdot_A P')\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(P'\cdot_A G)\cdot_A\bigl((x\cdot_A x)\cdot_A P'\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(P'\cdot_A G)\cdot_A(x\cdot_A P')
+&&\left(\because\ \blkref{claim_vacuum_factor_is_idempotent}\right)\\
+&=(P'\cdot_A G)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（イ）}\right)\\
+&=\bigl((P'\cdot_A G)\cdot_A P'\bigr)\cdot_A x
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=Q^{T,U}_{m-1}\cdot_A x_m
+&&\left(\because\ G=\alpha\cdot_A\kappa\text{、}x=x_m\text{。}\blkref{def_vacuum_sandwich_of_initial_parts}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_sandwich_when_last_number_is_in_both_subsets",
+    kind: "claim",
+    title: { text: "番号 m が両方の部分集合に入るとき、番号が m 以下の部分を真空の因子で挟んだ元は、m-1 以下の部分の元を番号 m の消滅と生成で挟んだものである" },
+    labels: ["claim_vacuum_sandwich_when_last_number_is_in_both_subsets"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), "、", math(String.raw`m\in\{1,\dots,M\}`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。", math(String.raw`m\in T`), " かつ ", math(String.raw`m\in U`), " のとき、次が成り立つ。"]),
+      displayMath(String.raw`Q^{T,U}_m=a_m\cdot_A\bigl(Q^{T,U}_{m-1}\cdot_A a^{\dagger}_m\bigr)`),
+    ],
+    proof: [
+      paragraph([math(String.raw`x:=x_m`), "、", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`\alpha:=a_{T,\le m-1}`), "、", math(String.raw`\kappa:=a^{\dagger}_{U,\le m-1}`), "、", math(String.raw`G:=\alpha\cdot_A\kappa`), " と置き、", math(String.raw`y^{U}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{T}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`z:=z^{T}_m`), "、", math(String.raw`y:=y^{U}_m`), " と置く。準備として次の三つが成り立つ。（イ）", math(String.raw`P_{\le m}=P'\cdot_A x`), " であり（", ref("def_initial_part_of_vacuum_element"), "）、", math(String.raw`j\in\{1,\dots,m-1\}`), " なら ", math(String.raw`j\neq m`), " なので ", math(String.raw`x\cdot_A x_j=x_j\cdot_A x`), " であるから（", ref("claim_vacuum_factors_with_different_numbers_commute"), "）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=x`), " と族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて ", math(String.raw`x\cdot_A P'=P'\cdot_A x`), " である。（ロ）", math(String.raw`j\in\{1,\dots,m-1\}`), " なら ", math(String.raw`j\neq m`), " なので ", math(String.raw`a_m\cdot_A x_j=x_j\cdot_A a_m`), "、", math(String.raw`a^{\dagger}_m\cdot_A x_j=x_j\cdot_A a^{\dagger}_m`), " であるから（", ref("claim_annihilation_generator_commutes_with_other_number_pair"), "、", ref("claim_creation_generator_commutes_with_other_number_pair"), " の ", math(String.raw`i,j`), " に ", math(String.raw`m,j`), " を当てる）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて ", math(String.raw`a_m\cdot_A P'=P'\cdot_A a_m`), "、", math(String.raw`a^{\dagger}_m\cdot_A P'=P'\cdot_A a^{\dagger}_m`), " である。（ハ）次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A a^{\dagger}_{U,\le m}
+&&\left(\because\ \blkref{claim_initial_reverse_ordered_annihilation_product_splits_off_last_number}\right)\\
+&=\bigl(z\cdot_A\alpha\bigr)\cdot_A\bigl(\kappa\cdot_A y\bigr)
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\right)\\
+&=z\cdot_A\bigl(\alpha\cdot_A(\kappa\cdot_A y)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A\bigl((\alpha\cdot_A\kappa)\cdot_A y\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=z\cdot_A(G\cdot_A y)
+&&\left(\because\ G\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`m\in T`), "、", math(String.raw`m\in U`), " なので ", math(String.raw`z=a_m`), "、", math(String.raw`y=a^{\dagger}_m`), " である（", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_ordered_product_of_selected_creation_generators"), "）。（ハ）により ", math(String.raw`a_{T,\le m}\cdot_A a^{\dagger}_{U,\le m}=a_m\cdot_A(G\cdot_A a^{\dagger}_m)`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=\Bigl(P_{\le m}\cdot_A\bigl(a_m\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A P_{\le m}
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、（ハ）}\right)\\
+&=\Bigl((P'\cdot_A x)\cdot_A\bigl(a_m\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（イ）の}\ P_{\le m}=P'\cdot_A x\ \text{を二か所に適用}\right)\\
+&=\biggl(P'\cdot_A\Bigl(x\cdot_A\bigl(a_m\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\biggr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(P'\cdot_A\bigl((x\cdot_A a_m)\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(P'\cdot_A\bigl(a_m\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \blkref{claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator}\right)\\
+&=\bigl((P'\cdot_A a_m)\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl((a_m\cdot_A P')\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=\Bigl(a_m\cdot_A\bigl(P'\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\Bigr)\cdot_A(P'\cdot_A x)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl(\bigl(P'\cdot_A(G\cdot_A a^{\dagger}_m)\bigr)\cdot_A(P'\cdot_A x)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl(\bigl((P'\cdot_A G)\cdot_A a^{\dagger}_m\bigr)\cdot_A(P'\cdot_A x)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl((P'\cdot_A G)\cdot_A\bigl(a^{\dagger}_m\cdot_A(P'\cdot_A x)\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl((P'\cdot_A G)\cdot_A\bigl((a^{\dagger}_m\cdot_A P')\cdot_A x\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl((P'\cdot_A G)\cdot_A\bigl((P'\cdot_A a^{\dagger}_m)\cdot_A x\bigr)\Bigr)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=a_m\cdot_A\Bigl((P'\cdot_A G)\cdot_A\bigl(P'\cdot_A(a^{\dagger}_m\cdot_A x)\bigr)\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\Bigl((P'\cdot_A G)\cdot_A\bigl(P'\cdot_A a^{\dagger}_m\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_creation_generator_times_vacuum_factor_is_creation_generator}\right)\\
+&=a_m\cdot_A\Bigl(\bigl((P'\cdot_A G)\cdot_A P'\bigr)\cdot_A a^{\dagger}_m\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=a_m\cdot_A\bigl(Q^{T,U}_{m-1}\cdot_A a^{\dagger}_m\bigr)
+&&\left(\because\ G=\alpha\cdot_A\kappa\text{。}\blkref{def_vacuum_sandwich_of_initial_parts}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_sandwich_of_agreeing_initial_parts_is_initial_vacuum_part",
+    kind: "claim",
+    title: { text: "番号が m 以下の元が同じ二つの部分集合では、番号が m 以下の部分を真空の因子で挟んだ元は、真空の因子の積である" },
+    labels: ["claim_vacuum_sandwich_of_agreeing_initial_parts_is_initial_vacuum_part"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。", math(String.raw`m\in\{0,1,\dots,M\}`), " について、すべての ", math(String.raw`t\in\{1,\dots,m\}`), " について「", math(String.raw`t\in T`), " と ", math(String.raw`t\in U`), " が同値である」ならば、次が成り立つ。"]),
+      displayMath(String.raw`Q^{T,U}_m=P_{\le m}`),
+    ],
+    proof: [
+      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`a_{T,\le 0}=a^{\dagger}_{U,\le 0}=P_{\le 0}=1_A`), " である（", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_0
+&=\bigl(1_A\cdot_A(1_A\cdot_A 1_A)\bigr)\cdot_A 1_A
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、}a_{T,\le 0}=a^{\dagger}_{U,\le 0}=P_{\le 0}=1_A\right)\\
+&=(1_A\cdot_A 1_A)\cdot_A 1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=1_A\cdot_A 1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=P_{\le 0}
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。すべての ", math(String.raw`t\in\{1,\dots,m\}`), " について「", math(String.raw`t\in T`), " と ", math(String.raw`t\in U`), " が同値である」とする。", math(String.raw`\{1,\dots,m-1\}\subseteq\{1,\dots,m\}`), " なので ", math(String.raw`m-1`), " でも同じ条件が成り立ち、帰納法の仮定により ", math(String.raw`Q^{T,U}_{m-1}=P_{\le m-1}`), " である。", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`x:=x_m`), " と置く。", math(String.raw`P_{\le m}=P'\cdot_A x`), " である（", ref("def_initial_part_of_vacuum_element"), "）。", math(String.raw`t:=m`), " で条件を読むと、", math(String.raw`m\in T`), " と ", math(String.raw`m\in U`), " は同値なので、「", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\notin U`), "」か「", math(String.raw`m\in T`), " かつ ", math(String.raw`m\in U`), "」のどちらかである。前者のとき："]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=Q^{T,U}_{m-1}\cdot_A x
+&&\left(\because\ \blkref{claim_vacuum_sandwich_when_last_number_is_in_neither_subset}\right)\\
+&=P'\cdot_A x
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=P_{\le m}
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right).
+\end{aligned}`),
+      paragraph(["後者のとき、", math(String.raw`j\in\{1,\dots,m-1\}`), " なら ", math(String.raw`j\neq m`), " なので ", math(String.raw`a^{\dagger}_m\cdot_A x_j=x_j\cdot_A a^{\dagger}_m`), "（", ref("claim_creation_generator_commutes_with_other_number_pair"), " の ", math(String.raw`i,j`), " に ", math(String.raw`m,j`), " を当てる）と ", math(String.raw`x\cdot_A x_j=x_j\cdot_A x`), "（", ref("claim_vacuum_factors_with_different_numbers_commute"), "）が成り立つので、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて ", math(String.raw`a^{\dagger}_m\cdot_A P'=P'\cdot_A a^{\dagger}_m`), " と ", math(String.raw`x\cdot_A P'=P'\cdot_A x`), " が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=a_m\cdot_A\bigl(Q^{T,U}_{m-1}\cdot_A a^{\dagger}_m\bigr)
+&&\left(\because\ \blkref{claim_vacuum_sandwich_when_last_number_is_in_both_subsets}\right)\\
+&=a_m\cdot_A\bigl(P'\cdot_A a^{\dagger}_m\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=a_m\cdot_A\bigl(a^{\dagger}_m\cdot_A P'\bigr)
+&&\left(\because\ a^{\dagger}_m\cdot_A P'=P'\cdot_A a^{\dagger}_m\right)\\
+&=\bigl(a_m\cdot_A a^{\dagger}_m\bigr)\cdot_A P'
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=x\cdot_A P'
+&&\left(\because\ x=x_m\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=P'\cdot_A x
+&&\left(\because\ x\cdot_A P'=P'\cdot_A x\right)\\
+&=P_{\le m}
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_sandwich_of_disagreeing_initial_parts_is_zero",
+    kind: "claim",
+    title: { text: "番号が m 以下の元が異なる二つの部分集合では、番号が m 以下の部分を真空の因子で挟んだ元は零である" },
+    labels: ["claim_vacuum_sandwich_of_disagreeing_initial_parts_is_zero"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`T,U\in\mathcal{P}_M`), " とし、", math(String.raw`x_i`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), "、", math(String.raw`a_{T,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_{U,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`Q^{T,U}_m`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとする。", math(String.raw`m\in\{0,1,\dots,M\}`), " について、「", math(String.raw`t\in T`), " かつ ", math(String.raw`t\notin U`), "」か「", math(String.raw`t\notin T`), " かつ ", math(String.raw`t\in U`), "」を満たす ", math(String.raw`t\in\{1,\dots,m\}`), " が存在するならば、次が成り立つ。"]),
+      displayMath(String.raw`Q^{T,U}_m=0_A`),
+    ],
+    proof: [
+      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき ", math(String.raw`\{1,\dots,0\}`), " は空集合なので、条件を満たす ", math(String.raw`t`), " は存在せず、主張は条件を満たす場合が無いので成り立つ。", math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。条件を満たす ", math(String.raw`t\in\{1,\dots,m\}`), " をとる。積 ", math(String.raw`0_A\cdot_A w`), " と ", math(String.raw`w\cdot_A 0_A`), "（", math(String.raw`w\in A`), "）が ", math(String.raw`0_A`), " であることは、右から ", math(String.raw`w`), " を掛ける写像と左から ", math(String.raw`w`), " を掛ける写像が線型写像であり（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "、", ref("claim_left_multiplication_in_algebra_is_linear_map"), "）、線型写像は零を零へ移すこと（", ref("claim_linear_map_sends_zero_to_zero"), "）による。"]),
+      paragraph([math(String.raw`t=m`), " のとき、「", math(String.raw`m\in T`), " かつ ", math(String.raw`m\notin U`), "」か「", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\in U`), "」が成り立つので、", math(String.raw`Q^{T,U}_m=0_A`), " である（", ref("claim_vacuum_sandwich_vanishes_when_last_number_is_in_exactly_one_subset"), "）。"]),
+      paragraph([math(String.raw`t\neq m`), " のとき、", math(String.raw`t\in\{1,\dots,m-1\}`), " なので ", math(String.raw`m-1`), " で条件が成り立ち、帰納法の仮定により ", math(String.raw`Q^{T,U}_{m-1}=0_A`), " である。番号 ", math(String.raw`m`), " については、「", math(String.raw`m`), " がちょうど一方に入る」「", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\notin U`), "」「", math(String.raw`m\in T`), " かつ ", math(String.raw`m\in U`), "」のどれか一つが成り立つ。一つ目のときは ", ref("claim_vacuum_sandwich_vanishes_when_last_number_is_in_exactly_one_subset"), " により ", math(String.raw`Q^{T,U}_m=0_A`), " である。二つ目のとき："]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=Q^{T,U}_{m-1}\cdot_A x_m
+&&\left(\because\ \blkref{claim_vacuum_sandwich_when_last_number_is_in_neither_subset}\right)\\
+&=0_A\cdot_A x_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=0_A
+&&\left(\because\ \text{右から}\ x_m\ \text{を掛ける写像が零を零へ移す}\right).
+\end{aligned}`),
+      paragraph(["三つ目のとき："]),
+      displayMath(String.raw`\begin{aligned}
+Q^{T,U}_m
+&=a_m\cdot_A\bigl(Q^{T,U}_{m-1}\cdot_A a^{\dagger}_m\bigr)
+&&\left(\because\ \blkref{claim_vacuum_sandwich_when_last_number_is_in_both_subsets}\right)\\
+&=a_m\cdot_A\bigl(0_A\cdot_A a^{\dagger}_m\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=a_m\cdot_A 0_A
+&&\left(\because\ \text{右から}\ a^{\dagger}_m\ \text{を掛ける写像が零を零へ移す}\right)\\
+&=0_A
+&&\left(\because\ \text{左から}\ a_m\ \text{を掛ける写像が零を零へ移す}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_vacuum_element_sandwich_of_annihilation_and_creation_products",
+    kind: "claim",
+    title: { text: "消滅の逆順の積と生成の積の積を真空への射影にあたる元で挟むと、二つの部分集合が等しいときだけ真空への射影にあたる元が残る" },
+    labels: ["claim_vacuum_element_sandwich_of_annihilation_and_creation_products"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`a_T`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`a^{\dagger}_U`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のもの、", math(String.raw`\delta_{T,U}`), " を集合 ", math(String.raw`\mathcal{P}_M`), " の上のクロネッカーのデルタ（", ref("def_kronecker_delta"), "）とする。すべての ", math(String.raw`T,U\in\mathcal{P}_M`), " について次が成り立つ。"]),
+      displayMath(String.raw`\bigl(P\cdot_A(a_T\cdot_A a^{\dagger}_U)\bigr)\cdot_A P=\delta_{T,U}\ast_A P`),
+    ],
+    proof: [
+      paragraph([math(String.raw`Q^{T,U}_M`), " を ", ref("def_vacuum_sandwich_of_initial_parts"), " のものとすると、", math(String.raw`Q^{T,U}_M=\bigl(P\cdot_A(a_T\cdot_A a^{\dagger}_U)\bigr)\cdot_A P`), " である（", ref("def_vacuum_sandwich_of_initial_parts"), "）。", math(String.raw`T=U`), " のとき、すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`t\in T`), " と ", math(String.raw`t\in U`), " は同値である。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(P\cdot_A(a_T\cdot_A a^{\dagger}_U)\bigr)\cdot_A P
+&=Q^{T,U}_M
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\right)\\
+&=P_{\le M}
+&&\left(\because\ m:=M\text{。}\blkref{claim_vacuum_sandwich_of_agreeing_initial_parts_is_initial_vacuum_part}\right)\\
+&=P
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right)\\
+&=1_{\mathbb{C}}\ast_A P
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\delta_{T,U}\ast_A P
+&&\left(\because\ T=U\text{。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`T\neq U`), " のとき、集合の等しさ（", ref("def_power_set_of_first_m_positive_integers"), "）により、", math(String.raw`t\in T`), " と ", math(String.raw`t\in U`), " が同値でない ", math(String.raw`t\in\{1,\dots,M\}`), " が存在する。その ", math(String.raw`t`), " では「", math(String.raw`t\in T`), " かつ ", math(String.raw`t\notin U`), "」か「", math(String.raw`t\notin T`), " かつ ", math(String.raw`t\in U`), "」が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(P\cdot_A(a_T\cdot_A a^{\dagger}_U)\bigr)\cdot_A P
+&=Q^{T,U}_M
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\right)\\
+&=0_A
+&&\left(\because\ m:=M\text{。}\blkref{claim_vacuum_sandwich_of_disagreeing_initial_parts_is_zero}\right)\\
+&=0_{\mathbb{C}}\ast_A P
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=\delta_{T,U}\ast_A P
+&&\left(\because\ T\neq U\text{。}\blkref{def_kronecker_delta}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_selected_number_factor_of_split_clifford_algebra",
+    kind: "definition",
+    title: { text: "部分集合に入るかどうかで選ぶ、番号ごとの生成と消滅の積" },
+    labels: ["def_selected_number_factor_of_split_clifford_algebra"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`S\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）とする。", math(String.raw`i\in\{1,\dots,M\}`), " について、", math(String.raw`A`), " の元 ", math(String.raw`u^{S}_i`), " を次で定める（", math(String.raw`i\in S`), " の真偽は ", ref("def_power_set_of_first_m_positive_integers"), " により一つに決まる）。"]),
+      displayMath(String.raw`u^{S}_i:=\begin{cases}a^{\dagger}_i\cdot_A a_i & (i\in S),\\ a_i\cdot_A a^{\dagger}_i & (i\notin S).\end{cases}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_creation_vacuum_annihilation_factor_of_one_number",
+    kind: "claim",
+    title: { text: "一つの番号について、生成の因子と消滅と生成の積と消滅の因子をこの順に掛けると、部分集合で選んだ積になる" },
+    labels: ["claim_creation_vacuum_annihilation_factor_of_one_number"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), "（", math(String.raw`i\in\{1,\dots,M\}`), "）を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。", math(String.raw`S\in\mathcal{P}_M`), " とし、", math(String.raw`y^{S}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{S}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`u^{S}_i`), " を ", ref("def_selected_number_factor_of_split_clifford_algebra"), " のものとする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\bigl(y^{S}_i\cdot_A x_i\bigr)\cdot_A z^{S}_i=u^{S}_i`),
+    ],
+    proof: [
+      paragraph([math(String.raw`i\in S`), " のとき、", math(String.raw`y^{S}_i=a^{\dagger}_i`), "、", math(String.raw`z^{S}_i=a_i`), " である（", ref("def_ordered_product_of_selected_creation_generators"), "、", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(y^{S}_i\cdot_A x_i\bigr)\cdot_A z^{S}_i
+&=\bigl(a^{\dagger}_i\cdot_A x_i\bigr)\cdot_A a_i
+&&\left(\because\ y^{S}_i=a^{\dagger}_i\text{、}z^{S}_i=a_i\right)\\
+&=a^{\dagger}_i\cdot_A a_i
+&&\left(\because\ \blkref{claim_creation_generator_times_vacuum_factor_is_creation_generator}\right)\\
+&=u^{S}_i
+&&\left(\because\ i\in S\text{。}\blkref{def_selected_number_factor_of_split_clifford_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`i\notin S`), " のとき、", math(String.raw`y^{S}_i=1_A`), "、", math(String.raw`z^{S}_i=1_A`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(y^{S}_i\cdot_A x_i\bigr)\cdot_A z^{S}_i
+&=\bigl(1_A\cdot_A x_i\bigr)\cdot_A 1_A
+&&\left(\because\ y^{S}_i=z^{S}_i=1_A\right)\\
+&=x_i\cdot_A 1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=x_i
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=a_i\cdot_A a^{\dagger}_i
+&&\left(\because\ x_i\ \text{の置き方。}\blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
+&=u^{S}_i
+&&\left(\because\ i\notin S\text{。}\blkref{def_selected_number_factor_of_split_clifford_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_initial_parts_of_creation_vacuum_annihilation_product_is_product_of_number_factors",
+    kind: "claim",
+    title: { text: "番号が m 以下の部分の生成の積と真空の因子の積と消滅の逆順の積の積は、部分集合で選んだ番号ごとの積の番号順の積である" },
+    labels: ["claim_initial_parts_of_creation_vacuum_annihilation_product_is_product_of_number_factors"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`S\in\mathcal{P}_M`), " とし、", math(String.raw`a^{\dagger}_{S,\le m}`), " を ", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", math(String.raw`P_{\le m}`), " を ", ref("def_initial_part_of_vacuum_element"), "、", math(String.raw`a_{S,\le m}`), " を ", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`u^{S}_i`), " を ", ref("def_selected_number_factor_of_split_clifford_algebra"), " のものとする。すべての ", math(String.raw`m\in\{0,1,\dots,M\}`), " について、族を ", math(String.raw`\{1,\dots,m\}`), " に制限した番号順の積（", ref("def_ordered_product_in_algebra"), "）について次が成り立つ。"]),
+      displayMath(String.raw`\bigl(a^{\dagger}_{S,\le m}\cdot_A P_{\le m}\bigr)\cdot_A a_{S,\le m}=\prod_{A,\,i=1}^{m}u^{S}_i`),
+    ],
+    proof: [
+      paragraph([math(String.raw`\Pi_m:=\prod_{A,\,i=1}^{m}u^{S}_i`), " と置く。部分積の式は番号 ", math(String.raw`m`), " までの因子だけで定まるので、", math(String.raw`\Pi_0=1_A`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A u^{S}_m`), " である（", ref("def_ordered_product_in_algebra"), "）。", math(String.raw`y^{S}_t`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`z^{S}_t`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`a^{\dagger}_{S,\le 0}=P_{\le 0}=a_{S,\le 0}=1_A`), " である（", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "、", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a^{\dagger}_{S,\le 0}\cdot_A P_{\le 0}\bigr)\cdot_A a_{S,\le 0}
+&=(1_A\cdot_A 1_A)\cdot_A 1_A
+&&\left(\because\ a^{\dagger}_{S,\le 0}=P_{\le 0}=a_{S,\le 0}=1_A\right)\\
+&=1_A\cdot_A 1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=1_A
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\Pi_0
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。", math(String.raw`\kappa:=a^{\dagger}_{S,\le m-1}`), "、", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`\alpha:=a_{S,\le m-1}`), "、", math(String.raw`x:=x_m`), "、", math(String.raw`y:=y^{S}_m`), "、", math(String.raw`z:=z^{S}_m`), "、", math(String.raw`u:=u^{S}_m`), " と置く（", math(String.raw`x_m`), " は ", ref("def_vacuum_element_of_split_clifford_algebra"), " のもの）。準備として次の二つが成り立つ。", math(String.raw`1_A`), " はどの元とも交換する（", ref("def_unital_ring"), " の乗法の単位元）。"]),
+      paragraph(["（イ）", math(String.raw`y\cdot_A P'=P'\cdot_A y`), "。", math(String.raw`j\in\{1,\dots,m-1\}`), " とする。", math(String.raw`m\in S`), " なら ", math(String.raw`y=a^{\dagger}_m`), " であり、", math(String.raw`m\neq j`), " なので ", math(String.raw`y\cdot_A x_j=x_j\cdot_A y`), " である（", ref("claim_creation_generator_commutes_with_other_number_pair"), " の ", math(String.raw`i,j`), " に ", math(String.raw`m,j`), " を当てる）。", math(String.raw`m\notin S`), " なら ", math(String.raw`y=1_A`), " である。したがって ", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=y`), " と族 ", math(String.raw`x_1,\dots,x_{m-1}`), " に当てて（イ）を得る。"]),
+      paragraph(["（ロ）", math(String.raw`u\cdot_A\alpha=\alpha\cdot_A u`), "。", math(String.raw`\alpha`), " の因子は ", math(String.raw`z^{S}_{m-k}`), "（", math(String.raw`k\in\{1,\dots,m-1\}`), "）であり、", math(String.raw`t:=m-k\in\{1,\dots,m-1\}`), " なので ", math(String.raw`t\neq m`), " である。", math(String.raw`t\in S`), " なら ", math(String.raw`z^{S}_t=a_t`), " であり、", math(String.raw`u=a^{\dagger}_m\cdot_A a_m`), " のとき ", ref("claim_annihilation_generator_commutes_with_other_number_reversed_pair"), "、", math(String.raw`u=a_m\cdot_A a^{\dagger}_m`), " のとき ", ref("claim_annihilation_generator_commutes_with_other_number_pair"), " を ", math(String.raw`i,j`), " に ", math(String.raw`t,m`), " を当てて、", math(String.raw`a_t\cdot_A u=u\cdot_A a_t`), " である。", math(String.raw`t\notin S`), " なら ", math(String.raw`z^{S}_t=1_A`), " である。したがって ", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u`), " と ", math(String.raw`\alpha`), " を定める族に当てて（ロ）を得る。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a^{\dagger}_{S,\le m}\cdot_A P_{\le m}\bigr)\cdot_A a_{S,\le m}
+&=\bigl((\kappa\cdot_A y)\cdot_A P_{\le m}\bigr)\cdot_A a_{S,\le m}
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\right)\\
+&=\bigl((\kappa\cdot_A y)\cdot_A(P'\cdot_A x)\bigr)\cdot_A a_{S,\le m}
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right)\\
+&=\bigl((\kappa\cdot_A y)\cdot_A(P'\cdot_A x)\bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ \blkref{claim_initial_reverse_ordered_annihilation_product_splits_off_last_number}\right)\\
+&=\Bigl(\kappa\cdot_A\bigl(y\cdot_A(P'\cdot_A x)\bigr)\Bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\kappa\cdot_A\bigl((y\cdot_A P')\cdot_A x\bigr)\Bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Bigl(\kappa\cdot_A\bigl((P'\cdot_A y)\cdot_A x\bigr)\Bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ \text{（イ）}\right)\\
+&=\Bigl(\kappa\cdot_A\bigl(P'\cdot_A(y\cdot_A x)\bigr)\Bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\bigl((\kappa\cdot_A P')\cdot_A(y\cdot_A x)\bigr)\cdot_A(z\cdot_A\alpha)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(\kappa\cdot_A P')\cdot_A\bigl((y\cdot_A x)\cdot_A(z\cdot_A\alpha)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(\kappa\cdot_A P')\cdot_A\Bigl(\bigl((y\cdot_A x)\cdot_A z\bigr)\cdot_A\alpha\Bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=(\kappa\cdot_A P')\cdot_A(u\cdot_A\alpha)
+&&\left(\because\ i:=m\text{。}\blkref{claim_creation_vacuum_annihilation_factor_of_one_number}\right)\\
+&=(\kappa\cdot_A P')\cdot_A(\alpha\cdot_A u)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=\bigl((\kappa\cdot_A P')\cdot_A\alpha\bigr)\cdot_A u
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
+&=\Pi_{m-1}\cdot_A u
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Pi_m
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_sum_over_subsets_of_selected_products_is_product_of_sums",
+    kind: "claim",
+    title: { text: "部分集合ごとに因子を選んだ番号順の積を、部分集合の 2 進の番号付けの順に足すと、因子の和の番号順の積になる" },
+    labels: ["claim_sum_over_subsets_of_selected_products_is_product_of_sums"],
+    statement: [
+      paragraph([math(String.raw`(B,+_B,\cdot_B,\ast_B,0_B,1_B)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`i`), " に ", math(String.raw`B`), " の元 ", math(String.raw`g_i`), " と ", math(String.raw`h_i`), " が一つずつ与えられているとする。", math(String.raw`S\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）と ", math(String.raw`i\in\{1,\dots,M\}`), " について、", math(String.raw`B`), " の元 ", math(String.raw`v^{S}_i`), " を、", math(String.raw`i\in S`), " なら ", math(String.raw`v^{S}_i:=g_i`), "、", math(String.raw`i\notin S`), " なら ", math(String.raw`v^{S}_i:=h_i`), " と定める。", math(String.raw`m\in\{0,1,\dots,M\}`), " について、", math(String.raw`2^m`), " と ", math(String.raw`e_m:\{1,\dots,2^m\}\to\mathcal{P}_m`), " を ", ref("def_binary_numbering_of_power_set"), " のものとする。", math(String.raw`\{1,\dots,m\}\subseteq\{1,\dots,M\}`), " なので ", math(String.raw`\mathcal{P}_m\subseteq\mathcal{P}_M`), " であり、", math(String.raw`v^{e_m(k)}_i`), " は定まる。このとき、すべての ", math(String.raw`m\in\{0,1,\dots,M\}`), " について、", math(String.raw`U_{\mathrm{vec}}(B)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の線型結合（", ref("def_linear_combination"), "）と、族を ", math(String.raw`\{1,\dots,m\}`), " に制限した番号順の積（", ref("def_ordered_product_in_algebra"), "）について次が成り立つ。"]),
+      displayMath(String.raw`\sum_{k=1}^{2^m}1_{\mathbb{C}}\ast_B\prod_{B,\,i=1}^{m}v^{e_m(k)}_i=\prod_{B,\,i=1}^{m}\bigl(h_i+_B g_i\bigr)`),
+    ],
+    proof: [
+      paragraph([math(String.raw`S\in\mathcal{P}_M`), " と ", math(String.raw`m\in\{0,1,\dots,M\}`), " について ", math(String.raw`F_m(S):=\prod_{B,\,i=1}^{m}v^{S}_i`), "、", math(String.raw`\Pi_m:=\prod_{B,\,i=1}^{m}(h_i+_B g_i)`), " と置く。部分積の式は番号 ", math(String.raw`m`), " までの因子だけで定まるので、", math(String.raw`F_0(S)=1_B`), "、", math(String.raw`\Pi_0=1_B`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`F_m(S)=F_{m-1}(S)\cdot_B v^{S}_m`), "、", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_B(h_m+_B g_m)`), " である（", ref("def_ordered_product_in_algebra"), "）。項が等しい二つの族の線型結合は等しい（", ref("def_linear_combination"), " の帰納的な定義は項だけで決まる）。", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`2^0=1`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{1}1_{\mathbb{C}}\ast_B F_0\bigl(e_0(k)\bigr)
+&=0_B+_B\Bigl(1_{\mathbb{C}}\ast_B F_0\bigl(e_0(1)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_linear_combination}\right)\\
+&=0_B+_B\bigl(1_{\mathbb{C}}\ast_B 1_B\bigr)
+&&\left(\because\ F_0\bigl(e_0(1)\bigr)=1_B\right)\\
+&=0_B+_B 1_B
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=1_B+_B 0_B
+&&\left(\because\ U_{\mathrm{ring}}(B)\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
+&=1_B
+&&\left(\because\ U_{\mathrm{ring}}(B)\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\Pi_0
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。", math(String.raw`n:=2^{m-1}`), " と置くと、", math(String.raw`2^m=2\cdot n=n+n`), " である（", ref("def_binary_numbering_of_power_set"), "）。準備として次の三つが成り立つ。"]),
+      paragraph(["（イ）", math(String.raw`k\in\{1,\dots,n\}`), " について ", math(String.raw`F_m(e_m(k))=F_{m-1}(e_{m-1}(k))\cdot_B h_m`), "。", math(String.raw`k\le 2^{m-1}`), " なので ", math(String.raw`e_m(k)=e_{m-1}(k)`), " であり（", ref("def_binary_numbering_of_power_set"), "）、", math(String.raw`e_{m-1}(k)\subseteq\{1,\dots,m-1\}`), " なので ", math(String.raw`m\notin e_m(k)`), "、", math(String.raw`v^{e_m(k)}_m=h_m`), " である。したがって ", math(String.raw`F_m(e_m(k))=F_{m-1}(e_m(k))\cdot_B v^{e_m(k)}_m=F_{m-1}(e_{m-1}(k))\cdot_B h_m`), " である。"]),
+      paragraph(["（ロ）", math(String.raw`j\in\{1,\dots,n\}`), " について ", math(String.raw`F_m(e_m(n+j))=F_{m-1}(e_{m-1}(j))\cdot_B g_m`), "。", math(String.raw`n<n+j\le 2^m`), " なので ", math(String.raw`e_m(n+j)=e_{m-1}(j)\cup\{m\}`), " である（", ref("def_binary_numbering_of_power_set"), "）。", math(String.raw`i\in\{1,\dots,m-1\}`), " なら ", math(String.raw`i\neq m`), " なので、", math(String.raw`i\in e_m(n+j)`), " と ", math(String.raw`i\in e_{m-1}(j)`), " は同値であり、", math(String.raw`v^{e_m(n+j)}_i=v^{e_{m-1}(j)}_i`), " である。部分積の式は番号 ", math(String.raw`m-1`), " までの因子だけで定まるので ", math(String.raw`F_{m-1}(e_m(n+j))=F_{m-1}(e_{m-1}(j))`), " である。また ", math(String.raw`m\in e_m(n+j)`), " なので ", math(String.raw`v^{e_m(n+j)}_m=g_m`), " である。したがって ", math(String.raw`F_m(e_m(n+j))=F_{m-1}(e_m(n+j))\cdot_B g_m=F_{m-1}(e_{m-1}(j))\cdot_B g_m`), " である。"]),
+      paragraph(["（ハ）", math(String.raw`w\in B`), " について、右から ", math(String.raw`w`), " を掛ける写像は ", math(String.raw`U_{\mathrm{vec}}(B)`), " から ", math(String.raw`U_{\mathrm{vec}}(B)`), " への線型写像である（", ref("claim_right_multiplication_in_algebra_is_linear_map"), "）。したがって ", ref("claim_linear_map_maps_linear_combination_to_linear_combination_of_values"), " により、", math(String.raw`\{1,\dots,n\}`), " の上の ", math(String.raw`B`), " の元の族 ", math(String.raw`X_k`), " について ", math(String.raw`\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B(X_k\cdot_B w)=\bigl(\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B X_k\bigr)\cdot_B w`), " である。"]),
+      paragraph(["帰納法の仮定は ", math(String.raw`\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B F_{m-1}(e_{m-1}(k))=\Pi_{m-1}`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{2^m}1_{\mathbb{C}}\ast_B F_m\bigl(e_m(k)\bigr)
+&=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B F_m\bigl(e_m(k)\bigr)\right)+_B\left(\sum_{j=1}^{n}1_{\mathbb{C}}\ast_B F_m\bigl(e_m(n+j)\bigr)\right)
+&&\left(\because\ 2^m=n+n\text{、}n':=n\text{。}\blkref{claim_splitting_linear_combination_into_first_and_last_terms}\right)\\
+&=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B\Bigl(F_{m-1}\bigl(e_{m-1}(k)\bigr)\cdot_B h_m\Bigr)\right)+_B\left(\sum_{j=1}^{n}1_{\mathbb{C}}\ast_B F_m\bigl(e_m(n+j)\bigr)\right)
+&&\left(\because\ \text{（イ）}\right)\\
+&=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B\Bigl(F_{m-1}\bigl(e_{m-1}(k)\bigr)\cdot_B h_m\Bigr)\right)+_B\left(\sum_{j=1}^{n}1_{\mathbb{C}}\ast_B\Bigl(F_{m-1}\bigl(e_{m-1}(j)\bigr)\cdot_B g_m\Bigr)\right)
+&&\left(\because\ \text{（ロ）}\right)\\
+&=\left(\left(\sum_{k=1}^{n}1_{\mathbb{C}}\ast_B F_{m-1}\bigl(e_{m-1}(k)\bigr)\right)\cdot_B h_m\right)+_B\left(\left(\sum_{j=1}^{n}1_{\mathbb{C}}\ast_B F_{m-1}\bigl(e_{m-1}(j)\bigr)\right)\cdot_B g_m\right)
+&&\left(\because\ \text{（ハ）を}\ w:=h_m\ \text{と}\ w:=g_m\ \text{の二か所に適用}\right)\\
+&=\bigl(\Pi_{m-1}\cdot_B h_m\bigr)+_B\bigl(\Pi_{m-1}\cdot_B g_m\bigr)
+&&\left(\because\ \text{帰納法の仮定を二か所に適用}\right)\\
+&=\Pi_{m-1}\cdot_B\bigl(h_m+_B g_m\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(B)\ \text{の分配法則（左の因子が共通）。}\blkref{def_unital_ring}\right)\\
+&=\Pi_m
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_decomposition_of_unity_in_split_clifford_algebra",
+    kind: "claim",
+    title: { text: "生成の積と真空への射影にあたる元と消滅の逆順の積の積を、部分集合全体の上で足すと 1 になる" },
+    labels: ["claim_decomposition_of_unity_in_split_clifford_algebra"],
+    statement: [
+      paragraph([math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(V,q)`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。", math(String.raw`a^{\dagger}_S`), " を ", ref("def_ordered_product_of_selected_creation_generators"), "、", math(String.raw`a_S`), " を ", ref("def_reverse_ordered_product_of_selected_annihilation_generators"), "、", math(String.raw`P`), " を ", ref("def_vacuum_element_of_split_clifford_algebra"), " のものとする。", math(String.raw`\mathcal{P}_M`), " は有限集合である（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）。", math(String.raw`U_{\mathrm{vec}}(A)`), "（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）の中の有限集合の上の和（", ref("def_sum_over_finite_set"), "）について次が成り立つ。"]),
+      displayMath(String.raw`\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)=1_A`),
+    ],
+    proof: [
+      paragraph([math(String.raw`u^{S}_i`), " を ", ref("def_selected_number_factor_of_split_clifford_algebra"), " のものとする。準備として次の四つが成り立つ。"]),
+      paragraph(["（イ）", math(String.raw`S\in\mathcal{P}_M`), " について ", math(String.raw`(a^{\dagger}_S\cdot_A P)\cdot_A a_S=\prod_{A,\,i=1}^{M}u^{S}_i`), "。", math(String.raw`a^{\dagger}_{S,\le M}=a^{\dagger}_S`), "、", math(String.raw`P_{\le M}=P`), "、", math(String.raw`a_{S,\le M}=a_S`), " であり（", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "、", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "）、", ref("claim_initial_parts_of_creation_vacuum_annihilation_product_is_product_of_number_factors"), " を ", math(String.raw`m:=M`), " で当てる。"]),
+      paragraph(["（ロ）", ref("claim_sum_over_subsets_of_selected_products_is_product_of_sums"), " を ", math(String.raw`B:=A`), "、", math(String.raw`g_i:=a^{\dagger}_i\cdot_A a_i`), "、", math(String.raw`h_i:=a_i\cdot_A a^{\dagger}_i`), "、", math(String.raw`m:=M`), " で当てる。このとき ", ref("def_selected_number_factor_of_split_clifford_algebra"), " により ", math(String.raw`v^{S}_i=u^{S}_i`), " である。"]),
+      paragraph(["（ハ）", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a_i\cdot_A a^{\dagger}_i\bigr)+_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)
+&=\delta_{i,i}\ast_A 1_A
+&&\left(\because\ j:=i\text{。}\blkref{claim_annihilation_and_creation_generators_anticommute}\right)\\
+&=1_{\mathbb{C}}\ast_A 1_A
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=1_A
+&&\left(\because\ U_{\mathrm{vec}}(A)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["（ニ）すべての因子が ", math(String.raw`1_A`), " の番号順の積は ", math(String.raw`1_A`), " である。部分積 ", math(String.raw`\Pi_m`), " について、", math(String.raw`\Pi_0=1_A`), " であり、", math(String.raw`\Pi_{m-1}=1_A`), " なら ", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A 1_A=\Pi_{m-1}=1_A`), " である（", ref("def_ordered_product_in_algebra"), "、", ref("def_unital_ring"), " の乗法の単位元）ので、", math(String.raw`m`), " についての帰納法により ", math(String.raw`\prod_{A,\,i=1}^{M}1_A=1_A`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\Bigl(\bigl(a^{\dagger}_S\cdot_A P\bigr)\cdot_A a_S\Bigr)
+&=\sum_{S\in\mathcal{P}_M}1_{\mathbb{C}}\ast_A\prod_{A,\,i=1}^{M}u^{S}_i
+&&\left(\because\ \text{（イ）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\sum_{k=1}^{2^M}1_{\mathbb{C}}\ast_A\prod_{A,\,i=1}^{M}u^{e_M(k)}_i
+&&\left(\because\ \text{番号付け}\ (2^M,e_M)\text{。}\blkref{claim_binary_numbering_is_numbering_of_power_set}\text{、}\blkref{def_sum_over_finite_set}\right)\\
+&=\prod_{A,\,i=1}^{M}\Bigl(\bigl(a_i\cdot_A a^{\dagger}_i\bigr)+_A\bigl(a^{\dagger}_i\cdot_A a_i\bigr)\Bigr)
+&&\left(\because\ \text{（ロ）。}\blkref{claim_sum_over_subsets_of_selected_products_is_product_of_sums}\right)\\
+&=\prod_{A,\,i=1}^{M}1_A
+&&\left(\because\ \text{（ハ）。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right)\\
+&=1_A
+&&\left(\because\ \text{（ニ）}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
