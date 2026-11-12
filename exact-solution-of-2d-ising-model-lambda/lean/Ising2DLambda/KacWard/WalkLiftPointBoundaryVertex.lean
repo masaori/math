@@ -1,6 +1,7 @@
 import Ising2DLambda.KacWard.WalkHorizontalBoundaryParity
 import Ising2DLambda.KacWard.CellBoundaryVertices
 import Ising2DLambda.NecSuf.KacWard.WalkLiftPointBoundaryVertex
+import Ising2DLambda.KacWard.PlaneLiftEndpointWinding
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -159,4 +160,70 @@ theorem interiorCellsOfWalk_boundaryEdge_has_departure
     rcases hselected.1 with hforward | hbackward
     · simp [gridEdgeEndpoints, hselected.2, hcol, hforward.1, hforward.2]
     · simp [gridEdgeEndpoints, hselected.2, hcol, hbackward.1, hbackward.2]
+/-- Every boundary vertex of the actual interior cells is a departure point
+of the lifted simple closed walk. -/
+theorem interiorCellsOfWalk_boundaryVertex_has_departure
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (v : ℤ × ℤ)
+    (hvtx : v ∈ cellBoundaryVertices
+      (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset) :
+    ∃ j : Fin (m + 1), planeLift γ j.castSucc = v := by
+  let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+  have hnext (j : Fin (m + 1)) :
+      ∃ k : Fin (m + 1), planeLift γ k.castSucc = planeLift γ j.succ := by
+    by_cases hj : j.val < m
+    · let k : Fin (m + 1) := ⟨j.val + 1, by omega⟩
+      refine ⟨k, ?_⟩
+      congr 1
+    · have hlast : j.succ = Fin.last (m + 1) := by
+        apply Fin.ext
+        have hjm : j.val = m := by omega
+        simp [hjm]
+      refine ⟨0, ?_⟩
+      rw [hlast, planeLift_endpoint_winding γ hγ, hh, hv]
+      simp
+  change v ∈ (planeCellBoundary cells).biUnion gridEdgeEndpoints at hvtx
+  obtain ⟨edge, hedge, hw⟩ := Finset.mem_biUnion.mp hvtx
+  have hcover (w : ℤ × ℤ) (hw : w ∈ gridEdgeEndpoints edge) :
+      ∃ j : Fin (m + 1), planeLift γ j.castSucc = w := by
+    obtain ⟨j, hp, hq⟩ :=
+      interiorCellsOfWalk_boundaryEdge_has_departure γ hγ hh hv edge hedge
+    have hne : (gridEdgeEndpoints edge).card = 2 := by
+      rcases edge with ⟨axis, ⟨r, c⟩⟩
+      cases axis <;> simp [gridEdgeEndpoints]
+    by_cases hwp : w = planeLift γ j.castSucc
+    · exact ⟨j, hwp.symm⟩
+    · obtain ⟨k, hk⟩ := hnext j
+      have hpq : planeLift γ j.castSucc ≠ planeLift γ j.succ := by
+        intro heq
+        have hzero : orientedEdgeLatticeStep (γ j) = 0 := by
+          have hs := planeLift_succ γ j
+          rw [← heq] at hs
+          apply add_left_cancel (a := planeLift γ j.castSucc)
+          simpa using hs.symm
+        unfold orientedEdgeLatticeStep at hzero
+        split_ifs at hzero <;> simp at hzero
+      have hsubset : ({planeLift γ j.castSucc, planeLift γ j.succ} :
+          Finset (ℤ × ℤ)) ⊆ gridEdgeEndpoints edge := by
+        intro x hx
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl
+        · exact hp
+        · exact hq
+      have hpair : ({planeLift γ j.castSucc, planeLift γ j.succ} :
+          Finset (ℤ × ℤ)).card = 2 := by simp [hpq]
+      have hendpoints : gridEdgeEndpoints edge =
+          {planeLift γ j.castSucc, planeLift γ j.succ} := by
+        exact (Finset.eq_of_subset_of_card_le hsubset (by omega)).symm
+      have hcases : w = planeLift γ j.castSucc ∨ w = planeLift γ j.succ := by
+        simpa [hendpoints] using hw
+      rcases hcases with h | h
+      · exact False.elim (hwp h)
+      · exact ⟨k, by simpa [h] using hk⟩
+  exact hcover v hw
+
 end Ising2DLambda.KacWard

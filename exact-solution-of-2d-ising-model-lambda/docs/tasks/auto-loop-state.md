@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-12（主経路の連続実行）、内側セルの境界頂点が実際の平面持ち上げの出発点で尽くされることを Lean 具体版と必要十分版で示した。** 次は出発辺の回転数和と境界頂点の局所回転数和の同定である。
 - **2026-11-12（並列の連続実行）、下組の実現像の上限が列の実数極限に等しいこと（`claim_sequence_lower_set_sup_eq_real_limit`）を Lean 具体版と必要十分版で示し、本文で使われていなかった「$\rho$ は狭義順序を保つ」の七行を外し、$0<_{\Lambda_{\mathbb Q}}\varepsilon$ を共通分母の証人で示していた段を $\rho(\varepsilon)=\iota(s)c>0=\rho(0)$ の四行と「実現値の狭義比較を順序へ戻す」事実へ、$\log_{\mathbb R}2>0$ を $\rho(0)=0$ を経る八行へ、上限の存在を完備性ではなく $I$ が最小上界であることへ直した。** 並列の表の次は、複素根の角表示である。
 - **2026-11-12（並列の連続実行）、正の分散因子から角の対数関数の連続性を得ること（`claim_dispersion_angle_log_continuous`）を Lean 具体版と必要十分版で示し、本文で「包含写像は単射で四則と順序を保つので $(r^2+2r-1)^2>0$」「$\mathbb R$ の分配律」の一行で済ませていた段を、$r^2+2r-1=\iota(p)\ne\iota(0)=0$ の五行、$B_q-(r^2+2r-1)^2$ の五行、$B_q\ge(r^2+2r-1)^2>0$ の四行へ直した。** 並列の表の次は、下組の上限と実数極限である。
 - **2026-11-12（並列の連続実行）、逆元操作のモード軌道が一元・二元・四元のいずれかで、一元であることと $\varpi,\varsigma\in\{1,-1\}$ が同値であること（`claim_mode_inversion_orbit_cardinality`）を Lean 具体版と必要十分版で示し、本文で「二つの因子はそれぞれ一または二なので積は一、二、四のいずれか」「積が一となるのは両成分がそれぞれ逆元に等しい場合に限る」と日本語で済ませていた段を、$n(z):=|\{z,z^{-1}\}|$ の場合分け、$|O|=n(\varpi)n(\varsigma)$ の三行、四通りの積、$|O|=1$ の同値の四行へ直した。** 並列の表の次は、角の対数関数の連続性である。
 - **2026-11-12（並列の連続実行）、モードの逆元操作が分散因子を保つこと（`claim_dispersion_inversion_invariant`）を Lean 具体版と必要十分版で示し、本文で「$\varpi^L=(-1)^a\ne0$ なので $\varpi\ne0$」と日本語で済ませていた段を $(-1)^a=\varpi^L=0^L=0$ の三行の矛盾へ、自分自身を根拠にしていた $(\varpi^{-1})^{-1}=\varpi$ の行を $\varpi\cdot\varpi^{-1}=1$ を引く形へ直した。** 並列の表の次は、モード軌道の大きさである。
-- **2026-11-12（主経路の連続実行）、奇数回の境界辺通過から実際の出発位置を取り出し、その一歩の両端が同じ境界辺に属することを Lean 二版で示した。** 次は境界頂点を実際の持ち上げ点が尽くすことを示す。
 
 
 
@@ -25,7 +25,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 境界頂点は実際の持ち上げ点から尽くされる | 記述・SageMath 済。Lean は未着手 | 各出発点が境界頂点に入る Lean 二版は済んだ。上の境界辺の被覆と、一頂点に接する境界辺二本を使って全射性を示す。 |
 | Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を同定する | 記述・SageMath 済。Lean は未着手 | 上の全単射と歩道の左右による方向表を使い、各頂点の項を対応させて有限和を同定する。 |
 | Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
@@ -72,9 +71,9 @@
 
 ## 前進の記録
 
+- 2026-11-12: 主経路の境界頂点の全射性を済ませた。具体版 `interiorCellsOfWalk_boundaryVertex_has_departure` は各境界辺を通る実際の一歩から二端点の出発位置を得て、周期末尾は零巻き付きによる始点との一致を使う。必要十分版 `boundary_vertices_covered` は辺の端点の被覆を境界頂点全体へ移す。次は回転数和と局所回転数和の同定である。
 - 2026-11-12: 並列の表の先頭の行の二十件目、下組の上限と実数極限（`claim_sequence_lower_set_sup_eq_real_limit`）を済ませた。具体版（`RealEscape/SequenceLowerSetSupRealLimit.lean`）は第一の事実（`rationalLogOrderLE_of_realizeRational_lt`）、$\rho(0)=0$（`realizeRational_zero`）、$c>0$（`realizeRational_generatorTwo_pos`）、上から（`realizeRational_le_of_mem_sequenceLowerSet`）、下から（`exists_mem_sequenceLowerSet_gt`）を本文と同じ順で示し、空でないこと・$I$ が最小上界であること・$\sup=I$ を結論にする（`sequence_lowerSet_sup_eq_realLimit`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/SequenceLowerSetSupRealLimit.lean`）は有理数体上の加群 $G$、全順序性と加法単調性だけを持つ関係、Archimedes 的な線型順序体 $K$ と順序位相、単調で有理数倍と可換な $\rho$、$0<\rho(g)$ だけを仮定し（完備性・推移律・反射律・$\rho$ の加法性は使わない）、空でないことと最小上界を結論にする。導出版は `SequenceLowerSetSupRealLimitFromNecSuf.lean`。到達点に要る Lean の無い主張は 25 件から 24 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の十九件目、角の対数関数の連続性（`claim_dispersion_angle_log_continuous`）を済ませた。具体版（`RealEscape/DispersionAngleLogContinuous.lean`）は $B_q$（`dispersionAngleArgument`）を置き、$p\ne0$ の四行、$0<r<1$ と $r^2+2r-1\ne0$、差の五行（`dispersionAngleArgument_sub_lower`）、下界と正値性（`dispersionAngleArgument_pos`）、連続性（`dispersionAngleArgument_continuous`）、$f_q=\log_{\mathbb R}\circ B_q$ の連続性を本文と同じ順で示す（`dispersion_angle_log_continuous`）。実対数の連続性は `def_real_logarithm` の具体版へ `realLog_comp_continuous` として足した。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/DispersionAngleLogContinuous.lean`）は、2 が平方でない可換環 $A$、四則が連続な位相を持つ線型順序の狭義順序可換環 $K$、単射な環準同型 $j:A\to K$ と $0<j(q)<1$、$c_j\le1$ の連続関数、正の元の上で連続な $\mathrm{lg}$ だけを仮定する（体であること・完備性・$-1\le c_j$・対数の乗法性と単調性は使わない）。導出版は `DispersionAngleLogContinuousFromNecSuf.lean`。到達点に要る Lean の無い主張は 26 件から 25 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の十八件目、逆元操作のモード軌道の大きさ（`claim_mode_inversion_orbit_cardinality`）を済ませた。具体版（`KacWard/ModeInversionOrbitCardinality.lean`）は軌道 `modeInversionOrbit` と $n(z)$（`modeInversionPairCard`）を置き、四点の所属（逆元不変性の具体版から）、$z=z^{-1}$ の同値の四行（`mode_eq_inv_iff`）、$n(z)$ の場合分け、元数の三行（`modeInversionOrbit_card`）、四通りの積と $|O|=1$ の同値の四行を本文と同じ順で示す（`mode_inversion_orbit_cardinality`）。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/ModeInversionOrbitCardinality.lean`）は可除環 $K$（乗法の可換性は使わない）、等号の判定可能性、$L\ge1$、符号の $t\cdot t=1$ だけを仮定する（$t\ne0$ は $t\cdot t=1$ と非自明性から出す）。導出版は `ModeInversionOrbitCardinalityFromNecSuf.lean`。到達点に要る Lean の無い主張は 27 件から 26 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 主経路の先頭「奇数回の境界辺通過から実際の出発辺を取り出す」を済ませた。必要十分版 `exists_position_of_odd_count` は奇数の有限和が零でないことから選択位置を得る。具体版 `interiorCellsOfWalk_boundaryEdge_has_departure` は直前の奇偶定理を横辺・縦辺に適用し、選んだ位置の単位歩の両端が指定した境界辺の端点であることを示す。次は境界頂点の全射性である。
-- 2026-11-12: 並列の表の先頭の行の十七件目、逆元操作による分散因子の不変性（`claim_dispersion_inversion_invariant`）を済ませた。具体版（`KacWard/DispersionInversionInvariant.lean`）は $\varpi\ne0$ の三行（`twistedMode_ne_zero`、$L\ge1$ を仮定）、逆元の冪の三行（`twistedMode_inv_pow`）、$\varpi\cdot\varpi^{-1}=1$ からの $(\varpi^{-1})^{-1}=\varpi$（`mode_inv_inv`）、横・縦の四行ずつを本文と同じ順で示す（`dispersion_inversion_invariant`）。必要十分版を呼ばない。必要十分版（`NecSuf/KacWard/DispersionInversionInvariant.lean`）は $\varpi\ne0$ の段を零元を持つモノイド、逆元の冪の段を除法モノイドと $t\cdot t=1$、分散因子の段を体（定義が体の上の多項式なので）と $z\cdot z^{-1}=1$ だけで行う。導出版は `DispersionInversionInvariantFromNecSuf.lean`。到達点に要る Lean の無い主張は 28 件から 27 件になった（`count-goal-lean-remaining.ts`）。
 
