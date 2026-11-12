@@ -7,11 +7,10 @@
 ## 現在地
 
 - **2026-11-12（主経路の連続実行）、実際の閉歩道の各出発点が内側セル集合の境界頂点に属することを Lean 二版で示した。** 次は境界頂点を持ち上げ点が尽くすことを示す。
-
+- **2026-11-12（並列の連続実行）、横・縦モードの複素実現が直積でも全単射であること（`claim_twisted_mode_product_bijection`）を Lean 具体版と必要十分版で示し、本文の単射の段で「組の等号から二つの成分の像がそれぞれ等しい」と日本語で済ませていた箇所を、射影 $\mathrm{pr}_1,\mathrm{pr}_2$ を置いた三行ずつの式変形と組の等号の二行へ直した。** 並列の表の次は、1 の冪根の逆元の共役である。
 - **2026-11-12（並列の連続実行）、横・縦モードの複素実現が複素根全体への全単射であること（`claim_twisted_modes_complex_roots_bijection`）を Lean 具体版と必要十分版で示し、本文の周期性の段（「$(j-k)/L\in\mathbb Z$ となる」と日本語で済ませていた）を $j=k+nL$ の三行の式変形へ、全射の段を有限集合の部分集合と個数の一致の文へ直した。** 並列の表の次は、横・縦モードの直積全単射である。
 - **2026-11-12（並列の連続実行）、複素実現した横・縦モードが対応する複素方程式の根であること（`claim_complex_realization_twisted_modes_are_complex_roots`）を Lean 具体版と必要十分版で示した。本文の証明は冪の保存の帰納法と $(-1)^c$ の実現まで本文に節のある主張だけを引いており、直す箇所は無かった。** 並列の表の次は、各モード集合と複素根集合の全単射である。
 - **2026-11-12（並列の連続実行）、複素実現が単射であること（`claim_complex_realization_injective`）を Lean 具体版と必要十分版で示し、本文の「複素数の実部と虚部の一意性から」と日本語で済ませていた段を、実部の三行と虚部の三行の式変形へ直した。** 並列の表の次は、横・縦モードの複素根集合への包含である。
-- **2026-11-12（並列の連続実行）、複素実現が乗法と単位元を保つこと（`claim_complex_realization_preserves_multiplication`）を Lean 具体版と必要十分版で示し、本文の $(a+b\omega)(c+d\omega)$ の展開と $\mathbb C$ 側の因数分解で乗法の結合・交換法則を根拠に書かずに並べ替えていた二か所に、それぞれ一行を足した。** 並列の表の次は、複素実現の単射性である。
 
 
 
@@ -46,7 +45,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 平方恒等式に依存しない実数体への脱出と有限 Fourier 分解の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | 2026-11-11 に主経路の表から移した。 到達点四つの閉包の中で、依存を辿っても平方恒等式・有限トーラス公式に届かない 22 件（2026-11-04 の研究管理が `ref()` と `\blkref{}` の走査で確かめた）。2026-11-12 に実閉部分体の有理上下界・Archimedes 性・有理挟み込み・有理下切断の上限・実現写像の有理数上での一致・加法の保存・乗法の保存・狭義順序の保存と単射性・複素実現の加法の保存・複素実現の乗法と単位元の保存・複素実現の単射性・複素実現した横・縦モードの複素根条件・各モード集合と複素根集合の全単射を済ませた（残り 9 件）。依存の順に、直積全単射、と、1 の冪根の逆元の共役 → 有理点での分散因子の正値性、逆元操作による分散因子の不変性 → モード軌道の大きさ、角の対数関数の連続性、下組の上限と実数極限、複素根の角表示、および到達点「分散因子の最小値は自己双対点で零になる」（`claim_dispersion_minimum_self_dual_point`）。具体版は実際の実閉部分体のデータと今回接続した実現写像の定義について述べる。一つの主張ごとに進め、行を割るときはこの備考を書き換える。 |
+| Onsager 閉形式への接続 | 平方恒等式に依存しない実数体への脱出と有限 Fourier 分解の Lean 二版 | 記述・SageMath 済。Lean 二版は未着手 | 2026-11-11 に主経路の表から移した。 到達点四つの閉包の中で、依存を辿っても平方恒等式・有限トーラス公式に届かない 22 件（2026-11-04 の研究管理が `ref()` と `\blkref{}` の走査で確かめた）。2026-11-12 に実閉部分体の有理上下界・Archimedes 性・有理挟み込み・有理下切断の上限・実現写像の有理数上での一致・加法の保存・乗法の保存・狭義順序の保存と単射性・複素実現の加法の保存・複素実現の乗法と単位元の保存・複素実現の単射性・複素実現した横・縦モードの複素根条件・各モード集合と複素根集合の全単射・直積全単射を済ませた（残り 8 件）。依存の順に、1 の冪根の逆元の共役 → 有理点での分散因子の正値性、逆元操作による分散因子の不変性 → モード軌道の大きさ、角の対数関数の連続性、下組の上限と実数極限、複素根の角表示、および到達点「分散因子の最小値は自己双対点で零になる」（`claim_dispersion_minimum_self_dual_point`）。具体版は実際の実閉部分体のデータと今回接続した実現写像の定義について述べる。一つの主張ごとに進め、行を割るときはこの備考を書き換える。 |
 | Lean の四層 | 正負四・回転位相に関わらない具体版の委譲を外す | 未着手 | 2026-11-12 の研究管理が主経路の行「具体版の必要十分版への委譲を外す」から移した。上の行を終えたら進める（上の行が主経路の完了待ちで進めないときも、この行へ進む）。対象は到達点の閉包の中で例外の台帳 `lean/concrete-necsuf-delegations.txt` に載る具体版のうち、一側閉包の正負四（`claim_one_sided_closure_projection_cyclic_turning`）にも回転位相・循環総回転数の主張にも依存せず、主経路が書き換える Lean ファイルに触れない 19 件である。行列式・マッチングの 7 件: `claim_perfect_matching_sign_enumeration_independent`・`claim_matching_word_sign_swap`・`claim_invariant_subset_reversal_sign`・`claim_polynomial_determinant_mul`・`claim_polynomial_determinant_noninjective_cancellation`・`claim_polynomial_product_of_sums`・`def_integer_matrix_determinant`。接触点分割・平滑化・横断数の 12 件: `claim_vertex_port_bijection`・`claim_edge_simple_contact_split`・`claim_smoothing_splits_closed_walk`・`claim_contact_split_turning_update`・`claim_reconnection_turning_difference`・`claim_contact_split_seam_parity`・`claim_contact_split_pair_descent`・`claim_smoothing_crossing_number_update`・`claim_smoothing_straight_visit_count_update`・`claim_vertex_crossing_number_factorization`・`claim_smoothing_vertex_crossing_number_update`・`claim_crossing_number_vertex_decomposition`。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。一件ずつ外し、外したら例外の台帳の行を消す。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
@@ -57,26 +56,24 @@
 ## レビュー記録
 
 - 2026-11-12: 内側セルを右に置く場合の入方向と局所回転数を、実際の歩道の四方向表と境界頂点の四セル表で照合した。方向の対応と符号に食い違いは無く、修正不要だった。
-
+- 2026-11-12: 「横・縦モードの複素実現は直積でも全単射である」の本文の証明が、単射の段を「二つの組の像が等しければ、組の等号から二つの成分の像がそれぞれ等しい」と日本語で済ませていた。第一成分・第二成分の射影 $\mathrm{pr}_1,\mathrm{pr}_2$ を置き、$\rho(\varpi)=\mathrm{pr}_1(\Theta(\varpi,\varsigma))=\mathrm{pr}_1(\Theta(\varpi',\varsigma'))=\rho(\varpi')$ と第二成分の同じ三行、各成分の単射性、$(\varpi,\varsigma)=(\varpi',\varsigma)=(\varpi',\varsigma')$ の二行へ直した（主張は不変）。SageMath を、集合の一致だけを見ていた形から各行の検算へ書き直した（4,392 行、否定の対照 8,736 件）。
 - 2026-11-12: 「横・縦モードの複素実現は複素根全体への全単射である」の本文の証明で、$e_{L,c,j}=e_{L,c,k}$ から「複素指数関数の周期性から $(j-k)/L\in\mathbb Z$ となる」と日本語で一段に済ませ、全射の段を「像は $E_{L,c}$ と同じ $L$ 個の元を持つので全射」と書いていた。周期性を $\exp(s)=\exp(t)\Rightarrow s=t+2\pi in$ の形で述べて $j=k+nL$ を三行の式変形で出し、$-L<nL<L$ から $n=0$ を導く形へ、$E_{L,c}$ の決定と全射の段を「有限集合の部分集合の元の個数が全体以上なら全体に一致する」を明示した文へ直した（主張は不変）。SageMath を各行の検算へ書き直した（632 行、否定の対照 408 件）。
 - 2026-11-12: 「複素実現は単射である」の本文の証明で、$\rho(a)+i\rho(b)=\rho(c)+i\rho(d)$ から $\rho(a)=\rho(c)$・$\rho(b)=\rho(d)$ を「複素数の実部と虚部の一意性から」と日本語で導いていた。$\rho(a)=\operatorname{Re}(\rho(a)+i\rho(b))=\operatorname{Re}(\rho(c)+i\rho(d))=\rho(c)$ と虚部の同じ三行の式変形へ直した（主張は不変）。SageMath を、三つの式変形の各行と係数の一致から $\xi=\eta$ へ戻る段を数体 $\mathbb Q(\sqrt2+\sqrt3)(\omega)$ の厳密計算で確かめる形に書き直した（2,401 件、うち像が一致する 49 件で各行、否定の対照 588 件）。
 - 2026-11-12: 「複素実現は乗法と単位元を保つ」の本文の証明で、$(a+b\omega)(c+d\omega)=ac+ad\omega+bc\omega+bd\omega^2$ の一行が根拠を分配法則だけとしつつ $(b\omega)(d\omega)=bd\omega^2$ などの乗法の結合・交換法則も使い、$\mathbb C$ 側の $(\rho(a)+i\rho(b))(\rho(c)+i\rho(d))$ への括り出しも同じだった。分配法則の行と乗法の結合・交換法則の行に分けた（主張は不変）。SageMath を、三つの式変形の各行を数体 $\mathbb Q(\sqrt2+\sqrt3)(\omega)$ の厳密計算で確かめる形に書き直した（2,401 件、否定の対照 1,764 件）。
-- 2026-11-12: 「複素実現は加法を保つ」の本文の証明で、$(\rho(a)+\rho(c))+i(\rho(b)+\rho(d))=(\rho(a)+i\rho(b))+(\rho(c)+i\rho(d))$ の一行が根拠を「$\mathbb C$ の加法の結合法則と交換法則」としつつ $i$ を和へ配る分配法則も使っていた。$\mathbb C$ の分配法則の行と結合・交換法則の行の二行に分けた（主張は不変）。SageMath を、二つの式変形の各行を数体 $\mathbb Q(\sqrt2+\sqrt3)(\omega)$ の厳密計算で確かめる形に書き直した（2,401 件、否定の対照 378 件）。
 
 ## 式変形の書き方の統一
 
+- 2026-11-12（並列の連続実行の書式統一）: 「係数上界つき多項式の積の係数は、上界の和より上の番号で零である」（`claim_qbar_poly_product_coeff_bound`）の式鎖で、三行の行末根拠にある句点を読点へ直した。
 - 2026-11-12（並列の連続実行の書式統一）: 「一次因子との積の係数は、上の番号で零である」（`claim_qbar_poly_linear_factor_coeff_bound`）の一次式の係数と積の係数の式鎖で、三行の行末根拠の中に残っていた句点を読点へ直した。
 - 2026-11-12（並列の連続実行の書式統一）: 「一次因子は消去できる」（`claim_qbar_poly_linear_factor_cancellation`）の一次式の係数の式鎖と、積の係数の式鎖で、二行の行末根拠に残っていた句点を読点へ直した（この主張の行末根拠の句点は全て片付いた）。
 - 2026-11-12（並列の連続実行の書式統一）: 「1 の冪根の全体の有限部分集合の元の個数は指数を超えない」（`claim_root_of_unity_subset_card_bound`）の第 3 の式鎖（$\mathrm{aev}_w(f)=0$）で、行末根拠に残っていた句点を読点へ直した（この主張の行末根拠の句点は全て片付いた）。
 - 2026-11-12（並列の連続実行の書式統一）: 「1 の冪根の全体の有限部分集合の元の個数は指数を超えない」（`claim_root_of_unity_subset_card_bound`）の番号 0 と番号 $k$ の係数の式鎖で、三行の行末根拠にある句点を読点へ直した。
-- 2026-11-12（並列の連続実行の書式統一）: 「因数定理の商の係数は、上界の番号以上で零である」（`claim_qbar_factor_quotient_coeff_bound`）の式鎖で、八行の行末根拠にある句点を読点へ直した。
 
 ## 前進の記録
 
 - 2026-11-12: 全単射の行を像の包含と全射性に割った。実際の歩道の各出発辺が内側セル集合の境界辺に属し、その出発点がその辺の端点であることから、各持ち上げ点が境界頂点に属することを Lean 具体版で示した。有限辺集合と端点集合だけを使う必要十分版も示した。SageMath は長さ十以下の 704 本で境界頂点集合の一致を再確認した。次は境界頂点を持ち上げ点が尽くすことを示す。
-
+- 2026-11-12: 並列の表の先頭の行の十四件目、横・縦モードの直積全単射（`claim_twisted_mode_product_bijection`）を済ませた。具体版（`RealEscape/TwistedModeProductBijection.lean`）は $\Theta_{L,a,b}$（`twistedModeProductRealization`）を置き、値域・単射（射影の三行ずつと組の等号の二行）・全射（各成分の全射性で逆像を取り三行）を本文と同じ順で示す（`twistedModeProductRealization_bijOn`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/TwistedModeProductBijection.lean`）は演算の無い四つの型と成分の写像 $f,g$ について、成分が全単射であることだけを仮定する（`pairMap_bijOn_necSuf`。mathlib の `Set.BijOn.prodMap` へは委ねない）。導出版は `TwistedModeProductBijectionFromNecSuf.lean`。到達点に要る Lean の無い主張は 31 件から 30 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の十三件目、横・縦モードの複素根集合への全単射（`claim_twisted_modes_complex_roots_bijection`）を済ませた。具体版（`RealEscape/TwistedModesComplexRootsBijection.lean`）は複素根集合 $E_{L,c}$（`complexRootSet`）と $e_{L,c,k}$（`complexRootCandidate`）を置き、$e_{L,c,k}^L=(-1)^c$ の四行（`complexRootCandidate_pow`）、周期性からの $j-k=nL$（`complexRootCandidate_period`）と整数の段（`natLt_eq_of_sub_eq_mul`）、根の個数の上界（`complexRootSet_ncard_le`。本文が ℂ の事実として引く上界を mathlib の `Polynomial.card_nthRoots` で書く）、$E_{L,c}=\{e_{L,c,k}\}$・$|E_{L,c}|=L$、像の包含・単射性・定義域の個数からの全単射（`complexAlgebraicRealization_horizontal_bijOn`・`vertical_bijOn`）を本文と同じ順で示す。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/TwistedModesComplexRootsBijection.lean`）は演算の無い集合と写像について、候補の所属・周期性・$E$ の有限性と個数の上界・写像の所属・定義域の上の単射性・定義域の個数だけを仮定する（大域的な単射性は要らない）。導出版は `TwistedModesComplexRootsBijectionFromNecSuf.lean`。到達点に要る Lean の無い主張は 32 件から 31 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 並列の表の先頭の行の十二件目、複素実現した横・縦モードの複素根条件（`claim_complex_realization_twisted_modes_are_complex_roots`）を済ませた。具体版（`RealEscape/ComplexRealizationTwistedModeRoots.lean`）は実際の実閉部分体のデータと Lean のモード集合 `horizontalTwistedModes`・`verticalTwistedModes` について、冪の保存の帰納法（零乗・単位元の保存・零乗の三行と、冪の定義・乗法の保存・帰納法の仮定・冪の定義の四行。`complexAlgebraicRealization_pow`）、$(-1)^c=(-1)^c+0\omega$ の表示から $\rho_{\mathbb C}((-1)^c)=\rho((-1)^c)+i\rho(0)=(-1)^c+i0=(-1)^c$（`complexAlgebraicRealization_signRat`）、結論の三行（`complexAlgebraicRealization_horizontalMode_pow`・`verticalMode_pow`）を本文と同じ順で示す。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/ComplexRealizationTwistedModeRoots.lean`）はモノイドかつ加法を持つ α と演算の無い β について、複素実現の乗法・単位元の保存、一意性、係数の実現値 $\rho(q)=r$・$\rho(z_0)=0$ だけを仮定する（α の可換性・加法の公理、表示の存在は使わない）。導出版は `ComplexRealizationTwistedModeRootsFromNecSuf.lean`。SageMath を数体 $\mathbb Q(\sqrt2+\sqrt3)(\omega)=\mathbb Q(\zeta_{24})$ の中の根 56 個で各行を確かめる形に書き直した（否定の対照 56 件）。到達点に要る Lean の無い主張は 33 件から 32 件になった（`count-goal-lean-remaining.ts`）。
 - 2026-11-12: 先頭の行には全単射と局所方向表の照合という別の論法が含まれるため、二行に割った。方向反転時に方向番号を二つ進め、二辺の順を逆にすると局所回転数の符号が反転することを、四方向の有限表で Lean に示した。巡回総回転数の出発辺ごとの和を前回の具体版と照合し、修正は不要だった。次は持ち上げ点と境界頂点の全単射を示す。
-- 2026-11-12: 並列の表の先頭の行の十一件目、複素実現の単射性（`claim_complex_realization_injective`）を済ませた。具体版（`RealEscape/ComplexRealizationInjective.lean`）は実際の実閉部分体のデータについて、一意表示を取り、定義・仮定・定義の三行、実部の三行・虚部の三行（`simp` で実部・虚部の定義を開く）、実現写像の単射性（`cutRealization_injective`）、$\xi=a+b\omega=c+d\omega=\eta$ を本文と同じ順で示す（`complexAlgebraicRealization_injective`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/ComplexRealizationInjective.lean`）は加法を持つ α と演算の無い β について、一意表示の存在と一意性、係数の実現値の単射性だけを仮定する（α の結合・交換法則、β の演算は使わない。存在を外すと表示を持たない元の像が任意になり単射性が従わない）。導出版は `ComplexRealizationInjectiveFromNecSuf.lean`。到達点に要る Lean の無い主張は 34 件から 33 件になった（`count-goal-lean-remaining.ts`）。
 

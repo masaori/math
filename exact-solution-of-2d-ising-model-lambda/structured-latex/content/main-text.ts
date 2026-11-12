@@ -35357,13 +35357,13 @@ w^{\,1}
 &&(\because\ p<k\ \text{なので、有限和を番号}\ p\ \text{で 2 つに分けられる})\\
 &=\sum_{i=0}^{p}\mathrm{ac}_i(P)\cdot 0
 +\sum_{i=p+1}^{k}\mathrm{ac}_i(P)\cdot\mathrm{ac}_{k-i}(Q)
-&&(\because\ i\le p\ \text{と}\ k>p+q\ \text{より}\ k-i\ge k-p>q\text{。本主張の}\ Q\ \text{の係数の仮定を各項へ同時に当てる})\\
+&&(\because\ i\le p\ \text{と}\ k>p+q\ \text{より}\ k-i\ge k-p>q\text{、本主張の}\ Q\ \text{の係数の仮定を各項へ同時に当てる})\\
 &=\sum_{i=0}^{p}\mathrm{ac}_i(P)\cdot 0
 +\sum_{i=p+1}^{k}0\cdot\mathrm{ac}_{k-i}(Q)
-&&(\because\ i\ge p+1\ \text{より}\ i>p\text{。本主張の}\ P\ \text{の係数の仮定を各項へ同時に当てる})\\
+&&(\because\ i\ge p+1\ \text{より}\ i>p\text{、本主張の}\ P\ \text{の係数の仮定を各項へ同時に当てる})\\
 &=\sum_{i=0}^{p}0
 +\sum_{i=p+1}^{k}0
-&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零。各項へ同時に当てる})\\
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零、各項へ同時に当てる})\\
 &=0+0
 &&(\because\ \overline{\mathbb{Q}}\ \text{の零元の有限和})\\
 &=0
@@ -86174,6 +86174,11 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 habitat: "C",
                 realEscape: "代数的な二つのモードを複素実現し、複素根集合の直積へ送る。",
                 verification: ["sagemath/check/twisted-mode-product-reindex"],
+                lean: [
+                  "Ising2DLambda.RealEscape.twistedModeProductRealization_bijOn",
+                  "Ising2DLambda.NecSuf.RealEscape.pairMap_bijOn_necSuf",
+                  "Ising2DLambda.RealEscape.twistedModeProductRealization_bijOn_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
@@ -86192,10 +86197,33 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                     math(String.raw`E_{L,b}`), " に属する。従って写像は指定した直積へ値を取る。",
                   ]),
                   paragraph([
-                    "二つの組の像が等しければ、組の等号から二つの成分の像がそれぞれ等しい。",
-                    ref("claim_twisted_modes_complex_roots_bijection"),
-                    " の各成分の単射性により元の二つの成分が等しく、組も等しい。よって単射である。",
+                    "組 ", math(String.raw`(z,w)\in\mathbb C\times\mathbb C`), " の第一成分と第二成分を ",
+                    math(String.raw`\mathrm{pr}_1(z,w):=z`), "、", math(String.raw`\mathrm{pr}_2(z,w):=w`),
+                    " と置く。", math(String.raw`(\varpi,\varsigma),(\varpi',\varsigma')\in\mathcal U_a\times\mathcal W_b`),
+                    " が ", math(String.raw`\Theta_{L,a,b}(\varpi,\varsigma)=\Theta_{L,a,b}(\varpi',\varsigma')`),
+                    " を満たすとする。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)
+&=\mathrm{pr}_1\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)&&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr)\\
+&=\mathrm{pr}_1\bigl(\Theta_{L,a,b}(\varpi',\varsigma')\bigr)&&\bigl(\because\ \text{仮定}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi')&&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr),\\
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)
+&=\mathrm{pr}_2\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)&&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr)\\
+&=\mathrm{pr}_2\bigl(\Theta_{L,a,b}(\varpi',\varsigma')\bigr)&&\bigl(\because\ \text{仮定}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma')&&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_twisted_modes_complex_roots_bijection"),
+                    " の横方向の単射性から ", math(String.raw`\varpi=\varpi'`), "、縦方向の単射性から ",
+                    math(String.raw`\varsigma=\varsigma'`), " である。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\varpi,\varsigma)
+&=(\varpi',\varsigma)&&\bigl(\because\ \varpi=\varpi'\bigr)\\
+&=(\varpi',\varsigma')&&\bigl(\because\ \varsigma=\varsigma'\bigr)
+\end{aligned}`),
+                  paragraph(["であり、単射である。"]),
                   paragraph([
                     "任意の ", math(String.raw`(z,w)\in E_{L,a}\times E_{L,b}`),
                     " を取る。", ref("claim_twisted_modes_complex_roots_bijection"),
