@@ -20,7 +20,7 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | Step 3 前半の結び（`𝓑` は張り、`dim Mat(2,ℂ) = 4 = #𝓑` より基底） | `top_le_span_pauliFamily`・`finrank_mat2_eq_four`・`pauliBasis`（「張り、元数が次元に等しい族は基底」は mathlib の `basisOfTopLeSpanOfCardEqFinrank` に委ねる） |
 | Step 3 後半（`𝓑^{⊠M}` は基底。`<tensor_basis>` (2) を `𝓑` に適用） | `kroneckerTensorPowBasisOf M pauliBasis`（`TheoremTensorBasisFromNecSuf.lean`。mathlib の `Basis.piTensorProduct` を移したもので、人手 `<tensor_basis>` の Step 4 と 1 対 1 でない） |
 | Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
-| Step 3 後半（`P_s` の帰納法で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteProd_mem`（**経路が違う**: 人手は `P_1 := E_1` から右へ `P_{s+1} := P_sE_{s+1}` と掛け、一段を `kronecker_product_rule` (1) と単位の 6 行で示す。Lean は単位行列から始める有限集合の帰納法で左から掛け、一段を `Function.update` の `simp` で閉じる） |
+| Step 3 後半（`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法で `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`、`s = M_col` で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteFactorPrefixProduct`（`P_s`）・`siteFactorPrefixProduct_eq_and_mem`（`s = 1` の 2 行と一段の 6 行の鎖）・`siteProd_mem`（`s = M_col`） |
 | Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`） | `Z_Y_generate_algebra` |
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
@@ -405,39 +405,114 @@ theorem coe_pauliBasis : ⇑pauliBasis = pauliFamily :=
 
 /-! ## Step 3 後半: `e_1 ⊠ ⋯ ⊠ e_M` は `𝒜` に属する -/
 
-/-- クロネッカー積 `A_1 ⊠ ⋯ ⊠ A_M` は、各因子をサイト作用素として含む部分多元環に属する。
+/-- 人手 Step 3 後半の `P_s`（`def_finite_product_of_matrices` の左から順に掛けた積 `E_1E_2⋯E_s`）:
+`P_1 := E_1`、`P_{s+1} := P_s E_{s+1}`。`E_k = I ⊠ ⋯ ⊠ x_k ⊠ ⋯ ⊠ I` は Lean の `siteOp k (x k)`。
+Lean の添字は 0 始まりで、`siteFactorPrefixProduct x s h` が人手の `P_{s+1}`、Lean のサイト `⟨k, _⟩` が人手のサイト `k+1` である。 -/
+noncomputable def siteFactorPrefixProduct (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
+    (s : ℕ) → s < M → TensorPow M
+  | 0, h => siteOp ⟨0, h⟩ (x ⟨0, h⟩)
+  | s + 1, h =>
+      siteFactorPrefixProduct x s (Nat.lt_of_succ_lt h) * siteOp ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)
 
-人手 Step 3 後半の「`E_k := I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（第 `k` 因子だけが `e_k`）について `E_1 ⋯ E_M = e_1 ⊠ ⋯ ⊠ e_M`」
-（`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` についての帰納法）と結論は同じだが、**経路が違う**: Lean は単位行列から始める有限集合 `s` についての帰納法で、`E_k` を左から掛け、一段を `Function.update` の `simp` で閉じる（人手は右から掛け、一段を `kronecker_product_rule` (1) と単位の 6 行で示す。状態台帳の件）。`E_k` は Lean の `siteOp k (x k)`。 -/
+/-- 人手 Step 3 後半の帰納法: `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`。
+人手の `s` は Lean の `s + 1` で、人手の「第 `1` から第 `s` 因子」は Lean の `(i : ℕ) ≤ s` である。
+`s = 1` の 2 行の鎖と、`s → s + 1` の 6 行の鎖は、下の 2 つの節の `calc` と 1 段ずつ対応する
+（Lean の最後の段は、人手の因子の並び `e_1 ⊠ ⋯ ⊠ e_{s+1} ⊠ I ⊠ ⋯ ⊠ I` を `if` の書き方へ移すだけである）。
+`P_s ∈ 𝒜` は、`s = 1` では `E_1 ∈ 𝒜`、`s → s + 1` では帰納法の仮定と `E_{s+1} ∈ 𝒜` と (iv) である。 -/
+theorem siteFactorPrefixProduct_eq_and_mem (A : Subalgebra ℂ (TensorPow M))
+    (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (hE : ∀ k, siteOp k (x k) ∈ A) :
+    ∀ (s : ℕ) (h : s < M),
+      siteFactorPrefixProduct x s h = siteProd M (fun i => if (i : ℕ) ≤ s then x i else 1)
+        ∧ siteFactorPrefixProduct x s h ∈ A
+  | 0, h => by
+    refine ⟨?_, hE _⟩                                                  -- `P_1 = E_1 ∈ 𝒜`
+    calc siteFactorPrefixProduct x 0 h
+        = siteOp ⟨0, h⟩ (x ⟨0, h⟩) := rfl                              -- `P_1` の定義
+      _ = siteProd M (fun i => if (i : ℕ) ≤ 0 then x i else 1) := by
+          rw [siteOp_apply]                                            -- `E_1` の定義（`e_1 ⊠ I ⊠ ⋯ ⊠ I`）
+          congr 1                                                      -- 両辺は同じ因子の並び（`Function.update` は `if` の書き方の違いだけ）
+          funext i
+          by_cases hi : (i : ℕ) = 0
+          · have he : i = ⟨0, h⟩ := Fin.ext hi
+            subst he
+            simp
+          · have hne : i ≠ ⟨0, h⟩ := fun he => hi (congrArg Fin.val he)
+            rw [Function.update_of_ne hne, if_neg (by omega), Pi.one_apply]
+  | s + 1, h => by
+    obtain ⟨ihEq, ihMem⟩ := siteFactorPrefixProduct_eq_and_mem A x hE s (Nat.lt_of_succ_lt h)
+    refine ⟨?_, ?_⟩
+    · calc siteFactorPrefixProduct x (s + 1) h
+          = siteFactorPrefixProduct x s (Nat.lt_of_succ_lt h) * siteOp ⟨s + 1, h⟩ (x ⟨s + 1, h⟩) :=
+            rfl                                                        -- `P_{s+1}` の定義
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i else 1)
+              * siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) ⟨s + 1, h⟩
+                  (x ⟨s + 1, h⟩)) := by
+            rw [ihEq, siteOp_apply]                                    -- 帰納法の仮定と `E_{s+1}` の定義
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i * 1
+              else if (i : ℕ) = s + 1 then 1 * x i else 1 * 1) := by
+            rw [← siteProd_mul]                                        -- `kronecker_product_rule` (1)
+            congr 1
+            funext i
+            simp only [Pi.mul_apply]
+            by_cases hi : (i : ℕ) ≤ s
+            · have hne : i ≠ ⟨s + 1, h⟩ := fun he => by
+                have := congrArg Fin.val he; simp at this; omega
+              rw [if_pos hi, if_pos hi, Function.update_of_ne hne, Pi.one_apply]
+            · by_cases hs : (i : ℕ) = s + 1
+              · have he : i = ⟨s + 1, h⟩ := Fin.ext hs
+                subst he
+                rw [if_neg hi, if_neg hi, if_pos hs, Function.update_self]
+              · have hne : i ≠ ⟨s + 1, h⟩ := fun he => hs (congrArg Fin.val he)
+                rw [if_neg hi, if_neg hi, if_neg hs, Function.update_of_ne hne, Pi.one_apply]
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then 1 * x i else 1 * 1) := by
+            congr 1
+            funext i
+            by_cases hi : (i : ℕ) ≤ s
+            · rw [if_pos hi, if_pos hi, mul_identity_matrix (x i)]
+                                                                       -- `identity_matrix_is_right_unit_of_mat_mult` を第 1 から第 `s` 因子へ同時に適用
+            · rw [if_neg hi, if_neg hi]
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then x i else 1 * 1) := by
+            congr 1
+            funext i
+            by_cases hs : (i : ℕ) = s + 1
+            · rw [if_pos hs, if_pos hs, identity_matrix_mul (x i)]
+                                                                       -- `identity_matrix_is_left_unit_of_mat_mult`（`A → e_{s+1}`）
+            · rw [if_neg hs, if_neg hs]
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then x i else 1) := by
+            rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                                       -- `identity_matrix_is_left_unit_of_mat_mult`（`A → I`）を第 `s+2` 以降の因子へ同時に適用
+        _ = siteProd M (fun i => if (i : ℕ) ≤ s + 1 then x i else 1) := by
+            congr 1                                                    -- 両辺は同じ因子の並び `e_1 ⊠ ⋯ ⊠ e_{s+1} ⊠ I ⊠ ⋯ ⊠ I`（`if` の書き方の違いだけ）
+            funext i
+            by_cases hi : (i : ℕ) ≤ s
+            · rw [if_pos hi, if_pos (by omega)]
+            · by_cases hs : (i : ℕ) = s + 1
+              · rw [if_neg hi, if_pos hs, if_pos (by omega)]
+              · rw [if_neg hi, if_neg hs, if_neg (by omega)]
+    · exact mul_mem ihMem (hE _)                                       -- 帰納法の仮定・`E_{s+1} ∈ 𝒜`・(iv)
+
+/-- クロネッカー積 `e_1 ⊠ ⋯ ⊠ e_M` は、各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I` を含む部分多元環に属する。
+
+人手 Step 3 後半の「`s = M_col` として `e_1 ⊠ ⋯ ⊠ e_{M_col} = P_{M_col} ∈ 𝒜`」: `siteFactorPrefixProduct_eq_and_mem` を
+人手の `s = M_col`（Lean の `M - 1`）で使い、`(i : ℕ) ≤ M - 1` がすべてのサイトで成り立つことから因子の並びを `x` に戻す。
+`M = 0` の場合は人手に現れない（人手は `M_col ∈ ℤ_{≥2}`）。主張の型を `M : ℕ` のままにするため、Lean はこの場合を
+`Fin 0 → Mat(2,ℂ)` の元が単位元しかないこと・`kronecker_product_rule` (2)（`siteProd_one`）・(ii) で別に閉じる。 -/
 theorem siteProd_mem (A : Subalgebra ℂ (TensorPow M)) (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ)
     (h : ∀ k, siteOp k (x k) ∈ A) : siteProd M x ∈ A := by
-  classical
-  have aux : ∀ s : Finset (Fin M),
-      siteProd M (fun i => if i ∈ s then x i else 1) ∈ A := by
-    intro s
-    induction s using Finset.induction_on with
-    | empty =>
-        have h0 : (fun i : Fin M => if i ∈ (∅ : Finset (Fin M)) then x i else 1) = 1 := by
-          funext i; simp
-        rw [h0, siteProd_one]
-        exact one_mem A
-    | @insert k s hk ih =>
-        have hstep : siteProd M (fun i => if i ∈ insert k s then x i else 1)
-            = siteOp k (x k) * siteProd M (fun i => if i ∈ s then x i else 1) := by
-          rw [siteOp_apply, ← siteProd_mul]
-          congr 1
-          funext i
-          simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply, Finset.mem_insert]
-          by_cases hik : i = k
-          · subst hik
-            simp [hk]
-          · by_cases his : i ∈ s <;> simp [hik, his]
-        rw [hstep]
-        exact mul_mem (h k) ih
-  have hall : (fun i : Fin M => if i ∈ (Finset.univ : Finset (Fin M)) then x i else 1) = x := by
-    funext i; simp
-  have huniv := aux Finset.univ
-  rwa [hall] at huniv
+  rcases Nat.eq_zero_or_pos M with hM | hM
+  · subst hM
+    have hx : x = 1 := funext fun i => i.elim0
+    rw [hx, siteProd_one]
+    exact one_mem A
+  · obtain ⟨hform, hmem⟩ := siteFactorPrefixProduct_eq_and_mem A x h (M - 1) (by omega)
+    have hall : (fun i : Fin M => if (i : ℕ) ≤ M - 1 then x i else 1) = x := by
+      funext i
+      rw [if_pos (by omega)]
+    rw [hform, hall] at hmem
+    exact hmem
 
 /-- 人手 Step 3 後半の「各 `E_k` は `𝒜` に属する」。`E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I` は Lean の
 `siteOp k e_k`。`e_k = I` なら `E_k = I_{Mat(2^M,ℂ)}`（`kronecker_product_rule` (2)。Lean の `siteOp_one`）で (ii)、

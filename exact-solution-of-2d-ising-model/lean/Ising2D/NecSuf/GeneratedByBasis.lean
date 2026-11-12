@@ -19,7 +19,7 @@
 | 原文 | 本ファイル | 効いている構造 |
 | --- | --- | --- |
 | Step 3「全体を張る集合を全部含むから全体」 | `eq_top_of_span_eq_top` | 可換半環上の代数と部分多元環（＝積で閉じた部分加群）だけ |
-| Step 3「単項テンソルの積」 | `map_mem_of_mulSingle_mem` | 有限添字の直積モノイドからの**モノイド準同型**であることだけ |
+| Step 3 後半「`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
 | Step 2「Jordan–Wigner 文字列の帰納法」 | `string_mem`, `local_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
 
 ### 効いていないもの（一次情報: 下の証明が使っている補題がすべて）
@@ -29,16 +29,17 @@
   `string_mem` の `r : R` として抽象化されており、その値は一切使われない
   （`Subalgebra.smul_mem` にそのまま渡すだけ）。
 * **テンソル積であること**: `map_mem_of_mulSingle_mem` が使うのは
-  「サイトごとの元を並べた族へ準同型を適用する」ことだけで、
-  クロネッカー積の成分公式も、サイト間の可換性も使わない
-  （非可換な `A` でも、`Pi.mulSingle` 同士は直積モノイドの中で自動的に可換になるため、
-  実際にはサイトごとの分解の順序を気にする必要がない）。
+  「サイトごとの元を並べた族へ積を保つ写像を適用する」ことだけで、
+  クロネッカー積の成分公式も、サイト間の可換性も使わない。
+  `φ` が単位元を保つことも、`A` の結合律も使わない（人手の帰納法は `P_1 := E_1` から始まり、
+  `P_{s+1} := P_sE_{s+1}` と右から 1 つずつ掛けるだけなので、積の付け替えが起きない）。
 * **Pauli 行列の関係式**: `σ^x = -√-1 σ^y σ^z`、`P_m P_m = I`、反交換関係のいずれも仮定に現れない。
   `string_mem` は「`σ^z_m = P_m Z_m`」という**分解の形**しか使わない
   （具体版は `P_m P_m = I` からこの分解を導くが、分解を仮定してしまえば対合性は不要である）。
 * **各サイトの次元が 2 であること**: どこにも 2 は現れない。
-* **添字が `Fin M` であること**: `map_mem_of_mulSingle_mem` の添字型は
-  等号判定可能な任意の有限型でよく、各サイトのモノイドはサイトごとに違ってよい。
+* **各サイトの `N i` が同じであること**: `N i`（`MulOneClass`）はサイトごとに違ってよい。
+  ただし添字は `Fin n` に固定し、その順序を使う（人手の `P_s` は第 `1` から第 `s` 因子という並びで定めるため）。
+  主張だけなら任意の有限添字で成り立つが、それは人手と別の手順（有限集合の帰納法）になるので、ここには置かない。
 
 Step 2 の抽象化で唯一残る「線型性への依存」は `σ^x_m = -√-1 σ^y_m σ^z_m` の係数だけであり、
 これは `Subalgebra` が加群構造をもつことで吸収される。つまり Step 2 に本質的なのは
@@ -47,7 +48,7 @@ Step 2 の抽象化で唯一残る「線型性への依存」は `σ^x_m = -√-
 import Mathlib.Algebra.Algebra.Subalgebra.Basic
 import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 import Mathlib.Algebra.Group.Pi.Basic
-import Mathlib.Data.Finset.Piecewise
+import Mathlib.Algebra.Group.Subsemigroup.Basic
 import Mathlib.LinearAlgebra.Basis.Basic
 import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.LinearAlgebra.Span.Basic
@@ -74,54 +75,124 @@ theorem eq_top_of_span_eq_top (S : Subalgebra R A) {s : Set A}
 
 end SpanTop
 
-/-! ## (b) サイトごとの元の積は、各サイト単独の元を含む部分モノイドに属する -/
+/-! ## (b) サイトごとの元の積は、各サイト単独の元を含む部分半群に属する
+
+具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem`・`Ising2D.siteProd_mem`（人手 Step 3 後半の
+`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` の帰納法）と同じ手順を、`φ` が積を保つ写像であることだけで回す。 -/
 
 section SiteProduct
 
-variable {ι : Type*} [Fintype ι] [DecidableEq ι] {N : ι → Type*} [∀ i, Monoid (N i)]
-variable {A : Type*} [Monoid A]
+variable {n : ℕ} {N : Fin n → Type*} [∀ i, MulOneClass (N i)]
+variable {A : Type*} [Mul A]
 
-omit [Fintype ι] in
-/-- 有限集合 `s` に台をもつ族の分解: `k ∉ s` なら
-`(insert k s).piecewise x 1 = mulSingle k (x k) * s.piecewise x 1`。 -/
-theorem piecewise_insert_eq_mulSingle_mul (x : ∀ i, N i) {k : ι} {s : Finset ι} (hk : k ∉ s) :
-    (insert k s).piecewise x (1 : ∀ i, N i)
-      = Pi.mulSingle k (x k) * s.piecewise x (1 : ∀ i, N i) := by
-  funext i
-  by_cases hik : i = k
-  · subst hik
-    simp [hk]
-  · rw [Pi.mul_apply, Pi.mulSingle_eq_of_ne hik, one_mul]
-    by_cases his : i ∈ s <;> simp [hik, his]
+/-- 人手 Step 3 後半の `P_s`（`P_1 := E_1`、`P_{s+1} := P_s E_{s+1}`）。`E_k` は `φ (mulSingle k (x k))`。
+具体版 `Ising2D.siteFactorPrefixProduct` と同じく、Lean の `s` が人手の `s + 1` である。 -/
+def prefixProduct (φ : (∀ i, N i) →ₙ* A) (x : ∀ i, N i) : (s : ℕ) → s < n → A
+  | 0, h => φ (Pi.mulSingle ⟨0, h⟩ (x ⟨0, h⟩))
+  | s + 1, h =>
+      prefixProduct φ x s (Nat.lt_of_succ_lt h) * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩))
 
-/-- **原文 Step 3 後半の骨格**: モノイド準同型 `φ` が「1 サイトだけ動かした族」`mulSingle k (x k)`
-をすべて部分モノイド `S` へ送るなら、任意の族 `x` に対して `φ x ∈ S`。
+/-- **原文 Step 3 後半の帰納法（必要十分版）**: `P_s = φ(e_1, …, e_s, 1, …, 1)` かつ `P_s ∈ S`。
+具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem` と同じ手順で、`s → s + 1` の鎖も同じ 7 段
+（定義・帰納法の仮定・積を保つこと（具体版の `kronecker_product_rule` (1)）・第 1 から第 `s` 因子の右単位・
+第 `s+1` 因子の左単位・第 `s+2` 以降の因子の左単位・因子の並びの書き換え）である。
 
-具体版では `φ = siteProd`、`φ (mulSingle k A) = siteOp k A` であり、
-「単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` が、各因子をサイト作用素として含む部分多元環に属する」に当たる。
+効いているのは、`φ` が**積を保つ**こと（`map_mul`）、各 `N i` の単位元が両側の単位元であること
+（`mul_one`・`one_mul`）、`S` が積で閉じていることだけである。`φ` が単位元を保つこと・`A` の結合律・
+`A` の単位元は使わない（人手の帰納法は `P_1 := E_1` から始まり、空の積 `P_0` を置かないため）。
+添字の**順序**（`Fin n` の `≤`）は使う: 人手の `P_s` は左から順に掛けた積で、第 `1` から第 `s` 因子という並びを使うからである。 -/
+theorem prefixProduct_eq_and_mem (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup A) (x : ∀ i, N i)
+    (hE : ∀ k, φ (Pi.mulSingle k (x k)) ∈ S) :
+    ∀ (s : ℕ) (h : s < n),
+      prefixProduct φ x s h = φ (fun i => if (i : ℕ) ≤ s then x i else 1)
+        ∧ prefixProduct φ x s h ∈ S
+  | 0, h => by
+    refine ⟨?_, hE _⟩
+    calc prefixProduct φ x 0 h
+        = φ (Pi.mulSingle ⟨0, h⟩ (x ⟨0, h⟩)) := rfl                    -- `P_1` の定義
+      _ = φ (fun i => if (i : ℕ) ≤ 0 then x i else 1) := by
+          congr 1                                                      -- `E_1` の定義（因子の並びの書き換え）
+          funext i
+          by_cases hi : (i : ℕ) = 0
+          · have he : i = ⟨0, h⟩ := Fin.ext hi
+            subst he
+            simp
+          · have hne : i ≠ ⟨0, h⟩ := fun he => hi (congrArg Fin.val he)
+            rw [Pi.mulSingle_eq_of_ne hne, if_neg (by omega)]
+  | s + 1, h => by
+    obtain ⟨ihEq, ihMem⟩ := prefixProduct_eq_and_mem φ S x hE s (Nat.lt_of_succ_lt h)
+    refine ⟨?_, ?_⟩
+    · calc prefixProduct φ x (s + 1) h
+          = prefixProduct φ x s (Nat.lt_of_succ_lt h) * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)) :=
+            rfl                                                        -- `P_{s+1}` の定義
+        _ = φ (fun i => if (i : ℕ) ≤ s then x i else 1)
+              * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)) := by
+            rw [ihEq]                                                  -- 帰納法の仮定（`E_{s+1}` の定義は `φ (mulSingle …)` そのもの）
+        _ = φ (fun i => if (i : ℕ) ≤ s then x i * 1
+              else if (i : ℕ) = s + 1 then 1 * x i else 1 * 1) := by
+            rw [← map_mul]                                             -- `φ` は積を保つ（具体版の `kronecker_product_rule` (1)）
+            congr 1
+            funext i
+            simp only [Pi.mul_apply]
+            by_cases hi : (i : ℕ) ≤ s
+            · have hne : i ≠ ⟨s + 1, h⟩ := fun he => by
+                have := congrArg Fin.val he; simp at this; omega
+              rw [if_pos hi, if_pos hi, Pi.mulSingle_eq_of_ne hne]
+            · by_cases hs : (i : ℕ) = s + 1
+              · have he : i = ⟨s + 1, h⟩ := Fin.ext hs
+                subst he
+                rw [if_neg hi, if_neg hi, if_pos hs, Pi.mulSingle_eq_same]
+              · have hne : i ≠ ⟨s + 1, h⟩ := fun he => hs (congrArg Fin.val he)
+                rw [if_neg hi, if_neg hi, if_neg hs, Pi.mulSingle_eq_of_ne hne]
+        _ = φ (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then 1 * x i else 1 * 1) := by
+            congr 1
+            funext i
+            by_cases hi : (i : ℕ) ≤ s
+            · rw [if_pos hi, if_pos hi, mul_one]                       -- 右単位を第 1 から第 `s` 因子へ同時に適用
+            · rw [if_neg hi, if_neg hi]
+        _ = φ (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then x i else 1 * 1) := by
+            congr 1
+            funext i
+            by_cases hs : (i : ℕ) = s + 1
+            · rw [if_pos hs, if_pos hs, one_mul]                       -- 左単位（`e_{s+1}`）
+            · rw [if_neg hs, if_neg hs]
+        _ = φ (fun i => if (i : ℕ) ≤ s then x i
+              else if (i : ℕ) = s + 1 then x i else 1) := by
+            congr 1
+            funext i
+            by_cases hi : (i : ℕ) ≤ s
+            · rw [if_pos hi, if_pos hi]
+            · by_cases hs : (i : ℕ) = s + 1
+              · rw [if_neg hi, if_neg hi, if_pos hs, if_pos hs]
+              · rw [if_neg hi, if_neg hi, if_neg hs, if_neg hs, one_mul]
+                                                                       -- 左単位（`1`）を第 `s+2` 以降の因子へ同時に適用
+        _ = φ (fun i => if (i : ℕ) ≤ s + 1 then x i else 1) := by
+            congr 1                                                    -- 因子の並びの書き換え（`if` の書き方の違いだけ）
+            funext i
+            by_cases hi : (i : ℕ) ≤ s
+            · rw [if_pos hi, if_pos (by omega)]
+            · by_cases hs : (i : ℕ) = s + 1
+              · rw [if_neg hi, if_pos hs, if_pos (by omega)]
+              · rw [if_neg hi, if_neg hs, if_neg (by omega)]
+    · exact mul_mem ihMem (hE _)                                       -- 帰納法の仮定・`E_{s+1} ∈ S`・`S` は積で閉じる
 
-効いているのは **`φ` がモノイド準同型であること**だけである。
-サイトのモノイド `N i` はサイトごとに違ってよく、`A` は非可換でよい。 -/
-theorem map_mem_of_mulSingle_mem (φ : (∀ i, N i) →* A) (S : Submonoid A) (x : ∀ i, N i)
-    (h : ∀ k, φ (Pi.mulSingle k (x k)) ∈ S) : φ x ∈ S := by
-  have key : ∀ s : Finset ι, φ (s.piecewise x 1) ∈ S := by
-    intro s
-    induction s using Finset.induction_on with
-    | empty =>
-        rw [Finset.piecewise_empty, map_one]
-        exact one_mem S
-    | @insert k s hk ih =>
-        rw [piecewise_insert_eq_mulSingle_mul x hk, map_mul]
-        exact mul_mem (h k) ih
-  have huniv := key Finset.univ
-  rwa [Finset.piecewise_univ] at huniv
+/-- **原文 Step 3 後半の結論（必要十分版）**: `0 < n` のとき、積を保つ写像 `φ` が「1 サイトだけ動かした族」
+`mulSingle k (x k)` をすべて部分半群 `S` へ送るなら、任意の族 `x` について `φ x ∈ S`。
+`prefixProduct_eq_and_mem` を人手の `s = n`（Lean の `n - 1`）で使う。
 
-/-- 部分多元環版（`Subalgebra` は部分モノイドでもあるので、そのまま移す）。 -/
-theorem map_mem_subalgebra_of_mulSingle_mem {R B : Type*} [CommSemiring R] [Semiring B]
-    [Algebra R B] {M : ι → Type*} [∀ i, Monoid (M i)]
-    (φ : (∀ i, M i) →* B) (S : Subalgebra R B) (x : ∀ i, M i)
-    (h : ∀ k, φ (Pi.mulSingle k (x k)) ∈ S) : φ x ∈ S :=
-  map_mem_of_mulSingle_mem φ S.toSubmonoid x h
+`0 < n` は削れない: 人手の帰納法は `P_1 := E_1` から始まるので、因子が 1 つも無いと始められない
+（`n = 0` で結論を得るには `φ 1 ∈ S` が別に要る。例えば `φ` が単位元を保ち `S` が単位元を含めば足りる。
+具体版はこの場合を `siteProd_one` と (ii) で別に閉じている）。 -/
+theorem map_mem_of_mulSingle_mem (hn : 0 < n) (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup A)
+    (x : ∀ i, N i) (h : ∀ k, φ (Pi.mulSingle k (x k)) ∈ S) : φ x ∈ S := by
+  obtain ⟨hform, hmem⟩ := prefixProduct_eq_and_mem φ S x h (n - 1) (by omega)
+  have hall : (fun i : Fin n => if (i : ℕ) ≤ n - 1 then x i else 1) = x := by
+    funext i
+    rw [if_pos (by omega)]
+  rw [hform, hall] at hmem
+  exact hmem
 
 end SiteProduct
 

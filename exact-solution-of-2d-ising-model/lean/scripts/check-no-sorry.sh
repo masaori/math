@@ -223,11 +223,12 @@ targets=(
   Ising2D.pauliBasis
   Ising2D.coe_pauliBasis
   Ising2D.siteOp_pauliFamily_mem_adjoin
+  Ising2D.siteFactorPrefixProduct_eq_and_mem
   Ising2D.siteProd_mem
   Ising2D.Z_Y_generate_algebra
   Ising2D.NecSuf.eq_top_of_span_eq_top
   Ising2D.NecSuf.map_mem_of_mulSingle_mem
-  Ising2D.NecSuf.map_mem_subalgebra_of_mulSingle_mem
+  Ising2D.NecSuf.prefixProduct_eq_and_mem
   Ising2D.NecSuf.string_mem
   Ising2D.NecSuf.local_mem
   Ising2D.xString_mem_adjoin_of_necSuf

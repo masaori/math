@@ -755,6 +755,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.pauliBasis` | `𝓑 = {I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底（張ることは `top_le_span_pauliFamily`、次元 4 は `finrank_mat2_eq_four`） | `<Z_Y_generate_algebra>` Step 3 前半の結び |
 | `Ising2D.kroneckerTensorPowBasisOf` | `Mat(2,ℂ)` の基底 `b` のクロネッカー積 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M` の基底（mathlib の `Basis.piTensorProduct` を移したもので、人手 Step 4 と 1 対 1 でない） | `<tensor_basis>` (2) |
 | `Ising2D.siteOp_pauliFamily_mem_adjoin` | 各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（`e_k ∈ 𝓑`）は `𝒜` に属する | `<Z_Y_generate_algebra>` Step 3 後半 |
+| `Ising2D.siteFactorPrefixProduct` / `siteFactorPrefixProduct_eq_and_mem` / `siteProd_mem` | `P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法で `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`、`s = M_col` で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`（必要十分版は `NecSuf.prefixProduct_eq_and_mem`・`NecSuf.map_mem_of_mulSingle_mem`） | `<Z_Y_generate_algebra>` Step 3 後半 |
 | `Ising2D.Z_Y_generate_algebra` | `Algebra.adjoin ℂ {Z_m, Y_m} = ⊤` | `<Z_Y_generate_algebra>` |
 | `Ising2D.acomm_sum_smul` / `acomm_sum_smul_left` | 反交換子の双線型性（有限線型結合の展開） | 補助（原文は暗黙に使用） |
 | `Ising2D.ZY_linearIndependent` | `(Z_1,…,Z_M,Y_1,…,Y_M)` は線型独立 | `004/001`（**原文は TODO**） |

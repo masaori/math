@@ -24,26 +24,26 @@
 **効いているのは「部分多元環は部分加群でもある」ことだけ**である。
 導出では `s` を `𝓑^{⊠M}` の元の集合とし、全体を張ることを `Basis.span_eq` で渡す。
 
-### (b) 「サイトごとの元の積は部分モノイドに属する」 — `NecSuf.map_mem_of_mulSingle_mem`
+### (b) 「サイトごとの元の積は部分半群に属する」 — `NecSuf.prefixProduct_eq_and_mem`・`NecSuf.map_mem_of_mulSingle_mem`
 
-仮定は
+人手 Step 3 後半の `P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法（`P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`）を、
+具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem` と同じ段の並びで回す。仮定は
 
-* 添字型 `ι` が有限で等号判定可能、
-* 各サイトのモノイド `N i`（サイトごとに違ってよい）、
-* 目標のモノイド `A`（可換性は不要）、
-* **モノイド準同型** `φ : (∀ i, N i) →* A`、
-* 部分モノイド `S` と、各 `k` について `φ (Pi.mulSingle k (x k)) ∈ S`
+* 添字は `Fin n` で `0 < n`（`P_1` から始めるため。`n = 0` では帰納法を始められない）、
+* 各サイトの `N i` は `MulOneClass`（単位元が両側の単位元であること。サイトごとに違ってよい）、
+* 目標の `A` は積を持つだけ（結合律も単位元も不要）、
+* **積を保つ写像** `φ : (∀ i, N i) →ₙ* A`、
+* 部分半群 `S` と、各 `k` について `φ (Pi.mulSingle k (x k)) ∈ S`
 
-だけ。証明は `x = Finset.univ.piecewise x 1` と有限集合の帰納法である。
+だけ。
 
-**効いているのは `φ` が単位元と積を保つことだけ**で、クロネッカー積の成分公式
-（`siteProd_apply`）も、異サイト可換性（`siteOp_mul_comm`）も使っていない。
-具体版 `Ising2D.siteProd_mem` は同じ帰納法を `TensorPow M` の中で直接回しているが、
-その帰納法は行列の性質を一切参照していなかった、ということが必要十分版で確認できた。
+**効いているのは `φ` が積を保つこと（具体版の `kronecker_product_rule` (1)）と、各サイトの単位元の両側の単位律だけ**で、
+クロネッカー積の成分公式（`siteProd_apply`）も、異サイト可換性（`siteOp_mul_comm`）も、`φ` が単位元を保つことも使っていない。
+具体版の帰納法は行列の性質を一段の 6 行（`kronecker_product_rule` (1)・右単位・左単位 2 回）でしか参照していなかった、
+ということが必要十分版で確認できた。
 
-サイト間の可換性が要らない理由も必要十分版から読める。分解 `x = ∏_k mulSingle k (x k)` は
-**直積モノイドの中の等式**であり、`mulSingle` 同士は台が交わらないので順序に依らない。
-`A` 側での可換性はどこにも要求されない。
+添字の順序は使う。人手の `P_s` が第 `1` から第 `s` 因子を左から順に掛けた積だからである。
+主張だけなら任意の有限添字で成り立つ（有限集合の帰納法）が、それは人手と別の手順なので置かない。
 
 ### (c) Step 2（Jordan–Wigner 文字列の帰納法） — `NecSuf.string_mem` / `NecSuf.local_mem`
 
@@ -85,14 +85,15 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
    `Mat(2^M, ℂ)` の基底であること（`Ising2D.kroneckerTensorPowBasisOf`）。必要十分版へ渡すのは、その族が全体を張ることだけである。
    `pauliBasis` が張ることには **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
    `kroneckerTensorPowBasisOf` は `Mat(2, ℂ)` の任意の基底で成り立つ。
-2. **`Ising2D.siteProdHom`**: `siteProd` を `MonoidHom` として束ねたもの。
-   材料は既存の `siteProd_one` と `siteProd_mul` だけ。
+2. **`Ising2D.siteProdHom`**: `siteProd` を積を保つ写像（`MulHom`）として束ねたもの。
+   材料は既存の `siteProd_mul` だけ。`M = 0`（人手に現れない場合）は必要十分版の `0 < n` を満たさないので、
+   導出の `siteProd_mem_of_necSuf` は具体版と同じく `siteProd_one` と (ii) で別に閉じる。
 3. **`Ising2D.siteOp_pauliFamily_mem_adjoin_of_necSuf`**: 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること。
    `e_k = I` なら `siteOp_one`、`e_k = σ^x, σ^y, σ^z` なら Step 2 の必要十分版の結論。
 
 言い換えると、原文の証明のうち **複素 2×2 行列に依存しているのは「1 サイトの基底の取り方」と
 「その基底のクロネッカー積が基底であること」だけ**であり、Step 2 の帰納法と Step 3 の
-「基底を含むから全体」「単項テンソルは積で作れる」はいずれも一般論である。
+「基底を含むから全体」「`e_1 ⊠ ⋯ ⊠ e_M` は `E_k` の積で作れる」はいずれも一般論である。
 
 ---
 
@@ -109,8 +110,8 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
   使うのは、その族が全体を**張る**ことだけである。人手 Step 3 の「基底である」も、結論には「張る」で足りる。
 
 * 具体版 `Ising2D.siteProd_mem` は `Subalgebra ℂ (TensorPow M)` を相手にしているが、
-  必要十分版 `NecSuf.map_mem_of_mulSingle_mem` は**部分モノイド**で足りる
-  （加法もスカラー倍も不要）。
+  必要十分版 `NecSuf.map_mem_of_mulSingle_mem` は**部分半群**で足りる
+  （加法もスカラー倍も単位元も不要）。
 * 具体版 Step 2 は `xString_mul_self`（`P_m P_m = I`）を帰納法の中で使う形に見えるが、
   実際には分解 `σ^z_m = P_m Z_m` を作る前処理でしか使っておらず、
   帰納法本体は対合性なしで回る。
@@ -150,8 +151,9 @@ Step 2 の必要十分版（`string_mem` / `local_mem`）が**公理に一切依
 上の「Step 2 に効いているのは漸化式と分解の形だけ」という主張の独立した裏づけになる
 （選択公理も命題外延性も使わずに証明が閉じている）。
 `map_mem_of_mulSingle_mem` が `Classical.choice` を使わないことも同様で、
-有限集合の帰納法と準同型性だけで閉じていることを示している。
+`P_s` の帰納法と、`φ` が積を保つことだけで閉じていることを示している
+（`map_mem_of_mulSingle_mem` の行は 2026-11-12 に `P_s` の帰納法へ書き直した後に確かめた出力）。
 
 `scripts/check-no-sorry.sh` の `targets` には本作業で追加した主要宣言
-（`NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.map_mem_of_mulSingle_mem`,
+（`NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.prefixProduct_eq_and_mem`, `NecSuf.map_mem_of_mulSingle_mem`,
 `NecSuf.eq_top_of_span_eq_top`, `Ising2D.Z_Y_generate_algebra_of_necSuf` ほか）を登録済み。

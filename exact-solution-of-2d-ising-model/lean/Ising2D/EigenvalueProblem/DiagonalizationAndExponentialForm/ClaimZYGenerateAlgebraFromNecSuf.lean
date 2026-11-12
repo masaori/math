@@ -9,7 +9,7 @@
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
 | **具体版** | `Ising2D.Z_Y_generate_algebra`（`ClaimZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
-| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、有限添字の直積モノイド、全体を張る集合 |
+| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、`Fin n` 添字の直積への積を保つ写像（`0 < n`）、全体を張る集合 |
 
 本ファイルは、同じ結論 `Algebra.adjoin ℂ (ZYSet M) = ⊤` を
 **必要十分版だけを論法として使って**導き直す（`Z_Y_generate_algebra_of_necSuf`）。
@@ -24,8 +24,10 @@
    `TheoremTensorBasisFromNecSuf.lean`）: `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` の基底であること
    （原文 Step 3 前半の成分比較 `matrix_two_decomp` と `dim Mat(2,ℂ) = 4`）と、
    `<tensor_basis>` (2) を `𝓑` に適用した `𝓑^{⊠M}` が `Mat(2^M, ℂ)` の基底であること。
-2. `siteProdHom`: クロネッカー積 `siteProd` がモノイド準同型であること
-   （`siteProd_one` と `siteProd_mul` を束ねただけ）。
+2. `siteProdHom`: クロネッカー積 `siteProd` が積を保つこと（`siteProd_mul`。`kronecker_product_rule` (1)）。
+   必要十分版の帰納法は `P_1 := E_1` から始まるので `siteProd_one` は要らない。
+   ただし `M = 0`（人手に現れない場合）は必要十分版の `0 < n` を満たさないので、具体版と同じく
+   `siteProd_one` と (ii) で別に閉じる。
 3. 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること: `e_k = I` なら `siteOp_one`、
    `e_k = σ^x, σ^y, σ^z` なら `σ_k^x, σ_k^y, σ_k^z` の定義と、Step 2 の必要十分版の結論。
 
@@ -126,33 +128,38 @@ theorem siteOp_pauliFamily_mem_adjoin_of_necSuf (k : Fin M) (j : Fin 4) :
 
 /-! ## Step 3 後半: サイトごとの積 -/
 
-/-- クロネッカー積 `siteProd` をモノイド準同型として束ねたもの。
-必要十分版 `NecSuf.map_mem_of_mulSingle_mem` へ渡すのはこの準同型性だけである。 -/
+/-- クロネッカー積 `siteProd` を積を保つ写像として束ねたもの（`kronecker_product_rule` (1)）。
+必要十分版 `NecSuf.map_mem_of_mulSingle_mem` へ渡すのはこの性質だけである。 -/
 noncomputable def siteProdHom (M : ℕ) :
-    (Fin M → Matrix (Fin 2) (Fin 2) ℂ) →* TensorPow M where
+    (Fin M → Matrix (Fin 2) (Fin 2) ℂ) →ₙ* TensorPow M where
   toFun := siteProd M
-  map_one' := siteProd_one M
   map_mul' := siteProd_mul M
 
 @[simp]
 theorem siteProdHom_apply (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
     siteProdHom M x = siteProd M x := rfl
 
-/-- 「1 サイトだけ動かした族」を送ると、そのサイトのサイト作用素になる。 -/
+/-- 「1 サイトだけ動かした族」を送ると、そのサイトのサイト作用素になる（`E_k` の定義）。 -/
 theorem siteProdHom_mulSingle (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
     siteProdHom M (Pi.mulSingle k A) = siteOp k A := by
   rw [siteProdHom_apply, siteOp_apply]
   rfl
 
 /-- **必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の特殊化**:
-クロネッカー積 `A_1 ⊠ ⋯ ⊠ A_M` は、各因子をサイト作用素として含む部分多元環に属する
-（具体版の `Ising2D.siteProd_mem` と同じ主張。帰納法は必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の中にある）。 -/
+クロネッカー積 `e_1 ⊠ ⋯ ⊠ e_M` は、各 `E_k` を含む部分多元環に属する
+（具体版の `Ising2D.siteProd_mem` と同じ主張。`P_s` の帰納法は必要十分版 `NecSuf.prefixProduct_eq_and_mem` の中にある）。
+`M = 0` は具体版の `siteProd_mem` と同じく `siteProd_one` と (ii) で閉じる（人手に現れない場合）。 -/
 theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (h : ∀ k, siteOp k (x k) ∈ A) :
     siteProd M x ∈ A := by
-  have := NecSuf.map_mem_subalgebra_of_mulSingle_mem (siteProdHom M) A x
-    (fun k => by rw [siteProdHom_mulSingle]; exact h k)
-  rwa [siteProdHom_apply] at this
+  rcases Nat.eq_zero_or_pos M with hM | hM
+  · subst hM
+    have hx : x = 1 := funext fun i => i.elim0
+    rw [hx, siteProd_one]
+    exact one_mem A
+  · have := NecSuf.map_mem_of_mulSingle_mem hM (siteProdHom M) A.toSubmonoid.toSubsemigroup x
+      (fun k => by rw [siteProdHom_mulSingle]; exact h k)
+    rwa [siteProdHom_apply] at this
 
 /-! ## 結論 -/
 
