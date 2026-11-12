@@ -3609,17 +3609,284 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         math(String.raw`\mathcal{B}`),
         " が ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " を張ることを導いている。",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{B}`),
-        "（",
-        ref("tensor_basis"),
-        " (1) の ",
-        math(String.raw`M=1`),
-        "）なので、",
-        ref("tensor_basis"),
-        " の証明の Step 3 (b) により ",
+        " を張ることを導いている。次に ",
         math(String.raw`\mathcal{B}`),
-        " は基底である。以下",
+        " が線型独立であること、すなわち ",
+        math(String.raw`c_0,c_x,c_y,c_z\in\mathbb{C}`),
+        " が ",
+        math(String.raw`c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z = O`),
+        "（",
+        math(String.raw`O\in\mathrm{Mat}(2,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列。左辺の和は左から結ぶ）を満たすならば ",
+        math(String.raw`c_0=c_x=c_y=c_z=0_{\mathbb{C}}`),
+        " であることを、成分の比較で示す。左辺を ",
+        math(String.raw`L := c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z`),
+        " とおく。準備 (a)・(c)・(d)・(e)・(g) は ",
+        ref("Z_Y_generate_algebra"),
+        " の証明で置いたもの（(a) ",
+        math(String.raw`(2_{\mathbb{C}}z)\,2_{\mathbb{C}}^{-1}=z`),
+        "、(c) ",
+        math(String.raw`z+(-z)=0_{\mathbb{C}}`),
+        "、(d) ",
+        math(String.raw`(z+w)+(z-w)=2_{\mathbb{C}}z`),
+        "、(e) ",
+        math(String.raw`(z+w)-(z-w)=2_{\mathbb{C}}w`),
+        "、(g) ",
+        math(String.raw`(-i)\,i=1_{\mathbb{C}}`),
+        "。",
+        math(String.raw`z,w\in\mathbb{C}`),
+        "）であり、体の公理（積の可換律・結合律・単位元、加法の単位元）は ",
+        ref("complex_numbers_form_a_field"),
+        " のものである。Pauli 行列の成分の行は ",
+        ref("pauli_matrix_products"),
+        " で定めた ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
+        " の成分であり、成分の ",
+        math(String.raw`0, 1, -1`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}, 1_{\mathbb{C}}, -1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`-z`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`(-1_{\mathbb{C}})z`),
+        "、差は ",
+        ref("def_complex_difference"),
+        " の差である。まず ",
+        math(String.raw`L`),
+        " の 4 つの成分を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_{11}
+&= \bigl(c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z\bigr)_{11}
+&&(\because\ L\ \text{の定義})\\
+&= \bigl(((c_0 I)_{11} + (c_x\sigma^x)_{11}) + (c_y\sigma^y)_{11}\bigr) + (c_z\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((c_0 I_{11} + c_x(\sigma^x)_{11}) + c_y(\sigma^y)_{11}\bigr) + c_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((c_0 \delta_{11} + c_x(\sigma^x)_{11}) + c_y(\sigma^y)_{11}\bigr) + c_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((c_0 1_{\mathbb{C}} + c_x(\sigma^x)_{11}) + c_y(\sigma^y)_{11}\bigr) + c_z(\sigma^z)_{11}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((c_0 1_{\mathbb{C}} + c_x 0_{\mathbb{C}}) + c_y 0_{\mathbb{C}}\bigr) + c_z 1_{\mathbb{C}}
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
+&= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= c_0 1_{\mathbb{C}} + c_z 1_{\mathbb{C}}
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= c_0 + c_z
+&&(\because\ \text{積の単位元を 2 か所へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+L_{12}
+&= \bigl(c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z\bigr)_{12}
+&&(\because\ L\ \text{の定義})\\
+&= \bigl(((c_0 I)_{12} + (c_x\sigma^x)_{12}) + (c_y\sigma^y)_{12}\bigr) + (c_z\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((c_0 I_{12} + c_x(\sigma^x)_{12}) + c_y(\sigma^y)_{12}\bigr) + c_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((c_0 \delta_{12} + c_x(\sigma^x)_{12}) + c_y(\sigma^y)_{12}\bigr) + c_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((c_0 0_{\mathbb{C}} + c_x(\sigma^x)_{12}) + c_y(\sigma^y)_{12}\bigr) + c_z(\sigma^z)_{12}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((c_0 0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y(-i)\bigr) + c_z 0_{\mathbb{C}}
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
+&= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y(-i)\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= c_x 1_{\mathbb{C}} + c_y(-i)
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= c_x + c_y(-i)
+&&(\because\ \text{積の単位元})\\
+&= c_x + (-i)c_y
+&&(\because\ \text{積の可換律})\\
+&= c_x + \bigl(-(ic_y)\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to c_y)\bigr)\\
+&= c_x - ic_y
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+L_{21}
+&= \bigl(c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z\bigr)_{21}
+&&(\because\ L\ \text{の定義})\\
+&= \bigl(((c_0 I)_{21} + (c_x\sigma^x)_{21}) + (c_y\sigma^y)_{21}\bigr) + (c_z\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((c_0 I_{21} + c_x(\sigma^x)_{21}) + c_y(\sigma^y)_{21}\bigr) + c_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((c_0 \delta_{21} + c_x(\sigma^x)_{21}) + c_y(\sigma^y)_{21}\bigr) + c_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((c_0 0_{\mathbb{C}} + c_x(\sigma^x)_{21}) + c_y(\sigma^y)_{21}\bigr) + c_z(\sigma^z)_{21}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((c_0 0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y i\bigr) + c_z 0_{\mathbb{C}}
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
+&= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y i\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= c_x 1_{\mathbb{C}} + c_y i
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= c_x + c_y i
+&&(\because\ \text{積の単位元})\\
+&= c_x + ic_y
+&&(\because\ \text{積の可換律})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+L_{22}
+&= \bigl(c_0 I + c_x\sigma^x + c_y\sigma^y + c_z\sigma^z\bigr)_{22}
+&&(\because\ L\ \text{の定義})\\
+&= \bigl(((c_0 I)_{22} + (c_x\sigma^x)_{22}) + (c_y\sigma^y)_{22}\bigr) + (c_z\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を 3 か所へ}\bigr)\\
+&= \bigl((c_0 I_{22} + c_x(\sigma^x)_{22}) + c_y(\sigma^y)_{22}\bigr) + c_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 か所へ}\bigr)\\
+&= \bigl((c_0 \delta_{22} + c_x(\sigma^x)_{22}) + c_y(\sigma^y)_{22}\bigr) + c_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)\\
+&= \bigl((c_0 1_{\mathbb{C}} + c_x(\sigma^x)_{22}) + c_y(\sigma^y)_{22}\bigr) + c_z(\sigma^z)_{22}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \bigl((c_0 1_{\mathbb{C}} + c_x 0_{\mathbb{C}}) + c_y 0_{\mathbb{C}}\bigr) + c_z(-1_{\mathbb{C}})
+&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
+&= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= c_0 1_{\mathbb{C}} + c_z(-1_{\mathbb{C}})
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&= c_0 + c_z(-1_{\mathbb{C}})
+&&(\because\ \text{積の単位元})\\
+&= c_0 + (-1_{\mathbb{C}})c_z
+&&(\because\ \text{積の可換律})\\
+&= c_0 + (-c_z)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to c_z)\ \text{を右辺から左辺へ}\bigr)\\
+&= c_0 - c_z
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`L = O`),
+        " と上の 4 本の鎖から、次の (p)〜(s) を得る。",
+      ]),
+      displayMath(String.raw`\text{(p)}\quad \begin{aligned}
+c_0 + c_z
+&= L_{11}
+&&(\because\ L_{11}\ \text{の鎖を右辺から左辺へ})\\
+&= O_{11}
+&&(\because\ L = O)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(q)}\quad \begin{aligned}
+c_x - ic_y
+&= L_{12}
+&&(\because\ L_{12}\ \text{の鎖を右辺から左辺へ})\\
+&= O_{12}
+&&(\because\ L = O)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(r)}\quad \begin{aligned}
+c_x + ic_y
+&= L_{21}
+&&(\because\ L_{21}\ \text{の鎖を右辺から左辺へ})\\
+&= O_{21}
+&&(\because\ L = O)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\text{(s)}\quad \begin{aligned}
+c_0 - c_z
+&= L_{22}
+&&(\because\ L_{22}\ \text{の鎖を右辺から左辺へ})\\
+&= O_{22}
+&&(\because\ L = O)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["これらから 4 つの係数が零であることを導く。"]),
+      displayMath(String.raw`\begin{aligned}
+c_0
+&= (2_{\mathbb{C}}c_0)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(a)}\ (z \to c_0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((c_0 + c_z) + (c_0 - c_z)\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(d)}\ (z \to c_0,\ w \to c_z)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0_{\mathbb{C}} + (c_0 - c_z)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(p)})\\
+&= (0_{\mathbb{C}} + 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(s)})\\
+&= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{加法の単位元})\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_z
+&= (2_{\mathbb{C}}c_z)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(a)}\ (z \to c_z)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((c_0 + c_z) - (c_0 - c_z)\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(e)}\ (z \to c_0,\ w \to c_z)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0_{\mathbb{C}} - (c_0 - c_z)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(p)})\\
+&= (0_{\mathbb{C}} - 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(s)})\\
+&= \bigl(0_{\mathbb{C}} + (-0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(c)}\ (z \to 0_{\mathbb{C}})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_x
+&= (2_{\mathbb{C}}c_x)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(a)}\ (z \to c_x)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((c_x + ic_y) + (c_x - ic_y)\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(d)}\ (z \to c_x,\ w \to ic_y)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0_{\mathbb{C}} + (c_x - ic_y)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(r)})\\
+&= (0_{\mathbb{C}} + 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(q)})\\
+&= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{加法の単位元})\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+ic_y
+&= \bigl(2_{\mathbb{C}}(ic_y)\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(a)}\ (z \to ic_y)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((c_x + ic_y) - (c_x - ic_y)\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(e)}\ (z \to c_x,\ w \to ic_y)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(0_{\mathbb{C}} - (c_x - ic_y)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(r)})\\
+&= (0_{\mathbb{C}} - 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&(\because\ \text{(q)})\\
+&= \bigl(0_{\mathbb{C}} + (-0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \text{(c)}\ (z \to 0_{\mathbb{C}})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_y
+&= 1_{\mathbb{C}}c_y
+&&(\because\ \text{積の単位元を右辺から左辺へ})\\
+&= \bigl((-i)\,i\bigr)c_y
+&&\bigl(\because\ \text{(g)}\ \text{を右辺から左辺へ}\bigr)\\
+&= (-i)(ic_y)
+&&(\because\ \text{積の結合律})\\
+&= (-i)\,0_{\mathbb{C}}
+&&(\because\ \text{上の}\ ic_y = 0_{\mathbb{C}})\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to -i)\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`\mathcal{B}`),
+        " は線型独立である。",
+        math(String.raw`\mathcal{B}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " を張り、かつ線型独立なので、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-基底である。以下",
       ]),
       displayMath(
         String.raw`e_1:=I,\quad e_2:=\sigma^x,\quad e_3:=\sigma^y,\quad e_4:=\sigma^z`,
@@ -3877,6 +4144,7 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
       status: "converted",
       notes: [
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 は Z_Y_generate_algebra の証明の Step 3 前半が「dim = 4 = #𝓑 より基底」を導いているとして引いていたが、Z_Y_generate_algebra は張ることだけで結ぶ形に直したので、張ることだけをそこから引き、dim_C Mat(2,C) = 4（tensor_basis (1) の M = 1）と tensor_basis の証明の Step 3 (b) で基底とする文をここへ移した（主張と論法は不変）。",
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 の「𝓑 は基底」は dim_C Mat(2,C) = 4 = #𝓑 と tensor_basis の証明の Step 3 (b) に依り、Step 3 (b) の前提の (a)「張る有限族の元数は次元以上」は本文で証明されていなかった。(a) を証明する代わりに、𝓑 の線型独立性を成分の比較で直接示す形にした: c_0 I + c_x σ^x + c_y σ^y + c_z σ^z = O の 4 成分を def_matrix_sum・def_matrix_scalar_multiple・def_identity_matrix・def_kronecker_delta・pauli_matrix_products の鎖で c_0 + c_z・c_x − ic_y・c_x + ic_y・c_0 − c_z と求め、def_zero_matrix で 0_C と置き、Z_Y_generate_algebra の準備 (a)・(c)・(d)・(e)・(g) で c_0 = c_z = c_x = ic_y = c_y = 0_C を導いた。(p)〜(s) は L_{ij} の鎖・L = O・def_zero_matrix の 3 行の鎖で書いた。張ることと合わせて基底とした。Step 2 の tensor_basis (2) は Step 3 (b) に依ったまま残る。主張は不変。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の proof は「TODO: 証明略」のみ。ここで証明を与えた。",
         "原文の statement は式のみで、どの体上・どの空間での線型独立かが書かれていなかったため、" +

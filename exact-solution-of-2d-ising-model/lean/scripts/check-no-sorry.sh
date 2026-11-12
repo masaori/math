@@ -271,6 +271,19 @@ targets=(
   Ising2D.ZY_injective
   Ising2D.ZYSet_eq_range
   Ising2D.ZYSet_linearIndepOn
+  Ising2D.pauliComb_apply_00
+  Ising2D.pauliComb_apply_01
+  Ising2D.pauliComb_apply_10
+  Ising2D.pauliComb_apply_11
+  Ising2D.pauliComb_eq_zero_equations
+  Ising2D.pauliComb_coeff_zero_eq_zero
+  Ising2D.pauliComb_coeff_z_eq_zero
+  Ising2D.pauliComb_coeff_x_eq_zero
+  Ising2D.pauliComb_coeff_I_mul_y_eq_zero
+  Ising2D.pauliComb_coeff_y_eq_zero
+  Ising2D.pauliComb_eq_zero_coeffs
+  Ising2D.pauliFamily_linearIndependent
+  Ising2D.pauliFamily_spans_and_linearIndependent
   Ising2D.expPhase_add
   Ising2D.expPhase_neg
   Ising2D.expPhase_natCast_mul

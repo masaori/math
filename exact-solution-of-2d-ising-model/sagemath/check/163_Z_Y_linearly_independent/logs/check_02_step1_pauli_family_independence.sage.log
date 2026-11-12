@@ -1,0 +1,128 @@
+PASS 引いた Pauli 行列は pauli_matrix_products の二乗の式を満たす
+PASS L の定義: 成分ごとの和・スカラー倍で組んだ L が Sage の行列演算と一致
+PASS L_11 第 1 行 = 第 2 行
+PASS L_11 第 2 行 = 第 3 行
+PASS L_11 第 3 行 = 第 4 行
+PASS L_11 第 4 行 = 第 5 行
+PASS L_11 第 5 行 = 第 6 行
+PASS L_11 第 6 行 = 第 7 行
+PASS L_11 第 7 行 = 第 8 行
+PASS L_11 第 8 行 = 第 9 行
+PASS L_12 第 1 行 = 第 2 行
+PASS L_12 第 2 行 = 第 3 行
+PASS L_12 第 3 行 = 第 4 行
+PASS L_12 第 4 行 = 第 5 行
+PASS L_12 第 5 行 = 第 6 行
+PASS L_12 第 6 行 = 第 7 行
+PASS L_12 第 7 行 = 第 8 行
+PASS L_12 第 8 行 = 第 9 行
+PASS L_12 第 9 行 = 第 10 行
+PASS L_12 第 10 行 = 第 11 行
+PASS L_12 第 11 行 = 第 12 行
+PASS L_21 第 1 行 = 第 2 行
+PASS L_21 第 2 行 = 第 3 行
+PASS L_21 第 3 行 = 第 4 行
+PASS L_21 第 4 行 = 第 5 行
+PASS L_21 第 5 行 = 第 6 行
+PASS L_21 第 6 行 = 第 7 行
+PASS L_21 第 7 行 = 第 8 行
+PASS L_21 第 8 行 = 第 9 行
+PASS L_21 第 9 行 = 第 10 行
+PASS L_22 第 1 行 = 第 2 行
+PASS L_22 第 2 行 = 第 3 行
+PASS L_22 第 3 行 = 第 4 行
+PASS L_22 第 4 行 = 第 5 行
+PASS L_22 第 5 行 = 第 6 行
+PASS L_22 第 6 行 = 第 7 行
+PASS L_22 第 7 行 = 第 8 行
+PASS L_22 第 8 行 = 第 9 行
+PASS L_22 第 9 行 = 第 10 行
+PASS L_22 第 10 行 = 第 11 行
+PASS L_22 第 11 行 = 第 12 行
+PASS 根拠の成分: (σ^y)_12 = -i、(σ^y)_21 = i、(σ^z)_22 = -1_C
+PASS 根拠: negative_i_times_complex_is_negation_of_i_times（z → c_y）
+PASS def_zero_matrix: O の 4 成分は 0_C
+PASS (p)〜(s) の係数行列は正則（解は零だけ）
+PASS (p)(q)(r)(s) の左辺は L_11, L_12, L_21, L_22
+PASS (p) の 1 行目 = 2 行目: L_ij の鎖を右辺から左辺へ
+PASS (p) の 3 行目: def_zero_matrix
+PASS (q) の 1 行目 = 2 行目: L_ij の鎖を右辺から左辺へ
+PASS (q) の 3 行目: def_zero_matrix
+PASS (r) の 1 行目 = 2 行目: L_ij の鎖を右辺から左辺へ
+PASS (r) の 3 行目: def_zero_matrix
+PASS (s) の 1 行目 = 2 行目: L_ij の鎖を右辺から左辺へ
+PASS (s) の 3 行目: def_zero_matrix
+PASS c_0 = 0_C（仮定の前） 第 1 行 = 第 2 行
+PASS c_0 = 0_C（仮定の前） 第 2 行 = 第 3 行
+PASS c_0 = 0_C: 仮定 (p) の左辺を 0_C に置く行
+PASS c_0 = 0_C: 否定の対照 (p) を (q) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (p) を (r) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (p) を (s) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (p) を (iy) に取り替えると移れない
+PASS c_0 = 0_C: 仮定 (s) の左辺を 0_C に置く行
+PASS c_0 = 0_C: 否定の対照 (s) を (p) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (s) を (q) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (s) を (r) に取り替えると移れない
+PASS c_0 = 0_C: 否定の対照 (s) を (iy) に取り替えると移れない
+PASS c_0 = 0_C（仮定の後） 第 1 行 = 第 2 行
+PASS c_0 = 0_C（仮定の後） 第 2 行 = 第 3 行
+PASS c_z = 0_C（仮定の前） 第 1 行 = 第 2 行
+PASS c_z = 0_C（仮定の前） 第 2 行 = 第 3 行
+PASS c_z = 0_C: 仮定 (p) の左辺を 0_C に置く行
+PASS c_z = 0_C: 否定の対照 (p) を (q) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (p) を (r) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (p) を (s) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (p) を (iy) に取り替えると移れない
+PASS c_z = 0_C: 仮定 (s) の左辺を 0_C に置く行
+PASS c_z = 0_C: 否定の対照 (s) を (p) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (s) を (q) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (s) を (r) に取り替えると移れない
+PASS c_z = 0_C: 否定の対照 (s) を (iy) に取り替えると移れない
+PASS c_z = 0_C（仮定の後） 第 1 行 = 第 2 行
+PASS c_z = 0_C（仮定の後） 第 2 行 = 第 3 行
+PASS c_z = 0_C（仮定の後） 第 3 行 = 第 4 行
+PASS c_x = 0_C（仮定の前） 第 1 行 = 第 2 行
+PASS c_x = 0_C（仮定の前） 第 2 行 = 第 3 行
+PASS c_x = 0_C: 仮定 (r) の左辺を 0_C に置く行
+PASS c_x = 0_C: 否定の対照 (r) を (p) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (r) を (q) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (r) を (s) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (r) を (iy) に取り替えると移れない
+PASS c_x = 0_C: 仮定 (q) の左辺を 0_C に置く行
+PASS c_x = 0_C: 否定の対照 (q) を (p) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (q) を (r) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (q) を (s) に取り替えると移れない
+PASS c_x = 0_C: 否定の対照 (q) を (iy) に取り替えると移れない
+PASS c_x = 0_C（仮定の後） 第 1 行 = 第 2 行
+PASS c_x = 0_C（仮定の後） 第 2 行 = 第 3 行
+PASS ic_y = 0_C（仮定の前） 第 1 行 = 第 2 行
+PASS ic_y = 0_C（仮定の前） 第 2 行 = 第 3 行
+PASS ic_y = 0_C: 仮定 (r) の左辺を 0_C に置く行
+PASS ic_y = 0_C: 否定の対照 (r) を (p) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (r) を (q) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (r) を (s) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (r) を (iy) に取り替えると移れない
+PASS ic_y = 0_C: 仮定 (q) の左辺を 0_C に置く行
+PASS ic_y = 0_C: 否定の対照 (q) を (p) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (q) を (r) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (q) を (s) に取り替えると移れない
+PASS ic_y = 0_C: 否定の対照 (q) を (iy) に取り替えると移れない
+PASS ic_y = 0_C（仮定の後） 第 1 行 = 第 2 行
+PASS ic_y = 0_C（仮定の後） 第 2 行 = 第 3 行
+PASS ic_y = 0_C（仮定の後） 第 3 行 = 第 4 行
+PASS c_y = 0_C（仮定の前） 第 1 行 = 第 2 行
+PASS c_y = 0_C（仮定の前） 第 2 行 = 第 3 行
+PASS c_y = 0_C（仮定の前） 第 3 行 = 第 4 行
+PASS c_y = 0_C: 仮定 (iy) の左辺を 0_C に置く行
+PASS c_y = 0_C: 否定の対照 (iy) を (p) に取り替えると移れない
+PASS c_y = 0_C: 否定の対照 (iy) を (q) に取り替えると移れない
+PASS c_y = 0_C: 否定の対照 (iy) を (r) に取り替えると移れない
+PASS c_y = 0_C: 否定の対照 (iy) を (s) に取り替えると移れない
+PASS c_y = 0_C（仮定の後） 第 1 行 = 第 2 行
+PASS 根拠 (g): (-i)i = 1_C
+PASS 否定の対照: L_12 の符号を + にすると成り立たない（(σ^y)_12 = -i）
+PASS 否定の対照: (σ^z)_22 を 1 と読むと L_22 は c_0 + c_z にならない
+PASS 否定の対照: c_z の鎖で (e) の代わりに (d) を使うと成り立たない
+PASS 否定の対照: (q) の -i を i と読み違えると係数行列は退化し、零以外の解が残る
+-- Z_Y_linearly_independent の Step 1 の鎖: 126/126 PASS
+RESULT: PASS
