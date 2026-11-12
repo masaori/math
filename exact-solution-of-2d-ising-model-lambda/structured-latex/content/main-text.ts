@@ -33937,28 +33937,28 @@ f
 &=\mathrm{ac}_{j}\Bigl(\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\Bigr)
 &&(\because\ g\ \text{の定め方})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_{j}\bigl(\widehat{\mathrm{ac}_k(f)}\,K_k(w)\bigr)
-&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数。有限和へ繰り返し当てる})\\
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数、有限和へ繰り返し当てる})\\
 &=\sum_{k=0}^{n}\ \sum_{i=0}^{j}\mathrm{ac}_{i}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)
-&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数。各項へ同時に当てる})\\
+&&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数、各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
 +\sum_{i=1}^{j}\mathrm{ac}_{i}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)\Bigr)
-&&(\because\ \text{有限和から}\ i=0\ \text{の項を分ける。各項へ同時に当てる})\\
+&&(\because\ \text{有限和から}\ i=0\ \text{の項を分ける、各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
 +\sum_{i=1}^{j}0\cdot\mathrm{ac}_{j-i}\bigl(K_k(w)\bigr)\Bigr)
-&&(\because\ 1\le i\ \text{の各項では}\ \blkref{def_qbar_constant_embedding}\ \text{の正次数の係数が零。各項へ同時に当てる})\\
+&&(\because\ 1\le i\ \text{の各項では}\ \blkref{def_qbar_constant_embedding}\ \text{の正次数の係数が零、各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\Bigl(\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
 +\sum_{i=1}^{j}0\Bigr)
-&&(\because\ \text{零を掛けると零。各項へ同時に当てる})\\
+&&(\because\ \text{零を掛けると零、各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_{0}\bigl(\widehat{\mathrm{ac}_k(f)}\bigr)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元。有限和の各項へ繰り返し当てる})\\
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元、有限和の各項へ繰り返し当てる})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot\mathrm{ac}_{j}\bigl(K_k(w)\bigr)
 &&(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \mathrm{ac}_{0}(\widehat{a})=a\ \text{を各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}\mathrm{ac}_k(f)\cdot 0
 &&(\because\ \text{各項で}\ k\le j\ \text{なので}\ \blkref{claim_qbar_pow_diff_sum_coeff_bound}\ \text{を各項へ同時に当てる})\\
 &=\sum_{k=0}^{n}0
-&&(\because\ \text{零を掛けると零。各項へ同時に当てる})\\
+&&(\because\ \text{零を掛けると零、各項へ同時に当てる})\\
 &=0
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元。有限和へ繰り返し当てる})
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元、有限和へ繰り返し当てる})
 \end{aligned}`),
                         paragraph([
                           "終点は主張の右辺である。この主張は、零でない多項式の相異なる根の個数を次数で抑える帰納法の一歩で、",
@@ -85710,6 +85710,12 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
                 habitat: "C",
                 realEscape: "代数的数の一意な二係数表示を実数の実現値へ送り、複素数の加法と比較する。",
                 verification: ["sagemath/check/complex-realization-preserves-addition"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_sum_decomposition",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_preserves_addition",
+                  "Ising2DLambda.NecSuf.RealEscape.complexRealization_preserves_addition_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_preserves_addition_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の ", math(String.raw`\xi,\eta\in\overline{\mathbb Q}`),
@@ -85744,6 +85750,9 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
 &=\bigl(\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(c)\bigr)
  +i\bigl(\rho_{R\to\mathbb R}(b)+\rho_{R\to\mathbb R}(d)\bigr)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\bigl(\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(c)\bigr)
+ +\bigl(i\rho_{R\to\mathbb R}(b)+i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \mathbb C\text{ の分配法則}\bigr)\\
 &=\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
  +\bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
 &&\bigl(\because\ \mathbb C\text{ の加法の結合法則と交換法則}\bigr)\\
