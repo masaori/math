@@ -2,6 +2,8 @@
 #   claim_sum_over_subsets_of_selected_products_is_product_of_sums, claim_decomposition_of_unity_in_split_clifford_algebra
 # クリフォード代数の中の等式を、準同型 Φ（Φ(a†_i)=c_i、Φ(a_i)=c_i^T）による行列の像で、整数行列の厳密計算で確かめる。像での確認であり、クリフォード代数の中の等式の証明ではない。
 # 一般の ℂ-代数についての主張（claim_sum_over_subsets_of_selected_products_is_product_of_sums）は、交換しない整数行列の族で確かめる。
+# 部分集合の 2 進の番号付け e_m は、本文の漸化式どおりの作り方と、S ↦ 1+Σ_{t∈S}2^{t-1} の逆写像を表から作る作り方の二つで作り、
+# 一致することを確かめてから使う。
 from itertools import combinations
 
 def power_set(M):
@@ -39,11 +41,30 @@ def setup(M):
     Pv = oprod([x[i] for i in range(1, M + 1)], I)                                # Φ(P)
     return P, c, ct, I, y, z, Ad, An, x, Pv
 
-def binary_numbering(m):           # def_binary_numbering_of_power_set（e_m(k) を k=1..2^m の順に並べた表）
+def two_pow(m):                    # def_binary_numbering_of_power_set の 2^0:=1、2^m:=2·2^{m-1}
+    return 1 if m == 0 else 2 * two_pow(m - 1)
+
+def e_by_recursion(m, k):          # def_binary_numbering_of_power_set の漸化式どおりの e_m(k)
     if m == 0:
-        return [frozenset()]
-    prev = binary_numbering(m - 1)
-    return prev + [S | {m} for S in prev]
+        assert k == 1
+        return frozenset()
+    h = two_pow(m - 1)
+    assert 1 <= k <= 2 * h
+    return e_by_recursion(m - 1, k) if k <= h else e_by_recursion(m - 1, k - h) | frozenset([m])
+
+def e_by_inverting_sum_of_powers(m):
+    # 漸化式とは別の作り方: 写像 S ↦ 1 + Σ_{t∈S} 2^{t-1}（P_m → {1..2^m}）を表に作り、全単射であることを確かめて逆写像の表を返す
+    code = {S: 1 + sum(2 ** (t - 1) for t in S) for S in power_set(m)}
+    assert sorted(code.values()) == list(range(1, 2 ** m + 1))
+    inv = {k: S for S, k in code.items()}
+    return [inv[k] for k in range(1, 2 ** m + 1)]
+
+def binary_numbering(m):           # e_m(k) を k=1..2^m の順に並べた表（二つの作り方が一致することを確かめてから返す）
+    by_recursion = [e_by_recursion(m, k) for k in range(1, two_pow(m) + 1)]
+    by_inverse = e_by_inverting_sum_of_powers(m)
+    assert two_pow(m) == 2 ** m
+    assert by_recursion == by_inverse
+    return by_recursion
 
 def expansion_holds(M, g, h, I):   # claim_sum_over_subsets_of_selected_products_is_product_of_sums の各 m
     for m in range(0, M + 1):
@@ -80,6 +101,9 @@ for M in range(1, 4):
         assert ct[i] * c[i] + c[i] * ct[i] == I                                         # 準備（ハ）
     total = sum(((Ad(S) * Pv) * An(S) for S in P), 0 * I)
     assert total == I                                                                    # 主張の像
+    eM = binary_numbering(M)
+    total_by_numbering = sum(((Ad(eM[k]) * Pv) * An(eM[k]) for k in range(2 ** M)), 0 * I)
+    assert total_by_numbering == I                                                       # 番号付け e_M の順に足しても同じ
     assert sum((Ad(S) * An(S) for S in P), 0 * I) != I                                   # 否定コントロール: P を抜くと 1 にならない
     # 一般の ℂ-代数の主張: 交換しない整数行列 3×3 の族
     set_random_seed(20261112 + M)

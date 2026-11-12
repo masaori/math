@@ -2,6 +2,7 @@
 #   claim_vacuum_sandwich_vanishes_when_last_number_is_in_exactly_one_subset, claim_vacuum_sandwich_when_last_number_is_in_neither_subset,
 #   claim_vacuum_sandwich_when_last_number_is_in_both_subsets, claim_vacuum_sandwich_of_agreeing_initial_parts_is_initial_vacuum_part,
 #   claim_vacuum_sandwich_of_disagreeing_initial_parts_is_zero, claim_vacuum_element_sandwich_of_annihilation_and_creation_products
+# 主張が自明に（両辺が零で）通っていないことを、両辺が零でない件・挟む前は零でないのに挟むと零になる件を数え、正であることで確かめる。
 # クリフォード代数の中の等式を、準同型 Φ（Φ(a†_i)=c_i、Φ(a_i)=c_i^T）による行列の像で、整数行列の厳密計算で確かめる。像での確認であり、クリフォード代数の中の等式の証明ではない。
 from itertools import combinations
 
@@ -48,6 +49,9 @@ for M in range(1, 4):
     P_le = lambda m: oprod([x[i] for i in range(1, m + 1)], I)                  # Φ(P_{≤m})
     Q = lambda T, U, m: (P_le(m) * (An_le(T, m) * Ad_le(U, m))) * P_le(m)       # Φ(Q^{T,U}_m)
     count = 0
+    nontriv = {"一致して Q が零でない": 0, "一致せず a_{T,≤m}a†_{U,≤m} が零でないのに Q が零": 0,
+               "両方に入り両辺が零でない": 0, "どちらにも入らず両辺が零でない": 0,
+               "T=U で両辺が零でない": 0, "T≠U で a_T a†_U が零でないのに両辺が零": 0}
     for T in P:
         assert An_le(T, M) == An(T) and Ad_le(T, M) == Ad(T) and P_le(M) == Pv     # 定義の m=M の読み
         for U in P:
@@ -55,8 +59,12 @@ for M in range(1, 4):
                 agree = all((t in T) == (t in U) for t in range(1, m + 1))
                 if agree:
                     assert Q(T, U, m) == P_le(m)                                    # 一致する場合の主張
+                    if Q(T, U, m) != Z:
+                        nontriv["一致して Q が零でない"] += 1
                 else:
                     assert Q(T, U, m) == Z                                          # 一致しない場合の主張
+                    if An_le(T, m) * Ad_le(U, m) != Z:
+                        nontriv["一致せず a_{T,≤m}a†_{U,≤m} が零でないのに Q が零"] += 1
                 if m == 0:
                     continue
                 assert An_le(T, m) == z(T)[m] * An_le(T, m - 1)                     # 消滅の逆順の積の分解
@@ -70,13 +78,26 @@ for M in range(1, 4):
                     assert Q(T, U, m) == Z                                          # ちょうど一方に入る場合
                 elif not inT:
                     assert Q(T, U, m) == Q(T, U, m - 1) * x[m]                      # どちらにも入らない場合
+                    if Q(T, U, m) != Z:
+                        nontriv["どちらにも入らず両辺が零でない"] += 1
                 else:
                     assert Q(T, U, m) == ct[m] * (Q(T, U, m - 1) * c[m])            # 両方に入る場合
+                    if Q(T, U, m) != Z:
+                        nontriv["両方に入り両辺が零でない"] += 1
                     assert Q(T, U, m) != c[m] * (Q(T, U, m - 1) * ct[m]) or Q(T, U, m - 1) == Z  # 否定コントロール（生成と消滅を取り違えた漸化式）
                 count += 1
             delta = 1 if T == U else 0
             assert (Pv * (An(T) * Ad(U))) * Pv == delta * Pv                        # 主張の像
+            if T == U and Pv != Z:
+                nontriv["T=U で両辺が零でない"] += 1
+            if T != U and An(T) * Ad(U) != Z:
+                nontriv["T≠U で a_T a†_U が零でないのに両辺が零"] += 1
     # 否定コントロール: P で挟まないと δ にならない組がある
     assert any(An(T) * Ad(U) != (1 if T == U else 0) * I for T in P for U in P)
-    print("M=%d: PASS (%d 件の漸化式)" % (M, count))
+    for key in ["一致して Q が零でない", "両方に入り両辺が零でない", "どちらにも入らず両辺が零でない", "T=U で両辺が零でない"]:
+        assert nontriv[key] > 0                                                     # 主張が非自明に成り立った件がある
+    if M >= 2:
+        for key in ["一致せず a_{T,≤m}a†_{U,≤m} が零でないのに Q が零", "T≠U で a_T a†_U が零でないのに両辺が零"]:
+            assert nontriv[key] > 0
+    print("M=%d: PASS (%d 件の漸化式; %s)" % (M, count, ", ".join("%s %d 件" % (k, v) for k, v in nontriv.items())))
 print("ALL PASS")

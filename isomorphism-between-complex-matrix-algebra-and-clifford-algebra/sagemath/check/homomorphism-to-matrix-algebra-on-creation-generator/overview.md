@@ -2,7 +2,7 @@
 
 - 対象ラベル: `claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix`
 - 検算: [check_homomorphism_to_matrix_algebra_on_creation_generator.sage](check_homomorphism_to_matrix_algebra_on_creation_generator.sage)
-- 方法: $`W:=\mathbb{Q}^M`$、基底 $`w`$ を標準基底とし、$`\mathrm{in}_1(w_i)=(w_i,0)`$ の座標 $`\beta^w_k(w_i)=\delta_{k,i}`$ と $`0_{W^*}(w_k)=0`$ を $`\varphi`$ の式に入れて、二つの線型結合の和が $`c_i`$ になることを確かめる。クリフォード代数の中の元 $`a^{\dagger}_i`$ そのものは計算せず、$`\Phi(a^{\dagger}_i)=\varphi(\mathrm{in}_1(w_i))`$ の右辺での確認である。整数の厳密計算で、浮動小数点は使わない。
+- 方法: 分裂した二次空間 $`V=W\oplus W^{*}`$ を組 $`(x,g)`$ として実装する。$`W:=\mathbb{Q}^M`$ の元は列ベクトル、$`W^{*}`$ の元は行ベクトル $`g`$ で $`g(x):=g\cdot x`$ とする。直和の成分への埋め込み $`\mathrm{in}_1(x)=(x,0_{W^*})`$・$`\mathrm{in}_2(g)=(0_W,g)`$、基底 $`w`$ についての座標の写像 $`\beta^w_k`$（$`x=\sum_j a_jw_j`$ を連立一次方程式として解いた $`a_k`$）、双対基底 $`f`$（基底行列の逆行列の行。$`f_i(w_k)=\delta_{i,k}`$ と $`\beta^w_k(w_i)=\delta_{k,i}`$ を確かめてから使う）、$`\varphi((x,g)):=\sum_k\beta^w_k(x)\ast c_k+\sum_kg(w_k)\ast c_k^{\mathsf T}`$ を、本文の定義どおりの関数として作る。基底 $`w`$ は、標準基底、上三角の行列（$`M\ge2`$ で非対角）の列、乱数で選んだ非対角の可逆な有理数行列の列二つ（乱数の種を固定）の四通りを試す。各 $`i`$ で、準備の二つの等式、$`\mathrm{in}_1(w_i)=(w_i,0_{W^*})`$、証明の式変形の各行、主張 $`\varphi(\mathrm{in}_1(w_i))=c_i`$ を確かめる。否定の対照として、$`\mathrm{in}_1`$ と $`\mathrm{in}_2`$ を取り違えた値（$`\varphi(\mathrm{in}_2(f_i))`$ と $`c_i`$、$`\varphi(\mathrm{in}_1(w_i))`$ と $`c_i^{\mathsf T}`$）が一致しないこと、$`j\ne i`$ の $`c_j`$ と一致しないこと、標準基底でない基底では $`w_i`$ の標準座標を $`\beta^w`$ の代わりに入れると $`c_i`$ にならない番号があることを確かめる。クリフォード代数の中の元 $`a^{\dagger}_i`$ そのものは計算せず、$`\Phi(a^{\dagger}_i)=\varphi(\mathrm{in}_1(w_i))`$ の右辺での確認である。有理数の厳密計算（`QQ`）で、浮動小数点は使わない。
 - 実行: `micromamba run -n sage sage sagemath/check/homomorphism-to-matrix-algebra-on-creation-generator/check_homomorphism_to_matrix_algebra_on_creation_generator.sage`（SageMath 10.9、2026-11-12）。
-- 結果: 通過。$`M=1,2,3`$ のすべてで全項目が成り立った。
+- 結果: 通過。$`M=1,2,3`$、四通りの基底、すべての $`i`$ の組 24 件で全項目が成り立った。
 - 位置づけ: 有限個の $`M`$ での裏取りであり、すべての $`M`$ についての証明ではない。

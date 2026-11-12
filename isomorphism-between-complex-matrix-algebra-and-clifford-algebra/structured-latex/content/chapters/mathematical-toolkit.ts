@@ -7427,6 +7427,56 @@ f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V
     ],
   },
   {
+    id: "mathematical_toolkit_claim_partial_product_is_ordered_product_of_restricted_family",
+    kind: "claim",
+    title: { text: "代数の中の番号順の積の部分積は、族を前の番号に制限した番号順の積である" },
+    labels: ["claim_partial_product_is_ordered_product_of_restricted_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`), " の元 ", math(String.raw`x_k`),
+        " が一つずつ与えられているとする。", math(String.raw`\Pi_j`), "（", math(String.raw`j\in\{0,1,\dots,n\}`), "）を、この族について ",
+        ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とする。", math(String.raw`m\in\{0,1,\dots,n\}`), " について、族を ",
+        math(String.raw`\{1,\dots,m\}`), " に制限した族 ", math(String.raw`k\mapsto x_k`), "（", math(String.raw`k\in\{1,\dots,m\}`),
+        "）の番号順の積を ", math(String.raw`\prod_{A,\,k=1}^{m}x_k`), " と書く。すべての ", math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{A,\,k=1}^{m}x_k=\Pi_m`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m\in\{0,1,\dots,n\}`), " を固定する。", math(String.raw`\Pi'_j`), "（", math(String.raw`j\in\{0,1,\dots,m\}`),
+        "）を、制限した族について ", ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とする。", math(String.raw`j\in\{0,1,\dots,m\}`),
+        " について ", math(String.raw`\Pi'_j=\Pi_j`), " を ", math(String.raw`j`), " の帰納法で示す。", math(String.raw`j=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Pi'_0
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\Pi_0
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`1\le j\le m`), " とし、", math(String.raw`j-1`), " で成り立つとする（帰納法の仮定）。"]),
+      displayMath(String.raw`\begin{aligned}
+\Pi'_j
+&=\Pi'_{j-1}\cdot_A x_j
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\Pi_{j-1}\cdot_A x_j
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Pi_j
+&&\left(\because\ j\le m\le n\text{。}\blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`j=m`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{A,\,k=1}^{m}x_k
+&=\Pi'_m
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\Pi_m
+&&\left(\because\ \text{上の帰納法で}\ j:=m\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_definition_subalgebra",
     kind: "definition",
     title: { text: "部分代数" },
@@ -17481,6 +17531,60 @@ x\star_D 1_D
         ref("def_unital_ring"), "）であり、", math(String.raw`(\lambda\ast_A x)\cdot_A a=\lambda\ast_A(x\cdot_A a)`),
         " はスカラー倍と乗法の両立の左の因子の条件（", ref("def_complex_algebra"), "）である。二つの条件が満たされたので線型写像である（",
         ref("def_linear_map"), "）。"]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_zero_times_element_in_algebra_is_zero",
+    kind: "claim",
+    title: { text: "代数の零元に右から元を掛けると零元である" },
+    labels: ["claim_zero_times_element_in_algebra_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）とする。すべての ", math(String.raw`w\in A`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`0_A\cdot_A w=0_A`),
+    ],
+    proof: [
+      paragraph([
+        "写像 ", math(String.raw`\bullet\cdot_A w`), " は ", math(String.raw`U_{\mathrm{vec}}(A)`), " から ", math(String.raw`U_{\mathrm{vec}}(A)`),
+        " への線型写像である（", ref("claim_right_multiplication_in_algebra_is_linear_map"), " の ", math(String.raw`a`), " に ", math(String.raw`w`),
+        " を当てる）。", math(String.raw`U_{\mathrm{vec}}(A)`), " の零ベクトルは ", math(String.raw`0_A`), " である（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_A\cdot_A w
+&=(\bullet\cdot_A w)(0_A)
+&&\left(\because\ \bullet\cdot_A w\ \text{の定義。}\blkref{claim_right_multiplication_in_algebra_is_linear_map}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_linear_map_sends_zero_to_zero}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_element_times_zero_in_algebra_is_zero",
+    kind: "claim",
+    title: { text: "代数の元に右から零元を掛けると零元である" },
+    labels: ["claim_element_times_zero_in_algebra_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）とする。すべての ", math(String.raw`w\in A`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`w\cdot_A 0_A=0_A`),
+    ],
+    proof: [
+      paragraph([
+        "写像 ", math(String.raw`w\cdot_A\bullet`), " は ", math(String.raw`U_{\mathrm{vec}}(A)`), " から ", math(String.raw`U_{\mathrm{vec}}(A)`),
+        " への線型写像である（", ref("claim_left_multiplication_in_algebra_is_linear_map"), " の ", math(String.raw`a`), " に ", math(String.raw`w`),
+        " を当てる）。", math(String.raw`U_{\mathrm{vec}}(A)`), " の零ベクトルは ", math(String.raw`0_A`), " である（", ref("def_underlying_ring_and_vector_space_of_algebra"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w\cdot_A 0_A
+&=(w\cdot_A\bullet)(0_A)
+&&\left(\because\ w\cdot_A\bullet\ \text{の定義。}\blkref{claim_left_multiplication_in_algebra_is_linear_map}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_linear_map_sends_zero_to_zero}\right).
+\end{aligned}`),
     ],
   },
   {
