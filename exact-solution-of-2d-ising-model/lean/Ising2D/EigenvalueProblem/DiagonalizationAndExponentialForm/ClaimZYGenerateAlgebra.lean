@@ -17,16 +17,17 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | Step 1（単一サイトの積公式・異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `pauli*`, `siteOp_mul_same`, `siteOp_mul_comm` |
 | Step 2（帰納法で `σ^x_m, σ^y_m, σ^z_m ∈ 𝒜`） | `xString_mem_adjoin`, `sigmaX_mem_adjoin` ほか |
 | Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底） | 準備 (a)〜(g) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`・`zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
-| Step 3 後半（基底のテンソル積が全体を張る） | `matrixUnitBasis`（`Ising2D/Representation.lean`）+ `E_eq_siteProd` |
-
-Step 3 後半だけ原文と経路が違う。原文は基底として `{I, σ^x, σ^y, σ^z}^{⊗M}` を取り
-`<tensor_basis>` を引くが、Lean では既に形式化済みの**行列単位の基底**
-`matrixUnitBasis`（これも `<tensor_basis>` の帰結）を使うほうが短い。
-どちらも「`𝒜` は ℂ-線型結合で閉じた部分空間で、ある基底を全部含むから全体」という論法で同じ。
+| Step 3 前半の結び（`𝓑` は張り、`dim Mat(2,ℂ) = 4 = #𝓑` より基底） | `top_le_span_pauliFamily`・`finrank_mat2_eq_four`・`pauliBasis`（「張り、元数が次元に等しい族は基底」は mathlib の `basisOfTopLeSpanOfCardEqFinrank` に委ねる） |
+| Step 3 後半（`𝓑^{⊠M}` は基底。`<tensor_basis>` (2) を `𝓑` に適用） | `kroneckerTensorPowBasisOf M pauliBasis`（`TheoremTensorBasisFromNecSuf.lean`。mathlib の `Basis.piTensorProduct` を移したもので、人手 `<tensor_basis>` の Step 4 と 1 対 1 でない） |
+| Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
+| Step 3 後半（`P_s` の帰納法で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteProd_mem`（**経路が違う**: 人手は `P_1 := E_1` から右へ `P_{s+1} := P_sE_{s+1}` と掛け、一段を `kronecker_product_rule` (1) と単位の 6 行で示す。Lean は単位行列から始める有限集合の帰納法で左から掛け、一段を `Function.update` の `simp` で閉じる） |
+| Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`） | `Z_Y_generate_algebra` |
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.TheoremTensorBasisFromNecSuf
+import Mathlib.LinearAlgebra.Dimension.OrzechProperty
 
 namespace Ising2D
 
@@ -384,32 +385,46 @@ theorem matrix_two_decomp (B : Matrix (Fin 2) (Fin 2) ℂ) :
   · exact (pauliDecompRhs_apply_10 _ _ _ _).symm
   · exact (pauliDecompRhs_apply_11 _ _ _ _).symm
 
-/-- 上をサイト `k` に載せた形。`siteOp k` が線型なのでそのまま持ち上がる。 -/
-theorem siteOp_decomp (k : Fin M) (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    siteOp k B = ((B 0 0 + B 1 1) / 2) • (1 : TensorPow M)
-      + ((B 0 1 + B 1 0) / 2) • sigmaX k
-      + ((Complex.I * (B 0 1 - B 1 0)) / 2) • sigmaY k
-      + ((B 0 0 - B 1 1) / 2) • sigmaZ k := by
-  conv_lhs => rw [matrix_two_decomp B]
-  rw [map_add, map_add, map_add, map_smul, map_smul, map_smul, map_smul, siteOp_one]
+/-- 人手 Step 3 の `𝓑 = {b_1, b_2, b_3, b_4} := {I_{Mat(2,ℂ)}, σ^x, σ^y, σ^z}`（Lean の添字は `0, 1, 2, 3`）。 -/
+noncomputable def pauliFamily : Fin 4 → Matrix (Fin 2) (Fin 2) ℂ :=
+  ![1, pauliX, pauliY, pauliZ]
+
+/-- 人手 Step 3 の「よって `𝓑` は張り」: 任意の `A ∈ Mat(2, ℂ)` は展開の式 `matrix_two_decomp` で
+`𝓑` の ℂ-線型結合に書ける。 -/
+theorem top_le_span_pauliFamily :
+    (⊤ : Submodule ℂ (Matrix (Fin 2) (Fin 2) ℂ)) ≤ Submodule.span ℂ (Set.range pauliFamily) := by
+  intro A _
+  rw [matrix_two_decomp A]
+  refine add_mem (add_mem (add_mem ?_ ?_) ?_) ?_
+  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨0, rfl⟩)
+  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨1, rfl⟩)
+  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨2, rfl⟩)
+  · exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨3, rfl⟩)
+
+/-- 人手 Step 3 の `dim_ℂ Mat(2, ℂ) = 4`（人手は根拠を書いていない）。Lean は行列単位の基底
+`NecSuf.matrixUnitBasis`（`<tensor_basis>` (1) の `M = 1` に当たる成分比較で作った基底）の元数
+`#({1,2} × {1,2}) = 4` を使う。 -/
+theorem finrank_mat2_eq_four : Module.finrank ℂ (Matrix (Fin 2) (Fin 2) ℂ) = 4 := by
+  rw [Module.finrank_eq_card_basis (NecSuf.matrixUnitBasis ℂ (Fin 2))]
   rfl
 
-/-- どんな `B ∈ Mat(2, ℂ)` を第 `k` 因子に載せても `𝒜` に入る。 -/
-theorem siteOp_mem_adjoin (k : Fin M) (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    siteOp k B ∈ Algebra.adjoin ℂ (ZYSet M) := by
-  rw [siteOp_decomp]
-  exact add_mem (add_mem (add_mem
-    (Subalgebra.smul_mem _ (one_mem _) _)
-    (Subalgebra.smul_mem _ (sigmaX_mem_adjoin k) _))
-    (Subalgebra.smul_mem _ (sigmaY_mem_adjoin k) _))
-    (Subalgebra.smul_mem _ (sigmaZ_mem_adjoin k) _)
+/-- 人手 Step 3 の「`dim_ℂ Mat(2,ℂ) = 4 = #𝓑` より基底である」（人手は根拠を書いていない）。
+Lean は「全体を張り、元数が次元に等しい族は基底」（人手 `<tensor_basis>` の証明の Step 3 (b) と同じ事実）を
+mathlib の `basisOfTopLeSpanOfCardEqFinrank` で使い、自前には証明していない。 -/
+noncomputable def pauliBasis : Module.Basis (Fin 4) ℂ (Matrix (Fin 2) (Fin 2) ℂ) :=
+  basisOfTopLeSpanOfCardEqFinrank pauliFamily top_le_span_pauliFamily
+    (by rw [finrank_mat2_eq_four]; rfl)
 
-/-! ## Step 3 後半: テンソル積が張る -/
+@[simp]
+theorem coe_pauliBasis : ⇑pauliBasis = pauliFamily :=
+  coe_basisOfTopLeSpanOfCardEqFinrank _ _ _
+
+/-! ## Step 3 後半: `e_1 ⊠ ⋯ ⊠ e_M` は `𝒜` に属する -/
 
 /-- 単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` は、各因子をサイト作用素として含む部分多元環に属する。
 
 人手 Step 3 後半の「`E_k := I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（第 `k` 因子だけが `e_k`）について `E_1 ⋯ E_M = e_1 ⊠ ⋯ ⊠ e_M`」
-（`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` についての帰納法）に対応する。Lean は有限集合 `s` についての帰納法で書く。`E_k` は Lean の `siteOp k (x k)`。 -/
+（`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` についての帰納法）と結論は同じだが、**経路が違う**: Lean は単位行列から始める有限集合 `s` についての帰納法で、`E_k` を左から掛け、一段を `Function.update` の `simp` で閉じる（人手は右から掛け、一段を `kronecker_product_rule` (1) と単位の 6 行で示す。状態台帳の件）。`E_k` は Lean の `siteOp k (x k)`。 -/
 theorem siteProd_mem (A : Subalgebra ℂ (TensorPow M)) (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ)
     (h : ∀ k, siteOp k (x k) ∈ A) : siteProd M x ∈ A := by
   classical
@@ -440,31 +455,39 @@ theorem siteProd_mem (A : Subalgebra ℂ (TensorPow M)) (x : Fin M → Matrix (F
   have huniv := aux Finset.univ
   rwa [hall] at huniv
 
-/-- 行列単位 `E_{IJ}` は、各サイトの `Mat(2, ℂ)` の行列単位のテンソル積である。 -/
-theorem E_eq_siteProd (I J : Conf M) :
-    E I J = siteProd M (fun i => Matrix.single (I i) (J i) (1 : ℂ)) := by
-  ext s t
-  simp only [siteProd_apply, Matrix.single_apply, E]
-  rw [Finset.prod_boole]
-  simp [funext_iff, forall_and]
+/-- 人手 Step 3 後半の「各 `E_k` は `𝒜` に属する」。`E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I` は Lean の
+`siteOp k e_k`。`e_k = I` なら `E_k = I_{Mat(2^M,ℂ)}`（`kronecker_product_rule` (2)。Lean の `siteOp_one`）で (ii)、
+`e_k = σ^x, σ^y, σ^z` なら `E_k = σ_k^x, σ_k^y, σ_k^z`（`def_site_pauli_matrices`。Lean の `sigmaX` などの定義）で Step 2。 -/
+theorem siteOp_pauliFamily_mem_adjoin (k : Fin M) (j : Fin 4) :
+    siteOp k (pauliFamily j) ∈ Algebra.adjoin ℂ (ZYSet M) := by
+  fin_cases j
+  · change siteOp k (1 : Matrix (Fin 2) (Fin 2) ℂ) ∈ Algebra.adjoin ℂ (ZYSet M)
+    rw [siteOp_one]                                                   -- `kronecker_product_rule` (2)
+    exact one_mem _                                                   -- (ii)
+  · exact sigmaX_mem_adjoin k                                         -- `def_site_pauli_matrices` と Step 2
+  · exact sigmaY_mem_adjoin k                                         -- `def_site_pauli_matrices` と Step 2
+  · exact sigmaZ_mem_adjoin k                                         -- `def_site_pauli_matrices` と Step 2
 
 /-! ## 結論 -/
 
 /-- **`<Z_Y_generate_algebra>` の形式化**:
-`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2, ℂ)^{⊗M}` 全体である。 -/
+`{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2, ℂ)^{⊗M}` 全体である。
+
+人手 Step 3 の結びと同じく、`𝓑^{⊠M}`（`<tensor_basis>` (2) を `𝓑` に適用した基底）の元
+`e_1 ⊠ ⋯ ⊠ e_M` がすべて `𝒜` に入ること（`siteProd_mem` と `siteOp_pauliFamily_mem_adjoin`）から、
+`Mat(2^M, ℂ) = span_ℂ(𝓑^{⊠M}) ⊆ 𝒜`（`𝒜` は ℂ-線型結合について閉じる）を得る。 -/
 theorem Z_Y_generate_algebra (M : ℕ) : Algebra.adjoin ℂ (ZYSet M) = ⊤ := by
-  classical
-  have hbasis : ∀ IJ : Conf M × Conf M,
-      (matrixUnitBasis M) IJ ∈ Algebra.adjoin ℂ (ZYSet M) := by
-    intro IJ
-    rw [matrixUnitBasis_apply, E_eq_siteProd]
-    exact siteProd_mem _ _ fun k => siteOp_mem_adjoin k _
-  have hle : Submodule.span ℂ (Set.range (matrixUnitBasis M)) ≤
+  have hbasis : ∀ p : Fin M → Fin 4,
+      kroneckerTensorPowBasisOf M pauliBasis p ∈ Algebra.adjoin ℂ (ZYSet M) := by
+    intro p
+    rw [kroneckerTensorPowBasisOf_apply, coe_pauliBasis]                -- `e_1 ⊠ ⋯ ⊠ e_M`
+    exact siteProd_mem _ _ fun k => siteOp_pauliFamily_mem_adjoin k (p k)
+  have hle : Submodule.span ℂ (Set.range (kroneckerTensorPowBasisOf M pauliBasis)) ≤
       Subalgebra.toSubmodule (Algebra.adjoin ℂ (ZYSet M)) := by
     rw [Submodule.span_le]
-    rintro _ ⟨IJ, rfl⟩
-    exact hbasis IJ
-  rw [(matrixUnitBasis M).span_eq] at hle
+    rintro _ ⟨p, rfl⟩
+    exact hbasis p
+  rw [(kroneckerTensorPowBasisOf M pauliBasis).span_eq] at hle          -- `Mat(2^M,ℂ) = span(𝓑^{⊠M})`
   refine eq_top_iff.2 fun v _ => ?_
   exact hle (Submodule.mem_top)
 

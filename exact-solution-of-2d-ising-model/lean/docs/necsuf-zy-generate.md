@@ -6,7 +6,7 @@
 | | ファイル | 主要定理 |
 | --- | --- | --- |
 | 具体版 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` | `Ising2D.Z_Y_generate_algebra` |
-| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_basis_mem` ほか |
+| 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top` |
 | 具体版の再導出 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebraFromNecSuf.lean` | `Ising2D.Z_Y_generate_algebra_of_necSuf` |
 
 この文書は、必要十分版を実際に書いて `lake build` を通した結果として判明したことだけを書く
@@ -16,14 +16,13 @@
 
 ## 1. 必要十分版の仮定（＝本当に必要だったもの）
 
-### (a) 「基底を全部含む部分多元環は全体」 — `NecSuf.eq_top_of_basis_mem`
+### (a) 「全体を張る集合を全部含む部分多元環は全体」 — `NecSuf.eq_top_of_span_eq_top`
 
-仮定は `[CommSemiring R] [Semiring A] [Algebra R A]` と `Basis ι R A` だけ。
-証明は `Submodule.span_le` と `Basis.span_eq` の 2 つしか使っていない。
+仮定は `[CommSemiring R] [Semiring A] [Algebra R A]` と、`R`-加群として全体を張る集合 `s` だけ
+（基底である必要は無い）。証明は `Submodule.span_le` しか使っていない。
 
 **効いているのは「部分多元環は部分加群でもある」ことだけ**である。
-より原型的な形は `NecSuf.eq_top_of_span_eq_top`（基底である必要すらなく、
-`R`-加群として全体を張る集合を含めばよい）。
+導出では `s` を `𝓑^{⊠M}` の元の集合とし、全体を張ることを `Basis.span_eq` で渡す。
 
 ### (b) 「サイトごとの元の積は部分モノイドに属する」 — `NecSuf.map_mem_of_mulSingle_mem`
 
@@ -79,28 +78,35 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 `ClaimZYGenerateAlgebraFromNecSuf.lean` で必要十分版に渡すために補ったのは 3 つだけである。
 
-1. **`Ising2D.span_pauli_eq_top`**:
-   `{I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を ℂ-加群として張る。
-   中身は既存の `Ising2D.matrix_two_decomp`（原文 Step 3 の展開の式。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`）そのもの。
-   ここは **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
+1. **基底 `kroneckerTensorPowBasisOf M pauliBasis`**（具体版と共有）:
+   `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` の基底であること（`Ising2D.pauliBasis`。張ることは
+   `Ising2D.matrix_two_decomp`（原文 Step 3 の展開の式。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`）、
+   次元 4 は `finrank_mat2_eq_four`）と、`<tensor_basis>` (2) を `𝓑` に当てた `𝓑^{⊠M}` が
+   `Mat(2^M, ℂ)` の基底であること（`Ising2D.kroneckerTensorPowBasisOf`）。必要十分版へ渡すのは、その族が全体を張ることだけである。
+   `pauliBasis` が張ることには **2×2 であることと係数が ℂ であることが本質的**（`1/2` と `√-1` を使う）。
+   `kroneckerTensorPowBasisOf` は `Mat(2, ℂ)` の任意の基底で成り立つ。
 2. **`Ising2D.siteProdHom`**: `siteProd` を `MonoidHom` として束ねたもの。
    材料は既存の `siteProd_one` と `siteProd_mul` だけ。
-3. **`Ising2D.E_eq_siteProd`（既存）**: 行列単位 `E_{IJ}` が各サイトの行列単位のテンソル積であること。
-   ここはクロネッカー積の成分公式が本質的。
+3. **`Ising2D.siteOp_pauliFamily_mem_adjoin_of_necSuf`**: 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること。
+   `e_k = I` なら `siteOp_one`、`e_k = σ^x, σ^y, σ^z` なら Step 2 の必要十分版の結論。
 
 言い換えると、原文の証明のうち **複素 2×2 行列に依存しているのは「1 サイトの基底の取り方」と
-「行列単位がテンソル積に分解すること」だけ**であり、Step 2 の帰納法と Step 3 の
+「その基底のクロネッカー積が基底であること」だけ**であり、Step 2 の帰納法と Step 3 の
 「基底を含むから全体」「単項テンソルは積で作れる」はいずれも一般論である。
 
 ---
 
 ## 3. 具体版が過剰な構造を要求していないかの検査（README 4 節の目的）
 
-必要十分版を書く過程で、具体版が不要な性質に依存している箇所は見つからなかった。
-具体版 `Z_Y_generate_algebra` の各ステップは、必要十分版の仮定へ 1 対 1 に対応する
-（対応表は `ClaimZYGenerateAlgebraFromNecSuf.lean` の冒頭コメント）。
+必要十分版を書く過程で、具体版が不要な性質に依存している箇所は、下の 1 点目（基底であることを経由する）を除いて見つからなかった。
+具体版 `Z_Y_generate_algebra` の各ステップは、必要十分版の仮定へ対応する
+（ステップの対応表は具体版 `ClaimZYGenerateAlgebra.lean` の冒頭コメント）。
 
-ただし次の 2 点は「必要十分版のほうが仮定が弱い」ことが分かった。
+ただし次の 3 点は「必要十分版のほうが仮定が弱い」ことが分かった。
+
+* 具体版の Step 3 は人手どおり `𝓑^{⊠M}` が**基底**であることを経由する（`finrank_mat2_eq_four`・
+  `basisOfTopLeSpanOfCardEqFinrank`・`Basis.piTensorProduct`）。しかし必要十分版 `NecSuf.eq_top_of_span_eq_top` が
+  使うのは、その族が全体を**張る**ことだけである。人手 Step 3 の「基底である」も、結論には「張る」で足りる。
 
 * 具体版 `Ising2D.siteProd_mem` は `Subalgebra ℂ (TensorPow M)` を相手にしているが、
   必要十分版 `NecSuf.map_mem_of_mulSingle_mem` は**部分モノイド**で足りる
@@ -115,12 +121,10 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 * **`matrix_two_decomp`（1 サイトの基底分解）**: これは `Mat(2, ℂ)` の具体的な事実であり、
   抽象化すると「4 次元代数に基底がある」という内容の無い主張になる。必要十分版へは
-  「生成系が全体を張る」という形（`span_pauli_eq_top`）で渡すのが限界で、
-  その証明は具体計算のまま残る。
-* **`E_eq_siteProd`（行列単位のテンソル分解）**: クロネッカー積の成分が因子の成分の積である、
-  という表現の具体的な性質。抽象テンソル積の一般論へ持ち上げれば「基底のテンソル積は基底」に
-  なるが、それは README 2 節で本文に持ち込まないと決めた道具であり、
-  Lean の必要十分版としても `NecSuf/MatrixUnits.lean` 側の話題になる。ここでは分離せず具体版を再利用した。
+  基底 `pauliBasis` の形で渡すのが限界で、その証明は具体計算のまま残る。
+* **`kroneckerTensorPowBasisOf`（`𝓑^{⊠M}` が基底）**: 人手 `<tensor_basis>` (2) のクロネッカー積の形。
+  Lean は抽象テンソル冪の基底（mathlib の `Basis.piTensorProduct`）を `tensorPowAlgEquiv` で移して得ており、
+  ここでは分離せず具体版を再利用した。
 
 ---
 
@@ -139,7 +143,6 @@ bash scripts/check-no-sorry.sh
 'Ising2D.NecSuf.string_mem' does not depend on any axioms
 'Ising2D.NecSuf.local_mem' does not depend on any axioms
 'Ising2D.NecSuf.map_mem_of_mulSingle_mem' depends on axioms: [propext, Quot.sound]
-'Ising2D.NecSuf.eq_top_of_basis_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Ising2D.Z_Y_generate_algebra_of_necSuf' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
@@ -151,4 +154,4 @@ Step 2 の必要十分版（`string_mem` / `local_mem`）が**公理に一切依
 
 `scripts/check-no-sorry.sh` の `targets` には本作業で追加した主要宣言
 （`NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.map_mem_of_mulSingle_mem`,
-`NecSuf.eq_top_of_basis_mem`, `Ising2D.Z_Y_generate_algebra_of_necSuf` ほか）を登録済み。
+`NecSuf.eq_top_of_span_eq_top`, `Ising2D.Z_Y_generate_algebra_of_necSuf` ほか）を登録済み。

@@ -752,6 +752,9 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.anticomm_Z_Y` | `[Z_μ, Y_ν]₊ = 0` | 同 第 2 式（**原文は TODO**） |
 | `Ising2D.anticomm_Y_Y` | `[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}` | 同 第 3 式（**原文は TODO**） |
 | `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開（係数は `/2_ℂ` の商。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`、準備は `zy_prep_*`） | `<Z_Y_generate_algebra>` Step 3 の準備 (a)〜(g) と `R_{11}`〜`R_{22}` の鎖 |
+| `Ising2D.pauliBasis` | `𝓑 = {I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底（張ることは `top_le_span_pauliFamily`、次元 4 は `finrank_mat2_eq_four`） | `<Z_Y_generate_algebra>` Step 3 前半の結び |
+| `Ising2D.kroneckerTensorPowBasisOf` | `Mat(2,ℂ)` の基底 `b` のクロネッカー積 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M` の基底（mathlib の `Basis.piTensorProduct` を移したもので、人手 Step 4 と 1 対 1 でない） | `<tensor_basis>` (2) |
+| `Ising2D.siteOp_pauliFamily_mem_adjoin` | 各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（`e_k ∈ 𝓑`）は `𝒜` に属する | `<Z_Y_generate_algebra>` Step 3 後半 |
 | `Ising2D.Z_Y_generate_algebra` | `Algebra.adjoin ℂ {Z_m, Y_m} = ⊤` | `<Z_Y_generate_algebra>` |
 | `Ising2D.acomm_sum_smul` / `acomm_sum_smul_left` | 反交換子の双線型性（有限線型結合の展開） | 補助（原文は暗黙に使用） |
 | `Ising2D.ZY_linearIndependent` | `(Z_1,…,Z_M,Y_1,…,Y_M)` は線型独立 | `004/001`（**原文は TODO**） |

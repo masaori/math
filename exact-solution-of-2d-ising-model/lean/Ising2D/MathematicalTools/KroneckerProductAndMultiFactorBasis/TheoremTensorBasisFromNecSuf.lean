@@ -15,17 +15,17 @@
 
 本プロジェクトの本文は抽象テンソル積を使わず、`Mat(2,ℂ)^{⊗M}` を
 **具体的な Kronecker 表現 `TensorPow M = Matrix (Conf M) (Conf M) ℂ`** で扱う（README 2 節）。
-したがって人手証明 `<tensor_basis>` が実際に使われるのは
+人手証明 `<tensor_basis>` (1) が使われるのは
 `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` Step 1 の
-「`cal(E) = { E_{IJ} }` は基底である」1 箇所であり、その具体版は
+「`cal(E) = { E_{IJ} }` は基底である」であり、その具体版は
 `Ising2D.matrixUnitBasis`（行列単位の族）である。
 本ファイルではこれを、テンソル積を一切使わない必要十分版
 `NecSuf.matrixUnitBasis` の特殊化として得る（`matrixUnitBasis_eq_necSuf`）。
 
 抽象テンソル冪 `AbstractTensorPow M` 側の基底 `matTensorPowBasis` も、
 基底の移送 `NecSuf.basisOfLinearEquiv` で Kronecker 表現へ運べる
-（`kroneckerTensorPowBasis`）。この 2 つの基底の存在が、人手証明 Step 3 後半で
-「基底を全部含む部分空間は全体」と言うときに必要なものすべてである。
+（`kroneckerTensorPowBasis`）。同じ移送を `Mat(2,ℂ)` の任意の基底で行ったものが `<tensor_basis>` (2) の
+`kroneckerTensorPowBasisOf` で、`<Z_Y_generate_algebra>` Step 3 後半が `𝓑 = {I, σ^x, σ^y, σ^z}` で使う。
 -/
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Representation
@@ -39,7 +39,7 @@ variable (M : ℕ)
 
 /-! ## 本文が実際に使う基底: 人手証明と同じ成分比較で得られる -/
 
-/-- **本プロジェクトが `<tensor_basis>` を使う唯一の場所の具体版**
+/-- **`<tensor_basis>` (1) を使う場所の具体版**
 （行列単位 `E_{IJ}` の族が `TensorPow M` の基底であること）を、
 必要十分版 `NecSuf.matrixUnitBasis`（人手証明 Step 1 と同じ成分比較で証明したもの。
 係数は任意の可換環、添字は任意の有限型でよい）の特殊化として得る。 -/
@@ -83,6 +83,30 @@ theorem kroneckerTensorPowBasis_apply (p : Fin M → Fin 2 × Fin 2) :
       = siteProd M (fun i => Matrix.single (p i).1 (p i).2 (1 : ℂ)) := by
   rw [kroneckerTensorPowBasis, NecSuf.basisOfLinearEquiv_apply]
   rw [matTensorPowBasis_apply]
+  exact tensorPowAlgEquiv_tprod M _
+
+/-! ## `<tensor_basis>` (2): `Mat(2, ℂ)` の任意の基底のクロネッカー積 -/
+
+/-- 人手 `<tensor_basis>` (2) のクロネッカー積の形: `Mat(2, ℂ)` の任意の ℂ-基底 `b`（添字 `ι`。
+人手の `𝓑 = {b_1, …, b_4}` では `ι = {1, 2, 3, 4}`）について、多重添字 `p = (a_1, …, a_M)` で
+添字づけた族 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M`（人手の `Mat(2^M, ℂ)`）の ℂ-基底である。
+
+抽象テンソル冪の基底 `tensorPowBasis M b` を `tensorPowAlgEquiv` で移したもので、
+移送に使う事実は `NecSuf.basisOfLinearEquiv` の 1 つだけである。`tensorPowBasis` は
+mathlib の `Basis.piTensorProduct` の特殊化で、人手 `<tensor_basis>` の Step 4
+（行列単位を `b` で展開し、`kronecker_multilinear` を因子ごとに当て、元数と次元の一致で基底とする）
+の 1 対 1 の形式化ではない。添字の型 `ι` を任意にしたのは、移送元の `tensorPowBasis` が任意の添字で述べられているためで、
+`<Z_Y_generate_algebra>` は `ι = Fin 4` で使う。 -/
+noncomputable def kroneckerTensorPowBasisOf {ι : Type*} (b : Basis ι ℂ (Matrix (Fin 2) (Fin 2) ℂ)) :
+    Basis (Fin M → ι) ℂ (TensorPow M) :=
+  NecSuf.basisOfLinearEquiv (tensorPowBasis M b) (tensorPowAlgEquiv M).toLinearEquiv
+
+/-- 上の基底の元は、各サイトに `b_{a_i}` を載せた積 `siteProd`（人手の `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}`）である。 -/
+@[simp]
+theorem kroneckerTensorPowBasisOf_apply {ι : Type*} (b : Basis ι ℂ (Matrix (Fin 2) (Fin 2) ℂ))
+    (p : Fin M → ι) :
+    kroneckerTensorPowBasisOf M b p = siteProd M (fun i => b (p i)) := by
+  rw [kroneckerTensorPowBasisOf, NecSuf.basisOfLinearEquiv_apply, tensorPowBasis_apply]
   exact tensorPowAlgEquiv_tprod M _
 
 end Ising2D

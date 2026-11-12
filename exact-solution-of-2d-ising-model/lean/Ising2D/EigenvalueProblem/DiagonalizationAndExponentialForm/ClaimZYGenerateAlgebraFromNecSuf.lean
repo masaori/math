@@ -9,21 +9,25 @@
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
 | **具体版** | `Ising2D.Z_Y_generate_algebra`（`ClaimZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
-| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_basis_mem`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、有限添字の直積モノイド、基底 |
+| **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_span_eq_top`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、有限添字の直積モノイド、全体を張る集合 |
 
 本ファイルは、同じ結論 `Algebra.adjoin ℂ (ZYSet M) = ⊤` を
 **必要十分版だけを論法として使って**導き直す（`Z_Y_generate_algebra_of_necSuf`）。
 
 ## 特殊化で埋めた「具体的な部分」
 
-必要十分版に渡すために本ファイルで補ったのは次の 3 つだけである。
-裏を返せば、原文の証明のうち **本当に複素 2×2 行列に依存しているのはこの 3 つだけ**である。
+必要十分版に渡す具体的な部分は次の 3 つである（1 は具体版のファイルと `TheoremTensorBasisFromNecSuf.lean` の定義を使う）。
+このうち複素 2×2 行列に依存しているのは 1 の `𝓑` が `Mat(2, ℂ)` を張ること（`matrix_two_decomp`）だけで、
+`<tensor_basis>` (2) は `Mat(2, ℂ)` の任意の基底で、3 は `siteOp_one` と Step 2 だけで成り立つ。
 
-1. `span_pauli_eq_top`: `{I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を ℂ-加群として張ること
-   （原文 Step 3 前半の成分比較。`matrix_two_decomp` そのもの）。
+1. `kroneckerTensorPowBasisOf M pauliBasis`（具体版の `ClaimZYGenerateAlgebra.lean` と
+   `TheoremTensorBasisFromNecSuf.lean`）: `𝓑 = {I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` の基底であること
+   （原文 Step 3 前半の成分比較 `matrix_two_decomp` と `dim Mat(2,ℂ) = 4`）と、
+   `<tensor_basis>` (2) を `𝓑` に適用した `𝓑^{⊠M}` が `Mat(2^M, ℂ)` の基底であること。
 2. `siteProdHom`: クロネッカー積 `siteProd` がモノイド準同型であること
    （`siteProd_one` と `siteProd_mul` を束ねただけ）。
-3. `E_eq_siteProd`（既存）: 行列単位 `E_{IJ}` が各サイトの行列単位のテンソル積であること。
+3. 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること: `e_k = I` なら `siteOp_one`、
+   `e_k = σ^x, σ^y, σ^z` なら `σ_k^x, σ_k^y, σ_k^z` の定義と、Step 2 の必要十分版の結論。
 
 Step 2（Jordan–Wigner 文字列の帰納法）は、`P_m P_m = I` から得られる分解
 `σ^z_m = P_m Z_m`, `σ^y_m = P_m Y_m` と漸化式 `P_{m+1} = P_m σ^x_m` を渡すだけで、
@@ -105,27 +109,17 @@ theorem sigma_mem_adjoin_of_necSuf (k : Fin M) :
   rw [sigmaZNat, dif_pos k.isLt, sigmaYNat, dif_pos k.isLt, sigmaXNat, dif_pos k.isLt] at h
   simpa using h
 
-/-! ## Step 3 前半: `{I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を張る -/
+/-! ## Step 3 後半: 各 `E_k` は `𝒜` に属する -/
 
-/-- 原文 Step 3 の成分比較（`matrix_two_decomp`）を「生成系が全体を張る」と言い換えた形。
-必要十分版 `NecSuf.map_mem_of_span_eq_top` へ渡すのはこれだけである。 -/
-theorem span_pauli_eq_top :
-    Submodule.span ℂ ({1, pauliX, pauliY, pauliZ} : Set (Matrix (Fin 2) (Fin 2) ℂ)) = ⊤ := by
-  refine eq_top_iff.2 fun B _ => ?_
-  rw [matrix_two_decomp B]
-  refine add_mem (add_mem (add_mem ?_ ?_) ?_) ?_ <;>
-    exact Submodule.smul_mem _ _ (Submodule.subset_span (by simp))
-
-/-- **必要十分版 `NecSuf.map_mem_of_span_eq_top` の特殊化**:
-どんな `B ∈ Mat(2, ℂ)` を第 `k` 因子に載せても `𝒜` に入る。
-`siteOp k` が ℂ-線型であることと、上の生成系だけで従う。 -/
-theorem siteOp_mem_adjoin_of_necSuf (k : Fin M) (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    siteOp k B ∈ Algebra.adjoin ℂ (ZYSet M) := by
-  refine NecSuf.map_mem_of_span_eq_top _ (siteOp k) span_pauli_eq_top ?_ B
-  intro v hv
+/-- 人手 Step 3 後半の「各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I`（`e_k ∈ 𝓑`）は `𝒜` に属する」を、
+Step 2 の必要十分版の結論 `sigma_mem_adjoin_of_necSuf` から得た形（場合分けは具体版
+`siteOp_pauliFamily_mem_adjoin` と同じ）。 -/
+theorem siteOp_pauliFamily_mem_adjoin_of_necSuf (k : Fin M) (j : Fin 4) :
+    siteOp k (pauliFamily j) ∈ Algebra.adjoin ℂ (ZYSet M) := by
   obtain ⟨hz, hy, hx⟩ := sigma_mem_adjoin_of_necSuf k
-  rcases hv with rfl | rfl | rfl | rfl
-  · rw [siteOp_one]; exact one_mem _
+  fin_cases j
+  · change siteOp k (1 : Matrix (Fin 2) (Fin 2) ℂ) ∈ Algebra.adjoin ℂ (ZYSet M)
+    rw [siteOp_one]; exact one_mem _
   · exact hx
   · exact hy
   · exact hz
@@ -152,7 +146,7 @@ theorem siteProdHom_mulSingle (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
 
 /-- **必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の特殊化**:
 単項テンソル `A_1 ⊗ ⋯ ⊗ A_M` は、各因子をサイト作用素として含む部分多元環に属する
-（具体版の `Ising2D.siteProd_mem` と同じ主張を、有限集合の帰納法を使わずに得たもの）。 -/
+（具体版の `Ising2D.siteProd_mem` と同じ主張。帰納法は必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の中にある）。 -/
 theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (h : ∀ k, siteOp k (x k) ∈ A) :
     siteProd M x ∈ A := by
@@ -165,11 +159,14 @@ theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
 /-- **`<Z_Y_generate_algebra>` を必要十分版から導出した形**:
 `{Z_1, …, Z_M, Y_1, …, Y_M}` が生成する ℂ-部分多元環は `Mat(2, ℂ)^{⊗M}` 全体である。
 
-具体版 `Ising2D.Z_Y_generate_algebra` と**同じ形の主張**であり、
-論法はすべて `NecSuf/GeneratedByBasis.lean` の必要十分版に委ねている。 -/
+具体版 `Ising2D.Z_Y_generate_algebra` と**同じ形の主張**で、具体版と同じく基底 `𝓑^{⊠M}` の元
+`e_1 ⊠ ⋯ ⊠ e_M` が `𝒜` に入ることから結論する。論法は `NecSuf/GeneratedByBasis.lean` の
+必要十分版（`eq_top_of_span_eq_top`・`map_mem_of_mulSingle_mem`・`string_mem`・`local_mem`）に委ねている。
+必要十分版へ渡すのは `𝓑^{⊠M}` が全体を張ること（`Basis.span_eq`）だけで、基底であること（線型独立性）は使わない。 -/
 theorem Z_Y_generate_algebra_of_necSuf (M : ℕ) : Algebra.adjoin ℂ (ZYSet M) = ⊤ := by
-  refine NecSuf.eq_top_of_basis_mem _ (matrixUnitBasis M) fun IJ => ?_
-  rw [matrixUnitBasis_apply, E_eq_siteProd]
-  exact siteProd_mem_of_necSuf _ _ fun k => siteOp_mem_adjoin_of_necSuf k _
+  refine NecSuf.eq_top_of_span_eq_top _ ?_ (kroneckerTensorPowBasisOf M pauliBasis).span_eq
+  rintro _ ⟨p, rfl⟩
+  rw [kroneckerTensorPowBasisOf_apply, coe_pauliBasis]
+  exact siteProd_mem_of_necSuf _ _ fun k => siteOp_pauliFamily_mem_adjoin_of_necSuf k (p k)
 
 end Ising2D

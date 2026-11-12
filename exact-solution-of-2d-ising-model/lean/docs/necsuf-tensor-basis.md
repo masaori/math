@@ -8,14 +8,15 @@
 | 具体版（本文が実際に使う形） | `Ising2D/Representation.lean` | `Ising2D.matrixUnitBasis`（`E_{IJ}` の族） |
 | 具体版（抽象テンソル積での表現） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` | `Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` |
 | **必要十分版** | `Ising2D/NecSuf/TensorPowerBasis.lean` | `NecSuf.matrix_eq_sum_smul_single` / `NecSuf.sum_smul_single_apply` / `NecSuf.linearIndependent_single` / `NecSuf.matrixUnitBasis` / `NecSuf.basisOfLinearEquiv` |
-| 対応づけ（導出） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasisFromNecSuf.lean` | `Ising2D.EBasis` / `EBasis_apply` / `coe_EBasis_eq_matrixUnitBasis` / `matrix_eq_sum_E` / `kroneckerTensorPowBasis` |
+| 対応づけ（導出） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasisFromNecSuf.lean` | `Ising2D.EBasis` / `EBasis_apply` / `coe_EBasis_eq_matrixUnitBasis` / `matrix_eq_sum_E` / `kroneckerTensorPowBasis` / `kroneckerTensorPowBasisOf` |
 
 ## この主張が本文で使われる形（一次情報）
 
 本文は抽象テンソル積を使わず `Mat(2,ℂ)^{⊗M}` を Kronecker 表現で扱う（README 2 節）。
-`<tensor_basis>` が引かれるのは
+この文書の必要十分版が扱うのは `<tensor_basis>` (1)（行列単位の族が基底）で、引かれるのは
 `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` Step 1 の
-「`cal(E) = { E_{IJ} : I,J ∈ {1,2}^M }` は基底である」の 1 箇所だけであり、
+「`cal(E) = { E_{IJ} : I,J ∈ {1,2}^M }` は基底である」である
+（(2) の `{I, σ^x, σ^y, σ^z}` の形は `<Z_Y_generate_algebra>` が引き、Lean は下の副産物の `kroneckerTensorPowBasisOf`）。
 人手証明がそこで使う論法は **成分比較**——
 「任意の行列 `A` は `A = Σ_{IJ} A_{IJ} E_{IJ}` と書け、係数は成分そのものだから一意」——である。
 
@@ -48,5 +49,9 @@
 - 抽象テンソル冪側の基底 `matTensorPowBasis` を ℂ-代数同型 `tensorPowAlgEquiv` で
   Kronecker 表現へ移した基底 `Ising2D.kroneckerTensorPowBasis`。移送に使うのは
   「基底は線型同型で移せる」`NecSuf.basisOfLinearEquiv` の 1 つだけ。
+- 同じ移送を `Mat(2,ℂ)` の任意の基底 `b` について行った `Ising2D.kroneckerTensorPowBasisOf`
+  （人手 `<tensor_basis>` (2) のクロネッカー積の形）。`<Z_Y_generate_algebra>` Step 3 後半が
+  `b = 𝓑 = {I, σ^x, σ^y, σ^z}` で使う。抽象テンソル冪の基底は mathlib の `Basis.piTensorProduct` で、
+  人手 `<tensor_basis>` Step 4 の 1 対 1 の形式化ではない。
 - mathlib の `Matrix.stdBasis` と同じ族であることの検算
   （`NecSuf.coe_matrixUnitBasis_eq_stdBasis`）。論法の差し替えではなく一致の確認である。

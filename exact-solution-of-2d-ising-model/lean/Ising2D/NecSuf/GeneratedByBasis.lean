@@ -18,8 +18,7 @@
 
 | 原文 | 本ファイル | 効いている構造 |
 | --- | --- | --- |
-| Step 3「基底を全部含むから全体」 | `eq_top_of_span_eq_top`, `eq_top_of_basis_mem` | 可換半環上の代数と部分多元環（＝積で閉じた部分加群）だけ |
-| Step 3「線型に分解して載せる」 | `map_mem_of_span_eq_top` | 写像が `R`-線型であることだけ |
+| Step 3「全体を張る集合を全部含むから全体」 | `eq_top_of_span_eq_top` | 可換半環上の代数と部分多元環（＝積で閉じた部分加群）だけ |
 | Step 3「単項テンソルの積」 | `map_mem_of_mulSingle_mem` | 有限添字の直積モノイドからの**モノイド準同型**であることだけ |
 | Step 2「Jordan–Wigner 文字列の帰納法」 | `string_mem`, `local_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
 
@@ -72,26 +71,6 @@ theorem eq_top_of_span_eq_top (S : Subalgebra R A) {s : Set A}
   have hle : Submodule.span R s ≤ Subalgebra.toSubmodule S := Submodule.span_le.2 hs
   rw [hspan] at hle
   exact eq_top_iff.2 fun a _ => hle Submodule.mem_top
-
-/-- 上の系: 部分多元環が**基底**を全部含めば全体である。
-基底の添字型 `ι` は任意でよい。 -/
-theorem eq_top_of_basis_mem {ι : Type*} (S : Subalgebra R A) (b : Module.Basis ι R A)
-    (h : ∀ i, b i ∈ S) : S = ⊤ :=
-  eq_top_of_span_eq_top S (by rintro _ ⟨i, rfl⟩; exact h i) b.span_eq
-
-/-- **原文 Step 3 前半の骨格**: `R`-線型写像 `f` が生成系 `s` を `S` の中へ送るなら、
-`f` の像はすべて `S` に入る。
-
-具体版では「任意の `B ∈ Mat(2, ℂ)` を第 `k` 因子に載せた `siteOp k B` が `𝒜` に入る」に当たる。
-効いているのは `f` の線型性と `S` が部分加群であることだけである。 -/
-theorem map_mem_of_span_eq_top {V : Type*} [AddCommMonoid V] [Module R V]
-    (S : Subalgebra R A) (f : V →ₗ[R] A) {s : Set V}
-    (hspan : Submodule.span R s = ⊤) (h : ∀ v ∈ s, f v ∈ S) (v : V) : f v ∈ S := by
-  have hle : Submodule.span R s ≤ (Subalgebra.toSubmodule S).comap f := by
-    refine Submodule.span_le.2 fun x hx => ?_
-    exact h x hx
-  rw [hspan] at hle
-  exact hle Submodule.mem_top
 
 end SpanTop
 
