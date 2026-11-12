@@ -9618,7 +9618,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
 &\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))\in C
 &&\bigl(\because\ \text{直前の不変条件を逆像へ適用}\bigr)\\
 &\ \Longleftrightarrow\ i\in C
-&&\bigl(\because\ \text{置換と逆写像の相殺}\bigr).
+&&\bigl(\because\ \text{置換と逆写像の相殺}\bigr)
 \end{aligned}`),
                 paragraph(["したがって ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " はどちらも ", math(String.raw`C`), " から ", math(String.raw`C`), " への写像に制限できる。各 ", math(String.raw`i\in C`), " で"]),
                 displayMath(String.raw`\begin{aligned}
@@ -9644,7 +9644,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
 &=(-1)\prod_{j\in C}A_{j,\sigma(j)}
 &&\bigl(\because\ |C|\text{ は奇数}\bigr)\\
 &=-\prod_{j\in C}A_{j,\sigma(j)}
-&&\bigl(\because\ -1\text{ との積}\bigr).
+&&\bigl(\because\ -1\text{ との積}\bigr)
 \end{aligned}`),
                 paragraph(["一方、軌道の外では置換の値が変わらないので、"]),
                 displayMath(String.raw`\prod_{i\in\mathcal J\setminus C}A_{i,\tau(i)}
@@ -9662,7 +9662,7 @@ Q_\pi:=\prod_{i\in\mathcal J\setminus C}A_{i,\pi(i)}
 &=(-P_\sigma)Q_\sigma&&\bigl(\because\ \text{上で示した外側の積の不変性}\bigr)\\
 &=-(P_\sigma Q_\sigma)&&\bigl(\because\ \text{積の第一因子の負号}\bigr)\\
 &=-\prod_{i\in\mathcal J}A_{i,\sigma(i)}
-&&\bigl(\because\ \text{分離した有限積をまとめる}\bigr).
+&&\bigl(\because\ \text{分離した有限積をまとめる}\bigr)
 \end{aligned}`),
                 paragraph(["これが第一の等号である。置換の符号自体は変わらず、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -9670,7 +9670,7 @@ c_\tau&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}
 &&\bigl(\because\ c_\pi\text{ の定義}\bigr)\\
 &=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
 &&\bigl(\because\ \blkref{claim_invariant_subset_reversal_sign}\bigr)\\
-&=c_\sigma&&\bigl(\because\ c_\pi\text{ の定義}\bigr).
+&=c_\sigma&&\bigl(\because\ c_\pi\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["したがって符号付き項についても、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -9680,7 +9680,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
 &=c_\sigma\left(-\prod_{i\in\mathcal J}A_{i,\sigma(i)}\right)
 &&\bigl(\because\ \text{上で示した全体の積の反転}\bigr)\\
 &=-\left(c_\sigma\prod_{i\in\mathcal J}A_{i,\sigma(i)}\right)
-&&\bigl(\because\ \text{積の第二因子の負号}\bigr).
+&&\bigl(\because\ \text{積の第二因子の負号}\bigr)
 \end{aligned}`),
                 paragraph(["対象集合が空のときは入力がなく、主張は全称命題として成り立つ。最小元の選択は対象集合に属する入力にだけ行った。計算は有限集合と代数的数係数多項式の中で閉じ、実数体・複素数体への脱出はない。"]),
               ],
@@ -70373,6 +70373,7 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.vertexSimpleWalk_period_seam_interior_side_eq",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_interior_side_constant",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_of_interior_left",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_of_interior_right",
                       "Ising2DLambda.NecSuf.KacWard.finite_adjacent_side_constant",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_interior_side_constant_from_necSuf",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
