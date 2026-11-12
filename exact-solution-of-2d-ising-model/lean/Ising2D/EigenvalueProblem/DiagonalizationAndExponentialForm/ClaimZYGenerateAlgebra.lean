@@ -25,7 +25,7 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 | Step 3 前半の結び（`𝓑` は `Mat(2,ℂ)` を張る） | `pauliFamily_spans`（`matrix_two_decomp` の係数を並べる） |
 | Step 3 後半（`𝓑^{⊠M}` は `Mat(2^M,ℂ)` を張る。`<kronecker_family_of_spanning_family_spans>` を `𝓑` に適用） | `kronecker_family_of_spanning_family_spans pauliFamily pauliFamily_spans`（`ClaimKroneckerFamilyOfSpanningFamilySpans.lean`） |
 | Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
-| Step 3 後半（`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法で `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`、`s = M_col` で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteFactorPrefixProduct`（`P_s`）・`siteFactorPrefixProduct_eq_and_mem`（`s = 1` の 2 行と一段の 6 行の鎖）・`siteProd_mem`（`s = M_col`） |
+| Step 3 後半（`Q_1 := E_1`・`Q_{s+1} := Q_sE_{s+1}` の帰納法で `Q_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `Q_s ∈ 𝒜`、`s = M_col` で `e_1 ⊠ ⋯ ⊠ e_M ∈ 𝒜`） | `siteFactorPrefixProduct`（`Q_s`）・`siteFactorPrefixProduct_eq_and_mem`（`s = 1` の 2 行と一段の 6 行の鎖）・`siteProd_mem`（`s = M_col`） |
 | Step 3 の結び（`Mat(2^M,ℂ) = span(𝓑^{⊠M}) ⊆ 𝒜`。`𝒜` は ℂ-線型結合について閉じる） | `Z_Y_generate_algebra` |
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
@@ -631,29 +631,29 @@ theorem pauliFamily_spans (A : Matrix (Fin 2) (Fin 2) ℂ) :
 
 /-! ## Step 3 後半: `e_1 ⊠ ⋯ ⊠ e_M` は `𝒜` に属する -/
 
-/-- 人手 Step 3 後半の `P_s`（`def_finite_product_of_matrices` の左から順に掛けた積 `E_1E_2⋯E_s`）:
-`P_1 := E_1`、`P_{s+1} := P_s E_{s+1}`。`E_k = I ⊠ ⋯ ⊠ x_k ⊠ ⋯ ⊠ I` は Lean の `siteOp k (x k)`。
-Lean の添字は 0 始まりで、`siteFactorPrefixProduct x s h` が人手の `P_{s+1}`、Lean のサイト `⟨k, _⟩` が人手のサイト `k+1` である。 -/
+/-- 人手 Step 3 後半の `Q_s`（`def_finite_product_of_matrices` の左から順に掛けた積 `E_1E_2⋯E_s`）:
+`Q_1 := E_1`、`Q_{s+1} := Q_s E_{s+1}`。`E_k = I ⊠ ⋯ ⊠ x_k ⊠ ⋯ ⊠ I` は Lean の `siteOp k (x k)`。
+Lean の添字は 0 始まりで、`siteFactorPrefixProduct x s h` が人手の `Q_{s+1}`、Lean のサイト `⟨k, _⟩` が人手のサイト `k+1` である。 -/
 noncomputable def siteFactorPrefixProduct (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
     (s : ℕ) → s < M → TensorPow M
   | 0, h => siteOp ⟨0, h⟩ (x ⟨0, h⟩)
   | s + 1, h =>
       siteFactorPrefixProduct x s (Nat.lt_of_succ_lt h) * siteOp ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)
 
-/-- 人手 Step 3 後半の帰納法: `P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`。
+/-- 人手 Step 3 後半の帰納法: `Q_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `Q_s ∈ 𝒜`。
 人手の `s` は Lean の `s + 1` で、人手の「第 `1` から第 `s` 因子」は Lean の `(i : ℕ) ≤ s` である。
 `s = 1` の 2 行の鎖と、`s → s + 1` の 6 行の鎖は、下の 2 つの節の `calc` と 1 段ずつ対応する
 （Lean の最後の段は、人手の因子の並び `e_1 ⊠ ⋯ ⊠ e_{s+1} ⊠ I ⊠ ⋯ ⊠ I` を `if` の書き方へ移すだけである）。
-`P_s ∈ 𝒜` は、`s = 1` では `E_1 ∈ 𝒜`、`s → s + 1` では帰納法の仮定と `E_{s+1} ∈ 𝒜` と (iv) である。 -/
+`Q_s ∈ 𝒜` は、`s = 1` では `E_1 ∈ 𝒜`、`s → s + 1` では帰納法の仮定と `E_{s+1} ∈ 𝒜` と (iv) である。 -/
 theorem siteFactorPrefixProduct_eq_and_mem (A : Subalgebra ℂ (TensorPow M))
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (hE : ∀ k, siteOp k (x k) ∈ A) :
     ∀ (s : ℕ) (h : s < M),
       siteFactorPrefixProduct x s h = siteProd M (fun i => if (i : ℕ) ≤ s then x i else 1)
         ∧ siteFactorPrefixProduct x s h ∈ A
   | 0, h => by
-    refine ⟨?_, hE _⟩                                                  -- `P_1 = E_1 ∈ 𝒜`
+    refine ⟨?_, hE _⟩                                                  -- `Q_1 = E_1 ∈ 𝒜`
     calc siteFactorPrefixProduct x 0 h
-        = siteOp ⟨0, h⟩ (x ⟨0, h⟩) := rfl                              -- `P_1` の定義
+        = siteOp ⟨0, h⟩ (x ⟨0, h⟩) := rfl                              -- `Q_1` の定義
       _ = siteProd M (fun i => if (i : ℕ) ≤ 0 then x i else 1) := by
           rw [siteOp_apply]                                            -- `E_1` の定義（`e_1 ⊠ I ⊠ ⋯ ⊠ I`）
           congr 1                                                      -- 両辺は同じ因子の並び（`Function.update` は `if` の書き方の違いだけ）
@@ -669,7 +669,7 @@ theorem siteFactorPrefixProduct_eq_and_mem (A : Subalgebra ℂ (TensorPow M))
     refine ⟨?_, ?_⟩
     · calc siteFactorPrefixProduct x (s + 1) h
           = siteFactorPrefixProduct x s (Nat.lt_of_succ_lt h) * siteOp ⟨s + 1, h⟩ (x ⟨s + 1, h⟩) :=
-            rfl                                                        -- `P_{s+1}` の定義
+            rfl                                                        -- `Q_{s+1}` の定義
         _ = siteProd M (fun i => if (i : ℕ) ≤ s then x i else 1)
               * siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) ⟨s + 1, h⟩
                   (x ⟨s + 1, h⟩)) := by
@@ -722,7 +722,7 @@ theorem siteFactorPrefixProduct_eq_and_mem (A : Subalgebra ℂ (TensorPow M))
 
 /-- クロネッカー積 `e_1 ⊠ ⋯ ⊠ e_M` は、各 `E_k = I ⊠ ⋯ ⊠ e_k ⊠ ⋯ ⊠ I` を含む部分多元環に属する。
 
-人手 Step 3 後半の「`s = M_col` として `e_1 ⊠ ⋯ ⊠ e_{M_col} = P_{M_col} ∈ 𝒜`」: `siteFactorPrefixProduct_eq_and_mem` を
+人手 Step 3 後半の「`s = M_col` として `e_1 ⊠ ⋯ ⊠ e_{M_col} = Q_{M_col} ∈ 𝒜`」: `siteFactorPrefixProduct_eq_and_mem` を
 人手の `s = M_col`（Lean の `M - 1`）で使い、`(i : ℕ) ≤ M - 1` がすべてのサイトで成り立つことから因子の並びを `x` に戻す。
 `M = 0` の場合は人手に現れない（人手は `M_col ∈ ℤ_{≥2}`）。主張の型を `M : ℕ` のままにするため、Lean はこの場合を
 `Fin 0 → Mat(2,ℂ)` の元が単位元しかないこと・`kronecker_product_rule` (2)（`siteProd_one`）・(ii) で別に閉じる。 -/

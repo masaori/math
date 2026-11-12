@@ -26,10 +26,10 @@
 
 ### (b) 「サイトごとの元の積は部分半群に属する」 — `NecSuf.prefixProduct_eq_and_mem`・`NecSuf.map_mem_of_mulSingle_mem`
 
-人手 Step 3 後半の `P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法（`P_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `P_s ∈ 𝒜`）を、
+人手 Step 3 後半の `Q_1 := E_1`・`Q_{s+1} := Q_sE_{s+1}` の帰納法（`Q_s = e_1 ⊠ ⋯ ⊠ e_s ⊠ I ⊠ ⋯ ⊠ I` かつ `Q_s ∈ 𝒜`）を、
 具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem` と同じ段の並びで回す。仮定は
 
-* 添字は `Fin n` で `0 < n`（`P_1` から始めるため。`n = 0` では帰納法を始められない）、
+* 添字は `Fin n` で `0 < n`（`Q_1` から始めるため。`n = 0` では帰納法を始められない）、
 * 各サイトの `N i` は `MulOneClass`（単位元が両側の単位元であること。サイトごとに違ってよい）、
 * 目標の `A` は積を持つだけ（結合律も単位元も不要）、
 * **積を保つ写像** `φ : (∀ i, N i) →ₙ* A`、
@@ -42,7 +42,7 @@
 具体版の帰納法は行列の性質を一段の 6 行（`kronecker_product_rule` (1)・右単位・左単位 2 回）でしか参照していなかった、
 ということが必要十分版で確認できた。
 
-添字の順序は使う。人手の `P_s` が第 `1` から第 `s` 因子を左から順に掛けた積だからである。
+添字の順序は使う。人手の `Q_s` が第 `1` から第 `s` 因子を左から順に掛けた積だからである。
 主張だけなら任意の有限添字で成り立つ（有限集合の帰納法）が、それは人手と別の手順なので置かない。
 
 ### (c) Step 2（Jordan–Wigner 文字列の帰納法） — `NecSuf.string_mem` / `NecSuf.local_mem`
@@ -186,14 +186,14 @@ bash scripts/check-no-sorry.sh
 ```
 
 （Step 2 の 6 行は 2026-11-12 に、累積帰納法の三段・可換の式・二乗の式へ組み直した後に `#print axioms` で取った出力。
-`map_mem_of_mulSingle_mem` の行は同じ日に `P_s` の帰納法へ書き直した後の出力。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
+`map_mem_of_mulSingle_mem` の行は同じ日に `P_s`（いまの `Q_s`）の帰納法へ書き直した後の出力。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
 `propext` は有限積の初項・漸化式を右辺から左辺へ読む段の `rw` から入る。選択公理は使わない。）
 
 Step 2 の必要十分版（`string_mem_of_previous` / `local_mem_of_previous` / `local_mem` / `string_mem` / `xl_mul_string_comm` / `string_mul_self`）が**公理に一切依存しない**ことは、
 上の「Step 2 に効いているのは漸化式と分解の形だけ」という主張の独立した裏づけになる
 （選択公理も命題外延性も使わずに証明が閉じている）。
 `map_mem_of_mulSingle_mem` が `Classical.choice` を使わないことも同様で、
-`P_s` の帰納法と、`φ` が積を保つことだけで閉じていることを示している。
+`Q_s` の帰納法と、`φ` が積を保つことだけで閉じていることを示している。
 
 `scripts/check-no-sorry.sh` の `targets` には本作業で追加した主要宣言
 （`NecSuf.string_mem_of_previous`, `NecSuf.local_mem_of_previous`, `NecSuf.string_mem`, `NecSuf.local_mem`, `NecSuf.xl_mul_string_comm`, `NecSuf.string_mul_self`, `NecSuf.prefixProduct_eq_and_mem`, `NecSuf.map_mem_of_mulSingle_mem`,

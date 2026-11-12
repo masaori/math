@@ -2,18 +2,18 @@ PASS M=1 k=1: e_k = I なら E_k = I_Mat(2^M)
 PASS M=1 k=1: e_k = σ^x なら E_k = σ_k^x
 PASS M=1 k=1: e_k = σ^y なら E_k = σ_k^y
 PASS M=1 k=1: e_k = σ^z なら E_k = σ_k^z
-PASS M=1 e=I P_1 第 1 行 = 第 2 行
-PASS M=1 e=I P_1 第 2 行 = 第 3 行
-PASS M=1 e=I: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=1 e=x P_1 第 1 行 = 第 2 行
-PASS M=1 e=x P_1 第 2 行 = 第 3 行
-PASS M=1 e=x: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=1 e=y P_1 第 1 行 = 第 2 行
-PASS M=1 e=y P_1 第 2 行 = 第 3 行
-PASS M=1 e=y: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=1 e=z P_1 第 1 行 = 第 2 行
-PASS M=1 e=z P_1 第 2 行 = 第 3 行
-PASS M=1 e=z: P_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=1 e=I Q_1 第 1 行 = 第 2 行
+PASS M=1 e=I Q_1 第 2 行 = 第 3 行
+PASS M=1 e=I: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=1 e=x Q_1 第 1 行 = 第 2 行
+PASS M=1 e=x Q_1 第 2 行 = 第 3 行
+PASS M=1 e=x: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=1 e=y Q_1 第 1 行 = 第 2 行
+PASS M=1 e=y Q_1 第 2 行 = 第 3 行
+PASS M=1 e=y: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=1 e=z Q_1 第 1 行 = 第 2 行
+PASS M=1 e=z Q_1 第 2 行 = 第 3 行
+PASS M=1 e=z: Q_M = E_1…E_M = e_1⊠…⊠e_M
 PASS M=2 k=1: e_k = I なら E_k = I_Mat(2^M)
 PASS M=2 k=1: e_k = σ^x なら E_k = σ_k^x
 PASS M=2 k=1: e_k = σ^y なら E_k = σ_k^y
@@ -22,150 +22,150 @@ PASS M=2 k=2: e_k = I なら E_k = I_Mat(2^M)
 PASS M=2 k=2: e_k = σ^x なら E_k = σ_k^x
 PASS M=2 k=2: e_k = σ^y なら E_k = σ_k^y
 PASS M=2 k=2: e_k = σ^z なら E_k = σ_k^z
-PASS M=2 e=II P_1 第 1 行 = 第 2 行
-PASS M=2 e=II P_1 第 2 行 = 第 3 行
-PASS M=2 e=II 帰納法の仮定 P_1
-PASS M=2 e=II P_2 第 1 行 = 第 2 行
-PASS M=2 e=II P_2 第 2 行 = 第 3 行
-PASS M=2 e=II P_2 第 3 行 = 第 4 行
-PASS M=2 e=II P_2 第 4 行 = 第 5 行
-PASS M=2 e=II P_2 第 5 行 = 第 6 行
-PASS M=2 e=II: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=Ix P_1 第 1 行 = 第 2 行
-PASS M=2 e=Ix P_1 第 2 行 = 第 3 行
-PASS M=2 e=Ix 帰納法の仮定 P_1
-PASS M=2 e=Ix P_2 第 1 行 = 第 2 行
-PASS M=2 e=Ix P_2 第 2 行 = 第 3 行
-PASS M=2 e=Ix P_2 第 3 行 = 第 4 行
-PASS M=2 e=Ix P_2 第 4 行 = 第 5 行
-PASS M=2 e=Ix P_2 第 5 行 = 第 6 行
-PASS M=2 e=Ix: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=Iy P_1 第 1 行 = 第 2 行
-PASS M=2 e=Iy P_1 第 2 行 = 第 3 行
-PASS M=2 e=Iy 帰納法の仮定 P_1
-PASS M=2 e=Iy P_2 第 1 行 = 第 2 行
-PASS M=2 e=Iy P_2 第 2 行 = 第 3 行
-PASS M=2 e=Iy P_2 第 3 行 = 第 4 行
-PASS M=2 e=Iy P_2 第 4 行 = 第 5 行
-PASS M=2 e=Iy P_2 第 5 行 = 第 6 行
-PASS M=2 e=Iy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=Iz P_1 第 1 行 = 第 2 行
-PASS M=2 e=Iz P_1 第 2 行 = 第 3 行
-PASS M=2 e=Iz 帰納法の仮定 P_1
-PASS M=2 e=Iz P_2 第 1 行 = 第 2 行
-PASS M=2 e=Iz P_2 第 2 行 = 第 3 行
-PASS M=2 e=Iz P_2 第 3 行 = 第 4 行
-PASS M=2 e=Iz P_2 第 4 行 = 第 5 行
-PASS M=2 e=Iz P_2 第 5 行 = 第 6 行
-PASS M=2 e=Iz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=xI P_1 第 1 行 = 第 2 行
-PASS M=2 e=xI P_1 第 2 行 = 第 3 行
-PASS M=2 e=xI 帰納法の仮定 P_1
-PASS M=2 e=xI P_2 第 1 行 = 第 2 行
-PASS M=2 e=xI P_2 第 2 行 = 第 3 行
-PASS M=2 e=xI P_2 第 3 行 = 第 4 行
-PASS M=2 e=xI P_2 第 4 行 = 第 5 行
-PASS M=2 e=xI P_2 第 5 行 = 第 6 行
-PASS M=2 e=xI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=xx P_1 第 1 行 = 第 2 行
-PASS M=2 e=xx P_1 第 2 行 = 第 3 行
-PASS M=2 e=xx 帰納法の仮定 P_1
-PASS M=2 e=xx P_2 第 1 行 = 第 2 行
-PASS M=2 e=xx P_2 第 2 行 = 第 3 行
-PASS M=2 e=xx P_2 第 3 行 = 第 4 行
-PASS M=2 e=xx P_2 第 4 行 = 第 5 行
-PASS M=2 e=xx P_2 第 5 行 = 第 6 行
-PASS M=2 e=xx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=xy P_1 第 1 行 = 第 2 行
-PASS M=2 e=xy P_1 第 2 行 = 第 3 行
-PASS M=2 e=xy 帰納法の仮定 P_1
-PASS M=2 e=xy P_2 第 1 行 = 第 2 行
-PASS M=2 e=xy P_2 第 2 行 = 第 3 行
-PASS M=2 e=xy P_2 第 3 行 = 第 4 行
-PASS M=2 e=xy P_2 第 4 行 = 第 5 行
-PASS M=2 e=xy P_2 第 5 行 = 第 6 行
-PASS M=2 e=xy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=xz P_1 第 1 行 = 第 2 行
-PASS M=2 e=xz P_1 第 2 行 = 第 3 行
-PASS M=2 e=xz 帰納法の仮定 P_1
-PASS M=2 e=xz P_2 第 1 行 = 第 2 行
-PASS M=2 e=xz P_2 第 2 行 = 第 3 行
-PASS M=2 e=xz P_2 第 3 行 = 第 4 行
-PASS M=2 e=xz P_2 第 4 行 = 第 5 行
-PASS M=2 e=xz P_2 第 5 行 = 第 6 行
-PASS M=2 e=xz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=yI P_1 第 1 行 = 第 2 行
-PASS M=2 e=yI P_1 第 2 行 = 第 3 行
-PASS M=2 e=yI 帰納法の仮定 P_1
-PASS M=2 e=yI P_2 第 1 行 = 第 2 行
-PASS M=2 e=yI P_2 第 2 行 = 第 3 行
-PASS M=2 e=yI P_2 第 3 行 = 第 4 行
-PASS M=2 e=yI P_2 第 4 行 = 第 5 行
-PASS M=2 e=yI P_2 第 5 行 = 第 6 行
-PASS M=2 e=yI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=yx P_1 第 1 行 = 第 2 行
-PASS M=2 e=yx P_1 第 2 行 = 第 3 行
-PASS M=2 e=yx 帰納法の仮定 P_1
-PASS M=2 e=yx P_2 第 1 行 = 第 2 行
-PASS M=2 e=yx P_2 第 2 行 = 第 3 行
-PASS M=2 e=yx P_2 第 3 行 = 第 4 行
-PASS M=2 e=yx P_2 第 4 行 = 第 5 行
-PASS M=2 e=yx P_2 第 5 行 = 第 6 行
-PASS M=2 e=yx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=yy P_1 第 1 行 = 第 2 行
-PASS M=2 e=yy P_1 第 2 行 = 第 3 行
-PASS M=2 e=yy 帰納法の仮定 P_1
-PASS M=2 e=yy P_2 第 1 行 = 第 2 行
-PASS M=2 e=yy P_2 第 2 行 = 第 3 行
-PASS M=2 e=yy P_2 第 3 行 = 第 4 行
-PASS M=2 e=yy P_2 第 4 行 = 第 5 行
-PASS M=2 e=yy P_2 第 5 行 = 第 6 行
-PASS M=2 e=yy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=yz P_1 第 1 行 = 第 2 行
-PASS M=2 e=yz P_1 第 2 行 = 第 3 行
-PASS M=2 e=yz 帰納法の仮定 P_1
-PASS M=2 e=yz P_2 第 1 行 = 第 2 行
-PASS M=2 e=yz P_2 第 2 行 = 第 3 行
-PASS M=2 e=yz P_2 第 3 行 = 第 4 行
-PASS M=2 e=yz P_2 第 4 行 = 第 5 行
-PASS M=2 e=yz P_2 第 5 行 = 第 6 行
-PASS M=2 e=yz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=zI P_1 第 1 行 = 第 2 行
-PASS M=2 e=zI P_1 第 2 行 = 第 3 行
-PASS M=2 e=zI 帰納法の仮定 P_1
-PASS M=2 e=zI P_2 第 1 行 = 第 2 行
-PASS M=2 e=zI P_2 第 2 行 = 第 3 行
-PASS M=2 e=zI P_2 第 3 行 = 第 4 行
-PASS M=2 e=zI P_2 第 4 行 = 第 5 行
-PASS M=2 e=zI P_2 第 5 行 = 第 6 行
-PASS M=2 e=zI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=zx P_1 第 1 行 = 第 2 行
-PASS M=2 e=zx P_1 第 2 行 = 第 3 行
-PASS M=2 e=zx 帰納法の仮定 P_1
-PASS M=2 e=zx P_2 第 1 行 = 第 2 行
-PASS M=2 e=zx P_2 第 2 行 = 第 3 行
-PASS M=2 e=zx P_2 第 3 行 = 第 4 行
-PASS M=2 e=zx P_2 第 4 行 = 第 5 行
-PASS M=2 e=zx P_2 第 5 行 = 第 6 行
-PASS M=2 e=zx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=zy P_1 第 1 行 = 第 2 行
-PASS M=2 e=zy P_1 第 2 行 = 第 3 行
-PASS M=2 e=zy 帰納法の仮定 P_1
-PASS M=2 e=zy P_2 第 1 行 = 第 2 行
-PASS M=2 e=zy P_2 第 2 行 = 第 3 行
-PASS M=2 e=zy P_2 第 3 行 = 第 4 行
-PASS M=2 e=zy P_2 第 4 行 = 第 5 行
-PASS M=2 e=zy P_2 第 5 行 = 第 6 行
-PASS M=2 e=zy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=2 e=zz P_1 第 1 行 = 第 2 行
-PASS M=2 e=zz P_1 第 2 行 = 第 3 行
-PASS M=2 e=zz 帰納法の仮定 P_1
-PASS M=2 e=zz P_2 第 1 行 = 第 2 行
-PASS M=2 e=zz P_2 第 2 行 = 第 3 行
-PASS M=2 e=zz P_2 第 3 行 = 第 4 行
-PASS M=2 e=zz P_2 第 4 行 = 第 5 行
-PASS M=2 e=zz P_2 第 5 行 = 第 6 行
-PASS M=2 e=zz: P_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=II Q_1 第 1 行 = 第 2 行
+PASS M=2 e=II Q_1 第 2 行 = 第 3 行
+PASS M=2 e=II 帰納法の仮定 Q_1
+PASS M=2 e=II Q_2 第 1 行 = 第 2 行
+PASS M=2 e=II Q_2 第 2 行 = 第 3 行
+PASS M=2 e=II Q_2 第 3 行 = 第 4 行
+PASS M=2 e=II Q_2 第 4 行 = 第 5 行
+PASS M=2 e=II Q_2 第 5 行 = 第 6 行
+PASS M=2 e=II: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=Ix Q_1 第 1 行 = 第 2 行
+PASS M=2 e=Ix Q_1 第 2 行 = 第 3 行
+PASS M=2 e=Ix 帰納法の仮定 Q_1
+PASS M=2 e=Ix Q_2 第 1 行 = 第 2 行
+PASS M=2 e=Ix Q_2 第 2 行 = 第 3 行
+PASS M=2 e=Ix Q_2 第 3 行 = 第 4 行
+PASS M=2 e=Ix Q_2 第 4 行 = 第 5 行
+PASS M=2 e=Ix Q_2 第 5 行 = 第 6 行
+PASS M=2 e=Ix: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=Iy Q_1 第 1 行 = 第 2 行
+PASS M=2 e=Iy Q_1 第 2 行 = 第 3 行
+PASS M=2 e=Iy 帰納法の仮定 Q_1
+PASS M=2 e=Iy Q_2 第 1 行 = 第 2 行
+PASS M=2 e=Iy Q_2 第 2 行 = 第 3 行
+PASS M=2 e=Iy Q_2 第 3 行 = 第 4 行
+PASS M=2 e=Iy Q_2 第 4 行 = 第 5 行
+PASS M=2 e=Iy Q_2 第 5 行 = 第 6 行
+PASS M=2 e=Iy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=Iz Q_1 第 1 行 = 第 2 行
+PASS M=2 e=Iz Q_1 第 2 行 = 第 3 行
+PASS M=2 e=Iz 帰納法の仮定 Q_1
+PASS M=2 e=Iz Q_2 第 1 行 = 第 2 行
+PASS M=2 e=Iz Q_2 第 2 行 = 第 3 行
+PASS M=2 e=Iz Q_2 第 3 行 = 第 4 行
+PASS M=2 e=Iz Q_2 第 4 行 = 第 5 行
+PASS M=2 e=Iz Q_2 第 5 行 = 第 6 行
+PASS M=2 e=Iz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=xI Q_1 第 1 行 = 第 2 行
+PASS M=2 e=xI Q_1 第 2 行 = 第 3 行
+PASS M=2 e=xI 帰納法の仮定 Q_1
+PASS M=2 e=xI Q_2 第 1 行 = 第 2 行
+PASS M=2 e=xI Q_2 第 2 行 = 第 3 行
+PASS M=2 e=xI Q_2 第 3 行 = 第 4 行
+PASS M=2 e=xI Q_2 第 4 行 = 第 5 行
+PASS M=2 e=xI Q_2 第 5 行 = 第 6 行
+PASS M=2 e=xI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=xx Q_1 第 1 行 = 第 2 行
+PASS M=2 e=xx Q_1 第 2 行 = 第 3 行
+PASS M=2 e=xx 帰納法の仮定 Q_1
+PASS M=2 e=xx Q_2 第 1 行 = 第 2 行
+PASS M=2 e=xx Q_2 第 2 行 = 第 3 行
+PASS M=2 e=xx Q_2 第 3 行 = 第 4 行
+PASS M=2 e=xx Q_2 第 4 行 = 第 5 行
+PASS M=2 e=xx Q_2 第 5 行 = 第 6 行
+PASS M=2 e=xx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=xy Q_1 第 1 行 = 第 2 行
+PASS M=2 e=xy Q_1 第 2 行 = 第 3 行
+PASS M=2 e=xy 帰納法の仮定 Q_1
+PASS M=2 e=xy Q_2 第 1 行 = 第 2 行
+PASS M=2 e=xy Q_2 第 2 行 = 第 3 行
+PASS M=2 e=xy Q_2 第 3 行 = 第 4 行
+PASS M=2 e=xy Q_2 第 4 行 = 第 5 行
+PASS M=2 e=xy Q_2 第 5 行 = 第 6 行
+PASS M=2 e=xy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=xz Q_1 第 1 行 = 第 2 行
+PASS M=2 e=xz Q_1 第 2 行 = 第 3 行
+PASS M=2 e=xz 帰納法の仮定 Q_1
+PASS M=2 e=xz Q_2 第 1 行 = 第 2 行
+PASS M=2 e=xz Q_2 第 2 行 = 第 3 行
+PASS M=2 e=xz Q_2 第 3 行 = 第 4 行
+PASS M=2 e=xz Q_2 第 4 行 = 第 5 行
+PASS M=2 e=xz Q_2 第 5 行 = 第 6 行
+PASS M=2 e=xz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=yI Q_1 第 1 行 = 第 2 行
+PASS M=2 e=yI Q_1 第 2 行 = 第 3 行
+PASS M=2 e=yI 帰納法の仮定 Q_1
+PASS M=2 e=yI Q_2 第 1 行 = 第 2 行
+PASS M=2 e=yI Q_2 第 2 行 = 第 3 行
+PASS M=2 e=yI Q_2 第 3 行 = 第 4 行
+PASS M=2 e=yI Q_2 第 4 行 = 第 5 行
+PASS M=2 e=yI Q_2 第 5 行 = 第 6 行
+PASS M=2 e=yI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=yx Q_1 第 1 行 = 第 2 行
+PASS M=2 e=yx Q_1 第 2 行 = 第 3 行
+PASS M=2 e=yx 帰納法の仮定 Q_1
+PASS M=2 e=yx Q_2 第 1 行 = 第 2 行
+PASS M=2 e=yx Q_2 第 2 行 = 第 3 行
+PASS M=2 e=yx Q_2 第 3 行 = 第 4 行
+PASS M=2 e=yx Q_2 第 4 行 = 第 5 行
+PASS M=2 e=yx Q_2 第 5 行 = 第 6 行
+PASS M=2 e=yx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=yy Q_1 第 1 行 = 第 2 行
+PASS M=2 e=yy Q_1 第 2 行 = 第 3 行
+PASS M=2 e=yy 帰納法の仮定 Q_1
+PASS M=2 e=yy Q_2 第 1 行 = 第 2 行
+PASS M=2 e=yy Q_2 第 2 行 = 第 3 行
+PASS M=2 e=yy Q_2 第 3 行 = 第 4 行
+PASS M=2 e=yy Q_2 第 4 行 = 第 5 行
+PASS M=2 e=yy Q_2 第 5 行 = 第 6 行
+PASS M=2 e=yy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=yz Q_1 第 1 行 = 第 2 行
+PASS M=2 e=yz Q_1 第 2 行 = 第 3 行
+PASS M=2 e=yz 帰納法の仮定 Q_1
+PASS M=2 e=yz Q_2 第 1 行 = 第 2 行
+PASS M=2 e=yz Q_2 第 2 行 = 第 3 行
+PASS M=2 e=yz Q_2 第 3 行 = 第 4 行
+PASS M=2 e=yz Q_2 第 4 行 = 第 5 行
+PASS M=2 e=yz Q_2 第 5 行 = 第 6 行
+PASS M=2 e=yz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=zI Q_1 第 1 行 = 第 2 行
+PASS M=2 e=zI Q_1 第 2 行 = 第 3 行
+PASS M=2 e=zI 帰納法の仮定 Q_1
+PASS M=2 e=zI Q_2 第 1 行 = 第 2 行
+PASS M=2 e=zI Q_2 第 2 行 = 第 3 行
+PASS M=2 e=zI Q_2 第 3 行 = 第 4 行
+PASS M=2 e=zI Q_2 第 4 行 = 第 5 行
+PASS M=2 e=zI Q_2 第 5 行 = 第 6 行
+PASS M=2 e=zI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=zx Q_1 第 1 行 = 第 2 行
+PASS M=2 e=zx Q_1 第 2 行 = 第 3 行
+PASS M=2 e=zx 帰納法の仮定 Q_1
+PASS M=2 e=zx Q_2 第 1 行 = 第 2 行
+PASS M=2 e=zx Q_2 第 2 行 = 第 3 行
+PASS M=2 e=zx Q_2 第 3 行 = 第 4 行
+PASS M=2 e=zx Q_2 第 4 行 = 第 5 行
+PASS M=2 e=zx Q_2 第 5 行 = 第 6 行
+PASS M=2 e=zx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=zy Q_1 第 1 行 = 第 2 行
+PASS M=2 e=zy Q_1 第 2 行 = 第 3 行
+PASS M=2 e=zy 帰納法の仮定 Q_1
+PASS M=2 e=zy Q_2 第 1 行 = 第 2 行
+PASS M=2 e=zy Q_2 第 2 行 = 第 3 行
+PASS M=2 e=zy Q_2 第 3 行 = 第 4 行
+PASS M=2 e=zy Q_2 第 4 行 = 第 5 行
+PASS M=2 e=zy Q_2 第 5 行 = 第 6 行
+PASS M=2 e=zy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=2 e=zz Q_1 第 1 行 = 第 2 行
+PASS M=2 e=zz Q_1 第 2 行 = 第 3 行
+PASS M=2 e=zz 帰納法の仮定 Q_1
+PASS M=2 e=zz Q_2 第 1 行 = 第 2 行
+PASS M=2 e=zz Q_2 第 2 行 = 第 3 行
+PASS M=2 e=zz Q_2 第 3 行 = 第 4 行
+PASS M=2 e=zz Q_2 第 4 行 = 第 5 行
+PASS M=2 e=zz Q_2 第 5 行 = 第 6 行
+PASS M=2 e=zz: Q_M = E_1…E_M = e_1⊠…⊠e_M
 PASS M=3 k=1: e_k = I なら E_k = I_Mat(2^M)
 PASS M=3 k=1: e_k = σ^x なら E_k = σ_k^x
 PASS M=3 k=1: e_k = σ^y なら E_k = σ_k^y
@@ -178,968 +178,968 @@ PASS M=3 k=3: e_k = I なら E_k = I_Mat(2^M)
 PASS M=3 k=3: e_k = σ^x なら E_k = σ_k^x
 PASS M=3 k=3: e_k = σ^y なら E_k = σ_k^y
 PASS M=3 k=3: e_k = σ^z なら E_k = σ_k^z
-PASS M=3 e=III P_1 第 1 行 = 第 2 行
-PASS M=3 e=III P_1 第 2 行 = 第 3 行
-PASS M=3 e=III 帰納法の仮定 P_1
-PASS M=3 e=III P_2 第 1 行 = 第 2 行
-PASS M=3 e=III P_2 第 2 行 = 第 3 行
-PASS M=3 e=III P_2 第 3 行 = 第 4 行
-PASS M=3 e=III P_2 第 4 行 = 第 5 行
-PASS M=3 e=III P_2 第 5 行 = 第 6 行
-PASS M=3 e=III 帰納法の仮定 P_2
-PASS M=3 e=III P_3 第 1 行 = 第 2 行
-PASS M=3 e=III P_3 第 2 行 = 第 3 行
-PASS M=3 e=III P_3 第 3 行 = 第 4 行
-PASS M=3 e=III P_3 第 4 行 = 第 5 行
-PASS M=3 e=III P_3 第 5 行 = 第 6 行
-PASS M=3 e=III: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IIx P_1 第 1 行 = 第 2 行
-PASS M=3 e=IIx P_1 第 2 行 = 第 3 行
-PASS M=3 e=IIx 帰納法の仮定 P_1
-PASS M=3 e=IIx P_2 第 1 行 = 第 2 行
-PASS M=3 e=IIx P_2 第 2 行 = 第 3 行
-PASS M=3 e=IIx P_2 第 3 行 = 第 4 行
-PASS M=3 e=IIx P_2 第 4 行 = 第 5 行
-PASS M=3 e=IIx P_2 第 5 行 = 第 6 行
-PASS M=3 e=IIx 帰納法の仮定 P_2
-PASS M=3 e=IIx P_3 第 1 行 = 第 2 行
-PASS M=3 e=IIx P_3 第 2 行 = 第 3 行
-PASS M=3 e=IIx P_3 第 3 行 = 第 4 行
-PASS M=3 e=IIx P_3 第 4 行 = 第 5 行
-PASS M=3 e=IIx P_3 第 5 行 = 第 6 行
-PASS M=3 e=IIx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IIy P_1 第 1 行 = 第 2 行
-PASS M=3 e=IIy P_1 第 2 行 = 第 3 行
-PASS M=3 e=IIy 帰納法の仮定 P_1
-PASS M=3 e=IIy P_2 第 1 行 = 第 2 行
-PASS M=3 e=IIy P_2 第 2 行 = 第 3 行
-PASS M=3 e=IIy P_2 第 3 行 = 第 4 行
-PASS M=3 e=IIy P_2 第 4 行 = 第 5 行
-PASS M=3 e=IIy P_2 第 5 行 = 第 6 行
-PASS M=3 e=IIy 帰納法の仮定 P_2
-PASS M=3 e=IIy P_3 第 1 行 = 第 2 行
-PASS M=3 e=IIy P_3 第 2 行 = 第 3 行
-PASS M=3 e=IIy P_3 第 3 行 = 第 4 行
-PASS M=3 e=IIy P_3 第 4 行 = 第 5 行
-PASS M=3 e=IIy P_3 第 5 行 = 第 6 行
-PASS M=3 e=IIy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IIz P_1 第 1 行 = 第 2 行
-PASS M=3 e=IIz P_1 第 2 行 = 第 3 行
-PASS M=3 e=IIz 帰納法の仮定 P_1
-PASS M=3 e=IIz P_2 第 1 行 = 第 2 行
-PASS M=3 e=IIz P_2 第 2 行 = 第 3 行
-PASS M=3 e=IIz P_2 第 3 行 = 第 4 行
-PASS M=3 e=IIz P_2 第 4 行 = 第 5 行
-PASS M=3 e=IIz P_2 第 5 行 = 第 6 行
-PASS M=3 e=IIz 帰納法の仮定 P_2
-PASS M=3 e=IIz P_3 第 1 行 = 第 2 行
-PASS M=3 e=IIz P_3 第 2 行 = 第 3 行
-PASS M=3 e=IIz P_3 第 3 行 = 第 4 行
-PASS M=3 e=IIz P_3 第 4 行 = 第 5 行
-PASS M=3 e=IIz P_3 第 5 行 = 第 6 行
-PASS M=3 e=IIz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IxI P_1 第 1 行 = 第 2 行
-PASS M=3 e=IxI P_1 第 2 行 = 第 3 行
-PASS M=3 e=IxI 帰納法の仮定 P_1
-PASS M=3 e=IxI P_2 第 1 行 = 第 2 行
-PASS M=3 e=IxI P_2 第 2 行 = 第 3 行
-PASS M=3 e=IxI P_2 第 3 行 = 第 4 行
-PASS M=3 e=IxI P_2 第 4 行 = 第 5 行
-PASS M=3 e=IxI P_2 第 5 行 = 第 6 行
-PASS M=3 e=IxI 帰納法の仮定 P_2
-PASS M=3 e=IxI P_3 第 1 行 = 第 2 行
-PASS M=3 e=IxI P_3 第 2 行 = 第 3 行
-PASS M=3 e=IxI P_3 第 3 行 = 第 4 行
-PASS M=3 e=IxI P_3 第 4 行 = 第 5 行
-PASS M=3 e=IxI P_3 第 5 行 = 第 6 行
-PASS M=3 e=IxI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Ixx P_1 第 1 行 = 第 2 行
-PASS M=3 e=Ixx P_1 第 2 行 = 第 3 行
-PASS M=3 e=Ixx 帰納法の仮定 P_1
-PASS M=3 e=Ixx P_2 第 1 行 = 第 2 行
-PASS M=3 e=Ixx P_2 第 2 行 = 第 3 行
-PASS M=3 e=Ixx P_2 第 3 行 = 第 4 行
-PASS M=3 e=Ixx P_2 第 4 行 = 第 5 行
-PASS M=3 e=Ixx P_2 第 5 行 = 第 6 行
-PASS M=3 e=Ixx 帰納法の仮定 P_2
-PASS M=3 e=Ixx P_3 第 1 行 = 第 2 行
-PASS M=3 e=Ixx P_3 第 2 行 = 第 3 行
-PASS M=3 e=Ixx P_3 第 3 行 = 第 4 行
-PASS M=3 e=Ixx P_3 第 4 行 = 第 5 行
-PASS M=3 e=Ixx P_3 第 5 行 = 第 6 行
-PASS M=3 e=Ixx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Ixy P_1 第 1 行 = 第 2 行
-PASS M=3 e=Ixy P_1 第 2 行 = 第 3 行
-PASS M=3 e=Ixy 帰納法の仮定 P_1
-PASS M=3 e=Ixy P_2 第 1 行 = 第 2 行
-PASS M=3 e=Ixy P_2 第 2 行 = 第 3 行
-PASS M=3 e=Ixy P_2 第 3 行 = 第 4 行
-PASS M=3 e=Ixy P_2 第 4 行 = 第 5 行
-PASS M=3 e=Ixy P_2 第 5 行 = 第 6 行
-PASS M=3 e=Ixy 帰納法の仮定 P_2
-PASS M=3 e=Ixy P_3 第 1 行 = 第 2 行
-PASS M=3 e=Ixy P_3 第 2 行 = 第 3 行
-PASS M=3 e=Ixy P_3 第 3 行 = 第 4 行
-PASS M=3 e=Ixy P_3 第 4 行 = 第 5 行
-PASS M=3 e=Ixy P_3 第 5 行 = 第 6 行
-PASS M=3 e=Ixy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Ixz P_1 第 1 行 = 第 2 行
-PASS M=3 e=Ixz P_1 第 2 行 = 第 3 行
-PASS M=3 e=Ixz 帰納法の仮定 P_1
-PASS M=3 e=Ixz P_2 第 1 行 = 第 2 行
-PASS M=3 e=Ixz P_2 第 2 行 = 第 3 行
-PASS M=3 e=Ixz P_2 第 3 行 = 第 4 行
-PASS M=3 e=Ixz P_2 第 4 行 = 第 5 行
-PASS M=3 e=Ixz P_2 第 5 行 = 第 6 行
-PASS M=3 e=Ixz 帰納法の仮定 P_2
-PASS M=3 e=Ixz P_3 第 1 行 = 第 2 行
-PASS M=3 e=Ixz P_3 第 2 行 = 第 3 行
-PASS M=3 e=Ixz P_3 第 3 行 = 第 4 行
-PASS M=3 e=Ixz P_3 第 4 行 = 第 5 行
-PASS M=3 e=Ixz P_3 第 5 行 = 第 6 行
-PASS M=3 e=Ixz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IyI P_1 第 1 行 = 第 2 行
-PASS M=3 e=IyI P_1 第 2 行 = 第 3 行
-PASS M=3 e=IyI 帰納法の仮定 P_1
-PASS M=3 e=IyI P_2 第 1 行 = 第 2 行
-PASS M=3 e=IyI P_2 第 2 行 = 第 3 行
-PASS M=3 e=IyI P_2 第 3 行 = 第 4 行
-PASS M=3 e=IyI P_2 第 4 行 = 第 5 行
-PASS M=3 e=IyI P_2 第 5 行 = 第 6 行
-PASS M=3 e=IyI 帰納法の仮定 P_2
-PASS M=3 e=IyI P_3 第 1 行 = 第 2 行
-PASS M=3 e=IyI P_3 第 2 行 = 第 3 行
-PASS M=3 e=IyI P_3 第 3 行 = 第 4 行
-PASS M=3 e=IyI P_3 第 4 行 = 第 5 行
-PASS M=3 e=IyI P_3 第 5 行 = 第 6 行
-PASS M=3 e=IyI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Iyx P_1 第 1 行 = 第 2 行
-PASS M=3 e=Iyx P_1 第 2 行 = 第 3 行
-PASS M=3 e=Iyx 帰納法の仮定 P_1
-PASS M=3 e=Iyx P_2 第 1 行 = 第 2 行
-PASS M=3 e=Iyx P_2 第 2 行 = 第 3 行
-PASS M=3 e=Iyx P_2 第 3 行 = 第 4 行
-PASS M=3 e=Iyx P_2 第 4 行 = 第 5 行
-PASS M=3 e=Iyx P_2 第 5 行 = 第 6 行
-PASS M=3 e=Iyx 帰納法の仮定 P_2
-PASS M=3 e=Iyx P_3 第 1 行 = 第 2 行
-PASS M=3 e=Iyx P_3 第 2 行 = 第 3 行
-PASS M=3 e=Iyx P_3 第 3 行 = 第 4 行
-PASS M=3 e=Iyx P_3 第 4 行 = 第 5 行
-PASS M=3 e=Iyx P_3 第 5 行 = 第 6 行
-PASS M=3 e=Iyx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Iyy P_1 第 1 行 = 第 2 行
-PASS M=3 e=Iyy P_1 第 2 行 = 第 3 行
-PASS M=3 e=Iyy 帰納法の仮定 P_1
-PASS M=3 e=Iyy P_2 第 1 行 = 第 2 行
-PASS M=3 e=Iyy P_2 第 2 行 = 第 3 行
-PASS M=3 e=Iyy P_2 第 3 行 = 第 4 行
-PASS M=3 e=Iyy P_2 第 4 行 = 第 5 行
-PASS M=3 e=Iyy P_2 第 5 行 = 第 6 行
-PASS M=3 e=Iyy 帰納法の仮定 P_2
-PASS M=3 e=Iyy P_3 第 1 行 = 第 2 行
-PASS M=3 e=Iyy P_3 第 2 行 = 第 3 行
-PASS M=3 e=Iyy P_3 第 3 行 = 第 4 行
-PASS M=3 e=Iyy P_3 第 4 行 = 第 5 行
-PASS M=3 e=Iyy P_3 第 5 行 = 第 6 行
-PASS M=3 e=Iyy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Iyz P_1 第 1 行 = 第 2 行
-PASS M=3 e=Iyz P_1 第 2 行 = 第 3 行
-PASS M=3 e=Iyz 帰納法の仮定 P_1
-PASS M=3 e=Iyz P_2 第 1 行 = 第 2 行
-PASS M=3 e=Iyz P_2 第 2 行 = 第 3 行
-PASS M=3 e=Iyz P_2 第 3 行 = 第 4 行
-PASS M=3 e=Iyz P_2 第 4 行 = 第 5 行
-PASS M=3 e=Iyz P_2 第 5 行 = 第 6 行
-PASS M=3 e=Iyz 帰納法の仮定 P_2
-PASS M=3 e=Iyz P_3 第 1 行 = 第 2 行
-PASS M=3 e=Iyz P_3 第 2 行 = 第 3 行
-PASS M=3 e=Iyz P_3 第 3 行 = 第 4 行
-PASS M=3 e=Iyz P_3 第 4 行 = 第 5 行
-PASS M=3 e=Iyz P_3 第 5 行 = 第 6 行
-PASS M=3 e=Iyz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=IzI P_1 第 1 行 = 第 2 行
-PASS M=3 e=IzI P_1 第 2 行 = 第 3 行
-PASS M=3 e=IzI 帰納法の仮定 P_1
-PASS M=3 e=IzI P_2 第 1 行 = 第 2 行
-PASS M=3 e=IzI P_2 第 2 行 = 第 3 行
-PASS M=3 e=IzI P_2 第 3 行 = 第 4 行
-PASS M=3 e=IzI P_2 第 4 行 = 第 5 行
-PASS M=3 e=IzI P_2 第 5 行 = 第 6 行
-PASS M=3 e=IzI 帰納法の仮定 P_2
-PASS M=3 e=IzI P_3 第 1 行 = 第 2 行
-PASS M=3 e=IzI P_3 第 2 行 = 第 3 行
-PASS M=3 e=IzI P_3 第 3 行 = 第 4 行
-PASS M=3 e=IzI P_3 第 4 行 = 第 5 行
-PASS M=3 e=IzI P_3 第 5 行 = 第 6 行
-PASS M=3 e=IzI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Izx P_1 第 1 行 = 第 2 行
-PASS M=3 e=Izx P_1 第 2 行 = 第 3 行
-PASS M=3 e=Izx 帰納法の仮定 P_1
-PASS M=3 e=Izx P_2 第 1 行 = 第 2 行
-PASS M=3 e=Izx P_2 第 2 行 = 第 3 行
-PASS M=3 e=Izx P_2 第 3 行 = 第 4 行
-PASS M=3 e=Izx P_2 第 4 行 = 第 5 行
-PASS M=3 e=Izx P_2 第 5 行 = 第 6 行
-PASS M=3 e=Izx 帰納法の仮定 P_2
-PASS M=3 e=Izx P_3 第 1 行 = 第 2 行
-PASS M=3 e=Izx P_3 第 2 行 = 第 3 行
-PASS M=3 e=Izx P_3 第 3 行 = 第 4 行
-PASS M=3 e=Izx P_3 第 4 行 = 第 5 行
-PASS M=3 e=Izx P_3 第 5 行 = 第 6 行
-PASS M=3 e=Izx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Izy P_1 第 1 行 = 第 2 行
-PASS M=3 e=Izy P_1 第 2 行 = 第 3 行
-PASS M=3 e=Izy 帰納法の仮定 P_1
-PASS M=3 e=Izy P_2 第 1 行 = 第 2 行
-PASS M=3 e=Izy P_2 第 2 行 = 第 3 行
-PASS M=3 e=Izy P_2 第 3 行 = 第 4 行
-PASS M=3 e=Izy P_2 第 4 行 = 第 5 行
-PASS M=3 e=Izy P_2 第 5 行 = 第 6 行
-PASS M=3 e=Izy 帰納法の仮定 P_2
-PASS M=3 e=Izy P_3 第 1 行 = 第 2 行
-PASS M=3 e=Izy P_3 第 2 行 = 第 3 行
-PASS M=3 e=Izy P_3 第 3 行 = 第 4 行
-PASS M=3 e=Izy P_3 第 4 行 = 第 5 行
-PASS M=3 e=Izy P_3 第 5 行 = 第 6 行
-PASS M=3 e=Izy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=Izz P_1 第 1 行 = 第 2 行
-PASS M=3 e=Izz P_1 第 2 行 = 第 3 行
-PASS M=3 e=Izz 帰納法の仮定 P_1
-PASS M=3 e=Izz P_2 第 1 行 = 第 2 行
-PASS M=3 e=Izz P_2 第 2 行 = 第 3 行
-PASS M=3 e=Izz P_2 第 3 行 = 第 4 行
-PASS M=3 e=Izz P_2 第 4 行 = 第 5 行
-PASS M=3 e=Izz P_2 第 5 行 = 第 6 行
-PASS M=3 e=Izz 帰納法の仮定 P_2
-PASS M=3 e=Izz P_3 第 1 行 = 第 2 行
-PASS M=3 e=Izz P_3 第 2 行 = 第 3 行
-PASS M=3 e=Izz P_3 第 3 行 = 第 4 行
-PASS M=3 e=Izz P_3 第 4 行 = 第 5 行
-PASS M=3 e=Izz P_3 第 5 行 = 第 6 行
-PASS M=3 e=Izz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xII P_1 第 1 行 = 第 2 行
-PASS M=3 e=xII P_1 第 2 行 = 第 3 行
-PASS M=3 e=xII 帰納法の仮定 P_1
-PASS M=3 e=xII P_2 第 1 行 = 第 2 行
-PASS M=3 e=xII P_2 第 2 行 = 第 3 行
-PASS M=3 e=xII P_2 第 3 行 = 第 4 行
-PASS M=3 e=xII P_2 第 4 行 = 第 5 行
-PASS M=3 e=xII P_2 第 5 行 = 第 6 行
-PASS M=3 e=xII 帰納法の仮定 P_2
-PASS M=3 e=xII P_3 第 1 行 = 第 2 行
-PASS M=3 e=xII P_3 第 2 行 = 第 3 行
-PASS M=3 e=xII P_3 第 3 行 = 第 4 行
-PASS M=3 e=xII P_3 第 4 行 = 第 5 行
-PASS M=3 e=xII P_3 第 5 行 = 第 6 行
-PASS M=3 e=xII: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xIx P_1 第 1 行 = 第 2 行
-PASS M=3 e=xIx P_1 第 2 行 = 第 3 行
-PASS M=3 e=xIx 帰納法の仮定 P_1
-PASS M=3 e=xIx P_2 第 1 行 = 第 2 行
-PASS M=3 e=xIx P_2 第 2 行 = 第 3 行
-PASS M=3 e=xIx P_2 第 3 行 = 第 4 行
-PASS M=3 e=xIx P_2 第 4 行 = 第 5 行
-PASS M=3 e=xIx P_2 第 5 行 = 第 6 行
-PASS M=3 e=xIx 帰納法の仮定 P_2
-PASS M=3 e=xIx P_3 第 1 行 = 第 2 行
-PASS M=3 e=xIx P_3 第 2 行 = 第 3 行
-PASS M=3 e=xIx P_3 第 3 行 = 第 4 行
-PASS M=3 e=xIx P_3 第 4 行 = 第 5 行
-PASS M=3 e=xIx P_3 第 5 行 = 第 6 行
-PASS M=3 e=xIx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xIy P_1 第 1 行 = 第 2 行
-PASS M=3 e=xIy P_1 第 2 行 = 第 3 行
-PASS M=3 e=xIy 帰納法の仮定 P_1
-PASS M=3 e=xIy P_2 第 1 行 = 第 2 行
-PASS M=3 e=xIy P_2 第 2 行 = 第 3 行
-PASS M=3 e=xIy P_2 第 3 行 = 第 4 行
-PASS M=3 e=xIy P_2 第 4 行 = 第 5 行
-PASS M=3 e=xIy P_2 第 5 行 = 第 6 行
-PASS M=3 e=xIy 帰納法の仮定 P_2
-PASS M=3 e=xIy P_3 第 1 行 = 第 2 行
-PASS M=3 e=xIy P_3 第 2 行 = 第 3 行
-PASS M=3 e=xIy P_3 第 3 行 = 第 4 行
-PASS M=3 e=xIy P_3 第 4 行 = 第 5 行
-PASS M=3 e=xIy P_3 第 5 行 = 第 6 行
-PASS M=3 e=xIy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xIz P_1 第 1 行 = 第 2 行
-PASS M=3 e=xIz P_1 第 2 行 = 第 3 行
-PASS M=3 e=xIz 帰納法の仮定 P_1
-PASS M=3 e=xIz P_2 第 1 行 = 第 2 行
-PASS M=3 e=xIz P_2 第 2 行 = 第 3 行
-PASS M=3 e=xIz P_2 第 3 行 = 第 4 行
-PASS M=3 e=xIz P_2 第 4 行 = 第 5 行
-PASS M=3 e=xIz P_2 第 5 行 = 第 6 行
-PASS M=3 e=xIz 帰納法の仮定 P_2
-PASS M=3 e=xIz P_3 第 1 行 = 第 2 行
-PASS M=3 e=xIz P_3 第 2 行 = 第 3 行
-PASS M=3 e=xIz P_3 第 3 行 = 第 4 行
-PASS M=3 e=xIz P_3 第 4 行 = 第 5 行
-PASS M=3 e=xIz P_3 第 5 行 = 第 6 行
-PASS M=3 e=xIz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xxI P_1 第 1 行 = 第 2 行
-PASS M=3 e=xxI P_1 第 2 行 = 第 3 行
-PASS M=3 e=xxI 帰納法の仮定 P_1
-PASS M=3 e=xxI P_2 第 1 行 = 第 2 行
-PASS M=3 e=xxI P_2 第 2 行 = 第 3 行
-PASS M=3 e=xxI P_2 第 3 行 = 第 4 行
-PASS M=3 e=xxI P_2 第 4 行 = 第 5 行
-PASS M=3 e=xxI P_2 第 5 行 = 第 6 行
-PASS M=3 e=xxI 帰納法の仮定 P_2
-PASS M=3 e=xxI P_3 第 1 行 = 第 2 行
-PASS M=3 e=xxI P_3 第 2 行 = 第 3 行
-PASS M=3 e=xxI P_3 第 3 行 = 第 4 行
-PASS M=3 e=xxI P_3 第 4 行 = 第 5 行
-PASS M=3 e=xxI P_3 第 5 行 = 第 6 行
-PASS M=3 e=xxI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xxx P_1 第 1 行 = 第 2 行
-PASS M=3 e=xxx P_1 第 2 行 = 第 3 行
-PASS M=3 e=xxx 帰納法の仮定 P_1
-PASS M=3 e=xxx P_2 第 1 行 = 第 2 行
-PASS M=3 e=xxx P_2 第 2 行 = 第 3 行
-PASS M=3 e=xxx P_2 第 3 行 = 第 4 行
-PASS M=3 e=xxx P_2 第 4 行 = 第 5 行
-PASS M=3 e=xxx P_2 第 5 行 = 第 6 行
-PASS M=3 e=xxx 帰納法の仮定 P_2
-PASS M=3 e=xxx P_3 第 1 行 = 第 2 行
-PASS M=3 e=xxx P_3 第 2 行 = 第 3 行
-PASS M=3 e=xxx P_3 第 3 行 = 第 4 行
-PASS M=3 e=xxx P_3 第 4 行 = 第 5 行
-PASS M=3 e=xxx P_3 第 5 行 = 第 6 行
-PASS M=3 e=xxx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xxy P_1 第 1 行 = 第 2 行
-PASS M=3 e=xxy P_1 第 2 行 = 第 3 行
-PASS M=3 e=xxy 帰納法の仮定 P_1
-PASS M=3 e=xxy P_2 第 1 行 = 第 2 行
-PASS M=3 e=xxy P_2 第 2 行 = 第 3 行
-PASS M=3 e=xxy P_2 第 3 行 = 第 4 行
-PASS M=3 e=xxy P_2 第 4 行 = 第 5 行
-PASS M=3 e=xxy P_2 第 5 行 = 第 6 行
-PASS M=3 e=xxy 帰納法の仮定 P_2
-PASS M=3 e=xxy P_3 第 1 行 = 第 2 行
-PASS M=3 e=xxy P_3 第 2 行 = 第 3 行
-PASS M=3 e=xxy P_3 第 3 行 = 第 4 行
-PASS M=3 e=xxy P_3 第 4 行 = 第 5 行
-PASS M=3 e=xxy P_3 第 5 行 = 第 6 行
-PASS M=3 e=xxy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xxz P_1 第 1 行 = 第 2 行
-PASS M=3 e=xxz P_1 第 2 行 = 第 3 行
-PASS M=3 e=xxz 帰納法の仮定 P_1
-PASS M=3 e=xxz P_2 第 1 行 = 第 2 行
-PASS M=3 e=xxz P_2 第 2 行 = 第 3 行
-PASS M=3 e=xxz P_2 第 3 行 = 第 4 行
-PASS M=3 e=xxz P_2 第 4 行 = 第 5 行
-PASS M=3 e=xxz P_2 第 5 行 = 第 6 行
-PASS M=3 e=xxz 帰納法の仮定 P_2
-PASS M=3 e=xxz P_3 第 1 行 = 第 2 行
-PASS M=3 e=xxz P_3 第 2 行 = 第 3 行
-PASS M=3 e=xxz P_3 第 3 行 = 第 4 行
-PASS M=3 e=xxz P_3 第 4 行 = 第 5 行
-PASS M=3 e=xxz P_3 第 5 行 = 第 6 行
-PASS M=3 e=xxz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xyI P_1 第 1 行 = 第 2 行
-PASS M=3 e=xyI P_1 第 2 行 = 第 3 行
-PASS M=3 e=xyI 帰納法の仮定 P_1
-PASS M=3 e=xyI P_2 第 1 行 = 第 2 行
-PASS M=3 e=xyI P_2 第 2 行 = 第 3 行
-PASS M=3 e=xyI P_2 第 3 行 = 第 4 行
-PASS M=3 e=xyI P_2 第 4 行 = 第 5 行
-PASS M=3 e=xyI P_2 第 5 行 = 第 6 行
-PASS M=3 e=xyI 帰納法の仮定 P_2
-PASS M=3 e=xyI P_3 第 1 行 = 第 2 行
-PASS M=3 e=xyI P_3 第 2 行 = 第 3 行
-PASS M=3 e=xyI P_3 第 3 行 = 第 4 行
-PASS M=3 e=xyI P_3 第 4 行 = 第 5 行
-PASS M=3 e=xyI P_3 第 5 行 = 第 6 行
-PASS M=3 e=xyI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xyx P_1 第 1 行 = 第 2 行
-PASS M=3 e=xyx P_1 第 2 行 = 第 3 行
-PASS M=3 e=xyx 帰納法の仮定 P_1
-PASS M=3 e=xyx P_2 第 1 行 = 第 2 行
-PASS M=3 e=xyx P_2 第 2 行 = 第 3 行
-PASS M=3 e=xyx P_2 第 3 行 = 第 4 行
-PASS M=3 e=xyx P_2 第 4 行 = 第 5 行
-PASS M=3 e=xyx P_2 第 5 行 = 第 6 行
-PASS M=3 e=xyx 帰納法の仮定 P_2
-PASS M=3 e=xyx P_3 第 1 行 = 第 2 行
-PASS M=3 e=xyx P_3 第 2 行 = 第 3 行
-PASS M=3 e=xyx P_3 第 3 行 = 第 4 行
-PASS M=3 e=xyx P_3 第 4 行 = 第 5 行
-PASS M=3 e=xyx P_3 第 5 行 = 第 6 行
-PASS M=3 e=xyx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xyy P_1 第 1 行 = 第 2 行
-PASS M=3 e=xyy P_1 第 2 行 = 第 3 行
-PASS M=3 e=xyy 帰納法の仮定 P_1
-PASS M=3 e=xyy P_2 第 1 行 = 第 2 行
-PASS M=3 e=xyy P_2 第 2 行 = 第 3 行
-PASS M=3 e=xyy P_2 第 3 行 = 第 4 行
-PASS M=3 e=xyy P_2 第 4 行 = 第 5 行
-PASS M=3 e=xyy P_2 第 5 行 = 第 6 行
-PASS M=3 e=xyy 帰納法の仮定 P_2
-PASS M=3 e=xyy P_3 第 1 行 = 第 2 行
-PASS M=3 e=xyy P_3 第 2 行 = 第 3 行
-PASS M=3 e=xyy P_3 第 3 行 = 第 4 行
-PASS M=3 e=xyy P_3 第 4 行 = 第 5 行
-PASS M=3 e=xyy P_3 第 5 行 = 第 6 行
-PASS M=3 e=xyy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xyz P_1 第 1 行 = 第 2 行
-PASS M=3 e=xyz P_1 第 2 行 = 第 3 行
-PASS M=3 e=xyz 帰納法の仮定 P_1
-PASS M=3 e=xyz P_2 第 1 行 = 第 2 行
-PASS M=3 e=xyz P_2 第 2 行 = 第 3 行
-PASS M=3 e=xyz P_2 第 3 行 = 第 4 行
-PASS M=3 e=xyz P_2 第 4 行 = 第 5 行
-PASS M=3 e=xyz P_2 第 5 行 = 第 6 行
-PASS M=3 e=xyz 帰納法の仮定 P_2
-PASS M=3 e=xyz P_3 第 1 行 = 第 2 行
-PASS M=3 e=xyz P_3 第 2 行 = 第 3 行
-PASS M=3 e=xyz P_3 第 3 行 = 第 4 行
-PASS M=3 e=xyz P_3 第 4 行 = 第 5 行
-PASS M=3 e=xyz P_3 第 5 行 = 第 6 行
-PASS M=3 e=xyz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xzI P_1 第 1 行 = 第 2 行
-PASS M=3 e=xzI P_1 第 2 行 = 第 3 行
-PASS M=3 e=xzI 帰納法の仮定 P_1
-PASS M=3 e=xzI P_2 第 1 行 = 第 2 行
-PASS M=3 e=xzI P_2 第 2 行 = 第 3 行
-PASS M=3 e=xzI P_2 第 3 行 = 第 4 行
-PASS M=3 e=xzI P_2 第 4 行 = 第 5 行
-PASS M=3 e=xzI P_2 第 5 行 = 第 6 行
-PASS M=3 e=xzI 帰納法の仮定 P_2
-PASS M=3 e=xzI P_3 第 1 行 = 第 2 行
-PASS M=3 e=xzI P_3 第 2 行 = 第 3 行
-PASS M=3 e=xzI P_3 第 3 行 = 第 4 行
-PASS M=3 e=xzI P_3 第 4 行 = 第 5 行
-PASS M=3 e=xzI P_3 第 5 行 = 第 6 行
-PASS M=3 e=xzI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xzx P_1 第 1 行 = 第 2 行
-PASS M=3 e=xzx P_1 第 2 行 = 第 3 行
-PASS M=3 e=xzx 帰納法の仮定 P_1
-PASS M=3 e=xzx P_2 第 1 行 = 第 2 行
-PASS M=3 e=xzx P_2 第 2 行 = 第 3 行
-PASS M=3 e=xzx P_2 第 3 行 = 第 4 行
-PASS M=3 e=xzx P_2 第 4 行 = 第 5 行
-PASS M=3 e=xzx P_2 第 5 行 = 第 6 行
-PASS M=3 e=xzx 帰納法の仮定 P_2
-PASS M=3 e=xzx P_3 第 1 行 = 第 2 行
-PASS M=3 e=xzx P_3 第 2 行 = 第 3 行
-PASS M=3 e=xzx P_3 第 3 行 = 第 4 行
-PASS M=3 e=xzx P_3 第 4 行 = 第 5 行
-PASS M=3 e=xzx P_3 第 5 行 = 第 6 行
-PASS M=3 e=xzx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xzy P_1 第 1 行 = 第 2 行
-PASS M=3 e=xzy P_1 第 2 行 = 第 3 行
-PASS M=3 e=xzy 帰納法の仮定 P_1
-PASS M=3 e=xzy P_2 第 1 行 = 第 2 行
-PASS M=3 e=xzy P_2 第 2 行 = 第 3 行
-PASS M=3 e=xzy P_2 第 3 行 = 第 4 行
-PASS M=3 e=xzy P_2 第 4 行 = 第 5 行
-PASS M=3 e=xzy P_2 第 5 行 = 第 6 行
-PASS M=3 e=xzy 帰納法の仮定 P_2
-PASS M=3 e=xzy P_3 第 1 行 = 第 2 行
-PASS M=3 e=xzy P_3 第 2 行 = 第 3 行
-PASS M=3 e=xzy P_3 第 3 行 = 第 4 行
-PASS M=3 e=xzy P_3 第 4 行 = 第 5 行
-PASS M=3 e=xzy P_3 第 5 行 = 第 6 行
-PASS M=3 e=xzy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=xzz P_1 第 1 行 = 第 2 行
-PASS M=3 e=xzz P_1 第 2 行 = 第 3 行
-PASS M=3 e=xzz 帰納法の仮定 P_1
-PASS M=3 e=xzz P_2 第 1 行 = 第 2 行
-PASS M=3 e=xzz P_2 第 2 行 = 第 3 行
-PASS M=3 e=xzz P_2 第 3 行 = 第 4 行
-PASS M=3 e=xzz P_2 第 4 行 = 第 5 行
-PASS M=3 e=xzz P_2 第 5 行 = 第 6 行
-PASS M=3 e=xzz 帰納法の仮定 P_2
-PASS M=3 e=xzz P_3 第 1 行 = 第 2 行
-PASS M=3 e=xzz P_3 第 2 行 = 第 3 行
-PASS M=3 e=xzz P_3 第 3 行 = 第 4 行
-PASS M=3 e=xzz P_3 第 4 行 = 第 5 行
-PASS M=3 e=xzz P_3 第 5 行 = 第 6 行
-PASS M=3 e=xzz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yII P_1 第 1 行 = 第 2 行
-PASS M=3 e=yII P_1 第 2 行 = 第 3 行
-PASS M=3 e=yII 帰納法の仮定 P_1
-PASS M=3 e=yII P_2 第 1 行 = 第 2 行
-PASS M=3 e=yII P_2 第 2 行 = 第 3 行
-PASS M=3 e=yII P_2 第 3 行 = 第 4 行
-PASS M=3 e=yII P_2 第 4 行 = 第 5 行
-PASS M=3 e=yII P_2 第 5 行 = 第 6 行
-PASS M=3 e=yII 帰納法の仮定 P_2
-PASS M=3 e=yII P_3 第 1 行 = 第 2 行
-PASS M=3 e=yII P_3 第 2 行 = 第 3 行
-PASS M=3 e=yII P_3 第 3 行 = 第 4 行
-PASS M=3 e=yII P_3 第 4 行 = 第 5 行
-PASS M=3 e=yII P_3 第 5 行 = 第 6 行
-PASS M=3 e=yII: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yIx P_1 第 1 行 = 第 2 行
-PASS M=3 e=yIx P_1 第 2 行 = 第 3 行
-PASS M=3 e=yIx 帰納法の仮定 P_1
-PASS M=3 e=yIx P_2 第 1 行 = 第 2 行
-PASS M=3 e=yIx P_2 第 2 行 = 第 3 行
-PASS M=3 e=yIx P_2 第 3 行 = 第 4 行
-PASS M=3 e=yIx P_2 第 4 行 = 第 5 行
-PASS M=3 e=yIx P_2 第 5 行 = 第 6 行
-PASS M=3 e=yIx 帰納法の仮定 P_2
-PASS M=3 e=yIx P_3 第 1 行 = 第 2 行
-PASS M=3 e=yIx P_3 第 2 行 = 第 3 行
-PASS M=3 e=yIx P_3 第 3 行 = 第 4 行
-PASS M=3 e=yIx P_3 第 4 行 = 第 5 行
-PASS M=3 e=yIx P_3 第 5 行 = 第 6 行
-PASS M=3 e=yIx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yIy P_1 第 1 行 = 第 2 行
-PASS M=3 e=yIy P_1 第 2 行 = 第 3 行
-PASS M=3 e=yIy 帰納法の仮定 P_1
-PASS M=3 e=yIy P_2 第 1 行 = 第 2 行
-PASS M=3 e=yIy P_2 第 2 行 = 第 3 行
-PASS M=3 e=yIy P_2 第 3 行 = 第 4 行
-PASS M=3 e=yIy P_2 第 4 行 = 第 5 行
-PASS M=3 e=yIy P_2 第 5 行 = 第 6 行
-PASS M=3 e=yIy 帰納法の仮定 P_2
-PASS M=3 e=yIy P_3 第 1 行 = 第 2 行
-PASS M=3 e=yIy P_3 第 2 行 = 第 3 行
-PASS M=3 e=yIy P_3 第 3 行 = 第 4 行
-PASS M=3 e=yIy P_3 第 4 行 = 第 5 行
-PASS M=3 e=yIy P_3 第 5 行 = 第 6 行
-PASS M=3 e=yIy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yIz P_1 第 1 行 = 第 2 行
-PASS M=3 e=yIz P_1 第 2 行 = 第 3 行
-PASS M=3 e=yIz 帰納法の仮定 P_1
-PASS M=3 e=yIz P_2 第 1 行 = 第 2 行
-PASS M=3 e=yIz P_2 第 2 行 = 第 3 行
-PASS M=3 e=yIz P_2 第 3 行 = 第 4 行
-PASS M=3 e=yIz P_2 第 4 行 = 第 5 行
-PASS M=3 e=yIz P_2 第 5 行 = 第 6 行
-PASS M=3 e=yIz 帰納法の仮定 P_2
-PASS M=3 e=yIz P_3 第 1 行 = 第 2 行
-PASS M=3 e=yIz P_3 第 2 行 = 第 3 行
-PASS M=3 e=yIz P_3 第 3 行 = 第 4 行
-PASS M=3 e=yIz P_3 第 4 行 = 第 5 行
-PASS M=3 e=yIz P_3 第 5 行 = 第 6 行
-PASS M=3 e=yIz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yxI P_1 第 1 行 = 第 2 行
-PASS M=3 e=yxI P_1 第 2 行 = 第 3 行
-PASS M=3 e=yxI 帰納法の仮定 P_1
-PASS M=3 e=yxI P_2 第 1 行 = 第 2 行
-PASS M=3 e=yxI P_2 第 2 行 = 第 3 行
-PASS M=3 e=yxI P_2 第 3 行 = 第 4 行
-PASS M=3 e=yxI P_2 第 4 行 = 第 5 行
-PASS M=3 e=yxI P_2 第 5 行 = 第 6 行
-PASS M=3 e=yxI 帰納法の仮定 P_2
-PASS M=3 e=yxI P_3 第 1 行 = 第 2 行
-PASS M=3 e=yxI P_3 第 2 行 = 第 3 行
-PASS M=3 e=yxI P_3 第 3 行 = 第 4 行
-PASS M=3 e=yxI P_3 第 4 行 = 第 5 行
-PASS M=3 e=yxI P_3 第 5 行 = 第 6 行
-PASS M=3 e=yxI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yxx P_1 第 1 行 = 第 2 行
-PASS M=3 e=yxx P_1 第 2 行 = 第 3 行
-PASS M=3 e=yxx 帰納法の仮定 P_1
-PASS M=3 e=yxx P_2 第 1 行 = 第 2 行
-PASS M=3 e=yxx P_2 第 2 行 = 第 3 行
-PASS M=3 e=yxx P_2 第 3 行 = 第 4 行
-PASS M=3 e=yxx P_2 第 4 行 = 第 5 行
-PASS M=3 e=yxx P_2 第 5 行 = 第 6 行
-PASS M=3 e=yxx 帰納法の仮定 P_2
-PASS M=3 e=yxx P_3 第 1 行 = 第 2 行
-PASS M=3 e=yxx P_3 第 2 行 = 第 3 行
-PASS M=3 e=yxx P_3 第 3 行 = 第 4 行
-PASS M=3 e=yxx P_3 第 4 行 = 第 5 行
-PASS M=3 e=yxx P_3 第 5 行 = 第 6 行
-PASS M=3 e=yxx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yxy P_1 第 1 行 = 第 2 行
-PASS M=3 e=yxy P_1 第 2 行 = 第 3 行
-PASS M=3 e=yxy 帰納法の仮定 P_1
-PASS M=3 e=yxy P_2 第 1 行 = 第 2 行
-PASS M=3 e=yxy P_2 第 2 行 = 第 3 行
-PASS M=3 e=yxy P_2 第 3 行 = 第 4 行
-PASS M=3 e=yxy P_2 第 4 行 = 第 5 行
-PASS M=3 e=yxy P_2 第 5 行 = 第 6 行
-PASS M=3 e=yxy 帰納法の仮定 P_2
-PASS M=3 e=yxy P_3 第 1 行 = 第 2 行
-PASS M=3 e=yxy P_3 第 2 行 = 第 3 行
-PASS M=3 e=yxy P_3 第 3 行 = 第 4 行
-PASS M=3 e=yxy P_3 第 4 行 = 第 5 行
-PASS M=3 e=yxy P_3 第 5 行 = 第 6 行
-PASS M=3 e=yxy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yxz P_1 第 1 行 = 第 2 行
-PASS M=3 e=yxz P_1 第 2 行 = 第 3 行
-PASS M=3 e=yxz 帰納法の仮定 P_1
-PASS M=3 e=yxz P_2 第 1 行 = 第 2 行
-PASS M=3 e=yxz P_2 第 2 行 = 第 3 行
-PASS M=3 e=yxz P_2 第 3 行 = 第 4 行
-PASS M=3 e=yxz P_2 第 4 行 = 第 5 行
-PASS M=3 e=yxz P_2 第 5 行 = 第 6 行
-PASS M=3 e=yxz 帰納法の仮定 P_2
-PASS M=3 e=yxz P_3 第 1 行 = 第 2 行
-PASS M=3 e=yxz P_3 第 2 行 = 第 3 行
-PASS M=3 e=yxz P_3 第 3 行 = 第 4 行
-PASS M=3 e=yxz P_3 第 4 行 = 第 5 行
-PASS M=3 e=yxz P_3 第 5 行 = 第 6 行
-PASS M=3 e=yxz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yyI P_1 第 1 行 = 第 2 行
-PASS M=3 e=yyI P_1 第 2 行 = 第 3 行
-PASS M=3 e=yyI 帰納法の仮定 P_1
-PASS M=3 e=yyI P_2 第 1 行 = 第 2 行
-PASS M=3 e=yyI P_2 第 2 行 = 第 3 行
-PASS M=3 e=yyI P_2 第 3 行 = 第 4 行
-PASS M=3 e=yyI P_2 第 4 行 = 第 5 行
-PASS M=3 e=yyI P_2 第 5 行 = 第 6 行
-PASS M=3 e=yyI 帰納法の仮定 P_2
-PASS M=3 e=yyI P_3 第 1 行 = 第 2 行
-PASS M=3 e=yyI P_3 第 2 行 = 第 3 行
-PASS M=3 e=yyI P_3 第 3 行 = 第 4 行
-PASS M=3 e=yyI P_3 第 4 行 = 第 5 行
-PASS M=3 e=yyI P_3 第 5 行 = 第 6 行
-PASS M=3 e=yyI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yyx P_1 第 1 行 = 第 2 行
-PASS M=3 e=yyx P_1 第 2 行 = 第 3 行
-PASS M=3 e=yyx 帰納法の仮定 P_1
-PASS M=3 e=yyx P_2 第 1 行 = 第 2 行
-PASS M=3 e=yyx P_2 第 2 行 = 第 3 行
-PASS M=3 e=yyx P_2 第 3 行 = 第 4 行
-PASS M=3 e=yyx P_2 第 4 行 = 第 5 行
-PASS M=3 e=yyx P_2 第 5 行 = 第 6 行
-PASS M=3 e=yyx 帰納法の仮定 P_2
-PASS M=3 e=yyx P_3 第 1 行 = 第 2 行
-PASS M=3 e=yyx P_3 第 2 行 = 第 3 行
-PASS M=3 e=yyx P_3 第 3 行 = 第 4 行
-PASS M=3 e=yyx P_3 第 4 行 = 第 5 行
-PASS M=3 e=yyx P_3 第 5 行 = 第 6 行
-PASS M=3 e=yyx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yyy P_1 第 1 行 = 第 2 行
-PASS M=3 e=yyy P_1 第 2 行 = 第 3 行
-PASS M=3 e=yyy 帰納法の仮定 P_1
-PASS M=3 e=yyy P_2 第 1 行 = 第 2 行
-PASS M=3 e=yyy P_2 第 2 行 = 第 3 行
-PASS M=3 e=yyy P_2 第 3 行 = 第 4 行
-PASS M=3 e=yyy P_2 第 4 行 = 第 5 行
-PASS M=3 e=yyy P_2 第 5 行 = 第 6 行
-PASS M=3 e=yyy 帰納法の仮定 P_2
-PASS M=3 e=yyy P_3 第 1 行 = 第 2 行
-PASS M=3 e=yyy P_3 第 2 行 = 第 3 行
-PASS M=3 e=yyy P_3 第 3 行 = 第 4 行
-PASS M=3 e=yyy P_3 第 4 行 = 第 5 行
-PASS M=3 e=yyy P_3 第 5 行 = 第 6 行
-PASS M=3 e=yyy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yyz P_1 第 1 行 = 第 2 行
-PASS M=3 e=yyz P_1 第 2 行 = 第 3 行
-PASS M=3 e=yyz 帰納法の仮定 P_1
-PASS M=3 e=yyz P_2 第 1 行 = 第 2 行
-PASS M=3 e=yyz P_2 第 2 行 = 第 3 行
-PASS M=3 e=yyz P_2 第 3 行 = 第 4 行
-PASS M=3 e=yyz P_2 第 4 行 = 第 5 行
-PASS M=3 e=yyz P_2 第 5 行 = 第 6 行
-PASS M=3 e=yyz 帰納法の仮定 P_2
-PASS M=3 e=yyz P_3 第 1 行 = 第 2 行
-PASS M=3 e=yyz P_3 第 2 行 = 第 3 行
-PASS M=3 e=yyz P_3 第 3 行 = 第 4 行
-PASS M=3 e=yyz P_3 第 4 行 = 第 5 行
-PASS M=3 e=yyz P_3 第 5 行 = 第 6 行
-PASS M=3 e=yyz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yzI P_1 第 1 行 = 第 2 行
-PASS M=3 e=yzI P_1 第 2 行 = 第 3 行
-PASS M=3 e=yzI 帰納法の仮定 P_1
-PASS M=3 e=yzI P_2 第 1 行 = 第 2 行
-PASS M=3 e=yzI P_2 第 2 行 = 第 3 行
-PASS M=3 e=yzI P_2 第 3 行 = 第 4 行
-PASS M=3 e=yzI P_2 第 4 行 = 第 5 行
-PASS M=3 e=yzI P_2 第 5 行 = 第 6 行
-PASS M=3 e=yzI 帰納法の仮定 P_2
-PASS M=3 e=yzI P_3 第 1 行 = 第 2 行
-PASS M=3 e=yzI P_3 第 2 行 = 第 3 行
-PASS M=3 e=yzI P_3 第 3 行 = 第 4 行
-PASS M=3 e=yzI P_3 第 4 行 = 第 5 行
-PASS M=3 e=yzI P_3 第 5 行 = 第 6 行
-PASS M=3 e=yzI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yzx P_1 第 1 行 = 第 2 行
-PASS M=3 e=yzx P_1 第 2 行 = 第 3 行
-PASS M=3 e=yzx 帰納法の仮定 P_1
-PASS M=3 e=yzx P_2 第 1 行 = 第 2 行
-PASS M=3 e=yzx P_2 第 2 行 = 第 3 行
-PASS M=3 e=yzx P_2 第 3 行 = 第 4 行
-PASS M=3 e=yzx P_2 第 4 行 = 第 5 行
-PASS M=3 e=yzx P_2 第 5 行 = 第 6 行
-PASS M=3 e=yzx 帰納法の仮定 P_2
-PASS M=3 e=yzx P_3 第 1 行 = 第 2 行
-PASS M=3 e=yzx P_3 第 2 行 = 第 3 行
-PASS M=3 e=yzx P_3 第 3 行 = 第 4 行
-PASS M=3 e=yzx P_3 第 4 行 = 第 5 行
-PASS M=3 e=yzx P_3 第 5 行 = 第 6 行
-PASS M=3 e=yzx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yzy P_1 第 1 行 = 第 2 行
-PASS M=3 e=yzy P_1 第 2 行 = 第 3 行
-PASS M=3 e=yzy 帰納法の仮定 P_1
-PASS M=3 e=yzy P_2 第 1 行 = 第 2 行
-PASS M=3 e=yzy P_2 第 2 行 = 第 3 行
-PASS M=3 e=yzy P_2 第 3 行 = 第 4 行
-PASS M=3 e=yzy P_2 第 4 行 = 第 5 行
-PASS M=3 e=yzy P_2 第 5 行 = 第 6 行
-PASS M=3 e=yzy 帰納法の仮定 P_2
-PASS M=3 e=yzy P_3 第 1 行 = 第 2 行
-PASS M=3 e=yzy P_3 第 2 行 = 第 3 行
-PASS M=3 e=yzy P_3 第 3 行 = 第 4 行
-PASS M=3 e=yzy P_3 第 4 行 = 第 5 行
-PASS M=3 e=yzy P_3 第 5 行 = 第 6 行
-PASS M=3 e=yzy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=yzz P_1 第 1 行 = 第 2 行
-PASS M=3 e=yzz P_1 第 2 行 = 第 3 行
-PASS M=3 e=yzz 帰納法の仮定 P_1
-PASS M=3 e=yzz P_2 第 1 行 = 第 2 行
-PASS M=3 e=yzz P_2 第 2 行 = 第 3 行
-PASS M=3 e=yzz P_2 第 3 行 = 第 4 行
-PASS M=3 e=yzz P_2 第 4 行 = 第 5 行
-PASS M=3 e=yzz P_2 第 5 行 = 第 6 行
-PASS M=3 e=yzz 帰納法の仮定 P_2
-PASS M=3 e=yzz P_3 第 1 行 = 第 2 行
-PASS M=3 e=yzz P_3 第 2 行 = 第 3 行
-PASS M=3 e=yzz P_3 第 3 行 = 第 4 行
-PASS M=3 e=yzz P_3 第 4 行 = 第 5 行
-PASS M=3 e=yzz P_3 第 5 行 = 第 6 行
-PASS M=3 e=yzz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zII P_1 第 1 行 = 第 2 行
-PASS M=3 e=zII P_1 第 2 行 = 第 3 行
-PASS M=3 e=zII 帰納法の仮定 P_1
-PASS M=3 e=zII P_2 第 1 行 = 第 2 行
-PASS M=3 e=zII P_2 第 2 行 = 第 3 行
-PASS M=3 e=zII P_2 第 3 行 = 第 4 行
-PASS M=3 e=zII P_2 第 4 行 = 第 5 行
-PASS M=3 e=zII P_2 第 5 行 = 第 6 行
-PASS M=3 e=zII 帰納法の仮定 P_2
-PASS M=3 e=zII P_3 第 1 行 = 第 2 行
-PASS M=3 e=zII P_3 第 2 行 = 第 3 行
-PASS M=3 e=zII P_3 第 3 行 = 第 4 行
-PASS M=3 e=zII P_3 第 4 行 = 第 5 行
-PASS M=3 e=zII P_3 第 5 行 = 第 6 行
-PASS M=3 e=zII: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zIx P_1 第 1 行 = 第 2 行
-PASS M=3 e=zIx P_1 第 2 行 = 第 3 行
-PASS M=3 e=zIx 帰納法の仮定 P_1
-PASS M=3 e=zIx P_2 第 1 行 = 第 2 行
-PASS M=3 e=zIx P_2 第 2 行 = 第 3 行
-PASS M=3 e=zIx P_2 第 3 行 = 第 4 行
-PASS M=3 e=zIx P_2 第 4 行 = 第 5 行
-PASS M=3 e=zIx P_2 第 5 行 = 第 6 行
-PASS M=3 e=zIx 帰納法の仮定 P_2
-PASS M=3 e=zIx P_3 第 1 行 = 第 2 行
-PASS M=3 e=zIx P_3 第 2 行 = 第 3 行
-PASS M=3 e=zIx P_3 第 3 行 = 第 4 行
-PASS M=3 e=zIx P_3 第 4 行 = 第 5 行
-PASS M=3 e=zIx P_3 第 5 行 = 第 6 行
-PASS M=3 e=zIx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zIy P_1 第 1 行 = 第 2 行
-PASS M=3 e=zIy P_1 第 2 行 = 第 3 行
-PASS M=3 e=zIy 帰納法の仮定 P_1
-PASS M=3 e=zIy P_2 第 1 行 = 第 2 行
-PASS M=3 e=zIy P_2 第 2 行 = 第 3 行
-PASS M=3 e=zIy P_2 第 3 行 = 第 4 行
-PASS M=3 e=zIy P_2 第 4 行 = 第 5 行
-PASS M=3 e=zIy P_2 第 5 行 = 第 6 行
-PASS M=3 e=zIy 帰納法の仮定 P_2
-PASS M=3 e=zIy P_3 第 1 行 = 第 2 行
-PASS M=3 e=zIy P_3 第 2 行 = 第 3 行
-PASS M=3 e=zIy P_3 第 3 行 = 第 4 行
-PASS M=3 e=zIy P_3 第 4 行 = 第 5 行
-PASS M=3 e=zIy P_3 第 5 行 = 第 6 行
-PASS M=3 e=zIy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zIz P_1 第 1 行 = 第 2 行
-PASS M=3 e=zIz P_1 第 2 行 = 第 3 行
-PASS M=3 e=zIz 帰納法の仮定 P_1
-PASS M=3 e=zIz P_2 第 1 行 = 第 2 行
-PASS M=3 e=zIz P_2 第 2 行 = 第 3 行
-PASS M=3 e=zIz P_2 第 3 行 = 第 4 行
-PASS M=3 e=zIz P_2 第 4 行 = 第 5 行
-PASS M=3 e=zIz P_2 第 5 行 = 第 6 行
-PASS M=3 e=zIz 帰納法の仮定 P_2
-PASS M=3 e=zIz P_3 第 1 行 = 第 2 行
-PASS M=3 e=zIz P_3 第 2 行 = 第 3 行
-PASS M=3 e=zIz P_3 第 3 行 = 第 4 行
-PASS M=3 e=zIz P_3 第 4 行 = 第 5 行
-PASS M=3 e=zIz P_3 第 5 行 = 第 6 行
-PASS M=3 e=zIz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zxI P_1 第 1 行 = 第 2 行
-PASS M=3 e=zxI P_1 第 2 行 = 第 3 行
-PASS M=3 e=zxI 帰納法の仮定 P_1
-PASS M=3 e=zxI P_2 第 1 行 = 第 2 行
-PASS M=3 e=zxI P_2 第 2 行 = 第 3 行
-PASS M=3 e=zxI P_2 第 3 行 = 第 4 行
-PASS M=3 e=zxI P_2 第 4 行 = 第 5 行
-PASS M=3 e=zxI P_2 第 5 行 = 第 6 行
-PASS M=3 e=zxI 帰納法の仮定 P_2
-PASS M=3 e=zxI P_3 第 1 行 = 第 2 行
-PASS M=3 e=zxI P_3 第 2 行 = 第 3 行
-PASS M=3 e=zxI P_3 第 3 行 = 第 4 行
-PASS M=3 e=zxI P_3 第 4 行 = 第 5 行
-PASS M=3 e=zxI P_3 第 5 行 = 第 6 行
-PASS M=3 e=zxI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zxx P_1 第 1 行 = 第 2 行
-PASS M=3 e=zxx P_1 第 2 行 = 第 3 行
-PASS M=3 e=zxx 帰納法の仮定 P_1
-PASS M=3 e=zxx P_2 第 1 行 = 第 2 行
-PASS M=3 e=zxx P_2 第 2 行 = 第 3 行
-PASS M=3 e=zxx P_2 第 3 行 = 第 4 行
-PASS M=3 e=zxx P_2 第 4 行 = 第 5 行
-PASS M=3 e=zxx P_2 第 5 行 = 第 6 行
-PASS M=3 e=zxx 帰納法の仮定 P_2
-PASS M=3 e=zxx P_3 第 1 行 = 第 2 行
-PASS M=3 e=zxx P_3 第 2 行 = 第 3 行
-PASS M=3 e=zxx P_3 第 3 行 = 第 4 行
-PASS M=3 e=zxx P_3 第 4 行 = 第 5 行
-PASS M=3 e=zxx P_3 第 5 行 = 第 6 行
-PASS M=3 e=zxx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zxy P_1 第 1 行 = 第 2 行
-PASS M=3 e=zxy P_1 第 2 行 = 第 3 行
-PASS M=3 e=zxy 帰納法の仮定 P_1
-PASS M=3 e=zxy P_2 第 1 行 = 第 2 行
-PASS M=3 e=zxy P_2 第 2 行 = 第 3 行
-PASS M=3 e=zxy P_2 第 3 行 = 第 4 行
-PASS M=3 e=zxy P_2 第 4 行 = 第 5 行
-PASS M=3 e=zxy P_2 第 5 行 = 第 6 行
-PASS M=3 e=zxy 帰納法の仮定 P_2
-PASS M=3 e=zxy P_3 第 1 行 = 第 2 行
-PASS M=3 e=zxy P_3 第 2 行 = 第 3 行
-PASS M=3 e=zxy P_3 第 3 行 = 第 4 行
-PASS M=3 e=zxy P_3 第 4 行 = 第 5 行
-PASS M=3 e=zxy P_3 第 5 行 = 第 6 行
-PASS M=3 e=zxy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zxz P_1 第 1 行 = 第 2 行
-PASS M=3 e=zxz P_1 第 2 行 = 第 3 行
-PASS M=3 e=zxz 帰納法の仮定 P_1
-PASS M=3 e=zxz P_2 第 1 行 = 第 2 行
-PASS M=3 e=zxz P_2 第 2 行 = 第 3 行
-PASS M=3 e=zxz P_2 第 3 行 = 第 4 行
-PASS M=3 e=zxz P_2 第 4 行 = 第 5 行
-PASS M=3 e=zxz P_2 第 5 行 = 第 6 行
-PASS M=3 e=zxz 帰納法の仮定 P_2
-PASS M=3 e=zxz P_3 第 1 行 = 第 2 行
-PASS M=3 e=zxz P_3 第 2 行 = 第 3 行
-PASS M=3 e=zxz P_3 第 3 行 = 第 4 行
-PASS M=3 e=zxz P_3 第 4 行 = 第 5 行
-PASS M=3 e=zxz P_3 第 5 行 = 第 6 行
-PASS M=3 e=zxz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zyI P_1 第 1 行 = 第 2 行
-PASS M=3 e=zyI P_1 第 2 行 = 第 3 行
-PASS M=3 e=zyI 帰納法の仮定 P_1
-PASS M=3 e=zyI P_2 第 1 行 = 第 2 行
-PASS M=3 e=zyI P_2 第 2 行 = 第 3 行
-PASS M=3 e=zyI P_2 第 3 行 = 第 4 行
-PASS M=3 e=zyI P_2 第 4 行 = 第 5 行
-PASS M=3 e=zyI P_2 第 5 行 = 第 6 行
-PASS M=3 e=zyI 帰納法の仮定 P_2
-PASS M=3 e=zyI P_3 第 1 行 = 第 2 行
-PASS M=3 e=zyI P_3 第 2 行 = 第 3 行
-PASS M=3 e=zyI P_3 第 3 行 = 第 4 行
-PASS M=3 e=zyI P_3 第 4 行 = 第 5 行
-PASS M=3 e=zyI P_3 第 5 行 = 第 6 行
-PASS M=3 e=zyI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zyx P_1 第 1 行 = 第 2 行
-PASS M=3 e=zyx P_1 第 2 行 = 第 3 行
-PASS M=3 e=zyx 帰納法の仮定 P_1
-PASS M=3 e=zyx P_2 第 1 行 = 第 2 行
-PASS M=3 e=zyx P_2 第 2 行 = 第 3 行
-PASS M=3 e=zyx P_2 第 3 行 = 第 4 行
-PASS M=3 e=zyx P_2 第 4 行 = 第 5 行
-PASS M=3 e=zyx P_2 第 5 行 = 第 6 行
-PASS M=3 e=zyx 帰納法の仮定 P_2
-PASS M=3 e=zyx P_3 第 1 行 = 第 2 行
-PASS M=3 e=zyx P_3 第 2 行 = 第 3 行
-PASS M=3 e=zyx P_3 第 3 行 = 第 4 行
-PASS M=3 e=zyx P_3 第 4 行 = 第 5 行
-PASS M=3 e=zyx P_3 第 5 行 = 第 6 行
-PASS M=3 e=zyx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zyy P_1 第 1 行 = 第 2 行
-PASS M=3 e=zyy P_1 第 2 行 = 第 3 行
-PASS M=3 e=zyy 帰納法の仮定 P_1
-PASS M=3 e=zyy P_2 第 1 行 = 第 2 行
-PASS M=3 e=zyy P_2 第 2 行 = 第 3 行
-PASS M=3 e=zyy P_2 第 3 行 = 第 4 行
-PASS M=3 e=zyy P_2 第 4 行 = 第 5 行
-PASS M=3 e=zyy P_2 第 5 行 = 第 6 行
-PASS M=3 e=zyy 帰納法の仮定 P_2
-PASS M=3 e=zyy P_3 第 1 行 = 第 2 行
-PASS M=3 e=zyy P_3 第 2 行 = 第 3 行
-PASS M=3 e=zyy P_3 第 3 行 = 第 4 行
-PASS M=3 e=zyy P_3 第 4 行 = 第 5 行
-PASS M=3 e=zyy P_3 第 5 行 = 第 6 行
-PASS M=3 e=zyy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zyz P_1 第 1 行 = 第 2 行
-PASS M=3 e=zyz P_1 第 2 行 = 第 3 行
-PASS M=3 e=zyz 帰納法の仮定 P_1
-PASS M=3 e=zyz P_2 第 1 行 = 第 2 行
-PASS M=3 e=zyz P_2 第 2 行 = 第 3 行
-PASS M=3 e=zyz P_2 第 3 行 = 第 4 行
-PASS M=3 e=zyz P_2 第 4 行 = 第 5 行
-PASS M=3 e=zyz P_2 第 5 行 = 第 6 行
-PASS M=3 e=zyz 帰納法の仮定 P_2
-PASS M=3 e=zyz P_3 第 1 行 = 第 2 行
-PASS M=3 e=zyz P_3 第 2 行 = 第 3 行
-PASS M=3 e=zyz P_3 第 3 行 = 第 4 行
-PASS M=3 e=zyz P_3 第 4 行 = 第 5 行
-PASS M=3 e=zyz P_3 第 5 行 = 第 6 行
-PASS M=3 e=zyz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zzI P_1 第 1 行 = 第 2 行
-PASS M=3 e=zzI P_1 第 2 行 = 第 3 行
-PASS M=3 e=zzI 帰納法の仮定 P_1
-PASS M=3 e=zzI P_2 第 1 行 = 第 2 行
-PASS M=3 e=zzI P_2 第 2 行 = 第 3 行
-PASS M=3 e=zzI P_2 第 3 行 = 第 4 行
-PASS M=3 e=zzI P_2 第 4 行 = 第 5 行
-PASS M=3 e=zzI P_2 第 5 行 = 第 6 行
-PASS M=3 e=zzI 帰納法の仮定 P_2
-PASS M=3 e=zzI P_3 第 1 行 = 第 2 行
-PASS M=3 e=zzI P_3 第 2 行 = 第 3 行
-PASS M=3 e=zzI P_3 第 3 行 = 第 4 行
-PASS M=3 e=zzI P_3 第 4 行 = 第 5 行
-PASS M=3 e=zzI P_3 第 5 行 = 第 6 行
-PASS M=3 e=zzI: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zzx P_1 第 1 行 = 第 2 行
-PASS M=3 e=zzx P_1 第 2 行 = 第 3 行
-PASS M=3 e=zzx 帰納法の仮定 P_1
-PASS M=3 e=zzx P_2 第 1 行 = 第 2 行
-PASS M=3 e=zzx P_2 第 2 行 = 第 3 行
-PASS M=3 e=zzx P_2 第 3 行 = 第 4 行
-PASS M=3 e=zzx P_2 第 4 行 = 第 5 行
-PASS M=3 e=zzx P_2 第 5 行 = 第 6 行
-PASS M=3 e=zzx 帰納法の仮定 P_2
-PASS M=3 e=zzx P_3 第 1 行 = 第 2 行
-PASS M=3 e=zzx P_3 第 2 行 = 第 3 行
-PASS M=3 e=zzx P_3 第 3 行 = 第 4 行
-PASS M=3 e=zzx P_3 第 4 行 = 第 5 行
-PASS M=3 e=zzx P_3 第 5 行 = 第 6 行
-PASS M=3 e=zzx: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zzy P_1 第 1 行 = 第 2 行
-PASS M=3 e=zzy P_1 第 2 行 = 第 3 行
-PASS M=3 e=zzy 帰納法の仮定 P_1
-PASS M=3 e=zzy P_2 第 1 行 = 第 2 行
-PASS M=3 e=zzy P_2 第 2 行 = 第 3 行
-PASS M=3 e=zzy P_2 第 3 行 = 第 4 行
-PASS M=3 e=zzy P_2 第 4 行 = 第 5 行
-PASS M=3 e=zzy P_2 第 5 行 = 第 6 行
-PASS M=3 e=zzy 帰納法の仮定 P_2
-PASS M=3 e=zzy P_3 第 1 行 = 第 2 行
-PASS M=3 e=zzy P_3 第 2 行 = 第 3 行
-PASS M=3 e=zzy P_3 第 3 行 = 第 4 行
-PASS M=3 e=zzy P_3 第 4 行 = 第 5 行
-PASS M=3 e=zzy P_3 第 5 行 = 第 6 行
-PASS M=3 e=zzy: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS M=3 e=zzz P_1 第 1 行 = 第 2 行
-PASS M=3 e=zzz P_1 第 2 行 = 第 3 行
-PASS M=3 e=zzz 帰納法の仮定 P_1
-PASS M=3 e=zzz P_2 第 1 行 = 第 2 行
-PASS M=3 e=zzz P_2 第 2 行 = 第 3 行
-PASS M=3 e=zzz P_2 第 3 行 = 第 4 行
-PASS M=3 e=zzz P_2 第 4 行 = 第 5 行
-PASS M=3 e=zzz P_2 第 5 行 = 第 6 行
-PASS M=3 e=zzz 帰納法の仮定 P_2
-PASS M=3 e=zzz P_3 第 1 行 = 第 2 行
-PASS M=3 e=zzz P_3 第 2 行 = 第 3 行
-PASS M=3 e=zzz P_3 第 3 行 = 第 4 行
-PASS M=3 e=zzz P_3 第 4 行 = 第 5 行
-PASS M=3 e=zzz P_3 第 5 行 = 第 6 行
-PASS M=3 e=zzz: P_M = E_1…E_M = e_1⊠…⊠e_M
-PASS 否定の対照: 因子の順を逆にした e_2⊠e_1 は P_2 にならない
-PASS 否定の対照: E_2 の e_2 を第 1 因子へずらすと P_2 にならない
+PASS M=3 e=III Q_1 第 1 行 = 第 2 行
+PASS M=3 e=III Q_1 第 2 行 = 第 3 行
+PASS M=3 e=III 帰納法の仮定 Q_1
+PASS M=3 e=III Q_2 第 1 行 = 第 2 行
+PASS M=3 e=III Q_2 第 2 行 = 第 3 行
+PASS M=3 e=III Q_2 第 3 行 = 第 4 行
+PASS M=3 e=III Q_2 第 4 行 = 第 5 行
+PASS M=3 e=III Q_2 第 5 行 = 第 6 行
+PASS M=3 e=III 帰納法の仮定 Q_2
+PASS M=3 e=III Q_3 第 1 行 = 第 2 行
+PASS M=3 e=III Q_3 第 2 行 = 第 3 行
+PASS M=3 e=III Q_3 第 3 行 = 第 4 行
+PASS M=3 e=III Q_3 第 4 行 = 第 5 行
+PASS M=3 e=III Q_3 第 5 行 = 第 6 行
+PASS M=3 e=III: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IIx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IIx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IIx 帰納法の仮定 Q_1
+PASS M=3 e=IIx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IIx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IIx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IIx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IIx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IIx 帰納法の仮定 Q_2
+PASS M=3 e=IIx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IIx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IIx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IIx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IIx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IIx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IIy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IIy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IIy 帰納法の仮定 Q_1
+PASS M=3 e=IIy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IIy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IIy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IIy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IIy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IIy 帰納法の仮定 Q_2
+PASS M=3 e=IIy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IIy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IIy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IIy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IIy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IIy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IIz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IIz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IIz 帰納法の仮定 Q_1
+PASS M=3 e=IIz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IIz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IIz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IIz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IIz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IIz 帰納法の仮定 Q_2
+PASS M=3 e=IIz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IIz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IIz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IIz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IIz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IIz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IxI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IxI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IxI 帰納法の仮定 Q_1
+PASS M=3 e=IxI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IxI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IxI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IxI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IxI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IxI 帰納法の仮定 Q_2
+PASS M=3 e=IxI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IxI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IxI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IxI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IxI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IxI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Ixx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Ixx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Ixx 帰納法の仮定 Q_1
+PASS M=3 e=Ixx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Ixx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Ixx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Ixx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Ixx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Ixx 帰納法の仮定 Q_2
+PASS M=3 e=Ixx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Ixx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Ixx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Ixx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Ixx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Ixx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Ixy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Ixy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Ixy 帰納法の仮定 Q_1
+PASS M=3 e=Ixy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Ixy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Ixy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Ixy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Ixy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Ixy 帰納法の仮定 Q_2
+PASS M=3 e=Ixy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Ixy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Ixy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Ixy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Ixy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Ixy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Ixz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Ixz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Ixz 帰納法の仮定 Q_1
+PASS M=3 e=Ixz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Ixz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Ixz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Ixz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Ixz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Ixz 帰納法の仮定 Q_2
+PASS M=3 e=Ixz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Ixz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Ixz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Ixz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Ixz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Ixz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IyI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IyI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IyI 帰納法の仮定 Q_1
+PASS M=3 e=IyI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IyI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IyI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IyI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IyI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IyI 帰納法の仮定 Q_2
+PASS M=3 e=IyI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IyI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IyI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IyI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IyI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IyI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Iyx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Iyx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Iyx 帰納法の仮定 Q_1
+PASS M=3 e=Iyx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Iyx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Iyx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Iyx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Iyx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Iyx 帰納法の仮定 Q_2
+PASS M=3 e=Iyx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Iyx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Iyx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Iyx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Iyx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Iyx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Iyy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Iyy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Iyy 帰納法の仮定 Q_1
+PASS M=3 e=Iyy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Iyy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Iyy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Iyy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Iyy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Iyy 帰納法の仮定 Q_2
+PASS M=3 e=Iyy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Iyy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Iyy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Iyy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Iyy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Iyy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Iyz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Iyz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Iyz 帰納法の仮定 Q_1
+PASS M=3 e=Iyz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Iyz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Iyz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Iyz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Iyz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Iyz 帰納法の仮定 Q_2
+PASS M=3 e=Iyz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Iyz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Iyz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Iyz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Iyz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Iyz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=IzI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=IzI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=IzI 帰納法の仮定 Q_1
+PASS M=3 e=IzI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=IzI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=IzI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=IzI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=IzI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=IzI 帰納法の仮定 Q_2
+PASS M=3 e=IzI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=IzI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=IzI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=IzI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=IzI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=IzI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Izx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Izx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Izx 帰納法の仮定 Q_1
+PASS M=3 e=Izx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Izx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Izx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Izx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Izx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Izx 帰納法の仮定 Q_2
+PASS M=3 e=Izx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Izx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Izx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Izx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Izx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Izx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Izy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Izy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Izy 帰納法の仮定 Q_1
+PASS M=3 e=Izy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Izy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Izy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Izy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Izy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Izy 帰納法の仮定 Q_2
+PASS M=3 e=Izy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Izy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Izy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Izy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Izy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Izy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=Izz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=Izz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=Izz 帰納法の仮定 Q_1
+PASS M=3 e=Izz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=Izz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=Izz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=Izz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=Izz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=Izz 帰納法の仮定 Q_2
+PASS M=3 e=Izz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=Izz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=Izz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=Izz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=Izz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=Izz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xII Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xII Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xII 帰納法の仮定 Q_1
+PASS M=3 e=xII Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xII Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xII Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xII Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xII Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xII 帰納法の仮定 Q_2
+PASS M=3 e=xII Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xII Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xII Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xII Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xII Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xII: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xIx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xIx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xIx 帰納法の仮定 Q_1
+PASS M=3 e=xIx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xIx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xIx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xIx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xIx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xIx 帰納法の仮定 Q_2
+PASS M=3 e=xIx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xIx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xIx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xIx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xIx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xIx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xIy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xIy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xIy 帰納法の仮定 Q_1
+PASS M=3 e=xIy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xIy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xIy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xIy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xIy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xIy 帰納法の仮定 Q_2
+PASS M=3 e=xIy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xIy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xIy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xIy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xIy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xIy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xIz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xIz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xIz 帰納法の仮定 Q_1
+PASS M=3 e=xIz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xIz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xIz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xIz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xIz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xIz 帰納法の仮定 Q_2
+PASS M=3 e=xIz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xIz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xIz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xIz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xIz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xIz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xxI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xxI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xxI 帰納法の仮定 Q_1
+PASS M=3 e=xxI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xxI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xxI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xxI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xxI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xxI 帰納法の仮定 Q_2
+PASS M=3 e=xxI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xxI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xxI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xxI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xxI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xxI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xxx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xxx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xxx 帰納法の仮定 Q_1
+PASS M=3 e=xxx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xxx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xxx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xxx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xxx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xxx 帰納法の仮定 Q_2
+PASS M=3 e=xxx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xxx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xxx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xxx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xxx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xxx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xxy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xxy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xxy 帰納法の仮定 Q_1
+PASS M=3 e=xxy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xxy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xxy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xxy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xxy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xxy 帰納法の仮定 Q_2
+PASS M=3 e=xxy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xxy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xxy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xxy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xxy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xxy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xxz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xxz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xxz 帰納法の仮定 Q_1
+PASS M=3 e=xxz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xxz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xxz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xxz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xxz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xxz 帰納法の仮定 Q_2
+PASS M=3 e=xxz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xxz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xxz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xxz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xxz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xxz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xyI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xyI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xyI 帰納法の仮定 Q_1
+PASS M=3 e=xyI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xyI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xyI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xyI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xyI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xyI 帰納法の仮定 Q_2
+PASS M=3 e=xyI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xyI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xyI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xyI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xyI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xyI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xyx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xyx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xyx 帰納法の仮定 Q_1
+PASS M=3 e=xyx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xyx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xyx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xyx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xyx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xyx 帰納法の仮定 Q_2
+PASS M=3 e=xyx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xyx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xyx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xyx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xyx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xyx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xyy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xyy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xyy 帰納法の仮定 Q_1
+PASS M=3 e=xyy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xyy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xyy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xyy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xyy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xyy 帰納法の仮定 Q_2
+PASS M=3 e=xyy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xyy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xyy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xyy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xyy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xyy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xyz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xyz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xyz 帰納法の仮定 Q_1
+PASS M=3 e=xyz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xyz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xyz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xyz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xyz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xyz 帰納法の仮定 Q_2
+PASS M=3 e=xyz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xyz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xyz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xyz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xyz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xyz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xzI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xzI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xzI 帰納法の仮定 Q_1
+PASS M=3 e=xzI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xzI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xzI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xzI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xzI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xzI 帰納法の仮定 Q_2
+PASS M=3 e=xzI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xzI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xzI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xzI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xzI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xzI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xzx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xzx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xzx 帰納法の仮定 Q_1
+PASS M=3 e=xzx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xzx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xzx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xzx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xzx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xzx 帰納法の仮定 Q_2
+PASS M=3 e=xzx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xzx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xzx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xzx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xzx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xzx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xzy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xzy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xzy 帰納法の仮定 Q_1
+PASS M=3 e=xzy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xzy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xzy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xzy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xzy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xzy 帰納法の仮定 Q_2
+PASS M=3 e=xzy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xzy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xzy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xzy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xzy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xzy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=xzz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=xzz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=xzz 帰納法の仮定 Q_1
+PASS M=3 e=xzz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=xzz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=xzz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=xzz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=xzz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=xzz 帰納法の仮定 Q_2
+PASS M=3 e=xzz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=xzz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=xzz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=xzz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=xzz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=xzz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yII Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yII Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yII 帰納法の仮定 Q_1
+PASS M=3 e=yII Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yII Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yII Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yII Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yII Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yII 帰納法の仮定 Q_2
+PASS M=3 e=yII Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yII Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yII Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yII Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yII Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yII: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yIx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yIx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yIx 帰納法の仮定 Q_1
+PASS M=3 e=yIx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yIx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yIx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yIx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yIx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yIx 帰納法の仮定 Q_2
+PASS M=3 e=yIx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yIx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yIx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yIx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yIx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yIx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yIy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yIy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yIy 帰納法の仮定 Q_1
+PASS M=3 e=yIy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yIy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yIy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yIy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yIy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yIy 帰納法の仮定 Q_2
+PASS M=3 e=yIy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yIy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yIy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yIy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yIy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yIy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yIz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yIz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yIz 帰納法の仮定 Q_1
+PASS M=3 e=yIz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yIz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yIz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yIz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yIz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yIz 帰納法の仮定 Q_2
+PASS M=3 e=yIz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yIz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yIz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yIz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yIz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yIz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yxI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yxI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yxI 帰納法の仮定 Q_1
+PASS M=3 e=yxI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yxI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yxI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yxI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yxI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yxI 帰納法の仮定 Q_2
+PASS M=3 e=yxI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yxI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yxI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yxI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yxI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yxI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yxx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yxx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yxx 帰納法の仮定 Q_1
+PASS M=3 e=yxx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yxx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yxx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yxx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yxx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yxx 帰納法の仮定 Q_2
+PASS M=3 e=yxx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yxx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yxx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yxx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yxx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yxx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yxy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yxy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yxy 帰納法の仮定 Q_1
+PASS M=3 e=yxy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yxy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yxy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yxy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yxy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yxy 帰納法の仮定 Q_2
+PASS M=3 e=yxy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yxy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yxy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yxy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yxy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yxy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yxz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yxz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yxz 帰納法の仮定 Q_1
+PASS M=3 e=yxz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yxz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yxz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yxz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yxz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yxz 帰納法の仮定 Q_2
+PASS M=3 e=yxz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yxz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yxz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yxz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yxz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yxz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yyI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yyI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yyI 帰納法の仮定 Q_1
+PASS M=3 e=yyI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yyI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yyI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yyI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yyI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yyI 帰納法の仮定 Q_2
+PASS M=3 e=yyI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yyI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yyI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yyI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yyI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yyI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yyx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yyx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yyx 帰納法の仮定 Q_1
+PASS M=3 e=yyx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yyx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yyx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yyx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yyx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yyx 帰納法の仮定 Q_2
+PASS M=3 e=yyx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yyx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yyx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yyx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yyx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yyx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yyy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yyy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yyy 帰納法の仮定 Q_1
+PASS M=3 e=yyy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yyy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yyy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yyy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yyy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yyy 帰納法の仮定 Q_2
+PASS M=3 e=yyy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yyy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yyy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yyy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yyy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yyy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yyz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yyz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yyz 帰納法の仮定 Q_1
+PASS M=3 e=yyz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yyz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yyz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yyz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yyz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yyz 帰納法の仮定 Q_2
+PASS M=3 e=yyz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yyz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yyz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yyz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yyz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yyz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yzI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yzI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yzI 帰納法の仮定 Q_1
+PASS M=3 e=yzI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yzI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yzI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yzI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yzI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yzI 帰納法の仮定 Q_2
+PASS M=3 e=yzI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yzI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yzI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yzI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yzI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yzI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yzx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yzx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yzx 帰納法の仮定 Q_1
+PASS M=3 e=yzx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yzx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yzx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yzx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yzx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yzx 帰納法の仮定 Q_2
+PASS M=3 e=yzx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yzx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yzx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yzx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yzx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yzx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yzy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yzy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yzy 帰納法の仮定 Q_1
+PASS M=3 e=yzy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yzy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yzy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yzy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yzy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yzy 帰納法の仮定 Q_2
+PASS M=3 e=yzy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yzy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yzy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yzy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yzy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yzy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=yzz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=yzz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=yzz 帰納法の仮定 Q_1
+PASS M=3 e=yzz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=yzz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=yzz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=yzz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=yzz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=yzz 帰納法の仮定 Q_2
+PASS M=3 e=yzz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=yzz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=yzz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=yzz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=yzz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=yzz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zII Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zII Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zII 帰納法の仮定 Q_1
+PASS M=3 e=zII Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zII Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zII Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zII Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zII Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zII 帰納法の仮定 Q_2
+PASS M=3 e=zII Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zII Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zII Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zII Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zII Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zII: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zIx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zIx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zIx 帰納法の仮定 Q_1
+PASS M=3 e=zIx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zIx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zIx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zIx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zIx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zIx 帰納法の仮定 Q_2
+PASS M=3 e=zIx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zIx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zIx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zIx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zIx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zIx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zIy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zIy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zIy 帰納法の仮定 Q_1
+PASS M=3 e=zIy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zIy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zIy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zIy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zIy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zIy 帰納法の仮定 Q_2
+PASS M=3 e=zIy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zIy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zIy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zIy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zIy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zIy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zIz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zIz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zIz 帰納法の仮定 Q_1
+PASS M=3 e=zIz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zIz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zIz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zIz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zIz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zIz 帰納法の仮定 Q_2
+PASS M=3 e=zIz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zIz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zIz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zIz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zIz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zIz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zxI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zxI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zxI 帰納法の仮定 Q_1
+PASS M=3 e=zxI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zxI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zxI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zxI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zxI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zxI 帰納法の仮定 Q_2
+PASS M=3 e=zxI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zxI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zxI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zxI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zxI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zxI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zxx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zxx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zxx 帰納法の仮定 Q_1
+PASS M=3 e=zxx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zxx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zxx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zxx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zxx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zxx 帰納法の仮定 Q_2
+PASS M=3 e=zxx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zxx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zxx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zxx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zxx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zxx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zxy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zxy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zxy 帰納法の仮定 Q_1
+PASS M=3 e=zxy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zxy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zxy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zxy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zxy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zxy 帰納法の仮定 Q_2
+PASS M=3 e=zxy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zxy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zxy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zxy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zxy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zxy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zxz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zxz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zxz 帰納法の仮定 Q_1
+PASS M=3 e=zxz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zxz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zxz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zxz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zxz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zxz 帰納法の仮定 Q_2
+PASS M=3 e=zxz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zxz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zxz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zxz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zxz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zxz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zyI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zyI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zyI 帰納法の仮定 Q_1
+PASS M=3 e=zyI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zyI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zyI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zyI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zyI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zyI 帰納法の仮定 Q_2
+PASS M=3 e=zyI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zyI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zyI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zyI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zyI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zyI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zyx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zyx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zyx 帰納法の仮定 Q_1
+PASS M=3 e=zyx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zyx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zyx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zyx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zyx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zyx 帰納法の仮定 Q_2
+PASS M=3 e=zyx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zyx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zyx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zyx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zyx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zyx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zyy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zyy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zyy 帰納法の仮定 Q_1
+PASS M=3 e=zyy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zyy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zyy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zyy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zyy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zyy 帰納法の仮定 Q_2
+PASS M=3 e=zyy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zyy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zyy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zyy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zyy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zyy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zyz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zyz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zyz 帰納法の仮定 Q_1
+PASS M=3 e=zyz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zyz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zyz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zyz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zyz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zyz 帰納法の仮定 Q_2
+PASS M=3 e=zyz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zyz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zyz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zyz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zyz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zyz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zzI Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zzI Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zzI 帰納法の仮定 Q_1
+PASS M=3 e=zzI Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zzI Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zzI Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zzI Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zzI Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zzI 帰納法の仮定 Q_2
+PASS M=3 e=zzI Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zzI Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zzI Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zzI Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zzI Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zzI: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zzx Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zzx Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zzx 帰納法の仮定 Q_1
+PASS M=3 e=zzx Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zzx Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zzx Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zzx Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zzx Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zzx 帰納法の仮定 Q_2
+PASS M=3 e=zzx Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zzx Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zzx Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zzx Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zzx Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zzx: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zzy Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zzy Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zzy 帰納法の仮定 Q_1
+PASS M=3 e=zzy Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zzy Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zzy Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zzy Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zzy Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zzy 帰納法の仮定 Q_2
+PASS M=3 e=zzy Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zzy Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zzy Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zzy Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zzy Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zzy: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS M=3 e=zzz Q_1 第 1 行 = 第 2 行
+PASS M=3 e=zzz Q_1 第 2 行 = 第 3 行
+PASS M=3 e=zzz 帰納法の仮定 Q_1
+PASS M=3 e=zzz Q_2 第 1 行 = 第 2 行
+PASS M=3 e=zzz Q_2 第 2 行 = 第 3 行
+PASS M=3 e=zzz Q_2 第 3 行 = 第 4 行
+PASS M=3 e=zzz Q_2 第 4 行 = 第 5 行
+PASS M=3 e=zzz Q_2 第 5 行 = 第 6 行
+PASS M=3 e=zzz 帰納法の仮定 Q_2
+PASS M=3 e=zzz Q_3 第 1 行 = 第 2 行
+PASS M=3 e=zzz Q_3 第 2 行 = 第 3 行
+PASS M=3 e=zzz Q_3 第 3 行 = 第 4 行
+PASS M=3 e=zzz Q_3 第 4 行 = 第 5 行
+PASS M=3 e=zzz Q_3 第 5 行 = 第 6 行
+PASS M=3 e=zzz: Q_M = E_1…E_M = e_1⊠…⊠e_M
+PASS 否定の対照: 因子の順を逆にした e_2⊠e_1 は Q_2 にならない
+PASS 否定の対照: E_2 の e_2 を第 1 因子へずらすと Q_2 にならない
 PASS 否定の対照: 第 2 因子の σ^x は σ_1^x ではない
 PASS 否定の対照: σ^y を転置すると σ_1^y ではない
 -- Z_Y_generate_algebra の Step 3 後半の E_k と積の鎖: 1144/1144 PASS

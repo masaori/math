@@ -1310,17 +1310,17 @@ R_{22}
         " は ",
         ref("def_finite_product_of_matrices"),
         " の左から順に掛けた積、すなわち ",
-        math(String.raw`P_1 := E_1`),
+        math(String.raw`Q_1 := E_1`),
         "、",
-        math(String.raw`P_{s+1} := P_s\,E_{s+1}`),
+        math(String.raw`Q_{s+1} := Q_s\,E_{s+1}`),
         "（",
         math(String.raw`1 \leq s < M_{\mathrm{col}}`),
         "）で定めた ",
-        math(String.raw`P_{M_{\mathrm{col}}}`),
+        math(String.raw`Q_{M_{\mathrm{col}}}`),
         " である。",
         math(String.raw`s \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について「",
-        math(String.raw`P_s = e_1\boxtimes\cdots\boxtimes e_s\boxtimes I\boxtimes\cdots\boxtimes I`),
+        math(String.raw`Q_s = e_1\boxtimes\cdots\boxtimes e_s\boxtimes I\boxtimes\cdots\boxtimes I`),
         "（",
         math(String.raw`I`),
         " は ",
@@ -1330,7 +1330,7 @@ R_{22}
         " のとき ",
         math(String.raw`I`),
         " の因子は無い）かつ ",
-        math(String.raw`P_s\in\mathcal{A}`),
+        math(String.raw`Q_s\in\mathcal{A}`),
         "」を ",
         math(String.raw`s`),
         " についての帰納法で示す。",
@@ -1338,23 +1338,23 @@ R_{22}
         " のとき、",
       ]),
       displayMath(String.raw`\begin{aligned}
-P_1
+Q_1
 &= E_1
-&&(\because\ P_1\ \text{の定義})\\
+&&(\because\ Q_1\ \text{の定義})\\
 &= e_1\boxtimes I\boxtimes\cdots\boxtimes I
 &&(\because\ E_1\ \text{の定義})
 \end{aligned}`),
       paragraph([
         "であり、",
-        math(String.raw`P_1 = E_1\in\mathcal{A}`),
+        math(String.raw`Q_1 = E_1\in\mathcal{A}`),
         "。",
         math(String.raw`s < M_{\mathrm{col}}`),
         " で成り立つとすると、",
       ]),
       displayMath(String.raw`\begin{aligned}
-P_{s+1}
-&= P_s\,E_{s+1}
-&&(\because\ P_{s+1}\ \text{の定義})\\
+Q_{s+1}
+&= Q_s\,E_{s+1}
+&&(\because\ Q_{s+1}\ \text{の定義})\\
 &= \Bigl(e_1\boxtimes\cdots\boxtimes e_s\boxtimes\overbrace{I}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
    \Bigl(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{e_{s+1}}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
 &&(\because\ \text{帰納法の仮定と}\ E_{s+1}\ \text{の定義})\\
@@ -1369,15 +1369,15 @@ P_{s+1}
 \end{aligned}`),
       paragraph([
         "であり、",
-        math(String.raw`P_s\in\mathcal{A}`),
+        math(String.raw`Q_s\in\mathcal{A}`),
         "（帰納法の仮定）と ",
         math(String.raw`E_{s+1}\in\mathcal{A}`),
         " と (iv) から ",
-        math(String.raw`P_{s+1} = P_sE_{s+1}\in\mathcal{A}`),
+        math(String.raw`Q_{s+1} = Q_sE_{s+1}\in\mathcal{A}`),
         "。",
         math(String.raw`s = M_{\mathrm{col}}`),
         " として ",
-        math(String.raw`e_1\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}} = P_{M_{\mathrm{col}}}\in\mathcal{A}`),
+        math(String.raw`e_1\boxtimes\cdots\boxtimes e_{M_{\mathrm{col}}} = Q_{M_{\mathrm{col}}}\in\mathcal{A}`),
         "。よって ",
         math(String.raw`\mathcal{B}^{\boxtimes M_{\mathrm{col}}}\subseteq\mathcal{A}`),
         "。",
@@ -1425,6 +1425,7 @@ P_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 後半の E_1⋯E_M の左から順に掛けた積を P_1 := E_1・P_{s+1} := P_sE_{s+1} と置いていたが、Step 2 の P_0 := I・P_r := P_{r-1}σ_r^x（σ^x の接頭積）と同じ文字で別の量を表していた。Step 3 後半の側を Q_1 := E_1・Q_{s+1} := Q_sE_{s+1} に改名した（主張と論法は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 2 の P_{m-1}P_{m-1} = I は「異サイトの可換性」の 1 行で因子を並べ替えており、途中が書かれていなかった。Step 2 の冒頭に P_0 := I・P_r := P_{r-1}σ_r^x を置き、積の表示 P_r = ∏_{j=1}^{r} σ_j^x（def_finite_product_of_matrices）、可換の式 σ_k^xP_r = P_rσ_k^x（r < k）と二乗の式 P_rP_r = I を r の帰納法の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・distinct_site_pauli_matrices_commute・Step 1 の σ_k^xσ_k^x = I）で示した。P_{m-1}Z_m・P_{m-1}Y_m の鎖に結合則の行を足し、名前だけの「I は積の単位元」を identity_matrix_is_left_unit_of_mat_mult の参照に替え、Z_m = P_{m-1}σ_m^z・Y_m = P_{m-1}σ_m^y を def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の積を def_finite_product_of_matrices で読む 4 行の鎖にした。使われていなかった「P_{m-1} は可逆で P_{m-1}^{-1} = P_{m-1}」の文を消した（主張は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 は 𝓑 = {I, σ^x, σ^y, σ^z} のクロネッカー積の族が Mat(2^M,C) を張ることだけを使うのに、「dim Mat(2,C) = 4 = #𝓑 より基底」（根拠が書かれていなかった）と tensor_basis (2)（張る族の元数が次元に等しければ基底であることに依り、その前提の「張る有限族の元数は次元以上」は本文で証明されていない）を経由していた。𝓑 が張ることを示したところで止め、新しく足した kronecker_family_of_spanning_family_spans で 𝓑^{⊠M} が張ることを得て、結びの「基底であるから」を「張るから」にした。主張は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 の鎖がラベルの無い根拠（「行列の積の成分計算」「単位行列の定義」「スカラー倍の成分計算」「1 は積の単位元」「(−i)i = 1」「スカラー倍の結合則」「クロネッカー積の積の規則」「II=I」）で書かれ、σ_k^xσ_k^x = I と σ_k^x = −iσ_k^yσ_k^z の持ち上げは「これより得る」の地の文だけだった（Step 2 の引用も (−i)(σ_k^yσ_k^z) の形に揃えた）。σ^xσ^x = I は pauli_matrix_products を引く 1 行に、σ^yσ^z = iσ^x は mat_mult の和の形から complex_zero_times_is_zero・加法の単位元・積の可換律・multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple を 1 行に 1 つずつ当てる鎖に、σ^x = (−i)(σ^yσ^z) は scalar_multiple_by_one・(g)・scalar_multiple_is_associative の鎖に、σ_k^aσ_k^b の持ち上げは kronecker_product_rule (1) と identity_matrix_is_left_unit_of_mat_mult の鎖にし、σ_k^xσ_k^x = I（kronecker_product_rule (2)）と σ_k^x = (−i)(σ_k^yσ_k^z)（kronecker_multilinear）の鎖を足した。異サイトの可換性の鎖（根拠「クロネッカー積の積の規則」で単位行列との積を暗に処理していた）は distinct_site_pauli_matrices_commute の参照に替えた。(−i)i = 1_ℂ を引くため、Step 3 の準備 (f)（ii = −1_ℂ）・(g)（(−i)i = 1_ℂ）を Step 1 の冒頭へ移した（中身は不変）。主張と論法は不変。",

@@ -19,7 +19,7 @@
 | 原文 | 本ファイル | 効いている構造 |
 | --- | --- | --- |
 | Step 3「全体を張る集合を全部含むから全体」 | `eq_top_of_span_eq_top` | 可換半環上の代数と部分多元環（＝積で閉じた部分加群）だけ |
-| Step 3 後半「`P_1 := E_1`・`P_{s+1} := P_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
+| Step 3 後半「`Q_1 := E_1`・`Q_{s+1} := Q_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
 | Step 2「Jordan–Wigner 文字列の帰納法」（外側の累積帰納法と、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法） | `string_mem_of_previous`, `local_mem_of_previous`, `local_mem`, `string_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
 | Step 2 の準備「可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`」 | `xl_mul_string_comm`, `string_mul_self` | モノイドであること、`x n * x n = 1`、相異なる番号どうしの可換性（下の節の冒頭） |
 | Step 2 の準備「積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`」 | `string_eq_finProdLeft` | 二項演算 `*` と元 `1`、`1 * x 0 = x 0` だけ（結合則・単位元のほかの性質は使わない。下の節の冒頭） |
@@ -33,15 +33,15 @@
 * **テンソル積であること**: `map_mem_of_mulSingle_mem` が使うのは
   「サイトごとの元を並べた族へ積を保つ写像を適用する」ことだけで、
   クロネッカー積の成分公式も、サイト間の可換性も使わない。
-  `φ` が単位元を保つことも、`A` の結合律も使わない（人手の帰納法は `P_1 := E_1` から始まり、
-  `P_{s+1} := P_sE_{s+1}` と右から 1 つずつ掛けるだけなので、積の付け替えが起きない）。
+  `φ` が単位元を保つことも、`A` の結合律も使わない（人手の帰納法は `Q_1 := E_1` から始まり、
+  `Q_{s+1} := Q_sE_{s+1}` と右から 1 つずつ掛けるだけなので、積の付け替えが起きない）。
 * **Pauli 行列の関係式**: `string_mem`・`local_mem` の仮定には `σ^x = -√-1 σ^y σ^z`、`P_m P_m = I`、反交換関係のいずれも現れない。
   `string_mem` は「`σ^z_m = P_m Z_m`」という**分解の形**しか使わない
   （具体版は `P_m P_m = I` からこの分解を導く。その `P_m P_m = I` の必要十分版が `string_mul_self` で、
   使うのは `σ^xσ^x = I` と相異なる番号どうしの可換性だけである）。
 * **各サイトの次元が 2 であること**: どこにも 2 は現れない。
 * **各サイトの `N i` が同じであること**: `N i`（`MulOneClass`）はサイトごとに違ってよい。
-  ただし添字は `Fin n` に固定し、その順序を使う（人手の `P_s` は第 `1` から第 `s` 因子という並びで定めるため）。
+  ただし添字は `Fin n` に固定し、その順序を使う（人手の `Q_s` は第 `1` から第 `s` 因子という並びで定めるため）。
   主張だけなら任意の有限添字で成り立つが、それは人手と別の手順（有限集合の帰納法）になるので、ここには置かない。
 
 Step 2 の抽象化で唯一残る「線型性への依存」は `σ^x_m = -√-1 σ^y_m σ^z_m` の係数だけであり、
@@ -82,29 +82,29 @@ end SpanTop
 /-! ## (b) サイトごとの元の積は、各サイト単独の元を含む部分半群に属する
 
 具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem`・`Ising2D.siteProd_mem`（人手 Step 3 後半の
-`P_1 := E_1`・`P_{s+1} := P_s E_{s+1}` の帰納法）と同じ手順を、`φ` が積を保つ写像であることだけで回す。 -/
+`Q_1 := E_1`・`Q_{s+1} := Q_s E_{s+1}` の帰納法）と同じ手順を、`φ` が積を保つ写像であることだけで回す。 -/
 
 section SiteProduct
 
 variable {n : ℕ} {N : Fin n → Type*} [∀ i, MulOneClass (N i)]
 variable {A : Type*} [Mul A]
 
-/-- 人手 Step 3 後半の `P_s`（`P_1 := E_1`、`P_{s+1} := P_s E_{s+1}`）。`E_k` は `φ (mulSingle k (x k))`。
+/-- 人手 Step 3 後半の `Q_s`（`Q_1 := E_1`、`Q_{s+1} := Q_s E_{s+1}`）。`E_k` は `φ (mulSingle k (x k))`。
 具体版 `Ising2D.siteFactorPrefixProduct` と同じく、Lean の `s` が人手の `s + 1` である。 -/
 def prefixProduct (φ : (∀ i, N i) →ₙ* A) (x : ∀ i, N i) : (s : ℕ) → s < n → A
   | 0, h => φ (Pi.mulSingle ⟨0, h⟩ (x ⟨0, h⟩))
   | s + 1, h =>
       prefixProduct φ x s (Nat.lt_of_succ_lt h) * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩))
 
-/-- **原文 Step 3 後半の帰納法（必要十分版）**: `P_s = φ(e_1, …, e_s, 1, …, 1)` かつ `P_s ∈ S`。
+/-- **原文 Step 3 後半の帰納法（必要十分版）**: `Q_s = φ(e_1, …, e_s, 1, …, 1)` かつ `Q_s ∈ S`。
 具体版 `Ising2D.siteFactorPrefixProduct_eq_and_mem` と同じ手順で、`s → s + 1` の鎖も同じ 7 段
 （定義・帰納法の仮定・積を保つこと（具体版の `kronecker_product_rule` (1)）・第 1 から第 `s` 因子の右単位・
 第 `s+1` 因子の左単位・第 `s+2` 以降の因子の左単位・因子の並びの書き換え）である。
 
 効いているのは、`φ` が**積を保つ**こと（`map_mul`）、各 `N i` の単位元が両側の単位元であること
 （`mul_one`・`one_mul`）、`S` が積で閉じていることだけである。`φ` が単位元を保つこと・`A` の結合律・
-`A` の単位元は使わない（人手の帰納法は `P_1 := E_1` から始まり、空の積 `P_0` を置かないため）。
-添字の**順序**（`Fin n` の `≤`）は使う: 人手の `P_s` は左から順に掛けた積で、第 `1` から第 `s` 因子という並びを使うからである。 -/
+`A` の単位元は使わない（人手の帰納法は `Q_1 := E_1` から始まり、空の積 `Q_0` を置かないため）。
+添字の**順序**（`Fin n` の `≤`）は使う: 人手の `Q_s` は左から順に掛けた積で、第 `1` から第 `s` 因子という並びを使うからである。 -/
 theorem prefixProduct_eq_and_mem (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup A) (x : ∀ i, N i)
     (hE : ∀ k, φ (Pi.mulSingle k (x k)) ∈ S) :
     ∀ (s : ℕ) (h : s < n),
@@ -113,7 +113,7 @@ theorem prefixProduct_eq_and_mem (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup
   | 0, h => by
     refine ⟨?_, hE _⟩
     calc prefixProduct φ x 0 h
-        = φ (Pi.mulSingle ⟨0, h⟩ (x ⟨0, h⟩)) := rfl                    -- `P_1` の定義
+        = φ (Pi.mulSingle ⟨0, h⟩ (x ⟨0, h⟩)) := rfl                    -- `Q_1` の定義
       _ = φ (fun i => if (i : ℕ) ≤ 0 then x i else 1) := by
           congr 1                                                      -- `E_1` の定義（因子の並びの書き換え）
           funext i
@@ -128,7 +128,7 @@ theorem prefixProduct_eq_and_mem (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup
     refine ⟨?_, ?_⟩
     · calc prefixProduct φ x (s + 1) h
           = prefixProduct φ x s (Nat.lt_of_succ_lt h) * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)) :=
-            rfl                                                        -- `P_{s+1}` の定義
+            rfl                                                        -- `Q_{s+1}` の定義
         _ = φ (fun i => if (i : ℕ) ≤ s then x i else 1)
               * φ (Pi.mulSingle ⟨s + 1, h⟩ (x ⟨s + 1, h⟩)) := by
             rw [ihEq]                                                  -- 帰納法の仮定（`E_{s+1}` の定義は `φ (mulSingle …)` そのもの）
@@ -186,7 +186,7 @@ theorem prefixProduct_eq_and_mem (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup
 `mulSingle k (x k)` をすべて部分半群 `S` へ送るなら、任意の族 `x` について `φ x ∈ S`。
 `prefixProduct_eq_and_mem` を人手の `s = n`（Lean の `n - 1`）で使う。
 
-`0 < n` は削れない: 人手の帰納法は `P_1 := E_1` から始まるので、因子が 1 つも無いと始められない
+`0 < n` は削れない: 人手の帰納法は `Q_1 := E_1` から始まるので、因子が 1 つも無いと始められない
 （`n = 0` で結論を得るには `φ 1 ∈ S` が別に要る。例えば `φ` が単位元を保ち `S` が単位元を含めば足りる。
 具体版はこの場合を `siteProd_one` と (ii) で別に閉じている）。 -/
 theorem map_mem_of_mulSingle_mem (hn : 0 < n) (φ : (∀ i, N i) →ₙ* A) (S : Subsemigroup A)

@@ -25,7 +25,7 @@
    （原文 Step 3 前半の成分比較 `matrix_two_decomp`）と、`<kronecker_family_of_spanning_family_spans>` を `𝓑` に適用した
    `𝓑^{⊠M}` が `Mat(2^M, ℂ)` を張ること（その必要十分版 `NecSuf.mem_familyCombinations_of_spanning` からの導出）。
 2. `siteProdHom`: クロネッカー積 `siteProd` が積を保つこと（`siteProd_mul`。`kronecker_product_rule` (1)）。
-   必要十分版の帰納法は `P_1 := E_1` から始まるので `siteProd_one` は要らない。
+   必要十分版の帰納法は `Q_1 := E_1` から始まるので `siteProd_one` は要らない。
    ただし `M = 0`（人手に現れない場合）は必要十分版の `0 < n` を満たさないので、具体版と同じく
    `siteProd_one` と (ii) で別に閉じる。
 3. 各 `E_k = siteOp k e_k`（`e_k ∈ 𝓑`）が `𝒜` に入ること: `e_k = I` なら `siteOp_one`、
@@ -212,7 +212,7 @@ theorem siteProdHom_mulSingle (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
 
 /-- **必要十分版 `NecSuf.map_mem_of_mulSingle_mem` の特殊化**:
 クロネッカー積 `e_1 ⊠ ⋯ ⊠ e_M` は、各 `E_k` を含む部分多元環に属する
-（具体版の `Ising2D.siteProd_mem` と同じ主張。`P_s` の帰納法は必要十分版 `NecSuf.prefixProduct_eq_and_mem` の中にある）。
+（具体版の `Ising2D.siteProd_mem` と同じ主張。`Q_s` の帰納法は必要十分版 `NecSuf.prefixProduct_eq_and_mem` の中にある）。
 `M = 0` は具体版の `siteProd_mem` と同じく `siteProd_one` と (ii) で閉じる（人手に現れない場合）。 -/
 theorem siteProd_mem_of_necSuf (A : Subalgebra ℂ (TensorPow M))
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (h : ∀ k, siteOp k (x k) ∈ A) :

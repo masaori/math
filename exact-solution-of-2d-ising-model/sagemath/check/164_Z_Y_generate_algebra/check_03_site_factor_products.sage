@@ -3,7 +3,7 @@
 # (1) e_k = I なら E_k = I_{Mat(2^M,C)}（kronecker_product_rule (2)）、
 # (2) e_k = σ^x, σ^y, σ^z なら E_k = σ_k^x, σ_k^y, σ_k^z（def_site_pauli_matrices）。
 #     σ_k^a はクロネッカー積を使わず、成分 (σ_k^a)_{s,t} = (σ^a)_{s_k,t_k} ∏_{j≠k} δ_{s_j,t_j} から独立に組み立てる。
-# (3) P_1 := E_1, P_{s+1} := P_s E_{s+1} について、P_1 の鎖（2 行）と帰納の一段の鎖（6 行）を一行ずつ。
+# (3) Q_1 := E_1, Q_{s+1} := Q_s E_{s+1} について、Q_1 の鎖（2 行）と帰納の一段の鎖（6 行）を一行ずつ。
 # を M = 1, 2, 3 と B^M の全ての組で確かめる。行列は QQ(i) 上で厳密に計算する。浮動小数点なし。
 import sys, itertools
 
@@ -59,32 +59,32 @@ for M in (1, 2, 3):
         e = [m for _, m in es]
         tag = "".join(n for n, _ in es)
         E = [site(M, k, e[k]) for k in range(M)]
-        # P_1 の鎖: P_1 = E_1 = e_1⊠I⊠…⊠I
-        P = E[0]
-        chain_check([P, E[0], kron([e[0]] + [I2] * (M - 1))], f"M={M} e={tag} P_1")
-        for s in range(1, M):  # P_s から P_{s+1}（s は 1 始まりの個数）
+        # Q_1 の鎖: Q_1 = E_1 = e_1⊠I⊠…⊠I
+        Q = E[0]
+        chain_check([Q, E[0], kron([e[0]] + [I2] * (M - 1))], f"M={M} e={tag} Q_1")
+        for s in range(1, M):  # Q_s から Q_{s+1}（s は 1 始まりの個数）
             hyp = kron(e[:s] + [I2] * (M - s))
-            check(P == hyp, f"M={M} e={tag} 帰納法の仮定 P_{s}")
+            check(Q == hyp, f"M={M} e={tag} 帰納法の仮定 Q_{s}")
             lines = [
-                P * E[s],
+                Q * E[s],
                 hyp * kron([I2] * s + [e[s]] + [I2] * (M - s - 1)),
                 kron([e[j] * I2 for j in range(s)] + [I2 * e[s]] + [I2 * I2] * (M - s - 1)),
                 kron(e[:s] + [I2 * e[s]] + [I2 * I2] * (M - s - 1)),
                 kron(e[:s] + [e[s]] + [I2 * I2] * (M - s - 1)),
                 kron(e[:s + 1] + [I2] * (M - s - 1)),
             ]
-            chain_check(lines, f"M={M} e={tag} P_{s+1}")
-            P = P * E[s]
-        check(P == prod(E, IM) and P == kron(e), f"M={M} e={tag}: P_M = E_1…E_M = e_1⊠…⊠e_M")
+            chain_check(lines, f"M={M} e={tag} Q_{s+1}")
+            Q = Q * E[s]
+        check(Q == prod(E, IM) and Q == kron(e), f"M={M} e={tag}: Q_M = E_1…E_M = e_1⊠…⊠e_M")
 
 # 否定の対照（人手の行の書き間違いを入れると落ちること）
 M = 2
 e = [sx, sz]
 E = [site(M, 0, e[0]), site(M, 1, e[1])]
 check(E[1] * E[0] == E[0] * E[1] and kron([e[1], e[0]]) != E[0] * E[1],
-      "否定の対照: 因子の順を逆にした e_2⊠e_1 は P_2 にならない")
+      "否定の対照: 因子の順を逆にした e_2⊠e_1 は Q_2 にならない")
 check(kron([e[0], I2]) * kron([e[1], I2]) != E[0] * E[1],
-      "否定の対照: E_2 の e_2 を第 1 因子へずらすと P_2 にならない")
+      "否定の対照: E_2 の e_2 を第 1 因子へずらすと Q_2 にならない")
 check(sigma_site_entrywise(2, 0, "x") != site(2, 1, sx),
       "否定の対照: 第 2 因子の σ^x は σ_1^x ではない")
 check(sigma_site_entrywise(2, 0, "y") != site(2, 0, sy).transpose(),
