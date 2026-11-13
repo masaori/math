@@ -19,12 +19,12 @@ Step 3 の最後の文（`S_1^{(+)}`・`S_2` は実対称なので `real_symmetr
 | Step 0 の `σ^zσ^y = (-i)σ^x`（11 行。`V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と同じ鎖） | `pauliZ_mul_pauliY`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
 | Step 0 の `σ^yσ^x = (-i)σ^z`（12 行。`V1_in_Z_Y_epsilon` の Step 0 の第 1 の鎖と同じ鎖） | `pauliY_mul_pauliX_eq`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`） |
 | Step 0 の `σ^xσ^z = (-i)σ^y`（11 行） | `pauliX_mul_pauliZ_eq`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
-| Step 1 の準備（`Z_m`・`Y_m` のクロネッカー積表示）と `Z_mY_m = (-i)σ^x_m` の 8 行（準備の `Z_m`・`Y_m` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult` → Step 0 の `σ^zσ^y = (-i)σ^x` → `kronecker_multilinear` → `def_site_pauli_matrices`） | `Z_mul_Y_same` の `calc` の 8 段（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`。準備の表示は Lean では `Z`・`Y` の定義そのもので `rfl`） |
+| Step 1 の準備（`Z_m`・`Y_m` のクロネッカー積表示）と `Z_mY_m = (-i)σ^x_m` の 8 行（準備の `Z_m`・`Y_m` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult` → Step 0 の `σ^zσ^y = (-i)σ^x` → `kronecker_multilinear` → `def_site_pauli_matrices`） | `Z_mul_Y_same_by_kronecker_form` の `calc` の 3 段（1・2 段が準備の `Z_m`・`Y_m` の表示で、`Z_prefix_kronecker_form`・`Y_prefix_kronecker_form`（`PartitionFunction/ProjectionAndJordanWigner/ClaimSitePauliPrefixProductKroneckerForm.lean`）が人手の各 4 行（定義の有限積 → (k) → `site_pauli_prefix_product_kronecker_form` → `a_j^{(z)}`・`a_j^{(y)}` の定義）と 1 対 1。3 段目が `Z_mul_Y_same`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`）の `calc` の 3〜8 段） |
 | Step 1 の `H_2` の鎖の 3 行（`def_H2` → 上で得た `Z_mY_m` → `finite_sum_of_scalar_multiples`） | `H2_eq_neg_I_smul_sum_sigmaX` の `calc` の 3 段 |
 | Step 1 の `S_2` の鎖の 8 行（`S_2` の定義 → `H_2` の表示 → `scalar_multiple_is_associative` → ℂ の積の結合律 → 交換律 → 結合律 → `i(-i) = 1` → 乗法の単位元） | `S2_eq_K2star_smul_sum_sigmaX` の `calc` の 7 段（先頭の「`S_2` の定義」の行は Lean では主張の左辺そのもの） |
-| Step 2 の準備（`Y_m`・`Z_{m+1}` のクロネッカー積表示と、`σ^z_mσ^z_{m+1}` の 6 行（`def_site_pauli_matrices` 2 回 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult` → `identity_matrix_is_left_unit_of_mat_mult` 2 回）） | `Y`・`Z` の定義（`rfl`）と `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker` の `calc` の 6 段 |
+| Step 2 の準備（`Y_m`・`Z_{m+1}` のクロネッカー積表示と、`σ^z_mσ^z_{m+1}` の 6 行（`def_site_pauli_matrices` 2 回 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult` → `identity_matrix_is_left_unit_of_mat_mult` 2 回）） | `Y_prefix_kronecker_form`・`Z_prefix_kronecker_form`（Step 1 の準備の表示を `m → m`・`m+1` で引く）と `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker` の `calc` の 6 段 |
 | Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` の 9 行（`1 ≤ m ≤ M_col-1`。準備の `Y_m`・`Z_{m+1}` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult`（`A → σ^z`・`A → I`） → Step 0 の `σ^yσ^x = (-i)σ^z` → `kronecker_multilinear` → 準備の `σ^z_mσ^z_{m+1}` の表示） | `Y_castSucc_mul_Z_succ` の `calc` の 9 段（人手の差の形の添字 `Fin.castSucc m`・`Fin.succ m` で） |
-| Step 2 の境界項の準備（`Y_{M_col}`・`Z_1`・`G`（`G = σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`）のクロネッカー積表示）と `Y_{M_col}Z_1 = (-i)G` の 8 行（準備の `Y_{M_col}`・`Z_1` の表示 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult`（`A → σ^x`・`A → σ^y`） → Step 0 の `σ^xσ^z = (-i)σ^y` → `kronecker_multilinear` → 準備の `G` の表示） | `Y_last_mul_Z_zero` の `calc` の 8 段（人手の差の形の添字 `Fin.last (r + 1)`・`0` で。準備の `Y`・`Z` の表示は定義そのもので `rfl`、`G` の表示は `boundaryYXYFamily` との書き方の違いを揃える段） |
+| Step 2 の境界項の準備（`Y_{M_col}`・`Z_1`・`G`（`G = ∏_{j=1}^{M_col}F_j^{(G)}`）のクロネッカー積表示）と `Y_{M_col}Z_1 = (-i)G` の 8 行（準備の `Y_{M_col}`・`Z_1` の表示 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult`（`A → σ^x`・`A → σ^y`） → Step 0 の `σ^xσ^z = (-i)σ^y` → `kronecker_multilinear` → 準備の `G` の表示） | `Y_last_mul_Z_zero` の `calc` の 9 段（人手の差の形の添字 `Fin.last (r + 1)`・`0` で。準備の `Y_{M_col}`・`Z_1` の表示は `Y_prefix_kronecker_form`・`Z_prefix_kronecker_form`（第 1・最後の因子を分けて書く人手の行は Lean の段が無い）、8 段は `ite` と `boundaryYXYFamily` の書き方の違いを揃える段、9 段は `boundaryG_kronecker_form` で主張の有限積の `G` に着く段（人手の最後の行「準備の `G` の表示」が 8・9 段）。準備の `G` の表示の 4 行（主張の `G` の有限積 → (kG) → `site_pauli_prefix_product_kronecker_form` → `a_j^{(G)}` の定義）は `boundaryG_kronecker_form`（因子 `boundaryGFactor`、文字 `boundaryGLetter`）） |
 | Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行（`def_site_pauli_matrices` → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_x` → `def_site_pauli_matrices`） | `sigmaX_transpose` の `calc` の 5 段（`kronecker_transpose` は `siteProd_transpose`、`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean`） |
 | Step 3 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行（Step 2 の準備の表示 → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_z` → 準備の表示） | `sigmaZ_castSucc_mul_sigmaZ_succ_transpose` の `calc` の 5 段 |
 | Step 3 の `G^⊤ = G` の 11 行（Step 2 の準備の `G` の表示 → `kronecker_transpose` → `transpose_of_pauli_x` → `transpose_of_pauli_y` → `negation_is_scalar_multiple_by_minus_one` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → `(-1)(-1) = 1` → `scalar_multiple_by_one` → 準備の表示） | `boundaryYXY_transpose` の `calc` の 11 段（準備の `G` の表示の `ite` の形は `boundaryYXYFamily_eq_ite`） |
@@ -45,11 +45,12 @@ Step 3 の最後の文（`S_1^{(+)}`・`S_2` は実対称なので `real_symmetr
   これらの鎖は係数の実性を使わないので、仮定 `star K1 = K1` は置かない。
   係数の実性を使う成分の実性（`S2_hasRealEntries`・`S1plus_hasRealEntries`）では `K1 K2star : ℝ` として受け取り、人手の主張の前置きの読み方
   `(K_1)_ℂ`・`(K_2^*)_ℂ`（`inclusion_rr_to_cc` の略記）どおり `(K1 : ℂ)`・`(K2star : ℂ)` を係数にする。
-- 人手の主張は、`G := σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` の定義と Step 3 の `S_1^{(+)}` の成分の実性の段落の「`M_col ≥ 2` より `r ≥ 1`」により `M_col ≥ 2` を前提にする（主張の文には書かれていない）。`H_2`・`S_2` の鎖は `M = r + 1`、`S_1^{(+)}` の鎖は `M = r + 2` の場合を述べる
+- 人手の主張は `M_col ≥ 2`（`def_H1_plus` の範囲）を主張の文に書いている。`H_2`・`S_2` の鎖は `M = r + 1`、`S_1^{(+)}` の鎖は `M = r + 2` の場合を述べる
   （Lean の添字は 0 始まりなので、人手の `m` は `Fin.castSucc m`、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0`）。
   人手の `H_1^{(+)}` の差の形は `H1plus_eq_sub`（`def_H1_plus`）で読み替える。
-- 人手の `G` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積 `siteProd` に入れたものとして書く
-  （`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`）。同じ文字の `boundaryG`（`σ^z_{M_col}σ^z_1`）とは別のものである。
+- 人手の `G` は主張で行列の有限積 `∏_{j=1}^{M_col}F_j^{(G)}` と定めてあるが、Lean の `G` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積 `siteProd` に入れたものとして書く
+  （`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`）。両者が等しいことは、人手の準備の `G` の表示の 4 行と 1 対 1 の `boundaryG_kronecker_form` が示す。`Y_last_mul_Z_zero` の右辺は人手どおり有限積の `G` で、
+`S_1^{(+)}` の鎖と Step 3 の鎖は、Lean の `G`（`siteProd`）で述べる（`S1plus_eq_K1_smul_sub` の「上で得た `Y_{M_col}Z_1 = (-i)G`」の段で `boundaryG_kronecker_form` により読み替える）。同じ文字の `boundaryG`（`σ^z_{M_col}σ^z_1`）とは別のものである。
 - `scalar_multiple_is_associative` の Lean の具体版は無く、mathlib の `smul_smul` を使う（状態台帳に記録がある）。
   ℂ の積の結合律・交換律・単位元（`complex_numbers_form_a_field`）は `mul_assoc`・`mul_comm`・`one_mul`、`i·(-i) = 1_ℂ` は `I_mul_neg_I`
   （`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`）。
@@ -76,13 +77,61 @@ namespace Ising2D
 
 open Matrix
 
+/-- **人手 `iH_is_real_symmetric` Step 1 の `Z_mY_m = (-i)σ^x_m` の 8 行の鎖**。1・2 段は Step 1 の準備の `Z_m`・`Y_m` の表示
+（`Z_prefix_kronecker_form`・`Y_prefix_kronecker_form`。それぞれ人手の 4 行の鎖と 1 対 1）、3〜8 段は `Z_mul_Y_same` の `calc` の 3〜8 段
+（`Z_mul_Y_same` の 1・2 段は Lean の `Z`・`Y` の定義による `rfl` なので、2 段目の右辺はその主張の左辺そのものである）。
+`Z_mul_Y_same` は `DefinitionTransferMatrixSymbols.lean` にあり、有限積の具体版を import できないので、準備の表示はここで当てる。 -/
+theorem Z_mul_Y_same_by_kronecker_form {M : ℕ} (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m :=
+  calc Z m * Y m = siteProd M (jwFamily m pauliZ) * Y m := by
+        rw [Z_prefix_kronecker_form m]                         -- 準備の `Z_m` の表示
+    _ = siteProd M (jwFamily m pauliZ) * siteProd M (jwFamily m pauliY) := by
+        rw [Y_prefix_kronecker_form m]                         -- 準備の `Y_m` の表示
+    _ = (-Complex.I) • sigmaX m := Z_mul_Y_same m       -- `Z_mul_Y_same` の 3〜8 段
+
+/-- 人手 `iH_is_real_symmetric` の主張の `G` の因子 `F_j^{(G)}`（`M_col = r + 2`。Lean の 0 始まりの `j` が人手の `F_{j+1}^{(G)}`）:
+第 1 因子（`j = 0`）と第 `M_col` 因子（`j = Fin.last (r + 1)`）は `σ_j^y`、それ以外は `σ_j^x`。 -/
+noncomputable def boundaryGFactor (r : ℕ) : Fin (r + 2) → TensorPow (r + 2) :=
+  fun j => if j = 0 ∨ j = Fin.last (r + 1) then sigmaY j else sigmaX j
+
+/-- 人手 `iH_is_real_symmetric` の Step 2 の `a_j^{(G)}`（第 1 因子と第 `M_col` 因子は `y`、それ以外は `x`）。 -/
+def boundaryGLetter (r : ℕ) : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ :=
+  fun j => if j = 0 ∨ j = Fin.last (r + 1) then pauliY else pauliX
+
+/-- **人手 `iH_is_real_symmetric` の Step 2 の準備の `G` の表示の 4 行**（`M_col = r + 2`）:
+主張の `G` の定義の有限積 `∏_{j=1}^{M_col}F_j^{(G)}` → (kG) → `site_pauli_prefix_product_kronecker_form`（`r → M_col`, `a_j → a_j^{(G)}`）
+→ `a_j^{(G)}` の定義。Lean の `G` は `siteProd` に `boundaryYXYFamily` を入れたもの（右辺）で定めてあり、
+この定理が人手の定義の有限積（左辺）に等しいことを示す。 -/
+theorem boundaryG_kronecker_form (r : ℕ) :
+    finiteMatrixProduct (r + 1) (boundaryGFactor r)
+      = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) :=
+  calc finiteMatrixProduct (r + 1) (boundaryGFactor r)
+      = finiteMatrixProduct (r + 1) (sitePauliFamily (r + 1) (Nat.lt_succ_self (r + 1)) (boundaryGLetter r)) := by
+        -- (kG): `F_j^{(G)} = σ_j^{a_j^{(G)}}`
+        congr 1
+        funext j
+        unfold sitePauliFamily boundaryGFactor boundaryGLetter
+        by_cases h : j = 0 ∨ j = Fin.last (r + 1)
+        · rw [if_pos h, if_pos h]; rfl
+        · rw [if_neg h, if_neg h]; rfl
+    _ = siteProd (r + 2) (prefixKroneckerFamily (r + 1) (boundaryGLetter r)) :=
+        site_pauli_prefix_product_kronecker_form (r + 1) (Nat.lt_succ_self (r + 1)) (boundaryGLetter r)
+                                                        -- `site_pauli_prefix_product_kronecker_form`（`r → M_col`, `a_j → a_j^{(G)}`）
+    _ = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
+        -- `a_j^{(G)}` の定義を `M_col` か所へ（`r = M_col` なので `I` の因子は無い）
+        congr 1
+        funext i
+        have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) := Fin.ext (by simp [firstSite])
+        have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) := Fin.ext (by simp [lastSite])
+        rw [prefixKroneckerFamily, dif_pos (show (i : ℕ) < r + 1 + 1 by omega)]
+        simp only [boundaryGLetter, boundaryYXYFamily, hf, hl, Fin.eta]
+
 /-- **人手 `iH_is_real_symmetric` Step 1 の `H_2` の鎖**: `H_2 = -iΣ_{m=1}^{M_col} σ^x_m`（`M = r + 1`）。 -/
 theorem H2_eq_neg_I_smul_sum_sigmaX (r : ℕ) :
     H2 (r + 1) = (-Complex.I) • ∑ m : Fin (r + 1), sigmaX m :=
   calc H2 (r + 1)
       = ∑ m : Fin (r + 1), Z m * Y m := rfl                                  -- `def_H2`
     _ = ∑ m : Fin (r + 1), (-Complex.I) • sigmaX m :=
-        Finset.sum_congr rfl fun m _ => Z_mul_Y_same m                       -- 上で得た `Z_mY_m = -iσ^x_m`
+        Finset.sum_congr rfl fun m _ => Z_mul_Y_same_by_kronecker_form m     -- 上で得た `Z_mY_m = -iσ^x_m`
     _ = (-Complex.I) • ∑ m : Fin (r + 1), sigmaX m :=
         finite_sum_smul_tensorPow _ r _                                      -- `finite_sum_of_scalar_multiples`（`m, n → 2^{M_col}`, `r → M_col`, `c → -i`, `(X_1, …, X_r) → (σ^x_1, …, σ^x_{M_col})`）
 
@@ -156,9 +205,8 @@ theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
 /-- **人手 `iH_is_real_symmetric` Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` の 9 行の鎖**（`1 ≤ m ≤ M_col - 1`、`M = r + 2`）を、
 `H1plus_eq_sub` の添字（`Fin.castSucc m`・`Fin.succ m`）で。
 
-人手との対応: 人手の準備の `Y_m`・`Z_{m+1}` のクロネッカー積表示（`def_jordan_wigner_Y_matrices`・`def_jordan_wigner_Z_matrices` と
-`site_pauli_prefix_product_kronecker_form`）は、Lean では `Y`・`Z` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
-`calc` の 1・2 段は `rfl` である（`Z_mul_Y_same` と同じ）。準備の `σ^z_mσ^z_{m+1}` の表示は `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker`。
+人手との対応: 人手の準備の `Y_m`・`Z_{m+1}` のクロネッカー積表示（Step 1 の準備の `Y_m`・`Z_m` の表示を `m → m`・`m+1` で引く）は、
+`calc` の 1・2 段の `Y_prefix_kronecker_form`・`Z_prefix_kronecker_form` である。準備の `σ^z_mσ^z_{m+1}` の表示は `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker`。
 人手の「第 `1` から第 `m-1` 因子」「第 `m+2` 以降の因子」は Lean の `i < Fin.castSucc m`・それ以外（`i ≠ Fin.castSucc m`, `i ≠ Fin.succ m`）である。
 `V1_in_Z_Y_epsilon` の Step 2 の鎖は別の 5 行の鎖で、Lean の `Y_mul_Z_next_of_not_last` が持つ。 -/
 theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
@@ -168,11 +216,11 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
   have hsucc : ((Fin.succ m : Fin (r + 2)) : ℕ) = ((Fin.castSucc m : Fin (r + 2)) : ℕ) + 1 := by simp
   calc
     Y (Fin.castSucc m) * Z (Fin.succ m)
-        = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY) * Z (Fin.succ m) := rfl
-                                                        -- 準備の `Y_m` の表示
+        = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY) * Z (Fin.succ m) := by
+          rw [Y_prefix_kronecker_form (Fin.castSucc m)]        -- 準備の `Y_m` の表示（Step 1 の準備の `Y_m` の表示）
     _ = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY)
-          * siteProd (r + 2) (jwFamily (Fin.succ m) pauliZ) := rfl
-                                                        -- 準備の `Z_{m+1}` の表示
+          * siteProd (r + 2) (jwFamily (Fin.succ m) pauliZ) := by
+          rw [Z_prefix_kronecker_form (Fin.succ m)]            -- 準備の `Z_{m+1}` の表示（Step 1 の準備の `Z_m` の表示（`m → m+1`））
     _ = siteProd (r + 2) (fun i =>
           if (i : ℕ) < (Fin.castSucc m : ℕ) then pauliX * pauliX
           else if i = Fin.castSucc m then pauliY * pauliX
@@ -231,23 +279,24 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
 /-- **人手 `iH_is_real_symmetric` Step 2 の境界項 `Y_{M_col}Z_1 = (-i)G` の 8 行の鎖**（`M_col = r + 2 ≥ 2`）を、
 `H1plus_eq_sub` の添字（`Fin.last (r + 1)`・`0`）で。
 
-人手との対応: 人手の準備の `Y_{M_col}`・`Z_1` のクロネッカー積表示（`def_jordan_wigner_Y_matrices`・`def_jordan_wigner_Z_matrices` と
-`site_pauli_prefix_product_kronecker_form`）は、Lean では `Y`・`Z` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
-`calc` の 1・2 段は `rfl` である。準備の `G` の表示（主張の `G := σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` と
-`site_pauli_prefix_product_kronecker_form`）は、Lean では `G` をはじめから `siteProd` に `boundaryYXYFamily` を入れたものとして
-書くので、人手の準備の `G` の 2 行（サイトの積としての定義と、クロネッカー積表示へ移す行）に当たる Lean の段は無く、`calc` の 8 段は因子の並びの書き方（`ite` と `boundaryYXYFamily` の `∨`）を揃えるだけである。
+人手との対応: 人手の準備の `Y_{M_col}`・`Z_1` のクロネッカー積表示（Step 1 の準備の表示を `m → M_col`・`1` で引く行）は、
+`calc` の 1・2 段の `Y_prefix_kronecker_form`・`Z_prefix_kronecker_form` である。それに続く、因子の並びの第 1・最後の因子を分けて書く人手の行は
+書き方だけの行で、Lean の段は無い。Lean の `G` は `siteProd` に `boundaryYXYFamily` を入れたもの（主張の右辺）で、人手の定義の有限積
+`∏_{j=1}^{M_col}F_j^{(G)}` に等しいことと準備の `G` の表示の 4 行は `boundaryG_kronecker_form` が持つ。人手の最後の行
+「準備の `G` の表示」は `calc` の 8・9 段で、8 段は因子の並びの書き方（`ite` と `boundaryYXYFamily` の `∨`）を揃え、9 段が `boundaryG_kronecker_form`
+で主張の有限積の `G` に着く。主張の右辺は人手どおり有限積の `G`（`finiteMatrixProduct (r + 1) (boundaryGFactor r)`）である。
 人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
 theorem Y_last_mul_Z_zero (r : ℕ) :
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
-      = (-Complex.I) • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
+      = (-Complex.I) • finiteMatrixProduct (r + 1) (boundaryGFactor r) := by
   have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
   calc
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
-        = siteProd (r + 2) (jwFamily (Fin.last (r + 1)) pauliY) * Z (0 : Fin (r + 2)) := rfl
-                                                        -- 準備の `Y_{M_col}` の表示
+        = siteProd (r + 2) (jwFamily (Fin.last (r + 1)) pauliY) * Z (0 : Fin (r + 2)) := by
+          rw [Y_prefix_kronecker_form (Fin.last (r + 1))]      -- 準備の `Y_{M_col}` の表示（Step 1 の準備の `Y_m` の表示（`m → M_col`）。第 1 因子を分けて書く人手の 2 行目は因子の並びの書き方だけで、Lean の段は無い）
     _ = siteProd (r + 2) (jwFamily (Fin.last (r + 1)) pauliY)
-          * siteProd (r + 2) (jwFamily (0 : Fin (r + 2)) pauliZ) := rfl
-                                                        -- 準備の `Z_1` の表示
+          * siteProd (r + 2) (jwFamily (0 : Fin (r + 2)) pauliZ) := by
+          rw [Z_prefix_kronecker_form (0 : Fin (r + 2))]       -- 準備の `Z_1` の表示（Step 1 の準備の `Z_m` の表示（`m → 1`）。最後の因子を分けて書く人手の 2 行目は Lean の段が無い）
     _ = siteProd (r + 2) (fun i =>
           if i = 0 then pauliX * pauliZ
           else if i = Fin.last (r + 1) then pauliY * 1 else pauliX * 1) := by
@@ -306,6 +355,8 @@ theorem Y_last_mul_Z_zero (r : ℕ) :
         by_cases hl' : i = Fin.last (r + 1)
         · rw [if_pos hl', if_pos (Or.inr hl')]
         · rw [if_neg hl', if_neg (by tauto)]
+    _ = (-Complex.I) • finiteMatrixProduct (r + 1) (boundaryGFactor r) := by
+      rw [boundaryG_kronecker_form]                     -- 準備の `G` の表示（主張の `G` の有限積から因子の並びまでの 4 行。`boundaryG_kronecker_form` を右辺から左辺へ）
 
 /-- **人手 `iH_is_real_symmetric` Step 2 の `S_1^{(+)}` の鎖**:
 `S_1^{(+)} = (iK_1)H_1^{(+)} = K_1Σ_{m=1}^{M_col-1} σ^z_mσ^z_{m+1} - K_1G`（`M = r + 2`）。人手の 13 行のうち先頭の「`S_1^{(+)}` の定義」の行は主張の左辺そのもので、残る 12 行が `calc` の 12 段と 1 対 1。 -/
@@ -324,7 +375,7 @@ theorem S1plus_eq_K1_smul_sub (K1 : ℂ) (r : ℕ) :
         rw [Finset.sum_congr rfl fun m _ => Y_castSucc_mul_Z_succ m]          -- 上で得た `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` を各項へ
     _ = (Complex.I * K1) • ((∑ m : Fin (r + 1), (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)))
           - (-Complex.I) • G) := by
-        rw [Y_last_mul_Z_zero]                                               -- 上で得た `Y_{M_col}Z_1 = (-i)G`
+        rw [Y_last_mul_Z_zero, boundaryG_kronecker_form]                     -- 上で得た `Y_{M_col}Z_1 = (-i)G`（主張の有限積の `G` を Lean の `G`（`siteProd`）へ読み替えるのは `boundaryG_kronecker_form`）
     _ = (Complex.I * K1) • ((-Complex.I) • D - (-Complex.I) • G) := by
         rw [finite_sum_smul_tensorPow (-Complex.I) r]                        -- `finite_sum_of_scalar_multiples`（`m, n → 2^{M_col}`, `r → M_col-1`, `c → -i`, `(X_1, …, X_r) → (σ^z_1σ^z_2, …, σ^z_{M_col-1}σ^z_{M_col})`）
     _ = (Complex.I * K1) • ((-Complex.I) • (D - G)) := by
@@ -696,7 +747,7 @@ theorem S1plus_isHermitian_of_real_symmetric (K1 : ℝ) (r : ℕ) :
 
 - 係数: `star K = K` を満たす `K : ℂ` は `((K.re : ℝ) : ℂ) = K`（`Complex.conj_eq_iff_re`）なので、人手の `K ∈ ℝ` の `K_ℂ` として
   `K.re` を上の鎖に渡す（`real_coefficient_of_star_eq`）。
-- 添字の個数: 人手の主張は、`G` の定義と Step 3 の `S_1^{(+)}` の成分の実性の段落の「`M_col ≥ 2` より `r ≥ 1`」により `M_col ≥ 2` を前提にする（主張の文には書かれていない）。
+- 添字の個数: 人手の主張は `M_col ≥ 2`（`def_H1_plus` の範囲）を主張の文に書いている。
   `S_1^{(+)}` の鎖は `M = r + 2` で述べたので、その範囲では上の鎖そのものである。`S_2` の鎖は Step 1 と Step 3 の `S_2` の段が
   `M_col ≥ 2` を使わないので `M = r + 1` で述べてあり、範囲外のうち `M = 1` も鎖で埋まる。鎖で埋まらない `M ≤ 1`（`S_1^{(+)}`）・`M = 0`（`S_2`）は、
   反可換性による補助 `S1_isHermitian`・`S1_transpose`・`S2_isHermitian_by_anticommutation`・`H2_transpose`（`ClaimPositiveDefinite.lean`）で埋める。

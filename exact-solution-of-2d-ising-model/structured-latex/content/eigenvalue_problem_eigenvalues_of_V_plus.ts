@@ -187,18 +187,40 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
         String.raw`\begin{aligned}
 S_1^{(+)} &= (K_1)_{\mathbb{C}}\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
   - (K_1)_{\mathbb{C}}\, G, \qquad
-G := \sigma_1^y\,\sigma_2^x \sigma_3^x \cdots \sigma_{M_{\mathrm{col}}-1}^x\, \sigma_{M_{\mathrm{col}}}^y \\
+G := \prod_{j=1}^{M_{\mathrm{col}}} F_j^{(G)} \\
 S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x\right)
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
+        "である。ここで ",
+        math(String.raw`M_{\mathrm{col}} \geq 2`),
+        "（",
+        ref("def_H1_plus"),
+        " の ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " の範囲）であり、",
         math(String.raw`G`),
-        " について（",
+        " は、",
+        math(String.raw`F_1^{(G)}:=\sigma_1^y`),
+        "、",
+        math(String.raw`F_j^{(G)}:=\sigma_j^x\ (j\in\{2,\dots,M_{\mathrm{col}}-1\})`),
+        "、",
+        math(String.raw`F_{M_{\mathrm{col}}}^{(G)}:=\sigma_{M_{\mathrm{col}}}^y`),
+        "（いずれも ",
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " の元）と置いたときの ",
+        ref("def_finite_product_of_matrices"),
+        " の有限積（",
+        math(String.raw`n\to 2^{M_{\mathrm{col}}},\ r\to M_{\mathrm{col}},\ A_j\to F_j^{(G)}`),
+        "）である。すなわち因子をサイト番号の昇順に並べて左から順に掛けた積 ",
+        math(String.raw`\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y`),
+        " である（",
         math(String.raw`M_{\mathrm{col}} = 2`),
         " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無く、",
         math(String.raw`G = \sigma_1^y\sigma_2^y`),
-        " と読む）、",
+        "）。このとき、",
         math(String.raw`S_1^{(+)}`),
         " と ",
         math(String.raw`S_2`),
@@ -360,30 +382,107 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
         ref("def_jordan_wigner_Y_matrices"),
         " の ",
         math(String.raw`Y_m`),
-        " をクロネッカー積で表す（",
+        " をクロネッカー積で表す。",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`a_j^{(z)}:=\begin{cases}x & (j<m)\\ z & (j=m)\end{cases}
+\qquad
+a_j^{(y)}:=\begin{cases}x & (j<m)\\ y & (j=m)\end{cases}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`a_j^{(z)},a_j^{(y)}\in\{x,y,z\}`),
+        "）。",
+        ref("def_jordan_wigner_Z_matrices"),
+        "・",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の因子 ",
+        math(String.raw`F_j^{(z)},F_j^{(y)}`),
+        "（それぞれの定義で ",
+        math(String.raw`m`),
+        " をこの Step の ",
+        math(String.raw`m`),
+        " として置いた記号）について、",
+        math(String.raw`j<m`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_j^{(z)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_j^{(z)}\ (j<m))\\
+&= \sigma_j^{a_j^{(z)}}
+&&(\because\ a_j^{(z)}\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}
+\qquad
+\begin{aligned}
+F_j^{(y)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_j^{(y)}\ (j<m))\\
+&= \sigma_j^{a_j^{(y)}}
+&&(\because\ a_j^{(y)}\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([math(String.raw`j=m`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+F_m^{(z)}
+&= \sigma_m^z
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_m^{(z)})\\
+&= \sigma_m^{a_m^{(z)}}
+&&(\because\ a_m^{(z)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}
+\qquad
+\begin{aligned}
+F_m^{(y)}
+&= \sigma_m^y
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_m^{(y)})\\
+&= \sigma_m^{a_m^{(y)}}
+&&(\because\ a_m^{(y)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "である。これらを (k) と呼ぶ。このとき（",
         math(String.raw`m = 1`),
-        " のとき第 ",
-        math(String.raw`m`),
-        " 因子より前の因子は無く、",
+        " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無く、",
         math(String.raw`m = M_{\mathrm{col}}`),
-        " のとき第 ",
-        math(String.raw`m`),
-        " 因子より後の因子は無い）。",
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）",
       ]),
       displayMath(String.raw`\begin{aligned}
 Z_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{z}
-&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{z}\text{）。積は左から掛けたものと読む})\\
+&= \prod_{j=1}^{m}F_j^{(z)}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j^{(z)}}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1^{(z)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(z)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_j \to a_j^{(z)}))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = z))
+&&(\because\ a_j^{(z)}\ \text{の定義を}\ m\ \text{か所へ})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 Y_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{y}
-&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{y}\text{）。積は左から掛けたものと読む})\\
+&= \prod_{j=1}^{m}F_j^{(y)}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j^{(y)}}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1^{(y)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(y)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_j \to a_j^{(y)}))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = y))
+&&(\because\ a_j^{(y)}\ \text{の定義を}\ m\ \text{か所へ})
 \end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " は任意に取ったので、この 2 つの表示（以下、Step 1 の準備の ",
+        math(String.raw`Z_m`),
+        "・",
+        math(String.raw`Y_m`),
+        " の表示）は全ての ",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " で成り立つ。",
+      ]),
       paragraph(["このとき"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -470,17 +569,13 @@ S_2
       ]),
       displayMath(String.raw`\begin{aligned}
 Y_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{y}
-&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{y}\text{）。積は左から掛けたものと読む})\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = y))
+&&(\because\ \text{Step 1 の準備の}\ Y_m\ \text{の表示}\ (m \leq M_{\mathrm{col}}-1\ \text{なので当てはまる}))
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 Z_{m+1}
-&= \sigma_1^x\cdots\sigma_{m}^x\sigma_{m+1}^{z}
-&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ (m \to m+1)\text{。積は左から掛けたものと読む})\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m}\boxtimes\overbrace{\sigma^{z}}^{(m+1)\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m-1}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m+1,\ a_1 = \cdots = a_{m} = x,\ a_{m+1} = z))
+&&(\because\ \text{Step 1 の準備の}\ Z_m\ \text{の表示}\ (m \to m+1\text{。}m+1 \leq M_{\mathrm{col}}))
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \sigma_m^z\sigma_{m+1}^z
@@ -544,24 +639,80 @@ Y_m Z_{m+1}
       ]),
       displayMath(String.raw`\begin{aligned}
 Y_{M_{\mathrm{col}}}
-&= \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^{y}
-&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ (m \to M_{\mathrm{col}})\text{。積は左から掛けたものと読む})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-1}\boxtimes\overbrace{\sigma^{y}}^{M_{\mathrm{col}}\text{th}}
+&&(\because\ \text{Step 1 の準備の}\ Y_m\ \text{の表示}\ (m \to M_{\mathrm{col}})\text{。}M_{\mathrm{col}}-m = 0\ \text{なので}\ I\ \text{の因子は無い})\\
 &= \sigma^x\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\overbrace{\sigma^{y}}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = \cdots = a_{M_{\mathrm{col}}-1} = x,\ a_{M_{\mathrm{col}}} = y))
+&&(\because\ \text{同じ因子の並びで、}M_{\mathrm{col}}-1\ \text{個の}\ \sigma^x\ \text{の因子のうち第}\ 1\ \text{因子を分けて書いた})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 Z_1
-&= \sigma_1^{z}
-&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ (m \to 1))\\
+&= \overbrace{\sigma^{z}}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-1}
+&&(\because\ \text{Step 1 の準備の}\ Z_m\ \text{の表示}\ (m \to 1)\text{。}m-1 = 0\ \text{なので}\ \sigma^x\ \text{の因子は無い})\\
 &= \overbrace{\sigma^{z}}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-2}\boxtimes I
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to 1,\ a_1 = z))
+&&(\because\ \text{同じ因子の並びで、}M_{\mathrm{col}}-1\ \text{個の}\ I\ \text{の因子のうち第}\ M_{\mathrm{col}}\ \text{因子を分けて書いた})
 \end{aligned}`),
+      paragraph([
+        math(String.raw`G`),
+        " については、",
+        math(String.raw`j \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`a_j^{(G)}:=\begin{cases}y & (j=1)\\ x & (2\leq j\leq M_{\mathrm{col}}-1)\\ y & (j=M_{\mathrm{col}})\end{cases}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`a_j^{(G)}\in\{x,y,z\}`),
+        "。",
+        math(String.raw`M_{\mathrm{col}} \geq 2`),
+        " より ",
+        math(String.raw`1 \neq M_{\mathrm{col}}`),
+        " なので場合は重ならない）。主張の ",
+        math(String.raw`G`),
+        " の定義の因子 ",
+        math(String.raw`F_j^{(G)}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_1^{(G)}
+&= \sigma_1^y
+&&(\because\ \text{主張の}\ F_1^{(G)}\ \text{の定義})\\
+&= \sigma_1^{a_1^{(G)}}
+&&(\because\ a_1^{(G)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}
+\qquad
+\begin{aligned}
+F_{M_{\mathrm{col}}}^{(G)}
+&= \sigma_{M_{\mathrm{col}}}^y
+&&(\because\ \text{主張の}\ F_{M_{\mathrm{col}}}^{(G)}\ \text{の定義})\\
+&= \sigma_{M_{\mathrm{col}}}^{a_{M_{\mathrm{col}}}^{(G)}}
+&&(\because\ a_{M_{\mathrm{col}}}^{(G)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([math(String.raw`2 \leq j \leq M_{\mathrm{col}}-1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+F_j^{(G)}
+&= \sigma_j^x
+&&(\because\ \text{主張の}\ F_j^{(G)}\ \text{の定義}\ (2 \leq j \leq M_{\mathrm{col}}-1))\\
+&= \sigma_j^{a_j^{(G)}}
+&&(\because\ a_j^{(G)}\ \text{の定義}\ (2 \leq j \leq M_{\mathrm{col}}-1)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "である。これらを (kG) と呼ぶ。このとき（",
+        math(String.raw`M_{\mathrm{col}} = 2`),
+        " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無い）",
+      ]),
       displayMath(String.raw`\begin{aligned}
 G
-&= \sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
-&&(\because\ \text{主張の } G \text{ の定義（}M_{\mathrm{col}} = 2\ \text{では}\ \sigma_1^y\sigma_2^y\text{）。積は左から掛けたものと読む})\\
+&= \prod_{j=1}^{M_{\mathrm{col}}}F_j^{(G)}
+&&(\because\ \text{主張の}\ G\ \text{の定義})\\
+&= \prod_{j=1}^{M_{\mathrm{col}}}\sigma_j^{a_j^{(G)}}
+&&(\because\ \text{(kG) を}\ M_{\mathrm{col}}\ \text{個の因子へ})\\
+&= \sigma^{a_1^{(G)}}\boxtimes\cdots\boxtimes\sigma^{a_{M_{\mathrm{col}}}^{(G)}}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_j \to a_j^{(G)})\text{。}r = M_{\mathrm{col}}\ \text{なので}\ I\ \text{の因子は無い})\\
 &= \overbrace{\sigma^{y}}^{1\text{st}}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\overbrace{\sigma^{y}}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = y,\ a_2 = \cdots = a_{M_{\mathrm{col}}-1} = x,\ a_{M_{\mathrm{col}}} = y))
+&&(\because\ a_j^{(G)}\ \text{の定義を}\ M_{\mathrm{col}}\ \text{か所へ})
 \end{aligned}`),
       paragraph(["このとき"]),
       displayMath(
@@ -966,6 +1117,7 @@ G
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の結論が S_1^{(+)}・S_2 の成分の実性を「K_1, K_2^* ∈ ℝ なので、これらの実係数の有限和」と名前だけで述べていたのを、新しい主張 sum_of_real_entry_matrices_has_real_entries・difference_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries（002_linear_space_general.ts）と real_scalar_multiple_of_real_entry_matrix_has_real_entries を引く 2 段落にした。K_1, K_2^* ∈ ℝ を ℂ の係数として (K_1)_ℂ・(K_2^*)_ℂ（inclusion_rr_to_cc の略記）として使うことを主張の前置きに書き、主張と Step 1〜3 の式の係数の位置の K_1・K_2^* をすべて (K_1)_ℂ・(K_2^*)_ℂ と書いた（ℝ の元として引く c → K_1 などはそのまま）。実対称 ⇒ エルミートの段は散文のままである。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の最後の文が「def_hermitian_positive_definite の最後の注意より、実対称行列はエルミートである」と、定義の中の主張を引いていたのを、その注意を切り出した定義 def_real_symmetric_complex_matrix と主張 real_symmetric_matrix_is_hermitian（009_eigenvalues_of_V.ts）を引く形にした（n → 2^{M_col}、A → S_1^{(+)} と A → S_2）。主張は変えていない。",
         "2026-11-03（全証明の SageMath 検算）: Step 0 の最後の段落が述べていた相異なるサイトの Pauli 行列の可換性（distinct_site_pauli_matrices_commute）は、Step 1・Step 2 をクロネッカー積の道に替えたあとどの行も使っていないので外した。主張は変えていない。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 並べて書いた積の括弧の付け方が定まっていなかった箇所を直した。主張の G の式を def_finite_product_of_matrices の有限積 G := Π_{j=1}^{M_col}F_j^{(G)}（F_1^{(G)} = σ_1^y、F_j^{(G)} = σ_j^x（2 ≤ j ≤ M_col−1）、F_{M_col}^{(G)} = σ_{M_col}^y）にし（並べて書いた σ_1^yσ_2^xσ_3^x⋯ は M_col = 2, 3 で字面が合わなかった）、M_col ≥ 2（def_H1_plus の範囲）を主張に書いた。Step 1 の準備の Z_m・Y_m の表示を、epsilon_anticommutes_with_jordan_wigner_Z・Z_Y_linearly_independent の Step 3 と同じ「定義の有限積 Π F_j → (k) で因子を σ_j^{a_j} に → site_pauli_prefix_product_kronecker_form → a_j の定義」の 4 行にし、「積は左から掛けたものと読む」の根拠を外した。Step 2 の準備の Y_m・Z_{m+1}・Y_{M_col}・Z_1 の表示は、Step 1 の準備の表示を m を替えて引く形にした（Y_{M_col}・Z_1 は因子の並びの第 1・最後の因子を分けて書く行を足した）。G の表示を a_j^{(G)} と (kG) を置いた同じ 4 行にした。表示の式と鎖の残りは不変。",
       ],
     },
   },

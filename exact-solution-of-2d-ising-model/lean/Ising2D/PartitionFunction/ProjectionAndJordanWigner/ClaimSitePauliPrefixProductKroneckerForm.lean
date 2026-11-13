@@ -192,6 +192,22 @@ theorem Y_eq_finiteMatrixProduct (m : Fin M) : Y m = finiteMatrixProduct (m : �
   calc Y m = siteProd M (jwFamily m pauliY) := rfl     -- Lean の `Y` の定義
     _ = finiteMatrixProduct (m : ℕ) (jwFactor m pauliY) := jw_eq_finiteMatrixProduct m pauliY
 
+/-- **人手 `iH_is_real_symmetric` の Step 1 の準備の `Z_m` の表示の 4 行**（人手の `m` は Lean の `m + 1`）:
+`def_jordan_wigner_Z_matrices` の有限積 `∏_{j=1}^{m}F_j^{(z)}` → (k) → `site_pauli_prefix_product_kronecker_form`（`r → m`）→ `a_j^{(z)}` の定義。
+1 段目は Lean の `Z` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡し、2 段目が残りの 3 行である。 -/
+theorem Z_prefix_kronecker_form (m : Fin M) : Z m = siteProd M (jwFamily m pauliZ) :=
+  calc Z m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliZ) :=
+        Z_eq_finiteMatrixProduct m                              -- `def_jordan_wigner_Z_matrices`
+    _ = siteProd M (jwFamily m pauliZ) :=
+        finiteMatrixProduct_jwFactor_kronecker_form m pauliZ    -- (k)・`site_pauli_prefix_product_kronecker_form`・`a_j^{(z)}` の定義
+
+/-- **人手 `iH_is_real_symmetric` の Step 1 の準備の `Y_m` の表示の 4 行**（人手の `m` は Lean の `m + 1`）。`Z_prefix_kronecker_form` と同じ形。 -/
+theorem Y_prefix_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) :=
+  calc Y m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliY) :=
+        Y_eq_finiteMatrixProduct m                              -- `def_jordan_wigner_Y_matrices`
+    _ = siteProd M (jwFamily m pauliY) :=
+        finiteMatrixProduct_jwFactor_kronecker_form m pauliY    -- (k)・`site_pauli_prefix_product_kronecker_form`・`a_j^{(y)}` の定義
+
 /-! ## Lean の `ε` は人手の定義の行列の有限積に等しい、と `global_spin_flip_kronecker_form` -/
 
 /-- Lean の `ε` の接頭積 `sigmaXPrefixProduct M (r + 1)`（`P_0 := I`、`P_{s+1} := P_sσ_{s+1}^x`）は、
