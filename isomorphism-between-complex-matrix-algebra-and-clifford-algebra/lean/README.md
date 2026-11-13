@@ -55,6 +55,10 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   どの番号付けで開いても同じであること（本文の定義のブロックの後半）を `sumOverFiniteSet_eq` として示す。
 - ℂ-代数は `UnitalRing` の欄を持ち（`extends`）、スカラー倍の四つの公理と両立の二つを足した structure である。
   線型空間の加法の四つの公理は環の加法の四つと同じ式なので重ねて置かない。
+- 両側イデアルを法とする合同は、本文どおり a +_A ((-1_ℂ) ∗_A b) ∈ I で定める。剰余類 [a]_I は `Set A`、商集合 A/I は
+  「ある a について X = [a]_I となる部分集合 X」の部分型で、A/I の元の等号は部分集合の等号である。商代数の演算と誘導される写像は、
+  代表を射影の全射性から `Classical.choose` で一つ選んで定め、任意の代表で開いてよいこと（本文の定義の後半）を
+  `quotientAdd_eq`・`inducedMap_eq` 等として示す。mathlib の `Quotient`・`Setoid`・`Ideal` は使わない。
 - 座標の写像 β^b_k は、張ることから存在する係数を `Classical.choose` で一つ選んで定め、それが一つしか
   ないことを本文の二つ目の性質として示す。
 
@@ -66,6 +70,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | ℂ-線型空間 | `MathematicalToolkit/ComplexVectorSpace/` の 7 ファイル | `NecSuf/MathematicalToolkit/ComplexVectorSpace/` の 7 ファイル | `ComplexVectorSpaceFromNecSuf.lean` |
 | 有限集合の上の和 | `MathematicalToolkit/FiniteSetSum/` の 4 ファイル（`Numbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/FiniteSetSum/` の 3 ファイル | `FiniteSetSumFromNecSuf.lean` |
 | ℂ-代数 | `MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `NecSuf/MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `ComplexAlgebraFromNecSuf.lean` |
+| 両側イデアルと商代数 | `MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル（節の末尾に置かれた直和の基底の主張は `DirectSumBasis.lean`） | `NecSuf/MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル | `IdealAndQuotientAlgebraFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -85,3 +90,16 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   0 + 0 = 0 だけが要る（どちらも 0 ·_V x = 0_V を経由する）。
 - ℂ-代数の節の五つの主張（部分積、生成元で一致する準同型、合成、恒等写像、番号順の積の像）は、係数の性質を一つも使わず、
   代数の公理（環の公理・スカラー倍の公理・両立の二つ）も使わない。使うのは演算の定義と準同型の条件だけである。
+
+## 必要十分版が示したこと（節「両側イデアルと商代数」）
+
+- 合同の定義の -1_ℂ は K の元 n に替え、n が 1 の加法の逆元であることは使う主張の仮定に置いた。
+- 両側イデアル・生成する両側イデアルの三つの主張・両側イデアルがスカラー倍で閉じていること・合同が加法と両立すること・
+  射影の全射性は、係数の性質を一つも使わない。
+- 合同の反射性には 1 + n = 0 と 0 + 0 = 0、対称性には n · n = 1、推移性と乗法との両立には n + 1 = 1 + n・1 + n = 0・0 + 0 = 0 が要る。
+  剰余類の同値と、それを経由する商代数の加法・乗法・環の構造には、この四つ（`CongruenceLaws`）が要る。
+- 合同がスカラー倍と両立することには、n とすべての λ の交換 n · λ = λ · n が要る。商集合のスカラー倍・線型空間・代数の構造と、
+  射影・誘導される写像が準同型であることは、これを経由する。K に環の公理を置けば分配法則から従う性質だが、
+  K に公理を置かない必要十分版では仮定として残る。
+- 準同型が零へ移す元の全体が両側イデアルであることには 0 + 0 = 0 だけが要る。
+- 二つの基底を並べた族が直和の基底であることには 0 + 0 = 0 と a · 0 = 0 だけが要る（成分への埋め込みが線型写像であることから来る）。
