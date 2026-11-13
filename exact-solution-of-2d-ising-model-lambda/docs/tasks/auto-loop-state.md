@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-13（主経路の連続実行）、内側を右に置く歩道の始点の入方向を方向表に対応させた。** 平面持ち上げの一歩から実際の辺の方向番号を得て、方向表の入方向が二だけずれることを Lean 具体版で示した。次は右に置く歩道の方向対応の必要十分版である。
 - **2026-11-13（主経路の連続実行）、内側を右に置く歩道の終点の出方向を方向表に対応させた。** 平面持ち上げの差から実際の辺の方向を得て、方向表の出方向は二だけずれることを Lean 具体版で示した。次は始点の入方向である。
 - **2026-11-13（並列の連続実行）、多項式行列式の乗法性（`claim_polynomial_determinant_mul`）と非単射の添字写像による内側和の相殺（`claim_polynomial_determinant_noninjective_cancellation`）の Lean 具体版から必要十分版への委譲を外した。** 並列の表の先頭の行が主経路の表の「内側を右に置く歩道の入出方向」を待つので、表の末尾の行「行列式・マッチングの具体版の委譲を外す」を進めた。具体版 `qbarPolynomial_sign_comp` は符号の乗法性を必要十分版の `sign_comp` で、`qbarPolynomial_sign_right_transposition_neg`・`qbarPolynomial_noninjective_inner_sum_zero` は互換と互換の符号と乗法性を必要十分版の `transpositionPerm`・`sign_transposition`・`sign_comp` で済ませていた。乗法性を具体版 `finiteOrderedSign_comp`、互換を具体版 `KacWard.finiteTranspositionPerm`（本文の $t_{a,b}$）、互換の符号を具体版 `KacWard.finiteTransposition_sign` へ替え、例外の台帳の三行を消した（48 件から 45 件）。末尾の行の残りは `claim_polynomial_product_of_sums`・`def_integer_matrix_determinant` の 2 件である。
 - **2026-11-13（主経路の連続実行）、内側セルを左に置く歩道の入方向を境界頂点の四セル方向表へ対応させた。** 終点の四セル方向表と平面持ち上げの座標差を、実際の辺の方向番号と一致させる Lean 具体版を示した。次は内側を右に置く場合の入出方向である。
 - **2026-11-13（主経路の連続実行）、内側セルを左に置く歩道の出方向を境界頂点の四セル方向表へ対応させた。** 平面持ち上げの隣接点の座標差から実際の向き付き辺の方向番号を得て、境界頂点の出方向と一致させる Lean 具体版を示した。次は同じ場合の入方向である。
-- **2026-11-13（並列の連続実行）、不変部分集合上の反転は置換の符号を保つこと（`claim_invariant_subset_reversal_sign`）の Lean 具体版から必要十分版への委譲を外した。** 具体版 `invariantSubsetReversal_sign`（`AlgebraicEigenvalue/InvariantSubsetReversalSign.lean`）は符号の値と乗法性を必要十分版の `sign_eq_one_or_neg_one`・`sign_comp` で済ませていた。本文の「$\mathrm{sgn}(q)\in\{-1,1\}$（`def_permutation_sign` の $(-1)$ の自然数冪）」を整数 $(-1)^k$ の値で、六等号の二行目と三行目を具体版 `finiteOrderedSign_comp` で示す形へ直し、例外の台帳の行を消した（49 件から 48 件）。並列の表の行の残りは 16 件で、次は `claim_polynomial_determinant_mul` である。
 
 
 
@@ -26,7 +26,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 内側を右に置く歩道の始点の入方向を境界頂点の方向表に対応させる | 記述・SageMath 済。Lean は未着手 | 右に置く歩道の始点で、実際の辺の方向と方向表の入方向が二だけずれることを示す。 |
 | Onsager 閉形式への接続 | 内側を右に置く歩道の方向対応の必要十分版を示す | 未着手 | 右に置く歩道の始点の入方向と終点の出方向を示した後、同じ論法の必要十分版を置く。 |
 | Lean の四層 | 接触点分割・平滑化・横断数の具体版の委譲を外す | 未着手 | 2026-11-13 の研究管理が並列の表から移した（並列へ到達点への最長の鎖を移したため）。対象は例外の台帳 `lean/concrete-necsuf-delegations.txt` に載る 12 件: `claim_vertex_port_bijection`・`claim_edge_simple_contact_split`・`claim_smoothing_splits_closed_walk`・`claim_contact_split_turning_update`・`claim_reconnection_turning_difference`・`claim_contact_split_seam_parity`・`claim_contact_split_pair_descent`・`claim_smoothing_crossing_number_update`・`claim_smoothing_straight_visit_count_update`・`claim_vertex_crossing_number_factorization`・`claim_smoothing_vertex_crossing_number_update`・`claim_crossing_number_vertex_decomposition`。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。一件ずつ外し、外したら例外の台帳の行を消す。並列の表の行「平方恒等式の節 6〜9 の Lean 二版」がこれらの具体版を引くので、並列が書いている Lean ファイルには触れず、引かれる側の具体版ファイルだけを書き換える。 |
 | Lean の四層 | 一側閉包・周期持ち上げ・階段・回転位相の具体版の委譲を外す | 未着手 | 2026-11-11: 到達点への最長の鎖に載らないので、熱力学極限の行の後ろへ移した。上の行が並列の表の完了待ちで進めないときは、この行を進める。 2026-11-12: 正負四・回転位相に関わらない 19 件（行列式・マッチング 7 件、接触点分割・平滑化・横断数 12 件）は並列の表の行「正負四・回転位相に関わらない具体版の委譲を外す」へ移した。この行に残るのは、一側閉包・周期持ち上げ・階段・回転位相の具体版である。 例外の台帳 `lean/concrete-necsuf-delegations.txt` の 2026-11-07 の見出しの下の残り 54 件（当初 59 件）。開いた名前空間から修飾なしで必要十分版の定理を呼んでいたもので、検査を直して見つけた（2026-11-07 の研究管理）。上の一側閉包の行が扱う対象（内側セル集合・補集合の辺連結性、穴の無いセル集合の Euler 数、対角の二セルの除外）はその行の中で外す。残りを、到達点に近い依存の順に一件ずつ外し、外したら例外の台帳の行を消す。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。 2026-11-13 の研究管理: 一側閉包の正負四の行を並列へ移したので、一側閉包・周期持ち上げ・階段の具体版は、並列の表の行「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」が済むまで触れない。それまでは回転位相の 5 件（`claim_cyclic_total_turning_multiple_of_four`・`claim_closed_walk_rotation_phase_sign`・`claim_closed_walk_rotation_phase`・`claim_rotation_phase_as_turning_power`・`claim_walk_rotation_phase_total_turning`）を先に外す。 |
@@ -58,7 +57,6 @@
 
 ## レビュー記録
 
-- 2026-11-13: 「符号は合成について乗法的である」の本文は線型順序を持つ任意の有限集合 $\mathcal J$ の上で述べるのに、SageMath の検算（`check.sage`）は $\mathcal J$ を行配位に取った場合だけで、Lean 具体版も行配位に限っていた。本文は不変。$\mathcal J=\{0,\dots,n-1\}$ に全ての線型順序（$n\le4$）と三つの順序（$n=5$）を載せ、証明の各段（$\Psi$ の全単射性、$|A|,|B|,|C|$、各対の偶数性、三つの符号の積、乗法性）を確かめる `check_general_finite_ordered_set.sage` を足した（57,249 組、三分律を崩した関係で乗法性が崩れる否定の対照を含む）。
 - 2026-11-13: 「完全マッチングの符号は対の列挙順序に依存しない」の主張文は $\operatorname{sgn}(\mathcal D)\in\{-1,1\}$ を述べるのに、証明は列挙の取り替えと空集合の場合だけを示し、値が $\{-1,1\}$ に属することを示していなかった（定義ブロックが $\in\{-1,1\}$ と書くだけ）。$\pi:=\pi_{W(\mathcal L_0)}$ を置き、`def_perfect_matching_sign`・`def_matching_word_sign`・`def_permutation_sign` を引く三等号と、整数 $(-1)^k$ の偶奇による所属の一行を証明に足した（主張は不変）。SageMath に四行の検算 `check_sign_values.sage` を足した（520 等式、否定の対照を含む）。
 - 2026-11-12: 「分散因子の最小値は自己双対点で零になる」の本文の証明が、$0<r<1$ を実現写像の四つの主張の列挙で、$2r(1-r^2)>0$ を根拠なしに、$B_\xi-(1-2r-r^2)^2$ を「$\mathbb R$ の分配則」の一行で、$(1-2r-r^2)^2=0\iff1-2\xi-\xi^2=0$ を「単射性と四則保存」の一行で、$-1-s<_R0$ を「$0<_Rx_c$ と $-2<_R0$」（推移律と加法の両立を引かずに）で、$1+x_c\ne0$ を「$s=1+x_c>_R0$」で済ませ、主張文に無い $s$ を置かずに使っていた。$s$ を `def_critical_point` から置き、五つの事実（$\rho(0)=0<\rho(\xi)$ と $\rho(\xi)<\rho(1)=1$、$c=2r((1-r)(1+r))>0$、$\rho(p)$ の七行、$s\ne0$ と $-1-s<_R-2<_R0$ を差の平方で示して推移律、$\xi\ne-1-s$ を $0<_R0$ からの $v\cdot v=0$ で）、差の六行、$B_\xi(0,0)$ の四行、零条件の七行の同値、$1+x_c=s\ne0$ の三行へ直した（主張は不変）。SageMath を各行の検算へ書き直した（4,364 件、否定の対照を含む）。
 - 2026-11-12: 「複素根の角表示は分散因子の実現値を余弦で表す」の本文の証明が、この主張に要らない「角の組は全モードの組を重複なく走る」を置き、$\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})$ を $\varpi+\varpi^{-1}\in R$ と実数・複素数の写像を示さずに書き、主張文が別の主張の証明の中で置いた記号 $e_{L,a,k}$ を使い、負号の保存を本文に節の無い事実として引いていた。共役の主張から $\varpi+\varpi^{-1}=2\alpha+0\cdot\omega$ の三行、$\varpi\ne0$ の三行、$\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})$ の八行、実部 $\operatorname{Re}$ を置いて $\rho_{R\to\mathbb R}(2\alpha)=2\cos\theta_1$ を出す九行、$\rho(m-w)=\rho(m-w)+\rho(w)-\rho(w)=\dots$ の十行へ直し、主張文の右辺を $r:=\iota_{\mathbb Q\to\mathbb R}(q)$ で書いた（主張は不変。下流の `claim_dispersion_angle_log_continuous` の $B_q$ と同じ形）。SageMath を各行の検算へ書き直した（42,435 件、否定の対照を含む）。
@@ -74,8 +72,8 @@
 
 ## 前進の記録
 
+- 2026-11-13: 主経路の先頭「内側を右に置く歩道の始点の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_right` は、実際の辺の方向番号と四セル方向表の入方向が二だけずれることを平面持ち上げの座標差から示す。本文・SageMath は不変。次は右側の方向対応の必要十分版。
 - 2026-11-13: 右に置く歩道の入出方向の行は始点の入方向・終点の出方向・必要十分版へ割った。終点の出方向は、四セル表の右側の補題と平面持ち上げの一歩の差から、実際の方向番号に二を足した値と等しいことを Lean 具体版で示した。本文と SageMath は既存のままである。
 - 2026-11-13: 並列の表の先頭の行（各出発位置の回転数と境界頂点の局所回転数の同定）は主経路の表の「内側を右に置く歩道の入出方向」の完了待ちなので、末尾の行「行列式・マッチングの具体版の委譲を外す」の `claim_polynomial_determinant_mul`・`claim_polynomial_determinant_noninjective_cancellation` を済ませた。`QbarPolynomialDeterminantMultiplicativity.lean` の `qbarPolynomial_sign_comp` は符号の乗法性の一行を具体版 `finiteOrderedSign_comp` で示す。`QbarPolynomialNoninjectiveCancellation.lean` は互換を `KacWard.finiteTranspositionPerm`、その各点の値を `finiteTransposition_apply_*`、互換の符号を `KacWard.finiteTransposition_sign`、乗法性を `finiteOrderedSign_comp` で示し、必要十分版の定理を開かない。導出版二ファイルは橋 `KacWard.finiteTranspositionPerm_eq_necSuf` で互換を必要十分版のものへ移して渡す。本文・SageMath は不変。
 - 2026-11-13（研究管理）: 到達点への最長の鎖（境界頂点の局所回転数の同定から熱力学極限まで）を主経路の表から並列の表へ移し、接触点分割・平滑化・横断数の委譲 12 件と式変形の書き方の統一を並列から主経路へ移した。直近 24 時間に減った 21 件は全て並列によるもので、主経路は 11/12 と 11/13 の二回の計測で残りを 1 件も減らしていない。鎖は直列なので、1 日の成功回数が多い側（並列 23 回、主経路 9 回）に置く。
 - 2026-11-13: 主経路の先頭「内側を左に置く歩道の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_left` は既存の四セル方向表の終点における入方向を、平面持ち上げの座標差と `orientedEdgeLatticeStep_direction` によって実際の辺の方向番号へ戻す。本文・SageMath は不変。次は内側を右に置く歩道の入出方向。
-- 2026-11-13: 主経路の局所同定を、内側が左の場合の出方向・入方向、右の場合の入出方向、各点の回転数一致に割った。左の出方向について、平面持ち上げの座標差を実際の辺の方向番号へ戻し、四セルの方向表の出方向と一致する Lean 具体版 `vertexSimpleWalk_outgoing_direction_eq_boundary_left` を示した。本文と SageMath は既存の局所方向表のままであり、各点の回転数一致と必要十分版は未了。
