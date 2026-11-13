@@ -1329,8 +1329,8 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 10 },
     body: [
       NOT_ADOPTED,
-      paragraph(["（もと content/008_TV1_hatZ_hatY_part1.ts の定義ブロック TV1_hatZ_hatY_definition_pauli_group。labels: def_pauli_group。以下は本文にあったときの内容のまま。）"]),
-      paragraph([math(String.raw`M \in \mathbb{Z}_{\geq 1}`), " とし、", math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`), " と書く。", ref("pauli_matrix_products"), " の Pauli 行列 ", math(String.raw`\sigma^x, \sigma^y, \sigma^z`), " と単位行列 ", math(String.raw`\sigma^0 := I_{\mathrm{Mat}(2,\mathbb{C})}`), " を用い、", math(String.raw`\mathbb{A} := \{0, x, y, z\}`), " とおく。"]),
+      paragraph(["（もと content/008_TV1_hatZ_hatY_part1.ts の定義ブロック TV1_hatZ_hatY_definition_pauli_group。labels: def_pauli_group。以下は本文にあったときの内容のまま。ただし Pauli 行列と単位行列の成分の出典は、いまの本文の定義のラベルに替えた。）"]),
+      paragraph([math(String.raw`M \in \mathbb{Z}_{\geq 1}`), " とし、", math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`), " と書く。", ref("def_pauli_matrices"), " の Pauli 行列 ", math(String.raw`\sigma^x, \sigma^y, \sigma^z`), " と単位行列 ", math(String.raw`\sigma^0 := I_{\mathrm{Mat}(2,\mathbb{C})}`), "（", ref("def_identity_matrix"), " で ", math(String.raw`n = 2`), "）を用い、", math(String.raw`\mathbb{A} := \{0, x, y, z\}`), " とおく。"]),
       paragraph([math(String.raw`M`), " 因子のパウリ行列群を"]),
       displayMath(String.raw`\mathcal{P}_M := \left\{\,i^{k}\,\sigma^{a_1}\boxtimes\sigma^{a_2}\boxtimes\cdots\boxtimes\sigma^{a_M}
 \ \middle|\ k \in \{0,1,2,3\},\ (a_1,\dots,a_M) \in \mathbb{A}^M \right\} \subseteq R`),
@@ -1368,11 +1368,11 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 10 },
     body: [
       NOT_ADOPTED,
-      paragraph(["（もと content/008_TV1_hatZ_hatY_part1.ts の主張ブロック TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group。labels: V2_not_in_clifford_group。以下は本文にあったときの内容のまま。）"]),
+      paragraph(["（もと content/008_TV1_hatZ_hatY_part1.ts の主張ブロック TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group。labels: V2_not_in_clifford_group。以下は本文にあったときの内容のまま。ただし Pauli 行列と単位行列の成分の出典は、いまの本文の定義のラベルに替えた。）"]),
       paragraph([ref("def_transfer_matrix_symbols"), " の ", math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(K_2^*\sum_{k=1}^{M}\sigma_k^x\right)`), " は ", "〔def_clifford_group〕", " のクリフォード群 ", math(String.raw`\mathcal{C}_M`), " に属さない。"]),
       paragraph(["したがって ", ref("def_T_g"), " の ", math(String.raw`T_g`), " の定義域をクリフォード群に限定すると、本証明で必要な ", math(String.raw`T_{V_2}`), " およびその合成 ", math(String.raw`T_{(V)}`), " が定義できなくなる。"]),
       paragraph(["証明."]),
-      paragraph(["Step 1: ", math(String.raw`\{\sigma^0, \sigma^x, \sigma^y, \sigma^z\}`), " が ", math(String.raw`\mathrm{Mat}(2,\mathbb{C})`), " の基底であること。", math(String.raw`a, b, c, d \in \mathbb{C}`), " について"]),
+      paragraph(["Step 1: ", math(String.raw`\{\sigma^0, \sigma^x, \sigma^y, \sigma^z\}`), " が ", math(String.raw`\mathrm{Mat}(2,\mathbb{C})`), " の基底であること。", math(String.raw`a, b, c, d \in \mathbb{C}`), " について、", math(String.raw`\sigma^0`), " の成分（", ref("def_identity_matrix"), " で ", math(String.raw`n = 2`), "）と ", math(String.raw`\sigma^x, \sigma^y, \sigma^z`), " の成分（", ref("def_pauli_matrices"), "）より"]),
       displayMath(String.raw`a\sigma^0 + b\sigma^x + c\sigma^y + d\sigma^z
 = \begin{pmatrix} a + d & b - ic \\ b + ic & a - d \end{pmatrix}`),
       paragraph(["が零行列なら、", math(String.raw`a+d = 0,\ a-d = 0`), " より ", math(String.raw`a = d = 0`), "、", math(String.raw`b - ic = 0,\ b + ic = 0`), " より辺々加えて ", math(String.raw`2b = 0`), " すなわち ", math(String.raw`b = 0`), "、したがって ", math(String.raw`c = 0`), "。よって 4 元は線型独立であり、", math(String.raw`\dim_\mathbb{C}\mathrm{Mat}(2,\mathbb{C}) = 4`), " なので基底である。", "〔tensor_basis のもとの (2)〕", " より ", math(String.raw`\{\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_M} \mid (a_1,\dots,a_M)\in\mathbb{A}^M\}`), " は ", math(String.raw`R`), " の基底である。"]),
@@ -1395,13 +1395,13 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
 = \sum_{n=0}^{\infty}\frac{(K_2^*)^n}{n!}(\sigma^x)^n\sigma^z
 = \sigma^z\sum_{n=0}^{\infty}\frac{(-K_2^*)^n}{n!}(\sigma^x)^n
 = \sigma^z\exp\!\left(-K_2^*\sigma^x\right)`),
-      paragraph(["また、", math(String.raw`c_2^* = \cosh 2K_2^*,\ s_2^* = \sinh 2K_2^*`), "（", ref("def_transfer_matrix_symbols"), "）と、成分計算（", ref("mat_mult"), "）による"]),
+      paragraph(["また、", math(String.raw`c_2^* = \cosh 2K_2^*,\ s_2^* = \sinh 2K_2^*`), "（", ref("def_transfer_matrix_symbols"), "）と、Pauli 行列の成分（", ref("def_pauli_matrices"), "）と成分計算（", ref("mat_mult"), "）による"]),
       displayMath(String.raw`\sigma^z\sigma^x
 = \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
 = \begin{pmatrix}0&1\\-1&0\end{pmatrix}
 = i\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 = i\,\sigma^y
-\quad (\because \text{行列の積の成分計算とスカラー倍の定義})`),
+\quad (\because \blkref{def_pauli_matrices}\ \text{の成分、行列の積の成分計算とスカラー倍の定義})`),
       paragraph(["を使う。すると"]),
       displayMath(String.raw`\begin{aligned}
 \exp\!\left(K_2^*\sigma^x\right)\sigma^z\exp\!\left(-K_2^*\sigma^x\right)

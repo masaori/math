@@ -288,7 +288,7 @@ BB
       paragraph([ref("def_rayleigh_sup"), " の ", math(String.raw`c(M_{\mathrm{col}})`), " と ", ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M_{\mathrm{col}})`), " について、次が成り立つ。"]),
       displayMath(String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)`),
       paragraph(["証明."]),
-      paragraph([ref("epsilon_projector_properties"), " (2)(3) より、任意の ", math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`), " は ", math(String.raw`x = x_+ + x_-`), "（", math(String.raw`x_\pm := P^{(\pm)}x \in \mathcal{F}^{(\pm)}`), "）と分解される。", ref("epsilon_square_and_eigenvalues"), " の証明で得た ", math(String.raw`\varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x`), " と、", ref("pauli_matrix_products"), " の ", math(String.raw`\sigma^x`), " の成分表示、", ref("kronecker_transpose"), " より、"]),
+      paragraph([ref("epsilon_projector_properties"), " (2)(3) より、任意の ", math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`), " は ", math(String.raw`x = x_+ + x_-`), "（", math(String.raw`x_\pm := P^{(\pm)}x \in \mathcal{F}^{(\pm)}`), "）と分解される。", ref("epsilon_square_and_eigenvalues"), " の証明で得た ", math(String.raw`\varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x`), " と、", ref("def_pauli_matrices"), " の ", math(String.raw`\sigma^x`), " の成分表示、", ref("kronecker_transpose"), " より、"]),
       displayMath(String.raw`\begin{aligned}
 \varepsilon^\top
 &=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
@@ -296,7 +296,7 @@ BB
 &=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
   \quad (\because \blkref{kronecker_transpose})\\
 &=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
-  \quad (\because \blkref{pauli_matrix_products}\ \text{の }\sigma^x\text{ の成分表示})\\
+  \quad (\because \blkref{def_pauli_matrices}\ \text{の }\sigma^x\text{ の成分表示})\\
 &=\varepsilon
   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
 \end{aligned}`),
