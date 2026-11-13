@@ -25,7 +25,7 @@
 抽象テンソル冪 `AbstractTensorPow M` 側の基底 `matTensorPowBasis` も、
 基底の移送 `NecSuf.basisOfLinearEquiv` で Kronecker 表現へ運べる
 （`kroneckerTensorPowBasis`）。`<tensor_basis>` (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族）は
-人手 Step 4 と 1 対 1 に `TheoremTensorBasisKroneckerFamilyOfBasis.lean` で示す。
+人手 Step 3 と 1 対 1 に `TheoremTensorBasisKroneckerFamilyOfBasis.lean` で示す。
 -/
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Representation
@@ -41,7 +41,7 @@ variable (M : ℕ)
 
 /-- **`<tensor_basis>` (1) を使う場所の具体版**
 （行列単位 `E_{IJ}` の族が `TensorPow M` の基底であること）を、
-必要十分版 `NecSuf.matrixUnitBasis`（人手証明 Step 1 と同じ成分比較で証明したもの。
+必要十分版 `NecSuf.matrixUnitBasis`（人手証明 `<tensor_basis>` Step 2 と同じ成分比較で証明したもの。
 係数は任意の可換環、添字は任意の有限型でよい）の特殊化として得る。 -/
 noncomputable def EBasis : Basis (Conf M × Conf M) ℂ (TensorPow M) :=
   NecSuf.matrixUnitBasis ℂ (Conf M)
@@ -57,7 +57,7 @@ theorem coe_EBasis_eq_matrixUnitBasis : ⇑(EBasis M) = ⇑(matrixUnitBasis M) :
   funext IJ
   rw [EBasis_apply, matrixUnitBasis_apply]
 
-/-- 人手証明 Step 1 の成分比較そのもの（`A = Σ_{IJ} A_{IJ} E_{IJ}`）を、
+/-- 人手証明 `<tensor_basis>` Step 2 の成分比較そのもの（`A = Σ_{IJ} A_{IJ} E_{IJ}`）を、
 本プロジェクトの記号で述べたもの。 -/
 theorem matrix_eq_sum_E (A : TensorPow M) :
     A = ∑ IJ : Conf M × Conf M, A IJ.1 IJ.2 • E IJ.1 IJ.2 :=

@@ -1,14 +1,12 @@
-# <tensor_basis> (2) とその証明の Step 4: Mat(2,C) の基底 b_1..b_4 のクロネッカー積の族 (F_q) は、
+# <tensor_basis> (2) とその証明の Step 3: Mat(2,C) の基底 b_1..b_4 のクロネッカー積の族 (F_q) は、
 # Mat(2^M,C) を張り（kronecker_family_of_spanning_family_spans）、かつ線型独立である
 # （kronecker_family_of_independent_family_is_independent）ので基底である。
 # (0) 仮定: b_1..b_4 が Mat(2,C) を張り、かつ線型独立（4 つの行列を並べた 4×4 の係数行列の階数が 4）。
-# (1) Step 4 の「(F_q) は張る」: 任意の X について X = Σ_q d_q F_q となる d を解いて見つけ、等式を厳密に確かめる
+# (1) Step 3 の「(F_q) は張る」: 任意の X について X = Σ_q d_q F_q となる d を解いて見つけ、等式を厳密に確かめる
 #     （X は行列単位の全てと、乱数の行列）。
-# (2) Step 4 の「(F_q) は線型独立」: (F_q) を並べた係数行列の核が 0（階数が N = 4^M）。
+# (2) Step 3 の「(F_q) は線型独立」: (F_q) を並べた係数行列の核が 0（階数が N = 4^M）。
 # (3) π は全単射: 多重添字 (a_1..a_M) の並べ方 π の像の個数が N。
 # 否定の対照: 張らない族（b_3 = b_1 + b_2）では (F_q) の係数行列の階数が N 未満で、張らない X があり、線型独立でもない。
-# (4) Step 5 の表示式: {u_1,u_2} を C^2 の基底、e_i = Σ_a d^{(i)}_a u_a として
-#     f_I = Σ_{(a_1..a_M)∈{1,2}^M} (Π_k d^{(i_k)}_{a_k}) (u_{a_1}⊠…⊠u_{a_M}) を全ての I で厳密に確かめる。
 # 基底は Pauli 族 {I,σ^x,σ^y,σ^z} と、別の基底（上三角と下三角を混ぜた族）。M = 1, 2, 3。QQ(i) 上の厳密計算。浮動小数点なし。
 import itertools
 
@@ -93,37 +91,6 @@ for M in [1, 2]:
     except ValueError:
         spans = False
     check(not spans, f"対照 M={M}: 行列単位 E_(1,2^M) は (F_q) の線型結合で書けない")
-
-# (4) Step 5 の表示式
-controls_done = 0
-e_std = [vector(K, [1, 0]), vector(K, [0, 1])]
-def kv(vs):
-    out = vs[0]
-    for v in vs[1:]:
-        out = vector(K, [x * y for x in out for y in v])
-    return out
-for ubasis in [[vector(K, [1, 1]), vector(K, [1, -1])], [vector(K, [2, i]), vector(K, [1, 3])]]:
-    U = matrix(K, ubasis).transpose()          # 列が u_1, u_2
-    D = [U.solve_right(e_std[t]) for t in range(2)]   # e_t = Σ_a D[t][a] u_a
-    for t in range(2):
-        check(sum((D[t][a] * ubasis[a] for a in range(2)), vector(K, [0, 0])) == e_std[t], "Step 5: e_i = Σ_a d^{(i)}_a u_a")
-    for M in [1, 2, 3]:
-        for I_ in itertools.product(range(2), repeat=M):
-            fI = kv([e_std[t] for t in I_])
-            rhs = sum((prod(D[I_[k]][A[k]] for k in range(M)) * kv([ubasis[a] for a in A])
-                       for A in itertools.product(range(2), repeat=M)), vector(K, [0] * 2 ** M))
-            check(fI == rhs, f"Step 5, M={M}, I={I_}: f_I の展開")
-    # 否定の対照: 係数の添字を取り違える（d^{(i_k)}_{a_k} の代わりに d^{(a_k)}_{i_k}）と崩れる。
-    # 係数の行列 (d^{(i)}_a) が対称な基底（u_1 = (1,1), u_2 = (1,-1)）では取り違えても値が変わらないので、対称でない基底でだけ行う。
-    if all(D[t][a] == D[a][t] for t in range(2) for a in range(2)):
-        continue
-    controls_done += 1
-    I_ = (0, 1)
-    wrong = sum((prod(D[A[k]][I_[k]] for k in range(2)) * kv([ubasis[a] for a in A])
-                 for A in itertools.product(range(2), repeat=2)), vector(K, [0] * 4))
-    check(wrong != kv([e_std[t] for t in I_]), "対照: Step 5 の係数の添字を取り違えると崩れる")
-
-check(controls_done >= 1, "対照: Step 5 の否定の対照を少なくとも 1 つの基底で行った")
 
 print(f"checks: {n_check}, failures: {n_fail}")
 if n_fail == 0:

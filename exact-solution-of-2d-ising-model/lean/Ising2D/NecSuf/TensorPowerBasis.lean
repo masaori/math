@@ -48,7 +48,7 @@ section MatrixUnitBasis
 
 variable {K : Type*} [CommRing K] {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- **人手証明 Step 1 の成分比較（前半）**: 任意の行列は行列単位の線型結合で書ける。
+/-- **人手証明 `<tensor_basis>` Step 2 の成分比較（前半）**: 任意の行列は行列単位の線型結合で書ける。
 
   `A = Σ_{(i,j)} A_{ij} E_{ij}`
 
@@ -70,7 +70,7 @@ theorem matrix_eq_sum_smul_single (A : Matrix n n K) :
   · intro h
     exact absurd (Finset.mem_univ i) h
 
-/-- **人手証明 Step 1 の成分比較（後半）**: 行列単位の線型結合の成分は、その係数そのものである。
+/-- **人手証明 `<tensor_basis>` Step 2 の成分比較（後半）**: 行列単位の線型結合の成分は、その係数そのものである。
 
   `(Σ_{(i,j)} c_{ij} E_{ij})_{kl} = c_{kl}`
 
@@ -102,7 +102,7 @@ theorem linearIndependent_single :
 行列単位の族 `{E_{ij}}` は行列環の基底である。
 
 係数は任意の可換環、添字は任意の有限（等号判定可能な）型でよい。
-証明は上の 2 本、すなわち人手証明 Step 1 の成分比較そのものだけを使う。 -/
+証明は上の 2 本、すなわち人手証明 `<tensor_basis>` Step 2 の成分比較そのものだけを使う。 -/
 noncomputable def matrixUnitBasis (K : Type*) [CommRing K] (n : Type*) [Fintype n]
     [DecidableEq n] : Basis (n × n) K (Matrix n n K) :=
   Basis.mk linearIndependent_single (by
