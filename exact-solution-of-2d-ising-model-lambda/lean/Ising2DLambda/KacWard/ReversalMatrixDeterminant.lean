@@ -4,6 +4,7 @@
 反転そのものであることを確かめ、符号の積と唯一の非零置換項を順に計算する。
 -/
 import Ising2DLambda.IntegerMatrix.Determinant
+import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.KacWard.ReversalMatrix
 import Mathlib.Data.Prod.Lex
 

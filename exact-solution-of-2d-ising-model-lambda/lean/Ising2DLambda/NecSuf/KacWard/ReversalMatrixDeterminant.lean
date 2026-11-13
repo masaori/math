@@ -6,6 +6,7 @@
 互換分解、符号の積、反転以外の零項、行指定展開の順序は具体版と同じである。
 -/
 import Ising2DLambda.IntegerMatrix.Determinant
+import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 
 namespace Ising2DLambda.NecSuf.KacWard
 

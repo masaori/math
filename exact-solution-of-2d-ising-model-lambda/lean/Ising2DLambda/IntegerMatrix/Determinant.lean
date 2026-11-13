@@ -1,21 +1,29 @@
-/- 整数行列式と、転倒数の符号を使う行指定の置換展開。 -/
+/- 整数行列式と、転倒数の符号を使う行指定の置換展開。
+
+符号・転倒数は本文の定義 `def_permutation_sign` をそのまま書いた定義（`sign`・`inversionCount`）を使う。
+符号の性質は具体版の補題だけを引く: 二乗が 1（`finiteOrderedSign_mul_self`）、乗法性
+（`finiteOrderedSign_comp`）、互換の符号（`KacWard.finiteTransposition_sign`）。必要十分版の定理は引かない。
+mathlib の `Matrix.det` と `Equiv.Perm.sign` は、本文の行列式の定義との対応（定義どうしの橋渡し）にだけ使う。 -/
 import Ising2DLambda.IntegerMatrix.Basic
-import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 namespace Ising2DLambda.IntegerMatrix
 
 open scoped BigOperators
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue
-open Ising2DLambda.NecSuf.KacWard
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
 
-private theorem linearOrder_trichotomous {ι : Type*} [LinearOrder ι] :
-    Trichotomous (fun x y : ι => x < y) := by
-  intro a b
-  rcases lt_trichotomy a b with hab | hab | hab
-  · exact Or.inl ⟨hab, ne_of_lt hab, not_lt_of_ge (le_of_lt hab)⟩
-  · exact Or.inr (Or.inl ⟨by simp [hab], hab, by simp [hab]⟩)
-  · exact Or.inr (Or.inr ⟨not_lt_of_ge (le_of_lt hab), ne_of_gt hab, hab⟩)
+/-- 恒等置換は転倒を持たないので、符号は `(-1)^0 = 1`。 -/
+private theorem inversionSign_one {ι : Type*} [Fintype ι] [LinearOrder ι] :
+    sign (fun x y : ι => x < y) (1 : Equiv.Perm ι) = 1 := by
+  have hcount : inversionCount (fun x y : ι => x < y) (1 : Equiv.Perm ι) = 0 := by
+    unfold inversionCount
+    rw [Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+    intro p hp hrev
+    have hlt : p.1 < p.2 := AlgebraicEigenvalue.finiteOrdered_mem_orderedPairs.mp hp
+    exact lt_asymm hlt (by simpa using hrev)
+  rw [sign, hcount, pow_zero]
 
 /-- 転倒数で定めた人手証明の符号を、行列式ライブラリの符号へ結ぶ準同型。 -/
 private noncomputable def inversionSignHom {ι : Type*} [Fintype ι] [LinearOrder ι] :
@@ -23,16 +31,16 @@ private noncomputable def inversionSignHom {ι : Type*} [Fintype ι] [LinearOrde
   toFun σ := {
     val := sign (fun x y : ι => x < y) σ
     inv := sign (fun x y : ι => x < y) σ
-    val_inv := sign_mul_self (fun x y : ι => x < y) σ
-    inv_val := sign_mul_self (fun x y : ι => x < y) σ
+    val_inv := AlgebraicEigenvalue.finiteOrderedSign_mul_self σ
+    inv_val := AlgebraicEigenvalue.finiteOrderedSign_mul_self σ
   }
   map_one' := by
     apply Units.ext
-    exact sign_one (fun x y : ι => x < y) linearOrder_trichotomous
+    exact inversionSign_one
   map_mul' := by
     intro σ τ
     apply Units.ext
-    exact sign_comp (fun x y : ι => x < y) linearOrder_trichotomous σ τ
+    exact AlgebraicEigenvalue.finiteOrderedSign_comp σ τ
 
 /-- 転倒数の偶奇で定めた符号は、行列式ライブラリの置換符号と一致する。 -/
 theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
@@ -47,18 +55,16 @@ theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
       rcases Int.units_eq_one_or u with hu | hu
       · refine ⟨1, ?_⟩
         apply Units.ext
-        simpa [hu, inversionSignHom] using
-          (sign_one (fun x y : ι => x < y) linearOrder_trichotomous)
+        simpa [hu, inversionSignHom] using (inversionSign_one (ι := ι))
       · obtain ⟨a, b, hab⟩ := exists_pair_ne ι
-        refine ⟨transpositionPerm a b, ?_⟩
+        refine ⟨KacWard.finiteTranspositionPerm a b, ?_⟩
         apply Units.ext
-        simp [inversionSignHom, sign_transposition, hab, hu]
+        simp [inversionSignHom, KacWard.finiteTransposition_sign hab, hu]
     · haveI : Subsingleton ι := not_nontrivial_iff_subsingleton.mp h
       ext τ
       have hτ : τ = 1 := Subsingleton.elim _ _
       subst τ
-      simpa [inversionSignHom] using
-        (sign_one (fun x y : ι => x < y) linearOrder_trichotomous)
+      simpa [inversionSignHom] using (inversionSign_one (ι := ι))
   have hvalue := DFunLike.congr_fun hhom σ
   exact congrArg Units.val hvalue
 
