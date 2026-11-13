@@ -2024,7 +2024,14 @@ C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bi
                 habitat: "Z",
                 verification: ["sagemath/check/transposition-sign-finite-ordered-set"],
                 lean: [
+                  "Ising2DLambda.KacWard.finiteTransposition",
+                  "Ising2DLambda.KacWard.finiteTranspositionPerm",
+                  "Ising2DLambda.KacWard.finiteTranspositionPerm_comm",
+                  "Ising2DLambda.KacWard.transpositionInversionSet_eq",
+                  "Ising2DLambda.KacWard.finiteTransposition_inversionCount",
+                  "Ising2DLambda.KacWard.finiteTransposition_sign",
                   "Ising2DLambda.NecSuf.KacWard.sign_transposition",
+                  "Ising2DLambda.KacWard.finiteTransposition_sign_from_necSuf",
                 ],
                 statement: [
                   paragraph([
@@ -35450,7 +35457,7 @@ F_{m+1}
 &=\mathrm{ac}_k\bigl((t-\widehat{w(m)})F_m\bigr)
 &&(\because\ \text{上で得た有限積の等式})\\
 &=0
-&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を多項式}\ F_m,\ \text{上界}\ m,\ \text{根}\ w(m)\ \text{へ適用。上界は帰納法の仮定})
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を多項式}\ F_m,\ \text{上界}\ m,\ \text{根}\ w(m)\ \text{へ適用、上界は帰納法の仮定})
 \end{aligned}`),
                         paragraph([
                           "を得る。これで帰納法が閉じた。この議論に実数体も複素数体も現れない。",
