@@ -2,7 +2,7 @@
 # Step 1 の鎖を一行ずつ確かめる。
 # (1) 第 1 式 σ^xσ^x = I_{Mat(2,C)}（pauli_matrix_products を引く 1 行）。
 # (2) 第 2 式 σ^yσ^z = iσ^x の 14 行（mat_mult の和の形・complex_zero_times_is_zero・加法の単位元・積の可換律・
-#     multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple・pauli_matrix_products）。
+#     multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple・1 行目と最後の行の def_pauli_matrices）。
 # (3) 第 3 式 σ^x = (-i)(σ^yσ^z) の 4 行（scalar_multiple_by_one・negative_i_times_i_is_one_in_cc・
 #     scalar_multiple_is_associative・第 2 式）。negative_i_times_i_is_one_in_cc の鎖そのものはその主張の検算が確かめる。
 #     ここではその結論 (-i)i = 1_C だけを使う。

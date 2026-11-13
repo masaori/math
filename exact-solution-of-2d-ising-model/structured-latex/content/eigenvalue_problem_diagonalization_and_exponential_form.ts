@@ -434,7 +434,7 @@ t
         "以下、",
         math(String.raw`\sigma^x, \sigma^y, \sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " は ",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " で定めた二次の Pauli 行列とし、",
         math(String.raw`i \in \mathbb{C}`),
         " は ",
@@ -477,7 +477,7 @@ t
         String.raw`\begin{aligned}
 \sigma^y\sigma^z
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^y,\ \sigma^z\bigr)\\
+&&\bigl(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^y,\ \sigma^z\bigr)\\
 &= \begin{pmatrix}0\cdot1+(-i)\cdot0&0\cdot0+(-i)(-1)\\i\cdot1+0\cdot0&i\cdot0+0\cdot(-1)\end{pmatrix}
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
 &= \begin{pmatrix}0+(-i)\cdot0&0+(-i)(-1)\\i\cdot1+0&i\cdot0+0\end{pmatrix}
@@ -501,7 +501,7 @@ t
 &= i\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ}\bigr)\\
 &= i\,\sigma^x
-&&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\bigr)
+&&\bigl(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x\bigr)
 \end{aligned}`,
       ),
       paragraph(["第 2 式から ", math(String.raw`\sigma^x`), " を書き直す（第 3 式）。"]),
@@ -966,7 +966,7 @@ P_{m-1}Y_m
         " は Step 1 の略記）、",
         math(String.raw`R`),
         " の 4 つの成分を求める。Pauli 行列の成分の行は ",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " で定めた ",
         math(String.raw`\sigma^x, \sigma^y, \sigma^z`),
         " の成分である。",
@@ -984,7 +984,7 @@ R_{11}
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{11}) + \kappa_y(\sigma^y)_{11}\bigr) + \kappa_z(\sigma^z)_{11}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z 1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_0 1_{\mathbb{C}} + \kappa_z 1_{\mathbb{C}}
@@ -1015,7 +1015,7 @@ R_{12}
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{12}) + \kappa_y(\sigma^y)_{12}\bigr) + \kappa_z(\sigma^z)_{12}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + \kappa_z 0_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y(-i)
@@ -1056,7 +1056,7 @@ R_{21}
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x(\sigma^x)_{21}) + \kappa_y(\sigma^y)_{21}\bigr) + \kappa_z(\sigma^z)_{21}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + \kappa_z 0_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y\,i
@@ -1099,7 +1099,7 @@ R_{22}
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x(\sigma^x)_{22}) + \kappa_y(\sigma^y)_{22}\bigr) + \kappa_z(\sigma^z)_{22}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + \kappa_x 0_{\mathbb{C}}) + \kappa_y 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
 &= \bigl((\kappa_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + \kappa_z(-1_{\mathbb{C}})
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= \kappa_0 1_{\mathbb{C}} + \kappa_z(-1_{\mathbb{C}})
@@ -1310,6 +1310,7 @@ Q_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: σ^x, σ^y, σ^z の成分を引く出典を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた（証明の冒頭の段落、Step 1 の第 2 式の鎖の 1 行目と最後の行、Step 3 の R の成分の段落と 4 成分の鎖の Pauli 行列の成分の行）。Step 1 の第 1 式 σ^xσ^x = I を引く段落と行は pauli_matrix_products のまま。式は不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 1 の準備 (f)・(g) と Step 3 の準備 (a)〜(e)（ラベルの無い式）を外し、それらを引いていた行を計算公式の章の主張 i_times_i_is_minus_one_in_cc・negative_i_times_i_is_one_in_cc・twice_times_inverse_of_two_is_original_in_cc・sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc の参照に替えた（(b)・(c) は (d)・(e) の中でしか使われていなかったので、残る箇所は無い）。体の公理の列挙から、準備でしか使っていなかった加法の可換律・結合律を外した。式の両端と中身は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 後半の E_1⋯E_M の左から順に掛けた積を P_1 := E_1・P_{s+1} := P_sE_{s+1} と置いていたが、Step 2 の P_0 := I・P_r := P_{r-1}σ_r^x（σ^x の接頭積）と同じ文字で別の量を表していた。Step 3 後半の側を Q_1 := E_1・Q_{s+1} := Q_sE_{s+1} に改名した（主張と論法は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 2 の P_{m-1}P_{m-1} = I は「異サイトの可換性」の 1 行で因子を並べ替えており、途中が書かれていなかった。Step 2 の冒頭に P_0 := I・P_r := P_{r-1}σ_r^x を置き、積の表示 P_r = ∏_{j=1}^{r} σ_j^x（def_finite_product_of_matrices）、可換の式 σ_k^xP_r = P_rσ_k^x（r < k）と二乗の式 P_rP_r = I を r の帰納法の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・distinct_site_pauli_matrices_commute・Step 1 の σ_k^xσ_k^x = I）で示した。P_{m-1}Z_m・P_{m-1}Y_m の鎖に結合則の行を足し、名前だけの「I は積の単位元」を identity_matrix_is_left_unit_of_mat_mult の参照に替え、Z_m = P_{m-1}σ_m^z・Y_m = P_{m-1}σ_m^y を def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の積を def_finite_product_of_matrices で読む 4 行の鎖にした。使われていなかった「P_{m-1} は可逆で P_{m-1}^{-1} = P_{m-1}」の文を消した（主張は不変）。",

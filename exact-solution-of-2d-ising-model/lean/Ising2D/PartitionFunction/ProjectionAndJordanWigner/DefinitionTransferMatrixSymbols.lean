@@ -263,7 +263,7 @@ theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
 /-- 人手 `Z_Y_generate_algebra` の Step 1 の第 2 式 `σ^yσ^z = iσ^x`。人手の鎖の 14 行と 1 段ずつ対応する。 -/
 theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
   calc
-    -- `pauli_matrix_products` の σ^y, σ^z
+    -- `def_pauli_matrices` の σ^y, σ^z
     pauliY * pauliZ = !![0, -Complex.I; Complex.I, 0] * !![1, 0; 0, -1] := rfl
     -- `mat_mult`
     _ = !![0 * 1 + (-Complex.I) * 0, 0 * 0 + (-Complex.I) * (-1);
@@ -296,7 +296,7 @@ theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
       ext i j
       rw [matrix_smul_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products` の σ^x
+    -- `def_pauli_matrices` の σ^x
     _ = Complex.I • pauliX := rfl
 
 /-- 人手 `Z_Y_generate_algebra` の Step 1 の第 3 式 `σ^x = (-i)(σ^yσ^z)`。人手の鎖の 4 行と 1 段ずつ対応する。 -/
