@@ -75015,6 +75015,13 @@ t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
                     title: { text: "非零巻き付きの頂点単純な閉路の循環総回転数は零である" },
                     labels: ["claim_nonzero_winding_simple_cycle_turning_zero"],
                     habitat: "Z",
+                    lean: [
+                      "Ising2DLambda.KacWard.nonzeroWindingSimpleCycle_cyclicTotalTurning_zero",
+                      "Ising2DLambda.KacWard.cyclicTotalTurning_eq_cyclicAdjacentSum",
+                      "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_zmod_directionPairTurning",
+                      "Ising2DLambda.NecSuf.KacWard.nonzero_winding_cycle_turning_zero_necSuf",
+                      "Ising2DLambda.KacWard.nonzeroWindingSimpleCycle_cyclicTotalTurning_zero_from_necSuf",
+                    ],
                     verification: ["sagemath/check/nonzero-winding-simple-cycle-turning-zero"],
                     statement: [
                       paragraph([
