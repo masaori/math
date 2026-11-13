@@ -65,7 +65,7 @@ theorem pauliX_configBasisIso_apply_of_eq_neg (_hM : 1 ≤ M) (s s' : SpinConf M
     rcases (s m).2 with hs | hs <;> rcases (s' m).2 with hs' | hs' <;>
       simp only [idxOfSpin, hs, hs'] at hne ⊢ <;>
       first | exact absurd rfl hne | norm_num
-  -- `pauli_matrix_products` の `σ^x` の成分 `(σ^x)_{12} = (σ^x)_{21} = 1_ℂ`
+  -- `def_pauli_matrices` の `σ^x` の成分 `(σ^x)_{12} = (σ^x)_{21} = 1_ℂ`
   revert hij
   generalize configBasisIso M s m = a
   generalize configBasisIso M s' m = b
@@ -84,7 +84,7 @@ theorem pauliX_configBasisIso_apply_of_ne_neg (_hM : 1 ≤ M) (s s' : SpinConf M
       first | exact absurd rfl h | norm_num at h
   have hij : configBasisIso M s m = configBasisIso M s' m := by    -- `def_config_basis_iso` の `i_m` の場合分け
     rw [configBasisIso_apply, configBasisIso_apply, heq]
-  -- `pauli_matrix_products` の `σ^x` の成分 `(σ^x)_{11} = (σ^x)_{22} = 0_ℂ`
+  -- `def_pauli_matrices` の `σ^x` の成分 `(σ^x)_{11} = (σ^x)_{22} = 0_ℂ`
   rw [← hij]
   generalize configBasisIso M s m = a
   fin_cases a <;> simp [pauliX]

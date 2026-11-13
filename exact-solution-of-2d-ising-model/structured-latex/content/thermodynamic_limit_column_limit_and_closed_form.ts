@@ -1204,7 +1204,7 @@ w
 \Longrightarrow\ &i_m \neq j_m
   &&\bigl(\because\ \blkref{def_config_basis_iso}\ \text{の}\ i_m\ \text{の場合分け}\bigr)\\
 \Longrightarrow\ &(\sigma^x)_{i_m j_m} = 1_{\mathbb{C}}
-  &&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{12} = (\sigma^x)_{21} = 1_{\mathbb{C}}\bigr)
+  &&\bigl(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{12} = (\sigma^x)_{21} = 1_{\mathbb{C}}\bigr)
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -1218,7 +1218,7 @@ w
 \Longrightarrow\ &i_m = j_m
   &&\bigl(\because\ \blkref{def_config_basis_iso}\ \text{の}\ i_m\ \text{の場合分け}\bigr)\\
 \Longrightarrow\ &(\sigma^x)_{i_m j_m} = 0_{\mathbb{C}}
-  &&\bigl(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{11} = (\sigma^x)_{22} = 0_{\mathbb{C}}\bigr)
+  &&\bigl(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x\ \text{の成分}\ (\sigma^x)_{11} = (\sigma^x)_{22} = 0_{\mathbb{C}}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -1279,6 +1279,7 @@ w
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「ε は各基底ベクトルを別の基底ベクトルへ写す置換行列」を trace_of_epsilon_V_plus の証明 Step 3 の (b)（証明の途中の段で、理由は散文）から引いていた。引ける主張にするため、ε の成分を global_spin_flip_kronecker_form と def_kronecker (2) から一行ずつ求める主張として足した。trace_of_epsilon_V_plus の (b) は列の向き ε_{ord(s'),ord(s)} = δ_{-s=s'} を基底ベクトルへの作用から読むもので、値は同じである。数値検証: sagemath/check/epsilon_entries_in_row_configuration_numbering/。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: σ^x の成分 (σ^x)_{12} = (σ^x)_{21} = 1_C と (σ^x)_{11} = (σ^x)_{22} = 0_C を引く準備の 2 行の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -2093,7 +2094,7 @@ k
         "（",
         ref("def_real_vector_inclusion"),
         "）と略記する。",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix} \in \mathrm{Mat}(2,\mathbb{C})`),
         " について",
@@ -2363,6 +2364,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の 3 行（各成分の値を使った 1 行目、「#𝓘 = 2^{M_col} と ((1/√2)^{M_col})^2 = 2^{-M_col}」の 2 行目、「指数法則」の 3 行目）を、def_matrix_norm → definition_of_sqrt_r_positive → square_of_real_absolute_value → 各成分の値 → finite_sum_of_constant_real_number → inclusion_zz_to_rr_of_power_of_two → 二乗の定義 → product_of_real_powers_is_power_of_product → ℝ の四則演算 → 二乗の定義 → definition_of_sqrt_r_positive → product_of_real_powers_is_power_of_product → ℝ の四則演算 → power_of_real_one_is_one の 14 行の鎖にした。本文に定義の無い 2^{-M_col}（実数の負の整数の冪）と名前だけの「指数法則」を消した。和の添字を 𝓘_{M_col} から def_matrix_norm の i ∈ {1,…,2^{M_col}} に戻し、ν が全単射であることで各成分の値を各 i へ渡した。値は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の結論 ‖x^{(+)}‖^2 = 1 から、根拠を書かずに 𝓡_+ の条件 ‖x^{(+)}‖ = 1 へ進んでいた。‖x^{(+)}‖ ∈ ℝ_{≥0}（def_matrix_norm）、‖x^{(+)}‖ = 0 なら 1 = ‖x^{(+)}‖^2 = 0 となる 4 行の鎖で ‖x^{(+)}‖ ≠ 0、‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x^{(+)}‖、b → 1）で ‖x^{(+)}‖ = 1 を示す段を足した。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、ノルムの鎖の積へ開く行・冪へ戻す行と、‖x^{(+)}‖ ≠ 0・‖x^{(+)}‖ = 1 を示す 2 本の鎖の積との行き来を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: a_+ の直前で σ^x の行列の形を引く段落の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -3549,7 +3551,7 @@ v^\top W_{\mathbb{R}}v
         "以下、",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z\in\mathrm{Mat}(2,\mathbb{C})`),
         " は ",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " で定めた二次の Pauli 行列、",
         math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " は ",
@@ -3608,7 +3610,7 @@ v^\top W_{\mathbb{R}}v
         " とおく。体の公理（積の可換律・結合律・単位元、加法の可換律・単位元）は ",
         ref("complex_numbers_form_a_field"),
         " のものである。Pauli 行列の成分の行は ",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " で定めた ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
         " の成分であり、成分の ",
@@ -3640,7 +3642,7 @@ L_{11}
 &= \bigl((c_0 1_{\mathbb{C}} + c_x(\sigma^x)_{11}) + c_y(\sigma^y)_{11}\bigr) + c_z(\sigma^z)_{11}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((c_0 1_{\mathbb{C}} + c_x 0_{\mathbb{C}}) + c_y 0_{\mathbb{C}}\bigr) + c_z 1_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
 &= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z 1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= c_0 1_{\mathbb{C}} + c_z 1_{\mathbb{C}}
@@ -3661,7 +3663,7 @@ L_{12}
 &= \bigl((c_0 0_{\mathbb{C}} + c_x(\sigma^x)_{12}) + c_y(\sigma^y)_{12}\bigr) + c_z(\sigma^z)_{12}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((c_0 0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y(-i)\bigr) + c_z 0_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y(-i)\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= c_x 1_{\mathbb{C}} + c_y(-i)
@@ -3688,7 +3690,7 @@ L_{21}
 &= \bigl((c_0 0_{\mathbb{C}} + c_x(\sigma^x)_{21}) + c_y(\sigma^y)_{21}\bigr) + c_z(\sigma^z)_{21}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((c_0 0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y i\bigr) + c_z 0_{\mathbb{C}}
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y i\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= c_x 1_{\mathbb{C}} + c_y i
@@ -3711,7 +3713,7 @@ L_{22}
 &= \bigl((c_0 1_{\mathbb{C}} + c_x(\sigma^x)_{22}) + c_y(\sigma^y)_{22}\bigr) + c_z(\sigma^z)_{22}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \bigl((c_0 1_{\mathbb{C}} + c_x 0_{\mathbb{C}}) + c_y 0_{\mathbb{C}}\bigr) + c_z(-1_{\mathbb{C}})
-&&(\because\ \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
+&&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
 &= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z(-1_{\mathbb{C}})
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
 &= c_0 1_{\mathbb{C}} + c_z(-1_{\mathbb{C}})
@@ -4487,6 +4489,7 @@ p
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が引く check_number_operator_is_hermitian の証明がこの主張を使う）。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 1 の A の展開と 4 成分の鎖（分母の 2 を「同分母の和・差」「約分」で処理し、商の読みが書かれていなかった）を、同じ展開を κ_0・κ_x・κ_y・κ_z と def_complex_quotient の商で一ステップずつ開いた Z_Y_generate_algebra の証明の Step 3 の前半の参照に替えた。B が基底であるという Step 1 の結論と、e_1〜e_4 の番号付けは不変。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z を引く段落、Step 1 の Pauli 行列の成分の段落と L_{11}・L_{12}・L_{21}・L_{22} の鎖の Pauli 行列の成分の行 4 行（計 6 か所）の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },

@@ -219,7 +219,7 @@ theorem pauliComb_apply_00 (c0 cx cy cz : ℂ) : pauliComb c0 cx cy cz 0 0 = c0 
     _ = ((c0 * 1 + cx * pauliX 0 0) + cy * pauliY 0 0) + cz * pauliZ 0 0 := by
           rw [kroneckerDelta_self]                                      -- `def_kronecker_delta`
     _ = ((c0 * 1 + cx * 0) + cy * 0) + cz * 1 := by
-          rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `pauli_matrix_products` の `(1,1)` 成分
+          rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `def_pauli_matrices` の `(1,1)` 成分
     _ = ((c0 * 1 + 0) + 0) + cz * 1 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = c0 * 1 + cz * 1 := by rw [add_zero, add_zero]                 -- 加法の単位元を 2 か所へ
@@ -244,7 +244,7 @@ theorem pauliComb_apply_01 (c0 cx cy cz : ℂ) :
     _ = ((c0 * 0 + cx * pauliX 0 1) + cy * pauliY 0 1) + cz * pauliZ 0 1 := by
           rw [kroneckerDelta_of_ne (by decide)]                         -- `def_kronecker_delta`
     _ = ((c0 * 0 + cx * 1) + cy * (-Complex.I)) + cz * 0 := by
-          rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `pauli_matrix_products` の `(1,2)` 成分
+          rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `def_pauli_matrices` の `(1,2)` 成分
     _ = ((0 + cx * 1) + cy * (-Complex.I)) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = cx * 1 + cy * (-Complex.I) := by rw [zero_add, add_zero]      -- 加法の単位元を 2 か所へ
@@ -272,7 +272,7 @@ theorem pauliComb_apply_10 (c0 cx cy cz : ℂ) :
     _ = ((c0 * 0 + cx * pauliX 1 0) + cy * pauliY 1 0) + cz * pauliZ 1 0 := by
           rw [kroneckerDelta_of_ne (by decide)]                         -- `def_kronecker_delta`
     _ = ((c0 * 0 + cx * 1) + cy * Complex.I) + cz * 0 := by
-          rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `pauli_matrix_products` の `(2,1)` 成分
+          rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `def_pauli_matrices` の `(2,1)` 成分
     _ = ((0 + cx * 1) + cy * Complex.I) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = cx * 1 + cy * Complex.I := by rw [zero_add, add_zero]         -- 加法の単位元を 2 か所へ
@@ -297,7 +297,7 @@ theorem pauliComb_apply_11 (c0 cx cy cz : ℂ) : pauliComb c0 cx cy cz 1 1 = c0 
     _ = ((c0 * 1 + cx * pauliX 1 1) + cy * pauliY 1 1) + cz * pauliZ 1 1 := by
           rw [kroneckerDelta_self]                                      -- `def_kronecker_delta`
     _ = ((c0 * 1 + cx * 0) + cy * 0) + cz * (-1) := by
-          rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `pauli_matrix_products` の `(2,2)` 成分
+          rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `def_pauli_matrices` の `(2,2)` 成分
     _ = ((c0 * 1 + 0) + 0) + cz * (-1) := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
     _ = c0 * 1 + cz * (-1) := by rw [add_zero, add_zero]              -- 加法の単位元を 2 か所へ
