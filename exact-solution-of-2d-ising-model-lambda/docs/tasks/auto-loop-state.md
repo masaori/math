@@ -6,12 +6,11 @@
 
 ## 現在地
 
+- **2026-11-13（並列の連続実行）、各出発位置の回転数と境界頂点の局所回転数の同定を Lean 具体版と必要十分版で示した。** 具体版 `vertexSimpleWalk_stepTurning_eq_boundary_turn_left`・`..._neg_boundary_turn_right` は、歩 $j$ の終点（次の歩 `finRotate (m + 1) j` の出発位置）で一歩の回転数が、内側を左に置くなら四セル表の局所回転数、右に置くならその符号反転に等しいことを、方向対への移行・左右の入出方向の対応・終点と次の出発点の一致（最後の歩は零巻き付き）から示す。必要十分版 `boundary_turn_match_left`・`boundary_turn_match_right` は方向を任意の型に上げ、右では方向対の回転数の反転則だけを仮定する。次の並列の tick は「出発辺の回転数和と境界頂点の局所回転数和を同定する」。
 - **2026-11-13（並列の連続実行）、整数行列の行列式（`def_integer_matrix_determinant`）とブロック対角行列の行列式（`claim_block_diagonal_determinant_product`）の Lean 具体版から必要十分版への委譲を外した。** 並列の表の先頭の行は着手時に主経路の「内側を右に置く歩道の方向対応の必要十分版」を待っていたので、末尾の行の残り二件を済ませ、この行を表から消した。整数行列式の橋 `inversionSign_eq_mathlibSign` は符号の単位元・二乗・乗法性・互換の符号を必要十分版の `sign_one`・`sign_mul_self`・`sign_comp`・`transpositionPerm`・`sign_transposition` で済ませていた。恒等置換の転倒数が零であることをこのファイルで示し、残りを具体版 `finiteOrderedSign_mul_self`・`finiteOrderedSign_comp`・`KacWard.finiteTranspositionPerm`・`KacWard.finiteTransposition_sign` へ替えた。ブロック対角の補題 `polynomial_prod_sum_fibers` は、本文の「選択集合が添字ごとに違っても同じ帰納法」を、選択集合が添字ごとに違う $\mathfrak F(S)$・$W_S$・$\operatorname{ins}$・$\operatorname{spl}$・二つの往復・重みの分離・帰納法・全体集合への代入として同じファイルに置き、必要十分版の `FamilyOn`・`insertFamilyEquiv`・`prod_attach_insertFamily`・`familyOnUnivEquiv` を使わない形へ直した。例外の台帳は 44 件から 43 件。
 - **2026-11-13（主経路の連続実行）、頂点の半辺と四方向の対応の具体版から必要十分版への委譲を外した。** 実際の向き付き辺の始点と方向番号の全単射から、頂点での制限と選択辺集合での制限を直接示した。次は接触点分割の具体版の委譲を一件外す。
-
 - **2026-11-13（主経路の連続実行）、内側を右に置く歩道の方向対応の必要十分版を示した。** 四方向の番号と境界表の逆向き番号の対応を Lean で抽象化した。次は接触点分割・平滑化・横断数の具体版の委譲を一件外す。
 - **2026-11-13（主経路の連続実行）、内側を右に置く歩道の始点の入方向を方向表に対応させた。** 平面持ち上げの一歩から実際の辺の方向番号を得て、方向表の入方向が二だけずれることを Lean 具体版で示した。次は右に置く歩道の方向対応の必要十分版である.
-- **2026-11-13（並列の連続実行）、多項式の有限和の積の添字写像展開（`claim_polynomial_product_of_sums`）の Lean 具体版から必要十分版への委譲を外した。** 並列の表の先頭の行は主経路の「内側を右に置く歩道の方向対応の必要十分版」がまだ未完なので、末尾の行を進めた。具体版 `qbarPolynomial_prod_sum_eq_sum_prod_family` は本文の $\mathfrak F(S)$・$\operatorname{ins}$・$\operatorname{spl}$ と重みの分離を必要十分版の `FamilyOn`・`insertFamilyEquiv`・`prod_attach_insertFamily` で済ませていた。本文の $\mathfrak F(S)$（`QbarFiniteMapsOn`）、$W_S$、$\operatorname{ins}$、$\operatorname{spl}$、二つの往復、重みの四等号を同じファイルに置き、本文と同じ順で示す形へ直した。例外の台帳の行を消した（45 件から 44 件）。末尾の行の残りは `def_integer_matrix_determinant` の 1 件と、下の備考に足したブロック対角の補題である。
 
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
@@ -36,7 +35,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 各出発位置の回転数と境界頂点の局所回転数を同定する | 記述・SageMath 済。Lean は未着手 | 出発位置と境界頂点の全単射、非後退辺対の回転数と方向対の重みの一致、左右それぞれの入出方向の対応を使う。 |
 | Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を同定する | 記述・SageMath 済。Lean は未着手 | 全単射と各点の回転数一致によって有限和を再添字付けする。 |
 | Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
@@ -53,13 +51,11 @@
 
 ## レビュー記録
 
+- 2026-11-13（並列）: 「持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである」の本文の最後の段（左に置く向きの接続数一・二・三の回転数 $-1,0,1$、右に置く向きの凸・凹・直進の $1,-1,0$、$t_\circ=v_1-v_3$ または $-(v_1-v_3)$）を、`cellBoundary_turn_by_incidence` と今回の左右の回転数一致の符号で照合した。符号と対応に食い違いは無く、修正不要だった。
 - 2026-11-13（並列）: 「ブロック対角行列の行列式は小行列式の積である」の本文の三行目は、選択集合を一つに固定した `claim_polynomial_product_of_sums` そのものではなく「その帰納法を各ファイバーの選択集合に適用」と書き、直前の段落で選択集合が同じことを使わないと述べている。本文はこの段落で根拠を明示しているので直さず、Lean 具体版を同じ形（添字ごとに違う選択集合の帰納法をこのファイルの中に置く）へ合わせた。
 - 2026-11-13: 前回の台帳更新で「残っているもの」と「並列の積み上げが受け持つもの」の表が消え、次の担当項目を選べなくなっていた。直前の台帳から両表を復元し、完了済みの右側方向対応の行だけを除いた。
-
 - 2026-11-13: 「完全マッチングの符号は対の列挙順序に依存しない」の主張文は $\operatorname{sgn}(\mathcal D)\in\{-1,1\}$ を述べるのに、証明は列挙の取り替えと空集合の場合だけを示し、値が $\{-1,1\}$ に属することを示していなかった（定義ブロックが $\in\{-1,1\}$ と書くだけ）。$\pi:=\pi_{W(\mathcal L_0)}$ を置き、`def_perfect_matching_sign`・`def_matching_word_sign`・`def_permutation_sign` を引く三等号と、整数 $(-1)^k$ の偶奇による所属の一行を証明に足した（主張は不変）。SageMath に四行の検算 `check_sign_values.sage` を足した（520 等式、否定の対照を含む）。
 - 2026-11-12: 「分散因子の最小値は自己双対点で零になる」の本文の証明が、$0<r<1$ を実現写像の四つの主張の列挙で、$2r(1-r^2)>0$ を根拠なしに、$B_\xi-(1-2r-r^2)^2$ を「$\mathbb R$ の分配則」の一行で、$(1-2r-r^2)^2=0\iff1-2\xi-\xi^2=0$ を「単射性と四則保存」の一行で、$-1-s<_R0$ を「$0<_Rx_c$ と $-2<_R0$」（推移律と加法の両立を引かずに）で、$1+x_c\ne0$ を「$s=1+x_c>_R0$」で済ませ、主張文に無い $s$ を置かずに使っていた。$s$ を `def_critical_point` から置き、五つの事実（$\rho(0)=0<\rho(\xi)$ と $\rho(\xi)<\rho(1)=1$、$c=2r((1-r)(1+r))>0$、$\rho(p)$ の七行、$s\ne0$ と $-1-s<_R-2<_R0$ を差の平方で示して推移律、$\xi\ne-1-s$ を $0<_R0$ からの $v\cdot v=0$ で）、差の六行、$B_\xi(0,0)$ の四行、零条件の七行の同値、$1+x_c=s\ne0$ の三行へ直した（主張は不変）。SageMath を各行の検算へ書き直した（4,364 件、否定の対照を含む）。
-- 2026-11-12: 「複素根の角表示は分散因子の実現値を余弦で表す」の本文の証明が、この主張に要らない「角の組は全モードの組を重複なく走る」を置き、$\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})$ を $\varpi+\varpi^{-1}\in R$ と実数・複素数の写像を示さずに書き、主張文が別の主張の証明の中で置いた記号 $e_{L,a,k}$ を使い、負号の保存を本文に節の無い事実として引いていた。共役の主張から $\varpi+\varpi^{-1}=2\alpha+0\cdot\omega$ の三行、$\varpi\ne0$ の三行、$\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})$ の八行、実部 $\operatorname{Re}$ を置いて $\rho_{R\to\mathbb R}(2\alpha)=2\cos\theta_1$ を出す九行、$\rho(m-w)=\rho(m-w)+\rho(w)-\rho(w)=\dots$ の十行へ直し、主張文の右辺を $r:=\iota_{\mathbb Q\to\mathbb R}(q)$ で書いた（主張は不変。下流の `claim_dispersion_angle_log_continuous` の $B_q$ と同じ形）。SageMath を各行の検算へ書き直した（42,435 件、否定の対照を含む）。
-- 2026-11-12: 「下組の実現像の上限は列の実数極限に等しい」の本文の証明が、結論に使わない「$\rho$ は狭義順序を保つ」の七行の鎖を先に置き、$0<_{\Lambda_{\mathbb Q}}\varepsilon$ を $s=m/n$ と共通分母の証人で日本語で示し、$c=\log_{\mathbb R}2>0$ を根拠なしに置き、Archimedes 性の段を「有理数の稠密性を二度用い…を選べばよい」と日本語で済ませ、上限の存在を「実数の完備性」に頼っていた。三つの事実（実現値の狭義比較を全順序性と単調性で順序へ戻す、$\rho(0)=0$ の四行、$c>0$ の八行）を先に置き、上からの四行、下からの三つの鎖（$b<\rho(\mu)$ の四行、$\rho(\mu+\varepsilon)<I$ の六行、$\rho(\varepsilon)>0=\rho(0)$ の四行）、$I$ が最小上界であることで上限を示す形へ直した。主張文と脱出理由から完備性を外した（主張は不変）。SageMath を各行の検算へ書き直した（5,402 件、区間演算、否定の対照を含む）。
 
 ## 式変形の書き方の統一
 
@@ -71,9 +67,8 @@
 
 ## 前進の記録
 
+- 2026-11-13: 並列の表の先頭の行「各出発位置の回転数と境界頂点の局所回転数を同定する」を済ませ、行を消した。Lean 具体版 `KacWard/WalkBoundaryVertexTurnMatch.lean`（巡回の後続が非後退であること、歩の終点と次の歩の出発点の一致、左右の回転数一致）、必要十分版 `NecSuf/KacWard/WalkBoundaryVertexTurnMatch.lean`、導出版 `WalkBoundaryVertexTurnMatchFromNecSuf.lean` を置き、本文 `claim_plane_simple_polygon_cyclic_turning` の `lean:` に登録した。本文・SageMath は不変。
 - 2026-11-13: 並列の表の先頭の行は着手時に主経路の表の「内側を右に置く歩道の方向対応の必要十分版」（未着手）を待っていたので、末尾の行「行列式・マッチングの具体版の委譲を外す」の残り二件（`def_integer_matrix_determinant` の `inversionSign_eq_mathlibSign`、ブロック対角の具体版の補題 `polynomial_prod_sum_fibers`）を済ませ、行を消した。`IntegerMatrix/Determinant.lean` は必要十分版の符号の定義（`sign`・`inversionCount`）だけを開き、定理は具体版だけを引く。`BlockDiagonalDeterminantProduct.lean` は必要十分版を import しない。本文・SageMath は不変。次の並列の tick は先頭の行（各出発位置の回転数と境界頂点の局所回転数の同定）から進められる。
 - 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」のうち、`claim_vertex_port_bijection` を済ませた。`vertexPort_bijective` と `selectedVertexPort_bijective` は実際の始点・方向番号の全単射から具体的に証明し、必要十分版への参照を除いた。例外台帳の二行を消した。本文と SageMath は不変。
-
 - 2026-11-13: 主経路の先頭「内側を右に置く歩道の方向対応の必要十分版」を済ませた。四方向の番号と境界表の逆向き番号の対応を抽象化した Lean 必要十分版を置き、既存の実際の歩道に関する具体版二件とともに本文の Lean 対応へ登録した。本文の主張と SageMath は不変。次は接触点分割・平滑化・横断数の具体版の委譲を一件外す。
 - 2026-11-13: 主経路の先頭「内側を右に置く歩道の始点の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_right` は、実際の辺の方向番号と四セル方向表の入方向が二だけずれることを平面持ち上げの座標差から示す。本文・SageMath は不変。次は右側の方向対応の必要十分版。
-- 2026-11-13: 並列の表の先頭の行は主経路の表の「内側を右に置く歩道の方向対応の必要十分版」（未着手）を待つので、末尾の行「行列式・マッチングの具体版の委譲を外す」の `claim_polynomial_product_of_sums` を済ませた。`QbarPolynomialProductSum.lean` は必要十分版の定義・定理を開かず、導出版は恒等の往復 `qbarFiniteMapsOnEquivFamilyOn` で必要十分版の和の添字を具体版の $\mathfrak F(S)$ へ移す。ブロック対角の具体版 `blockDiagonal_det_eq_prod_fiber_dets` が呼ぶ private 補題 `polynomial_prod_sum_fibers` は必要十分版の `FamilyOn`・`insertFamilyEquiv`・`prod_attach_insertFamily` を使っている（検査は登録名の本体だけを見るので数えない）ことを見つけ、末尾の行の備考へ足した。本文・SageMath は不変。
