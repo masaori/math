@@ -1259,6 +1259,9 @@ import Ising2DLambda.NecSuf.KacWard.WalkBoundaryDirectionMatch
 import Ising2DLambda.KacWard.WalkBoundaryVertexTurnMatch
 import Ising2DLambda.NecSuf.KacWard.WalkBoundaryVertexTurnMatch
 import Ising2DLambda.KacWard.WalkBoundaryVertexTurnMatchFromNecSuf
+import Ising2DLambda.KacWard.WalkBoundaryVertexTurnSum
+import Ising2DLambda.NecSuf.KacWard.WalkBoundaryVertexTurnSum
+import Ising2DLambda.KacWard.WalkBoundaryVertexTurnSumFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.WalkInteriorSideConstant
 import Ising2DLambda.KacWard.WalkInteriorSideConstantFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.CellVertexIncidenceCount
