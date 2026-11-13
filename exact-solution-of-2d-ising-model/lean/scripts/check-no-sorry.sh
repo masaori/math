@@ -1928,6 +1928,21 @@ targets=(
   Ising2D.cols_mul_diagonal_matrix_of_necSuf
   Ising2D.NecSuf.col_entry_mul_offdiag_eq_zero
   Ising2D.NecSuf.cols_mul_diagonal_eq_cols_smul
+  Ising2D.finite_sum_with_single_nonzero_term_succ
+  Ising2D.finite_sum_with_single_nonzero_term_fintype
+  Ising2D.finite_sum_with_single_nonzero_term_succ_of_necSuf
+  "Ising2D.NecSuf.finSumLeft_zeros'"
+  "Ising2D.NecSuf.finSumLeft_single'"
+  Ising2D.finite_sum_of_matrices_with_single_nonzero_term_apply
+  Ising2D.finite_sum_of_matrices_with_single_nonzero_term
+  Ising2D.matrix_finset_sum_eq_finSumLeft
+  Ising2D.finite_sum_of_matrices_with_single_nonzero_term_of_necSuf
+  "Ising2D.NecSuf.finSumLeft_matrix_apply'"
+  "Ising2D.NecSuf.finSumLeft_matrix_single'"
+  Ising2D.finite_double_sum_of_matrices_interchange_apply
+  Ising2D.finite_double_sum_of_matrices_interchange
+  Ising2D.finite_double_sum_of_matrices_interchange_of_necSuf
+  "Ising2D.NecSuf.finite_double_sum_of_matrices_interchange'"
   Ising2D.sqrt_of_positive_real_is_positive
   Ising2D.sqrt_of_positive_real_is_positive_of_necSuf
   Ising2D.NecSuf.pos_of_nonneg_of_sq_eq_pos

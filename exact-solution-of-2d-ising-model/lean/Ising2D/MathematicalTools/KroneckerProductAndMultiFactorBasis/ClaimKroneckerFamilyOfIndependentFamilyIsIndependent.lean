@@ -39,6 +39,7 @@
 `ClaimKroneckerFamilyOfIndependentFamilyIsIndependentFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteDoubleSumOfMatricesInterchange
 
 namespace Ising2D
 
@@ -220,7 +221,7 @@ theorem independenceStep_B_eq_sum (b : Fin 4 → Matrix (Fin 2) (Fin 2) ℂ) (d 
         Finset.sum_congr rfl fun p _ => Finset.sum_congr rfl fun a _ =>
           smul_smul _ _ _                                              -- `scalar_multiple_is_associative` を各項へ
     _ = ∑ a, ∑ p, (w p * (if p j = a then (1 : ℂ) else 0)) • b a :=
-        Finset.sum_comm                                                -- `finite_double_sum_of_matrices_interchange`
+        finite_double_sum_of_matrices_interchange _                    -- `finite_double_sum_of_matrices_interchange`
     _ = ∑ a, (∑ p, w p * (if p j = a then (1 : ℂ) else 0)) • b a :=
         Finset.sum_congr rfl fun a _ => Finset.sum_smul.symm           -- `finite_sum_of_scalar_multiples_of_one_matrix` を各 `a` へ
 
