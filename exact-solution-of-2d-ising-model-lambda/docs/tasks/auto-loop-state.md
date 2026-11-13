@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-11-13（主経路の連続実行）、内側セルを左に置く歩道の入方向を境界頂点の四セル方向表へ対応させた。** 終点の四セル方向表と平面持ち上げの座標差を、実際の辺の方向番号と一致させる Lean 具体版を示した。次は内側を右に置く場合の入出方向である。
 - **2026-11-13（主経路の連続実行）、内側セルを左に置く歩道の出方向を境界頂点の四セル方向表へ対応させた。** 平面持ち上げの隣接点の座標差から実際の向き付き辺の方向番号を得て、境界頂点の出方向と一致させる Lean 具体版を示した。次は同じ場合の入方向である。
 - **2026-11-13（並列の連続実行）、不変部分集合上の反転は置換の符号を保つこと（`claim_invariant_subset_reversal_sign`）の Lean 具体版から必要十分版への委譲を外した。** 具体版 `invariantSubsetReversal_sign`（`AlgebraicEigenvalue/InvariantSubsetReversalSign.lean`）は符号の値と乗法性を必要十分版の `sign_eq_one_or_neg_one`・`sign_comp` で済ませていた。本文の「$\mathrm{sgn}(q)\in\{-1,1\}$（`def_permutation_sign` の $(-1)$ の自然数冪）」を整数 $(-1)^k$ の値で、六等号の二行目と三行目を具体版 `finiteOrderedSign_comp` で示す形へ直し、例外の台帳の行を消した（49 件から 48 件）。並列の表の行の残りは 16 件で、次は `claim_polynomial_determinant_mul` である。
 - **2026-11-13（並列の連続実行）、完全列挙の隣接交換は符号を反転すること（`claim_matching_word_sign_swap`）の Lean 具体版から必要十分版への委譲を外した。** 具体版 `matchingWordSign_swap`・`matchingWord_swap_eq_map`（`AlgebraicEigenvalue/PerfectMatchingSign.lean`）は互換を必要十分版の `transpositionPerm` で、符号の乗法性と互換の符号を必要十分版の `sign_comp`・`sign_transposition` で済ませていた。互換を具体版の `KacWard.finiteTranspositionPerm`（本文の $t_{a,b}$）へ替え、本文の六等号の三行目と四行目を具体版 `finiteOrderedSign_comp`・`KacWard.finiteTransposition_sign` で示す形へ直し、例外の台帳の二行を消した（51 件から 49 件）。並列の表の行の残りは 17 件で、次は `claim_invariant_subset_reversal_sign` である。
 - **2026-11-13（並列の連続実行）、符号は合成について乗法的であること（`claim_permutation_sign_mul`）の、線型順序を持つ任意の有限集合の上の Lean 具体版 `finiteOrderedSign_comp` を置いた。** 本文は $\mathcal J$ 一般で述べるのに、具体版 `permSign_comp` は行配位に限っていた。新しい具体版（`AlgebraicEigenvalue/PermutationSignFiniteOrderedSet.lean`）は $\Psi$ が $P_L$ へ入ること、$\Psi'$ が逆写像であること、$|C|=\mathrm{inv}(\varphi)$、各対で $A,B,C$ に属する個数が偶数、三つの符号の積が $1$ の六行、乗法性の五行を本文と同じ順で示し、必要十分版の定理を呼ばない。並列の表の次は `claim_matching_word_sign_swap` の委譲外しである。
-- **2026-11-13（主経路の連続実行）、持ち上げた単純閉歩道の出発位置と内側セル集合の境界頂点の全単射を Lean 具体版・必要十分版で示した。** 出発点の単射、境界頂点への所属、全境界頂点の被覆を合わせた。次は各出発位置での回転数と境界頂点の局所回転数の一致である。
 
 
 
@@ -26,7 +26,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 内側を左に置く歩道の入方向を境界頂点の方向表に対応させる | 記述・SageMath 済。Lean は未着手 | 出方向の対応は Lean 具体版で済んだ。次は前の辺の方向番号と境界頂点の入方向を一致させる。 |
 | Onsager 閉形式への接続 | 内側を右に置く歩道の入出方向を境界頂点の方向表に対応させる | 記述・SageMath 済。Lean は未着手 | 左に置く場合の二方向を反転させ、各方向が二だけずれることを示す。 |
 | Onsager 閉形式への接続 | 各出発位置の回転数と境界頂点の局所回転数を同定する | 記述・SageMath 済。Lean は未着手 | 出発位置と境界頂点の全単射、非後退辺対の回転数と方向対の重みの一致、左右それぞれの入出方向の対応を使う。 |
 | Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を同定する | 記述・SageMath 済。Lean は未着手 | 全単射と各点の回転数一致によって有限和を再添字付けする。 |
@@ -74,8 +73,8 @@
 
 ## 前進の記録
 
+- 2026-11-13: 主経路の先頭「内側を左に置く歩道の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_left` は既存の四セル方向表の終点における入方向を、平面持ち上げの座標差と `orientedEdgeLatticeStep_direction` によって実際の辺の方向番号へ戻す。本文・SageMath は不変。次は内側を右に置く歩道の入出方向。
 - 2026-11-13: 主経路の局所同定を、内側が左の場合の出方向・入方向、右の場合の入出方向、各点の回転数一致に割った。左の出方向について、平面持ち上げの座標差を実際の辺の方向番号へ戻し、四セルの方向表の出方向と一致する Lean 具体版 `vertexSimpleWalk_outgoing_direction_eq_boundary_left` を示した。本文と SageMath は既存の局所方向表のままであり、各点の回転数一致と必要十分版は未了。
 - 2026-11-13: 並列の表の先頭の行の三件目 `claim_invariant_subset_reversal_sign` を済ませた。具体版 `invariantSubsetReversal_sign` は本文の部分置換 $p,q$ の両側逆、二重合成 $q\circ(q\circ\sigma)=\tau$、符号の二行と六等号を同じ順の calc のまま、符号の値を `def_permutation_sign` の $(-1)^{\mathrm{inv}}$ の値（`neg_one_pow_eq_or`）、乗法性の二行を具体版 `finiteOrderedSign_comp` で示す。必要十分版の import `NecSuf.KacWard.PermutationSignOrbitProduct` を外し、`PermutationSignFiniteOrderedSet` を import した（符号・転倒数は本文の定義を書いた `sign`・`inversionCount` を使う）。導出版 `InvariantSubsetReversalSignFromNecSuf.lean` は不変。本文・SageMath は不変。この行の残りは 16 件。
 - 2026-11-13: 並列の表の先頭の行の二件目 `claim_matching_word_sign_swap` を済ませた。具体版 `matchingWordSign_swap` は本文の六等号と同じ順の calc のまま、三行目（乗法性）を `finiteOrderedSign_comp`、四行目（互換の符号）を `KacWard.finiteTransposition_sign` で示す。`matchingWord_swap_eq_map` は互換を `KacWard.finiteTranspositionPerm` にし、$U,V$ の元の固定と $a,b$ の交換を具体版の `finiteTransposition_apply_*` で示す。同じファイルの `matchingWordSign_map` も `finiteOrderedSign_comp` へ替え、`PerfectMatchingSign.lean` から必要十分版の定理の参照と `NecSuf.KacWard.PermutationSignOrbitProduct` の import を外した（推移的にそれを受けていた必要十分版の二ファイル `NecSuf/AlgebraicEigenvalue/MatchingPairWordSignMap.lean`・`NecSuf/KacWard/ReferenceMatchingConstantTerm.lean` には直接の import を足した。符号・転倒数・順序対の集合は本文の定義を書いた `sign`・`inversionCount`・`orderedPairs` をそのまま使う）。本文・SageMath は不変。この行の残りは 17 件。
 - 2026-11-13: 並列の表の先頭の行「一般の有限線型順序集合の上の符号の乗法性の具体版」を済ませた。具体版 `finiteOrderedSign_comp` は本文の定義を書いた `sign`・`inversionCount`・`orderedPairs`（`(· < ·)` について）だけを使い、順序については三分律の帰結（`ne_of_lt`・`lt_asymm`・`lt_or_gt_of_ne`）だけを使う（推移律は使わない、本文の末尾の段落）。導出版は `PermutationSignFiniteOrderedSetFromNecSuf.lean`。行配位の `permSign_comp` は行配位の順序 `rowConfigLess` について述べる具体版として残した（行配位の辞書式順序は Lean の `LinearOrder` のインスタンスでなく、行列式の章の具体版がそれを引いているため）。本文の `lean:` に足した。
-- 2026-11-13: 主経路の先頭の局所同定を、非後退辺対の回転数を方向対の重みに移す論法と、歩道の左右による境界頂点の局所対応に割った。前者を Lean 具体版 `stepTurning_eq_directionPairTurning` で示した。後者は次の tick に残す。
