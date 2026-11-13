@@ -51555,11 +51555,11 @@ b(\sigma_{+})
 &=\frac{1}{L^2}\,\bigl(0(p)/1\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
 &=\frac{1}{L^2}\,\bigl(0/1\bigr)
-&&(\because\ \Lambda\text{ の単位元は零写像なので }0(p)=0\text{。}\blkref{def_log_order_group})\\
+&&(\because\ \Lambda\text{ の単位元は零写像なので }0(p)=0\text{、}\blkref{def_log_order_group})\\
 &=0
-&&(\because\ \mathbb{Q}\text{ の積。}0\text{ 倍は }0)\\
+&&(\because\ \mathbb{Q}\text{ の積で }0\text{ 倍は }0)\\
 &=0(p)
-&&(\because\ \Lambda_{\mathbb{Q}}\text{ の単位元は零写像。}\blkref{def_rational_log_order_group})
+&&(\because\ \Lambda_{\mathbb{Q}}\text{ の単位元は零写像、}\blkref{def_rational_log_order_group})
 \end{aligned}`),
                         paragraph([
                           "であり、両辺は ",
@@ -70523,6 +70523,9 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.stepTurning_eq_directionPairTurning",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_eq_boundary_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_eq_boundary_left",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_eq_boundary_right",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_eq_boundary_right",
+                      "Ising2DLambda.NecSuf.KacWard.right_boundary_direction_match",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertices_equiv_positions",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertices_covered",
                       "Ising2DLambda.NecSuf.KacWard.departure_mem_edgeBoundaryVertices",

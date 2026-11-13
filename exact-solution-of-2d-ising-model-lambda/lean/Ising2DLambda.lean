@@ -1255,6 +1255,7 @@ import Ising2DLambda.KacWard.WalkConsecutiveInteriorSides
 import Ising2DLambda.KacWard.WalkInteriorSideConstant
 import Ising2DLambda.KacWard.WalkBoundaryOutgoingDirection
 import Ising2DLambda.KacWard.WalkBoundaryDirectionMatch
+import Ising2DLambda.NecSuf.KacWard.WalkBoundaryDirectionMatch
 import Ising2DLambda.NecSuf.KacWard.WalkInteriorSideConstant
 import Ising2DLambda.KacWard.WalkInteriorSideConstantFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.CellVertexIncidenceCount
