@@ -50841,9 +50841,9 @@ N\cdot(\lambda+\nu)
 &=N\cdot\lambda+N\cdot\nu
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)+N\cdot\nu
-&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{、}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)+\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu_N)
-&&(\because\ N\text{ は }\nu\text{ の共通分母、証人 }\nu_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\nu\text{ の共通分母、証人 }\nu_N\text{、}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N+\nu_N)
 &&(\because\ \blkref{claim_rational_log_order_group_embedding}\text{ の加法性})
 \end{aligned}`),

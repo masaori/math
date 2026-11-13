@@ -2,14 +2,15 @@
 不変部分集合上の反転による符号保存の具体版。
 本文の部分置換の両側逆・二重合成・符号の六等号を独立に辿る。
 添字集合と部分集合が空の場合も含み、符号は自前の転倒数による整数値を使う。
+符号・転倒数は本文の定義を書いた `sign`・`inversionCount` を使い、乗法性は具体版
+`finiteOrderedSign_comp`（`claim_permutation_sign_mul`）を引く。必要十分版の定理は引かない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.SelectedOddOrbitReversal
-import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp sign_eq_one_or_neg_one)
-open Ising2DLambda.NecSuf.KacWard (trichotomous_of_linearOrder)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
@@ -67,10 +68,14 @@ theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
         _ = q (σ i) := congrArg q (if_neg hsi)
         _ = σ i := if_neg hsi
         _ = invariantSubsetReversal C σ hC i := (if_neg hi).symm
-  -- 本文の二行。符号の値を二つに分けて整数の積を計算する。
+  -- 本文の二行。一行目は `def_permutation_sign` の (-1) の自然数冪が 1 か -1 であること、
+  -- 二行目は二つの場合の整数の積。
   have hValues : sign (fun i j : J => i < j) q = 1 ∨
-      sign (fun i j : J => i < j) q = -1 :=
-    sign_eq_one_or_neg_one (fun i j : J => i < j) q
+      sign (fun i j : J => i < j) q = -1 := by
+    have he : sign (fun i j : J => i < j) q =
+        (-1 : ℤ) ^ inversionCount (fun i j : J => i < j) q := rfl
+    rw [he]
+    exact neg_one_pow_eq_or ℤ _
   have hSquare : sign (fun i j : J => i < j) q *
       sign (fun i j : J => i < j) q = 1 := by
     rcases hValues with hpos | hneg
@@ -85,11 +90,11 @@ theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
       congrArg (sign (fun i j : J => i < j)) hComposition.symm
     _ = sign (fun i j : J => i < j) q *
         sign (fun i j : J => i < j) (q * σ) :=
-      sign_comp _ trichotomous_of_linearOrder q (q * σ)
+      finiteOrderedSign_comp q (q * σ)
     _ = sign (fun i j : J => i < j) q *
         (sign (fun i j : J => i < j) q * sign (fun i j : J => i < j) σ) :=
       congrArg (sign (fun i j : J => i < j) q * ·)
-        (sign_comp _ trichotomous_of_linearOrder q σ)
+        (finiteOrderedSign_comp q σ)
     _ = (sign (fun i j : J => i < j) q * sign (fun i j : J => i < j) q) *
         sign (fun i j : J => i < j) σ := (mul_assoc _ _ _).symm
     _ = 1 * sign (fun i j : J => i < j) σ :=
