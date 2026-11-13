@@ -1,5 +1,6 @@
 import Ising2DLambda.AlgebraicEigenvalue.BlockDiagonalTermFactorization
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialProductSum
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.ShiftCharOrbitProduct
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 

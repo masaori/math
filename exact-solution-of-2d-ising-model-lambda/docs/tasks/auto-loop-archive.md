@@ -1,3 +1,7 @@
+- 現在地: **2026-11-13（主経路の連続実行）、内側セルを左に置く歩道の出方向を境界頂点の四セル方向表へ対応させた。** 平面持ち上げの隣接点の座標差から実際の向き付き辺の方向番号を得て、境界頂点の出方向と一致させる Lean 具体版を示した。次は同じ場合の入方向である。
+- 前進の記録: 2026-11-13: 主経路の先頭「内側を左に置く歩道の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_left` は既存の四セル方向表の終点における入方向を、平面持ち上げの座標差と `orientedEdgeLatticeStep_direction` によって実際の辺の方向番号へ戻す。本文・SageMath は不変。次は内側を右に置く歩道の入出方向。
+- 現在地: **2026-11-13（並列の連続実行）、不変部分集合上の反転は置換の符号を保つこと（`claim_invariant_subset_reversal_sign`）の Lean 具体版から必要十分版への委譲を外した。** 具体版 `invariantSubsetReversal_sign`（`AlgebraicEigenvalue/InvariantSubsetReversalSign.lean`）は符号の値と乗法性を必要十分版の `sign_eq_one_or_neg_one`・`sign_comp` で済ませていた。本文の「$\mathrm{sgn}(q)\in\{-1,1\}$（`def_permutation_sign` の $(-1)$ の自然数冪）」を整数 $(-1)^k$ の値で、六等号の二行目と三行目を具体版 `finiteOrderedSign_comp` で示す形へ直し、例外の台帳の行を消した（49 件から 48 件）。並列の表の行の残りは 16 件で、次は `claim_polynomial_determinant_mul` である。
+- 前進の記録: 2026-11-13: 主経路の局所同定を、内側が左の場合の出方向・入方向、右の場合の入出方向、各点の回転数一致に割った。左の出方向について、平面持ち上げの座標差を実際の辺の方向番号へ戻し、四セルの方向表の出方向と一致する Lean 具体版 `vertexSimpleWalk_outgoing_direction_eq_boundary_left` を示した。本文と SageMath は既存の局所方向表のままであり、各点の回転数一致と必要十分版は未了。
 - 現在地: **2026-11-13（主経路の連続実行）、持ち上げた単純閉歩道の出発位置と内側セル集合の境界頂点の全単射を Lean 具体版・必要十分版で示した。** 出発点の単射、境界頂点への所属、全境界頂点の被覆を合わせた。次は各出発位置での回転数と境界頂点の局所回転数の一致である。
 
 ## 式変形の書き方の統一
