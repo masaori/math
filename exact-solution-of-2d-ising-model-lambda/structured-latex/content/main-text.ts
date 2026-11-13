@@ -53955,7 +53955,7 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
 &=\bigl|\bigl\{\,e\in E^{\mathrm{op}}_{a,b} \;\bigm|\; \tau_{+}(\partial^{\mathrm{op}}_0(e))\ne\tau_{+}(\partial^{\mathrm{op}}_1(e))\,\bigr\}\bigr|
 &&(\because\ \blkref{def_open_rectangle_broken_bond_count})\\
 &=\bigl|\bigl\{\,e\in E^{\mathrm{op}}_{a,b} \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
-&&(\because\ \text{任意の }v\in V^{\mathrm{op}}_{a,b}\text{ で }\tau_{+}(v)=+1\text{。}\blkref{def_open_rectangle_constant_plus_configuration})\\
+&&(\because\ \text{任意の }v\in V^{\mathrm{op}}_{a,b}\text{ で }\tau_{+}(v)=+1\text{ である（}\blkref{def_open_rectangle_constant_plus_configuration}\text{）})\\
 &=|\varnothing|
 &&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
 &=0
