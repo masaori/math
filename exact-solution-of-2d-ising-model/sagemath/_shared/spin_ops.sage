@@ -5,7 +5,7 @@
 # 明示的な複素行列（CDF）として構成する。
 #
 # 対応する structured-latex の定義:
-#   - sigma^x, sigma^y, sigma^z                    : 006_Z_Y_anticommutation.ts（pauli_matrix_products）
+#   - sigma^x, sigma^y, sigma^z                    : 006_Z_Y_anticommutation.ts（def_pauli_matrices）
 #   - sigma_k^a                                     : partition_function_transfer_matrix_representation.ts（def_site_pauli_matrices）
 #   - Z_m := sigma_1^x ... sigma_{m-1}^x sigma_m^z   : 004_transfer_matrix.ts（Jordan–Wigner 行列族）
 #   - Y_m := sigma_1^x ... sigma_{m-1}^x sigma_m^y   : 同上

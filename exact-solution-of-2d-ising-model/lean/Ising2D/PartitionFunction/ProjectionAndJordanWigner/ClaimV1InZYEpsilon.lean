@@ -98,7 +98,7 @@ theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
 /-- 人手証明 Step 0 の `σˣσʸ = iσᶻ`。人手の鎖の各段と 1 対 1 に対応する。 -/
 theorem pauliX_mul_pauliY_eq : pauliX * pauliY = Complex.I • pauliZ := by
   calc
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     pauliX * pauliY = !![0, 1; 1, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
     -- `mat_mult`
     _ = !![0 * 0 + 1 * Complex.I, 0 * (-Complex.I) + 1 * 0;
@@ -127,7 +127,7 @@ theorem pauliX_mul_pauliY_eq : pauliX * pauliY = Complex.I • pauliZ := by
       ext i j
       rw [matrix_smul_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     _ = Complex.I • pauliZ := rfl
 
 /-! ## 非境界項と周期境界項 -/

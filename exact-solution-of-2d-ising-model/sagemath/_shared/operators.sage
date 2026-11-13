@@ -22,7 +22,7 @@ import numpy as _np
 from scipy.linalg import expm as _expm
 
 # ---------------------------------------------------------
-# Pauli 行列（<pauli_matrix_products>）
+# Pauli 行列（<def_pauli_matrices>）と I（<def_identity_matrix> で n = 2）
 # ---------------------------------------------------------
 I2 = _np.eye(2, dtype=complex)
 SX = _np.array([[0, 1], [1, 0]], dtype=complex)

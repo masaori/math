@@ -11,7 +11,7 @@ load("../../_shared/site_sigma_z_kronecker.sage")   # index_set・nu・kron_matr
 
 M_COL_RANGE = [1, 2, 3, 4, 5]
 
-SIGMA_X = matrix(ZZ, [[0, 1], [1, 0]])   # pauli_matrix_products の σ^x
+SIGMA_X = matrix(ZZ, [[0, 1], [1, 0]])   # def_pauli_matrices の σ^x
 
 
 def epsilon_body(M):

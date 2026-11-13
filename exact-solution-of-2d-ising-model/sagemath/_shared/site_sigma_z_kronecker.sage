@@ -9,7 +9,7 @@ import itertools
 
 M_RANGE = [1, 2, 3, 4, 5]
 
-# pauli_matrix_products の σ^z と、def_identity_matrix の I_{Mat(2,C)}
+# def_pauli_matrices の σ^z と、def_identity_matrix の I_{Mat(2,C)}
 SIGMA_Z = matrix(ZZ, [[1, 0], [0, -1]])
 ID2 = identity_matrix(ZZ, 2)
 # def_end_iso の e_1 = (1,0), e_2 = (0,1)（2 行 1 列の行列として持つ）

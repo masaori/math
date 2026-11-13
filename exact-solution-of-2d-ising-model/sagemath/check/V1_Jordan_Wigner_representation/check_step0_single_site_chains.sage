@@ -1,7 +1,7 @@
 # <V1_in_Z_Y_epsilon>: Step 0 の 3 本の鎖を 1 行ずつ、ガウス有理数体 QQ[i] の厳密計算で確かめる（浮動小数点は使わない）。
 K.<i> = QuadraticField(-1)
 M = MatrixSpace(K, 2, 2)
-SX = M([[0, 1], [1, 0]]); SY = M([[0, -i], [i, 0]]); SZ = M([[1, 0], [0, -1]])   # pauli_matrix_products
+SX = M([[0, 1], [1, 0]]); SY = M([[0, -i], [i, 0]]); SZ = M([[1, 0], [0, -1]])   # def_pauli_matrices
 def smul(a, A):                        # def_matrix_scalar_multiple: (aA)_{jk} = a A_{jk}
     return M([[a*A[r, c] for c in range(2)] for r in range(2)])
 def mat_mult(A, B):                    # mat_mult: (AB)_{jk} = A_{j1}B_{1k} + A_{j2}B_{2k}

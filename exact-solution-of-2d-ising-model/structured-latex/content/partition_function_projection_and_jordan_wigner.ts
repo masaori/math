@@ -200,10 +200,16 @@ export default defineBlocks([
         " の ",
         math(String.raw`\sigma_k^a \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
-        math(String.raw`\sigma^x,\sigma^y,\sigma^z,\ I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
         "、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）、",
         ref("def_kronecker"),
         " のクロネッカー積 ",
         math(String.raw`\boxtimes`),
@@ -279,6 +285,7 @@ export default defineBlocks([
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が ε・Z_m・Y_m のクロネッカー積表示を根拠なしで使っていたので、V1_in_Z_Y_epsilon の証明 Step 1 の帰納法を主張として切り出した。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 左辺を、P_1 := σ_1^{a_1}・P_{s+1} := P_sσ_{s+1}^{a_{s+1}} で定めた積 σ_1^{a_1}⋯σ_r^{a_r} から、def_finite_product_of_matrices の有限積 Π_{j=1}^{r}σ_j^{a_j} に述べ直した（二つは同じ漸化式で定まる同じ行列）。帰納法の段の P_1・P_{s+1} の定義の行は def_finite_product_of_matrices の第 1 式・第 2 式の行になった。並べて書いた積 σ_1^{a_1}⋯σ_r^{a_r} がこの有限積を表すことを主張の文に書いた（この主張を並べて書いた形から当てる箇所のため）。右辺と証明の残りの行は不変。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 主張の文で σ^x, σ^y, σ^z を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替え、I := I_{Mat(2,C)} は def_identity_matrix（n = 2）から引く形にした（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -295,7 +302,7 @@ export default defineBlocks([
         " の ",
         math(String.raw`\varepsilon`),
         "、",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x`),
         "、",
@@ -319,6 +326,7 @@ export default defineBlocks([
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明の準備として足した。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: def_global_spin_flip_matrix が ε を有限積 Π_{j=1}^{M_col}σ_j^x と定めたので、第 1 行をその有限積にし、「括弧は左から掛ける形に付け替える」と mat_mult_associative の根拠を外した。site_pauli_prefix_product_kronecker_form の左辺がこの有限積そのものなので、第 2 行はそのまま当たる。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 主張の文で σ^x を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -945,7 +953,7 @@ v_iu_i
     ],
     proof: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の Pauli 行列の成分表示、",
         ref("mat_mult"),
         " の行列積、および ",
@@ -1178,6 +1186,7 @@ Q_{r+1}
       status: "added",
       notes: [
         "旧来の複合定義から、全スピン反転行列の Jordan--Wigner 表示だけを独立した主張として分離した。各サイトの積 Z_mY_m=-i sigma_m^x と昇順の有限積を明示し、右辺が和でないことを保持した。Lean の zyPrefixProduct_eq_neg_i_pow_smul_xString と epsilon_eq_i_pow_smul_zyPrefixProduct が本文の向きの第二の有限帰納法と終端に対応し、NecSuf.prefix_eq_pow_smul_of_local_smul が同じ手順の必要十分版を担う。SageMath は同じ各行を global_spin_flip_jordan_wigner_representation で検算する。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で Pauli 行列の成分表示を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -1578,8 +1587,14 @@ c_i^*&>0
         " で定めた周期的な延長 ",
         math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z=\sigma_1^z`),
         "、",
-        ref("pauli_matrix_products"),
-        " で定めた二次の Pauli 行列と単位行列、",
+        ref("def_pauli_matrices"),
+        " で定めた二次の Pauli 行列、",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        " とした二次の単位行列 ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "、",
         ref("kronecker_product_rule"),
         " の (2) で示した二次の単位行列のクロネッカー積、",
         ref("def_site_pauli_matrices"),
@@ -1641,6 +1656,7 @@ c_i^*&>0
           "本ブロックへ集約した（インライン側にのみ在った σ_k^y, σ_k^z, I_{(Mat(2,C))^{⊗M}}, " +
           "p_m/q_m の対応は本ブロックへ補記済み）。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。本ブロックは V_1, V_2 を定義せず、<def_transfer_matrix> の成分定義と、<first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> のパウリ行列表示を参照する。上の <def_first_transfer_matrix_pauli>・<def_second_transfer_matrix_pauli> への分離の記録は、両ブロックがこの主張へ統合されたため歴史的な記録である。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 先頭段落で二次の Pauli 行列と単位行列を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から、Pauli 行列は定義 def_pauli_matrices、I_{Mat(2,C)} は def_identity_matrix（n = 2）に替えた（Pauli 行列の定義を主張から分けたため）。定めた記号は不変。",
       ],
     },
   },
@@ -1690,10 +1706,16 @@ c_i^*&>0
       ]),
       paragraph([
         "以下、",
-        math(String.raw`\sigma^x,\sigma^y,\sigma^z, I := I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2,\mathbb{C})`),
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " は ",
-        ref("pauli_matrix_products"),
-        " の Pauli 行列とし、クロネッカー積の積が各サイトごとの積であること（",
+        ref("def_pauli_matrices"),
+        " の Pauli 行列、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）とし、クロネッカー積の積が各サイトごとの積であること（",
         ref("kronecker_product_rule"),
         " (1)）",
       ]),
@@ -1728,7 +1750,7 @@ c_i^*&>0
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
@@ -1750,14 +1772,14 @@ c_i^*&>0
 &= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^z
-&&(\because \blkref{pauli_matrix_products})
+&&(\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^y
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0\cdot0+1\cdot i & 0\cdot(-i)+1\cdot0 \\ 1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+1\cdot i & 0+1\cdot0 \\ 1\cdot0+0 & 1\cdot(-i)+0\end{pmatrix}
@@ -1777,14 +1799,14 @@ c_i^*&>0
 &= i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= i\,\sigma^z
-&&(\because \blkref{pauli_matrix_products})
+&&(\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
@@ -1804,7 +1826,7 @@ c_i^*&>0
 &= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^x
-&&(\because \blkref{pauli_matrix_products})
+&&(\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       paragraph([
@@ -2077,6 +2099,7 @@ V_1
           "内容・式変形・根拠・参照は変えていない。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
         "2026-11-01: Step 0 の 3 本の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律・結合律、multiply_by_minus_one、(-1)·(-1) = 1）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z と I を置く段落の出典と、Step 0 の 3 本の鎖の 1 行目（σ の成分）と最後の行（= ∓iσ^a）の根拠 6 行を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替え、I := I_{Mat(2,C)} は def_identity_matrix（n = 2）から引く形にした（Pauli 行列の定義を主張から分けたため）。σ^xσ^x = I を引く行は積の公式なので替えていない。式は不変。",
       ],
     },
   },
@@ -2115,10 +2138,16 @@ V_1
         " の中身どうしが ",
         math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " の元として等しいことを示す。以下、",
-        math(String.raw`\sigma^x,\sigma^y,\sigma^z, I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
         " は ",
-        ref("pauli_matrix_products"),
-        " の Pauli 行列とする。クロネッカー積の積の規則（",
+        ref("def_pauli_matrices"),
+        " の Pauli 行列、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）とする。クロネッカー積の積の規則（",
         ref("kronecker_product_rule"),
         " (1)）と各因子についての ",
         math(String.raw`\mathbb{C}`),
@@ -2135,7 +2164,7 @@ V_1
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&& (\because \blkref{pauli_matrix_products}) \\
+&& (\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
 && (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
@@ -2155,7 +2184,7 @@ V_1
 &= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
 && (\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^x
-&& (\because \blkref{pauli_matrix_products})
+&& (\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       paragraph([
@@ -2287,6 +2316,7 @@ V_2
         "抽象テンソル積を使わず、具体的なクロネッカー積と二次 Pauli 行列の成分計算だけで証明した。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
         "2026-11-01: Step 0 の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律、multiply_by_minus_one）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z と I を置く段落の出典と、Step 0 の鎖の 1 行目（σ の成分）と最後の行（= -iσ^x）の根拠 2 行を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替え、I := I_{Mat(2,C)} は def_identity_matrix（n = 2）から引く形にした（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
