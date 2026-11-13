@@ -3513,25 +3513,35 @@ v^\top W_{\mathbb{R}}v
         math(String.raw`Y_1,\dots,Y_{M_{\mathrm{col}}}`),
         " を ",
         math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の元として考える。",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " を ",
-        math(String.raw`\mathbb{C}`),
-        "-線型空間とみなすとき、",
+        " の元として考える。このとき",
       ]),
       displayMath(
-        String.raw`\{Z_1, \dots, Z_{M_{\mathrm{col}}}, Y_1, \dots, Y_{M_{\mathrm{col}}}\} \text{ は線型独立}`,
+        String.raw`Z_1, \dots, Z_{M_{\mathrm{col}}}, Y_1, \dots, Y_{M_{\mathrm{col}}} \text{ は } \mathbb{C} \text{ 上線型独立}`,
       ),
       paragraph([
         "すなわち ",
         math(String.raw`\alpha_1,\dots,\alpha_{M_{\mathrm{col}}},\beta_1,\dots,\beta_{M_{\mathrm{col}}} \in \mathbb{C}`),
         " が ",
-        math(String.raw`\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m Z_m+\sum_{m=1}^{M_{\mathrm{col}}}\beta_m Y_m=0`),
-        " を満たすならば、すべての ",
-        math(String.raw`m`),
+        math(String.raw`\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m Z_m+\sum_{m=1}^{M_{\mathrm{col}}}\beta_m Y_m=O`),
+        "（",
+        math(String.raw`O\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、二つの有限和の和は ",
+        ref("def_matrix_sum"),
+        "）を満たすならば、すべての ",
+        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
-        math(String.raw`\alpha_m=\beta_m=0`),
-        " である。",
+        math(String.raw`\alpha_m=\beta_m=0_{\mathbb{C}}`),
+        " である（",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
       ]),
     ],
     proof: [
@@ -3567,27 +3577,8 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ]),
       paragraph([
         "Step 1: ",
-        math(String.raw`\mathcal{B}:=\{I,\sigma^x,\sigma^y,\sigma^z\}`),
-        " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        "-基底である。",
-        ref("Z_Y_generate_algebra"),
-        " の証明の Step 3 の前半は、上と同じ ",
-        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
-        " と ",
-        math(String.raw`I=I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " について、任意の ",
-        math(String.raw`A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}\in\mathrm{Mat}(2,\mathbb{C})`),
-        " が",
-      ]),
-      displayMath(
-        String.raw`A = \kappa_0 I + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z,\qquad
-\kappa_0 := \frac{a_{11}+a_{22}}{2_{\mathbb{C}}},\ \kappa_x := \frac{a_{12}+a_{21}}{2_{\mathbb{C}}},\ \kappa_y := \frac{i(a_{12}-a_{21})}{2_{\mathbb{C}}},\ \kappa_z := \frac{a_{11}-a_{22}}{2_{\mathbb{C}}} \in \mathbb{C}`,
-      ),
-      paragraph([
-        "と書けることを示している。",
+        math(String.raw`\mathcal{B}:=(I,\sigma^x,\sigma^y,\sigma^z)`),
+        " を 4 つの元の族とする。",
         math(String.raw`2_{\mathbb{C}}`),
         " は ",
         ref("inclusion_rr_to_cc"),
@@ -3601,15 +3592,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
         "（",
         ref("multiplicative_group_of_cc"),
-        "）であり、4 つの分数は ",
-        ref("def_complex_quotient"),
-        " の商（",
-        math(String.raw`w\to2_{\mathbb{C}}`),
-        "）である。そこではこの展開を右辺の 4 成分の鎖で示し、",
-        math(String.raw`\mathcal{B}`),
-        " が ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " を張ることを導いている。次に ",
+        "）である。",
         math(String.raw`\mathcal{B}`),
         " が線型独立であること、すなわち ",
         math(String.raw`c_0,c_x,c_y,c_z\in\mathbb{C}`),
@@ -3878,39 +3861,82 @@ c_y
       paragraph([
         "よって ",
         math(String.raw`\mathcal{B}`),
-        " は線型独立である。",
-        math(String.raw`\mathcal{B}`),
-        " は ",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " を張り、かつ線型独立なので、",
-        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        "-基底である。以下",
+        " は線型独立である。以下",
       ]),
       displayMath(
         String.raw`e_1:=I,\quad e_2:=\sigma^x,\quad e_3:=\sigma^y,\quad e_4:=\sigma^z`,
       ),
       paragraph(["と番号を付ける。"]),
       paragraph([
-        "Step 2: クロネッカー積がつくる基底。",
-        ref("tensor_basis"),
-        " (2) を基底 ",
-        math(String.raw`\mathcal{B}=\{e_1,e_2,e_3,e_4\}`),
-        " に適用すると、多重添字 ",
-        math(String.raw`(i_1,\dots,i_{M_{\mathrm{col}}})\in\{1,2,3,4\}^{M_{\mathrm{col}}}`),
-        " で添字づけられた族",
+        "Step 2: クロネッカー積の族の線型独立性。",
+        math(String.raw`\mathcal{P} := \{1,2,3,4\}^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`N := 4^{M_{\mathrm{col}}}`),
+        " とし、",
+        math(String.raw`\pi : \{1,\dots,N\} \to \mathcal{P}`),
+        " を全単射（",
+        math(String.raw`\mathcal{P}`),
+        " の元は各成分が 4 通りの ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個組なので ",
+        math(String.raw`\#\mathcal{P} = 4^{M_{\mathrm{col}}}`),
+        " であり、存在する）として ",
+        math(String.raw`\pi(q) = (\pi(q)_1,\dots,\pi(q)_{M_{\mathrm{col}}})`),
+        " と書き、",
       ]),
       displayMath(
-        String.raw`\mathcal{E}:=\left\{\,e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
-\;\middle|\;(i_1,\dots,i_{M_{\mathrm{col}}})\in\{1,2,3,4\}^{M_{\mathrm{col}}}\,\right\}`,
+        String.raw`F_q := e_{\pi(q)_1}\boxtimes\cdots\boxtimes e_{\pi(q)_{M_{\mathrm{col}}}} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}) \qquad (q \in \{1,\dots,N\})`,
       ),
       paragraph([
-        "は ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の ",
+        "とおく（",
+        math(String.raw`\boxtimes`),
+        " は ",
+        ref("def_kronecker"),
+        " (2) のクロネッカー積）。",
+        math(String.raw`c_1,c_2,c_3,c_4\in\mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{a=1}^{4} c_a e_a = O`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+((c_1I+c_2\sigma^x)+c_3\sigma^y)+c_4\sigma^z
+&= ((c_1e_1+c_2e_2)+c_3e_3)+c_4e_4
+&&(\because\ \text{Step 1 の}\ e_1,e_2,e_3,e_4\ \text{の定義を右辺から左辺へ 4 か所へ})\\
+&= \Bigl(\Bigl(\sum_{a=1}^{1} c_ae_a+c_2e_2\Bigr)+c_3e_3\Bigr)+c_4e_4
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (X_j \to c_je_j)\ \text{の}\ r=1\ \text{の段を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{a=1}^{2} c_ae_a+c_3e_3\Bigr)+c_4e_4
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (X_j \to c_je_j)\ \text{の}\ r+1=2\ \text{の段を右辺から左辺へ}\bigr)\\
+&= \sum_{a=1}^{3} c_ae_a+c_4e_4
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (X_j \to c_je_j)\ \text{の}\ r+1=3\ \text{の段を右辺から左辺へ}\bigr)\\
+&= \sum_{a=1}^{4} c_ae_a
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (X_j \to c_je_j)\ \text{の}\ r+1=4\ \text{の段を右辺から左辺へ}\bigr)\\
+&= O
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "なので、Step 1 の線型独立性（",
+        math(String.raw`c_0 \to c_1,\ c_x \to c_2,\ c_y \to c_3,\ c_z \to c_4`),
+        "）より ",
+        math(String.raw`c_1=c_2=c_3=c_4=0_{\mathbb{C}}`),
+        " である。よって ",
+        math(String.raw`e_1,e_2,e_3,e_4`),
+        " は ",
+        ref("kronecker_family_of_independent_family_is_independent"),
+        " の仮定を満たし（",
+        math(String.raw`M \to M_{\mathrm{col}},\ b_a \to e_a,\ \pi \to \text{この Step の}\ \pi`),
+        "）、族 ",
+        math(String.raw`(F_q)_{q\in\{1,\dots,N\}}`),
+        " は ",
         math(String.raw`\mathbb{C}`),
-        "-基底である。",
+        " 上線型独立である。すなわち ",
+        math(String.raw`d_1,\dots,d_N\in\mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{q=1}^{N} d_q F_q = O`),
+        " を満たすならば、すべての ",
+        math(String.raw`q\in\{1,\dots,N\}`),
+        " について ",
+        math(String.raw`d_q = 0_{\mathbb{C}}`),
+        " である。",
       ]),
       paragraph([
         "Step 3: ",
@@ -4000,9 +4026,11 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
       paragraph([
         "Step 4: 対応する多重添字。Step 1 の番号付け ",
         math(String.raw`e_1=I,\ e_2=\sigma^x,\ e_3=\sigma^y,\ e_4=\sigma^z`),
-        " のもとで、Step 3 の表示は ",
-        math(String.raw`Z_m,Y_m`),
-        " がそれぞれ多重添字",
+        " のもとで、",
+        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について多重添字 ",
+        math(String.raw`\zeta(m),\eta(m)\in\mathcal{P}`),
+        " を",
       ]),
       displayMath(
         String.raw`\zeta(m)_k:=\begin{cases}2 & (k<m)\\ 4 & (k=m)\\ 1 & (k>m)\end{cases}
@@ -4010,14 +4038,56 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \eta(m)_k:=\begin{cases}2 & (k<m)\\ 3 & (k=m)\\ 1 & (k>m)\end{cases}`,
       ),
       paragraph([
-        "に対応する ",
-        math(String.raw`\mathcal{E}`),
-        " の元であることを意味する。すなわち ",
-        math(String.raw`Z_m=e_{\zeta(m)_1}\boxtimes\cdots\boxtimes e_{\zeta(m)_{M_{\mathrm{col}}}}`),
+        "で定める（",
+        math(String.raw`k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        "）。",
+        math(String.raw`\pi^{-1}:\mathcal{P}\to\{1,\dots,N\}`),
+        " を Step 2 の全単射 ",
+        math(String.raw`\pi`),
+        " の逆写像とし（",
+        math(String.raw`\pi(\pi^{-1}(p)) = p`),
         "、",
-        math(String.raw`Y_m=e_{\eta(m)_1}\boxtimes\cdots\boxtimes e_{\eta(m)_{M_{\mathrm{col}}}}`),
-        "。",
+        math(String.raw`p\in\mathcal{P}`),
+        "）、",
       ]),
+      displayMath(
+        String.raw`q_Z(m) := \pi^{-1}(\zeta(m)),\qquad q_Y(m) := \pi^{-1}(\eta(m)) \qquad (m\in\{1,\dots,M_{\mathrm{col}}\})`,
+      ),
+      paragraph([
+        "とおく。",
+        math(String.raw`q_Z(m),q_Y(m)\in\{1,\dots,N\}`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_{q_Z(m)}
+&= e_{\pi(q_Z(m))_1}\boxtimes\cdots\boxtimes e_{\pi(q_Z(m))_{M_{\mathrm{col}}}}
+&&(\because\ F_q\ \text{の定義}\ (q \to q_Z(m)))\\
+&= e_{\pi(\pi^{-1}(\zeta(m)))_1}\boxtimes\cdots\boxtimes e_{\pi(\pi^{-1}(\zeta(m)))_{M_{\mathrm{col}}}}
+&&(\because\ q_Z(m)\ \text{の定義})\\
+&= e_{\zeta(m)_1}\boxtimes\cdots\boxtimes e_{\zeta(m)_{M_{\mathrm{col}}}}
+&&(\because\ \pi(\pi^{-1}(p)) = p\ (p \to \zeta(m)))\\
+&= \overbrace{e_2\boxtimes\cdots\boxtimes e_2}^{m-1}\boxtimes\overbrace{e_4}^{m\text{th}}\boxtimes\overbrace{e_1\boxtimes\cdots\boxtimes e_1}^{M_{\mathrm{col}}-m}
+&&(\because\ \zeta(m)\ \text{の定義を}\ M_{\mathrm{col}}\ \text{か所へ})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \text{Step 1 の}\ e_1,e_2,e_3,e_4\ \text{の定義を}\ M_{\mathrm{col}}\ \text{か所へ})\\
+&= Z_m
+&&(\because\ \text{Step 3 の}\ Z_m\ \text{の表示を右辺から左辺へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+F_{q_Y(m)}
+&= e_{\pi(q_Y(m))_1}\boxtimes\cdots\boxtimes e_{\pi(q_Y(m))_{M_{\mathrm{col}}}}
+&&(\because\ F_q\ \text{の定義}\ (q \to q_Y(m)))\\
+&= e_{\pi(\pi^{-1}(\eta(m)))_1}\boxtimes\cdots\boxtimes e_{\pi(\pi^{-1}(\eta(m)))_{M_{\mathrm{col}}}}
+&&(\because\ q_Y(m)\ \text{の定義})\\
+&= e_{\eta(m)_1}\boxtimes\cdots\boxtimes e_{\eta(m)_{M_{\mathrm{col}}}}
+&&(\because\ \pi(\pi^{-1}(p)) = p\ (p \to \eta(m)))\\
+&= \overbrace{e_2\boxtimes\cdots\boxtimes e_2}^{m-1}\boxtimes\overbrace{e_3}^{m\text{th}}\boxtimes\overbrace{e_1\boxtimes\cdots\boxtimes e_1}^{M_{\mathrm{col}}-m}
+&&(\because\ \eta(m)\ \text{の定義を}\ M_{\mathrm{col}}\ \text{か所へ})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \text{Step 1 の}\ e_1,e_2,e_3,e_4\ \text{の定義を}\ M_{\mathrm{col}}\ \text{か所へ})\\
+&= Y_m
+&&(\because\ \text{Step 3 の}\ Y_m\ \text{の表示を右辺から左辺へ})
+\end{aligned}`),
       paragraph([
         "Step 5: これら ",
         math(String.raw`2M_{\mathrm{col}}`),
@@ -4102,17 +4172,51 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         ],
       ]),
       paragraph([
+        math(String.raw`\zeta(m)`),
+        " と ",
+        math(String.raw`\zeta(m')`),
+        "、",
+        math(String.raw`\eta(m)`),
+        " と ",
+        math(String.raw`\eta(m')`),
+        " で ",
+        math(String.raw`m>m'`),
+        " の場合は、",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`m'`),
+        " の役割を入れ替えれば上の 1 つ目・2 つ目の場合になる。",
+      ]),
+      paragraph([
         "以上より ",
         math(String.raw`\zeta(1),\dots,\zeta(M_{\mathrm{col}}),\eta(1),\dots,\eta(M_{\mathrm{col}})`),
         " は相異なる ",
         math(String.raw`2M_{\mathrm{col}}`),
-        " 個の多重添字であり、対応する ",
-        math(String.raw`Z_1,\dots,Z_{M_{\mathrm{col}}},Y_1,\dots,Y_{M_{\mathrm{col}}}`),
-        " は基底 ",
-        math(String.raw`\mathcal{E}`),
-        " の相異なる ",
+        " 個の多重添字である。",
+        math(String.raw`\pi^{-1}`),
+        " は単射である。実際 ",
+        math(String.raw`p,p'\in\mathcal{P}`),
+        " が ",
+        math(String.raw`\pi^{-1}(p)=\pi^{-1}(p')`),
+        " を満たすならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p
+&= \pi(\pi^{-1}(p))
+&&(\because\ \pi(\pi^{-1}(p)) = p\ \text{を右辺から左辺へ})\\
+&= \pi(\pi^{-1}(p'))
+&&(\because\ \text{仮定}\ \pi^{-1}(p)=\pi^{-1}(p'))\\
+&= p'
+&&(\because\ \pi(\pi^{-1}(p)) = p\ (p \to p'))
+\end{aligned}`),
+      paragraph([
+        "である。相異なる ",
         math(String.raw`2M_{\mathrm{col}}`),
-        " 個の元である。",
+        " 個の多重添字を単射 ",
+        math(String.raw`\pi^{-1}`),
+        " で送ったものなので、",
+        math(String.raw`q_Z(1),\dots,q_Z(M_{\mathrm{col}}),q_Y(1),\dots,q_Y(M_{\mathrm{col}})\in\{1,\dots,N\}`),
+        " は相異なる。",
       ]),
       paragraph([
         "Step 6: 結論。",
@@ -4120,35 +4224,235 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         " が",
       ]),
       displayMath(
-        String.raw`\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m Z_m+\sum_{m=1}^{M_{\mathrm{col}}}\beta_m Y_m=0`,
+        String.raw`\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m Z_m+\sum_{m=1}^{M_{\mathrm{col}}}\beta_m Y_m=O`,
       ),
       paragraph([
-        "を満たすとする。Step 5 より左辺は基底 ",
-        math(String.raw`\mathcal{E}`),
-        " の相異なる元の ",
-        math(String.raw`\mathbb{C}`),
-        "-線型結合であり、",
-        math(String.raw`\mathcal{E}`),
-        " のそれ以外の元の係数は ",
-        math(String.raw`0`),
-        " である。基底による表示は一意（特に ",
-        math(String.raw`0`),
-        " の表示はすべての係数が ",
-        math(String.raw`0`),
-        "）であるから、",
+        "を満たすとする。",
+        math(String.raw`\delta_{qq'}\in\mathbb{C}`),
+        "（",
+        math(String.raw`q,q'\in\{1,\dots,N\}`),
+        "）は ",
+        ref("def_kronecker_delta"),
+        "（",
+        math(String.raw`n \to N`),
+        "）のクロネッカーのデルタ、複素数の有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " による。係数の族を",
       ]),
       displayMath(
-        String.raw`\alpha_1=\cdots=\alpha_{M_{\mathrm{col}}}=\beta_1=\cdots=\beta_{M_{\mathrm{col}}}=0`,
+        String.raw`d_q := \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q\,q_Z(m)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q\,q_Y(m)} \in \mathbb{C} \qquad (q\in\{1,\dots,N\})`,
+      ),
+      paragraph([
+        "とおく。この Step で引く行列の主張の行列の大きさ ",
+        math(String.raw`m, n`),
+        " はどれも ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " に取る（和の添字 ",
+        math(String.raw`m`),
+        " とは別の文字である）。まず準備として次の (t)・(u)・(v) を示す。",
+        math(String.raw`m, m_0\in\{1,\dots,M_{\mathrm{col}}\}`),
+        "、",
+        math(String.raw`q\in\{1,\dots,N\}`),
+        " とする。(t) ",
+        math(String.raw`q\neq q_Z(m)`),
+        " ならば ",
+        math(String.raw`\alpha_m(\delta_{q\,q_Z(m)}F_q)=O`),
+        "、",
+        math(String.raw`q\neq q_Y(m)`),
+        " ならば ",
+        math(String.raw`\beta_m(\delta_{q\,q_Y(m)}F_q)=O`),
+        "。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_m(\delta_{q\,q_Z(m)}F_q)
+&= \alpha_m(0_{\mathbb{C}}F_q)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q\neq q_Z(m))\bigr)\\
+&= \alpha_m O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (A \to F_q)\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (a \to \alpha_m)\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\beta_m(\delta_{q\,q_Y(m)}F_q)
+&= \beta_m(0_{\mathbb{C}}F_q)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q\neq q_Y(m))\bigr)\\
+&= \beta_m O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (A \to F_q)\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (a \to \beta_m)\bigr)
+\end{aligned}`),
+      paragraph([
+        "(u) ",
+        math(String.raw`m\neq m_0`),
+        " ならば ",
+        math(String.raw`\alpha_m\delta_{q_Z(m_0)\,q_Z(m)}=0_{\mathbb{C}}`),
+        " かつ ",
+        math(String.raw`\beta_m\delta_{q_Y(m_0)\,q_Y(m)}=0_{\mathbb{C}}`),
+        "。Step 5 より ",
+        math(String.raw`q_Z(m_0)\neq q_Z(m)`),
+        "、",
+        math(String.raw`q_Y(m_0)\neq q_Y(m)`),
+        " だからである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_m\delta_{q_Z(m_0)\,q_Z(m)}
+&= \alpha_m 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q_Z(m_0)\neq q_Z(m)\ \text{は Step 5 から})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \alpha_m)\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
+&= \beta_m 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q_Y(m_0)\neq q_Y(m)\ \text{は Step 5 から})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \beta_m)\bigr)
+\end{aligned}`),
+      paragraph([
+        "(v) すべての ",
+        math(String.raw`m, m_0`),
+        " について ",
+        math(String.raw`\beta_m\delta_{q_Z(m_0)\,q_Y(m)}=0_{\mathbb{C}}`),
+        " かつ ",
+        math(String.raw`\alpha_m\delta_{q_Y(m_0)\,q_Z(m)}=0_{\mathbb{C}}`),
+        "。Step 5 より ",
+        math(String.raw`q_Z(m_0)\neq q_Y(m)`),
+        "、",
+        math(String.raw`q_Y(m_0)\neq q_Z(m)`),
+        " だからである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\beta_m\delta_{q_Z(m_0)\,q_Y(m)}
+&= \beta_m 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q_Z(m_0)\neq q_Y(m)\ \text{は Step 5 から})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \beta_m)\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\alpha_m\delta_{q_Y(m_0)\,q_Z(m)}
+&= \alpha_m 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (q_Y(m_0)\neq q_Z(m)\ \text{は Step 5 から})\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \alpha_m)\bigr)
+\end{aligned}`),
+      paragraph([
+        "次に、",
+        math(String.raw`(d_q)_{q}`),
+        " を係数とする ",
+        math(String.raw`(F_q)_{q}`),
+        " の有限和が ",
+        math(String.raw`O`),
+        " であることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{q=1}^{N} d_qF_q
+&= \sum_{q=1}^{N}\Bigl(\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q\,q_Z(m)}\Bigr) + \Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q\,q_Y(m)}\Bigr)\Bigr)F_q
+&&(\because\ d_q\ \text{の定義を}\ N\ \text{か所へ})\\
+&= \sum_{q=1}^{N}\Bigl(\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q\,q_Z(m)}\Bigr)F_q + \Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q\,q_Y(m)}\Bigr)F_q\Bigr)
+&&\bigl(\because\ \blkref{scalar_sum_distributes_over_matrix}\ (a \to \textstyle\sum_{m}\alpha_m\delta_{q\,q_Z(m)},\ b \to \sum_{m}\beta_m\delta_{q\,q_Y(m)},\ A \to F_q)\ \text{を}\ N\ \text{か所へ}\bigr)\\
+&= \sum_{q=1}^{N}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\bigl((\alpha_m\delta_{q\,q_Z(m)})F_q\bigr) + \sum_{m=1}^{M_{\mathrm{col}}}\bigl((\beta_m\delta_{q\,q_Y(m)})F_q\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (r \to M_{\mathrm{col}},\ c_j \to \alpha_j\delta_{q\,q_Z(j)}\ \text{または}\ \beta_j\delta_{q\,q_Y(j)},\ A \to F_q)\ \text{を右辺から左辺へ}\ 2N\ \text{か所へ}\bigr)\\
+&= \sum_{q=1}^{N}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m(\delta_{q\,q_Z(m)}F_q) + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m(\delta_{q\,q_Y(m)}F_q)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a \to \alpha_m\ \text{または}\ \beta_m,\ b \to \delta_{q\,q_Z(m)}\ \text{または}\ \delta_{q\,q_Y(m)},\ A \to F_q)\ \text{を右辺から左辺へ}\ 2NM_{\mathrm{col}}\ \text{か所へ}\bigr)\\
+&= \sum_{q=1}^{N}\sum_{m=1}^{M_{\mathrm{col}}}\alpha_m(\delta_{q\,q_Z(m)}F_q) + \sum_{q=1}^{N}\sum_{m=1}^{M_{\mathrm{col}}}\beta_m(\delta_{q\,q_Y(m)}F_q)
+&&\bigl(\because\ \blkref{finite_sum_of_matrix_sums}\ (r \to N,\ X_j \to \textstyle\sum_{m}\alpha_m(\delta_{j\,q_Z(m)}F_j),\ \text{主張の}\ Y_j \to \sum_{m}\beta_m(\delta_{j\,q_Y(m)}F_j))\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\sum_{q=1}^{N}\alpha_m(\delta_{q\,q_Z(m)}F_q) + \sum_{m=1}^{M_{\mathrm{col}}}\sum_{q=1}^{N}\beta_m(\delta_{q\,q_Y(m)}F_q)
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\ (r \to N,\ s \to M_{\mathrm{col}},\ X_{a,b} \to \alpha_b(\delta_{a\,q_Z(b)}F_a)\ \text{または}\ \beta_b(\delta_{a\,q_Y(b)}F_a))\ \text{を}\ 2\ \text{か所へ}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m(\delta_{q_Z(m)\,q_Z(m)}F_{q_Z(m)}) + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m(\delta_{q_Y(m)\,q_Y(m)}F_{q_Y(m)})
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (r \to N,\ X_a \to \alpha_m(\delta_{a\,q_Z(m)}F_a),\ \text{主張の}\ q \to q_Z(m)\ \text{または}\ X_a \to \beta_m(\delta_{a\,q_Y(m)}F_a),\ \text{主張の}\ q \to q_Y(m))\ \text{を}\ 2M_{\mathrm{col}}\ \text{か所へ。(t)}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m(1_{\mathbb{C}}F_{q_Z(m)}) + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m(1_{\mathbb{C}}F_{q_Y(m)})
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ \text{を}\ 2M_{\mathrm{col}}\ \text{か所へ}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_mF_{q_Z(m)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_mF_{q_Y(m)}
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (A \to F_{q_Z(m)}\ \text{または}\ F_{q_Y(m)})\ \text{を}\ 2M_{\mathrm{col}}\ \text{か所へ}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_mZ_m + \sum_{m=1}^{M_{\mathrm{col}}}\beta_mY_m
+&&(\because\ \text{Step 4 の}\ F_{q_Z(m)} = Z_m,\ F_{q_Y(m)} = Y_m\ \text{を}\ 2M_{\mathrm{col}}\ \text{か所へ})\\
+&= O
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph([
+        "よって Step 2（その ",
+        math(String.raw`d_1,\dots,d_N`),
+        " をここで定めた ",
+        math(String.raw`d_1,\dots,d_N`),
+        " とする）より、すべての ",
+        math(String.raw`q\in\{1,\dots,N\}`),
+        " について ",
+        math(String.raw`d_q=0_{\mathbb{C}}`),
+        " である。",
+        math(String.raw`m_0\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " を任意に取り、これを ",
+        math(String.raw`q \to q_Z(m_0)`),
+        " と ",
+        math(String.raw`q \to q_Y(m_0)`),
+        " で使う。",
+        math(String.raw`M_{\mathrm{col}}\geq 1`),
+        " なので ",
+        math(String.raw`1\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " であり、下の鎖の (v) と ",
+        ref("finite_sum_with_single_nonzero_term"),
+        " は ",
+        math(String.raw`m \to 1`),
+        "・",
+        math(String.raw`n \to 1`),
+        " で使える。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_{m_0}
+&= \alpha_{m_0}1_{\mathbb{C}}
+&&(\because\ \text{積の単位元を右辺から左辺へ})\\
+&= \alpha_{m_0}\delta_{q_Z(m_0)\,q_Z(m_0)}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Z(m_0)\,q_Z(m)}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to M_{\mathrm{col}},\ z_j \to \alpha_j\delta_{q_Z(m_0)\,q_Z(j)},\ n \to m_0)\ \text{を右辺から左辺へ。(u)}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Z(m_0)\,q_Z(m)} + 0_{\mathbb{C}}
+&&(\because\ \text{加法の単位元を右辺から左辺へ})\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Z(m_0)\,q_Z(m)} + \beta_1\delta_{q_Z(m_0)\,q_Y(1)}
+&&(\because\ \text{(v)}\ (m \to 1)\ \text{を右辺から左辺へ})\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Z(m_0)\,q_Z(m)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Z(m_0)\,q_Y(m)}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to M_{\mathrm{col}},\ z_j \to \beta_j\delta_{q_Z(m_0)\,q_Y(j)},\ n \to 1)\ \text{を右辺から左辺へ。(v)}\bigr)\\
+&= d_{q_Z(m_0)}
+&&(\because\ d_q\ \text{の定義}\ (q \to q_Z(m_0)))\\
+&= 0_{\mathbb{C}}
+&&(\because\ \text{上の}\ d_q = 0_{\mathbb{C}}\ (q \to q_Z(m_0)))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\beta_{m_0}
+&= \beta_{m_0}1_{\mathbb{C}}
+&&(\because\ \text{積の単位元を右辺から左辺へ})\\
+&= \beta_{m_0}\delta_{q_Y(m_0)\,q_Y(m_0)}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to M_{\mathrm{col}},\ z_j \to \beta_j\delta_{q_Y(m_0)\,q_Y(j)},\ n \to m_0)\ \text{を右辺から左辺へ。(u)}\bigr)\\
+&= 0_{\mathbb{C}} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
+&&(\because\ \text{加法の単位元を右辺から左辺へ})\\
+&= \alpha_1\delta_{q_Y(m_0)\,q_Z(1)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
+&&(\because\ \text{(v)}\ (m \to 1)\ \text{を右辺から左辺へ})\\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Y(m_0)\,q_Z(m)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to M_{\mathrm{col}},\ z_j \to \alpha_j\delta_{q_Y(m_0)\,q_Z(j)},\ n \to 1)\ \text{を右辺から左辺へ。(v)}\bigr)\\
+&= d_{q_Y(m_0)}
+&&(\because\ d_q\ \text{の定義}\ (q \to q_Y(m_0)))\\
+&= 0_{\mathbb{C}}
+&&(\because\ \text{上の}\ d_q = 0_{\mathbb{C}}\ (q \to q_Y(m_0)))
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m_0\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " は任意だったので ",
+      ]),
+      displayMath(
+        String.raw`\alpha_1=\cdots=\alpha_{M_{\mathrm{col}}}=\beta_1=\cdots=\beta_{M_{\mathrm{col}}}=0_{\mathbb{C}}`,
       ),
       paragraph([
         "すなわち ",
-        math(String.raw`\{Z_1,\dots,Z_{M_{\mathrm{col}}},Y_1,\dots,Y_{M_{\mathrm{col}}}\}`),
+        math(String.raw`Z_1,\dots,Z_{M_{\mathrm{col}}},Y_1,\dots,Y_{M_{\mathrm{col}}}`),
         " は線型独立である。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 6 は「左辺は基底 𝓔 の相異なる元の線型結合で、基底による表示は一意」と日本語で済ませていたので、係数の族 d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)} を置き、Σ_q d_qF_q を scalar_sum_distributes_over_matrix・finite_sum_of_scalar_multiples_of_one_matrix・scalar_multiple_is_associative・finite_sum_of_matrix_sums・finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term・def_kronecker_delta・scalar_multiple_by_one の鎖で仮定の左辺 O に戻し、α_{m_0}・β_{m_0} を d_{q_Z(m_0)}・d_{q_Y(m_0)} に finite_sum_with_single_nonzero_term で戻す形にした（準備 (t)・(u)・(v)）。部分集合の上の和を使わないので、本文で定まっていない有限和の添字の付け方に依らない。これに合わせ、Step 2 を「𝓔 は基底（tensor_basis (2)）」から「族 (F_q) は線型独立（kronecker_family_of_independent_family_is_independent に Step 1 の線型独立性を渡す）」に替え（張ることは使わない）、Step 4 に q_Z(m) := π^{-1}(ζ(m))・q_Y(m) := π^{-1}(η(m)) と F_{q_Z(m)} = Z_m・F_{q_Y(m)} = Y_m の鎖（「Step 3 の表示は多重添字に対応することを意味する」の文を、ζ(m)・η(m) と e_a の定義を一行ずつ使う行に替えた）を、Step 5 に π^{-1} が単射であることと q_Z・q_Y の値が相異なることを足した（写像の名前は、Step 1 の複素数 z や σ^y・σ^z と衝突しないよう q_Z・q_Y にした）。Step 1 は 𝓑 が張ること（Z_Y_generate_algebra の Step 3 前半）と「基底である」の結びがこの証明のどこからも使われなくなったので外し、𝓑 を集合でなく族として置いて線型独立性だけを示す形にした。主張の 0 を零行列 O（def_zero_matrix）と 0_C に書き分け、「ℂ-線型空間とみなすとき」の句と集合の括弧を外して族の線型独立性として述べた（主張の中身は不変）。数値検証: sagemath/check/163_Z_Y_linearly_independent/check_03_step6_delta_coefficients.sage。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 は Z_Y_generate_algebra の証明の Step 3 前半が「dim = 4 = #𝓑 より基底」を導いているとして引いていたが、Z_Y_generate_algebra は張ることだけで結ぶ形に直したので、張ることだけをそこから引き、dim_C Mat(2,C) = 4（tensor_basis (1) の M = 1）と tensor_basis の証明の Step 3 (b) で基底とする文をここへ移した（主張と論法は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 1 の「𝓑 は基底」は dim_C Mat(2,C) = 4 = #𝓑 と tensor_basis の証明の Step 3 (b) に依り、Step 3 (b) の前提の (a)「張る有限族の元数は次元以上」は本文で証明されていなかった。(a) を証明する代わりに、𝓑 の線型独立性を成分の比較で直接示す形にした: c_0 I + c_x σ^x + c_y σ^y + c_z σ^z = O の 4 成分を def_matrix_sum・def_matrix_scalar_multiple・def_identity_matrix・def_kronecker_delta・pauli_matrix_products の鎖で c_0 + c_z・c_x − ic_y・c_x + ic_y・c_0 − c_z と求め、def_zero_matrix で 0_C と置き、Z_Y_generate_algebra の準備 (a)・(c)・(d)・(e)・(g) で c_0 = c_z = c_x = ic_y = c_y = 0_C を導いた。(p)〜(s) は L_{ij} の鎖・L = O・def_zero_matrix の 3 行の鎖で書いた。張ることと合わせて基底とした。Step 2 の tensor_basis (2) は Step 3 (b) に依ったまま残る。主張は不変。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
