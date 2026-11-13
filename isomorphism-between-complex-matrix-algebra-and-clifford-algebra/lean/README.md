@@ -61,6 +61,12 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   `quotientAdd_eq`・`inducedMap_eq` 等として示す。mathlib の `Quotient`・`Setoid`・`Ideal` は使わない。
 - 座標の写像 β^b_k は、張ることから存在する係数を `Classical.choose` で一つ選んで定め、それが一つしか
   ないことを本文の二つ目の性質として示す。
+- V の元の k 個の組 V^{1,…,k} は `Idx k → V`（`Tuple V k`）、写像 {1,…,k} → {1,…,n} の全体 X_{n,k} は `Idx k → Idx n` で表す。
+  k 重テンソル積の普遍性は「任意の ℂ-線型空間 U」を量化するので、U の宇宙を `IsTensorProduct` の宇宙の引数にする。
+- n 進の番号付け η_{n,k} は、本文の組 (a, r) を余りのある割り算 a := (m-1)/n^{k-1} + 1、r := (m-1) mod n^{k-1} + 1 で定め、
+  存在と一意性を `digit_decomposition`・`digit_unique` に書く。番号の整数の計算は `omega` と ℕ の割り算の補題で行う。
+- ℂ の中の番号順の積は、番号順の和と同じく `ℕ → ℂ` の族の部分積 P_m（`partialOrderedProduct`）で書く。
+- X_{n,k} の二元のクロネッカーのデルタは、X_{n,k} の等号の判定に `Classical.decEq` を使う。
 
 ## 形式化済みの節
 
@@ -71,6 +77,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 有限集合の上の和 | `MathematicalToolkit/FiniteSetSum/` の 4 ファイル（`Numbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/FiniteSetSum/` の 3 ファイル | `FiniteSetSumFromNecSuf.lean` |
 | ℂ-代数 | `MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `NecSuf/MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `ComplexAlgebraFromNecSuf.lean` |
 | 両側イデアルと商代数 | `MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル（節の末尾に置かれた直和の基底の主張は `DirectSumBasis.lean`） | `NecSuf/MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル | `IdealAndQuotientAlgebraFromNecSuf.lean` |
+| テンソル積 | `MathematicalToolkit/TensorProduct/` の 5 ファイル（`BaseNNumbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorProduct/` の 4 ファイル | `TensorProductFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -103,3 +110,15 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   K に公理を置かない必要十分版では仮定として残る。
 - 準同型が零へ移す元の全体が両側イデアルであることには 0 + 0 = 0 だけが要る。
 - 二つの基底を並べた族が直和の基底であることには 0 + 0 = 0 と a · 0 = 0 だけが要る（成分への埋め込みが線型写像であることから来る）。
+
+## 必要十分版が示したこと（節「テンソル積」）
+
+- k 重線型写像の後に線型写像を合成しても k 重線型写像であることは、係数の性質を一つも使わない。
+- K^X を線型空間にするのは、K を自分自身の上の線型空間にするのと同じ八つの性質（`ValuedMapsLaws`）で、乗法の交換法則と a · 1 = a は使わない。
+- 番号順の積が一つの因子の和を積の和へ移すことには左右の分配法則だけ、一つの因子のスカラー倍を積のスカラー倍へ移すことには
+  乗法の結合法則と、λ がどの元とも交換することが要る。二つの積の積には 1 · 1 = 1・結合法則・交換法則、後ろの因子が 1 の主張には a · 1 = a が要る。
+  0 の因子の主張は本文どおりスカラー倍の主張を λ := 0 で当てるので、結合法則と 0 の交換を連れてくる。
+- 基底の座標による構成が k 重テンソル積であることには、係数の乗法の交換法則が要る。τ が各成分のスカラー倍を保つ行で、
+  λ を番号順の積の前の部分 P_{r-1} の前へ出すためである。ほかに使うのは、K^X の八つの性質、係数の一意性の仮定の組
+  （座標の写像が線型形式であることと、双対基底であること）、0 + 0 = 0、a · 0 = 0 である。
+- 基底の元の組で値が一致する二つの k 重線型写像が等しいことには、0 + 0 = 0 だけが要る（線型写像が線型結合を移すことから来る）。
