@@ -3,15 +3,12 @@
 人手証明と同じく、向き付き辺を（台の辺, 向き）の対で持ち、添字 a の通過の接続を
 src (edge (σ a)) = tgt (edge a) で持つ。
 (1) 始点と終点の一致は、添字 l（対称に k）の通過の接続と通過の頂点の共有から、
-(2) 反転の回避は、台の辺の相異性（hinj）と向きの二値性（hd）から
-    必要十分版 reversal_avoidance_necSuf で示す。
+(2) 反転の回避は、台の辺の相異性（hinj）と向きの二値性（hd）から示す。
 人手証明が k ↔ l の入れ替えで対称に済ませる二本目も、同じ二段をそのまま書く。
 -/
-import Ising2DLambda.NecSuf.KacWard.EdgeSimpleReconnection
+import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 theorem edgeSimpleReconnectionNonbacktracking {U V : Type}
     (edge : ℕ → U × ℤ) (src tgt : U × ℤ → V) (σ : ℕ → ℕ) (m k l : ℕ)
@@ -31,14 +28,34 @@ theorem edgeSimpleReconnectionNonbacktracking {U V : Type}
   refine ⟨⟨?_, ?_⟩, ⟨?_, ?_⟩⟩
   · -- src(e_{σ(l)}) = tgt(e_l) = tgt(e_k)
     exact (hadj l hl.1 hl.2).trans hvertex.symm
-  · -- e_{σ(l)} ≠ ι(e_k): 台の辺の一致から σ(l) = k、対の一致が従う
-    exact reversal_avoidance_necSuf (edge k) (edge (σ l)) (hd k hk.1 hk.2)
-      (fun h1 => by rw [hinj (σ l) k hσl.1 hσl.2 hk.1 hk.2 h1])
+  · -- e_{σ(l)} ≠ ι(e_k): 台の辺の一致から σ(l) = k、二値の向きに固定点はない
+    intro hrev
+    have hbase : (edge (σ l)).1 = (edge k).1 := by rw [hrev]
+    have heq := hinj (σ l) k hσl.1 hσl.2 hk.1 hk.2 hbase
+    have hsnd : (edge k).2 = 1 - (edge k).2 := by
+      rw [heq] at hrev
+      have hs := congrArg (fun e : U × ℤ => e.2) hrev
+      exact hs
+    rcases hd k hk.1 hk.2 with hzero | hone
+    · rw [hzero] at hsnd
+      omega
+    · rw [hone] at hsnd
+      omega
   · -- src(e_{σ(k)}) = tgt(e_k) = tgt(e_l)
     exact (hadj k hk.1 hk.2).trans hvertex
   · -- e_{σ(k)} ≠ ι(e_l): 同じ二段を k ↔ l で
-    exact reversal_avoidance_necSuf (edge l) (edge (σ k)) (hd l hl.1 hl.2)
-      (fun h1 => by rw [hinj (σ k) l hσk.1 hσk.2 hl.1 hl.2 h1])
+    intro hrev
+    have hbase : (edge (σ k)).1 = (edge l).1 := by rw [hrev]
+    have heq := hinj (σ k) l hσk.1 hσk.2 hl.1 hl.2 hbase
+    have hsnd : (edge l).2 = 1 - (edge l).2 := by
+      rw [heq] at hrev
+      have hs := congrArg (fun e : U × ℤ => e.2) hrev
+      exact hs
+    rcases hd l hl.1 hl.2 with hzero | hone
+    · rw [hzero] at hsnd
+      omega
+    · rw [hone] at hsnd
+      omega
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem edgeSimpleReconnectionNonbacktracking_from_necSuf {U V : Type}

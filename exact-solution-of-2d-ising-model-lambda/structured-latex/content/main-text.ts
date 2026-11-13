@@ -52716,9 +52716,9 @@ a\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{a,c}(q)
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(q^{b}Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
 &=\log\bigl(q^{b}\bigr)+\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
-&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用でき、両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
 &=b\,\log q+\log\bigl(Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{c,b}(q)\bigr)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=b\text{ で。整数倍は }\blkref{def_log_order_group})\\
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=b\text{ で用い、整数倍は }\blkref{def_log_order_group})\\
 &=b\,\log q+\log Z^{\mathrm{op}}_{a,b}(q)+\log Z^{\mathrm{op}}_{c,b}(q)
 &&(\because\ \blkref{claim_log_additive})
 \end{aligned}`),
