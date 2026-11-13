@@ -1205,6 +1205,57 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_sum_of_matrix_sums",
+    kind: "claim",
+    title: { text: "行列の和の有限和は有限和の和に等しい" },
+    labels: ["finite_sum_of_matrix_sums"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r, Y_1,\dots,Y_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、行列の和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{r} (X_j + Y_j) = \Bigl(\sum_{j=1}^{r} X_j\Bigr) + \Bigl(\sum_{j=1}^{r} Y_j\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{r} (X_j + Y_j)\Bigr)_{ik}
+&= \sum_{j=1}^{r} (X_j + Y_j)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)\\
+&= \sum_{j=1}^{r} \bigl((X_j)_{ik} + (Y_j)_{ik}\bigr)
+&&\bigl(\because\ \blkref{def_matrix_sum}\text{ を }r\text{ 個の項へ同時適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} (X_j)_{ik}\Bigr) + \Bigl(\sum_{j=1}^{r} (Y_j)_{ik}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\ (\text{項の個数を }r\text{、}a_j \to (X_j)_{ik},\ b_j \to (Y_j)_{ik})\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)_{ik} + \Bigl(\sum_{j=1}^{r} Y_j\Bigr)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を右辺から左辺へ、2 箇所へ同時適用}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + \Bigl(\sum_{j=1}^{r} Y_j\Bigr)\Bigr)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 6 を、係数の族をクロネッカーのデルタで置いて基底の線型独立性へつなぐ鎖に書き直すとき、項ごとの和の有限和を二つの有限和に分ける段を引けるよう足した。複素数の版 finite_sum_of_complex_sums を成分へ当てはめる。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_distributes_over_sum_in_right_factor",
     kind: "claim",
     title: { text: "行列の積は右の因子の和に分配する" },
@@ -1797,6 +1848,57 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。スカラー倍を有限和の外へ出す finite_sum_of_scalar_multiples の帰納法の段に要るので足した。" +
           "iH_is_real_symmetric の Step 1・Step 2 の鎖が「スカラー倍の和の分配」と名前だけで根拠にしていた段を、その主張で引けるようにするためである。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_sum_distributes_over_matrix",
+    kind: "claim",
+    title: { text: "係数の和によるスカラー倍は各係数のスカラー倍の和に等しい" },
+    labels: ["scalar_sum_distributes_over_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a, b \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(a + b)A = aA + bA`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((a + b)A\bigr)_{ij}
+&= (a + b)\,A_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= a\,A_{ij} + b\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }(a+b)c=ac+bc\ (c \to A_{ij})\text{。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (aA)_{ij} + (bA)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用}\bigr)\\
+&= (aA + bA)_{ij}
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 6 を、係数の族をクロネッカーのデルタで置いて基底の線型独立性へつなぐ鎖に書き直すとき、係数の和 d_q を F_q に掛ける段を引けるよう足した。",
       ],
     },
   },
