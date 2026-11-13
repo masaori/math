@@ -7820,6 +7820,13 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
  &=\varepsilon[a,b,c,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr)
 \end{aligned}`),
                 paragraph(["これで隣り合う二対の交換は符号を保つ。一般の二つの列挙は ", ref("claim_perfect_matching_enumeration_complete"), " の先頭を合わせる帰納法で移り合う。帰納法では、既に一致させた対の端点を前置列 ", math(String.raw`U`), " として残し、", math(String.raw`U\mathbin{+\!+}W(\mathcal L)`), " 全体を完全列挙とする。尾の ", math(String.raw`W(\mathcal L)`), " だけを完全列挙とはしない。交換を一回追加するたび上の等号を適用し、交換列をつなぐときは等号の推移律を使う。交換零回の等号からの帰納法により、すべての列挙で符号は一致する。", ref("def_perfect_matching_sign"), " で選んだ ", math(String.raw`\mathcal L_0`), " と比較すれば主張の等号を得る。"]),
+                paragraph(["符号の値が ", math(String.raw`\{-1,1\}`), " に属することは、", math(String.raw`\pi:=\pi_{W(\mathcal L_0)}\in\operatorname{Perm}(\mathcal J)`), " と置いて次のとおりである。"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\mathcal D)&=\varepsilon(W(\mathcal L_0))&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
+ &=\operatorname{sgn}(\pi)&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
+ &=(-1)^{\operatorname{inv}(\pi)}&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)\\
+ &\in\{-1,1\}&&\bigl(\because\ \text{整数 }(-1)^k\text{ は }k\in\mathbb N\text{ が偶数なら }1\text{、奇数なら }-1\bigr)
+\end{aligned}`),
                 paragraph(["空集合では対の列挙も端点の列も空である。", ref("def_matching_word_sign"), " の置換は空集合上の恒等置換で、転倒対は存在しない。したがって"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\varnothing)&=\operatorname{sgn}(\operatorname{id}_{\varnothing})&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
@@ -50194,7 +50201,7 @@ const chapter_thermodynamic_limit = defineSection({
 &=k\cdot(N\cdot\lambda)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=k\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
-&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{、}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(k\lambda_N)
 &&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
 \end{aligned}`),

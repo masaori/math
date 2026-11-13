@@ -11,7 +11,7 @@ import Mathlib.Data.Finset.Sort
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp sign_eq_one_or_neg_one inversionCount orderedPairs)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp inversionCount orderedPairs)
 open Ising2DLambda.NecSuf.KacWard (transpositionPerm transpositionPerm_apply_left
   transpositionPerm_apply_right transpositionPerm_apply_of_ne sign_transposition
   trichotomous_of_linearOrder)
@@ -329,12 +329,20 @@ theorem matchingEnumerations_perm (D : PerfectMatching J) {l r : List (J × J)}
 noncomputable def perfectMatchingSign (D : PerfectMatching J) : ℤ :=
   matchingWordSign (matchingPairWord (matchingCanonicalEnumeration D))
 
-/-- 完全マッチングの符号は整数の ±1 に属する。 -/
+/-- 完全マッチングの符号は整数の ±1 に属する。本文の三等号と、
+`(-1)^k` が `k` の偶奇で `1` か `-1` になることを同順に記す。 -/
 theorem perfectMatchingSign_eq_one_or_neg_one (D : PerfectMatching J) :
     perfectMatchingSign D = 1 ∨ perfectMatchingSign D = -1 := by
-  rw [perfectMatchingSign, matchingWordSign_eq _
-    (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D))]
-  exact sign_eq_one_or_neg_one _ _
+  have hc := matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D)
+  have he : perfectMatchingSign D =
+      (-1 : ℤ) ^ inversionCount (fun x y : J => x < y) (matchingWordPermutation _ hc) :=
+    calc
+      perfectMatchingSign D = matchingWordSign (matchingPairWord (matchingCanonicalEnumeration D)) :=
+        rfl
+      _ = sign (fun x y : J => x < y) (matchingWordPermutation _ hc) := matchingWordSign_eq _ hc
+      _ = (-1 : ℤ) ^ inversionCount (fun x y : J => x < y) (matchingWordPermutation _ hc) := rfl
+  rw [he]
+  exact neg_one_pow_eq_or ℤ _
 
 /-- 符号は昇順対の列挙順序に依存しない。 -/
 theorem perfectMatchingSign_enumeration_independent (D : PerfectMatching J)
