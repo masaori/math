@@ -2,34 +2,38 @@
 添字写像が非単射のときの行列式内側和の相殺。値を Polynomial Qbar に固定し、
 衝突する二点の互換、積の再添字付け、符号反転、二項を除く帰納法を独立に辿る。
 有限相殺の必要十分版や行列式の既製定理は使わない。
+互換は具体版の `KacWard.finiteTranspositionPerm`（本文の t_{a,b}）、互換の符号は具体版
+`KacWard.finiteTransposition_sign`、符号の乗法性は具体版 `finiteOrderedSign_comp` を引く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp)
-open Ising2DLambda.NecSuf.KacWard
-  (transpositionPerm transpositionPerm_apply_left transpositionPerm_apply_right
-    transpositionPerm_apply_of_ne sign_transposition trichotomous_of_linearOrder)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.KacWard
+  (finiteTranspositionPerm finiteTransposition_apply_left finiteTransposition_apply_right
+    finiteTransposition_apply_of_ne finiteTransposition_sign)
 
 /-- 本文の符号反転。整数の符号、整数の包含、定数多項式の写像を順に辿る。 -/
 theorem qbarPolynomial_sign_right_transposition_neg
     {J : Type*} [Fintype J] [LinearOrder J]
     (a b : J) (hab : a ≠ b) (σ : Equiv.Perm J) :
-    Polynomial.C ((sign (fun i j : J => i < j) (σ * transpositionPerm a b) : ℤ) : Qbar) =
+    Polynomial.C ((sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
       -Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) := by
-  have hsign : sign (fun i j : J => i < j) (σ * transpositionPerm a b) =
+  have hsign : sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) =
       -sign (fun i j : J => i < j) σ := by
     calc
-      sign (fun i j : J => i < j) (σ * transpositionPerm a b) =
+      sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) =
           sign (fun i j : J => i < j) σ *
-            sign (fun i j : J => i < j) (transpositionPerm a b) :=
-        sign_comp (fun i j : J => i < j) trichotomous_of_linearOrder σ _
-      _ = sign (fun i j : J => i < j) σ * (-1) := by rw [sign_transposition a b hab]
+            sign (fun i j : J => i < j) (finiteTranspositionPerm a b) :=
+        finiteOrderedSign_comp σ _
+      _ = sign (fun i j : J => i < j) σ * (-1) := by rw [finiteTransposition_sign hab]
       _ = -sign (fun i j : J => i < j) σ := mul_neg_one _
   calc
-    Polynomial.C ((sign (fun i j : J => i < j) (σ * transpositionPerm a b) : ℤ) : Qbar) =
+    Polynomial.C ((sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
         Polynomial.C (((-sign (fun i j : J => i < j) σ) : ℤ) : Qbar) := by rw [hsign]
     _ = Polynomial.C (-((sign (fun i j : J => i < j) σ : ℤ) : Qbar)) := by
       rw [Int.cast_neg]
@@ -96,7 +100,7 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
         ∏ i : J, B (f i) (σ i)) = 0 := by
   classical
   obtain ⟨a, b, hf, hab⟩ := Function.not_injective_iff.mp h
-  let t : Equiv.Perm J := transpositionPerm a b
+  let t : Equiv.Perm J := finiteTranspositionPerm a b
   let F : Equiv.Perm J → Equiv.Perm J := fun σ => σ * t
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
     Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar)
@@ -108,28 +112,28 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
     by_cases hia : i = a
     · subst i
       calc
-        f (t a) = f b := congrArg f (transpositionPerm_apply_left a b)
+        f (t a) = f b := congrArg f (finiteTransposition_apply_left a b)
         _ = f a := hf.symm
     · by_cases hib : i = b
       · subst i
         calc
-          f (t b) = f a := congrArg f (transpositionPerm_apply_right a b)
+          f (t b) = f a := congrArg f (finiteTransposition_apply_right a b)
           _ = f b := hf
-      · exact congrArg f (transpositionPerm_apply_of_ne a b hia hib)
+      · exact congrArg f (finiteTransposition_apply_of_ne a b hia hib)
   have htt (i : J) : t (t i) = i := by
     by_cases hia : i = a
     · subst i
       calc
-        t (t a) = t b := congrArg t (transpositionPerm_apply_left a b)
-        _ = a := transpositionPerm_apply_right a b
+        t (t a) = t b := congrArg t (finiteTransposition_apply_left a b)
+        _ = a := finiteTransposition_apply_right a b
     · by_cases hib : i = b
       · subst i
         calc
-          t (t b) = t a := congrArg t (transpositionPerm_apply_right a b)
-          _ = b := transpositionPerm_apply_left a b
+          t (t b) = t a := congrArg t (finiteTransposition_apply_right a b)
+          _ = b := finiteTransposition_apply_left a b
       · calc
-          t (t i) = t i := congrArg t (transpositionPerm_apply_of_ne a b hia hib)
-          _ = i := transpositionPerm_apply_of_ne a b hia hib
+          t (t i) = t i := congrArg t (finiteTransposition_apply_of_ne a b hia hib)
+          _ = i := finiteTransposition_apply_of_ne a b hia hib
   -- 二重合成を点ごとに計算し、対合性を得る。
   have hF : Function.Involutive F := by
     intro σ
@@ -144,7 +148,7 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
     have himage : F σ a ≠ σ a := by
       calc
         F σ a = σ (t a) := rfl
-        _ = σ b := congrArg σ (transpositionPerm_apply_left a b)
+        _ = σ b := congrArg σ (finiteTransposition_apply_left a b)
         _ ≠ σ a := fun hba => hab (σ.injective hba).symm
     exact himage (congrArg (fun ρ : Equiv.Perm J => ρ a) heq)
   -- 積の定義、合成、添字写像の不変性、互換による再添字付け。

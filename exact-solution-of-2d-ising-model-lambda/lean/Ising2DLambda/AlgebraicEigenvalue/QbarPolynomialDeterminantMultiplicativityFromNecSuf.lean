@@ -4,6 +4,7 @@
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantMultiplicativity
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.DeterminantMultiplicativity
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSetFromNecSuf
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -46,7 +47,8 @@ theorem qbarPolynomial_det_mul_from_necSuf
         (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf A B c
         (fun π τ => qbarPolynomial_sign_comp π τ)
-        (fun a b hab σ => qbarPolynomial_sign_right_transposition_neg a b hab σ)
+        (fun a b hab σ => KacWard.finiteTranspositionPerm_eq_necSuf a b ▸
+          qbarPolynomial_sign_right_transposition_neg a b hab σ)
     _ = Matrix.det A * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       congrArg (· * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)))
         (qbarPolynomial_det_row_expansion_from_necSuf A).symm

@@ -2,15 +2,16 @@
 全単射の添字写像を置換へ移し、多項式行列式の乗法性を閉じる具体版。
 値を Polynomial Qbar に固定し、右合成の両逆・符号の移送・有限積の再添字付け・
 零項の除去・有限和の因数分離を本文と同じ順に辿る。
+符号の乗法性は具体版 `finiteOrderedSign_comp`（`claim_permutation_sign_mul`）を引く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialNoninjectiveCancellation
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp)
-open Ising2DLambda.NecSuf.KacWard (trichotomous_of_linearOrder)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 
 /-- 本文の符号の乗法性を整数の包含、定数多項式の写像の順で移す。 -/
 theorem qbarPolynomial_sign_comp
@@ -26,7 +27,7 @@ theorem qbarPolynomial_sign_comp
     _ =
         Polynomial.C (((sign (fun i j : J => i < j) π *
           sign (fun i j : J => i < j) τ) : ℤ) : Qbar) := by
-      rw [sign_comp (fun i j : J => i < j) trichotomous_of_linearOrder π τ]
+      rw [finiteOrderedSign_comp π τ]
     _ = Polynomial.C (((sign (fun i j : J => i < j) π : ℤ) : Qbar) *
         ((sign (fun i j : J => i < j) τ : ℤ) : Qbar)) := by rw [Int.cast_mul]
     _ = Polynomial.C ((sign (fun i j : J => i < j) π : ℤ) : Qbar) *

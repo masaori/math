@@ -54050,13 +54050,13 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
 &=q^{0}
 &&(\because\ \text{冪の指数 }0\text{ の約束 }q^{0}=1)\\
 &=q^{\,b^{\mathrm{op}}_{a,b}(\tau_{+})}
-&&(\because\ b^{\mathrm{op}}_{a,b}(\tau_{+})=0\text{。}\blkref{claim_open_rectangle_constant_plus_breaks_no_bond})\\
+&&(\because\ b^{\mathrm{op}}_{a,b}(\tau_{+})=0\text{、}\blkref{claim_open_rectangle_constant_plus_breaks_no_bond})\\
 &\le q^{\,b^{\mathrm{op}}_{a,b}(\tau_{+})}+\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}\setminus\{\tau_{+}\}}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
-&&(\because\ \text{加えた和は正の有理数の有限和なので }0\le\text{（準備。}\mathbb{Q}\text{ の順序は加法と両立する）})\\
+&&(\because\ \text{加えた和は正の有理数の有限和なので }0\le\text{（準備、}\mathbb{Q}\text{ の順序は加法と両立する）})\\
 &=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
 &&(\because\ \tau_{+}\in\Sigma^{\mathrm{op}}_{a,b}\text{（}\blkref{def_open_rectangle_constant_plus_configuration}\text{）なので分離した 1 項を有限和へ戻せる})\\
 &=Z^{\mathrm{op}}_{a,b}(q)
-&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_open_rectangle_partition_value_at_positive_rational})
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す、}\blkref{def_open_rectangle_partition_value_at_positive_rational})
 \end{aligned}`),
                         paragraph([
                           "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。周期境界の ",

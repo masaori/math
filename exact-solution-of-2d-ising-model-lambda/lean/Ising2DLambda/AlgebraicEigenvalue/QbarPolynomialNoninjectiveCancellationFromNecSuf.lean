@@ -1,5 +1,6 @@
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialNoninjectiveCancellation
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.NoninjectivePermutationSum
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSetFromNecSuf
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -16,6 +17,7 @@ theorem qbarPolynomial_noninjective_inner_sum_zero_from_necSuf
     (fun r s => neg_mul r s) B f a b hab hf
     (fun σ => Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign
       (fun i j : J => i < j) σ : ℤ) : Qbar))
-    (qbarPolynomial_sign_right_transposition_neg a b hab)
+    (fun σ => KacWard.finiteTranspositionPerm_eq_necSuf a b ▸
+      qbarPolynomial_sign_right_transposition_neg a b hab σ)
 
 end Ising2DLambda.AlgebraicEigenvalue
