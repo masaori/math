@@ -466,32 +466,8 @@ t
         math(String.raw`(-1_{\mathbb{C}})z`),
         " であり、体の公理（積の可換律・単位元、加法の単位元）は ",
         ref("complex_numbers_form_a_field"),
-        " のものである。準備として、",
-        math(String.raw`\mathbb{C}`),
-        " の中で次の (f)・(g) を置く（Step 3 でも使う。(a)〜(e) は Step 3 で置く）。",
+        " のものである。",
       ]),
-      displayMath(String.raw`\text{(f)}\quad \begin{aligned}
-ii
-&= (0,1)(0,1)
-&&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
-&= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
-&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
-&= (-1,0)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
-&= -1_{\mathbb{C}}
-&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\text{(g)}\quad \begin{aligned}
-(-i)\,i
-&= -(ii)
-&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to i)\bigr)\\
-&= -(-1_{\mathbb{C}})
-&&(\because\ \text{(f)})\\
-&= (-1_{\mathbb{C}})(-1_{\mathbb{C}})
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -1_{\mathbb{C}})\bigr)\\
-&= 1_{\mathbb{C}}
-&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)
-\end{aligned}`),
       paragraph(["第 1 式は ", ref("pauli_matrix_products"), " の一つである。"]),
       displayMath(
         String.raw`\sigma^x\sigma^x = I_{\mathrm{Mat}(2,\mathbb{C})} \qquad (\because\ \blkref{pauli_matrix_products})`,
@@ -535,7 +511,7 @@ ii
 &= 1_{\mathbb{C}}\,\sigma^x
 &&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (A \to \sigma^x)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-i)\,i\bigr)\,\sigma^x
-&&(\because\ \text{(g) を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{negative_i_times_i_is_one_in_cc}\ \text{を右辺から左辺へ}\bigr)\\
 &= (-i)\bigl(i\,\sigma^x\bigr)
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a \to -i,\ b \to i,\ A \to \sigma^x)\ \text{を右辺から左辺へ}\bigr)\\
 &= (-i)\bigl(\sigma^y\sigma^z\bigr)
@@ -964,7 +940,9 @@ P_{m-1}Y_m
         math(String.raw`-i`),
         "・",
         math(String.raw`-z`),
-        " は ",
+        "（",
+        math(String.raw`z\in\mathbb{C}`),
+        "）は ",
         ref("multiply_by_minus_one"),
         " の ",
         math(String.raw`(-1_{\mathbb{C}})i`),
@@ -976,103 +954,10 @@ P_{m-1}Y_m
         String.raw`A = \kappa_0 I_{\mathrm{Mat}(2,\mathbb{C})} + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z`,
       ),
       paragraph([
-        "（右辺の和は左から結ぶ）である。準備として、",
-        math(String.raw`z, w \in \mathbb{C}`),
-        " について次の (a)〜(e) を置く（(f)・(g) は Step 1 で置いた）。体の公理（積の可換律・結合律・単位元、加法の可換律・結合律・単位元、分配律）は ",
+        "（右辺の和は左から結ぶ）である。体の公理（積の可換律・結合律・単位元、加法の単位元、分配律）は ",
         ref("complex_numbers_form_a_field"),
         " のものである。",
       ]),
-      displayMath(String.raw`\text{(a)}\quad \begin{aligned}
-(2_{\mathbb{C}}z)\,2_{\mathbb{C}}^{-1}
-&= (z\,2_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{積の可換律})\\
-&= z\,(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1})
-&&(\because\ \text{積の結合律})\\
-&= z\,1_{\mathbb{C}}
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
-&= z
-&&(\because\ \text{積の単位元})
-\end{aligned}`),
-      displayMath(String.raw`\text{(b)}\quad \begin{aligned}
-z + z
-&= 1_{\mathbb{C}}z + 1_{\mathbb{C}}z
-&&(\because\ \text{積の単位元を 2 か所へ右辺から左辺へ})\\
-&= (1_{\mathbb{C}} + 1_{\mathbb{C}})\,z
-&&(\because\ \text{分配律を右辺から左辺へ})\\
-&= 2_{\mathbb{C}}z
-&&\bigl(\because\ \blkref{one_plus_one_is_two_in_cc}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\text{(c)}\quad \begin{aligned}
-z + (-z)
-&= z + (-1_{\mathbb{C}})z
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
-&= 1_{\mathbb{C}}z + (-1_{\mathbb{C}})z
-&&(\because\ \text{積の単位元を右辺から左辺へ})\\
-&= \bigl(1_{\mathbb{C}} + (-1_{\mathbb{C}})\bigr)\,z
-&&(\because\ \text{分配律を右辺から左辺へ})\\
-&= \bigl((1)_{\mathbb{C}} + (-1)_{\mathbb{C}}\bigr)\,z
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{・}\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 1\ \text{・}\ r = -1\bigr)\\
-&= \bigl(1 + (-1)\bigr)_{\mathbb{C}}\,z
-&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to -1)\bigr)\\
-&= (0)_{\mathbb{C}}\,z
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + (-1) = 0\bigr)\\
-&= 0_{\mathbb{C}}\,z
-&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 0\bigr)\\
-&= 0_{\mathbb{C}}
-&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)
-\end{aligned}`),
-      displayMath(String.raw`\text{(d)}\quad \begin{aligned}
-(z + w) + (z - w)
-&= (z + w) + \bigl(z + (-w)\bigr)
-&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
-&= z + \Bigl(w + \bigl(z + (-w)\bigr)\Bigr)
-&&(\because\ \text{加法の結合律})\\
-&= z + \bigl((w + z) + (-w)\bigr)
-&&(\because\ \text{加法の結合律を右辺から左辺へ})\\
-&= z + \bigl((z + w) + (-w)\bigr)
-&&(\because\ \text{加法の可換律})\\
-&= z + \Bigl(z + \bigl(w + (-w)\bigr)\Bigr)
-&&(\because\ \text{加法の結合律})\\
-&= z + (z + 0_{\mathbb{C}})
-&&(\because\ \text{(c)}\ (z \to w))\\
-&= z + z
-&&(\because\ \text{加法の単位元})\\
-&= 2_{\mathbb{C}}z
-&&(\because\ \text{(b)})
-\end{aligned}`),
-      displayMath(String.raw`\text{(e)}\quad \begin{aligned}
-(z + w) - (z - w)
-&= (z + w) + \bigl(-(z - w)\bigr)
-&&\bigl(\because\ \blkref{def_complex_difference}\ (z \to z + w,\ w \to z - w)\bigr)\\
-&= (z + w) + \Bigl(-\bigl(z + (-w)\bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
-&= (z + w) + (-1_{\mathbb{C}})\bigl(z + (-w)\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to z + (-w))\bigr)\\
-&= (z + w) + \bigl((-1_{\mathbb{C}})z + (-1_{\mathbb{C}})(-w)\bigr)
-&&(\because\ \text{分配律})\\
-&= (z + w) + \bigl((-z) + (-1_{\mathbb{C}})(-w)\bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
-&= (z + w) + \Bigl((-z) + (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})w\bigr)\Bigr)
-&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to w)\bigr)\\
-&= (z + w) + \Bigl((-z) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)w\Bigr)
-&&(\because\ \text{積の結合律を右辺から左辺へ})\\
-&= (z + w) + \bigl((-z) + 1_{\mathbb{C}}w\bigr)
-&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)\\
-&= (z + w) + \bigl((-z) + w\bigr)
-&&(\because\ \text{積の単位元})\\
-&= (w + z) + \bigl((-z) + w\bigr)
-&&(\because\ \text{加法の可換律})\\
-&= w + \Bigl(z + \bigl((-z) + w\bigr)\Bigr)
-&&(\because\ \text{加法の結合律})\\
-&= w + \Bigl(\bigl(z + (-z)\bigr) + w\Bigr)
-&&(\because\ \text{加法の結合律を右辺から左辺へ})\\
-&= w + (0_{\mathbb{C}} + w)
-&&(\because\ \text{(c)})\\
-&= w + w
-&&(\because\ \text{加法の単位元})\\
-&= 2_{\mathbb{C}}w
-&&(\because\ \text{(b)}\ (z \to w))
-\end{aligned}`),
       paragraph([
         "右辺を ",
         math(String.raw`R := \kappa_0 I_{\mathrm{Mat}(2,\mathbb{C})} + \kappa_x\sigma^x + \kappa_y\sigma^y + \kappa_z\sigma^z`),
@@ -1113,9 +998,9 @@ R_{11}
 &= \bigl((a_{11} + a_{22}) + (a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{分配律を右辺から左辺へ})\\
 &= (2_{\mathbb{C}}a_{11})\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(d)}\ (z \to a_{11},\ w \to a_{22}))\\
+&&\bigl(\because\ \blkref{sum_plus_difference_is_twice_first_in_cc}\ (a \to a_{11},\ b \to a_{22})\bigr)\\
 &= a_{11}
-&&(\because\ \text{(a)}\ (z \to a_{11}))
+&&\bigl(\because\ \blkref{twice_times_inverse_of_two_is_original_in_cc}\ (z \to a_{11})\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 R_{12}
@@ -1148,15 +1033,15 @@ R_{12}
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(((-i)\,i)(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{積の結合律を右辺から左辺へ})\\
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(1_{\mathbb{C}}(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(g)})\\
+&&\bigl(\because\ \blkref{negative_i_times_i_is_one_in_cc}\bigr)\\
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + (a_{12} - a_{21})\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{積の単位元})\\
 &= \bigl((a_{12} + a_{21}) + (a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{分配律を右辺から左辺へ})\\
 &= (2_{\mathbb{C}}a_{12})\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(d)}\ (z \to a_{12},\ w \to a_{21}))\\
+&&\bigl(\because\ \blkref{sum_plus_difference_is_twice_first_in_cc}\ (a \to a_{12},\ b \to a_{21})\bigr)\\
 &= a_{12}
-&&(\because\ \text{(a)}\ (z \to a_{12}))
+&&\bigl(\because\ \blkref{twice_times_inverse_of_two_is_original_in_cc}\ (z \to a_{12})\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 R_{21}
@@ -1189,7 +1074,7 @@ R_{21}
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((ii)(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{積の結合律を右辺から左辺へ})\\
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl((-1_{\mathbb{C}})(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(f)})\\
+&&\bigl(\because\ \blkref{i_times_i_is_minus_one_in_cc}\bigr)\\
 &= (a_{12} + a_{21})\,2_{\mathbb{C}}^{-1} + \bigl(-(a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
 &= \Bigl((a_{12} + a_{21}) + \bigl(-(a_{12} - a_{21})\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
@@ -1197,9 +1082,9 @@ R_{21}
 &= \bigl((a_{12} + a_{21}) - (a_{12} - a_{21})\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
 &= (2_{\mathbb{C}}a_{21})\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(e)}\ (z \to a_{12},\ w \to a_{21}))\\
+&&\bigl(\because\ \blkref{sum_minus_difference_is_twice_second_in_cc}\ (a \to a_{12},\ b \to a_{21})\bigr)\\
 &= a_{21}
-&&(\because\ \text{(a)}\ (z \to a_{21}))
+&&\bigl(\because\ \blkref{twice_times_inverse_of_two_is_original_in_cc}\ (z \to a_{21})\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 R_{22}
@@ -1236,9 +1121,9 @@ R_{22}
 &= \bigl((a_{11} + a_{22}) - (a_{11} - a_{22})\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
 &= (2_{\mathbb{C}}a_{22})\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{(e)}\ (z \to a_{11},\ w \to a_{22}))\\
+&&\bigl(\because\ \blkref{sum_minus_difference_is_twice_second_in_cc}\ (a \to a_{11},\ b \to a_{22})\bigr)\\
 &= a_{22}
-&&(\because\ \text{(a)}\ (z \to a_{22}))
+&&\bigl(\because\ \blkref{twice_times_inverse_of_two_is_original_in_cc}\ (z \to a_{22})\bigr)
 \end{aligned}`),
       paragraph([
         "4 つの成分が ",
@@ -1425,6 +1310,7 @@ Q_{s+1}
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 1 の準備 (f)・(g) と Step 3 の準備 (a)〜(e)（ラベルの無い式）を外し、それらを引いていた行を計算公式の章の主張 i_times_i_is_minus_one_in_cc・negative_i_times_i_is_one_in_cc・twice_times_inverse_of_two_is_original_in_cc・sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc の参照に替えた（(b)・(c) は (d)・(e) の中でしか使われていなかったので、残る箇所は無い）。体の公理の列挙から、準備でしか使っていなかった加法の可換律・結合律を外した。式の両端と中身は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 後半の E_1⋯E_M の左から順に掛けた積を P_1 := E_1・P_{s+1} := P_sE_{s+1} と置いていたが、Step 2 の P_0 := I・P_r := P_{r-1}σ_r^x（σ^x の接頭積）と同じ文字で別の量を表していた。Step 3 後半の側を Q_1 := E_1・Q_{s+1} := Q_sE_{s+1} に改名した（主張と論法は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 2 の P_{m-1}P_{m-1} = I は「異サイトの可換性」の 1 行で因子を並べ替えており、途中が書かれていなかった。Step 2 の冒頭に P_0 := I・P_r := P_{r-1}σ_r^x を置き、積の表示 P_r = ∏_{j=1}^{r} σ_j^x（def_finite_product_of_matrices）、可換の式 σ_k^xP_r = P_rσ_k^x（r < k）と二乗の式 P_rP_r = I を r の帰納法の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・distinct_site_pauli_matrices_commute・Step 1 の σ_k^xσ_k^x = I）で示した。P_{m-1}Z_m・P_{m-1}Y_m の鎖に結合則の行を足し、名前だけの「I は積の単位元」を identity_matrix_is_left_unit_of_mat_mult の参照に替え、Z_m = P_{m-1}σ_m^z・Y_m = P_{m-1}σ_m^y を def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の積を def_finite_product_of_matrices で読む 4 行の鎖にした。使われていなかった「P_{m-1} は可逆で P_{m-1}^{-1} = P_{m-1}」の文を消した（主張は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 は 𝓑 = {I, σ^x, σ^y, σ^z} のクロネッカー積の族が Mat(2^M,C) を張ることだけを使うのに、「dim Mat(2,C) = 4 = #𝓑 より基底」（根拠が書かれていなかった）と tensor_basis (2)（張る族の元数が次元に等しければ基底であることに依り、その前提の「張る有限族の元数は次元以上」は本文で証明されていない）を経由していた。𝓑 が張ることを示したところで止め、新しく足した kronecker_family_of_spanning_family_spans で 𝓑^{⊠M} が張ることを得て、結びの「基底であるから」を「張るから」にした。主張は不変。",

@@ -1,52 +1,14 @@
 PASS 2_C = (2,0) ≠ (0,0)
-PASS i i = -1_C（i = (0,1) と ℂ の積）
-PASS 準備 (a) 第 1 行 = 第 2 行
-PASS 準備 (a) 第 2 行 = 第 3 行
-PASS 準備 (a) 第 3 行 = 第 4 行
-PASS 準備 (a) 第 4 行 = 第 5 行
-PASS 準備 (b) 第 1 行 = 第 2 行
-PASS 準備 (b) 第 2 行 = 第 3 行
-PASS 準備 (b) 第 3 行 = 第 4 行
-PASS 準備 (c) 第 1 行 = 第 2 行
-PASS 準備 (c) 第 2 行 = 第 3 行
-PASS 準備 (c) 第 3 行 = 第 4 行
-PASS 準備 (c) 第 4 行 = 第 5 行
-PASS 準備 (c) 第 5 行 = 第 6 行
-PASS 準備 (c) 第 6 行 = 第 7 行
-PASS 準備 (c) 第 7 行 = 第 8 行
-PASS 準備 (d) 第 1 行 = 第 2 行
-PASS 準備 (d) 第 2 行 = 第 3 行
-PASS 準備 (d) 第 3 行 = 第 4 行
-PASS 準備 (d) 第 4 行 = 第 5 行
-PASS 準備 (d) 第 5 行 = 第 6 行
-PASS 準備 (d) 第 6 行 = 第 7 行
-PASS 準備 (d) 第 7 行 = 第 8 行
-PASS 準備 (d) 第 8 行 = 第 9 行
-PASS 準備 (e) 第 1 行 = 第 2 行
-PASS 準備 (e) 第 2 行 = 第 3 行
-PASS 準備 (e) 第 3 行 = 第 4 行
-PASS 準備 (e) 第 4 行 = 第 5 行
-PASS 準備 (e) 第 5 行 = 第 6 行
-PASS 準備 (e) 第 6 行 = 第 7 行
-PASS 準備 (e) 第 7 行 = 第 8 行
-PASS 準備 (e) 第 8 行 = 第 9 行
-PASS 準備 (e) 第 9 行 = 第 10 行
-PASS 準備 (e) 第 10 行 = 第 11 行
-PASS 準備 (e) 第 11 行 = 第 12 行
-PASS 準備 (e) 第 12 行 = 第 13 行
-PASS 準備 (e) 第 13 行 = 第 14 行
-PASS 準備 (e) 第 14 行 = 第 15 行
-PASS 準備 (e) 第 15 行 = 第 16 行
-PASS 準備 (f) の 1 行目: 虚数単位 i は組 (0, 1)
-PASS 準備 (f)（実数の組） 第 1 行 = 第 2 行
-PASS 準備 (f)（実数の組） 第 2 行 = 第 3 行
-PASS 準備 (f)（実数の組） 第 3 行 = 第 4 行
-PASS 準備 (f) の最後の行は -1_C = (-1, 0)
-PASS 準備 (f) の結論 ii = -1_C を有理関数体で
-PASS 準備 (g) 第 1 行 = 第 2 行
-PASS 準備 (g) 第 2 行 = 第 3 行
-PASS 準備 (g) 第 3 行 = 第 4 行
-PASS 準備 (g) 第 4 行 = 第 5 行
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → a11）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → a12）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → a21）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → a22）
+PASS 根拠 sum_plus_difference_is_twice_first_in_cc（a → a11, b → a22）
+PASS 根拠 sum_minus_difference_is_twice_second_in_cc（a → a11, b → a22）
+PASS 根拠 sum_plus_difference_is_twice_first_in_cc（a → a12, b → a21）
+PASS 根拠 sum_minus_difference_is_twice_second_in_cc（a → a12, b → a21）
+PASS 根拠 i_times_i_is_minus_one_in_cc: ii = -1_C（R_21 の鎖）
+PASS 根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C（R_12 の鎖）
 PASS R_11 の def_matrix_scalar_multiple の行（R の定義・def_matrix_sum の行の先）
 PASS I_11 = δ_11（def_identity_matrix・def_kronecker_delta）
 PASS R_12 の def_matrix_scalar_multiple の行（R の定義・def_matrix_sum の行の先）
@@ -130,5 +92,5 @@ PASS R = A（4 成分が等しい）
 PASS 否定の対照: κ_0 の /2_C を落とすと A にならない
 PASS 否定の対照: κ_y の i を落とすと A にならない
 PASS 否定の対照: κ_z の符号を逆にすると A にならない
--- Z_Y_generate_algebra の Step 3 の展開の鎖: 132/132 PASS
+-- Z_Y_generate_algebra の Step 3 の展開の鎖: 94/94 PASS
 RESULT: PASS

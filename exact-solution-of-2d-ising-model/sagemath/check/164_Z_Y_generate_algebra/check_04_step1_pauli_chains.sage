@@ -3,8 +3,9 @@
 # (1) 第 1 式 σ^xσ^x = I_{Mat(2,C)}（pauli_matrix_products を引く 1 行）。
 # (2) 第 2 式 σ^yσ^z = iσ^x の 14 行（mat_mult の和の形・complex_zero_times_is_zero・加法の単位元・積の可換律・
 #     multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple・pauli_matrix_products）。
-# (3) 第 3 式 σ^x = (-i)(σ^yσ^z) の 4 行（scalar_multiple_by_one・準備 (g)・scalar_multiple_is_associative・第 2 式）。
-#     準備 (f)・(g) の鎖そのものは check_02 が確かめる。ここでは (g) の結論 (-i)i = 1_C だけを使う。
+# (3) 第 3 式 σ^x = (-i)(σ^yσ^z) の 4 行（scalar_multiple_by_one・negative_i_times_i_is_one_in_cc・
+#     scalar_multiple_is_associative・第 2 式）。negative_i_times_i_is_one_in_cc の鎖そのものはその主張の検算が確かめる。
+#     ここではその結論 (-i)i = 1_C だけを使う。
 # (4) 第 4 式 σ_k^aσ_k^b = I⊠…⊠(σ^aσ^b)⊠…⊠I の 3 行を、全ての a, b ∈ {x,y,z}、M = 1, 2, 3、k で。
 #     σ_k^a はクロネッカー積を使わず、成分 (σ_k^a)_{s,t} = (σ^a)_{s_k,t_k} ∏_{j≠k} δ_{s_j,t_j} から独立に組み立てる。
 # (5) σ_k^xσ_k^x = I_{Mat(2^M,C)} の 3 行と σ_k^x = (-i)(σ_k^yσ_k^z) の 4 行を、M = 1, 2, 3 と全ての k で。
@@ -95,7 +96,7 @@ check(zero * i == zero and i * zero == zero * i and i * one == i,
       "第 2 式の 9〜11 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元")
 
 # (3) 第 3 式の 4 行
-check(neg_i * i == one, "準備 (g) の結論 (-i)i = 1_C")
+check(neg_i * i == one, "根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C")
 lines = [
     sx,
     one * sx,

@@ -20,7 +20,7 @@ PASS 第 2 式の 6 行目の根拠: complex_zero_times_is_zero (z → -i)
 PASS 第 2 式の 7 行目の根拠: multiply_by_minus_one (z → -i)
 PASS 第 2 式の 8 行目の根拠: double_negation_in_cc (z → i)
 PASS 第 2 式の 9〜11 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元
-PASS 準備 (g) の結論 (-i)i = 1_C
+PASS 根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C
 PASS 第 3 式 σ^x 第 1 行 = 第 2 行
 PASS 第 3 式 σ^x 第 2 行 = 第 3 行
 PASS 第 3 式 σ^x 第 3 行 = 第 4 行

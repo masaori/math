@@ -25,11 +25,11 @@
 | 3 行目: `multiply_by_minus_one`（`z → -1_ℂ`） | 3 段目（`neg_one_mul` を右辺から左辺へ） |
 | 4 行目: `minus_one_times_minus_one_is_one_in_cc` | 4 段目（`complex_minus_one_mul_minus_one`） |
 
-- 2 つの鎖は、人手 `Z_Y_generate_algebra` の証明の準備 (f)・(g) と同じ鎖である。その Lean
-  （`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`）は、
-  人手 `Z_Y_generate_algebra` が準備をこの 2 つの主張の参照に替えるまで残している（状態台帳の (d4c44p15f12)）。
-- この 2 つの主張を引くのは、いまは `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
-  `pauliComb_coeff_y_eq_zero`（人手 `Z_Y_linearly_independent` の Step 1 の `c_y = 0_ℂ` の鎖）である。
+- この 2 つの主張を引くのは、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
+  `pauliComb_coeff_y_eq_zero`（人手 `Z_Y_linearly_independent` の Step 1 の `c_y = 0_ℂ` の鎖）と、人手 `Z_Y_generate_algebra` の
+  Step 1 の第 3 式（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `pauliX_eq`）・
+  Step 3 の `R_{12}`・`R_{21}` の鎖（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の
+  `pauliDecompRhs_apply_01`・`_10`）である。
 
 必要十分版は置かない。`i_times_i_is_minus_one_in_cc` は `definition_of_cc` の積の式で具体的な数を計算するだけで、
 取り払える構造をこの説明以上に示す計算が無い（`complex_minus_one_mul_minus_one` と同じ扱い）。

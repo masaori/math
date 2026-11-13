@@ -16,11 +16,10 @@
 
 - Lean の `ℂ` の逆元は mathlib の定義なので、人手の逆元の式 `2_ℂ 2_ℂ^{-1} = 1_ℂ` は `mul_inv_cancel₀` で読む
   （`ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean` と同じ扱い）。
-- 鎖は人手 `Z_Y_generate_algebra` の証明の準備 (a) と同じである。その Lean
-  （`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の `zy_prep_two_mul_mul_inv_two`）は、
-  人手 `Z_Y_generate_algebra` が準備をこの主張の参照に替えるまで残している（状態台帳の (d4c44p15f12)）。
-- この主張を引くのは、いまは `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
-  `pauliComb_coeff_zero_eq_zero`・`_z_`・`_x_`・`_I_mul_y_`（人手 `Z_Y_linearly_independent` の Step 1 の係数が零になる鎖）である。
+- この主張を引くのは、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
+  `pauliComb_coeff_zero_eq_zero`・`_z_`・`_x_`・`_I_mul_y_`（人手 `Z_Y_linearly_independent` の Step 1 の係数が零になる鎖）と、
+  `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の `pauliDecompRhs_apply_00`〜`_11`
+  （人手 `Z_Y_generate_algebra` の Step 3 の `R_{11}`〜`R_{22}` の鎖の最後の行）である。
 
 必要十分版は `Ising2D/NecSuf/TwiceTimesInverseOfTwo.lean`、そこからの導出は同じフォルダの
 `ClaimTwiceTimesInverseOfTwoIsOriginalInCCFromNecSuf.lean` にある。

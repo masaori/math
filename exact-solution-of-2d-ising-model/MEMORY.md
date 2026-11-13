@@ -1,3 +1,5 @@
+2026-11-13: Lean の通しの証明のゴールラインの確認の四百五十八個目として、状態台帳の (d4c44p15f12) を行った。人手 Z_Y_generate_algebra の証明の準備 (a)〜(g)（ラベルの無い式）を外し、引いていた行を計算公式の章の 5 つの主張（i_times_i_is_minus_one_in_cc・negative_i_times_i_is_one_in_cc・twice_times_inverse_of_two_is_original_in_cc・sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc）の参照に替えた。式は不変。SageMath 164 の check_02 を主張の当てはめの検査に替えた（94 件 PASS）。Lean の zy_prep_* 7 定理を消し、計算公式の具体版へ替えた。新しい件 (d4c44p15f15)（加法の左単位元の根拠）。次は (d4c44p15f13)。
+
 2026-11-13: Lean の通しの証明のゴールラインの確認の四百五十七個目として、状態台帳の (d4c44p15f10)・(d4c44p15f11) を行った。人手 pauli_matrix_products の主張の文に束ねられていた σ^x, σ^y, σ^z の定義を定義ブロック def_pauli_matrices（006_Z_Y_anticommutation.ts）へ分け、同じファイルと射影の章の 2 行で成分を引く根拠をそれに替えた。Lean の pauliX/Y/Z の対応先・README の対応表・SageMath の出典のコメントを直した。ほかのファイルの参照は新しい件 (d4c44p15f14)。
 2026-11-13: Lean の通しの証明のゴールラインの確認の四百五十六個目として、状態台帳の (d4c44p15f9) を行った。人手 Z_Y_linearly_independent の Step 3 で、Jordan–Wigner の因子 F_j^{(z)}・F_j^{(y)} が Step 2 の族 (F_q) とは別に定めた記号であること（下付きの j はサイト番号、上付きを必ず付けて書き分ける。値は一致し得る）を書き添えた。改名はしない。SageMath check_04 のコメントをそろえた（232 件 PASS）。Lean は不変。次は (d4c44p15f10)。
 

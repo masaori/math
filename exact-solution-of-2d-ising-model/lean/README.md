@@ -762,7 +762,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.Conjugation.matrix_conj_*` | 一般の環の版を `Matrix.inv` の記法で述べた版（人手と 1 対 1 ではない。1 対 1 は上の `conj_*_matrix`） | 原文の記法に寄せた版 |
 | `Ising2D.acomm` / `Ising2D.commutator_via_anticommutators` | `[a b, c] = a [b,c]₊ - [a,c]₊ b`（任意の環） | `<commutator_via_anticommutators>` |
 | `Ising2D.matrix_commutator_via_anticommutators` | 同上を `Mat(n, ℂ)` で述べた版 | 同上 |
-| `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係（`Z_Y_generate_algebra` の Step 1 の第 2 式・第 3 式は `pauliY_mul_pauliZ`・`pauliX_eq`、準備 (f)・(g) は `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`） | `<def_pauli_matrices>`、`<pauli_matrix_products>`、`<Z_Y_generate_algebra>` Step 1 |
+| `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係（`Z_Y_generate_algebra` の Step 1 の第 2 式・第 3 式は `pauliY_mul_pauliZ`・`pauliX_eq`。`(-i)i = 1_ℂ` は `complex_neg_I_mul_I`（`<negative_i_times_i_is_one_in_cc>`）） | `<def_pauli_matrices>`、`<pauli_matrix_products>`、`<Z_Y_generate_algebra>` Step 1 |
 | `Ising2D.siteOp` | `I ⊗ ⋯ ⊗ A(k) ⊗ ⋯ ⊗ I`（`Mat(2,ℂ) →ₗ[ℂ] TensorPow M`） | `<def_transfer_matrix_symbols>` の `σ^a_k` |
 | `Ising2D.sigmaX/sigmaY/sigmaZ` | `σ^x_k, σ^y_k, σ^z_k` | 同上 |
 | `Ising2D.siteOp_mul_same` / `siteOp_mul_comm` / `sigmaX_mul_self` / `sigmaX_eq` | 同サイトの積（Step 1 の第 4 式）・異サイトの可換性・`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` | `<Z_Y_generate_algebra>` Step 1、異サイトの可換性は `distinct_site_pauli_matrices_commute` |
@@ -778,7 +778,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.anticomm_Z_Z` | `[Z_μ, Z_ν]₊ = 2 I δ^M_{(μ,ν)}` | `<anticommutator_of_Z_and_Y>` 第 1 式 |
 | `Ising2D.anticomm_Z_Y` | `[Z_μ, Y_ν]₊ = 0` | 同 第 2 式（**原文は TODO**） |
 | `Ising2D.anticomm_Y_Y` | `[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}` | 同 第 3 式（**原文は TODO**） |
-| `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開（係数は `/2_ℂ` の商。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`、準備は `zy_prep_*`） | `<Z_Y_generate_algebra>` Step 3 の準備 (a)〜(e)（(f)・(g) は Step 1）と `R_{11}`〜`R_{22}` の鎖 |
+| `Ising2D.matrix_two_decomp` | `Mat(2,ℂ)` の元の `{I, σ^x, σ^y, σ^z}` 展開（係数は `/2_ℂ` の商。成分ごとの鎖は `pauliDecompRhs_apply_00`〜`_11`。鎖が引く `complex_two_mul_mul_inv_two`・`complex_sum_add_difference`・`complex_sum_sub_difference`・`complex_I_mul_I`・`complex_neg_I_mul_I` は計算公式の章の主張の具体版） | `<Z_Y_generate_algebra>` Step 3 の `R_{11}`〜`R_{22}` の鎖 |
 | `Ising2D.pauliFamily_spans` | `𝓑 = {I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` を張る（`matrix_two_decomp` の係数を並べる） | `<Z_Y_generate_algebra>` Step 3 前半の結び |
 | `Ising2D.kronecker_family_of_spanning_family_spans` | `Mat(2,ℂ)` を張る `b_1,…,b_4` のクロネッカー積の族 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M` を張る（Step 1 は `linComb_mem_kroneckerFamilyCombinations`、Step 2 の `C(s)` の帰納法は `siteProd_mem_kroneckerFamilyCombinations`、`kronecker_multilinear` は `siteProd_update_sum_smul`、`E_{I,J}` が行列単位のクロネッカー積であることは `E_eq_siteProd_single`。必要十分版は `NecSuf.linComb_mem_familyCombinations`・`NecSuf.map_mem_familyCombinations`・`NecSuf.mem_familyCombinations_of_spanning`、導出は `span_kroneckerFamily_eq_top_of_necSuf`） | `<kronecker_family_of_spanning_family_spans>`、`<Z_Y_generate_algebra>` Step 3 後半 |
 | `Ising2D.kronecker_family_of_independent_family_is_independent` | 線型独立な `b_1,…,b_4` のクロネッカー積の族 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は線型独立（係数の和が `0` ならすべての係数が `0`。成分の比較とサイトについての下げる帰納法 `A(M) → ⋯ → A(0)`。必要十分版は `NecSuf.productFamilyOf_independent`、導出は `kronecker_family_of_independent_family_is_independent_of_necSuf`） | `<kronecker_family_of_independent_family_is_independent>` |

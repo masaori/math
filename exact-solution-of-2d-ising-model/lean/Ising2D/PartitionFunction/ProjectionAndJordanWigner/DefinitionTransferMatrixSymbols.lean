@@ -56,6 +56,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimTensor
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesIAndNegativeITimesIInCC
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
 namespace Ising2D
@@ -259,25 +260,6 @@ theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
     -- 上で計算した σ^z σ^y
     _ = -(pauliZ * pauliY) := by rw [pauliZ_mul_pauliY_entries]
 
-/-- 人手 `Z_Y_generate_algebra`（`eigenvalue_problem_diagonalization_and_exponential_form.ts`）の Step 1 の準備 (f): `ii = −1_ℂ`（人手の 4 行）。
-Step 3 の `R_{12}`・`R_{21}` の鎖も使う。 -/
-theorem zy_prep_I_mul_I : Complex.I * Complex.I = -1 :=
-  calc Complex.I * Complex.I
-      = (⟨0, 1⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl                             -- `def_imaginary_unit` を 2 か所へ
-    _ = (⟨0 * 0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := rfl                   -- `definition_of_cc` の積
-    _ = (⟨-1, 0⟩ : ℂ) := by norm_num                                  -- `ℝ` の四則
-    _ = -1 := by
-          rw [show (⟨-1, 0⟩ : ℂ) = ((-1 : ℝ) : ℂ) from rfl, Complex.ofReal_neg, Complex.ofReal_one]
-                                                                      -- `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1`
-
-/-- 人手 `Z_Y_generate_algebra` の Step 1 の準備 (g): `(−i) i = 1_ℂ`。Step 1 の第 3 式 `pauliX_eq` と Step 3 の `R_{12}` の鎖が使う。 -/
-theorem zy_prep_neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
-  calc (-Complex.I) * Complex.I
-      = -(Complex.I * Complex.I) := neg_I_mul_eq_neg_of_I_mul _         -- `negative_i_times_complex_is_negation_of_i_times`（`z → i`）
-    _ = -(-1) := by rw [zy_prep_I_mul_I]                                -- (f)
-    _ = (-1) * (-1) := (neg_one_mul (-1)).symm                          -- `multiply_by_minus_one`（`z → −1_ℂ`）
-    _ = 1 := complex_minus_one_mul_minus_one                            -- `minus_one_times_minus_one_is_one_in_cc`
-
 /-- 人手 `Z_Y_generate_algebra` の Step 1 の第 2 式 `σ^yσ^z = iσ^x`。人手の鎖の 14 行と 1 段ずつ対応する。 -/
 theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
   calc
@@ -322,8 +304,8 @@ theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
   calc pauliX
       = (1 : ℂ) • pauliX := (matrix_one_smul pauliX).symm
                                                         -- `scalar_multiple_by_one`（`A → σ^x`）を右辺から左辺へ
-    _ = ((-Complex.I) * Complex.I) • pauliX := by rw [zy_prep_neg_I_mul_I]
-                                                        -- (g) を右辺から左辺へ
+    _ = ((-Complex.I) * Complex.I) • pauliX := by rw [complex_neg_I_mul_I]
+                                                        -- `negative_i_times_i_is_one_in_cc` を右辺から左辺へ
     _ = (-Complex.I) • (Complex.I • pauliX) := (smul_smul _ _ _).symm
                                                         -- `scalar_multiple_is_associative`（`a → -i`, `b → i`, `A → σ^x`）を右辺から左辺へ。具体版が無いので mathlib の `smul_smul`
     _ = (-Complex.I) • (pauliY * pauliZ) := by rw [pauliY_mul_pauliZ]

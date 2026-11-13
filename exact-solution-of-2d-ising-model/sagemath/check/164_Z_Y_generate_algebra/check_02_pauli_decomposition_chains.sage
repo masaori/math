@@ -1,7 +1,10 @@
 # 対象ラベル: Z_Y_generate_algebra
 # Step 3 の A の展開 A = κ_0 I + κ_x σ^x + κ_y σ^y + κ_z σ^z（κ は def_complex_quotient の商 /2_C）について、
-# 準備 (a)〜(g) の鎖（(f)・(g) は人手では Step 1 の冒頭に置く）と、右辺 R の 4 成分 R_11, R_12, R_21, R_22 の鎖を一行ずつ確かめる。
-# 鎖は a11, a12, a21, a22, z, w を不定元にした QQ(i) 上の有理関数体で確かめる。浮動小数点なし。
+# 右辺 R の 4 成分 R_11, R_12, R_21, R_22 の鎖を一行ずつ確かめ、鎖が引く計算公式の章の主張
+# （twice_times_inverse_of_two_is_original_in_cc・sum_plus_difference_is_twice_first_in_cc・
+#  sum_minus_difference_is_twice_second_in_cc・i_times_i_is_minus_one_in_cc・negative_i_times_i_is_one_in_cc）の
+# 当てはめ（文字の置き換えどおり）を確かめる。主張そのものの鎖は各主張の検算が確かめる。
+# 鎖は a11, a12, a21, a22 を不定元にした QQ(i) 上の有理関数体で確かめる。浮動小数点なし。
 import sys
 
 n_check = 0
@@ -18,9 +21,9 @@ def chain_check(lines, name):
         check(lines[k] == lines[k + 1], f"{name} 第 {k+1} 行 = 第 {k+2} 行")
 
 K0.<I0> = QuadraticField(-1)
-R.<a11, a12, a21, a22, z, w> = PolynomialRing(K0)
+R.<a11, a12, a21, a22> = PolynomialRing(K0)
 F = R.fraction_field()
-a11, a12, a21, a22, z, w = [F(t) for t in (a11, a12, a21, a22, z, w)]
+a11, a12, a21, a22 = [F(t) for t in (a11, a12, a21, a22)]
 one, zero, two, m1 = F(1), F(0), F(2), F(-1)
 i = F(I0)
 ti = two^-1
@@ -29,33 +32,15 @@ sub = lambda x, y: x + neg(y)   # def_complex_difference: x - y := x + (-y)
 
 # 2_C ∈ C^×: 2_C = (2, 0) の第 1 成分が 2 ≠ 0
 check(QQ(2) != 0 and two != 0, "2_C = (2,0) ≠ (0,0)")
-check(i * i == m1, "i i = -1_C（i = (0,1) と ℂ の積）")
 
-# (a) (2z)2^{-1} = z
-chain_check([(two * z) * ti, (z * two) * ti, z * (two * ti), z * one, z], "準備 (a)")
-# (b) z + z = 2z
-chain_check([z + z, one * z + one * z, (one + one) * z, two * z], "準備 (b)")
-# (c) z + (-z) = 0
-chain_check([z + neg(z), z + m1 * z, one * z + m1 * z, (one + m1) * z, F(1 + (-1)) * z, F(0) * z, zero * z, zero], "準備 (c)")
-# (d) (z+w) + (z-w) = 2z
-chain_check([(z + w) + sub(z, w), (z + w) + (z + neg(w)), z + (w + (z + neg(w))), z + ((w + z) + neg(w)),
-             z + ((z + w) + neg(w)), z + (z + (w + neg(w))), z + (z + zero), z + z, two * z], "準備 (d)")
-# (e) (z+w) - (z-w) = 2w
-chain_check([sub(z + w, sub(z, w)), (z + w) + neg(sub(z, w)), (z + w) + neg(z + neg(w)), (z + w) + m1 * (z + neg(w)),
-             (z + w) + (m1 * z + m1 * neg(w)), (z + w) + (neg(z) + m1 * neg(w)), (z + w) + (neg(z) + m1 * (m1 * w)),
-             (z + w) + (neg(z) + (m1 * m1) * w), (z + w) + (neg(z) + one * w), (z + w) + (neg(z) + w),
-             (w + z) + (neg(z) + w), w + (z + (neg(z) + w)), w + ((z + neg(z)) + w), w + (zero + w), w + w, two * w], "準備 (e)")
-# (f) ii = -1, (g) (-i)i = 1
-# (f) ℂ = ℝ^2 の組の積で 4 行（definition_of_cc の積 (a,b)(c,d) = (ac - bd, ad + bc)）
-def cmul(x, y):
-    return (x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0])
-i_pair = (QQ(0), QQ(1))
-check(K0(i_pair[0]) + K0(i_pair[1]) * I0 == I0 and F(I0) == i, "準備 (f) の 1 行目: 虚数単位 i は組 (0, 1)")
-f_lines = [cmul(i_pair, i_pair), (0 * 0 - 1 * 1, 0 * 1 + 1 * 0), (QQ(-1), QQ(0)), (QQ(-1), QQ(0))]
-chain_check(f_lines, "準備 (f)（実数の組）")
-check(K0(f_lines[-1][0]) + K0(f_lines[-1][1]) * I0 == K0(-1), "準備 (f) の最後の行は -1_C = (-1, 0)")
-check(i * i == m1, "準備 (f) の結論 ii = -1_C を有理関数体で")
-chain_check([neg(i) * i, neg(i * i), neg(m1), m1 * m1, one], "準備 (g)")
+# 成分の鎖が引く主張の当てはめ（文字の置き換えどおり）
+for x in (a11, a12, a21, a22):
+    check((two * x) * ti == x, f"根拠 twice_times_inverse_of_two_is_original_in_cc（z → {x}）")
+for (a, b) in ((a11, a22), (a12, a21)):
+    check((a + b) + sub(a, b) == two * a, f"根拠 sum_plus_difference_is_twice_first_in_cc（a → {a}, b → {b}）")
+    check(sub(a + b, sub(a, b)) == two * b, f"根拠 sum_minus_difference_is_twice_second_in_cc（a → {a}, b → {b}）")
+check(i * i == m1, "根拠 i_times_i_is_minus_one_in_cc: ii = -1_C（R_21 の鎖）")
+check(neg(i) * i == one, "根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C（R_12 の鎖）")
 
 # 係数（def_complex_quotient の商 /2_C）と行列
 k0 = (a11 + a22) / two

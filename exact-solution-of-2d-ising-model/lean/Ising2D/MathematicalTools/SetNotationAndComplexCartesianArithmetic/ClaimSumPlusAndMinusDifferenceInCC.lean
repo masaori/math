@@ -34,7 +34,11 @@
   `complex_numbers_form_a_field` の証明の段落が示している。Lean の `-b` は加法の逆元そのものなので、`add_neg_cancel` の 1 段で受ける。
 - `(a+b) + (a-b) = 2a` を `ring` の 1 行で済ませない。人手の鎖の各段と対応しなくなるためである。
 
-`complex_sum_sub_difference` は `ClaimExpOfNegativeIRealAsCosMinusISin.lean` の主鎖の 6 段目が引く。
+この 2 つの主張を引くのは、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
+`pauliComb_coeff_zero_eq_zero`・`_z_`・`_x_`・`_I_mul_y_`（人手 `Z_Y_linearly_independent` の Step 1 の係数が零になる鎖）と、
+`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の `pauliDecompRhs_apply_00`〜`_11`
+（人手 `Z_Y_generate_algebra` の Step 3 の `R_{11}`〜`R_{22}` の鎖）である。
+`complex_sum_sub_difference` は `ClaimExpOfNegativeIRealAsCosMinusISin.lean` の主鎖の 6 段目も引く。
 人手 `euler_formula_cos_sin` は全実数上の `cos`・`sin` が未整備で、Lean に具体版が無い（`ClaimEulerFormulaCosSin.lean` は
 mathlib で受けている）。そのため、その鎖がこの 2 つの主張を引く行（人手の第 1 の等式の鎖の 6 行目と第 2 の等式の鎖の 7 行目）は Lean に対応する段が無い。
 

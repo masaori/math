@@ -14,14 +14,14 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 
 | 原文 | Lean |
 | --- | --- |
-| Step 1（準備 (f)・(g)、第 1〜4 式、`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` の鎖、異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`（準備 (f)・(g)）、`pauliX_mul_pauliX`（第 1 式。`pauli_matrix_products`）・`pauliY_mul_pauliZ`（第 2 式）・`pauliX_eq`（第 3 式）・`siteOp_mul_same`（第 4 式）・`sigmaX_mul_self`・`sigmaX_eq`（各鎖と 1 段ずつの `calc`）、`siteOp_mul_comm`（`distinct_site_pauli_matrices_commute`） |
+| Step 1（第 1〜4 式、`σ_k^xσ_k^x = I`・`σ_k^x = (-i)(σ_k^yσ_k^z)` の鎖、異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `pauliX_mul_pauliX`（第 1 式。`pauli_matrix_products`）・`pauliY_mul_pauliZ`（第 2 式）・`pauliX_eq`（第 3 式）・`siteOp_mul_same`（第 4 式）・`sigmaX_mul_self`・`sigmaX_eq`（各鎖と 1 段ずつの `calc`）、`siteOp_mul_comm`（`distinct_site_pauli_matrices_commute`） |
 | Step 2 の準備の `P_0 := I`・`P_r := P_{r-1}σ_r^x` | `sigmaXPrefixProduct`（`DefinitionTransferMatrixSymbols.lean`）・`sigmaXPrefixProduct_succ_of_lt` |
 | Step 2 の準備の積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`（`r = 1` の 4 行と一段の 3 行） | `sigmaXFamily`（Lean の `sigmaXFamily r` の因子は `σ_1^x, …, σ_{r+1}^x`。人手の `r` は Lean の `r + 1`）・`sigmaXPrefixProduct_eq_finiteMatrixProduct`（積は `def_finite_product_of_matrices` の具体版 `finiteMatrixProduct` を `ι := Conf M` で使う） |
 | Step 2 の準備の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`（`r` の帰納法） | `sigmaX_mul_sigmaXPrefixProduct_comm`・`sigmaXPrefixProduct_mul_self` |
 | Step 2 の `Z_m = P_{m-1}σ_m^z`・`Y_m = P_{m-1}σ_m^y` の 4 行の鎖（`m ≥ 2`） | `Z_eq_sigmaXPrefixProduct_mul`・`Y_eq_sigmaXPrefixProduct_mul`（`calc` の 4 段。1 行目は `Z_eq_finiteMatrixProduct`・`Y_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）、3 行目は `jwFactor` の定義、4 行目は `sigmaXPrefixProduct_eq_finiteMatrixProduct`） |
 | Step 2 の `P_{m-1}Z_m = σ_m^z`・`P_{m-1}Y_m = σ_m^y` の 4 行の鎖（`m ≥ 2`） | `sigmaZ_eq_sigmaXPrefixProduct_mul`・`sigmaY_eq_sigmaXPrefixProduct_mul` |
 | Step 2 の `m` の帰納法（仮定は `σ_1^x, …, σ_{m-1}^x ∈ 𝒜`）、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法、`σ_m^z, σ_m^y, σ_m^x ∈ 𝒜` | `sigma_mem_adjoin_all`・`sigma_mem_adjoin_first_site`（`m = 1`。`sigmaZ_zero_eq_Z`・`sigmaY_zero_eq_Y`）・`sigmaXPrefixProduct_mem_adjoin`・`sigma_mem_adjoin_of_previous_sigmaX`（`m ≥ 2`）、`sigmaX_mem_adjoin` ほか |
-| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` を張る） | 準備 (a)〜(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_self`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・`zy_prep_sum_sub_diff`（(f)・(g) は Step 1 の行）、4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
+| Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` を張る） | 4 成分の鎖は `pauliDecompRhs_apply_00`〜`_11`、展開の式は `matrix_two_decomp` |
 | Step 3 前半の結び（`𝓑` は `Mat(2,ℂ)` を張る） | `pauliFamily_spans`（`matrix_two_decomp` の係数を並べる） |
 | Step 3 後半（`𝓑^{⊠M}` は `Mat(2^M,ℂ)` を張る。`<kronecker_family_of_spanning_family_spans>` を `𝓑` に適用） | `kronecker_family_of_spanning_family_spans pauliFamily pauliFamily_spans`（`ClaimKroneckerFamilyOfSpanningFamilySpans.lean`） |
 | Step 3 後半（各 `E_k ∈ 𝒜`。`e_k = I` と `e_k = σ^x, σ^y, σ^z` の場合分け） | `siteOp_pauliFamily_mem_adjoin` |
@@ -35,6 +35,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimTwiceTimesInverseOfTwoIsOriginalInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
 
 namespace Ising2D
 
@@ -345,71 +347,13 @@ theorem sigmaX_mem_adjoin (k : Fin M) : sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M
 /-! ## Step 3 前半: `{I, σ^x, σ^y, σ^z}` は `Mat(2, ℂ)` を張る
 
 人手証明の Step 3 は、係数 `κ_0 := (a₁₁+a₂₂)/2_ℂ`・`κ_x := (a₁₂+a₂₁)/2_ℂ`・`κ_y := (i(a₁₂−a₂₁))/2_ℂ`・
-`κ_z := (a₁₁−a₂₂)/2_ℂ` を `def_complex_quotient` の商（`w → 2_ℂ`）と読み、準備 (a)〜(e) を置いてから
-（(f)・(g) は Step 1 で置く。Lean は `DefinitionTransferMatrixSymbols.lean` の `zy_prep_I_mul_I`・`zy_prep_neg_I_mul_I`）、
-右辺 `R` の 4 成分の鎖を書く。以下の補題はその準備と 4 本の鎖を 1 行ずつ辿る（人手の添字 `1, 2` は Lean では `0, 1`）。
-Lean の `z / 2` は `div_eq_mul_inv`（`def_complex_quotient`）で `z * 2⁻¹` に開く。`2_ℂ ∈ ℂ^×` は
-`complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）である。 -/
-
-/-- 人手 Step 3 の準備 (a): `(2_ℂ z) 2_ℂ^{-1} = z`。 -/
-theorem zy_prep_two_mul_mul_inv_two (z : ℂ) : (2 * z) * 2⁻¹ = z := by
-  calc (2 * z) * 2⁻¹
-      = (z * 2) * 2⁻¹ := by rw [mul_comm 2 z]                         -- 積の可換律
-    _ = z * (2 * 2⁻¹) := mul_assoc _ _ _                              -- 積の結合律
-    _ = z * 1 := by rw [mul_inv_cancel₀ complex_two_ne_zero_by_re]   -- `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
-    _ = z := mul_one z                                                -- 積の単位元
-
-/-- 人手 Step 3 の準備 (b): `z + z = 2_ℂ z`。 -/
-theorem zy_prep_add_self (z : ℂ) : z + z = 2 * z := by
-  calc z + z
-      = 1 * z + 1 * z := by rw [one_mul]                              -- 積の単位元を 2 か所へ右辺から左辺へ
-    _ = (1 + 1) * z := (add_mul _ _ _).symm                           -- 分配律を右辺から左辺へ
-    _ = 2 * z := by rw [complex_one_add_one]                          -- `one_plus_one_is_two_in_cc`
-
-/-- 人手 Step 3 の準備 (c): `z + (−z) = 0_ℂ`。 -/
-theorem zy_prep_add_neg (z : ℂ) : z + -z = 0 := by
-  calc z + -z
-      = z + (-1) * z := by rw [neg_one_mul]                           -- `multiply_by_minus_one`
-    _ = 1 * z + (-1) * z := by rw [one_mul]                           -- 積の単位元を右辺から左辺へ
-    _ = (1 + (-1)) * z := (add_mul _ _ _).symm                        -- 分配律を右辺から左辺へ
-    _ = (((1 : ℝ) : ℂ) + ((-1 : ℝ) : ℂ)) * z := by
-          rw [Complex.ofReal_neg, Complex.ofReal_one]                 -- `1_ℂ`・`-1_ℂ` は略記 `r_ℂ` の `r = 1`・`r = -1`
-    _ = ((1 + (-1) : ℝ) : ℂ) * z := by rw [Complex.ofReal_add]        -- `real_inclusion_preserves_sum`（`a → 1, b → -1`）
-    _ = ((0 : ℝ) : ℂ) * z := by rw [add_neg_cancel]                   -- `ℝ` で `1 + (-1) = 0`
-    _ = 0 * z := by rw [Complex.ofReal_zero]                          -- `0_ℂ` は略記 `r_ℂ` の `r = 0`
-    _ = 0 := zero_mul z                                               -- `complex_zero_times_is_zero`
-
-/-- 人手 Step 3 の準備 (d): `(z + w) + (z − w) = 2_ℂ z`。 -/
-theorem zy_prep_sum_add_diff (z w : ℂ) : (z + w) + (z - w) = 2 * z := by
-  calc (z + w) + (z - w)
-      = (z + w) + (z + -w) := by rw [sub_eq_add_neg]                  -- `def_complex_difference`
-    _ = z + (w + (z + -w)) := add_assoc _ _ _                         -- 加法の結合律
-    _ = z + ((w + z) + -w) := by rw [add_assoc w z (-w)]              -- 加法の結合律を右辺から左辺へ
-    _ = z + ((z + w) + -w) := by rw [add_comm w z]                    -- 加法の可換律
-    _ = z + (z + (w + -w)) := by rw [add_assoc z w (-w)]              -- 加法の結合律
-    _ = z + (z + 0) := by rw [zy_prep_add_neg w]                      -- (c)（`z → w`）
-    _ = z + z := by rw [add_zero]                                     -- 加法の単位元
-    _ = 2 * z := zy_prep_add_self z                                   -- (b)
-
-/-- 人手 Step 3 の準備 (e): `(z + w) − (z − w) = 2_ℂ w`。 -/
-theorem zy_prep_sum_sub_diff (z w : ℂ) : (z + w) - (z - w) = 2 * w := by
-  calc (z + w) - (z - w)
-      = (z + w) + -(z - w) := sub_eq_add_neg _ _                      -- `def_complex_difference`（`z → z + w, w → z − w`）
-    _ = (z + w) + -(z + -w) := by rw [sub_eq_add_neg z w]             -- `def_complex_difference`
-    _ = (z + w) + (-1) * (z + -w) := by rw [neg_one_mul]              -- `multiply_by_minus_one`（`z → z + (−w)`）
-    _ = (z + w) + ((-1) * z + (-1) * -w) := by rw [mul_add]           -- 分配律
-    _ = (z + w) + (-z + (-1) * -w) := by rw [neg_one_mul z]           -- `multiply_by_minus_one` を右辺から左辺へ
-    _ = (z + w) + (-z + (-1) * ((-1) * w)) := by rw [neg_one_mul w]   -- `multiply_by_minus_one`（`z → w`）
-    _ = (z + w) + (-z + ((-1) * (-1)) * w) := by rw [mul_assoc]       -- 積の結合律を右辺から左辺へ
-    _ = (z + w) + (-z + 1 * w) := by rw [complex_minus_one_mul_minus_one] -- `minus_one_times_minus_one_is_one_in_cc`
-    _ = (z + w) + (-z + w) := by rw [one_mul]                         -- 積の単位元
-    _ = (w + z) + (-z + w) := by rw [add_comm z w]                    -- 加法の可換律
-    _ = w + (z + (-z + w)) := add_assoc _ _ _                         -- 加法の結合律
-    _ = w + ((z + -z) + w) := by rw [add_assoc z (-z) w]              -- 加法の結合律を右辺から左辺へ
-    _ = w + (0 + w) := by rw [zy_prep_add_neg z]                      -- (c)
-    _ = w + w := by rw [zero_add]                                     -- 加法の単位元
-    _ = 2 * w := zy_prep_add_self w                                   -- (b)（`z → w`）
-
+`κ_z := (a₁₁−a₂₂)/2_ℂ` を `def_complex_quotient` の商（`w → 2_ℂ`）と読み、右辺 `R` の 4 成分の鎖を書く。
+以下の補題はその 4 本の鎖を 1 行ずつ辿る（人手の添字 `1, 2` は Lean では `0, 1`）。鎖が引く計算公式の章の主張は
+`complex_two_mul_mul_inv_two`（`twice_times_inverse_of_two_is_original_in_cc`）・`complex_sum_add_difference`
+（`sum_plus_difference_is_twice_first_in_cc`）・`complex_sum_sub_difference`（`sum_minus_difference_is_twice_second_in_cc`）・
+`complex_I_mul_I`（`i_times_i_is_minus_one_in_cc`）・`complex_neg_I_mul_I`（`negative_i_times_i_is_one_in_cc`）である。
+Lean の `z / 2` は `div_eq_mul_inv`（`def_complex_quotient`）で `z * 2⁻¹` に開く。人手の前置きの `2_ℂ ∈ ℂ^×` は
+`complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）で、`complex_two_mul_mul_inv_two` の中で使う。 -/
 
 /-- 人手 `pauli_matrix_products` で定めた Pauli 行列の成分（人手の証明の冒頭がこの定めを引く）。 -/
 theorem pauliX_apply_00 : pauliX 0 0 = 0 := rfl
@@ -469,8 +413,8 @@ theorem pauliDecompRhs_apply_00 (a b c d : ℂ) : pauliDecompRhs a b c d 0 0 = a
     _ = (a + d) * 2⁻¹ + (a - d) * 2⁻¹ := by
           rw [div_eq_mul_inv, div_eq_mul_inv]                           -- `def_complex_quotient` を 2 か所へ
     _ = ((a + d) + (a - d)) * 2⁻¹ := (add_mul _ _ _).symm              -- 分配律を右辺から左辺へ
-    _ = (2 * a) * 2⁻¹ := by rw [zy_prep_sum_add_diff a d]              -- (d)（`z → a₁₁, w → a₂₂`）
-    _ = a := zy_prep_two_mul_mul_inv_two a                              -- (a)（`z → a₁₁`）
+    _ = (2 * a) * 2⁻¹ := by rw [complex_sum_add_difference a d]         -- `sum_plus_difference_is_twice_first_in_cc`（`a → a₁₁, b → a₂₂`）
+    _ = a := complex_two_mul_mul_inv_two a                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₁₁`）
 
 /-- 人手 Step 3 の `R_{12}` の鎖。 -/
 theorem pauliDecompRhs_apply_01 (a b c d : ℂ) : pauliDecompRhs a b c d 0 1 = b := by
@@ -508,11 +452,11 @@ theorem pauliDecompRhs_apply_01 (a b c d : ℂ) : pauliDecompRhs a b c d 0 1 = b
     _ = (b + c) * 2⁻¹ + (((-Complex.I) * Complex.I) * (b - c)) * 2⁻¹ := by
           rw [← mul_assoc (-Complex.I) Complex.I]                              -- 積の結合律を右辺から左辺へ
     _ = (b + c) * 2⁻¹ + (1 * (b - c)) * 2⁻¹ := by
-          rw [zy_prep_neg_I_mul_I]                                      -- (g)
+          rw [complex_neg_I_mul_I]                                      -- `negative_i_times_i_is_one_in_cc`
     _ = (b + c) * 2⁻¹ + (b - c) * 2⁻¹ := by rw [one_mul]               -- 積の単位元
     _ = ((b + c) + (b - c)) * 2⁻¹ := (add_mul _ _ _).symm              -- 分配律を右辺から左辺へ
-    _ = (2 * b) * 2⁻¹ := by rw [zy_prep_sum_add_diff b c]              -- (d)（`z → a₁₂, w → a₂₁`）
-    _ = b := zy_prep_two_mul_mul_inv_two b                              -- (a)（`z → a₁₂`）
+    _ = (2 * b) * 2⁻¹ := by rw [complex_sum_add_difference b c]         -- `sum_plus_difference_is_twice_first_in_cc`（`a → a₁₂, b → a₂₁`）
+    _ = b := complex_two_mul_mul_inv_two b                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₁₂`）
 
 /-- 人手 Step 3 の `R_{21}` の鎖。 -/
 theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c := by
@@ -550,12 +494,12 @@ theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c
     _ = (b + c) * 2⁻¹ + ((Complex.I * Complex.I) * (b - c)) * 2⁻¹ := by
           rw [← mul_assoc Complex.I Complex.I]                              -- 積の結合律を右辺から左辺へ
     _ = (b + c) * 2⁻¹ + ((-1) * (b - c)) * 2⁻¹ := by
-          rw [zy_prep_I_mul_I]                                          -- (f)
+          rw [complex_I_mul_I]                                          -- `i_times_i_is_minus_one_in_cc`
     _ = (b + c) * 2⁻¹ + (-(b - c)) * 2⁻¹ := by rw [neg_one_mul]        -- `multiply_by_minus_one` を右辺から左辺へ
     _ = ((b + c) + -(b - c)) * 2⁻¹ := (add_mul _ _ _).symm             -- 分配律を右辺から左辺へ
     _ = ((b + c) - (b - c)) * 2⁻¹ := by rw [← sub_eq_add_neg]          -- `def_complex_difference` を右辺から左辺へ
-    _ = (2 * c) * 2⁻¹ := by rw [zy_prep_sum_sub_diff b c]              -- (e)（`z → a₁₂, w → a₂₁`）
-    _ = c := zy_prep_two_mul_mul_inv_two c                              -- (a)（`z → a₂₁`）
+    _ = (2 * c) * 2⁻¹ := by rw [complex_sum_sub_difference b c]         -- `sum_minus_difference_is_twice_second_in_cc`（`a → a₁₂, b → a₂₁`）
+    _ = c := complex_two_mul_mul_inv_two c                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₂₁`）
 
 /-- 人手 Step 3 の `R_{22}` の鎖。 -/
 theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d := by
@@ -593,8 +537,8 @@ theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d
     _ = (a + d) * 2⁻¹ + (-(a - d)) * 2⁻¹ := by rw [neg_one_mul]        -- `multiply_by_minus_one` を右辺から左辺へ
     _ = ((a + d) + -(a - d)) * 2⁻¹ := (add_mul _ _ _).symm             -- 分配律を右辺から左辺へ
     _ = ((a + d) - (a - d)) * 2⁻¹ := by rw [← sub_eq_add_neg]          -- `def_complex_difference` を右辺から左辺へ
-    _ = (2 * d) * 2⁻¹ := by rw [zy_prep_sum_sub_diff a d]              -- (e)（`z → a₁₁, w → a₂₂`）
-    _ = d := zy_prep_two_mul_mul_inv_two d                              -- (a)（`z → a₂₂`）
+    _ = (2 * d) * 2⁻¹ := by rw [complex_sum_sub_difference a d]         -- `sum_minus_difference_is_twice_second_in_cc`（`a → a₁₁, b → a₂₂`）
+    _ = d := complex_two_mul_mul_inv_two d                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₂₂`）
 
 
 /-- **原文 Step 3 の展開の式**:
