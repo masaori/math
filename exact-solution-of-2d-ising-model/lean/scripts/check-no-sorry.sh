@@ -124,6 +124,22 @@ targets=(
   Ising2D.independenceStatement_zero
   Ising2D.suffixLetterIndicator_eq
   Ising2D.kronecker_family_of_independent_family_is_independent
+  Ising2D.NecSuf.prefixProductOf_succ
+  Ising2D.NecSuf.prefixProductOf_update_of_le
+  Ising2D.NecSuf.suffixIndicatorOf_of_le
+  Ising2D.NecSuf.suffixIndicatorOf_of_lt
+  Ising2D.NecSuf.delta_commute
+  Ising2D.NecSuf.suffixIndicatorOf_commute
+  Ising2D.NecSuf.independenceStatementOf_top
+  Ising2D.NecSuf.eq_sum_delta_smul
+  Ising2D.NecSuf.independenceStepOf_B_eq_zero
+  Ising2D.NecSuf.independenceStepOf_B_eq_sum
+  Ising2D.NecSuf.independenceStatementOf_pred
+  Ising2D.NecSuf.independenceStatementOf_zero
+  Ising2D.NecSuf.suffixIndicatorOf_eq
+  Ising2D.NecSuf.productFamilyOf_independent
+  Ising2D.prefixProductOf_eq_prefixEntryProduct
+  Ising2D.kronecker_family_of_independent_family_is_independent_of_necSuf
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
   Ising2D.identity_matrix_two_conjTranspose

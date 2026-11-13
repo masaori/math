@@ -35,7 +35,8 @@
 | Step 5（`q ≠ q_0` の 3 行の鎖と `d_{q_0}` の 6 行の鎖） | `kronecker_family_of_independent_family_is_independent` |
 
 人手の主張は `M ≥ 1` で述べるが、Lean の証明は `M = 0` でもそのまま通るので `M` に条件を置かない。
-必要十分版は置いていない（次の作業単位で要否を判断する。状態台帳の (d4c44p15b)）。
+必要十分版は `Ising2D/NecSuf/ProductFamilyOfIndependentFamilyIsIndependent.lean`、特殊化による導出は同じフォルダの
+`ClaimKroneckerFamilyOfIndependentFamilyIsIndependentFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfSpanningFamilySpans
 
