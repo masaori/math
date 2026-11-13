@@ -61186,7 +61186,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法の可換性と結合性}\bigr)\\
 &=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
   +\pi_4\bigl(\tau(\vec e,\vec f)+\tau(\vec e',\vec f')\bigr)
-&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4\text{ の加法性（}\blkref{def_direction_residue_projection}\text{）}\bigr)\\
 &=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_1)
 &&\bigl(\because\ S_1\text{ の置き方}\bigr)
 \end{aligned}`),
@@ -61205,7 +61205,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法の可換性と結合性}\bigr)\\
 &=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
   +\pi_4\bigl(\tau(\vec e,\vec f')+\tau(\vec e',\vec f)\bigr)
-&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4\text{ の加法性（}\blkref{def_direction_residue_projection}\text{）}\bigr)\\
 &=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_2)
 &&\bigl(\because\ S_2\text{ の置き方}\bigr)
 \end{aligned}`),
@@ -61232,9 +61232,9 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                         displayMath(String.raw`\begin{aligned}
 \pi_4(S_2)+\pi_4(D)
 &=\pi_4(S_2+D)
-&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4\text{ の加法性（}\blkref{def_direction_residue_projection}\text{）}\bigr)\\
 &=\pi_4(S_1)
-&&\bigl(\because\ S_2+D=S_1\text{。}D\text{ の置き方と }\mathbb Z\text{ の加法}\bigr)\\
+&&\bigl(\because\ S_2+D=S_1\text{（}D\text{ の置き方と }\mathbb Z\text{ の加法）}\bigr)\\
 &=\pi_4(S_2)
 &&\bigl(\because\ \text{上で得た }\pi_4(S_1)=\pi_4(S_2)\bigr)\\
 &=\pi_4(S_2)+0
