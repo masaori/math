@@ -22,7 +22,7 @@ for s_ in (1, 2):
     for t_ in (1, 2):
         if s_ != t_:
             assert ID2[s_ - 1, t_ - 1] == (1 if s_ == t_ else 0) == 0   # def_identity_matrix・def_kronecker_delta
-            assert SIGMA_Z[s_ - 1, t_ - 1] == 0                           # pauli_matrix_products
+            assert SIGMA_Z[s_ - 1, t_ - 1] == 0                           # def_pauli_matrices
 
 count = 0
 for M in M_RANGE:

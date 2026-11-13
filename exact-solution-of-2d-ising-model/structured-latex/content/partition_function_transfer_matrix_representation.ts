@@ -877,10 +877,14 @@ s(i,M_{\mathrm{col}}+1)
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
         " とする。",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " で定めた二次の Pauli 行列 ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
-        " と単位行列 ",
+        "、",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        " とした単位行列 ",
         math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
         "、および ",
         ref("def_kronecker"),
@@ -909,6 +913,7 @@ s(i,M_{\mathrm{col}}+1)
       status: "added",
       notes: [
         "旧来の複合定義から、サイトごとの三つの Pauli 行列を一つの添字つき行列族として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 定義の文で二次の Pauli 行列と単位行列を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から、Pauli 行列は定義 def_pauli_matrices、I_{Mat(2,C)} は def_identity_matrix（n = 2）に替えた（Pauli 行列の定義を主張から分けたため）。定めた行列族は不変。",
       ],
     },
   },
@@ -1217,7 +1222,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     proof: [
       paragraph([
         "準備。",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}`),
         " と ",
@@ -1246,7 +1251,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   1 \\
   0
 \end{pmatrix}
-\quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
+\quad (\because \blkref{def_pauli_matrices},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
   1\cdot 1 + 0\cdot 0 \\
@@ -1281,7 +1286,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   0 \\
   1
 \end{pmatrix}
-\quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
+\quad (\because \blkref{def_pauli_matrices},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
   1\cdot 0 + 0\cdot 1 \\
@@ -1390,6 +1395,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         "2026-11-02: SageMath の検算（sagemath/check/sigma_z_diagonal_action/）のレビューで、1 ブロックに 4 つの主張（σ_m^z の固有ベクトルの等式・積の等式・二つの対角性）があったので、" +
           "この主張を σ_m^z f_{ι(μ)} = μ(m)_C f_{ι(μ)} だけにし、ほかを sigma_z_product_action・site_sigma_z_is_diagonal・site_sigma_z_product_is_diagonal に分けた。" +
           "スカラーを inclusion_rr_to_cc の μ(m)_C と書き、場合分けを (∵) 付きの鎖に、ラベルの無かった根拠（行列と列ベクトルの積・恒等行列の作用）をラベル参照にした。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の準備で σ^z の成分を引く段落と、σ^z e_1・σ^z e_2 の鎖の 1 行目の根拠（2 行）の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -1470,7 +1476,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         "）、",
         math(String.raw`(\sigma^z)_{st} = 0_{\mathbb{C}}`),
         "（",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         "）である。第 ",
         math(String.raw`p`),
         " 因子（",
@@ -1530,6 +1536,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
       notes: [
         "2026-11-02: sigma_z_diagonal_action の「これらはすべて基底 (f_I) に関して対角行列である」を、対角行列の定義（def_diagonal_matrix）に沿って成分で述べる独立の主張にした。" +
           "旧い証明は「基底の各元が固有ベクトルなので」と書いていたが、f_I の成分が δ であることを経ずに成分の意味の対角性へ渡していたので、クロネッカー積の成分から直接示す形にした。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の準備で (σ^z)_{st} = 0_C（s ≠ t）を引く出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
       ],
     },
   },
@@ -2500,7 +2507,7 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
         "）、",
         math(String.raw`\sigma^x`),
         " は ",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の Pauli 行列、",
         math(String.raw`\exp`),
         " は ",
@@ -2511,6 +2518,12 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
     proof: [
       paragraph([
         "証明の中で使う記号を先に置く。",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）、",
         math(String.raw`\tau \in \mathbb{R}`),
         " とし、",
         math(String.raw`B_\tau := \tau_{\mathbb{C}}\,\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -2535,7 +2548,7 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
       ),
       paragraph([
         "と定める。",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x`),
         " の成分と、",
@@ -3166,6 +3179,7 @@ A
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移し、K_2^* と s_2 の参照先を <def_second_dual_coupling_constant> と <def_indexed_hyperbolic_abbreviations> にした。番号で区切っていた四つの段を中間目標の名前へ変えた。",
         "2026-11-02: SageMath の検算を付けるときに証明を書き直した。倍角公式とテイラー展開の根拠が cosh_sinh_basic_properties を引いていた（そこには無い）。倍角公式は sinh_double_angle_formula へ付け替え、テイラー展開（本文の sinh_cosh_taylor_series には証明が無い）には頼らず、部分和の成分を 1 行 1 列の exp の部分和の半和 (E_N(τ)±E_N(-τ))/2 で書き、scalar_exp_is_limit_of_partial_sums と三角不等式で極限を取る形にした。行列の冪の指数法則・加法則（本文に無い）を def_exp (1) の冪の定義による一つの帰納法に、非負実数の平方根が積を保つこと（本文に無い）を二乗の比較（cosh_sinh_basic_properties (4)）に置き換えた。閉じた形の変数と tanh K_2 が同じ記号 t だったので、閉じた形の変数を τ にした。実数のスカラー倍と行列の実数の成分を a_C の略記として主張に書き、証明では a_C と明示した。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 主張の文で σ^x を引く出典と、証明で σ^x の成分を引く段落の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。σ^xσ^x = I を引く行（積の公式）は替えていない。証明の記号を置く段落に、出典の無かった I を I := I_{Mat(2,C)}（def_identity_matrix で n = 2）として足した。式は不変。",
       ],
     },
   },

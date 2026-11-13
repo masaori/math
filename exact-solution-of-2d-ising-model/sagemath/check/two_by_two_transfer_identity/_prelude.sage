@@ -23,7 +23,7 @@ QQ_TAU = PolynomialRing(QQ, 'tau_r')
 tr = QQ_TAU.gen()
 inc = QQ_TAU.hom([tau], R_TAU)
 
-# 本文 pauli_matrix_products の σ^x と I = I_{Mat(2,C)}（def_identity_matrix の δ_ij）。
+# 本文 def_pauli_matrices の σ^x と I = I_{Mat(2,C)}（def_identity_matrix の δ_ij）。
 SX = matrix(R_TAU, [[0, 1], [1, 0]])
 I2 = identity_matrix(R_TAU, 2)
 
