@@ -103,6 +103,7 @@ bash scripts/check-no-sorry.sh
 | `Ising2DLambda/TransferMatrix/*FromNecSuf.lean` | 具体版が必要十分版の特殊化として得られることの導出（4 件） |
 | `Ising2DLambda/AlgebraicEigenvalue/RowConfigOrder.lean` | 行配位の辞書式順序と、それが線形順序であること（具体版） |
 | `Ising2DLambda/AlgebraicEigenvalue/PermutationSign.lean` | 置換・転倒数・符号の定義と、符号の値・乗法性（具体版） |
+| `Ising2DLambda/AlgebraicEigenvalue/PermutationSignFiniteOrderedSet.lean` | 線型順序を持つ任意の有限集合の上の符号の乗法性（具体版。本文の定義どおり一般の $\mathcal J$ で述べる。導出版は `PermutationSignFiniteOrderedSetFromNecSuf.lean`） |
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/RowConfigOrder.lean` | 必要十分版。被覆と、値の集合から `ℕ` への単射だけを仮定する |
 | `Ising2DLambda/NecSuf/AlgebraicEigenvalue/PermutationSign.lean` | 必要十分版。有限型と判定できる二項関係、および**三分律だけ**を仮定する（推移律を使っていない） |
 | `Ising2DLambda/AlgebraicEigenvalue/Determinant.lean` | 定数多項式を与える写像・単位行列・行列式の定義と、恒等でない置換が 2 点以上を動かすこと・対角行列の行列式（具体版） |

@@ -1770,6 +1770,12 @@ N\lambda\le_{\Lambda}N\mu
                   lean: [
                     "Ising2DLambda.AlgebraicEigenvalue.permSign_comp",
                     "Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedPairMap",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedInversionCount_eq_card_pairMap",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrdered_parity_at_pair",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_mul_mul",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp",
+                    "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_from_necSuf",
                     "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp",
                   ],
                   verification: ["sagemath/check/permutation-sign"],
@@ -50714,11 +50720,11 @@ N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
 &=N^{-1}\cdot\bigl(N\cdot\lambda\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=N^{-1}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
-&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{、}\blkref{def_common_denominator})\\
 &=N^{-1}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)
 &&(\because\ \lambda_N=\mu_N)\\
 &=N^{-1}\cdot\bigl(N\cdot\mu\bigr)
-&&(\because\ N\text{ は }\mu\text{ の共通分母、証人 }\mu_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\mu\text{ の共通分母、証人 }\mu_N\text{、}\blkref{def_common_denominator})\\
 &=\bigl(N^{-1}\cdot N\bigr)\cdot\mu
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=\mu
