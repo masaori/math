@@ -54,7 +54,7 @@ private theorem siteProd_smul_family_for_jordanWigner (c : Fin M → ℂ)
 どちらの鎖の各段とも 1 対 1 に対応する。 -/
 theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
   calc
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     pauliY * pauliX = !![0, -Complex.I; Complex.I, 0] * !![0, 1; 1, 0] := rfl
     -- `mat_mult`
     _ = !![0 * 0 + (-Complex.I) * 1, 0 * 1 + (-Complex.I) * 0;
@@ -92,7 +92,7 @@ theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
       ext i j
       rw [matrix_smul_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     _ = (-Complex.I) • pauliZ := rfl
 
 /-- 人手証明 Step 0 の `σˣσʸ = iσᶻ`。人手の鎖の各段と 1 対 1 に対応する。 -/

@@ -64,7 +64,7 @@ theorem negI_mul_negI_eq_neg_one : (-Complex.I) * (-Complex.I) = -1 :=
 `H1_plus_in_sigma_z_form` の準備 4 が `pauli_x_times_pauli_z` として使う同じ等式でもある。 -/
 theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
   calc
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     pauliX * pauliZ = !![0, 1; 1, 0] * !![1, 0; 0, -1] := rfl
     -- `mat_mult`
     _ = !![0 * 1 + 1 * 0, 0 * 0 + 1 * (-1);
@@ -92,7 +92,7 @@ theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
       ext i j
       rw [matrix_smul_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     _ = (-Complex.I) • pauliY := rfl
 
 /-! ## 準備 1（内部の辺の因子のクロネッカー積表示）

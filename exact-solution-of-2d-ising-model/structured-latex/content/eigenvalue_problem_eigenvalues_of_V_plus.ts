@@ -270,7 +270,7 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
 \end{aligned}`,
       ),
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x, \sigma^y, \sigma^z`),
         " の積を ",
@@ -281,7 +281,7 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \blkref{pauli_matrix_products}) \\
+   \quad (\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
@@ -301,14 +301,14 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
 &= (-i)\begin{pmatrix}0&1\\1&0\end{pmatrix}
    \quad (\because \blkref{def_matrix_scalar_multiple}) \\
 &= (-i)\sigma^x
-   \quad (\because \blkref{pauli_matrix_products})
+   \quad (\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \blkref{pauli_matrix_products}) \\
+   \quad (\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
@@ -330,14 +330,14 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
 &= (-i)\begin{pmatrix}1&0\\0&-1\end{pmatrix}
    \quad (\because \blkref{def_matrix_scalar_multiple}) \\
 &= (-i)\sigma^z
-   \quad (\because \blkref{pauli_matrix_products})
+   \quad (\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \blkref{pauli_matrix_products}) \\
+   \quad (\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0\cdot1+1\cdot0 & 0\cdot0+1\cdot(-1) \\ 1\cdot1+0\cdot0 & 1\cdot0+0\cdot(-1)\end{pmatrix}
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+1\cdot0 & 0+1\cdot(-1) \\ 1\cdot1+0 & 1\cdot0+0\end{pmatrix}
@@ -357,7 +357,7 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
 &= (-i)\begin{pmatrix}0&-i\\i&0\end{pmatrix}
    \quad (\because \blkref{def_matrix_scalar_multiple}) \\
 &= (-i)\sigma^y
-   \quad (\because \blkref{pauli_matrix_products})
+   \quad (\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
       paragraph([
@@ -1118,6 +1118,7 @@ G
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の最後の文が「def_hermitian_positive_definite の最後の注意より、実対称行列はエルミートである」と、定義の中の主張を引いていたのを、その注意を切り出した定義 def_real_symmetric_complex_matrix と主張 real_symmetric_matrix_is_hermitian（009_eigenvalues_of_V.ts）を引く形にした（n → 2^{M_col}、A → S_1^{(+)} と A → S_2）。主張は変えていない。",
         "2026-11-03（全証明の SageMath 検算）: Step 0 の最後の段落が述べていた相異なるサイトの Pauli 行列の可換性（distinct_site_pauli_matrices_commute）は、Step 1・Step 2 をクロネッカー積の道に替えたあとどの行も使っていないので外した。主張は変えていない。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 並べて書いた積の括弧の付け方が定まっていなかった箇所を直した。主張の G の式を def_finite_product_of_matrices の有限積 G := Π_{j=1}^{M_col}F_j^{(G)}（F_1^{(G)} = σ_1^y、F_j^{(G)} = σ_j^x（2 ≤ j ≤ M_col−1）、F_{M_col}^{(G)} = σ_{M_col}^y）にし（並べて書いた σ_1^yσ_2^xσ_3^x⋯ は M_col = 2, 3 で字面が合わなかった）、M_col ≥ 2（def_H1_plus の範囲）を主張に書いた。Step 1 の準備の Z_m・Y_m の表示を、epsilon_anticommutes_with_jordan_wigner_Z・Z_Y_linearly_independent の Step 3 と同じ「定義の有限積 Π F_j → (k) で因子を σ_j^{a_j} に → site_pauli_prefix_product_kronecker_form → a_j の定義」の 4 行にし、「積は左から掛けたものと読む」の根拠を外した。Step 2 の準備の Y_m・Z_{m+1}・Y_{M_col}・Z_1 の表示は、Step 1 の準備の表示を m を替えて引く形にした（Y_{M_col}・Z_1 は因子の並びの第 1・最後の因子を分けて書く行を足した）。G の表示を a_j^{(G)} と (kG) を置いた同じ 4 行にした。表示の式と鎖の残りは不変。",
+        "2026-11-13: Step 0 の三つの Pauli 行列積で σ^x, σ^y, σ^z の成分を引く段落の参照と、鎖の 1 行目・最後の行の根拠（6 行）を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。σ^xσ^x = I を引く段落と Step 1・Step 2 の行は pauli_matrix_products のまま。式は不変。",
       ],
     },
   },
@@ -1131,7 +1132,7 @@ G
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とし、",
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の二次の Pauli 行列 ",
         math(String.raw`\sigma^x, \sigma^z`),
         " を用いて、",
@@ -2053,6 +2054,7 @@ U S_2 U^{-1}
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "この U は M の偶奇によらず両方の符号 (±) について働く。M=2,3,4,5,6 と両符号で残差 0 を数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_02_sign_flip_conjugation.sage）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-13: 主張の文で σ^x, σ^z を引く出典を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。Step 0・Step 1 で σ^aσ^a = I・反可換を引く行は pauli_matrix_products のまま。式は不変。",
       ],
     },
   },

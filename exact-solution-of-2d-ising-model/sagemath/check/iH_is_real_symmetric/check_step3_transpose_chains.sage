@@ -6,7 +6,7 @@
 K.<i> = QuadraticField(-1)
 M2 = MatrixSpace(K, 2, 2)
 I2 = M2(1)
-SX = M2([[0, 1], [1, 0]]); SY = M2([[0, -i], [i, 0]]); SZ = M2([[1, 0], [0, -1]])   # pauli_matrix_products
+SX = M2([[0, 1], [1, 0]]); SY = M2([[0, -i], [i, 0]]); SZ = M2([[1, 0], [0, -1]])   # def_pauli_matrices
 m1 = K(-1)
 def kron(factors):                      # def_kronecker: A_1 ⊠ ⋯ ⊠ A_M（左の因子が上位の桁）
     out = matrix(K, 1, 1, [1])

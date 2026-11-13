@@ -316,7 +316,7 @@ theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
 （`eigenvalue_problem_eigenvalues_of_V_plus.ts`。3 本は同じ鎖）の各段と 1 対 1 に対応する。 -/
 theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
   calc
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     pauliZ * pauliY = !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
     -- `mat_mult`
     _ = !![1 * 0 + 0 * Complex.I, 1 * (-Complex.I) + 0 * 0;
@@ -348,7 +348,7 @@ theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
       ext i j
       rw [matrix_smul_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products`（Pauli 行列）
+    -- `def_pauli_matrices`（Pauli 行列）
     _ = (-Complex.I) • pauliX := rfl
 
 end PauliRelations

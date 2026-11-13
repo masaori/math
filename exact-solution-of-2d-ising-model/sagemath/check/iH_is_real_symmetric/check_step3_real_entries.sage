@@ -8,7 +8,7 @@
 K.<i> = QuadraticField(-1)
 M2 = MatrixSpace(K, 2, 2)
 I2 = M2(1)
-SX = M2([[0, 1], [1, 0]]); SY = M2([[0, -i], [i, 0]]); SZ = M2([[1, 0], [0, -1]])   # pauli_matrix_products
+SX = M2([[0, 1], [1, 0]]); SY = M2([[0, -i], [i, 0]]); SZ = M2([[1, 0], [0, -1]])   # def_pauli_matrices
 def kron(factors):                      # def_kronecker
     out = matrix(K, 1, 1, [1])
     for A in factors:
