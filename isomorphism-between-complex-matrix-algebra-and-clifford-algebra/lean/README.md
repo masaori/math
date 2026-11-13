@@ -67,6 +67,10 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   存在と一意性を `digit_decomposition`・`digit_unique` に書く。番号の整数の計算は `omega` と ℕ の割り算の補題で行う。
 - ℂ の中の番号順の積は、番号順の和と同じく `ℕ → ℂ` の族の部分積 P_m（`partialOrderedProduct`）で書く。
 - X_{n,k} の二元のクロネッカーのデルタは、X_{n,k} の等号の判定に `Classical.decEq` を使う。
+- 番号付けた線型空間の族 (E_j) は `E : ℕ → Type v` と各 j の線型空間で、直和 D は零の境をもつ族 (j : ℕ) → E j の部分型で表す。
+  emb_k(y) の第 j 成分は、j = k のとき y を型の等式で E k から E j へ運んだもの（`cast`）である。
+- j 重テンソル積の族 (T_j, τ_j) は structure `TensorPowers` で表す。普遍性を U := T_{k+l} に当てるので、どの T_j も同じ宇宙に置く。
+  ρ_{u'}・θ_F は普遍性の存在から `Classical.choose` で選び、ただ一つであることは普遍性の一意性の欄で書く。
 
 ## 形式化済みの節
 
@@ -78,6 +82,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | ℂ-代数 | `MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `NecSuf/MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `ComplexAlgebraFromNecSuf.lean` |
 | 両側イデアルと商代数 | `MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル（節の末尾に置かれた直和の基底の主張は `DirectSumBasis.lean`） | `NecSuf/MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル | `IdealAndQuotientAlgebraFromNecSuf.lean` |
 | テンソル積 | `MathematicalToolkit/TensorProduct/` の 5 ファイル（`BaseNNumbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorProduct/` の 4 ファイル | `TensorProductFromNecSuf.lean` |
+| テンソル代数の土台（族の直和、つなげた組、テンソルの積とその双線型性） | `MathematicalToolkit/TensorAlgebra/` の 5 ファイル（`IndexShift.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorAlgebra/` の 4 ファイル | `TensorAlgebraFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -122,3 +127,14 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   λ を番号順の積の前の部分 P_{r-1} の前へ出すためである。ほかに使うのは、K^X の八つの性質、係数の一意性の仮定の組
   （座標の写像が線型形式であることと、双対基底であること）、0 + 0 = 0、a · 0 = 0 である。
 - 基底の元の組で値が一致する二つの k 重線型写像が等しいことには、0 + 0 = 0 だけが要る（線型写像が線型結合を移すことから来る）。
+
+## 必要十分版が示したこと（節「テンソル代数」の土台）
+
+- 族の直和が線型空間であることには、スカラー倍が零の境を保つための 0 + 0 = 0 と a · 0 = 0（λ ·_{E_j} 0_{E_j} = 0_{E_j} から来る）と、
+  加法の逆元 (-1_ℂ) ∗_D x を作るための 1 + n = 0 となる n が要る。成分ごとの和が零の境をもつことは係数の性質を使わない。
+- 二つの組をつなげること、成分の置き換えとの交換、k + l 重線型写像に後ろの組を固定して入れた写像が k 重線型であることは、係数の性質を一つも使わない。
+- 線型写像の各点ごとの和が線型写像であることは係数の性質を使わず、各点ごとのスカラー倍 μ ⊡ f が線型写像であることには、
+  μ がどの係数とも交換することが要る。
+- テンソルの積 m_{k,l} を定めるには、係数の乗法の交換法則が要る。ρ_•(F) が後ろにつなげる組についてスカラー倍を保つことを、
+  λ ⊡ ρ_b = ρ_d で示すためである。前の因子についての線型性は、λ ⊡ θ_F が線型写像であることで同じ性質をもう一度使う。
+

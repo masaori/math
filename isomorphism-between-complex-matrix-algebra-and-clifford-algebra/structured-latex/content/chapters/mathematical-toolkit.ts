@@ -16196,7 +16196,7 @@ m_{k,l}\bigl(\tau_k(u),\tau_l(u')\bigr)
       paragraph([
         math(String.raw`\theta_F:T_l\to T_{k+l}`),
         " は線型写像である（",
-        ref("def_product_of_tensors"),
+        ref("def_linear_map_multiplying_fixed_tensor_on_left"),
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
