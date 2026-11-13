@@ -139,6 +139,8 @@ export default defineBlocks([
 &&\left(\because\ \pi_{I_q}\ \text{は加法を保つ。}\blkref{claim_projection_onto_quotient_set_preserves_addition}\right)\\
 &=0_{\mathrm{Cl}(V,q)}+_{\mathrm{Cl}(V,q)}\pi_{I_q}\bigl(\lambda\ast_{T(V)}1_{T(V)}\bigr)
 &&\left(\because\ \text{第一項の元は}\ I_q\ \text{の元。}\blkref{claim_projection_onto_quotient_set_sends_ideal_elements_to_zero}\right)\\
+&=\pi_{I_q}\bigl(\lambda\ast_{T(V)}1_{T(V)}\bigr)+_{\mathrm{Cl}(V,q)}0_{\mathrm{Cl}(V,q)}
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_algebra}\right)\\
 &=\pi_{I_q}\bigl(\lambda\ast_{T(V)}1_{T(V)}\bigr)
 &&\left(\because\ 0_{\mathrm{Cl}(V,q)}\ \text{は加法の単位元。}\blkref{def_complex_algebra}\right)\\
 &=\lambda\ast_{\mathrm{Cl}(V,q)}\pi_{I_q}\bigl(1_{T(V)}\bigr)

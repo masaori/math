@@ -80,6 +80,14 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - テンソル代数の普遍性の A は任意の宇宙 w の型に置く。F_k を定めるのに (T_k, τ_k) の普遍性を U = U_vec(A) に当てるので、
   族が宇宙 w について k 重テンソル積であること `hP` を引数に取り、座標による構成ではそれを `coordinateTensor_isTensorProduct` から渡す。
 
+- 章「クリフォード代数」の前提「V は ℂ-線型空間、b は基底、q は二次形式」は structure `QuadraticSpaceWithBasis` の欄に置き、
+  T(V)・ι・I_q・Cl(V,q)・π_{I_q}・γ はその上の def である。分裂した二次空間の前提（W、基底 w、双対基底 f）は `SplitData` に置き、
+  `SplitData.space` が V := W ⊕ W^*、q := q_W、基底 c の `QuadraticSpaceWithBasis` を作る。
+- クリフォード代数の章の導出版は、具体版の T(V)・I_q が必要十分版のものと命題として等しい（定義による一致ではない）ので、
+  各主張の必要十分版を T(V) の構造 S・ι・I を変数にした形に書き直してから具体版のものを入れる。
+  分裂した二次空間の節は、具体版の W^* と必要十分版の W^* が別の部分型でクリフォード代数が別の集合になるので、
+  二つのクリフォード代数の間に普遍性で準同型 Φ・Ψ（Ψ ∘ Φ = 恒等写像）を作り、必要十分版の主張を Φ で引き戻す（`GeneratorsFromNecSuf.lean` の冒頭）。
+
 ## 形式化済みの節
 
 | 本文の節 | 具体版 | 必要十分版 | 導出版 |
@@ -92,6 +100,9 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | テンソル積 | `MathematicalToolkit/TensorProduct/` の 5 ファイル（`BaseNNumbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorProduct/` の 4 ファイル | `TensorProductFromNecSuf.lean` |
 | テンソル代数の土台（族の直和、つなげた組、テンソルの積とその双線型性） | `MathematicalToolkit/TensorAlgebra/` の 5 ファイル（`IndexShift.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorAlgebra/` の 4 ファイル | `TensorAlgebraFromNecSuf.lean` |
 | テンソル代数の代数の構造と普遍性（テンソルの積の結合法則、積・単位元、ℂ-代数であること、埋め込みと生成、普遍性、代数の中の積の補題） | `MathematicalToolkit/TensorAlgebra/` の `AssociativityOfTensorProduct`・`TensorAlgebraStructure`・`EmbeddingAndGeneration`・`UniversalPropertyOfTensorAlgebra`・`MultiplicationInAlgebra`・`InitialSegmentFromZero`（ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorAlgebra/` の同じ名前の 5 ファイル | `TensorAlgebraStructureFromNecSuf.lean`・`MultiplicationInAlgebraFromNecSuf.lean` |
+| 二次形式 | `MathematicalToolkit/QuadraticForm/QuadraticForm.lean` | `NecSuf/MathematicalToolkit/QuadraticForm/QuadraticForm.lean` | `QuadraticFormFromNecSuf.lean` |
+| クリフォード代数の定義と普遍性（章「クリフォード代数」の前半） | `CliffordAlgebra/DefinitionAndUniversalProperty/CliffordAlgebra.lean` | `NecSuf/CliffordAlgebra/DefinitionAndUniversalProperty/CliffordAlgebra.lean` | `CliffordAlgebraFromNecSuf.lean` |
+| 分裂した二次空間のクリフォード代数の生成元 | `CliffordAlgebra/SplitQuadraticSpace/Generators.lean` | `NecSuf/CliffordAlgebra/SplitQuadraticSpace/Generators.lean` | `GeneratorsFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -157,3 +168,15 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - テンソル代数が K-代数であることには、乗法の交換法則（m_{k,l} を定めるためと、積のスカラー倍の行で 1 · λ を λ · 1 に替えるため）、
   0 + 0 = 0 と a · 0 = 0（零の境・デルタで一項を取り出す行・和のスカラー倍）、直和の加法の逆元を作る 1 + n = 0 となる n が要る。
 - F が線型写像であることのスカラー倍の行に要るのは、1 と λ が交換することだけである。
+
+## 必要十分版が示したこと（節「二次形式」、章「クリフォード代数」）
+
+- 偏極の対称性は加法の結合法則と交換法則だけを、偏極の等式はそれに a + (-a) = 0 と 0 + a = a を足しただけを使う（どちらも本文どおり任意の写像 q について成り立つ）。
+- q_W の偏極の値と q_W が二次形式であることには、W^* を線型空間にする性質のほかに a + (-a) = 0 だけが要る。
+- 章「クリフォード代数」のどの主張も、q が二次形式であることを使わない。必要十分版の前提の組は q を V から K への任意の写像とし、
+  「q は二次形式」の欄を持たない（普遍性の証明が q について使うのは、f(v)·f(v) = q(v) ∗ 1 という仮定と I_q の生成元の形だけである）。
+- クリフォード代数を作り、γ が線型であることと γ(V) が生成することを示すのに K に要るのは、T(V) を座標で作る性質（テンソル代数の節と同じ）、
+  乗法の交換法則（テンソルの積と、商代数のスカラー倍で n · λ = λ · n）、合同の四つの性質だけである。
+  a + (-a) = 0 は、γ(v)² の計算・反交換子・普遍性の存在の三つの主張だけが使う。
+- 分裂した二次空間の反交換関係と平方が零であることは、章の前半の仮定のほかに K の性質を足さない
+  （W^* を線型空間にする性質と、双対基底が基底であることに要る a · 1 = a は、どちらも章の前半の仮定から出る）。
