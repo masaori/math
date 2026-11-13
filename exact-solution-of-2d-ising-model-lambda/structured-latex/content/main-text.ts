@@ -50364,7 +50364,7 @@ const chapter_thermodynamic_limit = defineSection({
 &=N'\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
 &&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})\\
 &=N'\cdot(N\cdot\lambda)
-&&(\because\ N\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator})\\
 &=(N'N)\cdot\lambda
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=(NN')\cdot\lambda
@@ -50372,7 +50372,7 @@ const chapter_thermodynamic_limit = defineSection({
 &=N\cdot(N'\cdot\lambda)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=N\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_{N'})
-&&(\because\ N'\text{ は }\lambda\text{ の共通分母。}\blkref{def_common_denominator})\\
+&&(\because\ N'\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N\lambda_{N'})
 &&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
 \end{aligned}`),
@@ -89162,6 +89162,11 @@ f^{\mathrm{per}}(q)
                 habitat: "R",
                 realEscape: "実数の角と余弦。実閉部分体の元を実現写像で実数へ送り、角に関する分散式の最小値を取る。零点の同定は実閉部分体の代数と順序へ戻す。",
                 verification: ["sagemath/check/dispersion-minimum-self-dual-point"],
+                lean: [
+                  "Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point",
+                  "Ising2DLambda.NecSuf.RealEscape.dispersion_minimum_self_dual_point_necSuf",
+                  "Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "任意の ", math(String.raw`\xi\in R`), "（", ref("def_real_closed_subfield"),
@@ -89182,68 +89187,200 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_cut_realization_preserves_addition"), "、",
-                    ref("claim_cut_realization_preserves_multiplication"), "、",
-                    ref("claim_cut_realization_agrees_on_rationals"), "、",
-                    ref("claim_cut_realization_preserves_strict_order"),
-                    " により ", math(String.raw`0<r<1`), " である。従って ",
-                    math(String.raw`2r(1-r^2)>0`), "。実余弦の上界 ",
-                    math(String.raw`\cos\theta_j\le1`), " を用いると、任意の角について",
+                    "証明の中だけで使う記号を置く。", math(String.raw`s\in\overline{\mathbb Q}`),
+                    " は ", ref("def_critical_point"), " で ", math(String.raw`x_c=-1+s`),
+                    " を定めた ", math(String.raw`s\cdot s=2`), " の元とする。",
+                    math(String.raw`2:=1+1\in R`), " とし、",
+                  ]),
+                  displayMath(String.raw`p:=1-2\cdot\xi-\xi\cdot\xi\in R,\qquad c:=2r(1-r^2)\in\mathbb R`),
+                  paragraph([
+                    "と置く（", math(String.raw`p\in R`), " は ", ref("def_real_closed_subfield"),
+                    " の第 1 条件。部分体は四則で閉じる）。",
+                    "以下の五つの事実を先に示す。",
+                  ]),
+                  paragraph([
+                    "第一の事実: ", math(String.raw`0<r<1`), "。",
+                    math(String.raw`0<_R\xi`), " と ", math(String.raw`\xi<_R1`), " から",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-B_\xi(\theta_1,\theta_2)-(1-2r-r^2)^2
-&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)-(1-2r-r^2)^2
-&&\bigl(\because\ B_\xi\text{ の定義}\bigr)\\
-&=2r(1-r^2)\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
+0
+&=\rho_{R\to\mathbb R}(0)
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }0\text{ に当てる}\bigr)\\
+&<\rho_{R\to\mathbb R}(\xi)
+&&\bigl(\because\ 0<_R\xi\text{ と }\blkref{claim_cut_realization_preserves_strict_order}\bigr)\\
+&=r
+&&\bigl(\because\ r\text{ の定義}\bigr),\\
+r
+&=\rho_{R\to\mathbb R}(\xi)
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&<\rho_{R\to\mathbb R}(1)
+&&\bigl(\because\ \xi<_R1\text{ と }\blkref{claim_cut_realization_preserves_strict_order}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる}\bigr).
+\end{aligned}`),
+                  paragraph(["第二の事実: ", math(String.raw`c>0`), "。"]),
+                  displayMath(String.raw`\begin{aligned}
+c
+&=2r(1-r^2)
+&&\bigl(\because\ c\text{ の定義}\bigr)\\
+&=2\cdot r\cdot\bigl((1-r)(1+r)\bigr)
 &&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
-&\ge0
-&&\bigl(\because\ 2r(1-r^2)>0\text{ と余弦の上界}\bigr).
+&>0
+&&\bigl(\because\ \text{第一の事実から }0<r\text{、}0<1-r\text{、}0<1+r\text{。正の実数の積は正}\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`\cos0=1`), " なので角 ", math(String.raw`(0,0)`),
-                    " で等号が成り立ち、これが最小値である。実現写像の単射性と四則保存から",
+                    "第三の事実: ", math(String.raw`\rho_{R\to\mathbb R}(p)=1-2r-r^2`), "。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(p)
+&=\rho_{R\to\mathbb R}(p)+(2r+r\cdot r)-(2r+r\cdot r)
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)\\
+&=\rho_{R\to\mathbb R}(p)+\bigl(\rho_{R\to\mathbb R}(2)\rho_{R\to\mathbb R}(\xi)+\rho_{R\to\mathbb R}(\xi)\rho_{R\to\mathbb R}(\xi)\bigr)-(2r+r\cdot r)
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }2\text{ に当てる、}r\text{ の定義}\bigr)\\
+&=\rho_{R\to\mathbb R}(p)+\bigl(\rho_{R\to\mathbb R}(2\cdot\xi)+\rho_{R\to\mathbb R}(\xi\cdot\xi)\bigr)-(2r+r\cdot r)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=\rho_{R\to\mathbb R}(p)+\rho_{R\to\mathbb R}(2\cdot\xi+\xi\cdot\xi)-(2r+r\cdot r)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\rho_{R\to\mathbb R}\bigl(p+(2\cdot\xi+\xi\cdot\xi)\bigr)-(2r+r\cdot r)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\rho_{R\to\mathbb R}(1)-(2r+r\cdot r)
+&&\bigl(\because\ p\text{ の定義と }R\text{ の四則}\bigr)\\
+&=1-2r-r^2
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる、}\mathbb R\text{ の四則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "第四の事実: ", math(String.raw`s\in R`), "、", math(String.raw`s\ne0`), "、",
+                    math(String.raw`-1-s<_R0`), "。", ref("claim_critical_point_mem_real_closed"),
+                    " により ", math(String.raw`s\in R`), " である。", math(String.raw`s=0`),
+                    " と仮定すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+2
+&=s\cdot s
+&&\bigl(\because\ s\text{ の取り方}\bigr)\\
+&=0\cdot0
+&&\bigl(\because\ s=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元の積}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり、", math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`), " で ",
+                    math(String.raw`2\ne0`), " であることに反する。従って ", math(String.raw`s\ne0`),
+                    " である。", ref("claim_critical_point_positive"), " と ",
+                    ref("def_real_algebraic_strict_order"), " により、零でない ",
+                    math(String.raw`w\in R`), " が存在して ", math(String.raw`x_c-0=w\cdot w`),
+                    " である。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(-2)-(-1-s)
+&=-1+s
+&&\bigl(\because\ R\text{ の四則}\bigr)\\
+&=x_c
+&&\bigl(\because\ \blkref{def_critical_point}\bigr)\\
+&=x_c-0
+&&\bigl(\because\ R\text{ の零元}\bigr)\\
+&=w\cdot w
+&&\bigl(\because\ w\text{ の取り方}\bigr),\\
+0-(-2)
+&=2
+&&\bigl(\because\ R\text{ の四則}\bigr)\\
+&=s\cdot s
+&&\bigl(\because\ s\text{ の取り方}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "であり、", math(String.raw`w\ne0`), "、", math(String.raw`s\ne0`), " なので ",
+                    ref("def_real_algebraic_strict_order"), " により ",
+                    math(String.raw`-1-s<_R-2`), " かつ ", math(String.raw`-2<_R0`), " である。",
+                    ref("claim_real_algebraic_order_transitive"), " により ",
+                    math(String.raw`-1-s<_R0`), " である。",
+                  ]),
+                  paragraph([
+                    "第五の事実: ", math(String.raw`\xi\ne-1-s`), "。", math(String.raw`\xi=-1-s`),
+                    " と仮定すると、第四の事実から ", math(String.raw`\xi<_R0`), " であり、",
+                    math(String.raw`0<_R\xi`), " と ", ref("claim_real_algebraic_order_transitive"),
+                    " により ", math(String.raw`0<_R0`), " である。", ref("def_real_algebraic_strict_order"),
+                    " により、零でない ", math(String.raw`v\in R`), " が存在して",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+v\cdot v
+&=0-0
+&&\bigl(\because\ v\text{ の取り方}\bigr)\\
+&=0
+&&\bigl(\because\ R\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。", ref("claim_qbar_no_zero_divisors"), " により ", math(String.raw`v=0`),
+                    " となり、", math(String.raw`v\ne0`), " に反する。",
+                  ]),
+                  paragraph(["最小値を求める。任意の角 ", math(String.raw`(\theta_1,\theta_2)\in[0,2\pi]^2`), " について"]),
+                  displayMath(String.raw`\begin{aligned}
+B_\xi(\theta_1,\theta_2)-(1-2r-r^2)^2
+&=(1+r^2)^2-c(\cos\theta_1+\cos\theta_2)-(1-2r-r^2)^2
+&&\bigl(\because\ B_\xi\text{ と }c\text{ の定義}\bigr)\\
+&=\bigl((1+r^2)-(1-2r-r^2)\bigr)\bigl((1+r^2)+(1-2r-r^2)\bigr)-c(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ \mathbb R\text{ の平方の差の展開}\bigr)\\
+&=(2r+2r^2)(2-2r)-c(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)\\
+&=4r(1-r^2)-c(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
+&=c\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
+&&\bigl(\because\ c\text{ の定義と }\mathbb R\text{ の分配則}\bigr)\\
+&\ge0
+&&\bigl(\because\ \text{第二の事実と実余弦の上界 }\cos\theta_j\le1\bigr)
+\end{aligned}`),
+                  paragraph(["であり、角 ", math(String.raw`(0,0)\in[0,2\pi]^2`), " では"]),
+                  displayMath(String.raw`\begin{aligned}
+B_\xi(0,0)
+&=\bigl(B_\xi(0,0)-(1-2r-r^2)^2\bigr)+(1-2r-r^2)^2
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)\\
+&=c\bigl((1-\cos0)+(1-\cos0)\bigr)+(1-2r-r^2)^2
+&&\bigl(\because\ \text{上の式変形の第五行までを }(\theta_1,\theta_2)=(0,0)\text{ に当てる}\bigr)\\
+&=c\bigl((1-1)+(1-1)\bigr)+(1-2r-r^2)^2
+&&\bigl(\because\ \cos0=1\bigr)\\
+&=(1-2r-r^2)^2
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。前者により ", math(String.raw`(1-2r-r^2)^2`), " は ",
+                    math(String.raw`[0,2\pi]^2`), " 上の ", math(String.raw`B_\xi`),
+                    " の値の下界であり、後者によりその値は角 ", math(String.raw`(0,0)`),
+                    " で達成される。従って最小値が存在して ", math(String.raw`(1-2r-r^2)^2`),
+                    " に等しい。",
+                  ]),
+                  paragraph(["最小値の零条件を求める。"]),
                   displayMath(String.raw`\begin{aligned}
 (1-2r-r^2)^2=0
 &\iff 1-2r-r^2=0
 &&\bigl(\because\ \mathbb R\text{ は零因子を持たない}\bigr)\\
-&\iff 1-2\xi-\xi^2=0
-&&\bigl(\because\ \rho_{R\to\mathbb R}\text{ の単射性と四則保存}\bigr)\\
-&\iff \xi^2+2\xi-1=0
-&&\bigl(\because\ R\text{ の加法の逆元}\bigr).
+&\iff \rho_{R\to\mathbb R}(p)=\rho_{R\to\mathbb R}(0)
+&&\bigl(\because\ \text{第三の事実と、}\blkref{claim_cut_realization_agrees_on_rationals}\text{ による }\rho_{R\to\mathbb R}(0)=0\bigr)\\
+&\iff p=0
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_strict_order}\text{ の単射性}\bigr)\\
+&\iff \xi\cdot\xi+2\cdot\xi-1=0
+&&\bigl(\because\ \xi\cdot\xi+2\cdot\xi-1=-p\text{（}R\text{ の四則）}\bigr)\\
+&\iff \bigl(\xi=-1+s\ \text{または}\ \xi=-1-s\bigr)
+&&\bigl(\because\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&\iff \xi=-1+s
+&&\bigl(\because\ \text{第五の事実}\bigr)\\
+&\iff \xi=x_c
+&&\bigl(\because\ \blkref{def_critical_point}\bigr).
 \end{aligned}`),
-                  paragraph([
-                    "後者の方程式の根は ", ref("claim_self_dual_quadratic_roots"),
-                    " により ", math(String.raw`-1+s`), " と ", math(String.raw`-1-s`),
-                    " である。", ref("def_critical_point"), " により ",
-                    math(String.raw`x_c=-1+s`), " であり、",
-                    ref("claim_critical_point_positive"), " から ", math(String.raw`0<_Rx_c`),
-                    " である。もう一つの根は",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
--1-s
-&=-1-(1+x_c)
-&&\bigl(\because\ s=1+x_c\text{ と }\blkref{def_critical_point}\bigr)\\
-&=-2-x_c
-&&\bigl(\because\ R\text{ の四則}\bigr)\\
-&<_R0
-&&\bigl(\because\ 0<_Rx_c\text{ と }-2<_R0\bigr).
-\end{aligned}`),
-                  paragraph([
-                    "従って ", math(String.raw`0<_R\xi`), " の下では ",
-                    math(String.raw`\xi=x_c`), " に限る。逆向きは ",
-                    ref("def_critical_point"), " の二次方程式から従う。さらに",
-                  ]),
+                  paragraph(["最後に ", math(String.raw`\xi=x_c`), " の点での双対性を示す。"]),
                   displayMath(String.raw`\begin{aligned}
 1+x_c
+&=1+(-1+s)
+&&\bigl(\because\ \blkref{def_critical_point}\bigr)\\
 &=s
-&&\bigl(\because\ x_c=-1+s\text{ と }\blkref{def_critical_point}\bigr)\\
+&&\bigl(\because\ R\text{ の四則}\bigr)\\
 &\ne0
-&&\bigl(\because\ s=1+x_c>_R0\text{ と }\blkref{claim_critical_point_positive}\bigr).
+&&\bigl(\because\ \text{第四の事実}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "よって ", ref("claim_kw_self_dual_quadratic_equivalence"),
-                    " を ", math(String.raw`\xi=x_c`), " に適用でき、",
+                    "であり、", ref("claim_self_dual_quadratic_roots"), " を ",
+                    math(String.raw`\xi:=x_c=-1+s`), " に当てると ",
+                    math(String.raw`x_c\cdot x_c+2\cdot x_c-1=0`), " である。",
+                    ref("claim_kw_self_dual_quadratic_equivalence"), " を ",
+                    math(String.raw`\xi:=x_c`), " に当てて ",
                     math(String.raw`\mathrm{KW}(x_c)=x_c`), " を得る。",
                   ]),
                 ],

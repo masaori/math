@@ -52,6 +52,9 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point
+  Ising2DLambda.NecSuf.RealEscape.dispersion_minimum_self_dual_point_necSuf
+  Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_from_necSuf
   Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_has_departure
   Ising2DLambda.NecSuf.KacWard.boundary_vertices_covered
   Ising2DLambda.KacWard.crossing_free_contact_split_children
