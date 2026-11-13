@@ -3930,68 +3930,7 @@ c_y
       paragraph([
         "Step 3: ",
         math(String.raw`Z_m,Y_m`),
-        " のクロネッカー積による表示。まず ",
-        math(String.raw`r\in\{1,\dots,M_{\mathrm{col}}\}`),
-        " と ",
-        math(String.raw`a_1,\dots,a_r\in\{x,y,z\}`),
-        " を取り、",
-        ref("site_pauli_prefix_product_kronecker_form"),
-        " の左辺の積 ",
-        math(String.raw`\sigma_1^{a_1}\cdots\sigma_r^{a_r}`),
-        "、すなわち ",
-        math(String.raw`P_1 := \sigma_1^{a_1}`),
-        "、",
-        math(String.raw`P_{s+1} := P_s\,\sigma_{s+1}^{a_{s+1}}`),
-        "（",
-        math(String.raw`1\le s<r`),
-        "）で定めた ",
-        math(String.raw`P_r`),
-        " を、",
-        ref("def_finite_product_of_matrices"),
-        " の有限積（",
-        math(String.raw`n\to 2^{M_{\mathrm{col}}},\ A_j\to\sigma_j^{a_j}`),
-        "）と結ぶ。",
-        math(String.raw`s\in\{1,\dots,r\}`),
-        " について ",
-        math(String.raw`\prod_{j=1}^{s}\sigma_j^{a_j} = P_s`),
-        " を ",
-        math(String.raw`s`),
-        " についての帰納法で示す。",
-        math(String.raw`s=1`),
-        " のとき",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\prod_{j=1}^{1}\sigma_j^{a_j}
-&= \sigma_1^{a_1}
-&&(\because\ \blkref{def_finite_product_of_matrices}\ (r\to 1,\ A_j\to\sigma_j^{a_j}))\\
-&= P_1
-&&(\because\ P_1\ \text{の定義を右辺から左辺へ})
-\end{aligned}`),
-      paragraph([
-        math(String.raw`s<r`),
-        " で成り立つとすると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\prod_{j=1}^{s+1}\sigma_j^{a_j}
-&= \Bigl(\prod_{j=1}^{s}\sigma_j^{a_j}\Bigr)\,\sigma_{s+1}^{a_{s+1}}
-&&(\because\ \blkref{def_finite_product_of_matrices}\ (r\to s,\ A_j\to\sigma_j^{a_j}))\\
-&= P_s\,\sigma_{s+1}^{a_{s+1}}
-&&(\because\ \text{帰納法の仮定})\\
-&= P_{s+1}
-&&(\because\ P_{s+1}\ \text{の定義を右辺から左辺へ})
-\end{aligned}`),
-      paragraph([
-        math(String.raw`s=r`),
-        " として ",
-        math(String.raw`\prod_{j=1}^{r}\sigma_j^{a_j} = \sigma_1^{a_1}\cdots\sigma_r^{a_r}`),
-        " である（右辺は ",
-        ref("site_pauli_prefix_product_kronecker_form"),
-        " の左辺の積 ",
-        math(String.raw`P_r`),
-        "）。これを (h) と呼ぶ。",
-      ]),
-      paragraph([
-        "次に ",
+        " のクロネッカー積による表示。",
         math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}\}`),
         " を固定し、",
         math(String.raw`j\in\{1,\dots,m\}`),
@@ -4063,8 +4002,6 @@ Z_m
 &&(\because\ \blkref{def_jordan_wigner_Z_matrices})\\
 &= \prod_{j=1}^{m}\sigma_j^{a_j^{(z)}}
 &&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
-&= \sigma_1^{a_1^{(z)}}\cdots\sigma_m^{a_m^{(z)}}
-&&(\because\ \text{(h)}\ (r\to m,\ a_j\to a_j^{(z)}))\\
 &= \sigma^{a_1^{(z)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(z)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
 &&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r\to m,\ a_j\to a_j^{(z)}))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
@@ -4078,8 +4015,6 @@ Y_m
 &&(\because\ \blkref{def_jordan_wigner_Y_matrices})\\
 &= \prod_{j=1}^{m}\sigma_j^{a_j^{(y)}}
 &&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
-&= \sigma_1^{a_1^{(y)}}\cdots\sigma_m^{a_m^{(y)}}
-&&(\because\ \text{(h)}\ (r\to m,\ a_j\to a_j^{(y)}))\\
 &= \sigma^{a_1^{(y)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(y)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
 &&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r\to m,\ a_j\to a_j^{(y)}))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
@@ -4516,6 +4451,7 @@ p
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: site_pauli_prefix_product_kronecker_form の左辺を def_finite_product_of_matrices の有限積 Π_{j=1}^{r}σ_j^{a_j} に述べ直したので、Step 3 で Π_{j=1}^{s}σ_j^{a_j} をその主張の左辺の積 P_s へ読み替えていた (h) の帰納法を外し、Z_m・Y_m の鎖を 4 行（定義 → (k) → site_pauli_prefix_product_kronecker_form → a_j^{(z)}・a_j^{(y)} の定義）にした。表示の式と Step 4 以降は不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 1 の係数が零になる鎖は Z_Y_generate_algebra の証明の中の準備 (a)・(c)・(d)・(e)・(g) を引いており、ラベルのあるブロックでないので blkref で引けなかった。(a)・(g) は主張 twice_times_inverse_of_two_is_original_in_cc・negative_i_times_i_is_one_in_cc（と (g) が使う i_times_i_is_minus_one_in_cc）として計算公式の章に足して引き、(d)・(e) は既存の主張 sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc を引いた。(c) z+(-z)=0_ℂ は z → 0_ℂ で当てる 2 か所だけなので、加法の可換律と既存の主張 negation_plus_self_is_zero_in_cc の 2 行にした。係数と鎖の両端は不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 3 は site_pauli_prefix_product_kronecker_form と同じ帰納法を証明の中で繰り返しており、その行が一ステップ一定理とラベル参照を満たしていなかった（帰納法の段の 1 行目が def_site_pauli_matrices で右の因子を開く操作を兼ね、2 行目に kronecker_product_rule (1) の参照が無く、3 行目が右単位・左単位を名前なしで同じ行に使い、r = 1 は def_transfer_matrix_symbols を引いていた）。帰納法を外して site_pauli_prefix_product_kronecker_form を引く形にした。def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の def_finite_product_of_matrices の積 Π_{j=1}^{m}F_j を主張の左辺の積 P_m へ読み替える段として、(h) Π_{j=1}^{s}σ_j^{a_j} = P_s の帰納法（def_finite_product_of_matrices と P_1・P_{s+1} の定義）と、a_j^{(z)}・a_j^{(y)} を置いた (k) F_j = σ_j^{a_j} を足し、Z_m・Y_m の表示をそれぞれ 5 行の鎖にした（m = 1 の場合分けは不要になった）。Z_m・Y_m の表示の式は不変。数値検証: sagemath/check/163_Z_Y_linearly_independent/check_04_step3_kronecker_form.sage。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 6 は「左辺は基底 𝓔 の相異なる元の線型結合で、基底による表示は一意」と日本語で済ませていたので、係数の族 d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)} を置き、Σ_q d_qF_q を scalar_sum_distributes_over_matrix・finite_sum_of_scalar_multiples_of_one_matrix・scalar_multiple_is_associative・finite_sum_of_matrix_sums・finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term・def_kronecker_delta・scalar_multiple_by_one の鎖で仮定の左辺 O に戻し、α_{m_0}・β_{m_0} を d_{q_Z(m_0)}・d_{q_Y(m_0)} に finite_sum_with_single_nonzero_term で戻す形にした（準備 (t)・(u)・(v)）。部分集合の上の和を使わないので、本文で定まっていない有限和の添字の付け方に依らない。これに合わせ、Step 2 を「𝓔 は基底（tensor_basis (2)）」から「族 (F_q) は線型独立（kronecker_family_of_independent_family_is_independent に Step 1 の線型独立性を渡す）」に替え（張ることは使わない）、Step 4 に q_Z(m) := π^{-1}(ζ(m))・q_Y(m) := π^{-1}(η(m)) と F_{q_Z(m)} = Z_m・F_{q_Y(m)} = Y_m の鎖（「Step 3 の表示は多重添字に対応することを意味する」の文を、ζ(m)・η(m) と e_a の定義を一行ずつ使う行に替えた）を、Step 5 に π^{-1} が単射であることと q_Z・q_Y の値が相異なることを足した（写像の名前は、Step 1 の複素数 z や σ^y・σ^z と衝突しないよう q_Z・q_Y にした）。Step 1 は 𝓑 が張ること（Z_Y_generate_algebra の Step 3 前半）と「基底である」の結びがこの証明のどこからも使われなくなったので外し、𝓑 を集合でなく族として置いて線型独立性だけを示す形にした。主張の 0 を零行列 O（def_zero_matrix）と 0_C に書き分け、「ℂ-線型空間とみなすとき」の句と集合の括弧を外して族の線型独立性として述べた（主張の中身は不変）。数値検証: sagemath/check/163_Z_Y_linearly_independent/check_03_step6_delta_coefficients.sage。",

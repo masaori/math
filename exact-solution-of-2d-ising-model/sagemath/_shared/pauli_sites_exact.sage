@@ -67,7 +67,7 @@ def site(M, k, a):
 
 
 def prefix_product(M, a_list):
-    """σ_1^{a_1}σ_2^{a_2}⋯σ_r^{a_r} を左から掛けたもの（P_1 := σ_1^{a_1}、P_{s+1} := P_s σ_{s+1}^{a_{s+1}}）。"""
+    """Π_{j=1}^{r}σ_j^{a_j}（def_finite_product_of_matrices: Π^1 := σ_1^{a_1}、Π^{s+1} := (Π^s)σ_{s+1}^{a_{s+1}}。左から掛ける）。"""
     P = site(M, 1, a_list[0])
     for s in range(2, len(a_list) + 1):
         P = body_product(P, site(M, s, a_list[s - 1]))

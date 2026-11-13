@@ -7,17 +7,17 @@
 
 具体版の `Mat(2,ℂ)`（各サイトの行列）を `R`、`Mat(2^{M_col},ℂ)` を `S`、クロネッカー積 `siteProd M` を
 `Φ : (Fin M → R) → S` に置き換える。`σ_k^{a}` は `Φ (Function.update 1 k a)`（`siteOpOf Φ k a`）である。
-節 `| s + 1` の Lean の変数 `s` は人手の `s - 1` で、段のコメントの `P_{s+1}`・「第 `s+2` 以降」などの `s` は人手の `s` である（具体版と同じ）。
+節 `| s + 1` の Lean の変数 `s` は人手の `s - 1` で、段のコメントの「第 `s+2` 以降」などの `s` は人手の `s` である（具体版と同じ）。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `s = 1` の 2 行（`P_1` の定義、`def_site_pauli_matrices` の `k = 1`） | `prefix_product_eq_map_prefixFamily` の `0` の節（同じ並び） |
-| `s → s + 1` の 6 行（`P_{s+1}` の定義、帰納法の仮定、`kronecker_product_rule` (1)、右の単位元、左の単位元 2 回） | 同じく `s + 1` の節（同じ並び。`kronecker_product_rule` (1) は仮定 `hΦ`） |
+| `s = 1` の 2 行（`def_finite_product_of_matrices` の第 1 式、`def_site_pauli_matrices` の `k = 1`） | `prefix_product_eq_map_prefixFamily` の `0` の節（同じ並び） |
+| `s → s + 1` の 6 行（`def_finite_product_of_matrices` の第 2 式（`r → s`）、帰納法の仮定、`kronecker_product_rule` (1)、右の単位元、左の単位元 2 回） | 同じく `s + 1` の節（同じ並び。`kronecker_product_rule` (1) は仮定 `hΦ`） |
 
 ## 何が効いているか / 効いていないか
 
 - **`Φ` が積を保つこと**（仮定 `hΦ`。具体版の `kronecker_product_rule` (1)）。`Φ` が単位元を保つことは使わない
-  （人手の帰納法は `P_1 := σ_1^{a_1}` から始まり、空の積を通らない）。
+  （人手の帰納法は `Π_{j=1}^{1}σ_j^{a_j} = σ_1^{a_1}` から始まり、空の積を通らない）。
 - **`R` の `x * 1 = x`（`x = a_j`）と `1 * x = x`（`x = a_{s+1}` と `x = 1`）**（`MulOneClass R`）。
   具体版の `identity_matrix_is_right_unit_of_mat_mult`・`identity_matrix_is_left_unit_of_mat_mult` である。
   `1 * 1 = 1` は `1 * x = x` の `x = 1` で、どちらかの単位元の法則が無いと右辺の因子の並びに `a_j * 1` や `1 * 1` が残る。
@@ -56,7 +56,7 @@ theorem prefix_product_eq_map_prefixFamily (Φ : (Fin M → R) → S)
       finProdLeft r (siteFamilyOf Φ r h a) = Φ (prefixFamily r a)
   | 0, h, a =>
     calc finProdLeft 0 (siteFamilyOf Φ 0 h a)
-        = siteOpOf Φ (⟨0, h⟩ : Fin M) (a 0) := finProdLeft_zero _      -- `P_1` の定義
+        = siteOpOf Φ (⟨0, h⟩ : Fin M) (a 0) := finProdLeft_zero _      -- `def_finite_product_of_matrices` の第 1 式
       _ = Φ (prefixFamily 0 a) := by
           -- サイト `1` だけに `a_1` を置いた並び
           rw [siteOpOf]
@@ -76,7 +76,7 @@ theorem prefix_product_eq_map_prefixFamily (Φ : (Fin M → R) → S)
     calc finProdLeft (s + 1) (siteFamilyOf Φ (s + 1) h a)
         = finProdLeft s (siteFamilyOf Φ s hs (fun j => a (Fin.castSucc j)))
             * siteOpOf Φ (⟨s + 1, h⟩ : Fin M) (a (Fin.last (s + 1))) := finProdLeft_succ s _
-                                                        -- `P_{s+1}` の定義
+                                                        -- `def_finite_product_of_matrices` の第 2 式（`r → s`）
       _ = Φ (prefixFamily s (fun j => a (Fin.castSucc j)))
             * Φ (Function.update (1 : Fin M → R) ⟨s + 1, h⟩ (a (Fin.last (s + 1)))) := by
           rw [ih, siteOpOf]                             -- 帰納法の仮定とサイト `s+1` の元

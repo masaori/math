@@ -198,20 +198,18 @@ export default defineBlocks([
         ref("def_kronecker"),
         " のクロネッカー積 ",
         math(String.raw`\boxtimes`),
-        " を用いる。積 ",
-        math(String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}`),
-        " は左から順に掛けたもの、すなわち ",
-        math(String.raw`P_1 := \sigma_1^{a_1}`),
         "、",
-        math(String.raw`P_{s+1} := P_s\,\sigma_{s+1}^{a_{s+1}}`),
-        "（",
-        math(String.raw`1 \leq s < r`),
-        "）で定めた ",
-        math(String.raw`P_r`),
-        " とする。このとき",
+        ref("def_finite_product_of_matrices"),
+        " の有限積（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A_j \to \sigma_j^{a_j}`),
+        "）を用いる。因子をサイト番号の昇順に並べて書いた積 ",
+        math(String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}`),
+        " は、この有限積 ",
+        math(String.raw`\prod_{j=1}^{r}\sigma_j^{a_j}`),
+        "（左から順に掛ける）を表す。このとき",
       ]),
       displayMath(
-        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
+        String.raw`\prod_{j=1}^{r}\sigma_j^{a_j}
 = \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-r}`,
       ),
       paragraph([
@@ -226,7 +224,7 @@ export default defineBlocks([
       paragraph([
         math(String.raw`s \in \{1,\dots,r\}`),
         " について ",
-        math(String.raw`P_s = \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes I\boxtimes\cdots\boxtimes I`),
+        math(String.raw`\prod_{j=1}^{s}\sigma_j^{a_j} = \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes I\boxtimes\cdots\boxtimes I`),
         "（",
         math(String.raw`I`),
         " は ",
@@ -240,9 +238,9 @@ export default defineBlocks([
         " のとき、",
       ]),
       displayMath(String.raw`\begin{aligned}
-P_1
+\prod_{j=1}^{1}\sigma_j^{a_j}
 &= \sigma_1^{a_1}
-&&(\because\ P_1\ \text{の定義})\\
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{の第 1 式}\ (A_j \to \sigma_j^{a_j}))\\
 &= \sigma^{a_1}\boxtimes I\boxtimes\cdots\boxtimes I
 &&(\because\ \blkref{def_site_pauli_matrices}\ \text{の}\ k = 1)
 \end{aligned}`),
@@ -251,9 +249,9 @@ P_1
         " で成り立つとすると、",
       ]),
       displayMath(String.raw`\begin{aligned}
-P_{s+1}
-&= P_s\,\sigma_{s+1}^{a_{s+1}}
-&&(\because\ P_{s+1}\ \text{の定義})\\
+\prod_{j=1}^{s+1}\sigma_j^{a_j}
+&= \Bigl(\prod_{j=1}^{s}\sigma_j^{a_j}\Bigr)\,\sigma_{s+1}^{a_{s+1}}
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{の第 2 式}\ (r \to s,\ A_j \to \sigma_j^{a_j}))\\
 &= \Bigl(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes\overbrace{I}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
    \Bigl(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{s+1}}}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
 &&(\because\ \text{帰納法の仮定と}\ \blkref{def_site_pauli_matrices}\ \text{の}\ k = s+1)\\
@@ -271,6 +269,7 @@ P_{s+1}
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が ε・Z_m・Y_m のクロネッカー積表示を根拠なしで使っていたので、V1_in_Z_Y_epsilon の証明 Step 1 の帰納法を主張として切り出した。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 左辺を、P_1 := σ_1^{a_1}・P_{s+1} := P_sσ_{s+1}^{a_{s+1}} で定めた積 σ_1^{a_1}⋯σ_r^{a_r} から、def_finite_product_of_matrices の有限積 Π_{j=1}^{r}σ_j^{a_j} に述べ直した（二つは同じ漸化式で定まる同じ行列）。帰納法の段の P_1・P_{s+1} の定義の行は def_finite_product_of_matrices の第 1 式・第 2 式の行になった。並べて書いた積 σ_1^{a_1}⋯σ_r^{a_r} がこの有限積を表すことを主張の文に書いた（この主張を並べて書いた形から当てる箇所のため）。右辺と証明の残りの行は不変。",
       ],
     },
   },

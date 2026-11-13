@@ -16,14 +16,14 @@
 * 人手の `r ∈ {1, …, M_col}` は Lean の `r + 1`（`r < M`）、人手の `a_1, …, a_r` は Lean の `a : Fin (r + 1) → Mat(2,ℂ)` で、人手の `a_j` が Lean の `a (j - 1)` である。
   人手は `a_j ∈ {x, y, z}` の `σ^{a_j}` で述べるが、証明は Pauli 行列の性質を使わない（各サイトの行列について使うのは、単位行列が左右の単位元であることだけ）ので、
   Lean は `σ^{a_j}` を一般の `a j ∈ Mat(2,ℂ)` で述べる（`siteOp_mul_same`・`siteOp_mul_comm` と同じ扱い）。
-* 人手の左辺の積 `σ_1^{a_1}⋯σ_r^{a_r}`（`P_1 := σ_1^{a_1}`・`P_{s+1} := P_sσ_{s+1}^{a_{s+1}}`）は、`def_finite_product_of_matrices` の
-  左から掛ける積そのものなので、Lean は具体版 `finiteMatrixProduct`（`ι := Conf M`）に因子 `sitePauliFamily r h a`（`σ_1^{a_1}, …, σ_{r+1}^{a_{r+1}}`）を入れて書く。
-  人手の `P_s` は Lean の `finiteMatrixProduct (s - 1) (sitePauliFamily (s - 1) _ (a の先頭 s 個))` で、`P_1`・`P_{s+1}` の定義は
-  `finiteMatrixProduct_zero`・`finiteMatrixProduct_succ` である。
+* 人手の左辺 `Π_{j=1}^{r}σ_j^{a_j}`（`def_finite_product_of_matrices` の有限積、`A_j → σ_j^{a_j}`）は、Lean の具体版 `finiteMatrixProduct`（`ι := Conf M`）に
+  因子 `sitePauliFamily r h a`（`σ_1^{a_1}, …, σ_{r+1}^{a_{r+1}}`）を入れたものである。
+  人手の `Π_{j=1}^{s}σ_j^{a_j}` は Lean の `finiteMatrixProduct (s - 1) (sitePauliFamily (s - 1) _ (a の先頭 s 個))` で、
+  `def_finite_product_of_matrices` の第 1 式の行と第 2 式（`r → s`）の行は `finiteMatrixProduct_zero`・`finiteMatrixProduct_succ` である。
 * 人手の右辺 `σ^{a_1}⊠⋯⊠σ^{a_r}⊠I⊠⋯⊠I` は `siteProd M (prefixKroneckerFamily r a)`（第 `i` 因子は `i < r + 1` なら `a i`、それ以外は `I`）。
-* 人手の `s` の帰納法は、Lean の `r` の帰納法（因子 `a` を一般にしたまま。`a` の先頭の `s` 個が人手の `P_s` の因子）である。
+* 人手の `s` の帰納法は、Lean の `r` の帰納法（因子 `a` を一般にしたまま。`a` の先頭の `s` 個が人手の `Π_{j=1}^{s}σ_j^{a_j}` の因子）である。
   `s = 1` の 2 行の鎖と、`s → s + 1` の 6 行の鎖は、`site_pauli_prefix_product_kronecker_form` の 2 つの節の `calc` と 1 段ずつ対応する。
-  節 `| s + 1` の Lean の変数 `s` は人手の `s - 1` である。段のコメントの `P_{s+1}`・`k = s+1`・「第 `s+2` 以降」などの `s` は人手の `s` で書く。
+  節 `| s + 1` の Lean の変数 `s` は人手の `s - 1` である。段のコメントの `k = s+1`・「第 `s+2` 以降」などの `s` は人手の `s` で書く。
   3 行目（`kronecker_product_rule` (1)）は `siteProd_mul` を右辺から左辺へ使い、因子の並びを人手の行と同じ形に書く。
   4 行目（第 1 から第 `s` 因子へ同時に適用）は因子ごとの場合分けの中で `mul_identity_matrix` を当てる。5・6 行目は `identity_matrix_mul` の `rw` 一回で
   該当する因子を全て書き換え、6 行目の場合分けは因子の並びを `prefixKroneckerFamily (s + 1) a` の形へ読み替えるだけである。
@@ -50,7 +50,7 @@ noncomputable def sitePauliFamily (r : ℕ) (h : r < M) (a : Fin (r + 1) → Mat
   fun j => siteOp ⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) h⟩ (a j)
 
 /-- **人手 `site_pauli_prefix_product_kronecker_form`**:
-`σ_1^{a_1}σ_2^{a_2}⋯σ_r^{a_r} = σ^{a_1}⊠⋯⊠σ^{a_r}⊠I⊠⋯⊠I`（人手の `r` は Lean の `r + 1`）。
+`Π_{j=1}^{r}σ_j^{a_j} = σ^{a_1}⊠⋯⊠σ^{a_r}⊠I⊠⋯⊠I`（人手の `r` は Lean の `r + 1`）。
 `s = 1` の 2 行の鎖と、`s → s + 1` の 6 行の鎖と 1 段ずつの `calc`。 -/
 theorem site_pauli_prefix_product_kronecker_form :
     ∀ (r : ℕ) (h : r < M) (a : Fin (r + 1) → Matrix (Fin 2) (Fin 2) ℂ),
@@ -58,7 +58,7 @@ theorem site_pauli_prefix_product_kronecker_form :
   | 0, h, a =>
     calc finiteMatrixProduct 0 (sitePauliFamily 0 h a)
         = siteOp (⟨0, h⟩ : Fin M) (a 0) := finiteMatrixProduct_zero _
-                                                        -- `P_1` の定義
+                                                        -- `def_finite_product_of_matrices` の第 1 式
       _ = siteProd M (prefixKroneckerFamily 0 a) := by
           -- `def_site_pauli_matrices` の `k = 1`
           rw [siteOp_apply]
@@ -78,7 +78,7 @@ theorem site_pauli_prefix_product_kronecker_form :
     calc finiteMatrixProduct (s + 1) (sitePauliFamily (s + 1) h a)
         = finiteMatrixProduct s (sitePauliFamily s hs (fun j => a (Fin.castSucc j)))
             * siteOp (⟨s + 1, h⟩ : Fin M) (a (Fin.last (s + 1))) := finiteMatrixProduct_succ s _
-                                                        -- `P_{s+1}` の定義
+                                                        -- `def_finite_product_of_matrices` の第 2 式（`r → s`）
       _ = siteProd M (prefixKroneckerFamily s (fun j => a (Fin.castSucc j)))
             * siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) ⟨s + 1, h⟩ (a (Fin.last (s + 1)))) := by
           rw [ih, siteOp_apply]                         -- 帰納法の仮定と `def_site_pauli_matrices` の `k = s+1`
