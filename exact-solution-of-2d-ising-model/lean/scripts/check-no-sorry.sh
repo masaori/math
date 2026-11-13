@@ -345,6 +345,10 @@ targets=(
   Ising2D.pauliComb_eq_zero_coeffs
   Ising2D.pauliFamily_linearIndependent
   Ising2D.pauliFamily_spans_and_linearIndependent
+  Ising2D.pauliFamily_sum_eq_zero_coeffs
+  Ising2D.pauliKroneckerFamily_spans_and_independent
+  Ising2D.sum_zyCoeff_smul_pauliKroneckerFamily
+  Ising2D.zy_step6_coeffs_eq_zero
   Ising2D.expPhase_add
   Ising2D.expPhase_neg
   Ising2D.expPhase_natCast_mul
