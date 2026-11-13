@@ -131,6 +131,7 @@ theorem vertexSimpleWalk_incoming_direction_eq_boundary_left
     rw [← orientedEdgeLatticeStep_direction, hs]
     rw [← h1]
     simpa [row, col, unitStepDirection] using hd.symm
+
   · obtain ⟨hr, hc, hd⟩ := h
     have hs : orientedEdgeLatticeStep (γ j) = (-1, 0) := by
       rw [hstep]
@@ -152,5 +153,86 @@ theorem vertexSimpleWalk_incoming_direction_eq_boundary_left
     rw [← orientedEdgeLatticeStep_direction, hs]
     rw [← h1]
     simpa [row, col, unitStepDirection] using hd.symm
+
+/-- With interior on the right, the boundary outgoing direction at the endpoint
+is the reverse of the step direction. -/
+theorem vertexSimpleWalk_outgoing_direction_eq_boundary_right
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (hright : ∀ j : Fin (m + 1),
+      Classical.choose
+        (vertexSimpleWalk_step_interior_side γ hγ hh hv hdistinct j.val j.isLt) = false)
+    (j : Fin (m + 1)) :
+    directionNumber (γ j) + 2 =
+      cellBoundaryOutgoing (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+        (planeLift γ j.succ).1 (planeLift γ j.succ).2 := by
+  classical
+  let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+  let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
+  have h0 : Fin.ofNat (m + 2) j.val = j.castSucc := by
+    apply Fin.ext
+    simp
+  have h1 : Fin.ofNat (m + 2) (j.val + 1) = j.succ := by
+    apply Fin.ext
+    simp [Nat.mod_eq_of_lt (by omega : j.val + 1 < m + 2)]
+  have hstep : orientedEdgeLatticeStep (γ j) =
+      (row (j.val + 1) - row j.val, col (j.val + 1) - col j.val) := by
+    have hs := planeLift_succ γ j
+    rw [← h0, ← h1] at hs
+    apply Prod.ext
+    · have := congrArg Prod.fst hs
+      dsimp [row] at *
+      omega
+    · have := congrArg Prod.snd hs
+      dsimp [col] at *
+      omega
+  have hout := vertexSimpleWalk_incoming_direction_of_interior_right
+    γ hγ hh hv hdistinct hright j
+  change (row (j.val + 1) = row j.val + 1 ∧ col (j.val + 1) = col j.val ∧
+      cellBoundaryOutgoing _ (row (j.val + 1)) (col (j.val + 1)) = 3) ∨
+    (row (j.val + 1) = row j.val - 1 ∧ col (j.val + 1) = col j.val ∧
+      cellBoundaryOutgoing _ (row (j.val + 1)) (col (j.val + 1)) = 1) ∨
+    (row (j.val + 1) = row j.val ∧ col (j.val + 1) = col j.val + 1 ∧
+      cellBoundaryOutgoing _ (row (j.val + 1)) (col (j.val + 1)) = 2) ∨
+    (row (j.val + 1) = row j.val ∧ col (j.val + 1) = col j.val - 1 ∧
+      cellBoundaryOutgoing _ (row (j.val + 1)) (col (j.val + 1)) = 0) at hout
+  rcases hout with h | h | h | h
+  · obtain ⟨hr, hc, hd⟩ := h
+    have hs : orientedEdgeLatticeStep (γ j) = (1, 0) := by
+      rw [hstep]
+      simp [hr, hc]
+    rw [← orientedEdgeLatticeStep_direction, hs]
+    rw [← h1]
+    simpa [row, col, unitStepDirection] using
+      (show (1 : ZMod 4) + 2 = 3 by decide).trans hd.symm
+  · obtain ⟨hr, hc, hd⟩ := h
+    have hs : orientedEdgeLatticeStep (γ j) = (-1, 0) := by
+      rw [hstep]
+      simp [hr, hc]
+    rw [← orientedEdgeLatticeStep_direction, hs]
+    rw [← h1]
+    simpa [row, col, unitStepDirection] using
+      (show (3 : ZMod 4) + 2 = 1 by decide).trans hd.symm
+  · obtain ⟨hr, hc, hd⟩ := h
+    have hs : orientedEdgeLatticeStep (γ j) = (0, 1) := by
+      rw [hstep]
+      simp [hr, hc]
+    rw [← orientedEdgeLatticeStep_direction, hs]
+    rw [← h1]
+    simpa [row, col, unitStepDirection] using
+      (show (0 : ZMod 4) + 2 = 2 by decide).trans hd.symm
+  · obtain ⟨hr, hc, hd⟩ := h
+    have hs : orientedEdgeLatticeStep (γ j) = (0, -1) := by
+      rw [hstep]
+      simp [hr, hc]
+    rw [← orientedEdgeLatticeStep_direction, hs]
+    rw [← h1]
+    simpa [row, col, unitStepDirection] using
+      (show (2 : ZMod 4) + 2 = 0 by decide).trans hd.symm
 
 end Ising2DLambda.KacWard
