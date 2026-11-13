@@ -24,9 +24,8 @@
 
 抽象テンソル冪 `AbstractTensorPow M` 側の基底 `matTensorPowBasis` も、
 基底の移送 `NecSuf.basisOfLinearEquiv` で Kronecker 表現へ運べる
-（`kroneckerTensorPowBasis`）。同じ移送を `Mat(2,ℂ)` の任意の基底で行ったものが `<tensor_basis>` (2) の
-`kroneckerTensorPowBasisOf` である（`<Z_Y_generate_algebra>` は張ることだけを使うので、これではなく
-`ClaimKroneckerFamilyOfSpanningFamilySpans.lean` を引く）。
+（`kroneckerTensorPowBasis`）。`<tensor_basis>` (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族）は
+人手 Step 4 と 1 対 1 に `TheoremTensorBasisKroneckerFamilyOfBasis.lean` で示す。
 -/
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Representation
@@ -84,30 +83,6 @@ theorem kroneckerTensorPowBasis_apply (p : Fin M → Fin 2 × Fin 2) :
       = siteProd M (fun i => Matrix.single (p i).1 (p i).2 (1 : ℂ)) := by
   rw [kroneckerTensorPowBasis, NecSuf.basisOfLinearEquiv_apply]
   rw [matTensorPowBasis_apply]
-  exact tensorPowAlgEquiv_tprod M _
-
-/-! ## `<tensor_basis>` (2): `Mat(2, ℂ)` の任意の基底のクロネッカー積 -/
-
-/-- 人手 `<tensor_basis>` (2) のクロネッカー積の形: `Mat(2, ℂ)` の任意の ℂ-基底 `b`（添字 `ι`。
-人手の `𝓑 = {b_1, …, b_4}` では `ι = {1, 2, 3, 4}`）について、多重添字 `p = (a_1, …, a_M)` で
-添字づけた族 `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}` は `TensorPow M`（人手の `Mat(2^M, ℂ)`）の ℂ-基底である。
-
-抽象テンソル冪の基底 `tensorPowBasis M b` を `tensorPowAlgEquiv` で移したもので、
-移送に使う事実は `NecSuf.basisOfLinearEquiv` の 1 つだけである。`tensorPowBasis` は
-mathlib の `Basis.piTensorProduct` の特殊化で、人手 `<tensor_basis>` の Step 4
-（行列単位を `b` で展開し、`kronecker_multilinear` を因子ごとに当て、元数と次元の一致で基底とする）
-の 1 対 1 の形式化ではない。添字の型 `ι` を任意にしたのは、移送元の `tensorPowBasis` が任意の添字で述べられているためで、
-人手 (2) の `𝓑 = {b_1, …, b_4}` は `ι = Fin 4` に当たる。 -/
-noncomputable def kroneckerTensorPowBasisOf {ι : Type*} (b : Basis ι ℂ (Matrix (Fin 2) (Fin 2) ℂ)) :
-    Basis (Fin M → ι) ℂ (TensorPow M) :=
-  NecSuf.basisOfLinearEquiv (tensorPowBasis M b) (tensorPowAlgEquiv M).toLinearEquiv
-
-/-- 上の基底の元は、各サイトに `b_{a_i}` を載せた積 `siteProd`（人手の `b_{a_1} ⊠ ⋯ ⊠ b_{a_M}`）である。 -/
-@[simp]
-theorem kroneckerTensorPowBasisOf_apply {ι : Type*} (b : Basis ι ℂ (Matrix (Fin 2) (Fin 2) ℂ))
-    (p : Fin M → ι) :
-    kroneckerTensorPowBasisOf M b p = siteProd M (fun i => b (p i)) := by
-  rw [kroneckerTensorPowBasisOf, NecSuf.basisOfLinearEquiv_apply, tensorPowBasis_apply]
   exact tensorPowAlgEquiv_tprod M _
 
 end Ising2D

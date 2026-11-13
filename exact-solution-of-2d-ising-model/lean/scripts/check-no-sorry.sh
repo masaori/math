@@ -97,8 +97,6 @@ targets=(
   Ising2D.matrix_eq_sum_E
   Ising2D.kroneckerTensorPowBasis
   Ising2D.kroneckerTensorPowBasis_apply
-  Ising2D.kroneckerTensorPowBasisOf
-  Ising2D.kroneckerTensorPowBasisOf_apply
   Ising2D.linComb_mem_kroneckerFamilyCombinations
   Ising2D.siteProd_update_sum_smul
   Ising2D.siteProd_mem_kroneckerFamilyCombinations
@@ -124,6 +122,7 @@ targets=(
   Ising2D.independenceStatement_zero
   Ising2D.suffixLetterIndicator_eq
   Ising2D.kronecker_family_of_independent_family_is_independent
+  Ising2D.tensor_basis_kronecker_family_of_basis
   Ising2D.NecSuf.prefixProductOf_succ
   Ising2D.NecSuf.prefixProductOf_update_of_le
   Ising2D.NecSuf.suffixIndicatorOf_of_le
