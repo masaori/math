@@ -3548,16 +3548,15 @@ v^\top W_{\mathbb{R}}v
       paragraph([
         "以下、",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z\in\mathrm{Mat}(2,\mathbb{C})`),
-        " を標準的な Pauli 行列",
-      ]),
-      displayMath(
-        String.raw`\sigma^x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
-\sigma^y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
-\sigma^z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
-I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
-      ),
-      paragraph([
-        "とする（",
+        " は ",
+        ref("pauli_matrix_products"),
+        " で定めた二次の Pauli 行列、",
+        math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " は ",
+        ref("def_identity_matrix"),
+        " の単位行列（",
+        math(String.raw`n=2`),
+        "）である（",
         math(String.raw`i\in\mathbb{C}`),
         " は ",
         ref("def_imaginary_unit"),
@@ -4539,6 +4538,7 @@ p
         "記号の定義（labels: def_transfer_matrix_symbols）は sigma^x, sigma^y, sigma^z を" +
           "定義せずに sigma_k^x 等を導入している。本証明では標準的な Pauli 行列として明示した" +
           "（Z_Y_generate_algebra の証明も同じ扱いをしている）。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z と I を行列の式で定め直していたのをやめ、pauli_matrix_products の二次の Pauli 行列と def_identity_matrix の単位行列（n = 2）を引く形にした（上の記録の前提「def_transfer_matrix_symbols は sigma^x 等を定義せずに」は、pauli_matrix_products が定め、def_transfer_matrix_symbols がそれを引くようになったので、いまは成り立たない。上の記録の「標準的な Pauli 行列として明示した」も要らなくなった）。Step 1 の成分の鎖は元から pauli_matrix_products の成分と def_identity_matrix を引いている。証明の中身は不変。",
         "2026-09-02 の式変形統一で、Step 3 の二本の鎖に行中の \\quad (\\because …) で置かれていた根拠 5 行を、" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が引く check_number_operator_is_hermitian の証明がこの主張を使う）。",
