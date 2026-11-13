@@ -6,6 +6,7 @@
 
 ## 現在地
 
+- **2026-11-13（並列の連続実行）、一側閉包のトーラス射影の循環総回転数が正負四であることを、実際の閉歩道について Lean 具体版で示した。** 具体版 `oneSidedClosureProjection_cyclicTurning` から仮定 `hwhitney` を外し、接触対数零・巻き付き非零の実際の閉歩道 $\gamma$ から作った一側閉包の射影 $\Gamma$ について $t_\circ(\Gamma)\in\{4,-4\}$ を述べる形に替えた。証明は、射影が閉じた非後退辺列で持ち上げ点が相異なり巻き付きが零であること（既存の `oneSidedClosureProjectionFromWalk_simple_zero_winding`）を、新しい `vertexSimpleWalk_cyclicTotalTurning_four`（平面単純多角形の具体版を実際の閉歩道の六つの計数等式と境界頂点の局所回転数和 $v_3-v_1$ で満たしたもの）へ代入する。例外の台帳から一件消した。次の並列の tick は「周期単純路の循環総回転数は零」。
 - **2026-11-13（並列の連続実行）、出発辺の回転数和と境界頂点の局所回転数和を Lean 具体版と必要十分版で同定した。** 具体版 `vertexSimpleWalk_cyclicTotalTurning_eq_boundary_turn_sum_left`・`..._neg_boundary_turn_sum_right` は、循環総回転数を巡回の後続 `finRotate (m + 1)` への一歩の回転数の全歩にわたる和に書き（`cyclicTotalTurning_eq_sum_finRotate`）、各項を歩の終点での四セル表の局所回転数（右ならその符号反転）へ書き換え、`finRotate` と出発位置と境界頂点の全単射で再添字付けして、境界頂点にわたる局所回転数の和（右ならその符号反転）に等しいことを示す。必要十分版は辺・頂点・回転数・局所回転数を任意に取り、全単射であることだけを使う。次の並列の tick は「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」。
 - **2026-11-13（主経路の連続実行）、接触点で再接続した歩道の非後退性の Lean 具体版から必要十分版への委譲を外した。** 台の辺の相異性で添字を一致させ、向きの二値性で反転の固定点を排除した。次は同じ行の残りを一件ずつ進める。
 - **2026-11-13（並列の連続実行）、各出発位置の回転数と境界頂点の局所回転数の同定を Lean 具体版と必要十分版で示した。** 具体版 `vertexSimpleWalk_stepTurning_eq_boundary_turn_left`・`..._neg_boundary_turn_right` は、歩 $j$ の終点（次の歩 `finRotate (m + 1) j` の出発位置）で一歩の回転数が、内側を左に置くなら四セル表の局所回転数、右に置くならその符号反転に等しいことを、方向対への移行・左右の入出方向の対応・終点と次の出発点の一致（最後の歩は零巻き付き）から示す。必要十分版 `boundary_turn_match_left`・`boundary_turn_match_right` は方向を任意の型に上げ、右では方向対の回転数の反転則だけを仮定する。次の並列の tick は「出発辺の回転数和と境界頂点の局所回転数和を同定する」。
@@ -35,7 +36,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
 | Onsager 閉形式への接続 | 頂点単純閉路の循環総回転数は切断線偶奇で決まる | 記述・SageMath 済。Lean 二版は未着手 | 零巻き付きと非零巻き付きの結果を切断線偶奇へ接続する。切断線偶奇が零の場合は、上の行「切断線偶奇が零の頂点単純閉路の巻き付きは零である」を引く（原始性を経由しない）。 |
 | Onsager 閉形式への接続 | 頂点単純閉路の位相因子はトーラスの巻き付き二次符号に等しい | 記述・SageMath 済。Lean 二版は未着手 | `claim_vertex_simple_orbit_quadratic_sign`。離散 Whitney 系の章へ移され、主張は閉じた非後退辺列と接触対数零の言葉で書かれている（2026-10-31 の研究管理が確認）。平方恒等式の章の接触点分割の帰納法が直接引くので、閉包の中の Whitney 系の行を引いて Lean 二版を書く。 |
@@ -50,11 +50,11 @@
 
 ## レビュー記録
 
+- 2026-11-13（並列）: 「持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである」と「一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである」の導出版 `planeSimplePolygon_cyclicTurning_from_necSuf`・`oneSidedClosureProjection_cyclicTurning_from_necSuf` が、必要十分版ではなく具体版を呼んでいた（具体版が必要十分版の特殊化であることを示していなかった）。両方を必要十分版 `plane_simple_polygon_cyclic_turning_necSuf`・`translated_injective_path_whitney_turning_necSuf` を呼ぶ形に直した。本文・SageMath は不変。
 - 2026-11-13（並列）: 「一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである」の本文の証明で、巻き付き零 $w_{\mathrm h}(\Gamma)=w_{\mathrm v}(\Gamma)=0$ を根拠の参照なしに述べている箇所を、引いている `claim_projected_plane_cycle_lift_translation` の主張文と照合した。その主張文が $P_n=P_0$ と巻き付き零を含むので、修正不要だった。
 - 2026-11-13（並列）: 「持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである」の本文の最後の段（左に置く向きの接続数一・二・三の回転数 $-1,0,1$、右に置く向きの凸・凹・直進の $1,-1,0$、$t_\circ=v_1-v_3$ または $-(v_1-v_3)$）を、`cellBoundary_turn_by_incidence` と今回の左右の回転数一致の符号で照合した。符号と対応に食い違いは無く、修正不要だった。
 - 2026-11-13（並列）: 「ブロック対角行列の行列式は小行列式の積である」の本文の三行目は、選択集合を一つに固定した `claim_polynomial_product_of_sums` そのものではなく「その帰納法を各ファイバーの選択集合に適用」と書き、直前の段落で選択集合が同じことを使わないと述べている。本文はこの段落で根拠を明示しているので直さず、Lean 具体版を同じ形（添字ごとに違う選択集合の帰納法をこのファイルの中に置く）へ合わせた。
 - 2026-11-13: 前回の台帳更新で「残っているもの」と「並列の積み上げが受け持つもの」の表が消え、次の担当項目を選べなくなっていた。直前の台帳から両表を復元し、完了済みの右側方向対応の行だけを除いた。
-- 2026-11-13: 「完全マッチングの符号は対の列挙順序に依存しない」の主張文は $\operatorname{sgn}(\mathcal D)\in\{-1,1\}$ を述べるのに、証明は列挙の取り替えと空集合の場合だけを示し、値が $\{-1,1\}$ に属することを示していなかった（定義ブロックが $\in\{-1,1\}$ と書くだけ）。$\pi:=\pi_{W(\mathcal L_0)}$ を置き、`def_perfect_matching_sign`・`def_matching_word_sign`・`def_permutation_sign` を引く三等号と、整数 $(-1)^k$ の偶奇による所属の一行を証明に足した（主張は不変）。SageMath に四行の検算 `check_sign_values.sage` を足した（520 等式、否定の対照を含む）。
 
 ## 式変形の書き方の統一
 
@@ -66,6 +66,7 @@
 
 ## 前進の記録
 
+- 2026-11-13: 並列の表の先頭の行「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」を済ませ、行を消した。Lean `KacWard/PlaneSimplePolygonCyclicTurningOfWalk.lean`（頂点数の分類・辺数の分割と、実際の閉歩道で正負四を示す `vertexSimpleWalk_cyclicTotalTurning_four`）を置き、`OneSidedClosureProjectionCyclicTurning.lean` の具体版を実際の閉歩道の前提だけから述べる形に替えた。導出版二件を必要十分版を呼ぶ形に直し、本文の二つの主張の `lean:` に登録した。本文・SageMath は不変。
 - 2026-11-13: 並列の表の先頭の行「出発辺の回転数和と境界頂点の局所回転数和を同定する」を済ませ、行を消した。Lean 具体版 `KacWard/WalkBoundaryVertexTurnSum.lean`、必要十分版 `NecSuf/KacWard/WalkBoundaryVertexTurnSum.lean`、導出版 `WalkBoundaryVertexTurnSumFromNecSuf.lean` を置き、本文 `claim_plane_simple_polygon_cyclic_turning` の `lean:` に登録した。本文・SageMath は不変。
 - 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」の再接続の非後退性を一件済ませた。`edgeSimpleReconnectionNonbacktracking` は必要十分版の補題を呼ばず、台の辺の相異性と向きの二値性から直接示す。例外の台帳から一件を消した。本文と SageMath の主張は不変。
 - 2026-11-13: 並列の表の先頭の行「各出発位置の回転数と境界頂点の局所回転数を同定する」を済ませ、行を消した。Lean 具体版 `KacWard/WalkBoundaryVertexTurnMatch.lean`（巡回の後続が非後退であること、歩の終点と次の歩の出発点の一致、左右の回転数一致）、必要十分版 `NecSuf/KacWard/WalkBoundaryVertexTurnMatch.lean`、導出版 `WalkBoundaryVertexTurnMatchFromNecSuf.lean` を置き、本文 `claim_plane_simple_polygon_cyclic_turning` の `lean:` に登録した。本文・SageMath は不変。

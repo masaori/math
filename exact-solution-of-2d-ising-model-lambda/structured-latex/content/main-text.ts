@@ -70578,6 +70578,10 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.finiteWeightedSum_fourClasses",
                       "Ising2DLambda.KacWard.cellVertexIncidence_sum_by_class_from_necSuf",
                       "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf",
+                      "Ising2DLambda.KacWard.cellVertices_card_eq_incidenceClasses",
+                      "Ising2DLambda.KacWard.cellEdges_card_eq_interior_add_boundary",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_four",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_four_from_necSuf",
                     ],
                     verification: [
                       "sagemath/check/vertex-simple-cycle-turning",
@@ -72974,9 +72978,11 @@ P_n(\gamma)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
+                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_simple_zero_winding",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_closed",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_winding_zero",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_four",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
                     ],
