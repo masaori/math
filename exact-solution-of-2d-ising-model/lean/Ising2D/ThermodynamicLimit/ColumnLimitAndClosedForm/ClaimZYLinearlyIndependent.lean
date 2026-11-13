@@ -10,7 +10,7 @@
 
 **本ファイルを書いた時点では原文の証明は「TODO: 証明略」のまま**だったので、Lean 側で先に証明した
 （`parts/006_ZとYの反交換関係` の `[Z_μ, Y_ν]₊` と同じパターン）。
-その後、人手証明側でも別経路の証明（`{I, σ^x, σ^y, σ^z}^{⊗M}` が基底であることを使う筋）が
+その後、人手証明側でも別経路の証明（`I, σ^x, σ^y, σ^z` のクロネッカー積の族 `(F_q)` が線型独立であることを使う筋）が
 書かれている。両者は同じ主張の別証明であり、下記の Clifford 関係による証明の方が短い。
 
 ## 形式化にあたっての読み替え
@@ -40,25 +40,32 @@
 
 いまの `ZY_linearIndependent` は上の Clifford 関係による別証明で、人手の Step 1〜6 とは対応しない。
 人手の Step を 1 対 1 に辿る補題は、次の Step から順に足している。
+人手は多重添字の集合 `𝒫 = {1,2,3,4}^M` を全単射 `π : {1, …, N} → 𝒫` で並べて `F_q`（`q ∈ {1, …, N}`）と書くが、
+Lean は `kronecker_family_of_independent_family_is_independent` と同じく多重添字 `p : Fin M → Fin 4` を添字とする有限和で書く
+（`ClaimKroneckerFamilyOfIndependentFamilyIsIndependent.lean` の記号の読み替え）。
 
 | 人手の Step | Lean |
 | --- | --- |
-| Step 1 の「`𝓑` は張る」（`Z_Y_generate_algebra` の証明の Step 3 前半を引く） | `pauliFamily_spans` |
 | Step 1 の `L := c_0 I + c_x σ^x + c_y σ^y + c_z σ^z` の 4 成分の鎖 | `pauliComb_apply_00`・`_01`・`_10`・`_11` |
 | Step 1 の `L = O` から (p)〜(s) | `pauliComb_eq_zero_equations` |
 | Step 1 の `c_0`・`c_z`・`c_x`・`ic_y`・`c_y` が零になる 5 本の鎖 | `pauliComb_coeff_zero_eq_zero`・`_z_`・`_x_`・`_I_mul_y_`・`_y_eq_zero` |
-| Step 1 の結論「`𝓑` は線型独立」「張り、線型独立なので基底」 | `pauliComb_eq_zero_coeffs`・`pauliFamily_sum_eq_zero_coeffs`・`pauliFamily_spans_and_linearIndependent`（`pauliFamily_linearIndependent` は同じ線型独立性を mathlib の `LinearIndependent` の形で述べた系） |
-| Step 2 の `𝓔` の元 `e_{i_1} ⊠ ⋯ ⊠ e_{i_M}` | `pauliKroneckerFamily` |
-| Step 2「`tensor_basis` (2) を `𝓑` に適用すると `𝓔` は基底」 | `pauliKroneckerFamily_spans_and_independent` |
-| Step 6「`𝓔` のそれ以外の元の係数は `0`」の係数の族 | `zyCoeffOnPauliKroneckerFamily` |
-| Step 6「左辺は `𝓔` の相異なる元の線型結合」 | `sum_zyCoeff_smul_pauliKroneckerFamily` |
-| Step 6「基底による表示は一意なので係数はすべて `0`」 | `zy_step6_coeffs_eq_zero` |
+| Step 1 の結論「`𝓑` は線型独立」（`L = O` ならば係数はすべて `0_ℂ`） | `pauliComb_eq_zero_coeffs` |
+| Step 1 の番号付け `e_1, e_2, e_3, e_4 := I, σ^x, σ^y, σ^z` | `pauliFamily`（`ClaimZYGenerateAlgebra.lean`。Lean の添字は `0, …, 3`） |
+| Step 2 の `F_q := e_{π(q)_1} ⊠ ⋯ ⊠ e_{π(q)_M}` | `pauliKroneckerFamily` |
+| Step 2 の `((c_1I+c_2σ^x)+c_3σ^y)+c_4σ^z = ⋯ = O` の 6 行の鎖 | 最後の行（仮定）を除く 5 行は `pauliComb_eq_sum_pauliFamily`、最後の行は `pauliFamily_sum_eq_zero_coeffs` の `.trans h` |
+| Step 2 の「Step 1 の線型独立性より `c_1 = ⋯ = c_4 = 0_ℂ`」 | `pauliFamily_sum_eq_zero_coeffs`（`pauliFamily_linearIndependent` は同じ線型独立性を mathlib の `LinearIndependent` の形で述べた系） |
+| Step 2 の「`kronecker_family_of_independent_family_is_independent` より族 `(F_q)` は線型独立」 | `pauliKroneckerFamily_independent` |
+| （旧い人手 Step 6 の「`𝓔` のそれ以外の元の係数は `0`」の係数の族） | `zyCoeffOnPauliKroneckerFamily` |
+| （旧い人手 Step 6 の「左辺は `𝓔` の相異なる元の線型結合」） | `sum_zyCoeff_smul_pauliKroneckerFamily` |
+| Step 6「`(F_q)` の線型独立性から係数はすべて `0`」 | `zy_step6_coeffs_eq_zero` |
 
-Step 3〜5（`Z_m`・`Y_m` のクロネッカー積の形、対応する多重添字 `ζ(m)`・`η(m)`、それらが相異なること）の Lean はまだ無い。
-Step 6 は多重添字を並べた単射 `x` を仮定に取って述べ、Step 3〜5 と合わせて主張を導く段は Step 3〜5 と一緒に置く。
-人手 Step 6 は「左辺は `𝓔` の相異なる元の線型結合で、それ以外の元の係数は `0`」を日本語の 1 文で述べ、係数の族を置いた
-式変形を書いていない。Lean の `sum_zyCoeff_smul_pauliKroneckerFamily` はこの 1 文を 4 段（像に無い多重添字の係数は `0`、
-単射による添字の付け替え、`x(s)` の係数の値、`Z` 側と `Y` 側への和の分割）に開いている。人手の側を鎖に書き直し、選んだ経路に合わせてこの 4 段も直す件は、状態台帳の (d4c44p15f) に在る。
+Step 3〜5（`Z_m`・`Y_m` のクロネッカー積の形、対応する多重添字 `ζ(m)`・`η(m)` と `q_Z(m)`・`q_Y(m)`、それらが相異なること）の
+Lean はまだ無い。Step 6 は多重添字を並べた単射 `x` を仮定に取って述べ、Step 3〜5 と合わせて主張を導く段は Step 3〜5 と一緒に置く。
+いまの Step 6 の Lean は、人手が係数の族 `d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)}` を置く鎖に書き直す前の形で、
+「左辺は `𝓔` の相異なる元の線型結合で、それ以外の元の係数は `0`」の 1 文を 4 段（像に無い多重添字の係数は `0`、
+単射による添字の付け替え、`x(s)` の係数の値、`Z` 側と `Y` 側への和の分割）に開いたものである。
+新しい人手の鎖（準備 (t)・(u)・(v)、`Σ_q d_qF_q` の 11 行、`α_{m_0}`・`β_{m_0}` の 8 行）と 1 対 1 に直す件は、
+状態台帳の (d4c44p15f3) の残りに在る。
 
 ## 必要十分版
 
@@ -68,15 +75,14 @@ Step 6 は多重添字を並べた単射 `x` を仮定に取って述べ、Step 
 いま分かっている、各 Step で効いているもの:
 - Step 1: 係数の積が可換であること・`2_ℂ` が可逆であること（準備 (a)。標数 2 では成り立たない）・
   `(-i)i = 1_ℂ`（準備 (g)。`i` が単元であること）と、成分の定義だけである。
-- Step 2: `<tensor_basis>` (2) を当てはめるだけで計算を含まない（`<tensor_basis>` (2) にも必要十分版は無い）。取り払える構造は、
-  (2) が引く 2 つの主張の必要十分版（`NecSuf/MultilinearImageOfSpanningFamilySpans.lean`・
-  `NecSuf/ProductFamilyOfIndependentFamilyIsIndependent.lean`）が示している。
+- Step 2: 有限和の定義の段を辿る 5 行の鎖と、`kronecker_family_of_independent_family_is_independent` を当てはめる段だけである。
+  後者で取り払える構造は、その必要十分版 `NecSuf/ProductFamilyOfIndependentFamilyIsIndependent.lean` が示している。
 - Step 6: Step 2 の線型独立性、`x` の単射性、有限和の操作（係数 `0` の項を落とす、単射で添字を付け替える、`⊕` の上の和を分ける）と
   `0 • A = 0` だけで、行列であることも係数が ℂ であることも効いていない。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
-import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.TheoremTensorBasisKroneckerFamilyOfBasis
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfIndependentFamilyIsIndependent
 
 namespace Ising2D
 
@@ -165,10 +171,9 @@ theorem ZYSet_linearIndepOn (M : ℕ) : LinearIndepOn ℂ id (ZYSet M) := by
   rw [ZYSet_eq_range]
   exact (ZY_linearIndependent M).linearIndepOn_id
 
-/-! ## 人手 Step 1: `𝓑 = {I, σ^x, σ^y, σ^z}` は `Mat(2, ℂ)` の基底
+/-! ## 人手 Step 1: `I, σ^x, σ^y, σ^z` は線型独立
 
-人手証明の Step 1 は、`𝓑` が張ることを `Z_Y_generate_algebra` の証明の Step 3 前半から引き
-（Lean は `pauliFamily_spans`）、線型独立性を成分の比較で示す。
+人手証明の Step 1 は、`𝓑` の線型独立性を成分の比較で示す（張ることは使わない）。
 `L := c_0 I + c_x σ^x + c_y σ^y + c_z σ^z` の 4 成分の鎖（`pauliComb_apply_00`〜`_11`）、
 `L = O` から得る (p)〜(s)、係数が零になる 5 本の鎖（`pauliComb_coeff_*_eq_zero`）を 1 行ずつ辿る。
 準備 (a)・(c)・(d)・(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・
@@ -366,14 +371,47 @@ theorem pauliComb_eq_zero_coeffs {c0 cx cy cz : ℂ} (h : pauliComb c0 cx cy cz 
     pauliComb_coeff_y_eq_zero (pauliComb_coeff_I_mul_y_eq_zero hq hr),
     pauliComb_coeff_z_eq_zero hp hs⟩
 
-/-- 人手 Step 1 の「よって `𝓑` は線型独立である」を族 `pauliFamily`（`e_1, …, e_4` は Lean の添字 `0, …, 3`）について、
-`<tensor_basis>` (2) の仮定の形（`Σ_a c_a e_a = O` ならば係数はすべて `0_ℂ`）で述べた形。 -/
+/-! ## 人手 Step 2: クロネッカー積の族 `(F_q)` の線型独立性
+
+人手は Step 1 の番号付け `e_1, e_2, e_3, e_4 := I, σ^x, σ^y, σ^z`（Lean の `pauliFamily` の添字 `0, …, 3`）のもとで、
+`Σ_{a=1}^{4} c_ae_a = O` を Step 1 の `L = O` の形へ戻して `c_1 = ⋯ = c_4 = 0_ℂ` を得、
+`kronecker_family_of_independent_family_is_independent` に渡して族 `(F_q)` の線型独立性を得る。 -/
+
+/-- 人手 Step 2 の `F_q := e_{π(q)_1} ⊠ ⋯ ⊠ e_{π(q)_M}`（多重添字 `π(q)` は Lean の `p : Fin M → Fin 4`）。 -/
+noncomputable def pauliKroneckerFamily (p : Fin M → Fin 4) : TensorPow M :=
+  siteProd M (fun k => pauliFamily (p k))
+
+/-- 人手 Step 2 の鎖 `((c_1I+c_2σ^x)+c_3σ^y)+c_4σ^z = Σ_{a=1}^{4} c_ae_a`（人手の `c_1, …, c_4` は Lean の `c 0, …, c 3`）。
+`def_finite_sum_of_matrices` の `r = 1` の段と `r + 1 = 2, 3, 4` の段は、Lean では `Fin.sum_univ_one`・`Fin.sum_univ_castSucc` で、
+途中の `Σ_{a=1}^{r}` は `Fin r` の上の和（`Fin 4` の始めの `r` 個へ `Fin.castSucc` で送ったもの）である。 -/
+theorem pauliComb_eq_sum_pauliFamily (c : Fin 4 → ℂ) :
+    pauliComb (c 0) (c 1) (c 2) (c 3) = ∑ a, c a • pauliFamily a := by
+  calc pauliComb (c 0) (c 1) (c 2) (c 3)
+      = ((c 0 • (1 : Matrix (Fin 2) (Fin 2) ℂ) + c 1 • pauliX) + c 2 • pauliY) + c 3 • pauliZ := rfl
+                                                                      -- 人手 Step 2 の鎖の行ではない。Step 1 の `L`（`c_0 → c_1, …, c_z → c_4`）を開いて鎖の左辺の形へつなぐ段
+    _ = ((c 0 • pauliFamily 0 + c 1 • pauliFamily 1) + c 2 • pauliFamily 2) + c 3 • pauliFamily 3 := rfl
+                                                                      -- Step 1 の `e_1, …, e_4` の定義を右辺から左辺へ 4 か所へ
+    _ = ((∑ a : Fin 1, c ((a.castSucc).castSucc.castSucc) • pauliFamily ((a.castSucc).castSucc.castSucc)
+            + c 1 • pauliFamily 1) + c 2 • pauliFamily 2) + c 3 • pauliFamily 3 := by
+          rw [Fin.sum_univ_one]; rfl                                    -- `def_finite_sum_of_matrices` の `r = 1` の段を右辺から左辺へ
+    _ = (∑ a : Fin 2, c (a.castSucc.castSucc) • pauliFamily (a.castSucc.castSucc)
+            + c 2 • pauliFamily 2) + c 3 • pauliFamily 3 := by
+          rw [Fin.sum_univ_castSucc (fun a : Fin 2 => c (a.castSucc.castSucc) • pauliFamily (a.castSucc.castSucc))]
+          rfl                                                           -- `def_finite_sum_of_matrices` の `r + 1 = 2` の段を右辺から左辺へ
+    _ = ∑ a : Fin 3, c a.castSucc • pauliFamily a.castSucc + c 3 • pauliFamily 3 := by
+          rw [Fin.sum_univ_castSucc (fun a : Fin 3 => c a.castSucc • pauliFamily a.castSucc)]
+          rfl                                                           -- `def_finite_sum_of_matrices` の `r + 1 = 3` の段を右辺から左辺へ
+    _ = ∑ a, c a • pauliFamily a := by
+          rw [Fin.sum_univ_castSucc (fun a : Fin 4 => c a • pauliFamily a)]
+          rfl                                                           -- `def_finite_sum_of_matrices` の `r + 1 = 4` の段を右辺から左辺へ
+
+/-- 人手 Step 2 の「`Σ_{a=1}^{4} c_ae_a = O` ならば、Step 1 の線型独立性（`c_0 → c_1, …, c_z → c_4`）より
+`c_1 = c_2 = c_3 = c_4 = 0_ℂ`」（`kronecker_family_of_independent_family_is_independent` の仮定の形）。 -/
 theorem pauliFamily_sum_eq_zero_coeffs (c : Fin 4 → ℂ) (h : ∑ a, c a • pauliFamily a = 0) :
     ∀ a, c a = 0 := by
-  have hcomb : pauliComb (c 0) (c 1) (c 2) (c 3) = 0 := by
-    rw [← h, Fin.sum_univ_four]
-    rfl
-  obtain ⟨h0, h1, h2, h3⟩ := pauliComb_eq_zero_coeffs hcomb
+  have hcomb : pauliComb (c 0) (c 1) (c 2) (c 3) = 0 :=
+    (pauliComb_eq_sum_pauliFamily c).trans h                           -- 上の鎖と仮定
+  obtain ⟨h0, h1, h2, h3⟩ := pauliComb_eq_zero_coeffs hcomb          -- Step 1 の線型独立性
   intro a
   fin_cases a
   · exact h0
@@ -386,35 +424,16 @@ theorem pauliFamily_linearIndependent : LinearIndependent ℂ pauliFamily := by
   rw [Fintype.linearIndependent_iff]
   exact pauliFamily_sum_eq_zero_coeffs
 
-/-- 人手 Step 1 の結論「`𝓑` は `Mat(2,ℂ)` を張り、かつ線型独立なので基底である」
-（張ることは `pauliFamily_spans`。人手と同じく基底を「張り、線型独立」として述べる）。 -/
-theorem pauliFamily_spans_and_linearIndependent :
-    (∀ A : Matrix (Fin 2) (Fin 2) ℂ, ∃ c : Fin 4 → ℂ, A = ∑ a, c a • pauliFamily a) ∧
-      (∀ c : Fin 4 → ℂ, ∑ a, c a • pauliFamily a = 0 → ∀ a, c a = 0) :=
-  ⟨pauliFamily_spans, pauliFamily_sum_eq_zero_coeffs⟩
+/-- 人手 Step 2 の結論: `e_1, …, e_4` は `kronecker_family_of_independent_family_is_independent` の仮定を満たし
+（`b_a → e_a`）、族 `(F_q)` は線型独立である。すなわち `Σ_q d_qF_q = O` ならばすべての `q` について `d_q = 0_ℂ`。 -/
+theorem pauliKroneckerFamily_independent (d : (Fin M → Fin 4) → ℂ)
+    (hd : ∑ p, d p • pauliKroneckerFamily p = 0) : ∀ p, d p = 0 :=
+  kronecker_family_of_independent_family_is_independent pauliFamily pauliFamily_sum_eq_zero_coeffs d hd
 
-/-! ## 人手 Step 2: クロネッカー積がつくる基底 `𝓔`
+/-! ## 人手 Step 6: 結論（旧い人手 Step 6 の形）
 
-人手は `<tensor_basis>` (2) を基底 `𝓑 = {e_1, …, e_4}` に適用して、
-`𝓔 = {e_{i_1} ⊠ ⋯ ⊠ e_{i_M} | (i_1, …, i_M) ∈ {1,2,3,4}^M}` が `Mat(2^M, ℂ)` の基底であるとする。
-Lean の `<tensor_basis>` (2) は `tensor_basis_kronecker_family_of_basis` で、基底を「張り、かつ線型独立」として述べる。
-多重添字 `(i_1, …, i_M)` は Lean の `p : Fin M → Fin 4`（添字は `0, …, 3`）である。 -/
-
-/-- 人手 Step 2 の `𝓔` の元 `e_{i_1} ⊠ ⋯ ⊠ e_{i_M}`（多重添字は `p : Fin M → Fin 4`）。 -/
-noncomputable def pauliKroneckerFamily (p : Fin M → Fin 4) : TensorPow M :=
-  siteProd M (fun k => pauliFamily (p k))
-
-/-- 人手 Step 2: `<tensor_basis>` (2) を Step 1 の基底 `𝓑` に適用すると、`𝓔` は `Mat(2^M, ℂ)` の基底
-（張り、かつ線型独立）である。仮定の「`𝓑` は基底（張り、かつ線型独立）」は Step 1 の結論 `pauliFamily_spans_and_linearIndependent`。 -/
-theorem pauliKroneckerFamily_spans_and_independent :
-    (∀ X : TensorPow M, ∃ d : (Fin M → Fin 4) → ℂ, X = ∑ p, d p • pauliKroneckerFamily p)
-      ∧ (∀ d : (Fin M → Fin 4) → ℂ, ∑ p, d p • pauliKroneckerFamily p = 0 → ∀ p, d p = 0) :=
-  tensor_basis_kronecker_family_of_basis pauliFamily pauliFamily_spans_and_linearIndependent.1
-    pauliFamily_spans_and_linearIndependent.2
-
-/-! ## 人手 Step 6: 結論
-
-人手 Step 6 は、Step 3〜5 で得た「`Z_m`・`Y_m` は `𝓔` の相異なる `2M` 個の元である」から、
+以下は、人手が係数の族 `d_q` を置く鎖に書き直す前の Step 6 に合わせた形である（新しい鎖と 1 対 1 に直す件は状態台帳の (d4c44p15f3) の残り）。
+旧い人手 Step 6 は、Step 3〜5 で得た「`Z_m`・`Y_m` は `𝓔` の相異なる `2M` 個の元である」から、
 `Σ_m α_m Z_m + Σ_m β_m Y_m = O` の左辺を `𝓔` の線型結合と読み（`𝓔` のそれ以外の元の係数は `0`）、
 基底による `O` の表示の一意性から係数がすべて `0` になることを導く。
 
@@ -424,13 +443,13 @@ Step 3〜5（`Z_m`・`Y_m` がどの多重添字の元か、その `2M` 個が�
 人手のサイトの番号 `m ∈ {1, …, M}` は Lean の `m : Fin M`（`0, …, M-1`）で、人手の `m` が Lean の `m - 1` に当たる。
 人手の `Z_m = e_{ζ(m)_1} ⊠ ⋯`・`Y_m = e_{η(m)_1} ⊠ ⋯`（Step 4）を代入して主張へつなぐ段は Step 3〜5 の Lean と一緒に置く。 -/
 
-/-- 人手 Step 6 の「`𝓔` の元 `E_{x(s)}` の係数は `α_m`（`s = inl m`）・`β_m`（`s = inr m`）、`𝓔` のそれ以外の元の係数は `0`」
+/-- 旧い人手 Step 6 の「`𝓔` の元 `E_{x(s)}` の係数は `α_m`（`s = inl m`）・`β_m`（`s = inr m`）、`𝓔` のそれ以外の元の係数は `0`」
 という係数の族 `d`。`x` が単射（Step 5）なので、`x(s)` の係数は `s` から一つに決まる（`Function.extend` の値）。 -/
 noncomputable def zyCoeffOnPauliKroneckerFamily (x : Fin M ⊕ Fin M → (Fin M → Fin 4)) (α β : Fin M → ℂ) :
     (Fin M → Fin 4) → ℂ :=
   Function.extend x (Sum.elim α β) 0
 
-/-- 人手 Step 6 の「左辺は基底 `𝓔` の相異なる元の ℂ-線型結合であり、`𝓔` のそれ以外の元の係数は `0`」:
+/-- 旧い人手 Step 6 の「左辺は基底 `𝓔` の相異なる元の ℂ-線型結合であり、`𝓔` のそれ以外の元の係数は `0`」:
 `Σ_p d_p E_p = Σ_m α_m E_{x(inl m)} + Σ_m β_m E_{x(inr m)}`。 -/
 theorem sum_zyCoeff_smul_pauliKroneckerFamily (x : Fin M ⊕ Fin M → (Fin M → Fin 4))
     (hx : Function.Injective x) (α β : Fin M → ℂ) :
@@ -456,7 +475,7 @@ theorem sum_zyCoeff_smul_pauliKroneckerFamily (x : Fin M ⊕ Fin M → (Fin M �
 
 /-- **人手 Step 6**: `x(inl m)`・`x(inr m)`（人手の `ζ(m)`・`η(m)`）が相異なる多重添字ならば、
 `Σ_m α_m E_{x(inl m)} + Σ_m β_m E_{x(inr m)} = O` から `α_1 = ⋯ = α_M = β_1 = ⋯ = β_M = 0`。
-基底による `O` の表示の一意性は、Step 2 の `𝓔` の線型独立性（`pauliKroneckerFamily_spans_and_independent` の後半）である。 -/
+係数が `0` になるのは、Step 2 の族 `(F_q)` の線型独立性（`pauliKroneckerFamily_independent`）による。 -/
 theorem zy_step6_coeffs_eq_zero (x : Fin M ⊕ Fin M → (Fin M → Fin 4)) (hx : Function.Injective x)
     (α β : Fin M → ℂ)
     (h : ∑ m, α m • pauliKroneckerFamily (x (Sum.inl m))
@@ -464,7 +483,7 @@ theorem zy_step6_coeffs_eq_zero (x : Fin M ⊕ Fin M → (Fin M → Fin 4)) (hx 
     (∀ m, α m = 0) ∧ (∀ m, β m = 0) := by
   have hd : ∑ p, zyCoeffOnPauliKroneckerFamily x α β p • pauliKroneckerFamily p = 0 := by
     rw [sum_zyCoeff_smul_pauliKroneckerFamily x hx α β, h]
-  have hzero := pauliKroneckerFamily_spans_and_independent.2 _ hd
+  have hzero := pauliKroneckerFamily_independent _ hd
   refine ⟨fun m => ?_, fun m => ?_⟩
   · calc α m = Sum.elim α β (Sum.inl m) := rfl
       _ = zyCoeffOnPauliKroneckerFamily x α β (x (Sum.inl m)) := (hx.extend_apply _ _ _).symm
