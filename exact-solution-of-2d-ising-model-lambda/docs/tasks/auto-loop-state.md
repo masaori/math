@@ -7,10 +7,10 @@
 ## 現在地
 
 - **2026-11-13（並列の連続実行）、各出発位置の回転数と境界頂点の局所回転数の同定を Lean 具体版と必要十分版で示した。** 具体版 `vertexSimpleWalk_stepTurning_eq_boundary_turn_left`・`..._neg_boundary_turn_right` は、歩 $j$ の終点（次の歩 `finRotate (m + 1) j` の出発位置）で一歩の回転数が、内側を左に置くなら四セル表の局所回転数、右に置くならその符号反転に等しいことを、方向対への移行・左右の入出方向の対応・終点と次の出発点の一致（最後の歩は零巻き付き）から示す。必要十分版 `boundary_turn_match_left`・`boundary_turn_match_right` は方向を任意の型に上げ、右では方向対の回転数の反転則だけを仮定する。次の並列の tick は「出発辺の回転数和と境界頂点の局所回転数和を同定する」。
+- **2026-11-13（主経路の連続実行）、接触点で分割した二本の接続の Lean 具体版から必要十分版への委譲を外した。** 元の接続と交換後の二接続から、添字区間の内部・継ぎ目・閉じる接続を具体版で直接示した。次は同じ行の残りを一件ずつ進める。
 - **2026-11-13（並列の連続実行）、整数行列の行列式（`def_integer_matrix_determinant`）とブロック対角行列の行列式（`claim_block_diagonal_determinant_product`）の Lean 具体版から必要十分版への委譲を外した。** 並列の表の先頭の行は着手時に主経路の「内側を右に置く歩道の方向対応の必要十分版」を待っていたので、末尾の行の残り二件を済ませ、この行を表から消した。整数行列式の橋 `inversionSign_eq_mathlibSign` は符号の単位元・二乗・乗法性・互換の符号を必要十分版の `sign_one`・`sign_mul_self`・`sign_comp`・`transpositionPerm`・`sign_transposition` で済ませていた。恒等置換の転倒数が零であることをこのファイルで示し、残りを具体版 `finiteOrderedSign_mul_self`・`finiteOrderedSign_comp`・`KacWard.finiteTranspositionPerm`・`KacWard.finiteTransposition_sign` へ替えた。ブロック対角の補題 `polynomial_prod_sum_fibers` は、本文の「選択集合が添字ごとに違っても同じ帰納法」を、選択集合が添字ごとに違う $\mathfrak F(S)$・$W_S$・$\operatorname{ins}$・$\operatorname{spl}$・二つの往復・重みの分離・帰納法・全体集合への代入として同じファイルに置き、必要十分版の `FamilyOn`・`insertFamilyEquiv`・`prod_attach_insertFamily`・`familyOnUnivEquiv` を使わない形へ直した。例外の台帳は 44 件から 43 件。
 - **2026-11-13（主経路の連続実行）、頂点の半辺と四方向の対応の具体版から必要十分版への委譲を外した。** 実際の向き付き辺の始点と方向番号の全単射から、頂点での制限と選択辺集合での制限を直接示した。次は接触点分割の具体版の委譲を一件外す。
 - **2026-11-13（主経路の連続実行）、内側を右に置く歩道の方向対応の必要十分版を示した。** 四方向の番号と境界表の逆向き番号の対応を Lean で抽象化した。次は接触点分割・平滑化・横断数の具体版の委譲を一件外す。
-- **2026-11-13（主経路の連続実行）、内側を右に置く歩道の始点の入方向を方向表に対応させた。** 平面持ち上げの一歩から実際の辺の方向番号を得て、方向表の入方向が二だけずれることを Lean 具体版で示した。次は右に置く歩道の方向対応の必要十分版である.
 
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
@@ -23,7 +23,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Lean の四層 | 接触点分割・平滑化・横断数の具体版の委譲を外す | 未着手 | 2026-11-13 の研究管理が並列の表から移した（並列へ到達点への最長の鎖を移したため）。対象は例外の台帳 `lean/concrete-necsuf-delegations.txt` に載る残り 11 件: `claim_edge_simple_contact_split`・`claim_smoothing_splits_closed_walk`・`claim_contact_split_turning_update`・`claim_reconnection_turning_difference`・`claim_contact_split_seam_parity`・`claim_contact_split_pair_descent`・`claim_smoothing_crossing_number_update`・`claim_smoothing_straight_visit_count_update`・`claim_vertex_crossing_number_factorization`・`claim_smoothing_vertex_crossing_number_update`・`claim_crossing_number_vertex_decomposition`。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。一件ずつ外し、外したら例外の台帳の行を消す。`claim_vertex_port_bijection` は済んだ。並列の表の行「平方恒等式の節 6〜9 の Lean 二版」がこれらの具体版を引くので、並列が書いている Lean ファイルには触れず、引かれる側の具体版ファイルだけを書き換える。 |
+| Lean の四層 | 接触点分割・平滑化・横断数の具体版の委譲を外す | 進行中 | 2026-11-13 の研究管理が並列の表から移した（並列へ到達点への最長の鎖を移したため）。`claim_edge_simple_contact_split` の接続部分は済んだ。再接続の非後退性（`edgeSimpleReconnectionNonbacktracking`）と `claim_smoothing_splits_closed_walk`・`claim_contact_split_turning_update`・`claim_reconnection_turning_difference`・`claim_contact_split_seam_parity`・`claim_contact_split_pair_descent`・`claim_smoothing_crossing_number_update`・`claim_smoothing_straight_visit_count_update`・`claim_vertex_crossing_number_factorization`・`claim_smoothing_vertex_crossing_number_update`・`claim_crossing_number_vertex_decomposition`。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。一件ずつ外し、外したら例外の台帳の行を消す。`claim_vertex_port_bijection` も済んだ。並列の表の行「平方恒等式の節 6〜9 の Lean 二版」がこれらの具体版を引くので、並列が書いている Lean ファイルには触れず、引かれる側の具体版ファイルだけを書き換える。 |
 | Lean の四層 | 一側閉包・周期持ち上げ・階段・回転位相の具体版の委譲を外す | 未着手 | 2026-11-11: 到達点への最長の鎖に載らないので、熱力学極限の行の後ろへ移した。上の行が並列の表の完了待ちで進めないときは、この行を進める。 2026-11-12: 正負四・回転位相に関わらない 19 件（行列式・マッチング 7 件、接触点分割・平滑化・横断数 12 件）は並列の表の行「正負四・回転位相に関わらない具体版の委譲を外す」へ移した。この行に残るのは、一側閉包・周期持ち上げ・階段・回転位相の具体版である。 例外の台帳 `lean/concrete-necsuf-delegations.txt` の 2026-11-07 の見出しの下の残り 54 件（当初 59 件）。開いた名前空間から修飾なしで必要十分版の定理を呼んでいたもので、検査を直して見つけた（2026-11-07 の研究管理）。上の一側閉包の行が扱う対象（内側セル集合・補集合の辺連結性、穴の無いセル集合の Euler 数、対角の二セルの除外）はその行の中で外す。残りを、到達点に近い依存の順に一件ずつ外し、外したら例外の台帳の行を消す。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。 2026-11-13 の研究管理: 一側閉包の正負四の行を並列へ移したので、一側閉包・周期持ち上げ・階段の具体版は、並列の表の行「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」が済むまで触れない。それまでは回転位相の 5 件（`claim_cyclic_total_turning_multiple_of_four`・`claim_closed_walk_rotation_phase_sign`・`claim_closed_walk_rotation_phase`・`claim_rotation_phase_as_turning_power`・`claim_walk_rotation_phase_total_turning`）を先に外す。 |
 | 臨界指数を零点列で書く | 臨界指数の具体版の委譲を外す | 未着手 | `lean/concrete-necsuf-delegations.txt` の `criticalPoint_exists_positiveRational_squareDiff_lt` と `leadingDistance_pinching_implies_predicate`。登録先の本文ブロック（臨界点の有理近似、先頭距離の詰め寄りから述語へ）は四つの到達点からの閉包の外なので、閉包の中の Lean の行より後に置く（2026-11-02 の研究管理）。この行は例外台帳が空になるまで消さない。 |
 | 有限系の側の章 | 行き止まりの主張の切り分け | 未着手 | 2026-10-31 の研究管理の実測では、どのブロックからも引かれず主定理の印も無い主張は全体で 48 件（近似の走査）。Kac--Ward 系の章のものは上の切り分けの行で扱う。この行の対象は残りの約 22 件で、道具の章 3、自由エントロピー 1、転送行列 5（`theorem_partition_polynomial_is_trace` を含む。主定理の印の検出漏れの可能性があるので読んで確かめる）、シフト対称性 1、固有値の代数性 5、Fisher 零点と双対性 4、熱力学極限 1、Fisher 零点の個数と密度 1、臨界指数 1。引用漏れか不要かを 1 件ずつ読んで判断する。判定は `ref()` と `\blkref{}` の両方を数えること（数え違いの実績あり）。 |
@@ -59,16 +59,16 @@
 
 ## 式変形の書き方の統一
 
+- 2026-11-13（主経路の書式統一）: 「有限系の自由エントロピー密度の上からの評価」の二つの式鎖で、行末根拠の句点を接続語と括弧へ直した（式と主張は不変）。
 - 2026-11-13（主経路の書式統一）: 「有限系の自由エントロピー密度の上からの評価」の $\log2=\ell_2$ の式鎖で、行末根拠の句点を括弧と接続語へ直した（主張と式は不変）。
 - 2026-11-13（主経路の書式統一）: 「正の有理点での有限自由エントロピー密度は非負である」の零写像の値の式鎖で、三行の行末根拠の中の句点を読点または接続語へ直した（主張と式は不変）。
 - 2026-11-13（主経路の書式統一）: 「全プラス配位は破れボンドを持たない」（`claim_constant_plus_breaks_no_bond`）の式鎖で、全プラス配位の定義を引く行末根拠の句点を読点へ直した（主張と式は不変）。
 - 2026-11-13（並列の連続実行の書式統一。研究管理がこの作業を主経路へ移す前に着手したもの）: 「正の有理点での開いた長方形の分配多項式の値は 1 以上である」（`claim_open_rectangle_value_ge_one_at_positive_rational`）の $1\le Z^{\mathrm{op}}_{a,b}(q)$ の式鎖で、三行の行末根拠の中の句点を読点へ直した（この主張の行末根拠の句点は全て片付いた）。
-- 2026-11-13（並列の連続実行の書式統一）: 「有理係数の対数順序群の加法は順序と両立する」（`claim_rational_log_order_group_add_monotone`）の $N\cdot(\lambda+\nu)$ の式鎖で、二行の行末根拠の中の句点を読点へ直した（この主張の行末根拠の句点は全て片付いた）。
 
 ## 前進の記録
 
 - 2026-11-13: 並列の表の先頭の行「各出発位置の回転数と境界頂点の局所回転数を同定する」を済ませ、行を消した。Lean 具体版 `KacWard/WalkBoundaryVertexTurnMatch.lean`（巡回の後続が非後退であること、歩の終点と次の歩の出発点の一致、左右の回転数一致）、必要十分版 `NecSuf/KacWard/WalkBoundaryVertexTurnMatch.lean`、導出版 `WalkBoundaryVertexTurnMatchFromNecSuf.lean` を置き、本文 `claim_plane_simple_polygon_cyclic_turning` の `lean:` に登録した。本文・SageMath は不変。
+- 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」の接続部分を一件済ませた。`edgeSimpleContactSplitConnections` は元の接続と二つの交換後接続を用い、二本の辺列の接続を区間ごとに示す。例外の台帳から一件を消した。本文と SageMath の主張は不変。
 - 2026-11-13: 並列の表の先頭の行は着手時に主経路の表の「内側を右に置く歩道の方向対応の必要十分版」（未着手）を待っていたので、末尾の行「行列式・マッチングの具体版の委譲を外す」の残り二件（`def_integer_matrix_determinant` の `inversionSign_eq_mathlibSign`、ブロック対角の具体版の補題 `polynomial_prod_sum_fibers`）を済ませ、行を消した。`IntegerMatrix/Determinant.lean` は必要十分版の符号の定義（`sign`・`inversionCount`）だけを開き、定理は具体版だけを引く。`BlockDiagonalDeterminantProduct.lean` は必要十分版を import しない。本文・SageMath は不変。次の並列の tick は先頭の行（各出発位置の回転数と境界頂点の局所回転数の同定）から進められる。
 - 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」のうち、`claim_vertex_port_bijection` を済ませた。`vertexPort_bijective` と `selectedVertexPort_bijective` は実際の始点・方向番号の全単射から具体的に証明し、必要十分版への参照を除いた。例外台帳の二行を消した。本文と SageMath は不変。
 - 2026-11-13: 主経路の先頭「内側を右に置く歩道の方向対応の必要十分版」を済ませた。四方向の番号と境界表の逆向き番号の対応を抽象化した Lean 必要十分版を置き、既存の実際の歩道に関する具体版二件とともに本文の Lean 対応へ登録した。本文の主張と SageMath は不変。次は接触点分割・平滑化・横断数の具体版の委譲を一件外す。
-- 2026-11-13: 主経路の先頭「内側を右に置く歩道の始点の入方向」を済ませた。Lean 具体版 `vertexSimpleWalk_incoming_direction_eq_boundary_right` は、実際の辺の方向番号と四セル方向表の入方向が二だけずれることを平面持ち上げの座標差から示す。本文・SageMath は不変。次は右側の方向対応の必要十分版。

@@ -51978,9 +51978,9 @@ Z_L(q)
 &\le_{\Lambda}\log\bigl(2^{L^2}\cdot(1+q)^{2L^2}\bigr)
 &&(\because\ \blkref{claim_rational_log_order_iff}\text{ を }q:=Z_L(q)\text{、}q':=2^{L^2}\cdot(1+q)^{2L^2}\text{ で読み、準備の第一を移す})\\
 &=\log\bigl(2^{L^2}\bigr)+\log\bigl((1+q)^{2L^2}\bigr)
-&&(\because\ \blkref{claim_log_additive}\text{。}2^{L^2},\ (1+q)^{2L^2}\in\mathbb{Q}_{>0})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用し、}2^{L^2},\ (1+q)^{2L^2}\in\mathbb{Q}_{>0})\\
 &=L^2\,\log2+2L^2\,\log(1+q)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2\text{ と }k:=2L^2\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2\text{ と }k:=2L^2\text{ で二項へ同時適用し、整数倍は }\blkref{def_log_order_group})\\
 &=L^2\,\ell_2+2L^2\,\log(1+q)
 &&(\because\ \text{準備の第二})
 \end{aligned}`),
@@ -52000,7 +52000,7 @@ Z_L(q)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{1}{L^2}\cdot\iota\bigl(L^2\,\ell_2+2L^2\,\log(1+q)\bigr)
 &&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ の右辺から左辺の向きを }\lambda:=\Phi_L(q)\text{、}\mu:=L^2\ell_2+2L^2\log(1+q)\text{ で読み、上の }\Lambda\text{ の比較を移す})\\
 &=\frac{1}{L^2}\cdot\bigl(\iota(L^2\,\ell_2)+\iota(2L^2\,\log(1+q))\bigr)
-&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&&(\because\ \iota\text{ は加法を保つ（}\blkref{claim_rational_log_order_group_embedding}\text{）})\\
 &=\frac{1}{L^2}\cdot\iota(L^2\,\ell_2)+\frac{1}{L^2}\cdot\iota(2L^2\,\log(1+q))
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
 &=\frac{1}{L^2}\cdot\bigl(L^2\cdot\iota(\ell_2)\bigr)+\frac{1}{L^2}\cdot\bigl(2L^2\cdot\iota(\log(1+q))\bigr)
