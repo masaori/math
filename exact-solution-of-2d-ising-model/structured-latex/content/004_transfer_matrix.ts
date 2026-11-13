@@ -69,7 +69,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         math(String.raw`2^M`),
         " 次の複素行列である）。",
         ref("tensor_basis"),
-        " (3) と (1) より ",
+        " (2) と (1) より ",
         math(String.raw`(f_I)_{I\in\mathcal{I}}`),
         " は ",
         math(String.raw`\mathcal{F}`),

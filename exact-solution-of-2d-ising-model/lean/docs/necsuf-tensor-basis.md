@@ -16,7 +16,7 @@
 この文書の必要十分版が扱うのは `<tensor_basis>` (1)（行列単位の族が基底）で、引かれるのは
 `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` Step 1 の
 「`cal(E) = { E_{IJ} : I,J ∈ {1,2}^M }` は基底である」である
-（(2) の Lean は人手 Step 3 と 1 対 1 の `Ising2D.tensor_basis_kronecker_family_of_basis`（`TheoremTensorBasisKroneckerFamilyOfBasis.lean`）で、この文書の必要十分版を通らない。`<Z_Y_generate_algebra>` は 2026-11-12 から (2) を引かず、張ることだけを述べる `<kronecker_family_of_spanning_family_spans>` を引く）。
+（もとの (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族）は本文のどこからも引かれなくなり、参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避した。その Lean は人手 Step 3 と 1 対 1 の `Ising2D.tensor_basis_kronecker_family_of_basis`（`RoutesNotAdopted/ClaimsUnusedByChapterGoals/TheoremTensorBasisKroneckerFamilyOfBasis.lean`）で、この文書の必要十分版を通らない。`<Z_Y_generate_algebra>` は張ることだけを述べる `<kronecker_family_of_spanning_family_spans>` を、`<Z_Y_linearly_independent>` は `<kronecker_family_of_independent_family_is_independent>` を引く）。
 人手証明がそこで使う論法は **成分比較**——
 「任意の行列 `A` は `A = Σ_{IJ} A_{IJ} E_{IJ}` と書け、係数は成分そのものだから一意」——である。
 

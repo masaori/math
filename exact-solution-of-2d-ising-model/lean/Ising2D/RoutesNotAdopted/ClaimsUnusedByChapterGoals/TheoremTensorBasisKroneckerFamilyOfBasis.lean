@@ -1,8 +1,13 @@
 /-
-# クロネッカー積がつくる基底: 一般の基底のクロネッカー積の族（`<tensor_basis>` (2)）
+# クロネッカー積がつくる基底: 一般の基底のクロネッカー積の族（もとの `<tensor_basis>` (2)）
 
 対応する人手証明:
-`structured-latex/content/002_linear_space_general.ts` の `tensor_basis` の (2) と、その証明の Step 3
+`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` の
+`note_linear_space_general_001_theorem_tensor_product_basis_kronecker_family_of_basis_unused_by_chapter_goals`
+（もと `structured-latex/content/002_linear_space_general.ts` の `tensor_basis` の (2) と、その証明の Step 3）。
+本文の `Z_Y_generate_algebra` は張ることだけを `kronecker_family_of_spanning_family_spans` で、
+`Z_Y_linearly_independent` は線型独立であることだけを `kronecker_family_of_independent_family_is_independent` で引き、
+この主張を引く箇所が本文に無いので、参照用ノートへ退避した。この Lean は形式化の記録として残す。
 
 記号の読み替え（`ClaimKroneckerFamilyOfSpanningFamilySpans.lean` と同じ）:
 - 人手の `𝓑 = {b_1, …, b_4}` は Lean の `b : Fin 4 → Mat(2, ℂ)`（添字は `0, …, 3`）、人手の `π(q) ∈ 𝒫 = {1,2,3,4}^M` は
@@ -36,7 +41,7 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-- **`<tensor_basis>` (2) の形式化**: `b_1, …, b_4` が `Mat(2, ℂ)` の ℂ-基底（張り、かつ線型独立）ならば、
+/-- **もとの `<tensor_basis>` (2) の形式化**: `b_1, …, b_4` が `Mat(2, ℂ)` の ℂ-基底（張り、かつ線型独立）ならば、
 族 `(b_{a_1} ⊠ ⋯ ⊠ b_{a_M})_{(a_1, …, a_M) ∈ {1,2,3,4}^M}` は `Mat(2^M, ℂ)`（Lean の `TensorPow M`）を張り、
 かつ線型独立である。
 

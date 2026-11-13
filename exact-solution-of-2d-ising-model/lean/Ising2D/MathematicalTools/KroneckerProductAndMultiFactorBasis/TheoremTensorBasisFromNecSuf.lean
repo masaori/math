@@ -24,8 +24,9 @@
 
 抽象テンソル冪 `AbstractTensorPow M` 側の基底 `matTensorPowBasis` も、
 基底の移送 `NecSuf.basisOfLinearEquiv` で Kronecker 表現へ運べる
-（`kroneckerTensorPowBasis`）。`<tensor_basis>` (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族）は
-人手 Step 3 と 1 対 1 に `TheoremTensorBasisKroneckerFamilyOfBasis.lean` で示す。
+（`kroneckerTensorPowBasis`）。もとの `<tensor_basis>` (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族。
+参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避した）は、人手 Step 3 と 1 対 1 に
+`RoutesNotAdopted/ClaimsUnusedByChapterGoals/TheoremTensorBasisKroneckerFamilyOfBasis.lean` で示す。
 -/
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Representation
