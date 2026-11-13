@@ -10,6 +10,40 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "Z_Y_anticommutation_definition_pauli_matrices",
+    kind: "definition",
+    title: { text: "Pauli 行列" },
+    labels: ["def_pauli_matrices"],
+    statement: [
+      paragraph([
+        ref("def_imaginary_unit"),
+        " の虚数単位 ",
+        math(String.raw`i \in \mathbb{C}`),
+        " を用いて、",
+        math(String.raw`2`),
+        " 次の複素行列 ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\sigma^x:=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\sigma^y:=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+\sigma^z:=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+\ \in\mathrm{Mat}(2,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定め、Pauli 行列と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。pauli_matrix_products が主張の文の中で σ^x, σ^y, σ^z を定めており、" +
+          "定義と主張を 1 つのブロックに束ねていた（証明の書き方の「1 ブロック 1 主張」）。定義だけを引けるよう、Pauli 行列の定義をこのブロックへ分けた。",
+      ],
+    },
+  },
+  {
     id: "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
     kind: "claim",
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 1 },
@@ -17,22 +51,16 @@ export default defineBlocks([
     labels: ["pauli_matrix_products"],
     statement: [
       paragraph([
-        math(String.raw`2`),
-        " 次の複素行列を",
-      ]),
-      displayMath(
-        String.raw`\sigma^x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
-\sigma^y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
-\sigma^z=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
-I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
-\ \in\mathrm{Mat}(2,\mathbb{C})`,
-      ),
-      paragraph([
-        "とする（",
-        math(String.raw`i \in \mathbb{C}`),
-        " は ",
-        ref("def_imaginary_unit"),
-        " の虚数単位）。このとき ",
+        ref("def_pauli_matrices"),
+        " の Pauli 行列 ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）とする。このとき ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " の中で",
       ]),
@@ -80,7 +108,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \sigma^x,\ \sigma^z \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
 &&(\because \blkref{mat_mult})
 \end{aligned}`,
@@ -89,7 +117,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^x\sigma^y
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \sigma^x,\ \sigma^y \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
 &&(\because \blkref{mat_mult})
 \end{aligned}`,
@@ -98,7 +126,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \sigma^z,\ \sigma^y \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0&-i\\(-1)\cdot i&0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
@@ -118,7 +146,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^x\sigma^x
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^x \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
@@ -131,7 +159,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^y\sigma^y
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \sigma^y \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}(-i)\cdot i&0\\0&i\cdot(-i)\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
@@ -146,7 +174,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^z\sigma^z
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \sigma^z \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}1&0\\0&(-1)\cdot(-1)\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
@@ -162,7 +190,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^z\sigma^x
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^z,\ \sigma^x \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0&1\\-1&0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}-0&1\\-1&-0\end{pmatrix}
@@ -179,7 +207,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^y,\ \sigma^x \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}-i&-0\\-0&i\end{pmatrix}
@@ -196,7 +224,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^y\sigma^z
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \sigma^y,\ \sigma^z \text{ の定義}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0&(-i)\cdot(-1)\\i&0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0&i\\i&0\end{pmatrix}
@@ -243,6 +271,7 @@ i\cdot(-i)
           "新しく足した def_matrix_negation へのラベル参照にした。反可換性の 3 式は、右辺の積を先に計算し、主張の左辺から始まる鎖にした" +
           "（以前は σ^x σ^z = -σ^z σ^x のように主張と逆向きの式を示していた）。符号の段は 0 = -0 と 1 = -(-1)（または i = -(-i)）の 2 段に割り、" +
           "行列の積の段と成分の積の段（(-1)·(-1) = 1 など）を分けた。右辺の積の計算は冒頭の準備へ移した。",
+        "2026-11-13: 主張の文の中にあった σ^x, σ^y, σ^z の定義を def_pauli_matrices へ分け（1 ブロック 1 主張）、証明の「σ の定義」の段をその参照にした。",
       ],
     },
   },
@@ -253,7 +282,7 @@ i\cdot(-i)
     labels: ["pauli_y_times_pauli_x"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " と、",
@@ -276,7 +305,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}(-i)\cdot 1&0\\0&i\end{pmatrix}
@@ -288,7 +317,7 @@ i\cdot(-i)
 &= (-i)\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= (-i)\,\sigma^z
-&&(\because \blkref{pauli_matrix_products})
+&&(\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
     ],
@@ -307,7 +336,7 @@ i\cdot(-i)
     labels: ["pauli_x_times_pauli_z"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " と、",
@@ -330,7 +359,7 @@ i\cdot(-i)
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products}) \\
+&&(\because \blkref{def_pauli_matrices}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}(-i)\cdot 0&-1\\1&(-i)\cdot 0\end{pmatrix}
@@ -342,7 +371,7 @@ i\cdot(-i)
 &= (-i)\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= (-i)\,\sigma^y
-&&(\because \blkref{pauli_matrix_products})
+&&(\because \blkref{def_pauli_matrices})
 \end{aligned}`,
       ),
     ],
@@ -404,7 +433,7 @@ I^\top
     labels: ["transpose_of_pauli_x"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -421,9 +450,9 @@ I^\top
 &= \begin{pmatrix}(\sigma^x)_{11}&(\sigma^x)_{21}\\(\sigma^x)_{12}&(\sigma^x)_{22}\end{pmatrix}
 &&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^x \text{ の成分}) \\
 &= \sigma^x
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^x)
 \end{aligned}`,
       ),
     ],
@@ -441,7 +470,7 @@ I^\top
     labels: ["transpose_of_pauli_z"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -458,9 +487,9 @@ I^\top
 &= \begin{pmatrix}(\sigma^z)_{11}&(\sigma^z)_{21}\\(\sigma^z)_{12}&(\sigma^z)_{22}\end{pmatrix}
 &&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^z \text{ の成分}) \\
 &= \sigma^z
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^z)
 \end{aligned}`,
       ),
     ],
@@ -478,7 +507,7 @@ I^\top
     labels: ["transpose_of_pauli_y"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -497,7 +526,7 @@ I^\top
 &= \begin{pmatrix}(\sigma^y)_{11}&(\sigma^y)_{21}\\(\sigma^y)_{12}&(\sigma^y)_{22}\end{pmatrix}
 &&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
 &= \begin{pmatrix}0&i\\-i&0\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^y \text{ の成分}) \\
 &= \begin{pmatrix}-0&i\\-i&-0\end{pmatrix}
 &&(\because \mathbb{C} \text{ で } 0=-0\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
 &= \begin{pmatrix}-0&-(-i)\\-i&-0\end{pmatrix}
@@ -505,7 +534,7 @@ I^\top
 &= -\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \blkref{def_matrix_negation}) \\
 &= -\,\sigma^y
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^y)
 \end{aligned}`,
       ),
     ],
@@ -583,7 +612,7 @@ I
     labels: ["pauli_x_has_real_entries"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
         " の成分はすべて実数（",
@@ -598,7 +627,7 @@ I
         String.raw`\begin{aligned}
 \sigma^x
 &= \begin{pmatrix}0_{\mathbb{C}}&1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^x) \\
 &= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(1)\\\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\end{pmatrix}
 &&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0),\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1) \text{ を各成分へ同時に適用})
 \end{aligned}`,
@@ -639,7 +668,7 @@ I
     labels: ["pauli_z_has_real_entries"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " の成分はすべて実数（",
@@ -654,7 +683,7 @@ I
         String.raw`\begin{aligned}
 \sigma^z
 &= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&-1_{\mathbb{C}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^z) \\
 &= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\\\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(-1)\end{pmatrix}
 &&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1),\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0),\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) \text{ を各成分へ同時に適用})
 \end{aligned}`,
@@ -719,7 +748,7 @@ I
     labels: ["pauli_y_is_i_times_real_factor"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
         " と ",
@@ -744,7 +773,7 @@ I
         String.raw`\begin{aligned}
 \sigma^y
 &= \begin{pmatrix}0_{\mathbb{C}}&-i\\i&0_{\mathbb{C}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^y) \\
 &= \begin{pmatrix}0_{\mathbb{C}}&(-1_{\mathbb{C}})\cdot i\\i&0_{\mathbb{C}}\end{pmatrix}
 &&(\because \blkref{multiply_by_minus_one}\ (z \to i)) \\
 &= \begin{pmatrix}0_{\mathbb{C}}&i\cdot(-1_{\mathbb{C}})\\i&0_{\mathbb{C}}\end{pmatrix}

@@ -13,10 +13,10 @@
 | 人手 | Lean |
 | --- | --- |
 | `identity_matrix_of_order_two_has_real_entries` の鎖 3 行（`def_identity_matrix` → `def_kronecker_delta` → `inclusion_rr_to_cc` の略記を各成分へ） | `identity_matrix_two_eq_ofReal` の `calc` の 3 段 |
-| `pauli_x_has_real_entries` の鎖 2 行（`pauli_matrix_products` の `σ^x` → `inclusion_rr_to_cc` の略記を各成分へ） | `pauliX_eq_ofReal` の `calc` の 2 段 |
-| `pauli_z_has_real_entries` の鎖 2 行（`pauli_matrix_products` の `σ^z` → `inclusion_rr_to_cc` の略記を各成分へ） | `pauliZ_eq_ofReal` の `calc` の 2 段 |
+| `pauli_x_has_real_entries` の鎖 2 行（`def_pauli_matrices` の `σ^x` → `inclusion_rr_to_cc` の略記を各成分へ） | `pauliX_eq_ofReal` の `calc` の 2 段 |
+| `pauli_z_has_real_entries` の鎖 2 行（`def_pauli_matrices` の `σ^z` → `inclusion_rr_to_cc` の略記を各成分へ） | `pauliZ_eq_ofReal` の `calc` の 2 段 |
 | `def_real_factor_of_pauli_y`（`R^y := !![0_ℂ, -1_ℂ; 1_ℂ, 0_ℂ]`） | `pauliYReal` |
-| `pauli_y_is_i_times_real_factor` の鎖 7 行（`pauli_matrix_products` の `σ^y` → `multiply_by_minus_one` → 積の可換律 → 積の単位元 → `complex_times_zero_is_zero` を 2 成分へ → `def_matrix_scalar_multiple` → `def_real_factor_of_pauli_y`） | `pauliY_eq_I_smul_pauliYReal` の `calc` の 7 段 |
+| `pauli_y_is_i_times_real_factor` の鎖 7 行（`def_pauli_matrices` の `σ^y` → `multiply_by_minus_one` → 積の可換律 → 積の単位元 → `complex_times_zero_is_zero` を 2 成分へ → `def_matrix_scalar_multiple` → `def_real_factor_of_pauli_y`） | `pauliY_eq_I_smul_pauliYReal` の `calc` の 7 段 |
 | `real_factor_of_pauli_y_has_real_entries` の鎖 2 行（`def_real_factor_of_pauli_y` → `inclusion_rr_to_cc` の略記を各成分へ） | `pauliYReal_eq_ofReal` の `calc` の 2 段 |
 | 各成分について `r` を取り、`def_matrix_with_real_entries` の条件が成り立つ | `identity_matrix_two_hasRealEntries`・`pauliX_hasRealEntries`・`pauliZ_hasRealEntries`・`pauliYReal_hasRealEntries`（`r` は実の `2 × 2` 行列の `(p, q)` 成分） |
 
@@ -58,7 +58,7 @@ theorem identity_matrix_two_hasRealEntries : MatrixHasRealEntries (1 : Matrix (F
 theorem pauliX_eq_ofReal :
     pauliX = !![((0 : ℝ) : ℂ), ((1 : ℝ) : ℂ); ((1 : ℝ) : ℂ), ((0 : ℝ) : ℂ)] :=
   calc pauliX
-      = !![(0 : ℂ), 1; 1, 0] := rfl                                    -- `pauli_matrix_products` の `σ^x`
+      = !![(0 : ℂ), 1; 1, 0] := rfl                                    -- `def_pauli_matrices` の `σ^x`
     _ = !![((0 : ℝ) : ℂ), ((1 : ℝ) : ℂ); ((1 : ℝ) : ℂ), ((0 : ℝ) : ℂ)] := by
         rw [Complex.ofReal_zero, Complex.ofReal_one]                  -- `inclusion_rr_to_cc` の略記 `0_ℂ = ι(0)`, `1_ℂ = ι(1)` を各成分へ
 
@@ -73,7 +73,7 @@ theorem pauliX_hasRealEntries : MatrixHasRealEntries pauliX := by
 theorem pauliZ_eq_ofReal :
     pauliZ = !![((1 : ℝ) : ℂ), ((0 : ℝ) : ℂ); ((0 : ℝ) : ℂ), ((-1 : ℝ) : ℂ)] :=
   calc pauliZ
-      = !![(1 : ℂ), 0; 0, -1] := rfl                                   -- `pauli_matrix_products` の `σ^z`
+      = !![(1 : ℂ), 0; 0, -1] := rfl                                   -- `def_pauli_matrices` の `σ^z`
     _ = !![((1 : ℝ) : ℂ), ((0 : ℝ) : ℂ); ((0 : ℝ) : ℂ), ((-1 : ℝ) : ℂ)] := by
         rw [Complex.ofReal_one, Complex.ofReal_zero, Complex.ofReal_neg, Complex.ofReal_one]
                                                                        -- `inclusion_rr_to_cc` の略記 `1_ℂ = ι(1)`, `0_ℂ = ι(0)`, `-1_ℂ = ι(-1)` を各成分へ
@@ -91,7 +91,7 @@ def pauliYReal : Matrix (Fin 2) (Fin 2) ℂ := !![0, -1; 1, 0]
 /-- **人手 `pauli_y_is_i_times_real_factor`**: `σ^y = iR^y`（7 行の鎖）。 -/
 theorem pauliY_eq_I_smul_pauliYReal : pauliY = Complex.I • pauliYReal :=
   calc pauliY
-      = !![0, -Complex.I; Complex.I, 0] := rfl                         -- `pauli_matrix_products` の `σ^y`
+      = !![0, -Complex.I; Complex.I, 0] := rfl                         -- `def_pauli_matrices` の `σ^y`
     _ = !![0, (-1) * Complex.I; Complex.I, 0] := by
         rw [neg_one_mul]                                               -- `multiply_by_minus_one`（`z → i`）
     _ = !![0, Complex.I * (-1); Complex.I, 0] := by

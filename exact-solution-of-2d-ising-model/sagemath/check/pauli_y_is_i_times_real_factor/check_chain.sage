@@ -10,7 +10,7 @@ def scalar_def(a, A):                    # def_matrix_scalar_multiple
 RY = matrix(KG, [[0, -1], [1, 0]])       # def_real_factor_of_pauli_y
 lines = [
     SY,
-    matrix(KG, [[0, -i], [i, 0]]),                      # pauli_matrix_products の σ^y
+    matrix(KG, [[0, -i], [i, 0]]),                      # def_pauli_matrices の σ^y
     matrix(KG, [[0, (-1) * i], [i, 0]]),                # multiply_by_minus_one
     matrix(KG, [[0, i * (-1)], [i, 0]]),                # 積の可換律
     matrix(KG, [[0, i * (-1)], [i * 1, 0]]),            # 積の単位元

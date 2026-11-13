@@ -237,6 +237,7 @@ export const ALL_LABELS = [
   "def_pair_of_matrices_times_column_of_numbers",
   "def_pair_of_matrices_times_two_by_two_matrix",
   "def_partition_function_2d_ising",
+  "def_pauli_matrices",
   "def_phi_cartesian",
   "def_phi_polar",
   "def_positive_coupling_tanh",

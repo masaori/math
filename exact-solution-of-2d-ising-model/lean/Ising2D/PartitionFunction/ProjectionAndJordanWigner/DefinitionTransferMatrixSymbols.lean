@@ -3,8 +3,7 @@
 
 対応する人手証明:
 `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` (`<def_transfer_matrix_symbols>`)
-（Pauli 行列そのものの成分表示は
-`parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` の証明冒頭にある）
+（Pauli 行列そのものの成分表示は人手 `def_pauli_matrices`（`structured-latex/content/006_Z_Y_anticommutation.ts`）にある）
 
 Pauli 行列の積の 6 式（`pauliX_mul_pauliX`・`pauliY_mul_pauliY`・`pauliZ_mul_pauliZ`・`pauliZ_mul_pauliX`・
 `pauliY_mul_pauliX`・`pauliY_mul_pauliZ_anticomm`）は、人手 `pauli_matrix_products`
@@ -63,15 +62,15 @@ namespace Ising2D
 
 /-! ## Pauli 行列（`Mat(2, ℂ)` の元）
 
-`parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` の証明冒頭の定義。 -/
+人手 `def_pauli_matrices`（`structured-latex/content/006_Z_Y_anticommutation.ts`）の定義。 -/
 
-/-- Pauli 行列 `σ^x = !![0, 1; 1, 0]`。 -/
+/-- Pauli 行列 `σ^x = !![0, 1; 1, 0]`（人手 `def_pauli_matrices`）。 -/
 def pauliX : Matrix (Fin 2) (Fin 2) ℂ := !![0, 1; 1, 0]
 
-/-- Pauli 行列 `σ^y = !![0, -√-1; √-1, 0]`。 -/
+/-- Pauli 行列 `σ^y = !![0, -i; i, 0]`（人手 `def_pauli_matrices`）。 -/
 def pauliY : Matrix (Fin 2) (Fin 2) ℂ := !![0, -Complex.I; Complex.I, 0]
 
-/-- Pauli 行列 `σ^z = !![1, 0; 0, -1]`。 -/
+/-- Pauli 行列 `σ^z = !![1, 0; 0, -1]`（人手 `def_pauli_matrices`）。 -/
 def pauliZ : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 
 section PauliRelations
@@ -118,7 +117,7 @@ theorem twoByTwo_kroneckerDelta_eq_identity :
 @[simp]
 theorem pauliX_mul_pauliX : pauliX * pauliX = 1 := by
   calc
-    -- σ^x の定義
+    -- `def_pauli_matrices`
     pauliX * pauliX = !![0, 1; 1, 0] * !![0, 1; 1, 0] := rfl
     -- `mat_mult`
     _ = !![1, 0; 0, 1] := by
@@ -133,7 +132,7 @@ theorem pauliX_mul_pauliX : pauliX * pauliX = 1 := by
 @[simp]
 theorem pauliY_mul_pauliY : pauliY * pauliY = 1 := by
   calc
-    -- σ^y の定義
+    -- `def_pauli_matrices`
     pauliY * pauliY = !![0, -Complex.I; Complex.I, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
     -- `mat_mult`
     _ = !![(-Complex.I) * Complex.I, 0; 0, Complex.I * (-Complex.I)] := by
@@ -150,7 +149,7 @@ theorem pauliY_mul_pauliY : pauliY * pauliY = 1 := by
 @[simp]
 theorem pauliZ_mul_pauliZ : pauliZ * pauliZ = 1 := by
   calc
-    -- σ^z の定義
+    -- `def_pauli_matrices`
     pauliZ * pauliZ = !![1, 0; 0, -1] * !![1, 0; 0, -1] := rfl
     -- `mat_mult`
     _ = !![1, 0; 0, (-1) * (-1)] := by
@@ -166,7 +165,7 @@ theorem pauliZ_mul_pauliZ : pauliZ * pauliZ = 1 := by
 /-- 人手の反可換性の準備 `σ^x σ^z = (0 -1; 1 0)`。 -/
 theorem pauliX_mul_pauliZ_entries : pauliX * pauliZ = !![0, -1; 1, 0] := by
   calc
-    -- σ^x, σ^z の定義
+    -- `def_pauli_matrices`
     pauliX * pauliZ = !![0, 1; 1, 0] * !![1, 0; 0, -1] := rfl
     -- `mat_mult`
     _ = !![0, -1; 1, 0] := by
@@ -176,7 +175,7 @@ theorem pauliX_mul_pauliZ_entries : pauliX * pauliZ = !![0, -1; 1, 0] := by
 /-- 人手の反可換性の準備 `σ^x σ^y = (i 0; 0 -i)`。 -/
 theorem pauliX_mul_pauliY_entries : pauliX * pauliY = !![Complex.I, 0; 0, -Complex.I] := by
   calc
-    -- σ^x, σ^y の定義
+    -- `def_pauli_matrices`
     pauliX * pauliY = !![0, 1; 1, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
     -- `mat_mult`
     _ = !![Complex.I, 0; 0, -Complex.I] := by
@@ -186,7 +185,7 @@ theorem pauliX_mul_pauliY_entries : pauliX * pauliY = !![Complex.I, 0; 0, -Compl
 /-- 人手の反可換性の準備 `σ^z σ^y = (0 -i; -i 0)`。 -/
 theorem pauliZ_mul_pauliY_entries : pauliZ * pauliY = !![0, -Complex.I; -Complex.I, 0] := by
   calc
-    -- σ^z, σ^y の定義
+    -- `def_pauli_matrices`
     pauliZ * pauliY = !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
     -- `mat_mult`
     _ = !![0, -Complex.I; (-1) * Complex.I, 0] := by
@@ -198,7 +197,7 @@ theorem pauliZ_mul_pauliY_entries : pauliZ * pauliY = !![0, -Complex.I; -Complex
 /-- `σ^z σ^x = -σ^x σ^z`（人手 `pauli_matrix_products`）。 -/
 theorem pauliZ_mul_pauliX : pauliZ * pauliX = -(pauliX * pauliZ) := by
   calc
-    -- σ^z, σ^x の定義
+    -- `def_pauli_matrices`
     pauliZ * pauliX = !![1, 0; 0, -1] * !![0, 1; 1, 0] := rfl
     -- `mat_mult`
     _ = !![0, 1; -1, 0] := by
@@ -219,7 +218,7 @@ theorem pauliZ_mul_pauliX : pauliZ * pauliX = -(pauliX * pauliZ) := by
 /-- `σ^y σ^x = -σ^x σ^y`（人手 `pauli_matrix_products`）。 -/
 theorem pauliY_mul_pauliX : pauliY * pauliX = -(pauliX * pauliY) := by
   calc
-    -- σ^y, σ^x の定義
+    -- `def_pauli_matrices`
     pauliY * pauliX = !![0, -Complex.I; Complex.I, 0] * !![0, 1; 1, 0] := rfl
     -- `mat_mult`
     _ = !![-Complex.I, 0; 0, Complex.I] := by
@@ -240,7 +239,7 @@ theorem pauliY_mul_pauliX : pauliY * pauliX = -(pauliX * pauliY) := by
 /-- `σ^y σ^z = -σ^z σ^y`（人手 `pauli_matrix_products`）。 -/
 theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
   calc
-    -- σ^y, σ^z の定義
+    -- `def_pauli_matrices`
     pauliY * pauliZ = !![0, -Complex.I; Complex.I, 0] * !![1, 0; 0, -1] := rfl
     -- `mat_mult`
     _ = !![0, (-Complex.I) * (-1); Complex.I, 0] := by
@@ -411,9 +410,9 @@ theorem pauliX_transpose : pauliXᵀ = pauliX := by
       ext p q
       rw [matrix_transpose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^x の成分
+    -- `def_pauli_matrices` の σ^x の成分
     _ = !![0, 1; 1, 0] := rfl
-    -- `pauli_matrix_products` の σ^x
+    -- `def_pauli_matrices` の σ^x
     _ = pauliX := rfl
 
 /-- 人手 `transpose_of_pauli_z`: `(σ^z)^⊤ = σ^z`。 -/
@@ -425,9 +424,9 @@ theorem pauliZ_transpose : pauliZᵀ = pauliZ := by
       ext p q
       rw [matrix_transpose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^z の成分
+    -- `def_pauli_matrices` の σ^z の成分
     _ = !![1, 0; 0, -1] := rfl
-    -- `pauli_matrix_products` の σ^z
+    -- `def_pauli_matrices` の σ^z
     _ = pauliZ := rfl
 
 /-- 人手 `transpose_of_pauli_y`: `(σ^y)^⊤ = -σ^y`。 -/
@@ -439,7 +438,7 @@ theorem pauliY_transpose : pauliYᵀ = -pauliY := by
       ext p q
       rw [matrix_transpose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^y の成分
+    -- `def_pauli_matrices` の σ^y の成分
     _ = !![0, Complex.I; -Complex.I, 0] := rfl
     -- ℂ で `0 = -0`（`-z` は `multiply_by_minus_one` の記号）
     _ = !![-0, Complex.I; -Complex.I, -0] := by rw [neg_zero]
@@ -450,7 +449,7 @@ theorem pauliY_transpose : pauliYᵀ = -pauliY := by
       ext i j
       rw [matrix_neg_apply]
       fin_cases i <;> fin_cases j <;> rfl
-    -- `pauli_matrix_products` の σ^y
+    -- `def_pauli_matrices` の σ^y
     _ = -pauliY := rfl
 
 end PauliTransposes

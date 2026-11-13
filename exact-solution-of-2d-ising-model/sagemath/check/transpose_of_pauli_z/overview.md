@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | 証明の鎖の全行 | `check_chain.sage` | 3 段。転置は `def_matrix_transpose` の成分の式で組み、Sage の `transpose()` との一致を見てから使う。対照 1 件: 対称でない `σ^zσ^x` は転置で変わる | **PASS** | 成り立つ |
 
-共通の準備は `sagemath/_shared/pauli_sites_exact.sage`（σ^x, σ^y, σ^z, I は `pauli_matrix_products` の成分）と、
+共通の準備は `sagemath/_shared/pauli_sites_exact.sage`（σ^x, σ^y, σ^z は `def_pauli_matrices`、I は `def_identity_matrix` の成分）と、
 `sagemath/_shared/matrix_operations_by_definition.sage` の `body_transpose`（`def_matrix_transpose`）。
 
 ## 計算の帰属と範囲

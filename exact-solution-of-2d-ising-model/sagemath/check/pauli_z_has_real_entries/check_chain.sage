@@ -9,7 +9,7 @@ def iota(r):
 
 lines = [
     SZ,
-    matrix(KG, [[1,0],[0,-1]]),                 # pauli_matrix_products
+    matrix(KG, [[1,0],[0,-1]]),                 # def_pauli_matrices
     matrix(KG, [[iota(1), iota(0)], [iota(0), iota(-1)]]),   # inclusion_rr_to_cc の略記
 ]
 check_chain(lines, "pauli_z_has_real_entries")

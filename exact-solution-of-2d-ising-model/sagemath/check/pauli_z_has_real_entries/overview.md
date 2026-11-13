@@ -12,9 +12,9 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 証明の鎖の全行と成分ごとの r | `check_chain.sage` | `σ^z = (1_ℂ 0_ℂ; 0_ℂ -1_ℂ) = (ι(1) ι(0); ι(0) ι(-1))` の 2 段（`pauli_matrix_products` → `inclusion_rr_to_cc` の略記）。`ι(r) := (r, 0)` は `QQ(i)` の `r + 0·i` として組む。各成分が人手の取る `r ∈ QQ` の `ι(r)` に等しく虚部 0 であること。対照 1 件: `σ^y` は虚部 0 でない成分を持つ | **PASS** | 2 段と 4 成分 |
+| 証明の鎖の全行と成分ごとの r | `check_chain.sage` | `σ^z = (1_ℂ 0_ℂ; 0_ℂ -1_ℂ) = (ι(1) ι(0); ι(0) ι(-1))` の 2 段（`def_pauli_matrices` → `inclusion_rr_to_cc` の略記）。`ι(r) := (r, 0)` は `QQ(i)` の `r + 0·i` として組む。各成分が人手の取る `r ∈ QQ` の `ι(r)` に等しく虚部 0 であること。対照 1 件: `σ^y` は虚部 0 でない成分を持つ | **PASS** | 2 段と 4 成分 |
 
-共通の準備は `sagemath/_shared/pauli_sites_exact.sage`（σ^x, σ^y, σ^z, I は `pauli_matrix_products` の成分）。
+共通の準備は `sagemath/_shared/pauli_sites_exact.sage`（σ^x, σ^y, σ^z は `def_pauli_matrices`、I は `def_identity_matrix` の成分）。
 
 ## 計算の帰属と範囲
 

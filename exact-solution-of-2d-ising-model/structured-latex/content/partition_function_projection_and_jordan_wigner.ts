@@ -847,13 +847,13 @@ y_ix_i
       displayMath(String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &=\begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})\\
+&&(\because\ \blkref{def_pauli_matrices})\\
 &=\begin{pmatrix}0&-i\\-i&0\end{pmatrix}
 &&(\because\ 2\times2\text{ 行列の積の定義。}\blkref{mat_mult})\\
 &=-i\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&(\because\ \mathbb{C}\text{ の四則})\\
 &=-i\,\sigma^x
-&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})
+&&(\because\ \blkref{def_pauli_matrices})
 \end{aligned}`),
       paragraph([
         "を得る。次に任意の ",

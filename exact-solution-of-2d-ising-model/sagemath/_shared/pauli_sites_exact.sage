@@ -1,7 +1,7 @@
 # ε・サイトの Pauli 行列・Jordan–Wigner 行列・転送行列の可換性の検算で共有する準備。
 # 成分は QQ(i)（KG）か、その上の多項式環に置き、等号は厳密に判定する。
 # 本文の定め方の経路:
-#   σ^x, σ^y, σ^z, I（pauli_matrix_products）、クロネッカー積は def_kronecker (2) の成分の式
+#   σ^x, σ^y, σ^z（def_pauli_matrices）、I（def_identity_matrix）、クロネッカー積は def_kronecker (2) の成分の式
 #   (A_1⊠⋯⊠A_M)_{ν(I),ν(J)} := ∏_k (A_k)_{i_k j_k}、σ_k^a は def_site_pauli_matrices（第 k 因子だけ σ^a）、
 #   積は mat_mult の成分の式（matrix_operations_by_definition.sage の body_product）、ε は def_global_spin_flip_matrix の
 #   σ_1^x⋯σ_M^x を左から掛けたもの、Z_m・Y_m は def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の
