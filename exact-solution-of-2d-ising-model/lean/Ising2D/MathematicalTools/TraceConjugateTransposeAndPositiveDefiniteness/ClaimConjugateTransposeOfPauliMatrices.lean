@@ -74,13 +74,13 @@ theorem pauliX_conjTranspose : pauliXᴴ = pauliX := by
       ext p q
       rw [Matrix.conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^x の成分
+    -- `def_pauli_matrices` の σ^x の成分
     _ = !![star (0 : ℂ), star 1; star 1, star 0] := rfl
     -- `complex_conjugate_of_real_inclusion` を `r = 0, 1` で 4 成分へ同時に
     _ = !![(0 : ℂ), 1; 1, 0] := by
       rw [star_of_real_inclusion_abbrev 0 0 real_inclusion_zero_abbrev,
         star_of_real_inclusion_abbrev 1 1 real_inclusion_one_abbrev]
-    -- `pauli_matrix_products` の σ^x
+    -- `def_pauli_matrices` の σ^x
     _ = pauliX := rfl
 
 /-- 人手 `conjugate_transpose_of_pauli_z`: `(σ^z)^* = σ^z`。 -/
@@ -92,14 +92,14 @@ theorem pauliZ_conjTranspose : pauliZᴴ = pauliZ := by
       ext p q
       rw [Matrix.conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^z の成分
+    -- `def_pauli_matrices` の σ^z の成分
     _ = !![star (1 : ℂ), star 0; star 0, star (-1)] := rfl
     -- `complex_conjugate_of_real_inclusion` を `r = 1, 0, -1` で 4 成分へ同時に
     _ = !![(1 : ℂ), 0; 0, -1] := by
       rw [star_of_real_inclusion_abbrev 1 1 real_inclusion_one_abbrev,
         star_of_real_inclusion_abbrev 0 0 real_inclusion_zero_abbrev,
         star_of_real_inclusion_abbrev (-1) (-1) real_inclusion_neg_one_abbrev]
-    -- `pauli_matrix_products` の σ^z
+    -- `def_pauli_matrices` の σ^z
     _ = pauliZ := rfl
 
 /-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\bar i = -i`（人手 `relation_of_gamma_2_theta_tilde` の「第二に」と同じ 6 行の鎖。
@@ -135,7 +135,7 @@ theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
       ext p q
       rw [Matrix.conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
-    -- `pauli_matrix_products` の σ^y の成分
+    -- `def_pauli_matrices` の σ^y の成分
     _ = !![star (0 : ℂ), star Complex.I; star (-Complex.I), star 0] := rfl
     -- `complex_conjugate_of_real_inclusion` を `r = 0` で 2 成分へ同時に
     _ = !![(0 : ℂ), star Complex.I; star (-Complex.I), 0] := by
@@ -146,7 +146,7 @@ theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
     -- 準備の `\overline{-i} = i`
     _ = !![(0 : ℂ), -Complex.I; Complex.I, 0] := by
       rw [star_neg_I_eq_I]
-    -- `pauli_matrix_products` の σ^y
+    -- `def_pauli_matrices` の σ^y
     _ = pauliY := rfl
 
 end Ising2D

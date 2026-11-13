@@ -19,7 +19,7 @@ def check_chain(lines, label):
     for k, (a, b) in enumerate(zip(lines, lines[1:]), start=1):
         assert a == b, f"{label}: 第 {k} 行と第 {k+1} 行が一致しない"
 
-SZp = [[z1, z0], [z0, zm1]]               # pauli_matrix_products の σ^z
+SZp = [[z1, z0], [z0, zm1]]               # def_pauli_matrices の σ^z
 S = body_star(SZp)
 assert to_sage(S) == to_sage(SZp).conjugate_transpose()
 c = cc_conj

@@ -43,7 +43,7 @@ prep_mi = [
     i_pair,                                # i := (0,1)
 ]
 check_chain(prep_mi, "conjugate_transpose_of_pauli_y 準備 conj(-i)")
-SYp = [[z0, mi_pair], [i_pair, z0]]       # pauli_matrix_products の σ^y
+SYp = [[z0, mi_pair], [i_pair, z0]]       # def_pauli_matrices の σ^y
 S = body_star(SYp)
 assert to_sage(S) == to_sage(SYp).conjugate_transpose()
 lines = [

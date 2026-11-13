@@ -733,7 +733,7 @@ I^*
     labels: ["conjugate_transpose_of_pauli_x"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -750,11 +750,11 @@ I^*
 &= \begin{pmatrix}\overline{(\sigma^x)_{11}}&\overline{(\sigma^x)_{21}}\\\overline{(\sigma^x)_{12}}&\overline{(\sigma^x)_{22}}\end{pmatrix}
 &&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
 &= \begin{pmatrix}\overline{0_{\mathbb{C}}}&\overline{1_{\mathbb{C}}}\\\overline{1_{\mathbb{C}}}&\overline{0_{\mathbb{C}}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^x \text{ の成分}) \\
 &= \begin{pmatrix}0_{\mathbb{C}}&1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
 &&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 0, 1 \text{ で 4 成分へ同時に}) \\
 &= \sigma^x
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^x)
 \end{aligned}`,
       ),
     ],
@@ -763,6 +763,7 @@ I^*
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「pauli_matrix_products の Pauli 行列の成分より (σ^x)^* = σ^x」と文で述べていたので、transpose_of_pauli_x と同じ成分の鎖で示す主張として足した。",
         "数値検証: sagemath/check/conjugate_transpose_of_pauli_x/。",
+        "2026-11-13: σ^x の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
       ],
     },
   },
@@ -774,7 +775,7 @@ I^*
     labels: ["conjugate_transpose_of_pauli_z"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -803,11 +804,11 @@ I^*
 &= \begin{pmatrix}\overline{(\sigma^z)_{11}}&\overline{(\sigma^z)_{21}}\\\overline{(\sigma^z)_{12}}&\overline{(\sigma^z)_{22}}\end{pmatrix}
 &&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
 &= \begin{pmatrix}\overline{1_{\mathbb{C}}}&\overline{0_{\mathbb{C}}}\\\overline{0_{\mathbb{C}}}&\overline{(-1)_{\mathbb{C}}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^z \text{ の成分}) \\
 &= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&(-1)_{\mathbb{C}}\end{pmatrix}
 &&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 1, 0, -1 \text{ で 4 成分へ同時に}) \\
 &= \sigma^z
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^z)
 \end{aligned}`,
       ),
     ],
@@ -816,6 +817,7 @@ I^*
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「pauli_matrix_products の Pauli 行列の成分より (σ^z)^* = σ^z」と文で述べていたので、transpose_of_pauli_z と同じ成分の鎖で示す主張として足した。",
         "数値検証: sagemath/check/conjugate_transpose_of_pauli_z/。",
+        "2026-11-13: σ^z の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
       ],
     },
   },
@@ -827,7 +829,7 @@ I^*
     labels: ["conjugate_transpose_of_pauli_y"],
     statement: [
       paragraph([
-        ref("pauli_matrix_products"),
+        ref("def_pauli_matrices"),
         " の ",
         math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
@@ -887,7 +889,7 @@ I^*
 &= \begin{pmatrix}\overline{(\sigma^y)_{11}}&\overline{(\sigma^y)_{21}}\\\overline{(\sigma^y)_{12}}&\overline{(\sigma^y)_{22}}\end{pmatrix}
 &&(\because \blkref{def_hermitian_positive_definite} \text{ で } n=2) \\
 &= \begin{pmatrix}\overline{0_{\mathbb{C}}}&\bar i\\\overline{-i}&\overline{0_{\mathbb{C}}}\end{pmatrix}
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y \text{ の成分}) \\
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^y \text{ の成分}) \\
 &= \begin{pmatrix}0_{\mathbb{C}}&\bar i\\\overline{-i}&0_{\mathbb{C}}\end{pmatrix}
 &&(\because \blkref{complex_conjugate_of_real_inclusion} \text{ を } r = 0 \text{ で 2 成分へ同時に}) \\
 &= \begin{pmatrix}0_{\mathbb{C}}&-i\\\overline{-i}&0_{\mathbb{C}}\end{pmatrix}
@@ -895,7 +897,7 @@ I^*
 &= \begin{pmatrix}0_{\mathbb{C}}&-i\\i&0_{\mathbb{C}}\end{pmatrix}
 &&(\because \text{準備の } \overline{-i} = i) \\
 &= \sigma^y
-&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y)
+&&(\because \blkref{def_pauli_matrices} \text{ の } \sigma^y)
 \end{aligned}`,
       ),
     ],
@@ -905,6 +907,7 @@ I^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian の (1) の証明が「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」と文で述べていたので、transpose_of_pauli_y と同じ成分の鎖で示す主張として足した。準備の \\bar i = -i の 6 行は relation_of_gamma_2_theta_tilde の「第二に」の鎖と同じである。",
         "数値検証: sagemath/check/conjugate_transpose_of_pauli_y/。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
+        "2026-11-13: σ^y の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
       ],
     },
   },
