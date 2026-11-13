@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-13: 台帳の「Lean：数学的道具立ての節『有限集合の上の和』『ℂ-代数』の具体版と必要十分版」の行を書き切った。本文 25 ブロックを lean/…/FiniteSetSum/（Numbering・Reindexing・SumOverFiniteSet・DoubleSum）と ComplexAlgebra/（Definitions・Homomorphisms）に形式化し、必要十分版・導出版を置いた。本文の二か所で項の等しい線型結合が等しいことの根拠を claim_linear_combinations_with_equal_terms_are_equal の参照に直した。lake build・check-no-sorry・npm run check・build:pdf 通過。
 - 2026-11-13: 台帳の「Lean の設定と、節『環』『ℂ-線型空間』の具体版と必要十分版」の行を書き切った。lean/ を立て（v4.32.1、lake exe cache get が要る）、具体版・必要十分版・導出版を置いた。規約は lean/README.md。本文に「項ごとに等しい二つの ℂ の中の番号順の和は等しい」を足した。次は台帳の Lean の次の行（節「有限集合の上の和」「ℂ-代数」）。
 - 2026-11-13: 台帳の系「複素行列版イジングの Jordan–Wigner 行列への接続」の行を書き切った。P_M で直接添字づけたクロネッカー積とその積の規則、c_m と c_m^T のクロネッカー積の形、U=⊠K による共役で c_m+c_m^T→Z_m、(−i)c_m+ic_m^T→Y_m、Ω=κ_{U,U'}∘Φ_Y が直交基底を Jordan–Wigner 行列へ送る同型であること。SageMath 通過。記述の行はこれで全部済み、残りは Lean の行。
 - 2026-11-12: 台帳の系「奇数次元」の行を書き切った。V'=V⊕ℂ^vec、q'((v,t))=q(v)+t·t、j=Cl(in'_1)、g=γ'(in'_2(1))、符号の因子 χ_i とその番号順の積 ε、中心の元 z=j(ε)g（すべての元と交換し z^2=1）、二つの ℂ-代数の直積、Φ'（普遍性による）、冪等元 e_±、Ψ'、系（Φ' と Ψ' が互いに逆）を置いた。SageMath 一つ通過。次は系「複素行列版イジングの Jordan–Wigner 行列への接続」。

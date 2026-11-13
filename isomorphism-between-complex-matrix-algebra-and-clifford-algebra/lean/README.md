@@ -49,6 +49,12 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 線型結合 Σ_{k=1}^{n} λ_k ·_V x_k は、本文の定義の部分和 L_m を `partialLinearCombination` として書き、
   その m = n を `linearCombination` とする。本文の m についての帰納法は `partialLinearCombination` についての
   `induction` になる。ℂ の中の番号順の和も同じ（`partialOrderedSum`・`orderedSum`）。
+- 有限集合 X の番号付け e:{1,…,n}→X は `Idx n → X`（`Idx n` は {1,…,n} の部分型）で表す。X が空集合でも書けるように
+  `ℕ → X` にしない。X の上の族 f から線型結合に渡す `ℕ` の族は `numberedFamily e f d`（{1,…,n} の外は値 d）で作る。
+- 有限集合の上の和 Σ_{x∈X} λ_x ·_V v_x は、X が有限集合であることの証明から番号付けを `Classical.choose` で一つ選んで定め、
+  どの番号付けで開いても同じであること（本文の定義のブロックの後半）を `sumOverFiniteSet_eq` として示す。
+- ℂ-代数は `UnitalRing` の欄を持ち（`extends`）、スカラー倍の四つの公理と両立の二つを足した structure である。
+  線型空間の加法の四つの公理は環の加法の四つと同じ式なので重ねて置かない。
 - 座標の写像 β^b_k は、張ることから存在する係数を `Classical.choose` で一つ選んで定め、それが一つしか
   ないことを本文の二つ目の性質として示す。
 
@@ -58,6 +64,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | --- | --- | --- | --- |
 | 環 | `MathematicalToolkit/Ring/UnitalRing.lean` | 置かない（二つの定義はどちらも ℂ を含まず、具体版がそのまま必要十分） | なし |
 | ℂ-線型空間 | `MathematicalToolkit/ComplexVectorSpace/` の 7 ファイル | `NecSuf/MathematicalToolkit/ComplexVectorSpace/` の 7 ファイル | `ComplexVectorSpaceFromNecSuf.lean` |
+| 有限集合の上の和 | `MathematicalToolkit/FiniteSetSum/` の 4 ファイル（`Numbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/FiniteSetSum/` の 3 ファイル | `FiniteSetSumFromNecSuf.lean` |
+| ℂ-代数 | `MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `NecSuf/MathematicalToolkit/ComplexAlgebra/` の 2 ファイル | `ComplexAlgebraFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -68,3 +76,12 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   0 の左右の単位性、1 + n = 0 となる n の存在、1 · a = a、右分配法則、a · 0 = 0、0 · a = 0 を使い、
   乗法の結合法則・交換法則・左分配法則を使わない。
 - 二つの線型空間の直和が線型空間であることは、係数の性質を一つも使わない。
+
+## 必要十分版が示したこと（節「有限集合の上の和」「ℂ-代数」）
+
+- 有限集合の上の和を定めること、番号付けによらないこと、和どうしの和、項ごとの比較、二重和の順序の入れ替えは、
+  係数の公理を一つも使わない。
+- 和のスカラー倍には 0 + 0 = 0 と a · 0 = 0 が要り、線型写像が和を値の和へ移すこと・係数 δ の和が一項を取り出すことには
+  0 + 0 = 0 だけが要る（どちらも 0 ·_V x = 0_V を経由する）。
+- ℂ-代数の節の五つの主張（部分積、生成元で一致する準同型、合成、恒等写像、番号順の積の像）は、係数の性質を一つも使わず、
+  代数の公理（環の公理・スカラー倍の公理・両立の二つ）も使わない。使うのは演算の定義と準同型の条件だけである。
