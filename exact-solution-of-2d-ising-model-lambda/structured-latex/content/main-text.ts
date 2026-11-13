@@ -54297,11 +54297,11 @@ b^{\mathrm{op}}_{a,b}(\sigma)
 &=\bigl|B^{\mathrm{op}}_{a,b}(\sigma)\bigr|
 &&(\because\ \blkref{def_open_rectangle_broken_bond_count})\\
 &\le\bigl|E^{\mathrm{op}}_{a,b}\bigr|
-&&(\because\ B^{\mathrm{op}}_{a,b}(\sigma)\subseteq E^{\mathrm{op}}_{a,b}\text{（}\blkref{def_open_rectangle_broken_bond_count}\text{）。部分集合の元の個数は全体の元の個数以下})\\
+&&(\because\ B^{\mathrm{op}}_{a,b}(\sigma)\subseteq E^{\mathrm{op}}_{a,b}\text{（}\blkref{def_open_rectangle_broken_bond_count}\text{）であり、部分集合の元の個数は全体の元の個数以下})\\
 &=\bigl|E^{\mathrm{op}}_{a,b,\mathrm h}\bigr|+\bigl|E^{\mathrm{op}}_{a,b,\mathrm v}\bigr|
-&&(\because\ E^{\mathrm{op}}_{a,b}\text{ は向きの印 }\mathrm h,\mathrm v\text{ が異なる 2 つの集合の直和。}\blkref{def_open_rectangle_edges})\\
+&&(\because\ E^{\mathrm{op}}_{a,b}\text{ は向きの印 }\mathrm h,\mathrm v\text{ が異なる 2 つの集合の直和、}\blkref{def_open_rectangle_edges})\\
 &=a\cdot(b-1)+(a-1)\cdot b
-&&(\because\ E^{\mathrm{op}}_{a,b,\mathrm h}=\{0,\dots,a-1\}\times\{0,\dots,b-2\}\text{、}E^{\mathrm{op}}_{a,b,\mathrm v}=\{0,\dots,a-2\}\times\{0,\dots,b-1\}\text{ の直積の元の個数。}a,b\ge1\text{ なので }a-1,b-1\in\mathbb{N})\\
+&&(\because\ E^{\mathrm{op}}_{a,b,\mathrm h}=\{0,\dots,a-1\}\times\{0,\dots,b-2\}\text{、}E^{\mathrm{op}}_{a,b,\mathrm v}=\{0,\dots,a-2\}\times\{0,\dots,b-1\}\text{ の直積の元の個数であり、}a,b\ge1\text{ なので }a-1,b-1\in\mathbb{N})\\
 &\le a\cdot b+a\cdot b
 &&(\because\ b-1\le b\text{、}a-1\le a\text{ と、}\mathbb{N}\text{ の乗法・加法は順序と両立する})\\
 &=2ab
@@ -54315,15 +54315,15 @@ b^{\mathrm{op}}_{a,b}(\sigma)
                         displayMath(String.raw`\begin{aligned}
 Z^{\mathrm{op}}_{a,b}(q)
 &=\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
-&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_open_rectangle_partition_value_at_positive_rational})\\
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す、}\blkref{def_open_rectangle_partition_value_at_positive_rational})\\
 &\le\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}(1+q)^{\,b^{\mathrm{op}}_{a,b}(\sigma)}
-&&(\because\ 0<q\text{ と }q\le1+q\text{（}0<1\text{ を }q\text{ へ足す）と準備の第二を各項へ同時適用。有限和は各項の比較と両立する})\\
+&&(\because\ 0<q\text{ と }q\le1+q\text{（}0<1\text{ を }q\text{ へ足す）と準備の第二を各項へ同時適用し、有限和は各項の比較と両立する})\\
 &\le\sum_{\sigma\in\Sigma^{\mathrm{op}}_{a,b}}(1+q)^{2ab}
-&&(\because\ \text{各 }\sigma\text{ で }b^{\mathrm{op}}_{a,b}(\sigma)\le2ab\text{（準備の第五）と }1\le1+q\text{（}0<q\text{ を }1\text{ へ足す）と準備の第三を各項へ同時適用。同上})\\
+&&(\because\ \text{各 }\sigma\text{ で }b^{\mathrm{op}}_{a,b}(\sigma)\le2ab\text{（準備の第五）と }1\le1+q\text{（}0<q\text{ を }1\text{ へ足す）と準備の第三を各項へ同時適用し、有限和は各項の比較と両立する})\\
 &=\bigl|\Sigma^{\mathrm{op}}_{a,b}\bigr|\cdot(1+q)^{2ab}
-&&(\because\ \sigma\text{ に依らない同じ元の有限和。準備の第四})\\
+&&(\because\ \sigma\text{ に依らない同じ元の有限和、準備の第四})\\
 &=2^{ab}\cdot(1+q)^{2ab}
-&&(\because\ |\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\text{。}ab\text{ 個の頂点（}\blkref{def_open_rectangle_vertices}\text{）のそれぞれに }+1,-1\text{ のどちらかを割り当てる写像の個数。}\blkref{def_open_rectangle_configuration})
+&&(\because\ |\Sigma^{\mathrm{op}}_{a,b}|=2^{ab}\text{ は }ab\text{ 個の頂点（}\blkref{def_open_rectangle_vertices}\text{）のそれぞれに }+1,-1\text{ のどちらかを割り当てる写像の個数、}\blkref{def_open_rectangle_configuration})
 \end{aligned}`),
                         paragraph([
                           "以上は有理数の四則と順序、有限和、および ",
