@@ -2959,4 +2959,534 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
       ]),
     ],
   },
+  {
+    id: "complex_matrix_algebra_definition_membership_index_of_subset",
+    kind: "definition",
+    title: { text: "部分集合に番号が入るかどうかを 1・2 で表す添字" },
+    labels: ["def_membership_index_of_subset"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`T\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）とする。",
+        math(String.raw`k\in\{1,\dots,M\}`), " について、", math(String.raw`o_T(k)\in\{1,2\}`), " を次で定める。",
+      ]),
+      displayMath(String.raw`o_T(k):=
+\begin{cases}
+  2 & (k\in T),\\
+  1 & (k\notin T).
+\end{cases}`),
+      paragraph([
+        math(String.raw`k\in T`), " か ", math(String.raw`k\notin T`), " のどちらか一方だけが成り立つので（", ref("def_power_set_of_first_m_positive_integers"), "）、",
+        math(String.raw`o_T(k)`), " は一つに決まる。記号 ", math(String.raw`o_T(k)`), " は ", math(String.raw`M`), " を書かないが、", math(String.raw`M`), " を固定して定める。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_entry_of_product_of_matrices_indexed_by_two_element_set",
+    kind: "claim",
+    title: { text: "{1,2} で添字づけた行列の積の成分" },
+    labels: ["claim_entry_of_product_of_matrices_indexed_by_two_element_set"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathrm{id}_2:\{1,2\}\to\{1,2\}`), " を恒等写像とすると、", math(String.raw`(2,\mathrm{id}_2)`), " は ", math(String.raw`\{1,2\}`),
+        " の番号付けなので、", math(String.raw`\{1,2\}`), " は有限集合であり（", ref("def_numbering_of_finite_set"), "）、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        "（", ref("def_matrices_indexed_by_finite_set"), "）が定まる。", math(String.raw`A,B\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " と ", math(String.raw`a,b\in\{1,2\}`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\bigl(A\cdot_{\mathrm{Mat}_{\{1,2\}}}B\bigr)_{a,b}=\bigl(A_{a,1}\cdot_{\mathbb{C}}B_{1,b}\bigr)+_{\mathbb{C}}\bigl(A_{a,2}\cdot_{\mathbb{C}}B_{2,b}\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        "和は ℂ-線型空間 ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), "（", ref("def_complex_numbers_as_complex_vector_space"), "。ℂ-線型空間であることは ",
+        ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"), "）の中の有限集合の上の和（", ref("def_sum_over_finite_set"), "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot_{\mathrm{Mat}_{\{1,2\}}}B\bigr)_{a,b}
+&=\sum_{z\in\{1,2\}}A_{a,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,b}
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{j=1}^{2}A_{a,\mathrm{id}_2(j)}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{\mathrm{id}_2(j),b}
+&&\left(\because\ \text{番号付け}\ (2,\mathrm{id}_2)\ \text{で開く。}\blkref{def_sum_over_finite_set}\right)\\
+&=\Bigl(0_{\mathbb{C}^{\mathrm{vec}}}+_{\mathbb{C}^{\mathrm{vec}}}\bigl(A_{a,1}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{1,b}\bigr)\Bigr)+_{\mathbb{C}^{\mathrm{vec}}}\bigl(A_{a,2}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{2,b}\bigr)
+&&\left(\because\ \blkref{def_linear_combination}\right)\\
+&=\Bigl(0_{\mathbb{C}}+_{\mathbb{C}}\bigl(A_{a,1}\cdot_{\mathbb{C}}B_{1,b}\bigr)\Bigr)+_{\mathbb{C}}\bigl(A_{a,2}\cdot_{\mathbb{C}}B_{2,b}\bigr)
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\bigl(A_{a,1}\cdot_{\mathbb{C}}B_{1,b}\bigr)+_{\mathbb{C}}\bigl(A_{a,2}\cdot_{\mathbb{C}}B_{2,b}\bigr)
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_kronecker_product_indexed_by_power_set",
+    kind: "definition",
+    title: { text: "{1,2} で添字づけた行列の族の、部分集合全体で添字づけたクロネッカー積" },
+    labels: ["def_kronecker_product_indexed_by_power_set"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とする。", math(String.raw`\mathcal{P}_M`), " は有限集合であり（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、",
+        math(String.raw`(2,\mathrm{id}_2)`), "（", math(String.raw`\mathrm{id}_2`), " は恒等写像）は ", math(String.raw`\{1,2\}`), " の番号付けなので ", math(String.raw`\{1,2\}`), " も有限集合である（", ref("def_numbering_of_finite_set"), "）。",
+        math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), "（", ref("def_matrices_indexed_by_finite_set"),
+        "）の元 ", math(String.raw`A_k`), " が一つずつ与えられているとする。", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元 ",
+        math(String.raw`\mathop{\boxtimes}\limits_{k=1}^{M}A_k`), " を、", math(String.raw`S,T\in\mathcal{P}_M`), " についての成分で次のように定め、族 ",
+        math(String.raw`A_1,\dots,A_M`), " のクロネッカー積と呼ぶ。",
+      ]),
+      displayMath(String.raw`\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}:=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\bigr)_{o_S(k),\,o_T(k)}`),
+      paragraph([
+        math(String.raw`o_S(k),o_T(k)\in\{1,2\}`), " は ", ref("def_membership_index_of_subset"), " の添字なので、", math(String.raw`(A_k)_{o_S(k),o_T(k)}`),
+        " は ", math(String.raw`A_k`), " の成分で ", math(String.raw`\mathbb{C}`), " の元であり、右辺はその ", math(String.raw`\mathbb{C}`), " の中の番号順の積（",
+        ref("def_ordered_product_in_complex_numbers"), "）である。したがって左辺は写像 ", math(String.raw`\mathcal{P}_M\times\mathcal{P}_M\to\mathbb{C}`), "、すなわち ",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元として一つに決まる。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers",
+    kind: "claim",
+    title: { text: "部分集合ごとに因子を選んだ ℂ の中の番号順の積を部分集合全体の上で足すと、因子の和の番号順の積になる" },
+    labels: ["claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathbb{C}`), " の元 ",
+        math(String.raw`x_k`), " と ", math(String.raw`y_k`), " が一つずつ与えられているとする。", math(String.raw`R\in\mathcal{P}_M`), "（",
+        ref("def_power_set_of_first_m_positive_integers"), "）と ", math(String.raw`k\in\{1,\dots,M\}`), " について、", math(String.raw`k\in R`), " なら ",
+        math(String.raw`v^{R}_k:=x_k`), "、", math(String.raw`k\notin R`), " なら ", math(String.raw`v^{R}_k:=y_k`), " と定める。", math(String.raw`\mathcal{P}_M`),
+        " は有限集合である（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）。ℂ-線型空間 ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), "（",
+        ref("def_complex_numbers_as_complex_vector_space"), "、", ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"), "）の中の有限集合の上の和（",
+        ref("def_sum_over_finite_set"), "）と ", math(String.raw`\mathbb{C}`), " の中の番号順の積（", ref("def_ordered_product_in_complex_numbers"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{R\in\mathcal{P}_M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k=\prod_{\mathbb{C},\,k=1}^{M}\bigl(y_k+_{\mathbb{C}}x_k\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`R\in\mathcal{P}_M`), " について、族 ", math(String.raw`v^{R}_1,\dots,v^{R}_M`), " の番号順の積の定義（", ref("def_ordered_product_in_complex_numbers"),
+        "）が帰納的に定める元を ", math(String.raw`F_m(R)\in\mathbb{C}`), "（", math(String.raw`m\in\{0,1,\dots,M\}`), "）と書き、族 ",
+        math(String.raw`y_1+_{\mathbb{C}}x_1,\dots,y_M+_{\mathbb{C}}x_M`), " について同じく定まる元を ", math(String.raw`\Pi_m\in\mathbb{C}`), " と書く。",
+        math(String.raw`F_0(R)=1_{\mathbb{C}}`), "、", math(String.raw`F_m(R)=F_{m-1}(R)\cdot_{\mathbb{C}}v^{R}_m`), "、", math(String.raw`\Pi_0=1_{\mathbb{C}}`), "、",
+        math(String.raw`\Pi_m=\Pi_{m-1}\cdot_{\mathbb{C}}(y_m+_{\mathbb{C}}x_m)`), "（", math(String.raw`1\le m\le M`), "）であり、",
+        math(String.raw`F_M(R)=\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k`), "、", math(String.raw`\Pi_M=\prod_{\mathbb{C},\,k=1}^{M}(y_k+_{\mathbb{C}}x_k)`), " である。",
+        math(String.raw`m\in\{0,1,\dots,M\}`), " について、", math(String.raw`2^m`), " と ", math(String.raw`e_m:\{1,\dots,2^m\}\to\mathcal{P}_m`), " を ",
+        ref("def_binary_numbering_of_power_set"), " のものとする。", math(String.raw`\{1,\dots,m\}\subseteq\{1,\dots,M\}`), " なので ",
+        math(String.raw`\mathcal{P}_m\subseteq\mathcal{P}_M`), " であり、", math(String.raw`F_m(e_m(j))`), " は定まる。以下の和はすべて ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の中の線型結合（", ref("def_linear_combination"), "）である。準備として次の二つが成り立つ。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`R,R'\in\mathcal{P}_M`), " と ", math(String.raw`m'\in\{0,1,\dots,M\}`), " について、すべての ", math(String.raw`i\in\{1,\dots,m'\}`),
+        " で ", math(String.raw`v^{R}_i=v^{R'}_i`), " ならば ", math(String.raw`F_{m'}(R)=F_{m'}(R')`), " である。", math(String.raw`m'`), " についての帰納法による。",
+        math(String.raw`m'=0`), " のときはどちらも ", math(String.raw`1_{\mathbb{C}}`), " である。", math(String.raw`m'\ge 1`), " のとき、仮定は ", math(String.raw`m'-1`),
+        " についても成り立つので帰納法の仮定から ", math(String.raw`F_{m'-1}(R)=F_{m'-1}(R')`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_{m'}(R)
+&=F_{m'-1}(R)\cdot_{\mathbb{C}}v^{R}_{m'}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=F_{m'-1}(R')\cdot_{\mathbb{C}}v^{R}_{m'}
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=F_{m'-1}(R')\cdot_{\mathbb{C}}v^{R'}_{m'}
+&&\left(\because\ \text{仮定で}\ i:=m'\right)\\
+&=F_{m'}(R')
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "（二）", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`r\in\mathbb{C}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`),
+        " に ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`p_k`), " が与えられているとする。各 ", math(String.raw`k`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(p_k\cdot_{\mathbb{C}}r\bigr)
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\bigl(p_k\cdot_{\mathbb{C}}r\bigr)
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=p_k\cdot_{\mathbb{C}}r
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=r\cdot_{\mathbb{C}}p_k
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\bigl(r\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}}p_k
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\bigl(r\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["したがって次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(p_k\cdot_{\mathbb{C}}r\bigr)
+&=\sum_{k=1}^{n}\bigl(r\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k
+&&\left(\because\ \text{各項で上の式。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&=r\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k\right)
+&&\left(\because\ b_k:=p_k\text{、}\mu:=r\text{。}\blkref{claim_scalar_multiple_of_linear_combination}\right)\\
+&=r\cdot_{\mathbb{C}}\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k\right)
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k\right)\cdot_{\mathbb{C}}r
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right).
+\end{aligned}`),
+      paragraph([
+        "すべての ", math(String.raw`m\in\{0,1,\dots,M\}`), " について ", math(String.raw`\sum_{j=1}^{2^m}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_m(e_m(j))=\Pi_m`),
+        " であることを、", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`2^0=1`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_0\bigl(e_0(j)\bigr)
+&=0_{\mathbb{C}^{\mathrm{vec}}}+_{\mathbb{C}^{\mathrm{vec}}}\Bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_0\bigl(e_0(1)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_linear_combination}\right)\\
+&=0_{\mathbb{C}^{\mathrm{vec}}}+_{\mathbb{C}^{\mathrm{vec}}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ F_0\bigl(e_0(1)\bigr)=1_{\mathbb{C}}\text{。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=\Pi_0
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。", math(String.raw`n:=2^{m-1}`), " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2^m
+&=2\cdot 2^{m-1}
+&&\left(\because\ \blkref{def_binary_numbering_of_power_set}\right)\\
+&=n+n
+&&\left(\because\ n=2^{m-1}\ \text{と整数の積}\right).
+\end{aligned}`),
+      paragraph([
+        "（三）", math(String.raw`k\in\{1,\dots,n\}`), " について、", math(String.raw`k\le 2^{m-1}`), " なので ", math(String.raw`e_m(k)=e_{m-1}(k)`), " であり（",
+        ref("def_binary_numbering_of_power_set"), "）、", math(String.raw`e_{m-1}(k)\subseteq\{1,\dots,m-1\}`), " なので ", math(String.raw`m\notin e_m(k)`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_m\bigl(e_m(k)\bigr)
+&=F_{m-1}\bigl(e_m(k)\bigr)\cdot_{\mathbb{C}}v^{e_m(k)}_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=F_{m-1}\bigl(e_m(k)\bigr)\cdot_{\mathbb{C}}y_m
+&&\left(\because\ m\notin e_m(k)\text{。}v\ \text{の定め方}\right)\\
+&=F_{m-1}\bigl(e_{m-1}(k)\bigr)\cdot_{\mathbb{C}}y_m
+&&\left(\because\ e_m(k)=e_{m-1}(k)\right).
+\end{aligned}`),
+      paragraph([
+        "（四）", math(String.raw`j\in\{1,\dots,n\}`), " について、", math(String.raw`n<n+j\le 2^m`), " なので ", math(String.raw`e_m(n+j)=e_{m-1}(j)\cup\{m\}`), " である（",
+        ref("def_binary_numbering_of_power_set"), "）。", math(String.raw`i\in\{1,\dots,m-1\}`), " なら ", math(String.raw`i\neq m`), " なので、", math(String.raw`i\in e_m(n+j)`),
+        " と ", math(String.raw`i\in e_{m-1}(j)`), " は同値であり、", math(String.raw`v^{e_m(n+j)}_i=v^{e_{m-1}(j)}_i`), " である。また ", math(String.raw`m\in e_m(n+j)`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_m\bigl(e_m(n+j)\bigr)
+&=F_{m-1}\bigl(e_m(n+j)\bigr)\cdot_{\mathbb{C}}v^{e_m(n+j)}_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=F_{m-1}\bigl(e_m(n+j)\bigr)\cdot_{\mathbb{C}}x_m
+&&\left(\because\ m\in e_m(n+j)\text{。}v\ \text{の定め方}\right)\\
+&=F_{m-1}\bigl(e_{m-1}(j)\bigr)\cdot_{\mathbb{C}}x_m
+&&\left(\because\ \text{（一）で}\ m':=m-1\right).
+\end{aligned}`),
+      paragraph(["帰納法の仮定は ", math(String.raw`\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_{m-1}(e_{m-1}(k))=\Pi_{m-1}`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+&\sum_{k=1}^{2^m}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_m\bigl(e_m(k)\bigr)\\
+&\quad=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_m\bigl(e_m(k)\bigr)\right)+_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{j=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_m\bigl(e_m(n+j)\bigr)\right)
+&&\left(\because\ 2^m=n+n\text{、}n':=n\text{。}\blkref{claim_splitting_linear_combination_into_first_and_last_terms}\right)\\
+&\quad=\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\Bigl(F_{m-1}\bigl(e_{m-1}(k)\bigr)\cdot_{\mathbb{C}}y_m\Bigr)\right)+_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{j=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\Bigl(F_{m-1}\bigl(e_{m-1}(j)\bigr)\cdot_{\mathbb{C}}x_m\Bigr)\right)
+&&\left(\because\ \text{各項で（三）と（四）。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&\quad=\left(\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_{m-1}\bigl(e_{m-1}(k)\bigr)\right)\cdot_{\mathbb{C}}y_m\right)+_{\mathbb{C}^{\mathrm{vec}}}\left(\left(\sum_{j=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_{m-1}\bigl(e_{m-1}(j)\bigr)\right)\cdot_{\mathbb{C}}x_m\right)
+&&\left(\because\ \text{（二）を}\ n\text{、}p_k:=F_{m-1}(e_{m-1}(k))\text{、}r:=y_m\ \text{と}\ r:=x_m\ \text{の二か所に適用}\right)\\
+&\quad=\bigl(\Pi_{m-1}\cdot_{\mathbb{C}}y_m\bigr)+_{\mathbb{C}^{\mathrm{vec}}}\bigl(\Pi_{m-1}\cdot_{\mathbb{C}}x_m\bigr)
+&&\left(\because\ \text{帰納法の仮定を二か所に適用}\right)\\
+&\quad=\bigl(\Pi_{m-1}\cdot_{\mathbb{C}}y_m\bigr)+_{\mathbb{C}}\bigl(\Pi_{m-1}\cdot_{\mathbb{C}}x_m\bigr)
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&\quad=\Pi_{m-1}\cdot_{\mathbb{C}}\bigl(y_m+_{\mathbb{C}}x_m\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&\quad=\Pi_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "これで帰納法が閉じた。", math(String.raw`(2^M,e_M)`), " は ", math(String.raw`\mathcal{P}_M`), " の番号付けなので（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{R\in\mathcal{P}_M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
+&=\sum_{j=1}^{2^M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}F_M\bigl(e_M(j)\bigr)
+&&\left(\because\ \text{番号付け}\ (2^M,e_M)\ \text{で開く。}\blkref{def_sum_over_finite_set}\right)\\
+&=\Pi_M
+&&\left(\because\ \text{上の帰納法で}\ m:=M\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}\bigl(y_k+_{\mathbb{C}}x_k\bigr)
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_product_of_kronecker_products_is_kronecker_product_of_products",
+    kind: "claim",
+    title: { text: "クロネッカー積どうしの積は、因子ごとの積のクロネッカー積である" },
+    labels: ["claim_product_of_kronecker_products_is_kronecker_product_of_products"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`A_k`), " と ", math(String.raw`B_k`), " が一つずつ与えられているとする。クロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"),
+        "）について、", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の中で次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}B_k\Bigr)=\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{A}:=\mathop{\boxtimes}_{k=1}^{M}A_k`), "、", math(String.raw`\mathbb{B}:=\mathop{\boxtimes}_{k=1}^{M}B_k`), " と置く。両辺は ",
+        math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元なので、", math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定して ", math(String.raw`(S,T)`),
+        " 成分を比べる（", ref("def_matrices_indexed_by_finite_set"), "）。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
+        math(String.raw`x_k:=(A_k)_{o_S(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_T(k)}`), "、", math(String.raw`y_k:=(A_k)_{o_S(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_T(k)}`),
+        " と置き、", math(String.raw`R\in\mathcal{P}_M`), " について ", math(String.raw`v^{R}_k`), " を ", ref("claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers"),
+        " のとおり定める。準備として次の三つが成り立つ。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`R\in\mathcal{P}_M`), " と ", math(String.raw`k`), " について ", math(String.raw`(A_k)_{o_S(k),o_R(k)}\cdot_{\mathbb{C}}(B_k)_{o_R(k),o_T(k)}=v^{R}_k`),
+        " である。", math(String.raw`k\in R`), " なら ", math(String.raw`o_R(k)=2`), " なので左辺は ", math(String.raw`x_k=v^{R}_k`), "、", math(String.raw`k\notin R`), " なら ",
+        math(String.raw`o_R(k)=1`), " なので左辺は ", math(String.raw`y_k=v^{R}_k`), " である（", ref("def_membership_index_of_subset"), "）。",
+      ]),
+      paragraph(["（二）", math(String.raw`R\in\mathcal{P}_M`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathbb{A}_{S,R}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathbb{B}_{R,T}
+&=\mathbb{A}_{S,R}\cdot_{\mathbb{C}}\mathbb{B}_{R,T}
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\left(\prod_{\mathbb{C},\,k=1}^{M}(A_k)_{o_S(k),o_R(k)}\right)\cdot_{\mathbb{C}}\left(\prod_{\mathbb{C},\,k=1}^{M}(B_k)_{o_R(k),o_T(k)}\right)
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\ \text{を二か所に適用}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}\Bigl((A_k)_{o_S(k),o_R(k)}\cdot_{\mathbb{C}}(B_k)_{o_R(k),o_T(k)}\Bigr)
+&&\left(\because\ \blkref{claim_product_of_two_ordered_products_in_complex_numbers}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
+&&\left(\because\ \text{各}\ k\ \text{で（一）。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
+&&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["（三）", math(String.raw`k\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+y_k+_{\mathbb{C}}x_k
+&=\bigl((A_k)_{o_S(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_T(k)}\bigr)+_{\mathbb{C}}\bigl((A_k)_{o_S(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_T(k)}\bigr)
+&&\left(\because\ x_k,\ y_k\ \text{の定め方}\right)\\
+&=\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_S(k),o_T(k)}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right).
+\end{aligned}`),
+      paragraph([
+        "和は ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), " の中の有限集合の上の和（", ref("def_sum_over_finite_set"), "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\mathbb{A}\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}\mathbb{B}\bigr)_{S,T}
+&=\sum_{R\in\mathcal{P}_M}\mathbb{A}_{S,R}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathbb{B}_{R,T}
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\sum_{R\in\mathcal{P}_M}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
+&&\left(\because\ \text{各}\ R\ \text{で（二）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}\bigl(y_k+_{\mathbb{C}}x_k\bigr)
+&&\left(\because\ \blkref{claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_S(k),o_T(k)}
+&&\left(\because\ \text{各}\ k\ \text{で（三）。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)\Bigr)_{S,T}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_kronecker_product_of_identity_matrices_is_identity_matrix",
+    kind: "claim",
+    title: { text: "単位行列だけのクロネッカー積は単位行列である" },
+    labels: ["claim_kronecker_product_of_identity_matrices_is_identity_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、すべての ", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`A_k:=1_{\mathrm{Mat}_{\{1,2\}}}`),
+        " とする。クロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathop{\boxtimes}\limits_{k=1}^{M}A_k=1_{\mathrm{Mat}_{\mathcal{P}_M}}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_S(k),o_T(k)}`),
+        " と置く。単位行列の定義（", ref("def_matrices_indexed_by_finite_set"), "）から ", math(String.raw`\alpha_k=\delta_{o_S(k),o_T(k)}`), " である。二つの場合に分ける。",
+      ]),
+      paragraph([
+        "（", math(String.raw`S=T`), " の場合）すべての ", math(String.raw`k`), " で ", math(String.raw`o_S(k)=o_T(k)`), " なので ", math(String.raw`\alpha_k=1_{\mathbb{C}}`),
+        " である（", ref("def_kronecker_delta"), "）。番号順の積の定義が族 ", math(String.raw`\alpha`), " について定める元を ", math(String.raw`P_j`), " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}
+&=\prod_{\mathbb{C},\,k=1}^{M}\alpha_k
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=P_0
+&&\left(\because\ \text{すべての}\ k\ \text{で}\ \alpha_k=1_{\mathbb{C}}\text{、}r:=0\text{。}\blkref{claim_ordered_product_with_unit_factors_after_index}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\delta_{S,T}
+&&\left(\because\ S=T\text{。}\blkref{def_kronecker_delta}\right)\\
+&=\bigl(1_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,T}
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+      paragraph([
+        "（", math(String.raw`S\neq T`), " の場合）集合の等しさの定義（", ref("def_power_set_of_first_m_positive_integers"), "）により、", math(String.raw`k\in S`), " と ",
+        math(String.raw`k\in T`), " が同値でない ", math(String.raw`r\in\{1,\dots,M\}`), " がある。", math(String.raw`o_S(r)`), " と ",
+        math(String.raw`o_T(r)`), " の一方は 2、他方は 1 なので（", ref("def_membership_index_of_subset"), "）、", math(String.raw`\alpha_r=0_{\mathbb{C}}`), " である（",
+        ref("def_kronecker_delta"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}
+&=\prod_{\mathbb{C},\,k=1}^{M}\alpha_k
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \alpha_r=0_{\mathbb{C}}\text{。}\blkref{claim_ordered_product_with_zero_factor_is_zero}\right)\\
+&=\delta_{S,T}
+&&\left(\because\ S\neq T\text{。}\blkref{def_kronecker_delta}\right)\\
+&=\bigl(1_{\mathrm{Mat}_{\mathcal{P}_M}}\bigr)_{S,T}
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_kronecker_product_is_linear_in_one_factor",
+    kind: "claim",
+    title: { text: "クロネッカー積は一つの因子の線型結合を、積の線型結合へ移す" },
+    labels: ["claim_kronecker_product_is_linear_in_one_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`r\in\{1,\dots,M\}`), "、", math(String.raw`\lambda,\lambda'\in\mathbb{C}`), " とし、",
+        math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`A_k,\ A'_k,\ A''_k`),
+        " が一つずつ与えられていて、次を満たすとする（", math(String.raw`\mathrm{Mat}_{\{1,2\}}`), " の演算は ", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+      list([
+        [math(String.raw`k\neq r`), " のとき ", math(String.raw`A_k=A'_k=A''_k`)],
+        [math(String.raw`A''_r=(\lambda\ast_{\mathrm{Mat}_{\{1,2\}}}A_r)+_{\mathrm{Mat}_{\{1,2\}}}(\lambda'\ast_{\mathrm{Mat}_{\{1,2\}}}A'_r)`)],
+      ]),
+      paragraph(["クロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）について次が成り立つ。"]),
+      displayMath(String.raw`\mathop{\boxtimes}\limits_{k=1}^{M}A''_k=\Bigl(\lambda\ast_{\mathrm{Mat}_{\mathcal{P}_M}}\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)+_{\mathrm{Mat}_{\mathcal{P}_M}}\Bigl(\lambda'\ast_{\mathrm{Mat}_{\mathcal{P}_M}}\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_S(k),o_T(k)}`), "、",
+        math(String.raw`\alpha'_k:=(A'_k)_{o_S(k),o_T(k)}`), "、", math(String.raw`\alpha''_k:=(A''_k)_{o_S(k),o_T(k)}`), " と置く。", math(String.raw`k\neq r`), " なら ",
+        math(String.raw`\alpha_k=\alpha'_k=\alpha''_k`), " であり、", math(String.raw`\alpha''_r=(\lambda\cdot_{\mathbb{C}}\alpha_r)+_{\mathbb{C}}(\lambda'\cdot_{\mathbb{C}}\alpha'_r)`),
+        " である（", ref("def_matrices_indexed_by_finite_set"), " の和とスカラー倍）。", math(String.raw`k\neq r`), " なら ", math(String.raw`\beta_k:=\alpha_k`), "、",
+        math(String.raw`\beta'_k:=\alpha'_k`), "、", math(String.raw`\beta_r:=\lambda\cdot_{\mathbb{C}}\alpha_r`), "、", math(String.raw`\beta'_r:=\lambda'\cdot_{\mathbb{C}}\alpha'_r`),
+        " と置く。", math(String.raw`k\neq r`), " なら ", math(String.raw`\alpha''_k=\beta_k=\beta'_k`), "、", math(String.raw`\alpha''_r=\beta_r+_{\mathbb{C}}\beta'_r`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A''_k\Bigr)_{S,T}
+&=\prod_{\mathbb{C},\,k=1}^{M}\alpha''_k
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\left(\prod_{\mathbb{C},\,k=1}^{M}\beta_k\right)+_{\mathbb{C}}\left(\prod_{\mathbb{C},\,k=1}^{M}\beta'_k\right)
+&&\left(\because\ \blkref{claim_ordered_product_is_additive_in_one_factor}\right)\\
+&=\left(\lambda\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,k=1}^{M}\alpha_k\right)+_{\mathbb{C}}\left(\lambda'\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,k=1}^{M}\alpha'_k\right)
+&&\left(\because\ \blkref{claim_ordered_product_is_homogeneous_in_one_factor}\ \text{を二か所に適用}\right)\\
+&=\left(\lambda\cdot_{\mathbb{C}}\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}\right)+_{\mathbb{C}}\left(\lambda'\cdot_{\mathbb{C}}\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)_{S,T}\right)
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\ \text{を二か所に適用}\right)\\
+&=\Bigl(\Bigl(\lambda\ast_{\mathrm{Mat}_{\mathcal{P}_M}}\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)+_{\mathrm{Mat}_{\mathcal{P}_M}}\Bigl(\lambda'\ast_{\mathrm{Mat}_{\mathcal{P}_M}}\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)\Bigr)_{S,T}
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\ \text{の和とスカラー倍}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_conjugation_of_matrices",
+    kind: "definition",
+    title: { text: "二つの行列で両側から挟む写像" },
+    labels: ["def_conjugation_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`X`), " を有限集合（", ref("def_numbering_of_finite_set"), "）、", math(String.raw`U,U'\in\mathrm{Mat}_X(\mathbb{C})`), "（",
+        ref("def_matrices_indexed_by_finite_set"), "）とする。写像 ", math(String.raw`\kappa_{U,U'}:\mathrm{Mat}_X(\mathbb{C})\to\mathrm{Mat}_X(\mathbb{C})`), " を次で定める。",
+      ]),
+      displayMath(String.raw`\kappa_{U,U'}(F):=\bigl(U\cdot_{\mathrm{Mat}_X}F\bigr)\cdot_{\mathrm{Mat}_X}U'\qquad\bigl(F\in\mathrm{Mat}_X(\mathbb{C})\bigr)`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism",
+    kind: "claim",
+    title: { text: "互いに逆な二つの行列で挟む写像は ℂ-代数の準同型である" },
+    labels: ["claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`X`), "、", math(String.raw`U`), "、", math(String.raw`U'`), "、", math(String.raw`\kappa_{U,U'}`), " を ", ref("def_conjugation_of_matrices"),
+        " のものとし、", math(String.raw`B:=\mathrm{Mat}_X(\mathbb{C})`), " と書く。", math(String.raw`U\cdot_B U'=1_B`), " かつ ", math(String.raw`U'\cdot_B U=1_B`),
+        " であるとする。このとき ", math(String.raw`\kappa_{U,U'}`), " は ℂ-代数 ", math(String.raw`B`), "（", ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"),
+        "）から ", math(String.raw`B`), " への ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\kappa:=\kappa_{U,U'}`), " と書き、", math(String.raw`F,G\in B`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意に取る。", ref("def_complex_algebra_homomorphism"),
+        " の四つの条件を示す。行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。加法を保つこと：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(F+_B G)
+&=\bigl(U\cdot_B(F+_B G)\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=\bigl((U\cdot_B F)+_B(U\cdot_B G)\bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_matrix_product_distributes_over_sum_in_right_factor}\right)\\
+&=\bigl((U\cdot_B F)\cdot_B U'\bigr)+_B\bigl((U\cdot_B G)\cdot_B U'\bigr)
+&&\left(\because\ \blkref{claim_matrix_product_distributes_over_sum_in_left_factor}\right)\\
+&=\kappa(F)+_B\kappa(G)
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right).
+\end{aligned}`),
+      paragraph(["乗法を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(F)\cdot_B\kappa(G)
+&=\bigl((U\cdot_B F)\cdot_B U'\bigr)\cdot_B\bigl((U\cdot_B G)\cdot_B U'\bigr)
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=(U\cdot_B F)\cdot_B\Bigl(U'\cdot_B\bigl((U\cdot_B G)\cdot_B U'\bigr)\Bigr)
+&&\left(\because\ \text{結合}\right)\\
+&=(U\cdot_B F)\cdot_B\Bigl(\bigl(U'\cdot_B(U\cdot_B G)\bigr)\cdot_B U'\Bigr)
+&&\left(\because\ \text{結合}\right)\\
+&=(U\cdot_B F)\cdot_B\Bigl(\bigl((U'\cdot_B U)\cdot_B G\bigr)\cdot_B U'\Bigr)
+&&\left(\because\ \text{結合}\right)\\
+&=(U\cdot_B F)\cdot_B\bigl((1_B\cdot_B G)\cdot_B U'\bigr)
+&&\left(\because\ U'\cdot_B U=1_B\right)\\
+&=(U\cdot_B F)\cdot_B(G\cdot_B U')
+&&\left(\because\ \blkref{claim_identity_matrix_is_left_unit_of_matrix_product}\right)\\
+&=\bigl((U\cdot_B F)\cdot_B G\bigr)\cdot_B U'
+&&\left(\because\ \text{結合}\right)\\
+&=\bigl(U\cdot_B(F\cdot_B G)\bigr)\cdot_B U'
+&&\left(\because\ \text{結合}\right)\\
+&=\kappa(F\cdot_B G)
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right).
+\end{aligned}`),
+      paragraph(["乗法の単位元を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(1_B)
+&=(U\cdot_B 1_B)\cdot_B U'
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=U\cdot_B U'
+&&\left(\because\ \blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right)\\
+&=1_B
+&&\left(\because\ U\cdot_B U'=1_B\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\kappa(\lambda\ast_B F)
+&=\bigl(U\cdot_B(\lambda\ast_B F)\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=\bigl(\lambda\ast_B(U\cdot_B F)\bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_scalar_multiple_is_compatible_with_matrix_product_in_right_factor}\right)\\
+&=\lambda\ast_B\bigl((U\cdot_B F)\cdot_B U'\bigr)
+&&\left(\because\ \blkref{claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor}\right)\\
+&=\lambda\ast_B\kappa(F)
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_conjugations_by_mutually_inverse_matrices_compose_to_identity",
+    kind: "claim",
+    title: { text: "二つの行列で挟んでから、順を入れ替えた二つの行列で挟むと、元の行列に戻る" },
+    labels: ["claim_conjugations_by_mutually_inverse_matrices_compose_to_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`X`), "、", math(String.raw`U`), "、", math(String.raw`U'`), " を ", ref("def_conjugation_of_matrices"), " のものとし、", math(String.raw`B:=\mathrm{Mat}_X(\mathbb{C})`),
+        " と書く。", math(String.raw`U'\cdot_B U=1_B`), " であるとする。すべての ", math(String.raw`F\in B`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\kappa_{U',U}\bigl(\kappa_{U,U'}(F)\bigr)=F`),
+    ],
+    proof: [
+      paragraph(["行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。"]),
+      displayMath(String.raw`\begin{aligned}
+\kappa_{U',U}\bigl(\kappa_{U,U'}(F)\bigr)
+&=\Bigl(U'\cdot_B\bigl((U\cdot_B F)\cdot_B U'\bigr)\Bigr)\cdot_B U
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\ \text{を二か所に適用}\right)\\
+&=\Bigl(\bigl(U'\cdot_B(U\cdot_B F)\bigr)\cdot_B U'\Bigr)\cdot_B U
+&&\left(\because\ \text{結合}\right)\\
+&=\bigl(U'\cdot_B(U\cdot_B F)\bigr)\cdot_B(U'\cdot_B U)
+&&\left(\because\ \text{結合}\right)\\
+&=\bigl(U'\cdot_B(U\cdot_B F)\bigr)\cdot_B 1_B
+&&\left(\because\ U'\cdot_B U=1_B\right)\\
+&=U'\cdot_B(U\cdot_B F)
+&&\left(\because\ \blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right)\\
+&=(U'\cdot_B U)\cdot_B F
+&&\left(\because\ \text{結合}\right)\\
+&=1_B\cdot_B F
+&&\left(\because\ U'\cdot_B U=1_B\right)\\
+&=F
+&&\left(\because\ \blkref{claim_identity_matrix_is_left_unit_of_matrix_product}\right).
+\end{aligned}`),
+    ],
+  },
 ]);

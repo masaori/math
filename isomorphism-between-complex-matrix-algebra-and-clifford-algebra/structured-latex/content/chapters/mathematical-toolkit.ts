@@ -13286,6 +13286,133 @@ P_m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_product_of_two_ordered_products_in_complex_numbers",
+    kind: "claim",
+    title: { text: "ℂ の中の二つの番号順の積の積は、因子ごとの積の番号順の積である" },
+    labels: ["claim_product_of_two_ordered_products_in_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,k\}`), " の各元 ", math(String.raw`s`), " に ", math(String.raw`\mathbb{C}`),
+        " の元 ", math(String.raw`\alpha_s,\ \beta_s`), " が一つずつ与えられているとする。", math(String.raw`\mathbb{C}`), " の中の番号順の積（",
+        ref("def_ordered_product_in_complex_numbers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\left(\prod_{\mathbb{C},\,s=1}^{k}\alpha_s\right)\cdot_{\mathbb{C}}\left(\prod_{\mathbb{C},\,s=1}^{k}\beta_s\right)=\prod_{\mathbb{C},\,s=1}^{k}\bigl(\alpha_s\cdot_{\mathbb{C}}\beta_s\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        "三つの積について番号順の積の定義（", ref("def_ordered_product_in_complex_numbers"), "）が帰納的に定める元を、順に ",
+        math(String.raw`P_m,\ Q_m,\ R_m\in\mathbb{C}`), "（", math(String.raw`m\in\{0,1,\dots,k\}`), "）と書く。", math(String.raw`m`),
+        " についての帰納法で ", math(String.raw`P_m\cdot_{\mathbb{C}}Q_m=R_m`), " を示す。", math(String.raw`m=0`), " のとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_0\cdot_{\mathbb{C}}Q_0
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\ \text{を二か所に適用}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=R_0
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le k`), " とし、",
+        math(String.raw`P_{m-1}\cdot_{\mathbb{C}}Q_{m-1}=R_{m-1}`), " とする（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m\cdot_{\mathbb{C}}Q_m
+&=\bigl(P_{m-1}\cdot_{\mathbb{C}}\alpha_m\bigr)\cdot_{\mathbb{C}}\bigl(Q_{m-1}\cdot_{\mathbb{C}}\beta_m\bigr)
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\ \text{を二か所に適用}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}\Bigl(\alpha_m\cdot_{\mathbb{C}}\bigl(Q_{m-1}\cdot_{\mathbb{C}}\beta_m\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}\Bigl(\bigl(\alpha_m\cdot_{\mathbb{C}}Q_{m-1}\bigr)\cdot_{\mathbb{C}}\beta_m\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}\Bigl(\bigl(Q_{m-1}\cdot_{\mathbb{C}}\alpha_m\bigr)\cdot_{\mathbb{C}}\beta_m\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}\Bigl(Q_{m-1}\cdot_{\mathbb{C}}\bigl(\alpha_m\cdot_{\mathbb{C}}\beta_m\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\bigl(P_{m-1}\cdot_{\mathbb{C}}Q_{m-1}\bigr)\cdot_{\mathbb{C}}\bigl(\alpha_m\cdot_{\mathbb{C}}\beta_m\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=R_{m-1}\cdot_{\mathbb{C}}\bigl(\alpha_m\cdot_{\mathbb{C}}\beta_m\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=R_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=k`), " のとき、", math(String.raw`P_k,\ Q_k,\ R_k`), " は主張の三つの積である（", ref("def_ordered_product_in_complex_numbers"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_ordered_product_with_unit_factors_after_index",
+    kind: "claim",
+    title: { text: "ある番号より後ろの因子がすべて 1 なら、ℂ の中の番号順の積はその番号までの部分の積に等しい" },
+    labels: ["claim_ordered_product_with_unit_factors_after_index"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`r\in\{0,1,\dots,k\}`), " とし、", math(String.raw`\{1,\dots,k\}`), " の各元 ", math(String.raw`s`),
+        " に ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\alpha_s`), " が一つずつ与えられていて、", math(String.raw`r<s\le k`), " を満たすすべての ",
+        math(String.raw`s`), " について ", math(String.raw`\alpha_s=1_{\mathbb{C}}`), " であるとする。番号順の積の定義（", ref("def_ordered_product_in_complex_numbers"),
+        "）が帰納的に定める元を ", math(String.raw`P_m\in\mathbb{C}`), "（", math(String.raw`m\in\{0,1,\dots,k\}`), "）と書く。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=P_r`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m\in\{r,r+1,\dots,k\}`), " についての帰納法で ", math(String.raw`P_m=P_r`), " を示す。", math(String.raw`m=r`), " のときは等しい。",
+        math(String.raw`r<m\le k`), " とし、", math(String.raw`P_{m-1}=P_r`), " とする（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ r<m\ \text{なので}\ \alpha_m=1_{\mathbb{C}}\right)\\
+&=P_{m-1}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=P_r
+&&\left(\because\ \text{帰納法の仮定}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=k`), " のとき、", math(String.raw`P_k=\prod_{\mathbb{C},\,s=1}^{k}\alpha_s`), " である（", ref("def_ordered_product_in_complex_numbers"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_ordered_product_with_zero_factor_is_zero",
+    kind: "claim",
+    title: { text: "因子の一つが 0 なら、ℂ の中の番号順の積は 0 である" },
+    labels: ["claim_ordered_product_with_zero_factor_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`r\in\{1,\dots,k\}`), " とし、", math(String.raw`\{1,\dots,k\}`), " の各元 ", math(String.raw`s`),
+        " に ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\alpha_s`), " が一つずつ与えられていて、", math(String.raw`\alpha_r=0_{\mathbb{C}}`),
+        " であるとする。", math(String.raw`\mathbb{C}`), " の中の番号順の積（", ref("def_ordered_product_in_complex_numbers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathbb{C},\,s=1}^{k}\alpha_s=0_{\mathbb{C}}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s\in\{1,\dots,k\}`), " について、", math(String.raw`s\neq r`), " なら ", math(String.raw`\alpha'_s:=\alpha_s`), "、", math(String.raw`\alpha'_r:=1_{\mathbb{C}}`),
+        " と置く。", math(String.raw`s\neq r`), " なら ", math(String.raw`\alpha_s=\alpha'_s`), " であり、", math(String.raw`\alpha_r`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_r
+&=0_{\mathbb{C}}
+&&\left(\because\ \text{仮定}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\alpha'_r
+&&\left(\because\ \alpha'_r\ \text{の定め方}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\mathbb{C},\,s=1}^{k}\alpha_s
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s
+&&\left(\because\ \lambda:=0_{\mathbb{C}}\text{。}\blkref{claim_ordered_product_is_homogeneous_in_one_factor}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_definition_construction_of_k_fold_tensor_product",
     kind: "definition",
     title: { text: "基底の座標による k 重テンソル積の構成" },

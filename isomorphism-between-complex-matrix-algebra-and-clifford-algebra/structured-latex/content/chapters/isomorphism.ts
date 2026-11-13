@@ -11866,4 +11866,1152 @@ a
       paragraph(["全射であること。", math(String.raw`(F,G)\in B\times B`), " について ", math(String.raw`\Psi'((F,G))`), " は ", math(String.raw`\Phi'(\Psi'((F,G)))=(F,G)`), " を満たす。したがって ", math(String.raw`\Phi'`), " は全単射である。", math(String.raw`\Phi'`), " の逆写像を ", math(String.raw`\Phi'^{-1}`), "（", math(String.raw`(F,G)`), " に ", math(String.raw`\Phi'(a)=(F,G)`), " を満たすただ一つの ", math(String.raw`a`), " を与える写像）とすると、", math(String.raw`\Psi'((F,G))`), " はこの条件を満たすので、", math(String.raw`\Phi'^{-1}((F,G))=\Psi'((F,G))`), " である。"]),
     ],
   },
+  {
+    id: "isomorphism_jordan_wigner_matrices_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "系：複素行列版イジングの Jordan–Wigner 行列への接続" },
+    labels: [],
+  },
+  {
+    id: "isomorphism_definition_pauli_matrix_x",
+    kind: "definition",
+    title: { text: "Pauli 行列 σx", tex: String.raw`\text{Pauli 行列 }\sigma^{x}` },
+    labels: ["def_pauli_matrix_x"],
+    statement: [
+      paragraph([
+        math(String.raw`(2,\mathrm{id}_2)`), "（", math(String.raw`\mathrm{id}_2`), " は恒等写像）は ", math(String.raw`\{1,2\}`), " の番号付けなので、", math(String.raw`\{1,2\}`), " は有限集合である（", ref("def_numbering_of_finite_set"), "）。", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        "（", ref("def_matrices_indexed_by_finite_set"), "）の元 ", math(String.raw`\sigma^{x}`), " を、成分で次のように定める。",
+      ]),
+      displayMath(String.raw`(\sigma^{x})_{1,1}:=0_{\mathbb{C}},\quad(\sigma^{x})_{1,2}:=1_{\mathbb{C}},\quad(\sigma^{x})_{2,1}:=1_{\mathbb{C}},\quad(\sigma^{x})_{2,2}:=0_{\mathbb{C}}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_pauli_matrix_y",
+    kind: "definition",
+    title: { text: "Pauli 行列 σy", tex: String.raw`\text{Pauli 行列 }\sigma^{y}` },
+    labels: ["def_pauli_matrix_y"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathrm{i}\in\mathbb{C}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の元（", math(String.raw`\mathrm{i}\cdot_{\mathbb{C}}\mathrm{i}=-_{\mathbb{C}}1_{\mathbb{C}}`),
+        "）とする。", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`\sigma^{y}`), " を、成分で次のように定める。",
+      ]),
+      displayMath(String.raw`(\sigma^{y})_{1,1}:=0_{\mathbb{C}},\quad(\sigma^{y})_{1,2}:=-_{\mathbb{C}}\mathrm{i},\quad(\sigma^{y})_{2,1}:=\mathrm{i},\quad(\sigma^{y})_{2,2}:=0_{\mathbb{C}}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_pauli_matrix_z",
+    kind: "definition",
+    title: { text: "Pauli 行列 σz", tex: String.raw`\text{Pauli 行列 }\sigma^{z}` },
+    labels: ["def_pauli_matrix_z"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`\sigma^{z}`), " を、成分で次のように定める。",
+        math(String.raw`-_{\mathbb{C}}1_{\mathbb{C}}`), " は ", math(String.raw`1_{\mathbb{C}}`), " の加法の逆元である。",
+      ]),
+      displayMath(String.raw`(\sigma^{z})_{1,1}:=1_{\mathbb{C}},\quad(\sigma^{z})_{1,2}:=0_{\mathbb{C}},\quad(\sigma^{z})_{2,1}:=0_{\mathbb{C}},\quad(\sigma^{z})_{2,2}:=-_{\mathbb{C}}1_{\mathbb{C}}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_matrix_exchanging_pauli_z_and_x",
+    kind: "definition",
+    title: { text: "σz と σx を入れ替える行列 K", tex: String.raw`\sigma^{z}\text{ と }\sigma^{x}\text{ を入れ替える行列 K}` },
+    labels: ["def_matrix_exchanging_pauli_z_and_x"],
+    statement: [
+      paragraph([math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`K`), " を、成分で次のように定める。"]),
+      displayMath(String.raw`K_{1,1}:=1_{\mathbb{C}},\quad K_{1,2}:=1_{\mathbb{C}},\quad K_{2,1}:=1_{\mathbb{C}},\quad K_{2,2}:=-_{\mathbb{C}}1_{\mathbb{C}}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_half_of_matrix_exchanging_pauli_z_and_x",
+    kind: "definition",
+    title: { text: "K の各成分に h を掛けた行列 K'" },
+    labels: ["def_half_of_matrix_exchanging_pauli_z_and_x"],
+    statement: [
+      paragraph([
+        math(String.raw`h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\in\mathbb{C}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の元とする。",
+        math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`K'`), " を、成分で次のように定める。",
+      ]),
+      displayMath(String.raw`K'_{1,1}:=h,\quad K'_{1,2}:=h,\quad K'_{2,1}:=h,\quad K'_{2,2}:=-_{\mathbb{C}}h`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_entries_of_combination_of_off_diagonal_matrix_units",
+    kind: "claim",
+    title: { text: "{1,2} で添字づけた二つの非対角の行列単位の線型結合の成分" },
+    labels: ["claim_entries_of_combination_of_off_diagonal_matrix_units"],
+    statement: [
+      paragraph([
+        math(String.raw`E_{2,1},E_{1,2}\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " を行列単位（", ref("def_matrix_unit"), "）とし、", math(String.raw`\lambda,\lambda'\in\mathbb{C}`), "、",
+        math(String.raw`D:=(\lambda\ast_{\mathrm{Mat}_{\{1,2\}}}E_{2,1})+_{\mathrm{Mat}_{\{1,2\}}}(\lambda'\ast_{\mathrm{Mat}_{\{1,2\}}}E_{1,2})`), " とする。次が成り立つ。",
+      ]),
+      displayMath(String.raw`D_{1,1}=0_{\mathbb{C}},\quad D_{1,2}=\lambda',\quad D_{2,1}=\lambda,\quad D_{2,2}=0_{\mathbb{C}}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a,b\in\{1,2\}`), " について、行列の和とスカラー倍（", ref("def_matrices_indexed_by_finite_set"), "）と行列単位の成分（", ref("def_matrix_unit"), "）から次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+D_{a,b}
+&=\bigl(\lambda\cdot_{\mathbb{C}}(E_{2,1})_{a,b}\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(E_{1,2})_{a,b}\bigr)
+&&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}(\delta_{2,a}\cdot_{\mathbb{C}}\delta_{1,b})\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(\delta_{1,a}\cdot_{\mathbb{C}}\delta_{2,b})\bigr)
+&&\left(\because\ \blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph(["四つの成分は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+D_{1,1}
+&=\bigl(\lambda\cdot_{\mathbb{C}}(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}})\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+D_{1,2}
+&=\bigl(\lambda\cdot_{\mathbb{C}}(0_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}})\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=\lambda'
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+D_{2,1}
+&=\bigl(\lambda\cdot_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(0_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}})\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=\lambda
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+D_{2,2}
+&=\bigl(\lambda\cdot_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}})\bigr)+_{\mathbb{C}}\bigl(\lambda'\cdot_{\mathbb{C}}(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_matrix_exchanging_pauli_matrices_times_its_half_is_identity",
+    kind: "claim",
+    title: { text: "K に右から K' を掛けると単位行列になる" },
+    labels: ["claim_matrix_exchanging_pauli_matrices_times_its_half_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`K'`), " を ", ref("def_half_of_matrix_exchanging_pauli_z_and_x"),
+        " の行列とする。", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'=1_{\mathrm{Mat}_{\{1,2\}}}`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h+_{\mathbb{C}}h
+&=(1_{\mathbb{C}}\cdot_{\mathbb{C}}h)+_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}h)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'\bigr)_{1,1}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(K')_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(K')_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}h\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}h\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=h+_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \text{準備の}\ h+_{\mathbb{C}}h=1_{\mathbb{C}}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'\bigr)_{1,2}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(K')_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(K')_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}h\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}h)\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'\bigr)_{2,1}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(K')_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(K')_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}h\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}h\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'\bigr)_{2,2}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(K')_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(K')_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}h\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}(-_{\mathbb{C}}h)\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=h+_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \text{準備の}\ h+_{\mathbb{C}}h=1_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分は単位行列の成分 ", math(String.raw`\delta_{1,1}=\delta_{2,2}=1_{\mathbb{C}}`), "、", math(String.raw`\delta_{1,2}=\delta_{2,1}=0_{\mathbb{C}}`), " に等しいので（", ref("def_kronecker_delta"), "）、主張の二つの行列は等しい（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_half_times_matrix_exchanging_pauli_matrices_is_identity",
+    kind: "claim",
+    title: { text: "K に左から K' を掛けると単位行列になる" },
+    labels: ["claim_half_times_matrix_exchanging_pauli_matrices_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`K'`), " を ", ref("def_half_of_matrix_exchanging_pauli_z_and_x"),
+        " の行列とする。", math(String.raw`K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K=1_{\mathrm{Mat}_{\{1,2\}}}`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h+_{\mathbb{C}}h
+&=(1_{\mathbb{C}}\cdot_{\mathbb{C}}h)+_{\mathbb{C}}(1_{\mathbb{C}}\cdot_{\mathbb{C}}h)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ h=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\text{。}\blkref{def_setting_of_general_even_dimensional_corollary}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,1}
+&=\bigl((K')_{1,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((K')_{1,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(h\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(h\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=h+_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \text{準備の}\ h+_{\mathbb{C}}h=1_{\mathbb{C}}\right),\\[4pt]
+\bigl(K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,2}
+&=\bigl((K')_{1,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((K')_{1,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(h\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(h\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+\bigl(K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,1}
+&=\bigl((K')_{2,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((K')_{2,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(h\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}h)\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right),\\[4pt]
+\bigl(K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,2}
+&=\bigl((K')_{2,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((K')_{2,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(h\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}h)\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_half_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=h+_{\mathbb{C}}h
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \text{準備の}\ h+_{\mathbb{C}}h=1_{\mathbb{C}}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分は単位行列の成分 ", math(String.raw`\delta_{1,1}=\delta_{2,2}=1_{\mathbb{C}}`), "、", math(String.raw`\delta_{1,2}=\delta_{2,1}=0_{\mathbb{C}}`), " に等しいので（", ref("def_kronecker_delta"), "）、主張の二つの行列は等しい（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_matrix_k_turns_pauli_z_into_pauli_x",
+    kind: "claim",
+    title: { text: "K に右から z の Pauli 行列を掛けたものは、K に左から x の Pauli 行列を掛けたものに等しい" },
+    labels: ["claim_matrix_k_turns_pauli_z_into_pauli_x"],
+    statement: [
+      paragraph([
+        math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`\sigma^{x}`), " を ", ref("def_pauli_matrix_x"), "、", math(String.raw`\sigma^{z}`), " を ",
+        ref("def_pauli_matrix_z"), " の行列とする。", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}\sigma^{z}=\sigma^{x}\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}\sigma^{z}\bigr)_{1,1}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(\sigma^{z})_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(\sigma^{z})_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_pauli_matrix_z}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{x})_{1,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{x})_{1,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_x}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{x}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}\sigma^{z}\bigr)_{1,2}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(\sigma^{z})_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(\sigma^{z})_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_pauli_matrix_z}\right)\\
+&=-_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{x})_{1,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{x})_{1,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_x}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{x}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}\sigma^{z}\bigr)_{2,1}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(\sigma^{z})_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(\sigma^{z})_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_pauli_matrix_z}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{x})_{2,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{x})_{2,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_x}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{x}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}\sigma^{z}\bigr)_{2,2}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(\sigma^{z})_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(\sigma^{z})_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\text{、}\blkref{def_pauli_matrix_z}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{x})_{2,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{x})_{2,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_x}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{x}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分がすべて等しいので、二つの行列は等しい（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_matrix_k_turns_sum_of_off_diagonal_matrix_units_into_pauli_z",
+    kind: "claim",
+    title: { text: "K に右から二つの非対角の行列単位の和を掛けたものは、K に左から z の Pauli 行列を掛けたものに等しい" },
+    labels: ["claim_matrix_k_turns_sum_of_off_diagonal_matrix_units_into_pauli_z"],
+    statement: [
+      paragraph([
+        math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`\sigma^{z}`), " を ", ref("def_pauli_matrix_z"), " の行列、",
+        math(String.raw`E_{2,1},E_{1,2}\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " を行列単位（", ref("def_matrix_unit"), "）とし、", math(String.raw`G`), " を次で置く。",
+      ]),
+      displayMath(String.raw`G:=(1_{\mathbb{C}}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{2,1})+_{\mathrm{Mat}_{\{1,2\}}}(1_{\mathbb{C}}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{1,2})`),
+      paragraph([
+        "このとき ", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}G=\sigma^{z}\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", ref("claim_entries_of_combination_of_off_diagonal_matrix_units"), " を ", math(String.raw`\lambda=\lambda'=1_{\mathbb{C}}`), " で当てると、", math(String.raw`G`), " の成分は ", math(String.raw`G_{1,1}=G_{2,2}=0_{\mathbb{C}}`), "、", math(String.raw`G_{1,2}=G_{2,1}=1_{\mathbb{C}}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G\bigr)_{1,1}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(G)_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(G)_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G\ \text{の成分}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{z})_{1,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{z})_{1,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_z}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{z}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G\bigr)_{1,2}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(G)_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(G)_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G\ \text{の成分}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{z})_{1,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{z})_{1,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_z}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{z}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G\bigr)_{2,1}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(G)_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(G)_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G\ \text{の成分}\right)\\
+&=-_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{z})_{2,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{z})_{2,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_z}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{z}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G\bigr)_{2,2}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(G)_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(G)_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G\ \text{の成分}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{z})_{2,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{z})_{2,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_z}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{z}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分がすべて等しいので、二つの行列は等しい（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_matrix_k_turns_imaginary_combination_of_off_diagonal_matrix_units_into_pauli_y",
+    kind: "claim",
+    title: { text: "K に右から二つの非対角の行列単位の虚数倍の和を掛けたものは、K に左から y の Pauli 行列を掛けたものに等しい" },
+    labels: ["claim_matrix_k_turns_imaginary_combination_of_off_diagonal_matrix_units_into_pauli_y"],
+    statement: [
+      paragraph([
+        math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`\sigma^{y}`), " を ", ref("def_pauli_matrix_y"), " の行列、",
+        math(String.raw`\mathrm{i}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の元、", math(String.raw`E_{2,1},E_{1,2}\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " を行列単位（", ref("def_matrix_unit"), "）とし、", math(String.raw`G'`), " を次で置く。",
+      ]),
+      displayMath(String.raw`G':=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_{\mathrm{Mat}_{\{1,2\}}}E_{2,1}\bigr)+_{\mathrm{Mat}_{\{1,2\}}}(\mathrm{i}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{1,2})`),
+      paragraph([
+        "このとき ", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'=\sigma^{y}\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、", ref("claim_entries_of_combination_of_off_diagonal_matrix_units"), " を ", math(String.raw`\lambda=-_{\mathbb{C}}\mathrm{i}`), "、", math(String.raw`\lambda'=\mathrm{i}`), " で当てると、", math(String.raw`G'`), " の成分は ", math(String.raw`G'_{1,1}=G'_{2,2}=0_{\mathbb{C}}`), "、", math(String.raw`G'_{1,2}=\mathrm{i}`), "、", math(String.raw`G'_{2,1}=-_{\mathbb{C}}\mathrm{i}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'\bigr)_{1,1}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(G')_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(G')_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G'\ \text{の成分}\right)\\
+&=-_{\mathbb{C}}\mathrm{i}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{y})_{1,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{y})_{1,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_y}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{y}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'\bigr)_{1,2}
+&=\bigl((K)_{1,1}\cdot_{\mathbb{C}}(G')_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{1,2}\cdot_{\mathbb{C}}(G')_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}\mathrm{i}\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G'\ \text{の成分}\right)\\
+&=\mathrm{i}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{y})_{1,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{y})_{1,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_y}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{y}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{1,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'\bigr)_{2,1}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(G')_{1,1}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(G')_{2,1}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}(-_{\mathbb{C}}\mathrm{i})\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G'\ \text{の成分}\right)\\
+&=\mathrm{i}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(\mathrm{i}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{y})_{2,1}\cdot_{\mathbb{C}}(K)_{1,1}\bigr)+_{\mathbb{C}}\bigl((\sigma^{y})_{2,2}\cdot_{\mathbb{C}}(K)_{2,1}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_y}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{y}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,1}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right),\\[4pt]
+\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'\bigr)_{2,2}
+&=\bigl((K)_{2,1}\cdot_{\mathbb{C}}(G')_{1,2}\bigr)+_{\mathbb{C}}\bigl((K)_{2,2}\cdot_{\mathbb{C}}(G')_{2,2}\bigr)
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}\mathrm{i}\bigr)+_{\mathbb{C}}\bigl((-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}0_{\mathbb{C}}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_matrix_exchanging_pauli_z_and_x}\ \text{と}\ G'\ \text{の成分}\right)\\
+&=\mathrm{i}
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(\mathrm{i}\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl((\sigma^{y})_{2,1}\cdot_{\mathbb{C}}(K)_{1,2}\bigr)+_{\mathbb{C}}\bigl((\sigma^{y})_{2,2}\cdot_{\mathbb{C}}(K)_{2,2}\bigr)
+&&\left(\because\ \text{成分の代入。}\blkref{def_pauli_matrix_y}\text{、}\blkref{def_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\bigl(\sigma^{y}\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)_{2,2}
+&&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right).
+\end{aligned}`),
+      paragraph([
+        "四つの成分がすべて等しいので、二つの行列は等しい（", ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_partial_product_of_pauli_z_diagonal_entries_is_sign_of_count",
+    kind: "claim",
+    title: { text: "z の Pauli 行列の対角成分を番号より前まで掛けた部分の積は、番号より小さい元の個数の符号である" },
+    labels: ["claim_partial_product_of_pauli_z_diagonal_entries_is_sign_of_count"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`T\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）、",
+        math(String.raw`i\in\{1,\dots,M\}`), " とし、", math(String.raw`\sigma^{z}`), " を ", ref("def_pauli_matrix_z"), " の行列、", math(String.raw`o_T(k)`), " を ",
+        ref("def_membership_index_of_subset"), " の添字とする。", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathbb{C}`),
+        " の元 ", math(String.raw`\alpha_k`), " が与えられていて、すべての ", math(String.raw`k\in\{1,\dots,i-1\}`), " について ",
+        math(String.raw`\alpha_k=(\sigma^{z})_{o_T(k),o_T(k)}`), " であるとする。番号順の積の定義（", ref("def_ordered_product_in_complex_numbers"),
+        "）が族 ", math(String.raw`\alpha_1,\dots,\alpha_M`), " について帰納的に定める元を ", math(String.raw`P_m`), "（", math(String.raw`m\in\{0,1,\dots,M\}`),
+        "）と書く。このとき次が成り立つ（", math(String.raw`N_i(T)`), " は ", ref("def_count_of_subset_elements_below_index"), "、", math(String.raw`\varsigma`), " は ",
+        ref("def_sign_of_nonnegative_integer"), "）。",
+      ]),
+      displayMath(String.raw`P_{i-1}=\varsigma\bigl(N_i(T)\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i`), " についての帰納法で示す。", math(String.raw`i=1`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_0
+&=1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\varsigma(0)
+&&\left(\because\ \blkref{def_sign_of_nonnegative_integer}\right)\\
+&=\varsigma\bigl(N_1(T)\bigr)
+&&\left(\because\ N_1(T)=0\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`i\in\{2,\dots,M\}`), " とし、", math(String.raw`i-1`), " で主張が成り立つとする（帰納法の仮定）。", math(String.raw`\alpha`), " についての仮定は ",
+        math(String.raw`k\in\{1,\dots,i-2\}`), " でも成り立つので、帰納法の仮定から ", math(String.raw`P_{i-2}=\varsigma(N_{i-1}(T))`), " である。", math(String.raw`i-1\in T`),
+        " のとき、", math(String.raw`o_T(i-1)=2`), " であり（", ref("def_membership_index_of_subset"), "）、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{i-1}
+&=P_{i-2}\cdot_{\mathbb{C}}\alpha_{i-1}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}\alpha_{i-1}
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}(\sigma^{z})_{o_T(i-1),o_T(i-1)}
+&&\left(\because\ \alpha\ \text{の仮定で}\ k:=i-1\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}(\sigma^{z})_{2,2}
+&&\left(\because\ o_T(i-1)=2\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}})
+&&\left(\because\ \blkref{def_pauli_matrix_z}\right)\\
+&=(-_{\mathbb{C}}1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma\bigl(N_{i-1}(T)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=(-1_{\mathbb{C}})\cdot_{\mathbb{C}}\varsigma\bigl(N_{i-1}(T)\bigr)
+&&\left(\because\ -_{\mathbb{C}}1_{\mathbb{C}}\ \text{と}\ -1_{\mathbb{C}}\ \text{はどちらも}\ 1_{\mathbb{C}}\ \text{の加法の逆元}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)+1\bigr)
+&&\left(\because\ N_{i-1}(T)+1\ge 1\text{。}\blkref{def_sign_of_nonnegative_integer}\right)\\
+&=\varsigma\bigl(N_i(T)\bigr)
+&&\left(\because\ i-1\in T\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`i-1\notin T`), " のとき、", math(String.raw`o_T(i-1)=1`), " であり（", ref("def_membership_index_of_subset"), "）、"]),
+      displayMath(String.raw`\begin{aligned}
+P_{i-1}
+&=P_{i-2}\cdot_{\mathbb{C}}\alpha_{i-1}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}\alpha_{i-1}
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}(\sigma^{z})_{o_T(i-1),o_T(i-1)}
+&&\left(\because\ \alpha\ \text{の仮定で}\ k:=i-1\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}(\sigma^{z})_{1,1}
+&&\left(\because\ o_T(i-1)=1\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_pauli_matrix_z}\right)\\
+&=\varsigma\bigl(N_{i-1}(T)\bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\varsigma\bigl(N_i(T)\bigr)
+&&\left(\because\ i-1\notin T\text{。}\blkref{def_count_of_subset_elements_below_index}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_creation_operator_matrix_is_kronecker_product",
+    kind: "claim",
+    title: { text: "生成作用素の行列は、z の Pauli 行列・行列単位・単位行列のクロネッカー積である" },
+    labels: ["claim_creation_operator_matrix_is_kronecker_product"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`m\in\{1,\dots,M\}`), " とし、", math(String.raw`c_m`), " を生成作用素の行列（", ref("def_creation_operator_matrix"),
+        "）、", math(String.raw`\sigma^{z}`), " を ", ref("def_pauli_matrix_z"), " の行列、", math(String.raw`E_{2,1}\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " を行列単位（",
+        ref("def_matrix_unit"), "）、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とする。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
+        math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ", math(String.raw`A_k`), " を次で置く。",
+      ]),
+      displayMath(String.raw`A_k:=
+\begin{cases}
+  \sigma^{z} & (k<m),\\
+  E_{2,1} & (k=m),\\
+  I_2 & (k>m).
+\end{cases}`),
+      paragraph(["クロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）について次が成り立つ。"]),
+      displayMath(String.raw`c_m=\mathop{\boxtimes}\limits_{k=1}^{M}A_k`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`\alpha_k:=(A_k)_{o_S(k),o_T(k)}`), " と置く。番号順の積の定義（",
+        ref("def_ordered_product_in_complex_numbers"), "）が族 ", math(String.raw`\alpha_1,\dots,\alpha_M`), " について定める元を ", math(String.raw`P_j`), " と書く。",
+        math(String.raw`(\mathop{\boxtimes}_{k}A_k)_{S,T}=\prod_{\mathbb{C},\,k=1}^{M}\alpha_k`), " である（", ref("def_kronecker_product_indexed_by_power_set"), "）。準備として、",
+        math(String.raw`a,b\in\{1,2\}`), "、", math(String.raw`a\neq b`), " ならば ", math(String.raw`(\sigma^{z})_{a,b}=0_{\mathbb{C}}`), "（", ref("def_pauli_matrix_z"), "）、",
+        math(String.raw`(I_2)_{a,b}=\delta_{a,b}`), "（", ref("def_matrices_indexed_by_finite_set"), "）かつ ", math(String.raw`\delta_{a,b}=0_{\mathbb{C}}`), "（", ref("def_kronecker_delta"), "）であり、",
+        math(String.raw`(E_{2,1})_{a,b}=\delta_{2,a}\cdot_{\mathbb{C}}\delta_{1,b}`), " である（", ref("def_matrix_unit"), "）。",
+        "生成作用素の行列の定義（", ref("def_creation_operator_matrix"), "）の二つの場合に分ける。",
+      ]),
+      paragraph([
+        "（", math(String.raw`m\notin T`), " かつ ", math(String.raw`S=T\cup\{m\}`), " の場合）", math(String.raw`(c_m)_{S,T}=\varsigma(N_m(T))`), " である。",
+        math(String.raw`k\neq m`), " なら、", math(String.raw`k\in S`), " と ", math(String.raw`k\in T`), " は同値なので ", math(String.raw`o_S(k)=o_T(k)`), " であり（",
+        ref("def_membership_index_of_subset"), "）、", math(String.raw`m\in S`), "、", math(String.raw`m\notin T`), " なので ", math(String.raw`o_S(m)=2`), "、",
+        math(String.raw`o_T(m)=1`), " である。したがって ", math(String.raw`k<m`), " なら ", math(String.raw`\alpha_k=(\sigma^{z})_{o_T(k),o_T(k)}`), "、",
+        math(String.raw`k>m`), " なら ", math(String.raw`\alpha_k=\delta_{o_T(k),o_T(k)}=1_{\mathbb{C}}`), "（", ref("def_kronecker_delta"), "）であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha_m
+&=(E_{2,1})_{2,1}
+&&\left(\because\ o_S(m)=2,\ o_T(m)=1\right)\\
+&=\delta_{2,2}\cdot_{\mathbb{C}}\delta_{1,1}
+&&\left(\because\ \blkref{def_matrix_unit}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_kronecker_delta}\right)\\
+&=1_{\mathbb{C}}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\mathbb{C},\,k=1}^{M}\alpha_k
+&=P_m
+&&\left(\because\ k>m\ \text{で}\ \alpha_k=1_{\mathbb{C}}\text{、}r:=m\text{。}\blkref{claim_ordered_product_with_unit_factors_after_index}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P_{m-1}\cdot_{\mathbb{C}}1_{\mathbb{C}}
+&&\left(\because\ \text{上の式}\right)\\
+&=P_{m-1}
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\varsigma\bigl(N_m(T)\bigr)
+&&\left(\because\ k<m\ \text{で}\ \alpha_k=(\sigma^{z})_{o_T(k),o_T(k)}\text{、}i:=m\text{。}\blkref{claim_partial_product_of_pauli_z_diagonal_entries_is_sign_of_count}\right)\\
+&=(c_m)_{S,T}
+&&\left(\because\ \blkref{def_creation_operator_matrix}\right).
+\end{aligned}`),
+      paragraph([
+        "（それ以外の場合）", math(String.raw`(c_m)_{S,T}=0_{\mathbb{C}}`), " である（", ref("def_creation_operator_matrix"), "）。", math(String.raw`\alpha_r=0_{\mathbb{C}}`),
+        " となる ", math(String.raw`r\in\{1,\dots,M\}`), " があれば、次のとおり成分が一致する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\mathbb{C},\,k=1}^{M}\alpha_k
+&=0_{\mathbb{C}}
+&&\left(\because\ \alpha_r=0_{\mathbb{C}}\text{。}\blkref{claim_ordered_product_with_zero_factor_is_zero}\right)\\
+&=(c_m)_{S,T}
+&&\left(\because\ \text{それ以外の場合。}\blkref{def_creation_operator_matrix}\right).
+\end{aligned}`),
+      paragraph([
+        "そのような ", math(String.raw`r`), " があることを、三つの場合に分けて示す。",
+      ]),
+      list([
+        [
+          math(String.raw`m\in T`), " のとき、", math(String.raw`o_T(m)=2`), " なので ", math(String.raw`\alpha_m=\delta_{2,o_S(m)}\cdot_{\mathbb{C}}\delta_{1,2}`), " であり、",
+          math(String.raw`\delta_{1,2}=0_{\mathbb{C}}`), " なので ", math(String.raw`\alpha_m=0_{\mathbb{C}}`), " である（", ref("def_kronecker_delta"), "）。",
+        ],
+        [
+          math(String.raw`m\notin T`), " かつ ", math(String.raw`m\notin S`), " のとき、", math(String.raw`o_S(m)=1`), " なので ", math(String.raw`\alpha_m=\delta_{2,1}\cdot_{\mathbb{C}}\delta_{1,o_T(m)}`),
+          " であり、", math(String.raw`\delta_{2,1}=0_{\mathbb{C}}`), " なので ", math(String.raw`\alpha_m=0_{\mathbb{C}}`), " である。",
+        ],
+        [
+          math(String.raw`m\notin T`), "、", math(String.raw`m\in S`), " かつ ", math(String.raw`S\neq T\cup\{m\}`), " のとき、集合の等しさの定義（",
+          ref("def_power_set_of_first_m_positive_integers"), "）により、", math(String.raw`k\in S`), " と ", math(String.raw`k\in T\cup\{m\}`), " が同値でない ",
+          math(String.raw`k\in\{1,\dots,M\}`), " がある。", math(String.raw`m\in S`), " かつ ", math(String.raw`m\in T\cup\{m\}`), " なので ", math(String.raw`k\neq m`),
+          " であり、", math(String.raw`k\neq m`), " なら ", math(String.raw`k\in T\cup\{m\}`), " と ", math(String.raw`k\in T`), " は同値なので、", math(String.raw`k\in S`),
+          " と ", math(String.raw`k\in T`), " は同値でない。したがって ", math(String.raw`o_S(k)\neq o_T(k)`), " であり（", ref("def_membership_index_of_subset"), "）、",
+          math(String.raw`A_k`), " は ", math(String.raw`\sigma^{z}`), " か ", math(String.raw`I_2`), " なので、準備から ", math(String.raw`\alpha_k=0_{\mathbb{C}}`), " である。",
+        ],
+      ]),
+      paragraph([
+        "二つの場合のどちらでも ", math(String.raw`(c_m)_{S,T}=(\mathop{\boxtimes}_{k}A_k)_{S,T}`), " であり、", math(String.raw`S,T`), " は任意だったので主張が成り立つ（",
+        ref("def_matrices_indexed_by_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_annihilation_operator_matrix_is_kronecker_product",
+    kind: "claim",
+    title: { text: "消滅作用素の行列は、z の Pauli 行列・行列単位・単位行列のクロネッカー積である" },
+    labels: ["claim_annihilation_operator_matrix_is_kronecker_product"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`m`), "、", math(String.raw`\sigma^{z}`), "、", math(String.raw`I_2`), "、", math(String.raw`A_k`), " を ",
+        ref("claim_creation_operator_matrix_is_kronecker_product"), " のものとし、", math(String.raw`c_m^{\mathsf T}`), " を消滅作用素の行列（", ref("def_annihilation_operator_matrix"),
+        "）、", math(String.raw`E_{1,2}\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " を行列単位（", ref("def_matrix_unit"), "）とする。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
+        math(String.raw`k\neq m`), " なら ", math(String.raw`A'_k:=A_k`), "、", math(String.raw`A'_m:=E_{1,2}`), " と置く。クロネッカー積（",
+        ref("def_kronecker_product_indexed_by_power_set"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`c_m^{\mathsf T}=\mathop{\boxtimes}\limits_{k=1}^{M}A'_k`),
+    ],
+    proof: [
+      paragraph([
+        "準備として、すべての ", math(String.raw`k\in\{1,\dots,M\}`), " と ", math(String.raw`a,b\in\{1,2\}`), " について ", math(String.raw`(A'_k)_{a,b}=(A_k)_{b,a}`),
+        " である。", math(String.raw`k\neq m`), " のとき、", math(String.raw`A_k`), " は ", math(String.raw`\sigma^{z}`), " か ", math(String.raw`I_2`), " であり、",
+        math(String.raw`a=b`), " なら両辺は同じ成分、", math(String.raw`a\neq b`), " なら両辺とも ", math(String.raw`0_{\mathbb{C}}`), " である（", ref("def_pauli_matrix_z"),
+        "、", ref("def_matrices_indexed_by_finite_set"), "、", ref("def_kronecker_delta"), "）。", math(String.raw`k=m`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(E_{1,2})_{a,b}
+&=\delta_{1,a}\cdot_{\mathbb{C}}\delta_{2,b}
+&&\left(\because\ \blkref{def_matrix_unit}\right)\\
+&=\delta_{2,b}\cdot_{\mathbb{C}}\delta_{1,a}
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=(E_{2,1})_{b,a}
+&&\left(\because\ \blkref{def_matrix_unit}\right).
+\end{aligned}`),
+      paragraph([math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定する。"]),
+      displayMath(String.raw`\begin{aligned}
+(c_m^{\mathsf T})_{S,T}
+&=(c_m)_{T,S}
+&&\left(\because\ \blkref{def_annihilation_operator_matrix}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{T,S}
+&&\left(\because\ \blkref{claim_creation_operator_matrix_is_kronecker_product}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}(A_k)_{o_T(k),o_S(k)}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\prod_{\mathbb{C},\,k=1}^{M}(A'_k)_{o_S(k),o_T(k)}
+&&\left(\because\ \text{各}\ k\ \text{で準備の等式。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)_{S,T}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_jordan_wigner_z_matrix",
+    kind: "definition",
+    title: { text: "Jordan–Wigner 行列 Zm", tex: String.raw`\text{Jordan–Wigner 行列 }Z_m` },
+    labels: ["def_jordan_wigner_z_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\sigma^{x}`), " を ", ref("def_pauli_matrix_x"), "、", math(String.raw`\sigma^{z}`), " を ", ref("def_pauli_matrix_z"),
+        " の行列、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とする。", math(String.raw`m\in\{1,\dots,M\}`), " について、", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元 ", math(String.raw`Z_m`), " を、次の族のクロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）で定める。",
+      ]),
+      displayMath(String.raw`Z_m:=\mathop{\boxtimes}\limits_{k=1}^{M}
+\begin{cases}
+  \sigma^{x} & (k<m),\\
+  \sigma^{z} & (k=m),\\
+  I_2 & (k>m).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_jordan_wigner_y_matrix",
+    kind: "definition",
+    title: { text: "Jordan–Wigner 行列 Ym", tex: String.raw`\text{Jordan–Wigner 行列 }Y_m` },
+    labels: ["def_jordan_wigner_y_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\sigma^{x}`), " を ", ref("def_pauli_matrix_x"), "、", math(String.raw`\sigma^{y}`), " を ", ref("def_pauli_matrix_y"),
+        " の行列、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とする。", math(String.raw`m\in\{1,\dots,M\}`), " について、", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元 ", math(String.raw`Y_m`), " を、次の族のクロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）で定める。",
+      ]),
+      displayMath(String.raw`Y_m:=\mathop{\boxtimes}\limits_{k=1}^{M}
+\begin{cases}
+  \sigma^{x} & (k<m),\\
+  \sigma^{y} & (k=m),\\
+  I_2 & (k>m).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_kronecker_power_of_matrix_exchanging_pauli_z_and_x",
+    kind: "definition",
+    title: { text: "すべての因子が K のクロネッカー積 U" },
+    labels: ["def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), " の行列とする。", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元 ", math(String.raw`U`), " を、すべての ", math(String.raw`k\in\{1,\dots,M\}`), " で因子が ", math(String.raw`K`), " である族のクロネッカー積（",
+        ref("def_kronecker_product_indexed_by_power_set"), "）で定める。",
+      ]),
+      displayMath(String.raw`U:=\mathop{\boxtimes}\limits_{k=1}^{M}K`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x",
+    kind: "definition",
+    title: { text: "すべての因子が K' のクロネッカー積 U'" },
+    labels: ["def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`K'`), " を ", ref("def_half_of_matrix_exchanging_pauli_z_and_x"), " の行列とする。", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " の元 ", math(String.raw`U'`), " を、すべての ", math(String.raw`k\in\{1,\dots,M\}`), " で因子が ", math(String.raw`K'`), " である族のクロネッカー積（",
+        ref("def_kronecker_product_indexed_by_power_set"), "）で定める。",
+      ]),
+      displayMath(String.raw`U':=\mathop{\boxtimes}\limits_{k=1}^{M}K'`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_kronecker_power_of_k_times_that_of_its_half_is_identity",
+    kind: "claim",
+    title: { text: "U に右から U' を掛けると単位行列になる" },
+    labels: ["claim_kronecker_power_of_k_times_that_of_its_half_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`U`), " を ", ref("def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`U'`), " を ", ref("def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"),
+        " の行列とする。", math(String.raw`U\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}U'=1_{\mathrm{Mat}_{\mathcal{P}_M}}`), " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+U\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}U'
+&=\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}K'\bigr)
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\mathop{\boxtimes}\limits_{k=1}^{M}1_{\mathrm{Mat}_{\{1,2\}}}
+&&\left(\because\ \blkref{claim_matrix_exchanging_pauli_matrices_times_its_half_is_identity}\text{。各}\ k\ \text{の因子が等しい。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=1_{\mathrm{Mat}_{\mathcal{P}_M}}
+&&\left(\because\ \blkref{claim_kronecker_product_of_identity_matrices_is_identity_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_kronecker_power_of_half_of_k_times_that_of_k_is_identity",
+    kind: "claim",
+    title: { text: "U に左から U' を掛けると単位行列になる" },
+    labels: ["claim_kronecker_power_of_half_of_k_times_that_of_k_is_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`U`), " を ", ref("def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`U'`), " を ", ref("def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"),
+        " の行列とする。", math(String.raw`U'\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}U=1_{\mathrm{Mat}_{\mathcal{P}_M}}`), " である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+U'\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}U
+&=\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K'\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\mathop{\boxtimes}\limits_{k=1}^{M}1_{\mathrm{Mat}_{\{1,2\}}}
+&&\left(\because\ \blkref{claim_half_times_matrix_exchanging_pauli_matrices_is_identity}\text{。各}\ k\ \text{の因子が等しい。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=1_{\mathrm{Mat}_{\mathcal{P}_M}}
+&&\left(\because\ \blkref{claim_kronecker_product_of_identity_matrices_is_identity_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis",
+    kind: "claim",
+    title: { text: "一般の偶数次元の系の準同型は、直交基底の前半の元の像を生成作用素と消滅作用素の行列の和へ移す" },
+    labels: ["claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`e`), "、", math(String.raw`\gamma_Y`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " のもの、",
+        math(String.raw`\Phi_Y:\mathrm{Cl}(Y,Q)\to\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " を ",
+        ref("theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"), " の準同型 ",
+        math(String.raw`\Phi_Y=\Phi\circ\mathrm{Cl}(\theta)`), " とする。", math(String.raw`c_m`), " を生成作用素の行列（", ref("def_creation_operator_matrix"), "）、",
+        math(String.raw`c_m^{\mathsf T}`), " を消滅作用素の行列（", ref("def_annihilation_operator_matrix"), "）とし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`),
+        " と書く。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Phi_Y\bigl(\gamma_Y(e_m)\bigr)=c_m+_B c_m^{\mathsf T}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書き、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"), " の族とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Phi_Y\bigl(\gamma_Y(e_m)\bigr)
+&=\Phi\Bigl(\mathrm{Cl}(\theta)\bigl(\gamma_Y(e_m)\bigr)\Bigr)
+&&\left(\because\ \Phi_Y\ \text{の定義。}\blkref{theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra}\right)\\
+&=\Phi\Bigl(\gamma\bigl(\theta(e_m)\bigr)\Bigr)
+&&\left(\because\ \mathrm{Cl}(\theta)\circ\gamma_Y=\gamma\circ\theta\text{。}\blkref{def_homomorphism_of_clifford_algebras_induced_by_isometry}\right)\\
+&=\Phi\bigl(\gamma(u_m)\bigr)
+&&\left(\because\ \theta=L_{e,u}\text{。}\blkref{def_map_to_split_quadratic_space}\text{、}\blkref{claim_map_by_coordinates_and_family_sends_basis_member_to_family_member}\right)\\
+&=\Phi\Bigl(\gamma\bigl((w_m,\ f_m)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&=\Phi\Bigl(\gamma\bigl(\mathrm{in}_1(w_m)+_V\mathrm{in}_2(f_m)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right)\\
+&=\Phi\Bigl(\gamma\bigl(\mathrm{in}_1(w_m)\bigr)+_A\gamma\bigl(\mathrm{in}_2(f_m)\bigr)\Bigr)
+&&\left(\because\ \gamma\ \text{は線型写像。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
+&=\Phi\bigl(a^{\dagger}_m+_A a_m\bigr)
+&&\left(\because\ \blkref{def_creation_generator_of_split_clifford_algebra}\text{、}\blkref{def_annihilation_generator_of_split_clifford_algebra}\right)\\
+&=\Phi\bigl(a^{\dagger}_m\bigr)+_B\Phi(a_m)
+&&\left(\because\ \Phi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&=c_m+_B c_m^{\mathsf T}
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix}\text{、}\blkref{claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis",
+    kind: "claim",
+    title: { text: "一般の偶数次元の系の準同型は、直交基底の後半の元の像を生成作用素と消滅作用素の行列の虚数倍の和へ移す" },
+    labels: ["claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`e`), "、", math(String.raw`\gamma_Y`), "、", math(String.raw`\Phi_Y`), "、", math(String.raw`c_m`), "、",
+        math(String.raw`c_m^{\mathsf T}`), "、", math(String.raw`B`), " を ", ref("claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis"), " のもの、",
+        math(String.raw`\mathrm{i}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の元とする。すべての ",
+        math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Phi_Y\bigl(\gamma_Y(e_{M+m})\bigr)=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書き、", math(String.raw`u`), " を ", ref("def_family_in_split_space_for_isometry"), " の族とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\Phi_Y\bigl(\gamma_Y(e_{M+m})\bigr)\\
+&\quad=\Phi\Bigl(\mathrm{Cl}(\theta)\bigl(\gamma_Y(e_{M+m})\bigr)\Bigr)
+&&\left(\because\ \Phi_Y\ \text{の定義。}\blkref{theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra}\right)\\
+&\quad=\Phi\Bigl(\gamma\bigl(\theta(e_{M+m})\bigr)\Bigr)
+&&\left(\because\ \mathrm{Cl}(\theta)\circ\gamma_Y=\gamma\circ\theta\text{。}\blkref{def_homomorphism_of_clifford_algebras_induced_by_isometry}\right)\\
+&\quad=\Phi\bigl(\gamma(u_{M+m})\bigr)
+&&\left(\because\ \theta=L_{e,u}\text{。}\blkref{def_map_to_split_quadratic_space}\text{、}\blkref{claim_map_by_coordinates_and_family_sends_basis_member_to_family_member}\right)\\
+&\quad=\Phi\Bigl(\gamma\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m,\ \mathrm{i}\cdot_{W^{*}}f_m\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{def_family_in_split_space_for_isometry}\right)\\
+&\quad=\Phi\Bigl(\gamma\Bigl(\mathrm{in}_1\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_W w_m\bigr)+_V\mathrm{in}_2\bigl(\mathrm{i}\cdot_{W^{*}}f_m\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{claim_direct_sum_element_is_sum_of_embedded_components}\right)\\
+&\quad=\Phi\Bigl(\gamma\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_V\mathrm{in}_1(w_m)\bigr)+_V\bigl(\mathrm{i}\cdot_V\mathrm{in}_2(f_m)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \mathrm{in}_1,\ \mathrm{in}_2\ \text{はスカラー倍を保つ。}\blkref{claim_embedding_into_first_component_is_linear_map}\text{、}\blkref{claim_embedding_into_second_component_is_linear_map}\right)\\
+&\quad=\Phi\Bigl(\gamma\bigl((-_{\mathbb{C}}\mathrm{i})\cdot_V\mathrm{in}_1(w_m)\bigr)+_A\gamma\bigl(\mathrm{i}\cdot_V\mathrm{in}_2(f_m)\bigr)\Bigr)
+&&\left(\because\ \gamma\ \text{は加法を保つ。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
+&\quad=\Phi\Bigl(\Bigl((-_{\mathbb{C}}\mathrm{i})\ast_A\gamma\bigl(\mathrm{in}_1(w_m)\bigr)\Bigr)+_A\Bigl(\mathrm{i}\ast_A\gamma\bigl(\mathrm{in}_2(f_m)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \gamma\ \text{はスカラー倍を保つ（二か所）。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
+&\quad=\Phi\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\ast_A a^{\dagger}_m\bigr)+_A\bigl(\mathrm{i}\ast_A a_m\bigr)\Bigr)
+&&\left(\because\ \blkref{def_creation_generator_of_split_clifford_algebra}\text{、}\blkref{def_annihilation_generator_of_split_clifford_algebra}\right)\\
+&\quad=\Phi\bigl((-_{\mathbb{C}}\mathrm{i})\ast_A a^{\dagger}_m\bigr)+_B\Phi\bigl(\mathrm{i}\ast_A a_m\bigr)
+&&\left(\because\ \Phi\ \text{は加法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&\quad=\Bigl((-_{\mathbb{C}}\mathrm{i})\ast_B\Phi\bigl(a^{\dagger}_m\bigr)\Bigr)+_B\bigl(\mathrm{i}\ast_B\Phi(a_m)\bigr)
+&&\left(\because\ \Phi\ \text{はスカラー倍を保つ（二か所）。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&\quad=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_sends_creation_generator_to_creation_operator_matrix}\text{、}\blkref{claim_homomorphism_to_matrix_algebra_sends_annihilation_generator_to_annihilation_operator_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix",
+    kind: "claim",
+    title: { text: "生成作用素と消滅作用素の行列の和を U と U' で挟むと、z の Pauli 行列で終わる Jordan–Wigner 行列になる" },
+    labels: ["claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`m\in\{1,\dots,M\}`), "、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " とし、",
+        math(String.raw`c_m`), " を ", ref("def_creation_operator_matrix"), "、", math(String.raw`c_m^{\mathsf T}`), " を ", ref("def_annihilation_operator_matrix"), "、",
+        math(String.raw`Z_m`), " を ", ref("def_jordan_wigner_z_matrix"), "、", math(String.raw`U`), " を ", ref("def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"), "、",
+        math(String.raw`U'`), " を ", ref("def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"), " の行列、", math(String.raw`\kappa_{U,U'}`), " を ",
+        ref("def_conjugation_of_matrices"), " の写像とする。次が成り立つ。",
+      ]),
+      displayMath(String.raw`\kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)=Z_m`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A_k`), " と ", math(String.raw`A'_k`), " を ", ref("claim_creation_operator_matrix_is_kronecker_product"), " と ", ref("claim_annihilation_operator_matrix_is_kronecker_product"),
+        " の族、", math(String.raw`E_{2,1},E_{1,2}`), " を行列単位、", math(String.raw`\sigma^{x},\sigma^{z}`), " を Pauli 行列（", ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_z"),
+        "）、", math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), " の行列、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とし、",
+        math(String.raw`\mathrm{Mat}_{\{1,2\}}`), " の演算の添字を ", math(String.raw`2`), " と略記する。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
+        math(String.raw`k\neq m`), " なら ", math(String.raw`G_k:=A_k`), "、", math(String.raw`G_m:=(1_{\mathbb{C}}\ast_2 E_{2,1})+_2(1_{\mathbb{C}}\ast_2 E_{1,2})`), " と置き、",
+        math(String.raw`F_k`), " を ", ref("def_jordan_wigner_z_matrix"), " の右辺の第 ", math(String.raw`k`), " 因子（", math(String.raw`k<m`), " なら ", math(String.raw`\sigma^{x}`),
+        "、", math(String.raw`k=m`), " なら ", math(String.raw`\sigma^{z}`), "、", math(String.raw`k>m`), " なら ", math(String.raw`I_2`), "）とする。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`c_m+_B c_m^{\mathsf T}=\mathop{\boxtimes}_{k}G_k`), " である。", math(String.raw`k\neq m`), " なら ", math(String.raw`A_k=A'_k=G_k`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c_m+_B c_m^{\mathsf T}
+&=\bigl(1_{\mathbb{C}}\ast_B c_m\bigr)+_B\bigl(1_{\mathbb{C}}\ast_B c_m^{\mathsf T}\bigr)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{claim_matrices_indexed_by_finite_set_form_complex_vector_space}\text{、}\blkref{def_complex_vector_space}\right)\\
+&=\Bigl(1_{\mathbb{C}}\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)+_B\Bigl(1_{\mathbb{C}}\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)
+&&\left(\because\ \blkref{claim_creation_operator_matrix_is_kronecker_product}\text{、}\blkref{claim_annihilation_operator_matrix_is_kronecker_product}\right)\\
+&=\mathop{\boxtimes}\limits_{k=1}^{M}G_k
+&&\left(\because\ r:=m\text{、}\lambda=\lambda':=1_{\mathbb{C}}\text{。}\blkref{claim_kronecker_product_is_linear_in_one_factor}\right).
+\end{aligned}`),
+      paragraph([
+        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_2 G_k=F_k\cdot_2 K`), " である。", math(String.raw`k<m`), " なら ", math(String.raw`G_k=\sigma^{z}`),
+        "、", math(String.raw`F_k=\sigma^{x}`), " で ", ref("claim_matrix_k_turns_pauli_z_into_pauli_x"), " による。", math(String.raw`k=m`), " なら ",
+        ref("claim_matrix_k_turns_sum_of_off_diagonal_matrix_units_into_pauli_z"), " による。", math(String.raw`k>m`), " なら ", math(String.raw`G_k=F_k=I_2`), " で、",
+        math(String.raw`K\cdot_2 I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ", math(String.raw`K=I_2\cdot_2 K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
+      ]),
+      paragraph(["行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。"]),
+      displayMath(String.raw`\begin{aligned}
+\kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)
+&=\bigl(U\cdot_B(c_m+_B c_m^{\mathsf T})\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=\Bigl(U\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G_k\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \text{（一）}\right)\\
+&=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G_k\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_2 G_k\bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F_k\cdot_2 K\bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \text{各}\ k\ \text{で（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}F_k\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\Bigl(Z_m\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_jordan_wigner_z_matrix}\right)\\
+&=\bigl(Z_m\cdot_B U\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=Z_m\cdot_B\bigl(U\cdot_B U'\bigr)
+&&\left(\because\ \text{結合}\right)\\
+&=Z_m\cdot_B 1_B
+&&\left(\because\ \blkref{claim_kronecker_power_of_k_times_that_of_its_half_is_identity}\right)\\
+&=Z_m
+&&\left(\because\ \blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_conjugation_of_imaginary_combination_of_creation_and_annihilation_matrices_is_jordan_wigner_y_matrix",
+    kind: "claim",
+    title: { text: "生成作用素と消滅作用素の行列の虚数倍の和を U と U' で挟むと、y の Pauli 行列で終わる Jordan–Wigner 行列になる" },
+    labels: ["claim_conjugation_of_imaginary_combination_of_creation_and_annihilation_matrices_is_jordan_wigner_y_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`m`), "、", math(String.raw`B`), "、", math(String.raw`c_m`), "、", math(String.raw`c_m^{\mathsf T}`), "、", math(String.raw`U`), "、",
+        math(String.raw`U'`), "、", math(String.raw`\kappa_{U,U'}`), " を ", ref("claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix"), " のもの、",
+        math(String.raw`\mathrm{i}`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), " の元、", math(String.raw`Y_m`), " を ", ref("def_jordan_wigner_y_matrix"),
+        " の行列とする。次が成り立つ。",
+      ]),
+      displayMath(String.raw`\kappa_{U,U'}\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)\Bigr)=Y_m`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A_k`), "、", math(String.raw`A'_k`), "、", math(String.raw`E_{2,1}`), "、", math(String.raw`E_{1,2}`), "、", math(String.raw`K`), "、", math(String.raw`I_2`),
+        " と添字の略記 ", math(String.raw`2`), " を ", ref("claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix"), " の証明のものとし、",
+        math(String.raw`\sigma^{x},\sigma^{y}`), " を Pauli 行列（", ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_y"), "）とする。", math(String.raw`X:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)`),
+        " と書く。", math(String.raw`k\neq m`), " なら ", math(String.raw`G'_k:=A_k`), "、", math(String.raw`G'_m:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_2 E_{2,1}\bigr)+_2(\mathrm{i}\ast_2 E_{1,2})`),
+        " と置き、", math(String.raw`F'_k`), " を ", ref("def_jordan_wigner_y_matrix"), " の右辺の第 ", math(String.raw`k`), " 因子（", math(String.raw`k<m`), " なら ",
+        math(String.raw`\sigma^{x}`), "、", math(String.raw`k=m`), " なら ", math(String.raw`\sigma^{y}`), "、", math(String.raw`k>m`), " なら ", math(String.raw`I_2`), "）とする。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`X=\mathop{\boxtimes}_{k}G'_k`), " である。", math(String.raw`k\neq m`), " なら ", math(String.raw`A_k=A'_k=G'_k`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X
+&=\Bigl((-_{\mathbb{C}}\mathrm{i})\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)+_B\Bigl(\mathrm{i}\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)
+&&\left(\because\ \blkref{claim_creation_operator_matrix_is_kronecker_product}\text{、}\blkref{claim_annihilation_operator_matrix_is_kronecker_product}\right)\\
+&=\mathop{\boxtimes}\limits_{k=1}^{M}G'_k
+&&\left(\because\ r:=m\text{、}\lambda:=-_{\mathbb{C}}\mathrm{i}\text{、}\lambda':=\mathrm{i}\text{。}\blkref{claim_kronecker_product_is_linear_in_one_factor}\right).
+\end{aligned}`),
+      paragraph([
+        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_2 G'_k=F'_k\cdot_2 K`), " である。", math(String.raw`k<m`), " なら ",
+        ref("claim_matrix_k_turns_pauli_z_into_pauli_x"), "、", math(String.raw`k=m`), " なら ", ref("claim_matrix_k_turns_imaginary_combination_of_off_diagonal_matrix_units_into_pauli_y"),
+        "、", math(String.raw`k>m`), " なら ", math(String.raw`K\cdot_2 I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ",
+        math(String.raw`K=I_2\cdot_2 K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
+      ]),
+      paragraph(["行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。"]),
+      displayMath(String.raw`\begin{aligned}
+\kappa_{U,U'}(X)
+&=\bigl(U\cdot_B X\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
+&=\Bigl(U\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G'_k\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \text{（一）}\right)\\
+&=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G'_k\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_2 G'_k\bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F'_k\cdot_2 K\bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \text{各}\ k\ \text{で（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}F'_k\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\Bigl(Y_m\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_jordan_wigner_y_matrix}\right)\\
+&=\bigl(Y_m\cdot_B U\bigr)\cdot_B U'
+&&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
+&=Y_m\cdot_B\bigl(U\cdot_B U'\bigr)
+&&\left(\because\ \text{結合}\right)\\
+&=Y_m\cdot_B 1_B
+&&\left(\because\ \blkref{claim_kronecker_power_of_k_times_that_of_its_half_is_identity}\right)\\
+&=Y_m
+&&\left(\because\ \blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power",
+    kind: "definition",
+    title: { text: "一般の偶数次元の系の行き先を U と U' で挟んだ写像" },
+    labels: ["def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。", math(String.raw`\Phi_Y:\mathrm{Cl}(Y,Q)\to B`), " と ", math(String.raw`\Psi_Y:B\to\mathrm{Cl}(Y,Q)`),
+        " を ", ref("theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"), " の準同型、", math(String.raw`U`), " を ",
+        ref("def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`U'`), " を ", ref("def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"),
+        " の行列、", math(String.raw`\kappa_{U,U'}`), " と ", math(String.raw`\kappa_{U',U}`), " を ", ref("def_conjugation_of_matrices"), " の写像とする。",
+        "写像 ", math(String.raw`\Omega:\mathrm{Cl}(Y,Q)\to B`), " を次で定める。",
+      ]),
+      displayMath(String.raw`\Omega:=\kappa_{U,U'}\circ\Phi_Y`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power",
+    kind: "definition",
+    title: { text: "U' と U で挟んでから一般の偶数次元の系の帰りへ渡す写像" },
+    labels: ["def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`B`), "、", math(String.raw`\Psi_Y`), "、",
+        math(String.raw`U`), "、", math(String.raw`U'`), "、", math(String.raw`\kappa_{U',U}`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"),
+        " のものとする。写像 ", math(String.raw`\Omega':B\to\mathrm{Cl}(Y,Q)`), " を次で定める。",
+      ]),
+      displayMath(String.raw`\Omega':=\Psi_Y\circ\kappa_{U',U}`),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_clifford_algebra_of_general_even_dimensional_space_sends_orthonormal_basis_to_jordan_wigner_matrices",
+    kind: "theorem",
+    title: { text: "系：一般の偶数次元の非退化な二次空間のクリフォード代数から行列環への同型で、直交基底の像が Jordan–Wigner 行列になるもの" },
+    labels: ["theorem_clifford_algebra_of_general_even_dimensional_space_sends_orthonormal_basis_to_jordan_wigner_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`\gamma_Y`), "、", math(String.raw`e`), " を ", ref("def_setting_of_general_even_dimensional_corollary"),
+        " のもの、", math(String.raw`B`), "、", math(String.raw`\Phi_Y`), "、", math(String.raw`\Psi_Y`), "、", math(String.raw`U`), "、", math(String.raw`U'`), " を ",
+        ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), " のもの、", math(String.raw`\Omega`), " を ",
+        ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), "、", math(String.raw`\Omega'`), " を ",
+        ref("def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"), " の写像とする。",
+      ]),
+      paragraph(["このとき次が成り立つ（", math(String.raw`Z_m`), " は ", ref("def_jordan_wigner_z_matrix"), "、", math(String.raw`Y_m`), " は ", ref("def_jordan_wigner_y_matrix"), "）。"]),
+      list([
+        [math(String.raw`\Omega`), " と ", math(String.raw`\Omega'`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"],
+        [
+          "すべての ", math(String.raw`a\in\mathrm{Cl}(Y,Q)`), " について ", math(String.raw`\Omega'(\Omega(a))=a`), " であり、すべての ", math(String.raw`F\in B`), " について ",
+          math(String.raw`\Omega(\Omega'(F))=F`), " である。",
+        ],
+        [
+          "すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について ", math(String.raw`\Omega(\gamma_Y(e_m))=Z_m`), " かつ ", math(String.raw`\Omega(\gamma_Y(e_{M+m}))=Y_m`), " である。",
+        ],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`U\cdot_B U'=1_B`), "（", ref("claim_kronecker_power_of_k_times_that_of_its_half_is_identity"), "）と ", math(String.raw`U'\cdot_B U=1_B`), "（",
+        ref("claim_kronecker_power_of_half_of_k_times_that_of_k_is_identity"), "）なので、", ref("claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism"),
+        " を ", math(String.raw`(U,U')`), " と ", math(String.raw`(U',U)`), " に当てると、", math(String.raw`\kappa_{U,U'}`), " と ", math(String.raw`\kappa_{U',U}`),
+        " は ℂ-代数の準同型である。", math(String.raw`\Phi_Y`), " と ", math(String.raw`\Psi_Y`), " も ℂ-代数の準同型なので（",
+        ref("theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"), "）、合成 ", math(String.raw`\Omega`), " と ",
+        math(String.raw`\Omega'`), " は ℂ-代数の準同型である（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。",
+      ]),
+      paragraph([
+        ref("claim_conjugations_by_mutually_inverse_matrices_compose_to_identity"), " を ", math(String.raw`(U,U')`), " に当てると（仮定 ", math(String.raw`U'\cdot_B U=1_B`),
+        "）すべての ", math(String.raw`G\in B`), " について ", math(String.raw`\kappa_{U',U}(\kappa_{U,U'}(G))=G`), "、", math(String.raw`(U',U)`), " に当てると（仮定 ",
+        math(String.raw`U\cdot_B U'=1_B`), "）", math(String.raw`\kappa_{U,U'}(\kappa_{U',U}(G))=G`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega'\bigl(\Omega(a)\bigr)
+&=\Psi_Y\Bigl(\kappa_{U',U}\Bigl(\kappa_{U,U'}\bigl(\Phi_Y(a)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\text{、}\blkref{def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\Psi_Y\bigl(\Phi_Y(a)\bigr)
+&&\left(\because\ \text{上の一つ目の等式で}\ G:=\Phi_Y(a)\right)\\
+&=a
+&&\left(\because\ \blkref{theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra}\right),\\[4pt]
+\Omega\bigl(\Omega'(F)\bigr)
+&=\kappa_{U,U'}\Bigl(\Phi_Y\Bigl(\Psi_Y\bigl(\kappa_{U',U}(F)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\text{、}\blkref{def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\kappa_{U,U'}\bigl(\kappa_{U',U}(F)\bigr)
+&&\left(\because\ \blkref{theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra}\right)\\
+&=F
+&&\left(\because\ \text{上の二つ目の等式で}\ G:=F\right).
+\end{aligned}`),
+      paragraph([math(String.raw`m\in\{1,\dots,M\}`), " について："]),
+      displayMath(String.raw`\begin{aligned}
+\Omega\bigl(\gamma_Y(e_m)\bigr)
+&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_m)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis}\right)\\
+&=Z_m
+&&\left(\because\ \blkref{claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix}\right),\\[4pt]
+\Omega\bigl(\gamma_Y(e_{M+m})\bigr)
+&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_{M+m})\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\kappa_{U,U'}\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis}\right)\\
+&=Y_m
+&&\left(\because\ \blkref{claim_conjugation_of_imaginary_combination_of_creation_and_annihilation_matrices_is_jordan_wigner_y_matrix}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
