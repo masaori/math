@@ -53538,9 +53538,9 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(q^{2L}Z^{\mathrm{op}}_{L,L}(q)\bigr)
 &=\log\bigl(q^{2L}\bigr)+\log Z^{\mathrm{op}}_{L,L}(q)
-&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&&(\because\ \blkref{claim_log_additive}\text{（両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元）})\\
 &=2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=2L\text{ で。整数倍は }\blkref{def_log_order_group})
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=2L\text{ で適用し、整数倍は }\blkref{def_log_order_group})
 \end{aligned}`),
                         paragraph([
                           "主張の左の元から始める次の一続きで示す。",
@@ -53554,7 +53554,7 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
 &=\Phi_L(q)
 &&(\because\ \blkref{def_finite_free_entropy})\\
 &\le_{\Lambda}\log Z^{\mathrm{op}}_{L,L}(q)
-&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_periodic_open_boundary_comparison_rational}\text{ の }0<q\le1\text{ の場合の上からの評価を移す。}\Phi_L(q)=\log Z_L(q)\text{ は }\blkref{def_finite_free_entropy})
+&&(\because\ \blkref{claim_rational_log_order_iff}\text{ で }\blkref{claim_periodic_open_boundary_comparison_rational}\text{ の }0<q\le1\text{ の場合の上からの評価を移し、}\Phi_L(q)=\log Z_L(q)\text{ は }\blkref{def_finite_free_entropy})
 \end{aligned}`),
                         paragraph([
                           "この鎖の第三行までが主張の左の不等式、第三行から第四行までが主張の右の不等式である。",
