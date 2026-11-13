@@ -75125,6 +75125,12 @@ a+cb&=t_{\circ}(\Gamma_c)
               title: { text: "頂点単純閉路の循環総回転数は切断線偶奇で決まる" },
               labels: ["claim_vertex_simple_cycle_turning_by_seam_parity"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.vertexSimpleCycle_cyclicTotalTurning_by_seamParity",
+                "Ising2DLambda.KacWard.natLtTwo_eq_zero_of_cast_zmod_two_eq_zero",
+                "Ising2DLambda.NecSuf.KacWard.vertex_simple_cycle_turning_by_seam_parity_necSuf",
+                "Ising2DLambda.KacWard.vertexSimpleCycle_cyclicTotalTurning_by_seamParity_from_necSuf",
+              ],
               verification: ["sagemath/check/vertex-simple-cycle-turning"],
               statement: [
                 paragraph([
