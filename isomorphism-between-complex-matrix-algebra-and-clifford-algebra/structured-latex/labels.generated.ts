@@ -233,6 +233,7 @@ export const ALL_LABELS = [
   "claim_ordered_products_with_equal_factors_are_equal",
   "claim_ordered_sum_of_zero_terms_is_zero",
   "claim_ordered_sum_with_kronecker_delta_picks_term",
+  "claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal",
   "claim_orthogonalization_step_extends_orthogonalized_part",
   "claim_orthogonalized_basis_can_be_modified_so_next_member_has_nonzero_value",
   "claim_pair_of_algebra_homomorphisms_is_algebra_homomorphism",

@@ -3090,6 +3090,45 @@ L_r(x)
     ],
   },
   {
+    id: "mathematical_toolkit_claim_ordered_sums_with_equal_terms_are_equal",
+    kind: "claim",
+    title: { text: "項ごとに等しい二つの ℂ の中の番号順の和は等しい" },
+    labels: ["claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ",
+        math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`\alpha_k,\ \alpha'_k`), " が一つずつ与えられ、すべての ",
+        math(String.raw`k\in\{1,\dots,n\}`), " について ", math(String.raw`\alpha_k=\alpha'_k`),
+        " が成り立つとする。このとき、", math(String.raw`\mathbb{C}`), " の中の番号順の和（", ref("def_ordered_sum_in_complex_numbers"),
+        "）について次の ", math(String.raw`\mathbb{C}`), " の等式が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{\mathbb{C},\,k=1}^{n}\alpha_k=\sum_{\mathbb{C},\,k=1}^{n}\alpha'_k`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbb{C}`), " の中の番号順の和の定義（", ref("def_ordered_sum_in_complex_numbers"), "）が二つの族について帰納的に定める ",
+        math(String.raw`\mathbb{C}`), " の元を、順に ", math(String.raw`S_m`), "、", math(String.raw`S'_m`), "（", math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）と書く。すなわち ", math(String.raw`S_0:=0_{\mathbb{C}}`), "、", math(String.raw`S_m:=S_{m-1}+_{\mathbb{C}}\alpha_m`), "、",
+        math(String.raw`S'_0:=0_{\mathbb{C}}`), "、", math(String.raw`S'_m:=S'_{m-1}+_{\mathbb{C}}\alpha'_m`), "（", math(String.raw`1\le m\le n`),
+        "）である。すべての ", math(String.raw`m`), " について ", math(String.raw`S_m=S'_m`), " であることを ", math(String.raw`m`),
+        " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。",
+        math(String.raw`m=0`), " のとき、", math(String.raw`S_0=0_{\mathbb{C}}=S'_0`), " である（", ref("def_ordered_sum_in_complex_numbers"), "）。",
+        math(String.raw`1\le m\le n`), " とし、", math(String.raw`S_{m-1}=S'_{m-1}`), " を仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_m
+&=S_{m-1}+_{\mathbb{C}}\alpha_m
+&&\left(\because\ S_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right)\\
+&=S'_{m-1}+_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=S'_{m-1}+_{\mathbb{C}}\alpha'_m
+&&\left(\because\ \text{仮定}\ \alpha_m=\alpha'_m\right)\\
+&=S'_m
+&&\left(\because\ S'_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_ordered_sum_with_kronecker_delta_picks_term",
     kind: "claim",
     title: { text: "ℂ の中の番号順の和で、第 k 項にクロネッカーのデルタを掛けた和は第 j 項になる" },
@@ -3391,7 +3430,7 @@ h(b_j)
 &=\sum_{\mathbb{C},\,k=1}^{n}g(b_k)\cdot_{\mathbb{C}}f_k(b_j)
 &&\left(\because\ \text{双対空間の元の線型結合の値（}x=b_j\text{）。}\blkref{claim_value_of_linear_combination_in_dual_space}\right)\\
 &=\sum_{\mathbb{C},\,k=1}^{n}g(b_k)\cdot_{\mathbb{C}}\delta_{k,j}
-&&\left(\because\ \text{各}\ k\ \text{で双対基底の条件}\ f_k(b_j)=\delta_{k,j}\text{。}\blkref{def_dual_basis}\right)\\
+&&\left(\because\ \text{各}\ k\ \text{で双対基底の条件}\ f_k(b_j)=\delta_{k,j}\text{。}\blkref{def_dual_basis}\text{、}\blkref{claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal}\right)\\
 &=g(b_j)
 &&\left(\because\ \alpha_k:=g(b_k)\ \text{として、デルタを掛けた和は第}\ j\ \text{項。}\blkref{claim_ordered_sum_with_kronecker_delta_picks_term}\right).
 \end{aligned}`),
@@ -3436,7 +3475,7 @@ h(x)
 &=\sum_{\mathbb{C},\,k=1}^{n}\mu_k\cdot_{\mathbb{C}}h(b_k)
 &&\left(\because\ h\ \text{は線型形式。}\blkref{claim_linear_form_maps_linear_combination_to_ordered_sum}\right)\\
 &=\sum_{\mathbb{C},\,k=1}^{n}\mu_k\cdot_{\mathbb{C}}g(b_k)
-&&\left(\because\ \text{各}\ k\ \text{で上で示した}\ h(b_k)=g(b_k)\right)\\
+&&\left(\because\ \text{各}\ k\ \text{で上で示した}\ h(b_k)=g(b_k)\text{。}\blkref{claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal}\right)\\
 &=g\left(\sum_{k=1}^{n}\mu_k\cdot_V b_k\right)
 &&\left(\because\ g\ \text{は線型形式。}\blkref{claim_linear_form_maps_linear_combination_to_ordered_sum}\right)\\
 &=g(x)
@@ -3537,7 +3576,7 @@ h(x)
 &=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}\delta_{k,j}
 &&\left(\because\ \alpha_k:=\lambda_k\ \text{として、デルタを掛けた和は第}\ j\ \text{項。}\blkref{claim_ordered_sum_with_kronecker_delta_picks_term}\right)\\
 &=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}f_k(b_j)
-&&\left(\because\ \text{各}\ k\ \text{で双対基底の条件}\ f_k(b_j)=\delta_{k,j}\text{。}\blkref{def_dual_basis}\right)\\
+&&\left(\because\ \text{各}\ k\ \text{で双対基底の条件}\ f_k(b_j)=\delta_{k,j}\text{。}\blkref{def_dual_basis}\text{、}\blkref{claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal}\right)\\
 &=\left(\sum_{k=1}^{n}\lambda_k\cdot_{V^{*}}f_k\right)(b_j)
 &&\left(\because\ \text{双対空間の元の線型結合の値（}x=b_j\text{）。}\blkref{claim_value_of_linear_combination_in_dual_space}\right)\\
 &=0_{V^{*}}(b_j)
