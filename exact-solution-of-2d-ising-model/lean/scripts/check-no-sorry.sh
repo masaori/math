@@ -347,7 +347,13 @@ targets=(
   Ising2D.pauliComb_eq_sum_pauliFamily
   Ising2D.pauliFamily_sum_eq_zero_coeffs
   Ising2D.pauliKroneckerFamily_independent
-  Ising2D.sum_zyCoeff_smul_pauliKroneckerFamily
+  Ising2D.multiIndexDelta_self
+  Ising2D.multiIndexDelta_of_ne
+  Ising2D.zy_step6_prep_t
+  Ising2D.zy_step6_prep_uv
+  Ising2D.sum_zyStep6Coeff_smul_pauliKroneckerFamily
+  Ising2D.zy_step6_alpha_eq_zero
+  Ising2D.zy_step6_beta_eq_zero
   Ising2D.zy_step6_coeffs_eq_zero
   Ising2D.expPhase_add
   Ising2D.expPhase_neg
@@ -1746,6 +1752,7 @@ targets=(
   Ising2D.matrix_smul_zero_matrix_apply
   Ising2D.matrix_smul_zero_matrix
   Ising2D.matrix_smul_zero_matrix_of_necSuf
+  Ising2D.smul_zero_matrix_tensorPow
   Ising2D.neg_mul_matrix_apply
   Ising2D.neg_mul_matrix
   Ising2D.neg_mul_matrix_of_necSuf
@@ -2005,6 +2012,7 @@ targets=(
   Ising2D.finite_sum_smul_one_matrix
   Ising2D.finite_sum_smul_one_matrix_of_necSuf
   Ising2D.finite_sum_smul_one_tensorPow
+  Ising2D.finite_sum_smul_one_tensorPow_fin
   Ising2D.matrix_add_smul_apply
   Ising2D.matrix_add_smul
   Ising2D.matrix_add_smul_of_necSuf
@@ -2013,6 +2021,7 @@ targets=(
   Ising2D.finite_sum_of_matrix_sums
   Ising2D.finite_sum_of_matrix_sums_of_necSuf
   Ising2D.finite_sum_of_matrix_sums_tensorPow
+  Ising2D.finite_sum_of_matrix_sums_tensorPow_fintype
   Ising2D.matrix_mul_right_tendsto
   Ising2D.matrix_mul_right_tendsto_of_necSuf
   Ising2D.mul_right_tendsto_tensorPow

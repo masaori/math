@@ -9,6 +9,7 @@
 `Conf M` の行列には当てはまらないためである。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrix
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.NecSuf.SmulOneMatrix
 import Ising2D.Basic
 
@@ -32,5 +33,15 @@ theorem smul_sub_smul_tensorPow {M : ℕ} (a b : ℂ) (A : TensorPow M) : a • 
 theorem finite_sum_smul_one_tensorPow {M : ℕ} (r : ℕ) (c : Fin (r + 1) → ℂ) (A : TensorPow M) :
     ∑ j, c j • A = (∑ j, c j) • A :=
   NecSuf.finite_sum_smul_one_matrix' r c A
+
+/-- `finite_sum_of_scalar_multiples_of_one_matrix` の `TensorPow M` での系で、項の個数 `n` を問わない形。
+`n = r + 1` では `finite_sum_smul_one_tensorPow` そのものである。`n = 0` は人手の範囲の外（`def_finite_sum_of_matrices` は
+項の個数が `1` 以上の和だけを定める）で、両辺とも空の和なので `zero_scalar_multiple_is_zero_matrix` で `O` に揃う。
+人手 `Z_Y_linearly_independent` の Step 6 の `Σ_{m=1}^{M_col}`（人手は `M_col ≥ 1`）を、Lean の `Fin M` の上の和で書くために置く。 -/
+theorem finite_sum_smul_one_tensorPow_fin {M : ℕ} (n : ℕ) (c : Fin n → ℂ) (A : TensorPow M) :
+    ∑ j, c j • A = (∑ j, c j) • A := by
+  cases n with
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, zero_smul_tensorPow]
+  | succ r => exact finite_sum_smul_one_tensorPow r c A
 
 end Ising2D

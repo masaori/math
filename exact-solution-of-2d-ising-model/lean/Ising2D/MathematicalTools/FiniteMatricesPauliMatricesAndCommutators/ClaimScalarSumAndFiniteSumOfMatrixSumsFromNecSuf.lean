@@ -33,4 +33,17 @@ theorem finite_sum_of_matrix_sums_tensorPow {M : ℕ} (n : ℕ) (X Y : Fin n →
     ∑ j, (X j + Y j) = (∑ j, X j) + ∑ j, Y j :=
   NecSuf.finite_sum_add_matrix' n X Y
 
+/-- `finite_sum_of_matrix_sums` の `TensorPow M` での系で、和の添字が有限型 `κ` のもの。`κ` に固定した番号を付けて
+`Fin (card κ)` の上の和へ移し、`finite_sum_of_matrix_sums_tensorPow` を当てて番号を外す。
+人手 `Z_Y_linearly_independent` の Step 6 の `Σ_{q=1}^{N}` を、Lean の多重添字 `Fin M → Fin 4` の上の和で書くために置く
+（人手の全単射 `π` で並べた添字 `q` を、Lean は多重添字そのもので書く）。 -/
+theorem finite_sum_of_matrix_sums_tensorPow_fintype {M : ℕ} {κ : Type*} [Fintype κ] (X Y : κ → TensorPow M) :
+    ∑ j, (X j + Y j) = (∑ j, X j) + ∑ j, Y j := by
+  let e : κ ≃ Fin (Fintype.card κ) := Fintype.equivFin κ
+  calc ∑ j, (X j + Y j)
+      = ∑ i, (X (e.symm i) + Y (e.symm i)) := (e.symm.sum_comp _).symm            -- `κ` に番号を付ける
+    _ = (∑ i, X (e.symm i)) + ∑ i, Y (e.symm i) :=
+        finite_sum_of_matrix_sums_tensorPow _ _ _                                  -- `finite_sum_of_matrix_sums`（`n → card κ`）
+    _ = (∑ j, X j) + ∑ j, Y j := by rw [e.symm.sum_comp, e.symm.sum_comp]         -- 番号を外す
+
 end Ising2D

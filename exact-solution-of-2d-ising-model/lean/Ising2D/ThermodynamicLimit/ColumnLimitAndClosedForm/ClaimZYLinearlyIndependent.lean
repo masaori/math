@@ -55,17 +55,18 @@ Lean は `kronecker_family_of_independent_family_is_independent` と同じく多
 | Step 2 の `((c_1I+c_2σ^x)+c_3σ^y)+c_4σ^z = ⋯ = O` の 6 行の鎖 | 最後の行（仮定）を除く 5 行は `pauliComb_eq_sum_pauliFamily`、最後の行は `pauliFamily_sum_eq_zero_coeffs` の `.trans h` |
 | Step 2 の「Step 1 の線型独立性より `c_1 = ⋯ = c_4 = 0_ℂ`」 | `pauliFamily_sum_eq_zero_coeffs`（`pauliFamily_linearIndependent` は同じ線型独立性を mathlib の `LinearIndependent` の形で述べた系） |
 | Step 2 の「`kronecker_family_of_independent_family_is_independent` より族 `(F_q)` は線型独立」 | `pauliKroneckerFamily_independent` |
-| （旧い人手 Step 6 の「`𝓔` のそれ以外の元の係数は `0`」の係数の族） | `zyCoeffOnPauliKroneckerFamily` |
-| （旧い人手 Step 6 の「左辺は `𝓔` の相異なる元の線型結合」） | `sum_zyCoeff_smul_pauliKroneckerFamily` |
-| Step 6「`(F_q)` の線型独立性から係数はすべて `0`」 | `zy_step6_coeffs_eq_zero` |
+| Step 6 のクロネッカーのデルタ `δ_{qq'}`（`def_kronecker_delta` の `n → N`） | `multiIndexDelta`（添字は多重添字。値は `multiIndexDelta_self`・`multiIndexDelta_of_ne`） |
+| Step 6 の係数の族 `d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)}` | `zyStep6Coeff` |
+| Step 6 の準備 (t) の 2 本の鎖 | `zy_step6_prep_t`（同じ形の 1 本を 2 か所へ当てる） |
+| Step 6 の準備 (u)・(v) の 4 本の鎖 | `zy_step6_prep_uv`（同じ形の 1 本を 4 か所へ当てる） |
+| Step 6 の `Σ_q d_qF_q` の 11 行の鎖 | 最後の行（仮定）を除く 10 行は `sum_zyStep6Coeff_smul_pauliKroneckerFamily`、最後の行は `zy_step6_coeffs_eq_zero` の `.trans h` |
+| Step 6 の「Step 2 より `d_q = 0_ℂ`」 | `zy_step6_coeffs_eq_zero` の `pauliKroneckerFamily_independent` の段 |
+| Step 6 の `α_{m_0}` の 8 行の鎖・`β_{m_0}` の 8 行の鎖 | `zy_step6_alpha_eq_zero`・`zy_step6_beta_eq_zero` |
+| Step 6 の結論 | `zy_step6_coeffs_eq_zero` |
 
 Step 3〜5（`Z_m`・`Y_m` のクロネッカー積の形、対応する多重添字 `ζ(m)`・`η(m)` と `q_Z(m)`・`q_Y(m)`、それらが相異なること）の
-Lean はまだ無い。Step 6 は多重添字を並べた単射 `x` を仮定に取って述べ、Step 3〜5 と合わせて主張を導く段は Step 3〜5 と一緒に置く。
-いまの Step 6 の Lean は、人手が係数の族 `d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)}` を置く鎖に書き直す前の形で、
-「左辺は `𝓔` の相異なる元の線型結合で、それ以外の元の係数は `0`」の 1 文を 4 段（像に無い多重添字の係数は `0`、
-単射による添字の付け替え、`x(s)` の係数の値、`Z` 側と `Y` 側への和の分割）に開いたものである。
-新しい人手の鎖（準備 (t)・(u)・(v)、`Σ_q d_qF_q` の 11 行、`α_{m_0}`・`β_{m_0}` の 8 行）と 1 対 1 に直す件は、
-状態台帳の (d4c44p15f3) の残りに在る。
+Lean はまだ無い。Step 6 は、Step 4 の `F_{q_Z(m)} = Z_m`・`F_{q_Y(m)} = Y_m` と Step 5 の「`q_Z`・`q_Y` の値は相異なる」を仮定に取って述べ、
+Step 3〜5 と合わせて主張を導く段は Step 3〜5 と一緒に置く。
 
 ## 必要十分版
 
@@ -77,12 +78,22 @@ Lean はまだ無い。Step 6 は多重添字を並べた単射 `x` を仮定に
   `(-i)i = 1_ℂ`（準備 (g)。`i` が単元であること）と、成分の定義だけである。
 - Step 2: 有限和の定義の段を辿る 5 行の鎖と、`kronecker_family_of_independent_family_is_independent` を当てはめる段だけである。
   後者で取り払える構造は、その必要十分版 `NecSuf/ProductFamilyOfIndependentFamilyIsIndependent.lean` が示している。
-- Step 6: Step 2 の線型独立性、`x` の単射性、有限和の操作（係数 `0` の項を落とす、単射で添字を付け替える、`⊕` の上の和を分ける）と
-  `0 • A = 0` だけで、行列であることも係数が ℂ であることも効いていない。
+- Step 6: Step 2 の線型独立性、Step 4・5 の仮定、クロネッカーのデルタの値、有限和の操作（係数の和のスカラー倍の分配、
+  有限和の分割と順序交換、項が一つだけ残る和）、スカラー倍の結合則、`0` 倍が `O` であること（`0•A = O`）、`O` のスカラー倍が `O` であること（`c•O = O`）、
+  `1` 倍、係数の積の `0`・`1`、係数の加法の単位元だけで、
+  行列であることも係数が ℂ であることも、係数の積が可換であることも効いていない。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerFamilyOfIndependentFamilyIsIndependent
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarSumAndFiniteSumOfMatrixSumsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfZeroMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesWithSingleNonzeroTerm
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteDoubleSumOfMatricesInterchange
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimFiniteSumWithSingleNonzeroTerm
 
 namespace Ising2D
 
@@ -430,66 +441,167 @@ theorem pauliKroneckerFamily_independent (d : (Fin M → Fin 4) → ℂ)
     (hd : ∑ p, d p • pauliKroneckerFamily p = 0) : ∀ p, d p = 0 :=
   kronecker_family_of_independent_family_is_independent pauliFamily pauliFamily_sum_eq_zero_coeffs d hd
 
-/-! ## 人手 Step 6: 結論（旧い人手 Step 6 の形）
+/-! ## 人手 Step 6: 結論
 
-以下は、人手が係数の族 `d_q` を置く鎖に書き直す前の Step 6 に合わせた形である（新しい鎖と 1 対 1 に直す件は状態台帳の (d4c44p15f3) の残り）。
-旧い人手 Step 6 は、Step 3〜5 で得た「`Z_m`・`Y_m` は `𝓔` の相異なる `2M` 個の元である」から、
-`Σ_m α_m Z_m + Σ_m β_m Y_m = O` の左辺を `𝓔` の線型結合と読み（`𝓔` のそれ以外の元の係数は `0`）、
-基底による `O` の表示の一意性から係数がすべて `0` になることを導く。
+人手は係数の族 `d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)}` を置き、準備 (t)・(u)・(v) を示したうえで、
+`Σ_q d_qF_q` を 11 行の鎖で仮定の左辺 `O` に戻し、Step 2 の線型独立性から `d_q = 0_ℂ` を得て、
+`α_{m_0}`・`β_{m_0}` を 8 行の鎖で `d_{q_Z(m_0)}`・`d_{q_Y(m_0)}` に戻す。
 
-Step 3〜5（`Z_m`・`Y_m` がどの多重添字の元か、その `2M` 個が相異なること）の Lean はまだ無いので、
-ここでは Step 6 を、多重添字を並べた写像 `x : Fin M ⊕ Fin M → (Fin M → Fin 4)`（`inl m` が人手の `ζ(m)`、
-`inr m` が `η(m)`）について述べる。Step 5 の「相異なる」は `x` の単射性 `hx` である。
-人手のサイトの番号 `m ∈ {1, …, M}` は Lean の `m : Fin M`（`0, …, M-1`）で、人手の `m` が Lean の `m - 1` に当たる。
-人手の `Z_m = e_{ζ(m)_1} ⊠ ⋯`・`Y_m = e_{η(m)_1} ⊠ ⋯`（Step 4）を代入して主張へつなぐ段は Step 3〜5 の Lean と一緒に置く。 -/
+Lean の読み替え:
+- 人手の添字 `q ∈ {1, …, N}`（Step 2 の全単射 `π` で多重添字を並べたもの）は、Step 2 と同じく多重添字 `p : Fin M → Fin 4` そのものである。
+  人手の `q_Z(m) := π^{-1}(ζ(m))`・`q_Y(m) := π^{-1}(η(m))` は、Lean では多重添字 `qZ m`・`qY m`（人手の `ζ(m)`・`η(m)`）になる。
+- 人手のクロネッカーのデルタ `δ_{qq'}`（`def_kronecker_delta` の `n → N`）は、多重添字の上の `multiIndexDelta`（同じ定義を添字 `𝒫` で述べたもの）である。
+- Step 3〜5 の Lean はまだ無いので、Step 4 の `F_{q_Z(m)} = Z_m`・`F_{q_Y(m)} = Y_m` と Step 5 の「`q_Z(1), …, q_Z(M), q_Y(1), …, q_Y(M)` は相異なる」を
+  仮定 `hFZ`・`hFY`・`hZZ`・`hYY`・`hZY` に取る。それらを Step 3〜5 から与えて主張を導く段は、Step 3〜5 の Lean と一緒に置く。
+- 人手のサイトの番号 `m ∈ {1, …, M}` は Lean の `m : Fin M`（`0, …, M-1`）で、人手の `m` が Lean の `m - 1` に当たる。人手の `m → 1` は Lean の `⟨0, _⟩` である。
+- 人手が引く `scalar_multiple_is_associative` は Lean の具体版が無いので、既存の慣行どおり mathlib の `smul_smul` を引く。 -/
 
-/-- 旧い人手 Step 6 の「`𝓔` の元 `E_{x(s)}` の係数は `α_m`（`s = inl m`）・`β_m`（`s = inr m`）、`𝓔` のそれ以外の元の係数は `0`」
-という係数の族 `d`。`x` が単射（Step 5）なので、`x(s)` の係数は `s` から一つに決まる（`Function.extend` の値）。 -/
-noncomputable def zyCoeffOnPauliKroneckerFamily (x : Fin M ⊕ Fin M → (Fin M → Fin 4)) (α β : Fin M → ℂ) :
-    (Fin M → Fin 4) → ℂ :=
-  Function.extend x (Sum.elim α β) 0
+/-- 人手 Step 6 のクロネッカーのデルタ `δ_{qq'}`（`def_kronecker_delta` を、Lean の添字である多重添字 `𝒫 = (Fin M → Fin 4)` の上で述べたもの）。 -/
+noncomputable def multiIndexDelta (p p' : Fin M → Fin 4) : ℂ := if p = p' then 1 else 0
 
-/-- 旧い人手 Step 6 の「左辺は基底 `𝓔` の相異なる元の ℂ-線型結合であり、`𝓔` のそれ以外の元の係数は `0`」:
-`Σ_p d_p E_p = Σ_m α_m E_{x(inl m)} + Σ_m β_m E_{x(inr m)}`。 -/
-theorem sum_zyCoeff_smul_pauliKroneckerFamily (x : Fin M ⊕ Fin M → (Fin M → Fin 4))
-    (hx : Function.Injective x) (α β : Fin M → ℂ) :
-    ∑ p, zyCoeffOnPauliKroneckerFamily x α β p • pauliKroneckerFamily p
-      = ∑ m, α m • pauliKroneckerFamily (x (Sum.inl m))
-        + ∑ m, β m • pauliKroneckerFamily (x (Sum.inr m)) := by
-  calc ∑ p, zyCoeffOnPauliKroneckerFamily x α β p • pauliKroneckerFamily p
-      = ∑ p ∈ Finset.univ.image x, zyCoeffOnPauliKroneckerFamily x α β p • pauliKroneckerFamily p := by
-          -- `𝓔` のうち `x` の像に無い元の係数は `0`
-          refine (Finset.sum_subset (Finset.subset_univ _) fun p _ hp => ?_).symm
-          have hnot : ¬ ∃ s, x s = p := by simpa using hp
-          rw [zyCoeffOnPauliKroneckerFamily, Function.extend_apply' _ _ _ hnot, Pi.zero_apply, zero_smul]
-    _ = ∑ s, zyCoeffOnPauliKroneckerFamily x α β (x s) • pauliKroneckerFamily (x s) :=
-          -- `x` は単射（Step 5）なので、像の上の和は `s` の上の和
-          Finset.sum_image fun s _ t _ hst => hx hst
-    _ = ∑ s, Sum.elim α β s • pauliKroneckerFamily (x s) := by
-          -- `x(s)` の係数は `Sum.elim α β s`
-          simp only [zyCoeffOnPauliKroneckerFamily, hx.extend_apply]
-    _ = ∑ m, α m • pauliKroneckerFamily (x (Sum.inl m))
-          + ∑ m, β m • pauliKroneckerFamily (x (Sum.inr m)) :=
-          -- `Fin M ⊕ Fin M` の上の和を `inl` 側（`Z` の項）と `inr` 側（`Y` の項）に分ける
-          Fintype.sum_sum_type _
+/-- `def_kronecker_delta` の `q = q'` の値。 -/
+theorem multiIndexDelta_self (p : Fin M → Fin 4) : multiIndexDelta p p = 1 := if_pos rfl
 
-/-- **人手 Step 6**: `x(inl m)`・`x(inr m)`（人手の `ζ(m)`・`η(m)`）が相異なる多重添字ならば、
-`Σ_m α_m E_{x(inl m)} + Σ_m β_m E_{x(inr m)} = O` から `α_1 = ⋯ = α_M = β_1 = ⋯ = β_M = 0`。
-係数が `0` になるのは、Step 2 の族 `(F_q)` の線型独立性（`pauliKroneckerFamily_independent`）による。 -/
-theorem zy_step6_coeffs_eq_zero (x : Fin M ⊕ Fin M → (Fin M → Fin 4)) (hx : Function.Injective x)
-    (α β : Fin M → ℂ)
-    (h : ∑ m, α m • pauliKroneckerFamily (x (Sum.inl m))
-        + ∑ m, β m • pauliKroneckerFamily (x (Sum.inr m)) = 0) :
+/-- `def_kronecker_delta` の `q ≠ q'` の値。 -/
+theorem multiIndexDelta_of_ne {p p' : Fin M → Fin 4} (h : p ≠ p') : multiIndexDelta p p' = 0 := if_neg h
+
+/-- 人手 Step 6 の係数の族 `d_q := Σ_m α_mδ_{q q_Z(m)} + Σ_m β_mδ_{q q_Y(m)}`。 -/
+noncomputable def zyStep6Coeff (qZ qY : Fin M → (Fin M → Fin 4)) (α β : Fin M → ℂ) (q : Fin M → Fin 4) : ℂ :=
+  ∑ m, α m * multiIndexDelta q (qZ m) + ∑ m, β m * multiIndexDelta q (qY m)
+
+/-- 人手 Step 6 の準備 (t): `q ≠ q'` ならば `c(δ_{qq'}F_q) = O`。人手の 2 本の鎖（`c → α_m, q' → q_Z(m)` と
+`c → β_m, q' → q_Y(m)`）は同じ形で、この 1 本をそれぞれへ当てる。 -/
+theorem zy_step6_prep_t (c : ℂ) {q q' : Fin M → Fin 4} (h : q ≠ q') :
+    c • (multiIndexDelta q q' • pauliKroneckerFamily q) = 0 := by
+  calc c • (multiIndexDelta q q' • pauliKroneckerFamily q)
+      = c • ((0 : ℂ) • pauliKroneckerFamily q) := by rw [multiIndexDelta_of_ne h]       -- `def_kronecker_delta`（`q ≠ q'`）
+    _ = c • (0 : TensorPow M) := by rw [zero_smul_tensorPow]                           -- `zero_scalar_multiple_is_zero_matrix`（`A → F_q`）
+    _ = 0 := smul_zero_matrix_tensorPow c                                               -- `scalar_multiple_of_zero_matrix`（`a → c`）
+
+/-- 人手 Step 6 の準備 (u)・(v): `q ≠ q'` ならば `cδ_{qq'} = 0_ℂ`。人手の 4 本の鎖（(u) の `c → α_m, q → q_Z(m_0), q' → q_Z(m)` と
+`c → β_m, q → q_Y(m_0), q' → q_Y(m)`、(v) の `c → β_m, q → q_Z(m_0), q' → q_Y(m)` と `c → α_m, q → q_Y(m_0), q' → q_Z(m)`）は
+同じ形で、この 1 本をそれぞれへ当てる（`q ≠ q'` は Step 5 から）。 -/
+theorem zy_step6_prep_uv (c : ℂ) {q q' : Fin M → Fin 4} (h : q ≠ q') :
+    c * multiIndexDelta q q' = 0 := by
+  calc c * multiIndexDelta q q'
+      = c * 0 := by rw [multiIndexDelta_of_ne h]                                         -- `def_kronecker_delta`（`q ≠ q'`）
+    _ = 0 := mul_zero c                                                                  -- `complex_times_zero_is_zero`（`z → c`）
+
+/-- 人手 Step 6 の `Σ_q d_qF_q` の鎖のうち、最後の行（仮定）を除く 10 行:
+`Σ_q d_qF_q = Σ_m α_mZ_m + Σ_m β_mY_m`。
+3 段目の `finite_sum_smul_one_tensorPow_fin` は項の個数 `M` を問わないので、この補題は `M = 0` でも成り立つ。
+`M = 0` は人手の範囲の外である（人手は `M_col ≥ 1`）。 -/
+theorem sum_zyStep6Coeff_smul_pauliKroneckerFamily (qZ qY : Fin M → (Fin M → Fin 4))
+    (hFZ : ∀ m, pauliKroneckerFamily (qZ m) = Z m) (hFY : ∀ m, pauliKroneckerFamily (qY m) = Y m)
+    (α β : Fin M → ℂ) :
+    ∑ q, zyStep6Coeff qZ qY α β q • pauliKroneckerFamily q = ∑ m, α m • Z m + ∑ m, β m • Y m := by
+  calc ∑ q, zyStep6Coeff qZ qY α β q • pauliKroneckerFamily q
+      = ∑ q, ((∑ m, α m * multiIndexDelta q (qZ m)) + (∑ m, β m * multiIndexDelta q (qY m)))
+          • pauliKroneckerFamily q := rfl
+                                    -- `d_q` の定義を `N` か所へ
+    _ = ∑ q, ((∑ m, α m * multiIndexDelta q (qZ m)) • pauliKroneckerFamily q
+          + (∑ m, β m * multiIndexDelta q (qY m)) • pauliKroneckerFamily q) :=
+        Finset.sum_congr rfl fun q _ => add_smul_tensorPow _ _ _
+                                    -- `scalar_sum_distributes_over_matrix` を `N` か所へ
+    _ = ∑ q, (∑ m, (α m * multiIndexDelta q (qZ m)) • pauliKroneckerFamily q
+          + ∑ m, (β m * multiIndexDelta q (qY m)) • pauliKroneckerFamily q) :=
+        Finset.sum_congr rfl fun q _ => by
+          rw [finite_sum_smul_one_tensorPow_fin M (fun m => α m * multiIndexDelta q (qZ m)),
+            finite_sum_smul_one_tensorPow_fin M (fun m => β m * multiIndexDelta q (qY m))]
+                                    -- `finite_sum_of_scalar_multiples_of_one_matrix` を右辺から左辺へ `2N` か所へ
+    _ = ∑ q, (∑ m, α m • (multiIndexDelta q (qZ m) • pauliKroneckerFamily q)
+          + ∑ m, β m • (multiIndexDelta q (qY m) • pauliKroneckerFamily q)) := by
+        simp only [smul_smul]       -- `scalar_multiple_is_associative`（mathlib の `smul_smul`）を右辺から左辺へ `2NM` か所へ
+    _ = ∑ q, ∑ m, α m • (multiIndexDelta q (qZ m) • pauliKroneckerFamily q)
+          + ∑ q, ∑ m, β m • (multiIndexDelta q (qY m) • pauliKroneckerFamily q) :=
+        finite_sum_of_matrix_sums_tensorPow_fintype _ _
+                                    -- `finite_sum_of_matrix_sums`（`r → N`）
+    _ = ∑ m, ∑ q, α m • (multiIndexDelta q (qZ m) • pauliKroneckerFamily q)
+          + ∑ m, ∑ q, β m • (multiIndexDelta q (qY m) • pauliKroneckerFamily q) := by
+        rw [finite_double_sum_of_matrices_interchange
+            (fun q m => α m • (multiIndexDelta q (qZ m) • pauliKroneckerFamily q)),
+          finite_double_sum_of_matrices_interchange
+            (fun q m => β m • (multiIndexDelta q (qY m) • pauliKroneckerFamily q))]
+                                    -- `finite_double_sum_of_matrices_interchange`（`r → N, s → M`）を 2 か所へ
+    _ = ∑ m, α m • (multiIndexDelta (qZ m) (qZ m) • pauliKroneckerFamily (qZ m))
+          + ∑ m, β m • (multiIndexDelta (qY m) (qY m) • pauliKroneckerFamily (qY m)) := by
+        congr 1
+        · exact Finset.sum_congr rfl fun m _ =>
+            finite_sum_of_matrices_with_single_nonzero_term
+              (fun q => α m • (multiIndexDelta q (qZ m) • pauliKroneckerFamily q)) (qZ m)
+              (fun q hq => zy_step6_prep_t (α m) hq)
+        · exact Finset.sum_congr rfl fun m _ =>
+            finite_sum_of_matrices_with_single_nonzero_term
+              (fun q => β m • (multiIndexDelta q (qY m) • pauliKroneckerFamily q)) (qY m)
+              (fun q hq => zy_step6_prep_t (β m) hq)
+                                    -- `finite_sum_of_matrices_with_single_nonzero_term`（`q → q_Z(m)` または `q_Y(m)`）を `2M` か所へ。(t)
+    _ = ∑ m, α m • ((1 : ℂ) • pauliKroneckerFamily (qZ m))
+          + ∑ m, β m • ((1 : ℂ) • pauliKroneckerFamily (qY m)) := by
+        simp only [multiIndexDelta_self]
+                                    -- `def_kronecker_delta` を `2M` か所へ
+    _ = ∑ m, α m • pauliKroneckerFamily (qZ m) + ∑ m, β m • pauliKroneckerFamily (qY m) := by
+        simp only [one_smul_tensorPow]
+                                    -- `scalar_multiple_by_one`（`A → F_{q_Z(m)}` または `F_{q_Y(m)}`）を `2M` か所へ
+    _ = ∑ m, α m • Z m + ∑ m, β m • Y m := by
+        simp only [hFZ, hFY]        -- Step 4 の `F_{q_Z(m)} = Z_m`・`F_{q_Y(m)} = Y_m` を `2M` か所へ
+
+/-- 人手 Step 6 の `α_{m_0}` の 8 行の鎖（`d_q = 0_ℂ`（`q → q_Z(m_0)`）まで）。 -/
+theorem zy_step6_alpha_eq_zero (qZ qY : Fin M → (Fin M → Fin 4))
+    (hZZ : ∀ m m', m ≠ m' → qZ m ≠ qZ m') (hZY : ∀ m m', qZ m ≠ qY m')
+    (α β : Fin M → ℂ) (hd : ∀ q, zyStep6Coeff qZ qY α β q = 0) (m₀ : Fin M) : α m₀ = 0 := by
+  let one : Fin M := ⟨0, Nat.lt_of_le_of_lt (Nat.zero_le _) m₀.isLt⟩   -- 人手の `1 ∈ {1, …, M}`（`M ≥ 1`）
+  calc α m₀
+      = α m₀ * 1 := (mul_one _).symm                                                     -- 積の単位元を右辺から左辺へ
+    _ = α m₀ * multiIndexDelta (qZ m₀) (qZ m₀) := by rw [multiIndexDelta_self]          -- `def_kronecker_delta` を右辺から左辺へ
+    _ = ∑ m, α m * multiIndexDelta (qZ m₀) (qZ m) :=
+        (finite_sum_with_single_nonzero_term_fintype (fun m => α m * multiIndexDelta (qZ m₀) (qZ m)) m₀
+          (fun m hm => zy_step6_prep_uv (α m) (hZZ m₀ m (Ne.symm hm)))).symm
+                                    -- `finite_sum_with_single_nonzero_term`（`n → m_0`）を右辺から左辺へ。(u)
+    _ = ∑ m, α m * multiIndexDelta (qZ m₀) (qZ m) + 0 := (add_zero _).symm                -- 加法の単位元を右辺から左辺へ
+    _ = ∑ m, α m * multiIndexDelta (qZ m₀) (qZ m) + β one * multiIndexDelta (qZ m₀) (qY one) := by
+        rw [zy_step6_prep_uv (β one) (hZY m₀ one)]                                       -- (v)（`m → 1`）を右辺から左辺へ
+    _ = ∑ m, α m * multiIndexDelta (qZ m₀) (qZ m) + ∑ m, β m * multiIndexDelta (qZ m₀) (qY m) := by
+        rw [finite_sum_with_single_nonzero_term_fintype (fun m => β m * multiIndexDelta (qZ m₀) (qY m)) one
+          (fun m _ => zy_step6_prep_uv (β m) (hZY m₀ m))]
+                                    -- `finite_sum_with_single_nonzero_term`（`n → 1`）を右辺から左辺へ。(v)
+    _ = zyStep6Coeff qZ qY α β (qZ m₀) := rfl                                           -- `d_q` の定義（`q → q_Z(m_0)`）
+    _ = 0 := hd _                                                                        -- 上の `d_q = 0_ℂ`（`q → q_Z(m_0)`）
+
+/-- 人手 Step 6 の `β_{m_0}` の 8 行の鎖（`d_q = 0_ℂ`（`q → q_Y(m_0)`）まで）。 -/
+theorem zy_step6_beta_eq_zero (qZ qY : Fin M → (Fin M → Fin 4))
+    (hYY : ∀ m m', m ≠ m' → qY m ≠ qY m') (hZY : ∀ m m', qZ m ≠ qY m')
+    (α β : Fin M → ℂ) (hd : ∀ q, zyStep6Coeff qZ qY α β q = 0) (m₀ : Fin M) : β m₀ = 0 := by
+  let one : Fin M := ⟨0, Nat.lt_of_le_of_lt (Nat.zero_le _) m₀.isLt⟩   -- 人手の `1 ∈ {1, …, M}`（`M ≥ 1`）
+  calc β m₀
+      = β m₀ * 1 := (mul_one _).symm                                                     -- 積の単位元を右辺から左辺へ
+    _ = β m₀ * multiIndexDelta (qY m₀) (qY m₀) := by rw [multiIndexDelta_self]          -- `def_kronecker_delta` を右辺から左辺へ
+    _ = ∑ m, β m * multiIndexDelta (qY m₀) (qY m) :=
+        (finite_sum_with_single_nonzero_term_fintype (fun m => β m * multiIndexDelta (qY m₀) (qY m)) m₀
+          (fun m hm => zy_step6_prep_uv (β m) (hYY m₀ m (Ne.symm hm)))).symm
+                                    -- `finite_sum_with_single_nonzero_term`（`n → m_0`）を右辺から左辺へ。(u)
+    _ = 0 + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := (zero_add _).symm                -- 加法の単位元を右辺から左辺へ
+    _ = α one * multiIndexDelta (qY m₀) (qZ one) + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := by
+        rw [zy_step6_prep_uv (α one) (Ne.symm (hZY one m₀))]                             -- (v)（`m → 1`）を右辺から左辺へ
+    _ = ∑ m, α m * multiIndexDelta (qY m₀) (qZ m) + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := by
+        rw [finite_sum_with_single_nonzero_term_fintype (fun m => α m * multiIndexDelta (qY m₀) (qZ m)) one
+          (fun m _ => zy_step6_prep_uv (α m) (Ne.symm (hZY m m₀)))]
+                                    -- `finite_sum_with_single_nonzero_term`（`n → 1`）を右辺から左辺へ。(v)
+    _ = zyStep6Coeff qZ qY α β (qY m₀) := rfl                                           -- `d_q` の定義（`q → q_Y(m_0)`）
+    _ = 0 := hd _                                                                        -- 上の `d_q = 0_ℂ`（`q → q_Y(m_0)`）
+
+/-- **人手 Step 6**: Step 4 の `F_{q_Z(m)} = Z_m`・`F_{q_Y(m)} = Y_m` と、Step 5 の「`q_Z(1), …, q_Z(M), q_Y(1), …, q_Y(M)` は相異なる」のもとで、
+`Σ_m α_mZ_m + Σ_m β_mY_m = O` ならば `α_1 = ⋯ = α_M = β_1 = ⋯ = β_M = 0_ℂ`。
+`Σ_q d_qF_q = O`（10 行の鎖と仮定）から Step 2 の線型独立性（`pauliKroneckerFamily_independent`、人手の「`d_1, …, d_N` をここで定めたものとする」）で
+`d_q = 0_ℂ` を得て、`α_{m_0}`・`β_{m_0}` の鎖へ渡す。 -/
+theorem zy_step6_coeffs_eq_zero (qZ qY : Fin M → (Fin M → Fin 4))
+    (hFZ : ∀ m, pauliKroneckerFamily (qZ m) = Z m) (hFY : ∀ m, pauliKroneckerFamily (qY m) = Y m)
+    (hZZ : ∀ m m', m ≠ m' → qZ m ≠ qZ m') (hYY : ∀ m m', m ≠ m' → qY m ≠ qY m')
+    (hZY : ∀ m m', qZ m ≠ qY m')
+    (α β : Fin M → ℂ) (h : ∑ m, α m • Z m + ∑ m, β m • Y m = 0) :
     (∀ m, α m = 0) ∧ (∀ m, β m = 0) := by
-  have hd : ∑ p, zyCoeffOnPauliKroneckerFamily x α β p • pauliKroneckerFamily p = 0 := by
-    rw [sum_zyCoeff_smul_pauliKroneckerFamily x hx α β, h]
-  have hzero := pauliKroneckerFamily_independent _ hd
-  refine ⟨fun m => ?_, fun m => ?_⟩
-  · calc α m = Sum.elim α β (Sum.inl m) := rfl
-      _ = zyCoeffOnPauliKroneckerFamily x α β (x (Sum.inl m)) := (hx.extend_apply _ _ _).symm
-      _ = 0 := hzero _
-  · calc β m = Sum.elim α β (Sum.inr m) := rfl
-      _ = zyCoeffOnPauliKroneckerFamily x α β (x (Sum.inr m)) := (hx.extend_apply _ _ _).symm
-      _ = 0 := hzero _
+  have hsum : ∑ q, zyStep6Coeff qZ qY α β q • pauliKroneckerFamily q = 0 :=
+    (sum_zyStep6Coeff_smul_pauliKroneckerFamily qZ qY hFZ hFY α β).trans h               -- 上の 10 行の鎖と仮定
+  have hd := pauliKroneckerFamily_independent _ hsum                                      -- Step 2 の線型独立性
+  exact ⟨zy_step6_alpha_eq_zero qZ qY hZZ hZY α β hd, zy_step6_beta_eq_zero qZ qY hYY hZY α β hd⟩
 
 end Ising2D
