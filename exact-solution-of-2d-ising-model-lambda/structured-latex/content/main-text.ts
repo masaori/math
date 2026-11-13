@@ -51939,9 +51939,9 @@ Z_L(q)
 &=v_p(2)-v_p(1)
 &&(\because\ \blkref{def_rational_log}\text{ を表示 }2=2/1\text{ へ適用})\\
 &=v_p(2)
-&&(\because\ v_p(1)=0\text{。}\blkref{def_prime_exponent})\\
+&&(\because\ v_p(1)=0\text{（}\blkref{def_prime_exponent}\text{）})\\
 &=\ell_2(p)
-&&(\because\ 2\text{ は素数なので }v_2(2)=1\text{、}p\ne2\Rightarrow v_p(2)=0\text{（}\blkref{def_prime_exponent}\text{）。}\blkref{def_log_order_group}\text{ の生成元の定義})
+&&(\because\ 2\text{ は素数なので }v_2(2)=1\text{、}p\ne2\Rightarrow v_p(2)=0\text{（}\blkref{def_prime_exponent}\text{）、および }\blkref{def_log_order_group}\text{ の生成元の定義})
 \end{aligned}`),
                     paragraph([
                       "であり、両辺は ",
