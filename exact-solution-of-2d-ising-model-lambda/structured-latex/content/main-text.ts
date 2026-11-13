@@ -51361,7 +51361,7 @@ b(\sigma_{+})
 &=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma_{+}(\partial_0(e))\ne\sigma_{+}(\partial_1(e))\,\bigr\}\bigr|
 &&(\because\ \text{破れボンド数の定義 }\blkref{def_broken_bond_count})\\
 &=\bigl|\bigl\{\,e\in E_L \;\bigm|\; +1\ne+1\,\bigr\}\bigr|
-&&(\because\ \text{任意の }v\in V_L\text{ で }\sigma_{+}(v)=+1\text{。}\blkref{def_constant_plus_configuration})\\
+&&(\because\ \text{任意の }v\in V_L\text{ で }\sigma_{+}(v)=+1\text{、}\blkref{def_constant_plus_configuration})\\
 &=|\varnothing|
 &&(\because\ +1=+1\text{ なので条件を満たす辺の番号は存在しない})\\
 &=0
