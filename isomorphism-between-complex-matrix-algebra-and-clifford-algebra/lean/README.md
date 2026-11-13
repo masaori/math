@@ -71,6 +71,14 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   emb_k(y) の第 j 成分は、j = k のとき y を型の等式で E k から E j へ運んだもの（`cast`）である。
 - j 重テンソル積の族 (T_j, τ_j) は structure `TensorPowers` で表す。普遍性を U := T_{k+l} に当てるので、どの T_j も同じ宇宙に置く。
   ρ_{u'}・θ_F は普遍性の存在から `Classical.choose` で選び、ただ一つであることは普遍性の一意性の欄で書く。
+- 本文の「(k+l)+p = k+(l+p) なので両辺は同じ集合の元である」のように、番号の等しい二つの集合を同じ集合として読む文は、
+  Lean では型が別の式になるので、その間の写像に名前を付ける：組には `castTuple`、T_j には `TensorPowers.castT`。どちらも番号の等式を
+  `subst` すると恒等写像になり、加法・スカラー倍・τ と交換する。テンソル代数の積の項 m_{i,p-i}(x_i, y_{p-i}) は castT で T_p へ運ぶ。
+- {0,…,N} は ℕ の部分型 `UpTo N` で、番号付けは本文どおり e(s) := s - 1（`upToNumbering`）。
+- テンソル代数の積・単位元・ℂ-代数であることは任意の j 重テンソル積の族 `P : TensorPowers SV` の上で書き、本文の T(V) は
+  P := `coordinateTensorPowers SV n b hb`（座標による構成）の場合である。座標による構成を使うのは、埋め込みの像が生成することと普遍性だけである。
+- テンソル代数の普遍性の A は任意の宇宙 w の型に置く。F_k を定めるのに (T_k, τ_k) の普遍性を U = U_vec(A) に当てるので、
+  族が宇宙 w について k 重テンソル積であること `hP` を引数に取り、座標による構成ではそれを `coordinateTensor_isTensorProduct` から渡す。
 
 ## 形式化済みの節
 
@@ -83,6 +91,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 両側イデアルと商代数 | `MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル（節の末尾に置かれた直和の基底の主張は `DirectSumBasis.lean`） | `NecSuf/MathematicalToolkit/IdealAndQuotientAlgebra/` の 5 ファイル | `IdealAndQuotientAlgebraFromNecSuf.lean` |
 | テンソル積 | `MathematicalToolkit/TensorProduct/` の 5 ファイル（`BaseNNumbering.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorProduct/` の 4 ファイル | `TensorProductFromNecSuf.lean` |
 | テンソル代数の土台（族の直和、つなげた組、テンソルの積とその双線型性） | `MathematicalToolkit/TensorAlgebra/` の 5 ファイル（`IndexShift.lean` は ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorAlgebra/` の 4 ファイル | `TensorAlgebraFromNecSuf.lean` |
+| テンソル代数の代数の構造と普遍性（テンソルの積の結合法則、積・単位元、ℂ-代数であること、埋め込みと生成、普遍性、代数の中の積の補題） | `MathematicalToolkit/TensorAlgebra/` の `AssociativityOfTensorProduct`・`TensorAlgebraStructure`・`EmbeddingAndGeneration`・`UniversalPropertyOfTensorAlgebra`・`MultiplicationInAlgebra`・`InitialSegmentFromZero`（ℂ を含まず両版が引く） | `NecSuf/MathematicalToolkit/TensorAlgebra/` の同じ名前の 5 ファイル | `TensorAlgebraStructureFromNecSuf.lean`・`MultiplicationInAlgebraFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -138,3 +147,13 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - テンソルの積 m_{k,l} を定めるには、係数の乗法の交換法則が要る。ρ_•(F) が後ろにつなげる組についてスカラー倍を保つことを、
   λ ⊡ ρ_b = ρ_d で示すためである。前の因子についての線型性は、λ ⊡ θ_F が線型写像であることで同じ性質をもう一度使う。
 
+## 必要十分版が示したこと（節「テンソル代数」の代数の構造と普遍性）
+
+- 代数の中の積の補題のうち、左右から掛ける写像の線型性と番号順の積の六つの主張は、係数の性質を一つも使わない。
+  零との積・線型結合との反交換子・部分代数が有限集合の上の和で閉じていることは 0 + 0 = 0 だけ、平方が零の元の線型結合の平方が零であることは
+  0 + 0 = 0 と a · 0 = 0、反交換する二元の入れ替えは 1 + n = 0 となる n と 0 + 0 = 0 を使う。
+- テンソルの積の結合法則、空の組の像が積の単位元であること、castT・castTuple の性質、μ^f_k が k 重線型であること、F_k を定めることは、
+  係数の性質を使わない（m_{k,l} を含む主張は、m_{k,l} を定めるための乗法の交換法則を仮定に持つだけである）。
+- テンソル代数が K-代数であることには、乗法の交換法則（m_{k,l} を定めるためと、積のスカラー倍の行で 1 · λ を λ · 1 に替えるため）、
+  0 + 0 = 0 と a · 0 = 0（零の境・デルタで一項を取り出す行・和のスカラー倍）、直和の加法の逆元を作る 1 + n = 0 となる n が要る。
+- F が線型写像であることのスカラー倍の行に要るのは、1 と λ が交換することだけである。

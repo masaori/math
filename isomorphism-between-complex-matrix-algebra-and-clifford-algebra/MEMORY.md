@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-13: 台帳の「Lean：数学的道具立ての節『テンソル代数』の代数の構造と普遍性の具体版と必要十分版」の行を書き切った。本文 56 ブロックを lean/…/TensorAlgebra/ の六ファイルに形式化し、必要十分版五ファイルと導出版二ファイルを置いた。本文の二か所の根拠の引き方を直した。lake build・check-no-sorry・npm run check・build:pdf 通過。次は台帳の Lean の次の行（節「二次形式」とクリフォード代数の章）。
 - 2026-11-13: 台帳の「Lean：数学的道具立ての節『テンソル代数』の土台の具体版と必要十分版」の行を書き切った。本文 21 ブロックを lean/…/TensorAlgebra/ の四ファイルと IndexShift.lean に形式化し、必要十分版（NecSuf/…/TensorAlgebra/ の四ファイル）と導出版 TensorAlgebraFromNecSuf.lean を置いた。テンソルの積を定めるには係数の乗法の交換法則が要ると分かった（lean/README.md の「必要十分版が示したこと（節『テンソル代数』の土台）」）。本文の参照を一か所直した。次の行（代数の構造と普遍性）は TensorPowers・tensorMul・DirectSumOfFamily をそのまま使う。
 - 2026-11-13: 台帳の「Lean：数学的道具立ての節『テンソル積』の具体版と必要十分版」の行を書き切った。本文 26 ブロックを lean/…/TensorProduct/ の五ファイルに形式化し、必要十分版（NecSuf/…/TensorProduct/ の四ファイル）と導出版 TensorProductFromNecSuf.lean を置いた。必要十分版で、座標による構成が k 重テンソル積であることに係数の乗法の交換法則が要ると分かった（lean/README.md の「必要十分版が示したこと（節『テンソル積』）」）。worktree では lake が PATH に無いので ~/.elan/bin を足し、lake exe cache get の後に lake build する。
 - 2026-11-13: 台帳の「Lean：数学的道具立ての節『両側イデアルと商代数』の具体版と必要十分版」の行を書き切った。本文 37 ブロックを lean/…/IdealAndQuotientAlgebra/ の五ファイルに形式化し、必要十分版（合同の -1_ℂ を K の元 n に替える）と導出版を置いた。本文は不変。lake build・check-no-sorry 通過。次は台帳の Lean の次の行（節「テンソル積」）。

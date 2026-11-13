@@ -17852,8 +17852,7 @@ L_{m-1}\cdot_A e+_A e\cdot_A L_{m-1}
 \end{aligned}`),
       paragraph([
         "本題。", math(String.raw`m=0`), " のとき、", math(String.raw`L_0\cdot_A L_0=0_A\cdot_A 0_A=0_A`), " である（", math(String.raw`L_0=0_A`),
-        "。写像 ", math(String.raw`0_A\cdot_A\bullet`), " は線型写像なので零を零へ移す。", ref("claim_left_multiplication_in_algebra_is_linear_map"), "、",
-        ref("claim_linear_map_sends_zero_to_zero"), "）。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}\cdot_A L_{m-1}=0_A`),
+        " と、", ref("claim_element_times_zero_in_algebra_is_zero"), " を ", math(String.raw`w:=0_A`), " に当てる）。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}\cdot_A L_{m-1}=0_A`),
         " を仮定する（帰納法の仮定）。", math(String.raw`e`), " は準備のものとする。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -18157,7 +18156,7 @@ L_m\cdot_A L_m
     proof: [
       paragraph([
         math(String.raw`t\in\{1,\dots,n-p+1\}`), " について ", math(String.raw`u_t:=x_{p-1+t}`), " と置く。", math(String.raw`r\in\{1,\dots,n-p\}`),
-        " について ", math(String.raw`u_{1+r}=x_{p+r}`), " である。",
+        " について ", math(String.raw`u_{1+r}=x_{p+r}`), " である。", math(String.raw`n=(p-1)+(n-p+1)`), " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \prod_{A,\,s=1}^{n}x_s
@@ -18170,7 +18169,7 @@ L_m\cdot_A L_m
 &=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(u_1\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
 &=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(x_p\cdot_A\prod_{A,\,r=1}^{n-p}x_{p+r}\right)
-&&\left(\because\ u_1=x_p\text{、}u_{1+r}=x_{p+r}\right).
+&&\left(\because\ u_1=x_p\text{。各}\ r\ \text{で}\ u_{1+r}=x_{p+r}\ \text{なので}\ \blkref{claim_ordered_products_with_equal_factors_are_equal}\right).
 \end{aligned}`),
     ],
   },
