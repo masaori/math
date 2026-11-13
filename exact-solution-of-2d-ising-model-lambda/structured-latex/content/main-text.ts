@@ -75208,6 +75208,11 @@ t_{\circ}(\gamma)=0,&\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)
               labels: ["claim_vertex_simple_orbit_quadratic_sign"],
               habitat: "Qbar",
               verification: ["sagemath/check/vertex-simple-orbit-quadratic-sign"],
+              lean: [
+                "Ising2DLambda.KacWard.vertexSimpleOrbit_quadraticSign",
+                "Ising2DLambda.NecSuf.KacWard.vertex_simple_orbit_quadratic_sign_necSuf",
+                "Ising2DLambda.KacWard.vertexSimpleOrbit_quadraticSign_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）とし、閉じた非後退辺列 ",
