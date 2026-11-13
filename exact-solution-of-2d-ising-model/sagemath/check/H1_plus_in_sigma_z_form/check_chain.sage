@@ -1,9 +1,9 @@
 # 対象ラベル: H1_plus_in_sigma_z_form（iH_1^{(+)} = D_0 + εG）
 # 証明の準備 1〜4 と最後の鎖の全ての行を、行に書かれた形のとおりに組み、隣どうしを QQ(i) で厳密に比べる。
-#   - 「σ_1^x⋯σ_{m-1}^xσ_m^y」などサイトの積の行は、def_site_pauli_matrices の σ_k^a を mat_mult の積で左から掛けて組む（prefix_product）。
+#   - 「Π F_j」「Π σ_j^{a_j}」の行は def_finite_product_of_matrices のとおり、def_site_pauli_matrices の σ_k^a を mat_mult の積で左から掛けて組む（prefix_product）。
 #   - 「A_1⊠⋯⊠A_M」の行は def_kronecker (2) の成分の式で組む。因子の積 (AB) は 2 次の mat_mult、(cA) は def_matrix_scalar_multiple。
 #   - スカラーの積 i·(−i)・(−1)·i は definition_of_cc の積を QQ の対で計算した値（cc_mul）で組む。
-# M_col = 2..5、準備 1・3 は全ての m ∈ {1,…,M_col−1}。浮動小数点は使わない。
+# M_col = 2..5、準備 1 の表示は全ての m ∈ {1,…,M_col}、準備 1 の残りと準備 3 は全ての m ∈ {1,…,M_col−1}。浮動小数点は使わない。
 load("_prelude.sage")
 
 rep = Report("H1_plus_in_sigma_z_form: 準備 1〜4 と最後の鎖")
@@ -13,13 +13,31 @@ for M in range(2, 6):
     YM = jw(M, M, 'y')
     Z1 = jw(M, 1, 'z')
     G = P_(site(M, M, 'z'), site(M, 1, 'z'))              # def_G_boundary_operator
+    # 準備 1 の Z_m・Y_m の表示（m ∈ {1,…,M}）: 有限積 → (k) → site_pauli_prefix_product_kronecker_form → a_j の定義
+    for m in range(1, M + 1):
+        Fz = [site(M, j, 'x') for j in range(1, m)] + [site(M, m, 'z')]   # def_jordan_wigner_Z_matrices の F_j^{(z)}
+        Fy = [site(M, j, 'x') for j in range(1, m)] + [site(M, m, 'y')]   # def_jordan_wigner_Y_matrices の F_j^{(y)}
+        az = ['x'] * (m - 1) + ['z']                                      # a_j^{(z)} の定義
+        ay = ['x'] * (m - 1) + ['y']                                      # a_j^{(y)} の定義
+        for j in range(1, m + 1):                                         # (k)
+            rep.chain([("F_j^{(z)}", Fz[j - 1]), ("σ_j^{a_j^{(z)}}", site(M, j, az[j - 1]))], f"M={M} m={m} j={j} (k) z")
+            rep.chain([("F_j^{(y)}", Fy[j - 1]), ("σ_j^{a_j^{(y)}}", site(M, j, ay[j - 1]))], f"M={M} m={m} j={j} (k) y")
+        for a, Fs, letters, A in [('z', Fz, az, Z), ('y', Fy, ay, Y)]:
+            prodF = Fs[0]                                                 # def_finite_product_of_matrices（左から掛ける）
+            for F in Fs[1:]:
+                prodF = P_(prodF, F)
+            rep.chain([(f"{a.upper()}_m", jw(M, m, a)),
+                       ("Π F_j", prodF),
+                       ("Π σ_j^{a_j}", prefix_product(M, letters)),
+                       ("σ^{a_1}⊠…⊠σ^{a_m}⊠I…", kron([PAULI[c] for c in letters] + [I] * (M - m))),
+                       ("σ^x…⊠σ^a⊠I…", kron([X] * (m - 1) + [A] + [I] * (M - m)))], f"M={M} m={m} 準備1 {a.upper()}_m の表示")
+        # 否定コントロール: 第 m 因子の文字を取り違えた並び（a_m = y）は Z_m と一致しない
+        rep.negative(kron([X] * (m - 1) + [Y] + [I] * (M - m)) != jw(M, m, 'z'), f"M={M} m={m} 準備1 a_m を取り違えると外れる")
     for m in range(1, M):
-        # 準備 1
+        # 準備 1 の Y_m・Z_{m+1}（準備 1 の表示を m ≤ M−1、m → m+1 で引く）
         rep.chain([("Y_m", jw(M, m, 'y')),
-                   ("σ_1^x⋯σ_{m-1}^xσ_m^y", prefix_product(M, ['x'] * (m - 1) + ['y'])),
                    ("σ^x…⊠σ^y⊠I…", kron([X] * (m - 1) + [Y] + [I] * (M - m)))], f"M={M} m={m} 準備1 Y_m")
         rep.chain([("Z_{m+1}", jw(M, m + 1, 'z')),
-                   ("σ_1^x⋯σ_m^xσ_{m+1}^z", prefix_product(M, ['x'] * m + ['z'])),
                    ("σ^x…⊠σ^z⊠I…", kron([X] * m + [Z] + [I] * (M - m - 1)))], f"M={M} m={m} 準備1 Z_m+1")
         zz = kron([I] * (m - 1) + [Z, Z] + [I] * (M - m - 1))
         rep.chain([("σ_m^zσ_{m+1}^z", P_(site(M, m, 'z'), site(M, m + 1, 'z'))),
@@ -42,8 +60,7 @@ for M in range(2, 6):
              ("σ_m^zσ_{m+1}^z", P_(site(M, m, 'z'), site(M, m + 1, 'z')))]
         rep.chain(L, f"M={M} m={m} 準備3")
     # 準備 2
-    rep.chain([("Y_M", YM), ("σ_1^x⋯σ_{M-1}^xσ_M^y", prefix_product(M, ['x'] * (M - 1) + ['y'])),
-               ("σ^x…⊠σ^y", kron([X] * (M - 1) + [Y]))], f"M={M} 準備2 Y_M")
+    rep.chain([("Y_M", YM), ("σ^x…⊠σ^y", kron([X] * (M - 1) + [Y]))], f"M={M} 準備2 Y_M")   # 準備 1 の Y_m の表示（m → M）
     rep.chain([("Z_1", Z1), ("σ_1^z", site(M, 1, 'z')), ("σ^z⊠I…", kron([Z] + [I] * (M - 1)))], f"M={M} 準備2 Z_1")
     rep.chain([("ε", eps), ("σ^x⊠…⊠σ^x", kron([X] * M))], f"M={M} 準備2 ε")
     zbd = kron([Z] + [I] * (M - 2) + [Z])

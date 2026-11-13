@@ -10,8 +10,9 @@
 | --- | --- |
 | 1 サイトの積 `σ^yσ^x = -iσ^z`（`pauli_y_times_pauli_x`）, `σ^xσ^x = I`（`pauli_matrix_products`） | `pauliY_mul_pauliX_eq`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`。その `calc` は旧い `V1_in_Z_Y_epsilon` の Step 0 の鎖に合わせたもので、`pauli_y_times_pauli_x` の 7 行の証明とは 1 対 1 でない）、`pauliX_mul_pauliX`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols`） |
 | 1 サイトの積 `σ^xσ^z = -iσ^y`（`pauli_x_times_pauli_z`） | `pauliX_mul_pauliZ_eq`（人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖と 1 対 1） |
-| 準備 1 の `Y_m`・`Z_{m+1}` の鎖（各 2 行）と `σ_m^zσ_{m+1}^z` の鎖（4 行） | `Y_kronecker_form`・`Z_nextSite_kronecker_form`（定義そのもので `rfl`）と `sigmaZ_mul_sigmaZ_nextSite_kronecker` の `calc` の 4 段（サイト `m` と `m+1` が異なることは `ne_nextSite_of_not_last`） |
-| 準備 2 の `Y_{M_col}`・`Z_1` の鎖（各 2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`rfl`）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
+| 準備 1 の `Z_m`・`Y_m` の表示（各 4 行: 有限積 → (k) → `site_pauli_prefix_product_kronecker_form` → `a_j` の定義。`m ∈ {1,…,M_col}`） | `Z_prefix_kronecker_form`・`Y_prefix_kronecker_form`（`PartitionFunction/ProjectionAndJordanWigner/ClaimSitePauliPrefixProductKroneckerForm.lean`。1 段目が Lean の `Z`・`Y` の定義（クロネッカー積）を人手の有限積へ読み替える橋渡し、2 段目が残りの 3 行） |
+| 準備 1 の `Y_m`・`Z_{m+1}`（各 1 行。準備 1 の表示を `m ≤ M_col-1`・`m → m+1` で引く）と `σ_m^zσ_{m+1}^z` の鎖（4 行） | `Y_kronecker_form`・`Z_nextSite_kronecker_form`（`Y_prefix_kronecker_form`・`Z_prefix_kronecker_form` の当てはめ）と `sigmaZ_mul_sigmaZ_nextSite_kronecker` の `calc` の 4 段（サイト `m` と `m+1` が異なることは `ne_nextSite_of_not_last`） |
+| 準備 2 の `Y_{M_col}`（1 行。準備 1 の `Y_m` の表示を `m → M_col` で引く）・`Z_1` の鎖（2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`Y_prefix_kronecker_form` の当てはめ）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
 | 準備 3 の 11 行の鎖 `i(Y_mZ_{m+1}) = ⋯ = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`） | `I_smul_Y_mul_Z_next_of_not_last` の `calc` の 11 段（7 段目の `kronecker_multilinear` の `r = 1` の式は `siteProd_ite_smul`） |
 | 準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG`（`M_col ≥ 2`） | `neg_I_smul_Y_lastSite_mul_Z_firstSite` の `calc` の 17 段（9・11 段目の `kronecker_multilinear` の `r = 1` の式（`j → 1`）は `siteProd_ite_smul`、10 段目（`j → M_col`）は `siteProd_ite_ite_smul`） |
 | `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary`（和は `Finset.filter` の上。`Fin (r + 1)` の上の和への読み替えは `sum_filter_not_last_eq_sum_castSucc`） |
@@ -100,19 +101,18 @@ Lean のサイトの添字は 0 始まりで、人手のサイト `m` は値が 
 人手の因子の並び `A⊠⋯⊠A`（`k` 個）は、Lean ではサイトごとの因子の族を `siteProd` に入れたもので、族は
 サイトの添字についての `if` で書く（人手の「第 `1` から第 `m-1` 因子」は `(i : ℕ) < (m : ℕ)`、第 `m` 因子は `i = m`）。 -/
 
-/-- **人手の準備 1 の `Y_m` の鎖**（2 行）: `Y_m = σ_1^x⋯σ_{m-1}^xσ_m^y = σ^x⊠⋯⊠σ^x⊠σ^y⊠I⊠⋯⊠I`。
-
-人手の 1 行目（`def_jordan_wigner_Y_matrices`）と 2 行目（`site_pauli_prefix_product_kronecker_form`）は、Lean では
-`Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので `rfl` である（`Z_mul_Y_same` と同じ。Lean の `Y` が
-人手の積 `∏_{j=1}^{m}F_j^{(y)}` に等しいことは、`site_pauli_prefix_product_kronecker_form` の具体版を使う `Y_eq_finiteMatrixProduct`
-（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つ）。
+/-- **人手の準備 1 の `Y_m`**（1 行）: `Y_m = σ^x⊠⋯⊠σ^x⊠σ^y⊠I⊠⋯⊠I`（∵ 準備 1 の `Y_m` の表示（`m ≤ M_col-1` なので当てはまる））。
+準備 1 の `Y_m` の表示の 4 行（有限積 → (k) → `site_pauli_prefix_product_kronecker_form` → `a_j^{(y)}` の定義）は
+`Y_prefix_kronecker_form`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）である。
 人手は `m ≤ M_col - 1` に限るが、Lean の等式は全ての `m` で成り立つので仮定を置かない。 -/
-theorem Y_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) := rfl
+theorem Y_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) :=
+  Y_prefix_kronecker_form m                             -- 準備 1 の `Y_m` の表示
 
-/-- **人手の準備 1 の `Z_{m+1}` の鎖**（2 行）: `Z_{m+1} = σ_1^x⋯σ_m^xσ_{m+1}^z = σ^x⊠⋯⊠σ^x⊠σ^z⊠I⊠⋯⊠I`。
-`Y_kronecker_form` と同じ理由で `rfl` である（人手の `m+1` は Lean の `nextSite m`）。 -/
+/-- **人手の準備 1 の `Z_{m+1}`**（1 行）: `Z_{m+1} = σ^x⊠⋯⊠σ^x⊠σ^z⊠I⊠⋯⊠I`（∵ 準備 1 の `Z_m` の表示（`m → m+1`））。
+人手の `m+1` は Lean の `nextSite m`。準備 1 の `Z_m` の表示の 4 行は `Z_prefix_kronecker_form` である。 -/
 theorem Z_nextSite_kronecker_form (m : Fin M) :
-    Z (nextSite m) = siteProd M (jwFamily (nextSite m) pauliZ) := rfl
+    Z (nextSite m) = siteProd M (jwFamily (nextSite m) pauliZ) :=
+  Z_prefix_kronecker_form (nextSite m)                  -- 準備 1 の `Z_m` の表示（`m → m+1`）
 
 /-- 人手の `m ∈ {1,…,M_col-1}` のサイト `m` と `m+1` は異なる（`nextSite m` の値は `m + 1`）。 -/
 theorem ne_nextSite_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) : m ≠ nextSite m := by
@@ -161,10 +161,11 @@ private theorem firstSite_ne_lastSite (hM : 2 ≤ M) :
     firstSite M (by omega) ≠ lastSite M (by omega) :=
   Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
 
-/-- **人手の準備 2 の `Y_{M_col}` の鎖**（2 行）: `Y_{M_col} = σ_1^x⋯σ_{M_col-1}^xσ_{M_col}^y = σ^x⊠⋯⊠σ^x⊠σ^y`。
-`Y_kronecker_form` と同じ理由で `rfl` である。 -/
+/-- **人手の準備 2 の `Y_{M_col}`**（1 行）: `Y_{M_col} = σ^x⊠⋯⊠σ^x⊠σ^y`（∵ 準備 1 の `Y_m` の表示（`m → M_col`。`I` の因子は無い））。
+人手の `M_col` は Lean の `lastSite M hM`。 -/
 theorem Y_lastSite_kronecker_form (hM : M ≠ 0) :
-    Y (lastSite M hM) = siteProd M (jwFamily (lastSite M hM) pauliY) := rfl
+    Y (lastSite M hM) = siteProd M (jwFamily (lastSite M hM) pauliY) :=
+  Y_prefix_kronecker_form (lastSite M hM)               -- 準備 1 の `Y_m` の表示（`m → M_col`）
 
 /-- **人手の準備 2 の `Z_1` の鎖**（2 行）: `Z_1 = σ_1^z = σ^z⊠I⊠⋯⊠I`。人手の 2 行と `calc` の 2 段が 1 対 1 に対応する。 -/
 theorem Z_firstSite_kronecker_form (hM : M ≠ 0) :
@@ -250,9 +251,9 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
   calc
     Complex.I • (Y m * Z (nextSite m))
         = Complex.I • (siteProd M (jwFamily m pauliY) * Z (nextSite m)) := by
-      rw [Y_kronecker_form]                             -- 準備 1 の `Y_m` の鎖
+      rw [Y_kronecker_form]                             -- 準備 1 の `Y_m` の行
     _ = Complex.I • (siteProd M (jwFamily m pauliY) * siteProd M (jwFamily (nextSite m) pauliZ)) := by
-      rw [Z_nextSite_kronecker_form]                    -- 準備 1 の `Z_{m+1}` の鎖
+      rw [Z_nextSite_kronecker_form]                    -- 準備 1 の `Z_{m+1}` の行
     _ = Complex.I • siteProd M (fun i =>
           if (i : ℕ) < (m : ℕ) then pauliX * pauliX
           else if i = m then pauliY * pauliX
@@ -363,7 +364,7 @@ theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :
     _ = (-Complex.I) • (Y (lastSite M hM0) * Z (firstSite M hM0)) := by
       rw [neg_one_mul]                                  -- `multiply_by_minus_one`（Lean の具体版は無く、mathlib の `neg_one_mul` を 1 回）
     _ = (-Complex.I) • (siteProd M (jwFamily (lastSite M hM0) pauliY) * Z (firstSite M hM0)) := by
-      rw [Y_lastSite_kronecker_form]                    -- 準備 2 の `Y_{M_col}` の鎖
+      rw [Y_lastSite_kronecker_form]                    -- 準備 2 の `Y_{M_col}` の行
     _ = (-Complex.I) • (siteProd M (jwFamily (lastSite M hM0) pauliY)
           * siteProd M (Function.update 1 (firstSite M hM0) pauliZ)) := by
       rw [Z_firstSite_kronecker_form]                   -- 準備 2 の `Z_1` の鎖

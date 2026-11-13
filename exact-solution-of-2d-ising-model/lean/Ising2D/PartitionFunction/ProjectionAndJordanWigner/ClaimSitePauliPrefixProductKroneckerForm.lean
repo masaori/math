@@ -194,14 +194,16 @@ theorem Y_eq_finiteMatrixProduct (m : Fin M) : Y m = finiteMatrixProduct (m : �
 
 /-- **人手 `iH_is_real_symmetric` の Step 1 の準備の `Z_m` の表示の 4 行**（人手の `m` は Lean の `m + 1`）:
 `def_jordan_wigner_Z_matrices` の有限積 `∏_{j=1}^{m}F_j^{(z)}` → (k) → `site_pauli_prefix_product_kronecker_form`（`r → m`）→ `a_j^{(z)}` の定義。
-1 段目は Lean の `Z` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡し、2 段目が残りの 3 行である。 -/
+1 段目は Lean の `Z` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡し、2 段目が残りの 3 行である。
+人手 `H1_plus_in_sigma_z_form` の準備 1 の `Z_m` の表示の 4 行も同じ形で、これを引く。 -/
 theorem Z_prefix_kronecker_form (m : Fin M) : Z m = siteProd M (jwFamily m pauliZ) :=
   calc Z m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliZ) :=
         Z_eq_finiteMatrixProduct m                              -- `def_jordan_wigner_Z_matrices`
     _ = siteProd M (jwFamily m pauliZ) :=
         finiteMatrixProduct_jwFactor_kronecker_form m pauliZ    -- (k)・`site_pauli_prefix_product_kronecker_form`・`a_j^{(z)}` の定義
 
-/-- **人手 `iH_is_real_symmetric` の Step 1 の準備の `Y_m` の表示の 4 行**（人手の `m` は Lean の `m + 1`）。`Z_prefix_kronecker_form` と同じ形。 -/
+/-- **人手 `iH_is_real_symmetric` の Step 1 の準備の `Y_m` の表示の 4 行**（人手の `m` は Lean の `m + 1`）。`Z_prefix_kronecker_form` と同じ形。
+人手 `H1_plus_in_sigma_z_form` の準備 1 の `Y_m` の表示の 4 行も同じ形で、これを引く。 -/
 theorem Y_prefix_kronecker_form (m : Fin M) : Y m = siteProd M (jwFamily m pauliY) :=
   calc Y m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliY) :=
         Y_eq_finiteMatrixProduct m                              -- `def_jordan_wigner_Y_matrices`

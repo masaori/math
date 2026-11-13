@@ -2018,33 +2018,126 @@ r
         math(String.raw`k`),
         " 個並べたもので、",
         math(String.raw`k = 0`),
-        " のときは何も並べない。積 ",
-        math(String.raw`\sigma_1^{a_1}\cdots\sigma_r^{a_r}`),
-        " は左から順に掛けたものとする（",
-        ref("site_pauli_prefix_product_kronecker_form"),
-        " の約束）。",
+        " のときは何も並べない。",
       ]),
       paragraph([
-        "準備 1（内部の辺の因子のクロネッカー積表示）。",
+        "準備 1（内部の辺の因子のクロネッカー積表示）。まず ",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " とし、",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`a_j^{(z)}:=\begin{cases}x & (j<m)\\ z & (j=m)\end{cases}
+\qquad
+a_j^{(y)}:=\begin{cases}x & (j<m)\\ y & (j=m)\end{cases}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`a_j^{(z)},a_j^{(y)}\in\{x,y,z\}`),
+        "）。",
+        ref("def_jordan_wigner_Z_matrices"),
+        "・",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の因子 ",
+        math(String.raw`F_j^{(z)},F_j^{(y)}`),
+        "（それぞれの定義で ",
+        math(String.raw`m`),
+        " をここの ",
+        math(String.raw`m`),
+        " として置いた記号）について、",
+        math(String.raw`j<m`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_j^{(z)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_j^{(z)}\ (j<m))\\
+&= \sigma_j^{a_j^{(z)}}
+&&(\because\ a_j^{(z)}\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}
+\qquad
+\begin{aligned}
+F_j^{(y)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_j^{(y)}\ (j<m))\\
+&= \sigma_j^{a_j^{(y)}}
+&&(\because\ a_j^{(y)}\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([math(String.raw`j=m`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+F_m^{(z)}
+&= \sigma_m^z
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_m^{(z)})\\
+&= \sigma_m^{a_m^{(z)}}
+&&(\because\ a_m^{(z)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}
+\qquad
+\begin{aligned}
+F_m^{(y)}
+&= \sigma_m^y
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_m^{(y)})\\
+&= \sigma_m^{a_m^{(y)}}
+&&(\because\ a_m^{(y)}\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "である。これらを (k) と呼ぶ。このとき（",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無く、",
+        math(String.raw`m = M`),
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_m
+&= \prod_{j=1}^{m}F_j^{(z)}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j^{(z)}}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1^{(z)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(z)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_j \to a_j^{(z)}))\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ a_j^{(z)}\ \text{の定義を}\ m\ \text{か所へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Y_m
+&= \prod_{j=1}^{m}F_j^{(y)}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j^{(y)}}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1^{(y)}}\boxtimes\cdots\boxtimes\sigma^{a_m^{(y)}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_j \to a_j^{(y)}))\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ a_j^{(y)}\ \text{の定義を}\ m\ \text{か所へ})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " は任意に取ったので、この 2 つの表示（以下、準備 1 の ",
+        math(String.raw`Z_m`),
+        "・",
+        math(String.raw`Y_m`),
+        " の表示）は全ての ",
+        math(String.raw`m \in \{1,\dots,M\}`),
+        " で成り立つ。以下、準備 1 の残りと準備 3 では ",
         math(String.raw`m \in \{1,\dots,M-1\}`),
         " とする。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 Y_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y
-&&(\because \blkref{def_jordan_wigner_Y_matrices}) \\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1=\cdots=a_{m-1}=x,\ a_m=y))
+&&(\because\ \text{準備 1 の}\ Y_m\ \text{の表示}\ (m \leq M-1\ \text{なので当てはまる}))
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 Z_{m+1}
-&= \sigma_1^x\cdots\sigma_{m}^x\sigma_{m+1}^z
-&&(\because \blkref{def_jordan_wigner_Z_matrices}) \\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
-&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m+1,\ a_1=\cdots=a_{m}=x,\ a_{m+1}=z))
+&&(\because\ \text{準備 1 の}\ Z_m\ \text{の表示}\ (m \to m+1\text{。}m+1 \leq M))
 \end{aligned}`,
       ),
       displayMath(
@@ -2067,10 +2160,8 @@ Z_{m+1}
       displayMath(
         String.raw`\begin{aligned}
 Y_{M}
-&= \sigma_1^x\cdots\sigma_{M-1}^x\sigma_{M}^y
-&&(\because \blkref{def_jordan_wigner_Y_matrices}) \\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y
-&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M,\ a_1=\cdots=a_{M-1}=x,\ a_M=y))
+&&(\because\ \text{準備 1 の}\ Y_m\ \text{の表示}\ (m \to M)\text{。}M-M = 0\ \text{なので}\ I\ \text{の因子は無い})
 \end{aligned}`,
       ),
       displayMath(
@@ -2109,10 +2200,10 @@ Z_1
         String.raw`\begin{aligned}
 i\,(Y_mZ_{m+1})
 &= i\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)Z_{m+1}\right)
-&&(\because \text{準備 1 の } Y_m \text{ の鎖}) \\
+&&(\because \text{準備 1 の } Y_m \text{ の行}) \\
 &= i\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
    \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)\right)
-&&(\because \text{準備 1 の } Z_{m+1} \text{ の鎖}) \\
+&&(\because \text{準備 1 の } Z_{m+1} \text{ の行}) \\
 &= i\left(\overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}\boxtimes(\sigma^y\sigma^x)\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m-1}\right)
 &&(\because \blkref{kronecker_product_rule}\ (1)) \\
 &= i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes(\sigma^y\sigma^x)\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m-1}\right)
@@ -2144,7 +2235,7 @@ i\,(Y_mZ_{m+1})
 &= (-i)\,(Y_{M}Z_1)
 &&(\because \blkref{multiply_by_minus_one}) \\
 &= (-i)\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y\right)Z_1\right)
-&&(\because \text{準備 2 の } Y_M \text{ の鎖}) \\
+&&(\because \text{準備 2 の } Y_M \text{ の行}) \\
 &= (-i)\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y\right)
    \left(\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\right)\right)
 &&(\because \text{準備 2 の } Z_1 \text{ の鎖}) \\
