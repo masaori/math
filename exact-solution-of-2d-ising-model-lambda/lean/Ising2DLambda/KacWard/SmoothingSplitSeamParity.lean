@@ -4,11 +4,33 @@
 合併して元の辺添字 `(0,m]` へ戻し、二成分の有限和を法 2 で読む。
 -/
 import Ising2DLambda.KacWard.Basic
+import Mathlib.Algebra.BigOperators.Intervals
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitSeamParity
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
+
+/-- 接触点分割の三つの辺添字区間は、元の辺添字区間を一度ずつ覆う。 -/
+private theorem contactSplit_seam_sum (g : ℕ → ℕ) (m k l : ℕ)
+    (hkl : k < l) (hlm : l ≤ m) :
+    (∑ r ∈ Finset.Ioc k l, g r)
+      + ((∑ r ∈ Finset.Ioc l m, g r) + ∑ r ∈ Finset.Ioc 0 k, g r)
+      = ∑ r ∈ Finset.Ioc 0 m, g r := by
+  have hfirst : (∑ r ∈ Finset.Ioc 0 k, g r) + ∑ r ∈ Finset.Ioc k l, g r
+      = ∑ r ∈ Finset.Ioc 0 l, g r :=
+    Finset.sum_Ioc_consecutive g (Nat.zero_le k) (le_of_lt hkl)
+  have hsecond : (∑ r ∈ Finset.Ioc 0 l, g r) + ∑ r ∈ Finset.Ioc l m, g r
+      = ∑ r ∈ Finset.Ioc 0 m, g r :=
+    Finset.sum_Ioc_consecutive g (Nat.zero_le l) hlm
+  calc
+    (∑ r ∈ Finset.Ioc k l, g r)
+        + ((∑ r ∈ Finset.Ioc l m, g r) + ∑ r ∈ Finset.Ioc 0 k, g r)
+      = ((∑ r ∈ Finset.Ioc 0 k, g r) + ∑ r ∈ Finset.Ioc k l, g r)
+          + ∑ r ∈ Finset.Ioc l m, g r := by
+            ac_rfl
+    _ = (∑ r ∈ Finset.Ioc 0 l, g r) + ∑ r ∈ Finset.Ioc l m, g r := by
+          rw [hfirst]
+    _ = ∑ r ∈ Finset.Ioc 0 m, g r := hsecond
 
 theorem smoothing_split_seam_parity {L : ℕ}
     (horizontal vertical : OrientedEdge L → ℕ) (edge : ℕ → OrientedEdge L)
@@ -21,9 +43,9 @@ theorem smoothing_split_seam_parity {L : ℕ}
           + ∑ r ∈ Finset.Ioc 0 k, vertical (edge r)) % 2) % 2) =
     ((∑ r ∈ Finset.Ioc 0 m, horizontal (edge r)) % 2,
       (∑ r ∈ Finset.Ioc 0 m, vertical (edge r)) % 2) := by
-  exact interval_split_parity_pair_necSuf
-    (fun r => horizontal (edge r)) (fun r => vertical (edge r))
-    m k l (le_of_lt hkl) hlm
+  have hh := contactSplit_seam_sum (fun r => horizontal (edge r)) m k l hkl hlm
+  have hv := contactSplit_seam_sum (fun r => vertical (edge r)) m k l hkl hlm
+  apply Prod.ext <;> simp only <;> omega
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem smoothing_split_seam_parity_from_necSuf {L : ℕ}
