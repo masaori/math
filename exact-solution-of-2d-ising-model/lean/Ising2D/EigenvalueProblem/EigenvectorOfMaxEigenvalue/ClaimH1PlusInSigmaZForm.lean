@@ -30,6 +30,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSitePauliPrefixProductKroneckerForm
 
 namespace Ising2D
 
@@ -174,11 +175,12 @@ theorem Z_firstSite_kronecker_form (hM : M ≠ 0) :
     _ = siteProd M (Function.update 1 (firstSite M hM) pauliZ) := rfl
                                                         -- `def_site_pauli_matrices`
 
-/-- **人手の準備 2 の `ε` の式**: `ε = σ^x⊠⋯⊠σ^x`（`global_spin_flip_kronecker_form`。その Lean は
-`epsilon_eq_siteProd`（`PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonCommutes.lean`）で、中身は
-`epsilon_eq_siteProd_pauliX_by_induction`）。 -/
-theorem epsilon_kronecker_form : epsilon M = siteProd M (fun _ => pauliX) :=
-  epsilon_eq_siteProd_pauliX_by_induction
+/-- **人手の準備 2 の `ε` の式**: `ε = σ^x⊠⋯⊠σ^x`（`global_spin_flip_kronecker_form`）。人手の `M_col ∈ ℤ_{≥1}` は、人手の 2 行の鎖と
+1 対 1 の具体版 `global_spin_flip_kronecker_form`（`PartitionFunction/ProjectionAndJordanWigner/ClaimSitePauliPrefixProductKroneckerForm.lean`）で、
+人手に無い `M = 0` は `epsilon_eq_siteProd_pauliX_by_induction` で埋める（`epsilon_eq_siteProd` と同じ分け方）。 -/
+theorem epsilon_kronecker_form : ∀ {M : ℕ}, epsilon M = siteProd M (fun _ => pauliX)
+  | 0 => epsilon_eq_siteProd_pauliX_by_induction
+  | n + 1 => global_spin_flip_kronecker_form n
 
 /-- **人手の準備 2 の `σ_{M_col}^zσ_1^z` の鎖**（4 行。`M_col ≥ 2`）。人手の 4 行と `calc` の 4 段が 1 対 1 に対応する。
 人手の第 `1` 因子は Lean の `i = firstSite M _`、第 `M_col` 因子は `i = lastSite M _`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/

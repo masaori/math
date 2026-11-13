@@ -31,14 +31,17 @@ Jordan--Wigner 表示を突き合わせることだからである。証明が�
 「各サイトについての複素線型性」に分離されている。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSitePauliPrefixProductKroneckerForm
 
 namespace Ising2D
 
 variable {M : ℕ}
 
-private theorem epsilon_eq_siteProd_for_jordanWigner (M : ℕ) :
-    epsilon M = siteProd M (fun _ => pauliX) := by
-  exact epsilon_eq_siteProd_pauliX_by_induction
+/-- `ε = σ^x⊠⋯⊠σ^x`（人手 `global_spin_flip_kronecker_form`。`M ≥ 1` はその具体版、人手に無い `M = 0` は帰納法の版）。 -/
+private theorem epsilon_eq_siteProd_for_jordanWigner :
+    ∀ M : ℕ, epsilon M = siteProd M (fun _ => pauliX)
+  | 0 => epsilon_eq_siteProd_pauliX_by_induction
+  | n + 1 => global_spin_flip_kronecker_form n
 
 private theorem siteProd_smul_family_for_jordanWigner (c : Fin M → ℂ)
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :

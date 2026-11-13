@@ -45,6 +45,7 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquar
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSitePauliPrefixProductKroneckerForm
 
 namespace Ising2D
 
@@ -54,10 +55,12 @@ variable {M : ℕ}
 
 /-! ## Step 1: サイト演算子との関係 -/
 
-/-- `ε = σ^x_1 ⋯ σ^x_M` は全サイトに `σ^x` を置いたクロネッカー積である。 -/
-theorem epsilon_eq_siteProd (M : ℕ) :
-    epsilon M = siteProd M (fun _ => pauliX) := by
-  exact epsilon_eq_siteProd_pauliX_by_induction
+/-- `ε = σ^x_1 ⋯ σ^x_M` は全サイトに `σ^x` を置いたクロネッカー積である（人手 `global_spin_flip_kronecker_form`）。
+人手の `M_col ∈ ℤ_{≥1}` は `global_spin_flip_kronecker_form`（人手の 2 行の鎖と 1 対 1）で、人手に無い `M = 0` は
+`epsilon_eq_siteProd_pauliX_by_induction` で埋める。 -/
+theorem epsilon_eq_siteProd : ∀ M : ℕ, epsilon M = siteProd M (fun _ => pauliX)
+  | 0 => epsilon_eq_siteProd_pauliX_by_induction
+  | n + 1 => global_spin_flip_kronecker_form n
 
 /-- ただ 1 サイトで反可換なら `ε` と反交換する、の形にした補助補題。 -/
 theorem epsilon_anticomm_of_single_site (y : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (j : Fin M)
@@ -100,7 +103,13 @@ theorem epsilon_anticomm_sigmaY (k : Fin M) :
 
 /-- 原文 Step 4 の `ε Z_m = -Z_m ε`。 -/
 theorem epsilon_anticomm_Z (m : Fin M) : epsilon M * Z m = -(Z m * epsilon M) := by
-  rw [Z]
+  -- 人手の `Z_m` の 4 行の鎖（人手の `m` は Lean の `m + 1`）
+  have hZ : Z m = siteProd M (jwFamily m pauliZ) :=
+    calc Z m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliZ) :=
+          Z_eq_finiteMatrixProduct m                             -- `def_jordan_wigner_Z_matrices`（Lean の `Z` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡しの段）
+      _ = siteProd M (jwFamily m pauliZ) :=
+          finiteMatrixProduct_jwFactor_kronecker_form m pauliZ       -- (k)・`site_pauli_prefix_product_kronecker_form`・`a_j` の定義
+  rw [hZ]
   refine epsilon_anticomm_of_single_site _ m ?_ ?_
   · rw [jwFamily_self, pauliZ_mul_pauliX]
   · intro i hi
@@ -111,7 +120,13 @@ theorem epsilon_anticomm_Z (m : Fin M) : epsilon M * Z m = -(Z m * epsilon M) :=
 
 /-- 原文 Step 4 の `ε Y_m = -Y_m ε`。 -/
 theorem epsilon_anticomm_Y (m : Fin M) : epsilon M * Y m = -(Y m * epsilon M) := by
-  rw [Y]
+  -- 人手の `Y_m` の 4 行の鎖（人手の `m` は Lean の `m + 1`）
+  have hY : Y m = siteProd M (jwFamily m pauliY) :=
+    calc Y m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliY) :=
+          Y_eq_finiteMatrixProduct m                             -- `def_jordan_wigner_Y_matrices`（Lean の `Y` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡しの段）
+      _ = siteProd M (jwFamily m pauliY) :=
+          finiteMatrixProduct_jwFactor_kronecker_form m pauliY       -- (k)・`site_pauli_prefix_product_kronecker_form`・`a_j` の定義
+  rw [hY]
   refine epsilon_anticomm_of_single_site _ m ?_ ?_
   · rw [jwFamily_self, pauliY_mul_pauliX]
   · intro i hi

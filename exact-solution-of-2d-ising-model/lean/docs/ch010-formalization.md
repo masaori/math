@@ -53,10 +53,11 @@
 | `Ising2D.V1plusHalf` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2} := exp((i/2)K_1H_1^{(+)})`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`） | `def_V1_plus_square_root` |
 | `Ising2D.V1_plus_square_root_property` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
 | `Ising2D.VPlusOfTransfer` | `V^{(+)} := (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`（`V_2` は `def_transfer_matrix` の `V_2`） | `def_V_plus` |
-| `Ising2D.epsilon_eq_siteProd` | `ε = σ^x ⊠ ⋯ ⊠ σ^x` | `global_spin_flip_kronecker_form` |
+| `Ising2D.global_spin_flip_kronecker_form` / `Ising2D.epsilon_eq_siteProd` | `ε = σ^x ⊠ ⋯ ⊠ σ^x`（前者が人手の 2 行の鎖と 1 対 1（`M_col = n + 1`）、後者はそれを使う側の一般の `M` の形） | `global_spin_flip_kronecker_form` |
+| `Ising2D.epsilon_eq_finiteMatrixProduct` / `Ising2D.sigmaXPrefixProduct_eq_sitePauliProduct` | Lean の `ε`（接頭積 `sigmaXPrefixProduct`）が人手の定義の有限積 `∏_{j=1}^{M_col}σ_j^x` に等しい | `def_global_spin_flip_matrix` |
 | `Ising2D.epsilon_commute_sigmaX` | `ε σ^x_k = σ^x_k ε` | `epsilon_commutes_with_site_sigma_x` |
 | `Ising2D.epsilon_anticomm_sigmaZ` / `..._sigmaY` | `ε σ^{z,y}_k = -σ^{z,y}_k ε` | `epsilon_anticommutes_with_site_sigma_z` / `epsilon_anticommutes_with_site_sigma_y` |
-| `Ising2D.epsilon_anticomm_Z` / `..._Y` | `ε Z_m = -Z_m ε`, `ε Y_m = -Y_m ε` | `epsilon_anticommutes_with_jordan_wigner_Z` / `epsilon_anticommutes_with_jordan_wigner_Y` |
+| `Ising2D.epsilon_anticomm_Z` / `..._Y` | `ε Z_m = -Z_m ε`, `ε Y_m = -Y_m ε`（`Z_m`・`Y_m` の 4 行の鎖は `Z_eq_finiteMatrixProduct` と `finiteMatrixProduct_jwFactor_kronecker_form`） | `epsilon_anticommutes_with_jordan_wigner_Z` / `epsilon_anticommutes_with_jordan_wigner_Y` |
 | `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1PauliForm` | **`ε V_1 = V_1 ε`**（前者が `def_transfer_matrix` の `V_1`、後者が右辺の式 `exp(K_1D)`） | `epsilon_commutes_with_V1` |
 | `Ising2D.epsilon_commute_V2` / `epsilon_commute_V2PauliForm` / `epsilon_commute_V2H2Form` | **`ε V_2 = V_2 ε`**（前者が `def_transfer_matrix` の `V_2`、後の 2 本が右辺の式） | `epsilon_commutes_with_V2` |
 | `Ising2D.epsilon_commute_H1plus` | `ε H_1^{(+)} = H_1^{(+)} ε`（`epsilon_commute_H1` は一般形） | `epsilon_commutes_with_H1_plus` |

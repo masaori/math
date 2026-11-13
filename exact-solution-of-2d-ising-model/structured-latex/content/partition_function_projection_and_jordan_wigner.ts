@@ -164,13 +164,22 @@ export default defineBlocks([
         String.raw`\varepsilon:=\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
-        "と定める。積はサイト番号の昇順に取る。",
+        "と定める。右辺は、",
+        ref("def_finite_product_of_matrices"),
+        " の有限積（",
+        math(String.raw`n\to 2^{M_{\mathrm{col}}},\ r\to M_{\mathrm{col}},\ A_j\to\sigma_j^x`),
+        "）",
+      ]),
+      displayMath(String.raw`\varepsilon=\prod_{j=1}^{M_{\mathrm{col}}}\sigma_j^x`),
+      paragraph([
+        "を表す。すなわち因子をサイト番号の昇順に並べ、左から順に掛ける。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "旧来の複合定義から、全スピン反転行列の定義だけを分離した。Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離し、そこから本定義を明示参照している。旧ラベルからの後続参照は、残した複合定義が新しい表示主張を明示参照することで意味を保つ。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 並べて書いた積 σ_1^x⋯σ_{M_col}^x の括弧の付け方が定まっていなかったので、def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices と同じく、def_finite_product_of_matrices の有限積 Π_{j=1}^{M_col}σ_j^x を表すと書いた。",
       ],
     },
   },
@@ -299,8 +308,8 @@ export default defineBlocks([
     proof: [
       displayMath(String.raw`\begin{aligned}
 \varepsilon
-&= \sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x
-&&(\because\ \blkref{def_global_spin_flip_matrix}\ \text{（積はサイト番号の昇順）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \prod_{j=1}^{M_{\mathrm{col}}}\sigma_j^x
+&&(\because\ \blkref{def_global_spin_flip_matrix})\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}}
 &&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = \cdots = a_{M_{\mathrm{col}}} = x))
 \end{aligned}`),
@@ -309,6 +318,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明の準備として足した。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: def_global_spin_flip_matrix が ε を有限積 Π_{j=1}^{M_col}σ_j^x と定めたので、第 1 行をその有限積にし、「括弧は左から掛ける形に付け替える」と mat_mult_associative の根拠を外した。site_pauli_prefix_product_kronecker_form の左辺がこの有限積そのものなので、第 2 行はそのまま当たる。",
       ],
     },
   },
@@ -605,14 +615,62 @@ y_ix_i
     proof: [
       paragraph([
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " と書く。まず",
+        " と書く。",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について",
+      ]),
+      displayMath(String.raw`a_j := \begin{cases}x & (j<m)\\ z & (j=m)\end{cases}`),
+      paragraph([
+        "と置く（",
+        math(String.raw`a_j \in \{x,y,z\}`),
+        "）。",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の因子 ",
+        math(String.raw`F_j^{(z)}`),
+        "（その定義で ",
+        math(String.raw`m`),
+        " を主張の ",
+        math(String.raw`m`),
+        " として置いた記号）について、",
+        math(String.raw`j<m`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_j^{(z)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_j^{(z)}\ (j<m))\\
+&= \sigma_j^{a_j}
+&&(\because\ a_j\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([math(String.raw`j=m`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+F_m^{(z)}
+&= \sigma_m^{z}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{の}\ F_m^{(z)})\\
+&= \sigma_m^{a_m}
+&&(\because\ a_m\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "である。これらを (k) と呼ぶ。まず（",
+        math(String.raw`m=1`),
+        " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無く、",
+        math(String.raw`m=M_{\mathrm{col}}`),
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）",
       ]),
       displayMath(String.raw`\begin{aligned}
 Z_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{z}
-&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{z}\text{）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \prod_{j=1}^{m}F_j^{(z)}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_m}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = z))
+&&(\because\ a_j\ \text{の定義を}\ m\ \text{か所へ})
 \end{aligned}`),
       paragraph([
         "である。",
@@ -622,13 +680,13 @@ Z_m
         " の第 ",
         math(String.raw`i`),
         " 因子は ",
-        math(String.raw`x_i := \sigma^x`),
+        math(String.raw`u_i := \sigma^x`),
         "、上の表示より ",
         math(String.raw`Z_m`),
         " の第 ",
         math(String.raw`i`),
         " 因子 ",
-        math(String.raw`y_i`),
+        math(String.raw`v_i`),
         " は ",
         math(String.raw`i < m`),
         " で ",
@@ -644,25 +702,25 @@ Z_m
         " である。",
         math(String.raw`i < m`),
         " では ",
-        math(String.raw`y_ix_i = \sigma^x\sigma^x = x_iy_i`),
+        math(String.raw`v_iu_i = \sigma^x\sigma^x = u_iv_i`),
         "、",
         math(String.raw`i > m`),
         " では",
       ]),
       displayMath(String.raw`\begin{aligned}
-y_ix_i
+v_iu_i
 &= I\sigma^x
-&&(\because\ x_i, y_i\ \text{の定義})\\
+&&(\because\ u_i, v_i\ \text{の定義})\\
 &= \sigma^x
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
 &= \sigma^xI
 &&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
-&= x_iy_i
-&&(\because\ x_i, y_i\ \text{の定義})
+&= u_iv_i
+&&(\because\ u_i, v_i\ \text{の定義})
 \end{aligned}`),
       paragraph([
         "であり、",
-        math(String.raw`y_mx_m = \sigma^{z}\sigma^x = -(\sigma^x\sigma^{z}) = -(x_my_m)`),
+        math(String.raw`v_mu_m = \sigma^{z}\sigma^x = -(\sigma^x\sigma^{z}) = -(u_mv_m)`),
         "（",
         ref("pauli_matrix_products"),
         "）である。よって",
@@ -672,7 +730,7 @@ y_ix_i
 &= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)\bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr) + \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
 &&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と上の}\ Z_m\ \text{の表示})\\
 &= O
-&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to Z_m,\ j \to m))
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (M \to M_{\mathrm{col}},\ x_i \to u_i,\ y_i \to v_i,\ X \to \varepsilon,\ Y \to Z_m,\ j \to m))
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -688,6 +746,7 @@ y_ix_i
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 4 の εZ_m = -Z_mε を、1 ブロック 1 主張で切り出した（V1_restriction_to_eigenspaces の証明 Step 1 と同じ内容）。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: Z_m をクロネッカー積へ直す鎖を、Z_Y_linearly_independent の Step 3 と同じ「def_jordan_wigner_Z_matrices の有限積 Π F_j^{(z)} → 因子を σ_j^{a_j} に → site_pauli_prefix_product_kronecker_form → a_j の定義」の形にし、「括弧は左から掛ける形に付け替える」と mat_mult_associative の根拠を外した。新しく置いた a_j の文字 x・y と混ざらないよう、第 i 因子の名前 x_i・y_i を u_i・v_i に替え、tensor_anticommutation_from_single_site の根拠に x_i → u_i・y_i → v_i・M → M_col の当てはめを書いた。",
       ],
     },
   },
@@ -717,14 +776,62 @@ y_ix_i
     proof: [
       paragraph([
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " と書く。まず",
+        " と書く。",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について",
+      ]),
+      displayMath(String.raw`a_j := \begin{cases}x & (j<m)\\ y & (j=m)\end{cases}`),
+      paragraph([
+        "と置く（",
+        math(String.raw`a_j \in \{x,y,z\}`),
+        "）。",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の因子 ",
+        math(String.raw`F_j^{(y)}`),
+        "（その定義で ",
+        math(String.raw`m`),
+        " を主張の ",
+        math(String.raw`m`),
+        " として置いた記号）について、",
+        math(String.raw`j<m`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F_j^{(y)}
+&= \sigma_j^x
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_j^{(y)}\ (j<m))\\
+&= \sigma_j^{a_j}
+&&(\because\ a_j\ \text{の定義}\ (j<m)\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([math(String.raw`j=m`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+F_m^{(y)}
+&= \sigma_m^{y}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{の}\ F_m^{(y)})\\
+&= \sigma_m^{a_m}
+&&(\because\ a_m\ \text{の定義を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        "である。これらを (k) と呼ぶ。まず（",
+        math(String.raw`m=1`),
+        " のとき ",
+        math(String.raw`\sigma^x`),
+        " の因子は無く、",
+        math(String.raw`m=M_{\mathrm{col}}`),
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）",
       ]),
       displayMath(String.raw`\begin{aligned}
 Y_m
-&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{y}
-&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{y}\text{）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \prod_{j=1}^{m}F_j^{(y)}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices})\\
+&= \prod_{j=1}^{m}\sigma_j^{a_j}
+&&(\because\ \text{(k) を}\ m\ \text{個の因子へ})\\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_m}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m))\\
 &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
-&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = y))
+&&(\because\ a_j\ \text{の定義を}\ m\ \text{か所へ})
 \end{aligned}`),
       paragraph([
         "である。",
@@ -734,13 +841,13 @@ Y_m
         " の第 ",
         math(String.raw`i`),
         " 因子は ",
-        math(String.raw`x_i := \sigma^x`),
+        math(String.raw`u_i := \sigma^x`),
         "、上の表示より ",
         math(String.raw`Y_m`),
         " の第 ",
         math(String.raw`i`),
         " 因子 ",
-        math(String.raw`y_i`),
+        math(String.raw`v_i`),
         " は ",
         math(String.raw`i < m`),
         " で ",
@@ -756,25 +863,25 @@ Y_m
         " である。",
         math(String.raw`i < m`),
         " では ",
-        math(String.raw`y_ix_i = \sigma^x\sigma^x = x_iy_i`),
+        math(String.raw`v_iu_i = \sigma^x\sigma^x = u_iv_i`),
         "、",
         math(String.raw`i > m`),
         " では",
       ]),
       displayMath(String.raw`\begin{aligned}
-y_ix_i
+v_iu_i
 &= I\sigma^x
-&&(\because\ x_i, y_i\ \text{の定義})\\
+&&(\because\ u_i, v_i\ \text{の定義})\\
 &= \sigma^x
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
 &= \sigma^xI
 &&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
-&= x_iy_i
-&&(\because\ x_i, y_i\ \text{の定義})
+&= u_iv_i
+&&(\because\ u_i, v_i\ \text{の定義})
 \end{aligned}`),
       paragraph([
         "であり、",
-        math(String.raw`y_mx_m = \sigma^{y}\sigma^x = -(\sigma^x\sigma^{y}) = -(x_my_m)`),
+        math(String.raw`v_mu_m = \sigma^{y}\sigma^x = -(\sigma^x\sigma^{y}) = -(u_mv_m)`),
         "（",
         ref("pauli_matrix_products"),
         "）である。よって",
@@ -784,7 +891,7 @@ y_ix_i
 &= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)\bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr) + \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
 &&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と上の}\ Y_m\ \text{の表示})\\
 &= O
-&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to Y_m,\ j \to m))
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (M \to M_{\mathrm{col}},\ x_i \to u_i,\ y_i \to v_i,\ X \to \varepsilon,\ Y \to Y_m,\ j \to m))
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -800,6 +907,7 @@ y_ix_i
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 4 の εY_m = -Y_mε を、1 ブロック 1 主張で切り出した（V1_restriction_to_eigenspaces の証明 Step 1 と同じ内容）。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: Y_m をクロネッカー積へ直す鎖を、Z_Y_linearly_independent の Step 3 と同じ「def_jordan_wigner_Y_matrices の有限積 Π F_j^{(y)} → 因子を σ_j^{a_j} に → site_pauli_prefix_product_kronecker_form → a_j の定義」の形にし、「括弧は左から掛ける形に付け替える」と mat_mult_associative の根拠を外した。新しく置いた a_j の文字 x・y と混ざらないよう、第 i 因子の名前 x_i・y_i を u_i・v_i に替え、tensor_anticommutation_from_single_site の根拠に x_i → u_i・y_i → v_i・M → M_col の当てはめを書いた。",
       ],
     },
   },
