@@ -15,6 +15,7 @@
   a の単射性は P 上の積を I 上の積へ移すのに要る。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
+import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Mathlib.Data.List.Sort
 import Mathlib.Algebra.Group.Basic
 import Mathlib.Algebra.GroupWithZero.Basic

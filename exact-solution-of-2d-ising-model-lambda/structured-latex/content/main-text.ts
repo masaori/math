@@ -51812,15 +51812,15 @@ b(\sigma_{+})
                         displayMath(String.raw`\begin{aligned}
 Z_L(q)
 &=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
-&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す。}\blkref{def_partition_polynomial})\\
+&&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す、}\blkref{def_partition_polynomial})\\
 &\le\sum_{\sigma\in\Sigma_L}(1+q)^{\,b(\sigma)}
-&&(\because\ 0<q\text{ と }q\le1+q\text{（}0<1\text{ を }q\text{ へ足す）と準備の第二を各項へ同時適用。有限和は各項の比較と両立する})\\
+&&(\because\ 0<q\text{ と }q\le1+q\text{（}0<1\text{ を }q\text{ へ足す）と準備の第二を各項へ同時適用、有限和は各項の比較と両立する})\\
 &\le\sum_{\sigma\in\Sigma_L}(1+q)^{2L^2}
-&&(\because\ \text{各 }\sigma\text{ で }b(\sigma)\le2L^2\text{（}\blkref{def_broken_bond_count}\text{）と }1\le1+q\text{（}0<q\text{ を }1\text{ へ足す）と準備の第三を各項へ同時適用。同上})\\
+&&(\because\ \text{各 }\sigma\text{ で }b(\sigma)\le2L^2\text{（}\blkref{def_broken_bond_count}\text{）と }1\le1+q\text{（}0<q\text{ を }1\text{ へ足す）と準備の第三を各項へ同時適用、同上})\\
 &=|\Sigma_L|\cdot(1+q)^{2L^2}
-&&(\because\ \sigma\text{ に依らない同じ元の有限和。準備の第四})\\
+&&(\because\ \sigma\text{ に依らない同じ元の有限和、準備の第四})\\
 &=2^{L^2}\cdot(1+q)^{2L^2}
-&&(\because\ |\Sigma_L|=2^{L^2}\text{。}\blkref{def_configuration})
+&&(\because\ |\Sigma_L|=2^{L^2}\text{、}\blkref{def_configuration})
 \end{aligned}`),
                         paragraph([
                           "以上は有理数の四則と順序、有限和、および ",

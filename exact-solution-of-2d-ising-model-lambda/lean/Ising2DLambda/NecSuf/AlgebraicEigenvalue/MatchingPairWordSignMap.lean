@@ -1,4 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
+import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordMap
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue

@@ -1,20 +1,23 @@
 /-
 完全マッチングの符号（`def_perfect_matching_sign`）と列挙順序独立性
 （`claim_perfect_matching_sign_enumeration_independent`）の具体版。
-昇順対の列挙から実際の置換を作り、既証明の転倒符号の乗法性と互換符号を用いる。
+昇順対の列挙から実際の置換を作り、線型順序を持つ任意の有限集合の上の符号の乗法性の具体版
+（`finiteOrderedSign_comp`）と互換の符号の具体版（`KacWard.finiteTransposition_sign`）を用いる。
+互換は具体版の `KacWard.finiteTranspositionPerm`（本文の `t_{a,b}`）である。必要十分版の定理は引かない。
 四つの隣接交換および先頭を合わせる帰納法を本文どおりに記す。住処は有限集合と ℤ。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PerfectMatching
-import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Mathlib.Data.List.NodupEquivFin
 import Mathlib.Data.Finset.Sort
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_comp inversionCount orderedPairs)
-open Ising2DLambda.NecSuf.KacWard (transpositionPerm transpositionPerm_apply_left
-  transpositionPerm_apply_right transpositionPerm_apply_of_ne sign_transposition
-  trichotomous_of_linearOrder)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
+open Ising2DLambda.KacWard (finiteTranspositionPerm finiteTranspositionPerm_apply
+  finiteTransposition_apply_left finiteTransposition_apply_right finiteTransposition_apply_of_ne
+  finiteTransposition_sign)
 
 /-- 全元をちょうど一度ずつ記す有限列。 -/
 def IsCompleteWord {J : Type*} (w : List J) : Prop :=
@@ -138,13 +141,13 @@ theorem matchingWordSign_map (w : List J) (h : IsCompleteWord w) (p : Equiv.Perm
     matchingWordSign (w.map p) =
       sign (fun x y : J => x < y) p * matchingWordSign w := by
   rw [matchingWordSign_eq _ (completeWord_map w h p), matchingWordPermutation_map,
-    sign_comp _ trichotomous_of_linearOrder, matchingWordSign_eq _ h]
+    finiteOrderedSign_comp, matchingWordSign_eq _ h]
 
 omit [Fintype J] in
 /-- 隣接二要素の交換を、値の互換の作用として同定する。 -/
 theorem matchingWord_swap_eq_map (u : List J) (a b : J) (v : List J)
     (h : IsCompleteWord (u ++ a :: b :: v)) :
-    (u ++ a :: b :: v).map (transpositionPerm a b) = u ++ b :: a :: v := by
+    (u ++ a :: b :: v).map (finiteTranspositionPerm a b) = u ++ b :: a :: v := by
   have hnd := List.nodup_append.mp h.1
   have htail := List.nodup_cons.mp hnd.2.1
   have hau : a ∉ u := by
@@ -156,22 +159,24 @@ theorem matchingWord_swap_eq_map (u : List J) (a b : J) (v : List J)
   have hav : a ∉ v := fun hx => htail.1 (List.mem_cons_of_mem b hx)
   have hbv : b ∉ v := (List.nodup_cons.mp htail.2).1
   have fix (l : List J) (ha : a ∉ l) (hb : b ∉ l) :
-      l.map (transpositionPerm a b) = l := by
-    have hf : ∀ x ∈ l, transpositionPerm a b x = id x := by
+      l.map (finiteTranspositionPerm a b) = l := by
+    have hf : ∀ x ∈ l, finiteTranspositionPerm a b x = id x := by
       intro x hx
-      exact transpositionPerm_apply_of_ne a b
+      rw [finiteTranspositionPerm_apply]
+      exact finiteTransposition_apply_of_ne a b
         (fun he => ha (he ▸ hx)) (fun he => hb (he ▸ hx))
     simpa only [List.map_id] using List.map_congr_left hf
   simp only [List.map_append, List.map_cons, fix u hau hbu, fix v hav hbv,
-    transpositionPerm_apply_left, transpositionPerm_apply_right]
+    finiteTranspositionPerm_apply, finiteTransposition_apply_left,
+    finiteTransposition_apply_right]
 
 /-- 語の交換によって定まる置換は、値の互換との左合成に等しい。 -/
 theorem matchingWordPermutation_swap (u : List J) (a b : J) (v : List J)
     (h : IsCompleteWord (u ++ a :: b :: v)) :
     matchingWordPermutation (u ++ b :: a :: v) (completeWord_swap u a b v h) =
-      transpositionPerm a b * matchingWordPermutation (u ++ a :: b :: v) h := by
+      finiteTranspositionPerm a b * matchingWordPermutation (u ++ a :: b :: v) h := by
   simpa only [matchingWord_swap_eq_map u a b v h] using
-    matchingWordPermutation_map (u ++ a :: b :: v) h (transpositionPerm a b)
+    matchingWordPermutation_map (u ++ a :: b :: v) h (finiteTranspositionPerm a b)
 
 /-- 隣接交換の符号反転。本文の六等号を同順に記す。 -/
 theorem matchingWordSign_swap (u : List J) (a b : J) (v : List J)
@@ -186,13 +191,13 @@ theorem matchingWordSign_swap (u : List J) (a b : J) (v : List J)
             (matchingWordPermutation (u ++ b :: a :: v) (completeWord_swap u a b v h)) :=
           matchingWordSign_eq _ _
     _ = sign (fun x y : J => x < y)
-          (transpositionPerm a b * matchingWordPermutation (u ++ a :: b :: v) h) := by
+          (finiteTranspositionPerm a b * matchingWordPermutation (u ++ a :: b :: v) h) := by
             rw [matchingWordPermutation_swap]
-    _ = sign (fun x y : J => x < y) (transpositionPerm a b) *
+    _ = sign (fun x y : J => x < y) (finiteTranspositionPerm a b) *
           sign (fun x y : J => x < y) (matchingWordPermutation (u ++ a :: b :: v) h) :=
-            sign_comp _ trichotomous_of_linearOrder _ _
+            finiteOrderedSign_comp _ _
     _ = (-1) * sign (fun x y : J => x < y)
-          (matchingWordPermutation (u ++ a :: b :: v) h) := by rw [sign_transposition a b hab]
+          (matchingWordPermutation (u ++ a :: b :: v) h) := by rw [finiteTransposition_sign hab]
     _ = - sign (fun x y : J => x < y)
           (matchingWordPermutation (u ++ a :: b :: v) h) := neg_one_mul _
     _ = - matchingWordSign (u ++ a :: b :: v) := by rw [matchingWordSign_eq _ h]
