@@ -21,17 +21,17 @@ if ! command -v lake >/dev/null 2>&1; then
 fi
 
 status=0
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
 
 # 0. どの .lean も入口から import されていること。
 #    **import されていないファイルはビルドも検査もされない。** 実測: 型エラーで壊れた下書きが
 #    import されないまま置かれ、lake build も sorry 検査も通ってしまった
 #    （壊れた宣言は字面に sorry が無くても sorryAx を使う）。
-orphans=""
-while IFS= read -r file; do
-  module="$(printf '%s' "$file" | sed 's#/#.#g; s#\.lean$##')"
-  grep -q "^import ${module}$" Ising2DLambda.lean || orphans="${orphans}  ${file}
-"
-done < <(find Ising2DLambda -name '*.lean' | sort)
+find Ising2DLambda -name '*.lean' | sort > "$tmp/files.txt"
+sed -n 's/^import \(Ising2DLambda\..*\)$/\1/p' Ising2DLambda.lean |
+  sed 's#\.#/#g; s#$#.lean#' | sort > "$tmp/imports.txt"
+orphans="$(comm -23 "$tmp/files.txt" "$tmp/imports.txt")"
 
 if [ -n "$orphans" ]; then
   echo "NG: 入口 Ising2DLambda.lean から import されていない .lean がある（ビルドも検査もされない）:" >&2
@@ -2508,8 +2508,6 @@ if [ ${#targets[@]} -eq 0 ]; then
   exit "$status"
 fi
 
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
 {
   echo "import Ising2DLambda"
   for target in "${targets[@]}"; do
