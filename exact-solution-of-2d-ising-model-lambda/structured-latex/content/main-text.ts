@@ -70513,6 +70513,8 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_card_eq_boundaryEdge_card",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_liftPoint_mem_boundaryVertices",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_has_departure",
+                      "Ising2DLambda.KacWard.vertexSimpleWalk_departure_equiv_boundaryVertices",
+                      "Ising2DLambda.NecSuf.KacWard.boundary_vertices_equiv_positions",
                       "Ising2DLambda.NecSuf.KacWard.boundary_vertices_covered",
                       "Ising2DLambda.NecSuf.KacWard.departure_mem_edgeBoundaryVertices",
                       "Ising2DLambda.KacWard.stepTurning_reversed_pair",

@@ -1241,6 +1241,8 @@ import Ising2DLambda.KacWard.BoundaryVertexTurnSum
 import Ising2DLambda.NecSuf.KacWard.WalkLiftPointBoundaryVertex
 import Ising2DLambda.NecSuf.KacWard.WalkBoundaryVertexCoverage
 import Ising2DLambda.KacWard.WalkLiftPointBoundaryVertex
+import Ising2DLambda.KacWard.WalkBoundaryVertexBijection
+import Ising2DLambda.NecSuf.KacWard.BoundaryVertexBijection
 import Ising2DLambda.NecSuf.KacWard.CyclicTurningAsStepSum
 import Ising2DLambda.KacWard.CyclicTurningAsStepSum
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexSidePropagation

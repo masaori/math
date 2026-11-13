@@ -6,6 +6,7 @@
 
 ## 現在地
 
+- **2026-11-13（主経路の連続実行）、持ち上げた単純閉歩道の出発位置と内側セル集合の境界頂点の全単射を Lean 具体版・必要十分版で示した。** 出発点の単射、境界頂点への所属、全境界頂点の被覆を合わせた。次は各出発位置での回転数と境界頂点の局所回転数の一致である。
 - **2026-11-13（並列の連続実行）、有限線型順序集合の相異なる二点の互換の符号は $-1$ であること（`claim_transposition_sign_on_finite_ordered_set`）の Lean 具体版を初めて置いた。** この主張の `lean:` は必要十分版 `NecSuf.KacWard.sign_transposition` だけで、具体版が無かった。`claim_matching_word_sign_swap` の具体版 `matchingWordSign_swap` が委譲を外すにはこの具体版と、一般の有限線型順序集合の上の符号の乗法性の具体版（本文 `claim_permutation_sign_mul` は $\mathcal J$ 一般で述べるが、具体版 `permSign_comp` は行配位に限る）の二つが要るので、並列の表の行を割り直した。並列の表の次は「一般の有限線型順序集合の上の符号の乗法性の具体版」である。
 - **2026-11-13（並列の連続実行）、完全マッチングの符号は対の列挙順序に依存しないこと（`claim_perfect_matching_sign_enumeration_independent`）の Lean 具体版から必要十分版への委譲を外した。** 具体版 `perfectMatchingSign_eq_one_or_neg_one` は必要十分版の `sign_eq_one_or_neg_one` を呼んでいたので、本文に足した四行 $\operatorname{sgn}(\mathcal D)=\varepsilon(W(\mathcal L_0))=\operatorname{sgn}(\pi)=(-1)^{\operatorname{inv}(\pi)}\in\{-1,1\}$ と同じ順の calc と整数 $(-1)^k$ の偶奇で示す形へ直し、例外の台帳の行を消した。並列の表の次は `claim_matching_word_sign_swap`（例外の台帳の `matchingWordSign_swap`・`matchingWord_swap_eq_map`）である。
 - **2026-11-12（並列の連続実行）、分散因子の最小値は自己双対点で零になること（`claim_dispersion_minimum_self_dual_point`）を Lean 具体版と必要十分版で示し、本文で $0<r<1$ を四つの参照の列挙で、$\rho(1-2\xi-\xi^2)=1-2r-r^2$ と単射性を「単射性と四則保存」の一行で、$-1-s<_R0$ を「$0<_Rx_c$ と $-2<_R0$」で、$s\ne0$ を「$s=1+x_c>_R0$」で済ませていた段を、五つの事実（$0<r<1$ の六行、$c>0$ の三行、$\rho(p)$ の七行、$-1-s<_R-2<_R0$ の推移律、$\xi\ne-1-s$）、差の六行、$B_\xi(0,0)$ の四行、零条件の七行の同値へ直した。** 並列の表の「平方恒等式に依存しない実数体への脱出と有限 Fourier 分解の Lean 二版」は 22 件とも済み、表から外した。並列の表の次は「正負四・回転位相に関わらない具体版の委譲を外す」の先頭 `claim_perfect_matching_sign_enumeration_independent` である。
@@ -25,7 +26,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を同定する | 記述・SageMath 済。Lean は未着手 | 上の全単射と歩道の左右による方向表を使い、各頂点の項を対応させて有限和を同定する。 |
+| Onsager 閉形式への接続 | 各出発位置の回転数と境界頂点の局所回転数を同定する | 記述・SageMath 済。Lean は未着手 | 出発位置と境界頂点の全単射は 2026-11-13 に Lean 二版で済んだ。歩道の左右による方向表を使い、各頂点の項を対応させる。 |
+| Onsager 閉形式への接続 | 出発辺の回転数和と境界頂点の局所回転数和を同定する | 記述・SageMath 済。Lean は未着手 | 全単射と各点の回転数一致によって有限和を再添字付けする。 |
 | Onsager 閉形式への接続 | 一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する | 記述・SageMath 済。Lean の接続は未着手 | 射影持ち上げ点の相異性、巻き付き零、内側セル集合の計数を正負四の定理へ接続する。具体版 `oneSidedClosureProjection_cyclicTurning` は結論を仮定 `hwhitney` で受け取り、必要十分版を呼んでいる。完了には実際の閉歩道の前提だけから平面単純多角形の具体版を適用する。 |
 | Onsager 閉形式への接続 | 周期単純路の循環総回転数は零 | 記述・SageMath 済。Lean 二版は未着手 | 三周期比較から得た周期方向の和の零を、有限辺列の循環総回転数の定義に一致させる。 |
 | Onsager 閉形式への接続 | 頂点単純閉路の循環総回転数は切断線偶奇で決まる | 記述・SageMath 済。Lean 二版は未着手 | 零巻き付きと非零巻き付きの結果を切断線偶奇へ接続する。切断線偶奇が零の場合は、上の行「切断線偶奇が零の頂点単純閉路の巻き付きは零である」を引く（原始性を経由しない）。 |
@@ -71,6 +73,7 @@
 
 ## 前進の記録
 
+- 2026-11-13: 主経路の先頭を全単射・各点の回転数一致・有限和の再添字付けへ割り直した。全単射は既存の出発点の単射、境界への所属、全境界頂点の被覆から Lean 具体版 `vertexSimpleWalk_departure_equiv_boundaryVertices` と必要十分版 `boundary_vertices_equiv_positions` で示した。各点の一致と有限和は次の行に残す。
 - 2026-11-13: 並列の表の先頭の行「正負四・回転位相に関わらない具体版の委譲を外す」の二件目 `claim_matching_word_sign_swap` に入ったところ、具体版 `matchingWordSign_swap` が呼ぶ必要十分版の定理（互換の符号 `sign_transposition`、符号の乗法性 `sign_comp`、互換の作用 `transpositionPerm_apply_*`）のうち、互換の符号と乗法性には一般の有限線型順序集合で述べた具体版が無かった。中身で割り、(1) 互換の符号の具体版、(2) 符号の乗法性の具体版、(3) 語の交換の委譲を外す、の三つにした。(1) を済ませた: 具体版（`KacWard/TranspositionSignFiniteOrderedSet.lean`）は本文の $t_{a,b}$ の場合分けの定義、二回合成で戻ること、名前の交換で同じ写像になること、$I=A\cup B\cup C$ の両包含（`⊆` は本文の五つの場合分け）、$\mathrm{inv}(t_{a,b})=|M|+|M|+1=2|M|+1$、符号の四行を本文と同じ順で示し、必要十分版の定理を呼ばない（本文の定義を書いた `sign`・`inversionCount`・`orderedPairs` だけを使う）。導出版は `TranspositionSignFiniteOrderedSetFromNecSuf.lean`。本文・SageMath は不変。(2)(3) は並列の表の行に置いた。
 - 2026-11-13: 並列の表の先頭の行「正負四・回転位相に関わらない具体版の委譲を外す」の一件目、`claim_perfect_matching_sign_enumeration_independent` を済ませた。この主張の具体版のうち委譲していたのは `perfectMatchingSign_eq_one_or_neg_one`（必要十分版の `sign_eq_one_or_neg_one` を修飾なしで呼んでいた）だけで、これを本文の四行と同じ順の calc（`matchingWordSign_eq` と符号・転倒数の定義の展開）と `neg_one_pow_eq_or` で示す形へ直し、`open` から `sign_eq_one_or_neg_one` を外した。例外の台帳は 52 件から 51 件になった。この行の残りは 18 件。
 - 2026-11-12: 並列の表の先頭の行の二十二件目（最後）、分散因子の最小値は自己双対点で零になること（`claim_dispersion_minimum_self_dual_point`）を済ませた。具体版（`RealEscape/DispersionMinimumSelfDualPoint.lean`）は第一の事実（`cutRealization_pos_lt_one`）、第二の事実（`dispersionMinimum_coefficient_pos`）、第三の事実の七行（`cutRealization_selfDualQuadratic`）、第四の事実（`sqrtTwo_ne_zero`・`negOneSubSqrtTwo_lt_zero`）、第五の事実（`ne_negOneSubSqrtTwo_of_pos`）、差の六行（`dispersionMinimumArgument_sub_gap`）、$B_\xi(0,0)$ の四行、零条件の七行の同値（`dispersionMinimumGap_eq_zero_iff`）、双対性（`criticalPoint_kwSelfDual`）を本文と同じ順で示す（`dispersion_minimum_self_dual_point`）。必要十分版を呼ばない。必要十分版（`NecSuf/RealEscape/DispersionMinimumSelfDualPoint.lean`）は、体 $R$ と差の平方で定めた順序、平方の和が平方であることと平方の和の零性（推移律で使う）、$2\ne0$、線型順序の狭義順序可換環 $K$、加法と乗法を保ち $0,1,2$ で一致し順序を送る単射 $\rho$、$c_j\le1$ と $c_j(x_0)=1$ を満たす関数だけを仮定する（$K$ が体であること・完備性・連続性・$-1\le c_j$・他の有理数での一致は使わない）。導出版は `DispersionMinimumSelfDualPointFromNecSuf.lean`。到達点に要る Lean の無い主張は 23 件から 22 件になった（`count-goal-lean-remaining.ts`）。
