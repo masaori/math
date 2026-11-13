@@ -6,7 +6,9 @@
 #      negative_i_times_complex_is_negation_of_i_times・multiply_by_minus_one・def_complex_difference）。
 #     c_0, c_x, c_y, c_z を不定元にした QQ(i) 上の多項式環の行列で、和・スカラー倍・成分を別々に組む。
 # (2) L = O から (p) c_0 + c_z = 0、(q) c_x − ic_y = 0、(r) c_x + ic_y = 0、(s) c_0 − c_z = 0 の各 3 行の鎖。
-# (3) c_0, c_z, c_x, ic_y, c_y が零になる 5 本の鎖。仮定を使う行は、前の行で仮定の左辺の式を 0_C に置いた形が
+# (3) c_0, c_z, c_x, ic_y, c_y が零になる 5 本の鎖（twice_times_inverse_of_two_is_original_in_cc・
+#     sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc・加法の可換律・
+#     negation_plus_self_is_zero_in_cc・negative_i_times_i_is_one_in_cc を引く）。仮定を使う行は、前の行で仮定の左辺の式を 0_C に置いた形が
 #     後の行であることを恒等式で確かめ、使う仮定を他の仮定に取り替えると移れないことを否定の対照にする。
 # 浮動小数点なし。
 import sys
@@ -132,7 +134,7 @@ chain_check([(zero + zero) * ti, zero * ti, zero], "c_0 = 0_C（仮定の後）"
 chain_check([cz, (two * cz) * ti, sub(P, S) * ti], "c_z = 0_C（仮定の前）")
 hyp_step(sub(P, S) * ti, sub(zero, S) * ti, "p", ti, "c_z = 0_C")
 hyp_step(sub(zero, S) * ti, sub(zero, zero) * ti, "s", -ti, "c_z = 0_C")
-chain_check([sub(zero, zero) * ti, (zero + neg(zero)) * ti, zero * ti, zero], "c_z = 0_C（仮定の後）")
+chain_check([sub(zero, zero) * ti, (zero + neg(zero)) * ti, (neg(zero) + zero) * ti, zero * ti, zero], "c_z = 0_C（仮定の後）")
 chain_check([cx, (two * cx) * ti, (Rr + Q) * ti], "c_x = 0_C（仮定の前）")
 hyp_step((Rr + Q) * ti, (zero + Q) * ti, "r", ti, "c_x = 0_C")
 hyp_step((zero + Q) * ti, (zero + zero) * ti, "q", ti, "c_x = 0_C")
@@ -140,16 +142,23 @@ chain_check([(zero + zero) * ti, zero * ti, zero], "c_x = 0_C（仮定の後）"
 chain_check([i * cy, (two * (i * cy)) * ti, sub(Rr, Q) * ti], "ic_y = 0_C（仮定の前）")
 hyp_step(sub(Rr, Q) * ti, sub(zero, Q) * ti, "r", ti, "ic_y = 0_C")
 hyp_step(sub(zero, Q) * ti, sub(zero, zero) * ti, "q", -ti, "ic_y = 0_C")
-chain_check([sub(zero, zero) * ti, (zero + neg(zero)) * ti, zero * ti, zero], "ic_y = 0_C（仮定の後）")
+chain_check([sub(zero, zero) * ti, (zero + neg(zero)) * ti, (neg(zero) + zero) * ti, zero * ti, zero], "ic_y = 0_C（仮定の後）")
 chain_check([cy, one * cy, (neg(i) * i) * cy, neg(i) * (i * cy)], "c_y = 0_C（仮定の前）")
 hyp_step(neg(i) * (i * cy), neg(i) * zero, "iy", neg(i), "c_y = 0_C")
 chain_check([neg(i) * zero, zero], "c_y = 0_C（仮定の後）")
-check(neg(i) * i == one, "根拠 (g): (-i)i = 1_C")
+check(neg(i) * i == one, "根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C")
+# 係数が零になる鎖が引く主張の当てはめ（文字の置き換えどおり）
+for z in (c0, cz, cx, i * cy):
+    check((two * z) * ti == z, "根拠 twice_times_inverse_of_two_is_original_in_cc（z → c_0, c_z, c_x, ic_y）")
+for a, b in ((c0, cz), (cx, i * cy)):
+    check((a + b) + sub(a, b) == two * a, "根拠 sum_plus_difference_is_twice_first_in_cc（a, b の置き換え）")
+    check(sub(a + b, sub(a, b)) == two * b, "根拠 sum_minus_difference_is_twice_second_in_cc（a, b の置き換え）")
+check(neg(zero) + zero == zero, "根拠 negation_plus_self_is_zero_in_cc（x → 0_C）")
 
 # 否定の対照
 check(L[0, 1] != cx + i * cy, "否定の対照: L_12 の符号を + にすると成り立たない（(σ^y)_12 = -i）")
 check(L[1, 1] != c0 + cz, "否定の対照: (σ^z)_22 を 1 と読むと L_22 は c_0 + c_z にならない")
-check(cz != ((c0 + cz) + sub(c0, cz)) * ti, "否定の対照: c_z の鎖で (e) の代わりに (d) を使うと成り立たない")
+check(cz != ((c0 + cz) + sub(c0, cz)) * ti, "否定の対照: c_z の鎖で sum_minus_difference_is_twice_second_in_cc の代わりに sum_plus_difference_is_twice_first_in_cc を使うと成り立たない")
 B2 = matrix(K0, [[1, 0, 0, 1], [0, 1, I0, 0], [0, 1, I0, 0], [1, 0, 0, -1]])
 check(B2.det() == 0, "否定の対照: (q) の -i を i と読み違えると係数行列は退化し、零以外の解が残る")
 

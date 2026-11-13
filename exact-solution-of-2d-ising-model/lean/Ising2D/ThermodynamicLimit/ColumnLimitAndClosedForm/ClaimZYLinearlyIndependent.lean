@@ -74,8 +74,8 @@ Step 3〜5 と合わせて主張を導く段は Step 3〜5 と一緒に置く。
 主張全体の必要十分版の扱いと一緒に状態台帳の (cl7f) で決める。`NecSuf/CliffordIndependence.lean` は Clifford 関係による
 別証明の必要十分版で、README 4 節の要件 1（証明手順が具体版と同じ）により、人手の経路の必要十分版にはならない。
 いま分かっている、各 Step で効いているもの:
-- Step 1: 係数の積が可換であること・`2_ℂ` が可逆であること（準備 (a)。標数 2 では成り立たない）・
-  `(-i)i = 1_ℂ`（準備 (g)。`i` が単元であること）と、成分の定義だけである。
+- Step 1: 係数の積が可換であること・`2_ℂ` が可逆であること（`twice_times_inverse_of_two_is_original_in_cc`。標数 2 では成り立たない）・
+  `(-i)i = 1_ℂ`（`negative_i_times_i_is_one_in_cc`。`i` が単元であること）と、成分の定義だけである。
 - Step 2: 有限和の定義の段を辿る 5 行の鎖と、`kronecker_family_of_independent_family_is_independent` を当てはめる段だけである。
   後者で取り払える構造は、その必要十分版 `NecSuf/ProductFamilyOfIndependentFamilyIsIndependent.lean` が示している。
 - Step 6: Step 2 の線型独立性、Step 4・5 の仮定、クロネッカーのデルタの値、有限和の操作（係数の和のスカラー倍の分配、
@@ -94,6 +94,10 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesWithSingleNonzeroTerm
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteDoubleSumOfMatricesInterchange
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimFiniteSumWithSingleNonzeroTerm
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimTwiceTimesInverseOfTwoIsOriginalInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesIAndNegativeITimesIInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -187,8 +191,10 @@ theorem ZYSet_linearIndepOn (M : ℕ) : LinearIndepOn ℂ id (ZYSet M) := by
 人手証明の Step 1 は、`𝓑` の線型独立性を成分の比較で示す（張ることは使わない）。
 `L := c_0 I + c_x σ^x + c_y σ^y + c_z σ^z` の 4 成分の鎖（`pauliComb_apply_00`〜`_11`）、
 `L = O` から得る (p)〜(s)、係数が零になる 5 本の鎖（`pauliComb_coeff_*_eq_zero`）を 1 行ずつ辿る。
-準備 (a)・(c)・(d)・(e) は `zy_prep_two_mul_mul_inv_two`・`zy_prep_add_neg`・`zy_prep_sum_add_diff`・
-`zy_prep_sum_sub_diff`、(g) は `zy_prep_neg_I_mul_I` である（人手の添字 `1, 2` は Lean では `0, 1`）。
+係数が零になる鎖が引く主張は、`twice_times_inverse_of_two_is_original_in_cc` が `complex_two_mul_mul_inv_two`、
+`sum_plus_difference_is_twice_first_in_cc`・`sum_minus_difference_is_twice_second_in_cc` が `complex_sum_add_difference`・
+`complex_sum_sub_difference`、`negation_plus_self_is_zero_in_cc` が `neg_add_self_complex`、`negative_i_times_i_is_one_in_cc` が
+`complex_neg_I_mul_I` である（人手の添字 `1, 2` は Lean では `0, 1`）。
 人手と同じく mathlib の基底の一般論（`Basis`）は使わない。 -/
 
 /-- 人手 Step 1 の `L := c_0 I + c_x σ^x + c_y σ^y + c_z σ^z`（和は左から結ぶ）。 -/
@@ -321,8 +327,10 @@ theorem pauliComb_eq_zero_equations {c0 cx cy cz : ℂ} (h : pauliComb c0 cx cy 
 theorem pauliComb_coeff_zero_eq_zero {c0 cz : ℂ} (hp : c0 + cz = 0) (hs : c0 - cz = 0) :
     c0 = 0 := by
   calc c0
-      = (2 * c0) * 2⁻¹ := (zy_prep_two_mul_mul_inv_two c0).symm         -- (a)（`z → c_0`）を右辺から左辺へ
-    _ = ((c0 + cz) + (c0 - cz)) * 2⁻¹ := by rw [zy_prep_sum_add_diff c0 cz]  -- (d)（`z → c_0, w → c_z`）を右辺から左辺へ
+      = (2 * c0) * 2⁻¹ := (complex_two_mul_mul_inv_two c0).symm
+                                      -- `twice_times_inverse_of_two_is_original_in_cc`（`z → c_0`）を右辺から左辺へ
+    _ = ((c0 + cz) + (c0 - cz)) * 2⁻¹ := by rw [complex_sum_add_difference c0 cz]
+                                      -- `sum_plus_difference_is_twice_first_in_cc`（`a → c_0, b → c_z`）を右辺から左辺へ
     _ = (0 + (c0 - cz)) * 2⁻¹ := by rw [hp]                           -- (p)
     _ = (0 + 0) * 2⁻¹ := by rw [hs]                                   -- (s)
     _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- 加法の単位元
@@ -332,21 +340,26 @@ theorem pauliComb_coeff_zero_eq_zero {c0 cz : ℂ} (hp : c0 + cz = 0) (hs : c0 -
 theorem pauliComb_coeff_z_eq_zero {c0 cz : ℂ} (hp : c0 + cz = 0) (hs : c0 - cz = 0) :
     cz = 0 := by
   calc cz
-      = (2 * cz) * 2⁻¹ := (zy_prep_two_mul_mul_inv_two cz).symm         -- (a)（`z → c_z`）を右辺から左辺へ
-    _ = ((c0 + cz) - (c0 - cz)) * 2⁻¹ := by rw [zy_prep_sum_sub_diff c0 cz]  -- (e)（`z → c_0, w → c_z`）を右辺から左辺へ
+      = (2 * cz) * 2⁻¹ := (complex_two_mul_mul_inv_two cz).symm
+                                      -- `twice_times_inverse_of_two_is_original_in_cc`（`z → c_z`）を右辺から左辺へ
+    _ = ((c0 + cz) - (c0 - cz)) * 2⁻¹ := by rw [complex_sum_sub_difference c0 cz]
+                                      -- `sum_minus_difference_is_twice_second_in_cc`（`a → c_0, b → c_z`）を右辺から左辺へ
     _ = (0 - (c0 - cz)) * 2⁻¹ := by rw [hp]                           -- (p)
     _ = (0 - 0) * 2⁻¹ := by rw [hs]                                   -- (s)
     _ = (0 + -0) * 2⁻¹ := by rw [sub_eq_add_neg]                      -- `def_complex_difference`
-    _ = 0 * 2⁻¹ := by rw [zy_prep_add_neg]                            -- (c)（`z → 0_ℂ`）
+    _ = (-0 + 0) * 2⁻¹ := by rw [add_comm (0 : ℂ) (-0)]               -- 加法の可換律
+    _ = 0 * 2⁻¹ := by rw [neg_add_self_complex 0]                     -- `negation_plus_self_is_zero_in_cc`（`x → 0_ℂ`）
     _ = 0 := zero_mul _                                               -- `complex_zero_times_is_zero`（`z → 2_ℂ^{-1}`）
 
 /-- 人手 Step 1 の `c_x = 0_ℂ` の鎖（(r)・(q) から）。 -/
 theorem pauliComb_coeff_x_eq_zero {cx cy : ℂ} (hq : cx - Complex.I * cy = 0)
     (hr : cx + Complex.I * cy = 0) : cx = 0 := by
   calc cx
-      = (2 * cx) * 2⁻¹ := (zy_prep_two_mul_mul_inv_two cx).symm         -- (a)（`z → c_x`）を右辺から左辺へ
+      = (2 * cx) * 2⁻¹ := (complex_two_mul_mul_inv_two cx).symm
+                                      -- `twice_times_inverse_of_two_is_original_in_cc`（`z → c_x`）を右辺から左辺へ
     _ = ((cx + Complex.I * cy) + (cx - Complex.I * cy)) * 2⁻¹ := by
-          rw [zy_prep_sum_add_diff cx (Complex.I * cy)]                -- (d)（`z → c_x, w → ic_y`）を右辺から左辺へ
+          rw [complex_sum_add_difference cx (Complex.I * cy)]
+                                      -- `sum_plus_difference_is_twice_first_in_cc`（`a → c_x, b → ic_y`）を右辺から左辺へ
     _ = (0 + (cx - Complex.I * cy)) * 2⁻¹ := by rw [hr]               -- (r)
     _ = (0 + 0) * 2⁻¹ := by rw [hq]                                   -- (q)
     _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- 加法の単位元
@@ -356,20 +369,23 @@ theorem pauliComb_coeff_x_eq_zero {cx cy : ℂ} (hq : cx - Complex.I * cy = 0)
 theorem pauliComb_coeff_I_mul_y_eq_zero {cx cy : ℂ} (hq : cx - Complex.I * cy = 0)
     (hr : cx + Complex.I * cy = 0) : Complex.I * cy = 0 := by
   calc Complex.I * cy
-      = (2 * (Complex.I * cy)) * 2⁻¹ := (zy_prep_two_mul_mul_inv_two _).symm  -- (a)（`z → ic_y`）を右辺から左辺へ
+      = (2 * (Complex.I * cy)) * 2⁻¹ := (complex_two_mul_mul_inv_two _).symm
+                                      -- `twice_times_inverse_of_two_is_original_in_cc`（`z → ic_y`）を右辺から左辺へ
     _ = ((cx + Complex.I * cy) - (cx - Complex.I * cy)) * 2⁻¹ := by
-          rw [zy_prep_sum_sub_diff cx (Complex.I * cy)]                -- (e)（`z → c_x, w → ic_y`）を右辺から左辺へ
+          rw [complex_sum_sub_difference cx (Complex.I * cy)]
+                                      -- `sum_minus_difference_is_twice_second_in_cc`（`a → c_x, b → ic_y`）を右辺から左辺へ
     _ = (0 - (cx - Complex.I * cy)) * 2⁻¹ := by rw [hr]               -- (r)
     _ = (0 - 0) * 2⁻¹ := by rw [hq]                                   -- (q)
     _ = (0 + -0) * 2⁻¹ := by rw [sub_eq_add_neg]                      -- `def_complex_difference`
-    _ = 0 * 2⁻¹ := by rw [zy_prep_add_neg]                            -- (c)（`z → 0_ℂ`）
+    _ = (-0 + 0) * 2⁻¹ := by rw [add_comm (0 : ℂ) (-0)]               -- 加法の可換律
+    _ = 0 * 2⁻¹ := by rw [neg_add_self_complex 0]                     -- `negation_plus_self_is_zero_in_cc`（`x → 0_ℂ`）
     _ = 0 := zero_mul _                                               -- `complex_zero_times_is_zero`（`z → 2_ℂ^{-1}`）
 
 /-- 人手 Step 1 の `c_y = 0_ℂ` の鎖（`ic_y = 0_ℂ` から）。 -/
 theorem pauliComb_coeff_y_eq_zero {cy : ℂ} (h : Complex.I * cy = 0) : cy = 0 := by
   calc cy
       = 1 * cy := (one_mul cy).symm                                   -- 積の単位元を右辺から左辺へ
-    _ = ((-Complex.I) * Complex.I) * cy := by rw [zy_prep_neg_I_mul_I]  -- (g) を右辺から左辺へ
+    _ = ((-Complex.I) * Complex.I) * cy := by rw [complex_neg_I_mul_I]  -- `negative_i_times_i_is_one_in_cc` を右辺から左辺へ
     _ = (-Complex.I) * (Complex.I * cy) := mul_assoc _ _ _            -- 積の結合律
     _ = (-Complex.I) * 0 := by rw [h]                                 -- 上の `ic_y = 0_ℂ`
     _ = 0 := mul_zero _                                               -- `complex_times_zero_is_zero`（`z → -i`）

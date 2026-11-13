@@ -3322,6 +3322,61 @@ i(-\theta)_{\mathbb C}
     },
   },
   {
+    id: "calculation_formulae_claim_twice_times_inverse_of_two_is_original_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(2_{\mathbb C}z)\,2_{\mathbb C}^{-1}=z` },
+    labels: ["twice_times_inverse_of_two_is_original_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`z\in\mathbb C`),
+        " とする。",
+        math(String.raw`2_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=2`),
+        " で、",
+        math(String.raw`2_{\mathbb{C}}=(2,0)\neq(0,0)=0_{\mathbb{C}}`),
+        " なので ",
+        math(String.raw`2_{\mathbb{C}}\in\mathbb{C}^{\times}`),
+        " であり、",
+        math(String.raw`2_{\mathbb C}^{-1}`),
+        " は ",
+        ref("multiplicative_group_of_cc"),
+        " の群 ",
+        math(String.raw`\mathbb{C}^{\times}`),
+        " での ",
+        math(String.raw`2_{\mathbb C}`),
+        " の逆元である。積は ",
+        ref("definition_of_cc"),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`(2_{\mathbb C}z)\,2_{\mathbb C}^{-1}=z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(2_{\mathbb{C}}z)\,2_{\mathbb{C}}^{-1}
+&= (z\,2_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}\bigr)\\
+&= z\,(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1})
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}\bigr)\\
+&= z\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
+&= z
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 1 の係数が零になる鎖が Z_Y_generate_algebra の証明の中の準備 (a) を引いていて、ラベルで引けなかったので主張にした。鎖は Z_Y_generate_algebra の準備 (a) と同じ 4 行である。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_045_theorem_euler_formula_cos_sin",
     kind: "theorem",
     origin: { path: "_old/typst/parts/000_計算公式/044_theorem_cos_sinのEuler表示.typ", ordinal: 45 },
@@ -3523,6 +3578,102 @@ i(-\theta)_{\mathbb C}
       status: "added",
       notes: [
         "2026-11-09（Lean の通しの証明）: factorization_of_A_theta_general は e_- := exp((-i)(θ)_ℂ) と置き、-iθ を -(iθ) と読む euler_formula_cos_sin を引いていた。その間をつなぐ主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_i_times_i_is_minus_one_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`i\,i=-1_{\mathbb C}` },
+    labels: ["i_times_i_is_minus_one_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`i \in \mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
+        math(String.raw`-1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=-1`),
+        " である。左辺の積は ",
+        ref("definition_of_cc"),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`i\,i=-1_{\mathbb C}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+i\,i
+&= (0,1)(0,1)
+&&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
+&= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= (-1,0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= -1_{\mathbb{C}}
+&&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 1 が Z_Y_generate_algebra の証明の中の準備 (g) を引いていて、ラベルで引けなかった。(g) を主張 negative_i_times_i_is_one_in_cc にするため、その鎖が使う準備 (f) をこの主張にした。鎖は Z_Y_generate_algebra の準備 (f) と同じ 4 行である。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_negative_i_times_i_is_one_in_cc",
+    kind: "claim",
+    title: { tex: String.raw`(-i)\,i=1_{\mathbb C}` },
+    labels: ["negative_i_times_i_is_one_in_cc"],
+    statement: [
+      paragraph([
+        math(String.raw`i \in \mathbb{C}`),
+        " は ",
+        ref("def_imaginary_unit"),
+        " の虚数単位、",
+        math(String.raw`-i`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転 ",
+        math(String.raw`(-1_{\mathbb C})i`),
+        "、",
+        math(String.raw`1_{\mathbb C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}`),
+        " の ",
+        math(String.raw`r=1`),
+        " である。左辺の積は ",
+        ref("definition_of_cc"),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`(-i)\,i=1_{\mathbb C}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-i)\,i
+&= -(i\,i)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to i)\bigr)\\
+&= -(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{i_times_i_is_minus_one_in_cc}\bigr)\\
+&= (-1_{\mathbb{C}})(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to -1_{\mathbb{C}})\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{minus_one_times_minus_one_is_one_in_cc}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 1 の c_y = 0_ℂ の鎖が Z_Y_generate_algebra の証明の中の準備 (g) を引いていて、ラベルで引けなかったので主張にした。鎖は Z_Y_generate_algebra の準備 (g) と同じ 4 行で、(f) の段を主張 i_times_i_is_minus_one_in_cc の参照にした。",
       ],
     },
   },

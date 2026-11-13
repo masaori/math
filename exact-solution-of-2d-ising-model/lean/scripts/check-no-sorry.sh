@@ -411,6 +411,11 @@ targets=(
   Ising2D.complex_sum_sub_difference_of_necSuf
   "Ising2D.NecSuf.sum_add_difference'"
   "Ising2D.NecSuf.sum_sub_difference'"
+  Ising2D.complex_two_mul_mul_inv_two
+  Ising2D.complex_two_mul_mul_inv_two_of_necSuf
+  "Ising2D.NecSuf.mul_mul_right_inverse_of_commute'"
+  Ising2D.complex_I_mul_I
+  Ising2D.complex_neg_I_mul_I
   Ising2D.complex_one_add_one
   Ising2D.complex_one_add_one_eq_ofReal_two
   Ising2D.neg_I_mul_real_neg_eq_I_mul

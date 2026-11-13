@@ -81,6 +81,7 @@ PASS c_z = 0_C: 否定の対照 (s) を (iy) に取り替えると移れない
 PASS c_z = 0_C（仮定の後） 第 1 行 = 第 2 行
 PASS c_z = 0_C（仮定の後） 第 2 行 = 第 3 行
 PASS c_z = 0_C（仮定の後） 第 3 行 = 第 4 行
+PASS c_z = 0_C（仮定の後） 第 4 行 = 第 5 行
 PASS c_x = 0_C（仮定の前） 第 1 行 = 第 2 行
 PASS c_x = 0_C（仮定の前） 第 2 行 = 第 3 行
 PASS c_x = 0_C: 仮定 (r) の左辺を 0_C に置く行
@@ -110,6 +111,7 @@ PASS ic_y = 0_C: 否定の対照 (q) を (iy) に取り替えると移れない
 PASS ic_y = 0_C（仮定の後） 第 1 行 = 第 2 行
 PASS ic_y = 0_C（仮定の後） 第 2 行 = 第 3 行
 PASS ic_y = 0_C（仮定の後） 第 3 行 = 第 4 行
+PASS ic_y = 0_C（仮定の後） 第 4 行 = 第 5 行
 PASS c_y = 0_C（仮定の前） 第 1 行 = 第 2 行
 PASS c_y = 0_C（仮定の前） 第 2 行 = 第 3 行
 PASS c_y = 0_C（仮定の前） 第 3 行 = 第 4 行
@@ -119,10 +121,19 @@ PASS c_y = 0_C: 否定の対照 (iy) を (q) に取り替えると移れない
 PASS c_y = 0_C: 否定の対照 (iy) を (r) に取り替えると移れない
 PASS c_y = 0_C: 否定の対照 (iy) を (s) に取り替えると移れない
 PASS c_y = 0_C（仮定の後） 第 1 行 = 第 2 行
-PASS 根拠 (g): (-i)i = 1_C
+PASS 根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → c_0, c_z, c_x, ic_y）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → c_0, c_z, c_x, ic_y）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → c_0, c_z, c_x, ic_y）
+PASS 根拠 twice_times_inverse_of_two_is_original_in_cc（z → c_0, c_z, c_x, ic_y）
+PASS 根拠 sum_plus_difference_is_twice_first_in_cc（a, b の置き換え）
+PASS 根拠 sum_minus_difference_is_twice_second_in_cc（a, b の置き換え）
+PASS 根拠 sum_plus_difference_is_twice_first_in_cc（a, b の置き換え）
+PASS 根拠 sum_minus_difference_is_twice_second_in_cc（a, b の置き換え）
+PASS 根拠 negation_plus_self_is_zero_in_cc（x → 0_C）
 PASS 否定の対照: L_12 の符号を + にすると成り立たない（(σ^y)_12 = -i）
 PASS 否定の対照: (σ^z)_22 を 1 と読むと L_22 は c_0 + c_z にならない
-PASS 否定の対照: c_z の鎖で (e) の代わりに (d) を使うと成り立たない
+PASS 否定の対照: c_z の鎖で sum_minus_difference_is_twice_second_in_cc の代わりに sum_plus_difference_is_twice_first_in_cc を使うと成り立たない
 PASS 否定の対照: (q) の -i を i と読み違えると係数行列は退化し、零以外の解が残る
--- Z_Y_linearly_independent の Step 1 の鎖: 126/126 PASS
+-- Z_Y_linearly_independent の Step 1 の鎖: 137/137 PASS
 RESULT: PASS
