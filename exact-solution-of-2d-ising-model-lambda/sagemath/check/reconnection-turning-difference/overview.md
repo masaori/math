@@ -2,7 +2,7 @@
 
 **対象ラベル**: `claim_reconnection_turning_difference`
 - 実行: `sage sagemath/check/reconnection-turning-difference/check.sage`
-- 状態: PASS（2026-08-30、組み替え四つ組 1,176 件）
+- 状態: PASS（2026-11-13、組み替え四つ組 1,176 件）
 
 `L=1,2,3` の全向き付き辺について、共通の後続辺を二つ選んだ四つ組
 （`f, f' ∈ Next(e) ∩ Next(e')`）を尽くし、二通りの対応の一歩の回転数の和が

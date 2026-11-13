@@ -7,7 +7,7 @@
   二つの鎖の左辺が同じ → π₄(S₁) = π₄(S₂)          `hcong`（加法の可換結合と左簡約）
   π₄(D) = 0 → D ∈ 4ℤ                              `hdvd`（`ZMod.intCast_zmod_eq_zero_iff_dvd`）
   τ ∈ {0,1,-1} → -4 ≤ D ≤ 4                       `turnValue_mem` の場合分け
-  4 の倍数かつ範囲内 → D ∈ {-4,0,4}                `dvd_four_bounded_mem_necSuf`
+  4 の倍数かつ範囲内 → D ∈ {-4,0,4}                整数の範囲の場合分け
 
 住処: 人手証明のこのブロックは Z を宣言している。ℝ / ℂ は現れない。
 -/
@@ -59,8 +59,7 @@ theorem reconnection_turning_difference (a b c d : Turn) (de de' df df' : ZMod 4
     rcases turnValue_mem b with hb | hb | hb <;>
     rcases turnValue_mem c with hc | hc | hc <;>
     rcases turnValue_mem d with hd | hd | hd <;>
-    exact dvd_four_bounded_mem_necSuf hdvd (by rw [ha, hb, hc, hd]; decide)
-      (by rw [ha, hb, hc, hd]; decide)
+    omega
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。`D` を回転数の差に取り、
 整除（π₄ による合同）と範囲（τ ∈ {0,1,-1}）を渡せば、必要十分版がこの主張を与える。 -/

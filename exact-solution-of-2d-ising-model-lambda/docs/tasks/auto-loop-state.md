@@ -8,7 +8,7 @@
 
 - **2026-11-13（並列の連続実行）、「頂点単純閉路の循環総回転数は切断線偶奇で決まる」を Lean 具体版と必要十分版で示した。** 具体版 `vertexSimpleCycle_cyclicTotalTurning_by_seamParity` は本文と同じ二場合に分け、切断線偶奇が零なら巻き付き零・持ち上げ点の相異性・実際の閉歩道での正負四の具体版を順に引き、零でないなら巻き付き数の偶奇の具体版で巻き付きが零でないことを背理で得て非零巻き付きの具体版を引く。必要十分版は三つの住処に零元だけを仮定し、巻き付きから切断線偶奇への写像が零を零へ送ることだけを使う。次の並列の tick は「頂点単純閉路の位相因子はトーラスの巻き付き二次符号に等しい」。
 - **2026-11-13（並列の連続実行）、「非零巻き付きの頂点単純な閉路の循環総回転数は零である」（周期単純路の循環総回転数は零）を Lean 具体版と必要十分版で示した。** 具体版 `nonzeroWindingSimpleCycle_cyclicTotalTurning_zero` は本文と同じ順で、一側閉包の射影の循環総回転数が正負四であること・周期数 $c=1,2$ の周期数差・三項の補題を組む。閉包の回転数（巡回隣接和）と元の辺列の回転数（`ZMod (m + 1)` 上の方向対の回転数の和）を循環総回転数の定義へ戻す二つの対応補題を置いた。必要十分版は加法群と二値の差の二倍非零だけを仮定する（可換性も使わない）。次の並列の tick は「頂点単純閉路の循環総回転数は切断線偶奇で決まる」。
-- **2026-11-13（主経路の連続実行）、接触点分割の循環総回転数の更新を Lean 具体版で直接示した。** 二点以外の有限和を一致させ、二点だけを取り出す論法を具体版に置いた。次は同じ行の残りを一件ずつ進める。
+- **2026-11-13（主経路の連続実行）、接続の組み替えの回転差を Lean 具体版で独立に示した。** 四つの一歩の値を場合分けし、4 の倍数という合同条件から差が −4, 0, 4 に限ることを直接証明した。次は接触点分割の切断線偶奇の具体版から委譲を外す。
 - **2026-11-13（並列の連続実行）、一側閉包のトーラス射影の循環総回転数が正負四であることを、実際の閉歩道について Lean 具体版で示した。** 具体版 `oneSidedClosureProjection_cyclicTurning` から仮定 `hwhitney` を外し、接触対数零・巻き付き非零の実際の閉歩道 $\gamma$ から作った一側閉包の射影 $\Gamma$ について $t_\circ(\Gamma)\in\{4,-4\}$ を述べる形に替えた。証明は、射影が閉じた非後退辺列で持ち上げ点が相異なり巻き付きが零であること（既存の `oneSidedClosureProjectionFromWalk_simple_zero_winding`）を、新しい `vertexSimpleWalk_cyclicTotalTurning_four`（平面単純多角形の具体版を実際の閉歩道の六つの計数等式と境界頂点の局所回転数和 $v_3-v_1$ で満たしたもの）へ代入する。例外の台帳から一件消した。次の並列の tick は「周期単純路の循環総回転数は零」。
 - **2026-11-13（主経路の連続実行）、平滑化した二本の閉歩道の接続を Lean 具体版で直接示した。** 内部・継ぎ目・閉じる接続を元の接続と交換後の接続から得た。次は同じ行の接触点分割の回転数更新を進める。
 
@@ -23,7 +23,13 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Lean の四層 | 接触点分割・平滑化・横断数の具体版の委譲を外す | 進行中 | 2026-11-13 の研究管理が並列の表から移した（並列へ到達点への最長の鎖を移したため）。`claim_edge_simple_contact_split` の接続部分、再接続の非後退性、`claim_smoothing_splits_closed_walk`・`claim_contact_split_turning_update` は済んだ。残りは・`claim_reconnection_turning_difference`・`claim_contact_split_seam_parity`・`claim_contact_split_pair_descent`・`claim_smoothing_crossing_number_update`・`claim_smoothing_straight_visit_count_update`・`claim_vertex_crossing_number_factorization`・`claim_smoothing_vertex_crossing_number_update`・`claim_crossing_number_vertex_decomposition`。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。一件ずつ外し、外したら例外の台帳の行を消す。`claim_vertex_port_bijection` も済んだ。並列の表の行「平方恒等式の節 6〜9 の Lean 二版」がこれらの具体版を引くので、並列が書いている Lean ファイルには触れず、引かれる側の具体版ファイルだけを書き換える。 |
+| Lean の四層 | 接触点分割の切断線偶奇の具体版の委譲を外す | 未着手 | `claim_contact_split_seam_parity` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 接触点分割の接触対減少の具体版の委譲を外す | 未着手 | `claim_contact_split_pair_descent` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 平滑化後の横断数更新の具体版の委譲を外す | 未着手 | `claim_smoothing_crossing_number_update` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 平滑化による直進通過数減少の具体版の委譲を外す | 未着手 | `claim_smoothing_straight_visit_count_update` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 頂点横断数の積表示の具体版の委譲を外す | 未着手 | `claim_vertex_crossing_number_factorization` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 平滑化後の頂点横断数の具体版の委譲を外す | 未着手 | `claim_smoothing_vertex_crossing_number_update` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
+| Lean の四層 | 横断数の頂点別分解の具体版の委譲を外す | 未着手 | `claim_crossing_number_vertex_decomposition` の具体版を本文と同じ論法で直接示し、例外の台帳から対応する行を消す。並列の表が書く Lean ファイルには触れない。 |
 | Lean の四層 | 一側閉包・周期持ち上げ・階段・回転位相の具体版の委譲を外す | 未着手 | 2026-11-11: 到達点への最長の鎖に載らないので、熱力学極限の行の後ろへ移した。上の行が並列の表の完了待ちで進めないときは、この行を進める。 2026-11-12: 正負四・回転位相に関わらない 19 件（行列式・マッチング 7 件、接触点分割・平滑化・横断数 12 件）は並列の表の行「正負四・回転位相に関わらない具体版の委譲を外す」へ移した。この行に残るのは、一側閉包・周期持ち上げ・階段・回転位相の具体版である。 例外の台帳 `lean/concrete-necsuf-delegations.txt` の 2026-11-07 の見出しの下の残り 54 件（当初 59 件）。開いた名前空間から修飾なしで必要十分版の定理を呼んでいたもので、検査を直して見つけた（2026-11-07 の研究管理）。上の一側閉包の行が扱う対象（内側セル集合・補集合の辺連結性、穴の無いセル集合の Euler 数、対角の二セルの除外）はその行の中で外す。残りを、到達点に近い依存の順に一件ずつ外し、外したら例外の台帳の行を消す。外し方は runbook「具体版の委譲の見逃しを台帳へ載せる」。 2026-11-13 の研究管理: 一側閉包の正負四の行を並列へ移したので、一側閉包・周期持ち上げ・階段の具体版は、並列の表の行「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」が済むまで触れない。それまでは回転位相の 5 件（`claim_cyclic_total_turning_multiple_of_four`・`claim_closed_walk_rotation_phase_sign`・`claim_closed_walk_rotation_phase`・`claim_rotation_phase_as_turning_power`・`claim_walk_rotation_phase_total_turning`）を先に外す。 |
 | 臨界指数を零点列で書く | 臨界指数の具体版の委譲を外す | 未着手 | `lean/concrete-necsuf-delegations.txt` の `criticalPoint_exists_positiveRational_squareDiff_lt` と `leadingDistance_pinching_implies_predicate`。登録先の本文ブロック（臨界点の有理近似、先頭距離の詰め寄りから述語へ）は四つの到達点からの閉包の外なので、閉包の中の Lean の行より後に置く（2026-11-02 の研究管理）。この行は例外台帳が空になるまで消さない。 |
 | 有限系の側の章 | 行き止まりの主張の切り分け | 未着手 | 2026-10-31 の研究管理の実測では、どのブロックからも引かれず主定理の印も無い主張は全体で 48 件（近似の走査）。Kac--Ward 系の章のものは上の切り分けの行で扱う。この行の対象は残りの約 22 件で、道具の章 3、自由エントロピー 1、転送行列 5（`theorem_partition_polynomial_is_trace` を含む。主定理の印の検出漏れの可能性があるので読んで確かめる）、シフト対称性 1、固有値の代数性 5、Fisher 零点と双対性 4、熱力学極限 1、Fisher 零点の個数と密度 1、臨界指数 1。引用漏れか不要かを 1 件ずつ読んで判断する。判定は `ref()` と `\blkref{}` の両方を数えること（数え違いの実績あり）。 |
@@ -47,11 +53,11 @@
 
 ## レビュー記録
 
+- 2026-11-13（主経路）: 「接続の組み替えの回転差」の本文が使う四つの方向番号等式、4 の倍数への移行、回転数の三値を具体版と照合した。主張と符号に食い違いは無く、修正不要だった。
 - 2026-11-13（並列）: 「頂点単純閉路の循環総回転数は切断線偶奇で決まる」の本文の二場合を、引く五つの主張の Lean 具体版の主張と照合した。切断線偶奇の零を巻き付き零の具体版の仮定（横・縦の切断線の指示子の和を二で割った余りが零）へ移すのは定義の展開だけで済み、非零の場合の背理で使う巻き付き数の偶奇は二を法とした等式なので、切断線偶奇の各成分が二未満であることを補った。本文の修正は不要だった。
 - 2026-11-13（並列）: 「非零巻き付きの頂点単純な閉路の循環総回転数は零である」の本文の $a+cb$ の式鎖と、引く三つの主張（周期数差、一側閉包の射影の正負四、三項の補題）の Lean 具体版の主張を照合した。周期数差の具体版が反復回数 $t$ と周期数 $c$ を任意に取り、本文の $t:=1$、$c=1,2$ をそのまま代入できるので、修正不要だった。本文の基点 $k_0$（横断座標の最大を達成する添字）は、具体版では一側閉包の正負四の具体版が与える $k_0$ を使う。
 - 2026-11-13（主経路）: 接触点分割の循環総回転数の本文と既存の具体版を照合した。二本の和の区間分割と二点更新の符号に食い違いは無く、修正不要だった。
 - 2026-11-13（並列）: 「持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである」と「一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである」の導出版 `planeSimplePolygon_cyclicTurning_from_necSuf`・`oneSidedClosureProjection_cyclicTurning_from_necSuf` が、必要十分版ではなく具体版を呼んでいた（具体版が必要十分版の特殊化であることを示していなかった）。両方を必要十分版 `plane_simple_polygon_cyclic_turning_necSuf`・`translated_injective_path_whitney_turning_necSuf` を呼ぶ形に直した。本文・SageMath は不変。
-- 2026-11-13（主経路）: 直前の `smoothedSplitWalkA_closed`・`smoothedSplitWalkB_closed` を本文の平滑化後の接続と照合した。終辺から始辺への交換後の接続と内部の元の接続がそれぞれ対応しており、修正不要だった。
 
 ## 式変形の書き方の統一
 
@@ -63,8 +69,8 @@
 
 ## 前進の記録
 
+- 2026-11-13: 主経路の先頭の委譲外しは複数の論法を含むため、残る七つの主張を一件ずつの行へ割った。順序と担当は変えていない。
+- 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」の接続組み替えの回転差を一件済ませた。具体版で四つの回転数の有限場合分けと 4 の倍数という合同条件を直接組み、例外の台帳から一件を消した。本文と SageMath は不変。
 - 2026-11-13: 並列の表の先頭の行「頂点単純閉路の循環総回転数は切断線偶奇で決まる」を済ませ、行を消した。Lean 具体版 `KacWard/VertexSimpleCycleTurningBySeamParity.lean`、必要十分版 `NecSuf/KacWard/VertexSimpleCycleTurningBySeamParity.lean`、導出版 `VertexSimpleCycleTurningBySeamParityFromNecSuf.lean` を置き、本文 `claim_vertex_simple_cycle_turning_by_seam_parity` の `lean:` に登録した。本文・SageMath は不変。
 - 2026-11-13: 並列の表の先頭の行「周期単純路の循環総回転数は零」を済ませ、行を消した。Lean 具体版 `KacWard/NonzeroWindingSimpleCycleTurningZero.lean`、必要十分版 `NecSuf/KacWard/NonzeroWindingSimpleCycleTurningZero.lean`、導出版 `NonzeroWindingSimpleCycleTurningZeroFromNecSuf.lean` を置き、本文 `claim_nonzero_winding_simple_cycle_turning_zero` の `lean:` に登録した。本文・SageMath は不変。
 - 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」の循環総回転数の更新を一件済ませた。二点以外の有限和の一致と二点の取り出しを具体版で直接証明し、例外の台帳から一件を消した。本文と SageMath の主張は不変。
-- 2026-11-13: 並列の表の先頭の行「一側閉包の射影回転数が正負四であることを実際の閉歩道へ代入する」を済ませ、行を消した。Lean `KacWard/PlaneSimplePolygonCyclicTurningOfWalk.lean`（頂点数の分類・辺数の分割と、実際の閉歩道で正負四を示す `vertexSimpleWalk_cyclicTotalTurning_four`）を置き、`OneSidedClosureProjectionCyclicTurning.lean` の具体版を実際の閉歩道の前提だけから述べる形に替えた。導出版二件を必要十分版を呼ぶ形に直し、本文の二つの主張の `lean:` に登録した。本文・SageMath は不変。
-- 2026-11-13: 主経路の先頭「接触点分割・平滑化・横断数の具体版の委譲を外す」の平滑化後の閉歩道の接続を一件済ませた。`smoothing_split_closed_connections` は元の内部接続と交換後の二接続を直接使い、必要十分版を呼ばない。例外の台帳から一件を消した。本文と SageMath の主張は不変。
