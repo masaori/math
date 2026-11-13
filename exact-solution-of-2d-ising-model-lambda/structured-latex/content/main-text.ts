@@ -53831,7 +53831,7 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
                     displayMath(String.raw`\begin{aligned}
 \frac{1}{L^2}\cdot\iota\bigl(2L\,\log q+\log Z^{\mathrm{op}}_{L,L}(q)\bigr)
 &=\frac{1}{L^2}\cdot\bigl(\iota(2L\,\log q)+\iota(\log Z^{\mathrm{op}}_{L,L}(q))\bigr)
-&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&&(\because\ \iota\text{ の加法保存（}\blkref{claim_rational_log_order_group_embedding}\text{）})\\
 &=\frac{1}{L^2}\cdot\iota(2L\,\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
 &=\frac{1}{L^2}\cdot\bigl(2L\cdot\iota(\log q)\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{L,L}(q))
