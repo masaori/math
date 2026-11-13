@@ -77,6 +77,12 @@ chain_check([Rm[0, 0], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[0, 0], sum_li
     (a11 + a22) * ti + sub(a11, a22) * ti,
     ((a11 + a22) + sub(a11, a22)) * ti,
     (two * a11) * ti, a11], "R_11 の鎖")
+# R_12・R_21 の鎖の加法の単位元の 2 行: 右から足す 0_C を消す行（complex_numbers_form_a_field の z + 0_C = z）と、
+# 左から足す 0_C を消す行（complex_zero_plus_is_original の 0_C + z = z、z → κ_x 1_C）
+for kyv in (ky * neg(i), ky * i):
+    check(((zero + kx * one) + kyv) + zero == (zero + kx * one) + kyv, "根拠 加法の単位元 z + 0_C = z（R_12・R_21 の鎖）")
+    check(zero + kx * one == kx * one, "根拠 complex_zero_plus_is_original（z → κ_x 1_C。R_12・R_21 の鎖）")
+
 # R_12
 u = sub(a12, a21)
 chain_check([Rm[0, 1], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[0, 1], sum_line(0, 1), first_line(0, 1),
@@ -84,6 +90,7 @@ chain_check([Rm[0, 1], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[0, 1], sum_li
     ((k0 * zero + kx * sx[0, 1]) + ky * sy[0, 1]) + kz * sz[0, 1],
     ((k0 * zero + kx * one) + ky * neg(i)) + kz * zero,
     ((zero + kx * one) + ky * neg(i)) + zero,
+    (zero + kx * one) + ky * neg(i),
     kx * one + ky * neg(i), kx + ky * neg(i),
     (a12 + a21) / two + ((i * u) / two) * neg(i),
     (a12 + a21) * ti + ((i * u) * ti) * neg(i),
@@ -100,6 +107,7 @@ chain_check([Rm[1, 0], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[1, 0], sum_li
     ((k0 * zero + kx * sx[1, 0]) + ky * sy[1, 0]) + kz * sz[1, 0],
     ((k0 * zero + kx * one) + ky * i) + kz * zero,
     ((zero + kx * one) + ky * i) + zero,
+    (zero + kx * one) + ky * i,
     kx * one + ky * i, kx + ky * i,
     (a12 + a21) / two + ((i * u) / two) * i,
     (a12 + a21) * ti + ((i * u) * ti) * i,

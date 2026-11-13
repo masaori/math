@@ -1674,6 +1674,53 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_complex_zero_plus_is_original",
+    kind: "claim",
+    title: { text: "複素数に 0 を左から足しても変わらない" },
+    labels: ["complex_zero_plus_is_original"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " とする。和は ",
+        ref("definition_of_cc"),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`0_{\mathbb{C}} + z = z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (a, b)`),
+        "（",
+        math(String.raw`a, b \in \mathbb{R}`),
+        "）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{C}} + z
+&= (0, 0) + (a, b)
+&&\bigl(\because\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0) = (0,0)\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (0 + a,\ 0 + b)
+&&\bigl(\because\ \text{複素数の和の定義 }\blkref{definition_of_cc}\bigr)\\
+&= (a,\ b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 2 箇所へ適用}\bigr)\\
+&= z
+&&(\because\ z = (a, b))
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_generate_algebra の Step 1 の第 2 式と Step 3 の R_{12}・R_{21} の鎖が、" +
+          "「加法の単位元」で 0_C + z = z（左から足す形）を消していたが、complex_numbers_form_a_field が示すのは z + 0_C = z（右から足す形）だけで、左から足す形は加法の可換律を合わせないと出ない。" +
+          "complex_zero_times_is_zero・complex_times_zero_is_zero と同じく、定義から計算する主張として足した。Lean の具体版は無く、使う側は zero_add で閉じる（complex_zero_times_is_zero の zero_mul と同じ扱い）。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_finite_product_of_complex_numbers",
     kind: "definition",
     title: { text: "複素数の有限積" },

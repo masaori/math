@@ -12,14 +12,16 @@ PASS 第 2 式 σ^yσ^z 第 10 行 = 第 11 行
 PASS 第 2 式 σ^yσ^z 第 11 行 = 第 12 行
 PASS 第 2 式 σ^yσ^z 第 12 行 = 第 13 行
 PASS 第 2 式 σ^yσ^z 第 13 行 = 第 14 行
+PASS 第 2 式 σ^yσ^z 第 14 行 = 第 15 行
 PASS 第 2 式の 2 行目の根拠: mat_mult の成分の和
 PASS 第 2 式の 3 行目の根拠: complex_zero_times_is_zero (z → 1, 0, -1)
-PASS 第 2 式の 4 行目の根拠: 加法の単位元
-PASS 第 2 式の 5 行目の根拠: 積の可換律
-PASS 第 2 式の 6 行目の根拠: complex_zero_times_is_zero (z → -i)
-PASS 第 2 式の 7 行目の根拠: multiply_by_minus_one (z → -i)
-PASS 第 2 式の 8 行目の根拠: double_negation_in_cc (z → i)
-PASS 第 2 式の 9〜11 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元
+PASS 第 2 式の 4 行目の根拠: complex_zero_plus_is_original (z → (-i)·0, (-i)(-1)) の 0_C + z = z
+PASS 第 2 式の 5 行目の根拠: 加法の単位元 z + 0_C = z
+PASS 第 2 式の 6 行目の根拠: 積の可換律
+PASS 第 2 式の 7 行目の根拠: complex_zero_times_is_zero (z → -i)
+PASS 第 2 式の 8 行目の根拠: multiply_by_minus_one (z → -i)
+PASS 第 2 式の 9 行目の根拠: double_negation_in_cc (z → i)
+PASS 第 2 式の 10〜12 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元
 PASS 根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C
 PASS 第 3 式 σ^x 第 1 行 = 第 2 行
 PASS 第 3 式 σ^x 第 2 行 = 第 3 行
@@ -306,5 +308,5 @@ PASS 否定の対照: 第 3 式の係数を i にすると成り立たない
 PASS 否定の対照: (-i)(-1) を -i と読み違えると 5 行目以降が成り立たない
 PASS 否定の対照: 第 4 式の積の因子を別のサイトに置くと成り立たない
 PASS 否定の対照: 同じサイトの σ^y と σ^z は可換ではない
--- Z_Y_generate_algebra の Step 1 の鎖: 308/308 PASS
+-- Z_Y_generate_algebra の Step 1 の鎖: 310/310 PASS
 RESULT: PASS

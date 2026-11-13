@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "complex_numbers_form_a_field",
   "complex_times_negation_is_negation_of_product_in_cc",
   "complex_times_zero_is_zero",
+  "complex_zero_plus_is_original",
   "complex_zero_times_is_zero",
   "condition_of_commutativity_of_sqrt_and_product",
   "config_basis_vector_own_component",

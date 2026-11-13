@@ -260,7 +260,7 @@ theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
     -- 上で計算した σ^z σ^y
     _ = -(pauliZ * pauliY) := by rw [pauliZ_mul_pauliY_entries]
 
-/-- 人手 `Z_Y_generate_algebra` の Step 1 の第 2 式 `σ^yσ^z = iσ^x`。人手の鎖の 14 行と 1 段ずつ対応する。 -/
+/-- 人手 `Z_Y_generate_algebra` の Step 1 の第 2 式 `σ^yσ^z = iσ^x`。人手の鎖の 15 行と 1 段ずつ対応する。 -/
 theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
   calc
     -- `def_pauli_matrices` の σ^y, σ^z
@@ -273,9 +273,12 @@ theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
     -- `complex_zero_times_is_zero`（`z → 1, 0, 0, -1`）を 4 か所へ
     _ = !![0 + (-Complex.I) * 0, 0 + (-Complex.I) * (-1);
           Complex.I * 1 + 0, Complex.I * 0 + 0] := by simp only [zero_mul]
-    -- 加法の単位元を 4 か所へ
+    -- `complex_zero_plus_is_original`（`z → (-i)·0, (-i)(-1)`）を 2 か所へ（具体版は無く `zero_add`）
+    _ = !![(-Complex.I) * 0, (-Complex.I) * (-1); Complex.I * 1 + 0, Complex.I * 0 + 0] := by
+      rw [zero_add, zero_add]
+    -- 加法の単位元（`z + 0_ℂ = z`）を 2 か所へ
     _ = !![(-Complex.I) * 0, (-Complex.I) * (-1); Complex.I * 1, Complex.I * 0] := by
-      simp only [zero_add, add_zero]
+      rw [add_zero, add_zero]
     -- 積の可換律を 2 か所へ
     _ = !![0 * (-Complex.I), (-1) * (-Complex.I); Complex.I * 1, Complex.I * 0] := by
       rw [mul_comm (-Complex.I) 0, mul_comm (-Complex.I) (-1)]

@@ -1,7 +1,7 @@
 # 対象ラベル: Z_Y_generate_algebra
 # Step 1 の鎖を一行ずつ確かめる。
 # (1) 第 1 式 σ^xσ^x = I_{Mat(2,C)}（pauli_matrix_products を引く 1 行）。
-# (2) 第 2 式 σ^yσ^z = iσ^x の 14 行（mat_mult の和の形・complex_zero_times_is_zero・加法の単位元・積の可換律・
+# (2) 第 2 式 σ^yσ^z = iσ^x の 15 行（mat_mult の和の形・complex_zero_times_is_zero・complex_zero_plus_is_original・加法の単位元・積の可換律・
 #     multiply_by_minus_one・double_negation_in_cc・積の単位元・def_matrix_scalar_multiple・1 行目と最後の行の def_pauli_matrices）。
 # (3) 第 3 式 σ^x = (-i)(σ^yσ^z) の 4 行（scalar_multiple_by_one・negative_i_times_i_is_one_in_cc・
 #     scalar_multiple_is_associative・第 2 式）。negative_i_times_i_is_one_in_cc の鎖そのものはその主張の検算が確かめる。
@@ -61,7 +61,7 @@ def at_site(M, k, e):  # I⊠…⊠e(第 k 因子)⊠…⊠I
 # (1) 第 1 式
 check(sx * sx == I2, "第 1 式: σ^xσ^x = I_Mat(2,C)")
 
-# (2) 第 2 式の 14 行
+# (2) 第 2 式の 15 行
 neg_i = neg(i)
 lines = [
     sy * sz,
@@ -69,6 +69,7 @@ lines = [
     matrix(K0, [[zero * one + neg_i * zero, zero * zero + neg_i * m1],
                 [i * one + zero * zero, i * zero + zero * m1]]),
     matrix(K0, [[zero + neg_i * zero, zero + neg_i * m1], [i * one + zero, i * zero + zero]]),
+    matrix(K0, [[neg_i * zero, neg_i * m1], [i * one + zero, i * zero + zero]]),
     matrix(K0, [[neg_i * zero, neg_i * m1], [i * one, i * zero]]),
     matrix(K0, [[zero * neg_i, m1 * neg_i], [i * one, i * zero]]),
     matrix(K0, [[zero, m1 * neg_i], [i * one, i * zero]]),
@@ -87,13 +88,15 @@ check(all((A_ * B_)[r, c] == A_[r, 0] * B_[0, c] + A_[r, 1] * B_[1, c] for r in 
       "第 2 式の 2 行目の根拠: mat_mult の成分の和")
 check(zero * one == zero and zero * zero == zero and zero * m1 == zero,
       "第 2 式の 3 行目の根拠: complex_zero_times_is_zero (z → 1, 0, -1)")
-check(zero + neg_i * zero == neg_i * zero and i * one + zero == i * one, "第 2 式の 4 行目の根拠: 加法の単位元")
-check(neg_i * zero == zero * neg_i and neg_i * m1 == m1 * neg_i, "第 2 式の 5 行目の根拠: 積の可換律")
-check(zero * neg_i == zero, "第 2 式の 6 行目の根拠: complex_zero_times_is_zero (z → -i)")
-check(m1 * neg_i == neg(neg_i), "第 2 式の 7 行目の根拠: multiply_by_minus_one (z → -i)")
-check(neg(neg_i) == i, "第 2 式の 8 行目の根拠: double_negation_in_cc (z → i)")
+check(zero + neg_i * zero == neg_i * zero and zero + neg_i * m1 == neg_i * m1,
+      "第 2 式の 4 行目の根拠: complex_zero_plus_is_original (z → (-i)·0, (-i)(-1)) の 0_C + z = z")
+check(i * one + zero == i * one and i * zero + zero == i * zero, "第 2 式の 5 行目の根拠: 加法の単位元 z + 0_C = z")
+check(neg_i * zero == zero * neg_i and neg_i * m1 == m1 * neg_i, "第 2 式の 6 行目の根拠: 積の可換律")
+check(zero * neg_i == zero, "第 2 式の 7 行目の根拠: complex_zero_times_is_zero (z → -i)")
+check(m1 * neg_i == neg(neg_i), "第 2 式の 8 行目の根拠: multiply_by_minus_one (z → -i)")
+check(neg(neg_i) == i, "第 2 式の 9 行目の根拠: double_negation_in_cc (z → i)")
 check(zero * i == zero and i * zero == zero * i and i * one == i,
-      "第 2 式の 9〜11 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元")
+      "第 2 式の 10〜12 行目の根拠: 0_C z = 0_C、積の可換律、積の単位元")
 
 # (3) 第 3 式の 4 行
 check(neg_i * i == one, "根拠 negative_i_times_i_is_one_in_cc: (-i)i = 1_C")
@@ -154,7 +157,7 @@ for M in (2, 3):
 # 否定の対照（人手の行の書き間違いを入れると落ちること）
 check(sy * sz != neg_i * sx, "否定の対照: 第 2 式の係数を -i にすると成り立たない")
 check(sx != i * (sy * sz), "否定の対照: 第 3 式の係数を i にすると成り立たない")
-check(neg_i * m1 != neg_i, "否定の対照: (-i)(-1) を -i と読み違えると 5 行目以降が成り立たない")
+check(neg_i * m1 != neg_i, "否定の対照: (-i)(-1) を -i と読み違えると 6 行目以降が成り立たない")
 check(sigma_site_entrywise(2, 0, "y") * sigma_site_entrywise(2, 0, "z") != at_site(2, 1, sy * sz),
       "否定の対照: 第 4 式の積の因子を別のサイトに置くと成り立たない")
 check(sigma_site_entrywise(2, 0, "y") * sigma_site_entrywise(2, 0, "z")

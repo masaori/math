@@ -439,8 +439,10 @@ theorem pauliDecompRhs_apply_01 (a b c d : ℂ) : pauliDecompRhs a b c d 0 1 = b
           rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `def_pauli_matrices` の `σ^x, σ^y, σ^z` の `(1,2)` 成分
     _ = ((0 + kappaX b c * 1) + kappaY b c * (-Complex.I)) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
+    _ = (0 + kappaX b c * 1) + kappaY b c * (-Complex.I) := by
+          rw [add_zero]                                                 -- 加法の単位元
     _ = kappaX b c * 1 + kappaY b c * (-Complex.I) := by
-          rw [zero_add, add_zero]                                       -- 加法の単位元を 2 か所へ
+          rw [zero_add]                                                 -- `complex_zero_plus_is_original`（`z → κ_x 1_ℂ`。具体版は無く `zero_add`）
     _ = kappaX b c + kappaY b c * (-Complex.I) := by rw [mul_one]             -- 積の単位元
     _ = (b + c) / 2 + ((Complex.I * (b - c)) / 2) * (-Complex.I) := rfl        -- `κ_x`・`κ_y` の定義
     _ = (b + c) * 2⁻¹ + ((Complex.I * (b - c)) * 2⁻¹) * (-Complex.I) := by
@@ -481,8 +483,10 @@ theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c
           rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `def_pauli_matrices` の `σ^x, σ^y, σ^z` の `(2,1)` 成分
     _ = ((0 + kappaX b c * 1) + kappaY b c * Complex.I) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
+    _ = (0 + kappaX b c * 1) + kappaY b c * Complex.I := by
+          rw [add_zero]                                                 -- 加法の単位元
     _ = kappaX b c * 1 + kappaY b c * Complex.I := by
-          rw [zero_add, add_zero]                                       -- 加法の単位元を 2 か所へ
+          rw [zero_add]                                                 -- `complex_zero_plus_is_original`（`z → κ_x 1_ℂ`。具体版は無く `zero_add`）
     _ = kappaX b c + kappaY b c * Complex.I := by rw [mul_one]             -- 積の単位元
     _ = (b + c) / 2 + ((Complex.I * (b - c)) / 2) * Complex.I := rfl        -- `κ_x`・`κ_y` の定義
     _ = (b + c) * 2⁻¹ + ((Complex.I * (b - c)) * 2⁻¹) * Complex.I := by

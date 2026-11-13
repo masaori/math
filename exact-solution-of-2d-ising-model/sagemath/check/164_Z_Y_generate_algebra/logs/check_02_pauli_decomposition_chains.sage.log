@@ -31,6 +31,10 @@ PASS R_11 の鎖 第 11 行 = 第 12 行
 PASS R_11 の鎖 第 12 行 = 第 13 行
 PASS R_11 の鎖 第 13 行 = 第 14 行
 PASS R_11 の鎖 第 14 行 = 第 15 行
+PASS 根拠 加法の単位元 z + 0_C = z（R_12・R_21 の鎖）
+PASS 根拠 complex_zero_plus_is_original（z → κ_x 1_C。R_12・R_21 の鎖）
+PASS 根拠 加法の単位元 z + 0_C = z（R_12・R_21 の鎖）
+PASS 根拠 complex_zero_plus_is_original（z → κ_x 1_C。R_12・R_21 の鎖）
 PASS R_12 の鎖 第 1 行 = 第 2 行
 PASS R_12 の鎖 第 2 行 = 第 3 行
 PASS R_12 の鎖 第 3 行 = 第 4 行
@@ -50,6 +54,7 @@ PASS R_12 の鎖 第 16 行 = 第 17 行
 PASS R_12 の鎖 第 17 行 = 第 18 行
 PASS R_12 の鎖 第 18 行 = 第 19 行
 PASS R_12 の鎖 第 19 行 = 第 20 行
+PASS R_12 の鎖 第 20 行 = 第 21 行
 PASS R_21 の鎖 第 1 行 = 第 2 行
 PASS R_21 の鎖 第 2 行 = 第 3 行
 PASS R_21 の鎖 第 3 行 = 第 4 行
@@ -70,6 +75,7 @@ PASS R_21 の鎖 第 17 行 = 第 18 行
 PASS R_21 の鎖 第 18 行 = 第 19 行
 PASS R_21 の鎖 第 19 行 = 第 20 行
 PASS R_21 の鎖 第 20 行 = 第 21 行
+PASS R_21 の鎖 第 21 行 = 第 22 行
 PASS R_22 の鎖 第 1 行 = 第 2 行
 PASS R_22 の鎖 第 2 行 = 第 3 行
 PASS R_22 の鎖 第 3 行 = 第 4 行
@@ -92,5 +98,5 @@ PASS R = A（4 成分が等しい）
 PASS 否定の対照: κ_0 の /2_C を落とすと A にならない
 PASS 否定の対照: κ_y の i を落とすと A にならない
 PASS 否定の対照: κ_z の符号を逆にすると A にならない
--- Z_Y_generate_algebra の Step 3 の展開の鎖: 94/94 PASS
+-- Z_Y_generate_algebra の Step 3 の展開の鎖: 100/100 PASS
 RESULT: PASS

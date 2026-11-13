@@ -482,8 +482,10 @@ t
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
 &= \begin{pmatrix}0+(-i)\cdot0&0+(-i)(-1)\\i\cdot1+0&i\cdot0+0\end{pmatrix}
 &&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 1,\ 0,\ 0,\ -1)\ \text{を 4 か所へ}\bigr)\\
+&= \begin{pmatrix}(-i)\cdot0&(-i)(-1)\\i\cdot1+0&i\cdot0+0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-i)\cdot0,\ (-i)(-1))\ \text{を 2 か所へ}\bigr)\\
 &= \begin{pmatrix}(-i)\cdot0&(-i)(-1)\\i\cdot1&i\cdot0\end{pmatrix}
-&&(\because\ \text{加法の単位元を 4 か所へ})\\
+&&(\because\ \text{加法の単位元を 2 か所へ})\\
 &= \begin{pmatrix}0\cdot(-i)&(-1)(-i)\\i\cdot1&i\cdot0\end{pmatrix}
 &&(\because\ \text{積の可換律を 2 か所へ})\\
 &= \begin{pmatrix}0&(-1)(-i)\\i\cdot1&i\cdot0\end{pmatrix}
@@ -1018,8 +1020,10 @@ R_{12}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= (0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y(-i)
+&&(\because\ \text{加法の単位元})\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y(-i)
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to \kappa_x 1_{\mathbb{C}})\bigr)\\
 &= \kappa_x + \kappa_y(-i)
 &&(\because\ \text{積の単位元})\\
 &= \frac{a_{12} + a_{21}}{2_{\mathbb{C}}} + \frac{i(a_{12} - a_{21})}{2_{\mathbb{C}}}(-i)
@@ -1059,8 +1063,10 @@ R_{21}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= (0_{\mathbb{C}} + \kappa_x 1_{\mathbb{C}}) + \kappa_y\,i
+&&(\because\ \text{加法の単位元})\\
 &= \kappa_x 1_{\mathbb{C}} + \kappa_y\,i
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to \kappa_x 1_{\mathbb{C}})\bigr)\\
 &= \kappa_x + \kappa_y\,i
 &&(\because\ \text{積の単位元})\\
 &= \frac{a_{12} + a_{21}}{2_{\mathbb{C}}} + \frac{i(a_{12} - a_{21})}{2_{\mathbb{C}}}\,i
@@ -1312,6 +1318,7 @@ Q_{s+1}
       notes: [
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: σ^x, σ^y, σ^z の成分を引く出典を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた（証明の冒頭の段落、Step 1 の第 2 式の鎖の 1 行目と最後の行、Step 3 の R の成分の段落と 4 成分の鎖の Pauli 行列の成分の行）。Step 1 の第 1 式 σ^xσ^x = I を引く段落と行は pauli_matrix_products のまま。式は不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 1 の準備 (f)・(g) と Step 3 の準備 (a)〜(e)（ラベルの無い式）を外し、それらを引いていた行を計算公式の章の主張 i_times_i_is_minus_one_in_cc・negative_i_times_i_is_one_in_cc・twice_times_inverse_of_two_is_original_in_cc・sum_plus_difference_is_twice_first_in_cc・sum_minus_difference_is_twice_second_in_cc の参照に替えた（(b)・(c) は (d)・(e) の中でしか使われていなかったので、残る箇所は無い）。体の公理の列挙から、準備でしか使っていなかった加法の可換律・結合律を外した。式の両端と中身は不変。",
+        "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 1 の第 2 式と Step 3 の R_{12}・R_{21} の鎖が「加法の単位元」で 0_C + z = z（左から足す形）も消していた。complex_numbers_form_a_field が示すのは z + 0_C = z だけなので、左から足す形を新しく足した complex_zero_plus_is_original の参照にし、右から足す形と行を分けた（第 2 式は 1 行、R_{12}・R_{21} はそれぞれ 1 行増えた）。式の両端は不変。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 後半の E_1⋯E_M の左から順に掛けた積を P_1 := E_1・P_{s+1} := P_sE_{s+1} と置いていたが、Step 2 の P_0 := I・P_r := P_{r-1}σ_r^x（σ^x の接頭積）と同じ文字で別の量を表していた。Step 3 後半の側を Q_1 := E_1・Q_{s+1} := Q_sE_{s+1} に改名した（主張と論法は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 2 の P_{m-1}P_{m-1} = I は「異サイトの可換性」の 1 行で因子を並べ替えており、途中が書かれていなかった。Step 2 の冒頭に P_0 := I・P_r := P_{r-1}σ_r^x を置き、積の表示 P_r = ∏_{j=1}^{r} σ_j^x（def_finite_product_of_matrices）、可換の式 σ_k^xP_r = P_rσ_k^x（r < k）と二乗の式 P_rP_r = I を r の帰納法の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・distinct_site_pauli_matrices_commute・Step 1 の σ_k^xσ_k^x = I）で示した。P_{m-1}Z_m・P_{m-1}Y_m の鎖に結合則の行を足し、名前だけの「I は積の単位元」を identity_matrix_is_left_unit_of_mat_mult の参照に替え、Z_m = P_{m-1}σ_m^z・Y_m = P_{m-1}σ_m^y を def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices の積を def_finite_product_of_matrices で読む 4 行の鎖にした。使われていなかった「P_{m-1} は可逆で P_{m-1}^{-1} = P_{m-1}」の文を消した（主張は不変）。",
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: Step 3 は 𝓑 = {I, σ^x, σ^y, σ^z} のクロネッカー積の族が Mat(2^M,C) を張ることだけを使うのに、「dim Mat(2,C) = 4 = #𝓑 より基底」（根拠が書かれていなかった）と tensor_basis (2)（張る族の元数が次元に等しければ基底であることに依り、その前提の「張る有限族の元数は次元以上」は本文で証明されていない）を経由していた。𝓑 が張ることを示したところで止め、新しく足した kronecker_family_of_spanning_family_spans で 𝓑^{⊠M} が張ることを得て、結びの「基底であるから」を「張るから」にした。主張は不変。",
