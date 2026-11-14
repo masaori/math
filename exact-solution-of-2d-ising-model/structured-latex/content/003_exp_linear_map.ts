@@ -696,7 +696,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
 &= 0 \cdot 0
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)
 \end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -1030,6 +1030,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "根拠 8 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の 1 行目「√1（行列ノルムの定義と E^{(k,l)} の成分の定義）」（ノルムの定義・成分の値・|0_K| = 0 と |1_K| = 1（K = ℝ・ℂ の場合分け）・0 の項を二重の和から落とすことを 1 行で使っていた）を、|0_K|・|1_K| の準備（K = ℂ の |0_C| は abs_basic_properties (3)、|1_C| は 3 行の鎖）、成分の絶対値の二乗の 2 本の鎖、行ごとの和の 2 本の鎖、ノルムの 5 行の鎖に割った（trace_power_upper_bound の【e_k のノルム】と同じ書き方。値と主張は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の最後の行の根拠「ℝ_{≥0} における 1 の非負平方根」を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 4 の成分の絶対値の二乗の鎖（(i,j) ≠ (k,l) の側）の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
       ],
     },
   },
