@@ -6473,7 +6473,7 @@ A - B
 &= (0\cdot x_j)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_real_identity_matrix}\ (s \to i,\ t \to j,\ i \neq j)\bigr)\\
 &= (0)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot a = 0\ (a \to x_j)\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to x_j)\bigr)\\
 &= 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = (0)_{\mathbb{C}}\bigr)
 \end{aligned}`),
@@ -6524,6 +6524,7 @@ r_i
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。rayleigh_bounds_operator_norm の k = 0 の段 ‖(W_ℝ)^0x‖ = ‖Ix‖ = ‖x‖ が、係数が ℂ の行列の積の左単位 identity_matrix_is_left_unit_of_mat_mult を実数の単位行列と実数のベクトルへ当てていたので、def_real_identity_matrix と def_real_matrix_vector_product について足した。実数の有限和のうち一つの項のほかが 0 のものを述べるブロックが本文に無いので、和を ℂ へ包含して finite_sum_with_single_nonzero_term を当て、単射性で戻す（n = 1 のときも空の和を使わない）。数値検証: sagemath/check/real_identity_matrix_is_left_unit_of_real_matrix_vector_product/。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: j ≠ i の鎖の 3 行目 0·x_j = 0 の名前だけの根拠「ℝ で 0·a = 0（a → x_j）」を real_zero_times_is_zero（x → x_j）の参照に替えた。式は不変。",
       ],
     },
   },

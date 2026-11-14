@@ -26,7 +26,7 @@
   乗法の交換則・結合則は `mul_comm`・`mul_assoc` である。
 - 左単位の 5 行目の `finite_sum_with_single_nonzero_term` は具体版が無いので、既存の慣行どおり mathlib の `Finset.sum_eq_single` を引く
   （仮定の「`j ≠ i` のとき `0_ℂ`」は `hoff` で人手どおりに示す）。3 行目の `real_inclusion_preserves_finite_sum` は
-  具体版 `real_inclusion_of_finite_sum_fintype`（`i ∈ ι` なので添字の型は空でない）、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`ℝ` の `0·a = 0`・`1·a = a` は `zero_mul`・`one_mul` である。
+  具体版 `real_inclusion_of_finite_sum_fintype`（`i ∈ ι` なので添字の型は空でない）、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`j ≠ i` の 3 行目の `0·x_j = 0` は具体版 `real_zero_times_is_zero` を引き、`ℝ` の `1·a = a` は `one_mul` である。
 
 必要十分版はまだ置いていない。具体版は人手と同じく ℝ の乗法の交換則（結合則の 3 行目・5 行目）を使うが、
 結合則そのものは交換則なしで成り立つはずで、それを必要十分版で確かめるのは残した件である
@@ -35,6 +35,7 @@
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Mathlib.Data.Complex.BigOperators
 import Mathlib.Data.Matrix.Mul
 
@@ -82,7 +83,7 @@ theorem real_identity_matrix_is_left_unit_of_real_matrix_vector_product
     calc ((r j : ℝ) : ℂ)
         = (((1 : Matrix ι ι ℝ) i j * x j : ℝ) : ℂ) := rfl                    -- `r_j := I_ijx_j`
       _ = ((0 * x j : ℝ) : ℂ) := by rw [Matrix.one_apply_ne (Ne.symm hj)]     -- `def_real_identity_matrix`（`i ≠ j`）
-      _ = ((0 : ℝ) : ℂ) := by rw [zero_mul]                                   -- ℝ で `0·a = 0`
+      _ = ((0 : ℝ) : ℂ) := by rw [real_zero_times_is_zero]                    -- `real_zero_times_is_zero`（`x → x_j`）
       _ = 0 := Complex.ofReal_zero                                            -- 略記 `0_ℂ = (0)_ℂ`
   have hon : r i = x i :=
     calc r i
