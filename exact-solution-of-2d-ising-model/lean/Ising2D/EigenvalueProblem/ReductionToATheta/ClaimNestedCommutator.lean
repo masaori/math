@@ -24,8 +24,8 @@
 | 人手 | Lean（(h1.z) の場合。ほかの 3 式も同じ並び） |
 | --- | --- |
 | 基底段階（`n = 0`） | `nesting_H1Plus_checkZ_even` の `k = 0` の場合の `calc` |
-| 帰納段階 1（`n` 偶数 → `n+1` 奇数） | `nesting_H1Plus_checkZ_step_even_to_odd` の `calc`（(h1.z)・(h1.y) は人手の行と 1 段ずつ。(h2.z)・(h2.y) は係数の並べ替えをまだ `ring` の 1 段で閉じている） |
-| 帰納段階 2（`n` 奇数 → `n+1` 偶数） | `nesting_H1Plus_checkZ_step_odd_to_even` の `calc`（(h1.z)・(h1.y) は人手の行と 1 段ずつ。(h2.z)・(h2.y) は係数の並べ替えをまだ `ring` の 1 段で閉じている。最後の `(n-1)/2+1 = (n+1)/2` は `k` で書くと `k+1` そのもの） |
+| 帰納段階 1（`n` 偶数 → `n+1` 奇数） | `nesting_H1Plus_checkZ_step_even_to_odd` の `calc`（(h1.z)・(h1.y)・(h2.z) は人手の行と 1 段ずつ。(h2.y) は係数の並べ替えをまだ `ring` の 1 段で閉じている） |
+| 帰納段階 2（`n` 奇数 → `n+1` 偶数） | `nesting_H1Plus_checkZ_step_odd_to_even` の `calc`（(h1.z)・(h1.y)・(h2.z) は人手の行と 1 段ずつ。(h2.y) は係数の並べ替えをまだ `ring` の 1 段で閉じている。最後の `(n-1)/2+1 = (n+1)/2` は `k` で書くと `k+1` そのもの） |
 
 偶数側の定理は `k` についての帰納法で、`k` から `k+1` へは帰納段階 1 と 2 を続けて当てる。
 奇数側の定理は偶数側に帰納段階 1 を当てる。
@@ -382,12 +382,36 @@ theorem nesting_H2_checkZ_step_even_to_odd (K2star : ℂ) (μ : ℤ) (k : ℕ)
     -- (C)
     _ = (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • ((-2 : ℂ) • checkY M μ) := by
         rw [lie_H2_checkZ μ]
-    -- スカラー倍の交換と結合。`K_2^*(-2) = (-1)(2K_2^*)`
-    _ = ((-1 : ℂ) ^ k * (-1) * ((2 * K2star) ^ (2 * k) * (2 * K2star))) • checkY M μ := by
-        rw [smul_smul]
-        congr 1
-        ring
-    -- 冪の指数法則を `(-1)` と `2K_2^*` の両方へ適用
+    -- `scalar_multiple_is_associative`
+    _ = ((K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) * (-2 : ℂ)) • checkY M μ :=
+        smul_smul _ _ _
+    -- 以下 8 段は人手の 8 行と 1 段ずつ対応する（積の結合律・可換律は `complex_numbers_form_a_field`）
+    -- `multiply_by_minus_one`（`z → 2`）
+    _ = ((K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) * ((-1 : ℂ) * 2)) • checkY M μ := by
+        rw [neg_one_mul (2 : ℂ)]
+    -- 積の可換律
+    _ = (((-1 : ℂ) * 2) * (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)))) • checkY M μ := by
+        rw [mul_comm (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) ((-1 : ℂ) * 2)]
+    -- 積の結合律
+    _ = ((-1 : ℂ) * (2 * (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))))) • checkY M μ := by
+        rw [mul_assoc (-1 : ℂ) 2 (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)))]
+    -- 積の結合律を右辺から左辺へ
+    _ = ((-1 : ℂ) * ((2 * K2star) * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)))) • checkY M μ := by
+        rw [← mul_assoc 2 K2star ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))]
+    -- 積の可換律
+    _ = ((-1 : ℂ) * (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) * (2 * K2star))) • checkY M μ := by
+        rw [mul_comm (2 * K2star) ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))]
+    -- 積の結合律
+    _ = ((-1 : ℂ) * ((-1 : ℂ) ^ k * ((2 * K2star) ^ (2 * k) * (2 * K2star)))) • checkY M μ := by
+        rw [mul_assoc ((-1 : ℂ) ^ k) ((2 * K2star) ^ (2 * k)) (2 * K2star)]
+    -- 積の結合律を右辺から左辺へ
+    _ = (((-1 : ℂ) * (-1 : ℂ) ^ k) * ((2 * K2star) ^ (2 * k) * (2 * K2star))) • checkY M μ := by
+        rw [← mul_assoc (-1 : ℂ) ((-1 : ℂ) ^ k) ((2 * K2star) ^ (2 * k) * (2 * K2star))]
+    -- 積の可換律
+    _ = (((-1 : ℂ) ^ k * (-1 : ℂ)) * ((2 * K2star) ^ (2 * k) * (2 * K2star))) • checkY M μ := by
+        rw [mul_comm (-1 : ℂ) ((-1 : ℂ) ^ k)]
+    -- 冪の約束 `x^{m+1} := x^m x` を `-1` と `2(K_2^*)_ℂ` の二か所へ（`scalar_exp_is_limit_of_partial_sums`）。
+    -- 続く人手の行 `n/2+1 = ((n+1)+1)/2` は、`n = 2k` と書くと両辺とも `k+1` なので Lean に段は無い
     _ = ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
         rw [← pow_succ, ← pow_succ]
 
@@ -408,12 +432,23 @@ theorem nesting_H2_checkZ_step_odd_to_even (K2star : ℂ) (μ : ℤ) (k : ℕ)
     -- (D)
     _ = (K2star * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))) • ((2 : ℂ) • checkZ M μ) := by
         rw [lie_H2_checkY μ]
-    -- スカラー倍の交換と結合
+    -- `scalar_multiple_is_associative`
+    _ = ((K2star * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))) * (2 : ℂ)) • checkZ M μ :=
+        smul_smul _ _ _
+    -- 以下 4 段は人手の 4 行と 1 段ずつ対応する（積の結合律・可換律は `complex_numbers_form_a_field`）
+    -- 積の可換律
+    _ = (2 * (K2star * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)))) • checkZ M μ := by
+        rw [mul_comm (K2star * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))) 2]
+    -- 積の結合律を右辺から左辺へ
+    _ = ((2 * K2star) * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))) • checkZ M μ := by
+        rw [← mul_assoc 2 K2star ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))]
+    -- 積の可換律
+    _ = (((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) * (2 * K2star)) • checkZ M μ := by
+        rw [mul_comm (2 * K2star) ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))]
+    -- 積の結合律
     _ = ((-1 : ℂ) ^ (k + 1) * ((2 * K2star) ^ (2 * k + 1) * (2 * K2star))) • checkZ M μ := by
-        rw [smul_smul]
-        congr 1
-        ring
-    -- 冪の指数法則
+        rw [mul_assoc ((-1 : ℂ) ^ (k + 1)) ((2 * K2star) ^ (2 * k + 1)) (2 * K2star)]
+    -- 冪の約束 `x^{m+1} := x^m x`（`scalar_exp_is_limit_of_partial_sums`）。`(2K_2^*)^{n+1}` の指数 `n+1` は `n = 2k+1` で `2(k+1)`
     _ = ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * (k + 1))) • checkZ M μ := by
         rw [← pow_succ, show 2 * k + 1 + 1 = 2 * (k + 1) by ring]
 
