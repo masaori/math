@@ -3,8 +3,8 @@
 ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版・導出版を置かない）。
 
   本文のラベル                                         このファイル
-  def_numbering_of_pairs_of_subsets                    pairCount（N_M := (2^M)^2）・one_le_pairCount（N_M ≥ 1）・
-                                                       pairNumbering（p_M）
+  def_numbering_of_pairs_of_subsets                    pairCount（N_M := (2^M)^2）・pairNumbering（p_M）
+  claim_number_of_pairs_of_subsets_is_at_least_one     one_le_pairCount（N_M ≥ 1）
   claim_numbering_of_pairs_of_subsets_is_numbering     pairNumbering_isNumbering・isFiniteSet_powerSetPairs
 
 本文の P_M × P_M（P_M の二つの元の順序対の全体）は Lean の積の型 `PowerSet M × PowerSet M` で表し、
@@ -25,7 +25,7 @@ def idxTwoSecond : Idx 2 := ⟨2, by omega, le_refl 2⟩
 /-- 本文 `def_numbering_of_pairs_of_subsets`：N_M := (2^M)^2（`def_power_of_nonnegative_integer` の冪で n := 2^M、k := 2）。 -/
 def pairCount (M : ℕ) : ℕ := natPower (twoPower M) 2
 
-/-- 本文 `def_numbering_of_pairs_of_subsets`：2^M ≥ 1 なので N_M = 2^M · (2^M · 1) ≥ 1。 -/
+/-- 本文 `claim_number_of_pairs_of_subsets_is_at_least_one`：2^M ≥ 1 なので N_M = 2^M · (2^M · 1) ≥ 1。 -/
 theorem one_le_pairCount (M : ℕ) : 1 ≤ pairCount M := by
   have h := one_le_twoPower M
   show 1 ≤ twoPower M * (twoPower M * 1)

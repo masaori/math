@@ -2260,13 +2260,48 @@ t\in e_{M-1}(k-h)
         " の元（",
         math(String.raw`\mathcal{P}_M`),
         " の二つの元の順序対）として一つに決まる。",
-        math(String.raw`2^M\ge 1`),
-        " なので ",
-        math(String.raw`N_M=2^M\cdot(2^M\cdot 1)\ge 1`),
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_number_of_pairs_of_subsets_is_at_least_one",
+    kind: "claim",
+    title: { text: "部分集合の組全体の番号付けの長さは 1 以上である" },
+    labels: ["claim_number_of_pairs_of_subsets_is_at_least_one"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`),
+        " とし、",
+        math(String.raw`N_M`),
+        " を ",
+        ref("def_numbering_of_pairs_of_subsets"),
+        " の整数とする。このとき ",
+        math(String.raw`N_M\ge 1`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`2^M\in\mathbb{Z}_{\ge 1}`),
         " である（",
-        ref("def_power_of_nonnegative_integer"),
+        ref("def_binary_numbering_of_power_set"),
         "）。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+N_M
+&=(2^M)^2
+&&\left(\because\ \blkref{def_numbering_of_pairs_of_subsets}\right)\\
+&=2^M\cdot(2^M)^1
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\ \text{で}\ k:=2\right)\\
+&=2^M\cdot\bigl(2^M\cdot(2^M)^0\bigr)
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\ \text{で}\ k:=1\right)\\
+&=2^M\cdot(2^M\cdot 1)
+&&\left(\because\ \blkref{def_power_of_nonnegative_integer}\ \text{で}\ k:=0\right)\\
+&=2^M\cdot 2^M
+&&\left(\because\ 1\ \text{は整数の乗法の単位元}\right)\\
+&\ge 1
+&&\left(\because\ 2^M\ge 1\ \text{で、1 以上の二つの整数の積は 1 以上}\right).
+\end{aligned}`),
     ],
   },
   {

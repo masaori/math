@@ -25,7 +25,31 @@ def sqrt_by_proof(z):
         v = b / (2 * u)
     assert u * u - v * v == a and 2 * u * v == b            # (★)
     s = K(u) + I_ * K(v)
-    assert s * s == z
+    A_, B_ = K(u), K(v)
+    # 本文の s·s の式変形の各行（乗法・加法の法則を一つずつ当てた形）を独立に計算して隣と比べる
+    rows = [s * s,
+            (A_ + I_ * B_) * (A_ + I_ * B_),
+            A_ * (A_ + I_ * B_) + (I_ * B_) * (A_ + I_ * B_),
+            (A_ * A_ + A_ * (I_ * B_)) + ((I_ * B_) * A_ + (I_ * B_) * (I_ * B_)),
+            (A_ * A_ + (A_ * I_) * B_) + (I_ * (B_ * A_) + ((I_ * B_) * I_) * B_),
+            (A_ * A_ + (I_ * A_) * B_) + (I_ * (B_ * A_) + (I_ * (I_ * B_)) * B_),
+            (A_ * A_ + I_ * (A_ * B_)) + (I_ * (B_ * A_) + ((I_ * I_) * B_) * B_),
+            (A_ * A_ + I_ * (A_ * B_)) + (I_ * (B_ * A_) + (I_ * I_) * (B_ * B_)),
+            (A_ * A_ + I_ * (A_ * B_)) + (I_ * (B_ * A_) + (-1) * (B_ * B_)),
+            (A_ * A_ + I_ * (A_ * B_)) + (I_ * (B_ * A_) + (-(B_ * B_))),
+            A_ * A_ + (I_ * (A_ * B_) + (I_ * (B_ * A_) + (-(B_ * B_)))),
+            A_ * A_ + ((I_ * (A_ * B_) + I_ * (B_ * A_)) + (-(B_ * B_))),
+            A_ * A_ + ((-(B_ * B_)) + (I_ * (A_ * B_) + I_ * (B_ * A_))),
+            (A_ * A_ + (-(B_ * B_))) + (I_ * (A_ * B_) + I_ * (B_ * A_)),
+            (A_ * A_ + (-(B_ * B_))) + I_ * (A_ * B_ + B_ * A_),
+            (K(u * u) + (-K(v * v))) + I_ * (K(u * v) + K(v * u)),
+            (K(u * u) + K(-(v * v))) + I_ * (K(u * v) + K(v * u)),
+            K(u * u + (-(v * v))) + I_ * K(u * v + v * u),
+            K(u * u - v * v) + I_ * K(u * v + v * u),
+            K(u * u - v * v) + I_ * K(2 * u * v),
+            K(a) + I_ * K(b),
+            z]
+    assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
     return s
 
 sq_cases = [QQ(4), QQ(0), QQ(-9), QQ(2), QQ(-3), K(3 + 4 * I), K(-5 - 12 * I), K(1 / 2 - 7 / 3 * I), K(-2 * I), K(-1 + I)]
@@ -69,9 +93,44 @@ def power_set(M):
 def N_(i, T):
     return len([t for t in T if t < i])
 
-stats = {"cases": 0, "neg_u": 0, "neg_h": 0}
+stats = {"cases": 0, "neg_u": 0, "neg_h": 0, "neg_psi": 0}
+import random as _pyrandom
+_local_rng = _pyrandom.Random(int(20261114))
+def rnd_q():
+    # 一行ずつの検算で使う有理数。大域の乱数の状態を消費しないので、乱数の例の行列は前の版の検算と同じになる
+    return QQ(_local_rng.randint(int(-5), int(5))) / QQ(_local_rng.randint(int(1), int(3)))
+
+def ordered_matrix_product(mats, Id):
+    X = Id
+    for Y_ in mats:
+        X = X * Y_
+    return X
+
+def Psi_evaluated(F, P, adag, ann, Id):
+    # def_homomorphism_from_matrix_algebra_to_clifford_algebra：Ψ(F)=Σ_{S,T} F_{S,T} a†_S P a_T を、
+    # 生成元 a†_i・a_i を行列 adag[i]・ann[i] に置き換えて評価する（a†_S は小さい順、a_T は大きい順の積、
+    # P=a_1a†_1⋯a_Ma†_M）。ℂ-代数の準同型は生成元の像で決まるので、これが像 Θ(Ψ(F)) である。
+    M_ = len(adag)
+    Pm = ordered_matrix_product([ann[i] * adag[i] for i in range(1, M_ + 1)], Id)
+    tot = 0 * Id
+    for si, S in enumerate(P):
+        for ti, T in enumerate(P):
+            if F[si, ti] != 0:
+                aS = ordered_matrix_product([adag[i] for i in sorted(S)], Id)
+                aT = ordered_matrix_product([ann[i] for i in sorted(T, reverse=True)], Id)
+                tot = tot + F[si, ti] * (aS * Pm * aT)
+    return tot
+
 for M in [1, 2, 3]:
     n = 2 * M
+    PK = power_set(M); nPK = len(PK)
+    cK = {i: matrix(QQ, nPK, nPK, lambda s_, t_: (-1) ** N_(i, PK[t_]) if (i not in PK[t_] and PK[s_] == PK[t_] | {i}) else 0) for i in range(1, M + 1)}
+    ctK = {i: cK[i].transpose() for i in cK}
+    IdK = identity_matrix(QQ, nPK)
+    cKbar = {i: cK[i].change_ring(K) for i in cK}; ctKbar = {i: ctK[i].change_ring(K) for i in ctK}; IdKbar = IdK.change_ring(K)
+    phiKbar = lambda y: sum((y[k] * cKbar[k + 1] for k in range(M)), 0 * IdKbar) + sum((y[M + k] * ctKbar[k + 1] for k in range(M)), 0 * IdKbar)
+    toQQ = lambda y: vector(QQ, [QQ(t) for t in y])          # 成分が有理数の代数的数を有理数へ（成分が有理数でなければ失敗する）
+    phiK = lambda y: sum((y[k] * cK[k + 1] for k in range(M)), 0 * IdK) + sum((y[M + k] * ctK[k + 1] for k in range(M)), 0 * IdK)
     examples = [diagonal_matrix(QQ, [1] * n), diagonal_matrix(QQ, [-1, 2] * M)]
     J = block_matrix(QQ, [[zero_matrix(QQ, M), identity_matrix(QQ, M) / 2], [identity_matrix(QQ, M) / 2, zero_matrix(QQ, M)]])
     examples.append(J)                                       # 対角成分がすべて 0 の形（取り替えの段を通る）
@@ -130,6 +189,69 @@ for M in [1, 2, 3]:
         v_bad = [(e[m] + I_ * e[M + m]) for m in range(M)] + [(e[m] + (-I_) * e[M + m]) for m in range(M)]
         Thp_bad = matrix(K, [L_map(d, v_bad)(x) for x in identity_matrix(K, n).rows()]).transpose()
         stats["neg_h"] += int(Thp_bad * Th == 2 * identity_matrix(K, n))
+        # claim_rearranging_sum_of_two_sums_in_vector_space：式変形の各行
+        x1, x2, y1, y2 = [vector(K, [rnd_q() for _ in range(n)]) for _ in range(4)]
+        rows = [(x1 + x2) + (y1 + y2), x1 + (x2 + (y1 + y2)), x1 + ((x2 + y1) + y2), x1 + ((y1 + x2) + y2), x1 + (y1 + (x2 + y2)), (x1 + y1) + (x2 + y2)]
+        assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+        # claim_linear_map_fixing_basis_members_is_identity：F:=L_{e,e} は基底 e を動かさない線型写像。F(x)=x の式変形の各行
+        Binv_e = matrix(K, e).transpose().inverse()
+        Fm = L_map(e, e)
+        assert all(Fm(e[k]) == e[k] for k in range(n))
+        x = vector(K, [rnd_q() for _ in range(n)])
+        beta = list(Binv_e * x)
+        rows = [Fm(x), Fm(lin_comb(beta, e)), lin_comb(beta, [Fm(e[k]) for k in range(n)]), lin_comb(beta, e), x]
+        assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+        # claim_linear_right_inverse_of_isometry_is_isometry：θ を等長写像、θ' をその右逆写像として q(θ'(y))=q'(θ(θ'(y)))=q'(y)
+        y = vector(K, [rnd_q() for _ in range(n)])
+        rows = [Q(thp(y)), qW(th(thp(y))), qW(y)]
+        assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+        # claim_existence_and_uniqueness_of_homomorphism_of_clifford_algebras_induced_by_isometry：g:=γ∘θ が
+        # g(v)g(v)=q(θ(v))1=Q(v)1 を満たすことを、Φ による行列環への像 φ(θ(v)) で確かめる（像での確認）
+        x = vector(K, [rnd_q() for _ in range(n)])
+        Gx = phiKbar(th(x))
+        assert Gx * Gx == qW(th(x)) * IdKbar == Q(x) * IdKbar
+        # θ'(u_{M+m})=e_{M+m} と θ(v_l)=d_l の式変形を一行ずつ（直和の元は (W の成分, W^* の成分) の組で持つ）
+        pair = lambda a_, b_: vector(K, list(a_) + list(b_))
+        wW = lambda m: vector(K, [1 if k == m else 0 for k in range(M)])
+        fW = lambda m: vector(K, [1 if k == m else 0 for k in range(M)])
+        zW = vector(K, [0] * M)
+        for m in range(M):
+            ep_ = e[M + m]
+            prep3 = [(-I_) * h + I_ * h, ((-I_) + I_) * h, 0 * h, K(0)]
+            prep4 = [((-I_) * h) * I_ + (I_ * h) * (-I_), (-I_) * (h * I_) + I_ * (h * (-I_)), (-I_) * (I_ * h) + I_ * ((-I_) * h),
+                     ((-I_) * I_) * h + (I_ * (-I_)) * h, 1 * h + 1 * h, (1 + 1) * h, K(1)]
+            assert all(r[i] == r[i + 1] for r in [prep3, prep4] for i in range(len(r) - 1))
+            rows = [thp(u[M + m]), thp(pair((-I_) * wW(m), I_ * fW(m))), thp(pair((-I_) * wW(m), zW) + pair(zW, I_ * fW(m))),
+                    thp((-I_) * d[m] + I_ * d[M + m]), thp((-I_) * d[m]) + thp(I_ * d[M + m]), (-I_) * thp(d[m]) + I_ * thp(d[M + m]),
+                    (-I_) * v[m] + I_ * v[M + m],
+                    (-I_) * (h * (e[m] + I_ * ep_)) + I_ * (h * (e[m] + (-I_) * ep_)),
+                    ((-I_) * h) * (e[m] + I_ * ep_) + (I_ * h) * (e[m] + (-I_) * ep_),
+                    (((-I_) * h) * e[m] + ((-I_) * h) * (I_ * ep_)) + ((I_ * h) * e[m] + (I_ * h) * ((-I_) * ep_)),
+                    (((-I_) * h) * e[m] + (((-I_) * h) * I_) * ep_) + ((I_ * h) * e[m] + ((I_ * h) * (-I_)) * ep_),
+                    (((-I_) * h) * e[m] + (I_ * h) * e[m]) + ((((-I_) * h) * I_) * ep_ + ((I_ * h) * (-I_)) * ep_),
+                    ((-I_) * h + I_ * h) * e[m] + (((-I_) * h) * I_ + (I_ * h) * (-I_)) * ep_,
+                    0 * e[m] + 1 * ep_, ep_]
+            assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+            for sgn in [1, -1]:
+                c_ = sgn * I_
+                rows = [th(v[m] if sgn == 1 else v[M + m]), th(h * (e[m] + c_ * ep_)), h * th(e[m] + c_ * ep_), h * (th(e[m]) + th(c_ * ep_)),
+                        h * (th(e[m]) + c_ * th(ep_)), h * (u[m] + c_ * u[M + m]),
+                        h * (pair(wW(m), fW(m)) + c_ * pair((-I_) * wW(m), I_ * fW(m))),
+                        h * (pair(wW(m), fW(m)) + pair(c_ * ((-I_) * wW(m)), c_ * (I_ * fW(m)))),
+                        h * pair(wW(m) + c_ * ((-I_) * wW(m)), fW(m) + c_ * (I_ * fW(m))),
+                        h * pair(wW(m) + (c_ * (-I_)) * wW(m), fW(m) + (c_ * I_) * fW(m)),
+                        h * pair((1 + c_ * (-I_)) * wW(m), (1 + c_ * I_) * fW(m))]
+                assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+                assert rows[-1] == (d[m] if sgn == 1 else d[M + m])
+        # Φ_Y(Ψ_Y(c_m))=c_m：Ψ_Y=Cl(θ')∘Ψ、Φ_Y=Φ∘Cl(θ)。Cl(θ') は a†_i=γ(d_i)・a_i=γ(d_{M+i}) を γ_Y(v_i)・γ_Y(v_{M+i}) へ、
+        # Φ∘Cl(θ) は γ_Y(y) を φ(θ(y)) へ移すので、Ψ の式の生成元を φ(θ(v_i))・φ(θ(v_{M+i})) に置き換えて評価する（θ は th で計算する）。
+        adagY = {i: phiK(toQQ(th(v[i - 1]))) for i in range(1, M + 1)}
+        annY = {i: phiK(toQQ(th(v[M + i - 1]))) for i in range(1, M + 1)}
+        for i in range(1, M + 1):
+            assert Psi_evaluated(cK[i], PK, adagY, annY, IdK) == cK[i]
+            assert Psi_evaluated(ctK[i], PK, adagY, annY, IdK) == ctK[i]
+        # 否定の対照：a_i の像を a†_i の像に取り違えると c_m に戻らない
+        stats["neg_psi"] += int(Psi_evaluated(cK[1], PK, adagY, adagY, IdK) != cK[1])
         print("M =", M, "case", stats["cases"], "ok", flush=True)
     # ---- 行列環への像（Φ∘Cl(θ) と Cl(θ')∘Ψ）----
     P = power_set(M); nP = len(P)
@@ -154,9 +276,6 @@ for M in [1, 2, 3]:
                 Mx = Mx * G[k]
             mons.append(Mx.list())
     assert matrix(KI, mons).rank() == nP * nP
-    # Φ_Y(Ψ_Y(c_i)) = φ(θ(θ'(d_i))) = φ(θ(v_i)) = c_i：θ(v_l)=d_l の像
-    vK = [(uK[m] + ii * uK[M + m]) / 2 for m in range(M)] + [(uK[m] - ii * uK[M + m]) / 2 for m in range(M)]   # θ(v_l)=h(θ(e_m)±iθ(e_{M+m}))
-    assert all(phi(vK[m]) == c[m + 1] and phi(vK[M + m]) == ct[m + 1] for m in range(M))
 print(stats)
-assert stats["neg_u"] == stats["cases"] and stats["neg_h"] == stats["cases"]
+assert stats["neg_u"] == stats["cases"] and stats["neg_h"] == stats["cases"] and stats["neg_psi"] == stats["cases"]
 print("PASS")

@@ -24,8 +24,8 @@ def ordered_sum(alpha):                                     # def_ordered_sum_in
 def is_basis(fam, n):                                       # def_basis（n 個の元で、行列の階数が n）
     return len(fam) == n and (n == 0 or matrix(QQ, fam).rank() == n)
 
-def add_multiples(b, s, c):                                 # def_family_adding_multiples_of_one_member（s は 0 始まり）
-    return [b[r] + c[r] * b[s] for r in range(len(b))]
+def add_multiples(b, s, omega):                             # def_family_adding_multiples_of_one_member（s は 0 始まり、係数の写像 ω）
+    return [b[r] + omega[r] * b[s] for r in range(len(b))]
 
 def orthogonalized_up_to(e, k, q, B):                       # def_basis_orthogonalized_up_to_index（k 個まで）
     n = len(e)
@@ -34,7 +34,19 @@ def orthogonalized_up_to(e, k, q, B):                       # def_basis_orthogon
     c3 = all(B(e[i], e[j]) == 0 for i in range(k) for j in range(k, n))
     return c1 and c2 and c3
 
-stats = {"cases": 0, "replaced": 0, "t_minus_one": 0, "wrong": 0}
+stats = {"cases": 0, "replaced": 0, "t_minus_one": 0, "wrong": 0, "sign": 0}
+
+# claim_ordered_sum_of_zero_terms_is_zero：どの項も 0 の番号順の和は 0（途中の和 S_m もすべて 0）。
+# 否定の対照：一つの項だけ 0 でないと和は 0 でない。
+for n0 in range(0, 7):
+    S = QQ(0); partial = [S]
+    for a in [QQ(0)] * n0:
+        S = S + a; partial.append(S)
+    assert all(x == 0 for x in partial) and ordered_sum([QQ(0)] * n0) == 0
+    if n0 >= 1:
+        for pos in range(n0):
+            alpha = [QQ(0)] * n0; alpha[pos] = QQ(3) / 7
+            assert ordered_sum(alpha) != 0
 
 def check_lemmas(A, n, q, B):
     for _ in range(5):
@@ -68,36 +80,60 @@ def run(A, label):
             js = [j for j in range(k + 1, n) if B(e[k], e[j]) != 0]
             assert js, "nondegenerate form must give such j"        # 第 k+1 元と直交しない元が後ろにある
             j = js[0]
-            beta, gamma = B(e[k], e[j]), q(e[j])
+            beta, zeta = B(e[k], e[j]), q(e[j])
             vals = {}
             for t in [QQ(1), QQ(-1)]:
-                lhs = q(e[k] + t * e[j])
-                assert lhs == (q(e[k]) + t * (t * gamma)) + t * beta == gamma + t * beta
-                vals[t] = lhs
-            assert (1 + 1) * beta == vals[QQ(1)] + (-1) * vals[QQ(-1)]
+                # 本文の式変形を一行ずつ：各行の式を独立に計算し、隣の行と等しいことを見る
+                rows = [q(e[k] + t * e[j]),
+                        (q(e[k]) + t * (t * q(e[j]))) + t * B(e[k], e[j]),
+                        (0 + t * (t * q(e[j]))) + t * B(e[k], e[j]),
+                        (0 + t * (t * zeta)) + t * B(e[k], e[j]),
+                        (0 + t * (t * zeta)) + t * beta,
+                        t * (t * zeta) + t * beta,
+                        (t * t) * zeta + t * beta,
+                        1 * zeta + t * beta,
+                        zeta + t * beta]
+                assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+                vals[t] = rows[0]
+            # 二つの値がともに 0 なら (1+1)β=0 になることの式変形（準備の等式と本文の鎖の各行）
+            Pv = zeta + 1 * beta; Nv = zeta + (-1) * beta
+            prep = [(-1) * Nv, (-1) * zeta + (-1) * ((-1) * beta), (-zeta) + (-1) * ((-1) * beta), (-zeta) + ((-1) * (-1)) * beta, (-zeta) + 1 * beta]
+            assert all(prep[i] == prep[i + 1] for i in range(len(prep) - 1))
+            chain = [(1 + 1) * beta, 1 * beta + 1 * beta, (0 + 1 * beta) + 1 * beta, ((zeta + (-zeta)) + 1 * beta) + 1 * beta,
+                     (zeta + ((-zeta) + 1 * beta)) + 1 * beta, (zeta + (1 * beta + (-zeta))) + 1 * beta, (Pv + (-zeta)) + 1 * beta,
+                     Pv + ((-zeta) + 1 * beta), Pv + (-1) * Nv]
+            assert all(chain[i] == chain[i + 1] for i in range(len(chain) - 1))
+            assert Pv == vals[QQ(1)] and Nv == vals[QQ(-1)]
             assert not (vals[QQ(1)] == 0 and vals[QQ(-1)] == 0)
             t = QQ(1) if vals[QQ(1)] != 0 else QQ(-1)
             if t == -1:
                 stats["t_minus_one"] += 1
-            c = [t if r == k else QQ(0) for r in range(n)]
-            et = add_multiples(e, j, c)
+            omega = [t if r == k else QQ(0) for r in range(n)]
+            et = add_multiples(e, j, omega)
             assert is_basis(et, n)
             assert all(et[r] == e[r] for r in range(n) if r != k)  # 係数 0 の元は変わらない
             nu = [QQ.random_element(num_bound=5, den_bound=3) for _ in range(n)]
-            assert lin_comb(nu, et, n) == lin_comb(nu, e, n) + ordered_sum([nu[r] * c[r] for r in range(n)]) * e[j]
+            assert lin_comb(nu, et, n) == lin_comb(nu, e, n) + ordered_sum([nu[r] * omega[r] for r in range(n)]) * e[j]
             assert orthogonalized_up_to(et, k, q, B) and q(et[k]) != 0
             stats["replaced"] += 1
         v = et[k]
         d = B(v, v)
         assert d == (1 + 1) * q(v) and d != 0
-        c = [QQ(0) if r <= k else -(B(et[r], v) * d ** -1) for r in range(n)]
-        ep = add_multiples(et, k, c)
+        omega = [QQ(0) if r <= k else -(B(et[r], v) * d ** -1) for r in range(n)]
+        ep = add_multiples(et, k, omega)
         assert is_basis(ep, n)
         nu = [QQ.random_element(num_bound=5, den_bound=3) for _ in range(n)]
-        assert lin_comb(nu, ep, n) == lin_comb(nu, et, n) + ordered_sum([nu[r] * c[r] for r in range(n)]) * et[k]
+        assert lin_comb(nu, ep, n) == lin_comb(nu, et, n) + ordered_sum([nu[r] * omega[r] for r in range(n)]) * et[k]
         for r in range(k + 1, n):
             alpha = B(et[r], v)
-            assert B(ep[k], ep[r]) == alpha + c[r] * d == alpha + (-(alpha * (d ** -1 * d))) == 0
+            # 本文の式変形の各行を、B の定義から独立に計算する
+            rows = [B(ep[k], ep[r]), B(v, et[r] + omega[r] * v), B(v, et[r]) + B(v, omega[r] * v), B(v, et[r]) + omega[r] * B(v, v),
+                    B(et[r], v) + omega[r] * B(v, v), alpha + omega[r] * d]
+            assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1)) and rows[-1] == 0
+            # 否定の対照：係数の符号を逆にすると、α≠0 のとき値は 2α≠0 になる
+            if alpha != 0:
+                assert B(v, et[r] + (-omega[r]) * v) == 2 * alpha != 0
+                stats["sign"] += 1
         assert orthogonalized_up_to(ep, k + 1, q, B)
         # 否定の対照：係数の 2 を落とす（d の代わりに q(v) で割る）と、後ろに直交しない元が残る
         wrong = add_multiples(et, k, [QQ(0) if r <= k else -(B(et[r], v) * q(v) ** -1) for r in range(n)])
@@ -133,7 +169,7 @@ while count < 40:
         continue
     run(A, "random")
     count += 1
-assert stats["replaced"] > 0 and stats["t_minus_one"] > 0 and stats["wrong"] > 0
+assert stats["replaced"] > 0 and stats["t_minus_one"] > 0 and stats["wrong"] > 0 and stats["sign"] > 0
 
 # 否定の対照：退化した二次形式では、第一元と直交しない元が後ろに無い
 Adeg = matrix(QQ, [[0, 0], [0, 1]])
@@ -143,5 +179,5 @@ assert qd(e[0]) == 0 and all(Bd(e[0], e[j]) == 0 for j in range(2))
 # 否定の対照：足す元自身の係数が 0 でないと基底にならないことがある
 e = [vector(QQ, [1, 0]), vector(QQ, [0, 1])]
 assert not is_basis(add_multiples(e, 0, [QQ(-1), QQ(5)]), 2)
-print("cases=%d replaced=%d t_minus_one=%d wrong=%d" % (stats["cases"], stats["replaced"], stats["t_minus_one"], stats["wrong"]))
+print("cases=%d replaced=%d t_minus_one=%d wrong=%d sign=%d" % (stats["cases"], stats["replaced"], stats["t_minus_one"], stats["wrong"], stats["sign"]))
 print("ALL PASS")
