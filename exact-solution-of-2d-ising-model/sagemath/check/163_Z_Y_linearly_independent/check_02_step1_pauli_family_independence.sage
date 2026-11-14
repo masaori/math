@@ -67,7 +67,8 @@ entry_chain(0, 0, "L_11", [
     ((c0 * one + cx * sx[0, 0]) + cy * sy[0, 0]) + cz * sz[0, 0],
     ((c0 * one + cx * zero) + cy * zero) + cz * one,
     ((c0 * one + zero) + zero) + cz * one,
-    c0 * one + cz * one,
+    (c0 * one + zero) + cz * one,              # complex_numbers_form_a_field の加法の単位元（外側の 0_C）
+    c0 * one + cz * one,                       # complex_numbers_form_a_field の加法の単位元（内側の 0_C）
     c0 + cz,
 ])
 entry_chain(0, 1, "L_12", [
@@ -94,7 +95,8 @@ entry_chain(1, 1, "L_22", [
     ((c0 * one + cx * sx[1, 1]) + cy * sy[1, 1]) + cz * sz[1, 1],
     ((c0 * one + cx * zero) + cy * zero) + cz * m1,
     ((c0 * one + zero) + zero) + cz * m1,
-    c0 * one + cz * m1,
+    (c0 * one + zero) + cz * m1,              # complex_numbers_form_a_field の加法の単位元（外側の 0_C）
+    c0 * one + cz * m1,                       # complex_numbers_form_a_field の加法の単位元（内側の 0_C）
     c0 + cz * m1,
     c0 + m1 * cz,
     c0 + neg(cz),

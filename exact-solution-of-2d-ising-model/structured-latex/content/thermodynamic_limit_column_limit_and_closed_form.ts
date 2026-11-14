@@ -3645,8 +3645,10 @@ L_{11}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,1)\ \text{成分})\\
 &= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z 1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= (c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + c_z 1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to c_0 1_{\mathbb{C}} + 0_{\mathbb{C}})\bigr)\\
 &= c_0 1_{\mathbb{C}} + c_z 1_{\mathbb{C}}
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to c_0 1_{\mathbb{C}})\bigr)\\
 &= c_0 + c_z
 &&(\because\ \text{積の単位元を 2 か所へ})
 \end{aligned}`),
@@ -3720,8 +3722,10 @@ L_{22}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,2)\ \text{成分})\\
 &= \bigl((c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + 0_{\mathbb{C}}\bigr) + c_z(-1_{\mathbb{C}})
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= (c_0 1_{\mathbb{C}} + 0_{\mathbb{C}}) + c_z(-1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to c_0 1_{\mathbb{C}} + 0_{\mathbb{C}})\bigr)\\
 &= c_0 1_{\mathbb{C}} + c_z(-1_{\mathbb{C}})
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to c_0 1_{\mathbb{C}})\bigr)\\
 &= c_0 + c_z(-1_{\mathbb{C}})
 &&(\because\ \text{積の単位元})\\
 &= c_0 + (-1_{\mathbb{C}})c_z
@@ -4495,6 +4499,7 @@ p
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 1 の A の展開と 4 成分の鎖（分母の 2 を「同分母の和・差」「約分」で処理し、商の読みが書かれていなかった）を、同じ展開を κ_0・κ_x・κ_y・κ_z と def_complex_quotient の商で一ステップずつ開いた Z_Y_generate_algebra の証明の Step 3 の前半の参照に替えた。B が基底であるという Step 1 の結論と、e_1〜e_4 の番号付けは不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z を引く段落、Step 1 の Pauli 行列の成分の段落と L_{11}・L_{12}・L_{21}・L_{22} の鎖の Pauli 行列の成分の行 4 行（計 6 か所）の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の L_{12}・L_{21} の鎖で、左から足す 0_C と右から足す 0_C を「加法の単位元を 2 か所へ」の 1 行でまとめて消していた行を、左から足す 0_C（complex_zero_plus_is_original（z → c_x 1_C））と右から足す 0_C（complex_numbers_form_a_field の加法の単位元）の 2 行に分けた。Step 6 の β_{m_0} の鎖で 0_C を左から足す行（右辺から左辺へ）の根拠を「加法の単位元」から complex_zero_plus_is_original に替えた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。L_{11}・L_{22} の入れ子の ((x + 0_C) + 0_C) と α_{m_0} の鎖の右から足す 0_C はどちらも右から足す形なので替えていない。Step 1 の c_0・c_x の鎖の (0_C + 0_C)2_C^{-1} = 0_C 2_C^{-1} の根拠に complex_numbers_form_a_field の名前と z → 0_C を添えた。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の L_{11}・L_{22} の鎖で、入れ子の ((c_0 1_C + 0_C) + 0_C) の 2 つの 0_C を「加法の単位元を 2 か所へ」の 1 行で消していた。内側の 0_C は外側の z + 0_C の z の中にあり、同じ定理を互いに重ならない 2 か所へ同時に当てる形になっていないので、外側の 0_C を消す行と内側の 0_C を消す行の 2 行に分け、根拠を complex_numbers_form_a_field の加法の単位元（z → c_0 1_C + 0_C、z → c_0 1_C）とした（L_{11}・L_{22} はそれぞれ 1 行増えた）。式の両端は不変。直前の記録で右から足す形なので替えないとした入れ子を、一ステップ一定理の観点からここで分けた。",
       ],
     },
   },

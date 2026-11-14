@@ -406,8 +406,10 @@ theorem pauliDecompRhs_apply_00 (a b c d : ℂ) : pauliDecompRhs a b c d 0 0 = a
           rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `def_pauli_matrices` の `σ^x, σ^y, σ^z` の `(1,1)` 成分
     _ = ((kappa0 a d * 1 + 0) + 0) + kappaZ a d * 1 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
+    _ = (kappa0 a d * 1 + 0) + kappaZ a d * 1 := by
+          rw [add_zero (kappa0 a d * 1 + 0)]                            -- 加法の単位元（外側の `0_ℂ`。`z → κ_0 1_ℂ + 0_ℂ`）
     _ = kappa0 a d * 1 + kappaZ a d * 1 := by
-          rw [add_zero, add_zero]                                       -- 加法の単位元を 2 か所へ
+          rw [add_zero (kappa0 a d * 1)]                                -- 加法の単位元（内側の `0_ℂ`。`z → κ_0 1_ℂ`）
     _ = kappa0 a d + kappaZ a d := by rw [mul_one, mul_one]           -- 積の単位元を 2 か所へ
     _ = (a + d) / 2 + (a - d) / 2 := rfl                              -- `κ_0`・`κ_z` の定義
     _ = (a + d) * 2⁻¹ + (a - d) * 2⁻¹ := by
@@ -528,8 +530,10 @@ theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d
           rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `def_pauli_matrices` の `σ^x, σ^y, σ^z` の `(2,2)` 成分
     _ = ((kappa0 a d * 1 + 0) + 0) + kappaZ a d * (-1) := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
+    _ = (kappa0 a d * 1 + 0) + kappaZ a d * (-1) := by
+          rw [add_zero (kappa0 a d * 1 + 0)]                            -- 加法の単位元（外側の `0_ℂ`。`z → κ_0 1_ℂ + 0_ℂ`）
     _ = kappa0 a d * 1 + kappaZ a d * (-1) := by
-          rw [add_zero, add_zero]                                       -- 加法の単位元を 2 か所へ
+          rw [add_zero (kappa0 a d * 1)]                                -- 加法の単位元（内側の `0_ℂ`。`z → κ_0 1_ℂ`）
     _ = kappa0 a d + kappaZ a d * (-1) := by rw [mul_one]             -- 積の単位元
     _ = kappa0 a d + (-1) * kappaZ a d := by
           rw [mul_comm (kappaZ a d) (-1)]                               -- 積の可換律

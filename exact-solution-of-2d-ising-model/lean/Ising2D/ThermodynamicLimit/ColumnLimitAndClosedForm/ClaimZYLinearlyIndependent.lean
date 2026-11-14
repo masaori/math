@@ -222,7 +222,10 @@ theorem pauliComb_apply_00 (c0 cx cy cz : ℂ) : pauliComb c0 cx cy cz 0 0 = c0 
           rw [pauliX_apply_00, pauliY_apply_00, pauliZ_apply_00]        -- `def_pauli_matrices` の `(1,1)` 成分
     _ = ((c0 * 1 + 0) + 0) + cz * 1 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
-    _ = c0 * 1 + cz * 1 := by rw [add_zero, add_zero]                 -- 加法の単位元を 2 か所へ
+    _ = (c0 * 1 + 0) + cz * 1 := by rw [add_zero (c0 * 1 + 0)]
+          -- `complex_numbers_form_a_field` の加法の単位元（外側の `0_ℂ`。`z → c_0 1_ℂ + 0_ℂ`）
+    _ = c0 * 1 + cz * 1 := by rw [add_zero (c0 * 1)]
+          -- `complex_numbers_form_a_field` の加法の単位元（内側の `0_ℂ`。`z → c_0 1_ℂ`）
     _ = c0 + cz := by rw [mul_one, mul_one]                           -- 積の単位元を 2 か所へ
 
 /-- 人手 Step 1 の `L_{12}` の鎖。 -/
@@ -306,7 +309,10 @@ theorem pauliComb_apply_11 (c0 cx cy cz : ℂ) : pauliComb c0 cx cy cz 1 1 = c0 
           rw [pauliX_apply_11, pauliY_apply_11, pauliZ_apply_11]        -- `def_pauli_matrices` の `(2,2)` 成分
     _ = ((c0 * 1 + 0) + 0) + cz * (-1) := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
-    _ = c0 * 1 + cz * (-1) := by rw [add_zero, add_zero]              -- 加法の単位元を 2 か所へ
+    _ = (c0 * 1 + 0) + cz * (-1) := by rw [add_zero (c0 * 1 + 0)]
+          -- `complex_numbers_form_a_field` の加法の単位元（外側の `0_ℂ`。`z → c_0 1_ℂ + 0_ℂ`）
+    _ = c0 * 1 + cz * (-1) := by rw [add_zero (c0 * 1)]
+          -- `complex_numbers_form_a_field` の加法の単位元（内側の `0_ℂ`。`z → c_0 1_ℂ`）
     _ = c0 + cz * (-1) := by rw [mul_one]                             -- 積の単位元
     _ = c0 + (-1) * cz := by rw [mul_comm cz (-1)]                    -- 積の可換律
     _ = c0 + -cz := by rw [neg_one_mul]                               -- `multiply_by_minus_one`（`z → c_z`）を右辺から左辺へ

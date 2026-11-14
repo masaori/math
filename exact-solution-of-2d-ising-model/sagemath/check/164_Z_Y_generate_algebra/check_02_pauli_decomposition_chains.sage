@@ -72,7 +72,9 @@ chain_check([Rm[0, 0], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[0, 0], sum_li
     ((k0 * one + kx * sx[0, 0]) + ky * sy[0, 0]) + kz * sz[0, 0],
     ((k0 * one + kx * zero) + ky * zero) + kz * one,
     ((k0 * one + zero) + zero) + kz * one,
-    k0 * one + kz * one, k0 + kz,
+    (k0 * one + zero) + kz * one,  # 加法の単位元（外側の 0_C）
+    k0 * one + kz * one,  # 加法の単位元（内側の 0_C）
+    k0 + kz,
     (a11 + a22) / two + sub(a11, a22) / two,
     (a11 + a22) * ti + sub(a11, a22) * ti,
     ((a11 + a22) + sub(a11, a22)) * ti,
@@ -126,7 +128,9 @@ chain_check([Rm[1, 1], (((k0 * Id + kx * sx) + ky * sy) + kz * sz)[1, 1], sum_li
     ((k0 * one + kx * sx[1, 1]) + ky * sy[1, 1]) + kz * sz[1, 1],
     ((k0 * one + kx * zero) + ky * zero) + kz * m1,
     ((k0 * one + zero) + zero) + kz * m1,
-    k0 * one + kz * m1, k0 + kz * m1, k0 + m1 * kz,
+    (k0 * one + zero) + kz * m1,  # 加法の単位元（外側の 0_C）
+    k0 * one + kz * m1,  # 加法の単位元（内側の 0_C）
+    k0 + kz * m1, k0 + m1 * kz,
     (a11 + a22) / two + m1 * (v / two),
     (a11 + a22) * ti + m1 * (v * ti),
     (a11 + a22) * ti + (m1 * v) * ti,

@@ -8,6 +8,7 @@ PASS L_11 第 5 行 = 第 6 行
 PASS L_11 第 6 行 = 第 7 行
 PASS L_11 第 7 行 = 第 8 行
 PASS L_11 第 8 行 = 第 9 行
+PASS L_11 第 9 行 = 第 10 行
 PASS L_12 第 1 行 = 第 2 行
 PASS L_12 第 2 行 = 第 3 行
 PASS L_12 第 3 行 = 第 4 行
@@ -41,6 +42,7 @@ PASS L_22 第 8 行 = 第 9 行
 PASS L_22 第 9 行 = 第 10 行
 PASS L_22 第 10 行 = 第 11 行
 PASS L_22 第 11 行 = 第 12 行
+PASS L_22 第 12 行 = 第 13 行
 PASS 根拠の成分: (σ^y)_12 = -i、(σ^y)_21 = i、(σ^z)_22 = -1_C
 PASS 根拠: negative_i_times_complex_is_negation_of_i_times（z → c_y）
 PASS def_zero_matrix: O の 4 成分は 0_C
@@ -137,5 +139,5 @@ PASS 否定の対照: L_12 の符号を + にすると成り立たない（(σ^y
 PASS 否定の対照: (σ^z)_22 を 1 と読むと L_22 は c_0 + c_z にならない
 PASS 否定の対照: c_z の鎖で sum_minus_difference_is_twice_second_in_cc の代わりに sum_plus_difference_is_twice_first_in_cc を使うと成り立たない
 PASS 否定の対照: (q) の -i を i と読み違えると係数行列は退化し、零以外の解が残る
--- Z_Y_linearly_independent の Step 1 の鎖: 139/139 PASS
+-- Z_Y_linearly_independent の Step 1 の鎖: 141/141 PASS
 RESULT: PASS
