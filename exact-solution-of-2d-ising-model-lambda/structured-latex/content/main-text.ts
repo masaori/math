@@ -84958,15 +84958,15 @@ const chapter_real_escape = defineSection({
                     displayMath(String.raw`\begin{aligned}
 \mu
 &=0+\mu
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の単位元 }0+\mu=\mu\text{ を右辺から左辺の向きに読む。素数ごとに }\mathbb{Q}\text{ の中で }0+\mu(p)=\mu(p))\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の単位元 }0+\mu=\mu\text{ を右辺から左辺の向きに読み、素数ごとに }\mathbb{Q}\text{ の中で }0+\mu(p)=\mu(p))\\
 &\le_{\Lambda_{\mathbb{Q}}}\varepsilon+\mu
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=\varepsilon\text{、}\nu:=\mu\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon)\\
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=\varepsilon\text{、}\nu:=\mu\text{ で読み、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon)\\
 &=\mu+\varepsilon
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則。素数ごとに }\mathbb{Q}\text{ の加法の交換則})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則を素数ごとに }\mathbb{Q}\text{ の加法の交換則で読む})\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_N(q)
 &&(\because\ \mu\text{ の所属の証人 }\varepsilon,N\text{ の性質を }L:=N\text{ で読む})\\
 &\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)+2\cdot\iota\bigl(\log(1+q)\bigr)
-&&(\because\ \blkref{claim_open_square_free_entropy_density_upper_bound}\text{ を }L:=N\text{、}q:=q\text{ で読む。}N\ge1)
+&&(\because\ \blkref{claim_open_square_free_entropy_density_upper_bound}\text{ を }L:=N\text{、}q:=q\text{ で読み、}N\ge1)
 \end{aligned}`),
                     paragraph([
                       "順序の推移律は ",

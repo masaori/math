@@ -45,7 +45,12 @@ theorem smoothing_vertex_crossing_number_update {m : ℕ} {V : Type} [DecidableE
         (vertex a) true)
   have hc : c' = n₀' * n₁' :=
     vertex_crossing_number_factorization vertex visit' (vertex a)
-  exact two_factor_after_single_decrement_necSuf n₀ n₁ n₀' n₁' c' h₀ h₁ hc
+  have h₀' : n₀' = n₀ - 1 := by omega
+  have h₁' : n₁' = n₁ - 1 := by omega
+  calc
+    c' = n₀' * n₁' := hc
+    _ = (n₀ - 1) * n₁' := by rw [h₀']
+    _ = (n₀ - 1) * (n₁ - 1) := by rw [h₁']
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem smoothing_vertex_crossing_number_update_from_necSuf {m : ℕ} {V : Type}
