@@ -2075,7 +2075,7 @@ S_{M_{\mathrm{col}},k}
 &=0_{\mathbb C}+(-0_{\mathbb C})
 &&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
 &=-0_{\mathbb C}
-&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z\to-0_{\mathbb C})\bigr)\\
 &=(-1_{\mathbb C})\cdot0_{\mathbb C}
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
 &=0_{\mathbb C}
@@ -2162,7 +2162,7 @@ S_{M_{\mathrm{col}},k}
 &=0_{\mathbb C}+(-(M_{\mathrm{col}})_{\mathbb C})
 &&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
 &=-(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z\to-(M_{\mathrm{col}})_{\mathbb C})\bigr)\\
 &=(-1_{\mathbb C})(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})
@@ -2263,7 +2263,12 @@ k
       ),
       paragraph(["となる。"]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
+      ],
+    },
   },
   {
     id: "evensector_003_definition_half_integer_checkZ",

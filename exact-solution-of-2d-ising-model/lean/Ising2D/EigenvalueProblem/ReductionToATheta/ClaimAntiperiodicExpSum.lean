@@ -396,7 +396,7 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
       _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]                                   -- 2 行目
       _ = 0 - (M : ℂ) := by rw [mul_one]                                        -- 3 行目
       _ = 0 + (-(M : ℂ)) := by rw [sub_eq_add_neg]                              -- 4 行目 `def_complex_difference`
-      _ = -(M : ℂ) := by rw [zero_add]                                          -- 5 行目
+      _ = -(M : ℂ) := by rw [zero_add]                                          -- 5 行目 `complex_zero_plus_is_original`（`z → -(M_col)_ℂ`。具体版は無く `zero_add`）
       _ = (-1) * (M : ℂ) := by rw [neg_one_mul]                                 -- 6 行目 `multiply_by_minus_one`
       _ = (M : ℂ) * (-1) := by rw [mul_comm]                                    -- 7 行目
       _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]                                -- 8 行目
@@ -429,7 +429,7 @@ theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ)
     _ = 0 - (M : ℂ) * 0 := by rw [mul_zero]                             -- 2 行目
     _ = (0 : ℂ) - 0 := by rw [mul_zero]                                 -- 3 行目
     _ = (0 : ℂ) + (-0) := by rw [sub_eq_add_neg]                        -- 4 行目 `def_complex_difference`
-    _ = -(0 : ℂ) := by rw [zero_add]                                    -- 5 行目
+    _ = -(0 : ℂ) := by rw [zero_add]                                    -- 5 行目 `complex_zero_plus_is_original`（`z → -0_ℂ`。具体版は無く `zero_add`）
     _ = (-1) * (0 : ℂ) := by rw [neg_one_mul]                           -- 6 行目 `multiply_by_minus_one`
     _ = 0 := by rw [mul_zero]                                           -- 7 行目
 
