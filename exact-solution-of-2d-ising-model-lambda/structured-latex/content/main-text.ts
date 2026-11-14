@@ -80053,6 +80053,19 @@ M_{D,T}(x)
                     title: { text: "偶部分グラフ上の局所対合の符号付き和は一である" },
                     labels: ["claim_local_pairing_signed_sum"],
                     habitat: "Z",
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingFamilies_signed_sum_eq_one",
+                      "Ising2DLambda.KacWard.nonzeroTaggedMatchings_sum_eq_localPairing_sum",
+                      "Ising2DLambda.KacWard.shortPairCrossingNumber_eq_localPairingCrossingCount",
+                      "Ising2DLambda.KacWard.nonzeroTaggedMatchings_signed_crossing_sum_eq_one",
+                      "Ising2DLambda.NecSuf.KacWard.localPairingFamilies_signed_sum_eq_one",
+                      "Ising2DLambda.NecSuf.KacWard.sum_over_terms_eq_sum_over_local_involutions",
+                      "Ising2DLambda.NecSuf.KacWard.crossing_pair_count_eq_vertex_sum",
+                      "Ising2DLambda.KacWard.localPairingFamilies_signed_sum_eq_one_from_necSuf",
+                      "Ising2DLambda.KacWard.nonzeroTaggedMatchings_sum_eq_localPairing_sum_from_necSuf",
+                      "Ising2DLambda.KacWard.shortPairCrossingNumber_eq_localPairingCrossingCount_from_necSuf",
+                      "Ising2DLambda.KacWard.nonzeroTaggedMatchings_signed_crossing_sum_eq_one_from_necSuf",
+                    ],
                     verification: ["sagemath/check/local-pairing-signed-sum"],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と偶部分グラフ ", math(String.raw`P\subseteq E_L`), " を固定する。", ref("claim_vertex_port_bijection"), " の各頂点の選択方向集合を ", math(String.raw`S_v(P)\subseteq I`), "、", ref("claim_vertex_local_pairing_product"), " の局所対合族の集合を ", math(String.raw`\mathcal C(P)`), " とする。各 ", math(String.raw`\boldsymbol\kappa=(\kappa_v)_{v\in V_L}\in\mathcal C(P)`), " について、", math(String.raw`c_v(\kappa_v)\in\{0,1\}`), " は ", math(String.raw`S_v(P)=I`), " かつ ", math(String.raw`\kappa_v(0)=2,\ \kappa_v(1)=3`), " のときだけ一、その他は零とする。", math(String.raw`t_P(\boldsymbol\kappa):=\sum_{v\in V_L}c_v(\kappa_v)\in\mathbb N`), " と置く。このとき整数の等式"]),
@@ -80093,7 +80106,25 @@ M_{D,T}(x)
 &=1
 &&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
+                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。"]),
+                      paragraph(["対合族 ", math(String.raw`\boldsymbol\kappa`), " から作った項 ", math(String.raw`(D,T)`), " の短い対は、", ref("claim_vertex_port_bijection"), " の全単射で、頂点 ", math(String.raw`v`), " の方向番号 ", math(String.raw`i\in S_v(P)`), " の半辺 ", math(String.raw`\vec e`), " と方向番号 ", math(String.raw`\kappa_v(i)`), " の半辺 ", math(String.raw`\vec f`), " の組である。その通過 ", math(String.raw`\iota(\vec e)\to\vec f`), " が直進するのは ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " のときである（", ref("claim_reversal_direction_shift"), "）。", ref("def_transverse_crossing"), " により、二つの短い対が横断するのは、始点が等しく、ともに直進し、方向軸が異なるときである。方向番号 ", math(String.raw`I`), " の上の有限の確認により、そのような二つの対が頂点 ", math(String.raw`v`), " にあるのは ", math(String.raw`c_v(\kappa_v)=1`), " のときだけで、そのとき ", math(String.raw`v`), " を始点とする短い対は方向番号 ", math(String.raw`\{0,2\}`), " と ", math(String.raw`\{1,3\}`), " の二つだけであり、この二つは横断する。ゆえに頂点 ", math(String.raw`v`), " を始点とする横断する順序のない対の個数は ", math(String.raw`c_v(\kappa_v)`), " であり、"]),
+                      displayMath(String.raw`\begin{aligned}
+t(D,T)
+&=\sum_{v\in V_L}\bigl|\{\text{頂点 }v\text{ を始点とする横断する順序のない対}\}\bigr|
+&&\bigl(\because\ \text{横断する二つの対は始点が等しい（}\blkref{def_transverse_crossing}\text{）}\bigr)\\
+&=\sum_{v\in V_L}c_v(\kappa_v)
+&&\bigl(\because\ \text{上の頂点ごとの数え上げ}\bigr)\\
+&=t_P(\boldsymbol\kappa)
+&&\bigl(\because\ t_P\text{ の定義}\bigr).
+\end{aligned}`),
+                      paragraph(["上の一対一対応による和の再添字付けで"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}
+&=\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
+&&\bigl(\because\ \text{一対一対応と }t(D,T)=t_P(\boldsymbol\kappa)\bigr)\\
+&=1
+&&\bigl(\because\ \text{一つ目の等式}\bigr).
+\end{aligned}`),
                     ],
                   },
                 },

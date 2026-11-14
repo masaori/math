@@ -13,12 +13,20 @@ def pairings(points):
             yield ((first, second),) + tail
 
 
+def transverse_pair_count(pairs):
+    # 頂点 v を始点とする横断する順序のない対の個数: 二つの対がともに直進（方向番号の差が二）し、方向軸が異なる。
+    straight = [pair for pair in pairs if (pair[1] - pair[0]) % 4 == 2]
+    return sum(1 for first, second in combinations(straight, 2) if first[0] % 2 != second[0] % 2)
+
+
 ports = (0, 1, 2, 3)
 local_cases = 0
 for degree in (0, 2, 4):
     for selected in combinations(ports, degree):
         choices = list(pairings(selected))
         crossing = lambda pairs: int(set(map(frozenset, pairs)) == {frozenset((0, 2)), frozenset((1, 3))})
+        # 頂点ごとの数え上げ: 横断する順序のない対の個数は c_v(κ_v) に等しい。
+        assert all(transverse_pair_count(choice) == crossing(choice) for choice in choices)
         local_sum = sum(ZZ(-1) ** crossing(choice) for choice in choices)
         assert local_sum == 1
         if degree == 4:
@@ -56,6 +64,10 @@ for length in (1, 2):
             factored = prod(sum(ZZ(-1) ** int(set(map(frozenset, choice)) == {frozenset((0, 2)), frozenset((1, 3))})
                                for choice in family) for family in families)
             assert direct == factored == 1
+            # t(D,T) = Σ_v |頂点 v の横断する順序のない対| = Σ_v c_v(κ_v) = t_P(κ)
+            for family in product(*families):
+                vertexwise = sum(transverse_pair_count(choice) for choice in family)
+                assert vertexwise == sum(crossing(choice) for choice in family)
             global_cases += 1
 
 print("RESULT: PASS; %d local sets, %d even subgraphs, %d vertex selections" % (local_cases, global_cases, selected_count_cases))
