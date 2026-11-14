@@ -51,6 +51,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -655,8 +656,8 @@ theorem gamma1_sq_add_gamma2_mul_chain_second_half (c₁ s₁ c₂' s₂' u : �
                           -- 33 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = c₁ ^ 2 * c₂' ^ 2 + 0 + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
           + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
-        rw [neg_add_cancel (2 * c₁ * c₂' * s₁ * s₂' * u)]
-                          -- 34 行目: `complex_numbers_form_a_field` の加法逆元
+        rw [neg_add_self_complex (2 * c₁ * c₂' * s₁ * s₂' * u)]
+                          -- 34 行目: `negation_plus_self_is_zero_in_cc`（`x → 2_ℂ c₁c₂^*s₁s₂^*u`）
     _ = c₁ ^ 2 * c₂' ^ 2 + s₁ ^ 2 * s₂' ^ 2 * u ^ 2 + (-1) * (c₁ ^ 2 * s₂' ^ 2 * u ^ 2)
           + (-1) * (s₁ ^ 2 * c₂' ^ 2) + (-1) * s₂' ^ 2 + s₂' ^ 2 * u ^ 2 := by
         rw [add_zero (c₁ ^ 2 * c₂' ^ 2)]

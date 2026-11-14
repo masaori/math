@@ -9,8 +9,12 @@
 - `calculation_formulae_claim_negation_plus_self_is_zero_in_cc`（ラベル **`negation_plus_self_is_zero_in_cc`**）
 
 Lean でこれらを引くのは `ClaimTwoSidedInverseOfTwoByTwo.lean` の成分の鎖（人手 `matrix_times_adjugate_two_by_two`・
-`adjugate_times_matrix_two_by_two`）である。人手では `anticommutator_of_check_psi` の準備 4 の (i)・(ii) も前の 2 つを引くが、
-Lean の `ClaimAnticommutatorCheckPsi.lean` は準備 4 を 1 段ずつは形式化していないので、そこに対応する参照は無い。
+`adjugate_times_matrix_two_by_two`）である。`neg_add_self_complex` は、ほかに `ClaimZYLinearlyIndependent.lean`
+（人手 `Z_Y_linearly_independent`）、`ClaimZeroMatrixProductAndSumEquations.lean`（人手 `matrix_summand_from_sum_equation`）、
+`ClaimDetATilde.lean`（人手 `det_A_theta_tilde`）も引く。
+人手では `anticommutator_of_check_psi` の準備 4 の (i)・(ii) が前の 2 つを、準備 5 と `frobenius_inner_product_axioms` が
+`negation_plus_self_is_zero_in_cc` を引くが、Lean の `ClaimAnticommutatorCheckPsi.lean` は準備 4・5 を 1 段ずつは形式化しておらず、
+`frobenius_inner_product_axioms` には Lean の具体版が無いので、そこに対応する参照は無い。
 
 ## 人手証明との対応
 

@@ -92,7 +92,7 @@ for n in [1, 2, 3]:
               a - qC - qC + qC,
               ((a + (-qC)) + (-qC)) + qC,                        # def_complex_difference
               (a + (-qC)) + ((-qC) + qC),                        # 加法の結合律
-              (a + (-qC)) + K(0),                                # 加法逆元
+              (a + (-qC)) + K(0),                                # negation_plus_self_is_zero_in_cc (x → q_C)
               a + (-qC),                                         # 加法の単位元
               a - qC,                                            # def_complex_difference
               incl(normsq(A) - q),                               # real_inclusion_preserves_difference

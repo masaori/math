@@ -14,7 +14,7 @@ def chain_of(A, B, C, i, k, P):
     return [
         (b, False),
         (P(0) + b, False),                                 # complex_zero_plus_is_original を右辺から左辺へ
-        ((body_neg_scalar(a) + a) + b, False),             # 加法の逆元
+        ((body_neg_scalar(a) + a) + b, False),             # negation_plus_self_is_zero_in_cc (x → A_ik) を右辺から左辺へ
         (body_neg_scalar(a) + (a + b), False),             # 加法の結合律
         (body_neg_scalar(a) + AB[i, k], False),            # def_matrix_sum
         (body_neg_scalar(a) + c, True),                    # 仮定 A + B = C

@@ -20,13 +20,15 @@
   成分の鎖の 11 行は `matrix_eq_zero_of_add_self_eq_zero_apply` の 11 段と 1 対 1 である。
 * `matrix_summand_from_sum_equation` の成分の鎖の 8 行は `matrix_eq_sub_of_add_eq_apply` の 8 段と 1 対 1 である。
   `0_ℂ + z = z`（`complex_zero_plus_is_original`）は `zero_add`（人手の主張に Lean の具体版が無い）、
-  `ℂ` の加法の逆元・結合律・交換律（`complex_numbers_form_a_field`）は `neg_add_cancel`・`add_assoc`・`add_comm`、
+  `(-x) + x = 0_ℂ`（`negation_plus_self_is_zero_in_cc`）はその具体版 `neg_add_self_complex`、
+  `ℂ` の加法の結合律・交換律（`complex_numbers_form_a_field`）は `add_assoc`・`add_comm`、
   `def_complex_difference` は `sub_eq_add_neg`。
 * 最後の「全ての成分が一致する」は `Matrix.ext`。人手の `m, n, p ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -90,7 +92,7 @@ theorem matrix_eq_sub_of_add_eq_apply {m p : ℕ} (A B C : Matrix (Fin m) (Fin p
     (h : A + B = C) (i : Fin m) (k : Fin p) : B i k = (C - A) i k :=
   calc B i k
       = 0 + B i k := (zero_add _).symm                                   -- `complex_zero_plus_is_original` を右辺から左辺へ
-    _ = (-A i k + A i k) + B i k := by rw [neg_add_cancel]               -- 加法の逆元
+    _ = (-A i k + A i k) + B i k := by rw [neg_add_self_complex]         -- `negation_plus_self_is_zero_in_cc`（`x → A_{ik}`）を右辺から左辺へ
     _ = -A i k + (A i k + B i k) := add_assoc _ _ _                      -- 加法の結合律
     _ = -A i k + (A + B) i k := by rw [matrix_sum_apply]                 -- `def_matrix_sum`
     _ = -A i k + C i k := by rw [h]                                      -- 仮定 `A + B = C`

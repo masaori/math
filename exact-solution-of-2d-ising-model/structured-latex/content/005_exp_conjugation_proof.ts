@@ -1032,7 +1032,7 @@ t\langle A,B\rangle
 &= \Bigl(\left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+\Bigl(\bigl(-q_{\mathbb{C}}\bigr)+q_{\mathbb{C}}\Bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の結合律})\\
 &= \Bigl(\left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)\Bigr)+0_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元（}(\mathbb{C},+)\ \text{は可換群）})\\
+&&\bigl(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to q_{\mathbb{C}})\bigr)\\
 &= \left(\|A\|^2\right)_{\mathbb{C}}+\bigl(-q_{\mathbb{C}}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元})\\
 &= \left(\|A\|^2\right)_{\mathbb{C}}-q_{\mathbb{C}}
@@ -1194,6 +1194,7 @@ u+\overline{u}
           "それぞれを使う式変形行の行末の (∵ …) へ移した。内容・式変形・根拠は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 5 と Step 6 で名前だけで根拠にしていた「ι_{ℝ→ℂ} の単射性」の 2 か所を、inclusion_rr_to_cc_is_injective への参照（a・b の当てはめ付き）に替えた。内容は変えていない。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の t := ū/(‖B‖²)_ℂ を β := ‖B‖² と def_complex_quotient で t = ū(β_ℂ)^{-1} と開き、β_ℂ ∈ ℂ^× と (β^{-1})_ℂ = (β_ℂ)^{-1} を新しい主張 real_inclusion_preserves_inverse から取った。三つの積の項の鎖の「約分」「ι_{ℝ→ℂ} が積と逆元を保つこと」「Step 0 による t̄ の表示」を、準備 t̄ = u(β_ℂ)^{-1}（complex_conjugate_of_product・complex_conjugate_of_inverse・complex_conjugate_of_real_inclusion）と準備 (ūu)(β_ℂ)^{-1} = q_ℂ（complex_conjugate_times_self・real_inclusion_preserves_product。q := |u|²/‖B‖²）と、積の結合律・可換律・逆元・単位元の 1 段ずつに開いた。三つの項の鎖は符号を付けない t⟨A,B⟩・t̄⟨B,A⟩・t̄t⟨B,B⟩ から始め、合わせる鎖は展開式の右辺から 1 行に 1 つずつ代入し、「ℂ の加法の結合律と加法逆元」を def_complex_difference と complex_numbers_form_a_field の結合律・加法逆元・単位元の行に、「ι_{ℝ→ℂ} が減法を保つこと」を real_inclusion_preserves_difference にした。主張と Step 5 の結論は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の合わせる鎖で (-q_C) + q_C を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示しておらず、左から足す形は加法の可換律を合わせないと出ない）から negation_plus_self_is_zero_in_cc (x → q_C) に替えた。式は不変。",
       ],
     },
   },

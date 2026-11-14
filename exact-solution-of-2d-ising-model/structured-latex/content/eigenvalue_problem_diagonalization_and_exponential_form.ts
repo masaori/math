@@ -5493,7 +5493,7 @@ c_2s_2^*
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
 &\quad= c_1^2(c_2^*)^2 + 0_{\mathbb{C}} + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr)
  + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to 2_{\mathbb{C}}c_1c_2^*s_1s_2^*u))\\
 &\quad= c_1^2(c_2^*)^2 + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr)
  + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
@@ -5720,6 +5720,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 最後の等式の鎖は relation_of_gamma_2_theta_tilde (2) を ℂ の −(r_ℂ)^2 の形で当てていたが、(2) の右辺は実数 −r^2 の像 (−r^2)_ℂ である。零元の後を、0_ℂ = (0)_ℂ、ℝ の加法逆元 −r^2 + r^2 = 0 を右辺から左辺へ、real_inclusion_preserves_sum を右辺から左辺へ、(2) を右辺から左辺へ、の順にして (2) をその形のまま当て、末尾を 1_ℂ + (r^2)_ℂ = (1 + r^2)_ℂ（real_inclusion_preserves_sum）にした（13 行 → 12 行）。第 3 行の real_inclusion_preserves_product、零元の行、和の結合律の行に「右辺から左辺へ」を書いた。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (x − iy)(x + iy) の鎖・(x − y)^2 の鎖・第 3 の等式の ℂ の中の鎖で、分配律を外側の積に当ててから内側の 2 つの積へ当てるのを 1 行に書いていた。内側の積は外側に当てた後に現れるので同じ定理の同時の適用ではない。外側の積へ当てる行と、内側の 2 箇所へ同時に当てる行の 2 行に割った（左辺の行を含めて (x − iy)(x + iy) の鎖は 15 行から 16 行、(x − y)^2 の鎖は 18 行から 19 行、第 3 の等式の鎖は 23 行から 24 行。中身は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 主張 (1) の鎖で -(2_C c_1c_2^*s_1s_2^*u) + 2_C c_1c_2^*s_1s_2^*u を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示していない）から negation_plus_self_is_zero_in_cc (x → 2_C c_1c_2^*s_1s_2^*u) に替えた。式は不変。",
       ],
     },
   },
@@ -7738,12 +7739,12 @@ u^{-}_\mu u^{-}_\nu + h\,h
 &= -\bigl((t\,t)^{-1}\bigr) + (t\,t)^{-1}
 &&(\because\ \text{上の二つの鎖})\\
 &= 0_{\mathbb C}
-&&\bigl(\because\ \text{加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+&&\bigl(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to (t\,t)^{-1})\bigr),\\[4pt]
 u^{+}_\mu u^{+}_\nu + h\,h
 &= -\bigl((t\,t)^{-1}\bigr) + (t\,t)^{-1}
 &&(\because\ \text{上の二つの鎖})\\
 &= 0_{\mathbb C}
-&&\bigl(\because\ \text{加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+&&\bigl(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to (t\,t)^{-1})\bigr),\\[4pt]
 \bigl(u^{-}_\mu u^{+}_\nu + h\,h\bigr)\,\omega
 &= \bigl((t\,t)^{-1} + (t\,t)^{-1}\bigr)\,\omega
 &&(\because\ \text{上の二つの鎖})\\
@@ -7915,6 +7916,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
         "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。散文の「和についての加法性も分配法則から従う」を anticommutator_of_finite_sums_of_scalar_multiples による係数を残した展開（準備 2）に、反交換子の対称性を def_matrix_anticommutator と matrix_sum_is_commutative の鎖（準備 1）に、δ = 0 の場合の散文を準備 3 の鎖に、abs_basic_properties が述べていない |−z| = |z|・|z̄| = |z| を def_complex_conjugate と definition_of_cc の積・abs_basic_properties (1) の成分の鎖に、ℂ の符号と逆元の規則を準備 4 の鎖にした。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き（def_check_fermi の √M_col・r・2 を包含の像 σ・ρ・2_C で読む）、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I と O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備 5 の二乗をその場の |a_μ|^2 := |a_μ||a_μ|・s^2 := ss から def_power_of_real_number の冪（m = 2）に替えた（記号の濫用の解消）。b_μ b_ν の鎖は r = |a_μ| の行と square_of_real_number_is_product の行に割り（7 行 → 8 行）、t t の鎖は ss = s^2 を square_of_real_number_is_product で引く行と definition_of_sqrt_r_positive の y^2 = x の行に割った（6 行 → 7 行）。準備の s の性質も s^2 = (M_col)_ℝ と書いた。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備 5 の r_ν の鎖の「ℝ で (−x)^2 = x^2」を、積へ開く行（square_of_real_number_is_product (r → −x)）・ℝ の四則演算 (−a)(−b) = ab の行・冪へ戻す行（square_of_real_number_is_product (r → x)）の 3 行に割った（11 行 → 13 行）。Lean は checkR_conj（DefinitionCheckFermi.lean）を同じ 13 行の calc にした。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 準備 5 の u^-_μu^-_ν + hh と u^+_μu^+_ν + hh の鎖で -((tt)^{-1}) + (tt)^{-1} を 0_C にする 2 行の根拠を、complex_numbers_form_a_field の加法の逆元（右から足す z + (-z) = 0_C しか示していない）から negation_plus_self_is_zero_in_cc (x → (tt)^{-1}) に替えた。式は不変。",
       ],
     },
   },
