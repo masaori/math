@@ -1302,9 +1302,15 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 &=
 \begin{pmatrix}
   0 \\
-  -1
+  0 + (-1)
 \end{pmatrix}
 \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元}) \\
+&=
+\begin{pmatrix}
+  0 \\
+  -1
+\end{pmatrix}
+\quad (\because \blkref{complex_zero_plus_is_original}\ (z \to -1_{\mathbb{C}})) \\
 &=
 \begin{pmatrix}
   (-1_{\mathbb{C}})\,0_{\mathbb{C}} \\
@@ -1396,6 +1402,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
           "この主張を σ_m^z f_{ι(μ)} = μ(m)_C f_{ι(μ)} だけにし、ほかを sigma_z_product_action・site_sigma_z_is_diagonal・site_sigma_z_product_is_diagonal に分けた。" +
           "スカラーを inclusion_rr_to_cc の μ(m)_C と書き、場合分けを (∵) 付きの鎖に、ラベルの無かった根拠（行列と列ベクトルの積・恒等行列の作用）をラベル参照にした。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の準備で σ^z の成分を引く段落と、σ^z e_1・σ^z e_2 の鎖の 1 行目の根拠（2 行）の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: σ^z e_2 の鎖の (0+0, 0+(-1)) を 1 行で (0, -1) にしていた行を、右から足す 0_C（第 1 成分。complex_numbers_form_a_field の加法の単位元）と左から足す 0_C（第 2 成分。complex_zero_plus_is_original）の 2 行に分けた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。σ^z e_1 の鎖の (1+0, 0+0) はどちらも右から足す形なので 1 行のままにした。",
       ],
     },
   },

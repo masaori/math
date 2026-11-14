@@ -1,11 +1,12 @@
 # 対象ラベル: sigma_z_diagonal_action
 # 証明の準備の二つの鎖:
 #   σ^z e_1 = [[1,0],[0,-1]](1,0)^⊤ = (1·1+0·0, 0·1+(-1)·0)^⊤ = (1+0, 0+0)^⊤ = (1,0)^⊤ = e_1
-#   σ^z e_2 = [[1,0],[0,-1]](0,1)^⊤ = (1·0+0·1, 0·0+(-1)·1)^⊤ = (0+0, 0+(-1))^⊤ = (0,-1)^⊤
+#   σ^z e_2 = [[1,0],[0,-1]](0,1)^⊤ = (1·0+0·1, 0·0+(-1)·1)^⊤ = (0+0, 0+(-1))^⊤ = (0, 0+(-1))^⊤ = (0,-1)^⊤
 #           = ((-1)·0, (-1)·1)^⊤ = (-(0), -(1))^⊤ = -e_2
 # 第一行は Sage の行列の積、第二行は mat_mult の和の式を一項ずつ足す経路と、手で書いた和、
 # 第三行は積だけを済ませた和（各積を別に計算して並べる）、第四行は手で書いた列、
-# e_2 の第五行は (-1)·z を、第六行は成分ごとの符号反転を、最後の行は def_matrix_negation の -e_2 を作る。帰属: ZZ。
+# e_2 では第四行で第 1 成分の右から足す 0 だけを消した列（加法の単位元）、第五行で第 2 成分の左から足す 0 を
+# 消した列（complex_zero_plus_is_original）を作り、第六行は (-1)·z を、第七行は成分ごとの符号反転を、最後の行は def_matrix_negation の -e_2 を作る。帰属: ZZ。
 load("../../_shared/site_sigma_z_kronecker.sage")
 
 def mat_mult_by_definition(A, v):
@@ -35,7 +36,8 @@ assert p == [0, 0, 0, -1]
 chain = [SIGMA_Z * E[2],
          col(1 * 0 + 0 * 1, 0 * 0 + (-1) * 1),
          col(p[0] + p[1], p[2] + p[3]),
-         col(0, -1),
+         col(0, p[2] + p[3]),                 # 加法の単位元（第 1 成分の 0 + 0 = 0）
+         col(0, -1),                          # complex_zero_plus_is_original（0 + (-1) = -1）
          col((-1) * 0, (-1) * 1),
          col(-(E[2][0, 0]), -(E[2][1, 0])),
          negate_entrywise(E[2])]
@@ -43,5 +45,5 @@ assert chain[0] == mat_mult_by_definition(SIGMA_Z, E[2])
 assert all(c == chain[0] for c in chain)
 # 対照: σ^z e_2 は e_2 ではない（符号が効いている）
 assert SIGMA_Z * E[2] != E[2]
-print("checked sigma^z e_1 = e_1 (5 terms) and sigma^z e_2 = -e_2 (7 terms) line by line")
+print("checked sigma^z e_1 = e_1 (5 terms) and sigma^z e_2 = -e_2 (8 terms) line by line")
 print("RESULT: PASS")
