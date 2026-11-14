@@ -1707,7 +1707,7 @@ t
 &= \arcsin\!\left(\frac{0}{\sqrt{1+0\cdot 0}^{(\mathbb{R}_{\geq 0})}}\right)
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
 &= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
 &= \arcsin\!\left(\frac{0}{1}\right)
@@ -1724,6 +1724,7 @@ t
       status: "added",
       notes: [
         "2026-11-08: relation_of_gamma_2_theta_tilde の準備の第五にあった arctan 0 の鎖を独立の主張にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖と relation_of_gamma_2_theta_tilde の (3)(4) の鎖が引く。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
       ],
     },
   },
@@ -1753,7 +1754,7 @@ t
 &= \sqrt{1-0\cdot 0}^{(\mathbb{R}_{\geq 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
 &= \sqrt{1-0}^{(\mathbb{R}_{\geq 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
 &= 1
@@ -1766,6 +1767,7 @@ t
         "2026-11-02: elementary_sine_bounds を分けるときに、積分の端点 0 での値に要るので足した。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 √1 = 1 が 1 ≥ 0・1^2 = 1・definition_of_sqrt_r_positive の一意性を 1 行で使っていたので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 「ℝ の四則」1 行（0^2 = 0・1 − 0 = 1 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a − 0 = a（a → 1）の 3 行に割った。値と主張は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 4 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
       ],
     },
   },

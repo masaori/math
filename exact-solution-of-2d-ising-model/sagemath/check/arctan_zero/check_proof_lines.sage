@@ -18,7 +18,7 @@ assert bool(arctan(SR(0)) == arcsin(SR(0) / sqrt(1 + SR(0)**2))); eq_count += 1
 args = [
     z / sqrt_aa(one + z**2),       # 1 行目の引数
     z / sqrt_aa(one + z * z),      # 2 行目: square_of_real_number_is_product（r → 0）
-    z / sqrt_aa(one + z),          # 3 行目: ℝ で 0·x = 0（x → 0）
+    z / sqrt_aa(one + z),          # 3 行目: real_zero_times_is_zero（x → 0）
     z / sqrt_aa(one),              # 4 行目: a + 0 = a（a → 1）
     z / one,                       # 5 行目: sqrt_of_real_one_is_one
     z,                             # 6 行目: 0/x = 0（x → 1）

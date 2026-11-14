@@ -5,7 +5,7 @@ s0 = sin_exact(0)
 l1 = sqrt_nonneg(1 - s0 ^ 2)            # 1 行目: def_cos
 l2 = sqrt_nonneg(1 - AA(0) ^ 2)         # 2 行目: sine_zero
 l3 = sqrt_nonneg(1 - AA(0) * AA(0))     # 3 行目: square_of_real_number_is_product (r → 0)
-l4 = sqrt_nonneg(1 - AA(0))             # 4 行目: ℝ で 0·x = 0 (x → 0)
+l4 = sqrt_nonneg(1 - AA(0))             # 4 行目: real_zero_times_is_zero (x → 0)
 l5 = sqrt_nonneg(AA(1))                 # 5 行目: ℝ で a − 0 = a (a → 1)
 assert AA(0) ^ 2 == AA(0) * AA(0)       # 3 行目の事実
 assert AA(0) * AA(0) == 0               # 4 行目の事実
