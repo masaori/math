@@ -61,15 +61,37 @@ theorem smoothing_straight_visit_count_update {m : ℕ} {V : Type} [DecidableEq 
       = (Finset.univ.filter fun k : Fin m => vertex k = w ∧
           (visit' k).turn = .straight ∧ (visit' k).vertical = ax).card
         + (if vertex a = w then 1 else 0) := by
+  classical
   obtain ⟨hvtx, hsa, hsb, haxne⟩ := hcross
+  have remove_one (S T : Finset (Fin m)) (x : Fin m)
+      (hx : x ∈ S) (hnot : x ∉ T)
+      (hother : ∀ y, y ≠ x → (y ∈ S ↔ y ∈ T)) :
+      S.card = T.card + 1 := by
+    have hset : T = S.erase x := by
+      ext y
+      simp only [Finset.mem_erase]
+      constructor
+      · intro hTy
+        have hyx : y ≠ x := by
+          rintro rfl
+          exact hnot hTy
+        exact ⟨hyx, (hother y hyx).mpr hTy⟩
+      · rintro ⟨hyx, hSy⟩
+        exact (hother y hyx).mp hSy
+    have hpos : 0 < S.card := Finset.card_pos.mpr ⟨x, hx⟩
+    rw [hset, Finset.card_erase_of_mem hx]
+    omega
   by_cases hw : vertex a = w
   · -- 人手証明の「w = v の場合」: 軸 ax に属する側の添字がちょうど一つ除かれる
     rw [if_pos hw]
     by_cases hax : (visit a).vertical = ax
     · -- 除かれる一元は a
-      refine flip_single_membership_card_necSuf Finset.univ _ _ a (Finset.mem_univ a)
-        ⟨hw, hsa, hax⟩ (fun hQ => ha hQ.2.1) ?_
-      intro y _ hya
+      refine remove_one _ _ a ?_ ?_ ?_
+      · exact Finset.mem_filter.mpr ⟨Finset.mem_univ a, hw, hsa, hax⟩
+      · intro hQ
+        exact ha (Finset.mem_filter.mp hQ).2.2.1
+      intro y hya
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and]
       by_cases hyb : y = b
       · subst hyb
         constructor
@@ -83,9 +105,12 @@ theorem smoothing_straight_visit_count_update {m : ℕ} {V : Type} [DecidableEq 
         cases h1 : (visit a).vertical <;> cases h2 : (visit b).vertical <;>
           cases ax <;> simp_all
       have hbw : vertex b = w := hvtx.symm.trans hw
-      refine flip_single_membership_card_necSuf Finset.univ _ _ b (Finset.mem_univ b)
-        ⟨hbw, hsb, hbx⟩ (fun hQ => hb hQ.2.1) ?_
-      intro y _ hyb
+      refine remove_one _ _ b ?_ ?_ ?_
+      · exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, hbw, hsb, hbx⟩
+      · intro hQ
+        exact hb (Finset.mem_filter.mp hQ).2.2.1
+      intro y hyb
+      simp only [Finset.mem_filter, Finset.mem_univ, true_and]
       by_cases hya : y = a
       · subst hya
         constructor
