@@ -131,16 +131,21 @@ for xx, yy in POS + NEG_UP + NEG_DOWN:
 # x = 0 の三つの鎖
 for yy in (AA(3), AA(1) / 7, s2):                                # x = 0, y > 0
     assert phi_polar_equals((AA(0), yy), (yy, pi_ / 2))          # 行 0 → 1（def_phi_polar）
-    rows = [phi_cartesian((yy, pi_ / 2)), (yy * cos_sin(pi_ / 2)[0], yy * cos_sin(pi_ / 2)[1]), (yy * 0, yy * 1), (AA(0), yy)]
+    rows = [phi_cartesian((yy, pi_ / 2)), (yy * cos_sin(pi_ / 2)[0], yy * cos_sin(pi_ / 2)[1]), (yy * 0, yy * 1),
+            (AA(0), yy * 1),                                     # real_times_zero_is_zero (x -> y)
+            (AA(0), yy)]                                         # 1 は積の単位元
     assert cos_sin(pi_ / 2) == (0, 1)
     assert all(a == b for a, b in zip(rows, rows[1:])) and rows[-1] == (0, yy)
 for yy in (AA(-3), -AA(1) / 2, -s3):                             # x = 0, y < 0
     assert phi_polar_equals((AA(0), yy), (-yy, -pi_ / 2))        # 行 0 → 1（def_phi_polar）
     rows = [phi_cartesian((-yy, -pi_ / 2)), ((-yy) * cos_sin(-pi_ / 2)[0], (-yy) * cos_sin(-pi_ / 2)[1]),
-            ((-yy) * 0, (-yy) * (-1)), (AA(0), yy)]
+            ((-yy) * 0, (-yy) * (-1)),
+            (AA(0), (-yy) * (-1)),                               # real_times_zero_is_zero (x -> -y)
+            (AA(0), yy)]                                         # 負号を 2 度施す
     assert cos_sin(-pi_ / 2) == (0, -1)
     assert all(a == b for a, b in zip(rows, rows[1:])) and rows[-1] == (0, yy)
-rows = [phi_cartesian(ZERO), (0 * cos_sin(Ang(0))[0], 0 * cos_sin(Ang(0))[1]), (AA(0), AA(0))]   # x = y = 0
+rows = [phi_cartesian(ZERO), (0 * cos_sin(Ang(0))[0], 0 * cos_sin(Ang(0))[1]),
+        (AA(0), AA(0))]                                          # x = y = 0。real_zero_times_is_zero (x -> cos 0, sin 0)
 assert all(a == b for a, b in zip(rows, rows[1:]))
 assert phi_polar_equals((AA(0), AA(0)), ZERO)
 

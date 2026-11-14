@@ -59,16 +59,40 @@ s=s'=0\ \lor\ \left(s=s'\land\varphi\sim_{\mathrm{angle}}\varphi'\right)`,
         " または ",
         math(String.raw`r'=\tilde r'=0`),
         " のとき。",
+        math(String.raw`r=\tilde r=0`),
+        " ならば",
       ]),
       displayMath(String.raw`\begin{aligned}
 rr'
+&= 0\cdot r'
+&&(\because\ r=0)\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to r'))\\
+&= 0\cdot\tilde r'
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\tilde r')\ \text{を右辺から左辺へ})\\
 &= \tilde r\tilde r'
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
+&&(\because\ \tilde r=0)
 \end{aligned}`),
       paragraph([
-        "であるから、",
+        "であり、",
+        math(String.raw`r'=\tilde r'=0`),
+        " ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+rr'
+&= r\cdot 0
+&&(\because\ r'=0)\\
+&= 0
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to r))\\
+&= \tilde r\cdot 0
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to\tilde r)\ \text{を右辺から左辺へ})\\
+&= \tilde r\tilde r'
+&&(\because\ \tilde r'=0)
+\end{aligned}`),
+      paragraph([
+        "である。いずれの場合も鎖が ",
+        math(String.raw`0`),
+        " を通るので、",
         math(String.raw`(rr',\theta+\theta')`),
         " と ",
         math(String.raw`(\tilde r\tilde r',\tilde\theta+\tilde\theta')`),
@@ -144,6 +168,7 @@ rr'
         "2026-11-01: 「（極座標表現）の乗法群」の証明の冒頭に「準備」として置いていた well-defined 性を、" +
           "積を使う全ての箇所の前提であり 1 ブロック 1 主張の規律に当たるため、独立した主張として切り出し、極座標表現の演算の定義の前に置いた。" +
           "別の代表元の記号を (r_1,θ_1) から (r̃,θ̃) に改めた（結合律の段の (r_1,θ_1) と意味が衝突していたため）。計算は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 場合 (a) の鎖が「ℝ では 0 を因子にもつ積は 0」を名前だけで根拠にしていたので、r = r̃ = 0 の鎖と r' = r̃' = 0 の鎖に分け、それぞれ 0 を代入する行と real_zero_times_is_zero・real_times_zero_is_zero（同じファイルの後ろのブロック）の参照の行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/polar_multiplication_well_defined/ の場合 (a) を割った鎖に合わせた。",
       ],
     },
   },
@@ -823,7 +848,7 @@ b
 &= (a-b\cdot 0,\ a\cdot 0+b)
 &&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})\\
 &= (a-0,\ 0+b)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
 &= (a,b)
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
 \end{aligned}`,
@@ -911,8 +936,10 @@ a^2
 a^2+b^2
 &= 0^2+0^2
 &&(\because\ \text{仮定}\ a=b=0)\\
+&= 0\cdot 0+0\cdot 0
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0)\ \text{を 2 箇所へ適用})\\
 &= 0+0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0)\ \text{を 2 箇所へ適用})\\
 &= 0
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
 \end{aligned}`,
@@ -966,8 +993,12 @@ a^2+b^2
       displayMath(
         String.raw`\begin{aligned}
 1^2+0^2
+&= 1\cdot 1+0\cdot 0
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 1,\ r\to 0)\ \text{を 2 箇所へ適用})\\
+&= 1+0\cdot 0
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
 &= 1+0
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元、および}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= 1
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &> 0
@@ -1123,6 +1154,7 @@ b
           "左辺から右辺までの 1 つの鎖へつないだ。単位元・平方和の同値・積で閉じること・逆元の存在は、" +
           "根拠の書かれていなかった段（1 が積の単位元、0 を因子にもつ積が 0、和の逆元、約分など）を" +
           "それぞれ独立した段として明示した。段は増えており、減った段は無い。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖・平方和の同値の a = b = 0 の鎖・1_C の平方和の鎖の「ℝ では 0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの後ろのブロック）の参照に替えた。平方を積に開く段は square_of_real_number_is_product の参照の行に、1 は積の単位元と 0 を因子にもつ積を束ねた行は 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
       ],
     },
   },
@@ -1263,8 +1295,12 @@ b
 &&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{より}\ -1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0))\\
 &= \bigl((-1)a-0\cdot b,\ (-1)b+0\cdot a\bigr)
 &&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
+&= \bigl((-1)a-0,\ (-1)b+0\bigr)
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
+&= \bigl((-1)a,\ (-1)b\bigr)
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})\\
 &= (-a,-b)
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元、}\ 0\ \text{を因子にもつ積は}\ 0\text{、}\ 0\ \text{は和の単位元})
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -1377,6 +1413,7 @@ b
         "原文の CC の定義は「CC := RR^2 に以下の演算を入れたもの」として積のみを明示しており、" +
           "加法が明示されていない。体であることを述べるには加法が必要なので、" +
           "本証明では RR^2 の成分ごとの加法を採ることを冒頭で明示した。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: -z と (-1_C)·z の一致の鎖の最後の行が「1 は積の単位元、0 を因子にもつ積は 0、0 は和の単位元」を 1 行で当てていたので、real_zero_times_is_zero（同じファイルの後ろのブロック）の参照の行・0 は和の単位元の行・1 は積の単位元の行の 3 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
       ],
     },
   },
@@ -3153,8 +3190,10 @@ z^2
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (y\cdot 0,\ y\cdot 1)
 &&(\because\ \cos(\pi/2)=0,\ \sin(\pi/2)=1)\\
+&= (0,\ y\cdot 1)
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to y))\\
 &= (0,\ y)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ 1\ \text{は積の単位元})\\
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
 &= (x,\ y)
 &&(\because\ x=0)
 \end{aligned}`,
@@ -3176,8 +3215,10 @@ z^2
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= \bigl((-y)\cdot 0,\ (-y)\cdot(-1)\bigr)
 &&(\because\ \cos(-\pi/2)=0,\ \sin(-\pi/2)=-1)\\
+&= \bigl(0,\ (-y)\cdot(-1)\bigr)
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to -y))\\
 &= (0,\ y)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ \text{負号を 2 度施すともとに戻る})\\
+&&(\because\ \text{負号を 2 度施すともとに戻る})\\
 &= (x,\ y)
 &&(\because\ x=0)
 \end{aligned}`,
@@ -3198,7 +3239,7 @@ z^2
 &= (0\cdot\cos 0,\ 0\cdot\sin 0)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,\ 0)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\cos 0,\ x\to\sin 0)\ \text{を 2 箇所へ適用})\\
 &= (x,\ y)
 &&(\because\ x=0\ \text{かつ}\ y=0)
 \end{aligned}`,
@@ -3218,6 +3259,7 @@ z^2
       notes: [
         "2026-11-01、1 ブロック 1 主張に従い、isomorphism_of_phi_cartesian の証明の後半（合成が恒等写像であることの場合分けの計算）を" +
           "この主張として切り出した。同時に、各場合の末尾の参照の一覧を各行の \\blkref に移し、各場合の最初の行を写像の合成の定義と φ_polar の定義の二行に分けた。計算は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: x = 0 の三つの場合の鎖の「0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの前のブロック）の参照に替え、1 は積の単位元・負号を 2 度施すことと束ねていた 2 行はそれぞれ 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/phi_cartesian_after_phi_polar_is_identity/ の x = 0 の鎖を割った行に合わせた。",
       ],
     },
   },
