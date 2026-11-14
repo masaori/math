@@ -22,11 +22,28 @@ theorem crossing_number_vertex_decomposition {m : ℕ} {V : Type} [DecidableEq V
         p.1 < p.2 ∧ IndexCrossing vertex visit p.1 p.2).card
       = ∑ v : V, (((Finset.univ ×ˢ Finset.univ).filter fun p : Fin m × Fin m =>
           p.1 < p.2 ∧ IndexCrossing vertex visit p.1 p.2).filter
-            fun p => vertex p.1 = v).card :=
-  card_eq_sum_fiber_card_necSuf
-    ((Finset.univ ×ˢ Finset.univ).filter fun p : Fin m × Fin m =>
-      p.1 < p.2 ∧ IndexCrossing vertex visit p.1 p.2)
-    (fun p => vertex p.1) Finset.univ (fun _ _ => Finset.mem_univ _)
+            fun p => vertex p.1 = v).card := by
+  let C := (Finset.univ ×ˢ Finset.univ).filter fun p : Fin m × Fin m =>
+    p.1 < p.2 ∧ IndexCrossing vertex visit p.1 p.2
+  let Cᵥ (v : V) := C.filter fun p => vertex p.1 = v
+  have hcover : (Finset.univ.biUnion Cᵥ) = C := by
+    ext p
+    simp only [Finset.mem_biUnion, Finset.mem_univ, true_and, Cᵥ, Finset.mem_filter]
+    constructor
+    · rintro ⟨v, hp, _⟩
+      exact hp
+    · intro hp
+      exact ⟨vertex p.1, hp, rfl⟩
+  have hdisj : ∀ v ∈ (Finset.univ : Finset V), ∀ w ∈ Finset.univ, v ≠ w →
+      Disjoint (Cᵥ v) (Cᵥ w) := by
+    intro v _ w _ hvw
+    apply Finset.disjoint_left.mpr
+    intro p hpv hpw
+    exact hvw ((Finset.mem_filter.mp hpv).2.symm.trans (Finset.mem_filter.mp hpw).2)
+  change C.card = ∑ v : V, (Cᵥ v).card
+  calc
+    C.card = (Finset.univ.biUnion Cᵥ).card := by rw [hcover]
+    _ = ∑ v : V, (Cᵥ v).card := Finset.card_biUnion hdisj
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem crossing_number_vertex_decomposition_from_necSuf

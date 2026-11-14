@@ -84850,9 +84850,9 @@ const chapter_real_escape = defineSection({
 &=-\iota(\ell_2)+\iota(\ell_2)
 &&(\because\ \varepsilon\text{ の定義})\\
 &=0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と加法。素数ごとに }\mathbb{Q}\text{ の中で }-\iota(\ell_2)(p)+\iota(\ell_2)(p)=0)\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と加法により、素数ごとに }\mathbb{Q}\text{ の中で }-\iota(\ell_2)(p)+\iota(\ell_2)(p)=0)\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)
-&&(\because\ \blkref{claim_open_square_free_entropy_density_nonnegative}\text{ を }L:=L\text{、}q:=q\text{ で読む。}L\ge1)
+&&(\because\ \blkref{claim_open_square_free_entropy_density_nonnegative}\text{ を }L:=L\text{、}q:=q\text{ で読み、}L\ge1)
 \end{aligned}`),
                         paragraph([
                           "使ったのは、下組の定義、",
