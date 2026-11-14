@@ -63,6 +63,20 @@ theorem negatedParallelStaircase_turnValue_sum_eq (L : ℕ) (wh wv : ℤ)
   · exact (negatedParallelStaircaseStep_turn_spec L wh wv
       (L * wh.natAbs + L * wv.natAbs - 1) 0 (by omega) hn).2
 
+private theorem twoPhaseStaircase_difference_concrete
+    (p : ℕ) (a b : ℤ × ℤ) (s : ℕ) :
+    twoPhaseStaircase p a b (s + 1) - twoPhaseStaircase p a b s =
+      twoBlockSequence p a b s := by
+  by_cases hs : s < p
+  · simp [twoPhaseStaircase, twoBlockSequence, hs, show s ≤ p by omega,
+      show s + 1 ≤ p by omega, add_mul]
+  · by_cases heq : s = p
+    · subst s
+      simp [twoPhaseStaircase, twoBlockSequence]
+    · have hsub : s + 1 - p = (s - p) + 1 := by omega
+      simp [twoPhaseStaircase, twoBlockSequence, hs, show ¬s ≤ p by omega,
+        show ¬s + 1 ≤ p by omega, hsub, add_mul]
+
 /-- 本文の二区間の表。空区間の方向は実際の歩として使われない。 -/
 theorem negatedParallelStaircaseStep_eq (L : ℕ) (wh wv : ℤ) (s : ℕ) :
     negatedParallelStaircaseStep L wh wv s =
@@ -74,7 +88,7 @@ theorem negatedParallelStaircaseStep_eq (L : ℕ) (wh wv : ℤ) (s : ℕ) :
   unfold windingParallelStaircase orderedTwoPhaseStaircase
   by_cases horder : 0 < wh * wv <;> simp only [horder, ite_true, ite_false]
   all_goals
-    rw [twoPhaseStaircase_difference_necSuf]
+    rw [twoPhaseStaircase_difference_concrete]
     unfold twoBlockSequence
     split <;> rfl
 

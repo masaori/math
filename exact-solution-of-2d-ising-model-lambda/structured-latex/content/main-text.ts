@@ -73758,7 +73758,9 @@ b,&s=p,\\
                         "（", math(String.raw`0\le s<n`), "）と置くと、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
+v_s&=(-G^{\gamma}_{s+1})-(-G^{\gamma}_s)
+&&\bigl(\because\ v_s\text{ の定義}\bigr)\\
+&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
 &&\bigl(\because\ \mathbb Z^2\text{ の減法と加法逆元}\bigr)\\
 &=\begin{cases}-a,&s<p,\\-b,&s\ge p\end{cases}
 &&\bigl(\because\ \text{直前の隣接差を代入}\bigr)
