@@ -186,15 +186,29 @@ def step_tail(name, n, k, two_k, em, ep, T):
             ("((-1)^{(n+1)/2}(2k)^{n+1})Ž", body_scalar(sgn(e) * pw(two_k, n + 1), T)),
         ]
     if name == 'h2.y' and n % 2 == 0:
+        sg, p, two = sgn(QQ(n) / 2), pw(two_k, n), k.parent()(2)
+        # 積の結合律・可換律を 1 行に 1 つずつ当てる 4 行（括弧は行の式どおり）
         return [
-            ("((-1)^{n/2}(2k)^n(2k))Ž", body_scalar(sgn(QQ(n) / 2) * pw(two_k, n) * two_k, T)),
+            ("(2(k(sp)))Ž", body_scalar(two * (k * (sg * p)), T)),
+            ("((2k)(sp))Ž", body_scalar((two * k) * (sg * p), T)),
+            ("((sp)(2k))Ž", body_scalar((sg * p) * (two * k), T)),
+            ("(s(p(2k)))Ž", body_scalar(sg * (p * (two * k)), T)),
             ("((-1)^{n/2}(2k)^{n+1})Ž", body_scalar(sgn(QQ(n) / 2) * pw(two_k, n + 1), T)),
             ("((-1)^{((n+1)-1)/2}(2k)^{n+1})Ž", body_scalar(sgn(QQ((n + 1) - 1) / 2) * pw(two_k, n + 1), T)),
         ]
     if name == 'h2.y':
         e = QQ(n - 1) / 2
+        sg, p, two, m = sgn(e), pw(two_k, n), k.parent()(2), k.parent()(-1)
+        # multiply_by_minus_one の 1 行と、積の結合律・可換律を 1 行に 1 つずつ当てる 7 行（括弧は行の式どおり）
         return [
-            ("((-1)^{(n-1)/2}(-1)(2k)^n(2k))Y̌", body_scalar(sgn(e) * (-1) * pw(two_k, n) * two_k, T)),
+            ("((k(sp))(m2))Y̌", body_scalar((k * (sg * p)) * (m * two), T)),
+            ("((m2)(k(sp)))Y̌", body_scalar((m * two) * (k * (sg * p)), T)),
+            ("(m(2(k(sp))))Y̌", body_scalar(m * (two * (k * (sg * p))), T)),
+            ("(m((2k)(sp)))Y̌", body_scalar(m * ((two * k) * (sg * p)), T)),
+            ("(m((sp)(2k)))Y̌", body_scalar(m * ((sg * p) * (two * k)), T)),
+            ("(m(s(p(2k))))Y̌", body_scalar(m * (sg * (p * (two * k))), T)),
+            ("((ms)(p(2k)))Y̌", body_scalar((m * sg) * (p * (two * k)), T)),
+            ("((sm)(p(2k)))Y̌", body_scalar((sg * m) * (p * (two * k)), T)),
             ("((-1)^{(n-1)/2+1}(2k)^{n+1})Y̌", body_scalar(sgn(e + 1) * pw(two_k, n + 1), T)),
             ("((-1)^{(n+1)/2}(2k)^{n+1})Y̌", body_scalar(sgn(QQ(n + 1) / 2) * pw(two_k, n + 1), T)),
         ]
