@@ -13,6 +13,28 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
 
+/-- 四区間の各歩の一致を、連結列の同じ位置の一致へ移す。 -/
+private theorem fourPartSequence_congr_range_concrete {Y : Type*}
+    (u v r x U V R X : ℕ → Y) (a b c d : ℕ)
+    (hu : ∀ i < a, u i = U i) (hv : ∀ i < b, v i = V i)
+    (hr : ∀ i < c, r i = R i) (hx : ∀ i < d, x i = X i)
+    (j : ℕ) (hj : j < a + b + c + d) :
+    joinDirectionSequence (joinDirectionSequence (joinDirectionSequence u v a) r (a + b))
+        x (a + b + c) j =
+      joinDirectionSequence (joinDirectionSequence (joinDirectionSequence U V a) R (a + b))
+        X (a + b + c) j := by
+  by_cases hja : j < a
+  · simp only [joinDirectionSequence, if_pos (show j < a + b + c by omega),
+      if_pos (show j < a + b by omega), if_pos hja, hu j hja]
+  · by_cases hjab : j < a + b
+    · simp only [joinDirectionSequence, if_pos (show j < a + b + c by omega),
+        if_pos hjab, if_neg hja, hv (j - a) (by omega)]
+    · by_cases hjabc : j < a + b + c
+      · simp only [joinDirectionSequence, if_pos hjabc, if_neg hjab,
+          hr (j - (a + b)) (by omega)]
+      · simp only [joinDirectionSequence, if_neg hjabc,
+          hx (j - (a + b + c)) (by omega)]
+
 private theorem transverse_zero (wh wv : ℤ) (S : ℤ × ℤ) :
     iteratedTransverseStaircase wh wv S 0 = S := by
   simp [iteratedTransverseStaircase, iteratedStaircase,
@@ -146,7 +168,7 @@ theorem oneSidedClosure_cyclicTurning_identification
       W (j + 1) - W j = _ := oneSidedClosure_stepSequence p q r s
         (c * m) b (c * n) (Nat.mul_pos hc hm) hb (Nat.mul_pos hc hn)
         h12 h23 h34 j (by omega)
-      _ = z j := fourPartSequence_congr_range _ _ _ _
+      _ = z j := fourPartSequence_congr_range_concrete _ _ _ _
         (repeatedLatticeWord u) (extendLatticeWord v) (repeatedLatticeWord e)
         (extendLatticeWord x) (c * m) b (c * n) b hu hv hr hx j hj
   -- 内部の隣接対は二つとも区間内にあり、閉じ目も最後と最初の歩だけを読む。

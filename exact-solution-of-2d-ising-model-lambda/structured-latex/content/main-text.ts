@@ -74610,7 +74610,7 @@ V_c(i)&=v(i)
 R_c(s)&=r(s\bmod n)
 &&\bigl(\because\ \blkref{claim_one_sided_parallel_return_repetition}\bigr),\\
 X_c(i)&=x(i)
-&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr).
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となる。連結の写像 ", math(String.raw`\mathcal J_c`), " を、",
