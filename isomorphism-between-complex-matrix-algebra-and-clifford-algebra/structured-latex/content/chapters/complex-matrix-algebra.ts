@@ -3547,4 +3547,709 @@ y_k+_{\mathbb{C}}x_k
 \end{aligned}`),
     ],
   },
+  {
+    id: "complex_matrix_algebra_definition_reversal_of_subsets",
+    kind: "definition",
+    title: { text: "部分集合の番号を逆順に付け替える写像" },
+    labels: ["def_reversal_of_subsets"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。写像 ", math(String.raw`\varrho_M:\mathcal{P}_M\to\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"),
+        "）を、", math(String.raw`T\in\mathcal{P}_M`), " について次で定める。",
+      ]),
+      displayMath(String.raw`\varrho_M(T):=\{\,M+1-s\ :\ s\in T\,\}`),
+      paragraph([
+        math(String.raw`s\in T`), " なら ", math(String.raw`1\le s\le M`), " なので ", math(String.raw`1\le M+1-s\le M`), " であり、右辺は ", math(String.raw`\{1,\dots,M\}`),
+        " の部分集合、すなわち ", math(String.raw`\mathcal{P}_M`), " の元である。", math(String.raw`M+1-s`), " は ", math(String.raw`\mathbb{Z}`), " の中の和と差である。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_membership_in_reversed_subset",
+    kind: "claim",
+    title: { text: "番号を逆順に付け替えた部分集合に入る番号" },
+    labels: ["claim_membership_in_reversed_subset"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`T\in\mathcal{P}_M`), " とし、", math(String.raw`\varrho_M`), " を ", ref("def_reversal_of_subsets"),
+        " の写像とする。すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`t\in\varrho_M(T)\iff M+1-t\in T`),
+    ],
+    proof: [
+      paragraph([
+        "（", math(String.raw`\Rightarrow`), "）", math(String.raw`t\in\varrho_M(T)`), " なら、", ref("def_reversal_of_subsets"), " により ", math(String.raw`t=M+1-s`),
+        " を満たす ", math(String.raw`s\in T`), " がある。このとき ", math(String.raw`M+1-t=s\in T`), " である。",
+      ]),
+      paragraph([
+        "（", math(String.raw`\Leftarrow`), "）", math(String.raw`s:=M+1-t`), " と置くと ", math(String.raw`s\in T`), " であり、", math(String.raw`M+1-s=t`),
+        " なので、", ref("def_reversal_of_subsets"), " により ", math(String.raw`t\in\varrho_M(T)`), " である。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_reversal_of_subsets_is_involution",
+    kind: "claim",
+    title: { text: "番号を逆順に付け替える写像を二回当てると元の部分集合に戻る" },
+    labels: ["claim_reversal_of_subsets_is_involution"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\varrho_M`), " を ", ref("def_reversal_of_subsets"), " の写像とする。すべての ",
+        math(String.raw`T\in\mathcal{P}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\varrho_M\bigl(\varrho_M(T)\bigr)=T`),
+    ],
+    proof: [
+      paragraph([
+        "集合の等しさ（", ref("def_power_set_of_first_m_positive_integers"), "）を確かめる。", math(String.raw`t\in\{1,\dots,M\}`), " を任意に固定する。",
+        math(String.raw`M+1-t\in\{1,\dots,M\}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t\in\varrho_M\bigl(\varrho_M(T)\bigr)
+&\iff M+1-t\in\varrho_M(T)
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\ \text{で}\ T\to\varrho_M(T)\right)\\
+&\iff M+1-(M+1-t)\in T
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\ \text{で}\ t\to M+1-t\right)\\
+&\iff t\in T
+&&\left(\because\ M+1-(M+1-t)=t\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_numbering_of_power_set_with_first_site_as_highest_digit",
+    kind: "definition",
+    title: { text: "番号 1 を最上位の桁にする、部分集合全体の番号付けの写像" },
+    labels: ["def_numbering_of_power_set_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`e_M:\{1,\dots,2^M\}\to\mathcal{P}_M`), " を ", ref("def_binary_numbering_of_power_set"), "、",
+        math(String.raw`\varrho_M`), " を ", ref("def_reversal_of_subsets"), " の写像とする。写像 ", math(String.raw`r_M:\{1,\dots,2^M\}\to\mathcal{P}_M`), " を次で定める。",
+      ]),
+      displayMath(String.raw`r_M(k):=\varrho_M\bigl(e_M(k)\bigr)\qquad\bigl(k\in\{1,\dots,2^M\}\bigr)`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set",
+    kind: "claim",
+    title: { text: "番号 1 を最上位の桁にする写像は、部分集合全体の番号付けを与える" },
+    labels: ["claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`r_M`), " を ", ref("def_numbering_of_power_set_with_first_site_as_highest_digit"), " の写像とする。組 ",
+        math(String.raw`(2^M,r_M)`), " は ", math(String.raw`\mathcal{P}_M`), " の番号付け（", ref("def_numbering_of_finite_set"), "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(2^M,e_M)`), " は ", math(String.raw`\mathcal{P}_M`), " の番号付けであり（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、",
+        math(String.raw`e_M^{-1}`), " をその逆写像とする（", ref("def_numbering_of_finite_set"), "）。",
+      ]),
+      paragraph([
+        "単射の条件。", math(String.raw`k,l\in\{1,\dots,2^M\}`), " が ", math(String.raw`r_M(k)=r_M(l)`), " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e_M(k)
+&=\varrho_M\Bigl(\varrho_M\bigl(e_M(k)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_reversal_of_subsets_is_involution}\right)\\
+&=\varrho_M\bigl(r_M(k)\bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=\varrho_M\bigl(r_M(l)\bigr)
+&&\left(\because\ r_M(k)=r_M(l)\right)\\
+&=\varrho_M\Bigl(\varrho_M\bigl(e_M(l)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=e_M(l)
+&&\left(\because\ \blkref{claim_reversal_of_subsets_is_involution}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`e_M`), " は単射の条件を満たすので（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、", math(String.raw`k=l`), " である。",
+      ]),
+      paragraph([
+        "全射の条件。", math(String.raw`T\in\mathcal{P}_M`), " とし、", math(String.raw`k:=e_M^{-1}\bigl(\varrho_M(T)\bigr)\in\{1,\dots,2^M\}`), " と置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r_M(k)
+&=\varrho_M\bigl(e_M(k)\bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=\varrho_M\Bigl(e_M\bigl(e_M^{-1}(\varrho_M(T))\bigr)\Bigr)
+&&\left(\because\ k\ \text{の置き方}\right)\\
+&=\varrho_M\bigl(\varrho_M(T)\bigr)
+&&\left(\because\ \blkref{def_numbering_of_finite_set}\ \text{の}\ e(e^{-1}(x))=x\right)\\
+&=T
+&&\left(\because\ \blkref{claim_reversal_of_subsets_is_involution}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit",
+    kind: "definition",
+    title: { text: "番号 1 を最上位の桁にする番号付けによる行列の添字の付け替え" },
+    labels: ["def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。", math(String.raw`\mathcal{P}_M`), " は有限集合であり（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、",
+        math(String.raw`(2^M,r_M)`), " はその番号付けである（", ref("claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"), "）。",
+        ref("def_reindexing_of_matrices_by_numbering"), " を ", math(String.raw`X:=\mathcal{P}_M`), "、", math(String.raw`(n,e):=(2^M,r_M)`), " に当てた写像を次のように書く。",
+      ]),
+      displayMath(String.raw`\nu_{r_M}:\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})\to\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C}),\qquad \nu_{r_M}(F)_{k,l}=F_{r_M(k),r_M(l)}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_reindexing_of_matrices_by_inverse_of_numbering_with_first_site_as_highest_digit",
+    kind: "definition",
+    title: { text: "番号 1 を最上位の桁にする番号付けの逆写像による行列の添字の付け替え" },
+    labels: ["def_reindexing_of_matrices_by_inverse_of_numbering_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`r_M^{-1}`), " を番号付け ", math(String.raw`(2^M,r_M)`), "（",
+        ref("claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"), "）の逆写像（", ref("def_numbering_of_finite_set"), "）とする。",
+        ref("def_reindexing_of_matrices_by_inverse_numbering"), " を ", math(String.raw`X:=\mathcal{P}_M`), "、", math(String.raw`(n,e):=(2^M,r_M)`), " に当てた写像を次のように書く。",
+      ]),
+      displayMath(String.raw`\mu_{r_M}:\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})\to\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C}),\qquad \mu_{r_M}(G)_{S,T}=G_{r_M^{-1}(S),r_M^{-1}(T)}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_tuples_of_ones_and_twos",
+    kind: "definition",
+    title: { text: "各成分が 1 か 2 である M 個組の全体" },
+    labels: ["def_tuples_of_ones_and_twos"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。写像 ", math(String.raw`I:\{1,\dots,M\}\to\{1,2\}`), " の全体の集合を ", math(String.raw`\mathcal{I}_M`), " と書き、",
+        math(String.raw`I\in\mathcal{I}_M`), " を各成分が 1 か 2 である ", math(String.raw`M`), " 個組と呼ぶ。", math(String.raw`t\in\{1,\dots,M\}`), " について ",
+        math(String.raw`I(t)\in\{1,2\}`), " を ", math(String.raw`I`), " の第 ", math(String.raw`t`), " 成分と呼ぶ。", math(String.raw`I,J\in\mathcal{I}_M`), " について ",
+        math(String.raw`I=J`), " は、すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`I(t)=J(t)`), " であることである（写像の等しさ）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_tuple_of_membership_indices",
+    kind: "definition",
+    title: { text: "部分集合に各番号が入るかどうかを並べた組" },
+    labels: ["def_tuple_of_membership_indices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。写像 ", math(String.raw`\bar{o}_M:\mathcal{P}_M\to\mathcal{I}_M`), "（", ref("def_tuples_of_ones_and_twos"), "）を、",
+        math(String.raw`T\in\mathcal{P}_M`), " と ", math(String.raw`t\in\{1,\dots,M\}`), " について次で定める。", math(String.raw`o_T(t)\in\{1,2\}`), " は ",
+        ref("def_membership_index_of_subset"), " の添字である。",
+      ]),
+      displayMath(String.raw`\bar{o}_M(T)(t):=o_T(t)`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_positions_of_two_in_tuple",
+    kind: "definition",
+    title: { text: "組の成分が 2 である番号の集合" },
+    labels: ["def_positions_of_two_in_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。写像 ", math(String.raw`\mathrm{pos}_M:\mathcal{I}_M\to\mathcal{P}_M`), "（", ref("def_tuples_of_ones_and_twos"), "、",
+        ref("def_power_set_of_first_m_positive_integers"), "）を、", math(String.raw`I\in\mathcal{I}_M`), " について次で定める。",
+      ]),
+      displayMath(String.raw`\mathrm{pos}_M(I):=\{\,t\in\{1,\dots,M\}\ :\ I(t)=2\,\}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_tuple_of_membership_indices_of_positions_of_two_is_original",
+    kind: "claim",
+    title: { text: "成分が 2 である番号の集合から並べ直した組は、元の組に等しい" },
+    labels: ["claim_tuple_of_membership_indices_of_positions_of_two_is_original"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\bar{o}_M`), " を ", ref("def_tuple_of_membership_indices"), "、", math(String.raw`\mathrm{pos}_M`), " を ",
+        ref("def_positions_of_two_in_tuple"), " の写像とする。すべての ", math(String.raw`I\in\mathcal{I}_M`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)=I`),
+    ],
+    proof: [
+      paragraph([
+        "写像の等しさ（", ref("def_tuples_of_ones_and_twos"), "）を確かめる。", math(String.raw`t\in\{1,\dots,M\}`), " を任意に固定する。", math(String.raw`I(t)\in\{1,2\}`),
+        " なので二つの場合に分ける。",
+      ]),
+      paragraph(["（", math(String.raw`I(t)=2`), " の場合）", math(String.raw`t\in\mathrm{pos}_M(I)`), " である（", ref("def_positions_of_two_in_tuple"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)(t)
+&=o_{\mathrm{pos}_M(I)}(t)
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=2
+&&\left(\because\ t\in\mathrm{pos}_M(I)\text{。}\blkref{def_membership_index_of_subset}\right)\\
+&=I(t)
+&&\left(\because\ I(t)=2\right).
+\end{aligned}`),
+      paragraph(["（", math(String.raw`I(t)=1`), " の場合）", math(String.raw`I(t)\neq 2`), " なので ", math(String.raw`t\notin\mathrm{pos}_M(I)`), " である（", ref("def_positions_of_two_in_tuple"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)(t)
+&=o_{\mathrm{pos}_M(I)}(t)
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=1
+&&\left(\because\ t\notin\mathrm{pos}_M(I)\text{。}\blkref{def_membership_index_of_subset}\right)\\
+&=I(t)
+&&\left(\because\ I(t)=1\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_ordered_sum_of_integers",
+    kind: "definition",
+    title: { text: "整数の番号順の和" },
+    labels: ["def_ordered_sum_of_integers"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{Z}`), " とし、", math(String.raw`\{a,\dots,b\}`), " の各元 ", math(String.raw`t`), " に整数 ", math(String.raw`n_t\in\mathbb{Z}`),
+        " が一つずつ与えられているとする（", math(String.raw`b<a`), " のとき ", math(String.raw`\{a,\dots,b\}`), " は空集合で、何も与えられていない）。整数 ",
+        math(String.raw`\sum_{t=a}^{b}n_t\in\mathbb{Z}`), " を、", math(String.raw`b<a`), " のとき ", math(String.raw`0`), "、", math(String.raw`b\ge a`), " のとき ",
+        math(String.raw`\bigl(\sum_{t=a}^{b-1}n_t\bigr)+n_b`), " として ", math(String.raw`b`), " について帰納的に定める。すなわち ", math(String.raw`\mathbb{Z}`),
+        " の加法で ", math(String.raw`t=a,\dots,b`), " の順に足した整数である。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_number_of_tuple_with_first_site_as_highest_digit",
+    kind: "definition",
+    title: { text: "第 1 成分を最上位の桁として読んだ組の番号" },
+    labels: ["def_number_of_tuple_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`2^{M-t}\in\mathbb{Z}_{\ge 1}`), "（", math(String.raw`t\in\{1,\dots,M\}`), "）を ",
+        ref("def_binary_numbering_of_power_set"), " の整数、", math(String.raw`\sum_{t=1}^{M}`), " を ", ref("def_ordered_sum_of_integers"), " の和とする。写像 ",
+        math(String.raw`\mathrm{num}_M:\mathcal{I}_M\to\mathbb{Z}`), "（", ref("def_tuples_of_ones_and_twos"), "）を、", math(String.raw`I\in\mathcal{I}_M`), " について次で定める。",
+      ]),
+      displayMath(String.raw`\mathrm{num}_M(I):=1+\sum_{t=1}^{M}\bigl(I(t)-1\bigr)\cdot 2^{M-t}`),
+      paragraph([
+        "右辺の演算はすべて ", math(String.raw`\mathbb{Z}`), " の中の和・差・積である。値が ", math(String.raw`\{1,\dots,2^M\}`), " に入ることは、この定義では主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_number_of_membership_tuple_of_reversed_subset_without_top_element",
+    kind: "claim",
+    title: { text: "番号 M を含まない部分集合を逆順に付け替えた組の番号" },
+    labels: ["claim_number_of_membership_tuple_of_reversed_subset_without_top_element"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`S\in\mathcal{P}_{M-1}`), " とする。", math(String.raw`S\subseteq\{1,\dots,M-1\}\subseteq\{1,\dots,M\}`),
+        " なので ", math(String.raw`S\in\mathcal{P}_M`), " でもある。", ref("def_reversal_of_subsets"), "、", ref("def_tuple_of_membership_indices"), "、",
+        ref("def_number_of_tuple_with_first_site_as_highest_digit"), " の写像について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(S)\bigr)\Bigr)=\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(\varrho_{M-1}(S)\bigr)\Bigr)`),
+    ],
+    proof: [
+      paragraph([
+        "準備として次の二つを示す。（一）", math(String.raw`o_{\varrho_M(S)}(1)=1`), "。", ref("claim_membership_in_reversed_subset"), " により ",
+        math(String.raw`1\in\varrho_M(S)`), " は ", math(String.raw`M\in S`), " と同値であり、", math(String.raw`S\subseteq\{1,\dots,M-1\}`), " なので ",
+        math(String.raw`M\notin S`), " である。よって ", math(String.raw`1\notin\varrho_M(S)`), " であり、", ref("def_membership_index_of_subset"), " から従う。",
+      ]),
+      paragraph([
+        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_{\varrho_M(S)}(t)=o_{\varrho_{M-1}(S)}(t-1)`), "。", math(String.raw`t-1\in\{1,\dots,M-1\}`),
+        " であり、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t\in\varrho_M(S)
+&\iff M+1-t\in S
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\right)\\
+&\iff (M-1)+1-(t-1)\in S
+&&\left(\because\ M+1-t=(M-1)+1-(t-1)\right)\\
+&\iff t-1\in\varrho_{M-1}(S)
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\ \text{で}\ M\to M-1,\ t\to t-1\right).
+\end{aligned}`),
+      paragraph([
+        "したがって二つの添字は同じ場合分けで 2 か 1 になり（", ref("def_membership_index_of_subset"), "）、等しい。",
+        math(String.raw`T:=\varrho_M(S)`), "、", math(String.raw`T':=\varrho_{M-1}(S)`), " と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_M\bigl(\bar{o}_M(T)\bigr)
+&=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
+&=1+\sum_{t=1}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=1+\Bigl(\bigl(o_T(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \mathbb{Z}\ \text{の和の最初の項を分ける}\right)\\
+&=1+\Bigl((1-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \text{（一）}\right)\\
+&=1+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ (1-1)\cdot 2^{M-1}=0\right)\\
+&=1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ \text{（二）}\right)\\
+&=1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}
+&&\left(\because\ M-t=(M-1)-(t-1)\right)\\
+&=1+\sum_{s=1}^{M-1}\bigl(o_{T'}(s)-1\bigr)\cdot 2^{(M-1)-s}
+&&\left(\because\ \text{足す番号を}\ s:=t-1\ \text{に付け替える}\right)\\
+&=1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
+&&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_number_of_membership_tuple_of_reversed_subset_with_top_element",
+    kind: "claim",
+    title: { text: "番号 M を足した部分集合を逆順に付け替えた組の番号" },
+    labels: ["claim_number_of_membership_tuple_of_reversed_subset_with_top_element"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`S\in\mathcal{P}_{M-1}`), " とする。", math(String.raw`S\cup\{M\}\in\mathcal{P}_M`), " であり、",
+        ref("def_reversal_of_subsets"), "、", ref("def_tuple_of_membership_indices"), "、", ref("def_number_of_tuple_with_first_site_as_highest_digit"),
+        " の写像について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(S\cup\{M\})\bigr)\Bigr)=2^{M-1}+\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(\varrho_{M-1}(S)\bigr)\Bigr)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`T:=\varrho_M(S\cup\{M\})`), "、", math(String.raw`T':=\varrho_{M-1}(S)`), " と書く。準備として次の二つを示す。（一）", math(String.raw`o_T(1)=2`),
+        "。", math(String.raw`M+1-1=M\in S\cup\{M\}`), " なので、", ref("claim_membership_in_reversed_subset"), " により ", math(String.raw`1\in T`), " であり、",
+        ref("def_membership_index_of_subset"), " から従う。",
+      ]),
+      paragraph([
+        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_T(t)=o_{T'}(t-1)`), "。", math(String.raw`M+1-t\le M-1`), " なので ",
+        math(String.raw`M+1-t\neq M`), " であり、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t\in T
+&\iff M+1-t\in S\cup\{M\}
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\right)\\
+&\iff M+1-t\in S
+&&\left(\because\ M+1-t\neq M\right)\\
+&\iff (M-1)+1-(t-1)\in S
+&&\left(\because\ M+1-t=(M-1)+1-(t-1)\right)\\
+&\iff t-1\in T'
+&&\left(\because\ \blkref{claim_membership_in_reversed_subset}\ \text{で}\ M\to M-1,\ t\to t-1\right).
+\end{aligned}`),
+      paragraph(["したがって二つの添字は等しい（", ref("def_membership_index_of_subset"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_M\bigl(\bar{o}_M(T)\bigr)
+&=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
+&=1+\sum_{t=1}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=1+\Bigl(\bigl(o_T(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \mathbb{Z}\ \text{の和の最初の項を分ける}\right)\\
+&=1+\Bigl((2-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \text{（一）}\right)\\
+&=1+\Bigl(2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ (2-1)\cdot 2^{M-1}=2^{M-1}\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \mathbb{Z}\ \text{の加法の交換法則と結合法則}\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \text{（二）}\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}\Bigr)
+&&\left(\because\ M-t=(M-1)-(t-1)\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{T'}(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
+&&\left(\because\ \text{足す番号を}\ s:=t-1\ \text{に付け替える}\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=2^{M-1}+\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
+&&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit",
+    kind: "claim",
+    title: { text: "番号 1 を最上位の桁にする番号付けで得た部分集合の組の番号は、元の番号に戻る" },
+    labels: ["claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`r_M`), " を ", ref("def_numbering_of_power_set_with_first_site_as_highest_digit"), "、",
+        math(String.raw`\bar{o}_M`), " を ", ref("def_tuple_of_membership_indices"), "、", math(String.raw`\mathrm{num}_M`), " を ",
+        ref("def_number_of_tuple_with_first_site_as_highest_digit"), " の写像とする。すべての ", math(String.raw`k\in\{1,\dots,2^M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathrm{num}_M\Bigl(\bar{o}_M\bigl(r_M(k)\bigr)\Bigr)=k`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`M`), " についての帰納法で示す。", math(String.raw`M=0`), " のとき、", math(String.raw`k=1`), " であり、", math(String.raw`\{1,\dots,0\}`),
+        " は空集合なので ", math(String.raw`t=1,\dots,0`), " の和は ", math(String.raw`0`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_0\Bigl(\bar{o}_0\bigl(r_0(1)\bigr)\Bigr)
+&=1+\sum_{t=1}^{0}\Bigl(\bar{o}_0\bigl(r_0(1)\bigr)(t)-1\Bigr)\cdot 2^{0-t}
+&&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
+&=1+0
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合}\right)\\
+&=1.
+\end{aligned}`),
+      paragraph([
+        math(String.raw`M\ge 1`), " とし、", math(String.raw`M-1`), " で成り立つとする（帰納法の仮定）。", math(String.raw`h:=2^{M-1}`), " と置く。",
+        math(String.raw`k\in\{1,\dots,2^M\}`), " について二つの場合に分ける。",
+      ]),
+      paragraph([
+        "（", math(String.raw`k\le h`), " の場合）", math(String.raw`e_M(k)=e_{M-1}(k)`), "（", ref("def_binary_numbering_of_power_set"), "）であり、",
+        math(String.raw`e_{M-1}(k)\in\mathcal{P}_{M-1}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_M\Bigl(\bar{o}_M\bigl(r_M(k)\bigr)\Bigr)
+&=\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(e_M(k))\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(e_{M-1}(k))\bigr)\Bigr)
+&&\left(\because\ \blkref{def_binary_numbering_of_power_set}\ \text{で}\ k\le h\right)\\
+&=\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(\varrho_{M-1}(e_{M-1}(k))\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_number_of_membership_tuple_of_reversed_subset_without_top_element}\ \text{で}\ S:=e_{M-1}(k)\right)\\
+&=\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(r_{M-1}(k)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=k
+&&\left(\because\ \text{帰納法の仮定}\right).
+\end{aligned}`),
+      paragraph([
+        "（", math(String.raw`k>h`), " の場合）", math(String.raw`2^M=h+h`), "（", ref("def_binary_numbering_of_power_set"), "）なので ", math(String.raw`k-h\in\{1,\dots,h\}`), " であり、", math(String.raw`e_M(k)=e_{M-1}(k-h)\cup\{M\}`), "（",
+        ref("def_binary_numbering_of_power_set"), "）、", math(String.raw`e_{M-1}(k-h)\in\mathcal{P}_{M-1}`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_M\Bigl(\bar{o}_M\bigl(r_M(k)\bigr)\Bigr)
+&=\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(e_M(k))\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\varrho_M(e_{M-1}(k-h)\cup\{M\})\bigr)\Bigr)
+&&\left(\because\ \blkref{def_binary_numbering_of_power_set}\ \text{で}\ k>h\right)\\
+&=h+\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(\varrho_{M-1}(e_{M-1}(k-h))\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_number_of_membership_tuple_of_reversed_subset_with_top_element}\ \text{で}\ S:=e_{M-1}(k-h)\right)\\
+&=h+\mathrm{num}_{M-1}\Bigl(\bar{o}_{M-1}\bigl(r_{M-1}(k-h)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_power_set_with_first_site_as_highest_digit}\right)\\
+&=h+(k-h)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=k.
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_number_of_tuple_with_first_site_as_highest_digit_is_bijection",
+    kind: "claim",
+    title: { text: "第 1 成分を最上位の桁として読んだ組の番号は、組の全体から番号の集合への全単射である" },
+    labels: ["claim_number_of_tuple_with_first_site_as_highest_digit_is_bijection"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\mathrm{num}_M`), " を ", ref("def_number_of_tuple_with_first_site_as_highest_digit"),
+        " の写像とする。すべての ", math(String.raw`I\in\mathcal{I}_M`), " について ", math(String.raw`\mathrm{num}_M(I)\in\{1,\dots,2^M\}`), " であり、写像 ",
+        math(String.raw`\mathrm{num}_M:\mathcal{I}_M\to\{1,\dots,2^M\}`), " は全単射である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(2^M,r_M)`), " は ", math(String.raw`\mathcal{P}_M`), " の番号付けであり（", ref("claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"), "）、",
+        math(String.raw`r_M^{-1}`), " をその逆写像とする（", ref("def_numbering_of_finite_set"), "）。まず、すべての ", math(String.raw`I\in\mathcal{I}_M`), " について ",
+        math(String.raw`\mathrm{num}_M(I)=r_M^{-1}(\mathrm{pos}_M(I))`), " を示す（", math(String.raw`\mathrm{pos}_M`), " は ", ref("def_positions_of_two_in_tuple"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{num}_M(I)
+&=\mathrm{num}_M\Bigl(\bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_tuple_of_membership_indices_of_positions_of_two_is_original}\right)\\
+&=\mathrm{num}_M\biggl(\bar{o}_M\Bigl(r_M\bigl(r_M^{-1}(\mathrm{pos}_M(I))\bigr)\Bigr)\biggr)
+&&\left(\because\ \blkref{def_numbering_of_finite_set}\ \text{の}\ e(e^{-1}(x))=x\right)\\
+&=r_M^{-1}\bigl(\mathrm{pos}_M(I)\bigr)
+&&\left(\because\ \blkref{claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit}\ \text{で}\ k:=r_M^{-1}(\mathrm{pos}_M(I))\right).
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`\mathrm{num}_M(I)\in\{1,\dots,2^M\}`), " である。単射であること。", math(String.raw`I,J\in\mathcal{I}_M`), " が ",
+        math(String.raw`\mathrm{num}_M(I)=\mathrm{num}_M(J)`), " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+I
+&=\bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)
+&&\left(\because\ \blkref{claim_tuple_of_membership_indices_of_positions_of_two_is_original}\right)\\
+&=\bar{o}_M\Bigl(r_M\bigl(r_M^{-1}(\mathrm{pos}_M(I))\bigr)\Bigr)
+&&\left(\because\ \blkref{def_numbering_of_finite_set}\ \text{の}\ e(e^{-1}(x))=x\right)\\
+&=\bar{o}_M\bigl(r_M(\mathrm{num}_M(I))\bigr)
+&&\left(\because\ \text{上で示した}\ \mathrm{num}_M(I)=r_M^{-1}(\mathrm{pos}_M(I))\right)\\
+&=\bar{o}_M\bigl(r_M(\mathrm{num}_M(J))\bigr)
+&&\left(\because\ \mathrm{num}_M(I)=\mathrm{num}_M(J)\right)\\
+&=\bar{o}_M\Bigl(r_M\bigl(r_M^{-1}(\mathrm{pos}_M(J))\bigr)\Bigr)
+&&\left(\because\ \text{上で示した}\ \mathrm{num}_M(J)=r_M^{-1}(\mathrm{pos}_M(J))\right)\\
+&=\bar{o}_M\bigl(\mathrm{pos}_M(J)\bigr)
+&&\left(\because\ \blkref{def_numbering_of_finite_set}\ \text{の}\ e(e^{-1}(x))=x\right)\\
+&=J
+&&\left(\because\ \blkref{claim_tuple_of_membership_indices_of_positions_of_two_is_original}\right).
+\end{aligned}`),
+      paragraph([
+        "全射であること。", math(String.raw`k\in\{1,\dots,2^M\}`), " について、", math(String.raw`I:=\bar{o}_M(r_M(k))\in\mathcal{I}_M`), " は ",
+        math(String.raw`\mathrm{num}_M(I)=k`), " を満たす（", ref("claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit"), "）。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_kronecker_product_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "{1,2} で添字づけた行列の族の、番号で添字づけたクロネッカー積" },
+    labels: ["def_kronecker_product_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), " を ", ref("def_reindexing_of_matrices_by_numbering"),
+        " で ", math(String.raw`n:=2^M`), " とした行列環とする。", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`t`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元 ",
+        math(String.raw`A_t`), " が一つずつ与えられているとする（", math(String.raw`\{1,2\}`), " が有限集合であることは ", ref("claim_two_element_set_is_finite_set"), "）。",
+        math(String.raw`\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), " の元 ", math(String.raw`\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t`), " を、",
+        math(String.raw`I,J\in\mathcal{I}_M`), "（", ref("def_tuples_of_ones_and_twos"), "）についての成分で次のように定める。",
+      ]),
+      displayMath(String.raw`\Bigl(\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t\Bigr)_{\mathrm{num}_M(I),\,\mathrm{num}_M(J)}:=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{I(t),\,J(t)}`),
+      paragraph([
+        math(String.raw`\mathrm{num}_M`), " は ", ref("def_number_of_tuple_with_first_site_as_highest_digit"), " の写像で、",
+        math(String.raw`\mathcal{I}_M`), " から ", math(String.raw`\{1,\dots,2^M\}`), " への全単射である（", ref("claim_number_of_tuple_with_first_site_as_highest_digit_is_bijection"),
+        "）。したがって各 ", math(String.raw`k,l\in\{1,\dots,2^M\}`), " について ", math(String.raw`(k,l)=(\mathrm{num}_M(I),\mathrm{num}_M(J))`), " を満たす ",
+        math(String.raw`(I,J)`), " はただ一つであり、左辺の成分は ", math(String.raw`\{1,\dots,2^M\}\times\{1,\dots,2^M\}`), " のすべての元で一つに決まる。右辺は ",
+        math(String.raw`A_t`), " の成分の ", math(String.raw`\mathbb{C}`), " の中の番号順の積（", ref("def_ordered_product_in_complex_numbers"), "）である。",
+      ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit",
+    kind: "claim",
+    title: { text: "部分集合全体で添字づけたクロネッカー積を、番号 1 を最上位の桁にする番号付けで付け替えると、番号で添字づけたクロネッカー積になる" },
+    labels: ["claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`t`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`A_t`), " が一つずつ与えられているとし、", math(String.raw`\nu_{r_M}`), " を ",
+        ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"), " の写像とする。次が成り立つ。",
+      ]),
+      displayMath(String.raw`\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t`),
+      paragraph([
+        "左辺のクロネッカー積は ", ref("def_kronecker_product_indexed_by_power_set"), "、右辺は ", ref("def_kronecker_product_indexed_by_numbers"), " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ", math(String.raw`\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), " の元なので、", math(String.raw`k,l\in\{1,\dots,2^M\}`), " を任意に固定して成分を比べる（",
+        ref("def_matrices_indexed_by_finite_set"), "）。", math(String.raw`I:=\bar{o}_M(r_M(k))`), "、", math(String.raw`J:=\bar{o}_M(r_M(l))`), " と置く（",
+        ref("def_tuple_of_membership_indices"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)_{k,l}
+&=\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)_{r_M(k),\,r_M(l)}
+&&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit}\right)\\
+&=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{o_{r_M(k)}(t),\,o_{r_M(l)}(t)}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{I(t),\,J(t)}
+&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&=\Bigl(\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t\Bigr)_{\mathrm{num}_M(I),\,\mathrm{num}_M(J)}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_numbers}\right)\\
+&=\Bigl(\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t\Bigr)_{k,l}
+&&\left(\because\ \blkref{claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit}\ \text{から}\ \mathrm{num}_M(I)=k,\ \mathrm{num}_M(J)=l\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_single_site_family_of_matrices",
+    kind: "definition",
+    title: { text: "番号 j の因子だけを残し、他を単位行列にした族" },
+    labels: ["def_single_site_family_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`t`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`f_t`), " が一つずつ与えられているとする。", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), "（", ref("def_matrices_indexed_by_finite_set"), "）と書く。",
+        math(String.raw`j\in\{1,\dots,M\}`), " について、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元の族 ", math(String.raw`f^{[j]}_t`), "（",
+        math(String.raw`t\in\{1,\dots,M\}`), "）を次で定める。",
+      ]),
+      displayMath(String.raw`f^{[j]}_t:=
+\begin{cases}
+  f_j & (t=j),\\
+  I_2 & (t\neq j).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_definition_initial_part_family_of_matrices",
+    kind: "definition",
+    title: { text: "番号 p までの因子を残し、後ろを単位行列にした族" },
+    labels: ["def_initial_part_family_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`f_t`), "、", math(String.raw`I_2`), " を ", ref("def_single_site_family_of_matrices"), " のものとする。",
+        math(String.raw`p\in\{0,1,\dots,M\}`), " について、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " の元の族 ", math(String.raw`f^{[\le p]}_t`), "（",
+        math(String.raw`t\in\{1,\dots,M\}`), "）を次で定める。",
+      ]),
+      displayMath(String.raw`f^{[\le p]}_t:=
+\begin{cases}
+  f_t & (t\le p),\\
+  I_2 & (t>p).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_ordered_product_of_single_site_kronecker_products",
+    kind: "claim",
+    title: { text: "一つの因子だけを残したクロネッカー積の番号順の積は、前の因子を残したクロネッカー積である" },
+    labels: ["claim_ordered_product_of_single_site_kronecker_products"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`f_t`), " を ", ref("def_single_site_family_of_matrices"), " のもの、", math(String.raw`f^{[j]}`), " を ",
+        ref("def_single_site_family_of_matrices"), "、", math(String.raw`f^{[\le p]}`), " を ", ref("def_initial_part_family_of_matrices"), " の族とし、",
+        math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。", math(String.raw`j\in\{1,\dots,M\}`), " について ",
+        math(String.raw`x_j:=\mathop{\boxtimes}_{t=1}^{M}f^{[j]}_t\in B`), "（", ref("def_kronecker_product_indexed_by_power_set"), "）と置く。すべての ",
+        math(String.raw`p\in\{0,1,\dots,M\}`), " について、族を ", math(String.raw`\{1,\dots,p\}`), " に制限した番号順の積（", ref("def_ordered_product_of_restricted_family"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{B,\,j=1}^{p}x_j=\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le p]}_t`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Pi_p`), "（", math(String.raw`p\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`x_1,\dots,x_M`), " について ", ref("def_ordered_product_in_algebra"),
+        " で帰納的に定めた元とする。", ref("claim_partial_product_is_ordered_product_of_restricted_family"), " により左辺は ", math(String.raw`\Pi_p`),
+        " に等しいので、", math(String.raw`\Pi_p=\mathop{\boxtimes}_{t=1}^{M}f^{[\le p]}_t`), " を ", math(String.raw`p`), " の帰納法で示す。二つのクロネッカー積は、",
+        "すべての ", math(String.raw`t`), " で因子が等しければ、成分の定義の式（", ref("def_kronecker_product_indexed_by_power_set"), "）が同じなので等しい。",
+      ]),
+      paragraph([
+        math(String.raw`p=0`), " のとき。すべての ", math(String.raw`t\in\{1,\dots,M\}`), " で ", math(String.raw`t>0`), " なので ", math(String.raw`f^{[\le 0]}_t=I_2`), " である（",
+        ref("def_initial_part_family_of_matrices"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Pi_0
+&=1_B
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\mathop{\boxtimes}\limits_{t=1}^{M}I_2
+&&\left(\because\ \blkref{claim_kronecker_product_of_identity_matrices_is_identity_matrix}\right)\\
+&=\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le 0]}_t
+&&\left(\because\ \text{因子が等しい}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le p\le M`), " とし、", math(String.raw`p-1`), " で成り立つとする（帰納法の仮定）。準備として、すべての ", math(String.raw`t\in\{1,\dots,M\}`),
+        " について ", math(String.raw`f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t=f^{[\le p]}_t`), " を示す（", ref("def_single_site_family_of_matrices"), "、",
+        ref("def_initial_part_family_of_matrices"), "）。",
+      ]),
+      paragraph([
+        math(String.raw`t<p`), " のとき：", math(String.raw`f^{[\le p-1]}_t=f_t`), "、", math(String.raw`f^{[p]}_t=I_2`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t
+&=f_t\cdot_{\mathrm{Mat}_{\{1,2\}}}I_2
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}t\le p-1\text{）、}\blkref{def_single_site_family_of_matrices}\text{（}t\neq p\text{）}\right)\\
+&=f_t
+&&\left(\because\ \blkref{claim_identity_matrix_is_right_unit_of_matrix_product}\right)\\
+&=f^{[\le p]}_t
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}t\le p\text{）}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`t=p`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f^{[\le p-1]}_p\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_p
+&=I_2\cdot_{\mathrm{Mat}_{\{1,2\}}}f_p
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}p>p-1\text{）、}\blkref{def_single_site_family_of_matrices}\text{（}t=p\text{）}\right)\\
+&=f_p
+&&\left(\because\ \blkref{claim_identity_matrix_is_left_unit_of_matrix_product}\right)\\
+&=f^{[\le p]}_p
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}p\le p\text{）}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`t>p`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t
+&=I_2\cdot_{\mathrm{Mat}_{\{1,2\}}}I_2
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}t>p-1\text{）、}\blkref{def_single_site_family_of_matrices}\text{（}t\neq p\text{）}\right)\\
+&=I_2
+&&\left(\because\ \blkref{claim_identity_matrix_is_left_unit_of_matrix_product}\right)\\
+&=f^{[\le p]}_t
+&&\left(\because\ \blkref{def_initial_part_family_of_matrices}\text{（}t>p\text{）}\right).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\Pi_p
+&=\Pi_{p-1}\cdot_B x_p
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le p-1]}_t\Bigr)\cdot_B x_p
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le p-1]}_t\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}f^{[p]}_t\Bigr)
+&&\left(\because\ x_p\ \text{の置き方}\right)\\
+&=\mathop{\boxtimes}\limits_{t=1}^{M}\bigl(f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t\bigr)
+&&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
+&=\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le p]}_t
+&&\left(\because\ \text{上の準備で因子が等しい}\right).
+\end{aligned}`),
+    ],
+  },
 ]);

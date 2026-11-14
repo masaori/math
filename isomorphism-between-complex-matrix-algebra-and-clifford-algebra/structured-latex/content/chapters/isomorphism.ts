@@ -13544,4 +13544,344 @@ a
       paragraph(["全射であること。", math(String.raw`F\in B`), " について ", math(String.raw`\Omega'(F)`), " は ", math(String.raw`\Omega(\Omega'(F))=F`), " を満たす。したがって ", math(String.raw`\Omega`), " は全単射であり、", math(String.raw`F`), " に ", math(String.raw`\Omega(a)=F`), " を満たすただ一つの ", math(String.raw`a`), " は ", math(String.raw`\Omega'(F)`), " なので、", math(String.raw`\Omega`), " の逆写像は ", math(String.raw`\Omega'`), " である。"]),
     ],
   },
+  {
+    id: "isomorphism_definition_site_pauli_matrices_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "番号で添字づけた、サイトごとの Pauli 行列" },
+    labels: ["def_site_pauli_matrices_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\sigma^{x}`), "、", math(String.raw`\sigma^{y}`), "、", math(String.raw`\sigma^{z}`), " を ",
+        ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_y"), "、", ref("def_pauli_matrix_z"), " の行列、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とする。",
+        math(String.raw`a\in\{x,y,z\}`), " と ", math(String.raw`k\in\{1,\dots,M\}`), " について、", math(String.raw`\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`\sigma^{a}_{k}`), " を、次の族の番号で添字づけたクロネッカー積（", ref("def_kronecker_product_indexed_by_numbers"), "）で定める。",
+      ]),
+      displayMath(String.raw`\sigma^{a}_{k}:=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}
+\begin{cases}
+  \sigma^{a} & (t=k),\\
+  I_2 & (t\neq k).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_factors_of_jordan_wigner_matrices_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "番号で添字づけた Jordan–Wigner 行列の因子" },
+    labels: ["def_factors_of_jordan_wigner_matrices_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\sigma^{a}_{k}`), " を ", ref("def_site_pauli_matrices_indexed_by_numbers"), " の行列とする。",
+        math(String.raw`b\in\{y,z\}`), "、", math(String.raw`m\in\{1,\dots,M\}`), "、", math(String.raw`j\in\{1,\dots,m\}`), " について、",
+        math(String.raw`\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), " の元 ", math(String.raw`F^{(b)}_{m,j}`), " を次で定める。",
+      ]),
+      displayMath(String.raw`F^{(b)}_{m,j}:=
+\begin{cases}
+  \sigma^{x}_{j} & (j<m),\\
+  \sigma^{b}_{m} & (j=m).
+\end{cases}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_jordan_wigner_z_matrix_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "番号で添字づけた Jordan–Wigner 行列 Zm", tex: String.raw`\text{番号で添字づけた Jordan–Wigner 行列 }Z^{(2^M)}_m` },
+    labels: ["def_jordan_wigner_z_matrix_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\widehat{B}:=\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), " と書く。", math(String.raw`m\in\{1,\dots,M\}`),
+        " について、", math(String.raw`\widehat{B}`), " の元 ", math(String.raw`Z^{(2^M)}_m`), " を、", ref("def_factors_of_jordan_wigner_matrices_indexed_by_numbers"),
+        " の因子の ", math(String.raw`\widehat{B}`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）で定める。",
+      ]),
+      displayMath(String.raw`Z^{(2^M)}_m:=\prod_{\widehat{B},\,j=1}^{m}F^{(z)}_{m,j}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_jordan_wigner_y_matrix_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "番号で添字づけた Jordan–Wigner 行列 Ym", tex: String.raw`\text{番号で添字づけた Jordan–Wigner 行列 }Y^{(2^M)}_m` },
+    labels: ["def_jordan_wigner_y_matrix_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\widehat{B}`), " を ", ref("def_jordan_wigner_z_matrix_indexed_by_numbers"), " のものとする。",
+        math(String.raw`m\in\{1,\dots,M\}`), " について、", math(String.raw`\widehat{B}`), " の元 ", math(String.raw`Y^{(2^M)}_m`), " を、",
+        ref("def_factors_of_jordan_wigner_matrices_indexed_by_numbers"), " の因子の ", math(String.raw`\widehat{B}`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）で定める。",
+      ]),
+      displayMath(String.raw`Y^{(2^M)}_m:=\prod_{\widehat{B},\,j=1}^{m}F^{(y)}_{m,j}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_reindexing_of_jordan_wigner_z_matrix_is_jordan_wigner_z_matrix_indexed_by_numbers",
+    kind: "claim",
+    title: { text: "Jordan–Wigner 行列 Zm を付け替えると、番号で添字づけた Zm になる", tex: String.raw`\text{Jordan–Wigner 行列 }Z_m\text{ を付け替えると、番号で添字づけた }Z^{(2^M)}_m\text{ になる}` },
+    labels: ["claim_reindexing_of_jordan_wigner_z_matrix_is_jordan_wigner_z_matrix_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\nu_{r_M}`), " を ", ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"),
+        " の写像、", math(String.raw`Z_m`), " を ", ref("def_jordan_wigner_z_matrix"), "、", math(String.raw`Z^{(2^M)}_m`), " を ", ref("def_jordan_wigner_z_matrix_indexed_by_numbers"),
+        " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\nu_{r_M}(Z_m)=Z^{(2^M)}_m`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "、", math(String.raw`\widehat{B}:=\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), "、",
+        math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " と書き、", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`f_t:=\sigma^{x}`), "（", math(String.raw`t<m`),
+        "）、", math(String.raw`f_m:=\sigma^{z}`), "、", math(String.raw`f_t:=I_2`), "（", math(String.raw`t>m`), "）と置く。", math(String.raw`Z_m=\mathop{\boxtimes}_{t=1}^{M}f_t`),
+        " である（", ref("def_jordan_wigner_z_matrix"), "）。", math(String.raw`f^{[j]}`), " を ", ref("def_single_site_family_of_matrices"), "、", math(String.raw`f^{[\le p]}`),
+        " を ", ref("def_initial_part_family_of_matrices"), " の族とし、", math(String.raw`x_j:=\mathop{\boxtimes}_{t=1}^{M}f^{[j]}_t\in B`), " と置く。",
+        math(String.raw`(2^M,r_M)`), " は ", math(String.raw`\mathcal{P}_M`), " の番号付けなので（", ref("claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"),
+        "）、", math(String.raw`\nu_{r_M}`), " は ℂ-代数の準同型である（", ref("claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"), "）。準備として次の二つを示す。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`j\in\{1,\dots,m\}`), " について ", math(String.raw`\nu_{r_M}(x_j)=F^{(z)}_{m,j}`), "。", math(String.raw`f^{[j]}_t`), " は ", math(String.raw`t=j`),
+        " で ", math(String.raw`f_j`), "、", math(String.raw`t\neq j`), " で ", math(String.raw`I_2`), " であり、", math(String.raw`f_j`), " は ", math(String.raw`j<m`), " なら ",
+        math(String.raw`\sigma^{x}`), "、", math(String.raw`j=m`), " なら ", math(String.raw`\sigma^{z}`), " である。したがって族 ", math(String.raw`f^{[j]}`), " は ",
+        ref("def_site_pauli_matrices_indexed_by_numbers"), " で ", math(String.raw`k:=j`), " と ", math(String.raw`a:=x`), "（", math(String.raw`j<m`), "）または ",
+        math(String.raw`a:=z`), "（", math(String.raw`j=m`), "）とした族と因子ごとに等しい。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{r_M}(x_j)
+&=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}f^{[j]}_t
+&&\left(\because\ \blkref{claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit}\right)\\
+&=\begin{cases}
+  \sigma^{x}_{j} & (j<m)\\
+  \sigma^{z}_{m} & (j=m)
+\end{cases}
+&&\left(\because\ \blkref{def_site_pauli_matrices_indexed_by_numbers}\text{。因子が等しい}\right)\\
+&=F^{(z)}_{m,j}
+&&\left(\because\ \blkref{def_factors_of_jordan_wigner_matrices_indexed_by_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "（二）すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`f^{[\le m]}_t=f_t`), "。", math(String.raw`t\le m`), " なら ",
+        math(String.raw`f^{[\le m]}_t=f_t`), " である（", ref("def_initial_part_family_of_matrices"), "）。", math(String.raw`t>m`), " なら、",
+        math(String.raw`f^{[\le m]}_t=I_2`), "（", ref("def_initial_part_family_of_matrices"), "）であり、", math(String.raw`f_t=I_2`), "（", math(String.raw`f`), " の置き方）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{r_M}(Z_m)
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}f_t\Bigr)
+&&\left(\because\ \blkref{def_jordan_wigner_z_matrix}\right)\\
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le m]}_t\Bigr)
+&&\left(\because\ \text{（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\ \text{の因子が等しい}\right)\\
+&=\nu_{r_M}\Bigl(\prod_{B,\,j=1}^{m}x_j\Bigr)
+&&\left(\because\ \blkref{claim_ordered_product_of_single_site_kronecker_products}\ \text{で}\ p:=m\right)\\
+&=\prod_{\widehat{B},\,j=1}^{m}\nu_{r_M}(x_j)
+&&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
+&=\prod_{\widehat{B},\,j=1}^{m}F^{(z)}_{m,j}
+&&\left(\because\ \text{（一）。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right)\\
+&=Z^{(2^M)}_m
+&&\left(\because\ \blkref{def_jordan_wigner_z_matrix_indexed_by_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_reindexing_of_jordan_wigner_y_matrix_is_jordan_wigner_y_matrix_indexed_by_numbers",
+    kind: "claim",
+    title: { text: "Jordan–Wigner 行列 Ym を付け替えると、番号で添字づけた Ym になる", tex: String.raw`\text{Jordan–Wigner 行列 }Y_m\text{ を付け替えると、番号で添字づけた }Y^{(2^M)}_m\text{ になる}` },
+    labels: ["claim_reindexing_of_jordan_wigner_y_matrix_is_jordan_wigner_y_matrix_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\nu_{r_M}`), " を ", ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"),
+        " の写像、", math(String.raw`Y_m`), " を ", ref("def_jordan_wigner_y_matrix"), "、", math(String.raw`Y^{(2^M)}_m`), " を ", ref("def_jordan_wigner_y_matrix_indexed_by_numbers"),
+        " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\nu_{r_M}(Y_m)=Y^{(2^M)}_m`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B`), "、", math(String.raw`\widehat{B}`), "、", math(String.raw`I_2`), " を ", ref("claim_reindexing_of_jordan_wigner_z_matrix_is_jordan_wigner_z_matrix_indexed_by_numbers"),
+        " の証明のものとし、", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`g_t:=\sigma^{x}`), "（", math(String.raw`t<m`), "）、", math(String.raw`g_m:=\sigma^{y}`),
+        "、", math(String.raw`g_t:=I_2`), "（", math(String.raw`t>m`), "）と置く。", math(String.raw`Y_m=\mathop{\boxtimes}_{t=1}^{M}g_t`), " である（", ref("def_jordan_wigner_y_matrix"),
+        "）。", ref("def_single_site_family_of_matrices"), " と ", ref("def_initial_part_family_of_matrices"), " を族 ", math(String.raw`g`), " に当てた族を ",
+        math(String.raw`g^{[j]}`), "、", math(String.raw`g^{[\le p]}`), " とし、", math(String.raw`y_j:=\mathop{\boxtimes}_{t=1}^{M}g^{[j]}_t\in B`), " と置く。", math(String.raw`\nu_{r_M}`),
+        " は ℂ-代数の準同型である（", ref("claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set"), "、",
+        ref("claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"), "）。",
+      ]),
+      paragraph([
+        "（一）", math(String.raw`j\in\{1,\dots,m\}`), " について ", math(String.raw`\nu_{r_M}(y_j)=F^{(y)}_{m,j}`), "。族 ", math(String.raw`g^{[j]}`), " は ",
+        ref("def_site_pauli_matrices_indexed_by_numbers"), " で ", math(String.raw`k:=j`), " と ", math(String.raw`a:=x`), "（", math(String.raw`j<m`), "）または ",
+        math(String.raw`a:=y`), "（", math(String.raw`j=m`), "）とした族と因子ごとに等しい（", ref("def_single_site_family_of_matrices"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{r_M}(y_j)
+&=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}g^{[j]}_t
+&&\left(\because\ \blkref{claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit}\right)\\
+&=\begin{cases}
+  \sigma^{x}_{j} & (j<m)\\
+  \sigma^{y}_{m} & (j=m)
+\end{cases}
+&&\left(\because\ \blkref{def_site_pauli_matrices_indexed_by_numbers}\text{。因子が等しい}\right)\\
+&=F^{(y)}_{m,j}
+&&\left(\because\ \blkref{def_factors_of_jordan_wigner_matrices_indexed_by_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "（二）すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`g^{[\le m]}_t=g_t`), "。", math(String.raw`t\le m`), " なら ",
+        math(String.raw`g^{[\le m]}_t=g_t`), " である（", ref("def_initial_part_family_of_matrices"), "）。", math(String.raw`t>m`), " なら、",
+        math(String.raw`g^{[\le m]}_t=I_2`), "（", ref("def_initial_part_family_of_matrices"), "）であり、", math(String.raw`g_t=I_2`), "（", math(String.raw`g`), " の置き方）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu_{r_M}(Y_m)
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}g_t\Bigr)
+&&\left(\because\ \blkref{def_jordan_wigner_y_matrix}\right)\\
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}g^{[\le m]}_t\Bigr)
+&&\left(\because\ \text{（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\ \text{の因子が等しい}\right)\\
+&=\nu_{r_M}\Bigl(\prod_{B,\,j=1}^{m}y_j\Bigr)
+&&\left(\because\ \blkref{claim_ordered_product_of_single_site_kronecker_products}\ \text{で}\ f\to g,\ p:=m\right)\\
+&=\prod_{\widehat{B},\,j=1}^{m}\nu_{r_M}(y_j)
+&&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
+&=\prod_{\widehat{B},\,j=1}^{m}F^{(y)}_{m,j}
+&&\left(\because\ \text{（一）。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right)\\
+&=Y^{(2^M)}_m
+&&\left(\because\ \blkref{def_jordan_wigner_y_matrix_indexed_by_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "U と U' で挟んだ写像を、番号の行列環へ移した写像" },
+    labels: ["def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`\Omega`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"),
+        " のものとし、", math(String.raw`\widehat{B}:=\mathrm{Mat}_{\{1,\dots,2^M\}}(\mathbb{C})`), "、", math(String.raw`\nu_{r_M}:\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})\to\widehat{B}`),
+        " を ", ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"), " の写像とする。写像 ", math(String.raw`\widehat{\Omega}:\mathrm{Cl}(Y,Q)\to\widehat{B}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`\widehat{\Omega}:=\nu_{r_M}\circ\Omega`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_homomorphism_to_general_clifford_algebra_from_matrices_indexed_by_numbers",
+    kind: "definition",
+    title: { text: "番号の行列環から部分集合全体で添字づけた行列環へ戻し、U' と U で挟んだ帰りへ渡す写像" },
+    labels: ["def_homomorphism_to_general_clifford_algebra_from_matrices_indexed_by_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`\widehat{B}`), " を ", ref("def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers"),
+        " のものとし、", math(String.raw`\Omega'`), " を ", ref("def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"), " の写像、",
+        math(String.raw`\mu_{r_M}:\widehat{B}\to\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " を ", ref("def_reindexing_of_matrices_by_inverse_of_numbering_with_first_site_as_highest_digit"),
+        " の写像とする。写像 ", math(String.raw`\widehat{\Omega}':\widehat{B}\to\mathrm{Cl}(Y,Q)`), " を次で定める。",
+      ]),
+      displayMath(String.raw`\widehat{\Omega}':=\Omega'\circ\mu_{r_M}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_to_matrices_indexed_by_numbers_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix",
+    kind: "claim",
+    title: { text: "番号の行列環への写像は、直交基底の前半の元の像を番号で添字づけた Zm へ送る" },
+    labels: ["claim_homomorphism_to_matrices_indexed_by_numbers_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\gamma_Y`), " を ",
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), "、", math(String.raw`e`), " を ", ref("def_orthonormal_basis_of_general_even_dimensional_space"),
+        " のもの、", math(String.raw`\widehat{\Omega}`), " を ", ref("def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers"), " の写像、",
+        math(String.raw`Z^{(2^M)}_m`), " を ", ref("def_jordan_wigner_z_matrix_indexed_by_numbers"), " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\widehat{\Omega}\bigl(\gamma_Y(e_m)\bigr)=Z^{(2^M)}_m`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\widehat{\Omega}\bigl(\gamma_Y(e_m)\bigr)
+&=\nu_{r_M}\Bigl(\Omega\bigl(\gamma_Y(e_m)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers}\right)\\
+&=\nu_{r_M}(Z_m)
+&&\left(\because\ \blkref{claim_conjugated_homomorphism_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix}\right)\\
+&=Z^{(2^M)}_m
+&&\left(\because\ \blkref{claim_reindexing_of_jordan_wigner_z_matrix_is_jordan_wigner_z_matrix_indexed_by_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_homomorphism_to_matrices_indexed_by_numbers_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix",
+    kind: "claim",
+    title: { text: "番号の行列環への写像は、直交基底の後半の元の像を番号で添字づけた Ym へ送る" },
+    labels: ["claim_homomorphism_to_matrices_indexed_by_numbers_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\gamma_Y`), " を ",
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), "、", math(String.raw`e`), " を ", ref("def_orthonormal_basis_of_general_even_dimensional_space"),
+        " のもの、", math(String.raw`\widehat{\Omega}`), " を ", ref("def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers"), " の写像、",
+        math(String.raw`Y^{(2^M)}_m`), " を ", ref("def_jordan_wigner_y_matrix_indexed_by_numbers"), " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\widehat{\Omega}\bigl(\gamma_Y(e_{M+m})\bigr)=Y^{(2^M)}_m`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\widehat{\Omega}\bigl(\gamma_Y(e_{M+m})\bigr)
+&=\nu_{r_M}\Bigl(\Omega\bigl(\gamma_Y(e_{M+m})\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers}\right)\\
+&=\nu_{r_M}(Y_m)
+&&\left(\because\ \blkref{claim_conjugated_homomorphism_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix}\right)\\
+&=Y^{(2^M)}_m
+&&\left(\because\ \blkref{claim_reindexing_of_jordan_wigner_y_matrix_is_jordan_wigner_y_matrix_indexed_by_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_homomorphisms_between_general_clifford_algebra_and_matrices_indexed_by_numbers_are_mutually_inverse_isomorphisms",
+    kind: "theorem",
+    title: { text: "系：一般の偶数次元の非退化な二次空間のクリフォード代数と、番号で添字づけた行列環の互いに逆な同型" },
+    labels: ["theorem_homomorphisms_between_general_clifford_algebra_and_matrices_indexed_by_numbers_are_mutually_inverse_isomorphisms"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), " を ",
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), " のもの、", math(String.raw`\widehat{B}`), " と ", math(String.raw`\widehat{\Omega}`), " を ",
+        ref("def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers"), "、", math(String.raw`\widehat{\Omega}'`), " を ",
+        ref("def_homomorphism_to_general_clifford_algebra_from_matrices_indexed_by_numbers"), " のものとする。このとき次が成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\widehat{\Omega}`), " と ", math(String.raw`\widehat{\Omega}'`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"],
+        [
+          "すべての ", math(String.raw`a\in\mathrm{Cl}(Y,Q)`), " について ", math(String.raw`\widehat{\Omega}'(\widehat{\Omega}(a))=a`), " であり、すべての ", math(String.raw`G\in\widehat{B}`),
+          " について ", math(String.raw`\widehat{\Omega}(\widehat{\Omega}'(G))=G`), " である。",
+        ],
+      ]),
+      paragraph(["したがって ", math(String.raw`\widehat{\Omega}`), " は全単射であり、その逆写像は ", math(String.raw`\widehat{\Omega}'`), " である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\Omega`), " と ", math(String.raw`\Omega'`), " は ℂ-代数の準同型で、互いに逆である（",
+        ref("theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms"), "）。",
+        math(String.raw`\nu_{r_M}`), "（", ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"), "）と ", math(String.raw`\mu_{r_M}`), "（",
+        ref("def_reindexing_of_matrices_by_inverse_of_numbering_with_first_site_as_highest_digit"), "）は ℂ-代数の準同型であり（", ref("claim_reindexing_of_matrices_by_numbering_is_algebra_homomorphism"), "、",
+        ref("claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism"), "）、合成 ", math(String.raw`\widehat{\Omega}`), " と ", math(String.raw`\widehat{\Omega}'`),
+        " は ℂ-代数の準同型である（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat{\Omega}'\bigl(\widehat{\Omega}(a)\bigr)
+&=\widehat{\Omega}'\Bigl(\nu_{r_M}\bigl(\Omega(a)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers}\right)\\
+&=\Omega'\Bigl(\mu_{r_M}\Bigl(\nu_{r_M}\bigl(\Omega(a)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_to_general_clifford_algebra_from_matrices_indexed_by_numbers}\right)\\
+&=\Omega'\bigl(\Omega(a)\bigr)
+&&\left(\because\ \blkref{claim_inverse_reindexing_after_reindexing_of_matrices_is_identity}\right)\\
+&=a
+&&\left(\because\ \blkref{theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms}\right),\\[4pt]
+\widehat{\Omega}\bigl(\widehat{\Omega}'(G)\bigr)
+&=\nu_{r_M}\Bigl(\Omega\bigl(\widehat{\Omega}'(G)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_to_matrices_indexed_by_numbers}\right)\\
+&=\nu_{r_M}\Bigl(\Omega\Bigl(\Omega'\bigl(\mu_{r_M}(G)\bigr)\Bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_to_general_clifford_algebra_from_matrices_indexed_by_numbers}\right)\\
+&=\nu_{r_M}\bigl(\mu_{r_M}(G)\bigr)
+&&\left(\because\ \blkref{theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms}\right)\\
+&=G
+&&\left(\because\ \blkref{claim_reindexing_after_inverse_reindexing_of_matrices_is_identity}\right).
+\end{aligned}`),
+      paragraph(["単射であること。", math(String.raw`a,a'\in\mathrm{Cl}(Y,Q)`), " が ", math(String.raw`\widehat{\Omega}(a)=\widehat{\Omega}(a')`), " を満たすとする。"]),
+      displayMath(String.raw`\begin{aligned}
+a
+&=\widehat{\Omega}'\bigl(\widehat{\Omega}(a)\bigr)
+&&\left(\because\ \text{上の一つ目の等式}\right)\\
+&=\widehat{\Omega}'\bigl(\widehat{\Omega}(a')\bigr)
+&&\left(\because\ \widehat{\Omega}(a)=\widehat{\Omega}(a')\right)\\
+&=a'
+&&\left(\because\ \text{上の一つ目の等式}\right).
+\end{aligned}`),
+      paragraph([
+        "全射であること。", math(String.raw`G\in\widehat{B}`), " について ", math(String.raw`\widehat{\Omega}'(G)`), " は ", math(String.raw`\widehat{\Omega}(\widehat{\Omega}'(G))=G`),
+        " を満たす。したがって ", math(String.raw`\widehat{\Omega}`), " は全単射であり、", math(String.raw`G`), " に ", math(String.raw`\widehat{\Omega}(a)=G`), " を満たすただ一つの ",
+        math(String.raw`a`), " は ", math(String.raw`\widehat{\Omega}'(G)`), " なので、", math(String.raw`\widehat{\Omega}`), " の逆写像は ", math(String.raw`\widehat{\Omega}'`), " である。",
+      ]),
+    ],
+  },
 ]);
