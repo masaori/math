@@ -80152,6 +80152,7 @@ t(D,T)
                     labels: ["claim_pfaffian_signed_even_subgraph"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/pfaffian-signed-even-subgraph"],
+                    lean: ["Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum", "Ising2DLambda.KacWard.torusQuadraticSign_eq_neg_one_pow", "Ising2DLambda.KacWard.gaugedPfaffian_eq_signedEvenSubgraphPolynomial", "Ising2DLambda.NecSuf.KacWard.sum_eq_sum_over_complements_of_fiber_signs", "Ising2DLambda.NecSuf.KacWard.sum_sign_weights_eq_map_of_parity_agreement", "Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum_from_necSuf", "Ising2DLambda.KacWard.gaugedPfaffian_eq_signedEvenSubgraphPolynomial_from_necSuf"],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " を取る。", ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " の添字を ", math(String.raw`\vec E_L=E_L\times\{0,1\}`), " の辺番号・端点番号の辞書式に並べる。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式"]),
                       displayMath(String.raw`\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L`),
