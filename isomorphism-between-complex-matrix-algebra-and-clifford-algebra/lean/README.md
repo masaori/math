@@ -80,6 +80,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - テンソル代数の普遍性の A は任意の宇宙 w の型に置く。F_k を定めるのに (T_k, τ_k) の普遍性を U = U_vec(A) に当てるので、
   族が宇宙 w について k 重テンソル積であること `hP` を引数に取り、座標による構成ではそれを `coordinateTensor_isTensorProduct` から渡す。
 
+- 章「同型の証明」のクリフォード代数の中の定義と主張（Φ・a†_S・a_T・P など）は、前提の組 D から引けるように名前空間 `Clifford.SplitData` に置く
+  （`D.vacuumElement` など）。行列の側の補題は `Isomorphism` に置く。
 - 章「クリフォード代数」の前提「V は ℂ-線型空間、b は基底、q は二次形式」は structure `QuadraticSpaceWithBasis` の欄に置き、
   T(V)・ι・I_q・Cl(V,q)・π_{I_q}・γ はその上の def である。分裂した二次空間の前提（W、基底 w、双対基底 f）は `SplitData` に置き、
   `SplitData.space` が V := W ⊕ W^*、q := q_W、基底 c の `QuadraticSpaceWithBasis` を作る。
@@ -109,6 +111,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「複素行列環」：番号付けによる行列の添字の付け替えと 2 進の番号付けによる行列環の同型 | `ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `NecSuf/ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `MatrixReindexingFromNecSuf.lean` |
 | 章「複素行列環」：クロネッカー積と、二つの行列で挟む写像 | `ComplexMatrixAlgebra/KroneckerProduct/` の 4 ファイル（`MembershipIndex.lean` は ℂ を含まず両版が引く） | `NecSuf/ComplexMatrixAlgebra/KroneckerProduct/` の 3 ファイル | `KroneckerProductFromNecSuf.lean` |
 | 章「同型の証明」のうち、生成作用素の行列の定義とその成分・反交換関係・空集合の位置の行列単位 | `Isomorphism/CreationOperatorMatrices/` の 7 ファイル（`CountAndSign.lean`・`IndexSetOperations.lean`・`VacuumIndexSets.lean` は ℂ を含まず両版が引く） | `NecSuf/Isomorphism/CreationOperatorMatrices/` の 4 ファイル | `CountAndSignFromNecSuf.lean`・`CreationMatricesFromNecSuf.lean`・`VacuumMatrixUnitFromNecSuf.lean` |
+| 章「同型の証明」のうち、クリフォード代数から行列環への準同型（c_i² = 0・(c_i^T)² = 0、φ、Φ の存在と一意性、Φ(a†_i) = c_i・Φ(a_i) = c_i^T） | `Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `HomomorphismToMatrixAlgebraFromNecSuf.lean` |
+| 章「同型の証明」のうち、クリフォード代数の中の局所的な等式（a†_S・a_T・P の定義、a_i P = 0・P a†_i = 0、生成元を左から・消滅元を右から掛けた式） | `Isomorphism/LocalIdentities/LocalIdentities.lean` | `NecSuf/Isomorphism/LocalIdentities/LocalIdentities.lean` | `LocalIdentitiesFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -199,3 +203,17 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   n がどの元とも交換することだけが要る。ς の値どうしの交換は、乗法の結合法則と 1·a = a から ς(a)·ς(b) = ς(a+b) を経て出る。
 - 空集合の位置の行列単位についての三つの主張は、本文の前提 M ∈ ℤ_{≥1} を使わない（M = 0 でも同じ証明が通る）。
   第二・第三の主張は n について何も仮定しない（使う符号は ς(0) = 1 だけ）。
+
+## 必要十分版が示したこと（章「同型の証明」のクリフォード代数から行列環への準同型と、クリフォード代数の中の局所的な等式）
+
+- c_i · c_i = 0 と c_i^T · c_i^T = 0 には、`ValuedMapsLaws`（L）・a · 1 = a・a · 0 = 0・0 · a = 0 だけが要る。具体版が ℂ の乗法の交換法則を当てる
+  成分の入れ替えは `creationMatrix_entries_comm` で済み、乗法の交換法則は要らない。
+- 行列の側の ς を定める n は、クリフォード代数の合同に使う n（1 + n = 0）と同じ K の元でよい。`SignLaws K n` の欄はどれも `CliffordLaws K n` の欄から出る。
+- φ が線型であることと φ(v)² = q(v) ∗ 1 は、章「クリフォード代数」の仮定 `CliffordLaws K n` のほかに K の性質を足さない。
+  φ(v)² の計算の μ_l · δ = δ · μ_l の行は、δ の値が 0 か 1 なので 0 と 1 の交換だけで足りる。
+- a + (-a) = 0 が要るのは、Φ をクリフォード代数の普遍性から得る段（Φ の存在と一意性・定義・Φ(a†_i) = c_i・Φ(a_i) = c_i^T）と、
+  生成元の反交換関係と平方が零であることを引く局所的な等式だけである。局所的な等式の定義の七つと、番号順の積の分解
+  （a_{T,≤m} = z^T_m · a_{T,≤m-1}、a_{T,≤M} = a_T、a_T の分解）は使わない。
+- 局所的な等式の行で使う K の性質は、n · n = 1・1 + n = 0（本文の (-1_ℂ)·(-1_ℂ) = 1_ℂ と反交換する二元の入れ替え）、0 + 0 = 0、
+  a · 0 = 0（i ∈ T の場合だけ）、ς(N) · n = n · ς(N) である。具体版が ℂ の乗法の交換法則を当てる行は ς(N)·(-1) = (-1)·ς(N) だけである。
+- 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない（M = 0 でも同じ証明が通る）。
