@@ -13,7 +13,7 @@
 | 背理法の鎖 1 行目: `x = y^2`（`y^2 = x` を右辺から左辺へ） | `calc` の 1 段目 |
 | 2 行目: `= 0^2`（仮定 `y = 0`） | `calc` の 2 段目 |
 | 3 行目: `= 0·0`（`square_of_real_number_is_product`（`r → 0`）） | `calc` の 3 段目 |
-| 4 行目: `= 0`（ℝ で `0·x = 0` の `x → 0`） | `calc` の 4 段目 |
+| 4 行目: `= 0`（`real_zero_times_is_zero`（`x → 0`）） | `calc` の 4 段目 |
 | `x > 0` に反するので `y ≠ 0`（`<` の非反射律） | `hx.ne' this` |
 | `y ≥ 0` は `y > 0` または `y = 0` のことなので `y > 0` | `lt_of_le_of_ne` |
 
@@ -26,6 +26,7 @@
 -/
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 namespace Ising2D
 
@@ -41,7 +42,7 @@ theorem sqrt_of_positive_real_is_positive (x : ℝ) (hx : 0 < x) : 0 < Real.sqrt
           = Real.sqrt x ^ 2 := hyx.symm                  -- `definition_of_sqrt_r_positive` の `y^2 = x` を右辺から左辺へ
         _ = (0 : ℝ) ^ 2 := by rw [h]                     -- 仮定 `y = 0`
         _ = 0 * 0 := square_of_real_number_is_product 0  -- `square_of_real_number_is_product`（`r → 0`）
-        _ = 0 := zero_mul 0                              -- ℝ で `0·x = 0`（`x → 0`）
+        _ = 0 := real_zero_times_is_zero 0               -- `real_zero_times_is_zero`（`x → 0`）
     exact hx.ne' this                                    -- `x > 0` に反する
   exact lt_of_le_of_ne hy0 (Ne.symm hne)                 -- `y ≥ 0` は `y > 0` または `y = 0`（ℝ の順序）
 

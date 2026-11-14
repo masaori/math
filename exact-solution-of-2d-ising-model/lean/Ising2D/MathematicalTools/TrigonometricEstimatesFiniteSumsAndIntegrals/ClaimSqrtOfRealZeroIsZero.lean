@@ -9,7 +9,7 @@
 | 人手 | Lean |
 | --- | --- |
 | `0^2 = 0·0`（`square_of_real_number_is_product`（`r → 0`）） | `h0` の `calc` の 1 段目 |
-| `0·0 = 0`（ℝ で `0·x = 0` の `x → 0`） | `h0` の `calc` の 2 段目 |
+| `0·0 = 0`（`real_zero_times_is_zero`（`x → 0`）） | `h0` の `calc` の 2 段目 |
 | `definition_of_sqrt_r_positive`（`x → 0`）の `y → 0` が `0 ≥ 0` と `0^2 = 0` を満たし、そのような `y` はただ一つ | `Real.sqrt_eq_iff_eq_sq` に `0 ≥ 0`（2 か所）と `h0` を渡す段 |
 
 - 人手の `√·^{(ℝ_{≥0})}`（`definition_of_sqrt_r_positive`）は Lean の `Real.sqrt` である。
@@ -23,6 +23,7 @@
 -/
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 namespace Ising2D
 
@@ -31,7 +32,7 @@ theorem sqrt_of_real_zero_is_zero : Real.sqrt 0 = 0 := by
   have h0 : (0 : ℝ) ^ 2 = 0 :=
     calc (0 : ℝ) ^ 2
         = 0 * 0 := square_of_real_number_is_product 0                        -- `square_of_real_number_is_product`（`r → 0`）
-      _ = 0 := zero_mul 0                                                      -- ℝ で `0·x = 0`（`x → 0`）
+      _ = 0 := real_zero_times_is_zero 0                                       -- `real_zero_times_is_zero`（`x → 0`）
   exact (Real.sqrt_eq_iff_eq_sq le_rfl le_rfl).mpr h0.symm                     -- `definition_of_sqrt_r_positive`（`x → 0`）の `y → 0` が `0 ≥ 0` と `0^2 = 0` を満たし、そのような `y` はただ一つ
 
 end Ising2D

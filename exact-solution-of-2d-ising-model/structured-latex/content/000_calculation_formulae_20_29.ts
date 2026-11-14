@@ -2233,7 +2233,7 @@ a^{m+1}\, b^{m+1}
 &= 0\cdot 0
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)
 \end{aligned}`),
       paragraph([
         "である。よって ",
@@ -2255,6 +2255,7 @@ a^{m+1}\, b^{m+1}
       status: "added",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。relation_of_gamma_2_theta_tilde の準備の第五の cos(π/2) の鎖の最後の行 √0 = 0 が、0 ≥ 0・0^2 = 0・definition_of_sqrt_r_positive の一意性を 1 行で使っていたので、1 行 1 事実で引けるよう足した（sqrt_of_real_one_is_one と同じ形）。Lean は Ising2D.sqrt_of_real_zero_is_zero（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSqrtOfRealZeroIsZero.lean）。数値検証: sagemath/check/sqrt_of_real_zero_is_zero/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（sqrt_of_real_one_is_one と同じ扱い）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
       ],
     },
   },
@@ -2317,7 +2318,7 @@ x
 &= 0\cdot 0
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0)\bigr)\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 0\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)
 \end{aligned}`),
       paragraph([
         "となり、",
@@ -2351,6 +2352,7 @@ x
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。diagonalization_check_P_D の Step 1 が「M_col ≥ 2 より √M_col > 0」の根拠に sqrt_nonnegative_existence_uniqueness（存在と一意性だけを述べる）を引いていたので、正であることを引けるよう足した。Lean は Ising2D.sqrt_of_positive_real_is_positive（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSqrtOfPositiveRealIsPositive.lean）。数値検証: sagemath/check/sqrt_of_positive_real_is_positive/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（sqrt_of_real_zero_is_zero と同じ扱い）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
       ],
     },
   },

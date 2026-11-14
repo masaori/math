@@ -5,7 +5,7 @@
 #     1 行目: x = y^2（definition_of_sqrt_r_positive の y^2 = x を右辺から左辺へ）
 #     2 行目: y^2 = 0^2（仮定 y = 0）
 #     3 行目: 0^2 = 0·0（square_of_real_number_is_product（r → 0））
-#     4 行目: 0·0 = 0（ℝ で 0·x = 0 の x → 0）
+#     4 行目: 0·0 = 0（real_zero_times_is_zero（x → 0））
 #   結論: y ≠ 0 と y ≥ 0 から y > 0
 # 帰属: x ∈ QQ_{>0} と、その非負の平方根 y ∈ AA。等号・順序は厳密。浮動小数点は使わない。
 

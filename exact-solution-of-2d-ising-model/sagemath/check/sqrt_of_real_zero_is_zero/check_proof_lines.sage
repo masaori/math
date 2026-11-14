@@ -1,7 +1,7 @@
 # 対象ラベル: sqrt_of_real_zero_is_zero
 # √0 = 0 の証明の各行を確かめる。
 #   1 行目: 0^2 = 0·0（square_of_real_number_is_product（r → 0）。冪は def_power_of_real_number のとおり a^0 := 1、a^{m+1} := a^m a で組む）
-#   2 行目: 0·0 = 0（ℝ で 0·x = 0 の x → 0）
+#   2 行目: 0·0 = 0（real_zero_times_is_zero（x → 0））
 #   結論: definition_of_sqrt_r_positive（x → 0）の y → 0 が y ≥ 0 ∧ y^2 = 0 を満たし、そのような y はただ一つ
 # 帰属: 0 ∈ QQ と 0 ∈ AA。等号・順序は厳密。浮動小数点は使わない。
 
