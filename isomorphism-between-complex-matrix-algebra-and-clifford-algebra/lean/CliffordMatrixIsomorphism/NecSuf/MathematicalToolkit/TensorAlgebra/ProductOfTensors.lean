@@ -4,12 +4,14 @@
 
   本文のラベル                                                  このファイル                         K に要るもの
   def_linear_map_appending_fixed_tuple                          appendMap 等                         なし
+  def_map_appending_tuples_to_fixed_tensor                      appendMapValue                       なし
   claim_appending_map_value_is_multilinear_in_appended_tuple    appendMapValue_isMultilinearMap      乗法の交換法則
   def_linear_map_multiplying_fixed_tensor_on_left               multiplyLeft 等                      乗法の交換法則（前の主張を経由）
   def_product_of_tensors                                        tensorMul                            同上
   claim_product_of_pure_tensors_is_pure_tensor_of_concatenation tensorMul_tau_tau                    同上（ほかに使わない）
   claim_product_of_tensors_is_linear_in_second_factor           tensorMul_add_right・smul_right      同上（ほかに使わない）
   claim_product_of_tensors_is_linear_in_first_factor            tensorMul_add_left・smul_left        同上
+  def_map_multiplying_fixed_tensor_on_right                     multiplyRight                        同上（m_{k,l} を経由）
 
 乗法の交換法則は、ρ_•(F) がスカラー倍を保つことを示す行で、λ ⊡ ρ_b が線型写像であること
 （`pointwiseSmulMap_isLinearMap` の μ · λ = λ · μ）に要る。λ はどの係数でもよいので、どの λ もどの元とも交換することが要る。
@@ -78,7 +80,7 @@ theorem appendMap_unique (k l : ℕ) (u' : Tuple V l) (g : P.T k → P.T (k + l)
     g = P.appendMap k l u' :=
   (P.appendMap_spec k l u').2 g ⟨hg, hgτ⟩
 
-/-- 本文 `claim_appending_map_value_is_multilinear_in_appended_tuple` の写像 ρ_•(F)(u') := ρ_{u'}(F)。 -/
+/-- 本文 `def_map_appending_tuples_to_fixed_tensor`：写像 ρ_•(F)(u') := ρ_{u'}(F)。 -/
 noncomputable def appendMapValue (k l : ℕ) (F : P.T k) : Tuple V l → P.T (k + l) :=
   fun u' => P.appendMap k l u' F
 
@@ -251,6 +253,10 @@ theorem tensorMul_smul_left (hcomm : ∀ a b : K, a * b = b * a) (k l : ℕ) (c 
       rw [P.pointwiseSmul_multiplyLeft hcomm k l c F]
   _ = (P.space (k + l)).smul c (P.multiplyLeft hcomm k l F G) := rfl
   _ = (P.space (k + l)).smul c (P.tensorMul hcomm k l F G) := rfl
+
+/-- 本文 `def_map_multiplying_fixed_tensor_on_right` の必要十分版：θ^R_G(F) := m_{k,l}(F, G)。 -/
+noncomputable def multiplyRight (hcomm : ∀ a b : K, a * b = b * a) (k l : ℕ) (G : P.T l) : P.T k → P.T (k + l) :=
+  fun F => P.tensorMul hcomm k l F G
 
 end TensorPowers
 

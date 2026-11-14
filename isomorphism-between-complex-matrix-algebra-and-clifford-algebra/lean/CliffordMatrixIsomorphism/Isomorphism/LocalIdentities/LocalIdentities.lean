@@ -558,6 +558,7 @@ theorem reverseOrderedAnnihilationProduct_mul_annihilation_of_not_mem {i : ℕ} 
   rw [Nat.sub_add_cancel hi.1] at hpass
   calc A.mul (D.reverseOrderedAnnihilationProduct T) (D.annihilation i)
       = A.mul (A.mul L (A.mul (D.selectedAnnihilationFactor T i) α)) (D.annihilation i) := by
+        -- 本文の一行目（ž^T_p を取り出す）と二行目（ž^T_p = z^T_i）は共通の分解の補題が持つ
         rw [D.reverseOrderedAnnihilationProduct_singleOut hi T]
     _ = A.mul (A.mul L (A.mul A.one α)) (D.annihilation i) := by rw [hzTi]
     _ = A.mul (A.mul L α) (D.annihilation i) := by rw [A.one_mul α]
@@ -581,8 +582,11 @@ theorem reverseOrderedAnnihilationProduct_mul_annihilation_of_mem {i : ℕ} (hi 
   have hpass := D.initialReverseAnnihilationProduct_mul_annihilation (i := i) T (i - 1) le_rfl
   rw [Nat.sub_add_cancel hi.1] at hpass
   calc A.mul (D.reverseOrderedAnnihilationProduct T) (D.annihilation i)
-      = A.mul (A.mul L (A.mul (D.annihilation i) α)) (D.annihilation i) := by
-        rw [D.reverseOrderedAnnihilationProduct_singleOut hi T, D.selectedAnnihilationFactor_of_mem hiT]
+      = A.mul (A.mul L (A.mul (D.selectedAnnihilationFactor T i) α)) (D.annihilation i) := by
+        -- 本文の一行目（ž^T_p を取り出す）と二行目（ž^T_p = z^T_i）は共通の分解の補題が持つ
+        rw [D.reverseOrderedAnnihilationProduct_singleOut hi T]
+    _ = A.mul (A.mul L (A.mul (D.annihilation i) α)) (D.annihilation i) := by
+        rw [D.selectedAnnihilationFactor_of_mem hiT]
     _ = A.mul L (A.mul (A.mul (D.annihilation i) α) (D.annihilation i)) := A.mul_assoc _ _ _
     _ = A.mul L (A.mul (D.annihilation i) (A.mul α (D.annihilation i))) := by
         rw [A.mul_assoc (D.annihilation i) α (D.annihilation i)]

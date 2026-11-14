@@ -14,6 +14,10 @@ universe u v w uK
 
 variable {K : Type uK} [Add K] [Mul K] [One K] {A : Type u} {B : Type v} {C : Type w}
 
+/-- 本文 `def_ordered_product_of_restricted_family` の必要十分版：族を {1,…,m} に制限した族 x' の番号順の積。 -/
+def restrictedOrderedProduct (SA : AlgebraOver K A) (x' : ℕ → A) (m : ℕ) : A :=
+  orderedProduct SA m x'
+
 /-- 本文 `claim_partial_product_is_ordered_product_of_restricted_family`：族を {1,…,m} に制限した族 x' の
 番号順の積は、元の族の部分積 Π_m に等しい。Π'_j = Π_j（j ≤ m）を j の帰納法で示す。 -/
 theorem orderedProduct_of_restricted_family (SA : AlgebraOver K A) (x x' : ℕ → A) (m : ℕ)
@@ -32,7 +36,8 @@ theorem orderedProduct_of_restricted_family (SA : AlgebraOver K A) (x x' : ℕ �
         _ = SA.mul (partialOrderedProduct SA x j) (x' (j + 1)) := by rw [ih (by omega)]
         _ = SA.mul (partialOrderedProduct SA x j) (x (j + 1)) := by rw [h (j + 1) (by omega) hjm]
         _ = partialOrderedProduct SA x (j + 1) := rfl
-  calc orderedProduct SA m x' = partialOrderedProduct SA x' m := rfl
+  calc orderedProduct SA m x' = restrictedOrderedProduct SA x' m := rfl
+    _ = partialOrderedProduct SA x' m := rfl
     _ = partialOrderedProduct SA x m := hj m le_rfl
 
 /-- 本文 `claim_homomorphisms_agreeing_on_generators_are_equal`：X が A を生成し、X の上で φ = ψ なら、

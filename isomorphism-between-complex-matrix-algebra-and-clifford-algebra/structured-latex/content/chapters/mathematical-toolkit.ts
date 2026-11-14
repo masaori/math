@@ -3112,7 +3112,16 @@ L_r(x)
         math(String.raw`S'_0:=0_{\mathbb{C}}`), "、", math(String.raw`S'_m:=S'_{m-1}+_{\mathbb{C}}\alpha'_m`), "（", math(String.raw`1\le m\le n`),
         "）である。すべての ", math(String.raw`m`), " について ", math(String.raw`S_m=S'_m`), " であることを ", math(String.raw`m`),
         " についての帰納法で示す。", math(String.raw`m=n`), " の場合が主張である。",
-        math(String.raw`m=0`), " のとき、", math(String.raw`S_0=0_{\mathbb{C}}=S'_0`), " である（", ref("def_ordered_sum_in_complex_numbers"), "）。",
+        math(String.raw`m=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_0
+&=0_{\mathbb{C}}
+&&\left(\because\ S_0\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right)\\
+&=S'_0
+&&\left(\because\ S'_0\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
         math(String.raw`1\le m\le n`), " とし、", math(String.raw`S_{m-1}=S'_{m-1}`), " を仮定する（帰納法の仮定）。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -7470,6 +7479,22 @@ f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V
     ],
   },
   {
+    id: "mathematical_toolkit_definition_ordered_product_of_restricted_family",
+    kind: "definition",
+    title: { text: "族を前の番号に制限した、代数の中の番号順の積" },
+    labels: ["def_ordered_product_of_restricted_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`), " の元 ", math(String.raw`x_k`),
+        " が一つずつ与えられているとする。", math(String.raw`m\in\{0,1,\dots,n\}`), " について、族を ",
+        math(String.raw`\{1,\dots,m\}`), " に制限した族 ", math(String.raw`k\mapsto x_k`), "（", math(String.raw`k\in\{1,\dots,m\}`),
+        "）の ", math(String.raw`A`), " の中の番号順の積（", ref("def_ordered_product_in_algebra"), "）を次の記号で書く。",
+      ]),
+      displayMath(String.raw`\prod_{A,\,k=1}^{m}x_k`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_partial_product_is_ordered_product_of_restricted_family",
     kind: "claim",
     title: { text: "代数の中の番号順の積の部分積は、族を前の番号に制限した番号順の積である" },
@@ -7479,9 +7504,8 @@ f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V
         math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
         " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`A`), " の元 ", math(String.raw`x_k`),
         " が一つずつ与えられているとする。", math(String.raw`\Pi_j`), "（", math(String.raw`j\in\{0,1,\dots,n\}`), "）を、この族について ",
-        ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とする。", math(String.raw`m\in\{0,1,\dots,n\}`), " について、族を ",
-        math(String.raw`\{1,\dots,m\}`), " に制限した族 ", math(String.raw`k\mapsto x_k`), "（", math(String.raw`k\in\{1,\dots,m\}`),
-        "）の番号順の積を ", math(String.raw`\prod_{A,\,k=1}^{m}x_k`), " と書く。すべての ", math(String.raw`m\in\{0,1,\dots,n\}`),
+        ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とし、", math(String.raw`m\in\{0,1,\dots,n\}`), " について ",
+        math(String.raw`\prod_{A,\,k=1}^{m}x_k`), " を ", ref("def_ordered_product_of_restricted_family"), " のものとする。すべての ", math(String.raw`m\in\{0,1,\dots,n\}`),
         " について次が成り立つ。",
       ]),
       displayMath(String.raw`\prod_{A,\,k=1}^{m}x_k=\Pi_m`),
@@ -7513,7 +7537,7 @@ f\left(\sum_{x\in X}1_{\mathbb{C}}\cdot_V\left(\sum_{y\in Y}\lambda_{x,y}\cdot_V
       displayMath(String.raw`\begin{aligned}
 \prod_{A,\,k=1}^{m}x_k
 &=\Pi'_m
-&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&&\left(\because\ \blkref{def_ordered_product_of_restricted_family}\right)\\
 &=\Pi_m
 &&\left(\because\ \text{上の帰納法で}\ j:=m\right).
 \end{aligned}`),
@@ -15877,10 +15901,10 @@ g_{\bullet,u'}\bigl(u[r\mapsto \lambda\cdot_V x]\bigr)
     ],
   },
   {
-    id: "mathematical_toolkit_claim_appending_map_value_is_multilinear_in_appended_tuple",
-    kind: "claim",
-    title: { text: "テンソルを一つ固定すると、後ろにつなげる組についての値は l 重線型写像である" },
-    labels: ["claim_appending_map_value_is_multilinear_in_appended_tuple"],
+    id: "mathematical_toolkit_definition_map_appending_tuples_to_fixed_tensor",
+    kind: "definition",
+    title: { text: "テンソルを一つ固定して、後ろにつなげる組を入れる写像" },
+    labels: ["def_map_appending_tuples_to_fixed_tensor"],
     statement: [
       paragraph([
         math(String.raw`V`),
@@ -15900,9 +15924,34 @@ g_{\bullet,u'}\bigl(u[r\mapsto \lambda\cdot_V x]\bigr)
         math(String.raw`F\in T_k`),
         " とする。写像 ",
         math(String.raw`\rho_{\bullet}(F):V^{\{1,\dots,l\}}\to T_{k+l}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`\rho_{\bullet}(F)(u'):=\rho_{u'}(F)\qquad\bigl(u'\in V^{\{1,\dots,l\}}\bigr)`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_appending_map_value_is_multilinear_in_appended_tuple",
+    kind: "claim",
+    title: { text: "テンソルを一つ固定すると、後ろにつなげる組についての値は l 重線型写像である" },
+    labels: ["claim_appending_map_value_is_multilinear_in_appended_tuple"],
+    statement: [
+      paragraph([
+        math(String.raw`V`),
+        "、",
+        math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`),
+        "、",
+        math(String.raw`k`),
+        "、",
+        math(String.raw`l`),
         " を ",
-        math(String.raw`\rho_{\bullet}(F)(u'):=\rho_{u'}(F)`),
-        " で定める。このとき ",
+        ref("def_linear_map_appending_fixed_tuple"),
+        " のものとし、",
+        math(String.raw`F\in T_k`),
+        " とし、",
+        math(String.raw`\rho_{\bullet}(F):V^{\{1,\dots,l\}}\to T_{k+l}`),
+        " を ",
+        ref("def_map_appending_tuples_to_fixed_tensor"),
+        " のものとする。このとき ",
         math(String.raw`\rho_{\bullet}(F)`),
         " は ",
         math(String.raw`V`),
@@ -16022,24 +16071,24 @@ g_{\bullet,u'}\bigl(u[r\mapsto \lambda\cdot_V x]\bigr)
       displayMath(String.raw`\begin{aligned}
 \rho_{\bullet}(F)\bigl(u'[r\mapsto x+_V y]\bigr)
 &=\rho_a(F)
-&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ a\ \text{の定義}\right)\\
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ a\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right)\\
 &=(\rho_b\boxplus\rho_c)(F)
 &&\left(\because\ \rho_a=\rho_b\boxplus\rho_c\right)\\
 &=\rho_b(F)+_{T_{k+l}}\rho_c(F)
 &&\left(\because\ \rho_b\boxplus\rho_c\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_maps_is_linear_map}\right)\\
 &=\rho_{\bullet}(F)\bigl(u'[r\mapsto x]\bigr)+_{T_{k+l}}\rho_{\bullet}(F)\bigl(u'[r\mapsto y]\bigr)
-&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b,\ c\ \text{の定義}\right).
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b,\ c\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \rho_{\bullet}(F)\bigl(u'[r\mapsto \lambda\cdot_V x]\bigr)
 &=\rho_d(F)
-&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ d\ \text{の定義}\right)\\
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ d\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right)\\
 &=(\lambda\boxdot\rho_b)(F)
 &&\left(\because\ \rho_d=\lambda\boxdot\rho_b\right)\\
 &=\lambda\cdot_{T_{k+l}}\rho_b(F)
 &&\left(\because\ \lambda\boxdot\rho_b\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_map_is_linear_map}\right)\\
 &=\lambda\cdot_{T_{k+l}}\rho_{\bullet}(F)\bigl(u'[r\mapsto x]\bigr)
-&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b\ \text{の定義}\right).
+&&\left(\because\ \rho_{\bullet}(F)\ \text{と}\ b\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right).
 \end{aligned}`),
     ],
   },
@@ -16284,7 +16333,7 @@ m_{k,l}(F,\lambda\cdot_{T_l}G)
 &=\rho_{u'}(F+_{T_k}F')
 &&\left(\because\ \rho_{u'}\ \text{は加法を保つ。}\blkref{def_linear_map}\right)\\
 &=\rho_{\bullet}(F+_{T_k}F')(u')
-&&\left(\because\ \rho_{\bullet}(F+_{T_k}F')\ \text{の定義。}\blkref{claim_appending_map_value_is_multilinear_in_appended_tuple}\right).
+&&\left(\because\ \rho_{\bullet}(F+_{T_k}F')\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 (\lambda\boxdot\theta_F)\bigl(\tau_l(u')\bigr)
@@ -16295,7 +16344,7 @@ m_{k,l}(F,\lambda\cdot_{T_l}G)
 &=\rho_{u'}(\lambda\cdot_{T_k}F)
 &&\left(\because\ \rho_{u'}\ \text{はスカラー倍を保つ。}\blkref{def_linear_map}\right)\\
 &=\rho_{\bullet}(\lambda\cdot_{T_k}F)(u')
-&&\left(\because\ \rho_{\bullet}(\lambda\cdot_{T_k}F)\ \text{の定義。}\blkref{claim_appending_map_value_is_multilinear_in_appended_tuple}\right).
+&&\left(\because\ \rho_{\bullet}(\lambda\cdot_{T_k}F)\ \text{の定義。}\blkref{def_map_appending_tuples_to_fixed_tensor}\right).
 \end{aligned}`),
       paragraph([
         "したがって線型写像 ",
@@ -16350,6 +16399,20 @@ m_{k,l}(\lambda\cdot_{T_k}F,G)
 &=\lambda\cdot_{T_{k+l}}m_{k,l}(F,G)
 &&\left(\because\ m_{k,l}\ \text{の定義。}\blkref{def_product_of_tensors}\right).
 \end{aligned}`),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_map_multiplying_fixed_tensor_on_right",
+    kind: "definition",
+    title: { text: "テンソルを一つ固定して後ろに掛ける写像" },
+    labels: ["def_map_multiplying_fixed_tensor_on_right"],
+    statement: [
+      paragraph([
+        math(String.raw`V`), "、", math(String.raw`(T_j,\tau_j)_{j\in\mathbb{Z}_{\ge 0}}`), "、", math(String.raw`k`), "、", math(String.raw`l`), "、",
+        math(String.raw`m_{k,l}`), " を ", ref("def_product_of_tensors"), " のものとし、", math(String.raw`G\in T_l`), " とする。写像 ",
+        math(String.raw`\theta^{\mathrm{R}}_G:T_k\to T_{k+l}`), " を次で定め、", math(String.raw`G`), " を後ろに掛ける写像と呼ぶ。",
+      ]),
+      displayMath(String.raw`\theta^{\mathrm{R}}_G(F):=m_{k,l}(F,G)\qquad(F\in T_k)`),
     ],
   },
   {
@@ -16803,18 +16866,21 @@ m_{k,0}\bigl(\tau_k(u),\tau_0(\varepsilon_V)\bigr)
       paragraph([
         math(String.raw`N_x,N_y\in\mathbb{Z}_{\ge 0}`), " を ", math(String.raw`x,y`), " の零の境とし（",
         ref("def_direct_sum_of_family_of_vector_spaces"), "）、", math(String.raw`N:=N_x+N_y`), " と置く。",
-        math(String.raw`p>N`), " とし、", math(String.raw`i\in\{0,\dots,p\}`), " を任意に取る。写像 ",
-        math(String.raw`m_{i,p-i}(\bullet,G)`), " と ", math(String.raw`m_{i,p-i}(F,\bullet)`), " は線型写像なので（",
-        ref("claim_product_of_tensors_is_linear_in_first_factor"), "、", ref("claim_product_of_tensors_is_linear_in_second_factor"),
-        "）、零ベクトルを零ベクトルへ移す（", ref("claim_linear_map_sends_zero_to_zero"), "）。",
+        math(String.raw`p>N`), " とし、", math(String.raw`i\in\{0,\dots,p\}`), " を任意に取る。",
+        math(String.raw`y_{p-i}`), " を後ろに掛ける写像 ", math(String.raw`\theta^{\mathrm{R}}_{y_{p-i}}:T_i\to T_p`), "（", ref("def_map_multiplying_fixed_tensor_on_right"),
+        "）は、", ref("claim_product_of_tensors_is_linear_in_first_factor"), " により線型写像である（", ref("def_linear_map"), "）。",
+        math(String.raw`x_i`), " を前に掛ける線型写像 ", math(String.raw`\theta_{x_i}:T_{p-i}\to T_p`), "（", ref("def_linear_map_multiplying_fixed_tensor_on_left"),
+        "）は線型写像である。",
         math(String.raw`i>N_x`), " なら ", math(String.raw`x_i=0_{T_i}`), " なので次が成り立つ。",
       ]),
       displayMath(String.raw`\begin{aligned}
 m_{i,p-i}(x_i,y_{p-i})
 &=m_{i,p-i}(0_{T_i},y_{p-i})
 &&\left(\because\ x_i=0_{T_i}\right)\\
+&=\theta^{\mathrm{R}}_{y_{p-i}}(0_{T_i})
+&&\left(\because\ \blkref{def_map_multiplying_fixed_tensor_on_right}\right)\\
 &=0_{T_p}
-&&\left(\because\ m_{i,p-i}(\bullet,y_{p-i})\ \text{は線型写像。}\blkref{claim_linear_map_sends_zero_to_zero}\right).
+&&\left(\because\ \theta^{\mathrm{R}}_{y_{p-i}}\ \text{は線型写像。}\blkref{claim_linear_map_sends_zero_to_zero}\right).
 \end{aligned}`),
       paragraph([
         math(String.raw`i\le N_x`), " なら ", math(String.raw`p-i\ge p-N_x>N_y`), " なので ", math(String.raw`y_{p-i}=0_{T_{p-i}}`),
@@ -16824,8 +16890,10 @@ m_{i,p-i}(x_i,y_{p-i})
 m_{i,p-i}(x_i,y_{p-i})
 &=m_{i,p-i}(x_i,0_{T_{p-i}})
 &&\left(\because\ y_{p-i}=0_{T_{p-i}}\right)\\
+&=\theta_{x_i}(0_{T_{p-i}})
+&&\left(\because\ \blkref{def_product_of_tensors}\right)\\
 &=0_{T_p}
-&&\left(\because\ m_{i,p-i}(x_i,\bullet)\ \text{は線型写像。}\blkref{claim_linear_map_sends_zero_to_zero}\right).
+&&\left(\because\ \theta_{x_i}\ \text{は線型写像。}\blkref{claim_linear_map_sends_zero_to_zero}\right).
 \end{aligned}`),
       paragraph(["どちらの場合も次が成り立つ。"]),
       displayMath(String.raw`\begin{aligned}
@@ -17851,8 +17919,17 @@ L_{m-1}\cdot_A e+_A e\cdot_A L_{m-1}
 &&\left(\because\ \text{上の等式で各項が}\ 0_A\text{。}\blkref{claim_linear_combination_of_zero_terms_is_zero}\right).
 \end{aligned}`),
       paragraph([
-        "本題。", math(String.raw`m=0`), " のとき、", math(String.raw`L_0\cdot_A L_0=0_A\cdot_A 0_A=0_A`), " である（", math(String.raw`L_0=0_A`),
-        " と、", ref("claim_element_times_zero_in_algebra_is_zero"), " を ", math(String.raw`w:=0_A`), " に当てる）。", math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}\cdot_A L_{m-1}=0_A`),
+        "本題。", math(String.raw`m=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_0\cdot_A L_0
+&=0_A\cdot_A 0_A
+&&\left(\because\ L_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_A
+&&\left(\because\ w:=0_A\ \text{に当てる。}\blkref{claim_element_times_zero_in_algebra_is_zero}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`), " とし、", math(String.raw`L_{m-1}\cdot_A L_{m-1}=0_A`),
         " を仮定する（帰納法の仮定）。", math(String.raw`e`), " は準備のものとする。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -18168,8 +18245,10 @@ L_m\cdot_A L_m
 &&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\ \text{と}\ \Pi_1\right)\\
 &=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(u_1\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(x_p\cdot_A\prod_{A,\,r=1}^{n-p}u_{1+r}\right)
+&&\left(\because\ u_t\ \text{の置き方で}\ t:=1\text{。}u_1=x_{p-1+1}=x_p\right)\\
 &=\left(\prod_{A,\,s=1}^{p-1}x_s\right)\cdot_A\left(x_p\cdot_A\prod_{A,\,r=1}^{n-p}x_{p+r}\right)
-&&\left(\because\ u_1=x_p\text{。各}\ r\ \text{で}\ u_{1+r}=x_{p+r}\ \text{なので}\ \blkref{claim_ordered_products_with_equal_factors_are_equal}\right).
+&&\left(\because\ \text{各}\ r\ \text{で}\ u_{1+r}=x_{p+r}\text{。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right).
 \end{aligned}`),
     ],
   },
@@ -18435,9 +18514,7 @@ w'''_r
       ]),
       displayMath(String.raw`F(x):=\sum_{i\in\{0,\dots,N\}}1_{\mathbb{C}}\ast_A F_i(x_i)`),
       paragraph([
-        "右辺は零の境 ", math(String.raw`N`), " の取り方によらない。", math(String.raw`x`), " の二つの零の境は大小のどちらかであり、小さい方を ",
-        math(String.raw`N`), "、大きい方を ", math(String.raw`N'`), " として ", ref("claim_sum_of_values_on_components_does_not_depend_on_zero_bound"),
-        " を当てると二つの和が等しいからである。",
+        "右辺が零の境 ", math(String.raw`N`), " の取り方によらないことは ", ref("claim_sum_of_values_on_components_does_not_depend_on_zero_bound"), " による。",
       ]),
     ],
   },
@@ -18457,10 +18534,29 @@ w'''_r
       paragraph([
         math(String.raw`x,y\in D`), "、", math(String.raw`\lambda\in\mathbb{C}`), " を任意に取り、", math(String.raw`N`), " を ",
         math(String.raw`x`), " の零の境と ", math(String.raw`y`), " の零の境の大きい方、", math(String.raw`I:=\{0,\dots,N\}`), " とする。",
-        math(String.raw`N`), " は ", math(String.raw`x`), " と ", math(String.raw`y`), " の零の境の条件を満たし、", math(String.raw`j>N`),
-        " なら ", math(String.raw`(x+_D y)_j=0_{T_j}+_{T_j}0_{T_j}=0_{T_j}`), "、", math(String.raw`(\lambda\ast_D x)_j=\lambda\cdot_{T_j}0_{T_j}=0_{T_j}`),
-        " なので（", ref("def_operations_on_direct_sum_of_family_of_vector_spaces"), "、", ref("claim_scalar_multiple_of_zero_vector_is_zero_vector"),
-        "）、", math(String.raw`x+_D y`), " と ", math(String.raw`\lambda\ast_D x`), " の零の境の条件も満たす（",
+        math(String.raw`N`), " は ", math(String.raw`x`), " と ", math(String.raw`y`), " の零の境の条件を満たす（", ref("def_direct_sum_of_family_of_vector_spaces"), "）。",
+        math(String.raw`j\in\mathbb{Z}_{\ge 0}`), " が ", math(String.raw`j>N`), " を満たすとき、次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x+_D y)_j
+&=x_j+_{T_j}y_j
+&&\left(\because\ \blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=0_{T_j}+_{T_j}0_{T_j}
+&&\left(\because\ j>N\ \text{と零の境の条件。}\blkref{def_direct_sum_of_family_of_vector_spaces}\right)\\
+&=0_{T_j}
+&&\left(\because\ T_j\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\ast_D x)_j
+&=\lambda\cdot_{T_j}x_j
+&&\left(\because\ \blkref{def_operations_on_direct_sum_of_family_of_vector_spaces}\right)\\
+&=\lambda\cdot_{T_j}0_{T_j}
+&&\left(\because\ j>N\ \text{と零の境の条件。}\blkref{def_direct_sum_of_family_of_vector_spaces}\right)\\
+&=0_{T_j}
+&&\left(\because\ \blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`N`), " は ", math(String.raw`x+_D y`), " と ", math(String.raw`\lambda\ast_D x`), " の零の境の条件も満たす（",
         ref("def_direct_sum_of_family_of_vector_spaces"), "）。各 ", math(String.raw`F_i`), " は線型写像なので、",
         math(String.raw`F_i(x_i+_{T_i}y_i)=F_i(x_i)+_A F_i(y_i)`), "、", math(String.raw`F_i(\lambda\cdot_{T_i}x_i)=\lambda\ast_A F_i(x_i)`),
         " である（", ref("def_linear_map_on_tensor_power_extending_linear_map"), "、", ref("def_linear_map"), "）。",
@@ -18514,9 +18610,20 @@ F(\lambda\ast_D x)
       paragraph([
         math(String.raw`x:=\mathrm{emb}_k(G)`), " と置く。", math(String.raw`k`), " は ", math(String.raw`x`), " の零の境の条件を満たす（",
         ref("def_embedding_into_component_of_direct_sum_of_family"), "）。", math(String.raw`i\in\{0,\dots,k\}`), " について ",
-        math(String.raw`g_i:=F_i(x_i)`), " と置くと、", math(String.raw`g_k=F_k(G)`), "、", math(String.raw`i\neq k`), " なら ",
-        math(String.raw`g_i=F_i(0_{T_i})=0_A`), " である（", ref("def_embedding_into_component_of_direct_sum_of_family"), "、",
-        ref("claim_linear_map_sends_zero_to_zero"), "）。したがってどの ", math(String.raw`i`), " でも ",
+        math(String.raw`g_i:=F_i(x_i)`), " と置くと、", math(String.raw`g_k=F_k(G)`), " である（", ref("def_embedding_into_component_of_direct_sum_of_family"), "）。",
+        math(String.raw`i\neq k`), " なら次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_i
+&=F_i(x_i)
+&&\left(\because\ g_i\ \text{の置き方}\right)\\
+&=F_i(0_{T_i})
+&&\left(\because\ i\neq k\text{。}\blkref{def_embedding_into_component_of_direct_sum_of_family}\right)\\
+&=0_A
+&&\left(\because\ \blkref{claim_linear_map_sends_zero_to_zero}\right)
+\end{aligned}`),
+      paragraph([
+        "したがってどの ", math(String.raw`i`), " でも ",
         math(String.raw`1_{\mathbb{C}}\ast_A g_i=\delta_{k,i}\ast_A g_i`), " である（", ref("def_kronecker_delta"), "、",
         ref("claim_scalar_multiple_of_zero_vector_is_zero_vector"), "、", ref("claim_zero_scalar_multiple_is_zero_vector"), "）。",
       ]),

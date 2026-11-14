@@ -7,6 +7,7 @@
   toComplexVectorSpace                     toComplexVectorSpace_toNecSuf（rfl）
   IsComplexAlgebraHomomorphism 等の性質     …_iff_necSuf
   partialOrderedProduct・orderedProduct    …_eq_necSuf（帰納法の各段が rfl）
+  restrictedOrderedProduct                 restrictedOrderedProduct_eq_necSuf（orderedProduct の一致から）
   各主張                                   …_of_necSuf
 
 必要十分版の五つの主張は、係数 K の性質を一つも使わない。
@@ -68,6 +69,10 @@ theorem generatesAlgebra_iff_necSuf (SA : ComplexAlgebra A) (X : Set A) :
     fun h S hS hXS => h S ((isSubalgebra_iff_necSuf SA S).1 hS) hXS⟩
 
 /-! ### 主張 -/
+
+theorem restrictedOrderedProduct_eq_necSuf (SA : ComplexAlgebra A) (x' : ℕ → A) (m : ℕ) :
+    restrictedOrderedProduct SA x' m = NecSuf.AlgebraOver.restrictedOrderedProduct SA.toNecSuf x' m :=
+  orderedProduct_eq_necSuf SA m x'
 
 theorem orderedProduct_of_restricted_family_of_necSuf (SA : ComplexAlgebra A) (x x' : ℕ → A)
     (m : ℕ) (h : ∀ k : ℕ, 1 ≤ k → k ≤ m → x' k = x k) :

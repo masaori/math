@@ -167,8 +167,12 @@ theorem convolution_isZeroBound (x y : DirectSumOfFamily P.space) :
           = P.castT (Nat.add_sub_of_le i.2) (P.tensorMul i.1 (p - i.1) (x.1 i.1) (y.1 (p - i.1))) := rfl
         _ = P.castT (Nat.add_sub_of_le i.2)
               (P.tensorMul i.1 (p - i.1) (P.space i.1).zero (y.1 (p - i.1))) := by rw [hx i.1 hi]
-        _ = P.castT (Nat.add_sub_of_le i.2) (P.space (i.1 + (p - i.1))).zero := by
-            rw [(P.tensorMul_left_isLinearMap i.1 (p - i.1) (y.1 (p - i.1))).map_zero]
+        _ = P.castT (Nat.add_sub_of_le i.2)
+              (P.multiplyRight i.1 (p - i.1) (y.1 (p - i.1)) (P.space i.1).zero) := rfl
+        _ = P.castT (Nat.add_sub_of_le i.2) (P.space (i.1 + (p - i.1))).zero :=
+            -- θ^R_{y_{p-i}} は線型写像（m_{i,p-i}(•, y_{p-i}) の線型性）
+            congrArg (P.castT (Nat.add_sub_of_le i.2))
+              ((P.tensorMul_left_isLinearMap i.1 (p - i.1) (y.1 (p - i.1))).map_zero)
         _ = (P.space p).zero := P.castT_zero _
     · -- i ≤ N_x なら p - i ≥ p - N_x > N_y なので y_{p-i} = 0_{T_{p-i}}
       have hpi : Ny < p - i.1 := by omega
@@ -176,8 +180,11 @@ theorem convolution_isZeroBound (x y : DirectSumOfFamily P.space) :
           = P.castT (Nat.add_sub_of_le i.2) (P.tensorMul i.1 (p - i.1) (x.1 i.1) (y.1 (p - i.1))) := rfl
         _ = P.castT (Nat.add_sub_of_le i.2)
               (P.tensorMul i.1 (p - i.1) (x.1 i.1) (P.space (p - i.1)).zero) := by rw [hy (p - i.1) hpi]
-        _ = P.castT (Nat.add_sub_of_le i.2) (P.space (i.1 + (p - i.1))).zero := by
-            rw [(P.tensorMul_right_isLinearMap i.1 (p - i.1) (x.1 i.1)).map_zero]
+        _ = P.castT (Nat.add_sub_of_le i.2)
+              (P.multiplyLeft i.1 (p - i.1) (x.1 i.1) (P.space (p - i.1)).zero) := rfl
+        _ = P.castT (Nat.add_sub_of_le i.2) (P.space (i.1 + (p - i.1))).zero :=
+            congrArg (P.castT (Nat.add_sub_of_le i.2))
+              ((P.multiplyLeft_isLinearMap i.1 (p - i.1) (x.1 i.1)).map_zero)
         _ = (P.space p).zero := P.castT_zero _
   calc (P.space p).smul 1 (P.convolutionTerm x y p i) = (P.space p).smul 1 (P.space p).zero := by rw [hw]
     _ = (P.space p).zero := smul_zero_eq_zero (P.space p) 1

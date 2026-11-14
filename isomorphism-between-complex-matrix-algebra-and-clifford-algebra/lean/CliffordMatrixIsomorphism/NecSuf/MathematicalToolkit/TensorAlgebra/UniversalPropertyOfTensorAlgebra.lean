@@ -197,7 +197,8 @@ noncomputable def extension (x : DirectSumOfFamily P.space) : A :=
   sumOverFiniteSet SA.toVectorSpace (isFiniteSet_upTo (Classical.choose x.2)) (fun _ => 1)
     (fun i => P.extensionOnPower hP SA hf i.1 (x.1 i.1))
 
-/-- 本文 `def_map_from_tensor_algebra_extending_linear_map`：右辺は零の境 N の取り方によらない。 -/
+/-- 本文 `def_map_from_tensor_algebra_extending_linear_map`：右辺は零の境 N の取り方によらない
+（本文は `claim_sum_of_values_on_components_does_not_depend_on_zero_bound` を引く）。 -/
 theorem extension_eq (L : ScalarMultipleOfZeroLaws K) (x : DirectSumOfFamily P.space) (N : ℕ) (hN : IsZeroBound P.space x.1 N) :
     P.extension hP SA hf x
       = sumOverFiniteSet SA.toVectorSpace (isFiniteSet_upTo N) (fun _ => 1)
@@ -279,8 +280,15 @@ theorem extension_embedComponent (L : ScalarMultipleOfZeroLaws K) (k : ℕ) (G :
     by_cases hi : (⟨k, le_refl k⟩ : UpTo k) = i
     · rw [kroneckerDelta, if_pos hi]
     · have hik : i.1 ≠ k := fun h => hi (Subtype.ext h.symm)
-      rw [kroneckerDelta, if_neg hi, embedComponent_of_ne P.space k G i.1 hik,
-        (P.extensionOnPower_isLinearMap hP SA hf i.1).map_zero L.zero_add_zero, smul_zero_eq_zero _ L.zero_add_zero L.mul_zero, smul_zero_eq_zero _ L.zero_add_zero L.mul_zero]
+      -- g_i = F_i(x_i) = F_i(0_{T_i}) = 0_A（i ≠ k）
+      have hg : P.extensionOnPower hP SA hf i.1 ((embedComponent P.space k G).1 i.1)
+          = SA.toVectorSpace.zero := calc
+        P.extensionOnPower hP SA hf i.1 ((embedComponent P.space k G).1 i.1)
+            = P.extensionOnPower hP SA hf i.1 (P.space i.1).zero := by
+              rw [embedComponent_of_ne P.space k G i.1 hik]
+        _ = SA.toVectorSpace.zero := (P.extensionOnPower_isLinearMap hP SA hf i.1).map_zero L.zero_add_zero
+      rw [kroneckerDelta, if_neg hi, hg, smul_zero_eq_zero _ L.zero_add_zero L.mul_zero,
+        smul_zero_eq_zero _ L.zero_add_zero L.mul_zero]
   calc P.extension hP SA hf (embedComponent P.space k G)
       = sumOverFiniteSet SA.toVectorSpace (isFiniteSet_upTo k) (fun _ => 1)
           (fun i => P.extensionOnPower hP SA hf i.1 ((embedComponent P.space k G).1 i.1)) :=

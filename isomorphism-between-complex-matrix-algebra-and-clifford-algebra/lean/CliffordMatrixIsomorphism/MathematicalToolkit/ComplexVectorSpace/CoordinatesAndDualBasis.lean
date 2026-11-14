@@ -225,11 +225,18 @@ theorem partialOrderedSum_congr (n : ℕ) (a a' : ℕ → ℂ) (h : ∀ k : ℕ,
     ∀ m : ℕ, m ≤ n → partialOrderedSum a m = partialOrderedSum a' m := by
   intro m
   induction m with
-  | zero => intro _; rfl
+  | zero =>
+    intro _
+    calc partialOrderedSum a 0
+        = (0 : ℂ) := rfl
+      _ = partialOrderedSum a' 0 := rfl
   | succ m ih =>
     intro hm
-    show partialOrderedSum a m + a (m + 1) = partialOrderedSum a' m + a' (m + 1)
-    rw [ih (Nat.le_of_succ_le hm), h (m + 1) (Nat.succ_pos m) hm]
+    calc partialOrderedSum a (m + 1)
+        = partialOrderedSum a m + a (m + 1) := rfl
+      _ = partialOrderedSum a' m + a (m + 1) := by rw [ih (Nat.le_of_succ_le hm)]
+      _ = partialOrderedSum a' m + a' (m + 1) := by rw [h (m + 1) (Nat.succ_pos m) hm]
+      _ = partialOrderedSum a' (m + 1) := rfl
 
 /-- 本文 `claim_ordered_sums_in_complex_numbers_with_equal_terms_are_equal`：
 1,…,n の項が等しい二つの ℂ の中の番号順の和は等しい。 -/

@@ -2,6 +2,7 @@
 節「ℂ-代数」のうち、番号順の積と準同型についての五つの主張の具体版。人手証明と 1 対 1 に対応させる。
 
   本文のラベル                                                         このファイル
+  def_ordered_product_of_restricted_family                             restrictedOrderedProduct
   claim_partial_product_is_ordered_product_of_restricted_family        orderedProduct_of_restricted_family
   claim_homomorphisms_agreeing_on_generators_are_equal                 eq_of_agree_on_generators
   claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism   IsComplexAlgebraHomomorphism.comp
@@ -21,6 +22,11 @@ universe u v w
 
 variable {A : Type u} {B : Type v} {C : Type w}
 
+/-- 本文 `def_ordered_product_of_restricted_family`：族を {1,…,m} に制限した族 x' の番号順の積 ∏_{A,k=1}^{m} x'_k。
+制限した族は `ℕ` の族としては 1,…,m で元の族と値の等しい族で表すので、その番号順の積 Π_m である。 -/
+def restrictedOrderedProduct (SA : ComplexAlgebra A) (x' : ℕ → A) (m : ℕ) : A :=
+  orderedProduct SA m x'
+
 /-- 本文 `claim_partial_product_is_ordered_product_of_restricted_family`：族を {1,…,m} に制限した族 x' の
 番号順の積は、元の族の部分積 Π_m に等しい。Π'_j = Π_j（j ≤ m）を j の帰納法で示す。 -/
 theorem orderedProduct_of_restricted_family (SA : ComplexAlgebra A) (x x' : ℕ → A) (m : ℕ)
@@ -39,7 +45,8 @@ theorem orderedProduct_of_restricted_family (SA : ComplexAlgebra A) (x x' : ℕ 
         _ = SA.mul (partialOrderedProduct SA x j) (x' (j + 1)) := by rw [ih (by omega)]
         _ = SA.mul (partialOrderedProduct SA x j) (x (j + 1)) := by rw [h (j + 1) (by omega) hjm]
         _ = partialOrderedProduct SA x (j + 1) := rfl
-  calc orderedProduct SA m x' = partialOrderedProduct SA x' m := rfl
+  calc orderedProduct SA m x' = restrictedOrderedProduct SA x' m := rfl
+    _ = partialOrderedProduct SA x' m := rfl
     _ = partialOrderedProduct SA x m := hj m le_rfl
 
 /-- 本文 `claim_homomorphisms_agreeing_on_generators_are_equal`：X が A を生成し、X の上で φ = ψ なら、

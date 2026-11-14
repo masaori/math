@@ -407,8 +407,11 @@ theorem orderedProduct_singleOut (SA : ComplexAlgebra A) (n p : ℕ) (hp1 : 1 �
           (SA.mul (x (p - 1 + 1)) (orderedProduct SA (n - p) (fun r => x (p - 1 + (1 + r))))) := by
         rw [SA.one_mul (x (p - 1 + 1))]
     _ = SA.mul (orderedProduct SA (p - 1) x)
+          (SA.mul (x p) (orderedProduct SA (n - p) (fun r => x (p - 1 + (1 + r))))) := by
+        rw [hu1]
+    _ = SA.mul (orderedProduct SA (p - 1) x)
           (SA.mul (x p) (orderedProduct SA (n - p) (fun r => x (p + r)))) := by
-        rw [hu1, orderedProduct_congr SA (n - p) _ _ hu]
+        rw [orderedProduct_congr SA (n - p) _ _ hu]
 
 /-- 本文 `claim_element_commuting_with_each_factor_commutes_with_ordered_product`：
 すべての k ∈ {1,…,n} で u ·_A x_k = x_k ·_A u なら u ·_A ∏ x_k = (∏ x_k) ·_A u。 -/

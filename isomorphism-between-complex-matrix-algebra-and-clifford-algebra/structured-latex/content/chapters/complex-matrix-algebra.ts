@@ -3091,7 +3091,7 @@ F_{m'}(R)
 \end{aligned}`),
       paragraph([
         "（二）", math(String.raw`n\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`r\in\mathbb{C}`), " とし、", math(String.raw`\{1,\dots,n\}`), " の各元 ", math(String.raw`k`),
-        " に ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`p_k`), " が与えられているとする。各 ", math(String.raw`k`), " について次が成り立つ。",
+        " に ", math(String.raw`\mathbb{C}`), " の元 ", math(String.raw`p_k`), " が与えられているとする。各 ", math(String.raw`k`), " について次が成り立つ。この等式を（二）の項の等式と呼ぶ。",
       ]),
       displayMath(String.raw`\begin{aligned}
 1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(p_k\cdot_{\mathbb{C}}r\bigr)
@@ -3110,7 +3110,7 @@ F_{m'}(R)
       displayMath(String.raw`\begin{aligned}
 \sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}\bigl(p_k\cdot_{\mathbb{C}}r\bigr)
 &=\sum_{k=1}^{n}\bigl(r\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k
-&&\left(\because\ \text{各項で上の式。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
+&&\left(\because\ \text{各項で（二）の項の等式。}\blkref{claim_linear_combinations_with_equal_terms_are_equal}\right)\\
 &=r\cdot_{\mathbb{C}^{\mathrm{vec}}}\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k\right)
 &&\left(\because\ b_k:=p_k\text{、}\mu:=r\text{。}\blkref{claim_scalar_multiple_of_linear_combination}\right)\\
 &=r\cdot_{\mathbb{C}}\left(\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}p_k\right)

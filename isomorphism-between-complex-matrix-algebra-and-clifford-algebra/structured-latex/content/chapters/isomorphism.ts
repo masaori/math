@@ -5239,8 +5239,10 @@ a_{T,\le m}\cdot_A a_i
 a_T\cdot_A a_i
 &=\Bigl(L\cdot_A\bigl(\check{z}^{T}_p\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
 &&\left(\because\ n:=M\text{。}\blkref{def_reverse_ordered_product_of_selected_annihilation_generators}\text{、}\blkref{claim_ordered_product_in_algebra_with_one_factor_singled_out}\right)\\
+&=\Bigl(L\cdot_A\bigl(z^{T}_i\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
+&&\left(\because\ M+1-p=i\text{。}\blkref{def_reverse_numbered_selected_annihilation_factor}\right)\\
 &=\Bigl(L\cdot_A\bigl(1_A\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
-&&\left(\because\ \check{z}^{T}_p=z^{T}_i=1_A\right)\\
+&&\left(\because\ i\notin T\text{。}\blkref{def_selected_annihilation_factor}\right)\\
 &=\bigl(L\cdot_A \alpha\bigr)\cdot_A a_i
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
 &=L\cdot_A\bigl(\alpha\cdot_A a_i\bigr)
@@ -5249,8 +5251,10 @@ a_T\cdot_A a_i
 &&\left(\because\ m:=i-1\text{。}\blkref{claim_initial_annihilation_factors_pass_annihilation_generator_with_sign}\right)\\
 &=\varsigma\bigl(N_i(T)\bigr)\ast_A\Bigl(L\cdot_A\bigl(a_i\cdot_A \alpha\bigr)\Bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
+&=\varsigma\bigl(N_i(T)\bigr)\ast_A\Bigl(L\cdot_A\bigl(z^{S}_i\cdot_A \alpha\bigr)\Bigr)
+&&\left(\because\ i\in S\text{。}\blkref{def_selected_annihilation_factor}\right)\\
 &=\varsigma\bigl(N_i(T)\bigr)\ast_A\Bigl(L\cdot_A\bigl(\check{z}^{S}_p\cdot_A \alpha\bigr)\Bigr)
-&&\left(\because\ \check{z}^{S}_p=z^{S}_i=a_i\right)\\
+&&\left(\because\ M+1-p=i\text{。}\blkref{def_reverse_numbered_selected_annihilation_factor}\right)\\
 &=\varsigma\bigl(N_i(T)\bigr)\ast_A\prod_{A,\,k=1}^{M}\check{z}^{S}_k
 &&\left(\because\ \text{族}\ \check{z}^{S}\ \text{に}\ n:=M\ \text{で当てる。}\blkref{claim_ordered_product_in_algebra_with_one_factor_singled_out}\right)\\
 &=\varsigma\bigl(N_i(T)\bigr)\ast_A a_{T\cup\{i\}}
@@ -5278,14 +5282,17 @@ a_T\cdot_A a_i
         " のものとし、", math(String.raw`L:=\prod_{A,\,k=1}^{M-i}\check{z}^{T}_k`), "、", math(String.raw`\alpha:=a_{T,\le i-1}`), "（",
         ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "）と置く。",
         ref("claim_reverse_ordered_annihilation_product_times_annihilation_generator_without_index"), " の証明と同じく ", math(String.raw`\alpha=\prod_{A,\,r=1}^{i-1}\check{z}^{T}_{p+r}`),
-        " であり、", math(String.raw`i\in T`), " なので ", math(String.raw`\check{z}^{T}_p=z^{T}_i=a_i`), " である（", ref("def_reverse_numbered_selected_annihilation_factor"), "、",
-        ref("def_selected_annihilation_factor"), "）。", math(String.raw`\varsigma`), " と ", math(String.raw`N_i(T)`), " は ", ref("claim_initial_annihilation_factors_pass_annihilation_generator_with_sign"),
+        " である。", math(String.raw`\varsigma`), " と ", math(String.raw`N_i(T)`), " は ", ref("claim_initial_annihilation_factors_pass_annihilation_generator_with_sign"),
         " のものである。",
       ]),
       displayMath(String.raw`\begin{aligned}
 a_T\cdot_A a_i
+&=\Bigl(L\cdot_A\bigl(\check{z}^{T}_p\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
+&&\left(\because\ n:=M\text{。}\blkref{claim_ordered_product_in_algebra_with_one_factor_singled_out}\right)\\
+&=\Bigl(L\cdot_A\bigl(z^{T}_i\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
+&&\left(\because\ M+1-p=i\text{。}\blkref{def_reverse_numbered_selected_annihilation_factor}\right)\\
 &=\Bigl(L\cdot_A\bigl(a_i\cdot_A \alpha\bigr)\Bigr)\cdot_A a_i
-&&\left(\because\ n:=M\text{、}\check{z}^{T}_p=a_i\text{。}\blkref{claim_ordered_product_in_algebra_with_one_factor_singled_out}\right)\\
+&&\left(\because\ i\in T\text{。}\blkref{def_selected_annihilation_factor}\right)\\
 &=L\cdot_A\Bigl(\bigl(a_i\cdot_A \alpha\bigr)\cdot_A a_i\Bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
 &=L\cdot_A\Bigl(a_i\cdot_A\bigl(\alpha\cdot_A a_i\bigr)\Bigr)
@@ -5927,11 +5934,35 @@ Q^{T,U}_m
       displayMath(String.raw`Q^{T,U}_m=P_{\le m}`),
     ],
     proof: [
-      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`a_{T,\le 0}=a^{\dagger}_{U,\le 0}=P_{\le 0}=1_A`), " である（", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "、", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "）。"]),
+      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、三つの元はどれも空の番号順の積である。"]),
+      displayMath(String.raw`\begin{aligned}
+a_{T,\le 0}
+&=\prod_{A,\,k=1}^{0}z^{T}_{1-k}
+&&\left(\because\ \blkref{def_initial_reverse_ordered_product_of_selected_annihilation_generators}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a^{\dagger}_{U,\le 0}
+&=\prod_{A,\,t=1}^{0}y^{U}_t
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+P_{\le 0}
+&=\prod_{A,\,i=1}^{0}x_i
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      paragraph(["これらを使って ", math(String.raw`Q^{T,U}_0`), " を開く。"]),
       displayMath(String.raw`\begin{aligned}
 Q^{T,U}_0
+&=\bigl(P_{\le 0}\cdot_A(a_{T,\le 0}\cdot_A a^{\dagger}_{U,\le 0})\bigr)\cdot_A P_{\le 0}
+&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\ \text{で}\ m:=0\right)\\
 &=\bigl(1_A\cdot_A(1_A\cdot_A 1_A)\bigr)\cdot_A 1_A
-&&\left(\because\ \blkref{def_vacuum_sandwich_of_initial_parts}\text{、}a_{T,\le 0}=a^{\dagger}_{U,\le 0}=P_{\le 0}=1_A\right)\\
+&&\left(\because\ a_{T,\le 0}=1_A\text{、}a^{\dagger}_{U,\le 0}=1_A\text{、}P_{\le 0}=1_A\ \text{を代入}\right)\\
 &=(1_A\cdot_A 1_A)\cdot_A 1_A
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
 &=1_A\cdot_A 1_A
@@ -5939,7 +5970,7 @@ Q^{T,U}_0
 &=1_A
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
 &=P_{\le 0}
-&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\right).
+&&\left(\because\ P_{\le 0}=1_A\right).
 \end{aligned}`),
       paragraph([math(String.raw`1\le m\le M`), " とし、", math(String.raw`m-1`), " で主張が成り立つとする（帰納法の仮定）。すべての ", math(String.raw`t\in\{1,\dots,m\}`), " について「", math(String.raw`t\in T`), " と ", math(String.raw`t\in U`), " が同値である」とする。", math(String.raw`\{1,\dots,m-1\}\subseteq\{1,\dots,m\}`), " なので ", math(String.raw`m-1`), " でも同じ条件が成り立ち、帰納法の仮定により ", math(String.raw`Q^{T,U}_{m-1}=P_{\le m-1}`), " である。", math(String.raw`P':=P_{\le m-1}`), "、", math(String.raw`x:=x_m`), " と置く。", math(String.raw`P_{\le m}=P'\cdot_A x`), " である（", ref("claim_initial_part_of_vacuum_element_splits_off_last_factor"), "）。", math(String.raw`t:=m`), " で条件を読むと、", math(String.raw`m\in T`), " と ", math(String.raw`m\in U`), " は同値なので、「", math(String.raw`m\notin T`), " かつ ", math(String.raw`m\notin U`), "」か「", math(String.raw`m\in T`), " かつ ", math(String.raw`m\in U`), "」のどちらかである。前者のとき："]),
       displayMath(String.raw`\begin{aligned}
@@ -6101,11 +6132,33 @@ Q^{T,U}_m
       displayMath(String.raw`\bigl(a^{\dagger}_{S,\le m}\cdot_A P_{\le m}\bigr)\cdot_A a_{S,\le m}=\prod_{A,\,i=1}^{m}u^{S}_i`),
     ],
     proof: [
-      paragraph([math(String.raw`\Pi_m`), "（", math(String.raw`m\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`u^{S}_1,\dots,u^{S}_M`), " について ", ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とする（", math(String.raw`\Pi_0=1_A`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A u^{S}_m`), "）。", ref("claim_partial_product_is_ordered_product_of_restricted_family"), "（", math(String.raw`n:=M`), "）により、すべての ", math(String.raw`m`), " で ", math(String.raw`\prod_{A,\,i=1}^{m}u^{S}_i=\Pi_m`), " であるから、主張の右辺は ", math(String.raw`\Pi_m`), " である。", math(String.raw`y^{S}_t`), " を ", ref("def_selected_creation_factor"), "、", math(String.raw`z^{S}_t`), " を ", ref("def_selected_annihilation_factor"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、", math(String.raw`a^{\dagger}_{S,\le 0}=P_{\le 0}=a_{S,\le 0}=1_A`), " である（", ref("def_initial_ordered_product_of_selected_creation_generators"), "、", ref("def_initial_part_of_vacuum_element"), "、", ref("def_initial_reverse_ordered_product_of_selected_annihilation_generators"), "）。"]),
+      paragraph([math(String.raw`\Pi_m`), "（", math(String.raw`m\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`u^{S}_1,\dots,u^{S}_M`), " について ", ref("def_ordered_product_in_algebra"), " で帰納的に定めた元とする（", math(String.raw`\Pi_0=1_A`), "、", math(String.raw`1\le m\le M`), " のとき ", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A u^{S}_m`), "）。", ref("claim_partial_product_is_ordered_product_of_restricted_family"), "（", math(String.raw`n:=M`), "）により、すべての ", math(String.raw`m`), " で ", math(String.raw`\prod_{A,\,i=1}^{m}u^{S}_i=\Pi_m`), " であるから、主張の右辺は ", math(String.raw`\Pi_m`), " である。", math(String.raw`y^{S}_t`), " を ", ref("def_selected_creation_factor"), "、", math(String.raw`z^{S}_t`), " を ", ref("def_selected_annihilation_factor"), " のもの（", math(String.raw`t\in\{1,\dots,M\}`), "）とする。", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき、三つの元はどれも空の番号順の積である。"]),
+      displayMath(String.raw`\begin{aligned}
+a^{\dagger}_{S,\le 0}
+&=\prod_{A,\,t=1}^{0}y^{S}_t
+&&\left(\because\ \blkref{def_initial_ordered_product_of_selected_creation_generators}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+P_{\le 0}
+&=\prod_{A,\,i=1}^{0}x_i
+&&\left(\because\ \blkref{def_initial_part_of_vacuum_element}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a_{S,\le 0}
+&=\prod_{A,\,k=1}^{0}z^{S}_{1-k}
+&&\left(\because\ \blkref{def_initial_reverse_ordered_product_of_selected_annihilation_generators}\ \text{で}\ m:=0\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\ \text{の}\ \Pi_0\right)
+\end{aligned}`),
+      paragraph(["これらを使って主張の左辺を開く。"]),
       displayMath(String.raw`\begin{aligned}
 \bigl(a^{\dagger}_{S,\le 0}\cdot_A P_{\le 0}\bigr)\cdot_A a_{S,\le 0}
 &=(1_A\cdot_A 1_A)\cdot_A 1_A
-&&\left(\because\ a^{\dagger}_{S,\le 0}=P_{\le 0}=a_{S,\le 0}=1_A\right)\\
+&&\left(\because\ a^{\dagger}_{S,\le 0}=1_A\text{、}P_{\le 0}=1_A\text{、}a_{S,\le 0}=1_A\ \text{を代入}\right)\\
 &=1_A\cdot_A 1_A
 &&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
 &=1_A

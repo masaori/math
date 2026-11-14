@@ -10,6 +10,7 @@
   TensorPowers                             TensorPowers.toNecSuf（k 重テンソル積であることは isTensorProduct_toNecSuf で運ぶ）
   appendMap・multiplyLeft・tensorMul       …_eq_necSuf（具体版と必要十分版で別々に `Classical.choose` で選ぶので、
                                            必要十分版の普遍性の一意性に具体版の写像を当てて一致させる）
+  multiplyRight                            multiplyRight_eq_necSuf（tensorMul の一致から）
   各主張                                   …_of_necSuf
 
 必要十分版の加法の逆元の係数 n には -1、乗法の交換法則には `mul_comm` を渡す。
@@ -201,6 +202,11 @@ theorem tensorMul_eq_necSuf (k l : ℕ) (F : P.T k) (G : P.T l) :
     P.tensorMul k l F G = P.toNecSuf.tensorMul mul_comm k l F G := by
   show P.multiplyLeft k l F G = P.toNecSuf.multiplyLeft mul_comm k l F G
   rw [P.multiplyLeft_eq_necSuf k l F]
+
+theorem multiplyRight_eq_necSuf (k l : ℕ) (G : P.T l) :
+    P.multiplyRight k l G = P.toNecSuf.multiplyRight mul_comm k l G := by
+  funext F
+  exact P.tensorMul_eq_necSuf k l F G
 
 theorem tensorMul_tau_tau_of_necSuf (k l : ℕ) (u : Tuple V k) (u' : Tuple V l) :
     P.tensorMul k l (P.τ k u) (P.τ l u') = P.τ (k + l) (concatTuple u u') := by

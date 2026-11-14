@@ -7,13 +7,15 @@
   def_linear_map_appending_fixed_tuple                          appendMap（ρ_{u'}）・appendMap_isLinearMap・
                                                                 appendMap_tau（ρ_{u'}(τ_k(u)) = τ_{k+l}(cat_{k,l}(u, u'))）・
                                                                 appendMap_unique（ただ一つであること）
-  claim_appending_map_value_is_multilinear_in_appended_tuple    appendMapValue（ρ_•(F)）・appendMapValue_isMultilinearMap
+  def_map_appending_tuples_to_fixed_tensor                      appendMapValue（ρ_•(F)）
+  claim_appending_map_value_is_multilinear_in_appended_tuple    appendMapValue_isMultilinearMap
   def_linear_map_multiplying_fixed_tensor_on_left               multiplyLeft（θ_F）・multiplyLeft_isLinearMap・
                                                                 multiplyLeft_tau・multiplyLeft_unique
   def_product_of_tensors                                        tensorMul（m_{k,l}）
   claim_product_of_pure_tensors_is_pure_tensor_of_concatenation tensorMul_tau_tau
   claim_product_of_tensors_is_linear_in_second_factor           tensorMul_add_right・tensorMul_smul_right
   claim_product_of_tensors_is_linear_in_first_factor            tensorMul_add_left・tensorMul_smul_left
+  def_map_multiplying_fixed_tensor_on_right                     multiplyRight（θ^R_G）
 
 本文の「ただ一つ存在する線型写像」は、k 重テンソル積の普遍性（`IsTensorProduct.universal`）の存在から
 `Classical.choose` で選び、ただ一つであることは普遍性の一意性の欄で書く（`appendMap_unique`・`multiplyLeft_unique`）。
@@ -83,7 +85,7 @@ theorem appendMap_unique (k l : ℕ) (u' : Tuple V l) (g : P.T k → P.T (k + l)
     g = P.appendMap k l u' :=
   (P.appendMap_spec k l u').2 g ⟨hg, hgτ⟩
 
-/-- 本文 `claim_appending_map_value_is_multilinear_in_appended_tuple` の写像 ρ_•(F)(u') := ρ_{u'}(F)。 -/
+/-- 本文 `def_map_appending_tuples_to_fixed_tensor`：写像 ρ_•(F)(u') := ρ_{u'}(F)。 -/
 noncomputable def appendMapValue (k l : ℕ) (F : P.T k) : Tuple V l → P.T (k + l) :=
   fun u' => P.appendMap k l u' F
 
@@ -256,6 +258,10 @@ theorem tensorMul_smul_left (k l : ℕ) (c : ℂ) (F : P.T k) (G : P.T l) :
       rw [P.pointwiseSmul_multiplyLeft k l c F]
   _ = (P.space (k + l)).smul c (P.multiplyLeft k l F G) := rfl
   _ = (P.space (k + l)).smul c (P.tensorMul k l F G) := rfl
+
+/-- 本文 `def_map_multiplying_fixed_tensor_on_right`：G ∈ T_l を後ろに掛ける写像 θ^R_G(F) := m_{k,l}(F, G)。 -/
+noncomputable def multiplyRight (k l : ℕ) (G : P.T l) : P.T k → P.T (k + l) :=
+  fun F => P.tensorMul k l F G
 
 end TensorPowers
 
