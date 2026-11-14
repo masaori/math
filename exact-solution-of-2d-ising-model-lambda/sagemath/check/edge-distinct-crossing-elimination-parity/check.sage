@@ -37,6 +37,7 @@ def verify(L, walk):
     family = eliminate(L, walk)
     supports = [set(e[:3] for e in member) for member in family]
     assert all(crossings(L, member) == 0 for member in family)
+    assert all(len(set(e[:3] for e in member)) == len(member) for member in family)
     assert len(set.union(*supports)) == sum(len(s) for s in supports) == len(walk)
     assert set.union(*supports) == set(e[:3] for e in walk)
     assert total_turn(walk) == sum(total_turn(member) for member in family)

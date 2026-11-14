@@ -123,7 +123,7 @@ theorem crossing_elimination_family_necSuf [AddCommMonoid T] [AddCommMonoid M]
       (c w : R) = ((c a + c b + 1 : ℕ) : R) + I (supp a) (supp b))
     (w : W) (hw : good w) :
     ∃ ds : List W, ds ≠ [] ∧ (ds.map supp).Pairwise Disjoint ∧
-      finsetListUnion (ds.map supp) = supp w ∧ (∀ d ∈ ds, c d = 0) ∧
+      finsetListUnion (ds.map supp) = supp w ∧ (∀ d ∈ ds, c d = 0) ∧ (∀ d ∈ ds, good d) ∧
       (ds.map t).sum = t w ∧
       (read (ds.map sH).sum, read (ds.map sV).sum) = (read (sH w), read (sV w)) ∧
       (c w : R) = ((ds.length - 1 : ℕ) : R) + finsetListPairSum I (ds.map supp) := by
@@ -135,7 +135,7 @@ theorem crossing_elimination_family_necSuf [AddCommMonoid T] [AddCommMonoid M]
   -- c(w) ∈ ℕ に関する整礎帰納法
   suffices H : ∀ N : ℕ, ∀ w, good w → c w = N → ∃ ds : List W, ds ≠ [] ∧
       (ds.map supp).Pairwise Disjoint ∧ finsetListUnion (ds.map supp) = supp w ∧
-      (∀ d ∈ ds, c d = 0) ∧ (ds.map t).sum = t w ∧
+      (∀ d ∈ ds, c d = 0) ∧ (∀ d ∈ ds, good d) ∧ (ds.map t).sum = t w ∧
       (read (ds.map sH).sum, read (ds.map sV).sum) = (read (sH w), read (sV w)) ∧
       (c w : R) = ((ds.length - 1 : ℕ) : R) + finsetListPairSum I (ds.map supp) from
     H _ w hw rfl
@@ -145,11 +145,14 @@ theorem crossing_elimination_family_necSuf [AddCommMonoid T] [AddCommMonoid M]
   intro w hw hN
   rcases Nat.eq_zero_or_pos N with h0 | hpos
   · -- 基底: 自分自身の一項の族
-    refine ⟨[w], List.cons_ne_nil _ _, List.pairwise_singleton _ _, ?_, ?_, ?_, ?_, ?_⟩
+    refine ⟨[w], List.cons_ne_nil _ _, List.pairwise_singleton _ _, ?_, ?_, ?_, ?_, ?_, ?_⟩
     · simp [finsetListUnion]
     · intro d hd
       rw [List.mem_singleton.mp hd]
       exact hN.trans h0
+    · intro d hd
+      rw [List.mem_singleton.mp hd]
+      exact hw
     · simp
     · simp
     · simp [finsetListPairSum, hN, h0]
@@ -157,12 +160,12 @@ theorem crossing_elimination_family_necSuf [AddCommMonoid T] [AddCommMonoid M]
     obtain ⟨a, b, ha, hb, hdesc, hABdisj, hABunion, hturn, hsHab, hsVab, hcross⟩ :=
       hsplit w hw (hN ▸ hpos)
     -- 二本への帰納法の仮定
-    obtain ⟨αs, hαne, hαdisj, hαunion, hαzero, hαturn, hαseam, hαcross⟩ :=
+    obtain ⟨αs, hαne, hαdisj, hαunion, hαzero, hαgood, hαturn, hαseam, hαcross⟩ :=
       ih _ (hN ▸ lt_of_le_of_lt (Nat.le_add_right _ _) hdesc) a ha rfl
-    obtain ⟨βs, hβne, hβdisj, hβunion, hβzero, hβturn, hβseam, hβcross⟩ :=
+    obtain ⟨βs, hβne, hβdisj, hβunion, hβzero, hβgood, hβturn, hβseam, hβcross⟩ :=
       ih _ (hN ▸ lt_of_le_of_lt (Nat.le_add_left _ _) hdesc) b hb rfl
     -- 両族を連結する
-    refine ⟨αs ++ βs, by simp [hαne], ?_, ?_, ?_, ?_, ?_, ?_⟩
+    refine ⟨αs ++ βs, by simp [hαne], ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
     · rw [List.map_append, List.pairwise_append]
       refine ⟨hαdisj, hβdisj, fun C hC D hD => ?_⟩
       have hCA : C ⊆ supp a := hαunion ▸ subset_finsetListUnion hC
@@ -173,6 +176,10 @@ theorem crossing_elimination_family_necSuf [AddCommMonoid T] [AddCommMonoid M]
       rcases List.mem_append.mp hd with h | h
       · exact hαzero d h
       · exact hβzero d h
+    · intro d hd
+      rcases List.mem_append.mp hd with h | h
+      · exact hαgood d h
+      · exact hβgood d h
     · calc ((αs ++ βs).map t).sum = (αs.map t).sum + (βs.map t).sum := by
             rw [List.map_append, List.sum_append]
         _ = t a + t b := by rw [hαturn, hβturn]

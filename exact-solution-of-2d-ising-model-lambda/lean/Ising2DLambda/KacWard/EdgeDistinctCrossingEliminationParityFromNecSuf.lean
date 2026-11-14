@@ -65,7 +65,7 @@ theorem edge_distinct_crossing_elimination_parity_from_necSuf [NeZero L] {m : �
     · have h2 := congrArg Prod.snd hs
       simp only [ClosedNonbacktrackingWalkData.seam] at h2 ⊢
       rw [h2, edgeSequenceSeamParities, Nat.mod_mod]
-  obtain ⟨δs, hne, hdisj, hunion, hzero, hturn, hseam, hcross⟩ :=
+  obtain ⟨δs, hne, hdisj, hunion, hzero, hgood, hturn, hseam, hcross⟩ :=
     Ising2DLambda.NecSuf.KacWard.crossing_elimination_family_necSuf
       (fun δ : ClosedNonbacktrackingWalkData L => Function.Injective fun r => (δ.walk r).1)
       (·.support) (·.crossing) (·.turning) (fun δ => δ.seam.1) (fun δ => δ.seam.2)
@@ -74,7 +74,8 @@ theorem edge_distinct_crossing_elimination_parity_from_necSuf [NeZero L] {m : �
       evenEdgeChainIntersection_empty_left evenEdgeChainIntersection_empty_right
       evenEdgeChainIntersection_union_left evenEdgeChainIntersection_union_right
       hsplit ⟨m, γ, hγ⟩ hinj
-  refine ⟨δs, hne, hdisj, (chainListUnion_eq_finsetListUnion _).trans hunion, hzero, hturn, ?_, ?_⟩
+  refine ⟨δs, hne, hdisj, (chainListUnion_eq_finsetListUnion _).trans hunion, hzero, hgood, hturn,
+    ?_, ?_⟩
   · rw [hseam]
     simp [ClosedNonbacktrackingWalkData.seam, edgeSequenceSeamParities]
   · rw [chainPairIntersectionSum_eq_finsetListPairSum]

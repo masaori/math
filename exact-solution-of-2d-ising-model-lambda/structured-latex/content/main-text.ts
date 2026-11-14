@@ -79108,7 +79108,8 @@ c(\gamma)+1
                         " の無向辺の台を ", math(String.raw`C_{\eta}`), " と書き、",
                         math(String.raw`C_i:=C_{\delta_i}`), " と置く。台 ",
                         math(String.raw`C_i`), " は互いに素で、合併は ", math(String.raw`C_{\gamma}`),
-                        " であり、各 ", math(String.raw`c(\delta_i)=0`), " である。さらに整数の等式と二元体の等式",
+                        " であり、各 ", math(String.raw`c(\delta_i)=0`), " で、各 ", math(String.raw`\delta_i`),
+                        " の無向辺の標識は相異なる。さらに整数の等式と二元体の等式",
                       ]),
                       displayMath(String.raw`\sum_{i=1}^{n}t_{\circ}(\delta_i)=t_{\circ}(\gamma),\qquad
 (h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
@@ -79125,7 +79126,7 @@ c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
                       paragraph([
                         math(String.raw`c(\gamma)\in\mathbb N`), " に関する整礎帰納法を用いる。",
                         math(String.raw`c(\gamma)=0`), " なら ", math(String.raw`n=1`),
-                        "、", math(String.raw`\delta_1=\gamma`), " と取る。辺の台、回転数、切断線偶奇は同じで、",
+                        "、", math(String.raw`\delta_1=\gamma`), " と取る。辺の標識の相異性、辺の台、回転数、切断線偶奇は同じで、",
                         "対 ", math(String.raw`i<j`), " の集合は空であり、横断数の式の両辺は零である。",
                       ]),
                       paragraph([
@@ -79133,7 +79134,7 @@ c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
                         " から横断する添字 ", math(String.raw`k<l`), " を選ぶ。",
                         ref("claim_smoothing_splits_closed_walk"), " の二本を ",
                         math(String.raw`\gamma_A,\gamma_B`), " とし、その辺の台を ",
-                        math(String.raw`C_A,C_B`), " とする。元の辺が相異なるので ",
+                        math(String.raw`C_A,C_B`), " とする。二本の辺はどちらも元の相異なる添字の辺なので、各子の無向辺の標識は相異なり、",
                         math(String.raw`C_A\cap C_B=\varnothing`), " かつ ",
                         math(String.raw`C_A\cup C_B=C_{\gamma}`), " である。",
                         ref("claim_smoothing_split_crossing_descent"), " により各子の横断数は元より小さい。",
@@ -79142,6 +79143,7 @@ c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
                         math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。両族を連結して ",
                         math(String.raw`(\delta_i)_{1\le i\le p+q}`), " と置く。",
                         "帰納法の台の条件と二本の台の分割により、連結族の台も互いに素で元の台を尽くす。",
+                        "連結族の各項の無向辺の標識が相異なることは、二本への帰納法の仮定から従う。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{i=1}^{p+q}t_{\circ}(\delta_i)
@@ -79523,6 +79525,13 @@ n_{\mathrm{ct}}(\gamma_A)
                     labels: ["claim_edge_distinct_walk_quadratic_sign"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/edge-distinct-walk-quadratic-sign"],
+                    lean: [
+                      "Ising2DLambda.KacWard.edgeDistinctWalk_quadraticSign",
+                      "Ising2DLambda.KacWard.crossingFreeWalk_quadraticSign",
+                      "Ising2DLambda.KacWard.torusQuadraticSign_walkFamily",
+                      "Ising2DLambda.NecSuf.KacWard.edge_distinct_walk_quadratic_sign_necSuf",
+                      "Ising2DLambda.KacWard.edgeDistinctWalk_quadraticSign_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),

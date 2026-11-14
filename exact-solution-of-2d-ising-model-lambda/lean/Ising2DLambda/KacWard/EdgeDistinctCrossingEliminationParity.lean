@@ -218,7 +218,7 @@ theorem smoothedSplitWalks_support_disjoint (γ : Fin (m + 1) → OrientedEdge L
 
 end Split
 
-/-- 本文の主張の結論: 横断のない閉じた非後退辺列の族 `(δ_i)_{1≤i≤n}`（`n ≥ 1`）があり、台は互いに素で
+/-- 本文の主張の結論: 横断のない閉じた非後退辺列の族 `(δ_i)_{1≤i≤n}`（`n ≥ 1`。各項の辺の標識は相異なる）があり、台は互いに素で
 合併は `C_γ`、回転数の和は `t_∘(γ)`、切断線偶奇の和は `(h(γ), v(γ))`、
 `c(γ) mod 2 = (n - 1) + Σ_{i<j} I_L(C_i, C_j)`（𝔽₂）。 -/
 def CrossingEliminationFamily [NeZero L] {m : ℕ} (γ : Fin (m + 1) → OrientedEdge L)
@@ -227,6 +227,7 @@ def CrossingEliminationFamily [NeZero L] {m : ℕ} (γ : Fin (m + 1) → Oriente
     (δs.map (·.support)).Pairwise Disjoint ∧
     chainListUnion (δs.map (·.support)) = closedWalkSupport γ ∧
     (∀ δ ∈ δs, δ.crossing = 0) ∧
+    (∀ δ ∈ δs, Function.Injective fun r => (δ.walk r).1) ∧
     (δs.map (·.turning)).sum = cyclicTotalTurning γ hγ ∧
     ((δs.map fun δ => δ.seam.1).sum % 2, (δs.map fun δ => δ.seam.2).sum % 2) =
       edgeSequenceSeamParities (List.ofFn γ) ∧
@@ -250,11 +251,15 @@ theorem edge_distinct_crossing_elimination_parity [NeZero L] {m : ℕ}
   intro m γ hγ hinj hN
   rcases Nat.eq_zero_or_pos N with h0 | hpos
   · -- c(γ) = 0 なら n = 1、δ_1 = γ
-    refine ⟨[⟨m, γ, hγ⟩], List.cons_ne_nil _ _, List.pairwise_singleton _ _, ?_, ?_, ?_, ?_, ?_⟩
+    refine ⟨[⟨m, γ, hγ⟩], List.cons_ne_nil _ _, List.pairwise_singleton _ _, ?_, ?_, ?_, ?_, ?_, ?_⟩
     · simp [chainListUnion, ClosedNonbacktrackingWalkData.support]
     · intro δ hδ
       rw [List.mem_singleton.mp hδ]
       exact hN.trans h0
+    · -- δ_1 = γ の辺の標識は相異なる
+      intro δ hδ
+      rw [List.mem_singleton.mp hδ]
+      exact hinj
     · simp [ClosedNonbacktrackingWalkData.turning]
     · simp [ClosedNonbacktrackingWalkData.seam, edgeSequenceSeamParities]
     · simp [chainPairIntersectionSum, hN, h0]
@@ -273,15 +278,15 @@ theorem edge_distinct_crossing_elimination_parity [NeZero L] {m : ℕ}
     have hltB : closedWalkCrossingNumber γB hB < N :=
       hN ▸ lt_of_le_of_lt (Nat.le_add_left _ _) hdesc
     -- 帰納法を二本へ適用する
-    obtain ⟨αs, hαne, hαdisj, hαunion, hαzero, hαturn, hαseam, hαcross⟩ :=
+    obtain ⟨αs, hαne, hαdisj, hαunion, hαzero, hαinj, hαturn, hαseam, hαcross⟩ :=
       ih _ hltA γA hA (smoothedSplitWalkA_edge_injective γ hγ hinj hkl) rfl
-    obtain ⟨βs, hβne, hβdisj, hβunion, hβzero, hβturn, hβseam, hβcross⟩ :=
+    obtain ⟨βs, hβne, hβdisj, hβunion, hβzero, hβinj, hβturn, hβseam, hβcross⟩ :=
       ih _ hltB γB hB (smoothedSplitWalkB_edge_injective γ hγ hinj hkl) rfl
     -- 二本の台の分割 C_A ∩ C_B = ∅、C_A ∪ C_B = C_γ
     have hABdisj := smoothedSplitWalks_support_disjoint γ hγ hinj hkl
     have hABunion := smoothedSplitWalks_support_union γ hγ hkl
     -- 両族を連結して (δ_i)_{1≤i≤p+q} と置く
-    refine ⟨αs ++ βs, by simp [hαne], ?_, ?_, ?_, ?_, ?_, ?_⟩
+    refine ⟨αs ++ βs, by simp [hαne], ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
     · -- 連結族の台も互いに素
       rw [List.map_append, List.pairwise_append]
       refine ⟨hαdisj, hβdisj, fun C hC D hD => ?_⟩
@@ -294,6 +299,11 @@ theorem edge_distinct_crossing_elimination_parity [NeZero L] {m : ℕ}
       rcases List.mem_append.mp hδ with h | h
       · exact hαzero δ h
       · exact hβzero δ h
+    · -- 連結族の各項の辺の標識は相異なる（二本への帰納法の仮定）
+      intro δ hδ
+      rcases List.mem_append.mp hδ with h | h
+      · exact hαinj δ h
+      · exact hβinj δ h
     · -- Σ t_∘(δ_i) = Σ t_∘(α_i) + Σ t_∘(β_j) = t_∘(γ_A) + t_∘(γ_B) = t_∘(γ)
       calc ((αs ++ βs).map (·.turning)).sum
           = (αs.map (·.turning)).sum + (βs.map (·.turning)).sum := by
