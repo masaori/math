@@ -126,6 +126,8 @@ export const ALL_LABELS = [
   "claim_edge_mode_index_bijection",
   "claim_edge_representative_displacement",
   "claim_edge_row_partition",
+  "claim_edge_set_horizontal_seam_parity_equals_winding_parity",
+  "claim_edge_set_vertical_seam_parity_equals_winding_parity",
   "claim_edge_simple_contact_split",
   "claim_empty_pfaffian_determinant",
   "claim_even_edge_chain_intersection",

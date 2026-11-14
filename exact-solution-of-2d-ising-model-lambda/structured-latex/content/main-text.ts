@@ -80172,10 +80172,106 @@ t(D,T)
 &&\bigl(\because\ \blkref{claim_local_pairing_signed_sum}\bigr)\\
 &=\sum_{P\in\mathcal W_L}(-1)^{(1+a)h(P)+(1+b)v(P)+h(P)v(P)}x^{|P|}
 &&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と指数の偶奇}\bigr)\\
+&=\sum_{P\in\mathcal W_L}(-1)^{(1+a)\varepsilon_{L,\mathrm{h}}(P)+(1+b)v(P)+\varepsilon_{L,\mathrm{h}}(P)v(P)}x^{|P|}
+&&\bigl(\because\ \blkref{claim_edge_set_horizontal_seam_parity_equals_winding_parity}\bigr)\\
+&=\sum_{P\in\mathcal W_L}(-1)^{(1+a)\varepsilon_{L,\mathrm{h}}(P)+(1+b)\varepsilon_{L,\mathrm{v}}(P)+\varepsilon_{L,\mathrm{h}}(P)\varepsilon_{L,\mathrm{v}}(P)}x^{|P|}
+&&\bigl(\because\ \blkref{claim_edge_set_vertical_seam_parity_equals_winding_parity}\bigr)\\
 &=Q^{a,b}_L
 &&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
 \end{aligned}`),
                       paragraph(["辺長一でも長短の標識を区別した有限和を使う。最後の等号で係数を ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " に送る。"]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_set_horizontal_seam_parity_equals_winding_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_set_horizontal_seam_parity_equals_winding_parity",
+                    kind: "claim",
+                    title: { text: "辺部分集合の横切断線の偶奇は横の巻き付き偶奇に等しい" },
+                    labels: ["claim_edge_set_horizontal_seam_parity_equals_winding_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/edge-set-seam-parity-equals-winding-parity"],
+                    lean: ["Ising2DLambda.KacWard.residueVal_eq_pred_iff", "Ising2DLambda.KacWard.horizontalSeamParity_eq_seamRowSum", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity", "Ising2DLambda.NecSuf.KacWard.line_indicator_sum_eq_line_count", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity_from_necSuf"],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\in\mathbb N_{>0}`), " と辺の部分集合 ", math(String.raw`A\subseteq E_L`), " を取る。", ref("def_seam_parities"), " の指示子と ", ref("def_torus_winding_parities"), " の巻き付き偶奇について、", math(String.raw`\mathbb N`), " の等式"]),
+                      displayMath(String.raw`\Bigl(\sum_{e\in A}c_{\mathrm h}(e,0)\Bigr)\bmod 2=\varepsilon_{L,\mathrm{h}}(A)`),
+                      paragraph(["が成り立つ。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([math(String.raw`y\in\mathbb Z/L\mathbb Z`), " について ", math(String.raw`s(y)=L-1`), " と ", math(String.raw`y=\pi(-1)`), " は同値である。実際、", ref("def_residue_maps"), " の ", math(String.raw`\pi(s(y))=y`), " から ", math(String.raw`s(y)=L-1`), " なら ", math(String.raw`y=\pi(L-1)=\pi(-1)`), "、逆に ", math(String.raw`0\le L-1\le L-1`), " と ", math(String.raw`\pi(L-1)=\pi(-1)`), " から ", math(String.raw`s(\pi(-1))=L-1`), " である（", ref("def_residue_maps"), " の代表の一意性）。これと ", ref("claim_edge_row_partition"), " の一意な辺番号の分解により、任意の ", math(String.raw`e\in E_L`), " について"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{i\in\mathbb Z/L\mathbb Z}\mathbf 1_{e=n_{\mathrm h}(i,\pi(-1))}
+&=\mathbf 1_{\exists r,j\in\mathbb Z/L\mathbb Z:\ e=n_{\mathrm h}(r,j)\text{ かつ }j=\pi(-1)}
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の一意な辺番号の分解}\bigr)\\
+&=\mathbf 1_{\exists r,j\in\mathbb Z/L\mathbb Z:\ e=n_{\mathrm h}(r,j)\text{ かつ }s(j)=L-1}
+&&\bigl(\because\ \blkref{def_residue_maps}\text{ による上の同値}\bigr)\\
+&=c_{\mathrm h}(e,0)
+&&\bigl(\because\ \blkref{def_seam_parities}\bigr)
+\end{aligned}`),
+                      paragraph(["である。これを ", math(String.raw`A`), " の各辺に適用して"]),
+                      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{e\in A}c_{\mathrm h}(e,0)\Bigr)\bmod 2
+&=\Bigl(\sum_{e\in A}\sum_{i\in\mathbb Z/L\mathbb Z}\mathbf 1_{e=n_{\mathrm h}(i,\pi(-1))}\Bigr)\bmod 2
+&&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
+&=\Bigl(\sum_{i\in\mathbb Z/L\mathbb Z}\sum_{e\in A}\mathbf 1_{e=n_{\mathrm h}(i,\pi(-1))}\Bigr)\bmod 2
+&&\bigl(\because\ \text{有限和の交換}\bigr)\\
+&=\Bigl(\sum_{i\in\mathbb Z/L\mathbb Z}\mathbf 1_{n_{\mathrm h}(i,\pi(-1))\in A}\Bigr)\bmod 2
+&&\bigl(\because\ \text{一点の指示子の有限和}\bigr)\\
+&=|A\cap C_{L,\mathrm{h}}|\bmod 2
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ により }i\mapsto n_{\mathrm h}(i,\pi(-1))\text{ は単射で像は }C_{L,\mathrm{h}}\bigr)\\
+&=\varepsilon_{L,\mathrm{h}}(A)
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_set_vertical_seam_parity_equals_winding_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_set_vertical_seam_parity_equals_winding_parity",
+                    kind: "claim",
+                    title: { text: "辺部分集合の縦切断線の偶奇は縦の巻き付き偶奇に等しい" },
+                    labels: ["claim_edge_set_vertical_seam_parity_equals_winding_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/edge-set-seam-parity-equals-winding-parity"],
+                    lean: ["Ising2DLambda.KacWard.verticalSeamParity_eq_seamColumnSum", "Ising2DLambda.KacWard.edgeSetVerticalSeamParity_eq_windingParity", "Ising2DLambda.NecSuf.KacWard.line_indicator_sum_eq_line_count", "Ising2DLambda.KacWard.edgeSetVerticalSeamParity_eq_windingParity_from_necSuf"],
+                    statement: [
+                      paragraph(["任意の ", math(String.raw`L\in\mathbb N_{>0}`), " と辺の部分集合 ", math(String.raw`A\subseteq E_L`), " を取る。", ref("def_seam_parities"), " の指示子と ", ref("def_torus_winding_parities"), " の巻き付き偶奇について、", math(String.raw`\mathbb N`), " の等式"]),
+                      displayMath(String.raw`\Bigl(\sum_{e\in A}c_{\mathrm v}(e,0)\Bigr)\bmod 2=\varepsilon_{L,\mathrm{v}}(A)`),
+                      paragraph(["が成り立つ。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([math(String.raw`y\in\mathbb Z/L\mathbb Z`), " について ", math(String.raw`s(y)=L-1`), " と ", math(String.raw`y=\pi(-1)`), " は同値である。実際、", ref("def_residue_maps"), " の ", math(String.raw`\pi(s(y))=y`), " から ", math(String.raw`s(y)=L-1`), " なら ", math(String.raw`y=\pi(L-1)=\pi(-1)`), "、逆に ", math(String.raw`0\le L-1\le L-1`), " と ", math(String.raw`\pi(L-1)=\pi(-1)`), " から ", math(String.raw`s(\pi(-1))=L-1`), " である（", ref("def_residue_maps"), " の代表の一意性）。これと ", ref("claim_edge_row_partition"), " の一意な辺番号の分解により、任意の ", math(String.raw`e\in E_L`), " について"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{j\in\mathbb Z/L\mathbb Z}\mathbf 1_{e=n_{\mathrm v}(\pi(-1),j)}
+&=\mathbf 1_{\exists i,r\in\mathbb Z/L\mathbb Z:\ e=n_{\mathrm v}(i,r)\text{ かつ }i=\pi(-1)}
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の一意な辺番号の分解}\bigr)\\
+&=\mathbf 1_{\exists i,r\in\mathbb Z/L\mathbb Z:\ e=n_{\mathrm v}(i,r)\text{ かつ }s(i)=L-1}
+&&\bigl(\because\ \blkref{def_residue_maps}\text{ による上の同値}\bigr)\\
+&=c_{\mathrm v}(e,0)
+&&\bigl(\because\ \blkref{def_seam_parities}\bigr)
+\end{aligned}`),
+                      paragraph(["である。これを ", math(String.raw`A`), " の各辺に適用して"]),
+                      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{e\in A}c_{\mathrm v}(e,0)\Bigr)\bmod 2
+&=\Bigl(\sum_{e\in A}\sum_{j\in\mathbb Z/L\mathbb Z}\mathbf 1_{e=n_{\mathrm v}(\pi(-1),j)}\Bigr)\bmod 2
+&&\bigl(\because\ \text{上の一辺ごとの等式}\bigr)\\
+&=\Bigl(\sum_{j\in\mathbb Z/L\mathbb Z}\sum_{e\in A}\mathbf 1_{e=n_{\mathrm v}(\pi(-1),j)}\Bigr)\bmod 2
+&&\bigl(\because\ \text{有限和の交換}\bigr)\\
+&=\Bigl(\sum_{j\in\mathbb Z/L\mathbb Z}\mathbf 1_{n_{\mathrm v}(\pi(-1),j)\in A}\Bigr)\bmod 2
+&&\bigl(\because\ \text{一点の指示子の有限和}\bigr)\\
+&=|A\cap C_{L,\mathrm{v}}|\bmod 2
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ により }j\mapsto n_{\mathrm v}(\pi(-1),j)\text{ は単射で像は }C_{L,\mathrm{v}}\bigr)\\
+&=\varepsilon_{L,\mathrm{v}}(A)
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)
+\end{aligned}`),
                     ],
                   },
                 },
