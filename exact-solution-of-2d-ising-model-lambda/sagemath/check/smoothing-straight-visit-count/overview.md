@@ -2,7 +2,7 @@
 
 **対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`, `claim_smoothing_cyclic_turning_invariance`, `claim_smoothing_interval_invariance`, `claim_smoothing_splits_closed_walk`, `claim_smoothing_split_turning_sum`, `claim_smoothing_split_seam_parity`, `claim_smoothing_split_crossing_partition`, `claim_smoothing_split_crossing_descent`
 - 実行: `sage sagemath/check/smoothing-straight-visit-count/check.sage`
-- 状態: PASS（2026-10-31、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
+- 状態: PASS（2026-11-14、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
 
 $L=1$（辺 1〜5 本）と $L=2,3$（辺 1〜8 本）の全閉じた非後退辺列の全横断対について、

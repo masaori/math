@@ -69,11 +69,23 @@ theorem smoothing_crossing_number_update {m : ℕ} {V : Type} [DecidableEq V] [F
     simpa [vertexCount] using
       (smoothing_other_vertex_crossing_invariance vertex visit visit' a b hcross hother ha hb w
         (Ne.symm hw))
-  have hsum := single_fiber_update_sum_necSuf
-    (vertexCount visit) (vertexCount visit') (vertex a) axisZero axisOne hlocal hvertexOther
   change crossingCount visit + 1 = crossingCount visit' + axisZero + axisOne
   rw [hdecomp, hdecomp']
-  exact hsum
+  have hbefore : (Finset.univ.erase (vertex a)).sum (vertexCount visit) +
+      vertexCount visit (vertex a) = ∑ w : V, vertexCount visit w :=
+    Finset.sum_erase_add (s := Finset.univ) (vertexCount visit)
+      (Finset.mem_univ (vertex a))
+  have hafter : (Finset.univ.erase (vertex a)).sum (vertexCount visit') +
+      vertexCount visit' (vertex a) = ∑ w : V, vertexCount visit' w :=
+    Finset.sum_erase_add (s := Finset.univ) (vertexCount visit')
+      (Finset.mem_univ (vertex a))
+  have hrest : (Finset.univ.erase (vertex a)).sum (vertexCount visit') =
+      (Finset.univ.erase (vertex a)).sum (vertexCount visit) := by
+    apply Finset.sum_congr rfl
+    intro w hw
+    exact hvertexOther w (Finset.ne_of_mem_erase hw)
+  rw [← hbefore, ← hafter, hrest]
+  omega
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem smoothing_crossing_number_update_from_necSuf {m : ℕ} {V : Type}

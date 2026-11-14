@@ -53393,7 +53393,7 @@ b(r_L(\tau))
                         displayMath(String.raw`\begin{aligned}
 Z_L(q)
 &=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
-&&\bigl(\because\ \blkref{def_partition_polynomial}\text{ への代入。代入は環準同型なので和と積を保つ（}\blkref{claim_value_at_rational_is_positive}\text{ の第二段）}\bigr)\\
+&&\bigl(\because\ \blkref{def_partition_polynomial}\text{ への代入と、代入が環準同型として和と積を保つこと（}\blkref{claim_value_at_rational_is_positive}\text{ の第二段）}\bigr)\\
 &=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
 q^{\,b(r_L(\tau))}
 &&\bigl(\because\ \text{全単射}\ r_L\ \text{に沿う和の並べ替え}\bigr)\\
