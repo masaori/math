@@ -81,6 +81,9 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfComplexNumberIsProduct
 
 namespace Ising2D
 
@@ -117,25 +120,100 @@ theorem gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq :
     gamma2 K θ * gamma2 K (-θ) = -((absGamma2 K θ : ℝ) : ℂ) ^ 2 := by
   rw [gamma2_mul_gamma2_neg_eq_neg_absSq, Complex.ofReal_neg, Complex.ofReal_pow]
 
-/-- **人手証明 Step 1 の準備**: 因数分解の恒等式
-`(λ - (g_1+r))(λ - (g_1-r)) = λ^2 - 2g_1λ + (g_1^2 - r^2)`。 -/
-theorem factor_identity_thetaTilde (g₁ r lam : ℂ) :
-    (lam - (g₁ + r)) * (lam - (g₁ - r)) = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) :=
-  calc (lam - (g₁ + r)) * (lam - (g₁ - r))
-      = lam ^ 2 - (g₁ - r) * lam - (g₁ + r) * lam + (g₁ + r) * (g₁ - r) := by ring  -- 分配則
-    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ + r) * (g₁ - r) := by ring                       -- 同類項の統合
-    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - g₁ * r + r * g₁ - r ^ 2) := by ring        -- 分配則
-    _ = lam ^ 2 - 2 * g₁ * lam + (((g₁ ^ 2 - g₁ * r) + g₁ * r) - r ^ 2) := by rw [mul_comm r g₁]
-                                                    -- `complex_numbers_form_a_field` の積の可換律
-    _ = lam ^ 2 - 2 * g₁ * lam + (((g₁ ^ 2 + (-(g₁ * r))) + g₁ * r) - r ^ 2) := by
-          rw [sub_eq_add_neg (g₁ ^ 2) (g₁ * r)]     -- `def_complex_difference`（`z → g_1^2`、`w → g_1r`）
-    _ = lam ^ 2 - 2 * g₁ * lam + ((g₁ ^ 2 + ((-(g₁ * r)) + g₁ * r)) - r ^ 2) := by
-          rw [add_assoc (g₁ ^ 2) (-(g₁ * r)) (g₁ * r)]
-                                                    -- `complex_numbers_form_a_field` の和の結合律
-    _ = lam ^ 2 - 2 * g₁ * lam + ((g₁ ^ 2 + 0) - r ^ 2) := by rw [neg_add_self_complex (g₁ * r)]
-                                                    -- `negation_plus_self_is_zero_in_cc`（`x → g_1r`）
-    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) := by rw [add_zero]
-                                                    -- `complex_numbers_form_a_field` の加法の単位元
+/-- **人手証明 Step 1 の準備**: 因数分解の恒等式（`λ, x, y ∈ ℂ`）
+`(λ - (x+y))(λ - (x-y)) = λ^2 - 2_ℂxλ + (x^2 - y^2)`。人手の 30 行の鎖と 1 段ずつ対応する。
+`charPoly_factor_thetaTilde` の最後の段で `x → (g_1)_ℂ`、`y → r_ℂ` として引く。 -/
+theorem factor_identity_thetaTilde (x y lam : ℂ) :
+    (lam - (x + y)) * (lam - (x - y)) = lam ^ 2 - 2 * x * lam + (x ^ 2 - y ^ 2) :=
+  calc (lam - (x + y)) * (lam - (x - y))
+      = (lam + -(x + y)) * (lam + -(x - y)) := by
+          rw [sub_eq_add_neg lam (x + y), sub_eq_add_neg lam (x - y)]
+                          -- 1 行目: `def_complex_difference`（`z → λ, w → x+y` と `z → λ, w → x-y` の 2 か所へ）
+    _ = lam * (lam + -(x - y)) + (-(x + y)) * (lam + -(x - y)) := add_mul _ _ _
+                          -- 2 行目: `complex_numbers_form_a_field` の右からの分配律
+    _ = (lam * lam + lam * -(x - y)) + ((-(x + y)) * lam + (-(x + y)) * -(x - y)) := by
+          rw [mul_add lam lam (-(x - y)), mul_add (-(x + y)) lam (-(x - y))]
+                          -- 3 行目: 左からの分配律を 2 か所へ
+    _ = ((lam * lam + lam * -(x - y)) + (-(x + y)) * lam) + (-(x + y)) * -(x - y) :=
+          (add_assoc _ _ _).symm
+                          -- 4 行目: 加法の結合律を右辺から左辺へ
+    _ = (lam * lam + (lam * -(x - y) + (-(x + y)) * lam)) + (-(x + y)) * -(x - y) := by
+          rw [add_assoc (lam * lam) (lam * -(x - y)) ((-(x + y)) * lam)]
+                          -- 5 行目: 加法の結合律
+    _ = (lam * lam + ((-(x - y)) * lam + (-(x + y)) * lam)) + (-(x + y)) * -(x - y) := by
+          rw [mul_comm lam (-(x - y))]
+                          -- 6 行目: 積の可換律
+    _ = (lam * lam + ((-(x - y)) + (-(x + y))) * lam) + (-(x + y)) * -(x - y) := by
+          rw [← add_mul (-(x - y)) (-(x + y)) lam]
+                          -- 7 行目: 右からの分配律を右辺から左辺へ
+    _ = (lam * lam + ((-1) * (x - y) + (-1) * (x + y)) * lam) + (-(x + y)) * -(x - y) := by
+          rw [neg_one_mul (x - y), neg_one_mul (x + y)]
+                          -- 8 行目: `multiply_by_minus_one`（`z → x-y` と `z → x+y` の 2 か所へ）
+    _ = (lam * lam + ((-1) * ((x - y) + (x + y))) * lam) + (-(x + y)) * -(x - y) := by
+          rw [← mul_add (-1 : ℂ) (x - y) (x + y)]
+                          -- 9 行目: 左からの分配律を右辺から左辺へ
+    _ = (lam * lam + (-((x - y) + (x + y))) * lam) + (-(x + y)) * -(x - y) := by
+          rw [neg_one_mul ((x - y) + (x + y))]
+                          -- 10 行目: `multiply_by_minus_one`（`z → (x-y)+(x+y)`）を右辺から左辺へ
+    _ = (lam * lam + (-((x + y) + (x - y))) * lam) + (-(x + y)) * -(x - y) := by
+          rw [add_comm (x - y) (x + y)]
+                          -- 11 行目: 加法の可換律
+    _ = (lam * lam + (-(2 * x)) * lam) + (-(x + y)) * -(x - y) := by
+          rw [complex_sum_add_difference x y]
+                          -- 12 行目: `sum_plus_difference_is_twice_first_in_cc`（`a → x, b → y`）
+    _ = (lam * lam + -((2 * x) * lam)) + (-(x + y)) * -(x - y) := by
+          rw [neg_mul_eq_neg_mul_complex (2 * x) lam]
+                          -- 13 行目: `negation_times_complex_is_negation_of_product_in_cc`（`z → 2_ℂx, w → λ`）
+    _ = (lam * lam - (2 * x) * lam) + (-(x + y)) * -(x - y) := by
+          rw [← sub_eq_add_neg (lam * lam) ((2 * x) * lam)]
+                          -- 14 行目: `def_complex_difference`（`z → λλ, w → (2_ℂx)λ`）を右辺から左辺へ
+    _ = (lam ^ 2 - (2 * x) * lam) + (-(x + y)) * -(x - y) := by
+          rw [← square_of_complex_number_is_product lam]
+                          -- 15 行目: `square_of_complex_number_is_product`（`z → λ`）を右辺から左辺へ
+    _ = (lam ^ 2 - (2 * x) * lam) + -((x + y) * -(x - y)) := by
+          rw [neg_mul_eq_neg_mul_complex (x + y) (-(x - y))]
+                          -- 16 行目: `negation_times_complex_is_negation_of_product_in_cc`（`z → x+y, w → -(x-y)`）
+    _ = (lam ^ 2 - (2 * x) * lam) + -(-((x + y) * (x - y))) := by
+          rw [mul_neg_eq_neg_mul_complex (x + y) (x - y)]
+                          -- 17 行目: `complex_times_negation_is_negation_of_product_in_cc`（`z → x+y, w → x-y`）
+    _ = (lam ^ 2 - (2 * x) * lam) + (x + y) * (x - y) := by
+          rw [complex_double_negation ((x + y) * (x - y))]
+                          -- 18 行目: `double_negation_in_cc`（`z → (x+y)(x-y)`）
+    _ = (lam ^ 2 - (2 * x) * lam) + (x * (x - y) + y * (x - y)) := by
+          rw [add_mul x y (x - y)]
+                          -- 19 行目: 右からの分配律
+    _ = (lam ^ 2 - (2 * x) * lam) + (x * (x + -y) + y * (x + -y)) := by
+          rw [sub_eq_add_neg x y]
+                          -- 20 行目: `def_complex_difference`（`z → x, w → y`）を 2 か所へ
+    _ = (lam ^ 2 - (2 * x) * lam) + ((x * x + x * -y) + (y * x + y * -y)) := by
+          rw [mul_add x x (-y), mul_add y x (-y)]
+                          -- 21 行目: 左からの分配律を 2 か所へ
+    _ = (lam ^ 2 - (2 * x) * lam) + ((x * x + -(x * y)) + (y * x + -(y * y))) := by
+          rw [mul_neg_eq_neg_mul_complex x y, mul_neg_eq_neg_mul_complex y y]
+                          -- 22 行目: `complex_times_negation_is_negation_of_product_in_cc`
+                          --          （`z → x, w → y` と `z → y, w → y` の 2 か所へ）
+    _ = (lam ^ 2 - (2 * x) * lam) + (((x * x + -(x * y)) + y * x) + -(y * y)) := by
+          rw [← add_assoc (x * x + -(x * y)) (y * x) (-(y * y))]
+                          -- 23 行目: 加法の結合律を右辺から左辺へ
+    _ = (lam ^ 2 - (2 * x) * lam) + (((x * x - x * y) + y * x) - y * y) := by
+          rw [← sub_eq_add_neg (x * x) (x * y), ← sub_eq_add_neg ((x * x - x * y) + y * x) (y * y)]
+                          -- 24 行目: `def_complex_difference`（`z → xx, w → xy` と
+                          --          `z → (xx-xy)+yx, w → yy` の 2 か所へ）を右辺から左辺へ
+    _ = (lam ^ 2 - (2 * x) * lam) + (((x ^ 2 - x * y) + y * x) - y ^ 2) := by
+          rw [← square_of_complex_number_is_product x, ← square_of_complex_number_is_product y]
+                          -- 25 行目: `square_of_complex_number_is_product`（`z → x` と `z → y` の 2 か所へ）を右辺から左辺へ
+    _ = (lam ^ 2 - (2 * x) * lam) + (((x ^ 2 - x * y) + x * y) - y ^ 2) := by rw [mul_comm y x]
+                          -- 26 行目: `complex_numbers_form_a_field` の積の可換律
+    _ = (lam ^ 2 - (2 * x) * lam) + (((x ^ 2 + (-(x * y))) + x * y) - y ^ 2) := by
+          rw [sub_eq_add_neg (x ^ 2) (x * y)]
+                          -- 27 行目: `def_complex_difference`（`z → x^2`、`w → xy`）
+    _ = (lam ^ 2 - (2 * x) * lam) + ((x ^ 2 + ((-(x * y)) + x * y)) - y ^ 2) := by
+          rw [add_assoc (x ^ 2) (-(x * y)) (x * y)]
+                          -- 28 行目: `complex_numbers_form_a_field` の和の結合律
+    _ = (lam ^ 2 - (2 * x) * lam) + ((x ^ 2 + 0) - y ^ 2) := by rw [neg_add_self_complex (x * y)]
+                          -- 29 行目: `negation_plus_self_is_zero_in_cc`（`x → xy`）
+    _ = lam ^ 2 - 2 * x * lam + (x ^ 2 - y ^ 2) := by rw [add_zero]
+                          -- 30 行目: `complex_numbers_form_a_field` の加法の単位元
 
 /-- **人手証明 Step 1**: `det(A(θ) - λI) = (λ - λ_{+,μ})(λ - λ_{-,μ})`。 -/
 theorem charPoly_factor_thetaTilde (lam : ℂ) :

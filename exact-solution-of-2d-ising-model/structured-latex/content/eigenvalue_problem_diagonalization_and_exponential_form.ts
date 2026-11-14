@@ -4011,6 +4011,16 @@ s_1c_2
         "、",
         math(String.raw`\sqrt{ab} = ir`),
         " である。",
+        math(String.raw`\mathbb{C}`),
+        " の式の中に現れる実数 ",
+        math(String.raw`g_1, r`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(g_1)_{\mathbb{C}}, r_{\mathbb{C}} \in \mathbb{C}`),
+        " として読み、",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の読みと同じく像の記号を省く。",
       ]),
       paragraph([
         "Step 1（固有値がこの 2 つに限ること）。",
@@ -4043,26 +4053,102 @@ s_1c_2
 \end{aligned}`,
       ),
       paragraph([
-        "準備として、因数分解の恒等式を確かめる。",
+        "準備として、",
+        math(String.raw`\lambda, x, y \in \mathbb{C}`),
+        " についての因数分解の恒等式を確かめる。差は ",
+        ref("def_complex_difference"),
+        " の差、",
+        math(String.raw`-z`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の符号反転（",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r = -1`),
+        "）、",
+        math(String.raw`z^2`),
+        " は ",
+        ref("square_of_complex_number_is_product"),
+        " の二乗、",
+        math(String.raw`2_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r = 2`),
+        "、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " の加法の単位元である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\lambda - (g_1+r))(\lambda - (g_1-r))
-&= \lambda^2 - (g_1-r)\lambda - (g_1+r)\lambda + (g_1+r)(g_1-r)
-   \quad (\because \text{分配則}) \\
-&= \lambda^2 - 2g_1\lambda + (g_1+r)(g_1-r)
-   \quad (\because \text{同類項の統合}) \\
-&= \lambda^2 - 2g_1\lambda + \left(g_1^2-g_1r+rg_1-r^2\right)
-   \quad (\because \text{分配則}) \\
-&= \lambda^2 - 2g_1\lambda + \left(\left(\left(g_1^2-g_1r\right)+g_1r\right)-r^2\right)
+(\lambda - (x+y))(\lambda - (x-y))
+&= \left(\lambda + \left(-\left(x+y\right)\right)\right)\left(\lambda + \left(-\left(x-y\right)\right)\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to \lambda,\ w \to x+y\text{ と } z \to \lambda,\ w \to x-y\text{ の 2 か所へ})) \\
+&= \lambda\left(\lambda + \left(-\left(x-y\right)\right)\right) + \left(-\left(x+y\right)\right)\left(\lambda + \left(-\left(x-y\right)\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の右からの分配律}) \\
+&= \left(\lambda\lambda + \lambda\left(-\left(x-y\right)\right)\right) + \left(\left(-\left(x+y\right)\right)\lambda + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の左からの分配律を 2 か所へ}) \\
+&= \left(\left(\lambda\lambda + \lambda\left(-\left(x-y\right)\right)\right) + \left(-\left(x+y\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の結合律を右辺から左辺へ}) \\
+&= \left(\lambda\lambda + \left(\lambda\left(-\left(x-y\right)\right) + \left(-\left(x+y\right)\right)\lambda\right)\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の結合律}) \\
+&= \left(\lambda\lambda + \left(\left(-\left(x-y\right)\right)\lambda + \left(-\left(x+y\right)\right)\lambda\right)\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
    \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
-&= \lambda^2 - 2g_1\lambda + \left(\left(\left(g_1^2+\left(-\left(g_1r\right)\right)\right)+g_1r\right)-r^2\right)
-   \quad (\because \blkref{def_complex_difference}\ (z \to g_1^2,\ w \to g_1r)) \\
-&= \lambda^2 - 2g_1\lambda + \left(\left(g_1^2+\left(\left(-\left(g_1r\right)\right)+g_1r\right)\right)-r^2\right)
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の和の結合律}) \\
-&= \lambda^2 - 2g_1\lambda + \left(\left(g_1^2+0_{\mathbb{C}}\right)-r^2\right)
-   \quad (\because \blkref{negation_plus_self_is_zero_in_cc}\ (x \to g_1r)) \\
-&= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
+&= \left(\lambda\lambda + \left(\left(-\left(x-y\right)\right) + \left(-\left(x+y\right)\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の右からの分配律を右辺から左辺へ}) \\
+&= \left(\lambda\lambda + \left(\left(-1_{\mathbb{C}}\right)\left(x-y\right) + \left(-1_{\mathbb{C}}\right)\left(x+y\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{multiply_by_minus_one}\ (z \to x-y\text{ と } z \to x+y\text{ の 2 か所へ})) \\
+&= \left(\lambda\lambda + \left(\left(-1_{\mathbb{C}}\right)\left(\left(x-y\right) + \left(x+y\right)\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の左からの分配律を右辺から左辺へ}) \\
+&= \left(\lambda\lambda + \left(-\left(\left(x-y\right) + \left(x+y\right)\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{multiply_by_minus_one}\ (z \to (x-y)+(x+y))\text{ を右辺から左辺へ}) \\
+&= \left(\lambda\lambda + \left(-\left(\left(x+y\right) + \left(x-y\right)\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の可換律}) \\
+&= \left(\lambda\lambda + \left(-\left(2_{\mathbb{C}}x\right)\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{sum_plus_difference_is_twice_first_in_cc}\ (a \to x,\ b \to y)) \\
+&= \left(\lambda\lambda + \left(-\left(\left(2_{\mathbb{C}}x\right)\lambda\right)\right)\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to 2_{\mathbb{C}}x,\ w \to \lambda)) \\
+&= \left(\lambda\lambda - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to \lambda\lambda,\ w \to (2_{\mathbb{C}}x)\lambda)\text{ を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(-\left(x+y\right)\right)\left(-\left(x-y\right)\right)
+   \quad (\because \blkref{square_of_complex_number_is_product}\ (z \to \lambda)\text{ を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(-\left(\left(x+y\right)\left(-\left(x-y\right)\right)\right)\right)
+   \quad (\because \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to x+y,\ w \to -(x-y))) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(-\left(-\left(\left(x+y\right)\left(x-y\right)\right)\right)\right)
+   \quad (\because \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to x+y,\ w \to x-y)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(x+y\right)\left(x-y\right)
+   \quad (\because \blkref{double_negation_in_cc}\ (z \to (x+y)(x-y))) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(x\left(x-y\right) + y\left(x-y\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の右からの分配律}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(x\left(x+\left(-y\right)\right) + y\left(x+\left(-y\right)\right)\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to x,\ w \to y)\text{ を 2 か所へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(xx + x\left(-y\right)\right) + \left(yx + y\left(-y\right)\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の左からの分配律を 2 か所へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(xx + \left(-\left(xy\right)\right)\right) + \left(yx + \left(-\left(yy\right)\right)\right)\right)
+   \quad (\because \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to x,\ w \to y\text{ と } z \to y,\ w \to y\text{ の 2 か所へ})) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(\left(xx + \left(-\left(xy\right)\right)\right) + yx\right) + \left(-\left(yy\right)\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の結合律を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(\left(xx - xy\right) + yx\right) - yy\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to xx,\ w \to xy\text{ と } z \to (xx - xy) + yx,\ w \to yy\text{ の 2 か所へ})\text{ を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(\left(x^2 - xy\right) + yx\right) - y^2\right)
+   \quad (\because \blkref{square_of_complex_number_is_product}\ (z \to x\text{ と } z \to y\text{ の 2 か所へ})\text{ を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(\left(x^2 - xy\right) + xy\right) - y^2\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(\left(x^2 + \left(-\left(xy\right)\right)\right) + xy\right) - y^2\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to x^2,\ w \to xy)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(x^2 + \left(\left(-\left(xy\right)\right) + xy\right)\right) - y^2\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の結合律}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(\left(x^2 + 0_{\mathbb{C}}\right) - y^2\right)
+   \quad (\because \blkref{negation_plus_self_is_zero_in_cc}\ (\text{主張の } x \to xy)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}x\right)\lambda\right) + \left(x^2 - y^2\right)
    \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元})
 \end{aligned}`,
       ),
@@ -4115,14 +4201,14 @@ s_1c_2
    \quad (\because \text{分配則}) \\
 &= g_1^2-g_1\lambda-g_1\lambda+\lambda^2+ab
    \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
-&= g_1^2-2g_1\lambda+\lambda^2+ab
+&= g_1^2-2_{\mathbb{C}}g_1\lambda+\lambda^2+ab
    \quad (\because \text{同類項の統合}) \\
-&= \lambda^2 - 2g_1\lambda + \left(g_1^2 + ab\right)
+&= \lambda^2 - 2_{\mathbb{C}}g_1\lambda + \left(g_1^2 + ab\right)
    \quad (\because \mathbb{C}\text{ の加法の交換則と結合則}) \\
-&= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
+&= \lambda^2 - 2_{\mathbb{C}}g_1\lambda + \left(g_1^2 - r^2\right)
    \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (ab = -r^2)) \\
 &= (\lambda - (g_1+r))(\lambda - (g_1-r))
-   \quad (\because \text{準備の因数分解の恒等式})
+   \quad (\because \text{準備の因数分解の恒等式}\ (x \to (g_1)_{\mathbb{C}},\ y \to r_{\mathbb{C}})\text{ を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -4275,6 +4361,11 @@ A(\theta)(cv)
           "b のまま括り出す鎖にし、b = -ā を使わない形にした（Lean の必要十分版 skew2_mulVec_pos/neg の第 2 成分が仮定なしで閉じることの反映）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の準備の因数分解の鎖の最後の行 g_1^2 − g_1r + rg_1 − r^2 = g_1^2 − r^2 を、名前だけの「ℂ の乗法の可換則と加法逆元」の 1 行で当てていた（積の可換律・差の定義・和の結合律・左から足す逆元・加法の単位元を束ねていた）。complex_numbers_form_a_field の積の可換律・def_complex_difference・和の結合律・negation_plus_self_is_zero_in_cc・complex_numbers_form_a_field の加法の単位元を 1 行に 1 つずつ当てる 5 行に割った（鎖は 4 行から 8 行）。式の両端と主張は不変。同じ鎖の「分配則」「同類項の統合」の行は名前だけのまま残る（状態台帳の別の件）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の det(A(θ) − λI) の鎖で名前だけだった「x·1 = x」「x·0 = 0」（どちらも λ ∈ ℂ を 2 成分へ同時適用）の根拠を、complex_numbers_form_a_field の乗法の単位元と complex_times_zero_is_zero（z → λ）のラベル参照に替えた。def_kronecker_delta の値 1_ℂ・0_ℂ に合わせ、続く 3 行の 1・0 を 1_ℂ・0_ℂ と書いた（式の値は変えていない）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の準備の因数分解の鎖の先頭 3 行（名前だけの「分配則」「同類項の統合」「分配則」。3 行目には和の結合律が 1 回隠れていた）を、" +
+          "def_complex_difference・complex_numbers_form_a_field の左右の分配律・和の結合律と可換律・積の可換律・multiply_by_minus_one・sum_plus_difference_is_twice_first_in_cc・" +
+          "negation_times_complex_is_negation_of_product_in_cc・complex_times_negation_is_negation_of_product_in_cc・double_negation_in_cc・square_of_complex_number_is_product を 1 行に 1 つずつ（同じ主張を複数箇所へ当てる行を除く）当てる 25 行に割った（鎖は 8 行から 30 行）。" +
+          "恒等式は λ, x, y ∈ ℂ について述べ、det の鎖の最後の行で x → (g_1)_ℂ, y → r_ℂ として引く。略記の段落に、ℂ の式の中の実数 g_1, r を inclusion_rr_to_cc の像として読む（def_gamma1_gamma2_of_theta の読みと同じく像の記号を省く）ことを書いた。" +
+          "係数の 2 は sum_plus_difference_is_twice_first_in_cc の 2_ℂ なので、det の鎖の 2g_1λ も 2_ℂ g_1λ と書いた。式の値と主張は不変。",
       ],
     },
   },
