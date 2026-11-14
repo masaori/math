@@ -27,6 +27,7 @@ for degree in (0, 2, 4):
 
 
 global_cases = 0
+selected_count_cases = 0
 for length in (1, 2):
     vertices = list(product(range(length), repeat=2))
     edges = list(product((0, 1), range(length), range(length)))
@@ -40,8 +41,14 @@ for length in (1, 2):
                     source = (row, (col + endpoint) % length) if axis == 0 else ((row + endpoint) % length, col)
                     if source == vertex:
                         directions.append(axis + 2 * endpoint)
+            # |S_v(P)| = |H_v(P)| = d_P(v): 方向番号は相異なり、その個数は端点数に等しい。
+            incidence = sum(1 for axis, row, col in selected for endpoint in (0, 1)
+                            if ((row, (col + endpoint) % length) if axis == 0 else ((row + endpoint) % length, col)) == vertex)
+            assert len(set(directions)) == len(directions) == incidence
             if len(directions) % 2:
                 break
+            assert len(directions) in (0, 2, 4)
+            selected_count_cases += 1
             families.append(list(pairings(tuple(sorted(directions)))))
         else:
             direct = sum(ZZ(-1) ** sum(int(set(map(frozenset, choice)) == {frozenset((0, 2)), frozenset((1, 3))}) for choice in family)
@@ -51,4 +58,4 @@ for length in (1, 2):
             assert direct == factored == 1
             global_cases += 1
 
-print("RESULT: PASS; %d local sets, %d even subgraphs" % (local_cases, global_cases))
+print("RESULT: PASS; %d local sets, %d even subgraphs, %d vertex selections" % (local_cases, global_cases, selected_count_cases))

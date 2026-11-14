@@ -80060,6 +80060,17 @@ M_{D,T}(x)
                       paragraph(["辺長一でも端点番号付き半辺を別々に数える。実数体・複素数体は現れない。"]),
                     ],
                     proof: [
+                      paragraph(["各頂点 ", math(String.raw`v\in V_L`), " の選択数は"]),
+                      displayMath(String.raw`\begin{aligned}
+|S_v(P)|
+&=|H_v(P)|
+&&\bigl(\because\ \blkref{claim_vertex_port_bijection}\bigr)\\
+&=\bigl|\{(e,d)\in P\times\{0,1\}\mid\partial_d(e)=v\}\bigr|
+&&\bigl(\because\ H_v(P)\text{ の定義と }\blkref{def_oriented_edge_endpoints}\bigr)\\
+&=d_P(v)
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\bigr)
+\end{aligned}`),
+                      paragraph(["であり、", ref("def_even_edge_subset"), " によりこれは偶数、", math(String.raw`S_v(P)\subseteq I`), " より ", math(String.raw`|S_v(P)|\le4`), " である。ゆえに ", math(String.raw`|S_v(P)|\in\{0,2,4\}`), "。"]),
                       paragraph([ref("claim_local_pairing_four_ports_count"), " による偶次数の選択は、", math(String.raw`|S_v(P)|=0,2`), " なら一通りであり、その ", math(String.raw`c_v`), " は零である。", math(String.raw`|S_v(P)|=4`), " なら ", math(String.raw`S_v(P)=I`), " で、三つの対合のうち ", math(String.raw`\{\{0,2\},\{1,3\}\}`), " だけが二本の直進通過を異なる方向軸で交差させる（", ref("def_transverse_crossing"), "）。ゆえに各頂点で"]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}

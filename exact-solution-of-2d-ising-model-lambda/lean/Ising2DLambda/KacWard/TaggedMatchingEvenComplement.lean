@@ -109,7 +109,7 @@ private theorem matching_sum_by_pairs {J : Type*} [Fintype J] [LinearOrder J]
       have hlt := (Finset.mem_filter.mp hp).2.1
       simp [pairSet, hlt.ne]
 
-private theorem incidence_as_oriented_sum {L : ℕ} (P : Finset (Edge L))
+theorem incidence_as_oriented_sum {L : ℕ} (P : Finset (Edge L))
     (v : Vertex L) :
     edgeSubsetIncidenceCount L P v =
       ∑ h : OrientedEdge L,
