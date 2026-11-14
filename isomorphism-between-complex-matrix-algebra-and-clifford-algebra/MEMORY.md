@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-14（研究管理）: 11/12 以降の本文・SageMath・Lean を読み、数学的な誤りと暗黙の同一視が無いことを確かめた。系の書き方と検算の不足、虚数単位 i を平方根の主張から取っていること、Jordan–Wigner 行列への接続の後半が notes にしか無いこと、Lean の導出版の欠けと sorry の検査の穴を、台帳の未着手の先頭に五行で足した。Lean の系を三行に割り、最後にゴールラインの検査の行を置いた。本文の前提 M ∈ ℤ_{≥1}・「q は二次形式」は残すと決めた。
+
 - 2026-11-14: 台帳の「Lean：同型の証明の章のうち行き Φ の構成とクリフォード代数の中の局所的な等式の具体版と必要十分版」の行を書き切った。本文 30 ブロックを lean/…/Isomorphism/HomomorphismToMatrixAlgebra/ と Isomorphism/LocalIdentities/ に具体版・必要十分版・導出版で形式化した（lean/README.md の「必要十分版が示したこと（章『同型の証明』のクリフォード代数から行列環への準同型と、クリフォード代数の中の局所的な等式）」）。本文は不変。lake build・check-no-sorry 通過。次は台帳の Lean の次の行（クリフォード代数の中の大域的な等式）。
 
 - 2026-11-14: 台帳の「Lean：複素行列環の章と、同型の証明の章のうち生成作用素の行列と反交換関係の具体版と必要十分版」の行を書き切った。本文 50 ブロックを lean/…/ComplexMatrixAlgebra/ と Isomorphism/CreationOperatorMatrices/ に具体版・必要十分版・導出版で形式化した（lean/README.md の「必要十分版が示したこと（章『複素行列環』…）」）。本文の二か所で一行に二つの定義を開いていた行を割った。次は台帳の Lean の次の行（行き Φ の構成とクリフォード代数の中の局所的な等式）。行列環は `matricesComplexAlgebra hX`、行列単位は `matrixUnit`、生成と消滅の作用素の行列は `creationMatrix`・`annihilationMatrix`、P_M は `PowerSet M`（有限であることは `isFiniteSet_powerSet M`）。
