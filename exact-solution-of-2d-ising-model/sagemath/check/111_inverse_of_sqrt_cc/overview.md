@@ -15,8 +15,8 @@ arg z = 0 のときだけ符号が一致し、それ以外では反転する。
 | # | ファイル | 検証内容 | 判定数 | 最大相対誤差 | ステータス |
 |---|---------|---------|-------|------------|-----------|
 | 01 | `check_01_inverse.sage` | 場合分けの両方 | 155 | 4.965e-16 | **PASS** |
-| 02 | `check_phi_polar_of_one_chain.sage` | 証明の第四の φ_polar(1_C) の鎖の根号の中の ℝ の計算（1^2 = 1、0^2 = 0·0、0·0 = 0、1 + 0 = 1）と √1 = 1・0/1 = 0 を ℚ・AA で厳密に（最後の行 arctan 0 = 0 は `arctan_zero` の検算） | 6 | 0 | **PASS** |
-| 03 | `check_sqrt_of_one_chain.sage` | 証明の第四の √(1_C) の鎖の偏角の ℝ の計算 3 行（0/2 = 0、0·π = 0、0 − 0 = 0）と cos 0 = 1・sin 0 = 0（`cosine_zero`・`sine_zero`）・1·x = x の行を QQ・AA・記号計算で厳密に。否定の対照 2 件 | 11 | 0 | **PASS** |
+| 02 | `check_phi_polar_of_one_chain.sage` | 証明の第四の φ_polar(1_C) の鎖の根号の中の ℝ の計算（1^2 = 1、0^2 = 0·0、0·0 = 0（`real_zero_times_is_zero`）、1 + 0 = 1）と √1 = 1・0/1 = 0 を ℚ・AA で厳密に（最後の行 arctan 0 = 0 は `arctan_zero` の検算） | 6 | 0 | **PASS** |
+| 03 | `check_sqrt_of_one_chain.sage` | 証明の第四の √(1_C) の鎖の偏角の ℝ の計算 3 行（0/2 = 0、0·π = 0（`real_zero_times_is_zero`）、0 − 0 = 0）と cos 0 = 1・sin 0 = 0（`cosine_zero`・`sine_zero`）・1·x = x の行を QQ・AA・記号計算で厳密に。否定の対照 2 件 | 11 | 0 | **PASS** |
 
 許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない。
 

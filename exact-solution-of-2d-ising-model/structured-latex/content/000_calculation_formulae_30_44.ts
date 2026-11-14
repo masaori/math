@@ -1901,8 +1901,10 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \mathbb{R}\ \text{で}\ a\cdot 0=0)\\
 &= (0\cdot\cos 0,\ 0\cdot\sin 0)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
-&= (0,0)=0_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+&= (0,0)
+&&(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to \cos 0,\ x \to \sin 0))\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=(0,0)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph(["次に右辺を計算する。"]),
@@ -1915,8 +1917,10 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{準備の第二。}\blkref{sqrt_of_real_zero_is_zero})\\
 &= \left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
-&= (0,0)=0_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
+&= (0,0)
+&&(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to \cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ x \to \sin\!\left(\tfrac{\theta}{2}-n\pi\right)))\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=(0,0)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -1924,7 +1928,11 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\cos,\sin`),
         " の値は ",
         math(String.raw`\mathbb{R}`),
-        " の元なので、最後の段は ",
+        " の元なので、",
+        math(String.raw`0`),
+        " を掛けて ",
+        math(String.raw`(0,0)`),
+        " へ移る段は ",
         math(String.raw`\mathbb{R}`),
         " の中の計算である。",
       ]),
@@ -1944,6 +1952,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       status: "converted",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第二の √0 = 0 の根拠と、それを使う r = 0 の場合の左辺・右辺の鎖の 2 行の参照を、definition_of_sqrt_r_positive から sqrt_of_real_zero_is_zero に替えた（値は不変）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の左辺・右辺の鎖の最後の行「(0,0) = 0_ℂ」は、名前だけの根拠「ℝ で 0·a = 0」に 0_ℂ = (0,0) を黙って束ねていたので、real_zero_times_is_zero を 2 箇所へ（左辺は x → cos 0・x → sin 0、右辺は x → cos(θ/2 − nπ)・x → sin(θ/2 − nπ)）当てて (0,0) へ移る行と、inclusion_rr_to_cc の 0_ℂ = ι(0) = (0,0) を右辺から左辺へ使う行の 2 行に割った（左辺 8 段・右辺 5 段になった）。式の両端は変えていない。",
         "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は Step 1 から Step 5 までの " +
           "5 段構成で、式と式の間に日本語の説明が挟まっていた。準備（n の一意性から出る " +
           "s_{[0,2π)}([θ]) = θ-2nπ と、√0 = 0）を冒頭にまとめ、そのうえで代表元によらないこと・" +
@@ -2613,7 +2622,7 @@ z
 &= \left[\left(\sqrt{1+0\cdot 0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r \to 0\bigr)\\
 &= \left[\left(\sqrt{1+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
@@ -2639,7 +2648,7 @@ z
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 2\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to \pi\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)\\
 &= (1\cdot\cos 0,\ 1\cdot\sin 0)
@@ -2753,6 +2762,7 @@ z
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 3 行目「ℝ の計算 1^2+0^2=1」（1^2 = 1・0^2 = 0・1 + 0 = 1 を 1 行で使っていた）を、power_of_real_one_is_one（m → 2）、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a + 0 = a（a → 1）の 4 行に割り、次の行の根拠「ℝ の計算 0/1=0」を「ℝ で 0/x = 0（x ≠ 0、ℝ は体）の x → 1」にした。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の最後の行の根拠「arctan 0=0」に参照が無かったので、新しく立てた主張 arctan_zero の参照にした。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の「ℝ の計算」1 行（0/2 = 0・0·π = 0・0 − 0 = 0 を 1 行で使っていた）を、ℝ で 0/x = 0（x → 2）、ℝ で 0·x = 0（x → π）、ℝ で a − 0 = a（a → 0）の 3 行に割った。根拠「cos 0=1」「sin 0=0」を cosine_zero・sine_zero の参照にし、「ℝ の積の計算を 2 箇所へ適用」を「ℝ で 1·x = x を 2 箇所へ（x → 1、x → 0）」にした。値と主張は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 0·0 = 0 の行と √(1_C) の鎖の 0·π = 0 の行の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を、real_zero_times_is_zero（x → 0、x → π）の参照に替えた。式は変えていない。",
       ],
     },
   },
