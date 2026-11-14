@@ -54418,13 +54418,13 @@ q^{a+L}\,Z^{\mathrm{op}}_{a,a}(q)
 &\le q^{L}\,q^{a}\,Z^{\mathrm{op}}_{a,a}(q)\,Z^{\mathrm{op}}_{a,c}(q)
 &&(\because\ 1\le Z^{\mathrm{op}}_{a,c}(q)\text{（}\blkref{claim_open_rectangle_value_ge_one_at_positive_rational}\text{）に正の }q^{L}q^{a}Z^{\mathrm{op}}_{a,a}(q)\text{ を掛ける})\\
 &\le q^{L}\,Z^{\mathrm{op}}_{a,a+c}(q)
-&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の下側 }q^{a}Z^{\mathrm{op}}_{a,a}(q)Z^{\mathrm{op}}_{a,c}(q)\le Z^{\mathrm{op}}_{a,a+c}(q)\text{（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=a\text{）に正の }q^{L}\text{ を掛ける})\\
+&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の下側 }q^{a}Z^{\mathrm{op}}_{a,a}(q)Z^{\mathrm{op}}_{a,c}(q)\le Z^{\mathrm{op}}_{a,a+c}(q)\text{（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{、}b:=a\text{）に正の }q^{L}\text{ を掛ける})\\
 &=q^{L}\,Z^{\mathrm{op}}_{a,L}(q)
 &&(\because\ \text{準備の第一 }a+c=L)\\
 &\le q^{L}\,Z^{\mathrm{op}}_{a,L}(q)\,Z^{\mathrm{op}}_{c,L}(q)
 &&(\because\ 1\le Z^{\mathrm{op}}_{c,L}(q)\text{（}\blkref{claim_open_rectangle_value_ge_one_at_positive_rational}\text{）に正の }q^{L}Z^{\mathrm{op}}_{a,L}(q)\text{ を掛ける})\\
 &\le Z^{\mathrm{op}}_{a+c,L}(q)
-&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の下側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=L\text{）})\\
+&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の下側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{、}b:=L\text{）})\\
 &=Z^{\mathrm{op}}_{L,L}(q)
 &&(\because\ \text{準備の第一 }a+c=L)
 \end{aligned}`),
@@ -54434,11 +54434,11 @@ Z^{\mathrm{op}}_{L,L}(q)
 &=Z^{\mathrm{op}}_{a+c,L}(q)
 &&(\because\ \text{準備の第一 }L=a+c)\\
 &\le Z^{\mathrm{op}}_{a,L}(q)\,Z^{\mathrm{op}}_{c,L}(q)
-&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=L\text{）})\\
+&&(\because\ \text{第一座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{、}b:=L\text{）})\\
 &=Z^{\mathrm{op}}_{a,a+c}(q)\,Z^{\mathrm{op}}_{c,L}(q)
 &&(\because\ \text{準備の第一 }L=a+c)\\
 &\le Z^{\mathrm{op}}_{a,a}(q)\,Z^{\mathrm{op}}_{a,c}(q)\,Z^{\mathrm{op}}_{c,L}(q)
-&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{。}b:=a\text{）に正の }Z^{\mathrm{op}}_{c,L}(q)\text{ を掛ける})\\
+&&(\because\ \text{第二座標方向の接合の }0<q\le1\text{ の上側（}\blkref{claim_open_rectangle_gluing_inequality_rational}\text{、}b:=a\text{）に正の }Z^{\mathrm{op}}_{c,L}(q)\text{ を掛ける})\\
 &\le Z^{\mathrm{op}}_{a,a}(q)\,2^{ac}(1+q)^{2ac}\,Z^{\mathrm{op}}_{c,L}(q)
 &&(\because\ Z^{\mathrm{op}}_{a,c}(q)\le2^{ac}(1+q)^{2ac}\text{（}\blkref{claim_open_rectangle_value_upper_bound_at_positive_rational}\text{）に正の }Z^{\mathrm{op}}_{a,a}(q)Z^{\mathrm{op}}_{c,L}(q)\text{ を掛ける})\\
 &\le Z^{\mathrm{op}}_{a,a}(q)\,2^{ac}(1+q)^{2ac}\,2^{cL}(1+q)^{2cL}
