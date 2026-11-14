@@ -180,7 +180,7 @@ five_tail = [
     (0 * g0 - 0, 1 * g0),                  # a - 0 = a
     (0 * g0 - 1 * 0, 1 * g0),              # x·0 = 0（x → 1）
     (0 * g0 - 1 * 0, 0 + 1 * g0),          # 0 + a = a
-    (0 * g0 - 1 * 0, 0 * 0 + 1 * g0),      # 0·x = 0（x → 0）
+    (0 * g0 - 1 * 0, 0 * 0 + 1 * g0),      # real_zero_times_is_zero（x → 0）
     cc_mul((Rz(0), Rz(1)), iz(g0)),        # definition_of_cc の積
 ]
 for k in range(len(five_tail) - 1):

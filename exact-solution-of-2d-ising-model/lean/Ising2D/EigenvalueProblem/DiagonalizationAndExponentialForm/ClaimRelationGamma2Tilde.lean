@@ -35,6 +35,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma2TildeNonzero
 import Ising2D.NecSuf.NegConjPair
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 namespace Ising2D
 
@@ -100,8 +101,9 @@ theorem absGamma2_thetaTilde_sq_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (�
     0 < absGamma2 P.const (thetaTilde M μ) ^ 2 := by
   have h := absGamma2_thetaTilde_pos P hM μ
   calc (0 : ℝ)
-      = 0 * absGamma2 P.const (thetaTilde M μ) := (zero_mul _).symm
-                          -- ℝ の四則
+      = 0 * absGamma2 P.const (thetaTilde M μ) :=
+        (real_zero_times_is_zero (absGamma2 P.const (thetaTilde M μ))).symm
+                          -- `real_zero_times_is_zero`（`x → |γ_2(θ)|`）を右辺から左辺へ
     _ < absGamma2 P.const (thetaTilde M μ) * absGamma2 P.const (thetaTilde M μ) :=
         mul_lt_mul_of_pos_right h h
                           -- `0 < |γ_2(θ)|` の両辺に正の実数 `|γ_2(θ)|` を掛ける
