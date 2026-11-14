@@ -14,7 +14,7 @@
 | 人手証明 | 本ファイル |
 | --- | --- |
 | (1) `∃! η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε` | `Ising2D.CheckFermi.eta` / `eta_mem` / `epsilon_mul_Qproj` / `eta_unique` |
-| (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（4 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
+| (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（9 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
 | (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | `eta_insert` の冒頭（`q` は `exists_ne_zero_mem_range_Qproj` の `q = Q̌_ε x`。1 次元性は使わない）・`Qproj_mulVec_generator`・`epsilon_mulVec_generator_eq_eta_smul` |
 | (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
 | (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ`（8 行ずつ）・`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`・`XA_ν^δ = A_ν^δX`（3 式と 5 行）と、その `X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†` | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
@@ -34,6 +34,7 @@
 （環の計算だけ）で閉じており、1 次元性を使わない。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatColumnwiseFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
@@ -170,7 +171,7 @@ theorem eta_mul_eta_sub_one_smul_generator {q : Conf M → ℂ} {η : ℂ} (hq2 
     _ = 0 := (vec_sub_eq_zero_iff_tensorPow q q).mpr rfl
                                                         -- `matrix_difference_zero_iff_equal`（`⟸`。数ベクトル）
 
-/-- **原文 (1)**: `ηη − 1 = 0` から `η ∈ {+1, −1}`。人手の `(η − 1)(η + 1)` の 4 行の鎖と、体 `ℂ` で積が `0` なら
+/-- **原文 (1)**: `ηη − 1 = 0` から `η ∈ {+1, −1}`。人手の `(η − 1)(η + 1)` の 9 行の鎖と、体 `ℂ` で積が `0` なら
 因子のどちらかが `0`（`complex_numbers_form_a_field`）である。 -/
 theorem eta_mem_of_mul_self_sub_one {η : ℂ} (hηη : η * η - 1 = 0) : η = 1 ∨ η = -1 := by
   have hfac : (η - 1) * (η + 1) = 0 :=
@@ -178,7 +179,16 @@ theorem eta_mem_of_mul_self_sub_one {η : ℂ} (hηη : η * η - 1 = 0) : η = 
         = (η - 1) * η + (η - 1) * 1 := mul_add _ _ _    -- `complex_numbers_form_a_field` の分配則
       _ = (η * η - η) + (η - 1) := by rw [sub_mul, one_mul, mul_one]
                                                         -- `complex_numbers_form_a_field` の分配則と乗法の単位元
-      _ = η * η - 1 := sub_add_sub_cancel _ _ _         -- `complex_numbers_form_a_field` の加法の結合則と逆元
+      _ = (η * η + (-η)) + (η + (-1)) := by rw [sub_eq_add_neg, sub_eq_add_neg]
+                                                        -- `def_complex_difference` を 2 か所へ同時適用
+      _ = η * η + ((-η) + (η + (-1))) := add_assoc _ _ _
+                                                        -- `complex_numbers_form_a_field` の和の結合律
+      _ = η * η + (((-η) + η) + (-1)) := by rw [← add_assoc (-η) η (-1)]
+                                                        -- `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
+      _ = η * η + (0 + (-1)) := by rw [neg_add_self_complex η]
+                                                        -- `negation_plus_self_is_zero_in_cc`（`x → η`）
+      _ = η * η + (-1) := by rw [zero_add]              -- `complex_zero_plus_is_original`（`z → -1`。具体版は無く `zero_add`）
+      _ = η * η - 1 := (sub_eq_add_neg _ _).symm        -- `def_complex_difference`（`z → ηη`、`w → 1`）を右辺から左辺へ
       _ = 0 := hηη                                      -- 上で示した `ηη − 1 = 0`
   rcases mul_eq_zero.1 hfac with h | h                  -- 体 `ℂ` では `η − 1 = 0` または `η + 1 = 0`
   · exact Or.inl (sub_eq_zero.1 h)

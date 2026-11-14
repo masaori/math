@@ -14,7 +14,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備 `Q^2 = Q^1Q = (Q^0Q)Q = (IQ)Q = QQ`（`def_exp` (1)、`identity_matrix_is_left_unit_of_mat_mult`） | `check_preparation_power.sage` | `Q` の成分を `QQ` 上の不定元に置き、冪を `A^0 := I`・`A^{m+1} := A^m A` のとおりに組んで 5 行の値を比べ、両端を Sage の冪・行列積と比べる | **PASS** | `n = 1,…,5` で厳密等号 |
-| Step 1 `(Qx+(x-Qx))_k = (Qx)_k + (x-Qx)_k = (Qx)_k + (x_k-(Qx)_k) = x_k`（`def_matrix_sum`・`def_matrix_difference`・加法の結合律・交換律・逆元・零元）と、成分の一致からの `x = Qx + (x-Qx)` | `check_step1_direct_sum.sage` | `x` の成分を `QQ(i)` 上の不定元に、`Q` を `QQ(i)` の具体の冪等行列に置いて 4 行の値を比べ、Sage のベクトルの和・差とも比べる | **PASS** | `n = 1,…,5`、各 `r = 0,…,n` で 3 個ずつの `Q` |
+| Step 1 `(Qx+(x-Qx))_k = (Qx)_k + (x-Qx)_k = (Qx)_k + (x_k-(Qx)_k) = (Qx)_k + (x_k+(-(Qx)_k)) = (Qx)_k + ((-(Qx)_k)+x_k) = ((Qx)_k+(-(Qx)_k)) + x_k = 0_C + x_k = x_k`（`def_matrix_sum`・`def_matrix_difference`・`def_complex_difference`・和の可換律・和の結合律・加法逆元・`complex_zero_plus_is_original`）と、成分の一致からの `x = Qx + (x-Qx)` | `check_step1_direct_sum.sage` | `x` の成分を `QQ(i)` 上の不定元に、`Q` を `QQ(i)` の具体の冪等行列に置いて 8 行の値を比べ、Sage のベクトルの和・差とも比べる | **PASS** | `n = 1,…,5`、各 `r = 0,…,n` で 3 個ずつの `Q` |
 | Step 1 `Q(x-Qx) = Qx-Q(Qx)`（`mat_mult_vector_difference`）`= Qx-(QQ)x`（`mat_mult_associative`）`= Qx-Qx`（`QQ = Q`）`= 0`（`matrix_difference_zero_iff_equal`） | 同上 | 本文の積・差・零ベクトルの組み方で 5 行の値を比べ、Sage の行列積でも `Q(x-Qx) = 0` を確かめる。否定コントロールとして冪等でない `2I` では `0` にならないこと | **PASS** | 同上 |
 | Step 1 `y = Qx = (QQ)x = Q(Qx) = Qy` | 同上 | `y := Qx` とおいて 5 個の値を比べる | **PASS** | 同上 |
 | Step 1 `Qy = 0`（`y ∈ ker Q`）と主張の直和分解 | 同上 | `x` を不定元のままでは `y ∈ ker Q` を課せないので、Sage の `column_space`・`right_kernel` で `im Q ∩ ker Q = {0}`、`im Q + ker Q = ℂ^n`、`dim im Q + dim ker Q = n`、`dim im Q = r` を確かめる | **PASS** | 同上 |

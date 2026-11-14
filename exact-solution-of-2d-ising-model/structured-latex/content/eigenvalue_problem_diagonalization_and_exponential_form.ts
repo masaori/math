@@ -4054,8 +4054,16 @@ s_1c_2
    \quad (\because \text{同類項の統合}) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2-g_1r+rg_1-r^2\right)
    \quad (\because \text{分配則}) \\
+&= \lambda^2 - 2g_1\lambda + \left(\left(\left(g_1^2-g_1r\right)+g_1r\right)-r^2\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
+&= \lambda^2 - 2g_1\lambda + \left(\left(\left(g_1^2+\left(-\left(g_1r\right)\right)\right)+g_1r\right)-r^2\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to g_1^2,\ w \to g_1r)) \\
+&= \lambda^2 - 2g_1\lambda + \left(\left(g_1^2+\left(\left(-\left(g_1r\right)\right)+g_1r\right)\right)-r^2\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の和の結合律}) \\
+&= \lambda^2 - 2g_1\lambda + \left(\left(g_1^2+0_{\mathbb{C}}\right)-r^2\right)
+   \quad (\because \blkref{negation_plus_self_is_zero_in_cc}\ (x \to g_1r)) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
-   \quad (\because \mathbb{C}\text{ の乗法の可換則と加法逆元})
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元})
 \end{aligned}`,
       ),
       paragraph(["そこで"]),
@@ -4265,6 +4273,7 @@ A(\theta)(cv)
         "2026-11-01: c ∈ ℂ^× 倍が固有ベクトルであることのうち cv ≠ 0 の段が無かったので足した（Lean の isEigenvector_smul_eigen_pos/neg の smul_ne_zero と同じ手順）。",
         "2026-11-01: Step 2 の第 2 成分は b = -ā を代入して ā を括り出し、最後に (v_±)_2 = b = -ā で b へ戻す往復をしていた。" +
           "b のまま括り出す鎖にし、b = -ā を使わない形にした（Lean の必要十分版 skew2_mulVec_pos/neg の第 2 成分が仮定なしで閉じることの反映）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の準備の因数分解の鎖の最後の行 g_1^2 − g_1r + rg_1 − r^2 = g_1^2 − r^2 を、名前だけの「ℂ の乗法の可換則と加法逆元」の 1 行で当てていた（積の可換律・差の定義・和の結合律・左から足す逆元・加法の単位元を束ねていた）。complex_numbers_form_a_field の積の可換律・def_complex_difference・和の結合律・negation_plus_self_is_zero_in_cc・complex_numbers_form_a_field の加法の単位元を 1 行に 1 つずつ当てる 5 行に割った（鎖は 4 行から 8 行）。式の両端と主張は不変。同じ鎖の「分配則」「同類項の統合」の行は名前だけのまま残る（状態台帳の別の件）。",
       ],
     },
   },

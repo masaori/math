@@ -80,6 +80,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimColumnMatrixTimesDiagonalMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -124,7 +125,17 @@ theorem factor_identity_thetaTilde (g₁ r lam : ℂ) :
       = lam ^ 2 - (g₁ - r) * lam - (g₁ + r) * lam + (g₁ + r) * (g₁ - r) := by ring  -- 分配則
     _ = lam ^ 2 - 2 * g₁ * lam + (g₁ + r) * (g₁ - r) := by ring                       -- 同類項の統合
     _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - g₁ * r + r * g₁ - r ^ 2) := by ring        -- 分配則
-    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) := by ring                           -- 可換則と加法逆元
+    _ = lam ^ 2 - 2 * g₁ * lam + (((g₁ ^ 2 - g₁ * r) + g₁ * r) - r ^ 2) := by rw [mul_comm r g₁]
+                                                    -- `complex_numbers_form_a_field` の積の可換律
+    _ = lam ^ 2 - 2 * g₁ * lam + (((g₁ ^ 2 + (-(g₁ * r))) + g₁ * r) - r ^ 2) := by
+          rw [sub_eq_add_neg (g₁ ^ 2) (g₁ * r)]     -- `def_complex_difference`（`z → g_1^2`、`w → g_1r`）
+    _ = lam ^ 2 - 2 * g₁ * lam + ((g₁ ^ 2 + ((-(g₁ * r)) + g₁ * r)) - r ^ 2) := by
+          rw [add_assoc (g₁ ^ 2) (-(g₁ * r)) (g₁ * r)]
+                                                    -- `complex_numbers_form_a_field` の和の結合律
+    _ = lam ^ 2 - 2 * g₁ * lam + ((g₁ ^ 2 + 0) - r ^ 2) := by rw [neg_add_self_complex (g₁ * r)]
+                                                    -- `negation_plus_self_is_zero_in_cc`（`x → g_1r`）
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) := by rw [add_zero]
+                                                    -- `complex_numbers_form_a_field` の加法の単位元
 
 /-- **人手証明 Step 1**: `det(A(θ) - λI) = (λ - λ_{+,μ})(λ - λ_{-,μ})`。 -/
 theorem charPoly_factor_thetaTilde (lam : ℂ) :

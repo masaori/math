@@ -1,4 +1,4 @@
-# SageMath Check: eigenvector_of_A_theta_tilde（det(A(θ) − λI) の成分の行）
+# SageMath Check: eigenvector_of_A_theta_tilde（det(A(θ) − λI) の成分の行と因数分解の恒等式）
 
 ## 対象
 
@@ -9,11 +9,13 @@
 - 範囲: Step 1 の `det(A(θ) − λI)` の鎖の先頭から `det [[g_1 − λ, a], [−b, g_1 − λ]]` までの行
   （`def_matrix_difference`・`def_matrix_scalar_multiple`・`def_identity_matrix`・`def_kronecker_delta` の成分、`x·1 = x`・`x·0 = 0`・`y − 0 = y`、
   `def_gamma1_gamma2_of_theta` の代入）。鎖の残りの行は `048_claim_A_theta_tilde` と `nonzero_kernel_iff_det_zero_two_by_two` が扱う。
+- 範囲（2026-11-14 に足した）: Step 1 の準備の因数分解の恒等式 `(λ − (g_1+r))(λ − (g_1−r)) = λ^2 − 2g_1λ + (g_1^2 − r^2)` の 8 行の鎖の全行。
 
 ## チェック一覧
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---------|---------|-----------|------|
+| check_factorization_identity.sage | 多項式環 `QQ(i)[λ, g1, r]` で、因数分解の鎖の 9 個の式を行の括弧どおりに組み、隣どうしが等しいこと。積の可換律 `rg_1 = g_1r`・`(−(g_1r)) + g_1r = 0`・`g_1^2 + 0 = g_1^2` を個別にも確かめる。否定コントロール: 最後の行を `g_1^2 + r^2` にすると先頭と一致しない | PASS | 8 個の等号がすべて厳密に一致 |
 | check_steps.sage | 多項式環 `QQ[A11, A12, A21, A22, λ, g1, a, b]` で、各行の行列が成分ごとに一致し行列式も一致すること。最後の行が `A − λI`（Sage の組み込みの演算）と一致し、`A(θ) = [[g1, a], [−b, g1]]` の代入で `[[g1 − λ, a], [−b, g1 − λ]]` になること。否定コントロール: 単位行列の非対角を 1 にした行列から作り直すと、最後の行とも行列式とも一致しない | PASS | すべて厳密に一致 |
 
 ## 備考
@@ -25,6 +27,7 @@
 ```bash
 cd sagemath/check/eigenvector_of_A_theta_tilde_determinant_entries
 ~/micromamba/envs/sage/bin/sage check_steps.sage
+~/micromamba/envs/sage/bin/sage check_factorization_identity.sage
 ```
 
-実行ログは `logs/` に保存してある（2026-11-01）。
+実行ログは `logs/` に保存してある（2026-11-01。因数分解の鎖は 2026-11-14）。

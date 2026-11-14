@@ -596,8 +596,18 @@ q
    \quad (\because \blkref{complex_numbers_form_a_field}\text{ の分配則}) \\
 &= (\eta\eta - \eta) + (\eta - 1)
    \quad (\because \blkref{complex_numbers_form_a_field}\text{ の分配則と乗法の単位元}) \\
+&= \left(\eta\eta + (-\eta)\right) + \left(\eta + (-1)\right)
+   \quad (\because \blkref{def_complex_difference}\text{ を 2 か所へ同時適用}) \\
+&= \eta\eta + \left((-\eta) + \left(\eta + (-1)\right)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の和の結合律}) \\
+&= \eta\eta + \left(\left((-\eta) + \eta\right) + (-1)\right)
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の和の結合律を右辺から左辺へ}) \\
+&= \eta\eta + \left(0_{\mathbb{C}} + (-1)\right)
+   \quad (\because \blkref{negation_plus_self_is_zero_in_cc}\ (x \to \eta)) \\
+&= \eta\eta + (-1)
+   \quad (\because \blkref{complex_zero_plus_is_original}\ (z \to -1)) \\
 &= \eta\eta - 1
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の結合則と逆元}) \\
+   \quad (\because \blkref{def_complex_difference}\ (z \to \eta\eta,\ w \to 1)\text{ を右辺から左辺へ}) \\
 &= 0
    \quad (\because \text{上で示した } \eta\eta-1=0)
 \end{aligned}`,
@@ -1380,6 +1390,7 @@ P_{k+1}\check{Q}_\epsilon
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-04（全証明の SageMath 検算）: 鎖の行の根拠の名前だけの引用（check_joint_eigenspace_decomposition (1)(3)・epsilon_anticommutes_with_check_Z_Y (3)(4)・check_number_operator_idempotent (1)(2)・check_number_operators_commute (1)(2)・「行列積の結合則」「恒等行列の定義」「零ベクトルの減法」「分配法則と差の定義」）を blkref に直し、結合則・分配（差は matrix_difference_is_sum_with_negation・matrix_difference_mul_vector 経由）・単位行列・スカラー倍の外出しを一行ずつに分けた。散文の推論を (∵) 付きの鎖にした: (1) の η² = 1 から η ∈ {±1}、「任意の x について … 行列としても」（(εQ̌_ϵ)x の鎖と mat_columnwise による列の鎖）、主張の ∃! の一意性の鎖（足した）。(2) の Step 1 の ň_μq = 0 と背理法を鎖に、Step 2 は他のブロックの証明の途中（check_joint_eigenspace_decomposition の証明の記号 R と Q̌_ϵ = ΠR）を引いていたのをやめ、Q̌_δ の定義の因子 A_ν^δ を直接使う形にした（A_μ^ϵ = I − ň_μ・A_μ^{ϵ'} = ň_μ の鎖、因子どうし・ψ̌_μ^† との可換性、Π_{ν≠μ} は def_finite_product_of_matrices_omitting_one_index と moving_one_factor_of_finite_product_to_the_end）。Step 3 の最初の行を 4 行に分け、「生成元なので (1) の一意性から」を η_{ϵ'}(ψ̌_μ^†q) の鎖と ψ̌_μ^†q ≠ 0 にした（1 次元性を使わないという証明中の注記と合わせた）。(3) の「1 つずつ取り替えていく」を k := M_col − |ϵ| の帰納法の鎖に、(4) の Π(I − 2ň_μ)Q̌_ϵ を P_k の帰納法の鎖に、定義の無い負の冪 (−1)^{−|ϵ|} を非負の冪の鎖に、「Σ_ϵ Q̌_ϵ = I を掛ければ」を ε = εI から始まる 10 行の鎖にした。主張は変えていない。計算の誤りは無かった。",
         "数値検証: sagemath/check/epsilon_eigenvalue_on_check_Q/（厳密計算。本文の ψ̌ で M_col = 2, 3、結合定数 3 組）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_02 も残っている。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の (η − 1)(η + 1) の鎖の (ηη − η) + (η − 1) = ηη − 1 を、complex_numbers_form_a_field の「加法の結合則と逆元」の 1 行で当てていた（差の定義・和の結合律 2 回・左から足す逆元・左から足す 0_C を束ねており、後の 2 つは体の公理に無い）。def_complex_difference（2 か所へ同時適用）・和の結合律・和の結合律（右辺から左辺へ）・negation_plus_self_is_zero_in_cc・complex_zero_plus_is_original・def_complex_difference（右辺から左辺へ）を 1 行に 1 つずつ当てる 6 行に割った（鎖は 4 行から 9 行）。式の両端と主張は不変。",
       ],
     },
   },

@@ -370,8 +370,16 @@ Q^2
 &&(\because\ \blkref{def_matrix_sum})\\
 &= (Qx)_k + \bigl(x_k - (Qx)_k\bigr)
 &&(\because\ \blkref{def_matrix_difference})\\
+&= (Qx)_k + \bigl(x_k + (-(Qx)_k)\bigr)
+&&(\because\ \blkref{def_complex_difference}\ (z \to x_k,\ w \to (Qx)_k))\\
+&= (Qx)_k + \bigl((-(Qx)_k) + x_k\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
+&= \bigl((Qx)_k + (-(Qx)_k)\bigr) + x_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
+&= 0_{\mathbb{C}} + x_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
 &= x_k
-&&(\because\ \mathbb{C}\ \text{の加法の結合律・交換律・加法逆元・零元。}\blkref{complex_numbers_form_a_field})
+&&(\because\ \blkref{complex_zero_plus_is_original}\ (z \to x_k))
 \end{aligned}`),
       paragraph([
         "なので、行列の等号は成分ごとであることから ",
@@ -563,6 +571,7 @@ Qv_j
         "2026-08-17 の式変形統一で、Step 1 の二つの計算（x−Qx∈ker Q、交わりが零）、Step 2 の Qv_j=v_j、Step 3 のトレースの計算を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
         "2026-09-02: Step 3 の鎖の直後に置いていた参照一覧を削り、相似変換でトレースが不変であることを使う行末の blkref へ移した。内容・式変形・根拠・参照は不変である。",
         "2026-11-01: SageMath の検算（sagemath/check/trace_of_idempotent/）を付けるときに直した。Q^2 = QQ を def_exp (1) の冪から導く準備を足し、Step 1 の分配則・結合則・零の行を mat_mult_vector_difference・mat_mult_associative・matrix_difference_zero_iff_equal で引き、x = Qx + (x − Qx) を成分の鎖にした。Step 2・3 は未定義の「表現行列」「基底変換行列」をやめ、基底を列に並べた P と対角の D を定めて QP = PD を成分の鎖で示し、tr(Q) を trace_basic_properties (4) から tr(D) へ運ぶ鎖にした。主張の右辺の自然数を ℂ の元として読む読み方を書いた。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の (Qx + (x − Qx))_k の鎖の (Qx)_k + (x_k − (Qx)_k) = x_k を、complex_numbers_form_a_field の加法の結合律・交換律・加法逆元・零元を束ねた 1 行で当てていた（左から足す 0_C は体の公理に無い）。def_complex_difference・和の可換律・和の結合律（右辺から左辺へ）・加法逆元・complex_zero_plus_is_original を 1 行に 1 つずつ当てる 5 行に割った（鎖は 3 行から 7 行）。式の両端と主張は不変。",
       ],
     },
   },

@@ -1,6 +1,6 @@
 # 対象ラベル: trace_of_idempotent
 # Step 1（直和分解）。冪等行列 Q は QQ(i) の具体の行列、x は成分を QQ(i) 上の不定元に置いたベクトルとする。
-# (a) (Qx + (x - Qx))_k の 3 行の鎖、(b) Q(x - Qx) の 4 行の鎖、(c) y = Qx から Qy までの 4 個の等号を、
+# (a) (Qx + (x - Qx))_k の 7 行の鎖、(b) Q(x - Qx) の 4 行の鎖、(c) y = Qx から Qy までの 4 個の等号を、
 # 本文の組み方で確かめる。(c) の最後の行 Qy = 0（y ∈ ker Q の仮定）は x を不定元のままでは課せないので、
 # Sage の column_space と right_kernel で im Q ∩ ker Q = {0} と dim im Q + dim ker Q = n を独立に確かめる。
 load("_prelude.sage")
@@ -18,8 +18,20 @@ for n in SIZES:
         # (a) x = Qx + (x - Qx) を成分で
         s = body_sum(Qx, xmQx)
         for k in range(n):
-            a = [s[k, 0], Qx[k, 0] + xmQx[k, 0], Qx[k, 0] + (x[k, 0] - Qx[k, 0]), x[k, 0]]
-            assert a[0] == a[1] == a[2] == a[3], (n, r, seed, k)
+            q, xk = Qx[k, 0], x[k, 0]
+            a = [
+                s[k, 0],
+                q + xmQx[k, 0],                  # def_matrix_sum
+                q + (xk - q),                    # def_matrix_difference
+                q + (xk + (-q)),                 # def_complex_difference
+                q + ((-q) + xk),                 # 和の可換律
+                (q + (-q)) + xk,                 # 和の結合律を右辺から左辺へ
+                Ring(0) + xk,                    # 加法逆元
+                xk,                              # complex_zero_plus_is_original
+            ]
+            for t in range(len(a) - 1):
+                assert a[t] == a[t + 1], (n, r, seed, k, t)
+            assert q + (-q) == Ring(0) and Ring(0) + xk == xk
         assert s == x and Qx + (x - Qx) == x
         # (b) Q(x - Qx) = Qx - Q(Qx) = Qx - (QQ)x = Qx - Qx = 0
         b = [

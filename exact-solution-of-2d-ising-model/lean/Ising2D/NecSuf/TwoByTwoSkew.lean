@@ -97,7 +97,15 @@ theorem skew2_factor_identity (g s lam : R) :
       = lam ^ 2 - (g - s) * lam - (g + s) * lam + (g + s) * (g - s) := by ring  -- 分配則
     _ = lam ^ 2 - 2 * g * lam + (g + s) * (g - s) := by ring                     -- 同類項の統合
     _ = lam ^ 2 - 2 * g * lam + (g ^ 2 - g * s + s * g - s ^ 2) := by ring      -- 分配則
-    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 - s ^ 2) := by ring                       -- 可換則と加法逆元
+    _ = lam ^ 2 - 2 * g * lam + (((g ^ 2 - g * s) + g * s) - s ^ 2) := by rw [mul_comm s g]
+                                                                                  -- 積の可換律
+    _ = lam ^ 2 - 2 * g * lam + (((g ^ 2 + (-(g * s))) + g * s) - s ^ 2) := by
+          rw [sub_eq_add_neg (g ^ 2) (g * s)]                                     -- 差は逆元の和
+    _ = lam ^ 2 - 2 * g * lam + ((g ^ 2 + ((-(g * s)) + g * s)) - s ^ 2) := by
+          rw [add_assoc (g ^ 2) (-(g * s)) (g * s)]                               -- 和の結合律
+    _ = lam ^ 2 - 2 * g * lam + ((g ^ 2 + 0) - s ^ 2) := by rw [neg_add_cancel (g * s)]
+                                                                                  -- 左から足す逆元 `(-x) + x = 0`
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 - s ^ 2) := by rw [add_zero]               -- 加法の単位元
 
 /-- **Step 1 の `det(A - λI)` の鎖**（具体版 `charPoly_factor_thetaTilde` の、`ab = -r^2` を代入する行の手前まで）。
 **任意の可換環**で成り立つ。 -/
