@@ -18,7 +18,8 @@ bash scripts/check-no-sorry.sh
 
 `scripts/check-no-sorry.sh` は三つを確かめる。どの `.lean` も入口 `CliffordMatrixIsomorphism.lean` から
 import されていること、字面に `sorry`・`admit` が無いこと、名前空間 `CliffordMatrixIsomorphism` の
-すべての宣言の依存する公理に `sorryAx` が無いこと（宣言の一覧は環境から拾うので、定理を足しても
+すべての宣言の依存する公理が Lean の標準の三つ（`propext`・`Classical.choice`・`Quot.sound`）に限られること
+（`sorryAx` も、`axiom` で置いた仮定も、ほかの公理も落ちる。宣言の一覧は環境から拾うので、定理を足しても
 スクリプトを直す必要は無い）。
 
 ## 置き場と名前空間

@@ -14,7 +14,7 @@
 k ∈ {1,…,n} に f(e(k)) を与える族を `numberedFamily e f d`（{1,…,n} の外では値 d。外の値は使わない）で作る。
 本文の「k ∈ {1,…,n} に v_{e(k)} と λ_{e(k)} を与える族」がこれに当たる。
 -/
-import Mathlib.Data.Complex.Basic
+import Mathlib.Data.Nat.Notation
 
 namespace CliffordMatrixIsomorphism
 

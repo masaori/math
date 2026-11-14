@@ -7,6 +7,7 @@
   castT・castTuple・emptyTuple・embedVector     同じ式（rfl。空の組は eq_emptyTuple で一致させる）
   tensorAlgebraMul                              tensorAlgebraMul_eq_necSuf（テンソルの積を `tensorMul_eq_necSuf` で替える）
   tensorAlgebraOne                              tensorAlgebraOne_eq_necSuf
+  convolution                                   convolution_eq_necSuf（項を `convolutionTerm_eq_necSuf` で替える）
   tensorAlgebra                                 tensorAlgebra_toNecSuf（具体版の代数を必要十分版の K := ℂ の代数として読んだものが、
                                                 必要十分版のテンソル代数に等しい）・tensorAlgebra_eq_of_necSuf
   coordinateTensorPowers                        coordinateTensorPowers_toNecSuf（τ は `coordinateTensor_eq_necSuf` で一致させる）
@@ -77,6 +78,18 @@ theorem eq_concatTuple_initialPart_of_necSuf {k : ℕ} (u : Tuple V (k + 1)) :
     u = concatTuple (initialPart u) (oneElementTuple (u (lastIdx k))) :=
   NecSuf.VectorSpace.eq_concatTuple_initialPart u
 
+/-- 本文 `claim_concatenation_with_empty_tuple_on_left` を、必要十分版から得たもの。 -/
+theorem concatTuple_emptyTuple_left_of_necSuf {l : ℕ} (u' : Tuple V l) :
+    castTuple (Nat.zero_add l) (concatTuple (emptyTuple V) u') = u' := by
+  rw [emptyTuple_eq_necSuf]
+  exact NecSuf.VectorSpace.concatTuple_emptyTuple_left u'
+
+/-- 本文 `claim_concatenation_with_empty_tuple_on_right` を、必要十分版から得たもの。 -/
+theorem concatTuple_emptyTuple_right_of_necSuf {k : ℕ} (u : Tuple V k) :
+    castTuple (Nat.add_zero k) (concatTuple u (emptyTuple V)) = u := by
+  rw [emptyTuple_eq_necSuf]
+  exact NecSuf.VectorSpace.concatTuple_emptyTuple_right u
+
 end Tuples
 
 theorem IsComplexLinearMap.comp_of_necSuf {V : Type u} {U : Type v} {W : Type w}
@@ -86,6 +99,23 @@ theorem IsComplexLinearMap.comp_of_necSuf {V : Type u} {U : Type v} {W : Type w}
   (isComplexLinearMap_iff_necSuf _ _ _).2
     (NecSuf.VectorSpace.IsLinearMap.comp ((isComplexLinearMap_iff_necSuf _ _ _).1 hf)
       ((isComplexLinearMap_iff_necSuf _ _ _).1 hg))
+
+/-- 本文 `claim_linear_maps_agreeing_on_pure_tensors_are_equal` を、必要十分版から得たもの。 -/
+theorem IsTensorProduct.linearMap_ext_of_necSuf {V : Type u} {T : Type v} {W : Type w}
+    {SV : ComplexVectorSpace V} {k : ℕ} {ST : ComplexVectorSpace T} {τ : Tuple V k → T}
+    {SW : ComplexVectorSpace W} (hT : IsTensorProduct.{u, v, w} SV k ST τ) {f g : T → W}
+    (hf : IsComplexLinearMap ST SW f) (hg : IsComplexLinearMap ST SW g)
+    (h : ∀ v : Tuple V k, f (τ v) = g (τ v)) : f = g :=
+  NecSuf.VectorSpace.IsTensorProduct.linearMap_ext (isTensorProduct_toNecSuf_universe SV k ST τ hT)
+    ((isComplexLinearMap_iff_necSuf ST SW f).1 hf) ((isComplexLinearMap_iff_necSuf ST SW g).1 hg) h
+
+/-- 本文 `claim_projection_onto_component_of_direct_sum_of_family_is_linear_map` を、必要十分版に ℂ の性質と
+n := -1 を渡して得たもの。 -/
+theorem projectComponent_isLinearMap_of_necSuf {E : ℕ → Type v} (S : ∀ j : ℕ, ComplexVectorSpace (E j)) (k : ℕ) :
+    IsComplexLinearMap (directSumOfFamilyVectorSpace S) (S k) (fun x => x.1 k) :=
+  (isComplexLinearMap_iff_necSuf _ _ _).2
+    (NecSuf.VectorSpace.projectComponent_isLinearMap (fun j => (S j).toNecSuf) complexScalarMultipleOfZeroLaws
+      (-1) (add_neg_cancel 1) k)
 
 theorem sumOverFiniteSet_eq_zero_of_terms_eq_zero_of_necSuf {W : Type v} (S : ComplexVectorSpace W)
     {X : Type w} (hX : IsFiniteSet X) (c : X → ℂ) (v : X → W) (h : ∀ x : X, S.smul (c x) (v x) = S.zero) :
@@ -154,6 +184,64 @@ theorem tensorAlgebraMul_embed_of_necSuf (k l : ℕ) (F : P.T k) (G : P.T l) :
   rw [P.tensorAlgebraMul_eq_necSuf, P.tensorMul_eq_necSuf]
   exact P.toNecSuf.tensorAlgebraMul_embed mul_comm complexScalarMultipleOfZeroLaws k l F G
 
+theorem convolution_eq_necSuf (x y : DirectSumOfFamily P.space) :
+    P.convolution x y = P.toNecSuf.convolution mul_comm x y := by
+  funext p
+  show sumOverFiniteSet (P.space p) (isFiniteSet_upTo p) (fun _ => 1) (P.convolutionTerm x y p)
+    = NecSuf.VectorSpace.sumOverFiniteSet (P.space p).toNecSuf (isFiniteSet_upTo p) (fun _ => 1)
+        (P.toNecSuf.convolutionTerm mul_comm x y p)
+  rw [sumOverFiniteSet_eq_necSuf, funext (P.convolutionTerm_eq_necSuf x y p)]
+
+/-- 本文 `claim_convolution_of_tensor_algebra_elements_lies_in_direct_sum` を、必要十分版から得たもの。 -/
+theorem convolution_isZeroBound_of_necSuf (x y : DirectSumOfFamily P.space) :
+    ∃ N : ℕ, IsZeroBound P.space (P.convolution x y) N := by
+  rw [P.convolution_eq_necSuf]
+  exact P.toNecSuf.convolution_isZeroBound mul_comm complexScalarMultipleOfZeroLaws x y
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_second_factor` の一つ目の式を、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_add_right_of_necSuf (x y y' : DirectSumOfFamily P.space) :
+    P.tensorAlgebraMul x (DirectSumOfFamily.add P.space y y')
+      = DirectSumOfFamily.add P.space (P.tensorAlgebraMul x y) (P.tensorAlgebraMul x y') := by
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_add_right mul_comm complexScalarMultipleOfZeroLaws x y y'
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_second_factor` の二つ目の式を、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_smul_right_of_necSuf (x : DirectSumOfFamily P.space) (l : ℂ) (y : DirectSumOfFamily P.space) :
+    P.tensorAlgebraMul x (DirectSumOfFamily.smul P.space l y)
+      = DirectSumOfFamily.smul P.space l (P.tensorAlgebraMul x y) := by
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_smul_right mul_comm complexScalarMultipleOfZeroLaws x l y
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_first_factor` の一つ目の式を、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_add_left_of_necSuf (x x' y : DirectSumOfFamily P.space) :
+    P.tensorAlgebraMul (DirectSumOfFamily.add P.space x x') y
+      = DirectSumOfFamily.add P.space (P.tensorAlgebraMul x y) (P.tensorAlgebraMul x' y) := by
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_add_left mul_comm complexScalarMultipleOfZeroLaws x x' y
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_first_factor` の二つ目の式を、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_smul_left_of_necSuf (l : ℂ) (x y : DirectSumOfFamily P.space) :
+    P.tensorAlgebraMul (DirectSumOfFamily.smul P.space l x) y
+      = DirectSumOfFamily.smul P.space l (P.tensorAlgebraMul x y) := by
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_smul_left mul_comm complexScalarMultipleOfZeroLaws l x y
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_second_factor`：x ⋆_D • が線型写像であることを、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_right_isLinearMap_of_necSuf (x : DirectSumOfFamily P.space) :
+    IsComplexLinearMap (directSumOfFamilyVectorSpace P.space) (directSumOfFamilyVectorSpace P.space)
+      (fun z => P.tensorAlgebraMul x z) := by
+  rw [isComplexLinearMap_iff_necSuf]
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_right_isLinearMap mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1) x
+
+/-- 本文 `claim_tensor_algebra_product_is_linear_in_first_factor`：• ⋆_D y が線型写像であることを、必要十分版から得たもの。 -/
+theorem tensorAlgebraMul_left_isLinearMap_of_necSuf (y : DirectSumOfFamily P.space) :
+    IsComplexLinearMap (directSumOfFamilyVectorSpace P.space) (directSumOfFamilyVectorSpace P.space)
+      (fun z => P.tensorAlgebraMul z y) := by
+  rw [isComplexLinearMap_iff_necSuf]
+  simp only [P.tensorAlgebraMul_eq_necSuf]
+  exact P.toNecSuf.tensorAlgebraMul_left_isLinearMap mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1) y
+
 theorem tensorAlgebraMul_assoc_of_necSuf (x y z : DirectSumOfFamily P.space) :
     P.tensorAlgebraMul (P.tensorAlgebraMul x y) z = P.tensorAlgebraMul x (P.tensorAlgebraMul y z) := by
   simp only [P.tensorAlgebraMul_eq_necSuf]
@@ -205,6 +293,13 @@ theorem embedVector_isLinearMap_of_necSuf :
     IsComplexLinearMap SV (ComplexAlgebra.underlyingVectorSpace P.tensorAlgebra) P.embedVector :=
   (isComplexLinearMap_iff_necSuf _ _ _).2
     (P.toNecSuf.embedVector_isLinearMap mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1))
+
+/-- 本文 `claim_embedded_image_of_tuple_lies_in_subalgebra_containing_image_of_embedding` を、必要十分版から得たもの。 -/
+theorem embedComponent_tau_mem_of_necSuf {B : Set (DirectSumOfFamily P.space)}
+    (hB : ComplexAlgebra.IsSubalgebra P.tensorAlgebra B) (hsub : Set.range P.embedVector ⊆ B) :
+    ∀ (k : ℕ) (u : Tuple V k), embedComponent P.space k (P.τ k u) ∈ B := by
+  rw [ComplexAlgebra.isSubalgebra_iff_necSuf, P.tensorAlgebra_toNecSuf] at hB
+  exact P.toNecSuf.embedComponent_tau_mem mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1) hB hsub
 
 end TensorPowers
 
@@ -303,6 +398,22 @@ theorem extension_embedVector_of_necSuf (x : V) : P.extension hP SA hf (P.embedV
   rw [P.extension_eq_necSuf hP SA hf]
   exact P.toNecSuf.extension_embedVector _ SA.toNecSuf _ complexScalarMultipleOfZeroLaws x
 
+/-- 本文 `claim_map_from_tensor_algebra_on_embedded_tensor` を、必要十分版から得たもの。 -/
+theorem extension_embedComponent_of_necSuf (k : ℕ) (G : P.T k) :
+    P.extension hP SA hf (embedComponent P.space k G) = P.extensionOnPower hP SA hf k G := by
+  rw [P.extension_eq_necSuf hP SA hf, P.extensionOnPower_eq_necSuf hP SA hf]
+  exact P.toNecSuf.extension_embedComponent _ SA.toNecSuf _ complexScalarMultipleOfZeroLaws k G
+
+/-- 本文 `claim_sum_of_values_on_components_does_not_depend_on_zero_bound` を、必要十分版から得たもの。 -/
+theorem sum_extensionOnPower_eq_of_le_of_necSuf (x : DirectSumOfFamily P.space) (N N' : ℕ)
+    (hN : IsZeroBound P.space x.1 N) (hNN' : N ≤ N') :
+    sumOverFiniteSet SA.toComplexVectorSpace (isFiniteSet_upTo N') (fun _ => 1)
+        (fun i => P.extensionOnPower hP SA hf i.1 (x.1 i.1))
+      = sumOverFiniteSet SA.toComplexVectorSpace (isFiniteSet_upTo N) (fun _ => 1)
+          (fun i => P.extensionOnPower hP SA hf i.1 (x.1 i.1)) := by
+  simp only [sumOverFiniteSet_eq_necSuf, P.extensionOnPower_eq_necSuf hP SA hf]
+  exact P.toNecSuf.sum_extensionOnPower_eq_of_le _ SA.toNecSuf _ complexScalarMultipleOfZeroLaws x N N' hN hNN'
+
 end TensorPowers
 
 /-- 本文 `claim_universal_property_of_tensor_algebra` を、必要十分版に ℂ の性質を渡して得たもの。 -/
@@ -339,5 +450,14 @@ theorem universalProperty_of_tensorAlgebra_of_necSuf {V : Type u} {A : Type w} (
   · have h1 := hΦ'.1
     rw [ComplexAlgebra.isComplexAlgebraHomomorphism_iff_necSuf, TensorPowers.tensorAlgebra_toNecSuf] at h1
     exact h1
+
+
+/-- 本文 `claim_ordered_product_of_values_of_linear_map_on_tuple_is_multilinear` を、必要十分版から得たもの。 -/
+theorem orderedProductOfValues_isMultilinear_of_necSuf {V : Type u} {A : Type w} {SV : ComplexVectorSpace V}
+    (SA : ComplexAlgebra A) {f : V → A} (hf : IsComplexLinearMap SV SA.toComplexVectorSpace f) (k : ℕ) :
+    IsMultilinearMap SV SA.toComplexVectorSpace k (orderedProductOfValues SA f k) := by
+  rw [isMultilinearMap_iff_necSuf,
+    funext (TensorPowers.orderedProductOfValues_eq_necSuf (f := f) SA k)]
+  exact NecSuf.VectorSpace.orderedProductOfValues_isMultilinear SA.toNecSuf (TensorPowers.hf_toNecSuf SA hf) k
 
 end CliffordMatrixIsomorphism.ComplexVectorSpace

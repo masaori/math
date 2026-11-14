@@ -45,7 +45,9 @@ else
   echo "OK: ソース中に sorry / admit は無い"
 fi
 
-# 3. 名前空間 CliffordMatrixIsomorphism のすべての宣言について、依存する公理に sorryAx が無いこと。
+# 3. 名前空間 CliffordMatrixIsomorphism のすべての宣言について、依存する公理が Lean の標準の三つ
+#    （propext・Classical.choice・Quot.sound）に限られること。sorryAx だけを見ると、`axiom` で置いた
+#    仮定や、ほかの非標準の公理への依存を見逃す。
 #    宣言の一覧を手で保つと追加漏れが検査の穴になるので、環境から全部を拾う。
 cat > "$tmp/CheckAxioms.lean" <<'LEAN'
 import CliffordMatrixIsomorphism
@@ -53,18 +55,20 @@ open Lean Elab Command
 
 elab "#check_no_sorry_in_project" : command => do
   let env ← getEnv
+  let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
   let mut count : Nat := 0
-  let mut bad : Array Name := #[]
+  let mut bad : Array (Name × Array Name) := #[]
   for (n, _) in env.constants.toList do
     if (`CliffordMatrixIsomorphism).isPrefixOf n && !n.isInternal then
       count := count + 1
       let axs ← liftCoreM (Lean.collectAxioms n)
-      if axs.contains ``sorryAx then
-        bad := bad.push n
+      let extra := axs.filter (fun a => !allowed.contains a)
+      if !extra.isEmpty then
+        bad := bad.push (n, extra)
   if bad.isEmpty then
-    logInfo m!"OK: {count} 個の宣言のどれも sorryAx に依存しない"
+    logInfo m!"OK: {count} 個の宣言のどれも、propext・Classical.choice・Quot.sound 以外の公理に依存しない"
   else
-    logError m!"NG: sorryAx に依存する宣言: {bad}"
+    logError m!"NG: propext・Classical.choice・Quot.sound 以外の公理に依存する宣言: {bad}"
 
 #check_no_sorry_in_project
 LEAN

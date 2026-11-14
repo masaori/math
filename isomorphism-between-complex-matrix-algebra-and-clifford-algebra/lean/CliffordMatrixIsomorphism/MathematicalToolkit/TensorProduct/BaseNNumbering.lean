@@ -18,6 +18,8 @@ Lean の帰納的定義は k + 1 の段を k の段から作るので、本文�
 この節の定義と主張は ℂ を含まないので、必要十分版はこのファイルをそのまま引く（必要十分版を別に置かない）。
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
+import Mathlib.Data.Nat.Basic
+import Mathlib.Tactic.Set
 
 namespace CliffordMatrixIsomorphism
 
