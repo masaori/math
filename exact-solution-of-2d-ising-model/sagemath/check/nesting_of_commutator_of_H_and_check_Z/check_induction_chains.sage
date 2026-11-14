@@ -91,17 +91,37 @@ def step_tail(name, n, k, two_k, em, ep, T):
     """係数の鎖の (k c_n a)T の次の行から最後の行まで（人手証明の行どおり）。em = exp(-iθ̃)、ep = exp(iθ̃)。"""
     one = k.parent()(1)
     if name == 'h1.z' and n % 2 == 0:
+        sg, p, two = sgn(QQ(n) / 2), pw(two_k, n), k.parent()(2)
+        # 積の結合律・可換律を 1 行に 1 つずつ当てる 5 行（括弧は行の式どおり）
         return [
-            ("((-1)^{n/2}(2k)^n(2k)exp(-iθ̃))Y̌", body_scalar(sgn(QQ(n) / 2) * pw(two_k, n) * two_k * em, T)),
+            ("(((k(sp))2)e)Y̌", body_scalar(((k * (sg * p)) * two) * em, T)),
+            ("((2(k(sp)))e)Y̌", body_scalar((two * (k * (sg * p))) * em, T)),
+            ("(((2k)(sp))e)Y̌", body_scalar(((two * k) * (sg * p)) * em, T)),
+            ("(((sp)(2k))e)Y̌", body_scalar(((sg * p) * (two * k)) * em, T)),
+            ("((s(p(2k)))e)Y̌", body_scalar((sg * (p * (two * k))) * em, T)),
             ("((-1)^{n/2}(2k)^{n+1}exp(-iθ̃))Y̌", body_scalar(sgn(QQ(n) / 2) * pw(two_k, n + 1) * em, T)),
             ("((-1)^{((n+1)-1)/2}(2k)^{n+1}exp(-iθ̃))Y̌", body_scalar(sgn(QQ((n + 1) - 1) / 2) * pw(two_k, n + 1) * em, T)),
         ]
     if name == 'h1.z':
         e = QQ(n - 1) / 2
+        sg, p, two, m = sgn(e), pw(two_k, n), k.parent()(2), k.parent()(-1)
+        A = (sg * p) * em
+        # multiply_by_minus_one の 1 行と、積の結合律・可換律を 1 行に 1 つずつ当てる 11 行（括弧は行の式どおり）
         return [
-            ("((-1)^{(n-1)/2}(-1)(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Ž", body_scalar(sgn(e) * (-1) * pw(two_k, n) * two_k * em * ep, T)),
-            ("((-1)^{(n-1)/2+1}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Ž", body_scalar(sgn(e + 1) * pw(two_k, n + 1) * em * ep, T)),
-            ("((-1)^{(n-1)/2+1}(2k)^{n+1}1_C)Ž", body_scalar(sgn(e + 1) * pw(two_k, n + 1) * one, T)),
+            ("((k((sp)e))((m2)f))Ž", body_scalar((k * A) * ((m * two) * ep), T)),
+            ("(((k((sp)e))(m2))f)Ž", body_scalar(((k * A) * (m * two)) * ep, T)),
+            ("(((m2)(k((sp)e)))f)Ž", body_scalar(((m * two) * (k * A)) * ep, T)),
+            ("((m(2(k((sp)e))))f)Ž", body_scalar((m * (two * (k * A))) * ep, T)),
+            ("((m((2k)((sp)e)))f)Ž", body_scalar((m * ((two * k) * A)) * ep, T)),
+            ("((m(((2k)(sp))e))f)Ž", body_scalar((m * (((two * k) * (sg * p)) * em)) * ep, T)),
+            ("(((m((2k)(sp)))e)f)Ž", body_scalar(((m * ((two * k) * (sg * p))) * em) * ep, T)),
+            ("((m((2k)(sp)))(ef))Ž", body_scalar((m * ((two * k) * (sg * p))) * (em * ep), T)),
+            ("((m((sp)(2k)))(ef))Ž", body_scalar((m * ((sg * p) * (two * k))) * (em * ep), T)),
+            ("((m(s(p(2k))))(ef))Ž", body_scalar((m * (sg * (p * (two * k)))) * (em * ep), T)),
+            ("(((ms)(p(2k)))(ef))Ž", body_scalar(((m * sg) * (p * (two * k))) * (em * ep), T)),
+            ("(((sm)(p(2k)))(ef))Ž", body_scalar(((sg * m) * (p * (two * k))) * (em * ep), T)),
+            ("(((-1)^{(n-1)/2+1}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Ž", body_scalar((sgn(e + 1) * pw(two_k, n + 1)) * (em * ep), T)),
+            ("(((-1)^{(n-1)/2+1}(2k)^{n+1})1_C)Ž", body_scalar((sgn(e + 1) * pw(two_k, n + 1)) * one, T)),
             ("((-1)^{(n-1)/2+1}(2k)^{n+1})Ž", body_scalar(sgn(e + 1) * pw(two_k, n + 1), T)),
             ("((-1)^{(n+1)/2}(2k)^{n+1})Ž", body_scalar(sgn(QQ(n + 1) / 2) * pw(two_k, n + 1), T)),
         ]

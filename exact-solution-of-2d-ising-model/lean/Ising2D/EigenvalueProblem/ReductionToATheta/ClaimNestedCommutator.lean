@@ -24,8 +24,8 @@
 | 人手 | Lean（(h1.z) の場合。ほかの 3 式も同じ並び） |
 | --- | --- |
 | 基底段階（`n = 0`） | `nesting_H1Plus_checkZ_even` の `k = 0` の場合の `calc` |
-| 帰納段階 1（`n` 偶数 → `n+1` 奇数） | `nesting_H1Plus_checkZ_step_even_to_odd` の `calc`（人手の 4 行） |
-| 帰納段階 2（`n` 奇数 → `n+1` 偶数） | `nesting_H1Plus_checkZ_step_odd_to_even` の `calc`（人手の行。最後の `(n-1)/2+1 = (n+1)/2` は `k` で書くと `k+1` そのもの） |
+| 帰納段階 1（`n` 偶数 → `n+1` 奇数） | `nesting_H1Plus_checkZ_step_even_to_odd` の `calc`（(h1.z) は人手の行と 1 段ずつ。ほかの 3 式は係数の並べ替えをまだ `ring` の 1 段で閉じている） |
+| 帰納段階 2（`n` 奇数 → `n+1` 偶数） | `nesting_H1Plus_checkZ_step_odd_to_even` の `calc`（(h1.z) は人手の行と 1 段ずつ。最後の `(n-1)/2+1 = (n+1)/2` は `k` で書くと `k+1` そのもの） |
 
 偶数側の定理は `k` についての帰納法で、`k` から `k+1` へは帰納段階 1 と 2 を続けて当てる。
 奇数側の定理は偶数側に帰納段階 1 を当てる。
@@ -111,11 +111,29 @@ theorem nesting_H1Plus_checkZ_step_even_to_odd (hM : M ≠ 0) (K1 : ℂ) (μ : �
     -- (A)
     _ = (K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) • ((2 * checkPhase M 1 μ) • checkY M μ) := by
         rw [lie_H1Plus_checkZ hM μ]
-    -- スカラー倍の交換と `K_1 (2K_1)^n 2 = (2K_1)^{n+1}`
+    -- `scalar_multiple_is_associative`
+    _ = ((K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) * (2 * checkPhase M 1 μ)) • checkY M μ :=
+        smul_smul _ _ _
+    -- 以下 5 段: `complex_numbers_form_a_field` の積の結合律・可換律を 1 段に 1 つずつ（人手の 5 行）
+    -- 積の結合律を右辺から左辺へ
+    _ = (((K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) * 2) * checkPhase M 1 μ) • checkY M μ := by
+        rw [← mul_assoc (K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) 2 (checkPhase M 1 μ)]
+    -- 積の可換律
+    _ = ((2 * (K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)))) * checkPhase M 1 μ) • checkY M μ := by
+        rw [mul_comm (K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) 2]
+    -- 積の結合律を右辺から左辺へ
+    _ = (((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))) * checkPhase M 1 μ) • checkY M μ := by
+        rw [← mul_assoc 2 K1 ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))]
+    -- 積の可換律
+    _ = ((((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) * (2 * K1)) * checkPhase M 1 μ) • checkY M μ := by
+        rw [mul_comm (2 * K1) ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k))]
+    -- 積の結合律
+    _ = (((-1 : ℂ) ^ k * ((2 * K1) ^ (2 * k) * (2 * K1))) * checkPhase M 1 μ) • checkY M μ := by
+        rw [mul_assoc ((-1 : ℂ) ^ k) ((2 * K1) ^ (2 * k)) (2 * K1)]
+    -- 冪の約束 `x^{m+1} := x^m x`（`scalar_exp_is_limit_of_partial_sums`）。
+    -- 続く人手の行 `n/2 = ((n+1)-1)/2` は、`n = 2k` と書くと両辺とも `k` なので Lean に段は無い
     _ = ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
-        rw [smul_smul]
-        congr 1
-        ring
+        rw [← pow_succ]
 
 /-- 人手 (h1.z) の帰納段階 2（`n = 2k+1` 奇数 → `n+1` 偶数）。 -/
 theorem nesting_H1Plus_checkZ_step_odd_to_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ)
@@ -136,15 +154,55 @@ theorem nesting_H1Plus_checkZ_step_odd_to_even (hM : M ≠ 0) (K1 : ℂ) (μ : �
     _ = (K1 * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1) * checkPhase M 1 μ))
           • ((-2 * checkPhase M (-1) μ) • checkZ M μ) := by
         rw [lie_H1Plus_checkY hM μ]
-    -- スカラー倍の交換と `K_1 (2K_1)^n (-2) = (-1)(2K_1)^{n+1}`
-    _ = ((-1) * (-1 : ℂ) ^ k * (2 * K1) ^ (2 * (k + 1))
-          * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
-        rw [smul_smul]
-        congr 1
-        ring
-    -- `e^{-iθ~}e^{iθ~} = 1` と `(-1)(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}`
+    -- `scalar_multiple_is_associative`
+    _ = ((K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)) * (-2 * checkPhase M (-1) μ)) • checkZ M μ :=
+        smul_smul _ _ _
+    -- 以下 12 段は人手の 12 行と 1 段ずつ対応する（積の結合律・可換律は `complex_numbers_form_a_field`）
+    -- `multiply_by_minus_one`（`z → 2`）
+    _ = ((K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)) * (((-1 : ℂ) * 2) * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [neg_one_mul (2 : ℂ)]
+    -- 積の結合律を右辺から左辺へ
+    _ = (((K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)) * ((-1 : ℂ) * 2)) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [← mul_assoc (K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)) ((-1 : ℂ) * 2) (checkPhase M (-1) μ)]
+    -- 積の可換律
+    _ = ((((-1 : ℂ) * 2) * (K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ))) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [mul_comm (K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)) ((-1 : ℂ) * 2)]
+    -- 積の結合律
+    _ = (((-1 : ℂ) * (2 * (K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)))) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [mul_assoc (-1 : ℂ) 2 (K1 * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ))]
+    -- 積の結合律を右辺から左辺へ
+    _ = (((-1 : ℂ) * ((2 * K1) * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ))) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [← mul_assoc 2 K1 (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * checkPhase M 1 μ)]
+    -- 積の結合律を右辺から左辺へ
+    _ = (((-1 : ℂ) * (((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1))) * checkPhase M 1 μ)) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [← mul_assoc (2 * K1) ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) (checkPhase M 1 μ)]
+    -- 積の結合律を右辺から左辺へ
+    _ = ((((-1 : ℂ) * ((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)))) * checkPhase M 1 μ) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [← mul_assoc (-1 : ℂ) ((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1))) (checkPhase M 1 μ)]
+    -- 積の結合律
+    _ = (((-1 : ℂ) * ((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [mul_assoc ((-1 : ℂ) * ((2 * K1) * ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)))) (checkPhase M 1 μ) (checkPhase M (-1) μ)]
+    -- 積の可換律
+    _ = (((-1 : ℂ) * (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1)) * (2 * K1))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [mul_comm (2 * K1) ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1))]
+    -- 積の結合律
+    _ = (((-1 : ℂ) * ((-1 : ℂ) ^ k * ((2 * K1) ^ (2 * k + 1) * (2 * K1)))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [mul_assoc ((-1 : ℂ) ^ k) ((2 * K1) ^ (2 * k + 1)) (2 * K1)]
+    -- 積の結合律を右辺から左辺へ
+    _ = ((((-1 : ℂ) * (-1 : ℂ) ^ k) * ((2 * K1) ^ (2 * k + 1) * (2 * K1))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [← mul_assoc (-1 : ℂ) ((-1 : ℂ) ^ k) ((2 * K1) ^ (2 * k + 1) * (2 * K1))]
+    -- 積の可換律
+    _ = ((((-1 : ℂ) ^ k * (-1 : ℂ)) * ((2 * K1) ^ (2 * k + 1) * (2 * K1))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [mul_comm (-1 : ℂ) ((-1 : ℂ) ^ k)]
+    -- 冪の約束 `x^{m+1} := x^m x` を `-1` と `2(K_1)_ℂ` の二か所へ（`scalar_exp_is_limit_of_partial_sums`）。`(2K_1)^{n+1}` の指数 `n+1` は `n = 2k+1` で `2(k+1)`
+    _ = (((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * (k + 1))) * (checkPhase M 1 μ * checkPhase M (-1) μ)) • checkZ M μ := by
+        rw [← pow_succ, ← pow_succ, show 2 * k + 1 + 1 = 2 * (k + 1) by ring]
+    -- 準備の `e^{-iθ~}e^{iθ~} = 1_ℂ`（`checkPhase_mul_neg_chain`）
+    _ = (((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * (k + 1))) * 1) • checkZ M μ := by
+        rw [checkPhase_mul_neg_chain hM]
+    -- `1_ℂ` は `ℂ` の積の単位元。続く人手の行 `(n-1)/2+1 = (n+1)/2` は、`n = 2k+1` と書くと両辺とも `k+1` なので Lean に段は無い
     _ = ((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * (k + 1))) • checkZ M μ := by
-        rw [checkPhase_mul_neg_chain hM, mul_one, ← pow_succ']
+        rw [mul_one]
 
 /-- **人手 (h1.z) の偶数側**: `n = 2k` のとき `(-1)^k (2K_1)^{2k} check(Z)_μ`。 -/
 theorem nesting_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :

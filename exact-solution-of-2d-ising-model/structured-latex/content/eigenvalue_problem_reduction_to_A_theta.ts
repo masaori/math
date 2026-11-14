@@ -4642,7 +4642,29 @@ T_{(V^{(+)})}(X)
         math(String.raw`(-2)\check{Y}_\mu`),
         "・",
         math(String.raw`(2)\check{Z}_\mu`),
-        " である。",
+        " である。この右辺の ",
+        math(String.raw`-2`),
+        " は ",
+        math(String.raw`2 = 2_{\mathbb{C}}`),
+        " の符号反転 ",
+        math(String.raw`-(2_{\mathbb{C}})`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を表す。主張と証明の ",
+        math(String.raw`-1 \in \mathbb{C}`),
+        " は ",
+        math(String.raw`-1_{\mathbb{C}} := (-1)_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        " による ",
+        math(String.raw`-1 \in \mathbb{R}`),
+        " の像。",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        "）を表す。括弧の無い 3 つ以上の複素数の積は、左から順に掛けたもの（",
+        math(String.raw`xyz := (xy)z`),
+        "）を表す。",
       ]),
       paragraph([
         "準備（位相の積）。",
@@ -4691,8 +4713,16 @@ C_{n+1}
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(A)\text{（準備の読み方で）}\bigr)\\
 &= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
-&= \bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
-&&\bigl(\because\ \mathbb{C}\text{ の積の可換律と結合律}\bigr)\\
+&= \bigl(\bigl(\bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)2\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl(2\bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\bigr)\\
+&= \bigl(\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl(\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\bigr)\\
+&= \bigl(\bigl((-1)^{n/2}\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\bigr)\\
 &= \bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
 &= \bigl((-1)^{((n+1)-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
@@ -4711,11 +4741,33 @@ C_{n+1}
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(B)\text{（準備の読み方で）}\bigr)\\
 &= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
-&= \bigl((-1)^{(n-1)/2}(-1)\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
-&&\bigl(\because\ \mathbb{C}\text{ の四則}\bigr)\\
-&= \bigl((-1)^{(n-1)/2+1}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&= \bigl(\bigl((K_1)_{\mathbb{C}}\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\bigl((-1)2\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to 2)\text{。準備の読み方で}\bigr)\\
+&= \bigl(\bigl(\bigl((K_1)_{\mathbb{C}}\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl((-1)2\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl(\bigl((-1)2\bigr)\bigl((K_1)_{\mathbb{C}}\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\bigr)\\
+&= \bigl(\bigl((-1)\bigl(2\bigl((K_1)_{\mathbb{C}}\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\bigr)\\
+&= \bigl(\bigl((-1)\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl((-1)\bigl(\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl(\bigl((-1)\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl((-1)\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\bigr)\\
+&= \bigl(\bigl((-1)\bigl(\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\bigr)\\
+&= \bigl(\bigl((-1)\bigl((-1)^{(n-1)/2}\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\bigr)\\
+&= \bigl(\bigl(\bigl((-1)(-1)^{(n-1)/2}\bigr)\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律を右辺から左辺へ}\bigr)\\
+&= \bigl(\bigl(\bigl((-1)^{(n-1)/2}(-1)\bigr)\bigl(\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\bigr)\\
+&= \bigl(\bigl((-1)^{(n-1)/2+1}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\bigr)\bigl(\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を }-1\text{ と }2(K_1)_{\mathbb{C}}\text{ の二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
-&= \bigl((-1)^{(n-1)/2+1}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}1_{\mathbb{C}}\bigr)\check{Z}_\mu
+&= \bigl(\bigl((-1)^{(n-1)/2+1}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\bigr)1_{\mathbb{C}}\bigr)\check{Z}_\mu
 &&\bigl(\because\ \text{準備の }\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr) = 1_{\mathbb{C}}\bigr)\\
 &= \bigl((-1)^{(n-1)/2+1}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n+1}\bigr)\check{Z}_\mu
 &&\bigl(\because\ 1_{\mathbb{C}}\text{ は }\mathbb{C}\text{ の積の単位元}\bigr)\\
@@ -4893,6 +4945,7 @@ F_{n+1}
         "2026-11-02（全証明の SageMath 検算）: 主張の中で定めていた交換子と n 重の反復を def_ad_X_matrix の ad^n_X への参照にし、実数のスカラー K_1・K_2^* と θ̃_μ を inclusion_rr_to_cc の像 (K_1)_C・(K_2^*)_C・(θ̃)_C で書き、(−1) の冪の指数が ℤ_{≥0} に属することを書き、係数を一つの複素数にまとめてからスカラー倍で掛ける括弧を明示した（主張の中身は不変）。証明は、双線型性の鎖の名前だけの根拠をスカラー倍の主張へのラベル参照に、exp(-iθ̃)exp(iθ̃) = 1 を scalar_exp_product・scalar_exp_zero の鎖に、(A)〜(D) を commutator_of_H_and_check_Z_Y へのラベル参照に、基底段階に単位元の行を、(A)〜(D) の右辺をスカラー倍として読むことを準備に書き、二つの帰納段階の鎖の末尾に冪の約束と指数の等式の行を足して n+1 の主張の右辺まで一続きにし、鎖の後の散文の照合を除いた。検算は sagemath/check/nesting_of_commutator_of_H_and_check_Z/（円分体と不定元で厳密）。",
         "2026-11-02（cosh_sinh_coefficient_conversion_for_check の検算）: 証明の冒頭の準備（交換子の双線型性）の鎖を、同じ事実を使う cosh_sinh_coefficient_conversion_for_check と共有するため独立の主張 commutator_of_scalar_multiples に切り出し、帰納段階の 8 か所の根拠をそれへのラベル参照にした（鎖の中身は不変）。",
         "2026-11-14（Lean の通しの証明）: 準備（位相の積）の -i(θ̃)_C + i(θ̃)_C = 0 を名前だけの「C の加法の逆元」で消していた。-i(θ̃)_C を def_half_integer_checkZ と同じく (-i)(θ̃)_C と読むことを書き、negative_i_times_complex_is_negation_of_i_times（z → (θ̃)_C）で -(i(θ̃)_C) に直す行を足してから negation_plus_self_is_zero_in_cc（x → i(θ̃)_C）を引くようにした（3 等号 → 4 等号）。exp(0) を exp(0_C) と書いた。式の両端は不変。",
+        "2026-11-14（Lean の通しの証明）: (h1.z) の二つの帰納段階で、係数の並べ替えを名前だけの「C の積の可換律と結合律」「C の四則」の 1 行で済ませていた。偶数の段を complex_numbers_form_a_field の積の結合律・可換律を 1 行に 1 つずつ当てる 5 行に、奇数の段を multiply_by_minus_one（z → 2。-2 = (-1)2）の 1 行と同じ当て方の 11 行に割り、準備（前提の読み方）に -2 を -(2_C)、-1 を -1_C、括弧の無い積を左から掛けたものと読むことを書き、続く冪の約束・準備の位相の積・単位元の行に括弧を明示した（式の両端と主張は不変）。並べ替えの行の数は、積の結合律・可換律を 1 か所に当てる手を 1 行として、行の数が最も少ない並べ方を総当たりで選んだ。(h1.y)・(h2.z)・(h2.y) の同じ行は次の回で割る。",
       ],
     },
   },
