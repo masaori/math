@@ -157,8 +157,16 @@ PASS: M=2 mu=1 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=1
@@ -169,10 +177,17 @@ PASS: M=2 mu=1 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=1 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=2
 PASS: M=2 mu=1 h1.y: 主張 n=2（帰納法の仮定）
@@ -182,8 +197,16 @@ PASS: M=2 mu=1 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=3
@@ -194,10 +217,17 @@ PASS: M=2 mu=1 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=1 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=4
 PASS: M=2 mu=1 h1.y: 主張 n=4（帰納法の仮定）
@@ -207,8 +237,16 @@ PASS: M=2 mu=1 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=5
@@ -219,10 +257,17 @@ PASS: M=2 mu=1 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=1 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=6
 PASS: M=2 mu=1 h1.y: 主張 n=6（帰納法の仮定）
@@ -232,8 +277,16 @@ PASS: M=2 mu=1 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=1 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=1 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=1 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=1 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=1 h1.y: 主張 n=7
@@ -570,8 +623,16 @@ PASS: M=2 mu=2 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=1
@@ -582,10 +643,17 @@ PASS: M=2 mu=2 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=2 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=2
 PASS: M=2 mu=2 h1.y: 主張 n=2（帰納法の仮定）
@@ -595,8 +663,16 @@ PASS: M=2 mu=2 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=3
@@ -607,10 +683,17 @@ PASS: M=2 mu=2 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=2 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=4
 PASS: M=2 mu=2 h1.y: 主張 n=4（帰納法の仮定）
@@ -620,8 +703,16 @@ PASS: M=2 mu=2 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=5
@@ -632,10 +723,17 @@ PASS: M=2 mu=2 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=2 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=2 mu=2 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=6
 PASS: M=2 mu=2 h1.y: 主張 n=6（帰納法の仮定）
@@ -645,8 +743,16 @@ PASS: M=2 mu=2 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=2 mu=2 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=2 mu=2 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=2 mu=2 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=2 mu=2 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=2 mu=2 h1.y: 主張 n=7
@@ -984,8 +1090,16 @@ PASS: M=3 mu=1 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=1
@@ -996,10 +1110,17 @@ PASS: M=3 mu=1 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=1 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=2
 PASS: M=3 mu=1 h1.y: 主張 n=2（帰納法の仮定）
@@ -1009,8 +1130,16 @@ PASS: M=3 mu=1 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=3
@@ -1021,10 +1150,17 @@ PASS: M=3 mu=1 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=1 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=4
 PASS: M=3 mu=1 h1.y: 主張 n=4（帰納法の仮定）
@@ -1034,8 +1170,16 @@ PASS: M=3 mu=1 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=5
@@ -1046,10 +1190,17 @@ PASS: M=3 mu=1 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=1 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=6
 PASS: M=3 mu=1 h1.y: 主張 n=6（帰納法の仮定）
@@ -1059,8 +1210,16 @@ PASS: M=3 mu=1 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=1 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=1 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=1 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=1 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=1 h1.y: 主張 n=7
@@ -1397,8 +1556,16 @@ PASS: M=3 mu=2 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=1
@@ -1409,10 +1576,17 @@ PASS: M=3 mu=2 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=2 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=2
 PASS: M=3 mu=2 h1.y: 主張 n=2（帰納法の仮定）
@@ -1422,8 +1596,16 @@ PASS: M=3 mu=2 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=3
@@ -1434,10 +1616,17 @@ PASS: M=3 mu=2 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=2 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=4
 PASS: M=3 mu=2 h1.y: 主張 n=4（帰納法の仮定）
@@ -1447,8 +1636,16 @@ PASS: M=3 mu=2 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=5
@@ -1459,10 +1656,17 @@ PASS: M=3 mu=2 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=2 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=6
 PASS: M=3 mu=2 h1.y: 主張 n=6（帰納法の仮定）
@@ -1472,8 +1676,16 @@ PASS: M=3 mu=2 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=2 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=2 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=2 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=2 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=2 h1.y: 主張 n=7
@@ -1809,8 +2021,16 @@ PASS: M=3 mu=3 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=1
@@ -1821,10 +2041,17 @@ PASS: M=3 mu=3 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=3 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=2
 PASS: M=3 mu=3 h1.y: 主張 n=2（帰納法の仮定）
@@ -1834,8 +2061,16 @@ PASS: M=3 mu=3 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=3
@@ -1846,10 +2081,17 @@ PASS: M=3 mu=3 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=3 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=4
 PASS: M=3 mu=3 h1.y: 主張 n=4（帰納法の仮定）
@@ -1859,8 +2101,16 @@ PASS: M=3 mu=3 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=5
@@ -1871,10 +2121,17 @@ PASS: M=3 mu=3 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=3 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=3 mu=3 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=6
 PASS: M=3 mu=3 h1.y: 主張 n=6（帰納法の仮定）
@@ -1884,8 +2141,16 @@ PASS: M=3 mu=3 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=3 mu=3 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=3 mu=3 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=3 mu=3 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=3 mu=3 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=3 mu=3 h1.y: 主張 n=7
@@ -2223,8 +2488,16 @@ PASS: M=4 mu=1 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=1
@@ -2235,10 +2508,17 @@ PASS: M=4 mu=1 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=1 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=2
 PASS: M=4 mu=1 h1.y: 主張 n=2（帰納法の仮定）
@@ -2248,8 +2528,16 @@ PASS: M=4 mu=1 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=3
@@ -2260,10 +2548,17 @@ PASS: M=4 mu=1 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=1 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=4
 PASS: M=4 mu=1 h1.y: 主張 n=4（帰納法の仮定）
@@ -2273,8 +2568,16 @@ PASS: M=4 mu=1 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=5
@@ -2285,10 +2588,17 @@ PASS: M=4 mu=1 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=1 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=6
 PASS: M=4 mu=1 h1.y: 主張 n=6（帰納法の仮定）
@@ -2298,8 +2608,16 @@ PASS: M=4 mu=1 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=1 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=1 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=1 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=1 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=1 h1.y: 主張 n=7
@@ -2636,8 +2954,16 @@ PASS: M=4 mu=2 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=1
@@ -2648,10 +2974,17 @@ PASS: M=4 mu=2 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=2 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=2
 PASS: M=4 mu=2 h1.y: 主張 n=2（帰納法の仮定）
@@ -2661,8 +2994,16 @@ PASS: M=4 mu=2 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=3
@@ -2673,10 +3014,17 @@ PASS: M=4 mu=2 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=2 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=4
 PASS: M=4 mu=2 h1.y: 主張 n=4（帰納法の仮定）
@@ -2686,8 +3034,16 @@ PASS: M=4 mu=2 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=5
@@ -2698,10 +3054,17 @@ PASS: M=4 mu=2 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=2 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=6
 PASS: M=4 mu=2 h1.y: 主張 n=6（帰納法の仮定）
@@ -2711,8 +3074,16 @@ PASS: M=4 mu=2 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=2 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=2 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=2 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=2 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=2 h1.y: 主張 n=7
@@ -3049,8 +3420,16 @@ PASS: M=4 mu=3 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=1
@@ -3061,10 +3440,17 @@ PASS: M=4 mu=3 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=3 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=2
 PASS: M=4 mu=3 h1.y: 主張 n=2（帰納法の仮定）
@@ -3074,8 +3460,16 @@ PASS: M=4 mu=3 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=3
@@ -3086,10 +3480,17 @@ PASS: M=4 mu=3 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=3 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=4
 PASS: M=4 mu=3 h1.y: 主張 n=4（帰納法の仮定）
@@ -3099,8 +3500,16 @@ PASS: M=4 mu=3 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=5
@@ -3111,10 +3520,17 @@ PASS: M=4 mu=3 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=3 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=6
 PASS: M=4 mu=3 h1.y: 主張 n=6（帰納法の仮定）
@@ -3124,8 +3540,16 @@ PASS: M=4 mu=3 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=3 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=3 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=3 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=3 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=3 h1.y: 主張 n=7
@@ -3462,8 +3886,16 @@ PASS: M=4 mu=4 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=1
@@ -3474,10 +3906,17 @@ PASS: M=4 mu=4 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=4 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=4 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=2
 PASS: M=4 mu=4 h1.y: 主張 n=2（帰納法の仮定）
@@ -3487,8 +3926,16 @@ PASS: M=4 mu=4 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=3
@@ -3499,10 +3946,17 @@ PASS: M=4 mu=4 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=4 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=4 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=4
 PASS: M=4 mu=4 h1.y: 主張 n=4（帰納法の仮定）
@@ -3512,8 +3966,16 @@ PASS: M=4 mu=4 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=5
@@ -3524,10 +3986,17 @@ PASS: M=4 mu=4 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=4 mu=4 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=4 mu=4 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=6
 PASS: M=4 mu=4 h1.y: 主張 n=6（帰納法の仮定）
@@ -3537,8 +4006,16 @@ PASS: M=4 mu=4 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=4 mu=4 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=4 mu=4 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=4 mu=4 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=4 mu=4 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=4 mu=4 h1.y: 主張 n=7
@@ -3876,8 +4353,16 @@ PASS: M=5 mu=1 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=1
@@ -3888,10 +4373,17 @@ PASS: M=5 mu=1 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=1 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=1 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=2
 PASS: M=5 mu=1 h1.y: 主張 n=2（帰納法の仮定）
@@ -3901,8 +4393,16 @@ PASS: M=5 mu=1 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=3
@@ -3913,10 +4413,17 @@ PASS: M=5 mu=1 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=1 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=1 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=4
 PASS: M=5 mu=1 h1.y: 主張 n=4（帰納法の仮定）
@@ -3926,8 +4433,16 @@ PASS: M=5 mu=1 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=5
@@ -3938,10 +4453,17 @@ PASS: M=5 mu=1 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=1 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=1 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=6
 PASS: M=5 mu=1 h1.y: 主張 n=6（帰納法の仮定）
@@ -3951,8 +4473,16 @@ PASS: M=5 mu=1 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=1 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=1 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=1 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=1 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=1 h1.y: 主張 n=7
@@ -4289,8 +4819,16 @@ PASS: M=5 mu=2 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=1
@@ -4301,10 +4839,17 @@ PASS: M=5 mu=2 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=2 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=2 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=2
 PASS: M=5 mu=2 h1.y: 主張 n=2（帰納法の仮定）
@@ -4314,8 +4859,16 @@ PASS: M=5 mu=2 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=3
@@ -4326,10 +4879,17 @@ PASS: M=5 mu=2 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=2 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=2 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=4
 PASS: M=5 mu=2 h1.y: 主張 n=4（帰納法の仮定）
@@ -4339,8 +4899,16 @@ PASS: M=5 mu=2 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=5
@@ -4351,10 +4919,17 @@ PASS: M=5 mu=2 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=2 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=2 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=6
 PASS: M=5 mu=2 h1.y: 主張 n=6（帰納法の仮定）
@@ -4364,8 +4939,16 @@ PASS: M=5 mu=2 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=2 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=2 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=2 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=2 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=2 h1.y: 主張 n=7
@@ -4702,8 +5285,16 @@ PASS: M=5 mu=3 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=1
@@ -4714,10 +5305,17 @@ PASS: M=5 mu=3 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=3 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=3 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=2
 PASS: M=5 mu=3 h1.y: 主張 n=2（帰納法の仮定）
@@ -4727,8 +5325,16 @@ PASS: M=5 mu=3 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=3
@@ -4739,10 +5345,17 @@ PASS: M=5 mu=3 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=3 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=3 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=4
 PASS: M=5 mu=3 h1.y: 主張 n=4（帰納法の仮定）
@@ -4752,8 +5365,16 @@ PASS: M=5 mu=3 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=5
@@ -4764,10 +5385,17 @@ PASS: M=5 mu=3 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=3 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=3 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=6
 PASS: M=5 mu=3 h1.y: 主張 n=6（帰納法の仮定）
@@ -4777,8 +5405,16 @@ PASS: M=5 mu=3 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=3 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=3 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=3 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=3 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=3 h1.y: 主張 n=7
@@ -5114,8 +5750,16 @@ PASS: M=5 mu=4 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=1
@@ -5126,10 +5770,17 @@ PASS: M=5 mu=4 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=4 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=4 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=2
 PASS: M=5 mu=4 h1.y: 主張 n=2（帰納法の仮定）
@@ -5139,8 +5790,16 @@ PASS: M=5 mu=4 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=3
@@ -5151,10 +5810,17 @@ PASS: M=5 mu=4 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=4 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=4 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=4
 PASS: M=5 mu=4 h1.y: 主張 n=4（帰納法の仮定）
@@ -5164,8 +5830,16 @@ PASS: M=5 mu=4 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=5
@@ -5176,10 +5850,17 @@ PASS: M=5 mu=4 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=4 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=4 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=6
 PASS: M=5 mu=4 h1.y: 主張 n=6（帰納法の仮定）
@@ -5189,8 +5870,16 @@ PASS: M=5 mu=4 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=4 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=4 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=4 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=4 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=4 h1.y: 主張 n=7
@@ -5527,8 +6216,16 @@ PASS: M=5 mu=5 h1.y n=0→1: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=0→1: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=0→1: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=0→1: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=0→1 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=0: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=1
@@ -5539,10 +6236,17 @@ PASS: M=5 mu=5 h1.y n=1→2: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=1→2: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=1→2: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=1→2: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=5 h1.y n=1→2 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=5 h1.y n=1: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=2
 PASS: M=5 mu=5 h1.y: 主張 n=2（帰納法の仮定）
@@ -5552,8 +6256,16 @@ PASS: M=5 mu=5 h1.y n=2→3: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=2→3: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=2→3: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=2→3: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=2→3 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=2: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=3
@@ -5564,10 +6276,17 @@ PASS: M=5 mu=5 h1.y n=3→4: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=3→4: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=3→4: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=3→4: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=5 h1.y n=3→4 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=5 h1.y n=3: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=4
 PASS: M=5 mu=5 h1.y: 主張 n=4（帰納法の仮定）
@@ -5577,8 +6296,16 @@ PASS: M=5 mu=5 h1.y n=4→5: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=4→5: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=4→5: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=4→5: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=4→5 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=4: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=5
@@ -5589,10 +6316,17 @@ PASS: M=5 mu=5 h1.y n=5→6: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=5→6: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=5→6: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=5→6: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」
-PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」
-PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(k c_n a)T」=「(((k((sp)f))2)e)Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((k((sp)f))2)e)Y̌」=「((2(k((sp)f)))e)Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((2(k((sp)f)))e)Y̌」=「(((2k)((sp)f))e)Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((2k)((sp)f))e)Y̌」=「((((2k)(sp))f)e)Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((((2k)(sp))f)e)Y̌」=「(((2k)(sp))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((2k)(sp))(fe))Y̌」=「(((sp)(2k))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((sp)(2k))(fe))Y̌」=「((s(p(2k)))(fe))Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(fe))Y̌」=「((s(p(2k)))(ef))Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「((s(p(2k)))(ef))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌」=「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」
+PASS: M=5 mu=5 h1.y n=5→6 係数の鎖: 「(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌」=「((-1)^{(n+1)/2}(2k)^{n+1})Y̌」
 PASS: M=5 mu=5 h1.y n=5: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=6
 PASS: M=5 mu=5 h1.y: 主張 n=6（帰納法の仮定）
@@ -5602,8 +6336,16 @@ PASS: M=5 mu=5 h1.y n=6→7: 「[kH, C_n]」=「[kH, (c_n)B_n]」
 PASS: M=5 mu=5 h1.y n=6→7: 「[kH, (c_n)B_n]」=「(k c_n)[H, B_n]」
 PASS: M=5 mu=5 h1.y n=6→7: 「(k c_n)[H, B_n]」=「(k c_n)((a)T)」
 PASS: M=5 mu=5 h1.y n=6→7: 「(k c_n)((a)T)」=「(k c_n a)T」
-PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」
-PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(k c_n a)T」=「((k(sp))((m2)f))Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((k(sp))((m2)f))Ž」=「(((k(sp))(m2))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(((k(sp))(m2))f)Ž」=「(((m2)(k(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(((m2)(k(sp)))f)Ž」=「((m(2(k(sp))))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((m(2(k(sp))))f)Ž」=「((m((2k)(sp)))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((m((2k)(sp)))f)Ž」=「((m((sp)(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((m((sp)(2k)))f)Ž」=「((m(s(p(2k))))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((m(s(p(2k))))f)Ž」=「(((ms)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(((ms)(p(2k)))f)Ž」=「(((sm)(p(2k)))f)Ž」
+PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「(((sm)(p(2k)))f)Ž」=「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=6→7 係数の鎖: 「((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž」=「((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž」
 PASS: M=5 mu=5 h1.y n=6: 鎖の最後の行が主張 n+1 の右辺
 PASS: M=5 mu=5 h1.y: 主張 n=7

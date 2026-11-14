@@ -126,17 +126,37 @@ def step_tail(name, n, k, two_k, em, ep, T):
             ("((-1)^{(n+1)/2}(2k)^{n+1})Ž", body_scalar(sgn(QQ(n + 1) / 2) * pw(two_k, n + 1), T)),
         ]
     if name == 'h1.y' and n % 2 == 0:
+        sg, p, two, m = sgn(QQ(n) / 2), pw(two_k, n), k.parent()(2), k.parent()(-1)
+        # multiply_by_minus_one の 1 行と、積の結合律・可換律を 1 行に 1 つずつ当てる 8 行（括弧は行の式どおり）
         return [
-            ("((-1)^{n/2}(-1)(2k)^n(2k)exp(iθ̃))Ž", body_scalar(sgn(QQ(n) / 2) * (-1) * pw(two_k, n) * two_k * ep, T)),
+            ("((k(sp))((m2)f))Ž", body_scalar((k * (sg * p)) * ((m * two) * ep), T)),
+            ("(((k(sp))(m2))f)Ž", body_scalar(((k * (sg * p)) * (m * two)) * ep, T)),
+            ("(((m2)(k(sp)))f)Ž", body_scalar(((m * two) * (k * (sg * p))) * ep, T)),
+            ("((m(2(k(sp))))f)Ž", body_scalar((m * (two * (k * (sg * p)))) * ep, T)),
+            ("((m((2k)(sp)))f)Ž", body_scalar((m * ((two * k) * (sg * p))) * ep, T)),
+            ("((m((sp)(2k)))f)Ž", body_scalar((m * ((sg * p) * (two * k))) * ep, T)),
+            ("((m(s(p(2k))))f)Ž", body_scalar((m * (sg * (p * (two * k)))) * ep, T)),
+            ("(((ms)(p(2k)))f)Ž", body_scalar(((m * sg) * (p * (two * k))) * ep, T)),
+            ("(((sm)(p(2k)))f)Ž", body_scalar(((sg * m) * (p * (two * k))) * ep, T)),
             ("((-1)^{n/2+1}(2k)^{n+1}exp(iθ̃))Ž", body_scalar(sgn(QQ(n) / 2 + 1) * pw(two_k, n + 1) * ep, T)),
             ("((-1)^{((n+1)+1)/2}(2k)^{n+1}exp(iθ̃))Ž", body_scalar(sgn(QQ((n + 1) + 1) / 2) * pw(two_k, n + 1) * ep, T)),
         ]
     if name == 'h1.y':
         e = QQ(n + 1) / 2
+        sg, p, two = sgn(e), pw(two_k, n), k.parent()(2)
+        A = (sg * p) * ep
+        # 積の結合律・可換律を 1 行に 1 つずつ当てる 8 行（括弧は行の式どおり）
         return [
-            ("((-1)^{(n+1)/2}(2k)^n(2k)exp(-iθ̃)exp(iθ̃))Y̌", body_scalar(sgn(e) * pw(two_k, n) * two_k * em * ep, T)),
-            ("((-1)^{(n+1)/2}(2k)^{n+1}exp(-iθ̃)exp(iθ̃))Y̌", body_scalar(sgn(e) * pw(two_k, n + 1) * em * ep, T)),
-            ("((-1)^{(n+1)/2}(2k)^{n+1}1_C)Y̌", body_scalar(sgn(e) * pw(two_k, n + 1) * one, T)),
+            ("(((k((sp)f))2)e)Y̌", body_scalar(((k * A) * two) * em, T)),
+            ("((2(k((sp)f)))e)Y̌", body_scalar((two * (k * A)) * em, T)),
+            ("(((2k)((sp)f))e)Y̌", body_scalar(((two * k) * A) * em, T)),
+            ("((((2k)(sp))f)e)Y̌", body_scalar((((two * k) * (sg * p)) * ep) * em, T)),
+            ("(((2k)(sp))(fe))Y̌", body_scalar(((two * k) * (sg * p)) * (ep * em), T)),
+            ("(((sp)(2k))(fe))Y̌", body_scalar(((sg * p) * (two * k)) * (ep * em), T)),
+            ("((s(p(2k)))(fe))Y̌", body_scalar((sg * (p * (two * k))) * (ep * em), T)),
+            ("((s(p(2k)))(ef))Y̌", body_scalar((sg * (p * (two * k))) * (em * ep), T)),
+            ("(((-1)^{(n+1)/2}(2k)^{n+1})(exp(-iθ̃)exp(iθ̃)))Y̌", body_scalar((sg * pw(two_k, n + 1)) * (em * ep), T)),
+            ("(((-1)^{(n+1)/2}(2k)^{n+1})1_C)Y̌", body_scalar((sg * pw(two_k, n + 1)) * one, T)),
             ("((-1)^{(n+1)/2}(2k)^{n+1})Y̌", body_scalar(sgn(e) * pw(two_k, n + 1), T)),
         ]
     if name == 'h2.z' and n % 2 == 0:
