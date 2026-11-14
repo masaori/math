@@ -91,8 +91,37 @@ theorem oneSidedClosureJunctionPairs_eq_fixed
   have hu0 : repeatDirectionSequence u m 0 = u 0 := by simp [repeatDirectionSequence]
   have hw0 : repeatDirectionSequence w (L * wh.natAbs + L * wv.natAbs) 0 = w 0 := by
     simp [repeatDirectionSequence]
-  have hulast := repeatDirectionSequence_last u m c hm hc
-  have hwlast := repeatDirectionSequence_last w (L * wh.natAbs + L * wv.natAbs) c hn hc
+  have hmindex : c * m - 1 = (c - 1) * m + (m - 1) := by
+    have hc' : c - 1 + 1 = c := by omega
+    have hlen : c * m = (c - 1) * m + m := by
+      calc
+        c * m = (c - 1 + 1) * m := congrArg (· * m) hc'.symm
+        _ = (c - 1) * m + m := by rw [Nat.add_mul, one_mul]
+    omega
+  have hnindex : c * (L * wh.natAbs + L * wv.natAbs) - 1 =
+      (c - 1) * (L * wh.natAbs + L * wv.natAbs) +
+        (L * wh.natAbs + L * wv.natAbs - 1) := by
+    have hc' : c - 1 + 1 = c := by omega
+    have hlen : c * (L * wh.natAbs + L * wv.natAbs) =
+        (c - 1) * (L * wh.natAbs + L * wv.natAbs) +
+          (L * wh.natAbs + L * wv.natAbs) := by
+      calc
+        c * (L * wh.natAbs + L * wv.natAbs) =
+            (c - 1 + 1) * (L * wh.natAbs + L * wv.natAbs) :=
+          congrArg (· * (L * wh.natAbs + L * wv.natAbs)) hc'.symm
+        _ = (c - 1) * (L * wh.natAbs + L * wv.natAbs) +
+            (L * wh.natAbs + L * wv.natAbs) := by rw [Nat.add_mul, one_mul]
+    omega
+  have hulast : repeatDirectionSequence u m (c * m - 1) = u (m - 1) := by
+    rw [hmindex]
+    simp [repeatDirectionSequence, Nat.add_mod, Nat.mod_eq_of_lt (show m - 1 < m by omega)]
+  have hwlast : repeatDirectionSequence w (L * wh.natAbs + L * wv.natAbs)
+      (c * (L * wh.natAbs + L * wv.natAbs) - 1) =
+      w (L * wh.natAbs + L * wv.natAbs - 1) := by
+    rw [hnindex]
+    simp [repeatDirectionSequence, Nat.add_mod,
+      Nat.mod_eq_of_lt (show L * wh.natAbs + L * wv.natAbs - 1 <
+        L * wh.natAbs + L * wv.natAbs by omega)]
   unfold fourJunctionPairs
   dsimp only
   rw [hulast, hw0, hwlast, hu0]

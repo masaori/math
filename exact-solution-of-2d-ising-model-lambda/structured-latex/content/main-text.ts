@@ -74491,7 +74491,7 @@ u_j &p_j(W)&\operatorname{dir}(p_j(W))\\ \hline
                         "、方向の列は ", ref("def_oriented_edge_direction"), " の各場合である。従って",
                       ]),
                       displayMath(String.raw`\operatorname{dir}(p_j(W))=d(u_j)
-\qquad\bigl(\because\ \text{直前の方向の四場合と }d\text{ の定義}\bigr).`),
+\qquad\bigl(\because\ \text{直前の方向の四場合と }d\text{ の定義}\bigr)`),
                       paragraph([
                         "特に辺長 ", math(String.raw`L=1,2`),
                         " でも、端点の差から方向を推測せず、辺の種類と向きから方向を読む。",
