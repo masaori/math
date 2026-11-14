@@ -587,6 +587,7 @@ export const ALL_LABELS = [
   "real_symmetric_matrix_moves_between_factors_of_sum_of_products",
   "real_vector_inclusion_intertwines_matrix_vector_product",
   "real_vector_inclusion_is_injective",
+  "real_zero_times_is_zero",
   "recover_Z_Y_from_check_Z_Y",
   "relation_of_gamma_2_theta_tilde",
   "remark_real_analysis_escape_chapter_E",

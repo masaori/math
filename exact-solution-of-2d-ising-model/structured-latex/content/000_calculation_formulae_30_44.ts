@@ -2077,7 +2077,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \left(0\cdot\cos\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}),\ 0\cdot\sin\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)
+&&(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to \cos\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}),\ x \to \sin\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})))
 \end{aligned}`),
       paragraph([
         "である。",
@@ -2093,7 +2093,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \left(0\cdot\cos\left(\tfrac{\theta_1}{2}-n_1\pi\right),\ 0\cdot\sin\left(\tfrac{\theta_1}{2}-n_1\pi\right)\right)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)
+&&(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to \cos\left(\tfrac{\theta_1}{2}-n_1\pi\right),\ x \to \sin\left(\tfrac{\theta_1}{2}-n_1\pi\right)))
 \end{aligned}`),
       paragraph([
         "となる。したがって",
@@ -2327,6 +2327,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "主張と仮定は変えていない。",
         "引いた定義・主張の参照は、それを適用した各式変形行の行末へ置いた。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: r_1 = 0 の場合の (0,0)·√z_2 = (0,0) を名前だけの「ℂ の零元を因子にもつ積は零元」で済ませていた行を、inclusion_rr_to_cc の 0_ℂ = (0,0)（右辺から左辺へ）・complex_zero_times_is_zero（z → √z_2）・inclusion_rr_to_cc の 3 行に割った。式の両端は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: r_1 = 0 または r_2 = 0 の場合の左辺の鎖と r_1 = 0 の場合の √z_1 の鎖の最後の行の根拠「0 を因子にもつ積は 0」（ℝ の 0·x = 0 を 2 成分へ）が名前だけだったので、足した主張 real_zero_times_is_zero を 2 箇所へ（x → cos(…)、x → sin(…)）当てる参照に替えた。式は変えていない。",
       ],
     },
   },

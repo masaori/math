@@ -1570,6 +1570,58 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_zero_times_is_zero",
+    kind: "claim",
+    title: { text: "実数に 0 を左から掛けると 0 になる" },
+    labels: ["real_zero_times_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " とする。和・積・",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`0\cdot x = 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-z`),
+        "（",
+        math(String.raw`z \in \mathbb{R}`),
+        "）は ",
+        ref("def_real_difference"),
+        " の加法の逆元である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0\cdot x
+&= 0\cdot x + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0\cdot x + \bigl(0\cdot x + (-(0\cdot x))\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0\cdot x)\ \text{を右辺から左辺へ}\bigr)\\
+&= (0\cdot x + 0\cdot x) + (-(0\cdot x))
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (0 + 0)\cdot x + (-(0\cdot x))
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a, b \to 0,\ c \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0\cdot x + (-(0\cdot x))
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + 0 = 0)\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0\cdot x)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0 を掛けると 0 になることは体の公理に含まれないのに、condition_of_commutativity_of_sqrt_and_product の r_1 = 0・r_2 = 0 の鎖と complex_zero_times_is_zero の証明が「ℝ で 0·x = 0」「0 を因子にもつ積は 0」を名前だけで根拠にしていたので、体の公理から示す主張として足した。Lean の具体版は Ising2D.real_zero_times_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroTimesIsZero.lean）、必要十分版は Ising2D.NecSuf.zero_mul_of_rightDistrib（NecSuf/ZeroMulOfRightDistrib.lean）。数値検証: sagemath/check/real_zero_times_is_zero/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
@@ -1603,7 +1655,7 @@ b
 &= (0\cdot a - 0\cdot b,\ 0\cdot b + 0\cdot a)
 &&\bigl(\because\ \text{複素数の積の定義 }\blkref{definition_of_cc}\bigr)\\
 &= (0 - 0,\ 0 + 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 4 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ \text{を 4 箇所へ}\ (x \to a,\ x \to b,\ x \to b,\ x \to a)\bigr)\\
 &= (0,\ 0 + 0)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - 0 = 0\bigr)\\
 &= (0,\ 0)
@@ -1618,6 +1670,7 @@ b
         "2026-11-01: 原文（Typst）に対応ブロックは無い。0 を掛けると 0 になることは体の公理に含まれず、本文のどのブロックも述べていなかった。" +
           "単位行列との積（identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult）の証明が使うので、定義から計算する形で足した。",
         "2026-11-01: 右から 0 を掛ける形は complex_times_zero_is_zero へ移した。この主張を引くのは identity_matrix_is_left_unit_of_mat_mult である。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で 0·x = 0（ℝ は体）を 4 箇所へ適用」は名前だけだった（0 を掛けると 0 になることは体の公理に含まれない）ので、足した主張 real_zero_times_is_zero（x → a, b, b, a）の参照に替えた。式は変えていない。",
       ],
     },
   },
