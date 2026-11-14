@@ -92,7 +92,7 @@ theorem Qproj_mulVec_of_mem_range {T : Finset (Fin M)} {w : Conf M → ℂ}
 `tr(Q̌_ε) = 1` と冪等性から `dim im Q̌_ε = 1`。 -/
 theorem finrank_range_Qproj (T : Finset (Fin M)) :
     Module.finrank ℂ (LinearMap.range (Matrix.toLin' (F.Qproj T))) = 1 := by
-  have h := trace_of_idempotent (F.Qproj T) (F.Qproj_mul_self T)
+  have h := trace_of_idempotent (F.Qproj T) ((idempotent_sq_eq_mul_self _).trans (F.Qproj_mul_self T))
   rw [F.trace_Qproj T] at h
   exact_mod_cast h.symm
 

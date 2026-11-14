@@ -3,7 +3,7 @@
 対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック。章立ての組み直しで、`iH_is_real_symmetric`・`sign_flip_conjugation` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った）
 
 - 具体版: `Ising2D/RoutesNotAdopted/IntegerMomentum/`（この章は整数運動量の経路として参照用ノートへ退避済みで、Lean は形式化の記録。`def_trace`・`trace_basic_properties`・`trace_of_idempotent` の `DefinitionTrace.lean` と、`def_hermitian_positive_definite`・`star_preserves_norm_and_limits`・`exp_hermitian_is_positive_definite`・`iH_is_real_symmetric` の `ClaimPositiveDefinite.lean` は、数学的道具立て「トレース・共役転置・正定値性」の項が多いので `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある）
-- 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`, `Ising2D/NecSuf/ConjugationOfExpSeries.lean`（`constant_c_value_even_sector` Step 2 の共役と指数関数の交換。導出は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimSignFlipConjugationFromNecSuf.lean`）
+- 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`, `Ising2D/NecSuf/TraceOfIdempotent.lean`（`trace_of_idempotent` の準備・Step 1〜3 を係数が可換環で同じ段で書く。導出は `MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimTraceOfIdempotentFromNecSuf.lean` の `trace_of_idempotent_of_necSuf`）, `Ising2D/NecSuf/ConjugationOfExpSeries.lean`（`constant_c_value_even_sector` Step 2 の共役と指数関数の交換。導出は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimSignFlipConjugationFromNecSuf.lean`）
 
 `lake build` 成功・`scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
 
@@ -17,6 +17,7 @@
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
+| `NecSuf.trace_of_idempotent`（`TraceOfIdempotent.lean`。準備・Step 1〜3 の補題も同名で同じ段。具体版の導出は `ClaimTraceOfIdempotentFromNecSuf.lean` の `trace_of_idempotent_of_necSuf`） | 可換環 `K`（`1 ≠ 0`）の上で、`im Q`・`ker Q` が自由加群なら `Q^2=Q ⇒ tr(Q) = dim_K im Q`（効くのは乗法の可換性と自由性だけ。体である必要はない。`ker Q` の有限性は `ker Q = im(I − Q)` から出す） | `trace_of_idempotent` |
 | `NecSuf.num` | `n_i := c_i a_i` | `def_number_operator` |
 | `NecSuf.sq_eq_zero_of_acomm_self` | `x + x = 0 → x = 0` の下で `x x = 0` | `number_operator_idempotent` (1) |
 | `NecSuf.ann_mul_cre` | `a_i c_i = 1 - n_i` | 同 (2) |
@@ -52,10 +53,12 @@
 | `trace_linear` / `trace_cyclic` / `trace_one_eq_card` / `trace_conj`（`DefinitionTrace.lean`） | 線型性・巡回性・`tr(I)=n`・共役不変 | `trace_basic_properties` (1)(2)(3)(4) |
 | `trace_identity_eq_sum_one`（`DefinitionTrace.lean`。人手の 3 行と 1 対 1） | `tr(I_n) = Σ_{k=1}^{n} 1_ℂ` | `trace_basic_properties` (3) |
 | `trace_add_matrix` / `trace_binaryWordMatrixSum` / `trace_of_scalar_multiple`（`ClaimTraceOfSumOverBinaryWords.lean`） | `tr(A+B) = tr(A)+tr(B)`、`tr(Σ_{ε∈{0,1}^r}B_ε) = Σ_ε tr(B_ε)`、`tr(αA) = αtr(A)` | `trace_of_sum_over_binary_words`（準備の鎖と帰納法）・`trace_of_scalar_multiple` |
-| `trace_of_idempotent` | `Q^2=Q ⇒ tr(Q) = dim im Q`（本体は Step 1〜3 ともまだ mathlib の `isProj_range`・`IsProj.trace` に委ねている。準備と Step 1 の 1 対 1 版は下の 3 行） | `trace_of_idempotent` |
+| `trace_of_idempotent` | `Q^2=Q ⇒ tr(Q) = dim im Q`（Step 3 の鎖を人手の 9 行と 1 対 1 の `calc`。準備・Step 1・Step 2 は下の行） | `trace_of_idempotent` |
 | `idempotent_sq_eq_mul_self` / `idempotent_mul_self_of_sq`（人手の 4 行と 1 対 1） | `Q^2 = QQ`、`Q^2 = Q ⇒ QQ = Q` | `trace_of_idempotent` の準備 |
 | `idempotent_decomposition_apply`（7 行）/ `idempotent_decomposition` / `idempotent_sub_mem_ker`（4 行）/ `idempotent_range_inter_ker_eq_zero`（5 行） | `(Qx+(x−Qx))_k = x_k`、`Q(x−Qx) = 0`、`y = Qx, Qy = 0 ⇒ y = 0` | `trace_of_idempotent` の Step 1 の 3 本の鎖 |
 | `isCompl_range_ker_of_idempotent` | `Q^2 = Q ⇒ ℂ^n = im Q ⊕ ker Q`（上の鎖から組み立てる） | 同 Step 1 |
+| `idempotent_mulVec_of_eq_mulVec`（4 行）/ `idempotentAdaptedBasis`・`idempotentAdaptedBasis_mem_range`・`idempotentAdaptedBasis_mem_ker` / `idempotentDiag` / `idempotent_mul_columns_eq`（11 行） | `v = Qx ⇒ Qv = v`、基底 `v_1,…,v_n`、`D`、`QP = PD` | 同 Step 2 |
+| `exists_inverse_of_basis_columns` / `trace_similarity_invariant_of_columns`（5 行） | `P'P = PP' = I` なる `P'`、行と列の添字の型が違う `P` での (4) | 同 Step 3、`trace_basic_properties` (4) |
 | `trace_one_tensorPow` | `tr(I) = 2^M` | `trace_of_number_operator_product` の `k=0` |
 | `tensorPow_two_torsion_free` | `x+x=0 → x=0`（`Mat(2^M,ℂ)`。定義は本文の `EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean` にあり、ここから使う） | `number_operator_idempotent` (1) の「`2≠0`」 |
 | `FermiSetup`（`DefinitionNumberOperator.lean`） | 原文 `def_number_operator` の設定（`𝓘`, 分枝 `t`） | `def_number_operator` |

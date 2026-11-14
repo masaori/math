@@ -672,6 +672,15 @@ targets=(
   Ising2D.trace_similarity_invariant
   Ising2D.trace_of_idempotent
   Ising2D.isCompl_range_ker_of_idempotent
+  Ising2D.idempotent_mulVec_of_eq_mulVec
+  Ising2D.idempotent_mul_columns_eq
+  Ising2D.exists_inverse_of_basis_columns
+  Ising2D.trace_similarity_invariant_of_columns
+  Ising2D.trace_of_idempotent_of_necSuf
+  Ising2D.NecSuf.trace_of_idempotent
+  Ising2D.NecSuf.idempotent_mul_columns_eq
+  Ising2D.NecSuf.isCompl_range_ker_of_idempotent
+  Ising2D.NecSuf.finite_ker_of_idempotent
   Ising2D.trace_one_tensorPow
   Ising2D.trace_add_matrix
   Ising2D.trace_binaryWordMatrixSum

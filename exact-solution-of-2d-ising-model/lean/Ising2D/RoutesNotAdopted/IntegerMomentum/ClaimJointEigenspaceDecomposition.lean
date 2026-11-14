@@ -114,7 +114,7 @@ theorem trace_Qproj (T : Finset F.Idx) :
 theorem finrank_range_Qproj (T : Finset F.Idx) :
     ((Module.finrank ℂ (LinearMap.range (Matrix.toLin' (F.Qproj T))) : ℕ) : ℂ)
       = ((2 ^ (M - F.I.card) : ℕ) : ℂ) := by
-  rw [← trace_of_idempotent _ (F.Qproj_mul_self T), F.trace_Qproj T]
+  rw [← trace_of_idempotent _ ((idempotent_sq_eq_mul_self _).trans (F.Qproj_mul_self T)), F.trace_Qproj T]
 
 /-! ## 原文 (5): `ℂ^{2^M}` の直和分解 -/
 

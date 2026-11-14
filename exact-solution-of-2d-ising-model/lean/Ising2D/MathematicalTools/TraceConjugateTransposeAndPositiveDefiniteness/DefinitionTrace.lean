@@ -17,11 +17,18 @@
 `Ising2D/NecSuf/NumberOperator.lean` の `tau_num_mul_add_self` と
 `Ising2D/NecSuf/JointEigenspace.lean` の `two_pow_smul_tau_projOn` にある
 （そこでは `τ` の値域すら任意の可換群でよいことが分かる）。
+
+`trace_of_idempotent` は上の理由に当たらない（準備・Step 1〜3 の鎖は ℂ 固有の性質を使わない）ので、
+係数を可換環にし、`im Q`・`ker Q` が自由加群であることと `1 ≠ 0` だけを仮定した必要十分版 `Ising2D/NecSuf/TraceOfIdempotent.lean` を置き、
+具体版をその特殊化として `ClaimTraceOfIdempotentFromNecSuf.lean` で導く。準備・Step 1〜3 の補題は、必要十分版でも同じ名前で同じ段である。
 -/
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.LinearAlgebra.Trace
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.LinearAlgebra.Projection
+import Mathlib.LinearAlgebra.Dimension.Free
+import Mathlib.LinearAlgebra.Matrix.Basis
+import Ising2D.NecSuf.MatColumnwise
 import Mathlib.Data.Complex.Basic
 import Ising2D.Basic
 import Ising2D.NecSuf.MatrixProductIdentityAndScalar
@@ -96,24 +103,6 @@ end TraceBasic
 section TraceIdempotent
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
-
-/-- **原文 `trace_of_idempotent` の形式化**:
-`Q^2 = Q` なら `tr(Q) = dim_ℂ (im Q)`。
-
-原文の `im Q = {Qx}` は、`Q` の定める線型写像 `x ↦ Q x` の像
-（`LinearMap.range Q.toLin'`）である。原文 Step 1（直和分解 `ℂ^n = im Q ⊕ ker Q`）と
-Step 2（適合基底での対角形）は、mathlib では
-`IsIdempotentElem.isProj_range`（冪等元は像への射影）と
-`LinearMap.IsProj.trace` にまとまっている。 -/
-theorem trace_of_idempotent (Q : Matrix n n ℂ) (hQ : Q * Q = Q) :
-    Q.trace = (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q)) : ℂ) := by
-  have hidem : IsIdempotentElem (Matrix.toLin' Q) := by
-    have h : Matrix.toLin' Q * Matrix.toLin' Q = Matrix.toLin' Q := by
-      rw [Module.End.mul_eq_comp, ← Matrix.toLin'_mul, hQ]
-    exact h
-  have hproj := LinearMap.IsIdempotentElem.isProj_range _ hidem
-  have h2 := hproj.trace (R := ℂ)
-  rw [← Matrix.trace_toLin'_eq Q, h2]
 
 /-- **人手 `trace_of_idempotent` の準備**: `Q^2 = QQ`。人手の 4 行と 1 対 1 の `calc`
 （`def_exp` (1) の冪 `A^{m+1} := A^m A` は mathlib の `pow_succ`、`A^0 := I` は `pow_zero`。
@@ -191,6 +180,156 @@ theorem isCompl_range_ker_of_idempotent (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q) :
     refine Submodule.add_mem_sup (LinearMap.mem_range.mpr ⟨x, Matrix.toLin'_apply Q x⟩) ?_
     rw [LinearMap.mem_ker, Matrix.toLin'_apply]
     exact idempotent_sub_mem_ker Q hQQ x
+
+/-- **人手 `trace_of_idempotent` の Step 2 の `Qv_j = v_j`**（`v_j ∈ im Q`）: `QQ = Q` かつ `v = Qx` なら `Qv = v`。
+人手の 4 行と 1 対 1 の `calc`（`mat_mult_associative` は上の `idempotent_sub_mem_ker` と同じく `Matrix.mulVec_mulVec`）。 -/
+theorem idempotent_mulVec_of_eq_mulVec (Q : Matrix n n ℂ) (hQQ : Q * Q = Q) (x v : n → ℂ)
+    (hv : v = Q *ᵥ x) : Q *ᵥ v = v :=
+  calc Q *ᵥ v
+      = Q *ᵥ (Q *ᵥ x) := by rw [hv]                         -- `v_j = Qx_j`
+    _ = (Q * Q) *ᵥ x := Matrix.mulVec_mulVec _ _ _          -- `mat_mult_associative`
+    _ = Q *ᵥ x := by rw [hQQ]                               -- 準備の `QQ = Q`
+    _ = v := hv.symm                                        -- `v_j = Qx_j`
+
+/-- **人手 Step 2 の基底 `v_1, …, v_n`**: `im Q` の基底 `v_1, …, v_r`（`r := dim_ℂ im Q`）と `ker Q` の基底
+`v_{r+1}, …, v_n` を並べたもの。人手の「Step 1 の直和分解より `v_1, …, v_n` は `ℂ^n` の基底」は、Step 1 の
+`isCompl_range_ker_of_idempotent` を `Submodule.prodEquivOfIsCompl` に渡して二つの基底をつなぐ段である。
+人手の添字 `1, …, n` は Lean では `Fin (r + s)`（`s := dim_ℂ ker Q`）で、行列 `Q` の添字の型 `n` とは別の型になる。人手は `r + s = n` を暗に使って `P` を正方行列にするが、Lean は列の添字を `Fin (r + s)` に取るのでこの等式を使わずに済み、`P` は長方行列になる。
+各部分空間の基底は `Module.finBasis`（人手の「基底を取る」）。 -/
+noncomputable def idempotentAdaptedBasis (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q) :
+    Module.Basis (Fin (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))
+      + Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q)))) ℂ (n → ℂ) :=
+  (((Module.finBasis ℂ (LinearMap.range (Matrix.toLin' Q))).prod
+      (Module.finBasis ℂ (LinearMap.ker (Matrix.toLin' Q)))).map
+    (Submodule.prodEquivOfIsCompl _ _ (isCompl_range_ker_of_idempotent Q hQ))).reindex finSumFinEquiv
+
+/-- 人手 Step 2: `j ≤ r` の `v_j` は `im Q` の元（Lean の添字は `0` 始まりなので `j < r`）。 -/
+theorem idempotentAdaptedBasis_mem_range (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q)
+    (j : Fin (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))
+      + Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q))))
+    (hj : (j : ℕ) < Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))) :
+    idempotentAdaptedBasis Q hQ j ∈ LinearMap.range (Matrix.toLin' Q) := by
+  obtain ⟨i, rfl⟩ : ∃ i, Fin.castAdd _ i = j := ⟨⟨j, hj⟩, rfl⟩
+  simp [idempotentAdaptedBasis]
+
+/-- 人手 Step 2: `j > r` の `v_j` は `ker Q` の元（Lean の添字では `r ≤ j`）。 -/
+theorem idempotentAdaptedBasis_mem_ker (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q)
+    (j : Fin (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))
+      + Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q))))
+    (hj : ¬ (j : ℕ) < Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))) :
+    idempotentAdaptedBasis Q hQ j ∈ LinearMap.ker (Matrix.toLin' Q) := by
+  obtain ⟨i, rfl⟩ : ∃ i, Fin.natAdd _ i = j :=
+    ⟨⟨j - Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q)), by omega⟩, Fin.ext (by simp; omega)⟩
+  simp [idempotentAdaptedBasis]
+
+/-- 人手 Step 2 の `D`: `D_{kl} := 1_ℂ`（`k = l ≤ r`）、`0_ℂ`（それ以外）。添字は `Fin (r + s)` で、`k ≤ r` は `0` 始まりの `k < r`。 -/
+def idempotentDiag (r s : ℕ) : Matrix (Fin (r + s)) (Fin (r + s)) ℂ :=
+  fun k l => if k = l ∧ (k : ℕ) < r then 1 else 0
+
+/-- **人手 `trace_of_idempotent` の Step 2**: `P := [v_1 ⋯ v_n]`（`mat_columnwise` の列に並べた行列）について `QP = PD`。
+成分 `(i, l)` ごとに人手の 11 行と 1 対 1 の `calc`。`mat_columnwise` は具体版 `matrix_mul_columns` の添字が `Fin m` に限るので、
+必要十分版 `NecSuf.mul_cols_eq_cols_mulVec` の特殊化を引く。`k = l` の項を分ける段は `Finset.add_sum_erase`
+（人手の「加法の結合律・交換律」）、`complex_times_zero_is_zero` は `mul_zero`、積の単位元は `mul_one`。 -/
+theorem idempotent_mul_columns_eq (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q) :
+    Q * Matrix.of (fun j l => idempotentAdaptedBasis Q hQ l j)
+      = Matrix.of (fun j l => idempotentAdaptedBasis Q hQ l j)
+        * idempotentDiag (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q)))
+            (Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q))) := by
+  set r := Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))
+  set s := Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q))
+  set v := idempotentAdaptedBasis Q hQ
+  set P : Matrix n (Fin (r + s)) ℂ := Matrix.of (fun j l => v l j)
+  set D := idempotentDiag r s
+  have hQQ := idempotent_mul_self_of_sq Q hQ
+  -- 人手 Step 2 の `j ≤ r` の `Qv_j = v_j` と `j > r` の `Qv_j = 0`
+  have hQv : ∀ l : Fin (r + s), (l : ℕ) < r → Q *ᵥ v l = v l := fun l hl => by
+    obtain ⟨x, hx⟩ := LinearMap.mem_range.mp (idempotentAdaptedBasis_mem_range Q hQ l hl)
+    rw [Matrix.toLin'_apply] at hx
+    exact idempotent_mulVec_of_eq_mulVec Q hQQ x (v l) hx.symm
+  have hQv0 : ∀ l : Fin (r + s), ¬ (l : ℕ) < r → Q *ᵥ v l = 0 := fun l hl => by
+    have h := idempotentAdaptedBasis_mem_ker Q hQ l hl
+    rwa [LinearMap.mem_ker, Matrix.toLin'_apply] at h
+  ext i l
+  symm
+  calc (P * D) i l
+      = ∑ k, P i k * D k l := Matrix.mul_apply                                 -- `mat_mult`
+    _ = P i l * D l l + ∑ k ∈ Finset.univ.erase l, P i k * D k l :=
+        (Finset.add_sum_erase _ _ (Finset.mem_univ l)).symm                    -- `k = l` の項を分ける
+    _ = P i l * D l l + ∑ k ∈ Finset.univ.erase l, P i k * 0 := by
+        congr 1
+        refine Finset.sum_congr rfl fun k hk => ?_
+        rw [show D k l = 0 from if_neg fun h => (Finset.ne_of_mem_erase hk) h.1]  -- `k ≠ l` では `D_{kl} = 0_ℂ`
+    _ = P i l * D l l + ∑ _k ∈ Finset.univ.erase l, (0 : ℂ) := by
+        simp only [mul_zero]                                                     -- `complex_times_zero_is_zero`
+    _ = P i l * D l l := by rw [Finset.sum_const_zero, add_zero]               -- `0_ℂ` は加法の単位元
+    _ = v l i * D l l := rfl                                                     -- `P` の定め方
+    _ = (if (l : ℕ) < r then v l i * 1 else v l i * 0) := by                     -- `D` の定め方
+        by_cases hl : (l : ℕ) < r
+        · rw [if_pos hl]; exact congrArg _ (if_pos ⟨rfl, hl⟩)
+        · rw [if_neg hl]; exact congrArg _ (if_neg fun h => hl h.2)
+    _ = (if (l : ℕ) < r then v l i else 0) := by                                 -- 積の単位元と `complex_times_zero_is_zero`
+        rw [mul_one, mul_zero]
+    _ = (Q *ᵥ v l) i := by                                                       -- `l ≤ r` では `Qv_l = v_l`、`l > r` では `Qv_l = 0`
+        by_cases hl : (l : ℕ) < r
+        · rw [if_pos hl, hQv l hl]
+        · rw [if_neg hl, hQv0 l hl, Pi.zero_apply]                              -- `def_zero_matrix`
+    _ = Matrix.of (fun i l => (Q *ᵥ v l) i) i l := rfl                           -- `mat_columnwise` の、列に並べた行列の成分の定め方
+    _ = (Q * P) i l := by rw [NecSuf.mul_cols_eq_cols_mulVec]                    -- `mat_columnwise`
+
+/-- 人手 Step 3 の「`v_1, …, v_n` は `ℂ^n` の基底なので `P'P = PP' = I` を満たす `P'` が取れる」。
+`P'` は基底 `v` による座標（`Basis.toMatrix`）で、二つの積が単位行列であることは mathlib の
+`Basis.toMatrix_mul_toMatrix_flip`（人手はこの段を証明せずに使っている）。 -/
+theorem exists_inverse_of_basis_columns {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (v : Module.Basis ι ℂ (n → ℂ)) :
+    ∃ P' : Matrix ι n ℂ, P' * Matrix.of (fun j l => v l j) = 1 ∧ Matrix.of (fun j l => v l j) * P' = 1 := by
+  have hP : Matrix.of (fun j l => v l j) = (Pi.basisFun ℂ n).toMatrix v := by
+    ext j l; simp [Module.Basis.toMatrix_apply]
+  refine ⟨v.toMatrix (Pi.basisFun ℂ n), ?_, ?_⟩
+  · rw [hP, Module.Basis.toMatrix_mul_toMatrix_flip]
+  · rw [hP, Module.Basis.toMatrix_mul_toMatrix_flip]
+
+/-- **人手 `trace_basic_properties` (4)** を、行と列の添字の型が違う行列 `P : ι × n`、`P' : n × ι` へ当てる形:
+`P'P = I` なら `tr(P(AP')) = tr(A)`。人手 Step 3 の `P`（行が `ℂ^n` の添字 `n`、列が基底の添字 `Fin (r + s)` の長方行列。`idempotentAdaptedBasis` の注を見よ）と `P'` へ、`P → P'`・`P' → P` と入れ替えて当てる。
+手順は `trace_similarity_invariant` の 5 行と同じで、(2) の巡回性だけは `trace_cyclic` が正方行列に限るので
+`Matrix.trace_mul_comm`（`trace_cyclic` の証明そのもの）を引く。 -/
+theorem trace_similarity_invariant_of_columns {ι : Type*} [Fintype ι]
+    (P : Matrix ι n ℂ) (P' : Matrix n ι ℂ) (A : Matrix n n ℂ) (h : P' * P = 1) :
+    (P * (A * P')).trace = A.trace :=
+  calc (P * (A * P')).trace
+      = ((P * A) * P').trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
+    _ = (P' * (P * A)).trace := Matrix.trace_mul_comm _ _  -- (2) を `A → PA`、`B → P'` に適用
+    _ = ((P' * P) * A).trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
+    _ = ((1 : Matrix n n ℂ) * A).trace := by rw [h]        -- `P'P = I`
+    _ = A.trace := by rw [NecSuf.one_mul_matrix]           -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- **人手 `trace_of_idempotent`**: `Q^2 = Q` なら `tr(Q) = dim_ℂ (im Q)`（直和分解は `isCompl_range_ker_of_idempotent`）。
+人手の `im Q = {Qx}` は `x ↦ Qx` の線型写像 `Matrix.toLin' Q` の像で、右辺の自然数は `ℂ` への像（`1_ℂ` をその個数だけ足した元）。
+Step 3 の鎖を人手の 9 行と 1 対 1 の `calc` で書く（Step 2 は `idempotent_mul_columns_eq`、`P'` は `exists_inverse_of_basis_columns`）。
+`Σ_{k=1}^{n} D_{kk}` を `Σ_{k=1}^{r}` と `Σ_{k=r+1}^{n}` に分ける段は `Fin.sum_univ_add`（人手の「`D` の定め方」の行に含まれる）。 -/
+theorem trace_of_idempotent (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q) :
+    Q.trace = (Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q)) : ℂ) := by
+  set r := Module.finrank ℂ (LinearMap.range (Matrix.toLin' Q))
+  set s := Module.finrank ℂ (LinearMap.ker (Matrix.toLin' Q))
+  set P : Matrix n (Fin (r + s)) ℂ := Matrix.of (fun j l => idempotentAdaptedBasis Q hQ l j)
+  set D := idempotentDiag r s
+  have hQP : Q * P = P * D := idempotent_mul_columns_eq Q hQ
+  obtain ⟨P', hP'P, hPP'⟩ := exists_inverse_of_basis_columns (idempotentAdaptedBasis Q hQ)
+  calc Q.trace
+      = (P' * (Q * P)).trace := (trace_similarity_invariant_of_columns P' P Q hPP').symm
+                                                            -- `trace_basic_properties` (4) を `P → P'`、`P' → P`、`A → Q` に。`PP' = I`
+    _ = (P' * (P * D)).trace := by rw [hQP]                 -- Step 2 の `QP = PD`
+    _ = ((P' * P) * D).trace := by rw [Matrix.mul_assoc]    -- `mat_mult_associative`
+    _ = ((1 : Matrix (Fin (r + s)) (Fin (r + s)) ℂ) * D).trace := by rw [hP'P]   -- `P'P = I`
+    _ = D.trace := by rw [NecSuf.one_mul_matrix]            -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = ∑ k, D k k := rfl                                   -- `def_trace`
+    _ = ∑ _k : Fin r, (1 : ℂ) + ∑ _k : Fin s, (0 : ℂ) := by -- `D` の定め方
+        rw [Fin.sum_univ_add]
+        congr 1
+        · exact Finset.sum_congr rfl fun k _ => if_pos ⟨rfl, k.isLt⟩
+        · exact Finset.sum_congr rfl fun k _ => if_neg fun h => by simp at h
+    _ = ∑ _k : Fin r, (1 : ℂ) := by rw [Finset.sum_const_zero, add_zero]   -- `0_ℂ` は加法の単位元
+    _ = (r : ℂ) := by                                       -- `r` の定め方と、主張の右辺の読み方（`1_ℂ` を `r` 個足した元）
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_one]
 
 end TraceIdempotent
 
