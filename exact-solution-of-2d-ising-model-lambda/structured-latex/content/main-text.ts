@@ -88310,9 +88310,9 @@ b
                         displayMath(String.raw`\begin{aligned}
 \mu+\varepsilon
 &\le_{\Lambda_{\mathbb{Q}}}\Psi_L(q)
-&&(\because\ \mu\text{ の所属の証人 }\varepsilon,N\text{ の性質。}N\le L)\\
+&&(\because\ \mu\text{ の所属の証人 }\varepsilon,N\text{ の性質と }N\le L)\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)
-&&(\because\ \blkref{claim_periodic_open_boundary_comparison_density_le_one}\text{ の右の不等式を }L:=L\text{、}q:=q\text{ で読む。}L\ge1\text{、}0<q\le1)
+&&(\because\ \blkref{claim_periodic_open_boundary_comparison_density_le_one}\text{ の右の不等式を }L:=L\text{、}q:=q\text{ で読み、}L\ge1\text{、}0<q\le1)
 \end{aligned}`),
                         paragraph([
                           "順序の推移律は ",
