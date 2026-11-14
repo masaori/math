@@ -3666,8 +3666,10 @@ L_{12}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (1,2)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y(-i)\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \bigl(c_x 1_{\mathbb{C}} + c_y(-i)\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to c_x 1_{\mathbb{C}})\bigr)\\
 &= c_x 1_{\mathbb{C}} + c_y(-i)
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
 &= c_x + c_y(-i)
 &&(\because\ \text{積の単位元})\\
 &= c_x + (-i)c_y
@@ -3693,8 +3695,10 @@ L_{21}
 &&(\because\ \blkref{def_pauli_matrices}\ \text{の}\ \sigma^x, \sigma^y, \sigma^z\ \text{の}\ (2,1)\ \text{成分})\\
 &= \bigl((0_{\mathbb{C}} + c_x 1_{\mathbb{C}}) + c_y i\bigr) + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を 2 か所へ}\bigr)\\
+&= \bigl(c_x 1_{\mathbb{C}} + c_y i\bigr) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to c_x 1_{\mathbb{C}})\bigr)\\
 &= c_x 1_{\mathbb{C}} + c_y i
-&&(\because\ \text{加法の単位元を 2 か所へ})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)\\
 &= c_x + c_y i
 &&(\because\ \text{積の単位元})\\
 &= c_x + ic_y
@@ -3779,7 +3783,7 @@ c_0
 &= (0_{\mathbb{C}} + 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{(s)})\\
 &= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{加法の単位元})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to 0_{\mathbb{C}})\bigr)\\
 &= 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
 \end{aligned}`),
@@ -3813,7 +3817,7 @@ c_x
 &= (0_{\mathbb{C}} + 0_{\mathbb{C}})\,2_{\mathbb{C}}^{-1}
 &&(\because\ \text{(q)})\\
 &= 0_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
-&&(\because\ \text{加法の単位元})\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ (z \to 0_{\mathbb{C}})\bigr)\\
 &= 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)
 \end{aligned}`),
@@ -4443,7 +4447,7 @@ p
 &= \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
 &&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to M_{\mathrm{col}},\ z_j \to \beta_j\delta_{q_Y(m_0)\,q_Y(j)},\ n \to m_0)\ \text{を右辺から左辺へ。(u)}\bigr)\\
 &= 0_{\mathbb{C}} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
-&&(\because\ \text{加法の単位元を右辺から左辺へ})\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ \bigl(z \to \textstyle\sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
 &= \alpha_1\delta_{q_Y(m_0)\,q_Z(1)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
 &&(\because\ \text{(v)}\ (m \to 1)\ \text{を右辺から左辺へ})\\
 &= \sum_{m=1}^{M_{\mathrm{col}}}\alpha_m\delta_{q_Y(m_0)\,q_Z(m)} + \sum_{m=1}^{M_{\mathrm{col}}}\beta_m\delta_{q_Y(m_0)\,q_Y(m)}
@@ -4490,6 +4494,7 @@ p
         "2026-10-31: 章立ての組み直しで、M→∞ の極限と閉形式の章へ移した（c_plus_equals_Lambda_half_integer の証明が引く check_number_operator_is_hermitian の証明がこの主張を使う）。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 1 の A の展開と 4 成分の鎖（分母の 2 を「同分母の和・差」「約分」で処理し、商の読みが書かれていなかった）を、同じ展開を κ_0・κ_x・κ_y・κ_z と def_complex_quotient の商で一ステップずつ開いた Z_Y_generate_algebra の証明の Step 3 の前半の参照に替えた。B が基底であるという Step 1 の結論と、e_1〜e_4 の番号付けは不変。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z を引く段落、Step 1 の Pauli 行列の成分の段落と L_{11}・L_{12}・L_{21}・L_{22} の鎖の Pauli 行列の成分の行 4 行（計 6 か所）の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の L_{12}・L_{21} の鎖で、左から足す 0_C と右から足す 0_C を「加法の単位元を 2 か所へ」の 1 行でまとめて消していた行を、左から足す 0_C（complex_zero_plus_is_original（z → c_x 1_C））と右から足す 0_C（complex_numbers_form_a_field の加法の単位元）の 2 行に分けた。Step 6 の β_{m_0} の鎖で 0_C を左から足す行（右辺から左辺へ）の根拠を「加法の単位元」から complex_zero_plus_is_original に替えた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。L_{11}・L_{22} の入れ子の ((x + 0_C) + 0_C) と α_{m_0} の鎖の右から足す 0_C はどちらも右から足す形なので替えていない。Step 1 の c_0・c_x の鎖の (0_C + 0_C)2_C^{-1} = 0_C 2_C^{-1} の根拠に complex_numbers_form_a_field の名前と z → 0_C を添えた。",
       ],
     },
   },

@@ -2,7 +2,7 @@
 # Step 1 の「𝓑 = {I, σ^x, σ^y, σ^z} は線型独立」を成分の比較で示す鎖を一行ずつ確かめる。
 # (1) L := c_0 I + c_x σ^x + c_y σ^y + c_z σ^z（和は左から結ぶ）の L_11, L_12, L_21, L_22 の鎖
 #     （L の定義・def_matrix_sum・def_matrix_scalar_multiple・def_identity_matrix・def_kronecker_delta・
-#      def_pauli_matrices の成分・complex_times_zero_is_zero・加法の単位元・積の単位元・積の可換律・
+#      def_pauli_matrices の成分・complex_times_zero_is_zero・complex_zero_plus_is_original・加法の単位元・積の単位元・積の可換律・
 #      negative_i_times_complex_is_negation_of_i_times・multiply_by_minus_one・def_complex_difference）。
 #     c_0, c_x, c_y, c_z を不定元にした QQ(i) 上の多項式環の行列で、和・スカラー倍・成分を別々に組む。
 # (2) L = O から (p) c_0 + c_z = 0、(q) c_x − ic_y = 0、(r) c_x + ic_y = 0、(s) c_0 − c_z = 0 の各 3 行の鎖。
@@ -74,7 +74,8 @@ entry_chain(0, 1, "L_12", [
     ((c0 * zero + cx * sx[0, 1]) + cy * sy[0, 1]) + cz * sz[0, 1],
     ((c0 * zero + cx * one) + cy * neg(i)) + cz * zero,
     ((zero + cx * one) + cy * neg(i)) + zero,
-    cx * one + cy * neg(i),
+    (cx * one + cy * neg(i)) + zero,             # complex_zero_plus_is_original (z -> c_x 1_C)
+    cx * one + cy * neg(i),                      # complex_numbers_form_a_field の加法の単位元
     cx + cy * neg(i),
     cx + neg(i) * cy,
     cx + neg(i * cy),
@@ -84,7 +85,8 @@ entry_chain(1, 0, "L_21", [
     ((c0 * zero + cx * sx[1, 0]) + cy * sy[1, 0]) + cz * sz[1, 0],
     ((c0 * zero + cx * one) + cy * i) + cz * zero,
     ((zero + cx * one) + cy * i) + zero,
-    cx * one + cy * i,
+    (cx * one + cy * i) + zero,             # complex_zero_plus_is_original (z -> c_x 1_C)
+    cx * one + cy * i,                      # complex_numbers_form_a_field の加法の単位元
     cx + cy * i,
     cx + i * cy,
 ])

@@ -19,6 +19,7 @@ PASS L_12 第 8 行 = 第 9 行
 PASS L_12 第 9 行 = 第 10 行
 PASS L_12 第 10 行 = 第 11 行
 PASS L_12 第 11 行 = 第 12 行
+PASS L_12 第 12 行 = 第 13 行
 PASS L_21 第 1 行 = 第 2 行
 PASS L_21 第 2 行 = 第 3 行
 PASS L_21 第 3 行 = 第 4 行
@@ -28,6 +29,7 @@ PASS L_21 第 6 行 = 第 7 行
 PASS L_21 第 7 行 = 第 8 行
 PASS L_21 第 8 行 = 第 9 行
 PASS L_21 第 9 行 = 第 10 行
+PASS L_21 第 10 行 = 第 11 行
 PASS L_22 第 1 行 = 第 2 行
 PASS L_22 第 2 行 = 第 3 行
 PASS L_22 第 3 行 = 第 4 行
@@ -135,5 +137,5 @@ PASS 否定の対照: L_12 の符号を + にすると成り立たない（(σ^y
 PASS 否定の対照: (σ^z)_22 を 1 と読むと L_22 は c_0 + c_z にならない
 PASS 否定の対照: c_z の鎖で sum_minus_difference_is_twice_second_in_cc の代わりに sum_plus_difference_is_twice_first_in_cc を使うと成り立たない
 PASS 否定の対照: (q) の -i を i と読み違えると係数行列は退化し、零以外の解が残る
--- Z_Y_linearly_independent の Step 1 の鎖: 137/137 PASS
+-- Z_Y_linearly_independent の Step 1 の鎖: 139/139 PASS
 RESULT: PASS

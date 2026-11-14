@@ -247,7 +247,10 @@ theorem pauliComb_apply_01 (c0 cx cy cz : ℂ) :
           rw [pauliX_apply_01, pauliY_apply_01, pauliZ_apply_01]        -- `def_pauli_matrices` の `(1,2)` 成分
     _ = ((0 + cx * 1) + cy * (-Complex.I)) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
-    _ = cx * 1 + cy * (-Complex.I) := by rw [zero_add, add_zero]      -- 加法の単位元を 2 か所へ
+    _ = (cx * 1 + cy * (-Complex.I)) + 0 := by rw [zero_add]
+          -- `complex_zero_plus_is_original`（`z → c_x 1_ℂ`。具体版は無く `zero_add`）
+    _ = cx * 1 + cy * (-Complex.I) := by rw [add_zero]
+          -- `complex_numbers_form_a_field` の加法の単位元
     _ = cx + cy * (-Complex.I) := by rw [mul_one]                     -- 積の単位元
     _ = cx + (-Complex.I) * cy := by rw [mul_comm cy (-Complex.I)]    -- 積の可換律
     _ = cx + -(Complex.I * cy) := by rw [neg_I_mul_eq_neg_of_I_mul]   -- `negative_i_times_complex_is_negation_of_i_times`（`z → c_y`）
@@ -275,7 +278,10 @@ theorem pauliComb_apply_10 (c0 cx cy cz : ℂ) :
           rw [pauliX_apply_10, pauliY_apply_10, pauliZ_apply_10]        -- `def_pauli_matrices` の `(2,1)` 成分
     _ = ((0 + cx * 1) + cy * Complex.I) + 0 := by
           rw [mul_zero, mul_zero]                                       -- `complex_times_zero_is_zero` を 2 か所へ
-    _ = cx * 1 + cy * Complex.I := by rw [zero_add, add_zero]         -- 加法の単位元を 2 か所へ
+    _ = (cx * 1 + cy * Complex.I) + 0 := by rw [zero_add]
+          -- `complex_zero_plus_is_original`（`z → c_x 1_ℂ`。具体版は無く `zero_add`）
+    _ = cx * 1 + cy * Complex.I := by rw [add_zero]
+          -- `complex_numbers_form_a_field` の加法の単位元
     _ = cx + cy * Complex.I := by rw [mul_one]                        -- 積の単位元
     _ = cx + Complex.I * cy := by rw [mul_comm cy Complex.I]          -- 積の可換律
 
@@ -333,7 +339,7 @@ theorem pauliComb_coeff_zero_eq_zero {c0 cz : ℂ} (hp : c0 + cz = 0) (hs : c0 -
                                       -- `sum_plus_difference_is_twice_first_in_cc`（`a → c_0, b → c_z`）を右辺から左辺へ
     _ = (0 + (c0 - cz)) * 2⁻¹ := by rw [hp]                           -- (p)
     _ = (0 + 0) * 2⁻¹ := by rw [hs]                                   -- (s)
-    _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- 加法の単位元
+    _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- `complex_numbers_form_a_field` の加法の単位元（`z → 0_ℂ`）
     _ = 0 := zero_mul _                                               -- `complex_zero_times_is_zero`（`z → 2_ℂ^{-1}`）
 
 /-- 人手 Step 1 の `c_z = 0_ℂ` の鎖（(p)・(s) から）。 -/
@@ -362,7 +368,7 @@ theorem pauliComb_coeff_x_eq_zero {cx cy : ℂ} (hq : cx - Complex.I * cy = 0)
                                       -- `sum_plus_difference_is_twice_first_in_cc`（`a → c_x, b → ic_y`）を右辺から左辺へ
     _ = (0 + (cx - Complex.I * cy)) * 2⁻¹ := by rw [hr]               -- (r)
     _ = (0 + 0) * 2⁻¹ := by rw [hq]                                   -- (q)
-    _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- 加法の単位元
+    _ = 0 * 2⁻¹ := by rw [add_zero]                                   -- `complex_numbers_form_a_field` の加法の単位元（`z → 0_ℂ`）
     _ = 0 := zero_mul _                                               -- `complex_zero_times_is_zero`（`z → 2_ℂ^{-1}`）
 
 /-- 人手 Step 1 の `ic_y = 0_ℂ` の鎖（(r)・(q) から）。 -/
@@ -595,7 +601,8 @@ theorem zy_step6_beta_eq_zero (qZ qY : Fin M → (Fin M → Fin 4))
         (finite_sum_with_single_nonzero_term_fintype (fun m => β m * multiIndexDelta (qY m₀) (qY m)) m₀
           (fun m hm => zy_step6_prep_uv (β m) (hYY m₀ m (Ne.symm hm)))).symm
                                     -- `finite_sum_with_single_nonzero_term`（`n → m_0`）を右辺から左辺へ。(u)
-    _ = 0 + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := (zero_add _).symm                -- 加法の単位元を右辺から左辺へ
+    _ = 0 + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := (zero_add _).symm
+                                    -- `complex_zero_plus_is_original`（`z → Σ_m β_mδ_{q_Y(m_0) q_Y(m)}`）を右辺から左辺へ（具体版は無く `zero_add`）
     _ = α one * multiIndexDelta (qY m₀) (qZ one) + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := by
         rw [zy_step6_prep_uv (α one) (Ne.symm (hZY one m₀))]                             -- (v)（`m → 1`）を右辺から左辺へ
     _ = ∑ m, α m * multiIndexDelta (qY m₀) (qZ m) + ∑ m, β m * multiIndexDelta (qY m₀) (qY m) := by
