@@ -71674,13 +71674,13 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
 &=w_{\mathrm v}(\gamma)w_{\mathrm h}(\gamma)-w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)
 &&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\bigr)\\
 &=0
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph(["したがって反復横断階段の平行座標は"]),
                       displayMath(String.raw`\begin{aligned}
 \pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)
 &=\pi_{\gamma}(C^{\gamma}_r)
-&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\text{、直前の等式と }\blkref{def_winding_parallel_coordinate}\bigr).
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\text{、直前の等式と }\blkref{def_winding_parallel_coordinate}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`0\le r\le H`), " の場合と ", math(String.raw`H<r\le H+V=n_{\perp}`),

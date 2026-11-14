@@ -107,9 +107,19 @@ theorem iteratedTransverseStaircase_parallel_width_bound
   have hperiod : windingParallelCoordinate wv wh (wh, -wv) = 0 := by
     simp [windingParallelCoordinate]
     ring
-  exact iteratedStaircase_coordinate_between_necSuf
-    (wh.natAbs + wv.natAbs) (windingTransverseStaircase wh wv) (wh, -wv) base
-    (windingParallelCoordinate wv wh) (min 0 (wh * wv)) (max 0 (wh * wv))
-    hn hperiod (windingTransverseStaircase_parallel_between wh wv) s
+  have hr := windingTransverseStaircase_parallel_between wh wv
+    (s % (wh.natAbs + wv.natAbs)) (Nat.mod_lt s hn)
+  have hcoord :
+      windingParallelCoordinate wv wh (iteratedTransverseStaircase wh wv base s) -
+          windingParallelCoordinate wv wh base =
+        windingParallelCoordinate wv wh
+          (windingTransverseStaircase wh wv (s % (wh.natAbs + wv.natAbs))) := by
+    change windingParallelCoordinate wv wh
+        (iteratedStaircase (wh.natAbs + wv.natAbs) (windingTransverseStaircase wh wv)
+          (wh, -wv) base s) - windingParallelCoordinate wv wh base = _
+    simp only [iteratedStaircase, map_add, map_nsmul, hperiod, nsmul_zero,
+      add_zero, add_sub_cancel_left]
+  rw [hcoord]
+  exact hr
 
 end Ising2DLambda.KacWard
