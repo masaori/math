@@ -71047,7 +71047,7 @@ s(i_r)-s(i_{r'})
 &=w_{\mathrm h}(\gamma)a_r-w_{\mathrm v}(\gamma)b_r
 &&\bigl(\because\ \mathbb Z\text{ の分配法則と加法の可換則}\bigr)\\
 &=\kappa_{\gamma}\!\left(P_r(\gamma)\right)
-&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\bigr).
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\bigr)
 \end{aligned}`),
                       paragraph([
                         "よって左辺の各値は右辺の有限集合に属する。逆に任意の ",

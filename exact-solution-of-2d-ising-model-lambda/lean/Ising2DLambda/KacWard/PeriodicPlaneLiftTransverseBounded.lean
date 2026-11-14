@@ -8,7 +8,6 @@
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct
 import Ising2DLambda.KacWard.DirectedWindingNumbers
-import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftTransverseBounded
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -48,10 +47,20 @@ theorem periodicPlaneLift_transverseCoordinate_eq_base
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wv wh k : ℤ) :
     windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) =
       windingTransverseCoordinate wh wv (base (k % (m : ℤ))) := by
-  exact periodic_lift_coordinate_eq_base_necSuf
-    base (windingShift L wv wh) (fun t => t / (m : ℤ)) (fun t => t % (m : ℤ))
-    (windingTransverseCoordinate wh wv)
-    (windingTransverseCoordinate_windingShift L wv wh) k
+  calc
+    windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) =
+        windingTransverseCoordinate wh wv
+          (base (k % (m : ℤ)) + (k / (m : ℤ)) • windingShift L wv wh) := by
+      rfl
+    _ = windingTransverseCoordinate wh wv (base (k % (m : ℤ))) +
+          windingTransverseCoordinate wh wv ((k / (m : ℤ)) • windingShift L wv wh) := by
+      rw [map_add]
+    _ = windingTransverseCoordinate wh wv (base (k % (m : ℤ))) +
+          (k / (m : ℤ)) • windingTransverseCoordinate wh wv (windingShift L wv wh) := by
+      rw [map_zsmul]
+    _ = windingTransverseCoordinate wh wv (base (k % (m : ℤ))) := by
+      rw [windingTransverseCoordinate_windingShift]
+      simp
 
 /-- `claim_periodic_plane_lift_transverse_bounded` の具体版。
 周期延長した横断座標の値は一周期内の値だけからなり、したがって有限集合である。 -/
