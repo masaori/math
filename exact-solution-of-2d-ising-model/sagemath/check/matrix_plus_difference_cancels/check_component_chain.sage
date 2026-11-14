@@ -18,7 +18,7 @@ def chain_of(A, B, i, k, P):
         a + (body_neg_scalar(a) + b),                      # C の加法の交換律
         (a + body_neg_scalar(a)) + b,                      # C の加法の結合律
         P(0) + b,                                          # 加法の逆元
-        b,                                                 # 加法の単位元
+        b,                                                 # complex_zero_plus_is_original
     ]
 
 

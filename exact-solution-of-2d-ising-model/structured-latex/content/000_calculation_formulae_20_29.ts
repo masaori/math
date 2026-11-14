@@ -2790,7 +2790,7 @@ z^2
 &= 0_{\mathbb{C}} + z_{m+1}
 &&(\because\ \blkref{finite_sum_of_complex_zeros})\\
 &= z_{m+1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元})\\
+&&(\because\ \blkref{complex_zero_plus_is_original}\ (z \to z_{m+1}))\\
 &= z_n
 &&(\because\ n = m+1)
 \end{aligned}`),
@@ -2818,6 +2818,7 @@ z^2
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。site_sigma_z_product_diagonal_entry（σ_m^zσ_{m'}^z の対角成分）の証明が、行列と基底ベクトルの積の成分の和を一つの項に縮めるのに使うので足した。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: n = m+1 の鎖で左から足す 0_C を消す行の根拠を、complex_numbers_form_a_field の「加法の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
       ],
     },
   },

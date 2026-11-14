@@ -4247,7 +4247,7 @@ X_{ik}
       displayMath(String.raw`\begin{aligned}
 B_{ik}
 &= 0_{\mathbb{C}} + B_{ik}
-&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to B_{ik})\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-A_{ik}) + A_{ik}\bigr) + B_{ik}
 &&\bigl(\because\ -A_{ik}\ \text{は}\ A_{ik}\ \text{の加法の逆元 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= (-A_{ik}) + \bigl(A_{ik} + B_{ik}\bigr)
@@ -4269,6 +4269,7 @@ B_{ik}
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (2) が行列の等式に「ℂ の四則」を当てて ψ̌ψ̌^† = (ψ̌^†ψ̌ + ψ̌ψ̌^†) - ψ̌^†ψ̌ としていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_sub_of_add_eq（ClaimZeroMatrixProductAndSumEquations.lean）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 左から 0_C を足す行（右辺から左辺へ）の根拠を、complex_numbers_form_a_field の「加法の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
       ],
     },
   },
@@ -4318,7 +4319,7 @@ B_{ik}
 &= 0_{\mathbb{C}} + B_{ik}
 &&\bigl(\because\ -A_{ik}\ \text{は}\ A_{ik}\ \text{の加法の逆元 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= B_{ik}
-&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元 }\blkref{complex_numbers_form_a_field}\bigr)
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to B_{ik})\bigr)
 \end{aligned}`),
       paragraph(["よって全ての成分が一致し、主張を得る。"]),
     ],
@@ -4326,6 +4327,7 @@ B_{ik}
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 0 が R_μ^{(1)} + R_μ^{(0)} = ň_μ + (I − ň_μ) = I を「行列の加法（加法逆元と単位元）」とだけ書いて主張を置かずに使っていたので足した。Lean は具体版 Ising2D.matrix_add_sub_cancel（ClaimMatrixPlusDifferenceCancels.lean）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 左から足した 0_C を消す行の根拠を、complex_numbers_form_a_field の「加法の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
       ],
     },
   },

@@ -19,7 +19,8 @@
   `2_ℂ ≠ 0_ℂ` の鎖は `complexTwo_ne_zero`、逆元 `2_ℂ^{-1}` の取り方（`complex_numbers_form_a_field` の逆元の存在）は `inv_mul_cancel₀` である。
   成分の鎖の 11 行は `matrix_eq_zero_of_add_self_eq_zero_apply` の 11 段と 1 対 1 である。
 * `matrix_summand_from_sum_equation` の成分の鎖の 8 行は `matrix_eq_sub_of_add_eq_apply` の 8 段と 1 対 1 である。
-  `ℂ` の加法の単位元・逆元・結合律・交換律（`complex_numbers_form_a_field`）は `zero_add`・`neg_add_cancel`・`add_assoc`・`add_comm`、
+  `0_ℂ + z = z`（`complex_zero_plus_is_original`）は `zero_add`（人手の主張に Lean の具体版が無い）、
+  `ℂ` の加法の逆元・結合律・交換律（`complex_numbers_form_a_field`）は `neg_add_cancel`・`add_assoc`・`add_comm`、
   `def_complex_difference` は `sub_eq_add_neg`。
 * 最後の「全ての成分が一致する」は `Matrix.ext`。人手の `m, n, p ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す。
 -/
@@ -88,7 +89,7 @@ theorem matrix_eq_zero_of_add_self_eq_zero {m p : ℕ} (X : Matrix (Fin m) (Fin 
 theorem matrix_eq_sub_of_add_eq_apply {m p : ℕ} (A B C : Matrix (Fin m) (Fin p) ℂ)
     (h : A + B = C) (i : Fin m) (k : Fin p) : B i k = (C - A) i k :=
   calc B i k
-      = 0 + B i k := (zero_add _).symm                                   -- 加法の単位元
+      = 0 + B i k := (zero_add _).symm                                   -- `complex_zero_plus_is_original` を右辺から左辺へ
     _ = (-A i k + A i k) + B i k := by rw [neg_add_cancel]               -- 加法の逆元
     _ = -A i k + (A i k + B i k) := add_assoc _ _ _                      -- 加法の結合律
     _ = -A i k + (A + B) i k := by rw [matrix_sum_apply]                 -- `def_matrix_sum`

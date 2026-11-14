@@ -13,7 +13,7 @@ def chain_of(A, B, C, i, k, P):
     a, b, c = A[i, k], B[i, k], C[i, k]
     return [
         (b, False),
-        (P(0) + b, False),                                 # 加法の単位元
+        (P(0) + b, False),                                 # complex_zero_plus_is_original を右辺から左辺へ
         ((body_neg_scalar(a) + a) + b, False),             # 加法の逆元
         (body_neg_scalar(a) + (a + b), False),             # 加法の結合律
         (body_neg_scalar(a) + AB[i, k], False),            # def_matrix_sum

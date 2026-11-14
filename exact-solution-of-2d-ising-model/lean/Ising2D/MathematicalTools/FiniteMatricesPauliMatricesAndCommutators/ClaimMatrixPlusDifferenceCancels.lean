@@ -11,7 +11,8 @@
 
 * 成分の鎖の 7 行は `matrix_add_sub_cancel_apply` の `calc` の 7 段と 1 対 1 である。
   `def_matrix_sum`・`def_matrix_difference` は `matrix_sum_apply`・`matrix_sub_apply`、`def_complex_difference` は `sub_eq_add_neg`、
-  `ℂ` の加法の交換律・結合律・逆元・単位元（`complex_numbers_form_a_field`）は `add_comm`・`add_assoc`・`add_neg_cancel`・`zero_add`。
+  `ℂ` の加法の交換律・結合律・逆元（`complex_numbers_form_a_field`）は `add_comm`・`add_assoc`・`add_neg_cancel`、
+  `0_ℂ + z = z`（`complex_zero_plus_is_original`）は `zero_add`（人手の主張に Lean の具体版が無い）。
 * 最後の「全ての成分が一致する」は `Matrix.ext`。人手の `m, p ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
@@ -31,7 +32,7 @@ theorem matrix_add_sub_cancel_apply {m p : ℕ} (A B : Matrix (Fin m) (Fin p) �
     _ = A i k + (-A i k + B i k) := by rw [add_comm (B i k)]             -- 加法の交換律
     _ = (A i k + -A i k) + B i k := (add_assoc _ _ _).symm               -- 加法の結合律
     _ = 0 + B i k := by rw [add_neg_cancel]                              -- 加法の逆元
-    _ = B i k := zero_add _                                              -- 加法の単位元
+    _ = B i k := zero_add _                                              -- `complex_zero_plus_is_original`
 
 /-- **`matrix_plus_difference_cancels`**: `A + (B - A) = B`。 -/
 theorem matrix_add_sub_cancel {m p : ℕ} (A B : Matrix (Fin m) (Fin p) ℂ) : A + (B - A) = B :=

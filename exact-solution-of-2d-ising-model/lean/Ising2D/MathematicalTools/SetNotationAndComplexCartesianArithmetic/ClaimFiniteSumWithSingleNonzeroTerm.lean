@@ -12,7 +12,7 @@
 | 人手 | Lean |
 | --- | --- |
 | `m = 1` の 2 行（`def_finite_sum_of_complex_numbers` → `n = 1`） | `finite_sum_with_single_nonzero_term_succ` の `zero` の `calc` の 2 段 |
-| 帰納法の段の `n = m+1` の場合の 5 行（和の定義 → `j ≤ m` の項を `0_ℂ` へ → `finite_sum_of_complex_zeros` → 加法の単位元 → `n = m+1`） | `succ` の `n = Fin.last (m + 1)` の場合の `calc` の 5 段 |
+| 帰納法の段の `n = m+1` の場合の 5 行（和の定義 → `j ≤ m` の項を `0_ℂ` へ → `finite_sum_of_complex_zeros` → `complex_zero_plus_is_original` → `n = m+1`） | `succ` の `n = Fin.last (m + 1)` の場合の `calc` の 5 段 |
 | 帰納法の段の `n ≤ m` の場合の 4 行（和の定義 → 帰納法の仮定 → `z_{m+1} = 0_ℂ` → 加法の単位元） | `succ` の `n = Fin.castSucc n'` の場合の `calc` の 4 段 |
 
 - 人手の `m ∈ ℤ_{≥1}` は Lean の `m + 1`、`z_1, …, z_m` は `z : Fin (m + 1) → ℂ`、`n ∈ {1, …, m}` は `n : Fin (m + 1)` である
@@ -21,7 +21,8 @@
 - `def_finite_sum_of_complex_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`ClaimRealInclusionPreservesFiniteSum.lean` と同じ読み替え）。
 - `finite_sum_of_complex_zeros` は具体版が無く `Finset.sum_const_zero`（`ClaimSigmaZDiagonalAction.lean` と同じ扱い）。
-  `complex_numbers_form_a_field` の加法の単位元は `zero_add`・`add_zero`。
+  `0_ℂ + z = z`（`complex_zero_plus_is_original`）は具体版が無く `zero_add`、
+  `complex_numbers_form_a_field` の加法の単位元（`z + 0_ℂ = z`）は `add_zero`。
 - 人手の場合分け「`n = m+1` のとき」「`n ∈ {1, …, m}` のとき」は、Lean では `n = Fin.last (m + 1)` か、
   ある `n' : Fin (m + 1)` で `n = Fin.castSucc n'` か、の場合分けである（`Fin.eq_castSucc_or_eq_last`）。
   後者では人手の `n ∈ {1, …, m}` を `Fin (m + 1)` の元として読んだものが `n'` で、帰納法の仮定を `n'` へ当てる。
@@ -53,7 +54,7 @@ theorem finite_sum_with_single_nonzero_term_succ :
         _ = (∑ _j : Fin (m + 1), (0 : ℂ)) + z (Fin.last (m + 1)) := by
             rw [Finset.sum_congr rfl fun j _ => hz _ (hn ▸ (Fin.castSucc_lt_last j).ne)] -- `j ≤ m` のとき `z_j = 0_ℂ` を各項へ同時に適用
         _ = 0 + z (Fin.last (m + 1)) := by rw [Finset.sum_const_zero]              -- `finite_sum_of_complex_zeros`
-        _ = z (Fin.last (m + 1)) := zero_add _                                     -- `complex_numbers_form_a_field` の加法の単位元
+        _ = z (Fin.last (m + 1)) := zero_add _                                     -- `complex_zero_plus_is_original`（`z → z_{m+1}`）
         _ = z n := by rw [hn]                                                      -- `n = m + 1`
     · -- 人手の `n ∈ {1, …, m}` の場合: `m + 1 ≠ n` なので `z_{m+1} = 0_ℂ`
       have hlast : z (Fin.last (m + 1)) = 0 := hz _ (Fin.castSucc_lt_last n').ne'

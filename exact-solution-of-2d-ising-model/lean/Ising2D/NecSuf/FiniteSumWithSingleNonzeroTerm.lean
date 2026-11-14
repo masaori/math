@@ -17,7 +17,7 @@
 | 人手の段 | 具体版の段 | 必要十分版の段 | 効いている仮定 |
 | --- | --- | --- | --- |
 | `m = 1` の 2 行 | 和の定義 → `n = 1` | `finSumLeft_single'` の `0` の節（同じ 2 段） | 和の定義の `Σ_{j=1}^{1} z_j := z_1` |
-| `n = m+1` の 5 行 | 和の定義 → 各項を `0` へ → 零の和 → 加法の単位元 → `n = m+1` | `r + 1` の節の `Fin.last` の場合（同じ 5 段） | `0 + z = z`、零の和が `0`（`finSumLeft_zeros'`。`z + 0 = z` の特別な場合 `0 + 0 = 0`） |
+| `n = m+1` の 5 行 | 和の定義 → 各項を `0` へ → 零の和 → `0 + z = z`（`complex_zero_plus_is_original`） → `n = m+1` | `r + 1` の節の `Fin.last` の場合（同じ 5 段） | `0 + z = z`、零の和が `0`（`finSumLeft_zeros'`。`z + 0 = z` の特別な場合 `0 + 0 = 0`） |
 | `n ≤ m` の 4 行 | 和の定義 → 帰納法の仮定 → `z_{m+1} = 0` → 加法の単位元 | `r + 1` の節の `Fin.castSucc` の場合（同じ 4 段） | `z + 0 = z` |
 | 行列版の成分の鎖の 2 行と「成分が一致」 | `Matrix.sum_apply` → `finite_sum_with_single_nonzero_term_fintype` → `Matrix.ext` | `finSumLeft_matrix_single'`（`finSumLeft_matrix_apply'` → `finSumLeft_single'` → `Matrix.ext`） | 成分の加法が和の成分（行列の和の定義）、零行列の成分が `0` |
 
