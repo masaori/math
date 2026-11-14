@@ -393,7 +393,7 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
           ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
             (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum              -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
       _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]       -- 1 行目
-      _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]                                   -- 2 行目
+      _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]                                   -- 2 行目 `complex_times_zero_is_zero`（`z → (2M_col)_ℂ`。具体版は無く `mul_zero`）
       _ = 0 - (M : ℂ) := by rw [mul_one]                                        -- 3 行目
       _ = 0 + (-(M : ℂ)) := by rw [sub_eq_add_neg]                              -- 4 行目 `def_complex_difference`
       _ = -(M : ℂ) := by rw [zero_add]                                          -- 5 行目 `complex_zero_plus_is_original`（`z → -(M_col)_ℂ`。具体版は無く `zero_add`）
@@ -426,12 +426,12 @@ theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ)
       = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 :=
         antiperiodic_exp_sum_delta_difference hM k                    -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
     _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 0 := by rw [hdelta2, hdelta]  -- 1 行目
-    _ = 0 - (M : ℂ) * 0 := by rw [mul_zero]                             -- 2 行目
-    _ = (0 : ℂ) - 0 := by rw [mul_zero]                                 -- 3 行目
+    _ = 0 - (M : ℂ) * 0 := by rw [mul_zero]                             -- 2 行目 `complex_times_zero_is_zero`（`z → (2M_col)_ℂ`。具体版は無く `mul_zero`）
+    _ = (0 : ℂ) - 0 := by rw [mul_zero]                                 -- 3 行目 `complex_times_zero_is_zero`（`z → (M_col)_ℂ`）
     _ = (0 : ℂ) + (-0) := by rw [sub_eq_add_neg]                        -- 4 行目 `def_complex_difference`
     _ = -(0 : ℂ) := by rw [zero_add]                                    -- 5 行目 `complex_zero_plus_is_original`（`z → -0_ℂ`。具体版は無く `zero_add`）
     _ = (-1) * (0 : ℂ) := by rw [neg_one_mul]                           -- 6 行目 `multiply_by_minus_one`
-    _ = 0 := by rw [mul_zero]                                           -- 7 行目
+    _ = 0 := by rw [mul_zero]                                           -- 7 行目 `complex_times_zero_is_zero`（`z → -1_ℂ`）
 
 /-- **原文と同じ `Complex.exp` で書いた `M ∤ k` の場合**。 -/
 theorem antiperiodic_complex_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ}

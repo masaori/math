@@ -98,14 +98,14 @@ def main():
             for lx in range(n):
                 dl = R(1) if kx == lx else R(0)
                 chain([(cI[kx, lx], ""), (c * I_[kx, lx], "def_matrix_scalar_multiple"), (c * dl, "def_identity_matrix")], f"準備 6 の第 1 の鎖 n={n} ({kx},{lx})")
-                chain([(c * dl, ""), (c * (R(1) if kx == lx else R(0)), "def_kronecker_delta"), ((c if kx == lx else R(0)), "complex_numbers_form_a_field")], f"準備 6 の第 2 の鎖 n={n} ({kx},{lx})")
+                chain([(c * dl, ""), (c * (R(1) if kx == lx else R(0)), "def_kronecker_delta"), ((c if kx == lx else R(0)), ("complex_numbers_form_a_field の乗法の単位元" if kx == lx else "complex_times_zero_is_zero (z → c)"))], f"準備 6 の第 2 の鎖 n={n} ({kx},{lx})")
         # Step 6 の T(W) の鎖のうち exp の値に依らない行（結合律・スカラーの外出し・右単位元）:
         # exp(X̌ + cI)・exp(-X̌) を不定元の行列 E1 = A、E2 = B、exp(c) を不定元 c に置いて確かめる
         chain([(body_product(body_product(W, A), B), ""), (body_product(W, body_product(A, B)), "mat_mult_associative")], f"Step 6 n={n}", offset=4)
         chain([(body_product(W, body_scalar(c, I_)), ""), (body_scalar(c, body_product(W, I_)), "scalar_multiple_factors_out_of_right_factor"),
                (body_scalar(c, W), "identity_matrix_is_right_unit_of_mat_mult")], f"Step 6 n={n}", offset=8)
 
-    # 準備 7 の第 2〜5 行（exp の値に依らない）: exp(c) を不定元 E に置き、場合分けの式 → (E·1, E·0) → Eδ_kl → (E I)_kl を比べる
+    # 準備 7 の第 2〜6 行（exp の値に依らない）: exp(c) を不定元 E に置き、場合分けの式 → (E·1, 0) → (E·1, E·0) → Eδ_kl → (E I)_kl を比べる
     RE = PolynomialRing(QQ, ["cc", "E"]); cc, Ev = RE.gens()
     for n in [2, 3, 4]:
         IE = body_identity(RE, n); cIE = body_scalar(cc, IE)
@@ -113,7 +113,8 @@ def main():
             for lx in range(n):
                 case1 = Ev if kx == lx else RE(0)          # 第 1 行の右辺で exp((cI)_kk) を、準備 6 の (cI)_kk = c を経て exp(c) = E と書いたもの
                 chain([(case1, ""),
-                       ((Ev * RE(1)) if kx == lx else (Ev * RE(0)), "complex_numbers_form_a_field"),
+                       ((Ev * RE(1)) if kx == lx else RE(0), "complex_numbers_form_a_field の乗法の単位元を右辺から左辺へ（k = l）"),
+                       ((Ev * RE(1)) if kx == lx else (Ev * RE(0)), "complex_times_zero_is_zero (z → exp(c)) を右辺から左辺へ（k ≠ l）"),
                        (Ev * (RE(1) if kx == lx else RE(0)), "def_kronecker_delta"),
                        (body_scalar(Ev, IE)[kx, lx], "準備 6 の第 1 の鎖（c → exp(c)）")], f"準備 7 n={n} ({kx},{lx})", offset=2)
                 rep.check(cIE[kx, kx] == cc, f"準備 7 の第 2 行の根拠 (cI)_kk = c n={n}", quiet=True)

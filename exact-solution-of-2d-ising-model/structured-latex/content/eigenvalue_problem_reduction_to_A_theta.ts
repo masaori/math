@@ -2069,9 +2069,9 @@ S_{M_{\mathrm{col}},k}
 &=(2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}
 &&\bigl(\because\ \delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C}\bigr)\\
 &=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}
-&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to(2M_{\mathrm{col}})_{\mathbb C})\bigr)\\
 &=0_{\mathbb C}-0_{\mathbb C}
-&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to(M_{\mathrm{col}})_{\mathbb C})\bigr)\\
 &=0_{\mathbb C}+(-0_{\mathbb C})
 &&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
 &=-0_{\mathbb C}
@@ -2079,7 +2079,7 @@ S_{M_{\mathrm{col}},k}
 &=(-1_{\mathbb C})\cdot0_{\mathbb C}
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
 &=0_{\mathbb C}
-&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr).
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to-1_{\mathbb C})\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -2156,7 +2156,7 @@ S_{M_{\mathrm{col}},k}
 &=(2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
 &&\bigl(\because\ \delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C},\ \delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
 &=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
-&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to(2M_{\mathrm{col}})_{\mathbb C})\bigr)\\
 &=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=0_{\mathbb C}+(-(M_{\mathrm{col}})_{\mathbb C})
@@ -2267,6 +2267,7 @@ k
       status: "added",
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
       ],
     },
   },
@@ -2524,15 +2525,15 @@ k
 &=(-1_{\mathbb R})_{\mathbb C}-i\bigl((-1_{\mathbb C})\cdot0_{\mathbb C}\bigr)
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z\to0_{\mathbb C})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}-i\cdot0_{\mathbb C}
-&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to-1_{\mathbb C})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}-0_{\mathbb C}
-&&\bigl(\because\ i\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to i)\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}+(-0_{\mathbb C})
 &&\bigl(\because\ \blkref{def_complex_difference}\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}+(-1_{\mathbb C})\cdot0_{\mathbb C}
 &&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}+0_{\mathbb C}
-&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to-1_{\mathbb C})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}
 &&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
 &=-1_{\mathbb C}
@@ -2550,6 +2551,7 @@ k
           "sin_of_negated_real の右辺は ℂ の符号反転 -(sin π)_ℂ なので、続く行を -(0_R)_ℂ → -0_ℂ → (-1_ℂ)·0_ℂ → 0_ℂ の順に直した（-0_R = 0_R の行が無くなり、-0_ℂ = (-1_ℂ)·0_ℂ と (-1_ℂ)·0_ℂ = 0_ℂ の 2 行が増え、鎖は 15 等号から 16 等号になった）。主張の中身は不変。",
         "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は euler_formula_cos_sin の読みどおり -(iθ_C)）を引く前に negative_i_times_complex_is_negation_of_i_times で -(i(·)_C) へ書き換える 1 行を足した（16 等号 → 17 等号）。ほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。角度の鎖の「ℝ の積の結合律と交換律」を、積の交換律（2π = π·2）と積の結合律の 2 行に（6 等号 → 7 等号）、主鎖の「cos,sin の 2π 周期性を 2 箇所へ同時適用」を、cos の周期性と sin の周期性の 2 行に（17 等号 → 18 等号）した。主張の中身は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 鎖の (−1_C)·0_C = 0_C の 2 行と i·0_C = 0_C の 1 行の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → −1_C、z → i）に替えた。式は不変。",
       ],
     },
   },

@@ -7,5 +7,5 @@ PASS 結論の -g_μ の鎖 第 2 行 (-1_C)(γ)_C（multiply_by_minus_one）
 PASS 結論の -g_μ の鎖 第 3 行 (-1)_C(γ)_C（-1_C = ι(-1)）
 PASS 結論の -g_μ の鎖 第 4 行 ((-1)γ)_C（real_inclusion_preserves_product）
 PASS 結論の -g_μ の鎖 第 5 行 (-γ)_C（ℝ の (-1)x = -x）
--- action_of_T_check_Vprime_on_check_psi: 準備 1〜4・6〜8、Step 6 の値に依らない行、結論の -g_μ: 619/619 PASS
+-- action_of_T_check_Vprime_on_check_psi: 準備 1〜4・6〜8、Step 6 の値に依らない行、結論の -g_μ: 648/648 PASS
 RESULT: PASS

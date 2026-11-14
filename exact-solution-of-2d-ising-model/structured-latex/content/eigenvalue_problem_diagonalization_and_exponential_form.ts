@@ -8816,7 +8816,7 @@ c\,\delta_{kl}
 &= c\,0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\ (k \neq l)\bigr)\\
 &= 0_{\mathbb{C}}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\bigr)
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to c)\bigr)
 \end{aligned}`),
       paragraph([
         "である。よって ",
@@ -8846,8 +8846,10 @@ c\,\delta_{kl}
 &&\bigl(\because\ \blkref{exp_of_diagonal_matrix}\ (n \to 2^{M_{\mathrm{col}}},\ D \to cI)\bigr)\\
 &= \begin{cases} \exp(c) & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
 &&\bigl(\because\ \text{準備 6 の対角成分}\bigr)\\
+&= \begin{cases} \exp(c)\,1_{\mathbb{C}} & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元を右辺から左辺へ}\ (k = l)\bigr)\\
 &= \begin{cases} \exp(c)\,1_{\mathbb{C}} & (k = l) \\ \exp(c)\,0_{\mathbb{C}} & (k \neq l) \end{cases}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \exp(c))\ \text{を右辺から左辺へ}\ (k \neq l)\bigr)\\
 &= \exp(c)\,\delta_{kl}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= \left(\exp(c)\,I\right)_{kl}
@@ -9303,6 +9305,7 @@ T\!\left(\check\psi_\mu\right)
           "機械識別子の行末根拠は人間可読な名前へ直した。内容と参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。旧証明は「交換子の第 1 引数についての C 線型性」「反交換子の対称性」「exp(cI) = exp(c)I（級数定義から）」「部分和が収束するので極限をとる」を引くブロックなしで使い、交換子の定義も引いていなかった。交換子の展開を準備 1〜5（スカラー行列の可換性、差と積、差の打ち消し、和の差、[X̌, W] = Σ g_ν[P_ν, W]）として本文のブロックで示し、Step 1・1' を commutator_via_anticommutators（Lean の lie_creAnn_cre・lie_creAnn_ann と同じ手順）から反交換子の値へ 1 行 1 根拠で運ぶ鎖に、Step 2・2' の和を finite_sum_of_matrices_with_single_nonzero_term で一項に絞る鎖にした。旧 Step 3〜5 と 3'〜5' は同じ計算の繰り返しだったので、[X̌, W] = cW を満たす一般の W・c について Step 3〜6 で一度だけ示し（Lean の matExp_conj_eigen と同じ形）、ψ̌^† と ψ̌ に当てはめた。極限の一意性は matrix_norm_triangle_inequality (4) で、cI の成分（準備 6）、exp(cI) = exp(c)I（準備 7、exp_of_diagonal_matrix）、X̌ + cI と −X̌ の可換性と和（準備 8）は冒頭の準備に鎖で示した。主張の右辺を commutation_V_plus_check_psi と同じ (exp(±γ(θ̃_μ)))_C に書き、ℝ への脱出を書いた（中身は不変）。検算は sagemath/check/action_of_T_check_Vprime_on_check_psi/。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 準備 6 の k ≠ l の鎖の c·0_C = 0_C と、準備 7 の 0_C = exp(c)·0_C の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → c、z → exp(c) を右辺から左辺へ）に替えた。準備 7 で乗法の単位元（k = l）と右から 0 を掛ける形（k ≠ l）を 1 行で当てていた行は、場合ごとの 2 行に割った（式の両端は不変）。",
       ],
     },
   },

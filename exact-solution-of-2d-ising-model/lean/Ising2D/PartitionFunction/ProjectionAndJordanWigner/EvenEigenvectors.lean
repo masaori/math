@@ -36,7 +36,7 @@ theorem zero_mem_evenEigenvectors (M : ℕ) (hM : 1 ≤ M) :
     _ = ∑ _s : Conf M, 0 := by
       apply Finset.sum_congr rfl
       intro s _hs
-      exact mul_zero (epsilon M r s)
+      exact mul_zero (epsilon M r s)  -- `complex_times_zero_is_zero`（`z → ε_{rs}`。具体版は無く `mul_zero`）
     _ = 0 := Finset.sum_const_zero
 
 /-- **人手本文 `even_eigenspace_is_complex_subspace` の和の場合**。 -/
