@@ -80164,7 +80164,7 @@ t(D,T)
 &=\sum_{D\in\mathcal M(\vec E_L)}\sum_{T\subseteq E_D}M_{D,T}(x)
 &&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
 &=\sum_{P\in\mathcal W_L}\ \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}M_{D,T}(x)
-&&\bigl(\because\ \blkref{claim_tagged_matching_even_complement}\text{ と有限和の再添字付け}\bigr)\\
+&&\bigl(\because\ \text{零の項は和に寄与しない、}\blkref{claim_tagged_matching_even_complement}\text{ と有限和の再添字付け}\bigr)\\
 &=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
   \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}
 &&\bigl(\because\ \blkref{claim_tagged_matching_quadratic_crossing_weight}\text{ と分配則}\bigr)\\

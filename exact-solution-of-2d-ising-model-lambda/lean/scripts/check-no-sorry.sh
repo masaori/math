@@ -2514,6 +2514,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberInversions_card_even
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockAcrossFiberInversions_card_even
+  Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum
+  Ising2DLambda.NecSuf.KacWard.sum_eq_sum_over_complements_of_fiber_signs
+  Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
