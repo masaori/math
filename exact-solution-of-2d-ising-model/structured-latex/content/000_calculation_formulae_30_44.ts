@@ -2102,8 +2102,12 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 \sqrt{z_1}\sqrt{z_2}
 &= (0,0)\cdot\sqrt{z_2}
 &&(\because\ \sqrt{z_1}=(0,0)\ \text{という直前の計算})\\
+&= 0_{\mathbb{C}}\sqrt{z_2}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=(0,0)\ \text{を右辺から左辺へ})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_zero_times_is_zero}\ (z\to\sqrt{z_2}))\\
 &= (0,0)
-&&(\because\ \mathbb{C}\ \text{の零元を因子にもつ積は零元})
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=(0,0))
 \end{aligned}`),
       paragraph([
         math(String.raw`(0,0)`),
@@ -2322,6 +2326,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "行っており、同じ角の比較なら偶奇に踏み込む必要がないためである。" +
           "主張と仮定は変えていない。",
         "引いた定義・主張の参照は、それを適用した各式変形行の行末へ置いた。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: r_1 = 0 の場合の (0,0)·√z_2 = (0,0) を名前だけの「ℂ の零元を因子にもつ積は零元」で済ませていた行を、inclusion_rr_to_cc の 0_ℂ = (0,0)（右辺から左辺へ）・complex_zero_times_is_zero（z → √z_2）・inclusion_rr_to_cc の 3 行に割った。式の両端は変えていない。",
       ],
     },
   },

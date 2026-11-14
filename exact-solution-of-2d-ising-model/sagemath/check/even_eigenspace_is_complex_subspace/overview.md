@@ -13,7 +13,7 @@
 |---|---|---|
 | `check_zero_action_definition.sage` | `[ε0]_r = Σ_s ε_{rs}0` | **PASS** |
 | `check_zero_multiplication.sage` | `Σ_s ε_{rs}0 = Σ_s 0` | **PASS** |
-| `check_zero_finite_sum.sage` | `Σ_s 0 = 0` | **PASS** |
+| `check_zero_finite_sum.sage` | `Σ_s 0 = 0`（`finite_sum_of_complex_zeros`、`m → 2^{M_col}`） | **PASS** |
 | `check_add_action_definition.sage` | `[ε(f+g)]_r = Σ_s ε_{rs}(f_s+g_s)` | **PASS** |
 | `check_add_distributivity.sage` | 積を各項へ分配する等式 | **PASS** |
 | `check_add_split_finite_sum.sage` | 有限和を二つの和へ分ける等式 | **PASS** |

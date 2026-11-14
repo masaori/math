@@ -6002,7 +6002,7 @@ c_+(M_{\mathrm{col}})
 &=\sum_{s=1}^{2^{M_{\mathrm{col}}}}0
 &&\left(\because\ \blkref{complex_times_zero_is_zero}\ (z\to\varepsilon_{rs})\ \text{を各項へ}\right)\\
 &=0
-&&\left(\because\ \text{有限個の零の和}\right).
+&&\left(\because\ \blkref{finite_sum_of_complex_zeros}\ (m\to 2^{M_{\mathrm{col}}})\right).
 \end{aligned}`),
       paragraph([
         "全ての成分が一致するので ",
@@ -6098,6 +6098,7 @@ c_+(M_{\mathrm{col}})
         "二つの部分空間性を束ねていた後続ブロックから、F^{(+)} の複素部分線型空間性だけを分離した。",
         "抽象線型写像 end(ε) を経由せず、通常の行列と数ベクトルの積を成分ごとに展開した。F^{(-)} の部分空間性は後続ブロックに残す。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 零ベクトルの鎖の ε_{rs}0 = 0 の根拠を、「complex_numbers_form_a_field の零倍」（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → ε_{rs}、各項へ）に替えた。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 零ベクトルの鎖の最後の行の名前だけの根拠「有限個の零の和」を、finite_sum_of_complex_zeros（m → 2^{M_col}）のラベル参照に替えた。式は変えていない。",
       ],
     },
   },

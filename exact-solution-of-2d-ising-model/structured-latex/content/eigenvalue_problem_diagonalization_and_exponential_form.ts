@@ -4086,25 +4086,25 @@ s_1c_2
    \end{pmatrix}
    \quad (\because \blkref{def_identity_matrix}) \\
 &= \det\begin{pmatrix}
-     A(\theta)_{11} - \lambda \cdot 1 & A(\theta)_{12} - \lambda \cdot 0 \\
-     A(\theta)_{21} - \lambda \cdot 0 & A(\theta)_{22} - \lambda \cdot 1
+     A(\theta)_{11} - \lambda \cdot 1_{\mathbb{C}} & A(\theta)_{12} - \lambda \cdot 0_{\mathbb{C}} \\
+     A(\theta)_{21} - \lambda \cdot 0_{\mathbb{C}} & A(\theta)_{22} - \lambda \cdot 1_{\mathbb{C}}
    \end{pmatrix}
    \quad (\because \blkref{def_kronecker_delta}) \\
 &= \det\begin{pmatrix}
-     A(\theta)_{11} - \lambda & A(\theta)_{12} - \lambda \cdot 0 \\
-     A(\theta)_{21} - \lambda \cdot 0 & A(\theta)_{22} - \lambda
+     A(\theta)_{11} - \lambda & A(\theta)_{12} - \lambda \cdot 0_{\mathbb{C}} \\
+     A(\theta)_{21} - \lambda \cdot 0_{\mathbb{C}} & A(\theta)_{22} - \lambda
    \end{pmatrix}
-   \quad (\because x \cdot 1 = x\text{ を 2 成分へ同時適用}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元 }\lambda\cdot 1_{\mathbb{C}} = \lambda\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix}
-     A(\theta)_{11} - \lambda & A(\theta)_{12} - 0 \\
-     A(\theta)_{21} - 0 & A(\theta)_{22} - \lambda
+     A(\theta)_{11} - \lambda & A(\theta)_{12} - 0_{\mathbb{C}} \\
+     A(\theta)_{21} - 0_{\mathbb{C}} & A(\theta)_{22} - \lambda
    \end{pmatrix}
-   \quad (\because x \cdot 0 = 0\text{ を 2 成分へ同時適用}) \\
+   \quad (\because \blkref{complex_times_zero_is_zero}\ (z \to \lambda)\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix}
      A(\theta)_{11} - \lambda & A(\theta)_{12} \\
      A(\theta)_{21} & A(\theta)_{22} - \lambda
    \end{pmatrix}
-   \quad (\because y - 0 = y\text{ を 2 成分へ同時適用}) \\
+   \quad (\because y - 0_{\mathbb{C}} = y\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix} g_1-\lambda & a \\ -b & g_1-\lambda\end{pmatrix}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)
@@ -4274,6 +4274,7 @@ A(\theta)(cv)
         "2026-11-01: Step 2 の第 2 成分は b = -ā を代入して ā を括り出し、最後に (v_±)_2 = b = -ā で b へ戻す往復をしていた。" +
           "b のまま括り出す鎖にし、b = -ā を使わない形にした（Lean の必要十分版 skew2_mulVec_pos/neg の第 2 成分が仮定なしで閉じることの反映）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の準備の因数分解の鎖の最後の行 g_1^2 − g_1r + rg_1 − r^2 = g_1^2 − r^2 を、名前だけの「ℂ の乗法の可換則と加法逆元」の 1 行で当てていた（積の可換律・差の定義・和の結合律・左から足す逆元・加法の単位元を束ねていた）。complex_numbers_form_a_field の積の可換律・def_complex_difference・和の結合律・negation_plus_self_is_zero_in_cc・complex_numbers_form_a_field の加法の単位元を 1 行に 1 つずつ当てる 5 行に割った（鎖は 4 行から 8 行）。式の両端と主張は不変。同じ鎖の「分配則」「同類項の統合」の行は名前だけのまま残る（状態台帳の別の件）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の det(A(θ) − λI) の鎖で名前だけだった「x·1 = x」「x·0 = 0」（どちらも λ ∈ ℂ を 2 成分へ同時適用）の根拠を、complex_numbers_form_a_field の乗法の単位元と complex_times_zero_is_zero（z → λ）のラベル参照に替えた。def_kronecker_delta の値 1_ℂ・0_ℂ に合わせ、続く 3 行の 1・0 を 1_ℂ・0_ℂ と書いた（式の値は変えていない）。",
       ],
     },
   },

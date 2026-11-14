@@ -8,7 +8,7 @@
   （ブロック `Athetatilde_004_claim_eigenvector`）
 - 範囲: Step 1 の `det(A(θ) − λI)` の鎖の先頭から `det [[g_1 − λ, a], [−b, g_1 − λ]]` までの行
   （`def_matrix_difference`・`def_matrix_scalar_multiple`・`def_identity_matrix`・`def_kronecker_delta` の成分、`x·1 = x`・`x·0 = 0`・`y − 0 = y`、
-  `def_gamma1_gamma2_of_theta` の代入）。鎖の残りの行は `048_claim_A_theta_tilde` と `nonzero_kernel_iff_det_zero_two_by_two` が扱う。
+  `def_gamma1_gamma2_of_theta` の代入）。`x·1 = x`・`x·0 = 0` の本文の根拠は `complex_numbers_form_a_field` の乗法の単位元と `complex_times_zero_is_zero`（2026-11-14）。鎖の残りの行は `048_claim_A_theta_tilde` と `nonzero_kernel_iff_det_zero_two_by_two` が扱う。
 - 範囲（2026-11-14 に足した）: Step 1 の準備の因数分解の恒等式 `(λ − (g_1+r))(λ − (g_1−r)) = λ^2 − 2g_1λ + (g_1^2 − r^2)` の 8 行の鎖の全行。
 
 ## チェック一覧
