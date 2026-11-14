@@ -8688,8 +8688,22 @@ C(A - B)
 &&\bigl(\because\ \blkref{def_matrix_difference}\bigr)\\
 &= \left(A_{kl} - B_{kl}\right) - \left(C_{kl} - B_{kl}\right)
 &&\bigl(\because\ \blkref{def_matrix_difference}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \left(A_{kl} - B_{kl}\right) + \left(-\left(C_{kl} - B_{kl}\right)\right)
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z \to A_{kl} - B_{kl},\ w \to C_{kl} - B_{kl})\bigr)\\
+&= \left(A_{kl} - B_{kl}\right) + \left(B_{kl} - C_{kl}\right)
+&&\bigl(\because\ \blkref{reversed_difference_is_negation_of_difference_in_cc}\ (a \to C_{kl},\ b \to B_{kl})\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(A_{kl} + (-B_{kl})\right) + \left(B_{kl} + (-C_{kl})\right)
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= A_{kl} + \left((-B_{kl}) + \left(B_{kl} + (-C_{kl})\right)\right)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律}\bigr)\\
+&= A_{kl} + \left(\left((-B_{kl}) + B_{kl}\right) + (-C_{kl})\right)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
+&= A_{kl} + \left(0_{\mathbb{C}} + (-C_{kl})\right)
+&&\bigl(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to B_{kl})\bigr)\\
+&= A_{kl} + (-C_{kl})
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to -C_{kl})\bigr)\\
 &= A_{kl} - C_{kl}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{と}\ \blkref{def_complex_difference}\bigr)\\
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z \to A_{kl},\ w \to C_{kl})\ \text{を右辺から左辺へ}\bigr)\\
 &= (A - C)_{kl}
 &&\bigl(\because\ \blkref{def_matrix_difference}\bigr)
 \end{aligned}`),
@@ -9306,6 +9320,7 @@ T\!\left(\check\psi_\mu\right)
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。旧証明は「交換子の第 1 引数についての C 線型性」「反交換子の対称性」「exp(cI) = exp(c)I（級数定義から）」「部分和が収束するので極限をとる」を引くブロックなしで使い、交換子の定義も引いていなかった。交換子の展開を準備 1〜5（スカラー行列の可換性、差と積、差の打ち消し、和の差、[X̌, W] = Σ g_ν[P_ν, W]）として本文のブロックで示し、Step 1・1' を commutator_via_anticommutators（Lean の lie_creAnn_cre・lie_creAnn_ann と同じ手順）から反交換子の値へ 1 行 1 根拠で運ぶ鎖に、Step 2・2' の和を finite_sum_of_matrices_with_single_nonzero_term で一項に絞る鎖にした。旧 Step 3〜5 と 3'〜5' は同じ計算の繰り返しだったので、[X̌, W] = cW を満たす一般の W・c について Step 3〜6 で一度だけ示し（Lean の matExp_conj_eigen と同じ形）、ψ̌^† と ψ̌ に当てはめた。極限の一意性は matrix_norm_triangle_inequality (4) で、cI の成分（準備 6）、exp(cI) = exp(c)I（準備 7、exp_of_diagonal_matrix）、X̌ + cI と −X̌ の可換性と和（準備 8）は冒頭の準備に鎖で示した。主張の右辺を commutation_V_plus_check_psi と同じ (exp(±γ(θ̃_μ)))_C に書き、ℝ への脱出を書いた（中身は不変）。検算は sagemath/check/action_of_T_check_Vprime_on_check_psi/。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 準備 6 の k ≠ l の鎖の c·0_C = 0_C と、準備 7 の 0_C = exp(c)·0_C の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → c、z → exp(c) を右辺から左辺へ）に替えた。準備 7 で乗法の単位元（k = l）と右から 0 を掛ける形（k ≠ l）を 1 行で当てていた行は、場合ごとの 2 行に割った（式の両端は不変）。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 準備 3 の成分の鎖の (A_kl - B_kl) - (C_kl - B_kl) = A_kl - C_kl を complex_numbers_form_a_field と def_complex_difference の 1 行で当てていた（差の定義・加法の結合律・逆元・単位元を束ねており、左から足す逆元と左から足す 0_C は体の公理に無い）。def_complex_difference・reversed_difference_is_negation_of_difference_in_cc・complex_numbers_form_a_field の和の結合律（2 回、向きつき）・negation_plus_self_is_zero_in_cc・complex_zero_plus_is_original を 1 行に 1 つずつ当てる 8 行に割った（鎖は 4 行から 11 行）。式の両端と主張は不変。",
       ],
     },
   },

@@ -3,7 +3,7 @@
 # Step 6 の T(W) の鎖のうち exp の値に依らない行（第 5・9・10 行）、結論の -g_μ = (-γ)_C の鎖を確かめる。
 # 準備 1〜4・6・8 と Step 6 の値に依らない行は、行列の形にだけ依る（X̌ や ψ̌ の中身に依らない）ので、成分を QQ 上の多項式環の不定元にした
 # n×n 行列（n = 2, 3, 4）で、各行を本文の式どおりに別々に組んで隣と比べる（全ての複素行列について一度に確かめる）。
-# 準備 3 は成分の鎖（def_matrix_difference と ℂ の算術）を、準備 4 は成分の鎖と行列の鎖の両方を確かめる。
+# 準備 3 は成分の鎖（def_matrix_difference と、ℂ の差・結合律・符号反転・0 の 1 行ずつ）を、準備 4 は成分の鎖と行列の鎖の両方を確かめる。
 # 準備 7 の exp(cI) = exp(c)I は ℝ への脱出（exp の極限）を含むので、cI が対角行列で対角成分が c であること（準備 6）を
 # 多項式環で厳密に確かめたうえで、exp(cI) を def_exp の部分和に尾の上界を足したボールで作り、成分ごとに exp(c)δ_{kl} のボールと
 # 重なることを c の 6 個の値 × n = 2, 4, 8 で確かめる。結論の -g_μ = (-γ)_C は、ℂ を実数の対として definition_of_cc の積で確かめる。
@@ -55,7 +55,14 @@ def main():
                 chain([(lhs[kx, lx], ""),
                        (body_difference(A, B)[kx, lx] - body_difference(C, B)[kx, lx], "def_matrix_difference（外側）"),
                        ((A[kx, lx] - B[kx, lx]) - (C[kx, lx] - B[kx, lx]), "def_matrix_difference 2 か所（内側）"),
-                       (A[kx, lx] - C[kx, lx], "complex_numbers_form_a_field"),
+                       ((A[kx, lx] - B[kx, lx]) + (-(C[kx, lx] - B[kx, lx])), "def_complex_difference"),
+                       ((A[kx, lx] - B[kx, lx]) + (B[kx, lx] - C[kx, lx]), "reversed_difference_is_negation_of_difference_in_cc（右辺から左辺へ）"),
+                       ((A[kx, lx] + (-B[kx, lx])) + (B[kx, lx] + (-C[kx, lx])), "def_complex_difference 2 か所"),
+                       (A[kx, lx] + ((-B[kx, lx]) + (B[kx, lx] + (-C[kx, lx]))), "complex_numbers_form_a_field の和の結合律"),
+                       (A[kx, lx] + (((-B[kx, lx]) + B[kx, lx]) + (-C[kx, lx])), "complex_numbers_form_a_field の和の結合律（右辺から左辺へ）"),
+                       (A[kx, lx] + (R(0) + (-C[kx, lx])), "negation_plus_self_is_zero_in_cc"),
+                       (A[kx, lx] + (-C[kx, lx]), "complex_zero_plus_is_original"),
+                       (A[kx, lx] - C[kx, lx], "def_complex_difference（右辺から左辺へ）"),
                        (body_difference(A, C)[kx, lx], "def_matrix_difference")], f"準備 3 n={n} ({kx},{lx})")
         rep.check(lhs != body_sum(A, C), f"対照 準備 3 を A + C と取り違えると一致しない n={n}", quiet=True)
         # 準備 4（3 項の和）
