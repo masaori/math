@@ -54562,18 +54562,18 @@ Z^{\mathrm{op}}_{L,L}(q)
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(q^{a+L}Z^{\mathrm{op}}_{a,a}(q)\bigr)
 &=\log\bigl(q^{a+L}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
-&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用し、両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
 &=(a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=a+L\text{ で。整数倍は }\blkref{def_log_order_group})
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=a+L\text{ に適用し、整数倍は }\blkref{def_log_order_group})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(2^{L^2-a^2}(1+q)^{2(L^2-a^2)}Z^{\mathrm{op}}_{a,a}(q)\bigr)
 &=\log\bigl(2^{L^2-a^2}(1+q)^{2(L^2-a^2)}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
-&&(\because\ \blkref{claim_log_additive}\text{。両因子は }\mathbb{Q}_{>0}\text{ の元})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用し、両因子は }\mathbb{Q}_{>0}\text{ の元})\\
 &=\log\bigl(2^{L^2-a^2}\bigr)+\log\bigl((1+q)^{2(L^2-a^2)}\bigr)+\log Z^{\mathrm{op}}_{a,a}(q)
-&&(\because\ \blkref{claim_log_additive}\text{。}2^{L^2-a^2},\ (1+q)^{2(L^2-a^2)}\in\mathbb{Q}_{>0})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用し、}2^{L^2-a^2},\ (1+q)^{2(L^2-a^2)}\in\mathbb{Q}_{>0})\\
 &=(L^2-a^2)\,\log2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2-a^2\text{ と }k:=2(L^2-a^2)\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=L^2-a^2\text{ と }k:=2(L^2-a^2)\text{ で二項へ同時適用し、整数倍は }\blkref{def_log_order_group})\\
 &=(L^2-a^2)\,\ell_2+2(L^2-a^2)\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)
 &&(\because\ \text{準備の第二})
 \end{aligned}`),
