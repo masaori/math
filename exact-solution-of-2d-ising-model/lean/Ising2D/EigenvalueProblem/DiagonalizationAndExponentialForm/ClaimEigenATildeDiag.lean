@@ -14,8 +14,9 @@
 （`r` は `absGamma2 K θ`）。根拠に引く `relation_of_gamma_2_theta_tilde` (1) の `b = -ā` は
 `gamma2_neg_eq_neg_conj`（その `θ := θ~_μ` への特殊化が (1) の形式化 `gamma2_neg_thetaTilde_eq`。
 本ファイルの Step 1・Step 2 の定理は任意の実数 `θ` について述べるので、特殊化する前の定理を引く）、
-(2) の `ab = -r^2` は `gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq`（(2) の形式化
-`gamma2_mul_gamma2_neg_eq_neg_absSq` の `r^2` の置き方を変えた言い換え）、
+(2) の `ab = (-|a|^2)_ℂ` は (2) の形式化 `gamma2_mul_gamma2_neg_eq_neg_absSq`（Step 1 の det の鎖は人手どおりこれを代入し、
+実数の符号反転と冪の像を `-(r_ℂ)^2` へ書き換える 6 段を踏む）、その `-(r_ℂ)^2` の形の言い換え
+`gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` は必要十分版からの導出で引く、
 `abs_basic_properties` の `a ā = r^2` は `gamma2_mul_conj_eq_absGamma2_sq` である。
 
 各箇条の［］内は、同じ段の必要十分版（`Ising2D.NecSuf.` を省く）である。
@@ -25,7 +26,7 @@
   `def_identity_matrix`・`def_kronecker_delta`（`kroneckerDelta_self`・`kroneckerDelta_of_ne`）の成分と、`x·1 = x`・`x·0 = 0`、
   `y - 0_ℂ = y` を割った `def_complex_difference`・`multiply_by_minus_one`・`complex_times_zero_is_zero`（`z → -1_ℂ`）・加法の単位元の 4 行。成分の式は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の
-  `matrix_sub_apply`・`matrix_smul_apply`・`identity_matrix_apply`）［`skew2_charPoly`・`skew2_charPoly_factor`］、零因子が無いことによる
+  `matrix_sub_apply`・`matrix_smul_apply`・`identity_matrix_apply`）［`skew2_charPoly`・`skew2_charPoly_factor_of_monoidHom`］、零因子が無いことによる
   `det_AMat_sub_smul_eq_zero_iff`［`skew2_det_eq_zero_iff`］、固有値が `λ_{±,μ}` に限るという statement の主張
   `eigenvalue_AMat_iff`（固有値の定義 `def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖。最後の段は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
@@ -81,6 +82,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimColumnMatrixTimesDiagonalMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
@@ -224,7 +226,7 @@ theorem charPoly_factor_thetaTilde (lam : ℂ) :
   set a := gamma2 K θ with ha
   set b := gamma2 K (-θ) with hb₀
   set r : ℂ := ((absGamma2 K θ : ℝ) : ℂ)
-  have hab : a * b = -r ^ 2 := gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq K θ
+  have hab : a * b = ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) := gamma2_mul_gamma2_neg_eq_neg_absSq K θ
   rw [lambdaPlusR_ofReal, lambdaMinusR_ofReal]
   calc (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)).det
       = (!![AMat K θ 0 0 - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 0,
@@ -325,7 +327,25 @@ theorem charPoly_factor_thetaTilde (lam : ℂ) :
                           -- `def_complex_difference`（`z → λλ, w → (2_ℂg_1)λ`）を右辺から左辺へ
     _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + a * b) := by rw [← square_of_complex_number_is_product lam, ← square_of_complex_number_is_product g₁]
                           -- `square_of_complex_number_is_product`（`z → λ` と `z → g_1` の 2 か所へ）を右辺から左辺へ
-    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) := by rw [hab, ← sub_eq_add_neg]  -- `ab = -r^2`
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ)) := by
+          rw [hab]        -- `relation_of_gamma_2_theta_tilde` (2)（`ab = (-|a|^2)_ℂ`、`r = |a|`）
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + (((-1) * absGamma2 K θ ^ 2 : ℝ) : ℂ)) := by
+          rw [neg_one_mul (absGamma2 K θ ^ 2)]
+                          -- ℝ で `(-1)x = -x`（`x → r^2`）を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + ((-1 : ℝ) : ℂ) * ((absGamma2 K θ ^ 2 : ℝ) : ℂ)) := by
+          rw [real_inclusion_mul (-1) (absGamma2 K θ ^ 2)]
+                          -- `real_inclusion_preserves_product`（`a → -1`、`b → r^2`）を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + (-1 : ℂ) * ((absGamma2 K θ ^ 2 : ℝ) : ℂ)) := by
+          rw [Complex.ofReal_neg, Complex.ofReal_one]
+                          -- `inclusion_rr_to_cc` の `-1_ℂ = ι_{ℝ→ℂ}(-1) = (-1)_ℂ` を右辺から左辺へ（人手の 1 行。
+                          -- Lean の `-1 : ℂ` は `-(1 : ℂ)` なので、`ι(-1) = -ι(1)` と `ι(1) = 1` の 2 つの書き換えで受ける）
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + (-1 : ℂ) * r ^ 2) := by
+          rw [real_inclusion_of_power (absGamma2 K θ) 2]
+                          -- `real_inclusion_preserves_power`（`r → r`、`m → 2`）
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 + -(r ^ 2)) := by rw [neg_one_mul (r ^ 2)]
+                          -- `multiply_by_minus_one`（`z → (r_ℂ)^2`）を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g₁ * lam + (g₁ ^ 2 - r ^ 2) := by rw [← sub_eq_add_neg (g₁ ^ 2) (r ^ 2)]
+                          -- `def_complex_difference`（`z → g_1^2`、`w → (r_ℂ)^2`）を右辺から左辺へ
     _ = (lam - (g₁ + r)) * (lam - (g₁ - r)) :=
         (factor_identity_thetaTilde g₁ r lam).symm                             -- 準備の恒等式
 

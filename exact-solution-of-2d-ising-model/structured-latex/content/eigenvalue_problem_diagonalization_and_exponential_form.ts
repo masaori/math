@@ -4005,7 +4005,7 @@ s_1c_2
         " より ",
         math(String.raw`b = -\bar a`),
         "、",
-        math(String.raw`ab = -r^2`),
+        math(String.raw`ab = (-r^2)_{\mathbb{C}}`),
         "、",
         math(String.raw`\sqrt{-ab} = r`),
         "、",
@@ -4021,6 +4021,15 @@ s_1c_2
         " として読み、",
         ref("def_gamma1_gamma2_of_theta"),
         " の読みと同じく像の記号を省く。",
+        "ただし ",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " の括弧の中の式は ",
+        math(String.raw`\mathbb{R}`),
+        " の式として読む（例えば ",
+        math(String.raw`(-r^2)_{\mathbb{C}}`),
+        " は実数 ",
+        math(String.raw`-r^2`),
+        " の像である）。",
       ]),
       paragraph([
         "Step 1（固有値がこの 2 つに限ること）。",
@@ -4273,8 +4282,20 @@ s_1c_2
    \quad (\because \blkref{def_complex_difference}\ (z \to \lambda\lambda,\ w \to (2_{\mathbb{C}}g_1)\lambda)\text{ を右辺から左辺へ}) \\
 &= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + ab\right)
    \quad (\because \blkref{square_of_complex_number_is_product}\ (z \to \lambda\text{ と } z \to g_1\text{ の 2 か所へ})\text{ を右辺から左辺へ}) \\
-&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 - r^2\right)
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (ab = -r^2)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + \left(-r^2\right)_{\mathbb{C}}\right)
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (2)\ (ab = (-|a|^2)_{\mathbb{C}},\ r = |a|)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + \left((-1)\,r^2\right)_{\mathbb{C}}\right)
+   \quad (\because \mathbb{R}\ \text{で}\ (-1)x = -x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to r^2\ \text{を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + (-1)_{\mathbb{C}}\left(r^2\right)_{\mathbb{C}}\right)
+   \quad (\because \blkref{real_inclusion_preserves_product}\ (a \to -1,\ b \to r^2)\ \text{を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + \left(-1_{\mathbb{C}}\right)\left(r^2\right)_{\mathbb{C}}\right)
+   \quad (\because \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}}\ \text{を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + \left(-1_{\mathbb{C}}\right)\left(r_{\mathbb{C}}\right)^2\right)
+   \quad (\because \blkref{real_inclusion_preserves_power}\ (r \to r,\ m \to 2)) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 + \left(-\left(r_{\mathbb{C}}\right)^2\right)\right)
+   \quad (\because \blkref{multiply_by_minus_one}\ (z \to (r_{\mathbb{C}})^2)\ \text{を右辺から左辺へ}) \\
+&= \left(\lambda^2 - \left(2_{\mathbb{C}}g_1\right)\lambda\right) + \left(g_1^2 - \left(r_{\mathbb{C}}\right)^2\right)
+   \quad (\because \blkref{def_complex_difference}\ (z \to g_1^2,\ w \to (r_{\mathbb{C}})^2)\ \text{を右辺から左辺へ}) \\
 &= (\lambda - (g_1+r))(\lambda - (g_1-r))
    \quad (\because \text{準備の因数分解の恒等式}\ (x \to (g_1)_{\mathbb{C}},\ y \to r_{\mathbb{C}})\text{ を右辺から左辺へ})
 \end{aligned}`,
@@ -4441,6 +4462,7 @@ A(\theta)(cv)
           "def_complex_difference・complex_times_negation_is_negation_of_product_in_cc・negation_times_complex_is_negation_of_product_in_cc・double_negation_in_cc・complex_numbers_form_a_field の分配律・結合律・可換律・積の単位元・" +
           "multiply_by_minus_one・one_plus_one_is_two_in_cc・square_of_complex_number_is_product を 1 行に 1 つずつ当てる 26 行に割った（新しい主張は足していない）。" +
           "係数の 2_ℂ g_1 λ を準備の恒等式の (2_ℂ x)λ と同じく (2_ℂ g_1)λ と書き、1_ℂ の読みを鎖の前に書いた。式の両端と主張は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の det(A(θ) − λI) の鎖の「(g_1^2 + ab) = (g_1^2 − r^2)（∵ relation_of_gamma_2_theta_tilde (ab = −r^2)）」1 行が、(2) の代入・実数の符号反転の像への読み替え・差の定義を束ねていたので、relation_of_gamma_2_theta_tilde (2)（ab = (−|a|^2)_ℂ）、ℝ で (−1)x = −x、real_inclusion_preserves_product、inclusion_rr_to_cc の −1_ℂ = (−1)_ℂ、real_inclusion_preserves_power（m → 2）、multiply_by_minus_one、def_complex_difference を 1 行に 1 つずつ当てる 7 行に割った（新しい主張なし。式の両端と主張は不変）。",
       ],
     },
   },

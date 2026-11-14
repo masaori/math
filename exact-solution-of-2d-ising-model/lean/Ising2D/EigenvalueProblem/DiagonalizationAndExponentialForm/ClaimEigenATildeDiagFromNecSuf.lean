@@ -12,7 +12,8 @@
 `A(θ) = !![g, a; -b, g]`（`AMat_eq`、人手 `def_gamma1_gamma2_of_theta`）、
 `λ_{±,μ} = g ± s`（`lambdaPlusR_ofReal`・`lambdaMinusR_ofReal`）、
 `a b = -s^2`（`gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq`、人手 `relation_of_gamma_2_theta_tilde` (2)）
-を渡すことだけである。仮定として渡す `γ_2` の関係は `a b = -r^2` だけで、具体版の Step 2 が経る
+を渡すことだけである（Step 1 の det の鎖だけは、具体版と同じく (2) の形 `a b = (-|γ_2(θ)|^2)_ℂ`（`gamma2_mul_gamma2_neg_eq_neg_absSq`）と
+乗法の準同型 `ι_{ℝ→ℂ}`（`Complex.ofRealHom`）を渡す）。仮定として渡す `γ_2` の関係は `a b = -r^2` だけで、具体版の Step 2 が経る
 `b = -ā` と `a ā = r^2` の 2 段は渡していない（`a b = -r^2` 自体は上流で `b = -ā` から導かれている）。
 `λ_+ ≠ λ_-` には `2r ≠ 0`（`r > 0` から）を渡す。`det P̌_μ` には、略記 `ρ := r_ℂ`、`u := 2_ℂ s`、`d := u b`、
 `q := (2_ℂ ℓ) b` について `u, d ∈ ℂ^×`（具体版の Step 1）と前置き (d) `d u = 2 q` を、`det P̌_μ ≠ 0` にはさらに
@@ -29,12 +30,15 @@ open Matrix
 
 variable (K : IsingConst) (θ : ℝ)
 
-/-- **`charPoly_factor_thetaTilde`（Step 1）を `NecSuf.skew2_charPoly`・`NecSuf.skew2_charPoly_factor` の特殊化として導いたもの**。 -/
+/-- **`charPoly_factor_thetaTilde`（Step 1）を `NecSuf.skew2_charPoly`・`NecSuf.skew2_charPoly_factor_of_monoidHom` の特殊化として導いたもの**。
+乗法の準同型は `ι_{ℝ→ℂ}`（`Complex.ofRealHom` を乗法の準同型として見たもの。`f(-1) = -1` は `ι` が環準同型であることから出す）、`t := |γ_2(θ)|`、仮定は (2) の形式化 `gamma2_mul_gamma2_neg_eq_neg_absSq`（`ab = (-|a|^2)_ℂ`）である。 -/
 theorem charPoly_factor_thetaTilde_of_necSuf (lam : ℂ) :
     (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)).det
       = (lam - ((lambdaPlusR K θ : ℝ) : ℂ)) * (lam - ((lambdaMinusR K θ : ℝ) : ℂ)) := by
-  rw [AMat_eq, lambdaPlusR_ofReal, lambdaMinusR_ofReal, NecSuf.skew2_charPoly,
-    NecSuf.skew2_charPoly_factor _ _ _ _ _ (gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq K θ)]
+  rw [AMat_eq, lambdaPlusR_ofReal, lambdaMinusR_ofReal, NecSuf.skew2_charPoly]
+  exact NecSuf.skew2_charPoly_factor_of_monoidHom (Complex.ofRealHom : ℝ →* ℂ)
+    (by rw [MonoidHom.coe_coe, map_neg, map_one]) _ _ _ lam (absGamma2 K θ)
+    (gamma2_mul_gamma2_neg_eq_neg_absSq K θ)
 
 /-- **`det_AMat_sub_smul_eq_zero_iff`（Step 1 の結論）を `NecSuf.skew2_det_eq_zero_iff` の特殊化として導いたもの**。 -/
 theorem det_AMat_sub_smul_eq_zero_iff_of_necSuf (lam : ℂ) :

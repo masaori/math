@@ -17,7 +17,7 @@
 * `eigenvector_of_A_theta_tilde` Step 1:
   準備の因数分解の恒等式 `factor_identity_thetaTilde` ↔ `skew2_factor_identity`、
   `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde` ↔ `skew2_charPoly`（`ab = -r^2` を代入する行の手前まで）と
-  `skew2_charPoly_factor`（`ab = -s^2` の代入と準備の恒等式の 2 行）、
+  `skew2_charPoly_factor_of_monoidHom`（乗法の準同型 `f` について、`ab = f(-t^2)` の代入から差の定義までの 7 段と準備の恒等式。固有値の段が引く `skew2_charPoly_factor` はその `f := id` への特殊化）、
   零因子が無いことによる `det_AMat_sub_smul_eq_zero_iff` ↔ `skew2_det_eq_zero_iff`、
   固有値の定義から `λ = g ± s` までの同値の鎖 `eigenvalue_AMat_iff` ↔ `skew2_eigenvalue_iff`
   （鎖のうち「0 でないベクトルを 0 へ送る ⟺ 行列式 0」の段は `NecSuf/TwoByTwoKernelAndDeterminant.lean` の
@@ -43,6 +43,8 @@
 
 * **行列が `!![g, a; -b, g]` の形（対角成分が等しい）であること**
 * **`a b = -s^2` を満たす `s` が係数環に取れること**
+  （det の鎖の `skew2_charPoly_factor_of_monoidHom` では、さらに弱く、`f(-1) = -1` を満たす乗法の準同型 `f : S →* R` と
+  `t ∈ S` について `a b = f(-t^2)` であれば足りる。具体版の `ι_{ℝ→ℂ}` が加法を保つことも単射であることも効いていない）
 * 固有値が `g ± s` に限るという段（`skew2_det_eq_zero_iff`・`skew2_eigenvalue_iff`）だけは、
   **係数環に零因子が無いこと**（`skew2_eigenvalue_iff` はさらに `0 ≠ 1`）
 * 2 つの固有値が異なること（`skew2_eigenvalues_ne`）には、**`2 s ≠ 0`**
@@ -301,14 +303,43 @@ theorem skew2_charPoly (g a b lam : R) :
     _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b) := by rw [← sq lam, ← sq g]
                           -- `z^2 = zz`（2 か所へ）を右辺から左辺へ
 
-/-- **Step 1 の `det(A - λI)` の鎖の残り 2 行**（具体版 `charPoly_factor_thetaTilde` の最後の 2 行）:
-`a b = -s^2` なら `λ^2 - 2gλ + (g^2 + ab) = (λ - (g+s))(λ - (g-s))`。 -/
+/-- **Step 1 の `det(A - λI)` の鎖の残り**（具体版 `charPoly_factor_thetaTilde` の最後の 8 行と同じ 8 段）:
+モノイド `S` から `R` の乗法のモノイドへの準同型 `f`（具体版では `ι_{ℝ→ℂ}`、人手 `inclusion_rr_to_cc`）で `f(-1) = -1` を満たすものと `t ∈ S`（具体版では `r = |a| ∈ ℝ`）について、
+`a b = f(-t^2)`（具体版では人手 `relation_of_gamma_2_theta_tilde` (2) の `ab = (-|a|^2)_ℂ`）なら
+`λ^2 - 2gλ + (g^2 + ab) = (λ - (g + f(t)))(λ - (g - f(t)))`。
+
+`f` に使うのは、積を保つこと（人手 `real_inclusion_preserves_product`）・冪を保つこと（人手 `real_inclusion_preserves_power`。
+モノイドの準同型なので `1` を保つことから出る）・`f(-1) = -1`（仮定 `hf`。人手 `inclusion_rr_to_cc` の読み `-1_ℂ = (-1)_ℂ`）だけである。
+`f` が加法を保つことは効いていないので、環準同型ではなく乗法の準同型で受ける。
+`S` には `(-1)x = -x` の段でモノイドと符号反転の分配（`HasDistribNeg`）だけを使う（`S` の加法・乗法の可換性は効いていない）。
+`f` が単射であることも、`S` が順序体であることも効いていない。 -/
+theorem skew2_charPoly_factor_of_monoidHom {S : Type*} [Monoid S] [HasDistribNeg S] (f : S →* R) (hf : f (-1) = -1)
+    (g a b lam : R) (t : S) (hab : a * b = f (-(t ^ 2))) :
+    lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b)
+      = (lam - (g + f t)) * (lam - (g - f t)) :=
+  calc lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b)
+      = lam ^ 2 - 2 * g * lam + (g ^ 2 + f (-(t ^ 2))) := by rw [hab]
+                          -- 1 段目: `ab = f(-t^2)` の代入（具体版の (2) の代入）
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + f ((-1) * t ^ 2)) := by rw [neg_one_mul (t ^ 2)]
+                          -- 2 段目: `S` で `(-1)x = -x`（`x → t^2`）を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + f (-1) * f (t ^ 2)) := by rw [map_mul f (-1) (t ^ 2)]
+                          -- 3 段目: `f` は積を保つ（具体版の `real_inclusion_preserves_product`）
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + (-1) * f (t ^ 2)) := by rw [hf]
+                          -- 4 段目: `f(-1) = -1`（仮定 `hf`。具体版の `-1_ℂ = (-1)_ℂ`）
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + (-1) * f t ^ 2) := by rw [map_pow f t 2]
+                          -- 5 段目: `f` は冪を保つ（具体版の `real_inclusion_preserves_power`）
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + -(f t ^ 2)) := by rw [neg_one_mul (f t ^ 2)]
+                          -- 6 段目: `-z = (-1)z`（具体版の `multiply_by_minus_one`）を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 - f t ^ 2) := by rw [← sub_eq_add_neg (g ^ 2) (f t ^ 2)]
+                          -- 7 段目: 差の定義を右辺から左辺へ（具体版の `def_complex_difference`）
+    _ = (lam - (g + f t)) * (lam - (g - f t)) := (skew2_factor_identity g (f t) lam).symm  -- 準備の恒等式
+
+/-- `skew2_charPoly_factor_of_monoidHom` を `f := id`（`S := R`、`hf` は `rfl`）へ特殊化したもの: `a b = -s^2` なら
+`λ^2 - 2gλ + (g^2 + ab) = (λ - (g+s))(λ - (g-s))`。固有値の段（`skew2_det_eq_zero_iff`・`skew2_eigenvalue_iff`）が引く。 -/
 theorem skew2_charPoly_factor (g a b s lam : R) (hab : a * b = -s ^ 2) :
     lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b)
       = (lam - (g + s)) * (lam - (g - s)) :=
-  calc lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b)
-      = lam ^ 2 - 2 * g * lam + (g ^ 2 - s ^ 2) := by rw [hab, ← sub_eq_add_neg]  -- `ab = -s^2`
-    _ = (lam - (g + s)) * (lam - (g - s)) := (skew2_factor_identity g s lam).symm  -- 準備の恒等式
+  skew2_charPoly_factor_of_monoidHom (MonoidHom.id R) rfl g a b lam s hab
 
 /-- **Step 1 の結論**（具体版 `det_AMat_sub_smul_eq_zero_iff`）: `det(A - λI) = 0` となるのは `λ = g ± s` のときに限る。
 
