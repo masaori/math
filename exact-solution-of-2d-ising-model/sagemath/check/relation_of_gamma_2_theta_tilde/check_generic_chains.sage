@@ -178,7 +178,7 @@ five_tail = [
     (g0 * 0, g0 * 1),
     (0 * g0, 1 * g0),                      # 積の可換律を 2 成分へ
     (0 * g0 - 0, 1 * g0),                  # a - 0 = a
-    (0 * g0 - 1 * 0, 1 * g0),              # x·0 = 0（x → 1）
+    (0 * g0 - 1 * 0, 1 * g0),              # real_times_zero_is_zero（x → 1）
     (0 * g0 - 1 * 0, 0 + 1 * g0),          # 0 + a = a
     (0 * g0 - 1 * 0, 0 * 0 + 1 * g0),      # real_zero_times_is_zero（x → 0）
     cc_mul((Rz(0), Rz(1)), iz(g0)),        # definition_of_cc の積

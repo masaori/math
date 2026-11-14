@@ -16,7 +16,7 @@ assert iota(0, P) == (P(0), P(0))
 second = (a * o - b * o, a * o + b * o)
 assert cc_mul(z, (o, o)) == second
 
-# 第三行: 第二行の 4 つの積 a·o, b·o, a·o, b·o のそれぞれが o = 0 で 0 になり、(0 − 0, 0 + 0) になる
+# 第三行（real_times_zero_is_zero を 4 箇所へ）: 第二行の 4 つの積 a·o, b·o, a·o, b·o のそれぞれが o = 0 で 0 になり、(0 − 0, 0 + 0) になる
 products = [a * o, b * o, a * o, b * o]
 assert all(t.subs(o=0) == 0 for t in products)
 third = (P(0) - P(0), P(0) + P(0))

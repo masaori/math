@@ -585,6 +585,7 @@ export const ALL_LABELS = [
   "real_sum_over_binary_words_distributes_in_left_factor",
   "real_symmetric_matrix_is_hermitian",
   "real_symmetric_matrix_moves_between_factors_of_sum_of_products",
+  "real_times_zero_is_zero",
   "real_vector_inclusion_intertwines_matrix_vector_product",
   "real_vector_inclusion_is_injective",
   "real_zero_times_is_zero",

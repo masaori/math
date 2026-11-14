@@ -3762,7 +3762,7 @@ s_1c_2
 &= \pi - 2\cdot 0\cdot\pi
 &&\bigl(\because\ \blkref{section_of_angle_representation}\ \text{の}\ \theta \to \pi\ \text{と整数}\ n \to 0\bigr)\\
 &= \pi - 0\cdot\pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 2\bigr)\\
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 2)\bigr)\\
 &= \pi - 0
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \pi
@@ -3841,7 +3841,7 @@ s_1c_2
 &= \bigl(\left|\gamma_2(\theta)\right|,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 1 = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to \left|\gamma_2(\theta)\right|)\bigr)\\
 &= \left|\gamma_2(\theta)\right|_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -3888,7 +3888,7 @@ s_1c_2
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 0\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 1\ \text{を第 1 成分の引く側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 1)\ \text{を第 1 成分の引く側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 1\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0\cdot 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
@@ -3928,6 +3928,7 @@ s_1c_2
         "2026-11-11（Lean の通しの証明）: 準備の第一の前置きの「分数は定まる」を def_complex_quotient の商と multiplicative_group_of_cc の逆元の参照にし、cos θ + i sin θ の鎖の、体であることだけを根拠にした分数の行（x(y/z) = (xy)/z・(xa)/(ya) = x/y・x/z + y/z = (x+y)/z・(2a)/2 = a）を、det_A_theta_tilde の u + iv の鎖と同じ z w^{-1} の形に開き、体の公理と逆元を 1 行に 1 つずつ当てた（17 行 → 27 行）。値と主張は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の第一の cos θ + i sin θ の鎖の 6〜11 行目（i(2_ℂi)^{-1} = 2_ℂ^{-1} を積の単位元・逆元・結合律で示す 6 行）を、exp_of_negative_i_real_as_cos_minus_i_sin・periodicity_of_check_fermi と同じ鎖なので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照 1 行にした（27 行 → 22 行）。値と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を左から掛けると 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」7 か所（(2) の 0 < |γ_2(θ)|^2 の鎖の 1 行目、(3) の φ_polar((−r)_C) の鎖・arg^{[0,2π)}((−r)_C) から始まる主張の鎖、(4) の φ_polar(r_C) の鎖・√ の鎖、(5) の √ の鎖の角度の行と第 2 成分の行）を real_zero_times_is_zero の参照に替えた（式は不変）。Lean の具体版 absGamma2_thetaTilde_sq_pos の zero_mul を Ising2D.real_zero_times_is_zero に替えた。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を右から掛けると 0 の名前だけの根拠「ℝ で x·0 = 0（ℝ は体）」3 か所（(3) の arg の鎖の 2·0 = 0（x → 2）、(4) の |γ_2(θ)|·0 = 0（x → |γ_2(θ)|）、(5) の第 1 成分の引く側の 0 = 1·0（x → 1）を右辺から左辺へ）を、足した主張 real_times_zero_is_zero の参照に替えた（式は不変）。",
       ],
     },
   },

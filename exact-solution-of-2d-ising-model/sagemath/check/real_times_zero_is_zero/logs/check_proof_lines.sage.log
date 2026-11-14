@@ -1,0 +1,4 @@
+QQ[o, x] で恒等的な段 5 個と、o = 0 でだけ成り立つ 0 + 0 = 0 の段 1 個を確かめた（等号 6 個）
+o = 0 を代入して全ての行が 0 になった
+negative controls (broken lines detected): 2
+RESULT: PASS

@@ -1898,7 +1898,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
 &&(\because\ 0\le 0-2\cdot0\cdot\pi<2\pi\ \text{と準備の第一})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
-&&(\because\ \mathbb{R}\ \text{で}\ a\cdot 0=0)\\
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x \to \tfrac{1}{2}))\\
 &= (0\cdot\cos 0,\ 0\cdot\sin 0)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)
@@ -1953,6 +1953,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 準備の第二の √0 = 0 の根拠と、それを使う r = 0 の場合の左辺・右辺の鎖の 2 行の参照を、definition_of_sqrt_r_positive から sqrt_of_real_zero_is_zero に替えた（値は不変）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の左辺・右辺の鎖の最後の行「(0,0) = 0_ℂ」は、名前だけの根拠「ℝ で 0·a = 0」に 0_ℂ = (0,0) を黙って束ねていたので、real_zero_times_is_zero を 2 箇所へ（左辺は x → cos 0・x → sin 0、右辺は x → cos(θ/2 − nπ)・x → sin(θ/2 − nπ)）当てて (0,0) へ移る行と、inclusion_rr_to_cc の 0_ℂ = ι(0) = (0,0) を右辺から左辺へ使う行の 2 行に割った（左辺 8 段・右辺 5 段になった）。式の両端は変えていない。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の左辺の鎖の (0, ½·0) から (0,0) への行の名前だけの根拠「ℝ で a·0 = 0」を、足した主張 real_times_zero_is_zero（x → ½）の参照に替えた（式は不変）。",
         "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は Step 1 から Step 5 までの " +
           "5 段構成で、式と式の間に日本語の説明が挟まっていた。準備（n の一意性から出る " +
           "s_{[0,2π)}([θ]) = θ-2nπ と、√0 = 0）を冒頭にまとめ、そのうえで代表元によらないこと・" +

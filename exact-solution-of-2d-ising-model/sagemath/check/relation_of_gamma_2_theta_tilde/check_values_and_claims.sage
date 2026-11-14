@@ -134,7 +134,7 @@ for (Yv, Zv) in COUPLINGS:
             tick(section(t2) == pi_ and section_by_floor(t2) == pi_, "(3) arg = s_{[0,2π)}([π]) = π - 2·0·π = π")
             three_main = [pi_ - (2 * 0) * pi_, pi_ - 0 * pi_, pi_ - Ang(0), pi_]
             for j in range(len(three_main) - 1):
-                tick(three_main[j] == three_main[j + 1], f"(3) 主張の鎖 第 {j+5} 行 = 第 {j+6} 行（x·0 = 0、real_zero_times_is_zero、a - 0 = a）")
+                tick(three_main[j] == three_main[j + 1], f"(3) 主張の鎖 第 {j+5} 行 = 第 {j+6} 行（real_times_zero_is_zero、real_zero_times_is_zero、a - 0 = a）")
             tick(pi_ - (2 * 1) * pi_ != pi_, "(3) 主張の鎖 否定の対照: 整数 n を 1 に取り違えると π - 2·1·π ≠ π")
             # (4)
             tick(-(g * gm) == F(-1) * (g * gm), "(4) 準備 第 1 行: -z = (-1_C) z")
@@ -163,7 +163,7 @@ for (Yv, Zv) in COUPLINGS:
                 (absg * 1, absg * cos_sin(Ang(0))[1]),
                 (absg * 1, absg * 0),
                 (absg, absg * 0),                            # x·1 = x (x → |γ|)
-                (absg, AA(0)),                               # x·0 = 0 (x → |γ|)
+                (absg, AA(0)),                               # real_times_zero_is_zero (x → |γ|)
                 iota(absg, AA),
             ]
             tick(sqrt_aa(r) == absg, "(4)(5) √r = |γ|（|γ| ≥ 0、|γ|^2 = r）")
@@ -184,7 +184,7 @@ for (Yv, Zv) in COUPLINGS:
                 (absg * 0, absg * 1),
                 (AA(0) * absg, 1 * absg),                    # 積の可換律を 2 成分へ
                 (AA(0) * absg - 0, 1 * absg),                # a - 0 = a
-                (AA(0) * absg - 1 * AA(0), 1 * absg),        # x·0 = 0 (x → 1)
+                (AA(0) * absg - 1 * AA(0), 1 * absg),        # real_times_zero_is_zero (x → 1)
                 (AA(0) * absg - 1 * AA(0), 0 + 1 * absg),    # 0 + a = a
                 (AA(0) * absg - 1 * AA(0), AA(0) * 0 + 1 * absg),      # real_zero_times_is_zero (x → 0)
                 cc_mul((AA(0), AA(1)), (absg, AA(0))),

@@ -2967,6 +2967,9 @@ targets=(
   Ising2D.real_zero_times_is_zero
   Ising2D.NecSuf.zero_mul_of_rightDistrib
   Ising2D.real_zero_times_is_zero_of_necSuf
+  Ising2D.real_times_zero_is_zero
+  Ising2D.NecSuf.mul_zero_of_leftDistrib
+  Ising2D.real_times_zero_is_zero_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products
