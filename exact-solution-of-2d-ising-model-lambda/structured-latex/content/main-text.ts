@@ -79979,6 +79979,16 @@ M_{D,T}(x)
                     title: { text: "非零項の位相は補辺の二次符号と短い対の横断数に等しい" },
                     labels: ["claim_tagged_matching_quadratic_crossing_weight"],
                     habitat: "Qbar",
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatchingTerm_quadraticCrossingWeight",
+                      "Ising2DLambda.KacWard.shortPairCrossingNumber_cycleSplit",
+                      "Ising2DLambda.KacWard.taggedCycleFamily_quadraticSign",
+                      "Ising2DLambda.KacWard.taggedCyclePhase_quadraticSign",
+                      "Ising2DLambda.KacWard.taggedCycleBaseEdge_image",
+                      "Ising2DLambda.KacWard.taggedCycleSeam_sum_mod",
+                      "Ising2DLambda.NecSuf.KacWard.tagged_matching_quadratic_crossing_weight_necSuf",
+                      "Ising2DLambda.KacWard.taggedMatchingTerm_quadraticCrossingWeight_from_necSuf",
+                    ],
                     verification: ["sagemath/check/tagged-matching-quadratic-crossing-weight"],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。補辺を ", math(String.raw`P:=P(D,T)\subseteq E_L`), " とし、", ref("claim_tagged_matching_cycle_weight"), " の交互閉路集合を ", math(String.raw`\mathcal C(D,T)`), " とする。短い標識の対は ", ref("claim_projected_edge_cycle_nonbacktracking"), " により閉歩道の通過に一対一に対応する。" ]),
