@@ -53,6 +53,46 @@ private lemma windingTransverseStaircase_coordinate_step_ge_one (wh wv : ℤ)
   have h := (windingTransverseStaircase_step_increase wh wv r hr).2
   omega
 
+private lemma iteratedTransverseStaircase_step (wh wv : ℤ) (base : ℤ × ℤ)
+    (hwind : (wh, wv) ≠ (0, 0)) (s : ℕ) :
+    iteratedTransverseStaircase wh wv base (s + 1) -
+        iteratedTransverseStaircase wh wv base s =
+      windingTransverseStaircase wh wv (s % (wh.natAbs + wv.natAbs) + 1) -
+        windingTransverseStaircase wh wv (s % (wh.natAbs + wv.natAbs)) := by
+  let n := wh.natAbs + wv.natAbs
+  have hn : 0 < n := windingTransverseStaircase_length_pos wh wv hwind
+  have hrlt : s % n < n := Nat.mod_lt s hn
+  have hsucc : s + 1 = (s % n + 1) + n * (s / n) := by
+    have := Nat.mod_add_div s n
+    omega
+  have hdivbase : (s + 1) / n = (s % n + 1) / n + s / n := by
+    rw [hsucc, Nat.add_mul_div_left _ _ hn]
+  have hmodbase : (s + 1) % n = (s % n + 1) % n := by
+    rw [hsucc, Nat.add_mul_mod_self_left]
+  by_cases hbefore : s % n + 1 < n
+  · have hdiv : (s + 1) / n = s / n := by
+      rw [hdivbase, Nat.div_eq_of_lt hbefore, zero_add]
+    have hmod : (s + 1) % n = s % n + 1 := by
+      rw [hmodbase, Nat.mod_eq_of_lt hbefore]
+    change iteratedStaircase n (windingTransverseStaircase wh wv) (wh, -wv) base
+        (s + 1) - iteratedStaircase n (windingTransverseStaircase wh wv) (wh, -wv)
+        base s = _
+    rw [iteratedStaircase, iteratedStaircase, hdiv, hmod]
+    abel
+  · have hrequiv : s % n + 1 = n := by omega
+    have hdiv : (s + 1) / n = s / n + 1 := by
+      rw [hdivbase, hrequiv, Nat.div_self hn]
+      omega
+    have hmod : (s + 1) % n = 0 := by
+      rw [hmodbase, hrequiv, Nat.mod_self]
+    change iteratedStaircase n (windingTransverseStaircase wh wv) (wh, -wv) base
+        (s + 1) - iteratedStaircase n (windingTransverseStaircase wh wv) (wh, -wv)
+        base s = _
+    rw [iteratedStaircase, iteratedStaircase, hdiv, hmod, windingTransverseStaircase_zero, hrequiv,
+      windingTransverseStaircase_end]
+    simp only [add_nsmul, one_nsmul]
+    abel
+
 /-- `claim_iterated_transverse_staircase_lower_bound`。
 一歩の差、横断座標の増加と下界、および頂点の相異性。 -/
 theorem iteratedTransverseStaircase_lower_bound (wh wv : ℤ) (base : ℤ × ℤ)
@@ -67,18 +107,36 @@ theorem iteratedTransverseStaircase_lower_bound (wh wv : ℤ) (base : ℤ × ℤ
       windingTransverseCoordinate wh wv (iteratedTransverseStaircase wh wv base s)) ∧
     Function.Injective (iteratedTransverseStaircase wh wv base) := by
   have hn := windingTransverseStaircase_length_pos wh wv hwind
-  have hzero := windingTransverseStaircase_zero wh wv
-  have hend := windingTransverseStaircase_end wh wv
-  have hcoordinate := iteratedStaircase_coordinate_necSuf
-    (wh.natAbs + wv.natAbs) (windingTransverseStaircase wh wv) (wh, -wv) base
-    (windingTransverseCoordinate wh wv) hn hzero hend
-    (windingTransverseStaircase_coordinate_step_ge_one wh wv)
+  have hincrement : ∀ s : ℕ,
+      windingTransverseCoordinate wh wv (iteratedTransverseStaircase wh wv base s) + 1 ≤
+        windingTransverseCoordinate wh wv
+          (iteratedTransverseStaircase wh wv base (s + 1)) := by
+    intro s
+    have hdiff := congrArg (windingTransverseCoordinate wh wv)
+      (iteratedTransverseStaircase_step wh wv base hwind s)
+    rw [map_sub, map_sub] at hdiff
+    have hbase := windingTransverseStaircase_coordinate_step_ge_one wh wv
+      (s % (wh.natAbs + wv.natAbs)) (Nat.mod_lt s hn)
+    omega
   constructor
   · intro s
-    exact iteratedStaircase_step_necSuf
-      (wh.natAbs + wv.natAbs) (windingTransverseStaircase wh wv) (wh, -wv) base
-      hn hzero hend s
-  exact hcoordinate
+    exact iteratedTransverseStaircase_step wh wv base hwind s
+  constructor
+  · intro s
+    exact lt_of_lt_of_le (lt_add_one _) (hincrement s)
+  constructor
+  · intro s
+    induction s with
+    | zero => simp [iteratedTransverseStaircase, iteratedStaircase,
+        windingTransverseStaircase_zero]
+    | succ s ih =>
+        have hs := hincrement s
+        norm_num [Nat.cast_add, Nat.cast_one]
+        omega
+  · intro a b hab
+    apply (strictMono_nat_of_lt_succ fun s =>
+      lt_of_lt_of_le (lt_add_one _) (hincrement s)).injective
+    exact congrArg (windingTransverseCoordinate wh wv) hab
 
 /-- 反復横断階段の各差は四つの単位格子ベクトルの一つである。 -/
 theorem iteratedTransverseStaircase_unit_step (wh wv : ℤ) (base : ℤ × ℤ)

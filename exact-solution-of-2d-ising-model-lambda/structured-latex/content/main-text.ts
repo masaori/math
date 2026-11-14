@@ -71354,7 +71354,7 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
 &=\bigl(Q+q\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))+C^{\gamma}_{r+1}\bigr)-\bigl(Q+q\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))+C^{\gamma}_r\bigr)
 &&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
 &=C^{\gamma}_{r+1}-C^{\gamma}_r
-&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の成分ごとの整数の加減}\bigr).
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の成分ごとの整数の加減}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`r=n_{\perp}-1`), " の場合、",
