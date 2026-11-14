@@ -19,7 +19,12 @@ theorem closed_walk_rotation_phase_sign {z : Qbar} (hz4 : z ^ 4 = -1)
         z ^ ((turns.map turnValue).sum + turnValue closing) :=
       closed_walk_rotation_phase hz4 turns closing
     _ = z ^ ((4 : ℤ) * r) := by rw [hr]
-    _ = (-1 : Qbar) ^ r := zpow_four_mul_eq_neg_one_zpow_necSuf hz4 r
+    _ = (z ^ (4 : ℤ)) ^ r := by rw [zpow_mul]
+    _ = (-1 : Qbar) ^ r := by
+      have hz4z : z ^ (4 : ℤ) = -1 := by
+        change z ^ ((4 : ℕ) : ℤ) = -1
+        rw [zpow_natCast, hz4]
+      rw [hz4z]
 
 theorem closed_walk_rotation_phase_sign_from_necSuf {z : Qbar} (hz4 : z ^ 4 = -1)
     (r : ℤ) : z ^ ((4 : ℤ) * r) = (-1 : Qbar) ^ r :=

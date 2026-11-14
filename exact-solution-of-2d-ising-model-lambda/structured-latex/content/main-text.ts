@@ -89055,7 +89055,7 @@ v_L
 &=\max_{(a,b)\in\mathcal S}L^{-2}\log_{\mathbb R}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
 &&\bigl(\because\ v_L,u_{L,a,b}\text{ の定義}\bigr)\\
 &=L^{-2}\log_{\mathbb R}\max_{(a,b)\in\mathcal S}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
-&&\bigl(\because\ L^{-2}>0\text{、実対数の単調性。}\blkref{def_real_logarithm}\bigr)\\
+&&\bigl(\because\ L^{-2}>0\text{、実対数の単調性、}\blkref{def_real_logarithm}\bigr)\\
 &=L^{-2}\log_{\mathbb R}M_L^{\mathrm{abs}}(q)
 &&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ と }\blkref{claim_partition_log_order_bounds}\text{ の最大値の定義}\bigr).
 \end{aligned}`),
