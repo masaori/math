@@ -6,6 +6,8 @@ PASS: M=2 mu=1: (C) [H_2, Ž] = -2Y̌
 PASS: M=2 mu=1: (D) [H_2, Y̌] = 2Ž
 PASS: M=2 mu=1: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=2 mu=1: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=2 mu=1: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=2 mu=1: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=2 mu=1: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=2 mu=1: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=2 mu=1: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -17,6 +19,8 @@ PASS: M=2 mu=2: (C) [H_2, Ž] = -2Y̌
 PASS: M=2 mu=2: (D) [H_2, Y̌] = 2Ž
 PASS: M=2 mu=2: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=2 mu=2: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=2 mu=2: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=2 mu=2: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=2 mu=2: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=2 mu=2: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=2 mu=2: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -28,6 +32,8 @@ PASS: M=3 mu=1: (C) [H_2, Ž] = -2Y̌
 PASS: M=3 mu=1: (D) [H_2, Y̌] = 2Ž
 PASS: M=3 mu=1: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=3 mu=1: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=3 mu=1: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=3 mu=1: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=3 mu=1: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=3 mu=1: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=3 mu=1: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -38,6 +44,8 @@ PASS: M=3 mu=2: (B) [H_1, Y̌] = -2exp(iθ̃)Ž
 PASS: M=3 mu=2: (C) [H_2, Ž] = -2Y̌
 PASS: M=3 mu=2: (D) [H_2, Y̌] = 2Ž
 PASS: M=3 mu=2: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=3 mu=2: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=3 mu=2: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=3 mu=2: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=3 mu=2: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=3 mu=2: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -49,6 +57,8 @@ PASS: M=3 mu=3: (C) [H_2, Ž] = -2Y̌
 PASS: M=3 mu=3: (D) [H_2, Y̌] = 2Ž
 PASS: M=3 mu=3: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=3 mu=3: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=3 mu=3: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=3 mu=3: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=3 mu=3: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=3 mu=3: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=3 mu=3: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -60,6 +70,8 @@ PASS: M=4 mu=1: (C) [H_2, Ž] = -2Y̌
 PASS: M=4 mu=1: (D) [H_2, Y̌] = 2Ž
 PASS: M=4 mu=1: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=4 mu=1: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=4 mu=1: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=4 mu=1: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=4 mu=1: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=4 mu=1: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=4 mu=1: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -71,6 +83,8 @@ PASS: M=4 mu=2: (C) [H_2, Ž] = -2Y̌
 PASS: M=4 mu=2: (D) [H_2, Y̌] = 2Ž
 PASS: M=4 mu=2: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=4 mu=2: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=4 mu=2: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=4 mu=2: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=4 mu=2: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=4 mu=2: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=4 mu=2: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -82,6 +96,8 @@ PASS: M=4 mu=3: (C) [H_2, Ž] = -2Y̌
 PASS: M=4 mu=3: (D) [H_2, Y̌] = 2Ž
 PASS: M=4 mu=3: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=4 mu=3: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=4 mu=3: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=4 mu=3: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=4 mu=3: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=4 mu=3: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=4 mu=3: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -93,6 +109,8 @@ PASS: M=4 mu=4: (C) [H_2, Ž] = -2Y̌
 PASS: M=4 mu=4: (D) [H_2, Y̌] = 2Ž
 PASS: M=4 mu=4: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=4 mu=4: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=4 mu=4: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=4 mu=4: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=4 mu=4: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=4 mu=4: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=4 mu=4: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -104,6 +122,8 @@ PASS: M=5 mu=1: (C) [H_2, Ž] = -2Y̌
 PASS: M=5 mu=1: (D) [H_2, Y̌] = 2Ž
 PASS: M=5 mu=1: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=5 mu=1: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=5 mu=1: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=5 mu=1: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=5 mu=1: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=5 mu=1: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=5 mu=1: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -115,6 +135,8 @@ PASS: M=5 mu=2: (C) [H_2, Ž] = -2Y̌
 PASS: M=5 mu=2: (D) [H_2, Y̌] = 2Ž
 PASS: M=5 mu=2: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=5 mu=2: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=5 mu=2: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=5 mu=2: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=5 mu=2: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=5 mu=2: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=5 mu=2: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -125,6 +147,8 @@ PASS: M=5 mu=3: (B) [H_1, Y̌] = -2exp(iθ̃)Ž
 PASS: M=5 mu=3: (C) [H_2, Ž] = -2Y̌
 PASS: M=5 mu=3: (D) [H_2, Y̌] = 2Ž
 PASS: M=5 mu=3: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=5 mu=3: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=5 mu=3: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=5 mu=3: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=5 mu=3: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=5 mu=3: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -136,6 +160,8 @@ PASS: M=5 mu=4: (C) [H_2, Ž] = -2Y̌
 PASS: M=5 mu=4: (D) [H_2, Y̌] = 2Ž
 PASS: M=5 mu=4: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=5 mu=4: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=5 mu=4: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=5 mu=4: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=5 mu=4: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=5 mu=4: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=5 mu=4: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる
@@ -147,6 +173,8 @@ PASS: M=5 mu=5: (C) [H_2, Ž] = -2Y̌
 PASS: M=5 mu=5: (D) [H_2, Y̌] = 2Ž
 PASS: M=5 mu=5: 対照 [H_1, Ž] ≠ 2exp(+iθ̃)Y̌
 PASS: M=5 mu=5: 指数 -iθ̃ + iθ̃ = 0（π を不定元にした有理関数体）
+PASS: M=5 mu=5: 指数 (-i)θ̃ + iθ̃ = -(iθ̃) + iθ̃
+PASS: M=5 mu=5: 指数 -(iθ̃) + iθ̃ = 0_C
 PASS: M=5 mu=5: exp(-iθ̃)exp(iθ̃) = 1_C（円分体で厳密）
 PASS: M=5 mu=5: 本文の exp のボールで exp(-iθ̃)exp(iθ̃) ∋ 1、exp(0) ∋ 1
 PASS: M=5 mu=5: 本文の exp(-iθ̃) のボールが 1 の冪根の値と重なる

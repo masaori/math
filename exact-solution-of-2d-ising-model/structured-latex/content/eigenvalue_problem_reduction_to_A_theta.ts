@@ -4644,13 +4644,25 @@ T_{(V^{(+)})}(X)
         math(String.raw`(2)\check{Z}_\mu`),
         " である。",
       ]),
-      paragraph(["準備（位相の積）。"]),
+      paragraph([
+        "準備（位相の積）。",
+        math(String.raw`-i(\tilde\theta)_{\mathbb{C}}`),
+        " は ",
+        ref("def_half_integer_checkZ"),
+        " と同じく ",
+        math(String.raw`(-i)(\tilde\theta)_{\mathbb{C}}`),
+        "（",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "）と読む。",
+      ]),
       displayMath(String.raw`\begin{aligned}
 \exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)
 &= \exp\bigl(-i(\tilde\theta)_{\mathbb{C}} + i(\tilde\theta)_{\mathbb{C}}\bigr)
 &&\bigl(\because\ \blkref{scalar_exp_product}\text{ を }K = \mathbb{C}\text{ で}\bigr)\\
-&= \exp(0)
-&&\bigl(\because\ \mathbb{C}\text{ の加法の逆元}\bigr)\\
+&= \exp\bigl(-(i(\tilde\theta)_{\mathbb{C}}) + i(\tilde\theta)_{\mathbb{C}}\bigr)
+&&\bigl(\because\ \blkref{negative_i_times_complex_is_negation_of_i_times}\ (z \to (\tilde\theta)_{\mathbb{C}})\bigr)\\
+&= \exp(0_{\mathbb{C}})
+&&\bigl(\because\ \blkref{negation_plus_self_is_zero_in_cc}\ (x \to i(\tilde\theta)_{\mathbb{C}})\bigr)\\
 &= 1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{scalar_exp_zero}\text{ を }K = \mathbb{C}\text{ で}\bigr)
 \end{aligned}`),
@@ -4880,6 +4892,7 @@ F_{n+1}
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02（全証明の SageMath 検算）: 主張の中で定めていた交換子と n 重の反復を def_ad_X_matrix の ad^n_X への参照にし、実数のスカラー K_1・K_2^* と θ̃_μ を inclusion_rr_to_cc の像 (K_1)_C・(K_2^*)_C・(θ̃)_C で書き、(−1) の冪の指数が ℤ_{≥0} に属することを書き、係数を一つの複素数にまとめてからスカラー倍で掛ける括弧を明示した（主張の中身は不変）。証明は、双線型性の鎖の名前だけの根拠をスカラー倍の主張へのラベル参照に、exp(-iθ̃)exp(iθ̃) = 1 を scalar_exp_product・scalar_exp_zero の鎖に、(A)〜(D) を commutator_of_H_and_check_Z_Y へのラベル参照に、基底段階に単位元の行を、(A)〜(D) の右辺をスカラー倍として読むことを準備に書き、二つの帰納段階の鎖の末尾に冪の約束と指数の等式の行を足して n+1 の主張の右辺まで一続きにし、鎖の後の散文の照合を除いた。検算は sagemath/check/nesting_of_commutator_of_H_and_check_Z/（円分体と不定元で厳密）。",
         "2026-11-02（cosh_sinh_coefficient_conversion_for_check の検算）: 証明の冒頭の準備（交換子の双線型性）の鎖を、同じ事実を使う cosh_sinh_coefficient_conversion_for_check と共有するため独立の主張 commutator_of_scalar_multiples に切り出し、帰納段階の 8 か所の根拠をそれへのラベル参照にした（鎖の中身は不変）。",
+        "2026-11-14（Lean の通しの証明）: 準備（位相の積）の -i(θ̃)_C + i(θ̃)_C = 0 を名前だけの「C の加法の逆元」で消していた。-i(θ̃)_C を def_half_integer_checkZ と同じく (-i)(θ̃)_C と読むことを書き、negative_i_times_complex_is_negation_of_i_times（z → (θ̃)_C）で -(i(θ̃)_C) に直す行を足してから negation_plus_self_is_zero_in_cc（x → i(θ̃)_C）を引くようにした（3 等号 → 4 等号）。exp(0) を exp(0_C) と書いた。式の両端は不変。",
       ],
     },
   },

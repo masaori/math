@@ -15,7 +15,7 @@
 人手は 4 式それぞれを `n ∈ ℤ_{≥0}` についての帰納法で示す。用いるのは
 `commutator_of_H_and_check_Z_Y` の (A)〜(D)（`lie_H1Plus_checkZ`・`lie_H1Plus_checkY`・`lie_H2_checkZ`・`lie_H2_checkY`）、
 交換子の双線型性 `[αX, βW] = αβ[X, W]`（`comm_smul_smul`。人手の 4 行の鎖どおりで、スカラー倍が積と可換な行は `scalar_identity_commutes`）、
-`e^{-iθ~}e^{iθ~} = 1`（`checkPhase_mul_neg`）だけである。
+`e^{-iθ~}e^{iθ~} = 1`（人手の準備（位相の積）の 4 行と 1 対 1 の `checkPhase_mul_neg_chain`）だけである。
 
 右辺は `n` の偶奇で場合分けされているので、Lean では `n = 2k` と `n = 2k+1` を別の定理にし、
 人手の符号の指数を `k` で書く（`(-1)^{n/2} = (-1)^k`、`(-1)^{(n-1)/2} = (-1)^k`、`(-1)^{(n+1)/2} = (-1)^{k+1}`）。
@@ -37,6 +37,9 @@
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCommutatorHCheckZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 
 namespace Ising2D
 
@@ -44,11 +47,36 @@ variable {M : ℕ}
 
 /-! ## 証明の冒頭で使う 2 つの事実 -/
 
-/-- `e^{-iθ~_μ} e^{iθ~_μ} = 1`（人手が帰納段階で使う唯一の位相の性質）。 -/
+/-- `e^{-iθ~_μ} e^{iθ~_μ} = 1`（人手が帰納段階で使う唯一の位相の性質）。`M_col ≠ 0` を取らない形で、
+必要十分版の特殊化（`ClaimNestedCommutatorFromNecSuf.lean`・`ClaimCoefficientConversionFromNecSuf.lean`）が使う。
+指数の和 `checkPhase_add_left` から出し、人手の準備（位相の積）の鎖とは 1 対 1 でない。
+人手の鎖と 1 対 1 の形は `checkPhase_mul_neg_chain`。 -/
 theorem checkPhase_mul_neg (M : ℕ) (μ : ℤ) :
     checkPhase M 1 μ * checkPhase M (-1) μ = 1 := by
   rw [← checkPhase_add_left]
   norm_num
+
+/-- **人手の準備（位相の積）**: `exp(-i(θ~)_ℂ) exp(i(θ~)_ℂ) = 1_ℂ`。calc の 2〜5 段目が人手の 4 行と 1 段ずつ対応する。
+1 段目は `checkPhase M 1 μ`・`checkPhase M (-1) μ` を人手の `exp((-i)(θ~)_ℂ)`・`exp(i(θ~)_ℂ)` と読む段
+（`checkPhase_eq_exp_neg_I_mul` と、`1_ℝθ~ = θ~`・`(-i)((-1)_ℝθ~)_ℂ = i(θ~)_ℂ` の書き換え）で、人手に行は無い。 -/
+theorem checkPhase_mul_neg_chain (hM : M ≠ 0) (μ : ℤ) :
+    checkPhase M 1 μ * checkPhase M (-1) μ = 1 := by
+  calc checkPhase M 1 μ * checkPhase M (-1) μ
+      -- 読み（人手に行は無い）
+      = Complex.exp ((-Complex.I) * (thetaTilde M μ : ℂ))
+          * Complex.exp (Complex.I * (thetaTilde M μ : ℂ)) := by
+        rw [checkPhase_eq_exp_neg_I_mul hM, checkPhase_eq_exp_neg_I_mul hM]
+        congr 2 <;> push_cast <;> ring
+    -- 人手 1 行目: `scalar_exp_product` を `K = ℂ` で
+    _ = Complex.exp ((-Complex.I) * (thetaTilde M μ : ℂ) + Complex.I * (thetaTilde M μ : ℂ)) :=
+        (Complex.exp_add _ _).symm
+    -- 人手 2 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ~)_ℂ`）
+    _ = Complex.exp (-(Complex.I * (thetaTilde M μ : ℂ)) + Complex.I * (thetaTilde M μ : ℂ)) := by
+        rw [neg_I_mul_eq_neg_of_I_mul]
+    -- 人手 3 行目: `negation_plus_self_is_zero_in_cc`（`x → i(θ~)_ℂ`）
+    _ = Complex.exp 0 := by rw [neg_add_self_complex]
+    -- 人手 4 行目: `scalar_exp_zero` を `K = ℂ` で
+    _ = 1 := Complex.exp_zero
 
 /-- 交換子の双線型性 `[αX, βW] = αβ[X, W]`（人手の証明の冒頭の 4 行の鎖）。 -/
 theorem comm_smul_smul (α β : ℂ) (X W : TensorPow M) :
@@ -116,7 +144,7 @@ theorem nesting_H1Plus_checkZ_step_odd_to_even (hM : M ≠ 0) (K1 : ℂ) (μ : �
         ring
     -- `e^{-iθ~}e^{iθ~} = 1` と `(-1)(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}`
     _ = ((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * (k + 1))) • checkZ M μ := by
-        rw [checkPhase_mul_neg, mul_one, ← pow_succ']
+        rw [checkPhase_mul_neg_chain hM, mul_one, ← pow_succ']
 
 /-- **人手 (h1.z) の偶数側**: `n = 2k` のとき `(-1)^k (2K_1)^{2k} check(Z)_μ`。 -/
 theorem nesting_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
@@ -194,7 +222,7 @@ theorem nesting_H1Plus_checkY_step_odd_to_even (hM : M ≠ 0) (K1 : ℂ) (μ : �
         ring
     -- `e^{iθ~}e^{-iθ~} = 1`
     _ = ((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * (k + 1))) • checkY M μ := by
-        rw [mul_comm (checkPhase M (-1) μ), checkPhase_mul_neg, mul_one]
+        rw [mul_comm (checkPhase M (-1) μ), checkPhase_mul_neg_chain hM, mul_one]
 
 /-- **人手 (h1.y) の偶数側**: `n = 2k` のとき `(-1)^k (2K_1)^{2k} check(Y)_μ`。 -/
 theorem nesting_H1Plus_checkY_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :

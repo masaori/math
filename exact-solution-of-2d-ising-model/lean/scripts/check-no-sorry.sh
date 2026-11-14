@@ -1509,6 +1509,7 @@ targets=(
   Ising2D.isUnit_VPlus
   Ising2D.TVPlus_eq_TConj
   Ising2D.comm_smul_smul
+  Ising2D.checkPhase_mul_neg_chain
   Ising2D.nesting_H1Plus_checkZ_step_even_to_odd
   Ising2D.nesting_H1Plus_checkZ_step_odd_to_even
   Ising2D.nesting_H1Plus_checkY_step_even_to_odd

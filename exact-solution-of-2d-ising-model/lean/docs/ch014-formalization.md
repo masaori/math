@@ -27,7 +27,7 @@
 | `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として（一般形） | `def_T_V_plus` |
 | `Ising2D.TV_V1plusHalfUnits_V2Units` | 人手の `V_2` で作った `T_{(V^{(+)})}` は `TVPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値 | `def_T_V_plus` |
 | `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |
-| `Ising2D.checkPhase_mul_neg`（`ClaimNestedCommutator.lean`） | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質） | `nesting_of_commutator_of_H_and_check_Z` の proof |
+| `Ising2D.checkPhase_mul_neg_chain`（`ClaimNestedCommutator.lean`） | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質。準備（位相の積）の 4 行と 1 対 1 の `calc`。`M_col ≠ 0` を取らない `checkPhase_mul_neg` は必要十分版の特殊化が使う） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.comm_smul_smul` | 交換子の双線型性 `[αX, βW] = αβ[X, W]`（人手の証明の冒頭の 4 行の鎖） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.nesting_H1Plus_checkZ_step_even_to_odd` / `..._step_odd_to_even` ほか 8 本 | 4 式それぞれの帰納段階 1（`n` 偶数 → `n+1` 奇数）・帰納段階 2（`n` 奇数 → `n+1` 偶数）の鎖（`C_{n+1} = [K_1H_1^{(+)}, C_n]` と帰納法の仮定 → 双線型性 → (A)〜(D) → スカラーの整理） | 同上 |
 | `Ising2D.nesting_H1Plus_checkZ_even` / `..._odd` | (h1.z) の偶数側・奇数側（偶数側は基底段階の `calc` と、帰納段階 1・2 を続けて当てる `k` の帰納法） | `nesting_of_commutator_of_H_and_check_Z` (h1.z) |
