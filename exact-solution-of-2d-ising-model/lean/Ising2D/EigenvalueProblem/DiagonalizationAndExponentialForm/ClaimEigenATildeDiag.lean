@@ -21,8 +21,9 @@
 各箇条の［］内は、同じ段の必要十分版（`Ising2D.NecSuf.` を省く）である。
 
 * `eigenvector_of_A_theta_tilde` Step 1: 準備の因数分解の恒等式 `factor_identity_thetaTilde`［`skew2_factor_identity`］と、
-  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`（先頭の 7 行は `def_matrix_difference`・`def_matrix_scalar_multiple`・
-  `def_identity_matrix`・`def_kronecker_delta`（`kroneckerDelta_self`・`kroneckerDelta_of_ne`）の成分と、`x·1 = x`・`x·0 = 0`・`y - 0 = y`。成分の式は
+  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`（先頭の 10 行は `def_matrix_difference`・`def_matrix_scalar_multiple`・
+  `def_identity_matrix`・`def_kronecker_delta`（`kroneckerDelta_self`・`kroneckerDelta_of_ne`）の成分と、`x·1 = x`・`x·0 = 0`、
+  `y - 0_ℂ = y` を割った `def_complex_difference`・`multiply_by_minus_one`・`complex_times_zero_is_zero`（`z → -1_ℂ`）・加法の単位元の 4 行。成分の式は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の
   `matrix_sub_apply`・`matrix_smul_apply`・`identity_matrix_apply`）［`skew2_charPoly`・`skew2_charPoly_factor`］、零因子が無いことによる
   `det_AMat_sub_smul_eq_zero_iff`［`skew2_det_eq_zero_iff`］、固有値が `λ_{±,μ}` に限るという statement の主張
@@ -254,9 +255,21 @@ theorem charPoly_factor_thetaTilde (lam : ℂ) :
     _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 - 0;
             AMat K θ 1 0 - 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
         simp only [mul_zero]                    -- `complex_times_zero_is_zero`（`z → λ` を 2 成分へ）
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 + (-0);
+            AMat K θ 1 0 + (-0), AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        rw [sub_eq_add_neg (AMat K θ 0 1) 0, sub_eq_add_neg (AMat K θ 1 0) 0]
+                                -- `def_complex_difference`（`w → 0_ℂ` を 2 成分へ）
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 + (-1) * 0;
+            AMat K θ 1 0 + (-1) * 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        rw [neg_eq_neg_one_mul (0 : ℂ)]
+                                -- `multiply_by_minus_one`（`z → 0_ℂ` を 2 成分へ）
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 + 0;
+            AMat K θ 1 0 + 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        rw [mul_zero (-1 : ℂ)]  -- `complex_times_zero_is_zero`（`z → -1_ℂ` を 2 成分へ）
     _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1; AMat K θ 1 0, AMat K θ 1 1 - lam] :
             Matrix (Fin 2) (Fin 2) ℂ).det := by
-        simp only [sub_zero]                                              -- `y - 0 = y`
+        rw [add_zero (AMat K θ 0 1), add_zero (AMat K θ 1 0)]
+                                -- `complex_numbers_form_a_field` の加法の単位元（`z + 0_ℂ = z` を 2 成分へ）
     _ = (!![g₁ - lam, a; -b, g₁ - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
         rw [AMat_eq]; rfl                                                 -- `def_gamma1_gamma2_of_theta`
     _ = (g₁ - lam) * (g₁ - lam) - a * (-b) := Matrix.det_fin_two_of _ _ _ _  -- 行列式の定義

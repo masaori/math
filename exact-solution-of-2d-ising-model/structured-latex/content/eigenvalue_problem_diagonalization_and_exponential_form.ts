@@ -4187,10 +4187,25 @@ s_1c_2
    \end{pmatrix}
    \quad (\because \blkref{complex_times_zero_is_zero}\ (z \to \lambda)\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} + \left(-0_{\mathbb{C}}\right) \\
+     A(\theta)_{21} + \left(-0_{\mathbb{C}}\right) & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because \blkref{def_complex_difference}\ (z \to A(\theta)_{12},\ w \to 0_{\mathbb{C}}\text{ と }z \to A(\theta)_{21},\ w \to 0_{\mathbb{C}}\text{ の 2 成分へ同時適用})) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} + \left(-1_{\mathbb{C}}\right)0_{\mathbb{C}} \\
+     A(\theta)_{21} + \left(-1_{\mathbb{C}}\right)0_{\mathbb{C}} & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because \blkref{multiply_by_minus_one}\ (z \to 0_{\mathbb{C}})\text{ を 2 成分へ同時適用}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} + 0_{\mathbb{C}} \\
+     A(\theta)_{21} + 0_{\mathbb{C}} & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}\ (z \to -1_{\mathbb{C}})\text{ を 2 成分へ同時適用}) \\
+&= \det\begin{pmatrix}
      A(\theta)_{11} - \lambda & A(\theta)_{12} \\
      A(\theta)_{21} & A(\theta)_{22} - \lambda
    \end{pmatrix}
-   \quad (\because y - 0_{\mathbb{C}} = y\text{ を 2 成分へ同時適用}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元 }z + 0_{\mathbb{C}} = z\ (z \to A(\theta)_{12}\text{ と }z \to A(\theta)_{21}\text{ の 2 成分へ同時適用})) \\
 &= \det\begin{pmatrix} g_1-\lambda & a \\ -b & g_1-\lambda\end{pmatrix}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)
@@ -4366,6 +4381,9 @@ A(\theta)(cv)
           "negation_times_complex_is_negation_of_product_in_cc・complex_times_negation_is_negation_of_product_in_cc・double_negation_in_cc・square_of_complex_number_is_product を 1 行に 1 つずつ（同じ主張を複数箇所へ当てる行を除く）当てる 25 行に割った（鎖は 8 行から 30 行）。" +
           "恒等式は λ, x, y ∈ ℂ について述べ、det の鎖の最後の行で x → (g_1)_ℂ, y → r_ℂ として引く。略記の段落に、ℂ の式の中の実数 g_1, r を inclusion_rr_to_cc の像として読む（def_gamma1_gamma2_of_theta の読みと同じく像の記号を省く）ことを書いた。" +
           "係数の 2 は sum_plus_difference_is_twice_first_in_cc の 2_ℂ なので、det の鎖の 2g_1λ も 2_ℂ g_1λ と書いた。式の値と主張は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の det(A(θ) − λI) の鎖で名前だけだった「y − 0_ℂ = y を 2 成分へ同時適用」の 1 行を、" +
+          "def_complex_difference（w → 0_ℂ）・multiply_by_minus_one（z → 0_ℂ）・complex_times_zero_is_zero（z → −1_ℂ）・complex_numbers_form_a_field の加法の単位元を 1 行に 1 つずつ（どれも 2 成分へ同時適用）当てる 4 行に割った。" +
+          "ℂ の y − 0_ℂ = y を述べる主張は本文に無いので、新しい主張は足さず既存の定義と主張の鎖にした。式の両端と主張は不変。",
       ],
     },
   },

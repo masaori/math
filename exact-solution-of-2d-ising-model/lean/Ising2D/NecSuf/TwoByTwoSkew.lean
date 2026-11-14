@@ -229,10 +229,23 @@ theorem skew2_charPoly (g a b lam : R) :
             (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - 0,
             (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] : Matrix (Fin 2) (Fin 2) R).det := by
         simp only [mul_zero]                                               -- `x·0 = 0`
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 + (-0);
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 + (-0), (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        rw [sub_eq_add_neg ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1) 0, sub_eq_add_neg ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0) 0]
+                                                                           -- 差の定義（`w → 0` を 2 成分へ）
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 + (-1) * 0;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 + (-1) * 0, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        rw [neg_eq_neg_one_mul (0 : R)]                                    -- `-z = (-1)z`（`z → 0` を 2 成分へ）
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 + 0;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 + 0, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        rw [mul_zero (-1 : R)]                                             -- `x·0 = 0`（`x → -1` を 2 成分へ）
     _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1;
             (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] :
             Matrix (Fin 2) (Fin 2) R).det := by
-        simp only [sub_zero]                                               -- `y - 0 = y`
+        rw [add_zero ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1), add_zero ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0)]                        -- `z + 0 = z`（2 成分へ）
     _ = (!![g - lam, a; -b, g - lam] : Matrix (Fin 2) (Fin 2) R).det := rfl  -- `!![g, a; -b, g]` の成分
     _ = (g - lam) * (g - lam) - a * (-b) := Matrix.det_fin_two_of _ _ _ _  -- 行列式の定義
     _ = (g - lam) * (g - lam) + a * b := by ring                           -- 環の四則

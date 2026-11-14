@@ -1,5 +1,5 @@
 # eigenvector_of_A_theta_tilde Step 1 の det(A(θ) − λI) の鎖のうち、差・スカラー倍・単位行列の定義の成分と
-# x·1 = x、x·0 = 0、y − 0 = y の各行を、不定元 A11..A22, λ の多項式環で確かめる（浮動小数点は使わない）。
+# x·1 = x、x·0 = 0 の各行と、y − 0 = y を割った 4 行（差の定義・−z = (−1)z・(−1)·0 = 0・z + 0 = z）を、不定元 A11..A22, λ の多項式環で確かめる（浮動小数点は使わない）。
 R.<A11, A12, A21, A22, lam, g1, a, b> = PolynomialRing(QQ)
 A = [[A11, A12], [A21, A22]]
 delta = lambda i, j: 1 if i == j else 0                                       # def_kronecker_delta
@@ -15,8 +15,17 @@ rows = [
     [[A11 - lam*1, A12 - lam*0], [A21 - lam*0, A22 - lam*1]],                # def_kronecker_delta
     [[A11 - lam, A12 - lam*0], [A21 - lam*0, A22 - lam]],                    # x·1 = x
     [[A11 - lam, A12 - 0], [A21 - 0, A22 - lam]],                            # x·0 = 0
-    [[A11 - lam, A12], [A21, A22 - lam]],                                    # y − 0 = y
+    [[A11 - lam, A12 + (-0)], [A21 + (-0), A22 - lam]],                      # def_complex_difference (w → 0)
+    [[A11 - lam, A12 + (-1)*0], [A21 + (-1)*0, A22 - lam]],                  # multiply_by_minus_one (z → 0)
+    [[A11 - lam, A12 + 0], [A21 + 0, A22 - lam]],                            # complex_times_zero_is_zero (z → −1)
+    [[A11 - lam, A12], [A21, A22 - lam]],                                    # 加法の単位元 z + 0 = z
 ]
+# y − 0 = y を割った 4 行で当てた事実を個別に確かめる
+for y in [A12, A21]:
+    assert y - 0 == y + (-0)            # def_complex_difference
+    assert y + (-0) == y + (-1)*0       # multiply_by_minus_one
+    assert y + (-1)*0 == y + 0          # complex_times_zero_is_zero
+    assert y + 0 == y                   # 加法の単位元
 for X in rows:
     assert X == rows[0], X
     assert det(X) == det(rows[0])
@@ -29,5 +38,5 @@ assert matrix(R, rows[-1]).subs(sub) == matrix(R, [[g1 - lam, a], [-b, g1 - lam]
 I_bad = [[1 for j in range(2)] for i in range(2)]
 bad = [[A[i][j] - lam * I_bad[i][j] for j in range(2)] for i in range(2)]
 assert bad != rows[-1] and det(bad) != det(rows[-1])
-print("det(A − λI) の先頭の 8 行（差・スカラー倍・単位行列の成分と四則）が成分ごとに一致し、A(θ) の代入で [[g1−λ, a], [−b, g1−λ]]")
+print("det(A − λI) の先頭の 11 行（差・スカラー倍・単位行列の成分と四則）が成分ごとに一致し、A(θ) の代入で [[g1−λ, a], [−b, g1−λ]]")
 print("ALL PASS")
