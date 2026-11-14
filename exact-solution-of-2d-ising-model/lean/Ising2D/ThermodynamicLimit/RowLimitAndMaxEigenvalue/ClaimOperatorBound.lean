@@ -33,6 +33,7 @@
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixVectorProductAssociativityAndIdentity
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -60,10 +61,10 @@ theorem psd_of_pd {W : Matrix n n ℝ} (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 <
         _ = ∑ k, ∑ l, (0 : ℝ) * W k l * 0 := rfl                              -- 2 行目: `u_k = 0`、`u_l = 0` を各項へ
         _ = ∑ _k : n, ∑ _l : n, (0 : ℝ) * 0 :=
             Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-              rw [zero_mul (W k l)]                                           -- 3 行目: `ℝ` で `0·a = 0`（`a → (W_ℝ)_kl`）を各項へ
+              rw [Ising2D.real_zero_times_is_zero (W k l)]                    -- 3 行目: `real_zero_times_is_zero`（`x → (W_ℝ)_kl`）を各項へ
         _ = ∑ _k : n, ∑ _l : n, (0 : ℝ) :=
             Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ =>
-              zero_mul 0                                                      -- 4 行目: `ℝ` で `0·a = 0`（`a → 0`）を各項へ
+              Ising2D.real_zero_times_is_zero 0                               -- 4 行目: `real_zero_times_is_zero`（`x → 0`）を各項へ
         _ = 0 := by simp only [Finset.sum_const_zero]                         -- 5 行目: `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
     exact h0.ge
   · exact (hpd u hu).le                                                       -- `u ≠ 0`: `W_real_is_positive_definite`（`x → u`）

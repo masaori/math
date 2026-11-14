@@ -56,6 +56,7 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexi
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -101,7 +102,7 @@ theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : 
       calc vecNorm z ^ 2
           = (0 : ℝ) ^ 2 := by rw [h]                                        -- `‖z‖ = 0` を代入
         _ = 0 * 0 := square_of_real_number_is_product 0                     -- `square_of_real_number_is_product`（`r → 0`）
-        _ = 0 := zero_mul 0                                                 -- ℝ で `0·x = 0`（ℝ は体 `set_and_algebra_notation`）の `x → 0`
+        _ = 0 := Ising2D.real_zero_times_is_zero 0                          -- `real_zero_times_is_zero`（`x → 0`）
     have h2 := norm_sq_pos_of_component_ne_zero hj0
     rw [h0] at h2
     exact lt_irrefl 0 h2
