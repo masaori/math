@@ -286,8 +286,10 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
    \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+   \quad \bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-1)\cdot i,\ (-1)\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
-   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
    \quad (\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
@@ -313,8 +315,10 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
    \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
+   \quad \bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-i)\cdot1,\ (-i)\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0 & i\cdot1\end{pmatrix}
-   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ 0 & i\cdot1\end{pmatrix}
    \quad (\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot1\end{pmatrix}
@@ -342,8 +346,10 @@ S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\
    \quad (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+1\cdot0 & 0+1\cdot(-1) \\ 1\cdot1+0 & 1\cdot0+0\end{pmatrix}
    \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0 & 1\cdot(-1) \\ 1\cdot1+0 & 1\cdot0+0\end{pmatrix}
+   \quad \bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to 1\cdot0,\ 1\cdot(-1))\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}1\cdot0 & 1\cdot(-1) \\ 1\cdot1 & 1\cdot0\end{pmatrix}
-   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}0 & 1\cdot(-1) \\ 1\cdot1 & 0\end{pmatrix}
    \quad (\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}0 & -1 \\ 1 & 0\end{pmatrix}
@@ -1119,6 +1125,7 @@ G
         "2026-11-03（全証明の SageMath 検算）: Step 0 の最後の段落が述べていた相異なるサイトの Pauli 行列の可換性（distinct_site_pauli_matrices_commute）は、Step 1・Step 2 をクロネッカー積の道に替えたあとどの行も使っていないので外した。主張は変えていない。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 並べて書いた積の括弧の付け方が定まっていなかった箇所を直した。主張の G の式を def_finite_product_of_matrices の有限積 G := Π_{j=1}^{M_col}F_j^{(G)}（F_1^{(G)} = σ_1^y、F_j^{(G)} = σ_j^x（2 ≤ j ≤ M_col−1）、F_{M_col}^{(G)} = σ_{M_col}^y）にし（並べて書いた σ_1^yσ_2^xσ_3^x⋯ は M_col = 2, 3 で字面が合わなかった）、M_col ≥ 2（def_H1_plus の範囲）を主張に書いた。Step 1 の準備の Z_m・Y_m の表示を、epsilon_anticommutes_with_jordan_wigner_Z・Z_Y_linearly_independent の Step 3 と同じ「定義の有限積 Π F_j → (k) で因子を σ_j^{a_j} に → site_pauli_prefix_product_kronecker_form → a_j の定義」の 4 行にし、「積は左から掛けたものと読む」の根拠を外した。Step 2 の準備の Y_m・Z_{m+1}・Y_{M_col}・Z_1 の表示は、Step 1 の準備の表示を m を替えて引く形にした（Y_{M_col}・Z_1 は因子の並びの第 1・最後の因子を分けて書く行を足した）。G の表示を a_j^{(G)} と (kG) を置いた同じ 4 行にした。表示の式と鎖の残りは不変。",
         "2026-11-13: Step 0 の三つの Pauli 行列積で σ^x, σ^y, σ^z の成分を引く段落の参照と、鎖の 1 行目・最後の行の根拠（6 行）を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。σ^xσ^x = I を引く段落と Step 1・Step 2 の行は pauli_matrix_products のまま。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 0 の三つの Pauli 行列積の鎖で、左から足す 0_C と右から足す 0_C を「0_C は加法の単位元」の 1 行でまとめて消していた行を、左から足す 0_C（complex_zero_plus_is_original を 2 か所へ）と右から足す 0_C（complex_numbers_form_a_field の加法の単位元を 2 か所へ）の 2 行に分けた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。",
       ],
     },
   },

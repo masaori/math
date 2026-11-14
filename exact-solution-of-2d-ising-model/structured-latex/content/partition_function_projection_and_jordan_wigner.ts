@@ -1755,8 +1755,10 @@ c_i^*&>0
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
 &&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-i)\cdot1,\ (-i)\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0 & i\cdot1\end{pmatrix}
-&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ 0 & i\cdot1\end{pmatrix}
 &&(\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot1\end{pmatrix}
@@ -1784,8 +1786,10 @@ c_i^*&>0
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0+1\cdot i & 0+1\cdot0 \\ 1\cdot0+0 & 1\cdot(-i)+0\end{pmatrix}
 &&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot i & 1\cdot0 \\ 1\cdot0+0 & 1\cdot(-i)+0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to 1\cdot i,\ 1\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}1\cdot i & 1\cdot0 \\ 1\cdot0 & 1\cdot(-i)\end{pmatrix}
-&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}1\cdot i & 0 \\ 0 & 1\cdot(-i)\end{pmatrix}
 &&(\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}1\cdot i & 0 \\ 0 & -i\end{pmatrix}
@@ -1811,8 +1815,10 @@ c_i^*&>0
 &&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
 &&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-1)\cdot i,\ (-1)\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
-&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
 &&(\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
@@ -2100,6 +2106,7 @@ V_1
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
         "2026-11-01: Step 0 の 3 本の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律・結合律、multiply_by_minus_one、(-1)·(-1) = 1）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z と I を置く段落の出典と、Step 0 の 3 本の鎖の 1 行目（σ の成分）と最後の行（= ∓iσ^a）の根拠 6 行を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替え、I := I_{Mat(2,C)} は def_identity_matrix（n = 2）から引く形にした（Pauli 行列の定義を主張から分けたため）。σ^xσ^x = I を引く行は積の公式なので替えていない。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 0 の 3 本の鎖で、左から足す 0_C と右から足す 0_C を「0_C は加法の単位元」の 1 行でまとめて消していた行を、左から足す 0_C（complex_zero_plus_is_original を 2 か所へ）と右から足す 0_C（complex_numbers_form_a_field の加法の単位元を 2 か所へ）の 2 行に分けた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。",
       ],
     },
   },
@@ -2169,8 +2176,10 @@ V_1
 && (\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
 && (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+&& \bigl(\because\ \blkref{complex_zero_plus_is_original}\ (z \to (-1)\cdot i,\ (-1)\cdot0)\ \text{を 2 か所へ}\bigr) \\
 &= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
-&& (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&& (\because 0_{\mathbb{C}}\ \text{は加法の単位元（右から足す 0 を 2 か所へ）。}\blkref{complex_numbers_form_a_field}) \\
 &= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
 && (\because \blkref{complex_times_zero_is_zero}) \\
 &= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
@@ -2317,6 +2326,7 @@ V_2
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
         "2026-11-01: Step 0 の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律、multiply_by_minus_one）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 証明の冒頭で σ^x, σ^y, σ^z と I を置く段落の出典と、Step 0 の鎖の 1 行目（σ の成分）と最後の行（= -iσ^x）の根拠 2 行を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替え、I := I_{Mat(2,C)} は def_identity_matrix（n = 2）から引く形にした（Pauli 行列の定義を主張から分けたため）。式は不変。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 0 の鎖で、左から足す 0_C（第 2 行）と右から足す 0_C（第 1 行）を「0_C は加法の単位元」の 1 行でまとめて消していた行を、左から足す 0_C（complex_zero_plus_is_original を 2 か所へ）と右から足す 0_C（complex_numbers_form_a_field の加法の単位元を 2 か所へ）の 2 行に分けた。complex_numbers_form_a_field が示すのは z + 0_C = z だけであるため。式の両端は不変。",
       ],
     },
   },

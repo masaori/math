@@ -16,9 +16,9 @@ Step 3 の最後の文（`S_1^{(+)}`・`S_2` は実対称なので `real_symmetr
 | 人手 | Lean |
 | --- | --- |
 | Step 0 の準備 `(-i)·i = 1`・`(-i)·(-i) = -1` | `negI_mul_I_eq_one`・`negI_mul_negI_eq_neg_one`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
-| Step 0 の `σ^zσ^y = (-i)σ^x`（11 行。`V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と同じ鎖） | `pauliZ_mul_pauliY`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
-| Step 0 の `σ^yσ^x = (-i)σ^z`（12 行。`V1_in_Z_Y_epsilon` の Step 0 の第 1 の鎖と同じ鎖） | `pauliY_mul_pauliX_eq`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`） |
-| Step 0 の `σ^xσ^z = (-i)σ^y`（11 行） | `pauliX_mul_pauliZ_eq`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
+| Step 0 の `σ^zσ^y = (-i)σ^x`（12 行。`V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と同じ鎖） | `pauliZ_mul_pauliY`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
+| Step 0 の `σ^yσ^x = (-i)σ^z`（13 行。`V1_in_Z_Y_epsilon` の Step 0 の第 1 の鎖と同じ鎖） | `pauliY_mul_pauliX_eq`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`） |
+| Step 0 の `σ^xσ^z = (-i)σ^y`（12 行） | `pauliX_mul_pauliZ_eq`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
 | Step 1 の準備（`Z_m`・`Y_m` のクロネッカー積表示）と `Z_mY_m = (-i)σ^x_m` の 8 行（準備の `Z_m`・`Y_m` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult` → Step 0 の `σ^zσ^y = (-i)σ^x` → `kronecker_multilinear` → `def_site_pauli_matrices`） | `Z_mul_Y_same_by_kronecker_form` の `calc` の 3 段（1・2 段が準備の `Z_m`・`Y_m` の表示で、`Z_prefix_kronecker_form`・`Y_prefix_kronecker_form`（`PartitionFunction/ProjectionAndJordanWigner/ClaimSitePauliPrefixProductKroneckerForm.lean`）が人手の各 4 行（定義の有限積 → (k) → `site_pauli_prefix_product_kronecker_form` → `a_j^{(z)}`・`a_j^{(y)}` の定義）と 1 対 1。3 段目が `Z_mul_Y_same`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`）の `calc` の 3〜8 段） |
 | Step 1 の `H_2` の鎖の 3 行（`def_H2` → 上で得た `Z_mY_m` → `finite_sum_of_scalar_multiples`） | `H2_eq_neg_I_smul_sum_sigmaX` の `calc` の 3 段 |
 | Step 1 の `S_2` の鎖の 8 行（`S_2` の定義 → `H_2` の表示 → `scalar_multiple_is_associative` → ℂ の積の結合律 → 交換律 → 結合律 → `i(-i) = 1` → 乗法の単位元） | `S2_eq_K2star_smul_sum_sigmaX` の `calc` の 7 段（先頭の「`S_2` の定義」の行は Lean では主張の左辺そのもの） |

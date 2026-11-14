@@ -60,7 +60,7 @@ theorem negI_mul_negI_eq_neg_one : (-Complex.I) * (-Complex.I) = -1 :=
     _ = (-1) * 1 := by rw [negI_mul_I_eq_one]                               -- 直前の鎖
     _ = -1 := mul_one _                                                      -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
 
-/-- 人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖 `σ^xσ^z = (-i)σ^y`。人手の鎖の 11 行と `calc` の 11 段が 1 対 1 に対応する。
+/-- 人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖 `σ^xσ^z = (-i)σ^y`。人手の鎖の 12 行と `calc` の 12 段が 1 対 1 に対応する。
 `H1_plus_in_sigma_z_form` の準備 4 が `pauli_x_times_pauli_z` として使う同じ等式でもある。 -/
 theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
   calc
@@ -73,8 +73,10 @@ theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
       fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
     -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
     _ = !![0 + 1 * 0, 0 + 1 * (-1); 1 * 1 + 0, 1 * 0 + 0] := by simp only [zero_mul]
-    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
-    _ = !![1 * 0, 1 * (-1); 1 * 1, 1 * 0] := by simp only [zero_add, add_zero]
+    -- `complex_zero_plus_is_original`（`z → 1·0, 1·(-1)`）を 2 か所へ（具体版は無く `zero_add`）
+    _ = !![1 * 0, 1 * (-1); 1 * 1 + 0, 1 * 0 + 0] := by rw [zero_add, zero_add]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。右から足す 0 を 2 か所へ）
+    _ = !![1 * 0, 1 * (-1); 1 * 1, 1 * 0] := by rw [add_zero, add_zero]
     -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
     _ = !![0, 1 * (-1); 1 * 1, 0] := by rw [mul_zero (1 : ℂ)]
     -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`。2 か所へ同時に適用）

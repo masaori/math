@@ -329,9 +329,12 @@ theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
     -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
     _ = !![1 * 0 + 0, 1 * (-Complex.I) + 0; 0 + (-1) * Complex.I, 0 + (-1) * 0] := by
       simp only [zero_mul]
-    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    -- `complex_zero_plus_is_original`（`z → (-1)·i, (-1)·0`）を 2 か所へ（具体版は無く `zero_add`）
+    _ = !![1 * 0 + 0, 1 * (-Complex.I) + 0; (-1) * Complex.I, (-1) * 0] := by
+      rw [zero_add, zero_add]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。右から足す 0 を 2 か所へ）
     _ = !![1 * 0, 1 * (-Complex.I); (-1) * Complex.I, (-1) * 0] := by
-      simp only [zero_add, add_zero]
+      rw [add_zero, add_zero]
     -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
     _ = !![0, 1 * (-Complex.I); (-1) * Complex.I, 0] := by simp only [mul_zero]
     -- `complex_times_zero_is_zero`（右辺の `(-i)·0` へ。2 か所へ同時に適用）

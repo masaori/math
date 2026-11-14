@@ -64,9 +64,12 @@ theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
     -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
     _ = !![0 + (-Complex.I) * 1, 0 + (-Complex.I) * 0;
           Complex.I * 0 + 0, Complex.I * 1 + 0] := by simp only [zero_mul]
-    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    -- `complex_zero_plus_is_original`（`z → (-i)·1, (-i)·0`）を 2 か所へ（具体版は無く `zero_add`）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0; Complex.I * 0 + 0, Complex.I * 1 + 0] := by
+      rw [zero_add, zero_add]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。右から足す 0 を 2 か所へ）
     _ = !![(-Complex.I) * 1, (-Complex.I) * 0; Complex.I * 0, Complex.I * 1] := by
-      simp only [zero_add, add_zero]
+      rw [add_zero, add_zero]
     -- `complex_times_zero_is_zero`
     _ = !![(-Complex.I) * 1, (-Complex.I) * 0; 0, Complex.I * 1] := by rw [mul_zero Complex.I]
     -- `complex_times_zero_is_zero`（右辺の `(-i)·0` へ）
@@ -108,8 +111,11 @@ theorem pauliX_mul_pauliY_eq : pauliX * pauliY = Complex.I • pauliZ := by
     -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
     _ = !![0 + 1 * Complex.I, 0 + 1 * 0; 1 * 0 + 0, 1 * (-Complex.I) + 0] := by
       simp only [zero_mul]
-    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
-    _ = !![1 * Complex.I, 1 * 0; 1 * 0, 1 * (-Complex.I)] := by simp only [zero_add, add_zero]
+    -- `complex_zero_plus_is_original`（`z → 1·i, 1·0`）を 2 か所へ（具体版は無く `zero_add`）
+    _ = !![1 * Complex.I, 1 * 0; 1 * 0 + 0, 1 * (-Complex.I) + 0] := by
+      rw [zero_add, zero_add]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。右から足す 0 を 2 か所へ）
+    _ = !![1 * Complex.I, 1 * 0; 1 * 0, 1 * (-Complex.I)] := by rw [add_zero, add_zero]
     -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
     _ = !![1 * Complex.I, 0; 0, 1 * (-Complex.I)] := by rw [mul_zero (1 : ℂ)]
     -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
