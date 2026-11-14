@@ -79992,7 +79992,9 @@ M_{D,T}(x)
                     verification: ["sagemath/check/tagged-matching-quadratic-crossing-weight"],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。補辺を ", math(String.raw`P:=P(D,T)\subseteq E_L`), " とし、", ref("claim_tagged_matching_cycle_weight"), " の交互閉路集合を ", math(String.raw`\mathcal C(D,T)`), " とする。短い標識の対は ", ref("claim_projected_edge_cycle_nonbacktracking"), " により閉歩道の通過に一対一に対応する。" ]),
-                      paragraph(["相異なる二つの短い標識の対が横断するとは、対応する通過の終点が等しく、ともに直進し、方向軸が異なることとする（", ref("def_transverse_crossing"), "）。そのような順序のない対の個数を ", math(String.raw`t(D,T)\in\mathbb N`), " と定める。補辺の切断線偶奇を ", math(String.raw`h(P),v(P)\in\{0,1\}`), " と書く。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式" ]),
+                      paragraph(["相異なる二つの短い標識の対が横断するとは、対応する通過の終点が等しく、ともに直進し、方向軸が異なることとする（", ref("def_transverse_crossing"), "）。そのような順序のない対の個数を ", math(String.raw`t(D,T)\in\mathbb N`), " と定める。補辺の切断線偶奇 ", math(String.raw`h(P),v(P)\in\{0,1\}`), " を、", ref("def_seam_parities"), " の指示子により " ]),
+                      displayMath(String.raw`h(P):=\Bigl(\sum_{e\in P}c_{\mathrm h}(e,0)\Bigr)\bmod 2,\qquad v(P):=\Bigl(\sum_{e\in P}c_{\mathrm v}(e,0)\Bigr)\bmod 2`),
+                      paragraph(["と定める（指示子は向きによらないので、向き ", math(String.raw`0`), " で読む）。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式" ]),
                       displayMath(String.raw`M_{D,T}(x)=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}`),
                       paragraph(["が成り立つ。辺長一の短い対も標識と方向で区別して数える。実数体・複素数体は使わない。"]),
                     ],
