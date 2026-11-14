@@ -248,11 +248,58 @@ theorem skew2_charPoly (g a b lam : R) :
         rw [add_zero ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1), add_zero ((!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0)]                        -- `z + 0 = z`（2 成分へ）
     _ = (!![g - lam, a; -b, g - lam] : Matrix (Fin 2) (Fin 2) R).det := rfl  -- `!![g, a; -b, g]` の成分
     _ = (g - lam) * (g - lam) - a * (-b) := Matrix.det_fin_two_of _ _ _ _  -- 行列式の定義
-    _ = (g - lam) * (g - lam) + a * b := by ring                           -- 環の四則
-    _ = g ^ 2 - g * lam - lam * g + lam ^ 2 + a * b := by ring              -- 分配則
-    _ = g ^ 2 - g * lam - g * lam + lam ^ 2 + a * b := by ring              -- 乗法の可換則
-    _ = g ^ 2 - 2 * g * lam + lam ^ 2 + a * b := by ring                     -- 同類項の統合
-    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b) := by ring                   -- 加法の交換則と結合則
+    _ = (g - lam) * (g - lam) + -(a * -b) := by rw [sub_eq_add_neg ((g - lam) * (g - lam)) (a * -b)]
+                          -- 差の定義（`z → (g-λ)(g-λ), w → a(-b)`）
+    _ = (g - lam) * (g - lam) + -(-(a * b)) := by rw [mul_neg a b]
+                          -- `z(-w) = -(zw)`（`z → a, w → b`）
+    _ = (g - lam) * (g - lam) + a * b := by rw [neg_neg (a * b)]
+                          -- `-(-z) = z`（`z → ab`）
+    _ = (g + -lam) * (g + -lam) + a * b := by rw [sub_eq_add_neg g lam]
+                          -- 差の定義（`z → g, w → λ`）を 2 か所へ
+    _ = (g * (g + -lam) + (-lam) * (g + -lam)) + a * b := by rw [add_mul g (-lam) (g + -lam)]
+                          -- 右からの分配律
+    _ = ((g * g + g * -lam) + ((-lam) * g + (-lam) * -lam)) + a * b := by rw [mul_add g g (-lam), mul_add (-lam) g (-lam)]
+                          -- 左からの分配律を 2 か所へ
+    _ = ((g * g + -(g * lam)) + ((-lam) * g + (-lam) * -lam)) + a * b := by rw [mul_neg g lam]
+                          -- `z(-w) = -(zw)`（`z → g, w → λ`）
+    _ = ((g * g + -(g * lam)) + (-(lam * g) + -(lam * -lam))) + a * b := by rw [neg_mul lam g, neg_mul lam (-lam)]
+                          -- `(-z)w = -(zw)`（2 か所へ）
+    _ = ((g * g + -(g * lam)) + (-(lam * g) + -(-(lam * lam)))) + a * b := by rw [mul_neg lam lam]
+                          -- `z(-w) = -(zw)`（`z → λ, w → λ`）
+    _ = ((g * g + -(g * lam)) + (-(lam * g) + lam * lam)) + a * b := by rw [neg_neg (lam * lam)]
+                          -- `-(-z) = z`（`z → λλ`）
+    _ = ((g * g + -(g * lam)) + (-(g * lam) + lam * lam)) + a * b := by rw [mul_comm lam g]
+                          -- 積の可換律
+    _ = (((g * g + -(g * lam)) + -(g * lam)) + lam * lam) + a * b := by rw [← add_assoc (g * g + -(g * lam)) (-(g * lam)) (lam * lam)]
+                          -- 加法の結合律を右辺から左辺へ
+    _ = ((g * g + (-(g * lam) + -(g * lam))) + lam * lam) + a * b := by rw [add_assoc (g * g) (-(g * lam)) (-(g * lam))]
+                          -- 加法の結合律
+    _ = ((g * g + ((-1) * (g * lam) + (-1) * (g * lam))) + lam * lam) + a * b := by rw [neg_eq_neg_one_mul (g * lam)]
+                          -- `-z = (-1)z`（`z → gλ`）を 2 か所へ
+    _ = ((g * g + (-1) * (g * lam + g * lam)) + lam * lam) + a * b := by rw [← mul_add (-1) (g * lam) (g * lam)]
+                          -- 左からの分配律を右辺から左辺へ
+    _ = ((g * g + (-1) * (1 * (g * lam) + 1 * (g * lam))) + lam * lam) + a * b := by rw [one_mul (g * lam)]
+                          -- 積の単位元を 2 か所へ右辺から左辺へ
+    _ = ((g * g + (-1) * ((1 + 1) * (g * lam))) + lam * lam) + a * b := by rw [← add_mul 1 1 (g * lam)]
+                          -- 右からの分配律を右辺から左辺へ
+    _ = ((g * g + (-1) * (2 * (g * lam))) + lam * lam) + a * b := by rw [one_add_one_eq_two]
+                          -- `1 + 1 = 2`（環の数字 `2` の定義）
+    _ = ((g * g + (-1) * ((2 * g) * lam)) + lam * lam) + a * b := by rw [← mul_assoc 2 g lam]
+                          -- 積の結合律を右辺から左辺へ
+    _ = ((g * g + -((2 * g) * lam)) + lam * lam) + a * b := by rw [neg_one_mul ((2 * g) * lam)]
+                          -- `-z = (-1)z` を右辺から左辺へ
+    _ = (lam * lam + (g * g + -((2 * g) * lam))) + a * b := by rw [add_comm (g * g + -((2 * g) * lam)) (lam * lam)]
+                          -- 加法の可換律
+    _ = (lam * lam + (-((2 * g) * lam) + g * g)) + a * b := by rw [add_comm (g * g) (-((2 * g) * lam))]
+                          -- 加法の可換律
+    _ = ((lam * lam + -((2 * g) * lam)) + g * g) + a * b := by rw [← add_assoc (lam * lam) (-((2 * g) * lam)) (g * g)]
+                          -- 加法の結合律を右辺から左辺へ
+    _ = (lam * lam + -((2 * g) * lam)) + (g * g + a * b) := add_assoc _ _ _
+                          -- 加法の結合律
+    _ = (lam * lam - (2 * g) * lam) + (g * g + a * b) := by rw [← sub_eq_add_neg (lam * lam) ((2 * g) * lam)]
+                          -- 差の定義を右辺から左辺へ
+    _ = lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b) := by rw [← sq lam, ← sq g]
+                          -- `z^2 = zz`（2 か所へ）を右辺から左辺へ
 
 /-- **Step 1 の `det(A - λI)` の鎖の残り 2 行**（具体版 `charPoly_factor_thetaTilde` の最後の 2 行）:
 `a b = -s^2` なら `λ^2 - 2gλ + (g^2 + ab) = (λ - (g+s))(λ - (g-s))`。 -/
