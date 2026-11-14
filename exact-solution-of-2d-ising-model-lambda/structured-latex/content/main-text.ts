@@ -9307,7 +9307,7 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
  &=\rho_C(\rho_C(\sigma))
  &&\bigl(\because\ \tau=\rho_C(\sigma)\bigr)\\
  &=\sigma
- &&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr).
+ &&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr)
 \end{aligned}`),
                 paragraph(["これが求める二重反転である。対象集合が空の場合は空集合から自身への唯一の写像となり、入力についての全称命題はそのまま成り立つ。有限集合とその置換だけを扱い、実数体・複素数体への脱出はない。"]),
               ],
