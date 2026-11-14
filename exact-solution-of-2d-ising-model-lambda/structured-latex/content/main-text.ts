@@ -88461,7 +88461,7 @@ b
 &=\bigl(\tfrac12+\tfrac12\bigr)\cdot\varepsilon
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の分配則 }(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda\text{ を右辺から左辺の向きに読む})\\
 &=1\cdot\varepsilon
-&&(\because\ \tfrac12+\tfrac12=1\text{。}\mathbb{Q}\text{ の四則})\\
+&&(\because\ \tfrac12+\tfrac12=1\text{、}\mathbb{Q}\text{ の四則})\\
 &=\varepsilon
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda)
 \end{aligned}`),
