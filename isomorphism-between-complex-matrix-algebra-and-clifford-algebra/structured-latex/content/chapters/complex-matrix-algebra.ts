@@ -392,8 +392,10 @@ export default defineBlocks([
 &&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
 &=(A_{x,z}\cdot_{\mathbb{C}}B_{z,w})\cdot_{\mathbb{C}}C_{w,y}
 &&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\lambda_{w,z}\cdot_{\mathbb{C}}C_{w,y}
+&&\left(\because\ \lambda_{w,z}\ \text{の定義}\right)\\
 &=\lambda_{w,z}\cdot_{\mathbb{C}^{\mathrm{vec}}} C_{w,y}
-&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義と}\ \lambda_{w,z}\ \text{の定義}\right).
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
 \end{aligned}`),
       paragraph([
         "次に、すべての ",
@@ -2011,8 +2013,10 @@ F_{p,q}
 t\in e_M(k)
 &\iff t\in e_{M-1}(k-h)\cup\{M\}
 &&\left(\because\ e_M\ \text{の定義（}k>h\text{ の場合）。}\blkref{def_binary_numbering_of_power_set}\right)\\
+&\iff \bigl(t\in e_{M-1}(k-h)\ \text{または}\ t\in\{M\}\bigr)
+&&\left(\because\ \text{和集合の定義}\right)\\
 &\iff \bigl(t\in e_{M-1}(k-h)\ \text{または}\ t=M\bigr)
-&&\left(\because\ \text{和集合と}\ \{M\}\ \text{の定義}\right)\\
+&&\left(\because\ \{M\}\ \text{の定義}\right)\\
 &\iff t\in e_{M-1}(k-h)
 &&\left(\because\ t\le M-1<M\ \text{なので}\ t\neq M\right).
 \end{aligned}`),

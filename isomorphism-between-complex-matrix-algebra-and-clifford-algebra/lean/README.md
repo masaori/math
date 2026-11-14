@@ -103,6 +103,12 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 二次形式 | `MathematicalToolkit/QuadraticForm/QuadraticForm.lean` | `NecSuf/MathematicalToolkit/QuadraticForm/QuadraticForm.lean` | `QuadraticFormFromNecSuf.lean` |
 | クリフォード代数の定義と普遍性（章「クリフォード代数」の前半） | `CliffordAlgebra/DefinitionAndUniversalProperty/CliffordAlgebra.lean` | `NecSuf/CliffordAlgebra/DefinitionAndUniversalProperty/CliffordAlgebra.lean` | `CliffordAlgebraFromNecSuf.lean` |
 | 分裂した二次空間のクリフォード代数の生成元 | `CliffordAlgebra/SplitQuadraticSpace/Generators.lean` | `NecSuf/CliffordAlgebra/SplitQuadraticSpace/Generators.lean` | `GeneratorsFromNecSuf.lean` |
+| 章「複素行列環」：行列の集合と演算、ℂ-代数であること | `ComplexMatrixAlgebra/MatrixAlgebra/` の 4 ファイル | `NecSuf/ComplexMatrixAlgebra/MatrixAlgebra/` の 4 ファイル | `MatrixAlgebraFromNecSuf.lean` |
+| 章「複素行列環」：行列単位、成分を取り出す写像、単位行列と行列の分解 | `ComplexMatrixAlgebra/MatrixUnits/MatrixUnits.lean` | `NecSuf/ComplexMatrixAlgebra/MatrixUnits/MatrixUnits.lean` | `MatrixUnitsFromNecSuf.lean` |
+| 章「複素行列環」：部分集合全体 P_M と 2 進の番号付け、組の番号付け | `ComplexMatrixAlgebra/PowerSetNumbering/` の 3 ファイル | 置かない（ℂ を含まず両版が引く） | なし |
+| 章「複素行列環」：番号付けによる行列の添字の付け替えと 2 進の番号付けによる行列環の同型 | `ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `NecSuf/ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `MatrixReindexingFromNecSuf.lean` |
+| 章「複素行列環」：クロネッカー積と、二つの行列で挟む写像 | `ComplexMatrixAlgebra/KroneckerProduct/` の 4 ファイル（`MembershipIndex.lean` は ℂ を含まず両版が引く） | `NecSuf/ComplexMatrixAlgebra/KroneckerProduct/` の 3 ファイル | `KroneckerProductFromNecSuf.lean` |
+| 章「同型の証明」のうち、生成作用素の行列の定義とその成分・反交換関係・空集合の位置の行列単位 | `Isomorphism/CreationOperatorMatrices/` の 7 ファイル（`CountAndSign.lean`・`IndexSetOperations.lean`・`VacuumIndexSets.lean` は ℂ を含まず両版が引く） | `NecSuf/Isomorphism/CreationOperatorMatrices/` の 4 ファイル | `CountAndSignFromNecSuf.lean`・`CreationMatricesFromNecSuf.lean`・`VacuumMatrixUnitFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -180,3 +186,16 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   a + (-a) = 0 は、γ(v)² の計算・反交換子・普遍性の存在の三つの主張だけが使う。
 - 分裂した二次空間の反交換関係と平方が零であることは、章の前半の仮定のほかに K の性質を足さない
   （W^* を線型空間にする性質と、双対基底が基底であることに要る a · 1 = a は、どちらも章の前半の仮定から出る）。
+
+## 必要十分版が示したこと（章「複素行列環」、章「同型の証明」の生成作用素の行列）
+
+- 行列の積を定めるには、係数を自分自身の上の線型空間にする八つの性質 L（`ValuedMapsLaws`）が要る（積の成分が K^vec の中の和なので）。
+  左右の分配法則、二つの付け替えが互いの逆であること、2 進の番号付けが全単射であることは、L のほかに係数の性質を使わない。
+- 乗法の交換法則が要るのは、積の結合法則（本文の経路が和のスカラー倍を左から掛けるため）と、スカラー倍の右の因子との両立
+  （主張そのものが λ の交換を要する）である。したがって行列の集合が K-代数であることは交換法則を要る。
+- 単位行列を右から掛けること・行列単位の積の規則・行列の行列単位による分解・生成作用素の行列を右から掛けた成分は、
+  δ の値が 0 か 1 なので、乗法の交換法則全体ではなく 0 と 1 がどの元とも交換することだけで足りる。
+- 符号 ς は -1 の代わりの元 n で定まり、ς(k)·ς(k) = 1 には n·n = 1 と 1 + n = 0 などの n についての個別の等式と、
+  n がどの元とも交換することだけが要る。ς の値どうしの交換は、乗法の結合法則と 1·a = a から ς(a)·ς(b) = ς(a+b) を経て出る。
+- 空集合の位置の行列単位についての三つの主張は、本文の前提 M ∈ ℤ_{≥1} を使わない（M = 0 でも同じ証明が通る）。
+  第二・第三の主張は n について何も仮定しない（使う符号は ς(0) = 1 だけ）。
