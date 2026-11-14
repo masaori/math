@@ -3020,14 +3020,33 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
     ],
   },
   {
+    id: "complex_matrix_algebra_claim_two_element_set_is_finite_set",
+    kind: "claim",
+    title: { text: "{1,2} は有限集合である" },
+    labels: ["claim_two_element_set_is_finite_set"],
+    statement: [
+      paragraph([
+        math(String.raw`\mathrm{id}_2:\{1,2\}\to\{1,2\}`), " を恒等写像とする。", math(String.raw`(2,\mathrm{id}_2)`), " は ", math(String.raw`\{1,2\}`),
+        " の番号付け（", ref("def_numbering_of_finite_set"), "）であり、", math(String.raw`\{1,2\}`), " は有限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathrm{id}_2`), " は ", math(String.raw`\{1,\dots,2\}=\{1,2\}`), " から ", math(String.raw`\{1,2\}`), " への写像で、",
+        math(String.raw`\mathrm{id}_2`), " 自身が逆写像なので全単射である。したがって ", math(String.raw`(2,\mathrm{id}_2)`), " は番号付けであり、",
+        math(String.raw`\{1,2\}`), " は番号付けをもつので有限集合である（", ref("def_numbering_of_finite_set"), "）。",
+      ]),
+    ],
+  },
+  {
     id: "complex_matrix_algebra_claim_entry_of_product_of_matrices_indexed_by_two_element_set",
     kind: "claim",
     title: { text: "{1,2} で添字づけた行列の積の成分" },
     labels: ["claim_entry_of_product_of_matrices_indexed_by_two_element_set"],
     statement: [
       paragraph([
-        math(String.raw`\mathrm{id}_2:\{1,2\}\to\{1,2\}`), " を恒等写像とすると、", math(String.raw`(2,\mathrm{id}_2)`), " は ", math(String.raw`\{1,2\}`),
-        " の番号付けなので、", math(String.raw`\{1,2\}`), " は有限集合であり（", ref("def_numbering_of_finite_set"), "）、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        math(String.raw`\mathrm{id}_2:\{1,2\}\to\{1,2\}`), " を恒等写像とする。", math(String.raw`\{1,2\}`), " は有限集合なので（",
+        ref("claim_two_element_set_is_finite_set"), "）、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
         "（", ref("def_matrices_indexed_by_finite_set"), "）が定まる。", math(String.raw`A,B\in\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), " と ", math(String.raw`a,b\in\{1,2\}`),
         " について次が成り立つ。",
       ]),
@@ -3043,7 +3062,7 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
 &=\sum_{z\in\{1,2\}}A_{a,z}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{z,b}
 &&\left(\because\ \blkref{def_matrices_indexed_by_finite_set}\right)\\
 &=\sum_{j=1}^{2}A_{a,\mathrm{id}_2(j)}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{\mathrm{id}_2(j),b}
-&&\left(\because\ \text{番号付け}\ (2,\mathrm{id}_2)\ \text{で開く。}\blkref{def_sum_over_finite_set}\right)\\
+&&\left(\because\ \text{番号付け}\ (2,\mathrm{id}_2)\ \text{（}\blkref{claim_two_element_set_is_finite_set}\text{）で開く。}\blkref{def_sum_over_finite_set}\right)\\
 &=\Bigl(0_{\mathbb{C}^{\mathrm{vec}}}+_{\mathbb{C}^{\mathrm{vec}}}\bigl(A_{a,1}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{1,b}\bigr)\Bigr)+_{\mathbb{C}^{\mathrm{vec}}}\bigl(A_{a,2}\cdot_{\mathbb{C}^{\mathrm{vec}}}B_{2,b}\bigr)
 &&\left(\because\ \blkref{def_linear_combination}\right)\\
 &=\Bigl(0_{\mathbb{C}}+_{\mathbb{C}}\bigl(A_{a,1}\cdot_{\mathbb{C}}B_{1,b}\bigr)\Bigr)+_{\mathbb{C}}\bigl(A_{a,2}\cdot_{\mathbb{C}}B_{2,b}\bigr)
@@ -3061,7 +3080,7 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とする。", math(String.raw`\mathcal{P}_M`), " は有限集合であり（", ref("claim_binary_numbering_is_numbering_of_power_set"), "）、",
-        math(String.raw`(2,\mathrm{id}_2)`), "（", math(String.raw`\mathrm{id}_2`), " は恒等写像）は ", math(String.raw`\{1,2\}`), " の番号付けなので ", math(String.raw`\{1,2\}`), " も有限集合である（", ref("def_numbering_of_finite_set"), "）。",
+        math(String.raw`\{1,2\}`), " も有限集合である（", ref("claim_two_element_set_is_finite_set"), "）。",
         math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`k`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`), "（", ref("def_matrices_indexed_by_finite_set"),
         "）の元 ", math(String.raw`A_k`), " が一つずつ与えられているとする。", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元 ",
         math(String.raw`\mathop{\boxtimes}\limits_{k=1}^{M}A_k`), " を、", math(String.raw`S,T\in\mathcal{P}_M`), " についての成分で次のように定め、族 ",

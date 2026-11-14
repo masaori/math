@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-14: 台帳の「研究管理 11/14 の読解で見つかった、系『奇数次元』『Jordan–Wigner 行列』の直し」の行を書き切った。奇数次元の設定から j・u・g を定義のブロックへ分け（h は def_inverse_of_two_in_complex_numbers を引く）、o・C_y・⟨φ1,φ2⟩・{1,2} の有限性を定義・主張に分けた。二つの定理を「互いに逆な同型」だけの主張にし、Jordan–Wigner の定理のラベルを theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms に改めて基底の像を二つの主張に出した。記号の衝突と地の文の鎖を直し、SageMath の二つの検算を本物の対照と途中の行の検算つきにした。次は台帳の「系『Jordan–Wigner 行列への接続』の後半」の行。
+
 - 2026-11-14: 台帳の「研究管理 11/14 の読解で見つかった、系『基底と行列の番号付け』『一般の偶数次元の非退化な二次空間』の直し」の行を書き切った。虚数単位 i を ℂ の前提の元として定義し（def_imaginary_unit・claim_imaginary_unit_squares_to_minus_one）、ℝ への脱出を平方根の主張の完備性の事実だけに限った。設定の定義を記号ごとの定義と主張（基底 d の値、(Y,Q)、正規直交基底 e、h と 1+1≠0、N_M≥1）に分け、記号の衝突（c→ω、γ→ζ、代入の V・b）と一行二根拠を直し、地の文の計算を整列した式変形にした。SageMath は直交基底と等長写像の検算を一行ずつの形にし、Φ_Y(Ψ_Y(c_m))=c_m を Ψ の式の評価で確かめた。台帳の Lean の行「系『基底と行列の番号付け』と『一般の偶数次元』」の本文のブロックは 8 つ増えた。
 
 - 2026-11-14: 台帳の「Lean の導出版の欠けと検査の穴を埋める」の行を書き切った。導出版が欠けていた 11 の主張の …_of_necSuf を TensorAlgebraStructureFromNecSuf.lean に置き、check-no-sorry.sh を標準の三つの公理以外への依存を落とす形にし、Numbering.lean の不要な ℂ の import を外した。

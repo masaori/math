@@ -6,7 +6,7 @@
   def_membership_index_of_subset     idxOne・idxTwo（{1,2} の二元）・membershipIndex（o_T(k)）・
                                      membershipIndex_of_mem・membershipIndex_of_not_mem（二つの場合）・
                                      idxOne_ne_idxTwo（1 ≠ 2）
-  claim_entry_of_product_of_matrices_indexed_by_two_element_set の前提
+  claim_two_element_set_is_finite_set
                                      isNumbering_two（(2, id_2) は {1,2} の番号付け）・isFiniteSet_two（{1,2} は有限集合）
 
 {1,2} は既存の `Idx 2`（{1,…,n} の部分型）で表し、その二元 1・2 を `idxOne`・`idxTwo` と書く。
@@ -30,12 +30,12 @@ theorem idxOne_ne_idxTwo : idxOne ≠ idxTwo := by
   have h' : (1 : ℕ) = 2 := congrArg Subtype.val h
   omega
 
-/-- 本文 `claim_entry_of_product_of_matrices_indexed_by_two_element_set` の前提：id_2 を恒等写像とすると、
+/-- 本文 `claim_two_element_set_is_finite_set` の前半：id_2 を恒等写像とすると、
 (2, id_2) は {1,2} の番号付けである。 -/
 theorem isNumbering_two : IsNumbering 2 (fun k : Idx 2 => k) :=
   ⟨fun _ _ h => h, fun i => ⟨i, rfl⟩⟩
 
-/-- 本文 `claim_entry_of_product_of_matrices_indexed_by_two_element_set` の前提：{1,2} は有限集合である。 -/
+/-- 本文 `claim_two_element_set_is_finite_set` の後半：{1,2} は有限集合である。 -/
 theorem isFiniteSet_two : IsFiniteSet (Idx 2) := ⟨2, fun k => k, isNumbering_two⟩
 
 open Classical in

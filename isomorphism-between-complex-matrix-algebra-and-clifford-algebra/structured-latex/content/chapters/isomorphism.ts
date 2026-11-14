@@ -10273,12 +10273,21 @@ a
     ],
   },
   {
+    id: "isomorphism_definition_family_of_unit_of_complex_numbers",
+    kind: "definition",
+    title: { text: "ℂ の乗法の単位元一つからなる族 o" },
+    labels: ["def_family_of_unit_of_complex_numbers"],
+    statement: [
+      paragraph(["写像 ", math(String.raw`o:\{1\}\to\mathbb{C}`), " を ", math(String.raw`o(1):=1_{\mathbb{C}}`), " で定め、", math(String.raw`o_1:=o(1)`), " と書く。"]),
+    ],
+  },
+  {
     id: "isomorphism_claim_family_of_unit_is_basis_of_complex_numbers",
     kind: "claim",
     title: { text: "ℂ の乗法の単位元一つからなる族は、ℂ に線型空間の構造を与えた組の基底である" },
     labels: ["claim_family_of_unit_is_basis_of_complex_numbers"],
     statement: [
-      paragraph(["写像 ", math(String.raw`o:\{1\}\to\mathbb{C}`), " を ", math(String.raw`o(1):=1_{\mathbb{C}}`), " で定め、", math(String.raw`o_1:=o(1)`), " と書く。このとき ", math(String.raw`o`), " は ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), "（", ref("def_complex_numbers_as_complex_vector_space"), "、", ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"), "）の基底（", ref("def_basis"), "）である。"]),
+      paragraph([math(String.raw`o`), " を ", ref("def_family_of_unit_of_complex_numbers"), " の写像とする。", math(String.raw`o`), " は ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), "（", ref("def_complex_numbers_as_complex_vector_space"), "、", ref("claim_complex_numbers_as_vector_space_is_complex_vector_space"), "）の基底（", ref("def_basis"), "）である。"]),
     ],
     proof: [
       paragraph(["準備として、", math(String.raw`\lambda_1\in\mathbb{C}`), " について ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), " の中の線型結合（", ref("def_linear_combination"), "）を計算する。"]),
@@ -10289,7 +10298,7 @@ a
 &=0_{\mathbb{C}}+_{\mathbb{C}}\bigl(\lambda_1\cdot_{\mathbb{C}}o_1\bigr)
 &&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}},\ \cdot_{\mathbb{C}^{\mathrm{vec}}},\ 0_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義}\text{。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
 &=0_{\mathbb{C}}+_{\mathbb{C}}\bigl(\lambda_1\cdot_{\mathbb{C}}1_{\mathbb{C}}\bigr)
-&&\left(\because\ o\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_family_of_unit_of_complex_numbers}\right)\\
 &=\lambda_1
 &&\left(\because\ \mathbb{C}\ \text{の四則}\right).
 \end{aligned}`),
@@ -10458,11 +10467,57 @@ B_{q'}\bigl(\mathrm{in}'_1(v),\mathrm{in}'_2(1_{\mathbb{C}})\bigr)
     title: { text: "奇数次元の系で固定する記号" },
     labels: ["def_setting_of_odd_dimensional_corollary"],
     statement: [
-      paragraph([math(String.raw`M`), "、", math(String.raw`W`), "、", math(String.raw`w`), "、", math(String.raw`f`), "、", math(String.raw`V`), "、", math(String.raw`q`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), "、", math(String.raw`\mathrm{in}_1`), "、", math(String.raw`\mathrm{in}_2`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。同じ定義が基底 ", math(String.raw`c`), " と呼ぶ ", math(String.raw`V`), " の基底を、生成作用素の行列との区別のため、ここでは ", math(String.raw`d:\{1,\dots,2M\}\to V`), " と書く。", math(String.raw`V'`), "、", math(String.raw`\mathrm{in}'_1`), "、", math(String.raw`\mathrm{in}'_2`), "、", math(String.raw`q'`), " を ", ref("def_odd_dimensional_extension_of_split_quadratic_space"), " のもの、", math(String.raw`o`), " を ", ref("claim_family_of_unit_is_basis_of_complex_numbers"), " の ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), " の基底とする。"]),
+      paragraph([math(String.raw`M`), "、", math(String.raw`W`), "、", math(String.raw`w`), "、", math(String.raw`f`), "、", math(String.raw`V`), "、", math(String.raw`q`), "、", math(String.raw`\mathrm{Cl}(V,q)`), "、", math(String.raw`\gamma`), "、", math(String.raw`\mathrm{in}_1`), "、", math(String.raw`\mathrm{in}_2`), " を ", ref("def_clifford_algebra_of_split_quadratic_space"), " のもの、", math(String.raw`a^{\dagger}_i`), " を ", ref("def_creation_generator_of_split_clifford_algebra"), "、", math(String.raw`a_i`), " を ", ref("def_annihilation_generator_of_split_clifford_algebra"), " の元とし、", math(String.raw`A:=\mathrm{Cl}(V,q)`), " と書く。同じ定義が基底 ", math(String.raw`c`), " と呼ぶ ", math(String.raw`V`), " の基底を、生成作用素の行列との区別のため、ここでは ", math(String.raw`d:\{1,\dots,2M\}\to V`), " と書く。", math(String.raw`V'`), "、", math(String.raw`\mathrm{in}'_1`), "、", math(String.raw`\mathrm{in}'_2`), "、", math(String.raw`q'`), " を ", ref("def_odd_dimensional_extension_of_split_quadratic_space"), " のもの、", math(String.raw`o`), " を ", ref("def_family_of_unit_of_complex_numbers"), " の写像、すなわち ", ref("claim_family_of_unit_is_basis_of_complex_numbers"), " の ", math(String.raw`\mathbb{C}^{\mathrm{vec}}`), " の基底とする。"]),
       paragraph([math(String.raw`d':\{1,\dots,2M+1\}\to V'`), " を、", ref("claim_basis_of_direct_sum_of_two_vector_spaces"), " で ", math(String.raw`V_1:=V`), "、", math(String.raw`V_2:=\mathbb{C}^{\mathrm{vec}}`), "、", math(String.raw`n:=2M`), "、", math(String.raw`n':=1`), "、", math(String.raw`b:=d`), "、", math(String.raw`b':=o`), " としたときの ", math(String.raw`V'`), " の基底とする。", math(String.raw`q'`), " は ", math(String.raw`V'`), " 上の二次形式なので（", ref("claim_odd_extension_quadratic_form_is_quadratic_form"), "）、基底 ", math(String.raw`d'`), " で構成した ", math(String.raw`(V',q')`), " のクリフォード代数（", ref("def_clifford_ideal"), "、", ref("def_clifford_algebra"), "）を ", math(String.raw`A':=\mathrm{Cl}(V',q')`), " と書き、", math(String.raw`\gamma':V'\to A'`), " を ", ref("def_clifford_generator_map"), " の写像とする。"]),
-      paragraph([math(String.raw`\mathrm{in}'_1`), " は ", math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`), " への等長写像なので（", ref("claim_embedding_into_first_component_of_odd_extension_is_isometry"), "）、それが誘導する準同型（", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "）を ", math(String.raw`j:=\mathrm{Cl}(\mathrm{in}'_1):A\to A'`), " と書く。", math(String.raw`j`), " は ℂ-代数の準同型で、", math(String.raw`V`), " から ", math(String.raw`A'`), " への写像として ", math(String.raw`j\circ\gamma=\gamma'\circ\mathrm{in}'_1`), " を満たす。", math(String.raw`V'`), " の元 ", math(String.raw`u`), " と ", math(String.raw`A'`), " の元 ", math(String.raw`g`), " を次で定める。"]),
-      displayMath(String.raw`u:=\mathrm{in}'_2(1_{\mathbb{C}})\in V',\qquad g:=\gamma'(u)\in A'`),
-      paragraph([math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "（", ref("def_matrices_indexed_by_finite_set"), "、", ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"), "）と書き、", math(String.raw`\Phi:A\to B`), " を ", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "、", math(String.raw`\Psi:B\to A`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " の写像とする。ℂ の元 ", math(String.raw`a`), " の加法の逆元を ", math(String.raw`-_{\mathbb{C}}a`), " と書き、", math(String.raw`-1_{\mathbb{C}}:=-_{\mathbb{C}}1_{\mathbb{C}}`), " とする。ℂ の中で ", math(String.raw`1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}\neq 0_{\mathbb{C}}`), " なので、その乗法の逆元を ", math(String.raw`h:=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})^{-1}\in\mathbb{C}`), " と書く。"]),
+      paragraph([math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "（", ref("def_matrices_indexed_by_finite_set"), "、", ref("claim_matrices_indexed_by_finite_set_form_complex_algebra"), "）と書き、", math(String.raw`\Phi:A\to B`), " を ", ref("def_homomorphism_from_clifford_algebra_to_matrix_algebra"), "、", math(String.raw`\Psi:B\to A`), " を ", ref("def_homomorphism_from_matrix_algebra_to_clifford_algebra"), " の写像とする。ℂ の元 ", math(String.raw`a`), " の加法の逆元を ", math(String.raw`-_{\mathbb{C}}a`), " と書き、", math(String.raw`-1_{\mathbb{C}}:=-_{\mathbb{C}}1_{\mathbb{C}}`), " とする。"]),
+    ],
+  },
+  {
+    id: "isomorphism_definition_induced_homomorphism_into_odd_extension_clifford_algebra",
+    kind: "definition",
+    title: { text: "第一成分への埋め込み写像が誘導する、一つの次元を足した空間のクリフォード代数への準同型" },
+    labels: ["def_induced_homomorphism_into_odd_extension_clifford_algebra"],
+    statement: [
+      paragraph([math(String.raw`V`), "、", math(String.raw`q`), "、", math(String.raw`A`), "、", math(String.raw`V'`), "、", math(String.raw`q'`), "、", math(String.raw`\mathrm{in}'_1`), "、", math(String.raw`A'`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\mathrm{in}'_1`), " は ", math(String.raw`(V,q)`), " から ", math(String.raw`(V',q')`), " への等長写像なので（", ref("claim_embedding_into_first_component_of_odd_extension_is_isometry"), "）、それが誘導する ℂ-代数の準同型（", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "）を ", math(String.raw`j:=\mathrm{Cl}(\mathrm{in}'_1):A\to A'`), " と書く。"]),
+    ],
+  },
+  {
+    id: "isomorphism_claim_induced_homomorphism_into_odd_extension_after_generator_map",
+    kind: "claim",
+    title: { text: "誘導された準同型 j を生成元の写像の像に当てると、第一成分への埋め込みの像の生成元になる", tex: String.raw`\text{誘導された準同型 }j\text{ を }\gamma\text{ の像に当てると、第一成分への埋め込みの }\gamma'\text{ の像になる}` },
+    labels: ["claim_induced_homomorphism_into_odd_extension_after_generator_map"],
+    statement: [
+      paragraph([math(String.raw`V`), "、", math(String.raw`\gamma`), "、", math(String.raw`\gamma'`), "、", math(String.raw`\mathrm{in}'_1`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のもの、", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型とする。すべての ", math(String.raw`v\in V`), " について次が成り立つ。"]),
+      displayMath(String.raw`j\bigl(\gamma(v)\bigr)=\gamma'\bigl(\mathrm{in}'_1(v)\bigr)`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+j\bigl(\gamma(v)\bigr)
+&=\mathrm{Cl}(\mathrm{in}'_1)\bigl(\gamma(v)\bigr)
+&&\left(\because\ \blkref{def_induced_homomorphism_into_odd_extension_clifford_algebra}\right)\\
+&=\gamma'\bigl(\mathrm{in}'_1(v)\bigr)
+&&\left(\because\ \theta:=\mathrm{in}'_1\ \text{として}\ \mathrm{Cl}(\theta)\circ\gamma=\gamma'\circ\theta\text{。}\blkref{def_homomorphism_of_clifford_algebras_induced_by_isometry}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_added_unit_vector_of_odd_extension",
+    kind: "definition",
+    title: { text: "足した次元の単位の元 u" },
+    labels: ["def_added_unit_vector_of_odd_extension"],
+    statement: [
+      paragraph([math(String.raw`V'`), " と ", math(String.raw`\mathrm{in}'_2`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`V'`), " の元 ", math(String.raw`u`), " を次で定める。"]),
+      displayMath(String.raw`u:=\mathrm{in}'_2(1_{\mathbb{C}})`),
+    ],
+  },
+  {
+    id: "isomorphism_definition_added_generator_of_odd_extension_clifford_algebra",
+    kind: "definition",
+    title: { text: "足した次元の単位の元の、生成元の写像による像 g", tex: String.raw`\text{足した次元の単位の元の }\gamma'\text{ による像 }g` },
+    labels: ["def_added_generator_of_odd_extension_clifford_algebra"],
+    statement: [
+      paragraph([math(String.raw`A'`), " と ", math(String.raw`\gamma'`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のもの、", math(String.raw`u`), " を ", ref("def_added_unit_vector_of_odd_extension"), " の元とする。", math(String.raw`A'`), " の元 ", math(String.raw`g`), " を次で定める。"]),
+      displayMath(String.raw`g:=\gamma'(u)`),
     ],
   },
   {
@@ -10471,17 +10526,17 @@ B_{q'}\bigl(\mathrm{in}'_1(v),\mathrm{in}'_2(1_{\mathbb{C}})\bigr)
     title: { text: "足した次元の単位の元の像の平方は 1 である" },
     labels: ["claim_square_of_added_generator_is_one"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`g\cdot_{A'}g=1_{A'}`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元、", math(String.raw`u`), " を ", ref("def_added_unit_vector_of_odd_extension"), " の元とする。", math(String.raw`g\cdot_{A'}g=1_{A'}`), " である。"]),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
 g\cdot_{A'}g
 &=\gamma'(u)\cdot_{A'}\gamma'(u)
-&&\left(\because\ g\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_generator_of_odd_extension_clifford_algebra}\right)\\
 &=q'(u)\ast_{A'}1_{A'}
 &&\left(\because\ \blkref{claim_square_of_clifford_generator}\right)\\
 &=q'\bigl(\mathrm{in}'_2(1_{\mathbb{C}})\bigr)\ast_{A'}1_{A'}
-&&\left(\because\ u\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_unit_vector_of_odd_extension}\right)\\
 &=1_{\mathbb{C}}\ast_{A'}1_{A'}
 &&\left(\because\ \blkref{claim_odd_extension_quadratic_form_at_added_unit_vector_is_one}\right)\\
 &=1_{A'}
@@ -10495,7 +10550,7 @@ g\cdot_{A'}g
     title: { text: "足した次元の単位の元の像は、分裂した二次空間の元の像と反交換する" },
     labels: ["claim_added_generator_anticommutes_with_image_of_split_space"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。すべての ", math(String.raw`v\in V`), " について次が成り立つ。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。すべての ", math(String.raw`v\in V`), " について次が成り立つ。"]),
       displayMath(String.raw`g\cdot_{A'}j\bigl(\gamma(v)\bigr)+_{A'}j\bigl(\gamma(v)\bigr)\cdot_{A'}g=0_{A'}`),
     ],
     proof: [
@@ -10503,15 +10558,15 @@ g\cdot_{A'}g
       displayMath(String.raw`\begin{aligned}
 g\cdot_{A'}j\bigl(\gamma(v)\bigr)+_{A'}j\bigl(\gamma(v)\bigr)\cdot_{A'}g
 &=g\cdot_{A'}\gamma'\bigl(\mathrm{in}'_1(v)\bigr)+_{A'}\gamma'\bigl(\mathrm{in}'_1(v)\bigr)\cdot_{A'}g
-&&\left(\because\ j\circ\gamma=\gamma'\circ\mathrm{in}'_1\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{claim_induced_homomorphism_into_odd_extension_after_generator_map}\right)\\
 &=\gamma'(u)\cdot_{A'}\gamma'\bigl(\mathrm{in}'_1(v)\bigr)+_{A'}\gamma'\bigl(\mathrm{in}'_1(v)\bigr)\cdot_{A'}\gamma'(u)
-&&\left(\because\ g\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_generator_of_odd_extension_clifford_algebra}\right)\\
 &=B_{q'}\bigl(u,\mathrm{in}'_1(v)\bigr)\ast_{A'}1_{A'}
 &&\left(\because\ \blkref{claim_anticommutator_of_clifford_generator_images_is_polarization}\right)\\
 &=B_{q'}\bigl(\mathrm{in}'_1(v),u\bigr)\ast_{A'}1_{A'}
 &&\left(\because\ \blkref{claim_polarization_is_symmetric}\right)\\
 &=B_{q'}\bigl(\mathrm{in}'_1(v),\mathrm{in}'_2(1_{\mathbb{C}})\bigr)\ast_{A'}1_{A'}
-&&\left(\because\ u\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_unit_vector_of_odd_extension}\right)\\
 &=0_{\mathbb{C}}\ast_{A'}1_{A'}
 &&\left(\because\ \blkref{claim_polarization_of_odd_extension_between_first_component_and_added_unit_vector_is_zero}\right)\\
 &=0_{A'}
@@ -10699,7 +10754,7 @@ a^{\dagger}_i\cdot_A\chi_i
     title: { text: "符号の因子の平方は 1 である" },
     labels: ["claim_square_of_parity_factor_is_one"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`x_i:=a_i\cdot_A a^{\dagger}_i`), " は ", ref("def_vacuum_factor_of_split_clifford_algebra"), " の元、", math(String.raw`\chi_i`), " は ", ref("def_parity_factor_of_split_clifford_algebra"), " の元である。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " は ", ref("def_parity_factor_of_split_clifford_algebra"), " の元である。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について次が成り立つ。"]),
       displayMath(String.raw`\chi_i\cdot_A\chi_i=1_A`),
     ],
     proof: [
@@ -10773,14 +10828,22 @@ y\cdot_A(p\cdot_A r)
     ],
   },
   {
+    id: "isomorphism_definition_elements_commuting_with_fixed_element",
+    kind: "definition",
+    title: { text: "固定した元と交換する元の全体" },
+    labels: ["def_elements_commuting_with_fixed_element"],
+    statement: [
+      paragraph([math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`y\in A`), " とする。", math(String.raw`A`), " の部分集合 ", math(String.raw`C_y`), " を次で定める。"]),
+      displayMath(String.raw`C_y:=\{\,a\in A:\ y\cdot_A a=a\cdot_A y\,\}`),
+    ],
+  },
+  {
     id: "isomorphism_claim_elements_commuting_with_fixed_element_form_subalgebra",
     kind: "claim",
     title: { text: "固定した元と交換する元の全体は部分代数である" },
     labels: ["claim_elements_commuting_with_fixed_element_form_subalgebra"],
     statement: [
-      paragraph([math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`y\in A`), " とし、", math(String.raw`A`), " の部分集合 ", math(String.raw`C_y`), " を次で定める。"]),
-      displayMath(String.raw`C_y:=\{\,a\in A:\ y\cdot_A a=a\cdot_A y\,\}`),
-      paragraph(["このとき ", math(String.raw`C_y`), " は ", math(String.raw`A`), " の部分代数（", ref("def_subalgebra"), "）である。"]),
+      paragraph([math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`y\in A`), " とし、", math(String.raw`C_y`), " を ", ref("def_elements_commuting_with_fixed_element"), " の部分集合とする。", math(String.raw`C_y`), " は ", math(String.raw`A`), " の部分代数（", ref("def_subalgebra"), "）である。"]),
     ],
     proof: [
       paragraph([ref("def_subalgebra"), " の四条件を示す。", math(String.raw`a,b`), " を ", math(String.raw`C_y`), " の任意の元、", math(String.raw`\lambda`), " を ℂ の任意の元とする。", math(String.raw`a\in C_y`), " と ", math(String.raw`b\in C_y`), " は ", math(String.raw`y\cdot_A a=a\cdot_A y`), " と ", math(String.raw`y\cdot_A b=b\cdot_A y`), " のことである。乗法の単位元を含むこと。"]),
@@ -10839,7 +10902,7 @@ y\cdot_A(\lambda\ast_A a)
       paragraph([math(String.raw`(A,+_A,\cdot_A,\ast_A,0_A,1_A)`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`X`), " を ", math(String.raw`A`), " を生成する ", math(String.raw`A`), " の部分集合（", ref("def_subset_generates_algebra"), "）、", math(String.raw`y\in A`), " とし、すべての ", math(String.raw`x\in X`), " について ", math(String.raw`y\cdot_A x=x\cdot_A y`), " であるとする。このとき、すべての ", math(String.raw`a\in A`), " について ", math(String.raw`y\cdot_A a=a\cdot_A y`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`C_y`), " を ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), " の部分集合とする。", math(String.raw`C_y`), " は ", math(String.raw`A`), " の部分代数であり、仮定から ", math(String.raw`X\subseteq C_y`), " である。", math(String.raw`X`), " は ", math(String.raw`A`), " を生成するので ", math(String.raw`C_y=A`), " である（", ref("def_subset_generates_algebra"), "）。", math(String.raw`a\in A=C_y`), " は ", math(String.raw`y\cdot_A a=a\cdot_A y`), " のことである。"]),
+      paragraph([math(String.raw`C_y`), " を ", ref("def_elements_commuting_with_fixed_element"), " の部分集合とする。", math(String.raw`C_y`), " は ", math(String.raw`A`), " の部分代数であり、仮定から ", math(String.raw`X\subseteq C_y`), " である。", math(String.raw`X`), " は ", math(String.raw`A`), " を生成するので ", math(String.raw`C_y=A`), " である（", ref("def_subset_generates_algebra"), "）。", math(String.raw`a\in A=C_y`), " は ", math(String.raw`y\cdot_A a=a\cdot_A y`), " のことである。"]),
     ],
   },
   {
@@ -10886,7 +10949,7 @@ a^{\dagger}_k\cdot_A a_i+_A a_i\cdot_A a^{\dagger}_k
       paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), " の元とする。", math(String.raw`i\neq k`), " であるすべての ", math(String.raw`i,k\in\{1,\dots,M\}`), " について ", math(String.raw`\chi_k\cdot_A\chi_i=\chi_i\cdot_A\chi_k`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`C_{\chi_k}`), " を ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), " の部分代数とする。", ref("claim_generators_commute_with_parity_factor_of_other_number"), " を二つの番号を入れ替えて（", math(String.raw`i`), " と ", math(String.raw`k`), " の役を替えて）当てると、", math(String.raw`a_i\cdot_A\chi_k=\chi_k\cdot_A a_i`), " と ", math(String.raw`a^{\dagger}_i\cdot_A\chi_k=\chi_k\cdot_A a^{\dagger}_i`), " なので、", math(String.raw`a_i,a^{\dagger}_i\in C_{\chi_k}`), " である。", math(String.raw`C_{\chi_k}`), " は乗法・スカラー倍・加法で閉じているので（", ref("def_subalgebra"), "）、", math(String.raw`a_i\cdot_A a^{\dagger}_i`), "、", math(String.raw`a^{\dagger}_i\cdot_A a_i`), "、", math(String.raw`(-1_{\mathbb{C}})\ast_A(a^{\dagger}_i\cdot_A a_i)`), "、", math(String.raw`\chi_i`), " が順に ", math(String.raw`C_{\chi_k}`), " に属する（", ref("def_parity_factor_of_split_clifford_algebra"), "）。", math(String.raw`\chi_i\in C_{\chi_k}`), " は主張の等式である。"]),
+      paragraph([math(String.raw`C_{\chi_k}`), " を ", ref("def_elements_commuting_with_fixed_element"), " の部分集合とする（部分代数であることは ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), "）。", ref("claim_generators_commute_with_parity_factor_of_other_number"), " を二つの番号を入れ替えて（", math(String.raw`i`), " と ", math(String.raw`k`), " の役を替えて）当てると、", math(String.raw`a_i\cdot_A\chi_k=\chi_k\cdot_A a_i`), " と ", math(String.raw`a^{\dagger}_i\cdot_A\chi_k=\chi_k\cdot_A a^{\dagger}_i`), " なので、", math(String.raw`a_i,a^{\dagger}_i\in C_{\chi_k}`), " である。", math(String.raw`C_{\chi_k}`), " は乗法・スカラー倍・加法で閉じているので（", ref("def_subalgebra"), "）、", math(String.raw`a_i\cdot_A a^{\dagger}_i`), "、", math(String.raw`a^{\dagger}_i\cdot_A a_i`), "、", math(String.raw`(-1_{\mathbb{C}})\ast_A(a^{\dagger}_i\cdot_A a_i)`), "、", math(String.raw`\chi_i`), " が順に ", math(String.raw`C_{\chi_k}`), " に属する（", ref("def_parity_factor_of_split_clifford_algebra"), "）。", math(String.raw`\chi_i\in C_{\chi_k}`), " は主張の等式である。"]),
     ],
   },
   {
@@ -10898,7 +10961,16 @@ a^{\dagger}_k\cdot_A a_i+_A a_i\cdot_A a^{\dagger}_k
       paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`\varepsilon\cdot_A\varepsilon=1_A`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`\Pi_m`), "（", math(String.raw`m\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`\chi_1,\dots,\chi_M`), "（", ref("def_parity_factor_of_split_clifford_algebra"), "）について ", ref("def_ordered_product_in_algebra"), " で帰納的に定めた部分積とする（", math(String.raw`\Pi_0=1_A`), "、", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A\chi_m`), "）。すべての ", math(String.raw`m`), " について ", math(String.raw`\Pi_m\cdot_A\Pi_m=1_A`), " を ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき ", math(String.raw`\Pi_0\cdot_A\Pi_0=1_A\cdot_A 1_A=1_A`), " である（", ref("def_ordered_product_in_algebra"), "、", ref("def_unital_ring"), " の乗法の単位元）。"]),
+      paragraph([math(String.raw`\Pi_m`), "（", math(String.raw`m\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`\chi_1,\dots,\chi_M`), "（", ref("def_parity_factor_of_split_clifford_algebra"), "）について ", ref("def_ordered_product_in_algebra"), " で帰納的に定めた部分積とする（", math(String.raw`\Pi_0=1_A`), "、", math(String.raw`\Pi_m=\Pi_{m-1}\cdot_A\chi_m`), "）。すべての ", math(String.raw`m`), " について ", math(String.raw`\Pi_m\cdot_A\Pi_m=1_A`), " を ", math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\Pi_0\cdot_A\Pi_0
+&=1_A\cdot_A\Pi_0
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right)\\
+&=\Pi_0
+&&\left(\because\ U_{\mathrm{ring}}(A)\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
+&=1_A
+&&\left(\because\ \blkref{def_ordered_product_in_algebra}\right).
+\end{aligned}`),
       paragraph([math(String.raw`1\le m\le M`), " とし、", math(String.raw`\Pi_{m-1}\cdot_A\Pi_{m-1}=1_A`), " を仮定する（帰納法の仮定）。", math(String.raw`\Pi_{m-1}`), " は族を ", math(String.raw`\{1,\dots,m-1\}`), " に制限した番号順の積 ", math(String.raw`\prod_{A,\,i=1}^{m-1}\chi_i`), " に等しく（", ref("claim_partial_product_is_ordered_product_of_restricted_family"), "）、", math(String.raw`i\le m-1`), " なら ", math(String.raw`i\neq m`), " なので ", math(String.raw`\chi_m\cdot_A\chi_i=\chi_i\cdot_A\chi_m`), " である（", ref("claim_parity_factors_with_different_numbers_commute"), "）。したがって ", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " により ", math(String.raw`\chi_m\cdot_A\Pi_{m-1}=\Pi_{m-1}\cdot_A\chi_m`), " である。"]),
       displayMath(String.raw`\begin{aligned}
 \Pi_m\cdot_A\Pi_m
@@ -10992,13 +11064,19 @@ y\cdot_A\varepsilon+_A\varepsilon\cdot_A y
       displayMath(String.raw`\begin{aligned}
 R_1\cdot_A\varepsilon+_A\varepsilon\cdot_A R_1
 &=\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A\bigl(a^{\dagger}_k\cdot_A\varepsilon+_A\varepsilon\cdot_A a^{\dagger}_k\bigr)
-&&\left(\because\ a:=\varepsilon\ \text{とした}\text{。}\blkref{claim_anticommutator_with_linear_combination_in_algebra}\right)\\
+&&\left(\because\ \text{主張の固定した元に}\ \varepsilon\text{、}r_l\ \text{に}\ a^{\dagger}_l\text{、}\mu_l\ \text{に}\ \beta^{w}_l(x)\ \text{を当てる。}\blkref{claim_anticommutator_with_linear_combination_in_algebra}\right)\\
 &=\sum_{k=1}^{M}\beta^{w}_k(x)\ast_A 0_A
-&&\left(\because\ \text{準備の等式を各項に}\right)\\
+&&\left(\because\ \text{準備の等式で}\ y:=a^{\dagger}_k\ \text{を各項に}\right)\\
 &=0_A
-&&\left(\because\ \text{各項は}\ \beta^{w}_k(x)\ast_A 0_A=0_A\text{。}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\text{。}\blkref{claim_linear_combination_of_zero_terms_is_zero}\right).
+&&\left(\because\ \text{各項は}\ \beta^{w}_k(x)\ast_A 0_A=0_A\ \text{（}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\text{）なので}\ \blkref{claim_linear_combination_of_zero_terms_is_zero}\right),\\[4pt]
+R_2\cdot_A\varepsilon+_A\varepsilon\cdot_A R_2
+&=\sum_{k=1}^{M}\xi(w_k)\ast_A\bigl(a_k\cdot_A\varepsilon+_A\varepsilon\cdot_A a_k\bigr)
+&&\left(\because\ \text{主張の固定した元に}\ \varepsilon\text{、}r_l\ \text{に}\ a_l\text{、}\mu_l\ \text{に}\ \xi(w_l)\ \text{を当てる。}\blkref{claim_anticommutator_with_linear_combination_in_algebra}\right)\\
+&=\sum_{k=1}^{M}\xi(w_k)\ast_A 0_A
+&&\left(\because\ \text{準備の等式で}\ y:=a_k\ \text{を各項に}\right)\\
+&=0_A
+&&\left(\because\ \text{各項は}\ \xi(w_k)\ast_A 0_A=0_A\ \text{（}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\text{）なので}\ \blkref{claim_linear_combination_of_zero_terms_is_zero}\right).
 \end{aligned}`),
-      paragraph(["同じ式変形を ", math(String.raw`R_2`), " について行うと（係数を ", math(String.raw`\xi(w_k)`), "、項を ", math(String.raw`a_k`), " に替える）、", math(String.raw`R_2\cdot_A\varepsilon+_A\varepsilon\cdot_A R_2=0_A`), " である。"]),
       displayMath(String.raw`\begin{aligned}
 \gamma(v)\cdot_A\varepsilon+_A\varepsilon\cdot_A\gamma(v)
 &=(R_1+_A R_2)\cdot_A\varepsilon+_A\varepsilon\cdot_A(R_1+_A R_2)
@@ -11020,10 +11098,10 @@ R_1\cdot_A\varepsilon+_A\varepsilon\cdot_A R_1
     title: { text: "足した次元の単位の元の像は、符号の因子の像と交換する" },
     labels: ["claim_added_generator_commutes_with_image_of_parity_factor"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について ", math(String.raw`g\cdot_{A'}j(\chi_i)=j(\chi_i)\cdot_{A'}g`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。すべての ", math(String.raw`i\in\{1,\dots,M\}`), " について ", math(String.raw`g\cdot_{A'}j(\chi_i)=j(\chi_i)\cdot_{A'}g`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`a_i=\gamma(\mathrm{in}_2(f_i))`), "、", math(String.raw`a^{\dagger}_i=\gamma(\mathrm{in}_1(w_i))`), " なので（", ref("def_annihilation_generator_of_split_clifford_algebra"), "、", ref("def_creation_generator_of_split_clifford_algebra"), "）、", ref("claim_added_generator_anticommutes_with_image_of_split_space"), " を ", math(String.raw`v:=\mathrm{in}_2(f_i)`), " と ", math(String.raw`v:=\mathrm{in}_1(w_i)`), " に当てると、", math(String.raw`g\cdot_{A'}j(a_i)+_{A'}j(a_i)\cdot_{A'}g=0_{A'}`), " と ", math(String.raw`g\cdot_{A'}j(a^{\dagger}_i)+_{A'}j(a^{\dagger}_i)\cdot_{A'}g=0_{A'}`), " である。", math(String.raw`A'`), " で ", ref("claim_element_anticommuting_with_two_elements_commutes_with_their_product"), " を ", math(String.raw`y:=g`), "、", math(String.raw`(p,r):=(j(a_i),j(a^{\dagger}_i))`), " と ", math(String.raw`(p,r):=(j(a^{\dagger}_i),j(a_i))`), " に当てると、", math(String.raw`j(a_i)\cdot_{A'}j(a^{\dagger}_i)`), " と ", math(String.raw`j(a^{\dagger}_i)\cdot_{A'}j(a_i)`), " は ", math(String.raw`A'`), " の部分代数 ", math(String.raw`C_g`), "（", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), "）に属する。", math(String.raw`j`), " は ℂ-代数の準同型なので（", ref("def_setting_of_odd_dimensional_corollary"), "）、次が成り立つ。"]),
+      paragraph([math(String.raw`a_i=\gamma(\mathrm{in}_2(f_i))`), "、", math(String.raw`a^{\dagger}_i=\gamma(\mathrm{in}_1(w_i))`), " なので（", ref("def_annihilation_generator_of_split_clifford_algebra"), "、", ref("def_creation_generator_of_split_clifford_algebra"), "）、", ref("claim_added_generator_anticommutes_with_image_of_split_space"), " を ", math(String.raw`v:=\mathrm{in}_2(f_i)`), " と ", math(String.raw`v:=\mathrm{in}_1(w_i)`), " に当てると、", math(String.raw`g\cdot_{A'}j(a_i)+_{A'}j(a_i)\cdot_{A'}g=0_{A'}`), " と ", math(String.raw`g\cdot_{A'}j(a^{\dagger}_i)+_{A'}j(a^{\dagger}_i)\cdot_{A'}g=0_{A'}`), " である。", math(String.raw`A'`), " で ", ref("claim_element_anticommuting_with_two_elements_commutes_with_their_product"), " を ", math(String.raw`y:=g`), "、", math(String.raw`(p,r):=(j(a_i),j(a^{\dagger}_i))`), " と ", math(String.raw`(p,r):=(j(a^{\dagger}_i),j(a_i))`), " に当てると、", math(String.raw`j(a_i)\cdot_{A'}j(a^{\dagger}_i)`), " と ", math(String.raw`j(a^{\dagger}_i)\cdot_{A'}j(a_i)`), " は ", math(String.raw`A'`), " の部分集合 ", math(String.raw`C_g`), "（", ref("def_elements_commuting_with_fixed_element"), "。部分代数であることは ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), "）に属する。", math(String.raw`j`), " は ℂ-代数の準同型なので（", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), "、", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "）、次が成り立つ。"]),
       displayMath(String.raw`\begin{aligned}
 j(\chi_i)
 &=j\bigl(a_i\cdot_A a^{\dagger}_i+_A(-1_{\mathbb{C}})\ast_A(a^{\dagger}_i\cdot_A a_i)\bigr)
@@ -11044,10 +11122,10 @@ j(\chi_i)
     title: { text: "足した次元の単位の元の像は、符号の因子の番号順の積の像と交換する" },
     labels: ["claim_added_generator_commutes_with_image_of_parity_element"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`g\cdot_{A'}j(\varepsilon)=j(\varepsilon)\cdot_{A'}g`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元、", math(String.raw`u`), " を ", ref("def_added_unit_vector_of_odd_extension"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`g\cdot_{A'}j(\varepsilon)=j(\varepsilon)\cdot_{A'}g`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`j`), " は ℂ-代数の準同型なので、", math(String.raw`j(\varepsilon)=\prod_{A',\,i=1}^{M}j(\chi_i)`), " である（", ref("def_parity_element_of_split_clifford_algebra"), "、", ref("claim_algebra_homomorphism_maps_ordered_product_to_ordered_product"), "）。", math(String.raw`g`), " は各因子 ", math(String.raw`j(\chi_i)`), " と交換するので（", ref("claim_added_generator_commutes_with_image_of_parity_factor"), "）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を ", math(String.raw`u:=g`), " に当てて ", math(String.raw`g\cdot_{A'}j(\varepsilon)=j(\varepsilon)\cdot_{A'}g`), " を得る。"]),
+      paragraph([math(String.raw`j`), " は ℂ-代数の準同型なので、", math(String.raw`j(\varepsilon)=\prod_{A',\,i=1}^{M}j(\chi_i)`), " である（", ref("def_parity_element_of_split_clifford_algebra"), "、", ref("claim_algebra_homomorphism_maps_ordered_product_to_ordered_product"), "）。", math(String.raw`g`), " は各因子 ", math(String.raw`j(\chi_i)`), " と交換するので（", ref("claim_added_generator_commutes_with_image_of_parity_factor"), "）、", ref("claim_element_commuting_with_each_factor_commutes_with_ordered_product"), " を、その主張の交換する元に ", math(String.raw`g`), " を当てて ", math(String.raw`g\cdot_{A'}j(\varepsilon)=j(\varepsilon)\cdot_{A'}g`), " を得る。"]),
     ],
   },
   {
@@ -11056,7 +11134,7 @@ j(\chi_i)
     title: { text: "奇数次元のクリフォード代数の中心の元" },
     labels: ["def_central_element_of_odd_dimensional_clifford_algebra"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`A'`), " の元 ", math(String.raw`z`), " を次で定める。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`A'`), " の元 ", math(String.raw`z`), " を次で定める。"]),
       displayMath(String.raw`z:=j(\varepsilon)\cdot_{A'}g`),
     ],
   },
@@ -11066,7 +11144,7 @@ j(\chi_i)
     title: { text: "中心の元の平方は 1 である" },
     labels: ["claim_square_of_central_element_is_one"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`z\cdot_{A'}z=1_{A'}`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`z\cdot_{A'}z=1_{A'}`), " である。"]),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
@@ -11100,7 +11178,7 @@ z\cdot_{A'}z
     title: { text: "中心の元は、分裂した二次空間の元の像と交換する" },
     labels: ["claim_central_element_commutes_with_image_of_split_space"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`v\in V`), " について ", math(String.raw`z\cdot_{A'}j(\gamma(v))=j(\gamma(v))\cdot_{A'}z`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`v\in V`), " について ", math(String.raw`z\cdot_{A'}j(\gamma(v))=j(\gamma(v))\cdot_{A'}z`), " である。"]),
     ],
     proof: [
       paragraph([math(String.raw`y:=\gamma(v)\in A`), " と置く。", ref("claim_added_generator_anticommutes_with_image_of_split_space"), " に ", ref("claim_anticommuting_elements_swap_with_sign"), " を当てると ", math(String.raw`g\cdot_{A'}j(y)=(-1_{\mathbb{C}})\ast_{A'}(j(y)\cdot_{A'}g)`), " である。", ref("claim_image_of_split_space_anticommutes_with_parity_element"), " の等式の左辺の二項を加法の交換法則で入れ替えて ", ref("claim_anticommuting_elements_swap_with_sign"), " を当てると ", math(String.raw`\varepsilon\cdot_A y=(-1_{\mathbb{C}})\ast_A(y\cdot_A\varepsilon)`), " である。"]),
@@ -11145,7 +11223,7 @@ z\cdot_{A'}j(y)
     title: { text: "中心の元は、足した次元の単位の元の像と交換する" },
     labels: ["claim_central_element_commutes_with_added_generator"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`g\cdot_{A'}z=z\cdot_{A'}g`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`g\cdot_{A'}z=z\cdot_{A'}g`), " である。"]),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
@@ -11167,7 +11245,7 @@ g\cdot_{A'}z
     title: { text: "一つの次元を足した空間の元の像は、第一成分の像と足した次元の単位の元の像の倍の和である" },
     labels: ["claim_image_of_odd_extension_element_is_sum_of_images"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。すべての ", math(String.raw`v\in V`), " と ", math(String.raw`t\in\mathbb{C}`), " について次が成り立つ。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。すべての ", math(String.raw`v\in V`), " と ", math(String.raw`t\in\mathbb{C}`), " について次が成り立つ。"]),
       displayMath(String.raw`\gamma'\bigl((v,t)\bigr)=j\bigl(\gamma(v)\bigr)+_{A'}t\ast_{A'}g`),
     ],
     proof: [
@@ -11183,15 +11261,15 @@ g\cdot_{A'}z
 &=\gamma'\bigl(\mathrm{in}'_1(v)+_{V'}t\cdot_{V'}\mathrm{in}'_2(1_{\mathbb{C}})\bigr)
 &&\left(\because\ \mathrm{in}'_2\ \text{はスカラー倍を保つ}\text{。}\blkref{claim_embedding_into_second_component_is_linear_map}\right)\\
 &=\gamma'\bigl(\mathrm{in}'_1(v)+_{V'}t\cdot_{V'}u\bigr)
-&&\left(\because\ u\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_unit_vector_of_odd_extension}\right)\\
 &=\gamma'\bigl(\mathrm{in}'_1(v)\bigr)+_{A'}\gamma'(t\cdot_{V'}u)
 &&\left(\because\ \gamma'\ \text{は加法を保つ}\text{。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
 &=\gamma'\bigl(\mathrm{in}'_1(v)\bigr)+_{A'}t\ast_{A'}\gamma'(u)
 &&\left(\because\ \gamma'\ \text{はスカラー倍を保つ}\text{。}\blkref{claim_clifford_generator_map_is_linear_map}\right)\\
 &=j\bigl(\gamma(v)\bigr)+_{A'}t\ast_{A'}\gamma'(u)
-&&\left(\because\ j\circ\gamma=\gamma'\circ\mathrm{in}'_1\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{claim_induced_homomorphism_into_odd_extension_after_generator_map}\right)\\
 &=j\bigl(\gamma(v)\bigr)+_{A'}t\ast_{A'}g
-&&\left(\because\ g\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right).
+&&\left(\because\ \blkref{def_added_generator_of_odd_extension_clifford_algebra}\right).
 \end{aligned}`),
     ],
   },
@@ -11201,7 +11279,7 @@ g\cdot_{A'}z
     title: { text: "中心の元は、奇数次元のクリフォード代数のすべての元と交換する" },
     labels: ["claim_central_element_commutes_with_every_element"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`a\in A'`), " について ", math(String.raw`z\cdot_{A'}a=a\cdot_{A'}z`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\chi_i`), " を ", ref("def_parity_factor_of_split_clifford_algebra"), "、", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`a\in A'`), " について ", math(String.raw`z\cdot_{A'}a=a\cdot_{A'}z`), " である。"]),
     ],
     proof: [
       paragraph([math(String.raw`x\in V'`), " を任意に取る。", math(String.raw`V'`), " の元は順序対なので ", math(String.raw`x=(v,t)`), "（", math(String.raw`v\in V`), "、", math(String.raw`t\in\mathbb{C}`), "）と書く。"]),
@@ -11338,56 +11416,66 @@ z\cdot_{A'}\gamma'(x)
     ],
   },
   {
+    id: "isomorphism_definition_pair_of_maps_into_product_of_algebras",
+    kind: "definition",
+    title: { text: "二つの写像を並べた、直積への写像" },
+    labels: ["def_pair_of_maps_into_product_of_algebras"],
+    statement: [
+      paragraph([math(String.raw`C`), "、", math(String.raw`A_1`), "、", math(String.raw`A_2`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`\varphi_1:C\to A_1`), " と ", math(String.raw`\varphi_2:C\to A_2`), " を写像とし、", math(String.raw`A_1\times A_2`), " を直積（", ref("def_product_of_two_complex_algebras"), "）とする。写像 ", math(String.raw`\langle\varphi_1,\varphi_2\rangle:C\to A_1\times A_2`), " を次で定める。"]),
+      displayMath(String.raw`\langle\varphi_1,\varphi_2\rangle(c):=\bigl(\varphi_1(c),\varphi_2(c)\bigr)\qquad(c\in C)`),
+    ],
+  },
+  {
     id: "isomorphism_claim_pair_of_algebra_homomorphisms_is_algebra_homomorphism",
     kind: "claim",
     title: { text: "二つの準同型を並べた写像は、直積への準同型である" },
     labels: ["claim_pair_of_algebra_homomorphisms_is_algebra_homomorphism"],
     statement: [
-      paragraph([math(String.raw`(C,+_C,\cdot_C,\ast_C,0_C,1_C)`), "、", math(String.raw`A_1`), "、", math(String.raw`A_2`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`\varphi_1:C\to A_1`), " と ", math(String.raw`\varphi_2:C\to A_2`), " を ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）とし、", math(String.raw`A_1\times A_2`), " を直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。写像 ", math(String.raw`\langle\varphi_1,\varphi_2\rangle:C\to A_1\times A_2`), " を ", math(String.raw`\langle\varphi_1,\varphi_2\rangle(c):=(\varphi_1(c),\varphi_2(c))`), " で定める。", math(String.raw`\langle\varphi_1,\varphi_2\rangle`), " は ℂ-代数の準同型である。"]),
+      paragraph([math(String.raw`(C,+_C,\cdot_C,\ast_C,0_C,1_C)`), "、", math(String.raw`A_1`), "、", math(String.raw`A_2`), " を ℂ-代数（", ref("def_complex_algebra"), "）、", math(String.raw`\varphi_1:C\to A_1`), " と ", math(String.raw`\varphi_2:C\to A_2`), " を ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）とし、", math(String.raw`A_1\times A_2`), " を直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）、", math(String.raw`\langle\varphi_1,\varphi_2\rangle:C\to A_1\times A_2`), " を ", ref("def_pair_of_maps_into_product_of_algebras"), " の写像とする。", math(String.raw`\langle\varphi_1,\varphi_2\rangle`), " は ℂ-代数の準同型である。"]),
     ],
     proof: [
       paragraph([math(String.raw`c,c'\in C`), "、", math(String.raw`\lambda\in\mathbb{C}`), " とする。「各成分に適用」と書いた行は、第一成分に ", math(String.raw`\varphi_1`), "、第二成分に ", math(String.raw`\varphi_2`), " の同じ名前の性質を当てる行である。"]),
       displayMath(String.raw`\begin{aligned}
 \langle\varphi_1,\varphi_2\rangle(c+_C c')
 &=(\varphi_1(c+_C c'),\ \varphi_2(c+_C c'))
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right)\\
 &=(\varphi_1(c)+_{A_1}\varphi_1(c'),\ \varphi_2(c)+_{A_2}\varphi_2(c'))
-&&\left(\because\ \text{加法を保つことをを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \text{加法を保つことを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
 &=\bigl(\varphi_1(c),\varphi_2(c)\bigr)+_{A_1\times A_2}\bigl(\varphi_1(c'),\varphi_2(c')\bigr)
 &&\left(\because\ \blkref{def_product_of_two_complex_algebras}\right)\\
 &=\langle\varphi_1,\varphi_2\rangle(c)+_{A_1\times A_2}\langle\varphi_1,\varphi_2\rangle(c')
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right).
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \langle\varphi_1,\varphi_2\rangle(c\cdot_C c')
 &=(\varphi_1(c\cdot_C c'),\ \varphi_2(c\cdot_C c'))
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right)\\
 &=(\varphi_1(c)\cdot_{A_1}\varphi_1(c'),\ \varphi_2(c)\cdot_{A_2}\varphi_2(c'))
-&&\left(\because\ \text{乗法を保つことをを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \text{乗法を保つことを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
 &=\bigl(\varphi_1(c),\varphi_2(c)\bigr)\cdot_{A_1\times A_2}\bigl(\varphi_1(c'),\varphi_2(c')\bigr)
 &&\left(\because\ \blkref{def_product_of_two_complex_algebras}\right)\\
 &=\langle\varphi_1,\varphi_2\rangle(c)\cdot_{A_1\times A_2}\langle\varphi_1,\varphi_2\rangle(c')
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right).
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \langle\varphi_1,\varphi_2\rangle(1_C)
 &=(\varphi_1(1_C),\ \varphi_2(1_C))
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right)\\
 &=(1_{A_1},1_{A_2})
-&&\left(\because\ \text{乗法の単位元を保つことをを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \text{乗法の単位元を保つことを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
 &=1_{A_1\times A_2}
 &&\left(\because\ \blkref{def_product_of_two_complex_algebras}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \langle\varphi_1,\varphi_2\rangle(\lambda\ast_C c)
 &=(\varphi_1(\lambda\ast_C c),\ \varphi_2(\lambda\ast_C c))
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right)\\
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right)\\
 &=(\lambda\ast_{A_1}\varphi_1(c),\ \lambda\ast_{A_2}\varphi_2(c))
-&&\left(\because\ \text{スカラー倍を保つことをを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
+&&\left(\because\ \text{スカラー倍を保つことを各成分に適用。}\blkref{def_complex_algebra_homomorphism}\right)\\
 &=\lambda\ast_{A_1\times A_2}\bigl(\varphi_1(c),\varphi_2(c)\bigr)
 &&\left(\because\ \blkref{def_product_of_two_complex_algebras}\right)\\
 &=\lambda\ast_{A_1\times A_2}\langle\varphi_1,\varphi_2\rangle(c)
-&&\left(\because\ \langle\varphi_1,\varphi_2\rangle\ \text{の定義}\right).
+&&\left(\because\ \blkref{def_pair_of_maps_into_product_of_algebras}\right).
 \end{aligned}`),
       paragraph(["四つの等式から、", math(String.raw`\langle\varphi_1,\varphi_2\rangle`), " は ℂ-代数の準同型である（", ref("def_complex_algebra_homomorphism"), "）。"]),
     ],
@@ -11582,7 +11670,7 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "奇数次元のクリフォード代数から行列環の直積への準同型" },
     labels: ["def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"],
     statement: [
-      paragraph([ref("claim_existence_and_uniqueness_of_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " のただ一つの ℂ-代数の準同型を ", math(String.raw`\Phi':A'\to B\times B`), " と書く。", math(String.raw`\Phi'`), " は ", math(String.raw`\Phi'\circ\gamma'=\varphi'`), " を満たす。"]),
+      paragraph([ref("claim_existence_and_uniqueness_of_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " で ", math(String.raw`\Phi'\circ\gamma'=\varphi'`), " を満たすただ一つの ℂ-代数の準同型を ", math(String.raw`\Phi':A'\to B\times B`), " と書く。"]),
     ],
   },
   {
@@ -11591,14 +11679,14 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "誘導された準同型のあとに行列の組への準同型を合成すると、同じ行列を二つ並べた組になる" },
     labels: ["claim_homomorphism_to_pair_of_matrices_after_induced_homomorphism"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。すべての ", math(String.raw`a\in A`), " について ", math(String.raw`\Phi'(j(a))=(\Phi(a),\Phi(a))`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。すべての ", math(String.raw`a\in A`), " について ", math(String.raw`\Phi'(j(a))=(\Phi(a),\Phi(a))`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`\Delta:=\langle\Phi,\Phi\rangle:A\to B\times B`), "（", math(String.raw`\Delta(a)=(\Phi(a),\Phi(a))`), "）は ℂ-代数の準同型である（", ref("claim_pair_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`\Phi'\circ j`), " も ℂ-代数の準同型である（", ref("def_setting_of_odd_dimensional_corollary"), "、", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`v\in V`), " について次が成り立つ。"]),
+      paragraph([math(String.raw`\Delta:=\langle\Phi,\Phi\rangle:A\to B\times B`), "（", ref("def_pair_of_maps_into_product_of_algebras"), "）は ℂ-代数の準同型である（", ref("claim_pair_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`\Phi'\circ j`), " も ℂ-代数の準同型である（", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), "、", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), "、", ref("def_homomorphism_of_clifford_algebras_induced_by_isometry"), "、", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`v\in V`), " について次が成り立つ。"]),
       displayMath(String.raw`\begin{aligned}
 \Phi'\bigl(j(\gamma(v))\bigr)
 &=\Phi'\bigl(\gamma'(\mathrm{in}'_1(v))\bigr)
-&&\left(\because\ j\circ\gamma=\gamma'\circ\mathrm{in}'_1\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{claim_induced_homomorphism_into_odd_extension_after_generator_map}\right)\\
 &=\varphi'\bigl(\mathrm{in}'_1(v)\bigr)
 &&\left(\because\ \blkref{def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras}\right)\\
 &=\varphi'\bigl((v,0_{\mathbb{C}^{\mathrm{vec}}})\bigr)
@@ -11614,7 +11702,7 @@ X\cdot_B Y+_B Y\cdot_B X
 &=\Bigl(\Phi(\gamma(v)),\ \Phi(\gamma(v))\Bigr)
 &&\left(\because\ U_{\mathrm{vec}}(B)\ \text{の加法の単位元。各成分に。}\blkref{def_complex_vector_space}\right)\\
 &=\Delta\bigl(\gamma(v)\bigr)
-&&\left(\because\ \Delta\ \text{の定義}\right).
+&&\left(\because\ \Delta:=\langle\Phi,\Phi\rangle\text{。}\blkref{def_pair_of_maps_into_product_of_algebras}\right).
 \end{aligned}`),
       paragraph([math(String.raw`\gamma(V)`), " は ", math(String.raw`A`), " を生成するので（", ref("claim_image_of_clifford_generator_map_generates_clifford_algebra"), "）、", ref("claim_homomorphisms_agreeing_on_generators_are_equal"), " により ", math(String.raw`\Phi'\circ j=\Delta`), " である。これは主張の等式である。"]),
     ],
@@ -11625,24 +11713,26 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "行列の組への準同型による、足した次元の単位の元の像の値" },
     labels: ["claim_homomorphism_to_pair_of_matrices_on_added_generator"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`\Phi'(g)=\bigl(\Phi(\varepsilon),\ (-1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\bigr)`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元、", math(String.raw`u`), " を ", ref("def_added_unit_vector_of_odd_extension"), " の元とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`\Phi'(g)=\bigl(\Phi(\varepsilon),\ (-1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\bigr)`), " である。"]),
     ],
     proof: [
       paragraph([math(String.raw`\Phi\circ\gamma`), " は ", math(String.raw`V`), " から ", math(String.raw`U_{\mathrm{vec}}(B)`), " への線型写像なので（", ref("claim_clifford_generator_map_is_linear_map"), "、", ref("def_complex_algebra_homomorphism"), "、", ref("claim_composition_of_linear_maps_is_linear_map"), "）、", math(String.raw`\Phi(\gamma(0_V))=0_B`), " である（", ref("claim_linear_map_sends_zero_to_zero"), "）。"]),
       displayMath(String.raw`\begin{aligned}
 \Phi'(g)
 &=\Phi'\bigl(\gamma'(u)\bigr)
-&&\left(\because\ g\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_generator_of_odd_extension_clifford_algebra}\right)\\
 &=\varphi'(u)
 &&\left(\because\ \blkref{def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras}\right)\\
 &=\varphi'\bigl(\mathrm{in}'_2(1_{\mathbb{C}})\bigr)
-&&\left(\because\ u\ \text{の定義}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_added_unit_vector_of_odd_extension}\right)\\
 &=\varphi'\bigl((0_V,1_{\mathbb{C}})\bigr)
 &&\left(\because\ \blkref{def_embedding_into_second_component_of_direct_sum}\right)\\
 &=\Bigl(\Phi(\gamma(0_V))+_B 1_{\mathbb{C}}\ast_B\Phi(\varepsilon),\ \Phi(\gamma(0_V))+_B(-_{\mathbb{C}}1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\Bigr)
 &&\left(\because\ \blkref{def_map_from_odd_extension_to_pair_of_matrices}\right)\\
+&=\Bigl(0_B+_B 1_{\mathbb{C}}\ast_B\Phi(\varepsilon),\ 0_B+_B(-_{\mathbb{C}}1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\Bigr)
+&&\left(\because\ \Phi(\gamma(0_V))=0_B\ \text{を二か所に}\right)\\
 &=\Bigl(0_B+_B 1_{\mathbb{C}}\ast_B\Phi(\varepsilon),\ 0_B+_B(-1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\Bigr)
-&&\left(\because\ \Phi(\gamma(0_V))=0_B\ \text{と}\ -1_{\mathbb{C}}\ \text{の定義。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定義。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
 &=\Bigl(1_{\mathbb{C}}\ast_B\Phi(\varepsilon)+_B 0_B,\ (-1_{\mathbb{C}})\ast_B\Phi(\varepsilon)+_B 0_B\Bigr)
 &&\left(\because\ U_{\mathrm{vec}}(B)\ \text{の加法の交換法則。各成分に。}\blkref{def_complex_vector_space}\right)\\
 &=\Bigl(1_{\mathbb{C}}\ast_B\Phi(\varepsilon),\ (-1_{\mathbb{C}})\ast_B\Phi(\varepsilon)\Bigr)
@@ -11658,7 +11748,7 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "行列の組への準同型による、中心の元の値" },
     labels: ["claim_homomorphism_to_pair_of_matrices_on_central_element"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\Phi'(z)=\bigl(1_B,\ (-1_{\mathbb{C}})\ast_B 1_B\bigr)`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\Phi'(z)=\bigl(1_B,\ (-1_{\mathbb{C}})\ast_B 1_B\bigr)`), " である。"]),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
@@ -11690,7 +11780,7 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "中心の元から作る二つの冪等元" },
     labels: ["def_idempotents_of_odd_dimensional_clifford_algebra"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について、", math(String.raw`A'`), " の元 ", math(String.raw`e_\sigma`), " を次で定める。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について、", math(String.raw`A'`), " の元 ", math(String.raw`e_\sigma`), " を次で定める。"]),
       displayMath(String.raw`e_\sigma:=h\ast_{A'}\bigl(1_{A'}+_{A'}\sigma\ast_{A'}z\bigr)`),
       paragraph([math(String.raw`e_{+}:=e_{1_{\mathbb{C}}}`), "、", math(String.raw`e_{-}:=e_{-1_{\mathbb{C}}}`), " と書く。"]),
     ],
@@ -11701,55 +11791,55 @@ X\cdot_B Y+_B Y\cdot_B X
     title: { text: "中心の元から作った冪等元の平方は、その元自身である" },
     labels: ["claim_idempotent_of_odd_dimensional_clifford_algebra_squares_to_itself"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について ", math(String.raw`e_\sigma\cdot_{A'}e_\sigma=e_\sigma`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について ", math(String.raw`e_\sigma\cdot_{A'}e_\sigma=e_\sigma`), " である。"]),
     ],
     proof: [
-      paragraph(["準備として、", math(String.raw`U:=1_{A'}+_{A'}\sigma\ast_{A'}z`), " と置き、", math(String.raw`U\cdot_{A'}U`), " を計算する。"]),
+      paragraph(["準備として、", math(String.raw`D:=1_{A'}+_{A'}\sigma\ast_{A'}z`), " と置き、", math(String.raw`D\cdot_{A'}D`), " を計算する。"]),
       displayMath(String.raw`\begin{aligned}
-U\cdot_{A'}U
-&=1_{A'}\cdot_{A'}U+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}U
+D\cdot_{A'}D
+&=1_{A'}\cdot_{A'}D+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}D
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
-&=U+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}U
+&=D+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}D
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
-&=U+_{A'}\bigl((\sigma\ast_{A'}z)\cdot_{A'}1_{A'}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\sigma\ast_{A'}z)\bigr)
+&=D+_{A'}\bigl((\sigma\ast_{A'}z)\cdot_{A'}1_{A'}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\sigma\ast_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\sigma\ast_{A'}z)\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\sigma\ast_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(z\cdot_{A'}(\sigma\ast_{A'}z))\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(z\cdot_{A'}(\sigma\ast_{A'}z))\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(\sigma\ast_{A'}(z\cdot_{A'}z))\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(\sigma\ast_{A'}(z\cdot_{A'}z))\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\sigma)\ast_{A'}(z\cdot_{A'}z)\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\sigma)\ast_{A'}(z\cdot_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\sigma)\ast_{A'}1_{A'}\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\sigma)\ast_{A'}1_{A'}\bigr)
 &&\left(\because\ \blkref{claim_square_of_central_element_is_one}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}1_{\mathbb{C}}\ast_{A'}1_{A'}\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}1_{\mathbb{C}}\ast_{A'}1_{A'}\bigr)
 &&\left(\because\ \sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}\ \text{なので}\ \sigma\cdot_{\mathbb{C}}\sigma=1_{\mathbb{C}}\right)\\
-&=U+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}1_{A'}\bigr)
+&=D+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}1_{A'}\bigr)
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
-&=U+_{A'}U
+&=D+_{A'}D
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
-&=1_{\mathbb{C}}\ast_{A'}U+_{A'}1_{\mathbb{C}}\ast_{A'}U
+&=1_{\mathbb{C}}\ast_{A'}D+_{A'}1_{\mathbb{C}}\ast_{A'}D
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
-&=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}U
+&=(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}D
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 e_\sigma\cdot_{A'}e_\sigma
-&=(h\ast_{A'}U)\cdot_{A'}(h\ast_{A'}U)
+&=(h\ast_{A'}D)\cdot_{A'}(h\ast_{A'}D)
 &&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right)\\
-&=h\ast_{A'}\bigl(U\cdot_{A'}(h\ast_{A'}U)\bigr)
+&=h\ast_{A'}\bigl(D\cdot_{A'}(h\ast_{A'}D)\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
-&=h\ast_{A'}\bigl(h\ast_{A'}(U\cdot_{A'}U)\bigr)
+&=h\ast_{A'}\bigl(h\ast_{A'}(D\cdot_{A'}D)\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
-&=(h\cdot_{\mathbb{C}}h)\ast_{A'}(U\cdot_{A'}U)
+&=(h\cdot_{\mathbb{C}}h)\ast_{A'}(D\cdot_{A'}D)
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
-&=(h\cdot_{\mathbb{C}}h)\ast_{A'}\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}U\bigr)
+&=(h\cdot_{\mathbb{C}}h)\ast_{A'}\bigl((1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}D\bigr)
 &&\left(\because\ \text{準備の等式}\right)\\
-&=\bigl((h\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_{A'}U
+&=\bigl((h\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_{A'}D
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
-&=h\ast_{A'}U
-&&\left(\because\ h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})=1_{\mathbb{C}}\text{。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&=h\ast_{A'}D
+&&\left(\because\ h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})=1_{\mathbb{C}}\text{。}\blkref{def_inverse_of_two_in_complex_numbers}\right)\\
 &=e_\sigma
 &&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right).
 \end{aligned}`),
@@ -11761,30 +11851,36 @@ e_\sigma\cdot_{A'}e_\sigma
     title: { text: "中心の元から作った二つの冪等元の積は零である" },
     labels: ["claim_product_of_different_idempotents_of_odd_dimensional_clifford_algebra_is_zero"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について ", math(String.raw`\bar{\sigma}:=-_{\mathbb{C}}\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " と書く。", math(String.raw`e_\sigma\cdot_{A'}e_{\bar{\sigma}}=0_{A'}`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について ", math(String.raw`\bar{\sigma}:=-_{\mathbb{C}}\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " と書く。", math(String.raw`e_\sigma\cdot_{A'}e_{\bar{\sigma}}=0_{A'}`), " である。"]),
     ],
     proof: [
-      paragraph(["準備として、", math(String.raw`U:=1_{A'}+_{A'}\sigma\ast_{A'}z`), "、", math(String.raw`\bar{U}:=1_{A'}+_{A'}\bar{\sigma}\ast_{A'}z`), " と置き、", math(String.raw`U\cdot_{A'}\bar{U}`), " を計算する。"]),
+      paragraph(["準備として、", math(String.raw`D:=1_{A'}+_{A'}\sigma\ast_{A'}z`), "、", math(String.raw`\bar{D}:=1_{A'}+_{A'}\bar{\sigma}\ast_{A'}z`), " と置き、", math(String.raw`D\cdot_{A'}\bar{D}`), " を計算する。"]),
       displayMath(String.raw`\begin{aligned}
-U\cdot_{A'}\bar{U}
-&=1_{A'}\cdot_{A'}\bar{U}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}\bar{U}
+D\cdot_{A'}\bar{D}
+&=1_{A'}\cdot_{A'}\bar{D}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}\bar{D}
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
-&=\bar{U}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}\bar{U}
+&=\bar{D}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}\bar{D}
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
-&=\bar{U}+_{A'}\bigl((\sigma\ast_{A'}z)\cdot_{A'}1_{A'}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\bar{\sigma}\ast_{A'}z)\bigr)
+&=\bar{D}+_{A'}\bigl((\sigma\ast_{A'}z)\cdot_{A'}1_{A'}+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\bar{\sigma}\ast_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\bar{\sigma}\ast_{A'}z)\bigr)
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\ast_{A'}z)\cdot_{A'}(\bar{\sigma}\ast_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の単位元。}\blkref{def_unital_ring}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(z\cdot_{A'}(\bar{\sigma}\ast_{A'}z))\bigr)
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(z\cdot_{A'}(\bar{\sigma}\ast_{A'}z))\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(\bar{\sigma}\ast_{A'}(z\cdot_{A'}z))\bigr)
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}\sigma\ast_{A'}(\bar{\sigma}\ast_{A'}(z\cdot_{A'}z))\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\bar{\sigma})\ast_{A'}(z\cdot_{A'}z)\bigr)
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\bar{\sigma})\ast_{A'}(z\cdot_{A'}z)\bigr)
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\bar{\sigma})\ast_{A'}1_{A'}\bigr)
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}\bar{\sigma})\ast_{A'}1_{A'}\bigr)
 &&\left(\because\ \blkref{claim_square_of_central_element_is_one}\right)\\
-&=\bar{U}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(-1_{\mathbb{C}})\ast_{A'}1_{A'}\bigr)
-&&\left(\because\ \sigma\cdot_{\mathbb{C}}\bar{\sigma}=-_{\mathbb{C}}(\sigma\cdot_{\mathbb{C}}\sigma)=-1_{\mathbb{C}}\ \text{（}\mathbb{C}\ \text{の四則と}\ \sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}\text{）}\right)\\
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(\sigma\cdot_{\mathbb{C}}(-_{\mathbb{C}}\sigma))\ast_{A'}1_{A'}\bigr)
+&&\left(\because\ \bar{\sigma}\ \text{の定義}\right)\\
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(-_{\mathbb{C}}(\sigma\cdot_{\mathbb{C}}\sigma))\ast_{A'}1_{A'}\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ x\cdot_{\mathbb{C}}(-_{\mathbb{C}}y)=-_{\mathbb{C}}(x\cdot_{\mathbb{C}}y)\right)\\
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(-_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}1_{A'}\bigr)
+&&\left(\because\ \sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}\ \text{なので}\ \sigma\cdot_{\mathbb{C}}\sigma=1_{\mathbb{C}}\right)\\
+&=\bar{D}+_{A'}\bigl(\sigma\ast_{A'}z+_{A'}(-1_{\mathbb{C}})\ast_{A'}1_{A'}\bigr)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定義。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
 &=(1_{A'}+_{A'}\bar{\sigma}\ast_{A'}z)+_{A'}\bigl((-1_{\mathbb{C}})\ast_{A'}1_{A'}+_{A'}\sigma\ast_{A'}z\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
 &=\bigl(1_{A'}+_{A'}(-1_{\mathbb{C}})\ast_{A'}1_{A'}\bigr)+_{A'}(\bar{\sigma}\ast_{A'}z+_{A'}\sigma\ast_{A'}z)
@@ -11802,11 +11898,11 @@ U\cdot_{A'}\bar{U}
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 e_\sigma\cdot_{A'}e_{\bar{\sigma}}
-&=(h\ast_{A'}U)\cdot_{A'}(h\ast_{A'}\bar{U})
+&=(h\ast_{A'}D)\cdot_{A'}(h\ast_{A'}\bar{D})
 &&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right)\\
-&=h\ast_{A'}\bigl(U\cdot_{A'}(h\ast_{A'}\bar{U})\bigr)
+&=h\ast_{A'}\bigl(D\cdot_{A'}(h\ast_{A'}\bar{D})\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、左の因子。}\blkref{def_complex_algebra}\right)\\
-&=h\ast_{A'}\bigl(h\ast_{A'}(U\cdot_{A'}\bar{U})\bigr)
+&=h\ast_{A'}\bigl(h\ast_{A'}(D\cdot_{A'}\bar{D})\bigr)
 &&\left(\because\ \text{スカラー倍と乗法の両立、右の因子。}\blkref{def_complex_algebra}\right)\\
 &=h\ast_{A'}(h\ast_{A'}0_{A'})
 &&\left(\because\ \text{準備の等式}\right)\\
@@ -11823,7 +11919,7 @@ e_\sigma\cdot_{A'}e_{\bar{\sigma}}
     title: { text: "中心の元から作った二つの冪等元の和は 1 である" },
     labels: ["claim_sum_of_idempotents_of_odd_dimensional_clifford_algebra_is_one"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`e_{+}+_{A'}e_{-}=1_{A'}`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`e_{+}+_{A'}e_{-}=1_{A'}`), " である。"]),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
@@ -11847,7 +11943,7 @@ e_{+}+_{A'}e_{-}
 &=\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_{A'}1_{A'}
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
 &=1_{\mathbb{C}}\ast_{A'}1_{A'}
-&&\left(\because\ h\ \text{の定義。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_inverse_of_two_in_complex_numbers}\right)\\
 &=1_{A'}
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
 \end{aligned}`),
@@ -11859,7 +11955,7 @@ e_{+}+_{A'}e_{-}
     title: { text: "中心の元から作った二つの冪等元の差は、中心の元である" },
     labels: ["claim_difference_of_idempotents_of_odd_dimensional_clifford_algebra_is_central_element"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}=z`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}=z`), " である。"]),
     ],
     proof: [
       paragraph([math(String.raw`U_{+}:=1_{A'}+_{A'}1_{\mathbb{C}}\ast_{A'}z`), "、", math(String.raw`U_{-}:=1_{A'}+_{A'}(-1_{\mathbb{C}})\ast_{A'}z`), " と置く（", math(String.raw`e_{\pm}=h\ast_{A'}U_{\pm}`), "。", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), "）。"]),
@@ -11898,7 +11994,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
 &=\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_{A'}z
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
 &=1_{\mathbb{C}}\ast_{A'}z
-&&\left(\because\ h\ \text{の定義。}\blkref{def_setting_of_odd_dimensional_corollary}\right)\\
+&&\left(\because\ \blkref{def_inverse_of_two_in_complex_numbers}\right)\\
 &=z
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
 \end{aligned}`),
@@ -11910,10 +12006,10 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "中心の元から作った冪等元は、すべての元と交換する" },
     labels: ["claim_idempotents_of_odd_dimensional_clifford_algebra_commute_with_every_element"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " と ", math(String.raw`y\in A'`), " について ", math(String.raw`y\cdot_{A'}e_\sigma=e_\sigma\cdot_{A'}y`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`z`), " を ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "、", math(String.raw`e_\sigma`), "・", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " と ", math(String.raw`y\in A'`), " について ", math(String.raw`y\cdot_{A'}e_\sigma=e_\sigma\cdot_{A'}y`), " である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`C_y`), " を ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), " の ", math(String.raw`A'`), " の部分代数とする。", math(String.raw`1_{A'}\in C_y`), " である（", ref("def_subalgebra"), "）。", math(String.raw`z\cdot_{A'}y=y\cdot_{A'}z`), "（", ref("claim_central_element_commutes_with_every_element"), "）なので ", math(String.raw`z\in C_y`), " である。", math(String.raw`C_y`), " はスカラー倍と加法で閉じているので（", ref("def_subalgebra"), "）、", math(String.raw`\sigma\ast_{A'}z`), "、", math(String.raw`1_{A'}+_{A'}\sigma\ast_{A'}z`), "、", math(String.raw`h\ast_{A'}(1_{A'}+_{A'}\sigma\ast_{A'}z)=e_\sigma`), " が順に ", math(String.raw`C_y`), " に属する（", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), "）。", math(String.raw`e_\sigma\in C_y`), " は主張の等式である。"]),
+      paragraph([math(String.raw`C_y`), " を ", ref("def_elements_commuting_with_fixed_element"), " の ", math(String.raw`A'`), " の部分集合とする（部分代数であることは ", ref("claim_elements_commuting_with_fixed_element_form_subalgebra"), "）。", math(String.raw`1_{A'}\in C_y`), " である（", ref("def_subalgebra"), "）。", math(String.raw`z\cdot_{A'}y=y\cdot_{A'}z`), "（", ref("claim_central_element_commutes_with_every_element"), "）なので ", math(String.raw`z\in C_y`), " である。", math(String.raw`C_y`), " はスカラー倍と加法で閉じているので（", ref("def_subalgebra"), "）、", math(String.raw`\sigma\ast_{A'}z`), "、", math(String.raw`1_{A'}+_{A'}\sigma\ast_{A'}z`), "、", math(String.raw`h\ast_{A'}(1_{A'}+_{A'}\sigma\ast_{A'}z)=e_\sigma`), " が順に ", math(String.raw`C_y`), " に属する（", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), "）。", math(String.raw`e_\sigma\in C_y`), " は主張の等式である。"]),
     ],
   },
   {
@@ -11922,7 +12018,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "行列の組への準同型による、冪等元の値" },
     labels: ["claim_homomorphism_to_pair_of_matrices_on_idempotents"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_\sigma`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について次が成り立つ。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_\sigma`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。すべての ", math(String.raw`\sigma\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について次が成り立つ。"]),
       displayMath(String.raw`\Phi'(e_\sigma)=\Bigl(\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}\sigma)\bigr)\ast_B 1_B,\ \ \bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}\sigma))\bigr)\ast_B 1_B\Bigr)`),
     ],
     proof: [
@@ -11968,7 +12064,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "行列環の直積から奇数次元のクリフォード代数への写像" },
     labels: ["def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "）、", math(String.raw`e_{+}`), " と ", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。写像 ", math(String.raw`\Psi':B\times B\to A'`), " を次で定める。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型とする。", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "）、", math(String.raw`e_{+}`), " と ", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元とする。写像 ", math(String.raw`\Psi':B\times B\to A'`), " を次で定める。"]),
       displayMath(String.raw`\Psi'\bigl((F,G)\bigr):=j\bigl(\Psi(F)\bigr)\cdot_{A'}e_{+}+_{A'}j\bigl(\Psi(G)\bigr)\cdot_{A'}e_{-}\qquad(F,G\in B)`),
     ],
   },
@@ -11978,7 +12074,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "行列環の直積から奇数次元のクリフォード代数への写像は ℂ-代数の準同型である" },
     labels: ["claim_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra_is_algebra_homomorphism"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`B\times B`), " を直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）、", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。", math(String.raw`\Psi'`), " は ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型とする。", math(String.raw`B\times B`), " を直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）、", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。", math(String.raw`\Psi'`), " は ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"]),
     ],
     proof: [
       paragraph([math(String.raw`J:=j\circ\Psi:B\to A'`), " と置く。", math(String.raw`\Psi`), " と ", math(String.raw`j`), " は ℂ-代数の準同型なので（", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "、", ref("def_setting_of_odd_dimensional_corollary"), "）、", math(String.raw`J`), " は ℂ-代数の準同型である（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`F,G,F',G'\in B`), "、", math(String.raw`\lambda\in\mathbb{C}`), " とする。準備として、", math(String.raw`p,r\in A'`), " と ", math(String.raw`\sigma,\tau\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について次の等式を示す（以下「積の並べ替え」と呼ぶ）。"]),
@@ -12050,19 +12146,27 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
 &=\bigl((P_1\cdot_{A'}e_{+})\cdot_{A'}(Q_1\cdot_{A'}e_{+})+_{A'}(P_1\cdot_{A'}e_{+})\cdot_{A'}(Q_2\cdot_{A'}e_{-})\bigr)+_{A'}\bigl((P_2\cdot_{A'}e_{-})\cdot_{A'}(Q_1\cdot_{A'}e_{+})+_{A'}(P_2\cdot_{A'}e_{-})\cdot_{A'}(Q_2\cdot_{A'}e_{-})\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の分配法則。}\blkref{def_unital_ring}\right)\\
-&=\bigl((P_1Q_1)\cdot_{A'}(e_{+}e_{+})+_{A'}(P_1Q_2)\cdot_{A'}(e_{+}e_{-})\bigr)+_{A'}\bigl((P_2Q_1)\cdot_{A'}(e_{-}e_{+})+_{A'}(P_2Q_2)\cdot_{A'}(e_{-}e_{-})\bigr)
-&&\left(\because\ \text{積の並べ替えを四か所に。ここで}\ PQ:=P\cdot_{A^{\prime}}Q\right)\\
-&=\bigl((P_1Q_1)\cdot_{A'}e_{+}+_{A'}(P_1Q_2)\cdot_{A'}(e_{+}e_{-})\bigr)+_{A'}\bigl((P_2Q_1)\cdot_{A'}(e_{-}e_{+})+_{A'}(P_2Q_2)\cdot_{A'}e_{-}\bigr)
+&=\bigl(P_1\cdot_{A'}\bigl(e_{+}\cdot_{A'}(Q_1\cdot_{A'}e_{+})\bigr)+_{A'}P_1\cdot_{A'}\bigl(e_{+}\cdot_{A'}(Q_2\cdot_{A'}e_{-})\bigr)\bigr)+_{A'}\bigl(P_2\cdot_{A'}\bigl(e_{-}\cdot_{A'}(Q_1\cdot_{A'}e_{+})\bigr)+_{A'}P_2\cdot_{A'}\bigl(e_{-}\cdot_{A'}(Q_2\cdot_{A'}e_{-})\bigr)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則を四か所に。}\blkref{def_unital_ring}\right)\\
+&=\bigl(P_1\cdot_{A'}\bigl((e_{+}\cdot_{A'}Q_1)\cdot_{A'}e_{+}\bigr)+_{A'}P_1\cdot_{A'}\bigl((e_{+}\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)\bigr)+_{A'}\bigl(P_2\cdot_{A'}\bigl((e_{-}\cdot_{A'}Q_1)\cdot_{A'}e_{+}\bigr)+_{A'}P_2\cdot_{A'}\bigl((e_{-}\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則を四か所に。}\blkref{def_unital_ring}\right)\\
+&=\bigl(P_1\cdot_{A'}\bigl((Q_1\cdot_{A'}e_{+})\cdot_{A'}e_{+}\bigr)+_{A'}P_1\cdot_{A'}\bigl((Q_2\cdot_{A'}e_{+})\cdot_{A'}e_{-}\bigr)\bigr)+_{A'}\bigl(P_2\cdot_{A'}\bigl((Q_1\cdot_{A'}e_{-})\cdot_{A'}e_{+}\bigr)+_{A'}P_2\cdot_{A'}\bigl((Q_2\cdot_{A'}e_{-})\cdot_{A'}e_{-}\bigr)\bigr)
+&&\left(\because\ e_{\pm}\ \text{は}\ A'\ \text{のすべての元と交換する。四か所に。}\blkref{claim_idempotents_of_odd_dimensional_clifford_algebra_commute_with_every_element}\right)\\
+&=\bigl(P_1\cdot_{A'}\bigl(Q_1\cdot_{A'}(e_{+}\cdot_{A'}e_{+})\bigr)+_{A'}P_1\cdot_{A'}\bigl(Q_2\cdot_{A'}(e_{+}\cdot_{A'}e_{-})\bigr)\bigr)+_{A'}\bigl(P_2\cdot_{A'}\bigl(Q_1\cdot_{A'}(e_{-}\cdot_{A'}e_{+})\bigr)+_{A'}P_2\cdot_{A'}\bigl(Q_2\cdot_{A'}(e_{-}\cdot_{A'}e_{-})\bigr)\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則を四か所に。}\blkref{def_unital_ring}\right)\\
+&=\bigl((P_1\cdot_{A'}Q_1)\cdot_{A'}(e_{+}\cdot_{A'}e_{+})+_{A'}(P_1\cdot_{A'}Q_2)\cdot_{A'}(e_{+}\cdot_{A'}e_{-})\bigr)+_{A'}\bigl((P_2\cdot_{A'}Q_1)\cdot_{A'}(e_{-}\cdot_{A'}e_{+})+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}(e_{-}\cdot_{A'}e_{-})\bigr)
+&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則を四か所に。}\blkref{def_unital_ring}\right)\\
+&=\bigl((P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}(P_1\cdot_{A'}Q_2)\cdot_{A'}(e_{+}\cdot_{A'}e_{-})\bigr)+_{A'}\bigl((P_2\cdot_{A'}Q_1)\cdot_{A'}(e_{-}\cdot_{A'}e_{+})+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)
 &&\left(\because\ \blkref{claim_idempotent_of_odd_dimensional_clifford_algebra_squares_to_itself}\right)\\
-&=\bigl((P_1Q_1)\cdot_{A'}e_{+}+_{A'}(P_1Q_2)\cdot_{A'}0_{A'}\bigr)+_{A'}\bigl((P_2Q_1)\cdot_{A'}0_{A'}+_{A'}(P_2Q_2)\cdot_{A'}e_{-}\bigr)
+&=\bigl((P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}(P_1\cdot_{A'}Q_2)\cdot_{A'}0_{A'}\bigr)+_{A'}\bigl((P_2\cdot_{A'}Q_1)\cdot_{A'}0_{A'}+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)
 &&\left(\because\ \blkref{claim_product_of_different_idempotents_of_odd_dimensional_clifford_algebra_is_zero}\right)\\
-&=\bigl((P_1Q_1)\cdot_{A'}e_{+}+_{A'}0_{A'}\bigr)+_{A'}\bigl(0_{A'}+_{A'}(P_2Q_2)\cdot_{A'}e_{-}\bigr)
+&=\bigl((P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}0_{A'}\bigr)+_{A'}\bigl(0_{A'}+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)
 &&\left(\because\ \blkref{claim_element_times_zero_in_algebra_is_zero}\right)\\
-&=(P_1Q_1)\cdot_{A'}e_{+}+_{A'}\bigl(0_{A'}+_{A'}(P_2Q_2)\cdot_{A'}e_{-}\bigr)
+&=(P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}\bigl(0_{A'}+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
-&=(P_1Q_1)\cdot_{A'}e_{+}+_{A'}\bigl((P_2Q_2)\cdot_{A'}e_{-}+_{A'}0_{A'}\bigr)
+&=(P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}\bigl((P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}+_{A'}0_{A'}\bigr)
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の加法の交換法則。}\blkref{def_unital_ring}\right)\\
-&=(P_1Q_1)\cdot_{A'}e_{+}+_{A'}(P_2Q_2)\cdot_{A'}e_{-}
+&=(P_1\cdot_{A'}Q_1)\cdot_{A'}e_{+}+_{A'}(P_2\cdot_{A'}Q_2)\cdot_{A'}e_{-}
 &&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の加法の単位元。}\blkref{def_unital_ring}\right)\\
 &=J(F\cdot_B F')\cdot_{A'}e_{+}+_{A'}J(G\cdot_B G')\cdot_{A'}e_{-}
 &&\left(\because\ J\ \text{は乗法を保つ。}\blkref{def_complex_algebra_homomorphism}\right)\\
@@ -12080,10 +12184,40 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "行列環の直積から奇数次元のクリフォード代数へ移してから行列の組へ戻すと、恒等写像になる" },
     labels: ["claim_homomorphism_to_pair_of_matrices_after_homomorphism_to_odd_clifford_algebra_is_identity"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。すべての ", math(String.raw`F,G\in B`), " について ", math(String.raw`\Phi'\bigl(\Psi'((F,G))\bigr)=(F,G)`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`h`), " を ", ref("def_inverse_of_two_in_complex_numbers"), " の元とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。すべての ", math(String.raw`F,G\in B`), " について ", math(String.raw`\Phi'\bigl(\Psi'((F,G))\bigr)=(F,G)`), " である。"]),
     ],
     proof: [
-      paragraph([ref("claim_homomorphism_to_pair_of_matrices_on_idempotents"), " を ", math(String.raw`\sigma:=1_{\mathbb{C}}`), " と ", math(String.raw`\sigma:=-1_{\mathbb{C}}`), " に当て、ℂ の四則で ", math(String.raw`h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})=1_{\mathbb{C}}`), "（", math(String.raw`h`), " の定義。", ref("def_setting_of_odd_dimensional_corollary"), "）、", math(String.raw`h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}}))=0_{\mathbb{C}}`), "、", math(String.raw`-_{\mathbb{C}}(-1_{\mathbb{C}})=1_{\mathbb{C}}`), " を使い、", math(String.raw`1_{\mathbb{C}}\ast_B 1_B=1_B`), "（", ref("def_complex_vector_space"), "）と ", math(String.raw`0_{\mathbb{C}}\ast_B 1_B=0_B`), "（", ref("claim_zero_scalar_multiple_is_zero_vector"), "）で書き直すと、", math(String.raw`\Phi'(e_{+})=(1_B,0_B)`), "、", math(String.raw`\Phi'(e_{-})=(0_B,1_B)`), " である。"]),
+      paragraph([math(String.raw`\Phi'(e_{+})`), " と ", math(String.raw`\Phi'(e_{-})`), " の値を先に求める。"]),
+      displayMath(String.raw`\begin{aligned}
+\Phi'(e_{+})
+&=\Phi'(e_{1_{\mathbb{C}}})
+&&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right)\\
+&=\Bigl(\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_B 1_B,\ \bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}}))\bigr)\ast_B 1_B\Bigr)
+&&\left(\because\ \sigma:=1_{\mathbb{C}}\text{。}\blkref{claim_homomorphism_to_pair_of_matrices_on_idempotents}\right)\\
+&=\Bigl(1_{\mathbb{C}}\ast_B 1_B,\ \bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}1_{\mathbb{C}}))\bigr)\ast_B 1_B\Bigr)
+&&\left(\because\ h\ \text{は}\ 1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}\ \text{の乗法の逆元。}\blkref{def_inverse_of_two_in_complex_numbers}\right)\\
+&=\bigl(1_{\mathbb{C}}\ast_B 1_B,\ 0_{\mathbb{C}}\ast_B 1_B\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(1_B,\ 0_{\mathbb{C}}\ast_B 1_B\bigr)
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=(1_B,\ 0_B)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right),\\[4pt]
+\Phi'(e_{-})
+&=\Phi'(e_{-1_{\mathbb{C}}})
+&&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right)\\
+&=\Bigl(\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}}))\bigr)\ast_B 1_B,\ \bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-_{\mathbb{C}}(-1_{\mathbb{C}})))\bigr)\ast_B 1_B\Bigr)
+&&\left(\because\ \sigma:=-1_{\mathbb{C}}\text{。}\blkref{claim_homomorphism_to_pair_of_matrices_on_idempotents}\right)\\
+&=\Bigl(\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}}))\bigr)\ast_B 1_B,\ \bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_B 1_B\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ -_{\mathbb{C}}(-1_{\mathbb{C}})=1_{\mathbb{C}}\right)\\
+&=\Bigl(\bigl(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}}))\bigr)\ast_B 1_B,\ 1_{\mathbb{C}}\ast_B 1_B\Bigr)
+&&\left(\because\ h\ \text{は}\ 1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}\ \text{の乗法の逆元。}\blkref{def_inverse_of_two_in_complex_numbers}\right)\\
+&=\bigl(0_{\mathbb{C}}\ast_B 1_B,\ 1_{\mathbb{C}}\ast_B 1_B\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の四則}\right)\\
+&=\bigl(0_B,\ 1_{\mathbb{C}}\ast_B 1_B\bigr)
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=(0_B,\ 1_B)
+&&\left(\because\ U_{\mathrm{vec}}(B)\ \text{のスカラー倍の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \Phi'\bigl(\Psi'((F,G))\bigr)
 &=\Phi'\bigl(j(\Psi(F))\cdot_{A'}e_{+}+_{A'}j(\Psi(G))\cdot_{A'}e_{-}\bigr)
@@ -12097,7 +12231,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
 &=(F,F)\cdot_{B\times B}\Phi'(e_{+})+_{B\times B}(G,G)\cdot_{B\times B}\Phi'(e_{-})
 &&\left(\because\ \blkref{claim_homomorphism_to_matrix_algebra_after_homomorphism_to_clifford_algebra_is_identity}\right)\\
 &=(F,F)\cdot_{B\times B}(1_B,0_B)+_{B\times B}(G,G)\cdot_{B\times B}(0_B,1_B)
-&&\left(\because\ \text{上の二つの値}\right)\\
+&&\left(\because\ \text{先に求めた}\ \Phi'(e_{+})\ \text{と}\ \Phi'(e_{-})\ \text{の値}\right)\\
 &=(F\cdot_B 1_B,\ F\cdot_B 0_B)+_{B\times B}(G\cdot_B 0_B,\ G\cdot_B 1_B)
 &&\left(\because\ \blkref{def_product_of_two_complex_algebras}\right)\\
 &=(F,\ F\cdot_B 0_B)+_{B\times B}(G\cdot_B 0_B,\ G)
@@ -12119,7 +12253,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "奇数次元のクリフォード代数から行列の組へ移してから戻すと、恒等写像になる" },
     labels: ["claim_homomorphism_to_odd_clifford_algebra_after_homomorphism_to_pair_of_matrices_is_identity"],
     statement: [
-      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。すべての ", math(String.raw`a\in A'`), " について ", math(String.raw`\Psi'\bigl(\Phi'(a)\bigr)=a`), " である。"]),
+      paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型、", math(String.raw`g`), " を ", ref("def_added_generator_of_odd_extension_clifford_algebra"), " の元とする。", math(String.raw`\varepsilon`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " の元、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。", math(String.raw`\varphi'`), " を ", ref("def_map_from_odd_extension_to_pair_of_matrices"), " の写像、", math(String.raw`\Phi'`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型とする。", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。すべての ", math(String.raw`a\in A'`), " について ", math(String.raw`\Psi'\bigl(\Phi'(a)\bigr)=a`), " である。"]),
     ],
     proof: [
       paragraph([math(String.raw`\Xi:=\Psi'\circ\Phi':A'\to A'`), " は ℂ-代数の準同型である（", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), "、", ref("claim_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra_is_algebra_homomorphism"), "、", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`\mathrm{id}_{A'}`), " も ℂ-代数の準同型である（", ref("claim_identity_map_is_algebra_homomorphism"), "）。", math(String.raw`\varepsilon`), " と ", math(String.raw`z`), " を ", ref("def_parity_element_of_split_clifford_algebra"), " と ", ref("def_central_element_of_odd_dimensional_clifford_algebra"), " の元とする。", math(String.raw`y\in A`), " について次が成り立つ。"]),
@@ -12199,8 +12333,8 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
     title: { text: "系：奇数次元の二次空間のクリフォード代数と、行列環二つの直積の同型" },
     labels: ["theorem_clifford_algebra_of_odd_dimensional_quadratic_space_is_isomorphic_to_product_of_matrix_algebras"],
     statement: [
-      paragraph([math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`W`), " を ", math(String.raw`M`), " 個の元からなる基底 ", math(String.raw`w`), " をもつ ℂ-線型空間、", math(String.raw`V:=W\oplus W^{*}`), "、", math(String.raw`q:=q_W`), " とし、", math(String.raw`V':=V\oplus\mathbb{C}^{\mathrm{vec}}`), " に ", math(String.raw`q'((v,t)):=q(v)+_{\mathbb{C}}t\cdot_{\mathbb{C}}t`), " を置く（", ref("def_odd_dimensional_extension_of_split_quadratic_space"), "。", math(String.raw`q'`), " は二次形式である。", ref("claim_odd_extension_quadratic_form_is_quadratic_form"), "）。", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`A':=\mathrm{Cl}(V',q')`), "、", math(String.raw`j:A\to A'`), "、", math(String.raw`g`), "、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "、", math(String.raw`\Phi`), "、", math(String.raw`\Psi`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。"]),
-      paragraph([math(String.raw`\varepsilon:=\prod_{A,\,i=1}^{M}(a_i\cdot_A a^{\dagger}_i+_A(-1_{\mathbb{C}})\ast_A(a^{\dagger}_i\cdot_A a_i))`), "（", ref("def_parity_element_of_split_clifford_algebra"), "）と ", math(String.raw`z:=j(\varepsilon)\cdot_{A'}g`), "（", ref("def_central_element_of_odd_dimensional_clifford_algebra"), "）について、", math(String.raw`z`), " は ", math(String.raw`A'`), " のすべての元と交換し（", ref("claim_central_element_commutes_with_every_element"), "）、", math(String.raw`z\cdot_{A'}z=1_{A'}`), " である（", ref("claim_square_of_central_element_is_one"), "）。", math(String.raw`\Phi':A'\to B\times B`), " を、", math(String.raw`\Phi'(j(a))=(\Phi(a),\Phi(a))`), "（", math(String.raw`a\in A`), "）と ", math(String.raw`\Phi'(g)=(\Phi(\varepsilon),(-1_{\mathbb{C}})\ast_B\Phi(\varepsilon))`), " を満たす ℂ-代数の準同型（", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), "、", ref("claim_homomorphism_to_pair_of_matrices_after_induced_homomorphism"), "、", ref("claim_homomorphism_to_pair_of_matrices_on_added_generator"), "）、", math(String.raw`\Psi':B\times B\to A'`), " を ", math(String.raw`\Psi'((F,G)):=j(\Psi(F))\cdot_{A'}e_{+}+_{A'}j(\Psi(G))\cdot_{A'}e_{-}`), "、", math(String.raw`e_{\pm}:=h\ast_{A'}(1_{A'}+_{A'}(\pm1_{\mathbb{C}})\ast_{A'}z)`), " で定める写像（", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), "、", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), "）とする。このとき次が成り立つ。"]),
+      paragraph([math(String.raw`M\in\mathbb{Z}_{\ge 1}`), "、", math(String.raw`W`), " を ", math(String.raw`M`), " 個の元からなる基底 ", math(String.raw`w`), " をもつ ℂ-線型空間、", math(String.raw`V:=W\oplus W^{*}`), "、", math(String.raw`q:=q_W`), " とし、", math(String.raw`V':=V\oplus\mathbb{C}^{\mathrm{vec}}`), " に ", math(String.raw`q'((v,t)):=q(v)+_{\mathbb{C}}t\cdot_{\mathbb{C}}t`), " を置く（", ref("def_odd_dimensional_extension_of_split_quadratic_space"), "。", math(String.raw`q'`), " は二次形式である。", ref("claim_odd_extension_quadratic_form_is_quadratic_form"), "）。", math(String.raw`A:=\mathrm{Cl}(V,q)`), "、", math(String.raw`A':=\mathrm{Cl}(V',q')`), "、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), "、", math(String.raw`\Phi`), "、", math(String.raw`\Psi`), " を ", ref("def_setting_of_odd_dimensional_corollary"), " のもの、", math(String.raw`B\times B`), " を ", math(String.raw`B`), " と ", math(String.raw`B`), " の直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）とする。"]),
+      paragraph([math(String.raw`\Phi':A'\to B\times B`), " を ", ref("def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras"), " の準同型、", math(String.raw`\Psi':B\times B\to A'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。このとき次が成り立つ。"]),
       list([[math(String.raw`\Phi'`), " と ", math(String.raw`\Psi'`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"], ["すべての ", math(String.raw`a\in A'`), " について ", math(String.raw`\Psi'(\Phi'(a))=a`), " であり、すべての ", math(String.raw`F,G\in B`), " について ", math(String.raw`\Phi'(\Psi'((F,G)))=(F,G)`), " である。"]]),
       paragraph(["したがって ", math(String.raw`\Phi'`), " は全単射であり、その逆写像は ", math(String.raw`\Psi'`), " である。"]),
     ],
@@ -12233,7 +12367,7 @@ a
     labels: ["def_pauli_matrix_x"],
     statement: [
       paragraph([
-        math(String.raw`(2,\mathrm{id}_2)`), "（", math(String.raw`\mathrm{id}_2`), " は恒等写像）は ", math(String.raw`\{1,2\}`), " の番号付けなので、", math(String.raw`\{1,2\}`), " は有限集合である（", ref("def_numbering_of_finite_set"), "）。", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        math(String.raw`\{1,2\}`), " は有限集合なので（", ref("claim_two_element_set_is_finite_set"), "）、", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
         "（", ref("def_matrices_indexed_by_finite_set"), "）の元 ", math(String.raw`\sigma^{x}`), " を、成分で次のように定める。",
       ]),
       displayMath(String.raw`(\sigma^{x})_{1,1}:=0_{\mathbb{C}},\quad(\sigma^{x})_{1,2}:=1_{\mathbb{C}},\quad(\sigma^{x})_{2,1}:=1_{\mathbb{C}},\quad(\sigma^{x})_{2,2}:=0_{\mathbb{C}}`),
@@ -13144,8 +13278,8 @@ U'\cdot_{\mathrm{Mat}_{\mathcal{P}_M}}U
         math(String.raw`A_k`), " と ", math(String.raw`A'_k`), " を ", ref("claim_creation_operator_matrix_is_kronecker_product"), " と ", ref("claim_annihilation_operator_matrix_is_kronecker_product"),
         " の族、", math(String.raw`E_{2,1},E_{1,2}`), " を行列単位、", math(String.raw`\sigma^{x},\sigma^{z}`), " を Pauli 行列（", ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_z"),
         "）、", math(String.raw`K`), " を ", ref("def_matrix_exchanging_pauli_z_and_x"), " の行列、", math(String.raw`I_2:=1_{\mathrm{Mat}_{\{1,2\}}}`), " とし、",
-        math(String.raw`\mathrm{Mat}_{\{1,2\}}`), " の演算の添字を ", math(String.raw`2`), " と略記する。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
-        math(String.raw`k\neq m`), " なら ", math(String.raw`G_k:=A_k`), "、", math(String.raw`G_m:=(1_{\mathbb{C}}\ast_2 E_{2,1})+_2(1_{\mathbb{C}}\ast_2 E_{1,2})`), " と置き、",
+        math(String.raw`k\in\{1,\dots,M\}`), " について ",
+        math(String.raw`k\neq m`), " なら ", math(String.raw`G_k:=A_k`), "、", math(String.raw`G_m:=(1_{\mathbb{C}}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{2,1})+_{\mathrm{Mat}_{\{1,2\}}}(1_{\mathbb{C}}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{1,2})`), " と置き、",
         math(String.raw`F_k`), " を ", ref("def_jordan_wigner_z_matrix"), " の右辺の第 ", math(String.raw`k`), " 因子（", math(String.raw`k<m`), " なら ", math(String.raw`\sigma^{x}`),
         "、", math(String.raw`k=m`), " なら ", math(String.raw`\sigma^{z}`), "、", math(String.raw`k>m`), " なら ", math(String.raw`I_2`), "）とする。",
       ]),
@@ -13162,12 +13296,11 @@ c_m+_B c_m^{\mathsf T}
 &&\left(\because\ r:=m\text{、}\lambda=\lambda':=1_{\mathbb{C}}\text{。}\blkref{claim_kronecker_product_is_linear_in_one_factor}\right).
 \end{aligned}`),
       paragraph([
-        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_2 G_k=F_k\cdot_2 K`), " である。", math(String.raw`k<m`), " なら ", math(String.raw`G_k=\sigma^{z}`),
+        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}G_k=F_k\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), " である。", math(String.raw`k<m`), " なら ", math(String.raw`G_k=\sigma^{z}`),
         "、", math(String.raw`F_k=\sigma^{x}`), " で ", ref("claim_matrix_k_turns_pauli_z_into_pauli_x"), " による。", math(String.raw`k=m`), " なら ",
         ref("claim_matrix_k_turns_sum_of_off_diagonal_matrix_units_into_pauli_z"), " による。", math(String.raw`k>m`), " なら ", math(String.raw`G_k=F_k=I_2`), " で、",
-        math(String.raw`K\cdot_2 I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ", math(String.raw`K=I_2\cdot_2 K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
+        math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ", math(String.raw`K=I_2\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
       ]),
-      paragraph(["行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。"]),
       displayMath(String.raw`\begin{aligned}
 \kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)
 &=\bigl(U\cdot_B(c_m+_B c_m^{\mathsf T})\bigr)\cdot_B U'
@@ -13176,9 +13309,9 @@ c_m+_B c_m^{\mathsf T}
 &&\left(\because\ \text{（一）}\right)\\
 &=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G_k\Bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
-&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_2 G_k\bigr)\Bigr)\cdot_B U'
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G_k\bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
-&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F_k\cdot_2 K\bigr)\Bigr)\cdot_B U'
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F_k\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \text{各}\ k\ \text{で（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
 &=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}F_k\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
@@ -13187,7 +13320,7 @@ c_m+_B c_m^{\mathsf T}
 &=\bigl(Z_m\cdot_B U\bigr)\cdot_B U'
 &&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
 &=Z_m\cdot_B\bigl(U\cdot_B U'\bigr)
-&&\left(\because\ \text{結合}\right)\\
+&&\left(\because\ \blkref{claim_matrix_product_is_associative}\right)\\
 &=Z_m\cdot_B 1_B
 &&\left(\because\ \blkref{claim_kronecker_power_of_k_times_that_of_its_half_is_identity}\right)\\
 &=Z_m
@@ -13212,40 +13345,39 @@ c_m+_B c_m^{\mathsf T}
     proof: [
       paragraph([
         math(String.raw`A_k`), "、", math(String.raw`A'_k`), "、", math(String.raw`E_{2,1}`), "、", math(String.raw`E_{1,2}`), "、", math(String.raw`K`), "、", math(String.raw`I_2`),
-        " と添字の略記 ", math(String.raw`2`), " を ", ref("claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix"), " の証明のものとし、",
-        math(String.raw`\sigma^{x},\sigma^{y}`), " を Pauli 行列（", ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_y"), "）とする。", math(String.raw`X:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)`),
-        " と書く。", math(String.raw`k\neq m`), " なら ", math(String.raw`G'_k:=A_k`), "、", math(String.raw`G'_m:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_2 E_{2,1}\bigr)+_2(\mathrm{i}\ast_2 E_{1,2})`),
+        " を ", ref("claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix"), " の証明のものとし、",
+        math(String.raw`\sigma^{x},\sigma^{y}`), " を Pauli 行列（", ref("def_pauli_matrix_x"), "、", ref("def_pauli_matrix_y"), "）とする。", math(String.raw`H:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)`),
+        " と書く。", math(String.raw`k\neq m`), " なら ", math(String.raw`G'_k:=A_k`), "、", math(String.raw`G'_m:=\bigl((-_{\mathbb{C}}\mathrm{i})\ast_{\mathrm{Mat}_{\{1,2\}}}E_{2,1}\bigr)+_{\mathrm{Mat}_{\{1,2\}}}(\mathrm{i}\ast_{\mathrm{Mat}_{\{1,2\}}}E_{1,2})`),
         " と置き、", math(String.raw`F'_k`), " を ", ref("def_jordan_wigner_y_matrix"), " の右辺の第 ", math(String.raw`k`), " 因子（", math(String.raw`k<m`), " なら ",
         math(String.raw`\sigma^{x}`), "、", math(String.raw`k=m`), " なら ", math(String.raw`\sigma^{y}`), "、", math(String.raw`k>m`), " なら ", math(String.raw`I_2`), "）とする。",
       ]),
       paragraph([
-        "（一）", math(String.raw`X=\mathop{\boxtimes}_{k}G'_k`), " である。", math(String.raw`k\neq m`), " なら ", math(String.raw`A_k=A'_k=G'_k`), " なので、",
+        "（一）", math(String.raw`H=\mathop{\boxtimes}_{k}G'_k`), " である。", math(String.raw`k\neq m`), " なら ", math(String.raw`A_k=A'_k=G'_k`), " なので、",
       ]),
       displayMath(String.raw`\begin{aligned}
-X
+H
 &=\Bigl((-_{\mathbb{C}}\mathrm{i})\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)+_B\Bigl(\mathrm{i}\ast_B\mathop{\boxtimes}\limits_{k=1}^{M}A'_k\Bigr)
 &&\left(\because\ \blkref{claim_creation_operator_matrix_is_kronecker_product}\text{、}\blkref{claim_annihilation_operator_matrix_is_kronecker_product}\right)\\
 &=\mathop{\boxtimes}\limits_{k=1}^{M}G'_k
 &&\left(\because\ r:=m\text{、}\lambda:=-_{\mathbb{C}}\mathrm{i}\text{、}\lambda':=\mathrm{i}\text{。}\blkref{claim_kronecker_product_is_linear_in_one_factor}\right).
 \end{aligned}`),
       paragraph([
-        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_2 G'_k=F'_k\cdot_2 K`), " である。", math(String.raw`k<m`), " なら ",
+        "（二）すべての ", math(String.raw`k`), " について ", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'_k=F'_k\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), " である。", math(String.raw`k<m`), " なら ",
         ref("claim_matrix_k_turns_pauli_z_into_pauli_x"), "、", math(String.raw`k=m`), " なら ", ref("claim_matrix_k_turns_imaginary_combination_of_off_diagonal_matrix_units_into_pauli_y"),
-        "、", math(String.raw`k>m`), " なら ", math(String.raw`K\cdot_2 I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ",
-        math(String.raw`K=I_2\cdot_2 K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
+        "、", math(String.raw`k>m`), " なら ", math(String.raw`K\cdot_{\mathrm{Mat}_{\{1,2\}}}I_2=K`), "（", ref("claim_identity_matrix_is_right_unit_of_matrix_product"), "）と ",
+        math(String.raw`K=I_2\cdot_{\mathrm{Mat}_{\{1,2\}}}K`), "（", ref("claim_identity_matrix_is_left_unit_of_matrix_product"), "）による。",
       ]),
-      paragraph(["行列の積の結合法則（", ref("claim_matrix_product_is_associative"), "）を「結合」と略記する。"]),
       displayMath(String.raw`\begin{aligned}
-\kappa_{U,U'}(X)
-&=\bigl(U\cdot_B X\bigr)\cdot_B U'
+\kappa_{U,U'}(H)
+&=\bigl(U\cdot_B H\bigr)\cdot_B U'
 &&\left(\because\ \blkref{def_conjugation_of_matrices}\right)\\
 &=\Bigl(U\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G'_k\Bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \text{（一）}\right)\\
 &=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}G'_k\Bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
-&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_2 G'_k\bigr)\Bigr)\cdot_B U'
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(K\cdot_{\mathrm{Mat}_{\{1,2\}}}G'_k\bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
-&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F'_k\cdot_2 K\bigr)\Bigr)\cdot_B U'
+&=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(F'_k\cdot_{\mathrm{Mat}_{\{1,2\}}}K\bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \text{各}\ k\ \text{で（二）。}\blkref{def_kronecker_product_indexed_by_power_set}\right)\\
 &=\Bigl(\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}F'_k\Bigr)\cdot_B\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}K\Bigr)\Bigr)\cdot_B U'
 &&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
@@ -13254,7 +13386,7 @@ X
 &=\bigl(Y_m\cdot_B U\bigr)\cdot_B U'
 &&\left(\because\ \blkref{def_kronecker_power_of_matrix_exchanging_pauli_z_and_x}\right)\\
 &=Y_m\cdot_B\bigl(U\cdot_B U'\bigr)
-&&\left(\because\ \text{結合}\right)\\
+&&\left(\because\ \blkref{claim_matrix_product_is_associative}\right)\\
 &=Y_m\cdot_B 1_B
 &&\left(\because\ \blkref{claim_kronecker_power_of_k_times_that_of_its_half_is_identity}\right)\\
 &=Y_m
@@ -13270,10 +13402,10 @@ X
     statement: [
       paragraph([
         math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), " を ",
-        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。", math(String.raw`\Phi_Y:\mathrm{Cl}(Y,Q)\to B`), " と ", math(String.raw`\Psi_Y:B\to\mathrm{Cl}(Y,Q)`),
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), " のものとし、", math(String.raw`B:=\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " と書く。", math(String.raw`\Phi_Y:\mathrm{Cl}(Y,Q)\to B`),
         " を ", ref("theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"), " の準同型、", math(String.raw`U`), " を ",
         ref("def_kronecker_power_of_matrix_exchanging_pauli_z_and_x"), "、", math(String.raw`U'`), " を ", ref("def_kronecker_power_of_half_of_matrix_exchanging_pauli_z_and_x"),
-        " の行列、", math(String.raw`\kappa_{U,U'}`), " と ", math(String.raw`\kappa_{U',U}`), " を ", ref("def_conjugation_of_matrices"), " の写像とする。",
+        " の行列、", math(String.raw`\kappa_{U,U'}`), " を ", ref("def_conjugation_of_matrices"), " の写像とする。",
         "写像 ", math(String.raw`\Omega:\mathrm{Cl}(Y,Q)\to B`), " を次で定める。",
       ]),
       displayMath(String.raw`\Omega:=\kappa_{U,U'}\circ\Phi_Y`),
@@ -13286,38 +13418,88 @@ X
     labels: ["def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"],
     statement: [
       paragraph([
-        math(String.raw`M`), "、", math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`B`), "、", math(String.raw`\Psi_Y`), "、",
-        math(String.raw`U`), "、", math(String.raw`U'`), "、", math(String.raw`\kappa_{U',U}`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"),
-        " のものとする。写像 ", math(String.raw`\Omega':B\to\mathrm{Cl}(Y,Q)`), " を次で定める。",
+        math(String.raw`M`), "、", math(String.raw`Y`), "、", math(String.raw`Q`), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`B`), "、",
+        math(String.raw`U`), "、", math(String.raw`U'`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"),
+        " のものとし、", math(String.raw`\Psi_Y:B\to\mathrm{Cl}(Y,Q)`), " を ", ref("theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra"),
+        " の準同型、", math(String.raw`\kappa_{U',U}`), " を ", ref("def_conjugation_of_matrices"), " の写像とする。写像 ", math(String.raw`\Omega':B\to\mathrm{Cl}(Y,Q)`), " を次で定める。",
       ]),
       displayMath(String.raw`\Omega':=\Psi_Y\circ\kappa_{U',U}`),
     ],
   },
   {
-    id: "isomorphism_theorem_clifford_algebra_of_general_even_dimensional_space_sends_orthonormal_basis_to_jordan_wigner_matrices",
-    kind: "theorem",
-    title: { text: "系：一般の偶数次元の非退化な二次空間のクリフォード代数から行列環への同型で、直交基底の像が Jordan–Wigner 行列になるもの" },
-    labels: ["theorem_clifford_algebra_of_general_even_dimensional_space_sends_orthonormal_basis_to_jordan_wigner_matrices"],
+    id: "isomorphism_claim_conjugated_homomorphism_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix",
+    kind: "claim",
+    title: { text: "U と U' で挟んだ写像は、直交基底の前半の元の像を z の Pauli 行列で終わる Jordan–Wigner 行列へ送る" },
+    labels: ["claim_conjugated_homomorphism_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix"],
     statement: [
       paragraph([
-        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), "、", math(String.raw`\gamma_Y`), " を ",
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\gamma_Y`), " を ",
         ref("def_general_even_dimensional_nondegenerate_quadratic_space"), "、", math(String.raw`e`), " を ", ref("def_orthonormal_basis_of_general_even_dimensional_space"),
-        " のもの、", math(String.raw`B`), "、", math(String.raw`\Phi_Y`), "、", math(String.raw`\Psi_Y`), "、", math(String.raw`U`), "、", math(String.raw`U'`), " を ",
-        ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), " のもの、", math(String.raw`\Omega`), " を ",
+        " のもの、", math(String.raw`\Omega`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), " の写像、",
+        math(String.raw`Z_m`), " を ", ref("def_jordan_wigner_z_matrix"), " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Omega\bigl(\gamma_Y(e_m)\bigr)=Z_m`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\Omega\bigl(\gamma_Y(e_m)\bigr)
+&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_m)\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)
+&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis}\right)\\
+&=Z_m
+&&\left(\because\ \blkref{claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_claim_conjugated_homomorphism_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix",
+    kind: "claim",
+    title: { text: "U と U' で挟んだ写像は、直交基底の後半の元の像を y の Pauli 行列で終わる Jordan–Wigner 行列へ送る" },
+    labels: ["claim_conjugated_homomorphism_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\gamma_Y`), " を ",
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), "、", math(String.raw`e`), " を ", ref("def_orthonormal_basis_of_general_even_dimensional_space"),
+        " のもの、", math(String.raw`\Omega`), " を ", ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), " の写像、",
+        math(String.raw`Y_m`), " を ", ref("def_jordan_wigner_y_matrix"), " の行列とする。すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\Omega\bigl(\gamma_Y(e_{M+m})\bigr)=Y_m`),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\Omega\bigl(\gamma_Y(e_{M+m})\bigr)
+&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_{M+m})\bigr)\Bigr)
+&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
+&=\kappa_{U,U'}\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)\Bigr)
+&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis}\right)\\
+&=Y_m
+&&\left(\because\ \blkref{claim_conjugation_of_imaginary_combination_of_creation_and_annihilation_matrices_is_jordan_wigner_y_matrix}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "isomorphism_theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms",
+    kind: "theorem",
+    title: { text: "系：一般の偶数次元の非退化な二次空間のクリフォード代数と行列環の、U と U' で挟んだ互いに逆な同型" },
+    labels: ["theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms"],
+    statement: [
+      paragraph([
+        math(String.raw`M`), " を ", ref("def_setting_of_general_even_dimensional_corollary"), "、", math(String.raw`\mathrm{Cl}(Y,Q)`), " を ",
+        ref("def_general_even_dimensional_nondegenerate_quadratic_space"), " のもの、", math(String.raw`B`), "、", math(String.raw`\Phi_Y`), "、", math(String.raw`U`), "、", math(String.raw`U'`), " を ",
+        ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), "、", math(String.raw`\Psi_Y`), " を ", ref("def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"), " のもの、", math(String.raw`\Omega`), " を ",
         ref("def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power"), "、", math(String.raw`\Omega'`), " を ",
         ref("def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power"), " の写像とする。",
       ]),
-      paragraph(["このとき次が成り立つ（", math(String.raw`Z_m`), " は ", ref("def_jordan_wigner_z_matrix"), "、", math(String.raw`Y_m`), " は ", ref("def_jordan_wigner_y_matrix"), "）。"]),
+      paragraph(["このとき次が成り立つ。"]),
       list([
         [math(String.raw`\Omega`), " と ", math(String.raw`\Omega'`), " はどちらも ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"],
         [
           "すべての ", math(String.raw`a\in\mathrm{Cl}(Y,Q)`), " について ", math(String.raw`\Omega'(\Omega(a))=a`), " であり、すべての ", math(String.raw`F\in B`), " について ",
           math(String.raw`\Omega(\Omega'(F))=F`), " である。",
         ],
-        [
-          "すべての ", math(String.raw`m\in\{1,\dots,M\}`), " について ", math(String.raw`\Omega(\gamma_Y(e_m))=Z_m`), " かつ ", math(String.raw`\Omega(\gamma_Y(e_{M+m}))=Y_m`), " である。",
-        ],
       ]),
+      paragraph(["したがって ", math(String.raw`\Omega`), " は全単射であり、その逆写像は ", math(String.raw`\Omega'`), " である。"]),
     ],
     proof: [
       paragraph([
@@ -13349,23 +13531,17 @@ X
 &=F
 &&\left(\because\ \text{上の二つ目の等式で}\ G:=F\right).
 \end{aligned}`),
-      paragraph([math(String.raw`m\in\{1,\dots,M\}`), " について："]),
+      paragraph(["単射であること。", math(String.raw`a,a'\in\mathrm{Cl}(Y,Q)`), " が ", math(String.raw`\Omega(a)=\Omega(a')`), " を満たすとする。"]),
       displayMath(String.raw`\begin{aligned}
-\Omega\bigl(\gamma_Y(e_m)\bigr)
-&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_m)\bigr)\Bigr)
-&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
-&=\kappa_{U,U'}\bigl(c_m+_B c_m^{\mathsf T}\bigr)
-&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis}\right)\\
-&=Z_m
-&&\left(\because\ \blkref{claim_conjugation_of_sum_of_creation_and_annihilation_matrices_is_jordan_wigner_z_matrix}\right),\\[4pt]
-\Omega\bigl(\gamma_Y(e_{M+m})\bigr)
-&=\kappa_{U,U'}\Bigl(\Phi_Y\bigl(\gamma_Y(e_{M+m})\bigr)\Bigr)
-&&\left(\because\ \blkref{def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power}\right)\\
-&=\kappa_{U,U'}\Bigl(\bigl((-_{\mathbb{C}}\mathrm{i})\ast_B c_m\bigr)+_B\bigl(\mathrm{i}\ast_B c_m^{\mathsf T}\bigr)\Bigr)
-&&\left(\because\ \blkref{claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis}\right)\\
-&=Y_m
-&&\left(\because\ \blkref{claim_conjugation_of_imaginary_combination_of_creation_and_annihilation_matrices_is_jordan_wigner_y_matrix}\right).
+a
+&=\Omega'\bigl(\Omega(a)\bigr)
+&&\left(\because\ \text{上の一つ目の等式}\right)\\
+&=\Omega'\bigl(\Omega(a')\bigr)
+&&\left(\because\ \Omega(a)=\Omega(a')\right)\\
+&=a'
+&&\left(\because\ \text{上の一つ目の等式}\right).
 \end{aligned}`),
+      paragraph(["全射であること。", math(String.raw`F\in B`), " について ", math(String.raw`\Omega'(F)`), " は ", math(String.raw`\Omega(\Omega'(F))=F`), " を満たす。したがって ", math(String.raw`\Omega`), " は全単射であり、", math(String.raw`F`), " に ", math(String.raw`\Omega(a)=F`), " を満たすただ一つの ", math(String.raw`a`), " は ", math(String.raw`\Omega'(F)`), " なので、", math(String.raw`\Omega`), " の逆写像は ", math(String.raw`\Omega'`), " である。"]),
     ],
   },
 ]);

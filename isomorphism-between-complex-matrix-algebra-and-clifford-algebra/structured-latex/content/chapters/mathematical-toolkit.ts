@@ -13475,7 +13475,7 @@ P_m
 &=0_{\mathbb{C}}\cdot_{\mathbb{C}}\prod_{\mathbb{C},\,s=1}^{k}\alpha'_s
 &&\left(\because\ \lambda:=0_{\mathbb{C}}\text{。}\blkref{claim_ordered_product_is_homogeneous_in_one_factor}\right)\\
 &=0_{\mathbb{C}}
-&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right).
+&&\left(\because\ \mathbb{C}\ \text{の中で、どの}\ x\in\mathbb{C}\ \text{についても}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}x=0_{\mathbb{C}}\right).
 \end{aligned}`),
     ],
   },

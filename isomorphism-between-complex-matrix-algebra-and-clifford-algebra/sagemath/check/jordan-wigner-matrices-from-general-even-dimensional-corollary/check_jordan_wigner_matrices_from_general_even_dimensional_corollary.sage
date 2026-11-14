@@ -115,4 +115,154 @@ for M in [1,2,3]:
         for b in range(2*M):
             ac = add(mul(gens[a], gens[b], P), mul(gens[b], gens[a], P))
             ok(ac == smul(2 if a == b else 0, ident(P)), "Jordan-Wigner anticommutation")
-print("PASS", passed)
+
+negs = 0
+def neg(c, msg):
+    # 否定の対照：c が真（一致しない）であることを確かめる
+    global negs
+    assert c, msg
+    negs += 1
+
+# ==== 途中の行：c_m + c_m^T = ⊠G_k、(U(⊠G))U' から Z_m まで、Y の側の同じ形（本文の式変形の各行）====
+one = QQbar(1)
+for M in [1,2,3]:
+    P = subsets(M)
+    U = kron(M, [K]*M); Up = kron(M, [Kp]*M); IdP = ident(P)
+    for m in range(1, M+1):
+        c = cmat(M, m); cT = transp(c)
+        A_ = [sz if k < m else (E21 if k == m else I2) for k in range(1, M+1)]     # claim_creation_operator_matrix_is_kronecker_product の族
+        Ap_ = [sz if k < m else (E12 if k == m else I2) for k in range(1, M+1)]    # claim_annihilation_operator_matrix_is_kronecker_product の族
+        for (lam, lamp, Fm, JW, nm) in [(one, one, sz, None, "Z"), (-i_, i_, sy, None, "Y")]:
+            Gm = add(smul(lam, E21), smul(lamp, E12))                              # G_m / G'_m
+            Gk = [A_[k-1] if k != m else Gm for k in range(1, M+1)]
+            Fk = [sx if k < m else (Fm if k == m else I2) for k in range(1, M+1)]  # Z_m / Y_m の第 k 因子
+            JWm = kron(M, Fk)                                                      # def_jordan_wigner_z_matrix / def_jordan_wigner_y_matrix
+            X = add(smul(lam, c), smul(lamp, cT))
+            # （一）
+            rows1 = ([add(c, cT)] if nm == "Z" else []) + [
+                add(smul(lam, c), smul(lamp, cT)),
+                add(smul(lam, kron(M, A_)), smul(lamp, kron(M, Ap_))),
+                kron(M, Gk)]
+            for r in range(len(rows1)-1):
+                ok(rows1[r] == rows1[r+1], "row (1) %s M=%d m=%d r=%d" % (nm, M, m, r))
+            # （二）K G_k = F_k K
+            for k in range(M):
+                ok(mul(K, Gk[k], X2) == mul(Fk[k], K, X2), "(2) K G_k = F_k K")
+            # 本体の式変形
+            rows = [mul(mul(U, X, P), Up, P),
+                    mul(mul(U, kron(M, Gk), P), Up, P),
+                    mul(mul(kron(M, [K]*M), kron(M, Gk), P), Up, P),
+                    mul(kron(M, [mul(K, Gk[k], X2) for k in range(M)]), Up, P),
+                    mul(kron(M, [mul(Fk[k], K, X2) for k in range(M)]), Up, P),
+                    mul(mul(kron(M, Fk), kron(M, [K]*M), P), Up, P),
+                    mul(mul(JWm, kron(M, [K]*M), P), Up, P),
+                    mul(mul(JWm, U, P), Up, P),
+                    mul(JWm, mul(U, Up, P), P),
+                    mul(JWm, IdP, P),
+                    JWm]
+            for r in range(len(rows)-1):
+                ok(rows[r] == rows[r+1], "conjugation row %s M=%d m=%d r=%d" % (nm, M, m, r))
+            # 否定の対照：G_m から E_{1,2} の項を落とすと X と一致しない。m 番の因子で K G_m は σ^x K と一致しない
+            neg(kron(M, [A_[k-1] if k != m else smul(lam, E21) for k in range(1, M+1)]) != X, "control: drop E12")
+            neg(mul(K, Gm, X2) != mul(sx, K, X2), "control: K G_m != sx K")
+
+# ==== Φ_Y、Ω、Ω' を具体的な (Y,Q) で計算する（体は Q(i)=QuadraticField(-1)、厳密計算）====
+# Y:=K^{2M}、正規直交基底 e を有理数の可逆行列 Eb の列に取り、Q(y):=y^T (Eb^{-1})^T Eb^{-1} y と置く（Q(e_k)=1、e は直交）。
+# θ=L_{e,u}（座標 β^e(y)=Eb^{-1}y と族 u）、θ'=L_{d,v}。Φ_Y=Φ∘Cl(θ) は γ_Y(y) を Φ(γ(θ(y)))=φ(θ(y)) へ移す。
+# Ψ_Y=Cl(θ')∘Ψ：Ψ(F)=Σ F_{S,T} a†_S P a_T（def_homomorphism_from_matrix_algebra_to_clifford_algebra）の a†_i=γ(d_i)・a_i=γ(d_{M+i}) を
+# Cl(θ') が γ_Y(θ'(d_i))・γ_Y(θ'(d_{M+i})) へ移すので、Φ_Y(Ψ_Y(F)) は Ψ の式の生成元を φ(θ(θ'(d_i)))・φ(θ(θ'(d_{M+i}))) に置き換えて評価した値である。
+# クリフォード代数の元は Φ_Y による行列への像で表す（像での確認であり、クリフォード代数の中の等式の証明ではない）。
+KI = QuadraticField(-1, 'ii'); ii = KI.gen()
+from itertools import combinations as _comb
+set_random_seed(20261114)
+def to_sage(D, Pl):          # 辞書の行列を Sage の行列へ（行・列の並びは Pl）
+    return matrix(KI, len(Pl), len(Pl), lambda a, b: KI(QQ(D[(Pl[a], Pl[b])].real())) + ii * KI(QQ(D[(Pl[a], Pl[b])].imag())))
+def oprod_m(ms, Id):
+    X = Id
+    for Y_ in ms:
+        X = X * Y_
+    return X
+for M in [1,2,3]:
+    P = subsets(M); nP = len(P); n = 2*M
+    Id = identity_matrix(KI, nP); Z0 = zero_matrix(KI, nP)
+    c = {m: to_sage(cmat(M, m), P) for m in range(1, M+1)}; ct = {m: c[m].transpose() for m in c}
+    Us = to_sage(kron(M, [K]*M), P); Ups = to_sage(kron(M, [Kp]*M), P)
+    Zs = {m: to_sage(kron(M, [sx if k < m else (sz if k == m else I2) for k in range(1, M+1)]), P) for m in c}
+    Ys = {m: to_sage(kron(M, [sx if k < m else (sy if k == m else I2) for k in range(1, M+1)]), P) for m in c}
+    kap = lambda L, R, F: (L * F) * R                               # def_conjugation_of_matrices
+    phi = lambda y: sum((y[k] * c[k+1] for k in range(M)), Z0) + sum((y[M+k] * ct[k+1] for k in range(M)), Z0)   # Φ(γ(y))、y は基底 d の座標
+    pair = lambda a_, b_: vector(KI, list(a_) + list(b_))         # (W の成分, W^* の成分)
+    wW = lambda m: vector(KI, [1 if k == m else 0 for k in range(M)]); zW = vector(KI, [0]*M)
+    in1 = lambda x: pair(x, zW); in2 = lambda g: pair(zW, g)
+    d = [in1(wW(m)) for m in range(M)] + [in2(wW(m)) for m in range(M)]          # d_m=in_1(w_m)、d_{M+m}=in_2(f_m)
+    u = [pair(wW(m), wW(m)) for m in range(M)] + [pair((-ii) * wW(m), ii * wW(m)) for m in range(M)]   # def_family_in_split_space_for_isometry
+    for trial in range(2):
+        while True:
+            Eb = random_matrix(QQ, n, n, num_bound=3, den_bound=2)
+            if Eb.det() != 0: break
+        Eb = Eb.change_ring(KI); Ebi = Eb.inverse()
+        e = Eb.columns()
+        Qf = lambda y: y * (Ebi.transpose() * Ebi) * y
+        ok(all(Qf(x) == 1 for x in e), "e orthonormal (Q=1)")
+        th = lambda y: sum((b * uu for b, uu in zip(Ebi * y, u)), vector(KI, [0]*n))          # θ=L_{e,u}
+        hK = KI(1)/2
+        v = [hK * (e[m] + ii * e[M+m]) for m in range(M)] + [hK * (e[m] + (-ii) * e[M+m]) for m in range(M)]   # def_family_in_general_space_for_inverse_isometry
+        thp = lambda x: sum((x[l] * v[l] for l in range(n)), vector(KI, [0]*n))                # θ'=L_{d,v}（d は標準基底なので座標は成分）
+        PhiY_gen = lambda y: phi(th(y))                                                          # Φ_Y(γ_Y(y))
+        for m in range(M):
+            # claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis の各行
+            rows = [PhiY_gen(e[m]), phi(th(e[m])), phi(u[m]), phi(pair(wW(m), wW(m))),
+                    phi(in1(wW(m)) + in2(wW(m))), phi(in1(wW(m))) + phi(in2(wW(m))), phi(d[m]) + phi(d[M+m]), c[m+1] + ct[m+1]]
+            for r in range(len(rows)-1):
+                ok(rows[r] == rows[r+1], "first half row %d" % r)
+            neg(PhiY_gen(e[m]) != c[m+1] - ct[m+1], "control: c - c^T")
+            # claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis の各行
+            rows = [PhiY_gen(e[M+m]), phi(th(e[M+m])), phi(u[M+m]), phi(pair((-ii) * wW(m), ii * wW(m))),
+                    phi(in1((-ii) * wW(m)) + in2(ii * wW(m))), phi((-ii) * in1(wW(m)) + ii * in2(wW(m))),
+                    phi((-ii) * in1(wW(m))) + phi(ii * in2(wW(m))), (-ii) * phi(in1(wW(m))) + ii * phi(in2(wW(m))),
+                    (-ii) * phi(d[m]) + ii * phi(d[M+m]), (-ii) * c[m+1] + ii * ct[m+1]]
+            for r in range(len(rows)-1):
+                ok(rows[r] == rows[r+1], "second half row %d" % r)
+            neg(PhiY_gen(e[M+m]) != ii * c[m+1] + (-ii) * ct[m+1], "control: swapped signs of i")
+            # Ω(γ_Y(e_m))=Z_m、Ω(γ_Y(e_{M+m}))=Y_m（Ω=κ_{U,U'}∘Φ_Y）
+            ok(kap(Us, Ups, PhiY_gen(e[m])) == Zs[m+1], "Omega e_m = Z_m")
+            ok(kap(Us, Ups, PhiY_gen(e[M+m])) == Ys[m+1], "Omega e_{M+m} = Y_m")
+            neg(kap(Us, Ups, PhiY_gen(e[m])) != Ys[m+1], "control: Omega e_m != Y_m")
+            neg(kap(Us, Ups, PhiY_gen(e[M+m])) != Zs[m+1], "control: Omega e_{M+m} != Z_m")
+        # Φ_Y(Ψ_Y(F)) の評価
+        adag = {i: phi(th(thp(d[i-1]))) for i in range(1, M+1)}
+        ann = {i: phi(th(thp(d[M+i-1]))) for i in range(1, M+1)}
+        Pv = oprod_m([ann[i] * adag[i] for i in range(1, M+1)], Id)
+        Emat = {}
+        for a, S in enumerate(P):
+            aS = oprod_m([adag[t] for t in sorted(S)], Id)
+            for b, T in enumerate(P):
+                Emat[(a, b)] = aS * Pv * oprod_m([ann[t] for t in sorted(T, reverse=True)], Id)   # Φ_Y(Cl(θ')(a†_S P a_T))
+        PhiY_PsiY = lambda F: sum((F[a, b] * Emat[(a, b)] for a in range(nP) for b in range(nP) if F[a, b] != 0), Z0)
+        Omega_Omegap = lambda F: kap(Us, Ups, PhiY_PsiY(kap(Ups, Us, F)))   # Ω(Ω'(F))=κ_{U,U'}(Φ_Y(Ψ_Y(κ_{U',U}(F))))
+        tests = [matrix(KI, nP, nP, lambda a, b: 1 if (a, b) == (s_, t_) else 0) for s_ in range(nP) for t_ in range(nP)]
+        tests += [matrix(KI, nP, nP, lambda a, b: QQ.random_element(num_bound=5, den_bound=3) + ii * QQ.random_element(num_bound=5, den_bound=3)) for _ in range(3)]
+        for F in tests:
+            ok(Omega_Omegap(F) == F, "Omega Omega' = id")
+        Fr = tests[-1]
+        # （κ_{U,U'} を二度当てる形は U·U=2^M·1 のため恒等写像になり、対照にならない。κ_{U',U} を落とした形を対照にする）
+        neg(kap(Us, Ups, PhiY_PsiY(Fr)) != Fr, "control: Omega' without kappa_{U',U}")
+        neg(kap(Us, Us, PhiY_PsiY(kap(Us, Us, Fr))) != Fr, "control: without h (U for U')")
+        # Ω'∘Ω=id を生成元 γ_Y(e_k) の像で：Φ_Y(Ω'(Ω(γ_Y(e_k))))=Φ_Y(Ψ_Y(κ_{U',U}(κ_{U,U'}(Φ_Y(γ_Y(e_k))))))=Φ_Y(γ_Y(e_k))
+        for k in range(n):
+            g = PhiY_gen(e[k])
+            ok(PhiY_PsiY(kap(Ups, Us, kap(Us, Ups, g))) == g, "Omega' Omega = id on generator image")
+        # 同じことを生成元の像の積（γ_Y(e_k)γ_Y(e_l)、Φ_Y は乗法を保つ）でも
+        for k in range(n):
+            for l in range(n):
+                g = PhiY_gen(e[k]) * PhiY_gen(e[l])
+                ok(PhiY_PsiY(kap(Ups, Us, kap(Us, Ups, g))) == g, "Omega' Omega = id on product of generator images")
+        # 否定の対照：Ψ の式で a_i の像と a†_i の像を取り違えると Ω'∘Ω は生成元を戻さない
+        # （c_m+c_m^T は取り違えで変わらないので、後半の生成元 γ_Y(e_{M+1}) の像で確かめる）
+        PvB = oprod_m([adag[i] * ann[i] for i in range(1, M+1)], Id)
+        badPsi = lambda F: sum((F[a, b] * (oprod_m([ann[t] for t in sorted(P[a])], Id) * PvB * oprod_m([adag[t] for t in sorted(P[b], reverse=True)], Id))
+                                for a in range(nP) for b in range(nP) if F[a, b] != 0), Z0)
+        g = PhiY_gen(e[M])
+        neg(badPsi(kap(Ups, Us, kap(Us, Ups, g))) != g, "control: swapped a and a-dagger in Psi")
+    print("M =", M, "Omega checks ok", flush=True)
+print("PASS", passed, "negative controls", negs)
