@@ -72408,11 +72408,17 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
 &&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)
 \end{aligned}`),
                       paragraph([
-                        math(String.raw`j=cm+t\,n_{\perp}`), " では第二部分が ",
-                        math(String.raw`D^{\gamma,Q_1,t}_{t n_{\perp}}=Q_1+t\,d_{\perp}(\gamma)=S+c\,B_{\gamma}+t\,d_{\perp}(\gamma)`),
-                        "（", ref("def_iterated_transverse_staircase"), "、",
-                        ref("def_one_sided_periodic_lift_closure"), " の ",
-                        math(String.raw`Q_1`), " の等式）、第三部分が ",
+                        math(String.raw`j=cm+t\,n_{\perp}`), " では第二部分が次の式鎖で接合する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+D^{\gamma,Q_1,t}_{t n_{\perp}}
+&=Q_1+t\,d_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=S+c\,B_{\gamma}+t\,d_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の }Q_1\text{ の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "第三部分が ",
                         math(String.raw`i=0`), " すなわち ", math(String.raw`a=0`), "、",
                         math(String.raw`b=0`), "、", math(String.raw`G^{\gamma}_0=(0,0)`), " なので ",
                         math(String.raw`S+t\,d_{\perp}(\gamma)+c\,B_{\gamma}`),
