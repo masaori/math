@@ -55116,9 +55116,9 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
                         displayMath(String.raw`\begin{aligned}
 \log\Bigl(q^{(k-1)(ka)}\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
 &=\log\bigl(q^{(k-1)(ka)}\bigr)+\log\Bigl(\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)^k\Bigr)
-&&(\because\ \blkref{claim_log_additive}\text{。両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
+&&(\because\ \blkref{claim_log_additive}\text{ を適用でき、両因子は準備の第一により }\mathbb{Q}_{>0}\text{ の元})\\
 &=(k-1)(ka)\,\log q+k\,\log\bigl(q^{(k-1)a}(Z^{\mathrm{op}}_{a,a}(q))^k\bigr)
-&&(\because\ \blkref{claim_log_power}\text{ を }k:=(k-1)(ka)\text{ と }k:=k\text{ で二項へ同時適用。整数倍は }\blkref{def_log_order_group})\\
+&&(\because\ \blkref{claim_log_power}\text{ を }k:=(k-1)(ka)\text{ と }k:=k\text{ で二項へ同時適用し、整数倍は }\blkref{def_log_order_group})\\
 &=(k-1)(ka)\,\log q+k\,\bigl(\log\bigl(q^{(k-1)a}\bigr)+\log\bigl((Z^{\mathrm{op}}_{a,a}(q))^k\bigr)\bigr)
 &&(\because\ \blkref{claim_log_additive})\\
 &=(k-1)(ka)\,\log q+k\,\bigl((k-1)a\,\log q+k\,\log Z^{\mathrm{op}}_{a,a}(q)\bigr)

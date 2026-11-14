@@ -3,9 +3,8 @@
 （`claim_rotation_phase_as_turning_power`）と「回転位相の積は総回転数の冪である」
 （`claim_walk_rotation_phase_total_turning`）の具体版。
 
-人手証明と同じく、一歩の等式は三場合の照合、積の等式は列の長さの帰納法で進む
-（場合分けと帰納法の本体は必要十分版にあり、ここでは代数的数の体と
-原始 8 乗根の約束 `z ^ 4 = -1` に固定して `z ≠ 0` を導く）。
+一歩の等式は人手証明と同じ三場合の照合で示す。積の等式では原始 8 乗根の
+約束 `z ^ 4 = -1` から `z ≠ 0` を導き、列についての必要十分版を適用する。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
 import Ising2DLambda.NecSuf.KacWard.TotalTurning
@@ -17,8 +16,11 @@ open Ising2DLambda.NecSuf.KacWard
 
 /-- 回転位相は一歩の回転数の整数冪である（代数的数の体に固定した具体版）。 -/
 theorem phaseOfTurn_eq_zpow (z : Qbar) (turn : Turn) :
-    phaseOfTurn z turn = z ^ turnValue turn :=
-  phaseOfTurn_eq_zpow_necSuf z turn
+    phaseOfTurn z turn = z ^ turnValue turn := by
+  cases turn
+  · simp [phaseOfTurn, turnValue]
+  · simp [phaseOfTurn, turnValue]
+  · simp [phaseOfTurn, turnValue]
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem phaseOfTurn_eq_zpow_from_necSuf (z : Qbar) (turn : Turn) :
