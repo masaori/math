@@ -1939,6 +1939,7 @@ import Ising2DLambda.KacWard.WalkFamilyQuadraticSignProduct
 import Ising2DLambda.KacWard.CrossingFreeWalkQuadraticSign
 import Ising2DLambda.NecSuf.KacWard.EdgeDistinctWalkQuadraticSign
 import Ising2DLambda.KacWard.EdgeDistinctWalkQuadraticSign
+import Ising2DLambda.KacWard.TaggedCycleQuadraticSign
 import Ising2DLambda.KacWard.EdgeDistinctWalkQuadraticSignFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleGaugeRatio
 import Ising2DLambda.KacWard.AlternatingCycleGaugeRatio
