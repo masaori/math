@@ -72940,8 +72940,10 @@ P_n(\gamma)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)
+&=P_0(\gamma)+\bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)-P_0(\gamma)
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の四則}\bigr)\\
 &=P_n(\gamma)-P_0(\gamma)
-&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\text{ と }\mathbb Z\times\mathbb Z\text{ の四則}\bigr)\\
+&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\bigr)\\
 &=(0,0)
 &&\bigl(\because\ P_n(\gamma)=P_0(\gamma)\bigr)
 \end{aligned}`),
