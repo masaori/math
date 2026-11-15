@@ -2695,7 +2695,7 @@ z
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
-&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2\text{。}2\ \text{は}\ \blkref{def_real_two}\ \text{の}\ 1 + 1\text{、}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
@@ -2818,6 +2818,7 @@ z
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 0/1 = 0 の行と √(1_C) の鎖の 0/2 = 0 の行の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1、x → 2）の参照に、準備の第四の 0 − 2·0·π = 0 の鎖の 3 行目と √(1_C) の鎖の 0 − 0 = 0 の行の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第四の 0 − 2·0·π = 0 の 3 行の鎖と、0 ≤ 0 < 2π から代表元 (1, 0) の偏角 0 に対する整数を 0 と定める地の文を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero へ移し、その参照に替えた。√(1_C) の鎖は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の名前だけの根拠「ℝ で a + 0 = a（a → 1）」を set_and_algebra_notation の加法の単位元の参照に替え、0/1 = 0 の行の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。√(1_C) の鎖の「ℝ で 1·x = x を 2 箇所へ」を set_and_algebra_notation の乗法の単位元の参照に替えた。式は不変。0/2 = 0 の行の 2 ≠ 0 は ℝ の 2 を定めるブロックを決める件で扱う。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の 0/2 = 0 の行の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式は不変。",
       ],
     },
   },
