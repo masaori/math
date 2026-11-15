@@ -19,8 +19,9 @@
 | part6 | `check_part6_sqrt_of_square_lines_exact.sage` | (6) の `x ≥ 0` の行 `√(x^2) = x`（`x = 0` を含む）と `x < 0` の行 `√((−x)^2) = −x`（`definition_of_sqrt_r_positive` のただ一つの非負の元。`QQ` の `x` と `AA` で厳密）と、符号を取り違えた元が根でない否定の対照 | 25（等号 13・否定の対照 12） | 厳密 | **PASS** |
 | 03 | `check_03_zero_square_rows.sage` | (1) の `x = 0` の三つの場合・(3) の `|z| = 0` の場合・(6) の鎖の `0^2 = 0·0`（`square_of_real_number_is_product`、`r → 0`）と `0·0 = 0`（`real_zero_times_is_zero`、`x → 0`）の行（平方根の中身を `QQ[x, y]` の多項式で一行ずつ）と、代入をしない否定の対照 | 15（等号 13・否定の対照 2） | 厳密 | **PASS** |
 | square product | `check_square_product_and_sqrt_definition_rows.sage` | 非負実数の平方の比較の鎖の両端 `u^2 = u·u`・`v·v = v^2`（`square_of_real_number_is_product`、`QQ[u, v]` で厳密）と、(2) の行 `(√(x^2+y^2))^2 = x^2+y^2`（`definition_of_sqrt_r_positive` の `u^2 = s`、`QQ` の `x, y` と `AA` で厳密）と、因子の取り違え・負の根の否定の対照 | 162（等号） | 厳密 | **PASS** |
+| negation square | `check_negation_square_rows.sage` | (1) の `x = 0, y < 0` の鎖と (6) の `x < 0` の鎖の平方根の中身の 3 行 `t^2 = t·t`（`square_of_real_number_is_product`、`r → t`）・`t·t = (−t)·(−t)`（`real_negation_times_negation_is_product`、`a, b → t` を右辺から左辺へ。`−t` を不定元に置き、その段だけを `−t` の代入で確かめる）・`(−t)·(−t) = (−t)^2`（`r → −t` を右辺から左辺へ）を `t` について確かめ、`t → y`・`t → x` の 2 つの鎖で共用する（`QQ[t, nt]` で厳密）と、片方の因子だけ符号を反転した否定の対照 | 4（等号 3・否定の対照 1） | 厳密 | **PASS** |
 
-許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない（01 だけ。02・part6・square product は `AA`（square product の平方の行は `QQ[u, v]`）、03 は `QQ[x, y]` の厳密計算）。
+許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない（01 だけ。02・part6・square product は `AA`（square product の平方の行は `QQ[u, v]`）、03 は `QQ[x, y]`、negation square は `QQ[t, nt]` の厳密計算）。
 
 ## 備考
 

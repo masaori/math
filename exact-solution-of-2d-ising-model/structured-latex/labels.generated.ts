@@ -584,6 +584,7 @@ export const ALL_LABELS = [
   "real_minus_zero_is_self",
   "real_multiple_of_hermitian_is_hermitian",
   "real_negation_of_zero_is_zero",
+  "real_negation_times_negation_is_product",
   "real_number_is_at_most_its_absolute_value",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",
   "real_sum_over_binary_words_distributes_in_left_factor",

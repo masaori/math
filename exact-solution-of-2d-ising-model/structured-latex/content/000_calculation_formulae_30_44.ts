@@ -235,8 +235,12 @@ y & (x=0,\ y>0),\\
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&= \sqrt{y\cdot y}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to y))\\
+&= \sqrt{(-y)\cdot(-y)}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{real_negation_times_negation_is_product}\ (a\to y,\ b\to y)\ \text{を右辺から左辺へ})\\
 &= \sqrt{(-y)^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ (-y)^2=y^2)\\
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to -y)\ \text{を右辺から左辺へ})\\
 &= -y
 &&(\because\ y<0\ \text{なので}\ -y\ge 0\ \text{であり}\ (-y)^2=(-y)^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to (-y)^2)\ \text{のただ一つの元}\ u\ \text{は}\ -y\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
@@ -492,8 +496,12 @@ x^2+y^2
       displayMath(
         String.raw`\begin{aligned}
 \sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
+&= \sqrt{x\cdot x}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to x))\\
+&= \sqrt{(-x)\cdot(-x)}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{real_negation_times_negation_is_product}\ (a\to x,\ b\to x)\ \text{を右辺から左辺へ})\\
 &= \sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ (-x)^2=x^2)\\
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to -x)\ \text{を右辺から左辺へ})\\
 &= -x
 &&(\because\ x<0\ \text{なので}\ -x\ge 0\ \text{であり}\ (-x)^2=(-x)^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to (-x)^2)\ \text{のただ一つの元}\ u\ \text{は}\ -x\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= |x|
@@ -509,6 +517,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y < 0 の鎖の √(y^2) = √((−y)^2) と (6) の x < 0 の鎖の √(x^2) = √((−x)^2) の行の根拠が「ℝ では (−y)^2 = y^2」「(−x)^2 = x^2」の名前だけだったので、それぞれを square_of_real_number_is_product（r → y、r → x）・real_negation_times_negation_is_product（a, b → y、a, b → x を右辺から左辺へ。この回に足した主張）・square_of_real_number_is_product（r → −y、r → −x を右辺から左辺へ）の 3 行に割った。鎖の両端と主張は変えていない。数値検証: sagemath/check/103_abs_basic_properties/check_negation_square_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 非負実数の平方の比較の鎖の両端の u^2 = u·u・v·v = v^2 と、(2) の (√(x^2+y^2))^2 = x^2+y^2 の行の根拠が「平方の定め方」「平方根の定義」の名前だけだったので、square_of_real_number_is_product（r → u、r → v を右辺から左辺へ）と definition_of_sqrt_r_positive の u^2 = s（s → x^2+y^2、u → √(x^2+y^2)。証明の中の x, y と衝突しないよう、(1) の前置きと同じく定義の文字を s, u で書いた）の参照に替えた。式の両端と主張は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(3) の |z| = 0 の鎖・(6) の鎖が、0^2 から 0 への行を名前だけの根拠「ℝ では 0 を因子にもつ積は 0」で済ませていた（冪を積に開く段も書かれていなかった）ので、square_of_real_number_is_product（r → 0）の行と real_zero_times_is_zero（x → 0）の行に割った（x = y = 0 の場合はどちらも 2 箇所へ）。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/103_abs_basic_properties/check_03_zero_square_rows.sage。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: (6) の x ≥ 0 の場合の √(x^2) = x と x < 0 の場合の √((−x)^2) = −x の行の根拠が「平方根の一意性」の名前だけだったので、(1) と同じく definition_of_sqrt_r_positive（(1) と同じ s・u の言い換えを (6) の場合分けの前に置き直し、s → x^2、s → (−x)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",

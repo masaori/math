@@ -1918,6 +1918,63 @@ a - 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_negation_times_negation_is_product",
+    kind: "claim",
+    title: { text: "符号を反転した実数どうしの積は、もとの実数どうしの積に等しい" },
+    labels: ["real_negation_times_negation_is_product"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`-a`),
+        "・",
+        math(String.raw`-b`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to a`),
+        "、",
+        math(String.raw`z \to b`),
+        "）、積は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`(-a)\cdot(-b) = a\cdot b`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-a)\cdot(-b)
+&= \bigl((-1)\cdot a\bigr)\cdot(-b)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot a\bigr)\cdot\bigl((-1)\cdot b\bigr)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-1)\cdot\Bigl(a\cdot\bigl((-1)\cdot b\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot\Bigl(\bigl(a\cdot(-1)\bigr)\cdot b\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot\Bigl(\bigl((-1)\cdot a\bigr)\cdot b\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot\bigl((-1)\cdot(a\cdot b)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot\bigl(-(a\cdot b)\bigr)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a\cdot b)\bigr)\\
+&= -\bigl(-(a\cdot b)\bigr)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to -(a\cdot b))\bigr)\\
+&= a\cdot b
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to a\cdot b)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。(−a)(−b) = ab は体の公理に含まれない（−a は加法の逆元として定めた）のに、abs_basic_properties の (1) の x = 0, y < 0 の鎖と (6) の x < 0 の鎖が「ℝ では (−y)^2 = y^2」「(−x)^2 = x^2」の名前だけで済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_times_negation_is_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationTimesNegationIsProduct.lean）、必要十分版は Ising2D.NecSuf.neg_mul_neg_of_rightDistrib（NecSuf/NegMulNegOfRightDistrib.lean）。数値検証: sagemath/check/real_negation_times_negation_is_product/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_zero_divided_is_zero",
     kind: "claim",
     title: { text: "0 を 0 でない実数で割ると 0 になる" },

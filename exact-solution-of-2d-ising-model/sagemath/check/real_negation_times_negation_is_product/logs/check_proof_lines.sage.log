@@ -1,0 +1,4 @@
+QQ[a, b, na, nb, nab, nnab] で恒等的な段 4 個と、主張を当てる段 5 個を確かめた（等号 9 個）
+符号反転を本来の値に置いて全ての行が ab になった
+negative controls (broken lines detected): 3
+RESULT: PASS
