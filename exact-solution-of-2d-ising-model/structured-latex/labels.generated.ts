@@ -598,6 +598,7 @@ export const ALL_LABELS = [
   "real_vector_inclusion_intertwines_matrix_vector_product",
   "real_vector_inclusion_is_injective",
   "real_zero_divided_is_zero",
+  "real_zero_less_than_one",
   "real_zero_times_is_zero",
   "recover_Z_Y_from_check_Z_Y",
   "relation_of_gamma_2_theta_tilde",

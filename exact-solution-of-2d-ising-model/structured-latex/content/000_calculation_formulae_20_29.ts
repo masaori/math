@@ -2086,6 +2086,102 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_zero_less_than_one",
+    kind: "claim",
+    title: { text: "実数の 0 は 1 より小さい" },
+    labels: ["real_zero_less_than_one"],
+    statement: [
+      paragraph([
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        "・順序 ",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）。このとき",
+      ]),
+      displayMath(String.raw`0 < 1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備。体 ",
+        math(String.raw`\mathbb{R}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）の公理より ",
+        math(String.raw`0 \neq 1`),
+        " である。",
+        math(String.raw`-1 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_difference"),
+        " の ",
+        math(String.raw`1`),
+        " の加法の逆元である。",
+        math(String.raw`\mathbb{R}`),
+        " の順序は全順序（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0 \leq 1`),
+        " か ",
+        math(String.raw`1 \leq 0`),
+        " であり、",
+        math(String.raw`0 \neq 1`),
+        " と合わせて ",
+        math(String.raw`0 < 1`),
+        " か ",
+        math(String.raw`1 < 0`),
+        " である。",
+        math(String.raw`0 < 1`),
+        " の場合は主張そのものである。",
+        math(String.raw`1 < 0`),
+        " の場合にも ",
+        math(String.raw`0 < 1`),
+        " となることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= 1 + (-1)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 1)\ \text{を右辺から左辺へ}\bigr)\\
+&< 0 + (-1)
+&&\bigl(\because\ \text{場合の仮定}\ 1 < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1,\ y \to 0,\ c \to -1\bigr)\\
+&= -1
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&< (-1)\cdot(-1)
+&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{を 2 つの因子へ当て、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 1\cdot 1
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to 1,\ b \to 1)\bigr)\\
+&= 1
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって、どちらの場合も ",
+        math(String.raw`0 < 1`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 1・0 < 2・2 ≠ 0 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde ほか）、0 < 1 は順序体の公理に含まれないので、ℝ の 2 を定めて 0 < 2 を示す前段として示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanOne.lean）、必要十分版は Ising2D.NecSuf.zero_lt_one_of_orderedAxioms（NecSuf/ZeroLtOneOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_one/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
