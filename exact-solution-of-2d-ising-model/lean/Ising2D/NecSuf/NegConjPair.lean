@@ -41,6 +41,12 @@
 `Preorder R` は mathlib の `MulPosStrictMono` の定義が前提にするためだけに置く（鎖が使うのは `<` だけで、反射律・推移律は使わない）。
 `MonoidWithZero R` は、冪の `Monoid` と `0·a = 0` の `MulZeroClass` に同じ乗法を共有させるために置く（`mul_zero` は使っていない。
 2 つを別々に置くと乗法が 2 つになるので、両方を 1 つの乗法で満たす最小のクラスとしてこれを選んだ）。
+第一の鎖の第 1 段の `0·a = 0` は、`MonoidWithZero` の公理 `zero_mul` として受け取る。具体版はこの段を
+`real_zero_times_is_zero`（加法の単位元・逆元・結合則と右からの分配則から示した主張。必要十分版は
+`NecSuf/ZeroMulOfRightDistrib.lean` の `zero_mul_of_rightDistrib`）を右辺から左辺へ引いて得る。
+この鎖に効くのは `0·a = 0` という等式だけで、それをどう示すかは効かないので、加法の構造を何も仮定に取らずに公理で受けた
+（具体版が `real_zero_times_is_zero` を通して使う加法の単位元・逆元・結合則と右からの分配則は、どれも効いていない）。
+上で第一の鎖に分配則と加法の逆元の存在が効いていないと書いたのは、この意味である。
 第二の鎖は、人手と具体版と同じく直前の鎖の結論 `0 < x`（`x := a^2`）を入力に取り、乗法を使わない。
 仮定は `AddGroup R`（符号反転と `-0 = 0`）・`LT R`・加法の左右からの狭義の単調性
 `AddLeftStrictMono R`・`AddRightStrictMono R` だけである（反射律・推移律・加法の可換性は使わない）。
@@ -103,7 +109,7 @@ section StrictNegativity
 theorem sq_pos_of_pos_chain {R : Type*} [MonoidWithZero R] [Preorder R] [MulPosStrictMono R]
     {a : R} (ha : 0 < a) : 0 < a ^ 2 :=
   calc (0 : R)
-      = 0 * a := (zero_mul a).symm                       -- `0·a = 0`
+      = 0 * a := (zero_mul a).symm                       -- `0·a = 0`（`MonoidWithZero` の公理。具体版では `real_zero_times_is_zero` を右辺から左辺へ引く段）
     _ < a * a := mul_lt_mul_of_pos_right ha ha           -- 正の元 `a` を右から掛ける
     _ = a ^ 2 := (sq_eq_mul_self' a).symm                -- `square_of_real_number_is_product` を右辺から左辺へ
 
