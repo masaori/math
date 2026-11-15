@@ -3287,13 +3287,27 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`z^\top (W_{\mathbb{R}})^nz \geq 0`),
         " を示す。",
         math(String.raw`z = 0`),
-        " なら ",
-        ref("def_real_bilinear_value"),
-        " の和の各項が ",
-        math(String.raw`0\cdot((W_{\mathbb{R}})^n)_{ij}\cdot 0 = 0`),
-        " なので ",
-        math(String.raw`z^\top (W_{\mathbb{R}})^nz = 0`),
-        " である。",
+        "（すべての ",
+        math(String.raw`i`),
+        " で ",
+        math(String.raw`z_i = 0`),
+        "）なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z^\top (W_{\mathbb{R}})^nz
+&= \sum_{i=1}^{d}\sum_{j=1}^{d} \bigl(z_i\,((W_{\mathbb{R}})^n)_{ij}\bigr)\,z_j
+  &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to (W_{\mathbb{R}})^n,\ x \to z,\ y \to z)\bigr)\\
+&= \sum_{i=1}^{d}\sum_{j=1}^{d} \bigl(0\cdot((W_{\mathbb{R}})^n)_{ij}\bigr)\cdot 0
+  &&\bigl(\because\ z_i = 0,\ z_j = 0\ \text{を各項へ}\bigr)\\
+&= \sum_{i=1}^{d}\sum_{j=1}^{d} 0\cdot 0
+  &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to ((W_{\mathbb{R}})^n)_{ij})\ \text{を各項へ}\bigr)\\
+&= \sum_{i=1}^{d}\sum_{j=1}^{d} 0
+  &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\ \text{を各項へ}\bigr)\\
+&= 0
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
         math(String.raw`z \neq 0`),
         " なら ",
         math(String.raw`z_{j_0} \neq 0`),
@@ -3887,6 +3901,7 @@ T
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗と積の行き来を def_power_of_real_number の冪をその場で開く書き方（x^2 = (x^0x)x = xx、t^2 = tt）から square_of_real_number_is_product を引く行に替え、1^2 = 1 を power_of_real_one_is_one（m → 2）から引いた。1 行に複数の事実をまとめていた行を割った: ‖w‖ の鎖の (‖z‖^{-1}z_i)^2 の行を積へ開く・並べ替える・冪へ戻すの 3 行に、(‖z‖^{-1})^2‖z‖^2 の行を同じく 3 行に、√1 の行を ‖z‖^{-1}‖z‖ = 1 の行と 1^2 = 1 の行に（9 行 → 14 行）、Σx_k^2 の鎖の最後の行を ‖x‖ = 1 の行と 1^2 = 1 の行に（3 行 → 4 行）、m_{k+1} の鎖の m_k^2/m_{k-1} = m_k(m_k/m_{k-1}) を square_of_real_number_is_product の行と結合則の行に（5 行 → 6 行）、【(W_ℝ)^n の成分の評価】の展開の行を、x_lx_l・x_kx_k の積で展開する行と square_of_real_number_is_product で冪へ戻す行に（7 行 → 8 行）。‖z‖ = 0 の場合の ‖z‖^2 = 0^2 = 0 を 0^2 = 0·0 = 0 にし、√1 = 1 の行の 1^2 = 1 を power_of_real_one_is_one から引いた。値と主張は変えていない。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段で、‖z‖ ≠ 0 の背理（‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0 を文の中の鎖と括弧 1 つの根拠で書いていた）を、‖z‖ = 0 の代入・square_of_real_number_is_product（r → 0）・ℝ で 0·x = 0（x → 0）の 3 行の鎖に開き、‖z‖^2 > 0 との矛盾と ‖z‖ ≥ 0 から ‖z‖ > 0（ℝ の順序で x ≥ 0 かつ x ≠ 0 なら x > 0 の根拠を添えた）を続く文に置いた。値と主張は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段の ‖z‖ ≠ 0 の背理の鎖の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z = 0 の段は地の文「def_real_bilinear_value の和の各項が 0·((W_ℝ)^n)_ij·0 = 0 なので」で、左から 0・右から 0 の 2 つの事実を根拠なしに束ねていた。W_real_is_positive_semidefinite の u = 0 の鎖と同じ 5 行の鎖（def_real_bilinear_value、z_i = z_j = 0 の代入、real_zero_times_is_zero（x → ((W_ℝ)^n)_ij）、同（x → 0）、0 の有限和）に開いた（式の両端と主張は不変）。",
       ],
     },
   },

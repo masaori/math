@@ -49,10 +49,18 @@ def check_psd(P, Pn, n, z, what):
     d = Pn.nrows()
     rng = range(d)
     if z == 0:
-        eq(bil(z, Pn, z), 0, f"{what}: z = 0 なら z^⊤(W_ℝ)^nz = 0")
+        # z = 0 の 5 行の鎖: def_real_bilinear_value、z_i = z_j = 0 の代入、real_zero_times_is_zero（x → ((W_ℝ)^n)_ij）、同（x → 0）、0 の有限和
+        zero = Pn.base_ring()(0)
+        chain_eq([bil(z, Pn, z),
+                  sum((z[i] * Pn[i, j]) * z[j] for i in rng for j in rng),
+                  sum((zero * Pn[i, j]) * zero for i in rng for j in rng),
+                  sum(zero * zero for i in rng for j in rng),
+                  sum(zero for i in rng for j in rng),
+                  zero], f"{what}: z = 0 の鎖")
         for i in rng:
             for j in rng:
-                eq(z[i] * Pn[i, j] * z[j], 0, f"{what}: z = 0 の各項")
+                chain_eq([(z[i] * Pn[i, j]) * z[j], (zero * Pn[i, j]) * zero, zero * zero, zero],
+                         f"{what}: z = 0 の各項 i={i}, j={j}")
         return
     j0 = next(j for j in rng if z[j] != 0)
     nz = norm_exact(z)

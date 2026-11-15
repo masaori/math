@@ -20,7 +20,7 @@
 | --- | --- |
 | 【冪の実数の行列】の `(W_ℝ)^1 = W_ℝ` の 6 行 | `power_one_of_W_real` の `calc` の 6 段 |
 | 【`(W_ℝ)^n` の成分の対称性】6 行と単射性 | `power_of_W_real_entry_symm`（`ClaimTracePowerUpperBound.lean`、同じ 6 行の鎖）をそのまま引く |
-| 【`(W_ℝ)^n` の半正定値性】`z = 0` の場合 | `power_of_W_real_is_positive_semidefinite` の `z = 0` の `calc` の 2 段 |
+| 【`(W_ℝ)^n` の半正定値性】`z = 0` の場合の 5 行 | `power_of_W_real_is_positive_semidefinite` の `z = 0` の `calc` の 5 段 |
 | 同じ段の各項の非負性 `|z_j|^2 = |z_j||z_j| ≥ 0` の 2 行 | `abs_sq_of_real_number_nonneg` の `calc` の 2 段 |
 | 同じ段の `|z_{j_0}| > 0`（`def_real_absolute_value` の場合分け） | `abs_pos_of_real_number_ne_zero` |
 | 同じ段の `‖z‖^2 ≥ |z_{j_0}|^2 = |z_{j_0}||z_{j_0}| > 0` の 4 行 | `norm_sq_pos_of_component_ne_zero` の `calc` の 4 段 |
@@ -195,9 +195,16 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
     have h0 : z ⬝ᵥ P *ᵥ z = 0 :=
       calc z ⬝ᵥ P *ᵥ z
           = ∑ i, ∑ j, z i * P i j * z j :=
-            dotProduct_mulVec_eq_real_bilinear_value z z P                  -- `def_real_bilinear_value`
-        _ = 0 := by simp only [hz, Pi.zero_apply, zero_mul, mul_zero,
-              Finset.sum_const_zero]                                        -- 各項が `0·((W_ℝ)^n)_ij·0 = 0`
+            dotProduct_mulVec_eq_real_bilinear_value z z P                  -- 1 行目: `def_real_bilinear_value`（`P → (W_ℝ)^n`、`x → z`、`y → z`）
+        _ = ∑ i, ∑ j, (0 : ℝ) * P i j * 0 := by
+            rw [hz]; rfl                                                    -- 2 行目: `z_i = 0`、`z_j = 0` を各項へ
+        _ = ∑ _i : Conf M, ∑ _j : Conf M, (0 : ℝ) * 0 :=
+            Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by
+              rw [Ising2D.real_zero_times_is_zero (P i j)]                  -- 3 行目: `real_zero_times_is_zero`（`x → ((W_ℝ)^n)_ij`）を各項へ
+        _ = ∑ _i : Conf M, ∑ _j : Conf M, (0 : ℝ) :=
+            Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ =>
+              Ising2D.real_zero_times_is_zero 0                             -- 4 行目: `real_zero_times_is_zero`（`x → 0`）を各項へ
+        _ = 0 := by simp only [Finset.sum_const_zero]                       -- 5 行目: `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
     exact h0.ge
   · -- `z ≠ 0` の場合: `z_{j_0} ≠ 0` となる `j_0`
     obtain ⟨j0, hj0⟩ := Function.ne_iff.mp hz
