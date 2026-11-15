@@ -555,6 +555,7 @@ export const ALL_LABELS = [
   "real_bilinear_value_of_scalar_multiple_vector",
   "real_bilinear_value_of_symmetric_matrix_is_symmetric",
   "real_bilinear_value_with_nonnegative_entries_is_nonnegative",
+  "real_double_negation",
   "real_exp_of_finite_sum",
   "real_exp_positive",
   "real_exp_series_converges",

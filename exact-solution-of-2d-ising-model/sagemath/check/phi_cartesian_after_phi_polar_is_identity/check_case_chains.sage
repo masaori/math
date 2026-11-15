@@ -141,7 +141,9 @@ for yy in (AA(-3), -AA(1) / 2, -s3):                             # x = 0, y < 0
     rows = [phi_cartesian((-yy, -pi_ / 2)), ((-yy) * cos_sin(-pi_ / 2)[0], (-yy) * cos_sin(-pi_ / 2)[1]),
             ((-yy) * 0, (-yy) * (-1)),
             (AA(0), (-yy) * (-1)),                               # real_times_zero_is_zero (x -> -y)
-            (AA(0), yy)]                                         # 負号を 2 度施す
+            (AA(0), (-1) * (-yy)),                               # ℝ の乗法の可換則
+            (AA(0), -(-yy)),                                     # real_minus_one_times_is_negation (a -> -y)
+            (AA(0), yy)]                                         # real_double_negation (a -> y)
     assert cos_sin(-pi_ / 2) == (0, -1)
     assert all(a == b for a, b in zip(rows, rows[1:])) and rows[-1] == (0, yy)
 rows = [phi_cartesian(ZERO), (0 * cos_sin(Ang(0))[0], 0 * cos_sin(Ang(0))[1]),

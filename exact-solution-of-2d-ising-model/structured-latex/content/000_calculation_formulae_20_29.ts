@@ -1861,6 +1861,63 @@ a - 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_double_negation",
+    kind: "claim",
+    title: { text: "実数の符号を 2 度反転するともとに戻る" },
+    labels: ["real_double_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`-a`),
+        " と ",
+        math(String.raw`-(-a)`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to a`),
+        "、",
+        math(String.raw`z \to -a`),
+        "）、和と ",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`-(-a) = a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-(-a)
+&= -(-a) + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= -(-a) + \bigl(a + (-a)\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\ \text{を右辺から左辺へ}\bigr)\\
+&= -(-a) + \bigl((-a) + a\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl(-(-a) + (-a)\bigr) + a
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((-a) + (-(-a))\bigr) + a
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0 + a
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to -a)\bigr)\\
+&= a + 0
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。−(−a) = a は体の公理に含まれない（−a は加法の逆元として定めた）のに、phi_cartesian_after_phi_polar_is_identity の x = 0, y < 0 の鎖が「負号を 2 度施すともとに戻る」だけで (−y)(−1) = y を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_double_negation（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealDoubleNegation.lean）、必要十分版は Ising2D.NecSuf.neg_neg_of_addCommGroup（NecSuf/NegNegOfAddCommGroup.lean）。数値検証: sagemath/check/real_double_negation/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_zero_divided_is_zero",
     kind: "claim",
     title: { text: "0 を 0 でない実数で割ると 0 になる" },
@@ -3412,8 +3469,12 @@ z^2
 &&(\because\ \cos(-\pi/2)=0,\ \sin(-\pi/2)=-1)\\
 &= \bigl(0,\ (-y)\cdot(-1)\bigr)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to -y))\\
+&= \bigl(0,\ (-1)\cdot(-y)\bigr)
+&&(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）})\\
+&= \bigl(0,\ -(-y)\bigr)
+&&(\because\ \blkref{real_minus_one_times_is_negation}\ (a\to -y))\\
 &= (0,\ y)
-&&(\because\ \text{負号を 2 度施すともとに戻る})\\
+&&(\because\ \blkref{real_double_negation}\ (a\to y))\\
 &= (x,\ y)
 &&(\because\ x=0)
 \end{aligned}`,
@@ -3455,6 +3516,7 @@ z^2
         "2026-11-01、1 ブロック 1 主張に従い、isomorphism_of_phi_cartesian の証明の後半（合成が恒等写像であることの場合分けの計算）を" +
           "この主張として切り出した。同時に、各場合の末尾の参照の一覧を各行の \\blkref に移し、各場合の最初の行を写像の合成の定義と φ_polar の定義の二行に分けた。計算は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: x = 0 の三つの場合の鎖の「0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの前のブロック）の参照に替え、1 は積の単位元・負号を 2 度施すことと束ねていた 2 行はそれぞれ 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/phi_cartesian_after_phi_polar_is_identity/ の x = 0 の鎖を割った行に合わせた。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: x = 0, y < 0 の鎖の「負号を 2 度施すともとに戻る」で (−y)(−1) = y を済ませていた 1 行を、ℝ の乗法の可換則・real_minus_one_times_is_negation（a → −y）・real_double_negation（a → y）の 3 行に割った。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/phi_cartesian_after_phi_polar_is_identity/ の同じ鎖を割った行に合わせた。",
       ],
     },
   },

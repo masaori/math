@@ -1,0 +1,4 @@
+QQ[n, a] で恒等的な段 7 個と、n = a でだけ成り立つ加法の逆元（z → -a）の段 1 個を確かめた（等号 8 個）
+n = a を代入して全ての行が a になった
+negative controls (broken lines detected): 3
+RESULT: PASS
