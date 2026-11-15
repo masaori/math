@@ -122,7 +122,7 @@ for (Yv, Zv) in COUPLINGS:
                 (r**2 + 0 * 0, AA(0) / (-r)),         # square_of_real_number_is_product (r → 0)
                 (r**2 + 0, AA(0) / (-r)),             # real_zero_times_is_zero (x → 0)
                 (r**2, AA(0) / (-r)),                 # a + 0 = a (a → r^2)
-                (r**2, AA(0)),                        # 0/x = 0 (x → -r ≠ 0)
+                (r**2, AA(0)),                        # real_zero_divided_is_zero (x → -r, -r ≠ 0)
             ]
             for j in range(len(three_polar) - 1):
                 tick(three_polar[j] == three_polar[j + 1], f"(3) φ_polar((-r)_C) の鎖 第 {j+2} 行 = 第 {j+3} 行")
@@ -134,7 +134,7 @@ for (Yv, Zv) in COUPLINGS:
             tick(section(t2) == pi_ and section_by_floor(t2) == pi_, "(3) arg = s_{[0,2π)}([π]) = π - 2·0·π = π")
             three_main = [pi_ - (2 * 0) * pi_, pi_ - 0 * pi_, pi_ - Ang(0), pi_]
             for j in range(len(three_main) - 1):
-                tick(three_main[j] == three_main[j + 1], f"(3) 主張の鎖 第 {j+5} 行 = 第 {j+6} 行（real_times_zero_is_zero、real_zero_times_is_zero、a - 0 = a）")
+                tick(three_main[j] == three_main[j + 1], f"(3) 主張の鎖 第 {j+5} 行 = 第 {j+6} 行（real_times_zero_is_zero、real_zero_times_is_zero、real_minus_zero_is_self）")
             tick(pi_ - (2 * 1) * pi_ != pi_, "(3) 主張の鎖 否定の対照: 整数 n を 1 に取り違えると π - 2·1·π ≠ π")
             # (4)
             tick(-(g * gm) == F(-1) * (g * gm), "(4) 準備 第 1 行: -z = (-1_C) z")
@@ -146,7 +146,7 @@ for (Yv, Zv) in COUPLINGS:
                 (r**2 + 0 * 0, AA(0) / r),            # square_of_real_number_is_product (r → 0)
                 (r**2 + 0, AA(0) / r),                # real_zero_times_is_zero (x → 0)
                 (r**2, AA(0) / r),                    # a + 0 = a (a → r^2)
-                (r**2, AA(0)),                        # 0/x = 0 (x → r ≠ 0)
+                (r**2, AA(0)),                        # real_zero_divided_is_zero (x → r, r ≠ 0)
             ]
             for j in range(len(four_polar) - 1):
                 tick(four_polar[j] == four_polar[j + 1], f"(4) φ_polar(r_C) の鎖 第 {j+2} 行 = 第 {j+3} 行")
@@ -156,9 +156,9 @@ for (Yv, Zv) in COUPLINGS:
             four_lines = [
                 phi_cartesian((sqrt_aa(r), Ang(0) / 2 - 0 * pi_)),
                 phi_cartesian((absg, Ang(0) / 2 - 0 * pi_)),
-                phi_cartesian((absg, Ang(0) - 0 * pi_)),     # 0/x = 0 (x → 2)
+                phi_cartesian((absg, Ang(0) - 0 * pi_)),     # real_zero_divided_is_zero (x → 2, 2 ≠ 0)
                 phi_cartesian((absg, Ang(0) - Ang(0))),      # real_zero_times_is_zero (x → π)
-                phi_cartesian((absg, Ang(0))),               # a - 0 = a (a → 0)
+                phi_cartesian((absg, Ang(0))),               # real_minus_zero_is_self (a → 0)
                 (absg * cos_sin(Ang(0))[0], absg * cos_sin(Ang(0))[1]),
                 (absg * 1, absg * cos_sin(Ang(0))[1]),
                 (absg * 1, absg * 0),
@@ -178,12 +178,12 @@ for (Yv, Zv) in COUPLINGS:
                 phi_cartesian((sqrt_aa(r), pi_ / 2 - 0 * pi_)),
                 phi_cartesian((absg, pi_ / 2 - 0 * pi_)),
                 phi_cartesian((absg, pi_ / 2 - Ang(0))),     # real_zero_times_is_zero (x → π)
-                phi_cartesian((absg, pi_ / 2)),              # a - 0 = a (a → π/2)
+                phi_cartesian((absg, pi_ / 2)),              # real_minus_zero_is_self (a → π/2)
                 (absg * cos_sin(pi_ / 2)[0], absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * cos_sin(pi_ / 2)[1]),
                 (absg * 0, absg * 1),
                 (AA(0) * absg, 1 * absg),                    # 積の可換律を 2 成分へ
-                (AA(0) * absg - 0, 1 * absg),                # a - 0 = a
+                (AA(0) * absg - 0, 1 * absg),                # real_minus_zero_is_self（a → 0·|γ| を右辺から左辺へ）
                 (AA(0) * absg - 1 * AA(0), 1 * absg),        # real_times_zero_is_zero (x → 1)
                 (AA(0) * absg - 1 * AA(0), 0 + 1 * absg),    # 0 + a = a
                 (AA(0) * absg - 1 * AA(0), AA(0) * 0 + 1 * absg),      # real_zero_times_is_zero (x → 0)

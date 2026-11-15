@@ -177,7 +177,7 @@ rep.check(cc_mul(iz(-1), iz(-r0)) == iz((-1) * (-r0)) and iz((-1) * (-r0)) == iz
 five_tail = [
     (g0 * 0, g0 * 1),
     (0 * g0, 1 * g0),                      # 積の可換律を 2 成分へ
-    (0 * g0 - 0, 1 * g0),                  # a - 0 = a
+    (0 * g0 - 0, 1 * g0),                  # real_minus_zero_is_self（a → 0·|γ| を右辺から左辺へ）
     (0 * g0 - 1 * 0, 1 * g0),              # real_times_zero_is_zero（x → 1）
     (0 * g0 - 1 * 0, 0 + 1 * g0),          # 0 + a = a
     (0 * g0 - 1 * 0, 0 * 0 + 1 * g0),      # real_zero_times_is_zero（x → 0）

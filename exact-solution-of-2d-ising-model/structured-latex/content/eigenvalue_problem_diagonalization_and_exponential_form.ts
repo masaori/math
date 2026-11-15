@@ -3732,7 +3732,7 @@ s_1c_2
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0+\pi\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to -r\text{。}-r < 0\ \text{より}\ -r \neq 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to -r,\ -r \neq 0\ \text{（}-r < 0\ \text{より）})\bigr)\\
 &= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
 &&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ 0+\pi\right)\right]_{\sim}
@@ -3766,7 +3766,7 @@ s_1c_2
 &= \pi - 0
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \pi\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \pi)\bigr)
 \end{aligned}`),
       paragraph([
         "(4) まず ",
@@ -3801,7 +3801,7 @@ s_1c_2
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to r\text{。}r > 0\ \text{より}\ r \neq 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to r,\ r \neq 0\ \text{（}r > 0\ \text{より）})\bigr)\\
 &= \left[\left(r,\ \arctan 0\right)\right]_{\sim}
 &&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
 &= \left[\left(r,\ 0\right)\right]_{\sim}
@@ -3827,11 +3827,11 @@ s_1c_2
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to 2\text{。}2 \neq 0\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 0\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cos 0,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
 &&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
@@ -3876,7 +3876,7 @@ s_1c_2
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \tfrac{\pi}{2}\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \tfrac{\pi}{2})\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cos\tfrac{\pi}{2},\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
 &&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
@@ -3886,7 +3886,7 @@ s_1c_2
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right|,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ xy = yx\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\ \text{と}\ y \to 0,\ y \to 1\ \text{を 2 成分へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 0\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0\cdot \left|\gamma_2(\theta)\right|)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 1)\ \text{を第 1 成分の引く側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
@@ -3929,6 +3929,7 @@ s_1c_2
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の第一の cos θ + i sin θ の鎖の 6〜11 行目（i(2_ℂi)^{-1} = 2_ℂ^{-1} を積の単位元・逆元・結合律で示す 6 行）を、exp_of_negative_i_real_as_cos_minus_i_sin・periodicity_of_check_fermi と同じ鎖なので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照 1 行にした（27 行 → 22 行）。値と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を左から掛けると 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」7 か所（(2) の 0 < |γ_2(θ)|^2 の鎖の 1 行目、(3) の φ_polar((−r)_C) の鎖・arg^{[0,2π)}((−r)_C) から始まる主張の鎖、(4) の φ_polar(r_C) の鎖・√ の鎖、(5) の √ の鎖の角度の行と第 2 成分の行）を real_zero_times_is_zero の参照に替えた（式は不変）。Lean の具体版 absGamma2_thetaTilde_sq_pos の zero_mul を Ising2D.real_zero_times_is_zero に替えた。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を右から掛けると 0 の名前だけの根拠「ℝ で x·0 = 0（ℝ は体）」3 か所（(3) の arg の鎖の 2·0 = 0（x → 2）、(4) の |γ_2(θ)|·0 = 0（x → |γ_2(θ)|）、(5) の第 1 成分の引く側の 0 = 1·0（x → 1）を右辺から左辺へ）を、足した主張 real_times_zero_is_zero の参照に替えた（式は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: (3)(4)(5) の名前だけの根拠 7 か所を参照に替えた。「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」の 3 か所（(3) の φ_polar((−r)_C) の鎖の x → −r、(4) の φ_polar(r_C) の鎖の x → r、(4) の主の鎖の x → 2）を real_zero_divided_is_zero に、「ℝ で a − 0 = a（ℝ は体）」の 4 か所（(3) の主の鎖の a → π、(4) の主の鎖の a → 0、(5) の主の鎖の a → π/2 と a → 0·|γ_2(θ)| を右辺から左辺へ）を real_minus_zero_is_self に替えた。x ≠ 0 の理由（−r < 0、r > 0、2 ≠ 0）は参照の括弧に残した。式は不変。",
       ],
     },
   },
