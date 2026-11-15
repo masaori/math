@@ -40,7 +40,7 @@
 - **本文で $u$ は方向単位ベクトルの名前。** Fourier 分解のモード変数には $u,w$ を使わず $\varpi,\varsigma$ を使う（1 記号 1 意味）。
 
 ## 直近の記録
-2026-11-15（主経路）: 自己双対変換の符号を除いた一致を、二つの平方と多項式の零積性から Lean 二版・導出版で示し、本文に登録した。既存の SageMath 検算は 2026-11-15 に PASS。今回の環境に `sage` は無く、再実行はしていない。
+2026-11-15（主経路）: 自己双対変換の符号を除いた一致を、二つの平方と多項式の零積性から Lean 二版・導出版で示し、本文に登録した。既存の SageMath 検算は 2026-11-15 に PASS。今回の環境に `sage` は無く、再実行はしていない。書式統一では同じ主張の多項式所属の根拠を行末へ移し、平方と零積の式鎖末尾の句点を除いた。
 
 2026-11-15（並列）: 「分散因子の積分の Onsager 表示への書換え」を周期境界の密度を引く最初の一行と書換えの段に割り、書換えの段を Lean 具体版 `onsager_hyperbolic_integral_rewrite`・必要十分版 `onsager_hyperbolic_integral_rewrite_necSuf`・導出版で示した（`RealEscape/OnsagerHyperbolicIntegralRewrite.lean` ほか）。既存の SageMath 検算は PASS。本文の `lean:` は合成の段で登録する。
 

@@ -84211,8 +84211,9 @@ P_L^{a,b}
 &=\sum_{j=0}^{2N}c_j(1+x)^{2N}\left(\frac{1-x}{1+x}\right)^j
 &&\bigl(\because\ \blkref{def_kw_dual_transform}\text{ と有限和の分配律}\bigr)\\
 &=\sum_{j=0}^{2N}c_j(1-x)^j(1+x)^{2N-j}
-&&\bigl(\because\ j\le2N\text{ と有理関数体の約分}\bigr)
-\in\overline{\mathbb Q}[x].
+&&\bigl(\because\ j\le2N\text{ と有理関数体の約分}\bigr)\\
+&\in\overline{\mathbb Q}[x]
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ は有限和と積で閉じる}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`F_L^{a,b}(x):=(1+x)^{2N}Q_L^{a,b}(\mathrm{KW}(x))`),
@@ -84235,7 +84236,7 @@ P_L^{a,b}
 &=4^ND_L^{a,b}(x)
 &&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr)\\
 &=(2^NQ_L^{a,b}(x))^2
-&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr).
+&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr)
 \end{aligned}`),
                   paragraph([
                     "上の平方の等式から、", math(String.raw`\overline{\mathbb Q}[x]`), " で",
@@ -84245,7 +84246,7 @@ P_L^{a,b}
 &=(F_L^{a,b})^2-(2^NQ_L^{a,b})^2
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr)\\
 &=0
-&&\bigl(\because\ \text{上で示した平方の等式}\bigr).
+&&\bigl(\because\ \text{上で示した平方の等式}\bigr)
 \end{aligned}`),
                   paragraph([
                     ref("claim_qbar_polynomial_zero_product"), " をこの積へ適用すると、",
