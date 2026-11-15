@@ -95,6 +95,42 @@ theorem periodicPlaneLift_step_edgeDisplacement
       hfinite _ (ZMod.val_lt _)
     _ = orientedEdgeLatticeStep (γ (k : ZMod m)) := by rw [ZMod.natCast_zmod_val]
 
+/-- 一周期内の最後の項を剰余類の零番目へ戻す。 -/
+private theorem cyclicAdjacentSum_latticeStep_zmod
+    (m : ℕ) [NeZero m] (v : ZMod m → ℤ × ℤ) :
+    cyclicAdjacentSum latticeStepTurning m (fun j => v (j : ZMod m)) =
+      ∑ j : ZMod m, latticeStepTurning (v j) (v (j + 1)) := by
+  let f : ℕ → ℤ := fun j => latticeStepTurning (v (j : ZMod m))
+    (v ((j + 1 : ℕ) : ZMod m))
+  have hcast (i : Fin m) : ZMod.finEquiv m i = (i.val : ZMod m) := by
+    cases m with
+    | zero => exact Fin.elim0 i
+    | succ n => exact (ZMod.natCast_zmod_val (n := n + 1) i).symm
+  have hsum : (∑ j : ZMod m, latticeStepTurning (v j) (v (j + 1))) =
+      ∑ j ∈ Finset.range m, f j := by
+    calc
+      _ = ∑ i : Fin m, latticeStepTurning (v (ZMod.finEquiv m i))
+          (v (ZMod.finEquiv m i + 1)) :=
+        (Equiv.sum_comp (ZMod.finEquiv m).toEquiv
+          (fun j => latticeStepTurning (v j) (v (j + 1)))).symm
+      _ = ∑ i : Fin m, f i.val := by
+        apply Finset.sum_congr rfl
+        intro i _
+        simp only [hcast, f, Nat.cast_add, Nat.cast_one]
+      _ = ∑ j ∈ Finset.range m, f j := Fin.sum_univ_eq_sum_range f m
+  have hm : m - 1 + 1 = m := Nat.sub_add_cancel (NeZero.one_le : 1 ≤ m)
+  have hlast : f (m - 1) = latticeStepTurning (v ((m - 1 : ℕ) : ZMod m)) (v 0) := by
+    dsimp only [f]
+    rw [hm, ZMod.natCast_self]
+  calc
+    _ = (∑ j ∈ Finset.range (m - 1), f j) + f (m - 1) := by
+      rw [hlast]
+      simp only [cyclicAdjacentSum, f, Nat.cast_zero]
+    _ = ∑ j ∈ Finset.range (m - 1 + 1), f j :=
+      (Finset.sum_range_succ f (m - 1)).symm
+    _ = ∑ j ∈ Finset.range m, f j := by rw [hm]
+    _ = _ := hsum.symm
+
 /-- `claim_periodic_plane_lift_period_turning`。元の辺そのものの同一視は使わない。 -/
 theorem periodicPlaneLift_periodTurning
     (m L : ℕ) [NeZero m] (base : ℤ → ℤ × ℤ) (wv wh : ℤ)
@@ -118,7 +154,7 @@ theorem periodicPlaneLift_periodTurning
       congrArg (cyclicAdjacentSum latticeStepTurning m) hsteps
     _ = ∑ j : ZMod m, latticeStepTurning (orientedEdgeLatticeStep (γ (j + (k₀ : ZMod m))))
         (orientedEdgeLatticeStep (γ ((j + 1) + (k₀ : ZMod m)))) :=
-      cyclicAdjacentSum_zmod m latticeStepTurning
+      cyclicAdjacentSum_latticeStep_zmod m
         (fun j => orientedEdgeLatticeStep (γ (j + (k₀ : ZMod m))))
     _ = ∑ j : ZMod m, latticeStepTurning (orientedEdgeLatticeStep (γ j))
         (orientedEdgeLatticeStep (γ (j + 1))) :=

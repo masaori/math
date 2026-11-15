@@ -74751,7 +74751,7 @@ C_{N_c}\bigl(w^{(c)}\bigr)
 &&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式}\bigr)\\
 &=(\delta_{\mathrm{row}}(\vec e_{r+1}),\delta_{\mathrm{col}}(\vec e_{r+1}))
 &&\bigl(\because\ \mathbb Z^2\text{ の加法の消去則}\bigr)\\
-&=D_r&&\bigl(\because\ D_r\text{ の定義}\bigr).
+&=D_r&&\bigl(\because\ D_r\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph(["よって任意の ", math(String.raw`j\in I_m`), " について、"]),
                       displayMath(String.raw`\begin{aligned}
