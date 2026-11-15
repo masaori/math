@@ -2970,6 +2970,15 @@ targets=(
   Ising2D.real_times_zero_is_zero
   Ising2D.NecSuf.mul_zero_of_leftDistrib
   Ising2D.real_times_zero_is_zero_of_necSuf
+  Ising2D.real_negation_of_zero_is_zero
+  Ising2D.NecSuf.neg_zero_of_addComm
+  Ising2D.real_negation_of_zero_is_zero_of_necSuf
+  Ising2D.real_minus_zero_is_self
+  Ising2D.NecSuf.sub_zero_of_negZero
+  Ising2D.real_minus_zero_is_self_of_necSuf
+  Ising2D.real_zero_divided_is_zero
+  Ising2D.NecSuf.zero_div_of_zeroMul
+  Ising2D.real_zero_divided_is_zero_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products

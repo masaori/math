@@ -1550,7 +1550,7 @@ t
       displayMath(String.raw`\begin{aligned}
 0
 &= 0/2
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{の}\ x \to 2\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\ \text{を右辺から左辺へ}\bigr)\\
 &< \pi/2
 &&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と、}\mathbb{R}\ \text{の順序で}\ x < y,\ c > 0 \Rightarrow x/c < y/c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to 2\ (2 > 0)\bigr)
 \end{aligned}`),
@@ -1581,6 +1581,7 @@ t
         "2026-11-08: 証明の準備にあった arcsin(−1) = −π/2・−π/2 < π/2・0 < π の 3 本の鎖を独立の主張 pi_is_positive へ移し、0 < π/2 の鎖の根拠をその参照にした。",
         "2026-11-09: 主張の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、arcsin_is_bijection の π と arcsin_of_one_is_half_pi の参照にした（pi_is_positive と揃えた）。値と主張は不変。",
         "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・sin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の 1 行目 0 = 0/2 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）」を real_zero_divided_is_zero（x → 2）を右辺から左辺へ当てる参照に替えた。式は不変。",
       ],
     },
   },
@@ -1713,7 +1714,7 @@ t
 &= \arcsin\!\left(\frac{0}{1}\right)
 &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
 &= \arcsin(0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1,\ 1 \neq 0)\bigr)\\
 &= \arcsin(\sin 0)
 &&(\because\ \blkref{sine_zero})\\
 &= 0
@@ -1725,6 +1726,7 @@ t
       notes: [
         "2026-11-08: relation_of_gamma_2_theta_tilde の準備の第五にあった arctan 0 の鎖を独立の主張にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖と relation_of_gamma_2_theta_tilde の (3)(4) の鎖が引く。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 6 行目 0/1 = 0 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1）の参照に替えた。式は不変。",
       ],
     },
   },
@@ -1756,7 +1758,7 @@ t
 &= \sqrt{1-0}^{(\mathbb{R}_{\geq 0})}
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 1)\bigr)\\
 &= 1
 &&(\because\ \blkref{sqrt_of_real_one_is_one})
 \end{aligned}`),
@@ -1768,6 +1770,7 @@ t
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 √1 = 1 が 1 ≥ 0・1^2 = 1・definition_of_sqrt_r_positive の一意性を 1 行で使っていたので、sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 「ℝ の四則」1 行（0^2 = 0・1 − 0 = 1 を 1 行で使っていた）を、square_of_real_number_is_product（r → 0）、ℝ で 0·x = 0（x → 0）、ℝ で a − 0 = a（a → 1）の 3 行に割った。値と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 4 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 5 行目 1 − 0 = 1 の名前だけの根拠「ℝ で a − 0 = a（ℝ は体）」を real_minus_zero_is_self（a → 1）の参照に替えた。式は不変。",
       ],
     },
   },

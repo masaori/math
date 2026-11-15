@@ -1,6 +1,6 @@
 # 対象ラベル: zero_in_closed_interval_from_minus_half_pi_to_half_pi
 # 0 ∈ [-π/2, π/2] の証明の鎖を一行ずつ確かめる。
-#   0 < π/2 の鎖 2 行: 0/x = 0（x → 2）・pi_is_positive の 0 < π と x < y, c > 0 ⇒ x/c < y/c（c → 2）
+#   0 < π/2 の鎖 2 行: real_zero_divided_is_zero（x → 2）を右辺から左辺へ・pi_is_positive の 0 < π と x < y, c > 0 ⇒ x/c < y/c（c → 2）
 #   -π/2 < 0 の鎖 3 行: a + 0 = a（a → -π/2）・順序と加法の両立（c → -π/2）・-a + a = 0（a → π/2）
 # 0 < π の鎖は主張 pi_is_positive の検算 sagemath/check/pi_is_positive/ が扱う。
 # 帰属: 等号は Sage の記号計算（SR）と QQ で厳密。不等号は RealBallField(256) のボールの比較で確かめる

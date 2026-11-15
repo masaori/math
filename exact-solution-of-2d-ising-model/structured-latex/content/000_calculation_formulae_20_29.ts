@@ -1711,6 +1711,129 @@ x\cdot 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_negation_of_zero_is_zero",
+    kind: "claim",
+    title: { text: "実数の 0 の符号を反転しても 0 である" },
+    labels: ["real_negation_of_zero_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`-0`),
+        " を ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to 0`),
+        "）とする。和と ",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`-0 = 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-0
+&= -0 + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0 + (-0)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。−0 = 0 は体の公理に含まれないのに、本文の ℝ の計算が「ℝ で a − 0 = a（ℝ は体）」の形でこれを暗に使っていたので、real_minus_zero_is_self の準備として足した。Lean の具体版は Ising2D.real_negation_of_zero_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfZeroIsZero.lean）、必要十分版は Ising2D.NecSuf.neg_zero_of_addComm（NecSuf/NegZeroOfAddComm.lean）。数値検証: sagemath/check/real_negation_of_zero_is_zero/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_minus_zero_is_self",
+    kind: "claim",
+    title: { text: "実数から 0 を引いても変わらない" },
+    labels: ["real_minus_zero_is_self"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " とする。差は ",
+        ref("def_real_difference"),
+        " のもの、和と ",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`a - 0 = a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+a - 0
+&= a + (-0)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to a,\ z \to 0)\bigr)\\
+&= a + 0
+&&\bigl(\because\ \blkref{real_negation_of_zero_is_zero}\bigr)\\
+&= a
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。a − 0 = a は体の公理に含まれないのに、cosine_zero・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde などの証明が「ℝ で a − 0 = a（ℝ は体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_minus_zero_is_self（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealMinusZeroIsSelf.lean）、必要十分版は Ising2D.NecSuf.sub_zero_of_negZero（NecSuf/SubZeroOfNegZero.lean）。数値検証: sagemath/check/real_minus_zero_is_self/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_zero_divided_is_zero",
+    kind: "claim",
+    title: { text: "0 を 0 でない実数で割ると 0 になる" },
+    labels: ["real_zero_divided_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        "、",
+        math(String.raw`x \neq 0`),
+        " とする。商は ",
+        ref("def_real_quotient"),
+        " のもの、積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`x^{-1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`x`),
+        " の乗法の逆元）は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`\frac{0}{x} = 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\frac{0}{x}
+&= 0\cdot x^{-1}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 0,\ z \to x)\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to x^{-1})\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0/x = 0 は体の公理に含まれないのに、arctan_zero・zero_in_closed_interval_from_minus_half_pi_to_half_pi・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde の証明が「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を名前だけで根拠にしていたので、示す主張として足した。x ≠ 0 は def_real_quotient が商を定めるために要る。Lean の具体版は Ising2D.real_zero_divided_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroDividedIsZero.lean）、必要十分版は Ising2D.NecSuf.zero_div_of_zeroMul（NecSuf/ZeroDivOfZeroMul.lean）。数値検証: sagemath/check/real_zero_divided_is_zero/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

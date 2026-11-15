@@ -21,7 +21,7 @@ args = [
     z / sqrt_aa(one + z),          # 3 行目: real_zero_times_is_zero（x → 0）
     z / sqrt_aa(one),              # 4 行目: a + 0 = a（a → 1）
     z / one,                       # 5 行目: sqrt_of_real_one_is_one
-    z,                             # 6 行目: 0/x = 0（x → 1）
+    z,                             # 6 行目: real_zero_divided_is_zero（x → 1）
 ]
 # 各段で置き換えた部分式が等しいこと
 assert z**2 == z * z; eq_count += 1
