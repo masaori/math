@@ -3899,4 +3899,101 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
       ],
     },
   },
+  {
+    id: "calculation_formulae_claim_angle_section_integer_of_pi_is_zero",
+    kind: "claim",
+    title: { text: "角度 π に対する切断の整数は 0" },
+    labels: ["angle_section_integer_of_pi_is_zero"],
+    statement: [
+      paragraph([
+        ref("angle_section_existence_uniqueness"),
+        " を ",
+        math(String.raw`\theta \to \pi`),
+        " に当てて得られる、",
+        math(String.raw`0 \leq \pi - 2n\pi < 2\pi`),
+        " を満たすただ一つの ",
+        math(String.raw`n \in \mathbb{Z}`),
+        " は ",
+        math(String.raw`n = 0`),
+        " である。ここで和・積・順序は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、差は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う値を先に置く。",
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0<\pi`),
+        " から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi
+&= 0+\pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \pi\ \text{を右辺から左辺へ}\bigr)\\
+&< \pi+\pi
+&&\bigl(\because\ 0<\pi\ \text{の両辺に}\ \pi\ \text{を足す。}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\bigr)\\
+&= 1\cdot\pi+1\cdot\pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to \pi\ \text{を 2 箇所へ、右辺から左辺へ}\bigr)\\
+&= (1+1)\,\pi
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 2\pi
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi-2\cdot 0\cdot\pi
+&= \pi-0\cdot\pi
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\bigr)\\
+&= \pi-0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi)\bigr)\\
+&= \pi
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \pi)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0<\pi`),
+        " から ",
+        math(String.raw`0\leq\pi`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序。",
+        ref("set_and_algebra_notation"),
+        "）である。",
+        math(String.raw`0\leq\pi`),
+        " と上の ",
+        math(String.raw`\pi<2\pi`),
+        " に、上の値 ",
+        math(String.raw`\pi-2\cdot 0\cdot\pi=\pi`),
+        " を当てると ",
+        math(String.raw`0\leq \pi-2\cdot 0\cdot\pi<2\pi`),
+        " であり、",
+        math(String.raw`n=0`),
+        " は条件を満たす。",
+        ref("angle_section_existence_uniqueness"),
+        " の一意性より、",
+        math(String.raw`\theta \to \pi`),
+        " について条件を満たす整数は ",
+        math(String.raw`0`),
+        " だけである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。relation_of_gamma_2_theta_tilde の準備の地の文が、0 < π だけを根拠に角度 0 と π の整数がどちらも 0 であるとしていた（π < 2π と π − 2·0·π = π が書かれていなかった）ので、角度 π の側を 1 つの主張にした（角度 0 の側は angle_section_integer_of_zero_is_zero）。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_integer_of_pi_is_zero/。",
+      ],
+    },
+  },
 ]);

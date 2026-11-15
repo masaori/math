@@ -3591,24 +3591,6 @@ s_1c_2
 &&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
 \end{aligned}`),
       paragraph([
-        ref("pi_is_positive"),
-        " の ",
-        math(String.raw`0 < \pi`),
-        " より ",
-        math(String.raw`0 \leq 0 - 2\cdot 0\cdot\pi < 2\pi`),
-        " と ",
-        math(String.raw`0 \leq \pi - 2\cdot 0\cdot\pi < 2\pi`),
-        " が成り立つので、",
-        ref("angle_section_existence_uniqueness"),
-        " の整数は角度 ",
-        math(String.raw`0`),
-        " と ",
-        math(String.raw`\pi`),
-        " のどちらについても ",
-        math(String.raw`0`),
-        " である。",
-      ]),
-      paragraph([
         "(1) 主張 (1) の左辺から始める。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3756,7 +3738,9 @@ s_1c_2
         math(String.raw`\pi`),
         " の ",
         ref("angle_section_existence_uniqueness"),
-        " の整数は準備により ",
+        " の整数は ",
+        ref("angle_section_integer_of_pi_is_zero"),
+        " より ",
         math(String.raw`0`),
         " である。主張 (3) の左辺から始める。",
       ]),
@@ -3771,7 +3755,7 @@ s_1c_2
 &= s_{[0,2\pi)}\!\left([\pi]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \blkref{first_and_second_projections}\ \text{の}\ r \neq 0\ \text{の場合})\\
 &= \pi - 2\cdot 0\cdot\pi
-&&\bigl(\because\ \blkref{section_of_angle_representation}\ \text{の}\ \theta \to \pi\ \text{と整数}\ n \to 0\bigr)\\
+&&\bigl(\because\ \blkref{section_of_angle_representation}\ \text{の}\ \theta \to \pi\ \text{と整数}\ n \to 0\ \text{（}\blkref{angle_section_integer_of_pi_is_zero}\text{）}\bigr)\\
 &= \pi - 0\cdot\pi
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 2)\bigr)\\
 &= \pi - 0
@@ -3825,7 +3809,9 @@ s_1c_2
         math(String.raw`0`),
         " の ",
         ref("angle_section_existence_uniqueness"),
-        " の整数は準備により ",
+        " の整数は ",
+        ref("angle_section_integer_of_zero_is_zero"),
+        " より ",
         math(String.raw`0`),
         " である。主張 (4) の左辺から始める。",
       ]),
@@ -3834,7 +3820,7 @@ s_1c_2
 &= \sqrt{r_{\mathbb{C}}}
 &&(\because\ \text{上の}\ -\gamma_2(\theta)\gamma_2(-\theta) = r_{\mathbb{C}})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
-&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,0)\ \text{と整数}\ 0\ \text{で})\\
+&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,0)\ \text{と整数}\ 0\ \text{で}\ \text{（}\blkref{angle_section_integer_of_zero_is_zero}\text{）})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
@@ -3872,7 +3858,9 @@ s_1c_2
         math(String.raw`\pi`),
         " の ",
         ref("angle_section_existence_uniqueness"),
-        " の整数は準備により ",
+        " の整数は ",
+        ref("angle_section_integer_of_pi_is_zero"),
+        " より ",
         math(String.raw`0`),
         " である。主張 (5) の左辺から始める。",
       ]),
@@ -3881,7 +3869,7 @@ s_1c_2
 &= \sqrt{(-r)_{\mathbb{C}}}
 &&(\because\ (2))\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\pi}{2}-0\cdot\pi\right)\right]_{\sim}\right)
-&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,\pi)\ \text{と整数}\ 0\ \text{で})\\
+&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,\pi)\ \text{と整数}\ 0\ \text{で}\ \text{（}\blkref{angle_section_integer_of_pi_is_zero}\text{）})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\right)\right]_{\sim}\right)
@@ -3943,6 +3931,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (3)(4)(5) の名前だけの根拠 7 か所を参照に替えた。「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」の 3 か所（(3) の φ_polar((−r)_C) の鎖の x → −r、(4) の φ_polar(r_C) の鎖の x → r、(4) の主の鎖の x → 2）を real_zero_divided_is_zero に、「ℝ で a − 0 = a（ℝ は体）」の 4 か所（(3) の主の鎖の a → π、(4) の主の鎖の a → 0、(5) の主の鎖の a → π/2 と a → 0·|γ_2(θ)| を右辺から左辺へ）を real_minus_zero_is_self に替えた。x ≠ 0 の理由（−r < 0、r > 0、2 ≠ 0）は参照の括弧に残した。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (2) の −|γ_2(θ)|^2 < 0 の鎖の 2 行目の名前だけの根拠「ℝ で −0 = 0（ℝ は体）」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 「第二に」の \\bar i = −i の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（鎖は 6 行から 11 行）。conjugate_transpose_of_pauli_y の準備の同じ鎖も同じ回に揃えた。両端と主張は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第五の末尾の地の文「pi_is_positive の 0 < π より 0 ≤ 0 − 2·0·π < 2π と 0 ≤ π − 2·0·π < 2π が成り立つので、angle_section_existence_uniqueness の整数は角度 0 と π のどちらについても 0」（π < 2π と π − 2·0·π = π が書かれていなかった）を消し、(3)(4)(5) の鎖の前の段落の「整数は準備により 0」を、角度 0 は angle_section_integer_of_zero_is_zero、角度 π は新しく足した angle_section_integer_of_pi_is_zero の参照に替えた。(3) の鎖の section_of_angle_representation の行と (5) の sqrt_expansion_via_polar の行に angle_section_integer_of_pi_is_zero を、(4) の sqrt_expansion_via_polar の行に angle_section_integer_of_zero_is_zero を添えた。式の両端と主張は不変。",
       ],
     },
   },
