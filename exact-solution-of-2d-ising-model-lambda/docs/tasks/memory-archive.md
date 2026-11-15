@@ -1,3 +1,5 @@
+2026-11-15（並列）: 「自己双対点より低温側での分配多項式の両側評価」を Lean 具体版 `lowTemperaturePartitionBounds`（有限トーラス公式の有理点での評価 `finiteTorusPolynomial_eval_rat` を含む）・必要十分版 `half_sum_two_sided_bounds_necSuf`（線型順序体・$|\iota|=4$・非負性だけ）・導出版で示し、本文の `lean:` に四件を登録した。本文と SageMath の修正は不要だった。
+
 2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」のモード $(1,1)$ の所属の段を Lean 具体版 `oneOne_mem_twistedModes_iff`・`oneElementOrbits_filter_one_one` ほか、必要十分版（所属は環と $1\ne-1$ だけ、軌道は $1^{-1}=1$ と逆元の対合性だけ、代表元の段は代表元の所属と $(1,1)$ を含む軌道の決定だけ）、導出版で示した。レビューで本文の所属の式鎖を三行に分け、$(1,1)$ を含む軌道が $O(1,1)=\{(1,1)\}$ だけであることの根拠を書き（主張は不変）、SageMath `check_one_one_membership.sage` を足した（PASS）。
 
 2026-11-15（主経路）: 横断幅を超えて離した周期持ち上げの非交差を整数帯の上下界から Lean 具体版で直接示し、必要十分版への委譲を一件外した。

@@ -9399,18 +9399,18 @@ k+k&\ge1+k&&\bigl(\because\ 1\le k\text{ に右から }k\text{ を加える}\big
  &=\rho_C(\sigma)(m)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ と }m\in C\bigr)\\
  &=\tau(m)&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
  &=\sigma(m)&&\bigl(\because\ \tau=\sigma\text{ を }m\text{ で評価}\bigr)\\
- &=b&&\bigl(\because\ b\text{ の定義}\bigr).
+ &=b&&\bigl(\because\ b\text{ の定義}\bigr)
 \end{aligned}`),
               displayMath(String.raw`\begin{aligned}
 \sigma(b)&=\sigma(\sigma^{-1}(m))&&\bigl(\because\ \sigma^{-1}(m)=b\bigr)\\
  &=m&&\bigl(\because\ \text{置換とその逆写像の相殺}\bigr),\\
 \sigma^{-1}(b)&=\sigma^{-1}(\sigma(m))&&\bigl(\because\ b=\sigma(m)\bigr)\\
- &=m&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr).
+ &=m&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr)
 \end{aligned}`),
               paragraph(["これで ", math(String.raw`\sigma`), " も ", math(String.raw`\sigma^{-1}`), " も二点 ", math(String.raw`m,b`), " を交換する。反復の全回数を扱うため、写像 ", math(String.raw`f:\mathcal J\to\mathcal J`), " が ", math(String.raw`f(m)=b`), " と ", math(String.raw`f(b)=m`), " を満たす場合を考える。各 ", math(String.raw`n\in\mathbb N`), " について、両始点の反復が ", math(String.raw`\{m,b\}`), " に属することを同時に帰納する。零回では、"]),
               displayMath(String.raw`\begin{aligned}
 f^{[0]}(m)&=m&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
-f^{[0]}(b)&=b&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+f^{[0]}(b)&=b&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
               paragraph(["どちらも二点の集合に属する。回数 ", math(String.raw`n`), " での二つの所属を帰納法の仮定とすると、"]),
               displayMath(String.raw`\begin{aligned}
@@ -9419,21 +9419,21 @@ f^{[n+1]}(m)&=f^{[n]}(f(m))&&\bigl(\because\ \blkref{def_finite_map_iteration}\b
  &\in\{m,b\}&&\bigl(\because\ b\text{ を始点とする帰納法の仮定}\bigr),\\
 f^{[n+1]}(b)&=f^{[n]}(f(b))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
  &=f^{[n]}(m)&&\bigl(\because\ f(b)=m\bigr)\\
- &\in\{m,b\}&&\bigl(\because\ m\text{ を始点とする帰納法の仮定}\bigr).
+ &\in\{m,b\}&&\bigl(\because\ m\text{ を始点とする帰納法の仮定}\bigr)
 \end{aligned}`),
               paragraph(["よって自然数の帰納法により全回数で二つの所属が成り立つ。", math(String.raw`f=\sigma`), " と ", math(String.raw`f=\sigma^{-1}`), " へ別々に適用して、各 ", math(String.raw`n\in\mathbb N`), " について、"]),
               displayMath(String.raw`\begin{aligned}
 \sigma^{[n]}(m)&\in\{m,b\}&&\bigl(\because\ f=\sigma\text{ への上の帰納法の適用}\bigr),\\
-(\sigma^{-1})^{[n]}(m)&\in\{m,b\}&&\bigl(\because\ f=\sigma^{-1}\text{ への上の帰納法の適用}\bigr).
+(\sigma^{-1})^{[n]}(m)&\in\{m,b\}&&\bigl(\because\ f=\sigma^{-1}\text{ への上の帰納法の適用}\bigr)
 \end{aligned}`),
               displayMath(String.raw`\begin{aligned}
 C&=\operatorname{Orb}_{\sigma}(m)&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
- &\subseteq\{m,b\}&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ と順逆両方向の到達の所属}\bigr).
+ &\subseteq\{m,b\}&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ と順逆両方向の到達の所属}\bigr)
 \end{aligned}`),
               displayMath(String.raw`\begin{aligned}
 \ell&=|C|&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)\\
  &\le|\{m,b\}|&&\bigl(\because\ \text{有限集合の包含による個数の単調性}\bigr)\\
- &=2&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr).
+ &=2&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr)
 \end{aligned}`),
               paragraph(["これは ", math(String.raw`3\le\ell`), " と矛盾する。背理法の仮定が偽なので、"]),
               displayMath(String.raw`\begin{aligned}
@@ -9441,7 +9441,7 @@ R_{\mathrm{odd}}(\sigma)
  &=\rho_{\operatorname{OddOrb}(\sigma)}(\sigma)&&\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr)\\
  &=\rho_C(\sigma)&&\bigl(\because\ C\text{ の定義}\bigr)\\
  &=\tau&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
- &\ne\sigma&&\bigl(\because\ \text{上の背理法}\bigr).
+ &\ne\sigma&&\bigl(\because\ \text{上の背理法}\bigr)
 \end{aligned}`),
               paragraph([ref("claim_selected_odd_orbit_reversal_involution"), " の自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}`), " は、この ", math(String.raw`R_{\mathrm{odd}}`), " の値域を対象集合へ制限した写像なので、各入力での値は同じである。"]),
               paragraph(["さらに、"]),
