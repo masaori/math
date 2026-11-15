@@ -139,13 +139,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 u^2
 &= u\cdot u
-&&(\because\ \text{平方の定め方})\\
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to u))\\
 &> v\cdot u
 &&(\because\ u>v\ \text{と}\ u>0\text{。正の元を掛けても大小は保たれる})\\
 &\ge v\cdot v
 &&(\because\ u\ge v\ \text{と}\ v\ge 0\text{。非負の元を掛けても大小は保たれる})\\
 &= v^2
-&&(\because\ \text{平方の定め方})
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to v)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -278,7 +278,7 @@ y & (x=0,\ y>0),\\
 &= \left(\sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}\right)^2
 &&(\because\ \text{上で示した成分による表示})\\
 &= x^2+y^2
-&&(\because\ x^2+y^2\ge 0\ \text{と、平方根の定義}\ \left(\sqrt{s}^{(\mathbb{R}_{\ge 0})}\right)^2=s)
+&&(\because\ x^2+y^2\ge 0\ \text{なので}\ \blkref{definition_of_sqrt_r_positive}\ \text{の}\ u^2 = s\ (s \to x^2+y^2,\ u \to \sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}))
 \end{aligned}`,
       ),
       paragraph([
@@ -509,6 +509,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 非負実数の平方の比較の鎖の両端の u^2 = u·u・v·v = v^2 と、(2) の (√(x^2+y^2))^2 = x^2+y^2 の行の根拠が「平方の定め方」「平方根の定義」の名前だけだったので、square_of_real_number_is_product（r → u、r → v を右辺から左辺へ）と definition_of_sqrt_r_positive の u^2 = s（s → x^2+y^2、u → √(x^2+y^2)。証明の中の x, y と衝突しないよう、(1) の前置きと同じく定義の文字を s, u で書いた）の参照に替えた。式の両端と主張は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(3) の |z| = 0 の鎖・(6) の鎖が、0^2 から 0 への行を名前だけの根拠「ℝ では 0 を因子にもつ積は 0」で済ませていた（冪を積に開く段も書かれていなかった）ので、square_of_real_number_is_product（r → 0）の行と real_zero_times_is_zero（x → 0）の行に割った（x = y = 0 の場合はどちらも 2 箇所へ）。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/103_abs_basic_properties/check_03_zero_square_rows.sage。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: (6) の x ≥ 0 の場合の √(x^2) = x と x < 0 の場合の √((−x)^2) = −x の行の根拠が「平方根の一意性」の名前だけだったので、(1) と同じく definition_of_sqrt_r_positive（(1) と同じ s・u の言い換えを (6) の場合分けの前に置き直し、s → x^2、s → (−x)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y > 0 の場合の √(y^2) = y と x = 0, y < 0 の場合の √((−y)^2) = −y の行の根拠が「平方根の一意性」の名前だけだったので、definition_of_sqrt_r_positive（直前の段落の s・u で書き、s → y^2、s → (−y)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
