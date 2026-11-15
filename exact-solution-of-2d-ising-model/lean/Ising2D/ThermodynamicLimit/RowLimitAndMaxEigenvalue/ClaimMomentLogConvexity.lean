@@ -30,11 +30,11 @@
 | 同じ段の `W^{a+b+1} = W^b(WW^a)` の 7 行 | `power_of_W_split_with_W` の `calc` の 7 段 |
 | 同じ段の `(W_ℝ)^s = (W_ℝ)^b(C_ℝ(W_ℝ)^a)` の 5 行 | `power_of_W_real_split` の `calc` の 5 段（`C = I` は `power_of_W_real_split_with_identity`、`C = W` は `power_of_W_real_split_with_W_real`） |
 | 【二つの冪で挟んだ値】10 行 | `real_bilinear_value_between_two_powers` の `calc` の 10 段（人手の `C_ℝ ∈ {I_ℝ, W_ℝ}` を任意の実数の行列 `CR` で述べる。証明は `C_ℝ` の性質を使わない） |
-| 【`I_ℝ` と `W_ℝ` の正値性】`y^⊤I_ℝy` の 3 行と、`≥ 0`・`> 0` | `real_bilinear_value_of_real_identity_matrix`（3 段）・`real_identity_matrix_is_positive_semidefinite`・`real_identity_matrix_is_positive_definite` |
+| 【`I_ℝ` と `W_ℝ` の正値性】`l ≠ k` の項の 3 行と `y^⊤I_ℝy` の 4 行と、`≥ 0`・`> 0` | `real_bilinear_value_of_real_identity_matrix`（`hterm` の 3 段と `calc` の 4 段）・`real_identity_matrix_is_positive_semidefinite`・`real_identity_matrix_is_positive_definite` |
 | 同じ段の `W_ℝ` の正定値性・半正定値性 | 仮定 `hpd`（`W_real_is_positive_definite`）と `psd_of_pd`（`W_real_is_positive_semidefinite`） |
 | 同じ段の `(I_ℝ)_kl = (I_ℝ)_lk` の 3 行 | `real_identity_matrix_entry_symm` の `calc` の 3 段（対称性は `real_identity_matrix_is_symmetric`） |
 | 【`(W_ℝ)^ax` は零でない】`x ≠ 0`（`unit_norm_vector_is_nonzero` を引く） | `ne_zero_of_unit_norm`（`ClaimUnitNormVectorIsNonzero.lean`） |
-| 同じ段の `a = 0`: `u^{(0)}_l = x_l` の 4 行 | `power_zero_of_W_real_mulVec_apply` の `calc` の 4 段 |
+| 同じ段の `a = 0`: `m ≠ l` の項の 2 行と `u^{(0)}_l = x_l` の 5 行 | `power_zero_of_W_real_mulVec_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段の `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a` の 7 行 | `power_succ_of_W_real` の `calc` の 7 段 |
 | 同じ段の `u^{(a+1)}_l = (W_ℝu^{(a)})_l` の 8 行 | `power_succ_of_W_real_mulVec_apply` の `calc` の 8 段 |
 | 同じ段の背理法の 5 行 | `real_bilinear_value_eq_zero_of_mulVec_eq_zero` の `calc` の 5 段と `power_of_W_real_mulVec_ne_zero` の帰納法 |
@@ -52,12 +52,15 @@
   `A = B` から `A_ℝ = B_ℝ` を出す行は `realMatrixOfRealEntries_congr` で書く。
 - 人手の `def_real_matrix_product`・`def_real_matrix_vector_product` は Lean の `Matrix _ _ ℝ` の `*`・`*ᵥ`（成分は和で `rfl`）、
   `def_real_bilinear_value` は `dotProduct_mulVec_eq_real_bilinear_value`、`‖·‖` は `vecNorm` である。
-- 人手の「`l ≠ k` の項は 0」の行は mathlib の `Finset.sum_eq_single` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
+- 人手の「`k` 以外の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if _ = k then _ else 0` に書き、
+  「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
   「各項は 0 以上なので和は 0 以上」「正の項があるので和は正」は mathlib の `Finset.sum_nonneg`・`Finset.sum_pos'` で書く
   （人手のこの 2 か所には参照が無い）。`ℝ` の分配則・結合則・交換則と有限和の順序の交換は `Finset.mul_sum`・`Finset.sum_mul`・`Finset.sum_comm`・`ring` で書く。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -67,18 +70,29 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 人手【`I_ℝ` と `W_ℝ` の正値性】の `y^⊤I_ℝy = Σ_k y_ky_k`（3 行）。 -/
+/-- 人手【`I_ℝ` と `W_ℝ` の正値性】の `y^⊤I_ℝy = Σ_k y_ky_k`（準備の 3 行と主の 4 行）。 -/
 theorem real_bilinear_value_of_real_identity_matrix (y : Conf M → ℝ) :
-    y ⬝ᵥ (1 : Matrix (Conf M) (Conf M) ℝ) *ᵥ y = ∑ k, y k * y k :=
-  calc y ⬝ᵥ (1 : Matrix (Conf M) (Conf M) ℝ) *ᵥ y
-      = ∑ k, ∑ l, y k * (1 : Matrix (Conf M) (Conf M) ℝ) k l * y l :=
-        dotProduct_mulVec_eq_real_bilinear_value y y 1                      -- `def_real_bilinear_value`
-    _ = ∑ k, y k * (1 : Matrix (Conf M) (Conf M) ℝ) k k * y k :=
-        Finset.sum_congr rfl fun k _ => by
-          rw [Finset.sum_eq_single k
-            (fun l _ hlk => by rw [Matrix.one_apply_ne (Ne.symm hlk), mul_zero, zero_mul])
-            (fun h => absurd (Finset.mem_univ k) h)]                       -- `l ≠ k` の項は `(I_ℝ)_kl = 0`（`def_real_identity_matrix`）なので `0`
-    _ = ∑ k, y k * y k := by simp only [Matrix.one_apply_eq, mul_one]       -- `(I_ℝ)_kk = 1`（`def_real_identity_matrix`）
+    y ⬝ᵥ (1 : Matrix (Conf M) (Conf M) ℝ) *ᵥ y = ∑ k, y k * y k := by
+  set I : Matrix (Conf M) (Conf M) ℝ := 1 with hI
+  -- 準備: `l ≠ k` の項（3 行）
+  have hterm : ∀ k l, l ≠ k → y k * I k l * y l = 0 := fun k l hlk =>
+    calc y k * I k l * y l
+        = y k * 0 * y l := by rw [hI, Matrix.one_apply_ne (Ne.symm hlk)]   -- `l ≠ k` なので `def_real_identity_matrix` の `(I_ℝ)_kl = 0`
+      _ = 0 * y l := by rw [real_times_zero_is_zero (y k)]                 -- `real_times_zero_is_zero`（`x → y_k`）
+      _ = 0 := real_zero_times_is_zero (y l)                               -- `real_zero_times_is_zero`（`x → y_l`）
+  calc y ⬝ᵥ I *ᵥ y
+      = ∑ k, ∑ l, y k * I k l * y l :=
+        dotProduct_mulVec_eq_real_bilinear_value y y I                      -- `def_real_bilinear_value`
+    _ = ∑ k, ∑ l, if l = k then y k * I k k * y k else 0 := by
+        refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => ?_
+        by_cases h : l = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hterm k l h]                                       -- 上の `l ≠ k` の項が `0` を各 `k` の内側の和の `l ≠ k` の各項へ
+    _ = ∑ k, y k * I k k * y k := by
+        refine Finset.sum_congr rfl fun k _ => ?_
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に、各 `k` へ同時に（具体版が無いので mathlib）
+    _ = ∑ k, y k * y k := by simp only [hI, Matrix.one_apply_eq, mul_one]   -- `(I_ℝ)_kk = 1`（`def_real_identity_matrix`）
 
 /-- 人手【`I_ℝ` と `W_ℝ` の正値性】の `y^⊤I_ℝy ≥ 0`（各項 `y_ky_k` は `0` 以上）。 -/
 theorem real_identity_matrix_is_positive_semidefinite (y : Conf M → ℝ) :
@@ -226,16 +240,25 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
     _ = (Pb *ᵥ x) ⬝ᵥ CR *ᵥ (Pa *ᵥ x) :=
         (dotProduct_mulVec_eq_real_bilinear_value _ _ CR).symm              -- `def_real_bilinear_value`
 
-/-- 人手【`(W_ℝ)^ax` は零でない】の `a = 0` の 4 行: `u^{(0)}_l = x_l`。 -/
+/-- 人手【`(W_ℝ)^ax` は零でない】の `a = 0` の `m ≠ l` の項の 2 行と 5 行: `u^{(0)}_l = x_l`。 -/
 theorem power_zero_of_W_real_mulVec_apply (x : Conf M → ℝ) (l : Conf M) :
-    ((realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x) l = x l :=
+    ((realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x) l = x l := by
+  -- 準備: `m ≠ l` の項（2 行）
+  have hterm : ∀ m, m ≠ l → (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m = 0 := fun m hml =>
+    calc (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m
+        = 0 * x m := by rw [Matrix.one_apply_ne (Ne.symm hml)]               -- `m ≠ l` なので `def_real_identity_matrix` の `(I_ℝ)_lm = 0`
+      _ = 0 := real_zero_times_is_zero (x m)                               -- `real_zero_times_is_zero`（`x → x_m`）
   calc ((realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x) l
       = ∑ m, (realMatrixOfRealEntries W hW.1 ^ 0) l m * x m := rfl          -- 【`(W_ℝ)^ax` の成分】（`a → 0`）
     _ = ∑ m, (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m := by rw [pow_zero]  -- `def_exp` (1) の `A^0 := I`（`K = ℝ`）
+    _ = ∑ m, if m = l then (1 : Matrix (Conf M) (Conf M) ℝ) l l * x l else 0 := by
+        refine Finset.sum_congr rfl fun m _ => ?_
+        by_cases h : m = l
+        · rw [if_pos h, h]
+        · rw [if_neg h, hterm m h]                                         -- 上の `m ≠ l` の項が `0` を `l` 以外の各項へ
     _ = (1 : Matrix (Conf M) (Conf M) ℝ) l l * x l := by
-        rw [Finset.sum_eq_single l
-          (fun m _ hml => by rw [Matrix.one_apply_ne (Ne.symm hml), zero_mul])
-          (fun h => absurd (Finset.mem_univ l) h)]                         -- `m ≠ l` の項は `(I_ℝ)_lm = 0`（`def_real_identity_matrix`）なので `0`
+        rw [Finset.sum_ite_eq' Finset.univ l, if_pos (Finset.mem_univ l)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
     _ = x l := by rw [Matrix.one_apply_eq, one_mul]                         -- `(I_ℝ)_ll = 1`（`def_real_identity_matrix`）
 
 /-- 人手【`(W_ℝ)^ax` は零でない】の 7 行: `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a`。 -/

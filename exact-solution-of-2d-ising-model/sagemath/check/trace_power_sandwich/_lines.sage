@@ -34,6 +34,57 @@ def chain_eq(L, what):
         eq(s, t, f"{what} {i + 1}→{i + 2} 行目")
 
 
+def sum_left_to_right(terms):
+    """def_finite_sum_of_real_numbers: 左から順に足す（項は 1 個以上）。"""
+    acc = terms[0]
+    for t in terms[1:]:
+        acc = acc + t
+    return acc
+
+
+def drop_zeros_left_to_right(terms, kept, label):
+    """0+⋯+0+kept+0+⋯+0 を def_finite_sum_of_real_numbers の左から順に足し、各段で 0 + r = r か r + 0 = r の一つだけを当てる。"""
+    acc = terms[0]
+    for j in range(1, len(terms)):
+        t = terms[j]
+        if acc == 0:
+            eq(acc + t, t, f"{label} の段（0 + r = r）j={j}")
+        else:
+            eq(t, 0, f"{label} の段で足す項は 0 j={j}")
+            eq(acc + t, acc, f"{label} の段（r + 0 = r）j={j}")
+        acc = acc + t
+    eq(acc, kept, f"{label}（0 の項を左から順に落とす）")
+
+
+def check_identity_off_diagonal_double_sum(I, y, what):
+    """y^⊤I_ℝy の l ≠ k の項の 3 行（(I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → y_k）、real_zero_times_is_zero（x → y_l））と、
+    ΣΣ y_k(I_ℝ)_kl y_l = Σ_k(0+⋯+0+y_k(I_ℝ)_kk y_k+0+⋯+0) = Σ_k y_k(I_ℝ)_kk y_k の 2 行。最後の和を返す。"""
+    d = I.nrows()
+    rng = range(d)
+    zero = QQ(0)
+    for k in rng:
+        for l in rng:
+            if l == k:
+                continue
+            eq(I[k, l], 0, f"{what}: l ≠ k なので def_real_identity_matrix の (I_ℝ)_kl = 0 k={k}, l={l}")
+            eq((y[k] * I[k, l]) * y[l], (y[k] * zero) * y[l], f"{what}: l ≠ k の項の 1 行目 k={k}, l={l}")
+            eq(y[k] * zero, 0, f"{what}: l ≠ k の項の 2 行目の根拠 real_times_zero_is_zero（x → y_k）")
+            eq((y[k] * zero) * y[l], zero * y[l], f"{what}: l ≠ k の項の 2 行目 k={k}, l={l}")
+            eq(zero * y[l], 0, f"{what}: l ≠ k の項の 3 行目（real_zero_times_is_zero、x → y_l）k={k}, l={l}")
+    inner = [[(y[k] * I[k, l]) * y[l] for l in rng] for k in rng]
+    inner_sub = [[(y[k] * I[k, k]) * y[k] if l == k else zero for l in rng] for k in rng]
+    for k in rng:
+        for l in rng:
+            eq(inner[k][l], inner_sub[k][l], f"{what}: 各 k の内側の和の各項へ 0 を当てる k={k}, l={l}")
+        drop_zeros_left_to_right(inner_sub[k], (y[k] * I[k, k]) * y[k], f"{what}: 各 k の内側の和の 0 を左から順に落とす k={k}")
+    L = [sum_left_to_right([sum_left_to_right(inner[k]) for k in rng]),
+         sum_left_to_right([sum_left_to_right(inner_sub[k]) for k in rng]),
+         sum_left_to_right([(y[k] * I[k, k]) * y[k] for k in rng])]
+    for s, t in zip(L, L[1:]):
+        eq(s, t, f"{what}: l ≠ k の項を落とす 2 行")
+    return L
+
+
 def check_symmetry(Pn, what):
     """【(W_ℝ)^n の成分の対称性】の結論 ((W_ℝ)^n)_lk = ((W_ℝ)^n)_kl の値の確認（実数の側。証明の鎖は check_varrho_lines）。成分は QQ。"""
     assert Pn.base_ring() == QQ
@@ -171,10 +222,11 @@ def check_unit_vector_bound(P, x, nmax, what):
     for k in rng:
         for l in rng:
             eq(I[k, l], kd(k, l), f"{what}: (I_ℝ)_kl")
-    chain_eq([m[0], bil(x, pw[0], x), bil(x, I, x),
-              sum(sum(x[k] * I[k, l] * x[l] for l in rng) for k in rng),
-              sum(x[k] * I[k, k] * x[k] for k in rng),
-              sum(x[k] * x[k] for k in rng), sum(rpow(x[k], 2) for k in rng), 1], f"{what}: m_0 の鎖")
+    # 準備 l ≠ k の項 (x_k(I_ℝ)_kl)x_l = (x_k·0)·x_l = 0·x_l = 0（3 行）と、主の 8 行
+    D = check_identity_off_diagonal_double_sum(I, x, f"{what}: m_0 の鎖")
+    eq(bil(x, I, x), D[0], f"{what}: m_0 の鎖の 3 行目（def_real_bilinear_value）")
+    chain_eq([m[0], bil(x, pw[0], x), bil(x, I, x), D[0], D[1], D[2],
+              sum_left_to_right([x[k] * x[k] for k in rng]), sum_left_to_right([rpow(x[k], 2) for k in rng]), 1], f"{what}: m_0 の鎖")
     # m_1 の鎖（(W_ℝ)^1 = W_ℝ は check_varrho_lines の ϱ の鎖。ここでは実数の側の値の一致）
     eq(pw[1], P, f"{what}: (W_ℝ)^1 = W_ℝ")
     chain_eq([m[1], bil(x, pw[1], x), bil(x, P, x)], f"{what}: m_1 の鎖")

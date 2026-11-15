@@ -20,6 +20,57 @@ def le(a, b, what, strict=False):
     n_le += 1
 
 
+def sum_left_to_right(terms):
+    """def_finite_sum_of_real_numbers: 左から順に足す（項は 1 個以上）。"""
+    acc = terms[0]
+    for t in terms[1:]:
+        acc = acc + t
+    return acc
+
+
+def drop_zeros_left_to_right(terms, kept, label):
+    """0+⋯+0+kept+0+⋯+0 を def_finite_sum_of_real_numbers の左から順に足し、各段で 0 + r = r か r + 0 = r の一つだけを当てる。"""
+    acc = terms[0]
+    for j in range(1, len(terms)):
+        t = terms[j]
+        if acc == 0:
+            eq(acc + t, t, f"{label} の段（0 + r = r）j={j}")
+        else:
+            eq(t, 0, f"{label} の段で足す項は 0 j={j}")
+            eq(acc + t, acc, f"{label} の段（r + 0 = r）j={j}")
+        acc = acc + t
+    eq(acc, kept, f"{label}（0 の項を左から順に落とす）")
+
+
+def check_identity_off_diagonal_double_sum(I, y, what):
+    """y^⊤I_ℝy の l ≠ k の項の 3 行（(I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → y_k）、real_zero_times_is_zero（x → y_l））と、
+    ΣΣ y_k(I_ℝ)_kl y_l = Σ_k(0+⋯+0+y_k(I_ℝ)_kk y_k+0+⋯+0) = Σ_k y_k(I_ℝ)_kk y_k の 2 行。最後の和を返す。"""
+    d = I.nrows()
+    rng = range(d)
+    zero = QQ(0)
+    for k in rng:
+        for l in rng:
+            if l == k:
+                continue
+            eq(I[k, l], 0, f"{what}: l ≠ k なので def_real_identity_matrix の (I_ℝ)_kl = 0 k={k}, l={l}")
+            eq((y[k] * I[k, l]) * y[l], (y[k] * zero) * y[l], f"{what}: l ≠ k の項の 1 行目 k={k}, l={l}")
+            eq(y[k] * zero, 0, f"{what}: l ≠ k の項の 2 行目の根拠 real_times_zero_is_zero（x → y_k）")
+            eq((y[k] * zero) * y[l], zero * y[l], f"{what}: l ≠ k の項の 2 行目 k={k}, l={l}")
+            eq(zero * y[l], 0, f"{what}: l ≠ k の項の 3 行目（real_zero_times_is_zero、x → y_l）k={k}, l={l}")
+    inner = [[(y[k] * I[k, l]) * y[l] for l in rng] for k in rng]
+    inner_sub = [[(y[k] * I[k, k]) * y[k] if l == k else zero for l in rng] for k in rng]
+    for k in rng:
+        for l in rng:
+            eq(inner[k][l], inner_sub[k][l], f"{what}: 各 k の内側の和の各項へ 0 を当てる k={k}, l={l}")
+        drop_zeros_left_to_right(inner_sub[k], (y[k] * I[k, k]) * y[k], f"{what}: 各 k の内側の和の 0 を左から順に落とす k={k}")
+    L = [sum_left_to_right([sum_left_to_right(inner[k]) for k in rng]),
+         sum_left_to_right([sum_left_to_right(inner_sub[k]) for k in rng]),
+         sum_left_to_right([(y[k] * I[k, k]) * y[k] for k in rng])]
+    for s, t in zip(L, L[1:]):
+        eq(s, t, f"{what}: l ≠ k の項を落とす 2 行")
+    return L
+
+
 def check_proof_lines(P, x, kmax, what):
     """P は QQ の実対称で正定値、x ∈ QQ^d は ‖x‖ = 1、kmax は主張 m_k^2 ≤ m_{k−1}m_{k+1} を確かめる最大の k。"""
     d = P.nrows()
@@ -90,13 +141,16 @@ def check_proof_lines(P, x, kmax, what):
                 eq(L[-1], ((P**b * x).row() * B * (P**a * x).column())[0, 0], f"{what}: 【二つの冪で挟んだ値】と組み込みの積 B={Bname}")
                 e = a + b + (1 if Bname == "W" else 0)
                 eq(L[0], m[e], f"{what}: 【二つの冪で挟んだ値】の左辺は m_{{a+b(+1)}} B={Bname}, a={a}, b={b}")
-    # 【I_ℝ と W_ℝ の正値性】: y^⊤Iy = ΣΣ y_k δ_kl y_l = Σ y_k δ_kk y_k = Σ y_k y_k ≥ 0（y ≠ 0 なら > 0）。y^⊤Wy > 0（y ≠ 0）
+    # 【I_ℝ と W_ℝ の正値性】: 準備 l ≠ k の項 (y_k(I_ℝ)_kl)y_l = (y_k·0)·y_l = 0·y_l = 0（3 行）。
+    # y^⊤Iy = ΣΣ y_k (I_ℝ)_kl y_l = Σ_k(0+⋯+0+y_k(I_ℝ)_kk y_k+0+⋯+0) = Σ y_k (I_ℝ)_kk y_k = Σ y_k y_k ≥ 0（y ≠ 0 なら > 0）。y^⊤Wy > 0（y ≠ 0）
     ys = list(U) + [vector(QQ, [QQ.random_element(num_bound=5, den_bound=4) for _ in rng]) for _ in range(4)] + [zero_vector(QQ, d)]
     for y in ys:
-        L = [bil(y, I, y),
-             sum(sum(y[k] * (1 if k == l else 0) * y[l] for l in rng) for k in rng),
-             sum(y[k] * 1 * y[k] for k in rng),
-             sum(y[k] * y[k] for k in rng)]
+        D = check_identity_off_diagonal_double_sum(I, y, f"{what}: 【I_ℝ と W_ℝ の正値性】")
+        eq(bil(y, I, y), D[0], f"{what}: 【I_ℝ と W_ℝ の正値性】の 1 行目（def_real_bilinear_value）")
+        L = [bil(y, I, y), D[0], D[1], D[2],
+             sum_left_to_right([y[k] * y[k] for k in rng])]
+        for k in rng:
+            eq(I[k, k], 1, f"{what}: 【I_ℝ と W_ℝ の正値性】の 4 行目の根拠 (I_ℝ)_kk = 1 k={k}")
         for s, t in zip(L, L[1:]):
             eq(s, t, f"{what}: 【I_ℝ と W_ℝ の正値性】の I の鎖")
         le(0, L[-1], f"{what}: y^⊤Iy ≥ 0")
@@ -113,9 +167,22 @@ def check_proof_lines(P, x, kmax, what):
     # 【(W_ℝ)^ax は零でない】
     assert x != 0
     eq(norm_exact(zero_vector(QQ, d)), 0, f"{what}: ‖0‖ = 0")
-    # u^(0)_l = Σ_m ((W_ℝ)^0)_lm x_m = Σ_m (I_ℝ)_lm x_m = (I_ℝ)_ll x_l = x_l
+    # 準備 m ≠ l の項 (I_ℝ)_lm x_m = 0·x_m = 0（2 行）。
+    # u^(0)_l = Σ_m ((W_ℝ)^0)_lm x_m = Σ_m (I_ℝ)_lm x_m = 0+⋯+0+(I_ℝ)_ll x_l+0+⋯+0 = (I_ℝ)_ll x_l = x_l
     for l in rng:
-        L = [U[0][l], sum(pw[0][l, mm] * x[mm] for mm in rng), sum(I[l, mm] * x[mm] for mm in rng), I[l, l] * x[l], x[l]]
+        for mm in rng:
+            if mm == l:
+                continue
+            eq(I[l, mm], 0, f"{what}: m ≠ l なので def_real_identity_matrix の (I_ℝ)_lm = 0")
+            eq(I[l, mm] * x[mm], QQ(0) * x[mm], f"{what}: u^(0)_l の m ≠ l の項の 1 行目 l={l}, m={mm}")
+            eq(QQ(0) * x[mm], 0, f"{what}: u^(0)_l の m ≠ l の項の 2 行目（real_zero_times_is_zero、x → x_m）")
+        terms = [I[l, mm] * x[mm] for mm in rng]
+        terms_sub = [I[l, l] * x[l] if mm == l else QQ(0) for mm in rng]
+        for mm in rng:
+            eq(terms[mm], terms_sub[mm], f"{what}: u^(0)_l の 3 行目を各項で（m ≠ l は上の項が 0）l={l}, m={mm}")
+        drop_zeros_left_to_right(terms_sub, I[l, l] * x[l], f"{what}: u^(0)_l の 4 行目 l={l}")
+        L = [U[0][l], sum_left_to_right([pw[0][l, mm] * x[mm] for mm in rng]), sum_left_to_right(terms),
+             sum_left_to_right(terms_sub), I[l, l] * x[l], x[l]]
         for s, t in zip(L, L[1:]):
             eq(s, t, f"{what}: u^(0)_l = x_l の鎖 l={l}")
     # (W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a（ϱ で運ぶ 7 行の鎖は check_varrho_lines）と、u^(a+1)_l = (W_ℝu^(a))_l の 8 行の鎖

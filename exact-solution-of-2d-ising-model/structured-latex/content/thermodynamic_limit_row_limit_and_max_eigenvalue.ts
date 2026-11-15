@@ -2732,14 +2732,32 @@ x^\top\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)
         math(String.raw`W_{\mathbb{R}}`),
         " の正値性】",
         math(String.raw`y \in \mathbb{R}^d`),
+        " とする。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " と、",
+        math(String.raw`l \neq k`),
+        " の ",
+        math(String.raw`l \in \{1,\dots,d\}`),
         " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(y_k\,(I_{\mathbb{R}})_{kl}\bigr)\,y_l
+&=(y_k\cdot 0)\cdot y_l
+&&\bigl(\because\ l \neq k\ \text{なので}\ \blkref{def_real_identity_matrix}\ \text{の}\ (I_{\mathbb{R}})_{kl} = 0\bigr)\\
+&=0\cdot y_l
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to y_k)\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to y_l)\bigr)
+\end{aligned}`),
+      paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 y^\top I_{\mathbb{R}}y
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}y_k\,(I_{\mathbb{R}})_{kl}\,y_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{k=1}^{d}\bigl(0 + \cdots + 0 + y_k\,(I_{\mathbb{R}})_{kk}\,y_k + 0 + \cdots + 0\bigr)
+&&\bigl(\because\ \text{上の}\ l \neq k\ \text{の}\ \bigl(y_k(I_{\mathbb{R}})_{kl}\bigr)y_l = 0\ \text{を各}\ k\ \text{の内側の和の}\ l \neq k\ \text{の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ l = k\ \text{の項の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=\sum_{k=1}^{d}y_k\,(I_{\mathbb{R}})_{kk}\,y_k
-&&\bigl(\because\ l \neq k\ \text{の項は}\ (I_{\mathbb{R}})_{kl} = 0\ \text{（}\blkref{def_real_identity_matrix}\text{）なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に、各}\ k\ \text{へ同時に適用}\bigr)\\
 &=\sum_{k=1}^{d}y_k\,y_k
 &&\bigl(\because\ (I_{\mathbb{R}})_{kk} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)
 \end{aligned}`),
@@ -2823,16 +2841,30 @@ y^\top I_{\mathbb{R}}y
         math(String.raw`a = 0`),
         " では、",
         math(String.raw`l \in \{1,\dots,d\}`),
+        " と、",
+        math(String.raw`m \neq l`),
+        " の ",
+        math(String.raw`m \in \{1,\dots,d\}`),
         " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+(I_{\mathbb{R}})_{lm}\,x_m
+&=0\cdot x_m
+&&\bigl(\because\ m \neq l\ \text{なので}\ \blkref{def_real_identity_matrix}\ \text{の}\ (I_{\mathbb{R}})_{lm} = 0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to x_m)\bigr)
+\end{aligned}`),
+      paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 u^{(0)}_l
 &=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^0\bigr)_{lm}\,x_m
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\ (a \to 0)\bigr)\\
 &=\sum_{m=1}^{d}(I_{\mathbb{R}})_{lm}\,x_m
 &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R})\bigr)\\
+&=0 + \cdots + 0 + (I_{\mathbb{R}})_{ll}\,x_l + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ m \neq l\ \text{の}\ (I_{\mathbb{R}})_{lm}x_m = 0\ \text{を}\ l\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ l-1\ \text{個、後に}\ d-l\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=(I_{\mathbb{R}})_{ll}\,x_l
-&&\bigl(\because\ m \neq l\ \text{の項は}\ (I_{\mathbb{R}})_{lm} = 0\ \text{（}\blkref{def_real_identity_matrix}\text{）なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=x_l
 &&\bigl(\because\ (I_{\mathbb{R}})_{ll} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)
 \end{aligned}`),
@@ -3141,6 +3173,7 @@ a+b+1 &= p+(p+1)+1
         "2026-11-05: SageMath の検算（sagemath/check/moment_log_convexity/）を付けるにあたり、根拠の欠けを直した（主張の不等式は不変。主張文に m_k の読み方を足した）。(1) 旧い鎖は (W^bx)^⊤W(W^ax) と x^⊤W^{a+b+1}x の等号を「冪の指数法則と (W^b)^⊤ = W^b」としていたが、行列の積の転置の主張は本文に無い。【二つの冪で挟んだ値】x^⊤(W^b(BW^a))x = (W^bx)^⊤B(W^ax)（B = I, W）を def_real_bilinear_value・mat_mult・W^b の成分の対称性で示し、二つの不等式の鎖をこれで書いた。P = I の鎖はユークリッドノルムを経ずに (u^{(a)})^⊤Iu^{(a)} で閉じた。(2)「冪の指数法則」を matrix_power_exponent_law の行に、「W は実対称」を power_of_real_symmetric_complex_matrix_is_real_symmetric の【冪の実対称性】にした。(3) 正値性の「W が可逆なので W^ax ≠ 0」は、可逆から核の自明性を導く主張が本文に無い。W の正定値性から Wu ≠ 0（u ≠ 0）を示し、a の帰納法で W^ax ≠ 0 とした。m_{2a}・m_{2a+1} > 0 を【二つの冪で挟んだ値】の鎖にした。I と W が psd_cauchy_schwarz の前提（def_real_symmetric_matrix の対称と半正定値）を満たすことを鎖で示した。積の行列 W^b(BW^a) の成分が実数であることを product_of_real_entry_matrices_has_real_entries で示して def_real_bilinear_value で読んだ。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張と証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ で m_k := x^⊤(W_ℝ)^kx と述べ直し、証明の冪をすべて (W_ℝ)^p、単位行列を I_ℝ（def_real_identity_matrix）にした。trace_power_upper_bound と同じく【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power。I_ℝ = ϱ(I) もここから出した）と【冪の対称性】（W^p の実対称性から ϱ を通す 6 行の鎖と単射性）を置き、【冪の分け方】は Mat(d,ℂ) の二つの鎖を ϱ で運ぶ 5 行の鎖（real_matrix_of_real_entry_matrix_preserves_product）にした。成分の積は def_real_matrix_product、(W_ℝ)^ax は def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で読んでいた）。u^(a+1) = W_ℝu^(a) は、(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a を ϱ で運ぶ 7 行の鎖と成分の 8 行の鎖にした（実数の行列とベクトルの積の結合則の主張が本文に無いため、mat_mult_associative の行を成分の計算に替えた）。W_ℝ の対称性・正定値性・半正定値性は W_real_is_symmetric・W_real_is_positive_definite・W_real_is_positive_semidefinite を引いた。主張の不等式は不変である。下流の trace_power_sandwich はまだこの主張を旧い形（m_k := x^⊤W^kx、w^⊤W^nw > 0）で引いており、主張と食い違っている（状態台帳の (r3b2e2) で W_ℝ の形に書き直す）。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。値と手順は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【I_ℝ と W_ℝ の正値性】の y^⊤I_ℝy の鎖と【(W_ℝ)^ax は零でない】の u^{(0)}_l の鎖で、単位行列の非対角成分の項を 0 を掛けると 0 を書かずに「(I_ℝ)_kl = 0 なので 0」で和から落としていた。準備に l ≠ k の項の 3 行の鎖（def_real_identity_matrix の (I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → y_k）、real_zero_times_is_zero（x → y_l））と m ≠ l の項の 2 行の鎖（(I_ℝ)_lm = 0 の代入、real_zero_times_is_zero（x → x_m））を置き、主の鎖の落とす段を、各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（y^⊤I_ℝy の鎖は 3 行から 4 行、u^{(0)}_l の鎖は 4 行から 5 行。式の両端と主張は不変）。",
       ],
     },
   },
@@ -3631,6 +3664,24 @@ z^\top (W_{\mathbb{R}})^nz
 &=1
 &&\bigl(\because\ \blkref{power_of_real_one_is_one}\ (m \to 2)\bigr)
 \end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k \in \{1,\dots,d\}`),
+        " と、",
+        math(String.raw`l \neq k`),
+        " の ",
+        math(String.raw`l \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(x_k\,(I_{\mathbb{R}})_{kl}\bigr)\,x_l
+&=(x_k\cdot 0)\cdot x_l
+&&\bigl(\because\ l \neq k\ \text{なので}\ \blkref{def_real_identity_matrix}\ \text{の}\ (I_{\mathbb{R}})_{kl} = 0\bigr)\\
+&=0\cdot x_l
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to x_k)\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to x_l)\bigr)
+\end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
 m_0
@@ -3640,8 +3691,10 @@ m_0
 &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathbb{R}}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}x_k\,(I_{\mathbb{R}})_{kl}\,x_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
+&=\sum_{k=1}^{d}\bigl(0 + \cdots + 0 + x_k\,(I_{\mathbb{R}})_{kk}\,x_k + 0 + \cdots + 0\bigr)
+&&\bigl(\because\ \text{上の}\ l \neq k\ \text{の}\ \bigl(x_k(I_{\mathbb{R}})_{kl}\bigr)x_l = 0\ \text{を各}\ k\ \text{の内側の和の}\ l \neq k\ \text{の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ l = k\ \text{の項の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=\sum_{k=1}^{d}x_k\,(I_{\mathbb{R}})_{kk}\,x_k
-&&\bigl(\because\ l \neq k\ \text{の項は}\ (I_{\mathbb{R}})_{kl} = 0\ \text{（}\blkref{def_real_identity_matrix}\text{）なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に、各}\ k\ \text{へ同時に適用}\bigr)\\
 &=\sum_{k=1}^{d}x_kx_k
 &&\bigl(\because\ (I_{\mathbb{R}})_{kk} = 1\ \text{（}\blkref{def_real_identity_matrix}\text{）}\bigr)\\
 &=\sum_{k=1}^{d}x_k^2
@@ -3965,6 +4018,7 @@ T
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段で、‖z‖ ≠ 0 の背理（‖z‖ = 0 なら ‖z‖^2 = 0^2 = 0·0 = 0 を文の中の鎖と括弧 1 つの根拠で書いていた）を、‖z‖ = 0 の代入・square_of_real_number_is_product（r → 0）・ℝ で 0·x = 0（x → 0）の 3 行の鎖に開き、‖z‖^2 > 0 との矛盾と ‖z‖ ≥ 0 から ‖z‖ > 0（ℝ の順序で x ≥ 0 かつ x ≠ 0 なら x > 0 の根拠を添えた）を続く文に置いた。値と主張は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段の ‖z‖ ≠ 0 の背理の鎖の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z = 0 の段は地の文「def_real_bilinear_value の和の各項が 0·((W_ℝ)^n)_ij·0 = 0 なので」で、左から 0・右から 0 の 2 つの事実を根拠なしに束ねていた。W_real_is_positive_semidefinite の u = 0 の鎖と同じ 5 行の鎖（def_real_bilinear_value、z_i = z_j = 0 の代入、real_zero_times_is_zero（x → ((W_ℝ)^n)_ij）、同（x → 0）、0 の有限和）に開いた（式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【単位ベクトルでの評価】の m_0 の鎖で、l ≠ k の項を 0 を掛けると 0 を書かずに「(I_ℝ)_kl = 0 なので 0」で和から落としていた。準備に l ≠ k の項の 3 行の鎖（def_real_identity_matrix の (I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → x_k）、real_zero_times_is_zero（x → x_l））を置き、主の鎖の落とす段を、各 k の内側の和の各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（m_0 の鎖は 7 行から 8 行。式の両端と主張は不変）。",
       ],
     },
   },

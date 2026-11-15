@@ -32,7 +32,7 @@
 | 【`(W_ℝ)^n` の成分の評価】の各二重和の値（`(e_q)_i` は `i = q` でだけ `1`） | `standard_basis_real_bilinear_value` |
 | 同じ段の 8 行と移項 | `power_of_W_real_entry_bound` の `calc` の 8 段と移項 |
 | 【単位ベクトルでの評価】`Σ_k x_k^2 = 1` の 4 行 | `sum_sq_of_unit_vector` の `calc` の 4 段 |
-| 同じ段の `m_0 = 1` の 7 行 | `moment_zero_eq_one` の `calc` の 7 段 |
+| 同じ段の `l ≠ k` の項の 3 行と `m_0 = 1` の 8 行 | `moment_zero_eq_one` の `hterm` の 3 段と `calc` の 8 段 |
 | 同じ段の `m_1 = x^⊤W_ℝx` の 2 行 | `moment_one_eq` の `calc` の 2 段 |
 | 同じ段の `m_k ≥ m_1m_{k-1}`（`k` の帰納法。`m_k/m_{k-1} ≥ m_1` の 2 行と `m_{k+1}` の 6 行） | `moment_ge_moment_one_mul_prev` の帰納法と二つの `calc` |
 | 同じ段の `m_p ≥ m_1^p`（`p` の帰納法の 4 行） | `moment_ge_moment_one_pow` の帰納法と `calc` の 4 段 |
@@ -44,7 +44,9 @@
   `hWRsymm`・`hpd` は `moment_log_convexity` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`。
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`m_k := x^⊤(W_ℝ)^kx` は `momentWReal`、`e_q` は `Pi.single q 1`、
   `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。`‖·‖` は `vecNorm`（`def_matrix_norm` の `K = ℝ`）。
-- 人手の「`i ≠ q` の項は 0」の行は、`ClaimTracePowerUpperBound.lean` と同じく mathlib の `Finset.sum_eq_single` で書く。
+- 人手【`(W_ℝ)^n` の成分の評価】の「`i ≠ q` の項は 0」の行は mathlib の `Finset.sum_eq_single` で書く。
+- 人手【単位ベクトルでの評価】の `m_0` の鎖の「各 `k` の内側の和の `l ≠ k` の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if l = k then _ else 0` に書き、
+  「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
 - 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
   `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
   `m_n ≤ T` の「有限和の加法の交換則・結合則」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
@@ -57,6 +59,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -293,19 +296,29 @@ theorem sum_sq_of_unit_vector {x : Conf M → ℝ} (hx : vecNorm x = 1) : ∑ k,
     _ = 1 := power_of_real_one_is_one 2                                     -- `power_of_real_one_is_one`（`m → 2`）
 
 omit hWRsymm hpd in
-/-- 人手【単位ベクトルでの評価】の `m_0 = 1`（7 行）。 -/
+/-- 人手【単位ベクトルでの評価】の `m_0 = 1`（準備の 3 行と主の 8 行）。 -/
 theorem moment_zero_eq_one {x : Conf M → ℝ} (hx : vecNorm x = 1) : momentWReal W hW x 0 = 1 := by
   set I : Matrix (Conf M) (Conf M) ℝ := 1 with hI
+  -- 準備: `l ≠ k` の項（3 行）
+  have hterm : ∀ k l, l ≠ k → x k * I k l * x l = 0 := fun k l hlk =>
+    calc x k * I k l * x l
+        = x k * 0 * x l := by rw [hI, Matrix.one_apply_ne (Ne.symm hlk)]   -- `l ≠ k` なので `def_real_identity_matrix` の `(I_ℝ)_kl = 0`
+      _ = 0 * x l := by rw [real_times_zero_is_zero (x k)]                 -- `real_times_zero_is_zero`（`x → x_k`）
+      _ = 0 := real_zero_times_is_zero (x l)                               -- `real_zero_times_is_zero`（`x → x_l`）
   calc momentWReal W hW x 0
       = x ⬝ᵥ (realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x := rfl              -- `m_0 := x^⊤(W_ℝ)^0x`
     _ = x ⬝ᵥ I *ᵥ x := by rw [pow_zero]                                    -- `def_exp` (1) の `A^0 := I`（`K = ℝ`、`I = I_ℝ`）
     _ = ∑ k, ∑ l, x k * I k l * x l := dotProduct_mulVec_eq_real_bilinear_value x x I
                                                                             -- `def_real_bilinear_value`
-    _ = ∑ k, x k * I k k * x k :=
-        Finset.sum_congr rfl fun k _ => by
-          rw [Finset.sum_eq_single k
-            (fun l _ hlk => by rw [hI, Matrix.one_apply_ne (Ne.symm hlk), mul_zero, zero_mul])
-            (fun h => absurd (Finset.mem_univ k) h)]                       -- `l ≠ k` の項は `(I_ℝ)_kl = 0`（`def_real_identity_matrix`）なので `0`
+    _ = ∑ k, ∑ l, if l = k then x k * I k k * x k else 0 := by
+        refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => ?_
+        by_cases h : l = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hterm k l h]                                       -- 上の `l ≠ k` の項が `0` を各 `k` の内側の和の `l ≠ k` の各項へ
+    _ = ∑ k, x k * I k k * x k := by
+        refine Finset.sum_congr rfl fun k _ => ?_
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に、各 `k` へ同時に（具体版が無いので mathlib）
     _ = ∑ k, x k * x k := by simp only [hI, Matrix.one_apply_eq, mul_one]   -- `(I_ℝ)_kk = 1`（`def_real_identity_matrix`）
     _ = ∑ k, x k ^ 2 := by simp only [square_of_real_number_is_product]     -- `square_of_real_number_is_product`（`r → x_k`）を右辺から左辺へ、各項へ同時に
     _ = 1 := sum_sq_of_unit_vector hx                                       -- 上の式変形
