@@ -100,7 +100,8 @@ theorem exists_real_pair_square_difference_double_product (a b : ℝ) :
       refine ⟨Real.sqrt a, 0, ?_, ?_⟩
       · calc Real.sqrt a * Real.sqrt a - 0 * 0
             = a - 0 * 0 := by rw [real_sqrt_mul_self a ha]
-          _ = a := by rw [mul_zero (0 : ℝ), sub_zero a]
+          _ = a - 0 := by rw [mul_zero (0 : ℝ)]
+          _ = a := sub_zero a
       · calc 2 * Real.sqrt a * 0
             = 0 := mul_zero (2 * Real.sqrt a)
           _ = b := hb.symm
@@ -109,7 +110,8 @@ theorem exists_real_pair_square_difference_double_product (a b : ℝ) :
       refine ⟨0, Real.sqrt (-a), ?_, ?_⟩
       · calc 0 * 0 - Real.sqrt (-a) * Real.sqrt (-a)
             = 0 * 0 - (-a) := by rw [real_sqrt_mul_self (-a) hna]
-          _ = a := by rw [mul_zero (0 : ℝ), zero_sub (-a), neg_neg a]
+          _ = 0 - (-a) := by rw [mul_zero (0 : ℝ)]
+          _ = a := by rw [zero_sub (-a), neg_neg a]
       · calc 2 * 0 * Real.sqrt (-a)
             = 0 := by rw [mul_zero (2 : ℝ), zero_mul (Real.sqrt (-a))]
           _ = b := hb.symm
@@ -170,36 +172,36 @@ theorem exists_real_pair_square_difference_double_product (a b : ℝ) :
         _ = b := by field_simp
 
 /-- 本文 `claim_existence_of_square_root_in_complex_numbers`：すべての z ∈ ℂ について s ·_ℂ s = z を満たす s ∈ ℂ がある。
-ℝ への脱出（(★) が ℝ の完備性に依る）。本文どおり A := ρ(u)、B := ρ(v)、s := A +_ℂ i ·_ℂ B と置く。 -/
+ℝ への脱出（(★) が ℝ の完備性に依る）。本文どおり û := ρ(u)、v̂ := ρ(v)、s := û +_ℂ i ·_ℂ v̂ と置く（Lean の名前は uHat・vHat）。 -/
 theorem exists_complex_square_root (z : ℂ) : ∃ s : ℂ, s * s = z := by
   obtain ⟨a, b, hz⟩ := complex_eq_real_add_imaginaryUnit_mul_real z
   obtain ⟨u, v, hstar1, hstar2⟩ := exists_real_pair_square_difference_double_product a b
   let i : ℂ := imaginaryUnit
-  let A : ℂ := realToComplex u
-  let B : ℂ := realToComplex v
-  refine ⟨A + i * B, ?_⟩
-  calc (A + i * B) * (A + i * B)
-      = A * (A + i * B) + (i * B) * (A + i * B) := by rw [add_mul A (i * B) (A + i * B)]
-    _ = (A * A + A * (i * B)) + ((i * B) * A + (i * B) * (i * B)) := by
-        rw [mul_add A A (i * B), mul_add (i * B) A (i * B)]
-    _ = (A * A + (A * i) * B) + (i * (B * A) + ((i * B) * i) * B) := by
-        rw [← mul_assoc A i B, mul_assoc i B A, ← mul_assoc (i * B) i B]
-    _ = (A * A + (i * A) * B) + (i * (B * A) + (i * (i * B)) * B) := by
-        rw [mul_comm A i, mul_comm (i * B) i]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + ((i * i) * B) * B) := by
-        rw [mul_assoc i A B, ← mul_assoc i i B]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + (i * i) * (B * B)) := by rw [mul_assoc (i * i) B B]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + (-1) * (B * B)) := by rw [imaginaryUnit_mul_self]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + -(B * B)) := by rw [neg_one_mul (B * B)]
-    _ = A * A + (i * (A * B) + (i * (B * A) + -(B * B))) := by
-        rw [_root_.add_assoc (A * A) (i * (A * B)) (i * (B * A) + -(B * B))]
-    _ = A * A + ((i * (A * B) + i * (B * A)) + -(B * B)) := by
-        rw [← _root_.add_assoc (i * (A * B)) (i * (B * A)) (-(B * B))]
-    _ = A * A + (-(B * B) + (i * (A * B) + i * (B * A))) := by
-        rw [_root_.add_comm (i * (A * B) + i * (B * A)) (-(B * B))]
-    _ = (A * A + -(B * B)) + (i * (A * B) + i * (B * A)) := by
-        rw [← _root_.add_assoc (A * A) (-(B * B)) (i * (A * B) + i * (B * A))]
-    _ = (A * A + -(B * B)) + i * (A * B + B * A) := by rw [← mul_add i (A * B) (B * A)]
+  let uHat : ℂ := realToComplex u
+  let vHat : ℂ := realToComplex v
+  refine ⟨uHat + i * vHat, ?_⟩
+  calc (uHat + i * vHat) * (uHat + i * vHat)
+      = uHat * (uHat + i * vHat) + (i * vHat) * (uHat + i * vHat) := by rw [add_mul uHat (i * vHat) (uHat + i * vHat)]
+    _ = (uHat * uHat + uHat * (i * vHat)) + ((i * vHat) * uHat + (i * vHat) * (i * vHat)) := by
+        rw [mul_add uHat uHat (i * vHat), mul_add (i * vHat) uHat (i * vHat)]
+    _ = (uHat * uHat + (uHat * i) * vHat) + (i * (vHat * uHat) + ((i * vHat) * i) * vHat) := by
+        rw [← mul_assoc uHat i vHat, mul_assoc i vHat uHat, ← mul_assoc (i * vHat) i vHat]
+    _ = (uHat * uHat + (i * uHat) * vHat) + (i * (vHat * uHat) + (i * (i * vHat)) * vHat) := by
+        rw [mul_comm uHat i, mul_comm (i * vHat) i]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + ((i * i) * vHat) * vHat) := by
+        rw [mul_assoc i uHat vHat, ← mul_assoc i i vHat]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + (i * i) * (vHat * vHat)) := by rw [mul_assoc (i * i) vHat vHat]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + (-1) * (vHat * vHat)) := by rw [imaginaryUnit_mul_self]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + -(vHat * vHat)) := by rw [neg_one_mul (vHat * vHat)]
+    _ = uHat * uHat + (i * (uHat * vHat) + (i * (vHat * uHat) + -(vHat * vHat))) := by
+        rw [_root_.add_assoc (uHat * uHat) (i * (uHat * vHat)) (i * (vHat * uHat) + -(vHat * vHat))]
+    _ = uHat * uHat + ((i * (uHat * vHat) + i * (vHat * uHat)) + -(vHat * vHat)) := by
+        rw [← _root_.add_assoc (i * (uHat * vHat)) (i * (vHat * uHat)) (-(vHat * vHat))]
+    _ = uHat * uHat + (-(vHat * vHat) + (i * (uHat * vHat) + i * (vHat * uHat))) := by
+        rw [_root_.add_comm (i * (uHat * vHat) + i * (vHat * uHat)) (-(vHat * vHat))]
+    _ = (uHat * uHat + -(vHat * vHat)) + (i * (uHat * vHat) + i * (vHat * uHat)) := by
+        rw [← _root_.add_assoc (uHat * uHat) (-(vHat * vHat)) (i * (uHat * vHat) + i * (vHat * uHat))]
+    _ = (uHat * uHat + -(vHat * vHat)) + i * (uHat * vHat + vHat * uHat) := by rw [← mul_add i (uHat * vHat) (vHat * uHat)]
     _ = (realToComplex (u * u) + -realToComplex (v * v))
           + i * (realToComplex (u * v) + realToComplex (v * u)) := by
         rw [realToComplex_mul u u, realToComplex_mul v v, realToComplex_mul u v, realToComplex_mul v u]

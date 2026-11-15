@@ -34,7 +34,7 @@ def orthogonalized_up_to(e, k, q, B):                       # def_basis_orthogon
     c3 = all(B(e[i], e[j]) == 0 for i in range(k) for j in range(k, n))
     return c1 and c2 and c3
 
-stats = {"cases": 0, "replaced": 0, "t_minus_one": 0, "wrong": 0, "sign": 0}
+stats = {"cases": 0, "replaced": 0, "t_minus_one": 0, "wrong": 0, "sign": 0, "span_neg": 0}
 
 # claim_ordered_sum_of_zero_terms_is_zero：どの項も 0 の番号順の和は 0（途中の和 S_m もすべて 0）。
 # 否定の対照：一つの項だけ 0 でないと和は 0 でない。
@@ -60,9 +60,30 @@ def check_lemmas(A, n, q, B):
         assert B(x, x) == (1 + 1) * q(x)                              # 同じ元の組での値
         assert q(x + t * y) == (q(x) + t * (t * q(y))) + t * B(x, y)  # 和とスカラー倍での値
     E = [vector(QQ, [1 if i == j else 0 for i in range(n)]) for j in range(n)]
-    # 張る族のどの元とも直交する元は零：{x : B(x,E_k)=0 ∀k} の次元を、B の表現行列 2A の核で見る
     G = matrix(QQ, n, n, lambda i, j: B(E[i], E[j]))
-    assert G == 2 * A and G.right_kernel().dimension() == 0
+    assert G == 2 * A
+    # claim_element_orthogonal_to_spanning_family_is_zero：基底でない張る族（n+1 個。標準基底に乱数の元を一つ足す）で確かめる。
+    # 張る族 b（n+1 個、階数 n）について、{x : B_q(x,b_k)=0 ∀k} を行列 (B_q(b_k, E_j))_{k,j} の核で求め、零空間であることを見る。
+    extra = random_vector(QQ, n, num_bound=5, den_bound=3)
+    bsp = E[:]; pos = ZZ.random_element(0, n + 1); bsp.insert(pos, extra)
+    assert len(bsp) == n + 1 and matrix(QQ, bsp).rank() == n                       # 張るが、元の個数が n+1 なので基底でない
+    C = matrix(QQ, n + 1, n, lambda k, j: B(bsp[k], E[j]))
+    assert C.right_kernel().dimension() == 0
+    # 証明の式変形の各行を乱数の x、y で：μ は Σ μ_k b_k = y を満たす一つの解（張る族なので存在する。一意ではない）
+    for _ in range(3):
+        x = random_vector(QQ, n, num_bound=5, den_bound=3)
+        y = random_vector(QQ, n, num_bound=5, den_bound=3)
+        mu = matrix(QQ, bsp).transpose().solve_right(y)
+        mu = mu + matrix(QQ, bsp).transpose().right_kernel().basis()[0] * QQ.random_element(num_bound=5, den_bound=3)   # 別の解に取り替える
+        assert lin_comb(list(mu), bsp, n) == y
+        rows = [B(x, y), B(x, lin_comb(list(mu), bsp, n)), ordered_sum([mu[k] * B(x, bsp[k]) for k in range(n + 1)])]
+        assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+    # 否定の対照：張らない族（n+1 個、すべて同じ超平面 {x_1=0}+… に入る。階数 n-1）では、どの元とも直交する 0 でない元がある
+    if n >= 1:
+        H = [vector(QQ, [0] + list(random_vector(QQ, n - 1, num_bound=5, den_bound=3))) if n > 1 else vector(QQ, [0]) for _ in range(n + 1)]
+        CH = matrix(QQ, n + 1, n, lambda k, j: B(H[k], E[j]))
+        assert matrix(QQ, H).rank() <= n - 1 and CH.right_kernel().dimension() >= 1
+        stats["span_neg"] += 1
 
 def run(A, label):
     n = A.nrows()
@@ -169,7 +190,7 @@ while count < 40:
         continue
     run(A, "random")
     count += 1
-assert stats["replaced"] > 0 and stats["t_minus_one"] > 0 and stats["wrong"] > 0 and stats["sign"] > 0
+assert stats["replaced"] > 0 and stats["t_minus_one"] > 0 and stats["wrong"] > 0 and stats["sign"] > 0 and stats["span_neg"] > 0
 
 # 否定の対照：退化した二次形式では、第一元と直交しない元が後ろに無い
 Adeg = matrix(QQ, [[0, 0], [0, 1]])
@@ -179,5 +200,5 @@ assert qd(e[0]) == 0 and all(Bd(e[0], e[j]) == 0 for j in range(2))
 # 否定の対照：足す元自身の係数が 0 でないと基底にならないことがある
 e = [vector(QQ, [1, 0]), vector(QQ, [0, 1])]
 assert not is_basis(add_multiples(e, 0, [QQ(-1), QQ(5)]), 2)
-print("cases=%d replaced=%d t_minus_one=%d wrong=%d sign=%d" % (stats["cases"], stats["replaced"], stats["t_minus_one"], stats["wrong"], stats["sign"]))
+print("cases=%d replaced=%d t_minus_one=%d wrong=%d sign=%d span_neg=%d" % (stats["cases"], stats["replaced"], stats["t_minus_one"], stats["wrong"], stats["sign"], stats["span_neg"]))
 print("ALL PASS")

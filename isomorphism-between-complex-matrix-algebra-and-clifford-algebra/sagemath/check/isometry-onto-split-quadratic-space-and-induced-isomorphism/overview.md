@@ -4,7 +4,6 @@
 - 対象ラベル: `claim_nonzero_scalar_multiples_of_basis_members_form_basis`
 - 対象ラベル: `claim_existence_of_orthonormal_basis_for_nondegenerate_quadratic_form`
 - 対象ラベル: `claim_quadratic_form_of_linear_combination_of_orthogonal_family`
-- 対象ラベル: `claim_rearranging_sum_of_two_sums_in_vector_space`
 - 対象ラベル: `def_map_by_coordinates_and_family`
 - 対象ラベル: `claim_map_by_coordinates_and_family_is_linear_map`
 - 対象ラベル: `claim_map_by_coordinates_and_family_sends_basis_member_to_family_member`
@@ -34,9 +33,10 @@
 - 方法: 平方根の主張は、本文の場合分け（$`b=0`$ で $`a\ge0`$／$`a<0`$、$`b\ne0`$ で $`r=\sqrt{a^2+b^2}`$、$`u=\sqrt{(r+a)/2}`$、$`v=b/(2u)`$）を実代数的数 `AA` でそのまま実装し、30 個の $`z`$ で $`r+a>0`$、$`uu-vv=a`$、$`2uv=b`$ と、$`s\cdot s`$ の式変形の 22 行（各行の式を独立に計算して隣の行と比べる）を確かめた。
   一般の空間は $`Y=K^{2M}`$、$`Q(x)=x^{\mathsf T}Ax`$（$`A`$ は有理数の対称行列で行列式が 0 でない。単位行列、符号の混ざった対角、対角成分がすべて 0 の分裂形、乱数 1 例）、$`K=`$ `QQbar`、$`M=1,2,3`$ の 12 例。
   直交基底を本文の前半の手順で作り、平方根で正規化して $`Q(e_k)=1`$・直交性・基底であることを確かめ、直交する族の線型結合での値の式を乱数の係数で確かめた。
-  $`W=K^M`$（標準基底と双対基底）、$`V=W\oplus W^{*}`$ で族 $`u,v,d`$ と $`\theta=L_{e,u}`$・$`\theta'=L_{d,v}`$ を定義どおり（座標の写像を係数にした線型結合）に実装し、$`q(u_k)=1`$、$`u`$ の直交性、$`\theta'(u_k)=e_k`$、$`\theta(v_l)=d_l`$、$`\theta'\circ\theta`$ と $`\theta\circ\theta'`$ が恒等写像、$`\theta`$ と $`\theta'`$ が等長写像であることを確かめた。$`\theta'(u_{M+m})=e_{M+m}`$ の式変形の 15 行と二つの準備の等式、$`\theta(v_l)=d_l`$ の式変形の 11 行（$`l=m,\ M+m`$）を、直和の元を成分の組で持って一行ずつ計算した。二つの和の和の並べ替えの 6 行、基底を動かさない線型写像 $`L_{e,e}`$ が恒等写像であることの 5 行、右逆写像が等長写像であることの 3 行も、乱数の元で一行ずつ計算した。
+  $`W=K^M`$（標準基底と双対基底）、$`V=W\oplus W^{*}`$ で族 $`u,v,d`$ と $`\theta=L_{e,u}`$・$`\theta'=L_{d,v}`$ を定義どおり（座標の写像を係数にした線型結合）に実装し、$`q(u_k)=1`$、$`u`$ の直交性、$`\theta'(u_k)=e_k`$、$`\theta(v_l)=d_l`$、$`\theta'\circ\theta`$ と $`\theta\circ\theta'`$ が恒等写像、$`\theta`$ と $`\theta'`$ が等長写像であることを確かめた。$`u_m`$ の表示の 3 行と $`\theta'(u_m)=e_m`$ の式変形の 15 行、$`\theta'(u_{M+m})=e_{M+m}`$ の式変形の 15 行と二つの準備の等式、$`\theta(v_l)=d_l`$ の式変形の 11 行（$`l=m,\ M+m`$）を、直和の元を成分の組で持って一行ずつ計算した。基底を動かさない線型写像 $`L_{e,e}`$ が恒等写像であることの 5 行、右逆写像が等長写像であることの 3 行も、乱数の元で一行ずつ計算した。
+  二つの和の和の並べ替え（claim_rearranging_sum_of_two_sums_in_vector_space）は、線型空間の加法の結合法則と交換法則だけで示す主張で行列の計算を含まず、$`K^{n}`$ のどの元で計算しても必ず通る比較にしかならない（加法が可換な空間でしか例を作れないので、否定の対照も作れない）ため、対象から外した。
   クリフォード代数の側は行列環への像で確かめた：誘導される準同型の存在の主張の $`g(v)g(v)=q(\theta(v))1`$ を $`\varphi(\theta(v))^2=Q(v)I`$ で、$`\Phi\circ\mathrm{Cl}(\theta)`$ が $`\gamma_Y(e_k)`$ を送る $`\varphi(u_k)`$ が $`\varphi(u_k)\varphi(u_l)+\varphi(u_l)\varphi(u_k)=2\delta_{k,l}I`$ を満たすこと、その単調な積 $`4^M`$ 個が行列環を張ること、$`\Phi_Y(\Psi_Y(c_m))=c_m`$ と $`\Phi_Y(\Psi_Y(c_m^{\mathsf T}))=c_m^{\mathsf T}`$（$`\Psi(F)=\sum F_{S,T}\,a^{\dagger}_SPa_T`$ の式を、生成元 $`a^{\dagger}_i`$・$`a_i`$ を $`\varphi(\theta(v_i))`$・$`\varphi(\theta(v_{M+i}))`$ に置き換えて評価する。$`\theta`$ は定義どおりに計算する）。逆の等長写像が誘導する準同型の合成の主張（claim_homomorphisms_induced_by_inverse_isometries_compose_to_identity）は、普遍性の一意性だけで示す主張で行列の計算を含まないので、対象から外した。
-  否定の対照: 平方根で $`v`$ の符号を逆にすると $`b\ne0`$ の 5 例すべてで平方が $`z`$ にならないこと、$`u_{M+m}`$ の第一成分の係数を $`\mathrm{i}`$ にすると 12 例すべてで等長でなくなること、$`v`$ から $`h`$ を落とすと 12 例すべてで $`\theta'\circ\theta`$ が恒等写像の 2 倍になること、$`\Psi`$ の評価で $`a_i`$ の像を $`a^{\dagger}_i`$ の像に取り違えると 12 例すべてで $`c_1`$ に戻らないこと。
-- 実行: `micromamba run -n sage sage sagemath/check/isometry-onto-split-quadratic-space-and-induced-isomorphism/check_isometry_onto_split_quadratic_space_and_induced_isomorphism.sage`（SageMath 10.9、2026-11-14、約 2 分）。
+  否定の対照: 平方根で $`v`$ の符号を逆にすると $`b\ne0`$ の 5 例すべてで平方が $`z`$ にならないこと、$`u_{M+m}`$ の第一成分の係数を $`\mathrm{i}`$ にすると 12 例すべてで等長でなくなること、$`v`$ から $`h`$ を落とすと 12 例すべてで $`\theta'\circ\theta`$ が恒等写像の 2 倍になること、$`\Psi`$ の評価で $`a_i`$ の像を $`a^{\dagger}_i`$ の像に取り違えると 12 例すべてで $`c_1`$ に戻らないこと、最後の基底の元だけを 2 倍する線型写像（他の基底の元は動かさない）では $`F(e_k)=e_k`$ を当てる行が落ち、12 例すべてで $`F(x)\neq x`$ になること、$`v_{M+m}`$ の $`\mathrm{i}`$ の符号を $`v_m`$ と同じにすると $`\theta'(u_m)`$ が $`e_m`$ にならないこと（24 回）。
+- 実行: `micromamba run -n sage sage sagemath/check/isometry-onto-split-quadratic-space-and-induced-isomorphism/check_isometry_onto_split_quadratic_space_and_induced_isomorphism.sage`（SageMath 10.9、2026-11-15、約 4 分）。
 - 結果: 通過。
 - 位置づけ: ℂ 上の一般の線型空間とクリフォード代数についての主張を、代数的数の有限個の例と行列への像で確かめた裏取りであり、証明の代わりではない。

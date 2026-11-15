@@ -93,7 +93,7 @@ def power_set(M):
 def N_(i, T):
     return len([t for t in T if t < i])
 
-stats = {"cases": 0, "neg_u": 0, "neg_h": 0, "neg_psi": 0}
+stats = {"cases": 0, "neg_u": 0, "neg_h": 0, "neg_psi": 0, "neg_fix": 0, "neg_um": 0}
 import random as _pyrandom
 _local_rng = _pyrandom.Random(int(20261114))
 def rnd_q():
@@ -189,10 +189,6 @@ for M in [1, 2, 3]:
         v_bad = [(e[m] + I_ * e[M + m]) for m in range(M)] + [(e[m] + (-I_) * e[M + m]) for m in range(M)]
         Thp_bad = matrix(K, [L_map(d, v_bad)(x) for x in identity_matrix(K, n).rows()]).transpose()
         stats["neg_h"] += int(Thp_bad * Th == 2 * identity_matrix(K, n))
-        # claim_rearranging_sum_of_two_sums_in_vector_space：式変形の各行
-        x1, x2, y1, y2 = [vector(K, [rnd_q() for _ in range(n)]) for _ in range(4)]
-        rows = [(x1 + x2) + (y1 + y2), x1 + (x2 + (y1 + y2)), x1 + ((x2 + y1) + y2), x1 + ((y1 + x2) + y2), x1 + (y1 + (x2 + y2)), (x1 + y1) + (x2 + y2)]
-        assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
         # claim_linear_map_fixing_basis_members_is_identity：F:=L_{e,e} は基底 e を動かさない線型写像。F(x)=x の式変形の各行
         Binv_e = matrix(K, e).transpose().inverse()
         Fm = L_map(e, e)
@@ -201,6 +197,13 @@ for M in [1, 2, 3]:
         beta = list(Binv_e * x)
         rows = [Fm(x), Fm(lin_comb(beta, e)), lin_comb(beta, [Fm(e[k]) for k in range(n)]), lin_comb(beta, e), x]
         assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+        # 否定の対照：最後の基底の元だけを 2 倍する線型写像 F_bad（他の基底の元は動かさない）では、F_bad(e_k)=e_k を当てる行が落ち、
+        # β_n(x)≠0 の x で F_bad(x)≠x になる（仮定「すべての基底の元を動かさない」を一つ外すと結論が成り立たない）
+        Fbad = lambda y: lin_comb([c_ * (2 if k == n - 1 else 1) for k, c_ in enumerate(Binv_e * y)], e)
+        xb = x if beta[n - 1] != 0 else x + e[n - 1]
+        betab = list(Binv_e * xb)
+        assert Fbad(lin_comb(betab, e)) == lin_comb(betab, [Fbad(e[k]) for k in range(n)])       # 線型写像の行は通る
+        stats["neg_fix"] += int(lin_comb(betab, [Fbad(e[k]) for k in range(n)]) != lin_comb(betab, e) and Fbad(xb) != xb)
         # claim_linear_right_inverse_of_isometry_is_isometry：θ を等長写像、θ' をその右逆写像として q(θ'(y))=q'(θ(θ'(y)))=q'(y)
         y = vector(K, [rnd_q() for _ in range(n)])
         rows = [Q(thp(y)), qW(th(thp(y))), qW(y)]
@@ -221,6 +224,25 @@ for M in [1, 2, 3]:
             prep4 = [((-I_) * h) * I_ + (I_ * h) * (-I_), (-I_) * (h * I_) + I_ * (h * (-I_)), (-I_) * (I_ * h) + I_ * ((-I_) * h),
                      ((-I_) * I_) * h + (I_ * (-I_)) * h, 1 * h + 1 * h, (1 + 1) * h, K(1)]
             assert all(r[i] == r[i + 1] for r in [prep3, prep4] for i in range(len(r) - 1))
+            # claim_map_from_split_quadratic_space_sends_family_to_orthonormal_basis の k=m の場合：u_m の表示の 3 行と θ'(u_m)=e_m の 15 行
+            one_ = K(1)
+            rows = [u[m], pair(wW(m), fW(m)), pair(wW(m), zW) + pair(zW, fW(m)), d[m] + d[M + m]]
+            assert all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+            rows = [thp(u[m]), thp(d[m] + d[M + m]), thp(d[m]) + thp(d[M + m]), v[m] + v[M + m],
+                    h * (e[m] + I_ * ep_) + h * (e[m] + (-I_) * ep_),
+                    h * ((e[m] + I_ * ep_) + (e[m] + (-I_) * ep_)),
+                    h * ((e[m] + e[m]) + (I_ * ep_ + (-I_) * ep_)),
+                    h * ((one_ * e[m] + one_ * e[m]) + (I_ * ep_ + (-I_) * ep_)),
+                    h * ((one_ + one_) * e[m] + (I_ + (-I_)) * ep_),
+                    h * ((one_ + one_) * e[m] + K(0) * ep_),
+                    h * ((one_ + one_) * e[m] + vector(K, [0] * n)),
+                    h * ((one_ + one_) * e[m]),
+                    (h * (one_ + one_)) * e[m],
+                    one_ * e[m],
+                    e[m]]
+            assert len(rows) == 15 and all(rows[i] == rows[i + 1] for i in range(len(rows) - 1))
+            # 否定の対照：v_{M+m} の i の符号を v_m と同じにすると、θ'(u_m) は e_m にならない（e' の係数が 0 にならない）
+            stats["neg_um"] += int(v[m] + h * (e[m] + I_ * ep_) != e[m])
             rows = [thp(u[M + m]), thp(pair((-I_) * wW(m), I_ * fW(m))), thp(pair((-I_) * wW(m), zW) + pair(zW, I_ * fW(m))),
                     thp((-I_) * d[m] + I_ * d[M + m]), thp((-I_) * d[m]) + thp(I_ * d[M + m]), (-I_) * thp(d[m]) + I_ * thp(d[M + m]),
                     (-I_) * v[m] + I_ * v[M + m],
@@ -276,6 +298,6 @@ for M in [1, 2, 3]:
                 Mx = Mx * G[k]
             mons.append(Mx.list())
     assert matrix(KI, mons).rank() == nP * nP
-print(stats)
-assert stats["neg_u"] == stats["cases"] and stats["neg_h"] == stats["cases"] and stats["neg_psi"] == stats["cases"]
+print(stats, flush=True)
+assert stats["neg_u"] == stats["cases"] and stats["neg_h"] == stats["cases"] and stats["neg_psi"] == stats["cases"] and stats["neg_fix"] == stats["cases"] and stats["neg_um"] > 0
 print("PASS")

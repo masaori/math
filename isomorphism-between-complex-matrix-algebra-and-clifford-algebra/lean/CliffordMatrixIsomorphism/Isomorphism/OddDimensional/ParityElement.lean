@@ -18,7 +18,8 @@
 
 表し方:
 - 本文の設定 def_setting_of_odd_dimensional_corollary のうち、ここで使うのは A := Cl(V,q)（分裂した二次空間の
-  クリフォード代数 `D.space.cliffordAlgebra`）だけである。奇数次元の拡大 V'・A' はどの主張も使わない。
+  クリフォード代数 `D.space.cliffordAlgebra`）だけである。奇数次元の拡大 V'・A'（`def_clifford_algebra_of_odd_extension`）は
+  どの主張も使わない。-1_ℂ（`def_minus_one_in_complex_numbers`）は ℂ の `-1` で書く。
   宣言は名前空間 `Clifford.SplitData` に置き、前提の組 D から `D.parityFactor i`・`D.parityElement` のように引く。
 - 番号付けた族 χ は `ℕ → Cl` で表し、{1,…,M} の外の値は使わない。i ∈ {1,…,M} は `1 ≤ i ∧ i ≤ D.M` で書く。
   i ∈ {1,…,M} は、反交換関係 a_i a†_j + a†_j a_i = δ_{i,j} ∗ 1 を引く主張（x_i a_i = a_i・a†_i x_i = a†_i を経由するものを含む）だけが使う。

@@ -280,11 +280,12 @@ theorem space_form_isQuadraticForm (hneg : ∀ a : K, a + -a = 0) :
 
 /-! ### 奇数次元の系で固定する記号 -/
 
-/-- 本文 `def_setting_of_odd_dimensional_corollary` の d' の必要十分版。 -/
+/-- 本文 `def_basis_of_odd_extension` の d' の必要十分版。 -/
 def oddBasis : ℕ → (W × DualSpace D.spaceW) × K :=
   concatenatedFamily (D.space C).space (coefficientsVec C.valuedMaps) (D.M + D.M) (D.space C).basis unitFamily
 
-/-- 本文 `def_setting_of_odd_dimensional_corollary` の (V', q') と基底 d' の組の必要十分版。
+/-- 本文 `def_clifford_algebra_of_odd_extension` の (V', q') と基底 d' の組の必要十分版（A' は `D.oddSpace C` の Cl、
+本文 `def_clifford_generator_map_of_odd_extension` の γ' はその γ）。
 必要十分版の前提の組は「q は二次形式」の欄を持たないので、q' が二次形式であることはここでは引かない。 -/
 def oddSpace : QuadraticSpaceWithBasis K ((W × DualSpace D.spaceW) × K) where
   space := oddVectorSpace C.valuedMaps (D.space C).space

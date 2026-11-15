@@ -5,7 +5,7 @@
   本文のラベル                                                          このファイル
   claim_entry_of_product_of_matrices_indexed_by_two_element_set         entry_mul_two（前提の isFiniteSet_two は
                                                                         `MembershipIndex.lean`）
-  def_kronecker_product_indexed_by_power_set                            kroneckerFactor（(A_k)_{o_S(k),o_T(k)} の族）・
+  def_kronecker_product_indexed_by_power_set                            kroneckerFactor（(A_k)_{o_{M,S}(k),o_{M,T}(k)} の族）・
                                                                         kroneckerProduct・kroneckerProduct_entry
   claim_product_of_kronecker_products_is_kronecker_product_of_products  mul_kroneckerProduct
   claim_kronecker_product_of_identity_matrices_is_identity_matrix       kroneckerProduct_one
@@ -59,11 +59,11 @@ theorem entry_mul_two (A B : Mat (Idx 2)) (a b : Idx 2) :
     _ = Mat.entry A a idxOne * Mat.entry B idxOne b + Mat.entry A a idxTwo * Mat.entry B idxTwo b := by
         rw [zero_add (Mat.entry A a idxOne * Mat.entry B idxOne b)]
 
-/-- 本文 `def_kronecker_product_indexed_by_power_set` の番号順の積の因子：k に (A_k)_{o_S(k),o_T(k)} を与える族。 -/
+/-- 本文 `def_kronecker_product_indexed_by_power_set` の番号順の積の因子：k に (A_k)_{o_{M,S}(k),o_{M,T}(k)} を与える族。 -/
 noncomputable def kroneckerFactor {M : ℕ} (A : ℕ → Mat (Idx 2)) (S T : PowerSet M) (k : ℕ) : ℂ :=
   Mat.entry (A k) (membershipIndex S k) (membershipIndex T k)
 
-/-- 本文 `def_kronecker_product_indexed_by_power_set`：(⊠_{k=1}^{M} A_k)_{S,T} := Π_{ℂ,k=1}^{M} (A_k)_{o_S(k),o_T(k)}。 -/
+/-- 本文 `def_kronecker_product_indexed_by_power_set`：(⊠_{k=1}^{M} A_k)_{S,T} := Π_{ℂ,k=1}^{M} (A_k)_{o_{M,S}(k),o_{M,T}(k)}。 -/
 noncomputable def kroneckerProduct (M : ℕ) (A : ℕ → Mat (Idx 2)) : Mat (PowerSet M) :=
   fun p => orderedProduct M (kroneckerFactor A p.1 p.2)
 
@@ -76,21 +76,21 @@ theorem mul_kroneckerProduct (M : ℕ) (A B : ℕ → Mat (Idx 2)) :
     Mat.mul (isFiniteSet_powerSet M) (kroneckerProduct M A) (kroneckerProduct M B)
       = kroneckerProduct M (fun k => Mat.mul isFiniteSet_two (A k) (B k)) := Mat.ext fun S T => by
   let V := complexNumbersVectorSpace
-  -- x_k := (A_k)_{o_S(k),2} ·_ℂ (B_k)_{2,o_T(k)}、y_k := (A_k)_{o_S(k),1} ·_ℂ (B_k)_{1,o_T(k)}
+  -- x_k := (A_k)_{o_{M,S}(k),2} ·_ℂ (B_k)_{2,o_{M,T}(k)}、y_k := (A_k)_{o_{M,S}(k),1} ·_ℂ (B_k)_{1,o_{M,T}(k)}
   let x : ℕ → ℂ := fun k =>
     Mat.entry (A k) (membershipIndex S k) idxTwo * Mat.entry (B k) idxTwo (membershipIndex T k)
   let y : ℕ → ℂ := fun k =>
     Mat.entry (A k) (membershipIndex S k) idxOne * Mat.entry (B k) idxOne (membershipIndex T k)
-  -- （一）(A_k)_{o_S(k),o_R(k)} ·_ℂ (B_k)_{o_R(k),o_T(k)} = v^R_k
+  -- （一）(A_k)_{o_{M,S}(k),o_{M,R}(k)} ·_ℂ (B_k)_{o_{M,R}(k),o_{M,T}(k)} = v^R_k
   have h1 : ∀ (R : PowerSet M) (k : ℕ),
       kroneckerFactor A S R k * kroneckerFactor B R T k = selectedFactor x y R.1 k := by
     intro R k
     by_cases hk : k ∈ R.1
-    · -- k ∈ R なら o_R(k) = 2
+    · -- k ∈ R なら o_{M,R}(k) = 2
       show Mat.entry (A k) (membershipIndex S k) (membershipIndex R k)
           * Mat.entry (B k) (membershipIndex R k) (membershipIndex T k) = selectedFactor x y R.1 k
       rw [membershipIndex_of_mem R k hk, selectedFactor_of_mem x y R.1 k hk]
-    · -- k ∉ R なら o_R(k) = 1
+    · -- k ∉ R なら o_{M,R}(k) = 1
       show Mat.entry (A k) (membershipIndex S k) (membershipIndex R k)
           * Mat.entry (B k) (membershipIndex R k) (membershipIndex T k) = selectedFactor x y R.1 k
       rw [membershipIndex_of_not_mem R k hk, selectedFactor_of_not_mem x y R.1 k hk]
@@ -107,7 +107,7 @@ theorem mul_kroneckerProduct (M : ℕ) (A B : ℕ → Mat (Idx 2)) :
     _ = 1 * orderedProduct M (selectedFactor x y R.1) := by
         rw [one_mul (orderedProduct M (selectedFactor x y R.1))]
     _ = V.smul 1 (orderedProduct M (selectedFactor x y R.1)) := rfl
-  -- （三）y_k +_ℂ x_k = (A_k ·_{Mat_{1,2}} B_k)_{o_S(k),o_T(k)}
+  -- （三）y_k +_ℂ x_k = (A_k ·_{Mat_{1,2}} B_k)_{o_{M,S}(k),o_{M,T}(k)}
   have h3 : ∀ k : ℕ, y k + x k
       = kroneckerFactor (fun k => Mat.mul isFiniteSet_two (A k) (B k)) S T k := fun k => calc
     y k + x k
@@ -130,7 +130,7 @@ theorem mul_kroneckerProduct (M : ℕ) (A B : ℕ → Mat (Idx 2)) :
 theorem kroneckerProduct_one (M : ℕ) :
     kroneckerProduct M (fun _ => (Mat.one : Mat (Idx 2))) = (Mat.one : Mat (PowerSet M)) :=
   Mat.ext fun S T => by
-  -- α_k := (A_k)_{o_S(k),o_T(k)} = δ_{o_S(k),o_T(k)}
+  -- α_k := (A_k)_{o_{M,S}(k),o_{M,T}(k)} = δ_{o_{M,S}(k),o_{M,T}(k)}
   have hα : ∀ k : ℕ, kroneckerFactor (fun _ => (Mat.one : Mat (Idx 2))) S T k
       = kroneckerDelta (membershipIndex S k) (membershipIndex T k) := fun _ => rfl
   by_cases hST : S = T
@@ -154,7 +154,7 @@ theorem kroneckerProduct_one (M : ℕ) :
       by_contra hiff
       exact hno ⟨t, ht1, htM, hiff⟩
     obtain ⟨r, hr1, hrM, hiff⟩ := hr
-    -- o_S(r) と o_T(r) の一方は 2、他方は 1 なので α_r = 0_ℂ
+    -- o_{M,S}(r) と o_{M,T}(r) の一方は 2、他方は 1 なので α_r = 0_ℂ
     have hne : membershipIndex S r ≠ membershipIndex T r := by
       by_cases hrS : r ∈ S.1
       · have hrT : r ∉ T.1 := fun h => hiff ⟨fun _ => h, fun _ => hrS⟩

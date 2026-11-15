@@ -248,21 +248,51 @@ for M in [1,2,3]:
         # （κ_{U,U'} を二度当てる形は U·U=2^M·1 のため恒等写像になり、対照にならない。κ_{U',U} を落とした形を対照にする）
         neg(kap(Us, Ups, PhiY_PsiY(Fr)) != Fr, "control: Omega' without kappa_{U',U}")
         neg(kap(Us, Us, PhiY_PsiY(kap(Us, Us, Fr))) != Fr, "control: without h (U for U')")
-        # Ω'∘Ω=id を生成元 γ_Y(e_k) の像で：Φ_Y(Ω'(Ω(γ_Y(e_k))))=Φ_Y(Ψ_Y(κ_{U',U}(κ_{U,U'}(Φ_Y(γ_Y(e_k))))))=Φ_Y(γ_Y(e_k))
+        # Ω'∘Ω=id と Ψ_Y∘Φ_Y=id を、クリフォード代数 Cl(Y,Q) の中で直接比べる（像での確認ではない）。
+        # Cl(Y,Q) は SageMath の CliffordAlgebra（関係 γ_Y(y)γ_Y(y)=Q(y)·1）で作り、Y の標準基底 std_j を生成元 x_j に送る。
+        # Φ_Y は生成元の像 Φ_Y(γ_Y(std_j))=φ(θ(std_j)) で決まる ℂ-代数の準同型なので、基底の単調な積 x_{j_1}⋯x_{j_r}（j_1<⋯<j_r）を
+        # φ(θ(std_{j_1}))⋯φ(θ(std_{j_r})) へ送り、線型に延ばして計算する。
+        # Ψ_Y=Cl(θ')∘Ψ は、Ψ(F)=Σ F_{S,T} a†_S P a_T の a†_i・a_i を Cl(Y,Q) の元 γ_Y(θ'(d_i))・γ_Y(θ'(d_{M+i})) に置き換えて、Cl(Y,Q) の中で計算する。
+        Gram = Ebi.transpose() * Ebi                                     # Q(y)=y^T Gram y
+        Qform = QuadraticForm(KI, 2 * Gram)                              # SageMath の QuadraticForm(R, H) は Q(y)=y^T H y/2
+        ok(all(Qform(y) == Qf(y) for y in e + [vector(KI, [QQ.random_element(num_bound=4, den_bound=3) for _ in range(n)]) for _ in range(3)]), "Sage quadratic form = Q")
+        Cl = CliffordAlgebra(Qform)
+        xg = Cl.gens()
+        gammaY = lambda y: sum((y[j] * xg[j] for j in range(n)), Cl.zero())          # γ_Y(y)
+        std = identity_matrix(KI, n).rows()
+        phi_std = [PhiY_gen(std[j]) for j in range(n)]                               # Φ_Y(γ_Y(std_j))
+        def PhiY(a):                                                                 # Φ_Y : Cl(Y,Q) → Mat_{P_M}
+            tot = Z0
+            for mon, coeff in a.monomial_coefficients().items():
+                tot = tot + coeff * oprod_m([phi_std[j] for j in sorted(mon)], Id)
+            return tot
+        def oprod_cl(xs):
+            X = Cl.one()
+            for Y_ in xs:
+                X = X * Y_
+            return X
+        adagC = {i: gammaY(thp(d[i-1])) for i in range(1, M+1)}                      # Cl(θ')(a†_i)=γ_Y(θ'(d_i))
+        annC = {i: gammaY(thp(d[M+i-1])) for i in range(1, M+1)}                     # Cl(θ')(a_i)=γ_Y(θ'(d_{M+i}))
+        def make_PsiY(ad, an):
+            PvC = oprod_cl([an[i] * ad[i] for i in range(1, M+1)])
+            EC = {(a, b): oprod_cl([ad[t] for t in sorted(S)]) * PvC * oprod_cl([an[t] for t in sorted(T, reverse=True)])
+                  for a, S in enumerate(P) for b, T in enumerate(P)}
+            return lambda F: sum((F[a, b] * EC[(a, b)] for a in range(nP) for b in range(nP) if F[a, b] != 0), Cl.zero())
+        PsiY = make_PsiY(adagC, annC)                                                # Ψ_Y : Mat_{P_M} → Cl(Y,Q)
+        # Cl(Y,Q) の基底（単調な積 4^M 個）全部と、生成元 γ_Y(e_k)、その二つの積、乱数の元で比べる
+        cl_tests = list(Cl.basis()) + [gammaY(e[k]) for k in range(n)] + [gammaY(e[k]) * gammaY(e[l]) for k in range(n) for l in range(n)]
+        cl_tests += [sum((KI(QQ.random_element(num_bound=5, den_bound=3)) * bm for bm in Cl.basis()), Cl.zero()) for _ in range(2)]
+        for a in cl_tests:
+            ok(PsiY(PhiY(a)) == a, "Psi_Y(Phi_Y(a)) = a in Cl(Y,Q)")
+            ok(PsiY(kap(Ups, Us, kap(Us, Ups, PhiY(a)))) == a, "Omega'(Omega(a)) = a in Cl(Y,Q)")
+        # Φ_Y が γ_Y の像を PhiY_gen と同じ値へ送ること（上の Φ_Y(γ_Y(e_k)) の行と同じ写像であることの確認）
         for k in range(n):
-            g = PhiY_gen(e[k])
-            ok(PhiY_PsiY(kap(Ups, Us, kap(Us, Ups, g))) == g, "Omega' Omega = id on generator image")
-        # 同じことを生成元の像の積（γ_Y(e_k)γ_Y(e_l)、Φ_Y は乗法を保つ）でも
-        for k in range(n):
-            for l in range(n):
-                g = PhiY_gen(e[k]) * PhiY_gen(e[l])
-                ok(PhiY_PsiY(kap(Ups, Us, kap(Us, Ups, g))) == g, "Omega' Omega = id on product of generator images")
-        # 否定の対照：Ψ の式で a_i の像と a†_i の像を取り違えると Ω'∘Ω は生成元を戻さない
-        # （c_m+c_m^T は取り違えで変わらないので、後半の生成元 γ_Y(e_{M+1}) の像で確かめる）
-        PvB = oprod_m([adag[i] * ann[i] for i in range(1, M+1)], Id)
-        badPsi = lambda F: sum((F[a, b] * (oprod_m([ann[t] for t in sorted(P[a])], Id) * PvB * oprod_m([adag[t] for t in sorted(P[b], reverse=True)], Id))
-                                for a in range(nP) for b in range(nP) if F[a, b] != 0), Z0)
-        g = PhiY_gen(e[M])
-        neg(badPsi(kap(Ups, Us, kap(Us, Ups, g))) != g, "control: swapped a and a-dagger in Psi")
+            ok(PhiY(gammaY(e[k])) == PhiY_gen(e[k]), "Phi_Y on gamma_Y(e_k)")
+        # 否定の対照：Ψ の式で a_i の像と a†_i の像を取り違えると、Cl(Y,Q) の元 γ_Y(e_{M+1}) に戻らない
+        # （γ_Y(e_1) は取り違えで変わらないので、後半の生成元で確かめる）
+        badPsiY = make_PsiY(annC, adagC)
+        neg(badPsiY(kap(Ups, Us, kap(Us, Ups, PhiY(gammaY(e[M]))))) != gammaY(e[M]), "control: swapped a and a-dagger in Psi (in Cl)")
+        # 否定の対照：κ_{U',U} を落とした Ω'∘Ω は、Cl(Y,Q) の元 γ_Y(e_1) に戻らない
+        neg(PsiY(kap(Us, Ups, PhiY(gammaY(e[0])))) != gammaY(e[0]), "control: Omega' without kappa_{U',U} (in Cl)")
     print("M =", M, "Omega checks ok", flush=True)
 print("PASS", passed, "negative controls", negs)

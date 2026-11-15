@@ -23,7 +23,7 @@ def e(M, k):             # def_binary_numbering_of_power_set
     return e(M - 1, k) if k <= h else e(M - 1, k - h) | frozenset([M])
 def rho(M, T): return frozenset(M + 1 - s for s in T)          # def_reversal_of_subsets
 def r(M, k): return rho(M, e(M, k))                             # def_numbering_of_power_set_with_first_site_as_highest_digit
-def o(T, k): return 2 if k in T else 1                          # def_membership_index_of_subset
+def o(T, k): return 2 if k in T else 1                          # def_membership_index_of_subset（本文の o_{M,T}(k)。M は T と k の範囲で決まる）
 def obar(M, T): return tuple(o(T, t) for t in range(1, M + 1))  # def_tuple_of_membership_indices（I(t) は tuple の t-1 番目）
 def pos(M, I): return frozenset(t for t in range(1, M + 1) if I[t - 1] == 2)   # def_positions_of_two_in_tuple
 def num(M, I): return 1 + sum((I[t - 1] - 1) * 2**(M - t) for t in range(1, M + 1))  # def_number_of_tuple_with_first_site_as_highest_digit
@@ -119,13 +119,13 @@ for M in [1, 2, 3]:
             JW_num = identity_matrix(QQbar, n)
             for Fj in F: JW_num = JW_num * Fj
             JW_P = kronP(M, [sx if t < m else (pauli[b] if t == m else I2) for t in range(1, M + 1)])   # def_jordan_wigner_z/y_matrix
-            # 証明の途中の行: f^{[≤m]} = f、x_j の像が因子、番号順の積の像
+            # 証明の途中の行（Z の側は 𝔷・ϑ_j、Y の側は 𝔶・ϖ_j）: ϑ_j の像が因子、番号順の積の像
             xs = [kronP(M, [(sx if j < m else pauli[b]) if t == j else I2 for t in range(1, M + 1)]) for j in range(1, m + 1)]
             for j in range(1, m + 1):
-                ok(nu(M, xs[j - 1], r) == F[j - 1], "nu_r(x_j) = F_{m,j}")
+                ok(nu(M, xs[j - 1], r) == F[j - 1], "nu_r(theta_j) = F_{m,j}")
             Pi = {(S, T): QQbar(1 if S == T else 0) for S in P for T in P}
             for xj in xs: Pi = mulP(Pi, xj, P)
-            ok(Pi == JW_P, "prod x_j = Z_m / Y_m in Mat_P")
+            ok(Pi == JW_P, "prod theta_j = Z_m / Y_m in Mat_P")
             ok(nu(M, JW_P, r) == JW_num, "nu_{r_M}(Z_m)=Z^{(2^M)}_m / Y")
             if M >= 2:
                 ng(nu(M, JW_P, e) != JW_num, "nu_{e_M} does not give the Ising-paper matrix")

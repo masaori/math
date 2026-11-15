@@ -15,8 +15,10 @@
   claim_odd_extension_quadratic_form_at_added_unit_vector_is_one                     SplitData.oddForm_oddSecondInclusion_one
   claim_polarization_of_odd_extension_between_first_component_and_added_unit_vector_is_zero
                                                                                      SplitData.polarization_oddInclusion_oddSecondInclusion_one
-  def_setting_of_odd_dimensional_corollary                                           SplitData.oddSpace（V'・q'・基底 d' の組。A' = D.oddSpace.Cl、
-                                                                                     γ' = D.oddSpace.γ）・SplitData.oddBasis（d'）
+  def_setting_of_odd_dimensional_corollary                                           宣言を置かない（既存の記号に名前を付けるだけ。下の「表し方」）
+  def_basis_of_odd_extension                                                         SplitData.oddBasis（d'）
+  def_clifford_algebra_of_odd_extension                                              SplitData.oddSpace（V'・q'・基底 d' の組。A' = D.oddSpace.Cl）
+  def_clifford_generator_map_of_odd_extension                                        D.oddSpace.γ（γ'。SplitData.oddSpace の docstring）
   def_induced_homomorphism_into_odd_extension_clifford_algebra                       SplitData.oddInclusionHom（j）・oddInclusionHom_isHom
   claim_induced_homomorphism_into_odd_extension_after_generator_map                  SplitData.oddInclusionHom_γ
   def_added_unit_vector_of_odd_extension                                             SplitData.addedUnitVector（u）
@@ -29,8 +31,9 @@
   `D.space.basis` である。B_q は `polarization D.space.space D.space.form`。
 - V' = V ⊕ ℂ^vec の元は V の元と ℂ の元の組 (v, t) で、型は `(W × DualSpace D.spaceW) × ℂ`。ℂ^vec は `complexNumbersVectorSpace`。
 - 番号付けた族 o:{1}→ℂ・d':{1,…,2M+1}→V' は `ℕ → ℂ`・`ℕ → V'` で表し、1,…,n の外の値は使わない。
-- 本文の def_setting_of_odd_dimensional_corollary のうち B・Φ・Ψ・-1_ℂ は既存の宣言（`Isomorphism` の行列環、
-  `SplitData.homomorphismToMatrix` 等、ℂ の `-1`）をそのまま使い、ここでは宣言を置かない。
+- 本文の def_setting_of_odd_dimensional_corollary の A・d・B・Φ・Ψ、def_additive_inverse_in_complex_numbers の -_ℂ、
+  def_minus_one_in_complex_numbers の -1_ℂ は既存の宣言（`D.space.Cl`、`D.space.basis`、`Isomorphism` の行列環、
+  `SplitData.homomorphismToMatrix` 等、ℂ の `-`・`-1`）をそのまま使い、ここでは宣言を置かない。
 - j は等長写像が誘導する準同型 `QuadraticSpaceWithBasis.inducedHom`（`InducedHomomorphism.lean`）を θ := in'_1 に当てたものである。
 - 本文の前提 M ∈ ℤ_{≥1} は、どの証明も使わない（M = 0 でも同じ証明が通る）ので、仮定に置かない。
 
@@ -184,13 +187,13 @@ theorem polarization_oddInclusion_oddSecondInclusion_one (v : W × DualSpace D.s
 
 /-! ### 奇数次元の系で固定する記号 -/
 
-/-- 本文 `def_setting_of_odd_dimensional_corollary` の d'：`claim_basis_of_direct_sum_of_two_vector_spaces` で
+/-- 本文 `def_basis_of_odd_extension`：d' は `claim_basis_of_direct_sum_of_two_vector_spaces` で
 V_1 := V、V_2 := ℂ^vec、n := 2M、n' := 1、b := d、b' := o とした族。 -/
 def oddBasis : ℕ → (W × DualSpace D.spaceW) × ℂ :=
   concatenatedFamily D.space.space complexNumbersVectorSpace (D.M + D.M) D.space.basis unitFamily
 
-/-- 本文 `def_setting_of_odd_dimensional_corollary`：(V', q') と基底 d' の組。A' := Cl(V', q') は `D.oddSpace.Cl`、
-γ' は `D.oddSpace.γ`。q' が二次形式であることは `claim_odd_extension_quadratic_form_is_quadratic_form`。 -/
+/-- 本文 `def_clifford_algebra_of_odd_extension`：(V', q') と基底 d' の組。A' := Cl(V', q') は `D.oddSpace.Cl`。
+本文 `def_clifford_generator_map_of_odd_extension` の γ' : V' → A' は `D.oddSpace.γ`。q' が二次形式であることは `claim_odd_extension_quadratic_form_is_quadratic_form`。 -/
 def oddSpace : QuadraticSpaceWithBasis ((W × DualSpace D.spaceW) × ℂ) where
   space := D.oddVectorSpace
   dim := (D.M + D.M) + 1

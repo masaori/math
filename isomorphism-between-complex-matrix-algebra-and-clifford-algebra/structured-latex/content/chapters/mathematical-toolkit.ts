@@ -13032,6 +13032,48 @@ m
     ],
   },
   {
+    id: "mathematical_toolkit_claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal",
+    kind: "claim",
+    title: { text: "因子ごとに等しい二つの ℂ の中の番号順の積は等しい" },
+    labels: ["claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`k\in\mathbb{Z}_{\ge 0}`), " とし、", math(String.raw`\{1,\dots,k\}`), " の各元 ", math(String.raw`r`), " に ", math(String.raw`\mathbb{C}`), " の元 ",
+        math(String.raw`\alpha_r,\ \alpha'_r`), " が一つずつ与えられ、すべての ", math(String.raw`r\in\{1,\dots,k\}`), " について ", math(String.raw`\alpha_r=\alpha'_r`),
+        " が成り立つとする。このとき、", math(String.raw`\mathbb{C}`), " の中の番号順の積（", ref("def_ordered_product_in_complex_numbers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\prod_{\mathbb{C},\,r=1}^{k}\alpha_r=\prod_{\mathbb{C},\,r=1}^{k}\alpha'_r`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_ordered_product_in_complex_numbers"), " が二つの族について帰納的に定める ", math(String.raw`\mathbb{C}`), " の元を、順に ", math(String.raw`P_m`), "、",
+        math(String.raw`P'_m`), "（", math(String.raw`m\in\{0,1,\dots,k\}`), "）と書く。すべての ", math(String.raw`m`), " について ", math(String.raw`P_m=P'_m`), " であることを ",
+        math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m=k`), " の場合が主張である。", math(String.raw`m=0`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_0
+&=1_{\mathbb{C}}
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P'_0
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le k`), " とし、", math(String.raw`P_{m-1}=P'_{m-1}`), " を仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_m
+&=P_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha_m
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=P'_{m-1}\cdot_{\mathbb{C}}\alpha'_m
+&&\left(\because\ \text{仮定}\ \alpha_m=\alpha'_m\right)\\
+&=P'_m
+&&\left(\because\ \blkref{def_ordered_product_in_complex_numbers}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_ordered_product_is_additive_in_one_factor",
     kind: "claim",
     title: { text: "ℂ の中の番号順の積は、一つの因子についての和を積の和へ移す" },

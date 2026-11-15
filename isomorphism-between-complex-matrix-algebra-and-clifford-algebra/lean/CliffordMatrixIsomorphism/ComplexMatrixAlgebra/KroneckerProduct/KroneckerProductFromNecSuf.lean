@@ -13,7 +13,7 @@
 ℂ から渡す性質は、`complexValuedMapsLaws`（ℂ^X を線型空間にする八つ）、乗法の交換法則 `mul_comm`、`mul_one`、`mul_zero`、
 `zero_mul`、`mul_assoc`、分配法則 `mul_add`・`add_mul` と、λ・λ' の交換・0 と 1 の交換（`mul_comm` から）である。
 0 + a = a は必要十分版が `complexValuedMapsLaws` から作るので渡さない。
-o_T(k)・{1,2}・P_M・2 進の番号付けは ℂ を含まないので、両版が同じものを使う。
+o_{M,T}(k)・{1,2}・P_M・2 進の番号付けは ℂ を含まないので、両版が同じものを使う。
 -/
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.KroneckerProduct
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.Conjugation

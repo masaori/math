@@ -1,7 +1,7 @@
 /-
 章「複素行列環」の、{1,2} で添字づけた行列の積の成分と、部分集合全体で添字づけたクロネッカー積とその三つの主張の必要十分版。
 具体版 `ComplexMatrixAlgebra/KroneckerProduct/KroneckerProduct.lean` と同じ def と calc の行で、係数 ℂ を型の変数 K に替えて書く。
-{1,2}・o_T(k)・(2, id_2)・{1,2} が有限集合であること（`MembershipIndex.lean`）と P_M（`PowerSetNumbering/`）は ℂ を含まないので、
+{1,2}・o_{M,T}(k)・(2, id_2)・{1,2} が有限集合であること（`MembershipIndex.lean`）と P_M（`PowerSetNumbering/`）は ℂ を含まないので、
 具体版と同じものを引く。
 
   本文のラベル                                                          このファイル                            使う K の性質
@@ -64,7 +64,7 @@ theorem entry_mul_two [Add K] [Mul K] [One K] [Zero K] (L : ValuedMapsLaws K)
 noncomputable def kroneckerFactor {M : ℕ} (A : ℕ → Mat K (Idx 2)) (S T : PowerSet M) (k : ℕ) : K :=
   Mat.entry (A k) (membershipIndex S k) (membershipIndex T k)
 
-/-- 本文 `def_kronecker_product_indexed_by_power_set` の必要十分版：(⊠ A_k)_{S,T} := Π_{k=1}^{M} (A_k)_{o_S(k),o_T(k)}。 -/
+/-- 本文 `def_kronecker_product_indexed_by_power_set` の必要十分版：(⊠ A_k)_{S,T} := Π_{k=1}^{M} (A_k)_{o_{M,S}(k),o_{M,T}(k)}。 -/
 noncomputable def kroneckerProduct [Mul K] [One K] (M : ℕ) (A : ℕ → Mat K (Idx 2)) : Mat K (PowerSet M) :=
   fun p => orderedProduct M (kroneckerFactor A p.1 p.2)
 

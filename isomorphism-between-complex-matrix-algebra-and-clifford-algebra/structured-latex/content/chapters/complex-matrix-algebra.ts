@@ -3006,16 +3006,16 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb{Z}_{\ge 0}`), "、", math(String.raw`T\in\mathcal{P}_M`), "（", ref("def_power_set_of_first_m_positive_integers"), "）とする。",
-        math(String.raw`k\in\{1,\dots,M\}`), " について、", math(String.raw`o_T(k)\in\{1,2\}`), " を次で定める。",
+        math(String.raw`k\in\{1,\dots,M\}`), " について、", math(String.raw`o_{M,T}(k)\in\{1,2\}`), " を次で定める。",
       ]),
-      displayMath(String.raw`o_T(k):=
+      displayMath(String.raw`o_{M,T}(k):=
 \begin{cases}
   2 & (k\in T),\\
   1 & (k\notin T).
 \end{cases}`),
       paragraph([
         math(String.raw`k\in T`), " か ", math(String.raw`k\notin T`), " のどちらか一方だけが成り立つので（", ref("def_power_set_of_first_m_positive_integers"), "）、",
-        math(String.raw`o_T(k)`), " は一つに決まる。記号 ", math(String.raw`o_T(k)`), " は ", math(String.raw`M`), " を書かないが、", math(String.raw`M`), " を固定して定める。",
+        math(String.raw`o_{M,T}(k)`), " は一つに決まる。同じ ", math(String.raw`T`), " が二つの ", math(String.raw`M`), " について ", math(String.raw`\mathcal{P}_M`), " の元になるときに区別するため、記号に ", math(String.raw`M`), " を添字で書く。",
       ]),
     ],
   },
@@ -3086,9 +3086,9 @@ F&=\mu_{e_M}\bigl(\nu_{e_M}(F)\bigr)
         math(String.raw`\mathop{\boxtimes}\limits_{k=1}^{M}A_k`), " を、", math(String.raw`S,T\in\mathcal{P}_M`), " についての成分で次のように定め、族 ",
         math(String.raw`A_1,\dots,A_M`), " のクロネッカー積と呼ぶ。",
       ]),
-      displayMath(String.raw`\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}:=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\bigr)_{o_S(k),\,o_T(k)}`),
+      displayMath(String.raw`\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}A_k\Bigr)_{S,T}:=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\bigr)_{o_{M,S}(k),\,o_{M,T}(k)}`),
       paragraph([
-        math(String.raw`o_S(k),o_T(k)\in\{1,2\}`), " は ", ref("def_membership_index_of_subset"), " の添字なので、", math(String.raw`(A_k)_{o_S(k),o_T(k)}`),
+        math(String.raw`o_{M,S}(k),o_{M,T}(k)\in\{1,2\}`), " は ", ref("def_membership_index_of_subset"), " の添字なので、", math(String.raw`(A_k)_{o_{M,S}(k),o_{M,T}(k)}`),
         " は ", math(String.raw`A_k`), " の成分で ", math(String.raw`\mathbb{C}`), " の元であり、右辺はその ", math(String.raw`\mathbb{C}`), " の中の番号順の積（",
         ref("def_ordered_product_in_complex_numbers"), "）である。したがって左辺は写像 ", math(String.raw`\mathcal{P}_M\times\mathcal{P}_M\to\mathbb{C}`), "、すなわち ",
         math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元として一つに決まる。",
@@ -3278,23 +3278,23 @@ F_m\bigl(e_m(n+j)\bigr)
         math(String.raw`\mathbb{A}:=\mathop{\boxtimes}_{k=1}^{M}A_k`), "、", math(String.raw`\mathbb{B}:=\mathop{\boxtimes}_{k=1}^{M}B_k`), " と置く。両辺は ",
         math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元なので、", math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定して ", math(String.raw`(S,T)`),
         " 成分を比べる（", ref("def_matrices_indexed_by_finite_set"), "）。", math(String.raw`k\in\{1,\dots,M\}`), " について ",
-        math(String.raw`x_k:=(A_k)_{o_S(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_T(k)}`), "、", math(String.raw`y_k:=(A_k)_{o_S(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_T(k)}`),
+        math(String.raw`x_k:=(A_k)_{o_{M,S}(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_{M,T}(k)}`), "、", math(String.raw`y_k:=(A_k)_{o_{M,S}(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_{M,T}(k)}`),
         " と置き、", math(String.raw`R\in\mathcal{P}_M`), " について ", math(String.raw`v^{R}_k`), " を ", ref("claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers"),
         " のとおり定める。準備として次の三つが成り立つ。",
       ]),
       paragraph([
-        "（一）", math(String.raw`R\in\mathcal{P}_M`), " と ", math(String.raw`k`), " について ", math(String.raw`(A_k)_{o_S(k),o_R(k)}\cdot_{\mathbb{C}}(B_k)_{o_R(k),o_T(k)}=v^{R}_k`),
-        " である。", math(String.raw`k\in R`), " なら ", math(String.raw`o_R(k)=2`), " なので左辺は ", math(String.raw`x_k=v^{R}_k`), "、", math(String.raw`k\notin R`), " なら ",
-        math(String.raw`o_R(k)=1`), " なので左辺は ", math(String.raw`y_k=v^{R}_k`), " である（", ref("def_membership_index_of_subset"), "）。",
+        "（一）", math(String.raw`R\in\mathcal{P}_M`), " と ", math(String.raw`k`), " について ", math(String.raw`(A_k)_{o_{M,S}(k),o_{M,R}(k)}\cdot_{\mathbb{C}}(B_k)_{o_{M,R}(k),o_{M,T}(k)}=v^{R}_k`),
+        " である。", math(String.raw`k\in R`), " なら ", math(String.raw`o_{M,R}(k)=2`), " なので左辺は ", math(String.raw`x_k=v^{R}_k`), "、", math(String.raw`k\notin R`), " なら ",
+        math(String.raw`o_{M,R}(k)=1`), " なので左辺は ", math(String.raw`y_k=v^{R}_k`), " である（", ref("def_membership_index_of_subset"), "）。",
       ]),
       paragraph(["（二）", math(String.raw`R\in\mathcal{P}_M`), " について次が成り立つ。"]),
       displayMath(String.raw`\begin{aligned}
 \mathbb{A}_{S,R}\cdot_{\mathbb{C}^{\mathrm{vec}}}\mathbb{B}_{R,T}
 &=\mathbb{A}_{S,R}\cdot_{\mathbb{C}}\mathbb{B}_{R,T}
 &&\left(\because\ \blkref{def_complex_numbers_as_complex_vector_space}\right)\\
-&=\left(\prod_{\mathbb{C},\,k=1}^{M}(A_k)_{o_S(k),o_R(k)}\right)\cdot_{\mathbb{C}}\left(\prod_{\mathbb{C},\,k=1}^{M}(B_k)_{o_R(k),o_T(k)}\right)
+&=\left(\prod_{\mathbb{C},\,k=1}^{M}(A_k)_{o_{M,S}(k),o_{M,R}(k)}\right)\cdot_{\mathbb{C}}\left(\prod_{\mathbb{C},\,k=1}^{M}(B_k)_{o_{M,R}(k),o_{M,T}(k)}\right)
 &&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\ \text{を二か所に適用}\right)\\
-&=\prod_{\mathbb{C},\,k=1}^{M}\Bigl((A_k)_{o_S(k),o_R(k)}\cdot_{\mathbb{C}}(B_k)_{o_R(k),o_T(k)}\Bigr)
+&=\prod_{\mathbb{C},\,k=1}^{M}\Bigl((A_k)_{o_{M,S}(k),o_{M,R}(k)}\cdot_{\mathbb{C}}(B_k)_{o_{M,R}(k),o_{M,T}(k)}\Bigr)
 &&\left(\because\ \blkref{claim_product_of_two_ordered_products_in_complex_numbers}\right)\\
 &=\prod_{\mathbb{C},\,k=1}^{M}v^{R}_k
 &&\left(\because\ \text{各}\ k\ \text{で（一）。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
@@ -3306,9 +3306,9 @@ F_m\bigl(e_m(n+j)\bigr)
       paragraph(["（三）", math(String.raw`k\in\{1,\dots,M\}`), " について次が成り立つ。"]),
       displayMath(String.raw`\begin{aligned}
 y_k+_{\mathbb{C}}x_k
-&=\bigl((A_k)_{o_S(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_T(k)}\bigr)+_{\mathbb{C}}\bigl((A_k)_{o_S(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_T(k)}\bigr)
+&=\bigl((A_k)_{o_{M,S}(k),1}\cdot_{\mathbb{C}}(B_k)_{1,o_{M,T}(k)}\bigr)+_{\mathbb{C}}\bigl((A_k)_{o_{M,S}(k),2}\cdot_{\mathbb{C}}(B_k)_{2,o_{M,T}(k)}\bigr)
 &&\left(\because\ x_k,\ y_k\ \text{の定め方}\right)\\
-&=\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_S(k),o_T(k)}
+&=\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_{M,S}(k),o_{M,T}(k)}
 &&\left(\because\ \blkref{claim_entry_of_product_of_matrices_indexed_by_two_element_set}\right).
 \end{aligned}`),
       paragraph([
@@ -3322,7 +3322,7 @@ y_k+_{\mathbb{C}}x_k
 &&\left(\because\ \text{各}\ R\ \text{で（二）。}\blkref{claim_sum_over_finite_set_depends_only_on_terms}\right)\\
 &=\prod_{\mathbb{C},\,k=1}^{M}\bigl(y_k+_{\mathbb{C}}x_k\bigr)
 &&\left(\because\ \blkref{claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers}\right)\\
-&=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_S(k),o_T(k)}
+&=\prod_{\mathbb{C},\,k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)_{o_{M,S}(k),o_{M,T}(k)}
 &&\left(\because\ \text{各}\ k\ \text{で（三）。}\blkref{def_ordered_product_in_complex_numbers}\right)\\
 &=\Bigl(\mathop{\boxtimes}\limits_{k=1}^{M}\bigl(A_k\cdot_{\mathrm{Mat}_{\{1,2\}}}B_k\bigr)\Bigr)_{S,T}
 &&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right).
@@ -3343,11 +3343,11 @@ y_k+_{\mathbb{C}}x_k
     ],
     proof: [
       paragraph([
-        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_S(k),o_T(k)}`),
-        " と置く。単位行列の定義（", ref("def_matrices_indexed_by_finite_set"), "）から ", math(String.raw`\alpha_k=\delta_{o_S(k),o_T(k)}`), " である。二つの場合に分ける。",
+        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_{M,S}(k),o_{M,T}(k)}`),
+        " と置く。単位行列の定義（", ref("def_matrices_indexed_by_finite_set"), "）から ", math(String.raw`\alpha_k=\delta_{o_{M,S}(k),o_{M,T}(k)}`), " である。二つの場合に分ける。",
       ]),
       paragraph([
-        "（", math(String.raw`S=T`), " の場合）すべての ", math(String.raw`k`), " で ", math(String.raw`o_S(k)=o_T(k)`), " なので ", math(String.raw`\alpha_k=1_{\mathbb{C}}`),
+        "（", math(String.raw`S=T`), " の場合）すべての ", math(String.raw`k`), " で ", math(String.raw`o_{M,S}(k)=o_{M,T}(k)`), " なので ", math(String.raw`\alpha_k=1_{\mathbb{C}}`),
         " である（", ref("def_kronecker_delta"), "）。番号順の積の定義が族 ", math(String.raw`\alpha`), " について定める元を ", math(String.raw`P_j`), " と書く。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3365,8 +3365,8 @@ y_k+_{\mathbb{C}}x_k
 \end{aligned}`),
       paragraph([
         "（", math(String.raw`S\neq T`), " の場合）集合の等しさの定義（", ref("def_power_set_of_first_m_positive_integers"), "）により、", math(String.raw`k\in S`), " と ",
-        math(String.raw`k\in T`), " が同値でない ", math(String.raw`r\in\{1,\dots,M\}`), " がある。", math(String.raw`o_S(r)`), " と ",
-        math(String.raw`o_T(r)`), " の一方は 2、他方は 1 なので（", ref("def_membership_index_of_subset"), "）、", math(String.raw`\alpha_r=0_{\mathbb{C}}`), " である（",
+        math(String.raw`k\in T`), " が同値でない ", math(String.raw`r\in\{1,\dots,M\}`), " がある。", math(String.raw`o_{M,S}(r)`), " と ",
+        math(String.raw`o_{M,T}(r)`), " の一方は 2、他方は 1 なので（", ref("def_membership_index_of_subset"), "）、", math(String.raw`\alpha_r=0_{\mathbb{C}}`), " である（",
         ref("def_kronecker_delta"), "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3402,8 +3402,8 @@ y_k+_{\mathbb{C}}x_k
     ],
     proof: [
       paragraph([
-        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_S(k),o_T(k)}`), "、",
-        math(String.raw`\alpha'_k:=(A'_k)_{o_S(k),o_T(k)}`), "、", math(String.raw`\alpha''_k:=(A''_k)_{o_S(k),o_T(k)}`), " と置く。", math(String.raw`k\neq r`), " なら ",
+        math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定し、", math(String.raw`k\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_k:=(A_k)_{o_{M,S}(k),o_{M,T}(k)}`), "、",
+        math(String.raw`\alpha'_k:=(A'_k)_{o_{M,S}(k),o_{M,T}(k)}`), "、", math(String.raw`\alpha''_k:=(A''_k)_{o_{M,S}(k),o_{M,T}(k)}`), " と置く。", math(String.raw`k\neq r`), " なら ",
         math(String.raw`\alpha_k=\alpha'_k=\alpha''_k`), " であり、", math(String.raw`\alpha''_r=(\lambda\cdot_{\mathbb{C}}\alpha_r)+_{\mathbb{C}}(\lambda'\cdot_{\mathbb{C}}\alpha'_r)`),
         " である（", ref("def_matrices_indexed_by_finite_set"), " の和とスカラー倍）。", math(String.raw`k\neq r`), " なら ", math(String.raw`\beta_k:=\alpha_k`), "、",
         math(String.raw`\beta'_k:=\alpha'_k`), "、", math(String.raw`\beta_r:=\lambda\cdot_{\mathbb{C}}\alpha_r`), "、", math(String.raw`\beta'_r:=\lambda'\cdot_{\mathbb{C}}\alpha'_r`),
@@ -3729,10 +3729,10 @@ r_M(k)
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb{Z}_{\ge 0}`), " とする。写像 ", math(String.raw`\bar{o}_M:\mathcal{P}_M\to\mathcal{I}_M`), "（", ref("def_tuples_of_ones_and_twos"), "）を、",
-        math(String.raw`T\in\mathcal{P}_M`), " と ", math(String.raw`t\in\{1,\dots,M\}`), " について次で定める。", math(String.raw`o_T(t)\in\{1,2\}`), " は ",
+        math(String.raw`T\in\mathcal{P}_M`), " と ", math(String.raw`t\in\{1,\dots,M\}`), " について次で定める。", math(String.raw`o_{M,T}(t)\in\{1,2\}`), " は ",
         ref("def_membership_index_of_subset"), " の添字である。",
       ]),
-      displayMath(String.raw`\bar{o}_M(T)(t):=o_T(t)`),
+      displayMath(String.raw`\bar{o}_M(T)(t):=o_{M,T}(t)`),
     ],
   },
   {
@@ -3768,7 +3768,7 @@ r_M(k)
       paragraph(["（", math(String.raw`I(t)=2`), " の場合）", math(String.raw`t\in\mathrm{pos}_M(I)`), " である（", ref("def_positions_of_two_in_tuple"), "）。"]),
       displayMath(String.raw`\begin{aligned}
 \bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)(t)
-&=o_{\mathrm{pos}_M(I)}(t)
+&=o_{M,\mathrm{pos}_M(I)}(t)
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
 &=2
 &&\left(\because\ t\in\mathrm{pos}_M(I)\text{。}\blkref{def_membership_index_of_subset}\right)\\
@@ -3778,7 +3778,7 @@ r_M(k)
       paragraph(["（", math(String.raw`I(t)=1`), " の場合）", math(String.raw`I(t)\neq 2`), " なので ", math(String.raw`t\notin\mathrm{pos}_M(I)`), " である（", ref("def_positions_of_two_in_tuple"), "）。"]),
       displayMath(String.raw`\begin{aligned}
 \bar{o}_M\bigl(\mathrm{pos}_M(I)\bigr)(t)
-&=o_{\mathrm{pos}_M(I)}(t)
+&=o_{M,\mathrm{pos}_M(I)}(t)
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
 &=1
 &&\left(\because\ t\notin\mathrm{pos}_M(I)\text{。}\blkref{def_membership_index_of_subset}\right)\\
@@ -3800,6 +3800,90 @@ r_M(k)
         math(String.raw`\bigl(\sum_{t=a}^{b-1}n_t\bigr)+n_b`), " として ", math(String.raw`b`), " について帰納的に定める。すなわち ", math(String.raw`\mathbb{Z}`),
         " の加法で ", math(String.raw`t=a,\dots,b`), " の順に足した整数である。",
       ]),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_ordered_sum_of_integers_splits_off_first_term",
+    kind: "claim",
+    title: { text: "整数の番号順の和から最初の項を分けられる" },
+    labels: ["claim_ordered_sum_of_integers_splits_off_first_term"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{Z}`), " が ", math(String.raw`a\le b`), " を満たすとし、", math(String.raw`\{a,\dots,b\}`), " の各元 ", math(String.raw`t`), " に整数 ",
+        math(String.raw`n_t\in\mathbb{Z}`), " が一つずつ与えられているとする。整数の番号順の和（", ref("def_ordered_sum_of_integers"), "）について次が成り立つ。右辺の和は、族を ",
+        math(String.raw`\{a+1,\dots,b\}`), " に制限した和である。",
+      ]),
+      displayMath(String.raw`\sum_{t=a}^{b}n_t=n_a+\sum_{t=a+1}^{b}n_t`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`b`), " についての帰納法で示す。", math(String.raw`b=a`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a}^{a}n_t
+&=\Bigl(\sum_{t=a}^{a-1}n_t\Bigr)+n_a
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合}\right)\\
+&=0+n_a
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合（}a-1<a\text{）}\right)\\
+&=n_a+0
+&&\left(\because\ \mathbb{Z}\ \text{の加法の交換法則}\right)\\
+&=n_a+\sum_{t=a+1}^{a}n_t
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合（}a<a+1\text{）}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`b\ge a+1`), " とし、", math(String.raw`b-1`), " で成り立つとする（帰納法の仮定。", math(String.raw`b-1\ge a`), " である）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a}^{b}n_t
+&=\Bigl(\sum_{t=a}^{b-1}n_t\Bigr)+n_b
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合}\right)\\
+&=\Bigl(n_a+\sum_{t=a+1}^{b-1}n_t\Bigr)+n_b
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=n_a+\Bigl(\Bigl(\sum_{t=a+1}^{b-1}n_t\Bigr)+n_b\Bigr)
+&&\left(\because\ \mathbb{Z}\ \text{の加法の結合法則}\right)\\
+&=n_a+\sum_{t=a+1}^{b}n_t
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a+1\ \text{の場合}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_ordered_sum_of_integers_is_unchanged_by_shifting_index",
+    kind: "claim",
+    title: { text: "整数の番号順の和は、足す番号を一つずらして付け替えても変わらない" },
+    labels: ["claim_ordered_sum_of_integers_is_unchanged_by_shifting_index"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{Z}`), " とし、", math(String.raw`\{a+1,\dots,b+1\}`), " の各元 ", math(String.raw`t`), " に整数 ", math(String.raw`n_t\in\mathbb{Z}`),
+        " が一つずつ与えられているとする。", math(String.raw`s\in\{a,\dots,b\}`), " なら ", math(String.raw`s+1\in\{a+1,\dots,b+1\}`), " なので、", math(String.raw`s\mapsto n_{s+1}`),
+        " は ", math(String.raw`\{a,\dots,b\}`), " の上の整数の族である。整数の番号順の和（", ref("def_ordered_sum_of_integers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{t=a+1}^{b+1}n_t=\sum_{s=a}^{b}n_{s+1}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`b`), " についての帰納法で示す。", math(String.raw`b<a`), " のとき、", math(String.raw`b+1<a+1`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a+1}^{b+1}n_t
+&=0
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合（}b+1<a+1\text{）}\right)\\
+&=\sum_{s=a}^{b}n_{s+1}
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`b\ge a`), " とし、", math(String.raw`b-1`), " で成り立つとする（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a+1}^{b+1}n_t
+&=\Bigl(\sum_{t=a+1}^{b}n_t\Bigr)+n_{b+1}
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合（}b+1\ge a+1\text{）}\right)\\
+&=\Bigl(\sum_{t=a+1}^{(b-1)+1}n_t\Bigr)+n_{b+1}
+&&\left(\because\ b=(b-1)+1\right)\\
+&=\Bigl(\sum_{s=a}^{b-1}n_{s+1}\Bigr)+n_{b+1}
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\sum_{s=a}^{b}n_{s+1}
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合}\right).
+\end{aligned}`),
     ],
   },
   {
@@ -3834,12 +3918,12 @@ r_M(k)
     ],
     proof: [
       paragraph([
-        "準備として次の二つを示す。（一）", math(String.raw`o_{\varrho_M(S)}(1)=1`), "。", ref("claim_membership_in_reversed_subset"), " により ",
+        "準備として次の二つを示す。（一）", math(String.raw`o_{M,\varrho_M(S)}(1)=1`), "。", ref("claim_membership_in_reversed_subset"), " により ",
         math(String.raw`1\in\varrho_M(S)`), " は ", math(String.raw`M\in S`), " と同値であり、", math(String.raw`S\subseteq\{1,\dots,M-1\}`), " なので ",
         math(String.raw`M\notin S`), " である。よって ", math(String.raw`1\notin\varrho_M(S)`), " であり、", ref("def_membership_index_of_subset"), " から従う。",
       ]),
       paragraph([
-        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_{\varrho_M(S)}(t)=o_{\varrho_{M-1}(S)}(t-1)`), "。", math(String.raw`t-1\in\{1,\dots,M-1\}`),
+        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_{M,\varrho_M(S)}(t)=o_{M-1,\varrho_{M-1}(S)}(t-1)`), "。", math(String.raw`t-1\in\{1,\dots,M-1\}`),
         " であり、次が成り立つ。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3859,20 +3943,22 @@ t\in\varrho_M(S)
 \mathrm{num}_M\bigl(\bar{o}_M(T)\bigr)
 &=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
-&=1+\sum_{t=1}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&=1+\sum_{t=1}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
-&=1+\Bigl(\bigl(o_T(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
-&&\left(\because\ \mathbb{Z}\ \text{の和の最初の項を分ける}\right)\\
-&=1+\Bigl((1-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&=1+\Bigl(\bigl(o_{M,T}(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \blkref{claim_ordered_sum_of_integers_splits_off_first_term}\ \text{で}\ a:=1,\ b:=M\right)\\
+&=1+\Bigl((1-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \text{（一）}\right)\\
-&=1+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&=1+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ (1-1)\cdot 2^{M-1}=0\right)\\
-&=1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{M-t}
+&=1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \text{（二）}\right)\\
-&=1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}
+&=1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}
 &&\left(\because\ M-t=(M-1)-(t-1)\right)\\
-&=1+\sum_{s=1}^{M-1}\bigl(o_{T'}(s)-1\bigr)\cdot 2^{(M-1)-s}
-&&\left(\because\ \text{足す番号を}\ s:=t-1\ \text{に付け替える}\right)\\
+&=1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}((s+1)-1)-1\bigr)\cdot 2^{(M-1)-((s+1)-1)}
+&&\left(\because\ \blkref{claim_ordered_sum_of_integers_is_unchanged_by_shifting_index}\ \text{で}\ a:=1,\ b:=M-1\right)\\
+&=1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}(s)-1\bigr)\cdot 2^{(M-1)-s}
+&&\left(\because\ (s+1)-1=s\right)\\
 &=1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
 &=\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
@@ -3895,12 +3981,12 @@ t\in\varrho_M(S)
     ],
     proof: [
       paragraph([
-        math(String.raw`T:=\varrho_M(S\cup\{M\})`), "、", math(String.raw`T':=\varrho_{M-1}(S)`), " と書く。準備として次の二つを示す。（一）", math(String.raw`o_T(1)=2`),
+        math(String.raw`T:=\varrho_M(S\cup\{M\})`), "、", math(String.raw`T':=\varrho_{M-1}(S)`), " と書く。準備として次の二つを示す。（一）", math(String.raw`o_{M,T}(1)=2`),
         "。", math(String.raw`M+1-1=M\in S\cup\{M\}`), " なので、", ref("claim_membership_in_reversed_subset"), " により ", math(String.raw`1\in T`), " であり、",
         ref("def_membership_index_of_subset"), " から従う。",
       ]),
       paragraph([
-        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_T(t)=o_{T'}(t-1)`), "。", math(String.raw`M+1-t\le M-1`), " なので ",
+        "（二）", math(String.raw`t\in\{2,\dots,M\}`), " について ", math(String.raw`o_{M,T}(t)=o_{M-1,T'}(t-1)`), "。", math(String.raw`M+1-t\le M-1`), " なので ",
         math(String.raw`M+1-t\neq M`), " であり、次が成り立つ。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3919,22 +4005,24 @@ t\in T
 \mathrm{num}_M\bigl(\bar{o}_M(T)\bigr)
 &=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
-&=1+\sum_{t=1}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}
+&=1+\sum_{t=1}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
-&=1+\Bigl(\bigl(o_T(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
-&&\left(\because\ \mathbb{Z}\ \text{の和の最初の項を分ける}\right)\\
-&=1+\Bigl((2-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&=1+\Bigl(\bigl(o_{M,T}(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&&\left(\because\ \blkref{claim_ordered_sum_of_integers_splits_off_first_term}\ \text{で}\ a:=1,\ b:=M\right)\\
+&=1+\Bigl((2-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \text{（一）}\right)\\
-&=1+\Bigl(2^{M-1}+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&=1+\Bigl(2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ (2-1)\cdot 2^{M-1}=2^{M-1}\right)\\
-&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_T(t)-1\bigr)\cdot 2^{M-t}\Bigr)
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \mathbb{Z}\ \text{の加法の交換法則と結合法則}\right)\\
-&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{M-t}\Bigr)
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \text{（二）}\right)\\
-&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}\Bigr)
+&=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}\Bigr)
 &&\left(\because\ M-t=(M-1)-(t-1)\right)\\
-&=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{T'}(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
-&&\left(\because\ \text{足す番号を}\ s:=t-1\ \text{に付け替える}\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}((s+1)-1)-1\bigr)\cdot 2^{(M-1)-((s+1)-1)}\Bigr)
+&&\left(\because\ \blkref{claim_ordered_sum_of_integers_is_unchanged_by_shifting_index}\ \text{で}\ a:=1,\ b:=M-1\right)\\
+&=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
+&&\left(\because\ (s+1)-1=s\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
 &=2^{M-1}+\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
@@ -4112,7 +4200,7 @@ I
 \nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)_{k,l}
 &=\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)_{r_M(k),\,r_M(l)}
 &&\left(\because\ \blkref{def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit}\right)\\
-&=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{o_{r_M(k)}(t),\,o_{r_M(l)}(t)}
+&=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{o_{M,r_M(k)}(t),\,o_{M,r_M(l)}(t)}
 &&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
 &=\prod_{\mathbb{C},\,t=1}^{M}\bigl(A_t\bigr)_{I(t),\,J(t)}
 &&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
@@ -4161,6 +4249,66 @@ I
     ],
   },
   {
+    id: "complex_matrix_algebra_claim_kronecker_products_of_factorwise_equal_families_are_equal",
+    kind: "claim",
+    title: { text: "因子ごとに等しい二つの族の、部分集合全体で添字づけたクロネッカー積は等しい" },
+    labels: ["claim_kronecker_products_of_factorwise_equal_families_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`t`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`A_t,\ A'_t`), " が一つずつ与えられ、すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`A_t=A'_t`),
+        " が成り立つとする。クロネッカー積（", ref("def_kronecker_product_indexed_by_power_set"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathop{\boxtimes}\limits_{t=1}^{M}A_t=\mathop{\boxtimes}\limits_{t=1}^{M}A'_t`),
+    ],
+    proof: [
+      paragraph([
+        "両辺は ", math(String.raw`\mathrm{Mat}_{\mathcal{P}_M}(\mathbb{C})`), " の元なので、", math(String.raw`S,T\in\mathcal{P}_M`), " を任意に固定して成分を比べる（",
+        ref("def_matrices_indexed_by_finite_set"), "）。", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`\alpha_t:=(A_t)_{o_{M,S}(t),\,o_{M,T}(t)}`), "、",
+        math(String.raw`\alpha'_t:=(A'_t)_{o_{M,S}(t),\,o_{M,T}(t)}`), " と置く（", ref("def_membership_index_of_subset"), "）。", math(String.raw`A_t=A'_t`),
+        " は写像としての等しさなので（", ref("def_matrices_indexed_by_finite_set"), "）、すべての ", math(String.raw`t`), " について ", math(String.raw`\alpha_t=\alpha'_t`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)_{S,T}
+&=\prod_{\mathbb{C},\,t=1}^{M}\alpha_t
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right)\\
+&=\prod_{\mathbb{C},\,t=1}^{M}\alpha'_t
+&&\left(\because\ \blkref{claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal}\right)\\
+&=\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A'_t\Bigr)_{S,T}
+&&\left(\because\ \blkref{def_kronecker_product_indexed_by_power_set}\right).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "complex_matrix_algebra_claim_kronecker_products_indexed_by_numbers_of_factorwise_equal_families_are_equal",
+    kind: "claim",
+    title: { text: "因子ごとに等しい二つの族の、番号で添字づけたクロネッカー積は等しい" },
+    labels: ["claim_kronecker_products_indexed_by_numbers_of_factorwise_equal_families_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`\{1,\dots,M\}`), " の各元 ", math(String.raw`t`), " に ", math(String.raw`\mathrm{Mat}_{\{1,2\}}(\mathbb{C})`),
+        " の元 ", math(String.raw`A_t,\ A'_t`), " が一つずつ与えられ、すべての ", math(String.raw`t\in\{1,\dots,M\}`), " について ", math(String.raw`A_t=A'_t`),
+        " が成り立つとする。番号で添字づけたクロネッカー積（", ref("def_kronecker_product_indexed_by_numbers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A'_t`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\nu_{r_M}`), " を ", ref("def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit"), " の写像、", math(String.raw`\boxtimes`), " を ",
+        ref("def_kronecker_product_indexed_by_power_set"), " のクロネッカー積とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A_t
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A_t\Bigr)
+&&\left(\because\ \blkref{claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit}\right)\\
+&=\nu_{r_M}\Bigl(\mathop{\boxtimes}\limits_{t=1}^{M}A'_t\Bigr)
+&&\left(\because\ \blkref{claim_kronecker_products_of_factorwise_equal_families_are_equal}\right)\\
+&=\mathop{\widehat{\boxtimes}}\limits_{t=1}^{M}A'_t
+&&\left(\because\ \blkref{claim_reindexing_of_kronecker_product_by_numbering_with_first_site_as_highest_digit}\ \text{で}\ A\to A'\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "complex_matrix_algebra_claim_ordered_product_of_single_site_kronecker_products",
     kind: "claim",
     title: { text: "一つの因子だけを残したクロネッカー積の番号順の積は、前の因子を残したクロネッカー積である" },
@@ -4180,8 +4328,7 @@ I
       paragraph([
         math(String.raw`\Pi_p`), "（", math(String.raw`p\in\{0,1,\dots,M\}`), "）を、族 ", math(String.raw`x_1,\dots,x_M`), " について ", ref("def_ordered_product_in_algebra"),
         " で帰納的に定めた元とする。", ref("claim_partial_product_is_ordered_product_of_restricted_family"), " により左辺は ", math(String.raw`\Pi_p`),
-        " に等しいので、", math(String.raw`\Pi_p=\mathop{\boxtimes}_{t=1}^{M}f^{[\le p]}_t`), " を ", math(String.raw`p`), " の帰納法で示す。二つのクロネッカー積は、",
-        "すべての ", math(String.raw`t`), " で因子が等しければ、成分の定義の式（", ref("def_kronecker_product_indexed_by_power_set"), "）が同じなので等しい。",
+        " に等しいので、", math(String.raw`\Pi_p=\mathop{\boxtimes}_{t=1}^{M}f^{[\le p]}_t`), " を ", math(String.raw`p`), " の帰納法で示す。",
       ]),
       paragraph([
         math(String.raw`p=0`), " のとき。すべての ", math(String.raw`t\in\{1,\dots,M\}`), " で ", math(String.raw`t>0`), " なので ", math(String.raw`f^{[\le 0]}_t=I_2`), " である（",
@@ -4194,7 +4341,7 @@ I
 &=\mathop{\boxtimes}\limits_{t=1}^{M}I_2
 &&\left(\because\ \blkref{claim_kronecker_product_of_identity_matrices_is_identity_matrix}\right)\\
 &=\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le 0]}_t
-&&\left(\because\ \text{因子が等しい}\right).
+&&\left(\because\ \blkref{claim_kronecker_products_of_factorwise_equal_families_are_equal}\text{。すべての}\ t\ \text{で}\ I_2=f^{[\le 0]}_t\right).
 \end{aligned}`),
       paragraph([
         math(String.raw`1\le p\le M`), " とし、", math(String.raw`p-1`), " で成り立つとする（帰納法の仮定）。準備として、すべての ", math(String.raw`t\in\{1,\dots,M\}`),
@@ -4248,7 +4395,7 @@ f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t
 &=\mathop{\boxtimes}\limits_{t=1}^{M}\bigl(f^{[\le p-1]}_t\cdot_{\mathrm{Mat}_{\{1,2\}}}f^{[p]}_t\bigr)
 &&\left(\because\ \blkref{claim_product_of_kronecker_products_is_kronecker_product_of_products}\right)\\
 &=\mathop{\boxtimes}\limits_{t=1}^{M}f^{[\le p]}_t
-&&\left(\because\ \text{上の準備で因子が等しい}\right).
+&&\left(\because\ \blkref{claim_kronecker_products_of_factorwise_equal_families_are_equal}\text{。因子が等しいことは上の準備}\right).
 \end{aligned}`),
     ],
   },

@@ -35,7 +35,7 @@
 - K の各元が平方根をもつこと（ℂ では ℝ の完備性への脱出）を使うのは、どの元での値も 1 の直交基底の存在だけである。
   直交基底の存在までは平方根を使わない。
 - 乗法の交換法則が初めて要るのは、どの元での値も 1 の直交基底の存在（q(e_i) の計算の (t_i s_i) s_i = s_i (t_i s_i) の行）と、
-  平方根の主張の s · s の展開（A·i = i·A、(i·B)·i = i·(i·B) の行）である。直交基底の存在までは交換法則を使わない。
+  平方根の主張の s · s の展開（û·i = i·û、(i·v̂)·i = i·(i·v̂) の行）である。直交基底の存在までは交換法則を使わない。
 - 互いに直交する族の線型結合での二次形式の値は、2 の可逆性も平方根も乗法の交換法則も使わない。
 -/
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.GeneralEvenDimensional.OrthogonalBasis
@@ -104,31 +104,31 @@ theorem exists_square_root (L : SquareRootLaws K)
     (z : K) : ∃ s : K, s * s = z := by
   obtain ⟨a, b, hz⟩ := hrep z
   obtain ⟨u, v, hstar1, hstar2⟩ := hstar a b
-  let A : K := ρ u
-  let B : K := ρ v
-  refine ⟨A + i * B, ?_⟩
-  calc (A + i * B) * (A + i * B)
-      = A * (A + i * B) + (i * B) * (A + i * B) := by rw [L.right_distrib A (i * B) (A + i * B)]
-    _ = (A * A + A * (i * B)) + ((i * B) * A + (i * B) * (i * B)) := by
-        rw [L.left_distrib A A (i * B), L.left_distrib (i * B) A (i * B)]
-    _ = (A * A + (A * i) * B) + (i * (B * A) + ((i * B) * i) * B) := by
-        rw [← L.mul_assoc A i B, L.mul_assoc i B A, ← L.mul_assoc (i * B) i B]
-    _ = (A * A + (i * A) * B) + (i * (B * A) + (i * (i * B)) * B) := by
-        rw [L.mul_comm A i, L.mul_comm (i * B) i]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + ((i * i) * B) * B) := by
-        rw [L.mul_assoc i A B, ← L.mul_assoc i i B]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + (i * i) * (B * B)) := by rw [L.mul_assoc (i * i) B B]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + (-1) * (B * B)) := by rw [hi]
-    _ = (A * A + i * (A * B)) + (i * (B * A) + -(B * B)) := by rw [L.neg_one_mul (B * B)]
-    _ = A * A + (i * (A * B) + (i * (B * A) + -(B * B))) := by
-        rw [L.add_assoc (A * A) (i * (A * B)) (i * (B * A) + -(B * B))]
-    _ = A * A + ((i * (A * B) + i * (B * A)) + -(B * B)) := by
-        rw [← L.add_assoc (i * (A * B)) (i * (B * A)) (-(B * B))]
-    _ = A * A + (-(B * B) + (i * (A * B) + i * (B * A))) := by
-        rw [L.add_comm (i * (A * B) + i * (B * A)) (-(B * B))]
-    _ = (A * A + -(B * B)) + (i * (A * B) + i * (B * A)) := by
-        rw [← L.add_assoc (A * A) (-(B * B)) (i * (A * B) + i * (B * A))]
-    _ = (A * A + -(B * B)) + i * (A * B + B * A) := by rw [← L.left_distrib i (A * B) (B * A)]
+  let uHat : K := ρ u
+  let vHat : K := ρ v
+  refine ⟨uHat + i * vHat, ?_⟩
+  calc (uHat + i * vHat) * (uHat + i * vHat)
+      = uHat * (uHat + i * vHat) + (i * vHat) * (uHat + i * vHat) := by rw [L.right_distrib uHat (i * vHat) (uHat + i * vHat)]
+    _ = (uHat * uHat + uHat * (i * vHat)) + ((i * vHat) * uHat + (i * vHat) * (i * vHat)) := by
+        rw [L.left_distrib uHat uHat (i * vHat), L.left_distrib (i * vHat) uHat (i * vHat)]
+    _ = (uHat * uHat + (uHat * i) * vHat) + (i * (vHat * uHat) + ((i * vHat) * i) * vHat) := by
+        rw [← L.mul_assoc uHat i vHat, L.mul_assoc i vHat uHat, ← L.mul_assoc (i * vHat) i vHat]
+    _ = (uHat * uHat + (i * uHat) * vHat) + (i * (vHat * uHat) + (i * (i * vHat)) * vHat) := by
+        rw [L.mul_comm uHat i, L.mul_comm (i * vHat) i]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + ((i * i) * vHat) * vHat) := by
+        rw [L.mul_assoc i uHat vHat, ← L.mul_assoc i i vHat]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + (i * i) * (vHat * vHat)) := by rw [L.mul_assoc (i * i) vHat vHat]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + (-1) * (vHat * vHat)) := by rw [hi]
+    _ = (uHat * uHat + i * (uHat * vHat)) + (i * (vHat * uHat) + -(vHat * vHat)) := by rw [L.neg_one_mul (vHat * vHat)]
+    _ = uHat * uHat + (i * (uHat * vHat) + (i * (vHat * uHat) + -(vHat * vHat))) := by
+        rw [L.add_assoc (uHat * uHat) (i * (uHat * vHat)) (i * (vHat * uHat) + -(vHat * vHat))]
+    _ = uHat * uHat + ((i * (uHat * vHat) + i * (vHat * uHat)) + -(vHat * vHat)) := by
+        rw [← L.add_assoc (i * (uHat * vHat)) (i * (vHat * uHat)) (-(vHat * vHat))]
+    _ = uHat * uHat + (-(vHat * vHat) + (i * (uHat * vHat) + i * (vHat * uHat))) := by
+        rw [L.add_comm (i * (uHat * vHat) + i * (vHat * uHat)) (-(vHat * vHat))]
+    _ = (uHat * uHat + -(vHat * vHat)) + (i * (uHat * vHat) + i * (vHat * uHat)) := by
+        rw [← L.add_assoc (uHat * uHat) (-(vHat * vHat)) (i * (uHat * vHat) + i * (vHat * uHat))]
+    _ = (uHat * uHat + -(vHat * vHat)) + i * (uHat * vHat + vHat * uHat) := by rw [← L.left_distrib i (uHat * vHat) (vHat * uHat)]
     _ = (ρ (u * u) + -ρ (v * v)) + i * (ρ (u * v) + ρ (v * u)) := by
         rw [hρmul u u, hρmul v v, hρmul u v, hρmul v u]
     _ = (ρ (u * u) + ρ (-(v * v))) + i * (ρ (u * v) + ρ (v * u)) := by
