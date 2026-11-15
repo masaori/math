@@ -1,0 +1,4 @@
+QQ[m, a] で恒等的な段 9 個と、m = -1 でだけ成り立つ加法の逆元（z → 1）の段 1 個を確かめた（等号 10 個）
+m = -1 を代入して全ての行が -a になった
+negative controls (broken lines detected): 3
+RESULT: PASS

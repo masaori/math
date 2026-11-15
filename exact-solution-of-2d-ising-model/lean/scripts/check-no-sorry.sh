@@ -2976,6 +2976,9 @@ targets=(
   Ising2D.real_minus_zero_is_self
   Ising2D.NecSuf.sub_zero_of_negZero
   Ising2D.real_minus_zero_is_self_of_necSuf
+  Ising2D.real_minus_one_times_is_negation
+  Ising2D.NecSuf.neg_one_mul_of_rightDistrib
+  Ising2D.real_minus_one_times_is_negation_of_necSuf
   Ising2D.real_zero_divided_is_zero
   Ising2D.NecSuf.zero_div_of_zeroMul
   Ising2D.real_zero_divided_is_zero_of_necSuf

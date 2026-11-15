@@ -1305,7 +1305,7 @@ b
 &= \bigl((-1)a,\ (-1)b\bigr)
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= (-a,-b)
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})
+&&(\because\ \blkref{real_minus_one_times_is_negation}\ (a\to a,\ a\to b)\ \text{を 2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -1420,6 +1420,7 @@ b
           "本証明では RR^2 の成分ごとの加法を採ることを冒頭で明示した。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: -z と (-1_C)·z の一致の鎖の最後の行が「1 は積の単位元、0 を因子にもつ積は 0、0 は和の単位元」を 1 行で当てていたので、real_zero_times_is_zero（同じファイルの後ろのブロック）の参照の行・0 は和の単位元の行・1 は積の単位元の行の 3 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の ((−1)a − 0, (−1)b + 0) = ((−1)a, (−1)b) の行は、体の公理でない a − 0 = a と和の単位元 x + 0 = x を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → (−1)a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の最後の行 ((−1)a, (−1)b) = (−a, −b) は、−a が加法の逆元なのに「1 は積の単位元」だけで済ませていた（(−1)a = −(1·a) の段が無い）ので、real_minus_one_times_is_negation（a → a, a → b。同じファイルの後ろのブロック）の参照に替えた。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
       ],
     },
   },
@@ -1793,6 +1794,69 @@ a - 0
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。a − 0 = a は体の公理に含まれないのに、cosine_zero・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde などの証明が「ℝ で a − 0 = a（ℝ は体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_minus_zero_is_self（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealMinusZeroIsSelf.lean）、必要十分版は Ising2D.NecSuf.sub_zero_of_negZero（NecSuf/SubZeroOfNegZero.lean）。数値検証: sagemath/check/real_minus_zero_is_self/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_minus_one_times_is_negation",
+    kind: "claim",
+    title: { text: "実数に −1 を左から掛けると符号が反転する" },
+    labels: ["real_minus_one_times_is_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`-1`),
+        " と ",
+        math(String.raw`-a`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to 1`),
+        "、",
+        math(String.raw`z \to a`),
+        "）、和・積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`(-1)\cdot a = -a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-1)\cdot a
+&= (-1)\cdot a + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (-1)\cdot a + \bigl(a + (-a)\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot a + a\bigr) + (-a)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((-1)\cdot a + 1\cdot a\bigr) + (-a)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot a = a\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl((-1) + 1\bigr)\cdot a + (-a)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x + y)c = xc + yc\ (x \to -1,\ y \to 1,\ c \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(1 + (-1)\bigr)\cdot a + (-a)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0\cdot a + (-a)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 1)\bigr)\\
+&= 0 + (-a)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to a)\bigr)\\
+&= (-a) + 0
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -a
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。(−1)·a = −a は体の公理に含まれない（−a は加法の逆元として定めた）のに、complex_numbers_form_a_field の (−1_C)·(a,b) の鎖の最後の行が「1 は積の単位元」だけで ((−1)a, (−1)b) = (−a, −b) を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_minus_one_times_is_negation（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealMinusOneTimesIsNegation.lean）、必要十分版は Ising2D.NecSuf.neg_one_mul_of_rightDistrib（NecSuf/NegOneMulOfRightDistrib.lean）。数値検証: sagemath/check/real_minus_one_times_is_negation/。",
       ],
     },
   },

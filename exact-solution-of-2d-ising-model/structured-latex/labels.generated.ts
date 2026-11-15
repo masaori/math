@@ -579,6 +579,7 @@ export const ALL_LABELS = [
   "real_matrix_of_real_entry_matrix_preserves_product",
   "real_matrix_vector_product_commutes_with_real_scalar_multiple",
   "real_matrix_vector_product_is_associative",
+  "real_minus_one_times_is_negation",
   "real_minus_zero_is_self",
   "real_multiple_of_hermitian_is_hermitian",
   "real_negation_of_zero_is_zero",
