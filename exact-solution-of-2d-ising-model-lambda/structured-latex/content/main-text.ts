@@ -80355,12 +80355,32 @@ D_L^{a,b}(x)
                       labels: ["claim_determinant_polynomial_square_root_exists"],
                       habitat: "Qbar",
                       verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                      lean: [
+                        "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_coeff_zero",
+                        "Ising2DLambda.KacWard.kacWardDeterminant_qbarPolynomialSquareRoot",
+                        "Ising2DLambda.KacWard.kacWardDeterminant_squareRoot_eq_signedEvenSubgraphPolynomial",
+                        "Ising2DLambda.KacWard.kacWardDeterminant_existsUnique_qbarPolynomialSquareRoot",
+                        "Ising2DLambda.NecSuf.KacWard.sum_ite_degree_zero_eq_one_necSuf",
+                        "Ising2DLambda.NecSuf.KacWard.existsUnique_squareRoot_of_witness_necSuf",
+                        "Ising2DLambda.KacWard.kacWardDeterminant_existsUnique_qbarPolynomialSquareRoot_from_necSuf",
+                      ],
                       statement: [
                         paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と各ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " について、", ref("def_kac_ward_determinants"), " の ", math(String.raw`D_L^{a,b}\in\overline{\mathbb Q}[x]`), " には ", ref("def_qbar_polynomial_square_root"), " の意味で定数項一の多項式平方根が存在する。その平方根を ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " と書く。", ref("claim_qbar_polynomial_square_root_unique"), " により一意である。実数体・複素数体は使わない。"]),
                       ],
                       proof: [
-                        paragraph([ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`Q_L^{a,b}`), " を係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送る。定数項は"]),
-                        displayMath(String.raw`\mathrm{ac}_0(Q_L^{a,b})=1\quad(\because\ \blkref{def_signed_even_subgraph_polynomial}\text{ で空の偶部分グラフだけが次数零の項を与える})`),
+                        paragraph([ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`Q_L^{a,b}`), " を係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送る。係数の包含は係数ごとに施すので、定数項は ", math(String.raw`\mathbb Z`), " の中で計算してよい。定数項は"]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(Q_L^{a,b})
+&=\sum_{\substack{A\subseteq E_L,\ \operatorname{Even}_L(A)\\ |A|=0}}
+(-1)^{(1+a)\,\varepsilon_{L,\mathrm{h}}(A)+(1+b)\,\varepsilon_{L,\mathrm{v}}(A)+\varepsilon_{L,\mathrm{h}}(A)\,\varepsilon_{L,\mathrm{v}}(A)}
+&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\text{ の }x^{0}\text{ の係数}\bigr)\\
+&=(-1)^{(1+a)\,\varepsilon_{L,\mathrm{h}}(\emptyset)+(1+b)\,\varepsilon_{L,\mathrm{v}}(\emptyset)+\varepsilon_{L,\mathrm{h}}(\emptyset)\,\varepsilon_{L,\mathrm{v}}(\emptyset)}
+&&\bigl(\because\ |A|=0\Leftrightarrow A=\emptyset\text{、}\forall v\in V_L:\ d_{\emptyset}(v)=0=2\cdot0\text{ より }\blkref{def_even_edge_subset}\text{ の }\operatorname{Even}_L(\emptyset)\bigr)\\
+&=(-1)^{(1+a)\cdot0+(1+b)\cdot0+0\cdot0}
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\text{ で }|\emptyset\cap C_{L,\mathrm{h}}|=|\emptyset\cap C_{L,\mathrm{v}}|=0\bigr)\\
+&=1
+&&\bigl(\because\ (-1)^{0}=1\bigr)
+\end{aligned}`),
                         paragraph(["である。平方は"]),
                         displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square}).`),
                         paragraph(["よって ", math(String.raw`Q_L^{a,b}`), " が平方根の存在証人である。一意性から"]),

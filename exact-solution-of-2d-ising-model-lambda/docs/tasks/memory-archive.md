@@ -1,4 +1,12 @@
+2026-11-14（並列）: Pfaffian の式鎖の五行目から八行目（二次符号の指数表示、切断線偶奇から巻き付き偶奇への置換、係数の送り）を Lean 具体版 `gaugedPfaffian_eq_signedEvenSubgraphPolynomial`・必要十分版・導出版で示し、`claim_pfaffian_signed_even_subgraph` の `lean:` に七件を登録した。本文・SageMath は不変。
+
 2026-11-14（主経路）: 反復横断階段の一歩の差を整数除法の二場合で示し、横断座標の増加・下界・単射性を Lean 具体版で直接示した。必要十分版への委譲を一件外し、本文の式鎖末尾を整えた。
+
+2026-11-14（並列）: Pfaffian の式鎖の一行目から四行目 $\operatorname{Pf}(K^{\mathrm{as}})=\sum_{P}\chi_{a,b}(h(P),v(P))x^{|P|}$ を Lean 具体版 `gaugedPfaffian_eq_seamSignedEvenSubgraphSum`・必要十分版 `sum_eq_sum_over_complements_of_fiber_signs`・導出版で示した。本文の二行目の根拠に零の項を落とす段を足した（式は不変）。
+
+2026-11-14（主経路）: 反復横断階段の一歩の差を整数除法の二場合で示し、横断座標の増加・下界・単射性を Lean 具体版で直接示した。必要十分版への委譲を一件外し、本文の式鎖末尾を整えた。
+
+2026-11-14（並列）: Pfaffian の式鎖の一行目から四行目 $\operatorname{Pf}(K^{\mathrm{as}})=\sum_{P}\chi_{a,b}(h(P),v(P))x^{|P|}$ を Lean 具体版 `gaugedPfaffian_eq_seamSignedEvenSubgraphSum`・必要十分版 `sum_eq_sum_over_complements_of_fiber_signs`・導出版で示した。本文の二行目の根拠に零の項を落とす段を足した（式は不変）。
 
 2026-11-14（並列）: Pfaffian の式鎖で書かれていなかった、補辺の切断線偶奇 $h(P),v(P)$ と巻き付き偶奇 $\varepsilon_{L,\mathrm h}(P),\varepsilon_{L,\mathrm v}(P)$ の一致を本文の主張二つにし、SageMath・Lean 具体版・必要十分版・導出版で示した（`KacWard/EdgeSetSeamWindingParity.lean`）。
 
