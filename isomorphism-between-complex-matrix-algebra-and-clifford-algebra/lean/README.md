@@ -118,7 +118,10 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「同型の証明」のうち、行列環からクリフォード代数への準同型（ℰ_{S,T} の定義と積の規則、Ψ の定義、Ψ が線型・行列単位を ℰ_{S,T} へ移す・行列単位どうしの積を保つ・ℂ-代数の準同型であること） | `Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `HomomorphismFromMatrixAlgebraFromNecSuf.lean` |
 | 章「同型の証明」のうち、二つの準同型が互いに逆であること（Φ(ℰ_{S,T}) = E_{S,T}、Φ ∘ Ψ = 恒等写像、生成作用素の列の和・消滅作用素の行の和、Ψ(c_i) = a†_i・Ψ(c_i^T) = a_i、γ((x, g)) の分解、Ψ ∘ Φ = 恒等写像、主定理） | `Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `NecSuf/Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `MutuallyInverseHomomorphismsFromNecSuf.lean` |
 | 章「同型の証明」のうち、系「行列単位にあたる元はクリフォード代数の基底をなす」（b の定義、Φ(Σ λ_m ∗ b_m) の成分、一次独立、張ること、基底であること） | `Isomorphism/BasisOfMatrixUnitElements/BasisOfMatrixUnitElements.lean` | `NecSuf/Isomorphism/BasisOfMatrixUnitElements/BasisOfMatrixUnitElements.lean` | `BasisOfMatrixUnitElementsFromNecSuf.lean` |
+| 章「同型の証明」の系「一般の偶数次元の非退化な二次空間」のうち、二次形式の補題と直交基底の存在（1+1≠0、偏極の第二引数の線型性・対角での値、一つの元の倍を足した族、第 k 元まで直交化された基底と直交化の一歩） | `Isomorphism/GeneralEvenDimensional/OrthogonalBasis.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/OrthogonalBasis.lean` | `OrthogonalBasisFromNecSuf.lean` |
+| 同じ系のうち、虚数単位、ℂ の元の平方根の存在、値が 1 の直交基底の存在、直交する族の線型結合での二次形式の値 | `Isomorphism/GeneralEvenDimensional/OrthonormalBasis.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/OrthonormalBasis.lean` | `OrthonormalBasisFromNecSuf.lean` |
 | 章「同型の証明」の系「一般の偶数次元の非退化な二次空間」のうち、基底の座標を係数にした族の線型結合の写像 L_{b,u}、基底を動かさない線型写像は恒等写像、等長写像の右逆、等長写像が誘導するクリフォード代数の準同型 Cl(θ) と逆向きの合成 | `Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `InducedHomomorphismFromNecSuf.lean` |
+| 同じ系のうち、分裂した二次空間の記号と一般の非退化な二次空間の設定、族 u・v、等長写像 θ・θ' と互いに逆であること、系の定理 | `Isomorphism/GeneralEvenDimensional/IsometryToSplitSpace.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/IsometryToSplitSpace.lean` | `IsometryToSplitSpaceFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -258,3 +261,22 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 二つの和の和の並べ替えと、等長写像の右逆の線型写像が等長写像であることは、係数の性質を一つも使わない。
 - Cl(θ) の存在と一意性、逆向きの等長写像が誘導する準同型の合成が恒等写像であることは、`CliffordLaws K n` と a + (-a) = 0 のほかに K の性質を足さない。
   三つとも q・q' が二次形式であることを使わないので、必要十分版は等長写像の仮定を「θ が線型」と「q'(θ(x)) = q(x)」の二つに分けて置く。
+
+## 必要十分版が示したこと（系「一般の偶数次元の非退化な二次空間」の、直交基底と値が 1 の直交基底）
+
+- 直交基底の存在までは、K の乗法の交換法則も平方根も使わない。
+- 2 の可逆性（1+1≠0）は「0 でない二元の積は 0 でない」と組で、B_q(v,v)=(1+1)·q(v) が 0 でないことを出す二か所（第 k+1 元の取り替えと直交化の一歩）だけが使う。
+  1≠0 は一次独立な族の元が零ベクトルでないことで要り、0 でない元の逆元は直交化の一歩だけが使う。
+- 平方根の存在と乗法の交換法則が要るのは、値が 1 の直交基底の存在だけである。平方根の主張の K の側は、可換な環の性質・i·i=-1・ρ が加法と乗法を保つことだけを使い、
+  順序と ℝ の完備性は ℝ だけの主張 (★)（uu−vv=a・2uv=b を満たす u, v がある）の仮定の中に閉じる。
+- 「1+1≠0」「i·i=-1」は ℂ の前提の事実で、必要十分版では宣言を置かず、使う主張の仮定にした（導出版も置かない）。
+- 互いに直交する族の線型結合での二次形式の値は、加法の性質と a·0=0・0·a=0 だけを使う。
+
+## 必要十分版が示したこと（系「一般の偶数次元の非退化な二次空間」の、等長写像の構成と系の定理）
+
+- K の各元が平方根をもつこと（ℂ では ℝ の完備性への脱出）と、0 でない元の逆元と、Q の非退化性は、値が 1 の直交基底 e を固定する段（`orthonormalBasis`）だけが使う。
+  θ・v・θ' の主張と、誘導される準同型で主定理を運ぶ段は、e が三つの条件（基底・直交・値が 1）を満たすことしか使わない。
+- 2 の可逆性が要るのは逆向きの写像 θ' の族 v だけで、θ が等長写像であることには要らない。
+- i·i = -1 は、族 u の各元での q の値が 1 であることと、θ・θ' が u・v を互いの基底へ移すことに要る。u の異なる二元が直交することは i·i = -1 を使わない。
+- 主定理の仮定（`CliffordLaws K n` と a + (-a) = 0）のほかに行の中で足す K の性質は、(-a)·b = -(a·b) と -(-a) = a と、Q が二次形式であることである。
+- 本文の前提 M ∈ ℤ_{≥1} は、どの主張も使わない（M = 0 でも同じ証明が通る）。
