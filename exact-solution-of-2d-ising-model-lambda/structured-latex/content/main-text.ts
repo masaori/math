@@ -84736,6 +84736,11 @@ Z_L(q)
                 labels: ["claim_partition_log_order_bounds"],
                 habitat: "Lambda",
                 verification: ["sagemath/check/partition-log-order-bounds"],
+                lean: [
+                  "Ising2DLambda.KacWard.partitionLogOrderBounds",
+                  "Ising2DLambda.NecSuf.KacWard.partition_log_order_bounds_necSuf",
+                  "Ising2DLambda.KacWard.partitionLogOrderBounds_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
@@ -84780,13 +84785,17 @@ Z_L(q)
                     ref("claim_signed_even_subgraph_rational_sign"),
                     " により四つの値は正なので ",
                     math(String.raw`M_L^{\mathrm{abs}}(q)=M_L(q)>0`), " である。",
-                    ref("claim_low_temperature_partition_bounds"), " から ",
+                    ref("claim_low_temperature_partition_bounds"), " の ",
+                    math(String.raw`M_L(q)/2\le Z_L(q)\le2M_L(q)`), " と ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)/4\le M_L^{\mathrm{abs}}(q)/2`),
+                    " から ",
                     math(String.raw`M_L^{\mathrm{abs}}(q)/4\le Z_L(q)\le2M_L^{\mathrm{abs}}(q)`),
                     " を得る。", math(String.raw`q^2+2q-1>0`), " の場合も ",
                     ref("claim_high_temperature_partition_bounds"), " が同じ不等式を与える。",
-                    "両場合で ", math(String.raw`M_L^{\mathrm{abs}}(q)>0`),
-                    " であり、", ref("claim_value_at_rational_is_positive"),
-                    " により ", math(String.raw`Z_L(q)>0`), " である。",
+                    ref("claim_value_at_rational_is_positive"),
+                    " により ", math(String.raw`Z_L(q)>0`), " であり、両場合の上界 ",
+                    math(String.raw`Z_L(q)\le2M_L^{\mathrm{abs}}(q)`), " から ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)>0`), " である。",
                   ]),
                   paragraph([
                     "有理数の正の数倍と ", ref("claim_rational_log_order_iff"),

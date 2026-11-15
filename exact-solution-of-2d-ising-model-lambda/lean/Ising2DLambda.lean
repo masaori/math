@@ -2120,3 +2120,6 @@ import Ising2DLambda.RealEscape.PeriodicDensityModeMaxLimitFromNecSuf
 import Ising2DLambda.RealEscape.SequenceLowerSetSupRealLimit
 import Ising2DLambda.NecSuf.RealEscape.SequenceLowerSetSupRealLimit
 import Ising2DLambda.RealEscape.SequenceLowerSetSupRealLimitFromNecSuf
+import Ising2DLambda.KacWard.PartitionLogOrderBounds
+import Ising2DLambda.NecSuf.KacWard.PartitionLogOrderBounds
+import Ising2DLambda.KacWard.PartitionLogOrderBoundsFromNecSuf
