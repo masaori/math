@@ -2994,6 +2994,9 @@ targets=(
   Ising2D.real_zero_less_than_one
   Ising2D.NecSuf.zero_lt_one_of_orderedAxioms
   Ising2D.real_zero_less_than_one_of_necSuf
+  Ising2D.real_zero_less_than_two
+  Ising2D.NecSuf.zero_lt_two_of_orderedAxioms
+  Ising2D.real_zero_less_than_two_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products

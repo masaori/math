@@ -2182,6 +2182,66 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_zero_less_than_two",
+    kind: "claim",
+    title: { text: "実数の 0 は 2 より小さい" },
+    labels: ["real_zero_less_than_two"],
+    statement: [
+      paragraph([
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`0 < 2`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`1 < 2`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&= 0 + 1
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&< 1 + 1
+&&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to 1,\ c \to 1\bigr)\\
+&= 2
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["本体。"]),
+      displayMath(String.raw`\begin{aligned}
+0 < 1\ \land\ 1 < 2
+&\Longrightarrow 0 < 2
+&&\bigl(\because\ \text{左の}\ 0 < 1\ \text{は}\ \blkref{real_zero_less_than_one}\text{、}1 < 2\ \text{は準備の鎖。}\mathbb{R}\ \text{の順序の推移律（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 2 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} など）、2 を def_real_two で定めたので、その 2 について 0 < 2 を real_zero_less_than_one から示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_two（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanTwo.lean）、必要十分版は Ising2D.NecSuf.zero_lt_two_of_orderedAxioms（NecSuf/ZeroLtTwoOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_two/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

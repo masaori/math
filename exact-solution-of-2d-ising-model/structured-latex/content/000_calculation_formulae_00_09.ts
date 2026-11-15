@@ -170,6 +170,41 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_definition_real_two",
+    kind: "definition",
+    title: { text: "実数の 2" },
+    labels: ["def_real_two"],
+    statement: [
+      paragraph([
+        "本文で ",
+        math(String.raw`\mathbb{R}`),
+        " の元として書く ",
+        math(String.raw`2 \in \mathbb{R}`),
+        " を",
+      ]),
+      displayMath(String.raw`2 := 1 + 1`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の単位元 ",
+        math(String.raw`1_{\mathbb{R}}`),
+        "、和は ",
+        math(String.raw`+_{\mathbb{R}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 2 を def_real_quotient の分母（π/2 など）や係数に使い、0 < 2・2 ≠ 0・1 + 1 = 2 を名前だけで根拠にしていたが、set_and_algebra_notation は ℝ の元として 0_ℝ・1_ℝ しか挙げず、2 を定めるブロックが無かった。def_real_difference・def_real_quotient と同じく set_and_algebra_notation の直後の定義の並びに置いた。0 < 2 は real_zero_less_than_two で示す。Lean では ℝ の数字 2 を mathlib の one_add_one_eq_two（1 + 1 = 2）で読む。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_000c0_claim_positive_real_square_injective",
     kind: "claim",
     title: { text: "正の実数の二乗の一意性" },
