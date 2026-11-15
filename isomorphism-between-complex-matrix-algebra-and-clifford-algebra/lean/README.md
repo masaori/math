@@ -76,6 +76,9 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   Lean では型が別の式になるので、その間の写像に名前を付ける：組には `castTuple`、T_j には `TensorPowers.castT`。どちらも番号の等式を
   `subst` すると恒等写像になり、加法・スカラー倍・τ と交換する。テンソル代数の積の項 m_{i,p-i}(x_i, y_{p-i}) は castT で T_p へ運ぶ。
 - {0,…,N} は ℕ の部分型 `UpTo N` で、番号付けは本文どおり e(s) := s - 1（`upToNumbering`）。
+- 各成分が 1 か 2 の組 I ∈ 𝓘_M は `Idx M → Idx 2`（写像の等しさが I = J になるよう、{1,…,M} の外の値を持たせない）。番号 t ∈ ℕ を受け取る式には
+  {1,…,M} の外で値 1 に延ばした `extendFamily I idxOne` を渡す。整数の番号順の和 Σ_{t=a}^{b}（a, b ∈ ℤ）は ℤ → ℤ の族について項の個数で値を定め、
+  本文の二つの場合の式（b < a、b ≥ a）を補題にして以後はそれだけを引く。num_M の値は ℤ の元で、{1,…,2^M} への写像は `tupleNumberIdx`、その逆写像は `tupleNumberInv`。
 - テンソル代数の積・単位元・ℂ-代数であることは任意の j 重テンソル積の族 `P : TensorPowers SV` の上で書き、本文の T(V) は
   P := `coordinateTensorPowers SV n b hb`（座標による構成）の場合である。座標による構成を使うのは、埋め込みの像が生成することと普遍性だけである。
 - テンソル代数の普遍性の A は任意の宇宙 w の型に置く。F_k を定めるのに (T_k, τ_k) の普遍性を U = U_vec(A) に当てるので、
@@ -111,6 +114,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「複素行列環」：部分集合全体 P_M と 2 進の番号付け、組の番号付け | `ComplexMatrixAlgebra/PowerSetNumbering/` の 3 ファイル | 置かない（ℂ を含まず両版が引く） | なし |
 | 章「複素行列環」：番号付けによる行列の添字の付け替えと 2 進の番号付けによる行列環の同型 | `ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `NecSuf/ComplexMatrixAlgebra/MatrixReindexing/` の 2 ファイル | `MatrixReindexingFromNecSuf.lean` |
 | 章「複素行列環」：クロネッカー積と、二つの行列で挟む写像 | `ComplexMatrixAlgebra/KroneckerProduct/` の 4 ファイル（`MembershipIndex.lean` は ℂ を含まず両版が引く） | `NecSuf/ComplexMatrixAlgebra/KroneckerProduct/` の 3 ファイル | `KroneckerProductFromNecSuf.lean` |
+| 章「複素行列環」：番号を逆順に付け替える写像と番号 1 を最上位の桁にする番号付け r_M、各成分が 1 か 2 の組と組の番号 num_M、整数の番号順の和、r_M による付け替え ν_{r_M}・μ_{r_M}、番号で添字づけたクロネッカー積、一つの因子だけを残したクロネッカー積の番号順の積 | `ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/` の 6 ファイル（`SubsetReversal`・`TuplesOfOnesAndTwos`・`OrderedIntegerSum`・`TupleNumber` は ℂ を含まず両版が引く） | `NecSuf/ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/` の 2 ファイル | `FirstSiteHighestDigitNumberingFromNecSuf.lean` |
 | 章「同型の証明」のうち、生成作用素の行列の定義とその成分・反交換関係・空集合の位置の行列単位 | `Isomorphism/CreationOperatorMatrices/` の 7 ファイル（`CountAndSign.lean`・`IndexSetOperations.lean`・`VacuumIndexSets.lean` は ℂ を含まず両版が引く） | `NecSuf/Isomorphism/CreationOperatorMatrices/` の 4 ファイル | `CountAndSignFromNecSuf.lean`・`CreationMatricesFromNecSuf.lean`・`VacuumMatrixUnitFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数から行列環への準同型（c_i² = 0・(c_i^T)² = 0、φ、Φ の存在と一意性、Φ(a†_i) = c_i・Φ(a_i) = c_i^T） | `Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `HomomorphismToMatrixAlgebraFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数の中の局所的な等式（a†_S・a_T・P の定義、a_i P = 0・P a†_i = 0、生成元を左から・消滅元を右から掛けた式） | `Isomorphism/LocalIdentities/LocalIdentities.lean` | `NecSuf/Isomorphism/LocalIdentities/LocalIdentities.lean` | `LocalIdentitiesFromNecSuf.lean` |
@@ -130,6 +134,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 同じ系のうち、φ' とその線型性・平方、Φ' の存在と一意性、Φ' ∘ j、Φ'(g) | `Isomorphism/OddDimensional/HomomorphismToPairOfMatrices.lean` | `NecSuf/Isomorphism/OddDimensional/HomomorphismToPairOfMatrices.lean` | `HomomorphismToPairOfMatricesFromNecSuf.lean` |
 | 同じ系のうち、Φ'(z)、e_± := ½(1 ± z) と、e_σ·e_σ = e_σ・e_σ·e_{-σ} = 0・e_+ + e_- = 1・e_+ − e_- = z・中心に入ること、Φ'(e_σ) | `Isomorphism/OddDimensional/Idempotents.lean` | `NecSuf/Isomorphism/OddDimensional/Idempotents.lean` | `IdempotentsFromNecSuf.lean` |
 | 同じ系のうち、Ψ' とそれが準同型であること、Φ' ∘ Ψ' = 恒等写像、Ψ' ∘ Φ' = 恒等写像、系の定理 | `Isomorphism/OddDimensional/HomomorphismFromPairOfMatrices.lean` | `NecSuf/Isomorphism/OddDimensional/HomomorphismFromPairOfMatrices.lean` | `HomomorphismFromPairOfMatricesFromNecSuf.lean` |
+| 章「同型の証明」の系「複素行列版イジングの Jordan–Wigner 行列への接続」の前半（Pauli 行列 σx・σy・σz、K・K' とその積・K で挟んだ Pauli 行列、σz の対角成分の部分積、c_m・c_m^T のクロネッカー積による表示、Z_m・Y_m、U・U' とその積、c_m + c_m^T などを U と U' で挟んだ行列、Φ_Y が直交基底の元を送る先、Ω・Ω' と系の定理） | `Isomorphism/JordanWignerMatrices/` の 5 ファイル（`TwoElementSetMembers.lean` は ℂ を含まず両版が引く） | `NecSuf/Isomorphism/JordanWignerMatrices/` の 4 ファイル | `PauliMatricesFromNecSuf.lean`・`CreationMatricesAsKroneckerProductsFromNecSuf.lean`・`JordanWignerConjugationFromNecSuf.lean`・`ConjugatedIsomorphismFromNecSuf.lean` |
+| 同じ系の後半（番号で添字づけたサイトごとの Pauli 行列 σ^a_k、Jordan–Wigner 行列の因子 F^{(b)}_{m,j}、番号で添字づけた Z^{(2^M)}_m・Y^{(2^M)}_m、ν_{r_M}(Z_m) = Z^{(2^M)}_m・ν_{r_M}(Y_m) = Y^{(2^M)}_m、Ω̂ := ν_{r_M} ∘ Ω・Ω̂' := Ω' ∘ μ_{r_M}、Ω̂ が直交基底の元の像を送る先、系の定理） | `Isomorphism/JordanWignerMatrices/` の `PauliLabels`（ℂ を含まず両版が引く）・`IndexedByNumbers`・`IsomorphismIndexedByNumbers` | `NecSuf/Isomorphism/JordanWignerMatrices/` の `IndexedByNumbers`・`IsomorphismIndexedByNumbers` | `IndexedByNumbersFromNecSuf.lean`・`IsomorphismIndexedByNumbersFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -221,6 +227,16 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 空集合の位置の行列単位についての三つの主張は、本文の前提 M ∈ ℤ_{≥1} を使わない（M = 0 でも同じ証明が通る）。
   第二・第三の主張は n について何も仮定しない（使う符号は ς(0) = 1 だけ）。
 
+## 必要十分版が示したこと（章「複素行列環」の、番号 1 を最上位の桁にする番号付けと番号で添字づけたクロネッカー積）
+
+- ϱ_M・r_M・𝓘_M・ō_M・pos_M・整数の番号順の和・num_M と、それらの主張（r_M が番号付けであること、num_M が全単射で ō_M ∘ r_M の逆であること）は
+  ℂ を含まないので、必要十分版を置かない。
+- ν_{r_M}・μ_{r_M}・番号で添字づけたクロネッカー積、部分集合全体で添字づけたクロネッカー積を ν_{r_M} で付け替えると番号で添字づけたクロネッカー積になること、
+  因子ごとに等しい族の番号で添字づけたクロネッカー積が等しいことは、係数の性質を一つも使わない。
+- 一つの因子だけを残したクロネッカー積の番号順の積の主張は、K について、行列の集合を代数にするための乗法の交換法則と a · 0 = 0 のほかに足す性質が無い
+  （a · 1 = a と 0 · a = 0 は、交換法則と L の 1 · a = a、a · 0 = 0 から出る）。証明の準備 f^{[≤p]}_t · f^{[p+1]}_t = f^{[≤p+1]}_t は、0 と 1 の交換だけで足りる。
+- 本文の前提 M ∈ ℤ_{≥1}（番号で添字づけたクロネッカー積とその主張、一つの因子だけを残した族）と p ∈ {0,…,M}・j ∈ {1,…,M} は、どの証明も使わない（M = 0 でも、p > M でも同じ証明が通る）。
+
 ## 必要十分版が示したこと（章「同型の証明」のクリフォード代数から行列環への準同型と、クリフォード代数の中の局所的な等式）
 
 - c_i · c_i = 0 と c_i^T · c_i^T = 0 には、`ValuedMapsLaws`（L）・a · 1 = a・a · 0 = 0・0 · a = 0 だけが要る。具体版が ℂ の乗法の交換法則を当てる
@@ -303,3 +319,29 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   系の段の仮定 h·(1+1) = 1 は、どれも e_± を作る段（平方・和・差、Φ'(e_±) の値）から来る。行の中で足す K の性質は 0 + 0 = 0、a·0 = 0、1 + (-1) = 0、
   -n = 1、1 + n = 0、a·n = -a だけで、K の乗法の交換法則は使わない。
 - 本文の前提 M ∈ ℤ_{≥1} と、主張の「i ∈ {1,…,M}」（g と j(χ_i) の交換）・「σ ∈ {1,-1}」（e_σ の交換と Φ'(e_σ)）は、証明が使わないので仮定に置かない。
+
+## 必要十分版が示したこと（系「複素行列版イジングの Jordan–Wigner 行列への接続」の前半）
+
+- K と K' が互いの逆であること（したがって U と U' が互いの逆であること）に要る 2 の可逆性は (1 + 1) · h = 1 の片側だけで、準備 h + h = 1 の一か所から来る。
+  Φ_Y が e_m・e_{M+m} を送る先（c_m + c_m^T、(-i) ∗ c_m + i ∗ c_m^T）は 2 の可逆性を使わない。Ω' を作る段（Ψ_Y）だけが h · (1 + 1) = 1 も使う。
+- i · i = -1 は、この節のどの行も使わない。σy・Y_m と K G' = σy K は i が K のどの元でも成り立ち、i · i = -1 は Φ_Y を作る段（θ が等長写像であること）から来るだけである。
+- {1,2} の行列の等式（K K' = 1、K' K = 1、K σz = σx K、K G = σz K、K G' = σy K）と非対角の行列単位の線型結合の成分は、K の乗法の交換法則を使わない。
+  具体版の「ℂ の四則」の行で要るのは、0・1・-1 との積の規則（a · 0 = 0、0 · a = 0、a · 1 = a、1 · a = a、(-a) · b = -(a · b)、a · (-b) = -(a · b)）と
+  -(-a) = a、a + (-a) = 0 だけである。乗法の交換法則が要るのは、クロネッカー積の積の主張と行列の積の結合法則を経由する U・U' と Z_m・Y_m の主張からである。
+- σz の対角成分の部分積が ς(N_i(T)) であることには、σz の (2,2) 成分 -1（加法の逆元）と ς を定める n が等しいこと（-1 = n）と、-1 がどの元とも交換することが要る。
+  -1 = n は、章「クリフォード代数」の仮定 `CliffordLaws K n`（1 + n = 0 と加法の公理）と a + (-a) = 0 から出る（`neg_one_eq_n`）。
+- c_m^T のクロネッカー積による表示の δ_{1,a} · δ_{2,b} = δ_{2,b} · δ_{1,a} の行は、0 と 1 の交換で足りる。
+- 本文の前提 M ∈ ℤ_{≥1} は、どの主張も使わない。σz の部分積の主張は i ≤ M を使わない。
+
+## 必要十分版が示したこと（系「複素行列版イジングの Jordan–Wigner 行列への接続」の後半）
+
+- σ^a_k・F^{(b)}_{m,j} の定義と、ν_{r_M}(Z_m) = Z^{(2^M)}_m・ν_{r_M}(Y_m) = Y^{(2^M)}_m の証明の場合分け（（一）と（二））、
+  番号で添字づけたクロネッカー積への付け替え、番号順の積の因子ごとの等号は、K の性質を一つも使わない。
+- K の性質（L・乗法の交換法則・a · 0 = 0）は、Mat_{P_M}(K) と Mat_{1,…,2^M}(K) を K-代数にすることから来る。行の中では、
+  一つの因子だけを残したクロネッカー積の番号順の積の主張と、ν_{r_M} が番号順の積を保つこと（K-代数の準同型であること）の二行が使う。
+- Y^{(2^M)}_m の主張は i が K のどの元でも成り立つ（i · i = -1 を使わない）。σ^a_k を a ∈ {x, y, z} の全体で一度に定めるので、
+  必要十分版の F^{(b)}_{m,j}・Z^{(2^M)}_m も i を引数にとるが、値は i によらない。
+- Ω̂・Ω̂' と系の定理は、前半の Ω・Ω' と系の定理が要する K の性質に何も足さない。ν_{r_M}・μ_{r_M} が互いの逆であることは K の性質を使わず、
+  準同型であることに要る性質は `CliffordLaws K n` の欄にある。
+- 本文の前提 M ∈ ℤ_{≥1} と、ν_{r_M}(Z_m) = Z^{(2^M)}_m・ν_{r_M}(Y_m) = Y^{(2^M)}_m の m ∈ {1,…,M} は、どの証明も使わない。
+  Ω̂ の二つの主張が m ∈ {1,…,M} を要するのは、前半の Ω の主張（c_m を作る）からである。

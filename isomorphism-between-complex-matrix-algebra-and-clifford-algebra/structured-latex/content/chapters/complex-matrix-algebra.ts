@@ -3887,6 +3887,47 @@ r_M(k)
     ],
   },
   {
+    id: "complex_matrix_algebra_claim_ordered_sums_of_integers_with_equal_terms_are_equal",
+    kind: "claim",
+    title: { text: "項ごとに等しい二つの整数の番号順の和は等しい" },
+    labels: ["claim_ordered_sums_of_integers_with_equal_terms_are_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb{Z}`), " とし、", math(String.raw`\{a,\dots,b\}`), " の各元 ", math(String.raw`t`), " に整数 ", math(String.raw`n_t,\ n'_t\in\mathbb{Z}`),
+        " が一つずつ与えられ、すべての ", math(String.raw`t\in\{a,\dots,b\}`), " について ", math(String.raw`n_t=n'_t`), " が成り立つとする。整数の番号順の和（",
+        ref("def_ordered_sum_of_integers"), "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{t=a}^{b}n_t=\sum_{t=a}^{b}n'_t`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`b`), " についての帰納法で示す。", math(String.raw`b<a`), " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a}^{b}n_t
+&=0
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合}\right)\\
+&=\sum_{t=a}^{b}n'_t
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b<a\ \text{の場合}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`b\ge a`), " とし、", math(String.raw`b-1`), " で成り立つとする（帰納法の仮定。", math(String.raw`\{a,\dots,b-1\}\subseteq\{a,\dots,b\}`),
+        " なので、仮定はそこでも成り立つ）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=a}^{b}n_t
+&=\Bigl(\sum_{t=a}^{b-1}n_t\Bigr)+n_b
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合}\right)\\
+&=\Bigl(\sum_{t=a}^{b-1}n'_t\Bigr)+n_b
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=\Bigl(\sum_{t=a}^{b-1}n'_t\Bigr)+n'_b
+&&\left(\because\ \text{仮定}\ n_b=n'_b\right)\\
+&=\sum_{t=a}^{b}n'_t
+&&\left(\because\ \blkref{def_ordered_sum_of_integers}\ \text{の}\ b\ge a\ \text{の場合}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "complex_matrix_algebra_definition_number_of_tuple_with_first_site_as_highest_digit",
     kind: "definition",
     title: { text: "第 1 成分を最上位の桁として読んだ組の番号" },
@@ -3944,7 +3985,7 @@ t\in\varrho_M(S)
 &=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
 &=1+\sum_{t=1}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
-&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ \blkref{def_tuple_of_membership_indices}\text{）}\right)\\
 &=1+\Bigl(\bigl(o_{M,T}(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \blkref{claim_ordered_sum_of_integers_splits_off_first_term}\ \text{で}\ a:=1,\ b:=M\right)\\
 &=1+\Bigl((1-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
@@ -3952,15 +3993,15 @@ t\in\varrho_M(S)
 &=1+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ (1-1)\cdot 2^{M-1}=0\right)\\
 &=1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{M-t}
-&&\left(\because\ \text{（二）}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で（二））}\right)\\
 &=1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}
-&&\left(\because\ M-t=(M-1)-(t-1)\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ M-t=(M-1)-(t-1)\text{）}\right)\\
 &=1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}((s+1)-1)-1\bigr)\cdot 2^{(M-1)-((s+1)-1)}
 &&\left(\because\ \blkref{claim_ordered_sum_of_integers_is_unchanged_by_shifting_index}\ \text{で}\ a:=1,\ b:=M-1\right)\\
 &=1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}(s)-1\bigr)\cdot 2^{(M-1)-s}
-&&\left(\because\ (s+1)-1=s\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ (s+1)-1=s\text{）}\right)\\
 &=1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}
-&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ \blkref{def_tuple_of_membership_indices}\text{）}\right)\\
 &=\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right).
 \end{aligned}`),
@@ -4006,7 +4047,7 @@ t\in T
 &=1+\sum_{t=1}^{M}\bigl(\bar{o}_M(T)(t)-1\bigr)\cdot 2^{M-t}
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right)\\
 &=1+\sum_{t=1}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}
-&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ \blkref{def_tuple_of_membership_indices}\text{）}\right)\\
 &=1+\Bigl(\bigl(o_{M,T}(1)-1\bigr)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \blkref{claim_ordered_sum_of_integers_splits_off_first_term}\ \text{で}\ a:=1,\ b:=M\right)\\
 &=1+\Bigl((2-1)\cdot 2^{M-1}+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
@@ -4016,15 +4057,15 @@ t\in T
 &=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M,T}(t)-1\bigr)\cdot 2^{M-t}\Bigr)
 &&\left(\because\ \mathbb{Z}\ \text{の加法の交換法則と結合法則}\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{M-t}\Bigr)
-&&\left(\because\ \text{（二）}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で（二））}\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{t=2}^{M}\bigl(o_{M-1,T'}(t-1)-1\bigr)\cdot 2^{(M-1)-(t-1)}\Bigr)
-&&\left(\because\ M-t=(M-1)-(t-1)\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ M-t=(M-1)-(t-1)\text{）}\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}((s+1)-1)-1\bigr)\cdot 2^{(M-1)-((s+1)-1)}\Bigr)
 &&\left(\because\ \blkref{claim_ordered_sum_of_integers_is_unchanged_by_shifting_index}\ \text{で}\ a:=1,\ b:=M-1\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(o_{M-1,T'}(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
-&&\left(\because\ (s+1)-1=s\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ (s+1)-1=s\text{）}\right)\\
 &=2^{M-1}+\Bigl(1+\sum_{s=1}^{M-1}\bigl(\bar{o}_{M-1}(T')(s)-1\bigr)\cdot 2^{(M-1)-s}\Bigr)
-&&\left(\because\ \blkref{def_tuple_of_membership_indices}\right)\\
+&&\left(\because\ \blkref{claim_ordered_sums_of_integers_with_equal_terms_are_equal}\ \text{（各項で}\ \blkref{def_tuple_of_membership_indices}\text{）}\right)\\
 &=2^{M-1}+\mathrm{num}_{M-1}\bigl(\bar{o}_{M-1}(T')\bigr)
 &&\left(\because\ \blkref{def_number_of_tuple_with_first_site_as_highest_digit}\right).
 \end{aligned}`),

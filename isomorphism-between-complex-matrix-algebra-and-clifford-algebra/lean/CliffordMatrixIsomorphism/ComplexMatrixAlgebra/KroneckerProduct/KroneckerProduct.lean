@@ -10,6 +10,7 @@
   claim_product_of_kronecker_products_is_kronecker_product_of_products  mul_kroneckerProduct
   claim_kronecker_product_of_identity_matrices_is_identity_matrix       kroneckerProduct_one
   claim_kronecker_product_is_linear_in_one_factor                       kroneckerProduct_linear_in_one_factor
+  claim_kronecker_products_of_factorwise_equal_families_are_equal       kroneckerProduct_congr
 
 {1,2} は `Idx 2` で、その二元は `idxOne`・`idxTwo`、番号付け (2, id_2) は `isNumbering_two`、
 {1,2} が有限集合であることは `isFiniteSet_two`（どれも ℂ を含まないので `MembershipIndex.lean` に置き、両版が引く）。Mat_{1,2}(ℂ) の積は `Mat.mul isFiniteSet_two`、
@@ -27,6 +28,8 @@ Mat_{P_M}(ℂ) の積は `Mat.mul (isFiniteSet_powerSet M)` である。単位�
   claim_sum_over_finite_set_depends_only_on_terms              sumOverFiniteSet_congr
   claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers
                                                                sumOverPowerSet_selected
+  claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal
+                                                               orderedProduct_eq_of_equal_factors
 本文が「各 k で（一）。def_ordered_product_in_complex_numbers」とする行（番号順の積の因子を各番号で取り替える行）は、
 因子の族がすべての k で等しいので、族の等式 `funext` を `orderedProduct M` に渡す行である。
 
@@ -222,5 +225,19 @@ theorem kroneckerProduct_linear_in_one_factor (M r : ℕ) (hr1 : 1 ≤ r) (hrM :
           orderedProduct_smul_in_one_factor M r hr1 hrM l' β' α' hβα' (if_pos rfl)]
     _ = l * Mat.entry (kroneckerProduct M A) S T + l' * Mat.entry (kroneckerProduct M A') S T := rfl
     _ = Mat.entry (Mat.add (Mat.smul l (kroneckerProduct M A)) (Mat.smul l' (kroneckerProduct M A'))) S T := rfl
+
+/-- 本文 `claim_kronecker_products_of_factorwise_equal_families_are_equal`：
+すべての t ∈ {1,…,M} で A_t = A'_t なら ⊠_{t=1}^{M} A_t = ⊠_{t=1}^{M} A'_t。 -/
+theorem kroneckerProduct_congr (M : ℕ) (A A' : ℕ → Mat (Idx 2)) (h : ∀ t : ℕ, 1 ≤ t → t ≤ M → A t = A' t) :
+    kroneckerProduct M A = kroneckerProduct M A' := Mat.ext fun S T => by
+  -- α_t := (A_t)_{o_{M,S}(t),o_{M,T}(t)}、α'_t := (A'_t)_{o_{M,S}(t),o_{M,T}(t)}。A_t = A'_t から α_t = α'_t
+  have hα : ∀ t : ℕ, 1 ≤ t → t ≤ M → kroneckerFactor A S T t = kroneckerFactor A' S T t := by
+    intro t ht1 htM
+    show Mat.entry (A t) _ _ = Mat.entry (A' t) _ _
+    rw [h t ht1 htM]
+  calc Mat.entry (kroneckerProduct M A) S T
+      = orderedProduct M (kroneckerFactor A S T) := rfl
+    _ = orderedProduct M (kroneckerFactor A' S T) := orderedProduct_eq_of_equal_factors M _ _ hα
+    _ = Mat.entry (kroneckerProduct M A') S T := rfl
 
 end CliffordMatrixIsomorphism.ComplexMatrixAlgebra

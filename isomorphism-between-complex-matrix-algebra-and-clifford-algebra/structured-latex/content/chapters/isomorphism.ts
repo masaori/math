@@ -13685,7 +13685,7 @@ a
 &=\mathfrak{z}_{j}
 &&\left(\because\ \blkref{def_single_site_family_of_matrices}\ \text{の}\ t=j\ \text{の場合}\right)\\
 &=\sigma^{x}
-&&\left(\because\ \mathfrak{z}\ \text{の置き方（}j<m\text{）}\right),\\[4pt]
+&&\left(\because\ \mathfrak{z}\ \text{の置き方で}\ t:=j\ \text{（}t<m\text{）}\right),\\[4pt]
 \mathfrak{z}^{[j]}_t
 &=I_2
 &&\left(\because\ \blkref{def_single_site_family_of_matrices}\ \text{の}\ t\neq j\ \text{の場合}\right).
@@ -13805,7 +13805,7 @@ a
 &=\mathfrak{y}_{j}
 &&\left(\because\ \blkref{def_single_site_family_of_matrices}\ \text{の}\ t=j\ \text{の場合}\right)\\
 &=\sigma^{x}
-&&\left(\because\ \mathfrak{y}\ \text{の置き方（}j<m\text{）}\right),\\[4pt]
+&&\left(\because\ \mathfrak{y}\ \text{の置き方で}\ t:=j\ \text{（}t<m\text{）}\right),\\[4pt]
 \mathfrak{y}^{[j]}_t
 &=I_2
 &&\left(\because\ \blkref{def_single_site_family_of_matrices}\ \text{の}\ t\neq j\ \text{の場合}\right).

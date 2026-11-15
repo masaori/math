@@ -13,6 +13,7 @@
                                                                                                                 a · 0 = 0 · a・0 · a = 0
   claim_kronecker_product_is_linear_in_one_factor                       kroneckerProduct_linear_in_one_factor   左右の分配法則・乗法の結合法則・
                                                                                                                 λ と λ' がどの元とも交換すること
+  claim_kronecker_products_of_factorwise_equal_families_are_equal       kroneckerProduct_congr                  なし
 
 L : `ValuedMapsLaws K` は積 `Mat.mul L hX` を定めるのに要る。積の主張の行で L から使うのは、二つの番号順の積の積の主張に渡す
 1 · 1 = 1（`L.one_mul 1`）と乗法の結合法則、Π v^R_k = 1_K ·_K Π v^R_k の行の 1 · a = a、
@@ -220,5 +221,19 @@ theorem kroneckerProduct_linear_in_one_factor [Add K] [Mul K] [One K]
           orderedProduct_smul_in_one_factor hmassoc M r hr1 hrM l' hcentral' β' α' hβα' (if_pos rfl)]
     _ = l * Mat.entry (kroneckerProduct M A) S T + l' * Mat.entry (kroneckerProduct M A') S T := rfl
     _ = Mat.entry (Mat.add (Mat.smul l (kroneckerProduct M A)) (Mat.smul l' (kroneckerProduct M A'))) S T := rfl
+
+/-- 本文 `claim_kronecker_products_of_factorwise_equal_families_are_equal` の必要十分版（K の性質を何も使わない）：
+すべての t ∈ {1,…,M} で A_t = A'_t なら ⊠_{t=1}^{M} A_t = ⊠_{t=1}^{M} A'_t。 -/
+theorem kroneckerProduct_congr [Mul K] [One K] (M : ℕ) (A A' : ℕ → Mat K (Idx 2)) (h : ∀ t : ℕ, 1 ≤ t → t ≤ M → A t = A' t) :
+    kroneckerProduct M A = kroneckerProduct M A' := Mat.ext fun S T => by
+  -- α_t := (A_t)_{o_{M,S}(t),o_{M,T}(t)}、α'_t := (A'_t)_{o_{M,S}(t),o_{M,T}(t)}。A_t = A'_t から α_t = α'_t
+  have hα : ∀ t : ℕ, 1 ≤ t → t ≤ M → kroneckerFactor A S T t = kroneckerFactor A' S T t := by
+    intro t ht1 htM
+    show Mat.entry (A t) _ _ = Mat.entry (A' t) _ _
+    rw [h t ht1 htM]
+  calc Mat.entry (kroneckerProduct M A) S T
+      = orderedProduct M (kroneckerFactor A S T) := rfl
+    _ = orderedProduct M (kroneckerFactor A' S T) := NecSuf.orderedProduct_eq_of_equal_factors M _ _ hα
+    _ = Mat.entry (kroneckerProduct M A') S T := rfl
 
 end CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra

@@ -1,5 +1,5 @@
 /-
-節「テンソル積」のうち、ℂ の中の番号順の積とその五つの主張の具体版。人手証明と 1 対 1 に対応させる。
+節「テンソル積」のうち、ℂ の中の番号順の積とその六つの主張の具体版。人手証明と 1 対 1 に対応させる。
 
   本文のラベル                                              このファイル
   def_ordered_product_in_complex_numbers                    partialOrderedProduct（P_m）・orderedProduct（P_k）
@@ -11,6 +11,8 @@
   claim_ordered_product_with_unit_factors_after_index       partialOrderedProduct_of_unit_factors（帰納法の主張）・
                                                             orderedProduct_of_unit_factors_after
   claim_ordered_product_with_zero_factor_is_zero            orderedProduct_of_zero_factor
+  claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal
+                                                            partialOrderedProduct_eq_of_equal_factors（帰納法の主張）・orderedProduct_eq_of_equal_factors
 
 番号付けた因子 α_1,…,α_k は、番号順の和（`Definitions.lean`）と同じく `ℕ → ℂ` で表し、1,…,k の外の値は使わない。
 本文の帰納法の主張（m < r と m ≥ r で形の違う P_m の等式）は、m についての帰納法を `partial…` の主張として書く。
@@ -222,5 +224,25 @@ theorem orderedProduct_of_zero_factor (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k
   calc orderedProduct k a = 0 * orderedProduct k a' :=
         orderedProduct_smul_in_one_factor k r hr1 hrk 0 a a' hne hα
     _ = 0 := by rw [zero_mul]
+
+/-- 本文 `claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal` の帰納法の主張：
+すべての r ∈ {1,…,k} で α_r = α'_r なら、m ≤ k で P_m = P'_m。 -/
+theorem partialOrderedProduct_eq_of_equal_factors (k : ℕ) (a a' : ℕ → ℂ) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    ∀ m : ℕ, m ≤ k → partialOrderedProduct a m = partialOrderedProduct a' m
+  | 0, _ => calc
+    partialOrderedProduct a 0 = 1 := rfl
+    _ = partialOrderedProduct a' 0 := rfl
+  | m + 1, hm => calc
+    partialOrderedProduct a (m + 1) = partialOrderedProduct a m * a (m + 1) := rfl
+    _ = partialOrderedProduct a' m * a (m + 1) := by
+        rw [partialOrderedProduct_eq_of_equal_factors k a a' h m (Nat.le_of_succ_le hm)]
+    _ = partialOrderedProduct a' m * a' (m + 1) := by rw [h (m + 1) (Nat.succ_pos m) hm]
+    _ = partialOrderedProduct a' (m + 1) := rfl
+
+/-- 本文 `claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal`：
+すべての r ∈ {1,…,k} で α_r = α'_r なら Π_{ℂ,r=1}^{k} α_r = Π_{ℂ,r=1}^{k} α'_r。 -/
+theorem orderedProduct_eq_of_equal_factors (k : ℕ) (a a' : ℕ → ℂ) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    orderedProduct k a = orderedProduct k a' :=
+  partialOrderedProduct_eq_of_equal_factors k a a' h k (le_refl k)
 
 end CliffordMatrixIsomorphism

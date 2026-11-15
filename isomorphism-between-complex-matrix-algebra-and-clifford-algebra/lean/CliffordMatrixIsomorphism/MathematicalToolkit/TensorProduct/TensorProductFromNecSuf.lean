@@ -162,6 +162,11 @@ theorem orderedProduct_of_zero_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk
   rw [orderedProduct_eq_necSuf]
   exact NecSuf.orderedProduct_of_zero_factor mul_assoc (fun c => mul_comm c 0) zero_mul k r hr1 hrk a hr
 
+theorem orderedProduct_eq_of_equal_factors_of_necSuf (k : ℕ) (a a' : ℕ → ℂ) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    orderedProduct k a = orderedProduct k a' := by
+  rw [orderedProduct_eq_necSuf, orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_eq_of_equal_factors k a a' h
+
 theorem coordinateTensor_isMultilinear_of_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : ℕ → V)
     (hb : IsBasisFamily S n b) (k : ℕ) :
     IsMultilinearMap S (coordinateTensorSpace n k) k (coordinateTensor S n b hb k) := by

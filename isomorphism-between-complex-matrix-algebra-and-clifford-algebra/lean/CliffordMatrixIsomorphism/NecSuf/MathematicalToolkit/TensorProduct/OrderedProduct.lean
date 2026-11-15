@@ -1,5 +1,5 @@
 /-
-節「テンソル積」のうち、ℂ の中の番号順の積とその五つの主張の必要十分版。具体版
+節「テンソル積」のうち、ℂ の中の番号順の積とその六つの主張の必要十分版。具体版
 `MathematicalToolkit/TensorProduct/OrderedProduct.lean` と同じ calc の行で、係数 ℂ を型の変数 K に替えて書く。
 
 各主張が実際に使う K の性質:
@@ -9,6 +9,7 @@
   orderedProduct_mul                      1 · 1 = 1、乗法の結合法則、乗法の交換法則（α_m と Q_{m-1} の入れ替え）
   orderedProduct_of_unit_factors_after    a · 1 = a
   orderedProduct_of_zero_factor           0 · a = 0、乗法の結合法則、0 がどの元とも交換すること
+  orderedProduct_eq_of_equal_factors      なし（因子ごとの等号を一つずつ書き換えるだけ）
 
 0 の因子の主張は、本文どおりスカラー倍の主張を λ := 0 で当てるので、スカラー倍の主張の仮定（結合法則と λ の交換）を連れてくる。
 P_k を直接帰納法で開けば 0 · a = 0 と a · 0 = 0 だけで済むが、本文と同じ手順を保つために置き換えない。
@@ -232,5 +233,25 @@ theorem orderedProduct_of_zero_factor [Zero K] (hmassoc : ∀ a b c : K, (a * b)
   calc orderedProduct k a = 0 * orderedProduct k a' :=
         orderedProduct_smul_in_one_factor hmassoc k r hr1 hrk 0 hzero_central a a' hne hα
     _ = 0 := by rw [hzero_mul]
+
+/-- 本文 `claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal` の帰納法の必要十分版（K の性質を何も使わない）：
+すべての r ∈ {1,…,k} で α_r = α'_r なら、m ≤ k で P_m = P'_m。 -/
+theorem partialOrderedProduct_eq_of_equal_factors (k : ℕ) (a a' : ℕ → K) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    ∀ m : ℕ, m ≤ k → partialOrderedProduct a m = partialOrderedProduct a' m
+  | 0, _ => calc
+    partialOrderedProduct a 0 = 1 := rfl
+    _ = partialOrderedProduct a' 0 := rfl
+  | m + 1, hm => calc
+    partialOrderedProduct a (m + 1) = partialOrderedProduct a m * a (m + 1) := rfl
+    _ = partialOrderedProduct a' m * a (m + 1) := by
+        rw [partialOrderedProduct_eq_of_equal_factors k a a' h m (Nat.le_of_succ_le hm)]
+    _ = partialOrderedProduct a' m * a' (m + 1) := by rw [h (m + 1) (Nat.succ_pos m) hm]
+    _ = partialOrderedProduct a' (m + 1) := rfl
+
+/-- 本文 `claim_ordered_products_in_complex_numbers_with_equal_factors_are_equal` の必要十分版（K の性質を何も使わない）：
+すべての r ∈ {1,…,k} で α_r = α'_r なら Π_{ℂ,r=1}^{k} α_r = Π_{ℂ,r=1}^{k} α'_r。 -/
+theorem orderedProduct_eq_of_equal_factors (k : ℕ) (a a' : ℕ → K) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    orderedProduct k a = orderedProduct k a' :=
+  partialOrderedProduct_eq_of_equal_factors k a a' h k (le_refl k)
 
 end CliffordMatrixIsomorphism.NecSuf

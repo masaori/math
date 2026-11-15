@@ -121,6 +121,12 @@ theorem kroneckerProduct_linear_in_one_factor_of_necSuf (M r : ℕ) (hr1 : 1 ≤
   exact NecSuf.ComplexMatrixAlgebra.kroneckerProduct_linear_in_one_factor mul_add add_mul mul_assoc M r hr1 hrM
     l l' (fun a => mul_comm a l) (fun a => mul_comm a l') A A' A'' hne hr
 
+/-- 本文 `claim_kronecker_products_of_factorwise_equal_families_are_equal` を必要十分版から得る。 -/
+theorem kroneckerProduct_congr_of_necSuf (M : ℕ) (A A' : ℕ → Mat (Idx 2))
+    (h : ∀ t : ℕ, 1 ≤ t → t ≤ M → A t = A' t) : kroneckerProduct M A = kroneckerProduct M A' := by
+  rw [kroneckerProduct_eq_necSuf, kroneckerProduct_eq_necSuf]
+  exact NecSuf.ComplexMatrixAlgebra.kroneckerProduct_congr M A A' h
+
 /-- 本文 `claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism` の加法を保つことを必要十分版から得る。 -/
 theorem conjugation_map_add_of_necSuf (hX : IsFiniteSet X) (U U' F G : Mat X) :
     conjugation hX U U' (Mat.add F G) = Mat.add (conjugation hX U U' F) (conjugation hX U U' G) := by
