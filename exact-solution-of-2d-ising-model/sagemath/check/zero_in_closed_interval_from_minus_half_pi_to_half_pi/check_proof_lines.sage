@@ -1,7 +1,8 @@
 # 対象ラベル: zero_in_closed_interval_from_minus_half_pi_to_half_pi
 # 0 ∈ [-π/2, π/2] の証明の鎖を一行ずつ確かめる。
-#   0 < π/2 の鎖 2 行: real_zero_divided_is_zero（x → 2）を右辺から左辺へ・pi_is_positive の 0 < π と x < y, c > 0 ⇒ x/c < y/c（c → 2）
-#   -π/2 < 0 の鎖 3 行: a + 0 = a（a → -π/2）・順序と加法の両立（c → -π/2）・-a + a = 0（a → π/2）
+#   準備: 0 < 2 と正の数の逆数は正から 0 < 2^{-1}
+#   0 < π/2 の鎖 2 行: pi_is_positive の 0 < π と準備の 0 < 2^{-1} と正の数どうしの積は正・def_real_quotient（y → π, z → 2）を右辺から左辺へ
+#   -π/2 < 0 の鎖 4 行: 加法の単位元（-π/2 + 0 = -π/2）を右辺から左辺へ・順序と加法の両立（c → -π/2）・加法の可換則・def_real_difference の加法の逆元（z → π/2）
 # 0 < π の鎖は主張 pi_is_positive の検算 sagemath/check/pi_is_positive/ が扱う。
 # 帰属: 等号は Sage の記号計算（SR）と QQ で厳密。不等号は RealBallField(256) のボールの比較で確かめる
 #       （π が実数なので ℝ へ脱出する。ボールの比較は真と判定できたときだけ真を返す）。
@@ -14,22 +15,30 @@ ineq_count = 0
 # 根拠に引く pi_is_positive の 0 < π（検算は sagemath/check/pi_is_positive/）
 assert R(0) < pi_b
 
+# 準備: 2^{-1} は 2 の乗法の逆元で、0 < 2 から 0 < 2^{-1}
+two_inv = QQ(2)**(-1)
+assert QQ(2) * two_inv == 1; eq_count += 1
+assert 0 < QQ(2) and 0 < two_inv; ineq_count += 2
+
 # 0 < π/2 の鎖
-assert QQ(0) == QQ(0) / 2; eq_count += 1
-assert R(0) / 2 < pi_b / 2; ineq_count += 1
+# 1 行目: 0 < π と 0 < 2^{-1} から 0 < π·2^{-1}（正の数どうしの積は正）
+assert R(0) < pi_b * R(two_inv); ineq_count += 1
+# 2 行目: π·2^{-1} = π/2（def_real_quotient）
+assert bool(pi * two_inv == pi / 2); eq_count += 1
 
 # -π/2 < 0 の鎖
 assert bool(-(pi / 2) == -(pi / 2) + 0); eq_count += 1
 assert -(pi_b / 2) + 0 < -(pi_b / 2) + pi_b / 2; ineq_count += 1
-assert bool(-(pi / 2) + pi / 2 == 0); eq_count += 1
+assert bool(-(pi / 2) + pi / 2 == pi / 2 + (-(pi / 2))); eq_count += 1   # 加法の可換則
+assert bool(pi / 2 + (-(pi / 2)) == 0); eq_count += 1                     # def_real_difference の加法の逆元
 
 # 結論: -π/2 ≤ 0 ≤ π/2
 assert -(pi_b / 2) <= 0 and R(0) <= pi_b / 2; ineq_count += 2
 
 # 否定コントロール
 broken = 0
-# 0 < π/2 の鎖で 2 の代わりに -2 で割ると不等号の向きが逆になり 0 < π/(-2) が成り立たない
-if not (R(0) < pi_b / (-2)):
+# 準備の逆数を -2 の逆数に取り違えると、0 < π·(-2)^{-1} が成り立たない
+if not (R(0) < pi_b * R(QQ(-2)**(-1))):
     broken += 1
 # 区間を [π/2, 3π/2] に取り違えると 0 は入らない
 if not (pi_b / 2 <= 0):

@@ -19,7 +19,7 @@ args = [
     z / sqrt_aa(one + z**2),       # 1 行目の引数
     z / sqrt_aa(one + z * z),      # 2 行目: square_of_real_number_is_product（r → 0）
     z / sqrt_aa(one + z),          # 3 行目: real_zero_times_is_zero（x → 0）
-    z / sqrt_aa(one),              # 4 行目: a + 0 = a（a → 1）
+    z / sqrt_aa(one),              # 4 行目: 0 は ℝ の加法の単位元（1 + 0 = 1）
     z / one,                       # 5 行目: sqrt_of_real_one_is_one
     z,                             # 6 行目: real_zero_divided_is_zero（x → 1）
 ]
@@ -28,6 +28,7 @@ assert z**2 == z * z; eq_count += 1
 assert z * z == z; eq_count += 1
 assert one + z == one; eq_count += 1
 assert sqrt_aa(one) == one; eq_count += 1
+assert one != z                 # 6 行目の x → 1 の条件 1 ≠ 0（体の公理 0 ≠ 1）
 assert z / one == z; eq_count += 1
 # 隣り合う行の arcsin の引数が等しい
 for a, b in zip(args, args[1:]):

@@ -1547,23 +1547,48 @@ t
       ]),
     ],
     proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`2^{-1} \in \mathbb{R}`),
+        " は ",
+        math(String.raw`2`),
+        " の乗法の逆元（",
+        math(String.raw`2 \neq 0`),
+        " なので ",
+        ref("set_and_algebra_notation"),
+        " の体 ",
+        math(String.raw`\mathbb{R}`),
+        " に在る）である。",
+        math(String.raw`0 < 2`),
+        " と、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数の逆数は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）であることから ",
+        math(String.raw`0 < 2^{-1}`),
+        " である。",
+      ]),
       paragraph(["主張の右側の不等号 ", math(String.raw`0 \leq \pi/2`), " を示す。"]),
       displayMath(String.raw`\begin{aligned}
 0
-&= 0/2
-&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\ \text{を右辺から左辺へ}\bigr)\\
-&< \pi/2
-&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と、}\mathbb{R}\ \text{の順序で}\ x < y,\ c > 0 \Rightarrow x/c < y/c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to 2\ (2 > 0)\bigr)
+&< \pi\cdot 2^{-1}
+&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と準備の}\ 0 < 2^{-1}\ \text{と、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \pi,\ z \to 2)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph(["主張の左側の不等号 ", math(String.raw`-\pi/2 \leq 0`), " を示す。"]),
       displayMath(String.raw`\begin{aligned}
 -\pi/2
 &= -\pi/2 + 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to -\pi/2\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (-\pi/2 + 0 = -\pi/2)\ \text{を右辺から左辺へ}\bigr)\\
 &< -\pi/2 + \pi/2
-&&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{の}\ c \to -\pi/2\bigr)\\
+&&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to \pi/2,\ c \to -\pi/2\bigr)\\
+&= \pi/2 + (-\pi/2)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ a + b = b + a\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ a \to -\pi/2,\ b \to \pi/2\bigr)\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{の}\ a \to \pi/2\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to \pi/2)\bigr)
 \end{aligned}`),
       paragraph([
         "狭義の不等号は等号を含まない不等号を含意するので ",
@@ -1583,6 +1608,7 @@ t
         "2026-11-09: 主張の π の説明を、remark_real_analysis_facts_R3_R4 の円周率の項から、arcsin_is_bijection の π と arcsin_of_one_is_half_pi の参照にした（pi_is_positive と揃えた）。値と主張は不変。",
         "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・sin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の 1 行目 0 = 0/2 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）」を real_zero_divided_is_zero（x → 2）を右辺から左辺へ当てる参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の根拠「x < y, c > 0 ⇒ x/c < y/c」は順序体の公理ではなく導いた事実だったので、準備に 0 < 2^{-1}（正の数の逆数は正）を置き、鎖を 0 < π·2^{-1}（正の数どうしの積は正）= π/2（def_real_quotient を右辺から左辺へ）の 2 行に替えた（1 行目の 0 = 0/2 は要らなくなったので外した）。−π/2 < 0 の鎖の a + 0 = a・順序と加法の両立に set_and_algebra_notation の参照を付け、「−a + a = 0」の 1 行を加法の可換則と def_real_difference の加法の逆元の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -1711,11 +1737,11 @@ t
 &= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (1 + 0 = 1)\bigr)\\
 &= \arcsin\!\left(\frac{0}{1}\right)
 &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
 &= \arcsin(0)
-&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1,\ 1 \neq 0)\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1\text{。}1 \neq 0\ \text{は体 }\mathbb{R}\ (\blkref{set_and_algebra_notation})\ \text{の公理}\ 0 \neq 1)\bigr)\\
 &= \arcsin(\sin 0)
 &&(\because\ \blkref{sine_zero})\\
 &= 0
@@ -1728,6 +1754,7 @@ t
         "2026-11-08: relation_of_gamma_2_theta_tilde の準備の第五にあった arctan 0 の鎖を独立の主張にした。inverse_of_sqrt_cc の φ_polar(1_C) の鎖と relation_of_gamma_2_theta_tilde の (3)(4) の鎖が引く。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 6 行目 0/1 = 0 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で a + 0 = a」を set_and_algebra_notation の加法の単位元の参照に替え、6 行目の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。式は不変。",
       ],
     },
   },
