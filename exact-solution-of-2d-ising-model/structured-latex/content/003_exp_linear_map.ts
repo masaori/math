@@ -611,7 +611,19 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         math(String.raw`y_{ij}\cdot 1=y_{ij}`),
         "、他の項は ",
         math(String.raw`y_{kl}\cdot 0=0`),
-        " であるから、和は ",
+        "（",
+        math(String.raw`K=\mathbb{R}`),
+        " なら ",
+        ref("real_times_zero_is_zero"),
+        " の ",
+        math(String.raw`x\to y_{kl}`),
+        "、",
+        math(String.raw`K=\mathbb{C}`),
+        " なら ",
+        ref("complex_times_zero_is_zero"),
+        " の ",
+        math(String.raw`z\to y_{kl}`),
+        "）であるから、和は ",
         math(String.raw`y_{ij}`),
         " に等しい。",
       ]),
@@ -1031,6 +1043,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の 1 行目「√1（行列ノルムの定義と E^{(k,l)} の成分の定義）」（ノルムの定義・成分の値・|0_K| = 0 と |1_K| = 1（K = ℝ・ℂ の場合分け）・0 の項を二重の和から落とすことを 1 行で使っていた）を、|0_K|・|1_K| の準備（K = ℂ の |0_C| は abs_basic_properties (3)、|1_C| は 3 行の鎖）、成分の絶対値の二乗の 2 本の鎖、行ごとの和の 2 本の鎖、ノルムの 5 行の鎖に割った（trace_power_upper_bound の【e_k のノルム】と同じ書き方。値と主張は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の最後の行の根拠「ℝ_{≥0} における 1 の非負平方根」を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 4 の成分の絶対値の二乗の鎖（(i,j) ≠ (k,l) の側）の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の地の文の y_{kl}·0 = 0（K の元に右から 0 を掛ける）に根拠が無かったので、K = ℝ なら real_times_zero_is_zero（x → y_{kl}）、K = ℂ なら complex_times_zero_is_zero（z → y_{kl}）の参照を添えた（式は不変）。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_03_matrix_unit_zero_entry.sage。",
       ],
     },
   },
@@ -2445,7 +2458,7 @@ a
 &= \left([0]_K^{\,m-1}\right)_{11}\cdot 0
    \quad (\because \blkref{def_one_by_one_matrix}) \\
 &= 0
-   \quad (\because K \text{ の元に } 0 \text{ を掛けると } 0)
+   \quad (\because K = \mathbb{R} \text{ なら }\blkref{real_times_zero_is_zero}\ (x \to ([0]_K^{\,m-1})_{11})\text{、} K = \mathbb{C} \text{ なら }\blkref{complex_times_zero_is_zero}\ (z \to ([0]_K^{\,m-1})_{11}))
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
@@ -2537,6 +2550,7 @@ S_N([0]_K)
       status: "added",
       notes: [
         "数の exp を行列の exp から定義したことに伴い置いた。数の列の極限の一意性はラベルを持つブロックが無いので、行列の部分和 S_N([0]_K) が定数列 [1]_K であることと、行列の極限の一意性（labels: matrix_norm_triangle_inequality (4)）から示した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の ([0]^m)_11 の鎖の最後の行の根拠が名前だけの「K の元に 0 を掛けると 0」だったので、K = ℝ なら real_times_zero_is_zero、K = ℂ なら complex_times_zero_is_zero（どちらも x・z → ([0]^{m-1})_11）の参照に替えた（式は不変）。Lean の具体版は無い（Lean は mathlib の Real.exp_zero・Complex.exp_zero を引く）。",
       ],
     },
   },
@@ -2656,7 +2670,7 @@ S_N([0]_K)
 &= 0 \cdot \exp(-x)
    \quad (\because \text{仮定 } \exp(x) = 0) \\
 &= 0
-   \quad (\because \mathbb{R} \text{ の元に } 0 \text{ を掛けると } 0)
+   \quad (\because \blkref{real_zero_times_is_zero}\ \text{の } x \text{ に } \exp(-x) \text{ を入れる})
 \end{aligned}`,
       ),
       paragraph([
@@ -2698,7 +2712,13 @@ S_N([0]_K)
         "。",
       ]),
     ],
-    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+    conversion: {
+      status: "added",
+      notes: [
+        "実数の exp を行列の exp から定義したことに伴い置いた。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 1 の背理の鎖の最後の行 0·exp(−x) = 0 の根拠が名前だけの「ℝ の元に 0 を掛けると 0」だったので、real_zero_times_is_zero（その x に exp(−x) を入れる）の参照に替えた（式は不変）。Lean の具体版 Ising2D.real_exp_ne_zero の同じ段も、mathlib の zero_mul から具体版 Ising2D.real_zero_times_is_zero に替えた。",
+      ],
+    },
   },
   {
     id: "exp_linear_map_011_claim_real_exp_strictly_increasing",
@@ -2909,8 +2929,16 @@ a_{\mathbb{C}}\,b_{\mathbb{C}}
    \quad (\because \blkref{inclusion_rr_to_cc}) \\
 &= (ab - 0\cdot 0,\ a\cdot 0 + 0\cdot b)
    \quad (\because \blkref{definition_of_cc}\text{ の積}) \\
+&= (ab - 0,\ a\cdot 0 + 0\cdot b)
+   \quad (\because \blkref{real_zero_times_is_zero}\ (x \to 0)) \\
+&= (ab - 0,\ 0 + 0\cdot b)
+   \quad (\because \blkref{real_times_zero_is_zero}\ (x \to a)) \\
+&= (ab - 0,\ 0 + 0)
+   \quad (\because \blkref{real_zero_times_is_zero}\ (x \to b)) \\
+&= (ab,\ 0 + 0)
+   \quad (\because \mathbb{R} \text{ で } u - 0 = u \text{ の } u \to ab) \\
 &= (ab,\ 0)
-   \quad (\because 0\cdot 0 = a\cdot 0 = 0\cdot b = 0) \\
+   \quad (\because 0+0 = 0) \\
 &= (ab)_{\mathbb{C}}
    \quad (\because \blkref{inclusion_rr_to_cc})
 \end{aligned}`,
@@ -3138,7 +3166,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
       ),
       paragraph(["である。"]),
     ],
-    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。", "2026-11-01: 1 行 1 列の複素行列の差の鎖で名前だけの根拠だった「行列の差は成分ごと」を、行列の差の定義 def_matrix_difference へのラベル参照に替えた。式と段は変えていない。"] },
+    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。", "2026-11-01: 1 行 1 列の複素行列の差の鎖で名前だけの根拠だった「行列の差は成分ごと」を、行列の差の定義 def_matrix_difference へのラベル参照に替えた。式と段は変えていない。", "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の積の鎖の (ab − 0·0, a·0 + 0·b) = (ab, 0) の行は、ℝ の 0·0 = 0・a·0 = 0・0·b = 0 と ab − 0 = ab・0 + 0 = 0 を名前だけの根拠 1 つで束ねていたので、real_zero_times_is_zero（x → 0）・real_times_zero_is_zero（x → a）・real_zero_times_is_zero（x → b）・ℝ で u − 0 = u（u → ab）・0 + 0 = 0 の 5 行に割った（鎖の両端は不変）。Lean の具体版は無い（Lean は mathlib の Complex.ofReal_exp を引く）。数値検証: sagemath/check/complex_exp_of_real_argument/check_preparation_sum_product_difference.sage。"] },
   },
   {
     id: "calc_formulae_definition_cosh_sinh",

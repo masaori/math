@@ -1,7 +1,8 @@
 # 対象ラベル: complex_exp_of_real_argument
 # 準備の三つの鎖を QQ[a, b] の不定元で確かめる。ℂ は definition_of_cc どおり実数の対で持つ。
 #   a_C + b_C = (a,0)+(b,0) = (a+b, 0+0) = (a+b, 0) = (a+b)_C
-#   a_C b_C = (a,0)(b,0) = (ab - 0·0, a·0 + 0·b) = (ab, 0) = (ab)_C
+#   a_C b_C = (a,0)(b,0) = (ab - 0·0, a·0 + 0·b) = (ab - 0, a·0 + 0·b) = (ab - 0, 0 + 0·b)
+#           = (ab - 0, 0 + 0) = (ab, 0 + 0) = (ab, 0) = (ab)_C
 #   a_C - b_C = a_C + (-b_C) = a_C + (-1)_C b_C = a_C + ((-1)b)_C = (a + (-1)b)_C = (a-b)_C
 # 不定元で成り立つ多項式の等号は、a, b へ任意の実数を代入しても成り立つ（代入は環準同型）。
 load("../../_shared/complex_as_real_pairs.sage")
@@ -26,11 +27,17 @@ mul_chain = [
     cc_mul(iota(a, R), iota(b, R)),
     cc_mul((a, zero), (b, zero)),
     (a * b - zero * zero, a * zero + zero * b),
-    (a * b, zero),
+    (a * b - zero, a * zero + zero * b),   # real_zero_times_is_zero (x -> 0)
+    (a * b - zero, zero + zero * b),       # real_times_zero_is_zero (x -> a)
+    (a * b - zero, zero + zero),           # real_zero_times_is_zero (x -> b)
+    (a * b, zero + zero),                  # ℝ で u - 0 = u (u -> ab)
+    (a * b, zero),                         # 0 + 0 = 0
     iota(a * b, R),
 ]
+# 割った各行の根拠の等号そのもの（左右の 0 掛けと u - 0 = u）を、不定元で確かめる。
+assert zero * zero == zero and a * zero == zero and zero * b == zero and a * b - zero == a * b and zero + zero == zero
 assert all(c == mul_chain[0] for c in mul_chain), mul_chain
-print("積の鎖 a_C b_C = (a,0)(b,0) = (ab-0·0, a·0+0·b) = (ab,0) = (ab)_C が QQ[a,b] で成り立つ")
+print("積の鎖 a_C b_C = (a,0)(b,0) = (ab-0·0, a·0+0·b) = (ab-0, a·0+0·b) = (ab-0, 0+0·b) = (ab-0, 0+0) = (ab, 0+0) = (ab,0) = (ab)_C が QQ[a,b] で成り立つ")
 
 # 差の鎖。-1_C は inclusion_rr_to_cc の略記 r_C の r = -1 なので ι(-1) と同じ対。multiply_by_minus_one の -z := (-1_C) z。
 sub_chain = [

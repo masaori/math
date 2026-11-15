@@ -22,6 +22,7 @@ mathlib の `Real.exp_add`・`Real.exp_zero` で表す。この 2 つ以外の�
 `ClaimRealExpPositiveFromNecSuf.lean`。
 -/
 import Mathlib.Analysis.SpecialFunctions.Exp
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 
 namespace Ising2D
 
@@ -44,8 +45,8 @@ theorem real_exp_ne_zero (x : ℝ) : Real.exp x ≠ 0 := by
                                         -- 上の鎖
       _ = 0 * Real.exp (-x) := by rw [h]
                                         -- 仮定 `exp(x) = 0`
-      _ = 0 := zero_mul _
-                                        -- ℝ の元に `0` を掛けると `0`
+      _ = 0 := Ising2D.real_zero_times_is_zero _
+                                        -- `real_zero_times_is_zero`（その `x` に `exp(-x)` を入れる）
   exact one_ne_zero h10
                                         -- `1 ≠ 0` に反する
 

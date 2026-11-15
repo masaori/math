@@ -18,7 +18,7 @@ for name, F in COEFFICIENT_FIELDS:
         line2 = product_entry_by_definition(Z^(m - 1), Z, 1, 1)           # 行列の積の成分（mat_mult）
         line3 = entry11(Z^(m - 1)) * entry11(Z)                            # 和は j = 1 の 1 項だけ
         line4 = entry11(Z^(m - 1)) * F(0)                                  # def_one_by_one_matrix
-        line5 = F(0)                                                       # 0 を掛けると 0
+        line5 = F(0)                                                       # K = R は real_times_zero_is_zero、K = C は complex_times_zero_is_zero
         assert line0 == line1 == line2 == line3 == line4 == line5, (name, m)
         assert Z^m == one_by_one(F, line0) == Z == O
     # 対照: m = 0 では [0]^0 = I ≠ O（準備が m ≥ 1 に限ることに意味がある）
