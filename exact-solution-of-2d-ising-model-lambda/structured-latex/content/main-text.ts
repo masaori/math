@@ -84411,10 +84411,27 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
                   paragraph([math(String.raw`q+1\in\mathbb Q`), " なので ", ref("claim_no_rational_square_two"), " と矛盾する。"]),
                   paragraph([
                     ref("claim_signed_even_subgraph_orbit_product"),
-                    " の軌道積を ", math(String.raw`x=q`), " で評価する。",
-                    "二元・四元軌道の因子は ", ref("claim_dispersion_positive_at_rational_point"),
-                    " により実閉部分体 ", math(String.raw`R`), " で正である。",
-                    "一元軌道の因子は同じ軌道積の定義から三種類だけである。",
+                    " の軌道積を ", math(String.raw`x=q`), " で評価する。各軌道 ",
+                    math(String.raw`O\in\mathfrak M_L^{a,b}`), " とその元 ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal K`), " について、実閉部分体 ",
+                    math(String.raw`R`), " の順序で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0
+&<_R(q^2+2q-1)^2
+&&\bigl(\because\ \blkref{claim_dispersion_positive_at_rational_point}\bigr)\\
+&\le_R\Delta(q;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{claim_dispersion_positive_at_rational_point}\bigr)\\
+&=\Delta_O(q)
+&&\bigl(\because\ \Delta_O\text{ は元の選択に依らない、}\blkref{claim_signed_even_subgraph_orbit_product}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "二つ目の ", math(String.raw`\le_R`), " が等号なら一つ目の不等式がそのまま ",
+                    math(String.raw`0<_R\Delta_O(q)`), " であり、狭義なら ",
+                    ref("claim_real_algebraic_order_transitive"), " により ",
+                    math(String.raw`0<_R\Delta_O(q)`), " である。二元・四元軌道の因子はこの ",
+                    math(String.raw`\Delta_O`), " から作られる。",
+                    "一元軌道の因子 ", math(String.raw`F_O`), " は同じ軌道積の定義から三種類だけである。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 1+q^2&>0&&\bigl(\because\ 0<q\text{ と }\mathbb Q\text{ の順序}\bigr)\\
