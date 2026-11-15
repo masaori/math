@@ -89361,10 +89361,10 @@ v_L
 &&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ と }\blkref{claim_partition_log_order_bounds}\text{ の最大値の定義}\bigr).
 \end{aligned}`),
                   paragraph([
-                    ref("claim_partition_log_order_bounds"), " の鎖を ",
-                    ref("claim_rational_embedded_log_order_iff"), " で埋め込み、",
-                    ref("claim_rational_log_order_group_nonneg_scalar_monotone"),
-                    " で正の有理数 ", math(String.raw`L^{-2}`), " 倍する。",
+                    ref("claim_partition_log_order_bounds"), " の鎖の三つの元 ",
+                    math(String.raw`\log M_L^{\mathrm{abs}}(q)-2\ell_2,\ \Phi_L(q),\ \log M_L^{\mathrm{abs}}(q)+\ell_2\in\Lambda`),
+                    " に ", ref("claim_scaled_embedding_order_transfer"),
+                    " を当て、", math(String.raw`L^{-2}`), " 倍した埋め込みの鎖へ移す。",
                     ref("def_finite_free_entropy_density"), " の ",
                     math(String.raw`\Psi_L(q)\in\Lambda_{\mathbb Q}`), " を用いると",
                   ]),
