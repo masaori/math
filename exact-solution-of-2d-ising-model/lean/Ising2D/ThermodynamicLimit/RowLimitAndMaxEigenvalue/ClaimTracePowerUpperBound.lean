@@ -22,8 +22,8 @@
 | 【`e_k` のノルム】`i ≠ k` の `|(e_k)_i|^2` の 3 行の鎖とノルムの 7 行 | `norm_of_standard_basis_vector` の `hoff` の `calc` の 3 段と `calc` の 7 段 |
 | 【冪の実数の行列】`(W^p)_ℝ = (W_ℝ)^p` | `real_matrix_of_real_entry_matrix_preserves_power`（`A → W`, `q → p`）をそのまま引く |
 | 【冪の対称性】6 行と単射性 | `power_of_W_real_entry_symm` の `calc` の 6 段と `inclusion_rr_to_cc_is_injective` |
-| 【対角成分の表示】`i ≠ k` の項の 3 行、`i ≠ k` の内側の和の 2 行、`j ≠ k` の項の 2 行と主の 7 行 | `diagonal_entry_via_standard_basis` の `hterm` の 3 段、`hrow` の 2 段、`hcol` の 2 段と `calc` の 7 段 |
-| 【`(W_ℝ)^ae_k` の成分とノルム】`m ≠ k` の項の 2 行と成分の 4 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 4 段 |
+| 【対角成分の表示】`i ≠ k` の項の 3 行、`i ≠ k` の内側の和の 2 行、`j ≠ k` の項の 2 行と主の 9 行 | `diagonal_entry_via_standard_basis` の `hterm` の 3 段、`hrow` の 2 段、`hcol` の 2 段と `calc` の 9 段 |
+| 【`(W_ℝ)^ae_k` の成分とノルム】`m ≠ k` の項の 2 行と成分の 5 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段のノルムの 3 行 | `norm_power_of_W_real_mulVec_standard_basis_le` の `calc` の 3 段 |
 | 同じ段の平方の 2 行 | `norm_sq_power_of_W_real_mulVec_standard_basis_le` の `calc` の 2 段 |
 | 偶数: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a` の 5 行 | `power_of_W_real_even_split` の `calc` の 5 段 |
@@ -113,7 +113,7 @@ theorem power_of_W_real_entry_symm (p : ℕ) (k l : Conf M) :
     _ = (((realMatrixOfRealEntries W hW.1 ^ p) l k : ℝ) : ℂ) := by
         rw [real_matrix_of_real_entry_matrix_preserves_power W hW.1 p]      -- 【冪の実数の行列】の `(W^p)_ℝ = (W_ℝ)^p`
 
-/-- 人手【対角成分の表示】: `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（準備の 3 行・2 行・2 行と主の 7 行）。 -/
+/-- 人手【対角成分の表示】: `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（準備の 3 行・2 行・2 行と主の 9 行）。 -/
 theorem diagonal_entry_via_standard_basis (p : ℕ) (k : Conf M) :
     (Pi.single k (1 : ℝ)) ⬝ᵥ (realMatrixOfRealEntries W hW.1 ^ p) *ᵥ (Pi.single k (1 : ℝ))
       = (realMatrixOfRealEntries W hW.1 ^ p) k k := by
@@ -147,7 +147,9 @@ theorem diagonal_entry_via_standard_basis (p : ℕ) (k : Conf M) :
     _ = ∑ j, e k * P k j * e j := by
         rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
                                                                             -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
-    _ = ∑ j, P k j * e j := by simp only [he, Pi.single_eq_same, one_mul]          -- `(e_k)_k = 1`
+    _ = ∑ j, 1 * P k j * e j := by rw [he, Pi.single_eq_same]                 -- `(e_k)_k = 1`
+    _ = ∑ j, P k j * e j :=
+        Finset.sum_congr rfl fun j _ => by rw [one_mul (P k j)]          -- `1` は ℝ の乗法の単位元 `1·x = x`（`x → ((W_ℝ)^p)_kj`、`set_and_algebra_notation`）を各項へ
     _ = ∑ j, if j = k then P k k * e k else 0 := by
         refine Finset.sum_congr rfl fun j _ => ?_
         by_cases h : j = k
@@ -156,9 +158,10 @@ theorem diagonal_entry_via_standard_basis (p : ℕ) (k : Conf M) :
     _ = P k k * e k := by
         rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
                                                                             -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
-    _ = P k k := by rw [he, Pi.single_eq_same, mul_one]                     -- `(e_k)_k = 1`
+    _ = P k k * 1 := by rw [he, Pi.single_eq_same]                          -- `(e_k)_k = 1`
+    _ = P k k := mul_one (P k k)                                            -- `1` は ℝ の乗法の単位元 `x·1 = x`（`x → ((W_ℝ)^p)_kk`、`set_and_algebra_notation`）
 
-/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の `m ≠ k` の項の 2 行と成分の 4 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
+/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の `m ≠ k` の項の 2 行と成分の 5 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
 theorem power_of_W_real_mulVec_standard_basis_apply (a : ℕ) (k l : Conf M) :
     ((realMatrixOfRealEntries W hW.1 ^ a) *ᵥ (Pi.single k (1 : ℝ))) l
       = (realMatrixOfRealEntries W hW.1 ^ a) l k := by
@@ -179,7 +182,8 @@ theorem power_of_W_real_mulVec_standard_basis_apply (a : ℕ) (k l : Conf M) :
     _ = P l k * e k := by
         rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
                                                                             -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
-    _ = P l k := by rw [he, Pi.single_eq_same, mul_one]                     -- `(e_k)_k = 1`
+    _ = P l k * 1 := by rw [he, Pi.single_eq_same]                          -- `(e_k)_k = 1`
+    _ = P l k := mul_one (P l k)                                            -- `1` は ℝ の乗法の単位元 `x·1 = x`（`x → ((W_ℝ)^a)_lk`、`set_and_algebra_notation`）
 
 /-- 人手 偶数の場合の 5 行: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a`。 -/
 theorem power_of_W_real_even_split (a : ℕ) :

@@ -96,9 +96,9 @@ def check_proof_lines(P, c, nmax, what):
                 eq(acc + t, acc, f"{label} の段（r + 0 = r）j={j}")
             acc = acc + t
         eq(acc, kept, f"{label}（0 の項を左から順に落とす）")
-    # 【対角成分の表示】: 準備（i ≠ k の項の 3 行、i ≠ k の内側の和の 2 行、j ≠ k の項の 2 行）と主の 7 行
+    # 【対角成分の表示】: 準備（i ≠ k の項の 3 行、i ≠ k の内側の和の 2 行、j ≠ k の項の 2 行）と主の 9 行
     # e_k^⊤W^pe_k = ΣΣ (e_k)_i (W^p)_ij (e_k)_j = 0+⋯+0+Σ_j (e_k)_k (W^p)_kj (e_k)_j+0+⋯+0 = Σ_j (e_k)_k (W^p)_kj (e_k)_j
-    #   = Σ_j (W^p)_kj (e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk (e_k)_k = (W^p)_kk
+    #   = Σ_j 1·(W^p)_kj (e_k)_j = Σ_j (W^p)_kj (e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk (e_k)_k = (W^p)_kk·1 = (W^p)_kk
     for p in range(nmax + 1):
         Q = pw[p]
         for k in range(d):
@@ -125,13 +125,22 @@ def check_proof_lines(P, c, nmax, what):
             kept_row = sum_left_to_right([(e[k] * Q[k, j]) * e[j] for j in range(d)])
             rows_sub = [kept_row if i == k else QQ(0) for i in range(d)]
             cols_sub = [Q[k, k] * e[k] if j == k else QQ(0) for j in range(d)]
+            eq(e[k], 1, f"{what}: 【対角成分の表示】の (e_k)_k = 1")
+            one_terms = [(QQ(1) * Q[k, j]) * e[j] for j in range(d)]
+            for j in range(d):
+                eq((e[k] * Q[k, j]) * e[j], one_terms[j], f"{what}: 【対角成分の表示】の 4 行目を各項で（(e_k)_k = 1）p={p}, k={k}, j={j}")
+                eq(QQ(1) * Q[k, j], Q[k, j], f"{what}: 【対角成分の表示】の 5 行目の根拠 1·x = x（x → (W^p)_kj）p={p}, k={k}, j={j}")
+            eq(Q[k, k] * e[k], Q[k, k] * QQ(1), f"{what}: 【対角成分の表示】の 8 行目（(e_k)_k = 1）p={p}, k={k}")
+            eq(Q[k, k] * QQ(1), Q[k, k], f"{what}: 【対角成分の表示】の 9 行目（x·1 = x、x → (W^p)_kk）p={p}, k={k}")
             L = [bil(e, Q, e),
                  sum_left_to_right(rows),
                  sum_left_to_right(rows_sub),
                  kept_row,
+                 sum_left_to_right(one_terms),
                  sum_left_to_right([Q[k, j] * e[j] for j in range(d)]),
                  sum_left_to_right(cols_sub),
                  Q[k, k] * e[k],
+                 Q[k, k] * QQ(1),
                  Q[k, k]]
             for a, b in zip(L, L[1:]):
                 eq(a, b, f"{what}: 【対角成分の表示】 p={p}, k={k}")
@@ -139,8 +148,8 @@ def check_proof_lines(P, c, nmax, what):
                 eq(rows[i], rows_sub[i], f"{what}: 【対角成分の表示】の 2 行目を各項で（i ≠ k は上の内側の和が 0）p={p}, k={k}, i={i}")
             drop_zeros_left_to_right(rows_sub, kept_row, f"{what}: 【対角成分の表示】の 3 行目 p={p}, k={k}")
             for j in range(d):
-                eq(Q[k, j] * e[j], cols_sub[j], f"{what}: 【対角成分の表示】の 5 行目を各項で（j ≠ k は上の項が 0）p={p}, k={k}, j={j}")
-            drop_zeros_left_to_right(cols_sub, Q[k, k] * e[k], f"{what}: 【対角成分の表示】の 6 行目 p={p}, k={k}")
+                eq(Q[k, j] * e[j], cols_sub[j], f"{what}: 【対角成分の表示】の 6 行目を各項で（j ≠ k は上の項が 0）p={p}, k={k}, j={j}")
+            drop_zeros_left_to_right(cols_sub, Q[k, k] * e[k], f"{what}: 【対角成分の表示】の 7 行目 p={p}, k={k}")
             eq(L[0], (e.row() * Q * e.column())[0, 0], f"{what}: 【対角成分の表示】 と組み込みの行列積 p={p}, k={k}")
     # 【W^ae_k の成分とノルム】: u := W^ae_k、u_l = Σ_m (W^a)_lm (e_k)_m = (W^a)_lk、‖u‖ ≤ c^a‖e_k‖ = c^a、‖u‖^2 ≤ c^{2a}
     U = {}
@@ -161,7 +170,9 @@ def check_proof_lines(P, c, nmax, what):
                     eq(terms[m], terms_sub[m], f"{what}: 【W^ae_k の成分とノルム】の 2 行目を各項で（m ≠ k は上の項が 0）")
                 eq(sum_left_to_right(terms), sum_left_to_right(terms_sub), f"{what}: 【W^ae_k の成分とノルム】の 2 行目")
                 drop_zeros_left_to_right(terms_sub, pw[a][l, k] * E[k][k], f"{what}: 【W^ae_k の成分とノルム】の 3 行目 a={a}, k={k}, l={l}")
-                eq(pw[a][l, k] * E[k][k], pw[a][l, k], f"{what}: 【W^ae_k の成分とノルム】の 4 行目")
+                eq(E[k][k], 1, f"{what}: 【W^ae_k の成分とノルム】の (e_k)_k = 1")
+                eq(pw[a][l, k] * E[k][k], pw[a][l, k] * QQ(1), f"{what}: 【W^ae_k の成分とノルム】の 4 行目（(e_k)_k = 1）")
+                eq(pw[a][l, k] * QQ(1), pw[a][l, k], f"{what}: 【W^ae_k の成分とノルム】の 5 行目（x·1 = x、x → (W^a)_lk）")
                 eq(u[l], pw[a][l, k], f"{what}: u_l = (W^a)_lk")
             nu = norm_exact(u)
             le(nu, c**a * norm_exact(E[k]), f"{what}: 【W^ae_k の成分とノルム】の ‖u‖ ≤ c^a‖e_k‖ a={a}, k={k}")

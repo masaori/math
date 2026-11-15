@@ -2144,14 +2144,18 @@ e_k^\top (W_{\mathbb{R}})^p e_k
 &&\bigl(\because\ \text{上の}\ i \neq k\ \text{の内側の和が}\ 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ i = k\ \text{の項の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=\sum_{j=1}^{d}(e_k)_k\,\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
-&=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
+&=\sum_{j=1}^{d}1\cdot\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
 &&\bigl(\because\ (e_k)_k = 1\bigr)\\
+&=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to ((W_{\mathbb{R}})^p)_{kj})\ \text{（}\blkref{set_and_algebra_notation}\text{）を}\ j = 1,\dots,d\ \text{の各項へ}\bigr)\\
 &=0 + \cdots + 0 + \bigl((W_{\mathbb{R}})^p\bigr)_{kk}\,(e_k)_k + 0 + \cdots + 0
 &&\bigl(\because\ \text{上の}\ j \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^p\bigr)_{kj}(e_k)_j = 0\ \text{を}\ k\ \text{以外の各項へ。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}\,(e_k)_k
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
+&=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}\cdot 1
+&&\bigl(\because\ (e_k)_k = 1\bigr)\\
 &=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}
-&&\bigl(\because\ (e_k)_k = 1\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to ((W_{\mathbb{R}})^p)_{kk})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "【",
@@ -2186,8 +2190,10 @@ u_l
 &&\bigl(\because\ \text{上の}\ m \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^a\bigr)_{lm}(e_k)_m = 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
+&=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\cdot 1
+&&\bigl(\because\ (e_k)_k = 1\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}
-&&\bigl(\because\ (e_k)_k = 1\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to ((W_{\mathbb{R}})^a)_{lk})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph(["であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -2392,6 +2398,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「d c^n = 2^{M_col} c^n（∵ d := 2^{M_col}）」は、行列の大きさ d ∈ ℤ と ℝ の冪 2^{M_col} を同じ記号で等号で結んでいた。新しく足した inclusion_zz_to_rr の写像 ι_{ℤ→ℝ} を通し、「同じ項 c^n を d 個足した和 = ι(d)c^n」を finite_sum_of_constant_real_number、「ι(2_ℤ^{M_col}) = 2_ℝ^{M_col}」を inclusion_zz_to_rr_of_power_of_two の参照にした。d を def_power_of_integer の 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した。主張の 2^{M_col} が ℝ の冪であることを主張の文に書いた。値は変わらない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【対角成分の表示】の i ≠ k・j ≠ k の項と【(W_ℝ)^ae_k の成分とノルム】の m ≠ k の項を、0 を掛けると 0 を書かずに「(e_k)_i = 0 なので 0」で和から落としていた。準備に、左から 0 の項の 3 行の鎖（(e_k)_i = 0 の代入、real_zero_times_is_zero を 2 回）、i ≠ k の内側の和が 0 の 2 行の鎖、右から 0 の項の 2 行の鎖（(e_k)_j = 0 の代入、real_times_zero_is_zero）を置き、主の鎖の落とす段を、各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（【e_k のノルム】と同じ書き方。【対角成分の表示】は 5 行から 7 行、成分の鎖は 3 行から 4 行。式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【対角成分の表示】の主の鎖の (e_k)_k = 1 の 2 行と【(W_ℝ)^ae_k の成分とノルム】の成分の鎖の最後の行が、(e_k)_k = 1 の代入と 1·x = x（または x·1 = x）を 1 行に束ね、根拠に代入しか書いていなかった。代入の行（1·((W_ℝ)^p)_{kj}(e_k)_j、((W_ℝ)^p)_{kk}·1、((W_ℝ)^a)_{lk}·1）と、1 は ℝ の乗法の単位元（set_and_algebra_notation）の行に分けた。主張と式の両端は不変。数値検証: sagemath/check/trace_power_upper_bound/。",
       ],
     },
   },
