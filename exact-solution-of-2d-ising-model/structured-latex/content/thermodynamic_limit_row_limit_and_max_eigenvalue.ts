@@ -2345,7 +2345,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}u_l\,(W_{\mathbb{R}})_{lr}\,u_r
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ u_l = ((W_{\mathbb{R}})^a)_{lk},\ u_r = ((W_{\mathbb{R}})^a)_{rk}\bigr)\\
 &=u^\top W_{\mathbb{R}}u
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x, y \to u,\ k \to l,\ l \to r)\bigr)\\
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x, y \to u,\ (k, l) \to (l, r))\bigr)\\
 &\leq c\,\|u\|^2
 &&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top W_{\mathbb{R}}x \leq c\|x\|^2\ (x \to u)\bigr)\\
 &\leq c\,c^{2a}
