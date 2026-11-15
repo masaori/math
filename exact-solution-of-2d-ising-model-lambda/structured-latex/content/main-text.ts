@@ -84616,6 +84616,11 @@ Z_L(q)
                 labels: ["claim_high_temperature_partition_bounds"],
                 habitat: "Q",
                 verification: ["sagemath/check/high-temperature-partition-bounds"],
+                lean: [
+                  "Ising2DLambda.KacWard.highTemperaturePartitionBounds",
+                  "Ising2DLambda.NecSuf.KacWard.high_temperature_partition_bounds_necSuf",
+                  "Ising2DLambda.KacWard.highTemperaturePartitionBounds_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と有理数 ",
@@ -84668,8 +84673,10 @@ Z_L(q)
 &&\bigl(\because\ \blkref{claim_low_temperature_partition_bounds}\bigr).
 \end{aligned}`),
                   paragraph([
-                    ref("claim_signed_even_subgraph_duality_sign"), " を ",
-                    math(String.raw`x=q`), " で評価する。",
+                    ref("claim_signed_even_subgraph_duality_up_to_sign"), " を ",
+                    math(String.raw`x=q`), " で評価する。符号 ",
+                    math(String.raw`\epsilon_L^{a,b}\in\{1,-1\}`),
+                    " の値は使わない。",
                     "両辺の値は有理数に属するので、",
                     ref("def_algebraic_numbers"), " の有理数から代数的数への単射により、",
                     "以下の等号は有理数の等号である。",
@@ -84680,7 +84687,7 @@ Z_L(q)
                   displayMath(String.raw`\begin{aligned}
 \frac{(1+q)^{2L^2}}{2^{L^2}}Q_L^{a,b}(t)
 &=\epsilon_L^{a,b}Q_L^{a,b}(q)
-&&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_sign}\bigr)\\
+&&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr)\\
 &=|Q_L^{a,b}(q)|
 &&\bigl(\because\ \text{左辺は正で }\epsilon_L^{a,b}\in\{1,-1\}\bigr).
 \end{aligned}`),
