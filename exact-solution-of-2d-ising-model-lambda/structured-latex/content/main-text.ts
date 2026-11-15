@@ -9403,7 +9403,7 @@ k+k&\ge1+k&&\bigl(\because\ 1\le k\text{ に右から }k\text{ を加える}\big
 \end{aligned}`),
               displayMath(String.raw`\begin{aligned}
 \sigma(b)&=\sigma(\sigma^{-1}(m))&&\bigl(\because\ \sigma^{-1}(m)=b\bigr)\\
- &=m&&\bigl(\because\ \text{置換とその逆写像の相殺}\bigr),\\
+ &=m&&\bigl(\because\ \text{置換とその逆写像の相殺}\bigr)\\
 \sigma^{-1}(b)&=\sigma^{-1}(\sigma(m))&&\bigl(\because\ b=\sigma(m)\bigr)\\
  &=m&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr)
 \end{aligned}`),
