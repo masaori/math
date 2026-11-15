@@ -6,12 +6,9 @@
 基点の座標差がその幅を超えるという仮定に反することを示す。住処は ℤ だけである。
 -/
 import Ising2DLambda.KacWard.IteratedStaircaseParallelWidth
-import Ising2DLambda.NecSuf.KacWard.ParallelSeparatedStaircases
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `claim_parallel_separated_staircases_disjoint`。 -/
 theorem parallelSeparatedIteratedTransverseStaircases_ne
@@ -25,18 +22,18 @@ theorem parallelSeparatedIteratedTransverseStaircases_ne
         windingParallelCoordinate wv wh rightBase| > |wh * wv|) :
     iteratedTransverseStaircase wh wv leftBase s ≠
       iteratedTransverseStaircase wh wv rightBase s' := by
-  have hintervalWidth :
-      max 0 (wh * wv) - min 0 (wh * wv) = |wh * wv| := by
+  intro heq
+  have hleft := iteratedTransverseStaircase_parallel_width_bound wh wv leftBase hwind s
+  have hright := iteratedTransverseStaircase_parallel_width_bound wh wv rightBase hwind s'
+  have hcoordinate := congrArg (windingParallelCoordinate wv wh) heq
+  have hwidth : max 0 (wh * wv) - min 0 (wh * wv) = |wh * wv| := by
     simpa using (max_sub_min_eq_abs (0 : ℤ) (wh * wv))
-  apply separated_bases_bounded_families_disjoint_necSuf
-    (fun u => iteratedTransverseStaircase wh wv leftBase u)
-    (fun u => iteratedTransverseStaircase wh wv rightBase u)
-    (windingParallelCoordinate wv wh) leftBase rightBase
-    (min 0 (wh * wv)) (max 0 (wh * wv))
-  · intro u
-    exact iteratedTransverseStaircase_parallel_width_bound wh wv leftBase hwind u
-  · intro u
-    exact iteratedTransverseStaircase_parallel_width_bound wh wv rightBase hwind u
-  · simpa [hintervalWidth] using hseparated
+  have hbound :
+      |windingParallelCoordinate wv wh leftBase -
+        windingParallelCoordinate wv wh rightBase| ≤
+          max 0 (wh * wv) - min 0 (wh * wv) := by
+    rw [abs_le]
+    constructor <;> omega
+  omega
 
 end Ising2DLambda.KacWard

@@ -71692,7 +71692,7 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
 &&\bigl(\because\ 0\le r\le H\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr),\\
 \pi_{\gamma}(C^{\gamma}_r)
 &=A-w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))(r-H)
-&&\bigl(\because\ H<r\le H+V\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr).
+&&\bigl(\because\ H<r\le H+V\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr)
 \end{aligned}`),
                       paragraph([
                         "第一の列は ", math(String.raw`r=0`), " で ", math(String.raw`0`), "、",
