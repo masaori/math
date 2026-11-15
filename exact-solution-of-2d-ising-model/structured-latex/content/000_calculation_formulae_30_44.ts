@@ -208,8 +208,10 @@ y & (x=0,\ y>0),\\
 \sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
 &= \sqrt{0^2+y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ x=0)\\
+&= \sqrt{0\cdot 0+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0))\\
 &= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= y
@@ -227,8 +229,10 @@ y & (x=0,\ y>0),\\
 \sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
 &= \sqrt{0^2+y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ x=0)\\
+&= \sqrt{0\cdot 0+y^2}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0))\\
 &= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= \sqrt{(-y)^2}^{(\mathbb{R}_{\ge 0})}
@@ -248,8 +252,10 @@ y & (x=0,\ y>0),\\
 \sqrt{x^2+y^2}^{(\mathbb{R}_{\ge 0})}
 &= \sqrt{0^2+0^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ x=0\ \text{かつ}\ y=0)\\
+&= \sqrt{0\cdot 0+0\cdot 0}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0)\ \text{を 2 箇所へ適用})\\
 &= \sqrt{0+0}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0\text{。2 箇所へ適用})\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0)\ \text{を 2 箇所へ適用})\\
 &= \sqrt{0}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= 0
@@ -293,8 +299,10 @@ x^2+y^2
 &&(\because\ \text{上で示した絶対値の平方})\\
 &= 0^2
 &&(\because\ \text{仮定}\ |z|=0)\\
+&= 0\cdot 0
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0))\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))
 \end{aligned}`,
       ),
       paragraph([
@@ -441,8 +449,10 @@ x^2+y^2
 &&(\because\ \mathbb{R}\ \text{から}\ \mathbb{C}\ \text{への包含写像の定め方})\\
 &= \sqrt{x^2+0^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{上で示した成分による表示})\\
+&= \sqrt{x^2+0\cdot 0}^{(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 0))\\
 &= \sqrt{x^2+0}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
 \end{aligned}`,
@@ -499,6 +509,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(3) の |z| = 0 の鎖・(6) の鎖が、0^2 から 0 への行を名前だけの根拠「ℝ では 0 を因子にもつ積は 0」で済ませていた（冪を積に開く段も書かれていなかった）ので、square_of_real_number_is_product（r → 0）の行と real_zero_times_is_zero（x → 0）の行に割った（x = y = 0 の場合はどちらも 2 箇所へ）。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/103_abs_basic_properties/check_03_zero_square_rows.sage。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: (6) の x ≥ 0 の場合の √(x^2) = x と x < 0 の場合の √((−x)^2) = −x の行の根拠が「平方根の一意性」の名前だけだったので、(1) と同じく definition_of_sqrt_r_positive（(1) と同じ s・u の言い換えを (6) の場合分けの前に置き直し、s → x^2、s → (−x)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y > 0 の場合の √(y^2) = y と x = 0, y < 0 の場合の √((−y)^2) = −y の行の根拠が「平方根の一意性」の名前だけだったので、definition_of_sqrt_r_positive（直前の段落の s・u で書き、s → y^2、s → (−y)^2）と sqrt_nonnegative_existence_uniqueness の一意性の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y = 0 の場合の鎖の √0 = 0 の行の根拠（0 ≥ 0・0^2 = 0・平方根の一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
@@ -1228,8 +1239,12 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
 &= 0-2\cdot 0\cdot\pi
 &&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と}\ 0\leq 0-2\cdot0\cdot\pi<2\pi)\\
+&= 0-0\cdot\pi
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2))\\
+&= 0-0
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
 &= 0
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0\ \text{であり、}\ 0\ \text{は和の単位元})
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1249,13 +1264,13 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0\cdot 0,\theta+\theta)]_{\sim})\right)
 &&(\because\ \text{極座標表現の演算（}\blkref{operations_on_polar_representation}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta+\theta)]_{\sim})\right)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
 &= 0
-&&(\because\ \text{いま見た}\ \arg^{[0,2\pi)}(z)\ \text{の計算の最後の 2 段})\\
+&&(\because\ \text{いま見た}\ \arg^{[0,2\pi)}(z)\ \text{の計算の最後の 4 段})\\
 &= 2\cdot 0
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\ \text{を右辺から左辺へ})\\
 &= 2\arg^{[0,2\pi)}(z)
 &&(\because\ \text{いま見た}\ \arg^{[0,2\pi)}(z)=0)
 \end{aligned}`,
@@ -1401,6 +1416,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
           "第 1 の場合の等式 0 = 2·0 が成り立つ）。そこで r = 0 の場合を別の場合として" +
           "先に片付け、r ≠ 0 の場合だけで pr_2([(r·r, θ+θ)]) = [θ+θ] の段を使う形にした。" +
           "成り立つ主張に不要な仮定を足すのは主張を弱めることになるので、そうしなかった。",
+        "2026-11-14（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の 3 か所の名前だけの根拠「0 を因子にもつ積は 0」を参照に替えた。arg(z) の鎖の最後の行（0 − 2·0·π = 0。0 を因子にもつ積と 0 は和の単位元を 1 行で当てていた）を real_times_zero_is_zero（x → 2）・real_zero_times_is_zero（x → π）・ℝ で a − 0 = a（a → 0）の 3 行に割り、arg(z^2) の鎖の 0·0 = 0 の行を real_zero_times_is_zero（x → 0）に、0 = 2·0 の行を real_times_zero_is_zero（x → 2）を右辺から左辺へ、にした（どちらも同じファイルより前の 000_calculation_formulae_20_29.ts のブロック）。arg(z^2) の鎖が引く「arg(z) の計算の最後の 2 段」を、割った後の「最後の 4 段」に直した。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/106_range_of_args_of_square_of_complex_numbers/check_02_zero_radius_rows.sage。",
         "原文は r, θ, n を導入していなかった（証明の中で θ と n を断りなく使っていた）ので、" +
           "積の場合と同じ設定を statement に書き下した。",
       ],
