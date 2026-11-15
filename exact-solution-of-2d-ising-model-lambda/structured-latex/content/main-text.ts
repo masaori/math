@@ -84070,6 +84070,15 @@ z=z^{-1}
                 labels: ["claim_signed_even_subgraph_orbit_product"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/signed-even-subgraph-orbit-product"],
+                lean: [
+                  "Ising2DLambda.KacWard.orbitExplicitProduct_sq",
+                  "Ising2DLambda.NecSuf.KacWard.orbit_explicit_product_sq_necSuf",
+                  "Ising2DLambda.KacWard.orbitExplicitProduct_sq_from_necSuf",
+                  "Ising2DLambda.KacWard.orbitExplicitProduct_coeff_zero",
+                  "Ising2DLambda.KacWard.orbitExplicitProduct_eq_signedEvenSubgraphPolynomial",
+                  "Ising2DLambda.NecSuf.KacWard.orbit_explicit_product_eq_squareRoot_necSuf",
+                  "Ising2DLambda.KacWard.orbitExplicitProduct_eq_signedEvenSubgraphPolynomial_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
@@ -84133,7 +84142,7 @@ z=z^{-1}
 &=\mathrm{ac}_0\!\left(\prod_{|O|=1}F_O\cdot\prod_{|O|=2}\Delta_O\cdot\prod_{|O|=4}\Delta_O^2\right)
 &&\bigl(\because\ P_L^{a,b}\text{ の定義}\bigr)\\
 &=\prod_{|O|=1}\mathrm{ac}_0(F_O)\cdot\prod_{|O|=2}\mathrm{ac}_0(\Delta_O)\cdot\prod_{|O|=4}\mathrm{ac}_0(\Delta_O)^2
-&&\bigl(\because\ \text{有限積の定数項は各因子の定数項の積}\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の積の係数 }\mathrm{ac}_0(fg)=\mathrm{ac}_0(f)\,\mathrm{ac}_0(g)\text{ を因子ごとに繰り返す}\bigr)\\
 &=\prod_{|O|=2}\mathrm{ac}_0(\Delta_O)\cdot\prod_{|O|=4}\mathrm{ac}_0(\Delta_O)^2
 &&\bigl(\because\ F_O\text{ の定義から定数項は一}\bigr)\\
 &=1
