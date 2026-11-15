@@ -73185,7 +73185,7 @@ u_s
                       ]),
                       displayMath(String.raw`\vartheta(u,v)
 =\begin{cases}0,&v=u,\\1,&v=(u_2,-u_1),\\-1,&v=(-u_2,u_1)\end{cases}
-\qquad\bigl(\because\ \vartheta\text{ の定義に四方向と三つの回転を代入}\bigr).`),
+\qquad\bigl(\because\ \vartheta\text{ の定義に四方向と三つの回転を代入}\bigr)`),
                       paragraph([
                         "これは一歩の回転数（", ref("def_step_turning"), "）の三場合と一致する。",
                         "射影は歩の方向を保つ（", ref("def_plane_unit_path_torus_projection"),

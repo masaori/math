@@ -88,6 +88,32 @@ def reversedParallelStaircaseStep (L : ℕ) (wh wv : ℤ) (s : ℕ) : ℤ × ℤ
   windingParallelStaircase L wh wv (L * wh.natAbs + L * wv.natAbs - 1 - s) -
     windingParallelStaircase L wh wv (L * wh.natAbs + L * wv.natAbs - s)
 
+/-- 本文の二段階階段の座標式から、境界を含む隣接差を直接読む。 -/
+private theorem twoPhaseStaircase_difference_concrete (p : ℕ) (a b : ℤ × ℤ) (j : ℕ) :
+    twoPhaseStaircase p a b (j + 1) - twoPhaseStaircase p a b j =
+      twoBlockSequence p a b j := by
+  by_cases hj : j < p
+  · simp [twoPhaseStaircase, twoBlockSequence, hj, show j ≤ p by omega,
+      show j + 1 ≤ p by omega, add_smul]
+  · by_cases heq : j = p
+    · subst j
+      simp [twoPhaseStaircase, twoBlockSequence]
+    · have hsub : j + 1 - p = (j - p) + 1 := by omega
+      simp [twoPhaseStaircase, twoBlockSequence, hj, show ¬j ≤ p by omega,
+        show ¬j + 1 ≤ p by omega, hsub, add_smul]
+
+/-- 添字を逆順にすると、二段階の歩の順序と向きがともに反転する。 -/
+private theorem reversedTwoPhaseStaircase_difference_concrete
+    (p q : ℕ) (a b : ℤ × ℤ) (s : ℕ) (hs : s < p + q) :
+    twoPhaseStaircase p a b (p + q - 1 - s) -
+      twoPhaseStaircase p a b (p + q - s) =
+        twoBlockSequence q (-b) (-a) s := by
+  have hindex : p + q - s = (p + q - 1 - s) + 1 := by omega
+  rw [hindex, ← neg_sub, twoPhaseStaircase_difference_concrete]
+  by_cases hsq : s < q
+  · simp [twoBlockSequence, hsq, show ¬p + q - 1 - s < p by omega]
+  · simp [twoBlockSequence, hsq, show p + q - 1 - s < p by omega]
+
 theorem reversedParallelStaircaseStep_unit_negative (L : ℕ) (wh wv : ℤ) (s : ℕ)
     (hs : s < L * wh.natAbs + L * wv.natAbs) :
     let u := reversedParallelStaircaseStep L wh wv s
@@ -154,11 +180,11 @@ theorem reversedParallelStaircaseStep_eq (L : ℕ) (wh wv : ℤ) (s : ℕ)
   unfold reversedParallelStaircaseStep windingParallelStaircase orderedTwoPhaseStaircase
   by_cases horder : 0 < wh * wv
   · simp only [if_pos horder]
-    exact reversedTwoPhaseStaircase_difference_necSuf _ _ _ _ _ hs
+    exact reversedTwoPhaseStaircase_difference_concrete _ _ _ _ _ hs
   · simp only [if_neg horder]
     have hs' : s < L * wv.natAbs + L * wh.natAbs := by omega
     simpa only [Nat.add_comm] using
-      reversedTwoPhaseStaircase_difference_necSuf
+      reversedTwoPhaseStaircase_difference_concrete
         (L * wv.natAbs) (L * wh.natAbs) (Int.sign wv, 0) (0, Int.sign wh) s hs'
 
 theorem reversedParallelStaircase_cyclicSum_eq (L : ℕ) (wh wv : ℤ)
