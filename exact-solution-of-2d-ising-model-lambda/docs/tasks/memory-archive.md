@@ -1,3 +1,5 @@
+2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」の積の符号の合成の段を Lean 具体版 `signedEvenSubgraphPolynomial_rational_sign`・必要十分版 `sign_compose_necSuf` ほか・導出版で示し、三段の十五件を本文の `lean:` に登録した。本文の最後の段落に正の元の積の式鎖と三分法による符号の反映を書き、SageMath に `check_sign_composition.sage` を足した。
+
 2026-11-15（並列）: 「自己双対点より低温側での分配多項式の両側評価」を Lean 具体版 `lowTemperaturePartitionBounds`（有限トーラス公式の有理点での評価 `finiteTorusPolynomial_eval_rat` を含む）・必要十分版 `half_sum_two_sided_bounds_necSuf`（線型順序体・$|\iota|=4$・非負性だけ）・導出版で示し、本文の `lean:` に四件を登録した。本文と SageMath の修正は不要だった。
 
 2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」のモード $(1,1)$ の所属の段を Lean 具体版 `oneOne_mem_twistedModes_iff`・`oneElementOrbits_filter_one_one` ほか、必要十分版（所属は環と $1\ne-1$ だけ、軌道は $1^{-1}=1$ と逆元の対合性だけ、代表元の段は代表元の所属と $(1,1)$ を含む軌道の決定だけ）、導出版で示した。レビューで本文の所属の式鎖を三行に分け、$(1,1)$ を含む軌道が $O(1,1)=\{(1,1)\}$ だけであることの根拠を書き（主張は不変）、SageMath `check_one_one_membership.sage` を足した（PASS）。
