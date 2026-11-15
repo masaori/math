@@ -1,3 +1,5 @@
+2026-11-14（並列）: Pfaffian の式鎖で書かれていなかった、補辺の切断線偶奇 $h(P),v(P)$ と巻き付き偶奇 $\varepsilon_{L,\mathrm h}(P),\varepsilon_{L,\mathrm v}(P)$ の一致を本文の主張二つにし、SageMath・Lean 具体版・必要十分版・導出版で示した（`KacWard/EdgeSetSeamWindingParity.lean`）。
+
 2026-11-14（主経路）: 一側閉包の四接合の固定列同定を Lean 具体版で直接示し、例外台帳から一件を消した。方向同定式の行末句点を除いた。
 
 2026-11-14（並列）: 局所対合族の横断数 $t_P(\kappa)$ と、対応する非零の標識付き完全マッチングの短い対の横断数 $t(D,T)$ の一致を頂点ごとの数え上げで示し、二つ目の等式を合成した（`KacWard/LocalPairingCrossingCount.lean`。Lean 具体版・必要十分版・導出版）。本文の証明に頂点ごとの数え上げと二つ目の等式の式鎖を足した。

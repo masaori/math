@@ -80304,6 +80304,12 @@ t(D,T)
                     labels: ["claim_determinant_signed_even_subgraph_square"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/determinant-signed-even-subgraph-square"],
+                    lean: [
+                      "Ising2DLambda.KacWard.gaugedTerminalMatrix_isZeroDiagonalSkew",
+                      "Ising2DLambda.KacWard.kacWardDeterminant_eq_signedEvenSubgraphPolynomial_sq",
+                      "Ising2DLambda.NecSuf.KacWard.eq_sq_of_det_eq_of_pfaffian_sq_eq_det",
+                      "Ising2DLambda.KacWard.kacWardDeterminant_eq_signedEvenSubgraphPolynomial_sq_from_necSuf",
+                    ],
                     statement: [
                       paragraph(["任意の辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とねじれ ", math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("def_kac_ward_determinants"), " と ", ref("def_signed_even_subgraph_polynomial"), " の多項式は、係数を ", math(String.raw`\overline{\mathbb Q}`), " に送ったとき"]),
                       displayMath(String.raw`D_L^{a,b}(x)=\bigl(Q_L^{a,b}\bigr)^2\quad\text{in }\overline{\mathbb Q}[x]`),
