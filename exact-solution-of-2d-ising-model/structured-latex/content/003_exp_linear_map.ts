@@ -1940,14 +1940,20 @@ S_NT_N
     ],
     proof: [
       paragraph([
-        "準備として、零行列の冪を書き下しておく。行列の冪の定義より ",
-        math(String.raw`O^0 = I`),
-        " であり、",
-        math(String.raw`n \geq 1`),
-        " のとき ",
-        math(String.raw`O^n = O`),
-        " である。",
+        "準備として、零行列の冪を書き下しておく。",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+O^k
+&= O^{k-1}\,O
+&&(\because\ \blkref{def_exp}\ \text{(1) の}\ A^{m+1} := A^m A\ (K \to \mathbb{C},\ n \to d,\ A \to O,\ m \to k-1))\\
+&= O
+&&(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ (m, n, p \to d,\ A \to O^{k-1}))
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(O)
@@ -1956,9 +1962,9 @@ S_NT_N
 &= \frac{O^0}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
 &&(\because\ \text{収束級数の第 0 項を分ける})\\
 &= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
-&&(\because\ O^0 = I)\\
+&&(\because\ \blkref{def_exp}\ \text{(1) の}\ A^0 := I\ (K \to \mathbb{C},\ n \to d,\ A \to O))\\
 &= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!}
-&&(\because\ n \geq 1\ \text{のとき}\ O^n = O)\\
+&&(\because\ \text{準備の}\ O^k = O\ (k \to n)\ \text{を}\ n \geq 1\ \text{の各項へ})\\
 &= I + \sum_{n=1}^{\infty} \frac{O}{n!}
 &&(\because\ 0! = 1)\\
 &= I + \Bigl(\sum_{n=1}^{\infty} \frac{1}{n!}\Bigr)_{\mathbb{C}} O
@@ -1975,6 +1981,7 @@ S_NT_N
       notes: [
         "2026-09-03 の式変形統一で、証明末尾の参照一覧を削除し、exp の定義を使う最初の等式行の行末へラベル参照を移した。内容・式変形・根拠は変えていない。",
         "2026-11-02: 「零行列のスカラー倍は零行列である」「零行列は行列の加法の単位元である」の名前だけの根拠を scalar_multiple_of_zero_matrix・matrix_plus_zero_matrix へのラベル参照に替えた。あわせて、スカラーを右に書いていた O · Σ 1/n! を def_matrix_scalar_multiple の書き方に合わせ、実数の和を inclusion_rr_to_cc の記法で ℂ へ移した (Σ 1/n!)_ℂ O に直した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の地の文「行列の冪の定義より O^0 = I、n ≥ 1 のとき O^n = O」はラベルの無い根拠だったので、k ≥ 1 の O^k = O を def_exp (1) の A^{m+1} := A^m A（K → ℂ、n → d、A → O、m → k−1）と zero_matrix_is_right_zero_of_mat_mult（m, n, p → d、A → O^{k−1}）の 2 行の鎖にし（冪の指数を k としたのは、引く 2 つの主張の次元の文字 n と分けるため）、本体の鎖の O^0 = I の行の根拠を def_exp (1) の A^0 := I の参照に替えた（主張と本体の鎖の式は不変）。Lean の具体版は無い（Lean は mathlib の NormedSpace.exp_zero を引く）。",
       ],
     },
   },
