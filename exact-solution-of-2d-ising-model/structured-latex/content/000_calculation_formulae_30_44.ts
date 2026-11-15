@@ -3683,8 +3683,20 @@ i\,i
 &&\bigl(\because\ \blkref{def_imaginary_unit}\ \text{を 2 か所へ}\bigr)\\
 &= (0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)
 &&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= (0-1\cdot1,\ 0\cdot1+1\cdot0)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
+&= (0-1,\ 0\cdot1+1\cdot0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
+&= (0-1,\ 0+1\cdot0)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 1)\bigr)\\
+&= (0-1,\ 0+0)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 1)\bigr)\\
+&= (0-1,\ 0)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + 0 = 0)\bigr)\\
+&= (0+(-1),\ 0)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 0,\ z \to 1)\bigr)\\
 &= (-1,0)
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + (-1) = -1)\bigr)\\
 &= -1_{\mathbb{C}}
 &&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
 \end{aligned}`),
@@ -3693,6 +3705,7 @@ i\,i
       status: "added",
       notes: [
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 1 が Z_Y_generate_algebra の証明の中の準備 (g) を引いていて、ラベルで引けなかった。(g) を主張 negative_i_times_i_is_one_in_cc にするため、その鎖が使う準備 (f) をこの主張にした。鎖は Z_Y_generate_algebra の準備 (f) と同じ 4 行である。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ の四則」は 0·0 = 0・1·1 = 1・0·1 = 0・1·0 = 0・0 + 0 = 0・0 − 1 = −1 を名前を挙げずに含んでいたので、real_zero_times_is_zero・ℝ の乗法の単位元・real_zero_times_is_zero・real_times_zero_is_zero・ℝ の加法の単位元・def_real_difference・ℝ の加法の単位元の 7 行に割った。鎖の両端と主張は不変。Lean の具体版 Ising2D.complex_I_mul_I（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimITimesIAndNegativeITimesIInCC.lean）の 3 段目（norm_num）も同じ 7 段に割った。数値検証: sagemath/check/i_times_i_is_minus_one_in_cc/。",
       ],
     },
   },

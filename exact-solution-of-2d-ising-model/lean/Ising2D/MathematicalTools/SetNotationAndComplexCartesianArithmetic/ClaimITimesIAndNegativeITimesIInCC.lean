@@ -7,14 +7,20 @@
 
 ## 人手証明との対応
 
-`complex_I_mul_I`（人手 `i_times_i_is_minus_one_in_cc` の 4 行）:
+`complex_I_mul_I`（人手 `i_times_i_is_minus_one_in_cc` の 10 行）:
 
 | 人手 | Lean |
 | --- | --- |
 | 1 行目: `def_imaginary_unit` を 2 か所へ | `calc` の 1 段目（`Complex.I` は `⟨0, 1⟩` なので `rfl`） |
 | 2 行目: `definition_of_cc` の積 | 2 段目（mathlib の `ℂ` の積の定義どおりなので `rfl`） |
-| 3 行目: `ℝ` の四則 | 3 段目（`norm_num`） |
-| 4 行目: `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1` | 4 段目（`Complex.ofReal_neg`・`Complex.ofReal_one`） |
+| 3 行目: `real_zero_times_is_zero`（`x → 0`） | 3 段目（`real_zero_times_is_zero 0`） |
+| 4 行目: `ℝ` で `1·x = x`（`x → 1`） | 4 段目（`one_mul 1`） |
+| 5 行目: `real_zero_times_is_zero`（`x → 1`） | 5 段目（`real_zero_times_is_zero 1`） |
+| 6 行目: `real_times_zero_is_zero`（`x → 1`） | 6 段目（`real_times_zero_is_zero 1`） |
+| 7 行目: `0` は `ℝ` の加法の単位元（`0 + 0 = 0`） | 7 段目（`add_zero 0`） |
+| 8 行目: `def_real_difference`（`y → 0, z → 1`） | 8 段目（`sub_eq_add_neg 0 1`） |
+| 9 行目: `0` は `ℝ` の加法の単位元（`0 + (-1) = -1`） | 9 段目（`zero_add (-1)`） |
+| 10 行目: `-1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = -1` | 10 段目（`Complex.ofReal_neg`・`Complex.ofReal_one`） |
 
 `complex_neg_I_mul_I`（人手 `negative_i_times_i_is_one_in_cc` の 4 行）:
 
@@ -40,19 +46,27 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
-import Mathlib.Tactic.NormNum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 namespace Ising2D
 
-/-- **人手 `i_times_i_is_minus_one_in_cc`**: `i i = -1_ℂ`（人手の 4 行）。 -/
+/-- **人手 `i_times_i_is_minus_one_in_cc`**: `i i = -1_ℂ`（人手の 10 行）。 -/
 theorem complex_I_mul_I : Complex.I * Complex.I = -1 :=
   calc Complex.I * Complex.I
       = (⟨0, 1⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl                             -- 1 行目: `def_imaginary_unit` を 2 か所へ
     _ = (⟨0 * 0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := rfl                   -- 2 行目: `definition_of_cc` の積
-    _ = (⟨-1, 0⟩ : ℂ) := by norm_num                                  -- 3 行目: `ℝ` の四則
+    _ = (⟨0 - 1 * 1, 0 * 1 + 1 * 0⟩ : ℂ) := by
+          rw [real_zero_times_is_zero 0]                              -- 3 行目: `real_zero_times_is_zero`（`x → 0`）
+    _ = (⟨0 - 1, 0 * 1 + 1 * 0⟩ : ℂ) := by rw [one_mul (1 : ℝ)]       -- 4 行目: `ℝ` で `1·x = x`（`x → 1`）
+    _ = (⟨0 - 1, 0 + 1 * 0⟩ : ℂ) := by rw [real_zero_times_is_zero 1] -- 5 行目: `real_zero_times_is_zero`（`x → 1`）
+    _ = (⟨0 - 1, 0 + 0⟩ : ℂ) := by rw [real_times_zero_is_zero 1]     -- 6 行目: `real_times_zero_is_zero`（`x → 1`）
+    _ = (⟨0 - 1, 0⟩ : ℂ) := by rw [add_zero (0 : ℝ)]                  -- 7 行目: `ℝ` の加法の単位元（`0 + 0 = 0`）
+    _ = (⟨0 + -1, 0⟩ : ℂ) := by rw [sub_eq_add_neg (0 : ℝ) 1]         -- 8 行目: `def_real_difference`（`y → 0, z → 1`）
+    _ = (⟨-1, 0⟩ : ℂ) := by rw [zero_add (-1 : ℝ)]                    -- 9 行目: `ℝ` の加法の単位元（`0 + (-1) = -1`）
     _ = -1 := by
           rw [show (⟨-1, 0⟩ : ℂ) = ((-1 : ℝ) : ℂ) from rfl, Complex.ofReal_neg, Complex.ofReal_one]
-                                                                      -- 4 行目: `-1_ℂ` は略記 `r_ℂ` の `r = -1`
+                                                                      -- 10 行目: `-1_ℂ` は略記 `r_ℂ` の `r = -1`
 
 /-- **人手 `negative_i_times_i_is_one_in_cc`**: `(-i) i = 1_ℂ`（人手の 4 行）。 -/
 theorem complex_neg_I_mul_I : (-Complex.I) * Complex.I = 1 :=
