@@ -8,7 +8,7 @@ for N in range(31):
     assert entry11(matrix_partial_sum(one_by_one(QQ, QQ(0)), N)) == 1
 R = PolynomialRing(QQ, 'E0,Em0'); E0, Em0 = R.gens()
 line1 = sinh_by_definition(E0, Em0)          # (exp(0) - exp(-0))/2
-line2 = sinh_by_definition(E0, E0)           # -0 = 0 で exp(-0) は exp(0) と同じ値
+line2 = sinh_by_definition(E0, E0)           # real_negation_of_zero_is_zero（-0 = 0）で exp(-0) は exp(0) と同じ値
 assert line1 != line2                         # 対照: 2 行目は引数の等号 -0 = 0 を使う
 assert line2 == 0                             # exp(0) の値によらず (E0 - E0)/2 = 0
 line3 = (QQ(1) - QQ(1)) / 2

@@ -189,7 +189,7 @@ export default defineBlocks([
 &= (-1,\ -0)
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (-1,\ 0)
-&&(\because\ \mathbb{R}\ \text{で}\ -0 = 0)\\
+&&(\because\ \blkref{real_negation_of_zero_is_zero})\\
 &= -1_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1)
 \end{aligned}`),
@@ -215,6 +215,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits (3) の (A_N − A)^* = A_N^* − A^* を成分で示すのに要るので足した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の −1_C の共役の鎖の 3 行目の名前だけの根拠「ℝ で −0 = 0」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },
@@ -301,7 +302,7 @@ export default defineBlocks([
 &= (r,-0)
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (r,0)
-&&(\because\ \mathbb{R}\ \text{で}\ -0 = 0)\\
+&&(\because\ \blkref{real_negation_of_zero_is_zero})\\
 &= r_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -310,6 +311,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の証明が「1/k! ∈ ℝ なので共役を取っても変わらない」と書いていたのを、正定値性の主張を分けるときに独立の主張にした。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 鎖の 3 行目の名前だけの根拠「ℝ で −0 = 0」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },

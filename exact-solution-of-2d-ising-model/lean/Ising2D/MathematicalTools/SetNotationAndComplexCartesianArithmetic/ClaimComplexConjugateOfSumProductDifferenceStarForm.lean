@@ -24,7 +24,7 @@
 - 人手の `m ∈ ℤ_{≥1}` に対し、使う側の `Fin n` は `n = 0` を含む。`n = 0` の段（両辺とも空の和）は人手証明の外で、
   空の和 `Σ_{j ∈ ∅} = 0`（mathlib の `Fin.sum_univ_zero`）と `\overline{0_ℂ} = 0_ℂ`（`complex_conjugate_star_zero`）で閉じる。
   `complex_conjugate_star_zero` は `complex_conjugate_of_neg_one` の 4 行と同じ段の並び（`inclusion_rr_to_cc` の `r_ℂ = (r, 0)`、
-  `def_complex_conjugate`、ℝ で `-0 = 0`、`inclusion_rr_to_cc`）で `r = 0` について示す。
+  `def_complex_conjugate`、`real_negation_of_zero_is_zero`、`inclusion_rr_to_cc`）で `r = 0` について示す。
   有限積も同じく、`n = 0`（両辺とも空の積）は人手証明の外で、空の積 `∏_{j ∈ ∅} = 1_ℂ`（mathlib の `Fin.prod_univ_zero`）と
   `\overline{1_ℂ} = 1_ℂ`（`complex_conjugate_star_one`。`complex_conjugate_star_zero` と同じ段の並びで `r = 1`）で閉じる。
   `\overline{0_ℂ} = 0_ℂ`・`\overline{1_ℂ} = 1_ℂ` は人手 `complex_conjugate_of_real_inclusion` の `r = 0`・`r = 1` でもあるが、その具体版
@@ -82,7 +82,7 @@ theorem complex_conjugate_star_zero : star (0 : ℂ) = 0 :=
     _ = (starRingEnd ℂ) (⟨0, 0⟩ : ℂ) := rfl                     -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 0`）
     _ = (⟨0, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                                 -- `def_complex_conjugate`
-    _ = (⟨0, 0⟩ : ℂ) := by rw [neg_zero]                        -- ℝ で `-0 = 0`
+    _ = (⟨0, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero]   -- `real_negation_of_zero_is_zero`
     _ = (((0 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 0`）
     _ = 0 := rfl                                                -- `(0)_ℂ` を `0_ℂ` と書く
 
@@ -94,7 +94,7 @@ theorem complex_conjugate_star_one : star (1 : ℂ) = 1 :=
     _ = (starRingEnd ℂ) (⟨1, 0⟩ : ℂ) := rfl                     -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）
     _ = (⟨1, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                                 -- `def_complex_conjugate`
-    _ = (⟨1, 0⟩ : ℂ) := by rw [neg_zero]                        -- ℝ で `-0 = 0`
+    _ = (⟨1, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero]   -- `real_negation_of_zero_is_zero`
     _ = (((1 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）
     _ = 1 := rfl                                                -- `(1)_ℂ` を `1_ℂ` と書く
 

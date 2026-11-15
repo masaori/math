@@ -1,5 +1,5 @@
 # 対象ラベル: real_absolute_value_of_nonpositive
-# q ≤ 0 なら |q| = -q。q < 0 は定義そのもの、q = 0 は 4 行の鎖 |q| = q = 0 = -0 = -q。
+# q ≤ 0 なら |q| = -q。q < 0 は定義そのもの、q = 0 は 4 行の鎖 |q| = q = 0 = -0 = -q（3 行目は real_negation_of_zero_is_zero を右辺から左辺へ）。
 # 帰属: QQ と AA の点。浮動小数点は使わない。
 def rabs(q):
     """def_real_absolute_value: q >= 0 なら q、q < 0 なら -q。"""

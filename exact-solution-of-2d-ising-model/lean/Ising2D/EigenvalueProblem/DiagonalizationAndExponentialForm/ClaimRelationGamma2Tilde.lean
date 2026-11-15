@@ -32,6 +32,7 @@
   必要十分版は `NecSuf.sq_pos_of_pos_chain`・`NecSuf.neg_neg_of_pos_chain`（`NecSuf/NegConjPair.lean`）、
   具体版をその系として導くのは `ClaimRelationGamma2TildeFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma2TildeNonzero
 import Ising2D.NecSuf.NegConjPair
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
@@ -117,7 +118,7 @@ theorem neg_absGamma2_thetaTilde_sq_neg (P : IsingParam) {M : ℕ} (hM : M ≠ 0
   calc -(absGamma2 P.const (thetaTilde M μ) ^ 2)
       < -0 := neg_lt_neg (absGamma2_thetaTilde_sq_pos P hM μ)
                           -- 直前の鎖の `0 < |γ_2(θ)|^2` の両辺の符号を反転すると向きが変わる
-    _ = 0 := neg_zero
-                          -- ℝ の四則
+    _ = 0 := real_negation_of_zero_is_zero
+                          -- `real_negation_of_zero_is_zero`
 
 end Ising2D

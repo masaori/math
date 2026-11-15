@@ -8,7 +8,7 @@ lines = [
     cc_conj(iota(r, P)),   # conj(r_C)
     cc_conj((r, P(0))),    # conj((r, 0))   (inclusion_rr_to_cc)
     (r, -P(0)),            # (r, -0)        (def_complex_conjugate)
-    (r, P(0)),             # (r, 0)         (ℝ で -0 = 0)
+    (r, P(0)),             # (r, 0)         (real_negation_of_zero_is_zero)
     iota(r, P),            # r_C            (inclusion_rr_to_cc)
 ]
 for t in range(len(lines) - 1):

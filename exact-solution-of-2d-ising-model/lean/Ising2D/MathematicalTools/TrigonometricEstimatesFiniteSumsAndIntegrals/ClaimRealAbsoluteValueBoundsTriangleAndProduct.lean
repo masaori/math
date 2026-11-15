@@ -22,6 +22,7 @@
 * 「非負の実数の積は非負」は `mul_nonneg`、「両辺の符号を反転する」は `neg_le_neg`・`neg_pos`・`neg_nonpos`、
   「ℝ で `-(ab) = a(-b)`」などの符号の付け替えは `mul_neg`・`neg_mul`・`neg_mul_neg` の 1 段ずつである。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Mathlib.Algebra.Order.AbsoluteValue.Basic
 import Mathlib.Data.Real.Basic
 
@@ -61,7 +62,7 @@ theorem real_absolute_value_of_nonpositive {q : ℝ} (hq : q ≤ 0) : |q| = -q :
   · calc |q|
         = q := abs_of_nonneg heq.ge                                           -- `def_real_absolute_value`（`q ≥ 0`）
       _ = 0 := heq                                                            -- `q = 0`
-      _ = -0 := neg_zero.symm                                                 -- ℝ で `-0 = 0`
+      _ = -0 := real_negation_of_zero_is_zero.symm                            -- `real_negation_of_zero_is_zero` を右辺から左辺へ
       _ = -q := by rw [heq]                                                   -- `q = 0`
 
 /-- **`real_abs_triangle_inequality`**: `a, b ∈ ℝ` について `|a + b| ≤ |a| + |b|`。 -/

@@ -571,7 +571,7 @@ export default defineBlocks([
 &= \frac{\exp(0)-\exp(-0)}{2}
 &&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(0)-\exp(0)}{2}
-&&(\because\ -0 = 0)\\
+&&(\because\ \blkref{real_negation_of_zero_is_zero})\\
 &= \frac{1-1}{2}
 &&(\because\ \blkref{scalar_exp_zero}\ \text{を 2 箇所へ})\\
 &= 0
@@ -582,6 +582,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が使っていた sinh 0 = 0 を、cosh の単調性と (5) の二つの不等式から引けるよう独立の主張にした。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 鎖の 2 行目の名前だけの根拠「−0 = 0」を real_negation_of_zero_is_zero の参照に替えた（exp の引数は ℝ の元）。式は不変。",
       ],
     },
   },

@@ -278,7 +278,7 @@ y^2 - r^2
 &= \frac{\exp(0) - \exp(-0)}{2}
    &&(\because\ \blkref{def_cosh_sinh}) \\
 &= \frac{\exp(0) - \exp(0)}{2}
-   &&(\because\ -0 = 0) \\
+   &&(\because\ \blkref{real_negation_of_zero_is_zero}) \\
 &= \frac{1 - 1}{2}
    &&(\because\ \blkref{scalar_exp_zero}) \\
 &= 0
@@ -348,6 +348,7 @@ t
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (4) の鎖の「1^2 − 1 = 0」1 行（1^2 = 1・1 − 1 = 0 の 2 事実）を power_of_real_one_is_one（m → 2）と ℝ で a − a = 0（a → 1）の 2 行に割り、次の行 √0 = 0（0 ≥ 0・0^2 = 0・一意性を 1 行で使っていた）を sqrt_of_real_zero_is_zero の参照にした（relation_of_gamma_2_theta_tilde の準備の第五の cos(π/2) の鎖と同じ書き方）。値と主張は不変。",
         "arccosh を式で定義したことに伴い、本文が使っている性質（非負・cosh との合成・非負側での一意性・arccosh(1)=0）を主張として置いた。",
         "2026-11-02: SageMath の検算（sagemath/check/arccosh_properties/）を付けるにあたり、証明を直した。log 1 = 0 を「def_real_logarithm_positive の証明で示した」と引いていたが、その定義に証明は無いので、scalar_exp_zero と log(exp x) = x からの鎖を準備に置いた。exp(-u)exp(u) = exp(0) の行を積の結合律・指数法則・-u+u=0 の三行に、cosh の鎖の「上の 2 式」を二行に、(3) の二つの代入と (4) の 1^2-1=0・√0=0 を一行ずつに分けた。(1) と (3) の sinh t ≥ 0 を場合分けの鎖に、√ の一意性を散文から (∵) 付きの式に移し、実対数と平方根による ℝ 脱出を準備に書いた。主張は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: (3) の t = 0 の場合の sinh 0 の鎖の 2 行目の名前だけの根拠「−0 = 0」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },
@@ -3664,7 +3665,7 @@ s_1c_2
 &< -0
 &&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺の符号を反転すると向きが変わる。}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation})\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ \blkref{real_negation_of_zero_is_zero}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`\gamma_2(-\theta) \neq 0_{\mathbb{C}}`),
@@ -3930,6 +3931,7 @@ s_1c_2
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を左から掛けると 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」7 か所（(2) の 0 < |γ_2(θ)|^2 の鎖の 1 行目、(3) の φ_polar((−r)_C) の鎖・arg^{[0,2π)}((−r)_C) から始まる主張の鎖、(4) の φ_polar(r_C) の鎖・√ の鎖、(5) の √ の鎖の角度の行と第 2 成分の行）を real_zero_times_is_zero の参照に替えた（式は不変）。Lean の具体版 absGamma2_thetaTilde_sq_pos の zero_mul を Ising2D.real_zero_times_is_zero に替えた。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を右から掛けると 0 の名前だけの根拠「ℝ で x·0 = 0（ℝ は体）」3 か所（(3) の arg の鎖の 2·0 = 0（x → 2）、(4) の |γ_2(θ)|·0 = 0（x → |γ_2(θ)|）、(5) の第 1 成分の引く側の 0 = 1·0（x → 1）を右辺から左辺へ）を、足した主張 real_times_zero_is_zero の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (3)(4)(5) の名前だけの根拠 7 か所を参照に替えた。「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」の 3 か所（(3) の φ_polar((−r)_C) の鎖の x → −r、(4) の φ_polar(r_C) の鎖の x → r、(4) の主の鎖の x → 2）を real_zero_divided_is_zero に、「ℝ で a − 0 = a（ℝ は体）」の 4 か所（(3) の主の鎖の a → π、(4) の主の鎖の a → 0、(5) の主の鎖の a → π/2 と a → 0·|γ_2(θ)| を右辺から左辺へ）を real_minus_zero_is_self に替えた。x ≠ 0 の理由（−r < 0、r > 0、2 ≠ 0）は参照の括弧に残した。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: (2) の −|γ_2(θ)|^2 < 0 の鎖の 2 行目の名前だけの根拠「ℝ で −0 = 0（ℝ は体）」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },
@@ -6165,7 +6167,7 @@ g
 &= \frac{\exp 0 + \exp(-0)}{2}
 &&(\because\ \blkref{def_cosh_sinh})\\
 &= \frac{\exp 0 + \exp 0}{2}
-&&(\because\ -0 = 0)\\
+&&(\because\ \blkref{real_negation_of_zero_is_zero})\\
 &= \frac{1 + 1}{2}
 &&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{R}))\\
 &= 1
@@ -6201,6 +6203,7 @@ g
           "id を Athetatilde_008_definition_gamma_theta_tilde から Athetatilde_008_claim_gamma_theta_tilde_positive へ改めた。" +
           "statement の括弧書きにあった背理法を、式変形の形で証明へ移した。中身は変えていない。",
         "2026-11-03: SageMath の検算（sagemath/check/gamma_theta_tilde_mu_positive/）を付けるときに証明を直した。γ ≥ 0 と cosh γ = γ_1 の根拠を def_gamma_theta だけから、それが引く arccosh_properties (1)・(2) の y = γ_1(θ~_μ) への適用に（γ_1 ≥ 1 は gamma1_gt_1_theta_tilde から）、値 γ(θ~_μ) を関数 γ と別の文字 t で置き、矛盾と結論の散文を 1 > 1 と t ≠ 0 かつ t ≥ 0 の形に書いた（中身は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 背理の鎖の 4 行目の名前だけの根拠「−0 = 0」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },

@@ -25,8 +25,9 @@
 - 人手の `m ∈ ℤ_{≥1}` は Lean の `m + 1`、`z_1, …, z_m` は `z : Fin (m + 1) → ℂ` である。
   `def_finite_sum_of_complex_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の `real_inclusion_of_finite_sum_succ` と同じ読み替え）。
-- 人手の「ℝ で `-(y+v) = (-y)+(-v)`」「ℝ で `(-y)(-v) = yv`」「ℝ で `-0 = 0`」「ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`」
-  「ℝ で `-(xv) = x(-v)`」「ℝ で `-(yu) = (-y)u`」は mathlib の `neg_add`・`neg_mul_neg`・`neg_zero`・`neg_add`・`mul_neg`・`neg_mul` で 1 段ずつ受ける。
+- 人手の「ℝ で `-(y+v) = (-y)+(-v)`」「ℝ で `(-y)(-v) = yv`」「ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`」
+  「ℝ で `-(xv) = x(-v)`」「ℝ で `-(yu) = (-y)u`」は mathlib の `neg_add`・`neg_mul_neg`・`neg_add`・`mul_neg`・`neg_mul` で 1 段ずつ受ける。
+- 人手の `\overline{-1_ℂ}` の鎖の 3 行目 `real_negation_of_zero_is_zero` は、同じ名前の具体版の定理で受ける。
 - 人手 `multiply_by_minus_one`（`-z := (-1_ℂ)z`）・`def_complex_difference`（`z - w := z + (-w)`）は具体版が Lean に無く、
   mathlib の `neg_one_mul`・`sub_eq_add_neg` で受ける（ほかのファイルと同じ）。
   人手の `-1_ℂ` は `inclusion_rr_to_cc` の像 `(-1)_ℂ` の略記で、Lean の `((-1 : ℝ) : ℂ)` と `-1 : ℂ` の行き来は
@@ -44,6 +45,7 @@
 差は「和を保つ・積を保つ・`\overline{-1} = -1`・`-x = (-1)x`・`x - y = x + (-y)`」を 1 回ずつ当てるだけで、
 `NecSuf/MatrixConjugationNegSub.lean` が同じ形の仮定（`hsub`・和と積を保つこと）で行列の共役について既に示している。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Complex.Basic
 
@@ -136,7 +138,7 @@ theorem complex_conjugate_of_neg_one : (starRingEnd ℂ) (-1 : ℂ) = -1 :=
     _ = (starRingEnd ℂ) (⟨-1, 0⟩ : ℂ) := rfl     -- 1 行目: `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = -1`）
     _ = (⟨-1, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                   -- 2 行目: `def_complex_conjugate`
-    _ = (⟨-1, 0⟩ : ℂ) := by rw [neg_zero]         -- 3 行目: ℝ で `-0 = 0`
+    _ = (⟨-1, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero] -- 3 行目: `real_negation_of_zero_is_zero`
     _ = (((-1 : ℝ)) : ℂ) := rfl                  -- 4 行目: `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = -1`）
     _ = -1 := by
         rw [Complex.ofReal_neg, Complex.ofReal_one] -- `(-1)_ℂ` を `-1_ℂ` と書く（`inclusion_rr_to_cc` の略記）

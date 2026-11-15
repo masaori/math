@@ -12,11 +12,11 @@ rows = [
     (cg, cg - g),                          # arccosh_properties (2): cosh t = g
     (c0, c0 - cg),                         # 仮定 t = 0 の代入: cosh 0 = cosh t
     ((e0 + em0) / 2, c0 - (e0 + em0) / 2), # def_cosh_sinh
-    ((e0 + e0) / 2, em0 - e0),             # -0 = 0 により exp(-0) = exp 0
+    ((e0 + e0) / 2, em0 - e0),             # real_negation_of_zero_is_zero（-0 = 0）により exp(-0) = exp 0
     (P((1 + 1) / 2), e0 - 1),              # scalar_exp_zero（K = ℝ）
     (P(1), None),                          # ℝ の四則
 ]
-names = ["準備の cosh t = g", "仮定 t = 0", "def_cosh_sinh", "-0 = 0", "scalar_exp_zero", "ℝ の四則"]
+names = ["準備の cosh t = g", "仮定 t = 0", "def_cosh_sinh", "real_negation_of_zero_is_zero", "scalar_exp_zero", "ℝ の四則"]
 for j in range(1, len(rows)):
     prev, cur = rows[j - 1][0], rows[j][0]
     relation = rows[j][1]

@@ -108,7 +108,7 @@ for (Yv, Zv) in COUPLINGS:
             tick(absg * absg == absg**2, "(2) 0 < |γ|^2 の鎖 第 3 行: |γ||γ| = |γ|^2（square_of_real_number_is_product を右辺から左辺へ）")
             # -|γ|^2 < 0 の鎖 2 行
             tick(-(absg**2) < -AA(0), "(2) -|γ|^2 < 0 の鎖 第 1 行: -|γ|^2 < -0")
-            tick(-AA(0) == AA(0), "(2) -|γ|^2 < 0 の鎖 第 2 行: -0 = 0（ℝ で -0 = 0）")
+            tick(-AA(0) == AA(0), "(2) -|γ|^2 < 0 の鎖 第 2 行: -0 = 0（real_negation_of_zero_is_zero）")
             tick(gm != 0, "(2) γ_2(-θ) ≠ 0_C")
             tick(cc_conj(cc_conj(gp)) == gp, "(2) 背理の鎖の二重の共役")
             # (3)

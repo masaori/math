@@ -25,7 +25,7 @@
 | (2) `exp(-u) = y - r` の結論 | ball | `exp(-u)` の囲みが `y - r` と重なる | **PASS** | 全点で成り立つ |
 | (2) `cosh(arccosh y)` の六行の鎖 | exact | 1 行目 `cosh(arccosh y) = cosh(u)` は `u` の定め方そのもので計算を含まないので検算しない。2 行目（`def_cosh_sinh` の適用）は定義の関数と本文の式の書き写しの一致で、自明に通る。代入の 3・4 行目を別々の関係式（`exp(u) = y+r`、`exp(-u) = y-r`）だけのイデアルで、5・6 行目を多項式の等号で | **PASS** | 厳密 |
 | (3) `t > 0` なら `sinh t > 0` | ball | 6 点の `t ∈ QQ_{>0}` で `sinh t` のボールが正 | **PASS** | 全点で成り立つ |
-| (3) `sinh 0 = (exp(0)-exp(-0))/2 = … = 0` | exact | `-0 = 0`、部分和の `exp(0) = 1`、`(1-1)/2 = 0` | **PASS** | 厳密 |
+| (3) `sinh 0 = (exp(0)-exp(-0))/2 = … = 0` | exact | `real_negation_of_zero_is_zero`（`-0 = 0`）、部分和の `exp(0) = 1`、`(1-1)/2 = 0` | **PASS** | 厳密 |
 | (3) `(sinh t)^2 = (cosh t)^2 - 1 = y^2 - 1` | exact | `cosh t, sinh t` を不定元に置き、`cosh^2 - sinh^2 = 1`、`cosh t = y` だけのイデアルで | **PASS** | 厳密 |
 | (3) `sinh t = √(y^2-1) = r` | ball | `y := cosh t` のボールで、`sinh t` と `√(y^2-1)` が重なる | **PASS** | 全点で成り立つ |
 | (3) `t = log(exp t) = log(cosh t + sinh t) = log(y + sinh t) = log(y + r) = arccosh(y)` | exact・ball | `exp(t) = cosh t + sinh t`（`cosh_sinh_basic_properties` (1)）は `exp(t)`・`exp(-t)` を不定元に置くと定義の展開だけで成り立つ（exp の性質を使わない）ことを、関係式なしで。代入の二行を別々の関係式で。`log(exp t)` と `arccosh(cosh t)` の囲みが `t` を含むことをボールで | **PASS** | 厳密・囲み |

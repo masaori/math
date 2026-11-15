@@ -15,7 +15,7 @@ prep = [
     cc_conj(m1),          # conj(-1_C)
     cc_conj((P(-1), P(0))),  # conj((-1, 0))     (inclusion_rr_to_cc)
     (P(-1), -P(0)),       # (-1, -0)           (def_complex_conjugate)
-    (P(-1), P(0)),        # (-1, 0)            (ℝ で -0 = 0)
+    (P(-1), P(0)),        # (-1, 0)            (real_negation_of_zero_is_zero)
     m1,                   # -1_C               (inclusion_rr_to_cc)
 ]
 for t in range(len(prep) - 1):

@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 1 行目 sinh の定義を 0 へ | `check_proof_lines.sage` | exp(0), exp(-0) を不定元に置いて | **PASS** | 成り立つ |
-| 2 行目 -0 = 0 | `check_proof_lines.sage` | QQ の等号。対照として不定元のままでは 1 行目と 2 行目は一致しない | **PASS** | 成り立つ |
+| 2 行目 `real_negation_of_zero_is_zero`（-0 = 0） | `check_proof_lines.sage` | QQ の等号。対照として不定元のままでは 1 行目と 2 行目は一致しない | **PASS** | 成り立つ |
 | 3 行目 exp(0) = 1（scalar_exp_zero）を 2 箇所へ | `check_proof_lines.sage` | 部分和 S_N([0]) の成分が N = 0,…,30 で 1 | **PASS** | 成り立つ |
 | 4 行目 四則 | `check_proof_lines.sage` | QQ で厳密。ボールでも sinh 0 が 0 を含む | **PASS** | 成り立つ |
 

@@ -113,7 +113,7 @@ theorem neg_neg_of_pos_chain {R : Type*} [AddGroup R] [LT R] [AddLeftStrictMono 
     [AddRightStrictMono R] {x : R} (hx : 0 < x) : -x < 0 :=
   calc -x
       < -0 := neg_lt_neg_iff.2 hx                        -- 符号を反転すると向きが変わる
-    _ = 0 := neg_zero                                    -- `-0 = 0`
+    _ = 0 := neg_zero                                    -- `-0 = 0`（具体版では `real_negation_of_zero_is_zero` の段）
 
 end StrictNegativity
 

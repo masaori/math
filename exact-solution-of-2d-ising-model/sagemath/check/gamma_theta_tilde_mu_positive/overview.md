@@ -17,7 +17,7 @@
 | 準備: g > 1（`gamma1_gt_1_theta_tilde`） | `check_values_and_claim.sage` | 具体値で g > 1 | **PASS** | 厳密（AA） |
 | 準備: cosh t = g（`arccosh_properties` (2)） | 同上 | `def_arccosh` の w := g + √(g^2 − 1) について (w + 1/w)/2 = g | **PASS** | 厳密（AA） |
 | 準備: t ≥ 0（`arccosh_properties` (1)） | 同上 | t = log w を囲むボールの下端 ≥ 0 | **PASS** | ボール（ℝ への脱出） |
-| 背理の鎖の 6 本の等号（`arccosh_properties` (2)・仮定 t = 0・`def_cosh_sinh`・−0 = 0・`scalar_exp_zero`・ℝ の四則） | `check_generic_chain.sage` | 各行の値を不定元に置き、隣り合う行の差がその行の根拠の関係 1 本のイデアルに入ること（関係なしでは異なる対照つき） | **PASS** | 厳密 |
+| 背理の鎖の 6 本の等号（`arccosh_properties` (2)・仮定 t = 0・`def_cosh_sinh`・`real_negation_of_zero_is_zero`・`scalar_exp_zero`・ℝ の四則） | `check_generic_chain.sage` | 各行の値を不定元に置き、隣り合う行の差がその行の根拠の関係 1 本のイデアルに入ること（関係なしでは異なる対照つき） | **PASS** | 厳密 |
 | 主張 | `check_values_and_claim.sage` | 具体値で t を囲むボールの下端 > 0（0 を含まない）。対照: g = 1 では w = 1、t = log 1 = 0 で狭義の不等号が成り立たない | **PASS** | 140 組 |
 
 ## 計算の帰属と範囲

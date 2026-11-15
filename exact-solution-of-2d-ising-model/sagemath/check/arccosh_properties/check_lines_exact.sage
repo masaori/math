@@ -92,7 +92,7 @@ print("  PASS -u + u = 0（QQ[u] で）")
 for N in range(0, 25):
     assert entry11(matrix_partial_sum(one_by_one(QQ, QQ(0)), N)) == 1
 print("  PASS exp(0) = 1（部分和 S_N([0]) = [1]、N = 0..24）")
-# sinh 0 = (exp(0) - exp(-0))/2 = 0: -0 = 0 と exp(0) = 1
+# sinh 0 = (exp(0) - exp(-0))/2 = 0: real_negation_of_zero_is_zero（-0 = 0）と exp(0) = 1
 assert -QQ(0) == 0
 e0 = entry11(matrix_partial_sum(one_by_one(QQ, QQ(0)), 30))
 assert sinh_by_definition(e0, e0) == 0 and (QQ(1) - 1) / 2 == 0

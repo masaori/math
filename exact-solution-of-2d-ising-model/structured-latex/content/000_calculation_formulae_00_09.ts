@@ -3408,7 +3408,7 @@ q
 &= 0
 &&\bigl(\because\ q = 0\bigr)\\
 &= -0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -0 = 0\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_of_zero_is_zero}\ \text{を右辺から左辺へ}\bigr)\\
 &= -q
 &&\bigl(\because\ q = 0\bigr)
 \end{aligned}`),
@@ -3418,6 +3418,7 @@ q
       status: "added",
       notes: [
         "2026-11-06: 原文（Typst）に対応ブロックは無い。real_abs_of_product の証明で ab ≤ 0 の場合の絶対値を出す段から引けるよう足した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: q = 0 の鎖の 3 行目の名前だけの根拠「ℝ で −0 = 0」を real_negation_of_zero_is_zero を右辺から左辺へ当てる参照に替えた。式は不変。",
       ],
     },
   },

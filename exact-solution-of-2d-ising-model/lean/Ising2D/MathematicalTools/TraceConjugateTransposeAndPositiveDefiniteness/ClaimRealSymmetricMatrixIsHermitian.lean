@@ -10,7 +10,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| `complex_conjugate_of_real_inclusion` の 4 行（`inclusion_rr_to_cc` → `def_complex_conjugate` → ℝ で `-0 = 0` → `inclusion_rr_to_cc`） | `complex_conjugate_of_real_inclusion` の `calc` の 4 段 |
+| `complex_conjugate_of_real_inclusion` の 4 行（`inclusion_rr_to_cc` → `def_complex_conjugate` → `real_negation_of_zero_is_zero` → `inclusion_rr_to_cc`） | `complex_conjugate_of_real_inclusion` の `calc` の 4 段 |
 | `A_{lk} = r_ℂ` を満たす `r ∈ ℝ` を取る（`def_matrix_with_real_entries`（`p → l`, `q → k`）） | `obtain ⟨r, hr⟩ := hreal l k` |
 | 成分の鎖の 6 行（共役転置の定義 → `r` の取り方 → `complex_conjugate_of_real_inclusion` → `r` の取り方 → `def_matrix_transpose` → `A^⊤ = A`） | `real_symmetric_isHermitian` の `calc` の 6 段 |
 | 全ての成分が一致するので `A^* = A`（エルミートの条件） | `Matrix.ext` と `Matrix.IsHermitian` の定義（`Aᴴ = A`） |
@@ -22,6 +22,7 @@
 必要十分版は `Ising2D/NecSuf/HermitianOfStarFixedSymmetricEntries.lean`、
 具体版をその特殊化として得るのは `ClaimRealSymmetricMatrixIsHermitianFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Mathlib.LinearAlgebra.Matrix.Hermitian
 
@@ -34,7 +35,7 @@ theorem complex_conjugate_of_real_inclusion (r : ℝ) : star (r : ℂ) = (r : �
   calc star (r : ℂ)
       = star (⟨r, 0⟩ : ℂ) := rfl                                            -- `inclusion_rr_to_cc`
     _ = ⟨r, -0⟩ := rfl                                                      -- `def_complex_conjugate`
-    _ = ⟨r, 0⟩ := by rw [neg_zero]                                          -- ℝ で `-0 = 0`
+    _ = ⟨r, 0⟩ := by rw [real_negation_of_zero_is_zero]                     -- `real_negation_of_zero_is_zero`
     _ = (r : ℂ) := rfl                                                      -- `inclusion_rr_to_cc`
 
 /-- **人手 `real_symmetric_matrix_is_hermitian`**: 実対称な複素行列はエルミートである。 -/
