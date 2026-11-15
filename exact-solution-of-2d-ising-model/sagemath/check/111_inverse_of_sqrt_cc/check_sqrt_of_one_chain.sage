@@ -1,6 +1,6 @@
 # <inverse_of_sqrt_cc>: 証明の第四の √(1_C) の鎖のうち、偏角の ℝ の計算の 3 行と cos 0・sin 0・1·x = x の行を確かめる。
 # 偏角: 0/2 − 0·π → 0 − 0·π（real_zero_divided_is_zero、x → 2）→ 0 − 0（real_zero_times_is_zero、x → π）→ 0（real_minus_zero_is_self、a → 0）。
-# 成分: (1·cos 0, 1·sin 0) → (1·1, 1·sin 0)（cosine_zero）→ (1·1, 1·0)（sine_zero）→ (1, 0)（ℝ で 1·x = x を 2 箇所）。
+# 成分: (1·cos 0, 1·sin 0) → (1·1, 1·sin 0)（cosine_zero）→ (1·1, 1·0)（sine_zero）→ (1, 0)（1 は ℝ の乗法の単位元 1·x = x（set_and_algebra_notation）を 2 箇所）。
 # 帰属: 0/2・0 − 0・1·x は QQ で厳密。π を含む 0·π は記号計算（SR）で厳密。cos 0・sin 0 は _shared の cos_sin（AA）で厳密。
 load("../../_shared/operators.sage")
 load("../../_shared/polar_trigonometry_exact.sage")

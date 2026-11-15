@@ -2667,11 +2667,11 @@ z
 &= \left[\left(\sqrt{1+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{の}\ a \to 1\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (1 + 0 = 1)\bigr)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
-&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1,\ 1 \neq 0)\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1\text{。}1 \neq 0\ \text{は体 }\mathbb{R}\ (\blkref{set_and_algebra_notation})\ \text{の公理}\ 0 \neq 1)\bigr)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
 &&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
@@ -2707,7 +2707,7 @@ z
 &= (1\cdot 1,\ 1\cdot 0)
 &&(\because\ \blkref{sine_zero})\\
 &= (1,\ 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{を 2 箇所へ適用（}x \to 1\text{、}x \to 0\text{）}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ \text{（}\blkref{set_and_algebra_notation}\text{）を 2 箇所へ適用（}x \to 1\text{、}x \to 0\text{）}\bigr)\\
 &= 1_{\mathbb{C}}
 &&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -2817,6 +2817,7 @@ z
           "数値検証: sagemath/check/111_inverse_of_sqrt_cc/check_zero_angle_integer_chain.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 0/1 = 0 の行と √(1_C) の鎖の 0/2 = 0 の行の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1、x → 2）の参照に、準備の第四の 0 − 2·0·π = 0 の鎖の 3 行目と √(1_C) の鎖の 0 − 0 = 0 の行の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第四の 0 − 2·0·π = 0 の 3 行の鎖と、0 ≤ 0 < 2π から代表元 (1, 0) の偏角 0 に対する整数を 0 と定める地の文を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero へ移し、その参照に替えた。√(1_C) の鎖は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の名前だけの根拠「ℝ で a + 0 = a（a → 1）」を set_and_algebra_notation の加法の単位元の参照に替え、0/1 = 0 の行の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。√(1_C) の鎖の「ℝ で 1·x = x を 2 箇所へ」を set_and_algebra_notation の乗法の単位元の参照に替えた。式は不変。0/2 = 0 の行の 2 ≠ 0 は ℝ の 2 を定めるブロックを決める件で扱う。",
       ],
     },
   },
