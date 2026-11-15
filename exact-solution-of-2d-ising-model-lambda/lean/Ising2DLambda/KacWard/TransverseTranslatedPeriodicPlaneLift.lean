@@ -74,14 +74,22 @@ theorem transverseTranslatedPeriodicPlaneLifts_disjoint
     (hgap : (v - u) * (wh ^ 2 + wv ^ 2) > Kmax - Kmin) :
     ∀ k k', transverseTranslatedPeriodicPlaneLift m L base wv wh u k ≠
       transverseTranslatedPeriodicPlaneLift m L base wv wh v k' := by
-  have hcoordinate : windingTransverseCoordinate wh wv (wh, -wv) =
-      wh ^ 2 + wv ^ 2 := by
-    simp [windingTransverseCoordinate]
-    ring
-  apply translatedFamilies_disjoint_necSuf
-    (periodicPlaneLift m base L wv wh) (wh, -wv)
-    (windingTransverseCoordinate wh wv) Kmin Kmax u v hlower hupper
-  rw [hcoordinate]
-  exact hgap
+  intro k k' heq
+  have hleft := transverseTranslatedPeriodicPlaneLift_coordinate
+    m L base wv wh u k
+  have hright := transverseTranslatedPeriodicPlaneLift_coordinate
+    m L base wv wh v k'
+  have hstrict : windingTransverseCoordinate wh wv
+      (transverseTranslatedPeriodicPlaneLift m L base wv wh u k) <
+      windingTransverseCoordinate wh wv
+        (transverseTranslatedPeriodicPlaneLift m L base wv wh v k') := by
+    rw [hleft, hright]
+    have hk := hupper k
+    have hk' := hlower k'
+    have hmul : (v - u) * (wh ^ 2 + wv ^ 2) =
+        v * (wh ^ 2 + wv ^ 2) - u * (wh ^ 2 + wv ^ 2) := by ring
+    rw [hmul] at hgap
+    omega
+  exact (ne_of_lt hstrict) (congrArg (windingTransverseCoordinate wh wv) heq)
 
 end Ising2DLambda.KacWard

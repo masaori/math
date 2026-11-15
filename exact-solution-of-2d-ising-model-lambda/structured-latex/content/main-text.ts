@@ -71614,7 +71614,7 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
 &>K_{\max}(\gamma)
 &&\bigl(\because\ s\ge1\text{ と整数の順序}\bigr)\\
 &\ge\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
-&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr).
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr)
 \end{aligned}`),
                       paragraph([
                         "横断座標 ", math(String.raw`\kappa_{\gamma}`),
