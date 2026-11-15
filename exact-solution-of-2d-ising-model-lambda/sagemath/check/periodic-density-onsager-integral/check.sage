@@ -1,3 +1,7 @@
+import os
+import sys
+
+directory = os.path.dirname(os.path.abspath(sys.argv[0]))
 # 対象ラベル: theorem_periodic_density_onsager_integral
 # 有限体積の対数評価と最大値への移行を検算する。
 # 極限と積分の等号は有限検算では証明できない。
@@ -14,3 +18,4 @@ for L in range(1, 6):
     maximum = max(values)
     assert maximum == R(1)/L**2 + R(3)/(10*L**3)
 print('RESULT: PASS')
+load(os.path.join(directory, 'check_mode_max.sage'))

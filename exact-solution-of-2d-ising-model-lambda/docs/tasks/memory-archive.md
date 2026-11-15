@@ -1,3 +1,7 @@
+2026-11-15（並列）: 「分散因子の積分の Onsager 表示への書換え」を周期境界の密度を引く最初の一行と書換えの段に割り、書換えの段を Lean 具体版 `onsager_hyperbolic_integral_rewrite`・必要十分版 `onsager_hyperbolic_integral_rewrite_necSuf`・導出版で示した（`RealEscape/OnsagerHyperbolicIntegralRewrite.lean` ほか）。既存の SageMath 検算は PASS。本文の `lean:` は合成の段で登録する。
+
+2026-11-15（並列）: 「分配多項式の両側評価を対数順序群の鎖へ移す」を $\Lambda$ への移送の段と場合分けと合成の段に割り、前者を Lean 具体版 `partitionLogOrderTransfer`・必要十分版 `log_order_transfer_of_two_sided_bounds_necSuf`・導出版で示した（`KacWard/PartitionLogOrderTransfer.lean` ほか）。既存の SageMath 検算は PASS。本文の `lean:` は合成の段で登録する。
+
 2026-11-15（主経路）: 自己双対変換の二つの平方の一致を、モード対の個数と既存の行列式の平方恒等式から Lean 具体版・必要十分版・導出版で示した。既存の SageMath 検算は PASS。書式統一では「奇数軌道を持つ置換の符号付き和は零である」の式鎖末尾の句読点を除いた。
 
 2026-11-15（主経路）: 分散因子の自己双対等式を実際のモードの有限積へ移す段を Lean 具体版・必要十分版・導出版で示した。既存の SageMath 検算を再実行した。

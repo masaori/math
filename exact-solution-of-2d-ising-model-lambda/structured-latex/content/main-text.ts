@@ -89337,7 +89337,14 @@ f^{\mathrm{per}}(q)
                     math(String.raw`M_L^{\mathrm{abs}}(q)\in\mathbb Q_{>0}`), " を用いて",
                     math(String.raw`u_{L,a,b}:=L^{-2}\log_{\mathbb R}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|\in\mathbb R`),
                     "、", math(String.raw`v_L:=\max_{(a,b)\in\mathcal S}u_{L,a,b}\in\mathbb R`),
-                    " と置く。", ref("claim_shifted_mode_riemann_sums"),
+                    " と置く。", ref("claim_no_rational_square_two"), " により ",
+                    math(String.raw`q^2+2q-1\ne0`), " なので、", ref("claim_signed_even_subgraph_rational_sign"),
+                    " の二つの場合のどちらでも ", math(String.raw`Q_L^{a,b}(q)\ne0`), " であり、",
+                    ref("claim_cut_realization_agrees_on_rationals"), " により ",
+                    math(String.raw`|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|=|\iota_{\mathbb Q\to\mathbb R}(Q_L^{a,b}(q))|>0`),
+                    " である。したがって ", math(String.raw`u_{L,a,b}`), " の被対数は正で、",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)>0`), " である。",
+                    ref("claim_shifted_mode_riemann_sums"),
                     " により四つの列 ", math(String.raw`u_{L,a,b}`), " はいずれも ",
                     math(String.raw`I_q`), " に収束する。有限集合上の最大値は各成分の共通極限へ収束するから ",
                     math(String.raw`v_L\to I_q`), " である。",
@@ -89347,7 +89354,7 @@ v_L
 &=\max_{(a,b)\in\mathcal S}L^{-2}\log_{\mathbb R}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
 &&\bigl(\because\ v_L,u_{L,a,b}\text{ の定義}\bigr)\\
 &=L^{-2}\log_{\mathbb R}\max_{(a,b)\in\mathcal S}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
-&&\bigl(\because\ L^{-2}>0\text{、実対数の単調性、}\blkref{def_real_logarithm}\bigr)\\
+&&\bigl(\because\ L^{-2}>0\text{、被対数は正、実対数の単調性、}\blkref{def_real_logarithm}\bigr)\\
 &=L^{-2}\log_{\mathbb R}M_L^{\mathrm{abs}}(q)
 &&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ と }\blkref{claim_partition_log_order_bounds}\text{ の最大値の定義}\bigr).
 \end{aligned}`),
