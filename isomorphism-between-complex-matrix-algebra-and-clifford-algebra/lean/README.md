@@ -115,6 +115,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「同型の証明」のうち、クリフォード代数から行列環への準同型（c_i² = 0・(c_i^T)² = 0、φ、Φ の存在と一意性、Φ(a†_i) = c_i・Φ(a_i) = c_i^T） | `Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `HomomorphismToMatrixAlgebraFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数の中の局所的な等式（a†_S・a_T・P の定義、a_i P = 0・P a†_i = 0、生成元を左から・消滅元を右から掛けた式） | `Isomorphism/LocalIdentities/LocalIdentities.lean` | `NecSuf/Isomorphism/LocalIdentities/LocalIdentities.lean` | `LocalIdentitiesFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数の中の大域的な等式（番号の違う因子の交換、a†_{U,≤m}・P_{≤m}・Q^{T,U}_m の定義と分解、(P (a_T a†_U)) P = δ_{T,U} ∗ P、u^S_i の定義、部分集合の和の主張、1 の分解） | `Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `NecSuf/Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `GlobalIdentitiesFromNecSuf.lean` |
+| 章「同型の証明」のうち、行列環からクリフォード代数への準同型（ℰ_{S,T} の定義と積の規則、Ψ の定義、Ψ が線型・行列単位を ℰ_{S,T} へ移す・行列単位どうしの積を保つ・ℂ-代数の準同型であること） | `Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `HomomorphismFromMatrixAlgebraFromNecSuf.lean` |
+| 章「同型の証明」のうち、二つの準同型が互いに逆であること（Φ(ℰ_{S,T}) = E_{S,T}、Φ ∘ Ψ = 恒等写像、生成作用素の列の和・消滅作用素の行の和、Ψ(c_i) = a†_i・Ψ(c_i^T) = a_i、γ((x, g)) の分解、Ψ ∘ Φ = 恒等写像、主定理） | `Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `NecSuf/Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `MutuallyInverseHomomorphismsFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -229,3 +231,13 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 部分集合の和の主張（一般の K-代数 B）は、B の乗法の交換法則も K の乗法の性質も使わない。使う K の性質は 0 + 0 = 0 だけで、
   右から掛ける写像が線型結合を線型結合へ移す主張の仮定から来る。
 - 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない。
+
+## 必要十分版が示したこと（章「同型の証明」の帰り Ψ と主定理）
+
+- 主定理（Φ と Ψ が互いに逆な代数の準同型であること）まで、K について章「クリフォード代数」の仮定 `CliffordLaws K n` のほかに足す性質は
+  a + (-a) = 0 だけである。これは Φ を普遍性から得る段と、1 の分解・真空で挟んだ元・生成元を掛けた局所的な等式を引く段から来る。
+  γ((x, g)) を a†_k と a_k の線型結合に分ける主張は a + (-a) = 0 も使わない。
+- 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない（M = 0 でも同じ証明が通る）。
+- 乗法の交換法則が行の中で要るのは、Ψ が線型であることの 1 · ρ = ρ · 1 と、Ψ(E_{S,T}) の δ_{S,S'} · δ_{T,T'} の入れ替えと、
+  行列単位の積の規則・行列の分解の 0 と 1 の交換だけである。どれも 0 か 1 とほかの元の交換で足りるが、行列環が K の上の代数であることが
+  交換法則を要するので、主張全体からは外せない。

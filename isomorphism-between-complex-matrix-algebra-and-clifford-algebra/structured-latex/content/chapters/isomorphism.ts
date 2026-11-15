@@ -6758,14 +6758,14 @@ F_m\bigl(e_m(n+j)\bigr)
 &=\prod_{B,\,t=1}^{M}\Phi(y^{S}_t)
 &&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
 &=\prod_{B,\,t=1}^{M}Y_t
-&&\left(\because\ \text{各}\ t\ \text{で（イ）。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right),\\[4pt]
+&&\left(\because\ \text{各}\ t\ \text{で（イ）。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right),\\[4pt]
 \Phi(P)
 &=\Phi\left(\prod_{A,\,i=1}^{M}x_i\right)
 &&\left(\because\ \blkref{def_vacuum_element_of_split_clifford_algebra}\right)\\
 &=\prod_{B,\,i=1}^{M}\Phi(x_i)
 &&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
 &=\prod_{B,\,i=1}^{M}\bigl(c_i^{\mathsf T}\cdot_B c_i\bigr)
-&&\left(\because\ \text{各}\ i\ \text{で（ロ）。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right)\\
+&&\left(\because\ \text{各}\ i\ \text{で（ロ）。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right)\\
 &=E_{\emptyset,\emptyset}
 &&\left(\because\ \blkref{claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit}\right),\\[4pt]
 \Phi(a_T)
@@ -6774,7 +6774,7 @@ F_m\bigl(e_m(n+j)\bigr)
 &=\prod_{B,\,k=1}^{M}\Phi(\check{z}^{T}_k)
 &&\left(\because\ \blkref{claim_algebra_homomorphism_maps_ordered_product_to_ordered_product}\right)\\
 &=\prod_{B,\,k=1}^{M}\check{Z}_k
-&&\left(\because\ \text{各}\ k\ \text{で（イ）の後の等式。因子が等しい族の番号順の積は等しい（}\blkref{def_ordered_product_in_algebra}\text{）}\right).
+&&\left(\because\ \text{各}\ k\ \text{で（イ）の後の等式。}\blkref{claim_ordered_products_with_equal_factors_are_equal}\right).
 \end{aligned}`),
       paragraph(["（ニ）", math(String.raw`E_{S,\emptyset}`), " に ", math(String.raw`E_{\emptyset,\emptyset}`), " を右から掛けても変わらない。"]),
       displayMath(String.raw`\begin{aligned}
