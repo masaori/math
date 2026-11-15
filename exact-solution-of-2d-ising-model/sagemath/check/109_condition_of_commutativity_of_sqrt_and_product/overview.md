@@ -20,6 +20,8 @@ arg z₁ + arg z₂ が 2π 未満かどうかで符号が変わる。**境界 a
 
 `r_1 = 0` または `r_2 = 0` の場合の 2 本の鎖の最後の行 `(0·cos(…), 0·sin(…)) = (0,0)` の根拠は `real_zero_times_is_zero`（2 箇所へ。2026-11-14 に名前だけの「0 を因子にもつ積は 0」から替えた）で、その鎖は `sagemath/check/real_zero_times_is_zero/` が確かめる。
 
+`r_1 = 0` の場合の `arg(z_1)` の鎖の最後の行 `s_{[0,2π)}([0]) = 0` の根拠は、2026-11-15 に名前だけの「角度切断の一意性を θ = 0, n = 0 へ当てた」から主張 `angle_section_of_zero_is_zero` の参照に替えた。その主張の鎖は `sagemath/check/angle_section_of_zero_is_zero/` が確かめる。
+
 許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない（check_01。`check_zero_factor_chain.sage` は厳密計算で許容誤差を使わない）。
 
 ## 備考

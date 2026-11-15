@@ -1,31 +1,28 @@
 # 対象ラベル: range_of_args_of_square_of_complex_numbers
-# r = 0 の場合の鎖のうち、0 を因子にもつ積を real_times_zero_is_zero・real_zero_times_is_zero の参照へ替えた行を、
-# QQ[pi_] の多項式として一行ずつ比べる（π は不定元 pi_ で表し、浮動小数点を使わない）。
-#   r = 0 の場合の冒頭に置いた準備（arg(z) の鎖の s([0]) = 0 − 2·0·π の次の行が引く）:
-#             0 − 2·0·π = 0 − 0·π = 0 − 0 = 0
-#             （2·0 = 0 は real_times_zero_is_zero (x → 2)、0·π = 0 は real_zero_times_is_zero (x → π)、
-#               最後は real_minus_zero_is_self (a → 0)。2·0·π は (2·0)·π と読む）
-#   arg(z^2): pr_2 の中の半径 0·0 = 0（real_zero_times_is_zero (x → 0)）、0 = 2·0（real_times_zero_is_zero (x → 2) を右辺から左辺へ）
+# r = 0 の場合の鎖のうち、主張の参照に替えた行を QQ[pi_] の多項式として一行ずつ比べる
+# （π は不定元 pi_ で表し、浮動小数点を使わない）。
+#   arg(z):   s_{[0,2π)}([0]) = 0（angle_section_of_zero_is_zero）。s([θ]) := θ − 2nπ に θ → 0 と
+#             angle_section_integer_of_zero_is_zero の n = 0 を当てた値が 0 であることを確かめる
+#             （その主張自身の鎖は sagemath/check/angle_section_of_zero_is_zero/ が確かめる）。
+#   arg(z^2): pr_2 の中の半径 0·0 = 0（real_zero_times_is_zero (x → 0)）、
+#             s_{[0,2π)}([0]) = 0（angle_section_of_zero_is_zero）、0 = 2·0（real_times_zero_is_zero (x → 2) を右辺から左辺へ）
 R.<pi_> = PolynomialRing(QQ)
 z = R(0)
 two = R(2)
 n = 0
+
+def section(theta, n_int):
+    return theta - (two * R(n_int)) * pi_
 
 def chain(rows):
     global n
     assert all(a == b for a, b in zip(rows, rows[1:])), rows
     n += len(rows) - 1
 
-chain([z - (two * z) * pi_, z - z * pi_, z - z, z])
+chain([section(z, 0), z])      # arg(z) の鎖の最後の行 s([0]) = 0
+chain([section(z, 0), z])      # arg(z^2) の鎖の同じ行 s([0]) = 0
 chain([z * z, z])
 chain([z, two * z])
-assert two * z == 0 and z * pi_ == 0 and z - z == 0
-# 整数の同定: RIF の π で 0 ≤ 0 − 2kπ < 2π を満たす k は 0 だけ（angle_section_existence_uniqueness の θ → 0）
-PI = RIF(pi)
-assert PI > 0
-sols = [k for k in range(-5, 6) if (0 - 2 * k * PI >= 0) and (0 - 2 * k * PI < 2 * PI)]
-assert sols == [0], sols
-n += 1
 assert z - two * pi_ != 0              # 対照: 整数 n → 0 でなく n → 1 なら 0 にならない
 
 print("zero-radius rows of range_of_args_of_square_of_complex_numbers in QQ[pi_]: %d checks" % n)

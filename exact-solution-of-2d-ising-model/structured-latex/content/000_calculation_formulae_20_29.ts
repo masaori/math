@@ -3752,4 +3752,151 @@ z^2
       status: "converted",
     },
   },
+  {
+    id: "calculation_formulae_claim_angle_section_integer_of_zero_is_zero",
+    kind: "claim",
+    title: { text: "角度 0 に対する切断の整数は 0" },
+    labels: ["angle_section_integer_of_zero_is_zero"],
+    statement: [
+      paragraph([
+        ref("angle_section_existence_uniqueness"),
+        " を ",
+        math(String.raw`\theta \to 0`),
+        " に当てて得られる、",
+        math(String.raw`0 \leq 0 - 2n\pi < 2\pi`),
+        " を満たすただ一つの ",
+        math(String.raw`n \in \mathbb{Z}`),
+        " は ",
+        math(String.raw`n = 0`),
+        " である。ここで和・積・順序は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、差は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う値を先に置く。",
+        ref("pi_is_positive"),
+        " の ",
+        math(String.raw`0<\pi`),
+        " と ",
+        math(String.raw`0<2`),
+        " から、",
+        math(String.raw`\mathbb{R}`),
+        " で正の数どうしの積は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0<2\pi`),
+        " である。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0-2\cdot 0\cdot\pi
+&= 0-0\cdot\pi
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\bigr)\\
+&= 0-0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi)\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0\leq 0`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の順序の反射律。",
+        ref("set_and_algebra_notation"),
+        "）と ",
+        math(String.raw`0<2\pi`),
+        " にこの値を当てると ",
+        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
+        " であり、",
+        math(String.raw`n=0`),
+        " は条件を満たす。",
+        ref("angle_section_existence_uniqueness"),
+        " の一意性より、",
+        math(String.raw`\theta \to 0`),
+        " について条件を満たす整数は ",
+        math(String.raw`0`),
+        " だけである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。同じ準備（0 − 2·0·π = 0 の 3 行の鎖と 0 < 2π の地の文から θ → 0 の整数を 0 と定めること）が range_of_args_of_square_of_complex_numbers・sqrt_expansion_via_polar・inverse_of_sqrt_cc の 3 ブロックに重複していたので、1 つの主張にまとめた。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_integer_of_zero_is_zero/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_angle_section_of_zero_is_zero",
+    kind: "claim",
+    title: { text: "角度表現の切断は 0 の同値類を 0 へ送る" },
+    labels: ["angle_section_of_zero_is_zero"],
+    statement: [
+      paragraph([
+        ref("section_of_angle_representation"),
+        " の切断 ",
+        math(String.raw`s_{[0,2\pi)}`),
+        " について",
+      ]),
+      displayMath(String.raw`s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right) = 0`),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`[0]_{\sim_{\mathrm{angle}}}`),
+        " は ",
+        ref("angle_equivalence_class"),
+        " の同値類、右辺の ",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " の ",
+        math(String.raw`0`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中で使う記号を先に置く。",
+        math(String.raw`n_0 \in \mathbb{Z}`),
+        " を、",
+        ref("angle_section_existence_uniqueness"),
+        " を ",
+        math(String.raw`\theta \to 0`),
+        " に当てて得られる ",
+        math(String.raw`0 \leq 0 - 2n_0\pi < 2\pi`),
+        " を満たすただ一つの整数とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
+&= 0-2n_0\pi
+&&\bigl(\because\ \blkref{section_of_angle_representation}\ (\theta \to 0,\ n \to n_0)\bigr)\\
+&= 0-2\cdot 0\cdot\pi
+&&\bigl(\because\ \blkref{angle_section_integer_of_zero_is_zero}\ \text{の}\ n_0 = 0\bigr)\\
+&= 0-0\cdot\pi
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\bigr)\\
+&= 0-0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi)\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。range_of_args_of_square_of_complex_numbers・sqrt_expansion_via_polar の r = 0 の場合と condition_of_commutativity_of_sqrt_and_product の r_1 = 0 の場合が s_{[0,2π)}([0]) = 0 をそれぞれの準備から（condition_of_commutativity_of_sqrt_and_product は「角度切断の一意性を θ = 0, n = 0 へ当てた」の名前だけで）出していたので、1 つの主張にした。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_of_zero_is_zero/。",
+      ],
+    },
+  },
 ]);

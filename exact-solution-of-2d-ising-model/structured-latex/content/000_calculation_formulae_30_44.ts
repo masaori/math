@@ -1236,45 +1236,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
       ]),
       paragraph([
         math(String.raw`r = 0`),
-        " のとき。この場合の中で使う値を先に置く。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-0-2\cdot 0\cdot\pi
-&= 0-0\cdot\pi
-&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2))\\
-&= 0-0
-&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
-&= 0
-&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        math(String.raw`0\leq 0<2\pi`),
-        " である（",
-        math(String.raw`0<2\pi`),
-        " は、",
-        ref("pi_is_positive"),
-        " の ",
-        math(String.raw`0<\pi`),
-        " と ",
-        math(String.raw`0<2`),
-        " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）による）。したがって ",
-        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
-        " であり、",
-        ref("angle_section_existence_uniqueness"),
-        " が ",
-        math(String.raw`\theta\to 0`),
-        " について一意に定める整数は ",
-        math(String.raw`0`),
-        " である。まず",
+        " のとき。まず",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1285,16 +1247,24 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ r=0\ \text{という、この場合の仮定})\\
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
-&= 0-2\cdot 0\cdot\pi
-&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と、いま見た整数}\ 0)\\
 &= 0
-&&(\because\ \text{いま置いた}\ 0-2\cdot 0\cdot\pi\ \text{の計算})
+&&(\because\ \blkref{angle_section_of_zero_is_zero})
 \end{aligned}`,
       ),
       paragraph([
         "であり、したがって ",
         math(String.raw`0 \leq \arg^{[0,2\pi)}(z) < \pi`),
-        " すなわち第 1 の場合にあたる。一方",
+        "（",
+        math(String.raw`0 \leq 0`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序の反射律（",
+        ref("set_and_algebra_notation"),
+        "）、",
+        math(String.raw`0 < \pi`),
+        " は ",
+        ref("pi_is_positive"),
+        "）すなわち第 1 の場合にあたる。一方",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1312,7 +1282,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
 &= 0
-&&(\because\ \text{いま見た}\ \arg^{[0,2\pi)}(z)\ \text{の計算の最後の 2 段})\\
+&&(\because\ \blkref{angle_section_of_zero_is_zero})\\
 &= 2\cdot 0
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\ \text{を右辺から左辺へ})\\
 &= 2\arg^{[0,2\pi)}(z)
@@ -1468,6 +1438,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
           "積の場合と同じ設定を statement に書き下した。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の準備の 0 − 2·0·π = 0 の鎖の 3 行目 0 − 0 = 0 の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: r ≠ 0 の場合の r·r ≠ 0 の根拠が地の文「実数の積は、因子がどちらも 0 でなければ 0 でない」だけだったので、000_calculation_formulae_20_29.ts に足した主張 real_product_of_nonzero_is_nonzero（a → r、b → r）の参照に替えた。主張と鎖は不変。Lean の具体版は無い。数値検証: sagemath/check/106_range_of_args_of_square_of_complex_numbers/check_nonzero_radius_square_row.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の冒頭の準備（0 − 2·0·π = 0 の 3 行の鎖と、0 ≤ 0 < 2π から angle_section_existence_uniqueness の整数を 0 と定める地の文）を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero・angle_section_of_zero_is_zero へ移した。arg(z) の鎖の最後の 2 行（s([0]) = 0 − 2·0·π と 0 − 2·0·π = 0）を angle_section_of_zero_is_zero を引く 1 行にし、arg(z^2) の鎖の「arg(z) の計算の最後の 2 段」を同じ主張の参照に替えた。鎖の両端と主張は不変。準備から pi_is_positive の参照が消えるので、「0 ≤ arg(z) < π すなわち第 1 の場合」の文に 0 ≤ 0（順序の反射律、set_and_algebra_notation）と 0 < π（pi_is_positive）の出典を足した。",
       ],
     },
   },
@@ -1949,45 +1920,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       ]),
       paragraph([
         math(String.raw`r=0`),
-        " のとき。この場合の中で使う値を先に置く。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-0-2\cdot 0\cdot\pi
-&= 0-0\cdot\pi
-&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2))\\
-&= 0-0
-&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
-&= 0
-&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        math(String.raw`0\leq 0<2\pi`),
-        " である（",
-        math(String.raw`0<2\pi`),
-        " は、",
-        ref("pi_is_positive"),
-        " の ",
-        math(String.raw`0<\pi`),
-        " と ",
-        math(String.raw`0<2`),
-        " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）による）。したがって ",
-        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
-        " であり、準備の第一で ",
-        math(String.raw`\theta\to 0`),
-        " とした整数は ",
-        math(String.raw`0`),
-        " で、",
-        math(String.raw`s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})=0-2\cdot 0\cdot\pi`),
-        " である。まず左辺を計算する。",
+        " のとき。まず左辺を計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1998,10 +1931,8 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合。}\blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
 &&(\because\ \text{準備の第二。}\blkref{sqrt_of_real_zero_is_zero})\\
-&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot (0-2\cdot 0\cdot\pi)\right)\right]_{\sim}\right)
-&&(\because\ \text{いま見た}\ s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})=0-2\cdot 0\cdot\pi)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
-&&(\because\ \text{いま置いた}\ 0-2\cdot 0\cdot\pi\ \text{の計算})\\
+&&(\because\ \blkref{angle_section_of_zero_is_zero})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x \to \tfrac{1}{2}))\\
 &= (0\cdot\cos 0,\ 0\cdot\sin 0)
@@ -2077,6 +2008,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "そこで 0 − 2·0·π = 0 の 3 行の鎖（real_times_zero_is_zero（x → 2）・real_zero_times_is_zero（x → π）・ℝ で a − 0 = a）と 0 ≤ 0 < 2π（0 < 2π は pi_is_positive と順序体の正の数どうしの積）を r = 0 の場合の冒頭に置いて s_{[0,2π)}([0]) = 0 − 2·0·π を先に述べ、左辺の鎖の 4 行目をその値の代入とその計算の 2 行に割った（左辺は 9 段になった）。鎖の両端と主張は不変。" +
           "数値検証: sagemath/check/108_sqrt_expansion_via_polar/check_02_zero_radius_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の準備の 0 − 2·0·π = 0 の鎖の 3 行目 0 − 0 = 0 の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の冒頭の準備（0 − 2·0·π = 0 の 3 行の鎖、0 ≤ 0 < 2π、準備の第一の整数を 0 と定めて s([0]) = 0 − 2·0·π とする地の文）を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero・angle_section_of_zero_is_zero へ移した。左辺の鎖の s([0]) を 0 − 2·0·π に替える行とそれを 0 にする行の 2 行を、angle_section_of_zero_is_zero を引く 1 行にした。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -2257,7 +2189,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{第1座標, 第2座標 の定義。}\blkref{first_and_second_projections})\\
 &= 0
-&&(\because\ \text{角度切断の一意性を}\ \theta=0,\ n=0\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})
+&&(\because\ \blkref{angle_section_of_zero_is_zero})
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -2447,6 +2379,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         "引いた定義・主張の参照は、それを適用した各式変形行の行末へ置いた。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: r_1 = 0 の場合の (0,0)·√z_2 = (0,0) を名前だけの「ℂ の零元を因子にもつ積は零元」で済ませていた行を、inclusion_rr_to_cc の 0_ℂ = (0,0)（右辺から左辺へ）・complex_zero_times_is_zero（z → √z_2）・inclusion_rr_to_cc の 3 行に割った。式の両端は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: r_1 = 0 または r_2 = 0 の場合の左辺の鎖と r_1 = 0 の場合の √z_1 の鎖の最後の行の根拠「0 を因子にもつ積は 0」（ℝ の 0·x = 0 を 2 成分へ）が名前だけだったので、足した主張 real_zero_times_is_zero を 2 箇所へ（x → cos(…)、x → sin(…)）当てる参照に替えた。式は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r_1 = 0 の場合の arg(z_1) の鎖の最後の行 s([0]) = 0 の根拠が「角度切断の一意性を θ = 0, n = 0 へ当てた」の名前だけで、0 − 2·0·π = 0 と 0 ≤ 0 < 2π と section_of_angle_representation の当てはめが書かれていなかったので、000_calculation_formulae_20_29.ts に足した主張 angle_section_of_zero_is_zero の参照に替えた。式は不変。",
       ],
     },
   },
@@ -2745,41 +2678,13 @@ z
       paragraph([
         "である。この代表元の偏角 ",
         math(String.raw`0`),
-        " について",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-0-2\cdot 0\cdot\pi
-&= 0-0\cdot\pi
-&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2))\\
-&= 0-0
-&&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
-&= 0
-&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
-\end{aligned}`),
-      paragraph([
-        "であり、",
-        math(String.raw`0\leq 0<2\pi`),
-        " である（",
-        math(String.raw`0<2\pi`),
-        " は、",
-        ref("pi_is_positive"),
-        " の ",
-        math(String.raw`0<\pi`),
-        " と ",
-        math(String.raw`0<2`),
-        " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）による）。したがって ",
-        math(String.raw`0\leq 0-2\cdot 0\cdot\pi<2\pi`),
-        " なので、この代表元に対する整数（",
+        " に対する整数（",
         ref("angle_section_existence_uniqueness"),
         " が ",
         math(String.raw`\theta\to 0`),
-        " について一意に定めるもの）は ",
+        " について一意に定めるもの）は、",
+        ref("angle_section_integer_of_zero_is_zero"),
+        " より ",
         math(String.raw`0`),
         " である。したがって",
       ]),
@@ -2911,6 +2816,7 @@ z
           "準備の第四の地の文「0 ≤ 0 − 2·0·π < 2π なので、この代表元に対する整数は 0」が 2·0 = 0・0·π = 0・0 − 0 = 0 を書かずに使っていたので、0 − 2·0·π = 0 の 3 行の鎖（real_times_zero_is_zero（x → 2）・real_zero_times_is_zero（x → π）・ℝ で a − 0 = a）と 0 ≤ 0 < 2π（0 < 2π は pi_is_positive と順序体の正の数どうしの積）を書き、そこから整数が 0 であることを述べる形にした。式の両端と主張は不変。" +
           "数値検証: sagemath/check/111_inverse_of_sqrt_cc/check_zero_angle_integer_chain.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 0/1 = 0 の行と √(1_C) の鎖の 0/2 = 0 の行の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1、x → 2）の参照に、準備の第四の 0 − 2·0·π = 0 の鎖の 3 行目と √(1_C) の鎖の 0 − 0 = 0 の行の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第四の 0 − 2·0·π = 0 の 3 行の鎖と、0 ≤ 0 < 2π から代表元 (1, 0) の偏角 0 に対する整数を 0 と定める地の文を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero へ移し、その参照に替えた。√(1_C) の鎖は不変。",
       ],
     },
   },

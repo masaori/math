@@ -49,6 +49,8 @@ export const ALL_LABELS = [
   "angle_equivalence_class",
   "angle_representation_of_rr",
   "angle_section_existence_uniqueness",
+  "angle_section_integer_of_zero_is_zero",
+  "angle_section_of_zero_is_zero",
   "anticommutator_of_Z_and_Y",
   "anticommutator_of_check_Z_Y",
   "anticommutator_of_check_psi",
