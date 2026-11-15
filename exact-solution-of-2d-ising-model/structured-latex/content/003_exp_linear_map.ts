@@ -2483,9 +2483,33 @@ a
       paragraph([
         "である。",
         ref("matrix_exp_series_converges"),
-        " の部分和について、すべての ",
-        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
-        " で",
+        " の部分和について、",
+        math(String.raw`N = 0`),
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_0([0]_K)
+&= \sum_{m=0}^{0}\frac{1}{m!}[0]_K^{\,m}
+   \quad (\because \blkref{matrix_exp_series_converges}\text{ の } S_N\ (N \to 0)) \\
+&= \sum_{j=1}^{1}\frac{1}{(j-1)!}[0]_K^{\,j-1}
+   \quad (\because K = \mathbb{R} \text{ なら添字を 1 ずらす、} K = \mathbb{C} \text{ なら }\blkref{def_finite_sum_of_matrices_from_index_zero}\ (\text{和の上端} \to 0,\ X_k \to \tfrac{1}{k!}[0]_{\mathbb{C}}^{\,k})) \\
+&= \frac{1}{0!}[0]_K^{\,0}
+   \quad (\because K = \mathbb{R} \text{ なら 1 項だけの和はその項、} K = \mathbb{C} \text{ なら }\blkref{def_finite_sum_of_matrices}\text{ の } \textstyle\sum_{j=1}^{1} X_j := X_1) \\
+&= \frac{1}{0!}I
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+&= I
+   \quad (\because 0! = 1) \\
+&= \left[I_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= [1]_K
+   \quad (\because \text{単位行列の対角成分は } 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`N \in \mathbb{Z}_{\ge 1}`),
+        " では",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2501,11 +2525,11 @@ S_N([0]_K)
 &= I + \sum_{m=1}^{N}\frac{1}{m!}O
    \quad (\because \text{上の } [0]_K^{\,m} = O\ (m \ge 1)) \\
 &= I + \sum_{m=1}^{N}O
-   \quad (\because \text{零行列のスカラー倍は零行列}) \\
+   \quad (\because K = \mathbb{R} \text{ なら零行列のスカラー倍は零行列、} K = \mathbb{C} \text{ なら }\blkref{scalar_multiple_of_zero_matrix}\ (\text{主張の } m, n \to 1,\ a \to (1/m!)_{\mathbb{C}})\text{ を各項へ}) \\
 &= I + O
-   \quad (\because \text{零行列どうしの和は零行列}) \\
+   \quad (\because K = \mathbb{R} \text{ なら零行列どうしの和は零行列、} K = \mathbb{C} \text{ なら }\blkref{finite_sum_of_zero_matrices}\ (\text{主張の } m, n \to 1,\ r \to N)) \\
 &= I
-   \quad (\because \text{零行列は行列の加法の単位元}) \\
+   \quad (\because K = \mathbb{R} \text{ なら零行列は行列の加法の単位元、} K = \mathbb{C} \text{ なら }\blkref{matrix_plus_zero_matrix}\ (\text{主張の } m, n \to 1,\ X \to I)) \\
 &= \left[I_{11}\right]_K
    \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
 &= [1]_K
@@ -2517,16 +2541,16 @@ S_N([0]_K)
         String.raw`\begin{aligned}
 \left\|S_N([0]_K) - [1]_K\right\|
 &= \left\|[1]_K - [1]_K\right\|
-   \quad (\because \text{上の鎖}) \\
+   \quad (\because N = 0 \text{ なら上の } N = 0 \text{ の鎖、} N \ge 1 \text{ なら上の } N \in \mathbb{Z}_{\ge 1} \text{ の鎖}) \\
 &= \|O\|
-   \quad (\because \text{行列の差は成分ごと}) \\
+   \quad (\because K = \mathbb{R} \text{ なら行列の差は成分ごと、} K = \mathbb{C} \text{ なら }\blkref{matrix_difference_zero_iff_equal}\ (\text{主張の } m, p \to 1,\ A, B \to [1]_{\mathbb{C}})\text{ の } \Leftarrow) \\
 &= 0
    \quad (\because \blkref{matrix_norm_triangle_inequality}\text{ (1)})
 \end{aligned}`,
       ),
       paragraph([
         "がすべての ",
-        math(String.raw`N`),
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
         " で成り立ち、値が 0 の定数の実数列は 0 に収束するので、",
         ref("def_matrix_norm"),
         " の意味で ",
@@ -2558,6 +2582,7 @@ S_N([0]_K)
       notes: [
         "数の exp を行列の exp から定義したことに伴い置いた。数の列の極限の一意性はラベルを持つブロックが無いので、行列の部分和 S_N([0]_K) が定数列 [1]_K であることと、行列の極限の一意性（labels: matrix_norm_triangle_inequality (4)）から示した。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の ([0]^m)_11 の鎖の最後の行の根拠が名前だけの「K の元に 0 を掛けると 0」だったので、K = ℝ なら real_times_zero_is_zero、K = ℂ なら complex_times_zero_is_zero（どちらも x・z → ([0]^{m-1})_11）の参照に替えた（式は不変）。Lean の具体版は無い（Lean は mathlib の Real.exp_zero・Complex.exp_zero を引く）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 部分和の鎖の「零行列のスカラー倍は零行列」「零行列どうしの和は零行列」「零行列は行列の加法の単位元」と差のノルムの鎖の「行列の差は成分ごと」は名前だけの根拠だったので、K = ℂ の側をそれぞれ scalar_multiple_of_zero_matrix（a → (1/m!)_ℂ）・finite_sum_of_zero_matrices（r → N）・matrix_plus_zero_matrix（X → I）・matrix_difference_zero_iff_equal（A, B → [1]_ℂ の ⇐）の参照に替えた。K = ℝ の側は実数の行列の和・スカラー倍・差・零行列を定めるブロックが本文に無いので名前のまま残した。finite_sum_of_zero_matrices は項の数が 1 以上の和についての主張で、N = 0 では第 0 項を分けた後の Σ_{m=1}^{0} が def_finite_sum_of_matrices で定まらないので、部分和の鎖を N = 0（def_finite_sum_of_matrices_from_index_zero と def_finite_sum_of_matrices の Σ_{j=1}^{1} X_j := X_1 で 1 項だけの和にする鎖）と N ∈ ℤ_{≥1}（もとの鎖）に分けた。どちらも [1]_K に着くので、すべての N ∈ ℤ_{≥0} で S_N([0]_K) = [1]_K であり、主張ともとの鎖の式は不変。",
       ],
     },
   },
