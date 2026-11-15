@@ -2289,6 +2289,200 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
+    kind: "claim",
+    title: { text: "正の実数の乗法の逆元は正" },
+    labels: ["real_inverse_of_positive_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        "、",
+        math(String.raw`0 < a`),
+        " とする。和・積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        "・順序 ",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）である。",
+        math(String.raw`0 < a`),
+        " から ",
+        math(String.raw`a \neq 0`),
+        " が従い（証明の準備で示す）、",
+        math(String.raw`a^{-1} \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の ",
+        math(String.raw`z^{-1}`),
+        "（",
+        math(String.raw`z \to a`),
+        "）、すなわち ",
+        math(String.raw`a`),
+        " の乗法の逆元（",
+        math(String.raw`a\cdot a^{-1} = 1`),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`0 < a^{-1}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`a \neq 0`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < a
+&\Longrightarrow 0 \neq a
+&&\bigl(\because\ \mathbb{R}\ \text{の}\ x < y\ \text{は}\ x \leq y\ \text{かつ}\ x \neq y\ \text{のことなので、その後半}\ (x \to 0,\ y \to a)\bigr)\\
+&\Longrightarrow a \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to a,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`a^{-1}`),
+        " が在る。",
+        math(String.raw`-a^{-1}`),
+        "・",
+        math(String.raw`-1`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to a^{-1}`),
+        "、",
+        math(String.raw`z \to 1`),
+        "）である。次に ",
+        math(String.raw`a^{-1} \neq 0`),
+        " を示す。",
+        math(String.raw`a^{-1} = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1
+&= a\cdot a^{-1}
+&&\bigl(\because\ a\ \text{の乗法の逆元}\ a\cdot a^{-1} = 1\ (a \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= a\cdot 0
+&&\bigl(\because\ \text{仮定}\ a^{-1} = 0\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to a)\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、体 ",
+        math(String.raw`\mathbb{R}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）の公理 ",
+        math(String.raw`0 \neq 1`),
+        " に反する。したがって ",
+        math(String.raw`a^{-1} \neq 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a^{-1} \neq 0
+&\Longrightarrow 0 \neq a^{-1}
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to 0,\ y \to a^{-1})\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\mathbb{R}`),
+        " の順序は全順序（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
+        math(String.raw`0 \leq a^{-1}`),
+        " か ",
+        math(String.raw`a^{-1} \leq 0`),
+        " であり、前者は ",
+        math(String.raw`0 \neq a^{-1}`),
+        " と、後者は ",
+        math(String.raw`a^{-1} \neq 0`),
+        " と合わせて（",
+        math(String.raw`x < y`),
+        " の意味）",
+        math(String.raw`0 < a^{-1}`),
+        " か ",
+        math(String.raw`a^{-1} < 0`),
+        " である。",
+        math(String.raw`0 < a^{-1}`),
+        " の場合は主張そのものである。",
+        math(String.raw`a^{-1} < 0`),
+        " の場合が起きないことを示す。この場合には次の 3 本の鎖が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= a^{-1} + (-a^{-1})
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a^{-1})\ \text{を右辺から左辺へ}\bigr)\\
+&< 0 + (-a^{-1})
+&&\bigl(\because\ \text{場合の仮定}\ a^{-1} < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to a^{-1},\ y \to 0,\ c \to -a^{-1}\bigr)\\
+&= -a^{-1}
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0
+&< a\cdot(-a^{-1})
+&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と上の鎖の}\ 0 < -a^{-1}\ \text{と、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\cdot\bigl((-1)\cdot a^{-1}\bigr)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a^{-1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(a\cdot(-1)\bigr)\cdot a^{-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((-1)\cdot a\bigr)\cdot a^{-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot\bigl(a\cdot a^{-1}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-1)\cdot 1
+&&\bigl(\because\ a\ \text{の乗法の逆元}\ a\cdot a^{-1} = 1\ (a \neq 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -1
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to 1)\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+1
+&= 0 + 1
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&< (-1) + 1
+&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to -1,\ c \to 1\bigr)\\
+&= 1 + (-1)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 1)\bigr)
+\end{aligned}`),
+      paragraph(["最後の鎖の ", math(String.raw`1 < 0`), " から矛盾を導く。"]),
+      displayMath(String.raw`\begin{aligned}
+0 < 1\ \land\ 1 < 0
+&\Longrightarrow 0 < 0
+&&\bigl(\because\ \text{左の}\ 0 < 1\ \text{は}\ \blkref{real_zero_less_than_one}\text{、}1 < 0\ \text{は最後の鎖。}\mathbb{R}\ \text{の順序の推移律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 \neq 0
+&&\bigl(\because\ \mathbb{R}\ \text{の}\ x < y\ \text{は}\ x \leq y\ \text{かつ}\ x \neq y\ \text{のことなので、その後半}\ (x \to 0,\ y \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`0 \neq 0`),
+        " は等号の反射律 ",
+        math(String.raw`0 = 0`),
+        " に反するので、",
+        math(String.raw`a^{-1} < 0`),
+        " の場合は起きない。したがって ",
+        math(String.raw`0 < a^{-1}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の乗法の逆元が正であることは順序体の公理に含まれないのに、zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} ほかが「ℝ で正の数の逆数は正（ℝ は順序体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_inverse_of_positive_is_positive（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealInverseOfPositiveIsPositive.lean）、必要十分版は Ising2D.NecSuf.inv_pos_of_orderedAxioms（NecSuf/InvPosOfOrderedAxioms.lean）。数値検証: sagemath/check/real_inverse_of_positive_is_positive/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

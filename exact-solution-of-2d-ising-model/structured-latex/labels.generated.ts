@@ -575,6 +575,7 @@ export const ALL_LABELS = [
   "real_inclusion_preserves_product",
   "real_inclusion_preserves_sum",
   "real_inclusion_preserves_sum_over_binary_words",
+  "real_inverse_of_positive_is_positive",
   "real_log_negative_below_one",
   "real_log_of_power",
   "real_log_of_product",

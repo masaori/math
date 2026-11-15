@@ -3000,6 +3000,9 @@ targets=(
   Ising2D.real_two_is_nonzero
   Ising2D.NecSuf.ne_zero_of_zero_lt
   Ising2D.real_two_is_nonzero_of_necSuf
+  Ising2D.real_inverse_of_positive_is_positive
+  Ising2D.NecSuf.inv_pos_of_orderedAxioms
+  Ising2D.real_inverse_of_positive_is_positive_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products
