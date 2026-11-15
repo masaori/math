@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-15: 研究管理。前回からの 9 コミットを読んだ（数学的な誤りと暗黙の同一視は無い）。台帳に、Jordan–Wigner の後半・一般の偶数次元・奇数次元の書き方と検算の直しの行を、Lean の Jordan–Wigner の行の前に足した。ゴールラインの検査の行に手本と、記述の行の Lean の列の書き直し、lean/README.md に書く三つを足した。
+
 - 2026-11-15: 台帳の「Lean：系『奇数次元』の具体版と必要十分版」の行を書き切った。本文 64 ラベルを lean/…/Isomorphism/OddDimensional/ の 8 ファイルに具体版・必要十分版・導出版で形式化した。2 の可逆性は e_± を作る段だけで要る（lean/README.md の「必要十分版が示したこと（系『奇数次元の二次空間』）」）。本文の二か所の書き方を直した（冪等元の平方の一行三根拠を三行に、Ψ' の準同型性の使われない準備を外す。主張は不変）。lake build・check-no-sorry・npm run check・build:pdf 通過。
 
 - 2026-11-15: 台帳の「Lean：系『基底と行列の番号付け』と『一般の偶数次元の非退化な二次空間』」の行を書き切った。本文 52 ブロックを lean/…/Isomorphism/BasisOfMatrixUnitElements/ と Isomorphism/GeneralEvenDimensional/（OrthogonalBasis・OrthonormalBasis・InducedHomomorphism・IsometryToSplitSpace）に具体版・必要十分版・導出版で形式化した。平方根と 2 の可逆性がどの段で要るかは lean/README.md の「必要十分版が示したこと」。次は台帳の Lean の次の行（系「奇数次元」）。
