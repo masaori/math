@@ -8894,7 +8894,7 @@ j\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ \sigma(y)\in\operatorname{Orb}_{\sigma}(i)
  &&\bigl(\because\ \text{始点 }\sigma(y)\text{ での帰納法の仮定}\bigr)\\
  &\ \Longleftrightarrow\ y\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).
+ &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)
 \end{aligned}`),
                 paragraph(["数学的帰納法により、順向きの所属同値が得られた。逆向きについては、逆置換の台の一致（", ref("claim_invariant_subset_reversal_orbit"), " の証明の冒頭）を使い、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8904,7 +8904,7 @@ j\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ y\in\operatorname{Orb}_{\sigma^{-1}}(i)
  &&\bigl(\because\ \text{順向きの所属同値を }\sigma^{-1}\text{ に適用}\bigr)\\
  &\ \Longleftrightarrow\ y\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr).
+ &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr)
 \end{aligned}`),
                 paragraph(["これを逆向きの所属同値と呼ぶ。また、任意の点 ", math(String.raw`y\in\mathcal J`), " について、"]),
                 displayMath(String.raw`\sigma^{[0]}(y)=y
@@ -8916,7 +8916,7 @@ k\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ \sigma^{[n]}(j)\in\operatorname{Orb}_{\sigma}(i)
  &&\bigl(\because\ \sigma^{[n]}(j)=k\bigr)\\
  &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \text{順向きの所属同値}\bigr).
+ &&\bigl(\because\ \text{順向きの所属同値}\bigr)
 \end{aligned}`),
                 paragraph(["逆向き、すなわち ", math(String.raw`(\sigma^{-1})^{[n]}(j)=k`), " ならば、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8924,7 +8924,7 @@ k\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ (\sigma^{-1})^{[n]}(j)\in\operatorname{Orb}_{\sigma}(i)
  &&\bigl(\because\ (\sigma^{-1})^{[n]}(j)=k\bigr)\\
  &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \text{逆向きの所属同値}\bigr).
+ &&\bigl(\because\ \text{逆向きの所属同値}\bigr)
 \end{aligned}`),
                 paragraph(["どちらも最後の条件は仮定で成り立つ。したがって ", math(String.raw`\operatorname{Orb}_{\sigma}(j)\subseteq\operatorname{Orb}_{\sigma}(i)`), " である。ここまでの議論は、台への所属を仮定した任意の二点に適用できる。"]),
                 paragraph(["逆の包含のため、まず ", math(String.raw`i\in\operatorname{Orb}_{\sigma}(j)`), " を示す。仮定 ", math(String.raw`j\in\operatorname{Orb}_{\sigma}(i)`), " と ", ref("def_finite_permutation_orbit"), " により、ある ", math(String.raw`n\in\mathbb N`), " が到達の証人となる。順向き、すなわち ", math(String.raw`\sigma^{[n]}(i)=j`), " ならば、"]),
@@ -8933,7 +8933,7 @@ i\in\operatorname{Orb}_{\sigma}(j)
  &\ \Longleftrightarrow\ \sigma^{[n]}(i)\in\operatorname{Orb}_{\sigma}(j)
  &&\bigl(\because\ \text{順向きの所属同値}\bigr)\\
  &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(j)
- &&\bigl(\because\ \sigma^{[n]}(i)=j\bigr).
+ &&\bigl(\because\ \sigma^{[n]}(i)=j\bigr)
 \end{aligned}`),
                 paragraph(["逆向き、すなわち ", math(String.raw`(\sigma^{-1})^{[n]}(i)=j`), " ならば、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -8941,7 +8941,7 @@ i\in\operatorname{Orb}_{\sigma}(j)
  &\ \Longleftrightarrow\ (\sigma^{-1})^{[n]}(i)\in\operatorname{Orb}_{\sigma}(j)
  &&\bigl(\because\ \text{逆向きの所属同値}\bigr)\\
  &\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(j)
- &&\bigl(\because\ (\sigma^{-1})^{[n]}(i)=j\bigr).
+ &&\bigl(\because\ (\sigma^{-1})^{[n]}(i)=j\bigr)
 \end{aligned}`),
                 paragraph(["どちらも最後の条件は零回の自己所属で成り立つ。よって ", math(String.raw`i\in\operatorname{Orb}_{\sigma}(j)`), " を得た。第一の包含の議論で二点を交換し、", math(String.raw`\operatorname{Orb}_{\sigma}(i)\subseteq\operatorname{Orb}_{\sigma}(j)`), " を得る。両包含により、主張する台の等号が成り立つ。", math(String.raw`\mathcal J=\varnothing`), " の場合は点がなく、全称命題はそのまま成り立つ。有限集合と自然数回の反復だけを使い、実数体・複素数体への脱出はない。"]),
               ],

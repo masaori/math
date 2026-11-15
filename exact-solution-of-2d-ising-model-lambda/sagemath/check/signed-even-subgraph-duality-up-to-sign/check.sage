@@ -4,6 +4,10 @@ import sys
 directory = os.path.dirname(os.path.abspath(sys.argv[0]))
 load(os.path.join(directory, '../signed-even-subgraph-orbit-product/_prelude.sage'))
 
+formal_ring = PolynomialRing(ZZ, names=('u', 't'))
+u, t = formal_ring.gens()
+assert ((1+u)^2+(1-u)^2)^2 - (1-u)*((1+u)^2-(1-u)^2)*(1+u)*t == 4*((1+u^2)^2-u*(1-u^2)*t)
+
 K = R.fraction_field()
 kw = (1-x)/(1+x)
 for length in range(1, 4):
