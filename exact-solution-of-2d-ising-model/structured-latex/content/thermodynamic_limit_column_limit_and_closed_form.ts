@@ -2891,7 +2891,7 @@ v^\top W_{\mathbb{R}}v
 &= (1 + 1)\,A
   &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)\,c = a\,c + b\,c\ \text{を右辺から左辺へ}\bigr)\\
 &= 2\,A
-  &&\bigl(\because\ \mathbb{R}\ \text{の}\ 1 + 1 = 2\bigr)
+  &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`\mathbb{R}`),
@@ -2906,6 +2906,7 @@ v^\top W_{\mathbb{R}}v
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε・W を掛け、v^⊤Wv = u^⊤Wu + 2u^⊤Wεu + (εu)^⊤W(εu) = … ≥ 2u^⊤Wu を「v = u + εu の展開と W^⊤ = W」「ε^⊤ = ε」「εW = Wε」「ε^2 = I」で出していた。この同一視を def_epsilon_real の ε_ℝ と def_W_real の W_ℝ で書き直すために足した。ℝ^d の元どうしの和は本文に定義が無いので、v を成分の等式で与え（epsilon_real_fixes_sum_of_vector_and_its_image と同じ v）、展開は双線型値の左右の加法性で行う。W^⊤ = W は使わない（交差項 u^⊤W_ℝũ・ũ^⊤W_ℝu はどちらも real_bilinear_value_with_nonnegative_entries_is_nonnegative で 0 以上なので、入れ替えて 2u^⊤Wεu にまとめる段が要らない）。(εu)^⊤W(εu) = u^⊤Wu の段は、元の u^⊤εWεu を経る書き方が双線型値と行列の積の結合を要するので、双線型値を Σ_k u_k(Pv)_k の形に開いて ε_ℝ を対称な行列として右の因子へ移す道にした（real_symmetric_matrix_moves_between_factors_of_sum_of_products）。数値検証: sagemath/check/W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice/。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 主張の鎖の最後の行 (1 + 1)A = 2A の根拠「ℝ の 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
       ],
     },
   },

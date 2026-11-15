@@ -3424,7 +3424,7 @@ s_1c_2
 &= \bigl((1 + 1)_{\mathbb{C}}\,\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
 &= \bigl(2_{\mathbb{C}}\,\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ（}2_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (2)_{\mathbb{C}}\text{）}\bigr)\\
 &= \bigl(\exp(i\theta)\,2_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \exp(i\theta)\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
@@ -3932,6 +3932,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (2) の −|γ_2(θ)|^2 < 0 の鎖の 2 行目の名前だけの根拠「ℝ で −0 = 0（ℝ は体）」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 「第二に」の \\bar i = −i の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（鎖は 6 行から 11 行）。conjugate_transpose_of_pauli_y の準備の同じ鎖も同じ回に揃えた。両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第五の末尾の地の文「pi_is_positive の 0 < π より 0 ≤ 0 − 2·0·π < 2π と 0 ≤ π − 2·0·π < 2π が成り立つので、angle_section_existence_uniqueness の整数は角度 0 と π のどちらについても 0」（π < 2π と π − 2·0·π = π が書かれていなかった）を消し、(3)(4)(5) の鎖の前の段落の「整数は準備により 0」を、角度 0 は angle_section_integer_of_zero_is_zero、角度 π は新しく足した angle_section_integer_of_pi_is_zero の参照に替えた。(3) の鎖の section_of_angle_representation の行と (5) の sqrt_expansion_via_polar の行に angle_section_integer_of_pi_is_zero を、(4) の sqrt_expansion_via_polar の行に angle_section_integer_of_zero_is_zero を添えた。式の両端と主張は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の最後の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
       ],
     },
   },
@@ -4909,7 +4910,7 @@ s\,s
 &= (1 + 1)_{\mathbb{C}}
    &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
 &= (2)_{\mathbb{C}}
-   &&(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2)\\
+   &&(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ})\\
 &= 2_{\mathbb{C}}
    &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}})
 \end{aligned}`,
@@ -5128,6 +5129,7 @@ A(\tilde\theta_\mu)
           "2 行目の「行列の積の結合則」を mat_mult_associative の参照にし、最後の行「行列の積の結合則」（右辺の読み方であって結合則ではない）を消した（4 行の鎖）。値と主張は不変。",
         "2026-11-11（Lean の通しの証明、続き）: Step 4 冒頭の「det P̌_μ ≠ 0 より P̌_μ は可逆」の根拠が本文に無かったので、主張 two_sided_inverse_of_two_by_two_with_nonzero_det（det ≠ 0 なら (det)^{-1} adj が両側逆元）を足して引き、def_invertible_elements_of_R の可逆の定義と逆元の一意性で P̌_μ ∈ R^× と P̌_μ^{-1} = (det P̌_μ)^{-1} adj P̌_μ を出した。値と主張は不変。",
         "2026-11-11（Lean の通しの証明、続き）: Step 2 の A P̌ = P̌ Ď の 3 行（根拠「行列の積を列ごとに見た」「Ď の右乗が列ごとのスカラー倍」がラベルを引いていなかった）を、P̌ = [v_+ v_-]（mat_columnwise の記法）と Ď が対角行列（def_diagonal_matrix）であることを前置きに書き、mat_columnwise・eigenvector_of_A_theta_tilde・新しく足した主張 column_matrix_times_diagonal_matrix_scales_columns を引く 6 行の鎖にした（λ_± を (Ď)_kk へ書き換える行を独立させた）。値と主張は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 前置き (c) の 1_ℂ + 1_ℂ = 2_ℂ の鎖の 3 行目 (1 + 1)_ℂ = (2)_ℂ の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
       ],
     },
   },
@@ -5454,7 +5456,7 @@ u + iv
 &= \bigl((1 + 1)_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
 &= \bigl(2_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \mathbb{R}\ \text{の四則}\ 1 + 1 = 2)\\
+&&(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ（}2_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (2)_{\mathbb{C}}\text{）})\\
 &= e_+\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= e_+\,1_{\mathbb{C}}
@@ -5924,6 +5926,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (x − iy)(x + iy) の鎖・(x − y)^2 の鎖・第 3 の等式の ℂ の中の鎖で、分配律を外側の積に当ててから内側の 2 つの積へ当てるのを 1 行に書いていた。内側の積は外側に当てた後に現れるので同じ定理の同時の適用ではない。外側の積へ当てる行と、内側の 2 箇所へ同時に当てる行の 2 行に割った（左辺の行を含めて (x − iy)(x + iy) の鎖は 15 行から 16 行、(x − y)^2 の鎖は 18 行から 19 行、第 3 の等式の鎖は 23 行から 24 行。中身は不変）。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 主張 (1) の鎖で -(2_C c_1c_2^*s_1s_2^*u) + 2_C c_1c_2^*s_1s_2^*u を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示していない）から negation_plus_self_is_zero_in_cc (x → 2_C c_1c_2^*s_1s_2^*u) に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の u + iv = e_+ の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ の四則 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
       ],
     },
   },
@@ -6997,7 +7000,7 @@ g
 &= \bigl((1 + 1)_{\mathbb{C}}\,\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
 &= \bigl(2_{\mathbb{C}}\,\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ（}2_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (2)_{\mathbb{C}}\text{）}\bigr)\\
 &= \bigl(\exp(ix)\,2_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
 &= \exp(ix)\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
@@ -7319,6 +7322,7 @@ d_\nu
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (2)(3) の根拠の欄の ℝ の一般の恒等式の変数を u, v から p, q に替え、各行に代入を添えた（(3) の「最後に」で始まる段落で置いた u := 2_ℂ(√M_col)_ℂ と文字が重なっていたため）。(2) の第二の鎖の 2 行目の -(2πk_ℝ) と (3) の −θ̃_ν の鎖の 2 行目の -(2π) に括弧を補った。主張と値は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 主張の前置きの整数の像の記号の文字を a から j に替えた（j_ℝ := ι_{ℤ→ℝ}(j)、j ∈ ℤ。antiperiodic_exp_sum の a_ℝ := ι_{ℤ→ℝ}(a) と同じ記号で、束縛する文字だけが違う）。証明の根拠の欄で引く real_inclusion_preserves_sum（a → 1, b → 1）・inclusion_rr_to_cc_is_injective（a → cos(-x), b → cos x）の ℝ の変数 a と文字が重なっていた。主張・証明の式と値は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 準備の第一の cos x + i sin x の鎖の 6〜11 行目（i(2_ℂi)^{-1} = 2_ℂ^{-1} を積の単位元・逆元・結合律で示す 6 行）を、exp_of_negative_i_real_as_cos_minus_i_sin・relation_of_gamma_2_theta_tilde と同じ鎖なので主張 i_times_inverse_of_two_i_is_inverse_of_two_in_cc の参照 1 行にした（27 行 → 22 行）。値と主張は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 準備の第一の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
       ],
     },
   },

@@ -4150,7 +4150,7 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
 &= (1+1)\,\pi
 &&\bigl(\because\ \mathbb{R}\ \text{の分配律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2\pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
         "である。また",
@@ -4196,6 +4196,7 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。relation_of_gamma_2_theta_tilde の準備の地の文が、0 < π だけを根拠に角度 0 と π の整数がどちらも 0 であるとしていた（π < 2π と π − 2·0·π = π が書かれていなかった）ので、角度 π の側を 1 つの主張にした（角度 0 の側は angle_section_integer_of_zero_is_zero）。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_integer_of_pi_is_zero/。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 準備の π < 2π の鎖の最後の行 (1+1)π = 2π の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
       ],
     },
   },

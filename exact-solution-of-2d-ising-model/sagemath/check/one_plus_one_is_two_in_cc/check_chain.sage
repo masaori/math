@@ -20,7 +20,7 @@ chain = [
     pair_add(one_C, one_C),                 # 1_C + 1_C
     pair_add(incl(1), incl(1)),             # (1)_C + (1)_C          略記の読み替えを 2 か所へ
     incl(QQ(1) + QQ(1)),                    # (1+1)_C                real_inclusion_preserves_sum（a → 1, b → 1）
-    incl(2),                                # (2)_C                  ℝ で 1 + 1 = 2
+    incl(2),                                # (2)_C                  def_real_two を右辺から左辺へ
     two_C,                                  # 2_C                    略記の読み替え
 ]
 for k in range(len(chain) - 1):

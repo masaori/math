@@ -61,7 +61,7 @@ euler_chain = [
     (1 * Ep_ + 1 * Ep_) * T2i,                                     # 積の単位元を 2 箇所へ（右辺から左辺へ）
     ((1 + 1) * Ep_) * T2i,                                         # 右からの分配律（右辺から左辺へ）
     ((QQ(1) + QQ(1)) * Ep_) * T2i,                                 # real_inclusion_preserves_sum
-    (T2 * Ep_) * T2i,                                              # ℝ で 1 + 1 = 2
+    (T2 * Ep_) * T2i,                                              # def_real_two を右辺から左辺へ（2_C は (2)_C の略記）
     (Ep_ * T2) * T2i,                                              # 積の可換律
     Ep_ * (T2 * T2i),                                              # 積の結合律
     Ep_ * 1,                                                       # multiplicative_group_of_cc の逆元 2_C

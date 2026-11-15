@@ -703,7 +703,7 @@ theorem one_add_one_eq_two_complex : (1 : ℂ) + 1 = 2 := by
     _ = ((1 + 1 : ℝ) : ℂ) := (Complex.ofReal_add 1 1).symm
                                         -- 2 行目: `real_inclusion_preserves_sum`（`a, b → 1`）
     _ = ((2 : ℝ) : ℂ) := by rw [one_add_one_eq_two]
-                                        -- 3 行目: `ℝ` で `1 + 1 = 2`
+                                        -- 3 行目: `def_real_two` を右辺から左辺へ
     _ = 2 := Complex.ofReal_ofNat 2
                                         -- 4 行目: `2_ℂ = (2_ℝ)_ℂ`
 

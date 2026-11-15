@@ -4255,7 +4255,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
 &= (1 + 1)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to 1,\ b \to 1)\bigr)\\
 &= (2)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 + 1 = 2\bigr)\\
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)\\
 &= 2_{\mathbb{C}}
 &&\bigl(\because\ 2_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = 2\bigr)
 \end{aligned}`),
@@ -4264,6 +4264,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_sum_with_itself_zero_implies_zero・V1_plus_square_root_property・trace_of_check_number_operator_product・exp_of_negative_i_real_as_cos_minus_i_sin の証明の準備が同じ 4 行の鎖をそれぞれ置いていたので、minus_one_times_minus_one_is_one_in_cc と同じく主張にして引けるようにした。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 3 行目 (1 + 1)_ℂ = (2)_ℂ の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、ℝ の 2 を定める def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
       ],
     },
   },

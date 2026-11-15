@@ -122,6 +122,6 @@ theorem W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_
     _ = u ⬝ᵥ W *ᵥ u + u ⬝ᵥ W *ᵥ u := by rw [zero_add]                       -- `0` は ℝ の加法の左単位元 `0 + A = A`
     _ = 1 * (u ⬝ᵥ W *ᵥ u) + 1 * (u ⬝ᵥ W *ᵥ u) := by rw [one_mul]            -- `1` は ℝ の乗法の単位元（2 か所）
     _ = (1 + 1) * (u ⬝ᵥ W *ᵥ u) := (add_mul 1 1 _).symm                       -- ℝ の分配則 `(a + b)c = ac + bc` を右辺から左辺へ
-    _ = 2 * (u ⬝ᵥ W *ᵥ u) := by rw [one_add_one_eq_two]                      -- ℝ の `1 + 1 = 2`
+    _ = 2 * (u ⬝ᵥ W *ᵥ u) := by rw [one_add_one_eq_two]                      -- `def_real_two` を右辺から左辺へ
 
 end Ising2D

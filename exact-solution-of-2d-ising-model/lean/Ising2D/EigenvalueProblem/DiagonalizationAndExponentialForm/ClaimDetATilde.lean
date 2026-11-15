@@ -336,7 +336,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
                           -- 15 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（`1_ℂ` は略記 `(1)_ℂ`）
     _ = ((2 : ℂ) * ep) * (2 : ℂ)⁻¹ := by
         rw [one_add_one_eq_two, Complex.ofReal_ofNat]
-                          -- 16 行目: ℝ の四則 `1 + 1 = 2`（`2_ℂ` は略記 `(2)_ℂ`）
+                          -- 16 行目: `def_real_two` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
     _ = ep * ((2 : ℂ) * (2 : ℂ)⁻¹) := by rw [mul_comm (2 : ℂ) ep, mul_assoc]
                           -- 17 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = ep * 1 := by rw [mul_inv_cancel₀ h2]

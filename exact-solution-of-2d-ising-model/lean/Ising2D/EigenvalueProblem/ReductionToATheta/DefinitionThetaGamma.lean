@@ -248,7 +248,7 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
     _ = ((((1 + 1 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
         rw [real_inclusion_add]                   -- 17 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
     _ = ((((2 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
-        rw [one_add_one_eq_two]                   -- 18 行目: ℝ で `1 + 1 = 2`
+        rw [one_add_one_eq_two]                   -- 18 行目: `def_real_two` を右辺から左辺へ
     _ = ((2 : ℂ) * eP) * (2 : ℂ)⁻¹ := by
         rw [Complex.ofReal_ofNat]                 -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = (eP * (2 : ℂ)) * (2 : ℂ)⁻¹ := by
