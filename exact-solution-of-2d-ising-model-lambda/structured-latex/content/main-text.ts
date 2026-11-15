@@ -54758,7 +54758,7 @@ Z^{\mathrm{op}}_{L,L}(q)
                         displayMath(String.raw`\begin{aligned}
 \frac{1}{L^2}\cdot\iota\bigl((a+L)\,\log q+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
 &=\frac{1}{L^2}\cdot\bigl(\iota((a+L)\,\log q)+\iota(\log Z^{\mathrm{op}}_{a,a}(q))\bigr)
-&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&&(\because\ \iota\text{ は加法を保つ}\blkref{claim_rational_log_order_group_embedding})\\
 &=\frac{1}{L^2}\cdot\iota((a+L)\,\log q)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
 &=\frac{1}{L^2}\cdot\bigl((a+L)\cdot\iota(\log q)\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
