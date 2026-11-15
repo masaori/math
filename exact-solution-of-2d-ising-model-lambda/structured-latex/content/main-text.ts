@@ -84175,6 +84175,11 @@ P_L^{a,b}
                 labels: ["claim_signed_even_subgraph_duality_up_to_sign"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/signed-even-subgraph-duality-up-to-sign"],
+                lean: [
+                  "Ising2DLambda.KacWard.signedEvenSubgraphDuality_up_to_sign",
+                  "Ising2DLambda.NecSuf.KacWard.duality_up_to_sign",
+                  "Ising2DLambda.KacWard.signedEvenSubgraphDuality_up_to_sign_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
