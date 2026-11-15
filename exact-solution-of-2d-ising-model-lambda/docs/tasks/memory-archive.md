@@ -2,6 +2,8 @@
 
 2026-11-15（並列）: 「自己双対点より低温側での分配多項式の両側評価」を Lean 具体版 `lowTemperaturePartitionBounds`（有限トーラス公式の有理点での評価 `finiteTorusPolynomial_eval_rat` を含む）・必要十分版 `half_sum_two_sided_bounds_necSuf`（線型順序体・$|\iota|=4$・非負性だけ）・導出版で示し、本文の `lean:` に四件を登録した。本文と SageMath の修正は不要だった。
 
+2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」の積の符号の合成の段を Lean 具体版 `signedEvenSubgraphPolynomial_rational_sign`・必要十分版 `sign_compose_necSuf` ほか・導出版で示し、三段の十五件を本文の `lean:` に登録した。本文の最後の段落に正の元の積の式鎖と三分法による符号の反映を書き、SageMath に `check_sign_composition.sage` を足した。
+
 2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」のモード $(1,1)$ の所属の段を Lean 具体版 `oneOne_mem_twistedModes_iff`・`oneElementOrbits_filter_one_one` ほか、必要十分版（所属は環と $1\ne-1$ だけ、軌道は $1^{-1}=1$ と逆元の対合性だけ、代表元の段は代表元の所属と $(1,1)$ を含む軌道の決定だけ）、導出版で示した。レビューで本文の所属の式鎖を三行に分け、$(1,1)$ を含む軌道が $O(1,1)=\{(1,1)\}$ だけであることの根拠を書き（主張は不変）、SageMath `check_one_one_membership.sage` を足した（PASS）。
 
 2026-11-15（主経路）: 横断幅を超えて離した周期持ち上げの非交差を整数帯の上下界から Lean 具体版で直接示し、必要十分版への委譲を一件外した。
@@ -12961,3 +12963,4 @@ READMEのOnsager閉形式へ、四ねじれ平方恒等式・有限Fourier・共
 
 2026-11-14（並列）: Pfaffian の式鎖で書かれていなかった、補辺の切断線偶奇 $h(P),v(P)$ と巻き付き偶奇 $\varepsilon_{L,\mathrm h}(P),\varepsilon_{L,\mathrm v}(P)$ の一致を本文の主張二つにし、SageMath・Lean 具体版・必要十分版・導出版で示した（`KacWard/EdgeSetSeamWindingParity.lean`）。
 2026-11-15（主経路）: 周期持ち上げ一周期の循環隣接和の具体版で、末尾の項を剰余類へ戻す補題を整数上で直接示し、委譲を一件外した。本文の歩ベクトルの式鎖末尾から句点を除いた。
+2026-11-15（主経路）: 自己双対変換の第一件を三段に割り、多項式性の段を Lean 具体版・必要十分版・導出版で示した。次数上界は $|E_L|=2L^2$、分母払いは有限係数和で示した。既存の SageMath 検算は PASS。書式統一では有限置換の軌道の台の零回の式鎖末尾から句点を除いた。
