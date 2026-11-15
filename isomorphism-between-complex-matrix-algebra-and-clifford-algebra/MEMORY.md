@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-15: 台帳の「Lean：系『基底と行列の番号付け』と『一般の偶数次元の非退化な二次空間』」の行の途中まで。行列単位にあたる元の基底の系 5 ブロック（Isomorphism/BasisOfMatrixUnitElements/）と、等長写像が誘導する準同型の 9 ブロック（Isomorphism/GeneralEvenDimensional/InducedHomomorphism*.lean）を具体版・必要十分版・導出版で形式化した。残りは同じ行の直交基底の 22 ブロックと等長写像の構成・系の定理の 19 ブロック。
+
 - 2026-11-15: 台帳の「Lean：同型の証明の章のうち帰り Ψ と主定理の具体版と必要十分版」の行を書き切った。本文 16 ブロック（Ψ の節と、二つの準同型が互いに逆であることの節と主定理）を lean/…/Isomorphism/HomomorphismFromMatrixAlgebra/ と Isomorphism/MutuallyInverseHomomorphisms/ に具体版・必要十分版・導出版で形式化した。主定理まで K に足す性質は a + (-a) = 0 だけ（lean/README.md の「必要十分版が示したこと（章『同型の証明』の帰り Ψ と主定理）」）。本文の Φ(ℰ_{S,T}) の証明の根拠三か所を claim_ordered_products_with_equal_factors_are_equal に直した。
 
 - 2026-11-15: 台帳の「Lean：同型の証明の章のうちクリフォード代数の中の大域的な等式の具体版と必要十分版」の行を書き切った。本文 25 ブロックを lean/…/Isomorphism/GlobalIdentities/ に具体版・必要十分版・導出版で形式化した（lean/README.md の「必要十分版が示したこと（章『同型の証明』のクリフォード代数の中の大域的な等式）」）。本文は不変。lake build・check-no-sorry 通過。次は台帳の Lean の次の行（帰り Ψ と主定理）。

@@ -117,6 +117,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「同型の証明」のうち、クリフォード代数の中の大域的な等式（番号の違う因子の交換、a†_{U,≤m}・P_{≤m}・Q^{T,U}_m の定義と分解、(P (a_T a†_U)) P = δ_{T,U} ∗ P、u^S_i の定義、部分集合の和の主張、1 の分解） | `Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `NecSuf/Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `GlobalIdentitiesFromNecSuf.lean` |
 | 章「同型の証明」のうち、行列環からクリフォード代数への準同型（ℰ_{S,T} の定義と積の規則、Ψ の定義、Ψ が線型・行列単位を ℰ_{S,T} へ移す・行列単位どうしの積を保つ・ℂ-代数の準同型であること） | `Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismFromMatrixAlgebra/HomomorphismFromMatrixAlgebra.lean` | `HomomorphismFromMatrixAlgebraFromNecSuf.lean` |
 | 章「同型の証明」のうち、二つの準同型が互いに逆であること（Φ(ℰ_{S,T}) = E_{S,T}、Φ ∘ Ψ = 恒等写像、生成作用素の列の和・消滅作用素の行の和、Ψ(c_i) = a†_i・Ψ(c_i^T) = a_i、γ((x, g)) の分解、Ψ ∘ Φ = 恒等写像、主定理） | `Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `NecSuf/Isomorphism/MutuallyInverseHomomorphisms/MutuallyInverseHomomorphisms.lean` | `MutuallyInverseHomomorphismsFromNecSuf.lean` |
+| 章「同型の証明」のうち、系「行列単位にあたる元はクリフォード代数の基底をなす」（b の定義、Φ(Σ λ_m ∗ b_m) の成分、一次独立、張ること、基底であること） | `Isomorphism/BasisOfMatrixUnitElements/BasisOfMatrixUnitElements.lean` | `NecSuf/Isomorphism/BasisOfMatrixUnitElements/BasisOfMatrixUnitElements.lean` | `BasisOfMatrixUnitElementsFromNecSuf.lean` |
+| 章「同型の証明」の系「一般の偶数次元の非退化な二次空間」のうち、基底の座標を係数にした族の線型結合の写像 L_{b,u}、基底を動かさない線型写像は恒等写像、等長写像の右逆、等長写像が誘導するクリフォード代数の準同型 Cl(θ) と逆向きの合成 | `Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `InducedHomomorphismFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -241,3 +243,18 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 乗法の交換法則が行の中で要るのは、Ψ が線型であることの 1 · ρ = ρ · 1 と、Ψ(E_{S,T}) の δ_{S,S'} · δ_{T,T'} の入れ替えと、
   行列単位の積の規則・行列の分解の 0 と 1 の交換だけである。どれも 0 か 1 とほかの元の交換で足りるが、行列環が K の上の代数であることが
   交換法則を要するので、主張全体からは外せない。
+
+## 必要十分版が示したこと（章「同型の証明」の系「行列単位にあたる元はクリフォード代数の基底をなす」）
+
+- 主定理の仮定（`CliffordLaws K n` と a + (-a) = 0）のほかに行の中で使う K の性質は、0 + 0 = 0・1 · 1 = 1・a · 0 = 0・0 · a = 0 と、
+  0 と 1 がどの元とも交換することだけである。具体版が ℂ の乗法の交換法則を当てる λ_m · δ_{m,j} = δ_{m,j} · λ_m の行は、δ の値が 0 か 1 なので
+  0 と 1 の交換で足りる。
+- 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない。
+
+## 必要十分版が示したこと（系「一般の偶数次元の非退化な二次空間」の、等長写像が誘導する準同型）
+
+- 線型写像が基底を動かさなければ恒等写像であることは、係数の性質のうち 0 + 0 = 0 だけを使う。一次独立は使わず、b が張ることだけで足りる。
+- L_{b,u} が線型であることと b_j を u_j へ移すことは、係数の一意性の仮定の組 `UniquenessLaws` だけで足りる（乗法の結合法則・交換法則・左分配法則は使わない）。
+- 二つの和の和の並べ替えと、等長写像の右逆の線型写像が等長写像であることは、係数の性質を一つも使わない。
+- Cl(θ) の存在と一意性、逆向きの等長写像が誘導する準同型の合成が恒等写像であることは、`CliffordLaws K n` と a + (-a) = 0 のほかに K の性質を足さない。
+  三つとも q・q' が二次形式であることを使わないので、必要十分版は等長写像の仮定を「θ が線型」と「q'(θ(x)) = q(x)」の二つに分けて置く。
