@@ -2936,7 +2936,7 @@ a_{\mathbb{C}}\,b_{\mathbb{C}}
 &= (ab - 0,\ 0 + 0)
    \quad (\because \blkref{real_zero_times_is_zero}\ (x \to b)) \\
 &= (ab,\ 0 + 0)
-   \quad (\because \mathbb{R} \text{ で } u - 0 = u \text{ の } u \to ab) \\
+   \quad (\because \blkref{real_minus_zero_is_self}\ (a \to ab)) \\
 &= (ab,\ 0)
    \quad (\because 0+0 = 0) \\
 &= (ab)_{\mathbb{C}}
@@ -3166,7 +3166,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
       ),
       paragraph(["である。"]),
     ],
-    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。", "2026-11-01: 1 行 1 列の複素行列の差の鎖で名前だけの根拠だった「行列の差は成分ごと」を、行列の差の定義 def_matrix_difference へのラベル参照に替えた。式と段は変えていない。", "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の積の鎖の (ab − 0·0, a·0 + 0·b) = (ab, 0) の行は、ℝ の 0·0 = 0・a·0 = 0・0·b = 0 と ab − 0 = ab・0 + 0 = 0 を名前だけの根拠 1 つで束ねていたので、real_zero_times_is_zero（x → 0）・real_times_zero_is_zero（x → a）・real_zero_times_is_zero（x → b）・ℝ で u − 0 = u（u → ab）・0 + 0 = 0 の 5 行に割った（鎖の両端は不変）。Lean の具体版は無い（Lean は mathlib の Complex.ofReal_exp を引く）。数値検証: sagemath/check/complex_exp_of_real_argument/check_preparation_sum_product_difference.sage。"] },
+    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。", "2026-11-01: 1 行 1 列の複素行列の差の鎖で名前だけの根拠だった「行列の差は成分ごと」を、行列の差の定義 def_matrix_difference へのラベル参照に替えた。式と段は変えていない。", "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の積の鎖の (ab − 0·0, a·0 + 0·b) = (ab, 0) の行は、ℝ の 0·0 = 0・a·0 = 0・0·b = 0 と ab − 0 = ab・0 + 0 = 0 を名前だけの根拠 1 つで束ねていたので、real_zero_times_is_zero（x → 0）・real_times_zero_is_zero（x → a）・real_zero_times_is_zero（x → b）・ℝ で u − 0 = u（u → ab）・0 + 0 = 0 の 5 行に割った（鎖の両端は不変）。Lean の具体版は無い（Lean は mathlib の Complex.ofReal_exp を引く）。数値検証: sagemath/check/complex_exp_of_real_argument/check_preparation_sum_product_difference.sage。", "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の名前だけの根拠「ℝ で u − 0 = u（u → ab）」を real_minus_zero_is_self（a → ab）の参照に替えた（式は不変）。"] },
   },
   {
     id: "calc_formulae_definition_cosh_sinh",

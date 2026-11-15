@@ -30,11 +30,11 @@ mul_chain = [
     (a * b - zero, a * zero + zero * b),   # real_zero_times_is_zero (x -> 0)
     (a * b - zero, zero + zero * b),       # real_times_zero_is_zero (x -> a)
     (a * b - zero, zero + zero),           # real_zero_times_is_zero (x -> b)
-    (a * b, zero + zero),                  # ℝ で u - 0 = u (u -> ab)
+    (a * b, zero + zero),                  # real_minus_zero_is_self (a -> ab)
     (a * b, zero),                         # 0 + 0 = 0
     iota(a * b, R),
 ]
-# 割った各行の根拠の等号そのもの（左右の 0 掛けと u - 0 = u）を、不定元で確かめる。
+# 割った各行の根拠の等号そのもの（左右の 0 掛けと a - 0 = a）を、不定元で確かめる。
 assert zero * zero == zero and a * zero == zero and zero * b == zero and a * b - zero == a * b and zero + zero == zero
 assert all(c == mul_chain[0] for c in mul_chain), mul_chain
 print("積の鎖 a_C b_C = (a,0)(b,0) = (ab-0·0, a·0+0·b) = (ab-0, a·0+0·b) = (ab-0, 0+0·b) = (ab-0, 0+0) = (ab, 0+0) = (ab,0) = (ab)_C が QQ[a,b] で成り立つ")

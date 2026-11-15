@@ -1869,7 +1869,7 @@ a - 0
 &= (0 - 0,\ 0 + 0)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ \text{を 4 箇所へ}\ (x \to a,\ x \to b,\ x \to b,\ x \to a)\bigr)\\
 &= (0,\ 0 + 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - 0 = 0\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= (0,\ 0)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
 &= 0_{\mathbb{C}}
@@ -1883,6 +1883,7 @@ a - 0
           "単位行列との積（identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult）の証明が使うので、定義から計算する形で足した。",
         "2026-11-01: 右から 0 を掛ける形は complex_times_zero_is_zero へ移した。この主張を引くのは identity_matrix_is_left_unit_of_mat_mult である。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で 0·x = 0（ℝ は体）を 4 箇所へ適用」は名前だけだった（0 を掛けると 0 になることは体の公理に含まれない）ので、足した主張 real_zero_times_is_zero（x → a, b, b, a）の参照に替えた。式は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で 0 − 0 = 0」を real_minus_zero_is_self（a → 0）の参照に替えた（式は不変）。",
       ],
     },
   },
@@ -1922,7 +1923,7 @@ z\,0_{\mathbb{C}}
 &= (0 - 0,\ 0 + 0)
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ \text{を 4 箇所へ}\ (x \to a,\ x \to b,\ x \to a,\ x \to b)\bigr)\\
 &= (0,\ 0 + 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - 0 = 0\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= (0,\ 0)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
 &= 0_{\mathbb{C}}
@@ -1936,6 +1937,7 @@ z\,0_{\mathbb{C}}
           "積の交換律で 0_C A_{ij} にしてから complex_zero_times_is_zero を使っていた。Lean の必要十分版で、この主張に乗法の可換則が効いていないことが分かったので、" +
           "右から掛ける形を定義から計算する主張として足し、その証明が直接引けるようにした。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で x·0 = 0（ℝ は体）を 4 箇所へ適用」は名前だけだった（0 を掛けると 0 になることは体の公理に含まれない）ので、足した主張 real_times_zero_is_zero（x → a, b, a, b）の参照に替えた。式は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で 0 − 0 = 0」を real_minus_zero_is_self（a → 0）の参照に替えた（式は不変）。",
       ],
     },
   },

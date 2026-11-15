@@ -4074,8 +4074,10 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x \to a))\\
 &= (a b - 0,\ 0 + 0)
 &&(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to 0,\ x \to b))\\
+&= (a b,\ 0 + 0)
+&&(\because\ \blkref{real_minus_zero_is_self}\ (a \to a b))\\
 &= (a b,\ 0)
-&&(\because\ \mathbb{R}\ \text{で}\ x - 0 = x\ \text{と}\ 0 + 0 = 0)\\
+&&(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0)\\
 &= (ab)_{\mathbb{C}}
 &&(\because\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -4085,6 +4087,7 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。first_transfer_matrix_pauli_form の証明の D の対角成分と成分の一致の鎖が、包含と ℂ の積の定義を開いて計算する段を一行で使っていたので、主張にして引けるようにした。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の名前だけの根拠「ℝ で x·0 = 0 と 0·x = 0（ℝ は体）を 3 箇所へ適用」（2 つの事実を 1 行で使っていた）を、real_times_zero_is_zero（x → a）の行と real_zero_times_is_zero を 2 箇所へ（x → 0, x → b）の行に割った（鎖の両端は不変）。2 つの主張は後ろのファイル 000_calculation_formulae_20_29.ts にあり、ここからは前方参照になる（検査は落とさない。置き場は状態台帳の定義より前の参照の件で扱う）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 5 行目の名前だけの根拠「ℝ で x − 0 = x と 0 + 0 = 0」（2 つの事実を 1 行で使っていた）を、real_minus_zero_is_self（a → ab）の行と「ℝ で 0 + 0 = 0」の行に割った（鎖の両端は不変）。real_minus_zero_is_self も後ろのファイル 000_calculation_formulae_20_29.ts にあり、前方参照になる。",
       ],
     },
   },

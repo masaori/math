@@ -1,7 +1,8 @@
 # 対象ラベル: real_inclusion_preserves_product
-# 証明の六つの等号（七つの項）:
-#   a_C b_C = (a,0)(b,0) = (ab - 0·0, a·0 + 0·b) = (ab - 0·0, 0 + 0·b) = (ab - 0, 0 + 0) = (ab, 0) = (ab)_C
-# 4 項目は real_times_zero_is_zero（x → a）、5 項目は real_zero_times_is_zero を 2 箇所へ（x → 0, b）。
+# 証明の七つの等号（八つの項）:
+#   a_C b_C = (a,0)(b,0) = (ab - 0·0, a·0 + 0·b) = (ab - 0·0, 0 + 0·b) = (ab - 0, 0 + 0) = (ab, 0 + 0) = (ab, 0) = (ab)_C
+# 4 項目は real_times_zero_is_zero（x → a）、5 項目は real_zero_times_is_zero を 2 箇所へ（x → 0, b）、
+# 6 項目は real_minus_zero_is_self（a → ab）、7 項目は ℝ で 0 + 0 = 0。
 # ℂ を実数の対として持ち（definition_of_cc）、a, b を QQ 上の多項式環の不定元に置く。対の積は
 # definition_of_cc の式 (x,y)(u,v) = (xu - yv, xv + yu) を書いた関数と、QQ(i)[a,b] の積の二つの経路で作る。
 # 不定元の多項式の等号は厳密に決まり、任意の実数を代入しても保たれる。帰属: QQ[a,b]。
@@ -19,6 +20,7 @@ chain = [pair_mul(incl(a), incl(b)),
          (a * b - 0 * 0, a * 0 + 0 * b),
          (a * b - 0 * 0, R(0) + 0 * b),
          (a * b - 0, R(0) + 0),
+         (a * b, R(0) + 0),
          (a * b, R(0)),
          incl(a * b)]
 assert all(c == chain[0] for c in chain)
@@ -31,5 +33,5 @@ im = sum(c.imag() * m for c, m in zip(p.coefficients(), p.monomials()))
 assert re == A * B and im == 0
 # 対照: 虚部が 0 でない数どうしの積は実部が積にならない
 assert pair_mul((a, R(1)), (b, R(1)))[0] != a * b
-print("checked the chain of 7 terms with indeterminates a, b")
+print("checked the chain of 8 terms with indeterminates a, b")
 print("RESULT: PASS")

@@ -22,7 +22,7 @@
 
 ℂ は本文の `definition_of_cc` どおり実数の対で持ち（共通の準備 `_shared/complex_as_real_pairs.sage`）、`z = (a, b)` の `a, b` を
 `QQ` 上の不定元に置いた。不定元で成り立つ等号は `a, b` に任意の実数を代入しても成り立つ。浮動小数点はない。
-第三行の根拠 `real_zero_times_is_zero`（`ℝ` で `0·x = 0`。2026-11-14 に主張として足し、`sagemath/check/real_zero_times_is_zero/` が鎖を確かめる）・第四行の `0 − 0 = 0`・第五行の `0 + 0 = 0` は `ℝ` の体の性質で、検算はこれを多項式環 `QQ[a, b]` の演算として使う。
+第三行の根拠 `real_zero_times_is_zero`（`ℝ` で `0·x = 0`。2026-11-14 に主張として足し、`sagemath/check/real_zero_times_is_zero/` が鎖を確かめる）、第四行の `0 − 0 = 0` は `real_minus_zero_is_self`（`a → 0`。2026-11-15 に名前だけの根拠から替えた。`sagemath/check/real_minus_zero_is_self/` が鎖を確かめる）、第五行の `0 + 0 = 0` は `ℝ` の体の性質で、検算はこれを多項式環 `QQ[a, b]` の演算として使う。
 
 ## 実行方法
 

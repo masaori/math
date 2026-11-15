@@ -8,17 +8,18 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 6 行の鎖（`inclusion_rr_to_cc` → `definition_of_cc` の積 → `real_times_zero_is_zero`（`x → a`） → `real_zero_times_is_zero` を 2 箇所（`x → 0, b`） → ℝ で `x - 0 = x`・`0 + 0 = 0` → `inclusion_rr_to_cc`） | `real_inclusion_mul` の `calc` の 6 段 |
+| 7 行の鎖（`inclusion_rr_to_cc` → `definition_of_cc` の積 → `real_times_zero_is_zero`（`x → a`） → `real_zero_times_is_zero` を 2 箇所（`x → 0, b`） → `real_minus_zero_is_self`（`a → ab`） → ℝ で `0 + 0 = 0` → `inclusion_rr_to_cc`） | `real_inclusion_mul` の `calc` の 7 段 |
 
 - 人手の `r_ℂ := (r, 0)` は Lean の `(r : ℂ)`（`Complex.ofReal r`。実部 `r`、虚部 `0` の構造体）である。
-  1 段目と 6 段目はこの書き方の違いだけで `rfl`、2 段目は mathlib の ℂ の積の定義（`definition_of_cc` の積と同じ式）で `rfl` である。
-- 3〜5 段目は、構造体の実部・虚部の ℝ の等式を `Complex.ext` で並べる。
+  1 段目と 7 段目はこの書き方の違いだけで `rfl`、2 段目は mathlib の ℂ の積の定義（`definition_of_cc` の積と同じ式）で `rfl` である。
+- 3〜6 段目は、構造体の実部・虚部の ℝ の等式を `Complex.ext` で並べる。
 
 具体的な 2 つの実数の計算であり、主張に固有の構造は ℂ の積の定義の式だけなので、必要十分版は置かない。
 -/
 import Mathlib.Data.Complex.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
 
 namespace Ising2D
 
@@ -32,7 +33,9 @@ theorem real_inclusion_mul (a b : ℝ) : (a : ℂ) * (b : ℂ) = ((a * b : ℝ) 
     _ = ⟨a * b - 0, 0 + 0⟩ :=
         Complex.ext (by rw [real_zero_times_is_zero (0 : ℝ)])
           (by rw [real_zero_times_is_zero b])                               -- `real_zero_times_is_zero` を 2 箇所へ（`x → 0, b`）
-    _ = ⟨a * b, 0⟩ := Complex.ext (sub_zero (a * b)) (add_zero (0 : ℝ))     -- ℝ で `x - 0 = x` と `0 + 0 = 0`
+    _ = ⟨a * b, 0 + 0⟩ :=
+        Complex.ext (real_minus_zero_is_self (a * b)) rfl                   -- `real_minus_zero_is_self`（`a → ab`）
+    _ = ⟨a * b, 0⟩ := Complex.ext rfl (add_zero (0 : ℝ))                    -- ℝ で `0 + 0 = 0`
     _ = ((a * b : ℝ) : ℂ) := rfl                                            -- `inclusion_rr_to_cc`
 
 end Ising2D
