@@ -8884,7 +8884,7 @@ j\in\operatorname{Orb}_{\sigma}(i)
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[0]}(y)\in\operatorname{Orb}_{\sigma}(i)
  &\ \Longleftrightarrow\ y\in\operatorname{Orb}_{\sigma}(i)
- &&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+ &&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`n`), " 回についてすべての始点で成り立つと仮定すると、"]),
                 displayMath(String.raw`\begin{aligned}

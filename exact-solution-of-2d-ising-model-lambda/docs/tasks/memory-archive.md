@@ -1,6 +1,10 @@
+2026-11-15（主経路）: 横断平行移動の座標等式を整数の分配則で Lean 具体版に直接示し、委譲を一件外した。反復横断階段の証明の式鎖末尾の句点を除いた。
+
 2026-11-15（並列）: 軌道ごとの明示積の定数項一と一意性の段を Lean 具体版 `orbitExplicitProduct_eq_signedEvenSubgraphPolynomial`・必要十分版 `orbit_explicit_product_eq_squareRoot_necSuf`・導出版で示し、平方の段と合わせ本文の `lean:` に七件を登録した。本文の定数項の式鎖の二行目の根拠を多項式環の積の係数へ直し、SageMath に定数項の各行と辺長一・二での $P=Q$ の係数一致の検算を足した（PASS）。
 
 2026-11-15（並列）: 軌道ごとの明示積の平方の段を Lean 具体版 `orbitExplicitProduct_sq`・必要十分版 `orbit_explicit_product_sq_necSuf`・導出版で示した。本文の五行（冪の法則、一元軌道の平方、元数と不変性、軌道による分割、モード積公式）と同じ順。本文・SageMath は不変。
+2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」を三段に割り、軌道因子の符号の段を Lean 具体版 `orbitDispersion_pos_at_rationalPoint`・`oneElementOrbitFactor_eval_at_rationalPoint`、必要十分版（推移律だけ／狭義順序環だけ）、導出版で示した。レビューで本文の二元・四元軌道の因子の正値に欠けていた二つの根拠（元の選択に依らないこと、推移律）を三行の式鎖で補い、SageMath `check_orbit_dispersion_chain.sage` を足した（PASS）。
+2026-11-15（並列）: 軌道ごとの明示積の定数項一と一意性の段を Lean 具体版 `orbitExplicitProduct_eq_signedEvenSubgraphPolynomial`・必要十分版 `orbit_explicit_product_eq_squareRoot_necSuf`・導出版で示し、平方の段と合わせ本文の `lean:` に七件を登録した。本文の定数項の式鎖の二行目の根拠を多項式環の積の係数へ直し、SageMath に定数項の各行と辺長一・二での $P=Q$ の係数一致の検算を足した（PASS）。
 
 2026-11-15（主経路）: 反転平行階段の歩の式を Lean 具体版で直接示し、必要十分版への委譲を一件外した。本文の回転表の式末尾を整えた。
 
