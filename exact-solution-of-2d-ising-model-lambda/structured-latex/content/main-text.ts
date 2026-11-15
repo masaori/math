@@ -84650,16 +84650,7 @@ t^2+2t-1
                     " なので、", ref("claim_signed_even_subgraph_rational_sign"),
                     " により四つの ", math(String.raw`Q_L^{a,b}(t)`), " は正である。",
                     math(String.raw`M_L(t):=\max_{(a,b)\in\mathcal S}Q_L^{a,b}(t)\in\mathbb Q_{>0}`),
-                    " と置く。低温側の下界は",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-Z_L(t)
-&\ge\frac12 M_L(t)
-&&\bigl(\because\ \blkref{claim_low_temperature_partition_bounds}\bigr)\\
-&\ge\frac14 M_L(t)
-&&\bigl(\because\ M_L(t)>0\bigr).
-\end{aligned}`),
-                  paragraph([
+                    " と置く。",
                     ref("def_sector_generating_polynomial"), " の係数は非負整数なので、",
                     math(String.raw`G_L^{c,d}(t)\ge0`), " である。",
                     ref("claim_partition_value_dual_factorization"), " と ",
