@@ -11838,8 +11838,12 @@ e_\sigma\cdot_{A'}e_\sigma
 &&\left(\because\ \text{準備の等式}\right)\\
 &=\bigl((h\cdot_{\mathbb{C}}h)\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})\bigr)\ast_{A'}D
 &&\left(\because\ U_{\mathrm{vec}}(A')\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
-&=h\ast_{A'}D
+&=\bigl(h\cdot_{\mathbb{C}}(h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}}))\bigr)\ast_{A'}D
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(h\cdot_{\mathbb{C}}1_{\mathbb{C}})\ast_{A'}D
 &&\left(\because\ h\cdot_{\mathbb{C}}(1_{\mathbb{C}}+_{\mathbb{C}}1_{\mathbb{C}})=1_{\mathbb{C}}\text{。}\blkref{def_inverse_of_two_in_complex_numbers}\right)\\
+&=h\ast_{A'}D
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
 &=e_\sigma
 &&\left(\because\ \blkref{def_idempotents_of_odd_dimensional_clifford_algebra}\right).
 \end{aligned}`),
@@ -12077,20 +12081,7 @@ e_{+}+_{A'}(-1_{\mathbb{C}})\ast_{A'}e_{-}
       paragraph(["以下の記号は ", ref("def_setting_of_odd_dimensional_corollary"), " のものとする。", math(String.raw`j`), " を ", ref("def_induced_homomorphism_into_odd_extension_clifford_algebra"), " の準同型とする。", math(String.raw`B\times B`), " を直積（", ref("def_product_of_two_complex_algebras"), "、", ref("claim_product_of_two_complex_algebras_is_complex_algebra"), "）、", math(String.raw`e_{+}`), "・", math(String.raw`e_{-}`), " を ", ref("def_idempotents_of_odd_dimensional_clifford_algebra"), " の元、", math(String.raw`\Psi'`), " を ", ref("def_homomorphism_from_pair_of_matrix_algebras_to_odd_clifford_algebra"), " の写像とする。", math(String.raw`\Psi'`), " は ℂ-代数の準同型（", ref("def_complex_algebra_homomorphism"), "）である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`J:=j\circ\Psi:B\to A'`), " と置く。", math(String.raw`\Psi`), " と ", math(String.raw`j`), " は ℂ-代数の準同型なので（", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "、", ref("def_setting_of_odd_dimensional_corollary"), "）、", math(String.raw`J`), " は ℂ-代数の準同型である（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`F,G,F',G'\in B`), "、", math(String.raw`\lambda\in\mathbb{C}`), " とする。準備として、", math(String.raw`p,r\in A'`), " と ", math(String.raw`\sigma,\tau\in\{1_{\mathbb{C}},-1_{\mathbb{C}}\}`), " について次の等式を示す（以下「積の並べ替え」と呼ぶ）。"]),
-      displayMath(String.raw`\begin{aligned}
-(p\cdot_{A'}e_\sigma)\cdot_{A'}(r\cdot_{A'}e_\tau)
-&=p\cdot_{A'}\bigl(e_\sigma\cdot_{A'}(r\cdot_{A'}e_\tau)\bigr)
-&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
-&=p\cdot_{A'}\bigl((e_\sigma\cdot_{A'}r)\cdot_{A'}e_\tau\bigr)
-&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
-&=p\cdot_{A'}\bigl((r\cdot_{A'}e_\sigma)\cdot_{A'}e_\tau\bigr)
-&&\left(\because\ y:=r\ \text{とした}\text{。}\blkref{claim_idempotents_of_odd_dimensional_clifford_algebra_commute_with_every_element}\right)\\
-&=p\cdot_{A'}\bigl(r\cdot_{A'}(e_\sigma\cdot_{A'}e_\tau)\bigr)
-&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right)\\
-&=(p\cdot_{A'}r)\cdot_{A'}(e_\sigma\cdot_{A'}e_\tau)
-&&\left(\because\ U_{\mathrm{ring}}(A')\ \text{の乗法の結合法則。}\blkref{def_unital_ring}\right).
-\end{aligned}`),
+      paragraph([math(String.raw`J:=j\circ\Psi:B\to A'`), " と置く。", math(String.raw`\Psi`), " と ", math(String.raw`j`), " は ℂ-代数の準同型なので（", ref("claim_homomorphism_from_matrix_algebra_to_clifford_algebra_is_algebra_homomorphism"), "、", ref("def_setting_of_odd_dimensional_corollary"), "）、", math(String.raw`J`), " は ℂ-代数の準同型である（", ref("claim_composition_of_algebra_homomorphisms_is_algebra_homomorphism"), "）。", math(String.raw`F,G,F',G'\in B`), "、", math(String.raw`\lambda\in\mathbb{C}`), " とする。"]),
       paragraph(["加法を保つこと。"]),
       displayMath(String.raw`\begin{aligned}
 \Psi'\bigl((F,G)+_{B\times B}(F',G')\bigr)

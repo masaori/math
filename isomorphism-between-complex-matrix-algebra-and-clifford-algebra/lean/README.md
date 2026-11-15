@@ -122,6 +122,14 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 同じ系のうち、虚数単位、ℂ の元の平方根の存在、値が 1 の直交基底の存在、直交する族の線型結合での二次形式の値 | `Isomorphism/GeneralEvenDimensional/OrthonormalBasis.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/OrthonormalBasis.lean` | `OrthonormalBasisFromNecSuf.lean` |
 | 章「同型の証明」の系「一般の偶数次元の非退化な二次空間」のうち、基底の座標を係数にした族の線型結合の写像 L_{b,u}、基底を動かさない線型写像は恒等写像、等長写像の右逆、等長写像が誘導するクリフォード代数の準同型 Cl(θ) と逆向きの合成 | `Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/InducedHomomorphism.lean` | `InducedHomomorphismFromNecSuf.lean` |
 | 同じ系のうち、分裂した二次空間の記号と一般の非退化な二次空間の設定、族 u・v、等長写像 θ・θ' と互いに逆であること、系の定理 | `Isomorphism/GeneralEvenDimensional/IsometryToSplitSpace.lean` | `NecSuf/Isomorphism/GeneralEvenDimensional/IsometryToSplitSpace.lean` | `IsometryToSplitSpaceFromNecSuf.lean` |
+| 章「同型の証明」の系「奇数次元の二次空間」のうち、V' := V ⊕ ℂ^vec と q'、族 o、q' の偏極・二次形式であること・in'_1 が等長写像・q'(u) = 1・in'_1 の像と u の直交、設定、j := Cl(in'_1) と j ∘ γ = γ' ∘ in'_1、u・g、g·g = 1、g と j(γ(v)) の反交換 | `Isomorphism/OddDimensional/OddExtension.lean` | `NecSuf/Isomorphism/OddDimensional/OddExtension.lean` | `OddExtensionFromNecSuf.lean` |
+| 同じ系のうち、一般の ℂ-代数の主張（二元のどちらとも反交換する元は積と交換する、C_y とそれが部分代数であること、生成する部分集合で交換すれば全体と交換する） | `Isomorphism/OddDimensional/CommutingElements.lean` | `NecSuf/Isomorphism/OddDimensional/CommutingElements.lean` | `CommutingElementsFromNecSuf.lean` |
+| 同じ系のうち、符号の因子 χ_i と ε、χ_i と a_i・a†_i の積と反交換、χ_i·χ_i = 1、番号の違う生成元・χ との交換、ε·ε = 1、生成元・γ(v) と ε の反交換 | `Isomorphism/OddDimensional/ParityElement.lean` | `NecSuf/Isomorphism/OddDimensional/ParityElement.lean` | `ParityElementFromNecSuf.lean` |
+| 同じ系のうち、g と j(χ_i)・j(ε) の交換、z := j(ε)·g、z·z = 1、z と j(γ(v))・g の交換、γ'((v,t)) の分解、z が中心に入ること | `Isomorphism/OddDimensional/CentralElement.lean` | `NecSuf/Isomorphism/OddDimensional/CentralElement.lean` | `CentralElementFromNecSuf.lean` |
+| 同じ系のうち、二つの ℂ-代数の直積とそれが ℂ-代数であること、⟨φ1,φ2⟩ と準同型であること、反交換する平方 1 の元の倍を足した元の平方 | `Isomorphism/OddDimensional/ProductOfAlgebras.lean` | `NecSuf/Isomorphism/OddDimensional/ProductOfAlgebras.lean` | `ProductOfAlgebrasFromNecSuf.lean` |
+| 同じ系のうち、φ' とその線型性・平方、Φ' の存在と一意性、Φ' ∘ j、Φ'(g) | `Isomorphism/OddDimensional/HomomorphismToPairOfMatrices.lean` | `NecSuf/Isomorphism/OddDimensional/HomomorphismToPairOfMatrices.lean` | `HomomorphismToPairOfMatricesFromNecSuf.lean` |
+| 同じ系のうち、Φ'(z)、e_± := ½(1 ± z) と、e_σ·e_σ = e_σ・e_σ·e_{-σ} = 0・e_+ + e_- = 1・e_+ − e_- = z・中心に入ること、Φ'(e_σ) | `Isomorphism/OddDimensional/Idempotents.lean` | `NecSuf/Isomorphism/OddDimensional/Idempotents.lean` | `IdempotentsFromNecSuf.lean` |
+| 同じ系のうち、Ψ' とそれが準同型であること、Φ' ∘ Ψ' = 恒等写像、Ψ' ∘ Φ' = 恒等写像、系の定理 | `Isomorphism/OddDimensional/HomomorphismFromPairOfMatrices.lean` | `NecSuf/Isomorphism/OddDimensional/HomomorphismFromPairOfMatrices.lean` | `HomomorphismFromPairOfMatricesFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -280,3 +288,18 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - i·i = -1 は、族 u の各元での q の値が 1 であることと、θ・θ' が u・v を互いの基底へ移すことに要る。u の異なる二元が直交することは i·i = -1 を使わない。
 - 主定理の仮定（`CliffordLaws K n` と a + (-a) = 0）のほかに行の中で足す K の性質は、(-a)·b = -(a·b) と -(-a) = a と、Q が二次形式であることである。
 - 本文の前提 M ∈ ℤ_{≥1} は、どの主張も使わない（M = 0 でも同じ証明が通る）。
+
+## 必要十分版が示したこと（系「奇数次元の二次空間」）
+
+- q' についての主張は、どれも q が q_W であることを使わない（任意の二次形式に一次元を足しても同じ証明が通る）。q' が二次形式であることには K の乗法の交換法則が要る（スカラー倍の行の t'·(λt) = λ(t'·t)）。
+- j・g・χ_i・ε・z と、それらの積・交換・反交換の主張は、章「クリフォード代数」の仮定 `CliffordLaws K n` と a + (-a) = 0 のほかに K の性質を足さない。
+  -1 の役の n に要るのは n·n = 1 と n + 1 = 0 だけで、z·z = 1 は g·g = 1 と ε·ε = 1 だけから出る。
+- 二つの ℂ-代数の直積が ℂ-代数であること、⟨φ1,φ2⟩ が準同型であること、C_y が部分代数であること、生成する部分集合で交換すれば全体と交換することは、K の性質を一つも使わない。
+  反交換する平方 1 の元の倍を足した元の平方の主張が使うのは、s ∗_A 0_A = 0_A の行の 0 + 0 = 0 と a·0 = 0 だけである。
+- φ'・Φ' とその値（Φ' ∘ j、Φ'(g)、Φ'(z)、Φ'(e_σ)）は、K の乗法の交換法則も 2 の可逆性も使わない。
+- 2 の可逆性（h·(1+1) = 1）が要るのは、e_σ·e_σ = e_σ、e_+ + e_- = 1、e_+ − e_- = z の三つだけである。e_σ·e_{-σ} = 0、e_σ が中心に入ること、Φ'(e_σ) は h が K の任意の元でも通る。
+  1 + 1 ≠ 0 そのものと (1+1)·h = 1 は、どの主張も使わない。
+- Ψ' が準同型であること・Φ' ∘ Ψ' = 恒等写像・Ψ' ∘ Φ' = 恒等写像は、e_± の性質（平方・積・和・差・中心に入ること）を仮定に置くと 2 の可逆性なしで通る。
+  系の段の仮定 h·(1+1) = 1 は、どれも e_± を作る段（平方・和・差、Φ'(e_±) の値）から来る。行の中で足す K の性質は 0 + 0 = 0、a·0 = 0、1 + (-1) = 0、
+  -n = 1、1 + n = 0、a·n = -a だけで、K の乗法の交換法則は使わない。
+- 本文の前提 M ∈ ℤ_{≥1} と、主張の「i ∈ {1,…,M}」（g と j(χ_i) の交換）・「σ ∈ {1,-1}」（e_σ の交換と Φ'(e_σ)）は、証明が使わないので仮定に置かない。
