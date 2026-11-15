@@ -158,16 +158,16 @@ def check_proof_lines(P, c, nmax, what):
             u = matvec(pw[a], E[k])
             eq(u, pw[a] * E[k], f"{what}: u の成分の式と組み込みの積 a={a}, k={k}")
             for l in range(d):
-                for m in range(d):
-                    if m != k:
-                        eq(E[k][m], 0, f"{what}: 【W^ae_k の成分とノルム】の m ≠ k なので (e_k)_m = 0")
-                        eq(pw[a][l, m] * E[k][m], pw[a][l, m] * QQ(0), f"{what}: 【W^ae_k の成分とノルム】m ≠ k の項の 1 行目（(e_k)_m = 0）")
-                        eq(pw[a][l, m] * QQ(0), 0, f"{what}: 【W^ae_k の成分とノルム】m ≠ k の項の 2 行目（real_times_zero_is_zero、x → (W^a)_lm）")
-                terms = [pw[a][l, m] * E[k][m] for m in range(d)]
-                terms_sub = [pw[a][l, k] * E[k][k] if m == k else QQ(0) for m in range(d)]
+                for j in range(d):
+                    if j != k:
+                        eq(E[k][j], 0, f"{what}: 【W^ae_k の成分とノルム】の j ≠ k なので (e_k)_j = 0")
+                        eq(pw[a][l, j] * E[k][j], pw[a][l, j] * QQ(0), f"{what}: 【W^ae_k の成分とノルム】j ≠ k の項の 1 行目（(e_k)_j = 0）")
+                        eq(pw[a][l, j] * QQ(0), 0, f"{what}: 【W^ae_k の成分とノルム】j ≠ k の項の 2 行目（real_times_zero_is_zero、x → (W^a)_lj）")
+                terms = [pw[a][l, j] * E[k][j] for j in range(d)]
+                terms_sub = [pw[a][l, k] * E[k][k] if j == k else QQ(0) for j in range(d)]
                 eq(u[l], sum_left_to_right(terms), f"{what}: 【W^ae_k の成分とノルム】の 1 行目")
-                for m in range(d):
-                    eq(terms[m], terms_sub[m], f"{what}: 【W^ae_k の成分とノルム】の 2 行目を各項で（m ≠ k は上の項が 0）")
+                for j in range(d):
+                    eq(terms[j], terms_sub[j], f"{what}: 【W^ae_k の成分とノルム】の 2 行目を各項で（j ≠ k は上の項が 0）")
                 eq(sum_left_to_right(terms), sum_left_to_right(terms_sub), f"{what}: 【W^ae_k の成分とノルム】の 2 行目")
                 drop_zeros_left_to_right(terms_sub, pw[a][l, k] * E[k][k], f"{what}: 【W^ae_k の成分とノルム】の 3 行目 a={a}, k={k}, l={l}")
                 eq(E[k][k], 1, f"{what}: 【W^ae_k の成分とノルム】の (e_k)_k = 1")
@@ -222,10 +222,10 @@ def check_proof_lines(P, c, nmax, what):
                  pw[2 * a + 1][k, k],
                  M[-1][k, k],
                  sum(pw[a][k, l] * WWa[l, k] for l in range(d)),
-                 sum(pw[a][k, l] * sum(P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
-                 sum(sum(pw[a][k, l] * P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
-                 sum(sum(pw[a][l, k] * P[l, m] * pw[a][m, k] for m in range(d)) for l in range(d)),
-                 sum(sum(u[l] * P[l, m] * u[m] for m in range(d)) for l in range(d)),
+                 sum(pw[a][k, l] * sum(P[l, r] * pw[a][r, k] for r in range(d)) for l in range(d)),
+                 sum(sum(pw[a][k, l] * P[l, r] * pw[a][r, k] for r in range(d)) for l in range(d)),
+                 sum(sum(pw[a][l, k] * P[l, r] * pw[a][r, k] for r in range(d)) for l in range(d)),
+                 sum(sum(u[l] * P[l, r] * u[r] for r in range(d)) for l in range(d)),
                  bil(u, P, u)]
             for x, y in zip(L, L[1:]):
                 eq(x, y, f"{what}: 奇数の鎖の等号 n={n}, k={k}")

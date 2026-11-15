@@ -23,7 +23,7 @@
 | 【冪の実数の行列】`(W^p)_ℝ = (W_ℝ)^p` | `real_matrix_of_real_entry_matrix_preserves_power`（`A → W`, `q → p`）をそのまま引く |
 | 【冪の対称性】6 行と単射性 | `power_of_W_real_entry_symm` の `calc` の 6 段と `inclusion_rr_to_cc_is_injective` |
 | 【対角成分の表示】`i ≠ k` の項の 3 行、`i ≠ k` の内側の和の 2 行、`j ≠ k` の項の 2 行と主の 9 行 | `diagonal_entry_via_standard_basis` の `hterm` の 3 段、`hrow` の 2 段、`hcol` の 2 段と `calc` の 9 段 |
-| 【`(W_ℝ)^ae_k` の成分とノルム】`m ≠ k` の項の 2 行と成分の 5 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 5 段 |
+| 【`(W_ℝ)^ae_k` の成分とノルム】`j ≠ k` の項の 2 行と成分の 5 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段のノルムの 3 行 | `norm_power_of_W_real_mulVec_standard_basis_le` の `calc` の 3 段 |
 | 同じ段の平方の 2 行 | `norm_sq_power_of_W_real_mulVec_standard_basis_le` の `calc` の 2 段 |
 | 偶数: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a` の 5 行 | `power_of_W_real_even_split` の `calc` の 5 段 |
@@ -161,24 +161,24 @@ theorem diagonal_entry_via_standard_basis (p : ℕ) (k : Conf M) :
     _ = P k k * 1 := by rw [he, Pi.single_eq_same]                          -- `(e_k)_k = 1`
     _ = P k k := mul_one (P k k)                                            -- `1` は ℝ の乗法の単位元 `x·1 = x`（`x → ((W_ℝ)^p)_kk`、`set_and_algebra_notation`）
 
-/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の `m ≠ k` の項の 2 行と成分の 5 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
+/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の `j ≠ k` の項の 2 行と成分の 5 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
 theorem power_of_W_real_mulVec_standard_basis_apply (a : ℕ) (k l : Conf M) :
     ((realMatrixOfRealEntries W hW.1 ^ a) *ᵥ (Pi.single k (1 : ℝ))) l
       = (realMatrixOfRealEntries W hW.1 ^ a) l k := by
   set P := realMatrixOfRealEntries W hW.1 ^ a
   set e : Conf M → ℝ := Pi.single k 1 with he
-  -- 準備: `m ≠ k` の項（2 行）
-  have hterm : ∀ m, m ≠ k → P l m * e m = 0 := fun m hmk =>
-    calc P l m * e m
-        = P l m * 0 := by rw [he, Pi.single_eq_of_ne hmk]                 -- `m ≠ k` なので `(e_k)_m = 0`
-      _ = 0 := real_times_zero_is_zero (P l m)                             -- `real_times_zero_is_zero`（`x → ((W_ℝ)^a)_lm`）
+  -- 準備: `j ≠ k` の項（2 行）
+  have hterm : ∀ j, j ≠ k → P l j * e j = 0 := fun j hjk =>
+    calc P l j * e j
+        = P l j * 0 := by rw [he, Pi.single_eq_of_ne hjk]                 -- `j ≠ k` なので `(e_k)_j = 0`
+      _ = 0 := real_times_zero_is_zero (P l j)                             -- `real_times_zero_is_zero`（`x → ((W_ℝ)^a)_lj`）
   calc (P *ᵥ e) l
-      = ∑ m, P l m * e m := rfl                                             -- `def_real_matrix_vector_product`（`P → (W_ℝ)^a`, `x → e_k`）
-    _ = ∑ m, if m = k then P l k * e k else 0 := by
-        refine Finset.sum_congr rfl fun m _ => ?_
-        by_cases h : m = k
+      = ∑ j, P l j * e j := rfl                                             -- `def_real_matrix_vector_product`（`P → (W_ℝ)^a`, `x → e_k`, `i → l`）
+    _ = ∑ j, if j = k then P l k * e k else 0 := by
+        refine Finset.sum_congr rfl fun j _ => ?_
+        by_cases h : j = k
         · rw [if_pos h, h]
-        · rw [if_neg h, hterm m h]                                         -- 上の `m ≠ k` の項が `0` を `k` 以外の各項へ
+        · rw [if_neg h, hterm j h]                                         -- 上の `j ≠ k` の項が `0` を `k` 以外の各項へ
     _ = P l k * e k := by
         rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
                                                                             -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
@@ -307,14 +307,14 @@ theorem diagonal_bound_odd (n a : ℕ) (hn : n = 2 * a + 1) (k : Conf M) :
                                                                             -- 【対角成分の表示】（`p → 2a + 1`）
     _ = (WR ^ a * (WR * WR ^ a)) k k := by rw [power_of_W_real_odd_split W hW a]  -- 上の式変形
     _ = ∑ l, (WR ^ a) k l * (WR * WR ^ a) l k := rfl                        -- `def_real_matrix_product`（`P → (W_ℝ)^a`, `Q → W_ℝ(W_ℝ)^a`）
-    _ = ∑ l, (WR ^ a) k l * ∑ m, WR l m * (WR ^ a) m k := rfl               -- `def_real_matrix_product`（`P → W_ℝ`, `Q → (W_ℝ)^a`）
-    _ = ∑ l, ∑ m, (WR ^ a) k l * WR l m * (WR ^ a) m k := by
+    _ = ∑ l, (WR ^ a) k l * ∑ r, WR l r * (WR ^ a) r k := rfl               -- `def_real_matrix_product`（`P → W_ℝ`, `Q → (W_ℝ)^a`, `i → l`, `j → r`, `k → k`）
+    _ = ∑ l, ∑ r, (WR ^ a) k l * WR l r * (WR ^ a) r k := by
         simp only [Finset.mul_sum, mul_assoc]                               -- 分配則と乗法の結合則
-    _ = ∑ l, ∑ m, (WR ^ a) l k * WR l m * (WR ^ a) m k :=
-        Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun m _ => by
+    _ = ∑ l, ∑ r, (WR ^ a) l k * WR l r * (WR ^ a) r k :=
+        Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun r _ => by
           rw [power_of_W_real_entry_symm W hW a k l]                        -- 【冪の対称性】の `((W_ℝ)^a)_kl = ((W_ℝ)^a)_lk`
-    _ = ∑ l, ∑ m, u l * WR l m * u m := by simp only [hul]                  -- `u_l = ((W_ℝ)^a)_lk`, `u_m = ((W_ℝ)^a)_mk`
-    _ = u ⬝ᵥ WR *ᵥ u := (dotProduct_mulVec_eq_real_bilinear_value u u WR).symm  -- `def_real_bilinear_value`（`P → W_ℝ`, `x, y → u`）
+    _ = ∑ l, ∑ r, u l * WR l r * u r := by simp only [hul]                  -- `u_l = ((W_ℝ)^a)_lk`, `u_r = ((W_ℝ)^a)_rk`
+    _ = u ⬝ᵥ WR *ᵥ u := (dotProduct_mulVec_eq_real_bilinear_value u u WR).symm  -- `def_real_bilinear_value`（`P → W_ℝ`, `x, y → u`, `(k, l) → (l, r)`）
     _ ≤ c * vecNorm u ^ 2 := by
         rw [vecNorm_sq]; exact quad_le_rayleighSup_mul u                    -- `def_rayleigh_sup` の `x^⊤W_ℝx ≤ c‖x‖^2`（`x → u`）
     _ ≤ c * c ^ (2 * a) :=

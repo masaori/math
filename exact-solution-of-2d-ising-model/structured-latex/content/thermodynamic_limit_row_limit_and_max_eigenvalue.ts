@@ -2169,25 +2169,25 @@ e_k^\top (W_{\mathbb{R}})^p e_k
         " とおく。",
         math(String.raw`l \in \{1,\dots,d\}`),
         " と、",
-        math(String.raw`m \neq k`),
+        math(String.raw`j \neq k`),
         " の ",
-        math(String.raw`m \in \{1,\dots,d\}`),
+        math(String.raw`j \in \{1,\dots,d\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,(e_k)_m
-&=\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\cdot 0
-&&\bigl(\because\ m \neq k\ \text{なので}\ (e_k)_m = 0\bigr)\\
+\bigl((W_{\mathbb{R}})^a\bigr)_{lj}\,(e_k)_j
+&=\bigl((W_{\mathbb{R}})^a\bigr)_{lj}\cdot 0
+&&\bigl(\because\ j \neq k\ \text{なので}\ (e_k)_j = 0\bigr)\\
 &=0
-&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to ((W_{\mathbb{R}})^a)_{lm})\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to ((W_{\mathbb{R}})^a)_{lj})\bigr)
 \end{aligned}`),
       paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 u_l
-&=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,(e_k)_m
-&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to (W_{\mathbb{R}})^a,\ x \to e_k)\bigr)\\
+&=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lj}\,(e_k)_j
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to (W_{\mathbb{R}})^a,\ x \to e_k,\ i \to l)\bigr)\\
 &=0 + \cdots + 0 + \bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k + 0 + \cdots + 0
-&&\bigl(\because\ \text{上の}\ m \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^a\bigr)_{lm}(e_k)_m = 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
+&&\bigl(\because\ \text{上の}\ j \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^a\bigr)_{lj}(e_k)_j = 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\cdot 1
@@ -2336,16 +2336,16 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
 &&\bigl(\because\ \text{上の式変形}\bigr)\\
 &=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)_{lk}
 &&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to (W_{\mathbb{R}})^a,\ Q \to W_{\mathbb{R}}(W_{\mathbb{R}})^a)\bigr)\\
-&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\sum_{m=1}^{d}(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
-&&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to (W_{\mathbb{R}})^a)\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
+&=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\sum_{r=1}^{d}(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
+&&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to (W_{\mathbb{R}})^a,\ i \to l,\ j \to r,\ k \to k)\bigr)\\
+&=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \text{分配則と乗法の結合則}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(W_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mk}
+&=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^a)_{kl} = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
-&=\sum_{l=1}^{d}\sum_{m=1}^{d}u_l\,(W_{\mathbb{R}})_{lm}\,u_m
-&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ u_l = ((W_{\mathbb{R}})^a)_{lk},\ u_m = ((W_{\mathbb{R}})^a)_{mk}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{r=1}^{d}u_l\,(W_{\mathbb{R}})_{lr}\,u_r
+&&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ae_k\text{ の成分とノルム】の}\ u_l = ((W_{\mathbb{R}})^a)_{lk},\ u_r = ((W_{\mathbb{R}})^a)_{rk}\bigr)\\
 &=u^\top W_{\mathbb{R}}u
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x, y \to u)\bigr)\\
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x, y \to u,\ k \to l,\ l \to r)\bigr)\\
 &\leq c\,\|u\|^2
 &&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top W_{\mathbb{R}}x \leq c\|x\|^2\ (x \to u)\bigr)\\
 &\leq c\,c^{2a}
@@ -2399,6 +2399,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「d c^n = 2^{M_col} c^n（∵ d := 2^{M_col}）」は、行列の大きさ d ∈ ℤ と ℝ の冪 2^{M_col} を同じ記号で等号で結んでいた。新しく足した inclusion_zz_to_rr の写像 ι_{ℤ→ℝ} を通し、「同じ項 c^n を d 個足した和 = ι(d)c^n」を finite_sum_of_constant_real_number、「ι(2_ℤ^{M_col}) = 2_ℝ^{M_col}」を inclusion_zz_to_rr_of_power_of_two の参照にした。d を def_power_of_integer の 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した。主張の 2^{M_col} が ℝ の冪であることを主張の文に書いた。値は変わらない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【対角成分の表示】の i ≠ k・j ≠ k の項と【(W_ℝ)^ae_k の成分とノルム】の m ≠ k の項を、0 を掛けると 0 を書かずに「(e_k)_i = 0 なので 0」で和から落としていた。準備に、左から 0 の項の 3 行の鎖（(e_k)_i = 0 の代入、real_zero_times_is_zero を 2 回）、i ≠ k の内側の和が 0 の 2 行の鎖、右から 0 の項の 2 行の鎖（(e_k)_j = 0 の代入、real_times_zero_is_zero）を置き、主の鎖の落とす段を、各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（【e_k のノルム】と同じ書き方。【対角成分の表示】は 5 行から 7 行、成分の鎖は 3 行から 4 行。式の両端と主張は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【対角成分の表示】の主の鎖の (e_k)_k = 1 の 2 行と【(W_ℝ)^ae_k の成分とノルム】の成分の鎖の最後の行が、(e_k)_k = 1 の代入と 1·x = x（または x·1 = x）を 1 行に束ね、根拠に代入しか書いていなかった。代入の行（1·((W_ℝ)^p)_{kj}(e_k)_j、((W_ℝ)^p)_{kk}·1、((W_ℝ)^a)_{lk}·1）と、1 は ℝ の乗法の単位元（set_and_algebra_notation）の行に分けた。主張と式の両端は不変。数値検証: sagemath/check/trace_power_upper_bound/。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^ae_k の成分とノルム】の和の添字を m から j に替えた。引く def_real_matrix_vector_product の当てはめ (m, n → d, …) の m（行列の行の数）と同じ文字だったため。当てはめに i → l を書き足した（定義の和の添字 j はそのまま）。奇数の場合の成分の鎖の和の添字 m も、def_real_matrix_product の当てはめ (m, n, p → d, …) の m と同じ文字だったので r に替え、当てはめに i → l, j → r, k → k を、続く def_real_bilinear_value の当てはめに (k, l) → (l, r)（同時の置き換え）を書き足した。主張・式の値・手順は不変。",
       ],
     },
   },
