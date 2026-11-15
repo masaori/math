@@ -47,15 +47,21 @@ theorem transverseTranslatedPeriodicPlaneLift_coordinate
         (transverseTranslatedPeriodicPlaneLift m L base wv wh u k) =
       windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) +
         u * (wh ^ 2 + wv ^ 2) := by
-  rw [show transverseTranslatedPeriodicPlaneLift m L base wv wh u k =
-      translatedFamily (periodicPlaneLift m base L wv wh) (wh, -wv) u k by
-    rfl]
-  rw [translatedFamily_coordinate_necSuf]
-  have hshift : windingTransverseCoordinate wh wv (wh, -wv) =
-      wh ^ 2 + wv ^ 2 := by
-    simp [windingTransverseCoordinate]
-    ring
-  rw [hshift]
+  calc
+    _ = windingTransverseCoordinate wh wv
+        (periodicPlaneLift m base L wv wh k + u • (wh, -wv)) := rfl
+    _ = windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) +
+          windingTransverseCoordinate wh wv (u • (wh, -wv)) := by rw [map_add]
+    _ = windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) +
+          u * windingTransverseCoordinate wh wv (wh, -wv) := by
+      rw [map_zsmul]
+      simp
+    _ = _ := by
+      have hshift : windingTransverseCoordinate wh wv (wh, -wv) =
+          wh ^ 2 + wv ^ 2 := by
+        simp [windingTransverseCoordinate]
+        ring
+      rw [hshift]
 
 /-- `claim_transverse_translates_of_periodic_plane_lift_disjoint` の分離部分。 -/
 theorem transverseTranslatedPeriodicPlaneLifts_disjoint

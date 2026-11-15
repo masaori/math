@@ -71377,7 +71377,7 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
 &=C^{\gamma}_{n_{\perp}}-C^{\gamma}_{n_{\perp}-1}
 &&\bigl(\because\ \text{直前の表示と }\blkref{def_iterated_transverse_staircase}\text{、成分ごとの整数の加減}\bigr)\\
 &=C^{\gamma}_{r+1}-C^{\gamma}_r
-&&\bigl(\because\ r=n_{\perp}-1\bigr).
+&&\bigl(\because\ r=n_{\perp}-1\bigr)
 \end{aligned}`),
                       paragraph([
                         "二場合は ", math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`),
@@ -71395,7 +71395,7 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
 &=\kappa_{\gamma}(C^{\gamma}_{r+1})-\kappa_{\gamma}(C^{\gamma}_r)
 &&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
 &\ge1
-&&\bigl(\because\ \blkref{claim_winding_transverse_staircase_step_increase}\text{ の真の増加と、整数で }>0\text{ は }\ge1\bigr).
+&&\bigl(\because\ \blkref{claim_winding_transverse_staircase_step_increase}\text{ の真の増加と、整数で }>0\text{ は }\ge1\bigr)
 \end{aligned}`),
                       paragraph([
                         "ここで ", math(String.raw`(\cdot)_1,(\cdot)_2`), " は ",
@@ -71410,7 +71410,7 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
 &\ge\kappa_{\gamma}(D^{\gamma,Q,t}_0)+s
 &&\bigl(\because\ \text{各増分が }\ge1\text{（上で示した）と順序の加法性}\bigr)\\
 &=\kappa_{\gamma}(Q)+s
-&&\bigl(\because\ D^{\gamma,Q,t}_0=Q\ \text{（}\blkref{def_iterated_transverse_staircase}\text{）}\bigr).
+&&\bigl(\because\ D^{\gamma,Q,t}_0=Q\ \text{（}\blkref{def_iterated_transverse_staircase}\text{）}\bigr)
 \end{aligned}`),
                       paragraph([
                         "横断座標が各歩で真に増えるため、添字の異なる二頂点の横断座標は異なり、頂点どうしも相異なる。",
