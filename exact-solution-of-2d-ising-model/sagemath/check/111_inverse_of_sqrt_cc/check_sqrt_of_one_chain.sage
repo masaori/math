@@ -1,5 +1,5 @@
 # <inverse_of_sqrt_cc>: 証明の第四の √(1_C) の鎖のうち、偏角の ℝ の計算の 3 行と cos 0・sin 0・1·x = x の行を確かめる。
-# 偏角: 0/2 − 0·π → 0 − 0·π（ℝ で 0/x = 0、x → 2）→ 0 − 0（real_zero_times_is_zero、x → π）→ 0（ℝ で a − 0 = a、a → 0）。
+# 偏角: 0/2 − 0·π → 0 − 0·π（real_zero_divided_is_zero、x → 2）→ 0 − 0（real_zero_times_is_zero、x → π）→ 0（real_minus_zero_is_self、a → 0）。
 # 成分: (1·cos 0, 1·sin 0) → (1·1, 1·sin 0)（cosine_zero）→ (1·1, 1·0)（sine_zero）→ (1, 0)（ℝ で 1·x = x を 2 箇所）。
 # 帰属: 0/2・0 − 0・1·x は QQ で厳密。π を含む 0·π は記号計算（SR）で厳密。cos 0・sin 0 は _shared の cos_sin（AA）で厳密。
 load("../../_shared/operators.sage")
@@ -7,9 +7,9 @@ load("../../_shared/polar_trigonometry_exact.sage")
 rep = CheckReport("inverse_of_sqrt_cc: √(1_C) の鎖の偏角の ℝ の計算と cos 0・sin 0")
 zero, one, two = QQ(0), QQ(1), QQ(2)
 # 偏角の 3 行。各行で置き換える部分式の等号を確かめる（記号計算は 0·π を式を作った時点で 0 に畳むので、行の式どうしの比較はしない）
-rep.truth(zero / two == zero, "0/2 = 0（0/x = 0 の x → 2）")
+rep.truth(zero / two == zero, "0/2 = 0（real_zero_divided_is_zero の x → 2）")
 rep.truth(bool(SR(zero) * pi == 0), "0·π = 0（real_zero_times_is_zero の x → π）")
-rep.truth(zero - zero == zero, "0 − 0 = 0（a − 0 = a の a → 0）")
+rep.truth(zero - zero == zero, "0 − 0 = 0（real_minus_zero_is_self の a → 0）")
 # 成分の行
 cos0, sin0 = cos_sin(Ang(0))
 rep.truth(cos0 == 1, "cos 0 = 1（cosine_zero）")

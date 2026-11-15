@@ -1236,7 +1236,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= 0-0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1456,6 +1456,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
           "arg(z^2) の鎖が引く「arg(z) の計算の最後の 4 段」を「最後の 2 段」に直した。鎖の両端と主張は不変。",
         "原文は r, θ, n を導入していなかった（証明の中で θ と n を断りなく使っていた）ので、" +
           "積の場合と同じ設定を statement に書き下した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の準備の 0 − 2·0·π = 0 の鎖の 3 行目 0 − 0 = 0 の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
       ],
     },
   },
@@ -1947,7 +1948,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= 0-0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -2064,6 +2065,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の左辺の鎖の 4 行目の根拠「0 ≤ 0 − 2·0·π < 2π と準備の第一」が、2·0 = 0・0·π = 0・0 − 0 = 0 を書かずに s_{[0,2π)}([0]) から 0 へ移っていた。" +
           "そこで 0 − 2·0·π = 0 の 3 行の鎖（real_times_zero_is_zero（x → 2）・real_zero_times_is_zero（x → π）・ℝ で a − 0 = a）と 0 ≤ 0 < 2π（0 < 2π は pi_is_positive と順序体の正の数どうしの積）を r = 0 の場合の冒頭に置いて s_{[0,2π)}([0]) = 0 − 2·0·π を先に述べ、左辺の鎖の 4 行目をその値の代入とその計算の 2 行に割った（左辺は 9 段になった）。鎖の両端と主張は不変。" +
           "数値検証: sagemath/check/108_sqrt_expansion_via_polar/check_02_zero_radius_rows.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の準備の 0 − 2·0·π = 0 の鎖の 3 行目 0 − 0 = 0 の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
       ],
     },
   },
@@ -2725,7 +2727,7 @@ z
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 1,\ 1 \neq 0)\bigr)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
 &&(\because\ \blkref{arctan_zero})
 \end{aligned}`),
@@ -2741,7 +2743,7 @@ z
 &= 0-0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi))\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -2777,11 +2779,11 @@ z
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0/x = 0\ (x \neq 0)\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 2\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0-0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - 0 = a\ \text{の}\ a \to 0\bigr)\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= (1\cdot\cos 0,\ 1\cdot\sin 0)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (1\cdot 1,\ 1\cdot\sin 0)
@@ -2897,6 +2899,7 @@ z
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第三の 0_C·0_C = 0_C の行の根拠が ℂ の積の定義（definition_of_cc）だけで、成分の ℝ の 0·0 = 0 などが書かれていなかったので、complex_zero_times_is_zero（z → 0_C）の参照にした。" +
           "準備の第四の地の文「0 ≤ 0 − 2·0·π < 2π なので、この代表元に対する整数は 0」が 2·0 = 0・0·π = 0・0 − 0 = 0 を書かずに使っていたので、0 − 2·0·π = 0 の 3 行の鎖（real_times_zero_is_zero（x → 2）・real_zero_times_is_zero（x → π）・ℝ で a − 0 = a）と 0 ≤ 0 < 2π（0 < 2π は pi_is_positive と順序体の正の数どうしの積）を書き、そこから整数が 0 であることを述べる形にした。式の両端と主張は不変。" +
           "数値検証: sagemath/check/111_inverse_of_sqrt_cc/check_zero_angle_integer_chain.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の 0/1 = 0 の行と √(1_C) の鎖の 0/2 = 0 の行の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1、x → 2）の参照に、準備の第四の 0 − 2·0·π = 0 の鎖の 3 行目と √(1_C) の鎖の 0 − 0 = 0 の行の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
       ],
     },
   },

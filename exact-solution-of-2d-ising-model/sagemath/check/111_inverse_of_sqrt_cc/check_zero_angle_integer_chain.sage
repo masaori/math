@@ -1,7 +1,7 @@
 # <inverse_of_sqrt_cc>: 準備の第三の 0_C·0_C = 0_C（complex_zero_times_is_zero の z → 0_C）と、
 # 準備の第四の 0 − 2·0·π = 0 の鎖、および 0 ≤ 0 − 2·0·π < 2π から整数が 0 に定まることを確かめる。
 #   0_C·0_C: (0,0)(0,0) = (0·0 − 0·0, 0·0 + 0·0) = (0 − 0, 0 + 0) = (0, 0)（QQ の対で厳密）
-#   偏角:    0 − 2·0·π = 0 − 0·π（real_times_zero_is_zero、x → 2）= 0 − 0（real_zero_times_is_zero、x → π）= 0（a − 0 = a）
+#   偏角:    0 − 2·0·π = 0 − 0·π（real_times_zero_is_zero、x → 2）= 0 − 0（real_zero_times_is_zero、x → π）= 0（real_minus_zero_is_self、a → 0）
 #            π は QQ[pi_] の不定元で表す。整数の同定だけ RIF の π（区間演算）で厳密に比べる。
 load("../../_shared/operators.sage")
 rep = CheckReport("inverse_of_sqrt_cc: 準備の第三の 0_C·0_C と第四の偏角 0 の整数")

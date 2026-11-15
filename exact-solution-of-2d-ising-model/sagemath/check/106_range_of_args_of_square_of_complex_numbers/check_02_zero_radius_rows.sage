@@ -4,7 +4,7 @@
 #   r = 0 の場合の冒頭に置いた準備（arg(z) の鎖の s([0]) = 0 − 2·0·π の次の行が引く）:
 #             0 − 2·0·π = 0 − 0·π = 0 − 0 = 0
 #             （2·0 = 0 は real_times_zero_is_zero (x → 2)、0·π = 0 は real_zero_times_is_zero (x → π)、
-#               最後は a − 0 = a (a → 0)。2·0·π は (2·0)·π と読む）
+#               最後は real_minus_zero_is_self (a → 0)。2·0·π は (2·0)·π と読む）
 #   arg(z^2): pr_2 の中の半径 0·0 = 0（real_zero_times_is_zero (x → 0)）、0 = 2·0（real_times_zero_is_zero (x → 2) を右辺から左辺へ）
 R.<pi_> = PolynomialRing(QQ)
 z = R(0)
