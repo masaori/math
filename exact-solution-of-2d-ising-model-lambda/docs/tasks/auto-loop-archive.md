@@ -1,4 +1,7 @@
 - 現在地: **2026-11-15（主経路）、横断幅を超えて離した周期持ち上げの非交差を Lean 具体版で直接示した。** 整数帯の上下界から座標の狭義不等式を導き、必要十分版への委譲を一件外した。次は担当表の先頭「一側閉包・周期持ち上げ・階段の他の具体版の委譲」を一件ずつ進める。
+- 前進の記録: 2026-11-15: 並列の表の先頭「熱力学極限の段の Lean 二版」の次の対象「有理点での四つの符号付き偶部分グラフ多項式の符号」を、軌道因子の符号・モード $(1,1)$ の所属・積の符号の合成の三つの論法に割り、因子の段の Lean 三件（`KacWard/SignedEvenSubgraphRationalSignFactors.lean`・`NecSuf/KacWard/SignedEvenSubgraphRationalSignFactors.lean`・`KacWard/SignedEvenSubgraphRationalSignFactorsFromNecSuf.lean`）を置いた。残る二段を並列の表の先頭の二行にした。
+- レビュー記録: 2026-11-15（並列）: 「有理点での四つの符号付き偶部分グラフ多項式の符号」の証明が、二元・四元軌道の因子の正値を「分散因子の正値性により正」と一文で済ませていた。引く主張が与えるのは $0<_R(q^2+2q-1)^2\le_R\Delta(q;\varpi,\varsigma)$ で、$0<_R\Delta_O(q)$ には元の選択に依らないことと推移律 `claim_real_algebraic_order_transitive` の二つの根拠が欠けていた。三行の式鎖と等号・狭義の場合分けに直し（主張は不変）、SageMath に `check_orbit_dispersion_chain.sage`（各軌道の全ての元での三行。PASS）を足した。
+- 現在地: **2026-11-15（主経路）、周期持ち上げ一周期の循環隣接和を Lean 具体版で直接示した。** 有限和の末尾を剰余類の零番目へ戻し、必要十分版への委譲を一件外した。次は担当表の先頭「整数帯の上端から延ばす平行階段と周期持ち上げの非交差」の委譲を外す。
 - レビュー記録: 2026-11-15（並列）: 「符号付き偶部分グラフ多項式の軌道ごとの明示積」の定数項の式鎖の二行目が、本文に節の無い「有限積の定数項は各因子の定数項の積」を根拠にしていたので、`def_qbar_polynomial_ring` の積の係数 $\mathrm{ac}_0(fg)=\mathrm{ac}_0(f)\mathrm{ac}_0(g)$ を因子ごとに繰り返す形の根拠へ直した（式は不変）。定数項の四行と $P=Q$ の同定に対応する検算が無かったので、SageMath に `check_constant_term_and_identification.sage` を足した（辺長一〜四の定数項の各行、辺長一・二で偶部分グラフから作った $Q^{a,b}_L$ との係数の一致。PASS）。
 - 前進の記録: 2026-11-15: 並列の表の先頭「軌道ごとの明示積の Lean 二版の合成」を済ませ、行を消した。論法は定数項の式鎖と一意性の一つなので割らなかった。具体版 `KacWard/SignedEvenSubgraphOrbitProduct.lean`・必要十分版 `NecSuf/KacWard/SignedEvenSubgraphOrbitProduct.lean`・導出版 `KacWard/SignedEvenSubgraphOrbitProductFromNecSuf.lean` を置き、本文 `claim_signed_even_subgraph_orbit_product` の `lean:` に平方の段の三件と合わせて七件を登録した。
 - レビュー記録: 2026-11-15（主経路）: 「反転平行階段の循環総回転数」の本文と Lean 具体版を照合した。隣接差の三場合、添字反転、二つの接合での寄与の順序は一致していた。
@@ -243,6 +246,7 @@
 - 2026-11-13: 「符号は合成について乗法的である」の本文は線型順序を持つ任意の有限集合 $\mathcal J$ の上で述べるのに、SageMath の検算（`check.sage`）は $\mathcal J$ を行配位に取った場合だけで、Lean 具体版も行配位に限っていた。本文は不変。$\mathcal J=\{0,\dots,n-1\}$ に全ての線型順序（$n\le4$）と三つの順序（$n=5$）を載せ、証明の各段（$\Psi$ の全単射性、$|A|,|B|,|C|$、各対の偶数性、三つの符号の積、乗法性）を確かめる `check_general_finite_ordered_set.sage` を足した（57,249 組、三分律を崩した関係で乗法性が崩れる否定の対照を含む）。
 
 ## 前進の記録
+- 2026-11-15: 主経路の先頭から横断平行移動の座標等式を一論法として進め、Lean 具体版で整数の分配則を直接示し、必要十分版への委譲を一件外した。残る非交差の論法を担当表の先頭へ割り出した。
 
 - 2026-11-14: 並列の表の先頭「辺の重複がない閉歩道の位相は二次符号と横断数で決まることの Lean 二版」を済ませ、行を消した。具体版 `KacWard/EdgeDistinctWalkQuadraticSign.lean`、必要十分版 `NecSuf/KacWard/EdgeDistinctWalkQuadraticSign.lean`（体を仮定。逆元は負の回転数の冪に、可換性は符号を有限積の外へ出すのに要る）、導出版 `EdgeDistinctWalkQuadraticSignFromNecSuf.lean` を置き、本文 `claim_edge_distinct_walk_quadratic_sign` の `lean:` に登録した。
 

@@ -183,14 +183,19 @@ theorem windingParallelStaircase_above_band_avoids_periodicPlaneLift
       (periodicPlaneLift m base L wv wh k) ≤ Kmax)
     (s : ℕ) (hs : s ≤ L * wh.natAbs + L * wv.natAbs) (k : ℤ) :
     Q + windingParallelStaircase L wh wv s ≠ periodicPlaneLift m base L wv wh k := by
-  apply translatedPath_above_upper_avoids_family_necSuf
-    (windingParallelStaircase L wh wv) (periodicPlaneLift m base L wv wh) Q
-    (windingTransverseCoordinate wh wv) (L * wh.natAbs + L * wv.natAbs)
-    (-(L : ℤ) * |wh * wv|) Kmax
-  · intro r hr
-    exact (windingParallelStaircase_transverse_between L wh wv r hr).1
-  · simpa [sub_eq_add_neg, add_comm] using hbase
-  · exact hupper
-  · exact hs
+  -- 本文の「幅の下界」から、平行移動した階段の横断座標を下から押さえる。
+  have hstep := (windingParallelStaircase_transverse_between L wh wv s hs).1
+  have htranslated :
+      windingTransverseCoordinate wh wv Q - (L : ℤ) * |wh * wv| ≤
+        windingTransverseCoordinate wh wv (Q + windingParallelStaircase L wh wv s) := by
+    rw [map_add]
+    nlinarith only [hstep]
+  -- 基点の帯外条件と持ち上げの帯上界を順に適用する。
+  have habove : Kmax <
+      windingTransverseCoordinate wh wv (Q + windingParallelStaircase L wh wv s) :=
+    lt_of_lt_of_le hbase htranslated
+  intro heq
+  rw [heq] at habove
+  exact (not_lt_of_ge (hupper k)) habove
 
 end Ising2DLambda.KacWard
