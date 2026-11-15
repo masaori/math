@@ -849,8 +849,10 @@ b
 &&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})\\
 &= (a-0,\ 0+b)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
+&= (a,\ 0+b)
+&&(\because\ \blkref{real_minus_zero_is_self}\ (a\to a))\\
 &= (a,b)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
 \end{aligned}`,
       ),
       paragraph(["であり、また"]),
@@ -1155,6 +1157,7 @@ b
           "根拠の書かれていなかった段（1 が積の単位元、0 を因子にもつ積が 0、和の逆元、約分など）を" +
           "それぞれ独立した段として明示した。段は増えており、減った段は無い。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖・平方和の同値の a = b = 0 の鎖・1_C の平方和の鎖の「ℝ では 0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの後ろのブロック）の参照に替えた。平方を積に開く段は square_of_real_number_is_product の参照の行に、1 は積の単位元と 0 を因子にもつ積を束ねた行は 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の最後の行 (a − 0, 0 + b) = (a, b) は、体の公理でない a − 0 = a と和の単位元 0 + b = b を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
       ],
     },
   },
@@ -1297,8 +1300,10 @@ b
 &&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
 &= \bigl((-1)a-0,\ (-1)b+0\bigr)
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
+&= \bigl((-1)a,\ (-1)b+0\bigr)
+&&(\because\ \blkref{real_minus_zero_is_self}\ (a\to (-1)a))\\
 &= \bigl((-1)a,\ (-1)b\bigr)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})\\
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
 &= (-a,-b)
 &&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})
 \end{aligned}`,
@@ -1414,6 +1419,7 @@ b
           "加法が明示されていない。体であることを述べるには加法が必要なので、" +
           "本証明では RR^2 の成分ごとの加法を採ることを冒頭で明示した。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: -z と (-1_C)·z の一致の鎖の最後の行が「1 は積の単位元、0 を因子にもつ積は 0、0 は和の単位元」を 1 行で当てていたので、real_zero_times_is_zero（同じファイルの後ろのブロック）の参照の行・0 は和の単位元の行・1 は積の単位元の行の 3 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の ((−1)a − 0, (−1)b + 0) = ((−1)a, (−1)b) の行は、体の公理でない a − 0 = a と和の単位元 x + 0 = x を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → (−1)a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
       ],
     },
   },

@@ -1,7 +1,8 @@
 # 対象ラベル: multiplicative_group_of_cc
-# 証明の三つの鎖のうち、0 を因子にもつ積を real_times_zero_is_zero・real_zero_times_is_zero の参照へ替えた行を、
+# 証明の三つの鎖のうち、0 を因子にもつ積を real_times_zero_is_zero・real_zero_times_is_zero の参照へ、
+# a − 0 = a を real_minus_zero_is_self の参照へ替えた行を、
 # QQ[a, b] の多項式として一行ずつ比べる（浮動小数点を使わない）。
-#   積の単位元:          (a,b)·1_C = (a,b)(1,0) = (a·1 − b·0, a·0 + b·1) = (a − b·0, a·0 + b) = (a − 0, 0 + b) = (a, b)
+#   積の単位元:          (a,b)·1_C = (a,b)(1,0) = (a·1 − b·0, a·0 + b·1) = (a − b·0, a·0 + b) = (a − 0, 0 + b) = (a, 0 + b) = (a, b)
 #   a = b = 0 の平方和:  a² + b² = 0² + 0² = 0·0 + 0·0 = 0 + 0 = 0
 #   1_C の平方和:        1² + 0² = 1·1 + 0·0 = 1 + 0·0 = 1 + 0 = 1
 R.<a, b> = PolynomialRing(QQ)
@@ -15,9 +16,12 @@ rows = [cmul((a, b), (R(1), R(0))),
         (a * 1 - b * 0, a * 0 + b * 1),
         (a - b * 0, a * 0 + b),        # 1 は積の単位元を 2 箇所へ
         (a - 0, 0 + b),                # real_times_zero_is_zero (x -> b, x -> a)
-        (a, b)]                        # 0 は和の単位元を 2 箇所へ
+        (a, 0 + b),                    # real_minus_zero_is_self (a -> a)
+        (a, b)]                        # 0 は和の単位元
 assert all(x == y for x, y in zip(rows, rows[1:]))
 assert b * 0 == 0 and a * 0 == 0       # real_times_zero_is_zero の二つの具体化
+assert a - 0 == a                      # real_minus_zero_is_self の具体化
+assert -R(0) == 0                      # その証明が引く real_negation_of_zero_is_zero
 
 # a = b = 0 の平方和の鎖
 h = {a: 0, b: 0}
