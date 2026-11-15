@@ -18,9 +18,11 @@
   `⟨(X i k).re, (X i k).im⟩` と書く（構造体の η で `X i k` と定義上等しい）。`0_ℂ = (0,0)`（`inclusion_rr_to_cc`）も定義上の等号である。
 * `matrix_plus_zero_matrix`・`zero_matrix_plus_matrix` の成分の鎖の 7 行は、`matrix_add_zero_matrix_apply`・`zero_matrix_add_matrix_apply` の
   `calc` の 7 段と 1 対 1 である。最後の「行列の等号は成分ごと」は `Matrix.ext`。
-* `matrix_minus_zero_matrix` の成分の鎖の 10 行は `matrix_sub_zero_matrix_apply` の 10 段と 1 対 1 である。
+* `matrix_minus_zero_matrix` の成分の鎖の 13 行は `matrix_sub_zero_matrix_apply` の 13 段と 1 対 1 である。
   人手の `-0_ℂ = (-1_ℂ)·0_ℂ`（`multiply_by_minus_one`）は、Lean の `ℂ` の符号反転が積で定義されていないので `neg_one_mul` で出す。
-  `(-1_ℂ, 0_ℂ) = ((-1,0),(0,0))`（`inclusion_rr_to_cc`）と `ℝ` の四則の段は、構造体の欄ごとの等号（`Complex.ext`）で出す。
+  `(-1_ℂ, 0_ℂ) = ((-1,0),(0,0))`（`inclusion_rr_to_cc`）の段は、構造体の欄ごとの等号（`Complex.ext`）で出す。
+  組の積の後の 4 段は、人手の 4 行どおり `real_times_zero_is_zero`（`x → -1` を 2 箇所へ）・`real_zero_times_is_zero`（`x → 0` を 2 箇所へ）・
+  `real_minus_zero_is_self`（`a → 0`）・`ℝ` の `0 + 0 = 0`（`add_zero`）で、組の欄ごとに書き換える。
   続く `X - O = X + O = X` の 2 行は `matrix_sub_zero_matrix` の 2 段である。
 * `finite_sum_of_zero_matrices` の帰納法は、Lean では `r + 1` 項の和（`Fin (r + 1)` の上の和）について `r` の帰納法で書く。
   人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。`def_finite_sum_of_matrices` の 2 つの式（`Σ_{j=1}^{1} X_j = X_1` と
@@ -29,6 +31,9 @@
 * 人手の `m, n ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す（成分が無いだけで、どの主張もそのまま成り立つ）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
 import Mathlib.Algebra.BigOperators.Fin
 
 namespace Ising2D
@@ -84,7 +89,12 @@ theorem matrix_sub_zero_matrix_apply {m n : ℕ} (X : Matrix (Fin m) (Fin n) ℂ
         congr 1
         exact congrArg₂ (· * ·) (Complex.ext (by simp) (by simp)) rfl             -- `inclusion_rr_to_cc`
     _ = X i k + ⟨(-1) * 0 - 0 * 0, (-1) * 0 + 0 * 0⟩ := rfl                       -- `definition_of_cc` の積
-    _ = X i k + ⟨0, 0⟩ := by congr 1; exact Complex.ext (by simp) (by simp)        -- `ℝ` の四則
+    _ = X i k + ⟨0 - 0 * 0, 0 + 0 * 0⟩ := by
+        rw [real_times_zero_is_zero (-1)]                                          -- `real_times_zero_is_zero` を 2 箇所へ（`x → -1, -1`）
+    _ = X i k + ⟨0 - 0, 0 + 0⟩ := by
+        rw [real_zero_times_is_zero 0]                                             -- `real_zero_times_is_zero` を 2 箇所へ（`x → 0, 0`）
+    _ = X i k + ⟨0, 0 + 0⟩ := by rw [real_minus_zero_is_self 0]                    -- `real_minus_zero_is_self`（`a → 0`）
+    _ = X i k + ⟨0, 0⟩ := by rw [add_zero (0 : ℝ)]                                 -- `ℝ` で `0 + 0 = 0`
     _ = X i k + 0 := rfl                                                           -- `inclusion_rr_to_cc`
     _ = X i k + (0 : Matrix (Fin m) (Fin n) ℂ) i k := by rw [matrix_zero_apply]    -- `def_zero_matrix`
     _ = (X + 0) i k := (matrix_sum_apply _ _ _ _).symm                             -- `def_matrix_sum`

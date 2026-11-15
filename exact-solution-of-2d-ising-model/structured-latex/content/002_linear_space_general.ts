@@ -473,8 +473,14 @@ export default defineBlocks([
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
 &= X_{ik} + \bigl((-1)\cdot 0 - 0 \cdot 0,\ (-1)\cdot 0 + 0 \cdot 0\bigr)
 &&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= X_{ik} + \bigl(0 - 0 \cdot 0,\ 0 + 0 \cdot 0\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ \text{を 2 箇所へ}\ (x \to -1,\ x \to -1)\bigr)\\
+&= X_{ik} + (0 - 0,\ 0 + 0)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to 0,\ x \to 0)\bigr)\\
+&= X_{ik} + (0,\ 0 + 0)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= X_{ik} + (0,0)
-&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
 &= X_{ik} + 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
 &= X_{ik} + O_{ik}
@@ -500,6 +506,7 @@ X - O
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列を引いても変わらない」と名前だけで根拠にしていたので、引けるよう足した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 成分の鎖の 7 行目の名前だけの根拠「ℝ の四則」（0 を掛けると 0・0 − 0 = 0・0 + 0 = 0 の 3 つの事実を 1 行で使っていた）を、real_times_zero_is_zero を 2 箇所へ（x → −1, −1）・real_zero_times_is_zero を 2 箇所へ（x → 0, 0）・real_minus_zero_is_self（a → 0）・「ℝ で 0 + 0 = 0」の 4 行に割った（鎖の両端と主張は不変）。",
       ],
     },
   },
@@ -8568,8 +8575,14 @@ u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
 &&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
 &= (xy-0\cdot 0,\ x\cdot 0+0\cdot y)
 &&(\because \text{複素数の積の定め方}) \\
+&= (xy-0\cdot 0,\ 0+0\cdot y)
+&&(\because \blkref{real_times_zero_is_zero}\ (x \to x)) \\
+&= (xy-0,\ 0+0)
+&&(\because \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to 0,\ x \to y)) \\
+&= (xy,\ 0+0)
+&&(\because \blkref{real_minus_zero_is_self}\ (a \to xy)) \\
 &= (xy,0)
-&&(\because 0 \text{ を掛けた項が消えること}) \\
+&&(\because \mathbb{R}\ \text{で}\ 0 + 0 = 0) \\
 &= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
 &&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
 \end{aligned}`,
@@ -8875,6 +8888,7 @@ R^2
         "2026-09-04: 式変形の書き方の統一。Step 6 の最後の等号の根拠が式変形の後の" +
           "散文段落に置かれていたので、その行の末尾の (∵ …) へ移した" +
           "（Step 3 の c=-1 と |-1|=1 の参照を含む）。内容と根拠は変えていない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 1 の ι_{ℝ→ℂ} が積を保つ鎖の 3 行目の名前だけの根拠「0 を掛けた項が消えること」（0 を掛けると 0・xy − 0 = xy・0 + 0 = 0 を 1 行で使っていた）を、real_times_zero_is_zero（x → x）・real_zero_times_is_zero を 2 箇所へ（x → 0, y）・real_minus_zero_is_self（a → xy）・「ℝ で 0 + 0 = 0」の 4 行に割った（鎖の両端は不変）。",
       ],
     },
   },
@@ -9106,10 +9120,46 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
 &&(\because\ \text{行列の積の定義})\\
 &=\sum_{k=1}^{n}a_{ik}\cdot 0
 &&(\because\ W\ \text{の第 2 列以降の定め方})\\
-&=0
-&&(\because\ 0\ \text{を掛けた項だけの有限和は}\ 0)
+&=\sum_{k=1}^{n}0
+&&(\because\ K=\mathbb{R}\ \text{なら}\ \blkref{real_times_zero_is_zero}\text{、}K=\mathbb{C}\ \text{なら}\ \blkref{complex_times_zero_is_zero}\ \text{を各項へ}\ (x \to a_{ik},\ z \to a_{ik}))
 \end{aligned}`),
-      paragraph(["である。これを使って"]),
+      paragraph([
+        "である（",
+        math(String.raw`W`),
+        " の成分と各項の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`K`),
+        " の 0 で、",
+        math(String.raw`K=\mathbb{C}`),
+        " のときは ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " である）。右辺の有限和は、",
+        math(String.raw`K=\mathbb{C}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}0_{\mathbb{C}}
+&=0_{\mathbb{C}}
+&&(\because\ \blkref{finite_sum_of_complex_zeros}\ (m \to n))
+\end{aligned}`),
+      paragraph([
+        "、",
+        math(String.raw`K=\mathbb{R}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}0
+&=\iota_{\mathbb{Z}\to\mathbb{R}}(n)\cdot 0
+&&(\because\ \blkref{finite_sum_of_constant_real_number}\ (m \to n,\ r \to 0))\\
+&=0
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x \to \iota_{\mathbb{Z}\to\mathbb{R}}(n)))
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        math(String.raw`(AW)_{ij}=0`),
+        " である。これを使って",
+      ]),
       displayMath(String.raw`\begin{aligned}
 \|AW\|
 &=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
@@ -9168,6 +9218,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         "2026-09-02: 三つの鎖の直後に置いていた参照一覧（ノルムの定義・ノルムの基本性質の Step 1・" +
           "劣乗法性）を削り、それらを実際に使う各行末の (∵ …) の \\blkref へ移した" +
           "（blkref が使えるようになったため）。内容・式変形・根拠・参照は不変である。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 第 2 列以降の成分の鎖の最後の行「Σ a_{ik}·0 = 0」の根拠「0 を掛けた項だけの有限和は 0」（右から 0 を掛けると 0 と、0 だけの有限和は 0 の 2 つの事実を 1 行で使っていた）を割った。鎖は Σ 0 で止め、各項を 0 にする行を K = ℝ なら real_times_zero_is_zero、K = ℂ なら complex_times_zero_is_zero の参照にし、Σ 0 = 0 を K = ℂ は finite_sum_of_complex_zeros、K = ℝ は finite_sum_of_constant_real_number と real_times_zero_is_zero の鎖で示した（(AW)_{ij} = 0 という結論は不変）。",
       ],
     },
   },

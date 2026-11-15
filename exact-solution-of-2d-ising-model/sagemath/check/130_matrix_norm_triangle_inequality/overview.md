@@ -16,6 +16,7 @@
 |---|---------|---------|-------|------------|-----------|
 | 01 | `check_01_norm_axioms.sage` | ノルムの公理と等号条件 | 415 | 3.320e-16 | **PASS** |
 | 02 | `check_02_limit_uniqueness.sage` | (4) 極限の一意性（証明の骨格 ‖A−A'‖ ≤ ‖A_N−A‖+‖A_N−A'‖） | 70 | 0.000e+00 | **PASS** |
+| 03 | `check_03_real_inclusion_product_chain.sage` | Step 1 の ι_{ℝ→ℂ} が積を保つ鎖の 8 項（0 を掛ける行を real_times_zero_is_zero・real_zero_times_is_zero・real_minus_zero_is_self・ℝ の 0 + 0 = 0 の 4 行に割った形）が隣り合って等しいこと。QQ[x, y] の厳密計算。否定コントロール付き | 7 | 厳密 | **PASS** |
 
 許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない。
 

@@ -10,7 +10,7 @@
 | --- | --- |
 | `matrix_add_zero_matrix_apply`（和の定義 → 零行列の定義 → 成分を実数の組に開く → 組の和 → `ℝ` の `a + 0 = a` → 組を閉じる） | `add_zero_matrix_apply`（和の定義 → 零行列の定義 → `x + 0 = x`） |
 | `zero_matrix_add_matrix_apply`（同じ並びで左から足す） | `zero_add_matrix_apply` |
-| `matrix_sub_zero_matrix_apply`（差の定義 → 零行列の定義 → 複素数の差 → `-0 = (-1)·0` → 組に開く → 組の積 → `ℝ` の四則 → 組を閉じる → 零行列の定義 → 和の定義）と `matrix_sub_zero_matrix` | `sub_zero_matrix_apply`（差の定義 → 零行列の定義 → `x - y = x + (-y)` → `-0 = 0` → 零行列の定義 → 和の定義）と `sub_zero_matrix` |
+| `matrix_sub_zero_matrix_apply`（差の定義 → 零行列の定義 → 複素数の差 → `-0 = (-1)·0` → 組に開く → 組の積 → `ℝ` の `x·0 = 0`・`0·x = 0`・`a − 0 = a`・`0 + 0 = 0` → 組を閉じる → 零行列の定義 → 和の定義）と `matrix_sub_zero_matrix` | `sub_zero_matrix_apply`（差の定義 → 零行列の定義 → `x - y = x + (-y)` → `-0 = 0` → 零行列の定義 → 和の定義）と `sub_zero_matrix` |
 | `finite_sum_of_zero_matrices`（有限和の定義の 2 式 → 帰納法の仮定 → `matrix_plus_zero_matrix`） | `sum_zero_matrices` |
 
 ## 何が効いているか / 効いていないか

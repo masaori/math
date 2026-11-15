@@ -1,7 +1,10 @@
 # 対象ラベル: matrix_minus_zero_matrix（X - O = X）
 # 証明の成分ごとの鎖の各行を、行に書かれた式どおりに別々に組み、隣り合う項が等しいことを確かめる。
 #   (X - O)_ik = X_ik - O_ik = X_ik - 0_C = X_ik + (-0_C) = X_ik + (-1_C)·0_C = X_ik + (-1,0)·(0,0)
-#              = X_ik + ((-1)·0 - 0·0, (-1)·0 + 0·0) = X_ik + (0,0) = X_ik + 0_C = X_ik + O_ik = (X + O)_ik
+#              = X_ik + ((-1)·0 - 0·0, (-1)·0 + 0·0) = X_ik + (0 - 0·0, 0 + 0·0) = X_ik + (0 - 0, 0 + 0)
+#              = X_ik + (0, 0 + 0) = X_ik + (0,0) = X_ik + 0_C = X_ik + O_ik = (X + O)_ik
+# 積の式の後の 4 行は real_times_zero_is_zero（x → -1 を 2 箇所へ）・real_zero_times_is_zero（x → 0 を 2 箇所へ）・
+# real_minus_zero_is_self（a → 0）・ℝ で 0 + 0 = 0 で、各行の式を書かれたとおりに組む。
 # 続く鎖 X - O = X + O = X の第 2 段は matrix_plus_zero_matrix（その check で確かめた）。ここでは行列として X + O = X も見る。
 # 複素数は definition_of_cc のとおり実数の組で持ち、和・積はその式で組む。差は def_complex_difference、
 # 符号反転は multiply_by_minus_one のとおり (-1_C)· で組む。
@@ -43,7 +46,10 @@ for m in [1, 2, 3]:
                     cc_add(x, cc_mul((P(-1), P(0)), zero)),                # X_ik + (-1_C)·0_C
                     cc_add(x, cc_mul((P(-1), P(0)), (P(0), P(0)))),        # X_ik + (-1,0)·(0,0)
                     cc_add(x, ((-1) * P(0) - P(0) * P(0), (-1) * P(0) + P(0) * P(0))),  # 積の式
-                    cc_add(x, (P(0), P(0))),                               # X_ik + (0,0)
+                    cc_add(x, (P(0) - P(0) * P(0), P(0) + P(0) * P(0))),   # real_times_zero_is_zero を 2 箇所へ
+                    cc_add(x, (P(0) - P(0), P(0) + P(0))),                 # real_zero_times_is_zero を 2 箇所へ
+                    cc_add(x, (P(0), P(0) + P(0))),                        # real_minus_zero_is_self
+                    cc_add(x, (P(0), P(0))),                               # X_ik + (0,0)（ℝ で 0 + 0 = 0）
                     cc_add(x, zero),                                       # X_ik + 0_C
                     cc_add(x, O[i, k]),                                    # X_ik + O_ik
                     XplusO[i, k],                                          # (X + O)_ik

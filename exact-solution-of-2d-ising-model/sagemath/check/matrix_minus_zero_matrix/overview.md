@@ -7,13 +7,13 @@
 - ファイル: `structured-latex/content/002_linear_space_general.ts`
 - ブロック: `linear_space_general_claim_matrix_minus_zero_matrix`
 - 主張: `X ∈ Mat(m,n,ℂ)` について `X - O = X`
-- 範囲: 証明の成分ごとの鎖の 10 行と、続く `X - O = X + O = X` の 2 行
+- 範囲: 証明の成分ごとの鎖の 13 行と、続く `X - O = X + O = X` の 2 行
 
 ## チェック一覧
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---------|---------|-----------|------|
-| check_steps.sage | 複素数の差を `def_complex_difference`、符号反転を `multiply_by_minus_one`、積を `definition_of_cc` の式どおりに組み、成分の鎖の 11 個の項が隣り合って等しいこと。`X - O = X + O` と `X + O = X` が成分ごとに成り立つこと。独立な経路として Sage の行列の差でも確かめた。否定コントロール: 零でない数を引くと変わる | PASS | すべて一致 |
+| check_steps.sage | 複素数の差を `def_complex_difference`、符号反転を `multiply_by_minus_one`、積を `definition_of_cc` の式どおりに組み、成分の鎖の 14 個の項が隣り合って等しいこと（2026-11-15 に、積の式の後の「ℝ の四則」の 1 行を 4 行に割ったのに合わせて項を 3 つ足した）。`X - O = X + O` と `X + O = X` が成分ごとに成り立つこと。独立な経路として Sage の行列の差でも確かめた。否定コントロール: 零でない数を引くと変わる | PASS | すべて一致 |
 
 ## 備考
 
@@ -27,4 +27,4 @@
 bash sagemath/tools/run-all-checks.sh matrix_minus_zero_matrix
 ```
 
-実行ログは `logs/` に保存してある（2026-11-01）。
+実行ログは `logs/` に保存してある（2026-11-15）。
