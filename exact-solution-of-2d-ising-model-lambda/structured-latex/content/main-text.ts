@@ -83689,14 +83689,14 @@ D^{a,b}_L(x)
 &=(\alpha+\gamma)-(\beta+\delta)\omega
 &&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の一意表示}\bigr)\\
 &=\operatorname{conj}_R(z)+\operatorname{conj}_R(w)
-&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr),\\
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
 \operatorname{conj}_R(zw)
 &=(\alpha\gamma-\beta\delta)-(\alpha\delta+\beta\gamma)\omega
 &&\bigl(\because\ \omega^2=-1\text{ と一意表示}\bigr)\\
 &=(\alpha-\beta\omega)(\gamma-\delta\omega)
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
 &=\operatorname{conj}_R(z)\operatorname{conj}_R(w)
-&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr).
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`r\in R`), " の表示は ", math(String.raw`r+0\omega`),
@@ -83707,14 +83707,14 @@ D^{a,b}_L(x)
 &=r-0\omega
 &&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
 &=r
-&&\bigl(\because\ R\text{ の零元}\bigr),\\
+&&\bigl(\because\ R\text{ の零元}\bigr)\\
 \operatorname{conj}_R(\operatorname{conj}_R(z))
 &=\operatorname{conj}_R(\alpha-\beta\omega)
 &&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
 &=\alpha+\beta\omega
 &&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
 &=z
-&&\bigl(\because\ z\text{ の表示}\bigr).
+&&\bigl(\because\ z\text{ の表示}\bigr)
 \end{aligned}`),
                   paragraph(["従って、この写像は全単射である。加法・乗法と単位元を保つので体の自己同型である。"]),
                   paragraph([
@@ -83725,7 +83725,7 @@ D^{a,b}_L(x)
 N&=(\alpha+\beta\omega)(\alpha-\beta\omega)
 &&\bigl(\because\ N\text{ と }\operatorname{conj}_R\text{ の定義}\bigr)\\
 &=\alpha^2+\beta^2
-&&\bigl(\because\ \omega^2=-1\text{ と分配律}\bigr),\\
+&&\bigl(\because\ \omega^2=-1\text{ と分配律}\bigr)\\
 N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
 &&\bigl(\because\ N\text{ の定義}\bigr)\\
 &=\zeta^n\operatorname{conj}_R(\zeta)^n
@@ -83735,7 +83735,7 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
 &=1\cdot\operatorname{conj}_R(1)
 &&\bigl(\because\ \zeta\in\mu_n,\ \blkref{def_root_of_unity_set}\bigr)\\
 &=1
-&&\bigl(\because\ 1\in R\text{ と }\operatorname{conj}_R(r)=r\bigr).
+&&\bigl(\because\ 1\in R\text{ と }\operatorname{conj}_R(r)=r\bigr)
 \end{aligned}`),
                   paragraph([
                     "よって ", math(String.raw`N=\alpha^2+\beta^2\in R`), " かつ ",
@@ -83768,7 +83768,7 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
 &=(c\cdot c)(u\cdot u)
 &&\bigl(\because\ N=c\cdot c,\ N^m-1=u\cdot u\bigr)\\
 &=(cu)\cdot(cu)
-&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr).
+&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`R`), " は体なので ", math(String.raw`cu\ne0`),
@@ -83800,7 +83800,7 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
 &=(c\cdot c)(u\cdot u)
 &&\bigl(\because\ N=c\cdot c,\ 1-N^m=u\cdot u\bigr)\\
 &=(cu)\cdot(cu)
-&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr).
+&&\bigl(\because\ R\text{ の乗法の結合・交換法則}\bigr)
 \end{aligned}`),
                   paragraph([
                     "前の場合と同じく ", ref("def_real_algebraic_strict_order"), " と ",
@@ -83814,7 +83814,7 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \alpha^2+\beta^2&=N&&\bigl(\because\ N\text{ の計算}\bigr)\\
-&=1&&\bigl(\because\ \text{三分法による結論}\bigr),\\
+&=1&&\bigl(\because\ \text{三分法による結論}\bigr)\\
 \zeta^{-1}&=\zeta^{-1}N
 &&\bigl(\because\ N=1\bigr)\\
 &=\zeta^{-1}(\zeta\operatorname{conj}_R(\zeta))
@@ -83822,7 +83822,7 @@ N^n&=(\zeta\operatorname{conj}_R(\zeta))^n
 &=\operatorname{conj}_R(\zeta)
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の結合法則と }\zeta^{-1}\zeta=1\bigr)\\
 &=\alpha-\beta\omega
-&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr).
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)
 \end{aligned}`),
                 ],
               },
