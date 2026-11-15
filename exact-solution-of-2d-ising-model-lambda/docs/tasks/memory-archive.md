@@ -12952,3 +12952,4 @@ READMEのOnsager閉形式へ、四ねじれ平方恒等式・有限Fourier・共
 2026-11-14（並列）: 非零項の位相が補辺の二次符号と短い対の横断数で決まる主張を Lean 具体版・必要十分版・導出版で合成し、本文に登録した（`KacWard/TaggedMatchingQuadraticCrossingWeight.lean`）。閉路の辺の無向辺と補辺の全単射を示した。本文に補辺の切断線偶奇の定義式を足した。
 
 2026-11-14（並列）: Pfaffian の式鎖で書かれていなかった、補辺の切断線偶奇 $h(P),v(P)$ と巻き付き偶奇 $\varepsilon_{L,\mathrm h}(P),\varepsilon_{L,\mathrm v}(P)$ の一致を本文の主張二つにし、SageMath・Lean 具体版・必要十分版・導出版で示した（`KacWard/EdgeSetSeamWindingParity.lean`）。
+2026-11-15（主経路）: 周期持ち上げ一周期の循環隣接和の具体版で、末尾の項を剰余類へ戻す補題を整数上で直接示し、委譲を一件外した。本文の歩ベクトルの式鎖末尾から句点を除いた。
