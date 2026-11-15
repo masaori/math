@@ -72588,7 +72588,8 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                         "上り階段の基点について",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-Q_1&=S+cB_{\gamma}
+Q_1
+&=S+cB_{\gamma}
 &&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第二部分の始点}\bigr)
 \end{aligned}`),
                       paragraph([
