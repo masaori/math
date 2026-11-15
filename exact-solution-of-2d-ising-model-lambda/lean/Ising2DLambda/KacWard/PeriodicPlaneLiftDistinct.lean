@@ -13,8 +13,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 /-- 整数格子点を一辺 `L` のトーラスの剰余類へ射影する。 -/
 def residuePoint (L : ℕ) (p : ℤ × ℤ) : ZMod L × ZMod L :=
   ((p.1 : ZMod L), (p.2 : ZMod L))
@@ -26,8 +24,7 @@ def windingShift (L : ℕ) (wv wh : ℤ) : ℤ × ℤ :=
 /-- `def_periodic_plane_lift`。整数の除法の商と余りで一周期の持ち上げを延長する。 -/
 def periodicPlaneLift
     (m : ℕ) (base : ℤ → ℤ × ℤ) (L : ℕ) (wv wh : ℤ) (k : ℤ) : ℤ × ℤ :=
-  periodicLiftCore base (windingShift L wv wh) (fun t => t / (m : ℤ))
-    (fun t => t % (m : ℤ)) k
+  base (k % (m : ℤ)) + (k / (m : ℤ)) • windingShift L wv wh
 
 /-- 周期並進は格子剰余への射影で消える。 -/
 lemma residuePoint_add_windingShift
@@ -70,12 +67,26 @@ theorem periodicPlaneLift_injective
       residuePoint L (base (k % (m : ℤ))) = residuePoint L (base (k' % (m : ℤ))) →
         k % (m : ℤ) = k' % (m : ℤ)) :
     Function.Injective (periodicPlaneLift m base L wv wh) := by
-  apply periodic_lift_injective_necSuf base (windingShift L wv wh)
-    (fun t => t / (m : ℤ)) (fun t => t % (m : ℤ)) (residuePoint L)
-  · intro r q
-    exact residuePoint_add_windingShift L (base r) q wv wh
-  · exact hbase
-  · exact windingShift_zsmul_eq_zero_imp L hL wv wh hwind
-  · exact edivEmodPair_injective m hm
+  intro k k' heq
+  have hprojectionEq :
+      residuePoint L (base (k % (m : ℤ))) =
+        residuePoint L (base (k' % (m : ℤ))) := by
+    rw [← residuePoint_add_windingShift L (base (k % (m : ℤ)))
+      (k / (m : ℤ)) wv wh]
+    rw [← residuePoint_add_windingShift L (base (k' % (m : ℤ)))
+      (k' / (m : ℤ)) wv wh]
+    exact congrArg (residuePoint L) heq
+  have hrem : k % (m : ℤ) = k' % (m : ℤ) := hbase k k' hprojectionEq
+  have hshiftEq :
+      (k / (m : ℤ)) • windingShift L wv wh =
+        (k' / (m : ℤ)) • windingShift L wv wh := by
+    simpa [periodicPlaneLift, hrem] using heq
+  have hshiftZero :
+      (k / (m : ℤ) - k' / (m : ℤ)) • windingShift L wv wh = 0 := by
+    rw [sub_smul]
+    exact sub_eq_zero.mpr hshiftEq
+  have hquot : k / (m : ℤ) = k' / (m : ℤ) :=
+    sub_eq_zero.mp (windingShift_zsmul_eq_zero_imp L hL wv wh hwind _ hshiftZero)
+  exact edivEmodPair_injective m hm (Prod.ext hquot hrem)
 
 end Ising2DLambda.KacWard

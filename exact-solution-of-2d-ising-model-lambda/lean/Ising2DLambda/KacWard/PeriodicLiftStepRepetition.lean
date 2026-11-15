@@ -14,7 +14,7 @@ theorem periodicPlaneLift_translate
   calc
     periodicPlaneLift m base L wv wh (j + a * m) =
         base (j % m) + (j / m + a) • windingShift L wv wh := by
-      simp only [periodicPlaneLift, periodicLiftCore, hquot, hrem]
+      simp only [periodicPlaneLift, hquot, hrem]
     _ = base (j % m) + ((j / m) • windingShift L wv wh + a • windingShift L wv wh) :=
       by rw [add_zsmul]
     _ = (base (j % m) + (j / m) • windingShift L wv wh) + a • windingShift L wv wh :=

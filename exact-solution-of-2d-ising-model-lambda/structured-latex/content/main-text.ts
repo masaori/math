@@ -70892,8 +70892,14 @@ t_{\circ}(\gamma)
                         "）と書き、", math(String.raw`\widetilde P_k(\gamma)=\widetilde P_{k'}(\gamma)`),
                         " と仮定する。各時点に対応するトーラスの頂点を",
                       ]),
-                      displayMath(String.raw`v_0:=\operatorname{src}(\vec e_1)=\operatorname{tgt}(\vec e_m),
-\qquad v_t:=\operatorname{tgt}(\vec e_t)\quad(1\le t\le m-1)`),
+                      displayMath(String.raw`\begin{aligned}
+v_0&:=\operatorname{src}(\vec e_1)
+&&\bigl(\because\ \text{定義}\bigr)\\
+&=\operatorname{tgt}(\vec e_m)
+&&\bigl(\because\ \blkref{def_closed_nonbacktracking_walk}\bigr),\\
+v_t&:=\operatorname{tgt}(\vec e_t)\quad(1\le t\le m-1)
+&&\bigl(\because\ \text{定義}\bigr)
+\end{aligned}`),
                       paragraph([
                         "と置く。最初の等号は閉じていること（", ref("def_closed_nonbacktracking_walk"),
                         "）から従う。", math(String.raw`v_t=(i_t,j_t)`), " と書く。",

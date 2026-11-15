@@ -58,7 +58,7 @@ theorem periodicPlaneLift_parallelCoordinate_add_period
   have hrem : (k + (m : ℤ)) % (m : ℤ) = k % (m : ℤ) := by
     exact Int.add_emod_right k (m : ℤ)
   rw [show (k + m : ℤ) = k + (m : ℤ) by rfl]
-  simp only [periodicPlaneLift, periodicLiftCore, hquot, hrem]
+  simp only [periodicPlaneLift, hquot, hrem]
   rw [periodic_lift_coordinate_next_period_necSuf]
   rw [windingParallelCoordinate_windingShift]
 

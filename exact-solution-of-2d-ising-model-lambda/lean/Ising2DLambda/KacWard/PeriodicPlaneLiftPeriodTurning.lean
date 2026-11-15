@@ -68,11 +68,11 @@ theorem periodicPlaneLift_step_edgeDisplacement
   have hm : 0 < m := NeZero.pos m
   have hmz : (m : ℤ) ≠ 0 := by omega
   have hbase (j : ℕ) (hj : j < m) : periodicPlaneLift m base L wv wh j = base j := by
-    simp [periodicPlaneLift, periodicLiftCore,
+    simp [periodicPlaneLift,
       Int.emod_eq_of_lt (by omega : (0 : ℤ) ≤ j) (by omega : (j : ℤ) < m),
       Int.ediv_eq_zero_of_lt (by omega : (0 : ℤ) ≤ j) (by omega : (j : ℤ) < m)]
   have hterminal : periodicPlaneLift m base L wv wh m = base m := by
-    simp [periodicPlaneLift, periodicLiftCore, Int.ediv_self hmz, hend]
+    simp [periodicPlaneLift, Int.ediv_self hmz, hend]
   have hfinite (j : ℕ) (hj : j < m) :
       periodicPlaneLift m base L wv wh ((j : ℤ) + 1) -
           periodicPlaneLift m base L wv wh j = orientedEdgeLatticeStep (γ (j : ZMod m)) := by
