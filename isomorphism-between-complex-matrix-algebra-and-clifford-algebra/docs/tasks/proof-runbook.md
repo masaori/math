@@ -24,6 +24,10 @@
    SageMath 10.9 は VM の micromamba の環境 `sage` に在り、PATH には無い。`which sage` で見つからなくても無いと判断せず、
    `micromamba run -n sage sage sagemath/check/<対象名>/<ファイル>.sage` で実行する。python3 で代用しない。
 6. **検証。** `(cd structured-latex && npm run gen && npm run check && npm run build:pdf)` を通す（build:pdf は最終成果物の PDF に組めない文字・未解決参照が無いことを確かめる。tectonic が無い環境ではそのことを前進の記録に書く）。SageMath の検算を置いた行は実行して結果を書く。
+   続けて、検証と証明の対応の検査 `node sagemath/tools/verify-check-linkage.ts`（各 overview.md の対象ラベルが本文に在り、本文の主張と定理のどれにも検算があるか、
+   `sagemath/tools/claims-without-check.ts` に検算を置かない理由があること）と、Lean の対応の検査 `node lean/scripts/verify-label-correspondence.ts`
+   （本文の全ラベルが具体版の docstring に現れ、主張と定理には必要十分版と導出版があること。例外は `lean/scripts/label-correspondence-exceptions.ts` に理由つきで置く）を通す。
+   主張・定理を足したら、検算を置くか、置かない理由を一覧に書く。Lean の行では、足した宣言でこの検査が通るまでを行う。
    落ちたら本文を直す。検証を主張に合わせて緩めない。
 7. **台帳と MEMORY の更新。** 台帳の行の状態（記述・SageMath・Lean のどこまで済んだか）と、前進の記録を書く。MEMORY の「次回やること」を直す。
 8. **main へ入れる。** `git fetch origin && git rebase origin/main` の後に main へ push し、
@@ -76,7 +80,7 @@
 - **必要十分版は、具体版と同じ structure と同じ手順のまま、ℂ を型の変数に替え、証明が実際に使う係数の性質だけを仮定する。**
   削れなかった仮定（2 の可逆性、平方根の存在など）は、どの主張で要るかをコメントに書く。具体版は必要十分版の特殊化として導く（`docs/context/証明の書き方.md` の「Lean 必要十分版」）。
 - **各定理の docstring に、対応する本文のラベルを書く。** 一つの行で、その節の本文のブロックを全部形式化する。
-- Lean の行の検証は、`lake build` と、`sorry` が残っていないことの検査である。本文を直したら `npm run check` も通す。
+- Lean の行の検証は、`lake build` と、`sorry` が残っていないことの検査（`bash lean/scripts/check-no-sorry.sh`）と、本文のラベルとの対応の検査（`node lean/scripts/verify-label-correspondence.ts`）である。本文を直したら `npm run check` も通す。
 - Lean で本文の誤りや、本文が書いていない前提が見つかったら、本文を直す（同じ行の中で）。主張が偽なら、台帳の「研究管理への申し送り」に書いて止まる。
 
 ## 止まってよい場合

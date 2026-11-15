@@ -2,13 +2,15 @@
 
 ## 次回やること
 
-- 状態台帳（`docs/tasks/proof-state.md`）の「次の一歩」の先頭の未着手の行を、runbook（`docs/tasks/proof-runbook.md`）に従って進める。
+- 状態台帳（`docs/tasks/proof-state.md`）の「次の一歩」の先頭の未着手の行を、runbook（`docs/tasks/proof-runbook.md`）に従って進める。2026-11-15 の時点で未着手の行は無く、ゴールラインの検査（verify-check-linkage・verify-label-correspondence）は通っている。次の行は研究管理が足す。
 
 ## 未解決問題・確認事項
 
 - なし（番号の無い有限集合の上の和は、2026-11-01 の研究管理が台帳に行として足した）。
 
 ## 完了済み
+
+- 2026-11-15: 台帳の「ゴールラインの検査を置いて通す」の行を書き切った。検証と証明の対応の検査（sagemath/tools/verify-check-linkage.ts と、検算を置かない理由の一覧 claims-without-check.ts）と、Lean の対応の検査（lean/scripts/verify-label-correspondence.ts と例外の一覧 label-correspondence-exceptions.ts）を置いて通した。主定理と奇数次元の系の Ψ∘Φ=id・Ψ'∘Φ'=id を SageMath の CliffordAlgebra の中で直接比べる検算を二つ新設した。台帳の「次の一歩」に未着手の行は無い（次の行は研究管理が決める）。中身は台帳の前進の記録。
 
 - 2026-11-15: 台帳の「Lean：系『Jordan–Wigner 行列への接続』の具体版と必要十分版」の行を書き切った（67 ラベル。本文に整数の番号順の和の項ごとの等号の主張を足した。中身は台帳の前進の記録）。
 - 2026-11-15: 台帳の「研究管理 11/15 の読解で見つかった、系『Jordan–Wigner 行列への接続』の後半・一般の偶数次元・奇数次元の書き方と検算の直し」の行を書き切った（中身は台帳の前進の記録）。主張と論法は不変。ℤ の和の主張二つとクロネッカー積の因子ごとの等しさの主張三つ、奇数次元の定義五つを足した。次は台帳の「Lean：系『Jordan–Wigner 行列への接続』」の行で、足した主張もそこで形式化する。

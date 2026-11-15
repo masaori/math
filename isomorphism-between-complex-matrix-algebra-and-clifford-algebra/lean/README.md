@@ -11,6 +11,7 @@ cd isomorphism-between-complex-matrix-algebra-and-clifford-algebra/lean
 lake exe cache get          # mathlib のビルド済み .olean を取得する（省くと mathlib 全体をビルドする）
 lake build
 bash scripts/check-no-sorry.sh
+node scripts/verify-label-correspondence.ts   # 本文のラベルと具体版・必要十分版・導出版の対応（下の「本文のラベルとの対応の検査」）
 ```
 
 `lean-toolchain`（`leanprover/lean4:v4.32.1`）と `lakefile.toml` の mathlib の `rev`（`v4.32.1`）は
@@ -42,6 +43,28 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   構造を作る主張（双対空間・直和・ℂ^vec が線型空間であること）は、必要十分版から作った構造が
   具体版の構造と同じであること（`…_eq_of_necSuf`、`rfl`）も示す。
 - 各宣言の docstring に、対応する本文のラベルを書く。各ファイルの冒頭に、本文のラベルと宣言の対応表を置く。
+
+## 本文のラベルとの対応の検査
+
+`node scripts/verify-label-correspondence.ts`（lean/ の外から打つときは `node lean/scripts/verify-label-correspondence.ts`）は、
+ソースの字面を読んで次を確かめ、終了コードで成否を返す。
+
+- 本文（`../structured-latex/content/chapters/`）の見出しでないブロックのラベルが、どれも具体版の宣言の docstring に現れること。
+- 本文の主張と定理のどれにも、必要十分版の宣言と導出版の宣言（名前が `…_of_necSuf`・`…_eq_of_necSuf`・`…_eq_necSuf` で終わるもの）があること。
+  docstring にラベルが無い宣言は、具体版と同じ名前（導出版は接尾辞を除いた名前）で対応を取る。
+- docstring が引く本文のラベルが本文に実在すること。
+
+規約の例外として、次の三つを置く。
+
+- 主張が ℂ を含まないもの（番号付け・部分集合・ℕ と ℤ の計算）と、ℂ についての事実で必要十分版では K の仮定になるもの（1 + 1 ≠ 0、i · i = -1）には、
+  必要十分版と導出版を置かない。既存の記号に名前を付けるだけの定義と、各宣言の前提（引数）になる定義には、具体版の宣言を置かない。
+  どれも `scripts/label-correspondence-exceptions.ts` に理由と一緒に載せ、検査はその一覧のラベルだけを外す。一覧のラベルに宣言を置いたら、検査が落ちるので一覧から消す。
+- 本文のラベルを持たない Lean の中だけの途中の補題（`partialOrderedSum_eq_zero_of_terms_eq_zero`・`splitFamily_first` など）には、導出版を置かない。
+  検査も本文のラベルだけを見る。
+- 系「一般の偶数次元の非退化な二次空間」の定理の導出版（`generalCliffordAlgebra_isomorphic_matrixAlgebra_of_necSuf`）は、
+  必要十分版の定理を直接特殊化せず、各段の導出版（誘導される準同型・主定理の準同型・等長写像の主張）から組み立てる。
+  具体版の Cl(Y,Q) と、具体版の前提を写した必要十分版の前提の Cl(Y,Q) が別の集合であり、両者の間の準同型を置いていないためである
+  （`Isomorphism/GeneralEvenDimensional/IsometryToSplitSpaceFromNecSuf.lean` の冒頭）。系「奇数次元」の導出版の Cl(V',q') も同じである。
 
 ## 表し方の約束
 
@@ -263,8 +286,11 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 
 ## 必要十分版が示したこと（章「同型の証明」の帰り Ψ と主定理）
 
-- 主定理（Φ と Ψ が互いに逆な代数の準同型であること）まで、K について章「クリフォード代数」の仮定 `CliffordLaws K n` のほかに足す性質は
-  a + (-a) = 0 だけである。これは Φ を普遍性から得る段と、1 の分解・真空で挟んだ元・生成元を掛けた局所的な等式を引く段から来る。
+- 主定理（Φ と Ψ が互いに逆な代数の準同型であること）の必要十分版の仮定は、`CliffordLaws K n` に a + (-a) = 0 を足したものである。
+  `CliffordLaws K n` は、K の加法の結合法則・交換法則・0 の性質・各元の逆元の存在、乗法の結合法則・交換法則・1 · a = a、
+  分配法則と、1 + n = 0・n · n = 1 を満たす元 n の組で、実質的に単位元をもつ可換環で -1 に当たる元 n を一つ固定したものである
+  （a · 1 = a は乗法の交換法則と 1 · a = a から出る）。a + (-a) = 0 は、K の記号 `-` が加法の逆元を与えることである。
+  a + (-a) = 0 は、Φ を普遍性から得る段と、1 の分解・真空で挟んだ元・生成元を掛けた局所的な等式を引く段で使う。
   γ((x, g)) を a†_k と a_k の線型結合に分ける主張は a + (-a) = 0 も使わない。
 - 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない（M = 0 でも同じ証明が通る）。
 - 乗法の交換法則が行の中で要るのは、Ψ が線型であることの 1 · ρ = ρ · 1 と、Ψ(E_{S,T}) の δ_{S,S'} · δ_{T,T'} の入れ替えと、

@@ -167,6 +167,29 @@ for M in range(1, 4):
     assert epb != (I, Z0) and pmul(epb, epb) != epb; counts['neg'] += 1
     assert padd(epb, emb) != (I, I); counts['neg'] += 1
     assert padd(epb, psc(-1, emb)) != (I, -I); counts['neg'] += 1
+    # z の中心性の主張の像。Φ'(g)・Φ'(j(χ_i))・Φ'(j(ε))・Φ'(z)・Φ'(e_±) は、上で生成元の像から組み立てた値を使う
+    for i in range(1, M + 1):
+        ok(pmul(Pg, PjChi[i]) == pmul(PjChi[i], Pg))            # claim_added_generator_commutes_with_image_of_parity_factor の像
+    ok(pmul(Pg, PjE) == pmul(PjE, Pg))                         # claim_added_generator_commutes_with_image_of_parity_element の像
+    for v in vs_:
+        Gv = phi_p(v, QQ(0))                                   # Φ'(j(γ(v)))
+        ok(pmul(Pz, Gv) == pmul(Gv, Pz))                       # claim_central_element_commutes_with_image_of_split_space の像
+    ok(pmul(Pg, Pz) == pmul(Pz, Pg))                           # claim_central_element_commutes_with_added_generator の像
+    for v in vs_:
+        for t in [QQ(0), QQ(1), QQ(-3) / 2, QQ.random_element(num_bound=9, den_bound=4)]:
+            ok(phi_p(v, t) == padd(phi_p(v, QQ(0)), psc(t, Pg)))   # claim_image_of_odd_extension_element_is_sum_of_images の像
+    # すべての元との交換: Φ' の像は B×B 全体（下の階数の確認）なので、乱数の組 X ∈ B×B で確かめる
+    for trial in range(3):
+        X = (random_matrix(QQ, n, n, num_bound=9, den_bound=4), random_matrix(QQ, n, n, num_bound=9, den_bound=4))
+        ok(pmul(Pz, X) == pmul(X, Pz))                         # claim_central_element_commutes_with_every_element の像
+        ok(pmul(X, ep) == pmul(ep, X) and pmul(X, em) == pmul(em, X))   # claim_idempotents_..._commute_with_every_element の像
+        # 否定の対照: 中心に入らない Φ'(g) と Φ'(j(γ(d_1))) は、乱数の組と交換しない
+        assert pmul(Pg, X) != pmul(X, Pg); counts['neg'] += 1
+        assert pmul(Gj[1], X) != pmul(X, Gj[1]); counts['neg'] += 1
+    # 否定の対照: Φ'(g) は Φ'(j(γ(d_1))) と反交換し、交換しない（両者の積は 0 でない）
+    assert pmul(Pg, Gj[1]) != pmul(Gj[1], Pg); counts['neg'] += 1
+    # 否定の対照: γ'((v,t)) の像で g の係数を −t にすると一致しない（t=1）
+    assert phi_p(dvec(0), QQ(1)) != padd(phi_p(dvec(0), QQ(0)), psc(-1, Pg)); counts['neg'] += 1
     # Φ∘Ψ の像: Ψ(F)=Σ F_{S,T} a†_S P a_T の Φ による像が F に戻ること（Φ'∘Ψ' = id の第一・第二成分の材料）
     Ad = lambda S: oprod([c[t] if t in S else I for t in range(1, M + 1)], I)
     An = lambda T: oprod([ct[M + 1 - k] if (M + 1 - k) in T else I for k in range(1, M + 1)], I)
