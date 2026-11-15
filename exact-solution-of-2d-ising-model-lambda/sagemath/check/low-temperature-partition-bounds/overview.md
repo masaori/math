@@ -9,3 +9,5 @@
 | `check_orbit_product_bounds.sage` | 辺長一から三の軌道積での符号と両側評価 | PASS（2026-10-29） |
 
 有限個の厳密計算であり、一般の辺長の論証は本文に記す。
+
+Lean 具体版 `Ising2DLambda.KacWard.lowTemperaturePartitionBounds`・必要十分版 `Ising2DLambda.NecSuf.KacWard.half_sum_two_sided_bounds_necSuf`・導出版 `lowTemperaturePartitionBounds_from_necSuf`（2026-11-15）。検算の対象の行は変わらない。

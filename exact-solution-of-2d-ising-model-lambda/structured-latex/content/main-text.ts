@@ -84550,6 +84550,12 @@ u\cdot v-0
                 labels: ["claim_low_temperature_partition_bounds"],
                 habitat: "Q",
                 verification: ["sagemath/check/low-temperature-partition-bounds"],
+                lean: [
+                  "Ising2DLambda.KacWard.finiteTorusPolynomial_eval_rat",
+                  "Ising2DLambda.KacWard.lowTemperaturePartitionBounds",
+                  "Ising2DLambda.NecSuf.KacWard.half_sum_two_sided_bounds_necSuf",
+                  "Ising2DLambda.KacWard.lowTemperaturePartitionBounds_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と有理数 ",
