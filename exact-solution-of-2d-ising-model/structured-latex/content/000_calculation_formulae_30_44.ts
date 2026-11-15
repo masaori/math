@@ -1328,11 +1328,11 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`r \neq 0`),
         " なので ",
         math(String.raw`r \cdot r \neq 0`),
-        " である（実数の積は、因子がどちらも ",
-        math(String.raw`0`),
-        " でなければ ",
-        math(String.raw`0`),
-        " でない）。したがって",
+        " である（",
+        ref("real_product_of_nonzero_is_nonzero"),
+        "（",
+        math(String.raw`a \to r,\ b \to r`),
+        "））。したがって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1467,6 +1467,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         "原文は r, θ, n を導入していなかった（証明の中で θ と n を断りなく使っていた）ので、" +
           "積の場合と同じ設定を statement に書き下した。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: r = 0 の場合の準備の 0 − 2·0·π = 0 の鎖の 3 行目 0 − 0 = 0 の名前だけの根拠「ℝ で a − 0 = a」を real_minus_zero_is_self（a → 0）の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: r ≠ 0 の場合の r·r ≠ 0 の根拠が地の文「実数の積は、因子がどちらも 0 でなければ 0 でない」だけだったので、000_calculation_formulae_20_29.ts に足した主張 real_product_of_nonzero_is_nonzero（a → r、b → r）の参照に替えた。主張と鎖は不変。Lean の具体版は無い。数値検証: sagemath/check/106_range_of_args_of_square_of_complex_numbers/check_nonzero_radius_square_row.sage。",
       ],
     },
   },

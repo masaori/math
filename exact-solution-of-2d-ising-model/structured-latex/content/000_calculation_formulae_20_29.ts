@@ -2018,6 +2018,74 @@ a - 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_product_of_nonzero_is_nonzero",
+    kind: "claim",
+    title: { text: "0 でない実数どうしの積は 0 でない" },
+    labels: ["real_product_of_nonzero_is_nonzero"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        "、",
+        math(String.raw`a \neq 0`),
+        "、",
+        math(String.raw`b \neq 0`),
+        " とする。積・",
+        math(String.raw`0`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`a\cdot b \neq 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a\cdot b = 0`),
+        " と仮定して矛盾を導く。",
+        math(String.raw`a^{-1} \in \mathbb{R}`),
+        " は ",
+        math(String.raw`a`),
+        " の乗法の逆元（",
+        math(String.raw`a \neq 0`),
+        " なので ",
+        ref("set_and_algebra_notation"),
+        " の体 ",
+        math(String.raw`\mathbb{R}`),
+        " に在り、",
+        math(String.raw`a^{-1}\cdot a = 1`),
+        " を満たす）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b
+&= 1\cdot b
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (a^{-1}\cdot a)\cdot b
+&&\bigl(\because\ a\ \text{の乗法の逆元}\ a^{-1}\cdot a = 1\ (a \neq 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= a^{-1}\cdot(a\cdot b)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a^{-1}\cdot 0
+&&\bigl(\because\ \text{仮定}\ a\cdot b = 0\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to a^{-1})\bigr)
+\end{aligned}`),
+      paragraph([
+        "これは ",
+        math(String.raw`b \neq 0`),
+        " に反する。したがって ",
+        math(String.raw`a\cdot b \neq 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0 でない実数どうしの積が 0 でないことは体の公理に含まれないのに、range_of_args_of_square_of_complex_numbers の r ≠ 0 の場合が「実数の積は、因子がどちらも 0 でなければ 0 でない」の地の文だけで r·r ≠ 0 を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_product_of_nonzero_is_nonzero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealProductOfNonzeroIsNonzero.lean）、必要十分版は Ising2D.NecSuf.mul_ne_zero_of_leftInverse（NecSuf/MulNeZeroOfLeftInverse.lean）。数値検証: sagemath/check/real_product_of_nonzero_is_nonzero/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
