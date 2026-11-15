@@ -3449,8 +3449,18 @@ s_1c_2
 &&(\because\ \blkref{def_imaginary_unit})\\
 &= (0,-1)
 &&(\because\ \blkref{def_complex_conjugate})\\
+&= \bigl(0,\ (-1)\cdot 1\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(0,\ (-1)\cdot 1 + 0\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(0 - 0,\ (-1)\cdot 1 + 0\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot 0 - 0,\ (-1)\cdot 1 + 0\cdot 0\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ \text{を 2 箇所へ}\ (x \to -1,\ x \to 0)\ \text{右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 1)\ \text{を右辺から左辺へ}\bigr)\\
 &= (-1,0)(0,1)
-&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= (-1_{\mathbb{C}})(0,1)
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
 &= (-1_{\mathbb{C}})\,i
@@ -3932,6 +3942,7 @@ s_1c_2
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0 を右から掛けると 0 の名前だけの根拠「ℝ で x·0 = 0（ℝ は体）」3 か所（(3) の arg の鎖の 2·0 = 0（x → 2）、(4) の |γ_2(θ)|·0 = 0（x → |γ_2(θ)|）、(5) の第 1 成分の引く側の 0 = 1·0（x → 1）を右辺から左辺へ）を、足した主張 real_times_zero_is_zero の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (3)(4)(5) の名前だけの根拠 7 か所を参照に替えた。「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」の 3 か所（(3) の φ_polar((−r)_C) の鎖の x → −r、(4) の φ_polar(r_C) の鎖の x → r、(4) の主の鎖の x → 2）を real_zero_divided_is_zero に、「ℝ で a − 0 = a（ℝ は体）」の 4 か所（(3) の主の鎖の a → π、(4) の主の鎖の a → 0、(5) の主の鎖の a → π/2 と a → 0·|γ_2(θ)| を右辺から左辺へ）を real_minus_zero_is_self に替えた。x ≠ 0 の理由（−r < 0、r > 0、2 ≠ 0）は参照の括弧に残した。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (2) の −|γ_2(θ)|^2 < 0 の鎖の 2 行目の名前だけの根拠「ℝ で −0 = 0（ℝ は体）」を real_negation_of_zero_is_zero の参照に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 「第二に」の \\bar i = −i の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（鎖は 6 行から 11 行）。conjugate_transpose_of_pauli_y の準備の同じ鎖も同じ回に揃えた。両端と主張は不変。",
       ],
     },
   },

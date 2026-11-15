@@ -1,5 +1,5 @@
 # 対象ラベル: conjugate_transpose_of_pauli_y
-# 準備の 2 本の鎖 conj i = -i（6 行）、conj(-i) = i（7 行）と、主の 6 行の鎖
+# 準備の 2 本の鎖 conj i = -i（11 行）、conj(-i) = i（12 行）と、主の 6 行の鎖
 #   (σ^y)^* = (conj σ_11 conj σ_21; conj σ_12 conj σ_22) = (conj 0_C conj i; conj(-i) conj 0_C) = (0_C conj i; conj(-i) 0_C)
 #   = (0_C -i; conj(-i) 0_C) = (0_C -i; i 0_C) = σ^y を 1 行ずつ確かめる。
 # ℂ は definition_of_cc どおり QQ の対、i := (0,1)（def_imaginary_unit）、-z := (-1_C) z（multiply_by_minus_one）、
@@ -26,6 +26,11 @@ prep_i = [
     c(i_pair),
     c((R(0), R(1))),                       # i := (0,1)
     (R(0), R(-1)),                         # def_complex_conjugate
+    (R(0), R(-1) * R(1)),                  # 1 は ℝ の乗法の単位元（右辺から左辺へ）
+    (R(0), R(-1) * R(1) + R(0)),           # 0 は ℝ の加法の単位元（右辺から左辺へ）
+    (R(0) - R(0), R(-1) * R(1) + R(0)),    # real_minus_zero_is_self（a → 0）右辺から左辺へ
+    (R(-1) * R(0) - R(0), R(-1) * R(1) + R(0) * R(0)),          # real_times_zero_is_zero を 2 箇所へ（x → -1, 0）
+    (R(-1) * R(0) - R(0) * R(1), R(-1) * R(1) + R(0) * R(0)),   # real_zero_times_is_zero（x → 1）
     cc_mul((R(-1), R(0)), (R(0), R(1))),   # definition_of_cc の積
     cc_mul(zm1, (R(0), R(1))),             # inclusion_rr_to_cc の (-1)_C = (-1,0)
     cc_mul(zm1, i_pair),                   # i := (0,1)
@@ -37,7 +42,12 @@ prep_mi = [
     c(cc_mul(zm1, i_pair)),                # multiply_by_minus_one
     c(cc_mul(zm1, (R(0), R(1)))),          # i := (0,1)
     c(cc_mul((R(-1), R(0)), (R(0), R(1)))),  # inclusion_rr_to_cc の (-1)_C = (-1,0)
-    c((R(0), R(-1))),                      # definition_of_cc の積
+    c((R(-1) * R(0) - R(0) * R(1), R(-1) * R(1) + R(0) * R(0))),  # definition_of_cc の積
+    c((R(-1) * R(0) - R(0), R(-1) * R(1) + R(0) * R(0))),         # real_zero_times_is_zero（x → 1）
+    c((R(0) - R(0), R(-1) * R(1) + R(0))), # real_times_zero_is_zero を 2 箇所へ（x → -1, 0）
+    c((R(0), R(-1) * R(1) + R(0))),        # real_minus_zero_is_self（a → 0）
+    c((R(0), R(-1) * R(1))),               # 0 は ℝ の加法の単位元
+    c((R(0), R(-1))),                      # 1 は ℝ の乗法の単位元
     (R(0), -R(-1)),                        # def_complex_conjugate
     (R(0), R(1)),                          # ℝ で -(-1) = 1
     i_pair,                                # i := (0,1)

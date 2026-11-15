@@ -13,7 +13,7 @@
 | 7 行の鎖の 3〜6 行目（共役転置の定義（`k → l`, `l → k`）→ `A^* = A` → `def_matrix_transpose` → `A^⊤ = A`） | `hermitian_and_transpose_invariant_matrix_is_real_symmetric` の `calc` の 4 段（`\overline{A_{kl}} = A_{kl}` を作る） |
 | 7 行の鎖の 1・2・7 行目（`def_complex_conjugate`（`x → a`, `y → b`）→ `a, b` の取り方 → … → `a, b` の取り方） | `exists_real_of_star_eq` の 1 つ目の `calc` の 4 段（3 段目が、上の 3〜6 行目の結論 `h`） |
 | 第 2 成分から `−b = b`（`ℂ = ℝ^2` の元の等号は成分ごと） | `congrArg Complex.im` |
-| `b = ½(b + b) = ½((−b) + b) = ½·0 = 0` の 4 行 | `exists_real_of_star_eq` の 2 つ目の `calc` の 4 段 |
+| `b = ½(b + b) = ½((−b) + b) = ½·0 = 0` の 4 行（最後の行は `real_times_zero_is_zero`（`x → ½`）） | `exists_real_of_star_eq` の 2 つ目の `calc` の 4 段（最後の段は具体版 `real_times_zero_is_zero (1 / 2)`） |
 | `A_{kl} = (a, b) = (a, 0) = a_ℂ` の 3 行と、`def_matrix_with_real_entries`（`r → a`） | `exists_real_of_star_eq` の 3 つ目の `calc` の 3 段と `⟨a, _⟩` |
 | `A^⊤ = A` と合わせて `def_real_symmetric_complex_matrix` | `⟨_, hT⟩` |
 
@@ -31,6 +31,7 @@
 具体版をその特殊化として得るのは `ClaimHermitianAndTransposeInvariantMatrixIsRealSymmetricFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Mathlib.LinearAlgebra.Matrix.Hermitian
 import Mathlib.Tactic.Ring
 
@@ -55,7 +56,7 @@ theorem exists_real_of_star_eq (z : ℂ) (h : star z = z) : ∃ a : ℝ, z = (a 
         = 1 / 2 * (b + b) := by ring                                        -- `ℝ` の四則
       _ = 1 / 2 * ((-b) + b) := by rw [hneg]                                -- `-b = b`
       _ = 1 / 2 * 0 := by rw [neg_add_cancel]                               -- `ℝ` で `(-b) + b = 0`
-      _ = 0 := by ring                                                      -- `ℝ` の四則
+      _ = 0 := real_times_zero_is_zero (1 / 2)                              -- `real_times_zero_is_zero`（`x → ½`）
   refine ⟨a, ?_⟩                                                            -- `def_matrix_with_real_entries`（`r → a`）
   calc z
       = ⟨a, b⟩ := hab                                                       -- `a, b` の取り方

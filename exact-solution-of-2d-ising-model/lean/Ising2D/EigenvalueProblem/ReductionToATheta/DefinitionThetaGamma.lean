@@ -68,6 +68,9 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimE
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
 
 namespace Ising2D
 
@@ -273,22 +276,29 @@ theorem conj_real_inclusion_mul (a b : ℝ) :
     _ = (a : ℂ) * (b : ℂ) := (real_inclusion_mul a b).symm
                                                   -- 準備の読み: `real_inclusion_preserves_product`
 
-/-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\bar i = -i`（人手の 6 行と、略記の読み替えの 1 段）。 -/
+/-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\bar i = -i`（人手の 11 行と、略記の読み替えの 1 段）。 -/
 theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
   calc (starRingEnd ℂ) Complex.I
       = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = (⟨0, -1⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                   -- 2 行目: `def_complex_conjugate`
-    _ = (⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ) :=
-        Complex.ext (by simp [Complex.mul_re]) (by simp [Complex.mul_im])
-                                                  -- 3 行目: `definition_of_cc` の積 `((-1)·0 - 0·1, (-1)·1 + 0·0)`
-                                                  -- （成分の ℝ の四則は `simp` で閉じる）
-    _ = ((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ) := rfl     -- 4 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
+    _ = (⟨0, (-1) * 1⟩ : ℂ) := by rw [mul_one]    -- 3 行目: `1` は `ℝ` の乗法の単位元を右辺から左辺へ
+    _ = (⟨0, (-1) * 1 + 0⟩ : ℂ) := by rw [add_zero]
+                                                  -- 4 行目: `0` は `ℝ` の加法の単位元を右辺から左辺へ
+    _ = (⟨0 - 0, (-1) * 1 + 0⟩ : ℂ) := by rw [real_minus_zero_is_self 0]
+                                                  -- 5 行目: `real_minus_zero_is_self`（`a → 0`）を右辺から左辺へ
+    _ = (⟨(-1) * 0 - 0, (-1) * 1 + 0 * 0⟩ : ℂ) := by
+        rw [real_times_zero_is_zero (-1), real_times_zero_is_zero 0]
+                                                  -- 6 行目: `real_times_zero_is_zero` を 2 箇所へ（`x → -1, 0`）右辺から左辺へ
+    _ = (⟨(-1) * 0 - 0 * 1, (-1) * 1 + 0 * 0⟩ : ℂ) := by rw [real_zero_times_is_zero 1]
+                                                  -- 7 行目: `real_zero_times_is_zero`（`x → 1`）を右辺から左辺へ
+    _ = (⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ) := rfl      -- 8 行目: `definition_of_cc` の積
+    _ = ((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ) := rfl     -- 9 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
     _ = (-1 : ℂ) * (⟨0, 1⟩ : ℂ) := by
         rw [Complex.ofReal_neg, Complex.ofReal_one] -- `(-1)_ℂ` を `-1_ℂ` と書く（`inclusion_rr_to_cc` の略記）
-    _ = (-1 : ℂ) * Complex.I := rfl               -- 5 行目: `def_imaginary_unit` の `i := (0,1)`
+    _ = (-1 : ℂ) * Complex.I := rfl               -- 10 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = -Complex.I := by
-        rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`
+        rw [neg_one_mul]                          -- 11 行目: `multiply_by_minus_one`
 
 /-- 人手 `relation_of_gamma_2_theta_tilde` の「第二に」の `\overline{exp(iθ)} = exp(-iθ)`（人手の 8 行）。 -/
 theorem conj_exp_I_mul_real (θ : ℝ) :

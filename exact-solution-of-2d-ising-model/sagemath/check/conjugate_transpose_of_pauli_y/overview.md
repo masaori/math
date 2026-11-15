@@ -6,14 +6,14 @@
 
 - ファイル: `structured-latex/content/009_eigenvalues_of_V.ts`
 - ブロック: `eigenvalues_of_V_claim_conjugate_transpose_of_pauli_y`（σ^y の共役転置）
-- 範囲: 準備の `\bar i = -i`（6 行）・`\overline{-i} = i`（7 行）の鎖と、`(σ^y)^* = σ^y` の 6 行の鎖
+- 範囲: 準備の `\bar i = -i`（11 行）・`\overline{-i} = i`（12 行）の鎖と、`(σ^y)^* = σ^y` の 6 行の鎖
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 準備の `\bar i = -i` の 6 行 | `check_chain.sage` | 6 段（`i := (0,1)`・`def_complex_conjugate`・`definition_of_cc` の積・`(-1)_ℂ = (-1,0)`・`i := (0,1)`・`multiply_by_minus_one`） | **PASS** | 成り立つ |
-| 準備の `\overline{-i} = i` の 7 行 | `check_chain.sage` | 7 段（`multiply_by_minus_one`・`i := (0,1)`・`(-1)_ℂ = (-1,0)`・`definition_of_cc` の積・`def_complex_conjugate`・ℝ で `-(-1) = 1`・`i := (0,1)`） | **PASS** | 成り立つ |
+| 準備の `\bar i = -i` の 11 行 | `check_chain.sage` | 11 段（`i := (0,1)`・`def_complex_conjugate`・ℝ の乗法の単位元・ℝ の加法の単位元・`real_minus_zero_is_self`・`real_times_zero_is_zero` を 2 箇所へ・`real_zero_times_is_zero`・`definition_of_cc` の積・`(-1)_ℂ = (-1,0)`・`i := (0,1)`・`multiply_by_minus_one`） | **PASS** | 成り立つ |
+| 準備の `\overline{-i} = i` の 12 行 | `check_chain.sage` | 12 段（`multiply_by_minus_one`・`i := (0,1)`・`(-1)_ℂ = (-1,0)`・`definition_of_cc` の積・`real_zero_times_is_zero`・`real_times_zero_is_zero` を 2 箇所へ・`real_minus_zero_is_self`・ℝ の加法の単位元・ℝ の乗法の単位元・`def_complex_conjugate`・ℝ で `-(-1) = 1`・`i := (0,1)`） | **PASS** | 成り立つ |
 | 主の鎖の全行 | `check_chain.sage` | 6 段。`body_star` が Sage の `conjugate_transpose()` と一致することを見てから使う。対照 1 件: 共役を落とした転置は `σ^y` と異なる | **PASS** | 成り立つ |
 
 共通の準備は `sagemath/_shared/hermitian_forms_by_definition.sage`（`body_star`: `def_hermitian_positive_definite` の

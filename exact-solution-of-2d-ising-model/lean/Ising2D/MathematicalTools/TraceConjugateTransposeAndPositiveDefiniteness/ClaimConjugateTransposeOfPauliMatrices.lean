@@ -7,13 +7,13 @@
 - `conjugate_transpose_of_identity_matrix_of_order_two`: `I^* = I`（`I = I_{Mat(2,ℂ)}`。6 行の鎖）
 - `conjugate_transpose_of_pauli_x`: `(σ^x)^* = σ^x`（4 行の鎖）
 - `conjugate_transpose_of_pauli_z`: `(σ^z)^* = σ^z`（4 行の鎖）
-- `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`（準備の `\bar i = -i`（6 行）・`\overline{-i} = i`（7 行）と、6 行の鎖）
+- `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`（準備の `\bar i = -i`（11 行）・`\overline{-i} = i`（12 行）と、6 行の鎖）
 
 各 `calc` の段の根拠は人手の行末の根拠と同じである。共役転置の成分の式 `(A^*)_{kl} = \overline{A_{lk}}`
 （`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose_apply` で読む。人手の `0_ℂ`・`1_ℂ`・`(-1)_ℂ` は
 `inclusion_rr_to_cc` の略記 `r_ℂ`（`r = 0, 1, -1`）で、Lean の `(0 : ℂ)`・`(1 : ℂ)`・`(-1 : ℂ)` とは型の上で別の項なので、
 `complex_conjugate_of_real_inclusion` を当てる段では `star_of_real_inclusion_abbrev` でその読み替えを挟む。
-準備の `\bar i = -i` は、人手 `relation_of_gamma_2_theta_tilde` の「第二に」の同じ 6 行の鎖の具体版 `conj_I_eq_neg_I` を引く。
+準備の `\bar i = -i` は、人手 `relation_of_gamma_2_theta_tilde` の「第二に」の同じ 11 行の鎖の具体版 `conj_I_eq_neg_I` を引く。
 
 具体的な 2 次の行列の成分の計算なので、必要十分版は置かない（転置の `pauliX_transpose` ほかと同じ）。
 -/
@@ -102,11 +102,11 @@ theorem pauliZ_conjTranspose : pauliZᴴ = pauliZ := by
     -- `def_pauli_matrices` の σ^z
     _ = pauliZ := rfl
 
-/-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\bar i = -i`（人手 `relation_of_gamma_2_theta_tilde` の「第二に」と同じ 6 行の鎖。
+/-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\bar i = -i`（人手 `relation_of_gamma_2_theta_tilde` の「第二に」と同じ 11 行の鎖。
 その具体版 `conj_I_eq_neg_I` を `star` の形で読む）。 -/
 theorem star_I_eq_neg_I : star Complex.I = -Complex.I := conj_I_eq_neg_I
 
-/-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\overline{-i} = i`（7 行の鎖）。 -/
+/-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\overline{-i} = i`（12 行の鎖）。 -/
 theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
   calc star (-Complex.I)
       = star ((-1 : ℂ) * Complex.I) := by
@@ -115,16 +115,21 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
     _ = star (((-1 : ℝ) : ℂ) * (⟨0, 1⟩ : ℂ)) := by
         rw [real_inclusion_neg_one_abbrev]                     -- 3 行目の読み: `-1_ℂ` を `(-1)_ℂ` と読む（`inclusion_rr_to_cc` の略記）
     _ = star ((⟨-1, 0⟩ : ℂ) * (⟨0, 1⟩ : ℂ)) := rfl            -- 3 行目: `inclusion_rr_to_cc` の `(-1)_ℂ = (-1,0)`
-    _ = star (⟨0, -1⟩ : ℂ) := by
-        congr 1
-        exact Complex.ext (by simp [Complex.mul_re]) (by simp [Complex.mul_im])
-                                                               -- 4 行目: `definition_of_cc` の積 `((-1)·0 - 0·1, (-1)·1 + 0·0)`
-                                                               -- （成分の ℝ の四則は `simp` で閉じる）
+    _ = star (⟨(-1) * 0 - 0 * 1, (-1) * 1 + 0 * 0⟩ : ℂ) := rfl -- 4 行目: `definition_of_cc` の積
+    _ = star (⟨(-1) * 0 - 0, (-1) * 1 + 0 * 0⟩ : ℂ) := by
+        rw [real_zero_times_is_zero 1]                         -- 5 行目: `real_zero_times_is_zero`（`x → 1`）
+    _ = star (⟨0 - 0, (-1) * 1 + 0⟩ : ℂ) := by
+        rw [real_times_zero_is_zero (-1), real_times_zero_is_zero 0]
+                                                               -- 6 行目: `real_times_zero_is_zero` を 2 箇所へ（`x → -1, 0`）
+    _ = star (⟨0, (-1) * 1 + 0⟩ : ℂ) := by
+        rw [real_minus_zero_is_self 0]                         -- 7 行目: `real_minus_zero_is_self`（`a → 0`）
+    _ = star (⟨0, (-1) * 1⟩ : ℂ) := by rw [add_zero]          -- 8 行目: `0` は `ℝ` の加法の単位元
+    _ = star (⟨0, -1⟩ : ℂ) := by rw [mul_one]                 -- 9 行目: `1` は `ℝ` の乗法の単位元
     _ = (starRingEnd ℂ) (⟨0, -1⟩ : ℂ) := rfl                  -- `star` を `starRingEnd ℂ` と読む
     _ = (⟨0, -(-1)⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
-                                                               -- 5 行目: `def_complex_conjugate`
-    _ = (⟨0, 1⟩ : ℂ) := by rw [neg_neg]                       -- 6 行目: ℝ で `-(-1) = 1`
-    _ = Complex.I := rfl                                       -- 7 行目: `def_imaginary_unit` の `i := (0,1)`
+                                                               -- 10 行目: `def_complex_conjugate`
+    _ = (⟨0, 1⟩ : ℂ) := by rw [neg_neg]                       -- 11 行目: ℝ で `-(-1) = 1`
+    _ = Complex.I := rfl                                       -- 12 行目: `def_imaginary_unit` の `i := (0,1)`
 
 /-- 人手 `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`。 -/
 @[simp]

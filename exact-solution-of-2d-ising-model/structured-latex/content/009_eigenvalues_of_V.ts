@@ -866,8 +866,18 @@ I^*
 &&(\because\ \blkref{def_imaginary_unit})\\
 &= (0,-1)
 &&(\because\ \blkref{def_complex_conjugate})\\
+&= \bigl(0,\ (-1)\cdot 1\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(0,\ (-1)\cdot 1 + 0\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(0 - 0,\ (-1)\cdot 1 + 0\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot 0 - 0,\ (-1)\cdot 1 + 0\cdot 0\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ \text{を 2 箇所へ}\ (x \to -1,\ x \to 0)\ \text{右辺から左辺へ}\bigr)\\
+&= \bigl((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 1)\ \text{を右辺から左辺へ}\bigr)\\
 &= (-1,0)(0,1)
-&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= (-1_{\mathbb{C}})(0,1)
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
 &= (-1_{\mathbb{C}})\,i
@@ -883,8 +893,18 @@ I^*
 &&(\because\ \blkref{def_imaginary_unit})\\
 &= \overline{(-1,0)(0,1)}
 &&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
+&= \overline{\bigl((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0\bigr)}
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \overline{\bigl((-1)\cdot 0 - 0,\ (-1)\cdot 1 + 0\cdot 0\bigr)}
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 1)\bigr)\\
+&= \overline{\bigl(0 - 0,\ (-1)\cdot 1 + 0\bigr)}
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ \text{を 2 箇所へ}\ (x \to -1,\ x \to 0)\bigr)\\
+&= \overline{\bigl(0,\ (-1)\cdot 1 + 0\bigr)}
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
+&= \overline{\bigl(0,\ (-1)\cdot 1\bigr)}
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \overline{(0,-1)}
-&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (0,-(-1))
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (0,1)
@@ -917,6 +937,7 @@ I^*
         "数値検証: sagemath/check/conjugate_transpose_of_pauli_y/。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
         "2026-11-13: σ^y の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の 2 本の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（\\bar i の鎖は 6 行から 11 行、\\overline{-i} の鎖は 7 行から 12 行）。\\bar i の鎖は relation_of_gamma_2_theta_tilde の「第二に」と同じ形に揃えた。両端と主張は不変。",
       ],
     },
   },
@@ -1107,7 +1128,7 @@ b
 &= \tfrac12 \cdot 0
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ (-b) + b = 0\bigr)\\
 &= 0
-&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to \tfrac12)\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 A_{kl}
@@ -1138,6 +1159,7 @@ A_{kl}
       status: "added",
       notes: [
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていた。そのうちエルミート性は exp_of_hermitian_is_hermitian、転置で不変であることは exp_of_symmetric_is_symmetric が運ぶので、二つから成分が実数であることへ戻す段を real_symmetric_matrix_is_hermitian の逆向きの主張として足した。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: b = 0 の鎖の最後の行 ½·0 = 0 の根拠「ℝ の四則」を real_times_zero_is_zero（x → ½）の参照に替えた。式は不変。",
       ],
     },
   },

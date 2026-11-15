@@ -52,8 +52,13 @@ rep.check(cos_theta + I0 * sin_theta == euler_chain[0], "cos θ + i sin θ の�
 i_pair = (QQ(0), QQ(1))
 bar_i_chain = [
     cc_conj(i_pair),
-    (QQ(0), QQ(-1)),
-    cc_mul((QQ(-1), QQ(0)), (QQ(0), QQ(1))),
+    (QQ(0), QQ(-1)),                                               # def_complex_conjugate
+    (QQ(0), QQ(-1) * QQ(1)),                                       # 1 は ℝ の乗法の単位元（右辺から左辺へ）
+    (QQ(0), QQ(-1) * QQ(1) + QQ(0)),                               # 0 は ℝ の加法の単位元（右辺から左辺へ）
+    (QQ(0) - QQ(0), QQ(-1) * QQ(1) + QQ(0)),                       # real_minus_zero_is_self（a → 0）右辺から左辺へ
+    (QQ(-1) * QQ(0) - QQ(0), QQ(-1) * QQ(1) + QQ(0) * QQ(0)),      # real_times_zero_is_zero を 2 箇所へ（x → -1, 0）
+    (QQ(-1) * QQ(0) - QQ(0) * QQ(1), QQ(-1) * QQ(1) + QQ(0) * QQ(0)),  # real_zero_times_is_zero（x → 1）
+    cc_mul((QQ(-1), QQ(0)), (QQ(0), QQ(1))),                       # definition_of_cc の積
     cc_mul(iota(-1, QQ), (QQ(0), QQ(1))),
     cc_mul(iota(-1, QQ), i_pair),
     cc_neg(i_pair, QQ),
