@@ -84448,11 +84448,24 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
 (1,1)\in\mathcal U_a\times\mathcal W_b
 &\Longleftrightarrow 1^L=(-1)^a\ \text{かつ}\ 1^L=(-1)^b
 &&\bigl(\because\ \blkref{def_horizontal_twisted_modes},\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&\Longleftrightarrow 1=(-1)^a\ \text{かつ}\ 1=(-1)^b
+&&\bigl(\because\ 1^L=1\bigr)\\
 &\Longleftrightarrow (a,b)=(0,0)
-&&\bigl(\because\ 1^L=1\text{ と }\blkref{def_spin_structures}\bigr).
+&&\bigl(\because\ (-1)^0=1,\ (-1)^1=-1\ne1\text{（}\mathbb Q\text{ の四則}\text{）と }\blkref{def_spin_structures}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "このモードの軌道は一つであり、対応する因子だけが ",
+                    math(String.raw`1^{-1}=1`), " なので ",
+                    ref("claim_mode_inversion_orbit_cardinality"), " の軌道は ",
+                    math(String.raw`O(1,1)=\{(1,1)\}`), " である。",
+                    "軌道 ", math(String.raw`O(\varpi,\varsigma)\in\mathfrak M_L^{a,b}`), " が ",
+                    math(String.raw`(1,1)`), " を含めば、同じ定義から ",
+                    math(String.raw`1\in\{\varpi,\varpi^{-1}\}`), " かつ ",
+                    math(String.raw`1\in\{\varsigma,\varsigma^{-1}\}`), " であり、",
+                    math(String.raw`\varpi^{-1}=1`), " なら ", math(String.raw`\varpi=1^{-1}=1`),
+                    " なので ", math(String.raw`\varpi=1`), "、同様に ", math(String.raw`\varsigma=1`),
+                    " である。したがって ", math(String.raw`\{(1,1)\}`), " の形の一元軌道は、",
+                    math(String.raw`(a,b)=(0,0)`), " のとき ", math(String.raw`\mathfrak M_L^{0,0}`),
+                    " にただ一つ属し、それ以外のときは属さない。その因子だけが ",
                     math(String.raw`-(q^2+2q-1)`), " となる。",
                   ]),
                   paragraph([

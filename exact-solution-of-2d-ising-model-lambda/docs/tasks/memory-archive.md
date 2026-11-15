@@ -1,3 +1,5 @@
+2026-11-15（並列）: 軌道ごとの明示積の平方の段を Lean 具体版 `orbitExplicitProduct_sq`・必要十分版 `orbit_explicit_product_sq_necSuf`・導出版で示した。本文の五行（冪の法則、一元軌道の平方、元数と不変性、軌道による分割、モード積公式）と同じ順。本文・SageMath は不変。
+
 2026-11-15（主経路）: 反転平行階段の歩の式を Lean 具体版で直接示し、必要十分版への委譲を一件外した。本文の回転表の式末尾を整えた。
 
 2026-11-15（並列）: 四つの行列式の定数項一の多項式平方根の存在と一意性を Lean 具体版 `kacWardDeterminant_existsUnique_qbarPolynomialSquareRoot`・必要十分版二件・導出版で示し、本文の `lean:` に七件を登録した。本文の定数項の証明を四行の式鎖にし、SageMath に同じ四行の検算を足した（PASS）。
