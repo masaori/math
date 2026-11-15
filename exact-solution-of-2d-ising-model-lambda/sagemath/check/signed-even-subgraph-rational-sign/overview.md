@@ -8,5 +8,6 @@
 | `check_orbit_product_sign.sage` | 軌道積の各因子と四つの符号 | PASS（2026-10-29） |
 | `check_orbit_dispersion_chain.sage` | 各軌道の全ての元で $0<(q^2+2q-1)^2\le\Delta(q;\varpi,\varsigma)=\Delta_O(q)$ | PASS（2026-11-15） |
 | `check_one_one_membership.sage` | $(1,1)$ の所属の三行、$O(1,1)=\{(1,1)\}$、$(1,1)$ を含む軌道は $O(1,1)$ だけで、$\{(1,1)\}$ の形の一元軌道は $(a,b)=(0,0)$ のときただ一つ（辺長一から四） | PASS（2026-11-15） |
+| `check_sign_composition.sage` | 正の元の積の三行（$uv-0=(u-0)(v-0)=(ss)(tt)=(st)(st)$）、$0-r=(-r)-0$、$P^{a,b}_L(q)$ を $(1,1)$ の因子と残りの積 $P'$ に分けた等式（$(0,0)$ で $P=-(q^2+2q-1)P'$、それ以外で $P=P'$）と $P'>0$（辺長一から三） | PASS（2026-11-15） |
 
 辺長一から三、有理点五点の厳密計算である。一般の辺長の論証は本文に記す。

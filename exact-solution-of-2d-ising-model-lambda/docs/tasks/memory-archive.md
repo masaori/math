@@ -1,3 +1,5 @@
+2026-11-15（並列）: 軌道ごとの明示積の定数項一と一意性の段を Lean 具体版 `orbitExplicitProduct_eq_signedEvenSubgraphPolynomial`・必要十分版 `orbit_explicit_product_eq_squareRoot_necSuf`・導出版で示し、平方の段と合わせ本文の `lean:` に七件を登録した。本文の定数項の式鎖の二行目の根拠を多項式環の積の係数へ直し、SageMath に定数項の各行と辺長一・二での $P=Q$ の係数一致の検算を足した（PASS）。
+
 2026-11-15（並列）: 軌道ごとの明示積の平方の段を Lean 具体版 `orbitExplicitProduct_sq`・必要十分版 `orbit_explicit_product_sq_necSuf`・導出版で示した。本文の五行（冪の法則、一元軌道の平方、元数と不変性、軌道による分割、モード積公式）と同じ順。本文・SageMath は不変。
 
 2026-11-15（主経路）: 反転平行階段の歩の式を Lean 具体版で直接示し、必要十分版への委譲を一件外した。本文の回転表の式末尾を整えた。
