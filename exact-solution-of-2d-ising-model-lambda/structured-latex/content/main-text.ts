@@ -83498,7 +83498,7 @@ D^{a,b}_L(x)
 &=x(1-x^2)\bigl(4-\varpi-\varpi^{-1}-\varsigma-\varsigma^{-1}\bigr)
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr)\\
 &=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
-&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の結合律}\bigr).
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の結合律}\bigr)
 \end{aligned}`),
                 ],
               },
