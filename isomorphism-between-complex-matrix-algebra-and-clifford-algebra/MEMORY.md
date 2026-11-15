@@ -10,6 +10,8 @@
 
 ## 完了済み
 
+- 2026-11-15: 台帳の「Lean：同型の証明の章のうちクリフォード代数の中の大域的な等式の具体版と必要十分版」の行を書き切った。本文 25 ブロックを lean/…/Isomorphism/GlobalIdentities/ に具体版・必要十分版・導出版で形式化した（lean/README.md の「必要十分版が示したこと（章『同型の証明』のクリフォード代数の中の大域的な等式）」）。本文は不変。lake build・check-no-sorry 通過。次は台帳の Lean の次の行（帰り Ψ と主定理）。
+
 - 2026-11-14: 台帳の「系『Jordan–Wigner 行列への接続』の後半：番号の行列環への移し」の行を書き切った。番号 1 を最上位の桁にする番号付け r_M=ϱ_M∘e_M、組の番号 num_M（あちらの ν）が全単射であること、あちらと同じ形のクロネッカー積・サイトごとの Pauli 行列・Z^{(2^M)}_m・Y^{(2^M)}_m を置き、ν_{r_M}(Z_m)=Z^{(2^M)}_m・ν_{r_M}(Y_m)=Y^{(2^M)}_m と、Ω̂=ν_{r_M}∘Ω が互いに逆な同型である系を示した。SageMath 通過。記述の行はこれで全部済み、残りは Lean の行とゴールラインの検査の行。
 
 - 2026-11-14: 台帳の「研究管理 11/14 の読解で見つかった、系『奇数次元』『Jordan–Wigner 行列』の直し」の行を書き切った。奇数次元の設定から j・u・g を定義のブロックへ分け（h は def_inverse_of_two_in_complex_numbers を引く）、o・C_y・⟨φ1,φ2⟩・{1,2} の有限性を定義・主張に分けた。二つの定理を「互いに逆な同型」だけの主張にし、Jordan–Wigner の定理のラベルを theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms に改めて基底の像を二つの主張に出した。記号の衝突と地の文の鎖を直し、SageMath の二つの検算を本物の対照と途中の行の検算つきにした。次は台帳の「系『Jordan–Wigner 行列への接続』の後半」の行。

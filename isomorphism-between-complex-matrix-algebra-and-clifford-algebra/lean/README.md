@@ -114,6 +114,7 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 | 章「同型の証明」のうち、生成作用素の行列の定義とその成分・反交換関係・空集合の位置の行列単位 | `Isomorphism/CreationOperatorMatrices/` の 7 ファイル（`CountAndSign.lean`・`IndexSetOperations.lean`・`VacuumIndexSets.lean` は ℂ を含まず両版が引く） | `NecSuf/Isomorphism/CreationOperatorMatrices/` の 4 ファイル | `CountAndSignFromNecSuf.lean`・`CreationMatricesFromNecSuf.lean`・`VacuumMatrixUnitFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数から行列環への準同型（c_i² = 0・(c_i^T)² = 0、φ、Φ の存在と一意性、Φ(a†_i) = c_i・Φ(a_i) = c_i^T） | `Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `NecSuf/Isomorphism/HomomorphismToMatrixAlgebra/HomomorphismToMatrixAlgebra.lean` | `HomomorphismToMatrixAlgebraFromNecSuf.lean` |
 | 章「同型の証明」のうち、クリフォード代数の中の局所的な等式（a†_S・a_T・P の定義、a_i P = 0・P a†_i = 0、生成元を左から・消滅元を右から掛けた式） | `Isomorphism/LocalIdentities/LocalIdentities.lean` | `NecSuf/Isomorphism/LocalIdentities/LocalIdentities.lean` | `LocalIdentitiesFromNecSuf.lean` |
+| 章「同型の証明」のうち、クリフォード代数の中の大域的な等式（番号の違う因子の交換、a†_{U,≤m}・P_{≤m}・Q^{T,U}_m の定義と分解、(P (a_T a†_U)) P = δ_{T,U} ∗ P、u^S_i の定義、部分集合の和の主張、1 の分解） | `Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `NecSuf/Isomorphism/GlobalIdentities/GlobalIdentities.lean` | `GlobalIdentitiesFromNecSuf.lean` |
 
 ## 必要十分版が示したこと（節「ℂ-線型空間」）
 
@@ -218,3 +219,13 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
 - 局所的な等式の行で使う K の性質は、n · n = 1・1 + n = 0（本文の (-1_ℂ)·(-1_ℂ) = 1_ℂ と反交換する二元の入れ替え）、0 + 0 = 0、
   a · 0 = 0（i ∈ T の場合だけ）、ς(N) · n = n · ς(N) である。具体版が ℂ の乗法の交換法則を当てる行は ς(N)·(-1) = (-1)·ς(N) だけである。
 - 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない（M = 0 でも同じ証明が通る）。
+
+## 必要十分版が示したこと（章「同型の証明」のクリフォード代数の中の大域的な等式）
+
+- a†_{U,≤m}・P_{≤m}・Q^{T,U}_m・u^S_i の定義、a†_{U,≤m} と P_{≤m} の分解、Q^{T,U}_M = (P (a_T a†_U)) P、a_{T,≤m} a†_{U,≤m} の分解は、
+  章「クリフォード代数」の仮定 `CliffordLaws K n` のほかに K の性質を足さない。
+- ほかのクリフォード代数の中の主張に要るのは、a + (-a) = 0（生成元の反交換関係と平方が零であることを引くため）だけである。
+  行の中で使う K の性質は 0 + 0 = 0（零のスカラー倍・零との積）と、a_i と a†_j a_j の交換の 1 + n = 0・n · n = 1 だけである。
+- 部分集合の和の主張（一般の K-代数 B）は、B の乗法の交換法則も K の乗法の性質も使わない。使う K の性質は 0 + 0 = 0 だけで、
+  右から掛ける写像が線型結合を線型結合へ移す主張の仮定から来る。
+- 2 の可逆性と平方根は、どの主張も使わない。本文の前提 M ∈ ℤ_{≥1} も、どの主張も使わない。
