@@ -1828,7 +1828,7 @@ P_{k+1}\check{Q}_\epsilon
 &> 0\cdot\tfrac12
 &&\bigl(\because\ \gamma(\tilde\theta_\mu) > 0\ \text{の両辺に}\ \tfrac12 > 0\ \text{を掛ける}\bigr)\\
 &= 0
-&&(\because\ 0\cdot\tfrac12 = 0)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \tfrac12)\bigr)
 \end{aligned}`,
       ),
       displayMath(
@@ -1837,7 +1837,7 @@ P_{k+1}\check{Q}_\epsilon
 &> 2\cdot 0
 &&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\ \text{(3) の}\ \sinh x > 0\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{に上の鎖を当て、両辺に}\ 2 > 0\ \text{を掛ける}\bigr)\\
 &= 0
-&&(\because\ 2\cdot 0 = 0)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 2)\bigr)
 \end{aligned}`,
       ),
       displayMath(
@@ -1947,6 +1947,7 @@ r
         "trace_of_check_Vprime が Σ_ε Λ̌_ε = Π 2cosh(γ/2) を与えるのと対をなす計算で、符号 η_ε が入ることで cosh が sinh に変わる。γ(θ~_μ) > 0（半整数運動量に固有）なので sinh の積が 0 にならないのが要点である。整数運動量では臨界点で γ(θ_M) = 0 になりうるため、この論法はそのままでは使えない。",
         "数値検証: sagemath/check/trace_of_epsilon_V_plus_via_check_eigenvalues/（旧い記録は sagemath/check/053_claim_even_sector_closing/check_03）。",
         "2026-11-04: SageMath の検算を付けるときに、名前だけの根拠と散文の推論を (∵) 付きの鎖にした。Step 1 は「トレースの線型性」と名前だけで和・スカラー倍・ε の積の段を省いていたので、trace_of_check_Vprime の Step 1 と同じ根拠の 13 行にした（ε を V^{(+)}Q̌_ε の前から作用させる mat_mult_associative・scalar_multiple_factors_out_of_right_factor・scalar_multiple_is_associative の行を足した）。Step 2 の「(−1)^{M−|ϵ|} = Π_μ(−1)^{1−ϵ_μ}」「theorem_exp_product（n=1）」「有限個の因子の積の展開」は、実数の符号 ǔ^{(e)} の有限積の包含が (−1_ℂ)^{M−|ϵ|} に等しいことの帰納法（Step 2）、各項を実数の包含 (ť_ϵȟ)_ℂ で表す鎖（Step 3）、real_exp_of_finite_sum・新しく足した finite_product_of_real_products・real_sum_over_binary_words_distributes_in_left_factor・expansion_of_finite_product_of_two_term_sums_of_real_numbers・def_cosh_sinh の sinh を引く鎖（Step 4）にした。theorem_exp_product は二つの行列の主張で M_col 個の和には届かない。Step 3 の sinh の正値性に引いていた cosh_sinh_basic_properties は (3) を明示し、正数の有限積は finite_product_of_positive_reals_is_positive を引いた。主張文は ℂ の値 tr(εV^{(+)}) と実数の因子を包含を書かずに等号で結び、ℂ の値に > 0 を書いていたので、実数の因子を ϰ ∈ ℝ と置いて (1) tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、(2) ϰ > 0、(3) 同値に分け、ℂ の元の > 0 を「正の実数の包含に等しい」と定めた（下流の max_eigenvector_in_even_sector・max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus が引く同値の形は変わらない）。値は変えていない。Lean（ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean）は旧い Step の分け方のままで、新しい鎖との 1 対 1 と finite_product_of_real_products の Lean は Lean の連続実行が受け持つ。",
+        "2026-11-15: Step 6 の 1 本目の鎖の最後の行の名前だけの根拠「0·½ = 0」を real_zero_times_is_zero（x → ½）の参照に、2 本目の鎖の最後の行の「2·0 = 0」を real_times_zero_is_zero（x → 2）の参照に替えた。式と主張は変えていない。",
       ],
     },
   },

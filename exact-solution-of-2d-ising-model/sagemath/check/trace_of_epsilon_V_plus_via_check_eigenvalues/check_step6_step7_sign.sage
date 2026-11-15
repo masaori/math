@@ -23,8 +23,8 @@ for (K1, K2) in PARAMS:
         assert C > 0                                                     # def_second_transfer_matrix_prefactor の ℝ_{>0}
         for g in gam:
             assert g > 0                                                 # gamma_theta_tilde_mu_positive
-            assert (g / 2).overlaps(g * half) and g * half > 0 * half and (0 * half) == 0
-            assert 2 * (g / 2).sinh() > 2 * 0 and 2 * 0 == 0
+            assert (g / 2).overlaps(g * half) and g * half > 0 * half and (0 * half) == 0   # 最後の行は real_zero_times_is_zero（x → ½）
+            assert 2 * (g / 2).sinh() > 2 * 0 and 2 * 0 == 0                             # 最後の行は real_times_zero_is_zero（x → 2）
             count += 5
         p = 2 * (gam[0] / 2).sinh()
         assert p > 0

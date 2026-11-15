@@ -46,6 +46,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 namespace Ising2D
 
@@ -602,7 +604,7 @@ theorem gam_half_pos (μ : Fin M) : D.gam μ / 2 > 0 :=
       = D.gam μ * (1 / 2) := div_eq_mul_one_div _ _   -- ℝ で `a/2 = a·½`
     _ > 0 * (1 / 2) := mul_lt_mul_of_pos_right (D.hgam μ) one_half_pos
                                                         -- `γ(θ̃_μ) > 0` の両辺に `½ > 0` を掛ける
-    _ = 0 := zero_mul _                                 -- `0·½ = 0`
+    _ = 0 := real_zero_times_is_zero (1 / 2)            -- `real_zero_times_is_zero`（`x → ½`）
 
 /-- **原文 Step 6** の 2 本目の鎖: `2sinh(γ(θ̃_μ)/2) > 2·0 = 0`。 -/
 theorem two_sinh_gam_half_pos (μ : Fin M) : 2 * Real.sinh (D.gam μ / 2) > 0 :=
@@ -610,7 +612,7 @@ theorem two_sinh_gam_half_pos (μ : Fin M) : 2 * Real.sinh (D.gam μ / 2) > 0 :=
       > 2 * 0 := mul_lt_mul_of_pos_left (cosh_sinh_basic_properties_3 (D.gam_half_pos μ)).2 two_pos
                                                         -- `cosh_sinh_basic_properties` (3) の `sinh x > 0`（`x → γ(θ̃_μ)/2`）に
                                                         -- 上の鎖を当て、両辺に `2 > 0` を掛ける
-    _ = 0 := mul_zero _                                 -- `2·0 = 0`
+    _ = 0 := real_times_zero_is_zero 2                  -- `real_times_zero_is_zero`（`x → 2`）
 
 end VPlusData
 
@@ -628,8 +630,9 @@ theorem prod_two_sinh_gam_half_pos {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlus
 `ϰ = (2sinh 2K_2)^{M_col/2}Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`、
 `(2sinh 2K_2)^{M_col/2}` が `D.C`。`def_second_transfer_matrix_prefactor` の `(2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0}` は
 `VPlusData` の入力 `D.hC`）。必要十分版は置かない（Step 6 の 4 本の鎖が効かせるのは、引いた
-`cosh_sinh_basic_properties` (3)・`finite_product_of_positive_reals_is_positive`（それぞれ必要十分版あり）と、
-ℝ の順序と乗法の計算規則（`a/2 = a·½`、正の数を不等号の両辺に掛ける、`0·a = 0`、`a·0 = 0`、正の数どうしの積は正）だけで、
+`cosh_sinh_basic_properties` (3)・`finite_product_of_positive_reals_is_positive`・`real_zero_times_is_zero`・
+`real_times_zero_is_zero`（それぞれ必要十分版あり）と、ℝ の順序と乗法の計算規則（`a/2 = a·½`、正の数を不等号の両辺に掛ける、
+正の数どうしの積は正）だけで、
 鎖に固有の取り払える構造が無い）。 -/
 theorem traceFactor_pos_step6 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     D.traceFactor > 0 :=
