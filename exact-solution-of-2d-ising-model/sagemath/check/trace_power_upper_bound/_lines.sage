@@ -84,23 +84,64 @@ def check_proof_lines(P, c, nmax, what):
             for l in range(d):
                 eq(pw[p][k, l], body_transpose(pw[p])[k, l], f"{what}: 【冪の実対称性】の鎖 1 行目")
                 eq(body_transpose(pw[p])[k, l], pw[p][l, k], f"{what}: 【冪の実対称性】の鎖 2 行目")
-    # 【対角成分の表示】: e_k^⊤W^pe_k = ΣΣ (e_k)_i (W^p)_ij (e_k)_j = Σ_j (e_k)_k (W^p)_kj (e_k)_j = Σ_j (W^p)_kj (e_k)_j = (W^p)_kk
+    def drop_zeros_left_to_right(terms, kept, label):
+        """0+⋯+0+kept+0+⋯+0 を def_finite_sum_of_real_numbers の左から順に足し、各段で 0 + r = r か r + 0 = r の一つだけを当てる。"""
+        acc = terms[0]
+        for j in range(1, len(terms)):
+            t = terms[j]
+            if acc == 0:
+                eq(acc + t, t, f"{label} の段（0 + r = r）j={j}")
+            else:
+                eq(t, 0, f"{label} の段で足す項は 0 j={j}")
+                eq(acc + t, acc, f"{label} の段（r + 0 = r）j={j}")
+            acc = acc + t
+        eq(acc, kept, f"{label}（0 の項を左から順に落とす）")
+    # 【対角成分の表示】: 準備（i ≠ k の項の 3 行、i ≠ k の内側の和の 2 行、j ≠ k の項の 2 行）と主の 7 行
+    # e_k^⊤W^pe_k = ΣΣ (e_k)_i (W^p)_ij (e_k)_j = 0+⋯+0+Σ_j (e_k)_k (W^p)_kj (e_k)_j+0+⋯+0 = Σ_j (e_k)_k (W^p)_kj (e_k)_j
+    #   = Σ_j (W^p)_kj (e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk (e_k)_k = (W^p)_kk
     for p in range(nmax + 1):
         Q = pw[p]
         for k in range(d):
             e = E[k]
+            for i in range(d):
+                if i == k:
+                    continue
+                eq(e[i], 0, f"{what}: 【対角成分の表示】の i ≠ k なので (e_k)_i = 0")
+                for j in range(d):
+                    eq((e[i] * Q[i, j]) * e[j], (QQ(0) * Q[i, j]) * e[j], f"{what}: 【対角成分の表示】i ≠ k の項の 1 行目（(e_k)_i = 0）p={p}, k={k}, i={i}, j={j}")
+                    eq(QQ(0) * Q[i, j], 0, f"{what}: 【対角成分の表示】i ≠ k の項の 2 行目の根拠 real_zero_times_is_zero（x → (W^p)_ij）")
+                    eq((QQ(0) * Q[i, j]) * e[j], QQ(0) * e[j], f"{what}: 【対角成分の表示】i ≠ k の項の 2 行目")
+                    eq(QQ(0) * e[j], 0, f"{what}: 【対角成分の表示】i ≠ k の項の 3 行目（real_zero_times_is_zero、x → (e_k)_j）")
+                inner = [(e[i] * Q[i, j]) * e[j] for j in range(d)]
+                eq(sum_left_to_right(inner), sum_left_to_right([QQ(0)] * d), f"{what}: 【対角成分の表示】i ≠ k の内側の和の 1 行目（各項へ 0）p={p}, k={k}, i={i}")
+                eq(sum_left_to_right([QQ(0)] * d), 0, f"{what}: 【対角成分の表示】i ≠ k の内側の和の 2 行目（0 + 0 = 0 を左から順に）")
+            for j in range(d):
+                if j == k:
+                    continue
+                eq(e[j], 0, f"{what}: 【対角成分の表示】の j ≠ k なので (e_k)_j = 0")
+                eq(Q[k, j] * e[j], Q[k, j] * QQ(0), f"{what}: 【対角成分の表示】j ≠ k の項の 1 行目（(e_k)_j = 0）p={p}, k={k}, j={j}")
+                eq(Q[k, j] * QQ(0), 0, f"{what}: 【対角成分の表示】j ≠ k の項の 2 行目（real_times_zero_is_zero、x → (W^p)_kj）")
+            rows = [sum_left_to_right([(e[i] * Q[i, j]) * e[j] for j in range(d)]) for i in range(d)]
+            kept_row = sum_left_to_right([(e[k] * Q[k, j]) * e[j] for j in range(d)])
+            rows_sub = [kept_row if i == k else QQ(0) for i in range(d)]
+            cols_sub = [Q[k, k] * e[k] if j == k else QQ(0) for j in range(d)]
             L = [bil(e, Q, e),
-                 sum(sum(e[i] * Q[i, j] * e[j] for j in range(d)) for i in range(d)),
-                 sum(e[k] * Q[k, j] * e[j] for j in range(d)),
-                 sum(Q[k, j] * e[j] for j in range(d)),
+                 sum_left_to_right(rows),
+                 sum_left_to_right(rows_sub),
+                 kept_row,
+                 sum_left_to_right([Q[k, j] * e[j] for j in range(d)]),
+                 sum_left_to_right(cols_sub),
                  Q[k, k] * e[k],
                  Q[k, k]]
             for a, b in zip(L, L[1:]):
                 eq(a, b, f"{what}: 【対角成分の表示】 p={p}, k={k}")
-            eq(L[0], (e.row() * Q * e.column())[0, 0], f"{what}: 【対角成分の表示】 と組み込みの行列積 p={p}, k={k}")
             for i in range(d):
-                if i != k:
-                    eq(e[i], 0, f"{what}: 【対角成分の表示】の i ≠ k の項は 0")
+                eq(rows[i], rows_sub[i], f"{what}: 【対角成分の表示】の 2 行目を各項で（i ≠ k は上の内側の和が 0）p={p}, k={k}, i={i}")
+            drop_zeros_left_to_right(rows_sub, kept_row, f"{what}: 【対角成分の表示】の 3 行目 p={p}, k={k}")
+            for j in range(d):
+                eq(Q[k, j] * e[j], cols_sub[j], f"{what}: 【対角成分の表示】の 5 行目を各項で（j ≠ k は上の項が 0）p={p}, k={k}, j={j}")
+            drop_zeros_left_to_right(cols_sub, Q[k, k] * e[k], f"{what}: 【対角成分の表示】の 6 行目 p={p}, k={k}")
+            eq(L[0], (e.row() * Q * e.column())[0, 0], f"{what}: 【対角成分の表示】 と組み込みの行列積 p={p}, k={k}")
     # 【W^ae_k の成分とノルム】: u := W^ae_k、u_l = Σ_m (W^a)_lm (e_k)_m = (W^a)_lk、‖u‖ ≤ c^a‖e_k‖ = c^a、‖u‖^2 ≤ c^{2a}
     U = {}
     for a in range(nmax // 2 + 1):
@@ -108,9 +149,19 @@ def check_proof_lines(P, c, nmax, what):
             u = matvec(pw[a], E[k])
             eq(u, pw[a] * E[k], f"{what}: u の成分の式と組み込みの積 a={a}, k={k}")
             for l in range(d):
-                eq(u[l], sum(pw[a][l, m] * E[k][m] for m in range(d)), f"{what}: 【W^ae_k の成分とノルム】の 1 行目")
-                eq(sum(pw[a][l, m] * E[k][m] for m in range(d)), pw[a][l, k] * E[k][k], f"{what}: 【W^ae_k の成分とノルム】の 2 行目")
-                eq(pw[a][l, k] * E[k][k], pw[a][l, k], f"{what}: 【W^ae_k の成分とノルム】の 3 行目")
+                for m in range(d):
+                    if m != k:
+                        eq(E[k][m], 0, f"{what}: 【W^ae_k の成分とノルム】の m ≠ k なので (e_k)_m = 0")
+                        eq(pw[a][l, m] * E[k][m], pw[a][l, m] * QQ(0), f"{what}: 【W^ae_k の成分とノルム】m ≠ k の項の 1 行目（(e_k)_m = 0）")
+                        eq(pw[a][l, m] * QQ(0), 0, f"{what}: 【W^ae_k の成分とノルム】m ≠ k の項の 2 行目（real_times_zero_is_zero、x → (W^a)_lm）")
+                terms = [pw[a][l, m] * E[k][m] for m in range(d)]
+                terms_sub = [pw[a][l, k] * E[k][k] if m == k else QQ(0) for m in range(d)]
+                eq(u[l], sum_left_to_right(terms), f"{what}: 【W^ae_k の成分とノルム】の 1 行目")
+                for m in range(d):
+                    eq(terms[m], terms_sub[m], f"{what}: 【W^ae_k の成分とノルム】の 2 行目を各項で（m ≠ k は上の項が 0）")
+                eq(sum_left_to_right(terms), sum_left_to_right(terms_sub), f"{what}: 【W^ae_k の成分とノルム】の 2 行目")
+                drop_zeros_left_to_right(terms_sub, pw[a][l, k] * E[k][k], f"{what}: 【W^ae_k の成分とノルム】の 3 行目 a={a}, k={k}, l={l}")
+                eq(pw[a][l, k] * E[k][k], pw[a][l, k], f"{what}: 【W^ae_k の成分とノルム】の 4 行目")
                 eq(u[l], pw[a][l, k], f"{what}: u_l = (W^a)_lk")
             nu = norm_exact(u)
             le(nu, c**a * norm_exact(E[k]), f"{what}: 【W^ae_k の成分とノルム】の ‖u‖ ≤ c^a‖e_k‖ a={a}, k={k}")

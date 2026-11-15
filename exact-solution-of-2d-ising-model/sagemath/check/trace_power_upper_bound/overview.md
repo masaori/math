@@ -15,8 +15,8 @@
 |---|---|---|---|
 | 【e_k のノルム】（`i ≠ k` の鎖 `|(e_k)_i|^2 = |0|^2 = 0^2 = 0` と、`‖e_k‖ = √(Σ|(e_k)_i|^2) = √(0+⋯+0+|(e_k)_k|^2+0+⋯+0) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1`） | `_lines.sage` | `i ≠ k` の鎖の 3 段（`|·|` は `def_real_absolute_value` の場合分けで作る）、AA の平方根で作ったノルムの 7 段、各項へ当てた和と、0 の項を左から順に落とす各段（`0 + a = a` か `a + 0 = a`）、根号の中が 1、`|1| = 1` と `1^2 = 1` | **PASS** |
 | 【冪の実対称性】（`W^p` は実対称） | `_lines.sage` | `def_exp` (1) の漸化式で作った冪が Sage の冪 `P**p` と一致し、成分が QQ、`def_matrix_transpose` で作った転置と一致。鎖 `(W^p)_kl = ((W^p)^⊤)_kl = (W^p)_lk` の 2 段を全成分で | **PASS** |
-| 【対角成分の表示】（`e_k^⊤W^pe_k = ΣΣ… = Σ_j (e_k)_k(W^p)_kj(e_k)_j = Σ_j (W^p)_kj(e_k)_j = (W^p)_kk(e_k)_k = (W^p)_kk`） | `_lines.sage` | 5 段の等号と、組み込みの行列積 `e^⊤Qe` との比較、`i ≠ k` の項が 0 | **PASS** |
-| 【W^ae_k の成分とノルム】（`u_l = Σ_m (W^a)_lm(e_k)_m = (W^a)_lk(e_k)_k = (W^a)_lk`、`‖u‖ ≤ c^a‖e_k‖ = c^a`、`‖u‖^2 ≤ c^{2a}`） | `_lines.sage` | 成分の式と組み込みの積、3 行の等号、`rayleigh_bounds_operator_norm` の冪の主張（指数 `a`）の不等号、`0 ≤ ‖u‖`、`(c^a)^2 = c^{2a}`、二乗した不等号 | **PASS** |
+| 【対角成分の表示】（準備: `i ≠ k` の項 `((e_k)_i(W^p)_ij)(e_k)_j = (0·(W^p)_ij)·(e_k)_j = 0·(e_k)_j = 0`、`i ≠ k` の内側の和 `Σ_j … = Σ_j 0 = 0`、`j ≠ k` の項 `(W^p)_kj(e_k)_j = (W^p)_kj·0 = 0`。主: `e_k^⊤W^pe_k = ΣΣ… = 0+⋯+0+Σ_j (e_k)_k(W^p)_kj(e_k)_j+0+⋯+0 = Σ_j (e_k)_k(W^p)_kj(e_k)_j = Σ_j (W^p)_kj(e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk(e_k)_k = (W^p)_kk`） | `_lines.sage` | 準備の 3 段・2 段・2 段（`real_zero_times_is_zero`・`real_times_zero_is_zero` の当てはめを含む）、主の 7 段の等号、各項へ 0 を当てた和、0 の項を左から順に落とす各段（`0 + r = r` か `r + 0 = r`）、組み込みの行列積 `e^⊤Qe` との比較 | **PASS** |
+| 【W^ae_k の成分とノルム】（準備: `m ≠ k` の項 `(W^a)_lm(e_k)_m = (W^a)_lm·0 = 0`。`u_l = Σ_m (W^a)_lm(e_k)_m = 0+⋯+0+(W^a)_lk(e_k)_k+0+⋯+0 = (W^a)_lk(e_k)_k = (W^a)_lk`、`‖u‖ ≤ c^a‖e_k‖ = c^a`、`‖u‖^2 ≤ c^{2a}`） | `_lines.sage` | 成分の式と組み込みの積、準備の 2 段、4 行の等号（各項へ 0 を当てた和と、0 の項を左から順に落とす各段）、`rayleigh_bounds_operator_norm` の冪の主張（指数 `a`）の不等号、`0 ≤ ‖u‖`、`(c^a)^2 = c^{2a}`、二乗した不等号 | **PASS** |
 | 偶数の場合の鎖（【対角成分の表示】 → `2a = a+a` → `matrix_power_exponent_law` → `mat_mult` → 【冪の実対称性】 の対称性 → `u_l = (W^a)_lk` → `u_lu_l = |u_l|^2` → `def_matrix_norm` → `≤ c^{2a}` → `n = 2a`） | `_lines.sage` | 8 段の等号、不等号、最後の等号。`W^{2a} = W^aW^a` を行列として比較 | **PASS** |
 | 奇数の場合の `W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a(W^{0+1}W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)` | `_lines.sage` | 7 段の行列の等号（冪は `def_exp` (1)、積は `mat_mult` の成分の式） | **PASS** |
 | 奇数の場合の成分の鎖（【対角成分の表示】 → 上の鎖 → `mat_mult` 2 回 → 分配則 → 【冪の実対称性】 → 【W^ae_k の成分とノルム】 → `def_real_bilinear_value` → `def_rayleigh_sup` → 【W^ae_k の成分とノルム】 と `c > 0` → 指数法則 → `n = 2a+1`） | `_lines.sage` | 8 段の等号、不等号 2 段、等号 2 段 | **PASS** |
@@ -31,9 +31,9 @@
 `_lines.sage` の `check_proof_lines` を二つの検算が呼ぶ。
 
 - `check_generic_positive_semidefinite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「半正定値（`rayleigh_bounds_operator_norm` の前提）」「`c` は上限」だけなので、
-  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 36830 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行、2026-11-08 の `|1| = 1`・`1^2 = 1` の行を含む）。
+  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 100929 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行、2026-11-08 の `|1| = 1`・`1^2 = 1` の行を含む）。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 28528 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 129632 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
 
 `W` の作り方、`c(M_col)` の作り方（特性多項式の最大の実根を AA で取り、`cI − W` の半正定値性と固有ベクトルでの到達で上限であることを確かめる）、
 ノルム・`x^⊤Py`・行列とベクトルの積・冪の関数は、直前の主張の検算 `sagemath/check/rayleigh_bounds_operator_norm/_prelude.sage` を読み込んで使う（その overview の「`c(M_col)` の作り方」）。

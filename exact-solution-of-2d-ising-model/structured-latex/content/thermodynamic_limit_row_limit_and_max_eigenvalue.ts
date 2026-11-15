@@ -2090,18 +2090,66 @@ c(M_{\mathrm{col}})
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`k \in \{1,\dots,d\}`),
+        " とする。",
+        math(String.raw`i \neq k`),
+        " の ",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " と ",
+        math(String.raw`j \in \{1,\dots,d\}`),
         " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((e_k)_i\,((W_{\mathbb{R}})^p)_{ij}\bigr)\,(e_k)_j
+&=\bigl(0\cdot((W_{\mathbb{R}})^p)_{ij}\bigr)\cdot(e_k)_j
+&&\bigl(\because\ i \neq k\ \text{なので}\ (e_k)_i = 0\bigr)\\
+&=0\cdot(e_k)_j
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to ((W_{\mathbb{R}})^p)_{ij})\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to (e_k)_j)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`i \neq k`),
+        " の ",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}(e_k)_i\,\bigl((W_{\mathbb{R}})^p\bigr)_{ij}\,(e_k)_j
+&=\sum_{j=1}^{d}0
+&&\bigl(\because\ \text{上の}\ \bigl((e_k)_i\,((W_{\mathbb{R}})^p)_{ij}\bigr)(e_k)_j = 0\ \text{を各項へ}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j \neq k`),
+        " の ",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
+&=\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\cdot 0
+&&\bigl(\because\ j \neq k\ \text{なので}\ (e_k)_j = 0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to ((W_{\mathbb{R}})^p)_{kj})\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
       displayMath(String.raw`\begin{aligned}
 e_k^\top (W_{\mathbb{R}})^p e_k
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i\,\bigl((W_{\mathbb{R}})^p\bigr)_{ij}\,(e_k)_j
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to (W_{\mathbb{R}})^p,\ x, y \to e_k)\bigr)\\
+&=0 + \cdots + 0 + \sum_{j=1}^{d}(e_k)_k\,\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ i \neq k\ \text{の内側の和が}\ 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ i = k\ \text{の項の前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=\sum_{j=1}^{d}(e_k)_k\,\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
-&&\bigl(\because\ i \neq k\ \text{の項は}\ (e_k)_i = 0\ \text{なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^p\bigr)_{kj}\,(e_k)_j
 &&\bigl(\because\ (e_k)_k = 1\bigr)\\
+&=0 + \cdots + 0 + \bigl((W_{\mathbb{R}})^p\bigr)_{kk}\,(e_k)_k + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ j \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^p\bigr)_{kj}(e_k)_j = 0\ \text{を}\ k\ \text{以外の各項へ。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}\,(e_k)_k
-&&\bigl(\because\ j \neq k\ \text{の項は}\ (e_k)_j = 0\ \text{なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^p\bigr)_{kk}
 &&\bigl(\because\ (e_k)_k = 1\bigr)
 \end{aligned}`),
@@ -2116,14 +2164,28 @@ e_k^\top (W_{\mathbb{R}})^p e_k
         math(String.raw`u := (W_{\mathbb{R}})^ae_k \in \mathbb{R}^d`),
         " とおく。",
         math(String.raw`l \in \{1,\dots,d\}`),
+        " と、",
+        math(String.raw`m \neq k`),
+        " の ",
+        math(String.raw`m \in \{1,\dots,d\}`),
         " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,(e_k)_m
+&=\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\cdot 0
+&&\bigl(\because\ m \neq k\ \text{なので}\ (e_k)_m = 0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to ((W_{\mathbb{R}})^a)_{lm})\bigr)
+\end{aligned}`),
+      paragraph(["なので"]),
       displayMath(String.raw`\begin{aligned}
 u_l
 &=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lm}\,(e_k)_m
 &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to (W_{\mathbb{R}})^a,\ x \to e_k)\bigr)\\
+&=0 + \cdots + 0 + \bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ m \neq k\ \text{の}\ \bigl((W_{\mathbb{R}})^a\bigr)_{lm}(e_k)_m = 0\ \text{を}\ k\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ k-1\ \text{個、後に}\ d-k\ \text{個}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(e_k)_k
-&&\bigl(\because\ m \neq k\ \text{の項は}\ (e_k)_m = 0\ \text{なので}\ 0\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
 &=\bigl((W_{\mathbb{R}})^a\bigr)_{lk}
 &&\bigl(\because\ (e_k)_k = 1\bigr)
 \end{aligned}`),
@@ -2329,6 +2391,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "2026-11-04: SageMath の検算（sagemath/check/trace_power_upper_bound/）を付けるにあたり、根拠の欠けを直した（主張は不変）。(1)「W は実対称なので W^n も実対称」と「冪の指数法則（W^{2a} = W^aW^a、W^{2a+1} = W^aWW^a）」は本文に主張が無かったので、power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_power_exponent_law・product_of_real_entry_matrices_has_real_entries を足して引いた。(2) 旧い鎖は (W^a e_k)^⊤(W^a e_k) と (W^a)^⊤ = W^a を使っていたが、行列の積の転置の主張は本文に無い。対角成分を mat_mult で開き、W^a の成分の対称性と u_l = (W^a)_{lk} で ‖u‖^2・u^⊤Wu に着く形にした。(3) (W^n)_{kk} = e_k^⊤W^ne_k・‖e_k‖ = 1 を def_real_bilinear_value・def_matrix_norm から示す準備を置き、e_k を定めた。(4)「作用素ノルムのレイリー上限評価の a 回の適用」は rayleigh_bounds_operator_norm の冪の主張（k → a）を一度当てるものなので、そう書いた。(5) W^{2a+1} = W^a(WW^a) を def_exp (1) と matrix_power_exponent_law の鎖にした。def_trace・def_rayleigh_sup への blkref を足した。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ の冪の対角成分の実数の和 Σ_k ((W_ℝ)^n)_kk で述べ直し（tr(W^n) はその r_ℂ であることは trace_of_W_power_via_W_real が述べる。下流の trace_power_sandwich・partition_function_sandwich はそれを引く形に書き直す予定）、証明の中の冪をすべて (W_ℝ)^p にした。【冪の実数の行列】で real_matrix_of_real_entry_matrix_preserves_power を引き、【冪の対称性】を W^p の実対称性から ϱ を通す 6 行の鎖と単射性に、W^{2a} = W^aW^a・W^{2a+1} = W^a(WW^a) を ϱ で運ぶ 5 行の鎖二本（real_matrix_of_real_entry_matrix_preserves_product）にし、成分の積を def_real_matrix_product で開き、(W_ℝ)^a e_k を新しく足した def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で「読んで」いた）。rayleigh_bounds_operator_norm の主張の積はまだ mat_mult の成分の式で、同じ式だが別の定義である（状態台帳の (r3b2e) で def_real_matrix_vector_product にそろえる）。最後のトレースの鎖の「項ごとの不等式の有限和は順序を保つ」を finite_sum_of_real_numbers_is_monotone の参照にした。値は変わらない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「d c^n = 2^{M_col} c^n（∵ d := 2^{M_col}）」は、行列の大きさ d ∈ ℤ と ℝ の冪 2^{M_col} を同じ記号で等号で結んでいた。新しく足した inclusion_zz_to_rr の写像 ι_{ℤ→ℝ} を通し、「同じ項 c^n を d 個足した和 = ι(d)c^n」を finite_sum_of_constant_real_number、「ι(2_ℤ^{M_col}) = 2_ℝ^{M_col}」を inclusion_zz_to_rr_of_power_of_two の参照にした。d を def_power_of_integer の 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した。主張の 2^{M_col} が ℝ の冪であることを主張の文に書いた。値は変わらない。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【対角成分の表示】の i ≠ k・j ≠ k の項と【(W_ℝ)^ae_k の成分とノルム】の m ≠ k の項を、0 を掛けると 0 を書かずに「(e_k)_i = 0 なので 0」で和から落としていた。準備に、左から 0 の項の 3 行の鎖（(e_k)_i = 0 の代入、real_zero_times_is_zero を 2 回）、i ≠ k の内側の和が 0 の 2 行の鎖、右から 0 の項の 2 行の鎖（(e_k)_j = 0 の代入、real_times_zero_is_zero）を置き、主の鎖の落とす段を、各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（【e_k のノルム】と同じ書き方。【対角成分の表示】は 5 行から 7 行、成分の鎖は 3 行から 4 行。式の両端と主張は不変）。",
       ],
     },
   },

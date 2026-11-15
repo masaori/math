@@ -22,8 +22,8 @@
 | 【`e_k` のノルム】`i ≠ k` の `|(e_k)_i|^2` の 3 行の鎖とノルムの 7 行 | `norm_of_standard_basis_vector` の `hoff` の `calc` の 3 段と `calc` の 7 段 |
 | 【冪の実数の行列】`(W^p)_ℝ = (W_ℝ)^p` | `real_matrix_of_real_entry_matrix_preserves_power`（`A → W`, `q → p`）をそのまま引く |
 | 【冪の対称性】6 行と単射性 | `power_of_W_real_entry_symm` の `calc` の 6 段と `inclusion_rr_to_cc_is_injective` |
-| 【対角成分の表示】5 行 | `diagonal_entry_via_standard_basis` の `calc` の 5 段 |
-| 【`(W_ℝ)^ae_k` の成分とノルム】成分の 3 行 | `power_of_W_real_mulVec_standard_basis_apply` の `calc` の 3 段 |
+| 【対角成分の表示】`i ≠ k` の項の 3 行、`i ≠ k` の内側の和の 2 行、`j ≠ k` の項の 2 行と主の 7 行 | `diagonal_entry_via_standard_basis` の `hterm` の 3 段、`hrow` の 2 段、`hcol` の 2 段と `calc` の 7 段 |
+| 【`(W_ℝ)^ae_k` の成分とノルム】`m ≠ k` の項の 2 行と成分の 4 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 4 段 |
 | 同じ段のノルムの 3 行 | `norm_power_of_W_real_mulVec_standard_basis_le` の `calc` の 3 段 |
 | 同じ段の平方の 2 行 | `norm_sq_power_of_W_real_mulVec_standard_basis_le` の `calc` の 2 段 |
 | 偶数: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a` の 5 行 | `power_of_W_real_even_split` の `calc` の 5 段 |
@@ -43,8 +43,9 @@
   `A = B` から `A_ℝ = B_ℝ` を出す行は `realMatrixOfRealEntries_congr` で書く。
 - 人手の `def_real_matrix_product`・`def_real_matrix_vector_product` は Lean の `Matrix _ _ ℝ` の `*`・`*ᵥ`（成分は和で `rfl`）、
   `def_real_bilinear_value` は `dotProduct_mulVec_eq_real_bilinear_value`、`‖·‖` は `vecNorm`（`def_matrix_norm` の `K = ℝ`）である。
-- 人手の「`i ≠ k` の項は 0」の行は、mathlib の `Finset.sum_eq_single`（一つの項を除いて 0 の有限和はその項）で書く。
-  本文に対応する主張は `finite_sum_with_single_nonzero_term`（係数 `ℂ`）で、`ℝ` の版は本文に無い。
+- 人手の「`k` 以外の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if _ = k then _ else 0` に書き、
+  「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`norm_of_standard_basis_vector` と同じ。
+  本文に対応する主張は `finite_sum_with_single_nonzero_term`（係数 `ℂ`）で、`ℝ` の版は本文に無い）。
 - 人手の `ℝ` の冪の指数法則・平方の単調性は mathlib の `pow_mul`・`pow_succ'`・`pow_le_pow_left₀` で書く。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
@@ -52,6 +53,8 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimNormOfNormalized
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPowerOfRealSymmetricComplexMatrixIsRealSymmetric
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
@@ -110,39 +113,72 @@ theorem power_of_W_real_entry_symm (p : ℕ) (k l : Conf M) :
     _ = (((realMatrixOfRealEntries W hW.1 ^ p) l k : ℝ) : ℂ) := by
         rw [real_matrix_of_real_entry_matrix_preserves_power W hW.1 p]      -- 【冪の実数の行列】の `(W^p)_ℝ = (W_ℝ)^p`
 
-/-- 人手【対角成分の表示】: `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（5 行）。 -/
+/-- 人手【対角成分の表示】: `e_k^⊤(W_ℝ)^pe_k = ((W_ℝ)^p)_kk`（準備の 3 行・2 行・2 行と主の 7 行）。 -/
 theorem diagonal_entry_via_standard_basis (p : ℕ) (k : Conf M) :
     (Pi.single k (1 : ℝ)) ⬝ᵥ (realMatrixOfRealEntries W hW.1 ^ p) *ᵥ (Pi.single k (1 : ℝ))
       = (realMatrixOfRealEntries W hW.1 ^ p) k k := by
   set P := realMatrixOfRealEntries W hW.1 ^ p
   set e : Conf M → ℝ := Pi.single k 1 with he
+  -- 準備: `i ≠ k` の項（3 行）
+  have hterm : ∀ i, i ≠ k → ∀ j, e i * P i j * e j = 0 := fun i hik j =>
+    calc e i * P i j * e j
+        = 0 * P i j * e j := by rw [he, Pi.single_eq_of_ne hik]           -- `i ≠ k` なので `(e_k)_i = 0`
+      _ = 0 * e j := by rw [real_zero_times_is_zero (P i j)]               -- `real_zero_times_is_zero`（`x → ((W_ℝ)^p)_ij`）
+      _ = 0 := real_zero_times_is_zero (e j)                               -- `real_zero_times_is_zero`（`x → (e_k)_j`）
+  -- 準備: `i ≠ k` の内側の和（2 行）
+  have hrow : ∀ i, i ≠ k → ∑ j, e i * P i j * e j = 0 := fun i hik =>
+    calc ∑ j, e i * P i j * e j
+        = ∑ _j : Conf M, (0 : ℝ) :=
+          Finset.sum_congr rfl fun j _ => hterm i hik j                    -- 上の `i ≠ k` の項が `0` を各項へ
+      _ = 0 := by simp only [Finset.sum_const_zero]                        -- `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
+  -- 準備: `j ≠ k` の項（2 行）
+  have hcol : ∀ j, j ≠ k → P k j * e j = 0 := fun j hjk =>
+    calc P k j * e j
+        = P k j * 0 := by rw [he, Pi.single_eq_of_ne hjk]                 -- `j ≠ k` なので `(e_k)_j = 0`
+      _ = 0 := real_times_zero_is_zero (P k j)                             -- `real_times_zero_is_zero`（`x → ((W_ℝ)^p)_kj`）
   calc e ⬝ᵥ P *ᵥ e
       = ∑ i, ∑ j, e i * P i j * e j :=
         dotProduct_mulVec_eq_real_bilinear_value e e P                     -- `def_real_bilinear_value`（`P → (W_ℝ)^p`, `x, y → e_k`）
+    _ = ∑ i, if i = k then ∑ j, e k * P k j * e j else 0 := by
+        refine Finset.sum_congr rfl fun i _ => ?_
+        by_cases h : i = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hrow i h]                                          -- 上の `i ≠ k` の内側の和が `0` を `k` 以外の各項へ
     _ = ∑ j, e k * P k j * e j := by
-        rw [Finset.sum_eq_single k
-          (fun i _ hik => by
-            simp only [he, Pi.single_eq_of_ne hik, zero_mul, Finset.sum_const_zero])
-          (fun h => absurd (Finset.mem_univ k) h)]                         -- `i ≠ k` の項は `(e_k)_i = 0` なので `0`
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
     _ = ∑ j, P k j * e j := by simp only [he, Pi.single_eq_same, one_mul]          -- `(e_k)_k = 1`
+    _ = ∑ j, if j = k then P k k * e k else 0 := by
+        refine Finset.sum_congr rfl fun j _ => ?_
+        by_cases h : j = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hcol j h]                                          -- 上の `j ≠ k` の項が `0` を `k` 以外の各項へ
     _ = P k k * e k := by
-        rw [Finset.sum_eq_single k
-          (fun j _ hjk => by rw [he, Pi.single_eq_of_ne hjk, mul_zero])
-          (fun h => absurd (Finset.mem_univ k) h)]                         -- `j ≠ k` の項は `(e_k)_j = 0` なので `0`
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
     _ = P k k := by rw [he, Pi.single_eq_same, mul_one]                     -- `(e_k)_k = 1`
 
-/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の成分の 3 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
+/-- 人手【`(W_ℝ)^ae_k` の成分とノルム】の `m ≠ k` の項の 2 行と成分の 4 行: `u_l = ((W_ℝ)^a)_lk`（`u := (W_ℝ)^ae_k`）。 -/
 theorem power_of_W_real_mulVec_standard_basis_apply (a : ℕ) (k l : Conf M) :
     ((realMatrixOfRealEntries W hW.1 ^ a) *ᵥ (Pi.single k (1 : ℝ))) l
       = (realMatrixOfRealEntries W hW.1 ^ a) l k := by
   set P := realMatrixOfRealEntries W hW.1 ^ a
   set e : Conf M → ℝ := Pi.single k 1 with he
+  -- 準備: `m ≠ k` の項（2 行）
+  have hterm : ∀ m, m ≠ k → P l m * e m = 0 := fun m hmk =>
+    calc P l m * e m
+        = P l m * 0 := by rw [he, Pi.single_eq_of_ne hmk]                 -- `m ≠ k` なので `(e_k)_m = 0`
+      _ = 0 := real_times_zero_is_zero (P l m)                             -- `real_times_zero_is_zero`（`x → ((W_ℝ)^a)_lm`）
   calc (P *ᵥ e) l
       = ∑ m, P l m * e m := rfl                                             -- `def_real_matrix_vector_product`（`P → (W_ℝ)^a`, `x → e_k`）
+    _ = ∑ m, if m = k then P l k * e k else 0 := by
+        refine Finset.sum_congr rfl fun m _ => ?_
+        by_cases h : m = k
+        · rw [if_pos h, h]
+        · rw [if_neg h, hterm m h]                                         -- 上の `m ≠ k` の項が `0` を `k` 以外の各項へ
     _ = P l k * e k := by
-        rw [Finset.sum_eq_single k
-          (fun m _ hmk => by rw [he, Pi.single_eq_of_ne hmk, mul_zero])
-          (fun h => absurd (Finset.mem_univ k) h)]                         -- `m ≠ k` の項は `(e_k)_m = 0` なので `0`
+        rw [Finset.sum_ite_eq' Finset.univ k, if_pos (Finset.mem_univ k)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
     _ = P l k := by rw [he, Pi.single_eq_same, mul_one]                     -- `(e_k)_k = 1`
 
 /-- 人手 偶数の場合の 5 行: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a`。 -/
