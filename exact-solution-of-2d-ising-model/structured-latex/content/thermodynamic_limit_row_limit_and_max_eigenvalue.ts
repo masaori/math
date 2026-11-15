@@ -2933,8 +2933,12 @@ u^{(a+1)}_l
 &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\cdot 0
 &&\bigl(\because\ W_{\mathbb{R}}u^{(a)} = 0\ \text{という仮定}\bigr)\\
+&=\sum_{k=1}^{d}0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to u^{(a)}_k)\ \text{を}\ d\ \text{個の項へ同時に}\bigr)\\
+&=\iota_{\mathbb{Z}\to\mathbb{R}}(d)\cdot 0
+&&\bigl(\because\ \blkref{finite_sum_of_constant_real_number}\ (m \to d \in \mathbb{Z}_{\geq 1},\ r \to 0)\bigr)\\
 &=0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ r \cdot 0 = 0\ \text{と}\ 0\ \text{の有限和}\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to \iota_{\mathbb{Z}\to\mathbb{R}}(d))\bigr)
 \end{aligned}`),
       paragraph([
         "となり、帰納法の仮定 ",
@@ -3174,6 +3178,7 @@ a+b+1 &= p+(p+1)+1
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張と証明は W の冪の成分を「def_rayleigh_sup が W を読むのと同じく実数として読む」としてから def_real_bilinear_value（実数の行列を取る）に当てていた。主張を def_W_real の W_ℝ で m_k := x^⊤(W_ℝ)^kx と述べ直し、証明の冪をすべて (W_ℝ)^p、単位行列を I_ℝ（def_real_identity_matrix）にした。trace_power_upper_bound と同じく【冪の実数の行列】（real_matrix_of_real_entry_matrix_preserves_power。I_ℝ = ϱ(I) もここから出した）と【冪の対称性】（W^p の実対称性から ϱ を通す 6 行の鎖と単射性）を置き、【冪の分け方】は Mat(d,ℂ) の二つの鎖を ϱ で運ぶ 5 行の鎖（real_matrix_of_real_entry_matrix_preserves_product）にした。成分の積は def_real_matrix_product、(W_ℝ)^ax は def_real_matrix_vector_product で開いた（旧い版は mat_mult の成分の式で読んでいた）。u^(a+1) = W_ℝu^(a) は、(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a を ϱ で運ぶ 7 行の鎖と成分の 8 行の鎖にした（実数の行列とベクトルの積の結合則の主張が本文に無いため、mat_mult_associative の行を成分の計算に替えた）。W_ℝ の対称性・正定値性・半正定値性は W_real_is_symmetric・W_real_is_positive_definite・W_real_is_positive_semidefinite を引いた。主張の不等式は不変である。下流の trace_power_sandwich はまだこの主張を旧い形（m_k := x^⊤W^kx、w^⊤W^nw > 0）で引いており、主張と食い違っている（状態台帳の (r3b2e2) で W_ℝ の形に書き直す）。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 行列の大きさ d := 2^{M_col} を def_power_of_integer の ℤ の冪 2_ℤ^{M_col} と書き、d ∈ ℤ_{≥1} を power_of_two_in_integers_is_at_least_one で示した（同じ記号 2^{M_col} を ℤ の元と ℝ の元に使い回さないため）。値と手順は変えていない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【I_ℝ と W_ℝ の正値性】の y^⊤I_ℝy の鎖と【(W_ℝ)^ax は零でない】の u^{(0)}_l の鎖で、単位行列の非対角成分の項を 0 を掛けると 0 を書かずに「(I_ℝ)_kl = 0 なので 0」で和から落としていた。準備に l ≠ k の項の 3 行の鎖（def_real_identity_matrix の (I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → y_k）、real_zero_times_is_zero（x → y_l））と m ≠ l の項の 2 行の鎖（(I_ℝ)_lm = 0 の代入、real_zero_times_is_zero（x → x_m））を置き、主の鎖の落とす段を、各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（y^⊤I_ℝy の鎖は 3 行から 4 行、u^{(0)}_l の鎖は 4 行から 5 行。式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^ax は零でない】の背理法の鎖の最後の行は根拠「ℝ で r·0 = 0 と 0 の有限和」で、右から 0 を掛けると 0 と、0 だけの有限和は 0 の 2 つの事実を名前だけの 1 行で使っていた。鎖を Σ_k 0 で一度止め、各項を 0 にする行を real_times_zero_is_zero（x → u^{(a)}_k）、Σ_k 0 = 0 を finite_sum_of_constant_real_number（m → d、r → 0）と real_times_zero_is_zero（x → ι_{ℤ→ℝ}(d)）の 2 行にした（鎖の両端と主張は不変）。Lean の具体版 real_bilinear_value_eq_zero_of_mulVec_eq_zero の最後の段も同じ 3 段にした。",
       ],
     },
   },

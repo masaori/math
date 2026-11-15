@@ -37,7 +37,7 @@
 | 同じ段の `a = 0`: `m ≠ l` の項の 2 行と `u^{(0)}_l = x_l` の 5 行 | `power_zero_of_W_real_mulVec_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段の `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a` の 7 行 | `power_succ_of_W_real` の `calc` の 7 段 |
 | 同じ段の `u^{(a+1)}_l = (W_ℝu^{(a)})_l` の 8 行 | `power_succ_of_W_real_mulVec_apply` の `calc` の 8 段 |
-| 同じ段の背理法の 5 行 | `real_bilinear_value_eq_zero_of_mulVec_eq_zero` の `calc` の 5 段と `power_of_W_real_mulVec_ne_zero` の帰納法 |
+| 同じ段の背理法の 7 行 | `real_bilinear_value_eq_zero_of_mulVec_eq_zero` の `calc` の 7 段（人手の `ι_{ℤ→ℝ}(d)` は Lean の `(Fintype.card (Conf M) : ℝ)`（`Nat.cast`））と `power_of_W_real_mulVec_ne_zero` の帰納法 |
 | 【正値性】`m_{2a} > 0`・`m_{2a+1} > 0` の 5 行ずつ | `moment_even_pos`・`moment_odd_pos` の `calc` の 5 段 |
 | 【`P = W_ℝ` の不等式】8 行 | `moment_sq_le_with_W_real` の `calc` の 8 段 |
 | 【`P = I_ℝ` の不等式】8 行 | `moment_sq_le_with_real_identity` の `calc` の 8 段 |
@@ -302,7 +302,7 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
     _ = ∑ n, WR l n * ((WR ^ a) *ᵥ x) n := rfl                              -- 【`(W_ℝ)^ax` の成分】
     _ = (WR *ᵥ ((WR ^ a) *ᵥ x)) l := rfl                                    -- `def_real_matrix_vector_product`（`P → W_ℝ`, `x → u^{(a)}`）
 
-/-- 人手【`(W_ℝ)^ax` は零でない】の背理法の 5 行: `W_ℝu = 0` なら `u^⊤W_ℝu = 0`。 -/
+/-- 人手【`(W_ℝ)^ax` は零でない】の背理法の 7 行: `W_ℝu = 0` なら `u^⊤W_ℝu = 0`。 -/
 theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
     (hu : realMatrixOfRealEntries W hW.1 *ᵥ u = 0) :
     u ⬝ᵥ realMatrixOfRealEntries W hW.1 *ᵥ u = 0 := by
@@ -314,7 +314,13 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
         simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配則と乗法の結合則
     _ = ∑ k, u k * (WR *ᵥ u) k := rfl                                       -- `def_real_matrix_vector_product`
     _ = ∑ k, u k * (0 : Conf M → ℝ) k := by rw [hu]                         -- `W_ℝu = 0` という仮定
-    _ = 0 := by simp only [Pi.zero_apply, mul_zero, Finset.sum_const_zero]  -- `ℝ` で `r·0 = 0` と `0` の有限和
+    _ = ∑ _k : Conf M, (0 : ℝ) :=
+        Finset.sum_congr rfl fun k _ => real_times_zero_is_zero (u k)       -- `real_times_zero_is_zero`（`x → u^{(a)}_k`）を `d` 個の項へ同時に
+    _ = (Fintype.card (Conf M) : ℝ) * 0 :=
+        finite_sum_of_constant_real_number_fintype
+          (by rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M) 0
+                                                                            -- `finite_sum_of_constant_real_number`（`m → d ∈ ℤ_{≥1}`, `r → 0`）
+    _ = 0 := real_times_zero_is_zero _                                      -- `real_times_zero_is_zero`（`x → ι_{ℤ→ℝ}(d)`）
 
 /-- 人手【`(W_ℝ)^ax` は零でない】: `x ≠ 0` なら `u^{(a)} := (W_ℝ)^ax ≠ 0`（`a` の帰納法。`W_ℝ` の正定値性 `hpd` を使う）。 -/
 theorem power_of_W_real_mulVec_ne_zero
@@ -330,7 +336,7 @@ theorem power_of_W_real_mulVec_ne_zero
         funext (power_succ_of_W_real_mulVec_apply W hW a x)                -- `u^{(a+1)} = W_ℝu^{(a)}`
       rw [hsucc]
       intro h0
-      have hzero := real_bilinear_value_eq_zero_of_mulVec_eq_zero W hW _ h0  -- 背理法の 5 行
+      have hzero := real_bilinear_value_eq_zero_of_mulVec_eq_zero W hW _ h0  -- 背理法の 7 行
       have hpos := hpd _ (power_of_W_real_mulVec_ne_zero hpd hx a)          -- 帰納法の仮定と【`I_ℝ` と `W_ℝ` の正値性】
       rw [hzero] at hpos
       exact lt_irrefl 0 hpos

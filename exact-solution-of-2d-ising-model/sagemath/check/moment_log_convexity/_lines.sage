@@ -210,6 +210,15 @@ def check_proof_lines(P, x, kmax, what):
              sum(u[k] * Wu[k] for k in rng)]
         for s, t in zip(L, L[1:]):
             eq(s, t, f"{what}: 背理法の鎖の 1〜3 行目 a={a}")
+        # 背理法の鎖の 4〜7 行目のうち、仮定 W_ℝu^(a) = 0 を使わない後ろの 3 段（Σ_k u_k·0 から 0 まで）。
+        # 仮定を当てた後の Σ_k u_k·0 を、零ベクトルを u に掛けた和として作る。
+        zero = [QQ(0) for k in rng]
+        L = [sum(u[k] * zero[k] for k in rng),            # Σ_k u^(a)_k · 0
+             sum(QQ(0) for k in rng),                      # Σ_k 0（real_times_zero_is_zero を各項へ）
+             QQ(len(rng)) * QQ(0),                         # ι_{ℤ→ℝ}(d)·0（finite_sum_of_constant_real_number）
+             QQ(0)]                                        # 0（real_times_zero_is_zero）
+        for s, t in zip(L, L[1:]):
+            eq(s, t, f"{what}: 背理法の鎖の 5〜7 行目 a={a}")
         assert u != 0 and Wu != 0, f"{what}: W^ax ≠ 0 a={a}"
     # 【正値性】: m_{2a} = x^⊤(W_ℝ)^{a+a}x = x^⊤(W^a(IW^a))x = (u^(a))^⊤Iu^(a) > 0、m_{2a+1} も同様に W で
     for a in range(K // 2 + 1):
