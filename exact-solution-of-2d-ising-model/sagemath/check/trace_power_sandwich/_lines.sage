@@ -174,6 +174,54 @@ def check_psd(P, Pn, n, z, what):
     le(0, L[-1], f"{what}: z^⊤(W_ℝ)^nz > 0", strict=True)
 
 
+def check_standard_basis_double_sum(Pn, g, h, what):
+    """【(W_ℝ)^n の成分の評価】の準備: i ≠ g の項の 3 行（(e_g)_i = 0 の代入、real_zero_times_is_zero（x → ((W_ℝ)^n)_ij）、
+    real_zero_times_is_zero（x → (e_h)_j））、i ≠ g の内側の和の 2 行、j ≠ h の項の 2 行（(e_h)_j = 0 の代入、real_times_zero_is_zero）と、
+    ΣΣ(e_g)_i((W_ℝ)^n)_ij(e_h)_j = 0+⋯+0+Σ_j(e_g)_g(…)_gj(e_h)_j+0+⋯+0 = … = ((W_ℝ)^n)_gh の 6 行。"""
+    d = Pn.nrows()
+    rng = range(d)
+    zero = QQ(0)
+    eg = vector(QQ, [1 if i == g else 0 for i in rng])
+    eh = vector(QQ, [1 if i == h else 0 for i in rng])
+    for i in rng:
+        if i == g:
+            continue
+        eq(eg[i], 0, f"{what}: i ≠ g なので (e_g)_i = 0 g={g}, i={i}")
+        for j in rng:
+            chain_eq([(eg[i] * Pn[i, j]) * eh[j], (zero * Pn[i, j]) * eh[j], zero * eh[j], zero],
+                     f"{what}: i ≠ g の項の 3 行 g={g}, h={h}, i={i}, j={j}")
+        terms = [(eg[i] * Pn[i, j]) * eh[j] for j in rng]
+        for j in rng:
+            eq(terms[j], zero, f"{what}: i ≠ g の内側の和の各項へ 0 を当てる i={i}, j={j}")
+        chain_eq([sum_left_to_right(terms), sum_left_to_right([zero] * d), zero], f"{what}: i ≠ g の内側の和の 2 行 i={i}")
+    for j in rng:
+        if j == h:
+            continue
+        eq(eh[j], 0, f"{what}: j ≠ h なので (e_h)_j = 0 h={h}, j={j}")
+        chain_eq([Pn[g, j] * eh[j], Pn[g, j] * zero, zero], f"{what}: j ≠ h の項の 2 行 g={g}, j={j}")
+    inner = [sum_left_to_right([(eg[i] * Pn[i, j]) * eh[j] for j in rng]) for i in rng]
+    kept_row = sum_left_to_right([(eg[g] * Pn[g, j]) * eh[j] for j in rng])
+    outer_sub = [kept_row if i == g else zero for i in rng]
+    for i in rng:
+        eq(inner[i], outer_sub[i], f"{what}: g 以外の各項へ i ≠ g の内側の和が 0 を当てる i={i}")
+    drop_zeros_left_to_right(outer_sub, kept_row, f"{what}: 外側の和の 0 を左から順に落とす g={g}")
+    row = [Pn[g, j] * eh[j] for j in rng]
+    row_sub = [Pn[g, h] * eh[h] if j == h else zero for j in rng]
+    for j in rng:
+        eq(row[j], row_sub[j], f"{what}: h 以外の各項へ j ≠ h の項が 0 を当てる j={j}")
+    drop_zeros_left_to_right(row_sub, Pn[g, h] * eh[h], f"{what}: 内側の和の 0 を左から順に落とす h={h}")
+    eq(eg[g], 1, f"{what}: (e_g)_g = 1")
+    eq(eh[h], 1, f"{what}: (e_h)_h = 1")
+    L = [sum_left_to_right(inner),
+         sum_left_to_right(outer_sub),
+         kept_row,
+         sum_left_to_right(row),
+         sum_left_to_right(row_sub),
+         Pn[g, h] * eh[h],
+         Pn[g, h]]
+    chain_eq(L, f"{what}: ΣΣ(e_g)_i((W_ℝ)^n)_ij(e_h)_j = ((W_ℝ)^n)_gh の 6 行 g={g}, h={h}")
+
+
 def check_entry_bound(Pn, x, k, l, what):
     """【(W_ℝ)^n の成分の評価】v_i := x_l(e_k)_i − x_k(e_l)_i の 8 行と、移項した不等式。"""
     d = Pn.nrows()
@@ -197,6 +245,8 @@ def check_entry_bound(Pn, x, k, l, what):
          rpow(x[l], 2) * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[l, k] + rpow(x[k], 2) * Pn[l, l],
          rpow(x[l], 2) * Pn[k, k] - x[l] * x[k] * Pn[k, l] - x[k] * x[l] * Pn[k, l] + rpow(x[k], 2) * Pn[l, l],
          rpow(x[l], 2) * Pn[k, k] - 2 * x[k] * Pn[k, l] * x[l] + rpow(x[k], 2) * Pn[l, l]]
+    for (g, h) in [(k, k), (k, l), (l, k), (l, l)]:
+        check_standard_basis_double_sum(Pn, g, h, what)
     le(0, L[0], f"{what}: 0 ≤ v^⊤(W_ℝ)^nv k={k}, l={l}")
     chain_eq(L, f"{what}: 【(W_ℝ)^n の成分の評価】 k={k}, l={l}")
     le(2 * x[k] * Pn[k, l] * x[l], rpow(x[l], 2) * Pn[k, k] + rpow(x[k], 2) * Pn[l, l], f"{what}: 移項した不等式 k={k}, l={l}")

@@ -29,7 +29,7 @@
 | 同じ段の `w^⊤(W_ℝ)^nw > 0`（`moment_log_convexity` の正値性） | 同じ定理の `hwpos` |
 | 同じ段の `‖w‖ = 1` の 15 行（`w_i := ‖z‖^{-1}z_i`） | `norm_of_inverse_norm_multiple_is_one` の `calc` の 15 段 |
 | 同じ段の `z^⊤(W_ℝ)^nz > 0` の 8 行 | `power_of_W_real_is_positive_semidefinite` の `z ≠ 0` の `calc` の 8 段 |
-| 【`(W_ℝ)^n` の成分の評価】の各二重和の値（`(e_q)_i` は `i = q` でだけ `1`） | `standard_basis_real_bilinear_value` |
+| 【`(W_ℝ)^n` の成分の評価】の準備 `Σ_iΣ_j(e_g)_i((W_ℝ)^n)_ij(e_h)_j = ((W_ℝ)^n)_gh`（`i ≠ g` の項の 3 行、`i ≠ g` の内側の和の 2 行、`j ≠ h` の項の 2 行と主の 6 行） | `standard_basis_real_bilinear_value` の `hterm`・`hrow`・`hcol` と `calc` の 6 段 |
 | 同じ段の 8 行と移項 | `power_of_W_real_entry_bound` の `calc` の 8 段と移項 |
 | 【単位ベクトルでの評価】`Σ_k x_k^2 = 1` の 4 行 | `sum_sq_of_unit_vector` の `calc` の 4 段 |
 | 同じ段の `l ≠ k` の項の 3 行と `m_0 = 1` の 8 行 | `moment_zero_eq_one` の `hterm` の 3 段と `calc` の 8 段 |
@@ -44,7 +44,8 @@
   `hWRsymm`・`hpd` は `moment_log_convexity` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`。
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`m_k := x^⊤(W_ℝ)^kx` は `momentWReal`、`e_q` は `Pi.single q 1`、
   `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。`‖·‖` は `vecNorm`（`def_matrix_norm` の `K = ℝ`）。
-- 人手【`(W_ℝ)^n` の成分の評価】の「`i ≠ q` の項は 0」の行は mathlib の `Finset.sum_eq_single` で書く。
+- 人手【`(W_ℝ)^n` の成分の評価】の準備の「`g`（`h`）以外の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if _ = g then _ else 0` に書き、
+  「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
 - 人手【単位ベクトルでの評価】の `m_0` の鎖の「各 `k` の内側の和の `l ≠ k` の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if l = k then _ else 0` に書き、
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
 - 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
@@ -150,18 +151,49 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
         rw [power_of_real_one_is_one 2]                                     -- `power_of_real_one_is_one`（`m → 2`）
     _ = 1 := sqrt_of_real_one_is_one                                        -- `sqrt_of_real_one_is_one`
 
-/-- 人手【`(W_ℝ)^n` の成分の評価】の各二重和: `Σ_iΣ_j (e_q)_iP_ij(e_r)_j = P_qr`
-（`(e_q)_i` は `i = q` でだけ `1` でほかは `0` なので、`0` でない項は一つだけ）。 -/
-theorem standard_basis_real_bilinear_value (P : Matrix (Conf M) (Conf M) ℝ) (q r : Conf M) :
-    ∑ i, ∑ j, (Pi.single q (1 : ℝ) : Conf M → ℝ) i * P i j * (Pi.single r (1 : ℝ) : Conf M → ℝ) j
-      = P q r := by
-  rw [Finset.sum_eq_single q
-    (fun i _ hiq => by simp only [Pi.single_eq_of_ne hiq, zero_mul, Finset.sum_const_zero])
-    (fun h => absurd (Finset.mem_univ q) h)]
-  rw [Finset.sum_eq_single r
-    (fun j _ hjr => by rw [Pi.single_eq_of_ne hjr, mul_zero])
-    (fun h => absurd (Finset.mem_univ r) h)]
-  rw [Pi.single_eq_same, Pi.single_eq_same, one_mul, mul_one]
+/-- 人手【`(W_ℝ)^n` の成分の評価】の準備: `Σ_iΣ_j (e_g)_iP_ij(e_h)_j = P_gh`
+（`i ≠ g` の項の 3 行、`i ≠ g` の内側の和の 2 行、`j ≠ h` の項の 2 行と主の 6 行。人手の `P` は `(W_ℝ)^n`）。 -/
+theorem standard_basis_real_bilinear_value (P : Matrix (Conf M) (Conf M) ℝ) (g h : Conf M) :
+    ∑ i, ∑ j, (Pi.single g (1 : ℝ) : Conf M → ℝ) i * P i j * (Pi.single h (1 : ℝ) : Conf M → ℝ) j
+      = P g h := by
+  set eg : Conf M → ℝ := Pi.single g 1 with heg
+  set eh : Conf M → ℝ := Pi.single h 1 with heh
+  -- 準備: `i ≠ g` の項（3 行）
+  have hterm : ∀ i, i ≠ g → ∀ j, eg i * P i j * eh j = 0 := fun i hig j =>
+    calc eg i * P i j * eh j
+        = 0 * P i j * eh j := by rw [heg, Pi.single_eq_of_ne hig]          -- `i ≠ g` なので `(e_g)_i = 0`
+      _ = 0 * eh j := by rw [Ising2D.real_zero_times_is_zero (P i j)]      -- `real_zero_times_is_zero`（`x → ((W_ℝ)^n)_ij`）
+      _ = 0 := Ising2D.real_zero_times_is_zero (eh j)                      -- `real_zero_times_is_zero`（`x → (e_h)_j`）
+  -- 準備: `i ≠ g` の内側の和（2 行）
+  have hrow : ∀ i, i ≠ g → ∑ j, eg i * P i j * eh j = 0 := fun i hig =>
+    calc ∑ j, eg i * P i j * eh j
+        = ∑ _j : Conf M, (0 : ℝ) :=
+          Finset.sum_congr rfl fun j _ => hterm i hig j                    -- 上の `i ≠ g` の項が `0` を各項へ
+      _ = 0 := by simp only [Finset.sum_const_zero]                        -- `def_finite_sum_of_real_numbers` の和と `0 + 0 = 0`（具体版が無いので mathlib）
+  -- 準備: `j ≠ h` の項（2 行）
+  have hcol : ∀ j, j ≠ h → P g j * eh j = 0 := fun j hjh =>
+    calc P g j * eh j
+        = P g j * 0 := by rw [heh, Pi.single_eq_of_ne hjh]                -- `j ≠ h` なので `(e_h)_j = 0`
+      _ = 0 := Ising2D.real_times_zero_is_zero (P g j)                     -- `real_times_zero_is_zero`（`x → ((W_ℝ)^n)_gj`）
+  calc ∑ i, ∑ j, eg i * P i j * eh j
+      = ∑ i, if i = g then ∑ j, eg g * P g j * eh j else 0 := by
+        refine Finset.sum_congr rfl fun i _ => ?_
+        by_cases hi : i = g
+        · rw [if_pos hi, hi]
+        · rw [if_neg hi, hrow i hi]                                        -- 上の `i ≠ g` の内側の和が `0` を `g` 以外の各項へ
+    _ = ∑ j, eg g * P g j * eh j := by
+        rw [Finset.sum_ite_eq' Finset.univ g, if_pos (Finset.mem_univ g)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
+    _ = ∑ j, P g j * eh j := by simp only [heg, Pi.single_eq_same, one_mul]       -- `(e_g)_g = 1`
+    _ = ∑ j, if j = h then P g h * eh h else 0 := by
+        refine Finset.sum_congr rfl fun j _ => ?_
+        by_cases hj : j = h
+        · rw [if_pos hj, hj]
+        · rw [if_neg hj, hcol j hj]                                        -- 上の `j ≠ h` の項が `0` を `h` 以外の各項へ
+    _ = P g h * eh h := by
+        rw [Finset.sum_ite_eq' Finset.univ h, if_pos (Finset.mem_univ h)]
+                                                                            -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
+    _ = P g h := by rw [heh, Pi.single_eq_same, mul_one]                    -- `(e_h)_h = 1`
 
 section General
 
@@ -279,7 +311,7 @@ theorem power_of_W_real_entry_bound (n : ℕ) (x : Conf M → ℝ) (k l : Conf M
       _ = x l ^ 2 * P k k - x l * x k * P k l - x k * x l * P l k + x k ^ 2 * P l l := by
           rw [standard_basis_real_bilinear_value, standard_basis_real_bilinear_value,
             standard_basis_real_bilinear_value, standard_basis_real_bilinear_value]
-                                                                            -- 各二重和で `0` でない項は一つだけ
+                                                                            -- 上の準備 `Σ_iΣ_j(e_g)_i((W_ℝ)^n)_ij(e_h)_j = ((W_ℝ)^n)_gh` を `(g, h) → (k, k), (k, l), (l, k), (l, l)` の 4 つの二重和へ同時に
       _ = x l ^ 2 * P k k - x l * x k * P k l - x k * x l * P k l + x k ^ 2 * P l l := by
           rw [show P l k = P k l from power_of_W_real_entry_symm W hW n l k]  -- 【`(W_ℝ)^n` の成分の対称性】の `((W_ℝ)^n)_lk = ((W_ℝ)^n)_kl`
       _ = x l ^ 2 * P k k - 2 * x k * P k l * x l + x k ^ 2 * P l l := by ring

@@ -3601,7 +3601,69 @@ z^\top (W_{\mathbb{R}})^nz
         " なら ",
         math(String.raw`(e_q)_i := 0`),
         " で定めた実数の組である。",
+        math(String.raw`g, h \in \{1,\dots,d\}`),
+        " とする。",
+        math(String.raw`i \neq g`),
+        " の ",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " と ",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " について",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((e_g)_i\,((W_{\mathbb{R}})^n)_{ij}\bigr)\,(e_h)_j
+&=\bigl(0\cdot((W_{\mathbb{R}})^n)_{ij}\bigr)\cdot(e_h)_j
+&&\bigl(\because\ i \neq g\ \text{なので}\ (e_g)_i = 0\bigr)\\
+&=0\cdot(e_h)_j
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to ((W_{\mathbb{R}})^n)_{ij})\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to (e_h)_j)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`i \neq g`),
+        " の ",
+        math(String.raw`i \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}(e_g)_i\,\bigl((W_{\mathbb{R}})^n\bigr)_{ij}\,(e_h)_j
+&=\sum_{j=1}^{d}0
+&&\bigl(\because\ \text{上の}\ \bigl((e_g)_i\,((W_{\mathbb{R}})^n)_{ij}\bigr)(e_h)_j = 0\ \text{を各項へ}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の和を左から順に足し、}\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j \neq h`),
+        " の ",
+        math(String.raw`j \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((W_{\mathbb{R}})^n\bigr)_{gj}\,(e_h)_j
+&=\bigl((W_{\mathbb{R}})^n\bigr)_{gj}\cdot 0
+&&\bigl(\because\ j \neq h\ \text{なので}\ (e_h)_j = 0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to ((W_{\mathbb{R}})^n)_{gj})\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{d}\sum_{j=1}^{d}(e_g)_i\,\bigl((W_{\mathbb{R}})^n\bigr)_{ij}\,(e_h)_j
+&=0 + \cdots + 0 + \sum_{j=1}^{d}(e_g)_g\,\bigl((W_{\mathbb{R}})^n\bigr)_{gj}\,(e_h)_j + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ i \neq g\ \text{の内側の和が}\ 0\ \text{を}\ g\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。}\ i = g\ \text{の項の前に}\ 0\ \text{が}\ g-1\ \text{個、後に}\ d-g\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
+&=\sum_{j=1}^{d}(e_g)_g\,\bigl((W_{\mathbb{R}})^n\bigr)_{gj}\,(e_h)_j
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
+&=\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^n\bigr)_{gj}\,(e_h)_j
+&&\bigl(\because\ (e_g)_g = 1\bigr)\\
+&=0 + \cdots + 0 + \bigl((W_{\mathbb{R}})^n\bigr)_{gh}\,(e_h)_h + 0 + \cdots + 0
+&&\bigl(\because\ \text{上の}\ j \neq h\ \text{の}\ \bigl((W_{\mathbb{R}})^n\bigr)_{gj}(e_h)_j = 0\ \text{を}\ h\ \text{以外の各項へ。前に}\ 0\ \text{が}\ h-1\ \text{個、後に}\ d-h\ \text{個}\bigr)\\
+&=\bigl((W_{\mathbb{R}})^n\bigr)_{gh}\,(e_h)_h
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + r = r\ \text{と}\ r + 0 = r\ (r \in \mathbb{R})\ \text{を左から順に}\bigr)\\
+&=\bigl((W_{\mathbb{R}})^n\bigr)_{gh}
+&&\bigl(\because\ (e_h)_h = 1\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
       displayMath(String.raw`\begin{aligned}
 0
 &\leq v^\top (W_{\mathbb{R}})^nv
@@ -3621,7 +3683,7 @@ z^\top (W_{\mathbb{R}})^nz
  + x_k^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to x_l,\ x_k)\ \text{を右辺から左辺へ}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - x_lx_k\,((W_{\mathbb{R}})^n)_{kl} - x_kx_l\,((W_{\mathbb{R}})^n)_{lk} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
-&&\bigl(\because\ (e_q)_i\ \text{は}\ i = q\ \text{でだけ}\ 1\ \text{でほかは}\ 0\ \text{なので、各二重和で}\ 0\ \text{でない項は一つだけ}\bigr)\\
+&&\bigl(\because\ \text{上の}\ \sum_{i=1}^{d}\sum_{j=1}^{d}(e_g)_i\,((W_{\mathbb{R}})^n)_{ij}\,(e_h)_j = ((W_{\mathbb{R}})^n)_{gh}\ \text{を}\ (g, h) \to (k, k),\ (k, l),\ (l, k),\ (l, l)\ \text{の 4 つの二重和へ同時に適用}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - x_lx_k\,((W_{\mathbb{R}})^n)_{kl} - x_kx_l\,((W_{\mathbb{R}})^n)_{kl} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^n\text{ の成分の対称性】の}\ ((W_{\mathbb{R}})^n)_{lk} = ((W_{\mathbb{R}})^n)_{kl}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - 2\,x_k\,((W_{\mathbb{R}})^n)_{kl}\,x_l + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
@@ -4019,6 +4081,7 @@ T
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z ≠ 0 の段の ‖z‖ ≠ 0 の背理の鎖の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の z = 0 の段は地の文「def_real_bilinear_value の和の各項が 0·((W_ℝ)^n)_ij·0 = 0 なので」で、左から 0・右から 0 の 2 つの事実を根拠なしに束ねていた。W_real_is_positive_semidefinite の u = 0 の鎖と同じ 5 行の鎖（def_real_bilinear_value、z_i = z_j = 0 の代入、real_zero_times_is_zero（x → ((W_ℝ)^n)_ij）、同（x → 0）、0 の有限和）に開いた（式の両端と主張は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【単位ベクトルでの評価】の m_0 の鎖で、l ≠ k の項を 0 を掛けると 0 を書かずに「(I_ℝ)_kl = 0 なので 0」で和から落としていた。準備に l ≠ k の項の 3 行の鎖（def_real_identity_matrix の (I_ℝ)_kl = 0 の代入、real_times_zero_is_zero（x → x_k）、real_zero_times_is_zero（x → x_l））を置き、主の鎖の落とす段を、各 k の内側の和の各項へ 0 を当てる行と 0 + r = r・r + 0 = r を左から順に当てる行の 2 行に割った（m_0 の鎖は 7 行から 8 行。式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の成分の評価】で、4 つの二重和 Σ_iΣ_j(e_k)_i((W_ℝ)^n)_ij(e_k)_j ほかを「(e_q)_i は i = q でだけ 1 でほかは 0 なので、各二重和で 0 でない項は一つだけ」の 1 行で値へ落としていた。準備に、g, h ∈ {1,…,d} についての Σ_iΣ_j(e_g)_i((W_ℝ)^n)_ij(e_h)_j = ((W_ℝ)^n)_gh の鎖（i ≠ g の項の 3 行（(e_g)_i = 0 の代入、real_zero_times_is_zero を 2 回）、i ≠ g の内側の和が 0 の 2 行、j ≠ h の項の 2 行（(e_h)_j = 0 の代入、real_times_zero_is_zero）、主の 6 行。trace_power_upper_bound の【対角成分の表示】と同じ書き方）を置き、主の鎖の行の根拠を、この準備を (g, h) → (k, k), (k, l), (l, k), (l, l) の 4 つの二重和へ同時に適用する形にした（式の両端と主張は不変）。",
       ],
     },
   },
