@@ -599,33 +599,93 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         String.raw`Y=\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}E^{(k,l)}`,
       ),
       paragraph([
-        "が成り立つ。実際、行列の和とスカラー倍は成分ごとに定まるので右辺の ",
+        "が成り立つ。",
+        math(String.raw`i, j \in \{1,\dots,n\}`),
+        " を固定し、右辺の ",
         math(String.raw`(i,j)`),
-        " 成分は ",
-        math(String.raw`\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\left(E^{(k,l)}\right)_{ij}`),
-        " であり、",
-        math(String.raw`E^{(k,l)}`),
-        " の定義よりこの和では ",
-        math(String.raw`(k,l)=(i,j)`),
-        " の項が ",
-        math(String.raw`y_{ij}\cdot 1=y_{ij}`),
-        "、他の項は ",
-        math(String.raw`y_{kl}\cdot 0=0`),
-        "（",
-        math(String.raw`K=\mathbb{R}`),
-        " なら ",
-        ref("real_times_zero_is_zero"),
-        " の ",
-        math(String.raw`x\to y_{kl}`),
-        "、",
-        math(String.raw`K=\mathbb{C}`),
-        " なら ",
-        ref("complex_times_zero_is_zero"),
-        " の ",
-        math(String.raw`z\to y_{kl}`),
-        "）であるから、和は ",
-        math(String.raw`y_{ij}`),
-        " に等しい。",
+        " 成分を求める。準備として、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`t_{kl} := y_{kl}\left(E^{(k,l)}\right)_{ij} \in K`),
+        " と置く。",
+        math(String.raw`(k,l) \neq (i,j)`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t_{kl}
+&= y_{kl}\left(E^{(k,l)}\right)_{ij}
+&&\bigl(\because\ \text{上の}\ t_{kl}\ \text{の置き方}\bigr)\\
+&= y_{kl}\cdot 0
+&&\bigl(\because\ E^{(k,l)}\ \text{の定義の}\ (i,j) \neq (k,l)\ \text{の場合}\bigr)\\
+&= 0
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら}\ \blkref{real_times_zero_is_zero}\ (x \to y_{kl})\text{、}K = \mathbb{C}\ \text{なら}\ \blkref{complex_times_zero_is_zero}\ (z \to y_{kl})\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+t_{ij}
+&= y_{ij}\left(E^{(i,j)}\right)_{ij}
+&&\bigl(\because\ \text{上の}\ t_{kl}\ \text{の置き方}\ (k \to i,\ l \to j)\bigr)\\
+&= y_{ij}\cdot 1
+&&\bigl(\because\ E^{(i,j)}\ \text{の定義の}\ (i,j) = (k,l)\ \text{の場合}\ (k \to i,\ l \to j)\bigr)\\
+&= y_{ij}
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら}\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to y_{ij})\ \text{（}\blkref{set_and_algebra_notation}\text{）、}K = \mathbb{C}\ \text{なら}\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\ (z \cdot 1_{\mathbb{C}} = z,\ z \to y_{ij})\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。さらに ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`s_k := \sum_{l=1}^{n} t_{kl} \in K`),
+        " と置く。",
+        math(String.raw`k \neq i`),
+        " なら、すべての ",
+        math(String.raw`l`),
+        " で ",
+        math(String.raw`(k,l) \neq (i,j)`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_k
+&= \sum_{l=1}^{n} t_{kl}
+&&\bigl(\because\ \text{上の}\ s_k\ \text{の置き方}\bigr)\\
+&= \sum_{l=1}^{n} 0
+&&\bigl(\because\ \text{上の}\ (k,l) \neq (i,j)\ \text{の}\ t_{kl}\ \text{の鎖を各項へ}\bigr)\\
+&= 0
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら}\ 0\ \text{の有限和は}\ 0\text{、}K = \mathbb{C}\ \text{なら}\ \blkref{finite_sum_of_complex_zeros}\ (m \to n)\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+s_i
+&= \sum_{l=1}^{n} t_{il}
+&&\bigl(\because\ \text{上の}\ s_k\ \text{の置き方}\ (k \to i)\bigr)\\
+&= t_{ij}
+&&\bigl(\because\ l \neq j\ \text{なら}\ (i,l) \neq (i,j)\ \text{なので上の鎖より}\ t_{il} = 0\text{。}K = \mathbb{R}\ \text{なら一つの項のほかが}\ 0\ \text{の有限和はその項、}K = \mathbb{C}\ \text{なら}\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to n,\ \text{和の添字}\ j \to l,\ z_l \to t_{il},\ \text{主張の}\ n \to j)\bigr)\\
+&= y_{ij}
+&&\bigl(\because\ \text{上の}\ t_{ij}\ \text{の鎖}\bigr)
+\end{aligned}`),
+      paragraph(["である。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}E^{(k,l)}\Bigr)_{ij}
+&= \sum_{k=1}^{n}\Bigl(\sum_{l=1}^{n}y_{kl}E^{(k,l)}\Bigr)_{ij}
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら行列の有限和の成分は成分の有限和、}K = \mathbb{C}\ \text{なら}\ \blkref{finite_sum_of_matrices_entrywise}\ (\text{主張の}\ m, n, r \to n,\ \text{和の添字}\ j \to k,\ X_k \to \textstyle\sum_{l=1}^{n}y_{kl}E^{(k,l)},\ \text{成分の}\ (i,k) \to (i,j))\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(y_{kl}E^{(k,l)}\right)_{ij}
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら行列の有限和の成分は成分の有限和、}K = \mathbb{C}\ \text{なら}\ \blkref{finite_sum_of_matrices_entrywise}\ (\text{主張の}\ m, n, r \to n,\ \text{和の添字}\ j \to l,\ X_l \to y_{kl}E^{(k,l)},\ \text{成分の}\ (i,k) \to (i,j))\ \text{を各}\ k\ \text{の項へ}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}y_{kl}\left(E^{(k,l)}\right)_{ij}
+&&\bigl(\because\ K = \mathbb{R}\ \text{なら行列のスカラー倍は成分ごと、}K = \mathbb{C}\ \text{なら}\ \blkref{def_matrix_scalar_multiple}\ (a \to y_{kl},\ A \to E^{(k,l)})\ \text{を各項へ}\bigr)\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}t_{kl}
+&&\bigl(\because\ \text{上の}\ t_{kl}\ \text{の置き方}\bigr)\\
+&= \sum_{k=1}^{n}s_k
+&&\bigl(\because\ \text{上の}\ s_k\ \text{の置き方}\bigr)\\
+&= s_i
+&&\bigl(\because\ k \neq i\ \text{なら上の鎖より}\ s_k = 0\text{。}K = \mathbb{R}\ \text{なら一つの項のほかが}\ 0\ \text{の有限和はその項、}K = \mathbb{C}\ \text{なら}\ \blkref{finite_sum_with_single_nonzero_term}\ (\text{主張の}\ m \to n,\ \text{和の添字}\ j \to k,\ z_k \to s_k,\ \text{主張の}\ n \to i)\bigr)\\
+&= y_{ij}
+&&\bigl(\because\ \text{上の}\ s_i\ \text{の鎖}\bigr)\\
+&= Y_{ij}
+&&\bigl(\because\ Y = (y_{kl})\ \text{の書き方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`(i,j)`),
+        " は任意なので、両辺の成分はすべて一致する。",
       ]),
       paragraph([
         "【",
@@ -1044,6 +1104,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: Step 4 の ‖E^{(k,l)}‖ の鎖の最後の行の根拠「ℝ_{≥0} における 1 の非負平方根」を sqrt_of_real_one_is_one の参照にした。値と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 4 の成分の絶対値の二乗の鎖（(i,j) ≠ (k,l) の側）の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の地の文の y_{kl}·0 = 0（K の元に右から 0 を掛ける）に根拠が無かったので、K = ℝ なら real_times_zero_is_zero（x → y_{kl}）、K = ℂ なら complex_times_zero_is_zero（z → y_{kl}）の参照を添えた（式は不変）。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_03_matrix_unit_zero_entry.sage。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の行列単位による展開の (i,j) 成分の議論が地の文の式変形のままで、y_{ij}·1 = y_{ij} と 0 の項を和から落とす段に根拠が無かったので、t_{kl} := y_{kl}(E^{(k,l)})_{ij}・s_k := Σ_l t_{kl} を置く準備の鎖（t_{kl} = 0（(k,l) ≠ (i,j)）、t_{ij} = y_{ij}、s_k = 0（k ≠ i）、s_i = y_{ij}）と、右辺の (i,j) 成分から Y_{ij} に着く 8 行の鎖に書き直した（準備の各鎖は置き方を開く行から始める）。K = ℂ の側は finite_sum_of_matrices_entrywise・def_matrix_scalar_multiple・complex_numbers_form_a_field の積の単位元・finite_sum_of_complex_zeros・finite_sum_with_single_nonzero_term の参照、K = ℝ の側は、実数の行列の和・スカラー倍の主張と、一つの項のほかが 0 の実数の有限和の主張が本文に無いので名前のまま（x·1 = x は set_and_algebra_notation）とした。0 の実数の有限和は finite_sum_of_constant_real_number と real_times_zero_is_zero で引けるが、ほかの ℝ の側の行とそろえて名前のままにした。主張と式の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_04_matrix_unit_expansion_entry_chain.sage。",
       ],
     },
   },
