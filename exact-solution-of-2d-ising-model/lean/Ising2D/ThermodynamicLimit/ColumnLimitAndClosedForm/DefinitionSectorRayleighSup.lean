@@ -64,6 +64,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 set_option linter.unusedSectionVars false
 
@@ -247,7 +248,7 @@ theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
         _ = vecNorm (evenUnit (n + 1)) * vecNorm (evenUnit (n + 1)) := square_of_real_number_is_product _
                                               -- `square_of_real_number_is_product`（`r → ‖x^{(+)}‖`）
         _ = 0 * 0 := by rw [h0]               -- `‖x^{(+)}‖ = 0` を両方の因子へ同時に適用
-        _ = 0 := zero_mul 0                   -- ℝ で `0 · 0 = 0`
+        _ = 0 := real_times_zero_is_zero 0    -- `real_times_zero_is_zero`（`x → 0`）
     exact one_ne_zero h10                     -- ℝ で `1 ≠ 0` に反する
   have hpos : 0 < vecNorm (evenUnit (n + 1)) := lt_of_le_of_ne hge (Ne.symm hne)
                                               -- `‖x^{(+)}‖ ∈ ℝ_{≥0}` と `‖x^{(+)}‖ ≠ 0` で `‖x^{(+)}‖ ∈ ℝ_{>0}`

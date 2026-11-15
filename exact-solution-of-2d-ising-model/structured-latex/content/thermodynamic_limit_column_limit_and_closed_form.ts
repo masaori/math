@@ -2302,7 +2302,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
 &= 0 \cdot 0
    \quad (\because \left\|x^{(+)}\right\| = 0\ \text{を両方の因子へ同時に適用}) \\
 &= 0
-   \quad (\because \mathbb{R}\ \text{で}\ 0 \cdot 0 = 0)
+   \quad (\because \blkref{real_times_zero_is_zero}\ (x \to 0))
 \end{aligned}`,
       ),
       paragraph([
@@ -2365,6 +2365,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の結論 ‖x^{(+)}‖^2 = 1 から、根拠を書かずに 𝓡_+ の条件 ‖x^{(+)}‖ = 1 へ進んでいた。‖x^{(+)}‖ ∈ ℝ_{≥0}（def_matrix_norm）、‖x^{(+)}‖ = 0 なら 1 = ‖x^{(+)}‖^2 = 0 となる 4 行の鎖で ‖x^{(+)}‖ ≠ 0、‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x^{(+)}‖、b → 1）で ‖x^{(+)}‖ = 1 を示す段を足した。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、ノルムの鎖の積へ開く行・冪へ戻す行と、‖x^{(+)}‖ ≠ 0・‖x^{(+)}‖ = 1 を示す 2 本の鎖の積との行き来を square_of_real_number_is_product で引く行にした（記号の濫用の解消）。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: a_+ の直前で σ^x の行列の形を引く段落の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: ‖x^{(+)}‖ = 0 を仮定した背理法の鎖の最後の行 0·0 = 0 の名前だけの根拠「ℝ で 0·0 = 0」を real_times_zero_is_zero（x → 0）の参照に替えた。式の両端と主張は不変。",
       ],
     },
   },

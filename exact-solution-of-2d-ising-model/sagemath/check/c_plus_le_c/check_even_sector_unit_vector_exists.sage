@@ -9,7 +9,7 @@
 #   ||x^{(+)}||^2 = (√Σ_i|x_i|^2)^2 = Σ_i|x_i|^2 = Σ_i x_i^2 = Σ_i ((1/√2)^M)^2 = ι(2^M)((1/√2)^M)^2 = 2^M((1/√2)^M)^2
 #                = 2^M((1/√2)^M(1/√2)^M) = 2^M(1/√2·1/√2)^M = 2^M(1/(√2√2))^M = 2^M(1/(√2)^2)^M = 2^M(1/2)^M
 #                = (2·1/2)^M = 1^M = 1（14 行。冪はすべて def_power_of_real_number どおりに組む）
-#   ‖x^{(+)}‖ ∈ ℝ_{≥0}、‖x‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（4 行）で ‖x‖ ≠ 0、
+#   ‖x^{(+)}‖ ∈ ℝ_{≥0}、‖x‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（4 行。最後は real_times_zero_is_zero、x → 0）で ‖x‖ ≠ 0、
 #   ‖x‖^2 = 1 = 1·1 = 1^2（3 行）と positive_real_square_injective で ‖x^{(+)}‖ = 1
 # 帰属: 実数の側は AA（実代数的数）、複素数の側は QQbar で厳密に判定する。浮動小数点を使わない。
 # ι は AA → QQbar の包含 QQbar(r)、ν は def_kronecker の ν(I) = 1 + Σ(i_k - 1)2^{M-k}（0 始まりでは Σ(i_k-1)2^{M-k}）。
@@ -148,7 +148,7 @@ for M in [1, 2, 3, 4, 5]:
     # 実際の ‖x^{(+)}‖ ∈ ℝ_{≥0} は 0 でないこと（よって ℝ_{>0}）を確かめる
     assert norm >= 0                                      # def_matrix_norm より ‖x^{(+)}‖ ∈ ℝ_{≥0}
     z = AA(0)
-    rows0 = [sq(z), z * z, AA(0) * AA(0), AA(0)]          # ‖x‖^2 = ‖x‖‖x‖（square_of_real_number_is_product）= 0·0 = 0（‖x‖ → 0）
+    rows0 = [sq(z), z * z, AA(0) * AA(0), AA(0)]          # ‖x‖^2 = ‖x‖‖x‖（square_of_real_number_is_product）= 0·0（‖x‖ → 0）= 0（real_times_zero_is_zero、x → 0）
     for u, w in zip(rows0, rows0[1:]):
         assert u == w
         n_eq += 1
