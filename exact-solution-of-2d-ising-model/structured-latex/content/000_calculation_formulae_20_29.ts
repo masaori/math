@@ -2242,6 +2242,53 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_two_is_nonzero",
+    kind: "claim",
+    title: { text: "実数の 2 は 0 でない" },
+    labels: ["real_two_is_nonzero"],
+    statement: [
+      paragraph([
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`2 \neq 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+0 < 2
+&\Longrightarrow 0 \neq 2
+&&\bigl(\because\ \text{左の}\ 0 < 2\ \text{は}\ \blkref{real_zero_less_than_two}\text{。}\mathbb{R}\ \text{の}\ x < y\ \text{は}\ x \leq y\ \text{かつ}\ x \neq y\ \text{のことなので、その後半}\ (x \to 0,\ y \to 2)\bigr)\\
+&\Longrightarrow 2 \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to 2,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 2 ≠ 0 を名前だけで根拠にしており（inverse_of_sqrt_cc の 0/2 = 0 の行、relation_of_gamma_2_theta_tilde ほか）、2 を def_real_two で定めたので、その 2 について 2 ≠ 0 を real_zero_less_than_two から示す主張にした。Lean の具体版は Ising2D.real_two_is_nonzero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTwoIsNonzero.lean）、必要十分版は Ising2D.NecSuf.ne_zero_of_zero_lt（NecSuf/NeZeroOfZeroLt.lean）。数値検証: sagemath/check/real_two_is_nonzero/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
