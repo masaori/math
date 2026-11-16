@@ -27,6 +27,7 @@
 `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` で扱う。
 -/
 import Ising2D.NecSuf.RayleighMoments
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Mathlib.LinearAlgebra.Matrix.Symmetric
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.LinearAlgebra.Matrix.Trace
@@ -103,6 +104,20 @@ noncomputable def vecNorm (x : n → ℝ) : ℝ := Real.sqrt (vecNormSq x)
 
 theorem vecNormSq_eq_sum (x : n → ℝ) : vecNormSq x = ∑ i, x i ^ 2 := by
   simp [vecNormSq, dotProduct, sq]
+
+/-- Lean の `vecNorm x = √(x ⬝ᵥ x)` を、人手の `def_matrix_norm`（`K = ℝ`）の `‖w‖ = √(Σ_i|w_i|^2)` の形に書く（Lean だけの読み替え）。
+人手の鎖では `def_matrix_norm` を引く 1 行に当たる。各段は Lean の定義を 1 つ開くか、1 つの主張を全ての項へ同時に当てる。 -/
+theorem vecNorm_eq_sqrt_sum_abs_sq (x : n → ℝ) : vecNorm x = Real.sqrt (∑ i, |x i| ^ 2) :=
+  calc vecNorm x
+      = Real.sqrt (vecNormSq x) := rfl                -- Lean の `vecNorm` の定義
+    _ = Real.sqrt (x ⬝ᵥ x) := rfl                     -- Lean の `vecNormSq` の定義
+    _ = Real.sqrt (∑ i, x i * x i) := rfl             -- Lean の `dotProduct` の定義
+    _ = Real.sqrt (∑ i, x i ^ 2) :=
+        congrArg Real.sqrt (Finset.sum_congr rfl fun i _ => (square_of_real_number_is_product (x i)).symm)
+                                                      -- `square_of_real_number_is_product`（`r → x_i`）を右辺から左辺へ、全ての項へ同時に
+    _ = Real.sqrt (∑ i, |x i| ^ 2) :=
+        congrArg Real.sqrt (Finset.sum_congr rfl fun i _ => (square_of_real_absolute_value (x i)).symm)
+                                                      -- `square_of_real_absolute_value`（`q → x_i`）を右辺から左辺へ、全ての項へ同時に
 
 theorem vecNormSq_nonneg (x : n → ℝ) : 0 ≤ vecNormSq x := by
   rw [vecNormSq_eq_sum]

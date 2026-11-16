@@ -45,7 +45,8 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 
 * 人手のノルムの鎖は `i ∈ {1,…,2^{M_col}}` の上の和で書き、和の個数を上端の `2^{M_col}` で読む。Lean の和は `I : Conf (n + 1)` の上の和なので、
   `finite_sum_of_constant_real_number` の段の後に、添字の個数を `2^{M_col}` に読み替える段（`card_conf_nat`）が 1 つ多い。
-  1 段目の `def_matrix_norm` は、Lean の `vecNorm x = √(x ⬝ᵥ x)` を `√(Σ|x_i|^2)` に書く `square_of_real_absolute_value` を含む（`ClaimNormOfNormalizedRealVectorIsOne.lean` の `vecNorm_sq_eq_sum_abs_sq` と同じ）。
+  1 段目の `def_matrix_norm` は、Lean の `vecNorm x = √(x ⬝ᵥ x)` を人手の `√(Σ|x_i|^2)` の形に書く読み替えの補題 `vecNorm_eq_sqrt_sum_abs_sq`
+  （`RealMatrixBilinearFormAndNorm.lean`。Lean の定義を開く 3 段と、`square_of_real_number_is_product`・`square_of_real_absolute_value` を全ての項へ当てる 2 段）で引く。
 * Lean の通しの定理は `M` を一般に取るので、`evenSectorSet_epsilonR_nonempty` は `M = 0` も扱う。
   人手は `M_col ≥ 1` なので `M = 0` の行は無い。`M = 0` の `ε_ℝx^{(+)} = x^{(+)}`（`epsilonR_zero_mulVec_evenUnit`）は、
   `ε` が符号反転の置換行列であること（`epsilonR_mulVec_apply`）と `x^{(+)}` の成分が添字に依らないことから示す。
@@ -205,9 +206,8 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
                           -- Lean の `div_eq_mul_inv` は `z ≠ 0` を求めない（`⁻¹` が全域）ので、`calc` では使わない
   calc vecNorm (evenUnit (n + 1)) ^ 2
       = (Real.sqrt (∑ I, |evenUnit (n + 1) I| ^ 2)) ^ 2 := by
-        rw [vecNorm, vecNormSq_eq_sum]
-        simp only [square_of_real_absolute_value]
-                          -- `def_matrix_norm` の数ベクトルのノルム（`w → x^{(+)}`）。`square_of_real_absolute_value` は書き方の差を埋める段
+        rw [vecNorm_eq_sqrt_sum_abs_sq]
+                          -- `def_matrix_norm` の数ベクトルのノルム（`w → x^{(+)}`）。Lean の `vecNorm` をその形に書くのは `vecNorm_eq_sqrt_sum_abs_sq`
     _ = ∑ I, |evenUnit (n + 1) I| ^ 2 :=
         Real.sq_sqrt (Finset.sum_nonneg fun I _ => sq_nonneg _)
                           -- `definition_of_sqrt_r_positive` の `y^2 = x`（根号の中は非負実数の有限和）
