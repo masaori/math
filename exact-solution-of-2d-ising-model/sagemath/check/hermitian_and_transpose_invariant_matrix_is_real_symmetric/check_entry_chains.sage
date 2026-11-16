@@ -1,5 +1,5 @@
 # 対象ラベル: hermitian_and_transpose_invariant_matrix_is_real_symmetric
-# 人手の証明の 3 つの鎖（7 行の鎖、b = 0 の 4 行、A_kl = a_C の 3 行）を、n = 1..3 の一般の A ∈ Mat(n, ℂ)（成分 A_{kl} = (a_{kl}, b_{kl}) は QQ 上の不定元の対）について、
+# 人手の証明の 3 つの鎖（7 行の鎖、b = 0 の 10 行、A_kl = a_C の 3 行）を、n = 1..3 の一般の A ∈ Mat(n, ℂ)（成分 A_{kl} = (a_{kl}, b_{kl}) は QQ 上の不定元の対）について、
 # 仮定 A^* = A と A^⊤ = A の成分の等式が生成するイデアル J を法として、全ての k, l で 1 行ずつ確かめる。
 # 恒等的に成り立つ行（定義を書き換えるだけの行）は差が 0、仮定を使う行は差が J に入ることを見る（グレブナー基底による厳密な判定）。
 # 複素数は本文 definition_of_cc どおり実数の対で持ち（_shared/complex_as_real_pairs.sage）、Sage の複素数は使わない。
@@ -55,13 +55,34 @@ for n in range(1, 4):
             # 第 2 成分から -b = b（J を法として）
             assert J.reduce(-b - b) == 0
             count += 1
-            # b の鎖: b = 1/2 (b + b) = 1/2 ((-b) + b) = 1/2 · 0 = 0
-            chain3 = [(b, True), ((b + b) / 2, True), (((-b) + b) / 2, False), (P(0) / 2, True), (P(0), True)]
-            # 2 行目 → 3 行目は -b = b による（J を法として）。3 行目 → 4 行目は ℝ の (-b) + b = 0（恒等的）
-            assert chain3[0][0] == chain3[1][0]
-            assert J.reduce(chain3[1][0] - chain3[2][0]) == 0
-            assert chain3[2][0] == chain3[3][0] and chain3[3][0] == chain3[4][0]
-            count += 4
+            # b の鎖（10 行）: b = 1·b = (2^{-1}·2)·b = 2^{-1}·(2·b) = 2^{-1}·((1+1)·b) = 2^{-1}·(1·b + 1·b)
+            #   = 2^{-1}·(b + b) = 2^{-1}·((-b) + b) = 2^{-1}·(b + (-b)) = 2^{-1}·0 = 0
+            # 各行は左辺と右辺を別々に組む。2^{-1} は QQ の 2 の逆元、1 + 1 は QQ の和で組み、2 と別に持つ。
+            one, two = QQ(1), QQ(2)
+            inv2 = two ** (-1)
+            assert inv2 * two == 1 and two == one + one   # 逆元 2^{-1}·2 = 1（2 ≠ 0）と def_real_two
+            chain3 = [
+                (b, True),
+                (one * b, True),                         # 乗法の単位元（右辺から左辺へ）
+                ((inv2 * two) * b, True),                # 逆元 2^{-1}·2 = 1（右辺から左辺へ）
+                (inv2 * (two * b), True),                # 乗法の結合則
+                (inv2 * ((one + one) * b), True),        # def_real_two
+                (inv2 * (one * b + one * b), True),      # 分配則
+                (inv2 * (b + b), True),                  # 乗法の単位元を 2 か所へ
+                (inv2 * ((-b) + b), False),              # -b = b（J を法として）
+                (inv2 * (b + (-b)), True),               # 加法の可換則
+                (inv2 * P(0), True),                     # 加法の逆元 z + (-z) = 0（z → b）
+                (P(0), True),                            # real_times_zero_is_zero（x → 2^{-1}）
+            ]
+            for t_ in range(1, len(chain3)):
+                x, y = chain3[t_ - 1][0], chain3[t_][0]
+                if chain3[t_][1]:
+                    assert x == y, (n, k, l, "b", t_)
+                else:
+                    assert J.reduce(x - y) == 0, (n, k, l, "b", t_)
+                count += 1
+            # -b = b を使う行は J を法としてしか成り立たない（恒等的ではない）
+            assert inv2 * (b + b) != inv2 * ((-b) + b)
             # 最後の鎖: A_kl = (a, b) = (a, 0) = a_C
             assert A[k][l] == (a, b)
             assert pair_in((a, b), (a, P(0)), J)

@@ -13,7 +13,7 @@
 | 7 行の鎖の 3〜6 行目（共役転置の定義（`k → l`, `l → k`）→ `A^* = A` → `def_matrix_transpose` → `A^⊤ = A`） | `hermitian_and_transpose_invariant_matrix_is_real_symmetric` の `calc` の 4 段（`\overline{A_{kl}} = A_{kl}` を作る） |
 | 7 行の鎖の 1・2・7 行目（`def_complex_conjugate`（`x → a`, `y → b`）→ `a, b` の取り方 → … → `a, b` の取り方） | `exists_real_of_star_eq` の 1 つ目の `calc` の 4 段（3 段目が、上の 3〜6 行目の結論 `h`） |
 | 第 2 成分から `−b = b`（`ℂ = ℝ^2` の元の等号は成分ごと） | `congrArg Complex.im` |
-| `b = ½(b + b) = ½((−b) + b) = ½·0 = 0` の 4 行（最後の行は `real_times_zero_is_zero`（`x → ½`）） | `exists_real_of_star_eq` の 2 つ目の `calc` の 4 段（最後の段は具体版 `real_times_zero_is_zero (1 / 2)`） |
+| `b = 0` の 10 行の鎖（乗法の単位元 → 逆元 `2^{-1}·2 = 1`（`real_two_is_nonzero`）→ 乗法の結合則 → `def_real_two` → 分配則 → 乗法の単位元 → `−b = b` → 加法の可換則 → `def_real_difference` の加法の逆元 → `real_times_zero_is_zero`（`x → 2^{-1}`）） | `exists_real_of_star_eq` の 2 つ目の `calc` の 10 段（逆元の段は具体版 `real_two_is_nonzero`、最後の段は具体版 `real_times_zero_is_zero 2⁻¹`） |
 | `A_{kl} = (a, b) = (a, 0) = a_ℂ` の 3 行と、`def_matrix_with_real_entries`（`r → a`） | `exists_real_of_star_eq` の 3 つ目の `calc` の 3 段と `⟨a, _⟩` |
 | `A^⊤ = A` と合わせて `def_real_symmetric_complex_matrix` | `⟨_, hT⟩` |
 
@@ -32,8 +32,8 @@
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 import Mathlib.LinearAlgebra.Matrix.Hermitian
-import Mathlib.Tactic.Ring
 
 namespace Ising2D
 
@@ -53,10 +53,16 @@ theorem exists_real_of_star_eq (z : ℂ) (h : star z = z) : ∃ a : ℝ, z = (a 
   have hneg : -b = b := congrArg Complex.im hpair                           -- 第 2 成分（`ℂ = ℝ^2` の元の等号は成分ごと）
   have hb : b = 0 :=
     calc b
-        = 1 / 2 * (b + b) := by ring                                        -- `ℝ` の四則
-      _ = 1 / 2 * ((-b) + b) := by rw [hneg]                                -- `-b = b`
-      _ = 1 / 2 * 0 := by rw [neg_add_cancel]                               -- `ℝ` で `(-b) + b = 0`
-      _ = 0 := real_times_zero_is_zero (1 / 2)                              -- `real_times_zero_is_zero`（`x → ½`）
+        = 1 * b := (one_mul b).symm                                         -- 乗法の単位元 `1·a = a`（`a → b`）を右辺から左辺へ
+      _ = (2⁻¹ * 2) * b := by rw [inv_mul_cancel₀ real_two_is_nonzero]      -- 乗法の逆元 `a^{-1}·a = 1`（`a → 2`。`real_two_is_nonzero`）を右辺から左辺へ
+      _ = 2⁻¹ * (2 * b) := mul_assoc _ _ _                                  -- 乗法の結合則
+      _ = 2⁻¹ * ((1 + 1) * b) := by rw [one_add_one_eq_two]                 -- `def_real_two`
+      _ = 2⁻¹ * (1 * b + 1 * b) := by rw [add_mul]                          -- 分配則 `(x + y)c = xc + yc`（`x, y → 1`, `c → b`）
+      _ = 2⁻¹ * (b + b) := by rw [one_mul]                                  -- 乗法の単位元（`a → b`）を 2 か所へ同時に
+      _ = 2⁻¹ * ((-b) + b) := by rw [hneg]                                  -- `-b = b` を右辺から左辺へ（和の第 1 項）
+      _ = 2⁻¹ * (b + (-b)) := by rw [add_comm (-b) b]                       -- 加法の可換則
+      _ = 2⁻¹ * 0 := by rw [add_neg_cancel]                                 -- `def_real_difference` の加法の逆元 `z + (-z) = 0`（`z → b`）
+      _ = 0 := real_times_zero_is_zero 2⁻¹                                  -- `real_times_zero_is_zero`（`x → 2^{-1}`）
   refine ⟨a, ?_⟩                                                            -- `def_matrix_with_real_entries`（`r → a`）
   calc z
       = ⟨a, b⟩ := hab                                                       -- `a, b` の取り方

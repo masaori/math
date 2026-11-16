@@ -1095,6 +1095,43 @@ I^*
         math(String.raw`a, b \in \mathbb{R}`),
         " を取れる。",
       ]),
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-b`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to b`),
+        "）、",
+        math(String.raw`2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`1 + 1`),
+        "、",
+        math(String.raw`2^{-1} \in \mathbb{R}`),
+        " は ",
+        math(String.raw`2`),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の逆元（",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        "。",
+        math(String.raw`2 \neq 0`),
+        " は ",
+        ref("real_two_is_nonzero"),
+        "）であり、和・積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。",
+      ]),
       displayMath(String.raw`\begin{aligned}
 (a, -b)
 &= \overline{(a, b)}
@@ -1122,14 +1159,26 @@ I^*
       ]),
       displayMath(String.raw`\begin{aligned}
 b
-&= \tfrac12\,(b + b)
-&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)\\
-&= \tfrac12\,\bigl((-b) + b\bigr)
-&&\bigl(\because\ -b = b\bigr)\\
-&= \tfrac12 \cdot 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-b) + b = 0\bigr)\\
+&= 1 \cdot b
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1 \cdot a = a\ (a \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(2^{-1} \cdot 2\bigr) \cdot b
+&&\bigl(\because\ 2\ \text{の乗法の逆元}\ a^{-1} \cdot a = 1\ (a \to 2\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 2^{-1} \cdot (2 \cdot b)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 2^{-1} \cdot \bigl((1 + 1) \cdot b\bigr)
+&&\bigl(\because\ \blkref{def_real_two}\bigr)\\
+&= 2^{-1} \cdot (1 \cdot b + 1 \cdot b)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x + y)c = xc + yc\ (x, y \to 1,\ c \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 2^{-1} \cdot (b + b)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1 \cdot a = a\ (a \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を 2 か所へ同時に}\bigr)\\
+&= 2^{-1} \cdot \bigl((-b) + b\bigr)
+&&\bigl(\because\ -b = b\ \text{を右辺から左辺へ、和の第 1 項へ}\bigr)\\
+&= 2^{-1} \cdot \bigl(b + (-b)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 2^{-1} \cdot 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to b)\bigr)\\
 &= 0
-&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to \tfrac12)\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 2^{-1})\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 A_{kl}
@@ -1161,6 +1210,7 @@ A_{kl}
       notes: [
         "2026-11-05（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。W_is_real_symmetric_positive_definite の Step 2 が「実対称行列の冪は実対称で、def_exp の級数の部分和は実対称、star_preserves_norm_and_limits (3) と同じ議論（転置もノルムを保つ）から極限も実対称」と名前だけで述べていた。そのうちエルミート性は exp_of_hermitian_is_hermitian、転置で不変であることは exp_of_symmetric_is_symmetric が運ぶので、二つから成分が実数であることへ戻す段を real_symmetric_matrix_is_hermitian の逆向きの主張として足した。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: b = 0 の鎖の最後の行 ½·0 = 0 の根拠「ℝ の四則」を real_times_zero_is_zero（x → ½）の参照に替えた。式は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: b = 0 の鎖の 1 行目 b = ½(b + b)（根拠「ℝ の四則」）と 3 行目 (−b) + b = 0（名前だけ）を 1 行 1 事実に割った。½ を 2 の ℝ の乗法の逆元 2^{-1} と書き、1 行目を乗法の単位元・逆元 2^{-1}·2 = 1（2 ≠ 0 は real_two_is_nonzero）・乗法の結合則・def_real_two・分配則・乗法の単位元の 6 行に、3 行目を加法の可換則と def_real_difference の加法の逆元の 2 行にした。鎖の両端（b と 0）と主張は不変。",
       ],
     },
   },
