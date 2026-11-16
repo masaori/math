@@ -16,6 +16,9 @@ export const withoutDeclaration: readonly Exception[] = [
       "（Isomorphism/OddDimensional/OddExtension.lean の冒頭の対応表と「表し方」）",
     labels: [
       "def_setting_of_odd_dimensional_corollary",
+      "def_clifford_algebra_of_split_space_in_odd_corollary",
+      "def_basis_of_split_space_in_odd_corollary",
+      "def_matrix_algebra_in_odd_corollary",
       "def_additive_inverse_in_complex_numbers",
       "def_minus_one_in_complex_numbers",
     ],

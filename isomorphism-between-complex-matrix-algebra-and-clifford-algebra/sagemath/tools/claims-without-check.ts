@@ -19,15 +19,22 @@ export const excludedChapters: readonly ExcludedChapter[] = [
       "行列を定義する前の章で、環・線型空間・有限集合の上の和・代数・商代数・テンソル積・テンソル代数・二次形式の一般の主張だけを置く。" +
       "行列の計算を含まない（台帳の数学的道具立ての行の SageMath の列が「不要」）",
   },
-  {
-    chapter: "clifford-algebra.ts",
-    reason:
-      "クリフォード代数の定義・普遍性・生成と、分裂した二次空間の生成元の関係を、偏極と二次形式の値から示す章で、行列の計算を含まない" +
-      "（台帳のクリフォード代数の章の行の SageMath の列が「不要」。生成元の関係の行列の像は、同型の証明の章の生成作用素の行列の反交換関係の検算が確かめる）",
-  },
 ];
 
 export const excludedLabels: readonly ExcludedLabels[] = [
+  {
+    reason:
+      "一般の二次空間のクリフォード代数の主張（γ が線型であること、γ(v) の平方と反交換子、γ(V) が生成すること、普遍性）で、証明はイデアルの定義と商代数の性質を当てるだけである。" +
+      "SageMath の CliffordAlgebra は γ(v)^2=q(v)·1 を定義として持つので、そこで比べても実装の定義の写しになる" +
+      "（分裂した二次空間の生成元の反交換関係と平方は、q_W の偏極の値を使う計算なので検算を置いた）",
+    labels: [
+      "claim_clifford_generator_map_is_linear_map",
+      "claim_square_of_clifford_generator",
+      "claim_anticommutator_of_clifford_generator_images_is_polarization",
+      "claim_image_of_clifford_generator_map_generates_clifford_algebra",
+      "claim_universal_property_of_clifford_algebra",
+    ],
+  },
   {
     reason:
       "任意の有限集合で添字づけた行列についての一般の主張で、証明は成分の等式を ℂ の四則の公理へ帰着するか、ℂ-代数の公理を当てるだけである。" +

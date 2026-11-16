@@ -17,7 +17,7 @@
   claim_image_of_split_space_anticommutes_with_parity_element                   γ_anticommute_parityElement
 
 表し方:
-- 本文の設定 def_setting_of_odd_dimensional_corollary のうち、ここで使うのは A := Cl(V,q)（分裂した二次空間の
+- 本文の奇数次元の系の記号のうち、ここで使うのは def_clifford_algebra_of_split_space_in_odd_corollary の A := Cl(V,q)（分裂した二次空間の
   クリフォード代数 `D.space.cliffordAlgebra`）だけである。奇数次元の拡大 V'・A'（`def_clifford_algebra_of_odd_extension`）は
   どの主張も使わない。-1_ℂ（`def_minus_one_in_complex_numbers`）は ℂ の `-1` で書く。
   宣言は名前空間 `Clifford.SplitData` に置き、前提の組 D から `D.parityFactor i`・`D.parityElement` のように引く。

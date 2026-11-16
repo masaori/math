@@ -1,7 +1,8 @@
 # 系「奇数次元」の検算。クリフォード代数の中の主張は、準同型 Φ（Φ(a†_i)=c_i、Φ(a_i)=c_i^T）と
 # Φ'（Φ'∘γ'=φ'。生成元 γ'(in'_1(d_k))・g=γ'(in'_2(1)) の像を φ' の定義から計算し、A' の元の像は生成元の像の積と線型結合で作る）
 # による行列（の組）への像で確かめる。Φ(ε) と Φ'(g) は手で置かず、Φ(χ_i) の番号順の積と φ'((0,1)) から計算する。
-# 像での確認であり、クリフォード代数の中の主張の証明ではない。M=1,2,3、整数・有理数の厳密計算（ZZ・QQ）。
+# 像での確認であり、クリフォード代数の中の主張の証明ではない。ただし z と e_± がすべての元と交換することは、
+# SageMath の CliffordAlgebra で Cl(V',q') を作り、その中で基底 2·4^M 個との交換として直接比べる。M=1,2,3、整数・有理数の厳密計算（ZZ・QQ）。
 from itertools import combinations
 
 def N_(i, T):                                     # def_count_of_subset_elements_below_index
@@ -178,14 +179,31 @@ for M in range(1, 4):
     for v in vs_:
         for t in [QQ(0), QQ(1), QQ(-3) / 2, QQ.random_element(num_bound=9, den_bound=4)]:
             ok(phi_p(v, t) == padd(phi_p(v, QQ(0)), psc(t, Pg)))   # claim_image_of_odd_extension_element_is_sum_of_images の像
-    # すべての元との交換: Φ' の像は B×B 全体（下の階数の確認）なので、乱数の組 X ∈ B×B で確かめる
-    for trial in range(3):
-        X = (random_matrix(QQ, n, n, num_bound=9, den_bound=4), random_matrix(QQ, n, n, num_bound=9, den_bound=4))
-        ok(pmul(Pz, X) == pmul(X, Pz))                         # claim_central_element_commutes_with_every_element の像
-        ok(pmul(X, ep) == pmul(ep, X) and pmul(X, em) == pmul(em, X))   # claim_idempotents_..._commute_with_every_element の像
-        # 否定の対照: 中心に入らない Φ'(g) と Φ'(j(γ(d_1))) は、乱数の組と交換しない
-        assert pmul(Pg, X) != pmul(X, Pg); counts['neg'] += 1
-        assert pmul(Gj[1], X) != pmul(X, Gj[1]); counts['neg'] += 1
+    # すべての元との交換は、行列への像ではなく Cl(V',q') の中で比べる。Cl(V',q') を SageMath の CliffordAlgebra（係数 QQ）で作り、
+    # V' の基底 d'_k=in'_1(d_k)（k ≤ 2M）、d'_{2M+1}=in'_2(1) の座標 y で q'(y)=Σ_k y_k y_{M+k} + y_{2M+1}^2 とする。
+    # j(a†_i)=γ'(d'_i)、j(a_i)=γ'(d'_{M+i})、g=γ'(d'_{2M+1})、z=j(ε)·g、e_σ=h(1+σz) を Cl(V',q') の中で計算し、
+    # 基底 2·4^M 個のそれぞれ x について x·z=z·x、x·e_+=e_+·x、x·e_-=e_-·x を比べる。
+    Hq = matrix(QQ, 2 * M + 1, 2 * M + 1, lambda r, s: 1 if (r < 2 * M and s < 2 * M and abs(r - s) == M) else (2 if r == s == 2 * M else 0))
+    ClP = CliffordAlgebra(QuadraticForm(QQ, Hq))
+    xg = ClP.gens()
+    jad = {i: xg[i - 1] for i in range(1, M + 1)}
+    jan = {i: xg[M + i - 1] for i in range(1, M + 1)}
+    gC = xg[2 * M]
+    jEpsC = oprod([jan[i] * jad[i] + QQ(-1) * (jad[i] * jan[i]) for i in range(1, M + 1)], ClP.one())   # j(ε)=∏ j(χ_i)
+    zC = jEpsC * gC                                            # def_central_element_of_odd_dimensional_clifford_algebra
+    epC = h * (ClP.one() + zC)                                 # def_idempotents_of_odd_dimensional_clifford_algebra
+    emC = h * (ClP.one() + QQ(-1) * zC)
+    basisC = list(ClP.basis())
+    ok(len(basisC) == 2 * n * n)
+    for x in basisC:
+        ok(x * zC == zC * x)                                   # claim_central_element_commutes_with_every_element
+        ok(x * epC == epC * x and x * emC == emC * x)          # claim_idempotents_of_odd_dimensional_clifford_algebra_commute_with_every_element
+    # 否定の対照: 中心に入らない g と j(a†_1) は、基底のある元と交換しない
+    assert any(x * gC != gC * x for x in basisC); counts['neg'] += 1
+    assert any(x * jad[1] != jad[1] * x for x in basisC); counts['neg'] += 1
+    # 否定の対照: χ_i の符号を + にした積 j(ε) の代わりで作った z は、基底のある元と交換しない
+    zbadC = oprod([jan[i] * jad[i] + jad[i] * jan[i] for i in range(1, M + 1)], ClP.one()) * gC
+    assert any(x * zbadC != zbadC * x for x in basisC); counts['neg'] += 1
     # 否定の対照: Φ'(g) は Φ'(j(γ(d_1))) と反交換し、交換しない（両者の積は 0 でない）
     assert pmul(Pg, Gj[1]) != pmul(Gj[1], Pg); counts['neg'] += 1
     # 否定の対照: γ'((v,t)) の像で g の係数を −t にすると一致しない（t=1）

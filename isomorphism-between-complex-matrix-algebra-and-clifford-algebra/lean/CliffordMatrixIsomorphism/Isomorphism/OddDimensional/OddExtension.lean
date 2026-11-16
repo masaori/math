@@ -16,6 +16,9 @@
   claim_polarization_of_odd_extension_between_first_component_and_added_unit_vector_is_zero
                                                                                      SplitData.polarization_oddInclusion_oddSecondInclusion_one
   def_setting_of_odd_dimensional_corollary                                           宣言を置かない（既存の記号に名前を付けるだけ。下の「表し方」）
+  def_clifford_algebra_of_split_space_in_odd_corollary                               宣言を置かない（A。既存の記号に名前を付けるだけ。下の「表し方」）
+  def_basis_of_split_space_in_odd_corollary                                          宣言を置かない（d。既存の記号に名前を付けるだけ。下の「表し方」）
+  def_matrix_algebra_in_odd_corollary                                                宣言を置かない（B。既存の記号に名前を付けるだけ。下の「表し方」）
   def_basis_of_odd_extension                                                         SplitData.oddBasis（d'）
   def_clifford_algebra_of_odd_extension                                              SplitData.oddSpace（V'・q'・基底 d' の組。A' = D.oddSpace.Cl）
   def_clifford_generator_map_of_odd_extension                                        D.oddSpace.γ（γ'。SplitData.oddSpace の docstring）
@@ -31,7 +34,8 @@
   `D.space.basis` である。B_q は `polarization D.space.space D.space.form`。
 - V' = V ⊕ ℂ^vec の元は V の元と ℂ の元の組 (v, t) で、型は `(W × DualSpace D.spaceW) × ℂ`。ℂ^vec は `complexNumbersVectorSpace`。
 - 番号付けた族 o:{1}→ℂ・d':{1,…,2M+1}→V' は `ℕ → ℂ`・`ℕ → V'` で表し、1,…,n の外の値は使わない。
-- 本文の def_setting_of_odd_dimensional_corollary の A・d・B・Φ・Ψ、def_additive_inverse_in_complex_numbers の -_ℂ、
+- 本文の def_clifford_algebra_of_split_space_in_odd_corollary の A、def_basis_of_split_space_in_odd_corollary の d、
+  def_matrix_algebra_in_odd_corollary の B、本文の章「同型の証明」の Φ・Ψ、def_additive_inverse_in_complex_numbers の -_ℂ、
   def_minus_one_in_complex_numbers の -1_ℂ は既存の宣言（`D.space.Cl`、`D.space.basis`、`Isomorphism` の行列環、
   `SplitData.homomorphismToMatrix` 等、ℂ の `-`・`-1`）をそのまま使い、ここでは宣言を置かない。
 - j は等長写像が誘導する準同型 `QuadraticSpaceWithBasis.inducedHom`（`InducedHomomorphism.lean`）を θ := in'_1 に当てたものである。
