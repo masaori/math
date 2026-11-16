@@ -5189,8 +5189,20 @@ i\,i
 &&\bigl(\because\ 1_{\mathbb{C}} = (1_{\mathbb{R}}, 0_{\mathbb{R}})\text{ の加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl((-1_{\mathbb{R}})(-1_{\mathbb{R}}) - 0_{\mathbb{R}}0_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
 &&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
+&= \bigl(1_{\mathbb{R}}1_{\mathbb{R}} - 0_{\mathbb{R}}0_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a\to 1_{\mathbb{R}},\ b\to 1_{\mathbb{R}})\bigr)\\
+&= \bigl(1_{\mathbb{R}} - 0_{\mathbb{R}}0_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \mathbb{R}\text{ では }1\text{ は積の単位元}\bigr)\\
+&= \bigl(1_{\mathbb{R}} - 0_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to 0_{\mathbb{R}})\bigr)\\
+&= \bigl(1_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a\to 1_{\mathbb{R}})\bigr)\\
+&= \bigl(1_{\mathbb{R}},\ 0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to -1_{\mathbb{R}})\bigr)\\
+&= \bigl(1_{\mathbb{R}},\ 0_{\mathbb{R}} + 0_{\mathbb{R}}\bigr)
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x\to -1_{\mathbb{R}})\bigr)\\
 &= (1_{\mathbb{R}}, 0_{\mathbb{R}})
-&&\bigl(\because\ \mathbb{R}\text{ の四則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\text{ では }0\text{ は和の単位元}\bigr)\\
 &= 1_{\mathbb{C}}
 &&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`),
@@ -5460,6 +5472,7 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
         "M=2,3,4,5、μ=1..M、n=0..8 で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage の scaled 列）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02（全証明の SageMath 検算。sagemath/check/cosh_sinh_coefficient_conversion_for_check/）: 主張を nesting_of_commutator_of_H_and_check_Z の新しい表記にそろえ、K_1・K_2^*・θ̃ を inclusion_rr_to_cc の像で、生成子をスカラー倍 (i/2)((K_1)_C H_1^{(+)})・i((K_2^*)_C H_2) と、係数を一つの複素数にまとめたスカラー倍で書き、i・-i・i/2 と冪の約束を明記した（主張の中身は不変）。証明は、補題 1 の散文（「合成の各段からスカラーを前へ出せる」）を m についての帰納法の鎖に、その中の交換子の線型性を新しい主張 commutator_of_scalar_multiples への参照に、補題 2（i^n の偶奇。偶数冪・積の冪の法則を根拠なしで使っていた）と各鎖の (i/2)^n = i^n 2^{-n}・(2K_1)^n = 2^n K_1^n・(-1)^{a}(-1)^{b} = (-1)^{a+b} の行を、冪の約束だけから帰納法で示す二つの準備 (i/2)^m(2k)^m = i^m k^m と i^{2l}(-1)^l = 1 に置き換え、i i = -1 と (-1)(-1) = 1 を definition_of_cc の積から示した。偶数の場合は (h1.z)・(h1.y)、(h2.z)・(h2.y) をそれぞれ一本の鎖にまとめ、鎖の後の散文の照合を除いた。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 準備の (-1_C)(-1_C) = 1_C の鎖で、(-1)(-1)・0·0 の消去・1 − 0・(-1)·0・0·(-1)・0 + 0 を「ℝ の四則」1 つで片付けていた行を、real_negation_times_negation_is_product・「ℝ では 1 は積の単位元」・real_times_zero_is_zero・real_minus_zero_is_self・real_times_zero_is_zero・real_zero_times_is_zero・「ℝ では 0 は和の単位元」の 7 行に割った（鎖の両端と主張は不変）。",
       ],
     },
   },
