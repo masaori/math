@@ -5,12 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-16（主経路）、無ねじれの負符号を四項和から示した。** 非自明な三つの正符号と $2Z_L(1)=2^{L^2+1}$ を使い、符号全体の本文に Lean 具体版・必要十分版・導出版を登録した。次は分散因子の有限積の実対数と半格子ずれた Riemann 和を進める。
 - **2026-11-15（並列の連続実行）、「周期境界の自由エネルギー密度は分散因子の積分に等しい」と「分散因子の積分の Onsager 表示への書換え」の合成の段から、対数順序群の鎖を `partitionLogOrderBounds` で当て、四つのモード和の極限（主経路の `claim_shifted_mode_riemann_sums`）だけを仮定 `hmode` に残す段を割り、Lean 具体版・必要十分版・導出版で示した。** 具体版は `periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits` と `periodicFreeEnergyDensity_onsagerForm_of_modeLimits`（`RealEscape/PeriodicDensityOnsagerOfModeLimits.lean`）。必要十分版は符号の二場合の評価・成分の非零性・`rlog` の正の元の上での単調性と係数の非負性だけを仮定に持ち、三つの段（鎖・最大値の極限・下組の上限）と書換えの段を同じ順につなぐ。残る二つの合成は、`claim_shifted_mode_riemann_sums` の具体版を `hmode` に当てて本文の `lean:` を登録するだけである。
 - **2026-11-15（主経路）、非自明なねじれの正符号を Lean 具体版・必要十分版・導出版で示した。** 臨界点の非零値を固定点での符号の二択に接続した。次は無ねじれの四項和から負符号を決める。符号全体の本文 `lean:` はその合成時に登録する。
 - **2026-11-15（並列の連続実行）、「分配多項式の両側評価を対数順序群の鎖へ移す」の合成の段を Lean 具体版・必要十分版・導出版で示し、本文の `lean:` に登録した。** 具体版 `partitionLogOrderBounds`（`KacWard/PartitionLogOrderBounds.lean`）は $q^2+2q-1\ne0$（`noRationalSquareTwo`）、符号による二場合（低温側は四つの値の正値性から $M^{\mathrm{abs}}_L=M_L$ として `lowTemperaturePartitionBounds` を弱め、高温側は `highTemperaturePartitionBounds`）、$Z_L(q)>0$ と上界からの $M^{\mathrm{abs}}_L(q)>0$、`partitionLogOrderTransfer` を本文の順に置く。必要十分版は線型順序体に $2$ の平方根が無いこと（外すと $q^2+2q-1=0$ の場合が残る）を仮定に持つ。本文の証明は $M^{\mathrm{abs}}_L(q)>0$ の根拠を「$Z_L(q)>0$ と上界」と書き足した。鎖の次は「周期境界の自由エネルギー密度は分散因子の積分に等しい」の合成の段で、主経路の `claim_shifted_mode_riemann_sums` を待つ。
 - **2026-11-15（並列の連続実行）、「自己双対点より高温側での分配多項式の両側評価」を Lean 具体版・必要十分版・導出版で示し、本文の `lean:` に登録した。** 本文の証明は符号 $\epsilon^{a,b}_L$ の値を使わず $\epsilon^{a,b}_L\in\{1,-1\}$ だけを使うので、引く主張を `claim_signed_even_subgraph_duality_sign` から Lean のある `claim_signed_even_subgraph_duality_up_to_sign` に替えた（主張は不変）。具体版 `highTemperaturePartitionBounds`（`KacWard/HighTemperaturePartitionBounds.lean`）は符号を除いた自己双対性を $x=q$ で評価して有理数の等号にし、$(1+q)^{2L^2}2^{-L^2}Q^{a,b}_L(t)=|Q^{a,b}_L(q)|$、最大値の等式、下界の書き直しを本文の順に置く。高温側は主経路の符号決定を待たなくなった。
-- **2026-11-15（並列の連続実行）、「周期境界の自由エネルギー密度は分散因子の積分に等しい」の合成の段から、四つのモード和の最大値 $v_L$ を $w_L=L^{-2}\log_{\mathbb R}M^{\mathrm{abs}}_L(q)$ と同定し、四つの列の共通極限から $w_L\to I$ と $f^{\mathrm{per}}(q)=I$ を得る段を割り、Lean 具体版・必要十分版・導出版で示した。** 具体版 `periodicFreeEnergyDensity_eq_of_modeLimits`（`RealEscape/PeriodicDensityModeMaxLimit.lean`）は $q^2+2q-1\ne0$ と四つの符号から $Q^{a,b}_L(q)\ne0$、$\rho_{R\to\mathbb R}$ の有理数上の一致、実対数の単調性による最大値の入れ替え、有限集合上の最大値の極限を本文の順に置く。必要十分版は空でない有限添字集合・線型順序・成分の値を含む集合の上での単調性・順序位相だけを使う。残る合成の段は、主経路の `claim_shifted_mode_riemann_sums` を仮定 `hmode` に、対数順序群の鎖の合成を `hchain` に当てて `lean:` を登録するだけになった。
-- **2026-11-15（主経路）、臨界点で非自明なねじれの各分散因子が零でないことを Lean 具体版・必要十分版・導出版で示した。** 次は有限積と平方恒等式を合成して符号付き偶部分グラフ多項式の値を零でないと示す。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -22,7 +21,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 無ねじれの負符号の四項和 | 未着手 | 三つの正符号と $2Z_L=\sum Q_L^{a,b}$ から $Q_L^{0,0}(1)=-2^{L^2}$ を得て符号を決める。この合成時に本文の `lean:` に登録する。 |
 | Onsager 閉形式への接続 | 分散因子の有限積の実対数と半格子ずれた Riemann 和の Lean 二版 | 未着手 | 2026-11-15 の研究管理が旧二行（Riemann 和の収束の段、枝の五件のうち Riemann 和の側）を一行にまとめた。`claim_dispersion_product_real_log_sum` → `claim_shifted_mode_riemann_sums` の順。並列の鎖の五件目「周期境界の自由エネルギー密度は分散因子の積分に等しい」が `claim_shifted_mode_riemann_sums` を引く。証明の後半「$h_L^2\sum_{k,l}f_q(t^{a,b}_{L,k,l})\to I$」（一様連続性と小区画の誤差評価）は独立した段として割ってよい。本文の `lean:` への登録は主張の全体を合成する段で行う。 |
 | Onsager 閉形式への接続 | 有限トーラス公式の Lean 二版 | 未着手 | `claim_determinant_square_root_torus_formula`。並列の「平方根の存在」（`claim_determinant_polynomial_square_root_exists`）は済んでいるので引ける。鎖の上の主張に引かれないので、上の二行の後に置く。 |
 | Lean の四層 | 一側閉包・周期持ち上げ・階段の他の具体版の委譲を外す | 未着手 | `lean/concrete-necsuf-delegations.txt` の残りを、到達点に近い依存の順に一件ずつ独立に示す。 |
@@ -44,12 +42,11 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 
 ## レビュー記録
+- 2026-11-16（主経路）: 自己双対変換の符号決定の本文、四項和の既存 Lean 定理と SageMath 検算を照合し、零での評価と三つの正符号の適用に食い違いは無かった。
 - 2026-11-15（並列）: 「周期境界の自由エネルギー密度は分散因子の積分に等しい」の主張が、有理数 $q$ を包含写像を通さずに実数の式 $(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)$ へ入れていた（同一視）。`def_real_logarithm` の包含写像で $r:=\iota_{\mathbb Q\to\mathbb R}(q)$ と置き、被対数を `claim_dispersion_angle_log_continuous` の $B_q$ と書いた（値は不変。Onsager 表示の最初の行が引く $B_q$ と一致した）。
 - 2026-11-15（並列）: 「分配多項式の両側評価を対数順序群の鎖へ移す」の証明で、主張が $M^{\mathrm{abs}}_L(q)\in\mathbb Q_{>0}$ と置くのに、高温側の場合の正値性の根拠が書かれていなかった（「両場合で $M^{\mathrm{abs}}_L(q)>0$」とだけあった）。`claim_value_at_rational_is_positive` の $Z_L(q)>0$ と両場合の上界 $Z_L(q)\le2M^{\mathrm{abs}}_L(q)$ から示す文に直し、低温側の $M_L/2\le Z_L$ を $M^{\mathrm{abs}}_L/4\le Z_L$ へ弱める根拠も書いた（主張は不変）。
 - 2026-11-15（並列）: 「周期境界の自由エネルギー密度は分散因子の積分に等しい」の証明で、$u_{L,a,b}$ の被対数 $|\rho_{R\to\mathbb R}(Q^{a,b}_L(q))|$ が正であることの根拠が無く、最大値と実対数の入れ替えの行も被対数の正値性を引いていなかった。`claim_no_rational_square_two`・`claim_signed_even_subgraph_rational_sign`・`claim_cut_realization_agrees_on_rationals` から正であることを示す文を足し、入れ替えの行の根拠に「被対数は正」を足した（主張は不変）。
 - 2026-11-15（主経路）: 自己双対変換の符号決定で臨界点の分散因子の平方和表示とモード集合のねじれ条件を照合し、主張との食い違いは無かった。
-- 2026-11-15（並列）: 「自己双対点より高温側での分配多項式の両側評価」の証明で、低温側の下界から $Z_L(t)\ge\frac14M_L(t)$ まで弱めた二行の式鎖が後で使われていなかった（双対因数分解の鎖の最後の行は $Z_L(t)\ge\frac12M_L(t)$ を直接引く）ので削った（主張・他の行は不変）。
-- 2026-11-15（並列）: 「周期境界の自由エネルギー密度は分散因子の積分に等しい」の証明で、鎖を「`claim_rational_embedded_log_order_iff` で埋め込み、非負の有理数倍の単調性で $L^{-2}$ 倍する」と書いていた。前者は正の有理数の対数どうしの順序の主張で、鎖の元 $\log M-2\ell_2$ には形の上で当たらないので、一般の $\lambda,\mu\in\Lambda$ について $L^{-2}$ 倍の埋め込みの順序を言う `claim_scaled_embedding_order_transfer` を一度引く形に直した（主張・値は不変）。
 
 ## 式変形の書き方の統一
 - 2026-11-15（主経路の書式統一）: 「交互の二色付けから二つの完全マッチングが得られる」の証明ブロックで、式鎖と独立した式の末尾 17 行から句読点を除いた（式と根拠は不変）。
@@ -59,9 +56,8 @@
 - 2026-11-15（主経路の書式統一）: 「符号付き偶部分グラフ多項式の自己双対変換」の所属の式鎖を独立した行にし、閉性の根拠を行末に置いた。平方と零積の式鎖末尾の句点を除いた（等式と主張は不変）。
 
 ## 前進の記録
+- 2026-11-16: 三つの非自明なねじれの正符号、有限トーラス公式、一での分配多項式の値から無ねじれの値 $-2^{L^2}$ を得て負符号を決めた。Lean 具体版・必要十分版・導出版を示し、既存の SageMath 検算は PASS。符号全体の本文 `lean:` に六定理を登録した。
 - 2026-11-15: 並列の表の残り（周期境界の密度と Onsager 表示の合成）は主経路の `claim_shifted_mode_riemann_sums`（未着手）を待つ。待たずに済む部分として、鎖を `partitionLogOrderBounds` で当て、Riemann 和だけを仮定に残す段を割り、Lean 具体版・必要十分版・導出版で示した。新しい式変形は無いので SageMath は足していない（各段の検算は既存）。
 - 2026-11-15: 臨界点の非自明なねじれの非零値を、自己双対変換の固定点での符号の二択へ接続し、正符号を Lean 具体版・必要十分版・導出版で示した。既存の SageMath 検算は PASS。本文の `lean:` は無ねじれを含む符号全体の合成時に登録する。
 - 2026-11-15: 並列の表の先頭「分配多項式の両側評価を対数順序群の鎖へ移す」の合成の段を Lean 具体版・必要十分版・導出版で示し、本文の `lean:` に登録した（移送の段 `partitionLogOrderTransfer` と合わせて四層で済み）。SageMath に辺長 1〜3 の実際の $Q^{a,b}_L(q)$ と総当たりの $Z_L(q)$ で符号の二場合の合成を確かめる `check_composed_cases.sage` を足した（PASS）。並列の表の残りの二つの合成（周期境界の密度、Onsager 表示）は、主経路の `claim_shifted_mode_riemann_sums`（未着手）を待つ。`count-goal-lean-remaining.ts` の実測で、到達点の閉包の Lean の無いものは 7 件から 6 件、最長の鎖は 4 件のまま（先頭は主経路の `claim_dispersion_product_real_log_sum`）。
 - 2026-11-15: 各分散因子の非零性から有限積の非零性を得て、行列式の平方恒等式から非自明なねじれの符号付き偶部分グラフ多項式の臨界点での非零性を示した。Lean 具体版・必要十分版・導出版と SageMath 検算が通った。本文の `lean:` は符号全体の合成時に登録する。
-- 2026-11-15: 並列の表の先頭「自己双対点より高温側での分配多項式の両側評価」の合成の段は、符号の値を使わないので主経路の `claim_signed_even_subgraph_duality_sign` を待たずに済むと分かった。本文の根拠を `claim_signed_even_subgraph_duality_up_to_sign` に替え、Lean 具体版・必要十分版・導出版で示して `lean:` に登録した。SageMath に辺長 1〜3 の実際の $Q^{a,b}_L$ と総当たりの $Z_L(q)$ で確かめる `check_duality_absolute.sage` を足した（PASS）。これで `claim_signed_even_subgraph_duality_sign` を引く本文ブロックは無くなった（主経路の表の符号決定の三行の扱いは研究管理が決める）。`count-goal-lean-remaining.ts` の実測で、到達点の閉包の Lean の無いものは 9 件から 7 件、最長の鎖は 5 件から 4 件になり、鎖の先頭は主経路の `claim_dispersion_product_real_log_sum` になった。
-- 2026-11-15: 並列の表の高温側・対数順序群の鎖の合成・Onsager 表示の合成は主経路の未完の行を待つ。「周期境界の自由エネルギー密度は分散因子の積分に等しい」の合成の段を、Riemann 和の主張を仮定で受ける「モード和の最大値の同定と共通極限」の段と、仮定へ実際の主張を当てる段に割り、前者を Lean 具体版・必要十分版・導出版で示した。SageMath に実際の $Q^{a,b}_L(q)$（辺長 1〜3）で最大値の同定を確かめる `check_mode_max.sage` を足した（PASS）。

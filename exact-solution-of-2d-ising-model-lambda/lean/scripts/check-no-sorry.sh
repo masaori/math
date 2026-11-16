@@ -55,6 +55,9 @@ targets=(
   Ising2DLambda.KacWard.signedEvenSubgraphDuality_nontrivial_positive_sign
   Ising2DLambda.NecSuf.KacWard.duality_nontrivial_positive_sign
   Ising2DLambda.KacWard.signedEvenSubgraphDuality_nontrivial_positive_sign_from_necSuf
+  Ising2DLambda.KacWard.signedEvenSubgraphDuality_trivial_negative_sign
+  Ising2DLambda.NecSuf.KacWard.duality_trivial_negative_sign
+  Ising2DLambda.KacWard.signedEvenSubgraphDuality_trivial_negative_sign_from_necSuf
   Ising2DLambda.KacWard.signedEvenSubgraph_critical_nonzero
   Ising2DLambda.NecSuf.KacWard.signed_value_nonzero_of_mode_product
   Ising2DLambda.KacWard.signedEvenSubgraph_critical_nonzero_from_necSuf
