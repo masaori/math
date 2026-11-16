@@ -1,5 +1,6 @@
-# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 6 の不等号の 4 つの鎖と Step 7 の同値の鎖）
-# Step 6: 準備 2 = 1 + 1 ≠ 0、0 < 2^{-1}。γ(θ̃_μ)/2 = γ(θ̃_μ)·2^{-1} > 0（正の数どうしの積）、2sinh(γ(θ̃_μ)/2) > 2·0 = 0、
+# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 6 の不等号の 5 つの鎖と Step 7 の同値の鎖）
+# Step 6: 準備 2 = 1 + 1 ≠ 0、0 < 2^{-1}。γ(θ̃_μ)/2 = γ(θ̃_μ)·2^{-1} > 0（正の数どうしの積）、sinh(γ(θ̃_μ)/2) > 0、
+#         2sinh(γ(θ̃_μ)/2) > 0（0 < 2 と直前の鎖に正の数どうしの積）、
 #         Π_μ 2sinh(γ(θ̃_μ)/2) > 0（finite_product_of_positive_reals_is_positive。有限積は左から畳み込み、各段が正）、
 #         ϰ = C Π_μ 2sinh(γ(θ̃_μ)/2) > 0（C ∈ ℝ_{>0} と ab > 0）。
 # Step 7: η = +1 なら tr(εV) = 1_Cϰ_C = ϰ_C。逆に tr(εV) = r_C（r > 0）なら (r, 0) = r_C = (ȟϰ)_C = (ȟϰ, 0) から r = ȟϰ で、
@@ -31,15 +32,16 @@ for (K1, K2) in PARAMS:
             assert g > 0                                                 # gamma_theta_tilde_mu_positive
             assert (g / 2).overlaps(g * inv_two)                         # def_real_quotient（y → γ(θ̃_μ)、z → 2）
             assert g * inv_two > 0                                       # γ(θ̃_μ) > 0 と 0 < 2^{-1} の積は正
-            assert 2 * (g / 2).sinh() > 2 * 0 and 2 * 0 == 0                             # 最後の行は real_times_zero_is_zero（x → 2）
-            count += 4
+            assert (g / 2).sinh() > 0                                    # cosh_sinh_basic_properties (3)（x → γ(θ̃_μ)/2）
+            assert two_q > 0 and 2 * (g / 2).sinh() > 0                  # real_zero_less_than_two の 0 < 2 と直前の鎖の積は正
+            count += 5
         p = 2 * (gam[0] / 2).sinh()
         assert p > 0
         for g in gam[1:]:
             p = p * (2 * (g / 2).sinh())
             assert p > 0
             count += 1
-        # Step 6 の第三の鎖の 1 行（finite_product_of_positive_reals_is_positive）と第四の鎖（ϰ の置き方、ab > 0）
+        # Step 6 の第四の鎖の 1 行（finite_product_of_positive_reals_is_positive）と第五の鎖（ϰ の置き方、ab > 0）
         assert p > 0
         kappa = C * p
         assert kappa.overlaps(C * left_product([2 * (g / 2).sinh() for g in gam])) and kappa > 0

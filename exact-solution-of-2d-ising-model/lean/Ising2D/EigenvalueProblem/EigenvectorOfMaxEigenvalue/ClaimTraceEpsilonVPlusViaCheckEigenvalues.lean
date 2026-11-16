@@ -30,7 +30,7 @@
 | Step 4 の 1 本目の 7 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε_μ)})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`）・`VPlusData.checkW`・`checkLambda_finsetOfWord`・`ite_eq_one_eq_val_real`（`Λ̌_ε` の定義を語の成分で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
 | Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`（1〜6 行目。Step 7 の `⟸` が引く）・`VPlusData.trace_epsilon_mul_V_step5`（それに 7・8 行目を続けた全体。同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
-| Step 6 の 4 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・2・4 本目は同じ行の calc、人手が 1 行の 3 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
+| Step 6 の 5 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`sinh(γ(θ̃_μ)/2) > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.sinh_gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・3・5 本目は同じ行の calc（3 本目は 1 段）、2 本目は `cosh_sinh_basic_properties` (3) の適用 1 つ、4 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ（どちらも人手で 1 行）。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 4 行の鎖 `(r,0) = r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ = (ȟϰ,0)` と成分の比較、`ȟ = −1` の背理の 4 行、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 3 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
@@ -49,7 +49,6 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
-import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 
 namespace Ising2D
 
@@ -613,34 +612,37 @@ theorem gam_half_pos (μ : Fin M) : D.gam μ / 2 > 0 :=
     _ > 0 := mul_pos (D.hgam μ) h2inv                   -- ℝ で正の数どうしの積は正（順序体）に、
                                                         -- `γ(θ̃_μ) > 0` と `0 < 2^{-1}` を当てる
 
-/-- **原文 Step 6** の 2 本目の鎖: `2sinh(γ(θ̃_μ)/2) > 2·0 = 0`。 -/
+/-- **原文 Step 6** の 2 本目の鎖: `sinh(γ(θ̃_μ)/2) > 0`（`γ(θ̃_μ)` が `D.gam μ`）。 -/
+theorem sinh_gam_half_pos (μ : Fin M) : Real.sinh (D.gam μ / 2) > 0 :=
+  (cosh_sinh_basic_properties_3 (D.gam_half_pos μ)).2  -- `cosh_sinh_basic_properties` (3) の `sinh x > 0`（`x → γ(θ̃_μ)/2`）に
+                                                        -- 上の鎖を当てる
+
+/-- **原文 Step 6** の 3 本目の鎖: `2sinh(γ(θ̃_μ)/2) > 0`。 -/
 theorem two_sinh_gam_half_pos (μ : Fin M) : 2 * Real.sinh (D.gam μ / 2) > 0 :=
   calc 2 * Real.sinh (D.gam μ / 2)
-      > 2 * 0 := mul_lt_mul_of_pos_left (cosh_sinh_basic_properties_3 (D.gam_half_pos μ)).2 two_pos
-                                                        -- `cosh_sinh_basic_properties` (3) の `sinh x > 0`（`x → γ(θ̃_μ)/2`）に
-                                                        -- 上の鎖を当て、両辺に `2 > 0` を掛ける
-    _ = 0 := real_times_zero_is_zero 2                  -- `real_times_zero_is_zero`（`x → 2`）
+      > 0 := mul_pos real_zero_less_than_two (D.sinh_gam_half_pos μ)
+                                                        -- ℝ で正の数どうしの積は正（順序体）に、
+                                                        -- `real_zero_less_than_two` の `0 < 2` と直前の鎖を当てる
 
 end VPlusData
 
 namespace VPlusData
 
-/-- **原文 Step 6** の 3 本目の鎖: `Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`）。 -/
+/-- **原文 Step 6** の 4 本目の鎖: `Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`）。 -/
 theorem prod_two_sinh_gam_half_pos {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     ∏ μ, 2 * Real.sinh (D.gam μ / 2) > 0 :=
   finite_product_of_positive_reals_is_positive r (fun μ => 2 * Real.sinh (D.gam μ / 2))
     (fun μ => D.two_sinh_gam_half_pos μ)
                                                         -- `finite_product_of_positive_reals_is_positive`
-                                                        -- （`m → M_col`、`j → μ`、`r_μ → 2sinh(γ(θ̃_μ)/2)`）に、上の各 `μ` の鎖を当てる
+                                                        -- （`m → M_col`、`j → μ`、`r_μ → 2sinh(γ(θ̃_μ)/2)`）に、直前の各 `μ` の鎖を当てる
 
-/-- **原文 Step 6** の 4 本目の鎖（(2) の不等号）:
+/-- **原文 Step 6** の 5 本目の鎖（(2) の不等号）:
 `ϰ = (2sinh 2K_2)^{M_col/2}Π_{μ=1}^{M_col}2sinh(γ(θ̃_μ)/2) > 0`（人手の `M_col` が Lean の `r + 1`、
 `(2sinh 2K_2)^{M_col/2}` が `D.C`。`def_second_transfer_matrix_prefactor` の `(2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0}` は
-`VPlusData` の入力 `D.hC`）。必要十分版は置かない（Step 6 の 4 本の鎖が効かせるのは、引いた
+`VPlusData` の入力 `D.hC`）。必要十分版は置かない（Step 6 の 5 本の鎖が効かせるのは、引いた
 `cosh_sinh_basic_properties` (3)・`finite_product_of_positive_reals_is_positive`・`def_real_quotient`・
-`real_two_is_nonzero`・`real_inverse_of_positive_is_positive`・`real_zero_less_than_two`・
-`real_times_zero_is_zero`（それぞれ必要十分版あり。`def_real_quotient` は定義）と、ℝ の順序と乗法の計算規則（正の数を不等号の両辺に掛ける、
-正の数どうしの積は正）だけで、
+`real_two_is_nonzero`・`real_inverse_of_positive_is_positive`・`real_zero_less_than_two`
+（それぞれ必要十分版あり。`def_real_quotient` は定義）と、ℝ の順序と乗法の計算規則（正の数どうしの積は正）だけで、
 鎖に固有の取り払える構造が無い）。 -/
 theorem traceFactor_pos_step6 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     D.traceFactor > 0 :=

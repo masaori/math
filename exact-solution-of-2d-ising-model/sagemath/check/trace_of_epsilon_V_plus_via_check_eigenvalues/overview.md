@@ -8,7 +8,7 @@
 - ブロック: `closing_003_claim_trace_epsilon_V_plus_via_eigenvalues`（ϰ := (2sinh 2K_2)^{M_col/2} Π_μ 2sinh(γ(θ̃_μ)/2) ∈ ℝ について
   (1) tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、(2) ϰ > 0、(3) η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0。ℂ の元の z > 0 は「z = r_ℂ なる r ∈ ℝ_{>0} がある」）
 - 範囲: 証明の Step 1（13 行）、Step 2（k = 1 の二つの場合の 5 行・7 行と、帰納法の段の二つの場合の 6 行ずつ）、Step 3（7 行）、
-  Step 4（第一の鎖 7 行と第二の鎖 15 行。行数は等号の数）、Step 5（8 行。1 行目は Step 1 の鎖そのもの）、Step 6（4 つの鎖）、Step 7（同値の 2 つの鎖と r = ȟϰ < 0 の鎖）の全ての行と、主張そのもの。
+  Step 4（第一の鎖 7 行と第二の鎖 15 行。行数は等号の数）、Step 5（8 行。1 行目は Step 1 の鎖そのもの）、Step 6（5 つの鎖）、Step 7（同値の 2 つの鎖と r = ȟϰ < 0 の鎖）の全ての行と、主張そのもの。
 - 記号（証明の中だけ）: ȟ ∈ {1, −1} ⊂ ℝ（ȟ_ℂ = η_{(1,…,1)}）、ǔ^{(1)} := 1、ǔ^{(0)} := −1、|ϵ|_k := #{μ ≤ k | ϵ_μ = 1}、
   ť_ϵ := (Π_μ ǔ^{(ϵ_μ)})Λ̌_ϵ、w̌_μ^{(e)} := ǔ^{(e)}exp(γ(θ̃_μ)(e − 1/2))。
 
@@ -29,7 +29,7 @@ E_1 → ComplexBallField(512) の埋め込み、γ(θ̃_μ) の球（`def_gamma_
 | Step 4 の第一の鎖 7 行（ť の置き方、Λ̌ の定義、`real_exp_of_finite_sum`、ℝ の a(bc) = b(ac)、`finite_product_of_real_products`、a^{(e)} の置き方、交換則） | `check_step4_real_chains.sage` | 球（全ての行の値）と厳密（4〜7 行の構造を exp(γ/2) を不定元にして） |
 | Step 4 の第二の鎖 15 行（直前の鎖、`real_sum_over_binary_words_distributes_in_left_factor`、`expansion_of_finite_product_of_two_term_sums_of_real_numbers`、置き方、ǔ の定義、1·b = b、a + (−1)b = a − b、1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·1/2 = a/2、b = 2·(b/2)、`def_cosh_sinh` の sinh、交換則、ϰ の置き方） | `check_step4_real_chains.sage` | 球（全ての行の値。sinh の行は Sage の sinh で独立に）と厳密（和の分配・展開・閉形式を不定元で、引数の書き換えを QQ[γ] で、1·b = b・a + (−1)b = a − b を QQ[a,b] で、b = 2·(b/2) を QQ(b) で） |
 | Step 5 の 8 行（Step 1、Step 3、`real_inclusion_preserves_sum_over_binary_words`、`real_sum_over_binary_words_distributes_in_left_factor`、Step 4、交換則、`real_inclusion_preserves_product`、ȟ の取り方） | `check_step3_step5_chains.sage` | 厳密な部（行の代数）と球の部（包含の行を、ℂ を ComplexBallField、包含を r ↦ r + 0i として値で） |
-| Step 6 の準備（`def_real_two` の 1 + 1 = 2、`real_two_is_nonzero` の 2 ≠ 0、`real_inverse_of_positive_is_positive`（a → 2）の 0 < 2^{-1}）と 4 つの鎖（γ/2 = γ·2^{-1}（`def_real_quotient`）> 0（正の数どうしの積は正）、`cosh_sinh_basic_properties` (3) と 2 倍と `real_times_zero_is_zero` の 2·0 = 0、`finite_product_of_positive_reals_is_positive`、ϰ の置き方と `def_second_transfer_matrix_prefactor` の C > 0 による ab > 0） | `check_step6_step7_sign.sage` | 準備は QQ で厳密に。鎖は球の全体が不等号を満たすこと（有限積は左から畳み込み、各段が正） |
+| Step 6 の準備（`def_real_two` の 1 + 1 = 2、`real_two_is_nonzero` の 2 ≠ 0、`real_inverse_of_positive_is_positive`（a → 2）の 0 < 2^{-1}）と 5 つの鎖（γ/2 = γ·2^{-1}（`def_real_quotient`）> 0（正の数どうしの積は正）、`cosh_sinh_basic_properties` (3) の sinh(γ/2) > 0、`real_zero_less_than_two` の 0 < 2 と直前の鎖による 2sinh(γ/2) > 0（正の数どうしの積は正）、`finite_product_of_positive_reals_is_positive`、ϰ の置き方と `def_second_transfer_matrix_prefactor` の C > 0 による ab > 0） | `check_step6_step7_sign.sage` | 準備は QQ で厳密に。鎖は球の全体が不等号を満たすこと（有限積は左から畳み込み、各段が正） |
 | Step 7（η = +1 なら tr = 1_ℂϰ_ℂ = ϰ_ℂ。逆は (r, 0) = r_ℂ = tr = (ȟϰ)_ℂ = (ȟϰ, 0) から r = ȟϰ、ȟ = −1 なら r = ȟϰ = (−1)ϰ = −ϰ < 0） | `check_step6_step7_sign.sage` | 厳密（ℂ = QQ(i)。ϰ の球の中の正の有理数で、ȟ = ±1 の両方） |
 | 主張 (1)(2)(3) | `check_claim_statement.sage` | 球（下の「主張の検算」） |
 
@@ -62,7 +62,7 @@ exp を Sage の球の行列の exp と `def_exp` の部分和に尾の上界を
 | `check_step2_sign_power.sage` | Step 2 の帰納法（M_col = 1..7 の全ての ϵ と k） | 実行済み | PASS（9228 行、否定コントロール 171 件） |
 | `check_step3_step5_chains.sage` | Step 3 の 7 行（全ての ϵ）と Step 5 の 8 行 | 実行済み | PASS（厳密 294 段、球 294 段、否定コントロール 18 件） |
 | `check_step4_real_chains.sage` | Step 4 の二つの鎖（結合定数 7 組 × M_col = 2..6、厳密は M_col = 1..6） | 実行済み | PASS（球 6566 行、厳密 530 行、否定コントロール 112 件） |
-| `check_step6_step7_sign.sage` | Step 6・Step 7（結合定数 7 組 × M_col = 2..6） | 実行済み | PASS（1019 行、否定コントロール 14 件） |
+| `check_step6_step7_sign.sage` | Step 6・Step 7（結合定数 7 組 × M_col = 2..6） | 実行済み | PASS（1159 行、否定コントロール 14 件） |
 | `check_claim_statement.sage` | 主張 (1)(2)(3)（結合定数 3 組 × M_col = 2, 3） | 実行済み | PASS（30 件、否定コントロール 18 件） |
 
 ## 実行方法
