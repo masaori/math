@@ -87299,6 +87299,13 @@ B_q(\theta_1,\theta_2)
                 habitat: "R",
                 realEscape: "連続極限。有限モード和を実数の角の格子和として読み、連続関数の一様連続性と Riemann 積分により辺長を無限大へ送る。",
                 verification: ["sagemath/check/shifted-mode-riemann-sums"],
+                lean: [
+                  "Ising2DLambda.RealEscape.shiftedModeRiemannSums_tendsto",
+                  "Ising2DLambda.RealEscape.realLogSum_of_dispersionProduct",
+                  "Ising2DLambda.RealEscape.modeLogDensity_tendsto_of_realLogSum",
+                  "Ising2DLambda.NecSuf.RealEscape.tendsto_of_finiteSumEq_necSuf",
+                  "Ising2DLambda.RealEscape.shiftedModeRiemannSums_tendsto_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`),
@@ -89432,6 +89439,12 @@ f^{\mathrm{per}}(q)
                 habitat: "R",
                 realEscape: "連続極限と積分。可算側の有限体積の両側評価を実現し、四つのモード和の共通実数極限を下組の上限と同定する。",
                 verification: ["sagemath/check/periodic-density-onsager-integral"],
+                lean: [
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits",
+                  "Ising2DLambda.NecSuf.RealEscape.sup_eq_of_signedBounds_modeLimits_necSuf",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`), "）を取る。",
@@ -89538,6 +89551,12 @@ f^{\mathrm{per}}(q)
                 habitat: "R",
                 realEscape: "実対数と指数評価。代数的略記を実数の双曲線関数に読み替え、正の因子の実対数を積分から取り出す。",
                 verification: ["sagemath/check/onsager-hyperbolic-integral-form"],
+                lean: [
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_of_modeLimits",
+                  "Ising2DLambda.NecSuf.RealEscape.onsagerForm_of_signedBounds_modeLimits_necSuf",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`), "）を取る。",

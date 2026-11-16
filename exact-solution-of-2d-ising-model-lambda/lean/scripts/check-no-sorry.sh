@@ -2529,6 +2529,12 @@ targets=(
   Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum
   Ising2DLambda.NecSuf.KacWard.sum_eq_sum_over_complements_of_fiber_signs
   Ising2DLambda.KacWard.gaugedPfaffian_eq_seamSignedEvenSubgraphSum_from_necSuf
+  Ising2DLambda.RealEscape.shiftedModeRiemannSums_tendsto
+  Ising2DLambda.RealEscape.shiftedModeRiemannSums_tendsto_from_necSuf
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_from_necSuf
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
