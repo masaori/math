@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "complex_conjugate_of_sum",
   "complex_conjugate_times_self",
   "complex_exp_of_real_argument",
+  "complex_minus_zero_is_self",
   "complex_numbers_form_a_field",
   "complex_times_negation_is_negation_of_product_in_cc",
   "complex_times_zero_is_zero",

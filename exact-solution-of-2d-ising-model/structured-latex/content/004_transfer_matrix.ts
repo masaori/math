@@ -516,7 +516,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
 &= |0 - 0|
    \quad (\because \text{上の部分和の成分 } (S_N)_{kl} = 0) \\
 &= |0|
-   \quad (\because 0 - 0 = 0) \\
+   \quad (\because \blkref{complex_minus_zero_is_self}\ (z \to 0_{\mathbb{C}})) \\
 &= 0
    \quad (\because \blkref{abs_basic_properties}\text{ (3)}) \\
 &\to 0 \quad (N \to \infty)
@@ -573,6 +573,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移した。Step 1〜3 の番号を中間目標の名前（対角行列の積と冪・指数級数の部分和・極限）へ変えた。",
         "2026-11-01: SageMath の検算（sagemath/check/exp_of_diagonal_matrix/）を付けるにあたり、証明を書き直した。冪の帰納法（基底と帰納の段）と、極限から成分を決める段を、根拠付きの鎖にした。対角成分の極限の根拠を、実数の級数の収束（labels: real_exp_series_converges）を複素数へ流用する書き方から、数の exp が部分和の極限であること（labels: scalar_exp_is_limit_of_partial_sums）と数の列の極限の一意性（labels: scalar_limit_is_unique。このとき足した）へ替えた。部分和の記号を E_K から S_N へ替えた（行列単位 E_{I,J} との衝突と、体 K との衝突を避けるため）。両辺の exp が極限で定まり、ℝ へ脱出していることを主張に書いた。",
         "2026-11-02: 冪の帰納法の基底の 2 本の鎖で、名前だけの根拠「単位行列の非対角成分」「単位行列の対角成分」を、def_identity_matrix（I_{Mat(n,C)} の成分は δ）と def_kronecker_delta（δ の値）の 2 段に割ってラベル参照に替えた。def_exp の I がこの I_{Mat(n,C)} であることと、d_k^0 := 1_C を証明の冒頭に書いた。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 非対角成分の極限の鎖の 2 行目の名前だけの根拠「0 − 0 = 0」（ℂ の 0_C − 0_C = 0_C）を、足した主張 complex_minus_zero_is_self（z → 0_C）の参照に替えた（式と主張は不変）。",
       ],
     },
   },

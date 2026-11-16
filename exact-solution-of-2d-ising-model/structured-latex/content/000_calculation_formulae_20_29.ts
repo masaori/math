@@ -2638,6 +2638,49 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_complex_minus_zero_is_self",
+    kind: "claim",
+    title: { text: "複素数から 0 を引いても変わらない" },
+    labels: ["complex_minus_zero_is_self"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " とする。差は ",
+        ref("def_complex_difference"),
+        "、和は ",
+        ref("definition_of_cc"),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)`),
+        " と ",
+        math(String.raw`-1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`z - 0_{\mathbb{C}} = z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+z - 0_{\mathbb{C}}
+&= z + (-0_{\mathbb{C}})
+&&\bigl(\because\ \blkref{def_complex_difference}\ (z \to z,\ w \to 0_{\mathbb{C}})\bigr)\\
+&= z + (-1_{\mathbb{C}})\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ (z \to 0_{\mathbb{C}})\bigr)\\
+&= z + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to -1_{\mathbb{C}})\bigr)\\
+&= z
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。exp_of_diagonal_matrix の非対角成分の極限の鎖が ℂ の 0_C − 0_C = 0_C を「0 − 0 = 0」と名前だけで根拠にしていた。z − 0_C = z は体の公理に含まれない（差は def_complex_difference で加法の逆元を足すこととして定めた）ので、real_minus_zero_is_self の ℂ の側として示す主張を足した。Lean の具体版は置かない（complex_zero_times_is_zero・complex_times_zero_is_zero・complex_zero_plus_is_original と同じく、ℂ の元の基本の計算は使う側が mathlib の sub_zero で閉じる。exp_of_diagonal_matrix の Lean の具体版 matrixExp_diagonal_apply は非対角成分の極限の鎖を持たない）。数値検証: sagemath/check/complex_minus_zero_is_self/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_finite_product_of_complex_numbers",
     kind: "definition",
     title: { text: "複素数の有限積" },

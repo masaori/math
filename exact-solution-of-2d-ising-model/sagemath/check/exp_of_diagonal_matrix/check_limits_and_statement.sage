@@ -1,6 +1,6 @@
 # 対象ラベル: exp_of_diagonal_matrix
 # 中間目標「極限」の行と主張そのものを確かめる。
-#   k ≠ l: |(S_N)_kl - 0| = |0 - 0| = |0| = 0（厳密）
+#   k ≠ l: |(S_N)_kl - 0| = |0 - 0| = |0| = 0（厳密。2 段目の根拠は complex_minus_zero_is_self（z → 0_C））
 #   k = l: |(S_N)_kk - exp(d_k)| = |Σ_{p≤N} d_k^p/p! - exp(d_k)| → 0
 #   主張: exp(D)_kl = exp(d_k)（k = l）、0（k ≠ l）
 # 帰属: D は QQ(i) を成分とする対角行列（n = 1..4）。部分和は QQ(i) の中で厳密に作る。exp(D) と exp(d_k) は極限で、
