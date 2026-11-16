@@ -1,24 +1,31 @@
 /-
 節「系：複素行列版イジングの Jordan–Wigner 行列への接続」のうち、Φ_Y が値が 1 の直交基底の元の像を送る先、
-Ω・Ω' が直交基底の元の像を送る先、系の定理の具体版を、各段の導出版から組み立てた導出版。
-
-運び方: 系「一般の偶数次元」の導出版（`IsometryToSplitSpaceFromNecSuf.lean` の冒頭）と同じく、具体版の Cl(Y,Q)・Cl(V,q) と
-必要十分版のそれは別の集合なので、必要十分版の主張を直に特殊化しない。具体版と同じ calc の行を、各行が引く主張の導出版
-（`inducedHom_γ_of_necSuf`・`mapByCoordinates_basis_of_necSuf`・`pair_eq_add_embed_of_necSuf`・
-`γ_isLinearMap_of_necSuf`・`homomorphismToMatrix_isHom_of_necSuf`・`homomorphismToMatrix_creation_of_necSuf`・
-`homomorphismToMatrix_annihilation_of_necSuf`・`generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family_of_necSuf`・
-`conjugation_…_of_necSuf`、この節の行列の側の主張の導出版）で書き直す。Ω・Ω' は具体版の定義をそのまま使う。
-u の定義を開く行（`splitFamily_first`・`splitFamily_second`）は定義の展開で、主張を引く行ではないので具体版のものを使う。
+Ω・Ω' が直交基底の元の像を送る先、系の定理の具体版が、必要十分版の K := ℂ、n := -1_ℂ、i := imaginaryUnit、h := inverseOfTwo への
+特殊化から得られることを示す導出版。
 
   具体版                                                         導出版
+  conjugatedHomomorphismToMatrix（Ω）                            conjugatedHomomorphismToMatrix_eq_necSuf（Ω = Ω_N ∘ T_Y）
+  conjugatedHomomorphismFromMatrix（Ω'）                         toCl_conjugatedHomomorphismFromMatrix（T_Y ∘ Ω' = Ω'_N）
   homomorphismToMatrixOfGeneral_first・…_second                  …_of_necSuf
   conjugatedHomomorphismToMatrix_first・…_second                 …_of_necSuf
-  conjugatedHomomorphisms_mutually_inverse_of_family・
-  conjugatedHomomorphisms_mutually_inverse                       …_of_necSuf
+  conjugatedHomomorphisms_mutually_inverse_of_family             …_of_necSuf（必要十分版の本体を特殊化し、T_Y・S_Y で引き戻す）
+  conjugatedHomomorphisms_mutually_inverse                       …_of_necSuf（本体の導出版を固定した e に当てる）
+
+運び方: 系「一般の偶数次元」の導出版（`IsometryToSplitSpaceFromNecSuf.lean` の冒頭）と同じく、具体版の Cl(Y,Q) と、具体版の前提を
+写した必要十分版の前提 `D.toNecSuf`・`QY.toNecSuf` の Cl(Y,Q) は別の集合なので、二つの間の互いに逆な準同型
+T_Y・S_Y（`QuadraticSpaceWithBasis.transportToNecSuf`。点は動かさない）を置く。具体版の Φ_Y は Φ_{Y,N} ∘ T_Y、Ψ_Y は S_Y ∘ Ψ_{Y,N}
+に等しい（`homomorphismToMatrixOfGeneral_eq_necSuf`・`toCl_homomorphismFromMatrixOfGeneral`）。U・U'・κ・c_m・c_m^T・Z_m・Y_m は
+必要十分版のものと同じ行列である（`JordanWignerConjugationFromNecSuf.lean`）。したがって Ω = Ω_N ∘ T_Y、Ω' = S_Y ∘ Ω'_N となり、
+γ_Y(e_m) を送る先の主張は、T_Y(γ_Y(e_m)) = γ_{Y,N}(e_m) に必要十分版の主張を当てて得る。系の定理の本体は、必要十分版の本体の
+六つの部分をこの二つの等式で具体版へ移す。系の定理は、必要十分版の系の定理と同じく、本体を固定した e に当てる
+（二つの e は別々に `Classical.choose` で選ぶので、必要十分版の系の定理そのものは具体版の e について述べない）。
+ℂ から渡す性質は、系「一般の偶数次元」の導出版と同じ組（`complexCliffordLaws`・`add_neg_cancel`・`neg_mul`・`neg_neg`・
+`imaginaryUnit_mul_self`・`isInverseOfTwo_inverseOfTwo`）と、(1 + 1) · h = 1 の `mul_inverseOfTwo` である。
 -/
 import CliffordMatrixIsomorphism.Isomorphism.JordanWignerMatrices.ConjugatedIsomorphism
 import CliffordMatrixIsomorphism.Isomorphism.JordanWignerMatrices.JordanWignerConjugationFromNecSuf
 import CliffordMatrixIsomorphism.Isomorphism.GeneralEvenDimensional.IsometryToSplitSpaceFromNecSuf
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.JordanWignerMatrices.ConjugatedIsomorphism
 
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
@@ -33,121 +40,105 @@ noncomputable section
 
 variable {W : Type u} (D : SplitData W) {Y : Type v}
 
+/-! ### 必要十分版の Ω・Ω' と、具体版の Ω・Ω' との関係 -/
+
+/-- 必要十分版の Ω（`D.toNecSuf` と `QY.toNecSuf` に ℂ の性質を渡したもの）。 -/
+abbrev conjugatedHomomorphismToMatrixN (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
+    QY.toNecSuf.Cl complexCliffordLaws → Mat (PowerSet D.M) :=
+  D.toNecSuf.conjugatedHomomorphismToMatrix complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
+    e he.toNecSuf
+
+/-- 必要十分版の Ω'（`D.toNecSuf` と `QY.toNecSuf` に ℂ の性質を渡したもの）。 -/
+abbrev conjugatedHomomorphismFromMatrixN (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
+    Mat (PowerSet D.M) → QY.toNecSuf.Cl complexCliffordLaws :=
+  D.toNecSuf.conjugatedHomomorphismFromMatrix complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+    ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf
+
+/-- 本文 `def_homomorphism_from_general_clifford_algebra_conjugated_by_kronecker_power`：具体版の Ω は、必要十分版の Ω に
+T_Y を先に当てたものである（Φ_Y = Φ_{Y,N} ∘ T_Y と、U・U'・κ が必要十分版のものと同じ行列であることによる）。 -/
+theorem conjugatedHomomorphismToMatrix_eq_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (a : QY.Cl) :
+    D.conjugatedHomomorphismToMatrix QY e he a
+      = D.conjugatedHomomorphismToMatrixN QY e he ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl a) := by
+  show conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfExchange D.M) (kroneckerPowerOfHalfExchange D.M)
+      (D.homomorphismToMatrixOfGeneral QY e he a) = _
+  rw [D.homomorphismToMatrixOfGeneral_eq_necSuf QY e he a, conjugation_eq_necSuf, kroneckerPowerOfExchange_eq_necSuf,
+    kroneckerPowerOfHalfExchange_eq_necSuf]
+  rfl
+
+/-- 本文 `def_homomorphism_to_general_clifford_algebra_conjugated_by_kronecker_power`：具体版の Ω' を T_Y で写したものは、
+必要十分版の Ω' である（T_Y ∘ Ψ_Y = Ψ_{Y,N} と、U・U'・κ が必要十分版のものと同じ行列であることによる）。 -/
+theorem toCl_conjugatedHomomorphismFromMatrix (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (F : Mat (PowerSet D.M)) :
+    (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl (D.conjugatedHomomorphismFromMatrix QY e he F)
+      = D.conjugatedHomomorphismFromMatrixN QY e he F := by
+  show (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl (D.homomorphismFromMatrixOfGeneral QY e he
+      (conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfHalfExchange D.M) (kroneckerPowerOfExchange D.M) F)) = _
+  rw [D.toCl_homomorphismFromMatrixOfGeneral QY e he, conjugation_eq_necSuf, kroneckerPowerOfExchange_eq_necSuf,
+    kroneckerPowerOfHalfExchange_eq_necSuf]
+  rfl
+
 /-! ### Φ_Y が直交基底の元の像を送る先 -/
 
-/-- 本文 `claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis` を、各段の導出版から
-具体版と同じ手順で組み立てたもの。 -/
-theorem homomorphismToMatrixOfGeneral_first_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+/-- 本文 `claim_homomorphism_from_general_space_on_first_half_of_orthonormal_basis` を、必要十分版の主張を
+T_Y(γ_Y(e_m)) = γ_{Y,N}(e_m) に当てて得たもの。 -/
+theorem homomorphismToMatrixOfGeneral_first_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (m : ℕ) (hm : 1 ≤ m ∧ m ≤ D.M) :
     D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e m))
       = D.matrixAlgebra.add (creationMatrix D.M m hm) (annihilationMatrix D.M m hm) := by
-  let A := D.space.cliffordAlgebra
-  let B := D.matrixAlgebra
-  let S₂ := dualSpaceVectorSpace D.spaceW
-  let Φ := D.homomorphismToMatrix
-  let θ := D.mapToSplit QY e he
-  let hθ := D.mapToSplit_isIsometry QY e he
-  calc D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e m))
-      = Φ (QuadraticSpaceWithBasis.inducedHom QY D.space θ hθ (QY.γ (e m))) := rfl
-    _ = Φ (D.space.γ (θ (e m))) := by rw [QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf]
-    _ = Φ (D.space.γ (D.splitFamily m)) := by
-        rw [show θ (e m) = D.splitFamily m from
-          mapByCoordinates_basis_of_necSuf QY.space D.space.space (D.M + D.M) e he.isBasis D.splitFamily m hm.1 (by omega)]
-    _ = Φ (D.space.γ (D.w m, D.f m)) := by rw [D.splitFamily_first m hm.2]
-    _ = Φ (D.space.γ (D.space.space.add (embedFirst S₂ (D.w m)) (embedSecond D.spaceW (D.f m)))) :=
-        congrArg (fun p => Φ (D.space.γ p)) (pair_eq_add_embed_of_necSuf D.spaceW S₂ (D.w m) (D.f m))
-    _ = Φ (A.add (D.space.γ (embedFirst S₂ (D.w m))) (D.space.γ (embedSecond D.spaceW (D.f m)))) := by
-        rw [D.space.γ_isLinearMap_of_necSuf.map_add]; rfl
-    _ = Φ (A.add (D.creation m) (D.annihilation m)) := rfl
-    _ = B.add (Φ (D.creation m)) (Φ (D.annihilation m)) := D.homomorphismToMatrix_isHom_of_necSuf.map_add _ _
-    _ = B.add (creationMatrix D.M m hm) (annihilationMatrix D.M m hm) := by
-        rw [show Φ (D.creation m) = creationMatrix D.M m hm from D.homomorphismToMatrix_creation_of_necSuf hm,
-          show Φ (D.annihilation m) = annihilationMatrix D.M m hm from D.homomorphismToMatrix_annihilation_of_necSuf hm]
+  rw [D.homomorphismToMatrixOfGeneral_eq_necSuf QY e he, (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+    creationMatrix_eq_necSuf, annihilationMatrix_eq_necSuf]
+  exact D.toNecSuf.homomorphismToMatrixOfGeneral_first complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e
+    he.toNecSuf m hm
 
-/-- 本文 `claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis` を、各段の導出版から
-具体版と同じ手順で組み立てたもの。 -/
-theorem homomorphismToMatrixOfGeneral_second_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+/-- 本文 `claim_homomorphism_from_general_space_on_second_half_of_orthonormal_basis` を、必要十分版の主張を
+T_Y(γ_Y(e_{M+m})) = γ_{Y,N}(e_{M+m}) に当てて得たもの。 -/
+theorem homomorphismToMatrixOfGeneral_second_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (m : ℕ) (hm : 1 ≤ m ∧ m ≤ D.M) :
     D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e (D.M + m)))
       = D.matrixAlgebra.add (D.matrixAlgebra.smul (-imaginaryUnit) (creationMatrix D.M m hm))
           (D.matrixAlgebra.smul imaginaryUnit (annihilationMatrix D.M m hm)) := by
-  let A := D.space.cliffordAlgebra
-  let B := D.matrixAlgebra
-  let SV := D.space.space
-  let S₂ := dualSpaceVectorSpace D.spaceW
-  let Φ := D.homomorphismToMatrix
-  let θ := D.mapToSplit QY e he
-  let hθ := D.mapToSplit_isIsometry QY e he
-  let i := imaginaryUnit
-  have hin1 : embedFirst S₂ (D.spaceW.smul (-i) (D.w m)) = SV.smul (-i) (embedFirst S₂ (D.w m)) :=
-    (embedFirst_isLinearMap_of_necSuf D.spaceW S₂).map_smul (-i) (D.w m)
-  have hin2 : embedSecond D.spaceW (S₂.smul i (D.f m)) = SV.smul i (embedSecond D.spaceW (D.f m)) :=
-    (embedSecond_isLinearMap_of_necSuf D.spaceW S₂).map_smul i (D.f m)
-  calc D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e (D.M + m)))
-      = Φ (QuadraticSpaceWithBasis.inducedHom QY D.space θ hθ (QY.γ (e (D.M + m)))) := rfl
-    _ = Φ (D.space.γ (θ (e (D.M + m)))) := by rw [QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf]
-    _ = Φ (D.space.γ (D.splitFamily (D.M + m))) := by
-        rw [show θ (e (D.M + m)) = D.splitFamily (D.M + m) from
-          mapByCoordinates_basis_of_necSuf QY.space D.space.space (D.M + D.M) e he.isBasis D.splitFamily (D.M + m) (by omega)
-            (by omega)]
-    _ = Φ (D.space.γ (D.spaceW.smul (-i) (D.w m), S₂.smul i (D.f m))) := by rw [D.splitFamily_second m hm.1]
-    _ = Φ (D.space.γ (SV.add (embedFirst S₂ (D.spaceW.smul (-i) (D.w m)))
-          (embedSecond D.spaceW (S₂.smul i (D.f m))))) :=
-        congrArg (fun p => Φ (D.space.γ p))
-          (pair_eq_add_embed_of_necSuf D.spaceW S₂ (D.spaceW.smul (-i) (D.w m)) (S₂.smul i (D.f m)))
-    _ = Φ (D.space.γ (SV.add (SV.smul (-i) (embedFirst S₂ (D.w m))) (SV.smul i (embedSecond D.spaceW (D.f m))))) := by
-        rw [hin1, hin2]
-    _ = Φ (A.add (D.space.γ (SV.smul (-i) (embedFirst S₂ (D.w m))))
-          (D.space.γ (SV.smul i (embedSecond D.spaceW (D.f m))))) := by rw [D.space.γ_isLinearMap_of_necSuf.map_add]; rfl
-    _ = Φ (A.add (A.smul (-i) (D.space.γ (embedFirst S₂ (D.w m))))
-          (A.smul i (D.space.γ (embedSecond D.spaceW (D.f m))))) := by
-        rw [D.space.γ_isLinearMap_of_necSuf.map_smul (-i) (embedFirst S₂ (D.w m)),
-          D.space.γ_isLinearMap_of_necSuf.map_smul i (embedSecond D.spaceW (D.f m))]; rfl
-    _ = Φ (A.add (A.smul (-i) (D.creation m)) (A.smul i (D.annihilation m))) := rfl
-    _ = B.add (Φ (A.smul (-i) (D.creation m))) (Φ (A.smul i (D.annihilation m))) :=
-        D.homomorphismToMatrix_isHom_of_necSuf.map_add _ _
-    _ = B.add (B.smul (-i) (Φ (D.creation m))) (B.smul i (Φ (D.annihilation m))) := by
-        rw [show Φ (A.smul (-i) (D.creation m)) = B.smul (-i) (Φ (D.creation m)) from
-            D.homomorphismToMatrix_isHom_of_necSuf.map_smul (-i) (D.creation m),
-          show Φ (A.smul i (D.annihilation m)) = B.smul i (Φ (D.annihilation m)) from
-            D.homomorphismToMatrix_isHom_of_necSuf.map_smul i (D.annihilation m)]
-    _ = B.add (B.smul (-i) (creationMatrix D.M m hm)) (B.smul i (annihilationMatrix D.M m hm)) := by
-        rw [show Φ (D.creation m) = creationMatrix D.M m hm from D.homomorphismToMatrix_creation_of_necSuf hm,
-          show Φ (D.annihilation m) = annihilationMatrix D.M m hm from D.homomorphismToMatrix_annihilation_of_necSuf hm]
+  rw [D.homomorphismToMatrixOfGeneral_eq_necSuf QY e he, (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+    creationMatrix_eq_necSuf, annihilationMatrix_eq_necSuf]
+  exact D.toNecSuf.homomorphismToMatrixOfGeneral_second complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e
+    he.toNecSuf m hm
 
 /-! ### U と U' で挟んだ写像 Ω・Ω' -/
 
-/-- 本文 `claim_conjugated_homomorphism_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix` を、各段の導出版から
-具体版と同じ手順で組み立てたもの。 -/
-theorem conjugatedHomomorphismToMatrix_first_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+/-- 本文 `claim_conjugated_homomorphism_sends_first_half_of_orthonormal_basis_to_jordan_wigner_z_matrix` を、必要十分版の主張を
+Ω = Ω_N ∘ T_Y で引き戻して得たもの。 -/
+theorem conjugatedHomomorphismToMatrix_first_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (m : ℕ) (hm : 1 ≤ m ∧ m ≤ D.M) :
-    D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e m)) = jordanWignerZ D.M m := calc
-  D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e m))
-      = conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfExchange D.M) (kroneckerPowerOfHalfExchange D.M)
-          (D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e m))) := rfl
-  _ = conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfExchange D.M) (kroneckerPowerOfHalfExchange D.M)
-          (Mat.add (creationMatrix D.M m hm) (annihilationMatrix D.M m hm)) := by
-        rw [D.homomorphismToMatrixOfGeneral_first_of_necSuf QY e he m hm]; rfl
-  _ = jordanWignerZ D.M m := conjugation_creation_add_annihilation_of_necSuf D.M m hm
+    D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e m)) = jordanWignerZ D.M m := by
+  rw [D.conjugatedHomomorphismToMatrix_eq_necSuf QY e he, (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+    jordanWignerZ_eq_necSuf]
+  exact D.toNecSuf.conjugatedHomomorphismToMatrix_first complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo mul_inverseOfTwo QY.toNecSuf
+    ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf m hm
 
-/-- 本文 `claim_conjugated_homomorphism_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix` を、各段の導出版から
-具体版と同じ手順で組み立てたもの。 -/
-theorem conjugatedHomomorphismToMatrix_second_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+/-- 本文 `claim_conjugated_homomorphism_sends_second_half_of_orthonormal_basis_to_jordan_wigner_y_matrix` を、必要十分版の主張を
+Ω = Ω_N ∘ T_Y で引き戻して得たもの。 -/
+theorem conjugatedHomomorphismToMatrix_second_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (m : ℕ) (hm : 1 ≤ m ∧ m ≤ D.M) :
-    D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e (D.M + m))) = jordanWignerY D.M m := calc
-  D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e (D.M + m)))
-      = conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfExchange D.M) (kroneckerPowerOfHalfExchange D.M)
-          (D.homomorphismToMatrixOfGeneral QY e he (QY.γ (e (D.M + m)))) := rfl
-  _ = conjugation (isFiniteSet_powerSet D.M) (kroneckerPowerOfExchange D.M) (kroneckerPowerOfHalfExchange D.M)
-          (Mat.add (Mat.smul (-imaginaryUnit) (creationMatrix D.M m hm))
-            (Mat.smul imaginaryUnit (annihilationMatrix D.M m hm))) := by
-        rw [D.homomorphismToMatrixOfGeneral_second_of_necSuf QY e he m hm]; rfl
-  _ = jordanWignerY D.M m := conjugation_imaginary_combination_of_necSuf D.M m hm
+    D.conjugatedHomomorphismToMatrix QY e he (QY.γ (e (D.M + m))) = jordanWignerY D.M m := by
+  rw [D.conjugatedHomomorphismToMatrix_eq_necSuf QY e he, (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+    jordanWignerY_eq_necSuf]
+  exact D.toNecSuf.conjugatedHomomorphismToMatrix_second complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo mul_inverseOfTwo QY.toNecSuf
+    ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf m hm
 
 /-! ### 系の定理 -/
 
-/-- 系の定理の本体（`conjugatedHomomorphisms_mutually_inverse_of_family`）を、各段の導出版から組み立てたもの。 -/
-theorem conjugatedHomomorphisms_mutually_inverse_of_family_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+/-- 系の定理の本体（`conjugatedHomomorphisms_mutually_inverse_of_family`）を、必要十分版の系の定理の本体を
+`D.toNecSuf`・`QY.toNecSuf` と ℂ の性質に特殊化し、互いに逆な準同型 T_Y : Cl(Y,Q) → Cl_N(Y,Q)・S_Y で引き戻して得たもの。
+具体版の Ω は Ω_N ∘ T_Y、Ω' は S_Y ∘ Ω'_N に等しい。 -/
+theorem conjugatedHomomorphisms_mutually_inverse_of_family_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
     IsComplexAlgebraHomomorphism QY.cliffordAlgebra D.matrixAlgebra (D.conjugatedHomomorphismToMatrix QY e he) ∧
       IsComplexAlgebraHomomorphism D.matrixAlgebra QY.cliffordAlgebra (D.conjugatedHomomorphismFromMatrix QY e he) ∧
@@ -157,59 +148,34 @@ theorem conjugatedHomomorphisms_mutually_inverse_of_family_of_necSuf (QY : Cliff
       Function.Bijective (D.conjugatedHomomorphismToMatrix QY e he) ∧
       (∀ (F : Mat (PowerSet D.M)) (a : QY.Cl),
         D.conjugatedHomomorphismToMatrix QY e he a = F → a = D.conjugatedHomomorphismFromMatrix QY e he F) := by
-  let hX := isFiniteSet_powerSet D.M
-  let U := kroneckerPowerOfExchange D.M
-  let U' := kroneckerPowerOfHalfExchange D.M
-  let ΦY := D.homomorphismToMatrixOfGeneral QY e he
-  let ΨY := D.homomorphismFromMatrixOfGeneral QY e he
-  let Ω := D.conjugatedHomomorphismToMatrix QY e he
-  let Ω' := D.conjugatedHomomorphismFromMatrix QY e he
-  obtain ⟨hΦY, hΨY, hΨΦ, hΦΨ, -, -⟩ := D.generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family_of_necSuf QY e he
-  -- U ·_B U' = 1_B と U' ·_B U = 1_B
-  have hUU' : Mat.mul hX U U' = Mat.one := kroneckerPowerOfExchange_mul_half_of_necSuf D.M
-  have hU'U : Mat.mul hX U' U = Mat.one := kroneckerPowerOfHalfExchange_mul_of_necSuf D.M
-  -- κ_{U,U'} と κ_{U',U} は ℂ-代数の準同型
-  have hκ : IsComplexAlgebraHomomorphism D.matrixAlgebra D.matrixAlgebra (conjugation hX U U') :=
-    conjugation_isComplexAlgebraHomomorphism_of_necSuf hX U U' hUU' hU'U
-  have hκ' : IsComplexAlgebraHomomorphism D.matrixAlgebra D.matrixAlgebra (conjugation hX U' U) :=
-    conjugation_isComplexAlgebraHomomorphism_of_necSuf hX U' U hU'U hUU'
-  -- 合成 Ω と Ω' は ℂ-代数の準同型
-  have hΩ : IsComplexAlgebraHomomorphism QY.cliffordAlgebra D.matrixAlgebra Ω :=
-    IsComplexAlgebraHomomorphism.comp_of_necSuf (φ := ΦY) (ψ := conjugation hX U U') hΦY hκ
-  have hΩ' : IsComplexAlgebraHomomorphism D.matrixAlgebra QY.cliffordAlgebra Ω' :=
-    IsComplexAlgebraHomomorphism.comp_of_necSuf (φ := conjugation hX U' U) (ψ := ΨY) hκ' hΨY
-  -- 一つ目の等式：κ_{U',U}(κ_{U,U'}(G)) = G。二つ目の等式：κ_{U,U'}(κ_{U',U}(G)) = G
-  have h1 : ∀ G : Mat (PowerSet D.M), conjugation hX U' U (conjugation hX U U' G) = G :=
-    conjugation_conjugation_of_necSuf hX U U' hU'U
-  have h2 : ∀ G : Mat (PowerSet D.M), conjugation hX U U' (conjugation hX U' U G) = G :=
-    conjugation_conjugation_of_necSuf hX U' U hUU'
-  have hΩ'Ω : ∀ a : QY.Cl, Ω' (Ω a) = a := fun a => calc
-    Ω' (Ω a) = ΨY (conjugation hX U' U (conjugation hX U U' (ΦY a))) := rfl
-    _ = ΨY (ΦY a) := by rw [show conjugation hX U' U (conjugation hX U U' (ΦY a)) = ΦY a from h1 (ΦY a)]
-    _ = a := hΨΦ a
-  have hΩΩ' : ∀ F : Mat (PowerSet D.M), Ω (Ω' F) = F := fun F => calc
-    Ω (Ω' F) = conjugation hX U U' (ΦY (ΨY (conjugation hX U' U F))) := rfl
-    _ = conjugation hX U U' (conjugation hX U' U F) := by rw [show ΦY (ΨY (conjugation hX U' U F)) = conjugation hX U' U F from hΦΨ (conjugation hX U' U F)]
-    _ = F := h2 F
-  -- 単射であること
-  have hinj : Function.Injective Ω := by
-    intro a a' haa'
-    calc a = Ω' (Ω a) := (hΩ'Ω a).symm
-      _ = Ω' (Ω a') := by rw [haa']
-      _ = a' := hΩ'Ω a'
-  -- 全射であること
-  have hsurj : Function.Surjective Ω := fun F => ⟨Ω' F, hΩΩ' F⟩
-  -- Ω^{-1}(F) = Ω'(F)
-  have hinv : ∀ (F : Mat (PowerSet D.M)) (a : QY.Cl), Ω a = F → a = Ω' F := by
-    intro F a ha
-    apply hinj
-    calc Ω a = F := ha
-      _ = Ω (Ω' F) := (hΩΩ' F).symm
-  exact ⟨hΩ, hΩ', hΩ'Ω, hΩΩ', ⟨hinj, hsurj⟩, hinv⟩
+  let P := QuadraticSpaceWithBasis.transportToNecSuf QY
+  let ΩN := D.conjugatedHomomorphismToMatrixN QY e he
+  let Ω'N := D.conjugatedHomomorphismFromMatrixN QY e he
+  obtain ⟨hΩN, hΩ'N, hΩ'ΩN, hΩΩ'N, hbijN, hinvN⟩ :=
+    D.toNecSuf.conjugatedHomomorphisms_mutually_inverse_of_family complexCliffordLaws add_neg_cancel neg_mul neg_neg
+      imaginaryUnit imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+      ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf
+  have hΩ : IsComplexAlgebraHomomorphism (QuadraticSpaceWithBasis.algebraOfNecSuf QY.toNecSuf) D.matrixAlgebra ΩN :=
+    (isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2 (by rw [D.matrixAlgebra_toNecSuf]; exact hΩN)
+  have hΩ' : IsComplexAlgebraHomomorphism D.matrixAlgebra (QuadraticSpaceWithBasis.algebraOfNecSuf QY.toNecSuf) Ω'N :=
+    (isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2 (by rw [D.matrixAlgebra_toNecSuf]; exact hΩ'N)
+  have hΩeq : D.conjugatedHomomorphismToMatrix QY e he = fun a => ΩN (P.toCl a) :=
+    funext (D.conjugatedHomomorphismToMatrix_eq_necSuf QY e he)
+  have hΩ'eq : D.conjugatedHomomorphismFromMatrix QY e he = fun F => P.ofCl (Ω'N F) := funext fun F =>
+    (P.ofCl_toCl _).symm.trans (congrArg P.ofCl (D.toCl_conjugatedHomomorphismFromMatrix QY e he F))
+  rw [hΩeq, hΩ'eq]
+  refine ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom hΩ,
+    IsComplexAlgebraHomomorphism.comp_of_necSuf hΩ' P.ofCl_isHom,
+    fun a => ?_, fun F => ?_, ?_, fun F a ha => ?_⟩
+  · exact (congrArg P.ofCl (hΩ'ΩN (P.toCl a))).trans (P.ofCl_toCl a)
+  · exact (congrArg ΩN (P.toCl_ofCl (Ω'N F))).trans (hΩΩ'N F)
+  · exact hbijN.comp P.toCl_bijective
+  · exact (P.ofCl_toCl a).symm.trans (congrArg P.ofCl (hinvN F (P.toCl a) ha))
 
 /-- 本文 `theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms`
-を、各段の導出版から組み立てたもの（e := `orthonormalBasis`）。 -/
-theorem conjugatedHomomorphisms_mutually_inverse_of_necSuf (QY : Clifford.QuadraticSpaceWithBasis Y)
+を得たもの（e := `orthonormalBasis`）。必要十分版の系の定理が、必要十分版の本体を e := 必要十分版の `orthonormalBasis` に当てるのと
+同じ手順で、上の本体の導出版を具体版の e に当てる。 -/
+theorem conjugatedHomomorphisms_mutually_inverse_of_necSuf (QY : QuadraticSpaceWithBasis Y)
     (hdim : QY.dim = D.M + D.M) (hQ : IsNondegenerateQuadraticForm QY.space QY.form) :
     let e := D.orthonormalBasis QY hdim hQ
     let he := D.orthonormalBasis_spec QY hdim hQ

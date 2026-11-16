@@ -404,11 +404,18 @@ theorem dualBasis_linearlyIndependent_of_necSuf (S : ComplexVectorSpace V) (n : 
   exact (dualSpace_partialLinearCombination_val_eq_necSuf S f c n).symm.trans
     (congrArg Subtype.val hc)
 
+/-- 本文 `claim_dual_basis_is_basis_of_dual_space` を、必要十分版の主張を特殊化して得る。具体版の V^* と必要十分版の V^* は
+値の写像の別の部分型なので、線型結合の値の写像が一致すること（`dualSpace_partialLinearCombination_val_eq_necSuf`）で
+一次独立の関係式と張る式を運ぶ。 -/
 theorem dualBasis_isBasis_of_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : ℕ → V)
     (hb : IsBasisFamily S n b) (f : ℕ → DualSpace S) (hf : IsDualBasis S n b f) :
-    IsBasisFamily (dualSpaceVectorSpace S) n f where
-  linearlyIndependent := dualBasis_linearlyIndependent_of_necSuf S n b f hf
-  spans g := ⟨fun k => g.1 (b k), (dualBasis_spans_of_necSuf S n b hb f hf g).symm⟩
+    IsBasisFamily (dualSpaceVectorSpace S) n f := by
+  have hN := NecSuf.VectorSpace.dualBasis_isBasis complexDualSpaceVectorSpaceLaws zero_add mul_one S.toNecSuf n b
+    ((isBasisFamily_iff_necSuf S n b).1 hb) (fun k => (f k).toNecSuf) hf
+  refine ⟨fun c hc => hN.linearlyIndependent c (Subtype.ext ?_), fun g => ?_⟩
+  · exact (dualSpace_partialLinearCombination_val_eq_necSuf S f c n).symm.trans (congrArg Subtype.val hc)
+  · obtain ⟨c, hc⟩ := hN.spans g.toNecSuf
+    exact ⟨c, Subtype.ext ((dualSpace_partialLinearCombination_val_eq_necSuf S f c n).trans (congrArg Subtype.val hc))⟩
 
 /-! ### 直和 -/
 

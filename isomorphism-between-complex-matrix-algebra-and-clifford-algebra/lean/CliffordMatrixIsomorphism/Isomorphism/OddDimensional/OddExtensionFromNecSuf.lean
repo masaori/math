@@ -6,14 +6,15 @@
   linearCombination_unitFamily・unitFamily_isBasis    …_of_necSuf
   oddVectorSpace・oddForm                             oddVectorSpace_eq_of_necSuf・oddForm_eq_necSuf（rfl）
   polarization_oddForm ほか q' の五つの主張           …_of_necSuf
-  oddInclusionHom_isHom・oddInclusionHom_γ            …_of_necSuf
+  oddInclusionHom_isHom・oddInclusionHom_γ            …_of_necSuf（後者は必要十分版の主張を T'・S' で引き戻す）
   addedGenerator_mul_self・addedGenerator_anticommute …_of_necSuf（必要十分版の主張を T'・S' で引き戻す）
 
 運び方:
 - q' についての主張は、必要十分版が任意の K-線型空間 S と写像 q について書いてあるので、S := V の組を `toNecSuf` で読んだもの、
   q := q_W、L := `complexValuedMapsLaws` を入れる。V' の点の型は具体版と同じで、具体版の V' の演算・q'・B_{q'} は
   必要十分版のものと定義により一致する（`rfl`）。
-- j の二つの主張は、等長写像が誘導する準同型の導出版（`InducedHomomorphismFromNecSuf.lean`）を θ := in'_1 に当てる。
+- j が準同型であることは、等長写像が誘導する準同型の導出版（`InducedHomomorphismFromNecSuf.lean`）を θ := in'_1 に当てる。
+  j(γ(v)) = γ'(in'_1(v)) は、必要十分版の主張を下の T'・S' で引き戻す。
 - g の主張は、具体版の Cl(V',q') と必要十分版のものが別の集合なので、二つの間の互いに逆な準同型
   T' : Cl(V',q') → Cl_N(V',q')・S'（`oddTransport`。V' の点を (v, t) ↦ (v を写した点, t) で写す）を置き、
   具体版の主張の両辺の T' による像が必要十分版の主張の両辺になることを示して（T'(g) = g_N、T'(j(a)) = j_N(T(a))）、
@@ -108,11 +109,6 @@ theorem oddInclusionHom_isHom_of_necSuf :
     IsComplexAlgebraHomomorphism D.space.cliffordAlgebra D.oddSpace.cliffordAlgebra D.oddInclusionHom :=
   QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf D.space D.oddSpace D.oddInclusion D.oddInclusion_isIsometry
 
-/-- 本文 `claim_induced_homomorphism_into_odd_extension_after_generator_map` を、必要十分版から得たもの。 -/
-theorem oddInclusionHom_γ_of_necSuf (v : W × DualSpace D.spaceW) :
-    D.oddInclusionHom (D.space.γ v) = D.oddSpace.γ (D.oddInclusion v) :=
-  QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf D.space D.oddSpace D.oddInclusion D.oddInclusion_isIsometry v
-
 /-! ### 具体版の Cl(V',q') と必要十分版の Cl(V',q') の間の準同型 -/
 
 /-- V' の点を必要十分版の V' の点へ写す：(v, t) ↦ (v を写した点, t)。 -/
@@ -144,8 +140,19 @@ theorem oddToCl_oddInclusionHom (a : D.space.Cl) :
       rw [← hv]
       show D.oddTransport.toCl (D.oddInclusionHom (D.space.γ v))
         = D.toNecSuf.oddInclusionHom complexCliffordLaws add_neg_cancel (D.splitTransport.toCl (D.space.γ v))
-      rw [D.oddInclusionHom_γ_of_necSuf v, D.oddTransport.toCl_γ, D.splitTransport.toCl_γ]
+      -- j は θ := in'_1 が誘導する準同型 Cl(θ) なので、j(γ(v)) = γ'(in'_1(v)) は誘導される準同型の主張による
+      rw [show D.oddInclusionHom (D.space.γ v) = D.oddSpace.γ (D.oddInclusion v) from
+          QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf D.space D.oddSpace D.oddInclusion D.oddInclusion_isIsometry v,
+        D.oddTransport.toCl_γ, D.splitTransport.toCl_γ]
       exact (D.toNecSuf.oddInclusionHom_γ complexCliffordLaws add_neg_cancel (splitPointToNecSuf D.spaceW v)).symm) a
+
+/-- 本文 `claim_induced_homomorphism_into_odd_extension_after_generator_map` を、必要十分版の主張を T' で引き戻して得たもの
+（T'(j(γ(v))) = j_N(γ_N(v を写した点)) に必要十分版の主張を当て、T'(γ'(in'_1(v))) と比べる）。 -/
+theorem oddInclusionHom_γ_of_necSuf (v : W × DualSpace D.spaceW) :
+    D.oddInclusionHom (D.space.γ v) = D.oddSpace.γ (D.oddInclusion v) := by
+  apply D.oddTransport.eq_of_toCl_eq
+  rw [D.oddToCl_oddInclusionHom, D.splitTransport.toCl_γ, D.oddTransport.toCl_γ]
+  exact D.toNecSuf.oddInclusionHom_γ complexCliffordLaws add_neg_cancel (splitPointToNecSuf D.spaceW v)
 
 /-- T'(g) = g_N。 -/
 theorem oddToCl_addedGenerator :

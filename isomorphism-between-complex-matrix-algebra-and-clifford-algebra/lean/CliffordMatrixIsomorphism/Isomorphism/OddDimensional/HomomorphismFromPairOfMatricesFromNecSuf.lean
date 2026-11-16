@@ -12,6 +12,7 @@
   homomorphismToPairOfMatrices_homomorphismFromPairOfMatrices    homomorphismToPairOfMatrices_homomorphismFromPairOfMatrices_of_necSuf
   homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices    homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices_of_necSuf
   oddCliffordAlgebra_isomorphic_pairOfMatrixAlgebras             oddCliffordAlgebra_isomorphic_pairOfMatrixAlgebras_of_necSuf
+                                                                 （必要十分版の系の定理を T'・S' で引き戻す）
 
 運び方:
 - 必要十分版の前半は A・A'・B を任意の代数に替えて書いてあるので、具体版の Cl(V',q') と必要十分版の前提の組 `D.toNecSuf` の
@@ -22,8 +23,8 @@
   `HomomorphismToPairOfMatricesFromNecSuf.lean`・`CentralElementFromNecSuf.lean`・`ParityElementFromNecSuf.lean`・
   `OddExtensionFromNecSuf.lean`・`MutuallyInverseHomomorphismsFromNecSuf.lean`・`HomomorphismFromMatrixAlgebraFromNecSuf.lean`・
   `CliffordAlgebraFromNecSuf.lean`）から渡す。
-- 系の定理は、準同型であることと互いに逆であることを上の導出から取り、全単射と逆写像の部分を具体版と同じ手順で示す
-  （`MutuallyInverseHomomorphismsFromNecSuf.lean` の主定理と同じ）。
+- 系の定理は、必要十分版の系の定理を特殊化し、互いに逆な準同型 T'・S'（`oddTransport`）で引き戻す。具体版の Φ' は Φ'_N ∘ T'
+  （存在と一意性の主張の一意性）、Ψ' は S' ∘ Ψ'_N（T' が j・Ψ・e_± を必要十分版の j_N・Ψ_N・e_{±,N} へ送ること）に等しい。
 ℂ から渡す性質は、0 + 0 = 0、a · 0 = 0、1 + (-1) = 0、-(-1) = 1、a · (-1) = -a、h · (1 + 1) = 1 の `inverseOfTwo_mul` である。
 -/
 import CliffordMatrixIsomorphism.Isomorphism.OddDimensional.HomomorphismFromPairOfMatrices
@@ -105,8 +106,59 @@ theorem homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices_of_necSuf (a
     D.idempotentPlus_sub_idempotentMinus_of_necSuf rfl D.parityElement_mul_self_of_necSuf D.space.γ D.oddSpace.γ
     ((generatesAlgebra_iff_necSuf _ _).1 D.oddSpace.γ_generates_of_necSuf) D.oddSpace_γ_pair_of_necSuf a
 
-/-- 本文 `theorem_clifford_algebra_of_odd_dimensional_quadratic_space_is_isomorphic_to_product_of_matrix_algebras` を
-必要十分版から得る。 -/
+/-! ### 系の定理：必要十分版の定理を T'・S' で引き戻す -/
+
+/-- 必要十分版の Φ'（`D.toNecSuf` に ℂ の性質を渡したもの）。 -/
+abbrev homomorphismToPairOfMatricesN :
+    (D.toNecSuf.oddSpace complexCliffordLaws).Cl complexCliffordLaws → Mat (PowerSet D.M) × Mat (PowerSet D.M) :=
+  D.toNecSuf.homomorphismToPairOfMatrices complexCliffordLaws add_neg_cancel
+
+/-- 必要十分版の Ψ'（`D.toNecSuf` に ℂ の性質と h := inverseOfTwo を渡したもの）。 -/
+abbrev homomorphismFromPairOfMatricesN :
+    Mat (PowerSet D.M) × Mat (PowerSet D.M) → (D.toNecSuf.oddSpace complexCliffordLaws).Cl complexCliffordLaws :=
+  D.toNecSuf.homomorphismFromPairOfMatrices complexCliffordLaws add_neg_cancel inverseOfTwo
+
+/-- 具体版の Φ' は、必要十分版の Φ' に T' を先に当てたものである（存在と一意性の主張の一意性による）。 -/
+theorem homomorphismToPairOfMatrices_eq_comp (a : D.oddSpace.Cl) :
+    D.homomorphismToPairOfMatrices a = D.homomorphismToPairOfMatricesN (D.oddTransport.toCl a) := by
+  let P := D.oddTransport
+  obtain ⟨Θ, -, huniq⟩ := D.existsUnique_homomorphismToPairOfMatrices_of_necSuf
+  have hN := D.toNecSuf.homomorphismToPairOfMatrices_isHom complexCliffordLaws add_neg_cancel
+  rw [← D.pairOfMatricesAlgebra_toNecSuf] at hN
+  have h1 : D.homomorphismToPairOfMatrices = Θ :=
+    huniq _ ⟨D.homomorphismToPairOfMatrices_isHom_of_necSuf, D.homomorphismToPairOfMatrices_γ_of_necSuf⟩
+  have h2 : (fun x => D.homomorphismToPairOfMatricesN (P.toCl x)) = Θ :=
+    huniq _ ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom
+        ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2 hN), fun x => by
+      show D.homomorphismToPairOfMatricesN (P.toCl (D.oddSpace.γ x)) = D.mapToPairOfMatrices x
+      rw [P.toCl_γ, D.mapToPairOfMatrices_eq_necSuf]
+      exact D.toNecSuf.homomorphismToPairOfMatrices_γ complexCliffordLaws add_neg_cancel _⟩
+  exact congrFun (h1.trans h2.symm) a
+
+/-- T'(e_σ) = e_{σ,N}（T' は準同型で、T'(z) = z_N）。 -/
+theorem oddToCl_idempotent (σ : ℂ) :
+    D.oddTransport.toCl (D.idempotent σ) = D.toNecSuf.idempotent complexCliffordLaws add_neg_cancel inverseOfTwo σ := by
+  have hT := D.oddTransport.toCl_isHom
+  rw [idempotent, hT.map_smul, hT.map_add, hT.map_one, hT.map_smul, D.oddToCl_centralElement]
+  rfl
+
+/-- T'(Ψ'((F, G))) = Ψ'_N((F, G))。 -/
+theorem oddToCl_homomorphismFromPairOfMatrices (p : Mat (PowerSet D.M) × Mat (PowerSet D.M)) :
+    D.oddTransport.toCl (D.homomorphismFromPairOfMatrices p) = D.homomorphismFromPairOfMatricesN p := by
+  have hT := D.oddTransport.toCl_isHom
+  show D.oddTransport.toCl (D.oddSpace.cliffordAlgebra.add
+      (D.oddSpace.cliffordAlgebra.mul (D.oddInclusionHom (D.homomorphismFromMatrix p.1)) D.idempotentPlus)
+      (D.oddSpace.cliffordAlgebra.mul (D.oddInclusionHom (D.homomorphismFromMatrix p.2)) D.idempotentMinus)) = _
+  rw [hT.map_add, hT.map_mul, hT.map_mul, D.oddToCl_oddInclusionHom, D.oddToCl_oddInclusionHom,
+    toN_homomorphismFromMatrix D.splitTransport.toCl_isHom D.splitTransport.toCl_γ,
+    toN_homomorphismFromMatrix D.splitTransport.toCl_isHom D.splitTransport.toCl_γ,
+    show D.idempotentPlus = D.idempotent 1 from rfl, show D.idempotentMinus = D.idempotent (-1) from rfl,
+    D.oddToCl_idempotent, D.oddToCl_idempotent]
+  rfl
+
+/-- 本文 `theorem_clifford_algebra_of_odd_dimensional_quadratic_space_is_isomorphic_to_product_of_matrix_algebras` を、
+必要十分版の系の定理を `D.toNecSuf`・ℂ の性質・h := inverseOfTwo に特殊化し、互いに逆な準同型 T'・S'（`oddTransport`）で
+引き戻して得たもの。具体版の Φ' は Φ'_N ∘ T'、Ψ' は S' ∘ Ψ'_N に等しい。 -/
 theorem oddCliffordAlgebra_isomorphic_pairOfMatrixAlgebras_of_necSuf :
     IsComplexAlgebraHomomorphism D.oddSpace.cliffordAlgebra D.pairOfMatricesAlgebra D.homomorphismToPairOfMatrices ∧
       IsComplexAlgebraHomomorphism D.pairOfMatricesAlgebra D.oddSpace.cliffordAlgebra
@@ -116,23 +168,28 @@ theorem oddCliffordAlgebra_isomorphic_pairOfMatrixAlgebras_of_necSuf :
       Function.Bijective D.homomorphismToPairOfMatrices ∧
       (∀ (F G : Mat (PowerSet D.M)) (a : D.oddSpace.Cl),
         D.homomorphismToPairOfMatrices a = (F, G) → a = D.homomorphismFromPairOfMatrices (F, G)) := by
-  let Φ' := D.homomorphismToPairOfMatrices
-  let Ψ' := D.homomorphismFromPairOfMatrices
-  have hinj : Function.Injective Φ' := by
-    intro a a' haa'
-    calc a = Ψ' (Φ' a) := (D.homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices_of_necSuf a).symm
-      _ = Ψ' (Φ' a') := by rw [haa']
-      _ = a' := D.homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices_of_necSuf a'
-  have hsurj : Function.Surjective Φ' := fun p =>
-    ⟨Ψ' (p.1, p.2), D.homomorphismToPairOfMatrices_homomorphismFromPairOfMatrices_of_necSuf p.1 p.2⟩
-  have hinv : ∀ (F G : Mat (PowerSet D.M)) (a : D.oddSpace.Cl), Φ' a = (F, G) → a = Ψ' (F, G) := by
-    intro F G a ha
-    apply hinj
-    calc Φ' a = (F, G) := ha
-      _ = Φ' (Ψ' (F, G)) := (D.homomorphismToPairOfMatrices_homomorphismFromPairOfMatrices_of_necSuf F G).symm
-  exact ⟨D.homomorphismToPairOfMatrices_isHom_of_necSuf, D.homomorphismFromPairOfMatrices_isHom_of_necSuf,
-    D.homomorphismFromPairOfMatrices_homomorphismToPairOfMatrices_of_necSuf,
-    D.homomorphismToPairOfMatrices_homomorphismFromPairOfMatrices_of_necSuf, ⟨hinj, hsurj⟩, hinv⟩
+  let P := D.oddTransport
+  let ΦN := D.homomorphismToPairOfMatricesN
+  let ΨN := D.homomorphismFromPairOfMatricesN
+  obtain ⟨hΦN, hΨN, hΨΦN, hΦΨN, hbijN, hinvN⟩ :=
+    D.toNecSuf.oddCliffordAlgebra_isomorphic_pairOfMatrixAlgebras complexCliffordLaws add_neg_cancel inverseOfTwo
+      inverseOfTwo_mul
+  rw [← D.pairOfMatricesAlgebra_toNecSuf] at hΦN hΨN
+  have hΦeq : D.homomorphismToPairOfMatrices = fun a => ΦN (P.toCl a) := funext D.homomorphismToPairOfMatrices_eq_comp
+  have hΨeq : D.homomorphismFromPairOfMatrices = fun p => P.ofCl (ΨN p) := funext fun p =>
+    (P.ofCl_toCl _).symm.trans (congrArg P.ofCl (D.oddToCl_homomorphismFromPairOfMatrices p))
+  rw [hΦeq, hΨeq]
+  refine ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom
+      ((isComplexAlgebraHomomorphism_iff_necSuf
+        (QuadraticSpaceWithBasis.algebraOfNecSuf (D.toNecSuf.oddSpace complexCliffordLaws)) D.pairOfMatricesAlgebra ΦN).2 hΦN),
+    IsComplexAlgebraHomomorphism.comp_of_necSuf
+      ((isComplexAlgebraHomomorphism_iff_necSuf D.pairOfMatricesAlgebra
+        (QuadraticSpaceWithBasis.algebraOfNecSuf (D.toNecSuf.oddSpace complexCliffordLaws)) ΨN).2 hΨN) P.ofCl_isHom,
+    fun a => ?_, fun F G => ?_, ?_, fun F G a ha => ?_⟩
+  · exact (congrArg P.ofCl (hΨΦN (P.toCl a))).trans (P.ofCl_toCl a)
+  · exact (congrArg ΦN (P.toCl_ofCl (ΨN (F, G)))).trans (hΦΨN F G)
+  · exact hbijN.comp P.toCl_bijective
+  · exact (P.ofCl_toCl a).symm.trans (congrArg P.ofCl (hinvN F G (P.toCl a) ha))
 
 end
 

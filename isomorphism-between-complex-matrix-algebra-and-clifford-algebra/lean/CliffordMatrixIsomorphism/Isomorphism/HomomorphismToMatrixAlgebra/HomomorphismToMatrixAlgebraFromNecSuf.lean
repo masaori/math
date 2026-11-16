@@ -23,8 +23,9 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 クリフォード代数は、具体版の Cl と必要十分版の前提 `D.toNecSuf` の Cl' が別の集合である（`GeneratorsFromNecSuf.lean` の冒頭）。
 そこで、具体版の普遍性から得る準同型 Φ : Cl → Cl'（Φ ∘ γ = γ' ∘（点を写す写像））と、必要十分版の主張の準同型
 Φ' : Cl' → Mat_{P_M}(ℂ) の合成 Φ' ∘ Φ を作る。
+  - 存在と一意性の主張は、必要十分版の主張を特殊化し、互いに逆な準同型 T : Cl → Cl'・S : Cl' → Cl（`splitTransport`）で
+    引き戻す。存在は Φ'_N ∘ T。一意性は、条件を満たす Θ について Θ ∘ S が必要十分版の条件を満たすので Θ ∘ S = Φ'_N となることによる。
   - Φ' ∘ Φ は準同型で、Φ' ∘ Φ ∘ γ = Φ' ∘ γ' ∘（点を写す写像）= φ' ∘（点を写す写像）= φ（必要十分版の Φ' ∘ γ' = φ'）。
-    これで具体版の存在を得る。一意性は、γ(V) が生成することから、γ の上で一致する準同型が等しいことによる。
   - 具体版の Φ は Φ' ∘ Φ に等しいので、Φ(a†_i) = Φ'(Φ(a†_i)) = Φ'(a'†_i) = c_i（必要十分版の主張）。Φ(a_i) も同じ。
 ℂ から渡す性質は、`complexValuedMapsLaws`、a · 1 = a の `mul_one`、a · 0 = 0 の `mul_zero`、0 · a = 0 の `zero_mul`、
 章「クリフォード代数」の仮定の組 `complexCliffordLaws`、a + (-a) = 0 の `add_neg_cancel` である。
@@ -165,8 +166,10 @@ theorem comp_toN_γ {Φ : D.space.Cl → D.spaceN.Cl complexCliffordLaws}
   rw [hΦγ v, D.matrixValuedMap_eq_necSuf v]
   exact D.toNecSuf.homomorphismToMatrix_γ complexCliffordLaws add_neg_cancel _
 
-/-- 本文 `claim_existence_and_uniqueness_of_homomorphism_from_clifford_algebra_to_matrix_algebra` を必要十分版から得る。
-存在は Φ' ∘ Φ、一意性は γ(V) が生成することによる。 -/
+/-- 本文 `claim_existence_and_uniqueness_of_homomorphism_from_clifford_algebra_to_matrix_algebra` を、必要十分版の主張を
+特殊化して得る。必要十分版の主張が与える Φ_N : Cl' → Mat と、互いに逆な準同型 T : Cl → Cl'・S : Cl' → Cl（`splitTransport`）を使う。
+存在は Φ_N ∘ T。一意性は、条件を満たす Φ' について Φ' ∘ S が必要十分版の条件を満たすので Φ' ∘ S = Φ_N となり、
+Φ' = Φ' ∘ S ∘ T = Φ_N ∘ T となることによる。 -/
 theorem existsUnique_homomorphismToMatrix_of_necSuf :
     ∃ Φ : D.space.Cl → Mat (PowerSet D.M),
       (IsComplexAlgebraHomomorphism D.space.cliffordAlgebra D.matrixAlgebra Φ ∧
@@ -174,12 +177,27 @@ theorem existsUnique_homomorphismToMatrix_of_necSuf :
       ∀ Φ' : D.space.Cl → Mat (PowerSet D.M),
         (IsComplexAlgebraHomomorphism D.space.cliffordAlgebra D.matrixAlgebra Φ' ∧
           ∀ v, Φ' (D.space.γ v) = D.matrixValuedMap v) → Φ' = Φ := by
-  obtain ⟨Φ, hΦ, hΦγ⟩ := D.exists_toN
-  refine ⟨fun x => D.homomorphismToMatrixN (Φ x), ⟨D.comp_toN_isHom hΦ, D.comp_toN_γ hΦγ⟩, ?_⟩
-  rintro Φ' ⟨hΦ', hΦ'γ⟩
-  funext x
-  exact eq_of_agree_on_generators_of_necSuf hΦ' (D.comp_toN_isHom hΦ) (Set.range D.space.γ)
-    D.space.γ_generates_of_necSuf (fun _ ⟨v, hv⟩ => by rw [← hv, hΦ'γ v, D.comp_toN_γ hΦγ v]) x
+  obtain ⟨ΦN, ⟨hΦN, hΦNγ⟩, huniqN⟩ := D.toNecSuf.existsUnique_homomorphismToMatrix complexCliffordLaws add_neg_cancel
+  let P := D.splitTransport
+  have hΦN' : IsComplexAlgebraHomomorphism D.algebraN D.matrixAlgebra ΦN := by
+    rw [isComplexAlgebraHomomorphism_iff_necSuf, D.matrixAlgebra_toNecSuf]
+    exact hΦN
+  refine ⟨fun x => ΦN (P.toCl x), ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom hΦN', fun v => ?_⟩, ?_⟩
+  · show ΦN (P.toCl (D.space.γ v)) = D.matrixValuedMap v
+    rw [P.toCl_γ, D.matrixValuedMap_eq_necSuf v]
+    exact hΦNγ _
+  · rintro Φ' ⟨hΦ', hΦ'γ⟩
+    have hcomp : (fun y => Φ' (P.ofCl y)) = ΦN := by
+      refine huniqN _ ⟨?_, fun v' => ?_⟩
+      · have h := IsComplexAlgebraHomomorphism.comp_of_necSuf P.ofCl_isHom hΦ'
+        rw [isComplexAlgebraHomomorphism_iff_necSuf, D.matrixAlgebra_toNecSuf] at h
+        exact h
+      · show Φ' (P.ofCl (D.spaceN.γ complexCliffordLaws v')) = D.toNecSuf.matrixValuedMap complexCliffordLaws v'
+        rw [P.ofCl_γ, hΦ'γ, D.matrixValuedMap_eq_necSuf]
+        exact congrArg (D.toNecSuf.matrixValuedMap complexCliffordLaws) (P.toPoint_ofPoint v')
+    funext x
+    calc Φ' x = Φ' (P.ofCl (P.toCl x)) := by rw [P.ofCl_toCl]
+      _ = ΦN (P.toCl x) := congrFun hcomp (P.toCl x)
 
 /-- 本文 `def_homomorphism_from_clifford_algebra_to_matrix_algebra` の「Φ は ℂ-代数の準同型」を必要十分版から得る。 -/
 theorem homomorphismToMatrix_isHom_of_necSuf :

@@ -7,8 +7,8 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 （`eq_of_toN_eq`）。行列環への準同型 Φ_具体 は Φ' ∘ Φ に等しい（`homomorphismToMatrix_eq_comp`）ので、Φ_具体 の値の主張は
 必要十分版の Φ' の主張を Φ で写した元に当てて得る。生成作用素・消滅作用素の行列は `creationMatrix_eq_necSuf`・
 `annihilationMatrix_eq_necSuf`、座標の写像は `coordinate_eq_necSuf` で必要十分版のものへ移す。
-主定理は、主張の五つの部分のうち準同型であることと互いに逆であることを上の導出から取り、全単射と逆写像の部分を
-具体版と同じ手順でそこから示す。
+主定理は、必要十分版の主定理を特殊化し、互いに逆な準同型 T・S（`splitTransport`）で引き戻す
+（具体版の Cl と必要十分版の Cl' は別の集合なので、`TransportToNecSufFromNecSuf.lean` の運び方による）。
 ℂ から渡す性質は、章「クリフォード代数」の仮定の組 `complexCliffordLaws` と、a + (-a) = 0 の `add_neg_cancel` だけである。
 -/
 import CliffordMatrixIsomorphism.Isomorphism.MutuallyInverseHomomorphisms.MutuallyInverseHomomorphisms
@@ -114,7 +114,9 @@ theorem homomorphismFromMatrix_homomorphismToMatrix_of_necSuf (a : D.space.Cl) :
   rw [toN_homomorphismFromMatrix hΦ hΦγ, D.homomorphismToMatrix_eq_comp hΦ hΦγ]
   exact D.toNecSuf.homomorphismFromMatrix_homomorphismToMatrix complexCliffordLaws add_neg_cancel (Φ a)
 
-/-- 本文 `theorem_clifford_algebra_of_split_quadratic_space_is_isomorphic_to_matrix_algebra` を必要十分版から得る。 -/
+/-- 本文 `theorem_clifford_algebra_of_split_quadratic_space_is_isomorphic_to_matrix_algebra` を、必要十分版の主定理を
+`D.toNecSuf` と ℂ の性質に特殊化し、互いに逆な準同型 T : Cl → Cl'・S : Cl' → Cl（`splitTransport`）で引き戻して得たもの。
+具体版の Φ は Φ_N ∘ T（`homomorphismToMatrix_eq_comp`）、Ψ は S ∘ Ψ_N（`toN_homomorphismFromMatrix` と S ∘ T = 恒等写像）に等しい。 -/
 theorem cliffordAlgebra_isomorphic_matrixAlgebra_of_necSuf :
     IsComplexAlgebraHomomorphism D.space.cliffordAlgebra D.matrixAlgebra D.homomorphismToMatrix ∧
       IsComplexAlgebraHomomorphism D.matrixAlgebra D.space.cliffordAlgebra D.homomorphismFromMatrix ∧
@@ -122,22 +124,26 @@ theorem cliffordAlgebra_isomorphic_matrixAlgebra_of_necSuf :
       (∀ F : Mat (PowerSet D.M), D.homomorphismToMatrix (D.homomorphismFromMatrix F) = F) ∧
       Function.Bijective D.homomorphismToMatrix ∧
       (∀ (F : Mat (PowerSet D.M)) (a : D.space.Cl), D.homomorphismToMatrix a = F → a = D.homomorphismFromMatrix F) := by
-  let Φ := D.homomorphismToMatrix
-  let Ψ := D.homomorphismFromMatrix
-  have hinj : Function.Injective Φ := by
-    intro a b hab
-    calc a = Ψ (Φ a) := (D.homomorphismFromMatrix_homomorphismToMatrix_of_necSuf a).symm
-      _ = Ψ (Φ b) := by rw [hab]
-      _ = b := D.homomorphismFromMatrix_homomorphismToMatrix_of_necSuf b
-  have hsurj : Function.Surjective Φ := fun F => ⟨Ψ F, D.homomorphismToMatrix_homomorphismFromMatrix_of_necSuf F⟩
-  have hinv : ∀ (F : Mat (PowerSet D.M)) (a : D.space.Cl), Φ a = F → a = Ψ F := by
-    intro F a ha
-    apply hinj
-    calc Φ a = F := ha
-      _ = Φ (Ψ F) := (D.homomorphismToMatrix_homomorphismFromMatrix_of_necSuf F).symm
-  exact ⟨D.homomorphismToMatrix_isHom_of_necSuf, D.homomorphismFromMatrix_isHom_of_necSuf,
-    D.homomorphismFromMatrix_homomorphismToMatrix_of_necSuf, D.homomorphismToMatrix_homomorphismFromMatrix_of_necSuf,
-    ⟨hinj, hsurj⟩, hinv⟩
+  let P := D.splitTransport
+  let ΦN := D.homomorphismToMatrixN
+  let ΨN := D.toNecSuf.homomorphismFromMatrix complexCliffordLaws
+  obtain ⟨hΦN, hΨN, hΨΦN, hΦΨN, hbijN, hinvN⟩ :=
+    D.toNecSuf.cliffordAlgebra_isomorphic_matrixAlgebra complexCliffordLaws add_neg_cancel
+  rw [← D.matrixAlgebra_toNecSuf] at hΦN hΨN
+  have hΦeq : D.homomorphismToMatrix = fun a => ΦN (P.toCl a) :=
+    funext (D.homomorphismToMatrix_eq_comp P.toCl_isHom P.toCl_γ)
+  have hΨeq : D.homomorphismFromMatrix = fun F => P.ofCl (ΨN F) := funext fun F =>
+    (P.ofCl_toCl _).symm.trans (congrArg P.ofCl (toN_homomorphismFromMatrix P.toCl_isHom P.toCl_γ F))
+  rw [hΦeq, hΨeq]
+  refine ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom
+      ((isComplexAlgebraHomomorphism_iff_necSuf D.algebraN D.matrixAlgebra ΦN).2 hΦN),
+    IsComplexAlgebraHomomorphism.comp_of_necSuf
+      ((isComplexAlgebraHomomorphism_iff_necSuf D.matrixAlgebra D.algebraN ΨN).2 hΨN) P.ofCl_isHom,
+    fun a => ?_, fun F => ?_, ?_, fun F a ha => ?_⟩
+  · exact (congrArg P.ofCl (hΨΦN (P.toCl a))).trans (P.ofCl_toCl a)
+  · exact (congrArg ΦN (P.toCl_ofCl (ΨN F))).trans (hΦΨN F)
+  · exact hbijN.comp P.toCl_bijective
+  · exact (P.ofCl_toCl a).symm.trans (congrArg P.ofCl (hinvN F (P.toCl a) ha))
 
 end
 

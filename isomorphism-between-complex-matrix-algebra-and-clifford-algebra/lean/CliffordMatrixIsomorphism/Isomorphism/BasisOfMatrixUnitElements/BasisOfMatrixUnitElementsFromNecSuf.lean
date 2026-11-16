@@ -99,10 +99,24 @@ theorem matrixUnitElementFamily_spans_of_necSuf :
       D.matrixUnitElementFamily :=
   fun x => ⟨_, D.linearCombination_matrixUnitElementFamily_eq_of_necSuf x⟩
 
-/-- 本文 `theorem_matrix_unit_elements_form_basis_of_clifford_algebra` を必要十分版から得る。 -/
+/-- 本文 `theorem_matrix_unit_elements_form_basis_of_clifford_algebra` を、必要十分版の定理を特殊化して得る。
+一次独立は、関係式を準同型 T : Cl → Cl'（`splitTransport`）で写して必要十分版の一次独立に当てる。張ることは、x の T による像を
+必要十分版の線型結合に書き、T が単射であること（S ∘ T = 恒等写像）で x に戻す。 -/
 theorem matrixUnitElementFamily_isBasis_of_necSuf :
-    IsBasisFamily D.space.cliffordAlgebra.toComplexVectorSpace (pairCount D.M) D.matrixUnitElementFamily :=
-  ⟨D.matrixUnitElementFamily_linearlyIndependent_of_necSuf, D.matrixUnitElementFamily_spans_of_necSuf⟩
+    IsBasisFamily D.space.cliffordAlgebra.toComplexVectorSpace (pairCount D.M) D.matrixUnitElementFamily := by
+  have hN := D.toNecSuf.matrixUnitElementFamily_isBasis complexCliffordLaws add_neg_cancel zero_comm_complex
+    one_comm_complex
+  let P := D.splitTransport
+  have hΦ := P.toCl_isHom
+  have hΦγ : ∀ p, P.toCl (D.space.γ p) = D.mapToN p := P.toCl_γ
+  refine ⟨fun c hc k hk1 hkN => ?_, fun x => ?_⟩
+  · have hc' := congrArg P.toCl hc
+    rw [D.toN_linearCombination_matrixUnitElementFamily hΦ hΦγ] at hc'
+    exact hN.linearlyIndependent c (hc'.trans hΦ.isLinearMap.map_zero) k hk1 hkN
+  · obtain ⟨c, hc⟩ := hN.spans (P.toCl x)
+    refine ⟨c, P.eq_of_toCl_eq ?_⟩
+    rw [D.toN_linearCombination_matrixUnitElementFamily hΦ hΦγ]
+    exact hc
 
 end
 

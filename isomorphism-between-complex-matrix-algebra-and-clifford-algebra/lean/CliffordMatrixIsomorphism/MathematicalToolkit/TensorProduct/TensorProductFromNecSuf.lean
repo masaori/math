@@ -132,41 +132,6 @@ theorem IsMultilinearMap.comp_linearMap_of_necSuf {SV : ComplexVectorSpace V}
     (NecSuf.VectorSpace.IsMultilinearMap.comp_linearMap ((isMultilinearMap_iff_necSuf SV SU k h).1 hh)
       ((isComplexLinearMap_iff_necSuf SU SU' f).1 hf))
 
-theorem orderedProduct_add_in_one_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k)
-    (a a' a'' : ℕ → ℂ) (hne : ∀ s : ℕ, 1 ≤ s → s ≤ k → s ≠ r → a s = a' s ∧ a s = a'' s)
-    (hr : a r = a' r + a'' r) :
-    orderedProduct k a = orderedProduct k a' + orderedProduct k a'' := by
-  simp only [orderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_add_in_one_factor mul_add add_mul k r hr1 hrk a a' a'' hne hr
-
-theorem orderedProduct_smul_in_one_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k) (l : ℂ)
-    (a a' : ℕ → ℂ) (hne : ∀ s : ℕ, 1 ≤ s → s ≤ k → s ≠ r → a s = a' s) (hr : a r = l * a' r) :
-    orderedProduct k a = l * orderedProduct k a' := by
-  simp only [orderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_smul_in_one_factor mul_assoc k r hr1 hrk l (fun c => mul_comm c l) a a'
-    hne hr
-
-theorem orderedProduct_mul_of_necSuf (k : ℕ) (a b : ℕ → ℂ) :
-    orderedProduct k a * orderedProduct k b = orderedProduct k (fun s => a s * b s) := by
-  simp only [orderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_mul (one_mul 1) mul_assoc mul_comm k a b
-
-theorem orderedProduct_of_unit_factors_after_of_necSuf (k r : ℕ) (hrk : r ≤ k) (a : ℕ → ℂ)
-    (h1 : ∀ s : ℕ, r < s → s ≤ k → a s = 1) :
-    orderedProduct k a = partialOrderedProduct a r := by
-  rw [orderedProduct_eq_necSuf, partialOrderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_of_unit_factors_after mul_one k r hrk a h1
-
-theorem orderedProduct_of_zero_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k) (a : ℕ → ℂ)
-    (hr : a r = 0) : orderedProduct k a = 0 := by
-  rw [orderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_of_zero_factor mul_assoc (fun c => mul_comm c 0) zero_mul k r hr1 hrk a hr
-
-theorem orderedProduct_eq_of_equal_factors_of_necSuf (k : ℕ) (a a' : ℕ → ℂ) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
-    orderedProduct k a = orderedProduct k a' := by
-  rw [orderedProduct_eq_necSuf, orderedProduct_eq_necSuf]
-  exact NecSuf.orderedProduct_eq_of_equal_factors k a a' h
-
 theorem coordinateTensor_isMultilinear_of_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : ℕ → V)
     (hb : IsBasisFamily S n b) (k : ℕ) :
     IsMultilinearMap S (coordinateTensorSpace n k) k (coordinateTensor S n b hb k) := by
@@ -222,3 +187,49 @@ theorem coordinateTensor_isTensorProduct_of_necSuf (S : ComplexVectorSpace V) (n
     complexUniquenessLaws mul_comm S.toNecSuf n b _ k
 
 end CliffordMatrixIsomorphism.ComplexVectorSpace
+
+/-! ### ℂ の中の番号順の積の主張
+
+具体版の番号順の積（`orderedProduct`）とその主張は名前空間 `CliffordMatrixIsomorphism` に在るので、導出版も同じ名前空間に置く
+（導出版の名前は、具体版の名前に接尾辞を足したもの）。 -/
+
+namespace CliffordMatrixIsomorphism
+
+open ComplexVectorSpace
+
+theorem orderedProduct_add_in_one_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k)
+    (a a' a'' : ℕ → ℂ) (hne : ∀ s : ℕ, 1 ≤ s → s ≤ k → s ≠ r → a s = a' s ∧ a s = a'' s)
+    (hr : a r = a' r + a'' r) :
+    orderedProduct k a = orderedProduct k a' + orderedProduct k a'' := by
+  simp only [orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_add_in_one_factor mul_add add_mul k r hr1 hrk a a' a'' hne hr
+
+theorem orderedProduct_smul_in_one_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k) (l : ℂ)
+    (a a' : ℕ → ℂ) (hne : ∀ s : ℕ, 1 ≤ s → s ≤ k → s ≠ r → a s = a' s) (hr : a r = l * a' r) :
+    orderedProduct k a = l * orderedProduct k a' := by
+  simp only [orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_smul_in_one_factor mul_assoc k r hr1 hrk l (fun c => mul_comm c l) a a'
+    hne hr
+
+theorem orderedProduct_mul_of_necSuf (k : ℕ) (a b : ℕ → ℂ) :
+    orderedProduct k a * orderedProduct k b = orderedProduct k (fun s => a s * b s) := by
+  simp only [orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_mul (one_mul 1) mul_assoc mul_comm k a b
+
+theorem orderedProduct_of_unit_factors_after_of_necSuf (k r : ℕ) (hrk : r ≤ k) (a : ℕ → ℂ)
+    (h1 : ∀ s : ℕ, r < s → s ≤ k → a s = 1) :
+    orderedProduct k a = partialOrderedProduct a r := by
+  rw [orderedProduct_eq_necSuf, partialOrderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_of_unit_factors_after mul_one k r hrk a h1
+
+theorem orderedProduct_of_zero_factor_of_necSuf (k r : ℕ) (hr1 : 1 ≤ r) (hrk : r ≤ k) (a : ℕ → ℂ)
+    (hr : a r = 0) : orderedProduct k a = 0 := by
+  rw [orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_of_zero_factor mul_assoc (fun c => mul_comm c 0) zero_mul k r hr1 hrk a hr
+
+theorem orderedProduct_eq_of_equal_factors_of_necSuf (k : ℕ) (a a' : ℕ → ℂ) (h : ∀ r : ℕ, 1 ≤ r → r ≤ k → a r = a' r) :
+    orderedProduct k a = orderedProduct k a' := by
+  rw [orderedProduct_eq_necSuf, orderedProduct_eq_necSuf]
+  exact NecSuf.orderedProduct_eq_of_equal_factors k a a' h
+
+end CliffordMatrixIsomorphism
