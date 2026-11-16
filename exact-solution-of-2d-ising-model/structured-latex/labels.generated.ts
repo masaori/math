@@ -594,6 +594,7 @@ export const ALL_LABELS = [
   "real_negation_of_zero_is_zero",
   "real_negation_times_negation_is_product",
   "real_number_is_at_most_its_absolute_value",
+  "real_product_of_inverses_is_inverse_of_product",
   "real_product_of_nonzero_is_nonzero",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",
   "real_sum_over_binary_words_distributes_in_left_factor",

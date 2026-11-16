@@ -7,8 +7,10 @@
 #   ε ι(x^{(+)}) = (σ^x⊠⋯)ι(x^{(+)}) = (σ^x⊠⋯)(b_+⊠⋯) = (σ^x b_+)⊠⋯ = b_+⊠⋯ = ι(x^{(+)})
 #   ε_ℝ x^{(+)} = x^{(+)}（ε_ℝ := ϱ(ε)。epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors の ⇐）
 #   ||x^{(+)}||^2 = (√Σ_i|x_i|^2)^2 = Σ_i|x_i|^2 = Σ_i x_i^2 = Σ_i ((1/√2)^M)^2 = ι(2^M)((1/√2)^M)^2 = 2^M((1/√2)^M)^2
-#                = 2^M((1/√2)^M(1/√2)^M) = 2^M(1/√2·1/√2)^M = 2^M(1/(√2√2))^M = 2^M(1/(√2)^2)^M = 2^M(1/2)^M
-#                = (2·1/2)^M = (2·(1·2^{-1}))^M = (2·2^{-1})^M = 1^M = 1（16 行。冪はすべて def_power_of_real_number どおりに組む）
+#                = 2^M((1/√2)^M(1/√2)^M) = 2^M(1/√2·1/√2)^M = 2^M((1·√2^{-1})(1·√2^{-1}))^M = 2^M(√2^{-1}√2^{-1})^M
+#                = 2^M((√2√2)^{-1})^M = 2^M(1·(√2√2)^{-1})^M = 2^M(1/(√2√2))^M = 2^M(1/(√2)^2)^M = 2^M(1/2)^M
+#                = (2·1/2)^M = (2·(1·2^{-1}))^M = (2·2^{-1})^M = 1^M = 1（20 行。冪はすべて def_power_of_real_number どおりに組む）
+#   √2 ≠ 0（0 < 2、sqrt_of_positive_real_is_positive、< の意味の後半と等号の対称律の対偶）、√2√2 ≠ 0（real_product_of_nonzero_is_nonzero）
 #   2_ℝ := 1 + 1（def_real_two）について 0 < 2（real_zero_less_than_two）と < の意味の前半で 2 ∈ ℝ_{≥0}、2 ≠ 0（real_two_is_nonzero）
 #   ‖x^{(+)}‖ ∈ ℝ_{≥0}、‖x‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（4 行。最後は real_times_zero_is_zero、x → 0）で ‖x‖ ≠ 0、
 #   ‖x‖^2 = 1 = 1·1 = 1^2（3 行）と positive_real_square_injective で ‖x^{(+)}‖ = 1
@@ -125,8 +127,18 @@ for M in [1, 2, 3, 4, 5]:
     assert two != AA(0)                                   # real_two_is_nonzero
     two_inv = two ** (-1)                                 # ℝ の 2_ℝ の乗法の逆元 2_ℝ^{-1}
     assert two * two_inv == AA(1)                         # def_real_quotient の乗法の逆元 z z^{-1} = 1_ℝ（z → 2_ℝ）
-    # ノルムの 16 行の鎖（冪は def_power_of_real_number どおり rpow で組み、二乗も m = 2 の冪 rpow(t, 2) とする）
+    # √2 ≠ 0（real_zero_less_than_two、sqrt_of_positive_real_is_positive（x → 2_ℝ）、< の意味の後半、等号の対称律の対偶）と
+    # √2√2 ≠ 0（real_product_of_nonzero_is_nonzero（a, b → √2））
     s2 = AA(2).sqrt()
+    assert AA(0) < two and AA(0) < s2                     # 2_ℝ ∈ ℝ_{>0} と sqrt_of_positive_real_is_positive の 0 < √2
+    assert AA(0) != s2 and s2 != AA(0)                    # < の意味の後半で 0 ≠ √2、等号の対称律の対偶で √2 ≠ 0
+    assert s2 * s2 != AA(0)                               # real_product_of_nonzero_is_nonzero
+    s2_inv = s2 ** (-1)                                   # ℝ の √2 の乗法の逆元 √2^{-1}
+    s2s2_inv = (s2 * s2) ** (-1)                          # ℝ の √2√2 の乗法の逆元 (√2√2)^{-1}
+    assert s2 * s2_inv == AA(1) and (s2 * s2) * s2s2_inv == AA(1)   # def_real_quotient の z z^{-1} = 1_ℝ
+    # 否定コントロール: 逆元の積を和の逆元と取り違えると (√2+√2)^{-1} ≠ √2^{-1}√2^{-1}
+    assert (s2 + s2) ** (-1) != s2_inv * s2_inv
+    # ノルムの 20 行の鎖（冪は def_power_of_real_number どおり rpow で組み、二乗も m = 2 の冪 rpow(t, 2) とする）
     sq = lambda t: rpow(t, 2)
     norm = sqrt(sum(abs(c) * abs(c) for c in xp))  # def_matrix_norm の ‖x‖ := √(Σ|x_i|^2)
     rows = [
@@ -139,7 +151,11 @@ for M in [1, 2, 3, 4, 5]:
         rpow(two, M) * sq(rpow(r, M)),                        # inclusion_zz_to_rr_of_power_of_two
         rpow(two, M) * (rpow(r, M) * rpow(r, M)),             # square_of_real_number_is_product（r → (1/√2)^M）
         rpow(two, M) * rpow(r * r, M),                        # product_of_real_powers_is_power_of_product
-        rpow(two, M) * rpow(1 / (s2 * s2), M),                # (1/p)(1/q) = 1/(pq)
+        rpow(two, M) * rpow((AA(1) * s2_inv) * (AA(1) * s2_inv), M),   # def_real_quotient（y → 1、z → √2 ≠ 0）を 2 つの因子へ
+        rpow(two, M) * rpow(s2_inv * s2_inv, M),              # 1 は ℝ の乗法の単位元の 1·x = x（x → √2^{-1}）を 2 つの因子へ
+        rpow(two, M) * rpow(s2s2_inv, M),                     # real_product_of_inverses_is_inverse_of_product（a, b → √2）
+        rpow(two, M) * rpow(AA(1) * s2s2_inv, M),             # 1·x = x（x → (√2√2)^{-1}）を右辺から左辺へ
+        rpow(two, M) * rpow(1 / (s2 * s2), M),                # def_real_quotient（y → 1、z → √2√2 ≠ 0）を右辺から左辺へ
         rpow(two, M) * rpow(1 / sq(s2), M),                   # square_of_real_number_is_product（r → √2）を右辺から左辺へ
         rpow(two, M) * rpow(1 / two, M),                      # definition_of_sqrt_r_positive の y^2 = x（x → 2）
         rpow(two * (1 / two), M),                             # product_of_real_powers_is_power_of_product

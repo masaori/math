@@ -2991,6 +2991,9 @@ targets=(
   Ising2D.real_product_of_nonzero_is_nonzero
   Ising2D.NecSuf.mul_ne_zero_of_leftInverse
   Ising2D.real_product_of_nonzero_is_nonzero_of_necSuf
+  Ising2D.real_product_of_inverses_is_inverse_of_product
+  Ising2D.NecSuf.mul_of_rightInverses_eq_rightInverse_of_mul
+  Ising2D.real_product_of_inverses_is_inverse_of_product_of_necSuf
   Ising2D.real_zero_less_than_one
   Ising2D.NecSuf.zero_lt_one_of_orderedAxioms
   Ising2D.real_zero_less_than_one_of_necSuf

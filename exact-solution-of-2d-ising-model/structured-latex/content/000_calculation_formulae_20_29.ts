@@ -2086,6 +2086,91 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_product_of_inverses_is_inverse_of_product",
+    kind: "claim",
+    title: { text: "0 でない実数の逆元どうしの積は積の逆元" },
+    labels: ["real_product_of_inverses_is_inverse_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        "、",
+        math(String.raw`a \neq 0`),
+        "、",
+        math(String.raw`b \neq 0`),
+        " とする。積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものであり、",
+        ref("real_product_of_nonzero_is_nonzero"),
+        " より ",
+        math(String.raw`a\cdot b \neq 0`),
+        " である。",
+        math(String.raw`a^{-1}`),
+        "・",
+        math(String.raw`b^{-1}`),
+        "・",
+        math(String.raw`(a\cdot b)^{-1}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の乗法の逆元（",
+        math(String.raw`z\,z^{-1} = 1_{\mathbb{R}}`),
+        " を満たす元。",
+        math(String.raw`z \to a,\ b,\ a\cdot b`),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`a^{-1}\cdot b^{-1} = (a\cdot b)^{-1}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph(["準備として、"]),
+      displayMath(String.raw`\begin{aligned}
+(a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right)
+&= a\cdot\left(b\cdot\left(a^{-1}\cdot b^{-1}\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\cdot\left(\left(b\cdot a^{-1}\right)\cdot b^{-1}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= a\cdot\left(\left(a^{-1}\cdot b\right)\cdot b^{-1}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\cdot\left(a^{-1}\cdot\left(b\cdot b^{-1}\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\cdot\left(a^{-1}\cdot 1\right)
+&&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to b \neq 0)\bigr)\\
+&= a\cdot a^{-1}
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ x\cdot 1 = x\ (x \to a^{-1})\bigr)\\
+&= 1
+&&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to a \neq 0)\bigr)
+\end{aligned}`),
+      paragraph(["である。これを用いて"]),
+      displayMath(String.raw`\begin{aligned}
+a^{-1}\cdot b^{-1}
+&= 1\cdot\left(a^{-1}\cdot b^{-1}\right)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ 1\cdot x = x\ (x \to a^{-1}\cdot b^{-1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \left((a\cdot b)\cdot(a\cdot b)^{-1}\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
+&&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to a\cdot b \neq 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left((a\cdot b)^{-1}\cdot(a\cdot b)\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (a\cdot b)^{-1}\cdot\left((a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (a\cdot b)^{-1}\cdot 1
+&&\bigl(\because\ \text{準備の}\ (a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right) = 1\bigr)\\
+&= (a\cdot b)^{-1}
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ x\cdot 1 = x\ (x \to (a\cdot b)^{-1})\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖が「ℝ で (1/p)(1/q) = 1/(pq)」を名前だけで根拠にしていた。逆元の積が積の逆元であることは体の公理に含まれないので、その行を def_real_quotient と乗法の単位元とこの主張の 5 行に割るために足した。逆元の一意性は使わず、(a·b)^{-1} に 1 を掛ける形の鎖で示す。Lean の具体版は Ising2D.real_product_of_inverses_is_inverse_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealProductOfInversesIsInverseOfProduct.lean）、必要十分版は Ising2D.NecSuf.mul_of_rightInverses_eq_rightInverse_of_mul（NecSuf/MulOfRightInversesEqRightInverseOfMul.lean）。数値検証: sagemath/check/real_product_of_inverses_is_inverse_of_product/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_zero_less_than_one",
     kind: "claim",
     title: { text: "実数の 0 は 1 より小さい" },

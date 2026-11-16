@@ -31,7 +31,8 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 | `ει(x^{(+)}) = ι(x^{(+)})` の 5 行の鎖 | `epsilon_mulVec_cvec_evenUnit` の `calc` の 5 段 |
 | `def_even_eigenvectors_of_epsilon` と `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`（`⇐`）で `ε_ℝx^{(+)} = x^{(+)}` | `epsilonR_mulVec_evenUnit`（`epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` の `mpr`） |
 | `2_ℝ ∈ ℝ_{≥0}`（`real_zero_less_than_two` と `<` の意味の前半）、`2_ℝ ≠ 0`（`real_two_is_nonzero`） | `vecNorm_sq_evenUnit_succ` の `h2`・`h2ne` |
-| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 16 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（16 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段） |
+| `0 < √2`（`real_zero_less_than_two`・`sqrt_of_positive_real_is_positive`）、`√2 ≠ 0`（`<` の意味の後半と等号の対称律の対偶）、`√2√2 ≠ 0`（`real_product_of_nonzero_is_nonzero`） | `vecNorm_sq_evenUnit_succ` の `hs2pos`・`hs2ne`・`hs2s2ne` |
+| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 20 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（20 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段） |
 | `‖x^{(+)}‖ ∈ ℝ_{≥0}`、`‖x^{(+)}‖ = 0` なら `1 = ⋯ = 0` の 4 行の鎖、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と `positive_real_square_injective` で `‖x^{(+)}‖ = 1`（背理法の結びは体 `ℝ` の公理の `0 ≠ 1`、`ℝ_{>0}` へは等号の対称律の対偶と `<` の意味、`1 ∈ ℝ_{>0}` は `real_zero_less_than_one`） | `vecNorm_evenUnit_succ`（`calc` の 4 段と 3 段、`zero_ne_one`、`hne'` と `lt_iff_le_and_ne`、`real_zero_less_than_one`） |
 | 空でない（`(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`） | `evenSectorSet_epsilonR_nonempty` |
 
@@ -69,6 +70,8 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfInversesIsInverseOfProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
 
 set_option linter.unusedSectionVars false
 
@@ -185,7 +188,7 @@ theorem epsilonR_zero_mulVec_evenUnit : epsilonR 0 *ᵥ evenUnit 0 = evenUnit 0 
   rw [epsilonR_mulVec_apply]
   rfl
 
-/-- 人手の `‖x^{(+)}‖² = 1` の 16 行の鎖（人手の `M_col` は `n + 1`、`ν(I)` は `I : Conf (n + 1)`）。 -/
+/-- 人手の `‖x^{(+)}‖² = 1` の 20 行の鎖（人手の `M_col` は `n + 1`、`ν(I)` は `I : Conf (n + 1)`）。 -/
 theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 := by
   have hcard : 1 ≤ Fintype.card (Conf (n + 1)) := by
     rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one (n + 1)
@@ -193,6 +196,13 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
                           -- `real_zero_less_than_two` の `0 < 2_ℝ` と `<` の意味の前半（`x → 0, y → 2_ℝ`）で `2_ℝ ∈ ℝ_{≥0}`
   have h2ne : (2 : ℝ) ≠ 0 := real_two_is_nonzero
                           -- `real_two_is_nonzero` の `2_ℝ ≠ 0`
+  have hs2pos : 0 < Real.sqrt 2 := sqrt_of_positive_real_is_positive 2 real_zero_less_than_two
+                          -- `real_zero_less_than_two` の `0 < 2_ℝ` と `sqrt_of_positive_real_is_positive`（`x → 2_ℝ`）
+  have hs2ne : Real.sqrt 2 ≠ 0 := fun h => (lt_iff_le_and_ne.mp hs2pos).2 h.symm
+                          -- `<` の意味の後半（`x → 0`、`y → √2`）で `0 ≠ √2`、等号の対称律の対偶で `√2 ≠ 0`
+  have hs2s2ne : Real.sqrt 2 * Real.sqrt 2 ≠ 0 := real_product_of_nonzero_is_nonzero _ _ hs2ne hs2ne
+                          -- `real_product_of_nonzero_is_nonzero`（`a, b → √2`）の `√2√2 ≠ 0`。人手の最後の `def_real_quotient` の段の `z ≠ 0` に当たる。
+                          -- Lean の `div_eq_mul_inv` は `z ≠ 0` を求めない（`⁻¹` が全域）ので、`calc` では使わない
   calc vecNorm (evenUnit (n + 1)) ^ 2
       = (Real.sqrt (∑ I, |evenUnit (n + 1) I| ^ 2)) ^ 2 := by
         rw [vecNorm, vecNormSq_eq_sum]
@@ -222,9 +232,21 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
     _ = (2 : ℝ) ^ (n + 1) * (1 / Real.sqrt 2 * (1 / Real.sqrt 2)) ^ (n + 1) := by
         rw [product_of_real_powers_is_power_of_product]
                           -- `product_of_real_powers_is_power_of_product`（`a, b → 1/√2`、`m → M_col`）
+    _ = (2 : ℝ) ^ (n + 1) * ((1 * (Real.sqrt 2)⁻¹) * (1 * (Real.sqrt 2)⁻¹)) ^ (n + 1) := by
+        rw [div_eq_mul_inv]
+                          -- `def_real_quotient`（`y → 1`、`z → √2 ≠ 0`）を 2 つの因子へ同時に適用
+    _ = (2 : ℝ) ^ (n + 1) * ((Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹) ^ (n + 1) := by
+        rw [one_mul]
+                          -- `1` は ℝ の乗法の単位元の `1·x = x`（`x → √2^{-1}`）を 2 つの因子へ同時に適用
+    _ = (2 : ℝ) ^ (n + 1) * ((Real.sqrt 2 * Real.sqrt 2)⁻¹) ^ (n + 1) := by
+        rw [real_product_of_inverses_is_inverse_of_product _ _ hs2ne hs2ne]
+                          -- `real_product_of_inverses_is_inverse_of_product`（`a, b → √2`）
+    _ = (2 : ℝ) ^ (n + 1) * (1 * (Real.sqrt 2 * Real.sqrt 2)⁻¹) ^ (n + 1) := by
+        rw [one_mul]
+                          -- `1·x = x`（`x → (√2√2)^{-1}`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / (Real.sqrt 2 * Real.sqrt 2)) ^ (n + 1) := by
-        rw [one_div_mul_one_div]
-                          -- ℝ で `(1/p)(1/q) = 1/(pq)`（`p, q → √2`）
+        rw [div_eq_mul_inv]
+                          -- `def_real_quotient`（`y → 1`、`z → √2√2 ≠ 0`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / Real.sqrt 2 ^ 2) ^ (n + 1) := by
         rw [← square_of_real_number_is_product]
                           -- `square_of_real_number_is_product`（`r → √2`）を右辺から左辺へ
