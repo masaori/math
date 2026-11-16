@@ -31,7 +31,7 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 | `ει(x^{(+)}) = ι(x^{(+)})` の 5 行の鎖 | `epsilon_mulVec_cvec_evenUnit` の `calc` の 5 段 |
 | `def_even_eigenvectors_of_epsilon` と `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`（`⇐`）で `ε_ℝx^{(+)} = x^{(+)}` | `epsilonR_mulVec_evenUnit`（`epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` の `mpr`） |
 | `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 14 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（14 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段） |
-| `‖x^{(+)}‖ ∈ ℝ_{≥0}`、`‖x^{(+)}‖ = 0` なら `1 = ⋯ = 0` の 4 行の鎖、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と `positive_real_square_injective` で `‖x^{(+)}‖ = 1` | `vecNorm_evenUnit_succ`（`calc` の 4 段と 3 段） |
+| `‖x^{(+)}‖ ∈ ℝ_{≥0}`、`‖x^{(+)}‖ = 0` なら `1 = ⋯ = 0` の 4 行の鎖、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と `positive_real_square_injective` で `‖x^{(+)}‖ = 1`（背理法の結びは体 `ℝ` の公理の `0 ≠ 1`、`ℝ_{>0}` へは等号の対称律の対偶と `<` の意味、`1 ∈ ℝ_{>0}` は `real_zero_less_than_one`） | `vecNorm_evenUnit_succ`（`calc` の 4 段と 3 段、`zero_ne_one`、`hne'` と `lt_iff_le_and_ne`、`real_zero_less_than_one`） |
 | 空でない（`(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`） | `evenSectorSet_epsilonR_nonempty` |
 
 - 人手の `M_col ≥ 1` は Lean の `n + 1` である。人手の `ν(I)` は Lean の `I : Conf (n + 1)`（`vecKron` の冒頭の注意と同じ）。
@@ -65,6 +65,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
 
 set_option linter.unusedSectionVars false
 
@@ -235,7 +236,8 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
                           -- `power_of_real_one_is_one`（`m → M_col`）
 
 /-- 人手の「`‖x^{(+)}‖^2 = 1` から `‖x^{(+)}‖ = 1`」（人手の `M_col` は `n + 1`）: `‖x^{(+)}‖ ∈ ℝ_{≥0}`（`def_matrix_norm`）、
-`‖x^{(+)}‖ = 0` なら `1 = ‖x^{(+)}‖^2 = ‖x^{(+)}‖‖x^{(+)}‖ = 0·0 = 0` の 4 行の鎖で矛盾、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と
+`‖x^{(+)}‖ = 0` なら `1 = ‖x^{(+)}‖^2 = ‖x^{(+)}‖‖x^{(+)}‖ = 0·0 = 0` の 4 行の鎖と体 `ℝ` の公理の `0 ≠ 1` で矛盾、
+等号の対称律の対偶と `<` の意味（`x ≤ y` かつ `x ≠ y`）で `‖x^{(+)}‖ ∈ ℝ_{>0}`、`real_zero_less_than_one` で `1 ∈ ℝ_{>0}`、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と
 `positive_real_square_injective`（`a → ‖x^{(+)}‖`、`b → 1`、`⇒`）。 -/
 theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
   have hge : 0 ≤ vecNorm (evenUnit (n + 1)) := vecNorm_nonneg _          -- `def_matrix_norm` より `‖x^{(+)}‖ ∈ ℝ_{≥0}`
@@ -249,16 +251,19 @@ theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
                                               -- `square_of_real_number_is_product`（`r → ‖x^{(+)}‖`）
         _ = 0 * 0 := by rw [h0]               -- `‖x^{(+)}‖ = 0` を両方の因子へ同時に適用
         _ = 0 := real_times_zero_is_zero 0    -- `real_times_zero_is_zero`（`x → 0`）
-    exact one_ne_zero h10                     -- ℝ で `1 ≠ 0` に反する
-  have hpos : 0 < vecNorm (evenUnit (n + 1)) := lt_of_le_of_ne hge (Ne.symm hne)
-                                              -- `‖x^{(+)}‖ ∈ ℝ_{≥0}` と `‖x^{(+)}‖ ≠ 0` で `‖x^{(+)}‖ ∈ ℝ_{>0}`
+    exact (zero_ne_one : (0 : ℝ) ≠ 1) h10.symm
+                                              -- 等号の対称律で `0 = 1`。体 `ℝ` の公理の `0 ≠ 1`（`set_and_algebra_notation`）に反する
+  have hne' : 0 ≠ vecNorm (evenUnit (n + 1)) := fun h => hne h.symm
+                                              -- 等号の対称律の対偶で `0 ≠ ‖x^{(+)}‖`
+  have hpos : 0 < vecNorm (evenUnit (n + 1)) := lt_iff_le_and_ne.mpr ⟨hge, hne'⟩
+                                              -- `ℝ` の `x < y` は `x ≤ y` かつ `x ≠ y` のこと（`x → 0`、`y → ‖x^{(+)}‖`）
   have hsq : vecNorm (evenUnit (n + 1)) ^ 2 = (1 : ℝ) ^ 2 :=
     calc vecNorm (evenUnit (n + 1)) ^ 2
         = 1 := vecNorm_sq_evenUnit_succ n     -- 上のノルムの鎖
-      _ = 1 * 1 := (mul_one 1).symm           -- ℝ で `1 · 1 = 1` を右辺から左辺へ
+      _ = 1 * 1 := (mul_one 1).symm           -- `1` は `ℝ` の乗法の単位元（`set_and_algebra_notation`）の `1 · 1 = 1` を右辺から左辺へ
       _ = (1 : ℝ) ^ 2 := (square_of_real_number_is_product 1).symm
                                               -- `square_of_real_number_is_product`（`r → 1`）を右辺から左辺へ
-  exact (positive_real_square_injective hpos one_pos).mp hsq
+  exact (positive_real_square_injective hpos real_zero_less_than_one).mp hsq
                                               -- `positive_real_square_injective`（`a → ‖x^{(+)}‖`、`b → 1`、`⇒`）
 
 /-- `‖x^{(+)}‖ = 1`。`M ≥ 1` は人手の `vecNorm_evenUnit_succ`、`M = 0`（`x^{(+)}` は成分 `1` の 1 成分のベクトル）は人手に無い（冒頭の注意）。 -/
