@@ -86887,8 +86887,11 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                     ref("claim_dispersion_mode_product"), " を ", math(String.raw`x:=q`),
                     " で評価すると、", math(String.raw`(Q_L^{a,b}(q))^2`),
                     " は正元の有限積に等しい。従って ", math(String.raw`Q_L^{a,b}(q)\ne0`),
-                    " である。", math(String.raw`T:=\rho_{R\to\mathbb R}(Q_L^{a,b}(q))`),
-                    " と置くと、", ref("claim_cut_realization_preserves_strict_order"),
+                    " である。",
+                  ]),
+                  displayMath(String.raw`T:=\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\in\mathbb R`),
+                  paragraph([
+                    ref("claim_cut_realization_preserves_strict_order"),
                     " と実現写像の単射性により ", math(String.raw`T\ne0`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
