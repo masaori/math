@@ -4,13 +4,13 @@
 対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`, `finite_sum_of_real_sums`, `finite_double_sum_of_real_numbers_interchange`,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
 `finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`,
-`finite_sum_of_real_numbers_moves_one_term_to_end`
+`finite_sum_of_real_numbers_moves_one_term_to_end`, `finite_sum_of_real_numbers_with_single_nonzero_term`
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_definition_finite_sum_of_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_real_sums`, `calc_formulae_claim_finite_double_sum_of_real_numbers_interchange`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
 `calc_formulae_claim_finite_sum_of_real_scalar_multiples`,
 `calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`,
 `calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`, `calc_formulae_claim_finite_sum_of_real_numbers_is_monotone`,
-`calc_formulae_claim_finite_sum_of_real_numbers_moves_one_term_to_end`）。
+`calc_formulae_claim_finite_sum_of_real_numbers_moves_one_term_to_end`, `calc_formulae_claim_finite_sum_of_real_numbers_with_single_nonzero_term`）。
 
 **必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`（一つの項を末尾へ移す主張は `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`、和の主張は複素数の兄弟 `finite_sum_of_complex_sums` と共有の `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`、二重の和の順序の入れ替えは `Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`）。具体版をその系として導くのは
 `ClaimFiniteSumsOfRealNumbersFromNecSuf.lean`。
@@ -48,6 +48,10 @@
   人手の `{1, …, m+1} ⊂ {1, …, m+2}` の包含は `Fin.castSucc` で、人手の前置き `δ^{m+1}_{k}(j) = δ^{m}_{k}(j)` は Lean では
   `skipIndex k'.castSucc j.castSucc = (skipIndex k' j).castSucc` になる。各場合の最後の行「`k = 1`」「`k = 2`」「`k = m + 2`」は、
   Lean では `k` を場合分けで置き換え済みなので段にしない。`s` の置き方は `let` で、置き方の段は `rfl` である。
+* `finite_sum_of_real_numbers_with_single_nonzero_term_succ` は人手の `m ≥ 1` を Lean の `m + 1`、`k ∈ {1, …, m}` を `k : Fin (m + 1)` で書く。
+  `m = 1` の 2 行、帰納法の段の `k = m + 1`（`Fin.last`）の 5 行と `k ≤ m`（`Fin.castSucc k'`）の 4 行が人手の行と 1 対 1 の `calc` である。
+  `k = m + 1` の前置き（`r_1, …, r_m` と `1` が帰納法の仮定の仮定を満たすこと、`r_1 = 0`）は、帰納法の仮定へ渡す関数と `have` である。
+  「`0` は `ℝ` の和の単位元」は `zero_add`・`add_zero`（`finite_sum_of_nonnegative_reals_ge_term_succ` と同じ扱い）。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
@@ -461,5 +465,39 @@ theorem finite_sum_of_real_numbers_moves_one_term_to_end (n : ℕ) (b : Fin (n +
             rw [hδlast]                                                       -- `δ^{m+1}_{k}(m+1) = m + 2`
         _ = (∑ j : Fin (n + 2), b (skipIndex k'.castSucc j)) + b k'.castSucc := by
             rw [Fin.sum_univ_castSucc (fun j => b (skipIndex k'.castSucc j))] -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
+
+
+/-- **人手 `finite_sum_of_real_numbers_with_single_nonzero_term`**: `j ≠ k` のすべての `j` で `r_j = 0` なら `Σ_{j=1}^{m} r_j = r_k`
+（`m ∈ ℤ_{≥1}` は Lean の `m + 1`）。`m` についての帰納法。人手と同じく、`k = m + 1` の場合は零の有限和を経ず、
+帰納法の仮定を `k → 1`（Lean の `0`）へ当てる。 -/
+theorem finite_sum_of_real_numbers_with_single_nonzero_term_succ :
+    ∀ (m : ℕ) (r : Fin (m + 1) → ℝ) (k : Fin (m + 1)), (∀ j, j ≠ k → r j = 0) → ∑ j, r j = r k
+  | 0, r, k, _ =>                                                                  -- 人手の `m = 1`
+    calc ∑ j : Fin 1, r j
+        = r 0 := Fin.sum_univ_one r                                                -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{1} r_j := r_1`
+      _ = r k := by rw [Fin.fin_one_eq_zero k]                                     -- `k = 1`
+  | m + 1, r, k, hr => by                                                          -- 人手の `m → m + 1`
+    rcases (Fin.eq_castSucc_or_eq_last k).symm with hk | ⟨k', rfl⟩
+    · -- 人手の `k = m + 1` の場合: `r_1, …, r_m` と `1` は帰納法の仮定の仮定を満たし、`1 ≠ m + 1 = k` なので `r_1 = 0`
+      have hfirst : r (Fin.castSucc 0) = 0 := hr _ (hk ▸ (Fin.castSucc_lt_last 0).ne)
+      calc ∑ j : Fin (m + 2), r j
+          = (∑ j : Fin (m + 1), r (Fin.castSucc j)) + r (Fin.last (m + 1)) :=
+            Fin.sum_univ_castSucc r                                                -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
+        _ = r (Fin.castSucc 0) + r (Fin.last (m + 1)) := by
+            rw [finite_sum_of_real_numbers_with_single_nonzero_term_succ m (fun j => r (Fin.castSucc j)) 0
+              (fun j hj => hr _ (hk ▸ (Fin.castSucc_lt_last j).ne))]              -- 帰納法の仮定を `r_1, …, r_m` と `k → 1` へ
+        _ = 0 + r (Fin.last (m + 1)) := by rw [hfirst]                             -- `r_1 = 0`
+        _ = r (Fin.last (m + 1)) := zero_add _                                     -- `0` は `ℝ` の和の単位元
+        _ = r k := by rw [hk]                                                      -- `k = m + 1`
+    · -- 人手の `k ∈ {1, …, m}` の場合: `m + 1 ≠ k` なので `r_{m+1} = 0`
+      have hlast : r (Fin.last (m + 1)) = 0 := hr _ (Fin.castSucc_lt_last k').ne'
+      calc ∑ j : Fin (m + 2), r j
+          = (∑ j : Fin (m + 1), r (Fin.castSucc j)) + r (Fin.last (m + 1)) :=
+            Fin.sum_univ_castSucc r                                                -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
+        _ = r (Fin.castSucc k') + r (Fin.last (m + 1)) := by
+            rw [finite_sum_of_real_numbers_with_single_nonzero_term_succ m (fun j => r (Fin.castSucc j)) k'
+              (fun j hj => hr _ (fun h => hj (Fin.castSucc_injective _ h)))]      -- 帰納法の仮定を `r_1, …, r_m` と `k` へ
+        _ = r (Fin.castSucc k') + 0 := by rw [hlast]                               -- `r_{m+1} = 0`
+        _ = r (Fin.castSucc k') := add_zero _                                      -- `0` は `ℝ` の和の単位元
 
 end Ising2D

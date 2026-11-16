@@ -17,6 +17,7 @@
 | 01 | `check_01_vector_bound.sage` | 不等式と等号 | 155 | 2.237e-16 | **PASS** |
 | 02 | `check_02_proof_path_W.sage` | 証明の経路: ‖AW‖ = ‖Aw‖、‖W‖ = ‖w‖ | 358 | 2.883e-16 | **PASS** |
 | 03 | `check_03_zero_columns_chain.sage` | 第 2 列以降の成分の鎖 Σ a_ik W_kj = Σ a_ik·0 = Σ 0 と、K = ℂ の Σ 0_C = 0_C、K = ℝ の Σ 0 = ι(n)·0 = 0。和は左から 1 項ずつ足す定義どおり。n = 1..4、QQ 上の多項式環の厳密計算。否定コントロール付き | 8 | 厳密 | **PASS** |
+| 04 | `check_04_zero_columns_absolute_square_chain.sage` | ‖AW‖ と ‖W‖ の鎖の前の準備: 2 ≤ j ≤ n の \|(AW)_ij\|^2・\|W_ij\|^2 = \|0\|^2 = 0^2 = 0·0 = 0（matrix_norm_triangle_inequality の Step 1・square_of_real_number_is_product・real_times_zero_is_zero）と、内側の和 Σ_j \|X_ij\|^2 を第 1 列の項 \|X_i1\|^2 に縮める等式（finite_sum_of_real_numbers_with_single_nonzero_term）。K = ℝ と K = ℂ、n = 1..4、QQ 上の多項式環の厳密計算。否定コントロール付き | 10 | 厳密 | **PASS** |
 
 許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない。
 

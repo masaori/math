@@ -1,0 +1,3 @@
+checked 10 chains
+negative control: column 2 entry 1 breaks the collapse
+RESULT: PASS

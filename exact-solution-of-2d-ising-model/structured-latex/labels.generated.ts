@@ -385,6 +385,7 @@ export const ALL_LABELS = [
   "finite_sum_of_real_numbers_is_monotone",
   "finite_sum_of_real_numbers_moves_one_term_to_end",
   "finite_sum_of_real_numbers_triangle_inequality",
+  "finite_sum_of_real_numbers_with_single_nonzero_term",
   "finite_sum_of_real_scalar_multiples",
   "finite_sum_of_real_sums",
   "finite_sum_of_scalar_multiples",

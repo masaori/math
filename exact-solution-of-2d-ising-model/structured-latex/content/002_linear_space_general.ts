@@ -9056,7 +9056,7 @@ R^2
     title: { text: "行列ノルムによる数ベクトルの評価" },
     labels: ["matrix_norm_vector_bound"],
     statement: [
-      paragraph(["行列と数ベクトルの積は ", ref("mat_mult"), "、零成分の絶対値は ", ref("matrix_norm_triangle_inequality"), " の証明冒頭、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。"]),
+      paragraph(["行列と数ベクトルの積は ", ref("mat_mult"), "、零成分の絶対値は ", ref("matrix_norm_triangle_inequality"), " の証明冒頭、0 の項を落とす実数の有限和は ", ref("finite_sum_of_real_numbers_with_single_nonzero_term"), "、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
@@ -9158,14 +9158,68 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       paragraph([
         "であるから、",
         math(String.raw`(AW)_{ij}=0`),
-        " である。これを使って",
+        " である。さらに ",
+        math(String.raw`1\le i\le n`),
+        "、",
+        math(String.raw`2\le j\le n`),
+        " について（絶対値の中の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`K`),
+        " の 0、それ以外の ",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の 0 である）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|(AW)_{ij}\right|^2
+&=\left|0\right|^2
+&&(\because\ \text{上の}\ (AW)_{ij}=0)\\
+&=0^2
+&&(\because\ \blkref{matrix_norm_triangle_inequality}\ \text{の証明の Step 1 の}\ |z|=0 \iff z=0\ (z \to 0))\\
+&=0\cdot 0
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0))\\
+&=0
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x \to 0))
+\end{aligned}`),
+      paragraph(["、"]),
+      displayMath(String.raw`\begin{aligned}
+\left|W_{ij}\right|^2
+&=\left|0\right|^2
+&&(\because\ W\ \text{の第 2 列以降の定め方})\\
+&=0^2
+&&(\because\ \blkref{matrix_norm_triangle_inequality}\ \text{の証明の Step 1 の}\ |z|=0 \iff z=0\ (z \to 0))\\
+&=0\cdot 0
+&&(\because\ \blkref{square_of_real_number_is_product}\ (r \to 0))\\
+&=0
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x \to 0))
+\end{aligned}`),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`1\le i\le n`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2
+&=\left|(AW)_{i1}\right|^2
+&&(\because\ \blkref{finite_sum_of_real_numbers_with_single_nonzero_term}\ (m \to n,\ r_j \to \left|(AW)_{ij}\right|^2,\ k \to 1)\text{。}j \ne 1\ \text{の項は上の等式により}\ 0)
+\end{aligned}`),
+      paragraph(["、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{n}\left|W_{ij}\right|^2
+&=\left|W_{i1}\right|^2
+&&(\because\ \blkref{finite_sum_of_real_numbers_with_single_nonzero_term}\ (m \to n,\ r_j \to \left|W_{ij}\right|^2,\ k \to 1)\text{。}j \ne 1\ \text{の項は上の等式により}\ 0)
+\end{aligned}`),
+      paragraph([
+        "である。これらを使って",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|AW\|
 &=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})\\
 &=\sqrt{\sum_{i=1}^{n}\left|(AW)_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1。}\blkref{matrix_norm_triangle_inequality}\text{）なので第 2 列以降は平方和に寄与しない})\\
+&&(\because\ \text{上の}\ \textstyle\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2=\left|(AW)_{i1}\right|^2\ \text{を各}\ i\ \text{へ})\\
 &=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{上の第 1 列の成分の等式})\\
 &=\|Aw\|
@@ -9179,7 +9233,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
 &=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|W_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})\\
 &=\sqrt{\sum_{i=1}^{n}\left|W_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1。}\blkref{matrix_norm_triangle_inequality}\text{）なので第 2 列以降は平方和に寄与しない})\\
+&&(\because\ \text{上の}\ \textstyle\sum_{j=1}^{n}\left|W_{ij}\right|^2=\left|W_{i1}\right|^2\ \text{を各}\ i\ \text{へ})\\
 &=\sqrt{\sum_{i=1}^{n}\left|w_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ W\ \text{の第 1 列の定め方})\\
 &=\|w\|
@@ -9219,6 +9273,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
           "劣乗法性）を削り、それらを実際に使う各行末の (∵ …) の \\blkref へ移した" +
           "（blkref が使えるようになったため）。内容・式変形・根拠・参照は不変である。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 第 2 列以降の成分の鎖の最後の行「Σ a_{ik}·0 = 0」の根拠「0 を掛けた項だけの有限和は 0」（右から 0 を掛けると 0 と、0 だけの有限和は 0 の 2 つの事実を 1 行で使っていた）を割った。鎖は Σ 0 で止め、各項を 0 にする行を K = ℝ なら real_times_zero_is_zero、K = ℂ なら complex_times_zero_is_zero の参照にし、Σ 0 = 0 を K = ℂ は finite_sum_of_complex_zeros、K = ℝ は finite_sum_of_constant_real_number と real_times_zero_is_zero の鎖で示した（(AW)_{ij} = 0 という結論は不変）。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: ‖AW‖ と ‖W‖ の鎖の 2 行目の根拠「|0| = 0（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない」（|0| = 0、0 の平方は 0、0 の項を落とした ℝ の有限和の 3 つの事実を 1 つの根拠で使っていた）を割った。鎖の前に、2 ≤ j ≤ n の |(AW)_{ij}|^2 と |W_{ij}|^2 を |0|^2 = 0^2 = 0·0 = 0（matrix_norm_triangle_inequality の Step 1・square_of_real_number_is_product・real_times_zero_is_zero）とする鎖と、内側の和を新しく足した finite_sum_of_real_numbers_with_single_nonzero_term で第 1 列の項に縮める等式を置き、2 行目の根拠をその等式の参照にした（鎖の両端と主張は不変）。",
       ],
     },
   },

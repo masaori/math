@@ -1,12 +1,16 @@
 /-
 # 一つの項のほかが 0 の有限和はその項に等しい（必要十分版）
 
-対応する人手証明のラベル: `finite_sum_with_single_nonzero_term`・`finite_sum_of_matrices_with_single_nonzero_term`
+対応する人手証明のラベル: `finite_sum_with_single_nonzero_term`・`finite_sum_of_matrices_with_single_nonzero_term`・`finite_sum_of_real_numbers_with_single_nonzero_term`
 具体版: `Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimFiniteSumWithSingleNonzeroTerm.lean` の
 `finite_sum_with_single_nonzero_term_succ` と、
 `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimFiniteSumOfMatricesWithSingleNonzeroTerm.lean` の
 `finite_sum_of_matrices_with_single_nonzero_term`。具体版をこのファイルの系として導くのは、それぞれ同じフォルダの
 `ClaimFiniteSumWithSingleNonzeroTermFromNecSuf.lean`・`ClaimFiniteSumOfMatricesWithSingleNonzeroTermFromNecSuf.lean`。
+実数版の具体版は `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean` の
+`finite_sum_of_real_numbers_with_single_nonzero_term_succ` で、人手の証明の `k = m+1` の場合が複素数版と違う（零の有限和を経ず、
+帰納法の仮定を `k → 1` へ当てる）ので、同じ手順の必要十分版 `finSumLeft_single_via_first'` を別に置く。導くのは同じフォルダの
+`ClaimFiniteSumsOfRealNumbersFromNecSuf.lean`。
 
 人手の `ℂ` を、零と加法を持つ集合 `G` に置き換える。有限和は左から足す和 `finSumLeft`
 （`Ising2D/NecSuf/AdditiveToMultiplicativeMapOfFiniteSum.lean`。人手の `m ∈ ℤ_{≥1}` は Lean の `r + 1`、
@@ -19,9 +23,13 @@
 | `m = 1` の 2 行 | 和の定義 → `n = 1` | `finSumLeft_single'` の `0` の節（同じ 2 段） | 和の定義の `Σ_{j=1}^{1} z_j := z_1` |
 | `n = m+1` の 5 行 | 和の定義 → 各項を `0` へ → 零の和 → `0 + z = z`（`complex_zero_plus_is_original`） → `n = m+1` | `r + 1` の節の `Fin.last` の場合（同じ 5 段） | `0 + z = z`、零の和が `0`（`finSumLeft_zeros'`。`z + 0 = z` の特別な場合 `0 + 0 = 0`） |
 | `n ≤ m` の 4 行 | 和の定義 → 帰納法の仮定 → `z_{m+1} = 0` → 加法の単位元 | `r + 1` の節の `Fin.castSucc` の場合（同じ 4 段） | `z + 0 = z` |
+| 実数版の `m = 1` の 2 行 | 和の定義 → `k = 1` | `finSumLeft_single_via_first'` の `0` の節（同じ 2 段） | 和の定義の `Σ_{j=1}^{1} r_j := r_1` |
+| 実数版の `k = m+1` の 5 行 | 和の定義 → 帰納法の仮定（`k → 1`） → `r_1 = 0` → `0 + r = r`（`zero_add`） → `k = m+1` | `r + 1` の節の `Fin.last` の場合（同じ 5 段） | `0 + z = z` |
+| 実数版の `k ≤ m` の 4 行 | 和の定義 → 帰納法の仮定 → `r_{m+1} = 0` → `r + 0 = r`（`add_zero`） | `r + 1` の節の `Fin.castSucc` の場合（同じ 4 段） | `z + 0 = z` |
 | 行列版の成分の鎖の 2 行と「成分が一致」 | `Matrix.sum_apply` → `finite_sum_with_single_nonzero_term_fintype` → `Matrix.ext` | `finSumLeft_matrix_single'`（`finSumLeft_matrix_apply'` → `finSumLeft_single'` → `Matrix.ext`） | 成分の加法が和の成分（行列の和の定義）、零行列の成分が `0` |
 
-- **効いているのは、`0` が加法の左右の単位元であること（`AddZeroClass`）だけである。**
+- **効いているのは、`0` が加法の左右の単位元であること（`AddZeroClass`）だけである。** 実数版の手順（`finSumLeft_single_via_first'`）では
+  零の和も現れず、`0 + z = z`（`k = m+1`）と `z + 0 = z`（`k ≤ m`）だけを使う。
   零の和 `finite_sum_of_complex_zeros` は `0 + 0 = 0` だけで済み、これも右の単位元の特別な場合である。
 - **効いていないもの**: 加法の結合則・交換則（和は左から順に畳み込むので、括弧の付け替えも並べ替えも現れない）、
   加法の逆元、乗法、`ℂ` であること。行列版では、行と列の添字の有限性、成分の乗法。
@@ -100,5 +108,38 @@ theorem finSumLeft_matrix_single' {α β R : Type*} [AddZeroClass R]
       _ = X q i k :=
           finSumLeft_single' r (fun a => X a i k) q
             (fun a ha => by rw [hX a ha]; exact Matrix.zero_apply i k)                  -- `finSumLeft_single'`（`(X_a)_{ik} = O_{ik} = 0`）
+
+/-- **必要十分版の `finite_sum_of_real_numbers_with_single_nonzero_term`**: `j ≠ k` のすべての `j` で `z_j = 0` なら
+`Σ_{j=1}^{r+1} z_j = z_k`。具体版 `finite_sum_of_real_numbers_with_single_nonzero_term_succ` と同じく、`k = m+1` の場合は
+帰納法の仮定を `k → 1`（`0`）へ当てて残りの項を `z_1 = 0` にまとめる（零の和 `finSumLeft_zeros'` を経ない）。 -/
+theorem finSumLeft_single_via_first' {G : Type*} [AddZeroClass G] :
+    ∀ (r : ℕ) (z : Fin (r + 1) → G) (k : Fin (r + 1)), (∀ j, j ≠ k → z j = 0) → finSumLeft r z = z k
+  | 0, z, k, _ =>
+    calc finSumLeft 0 z
+        = z 0 := finSumLeft_zero z                                                      -- 和の定義
+      _ = z k := by rw [Fin.fin_one_eq_zero k]                                          -- `k = 1`
+  | r + 1, z, k, hz => by
+    rcases (Fin.eq_castSucc_or_eq_last k).symm with hk | ⟨k', rfl⟩
+    · -- 具体版の `k = m + 1` の場合
+      have hfirst : z (Fin.castSucc 0) = 0 := hz _ (hk ▸ (Fin.castSucc_lt_last 0).ne)
+      calc finSumLeft (r + 1) z
+          = finSumLeft r (fun j => z (Fin.castSucc j)) + z (Fin.last (r + 1)) :=
+            finSumLeft_succ r z                                                         -- 和の定義
+        _ = z (Fin.castSucc 0) + z (Fin.last (r + 1)) := by
+            rw [finSumLeft_single_via_first' r (fun j => z (Fin.castSucc j)) 0
+              (fun j hj => hz _ (hk ▸ (Fin.castSucc_lt_last j).ne))]                   -- 帰納法の仮定（`k → 1`）
+        _ = 0 + z (Fin.last (r + 1)) := by rw [hfirst]                                  -- `z_1 = 0`
+        _ = z (Fin.last (r + 1)) := zero_add _                                          -- `0 + z = z`
+        _ = z k := by rw [hk]                                                           -- `k = m + 1`
+    · -- 具体版の `k ∈ {1, …, m}` の場合
+      have hlast : z (Fin.last (r + 1)) = 0 := hz _ (Fin.castSucc_lt_last k').ne'
+      calc finSumLeft (r + 1) z
+          = finSumLeft r (fun j => z (Fin.castSucc j)) + z (Fin.last (r + 1)) :=
+            finSumLeft_succ r z                                                         -- 和の定義
+        _ = z (Fin.castSucc k') + z (Fin.last (r + 1)) := by
+            rw [finSumLeft_single_via_first' r (fun j => z (Fin.castSucc j)) k'
+              (fun j hj => hz _ (fun h => hj (Fin.castSucc_injective _ h)))]           -- 帰納法の仮定
+        _ = z (Fin.castSucc k') + 0 := by rw [hlast]                                    -- `z_{m+1} = 0`
+        _ = z (Fin.castSucc k') := add_zero _                                           -- `z + 0 = z`
 
 end Ising2D.NecSuf

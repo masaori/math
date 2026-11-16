@@ -1867,6 +1867,135 @@ T_B(X - W)
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_real_numbers_with_single_nonzero_term",
+    kind: "claim",
+    title: { text: "一つの項のほかが 0 の実数の有限和はその項に等しい" },
+    labels: ["finite_sum_of_real_numbers_with_single_nonzero_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m\}`),
+        " とし、",
+        math(String.raw`j \neq k`),
+        " のすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について ",
+        math(String.raw`r_j = 0`),
+        " とする（",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の 0）。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} r_j = r_k`),
+      paragraph([
+        "が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す（各 ",
+        math(String.raw`m`),
+        " で、仮定を満たすすべての ",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " と ",
+        math(String.raw`k \in \{1,\dots,m\}`),
+        " についての主張を示す）。",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`k = 1`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} r_j
+&= r_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} r_j := r_1\bigr)\\
+&= r_k
+&&(\because\ k = 1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " で成り立つと仮定し、",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " が仮定を満たすとする。",
+        math(String.raw`k = m+1`),
+        " のとき、",
+        math(String.raw`j \in \{2,\dots,m\}`),
+        " はどれも ",
+        math(String.raw`j \neq k`),
+        " なので ",
+        math(String.raw`r_j = 0`),
+        " であり、",
+        math(String.raw`r_1,\dots,r_m`),
+        " と ",
+        math(String.raw`1 \in \{1,\dots,m\}`),
+        " は帰納法の仮定の仮定を満たし、",
+        math(String.raw`1 \neq m+1 = k`),
+        " なので ",
+        math(String.raw`r_1 = 0`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} r_j
+&= \Bigl(\sum_{j=1}^{m} r_j\Bigr) + r_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{m+1} r_j := \bigl(\sum_{j=1}^{m} r_j\bigr) + r_{m+1}\bigr)\\
+&= r_1 + r_{m+1}
+&&(\because\ \text{帰納法の仮定を}\ r_1,\dots,r_m\ \text{と}\ k \to 1\ \text{へ})\\
+&= 0 + r_{m+1}
+&&(\because\ r_1 = 0)\\
+&= r_{m+1}
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= r_k
+&&(\because\ k = m+1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`k \in \{1,\dots,m\}`),
+        " のとき、",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " かつ ",
+        math(String.raw`j \neq k`),
+        " なら ",
+        math(String.raw`r_j = 0`),
+        " なので ",
+        math(String.raw`r_1,\dots,r_m`),
+        " と ",
+        math(String.raw`k`),
+        " は帰納法の仮定の仮定を満たし、",
+        math(String.raw`m+1 \neq k`),
+        " なので ",
+        math(String.raw`r_{m+1} = 0`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} r_j
+&= \Bigl(\sum_{j=1}^{m} r_j\Bigr) + r_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{m+1} r_j := \bigl(\sum_{j=1}^{m} r_j\bigr) + r_{m+1}\bigr)\\
+&= r_k + r_{m+1}
+&&(\because\ \text{帰納法の仮定を}\ r_1,\dots,r_m\ \text{と}\ k\ \text{へ})\\
+&= r_k + 0
+&&(\because\ r_{m+1} = 0)\\
+&= r_k
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`m+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。matrix_norm_vector_bound の ‖AW‖ と ‖W‖ の鎖の「第 2 列以降は平方和に寄与しない」（ℝ の有限和で 0 の項を落とす）を引けるよう足した。複素数版 finite_sum_with_single_nonzero_term と違い、k = m+1 の場合は零の有限和を経ず、帰納法の仮定を k → 1 へ当てて残りの項を r_1 = 0 にまとめる（ℝ の零の有限和には専用の主張が無く、finite_sum_of_constant_real_number と real_times_zero_is_zero の 2 行で示すと乗法を経るが、この形なら 0 が和の単位元であることだけで済むため）。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_real_inclusion_preserves_finite_sum",
     kind: "claim",
     title: { text: "実数の有限和の包含は包含の有限和に等しい" },

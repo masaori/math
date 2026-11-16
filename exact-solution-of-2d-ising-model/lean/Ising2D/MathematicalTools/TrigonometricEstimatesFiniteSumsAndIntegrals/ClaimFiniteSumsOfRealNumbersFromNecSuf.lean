@@ -4,7 +4,7 @@
 具体版 `ClaimFiniteSumsOfRealNumbers.lean` の主張を、必要十分版 `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean` を
 係数 `R := ℝ` に特殊化して得る。人手のラベルは `finite_sum_of_real_differences`, `finite_sum_of_real_sums`（必要十分版は `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`）, `finite_double_sum_of_real_numbers_interchange`（必要十分版は `Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`）,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
-`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`（この 2 つは必要十分版 `Ising2D/NecSuf/FiniteSumSubadditiveAndMonotone.lean`）、`finite_sum_of_real_numbers_moves_one_term_to_end`（必要十分版 `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`）。人手証明と 1 対 1 に対応する形は具体版のほうである。
+`finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`（この 2 つは必要十分版 `Ising2D/NecSuf/FiniteSumSubadditiveAndMonotone.lean`）、`finite_sum_of_real_numbers_moves_one_term_to_end`（必要十分版 `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`）、`finite_sum_of_real_numbers_with_single_nonzero_term`（必要十分版 `Ising2D/NecSuf/FiniteSumWithSingleNonzeroTerm.lean` の `finSumLeft_single_via_first'`。具体版の `Finset.sum` と必要十分版の `finSumLeft` の一致は `real_finset_sum_eq_finSumLeft`）。人手証明と 1 対 1 に対応する形は具体版のほうである。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.NecSuf.FiniteSumDifferenceAndNonnegativeTerm
@@ -12,6 +12,8 @@ import Ising2D.NecSuf.FiniteSumSubadditiveAndMonotone
 import Ising2D.NecSuf.FiniteSumMovesOneTermToEnd
 import Ising2D.NecSuf.MatMulDistribSum
 import Ising2D.NecSuf.FiniteDoubleSumInterchange
+import Ising2D.NecSuf.FiniteSumWithSingleNonzeroTerm
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 import Ising2D.NecSuf.AbsoluteValueBoundsTriangleAndProduct
 import Mathlib.Data.Real.Basic
 
@@ -75,5 +77,11 @@ theorem finite_sum_of_real_numbers_is_monotone_of_necSuf (m : ℕ) (a b : Fin m 
 theorem finite_sum_of_real_numbers_moves_one_term_to_end_of_necSuf (n : ℕ) (b : Fin (n + 2) → ℝ) (k : Fin (n + 2)) :
     ∑ j, b j = (∑ j : Fin (n + 1), b (skipIndex k j)) + b k :=
   NecSuf.finite_sum_skip_index_succ' (R := ℝ) n b k
+
+/-- `finite_sum_of_real_numbers_with_single_nonzero_term_succ` を `NecSuf.finSumLeft_single_via_first'`（`G := ℝ`。仮定は `0` が加法の左右の単位元であることだけ）の特殊化として得る。 -/
+theorem finite_sum_of_real_numbers_with_single_nonzero_term_succ_of_necSuf (m : ℕ) (r : Fin (m + 1) → ℝ) (k : Fin (m + 1))
+    (hr : ∀ j, j ≠ k → r j = 0) : ∑ j, r j = r k := by
+  rw [real_finset_sum_eq_finSumLeft]
+  exact NecSuf.finSumLeft_single_via_first' m r k hr
 
 end Ising2D
