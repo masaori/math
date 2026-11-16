@@ -6,7 +6,7 @@
   pairOfMatricesAlgebra                               pairOfMatricesAlgebra_toNecSuf
   mapToPairOfMatrices                                 mapToPairOfMatrices_eq_necSuf（必要十分版の φ' に点を写す写像を先に当てたもの）
   mapToPairOfMatrices_isLinearMap・_mul_self          …_of_necSuf
-  existsUnique_homomorphismToPairOfMatrices           existsUnique_homomorphismToPairOfMatrices_of_necSuf
+  existsUnique_homomorphismToPairOfMatrices           existsUnique_homomorphismToPairOfMatrices_of_necSuf（T'・S' で引き戻す）
   homomorphismToPairOfMatrices_isHom・_γ              …_of_necSuf
   homomorphismToPairOfMatrices_oddInclusionHom        homomorphismToPairOfMatrices_oddInclusionHom_of_necSuf
   homomorphismToPairOfMatrices_addedGenerator         homomorphismToPairOfMatrices_addedGenerator_of_necSuf
@@ -17,8 +17,8 @@
   （`homomorphismToMatrix_eq_comp`）、T(ε) = ε_N（`toN_parityElement`）なので、具体版の φ' は、必要十分版の φ' に
   V' の点を写す写像 (v, t) ↦ (v を写した点, t) を先に当てたものに等しい（`mapToPairOfMatrices_eq_necSuf`）。
   φ' が線型であることと値の平方は、これで必要十分版の主張から得る。
-- Cl(V',q') も具体版と必要十分版で別の集合で、その間の準同型はこの節に置かない。Φ' の存在と一意性は、
-  具体版と同じ手順を各段の導出版（普遍性の導出版と、上の二つ）から組み立てる（`OddExtensionFromNecSuf.lean` の j・g と同じ）。
+- Cl(V',q') も具体版と必要十分版で別の集合なので、Φ' の存在と一意性は、二つの間の互いに逆な準同型 T'・S'
+  （`OddExtensionFromNecSuf.lean` の `oddTransport`）で必要十分版の主張を引き戻して得る。
 - Φ'(j(a)) は、γ(v) の上では必要十分版の主張を a := γ_N(v を写した点) に当てた値に等しく、二つの準同型は γ(V) の上で
   一致するので等しい。Φ'(g) は、Φ'(g) = φ'(u) = φ'_N(u_N) = Φ'_N(g_N) と運んで必要十分版の主張を当てる。
 ℂ から渡す性質は、章「クリフォード代数」の仮定の組 `complexCliffordLaws` と a + (-a) = 0 の `add_neg_cancel` だけである。
@@ -49,10 +49,6 @@ theorem pairOfMatricesAlgebra_toNecSuf :
     D.pairOfMatricesAlgebra.toNecSuf = D.toNecSuf.pairOfMatricesAlgebra complexCliffordLaws := by
   rw [productAlgebra_toNecSuf, D.matrixAlgebra_toNecSuf]
   rfl
-
-/-- V' の点を必要十分版の V' の点へ写す：(v, t) ↦ (v を写した点, t)。 -/
-def oddPointToNecSuf (p : (W × DualSpace D.spaceW) × ℂ) : (W × NecSuf.VectorSpace.DualSpace D.spaceW.toNecSuf) × ℂ :=
-  (splitPointToNecSuf D.spaceW p.1, p.2)
 
 /-- 具体版の φ' は、必要十分版の φ' に V' の点を写す写像を先に当てたものと同じ。 -/
 theorem mapToPairOfMatrices_eq_necSuf (p : (W × DualSpace D.spaceW) × ℂ) :
@@ -98,16 +94,34 @@ theorem mapToPairOfMatrices_mul_self_of_necSuf (p : (W × DualSpace D.spaceW) ×
   exact hN
 
 /-- 本文 `claim_existence_and_uniqueness_of_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras` を、
-具体版と同じ手順で、普遍性の導出版と上の二つの導出版から得る。 -/
+必要十分版の主張を、互いに逆な準同型 T' : Cl(V',q') → Cl_N(V',q')・S'（`oddTransport`）で引き戻して得る。
+存在は Φ'_N ∘ T'、一意性は、条件を満たす Θ' について Θ' ∘ S' が必要十分版の条件を満たすことから出る。 -/
 theorem existsUnique_homomorphismToPairOfMatrices_of_necSuf :
     ∃ Θ : D.oddSpace.Cl → Mat (PowerSet D.M) × Mat (PowerSet D.M),
       (IsComplexAlgebraHomomorphism D.oddSpace.cliffordAlgebra D.pairOfMatricesAlgebra Θ ∧
         ∀ x, Θ (D.oddSpace.γ x) = D.mapToPairOfMatrices x) ∧
       ∀ Θ' : D.oddSpace.Cl → Mat (PowerSet D.M) × Mat (PowerSet D.M),
         (IsComplexAlgebraHomomorphism D.oddSpace.cliffordAlgebra D.pairOfMatricesAlgebra Θ' ∧
-          ∀ x, Θ' (D.oddSpace.γ x) = D.mapToPairOfMatrices x) → Θ' = Θ :=
-  D.oddSpace.universalProperty_of_necSuf D.pairOfMatricesAlgebra D.mapToPairOfMatrices
-    D.mapToPairOfMatrices_isLinearMap_of_necSuf D.mapToPairOfMatrices_mul_self_of_necSuf
+          ∀ x, Θ' (D.oddSpace.γ x) = D.mapToPairOfMatrices x) → Θ' = Θ := by
+  let P := D.oddTransport
+  obtain ⟨Θ, ⟨hΘ, hΘγ⟩, huniq⟩ :=
+    D.toNecSuf.existsUnique_homomorphismToPairOfMatrices complexCliffordLaws add_neg_cancel
+  rw [← D.pairOfMatricesAlgebra_toNecSuf] at hΘ huniq
+  refine ⟨fun x => Θ (P.toCl x),
+    ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2 hΘ),
+      fun x => ?_⟩, fun Θ' hΘ' => ?_⟩
+  · show Θ (P.toCl (D.oddSpace.γ x)) = D.mapToPairOfMatrices x
+    rw [P.toCl_γ, hΘγ]
+    exact (D.mapToPairOfMatrices_eq_necSuf x).symm
+  · have key : (fun y => Θ' (P.ofCl y)) = Θ := huniq _
+      ⟨(isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 (IsComplexAlgebraHomomorphism.comp_of_necSuf P.ofCl_isHom hΘ'.1),
+        fun y => by
+          show Θ' (P.ofCl ((D.toNecSuf.oddSpace complexCliffordLaws).γ complexCliffordLaws y)) = _
+          rw [P.ofCl_γ, hΘ'.2, D.mapToPairOfMatrices_eq_necSuf]
+          exact congrArg (D.toNecSuf.mapToPairOfMatrices complexCliffordLaws add_neg_cancel) (P.toPoint_ofPoint y)⟩
+    funext x
+    calc Θ' x = Θ' (P.ofCl (P.toCl x)) := by rw [P.ofCl_toCl]
+      _ = Θ (P.toCl x) := congrFun key (P.toCl x)
 
 /-- 本文 `def_homomorphism_from_odd_clifford_algebra_to_pair_of_matrix_algebras` の「Φ' は ℂ-代数の準同型」を必要十分版から得る。 -/
 theorem homomorphismToPairOfMatrices_isHom_of_necSuf :

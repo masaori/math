@@ -21,6 +21,7 @@ W ⊕ W^* の点を写す写像（`splitPointToNecSuf` と `splitPointOfNecSuf`�
 -/
 import CliffordMatrixIsomorphism.CliffordAlgebra.SplitQuadraticSpace.Generators
 import CliffordMatrixIsomorphism.CliffordAlgebra.DefinitionAndUniversalProperty.CliffordAlgebraFromNecSuf
+import CliffordMatrixIsomorphism.CliffordAlgebra.DefinitionAndUniversalProperty.TransportToNecSufFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.CliffordAlgebra.SplitQuadraticSpace.Generators
 
 namespace CliffordMatrixIsomorphism.Clifford
@@ -55,6 +56,18 @@ abbrev algebraN : ComplexAlgebra (D.spaceN.Cl complexCliffordLaws) :=
 /-- 必要十分版の W ⊕ W^* の点を、具体版の点へ写し戻す。 -/
 def splitPointOfNecSuf (p : W × NecSuf.VectorSpace.DualSpace D.spaceW.toNecSuf) : W × DualSpace D.spaceW :=
   (p.1, DualSpace.ofNecSuf p.2)
+
+/-- V := W ⊕ W^* の点を、必要十分版の V の点へ写す写し方（`splitPointToNecSuf` と `splitPointOfNecSuf`）。
+系の導出版が、二つのクリフォード代数の間の互いに逆な準同型（`QuadraticSpaceWithBasis.PointTransport.toCl`・`ofCl`）を作るのに使う。 -/
+def splitTransport : QuadraticSpaceWithBasis.PointTransport D.space D.spaceN where
+  toPoint := splitPointToNecSuf D.spaceW
+  ofPoint := D.splitPointOfNecSuf
+  toPoint_isLinearMap := ⟨fun _ _ => rfl, fun _ _ => rfl⟩
+  ofPoint_isLinearMap := ⟨fun _ _ => rfl, fun _ _ => rfl⟩
+  form_toPoint := fun _ => rfl
+  form_ofPoint := fun _ => rfl
+  ofPoint_toPoint := fun _ => rfl
+  toPoint_ofPoint := fun _ => rfl
 
 /-- v ↦ γ'(v を写した点)。 -/
 def mapToN (p : W × DualSpace D.spaceW) : D.spaceN.Cl complexCliffordLaws :=

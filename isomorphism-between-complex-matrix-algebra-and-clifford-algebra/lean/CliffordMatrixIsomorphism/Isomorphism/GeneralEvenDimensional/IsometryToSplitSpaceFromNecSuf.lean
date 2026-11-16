@@ -12,8 +12,9 @@ i := imaginaryUnit、h := inverseOfTwo への特殊化から得られること�
   splitFamily・mapToSplit・inverseFamily・mapFromSplit
                                                 splitFamily_toNecSuf・mapToSplit_toNecSuf・inverseFamily_eq_necSuf・mapFromSplit_eq_necSuf
   form_splitFamily ほか各主張                   …_of_necSuf
-  generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family・generalCliffordAlgebra_isomorphic_matrixAlgebra
-                                                …_of_necSuf（具体版と同じ手順を、各段の導出版から組み立てる）
+  generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family
+                                                …_of_necSuf（必要十分版の本体を特殊化し、T_Y・S_Y で引き戻す）
+  generalCliffordAlgebra_isomorphic_matrixAlgebra …_of_necSuf（本体の導出版を固定した e に当てる）
 
 運び方:
 - 具体版の V = W ⊕ W^* と、具体版の前提を写した必要十分版の前提 `D.toNecSuf` の V は、W^* が値の写像の同じ別の部分型なので別の集合である。
@@ -23,9 +24,12 @@ i := imaginaryUnit、h := inverseOfTwo への特殊化から得られること�
   θ' は必要十分版の θ' に写した点を入れたものに等しい（`mapFromSplit_eq_necSuf`）。座標の写像は具体版と必要十分版で別々に選ぶので、
   1,…,2M の番号で値が一致することを係数の一意性で示す（`coordinate_splitBasis_eq_necSuf`。Y の側は既存の `coordinate_eq_necSuf`）。
 - Y の側は同じ型の上で、具体版の前提の組 `QY` を `QY.toNecSuf`（欄を写すだけ）として読む。
-- 系の定理は、主定理の導出版（`MutuallyInverseHomomorphismsFromNecSuf.lean`）と同じく、具体版と同じ手順を各段の導出版
-  （誘導される準同型・主定理の準同型・この節の等長写像の主張）から組み立てる。具体版の Cl(Y,Q) と必要十分版の Cl(Y,Q) は別の集合なので、
-  必要十分版の系の定理を直に特殊化することはしない。
+- 系の定理の本体は、必要十分版の本体を `D.toNecSuf`・`QY.toNecSuf` に特殊化し、引き戻して得る。具体版の Cl(Y,Q) と
+  必要十分版の Cl(Y,Q) は別の集合なので、二つの間の互いに逆な準同型 T_Y・S_Y（`QuadraticSpaceWithBasis.transportToNecSuf`。
+  点は動かさない）を置く。具体版の Φ_Y は Φ_{Y,N} ∘ T_Y に等しく（Cl(θ) と Cl_N(θ_N) を T・T_Y が結ぶ。
+  `splitToCl_inducedHom_mapToSplit`）、具体版の Ψ_Y は S_Y ∘ Ψ_{Y,N} に等しい（`toCl_inducedHom_mapFromSplit` と、
+  Ψ と Ψ_N を T が結ぶ `toN_homomorphismFromMatrix`）。必要十分版の本体の六つの部分を、この二つの等式で具体版へ移す。
+- 系の定理は、必要十分版の系の定理と同じく、本体を固定した e に当てる。
 ℂ から渡す性質は、章「クリフォード代数」の仮定の組 `complexCliffordLaws`、a + (-a) = 0 の `add_neg_cancel`、(-a)·b = -(a·b) の `neg_mul`、
 -(-a) = a の `neg_neg`、i · i = -1 の `imaginaryUnit_mul_self`、h が 1 + 1 の逆元であること（`inverseOfTwo_mul`・`mul_inverseOfTwo`）である。
 -/
@@ -328,8 +332,117 @@ theorem mapFromSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : 
 
 /-! ### 系の定理 -/
 
-/-- 系の定理の本体（`generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family`）を、具体版と同じ手順で、
-各段の導出版から組み立てたもの。 -/
+/-- 必要十分版の Φ_Y（`D.toNecSuf` と `QY.toNecSuf` に ℂ の性質を渡したもの）。 -/
+abbrev homomorphismToMatrixOfGeneralN (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
+    QY.toNecSuf.Cl complexCliffordLaws → Mat (PowerSet D.M) :=
+  D.toNecSuf.homomorphismToMatrixOfGeneral complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e
+    he.toNecSuf
+
+/-- 必要十分版の Ψ_Y（`D.toNecSuf` と `QY.toNecSuf` に ℂ の性質を渡したもの）。 -/
+abbrev homomorphismFromMatrixOfGeneralN (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
+    Mat (PowerSet D.M) → QY.toNecSuf.Cl complexCliffordLaws :=
+  D.toNecSuf.homomorphismFromMatrixOfGeneral complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+    ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf
+
+/-- T(Cl(θ)(a)) = Cl_N(θ_N)(T_Y(a))。二つの準同型 Cl(Y,Q) → Cl_N(V,q) は γ_Y(Y) の上で一致する
+（θ_N は θ の値を写した点を返す。`mapToSplit_toNecSuf`）。 -/
+theorem splitToCl_inducedHom_mapToSplit (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (a : QY.Cl) :
+    D.splitTransport.toCl
+        (QuadraticSpaceWithBasis.inducedHom QY D.space (D.mapToSplit QY e he) (D.mapToSplit_isIsometry QY e he) a)
+      = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel QY.toNecSuf D.spaceN
+          (D.toNecSuf.mapToSplit complexCliffordLaws imaginaryUnit QY.toNecSuf e he.toNecSuf)
+          (D.toNecSuf.mapToSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
+            e he.toNecSuf).isLinearMap
+          (D.toNecSuf.mapToSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
+            e he.toNecSuf).map_form
+          ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl a) :=
+  eq_of_agree_on_generators_of_necSuf
+    (IsComplexAlgebraHomomorphism.comp_of_necSuf
+      (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf QY D.space _ (D.mapToSplit_isIsometry QY e he))
+      D.splitTransport.toCl_isHom)
+    (IsComplexAlgebraHomomorphism.comp_of_necSuf (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_isHom
+      ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2
+        (NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom_isHom complexCliffordLaws add_neg_cancel _ _ _ _ _)))
+    (Set.range QY.γ) QY.γ_generates_of_necSuf
+    (fun _ ⟨y, hy⟩ => by
+      rw [← hy]
+      show D.splitTransport.toCl
+          (QuadraticSpaceWithBasis.inducedHom QY D.space (D.mapToSplit QY e he) (D.mapToSplit_isIsometry QY e he)
+            (QY.γ y))
+        = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel QY.toNecSuf D.spaceN _ _ _
+          ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl (QY.γ y))
+      rw [QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf, D.splitTransport.toCl_γ,
+        (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+        NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom_γ]
+      exact congrArg (D.spaceN.γ complexCliffordLaws) (D.mapToSplit_toNecSuf QY e he y)) a
+
+/-- T_Y(Cl(θ')(x)) = Cl_N(θ'_N)(T(x))。二つの準同型 Cl(V,q) → Cl_N(Y,Q) は γ(V) の上で一致する
+（θ' は θ'_N に写した点を入れたもの。`mapFromSplit_eq_necSuf`）。 -/
+theorem toCl_inducedHom_mapFromSplit (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (x : D.space.Cl) :
+    (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl
+        (QuadraticSpaceWithBasis.inducedHom D.space QY (D.mapFromSplit QY e) (D.mapFromSplit_isIsometry QY e he) x)
+      = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel D.spaceN QY.toNecSuf
+          (D.toNecSuf.mapFromSplit complexCliffordLaws imaginaryUnit inverseOfTwo QY.toNecSuf e)
+          (D.toNecSuf.mapFromSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+            ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf).isLinearMap
+          (D.toNecSuf.mapFromSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+            ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf).map_form
+          (D.splitTransport.toCl x) :=
+  eq_of_agree_on_generators_of_necSuf
+    (IsComplexAlgebraHomomorphism.comp_of_necSuf
+      (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf D.space QY _ (D.mapFromSplit_isIsometry QY e he))
+      (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_isHom)
+    (IsComplexAlgebraHomomorphism.comp_of_necSuf D.splitTransport.toCl_isHom
+      ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2
+        (NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom_isHom complexCliffordLaws add_neg_cancel _ _ _ _ _)))
+    (Set.range D.space.γ) D.space.γ_generates_of_necSuf
+    (fun _ ⟨p, hp⟩ => by
+      rw [← hp]
+      show (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl
+          (QuadraticSpaceWithBasis.inducedHom D.space QY (D.mapFromSplit QY e) (D.mapFromSplit_isIsometry QY e he)
+            (D.space.γ p))
+        = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel D.spaceN QY.toNecSuf _ _ _
+          (D.splitTransport.toCl (D.space.γ p))
+      rw [QuadraticSpaceWithBasis.inducedHom_γ_of_necSuf, (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_γ,
+        D.splitTransport.toCl_γ, NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom_γ]
+      exact congrArg (QY.toNecSuf.γ complexCliffordLaws) (D.mapFromSplit_eq_necSuf QY e p)) x
+
+/-- 具体版の Φ_Y は、必要十分版の Φ_Y に T_Y を先に当てたものである。 -/
+theorem homomorphismToMatrixOfGeneral_eq_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (a : QY.Cl) :
+    D.homomorphismToMatrixOfGeneral QY e he a
+      = D.homomorphismToMatrixOfGeneralN QY e he ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl a) := by
+  show D.homomorphismToMatrix
+      (QuadraticSpaceWithBasis.inducedHom QY D.space (D.mapToSplit QY e he) (D.mapToSplit_isIsometry QY e he) a) = _
+  rw [D.homomorphismToMatrix_eq_comp D.splitTransport.toCl_isHom D.splitTransport.toCl_γ,
+    D.splitToCl_inducedHom_mapToSplit QY e he a]
+  rfl
+
+/-- 具体版の Ψ_Y を T_Y で写したものは、必要十分版の Ψ_Y である。 -/
+theorem toCl_homomorphismFromMatrixOfGeneral (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
+    (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (F : Mat (PowerSet D.M)) :
+    (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl (D.homomorphismFromMatrixOfGeneral QY e he F)
+      = D.homomorphismFromMatrixOfGeneralN QY e he F := by
+  show (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl
+      (QuadraticSpaceWithBasis.inducedHom D.space QY (D.mapFromSplit QY e) (D.mapFromSplit_isIsometry QY e he)
+        (D.homomorphismFromMatrix F)) = _
+  rw [D.toCl_inducedHom_mapFromSplit QY e he,
+    toN_homomorphismFromMatrix D.splitTransport.toCl_isHom D.splitTransport.toCl_γ F]
+  rfl
+
+/-- 系の定理の本体（`generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family`）を、必要十分版の系の定理の本体を
+`D.toNecSuf`・`QY.toNecSuf` と ℂ の性質に特殊化し、互いに逆な準同型 T_Y : Cl(Y,Q) → Cl_N(Y,Q)・S_Y で引き戻して得たもの。
+具体版の Φ_Y は Φ_{Y,N} ∘ T_Y、Ψ_Y は S_Y ∘ Ψ_{Y,N} に等しい。 -/
 theorem generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family_of_necSuf (QY : QuadraticSpaceWithBasis Y)
     (e : ℕ → Y) (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
     IsComplexAlgebraHomomorphism QY.cliffordAlgebra D.matrixAlgebra (D.homomorphismToMatrixOfGeneral QY e he) ∧
@@ -340,52 +453,35 @@ theorem generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family_of_necSuf (QY 
       Function.Bijective (D.homomorphismToMatrixOfGeneral QY e he) ∧
       (∀ (F : Mat (PowerSet D.M)) (a : QY.Cl),
         D.homomorphismToMatrixOfGeneral QY e he a = F → a = D.homomorphismFromMatrixOfGeneral QY e he F) := by
-  let θ := D.mapToSplit QY e he
-  let θ' := D.mapFromSplit QY e
-  let hθ := D.mapToSplit_isIsometry_of_necSuf QY e he
-  let hθ' := D.mapFromSplit_isIsometry_of_necSuf QY e he
-  let Clθ := QuadraticSpaceWithBasis.inducedHom QY D.space θ hθ
-  let Clθ' := QuadraticSpaceWithBasis.inducedHom D.space QY θ' hθ'
-  let Φ := D.homomorphismToMatrix
-  let Ψ := D.homomorphismFromMatrix
-  let ΦY := D.homomorphismToMatrixOfGeneral QY e he
-  let ΨY := D.homomorphismFromMatrixOfGeneral QY e he
-  have hΦY : IsComplexAlgebraHomomorphism QY.cliffordAlgebra D.matrixAlgebra ΦY :=
-    IsComplexAlgebraHomomorphism.comp_of_necSuf (φ := Clθ) (ψ := Φ)
-      (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf QY D.space θ hθ) D.homomorphismToMatrix_isHom_of_necSuf
-  have hΨY : IsComplexAlgebraHomomorphism D.matrixAlgebra QY.cliffordAlgebra ΨY :=
-    IsComplexAlgebraHomomorphism.comp_of_necSuf (φ := Ψ) (ψ := Clθ') D.homomorphismFromMatrix_isHom_of_necSuf
-      (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf D.space QY θ' hθ')
-  have h1 : ∀ a : QY.Cl, Clθ' (Clθ a) = a :=
-    QuadraticSpaceWithBasis.inducedHom_comp_inducedHom_of_necSuf QY D.space θ hθ θ' hθ'
-      (D.mapFromSplit_mapToSplit_of_necSuf QY e he)
-  have h2 : ∀ X : D.space.Cl, Clθ (Clθ' X) = X :=
-    QuadraticSpaceWithBasis.inducedHom_comp_inducedHom_of_necSuf D.space QY θ' hθ' θ hθ
-      (D.mapToSplit_mapFromSplit_of_necSuf QY e he)
-  have hΨΦ : ∀ a : QY.Cl, ΨY (ΦY a) = a := fun a => calc
-    ΨY (ΦY a) = Clθ' (Ψ (Φ (Clθ a))) := rfl
-    _ = Clθ' (Clθ a) := by
-        rw [show Ψ (Φ (Clθ a)) = Clθ a from D.homomorphismFromMatrix_homomorphismToMatrix_of_necSuf (Clθ a)]
-    _ = a := h1 a
-  have hΦΨ : ∀ F : Mat (PowerSet D.M), ΦY (ΨY F) = F := fun F => calc
-    ΦY (ΨY F) = Φ (Clθ (Clθ' (Ψ F))) := rfl
-    _ = Φ (Ψ F) := by rw [h2 (Ψ F)]
-    _ = F := D.homomorphismToMatrix_homomorphismFromMatrix_of_necSuf F
-  have hinj : Function.Injective ΦY := by
-    intro a a' haa'
-    calc a = ΨY (ΦY a) := (hΨΦ a).symm
-      _ = ΨY (ΦY a') := by rw [haa']
-      _ = a' := hΨΦ a'
-  have hsurj : Function.Surjective ΦY := fun F => ⟨ΨY F, hΦΨ F⟩
-  have hinv : ∀ (F : Mat (PowerSet D.M)) (a : QY.Cl), ΦY a = F → a = ΨY F := by
-    intro F a ha
-    apply hinj
-    calc ΦY a = F := ha
-      _ = ΦY (ΨY F) := (hΦΨ F).symm
-  exact ⟨hΦY, hΨY, hΨΦ, hΦΨ, ⟨hinj, hsurj⟩, hinv⟩
+  let P := QuadraticSpaceWithBasis.transportToNecSuf QY
+  let ΦN := D.homomorphismToMatrixOfGeneralN QY e he
+  let ΨN := D.homomorphismFromMatrixOfGeneralN QY e he
+  obtain ⟨hΦN, hΨN, hΨΦN, hΦΨN, hbijN, hinvN⟩ :=
+    D.toNecSuf.generalCliffordAlgebra_isomorphic_matrixAlgebra_of_family complexCliffordLaws add_neg_cancel neg_mul
+      neg_neg imaginaryUnit imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+      ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf
+  rw [← D.matrixAlgebra_toNecSuf] at hΦN hΨN
+  have hΦeq : D.homomorphismToMatrixOfGeneral QY e he = fun a => ΦN (P.toCl a) :=
+    funext (D.homomorphismToMatrixOfGeneral_eq_necSuf QY e he)
+  have hΨeq : D.homomorphismFromMatrixOfGeneral QY e he = fun F => P.ofCl (ΨN F) := funext fun F =>
+    (P.ofCl_toCl _).symm.trans (congrArg P.ofCl (D.toCl_homomorphismFromMatrixOfGeneral QY e he F))
+  rw [hΦeq, hΨeq]
+  refine ⟨IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom
+      ((isComplexAlgebraHomomorphism_iff_necSuf (QuadraticSpaceWithBasis.algebraOfNecSuf QY.toNecSuf) D.matrixAlgebra
+        ΦN).2 hΦN),
+    IsComplexAlgebraHomomorphism.comp_of_necSuf
+      ((isComplexAlgebraHomomorphism_iff_necSuf D.matrixAlgebra (QuadraticSpaceWithBasis.algebraOfNecSuf QY.toNecSuf)
+        ΨN).2 hΨN) P.ofCl_isHom,
+    fun a => ?_, fun F => ?_, ?_, fun F a ha => ?_⟩
+  · exact (congrArg P.ofCl (hΨΦN (P.toCl a))).trans (P.ofCl_toCl a)
+  · exact (congrArg ΦN (P.toCl_ofCl (ΨN F))).trans (hΦΨN F)
+  · exact hbijN.comp P.toCl_bijective
+  · exact (P.ofCl_toCl a).symm.trans (congrArg P.ofCl (hinvN F (P.toCl a) ha))
 
 /-- 本文 `theorem_clifford_algebra_of_general_even_dimensional_nondegenerate_quadratic_space_is_isomorphic_to_matrix_algebra`
-を、各段の導出版から組み立てたもの（e := `orthonormalBasis`）。 -/
+を得たもの（e := `orthonormalBasis`）。必要十分版の系の定理が、必要十分版の本体を e := 必要十分版の `orthonormalBasis` に当てるのと
+同じ手順で、上の本体の導出版を具体版の e に当てる（二つの e は別々に `Classical.choose` で選ぶので、必要十分版の系の定理そのものは
+具体版の e について述べない）。 -/
 theorem generalCliffordAlgebra_isomorphic_matrixAlgebra_of_necSuf (QY : QuadraticSpaceWithBasis Y)
     (hdim : QY.dim = D.M + D.M) (hQ : IsNondegenerateQuadraticForm QY.space QY.form) :
     let e := D.orthonormalBasis QY hdim hQ
