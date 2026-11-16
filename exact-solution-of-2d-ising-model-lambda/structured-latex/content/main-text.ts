@@ -12149,9 +12149,19 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 \end{aligned}`),
                 paragraph([
                   math(String.raw`m\le i`), " のときは、もし ", math(String.raw`i=m`),
-                  " なら ", math(String.raw`m+j=m+n`), " から ", math(String.raw`j=n`),
-                  " となり、", math(String.raw`(i,j)\ne(m,n)`), " に反する。よって",
+                  " なら次の式鎖を得る。",
                 ]),
+                displayMath(String.raw`\begin{aligned}
+j&=(m+j)-m
+&&\bigl(\because\ \mathbb N\text{ の加法の消去}\bigr)\\
+&=(i+j)-m
+&&\bigl(\because\ i=m\bigr)\\
+&=(m+n)-m
+&&\bigl(\because\ (i,j)\in B\bigr)\\
+&=n
+&&\bigl(\because\ \mathbb N\text{ の加法の消去}\bigr)
+\end{aligned}`),
+                paragraph(["これは ", math(String.raw`(i,j)\ne(m,n)`), " に反する。よって"]),
                 displayMath(String.raw`\begin{aligned}
 m&<i
 &&\bigl(\because\ m\le i,\ i\ne m\bigr)\\

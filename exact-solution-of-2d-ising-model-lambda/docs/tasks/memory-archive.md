@@ -1,3 +1,5 @@
+2026-11-15（並列）: 「自己双対点より高温側での分配多項式の両側評価」を四層で閉じた。本文の根拠を、符号の値を使わずに済む `claim_signed_even_subgraph_duality_up_to_sign` に替え、Lean 具体版 `highTemperaturePartitionBounds`・必要十分版 `high_temperature_partition_bounds_necSuf`・導出版を置いて `lean:` に登録した。SageMath `check_duality_absolute.sage`（辺長 1〜3、実際の多項式と総当たりの $Z_L$）PASS。
+2026-11-15（並列）: 「周期境界の自由エネルギー密度は分散因子の積分に等しい」の合成の段から、四つのモード和の最大値を $w_L$ と同定し共通極限から $f^{\mathrm{per}}(q)=I$ を得る段を割り、Lean 具体版 `periodicFreeEnergyDensity_eq_of_modeLimits`・必要十分版 `tendsto_of_componentLimits_necSuf` ほか・導出版で示した（`RealEscape/PeriodicDensityModeMaxLimit.lean` ほか）。本文に被対数が正である根拠を足し、SageMath に `check_mode_max.sage` を足した（PASS）。
 2026-11-15（主経路）: 臨界点での各分散因子の非零性を Lean 具体版・必要十分版・導出版で示した。有限積と平方恒等式の合成は次の行へ残した。既存の SageMath 検算は再実行して PASS。書式統一では逆写像相殺の式鎖の読点を除いた。
 
 2026-11-15（並列）: 「自己双対点より高温側での分配多項式の両側評価」を自己双対変換の符号に依存しない段と合成の段に割り、前者（双対因数分解による下界と上界）を Lean 具体版 `highTemperatureDualBounds`・必要十分版・導出版で示した。本文の使われない一行（$Z_L(t)\ge\frac14M_L(t)$）を削った。SageMath 検算を再実行した（PASS）。
