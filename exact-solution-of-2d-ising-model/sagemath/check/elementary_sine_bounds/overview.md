@@ -6,14 +6,14 @@
 
 - ファイル: `structured-latex/content/020_critical_point.ts`
 - ブロック: `critical_008_claim_elementary_sine_bounds`（θ ∈ [0, π] なら θ/2 - sin(θ/2) ≤ θ³/48）
-- 範囲: 準備と鎖の三行
+- 範囲: 準備と鎖の四行
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備 θ/2 ∈ [0, π/2] | `check_proof_lines.sage` | QQ で q/2 ∈ [0, 1/2] | **PASS** | 成り立つ |
-| 鎖の 1・3 行目 | `check_proof_lines.sage` | QQ[θ, s] の多項式の等式で厳密に | **PASS** | 成り立つ |
+| 鎖の 1・3・4 行目（3 行目は `real_minus_zero_is_self`（a → (1/6)(θ/2)³）、4 行目は ℝ の四則） | `check_proof_lines.sage` | QQ[θ, s] の多項式の等式で厳密に。対照として、θ/2 を θ に取り違えた (1/6)θ³ は 4 行目の値と一致しない | **PASS** | 成り立つ |
 | 鎖の 2 行目と主張 | `check_proof_lines.sage` | [0, π] の 12 等分点 θ = qπ で sin(θ/2) を AA、θ をボールで | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲

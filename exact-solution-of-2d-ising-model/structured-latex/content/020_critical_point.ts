@@ -1436,7 +1436,7 @@ a \geq 0\ \land\ b \geq 0
       displayMath(String.raw`\begin{aligned}
 t
 &= t - 0
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to t)\ \text{を右辺から左辺へ}\bigr)\\
 &= \int_0^t 1\,du
 &&(\because\ \text{(R4) を }F(u) = u\text{ に。微分の公式で }F' = 1)\\
 &\leq \int_0^t \cosh u\,du
@@ -1446,13 +1446,14 @@ t
 &= \sinh t - 0
 &&(\because\ \blkref{sinh_zero})\\
 &= \sinh t
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \sinh t)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (5) の前半を独立の主張にし、主張の左辺から始まる一続きの鎖に改めた。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 鎖の 1 行目 t = t − 0 と最後の行 sinh t − 0 = sinh t の名前だけの根拠「ℝ の四則」を、real_minus_zero_is_self（a → t を右辺から左辺へ、a → sinh t）の参照に替えた。式は不変。",
       ],
     },
   },
@@ -1496,7 +1497,7 @@ t
       displayMath(String.raw`\begin{aligned}
 \sinh t
 &= \sinh t - 0
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \sinh t)\ \text{を右辺から左辺へ}\bigr)\\
 &= \sinh t - \sinh 0
 &&(\because\ \blkref{sinh_zero})\\
 &= \int_0^t \cosh u\,du
@@ -1505,14 +1506,17 @@ t
 &&(\because\ \text{(R3) の単調性と、}u \in [0,t]\text{ で }\cosh u \leq \cosh t\text{。}\blkref{cosh_monotone_on_nonnegative})\\
 &= t\cosh t - 0\cdot\cosh t
 &&(\because\ \text{(R4) を }F(u) = u\cosh t\text{ に。微分の公式で }F' = \cosh t)\\
+&= t\cosh t - 0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \cosh t)\bigr)\\
 &= t\cosh t
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to t\cosh t)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (5) の後半を独立の主張にし、主張の左辺から始まる一続きの鎖に改めた。cosh の単調性は cosh_monotone_on_nonnegative から引く。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 鎖の 1 行目 sinh t = sinh t − 0 の名前だけの根拠「ℝ の四則」を real_minus_zero_is_self（a → sinh t を右辺から左辺へ）の参照に替えた。最後の行 t cosh t − 0·cosh t = t cosh t（0·cosh t = 0 と a − 0 = a の 2 つを「ℝ の四則」1 つで使っていた）を、real_zero_times_is_zero（x → cosh t）の行と real_minus_zero_is_self（a → t cosh t）の行の 2 行に割った。鎖の両端は不変。",
       ],
     },
   },
@@ -2032,12 +2036,14 @@ t - \sin t
 &= 0 - 0
 &&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
 &= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 elementary_sine_bounds の Step 1 を独立の主張にした。sin の定義域が [-π/2, π/2] なので t の範囲を t ≥ 0 から [0, π/2] に改め、端点 0 での値と 1 - cos u ≥ 0 の根拠を足した。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 0 − 0 = 0 に根拠が無かったので、real_minus_zero_is_self（a → 0）の参照を付けた。式は不変。",
       ],
     },
   },
@@ -2101,12 +2107,14 @@ t - \sin t
 &= 0 - 0
 &&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
 &= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 elementary_sine_bounds の Step 2 の前半を独立の主張にした。t の範囲を [0, π/2] に改め、端点 0 での値と導関数の根拠を足した。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 0 − 0 = 0 に根拠が無かったので、real_minus_zero_is_self（a → 0）の参照を付けた。式は不変。",
       ],
     },
   },
@@ -2170,12 +2178,14 @@ t - \sin t
 &= 0 - 0
 &&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
 &= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 elementary_sine_bounds の Step 2 の後半を独立の主張にした。t の範囲を [0, π/2] に改め、端点 0 での値と導関数の根拠を足した。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 鎖の最後の行 0 − 0 = 0 に根拠が無かったので、real_minus_zero_is_self（a → 0）の参照を付けた。式は不変。",
       ],
     },
   },
@@ -2356,6 +2366,8 @@ c_0
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &\leq \frac{1}{6}\left(\frac{\theta}{2}\right)^3 - 0
 &&(\because\ \blkref{sine_cubic_lower_bound}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
+&= \frac{1}{6}\left(\frac{\theta}{2}\right)^3
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \tfrac{1}{6}(\tfrac{\theta}{2})^3)\bigr)\\
 &= \frac{\theta^3}{48}
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`),
@@ -2364,6 +2376,7 @@ c_0
       status: "added",
       notes: [
         "2026-11-02: 1 ブロック 1 主張にするため、一般の t の三つの評価（argument_minus_sine_nonnegative・cosine_quadratic_lower_bound・sine_cubic_lower_bound）、c_0 の定義と数値評価、c_0 θ/2 ≤ sin(θ/2) ≤ θ/2（sine_half_angle_linear_bounds）を別のブロックへ分け、このブロックには上側の θ³/48 の評価だけを残した（下側 0 ≤ θ/2 - sin(θ/2) は argument_minus_sine_nonnegative の当てはめなので主張から外した）。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 第 1 式の上からの評価の最後の行 (1/6)(θ/2)³ − 0 = θ³/48（a − 0 = a と (1/6)(θ/2)³ = θ³/48 の 2 つを「ℝ の四則」1 つで使っていた）を、real_minus_zero_is_self（a → (1/6)(θ/2)³）の行と「ℝ の四則」の行の 2 行に割った。鎖の両端は不変。Lean の具体版 elementary_sine_bounds_cube は鎖の行を一つずつ写していない（linarith で閉じる）ので変えていない。",
       ],
     },
   },
@@ -2435,6 +2448,7 @@ c_0
 &\leq \frac{\theta}{2} - 0
 &&(\because\ \blkref{argument_minus_sine_nonnegative}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
 &= \frac{\theta}{2}
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \tfrac{\theta}{2})\bigr)
 \end{aligned}`),
       paragraph(["下からの評価は次のとおりである。"]),
       displayMath(String.raw`\begin{aligned}
@@ -2458,6 +2472,7 @@ c_0
       notes: [
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 1/2（正の数どうしの積は正。ℝ は順序体 set_and_algebra_notation）から 0 < π/2 を出す文を置き、鎖の根拠「π/2 > 0」をその参照にした。値と主張は不変。",
         "2026-11-02: 旧 elementary_sine_bounds の主張の第二の行を独立の主張にした。(θ/2)² ≤ π²/4 を準備の鎖にした。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 上からの評価の鎖の最後の行 θ/2 − 0 = θ/2 に根拠が無かったので、real_minus_zero_is_self（a → θ/2）の参照を付けた。式は不変。",
       ],
     },
   },
@@ -3038,6 +3053,7 @@ x - \log(1+x)
 &= 0 - 0
 &&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
 &= 0
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \log(1+x)
@@ -3046,12 +3062,14 @@ x - \log(1+x)
 &\leq x - 0
 &&(\because\ \text{直前の鎖})\\
 &= x
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to x)\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-02: 旧 closed_form_log_integral (2) の証明が括弧書きで示していた log(1+x) ≤ x を独立の主張にし、x = 0 の場合、H の微分可能性と導関数、被積分関数の符号を (∵) 付きの鎖にした。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 2 本の鎖の最後の行 0 − 0 = 0 と x − 0 = x に根拠が無かったので、real_minus_zero_is_self（a → 0、a → x）の参照を付けた。式は不変。",
       ],
     },
   },
@@ -3343,6 +3361,7 @@ F(0)
 &= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right) - 0
 &&(\because\ F(0) = 0)\\
 &= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 2\,\mathrm{arcsinh}(\tfrac{\pi}{2\delta}))\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -3351,6 +3370,7 @@ F(0)
         "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +
           "旧証明の √((θ²+4δ²)/(4δ²)) = √(θ²+4δ²)/(2δ) は平方根の商の規則を定めるブロックが本文に無いので、平方根の一意性から √(q²+1) = W/δ を示す形に改め、F(0) = 0 と F' の連続性を書いた。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: F(0) の鎖の √1 = 1 の行の名前だけの根拠を sqrt_of_real_one_is_one の参照にし、準備の文の「同じ一意性と 1 ≥ 0、1^2 = 1 より √1 = 1」を消した（その主張が担う）。値と主張は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 閉形式の鎖の最後の行 2 arcsinh(π/(2δ)) − 0 = 2 arcsinh(π/(2δ)) に根拠が無かったので、real_minus_zero_is_self（a → 2 arcsinh(π/(2δ))）の参照を付けた。式は不変。Lean の具体版 integral_inv_sqrt_pi は鎖の行を一つずつ写していないので変えていない。",
       ],
     },
   },

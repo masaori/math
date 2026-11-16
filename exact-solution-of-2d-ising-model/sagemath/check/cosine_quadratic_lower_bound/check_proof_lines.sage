@@ -13,6 +13,7 @@ G = lambda x: cos(x) - 1 + x^2/2
 assert bool(diff(G(u), u) == -sin(u) + u) and bool(-sin(u) + u == u - sin(u))
 assert bool(integrate(u - sin(u), u, 0, t) == G(t) - G(0))      # 2 行目
 assert bool(integrate(0, u, 0, t) == 0 - 0)                      # 4 行目
+assert QQ(0) - QQ(0) == 0                                        # 5 行目（real_minus_zero_is_self、a → 0）
 print("導関数 G' = -sin u + u = u - sin u と、積分の値の二つの行が SR で成り立つ")
 assert cos_exact(0) - 1 + QQ(0)^2/2 == 0                          # 1 行目と t = 0 の場合
 for q in HALF_GRID:

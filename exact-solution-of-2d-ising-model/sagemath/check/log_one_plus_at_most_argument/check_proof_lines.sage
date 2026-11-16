@@ -26,13 +26,14 @@ Hp = diff(H, vs)
 assert bool(Hp == 1 - diff(log(vs), vs).subs(vs=1 + vs) * (0 + 1)) and bool(Hp == 1 - 1/(1 + vs) * 1) and bool(Hp == 1 - 1/(1 + vs))   # H' の鎖の三行
 assert bool(integrate(1 - 1/(1 + vs), vs, 0, xs) == H.subs(vs=xs) - H.subs(vs=0))   # 2 行目
 assert bool(integrate(0, vs, 0, xs) == 0 - 0)                                        # 4 行目
+assert QQ(0) - QQ(0) == 0                                                            # 5 行目（real_minus_zero_is_self、a → 0）
 print("H' = 1 - 1/(1+v) と積分の値の二つの行が SR で成り立つ")
 for x0 in XS:
     gap = x0 - log_ball(1 + x0)
     assert gap.lower() > 0                                   # 積分の鎖の両端 x - log(1+x) ≥ 0（x > 0 では狭義）
     assert surely_le(log_ball(1 + x0), x0)                   # 主張
 Rxl.<xx, ll> = QQ[]
-assert ll == xx - (xx - ll) and xx - 0 == xx                  # 最後の鎖の等号（ll は log(1+x) の不定元）
+assert ll == xx - (xx - ll) and xx - 0 == xx                  # 最後の鎖の等号（ll は log(1+x) の不定元。x − 0 = x は real_minus_zero_is_self、a → x）
 print(f"{len(XS)} 点の x > 0 で x - log(1+x) > 0 と log(1+x) ≤ x がボールで確定する。x = 0 では等号")
 assert surely_lt(QQ(1)/2, log_ball(2))
 print("対照: x = 1 で log(1+x) ≤ x/2 は成り立たない")

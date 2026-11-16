@@ -13,6 +13,7 @@ F = lambda x: x - sin(x)
 assert bool(diff(F(u), u) == 1 - cos(u))
 assert bool(integrate(1 - cos(u), u, 0, t) == F(t) - F(0))      # 2 行目
 assert bool(integrate(0, u, 0, t) == 0 - 0)                      # 4 行目
+assert QQ(0) - QQ(0) == 0                                        # 5 行目（real_minus_zero_is_self、a → 0）
 print("導関数 F' = 1 - cos と、積分の値の二つの行が SR で成り立つ")
 assert 0 - sin_exact(0) == 0                                      # 1 行目と t = 0 の場合
 for q in HALF_GRID:

@@ -13,6 +13,7 @@ H = lambda x: sin(x) - x + x^3/6
 assert bool(diff(H(v), v) == cos(v) - 1 + v^2/2)
 assert bool(integrate(cos(v) - 1 + v^2/2, v, 0, t) == H(t) - H(0))     # 2 行目
 assert bool(integrate(0, v, 0, t) == 0 - 0)                             # 4 行目
+assert QQ(0) - QQ(0) == 0                                        # 5 行目（real_minus_zero_is_self、a → 0）
 print("導関数 H' = cos v - 1 + v²/2 と、積分の値の二つの行が SR で成り立つ")
 assert sin_exact(0) - 0 + QQ(0)^3/6 == 0                                 # 1 行目と t = 0 の場合
 for q in HALF_GRID[1:]:

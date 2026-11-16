@@ -12,6 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| 5 行目 0 − 0 = 0（`real_minus_zero_is_self`、a → 0） | `check_proof_lines.sage` | QQ で厳密に | **PASS** | 成り立つ |
 | t = 0 の場合と 1 行目（0 - sin 0 = 0） | `check_proof_lines.sage` | AA で厳密に | **PASS** | 成り立つ |
 | 導関数 F' = 1 - cos と 2・4 行目（(R4) の当てはめ） | `check_proof_lines.sage` | SR の記号微分・記号積分（t > 0 を仮定） | **PASS** | 成り立つ |
 | 3 行目の被積分関数の符号 1 - cos u ≥ 0 | `check_proof_lines.sage` | [0, π/2] の 12 等分点 u = qπ で AA | **PASS** | 成り立つ |

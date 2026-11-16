@@ -14,6 +14,7 @@ R.<th, s, p> = QQ[]
 h = th / 2
 assert h^2 == h * h and (p/2) * (p/2) == p^2 / 4                                   # 準備の 1・4 行目
 assert s == h - (h - s)                                                            # 上の 1 行目
+assert h - 0 == h                                                                  # 上の 3 行目（real_minus_zero_is_self、a → θ/2）
 assert s == (h - QQ(1)/6 * h^3) + (s - h + QQ(1)/6 * h^3)                          # 下の 1 行目
 assert h - QQ(1)/6 * h^3 + 0 == h * (1 - QQ(1)/6 * h^2)                            # 下の 3 行目
 assert h * (1 - QQ(1)/6 * p^2/4) == h * (1 - p^2/24)                               # 下の 5 行目

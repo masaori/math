@@ -6,12 +6,13 @@
 
 - ファイル: `structured-latex/content/020_critical_point.ts`
 - ブロック: `critical_claim_sinh_at_most_argument_times_cosh`（t ≥ 0 なら sinh t ≤ t cosh t）
-- 範囲: t = 0 の場合と鎖の六行
+- 範囲: t = 0 の場合と鎖の七行
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| 1 行目 sinh t = sinh t − 0・7 行目 t cosh t − 0 = t cosh t（`real_minus_zero_is_self`）、6 行目 t cosh t − 0·cosh t = t cosh t − 0（`real_zero_times_is_zero`） | `check_proof_lines.sage` | QQ[t, s, c]（s は sinh t、c は cosh t）の多項式の等式で厳密に。対照として 0·cosh t を 1·cosh t に取り違えると一致しない | **PASS** | 成り立つ |
 | t = 0 の場合と 2 行目 sinh 0 = 0 | `check_proof_lines.sage` | ボールが 0 を含む | **PASS** | 成り立つ |
 | 3・5 行目 (R4) の当てはめ | `check_proof_lines.sage` | SR の記号積分で ∫_0^t cosh u du = sinh t - sinh 0、∫_0^t cosh t du = t cosh t - 0·cosh t。導関数は QQ[u] の形式冪級数で | **PASS** | 成り立つ |
 | 4 行目 (R3) の単調性と cosh u ≤ cosh t | `check_proof_lines.sage` | t > 0 の 6 点で [0,t] の 40 等分点の cosh u ≤ cosh t と、鎖の両端 sinh t < t cosh t を具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する | **PASS** | 成り立つ |

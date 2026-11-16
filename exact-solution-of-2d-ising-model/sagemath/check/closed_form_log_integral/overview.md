@@ -12,6 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| 閉形式の鎖の最後の行 2 arcsinh(π/(2δ)) − 0 = 2 arcsinh(π/(2δ))（`real_minus_zero_is_self`） | `check_proof_lines.sage` | QQ[a]（a は 2 arcsinh(π/(2δ)) の不定元）の多項式の等式で厳密に。対照として差の向きを取り違えた 0 − a は a と一致しない | **PASS** | 成り立つ |
 | 準備の鎖 (W/δ)² = … = q² + 1 | `check_proof_lines.sage` | QQ(δ,θ)[W]/(W²-δ²-θ²/4) の等号として厳密に | **PASS** | 成り立つ |
 | √(q²+1) = W/δ と F(0) の鎖の √1 = 1 の行（`sqrt_of_real_one_is_one`） | `check_proof_lines.sage` | 5 点の (δ, θ) で AA の非負の平方根として厳密に | **PASS** | 成り立つ |
 | q' = 1/(2δ) と F' の鎖の六行 | `check_proof_lines.sage` | SR の記号微分を 5 点で QQbar へ送り、2〜6 行目の値と厳密に比べる | **PASS** | 成り立つ |

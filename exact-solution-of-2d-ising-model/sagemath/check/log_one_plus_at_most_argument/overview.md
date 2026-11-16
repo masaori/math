@@ -12,6 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| 積分の鎖の 5 行目 0 − 0 = 0 と最後の鎖の x − 0 = x（`real_minus_zero_is_self`、a → 0、a → x） | `check_proof_lines.sage` | QQ と QQ[x, l] の多項式の等式で厳密に | **PASS** | 成り立つ |
 | 準備の鎖 log(1+0) = log 1 = log(exp 0) = 0 | `check_proof_lines.sage` | 本文の exp の部分和 S_N([0]) が QQ で厳密に 1、Arb の log 1 が厳密に 0 | **PASS** | 成り立つ |
 | H' の鎖の三行と積分の鎖の 2・4 行目（(R4) の当てはめ） | `check_proof_lines.sage` | SR の記号微分・記号積分（x > 0 を仮定） | **PASS** | 成り立つ |
 | 被積分関数の鎖と 3 行目の各点の符号 | `check_proof_lines.sage` | QQ(v) の等号と、[0, x] の 11 点で QQ の大小 | **PASS** | 成り立つ |

@@ -43,6 +43,9 @@ for d0 in [QQ(1)/1000, QQ(1)/100, QQ(1)/10, QQ(1)/2, QQ(1), QQ(5)]:
     assert surely_equal(I, Fpi - 0)                                     # 積分の鎖の両端（(R4) の当てはめ）
     assert surely_equal(Fpi, 2 * log_ball(RBF512.pi()/(2*d0) + (RBF512.pi()^2/(4*d0^2) + 1).sqrt()))   # F(π) を def_arcsinh で
 print("6 点の δ で ∫_0^π dθ/√(δ²+θ²/4) が 2 arcsinh(π/(2δ)) とボールで一致する")
+Ra.<aa> = QQ[]                                                          # aa は 2 arcsinh(π/(2δ)) の不定元
+assert aa - 0 == aa                                                     # 閉形式の鎖の最後の行（real_minus_zero_is_self、a → 2 arcsinh(π/(2δ))）
+assert 0 - aa != aa                                                     # 対照: 差の向きを取り違えると一致しない
 d0 = QQ(1)/10
 I = integral_over_zero_pi(lambda th_, an: 1 / (CBF256(d0^2) + th_^2/4).sqrt(analytic=an))
 assert surely_lt((RBF512.pi() / (2*d0)).arcsinh(), I)

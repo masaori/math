@@ -7,11 +7,17 @@
 # - 不等号の行（(R3) の単調性）は、t > 0 の 6 点で、被積分関数の各点の大小を [0,t] の 40 等分点で本文の exp のボールで確かめ、
 #   鎖の両端をボールで比べる（RealBallField(512)。値が QQ に収まらないため）。
 # - t = 0 の場合と sinh 0 = 0 の行は、ボールが 0 を含むこと（QQ での厳密な確認は sinh_zero の検算）。
+# - 1・6 行目（real_minus_zero_is_self）は、t と s := sinh t を QQ 上の不定元とした多項式環で厳密に。
 load("../../_shared/hyperbolic_by_definition.sage")
 WHICH = "least"
 uu, tt = SR.var('uu tt')
 assert bool(integrate(1, uu, 0, tt) == tt - 0)                        # 2 行目
 assert bool(integrate(cosh(uu), uu, 0, tt) == sinh(tt) - sinh(0))     # 4 行目
+Q.<t, s> = QQ[]
+assert t == t - 0                    # 1 行目（real_minus_zero_is_self、a → t を右辺から左辺へ）
+assert s - 0 == s                    # 6 行目（real_minus_zero_is_self、a → sinh t）
+assert 0 - s != s                    # 対照: 差の向きを取り違えると 6 行目は成り立たない
+print("1・6 行目の等号が QQ[t, s] で成り立つ")
 P.<u> = PolynomialRing(QQ)
 T = lambda p, d: truncate_total_degree(p, d)
 assert u.derivative(u) == 1
