@@ -5,6 +5,7 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-16（並列の連続実行）、「半格子ずれた四つのモード和は同じ積分へ収束する」の合成の段と、それを周期境界の密度・Onsager 表示へつなぐ段を、主経路の `claim_dispersion_product_real_log_sum` の具体版だけを仮定 `hsum` に残す形で Lean 具体版・必要十分版・導出版にした**（`RealEscape/ShiftedModeRiemannSumsOfRealLogSum.lean`）。主経路がその具体版を示したら、`hsum` に当てて三つの本文ブロックの `lean:` を登録すれば並列の表の二行は済む。
 - **2026-11-16（並列の連続実行）、主張「複素根の候補の添字付けは複素根集合への全単射である」（`claim_complex_root_candidates_bijection`）を本文に置き、四層で閉じた。** 写像 $\mathrm{rt}_{L,c}:k\mapsto e_{L,c,k}$ の単射性は「横・縦モードの複素実現は複素根全体への全単射である」の証明の中にしか無かったので切り出し、その証明は $|E_{L,c}|=L$ をこの主張から引く形にした。「半格子ずれた四つのモード和は同じ積分へ収束する」の再添字付けの行は、二つの全単射の合成を根拠に引く。Lean 具体版 `complexRootCandidate_bijOn`・必要十分版 `candidate_bijOn_necSuf`・導出版を登録し、`shiftedModeOf_inj`・`shiftedModeOf_surj` はこの全単射を引く形にした。並列の表の先頭行に残るのは主経路の実対数との合成だけである。
 - **2026-11-16（主経路）、分散因子の有限積の実対数をモードごとの和へ移す主張を Lean 具体版で合成した。** 残るのは必要十分版・導出版である。
 - **2026-11-16（並列の連続実行）、「半格子ずれた四つのモード和は同じ積分へ収束する」の合成の段のうち、主経路の実対数を使わない二段を Lean 具体版・必要十分版・導出版で示した。** 具体版 `modeSum_realizedDispersionLog_eq_sampleSum`（`RealEscape/ShiftedModeSumReindex.lean`）は、モード和 $\sum_{(\varpi,\varsigma)}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))$ を $\Theta_{L,a,b}$ の逆像で $\{0,\dots,L-1\}^2$ へ再添字付けし、角表示と $f_q$ の定義で標本点和 $\sum_{k,l}f_q(t^{a,b}_{L,k,l})$ へ移す（本文の最初の式鎖の二〜四行目）。`halfInvSq_sampleSum_tendsto` は $\frac1{2L^2}\sum f_q(t)\to I/(8\pi^2)$（結論の式鎖の二・三行目）。残るのは主経路の `claim_dispersion_product_real_log_sum` の具体版との合成と `lean:` の登録だけである。
@@ -36,8 +37,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 半格子ずれた Riemann 和: 有限和の等式との合成 | 主経路の実対数との合成だけが残る | 後半の誤差評価は `shiftedAngleRiemannSum_tendsto`（`RealEscape/ShiftedModeRiemannSumErrorEstimate.lean`）、前半のうち実対数を使わない再添字付け・角表示の段 `modeSum_realizedDispersionLog_eq_sampleSum` と結論の式鎖の定数倍の段 `halfInvSq_sampleSum_tendsto`（`RealEscape/ShiftedModeSumReindex.lean`）は Lean 具体版・必要十分版・導出版で済んだ。再添字付けの行が引く $k\mapsto e_{L,c,k}$ の全単射性は主張 `claim_complex_root_candidates_bijection` に切り出して四層で閉じた。残るのは、主経路の `claim_dispersion_product_real_log_sum` の具体版（$L^{-2}\log_{\mathbb R}|\rho(Q^{a,b}_L(q))|=\frac1{2L^2}\sum_m\log_{\mathbb R}\rho(\Delta)$）を `modeSum_realizedDispersionLog_eq_sampleSum` の `hφ` に当てて `halfInvSq_sampleSum_tendsto` と合成し、本文の `lean:` を登録する段だけである。主経路の「分散因子の有限積の実対数をモード和へ移す」の完了を待つ。 |
-| Onsager 閉形式への接続 | 熱力学極限の段の Lean 二版（平方恒等式に依存するもの） | 未着手 | 残るのは、上の行で得る `claim_shifted_mode_riemann_sums` の具体版を `periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits`・`periodicFreeEnergyDensity_onsagerForm_of_modeLimits`（`RealEscape/PeriodicDensityOnsagerOfModeLimits.lean`、Lean 二版と導出版で済み）の仮定 `hmode` に当て、`theorem_periodic_density_onsager_integral` と `claim_onsager_hyperbolic_integral_form` の `lean:` を登録する段だけである。それまでの段の経過は保管庫と git の履歴にある。 |
+| Onsager 閉形式への接続 | 半格子ずれた Riemann 和: 有限和の等式との合成 | 主経路の実対数を当てて `lean:` を登録するだけが残る | 誤差評価 `shiftedAngleRiemannSum_tendsto`、再添字付け・角表示 `modeSum_realizedDispersionLog_eq_sampleSum`、定数倍 `halfInvSq_sampleSum_tendsto`、全単射性 `claim_complex_root_candidates_bijection` は四層で済んだ。これらの合成 `modeLogDensity_tendsto_of_realLogSum`（`RealEscape/ShiftedModeRiemannSumsOfRealLogSum.lean`）も Lean 具体版・必要十分版 `tendsto_of_finiteSumEq_necSuf`・導出版で済み、最初の式鎖の一行目だけを仮定 `hsum`（各 $L\ge1$ で $u_{L,a,b}=\frac1{2L^2}\sum\varphi$ となる和の項 $\varphi$ が在ること）に残す。残るのは、主経路の `claim_dispersion_product_real_log_sum` の具体版から `hsum` を作り、本文 `claim_shifted_mode_riemann_sums` の `lean:` を登録する段だけである。主経路の「分散因子の有限積の実対数の具体版を合成する」の完了を待つ。 |
+| Onsager 閉形式への接続 | 熱力学極限の段の Lean 二版（平方恒等式に依存するもの） | 上の行の `hsum` を当てて `lean:` を登録するだけが残る | 上の行の合成を `hmode` に当てた `periodicFreeEnergyDensity_eq_dispersionIntegral_of_realLogSum`・`periodicFreeEnergyDensity_onsagerForm_of_realLogSum`（同じファイル。導出版は `..._from_necSuf`）で済んだ。残るのは、上の行と同じ `hsum` を当てて `theorem_periodic_density_onsager_integral` と `claim_onsager_hyperbolic_integral_form` の `lean:` を登録する段だけである。それまでの段の経過は保管庫と git の履歴にある。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。
@@ -60,6 +61,7 @@
 - 2026-11-16（主経路の書式統一）: 「全軌道が偶数長なら最小元からの色は一歩ごとに反転する」の証明ブロックで、式鎖と独立した式の行末の句読点を除いた（式と根拠は不変）。
 
 ## 前進の記録
+- 2026-11-16（並列）: 表の二行とも主経路の実対数を待つが、その結果を仮定 `hsum` に残した合成は待たずに書けるので、Riemann 和の合成と周期境界の密度・Onsager 表示への合成を Lean 具体版・必要十分版・導出版で示した（行は消さず、残る登録の段を備考に書いた）。新しい式変形の行は無いので SageMath は足していない（定数の書き換え $(1/(8\pi^2))I=I/(8\pi^2)$ は `check_limit_rewrite_lines.sage` が既に検算している）。
 - 2026-11-16（並列）: 表の先頭「有限和の等式との合成」は主経路の実対数を待つが、備考の「登録の前に再添字付けの行の根拠を直す」は待たずにできるので行い、単射性を主張ブロックへ切り出して四層で閉じた（行は消さず、残る合成の段を備考に書いた）。SageMath は `twisted-modes-complex-roots-bijection` の候補の行を `complex-root-candidates-bijection` へ分けた（両方 PASS）。
 - 2026-11-16: 正の因子の有限積が符号付き多項式値の平方に等しいことから非零性を導き、実対数の補題を合成して `claim_dispersion_product_real_log_sum` を Lean 具体版へ登録した。
 - 2026-11-16: 実対数の行を絶対値から平方への移行、実際の多項式での合成、必要十分版に割った。最初の論法 `realLog_abs_eq_half_realLog_sq` を Lean 具体版で示した。
