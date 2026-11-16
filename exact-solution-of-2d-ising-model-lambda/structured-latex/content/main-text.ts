@@ -86902,6 +86902,7 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 labels: ["claim_dispersion_product_real_log_sum"],
                 habitat: "R",
                 realEscape: "実対数。可算側で正と示した分散因子を実現写像で正の実数へ送り、有限積の実対数を有限和へ移す。",
+                lean: ["Ising2DLambda.RealEscape.dispersion_product_real_log_sum"],
                 verification: ["sagemath/check/dispersion-product-real-log-sum"],
                 statement: [
                   paragraph([
