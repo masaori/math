@@ -3554,43 +3554,6 @@ s_1c_2
 &&(\because\ \text{上の}\ \gamma_2(-\theta)\ \text{の表示})
 \end{aligned}`),
       paragraph([
-        "第五に、",
-        math(String.raw`\sin(\pi/2) = 1`),
-        "・",
-        math(String.raw`\cos(\pi/2) = 0`),
-        " を確かめる。",
-        ref("arcsin_is_bijection"),
-        " の ",
-        math(String.raw`\pi`),
-        " について ",
-        math(String.raw`\arcsin(1) = \pi/2`),
-        " である（",
-        ref("arcsin_of_one_is_half_pi"),
-        "。",
-        math(String.raw`\pi \in \mathbb{R}`),
-        " を使うのは、弧の長さが実数だからである）。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\sin(\pi/2)
-&= \sin(\arcsin(1))
-&&(\because\ \blkref{arcsin_of_one_is_half_pi})\\
-&= 1
-&&(\because\ \pi/2 = \arcsin(1) \in [-\pi/2,\pi/2]\ (\blkref{arcsin_is_bijection}\ \text{の値域})\ \text{で}\ \blkref{def_sin}\ \text{の}\ y\ \text{はただ一つ。}\arcsin(1) = \pi/2\ \text{なので}\ y = 1)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\cos(\pi/2)
-&= \sqrt{1-(\sin(\pi/2))^2}^{(\mathbb{R}_{\geq 0})}
-&&(\because\ \blkref{def_cos})\\
-&= \sqrt{1-1^2}^{(\mathbb{R}_{\geq 0})}
-&&(\because\ \text{上の}\ \sin(\pi/2) = 1)\\
-&= \sqrt{1-1}^{(\mathbb{R}_{\geq 0})}
-&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ \text{の}\ m \to 2\bigr)\\
-&= \sqrt{0}^{(\mathbb{R}_{\geq 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
-&= 0
-&&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
-\end{aligned}`),
-      paragraph([
         "(1) 主張 (1) の左辺から始める。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -3879,9 +3842,9 @@ s_1c_2
 &= \bigl(\left|\gamma_2(\theta)\right|\cos\tfrac{\pi}{2},\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
 &&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
-&&(\because\ \text{準備の}\ \cos(\pi/2) = 0)\\
+&&(\because\ \blkref{cosine_of_half_pi_is_zero})\\
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
-&&(\because\ \text{準備の}\ \sin(\pi/2) = 1)\\
+&&(\because\ \blkref{sine_of_half_pi_is_one})\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right|,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ xy = yx\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\ \text{と}\ y \to 0,\ y \to 1\ \text{を 2 成分へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
@@ -3934,6 +3897,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第五の末尾の地の文「pi_is_positive の 0 < π より 0 ≤ 0 − 2·0·π < 2π と 0 ≤ π − 2·0·π < 2π が成り立つので、angle_section_existence_uniqueness の整数は角度 0 と π のどちらについても 0」（π < 2π と π − 2·0·π = π が書かれていなかった）を消し、(3)(4)(5) の鎖の前の段落の「整数は準備により 0」を、角度 0 は angle_section_integer_of_zero_is_zero、角度 π は新しく足した angle_section_integer_of_pi_is_zero の参照に替えた。(3) の鎖の section_of_angle_representation の行と (5) の sqrt_expansion_via_polar の行に angle_section_integer_of_pi_is_zero を、(4) の sqrt_expansion_via_polar の行に angle_section_integer_of_zero_is_zero を添えた。式の両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の最後の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p22)）: (4) の主の鎖の 0/2 = 0 の行（real_zero_divided_is_zero、x → 2）の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式と主張は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: (5) の主の鎖の根拠「準備の cos(π/2) = 0」「準備の sin(π/2) = 1」が証明の中の準備を指していたので、準備の第五の 2 本の鎖を主張 sine_of_half_pi_is_one・cosine_of_half_pi_is_zero（020_critical_point.ts）へ移し、2 行の根拠をその参照にした。準備の第五は 2 本の鎖だけだったので段落ごと外した。式の両端と主張は不変。",
       ],
     },
   },

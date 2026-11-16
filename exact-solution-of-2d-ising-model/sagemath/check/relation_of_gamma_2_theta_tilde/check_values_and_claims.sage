@@ -5,15 +5,10 @@ load("_prelude.sage")
 
 rep = Report("relation_of_gamma_2_theta_tilde: 具体の値と主張")
 
-# ---- 準備の第五: sin(π/2) = 1、cos(π/2) = 0、0 < π（pi_is_positive）、(3)(4)(5) が引く角度 0・π の整数（arctan 0 = 0 は主張 arctan_zero の検算 sagemath/check/arctan_zero/） ----
-rep.check(bool(arcsin(SR(1)) == pi / 2), "Sage の arcsin(1) = π/2（π の定め方）")
-rep.check(cos_sin(pi_ / 2) == (AA(0), AA(1)), "cos(π/2) = 0、sin(π/2) = 1（1 の 4 乗根の実部・虚部）")
-rep.check(AA(1)**2 == 1, "cos(π/2) の鎖 第 3 行: √(1 - 1^2) = √(1 - 1)（power_of_real_one_is_one の m → 2）")
-rep.check(AA(1) - AA(1) == 0, "cos(π/2) の鎖 第 4 行: √(1 - 1) = √0（ℝ で a - a = 0 の a → 1）")
-rep.check(sqrt_aa(AA(0)) == 0, "cos(π/2) の鎖 第 5 行: √0 = 0（sqrt_of_real_zero_is_zero。検算 sagemath/check/sqrt_of_real_zero_is_zero/）")
-rep.check(1 - AA(1)**2 != 1 - AA(2)**2 and AA(2) - AA(1) != 0, "cos(π/2) の鎖 否定の対照: 1^2 を 2^2 に、a - a を 2 - 1 に取り違えると等号が崩れる")
+# ---- (5) の主の鎖が引く sin(π/2) = 1・cos(π/2) = 0（主張 sine_of_half_pi_is_one・cosine_of_half_pi_is_zero の参照。鎖の検算は同名のラベルのディレクトリ）、(3)(4)(5) が引く角度 0・π の整数（arctan 0 = 0 は主張 arctan_zero の検算 sagemath/check/arctan_zero/） ----
+rep.check(cos_sin(pi_ / 2) == (AA(0), AA(1)), "cos(π/2) = 0、sin(π/2) = 1（cosine_of_half_pi_is_zero・sine_of_half_pi_is_one の値。1 の 4 乗根の実部・虚部）")
 rep.check(cos_sin(Ang(0)) == (AA(1), AA(0)), "cos 0 = 1、sin 0 = 0")
-rep.check(bool(pi > 0) and RealBallField(256)(0) < RealBallField(256).pi(), "0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_positive/）")
+rep.check(bool(pi > 0) and RealBallField(256)(0) < RealBallField(256).pi(), "0 < π（angle_section_integer_of_pi_is_zero が引く pi_is_positive の値。鎖の検算は sagemath/check/pi_is_positive/）")
 rep.check(Ang(0) + pi_ == pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）")
 rep.check(Ang(1) + pi_ != pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π")
 rep.check(n_of_section(Ang(0)) == 0 and n_of_section(pi_) == 0, "(3)(4)(5) が引く角度 0 と π の angle_section_existence_uniqueness の整数は 0（主張 angle_section_integer_of_zero_is_zero・angle_section_integer_of_pi_is_zero の参照。鎖の検算はそれぞれのラベルのディレクトリ）")

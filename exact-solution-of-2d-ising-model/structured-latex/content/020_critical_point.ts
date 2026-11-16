@@ -1813,6 +1813,98 @@ t
   },
 
   {
+    id: "critical_claim_sine_of_half_pi_is_one",
+    kind: "claim",
+    title: { tex: String.raw`\sin(\pi/2) = 1` },
+    labels: ["sine_of_half_pi_is_one"],
+    statement: [
+      paragraph([
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " と ",
+        ref("arcsin_is_bijection"),
+        " の ",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\sin(\pi/2) = 1`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\sin`),
+        " の定義域と ",
+        math(String.raw`\pi`),
+        " が実数だからである）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\sin(\pi/2)
+&= \sin(\arcsin(1))
+&&(\because\ \blkref{arcsin_of_one_is_half_pi}\ \text{を右辺から左辺へ})\\
+&= 1
+&&(\because\ \pi/2 = \arcsin(1) \in [-\pi/2,\pi/2]\ (\blkref{arcsin_is_bijection}\ \text{の値域})\ \text{で}\ \blkref{def_sin}\ \text{の}\ y\ \text{はただ一つ。}\arcsin(1) = \pi/2\ \text{なので}\ y = 1)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: relation_of_gamma_2_theta_tilde の準備の第五にあった sin(π/2) = 1 の鎖を独立の主張にした。1 行目の根拠に「右辺から左辺へ」を添えた（式は不変）。(5) の主の鎖が引く。",
+        "四層のうち記述と SageMath まで。Lean は置かない: 本文の sin は弧の長さで定めた arcsin の逆で、Lean の Real.sin・Real.pi とは定義が違い、本文の弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない（arcsin_of_one_is_half_pi と同じ理由）。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosine_of_half_pi_is_zero",
+    kind: "claim",
+    title: { tex: String.raw`\cos(\pi/2) = 0` },
+    labels: ["cosine_of_half_pi_is_zero"],
+    statement: [
+      paragraph([
+        ref("def_cos"),
+        " の ",
+        math(String.raw`\cos`),
+        " と ",
+        ref("arcsin_is_bijection"),
+        " の ",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\cos(\pi/2) = 0`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cos`),
+        " の定義域と ",
+        math(String.raw`\pi`),
+        " が実数だからである）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\cos(\pi/2)
+&= \sqrt{1-(\sin(\pi/2))^2}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \blkref{def_cos}\ \text{の}\ \theta \to \pi/2\text{。}\pi/2 = \arcsin(1) \in [-\pi/2,\pi/2]\ \text{は}\ \blkref{arcsin_of_one_is_half_pi}\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の値域}\bigr)\\
+&= \sqrt{1-1^2}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \blkref{sine_of_half_pi_is_one})\\
+&= \sqrt{1-1}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \blkref{power_of_real_one_is_one}\ \text{の}\ m \to 2\bigr)\\
+&= \sqrt{0}^{(\mathbb{R}_{\geq 0})}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a - a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 1\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{sqrt_of_real_zero_is_zero}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: relation_of_gamma_2_theta_tilde の準備の第五にあった cos(π/2) = 0 の鎖を独立の主張にした。1 行目の根拠に、def_cos の定義域に π/2 が入る理由（arcsin_of_one_is_half_pi と arcsin_is_bijection の値域）を足し、2 行目の「上の sin(π/2) = 1」を sine_of_half_pi_is_one の参照にした。値と鎖の式は不変。",
+        "四層のうち記述と SageMath まで。Lean は置かない（sine_of_half_pi_is_one と同じ理由）。",
+      ],
+    },
+  },
+
+  {
     id: "critical_claim_cosine_at_most_one",
     kind: "claim",
     title: { tex: String.raw`\cos v \leq 1` },

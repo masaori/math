@@ -1,12 +1,7 @@
 == relation_of_gamma_2_theta_tilde: 具体の値と主張
-PASS Sage の arcsin(1) = π/2（π の定め方）
-PASS cos(π/2) = 0、sin(π/2) = 1（1 の 4 乗根の実部・虚部）
-PASS cos(π/2) の鎖 第 3 行: √(1 - 1^2) = √(1 - 1)（power_of_real_one_is_one の m → 2）
-PASS cos(π/2) の鎖 第 4 行: √(1 - 1) = √0（ℝ で a - a = 0 の a → 1）
-PASS cos(π/2) の鎖 第 5 行: √0 = 0（sqrt_of_real_zero_is_zero。検算 sagemath/check/sqrt_of_real_zero_is_zero/）
-PASS cos(π/2) の鎖 否定の対照: 1^2 を 2^2 に、a - a を 2 - 1 に取り違えると等号が崩れる
+PASS cos(π/2) = 0、sin(π/2) = 1（cosine_of_half_pi_is_zero・sine_of_half_pi_is_one の値。1 の 4 乗根の実部・虚部）
 PASS cos 0 = 1、sin 0 = 0
-PASS 0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_positive/）
+PASS 0 < π（angle_section_integer_of_pi_is_zero が引く pi_is_positive の値。鎖の検算は sagemath/check/pi_is_positive/）
 PASS (3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）
 PASS (3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π
 PASS (3)(4)(5) が引く角度 0 と π の angle_section_existence_uniqueness の整数は 0（主張 angle_section_integer_of_zero_is_zero・angle_section_integer_of_pi_is_zero の参照。鎖の検算はそれぞれのラベルのディレクトリ）
@@ -14,5 +9,5 @@ PASS (4) の主の鎖 0/2 = 0 の行: 2 = 1 + 1（def_real_two）
 PASS (4) の主の鎖 0/2 = 0 の行: 2 ≠ 0（real_two_is_nonzero。real_zero_divided_is_zero の前提 x ≠ 0 の x → 2）
 PASS 具体の組の数: 結合定数 4 組 × M_col = 2..8 の全 μ = 140 組
 PASS 全ての組で全ての行が一致
--- relation_of_gamma_2_theta_tilde: 具体の値と主張: 15/15 PASS
+-- relation_of_gamma_2_theta_tilde: 具体の値と主張: 10/10 PASS
 RESULT: PASS
