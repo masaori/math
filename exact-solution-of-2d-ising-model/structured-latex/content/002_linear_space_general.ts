@@ -8552,40 +8552,32 @@ u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
         "）による。",
         math(String.raw`K=\mathbb{R}`),
         " のときは、",
+        math(String.raw`x,y\in\mathbb{R}`),
+        " について ",
         ref("inclusion_rr_to_cc"),
         " の ",
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
-        " が和と積を保つこと",
+        " が和と積を保つこと（",
+        ref("real_inclusion_preserves_sum"),
+        "・",
+        ref("real_inclusion_preserves_product"),
+        " の ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}:=\iota_{\mathbb{R}\to\mathbb{C}}(r)`),
+        " である）",
       ]),
       displayMath(
-        String.raw`\begin{aligned}
-\iota_{\mathbb{R}\to\mathbb{C}}(x)+\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)+(y,0)
-&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
-&= (x+y,0)
-&&(\because \text{複素数の和の定め方}) \\
-&= \iota_{\mathbb{R}\to\mathbb{C}}(x+y)
-&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
-\end{aligned}`,
+        String.raw`\iota_{\mathbb{R}\to\mathbb{C}}(x)+\iota_{\mathbb{R}\to\mathbb{C}}(y)
+= \iota_{\mathbb{R}\to\mathbb{C}}(x+y)
+\quad (\because\ \blkref{real_inclusion_preserves_sum}\ (a \to x,\ b \to y))`,
       ),
       displayMath(
-        String.raw`\begin{aligned}
-\iota_{\mathbb{R}\to\mathbb{C}}(x)\cdot\iota_{\mathbb{R}\to\mathbb{C}}(y)
-&= (x,0)\cdot(y,0)
-&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方}) \\
-&= (xy-0\cdot 0,\ x\cdot 0+0\cdot y)
-&&(\because \text{複素数の積の定め方}) \\
-&= (xy-0\cdot 0,\ 0+0\cdot y)
-&&(\because \blkref{real_times_zero_is_zero}\ (x \to x)) \\
-&= (xy-0,\ 0+0)
-&&(\because \blkref{real_zero_times_is_zero}\ \text{を 2 箇所へ}\ (x \to 0,\ x \to y)) \\
-&= (xy,\ 0+0)
-&&(\because \blkref{real_minus_zero_is_self}\ (a \to xy)) \\
-&= (xy,0)
-&&(\because \mathbb{R}\ \text{で}\ 0 + 0 = 0) \\
-&= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
-&&(\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ の定め方})
-\end{aligned}`,
+        String.raw`\iota_{\mathbb{R}\to\mathbb{C}}(x)\,\iota_{\mathbb{R}\to\mathbb{C}}(y)
+= \iota_{\mathbb{R}\to\mathbb{C}}(xy)
+\quad (\because\ \blkref{real_inclusion_preserves_product}\ (a \to x,\ b \to y))`,
       ),
       paragraph([
         "と ",
@@ -8889,6 +8881,7 @@ R^2
           "散文段落に置かれていたので、その行の末尾の (∵ …) へ移した" +
           "（Step 3 の c=-1 と |-1|=1 の参照を含む）。内容と根拠は変えていない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 1 の ι_{ℝ→ℂ} が積を保つ鎖の 3 行目の名前だけの根拠「0 を掛けた項が消えること」（0 を掛けると 0・xy − 0 = xy・0 + 0 = 0 を 1 行で使っていた）を、real_times_zero_is_zero（x → x）・real_zero_times_is_zero を 2 箇所へ（x → 0, y）・real_minus_zero_is_self（a → xy）・「ℝ で 0 + 0 = 0」の 4 行に割った（鎖の両端は不変）。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: Step 1 の ι_{ℝ→ℂ} が和と積を保つ 2 つの鎖は、根拠が「ι_{ℝ→ℂ} の定め方」「複素数の和（積）の定め方」の名前だけで、和の鎖は (x,0)+(y,0) = (x+y,0) の行で definition_of_cc の和と ℝ の 0 + 0 = 0 の 2 つの事実を使っていた。2 つの鎖は本文で証明済みの real_inclusion_preserves_sum・real_inclusion_preserves_product（いずれも a → x, b → y）の証明と同じ計算なので、鎖を外して 1 行ずつその参照にした（2 つの等式と Step 1 の結論は不変）。",
       ],
     },
   },

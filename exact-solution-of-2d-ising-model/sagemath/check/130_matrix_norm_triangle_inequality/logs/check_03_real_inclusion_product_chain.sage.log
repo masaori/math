@@ -1,3 +1,0 @@
-checked the chain of 8 terms with indeterminates x, y
-negative control: (x,1)·(y,0) != ι(xy)
-RESULT: PASS
