@@ -908,7 +908,7 @@ I^*
 &= (0,-(-1))
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= (0,1)
-&&(\because\ \mathbb{R}\ \text{で}\ -(-1) = 1)\\
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to 1)\bigr)\\
 &= i
 &&(\because\ \blkref{def_imaginary_unit})
 \end{aligned}`),
@@ -938,6 +938,7 @@ I^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
         "2026-11-13: σ^y の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の 2 本の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（\\bar i の鎖は 6 行から 11 行、\\overline{-i} の鎖は 7 行から 12 行）。\\bar i の鎖は relation_of_gamma_2_theta_tilde の「第二に」と同じ形に揃えた。両端と主張は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 準備の \\overline{-i} の鎖の 11 行目の根拠「ℝ で −(−1) = 1」（名前だけ）を、計算公式の章の主張 real_double_negation（a → 1）の参照に替えた。式と主張は不変。",
       ],
     },
   },

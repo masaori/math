@@ -20,6 +20,7 @@
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
 
 namespace Ising2D
 
@@ -128,7 +129,7 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
     _ = (starRingEnd ℂ) (⟨0, -1⟩ : ℂ) := rfl                  -- `star` を `starRingEnd ℂ` と読む
     _ = (⟨0, -(-1)⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                                -- 10 行目: `def_complex_conjugate`
-    _ = (⟨0, 1⟩ : ℂ) := by rw [neg_neg]                       -- 11 行目: ℝ で `-(-1) = 1`
+    _ = (⟨0, 1⟩ : ℂ) := by rw [real_double_negation 1]        -- 11 行目: `real_double_negation`（`a → 1`）
     _ = Complex.I := rfl                                       -- 12 行目: `def_imaginary_unit` の `i := (0,1)`
 
 /-- 人手 `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`。 -/

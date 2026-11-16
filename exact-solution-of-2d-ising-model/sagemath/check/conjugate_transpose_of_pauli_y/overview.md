@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備の `\bar i = -i` の 11 行 | `check_chain.sage` | 11 段（`i := (0,1)`・`def_complex_conjugate`・ℝ の乗法の単位元・ℝ の加法の単位元・`real_minus_zero_is_self`・`real_times_zero_is_zero` を 2 箇所へ・`real_zero_times_is_zero`・`definition_of_cc` の積・`(-1)_ℂ = (-1,0)`・`i := (0,1)`・`multiply_by_minus_one`） | **PASS** | 成り立つ |
-| 準備の `\overline{-i} = i` の 12 行 | `check_chain.sage` | 12 段（`multiply_by_minus_one`・`i := (0,1)`・`(-1)_ℂ = (-1,0)`・`definition_of_cc` の積・`real_zero_times_is_zero`・`real_times_zero_is_zero` を 2 箇所へ・`real_minus_zero_is_self`・ℝ の加法の単位元・ℝ の乗法の単位元・`def_complex_conjugate`・ℝ で `-(-1) = 1`・`i := (0,1)`） | **PASS** | 成り立つ |
+| 準備の `\overline{-i} = i` の 12 行 | `check_chain.sage` | 12 段（`multiply_by_minus_one`・`i := (0,1)`・`(-1)_ℂ = (-1,0)`・`definition_of_cc` の積・`real_zero_times_is_zero`・`real_times_zero_is_zero` を 2 箇所へ・`real_minus_zero_is_self`・ℝ の加法の単位元・ℝ の乗法の単位元・`def_complex_conjugate`・`real_double_negation`（`a → 1`）・`i := (0,1)`） | **PASS** | 成り立つ |
 | 主の鎖の全行 | `check_chain.sage` | 6 段。`body_star` が Sage の `conjugate_transpose()` と一致することを見てから使う。対照 1 件: 共役を落とした転置は `σ^y` と異なる | **PASS** | 成り立つ |
 
 共通の準備は `sagemath/_shared/hermitian_forms_by_definition.sage`（`body_star`: `def_hermitian_positive_definite` の

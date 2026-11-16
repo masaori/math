@@ -49,7 +49,7 @@ prep_mi = [
     c((R(0), R(-1) * R(1))),               # 0 は ℝ の加法の単位元
     c((R(0), R(-1))),                      # 1 は ℝ の乗法の単位元
     (R(0), -R(-1)),                        # def_complex_conjugate
-    (R(0), R(1)),                          # ℝ で -(-1) = 1
+    (R(0), R(1)),                          # real_double_negation（a → 1）
     i_pair,                                # i := (0,1)
 ]
 check_chain(prep_mi, "conjugate_transpose_of_pauli_y 準備 conj(-i)")
