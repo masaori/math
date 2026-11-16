@@ -10117,19 +10117,19 @@ r_\sigma(b)\bmod2&=0\bmod2&&\bigl(\because\ r_\sigma(b)=0\text{ の代入}\bigr)
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[1]}(i)&=\sigma^{[0]}(\sigma(i))
 &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
-&=\sigma(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+&=\sigma(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\sigma(i)\in\operatorname{Orb}_\sigma(i)
-\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の順向きの証人 }1\bigr).`),
+\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の順向きの証人 }1\bigr)`),
                 displayMath(String.raw`\begin{aligned}
-m_\sigma(\sigma(i))&=b&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\text{ の証明の軌道内の最小元の一致}\bigr),\\
+m_\sigma(\sigma(i))&=b&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\text{ の証明の軌道内の最小元の一致}\bigr)\\
 p_\sigma(m_\sigma(\sigma(i)))&=p_\sigma(b)
 &&\bigl(\because\ m_\sigma(\sigma(i))=b\text{ の代入}\bigr)\\
-&=p&&\bigl(\because\ p\text{ の略記}\bigr).
+&=p&&\bigl(\because\ p\text{ の略記}\bigr)
 \end{aligned}`),
                 paragraph(["以下 ", math(String.raw`r:=r_\sigma(i)\in\mathbb N`), "、", math(String.raw`t:=r_\sigma(\sigma(i))\in\mathbb N`), " と略す。定義の座標条件を同じ最小元へ書き換えると、"]),
                 displayMath(String.raw`r<p,\quad t<p
-\qquad\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標の範囲と上の周期の等号}\bigr),`),
+\qquad\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標の範囲と上の周期の等号}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[t]}(b)&=\sigma^{[t]}(m_\sigma(\sigma(i)))
 &&\bigl(\because\ m_\sigma(\sigma(i))=b\text{ の代入}\bigr)\\
@@ -10139,46 +10139,46 @@ p_\sigma(m_\sigma(\sigma(i)))&=p_\sigma(b)
 &=\sigma^{[r]}(\sigma(b))
 &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の準備の可換性}\bigr)\\
 &=\sigma^{[r+1]}(b)
-&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)
 \end{aligned}`),
                 paragraph(["また、"]),
                 displayMath(String.raw`\begin{aligned}
 p\bmod2&=\operatorname{len}_\sigma(b)\bmod2
 &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_enumeration}\text{ の周期と長さの一致}\bigr)\\
-&=0&&\bigl(\because\ \text{全軌道が偶数長という仮定を }b\text{ に適用}\bigr).
+&=0&&\bigl(\because\ \text{全軌道が偶数長という仮定を }b\text{ に適用}\bigr)
 \end{aligned}`),
                 paragraph(["非末端の場合、すなわち ", math(String.raw`r+1<p`), " の場合には、上の反復値の等号から、"]),
-                displayMath(String.raw`t=r+1\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ r+1<p\bigr).`),
+                displayMath(String.raw`t=r+1\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ r+1<p\bigr)`),
                 paragraph(["余り ", math(String.raw`r\bmod2`), " は零か一である。零の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
 t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
 &=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
 &=(0+1)\bmod2&&\bigl(\because\ r\bmod2=0\text{ の代入}\bigr)\\
-&=1&&\bigl(\because\ \text{自然数の計算}\bigr).
+&=1&&\bigl(\because\ \text{自然数の計算}\bigr)
 \end{aligned}`),
                 paragraph(["一の場合は、"]),
                 displayMath(String.raw`\begin{aligned}
 t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
 &=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
 &=(1+1)\bmod2&&\bigl(\because\ r\bmod2=1\text{ の代入}\bigr)\\
-&=0&&\bigl(\because\ \text{自然数の計算}\bigr).
+&=0&&\bigl(\because\ \text{自然数の計算}\bigr)
 \end{aligned}`),
                 paragraph(["この二場合で ", math(String.raw`t\bmod2=0\Longleftrightarrow r\bmod2\ne0`), " を得る。末端の場合、すなわち ", math(String.raw`\neg(r+1<p)`), " の場合には、"]),
-                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p\text{ と自然数の順序}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \sigma^{[t]}(b)&=\sigma^{[r+1]}(b)&&\bigl(\because\ \text{上で示した一歩の等式}\bigr)\\
 &=\sigma^{[p]}(b)&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
 &=b&&\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還条件}\bigr)\\
-&=\sigma^{[0]}(b)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+&=\sigma^{[0]}(b)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)
 \end{aligned}`),
-                displayMath(String.raw`t=0\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ 0<p\bigr).`),
+                displayMath(String.raw`t=0\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ 0<p\bigr)`),
                 paragraph(["もし ", math(String.raw`r\bmod2=0`), " なら、"]),
                 displayMath(String.raw`\begin{aligned}
 0&=p\bmod2&&\bigl(\because\ p\bmod2=0\text{ の対称性}\bigr)\\
 &=(r+1)\bmod2&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
 &=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
 &=(0+1)\bmod2&&\bigl(\because\ r\bmod2=0\text{ の代入}\bigr)\\
-&=1&&\bigl(\because\ \text{自然数の計算}\bigr).
+&=1&&\bigl(\because\ \text{自然数の計算}\bigr)
 \end{aligned}`),
                 paragraph(["これは ", math(String.raw`0\ne1`), " に反するので ", math(String.raw`r\bmod2\ne0`), " である。一方 ", math(String.raw`t=0`), " より ", math(String.raw`t\bmod2=0`), " である。従って末端でも両辺が真となり、同じ同値を得る。両場合を合わせて、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -10188,7 +10188,7 @@ t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
 &\ \Longleftrightarrow\ r\bmod2\ne0
 &&\bigl(\because\ \text{非末端・末端で示した同値}\bigr)\\
 &\ \Longleftrightarrow\ i\notin C_\sigma
-&&\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義を否定}\bigr).
+&&\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義を否定}\bigr)
 \end{aligned}`),
                 paragraph(["空集合では点 ", math(String.raw`i`), " がないので全称命題は成り立つ。長さ二の軌道では座標零が非末端、座標一が末端に当たり、同じ二場合で閉じる。使った対象は有限集合・自然数・置換の反復だけであり、実数体・複素数体への脱出はない。"]),
               ],
