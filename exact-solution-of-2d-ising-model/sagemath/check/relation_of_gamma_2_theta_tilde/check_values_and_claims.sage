@@ -17,6 +17,8 @@ rep.check(bool(pi > 0) and RealBallField(256)(0) < RealBallField(256).pi(), "0 <
 rep.check(Ang(0) + pi_ == pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）")
 rep.check(Ang(1) + pi_ != pi_, "(3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π")
 rep.check(n_of_section(Ang(0)) == 0 and n_of_section(pi_) == 0, "(3)(4)(5) が引く角度 0 と π の angle_section_existence_uniqueness の整数は 0（主張 angle_section_integer_of_zero_is_zero・angle_section_integer_of_pi_is_zero の参照。鎖の検算はそれぞれのラベルのディレクトリ）")
+rep.check(QQ(1) + QQ(1) == QQ(2), "(4) の主の鎖 0/2 = 0 の行: 2 = 1 + 1（def_real_two）")
+rep.check(QQ(2) != 0, "(4) の主の鎖 0/2 = 0 の行: 2 ≠ 0（real_two_is_nonzero。real_zero_divided_is_zero の前提 x ≠ 0 の x → 2）")
 
 n_cases = 0
 fail_lines = {}
@@ -156,7 +158,7 @@ for (Yv, Zv) in COUPLINGS:
             four_lines = [
                 phi_cartesian((sqrt_aa(r), Ang(0) / 2 - 0 * pi_)),
                 phi_cartesian((absg, Ang(0) / 2 - 0 * pi_)),
-                phi_cartesian((absg, Ang(0) - 0 * pi_)),     # real_zero_divided_is_zero (x → 2, 2 ≠ 0)
+                phi_cartesian((absg, Ang(0) - 0 * pi_)),     # real_zero_divided_is_zero (x → 2。2 は def_real_two の 1 + 1、2 ≠ 0 は real_two_is_nonzero)
                 phi_cartesian((absg, Ang(0) - Ang(0))),      # real_zero_times_is_zero (x → π)
                 phi_cartesian((absg, Ang(0))),               # real_minus_zero_is_self (a → 0)
                 (absg * cos_sin(Ang(0))[0], absg * cos_sin(Ang(0))[1]),

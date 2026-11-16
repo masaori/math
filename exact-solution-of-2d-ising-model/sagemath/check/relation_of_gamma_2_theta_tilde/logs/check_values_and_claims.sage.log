@@ -10,7 +10,9 @@ PASS 0 < π（pi_is_positive の参照。鎖の検算は sagemath/check/pi_is_po
 PASS (3) φ_polar((-r)_C) の鎖 第 12 行: [(r, 0+π)] = [(r, π)]（ℝ で 0 + a = a の a → π。第 11 行 arctan 0 = 0 は sagemath/check/arctan_zero/）
 PASS (3) φ_polar((-r)_C) の鎖 第 12 行 否定の対照: 0 を 1 に取り違えると 1 + π ≠ π
 PASS (3)(4)(5) が引く角度 0 と π の angle_section_existence_uniqueness の整数は 0（主張 angle_section_integer_of_zero_is_zero・angle_section_integer_of_pi_is_zero の参照。鎖の検算はそれぞれのラベルのディレクトリ）
+PASS (4) の主の鎖 0/2 = 0 の行: 2 = 1 + 1（def_real_two）
+PASS (4) の主の鎖 0/2 = 0 の行: 2 ≠ 0（real_two_is_nonzero。real_zero_divided_is_zero の前提 x ≠ 0 の x → 2）
 PASS 具体の組の数: 結合定数 4 組 × M_col = 2..8 の全 μ = 140 組
 PASS 全ての組で全ての行が一致
--- relation_of_gamma_2_theta_tilde: 具体の値と主張: 13/13 PASS
+-- relation_of_gamma_2_theta_tilde: 具体の値と主張: 15/15 PASS
 RESULT: PASS

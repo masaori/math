@@ -3824,7 +3824,7 @@ s_1c_2
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
 &&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\cdot\pi\right)\right]_{\sim}\right)
-&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2,\ 2 \neq 0)\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to 2\text{。}2\ \text{は}\ \blkref{def_real_two}\ \text{の}\ 1 + 1\text{、}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0-0\right)\right]_{\sim}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to \pi)\bigr)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0\right)\right]_{\sim}\right)
@@ -3933,6 +3933,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 「第二に」の \\bar i = −i の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（鎖は 6 行から 11 行）。conjugate_transpose_of_pauli_y の準備の同じ鎖も同じ回に揃えた。両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第五の末尾の地の文「pi_is_positive の 0 < π より 0 ≤ 0 − 2·0·π < 2π と 0 ≤ π − 2·0·π < 2π が成り立つので、angle_section_existence_uniqueness の整数は角度 0 と π のどちらについても 0」（π < 2π と π − 2·0·π = π が書かれていなかった）を消し、(3)(4)(5) の鎖の前の段落の「整数は準備により 0」を、角度 0 は angle_section_integer_of_zero_is_zero、角度 π は新しく足した angle_section_integer_of_pi_is_zero の参照に替えた。(3) の鎖の section_of_angle_representation の行と (5) の sqrt_expansion_via_polar の行に angle_section_integer_of_pi_is_zero を、(4) の sqrt_expansion_via_polar の行に angle_section_integer_of_zero_is_zero を添えた。式の両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の最後の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p22)）: (4) の主の鎖の 0/2 = 0 の行（real_zero_divided_is_zero、x → 2）の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式と主張は不変。",
       ],
     },
   },
