@@ -74,6 +74,7 @@ targets=(
   Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point
   Ising2DLambda.NecSuf.RealEscape.dispersion_minimum_self_dual_point_necSuf
   Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_from_necSuf
+  Ising2DLambda.RealEscape.signedEvenSubgraph_square_eq_dispersion_product
   Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_has_departure
   Ising2DLambda.NecSuf.KacWard.boundary_vertices_covered
   Ising2DLambda.KacWard.crossing_free_contact_split_children
