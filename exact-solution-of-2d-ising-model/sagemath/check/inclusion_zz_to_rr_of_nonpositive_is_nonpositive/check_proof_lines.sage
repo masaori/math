@@ -11,7 +11,7 @@ for m in range(1, 200):
     assert io(m) >= 1                                    # inclusion_zz_to_rr_of_positive_is_at_least_one（n → m）
     assert -io(m) <= QQ(-1); cnt += 1                    # 両辺の符号を反転する
     assert QQ(-1) <= -QQ(0); cnt += 1                    # 1 ≥ 0 の両辺の符号を反転する
-    assert -QQ(0) == QQ(0); cnt += 1                     # -0 = 0
+    assert -QQ(0) == QQ(0); cnt += 1                     # -0 = 0（real_negation_of_zero_is_zero）
     assert io(-m) <= 0; cnt += 1                         # 主張
     assert io(-m) == QQ(-m); cnt += 1                    # 組み込みの埋め込み（別の経路）
 # 否定コントロール: ι(-n) := -ι(n) の節を ι'(-n) := ι(n) に取り違えた写像では、n = -1 で ι'(-1) = 1 > 0 になる

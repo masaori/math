@@ -1505,7 +1505,7 @@ T_B(X - W)
 &\leq -0_{\mathbb{R}}
   &&\bigl(\because\ 1_{\mathbb{R}} \geq 0_{\mathbb{R}}\ \text{の両辺の符号を反転する}\bigr)\\
 &= 0_{\mathbb{R}}
-  &&\bigl(\because\ -0_{\mathbb{R}} = 0_{\mathbb{R}}\bigr)
+  &&\bigl(\because\ \blkref{real_negation_of_zero_is_zero}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -1513,6 +1513,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。limit_of_log_Z_in_N_row がアルキメデス性で取る N_0 ∈ ℤ について、0_ℝ < ι_{ℤ→ℝ}(N_0) から N_0 ∈ ℤ_{≥1} を導く段（この主張の対偶）で引けるよう足した。inclusion_zz_to_rr の負の元の節を使う最初の主張である。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: n = -m の鎖の最後の行 −0_ℝ = 0_ℝ の根拠が式そのものの名前だけだったので、real_negation_of_zero_is_zero の参照に替えた（式と主張は不変）。Lean の具体版の同じ段も mathlib の neg_zero から Ising2D.real_negation_of_zero_is_zero に替えた。",
       ],
     },
   },

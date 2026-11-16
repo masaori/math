@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
 | `n = 0`: `ι(0) = 0 ≤ 0` | `check_proof_lines.sage` | `ι` を定義の再帰（共通の準備 `sagemath/_shared/inclusion_zz_to_rr_by_definition.sage`）で作り、QQ で | **PASS** |
-| `n = -m`: `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `check_proof_lines.sage` | `m = 1..199` で各行を QQ の厳密な比較で（`ι(m) ≥ 1` は `inclusion_zz_to_rr_of_positive_is_at_least_one`）。組み込みの埋め込み `QQ(-m)` との一致 | **PASS** |
+| `n = -m`: `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `check_proof_lines.sage` | `m = 1..199` で各行を QQ の厳密な比較で（`ι(m) ≥ 1` は `inclusion_zz_to_rr_of_positive_is_at_least_one`、`-0 = 0` は `real_negation_of_zero_is_zero`）。組み込みの埋め込み `QQ(-m)` との一致 | **PASS** |
 
 比較は 1196 個。否定コントロール: 定義の負の元の節 `ι(-n) := -ι(n)` を `ι'(-n) := ι(n)` に取り違えた写像では、`ι'(-1) = 1 > 0` になる。
 

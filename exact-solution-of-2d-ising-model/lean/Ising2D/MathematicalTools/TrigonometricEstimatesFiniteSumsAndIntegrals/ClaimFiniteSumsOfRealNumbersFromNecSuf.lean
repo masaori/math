@@ -44,10 +44,10 @@ theorem finite_double_sum_of_real_numbers_interchange_fintype_of_necSuf {κ ι :
   NecSuf.finite_double_sum_interchange' (R := ℝ) a
 
 /-- `finite_sum_of_negated_real_numbers` を `NecSuf.finite_sum_neg_fin'`（係数 `ℝ`）の特殊化として得る。
-二つの仮定は ℝ の `neg_add`（`-(a + b) = -a + -b`）と `neg_zero`（`-0 = 0`）で与える。 -/
+二つの仮定は ℝ の `neg_add`（`-(a + b) = -a + -b`）と、具体版と同じ `real_negation_of_zero_is_zero`（`-0 = 0`）で与える。 -/
 theorem finite_sum_of_negated_real_numbers_of_necSuf (m : ℕ) (x : Fin m → ℝ) :
     ∑ j, -(x j) = -(∑ j, x j) :=
-  NecSuf.finite_sum_neg_fin' (R := ℝ) neg_add neg_zero m x
+  NecSuf.finite_sum_neg_fin' (R := ℝ) neg_add real_negation_of_zero_is_zero m x
 
 /-- `finite_sum_of_real_scalar_multiples` を `NecSuf.finite_sum_mul_left_fin'`（係数 `ℝ`）の特殊化として得る。
 空の和の仮定 `c0 = 0` は ℝ の `mul_zero` で与える。 -/

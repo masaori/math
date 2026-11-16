@@ -33,6 +33,7 @@
   （`calc` は `1 ≤ …` の向きに書くので、人手の行を下から上へ並べている）。
 * `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` は人手と同じく `n = 0` と `n = -m`（`m ∈ ℤ_{≥1}`）の場合分けで、`n = -m` の段は人手の 4 行に、
   `ι(m)` を `ℕ` の埋め込みの形にする 1 段（`inclusion_zz_to_rr_of_natCast`）を足したもの、`n = 0` の段は人手の 2 行に同じ 1 段を足したものである。
+  `n = -m` の鎖の最後の段 `-0_ℝ = 0_ℝ` は人手と同じく `real_negation_of_zero_is_zero`（mathlib の `neg_zero` は使わない）。
 * `inclusion_zz_to_rr_is_monotone_on_nonnegatives` は人手と同じく `k := b − a` を置き、`ι(k) ≥ 0` の 2 つの場合と、`ι(b) ≥ ι(a)` の 4 行の鎖
   （`calc` は `ι(a) ≤ …` の向きに書くので下から上へ）である。
 * 人手の `ℤ` の冪 `def_power_of_integer` は、`ℤ_{≥0}` の元では Lean の `ℕ` の冪で、`a^0 := 1` は `Nat.pow_zero`、`a^{m+1} := a^ma` は `Nat.pow_succ` である。
@@ -43,6 +44,7 @@
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 
 namespace Ising2D
 
@@ -173,7 +175,7 @@ theorem inclusion_zz_to_rr_of_nonpositive_is_nonpositive (n : ℤ) (hn : n ≤ 0
       _ ≤ -1 := neg_le_neg (inclusion_zz_to_rr_of_positive_is_at_least_one k hk1)
                                                                            -- `inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → m`）の両辺の符号を反転する
       _ ≤ -0 := neg_le_neg zero_le_one                                     -- `1_ℝ ≥ 0_ℝ` の両辺の符号を反転する
-      _ = 0 := neg_zero                                                    -- `-0_ℝ = 0_ℝ`
+      _ = 0 := real_negation_of_zero_is_zero                               -- `real_negation_of_zero_is_zero`
   · -- `n = 0` のとき
     calc ((n : ℤ) : ℝ) = (((0 : ℕ) : ℤ) : ℝ) := by rw [hzero]; rfl
       _ = ((0 : ℕ) : ℝ) := inclusion_zz_to_rr_of_natCast 0

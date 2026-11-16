@@ -31,7 +31,7 @@
   帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である。人手の「各 `l` の項へ同時適用」は `Finset.sum_congr` で各項に当てる段である。
   Lean の `p = 0` または `q = 0`（空の和）は人手には無い（`finite_double_sum_of_real_numbers_interchange`）。有限型の添字の二重の和には `_fintype` を置く。
 * `finite_sum_of_negated_real_numbers_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
-  人手の 1 行「ℝ で `(−a) + (−b) = −(a + b)`」は mathlib の `neg_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`）。
+  人手の 1 行「ℝ で `(−a) + (−b) = −(a + b)`」は mathlib の `neg_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`。その段の `-0 = 0` は mathlib の `neg_zero` ではなく `real_negation_of_zero_is_zero`）。
 * `finite_sum_of_real_scalar_multiples_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
   人手の 1 行「ℝ の分配法則 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_scalar_multiples`）。
   有限型の添字の和には、`finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく番号を付けて当てる `finite_sum_of_real_scalar_multiples_fintype` を置く。
@@ -51,6 +51,7 @@
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMap
 
@@ -220,7 +221,7 @@ theorem finite_sum_of_negated_real_numbers_succ (m : ℕ) (x : Fin (m + 1) → �
 theorem finite_sum_of_negated_real_numbers (m : ℕ) (x : Fin m → ℝ) :
     ∑ j, -(x j) = -(∑ j, x j) := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, neg_zero]
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, real_negation_of_zero_is_zero]
   | succ m => exact finite_sum_of_negated_real_numbers_succ m x
 
 /-- **`finite_sum_of_real_scalar_multiples`**（`m + 1` 項）: `Σ_{j=1}^{m+1} c x_j = c Σ_{j=1}^{m+1} x_j`。`m` についての帰納法。 -/
