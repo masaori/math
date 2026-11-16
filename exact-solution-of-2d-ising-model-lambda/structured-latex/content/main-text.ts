@@ -84367,7 +84367,7 @@ Q_L^{0,0}(1)
 &=2\cdot2^N-3\cdot2^N
 &&\bigl(\because\ \blkref{claim_coefficient_representation},\ \blkref{claim_coefficient_sum}\text{ と上の三つの評価}\bigr)\\
 &=-2^N
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                   paragraph([
                     "一方、", ref("claim_signed_even_subgraph_duality_up_to_sign"),
@@ -84381,9 +84381,15 @@ Q_L^{0,0}(1)
 &=\epsilon_L^{0,0}2^NQ_L^{0,0}(0)
 &&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr)\\
 &=\epsilon_L^{0,0}2^N
-&&\bigl(\because\ Q_L^{0,0}(0)=1,\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
+&&\bigl(\because\ Q_L^{0,0}(0)=1,\ \blkref{def_signed_even_subgraph_polynomial}\bigr)
 \end{aligned}`),
-                  paragraph([math(String.raw`Q_L^{0,0}(1)=-2^N`), " と ", math(String.raw`2^N\ne0`), " から ", math(String.raw`\epsilon_L^{0,0}=-1`), " を得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+\epsilon_L^{0,0}
+&=\frac{Q_L^{0,0}(1)}{2^N}
+&&\bigl(\because\ Q_L^{0,0}(1)=\epsilon_L^{0,0}2^N,\ 2^N\ne0,\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr)\\
+&=-1
+&&\bigl(\because\ Q_L^{0,0}(1)=-2^N,\ 2^N\ne0,\ \blkref{claim_finite_torus_polynomial},\ \blkref{claim_coefficient_representation},\ \blkref{claim_coefficient_sum}\bigr)
+\end{aligned}`),
                 ],
               },
             },
