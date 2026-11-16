@@ -87307,18 +87307,36 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                     "小区画内の任意の ", math(String.raw`x`), " に対して各座標の差は ",
                     math(String.raw`h_L\le h_{L_0}<\eta`), " 以下なので、",
                     math(String.raw`|f_q(x)-f_q(t^{a,b}_{L,k,l})|<\varepsilon/(8\pi^2)`),
-                    " である。積分の加法性と絶対値の三角不等式を使うと",
+                    " である。証明の中だけで使う記号として、",
+                    math(String.raw`k,l\in\{0,\ldots,L-1\}`), " と ", math(String.raw`\theta_1\in\mathbb R`), " に対して",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+J_{L,k,l}(g)&:=\int_{kh_L}^{(k+1)h_L}\!\int_{lh_L}^{(l+1)h_L}g(\theta_1,\theta_2)\,d\theta_2\,d\theta_1\qquad(g:\mathbb R^2\to\mathbb R\text{ は連続}),\\
+d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
+\end{aligned}`),
+                  paragraph([
+                    "と置く。連続関数 ", math(String.raw`g`), " の内側の積分 ",
+                    math(String.raw`\theta_1\mapsto\int_{lh_L}^{(l+1)h_L}g(\theta_1,\theta_2)\,d\theta_2`),
+                    " は連続なので、外側の区間積分が定まる。区間積分の性質を一つずつ使うと",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \left|I-h_L^2\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})\right|
-&=\left|\sum_{k,l=0}^{L-1}\int_{C_{L,k,l}}\bigl(f_q(x)-f_q(t^{a,b}_{L,k,l})\bigr)\,dx\right|
-&&\bigl(\because\ C_{L,k,l}\text{ は境界を除き正方形を分割する}\bigr)\\
-&\le\sum_{k,l=0}^{L-1}\int_{C_{L,k,l}}\left|f_q(x)-f_q(t^{a,b}_{L,k,l})\right|\,dx
-&&\bigl(\because\ \text{積分の三角不等式}\bigr)\\
-&\le\frac{\varepsilon}{8\pi^2}\sum_{k,l=0}^{L-1}\operatorname{area}(C_{L,k,l})
-&&\bigl(\because\ \text{各小区画での一様評価と積分の単調性}\bigr)\\
+&=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}(f_q)-\sum_{k,l=0}^{L-1}h_L\,h_L\,f_q(t^{a,b}_{L,k,l})\right|
+&&\bigl(\because\ \text{区間積分の隣接区間での加法性を外側と内側に当てる。}0=0\cdot h_L\text{、}2\pi=Lh_L\bigr)\\
+&=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}(f_q)-\sum_{k,l=0}^{L-1}J_{L,k,l}\bigl(f_q(t^{a,b}_{L,k,l})\bigr)\right|
+&&\bigl(\because\ \text{定数の区間積分は区間の長さ倍、}(k+1)h_L-kh_L=h_L\bigr)\\
+&=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}\bigl(d^{a,b}_{L,k,l}\bigr)\right|
+&&\bigl(\because\ \text{区間積分の線型性を内側と外側に当てる}\bigr)\\
+&\le\sum_{k,l=0}^{L-1}\left|J_{L,k,l}\bigl(d^{a,b}_{L,k,l}\bigr)\right|
+&&\bigl(\because\ \text{有限和の三角不等式}\bigr)\\
+&\le\sum_{k,l=0}^{L-1}\frac{\varepsilon}{8\pi^2}\,h_L\,h_L
+&&\bigl(\because\ C_{L,k,l}\text{ の上で }|d^{a,b}_{L,k,l}|<\varepsilon/(8\pi^2)\text{、区間積分の評価 }\textstyle\bigl|\int_\alpha^\beta g\bigr|\le c(\beta-\alpha)\text{（}|g|\le c\text{）を内側と外側に当てる}\bigr)\\
+&=\frac{\varepsilon}{8\pi^2}\,(Lh_L)^2
+&&\bigl(\because\ L^2\text{ 個の同じ項の和}\bigr)\\
+&=\frac{\varepsilon}{8\pi^2}\,(2\pi)^2
+&&\bigl(\because\ Lh_L=2\pi\bigr)\\
 &=\frac{\varepsilon}{2}
-&&\bigl(\because\ \sum_{k,l}\operatorname{area}(C_{L,k,l})=(2\pi)^2\bigr).
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
 \end{aligned}`),
                   paragraph([
                     "右辺は ", math(String.raw`\varepsilon`), " より小さい。これは任意の ", math(String.raw`\varepsilon>0`), " と全ての ",
