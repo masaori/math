@@ -1,5 +1,5 @@
 /-
-`claim_twisted_modes_complex_roots_bijection` の必要十分版。
+`claim_complex_root_candidates_bijection` と `claim_twisted_modes_complex_roots_bijection` の必要十分版。
 
 具体版と同じ手順（候補 e_0, …, e_{L-1} が E に属すること、e_j = e_k から j - k = nL を経て
 -L < j - k < L・n = 0・j = k を出すこと、E の元が L 個以下なので E = {e_k | k < L}・|E| = L、
@@ -60,6 +60,19 @@ theorem rootSet_eq_candidates_necSuf {γ : Type*} (L : ℕ) (e : ℕ → γ) (E 
   have heq : E = e '' (Finset.range L : Set ℕ) :=
     (Set.eq_of_subset_of_ncard_le hsub (by rw [hcand]; exact ncardLe) finite).symm
   exact ⟨heq, by rw [heq, hcand]⟩
+
+/-- `claim_complex_root_candidates_bijection` の必要十分版: e|_{0,…,L-1} : {0,…,L-1} → E は全単射。
+仮定は mem・period・finite・ncardLe だけで、具体版と同じく、値を E に取ることは mem、単射性は
+period と整数の段、全射性は E = {e_k | k < L} から得る。 -/
+theorem candidate_bijOn_necSuf {γ : Type*} (L : ℕ) (e : ℕ → γ) (E : Set γ)
+    (mem : ∀ k : ℕ, e k ∈ E)
+    (period : ∀ j k : ℕ, e j = e k → ∃ n : ℤ, (j : ℤ) - k = n * L)
+    (finite : E.Finite) (ncardLe : E.ncard ≤ L) :
+    Set.BijOn e (Finset.range L : Set ℕ) E := by
+  obtain ⟨hE, -⟩ := rootSet_eq_candidates_necSuf L e E mem period finite ncardLe
+  refine ⟨fun k _ => mem k, candidate_injOn_necSuf L e period, ?_⟩
+  rw [hE]
+  exact Set.surjOn_image _ _
 
 /-- 必要十分版: f|_U : U → E は全単射。 -/
 theorem bijOn_rootSet_necSuf {α γ : Type*} (L : ℕ) (e : ℕ → γ) (E : Set γ)

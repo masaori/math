@@ -1,4 +1,5 @@
 /-
+`claim_complex_root_candidates_bijection`（複素根の候補の添字付けは複素根集合への全単射である）と
 `claim_twisted_modes_complex_roots_bijection`
 （横・縦モードの複素実現は複素根全体への全単射である）の具体版。
 
@@ -17,8 +18,9 @@ c/2 は `(if c then 1 else 0) / 2` と書く（`KacWard/TwistedModeSets.lean` �
     （ℂ の事実として本文が引く次数による根の個数の上界。ℂ 上の L 乗根の多重集合
     `Polynomial.nthRoots` の大きさが L 以下であることで書く）。
   - L 個の相異なる根 e_{L,c,k} が E_{L,c} に含まれ、E_{L,c} の元は L 個以下なので
-    E_{L,c} = {e_{L,c,k} | 0 ≤ k < L}、|E_{L,c}| = L: `complexRootSet_eq_candidates`・
-    `complexRootSet_ncard`。
+    E_{L,c} = {e_{L,c,k} | 0 ≤ k < L}: `complexRootSet_eq_candidates`。
+    rt_{L,c} は全単射: `complexRootCandidate_bijOn`（ここまでが `claim_complex_root_candidates_bijection`）。
+  - 全単射 rt_{L,c} により |E_{L,c}| = L: `complexRootSet_ncard`。
   - 制限写像の像は E に含まれ（`claim_complex_realization_twisted_modes_are_complex_roots`）、
     単射で（`claim_complex_realization_injective`）、定義域は L 個の元を持つ
     （`claim_twisted_mode_sets_card`）ので、像は E と同じ L 個の元を持ち全射:
@@ -148,10 +150,20 @@ theorem complexRootSet_eq_candidates (L : ℕ) (hL : 0 < L) (c : Bool) :
   rw [complexRootCandidates_ncard L hL c]
   exact complexRootSet_ncard_le L hL c
 
-/-- 本文の |E_{L,c}| = L。 -/
+/-- 本文 `claim_complex_root_candidates_bijection`: rt_{L,c} : {0,…,L-1} → E_{L,c}、k ↦ e_{L,c,k} は
+全単射。値を E に取ることは冪の四行、単射性は周期性と整数の段、全射性は根の個数の上界と
+E = {e_{L,c,k} | 0 ≤ k < L} から。 -/
+theorem complexRootCandidate_bijOn (L : ℕ) (hL : 0 < L) (c : Bool) :
+    Set.BijOn (complexRootCandidate L c) (Finset.range L : Set ℕ) (complexRootSet L c) := by
+  refine ⟨fun k _ => complexRootCandidate_pow L hL c k, complexRootCandidate_injOn L hL c, ?_⟩
+  rw [complexRootSet_eq_candidates L hL c]
+  exact Set.surjOn_image _ _
+
+/-- 本文 `claim_twisted_modes_complex_roots_bijection` の証明の一段落目: 全単射 rt_{L,c} により
+|E_{L,c}| = |{0,…,L-1}| = L。 -/
 theorem complexRootSet_ncard (L : ℕ) (hL : 0 < L) (c : Bool) :
     (complexRootSet L c).ncard = L := by
-  rw [complexRootSet_eq_candidates L hL c, complexRootCandidates_ncard L hL c]
+  rw [← (complexRootCandidate_bijOn L hL c).image_eq, complexRootCandidates_ncard L hL c]
 
 /-- 横・縦のモード集合はどちらも L 個の元を持つ（`claim_twisted_mode_sets_card`。
 ξ^L = -1 の ξ は `claim_antiperiodic_mode_exists` から取る）。 -/

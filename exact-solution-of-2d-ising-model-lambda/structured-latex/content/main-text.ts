@@ -86661,45 +86661,38 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
             },
           },
           {
-            role: "primary",
+            role: "supporting",
             element: {
               kind: "elementGroup",
-              id: "group_of_real_escape_claim_twisted_modes_complex_roots_bijection",
+              id: "group_of_real_escape_claim_complex_root_candidates_bijection",
               focus: {
-                id: "real_escape_claim_twisted_modes_complex_roots_bijection",
+                id: "real_escape_claim_complex_root_candidates_bijection",
                 kind: "claim",
-                title: { text: "横・縦モードの複素実現は複素根全体への全単射である" },
-                labels: ["claim_twisted_modes_complex_roots_bijection"],
+                title: { text: "複素根の候補の添字付けは複素根集合への全単射である" },
+                labels: ["claim_complex_root_candidates_bijection"],
                 habitat: "C",
-                realEscape: "複素実現した有限モードを複素指数関数で表示するため、指数評価として複素数体へ脱出する。固定した代数的原始根の像は指定しない。",
-                verification: ["sagemath/check/twisted-modes-complex-roots-bijection"],
+                realEscape: "1 の冪根を複素指数関数で表示するため、指数評価として複素数体へ脱出する。",
+                verification: ["sagemath/check/complex-root-candidates-bijection"],
                 lean: [
-                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn",
-                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn",
+                  "Ising2DLambda.RealEscape.complexRootCandidate_bijOn",
                   "Ising2DLambda.RealEscape.complexRootSet_eq_candidates",
-                  "Ising2DLambda.NecSuf.RealEscape.bijOn_rootSet_necSuf",
-                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn_from_necSuf",
-                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn_from_necSuf",
+                  "Ising2DLambda.NecSuf.RealEscape.candidate_bijOn_necSuf",
+                  "Ising2DLambda.RealEscape.complexRootCandidate_bijOn_from_necSuf",
                 ],
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
-                    math(String.raw`c\in\{0,1\}`), " に対し、複素根集合を",
+                    math(String.raw`c\in\{0,1\}`), " に対し、複素根集合と候補を",
                   ]),
-                  displayMath(String.raw`E_{L,c}:=\{z\in\mathbb C\mid z^L=(-1)^c\}
-=\left\{\exp\!\left(\frac{2\pi i(k+c/2)}{L}\right)\in\mathbb C\ \middle|\ k\in\{0,\ldots,L-1\}\right\}`),
-                  paragraph([
-                    "と置く。", ref("def_horizontal_twisted_modes"), " の ", math(String.raw`\mathcal U_a`),
-                    " と ", ref("def_vertical_twisted_modes"), " の ", math(String.raw`\mathcal W_b`),
-                    " について、", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal U_a}:\mathcal U_a\to E_{L,a}`),
-                    " および ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal W_b}:\mathcal W_b\to E_{L,b}`),
-                    " はそれぞれ全単射である。ここで ", math(String.raw`(a,b)\in\mathcal S`), " とする。",
-                  ]),
+                  displayMath(String.raw`E_{L,c}:=\{z\in\mathbb C\mid z^L=(-1)^c\},\qquad
+e_{L,c,k}:=\exp\!\left(\frac{2\pi i(k+c/2)}{L}\right)\in\mathbb C\quad(k\in\{0,\ldots,L-1\})`),
+                  paragraph(["と置く。このとき写像"]),
+                  displayMath(String.raw`\mathrm{rt}_{L,c}:\{0,\ldots,L-1\}\longrightarrow E_{L,c},\qquad k\longmapsto e_{L,c,k}`),
+                  paragraph(["は値を ", math(String.raw`E_{L,c}`), " に取り、全単射である。"]),
                 ],
                 proof: [
                   paragraph([
-                    "まず ", math(String.raw`k\in\{0,\ldots,L-1\}`), " に対し ",
-                    math(String.raw`e_{L,c,k}:=\exp(2\pi i(k+c/2)/L)\in\mathbb C`), " と置く。複素指数関数の加法法則から",
+                    "任意の ", math(String.raw`k\in\{0,\ldots,L-1\}`), " について、複素指数関数の加法法則から",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 e_{L,c,k}^{L}
@@ -86709,7 +86702,8 @@ e_{L,c,k}^{L}
 &=(-1)^c&&\bigl(\because\ c\in\{0,1\},\ \exp(0)=1,\ \exp(\pi i)=-1\bigr).
 \end{aligned}`),
                   paragraph([
-                    "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " である。",
+                    "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " であり、",
+                    math(String.raw`\mathrm{rt}_{L,c}`), " は値を ", math(String.raw`E_{L,c}`), " に取る。",
                     math(String.raw`j,k\in\{0,\ldots,L-1\}`), " が ",
                     math(String.raw`e_{L,c,j}=e_{L,c,k}`), " を満たすとする。",
                     "複素指数関数の周期性（", math(String.raw`s,t\in\mathbb C`), " が ",
@@ -86735,19 +86729,63 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                     math(String.raw`j-k=nL`), " なので ", math(String.raw`-L<nL<L`),
                     " であり、", math(String.raw`L>0`), " で割って ", math(String.raw`-1<n<1`),
                     " である。この区間に属する整数は零だけなので ", math(String.raw`n=0`),
-                    "、", math(String.raw`j=k+0L=k`), " である。よってこれらは相異なる ",
-                    math(String.raw`L`), " 個の根である。",
+                    "、", math(String.raw`j=k+0L=k`), " である。従って ",
+                    math(String.raw`\mathrm{rt}_{L,c}`), " は単射である。",
                   ]),
                   paragraph([
                     math(String.raw`X^L-(-1)^c\in\mathbb C[X]`), " は零でない次数 ",
                     math(String.raw`L`), " の多項式なので、異なる複素根を ",
                     math(String.raw`L`), " 個より多く持たない。従って ", math(String.raw`E_{L,c}`),
                     " は有限集合で、元は ", math(String.raw`L`), " 個以下である。",
-                    math(String.raw`\{e_{L,c,k}\mid 0\le k<L\}`), " は ", math(String.raw`E_{L,c}`),
-                    " の部分集合で ", math(String.raw`L`), " 個の元を持つ。",
-                    "有限集合の部分集合の元の個数が全体の元の個数以上なら、部分集合は全体に一致する。従って ",
-                    math(String.raw`E_{L,c}=\{e_{L,c,k}\mid 0\le k<L\}`), " かつ ",
-                    math(String.raw`|E_{L,c}|=L`), " である。",
+                    math(String.raw`\mathrm{rt}_{L,c}`), " は単射なので、像 ",
+                    math(String.raw`\{e_{L,c,k}\mid 0\le k<L\}`), " は ", math(String.raw`L`),
+                    " 個の元を持つ ", math(String.raw`E_{L,c}`), " の部分集合である。",
+                    "有限集合の部分集合の元の個数が全体の元の個数以上なら、部分集合は全体に一致する。従って像は ",
+                    math(String.raw`E_{L,c}`), " に一致し、", math(String.raw`\mathrm{rt}_{L,c}`),
+                    " は全射である。よって全単射である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_twisted_modes_complex_roots_bijection",
+              focus: {
+                id: "real_escape_claim_twisted_modes_complex_roots_bijection",
+                kind: "claim",
+                title: { text: "横・縦モードの複素実現は複素根全体への全単射である" },
+                labels: ["claim_twisted_modes_complex_roots_bijection"],
+                habitat: "C",
+                realEscape: "代数的な有限モードを複素実現し、複素数体の中の複素根集合へ送る。固定した代数的原始根の像は指定しない。",
+                verification: ["sagemath/check/twisted-modes-complex-roots-bijection"],
+                lean: [
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn",
+                  "Ising2DLambda.NecSuf.RealEscape.bijOn_rootSet_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_horizontal_bijOn_from_necSuf",
+                  "Ising2DLambda.RealEscape.complexAlgebraicRealization_vertical_bijOn_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("claim_complex_root_candidates_bijection"),
+                    " の複素根集合 ", math(String.raw`E_{L,a},E_{L,b}`), " を使う。",
+                    ref("def_horizontal_twisted_modes"), " の ", math(String.raw`\mathcal U_a`),
+                    " と ", ref("def_vertical_twisted_modes"), " の ", math(String.raw`\mathcal W_b`),
+                    " について、", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal U_a}:\mathcal U_a\to E_{L,a}`),
+                    " および ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal W_b}:\mathcal W_b\to E_{L,b}`),
+                    " はそれぞれ全単射である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`c\in\{0,1\}`), " とする。", ref("claim_complex_root_candidates_bijection"),
+                    " の全単射 ", math(String.raw`\mathrm{rt}_{L,c}:\{0,\ldots,L-1\}\to E_{L,c}`),
+                    " により、", math(String.raw`E_{L,c}`), " は有限集合で ",
+                    math(String.raw`|E_{L,c}|=|\{0,\ldots,L-1\}|=L`), " である。",
                   ]),
                   paragraph([
                     ref("claim_complex_realization_twisted_modes_are_complex_roots"),
@@ -86788,7 +86826,7 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 statement: [
                   paragraph([
                     "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
-                    math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("claim_twisted_modes_complex_roots_bijection"),
+                    math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("claim_complex_root_candidates_bijection"),
                     " の複素根集合を用いて写像",
                   ]),
                   displayMath(String.raw`\Theta_{L,a,b}:\mathcal U_a\times\mathcal W_b\longrightarrow E_{L,a}\times E_{L,b},\qquad
@@ -87278,9 +87316,17 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                 proof: [
                   paragraph([
                     "各 ", math(String.raw`L\ge1`), " と各 ", math(String.raw`k,l\in\{0,\ldots,L-1\}`),
-                    " について、", ref("claim_twisted_mode_product_bijection"), " の全単射による唯一の逆像を ",
+                    " について、", ref("claim_complex_root_candidates_bijection"), " により ",
+                    math(String.raw`(\mathrm{rt}_{L,a}(k),\mathrm{rt}_{L,b}(l))\in E_{L,a}\times E_{L,b}`),
+                    " であり、", ref("claim_twisted_mode_product_bijection"), " の全単射 ",
+                    math(String.raw`\Theta_{L,a,b}`), " によるその唯一の逆像を ",
                     math(String.raw`(\varpi^{a,b}_{L,k,l},\varsigma^{a,b}_{L,k,l})\in\mathcal U_a\times\mathcal W_b`),
-                    " と書く。", ref("claim_dispersion_product_real_log_sum"), " から一続きに計算すると",
+                    " と書く。写像 ",
+                    math(String.raw`\{0,\ldots,L-1\}\times\{0,\ldots,L-1\}\to\mathcal U_a\times\mathcal W_b,\ (k,l)\mapsto(\varpi^{a,b}_{L,k,l},\varsigma^{a,b}_{L,k,l})`),
+                    " は、", ref("claim_complex_root_candidates_bijection"), " の二つの全単射の組 ",
+                    math(String.raw`(k,l)\mapsto(\mathrm{rt}_{L,a}(k),\mathrm{rt}_{L,b}(l))`),
+                    " と ", math(String.raw`\Theta_{L,a,b}`), " の逆写像との合成なので、全単射である。",
+                    ref("claim_dispersion_product_real_log_sum"), " から一続きに計算すると",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
@@ -87289,7 +87335,7 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
 &&\bigl(\because\ \blkref{claim_dispersion_product_real_log_sum}\bigr)\\
 &=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}
 \log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi^{a,b}_{L,k,l},\varsigma^{a,b}_{L,k,l}))
-&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ による再添字付け}\bigr)\\
+&&\bigl(\because\ \blkref{claim_complex_root_candidates_bijection}\text{ と }\blkref{claim_twisted_mode_product_bijection}\text{ の全単射の合成による再添字付け}\bigr)\\
 &=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}\log_{\mathbb R}B_q(t^{a,b}_{L,k,l})
 &&\bigl(\because\ \blkref{claim_dispersion_angle_realization}\bigr)\\
 &=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})

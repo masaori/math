@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-16（並列の連続実行）、主張「複素根の候補の添字付けは複素根集合への全単射である」（`claim_complex_root_candidates_bijection`）を本文に置き、四層で閉じた。** 写像 $\mathrm{rt}_{L,c}:k\mapsto e_{L,c,k}$ の単射性は「横・縦モードの複素実現は複素根全体への全単射である」の証明の中にしか無かったので切り出し、その証明は $|E_{L,c}|=L$ をこの主張から引く形にした。「半格子ずれた四つのモード和は同じ積分へ収束する」の再添字付けの行は、二つの全単射の合成を根拠に引く。Lean 具体版 `complexRootCandidate_bijOn`・必要十分版 `candidate_bijOn_necSuf`・導出版を登録し、`shiftedModeOf_inj`・`shiftedModeOf_surj` はこの全単射を引く形にした。並列の表の先頭行に残るのは主経路の実対数との合成だけである。
 - **2026-11-16（主経路）、符号付き多項式の値の絶対値から平方の実対数へ移す段を Lean 具体版で示した。** 残るのは実際の多項式値の非零性と補題の合成、その後の必要十分版・導出版である。
 - **2026-11-16（並列の連続実行）、「半格子ずれた四つのモード和は同じ積分へ収束する」の合成の段のうち、主経路の実対数を使わない二段を Lean 具体版・必要十分版・導出版で示した。** 具体版 `modeSum_realizedDispersionLog_eq_sampleSum`（`RealEscape/ShiftedModeSumReindex.lean`）は、モード和 $\sum_{(\varpi,\varsigma)}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))$ を $\Theta_{L,a,b}$ の逆像で $\{0,\dots,L-1\}^2$ へ再添字付けし、角表示と $f_q$ の定義で標本点和 $\sum_{k,l}f_q(t^{a,b}_{L,k,l})$ へ移す（本文の最初の式鎖の二〜四行目）。`halfInvSq_sampleSum_tendsto` は $\frac1{2L^2}\sum f_q(t)\to I/(8\pi^2)$（結論の式鎖の二・三行目）。残るのは主経路の `claim_dispersion_product_real_log_sum` の具体版との合成と `lean:` の登録だけである。
 - **2026-11-16（主経路）、正の有限積を実現した後の実対数は各因子の実対数の和であることを Lean 具体版で示した。** 次は符号付き多項式の値の絶対値から平方の実対数へ移し、本文の主張全体を合成する。
 - **2026-11-16（並列の連続実行）、有限トーラス公式「分配多項式は四つの行列式の定数項一の平方根の和の半分である」を Lean 具体版・必要十分版・導出版で示し、本文の `lean:` に登録した。** 具体版 `partitionPolynomial_eq_half_sum_kacWardSquareRoots`（`KacWard/DeterminantSquareRootTorusFormula.lean`）は $Z_L=\frac12(2Z_L)=\frac12\sum Q^{a,b}_L=\frac12\sum S^{a,b}_L$ を本文と同じ三行で示す。必要十分版は乗法のモノイドと加法可換モノイドを別々に持つ型で、仮定は $\frac12\cdot2=1$・送った有限トーラス公式・平方根の一意性だけである。並列の表に残る二行は主経路の実対数の行を待つ。
-- **2026-11-16（主経路）、平方恒等式とモード積を有理点で評価する Lean 具体補題を示した。** 次は正の実現値への有限積の移送と実対数の有限積法則を合成する。本文の主張全体は Lean 未完である。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -37,7 +37,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 半格子ずれた Riemann 和: 有限和の等式との合成 | 主経路の実対数との合成だけが残る | 後半の誤差評価は `shiftedAngleRiemannSum_tendsto`（`RealEscape/ShiftedModeRiemannSumErrorEstimate.lean`）、前半のうち実対数を使わない再添字付け・角表示の段 `modeSum_realizedDispersionLog_eq_sampleSum` と結論の式鎖の定数倍の段 `halfInvSq_sampleSum_tendsto`（`RealEscape/ShiftedModeSumReindex.lean`）は Lean 具体版・必要十分版・導出版で済んだ。残るのは、主経路の `claim_dispersion_product_real_log_sum` の具体版（$L^{-2}\log_{\mathbb R}|\rho(Q^{a,b}_L(q))|=\frac1{2L^2}\sum_m\log_{\mathbb R}\rho(\Delta)$）を `modeSum_realizedDispersionLog_eq_sampleSum` の `hφ` に当てて `halfInvSq_sampleSum_tendsto` と合成し、本文の `lean:` を登録する段だけである。登録の前に、本文の再添字付けの行の根拠を直す: この行は $k\mapsto e_{L,c,k}$ の $\{0,\dots,L-1\}$ 上の単射性を使うが、それは `claim_twisted_modes_complex_roots_bijection` の証明の中にしか無く、主張に無い（Lean では `complexRootCandidate_injOn`）。主張ブロックへ切り出して引く。主経路の「分散因子の有限積の実対数をモード和へ移す」の完了を待つ。 |
+| Onsager 閉形式への接続 | 半格子ずれた Riemann 和: 有限和の等式との合成 | 主経路の実対数との合成だけが残る | 後半の誤差評価は `shiftedAngleRiemannSum_tendsto`（`RealEscape/ShiftedModeRiemannSumErrorEstimate.lean`）、前半のうち実対数を使わない再添字付け・角表示の段 `modeSum_realizedDispersionLog_eq_sampleSum` と結論の式鎖の定数倍の段 `halfInvSq_sampleSum_tendsto`（`RealEscape/ShiftedModeSumReindex.lean`）は Lean 具体版・必要十分版・導出版で済んだ。再添字付けの行が引く $k\mapsto e_{L,c,k}$ の全単射性は主張 `claim_complex_root_candidates_bijection` に切り出して四層で閉じた。残るのは、主経路の `claim_dispersion_product_real_log_sum` の具体版（$L^{-2}\log_{\mathbb R}|\rho(Q^{a,b}_L(q))|=\frac1{2L^2}\sum_m\log_{\mathbb R}\rho(\Delta)$）を `modeSum_realizedDispersionLog_eq_sampleSum` の `hφ` に当てて `halfInvSq_sampleSum_tendsto` と合成し、本文の `lean:` を登録する段だけである。主経路の「分散因子の有限積の実対数をモード和へ移す」の完了を待つ。 |
 | Onsager 閉形式への接続 | 熱力学極限の段の Lean 二版（平方恒等式に依存するもの） | 未着手 | 残るのは、上の行で得る `claim_shifted_mode_riemann_sums` の具体版を `periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits`・`periodicFreeEnergyDensity_onsagerForm_of_modeLimits`（`RealEscape/PeriodicDensityOnsagerOfModeLimits.lean`、Lean 二版と導出版で済み）の仮定 `hmode` に当て、`theorem_periodic_density_onsager_integral` と `claim_onsager_hyperbolic_integral_form` の `lean:` を登録する段だけである。それまでの段の経過は保管庫と git の履歴にある。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
@@ -46,11 +46,11 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 
 ## レビュー記録
+- 2026-11-16（並列）: 新しく置いた「複素根の候補の添字付けは複素根集合への全単射である」は依存を辿っても格子・配位に届かないが、住処が $\mathbb C$ で指数評価の脱出を持つので、元の主張と同じ章「実数体への脱出と熱力学極限」に置いた。道具の章へ移すかは研究管理に委ねる（主経路の表「道具の節を割って道具の章へ移す」の候補）。
 - 2026-11-16（主経路）: 直前の有限積の実対数の補題を本文の最終行と照合し、正値性の前提と有限積の添字に食い違いは無かった。
 - 2026-11-16（並列）: 「半格子ずれた四つのモード和は同じ積分へ収束する」の再添字付けの行が、$k\mapsto e_{L,c,k}$ の $\{0,\dots,L-1\}$ 上の単射性を `claim_twisted_mode_product_bijection` だけで済ませていた。この単射性は `claim_twisted_modes_complex_roots_bijection` の証明の中にしか無いので、並列の表の合成の段の備考に、主張ブロックへ切り出して引く作業として載せた（本文は未変更）。
 - 2026-11-16（主経路）: 直前の正の因子の選択と有限積の平方値への同定を、本文の分散因子の正値性・有理点での平方恒等式と照合し、前提と添字に食い違いは無かった。
 - 2026-11-16（並列）: 有限トーラス公式の証明の一行目が、$\mathbb Z[x]$ の等式を $\overline{\mathbb Q}[x]$ へ送ることと $2$ で割ることを一行で済ませていたので、$Z_L=\frac12(2Z_L)$ の行を分けた（主張は不変）。この章は $\mathbb Z[x]$ の多項式を「係数を $\overline{\mathbb Q}$ に送ったとき」と書き、送る写像に名前を付けていない（平方恒等式・平方根の存在・有限トーラス公式）。主経路の平方恒等式の本文にも及ぶので、直すかどうかは研究管理に委ねる。
-- 2026-11-16（主経路）: 直前の有理点での平方評価を、分散因子の正値性および本文の有限積の式と照合し、前提と積の添字に食い違いは無かった。
 
 ## 式変形の書き方の統一
 - 2026-11-16（主経路の書式統一）: 「分散因子の有限積の実対数はモードごとの和になる」で、式鎖の準備に使う実数 $T$ の定義を独立した式へ分けた（式と根拠は不変）。
@@ -61,8 +61,8 @@
 - 2026-11-16（主経路の書式統一）: 「代数的数係数多項式の積が零なら一方が零である」で、$i=m$ から $j=n$ に至る計算を行末根拠付きの式鎖へ分けた（主張は不変）。
 
 ## 前進の記録
+- 2026-11-16（並列）: 表の先頭「有限和の等式との合成」は主経路の実対数を待つが、備考の「登録の前に再添字付けの行の根拠を直す」は待たずにできるので行い、単射性を主張ブロックへ切り出して四層で閉じた（行は消さず、残る合成の段を備考に書いた）。SageMath は `twisted-modes-complex-roots-bijection` の候補の行を `complex-root-candidates-bijection` へ分けた（両方 PASS）。
 - 2026-11-16: 実対数の行を絶対値から平方への移行、実際の多項式での合成、必要十分版に割った。最初の論法 `realLog_abs_eq_half_realLog_sq` を Lean 具体版で示した。
 - 2026-11-16（並列）: 表の先頭「有限和の等式との合成」は主経路の実対数を待つが、本文の証明のうち実対数を使わない再添字付け・角表示の段と結論の定数倍の段は待たずに書けるので、その二段を Lean 具体版・必要十分版・導出版で示した（行は消さず、残る合成の段を備考に書いた）。SageMath に結論の式鎖の二行目の検算 `check_limit_rewrite_lines.sage` を足した（PASS）。
 - 2026-11-16: 正の有限積の実現値の実対数を、各因子の実現値の実対数の和へ移す Lean 具体補題を示した。符号付き多項式の値の絶対値との合成と必要十分版は次の段に残す。
 - 2026-11-16（並列）: 表の先頭二行は主経路の「分散因子の有限積の実対数をモード和へ移す」を待つので、末尾の有限トーラス公式の Lean 二版へ進んで済ませ、行を消した。SageMath に式鎖の三行の検算を足した（PASS）。
-- 2026-11-16: 有限積の実対数の行を論法で割り、正の分散因子をモードごとに選んで、その積の代数的な像が符号付き多項式の値の平方になる Lean 具体補題を示した。実対数への移送と必要十分版は次の段に残す。

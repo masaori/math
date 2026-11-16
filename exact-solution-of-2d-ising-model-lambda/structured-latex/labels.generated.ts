@@ -62,6 +62,7 @@ export const ALL_LABELS = [
   "claim_complex_realization_preserves_addition",
   "claim_complex_realization_preserves_multiplication",
   "claim_complex_realization_twisted_modes_are_complex_roots",
+  "claim_complex_root_candidates_bijection",
   "claim_configuration_partition",
   "claim_connected_graph_crossing_edge",
   "claim_const_embedding_prod",

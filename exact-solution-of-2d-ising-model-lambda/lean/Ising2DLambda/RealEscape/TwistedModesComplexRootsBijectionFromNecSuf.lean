@@ -16,6 +16,15 @@ open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.CriticalExponent
 open Ising2DLambda.KacWard
 
+/-- `claim_complex_root_candidates_bijection` の具体版は、必要十分版 `candidate_bijOn_necSuf` を
+γ := ℂ、e := e_{L,c,·}、E := E_{L,c} に特殊化して得られる。 -/
+theorem complexRootCandidate_bijOn_from_necSuf (L : ℕ) (hL : 0 < L) (c : Bool) :
+    Set.BijOn (complexRootCandidate L c) (Finset.range L : Set ℕ) (complexRootSet L c) :=
+  Ising2DLambda.NecSuf.RealEscape.candidate_bijOn_necSuf L (complexRootCandidate L c)
+    (complexRootSet L c) (complexRootCandidate_pow L hL c)
+    (complexRootCandidate_period L hL c) (complexRootSet_finite L hL c)
+    (complexRootSet_ncard_le L hL c)
+
 theorem complexAlgebraicRealization_bijOn_from_necSuf (data : RealClosedSubfieldData)
     (L : ℕ) (hL : 0 < L) (c : Bool) (U : Set Qbar) (hU : U.ncard = L)
     (hmaps : Set.MapsTo (complexAlgebraicRealization data) U (complexRootSet L c)) :

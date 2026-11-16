@@ -5,7 +5,7 @@
   人手証明                                                          このファイル
   最初の式鎖の二〜四行目:
     Σ_{(ϖ,ς) ∈ U_a × W_b} log_ℝ ρ_R(Δ(q;ϖ,ς))
-      = Σ_{k,l=0}^{L-1} log_ℝ ρ_R(Δ(q;ϖ_{k,l},ς_{k,l}))   （Θ_{L,a,b} による再添字付け）
+      = Σ_{k,l=0}^{L-1} log_ℝ ρ_R(Δ(q;ϖ_{k,l},ς_{k,l}))   （rt_{L,a} × rt_{L,b} と Θ_{L,a,b} の全単射の合成による再添字付け）
       = Σ_{k,l=0}^{L-1} log_ℝ B_q(t^{a,b}_{L,k,l})          （claim_dispersion_angle_realization）
       = Σ_{k,l=0}^{L-1} f_q(t^{a,b}_{L,k,l})                 （f_q の定義）       `modeSum_realizedDispersionLog_eq_sampleSum`
   (ϖ_{k,l},ς_{k,l}) := Θ_{L,a,b} の (e_{L,a,k}, e_{L,b,l}) の唯一の逆像       `shiftedModeOf`
@@ -66,8 +66,8 @@ theorem shiftedModeOf_spec (data : RealClosedSubfieldData) (L : ℕ) [NeZero L]
     (complexRootCandidate_pair_mem L hL s k l))).2
 
 /-- 再添字付けの全単射: `(k, l) ↦ (ϖ_{k,l}, ς_{k,l})` は `{0,…,L-1}²` から `U_a × W_b` への全単射。
-単射は Θ の値の成分と `e_{L,c,·}` の単射性から、全射は Θ の値が `E_{L,a} × E_{L,b} = {e_k} × {e_l}`
-に属することと Θ の単射性から。 -/
+単射は Θ の値の成分と `rt_{L,c}` の単射性（`claim_complex_root_candidates_bijection`）から、
+全射は Θ の値が `E_{L,a} × E_{L,b}` に属することと `rt_{L,c}` の全射性と Θ の単射性から。 -/
 theorem shiftedModeOf_inj (data : RealClosedSubfieldData) (L : ℕ) [NeZero L]
     (s : SpinStructure) (k l k' l' : ℕ) (hk : k < L) (hl : l < L) (hk' : k' < L) (hl' : l' < L)
     (h : shiftedModeOf data L s k l = shiftedModeOf data L s k' l') : k = k' ∧ l = l' := by
@@ -76,8 +76,9 @@ theorem shiftedModeOf_inj (data : RealClosedSubfieldData) (L : ℕ) [NeZero L]
       (complexRootCandidate L s.1 k', complexRootCandidate L s.2 l') := by
     rw [← shiftedModeOf_spec data L s k l, ← shiftedModeOf_spec data L s k' l', h]
   obtain ⟨h1, h2⟩ := Prod.mk.inj hΘ
-  exact ⟨complexRootCandidate_injOn L hL s.1 (by simpa using hk) (by simpa using hk') h1,
-    complexRootCandidate_injOn L hL s.2 (by simpa using hl) (by simpa using hl') h2⟩
+  -- claim_complex_root_candidates_bijection の単射性
+  exact ⟨(complexRootCandidate_bijOn L hL s.1).injOn (by simpa using hk) (by simpa using hk') h1,
+    (complexRootCandidate_bijOn L hL s.2).injOn (by simpa using hl) (by simpa using hl') h2⟩
 
 theorem shiftedModeOf_surj (data : RealClosedSubfieldData) (L : ℕ) [NeZero L]
     (s : SpinStructure) (m : FourierModePair L s) :
@@ -86,11 +87,9 @@ theorem shiftedModeOf_surj (data : RealClosedSubfieldData) (L : ℕ) [NeZero L]
   have hbij := twistedModeProductRealization_bijOn data L hL s
   -- Θ(m) ∈ E_{L,a} × E_{L,b}
   obtain ⟨h1, h2⟩ := hbij.mapsTo m.2
-  -- E_{L,c} = {e_{L,c,k} | 0 ≤ k < L}
-  rw [complexRootSet_eq_candidates L hL s.1] at h1
-  rw [complexRootSet_eq_candidates L hL s.2] at h2
-  obtain ⟨k, hk, hk'⟩ := h1
-  obtain ⟨l, hl, hl'⟩ := h2
+  -- claim_complex_root_candidates_bijection の全射性
+  obtain ⟨k, hk, hk'⟩ := (complexRootCandidate_bijOn L hL s.1).surjOn h1
+  obtain ⟨l, hl, hl'⟩ := (complexRootCandidate_bijOn L hL s.2).surjOn h2
   refine ⟨k, by simpa using hk, l, by simpa using hl, ?_⟩
   apply Subtype.ext
   -- Θ の単射性
