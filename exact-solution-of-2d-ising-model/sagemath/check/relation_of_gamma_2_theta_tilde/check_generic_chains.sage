@@ -49,9 +49,10 @@ for k in range(len(euler_chain) - 1):
 rep.check(cos_theta + I0 * sin_theta == euler_chain[0], "cos θ + i sin θ の鎖 第 1 行は euler_formula_cos_sin の代入")
 
 # ---- 準備の第二: ī = -i（実数の対で） ----
-i_pair = (QQ(0), QQ(1))
+i_pair = (QQ(0), QQ(1))                                            # def_imaginary_unit: i := (0,1)
 bar_i_chain = [
-    cc_conj(i_pair),
+    cc_conj(i_pair),                                               # 第 1 行 ī（i は i_pair を通す。ログの「第 k 行」は式を数える）
+    cc_conj((QQ(0), QQ(1))),                                       # def_imaginary_unit: \overline{(0,1)}（対を直に書く）
     (QQ(0), QQ(-1)),                                               # def_complex_conjugate
     (QQ(0), QQ(-1) * QQ(1)),                                       # 1 は ℝ の乗法の単位元（右辺から左辺へ）
     (QQ(0), QQ(-1) * QQ(1) + QQ(0)),                               # 0 は ℝ の加法の単位元（右辺から左辺へ）
@@ -59,9 +60,9 @@ bar_i_chain = [
     (QQ(-1) * QQ(0) - QQ(0), QQ(-1) * QQ(1) + QQ(0) * QQ(0)),      # real_times_zero_is_zero を 2 箇所へ（x → -1, 0）
     (QQ(-1) * QQ(0) - QQ(0) * QQ(1), QQ(-1) * QQ(1) + QQ(0) * QQ(0)),  # real_zero_times_is_zero（x → 1）
     cc_mul((QQ(-1), QQ(0)), (QQ(0), QQ(1))),                       # definition_of_cc の積
-    cc_mul(iota(-1, QQ), (QQ(0), QQ(1))),
-    cc_mul(iota(-1, QQ), i_pair),
-    cc_neg(i_pair, QQ),
+    cc_mul(iota(-1, QQ), (QQ(0), QQ(1))),                          # inclusion_rr_to_cc の (-1)_C = (-1,0)
+    cc_mul(iota(-1, QQ), i_pair),                                  # def_imaginary_unit
+    cc_neg(i_pair, QQ),                                            # multiply_by_minus_one
 ]
 for k in range(len(bar_i_chain) - 1):
     rep.check(bar_i_chain[k] == bar_i_chain[k + 1], f"ī の鎖 第 {k+1} 行 = 第 {k+2} 行")
