@@ -17495,23 +17495,15 @@ const chapter_shift_symmetry = defineSection({
                           " は ",
                           ref("def_column_translation"),
                           "）。",
-                          ref("def_intra_row_broken_count"),
-                          " が ",
-                          math(String.raw`b_{\mathrm{h}}(\tau)`),
-                          " を定めるのに使う集合は ",
-                          math(
-                            String.raw`\bigl\{\,z\in\mathbb{Z}/L\mathbb{Z}\;\bigm|\;\tau(z)\ne\tau(z+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}`,
-                          ),
-                          " であり、",
-                          ref("def_column_translation"),
-                          " の ",
-                          math(String.raw`\gamma(z)=z+_{\mathbb{Z}/L\mathbb{Z}}\bar1`),
-                          " によりこれは ",
-                          math(String.raw`X`),
-                          " に等しい。したがって ",
-                          math(String.raw`b_{\mathrm{h}}(\tau)=|X|`),
-                          " である。",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+b_{\mathrm h}(\tau)
+&=\left|\bigl\{z\in\mathbb Z/L\mathbb Z\mid
+  \tau(z)\ne\tau(z+_{\mathbb Z/L\mathbb Z}\bar1)\bigr\}\right|
+&&\bigl(\because\ \blkref{def_intra_row_broken_count}\bigr)\\
+&=|X|
+&&\bigl(\because\ \blkref{def_column_translation}\text{ と }X\text{ の定義}\bigr)
+\end{aligned}`),
                         paragraph([
                           "また ",
                           math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
@@ -86902,7 +86894,11 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 labels: ["claim_dispersion_product_real_log_sum"],
                 habitat: "R",
                 realEscape: "実対数。可算側で正と示した分散因子を実現写像で正の実数へ送り、有限積の実対数を有限和へ移す。",
-                lean: ["Ising2DLambda.RealEscape.dispersion_product_real_log_sum"],
+                lean: [
+                  "Ising2DLambda.RealEscape.dispersion_product_real_log_sum",
+                  "Ising2DLambda.NecSuf.RealEscape.squareProduct_realLog_sum",
+                  "Ising2DLambda.RealEscape.dispersion_product_real_log_sum_from_necSuf",
+                ],
                 verification: ["sagemath/check/dispersion-product-real-log-sum"],
                 statement: [
                   paragraph([
