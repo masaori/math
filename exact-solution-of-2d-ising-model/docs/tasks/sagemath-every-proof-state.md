@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-09: 証明を持つブロック 500 件のすべてに SageMath の検算が付いた（`node sagemath/tools/verify-every-proof-has-check.ts` が exit 0、`verify-check-linkage.ts` が 514 件で通る）。2026-11-05 に 420 件のすべてに検算が付いてゴールラインを満たし一時停止したが、Lean の連続実行が 2026-11-06 に人手へ足した `000_calculation_formulae_00_09.ts` の 3 件で満たさなくなったので、2026-11-09 に連続実行「複素行列版イジング: 全証明の SageMath 検算」を再開し、同日にその 3 件へ検算を付けてゴールラインを再び満たした。
+2026-11-09: 証明を持つブロック 500 件のすべてに SageMath の検算が付いた（`node sagemath/tools/verify-every-proof-has-check.ts` が exit 0、`verify-check-linkage.ts` が 514 件で通る）。2026-11-05 に 420 件のすべてに検算が付いてゴールラインを満たし一時停止したが、Lean の連続実行が 2026-11-06 に人手へ足した `000_calculation_formulae_00_09.ts` の 3 件で満たさなくなったので、2026-11-09 に連続実行「複素行列版イジング: 全証明の SageMath 検算」を再開し、同日にその 3 件へ検算を付けてゴールラインを再び満たした。2026-11-16: 証明を持つブロックは 555 件に増えたが、検算の無いものは 0 件（`verify-every-proof-has-check.ts` が exit 0、`verify-check-linkage.ts` が 569 件で通る）。増えた 55 件には Lean の連続実行が同じ回で検算を付けていた。連続実行「複素行列版イジング: 全証明の SageMath 検算」は進める単位が残っていないのでアーカイブした。
 
 済んだもの（文書順）:
 
@@ -411,7 +411,7 @@
 - `index_skipping_map_never_takes_skipped_index`・`index_skipping_map_reaches_every_other_index`・`bijection_composed_with_index_skipping_map_stays_in_lower_indices`（一つの添字を飛ばす写像 δ^m_k が k を値に取らないこと・k 以外の全てを値に取ること、π(k) = m+1 の k を飛ばしてから全単射 π で送ると m+1 に届かないこと）: `sagemath/check/<ラベル>/`。3 件の主張は 2026-11-06 に `index_skipping_map_is_injective/`・`bijection_composed_with_index_skipping_map_is_bijective/` の中で確かめていたが、`overview.md` の「対象ラベル」は 1 つしか読まれないので未検算に数えられていた。ラベルごとのディレクトリへ移し、証明の各行（背理法の鎖は各行が使う事実）を `ZZ` の全数検査（`m ≤ 9`、置換は `m ≤ 5`）で確かめた。レビューの指摘で、`bijection_composed_with_index_skipping_map_is_bijective` の全射性の背理法の鎖の検査を足し、δ を定義の読み方（`{1,…,m+1}∖{k}` の j 番目）と独立に突き合わせた。本文の注記の検算の置き場を新しいディレクトリへ直した。計算の誤りは無かった。
 
 ## 次の一歩
-ゴールラインを満たした（2026-11-09）。証明を持つブロックが増えたら、そのブロックに検算を付けて再びゴールラインを満たす。下の「検算で見つかった本文の誤り」の残りは、検算の付いたブロックの見直しで扱う。
+ゴールラインを満たした（2026-11-09。2026-11-16 にも満たしていることを確かめた）。この連続実行はアーカイブした（2026-11-16）。証明を持つブロックを足す連続実行は、同じ回で検算を付ける（Lean の連続実行の runbook）。それでも確認コマンドが落ちたら、アーカイブを戻して再開し、検算の無いブロックに検算を付けて再びゴールラインを満たす。下の「検算で見つかった本文の誤り」の残りは、検算の付いたブロックの見直しで扱う。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
