@@ -1,5 +1,5 @@
-# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 6 の不等号の 3 つの鎖と Step 7 の同値の鎖）
-# Step 6: γ(θ̃_μ)/2 = γ(θ̃_μ)·1/2 > 0·1/2 = 0、2sinh(γ(θ̃_μ)/2) > 2·0 = 0、
+# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 6 の不等号の 4 つの鎖と Step 7 の同値の鎖）
+# Step 6: 準備 2 = 1 + 1 ≠ 0、0 < 2^{-1}。γ(θ̃_μ)/2 = γ(θ̃_μ)·2^{-1} > 0（正の数どうしの積）、2sinh(γ(θ̃_μ)/2) > 2·0 = 0、
 #         Π_μ 2sinh(γ(θ̃_μ)/2) > 0（finite_product_of_positive_reals_is_positive。有限積は左から畳み込み、各段が正）、
 #         ϰ = C Π_μ 2sinh(γ(θ̃_μ)/2) > 0（C ∈ ℝ_{>0} と ab > 0）。
 # Step 7: η = +1 なら tr(εV) = 1_Cϰ_C = ϰ_C。逆に tr(εV) = r_C（r > 0）なら (r, 0) = r_C = (ȟϰ)_C = (ȟϰ, 0) から r = ȟϰ で、
@@ -12,8 +12,14 @@ load("_prelude.sage")
 
 PARAMS = [(RB(QQ(2) / 5), RB(QQ(4) / 5)), (RB(QQ(6) / 5), RB(QQ(3) / 10)), (RB(QQ(11) / 25), RB(QQ(11) / 25)), (RB(QQ(1) / 10), RB(2))]
 PARAMS += [(2 * RB(QQ(y)).log(), RB(QQ(x)).log()) for (x, y) in COUPLINGS]
-half = RB(1) / 2
-count = 0
+# Step 6 の準備（厳密に）: def_real_two の 2 = 1 + 1、real_two_is_nonzero の 2 ≠ 0、
+# real_inverse_of_positive_is_positive（a → 2）の 0 < 2^{-1}（2·2^{-1} = 1 で定まる逆元）
+two_q = QQ(1) + QQ(1)
+assert two_q == 2 and two_q != 0
+inv_two_q = two_q ** -1
+assert two_q * inv_two_q == 1 and inv_two_q > 0
+inv_two = RB(inv_two_q)
+count = 4                                                        # Step 6 の準備の 4 判定（1 + 1 = 2、2 ≠ 0、2·2^{-1} = 1、2^{-1} > 0）
 negatives = 0
 Ci = QuadraticField(-1, 'i')
 for (K1, K2) in PARAMS:
@@ -23,9 +29,10 @@ for (K1, K2) in PARAMS:
         assert C > 0                                                     # def_second_transfer_matrix_prefactor の ℝ_{>0}
         for g in gam:
             assert g > 0                                                 # gamma_theta_tilde_mu_positive
-            assert (g / 2).overlaps(g * half) and g * half > 0 * half and (0 * half) == 0   # 最後の行は real_zero_times_is_zero（x → ½）
+            assert (g / 2).overlaps(g * inv_two)                         # def_real_quotient（y → γ(θ̃_μ)、z → 2）
+            assert g * inv_two > 0                                       # γ(θ̃_μ) > 0 と 0 < 2^{-1} の積は正
             assert 2 * (g / 2).sinh() > 2 * 0 and 2 * 0 == 0                             # 最後の行は real_times_zero_is_zero（x → 2）
-            count += 5
+            count += 4
         p = 2 * (gam[0] / 2).sinh()
         assert p > 0
         for g in gam[1:]:
