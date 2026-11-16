@@ -11,7 +11,7 @@ for M in [2, 3]:
     for xx in [QQ(2), QQ(3)]:
         for yy in [QQ(2), QQ(3)]:
             W = W_exact(M, xx, yy)
-            assert W.nrows() == d                                 # d := 2^{M_col}
+            assert W.nrows() == d                                 # d := 2_ℤ^{M_col} ∈ ℤ_{≥1}（def_power_of_integer の ℤ の冪、power_of_two_in_integers_is_at_least_one）
             assert is_real_symmetric(W)                           # W_is_real_symmetric_positive_definite（実対称）
             assert real_rooted_with_signs(W, strict=True)          # 正定値
             xs = [vector(QQ, [1 if i == 0 else 0 for i in range(d)]),

@@ -8,7 +8,7 @@
 - ブロック: `maxeig_008b_claim_moment_log_convexity`（モーメント列 `m_k := x^⊤(W_ℝ)^kx` の正値性 `m_k > 0` と対数凸性 `m_k^2 ≤ m_{k−1}m_{k+1}`。`W_ℝ := ϱ(W)` は `def_W_real`）
 - 範囲: 証明の七つの準備（【冪の実数の行列】【冪の対称性】【(W_ℝ)^ax の成分】【冪の分け方】【二つの冪で挟んだ値】【I_ℝ と W_ℝ の正値性】【(W_ℝ)^ax は零でない】）、
   【正値性】の二つの鎖、【P = W_ℝ の不等式】【P = I_ℝ の不等式】の鎖、奇数・偶数の場合分けの鎖と添字の確認、主張そのもの。
-- 記号は証明のとおり `d := 2^{M_col}`、`u^(a) := (W_ℝ)^ax`、`I := I_{Mat(d,C)}`、`I_ℝ := I_{Mat(d,R)}`、`C ∈ {I, W}`。
+- 記号は証明のとおり `d := 2_ℤ^{M_col} ∈ ℤ_{≥1}`（`def_power_of_integer` の ℤ の冪。`power_of_two_in_integers_is_at_least_one` より `ℤ_{≥1}` の元）、`u^(a) := (W_ℝ)^ax`、`I := I_{Mat(d,C)}`、`I_ℝ := I_{Mat(d,R)}`、`C ∈ {I, W}`。
 - `check_proof_lines` は実数の側の行を、`W_ℝ` を QQ の行列 `P` として確かめる。`check_varrho_lines` は複素行列 `W`（QQbar）と `W_ℝ = ϱ(W)`（AA）を別々に作り、`ϱ` で運ぶ行を確かめる。
 
 ## 証明の行との対応
