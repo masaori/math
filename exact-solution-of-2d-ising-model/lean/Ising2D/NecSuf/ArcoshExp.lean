@@ -35,14 +35,16 @@ namespace Ising2D.NecSuf
 
 /-- 補助（人手証明 `gamma1_gt_1_theta_tilde` の準備の第二の含意の鎖の後半）: `0 < a` なら `0 < a^2`。
 具体版 `gamma1_gt_1_prep_absGamma2_sq_pos` の 3 段（`a·a > 0·a` → `0·a = 0` で `a·a > 0` → 冪へ戻して `a^2 > 0`）と同じ並び。
-効くのは、正の元を右から掛けると狭義の不等号が保たれること（`MulPosStrictMono`）、`0·a = 0`、冪の定義の 2 つの式と
-`1` が乗法の単位元であること（`sq_eq_mul_self'`）だけである。`MonoidWithZero R` は冪の `Monoid` と `0·a = 0` に同じ乗法を
-共有させるため、`Preorder R` は `MulPosStrictMono` の定義が前提にするためだけに置く（推移律・反射律は使わない）。
+効くのは、正の元を右から掛けると狭義の不等号が保たれること（`MulPosStrictMono`）、鎖の `a` での `0·a = 0`（仮定 `h0a`）、
+冪の定義の 2 つの式と `1` が乗法の単位元であること（`sq_eq_mul_self'`）だけである。`Monoid R` は乗法と冪のため、`Zero R` は `0` を置くため
+（乗法を持たないので、`Monoid R` と並べても乗法は 1 つ）、`Preorder R` は `MulPosStrictMono` の定義が前提にするためだけに置く
+（推移律・反射律は使わない）。`0·a = 0` は全ての元についての公理ではなく、`a` の 1 点の等式を仮定に取る
+（`MonoidWithZero` は使わない `a·0 = 0` と、`a` 以外の元での `0·b = 0` を連れてくる）。
 `NegConjPair.lean` の `sq_pos_of_pos_chain` と主張は同じだが、段の順が人手の `gamma1_gt_1_theta_tilde` の準備に合わせて違う。 -/
-theorem sq_pos_of_pos_implication_chain {R : Type*} [MonoidWithZero R] [Preorder R] [MulPosStrictMono R]
-    {a : R} (ha : 0 < a) : 0 < a ^ 2 := by
+theorem sq_pos_of_pos_implication_chain {R : Type*} [Monoid R] [Zero R] [Preorder R] [MulPosStrictMono R]
+    {a : R} (h0a : (0 : R) * a = 0) (ha : 0 < a) : 0 < a ^ 2 := by
   have h1 : 0 * a < a * a := mul_lt_mul_of_pos_right ha ha   -- `a > 0` の両辺に `0 < a` を掛ける
-  have h2 : 0 < a * a := by rw [zero_mul a] at h1; exact h1   -- `0·a = 0`
+  have h2 : 0 < a * a := by rw [h0a] at h1; exact h1          -- 仮定 `0·a = 0`
   rw [sq_eq_mul_self' a]; exact h2                            -- `square_of_real_number_is_product` を右辺から左辺へ
 
 /-- 補助（人手証明 `gamma1_gt_1_theta_tilde` の背理の鎖）: `0 < t` かつ `t ≤ 1` なら `t^2 ≤ 1`。

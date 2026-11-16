@@ -31,20 +31,22 @@
 具体版 `absGamma2_thetaTilde_sq_pos`・`neg_absGamma2_thetaTilde_sq_neg` の `calc`（人手の 3 行と 2 行の鎖）は、
 `sq_pos_of_pos_chain`・`neg_neg_of_pos_chain` の `calc` と同じ並びで対応する。効くのは
 
-* `0·a = 0`、正の元を右から掛けると狭義の不等号が保たれること（`MulPosStrictMono`）、
+* `a` での `0·a = 0`、正の元を右から掛けると狭義の不等号が保たれること（`MulPosStrictMono`）、
 * 冪の定義の 2 つの式と `1` が乗法の単位元であること（`NecSuf.sq_eq_mul_self'`）、
 * 両辺の符号を反転すると狭義の不等号の向きが変わること（加法の左右からの狭義の単調性）
 
 だけである。複素数であること、絶対値であること、全順序、順序の反対称律、乗法の可換性、分配則、
 加法の可換性、加法の逆元の存在（第一の鎖）は効いていない。
-第一の鎖の仮定は `MonoidWithZero R`（`0·a = 0` と冪）・`Preorder R`・`MulPosStrictMono R`（第 2 段の狭義の単調性）だけである。
+第一の鎖の仮定は `Monoid R`（乗法と冪）・`Zero R`・`Preorder R`・`MulPosStrictMono R`（第 2 段の狭義の単調性）と、
+鎖の `a` での等式 `0·a = 0`（仮定 `h0a`）だけである。
 `Preorder R` は mathlib の `MulPosStrictMono` の定義が前提にするためだけに置く（鎖が使うのは `<` だけで、反射律・推移律は使わない）。
-`MonoidWithZero R` は、冪の `Monoid` と `0·a = 0` の `MulZeroClass` に同じ乗法を共有させるために置く（`mul_zero` は使っていない。
-2 つを別々に置くと乗法が 2 つになるので、両方を 1 つの乗法で満たす最小のクラスとしてこれを選んだ）。
-第一の鎖の第 1 段の `0·a = 0` は、`MonoidWithZero` の公理 `zero_mul` として受け取る。具体版はこの段を
-`real_zero_times_is_zero`（加法の単位元・逆元・結合則と右からの分配則から示した主張。必要十分版は
+`Zero R` は `0` という元を置くだけで乗法を持たないので、`Monoid R` と並べても乗法は 1 つである。
+第一の鎖の第 1 段の `0·a = 0` は、全ての元についての公理ではなく、鎖の `a` の 1 点での等式を仮定に取る
+（`MonoidWithZero` は使わない `a·0 = 0`（`mul_zero`）と、`a` 以外の元での `0·b = 0` まで連れてくる）。
+`NecSuf/PositiveSquareRootIsPositive.lean` の `h00`（`0·0 = 0`）と同じ受け方である。
+具体版はこの段を `real_zero_times_is_zero`（`x → a`。加法の単位元・逆元・結合則と右からの分配則から示した主張。必要十分版は
 `NecSuf/ZeroMulOfRightDistrib.lean` の `zero_mul_of_rightDistrib`）を右辺から左辺へ引いて得る。
-この鎖に効くのは `0·a = 0` という等式だけで、それをどう示すかは効かないので、加法の構造を何も仮定に取らずに公理で受けた
+この鎖に効くのは `0·a = 0` という等式だけで、それをどう示すかは効かないので、加法の構造を何も仮定に取らずに等式を仮定で受けた
 （具体版が `real_zero_times_is_zero` を通して使う加法の単位元・逆元・結合則と右からの分配則は、どれも効いていない）。
 上で第一の鎖に分配則と加法の逆元の存在が効いていないと書いたのは、この意味である。
 第二の鎖は、人手と具体版と同じく直前の鎖の結論 `0 < x`（`x := a^2`）を入力に取り、乗法を使わない。
@@ -106,10 +108,10 @@ section StrictNegativity
 
 /-- **必要十分版 (2) の狭義部分の第一の鎖**: `0 < a` なら `0 < a^2`。
 具体版 `absGamma2_thetaTilde_sq_pos` の 3 段と同じ並び。 -/
-theorem sq_pos_of_pos_chain {R : Type*} [MonoidWithZero R] [Preorder R] [MulPosStrictMono R]
-    {a : R} (ha : 0 < a) : 0 < a ^ 2 :=
+theorem sq_pos_of_pos_chain {R : Type*} [Monoid R] [Zero R] [Preorder R] [MulPosStrictMono R]
+    {a : R} (h0a : (0 : R) * a = 0) (ha : 0 < a) : 0 < a ^ 2 :=
   calc (0 : R)
-      = 0 * a := (zero_mul a).symm                       -- `0·a = 0`（`MonoidWithZero` の公理。具体版では `real_zero_times_is_zero` を右辺から左辺へ引く段）
+      = 0 * a := h0a.symm                                -- 仮定 `0·a = 0` を右辺から左辺へ（具体版では `real_zero_times_is_zero`（`x → a`）を右辺から左辺へ引く段）
     _ < a * a := mul_lt_mul_of_pos_right ha ha           -- 正の元 `a` を右から掛ける
     _ = a ^ 2 := (sq_eq_mul_self' a).symm                -- `square_of_real_number_is_product` を右辺から左辺へ
 
