@@ -10434,19 +10434,19 @@ p^{[n]}(\tau(i))&=\tau(q^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)
               ],
               proof: [
                 paragraph([math(String.raw`j\in\mathcal B_{\tau,\upsilon}(i)`), " を仮定する。", ref("def_matching_pair_component"), " の合併の定義に従い、所属する軌道で場合分けする。まず ", math(String.raw`j\in\operatorname{Orb}_p(i)`), " の場合、"]),
-                displayMath(String.raw`\tau(j)\in\operatorname{Orb}_p(\tau(i))\qquad\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr).`),
+                displayMath(String.raw`\tau(j)\in\operatorname{Orb}_p(\tau(i))\qquad\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr)`),
                 displayMath(String.raw`\begin{aligned}
 \mathcal B_{\tau,\upsilon}(j)
 &=\operatorname{Orb}_p(j)\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)\\
 &=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
 &=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
-&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr).
+&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)
 \end{aligned}`),
                 paragraph(["次に ", math(String.raw`j\in\operatorname{Orb}_p(\tau(i))`), " の場合、"]),
                 displayMath(String.raw`\begin{aligned}
-\tau(j)&\in\operatorname{Orb}_p(\tau(\tau(i)))&&\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr),\\
-\tau(\tau(i))&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr),\\
-\tau(j)&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \text{直前の等号による所属の移し替え}\bigr).
+\tau(j)&\in\operatorname{Orb}_p(\tau(\tau(i)))&&\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr)\\
+\tau(\tau(i))&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)\\
+\tau(j)&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \text{直前の等号による所属の移し替え}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \mathcal B_{\tau,\upsilon}(j)
@@ -10454,7 +10454,7 @@ p^{[n]}(\tau(i))&=\tau(q^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)
 &=\operatorname{Orb}_p(\tau(i))\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
 &=\operatorname{Orb}_p(\tau(i))\cup\operatorname{Orb}_p(i)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
 &=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))&&\bigl(\because\ \text{合併の可換性}\bigr)\\
-&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr).
+&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)
 \end{aligned}`),
                 paragraph(["二つの場合で同じ結論を得た。空集合には始点がなく、共有する対でも同じ論法が通る。使った対象は有限番号集合とその部分集合だけであり、実数体への脱出はない。"]),
               ],
