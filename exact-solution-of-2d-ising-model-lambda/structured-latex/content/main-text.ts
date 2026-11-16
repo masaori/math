@@ -10823,21 +10823,21 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
               proof: [
                 paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。この証明では ", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}\in\operatorname{Perm}(\mathcal J)`), "、", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`p:=p_\sigma(i)\in\mathbb N`), "、", math(String.raw`e_n:=\sigma^{[n]}(i)\in\mathcal J`), "（", math(String.raw`n\in\mathbb N`), "）と略す。", ref("def_finite_permutation_minimal_period"), " より ", math(String.raw`0<p`), " かつ ", math(String.raw`e_p=i`), " である。"]),
                 displayMath(String.raw`\begin{aligned}
-e_0&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
-e_{n+1}&=\sigma(e_n)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰と反復の可換性}\bigr),\\
+e_0&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+e_{n+1}&=\sigma(e_n)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰と反復の可換性}\bigr)\\
 e_{n+1}\in C&\Longleftrightarrow e_n\notin C
-&&\bigl(\because\ \blkref{claim_matching_pair_successor_color}\bigr).
+&&\bigl(\because\ \blkref{claim_matching_pair_successor_color}\bigr)
 \end{aligned}`),
                 paragraph(["自然数 ", math(String.raw`n`), " について帰納し、色が反復回数の偶奇で決まることを示す。零回では ", math(String.raw`e_0=i`), " である。", math(String.raw`n`), " 回で成り立つと仮定すると、一歩の色反転と自然数の偶奇の交替から ", math(String.raw`n+1`), " 回でも成り立つ。したがって任意の ", math(String.raw`n\in\mathbb N`), " で"]),
                 displayMath(String.raw`e_n\in C\quad\Longleftrightarrow\quad
 \bigl((n\bmod2=0)\Longleftrightarrow i\in C\bigr)
-\qquad\bigl(\because\ \text{反復回数についての帰納法}\bigr).`),
+\qquad\bigl(\because\ \text{反復回数についての帰納法}\bigr)`),
                 paragraph(["ここで ", math(String.raw`e_p=i`), " を代入する。", math(String.raw`i\in C`), " なら同値の両側が真になるため ", math(String.raw`p\bmod2=0`), " である。", math(String.raw`i\notin C`), " なら左側が偽になるため、右側も偽でなければならず、やはり ", math(String.raw`p\bmod2=0`), " である。最後に"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{len}_\sigma(i)&=p
-&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\text{ の最小周期と軌道長の一致}\bigr),\\
+&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\text{ の最小周期と軌道長の一致}\bigr)\\
 \operatorname{len}_\sigma(i)\bmod2&=0
-&&\bigl(\because\ p\bmod2=0\bigr).
+&&\bigl(\because\ p\bmod2=0\bigr)
 \end{aligned}`),
                 paragraph(["空集合では始点がなく、全称命題として成立する。有限集合と自然数の偶奇だけを扱い、実数体への脱出はない。"]),
               ],
