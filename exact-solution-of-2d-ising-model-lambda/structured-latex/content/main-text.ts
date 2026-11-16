@@ -80412,6 +80412,13 @@ D_L^{a,b}(x)
                     standing: "mainTheorem",
                     habitat: "Qbar",
                     verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                    lean: [
+                      "Ising2DLambda.KacWard.finiteTorusPolynomial_map_qbar",
+                      "Ising2DLambda.KacWard.partitionPolynomial_eq_half_sum_kacWardSquareRoots",
+                      "Ising2DLambda.KacWard.torusFormula_half_pos",
+                      "Ising2DLambda.NecSuf.KacWard.eq_half_sum_squareRoots_necSuf",
+                      "Ising2DLambda.KacWard.partitionPolynomial_eq_half_sum_kacWardSquareRoots_from_necSuf",
+                    ],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とし、", ref("claim_determinant_polynomial_square_root_exists"), " の四つの平方根 ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_partition_polynomial"), " の ", math(String.raw`Z_L`), " について"]),
                       displayMath(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}\quad\text{in }\overline{\mathbb Q}[x]`),
@@ -80420,8 +80427,10 @@ D_L^{a,b}(x)
                     proof: [
                       displayMath(String.raw`\begin{aligned}
 Z_L
+&=\frac12\bigl(2Z_L\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則と }2\ne0\text{、}\frac12\cdot2=1\bigr)\\
 &=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
-&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ の }\mathbb Z[x]\text{ の等式を }\overline{\mathbb Q}[x]\text{ へ送る}\bigr)\\
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ の }\mathbb Z[x]\text{ の等式を係数ごとに }\overline{\mathbb Q}[x]\text{ へ送る}\bigr)\\
 &=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
 &&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
 \end{aligned}`),

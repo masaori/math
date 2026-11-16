@@ -40,5 +40,14 @@ for L in (1, 2):
             roots.append(q)
             checked += 1
     assert sum(roots) == 2 * z
+    # 有限トーラス公式の式鎖（Qbar[x] の中）: 一行目 Z_L = (1/2)(2 Z_L)、二行目 = (1/2) Σ Q、
+    # 三行目 = (1/2) Σ S（S = Q は一意性による）
+    PQ = PolynomialRing(QQbar, 'x')
+    zq = PQ(z)
+    half = QQbar(1) / 2
+    assert zq == half * (2 * zq)
+    assert half * (2 * zq) == half * sum(PQ(r) for r in roots)
+    assert half * sum(PQ(r) for r in roots) == zq
+    assert QQ(1) / 2 > 0
 
 print('RESULT: PASS; %d polynomial square roots and two finite-torus sums' % checked)
