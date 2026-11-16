@@ -8,7 +8,8 @@
 #   ε_ℝ x^{(+)} = x^{(+)}（ε_ℝ := ϱ(ε)。epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors の ⇐）
 #   ||x^{(+)}||^2 = (√Σ_i|x_i|^2)^2 = Σ_i|x_i|^2 = Σ_i x_i^2 = Σ_i ((1/√2)^M)^2 = ι(2^M)((1/√2)^M)^2 = 2^M((1/√2)^M)^2
 #                = 2^M((1/√2)^M(1/√2)^M) = 2^M(1/√2·1/√2)^M = 2^M(1/(√2√2))^M = 2^M(1/(√2)^2)^M = 2^M(1/2)^M
-#                = (2·1/2)^M = 1^M = 1（14 行。冪はすべて def_power_of_real_number どおりに組む）
+#                = (2·1/2)^M = (2·(1·2^{-1}))^M = (2·2^{-1})^M = 1^M = 1（16 行。冪はすべて def_power_of_real_number どおりに組む）
+#   2_ℝ := 1 + 1（def_real_two）について 0 < 2（real_zero_less_than_two）と < の意味の前半で 2 ∈ ℝ_{≥0}、2 ≠ 0（real_two_is_nonzero）
 #   ‖x^{(+)}‖ ∈ ℝ_{≥0}、‖x‖ = 0 なら 1 = ‖x‖^2 = ‖x‖‖x‖ = 0·0 = 0（4 行。最後は real_times_zero_is_zero、x → 0）で ‖x‖ ≠ 0、
 #   ‖x‖^2 = 1 = 1·1 = 1^2（3 行）と positive_real_square_injective で ‖x^{(+)}‖ = 1
 # 帰属: 実数の側は AA（実代数的数）、複素数の側は QQbar で厳密に判定する。浮動小数点を使わない。
@@ -117,9 +118,15 @@ for M in [1, 2, 3, 4, 5]:
     # 否定コントロール: x^{(+)} の 1 成分の符号を変えると ε_ℝ で動く
     y = vector(AA, list(xp)); y[0] = -y[0]
     assert eps_R * y != y
-    # ノルムの 14 行の鎖（冪は def_power_of_real_number どおり rpow で組み、二乗も m = 2 の冪 rpow(t, 2) とする）
-    s2 = AA(2).sqrt()
+    # 2_ℝ ∈ ℝ_{≥0} と 2_ℝ ≠ 0（def_real_two、real_zero_less_than_two と < の意味の前半、real_two_is_nonzero）
     two = AA(1) + AA(1)
+    assert two == AA(2)
+    assert AA(0) < two and AA(0) <= two                   # real_zero_less_than_two と < の意味の前半で 2_ℝ ∈ ℝ_{≥0}
+    assert two != AA(0)                                   # real_two_is_nonzero
+    two_inv = two ** (-1)                                 # ℝ の 2_ℝ の乗法の逆元 2_ℝ^{-1}
+    assert two * two_inv == AA(1)                         # def_real_quotient の乗法の逆元 z z^{-1} = 1_ℝ（z → 2_ℝ）
+    # ノルムの 16 行の鎖（冪は def_power_of_real_number どおり rpow で組み、二乗も m = 2 の冪 rpow(t, 2) とする）
+    s2 = AA(2).sqrt()
     sq = lambda t: rpow(t, 2)
     norm = sqrt(sum(abs(c) * abs(c) for c in xp))  # def_matrix_norm の ‖x‖ := √(Σ|x_i|^2)
     rows = [
@@ -136,7 +143,9 @@ for M in [1, 2, 3, 4, 5]:
         rpow(two, M) * rpow(1 / sq(s2), M),                   # square_of_real_number_is_product（r → √2）を右辺から左辺へ
         rpow(two, M) * rpow(1 / two, M),                      # definition_of_sqrt_r_positive の y^2 = x（x → 2）
         rpow(two * (1 / two), M),                             # product_of_real_powers_is_power_of_product
-        rpow(AA(1), M),                                       # p · (1/p) = 1
+        rpow(two * (AA(1) * two_inv), M),                     # def_real_quotient（y → 1、z → 2_ℝ ≠ 0）
+        rpow(two * two_inv, M),                               # 1 は ℝ の乗法の単位元の 1·x = x（x → 2_ℝ^{-1}）
+        rpow(AA(1), M),                                       # def_real_quotient の乗法の逆元 z z^{-1} = 1_ℝ（z → 2_ℝ ≠ 0）
         AA(1),                                                # power_of_real_one_is_one
     ]
     for u, w in zip(rows, rows[1:]):

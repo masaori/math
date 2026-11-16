@@ -30,7 +30,8 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 | `ι(x^{(+)})_{ν(I)} = (b_+⊠⋯⊠b_+)_{ν(I)}` の 5 行の鎖 | `cvec_evenUnit` の `calc` の 5 段 |
 | `ει(x^{(+)}) = ι(x^{(+)})` の 5 行の鎖 | `epsilon_mulVec_cvec_evenUnit` の `calc` の 5 段 |
 | `def_even_eigenvectors_of_epsilon` と `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors`（`⇐`）で `ε_ℝx^{(+)} = x^{(+)}` | `epsilonR_mulVec_evenUnit`（`epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors` の `mpr`） |
-| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 14 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（14 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段） |
+| `2_ℝ ∈ ℝ_{≥0}`（`real_zero_less_than_two` と `<` の意味の前半）、`2_ℝ ≠ 0`（`real_two_is_nonzero`） | `vecNorm_sq_evenUnit_succ` の `h2`・`h2ne` |
+| `‖x^{(+)}‖² = (√Σ_i\|x_i\|²)² = ⋯ = 1^{M_col} = 1` の 16 行の鎖 | `vecNorm_sq_evenUnit_succ` の `calc`（16 段と、添字の個数を `2^{M_col}` に読み替える Lean だけの 1 段） |
 | `‖x^{(+)}‖ ∈ ℝ_{≥0}`、`‖x^{(+)}‖ = 0` なら `1 = ⋯ = 0` の 4 行の鎖、`‖x^{(+)}‖^2 = 1 = 1·1 = 1^2` の 3 行の鎖と `positive_real_square_injective` で `‖x^{(+)}‖ = 1`（背理法の結びは体 `ℝ` の公理の `0 ≠ 1`、`ℝ_{>0}` へは等号の対称律の対偶と `<` の意味、`1 ∈ ℝ_{>0}` は `real_zero_less_than_one`） | `vecNorm_evenUnit_succ`（`calc` の 4 段と 3 段、`zero_ne_one`、`hne'` と `lt_iff_le_and_ne`、`real_zero_less_than_one`） |
 | 空でない（`(x^{(+)})ᵀW_ℝx^{(+)} ∈ 𝓡_+`） | `evenSectorSet_epsilonR_nonempty` |
 
@@ -66,6 +67,8 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 
 set_option linter.unusedSectionVars false
 
@@ -182,12 +185,14 @@ theorem epsilonR_zero_mulVec_evenUnit : epsilonR 0 *ᵥ evenUnit 0 = evenUnit 0 
   rw [epsilonR_mulVec_apply]
   rfl
 
-/-- 人手の `‖x^{(+)}‖² = 1` の 14 行の鎖（人手の `M_col` は `n + 1`、`ν(I)` は `I : Conf (n + 1)`）。 -/
+/-- 人手の `‖x^{(+)}‖² = 1` の 16 行の鎖（人手の `M_col` は `n + 1`、`ν(I)` は `I : Conf (n + 1)`）。 -/
 theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 := by
   have hcard : 1 ≤ Fintype.card (Conf (n + 1)) := by
     rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one (n + 1)
-  have h2 : (0 : ℝ) ≤ 2 := by norm_num
-  have h2ne : (2 : ℝ) ≠ 0 := by norm_num
+  have h2 : (0 : ℝ) ≤ 2 := (lt_iff_le_and_ne.mp real_zero_less_than_two).1
+                          -- `real_zero_less_than_two` の `0 < 2_ℝ` と `<` の意味の前半（`x → 0, y → 2_ℝ`）で `2_ℝ ∈ ℝ_{≥0}`
+  have h2ne : (2 : ℝ) ≠ 0 := real_two_is_nonzero
+                          -- `real_two_is_nonzero` の `2_ℝ ≠ 0`
   calc vecNorm (evenUnit (n + 1)) ^ 2
       = (Real.sqrt (∑ I, |evenUnit (n + 1) I| ^ 2)) ^ 2 := by
         rw [vecNorm, vecNormSq_eq_sum]
@@ -229,9 +234,15 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
     _ = (2 * (1 / 2) : ℝ) ^ (n + 1) :=
         product_of_real_powers_is_power_of_product (n + 1) 2 (1 / 2)
                           -- `product_of_real_powers_is_power_of_product`（`a → 2_ℝ`、`b → 1/2_ℝ`、`m → M_col`）
+    _ = (2 * (1 * 2⁻¹) : ℝ) ^ (n + 1) := by
+        rw [div_eq_mul_inv]
+                          -- `def_real_quotient`（`y → 1`、`z → 2_ℝ ≠ 0`）
+    _ = (2 * 2⁻¹ : ℝ) ^ (n + 1) := by
+        rw [one_mul]
+                          -- `1` は ℝ の乗法の単位元（`set_and_algebra_notation`）の `1·x = x`（`x → 2_ℝ^{-1}`）
     _ = (1 : ℝ) ^ (n + 1) := by
-        rw [mul_one_div_cancel h2ne]
-                          -- ℝ で `p · (1/p) = 1`（`p → 2_ℝ ≠ 0`）
+        rw [mul_inv_cancel₀ h2ne]
+                          -- `def_real_quotient` の乗法の逆元 `z z^{-1} = 1_ℝ`（`z → 2_ℝ ≠ 0`）
     _ = 1 := power_of_real_one_is_one (n + 1)
                           -- `power_of_real_one_is_one`（`m → M_col`）
 

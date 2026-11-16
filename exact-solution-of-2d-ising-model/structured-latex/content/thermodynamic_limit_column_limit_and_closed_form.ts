@@ -2240,7 +2240,37 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         ref("power_of_two_in_integers_is_at_least_one"),
         " より ",
         math(String.raw`2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        " である。",
+        math(String.raw`2_{\mathbb{R}}`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
         " であり、",
+        ref("real_zero_less_than_two"),
+        " の ",
+        math(String.raw`0 < 2_{\mathbb{R}}`),
+        " と、順序体 ",
+        math(String.raw`\mathbb{R}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）の ",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のことの前半（",
+        math(String.raw`x \to 0,\ y \to 2_{\mathbb{R}}`),
+        "）より ",
+        math(String.raw`0 \leq 2_{\mathbb{R}}`),
+        "、すなわち ",
+        math(String.raw`2_{\mathbb{R}} \in \mathbb{R}_{\ge 0}`),
+        " である。また ",
+        ref("real_two_is_nonzero"),
+        " より ",
+        math(String.raw`2_{\mathbb{R}} \neq 0`),
+        " である。",
         math(String.raw`\sqrt{2} := \sqrt{2_{\mathbb{R}}}^{(\mathbb{R}_{\ge 0})}`),
         "（",
         ref("definition_of_sqrt_r_positive"),
@@ -2277,8 +2307,12 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
    \quad (\because \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2 = x\ (x \to 2_{\mathbb{R}} \in \mathbb{R}_{\ge 0})) \\
 &= \left(2_{\mathbb{R}}\cdot\frac{1}{2_{\mathbb{R}}}\right)^{M_{\mathrm{col}}}
    \quad (\because \blkref{product_of_real_powers_is_power_of_product}\ (a \to 2_{\mathbb{R}},\ b \to 1/2_{\mathbb{R}},\ m \to M_{\mathrm{col}})) \\
+&= \left(2_{\mathbb{R}}\cdot\left(1\cdot 2_{\mathbb{R}}^{-1}\right)\right)^{M_{\mathrm{col}}}
+   \quad (\because \blkref{def_real_quotient}\ (y \to 1,\ z \to 2_{\mathbb{R}} \neq 0)) \\
+&= \left(2_{\mathbb{R}}\cdot 2_{\mathbb{R}}^{-1}\right)^{M_{\mathrm{col}}}
+   \quad (\because 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ 1 \cdot x = x\ (x \to 2_{\mathbb{R}}^{-1})) \\
 &= 1^{M_{\mathrm{col}}}
-   \quad (\because \mathbb{R}\ \text{で}\ p\cdot\tfrac{1}{p} = 1\ (p \to 2_{\mathbb{R}} \neq 0)) \\
+   \quad (\because \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to 2_{\mathbb{R}} \neq 0)) \\
 &= 1
    \quad (\because \blkref{power_of_real_one_is_one}\ (m \to M_{\mathrm{col}}))
 \end{aligned}`,
@@ -2393,6 +2427,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: a_+ の直前で σ^x の行列の形を引く段落の出典を、pauli_matrix_products（Pauli 行列の積の主張）から Pauli 行列の定義 def_pauli_matrices に替えた（Pauli 行列の定義を主張から分けたため）。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: ‖x^{(+)}‖ = 0 を仮定した背理法の鎖の最後の行 0·0 = 0 の名前だけの根拠「ℝ で 0·0 = 0」を real_times_zero_is_zero（x → 0）の参照に替えた。式の両端と主張は不変。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認）: ‖x^{(+)}‖ = 1 を示す段の名前だけの根拠 4 つを参照にした。背理法の結びの「ℝ で 1 ≠ 0」を、等号の対称律で 0 = 1 とし体 ℝ の公理の 0 ≠ 1（set_and_algebra_notation）に反する形に、根拠の無かった「ℝ_{≥0} と ≠ 0 を合わせて ℝ_{>0}」を、等号の対称律の対偶で 0 ≠ ‖x^{(+)}‖ とし ℝ の x < y は x ≤ y かつ x ≠ y のことで 0 < ‖x^{(+)}‖ とする形に、「1 ∈ ℝ_{>0}」を real_zero_less_than_one の参照に、‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の鎖の「ℝ で 1·1 = 1」を 1 は ℝ の乗法の単位元（set_and_algebra_notation）の参照にした。式と主張は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: ノルムの鎖の「ℝ で p·(1/p) = 1（p → 2_ℝ ≠ 0）」の 1 行を、def_real_quotient（y → 1、z → 2_ℝ ≠ 0）→ 1 は ℝ の乗法の単位元（set_and_algebra_notation）の 1·x = x → def_real_quotient の乗法の逆元 z z^{-1} = 1_ℝ の 3 行に割り、鎖を 16 行にした。鎖の前に、2_ℝ が def_real_two の 2 であること、real_zero_less_than_two と < の意味の前半で 2_ℝ ∈ ℝ_{≥0}（√2 の根号の中と鎖の definition_of_sqrt_r_positive の行の条件）、real_two_is_nonzero で 2_ℝ ≠ 0 であることを書いた。鎖の両端と主張は不変。",
       ],
     },
   },
