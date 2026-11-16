@@ -363,11 +363,21 @@ export default defineBlocks([
         math(String.raw`x = 0`),
         " かつ ",
         math(String.raw`-y = 0`),
-        "、よって ",
+        " である。",
         math(String.raw`\mathbb{R}`),
-        " で ",
-        math(String.raw`y = -(-y) = -0 = 0`),
-        " となり ",
+        " で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y
+&= -(-y)
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to y)\ \text{を右辺から左辺へ}\bigr)\\
+&= -0
+&&(\because\ \text{仮定から得た}\ -y = 0)\\
+&= 0
+&&(\because\ \blkref{real_negation_of_zero_is_zero})
+\end{aligned}`),
+      paragraph([
+        "となり ",
         math(String.raw`w = (0,0)`),
         " である。これは ",
         math(String.raw`w \in \mathbb{C}^{\times} = \mathbb{C}\setminus\{(0,0)\}`),
@@ -412,6 +422,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。check_number_operator_is_hermitian (3) の conj(α_μ) の鎖が「\\overline{z^{-1}} = (\\bar z)^{-1}」を根拠なしに使っていたので、主張のブロックに切り出した。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認）: 準備（\\overline{w} ∈ ℂ^×）の文中の y = -(-y) = -0 = 0 が -(-y) = y と -0 = 0 を根拠なしに使っていたので、1 行 1 等号の鎖にし、real_double_negation（a → y）と real_negation_of_zero_is_zero の参照にした（準備の結論と主張は不変）。",
       ],
     },
   },

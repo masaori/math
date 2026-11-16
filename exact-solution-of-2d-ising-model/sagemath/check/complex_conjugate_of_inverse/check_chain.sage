@@ -25,6 +25,24 @@ assert cc_mul(cw, cc_inv(cw)) == one and cc_mul(cc_inv(cw), cw) == one
 # 準備: conj(w) = (x, -y) で、(x, -y) = (0, 0) なら (x, y) = (0, 0)
 assert cw == (x, -y)
 assert cw[0]^2 + cw[1]^2 == w[0]^2 + w[1]^2          # conj(w) の成分の平方和は w のものと同じ（0 でない）
+# 準備の y の鎖 3 行: y = -(-y) = -0 = 0。
+# 一般形: real_double_negation の -(-a) = a と real_negation_of_zero_is_zero の -0 = 0 を QQ[a_y] で確かめる
+Ra_y = PolynomialRing(QQ, "a_y")
+a_y = Ra_y.gen()
+assert -(-a_y) == a_y                                 # real_double_negation（一般形）
+assert -Ra_y(0) == Ra_y(0)                            # real_negation_of_zero_is_zero
+# 当てはめ: y を不定元 t_y に置き、仮定 -y = 0 を課した剰余環 QQ[t_y]/(-t_y) で隣り合う行を比べる
+Rt_y = PolynomialRing(QQ, "t_y")
+t_y = Rt_y.gen()
+Q_y = Rt_y.quotient(Rt_y.ideal(-t_y))
+ty = Q_y(t_y)
+assert -ty == 0                                       # 剰余環で仮定 -y = 0 が成り立つ
+y_chain = [ty, -(-ty), -Q_y(0), Q_y(0)]               # y, -(-y), -0, 0
+for k in range(len(y_chain) - 1):
+    assert y_chain[k] == y_chain[k + 1], ("y chain", k)
+assert t_y == -(-t_y)                                 # 1 行目は仮定なしでも成り立つ（real_double_negation の当てはめ a → y）
+# 対照: 仮定を外すと 2 行目 -(-y) = -0 は成り立たない（QQ[t_y] で -(-t_y) ≠ -0）
+assert -(-t_y) != -Rt_y(0)
 # 準備の鎖: conj(w)conj(w^{-1}) = conj(w w^{-1}) = conj(1_C) = 1_C
 prep = [
     cc_mul(cw, cc_conj(wi)),
@@ -55,5 +73,5 @@ for (a, b) in [(1, 0), (0, 1), (2, -3), (QQ(1) / 2, QQ(5) / 7), (-4, 0)]:
     assert lhs[0] + KG.gen() * lhs[1] == (z^(-1)).conjugate() == (z.conjugate())^(-1)
 # 否定コントロール: 共役を取らない逆元 w^{-1} は (conj w)^{-1} と一般には異なる
 assert cc_inv(w) != cwi
-print("w = (x, y) を有理関数体に置いて準備の鎖 3 行・主鎖 5 行を確かめ、具体の w 5 個で QQ(i) と突き合わせた。否定コントロール 1 件")
+print("準備の y = -(-y) = -0 = 0 の 3 行（一般形 2 件・当てはめ）、w = (x, y) を有理関数体に置いて準備の鎖 3 行・主鎖 5 行を確かめ、具体の w 5 個で QQ(i) と突き合わせた。否定コントロール 2 件")
 print("RESULT: PASS")

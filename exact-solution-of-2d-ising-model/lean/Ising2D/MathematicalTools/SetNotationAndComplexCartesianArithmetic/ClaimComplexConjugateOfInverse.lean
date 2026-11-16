@@ -8,7 +8,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 準備（`\overline{w} ∈ ℂ^×`）: `\overline{w} = (x,-y)`、`(0,0)` なら `x = 0` かつ `-y = 0` で `y = 0`、`w = (0,0)` と矛盾 | `complex_conjugate_ne_zero` |
+| 準備（`\overline{w} ∈ ℂ^×`）: `\overline{w} = (x,-y)`、`(0,0)` なら `x = 0` かつ `-y = 0`、`y = -(-y) = -0 = 0` の 3 行（`real_double_negation`・`real_negation_of_zero_is_zero`）、`w = (0,0)` と矛盾 | `complex_conjugate_ne_zero`（`y` の鎖は `hy` の `calc` の 3 段） |
 | 準備（`\overline{w}\,\overline{w^{-1}} = 1_ℂ`）の 3 行 | `complex_conjugate_mul_complex_conjugate_inv` の `calc` の 3 段 |
 | 主張の 5 行 | `complex_conjugate_of_inverse` の `calc` の 5 段 |
 
@@ -23,6 +23,8 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifference
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 
 namespace Ising2D
 
@@ -46,9 +48,11 @@ theorem complex_conjugate_ne_zero {w : ℂ} (hw : w ≠ 0) : (starRingEnd ℂ) w
       _ = 0 := Complex.zero_im
   have hy : w.im = 0 :=
     calc w.im
-        = -(-w.im) := (neg_neg _).symm  -- ℝ で `y = -(-y)`
-      _ = -0 := by rw [hy']             -- `-y = 0`
-      _ = 0 := neg_zero                 -- ℝ で `-0 = 0`
+        = -(-w.im) := (real_double_negation w.im).symm
+                                      -- `real_double_negation`（`a → y`）を右辺から左辺へ
+      _ = -0 := by rw [hy']             -- 仮定から得た `-y = 0`
+      _ = 0 := real_negation_of_zero_is_zero
+                                      -- `real_negation_of_zero_is_zero`
   exact hw (Complex.ext (hx.trans Complex.zero_re.symm) (hy.trans Complex.zero_im.symm))
                                       -- `w = (0,0)` は `w ∈ ℂ^×` に反する
 
