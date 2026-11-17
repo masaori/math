@@ -116,9 +116,15 @@ theorem windingTransverseStaircase_step_increase (wh wv : ℤ) (s : ℕ)
 theorem windingTransverseStaircase_injOn (wh wv : ℤ) :
     Set.InjOn (windingTransverseStaircase wh wv)
       (Set.Iic (wh.natAbs + wv.natAbs)) := by
-  exact twoPhaseStaircase_injOn_necSuf wh.natAbs wv.natAbs
-    (Int.sign wh, 0) (0, -Int.sign wv) (windingTransverseCoordinate wh wv)
-    (horizontalStep_transverseCoordinate_pos wh wv)
-    (verticalStep_transverseCoordinate_pos wh wv)
+  have hstrict : StrictMonoOn
+      (fun s => windingTransverseCoordinate wh wv (windingTransverseStaircase wh wv s))
+      (Set.Iic (wh.natAbs + wv.natAbs)) := by
+    apply strictMonoOn_of_lt_succ Set.ordConnected_Iic
+    intro s _ _ hsnext
+    exact (windingTransverseStaircase_step_increase wh wv s
+      (Nat.lt_of_succ_le hsnext)).2
+  intro s hs t ht heq
+  apply hstrict.injOn hs ht
+  exact congrArg (windingTransverseCoordinate wh wv) heq
 
 end Ising2DLambda.KacWard

@@ -71349,7 +71349,10 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
                         math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`),
                         "）と書く。まず一歩の差を二場合で求める。",
                         math(String.raw`r\le n_{\perp}-2`), " の場合、",
-                        math(String.raw`s+1=q\,n_{\perp}+(r+1)`), " かつ ",
+                      ]),
+                      displayMath(String.raw`s+1=q\,n_{\perp}+(r+1)
+\qquad\bigl(\because\ s=q\,n_{\perp}+r\bigr)`),
+                      paragraph([
                         math(String.raw`r+1\in\{0,\ldots,n_{\perp}-1\}`),
                         " なのでこれが ", math(String.raw`s+1`), " の除法の表示であり、",
                       ]),
