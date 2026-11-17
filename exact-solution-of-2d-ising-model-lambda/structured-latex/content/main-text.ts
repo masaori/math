@@ -11260,7 +11260,7 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
                 paragraph(["まず ", math(String.raw`(\mathcal D_\tau,\mathcal D_\upsilon)\in\mathfrak P_{\mathcal J}`), " を固定し、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}`), " と置く。", ref("claim_matching_pair_reconstructed_orbit"), " により各点の置換軌道と二歩軌道の合併は同じ集合なので、最小元も一致する。", ref("def_even_orbit_coloring"), " と ", ref("def_matching_pair_coloring"), " の第一色はともにこの最小元を含む。さらに ", ref("claim_even_orbit_coloring"), " と ", ref("claim_matching_pair_successor_color"), " により、両方の色は ", math(String.raw`\sigma`), " の一歩ごとに反転する。軌道の最小元から順向きの反復回数に関する帰納法で"]),
                 displayMath(String.raw`C_\sigma=C_{\tau,\upsilon}
 \qquad\bigl(\because\ \blkref{claim_matching_pair_reconstructed_orbit},
-\ \blkref{claim_even_orbit_coloring},\ \blkref{claim_matching_pair_successor_color}\bigr).`),
+\ \blkref{claim_even_orbit_coloring},\ \blkref{claim_matching_pair_successor_color}\bigr)`),
                 paragraph(["この色の一致と ", ref("claim_matching_pair_first_recovery"), "、", ref("claim_matching_pair_second_recovery"), " を順に使うと、"]),
                 displayMath(String.raw`\begin{aligned}
 G(F(\mathcal D_\tau,\mathcal D_\upsilon))
@@ -11270,11 +11270,11 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
 &&\bigl(\because\ C_\sigma=C_{\tau,\upsilon}\bigr)\\
 &=(\mathcal D_\tau,\mathcal D_\upsilon)
 &&\bigl(\because\ \blkref{claim_matching_pair_first_recovery},
-\ \blkref{claim_matching_pair_second_recovery}\bigr).
+\ \blkref{claim_matching_pair_second_recovery}\bigr)
 \end{aligned}`),
                 paragraph(["次に ", math(String.raw`\sigma\in\mathfrak S_{\mathcal J}`), " を固定する。", ref("claim_matching_pair_reverse_permutation"), " を適用すると、"]),
                 displayMath(String.raw`F(G(\sigma))=\sigma
-\qquad\bigl(\because\ \blkref{claim_matching_pair_reverse_permutation}\bigr).`),
+\qquad\bigl(\because\ \blkref{claim_matching_pair_reverse_permutation}\bigr)`),
                 paragraph(["両方向の合成が恒等写像なので、", math(String.raw`F`), " は単射かつ全射である。", ref("claim_perfect_matching_involution"), " によるマッチングと相手写像の対応を使っても同じ結論である。空集合では写像の唯一性により両等号が成り立つ。長さ二の軌道と二つのマッチングが共有する対も、上の復元等号に含まれる。有限集合の反復だけを扱い、実数体への脱出はない。"]),
               ],
             },
