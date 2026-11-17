@@ -16,7 +16,7 @@
 | `m → m+1` の 4 行（帰納法の仮定を含む） | 同上 | `m = 0,…,8` で帰納法の仮定 `a^m b^m = (ab)^m` と 4 行の等号を確かめ、Sage の `**`（独立な経路）と比べる | **PASS** | 厳密（38 組の `(a, b)` で等号 1482 個） |
 | `def_sector_rayleigh_sup` の当て方 | 同上 | `(1/√2)^M(1/√2)^M = (1/√2·1/√2)^M = (1/2)^M`、`2^M(1/2)^M = 1^M = 1` | **PASS** | `AA` で厳密 |
 | 否定コントロール | 同上 | 帰納法の段の 2 行目で `ab` の代わりに `a + b` を掛けると等号が崩れる | **PASS** | 36 件 |
-| `m = 0` の鎖の `1·1 = 1`（`x·1 = x` の `x → 1`。`set_and_algebra_notation`） | `check_unit_rows_cite_set_and_algebra_notation.sage` | 行に書いた形と代入どおりに `QQ` の等号で。対照（`2·1 ≠ 1`） | **PASS** | 厳密（1 行） |
+| `m = 0` の鎖の `1·1 = 1`（`x·1 = x` の `x → 1`。`set_and_algebra_notation`） | `check_unit_rows_cite_set_and_algebra_notation.sage` | 行に書いた形と代入どおりに `QQ` の等号で。`QQ` の値で比べるので、形の左右は区別できず、それはレビューの目視で確かめた。対照（`2·1 ≠ 1`） | **PASS** | 厳密（1 行） |
 
 ## 計算の帰属と範囲
 

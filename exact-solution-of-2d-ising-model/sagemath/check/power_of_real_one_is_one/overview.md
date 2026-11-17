@@ -15,7 +15,7 @@
 | `m = 0` の 1 行 | `check_induction_chain.sage` | `1^0 = 1`（冪は `def_power_of_real_number` どおり `a^0 := 1`、`a^{m+1} := a^m a` で組む） | **PASS** | 厳密 |
 | `m → m+1` の 3 行（帰納法の仮定を含む） | 同上 | `m = 0,…,20` で帰納法の仮定 `1^m = 1` と `1^{m+1} = 1^m·1 = 1·1 = 1` を確かめ、Sage の `**` と比べる | **PASS** | 厳密（等号 128 個） |
 | 否定コントロール | 同上 | 底を `1` 以外（`2`、`-1/3`、`1/√2`）にすると `m ≥ 1` で `1` にならない | **PASS** | 60 件 |
-| 帰納法の段の `1·1 = 1`（`x·1 = x` の `x → 1`。`set_and_algebra_notation`） | `check_unit_rows_cite_set_and_algebra_notation.sage` | 行に書いた形と代入どおりに `QQ` の等号で。対照（`2·1 ≠ 1`） | **PASS** | 厳密（1 行） |
+| 帰納法の段の `1·1 = 1`（`x·1 = x` の `x → 1`。`set_and_algebra_notation`） | `check_unit_rows_cite_set_and_algebra_notation.sage` | 行に書いた形と代入どおりに `QQ` の等号で。`QQ` の値で比べるので、形の左右は区別できず、それはレビューの目視で確かめた。対照（`2·1 ≠ 1`） | **PASS** | 厳密（1 行） |
 
 ## 計算の帰属と範囲
 
