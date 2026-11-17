@@ -36996,22 +36996,30 @@ Z_L(1)
 &=B&&\bigl(\because\ \mathcal{B}_L(\sigma)=B\bigr)
 \end{aligned}`),
                     paragraph([
-                      "である。また、", math(String.raw`(0,0)\in V_L`), " における値は ",
-                      math(String.raw`\sigma((0,0))\in\{+1,-1\}`), " なので ",
-                      math(String.raw`\nu_L(\sigma)((0,0))=-\sigma((0,0))\ne\sigma((0,0))`), " であり、",
-                      math(String.raw`\nu_L(\sigma)\ne\sigma`), " である。",
+                      "である。また、", math(String.raw`(0,0)\in V_L`), " で ",
+                      math(String.raw`\sigma((0,0))\in\{+1,-1\}`), " なので、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\nu_L(\sigma)((0,0))
+&=-\sigma((0,0))
+&&\bigl(\because\ \blkref{def_global_spin_reversal}\bigr)\\
+&\ne\sigma((0,0))
+&&\bigl(\because\ \sigma((0,0))\in\{+1,-1\}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "従って ", math(String.raw`\nu_L(\sigma)\ne\sigma`), " である。",
                       math(String.raw`\tau\in\Sigma_L(B)`), " を任意に取る。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \tau\in\Sigma_L(B)
 &\Longleftrightarrow \tau=\sigma\ \text{ または }\ \tau=\nu_L(\sigma)
-&&\bigl(\because\ \blkref{claim_same_broken_edges_equal_or_global_reversal},\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\bigr),\\
+&&\bigl(\because\ \blkref{claim_same_broken_edges_equal_or_global_reversal},\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\bigr)\\
 \Sigma_L(B)
 &=\left\{\sigma,\nu_L(\sigma)\right\}
-&&\bigl(\because\ \Sigma_L(B)\text{ の定義と上の同値}\bigr),\\
+&&\bigl(\because\ \Sigma_L(B)\text{ の定義と上の同値}\bigr)\\
 |\Sigma_L(B)|
 &=2
-&&\bigl(\because\ \nu_L(\sigma)\ne\sigma\bigr).
+&&\bigl(\because\ \nu_L(\sigma)\ne\sigma\bigr)
 \end{aligned}`),
                     paragraph(["を得る。したがって有限和を ", math(String.raw`\mathcal{B}_L`), " の値ごとにまとめると"]),
                     displayMath(String.raw`\begin{aligned}
@@ -47436,6 +47444,90 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                     math(String.raw`\overline{\mathbb Q}`), " の部分集合についての三分法である。",
                     "実数体と複素数体は使わない。",
                   ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_quadratic_inverse_mem",
+              focus: {
+                id: "zero_pinching_claim_quadratic_inverse_mem",
+                kind: "claim",
+                title: { text: "二次体の非零元の逆元の表示" },
+                labels: ["claim_quadratic_inverse_mem"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/quadratic-inverse"],
+                lean: [
+                  "Ising2DLambda.FisherZero.quadraticInverse_mem",
+                  "Ising2DLambda.NecSuf.FisherZero.inverse_mem_necSuf",
+                  "Ising2DLambda.FisherZero.quadraticInverse_mem_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "有理数の包含を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                    " とし（", ref("def_algebraic_numbers"), "）、",
+                    math(String.raw`s\in\overline{\mathbb Q}`), " は ",
+                    math(String.raw`s\cdot s=\iota(2)`), " を満たすとする（",
+                    ref("claim_sqrt_two_exists"), "）。任意の ",
+                    math(String.raw`\xi\in Q_s`), "（", ref("def_quadratic_field_set"), "）で ",
+                    math(String.raw`\xi\ne0`), " ならば、",
+                    math(String.raw`\xi^{-1}\in Q_s`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
+                    " と置く（", ref("def_quadratic_representation_map"), "）。",
+                    math(String.raw`d:=a^2-2b^2\in\mathbb Q`),
+                    " と置く。有理係数の共役との積を計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi\bigl(\iota(a)-\iota(b)s\bigr)
+&=\bigl(\iota(a)+\iota(b)s\bigr)\bigl(\iota(a)-\iota(b)s\bigr)
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=\iota(a)^2-\iota(b)^2s^2
+&&\bigl(\because\ \text{平方差の公式}\bigr)\\
+&=\iota(a)^2-2\iota(b)^2
+&&\bigl(\because\ s^2=\iota(2),\ \blkref{claim_sqrt_two_exists}\bigr)\\
+&=\iota(a^2-2b^2)
+&&\bigl(\because\ \iota\text{ は体の演算を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(d)
+&&\bigl(\because\ d\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`d=0`), " と仮定する。上の積の等式と ",
+                    math(String.raw`\xi\ne0`), "、体 ", math(String.raw`\overline{\mathbb Q}`),
+                    " の零積性から ", math(String.raw`\iota(a)-\iota(b)s=0`), " となる。",
+                  ]),
+                  displayMath(String.raw`\iota(a)+\iota(-b)s=\iota(0)+\iota(0)s
+\quad\bigl(\because\ \iota(-b)=-\iota(b),\ \text{直前の等式}\bigr)`),
+                  paragraph([
+                    ref("claim_quadratic_representation_unique"), " をこの二つの表示へ適用すると ",
+                    math(String.raw`a=0`), " かつ ", math(String.raw`-b=0`), "、従って ",
+                    math(String.raw`\xi=\iota(0)+\iota(0)s=0`), " となり仮定に反する。ゆえに ",
+                    math(String.raw`d\ne0`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\iota(a/d)+\iota(-b/d)s
+&=\iota(d)^{-1}\bigl(\iota(a)-\iota(b)s\bigr)
+&&\bigl(\because\ \iota\text{ は体の演算を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+\xi\cdot\iota(d)^{-1}\bigl(\iota(a)-\iota(b)s\bigr)
+&=\iota(d)^{-1}\cdot\xi\bigl(\iota(a)-\iota(b)s\bigr)
+&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&=\iota(d)^{-1}\iota(d)
+&&\bigl(\because\ \text{上の共役との積}\bigr)\\
+&=1
+&&\bigl(\because\ d\ne0,\ \iota\text{ の単射性}\bigr)\\
+\xi^{-1}
+&=\iota(a/d)+\iota(-b/d)s
+&&\bigl(\because\ \xi\text{ の逆元の一意性}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ a/d,-b/d\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
+\end{aligned}`),
+                  paragraph(["有理数と代数的数の四則だけを使い、実数体と複素数体は現れない。"]),
                 ],
               },
             },
