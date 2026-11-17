@@ -93063,9 +93063,12 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
                   ],
                   proof: [
                     paragraph([
-                      math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`), " を取り、",
-                      math(String.raw`\eta:=(\varepsilon\cdot\varepsilon)/4\in\mathbb{Q}`),
-                      " と置く。", math(String.raw`\varepsilon`), " は零でない有理数だから ",
+                      math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`), " を取り、次で ",
+                      math(String.raw`\eta\in\mathbb{Q}`), " を定める。",
+                    ]),
+                    displayMath(String.raw`\eta:=(\varepsilon\cdot\varepsilon)/4\qquad(\because\ \mathbb{Q}\text{ の四則})`),
+                    paragraph([
+                      math(String.raw`\varepsilon`), " は零でない有理数だから ",
                       math(String.raw`\varepsilon\cdot\varepsilon\in\mathbb{Q}_{>0}`),
                       " であり、", math(String.raw`\eta\in\mathbb{Q}_{>0}`),
                       " である（", math(String.raw`\mathbb{Q}`), " の四則と順序）。",
