@@ -3675,13 +3675,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
         " にまとまる。",
       ]),
       paragraph([
-        "Step 2（(C)(D)）。交換子は第 2 引数について ",
-        math(String.raw`\mathbb{C}`),
-        " 線型なので、Step 1 の第 1 式と ",
-        ref("def_half_integer_checkZ"),
-        " と ",
-        ref("def_half_integer_checkY"),
-        " より",
+        "Step 2（(C)(D)）。主張 (C) の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3699,9 +3693,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 \end{aligned}`,
       ),
       paragraph([
-        "である。Step 1 の第 2 式 ",
-        math(String.raw`[H_2, Y_j] = 2Z_j`),
-        " からも、一続きに",
+        "である。また、主張 (D) の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3728,13 +3720,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
         math(String.raw`j = 1,\dots,M_{\mathrm{col}}`),
         " が ",
         math(String.raw`l = 0,\dots,M_{\mathrm{col}}-1`),
-        " に 1 対 1 で対応する）。また、",
-        ref("half_integer_phase_antiperiodicity"),
-        " の ",
-        math(String.raw`\exp(-iM_{\mathrm{col}}\tilde\theta_\mu) = -1`),
-        " と ",
-        math(String.raw`Y_0^{\flat} = -Y_{M_{\mathrm{col}}}`),
-        " より、境界の二項は一続きに",
+        " に 1 対 1 で対応する）。境界の二項は一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3752,7 +3738,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 \end{aligned}`,
       ),
       paragraph([
-        "となる。この境界項の等式と Step 1 の第 3 式、交換子の線型性を使うと、主張の左辺から一続きに",
+        "となる。主張 (A) の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3786,19 +3772,13 @@ Z_jZ_j &= I,\quad Y_jY_j = I
         math(String.raw`j = 1,\dots,M_{\mathrm{col}}`),
         " が ",
         math(String.raw`l = 2,\dots,M_{\mathrm{col}}+1`),
-        " に 1 対 1 で対応する）。また、",
-        ref("half_integer_phase_antiperiodicity"),
-        " の ",
-        math(String.raw`\exp(-iM_{\mathrm{col}}\tilde\theta_\mu) = -1`),
-        " と ",
-        math(String.raw`Z_{M_{\mathrm{col}}+1}^{\flat} = -Z_1`),
-        " より、境界の二項は一続きに",
+        " に 1 対 1 で対応する）。境界の二項は一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(-i(M_{\mathrm{col}}+1)\tilde\theta_\mu)\,Z_{M_{\mathrm{col}}+1}^{\flat}
 &= \exp(-iM_{\mathrm{col}}\tilde\theta_\mu)\,\exp(-i\tilde\theta_\mu)\,Z_{M_{\mathrm{col}}+1}^{\flat}
-   &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \exp(-iM_{\mathrm{col}}\tilde\theta_\mu)\,\exp(-i\tilde\theta_\mu)\left(-Z_1\right)
    &&(\because Z_{M_{\mathrm{col}}+1}^{\flat} := -Z_1) \\
 &= \left(-1\right)\exp(-i\tilde\theta_\mu)\left(-Z_1\right)
@@ -3810,7 +3790,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 \end{aligned}`,
       ),
       paragraph([
-        "となる。この境界項の等式と Step 1 の第 4 式、交換子の線型性を使うと、主張の左辺から一続きに",
+        "となる。主張 (B) の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3855,6 +3835,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
           "有限和を O にする行は、添字が 1..M_col−1 の 2 か所だけを finite_sum_of_zero_matrices へのラベル参照にした。" +
           "残る 4 か所は一つの添字を除いた集合の上の和（M_col = 2 では空の和）で、本文の有限和の定義（添字 1..r、r ≥ 1）が覆わないので名前の根拠のまま残した。式・主張は変えていない。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の [H_2, Ž_μ] の鎖の後に置いていた「（最初と最後の等号は def_half_integer_checkZ と def_half_integer_checkY の Ž_μ, Y̌_μ の定義による。）」を削った（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。最初と最後の行の (∵ …) は既に \\blkref{def_half_integer_checkZ}・\\blkref{def_half_integer_checkY} で引いていた。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の二本の鎖の前の導入の文が、鎖の行の根拠と同じもの（交換子の第 2 引数についての ℂ 線型性・Step 1 の第 1 式・def_half_integer_checkZ・def_half_integer_checkY、二本目は Step 1 の第 2 式）を並べていたので、導入の文から削り、「主張 (C) の左辺から一続きに」「主張 (D) の左辺から一続きに」とした。同じ理由で、Step 3・Step 4 の境界の二項の鎖の前の「half_integer_phase_antiperiodicity の exp(−iM_col θ̃_μ) = −1 と Y_0^♭ = −Y_{M_col}（Z_{M_col+1}^♭ = −Z_1）より」と、主計算の鎖の前の「この境界項の等式と Step 1 の第 3（4）式、交換子の線型性を使うと」も削り（行の根拠に \\blkref{half_integer_phase_antiperiodicity}・Y_0^♭（Z_{M_col+1}^♭）の定義・Step 1 の第 3（4）式・交換子の線型性・直前の displayMath が在る）、「主張 (A)（(B)）の左辺から一続きに」とした。添字の付け替えが 1 対 1 であることの文は行の根拠に無いので残した。Step 4 の境界の二項の鎖の 1 行目で名前の文字列で書いていた theorem_exp_product を \\blkref{theorem_exp_product} にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

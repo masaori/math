@@ -8141,20 +8141,17 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         math(String.raw`E_{IJ}`),
         " の積公式。",
         math(String.raw`I,J,K,L\in\{1,2\}^M`),
-        " について、",
-        ref("kronecker_product_rule"),
-        " (1)、",
-        ref("kronecker_multilinear"),
-        " と Step 1 より",
+        " について、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E_{IJ} E_{KL}
-&= (E_{i_1 j_1}\boxtimes\cdots\boxtimes E_{i_M j_M})(E_{k_1 l_1}\boxtimes\cdots\boxtimes E_{k_M l_M}) \\
+&= (E_{i_1 j_1}\boxtimes\cdots\boxtimes E_{i_M j_M})(E_{k_1 l_1}\boxtimes\cdots\boxtimes E_{k_M l_M})
+&&(\because E_{IJ} \text{ の定め方}) \\
 &= (E_{i_1 j_1}E_{k_1 l_1})\boxtimes\cdots\boxtimes(E_{i_M j_M}E_{k_M l_M})
 &&(\because \blkref{kronecker_product_rule}\ (1)) \\
 &= (\delta_{j_1 k_1}E_{i_1 l_1})\boxtimes\cdots\boxtimes(\delta_{j_M k_M}E_{i_M l_M})
-&&(\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
+&&(\because \text{Step 1 の } E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
 &= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL}
 &&(\because \blkref{kronecker_multilinear}\ \text{を各因子へ } M \text{ 回})
 \end{aligned}`,
@@ -8169,9 +8166,7 @@ E_{IJ} E_{KL}
         math(String.raw`0`),
         " であるから ",
         math(String.raw`E_{IJ}E_{KL}=\delta_{JK}E_{IL}`),
-        "。また各因子に ",
-        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}`),
-        " を代入して展開すると",
+        "。また、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -8179,7 +8174,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
 &&(\because \blkref{kronecker_product_rule}\ (2)\ \text{を右辺から左辺へ}) \\
 &= (E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})
-&&(\because I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}) \\
+&&(\because \text{Step 1 の } I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}) \\
 &= \sum_{P=(p_1,\dots,p_M)\in\{1,2\}^M}
    E_{p_1 p_1}\boxtimes\cdots\boxtimes E_{p_M p_M}
 &&(\because \blkref{kronecker_multilinear}\ \text{を各因子へ } M \text{ 回}) \\
@@ -8320,6 +8315,7 @@ W
           "置かれていた根拠 13 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。" +
           "内容・式変形・根拠・参照は変えていない。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の I_{Mat(2^M,ℂ)} の展開の鎖の後に置いていた「（引いたのは kronecker_product_rule (2) と kronecker_multilinear である）」を削り、その鎖の 1 行目の根拠を \\blkref{kronecker_product_rule} (2)、3 行目を \\blkref{kronecker_multilinear} にした（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。同じ Step の E_{IJ}E_{KL} の鎖で名前だけで書いていた「クロネッカー積の積の規則」「各因子についての線型性を M 回」も \\blkref{kronecker_product_rule} (1)・\\blkref{kronecker_multilinear} にした。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の E_{IJ}E_{KL} の鎖の前の導入の文が、鎖の行の \\blkref と同じ参照（kronecker_product_rule (1)・kronecker_multilinear）と「Step 1 より」を並べていたので、導入の文から削り、Step 1 を引く行の根拠を「Step 1 の E_{ij}E_{kl}=δ_{jk}E_{il}」と書いた。I_{Mat(2^M,ℂ)} の展開の鎖の前の「各因子に I_{Mat(2,ℂ)}=E_{11}+E_{22} を代入して展開すると」も行の根拠と重なるので「また、一続きに」とし、その行の根拠を「Step 1 の I_{Mat(2,ℂ)}=E_{11}+E_{22}」と書いた。E_{IJ}E_{KL} の鎖の 1 行目に欠けていた根拠「E_{IJ} の定め方」を足した。式・鎖の両端・段数は不変。",
       ],
     },
   },
