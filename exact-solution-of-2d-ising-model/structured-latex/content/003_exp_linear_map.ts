@@ -728,7 +728,7 @@ s_i
       displayMath(String.raw`\begin{aligned}
 |1_{\mathbb{C}}|
 &= |\iota_{\mathbb{R}\to\mathbb{C}}(1_{\mathbb{R}})|
-&&\bigl(\because\ 1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(1)\ \text{（}\blkref{multiplicative_group_of_cc}\ \text{の証明の冒頭で}\ \blkref{inclusion_rr_to_cc}\ \text{から置いた}\ \mathbb{C}\ \text{の積の単位元）}\bigr)\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ (1_{\mathbb{R}})_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1_{\mathbb{R}})\bigr)\\
 &= |1_{\mathbb{R}}|
 &&\bigl(\because\ \blkref{abs_basic_properties}\ (6)\ (x \to 1_{\mathbb{R}})\bigr)\\
 &= 1
@@ -1097,6 +1097,7 @@ s_i
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の地の文の y_{kl}·0 = 0（K の元に右から 0 を掛ける）に根拠が無かったので、K = ℝ なら real_times_zero_is_zero（x → y_{kl}）、K = ℂ なら complex_times_zero_is_zero（z → y_{kl}）の参照を添えた（式は不変）。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_03_matrix_unit_zero_entry.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の行列単位による展開の (i,j) 成分の議論が地の文の式変形のままで、y_{ij}·1 = y_{ij} と 0 の項を和から落とす段に根拠が無かったので、t_{kl} := y_{kl}(E^{(k,l)})_{ij}・s_k := Σ_l t_{kl} を置く準備の鎖（t_{kl} = 0（(k,l) ≠ (i,j)）、t_{ij} = y_{ij}、s_k = 0（k ≠ i）、s_i = y_{ij}）と、右辺の (i,j) 成分から Y_{ij} に着く 8 行の鎖に書き直した（準備の各鎖は置き方を開く行から始める）。K = ℂ の側は finite_sum_of_matrices_entrywise・def_matrix_scalar_multiple・complex_numbers_form_a_field の積の単位元・finite_sum_of_complex_zeros・finite_sum_with_single_nonzero_term の参照、K = ℝ の側は、実数の行列の和・スカラー倍の主張と、一つの項のほかが 0 の実数の有限和の主張が本文に無いので名前のまま（x·1 = x は set_and_algebra_notation）とした。0 の実数の有限和は finite_sum_of_constant_real_number と real_times_zero_is_zero で引けるが、ほかの ℝ の側の行とそろえて名前のままにした。主張と式の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_04_matrix_unit_expansion_entry_chain.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 7 の鎖の後の段落の「（最後の不等号で引いたのは real_exp_series_converges (2) である）」を削り、鎖の最後の行の根拠「非負実数の指数級数の部分和の上界を a = c_Φ に適用し」を \\blkref{real_exp_series_converges} (2) の参照にした（根拠を式変形の行から引く。式・鎖の両端・段数は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 4 の |1_C| の鎖の 1 行目の根拠を、multiplicative_group_of_cc の証明の冒頭の前置き（別の主張の証明の中の文）を経由する書き方から、「1_C は inclusion_rr_to_cc の略記 (1_R)_C = ι_{R→C}(1_R)」の直接の参照に替えた。式・鎖の両端・段数は不変。",
       ],
     },
   },

@@ -29,7 +29,7 @@ def iota(x):
     return QQbar(QQ(x)) + QQbar(QQ(0)) * QQbar(I)
 one_C = QQbar(1)
 rep.truth(iota(1).real() == 1 and iota(1).imag() == 0, "ι(1_R) = (1, 0)")
-rep.truth(one_C * QQbar(2 + 3*I) == QQbar(2 + 3*I) and one_C == iota(1), "1_C（積の単位元）= ι(1_R)")
+rep.truth(one_C == iota(1), "1_C = ι(1_R)（inclusion_rr_to_cc の略記 (1_R)_C）")
 rep.truth(AA(abs(iota(1))) == AA(real_abs(QQ(1))), "|ι(1_R)| = |1_R|（abs_basic_properties (6)）")
 rep.truth(real_abs(QQ(1)) == 1, "|1_R| = 1（def_real_absolute_value）")
 

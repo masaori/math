@@ -1,3 +1,5 @@
+2026-11-17: Lean の通しの証明のゴールラインの確認の五百八十四個目として、状態台帳の (d4c44p15f15p38h3) を行って済んだ。`exp_converges` の Step 4 の |1_ℂ| の鎖の 1 行目の根拠を、`multiplicative_group_of_cc` の証明の冒頭を経由する書き方から「1_ℂ は `inclusion_rr_to_cc` の略記 (1_ℝ)_ℂ」の直接の参照に替えた（式は不変。Lean は不変。SageMath の検算名を合わせて PASS）。次は状態台帳の「次の一歩」の (d4c44p15f15p38i) から。
+
 2026-11-17: Lean の通しの証明のゴールラインの確認の五百八十三個目として、状態台帳の (d4c44p15f15p38h2) を行って済んだ。`multiplicative_group_of_cc` の証明の「積について閉じること」の段の恒等式 (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) を、式を変えずに新しい主張 `product_of_sums_of_two_squares_identity` にし、閉性の段落と `abs_basic_properties` (4) の鎖の行をその参照に替えた。SageMath の検算を新設（PASS）。Lean は不変。次は (d4c44p15f15p38h3)（`003_exp_linear_map.ts` 731 行付近が 1_ℂ = ι(1) を `multiplicative_group_of_cc` の証明の冒頭から引いている件）。
 
 2026-11-17: Lean の通しの証明のゴールラインの確認の五百八十二個目として、状態台帳の (d4c44p15f15p38h) を (p38h1)〜(p38h3) に割り、(p38h1) を行って済んだ。`complex_numbers_form_a_field` の積のモノイド構造の段落が `multiplicative_group_of_cc` の証明の段から引いていた積の結合律・単位元を、その段の鎖を式を変えずに移した新しい主張 `complex_multiplication_is_associative`・`complex_one_is_multiplicative_identity` にし、参照に替えた（Lean は不変）。SageMath 2 本を新設（PASS）。レビュー 2 回。全検査通過。次は (p38h2)（状態台帳の「次の一歩」）。新しい件 (p38m)。注意: lake は ~/.elan/bin、sage は ~/micromamba/envs/sage/bin。
