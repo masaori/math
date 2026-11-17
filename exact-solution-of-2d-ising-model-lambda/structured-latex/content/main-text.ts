@@ -47498,29 +47498,53 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &&\bigl(\because\ d\text{ の定義}\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`d=0`), " と仮定する。上の積の等式と ",
-                    math(String.raw`\xi\ne0`), "、体 ", math(String.raw`\overline{\mathbb Q}`),
+                    math(String.raw`d=0`), " と仮定する。すると、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi\bigl(\iota(a)-\iota(b)s\bigr)
+&=\iota(d)
+&&\bigl(\because\ \text{上の共役との積}\bigr)\\
+&=\iota(0)
+&&\bigl(\because\ d=0\bigr)\\
+&=0
+&&\bigl(\because\ \iota\text{ は零元を保つ、}\blkref{def_algebraic_numbers}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\xi\ne0`), " と体 ", math(String.raw`\overline{\mathbb Q}`),
                     " の零積性から ", math(String.raw`\iota(a)-\iota(b)s=0`), " となる。",
                   ]),
                   displayMath(String.raw`\iota(a)+\iota(-b)s=\iota(0)+\iota(0)s
 \quad\bigl(\because\ \iota(-b)=-\iota(b),\ \text{直前の等式}\bigr)`),
                   paragraph([
                     ref("claim_quadratic_representation_unique"), " をこの二つの表示へ適用すると ",
-                    math(String.raw`a=0`), " かつ ", math(String.raw`-b=0`), "、従って ",
-                    math(String.raw`\xi=\iota(0)+\iota(0)s=0`), " となり仮定に反する。ゆえに ",
+                    math(String.raw`a=0`), " かつ ", math(String.raw`-b=0`), " である。",
+                    "加法逆元の零性から ", math(String.raw`b=0`), " である。従って、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi
+&=\iota(a)+\iota(b)s
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=\iota(0)+\iota(0)s
+&&\bigl(\because\ a=0,\ b=0\bigr)\\
+&=0
+&&\bigl(\because\ \iota\text{ は零元を保ち、零元との積は零元}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "これは ", math(String.raw`\xi\ne0`), " に反する。ゆえに ",
                     math(String.raw`d\ne0`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\iota(a/d)+\iota(-b/d)s
-&=\iota(d)^{-1}\bigl(\iota(a)-\iota(b)s\bigr)
+\xi\bigl(\iota(a/d)+\iota(-b/d)s\bigr)
+&=\xi\cdot\iota(d)^{-1}\bigl(\iota(a)-\iota(b)s\bigr)
 &&\bigl(\because\ \iota\text{ は体の演算を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
-\xi\cdot\iota(d)^{-1}\bigl(\iota(a)-\iota(b)s\bigr)
 &=\iota(d)^{-1}\cdot\xi\bigl(\iota(a)-\iota(b)s\bigr)
 &&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
 &=\iota(d)^{-1}\iota(d)
 &&\bigl(\because\ \text{上の共役との積}\bigr)\\
 &=1
-&&\bigl(\because\ d\ne0,\ \iota\text{ の単射性}\bigr)\\
+&&\bigl(\because\ d\ne0,\ \iota\text{ の単射性}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
 \xi^{-1}
 &=\iota(a/d)+\iota(-b/d)s
 &&\bigl(\because\ \xi\text{ の逆元の一意性}\bigr)\\
