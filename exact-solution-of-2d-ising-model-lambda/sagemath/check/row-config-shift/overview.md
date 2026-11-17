@@ -73,8 +73,8 @@ $L$ については 4 つの値に限っている。
 
 | 実行日 | 結果 |
 |---|---|
-| 2026-08-08 | すべて通過（$L=1,2,3,4$。上の 1〜7 と「主張が空でないことの確認」） |
+| 2026-11-17 | すべて通過（$L=1,2,3,4$。上の 1〜7 と「主張が空でないことの確認」） |
 
 ```
-sage sagemath/check/row-config-shift/check.sage
+sage -c "__file__='sagemath/check/row-config-shift/check.sage'; load('sagemath/check/row-config-shift/check.sage')"
 ```

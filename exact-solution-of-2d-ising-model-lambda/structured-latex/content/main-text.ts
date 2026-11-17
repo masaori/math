@@ -17590,10 +17590,13 @@ b_{\mathrm{h}}\bigl(S(\tau)\bigr)
                           math(String.raw`b_{\mathrm{v}}(\tau,\tau')`),
                           " を定める集合はこの ",
                           math(String.raw`Y`),
-                          " そのものであり、",
-                          math(String.raw`b_{\mathrm{v}}(\tau,\tau')=|Y|`),
-                          " である。",
+                          " そのものである。",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+b_{\mathrm{v}}(\tau,\tau')
+&=|Y|
+&&(\because\ \blkref{def_inter_row_broken_count}\ \text{と}\ Y\ \text{の定め方})
+\end{aligned}`),
                         paragraph([
                           "また ",
                           math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
