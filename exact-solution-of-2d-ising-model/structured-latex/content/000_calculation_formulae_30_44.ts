@@ -534,6 +534,7 @@ x^2+y^2
           "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
           "式の直後に ref で挙げている。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
       ],
     },
   },
@@ -2458,6 +2459,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "実数の和の行を二行に分けた。上流の定義が未完であることを主張に書いた。計算の誤りは無かった。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したので、" +
           "√r·√r = r を一行で定義から引いていた行を、square_of_real_number_is_product で積を冪 (√r)^2 へ戻す行と、定義の y^2 = x の行の二行に割った（鎖は十の式から十一の式へ）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
       ],
     },
   },
@@ -2499,17 +2501,12 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 z
 &=\sqrt{z}\sqrt{z}
-&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&&(\because\ \blkref{sqrt_squared_is_original}\ \text{を右辺から左辺へ})\\
 &=\sqrt{z\cdot z}
-&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&&(\because\ \blkref{condition_of_commutativity_of_sqrt_and_product}\ \text{の第 1 の場合（}z_1=z_2=z\text{）を右辺から左辺へ})\\
 &=\sqrt{z^2}
 &&(\because\ z\cdot z=z^{2})
 \end{aligned}`),
-      paragraph([
-        "（第 1 の等号で引いたのは ",
-        ref("sqrt_squared_is_original"),
-        "。）",
-      ]),
       paragraph([
         math(String.raw`\pi\leq\alpha<2\pi`),
         " の場合。このとき ",
@@ -2525,19 +2522,14 @@ z
       displayMath(String.raw`\begin{aligned}
 z
 &=\sqrt{z}\sqrt{z}
-&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&&(\because\ \blkref{sqrt_squared_is_original}\ \text{を右辺から左辺へ})\\
 &=-\bigl(-\sqrt{z}\sqrt{z}\bigr)
 &&(\because\ \mathbb{C}\ \text{の元}\ w\ \text{について}\ -(-w)=w)\\
 &=-\sqrt{z\cdot z}
-&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&&(\because\ \blkref{condition_of_commutativity_of_sqrt_and_product}\ \text{の第 2 の場合（}z_1=z_2=z\text{）を右辺から左辺へ})\\
 &=-\sqrt{z^2}
 &&(\because\ z\cdot z=z^{2})
 \end{aligned}`),
-      paragraph([
-        "（第 1 の等号で引いたのは ",
-        ref("sqrt_squared_is_original"),
-        "。）",
-      ]),
       paragraph([
         "2 つの場合は ",
         math(String.raw`\alpha\in[0,2\pi)`),
@@ -2562,6 +2554,7 @@ z
           "sqrt_squared_is_original は各式変形の直後へ移した。" +
           "残る 2 件（可換条件と偏角の定義）は使用箇所の散文で既に引かれている。" +
           "式変形・根拠・内容は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。この回に、二つの場合の鎖の後に置いていた「（第 1 の等号で引いたのは sqrt_squared_is_original。）」の段落 2 個を削り、第 1 の等号の根拠を \\blkref{sqrt_squared_is_original}、可換条件の行の根拠を \\blkref{condition_of_commutativity_of_sqrt_and_product} の第 1・第 2 の場合（z_1 = z_2 = z）にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2813,6 +2806,7 @@ z
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の第四の 0 − 2·0·π = 0 の 3 行の鎖と、0 ≤ 0 < 2π から代表元 (1, 0) の偏角 0 に対する整数を 0 と定める地の文を、000_calculation_formulae_20_29.ts に足した主張 angle_section_integer_of_zero_is_zero へ移し、その参照に替えた。√(1_C) の鎖は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の名前だけの根拠「ℝ で a + 0 = a（a → 1）」を set_and_algebra_notation の加法の単位元の参照に替え、0/1 = 0 の行の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。√(1_C) の鎖の「ℝ で 1·x = x を 2 箇所へ」を set_and_algebra_notation の乗法の単位元の参照に替えた。式は不変。0/2 = 0 の行の 2 ≠ 0 は ℝ の 2 を定めるブロックを決める件で扱う。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の 0/2 = 0 の行の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
       ],
     },
   },

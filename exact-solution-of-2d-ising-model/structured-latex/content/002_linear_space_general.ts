@@ -8152,11 +8152,11 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
 E_{IJ} E_{KL}
 &= (E_{i_1 j_1}\boxtimes\cdots\boxtimes E_{i_M j_M})(E_{k_1 l_1}\boxtimes\cdots\boxtimes E_{k_M l_M}) \\
 &= (E_{i_1 j_1}E_{k_1 l_1})\boxtimes\cdots\boxtimes(E_{i_M j_M}E_{k_M l_M})
-&&(\because \text{クロネッカー積の積の規則}) \\
+&&(\because \blkref{kronecker_product_rule}\ (1)) \\
 &= (\delta_{j_1 k_1}E_{i_1 l_1})\boxtimes\cdots\boxtimes(\delta_{j_M k_M}E_{i_M l_M})
 &&(\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
 &= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL}
-&&(\because \text{各因子についての線型性を } M \text{ 回})
+&&(\because \blkref{kronecker_multilinear}\ \text{を各因子へ } M \text{ 回})
 \end{aligned}`,
       ),
       paragraph([
@@ -8177,23 +8177,16 @@ E_{IJ} E_{KL}
         String.raw`\begin{aligned}
 I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &= I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}
-&&(\because \text{クロネッカー積の積の規則 (2) を右辺から左辺へ}) \\
+&&(\because \blkref{kronecker_product_rule}\ (2)\ \text{を右辺から左辺へ}) \\
 &= (E_{11}+E_{22})\boxtimes\cdots\boxtimes(E_{11}+E_{22})
 &&(\because I_{\mathrm{Mat}(2,\mathbb{C})}=E_{11}+E_{22}) \\
 &= \sum_{P=(p_1,\dots,p_M)\in\{1,2\}^M}
    E_{p_1 p_1}\boxtimes\cdots\boxtimes E_{p_M p_M}
-&&(\because \text{各因子についての線型性を } M \text{ 回}) \\
+&&(\because \blkref{kronecker_multilinear}\ \text{を各因子へ } M \text{ 回}) \\
 &= \sum_{P\in\{1,2\}^M} E_{PP}
 &&(\because E_{PP} \text{ の定め方})
 \end{aligned}`,
       ),
-      paragraph([
-        "（引いたのは ",
-        ref("kronecker_product_rule"),
-        " (2) と ",
-        ref("kronecker_multilinear"),
-        " である）。",
-      ]),
       paragraph([
         "Step 3: ",
         math(String.raw`W`),
@@ -8326,6 +8319,7 @@ W
         "2026-09-01 の式変形統一で、Step 3 の二本の鎖と Step 4 の鎖に行中の \\quad(\\because …) で" +
           "置かれていた根拠 13 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。" +
           "内容・式変形・根拠・参照は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の I_{Mat(2^M,ℂ)} の展開の鎖の後に置いていた「（引いたのは kronecker_product_rule (2) と kronecker_multilinear である）」を削り、その鎖の 1 行目の根拠を \\blkref{kronecker_product_rule} (2)、3 行目を \\blkref{kronecker_multilinear} にした（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。同じ Step の E_{IJ}E_{KL} の鎖で名前だけで書いていた「クロネッカー積の積の規則」「各因子についての線型性を M 回」も \\blkref{kronecker_product_rule} (1)・\\blkref{kronecker_multilinear} にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -9267,6 +9261,7 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
           "（blkref が使えるようになったため）。内容・式変形・根拠・参照は不変である。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 第 2 列以降の成分の鎖の最後の行「Σ a_{ik}·0 = 0」の根拠「0 を掛けた項だけの有限和は 0」（右から 0 を掛けると 0 と、0 だけの有限和は 0 の 2 つの事実を 1 行で使っていた）を割った。鎖は Σ 0 で止め、各項を 0 にする行を K = ℝ なら real_times_zero_is_zero、K = ℂ なら complex_times_zero_is_zero の参照にし、Σ 0 = 0 を K = ℂ は finite_sum_of_complex_zeros、K = ℝ は finite_sum_of_constant_real_number と real_times_zero_is_zero の鎖で示した（(AW)_{ij} = 0 という結論は不変）。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認）: ‖AW‖ と ‖W‖ の鎖の 2 行目の根拠「|0| = 0（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない」（|0| = 0、0 の平方は 0、0 の項を落とした ℝ の有限和の 3 つの事実を 1 つの根拠で使っていた）を割った。鎖の前に、2 ≤ j ≤ n の |(AW)_{ij}|^2 と |W_{ij}|^2 を |0|^2 = 0^2 = 0·0 = 0（matrix_norm_triangle_inequality の Step 1・square_of_real_number_is_product・real_times_zero_is_zero）とする鎖と、内側の和を新しく足した finite_sum_of_real_numbers_with_single_nonzero_term で第 1 列の項に縮める等式を置き、2 行目の根拠をその等式の参照にした（鎖の両端と主張は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-10 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
       ],
     },
   },

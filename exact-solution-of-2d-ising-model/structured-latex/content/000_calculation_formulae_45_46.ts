@@ -205,6 +205,7 @@ T_B(I)
           "Lean の対応は Ising2D.Conjugation.conj_mul_matrix・conj_one_matrix・mul_mul_inv_rev_matrix・inv_rev_mul_mul_matrix・mulUnitOfChains（GH が正則）・units_mul_inv_rev_matrix・conj_comp_matrix・conj_comp_matrix_of_chains（ClaimConjugationIsRingHom.lean）、必要十分版 NecSuf.Conj.sandwich_mul・sandwich_one・sandwich_comp を同じ段の calc にした。数値検証: sagemath/check/117_conjugation_is_ring_homomorphism/check_02_chains.sage。",
         "式変形の書き方の統一（2026-08-09）。Step 1 / Step 2 / Step 3 という番号での区切りを、それぞれの中間目標の名前（乗法性・単位性・合成則）へ変えた。合成則の中の逆元の公式は式変形ではなく準備なので、そう呼び直した。証明の冒頭に置かれていた共役写像の定義への参照を、それを使った各鎖の直後へ移した（この生成器は \\blkref を定義していないので、(∵ …) の中には題を書き、ラベル参照は式の直後に置く）。式変形の段は 1 つも増減していない。",
         "2026-08-31 の式変形統一で、五本の鎖に行中の \\quad(\\because …) で置かれていた根拠 20 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・参照は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
       ],
     },
   },

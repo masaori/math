@@ -3699,13 +3699,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 \end{aligned}`,
       ),
       paragraph([
-        "（最初と最後の等号は ",
-        ref("def_half_integer_checkZ"),
-        " と ",
-        ref("def_half_integer_checkY"),
-        " の ",
-        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
-        " の定義による。）Step 1 の第 2 式 ",
+        "である。Step 1 の第 2 式 ",
         math(String.raw`[H_2, Y_j] = 2Z_j`),
         " からも、一続きに",
       ]),
@@ -3860,6 +3854,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
           "（matrix_plus_zero_matrix・zero_matrix_plus_matrix）の 2 行に分け、「零行列を引いても変わらない」（2 か所）を matrix_minus_zero_matrix へのラベル参照に替えた。" +
           "有限和を O にする行は、添字が 1..M_col−1 の 2 か所だけを finite_sum_of_zero_matrices へのラベル参照にした。" +
           "残る 4 か所は一つの添字を除いた集合の上の和（M_col = 2 では空の和）で、本文の有限和の定義（添字 1..r、r ≥ 1）が覆わないので名前の根拠のまま残した。式・主張は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の [H_2, Ž_μ] の鎖の後に置いていた「（最初と最後の等号は def_half_integer_checkZ と def_half_integer_checkY の Ž_μ, Y̌_μ の定義による。）」を削った（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。最初と最後の行の (∵ …) は既に \\blkref{def_half_integer_checkZ}・\\blkref{def_half_integer_checkY} で引いていた。式・鎖の両端・段数は不変。",
       ],
     },
   },
