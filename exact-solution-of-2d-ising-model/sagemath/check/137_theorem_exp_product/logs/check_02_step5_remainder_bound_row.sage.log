@@ -1,0 +1,4 @@
+=== theorem_exp_product: Step 5 の剰余の評価の行 ===
+  確かめた行: 540
+checks: 1441, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

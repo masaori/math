@@ -1,0 +1,4 @@
+=== exp_converges: Step 7 の部分和の上界の行 ===
+  確かめた行: 260
+checks: 326, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS
