@@ -1,3 +1,6 @@
+- 現在地: **2026-11-16（主経路）、分散因子の有限積の実対数をモードごとの和へ移す主張を Lean 具体版で合成した。** 残るのは必要十分版・導出版である。
+- レビュー記録: 2026-11-16（主経路）: 直前の有限積の実対数の補題を本文の最終行と照合し、正値性の前提と有限積の添字に食い違いは無かった。
+- 前進の記録: 2026-11-16: 正の因子の有限積が符号付き多項式値の平方に等しいことから非零性を導き、実対数の補題を合成して `claim_dispersion_product_real_log_sum` を Lean 具体版へ登録した。
 - 現在地: **2026-11-16（並列の連続実行）、「半格子ずれた四つのモード和は同じ積分へ収束する」の合成の段のうち、主経路の実対数を使わない二段を Lean 具体版・必要十分版・導出版で示した。** 具体版 `modeSum_realizedDispersionLog_eq_sampleSum`（`RealEscape/ShiftedModeSumReindex.lean`）は、モード和 $\sum_{(\varpi,\varsigma)}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))$ を $\Theta_{L,a,b}$ の逆像で $\{0,\dots,L-1\}^2$ へ再添字付けし、角表示と $f_q$ の定義で標本点和 $\sum_{k,l}f_q(t^{a,b}_{L,k,l})$ へ移す（本文の最初の式鎖の二〜四行目）。`halfInvSq_sampleSum_tendsto` は $\frac1{2L^2}\sum f_q(t)\to I/(8\pi^2)$（結論の式鎖の二・三行目）。残るのは主経路の `claim_dispersion_product_real_log_sum` の具体版との合成と `lean:` の登録だけである。
 - レビュー記録: 2026-11-16（並列）: 「半格子ずれた四つのモード和は同じ積分へ収束する」の再添字付けの行が、$k\mapsto e_{L,c,k}$ の $\{0,\dots,L-1\}$ 上の単射性を `claim_twisted_mode_product_bijection` だけで済ませていた。この単射性は `claim_twisted_modes_complex_roots_bijection` の証明の中にしか無いので、並列の表の合成の段の備考に、主張ブロックへ切り出して引く作業として載せた（本文は未変更）。
 - 前進の記録: 2026-11-16: 実対数の行を絶対値から平方への移行、実際の多項式での合成、必要十分版に割った。最初の論法 `realLog_abs_eq_half_realLog_sq` を Lean 具体版で示した。

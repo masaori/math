@@ -170,10 +170,9 @@ theorem windingParallelStaircase_transverse_width_bound
           windingTransverseCoordinate wh wv Q ∧
       windingTransverseCoordinate wh wv (Q + windingParallelStaircase L wh wv s) -
           windingTransverseCoordinate wh wv Q ≤ 0 := by
-  exact translatedPath_coordinate_between_necSuf
-    (windingParallelStaircase L wh wv) Q (windingTransverseCoordinate wh wv)
-    (L * wh.natAbs + L * wv.natAbs) (-(L : ℤ) * |wh * wv|) 0
-    (fun r hr => windingParallelStaircase_transverse_between L wh wv r hr) s hs
+  have hwidth := windingParallelStaircase_transverse_between L wh wv s hs
+  rw [map_add]
+  constructor <;> omega
 
 /-- `claim_parallel_staircase_transverse_width_bound` の帯外条件の具体版。 -/
 theorem windingParallelStaircase_above_band_avoids_periodicPlaneLift
