@@ -47602,14 +47602,58 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &&\bigl(\because\ (1_{\mathbb Q},0_{\mathbb Q})\in\mathbb Q\times\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "零元は ", ref("claim_quadratic_zero_mem"), "、加法逆元は ",
-                    ref("claim_quadratic_negation_mem"), "、加法は ",
-                    ref("claim_quadratic_addition_mem"), "、乗法は ",
-                    ref("claim_quadratic_multiplication_mem"), "、非零元の逆元は ",
-                    ref("claim_quadratic_inverse_mem"), " からそれぞれ閉じる。",
+                    "任意の ", math(String.raw`x,y\in Q_s`), " と、零元でない任意の ",
+                    math(String.raw`u\in Q_s`), " について、既存の閉性を適用する。",
+                  ]),
+                  displayMath(String.raw`0\in Q_s\qquad\bigl(\because\ \blkref{claim_quadratic_zero_mem}\bigr)`),
+                  displayMath(String.raw`-x\in Q_s\qquad\bigl(\because\ \blkref{claim_quadratic_negation_mem}\bigr)`),
+                  displayMath(String.raw`x+y\in Q_s\qquad\bigl(\because\ \blkref{claim_quadratic_addition_mem}\bigr)`),
+                  displayMath(String.raw`x\cdot y\in Q_s\qquad\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr)`),
+                  displayMath(String.raw`u^{-1}\in Q_s\qquad\bigl(\because\ \blkref{claim_quadratic_inverse_mem}\bigr)`),
+                  paragraph([
                     "体 ", math(String.raw`\overline{\mathbb Q}`),
                     " の四則を制限したものが部分体の演算である。",
                     "実数体と複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_quadratic_positive_cone_is_subfield_positive_cone",
+              focus: {
+                id: "zero_pinching_claim_quadratic_positive_cone_is_subfield_positive_cone",
+                kind: "claim",
+                title: { text: "二次体の正錐は部分体の正錐である" },
+                labels: ["claim_quadratic_positive_cone_is_subfield_positive_cone"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/quadratic-positive-cone-subfield-positive-cone"],
+                lean: [
+                  "Ising2DLambda.FisherZero.quadraticPositiveCone_isSubfieldPositiveCone",
+                  "Ising2DLambda.NecSuf.FisherZero.positiveCone_of_closed_trichotomy",
+                  "Ising2DLambda.FisherZero.quadraticPositiveCone_isSubfieldPositiveCone_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`), " を有理数の包含とし（", ref("def_algebraic_numbers"), "）、",
+                    math(String.raw`s\in\overline{\mathbb Q}`), " は ", math(String.raw`s\cdot s=\iota(2)`), " を満たすとする。",
+                    math(String.raw`Q_s`), " の部分体構造（", ref("claim_quadratic_field_set_is_subfield"), "）と、",
+                    math(String.raw`P_s\subseteq Q_s`), "（", ref("def_quadratic_positive_cone"), "）を用いる。",
+                    "このとき ", math(String.raw`P_s`), " は ", math(String.raw`Q_s`), " の正錐（", ref("def_subfield_positive_cone"), "）である。",
+                  ]),
+                ],
+                proof: [
+                  displayMath(String.raw`P_s\subseteq Q_s\qquad\bigl(\because\ \blkref{def_quadratic_positive_cone}\bigr)`),
+                  paragraph(["任意の ", math(String.raw`x,y\in P_s`), " を取る。"]),
+                  displayMath(String.raw`x+y\in P_s\qquad\bigl(\because\ \blkref{claim_quadratic_positive_cone_add_closed}\bigr)`),
+                  displayMath(String.raw`x\cdot y\in P_s\qquad\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\bigr)`),
+                  paragraph([
+                    "任意の ", math(String.raw`z\in Q_s`), " について、",
+                    "零・正・負のちょうど一つが成り立つ（", ref("claim_quadratic_positive_cone_ambient_trichotomy"), "）。",
+                    "これらは部分体の正錐の四条件（", ref("def_subfield_positive_cone"), "）である。",
                   ]),
                 ],
               },
