@@ -726,6 +726,9 @@ import Ising2DLambda.FisherZero.RealClosedSubfieldFromNecSuf
 import Ising2DLambda.FisherZero.SubfieldPositiveCone
 import Ising2DLambda.NecSuf.FisherZero.SubfieldPositiveCone
 import Ising2DLambda.FisherZero.SubfieldPositiveConeFromNecSuf
+import Ising2DLambda.FisherZero.SubfieldPrecone
+import Ising2DLambda.NecSuf.FisherZero.SubfieldPrecone
+import Ising2DLambda.FisherZero.SubfieldPreconeFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.FisherZero.RealAlgebraicOrderFromNecSuf

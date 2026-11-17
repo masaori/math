@@ -47395,6 +47395,450 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_subfield_precone",
+        labels: [],
+        title: { text: "前錐とその一歩の延長" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_subfield_precone",
+              focus:
+                {
+                  id: "zero_pinching_def_subfield_precone",
+                  kind: "definition",
+                  title: { text: "部分体の正錐に従う前錐" },
+                  labels: ["def_subfield_precone"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.IsSubfieldPrecone",
+                    "Ising2DLambda.NecSuf.FisherZero.IsPreconeOn",
+                    "Ising2DLambda.FisherZero.isSubfieldPrecone_iff_from_necSuf",
+                  ],
+                  verification: ["sagemath/check/subfield-precone"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " と ",
+                      math(String.raw`E`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体で ",
+                      math(String.raw`F\subseteq E`),
+                      " を満たすものとし、",
+                      math(String.raw`C_F`),
+                      " を ",
+                      math(String.raw`F`),
+                      " の正錐とする（",
+                      ref("def_subfield_positive_cone"),
+                      "）。",
+                      math(String.raw`E`),
+                      " の部分集合 ",
+                      math(String.raw`T`),
+                      " が ",
+                      math(String.raw`(F,C_F)`),
+                      " に従う ",
+                      math(String.raw`E`),
+                      " の",
+                      math(String.raw`\textbf{前錐}`),
+                      "であるとは、次の四条件を満たすことをいう（加法 ",
+                      math(String.raw`+`),
+                      "・乗法 ",
+                      math(String.raw`\cdot`),
+                      " はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のものである）。",
+                    ]),
+                    list([
+                      [
+                        "任意の ",
+                        math(String.raw`a\in T`),
+                        " と任意の ",
+                        math(String.raw`b\in T`),
+                        " について、",
+                        math(String.raw`a+b\in T`),
+                        "。",
+                      ],
+                      [
+                        "任意の ",
+                        math(String.raw`a\in T`),
+                        " と任意の ",
+                        math(String.raw`b\in T`),
+                        " について、",
+                        math(String.raw`a\cdot b\in T`),
+                        "。",
+                      ],
+                      [
+                        "任意の ",
+                        math(String.raw`y\in E`),
+                        " について、",
+                        math(String.raw`y\cdot y\in T`),
+                        "。",
+                      ],
+                      [
+                        math(String.raw`C_F\subseteq T`),
+                        "。",
+                      ],
+                    ]),
+                    paragraph([
+                      "正錐（",
+                      ref("def_subfield_positive_cone"),
+                      "）と違い、前錐には三分法を課さず、零元を含むことも許す。",
+                      "前錐は ",
+                      math(String.raw`E`),
+                      " だけからも ",
+                      math(String.raw`(F,C_F)`),
+                      " だけからも決まらないので、言及するときは常に ",
+                      math(String.raw`F`),
+                      "・",
+                      math(String.raw`C_F`),
+                      "・",
+                      math(String.raw`E`),
+                      " を明示する。",
+                      "この定義は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合と ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の演算だけで述べられ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_precone_adjoin_element_is_precone",
+              focus:
+                {
+                  id: "zero_pinching_claim_precone_adjoin_element_is_precone",
+                  kind: "claim",
+                  title: { text: "前錐に一つの元を付け足した集合は、もとの前錐とその元を含む前錐である" },
+                  labels: ["claim_precone_adjoin_element_is_precone"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/precone-adjoin-element"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.preconeAdjoin",
+                    "Ising2DLambda.FisherZero.preconeAdjoin_isSubfieldPrecone",
+                    "Ising2DLambda.NecSuf.FisherZero.preconeAdjoin_isPreconeOn_necSuf",
+                    "Ising2DLambda.FisherZero.preconeAdjoin_isSubfieldPrecone_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F\subseteq E`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体、",
+                      math(String.raw`C_F`),
+                      " を ",
+                      math(String.raw`F`),
+                      " の正錐（",
+                      ref("def_subfield_positive_cone"),
+                      "）、",
+                      math(String.raw`T`),
+                      " を ",
+                      math(String.raw`(F,C_F)`),
+                      " に従う ",
+                      math(String.raw`E`),
+                      " の前錐（",
+                      ref("def_subfield_precone"),
+                      "）とする。",
+                      math(String.raw`a\in E`),
+                      " に対し、",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合",
+                    ]),
+                    displayMath(String.raw`T\langle a\rangle:=\{\,t+a\cdot t'\mid t\in T,\ t'\in T\,\}`),
+                    paragraph([
+                      "を置く。このとき ",
+                      math(String.raw`T\langle a\rangle`),
+                      " は ",
+                      math(String.raw`(F,C_F)`),
+                      " に従う ",
+                      math(String.raw`E`),
+                      " の前錐であって、",
+                      math(String.raw`T\subseteq T\langle a\rangle`),
+                      " と ",
+                      math(String.raw`a\in T\langle a\rangle`),
+                      " を満たす。",
+                      "記号 ",
+                      math(String.raw`T\langle a\rangle`),
+                      " は前錐 ",
+                      math(String.raw`T`),
+                      " と元 ",
+                      math(String.raw`a`),
+                      " からこの集合を作る操作だけを表し、他の意味に使わない。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "零元 ",
+                      math(String.raw`0`),
+                      " と単位元 ",
+                      math(String.raw`1`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のものとする。まず ",
+                      math(String.raw`T`),
+                      " が零元と単位元を含むことを確かめる。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+0&\in E&&\bigl(\because\ E\text{ は部分体}\bigr),\\
+0\cdot 0&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の平方の条件}\bigr),\\
+0&\in T&&\bigl(\because\ 0\cdot0=0\text{ を代入}\bigr),\\
+1&\in E&&\bigl(\because\ E\text{ は部分体}\bigr),\\
+1\cdot 1&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の平方の条件}\bigr),\\
+1&\in T&&\bigl(\because\ 1\cdot1=1\text{ を代入}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "包含 ",
+                      math(String.raw`T\subseteq T\langle a\rangle`),
+                      "。任意の ",
+                      math(String.raw`t\in T`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+t&=t+a\cdot 0&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の零元との積と加法の単位元}\bigr),\\
+t&\in T\langle a\rangle&&\bigl(\because\ t\in T,\ 0\in T\text{ と }T\langle a\rangle\text{ の定義}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "所属 ",
+                      math(String.raw`a\in T\langle a\rangle`),
+                      "。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+a&=0+a\cdot 1&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の単位元との積と加法の単位元}\bigr),\\
+a&\in T\langle a\rangle&&\bigl(\because\ 0\in T,\ 1\in T\text{ と }T\langle a\rangle\text{ の定義}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`T\langle a\rangle\subseteq E`),
+                      "。任意の ",
+                      math(String.raw`t\in T`),
+                      " と ",
+                      math(String.raw`t'\in T`),
+                      " について、",
+                      math(String.raw`T\subseteq E`),
+                      " から ",
+                      math(String.raw`t\in E`),
+                      "・",
+                      math(String.raw`t'\in E`),
+                      " であり、",
+                      math(String.raw`a\in E`),
+                      " と部分体 ",
+                      math(String.raw`E`),
+                      " の積と和で閉じることから ",
+                      math(String.raw`t+a\cdot t'\in E`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "以下、",
+                      math(String.raw`T\langle a\rangle`),
+                      " の二つの元を ",
+                      math(String.raw`z_1=t_1+a\cdot t_2`),
+                      "・",
+                      math(String.raw`z_2=t_3+a\cdot t_4`),
+                      "（",
+                      math(String.raw`t_1,t_2,t_3,t_4\in T`),
+                      "）と書く。和で閉じること。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+z_1+z_2
+&=(t_1+a\cdot t_2)+(t_3+a\cdot t_4)&&\bigl(\because\ z_1,z_2\text{ の表示}\bigr)\\
+&=(t_1+t_3)+(a\cdot t_2+a\cdot t_4)&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法の結合則と交換則}\bigr)\\
+&=(t_1+t_3)+a\cdot(t_2+t_4)&&\bigl(\because\ \text{分配則}\bigr),
+\end{aligned}`),
+                    displayMath(String.raw`\begin{aligned}
+t_1+t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の和の条件}\bigr),\\
+t_2+t_4&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の和の条件}\bigr),\\
+z_1+z_2&\in T\langle a\rangle&&\bigl(\because\ \text{直前の二つの所属と }T\langle a\rangle\text{ の定義}\bigr).
+\end{aligned}`),
+                    paragraph(["積で閉じること。"]),
+                    displayMath(String.raw`\begin{aligned}
+z_1\cdot z_2
+&=(t_1+a\cdot t_2)\cdot(t_3+a\cdot t_4)&&\bigl(\because\ z_1,z_2\text{ の表示}\bigr)\\
+&=t_1\cdot t_3+t_1\cdot(a\cdot t_4)+(a\cdot t_2)\cdot t_3+(a\cdot t_2)\cdot(a\cdot t_4)&&\bigl(\because\ \text{分配則}\bigr)\\
+&=\bigl(t_1\cdot t_3+(a\cdot a)\cdot(t_2\cdot t_4)\bigr)+a\cdot(t_1\cdot t_4+t_2\cdot t_3)&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の乗法の結合則・交換則と分配則}\bigr),
+\end{aligned}`),
+                    displayMath(String.raw`\begin{aligned}
+t_1\cdot t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+a\cdot a&\in T&&\bigl(\because\ a\in E\text{ と }\blkref{def_subfield_precone}\text{ の平方の条件}\bigr),\\
+t_2\cdot t_4&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+(a\cdot a)\cdot(t_2\cdot t_4)&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+t_1\cdot t_3+(a\cdot a)\cdot(t_2\cdot t_4)&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の和の条件}\bigr),\\
+t_1\cdot t_4+t_2\cdot t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件と和の条件}\bigr),\\
+z_1\cdot z_2&\in T\langle a\rangle&&\bigl(\because\ \text{直前の二つの所属と }T\langle a\rangle\text{ の定義}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "平方の条件。任意の ",
+                      math(String.raw`y\in E`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+y\cdot y&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の平方の条件}\bigr),\\
+y\cdot y&\in T\langle a\rangle&&\bigl(\because\ \text{上の包含 }T\subseteq T\langle a\rangle\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "正錐を含むこと。任意の ",
+                      math(String.raw`c\in C_F`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+c&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の条件 }C_F\subseteq T\bigr),\\
+c&\in T\langle a\rangle&&\bigl(\because\ \text{上の包含 }T\subseteq T\langle a\rangle\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "以上で ",
+                      math(String.raw`T\langle a\rangle`),
+                      " は ",
+                      ref("def_subfield_precone"),
+                      " の四条件を満たし、",
+                      math(String.raw`T`),
+                      " と ",
+                      math(String.raw`a`),
+                      " を含む。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の加法・乗法と部分集合への所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_precone_adjoin_one_side_avoids_minus_one",
+              focus:
+                {
+                  id: "zero_pinching_claim_precone_adjoin_one_side_avoids_minus_one",
+                  kind: "claim",
+                  title: { text: "負の単位元を含まない前錐には、元とその符号反転の少なくとも一方を負の単位元を含めずに付け足せる" },
+                  labels: ["claim_precone_adjoin_one_side_avoids_minus_one"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/precone-adjoin-one-side"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.neg_one_not_mem_preconeAdjoin_or",
+                    "Ising2DLambda.NecSuf.FisherZero.neg_one_not_mem_adjoin_or_necSuf",
+                    "Ising2DLambda.FisherZero.neg_one_not_mem_preconeAdjoin_or_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F\subseteq E`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体、",
+                      math(String.raw`C_F`),
+                      " を ",
+                      math(String.raw`F`),
+                      " の正錐（",
+                      ref("def_subfield_positive_cone"),
+                      "）、",
+                      math(String.raw`T`),
+                      " を ",
+                      math(String.raw`(F,C_F)`),
+                      " に従う ",
+                      math(String.raw`E`),
+                      " の前錐（",
+                      ref("def_subfield_precone"),
+                      "）とし、",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の単位元の符号反転 ",
+                      math(String.raw`-1`),
+                      " が ",
+                      math(String.raw`T`),
+                      " に属さないとする。このとき任意の ",
+                      math(String.raw`a\in E`),
+                      " について、",
+                      math(String.raw`-1\notin T\langle a\rangle`),
+                      " または ",
+                      math(String.raw`-1\notin T\langle -a\rangle`),
+                      " が成り立つ（",
+                      math(String.raw`T\langle\cdot\rangle`),
+                      " は ",
+                      ref("claim_precone_adjoin_element_is_precone"),
+                      " の集合。",
+                      math(String.raw`-a\in E`),
+                      " は ",
+                      math(String.raw`a`),
+                      " の ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " での符号反転である）。",
+                    ]),
+                    paragraph([
+                      "この主張は、列挙に沿って前錐を一元ずつ大きくしながら ",
+                      math(String.raw`-1`),
+                      " を含まないことを保つ一歩として使う。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "背理法による。",
+                      math(String.raw`-1\in T\langle a\rangle`),
+                      " かつ ",
+                      math(String.raw`-1\in T\langle -a\rangle`),
+                      " と仮定する。",
+                      math(String.raw`T\langle\cdot\rangle`),
+                      " の定義から、",
+                      math(String.raw`t_1,t_2,t_3,t_4\in T`),
+                      " で次を満たすものが取れる。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+-1&=t_1+a\cdot t_2,\\
+-1&=t_3+(-a)\cdot t_4.
+\end{aligned}`),
+                    paragraph(["移項して、"]),
+                    displayMath(String.raw`\begin{aligned}
+a\cdot t_2&=-1-t_1&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr),\\
+(-a)\cdot t_4&=-1-t_3&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr).
+\end{aligned}`),
+                    paragraph(["これを使って ", math(String.raw`-1`), " を書き直す。"]),
+                    displayMath(String.raw`\begin{aligned}
+-1
+&=(t_1+t_3+t_1\cdot t_3)-(1+t_1+t_3+t_1\cdot t_3)&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=(t_1+t_3+t_1\cdot t_3)-(-1-t_1)\cdot(-1-t_3)&&\bigl(\because\ \text{分配則による展開}\bigr)\\
+&=(t_1+t_3+t_1\cdot t_3)-(a\cdot t_2)\cdot\bigl((-a)\cdot t_4\bigr)&&\bigl(\because\ \text{移項した二式の代入}\bigr)\\
+&=(t_1+t_3+t_1\cdot t_3)+(a\cdot a)\cdot(t_2\cdot t_4)&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の乗法の結合則・交換則と符号反転}\bigr).
+\end{aligned}`),
+                    paragraph(["右辺の各項の所属は次のとおりである。"]),
+                    displayMath(String.raw`\begin{aligned}
+t_1+t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の和の条件}\bigr),\\
+t_1\cdot t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+t_1+t_3+t_1\cdot t_3&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の和の条件}\bigr),\\
+a\cdot a&\in T&&\bigl(\because\ a\in E\text{ と }\blkref{def_subfield_precone}\text{ の平方の条件}\bigr),\\
+t_2\cdot t_4&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+(a\cdot a)\cdot(t_2\cdot t_4)&\in T&&\bigl(\because\ \blkref{def_subfield_precone}\text{ の積の条件}\bigr),\\
+-1&\in T&&\bigl(\because\ \text{直前の等号と }\blkref{def_subfield_precone}\text{ の和の条件}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "これは ",
+                      math(String.raw`-1\notin T`),
+                      " に反する。したがって ",
+                      math(String.raw`-1\notin T\langle a\rangle`),
+                      " または ",
+                      math(String.raw`-1\notin T\langle -a\rangle`),
+                      " である。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則と部分集合への所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
