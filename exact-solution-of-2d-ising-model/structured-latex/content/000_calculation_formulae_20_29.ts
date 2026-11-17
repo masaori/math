@@ -852,7 +852,7 @@ b
 &= (a,\ 0+b)
 &&(\because\ \blkref{real_minus_zero_is_self}\ (a\to a))\\
 &= (a,b)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`,
       ),
       paragraph(["であり、また"]),
@@ -885,7 +885,7 @@ a^2+b^2
 &\ge 0+0
 &&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -897,7 +897,7 @@ a^2+b^2
         String.raw`\begin{aligned}
 a^2
 &= a^2+0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= a^2+\left(b^2+(-b^2)\right)
 &&(\because\ -b^2\ \text{は}\ b^2\ \text{の和の逆元})\\
 &= \left(a^2+b^2\right)+(-b^2)
@@ -905,7 +905,7 @@ a^2
 &= 0+(-b^2)
 &&(\because\ \text{仮定}\ a^2+b^2=0)\\
 &= -b^2
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -b^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &\le 0
 &&(\because\ b^2\ge 0\ \text{と、和の逆元が順序を反転すること})
 \end{aligned}`,
@@ -943,7 +943,7 @@ a^2+b^2
 &= 0+0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0)\ \text{を 2 箇所へ適用})\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -969,7 +969,7 @@ a^2+b^2
 &= a^2c^2+b^2d^2+a^2d^2+b^2c^2+0
 &&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
 &= a^2c^2+b^2d^2+a^2d^2+b^2c^2
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a^2c^2+b^2d^2+a^2d^2+b^2c^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(a^2+b^2\right)\left(c^2+d^2\right)
 &&(\because\ \mathbb{R}\ \text{の分配律と積の可換律})
 \end{aligned}`,
@@ -1002,7 +1002,7 @@ a^2+b^2
 &= 1+0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= 1
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &> 0
 &&(\because\ \mathbb{R}\ \text{の順序})
 \end{aligned}`,
@@ -1158,6 +1158,7 @@ b
           "それぞれ独立した段として明示した。段は増えており、減った段は無い。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖・平方和の同値の a = b = 0 の鎖・1_C の平方和の鎖の「ℝ では 0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの後ろのブロック）の参照に替えた。平方を積に開く段は square_of_real_number_is_product の参照の行に、1 は積の単位元と 0 を因子にもつ積を束ねた行は 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の最後の行 (a − 0, 0 + b) = (a, b) は、体の公理でない a − 0 = a と和の単位元 0 + b = b を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: この証明の 7 行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と、使った形（積の単位元の鎖の最後の行は左から足す 0 + x = x の x → b、平方和の非負の鎖・a = b = 0 の平方和の鎖は 0 + x = x の x → 0、a² = 0 の鎖は x + 0 = x の x → a² を右辺から左辺へと 0 + x = x の x → −b²、閉性の恒等式は x + 0 = x、1_C の平方和の鎖は x + 0 = x の x → 1）の行に替えた。鎖の両端と段の数は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_03_additive_identity_rows.sage。",
       ],
     },
   },
