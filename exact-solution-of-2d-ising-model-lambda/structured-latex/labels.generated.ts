@@ -512,6 +512,7 @@ export const ALL_LABELS = [
   "claim_quadratic_positive_add_nonnegative_negative_first",
   "claim_quadratic_positive_add_nonnegative_negative_second",
   "claim_quadratic_positive_cone_add_closed",
+  "claim_quadratic_positive_cone_ambient_trichotomy",
   "claim_quadratic_positive_cone_mul_closed",
   "claim_quadratic_positive_cone_nat_mul",
   "claim_quadratic_positive_cone_pow_closed",
