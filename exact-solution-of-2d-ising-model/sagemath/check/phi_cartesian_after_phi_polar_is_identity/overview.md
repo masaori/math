@@ -21,6 +21,7 @@
 | `x < 0` の二つの鎖の本文の四行（検算の三行。`y ≥ 0` で `α+π`、`y < 0` で `α-π`） | 具体の点で、`φ_cart([(S, α±π)])` を 1 の冪根から計算し、`cos(α±π) = -cos α`、`sin(α±π) = -sin α` と、共通の式 `(-S cos α, -S sin α)` に着くこと | **PASS** | 5 点 |
 | `x < 0` の共通の鎖の行 c0 → c8 | 行 c0 → c1 は上と同じく 1 の冪根で（独立に確かめているのは cos の成分）。行 c1 → c8 は一般の点で関係（`x = -X'`、`X' = X`、`W = XU`、`W = S`）だけを代入して、具体の点で `AA` で隣どうしを比べる | **PASS** | 一般の点と 7 点 |
 | `x = 0, y > 0`、`x = 0, y < 0`、`x = y = 0` の鎖 | 具体の点で一行ずつ。`0` を因子にもつ積の行（`y·0`・`(−y)·0` は `real_times_zero_is_zero`、`0·cos 0`・`0·sin 0` は `real_zero_times_is_zero`）と、続く `1` が積の単位元の行、`(−y)(−1)` を ℝ の乗法の可換則・`real_minus_one_times_is_negation`（`a → −y`）・`real_double_negation`（`a → y`）で `y` に戻す 3 行を別の行として比べる。最初の行は `phi_polar_equals` で定義の場合と比べる。`cos(±π/2)`、`sin(±π/2)`、`cos 0`、`sin 0` は 1 の冪根から | **PASS** | 7 点 |
+| `x = 0, y > 0` の鎖の `(0, y·1) = (0, y)`（`x·1 = x` の `x → y`。`set_and_algebra_notation`） | `check_unit_rows_cite_set_and_algebra_notation.sage` で、行に書いた形と代入どおりに `QQ[y]` の多項式の等号で。対照（`2y ≠ y`） | **PASS** | 厳密（1 行） |
 
 ## 計算の帰属と範囲
 

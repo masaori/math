@@ -293,9 +293,9 @@ rr'
 &= [(r\cdot 1,\ \theta+0)]_{\sim}
 &&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r,\ \theta+0)]_{\sim}
-&&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= [(r,\theta)]_{\sim}
-&&(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \theta)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph(["であり、また"]),
       displayMath(String.raw`\begin{aligned}
@@ -305,9 +305,9 @@ e\cdot[(r,\theta)]_{\sim}
 &= [(1\cdot r,\ 0+\theta)]_{\sim}
 &&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r,\ 0+\theta)]_{\sim}
-&&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= [(r,\theta)]_{\sim}
-&&(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \theta)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "である。結合律と単位元の 2 つより、",
@@ -324,6 +324,7 @@ e\cdot[(r,\theta)]_{\sim}
       notes: [
         "2026-11-01: 「（極座標表現）の乗法群」の証明の「結合律」「単位元」「モノイドであること」の段を、" +
           "1 ブロック 1 主張の規律に従って独立した主張として切り出した。計算は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 単位元の 2 本の鎖の 4 行が「1 は ℝ の積の単位元」「0 は ℝ の和の単位元」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と、使った形（右から掛ける側は x·1 = x の x → r と x + 0 = x の x → θ、左から掛ける側は 1·x = x の x → r と 0 + x = x の x → θ）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -846,7 +847,7 @@ b
 &= (a\cdot 1-b\cdot 0,\ a\cdot 0+b\cdot 1)
 &&(\because\ \mathbb{C}\ \text{の積の定義})\\
 &= (a-b\cdot 0,\ a\cdot 0+b)
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元。2 箇所へ適用})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to a,\ x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= (a-0,\ 0+b)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
 &= (a,\ 0+b)
@@ -998,7 +999,7 @@ a^2+b^2
 &= 1\cdot 1+0\cdot 0
 &&(\because\ \blkref{square_of_real_number_is_product}\ (r\to 1,\ r\to 0)\ \text{を 2 箇所へ適用})\\
 &= 1+0\cdot 0
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 1+0
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= 1
@@ -1159,6 +1160,7 @@ b
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖・平方和の同値の a = b = 0 の鎖・1_C の平方和の鎖の「ℝ では 0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの後ろのブロック）の参照に替えた。平方を積に開く段は square_of_real_number_is_product の参照の行に、1 は積の単位元と 0 を因子にもつ積を束ねた行は 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の最後の行 (a − 0, 0 + b) = (a, b) は、体の公理でない a − 0 = a と和の単位元 0 + b = b を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: この証明の 7 行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と、使った形（積の単位元の鎖の最後の行は左から足す 0 + x = x の x → b、平方和の非負の鎖・a = b = 0 の平方和の鎖は 0 + x = x の x → 0、a² = 0 の鎖は x + 0 = x の x → a² を右辺から左辺へと 0 + x = x の x → −b²、閉性の恒等式は x + 0 = x、1_C の平方和の鎖は x + 0 = x の x → 1）の行に替えた。鎖の両端と段の数は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_03_additive_identity_rows.sage。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の (a·1 − b·0, a·0 + b·1) を消す行と、1_C の平方和の鎖の 1·1 を消す行が「ℝ では 1 は積の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → a, x → b と x → 1）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -1254,7 +1256,7 @@ b
 &= (a+0,\ b+0)
 &&(\because\ \text{成分ごとの加法の定義})\\
 &= (a,b)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a,\ x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)
 \end{aligned}`,
       ),
       paragraph(["加法の逆元。"]),
@@ -1297,7 +1299,7 @@ b
 &= \bigl((-1)a,\ (-1)b+0\bigr)
 &&(\because\ \blkref{real_minus_zero_is_self}\ (a\to (-1)a))\\
 &= \bigl((-1)a,\ (-1)b\bigr)
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to (-1)b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-a,-b)
 &&(\because\ \blkref{real_minus_one_times_is_negation}\ (a\to a,\ a\to b)\ \text{を 2 箇所へ適用})
 \end{aligned}`,
@@ -1397,6 +1399,7 @@ b
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の ((−1)a − 0, (−1)b + 0) = ((−1)a, (−1)b) の行は、体の公理でない a − 0 = a と和の単位元 x + 0 = x を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → (−1)a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の最後の行 ((−1)a, (−1)b) = (−a, −b) は、−a が加法の逆元なのに「1 は積の単位元」だけで済ませていた（(−1)a = −(1·a) の段が無い）ので、real_minus_one_times_is_negation（a → a, a → b。同じファイルの後ろのブロック）の参照に替えた。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 加法の単位元の鎖の (a + 0, b + 0) を消す行と、−z と (−1_C)·z の一致の鎖の (−1)b + 0 を消す行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x + 0 = x の x → a, x → b と x → (−1)b）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2698,7 +2701,7 @@ a
 &= (0,\ 0 + 0)
 &&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= (0,\ 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
 \end{aligned}`),
@@ -2711,6 +2714,7 @@ a
         "2026-11-01: 右から 0 を掛ける形は complex_times_zero_is_zero へ移した。この主張を引くのは identity_matrix_is_left_unit_of_mat_mult である。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で 0·x = 0（ℝ は体）を 4 箇所へ適用」は名前だけだった（0 を掛けると 0 になることは体の公理に含まれない）ので、足した主張 real_zero_times_is_zero（x → a, b, b, a）の参照に替えた。式は変えていない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で 0 − 0 = 0」を real_minus_zero_is_self（a → 0）の参照に替えた（式は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 鎖の (0, 0 + 0) = (0, 0) の行が「ℝ で 0 + 0 = 0」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と使った形（x + 0 = x の x → 0）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2752,7 +2756,7 @@ z\,0_{\mathbb{C}}
 &= (0,\ 0 + 0)
 &&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= (0,\ 0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0_{\mathbb{C}}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
 \end{aligned}`),
@@ -2765,6 +2769,7 @@ z\,0_{\mathbb{C}}
           "右から掛ける形を定義から計算する主張として足し、その証明が直接引けるようにした。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で x·0 = 0（ℝ は体）を 4 箇所へ適用」は名前だけだった（0 を掛けると 0 になることは体の公理に含まれない）ので、足した主張 real_times_zero_is_zero（x → a, b, a, b）の参照に替えた。式は変えていない。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で 0 − 0 = 0」を real_minus_zero_is_self（a → 0）の参照に替えた（式は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 鎖の (0, 0 + 0) = (0, 0) の行が「ℝ で 0 + 0 = 0」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と使った形（x + 0 = x の x → 0）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3034,7 +3039,7 @@ z - 0_{\mathbb{C}}
 &= r
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to r)\bigr)\\
 &= 1\, r
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= r^0\, r
 &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to r)\ \text{を右辺から左辺へ}\bigr)\\
 &= r^1
@@ -3060,6 +3065,7 @@ z - 0_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup が x^{(+)} の各成分を「(a_+)_{i_k} = 1/√2 なので (1/√2)^{M_col}」と散文の 1 文で述べていたので、成分の値の鎖から引けるよう足した。Lean は Ising2D.finite_product_of_constant_real_is_power（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfConstantRealIsPower.lean）。数値検証: sagemath/check/finite_product_of_constant_real_is_power/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（検査は落とさない。def_finite_product_of_real_numbers の近くに置くか、定義の置き場を前へ移すかは、状態台帳の前方参照の件と合わせて扱う）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: m = 1 の鎖の r = 1·r の行が「1 は ℝ の乗法の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（1·x = x の x → r を右辺から左辺へ）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3094,7 +3100,7 @@ a^0\, b^0
 &= 1\cdot 1
 &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to a,\ a \to b)\ \text{を 2 箇所へ同時に}\bigr)\\
 &= 1
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (ab)^0
 &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1\ (a \to ab)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -3120,6 +3126,7 @@ a^{m+1}\, b^{m+1}
       status: "added",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖が ((1/√2)^{M_col})^2 = 2^{-M_col} と、本文に定義の無い実数の負の整数の冪と「指数法則」を名前だけで使っていたので、((1/√2)^{M_col})^2 から 1 までを一ステップ一定理でつなぐために足した。Lean は Ising2D.product_of_real_powers_is_power_of_product（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimProductOfRealPowersIsPowerOfProduct.lean）。数値検証: sagemath/check/product_of_real_powers_is_power_of_product/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（finite_product_of_constant_real_is_power と同じ扱い）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: m = 0 の鎖の 1·1 = 1 の行が「1 は ℝ の乗法の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → 1）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3166,7 +3173,7 @@ a^{m+1}\, b^{m+1}
 &= 1\cdot 1
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= 1
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -3174,6 +3181,7 @@ a^{m+1}\, b^{m+1}
       status: "added",
       notes: [
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖の最後の行 1^{M_col} = 1 を引けるよう足した。Lean は Ising2D.power_of_real_one_is_one（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimPowerOfRealOneIsOne.lean）。数値検証: sagemath/check/power_of_real_one_is_one/。引く def_power_of_real_number は 020_critical_point.ts にあり、文書の並びでは後に来る（finite_product_of_constant_real_is_power と同じ扱い）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 帰納法の段の鎖の 1·1 = 1 の行が「1 は ℝ の乗法の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → 1）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -4188,7 +4196,7 @@ z^2
 &= (0,\ y\cdot 1)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to y))\\
 &= (0,\ y)
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (x,\ y)
 &&(\because\ x=0)
 \end{aligned}`,
@@ -4260,6 +4268,7 @@ z^2
           "この主張として切り出した。同時に、各場合の末尾の参照の一覧を各行の \\blkref に移し、各場合の最初の行を写像の合成の定義と φ_polar の定義の二行に分けた。計算は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: x = 0 の三つの場合の鎖の「0 を因子にもつ積は 0」を、real_times_zero_is_zero・real_zero_times_is_zero（同じファイルの前のブロック）の参照に替え、1 は積の単位元・負号を 2 度施すことと束ねていた 2 行はそれぞれ 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/phi_cartesian_after_phi_polar_is_identity/ の x = 0 の鎖を割った行に合わせた。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: x = 0, y < 0 の鎖の「負号を 2 度施すともとに戻る」で (−y)(−1) = y を済ませていた 1 行を、ℝ の乗法の可換則・real_minus_one_times_is_negation（a → −y）・real_double_negation（a → y）の 3 行に割った。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/phi_cartesian_after_phi_polar_is_identity/ の同じ鎖を割った行に合わせた。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: x = 0, y > 0 の鎖の y·1 = y の行が「ℝ では 1 は積の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → y）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
