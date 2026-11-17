@@ -49692,6 +49692,383 @@ q=a/b&\in F&&\bigl(\because\ F\text{ は零元でない元による商で閉じ�
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_subfield_coefficient_polynomial_division",
+        labels: [],
+        title: { text: "部分体を係数とする多項式の除法" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_polynomial_division",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_polynomial_division",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式は、最高次の係数が零でない多項式で割れる" },
+                  labels: ["claim_subfield_coefficient_polynomial_division"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-coefficient-polynomial-division"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfieldConstMulPowMulCoeff",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomialDivision_bound",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomialDivision",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialDivision_necSuf",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomialDivision_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とする。",
+                      math(String.raw`h\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）と ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " が、",
+                      math(String.raw`\mathrm{ac}_n(h)\ne0`),
+                      " を満たし、かつ任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`k>n`),
+                      " ならば ",
+                      math(String.raw`\mathrm{ac}_k(h)=0`),
+                      " を満たすとする（",
+                      math(String.raw`\mathrm{ac}_k`),
+                      " は ",
+                      ref("def_qbar_polynomial_ring"),
+                      " の係数。",
+                      math(String.raw`n`),
+                      " を ",
+                      math(String.raw`h`),
+                      " の最高次の番号と呼ぶ）。このとき、任意の ",
+                      math(String.raw`g\in F[t]`),
+                      " について、",
+                      math(String.raw`u\in F[t]`),
+                      " と ",
+                      math(String.raw`r\in F[t]`),
+                      " で",
+                    ]),
+                    displayMath(String.raw`g=u\cdot h+r,\qquad\text{任意の }k\in\mathbb{N}\text{ について }k\ge n\text{ ならば }\mathrm{ac}_k(r)=0`),
+                    paragraph([
+                      "を満たすものが存在する（和と積は ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " のもの）。",
+                      math(String.raw`u`),
+                      " を商、",
+                      math(String.raw`r`),
+                      " を余りと呼ぶ。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "係数はすべて ",
+                      ref("def_qbar_polynomial_ring"),
+                      " の ",
+                      math(String.raw`\mathrm{ac}_k`),
+                      " であり、値の計算はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の中で行う。",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      " の写像である。",
+                    ]),
+                    paragraph([
+                      "単項式の係数。",
+                      math(String.raw`c\in\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`m\in\mathbb{N}`),
+                      " を取る。任意の ",
+                      math(String.raw`i\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i\bigl(\widehat{c}\cdot t^{m}\bigr)
+&=\sum_{j=0}^{i}\mathrm{ac}_j(\widehat{c})\cdot\mathrm{ac}_{i-j}(t^{m})
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr)\\
+&=\mathrm{ac}_0(\widehat{c})\cdot\mathrm{ac}_{i}(t^{m})+\sum_{j=1}^{i}\mathrm{ac}_j(\widehat{c})\cdot\mathrm{ac}_{i-j}(t^{m})
+&&\bigl(\because\ j=0\ \text{の項を分ける}\bigr)\\
+&=c\cdot\mathrm{ac}_{i}(t^{m})+\sum_{j=1}^{i}0\cdot\mathrm{ac}_{i-j}(t^{m})
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\bigr)\\
+&=c\cdot\mathrm{ac}_{i}(t^{m})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積と和}\bigr)\\
+&=\begin{cases}c&(i=m)\\0&(i\ne m)\end{cases}
+&&\bigl(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`0\in F`),
+                      " なので、",
+                      math(String.raw`c\in F`),
+                      " ならば ",
+                      math(String.raw`\widehat{c}\cdot t^{m}\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）である。",
+                    ]),
+                    paragraph([
+                      "単項式を掛けた多項式の係数。さらに ",
+                      math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+                      " と ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " を取る。",
+                      math(String.raw`k\ge m`),
+                      " なら",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(\widehat{c}\cdot t^{m}\cdot f\bigr)
+&=\sum_{i=0}^{k}\mathrm{ac}_i\bigl(\widehat{c}\cdot t^{m}\bigr)\cdot\mathrm{ac}_{k-i}(f)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr)\\
+&=\mathrm{ac}_m\bigl(\widehat{c}\cdot t^{m}\bigr)\cdot\mathrm{ac}_{k-m}(f)+\sum_{\substack{0\le i\le k\\ i\ne m}}\mathrm{ac}_i\bigl(\widehat{c}\cdot t^{m}\bigr)\cdot\mathrm{ac}_{k-i}(f)
+&&\bigl(\because\ m\le k\ \text{なので}\ i=m\ \text{の項を分ける}\bigr)\\
+&=c\cdot\mathrm{ac}_{k-m}(f)+\sum_{\substack{0\le i\le k\\ i\ne m}}0\cdot\mathrm{ac}_{k-i}(f)
+&&\bigl(\because\ \text{単項式の係数の段}\bigr)\\
+&=c\cdot\mathrm{ac}_{k-m}(f)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積と和}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`k<m`),
+                      " なら",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(\widehat{c}\cdot t^{m}\cdot f\bigr)
+&=\sum_{i=0}^{k}\mathrm{ac}_i\bigl(\widehat{c}\cdot t^{m}\bigr)\cdot\mathrm{ac}_{k-i}(f)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr)\\
+&=\sum_{i=0}^{k}0\cdot\mathrm{ac}_{k-i}(f)
+&&\bigl(\because\ i\le k<m\ \text{より}\ i\ne m\text{、単項式の係数の段 を各項へ同時に当てる}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積と和}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                    ]),
+                    paragraph([
+                      "帰納法の主張。",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " について、次の述語を ",
+                      math(String.raw`P(d)`),
+                      " と書く: 「任意の ",
+                      math(String.raw`g\in F[t]`),
+                      " について、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`k\ge d`),
+                      " ならば ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " であるなら、",
+                      math(String.raw`u,r\in F[t]`),
+                      " で ",
+                      math(String.raw`g=u\cdot h+r`),
+                      " かつ任意の ",
+                      math(String.raw`k\ge n`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(r)=0`),
+                      " を満たすものが存在する」。",
+                      math(String.raw`d`),
+                      " についての帰納法で、任意の ",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`P(d)`),
+                      " を示す。",
+                    ]),
+                    paragraph([
+                      "割る必要のない場合。",
+                      math(String.raw`d\le n`),
+                      " とし、",
+                      math(String.raw`g\in F[t]`),
+                      " が ",
+                      math(String.raw`k\ge d`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " を満たすとする。",
+                      math(String.raw`u:=0`),
+                      "、",
+                      math(String.raw`r:=g`),
+                      " と置く。",
+                      math(String.raw`0\in F`),
+                      " なので ",
+                      math(String.raw`u\in F[t]`),
+                      "、仮定から ",
+                      math(String.raw`r\in F[t]`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+u\cdot h+r&=0\cdot h+g&&\bigl(\because\ u,r\ \text{の置き方}\bigr)\\
+&=g&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の零元との積と和}\bigr),\\[4pt]
+\mathrm{ac}_k(r)&=\mathrm{ac}_k(g)&&\bigl(\because\ r\ \text{の置き方}\bigr)\\
+&=0&&\bigl(\because\ k\ge n\ge d\ \text{と}\ g\ \text{の仮定}\bigr)\qquad(k\ge n).
+\end{aligned}`),
+                    paragraph([
+                      "とくに ",
+                      math(String.raw`n\ge0`),
+                      " なので ",
+                      math(String.raw`P(0)`),
+                      " が成り立つ。",
+                    ]),
+                    paragraph([
+                      "帰納法の一歩。",
+                      math(String.raw`P(d)`),
+                      " を仮定し、",
+                      math(String.raw`P(d+1)`),
+                      " を示す。",
+                      math(String.raw`d+1\le n`),
+                      " なら上の割る必要のない場合である。以下 ",
+                      math(String.raw`d+1>n`),
+                      "、すなわち ",
+                      math(String.raw`d\ge n`),
+                      " とし、",
+                      math(String.raw`g\in F[t]`),
+                      " が ",
+                      math(String.raw`k\ge d+1`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " を満たすとする。次を置く。",
+                    ]),
+                    displayMath(String.raw`c:=\mathrm{ac}_d(g)\,/\,\mathrm{ac}_n(h)\in\overline{\mathbb{Q}},\qquad m:=d-n\in\mathbb{N},\qquad g':=g-\widehat{c}\cdot t^{m}\cdot h\in\overline{\mathbb{Q}}[t].`),
+                    paragraph([
+                      "商が定まるのは ",
+                      math(String.raw`\mathrm{ac}_n(h)\ne0`),
+                      " による。所属は",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_d(g)&\in F,\quad\mathrm{ac}_n(h)\in F&&\bigl(\because\ g,h\in F[t]\bigr),\\
+c&\in F&&\bigl(\because\ F\ \text{は零元でない元による商で閉じる}\bigr),\\
+\widehat{c}\cdot t^{m}&\in F[t]&&\bigl(\because\ \text{単項式の係数の段}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`g'`),
+                      " の係数を求める。任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について、",
+                      math(String.raw`k\ge m`),
+                      " なら ",
+                      math(String.raw`\mathrm{ac}_k(g')=\mathrm{ac}_k(g)-c\cdot\mathrm{ac}_{k-m}(h)`),
+                      "、",
+                      math(String.raw`k<m`),
+                      " なら ",
+                      math(String.raw`\mathrm{ac}_k(g')=\mathrm{ac}_k(g)-0`),
+                      " である（",
+                      ref("def_qbar_polynomial_ring"),
+                      " の和の係数と単項式を掛けた係数の段）。",
+                      math(String.raw`F`),
+                      " は積と差で閉じ ",
+                      math(String.raw`0\in F`),
+                      " なので、どちらの場合も ",
+                      math(String.raw`\mathrm{ac}_k(g')\in F`),
+                      "、すなわち ",
+                      math(String.raw`g'\in F[t]`),
+                      " である。",
+                      math(String.raw`k\ge d+1`),
+                      " では ",
+                      math(String.raw`k-m=k-d+n>n`),
+                      " なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(g')&=\mathrm{ac}_k(g)-c\cdot\mathrm{ac}_{k-m}(h)&&\bigl(\because\ k\ge d+1>m\ \text{と単項式を掛けた係数の段}\bigr)\\
+&=0-c\cdot0&&\bigl(\because\ g\ \text{の仮定と}\ h\ \text{の最高次の番号}\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`k=d`),
+                      " では ",
+                      math(String.raw`d-m=n`),
+                      " なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_d(g')&=\mathrm{ac}_d(g)-c\cdot\mathrm{ac}_{n}(h)&&\bigl(\because\ d\ge m\ \text{と単項式を掛けた係数の段}\bigr)\\
+&=\mathrm{ac}_d(g)-\bigl(\mathrm{ac}_d(g)\,/\,\mathrm{ac}_n(h)\bigr)\cdot\mathrm{ac}_{n}(h)&&\bigl(\because\ c\ \text{の置き方}\bigr)\\
+&=\mathrm{ac}_d(g)-\mathrm{ac}_d(g)&&\bigl(\because\ \mathrm{ac}_n(h)\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の商}\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。したがって ",
+                      math(String.raw`k\ge d`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g')=0`),
+                      " であり、帰納法の仮定 ",
+                      math(String.raw`P(d)`),
+                      " を ",
+                      math(String.raw`g'`),
+                      " に当てて、",
+                      math(String.raw`u',r\in F[t]`),
+                      " で ",
+                      math(String.raw`g'=u'\cdot h+r`),
+                      " かつ ",
+                      math(String.raw`k\ge n`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(r)=0`),
+                      " を満たすものを得る。",
+                      math(String.raw`u:=u'+\widehat{c}\cdot t^{m}`),
+                      " と置く。",
+                      math(String.raw`\mathrm{ac}_k(u)=\mathrm{ac}_k(u')+\mathrm{ac}_k(\widehat{c}\cdot t^{m})`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      " の和の係数）は ",
+                      math(String.raw`F`),
+                      " の二元の和なので ",
+                      math(String.raw`u\in F[t]`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+g&=g'+\widehat{c}\cdot t^{m}\cdot h&&\bigl(\because\ g'\ \text{の置き方}\bigr)\\
+&=u'\cdot h+r+\widehat{c}\cdot t^{m}\cdot h&&\bigl(\because\ u',r\ \text{の取り方}\bigr)\\
+&=\bigl(u'+\widehat{c}\cdot t^{m}\bigr)\cdot h+r&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則と和の交換}\bigr)\\
+&=u\cdot h+r&&\bigl(\because\ u\ \text{の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。これで ",
+                      math(String.raw`P(d+1)`),
+                      " が示された。",
+                    ]),
+                    paragraph([
+                      "結論。",
+                      math(String.raw`g\in F[t]`),
+                      " を任意に取る。",
+                      math(String.raw`\mathrm{ac}_k(g)\ne0`),
+                      " となる ",
+                      math(String.raw`k`),
+                      " は有限個である（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）から、それらのどれよりも大きい ",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " が取れ、",
+                      math(String.raw`k\ge d`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " である。",
+                      math(String.raw`P(d)`),
+                      " を ",
+                      math(String.raw`g`),
+                      " に当てれば主張を得る。",
+                      math(String.raw`F`),
+                      " について使ったのは、",
+                      math(String.raw`0\in F`),
+                      " と、和・差・積・零元でない元による商で閉じることだけである。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の有限の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },

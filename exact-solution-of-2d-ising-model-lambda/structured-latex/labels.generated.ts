@@ -683,6 +683,7 @@ export const ALL_LABELS = [
   "claim_standard_dual_height_vertical_seam_conditional",
   "claim_standard_dual_rectangle_parity",
   "claim_step_advances_direction",
+  "claim_subfield_coefficient_polynomial_division",
   "claim_subfield_coefficient_vanishing_polynomial_exists",
   "claim_subfield_contains_rationals",
   "claim_successor_direction_selection",
