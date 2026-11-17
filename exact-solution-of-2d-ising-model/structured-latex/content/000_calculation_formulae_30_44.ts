@@ -340,7 +340,7 @@ x^2+y^2
 &= (ac-bd)^2+(ad+bc)^2
 &&(\because\ \text{上で示した絶対値の平方})\\
 &= (a^2+b^2)(c^2+d^2)
-&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の「積について閉じること」の恒等式})\\
+&&(\because\ \blkref{product_of_sums_of_two_squares_identity})\\
 &= |z_1|^2|z_2|^2
 &&(\because\ \text{上で示した絶対値の平方。2 箇所へ適用})\\
 &= \left(|z_1|\,|z_2|\right)^2
@@ -510,6 +510,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: (4) の鎖の (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) の行は、multiplicative_group_of_cc の証明の中の段（「積について閉じること」の恒等式）を引いていた。その主張は「ℂ^× は群をなす」だけなので、恒等式を独立した主張 product_of_sums_of_two_squares_identity にし、その参照に替えた（a, b, c, d はこの段の z_1 = (a,b), z_2 = (c,d) の成分で、主張の文字と同じ）。式・鎖の両端・段数は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y < 0 の鎖の √(y^2) = √((−y)^2) と (6) の x < 0 の鎖の √(x^2) = √((−x)^2) の行の根拠が「ℝ では (−y)^2 = y^2」「(−x)^2 = x^2」の名前だけだったので、それぞれを square_of_real_number_is_product（r → y、r → x）・real_negation_times_negation_is_product（a, b → y、a, b → x を右辺から左辺へ。この回に足した主張）・square_of_real_number_is_product（r → −y、r → −x を右辺から左辺へ）の 3 行に割った。鎖の両端と主張は変えていない。数値検証: sagemath/check/103_abs_basic_properties/check_negation_square_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 非負実数の平方の比較の鎖の両端の u^2 = u·u・v·v = v^2 と、(2) の (√(x^2+y^2))^2 = x^2+y^2 の行の根拠が「平方の定め方」「平方根の定義」の名前だけだったので、square_of_real_number_is_product（r → u、r → v を右辺から左辺へ）と definition_of_sqrt_r_positive の u^2 = s（s → x^2+y^2、u → √(x^2+y^2)。証明の中の x, y と衝突しないよう、(1) の前置きと同じく定義の文字を s, u で書いた）の参照に替えた。式の両端と主張は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(3) の |z| = 0 の鎖・(6) の鎖が、0^2 から 0 への行を名前だけの根拠「ℝ では 0 を因子にもつ積は 0」で済ませていた（冪を積に開く段も書かれていなかった）ので、square_of_real_number_is_product（r → 0）の行と real_zero_times_is_zero（x → 0）の行に割った（x = y = 0 の場合はどちらも 2 箇所へ）。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/103_abs_basic_properties/check_03_zero_square_rows.sage。",

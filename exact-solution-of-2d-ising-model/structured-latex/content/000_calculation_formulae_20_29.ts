@@ -951,6 +951,46 @@ z\cdot 1_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_product_of_sums_of_two_squares_identity",
+    kind: "claim",
+    title: {
+      tex: "2\\text{ つの平方和の積の恒等式}",
+    },
+    labels: ["product_of_sums_of_two_squares_identity"],
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a,b,c,d\in\mathbb{R}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`(ac-bd)^2+(ad+bc)^2=\left(a^2+b^2\right)\left(c^2+d^2\right)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(ac-bd)^2+(ad+bc)^2
+&= \left(a^2c^2-2abcd+b^2d^2\right)+\left(a^2d^2+2abcd+b^2c^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律・可換律を 2 箇所へ適用})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+\left((-2abcd)+2abcd\right)
+&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+0
+&&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
+&= a^2c^2+b^2d^2+a^2d^2+b^2c^2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a^2c^2+b^2d^2+a^2d^2+b^2c^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(a^2+b^2\right)\left(c^2+d^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の可換律})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。この恒等式は multiplicative_group_of_cc の証明の「積について閉じること」の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、abs_basic_properties の (4)（積の絶対値）の鎖が引ける主張が無かった。その段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端は主張の両辺のまま）。1 行で 2 つ以上の定理を当てている行（第 1・第 2・第 5 の等号）は台帳の件で扱う。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、この恒等式を述べる宣言は置いていない）。数値検証: sagemath/check/product_of_sums_of_two_squares_identity/check_identity_chain.sage。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
     kind: "claim",
     origin: { path: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ", ordinal: 24 },
@@ -1088,24 +1128,7 @@ a^2+b^2
       ]),
       paragraph([
         math(String.raw`\mathbb{C}^{\times}`),
-        " が積について閉じること。まず次の恒等式を示す。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(ac-bd)^2+(ad+bc)^2
-&= \left(a^2c^2-2abcd+b^2d^2\right)+\left(a^2d^2+2abcd+b^2c^2\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律・可換律を 2 箇所へ適用})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+\left((-2abcd)+2abcd\right)
-&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+0
-&&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a^2c^2+b^2d^2+a^2d^2+b^2c^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
-&= \left(a^2+b^2\right)\left(c^2+d^2\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の可換律})
-\end{aligned}`,
-      ),
-      paragraph([
+        " が積について閉じること。",
         math(String.raw`z=(a,b),\ w=(c,d)\in\mathbb{C}^{\times}`),
         " とすると、上で示した同値より ",
         math(String.raw`a^2+b^2>0`),
@@ -1115,7 +1138,9 @@ a^2+b^2
         math(String.raw`(a^2+b^2)(c^2+d^2)>0`),
         " である（",
         math(String.raw`\mathbb{R}`),
-        " では正の元どうしの積は正）。この恒等式より ",
+        " では正の元どうしの積は正）。",
+        ref("product_of_sums_of_two_squares_identity"),
+        " より ",
         math(String.raw`zw=(ac-bd,\ ad+bc)`),
         " の 2 つの成分の平方和は正であり、再び上の同値より ",
         math(String.raw`zw\ne(0,0)`),
@@ -1299,6 +1324,7 @@ b
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の (a·1 − b·0, a·0 + b·1) を消す行と、1_C の平方和の鎖の 1·1 を消す行が「ℝ では 1 は積の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → a, x → b と x → 1）の行にした。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の可換律」の段の鎖は ℂ の全元についての主張で、この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_commutative（このブロックの直前）の証明へ移した。この証明の中で可換律を使う 2 行（1_C·(a,b) = (a,b)·1_C と w·z = z·w）と結論の「可換群である」は、その主張の参照に替えた。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の結合律」「積の単位元」の段の鎖は ℂ の全元についての主張で、その鎖のために置いていた (a,b),(c,d),(e,f) ∈ ℂ の前置きは使われなくなったので削った（残る段は z = (a,b) を段ごとに置き、閉性の恒等式の a,b,c,d ∈ ℝ は積の式の前置きにある）。この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_associative・complex_one_is_multiplicative_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。1/z = z^{-1} の鎖の「上で示した 1_C が積の単位元であること」と結論の結合律・単位元も、その主張の参照に替えた。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積について閉じること」の段の恒等式 (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) は、abs_basic_properties の (4) の鎖が「multiplicative_group_of_cc の「積について閉じること」の恒等式」として証明の中の段を引いていた。この主張（ℂ^× は群をなす）からは引けないので、鎖の式を変えずに新しい主張 product_of_sums_of_two_squares_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。",
       ],
     },
   },

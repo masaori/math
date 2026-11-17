@@ -548,6 +548,7 @@ export const ALL_LABELS = [
   "product_of_anticommuting_matrices_commutes",
   "product_of_real_entry_matrices_has_real_entries",
   "product_of_real_powers_is_power_of_product",
+  "product_of_sums_of_two_squares_identity",
   "product_of_two_finite_products_of_matrices",
   "psd_cauchy_schwarz",
   "radial_normalization_exists_unique",
