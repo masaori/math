@@ -71,15 +71,12 @@
   指摘があれば同じ単位を修正して再レビューし、未解決のまま次へ進まない。
 - 検証を全て通す：論文側の `check`・`build:html`・`build:pdf`、`node sagemath/tools/verify-check-linkage.ts`、
   `lean/` で `lake build` と `bash scripts/check-no-sorry.sh`。
-- 論文本文の HTML（`build:html`）と論文構成のページ（`build:organization-artifact`）を作り直し、skill `publish-artifact` で
-  名前空間 `math` のパス `complex-matrix-ising-paper` と `complex-matrix-ising-paper-organization` へ公開し直す。
-  公開後に `bash scripts/verify-complex-matrix-ising-paper-artifacts.sh` を通す。
 - 状態台帳と `MEMORY.md` を更新してコミットし、成果コミットを remote default へ反映し、fetch 後の包含確認までを同じ作業で行う。
   non-fast-forward 時は remote default を取り込み、再検証してから反映する。
 
 ## 並行して本文を触る作業との衝突
 
-lambda 版の証明の積み上げ（連続実行「可算二次元イジング: 証明の積み上げ」）は、式変形の書き方の統一のために
+lambda 版の証明の積み上げは、式変形の書き方の統一のために
 この論文の `content/` のブロックも書き換える。ブロックを移した回で rebase が衝突したら、相手の書き換え（証明の中身）を残し、
 こちらの移動をその上にやり直す。相手の書き換えを捨てない。
 
