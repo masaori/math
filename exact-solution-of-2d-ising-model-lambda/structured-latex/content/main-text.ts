@@ -17799,13 +17799,20 @@ T_{S(\tau),S(\tau')}
                         ]),
                       ],
                       proof: [
+                        paragraph([
+                          ref("def_row_config_shift"), " の写像 ", math(String.raw`S`),
+                          " は ", math(String.raw`S(\tau)\in R_L`), " を一意に定める。したがって",
+                        ]),
+                        displayMath(String.raw`R_L=\{S(\tau)\}\mathbin{\dot\cup}\bigl(R_L\setminus\{S(\tau)\}\bigr)
+\qquad(\because\ \blkref{def_row_config_shift}\text{ と集合の補集合の定義})`),
+                        paragraph(["であり、和は次のように分かれる。"]),
                         displayMath(String.raw`\begin{aligned}
 (UA)_{\tau,\tau''}
 &=\sum_{\tau'\in R_L}U_{\tau,\tau'}\,A_{\tau',\tau''}
 &&(\because\ \blkref{def_matrix_product})\\
 &=U_{\tau,S(\tau)}\,A_{S(\tau),\tau''}
   +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}U_{\tau,\tau'}\,A_{\tau',\tau''}
-&&(\because\ R_L\ \text{を}\ \{S(\tau)\}\ \text{とその補集合へ分けた}) \\
+&&(\because\ R_L\ \text{を}\ \{S(\tau)\}\ \text{とその補集合へ分けた})\\
 &=\kappa(1)\cdot A_{S(\tau),\tau''}
   +\sum_{\substack{\tau'\in R_L\\ \tau'\ne S(\tau)}}\kappa(0)\cdot A_{\tau',\tau''}
 &&(\because\ \blkref{def_shift_matrix}\ \text{を 2 箇所へ適用})\\
@@ -17819,21 +17826,7 @@ T_{S(\tau),S(\tau')}
 &=A_{S(\tau),\tau''}
 &&(\because\ \blkref{def_constant_polynomial}\ \text{の}\ \kappa(0)\ \text{は零元})
 \end{aligned}`),
-                        paragraph([
-                          "を得る。第 2 の等号で和を 2 つに分けられるのは、",
-                          ref("def_row_config_shift"),
-                          " の ",
-                          math(String.raw`S`),
-                          " が写像であることから ",
-                          math(String.raw`S(\tau)`),
-                          " が ",
-                          math(String.raw`R_L`),
-                          " のただ 1 つの元として定まり、",
-                          math(String.raw`R_L`),
-                          " が ",
-                          math(String.raw`\{S(\tau)\}`),
-                          " とその補集合の互いに素な合併になるからである。",
-                        ]),
+                        paragraph(["を得る。"]),
                         paragraph([
                           "現れるのは ",
                           math(String.raw`\mathbb{Z}[x]`),

@@ -67,6 +67,50 @@ private lemma verticalStep_isUnit (wv : ℤ) (hwv : wv ≠ 0) :
   · left
     rw [Int.sign_eq_one_iff_pos.mpr hpos]
 
+private lemma parallelTwoPhase_step (H V : ℕ) (first second : ℤ × ℤ)
+    (coordinate : (ℤ × ℤ) →+ ℤ)
+    (hfirst : 0 < H → 0 < coordinate first)
+    (hsecond : 0 < V → 0 < coordinate second)
+    (s : ℕ) (hs : s < H + V) :
+    (twoPhaseStaircase H first second (s + 1) -
+      twoPhaseStaircase H first second s = if s < H then first else second) ∧
+    coordinate (twoPhaseStaircase H first second s) <
+      coordinate (twoPhaseStaircase H first second (s + 1)) := by
+  by_cases hphase : s < H
+  · have hsle : s ≤ H := Nat.le_of_lt hphase
+    have hsuccle : s + 1 ≤ H := by omega
+    have hH : 0 < H := by omega
+    simp only [twoPhaseStaircase, if_pos hsle, if_pos hsuccle, if_pos hphase]
+    constructor
+    · simp [Nat.cast_add, add_mul]
+    · rw [map_nsmul, map_nsmul]
+      simpa [Nat.cast_add, add_mul] using
+        add_lt_add_left (hfirst hH) (s • coordinate first)
+  · have hsuccgt : ¬s + 1 ≤ H := by omega
+    have hV : 0 < V := by omega
+    simp only [twoPhaseStaircase, if_neg hsuccgt, if_neg hphase]
+    by_cases heq : s = H
+    · subst s
+      simp only [le_refl, if_pos, Nat.add_sub_cancel_left]
+      constructor
+      · simp
+      · rw [map_nsmul, map_add, map_nsmul]
+        simp only [one_nsmul]
+        exact lt_add_of_pos_right _ (hsecond hV)
+    · have hsnotle : ¬s ≤ H := by omega
+      simp only [if_neg hsnotle]
+      have hsub : s + 1 - H = (s - H) + 1 := by omega
+      constructor
+      · rw [hsub, add_nsmul]
+        simp
+      · rw [map_add, map_add, map_nsmul, map_nsmul]
+        rw [hsub, add_nsmul]
+        simp only [map_add, map_nsmul, one_nsmul]
+        simpa [add_assoc] using
+          (lt_add_of_pos_right
+            (H • coordinate first + (s - H) • coordinate second)
+            (hsecond hV))
+
 /-- `claim_winding_parallel_staircase_step_increase`。
 各隣接差は四つの単位格子ベクトルの一つであり、平行座標を真に増やす。 -/
 theorem windingParallelStaircase_step_increase (L : ℕ) (wh wv : ℤ) (s : ℕ)
@@ -85,10 +129,30 @@ theorem windingParallelStaircase_step_increase (L : ℕ) (wh wv : ℤ) (s : ℕ)
       0 < windingParallelCoordinate wv wh (Int.sign wv, 0) := by
     intro h
     exact verticalStep_parallelCoordinate_pos wh wv (natAbs_pos_of_product_pos L wv h)
-  have hstep := orderedTwoPhaseStaircase_step_necSuf
-    (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
-    (0, Int.sign wh) (Int.sign wv, 0) (windingParallelCoordinate wv wh)
-    hfirst hsecond s hs
+  have hstep :
+      (orderedTwoPhaseStaircase (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
+        (0, Int.sign wh) (Int.sign wv, 0) (s + 1) -
+        orderedTwoPhaseStaircase (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
+          (0, Int.sign wh) (Int.sign wv, 0) s =
+        if 0 < wh * wv then
+          (if s < L * wh.natAbs then (0, Int.sign wh) else (Int.sign wv, 0))
+        else (if s < L * wv.natAbs then (Int.sign wv, 0) else (0, Int.sign wh))) ∧
+      windingParallelCoordinate wv wh
+        (orderedTwoPhaseStaircase (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
+          (0, Int.sign wh) (Int.sign wv, 0) s) <
+      windingParallelCoordinate wv wh
+        (orderedTwoPhaseStaircase (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
+          (0, Int.sign wh) (Int.sign wv, 0) (s + 1)) := by
+    by_cases horder : 0 < wh * wv
+    · simpa [orderedTwoPhaseStaircase, horder] using
+        (parallelTwoPhase_step (L * wh.natAbs) (L * wv.natAbs)
+          (0, Int.sign wh) (Int.sign wv, 0) (windingParallelCoordinate wv wh)
+          hfirst hsecond s hs)
+    · have hs' : s < L * wv.natAbs + L * wh.natAbs := by omega
+      simpa [orderedTwoPhaseStaircase, horder] using
+        (parallelTwoPhase_step (L * wv.natAbs) (L * wh.natAbs)
+          (Int.sign wv, 0) (0, Int.sign wh) (windingParallelCoordinate wv wh)
+          hsecond hfirst s hs')
   dsimp [windingParallelStaircase]
   constructor
   · rw [hstep.1]
