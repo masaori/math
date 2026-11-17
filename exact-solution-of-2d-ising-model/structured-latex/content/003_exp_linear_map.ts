@@ -967,13 +967,11 @@ s_i
 &\le \|Y\|\sum_{m=0}^{N}\frac{c_{\Phi}^{\,m}}{m!}
 &&(\because\ \text{(2b) を各項に適用する})\\
 &\le \|Y\|\,E(c_{\Phi})
-&&(\because\ \text{非負実数の指数級数の部分和の上界を}\ a=c_{\Phi}\ \text{に適用し、}\ \|Y\|\ge 0)
+&&(\because\ \blkref{real_exp_series_converges}\ \text{(2) を}\ a=c_{\Phi}\ \text{に適用し、}\ \|Y\|\ge 0)
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の不等号で引いたのは ",
-        ref("real_exp_series_converges"),
-        " (2) である）。左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
+        "左辺は非負項の実数級数の部分和なので単調非減少であり、いま ",
         math(String.raw`\|Y\|\,E(c_{\Phi})`),
         " で上に有界であるから収束する（",
         math(String.raw`\mathbb{R}`),
@@ -1098,6 +1096,7 @@ s_i
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 4 の成分の絶対値の二乗の鎖（(i,j) ≠ (k,l) の側）の最後の行 0·0 = 0 の根拠が名前だけの「ℝ で 0·x = 0（ℝ は体）の x → 0」だった（0 を掛けると 0 になることは体の公理に含まれない）ので、real_zero_times_is_zero（x → 0）の参照に替えた（式は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の地の文の y_{kl}·0 = 0（K の元に右から 0 を掛ける）に根拠が無かったので、K = ℝ なら real_times_zero_is_zero（x → y_{kl}）、K = ℂ なら complex_times_zero_is_zero（z → y_{kl}）の参照を添えた（式は不変）。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_03_matrix_unit_zero_entry.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 4 の行列単位による展開の (i,j) 成分の議論が地の文の式変形のままで、y_{ij}·1 = y_{ij} と 0 の項を和から落とす段に根拠が無かったので、t_{kl} := y_{kl}(E^{(k,l)})_{ij}・s_k := Σ_l t_{kl} を置く準備の鎖（t_{kl} = 0（(k,l) ≠ (i,j)）、t_{ij} = y_{ij}、s_k = 0（k ≠ i）、s_i = y_{ij}）と、右辺の (i,j) 成分から Y_{ij} に着く 8 行の鎖に書き直した（準備の各鎖は置き方を開く行から始める）。K = ℂ の側は finite_sum_of_matrices_entrywise・def_matrix_scalar_multiple・complex_numbers_form_a_field の積の単位元・finite_sum_of_complex_zeros・finite_sum_with_single_nonzero_term の参照、K = ℝ の側は、実数の行列の和・スカラー倍の主張と、一つの項のほかが 0 の実数の有限和の主張が本文に無いので名前のまま（x·1 = x は set_and_algebra_notation）とした。0 の実数の有限和は finite_sum_of_constant_real_number と real_times_zero_is_zero で引けるが、ほかの ℝ の側の行とそろえて名前のままにした。主張と式の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/145_exp_converges/check_04_matrix_unit_expansion_entry_chain.sage。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 7 の鎖の後の段落の「（最後の不等号で引いたのは real_exp_series_converges (2) である）」を削り、鎖の最後の行の根拠「非負実数の指数級数の部分和の上界を a = c_Φ に適用し」を \\blkref{real_exp_series_converges} (2) の参照にした（根拠を式変形の行から引く。式・鎖の両端・段数は不変）。",
       ],
     },
   },
@@ -1822,13 +1821,10 @@ S_NT_N
 \right)
 &&(\because\ \text{上の添字集合の包含と、非負項を付け加えても和は増えるだけであること})\\
 &\le \|I\|^2\left(R_{P_N-1}(a)\,E(b)+E(a)\,R_{P_N-1}(b)\right)
-&&(\because\ \text{非負実数の指数級数の収束の (2)(3)})
+&&(\because\ \blkref{real_exp_series_converges}\ \text{の (2)(3)})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の不等号で引いたのは ",
-        ref("real_exp_series_converges"),
-        " の (2)(3) である。",
         math(String.raw`P_N\ge (N+1)/2`),
         " より ",
         math(String.raw`P_N-1\to\infty`),
@@ -1972,6 +1968,7 @@ S_NT_N
         "2026-09-01 の式変形統一で、Step 1 の帰納法の初期値にあった一行三等号 " +
           "AI=A=IA を、単位行列を根拠とする二段の行末根拠つきの鎖へ開いた。" +
           "内容・式変形・根拠・ラベル参照は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 5 の剰余の評価の鎖の後の段落の「最後の不等号で引いたのは real_exp_series_converges の (2)(3) である。」を削り、鎖の最後の行の根拠「非負実数の指数級数の収束の (2)(3)」を \\blkref{real_exp_series_converges} の (2)(3) の参照にした（根拠を式変形の行から引く。式・鎖の両端・段数は不変）。",
       ],
     },
   },
