@@ -50,6 +50,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfPositiveIsNegative
 
 namespace Ising2D
 
@@ -711,8 +712,8 @@ theorem eta_univ_eq_one_of_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D
           _ = (-1) * D.traceFactor := by rw [hm1]        -- 仮定 `ȟ = −1`
           _ = -D.traceFactor := real_minus_one_times_is_negation _
                                                         -- `real_minus_one_times_is_negation`（`a → ϰ`）
-          _ < 0 := neg_neg_of_pos D.traceFactor_pos_step6
-                                                        -- ℝ で `a > 0` なら `−a < 0`（`a → ϰ`）に (2) の `ϰ > 0` を当てる
+          _ < 0 := real_negation_of_positive_is_negative _ D.traceFactor_pos_step6
+                                                        -- `real_negation_of_positive_is_negative`（`a → ϰ`）に (2) の `ϰ > 0` を当てる
       exact lt_asymm hs hneg
   calc F.eta Finset.univ
       = ((F.checkH : ℝ) : ℂ) := F.checkH_ofReal.symm    -- `ȟ` の取り方
@@ -721,7 +722,7 @@ theorem eta_univ_eq_one_of_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D
 /-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (3)**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`
 （人手の `M_col` が Lean の `r + 1`）。必要十分版は置かない。Step 7 の鎖が新しく効かせるのは、
 `inclusion_rr_to_cc` の定義、`ℂ = ℝ × ℝ` の元の等号が成分ごとであること、`ȟ ∈ {1,−1}`、ℝ の順序環としての規則
-（`(−1)a = −a`（`real_minus_one_times_is_negation`）、`a > 0` なら `−a < 0`、狭義順序の非対称律）だけで、ℝ の完備性は効かない。しかし引く (1)・(2) の主張が
+（`(−1)a = −a`（`real_minus_one_times_is_negation`）、`a > 0` なら `−a < 0`（`real_negation_of_positive_is_negative`）、狭義順序の非対称律）だけで、ℝ の完備性は効かない。しかし引く (1)・(2) の主張が
 `ϰ ∈ ℝ` と `ℝ ⊂ ℂ` の包含に固定されていて、この鎖だけを順序環へ持ち上げても (1)・(2) を当てられないので、置かない。 -/
 theorem eta_univ_eq_one_iff_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     F.eta Finset.univ = 1 ↔ ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ) :=

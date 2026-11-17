@@ -2568,6 +2568,59 @@ a^{-1} \neq 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_negation_of_positive_is_negative",
+    kind: "claim",
+    title: { text: "正の実数の加法の逆元は負" },
+    labels: ["real_negation_of_positive_is_negative"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        "、",
+        math(String.raw`0 < a`),
+        " とする。和・",
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）、",
+        math(String.raw`-a \in \mathbb{R}`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to a`),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`-a < 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-a
+&= 0 + (-a)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&< a + (-a)
+&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to a,\ c \to -a\bigr)\\
+&= 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の加法の逆元が負であることは順序体の公理に含まれないのに、trace_of_epsilon_V_plus_via_check_eigenvalues の Step 7 の ȟ = −1 の背理の鎖の 4 行目が「ℝ で a > 0 なら −a < 0」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_of_positive_is_negative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfPositiveIsNegative.lean）、必要十分版は Ising2D.NecSuf.neg_lt_zero_of_zero_lt（NecSuf/NegLtZeroOfZeroLt.lean）。数値検証: sagemath/check/real_negation_of_positive_is_negative/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

@@ -1947,7 +1947,7 @@ r
 &= -\varkappa
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to \varkappa)\bigr)\\
 &< 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0\ \text{なら}\ -a < 0\ (a \to \varkappa)\ \text{に (2) の}\ \varkappa > 0\ \text{を当てる}\bigr)
+&&\bigl(\because\ \blkref{real_negation_of_positive_is_negative}\ (a \to \varkappa)\ \text{に (2) の}\ \varkappa > 0\ \text{を当てる}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1981,6 +1981,7 @@ r
         "2026-11-16: Step 6 の 2 本目の鎖の 1 行目「sinh x > 0 に上の鎖を当て、両辺に 2 > 0 を掛ける」が 2 つの事実を束ねていたので、cosh_sinh_basic_properties (3)（x → γ(θ̃_μ)/2）で sinh(γ(θ̃_μ)/2) > 0 を述べる鎖を 1 本前に足し、2sinh(γ(θ̃_μ)/2) > 0 の鎖を、順序体 ℝ（set_and_algebra_notation）の「正の数どうしの積は正」に real_zero_less_than_two の 0 < 2 とその鎖を当てる 1 行にした（2·0 = 0 の行は要らなくなった）。鎖を 4 つから 5 つにした。鎖の両端と主張は変えていない。",
         "2026-11-16: Step 6 の 5 本目の鎖の 2 行目の名前だけの根拠「ℝ で a > 0, b > 0 なら ab > 0」を、1・3 本目の鎖と同じ「ℝ で正の数どうしの積は正（ℝ は順序体 set_and_algebra_notation）」の参照にした。当てる 2 つの事実（def_second_transfer_matrix_prefactor の (2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} と直前の鎖）と、鎖の両端・主張は変えていない。",
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 3 行目の名前だけの根拠「ℝ で (−1)a = −a（a → ϰ）」を real_minus_one_times_is_negation（a → ϰ）の参照にした。式と主張は変えていない。",
+        "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 4 行目の名前だけの根拠「ℝ で a > 0 なら −a < 0（a → ϰ）」を、新しく足した real_negation_of_positive_is_negative（a → ϰ）の参照にした。当てる (2) の ϰ > 0 と、式・主張は変えていない。",
       ],
     },
   },

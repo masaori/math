@@ -62,7 +62,7 @@ for (K1, K2) in PARAMS:
                 for x, y in zip(lines7, lines7[1:]):
                     assert x == y
                     count += 1
-                assert lines7[-1] < 0                                   # −ϰ < 0（ϰ > 0）
+                assert lines7[-1] < 0                                   # −ϰ < 0（real_negation_of_positive_is_negative、a → ϰ、に ϰ > 0 を当てる）
             count += 2
         # 否定コントロール: ϰ の sinh の引数に −γ を入れると M_col が奇数のとき負
         if M % 2 == 1:
