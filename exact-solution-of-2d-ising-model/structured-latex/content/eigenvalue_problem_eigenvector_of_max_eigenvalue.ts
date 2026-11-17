@@ -1882,7 +1882,7 @@ P_{k+1}\check{Q}_\epsilon
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
 &&\bigl(\because\ \varkappa\ \text{の置き方}\bigr)\\
 &> 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0,\ b > 0\ \text{なら}\ ab > 0\ \bigl(a \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2},\ b \to \textstyle\prod_{\mu}2\sinh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{に、}\blkref{def_second_transfer_matrix_prefactor}\ \text{の}\ (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}\ \text{と直前の不等号を当てる}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）に、}\blkref{def_second_transfer_matrix_prefactor}\ \text{の}\ (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}\ \text{と直前の鎖を当てる}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1979,6 +1979,7 @@ r
         "2026-11-15: Step 6 の 1 本目の鎖の最後の行の名前だけの根拠「0·½ = 0」を real_zero_times_is_zero（x → ½）の参照に、2 本目の鎖の最後の行の「2·0 = 0」を real_times_zero_is_zero（x → 2）の参照に替えた。式と主張は変えていない。",
         "2026-11-16: Step 6 の 1 本目の鎖の名前だけの根拠「ℝ で a/2 = a·½」「γ(θ̃_μ) > 0 の両辺に ½ > 0 を掛ける」を、def_real_quotient（y → γ(θ̃_μ)、z → 2）の行と、順序体 ℝ（set_and_algebra_notation）の「正の数どうしの積は正」に γ(θ̃_μ) > 0 と 0 < 2^{-1} を当てる行の 2 行にした（0·½ = 0 の行は要らなくなった）。2 ≠ 0（real_two_is_nonzero）と 0 < 2^{-1}（real_inverse_of_positive_is_positive（a → 2）と real_zero_less_than_two）を鎖の前に書いた。鎖の両端と主張は変えていない。",
         "2026-11-16: Step 6 の 2 本目の鎖の 1 行目「sinh x > 0 に上の鎖を当て、両辺に 2 > 0 を掛ける」が 2 つの事実を束ねていたので、cosh_sinh_basic_properties (3)（x → γ(θ̃_μ)/2）で sinh(γ(θ̃_μ)/2) > 0 を述べる鎖を 1 本前に足し、2sinh(γ(θ̃_μ)/2) > 0 の鎖を、順序体 ℝ（set_and_algebra_notation）の「正の数どうしの積は正」に real_zero_less_than_two の 0 < 2 とその鎖を当てる 1 行にした（2·0 = 0 の行は要らなくなった）。鎖を 4 つから 5 つにした。鎖の両端と主張は変えていない。",
+        "2026-11-16: Step 6 の 5 本目の鎖の 2 行目の名前だけの根拠「ℝ で a > 0, b > 0 なら ab > 0」を、1・3 本目の鎖と同じ「ℝ で正の数どうしの積は正（ℝ は順序体 set_and_algebra_notation）」の参照にした。当てる 2 つの事実（def_second_transfer_matrix_prefactor の (2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} と直前の鎖）と、鎖の両端・主張は変えていない。",
       ],
     },
   },

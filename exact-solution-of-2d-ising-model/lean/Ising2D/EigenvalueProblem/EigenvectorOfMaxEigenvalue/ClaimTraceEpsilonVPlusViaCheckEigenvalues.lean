@@ -649,8 +649,8 @@ theorem traceFactor_pos_step6 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData 
   calc D.traceFactor
       = D.C * ∏ μ, 2 * Real.sinh (D.gam μ / 2) := rfl  -- `ϰ` の置き方
     _ > 0 := mul_pos D.hC D.prod_two_sinh_gam_half_pos
-                                                        -- ℝ で `a > 0`、`b > 0` なら `ab > 0`（`a → (2sinh 2K_2)^{M_col/2}`、
-                                                        -- `b → Π_μ2sinh(γ(θ̃_μ)/2)`）に、`D.hC` と直前の鎖を当てる
+                                                        -- ℝ で正の数どうしの積は正（順序体）に、
+                                                        -- `D.hC` の `(2sinh 2K_2)^{M_col/2} > 0` と直前の鎖を当てる
 
 end VPlusData
 

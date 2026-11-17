@@ -2,7 +2,7 @@
 # Step 6: 準備 2 = 1 + 1 ≠ 0、0 < 2^{-1}。γ(θ̃_μ)/2 = γ(θ̃_μ)·2^{-1} > 0（正の数どうしの積）、sinh(γ(θ̃_μ)/2) > 0、
 #         2sinh(γ(θ̃_μ)/2) > 0（0 < 2 と直前の鎖に正の数どうしの積）、
 #         Π_μ 2sinh(γ(θ̃_μ)/2) > 0（finite_product_of_positive_reals_is_positive。有限積は左から畳み込み、各段が正）、
-#         ϰ = C Π_μ 2sinh(γ(θ̃_μ)/2) > 0（C ∈ ℝ_{>0} と ab > 0）。
+#         ϰ = C Π_μ 2sinh(γ(θ̃_μ)/2) > 0（C ∈ ℝ_{>0} と、ℝ で正の数どうしの積は正（順序体））。
 # Step 7: η = +1 なら tr(εV) = 1_Cϰ_C = ϰ_C。逆に tr(εV) = r_C（r > 0）なら (r, 0) = r_C = (ȟϰ)_C = (ȟϰ, 0) から r = ȟϰ で、
 #         ȟ = −1 なら r = ȟϰ = (−1)ϰ = −ϰ < 0 の鎖となり矛盾、よって ȟ = 1、η = ȟ_C = 1_C。
 # 球の部: γ(θ̃_μ)・sinh・C の値は ℝ への脱出なので RealBallField(512) の球で、不等号は球の全体が満たすこと、等号は重なりと半径で確かめる。
@@ -41,7 +41,7 @@ for (K1, K2) in PARAMS:
             p = p * (2 * (g / 2).sinh())
             assert p > 0
             count += 1
-        # Step 6 の第四の鎖の 1 行（finite_product_of_positive_reals_is_positive）と第五の鎖（ϰ の置き方、ab > 0）
+        # Step 6 の第四の鎖の 1 行（finite_product_of_positive_reals_is_positive）と第五の鎖（ϰ の置き方、ℝ で正の数どうしの積は正（順序体））
         assert p > 0
         kappa = C * p
         assert kappa.overlaps(C * left_product([2 * (g / 2).sinh() for g in gam])) and kappa > 0
