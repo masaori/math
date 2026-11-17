@@ -58,7 +58,7 @@ for (K1, K2) in PARAMS:
                 assert Ci(1) * Ci(kq) == Ci(kq)
             else:
                 r = tr_val.list()[0]
-                lines7 = [r, h * kq, (-1) * kq, -kq]                    # r = ȟϰ = (−1)ϰ = −ϰ
+                lines7 = [r, h * kq, (-1) * kq, -kq]                    # r = ȟϰ = (−1)ϰ = −ϰ（3 段目は real_minus_one_times_is_negation、a → ϰ）
                 for x, y in zip(lines7, lines7[1:]):
                     assert x == y
                     count += 1
