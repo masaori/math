@@ -47725,6 +47725,88 @@ x^{-1}&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr).
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_increasing_positive_cone_union_is_positive_cone",
+              focus: {
+                id: "zero_pinching_claim_increasing_positive_cone_union_is_positive_cone",
+                kind: "claim",
+                title: { text: "増大列にある正錐の和集合は正錐である" },
+                labels: ["claim_increasing_positive_cone_union_is_positive_cone"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/increasing-positive-cone-union"],
+                lean: [
+                  "Ising2DLambda.FisherZero.increasingPositiveConeUnion_isPositiveCone",
+                  "Ising2DLambda.NecSuf.FisherZero.increasingPositiveConeUnion_isPositiveCone",
+                  "Ising2DLambda.FisherZero.increasingPositiveConeUnion_isPositiveCone_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "各 ", math(String.raw`n\in\mathbb N`), " に部分体 ",
+                    math(String.raw`F_n\subseteq\overline{\mathbb Q}`), " と正錐 ",
+                    math(String.raw`C_n\subseteq F_n`), " を与え、",
+                    math(String.raw`(F_{n+1},C_{n+1})`), " は ",
+                    math(String.raw`(F_n,C_n)`), " の延長（",
+                    ref("def_positive_cone_extension"), "）とする。",
+                    math(String.raw`F_\infty:=\bigcup_{n\in\mathbb N}F_n`), " と ",
+                    math(String.raw`C_\infty:=\bigcup_{n\in\mathbb N}C_n`), " と置く。",
+                    "このとき ", math(String.raw`C_\infty`), " は部分体 ",
+                    math(String.raw`F_\infty`), "（", ref("claim_increasing_subfield_union_is_subfield"),
+                    "）の正錐（", ref("def_subfield_positive_cone"), "）である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_positive_cone_extension"), " より各 ",
+                    math(String.raw`n\in\mathbb N`), " で ",
+                    math(String.raw`C_n\subseteq C_{n+1}`), " である。",
+                    "包含の推移律と自然数の帰納法から、",
+                    math(String.raw`i\le j`), " なら ",
+                    math(String.raw`F_i\subseteq F_j`), " および ",
+                    math(String.raw`C_i\subseteq C_j`), " である。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`z\in C_\infty`), " に対し ",
+                    math(String.raw`z\in C_i`), " となる ",
+                    math(String.raw`i\in\mathbb N`), " がある。",
+                  ]),
+                  displayMath(String.raw`z\in C_i\subseteq F_i\subseteq F_\infty\quad\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の包含と和集合の定義}\bigr)`),
+                  paragraph([
+                    "任意の ", math(String.raw`x,y\in C_\infty`), " に対し ",
+                    math(String.raw`x\in C_i`), "、", math(String.raw`y\in C_j`),
+                    " となる ", math(String.raw`i,j\in\mathbb N`), " を選び、",
+                    math(String.raw`k:=\max\{i,j\}`), " と置く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+x&\in C_k&&\bigl(\because\ i\le k,\ C_i\subseteq C_k\bigr)\\
+y&\in C_k&&\bigl(\because\ j\le k,\ C_j\subseteq C_k\bigr)\\
+x+y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の和の閉性}\bigr)\\
+x\cdot y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の閉性}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`x+y,x\cdot y\in C_\infty`), " である。",
+                    "任意の ", math(String.raw`z\in F_\infty`), " はある ",
+                    math(String.raw`F_i`), " に属する。",
+                    math(String.raw`F_i`), " の三分法により ",
+                    math(String.raw`z=0`), "、", math(String.raw`z\in C_i`), "、",
+                    math(String.raw`-z\in C_i`), " のどれか一つが成り立つ（",
+                    ref("def_subfield_positive_cone"), "）。よって ",
+                    math(String.raw`F_\infty`), " について三つの場合は網羅する。",
+                  ]),
+                  paragraph([
+                    "もし二つの符号が ", math(String.raw`C_\infty`),
+                    " に属せば、それぞれの証人の添字の最大値 ",
+                    math(String.raw`k`), " で両方が ", math(String.raw`C_k`),
+                    " に属し、", ref("def_subfield_positive_cone"), " の三分法の排他性に反する。",
+                    "零と一方の符号が同時に成り立つ場合も、符号の証人の段の三分法の排他性に反する。",
+                    "従って三つの場合は排他的であり、正錐の条件がすべて成り立つ。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
