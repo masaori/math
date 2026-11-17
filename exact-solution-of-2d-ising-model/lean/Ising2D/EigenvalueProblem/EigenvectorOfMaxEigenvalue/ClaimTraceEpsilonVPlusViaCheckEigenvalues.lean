@@ -20,6 +20,14 @@
 `C = (2 sinh 2K_2)^{M/2} > 0` と `γ(θ̃_μ) > 0`（原文 `gamma_theta_tilde_mu_positive`、
 章 015 の `gamma1_gt_1_theta_tilde` の帰結）も仮定に含める。
 **`γ(θ̃_μ) > 0` が半整数運動量に固有の要点であり、これがあるので `sinh` の積が `0` にならない。**
+
+## 人手の ℂ の公理と略記の読み方
+
+人手の `complex_numbers_form_a_field` の積の単位元（`multiplicative_group_of_cc` の「積の単位元」が `1_ℂ·z = z`・`z·1_ℂ = z` の
+両方を示す）は `one_mul`・`mul_one`、`inclusion_rr_to_cc` の略記 `1_ℂ = ι_{ℝ→ℂ}(1)` は `Complex.ofReal_one` で読む
+（`ClaimEpsilonRealPermutesEntriesBySpinFlip.lean` などと同じ既存の慣行。人手の ℂ の体の公理には Lean の具体版を置いていない）。
+Step 7 の `⟹` の 2 行目と `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行目はこの読み方で人手の行と 1 対 1 である。
+
 ## 原文の鎖との対応
 
 | 原文の行 | Lean |
