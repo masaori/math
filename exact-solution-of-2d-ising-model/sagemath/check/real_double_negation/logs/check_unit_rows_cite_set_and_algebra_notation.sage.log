@@ -1,0 +1,3 @@
+row −(−a) = −(−a) + 0（x + 0 = x の x → −(−a) を右辺から左辺へ）
+row a + 0 = a（x + 0 = x の x → a）
+RESULT: PASS

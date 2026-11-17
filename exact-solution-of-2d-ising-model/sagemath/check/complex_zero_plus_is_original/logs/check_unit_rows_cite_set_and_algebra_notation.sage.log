@@ -1,0 +1,2 @@
+row (0 + a, 0 + b) = (a, b)（0 + x = x の x → a, x → b を 2 箇所へ）
+RESULT: PASS

@@ -1675,7 +1675,7 @@ b
       displayMath(String.raw`\begin{aligned}
 0\cdot x
 &= 0\cdot x + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ y + 0 = y\ (y \to 0\cdot x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 0\cdot x + \bigl(0\cdot x + (-(0\cdot x))\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0\cdot x)\ \text{を右辺から左辺へ}\bigr)\\
 &= (0\cdot x + 0\cdot x) + (-(0\cdot x))
@@ -1683,7 +1683,7 @@ b
 &= (0 + 0)\cdot x + (-(0\cdot x))
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a, b \to 0,\ c \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= 0\cdot x + (-(0\cdot x))
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + 0 = 0)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ y + 0 = y\ (y \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0\cdot x)\bigr)
 \end{aligned}`),
@@ -1692,6 +1692,7 @@ b
       status: "added",
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0 を掛けると 0 になることは体の公理に含まれないのに、condition_of_commutativity_of_sqrt_and_product の r_1 = 0・r_2 = 0 の鎖と complex_zero_times_is_zero の証明が「ℝ で 0·x = 0」「0 を因子にもつ積は 0」を名前だけで根拠にしていたので、体の公理から示す主張として足した。Lean の具体版は Ising2D.real_zero_times_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroTimesIsZero.lean）、必要十分版は Ising2D.NecSuf.zero_mul_of_rightDistrib（NecSuf/ZeroMulOfRightDistrib.lean）。数値検証: sagemath/check/real_zero_times_is_zero/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0·x = 0·x + 0（y + 0 = y の y → 0·x を右辺から左辺へ）と (0 + 0)·x を 0·x にする行（y → 0）。主張の変数 x と取り違えないよう、形の変数を y にした。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1727,7 +1728,7 @@ b
       displayMath(String.raw`\begin{aligned}
 x\cdot 0
 &= x\cdot 0 + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ y + 0 = y\ (y \to x\cdot 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= x\cdot 0 + \bigl(x\cdot 0 + (-(x\cdot 0))\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to x\cdot 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= (x\cdot 0 + x\cdot 0) + (-(x\cdot 0))
@@ -1735,7 +1736,7 @@ x\cdot 0
 &= x\cdot (0 + 0) + (-(x\cdot 0))
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ (a \to x,\ b, c \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= x\cdot 0 + (-(x\cdot 0))
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + 0 = 0)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ y + 0 = y\ (y \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to x\cdot 0)\bigr)
 \end{aligned}`),
@@ -1744,6 +1745,7 @@ x\cdot 0
       status: "added",
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0 を右から掛けると 0 になることは体の公理に含まれないのに、complex_times_zero_is_zero・real_inclusion_preserves_product・sqrt_expansion_via_polar・relation_of_gamma_2_theta_tilde の証明が「ℝ で x·0 = 0（ℝ は体）」を名前だけで根拠にしていたので、real_zero_times_is_zero と同じ手順（分配則だけを左からの形に替える）で示す主張として足した。Lean の具体版は Ising2D.real_times_zero_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTimesZeroIsZero.lean）、必要十分版は Ising2D.NecSuf.mul_zero_of_leftDistrib（NecSuf/MulZeroOfLeftDistrib.lean）。数値検証: sagemath/check/real_times_zero_is_zero/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: x·0 = x·0 + 0（y + 0 = y の y → x·0 を右辺から左辺へ）と x·(0 + 0) を x·0 にする行（y → 0）。主張の変数 x と取り違えないよう、形の変数を y にした。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1774,7 +1776,7 @@ x\cdot 0
       displayMath(String.raw`\begin{aligned}
 -0
 &= -0 + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to -0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 0 + (-0)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0
@@ -1785,6 +1787,7 @@ x\cdot 0
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。−0 = 0 は体の公理に含まれないのに、本文の ℝ の計算が「ℝ で a − 0 = a（ℝ は体）」の形でこれを暗に使っていたので、real_minus_zero_is_self の準備として足した。Lean の具体版は Ising2D.real_negation_of_zero_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfZeroIsZero.lean）、必要十分版は Ising2D.NecSuf.neg_zero_of_addComm（NecSuf/NegZeroOfAddComm.lean）。数値検証: sagemath/check/real_negation_of_zero_is_zero/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: −0 = −0 + 0（x + 0 = x の x → −0 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1817,13 +1820,14 @@ a - 0
 &= a + 0
 &&\bigl(\because\ \blkref{real_negation_of_zero_is_zero}\bigr)\\
 &= a
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。a − 0 = a は体の公理に含まれないのに、cosine_zero・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde などの証明が「ℝ で a − 0 = a（ℝ は体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_minus_zero_is_self（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealMinusZeroIsSelf.lean）、必要十分版は Ising2D.NecSuf.sub_zero_of_negZero（NecSuf/SubZeroOfNegZero.lean）。数値検証: sagemath/check/real_minus_zero_is_self/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: a + 0 = a（x + 0 = x の x → a）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1862,13 +1866,13 @@ a - 0
       displayMath(String.raw`\begin{aligned}
 (-1)\cdot a
 &= (-1)\cdot a + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to (-1)\cdot a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= (-1)\cdot a + \bigl(a + (-a)\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1)\cdot a + a\bigr) + (-a)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl((-1)\cdot a + 1\cdot a\bigr) + (-a)
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot a = a\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1) + 1\bigr)\cdot a + (-a)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x + y)c = xc + yc\ (x \to -1,\ y \to 1,\ c \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \bigl(1 + (-1)\bigr)\cdot a + (-a)
@@ -1880,13 +1884,14 @@ a - 0
 &= (-a) + 0
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -a
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to -a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。(−1)·a = −a は体の公理に含まれない（−a は加法の逆元として定めた）のに、complex_numbers_form_a_field の (−1_C)·(a,b) の鎖の最後の行が「1 は積の単位元」だけで ((−1)a, (−1)b) = (−a, −b) を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_minus_one_times_is_negation（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealMinusOneTimesIsNegation.lean）、必要十分版は Ising2D.NecSuf.neg_one_mul_of_rightDistrib（NecSuf/NegOneMulOfRightDistrib.lean）。数値検証: sagemath/check/real_minus_one_times_is_negation/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: (−1)·a = (−1)·a + 0（x + 0 = x の x → (−1)·a を右辺から左辺へ）、a = 1·a（1·x = x の x → a を右辺から左辺へ）、(−a) + 0 = −a（x + 0 = x の x → −a）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1923,7 +1928,7 @@ a - 0
       displayMath(String.raw`\begin{aligned}
 -(-a)
 &= -(-a) + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to -(-a))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= -(-a) + \bigl(a + (-a)\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\ \text{を右辺から左辺へ}\bigr)\\
 &= -(-a) + \bigl((-a) + a\bigr)
@@ -1937,13 +1942,14 @@ a - 0
 &= a + 0
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。−(−a) = a は体の公理に含まれない（−a は加法の逆元として定めた）のに、phi_cartesian_after_phi_polar_is_identity の x = 0, y < 0 の鎖が「負号を 2 度施すともとに戻る」だけで (−y)(−1) = y を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_double_negation（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealDoubleNegation.lean）、必要十分版は Ising2D.NecSuf.neg_neg_of_addCommGroup（NecSuf/NegNegOfAddCommGroup.lean）。数値検証: sagemath/check/real_double_negation/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: −(−a) = −(−a) + 0（x + 0 = x の x → −(−a) を右辺から左辺へ）と a + 0 = a（x → a）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2090,7 +2096,7 @@ a - 0
       displayMath(String.raw`\begin{aligned}
 b
 &= 1\cdot b
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= (a^{-1}\cdot a)\cdot b
 &&\bigl(\because\ a\ \text{の乗法の逆元}\ a^{-1}\cdot a = 1\ (a \neq 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= a^{-1}\cdot(a\cdot b)
@@ -2112,6 +2118,7 @@ b
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。0 でない実数どうしの積が 0 でないことは体の公理に含まれないのに、range_of_args_of_square_of_complex_numbers の r ≠ 0 の場合が「実数の積は、因子がどちらも 0 でなければ 0 でない」の地の文だけで r·r ≠ 0 を済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_product_of_nonzero_is_nonzero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealProductOfNonzeroIsNonzero.lean）、必要十分版は Ising2D.NecSuf.mul_ne_zero_of_leftInverse（NecSuf/MulNeZeroOfLeftInverse.lean）。数値検証: sagemath/check/real_product_of_nonzero_is_nonzero/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: b = 1·b（1·x = x の x → b を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2171,7 +2178,7 @@ b
 &= a\cdot\left(a^{-1}\cdot 1\right)
 &&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to b \neq 0)\bigr)\\
 &= a\cdot a^{-1}
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ x\cdot 1 = x\ (x \to a^{-1})\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to a^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 1
 &&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to a \neq 0)\bigr)
 \end{aligned}`),
@@ -2179,7 +2186,7 @@ b
       displayMath(String.raw`\begin{aligned}
 a^{-1}\cdot b^{-1}
 &= 1\cdot\left(a^{-1}\cdot b^{-1}\right)
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ 1\cdot x = x\ (x \to a^{-1}\cdot b^{-1})\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to a^{-1}\cdot b^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \left((a\cdot b)\cdot(a\cdot b)^{-1}\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
 &&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to a\cdot b \neq 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left((a\cdot b)^{-1}\cdot(a\cdot b)\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
@@ -2189,7 +2196,7 @@ a^{-1}\cdot b^{-1}
 &= (a\cdot b)^{-1}\cdot 1
 &&\bigl(\because\ \text{準備の}\ (a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right) = 1\bigr)\\
 &= (a\cdot b)^{-1}
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）の}\ x\cdot 1 = x\ (x \to (a\cdot b)^{-1})\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to (a\cdot b)^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -2197,6 +2204,7 @@ a^{-1}\cdot b^{-1}
       status: "added",
       notes: [
         "2026-11-16（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_sector_rayleigh_sup のノルムの鎖が「ℝ で (1/p)(1/q) = 1/(pq)」を名前だけで根拠にしていた。逆元の積が積の逆元であることは体の公理に含まれないので、その行を def_real_quotient と乗法の単位元とこの主張の 5 行に割るために足した。逆元の一意性は使わず、(a·b)^{-1} に 1 を掛ける形の鎖で示す。Lean の具体版は Ising2D.real_product_of_inverses_is_inverse_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealProductOfInversesIsInverseOfProduct.lean）、必要十分版は Ising2D.NecSuf.mul_of_rightInverses_eq_rightInverse_of_mul（NecSuf/MulOfRightInversesEqRightInverseOfMul.lean）。数値検証: sagemath/check/real_product_of_inverses_is_inverse_of_product/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: a^{-1}·1 = a^{-1}（x·1 = x の x → a^{-1}）、a^{-1}·b^{-1} = 1·(a^{-1}·b^{-1})（1·x = x を右辺から左辺へ）、(a·b)^{-1}·1 = (a·b)^{-1}（x·1 = x）の 3 行は形が参照の後ろにあったので並びを直した。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2272,7 +2280,7 @@ a^{-1}\cdot b^{-1}
 &< 0 + (-1)
 &&\bigl(\because\ \text{場合の仮定}\ 1 < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1,\ y \to 0,\ c \to -1\bigr)\\
 &= -1
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 0
@@ -2281,7 +2289,7 @@ a^{-1}\cdot b^{-1}
 &= 1\cdot 1
 &&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to 1,\ b \to 1)\bigr)\\
 &= 1
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "したがって、どちらの場合も ",
@@ -2293,6 +2301,7 @@ a^{-1}\cdot b^{-1}
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 1・0 < 2・2 ≠ 0 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde ほか）、0 < 1 は順序体の公理に含まれないので、ℝ の 2 を定めて 0 < 2 を示す前段として示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanOne.lean）、必要十分版は Ising2D.NecSuf.zero_lt_one_of_orderedAxioms（NecSuf/ZeroLtOneOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_one/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0 + (−1) = −1（0 + x = x の x → −1）と 1·1 = 1（x·1 = x の x → 1）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2336,7 +2345,7 @@ a^{-1}\cdot b^{-1}
       displayMath(String.raw`\begin{aligned}
 1
 &= 0 + 1
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< 1 + 1
 &&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to 1,\ c \to 1\bigr)\\
 &= 2
@@ -2353,6 +2362,7 @@ a^{-1}\cdot b^{-1}
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 2 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} など）、2 を def_real_two で定めたので、その 2 について 0 < 2 を real_zero_less_than_one から示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_two（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanTwo.lean）、必要十分版は Ising2D.NecSuf.zero_lt_two_of_orderedAxioms（NecSuf/ZeroLtTwoOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_two/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 1 = 0 + 1（0 + x = x の x → 1 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2541,7 +2551,7 @@ a^{-1} \neq 0
 &< 0 + (-a^{-1})
 &&\bigl(\because\ \text{場合の仮定}\ a^{-1} < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to a^{-1},\ y \to 0,\ c \to -a^{-1}\bigr)\\
 &= -a^{-1}
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -a^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 0
@@ -2563,7 +2573,7 @@ a^{-1} \neq 0
       displayMath(String.raw`\begin{aligned}
 1
 &= 0 + 1
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< (-1) + 1
 &&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to -1,\ c \to 1\bigr)\\
 &= 1 + (-1)
@@ -2594,6 +2604,7 @@ a^{-1} \neq 0
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の乗法の逆元が正であることは順序体の公理に含まれないのに、zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} ほかが「ℝ で正の数の逆数は正（ℝ は順序体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_inverse_of_positive_is_positive（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealInverseOfPositiveIsPositive.lean）、必要十分版は Ising2D.NecSuf.inv_pos_of_orderedAxioms（NecSuf/InvPosOfOrderedAxioms.lean）。数値検証: sagemath/check/real_inverse_of_positive_is_positive/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0 + (−a^{-1}) = −a^{-1}（0 + x = x の x → −a^{-1}）と 1 = 0 + 1（x → 1 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2636,7 +2647,7 @@ a^{-1} \neq 0
       displayMath(String.raw`\begin{aligned}
 -a
 &= 0 + (-a)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< a + (-a)
 &&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to a,\ c \to -a\bigr)\\
 &= 0
@@ -2647,6 +2658,7 @@ a^{-1} \neq 0
       status: "added",
       notes: [
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の加法の逆元が負であることは順序体の公理に含まれないのに、trace_of_epsilon_V_plus_via_check_eigenvalues の Step 7 の ȟ = −1 の背理の鎖の 4 行目が「ℝ で a > 0 なら −a < 0」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_of_positive_is_negative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfPositiveIsNegative.lean）、必要十分版は Ising2D.NecSuf.neg_lt_zero_of_zero_lt（NecSuf/NegLtZeroOfZeroLt.lean）。数値検証: sagemath/check/real_negation_of_positive_is_negative/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: −a = 0 + (−a)（0 + x = x の x → −a を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -2857,7 +2869,7 @@ z\,0_{\mathbb{C}}
 &= (0 + a,\ 0 + b)
 &&\bigl(\because\ \text{複素数の和の定義 }\blkref{definition_of_cc}\bigr)\\
 &= (a,\ b)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to a,\ x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= z
 &&(\because\ z = (a, b))
 \end{aligned}`),
@@ -2868,6 +2880,7 @@ z\,0_{\mathbb{C}}
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_generate_algebra の Step 1 の第 2 式と Step 3 の R_{12}・R_{21} の鎖が、" +
           "「加法の単位元」で 0_C + z = z（左から足す形）を消していたが、complex_numbers_form_a_field が示すのは z + 0_C = z（右から足す形）だけで、左から足す形は加法の可換律を合わせないと出ない。" +
           "complex_zero_times_is_zero・complex_times_zero_is_zero と同じく、定義から計算する主張として足した。Lean の具体版は無く、使う側は zero_add で閉じる（complex_zero_times_is_zero の zero_mul と同じ扱い）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: (0 + a, 0 + b) = (a, b)（0 + x = x の x → a, x → b を 2 箇所へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -4610,11 +4623,11 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \pi
 &= 0+\pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \pi\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< \pi+\pi
 &&\bigl(\because\ 0<\pi\ \text{の両辺に}\ \pi\ \text{を足す。}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\bigr)\\
 &= 1\cdot\pi+1\cdot\pi
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to \pi\ \text{を 2 箇所へ、右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ、右辺から左辺へ}\bigr)\\
 &= (1+1)\,\pi
 &&\bigl(\because\ \mathbb{R}\ \text{の分配律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2\pi
@@ -4665,6 +4678,7 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。relation_of_gamma_2_theta_tilde の準備の地の文が、0 < π だけを根拠に角度 0 と π の整数がどちらも 0 であるとしていた（π < 2π と π − 2·0·π = π が書かれていなかった）ので、角度 π の側を 1 つの主張にした（角度 0 の側は angle_section_integer_of_zero_is_zero）。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_integer_of_pi_is_zero/。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 準備の π < 2π の鎖の最後の行 (1+1)π = 2π の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: π = 0 + π（0 + x = x の x → π を右辺から左辺へ）と π + π = 1·π + 1·π（1·x = x の x → π を 2 箇所へ、右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
