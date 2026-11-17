@@ -12,6 +12,10 @@
  * - 存在の義務: 到達点の Lean 具体版が引数で受け取る構造（例: 実閉部分体のデータ）の存在を示す主張。
  *   結論がその構造に依らない定理でも、構造が一つも作られていなければ条件付きの主張にとどまるので、
  *   到達点と同じく閉包の起点にする。主張が本文に無ければ、Lean の無いもの 1 件として数える。
+ * - 予定の部品: 本文に無い存在の義務を、台帳の行に対応する予定の主張（ラベル）へ割ったもの。
+ *   本文にそのラベルのブロックが現れるまでは、予定の依存を持つ Lean の無いもの 1 件として数え、
+ *   現れたら本文のブロックとその依存で数える。義務を 1 件のまま数えると、台帳の行が済んでも
+ *   義務の主張が書かれるまで件数が動かず、減る速さを読めないため。
  * - 着手できるもの: Lean の無いもののうち、直接の依存に Lean の無いものが一つも無いもの。
  * - 最長の鎖: Lean の無いものだけを辿る依存の最長の列。積み上げを一本で進める限り、
  *   残りはこの長さの回数より早くは終わらない。
@@ -40,8 +44,52 @@ export const GOAL_TARGETS = [
  * 引数に取るが、その値を作る主張は本文にも Lean にも無い（2026-11-17 の研究管理が確かめた）。
  */
 export const EXISTENCE_OBLIGATIONS = [
-  { label: "claim_real_closed_subfield_exists", title: "実閉部分体と虚数単位の組は存在する" },
+  {
+    label: "claim_real_closed_subfield_exists",
+    title: "実閉部分体と虚数単位の組は存在する",
+    parts: [
+      "claim_enumerated_ordered_subfield_is_maximal",
+      "claim_maximal_ordered_subfield_positive_is_square",
+      "claim_odd_degree_positive_cone_extension",
+      "claim_adjoin_imaginary_unit_gives_algebraic_numbers",
+    ],
+  },
 ] as const;
+
+/**
+ * 存在の義務の予定の部品（2026-11-17 の研究管理が台帳の行に合わせて決めた。runbook「実閉部分体の存在の経路」）。
+ * ラベル名は台帳の行が名指す。本文で別のラベルにしたら、ここを直す。
+ */
+export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly string[] }> = {
+  claim_algebraic_numbers_enumeration: { title: "代数的数の全体の列挙", dependsOn: [] },
+  def_subfield_positive_cone: { title: "部分体の正錐", dependsOn: [] },
+  def_positive_cone_extension: { title: "部分体の正錐の延長", dependsOn: ["def_subfield_positive_cone"] },
+  claim_quadratic_positive_cone_is_subfield_positive_cone: {
+    title: "二次体の正錐は部分体の正錐である",
+    dependsOn: ["def_subfield_positive_cone"],
+  },
+  claim_enumerated_ordered_subfield_is_maximal: {
+    title: "列挙に沿った順序付き部分体は極大である",
+    dependsOn: [
+      "claim_algebraic_numbers_enumeration",
+      "def_positive_cone_extension",
+      "claim_quadratic_positive_cone_is_subfield_positive_cone",
+    ],
+  },
+  claim_maximal_ordered_subfield_positive_is_square: {
+    title: "極大な順序付き部分体では正の元が平方である",
+    dependsOn: ["claim_enumerated_ordered_subfield_is_maximal"],
+  },
+  claim_odd_degree_positive_cone_extension: {
+    title: "奇数次の元を付け足しても正錐は延長できる",
+    dependsOn: ["def_positive_cone_extension"],
+  },
+  claim_symmetric_polynomial_fundamental_theorem: { title: "対称式の基本定理", dependsOn: [] },
+  claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
+    title: "虚数単位を足すと代数的数の全体になる",
+    dependsOn: ["claim_odd_degree_positive_cone_extension", "claim_symmetric_polynomial_fundamental_theorem"],
+  },
+};
 
 const COUNTED_KINDS = new Set(["definition", "claim", "theorem", "remark"]);
 const BLKREF_RE = /\\blkref\{([^}]+)\}/g;
@@ -90,15 +138,27 @@ for (const target of GOAL_TARGETS) {
 }
 const closure = new Set<Block>();
 const queue = GOAL_TARGETS.map((target) => byLabel.get(target) as Block);
+// 本文にまだ無い主張は、予定の依存を持つ Lean の無いもの 1 件として閉包へ入れる。
+const placeholders = new Map<string, Block>();
+function resolvePlanned(label: string, title: string, dependsOn: readonly string[]): Block {
+  const real = byLabel.get(label);
+  if (real !== undefined) return real;
+  const known = placeholders.get(label);
+  if (known !== undefined) return known;
+  const placeholder: Block = { id: label, kind: "claim", title: { text: `（本文に未作成）${title}` }, labels: [label] };
+  placeholders.set(label, placeholder);
+  dependencies.set(
+    placeholder,
+    dependsOn.map((dep) => {
+      const part = PLANNED_PARTS[dep];
+      if (part === undefined) throw new Error(`予定の部品 ${dep} が PLANNED_PARTS に無い`);
+      return resolvePlanned(dep, part.title, part.dependsOn);
+    }),
+  );
+  return placeholder;
+}
 for (const obligation of EXISTENCE_OBLIGATIONS) {
-  const block = byLabel.get(obligation.label);
-  if (block !== undefined) queue.push(block);
-  else {
-    // 本文にまだ無い主張は、依存の無い Lean の無いもの 1 件として閉包へ入れる。
-    const placeholder: Block = { id: obligation.label, kind: "claim", title: { text: `（本文に未作成）${obligation.title}` }, labels: [obligation.label] };
-    dependencies.set(placeholder, []);
-    queue.push(placeholder);
-  }
+  queue.push(resolvePlanned(obligation.label, obligation.title, obligation.parts));
 }
 while (queue.length > 0) {
   const block = queue.pop() as Block;
