@@ -2656,7 +2656,7 @@ z
 &= \left[\left(\sqrt{1+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (1 + 0 = 1)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \blkref{sqrt_of_real_one_is_one})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
@@ -2696,7 +2696,7 @@ z
 &= (1\cdot 1,\ 1\cdot 0)
 &&(\because\ \blkref{sine_zero})\\
 &= (1,\ 0)
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ \text{（}\blkref{set_and_algebra_notation}\text{）を 2 箇所へ適用（}x \to 1\text{、}x \to 0\text{）}\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to 1\text{、}x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ}\bigr)\\
 &= 1_{\mathbb{C}}
 &&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
@@ -2818,6 +2818,7 @@ z
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の 0/2 = 0 の行の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 二つの場合の鎖の名前だけの根拠を参照に替えた。「1_C は C の積の単位元」4 行と「C の積の結合律」2 行を complex_numbers_form_a_field の参照（使った形と代入つき）に、「準備の第三で取った 1/√z の定め方」「準備の第二で取った 1/z の定め方」各 2 行を multiplicative_group_of_cc の逆元（w^{-1}w = 1_C の w → √z、ww^{-1} = 1_C の w → z）に、「sqrt と積が可換になる条件の第 1・第 2 の場合」を condition_of_commutativity_of_sqrt_and_product（z_1 → z、z_2 → 1/z）を右辺から左辺へに、「-(-w)=w」を double_negation_in_cc に、「C の積と符号の関係」を complex_times_negation_is_negation_of_product_in_cc（z → 1/√z、w → 1_C）にした。偏角の和の「ℝ の和の計算」2 行のうち 0 + 0 = 0 を set_and_algebra_notation の加法の単位元（x → 0）に、arg z + (2π − arg z) = 2π を def_real_difference・加法の交換律・結合律・逆元・単位元の 5 行に割った（鎖の両端は不変。偏角の和の第 2 の場合の鎖は 2 段から 6 段）。主張は不変。SageMath の検算 check_reciprocal_cases_chains.sage を足した。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く 2 行に、使った形と代入が書かれていない、または代入が参照の後ろに置かれていたので、000_calculation_formulae_20_29.ts の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: φ_polar(1_C) の鎖の 1 + 0 = 1（x + 0 = x の x → 1）と、√(1_C) の鎖の (1·1, 1·0) = (1, 0)（1·x = x の x → 1、x → 0 を 2 箇所へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -3687,17 +3688,17 @@ i\,i
 &= (0-1\cdot1,\ 0\cdot1+1\cdot0)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= (0-1,\ 0\cdot1+1\cdot0)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (0-1,\ 0+1\cdot0)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 1)\bigr)\\
 &= (0-1,\ 0+0)
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 1)\bigr)\\
 &= (0-1,\ 0)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + 0 = 0)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (0+(-1),\ 0)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 0,\ z \to 1)\bigr)\\
 &= (-1,0)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\ (0 + (-1) = -1)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -1_{\mathbb{C}}
 &&\bigl(\because\ -1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1\bigr)
 \end{aligned}`),
@@ -3707,6 +3708,7 @@ i\,i
       notes: [
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_linearly_independent の Step 1 が Z_Y_generate_algebra の証明の中の準備 (g) を引いていて、ラベルで引けなかった。(g) を主張 negative_i_times_i_is_one_in_cc にするため、その鎖が使う準備 (f) をこの主張にした。鎖は Z_Y_generate_algebra の準備 (f) と同じ 4 行である。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ の四則」は 0·0 = 0・1·1 = 1・0·1 = 0・1·0 = 0・0 + 0 = 0・0 − 1 = −1 を名前を挙げずに含んでいたので、real_zero_times_is_zero・ℝ の乗法の単位元・real_zero_times_is_zero・real_times_zero_is_zero・ℝ の加法の単位元・def_real_difference・ℝ の加法の単位元の 7 行に割った。鎖の両端と主張は不変。Lean の具体版 Ising2D.complex_I_mul_I（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimITimesIAndNegativeITimesIInCC.lean）の 3 段目（norm_num）も同じ 7 段に割った。数値検証: sagemath/check/i_times_i_is_minus_one_in_cc/。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く 3 行に、使った形と代入が書かれていない、または代入が参照の後ろに置かれていたので、000_calculation_formulae_20_29.ts の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 1·1 = 1（1·x = x の x → 1）、0 + 0 = 0（x + 0 = x の x → 0）、0 + (−1) = −1（0 + x = x の x → −1）。式・鎖の両端・段数は不変。Lean の具体版 Ising2D.complex_I_mul_I は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
