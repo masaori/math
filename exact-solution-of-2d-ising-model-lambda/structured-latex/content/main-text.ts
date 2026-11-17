@@ -47824,6 +47824,85 @@ x\cdot y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の�
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_enumerated_ordered_subfield_maximality_criterion",
+        labels: [],
+        title: { text: "列挙段階の取込条件から従う順序付き部分体の極大性" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_enumerated_ordered_subfield_maximality_criterion",
+              focus: {
+                id: "zero_pinching_claim_enumerated_ordered_subfield_maximality_criterion",
+                kind: "claim",
+                title: { text: "列挙段階で延長可能な元を取り込めば和集合は極大である" },
+                labels: ["claim_enumerated_ordered_subfield_maximality_criterion"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/enumerated-ordered-subfield-maximality-criterion"],
+                lean: [
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_maximalityCriterion",
+                  "Ising2DLambda.NecSuf.FisherZero.enumeratedOrderedSubfield_maximalityCriterion",
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_maximalityCriterion_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\xi:\mathbb N\to\overline{\mathbb Q}`), " を全射（",
+                    ref("claim_algebraic_numbers_enumeration"), "）とする。各 ", math(String.raw`n\in\mathbb N`),
+                    " に部分体 ", math(String.raw`F_n\subseteq\overline{\mathbb Q}`), " と正錐 ",
+                    math(String.raw`C_n\subseteq F_n`), " を与え、",
+                    math(String.raw`(F_{n+1},C_{n+1})`), " は ", math(String.raw`(F_n,C_n)`),
+                    " の延長（", ref("def_positive_cone_extension"), "）とする。さらに各 ",
+                    math(String.raw`n\in\mathbb N`), " について、もし部分体 ",
+                    math(String.raw`E\subseteq\overline{\mathbb Q}`), " と正錐 ",
+                    math(String.raw`D\subseteq E`), " が ", math(String.raw`(F_n,C_n)`),
+                    " を延長し、", math(String.raw`\xi(n)\in E`), " なら、",
+                    math(String.raw`\xi(n)\in F_{n+1}`), " と仮定する。",
+                    math(String.raw`R:=\bigcup_{n\in\mathbb N}F_n`), " と ",
+                    math(String.raw`C_R:=\bigcup_{n\in\mathbb N}C_n`), " を置く。",
+                    "各 ", math(String.raw`n\in\mathbb N`), " で ",
+                    math(String.raw`C_R\cap F_n=C_n`), " も仮定する。",
+                    "このとき ", math(String.raw`(R,C_R)`), " を延長する任意の ",
+                    math(String.raw`(E,D)`), " について ", math(String.raw`E=R`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([ref("claim_increasing_subfield_union_is_subfield"), " により ", math(String.raw`R`),
+                    " は部分体であり、", ref("claim_increasing_positive_cone_union_is_positive_cone"),
+                    " により ", math(String.raw`C_R`), " はその正錐である。",
+                    math(String.raw`(E,D)`), " を ", math(String.raw`(R,C_R)`),
+                    " の延長として固定する。" ]),
+                  paragraph(["任意の ", math(String.raw`z\in E`), " を取る。",
+                    math(String.raw`\xi(n)=z`), " となる ", math(String.raw`n\in\mathbb N`),
+                    " を全射性で選ぶ。延長の定義と和集合の定義から次が成り立つ。" ]),
+                  displayMath(String.raw`\begin{aligned}
+F_n&\subseteq R&&\bigl(\because\ R\text{ は }F_n\text{ の和集合}\bigr)\\
+C_R\cap F_n&=C_n&&\bigl(\because\ \text{仮定}\bigr)\\
+D\cap F_n&=(D\cap R)\cap F_n&&\bigl(\because\ F_n\subseteq R\bigr)\\
+&=C_R\cap F_n&&\bigl(\because\ \blkref{def_positive_cone_extension}\text{ の }D\cap R=C_R\bigr)\\
+&=C_n&&\bigl(\because\ \text{上の等号}\bigr).
+\end{aligned}`),
+                  paragraph(["よって ", math(String.raw`(E,D)`), " は ", math(String.raw`(F_n,C_n)`),
+                    " の延長である。取込条件をこの延長と ", math(String.raw`\xi(n)=z\in E`),
+                    " に適用する。" ]),
+                  displayMath(String.raw`\xi(n)\in F_{n+1}\qquad\bigl(\because\ \text{取込条件}\bigr)`),
+                  displayMath(String.raw`z\in F_{n+1}\qquad\bigl(\because\ z=\xi(n)\bigr)`),
+                  displayMath(String.raw`z\in R\qquad\bigl(\because\ F_{n+1}\subseteq R\bigr)`),
+                  paragraph(["従って ", math(String.raw`E\subseteq R`), " である。逆包含 ",
+                    math(String.raw`R\subseteq E`), " は ", ref("def_positive_cone_extension"),
+                    " の延長の前提なので ", math(String.raw`E=R`), " である。",
+                    "実数体・複素数体は使わない。" ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },
