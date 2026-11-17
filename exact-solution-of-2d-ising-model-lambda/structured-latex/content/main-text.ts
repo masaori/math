@@ -71362,8 +71362,11 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
 \end{aligned}`),
                       paragraph([
                         math(String.raw`r=n_{\perp}-1`), " の場合、",
-                        math(String.raw`s+1=(q+1)\,n_{\perp}+0`), " が ",
-                        math(String.raw`s+1`), " の除法の表示であり、",
+                      ]),
+                      displayMath(String.raw`s+1=(q+1)\,n_{\perp}+0
+\qquad\bigl(\because\ s=q\,n_{\perp}+r,\ r=n_{\perp}-1\bigr)`),
+                      paragraph([
+                        "これが ", math(String.raw`s+1`), " の除法の表示であり、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 D^{\gamma,Q,t}_{s+1}

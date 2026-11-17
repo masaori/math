@@ -33,6 +33,50 @@ private lemma verticalStep_transverseCoordinate_pos (wh wv : ℤ)
   rw [mul_comm, Int.sign_mul_self]
   exact_mod_cast hV
 
+private lemma transverseTwoPhase_step (H V : ℕ) (first second : ℤ × ℤ)
+    (coordinate : (ℤ × ℤ) →+ ℤ)
+    (hfirst : 0 < H → 0 < coordinate first)
+    (hsecond : 0 < V → 0 < coordinate second)
+    (s : ℕ) (hs : s < H + V) :
+    (twoPhaseStaircase H first second (s + 1) -
+      twoPhaseStaircase H first second s = if s < H then first else second) ∧
+    coordinate (twoPhaseStaircase H first second s) <
+      coordinate (twoPhaseStaircase H first second (s + 1)) := by
+  by_cases hphase : s < H
+  · have hsle : s ≤ H := Nat.le_of_lt hphase
+    have hsuccle : s + 1 ≤ H := by omega
+    have hH : 0 < H := by omega
+    simp only [twoPhaseStaircase, if_pos hsle, if_pos hsuccle, if_pos hphase]
+    constructor
+    · simp [Nat.cast_add, add_mul]
+    · rw [map_nsmul, map_nsmul]
+      simpa [Nat.cast_add, add_mul] using
+        add_lt_add_left (hfirst hH) (s • coordinate first)
+  · have hsuccgt : ¬s + 1 ≤ H := by omega
+    have hV : 0 < V := by omega
+    simp only [twoPhaseStaircase, if_neg hsuccgt, if_neg hphase]
+    by_cases heq : s = H
+    · subst s
+      simp only [le_refl, if_pos, Nat.add_sub_cancel_left]
+      constructor
+      · simp
+      · rw [map_nsmul, map_add, map_nsmul]
+        simp only [one_nsmul]
+        exact lt_add_of_pos_right _ (hsecond hV)
+    · have hsnotle : ¬s ≤ H := by omega
+      simp only [if_neg hsnotle]
+      have hsub : s + 1 - H = (s - H) + 1 := by omega
+      constructor
+      · rw [hsub, add_nsmul]
+        simp
+      · rw [map_add, map_add, map_nsmul, map_nsmul]
+        rw [hsub, add_nsmul]
+        simp only [map_add, map_nsmul, one_nsmul]
+        simpa [add_assoc] using
+          (lt_add_of_pos_right
+            (H • coordinate first + (s - H) • coordinate second)
+            (hsecond hV))
+
 /-- `claim_winding_transverse_staircase_step_increase`。
 各隣接差は四つの単位格子ベクトルの一つであり、横断座標を真に増やす。 -/
 theorem windingTransverseStaircase_step_increase (wh wv : ℤ) (s : ℕ)
@@ -43,7 +87,7 @@ theorem windingTransverseStaircase_step_increase (wh wv : ℤ) (s : ℕ)
       difference = (0, 1) ∨ difference = (0, -1)) ∧
     windingTransverseCoordinate wh wv (windingTransverseStaircase wh wv s) <
       windingTransverseCoordinate wh wv (windingTransverseStaircase wh wv (s + 1)) := by
-  have hstep := twoPhaseStaircase_step_necSuf wh.natAbs wv.natAbs
+  have hstep := transverseTwoPhase_step wh.natAbs wv.natAbs
     (Int.sign wh, 0) (0, -Int.sign wv) (windingTransverseCoordinate wh wv)
     (horizontalStep_transverseCoordinate_pos wh wv)
     (verticalStep_transverseCoordinate_pos wh wv) s hs
