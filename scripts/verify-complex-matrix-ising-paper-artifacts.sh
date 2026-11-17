@@ -8,9 +8,14 @@
 # 判定は公開 HTML に埋め込まれた版（生成時の commit）で行う。未コミットの状態で
 # 公開されている場合、および版が origin/main に含まれない場合は失敗とする。
 # 公開ページには再編の現在地（章へ割り当てた件数）が載っていることも併せて検証する。
+# 公開先の基底 URL は環境変数 PUBLISHED_BASE_URL で渡す。
 set -uo pipefail
 
-BASE_URL="https://hexcomp-artifacts.web.app/math"
+if [ -z "${PUBLISHED_BASE_URL:-}" ]; then
+  echo "公開先の基底 URL を環境変数 PUBLISHED_BASE_URL で渡す（例: 公開の名前空間の URL。末尾の / は付けない）" >&2
+  exit 2
+fi
+BASE_URL="$PUBLISHED_BASE_URL"
 SLUGS=(complex-matrix-ising-paper complex-matrix-ising-paper-organization)
 
 failures=0

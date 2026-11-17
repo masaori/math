@@ -15,7 +15,7 @@
 # 人間は「いまどこにいるのか」を成果物から読めない。
 #
 #   bash scripts/verify-upstream-load-and-roadmap.sh              # 正本だけを検査
-#   bash scripts/verify-upstream-load-and-roadmap.sh --published  # 公開 HTML も検査
+#   bash scripts/verify-upstream-load-and-roadmap.sh --published  # 公開 HTML も検査（公開先は PUBLISHED_BASE_URL で渡す）
 #   bash scripts/verify-upstream-load-and-roadmap.sh --run        # 対象検算を実際に走らせて時間を測る
 set -uo pipefail
 
@@ -23,7 +23,6 @@ PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 cd "$PROJECT_DIR"
 
 TARGET_CHECK="sagemath/check/parity-identity-simple-cycle-arc-interior-membership/check.sage"
-PUBLISHED_URL="https://hexcomp-artifacts.web.app/math/ising-lambda/"
 # 対象検算の実行時間の上限（秒）。
 RUN_LIMIT_SECONDS="${RUN_LIMIT_SECONDS:-1800}"
 
@@ -89,6 +88,11 @@ done
 [ "$source_missing" -eq 0 ] && ok "五つの段が構造化テキストの本文にある"
 
 if [ "$check_published" -eq 1 ]; then
+  if [ -z "${PUBLISHED_BASE_URL:-}" ]; then
+    echo "公開先の基底 URL を環境変数 PUBLISHED_BASE_URL で渡す（例: 公開の名前空間の URL。末尾の / は付けない）" >&2
+    exit 2
+  fi
+  PUBLISHED_URL="$PUBLISHED_BASE_URL/ising-lambda/"
   html="$(mktemp)"
   if curl -fsS "$PUBLISHED_URL" -o "$html"; then
     published_missing=0

@@ -8,7 +8,7 @@
 # この script は自己完結にしてある。remote default branch の版だけを取り出して
 # そのまま実行できる（作業ツリーの状態に依存しない）:
 #
-#   git show origin/main:scripts/verify-structured-latex-mobile-toc-artifacts.sh | bash -s -- --published
+#   git show origin/main:scripts/verify-structured-latex-mobile-toc-artifacts.sh | PUBLISHED_BASE_URL=<公開先の基底 URL> bash -s -- --published
 #
 # 「現行版が反映されているか」は、公開 HTML に埋め込まれた版表示（作成時の commit）を見て、
 # それが remote default branch に含まれるコミットかどうかで判定する。
@@ -21,7 +21,13 @@ case "${1-}" in
   *) echo "usage: $0 [--build|--published]" >&2; exit 2 ;;
 esac
 
-BASE_URL="https://hexcomp-artifacts.web.app/math"
+if [ "$MODE" = "published" ]; then
+  if [ -z "${PUBLISHED_BASE_URL:-}" ]; then
+    echo "公開先の基底 URL を環境変数 PUBLISHED_BASE_URL で渡す（例: 公開の名前空間の URL。末尾の / は付けない）" >&2
+    exit 2
+  fi
+fi
+BASE_URL="${PUBLISHED_BASE_URL:-}"
 
 # 共通レンダラー（structured-latex/renderers/html/chapter-navigation.ts）を使う論文と、
 # その論文が公開されている名前空間の対応。新しい論文を足したらここへ 1 行足す。

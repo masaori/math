@@ -2,7 +2,7 @@
 # 研究の段取りが、正本・手元のビルド・公開ページの三つで一致していることを検査する。
 #
 #   verify-roadmap-artifact.sh              正本の内容検査と、手元でビルドした HTML との照合
-#   verify-roadmap-artifact.sh --published  さらに公開ページを取得して同じ照合を行う
+#   verify-roadmap-artifact.sh --published  さらに公開ページを取得して同じ照合を行う（公開先は PUBLISHED_BASE_URL で渡す）
 #
 # 公開ページの照合を既定にしないのは、公開が済む前の検証でも使うためである。
 # 逆に `--published` を付けたときは、取得できないこと・古いことを成功として通さない。
@@ -10,7 +10,6 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 STRUCTURED_DIR="$PROJECT_DIR/structured-latex"
-PUBLISHED_URL="https://hexcomp-artifacts.web.app/math/cellular-automata-statistical-mechanics/"
 
 check_published=0
 for arg in "$@"; do
@@ -44,6 +43,11 @@ if [ "$check_published" -eq 0 ]; then
   exit 0
 fi
 
+if [ -z "${PUBLISHED_BASE_URL:-}" ]; then
+  echo "公開先の基底 URL を環境変数 PUBLISHED_BASE_URL で渡す（例: 公開の名前空間の URL。末尾の / は付けない）" >&2
+  exit 2
+fi
+PUBLISHED_URL="$PUBLISHED_BASE_URL/cellular-automata-statistical-mechanics/"
 echo "== 公開ページと照合する: $PUBLISHED_URL =="
 tmp="$(mktemp -t roadmap-published.XXXXXX)"
 trap 'rm -f "$tmp"' EXIT
