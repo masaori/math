@@ -786,32 +786,22 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \langle A,A\rangle
-&= \sum_{i,j}\overline{a_{ij}}\,a_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,a_{ij}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\left(|a_{ij}|^2\right)_{\mathbb{C}}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\left(|a_{ij}|^2\right)_{\mathbb{C}}
    \quad (\because \text{Step 0 の } \overline{z}z=\left(|z|^2\right)_{\mathbb{C}}) \\
-&= \left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}
-   \quad (\because \mathbb{R}\to\mathbb{C} \text{ の包含写像 } \iota_{\mathbb{R}\to\mathbb{C}} \text{ が加法を保つこと})
-\end{aligned}`,
-      ),
-      paragraph([
-        "最後の段で引いたのは ",
-        ref("inclusion_rr_to_cc"),
-        " である。さらに",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\langle A,A\rangle
-&= \left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}
-   \quad (\because \text{上の鎖}) \\
+&= \sum_{i=1}^{n}\left(\sum_{j=1}^{n}|a_{ij}|^2\right)_{\mathbb{C}}
+   \quad (\because \blkref{real_inclusion_preserves_finite_sum}\ (m\to n,\ r_j\to|a_{ij}|^2)\ \text{を各 } i \text{ の内側の和へ同時適用}) \\
+&= \left(\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2\right)_{\mathbb{C}}
+   \quad (\because \blkref{real_inclusion_preserves_finite_sum}\ (m\to n,\ j\to i,\ r_i\to\textstyle\sum_{j=1}^{n}|a_{ij}|^2)\ \text{を外側の和へ}) \\
+&= \left(\Bigl(\sqrt{\textstyle\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2}^{\,(\mathbb{R}_{\ge 0})}\Bigr)^2\right)_{\mathbb{C}}
+   \quad (\because \blkref{definition_of_sqrt_r_positive}\ \text{の}\ y^2=x\ (x\to\textstyle\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2\ \text{。}x\ge 0\ \text{は}\ \blkref{def_matrix_norm}\ \text{の根号の中})\ \text{を右辺から左辺へ}) \\
 &= \left(\|A\|^2\right)_{\mathbb{C}}
-   \quad (\because \|A\|^2=\sum_{i,j}|a_{ij}|^2\ \text{（ノルムの定義）})
+   \quad (\because \blkref{def_matrix_norm}\ (K=\mathbb{C})\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
-        "である（ノルムの定義は ",
-        ref("def_matrix_norm"),
-        "）。よって ",
+        "よって ",
         math(String.raw`\langle A,A\rangle`),
         " は非負実数 ",
         math(String.raw`\|A\|^2`),
@@ -1208,6 +1198,7 @@ u+\overline{u}
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: Step 5 と Step 6 で名前だけで根拠にしていた「ι_{ℝ→ℂ} の単射性」の 2 か所を、inclusion_rr_to_cc_is_injective への参照（a・b の当てはめ付き）に替えた。内容は変えていない。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の t := ū/(‖B‖²)_ℂ を β := ‖B‖² と def_complex_quotient で t = ū(β_ℂ)^{-1} と開き、β_ℂ ∈ ℂ^× と (β^{-1})_ℂ = (β_ℂ)^{-1} を新しい主張 real_inclusion_preserves_inverse から取った。三つの積の項の鎖の「約分」「ι_{ℝ→ℂ} が積と逆元を保つこと」「Step 0 による t̄ の表示」を、準備 t̄ = u(β_ℂ)^{-1}（complex_conjugate_of_product・complex_conjugate_of_inverse・complex_conjugate_of_real_inclusion）と準備 (ūu)(β_ℂ)^{-1} = q_ℂ（complex_conjugate_times_self・real_inclusion_preserves_product。q := |u|²/‖B‖²）と、積の結合律・可換律・逆元・単位元の 1 段ずつに開いた。三つの項の鎖は符号を付けない t⟨A,B⟩・t̄⟨B,A⟩・t̄t⟨B,B⟩ から始め、合わせる鎖は展開式の右辺から 1 行に 1 つずつ代入し、「ℂ の加法の結合律と加法逆元」を def_complex_difference と complex_numbers_form_a_field の結合律・加法逆元・単位元の行に、「ι_{ℝ→ℂ} が減法を保つこと」を real_inclusion_preserves_difference にした。主張と Step 5 の結論は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の合わせる鎖で (-q_C) + q_C を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示しておらず、左から足す形は加法の可換律を合わせないと出ない）から negation_plus_self_is_zero_in_cc (x → q_C) に替えた。式は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 4 の鎖の後に置いていた「最後の段で引いたのは inclusion_rr_to_cc である。」の段落を削った。その行は ι_{ℝ→ℂ} が二重の有限和を保つことを使うが、inclusion_rr_to_cc は定義だけなので、行を 2 段に割り、各 i の内側の和と外側の和へ real_inclusion_preserves_finite_sum（m = n）を当てた。続けて置いていた (‖A‖²)_ℂ の鎖（根拠「上の鎖」）を同じ鎖の最後の行にし、後ろの段落の「（ノルムの定義は def_matrix_norm）」を、definition_of_sqrt_r_positive の y² = x の行と def_matrix_norm の行の 2 行に割って鎖に入れた（011_max_eigenvalue.ts の同じ変形と同じ割り方）。和の記号 Σ_{i,j} は (0) と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。鎖の両端は不変。",
       ],
     },
   },
