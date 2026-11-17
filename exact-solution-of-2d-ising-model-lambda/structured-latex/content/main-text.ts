@@ -84991,7 +84991,15 @@ Q_L^{a,b}(x_c)^2
 &=\epsilon_L^{a,b}2^NQ_L^{a,b}(x_c)
 &&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr).
 \end{aligned}`),
-                  paragraph(["非零の ", math(String.raw`2^NQ_L^{a,b}(x_c)`), " を消去して ", math(String.raw`\epsilon_L^{a,b}=1`), " を得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+\epsilon_L^{a,b}
+&=\frac{\epsilon_L^{a,b}2^NQ_L^{a,b}(x_c)}{2^NQ_L^{a,b}(x_c)}
+&&\bigl(\because\ Q_L^{a,b}(x_c)\ne0,\ 2^N\ne0\bigr)\\
+&=\frac{2^NQ_L^{a,b}(x_c)}{2^NQ_L^{a,b}(x_c)}
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
+&=1
+&&\bigl(\because\ Q_L^{a,b}(x_c)\ne0,\ 2^N\ne0\bigr).
+\end{aligned}`),
                   paragraph([
                     "次に ", math(String.raw`(a,b)=(0,0)`), " とする。",
                     ref("def_signed_even_subgraph_polynomial"), " より、空の偶部分グラフだけが定数項へ寄与し、",
