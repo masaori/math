@@ -124,8 +124,8 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
                                                                -- 6 行目: `real_times_zero_is_zero` を 2 箇所へ（`x → -1, 0`）
     _ = star (⟨0, (-1) * 1 + 0⟩ : ℂ) := by
         rw [real_minus_zero_is_self 0]                         -- 7 行目: `real_minus_zero_is_self`（`a → 0`）
-    _ = star (⟨0, (-1) * 1⟩ : ℂ) := by rw [add_zero]          -- 8 行目: `0` は `ℝ` の加法の単位元
-    _ = star (⟨0, -1⟩ : ℂ) := by rw [mul_one]                 -- 9 行目: `1` は `ℝ` の乗法の単位元
+    _ = star (⟨0, (-1) * 1⟩ : ℂ) := by rw [add_zero]          -- 8 行目: `0` は `ℝ` の加法の単位元 `x + 0 = x`（`x → (-1) * 1`）
+    _ = star (⟨0, -1⟩ : ℂ) := by rw [mul_one]                 -- 9 行目: `1` は `ℝ` の乗法の単位元 `x * 1 = x`（`x → -1`）
     _ = (starRingEnd ℂ) (⟨0, -1⟩ : ℂ) := rfl                  -- `star` を `starRingEnd ℂ` と読む
     _ = (⟨0, -(-1)⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                                -- 10 行目: `def_complex_conjugate`

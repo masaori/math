@@ -14,6 +14,7 @@
 |---|---|---|---|---|
 | 準備の `\bar i = -i` の 11 行 | `check_chain.sage` | 11 段（`i := (0,1)`・`def_complex_conjugate`・ℝ の乗法の単位元・ℝ の加法の単位元・`real_minus_zero_is_self`・`real_times_zero_is_zero` を 2 箇所へ・`real_zero_times_is_zero`・`definition_of_cc` の積・`(-1)_ℂ = (-1,0)`・`i := (0,1)`・`multiply_by_minus_one`） | **PASS** | 成り立つ |
 | 準備の `\overline{-i} = i` の 12 行 | `check_chain.sage` | 12 段（`multiply_by_minus_one`・`i := (0,1)`・`(-1)_ℂ = (-1,0)`・`definition_of_cc` の積・`real_zero_times_is_zero`・`real_times_zero_is_zero` を 2 箇所へ・`real_minus_zero_is_self`・ℝ の加法の単位元・ℝ の乗法の単位元・`def_complex_conjugate`・`real_double_negation`（`a → 1`）・`i := (0,1)`） | **PASS** | 成り立つ |
+| ℝ の加法の単位元を引く 2 行（`set_and_algebra_notation`）: `\bar i` の鎖の `(−1)·1 = (−1)·1 + 0`（`x + 0 = x` の `x → (−1)·1` を右辺から左辺へ）、`\overline{-i}` の鎖の `(−1)·1 + 0 = (−1)·1`（`x + 0 = x` の `x → (−1)·1`） | `check_unit_rows_cite_set_and_algebra_notation.sage` | 行に書いた形と代入で形の両辺を作り、前後の行が同じ文脈（対の第 2 成分）の穴にそれを入れたものと `QQ` で等しいことを確かめる。式を正規化するので、形の左右と向きは区別できず、それはレビューの目視で確かめた。対照（`0 + 1 ≠ 0`） | **PASS** | 厳密（2 行） |
 | 主の鎖の全行 | `check_chain.sage` | 6 段。`body_star` が Sage の `conjugate_transpose()` と一致することを見てから使う。対照 1 件: 共役を落とした転置は `σ^y` と異なる | **PASS** | 成り立つ |
 
 共通の準備は `sagemath/_shared/hermitian_forms_by_definition.sage`（`body_star`: `def_hermitian_positive_definite` の

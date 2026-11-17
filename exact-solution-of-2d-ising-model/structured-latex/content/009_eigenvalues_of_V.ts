@@ -869,7 +869,7 @@ I^*
 &= \bigl(0,\ (-1)\cdot 1\bigr)
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \bigl(0,\ (-1)\cdot 1 + 0\bigr)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to (-1)\cdot 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \bigl(0 - 0,\ (-1)\cdot 1 + 0\bigr)
 &&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1)\cdot 0 - 0,\ (-1)\cdot 1 + 0\cdot 0\bigr)
@@ -902,7 +902,7 @@ I^*
 &= \overline{\bigl(0,\ (-1)\cdot 1 + 0\bigr)}
 &&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\bigr)\\
 &= \overline{\bigl(0,\ (-1)\cdot 1\bigr)}
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to (-1)\cdot 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \overline{(0,-1)}
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (0,-(-1))
@@ -939,6 +939,7 @@ I^*
         "2026-11-13: σ^y の主張の出典と、鎖の成分の段・最後の段の根拠を、Pauli 行列の積の主張 pauli_matrix_products から、そこから分けた定義 def_pauli_matrices に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の 2 本の鎖で、definition_of_cc の積の 1 行が (−1)·0 = 0・0·1 = 0・0·0 = 0・0 − 0 = 0・(−1)·1 + 0 = (−1)·1・(−1)·1 = −1 を黙って含めていたので、積の行を成分の式で止め、real_times_zero_is_zero（2 箇所へ、x → −1, 0）・real_zero_times_is_zero（x → 1）・real_minus_zero_is_self（a → 0）・ℝ の加法の単位元・ℝ の乗法の単位元の 1 行 1 事実に割った（\\bar i の鎖は 6 行から 11 行、\\overline{-i} の鎖は 7 行から 12 行）。\\bar i の鎖は relation_of_gamma_2_theta_tilde の「第二に」と同じ形に揃えた。両端と主張は不変。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認）: 準備の \\overline{-i} の鎖の 11 行目の根拠「ℝ で −(−1) = 1」（名前だけ）を、計算公式の章の主張 real_double_negation（a → 1）の参照に替えた。式と主張は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の加法の単位元を set_and_algebra_notation で引く 2 行に、使った形と代入が書かれていなかったので、000_calculation_formulae_20_29.ts の同じ行と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした: \\bar i の鎖の (−1)·1 = (−1)·1 + 0（x + 0 = x の x → (−1)·1 を右辺から左辺へ）と、\\overline{-i} の鎖の (−1)·1 + 0 = (−1)·1（x + 0 = x の x → (−1)·1）。式・鎖の両端・段数は不変。Lean の具体版 Ising2D.star_neg_I_eq_I は証明が不変で、8・9 段のコメントだけを本文の形に揃えた。conj_I_eq_neg_I は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
