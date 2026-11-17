@@ -183,12 +183,15 @@ theorem windingParallelStaircase_step_increase (L : ℕ) (wh wv : ℤ) (s : ℕ)
 theorem windingParallelStaircase_injOn (L : ℕ) (wh wv : ℤ) :
     Set.InjOn (windingParallelStaircase L wh wv)
       (Set.Iic (L * wh.natAbs + L * wv.natAbs)) := by
-  apply orderedTwoPhaseStaircase_injOn_necSuf
-    (0 < wh * wv) (L * wh.natAbs) (L * wv.natAbs)
-    (0, Int.sign wh) (Int.sign wv, 0) (windingParallelCoordinate wv wh)
-  · intro h
-    exact horizontalStep_parallelCoordinate_pos wh wv (natAbs_pos_of_product_pos L wh h)
-  · intro h
-    exact verticalStep_parallelCoordinate_pos wh wv (natAbs_pos_of_product_pos L wv h)
+  have hstrict : StrictMonoOn
+      (fun s => windingParallelCoordinate wv wh (windingParallelStaircase L wh wv s))
+      (Set.Iic (L * wh.natAbs + L * wv.natAbs)) := by
+    apply strictMonoOn_of_lt_succ Set.ordConnected_Iic
+    intro s _ _ hsnext
+    exact (windingParallelStaircase_step_increase L wh wv s
+      (Nat.lt_of_succ_le hsnext)).2
+  intro s hs t ht heq
+  apply hstrict.injOn hs ht
+  exact congrArg (windingParallelCoordinate wv wh) heq
 
 end Ising2DLambda.KacWard
