@@ -47691,9 +47691,11 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                   paragraph([
                     "包含の推移律と自然数についての帰納法から、",
                     math(String.raw`i\le k`), " なら ", math(String.raw`F_i\subseteq F_k`), " である。",
-                    "零元と単位元は ", math(String.raw`F_0`), " に属するため ",
-                    math(String.raw`F_\infty`), " に属する。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+0&\in F_0\subseteq F_\infty&&\bigl(\because\ F_0\text{ は部分体、和集合の定義}\bigr)\\
+1&\in F_0\subseteq F_\infty&&\bigl(\because\ F_0\text{ は部分体、和集合の定義}\bigr).
+\end{aligned}`),
                   paragraph([
                     "任意の ", math(String.raw`x,y\in F_\infty`), " を取る。",
                     "和集合の定義から ", math(String.raw`x\in F_i`), " と ",
@@ -47705,19 +47707,27 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 x&\in F_k&&\bigl(\because\ i\le k,\ F_i\subseteq F_k\bigr)\\
 y&\in F_k&&\bigl(\because\ j\le k,\ F_j\subseteq F_k\bigr)\\
 x+y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr)\\
-x\cdot y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr).
+x+y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr)\\
+x\cdot y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr)\\
+x\cdot y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr).
 \end{aligned}`),
                   paragraph([
-                    "従って ", math(String.raw`x+y,x\cdot y\in F_\infty`), " である。",
                     "任意の ", math(String.raw`x\in F_\infty`), " には ",
                     math(String.raw`x\in F_i`), " を満たす ", math(String.raw`i\in\mathbb N`), " がある。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 -x&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr)\\
-x^{-1}&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr).
+-x&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr).
 \end{aligned}`),
                   paragraph([
-                    "ゆえに ", math(String.raw`-x,x^{-1}\in F_\infty`), " である。",
+                    "さらに ", math(String.raw`x\ne 0`), " の場合に限り、部分体 ",
+                    math(String.raw`F_i`), " の逆元の閉性を使う。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+x^{-1}&\in F_i&&\bigl(\because\ x\ne0,\ F_i\text{ は部分体}\bigr)\\
+x^{-1}&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr).
+\end{aligned}`),
+                  paragraph([
                     "これで部分体の六つの閉性をすべて示した。議論は ",
                     math(String.raw`\overline{\mathbb Q}`), " の中で閉じ、実数体・複素数体を使わない。",
                   ]),
