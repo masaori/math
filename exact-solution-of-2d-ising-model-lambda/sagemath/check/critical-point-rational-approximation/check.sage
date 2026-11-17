@@ -19,7 +19,9 @@ def main():
         q = QQ(k + 1) / N
         assert 0 < q
         assert AA(p) <= xc < AA(q)
-        assert q - p == h
+        assert q - p == QQ(k + 1) / N - QQ(k) / N
+        assert QQ(k + 1) / N - QQ(k) / N == QQ(1) / N
+        assert QQ(1) / N == h
 
         # 平方証人そのものを重ねて構成すると AA の根体が不要に膨らむため、
         # 各証人の平方を厳密な AA 元として追う。正値性と実閉性が平方証人の存在を与える。

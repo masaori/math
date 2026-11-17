@@ -2,7 +2,6 @@
 import Ising2DLambda.CriticalExponent.PositiveRationalMeshWidth
 import Ising2DLambda.CriticalExponent.CriticalPointRationalPartitionInterval
 import Ising2DLambda.CriticalExponent.PositiveRationalPositiveInRealClosed
-import Ising2DLambda.NecSuf.CriticalExponent.CriticalPointRationalApproximation
 
 namespace Ising2DLambda.CriticalExponent
 
@@ -65,11 +64,36 @@ theorem criticalPoint_exists_positiveRational_squareDiff_lt
     have hrQ := congrArg (fun z : base.carrier => (z : Qbar)) hr
     push_cast at hrQ
     simpa [deltaR, h] using hrQ
-  exact Ising2DLambda.NecSuf.CriticalExponent.rational_approximation_square_lt_necSuf
-    (realClosed_sum_of_two_squares_is_square base)
-    (fun a b hzero => by
-      apply realClosed_sq_add_sq_eq_zero base a b
-      exact_mod_cast hzero)
-    xc p q h deltaR hWidth hLower' hUpper' hPositive' hFine'
+  obtain ⟨a, ha0, ha⟩ := hUpper'
+  obtain ⟨e, he0, he⟩ := hPositive'
+  obtain ⟨r, hr0, hr⟩ := hFine'
+  obtain ⟨d, hd⟩ : ∃ d : base.carrier, xc - p = d * d := by
+    rcases hLower' with hStrict | hEqual
+    · exact hStrict
+    · exact ⟨0, by rw [hEqual]; ring⟩
+  have hGap : h - a * a = d * d := by
+    rw [← hWidth, ← ha, ← hd]
+    ring
+  obtain ⟨v, hv⟩ := realClosed_sum_of_two_squares_is_square base e a
+  have hv0 : v ≠ 0 := by
+    intro hvZero
+    have hsum : e * e + a * a = 0 := by rw [hv, hvZero]; ring
+    exact he0 (realClosed_sq_add_sq_eq_zero base e a (by exact_mod_cast hsum)).1
+  obtain ⟨z, hz⟩ := realClosed_sum_of_two_squares_is_square base r (d * v)
+  have hz0 : z ≠ 0 := by
+    intro hzZero
+    have hsum : r * r + (d * v) * (d * v) = 0 := by rw [hz, hzZero]; ring
+    exact hr0 (realClosed_sq_add_sq_eq_zero base r (d * v) (by exact_mod_cast hsum)).1
+  change ∃ z : base.carrier, z ≠ 0 ∧
+    deltaR - (xc - q) * (xc - q) = z * z
+  refine ⟨z, hz0, ?_⟩
+  calc
+    deltaR - (xc - q) * (xc - q)
+        = (deltaR - h * h) + (h * h - (a * a) * (a * a)) := by rw [← ha]; ring
+    _ = r * r + (h - a * a) * (h + a * a) := by rw [hr]; ring
+    _ = r * r + (d * d) * (e * e + a * a) := by rw [hGap, he]
+    _ = r * r + (d * d) * (v * v) := by rw [hv]
+    _ = r * r + (d * v) * (d * v) := by ring
+    _ = z * z := hz
 
 end Ising2DLambda.CriticalExponent

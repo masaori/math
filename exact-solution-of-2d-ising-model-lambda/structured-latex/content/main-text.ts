@@ -92928,9 +92928,19 @@ s+1
                     displayMath(String.raw`k+1\le N,\qquad p:=\frac{k}{N}\le_Rx_c<_Rq:=\frac{k+1}{N}`),
                     paragraph([
                       "となる。", math(String.raw`k+1\ge1`), " と ", math(String.raw`N\ge1`),
-                      " より ", math(String.raw`q\in\mathbb{Q}_{>0}`), " である。さらに ",
-                      math(String.raw`q-p=1/N=h`), "（", math(String.raw`\mathbb{Q}`),
-                      " の四則）である。狭義上界から零元でない ", math(String.raw`a\in R`),
+                      " より ", math(String.raw`q\in\mathbb{Q}_{>0}`), " である。さらに",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+q-p
+&=\frac{k+1}{N}-\frac{k}{N}
+&&(\because\ p,q\text{ の定義})\\
+&=\frac{1}{N}
+&&(\because\ \mathbb{Q}\text{ の四則})\\
+&=h
+&&(\because\ h\text{ の定義})
+\end{aligned}`),
+                    paragraph([
+                      "である。狭義上界から零元でない ", math(String.raw`a\in R`),
                       " を、広義下界から ", math(String.raw`d\in R`), " を取って",
                     ]),
                     displayMath(String.raw`q-x_c=a\cdot a,\qquad x_c-p=d\cdot d`),
