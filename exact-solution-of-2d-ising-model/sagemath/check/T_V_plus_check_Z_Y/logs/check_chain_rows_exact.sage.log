@@ -1,0 +1,673 @@
+PASS: M=2 x=2 y=2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=2 x=2 y=2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=2 x=2 y=2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=2 x=2 y=2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=2 y=2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=2 x=2 y=2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=2 x=2 y=2 mu=1: 対照 G の転置では一致しない
+PASS: M=2 x=2 y=2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=2 x=2 y=2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=2 x=2 y=2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=2 x=2 y=2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=2 y=2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=2 x=2 y=2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=2 x=2 y=2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=2 x=2 y=2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=2 x=2 y=2 mu=2: 対照 G の転置では一致しない
+M=2 x=2 y=2: done
+PASS: M=2 x=3 y=3/2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=2 x=3 y=3/2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=2 x=3 y=3/2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=2 x=3 y=3/2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=3 y=3/2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=2 x=3 y=3/2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=2 x=3 y=3/2 mu=1: 対照 G の転置では一致しない
+PASS: M=2 x=3 y=3/2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=2 x=3 y=3/2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=2 x=3 y=3/2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=2 x=3 y=3/2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=3 y=3/2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=2 x=3 y=3/2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=2 x=3 y=3/2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=2 x=3 y=3/2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=2 x=3 y=3/2 mu=2: 対照 G の転置では一致しない
+M=2 x=3 y=3/2: done
+PASS: M=3 x=2 y=2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=2 y=2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=2 y=2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=2 y=2 mu=1: 対照 G の転置では一致しない
+PASS: M=3 x=2 y=2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=2 y=2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=2 y=2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=2 y=2 mu=2: 対照 G の転置では一致しない
+PASS: M=3 x=2 y=2 mu=3: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=2 y=2 mu=3: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=2 y=2 mu=3 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=3 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=3 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 7 行目 = 8 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 8 行目 = 9 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 9 行目 = 10 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 10 行目 = 11 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 11 行目 = 12 行目
+PASS: M=3 x=2 y=2 mu=3 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=2 y=2 mu=3: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=2 y=2 mu=3: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=2 y=2 mu=3: 対照 G の転置では一致しない
+M=3 x=2 y=2: done
+PASS: M=3 x=3 y=3/2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=3 y=3/2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=3 y=3/2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=3 y=3/2 mu=1: 対照 G の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=3 y=3/2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=3 y=3/2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=3 y=3/2 mu=2: 対照 G の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=3: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=3 x=3 y=3/2 mu=3: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=3 x=3 y=3/2 mu=3 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=3 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=3 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 7 行目 = 8 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 8 行目 = 9 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 9 行目 = 10 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 10 行目 = 11 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 11 行目 = 12 行目
+PASS: M=3 x=3 y=3/2 mu=3 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=3 x=3 y=3/2 mu=3: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=3 x=3 y=3/2 mu=3: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=3 x=3 y=3/2 mu=3: 対照 G の転置では一致しない
+M=3 x=3 y=3/2: done
+PASS: M=4 x=2 y=2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=2 y=2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=2 y=2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=2 y=2 mu=1: 対照 G の転置では一致しない
+PASS: M=4 x=2 y=2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=2 y=2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=2 y=2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=2 y=2 mu=2: 対照 G の転置では一致しない
+PASS: M=4 x=2 y=2 mu=3: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=2 y=2 mu=3: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=2 y=2 mu=3 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=3 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=3 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=3 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=3: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=3: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=2 y=2 mu=3: 対照 G の転置では一致しない
+PASS: M=4 x=2 y=2 mu=4: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=2 y=2 mu=4: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=2 y=2 mu=4 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=4 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=4 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 7 行目 = 8 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 8 行目 = 9 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 9 行目 = 10 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 10 行目 = 11 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 11 行目 = 12 行目
+PASS: M=4 x=2 y=2 mu=4 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=2 y=2 mu=4: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=2 y=2 mu=4: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=2 y=2 mu=4: 対照 G の転置では一致しない
+M=4 x=2 y=2: done
+PASS: M=4 x=3 y=3/2 mu=1: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=3 y=3/2 mu=1: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=3 y=3/2 mu=1 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=1 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=1 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=1 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=1: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=1: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=3 y=3/2 mu=1: 対照 G の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=2: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=3 y=3/2 mu=2: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=3 y=3/2 mu=2 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=2 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=2 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=2 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=2: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=2: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=3 y=3/2 mu=2: 対照 G の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=3: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=3 y=3/2 mu=3: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=3 y=3/2 mu=3 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=3 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=3 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=3 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=3: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=3: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=3 y=3/2 mu=3: 対照 G の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=4: 準備 (β_1)_{l1} = (B_1(θ̃))_{l1}
+PASS: M=4 x=3 y=3/2 mu=4: 準備 (β_2)_{l1} = (B_1(θ̃))_{l2}
+PASS: M=4 x=3 y=3/2 mu=4 (z): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=4 (z): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=4 (y): T_(V+)(X)（V^(+) の Sage の積と inverse）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 7 行目 = 8 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 8 行目 = 9 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 9 行目 = 10 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 10 行目 = 11 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 11 行目 = 12 行目
+PASS: M=4 x=3 y=3/2 mu=4 (y): 対照 6 行目の B_2 を転置すると 5 行目と一致しない
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖の始点（Sage の共役）= 1 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 1 行目 = 2 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 2 行目 = 3 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 3 行目 = 4 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 4 行目 = 5 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 5 行目 = 6 行目
+PASS: M=4 x=3 y=3/2 mu=4: 2 列を並べる鎖 6 行目 = 7 行目
+PASS: M=4 x=3 y=3/2 mu=4: (B_1 B_2) B_1 を mat_mult の成分で組んだものが Sage の積と一致
+PASS: M=4 x=3 y=3/2 mu=4: 対照 G の転置では一致しない
+M=4 x=3 y=3/2: done
+RESULT: PASS

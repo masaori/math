@@ -6820,6 +6820,104 @@ B_2 := \begin{pmatrix}
     },
   },
   {
+    id: "evensectorT_claim_pair_of_matrices_times_matrix_times_column_associative",
+    kind: "claim",
+    title: { tex: String.raw`\text{行列の組と } 2\times 2 \text{ 行列と数の列の積の結合律}` },
+    labels: ["pair_of_matrices_times_matrix_times_column_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B\in\mathrm{Mat}(d,\mathbb{C})`),
+        "、",
+        math(String.raw`P\in\mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`v\in\mathrm{Mat}(2,1,\mathbb{C})`),
+        " とする。行列の組と ",
+        math(String.raw`2\times 2`),
+        " 行列の積は ",
+        ref("def_pair_of_matrices_times_two_by_two_matrix"),
+        "、行列の組と ",
+        math(String.raw`v`),
+        " の積は ",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " の数の列を ",
+        math(String.raw`v`),
+        " の成分 ",
+        math(String.raw`v_{11}, v_{21}`),
+        " に取ったもの、",
+        math(String.raw`Pv\in\mathrm{Mat}(2,1,\mathbb{C})`),
+        " は ",
+        ref("mat_mult"),
+        " の積とする。このとき",
+      ]),
+      displayMath(String.raw`\bigl(\begin{pmatrix}A, & B\end{pmatrix}P\bigr)v = \begin{pmatrix}A, & B\end{pmatrix}(Pv)`),
+      paragraph([
+        "が成り立つ（両辺とも ",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " の元）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p := P_{11},\ q := P_{12},\ r := P_{21},\ s := P_{22},\ a := v_{11},\ b := v_{21}`),
+        "（いずれも ",
+        math(String.raw`\mathbb{C}`),
+        " の元）と置く。両辺はともに ",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`k, l \in \{1,\dots,d\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\bigl(\begin{pmatrix}A, & B\end{pmatrix}P\bigr)v\Bigr)_{kl}
+&= \left(\left(\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p \\ r\end{pmatrix},\ \begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}q \\ s\end{pmatrix}\right)\begin{pmatrix}a \\ b\end{pmatrix}\right)_{kl}
+&&(\because\ \blkref{def_pair_of_matrices_times_two_by_two_matrix})\\
+&= \left(\begin{pmatrix}pA + rB, & qA + sB\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix}\right)_{kl}
+&&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\ \text{を 2 成分へ同時適用})\\
+&= \bigl(a(pA + rB) + b(qA + sB)\bigr)_{kl}
+&&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers})\\
+&= \bigl(a(pA + rB)\bigr)_{kl} + \bigl(b(qA + sB)\bigr)_{kl}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= a\,(pA + rB)_{kl} + b\,(qA + sB)_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用})\\
+&= a\bigl((pA)_{kl} + (rB)_{kl}\bigr) + b\bigl((qA)_{kl} + (sB)_{kl}\bigr)
+&&(\because\ \blkref{def_matrix_sum}\ \text{を 2 箇所へ適用})\\
+&= a\bigl(p A_{kl} + r B_{kl}\bigr) + b\bigl(q A_{kl} + s B_{kl}\bigr)
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 4 箇所へ適用})\\
+&= \bigl(a(pA_{kl}) + a(rB_{kl})\bigr) + \bigl(b(qA_{kl}) + b(sB_{kl})\bigr)
+&&(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\ \text{を 2 箇所へ適用})\\
+&= \bigl((ap)A_{kl} + (ar)B_{kl}\bigr) + \bigl((bq)A_{kl} + (bs)B_{kl}\bigr)
+&&(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\ \text{を 4 箇所へ適用})\\
+&= \bigl((ap)A_{kl} + (bq)A_{kl}\bigr) + \bigl((ar)B_{kl} + (bs)B_{kl}\bigr)
+&&(\because\ \mathbb{C}\ \text{の加法の結合律・交換律 }\blkref{complex_numbers_form_a_field})\\
+&= (ap + bq)A_{kl} + (ar + bs)B_{kl}
+&&(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\ \text{を 2 箇所へ適用})\\
+&= (pa + qb)A_{kl} + (ra + sb)B_{kl}
+&&(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\ \text{を 4 箇所へ適用})\\
+&= (P_{11}v_{11} + P_{12}v_{21})A_{kl} + (P_{21}v_{11} + P_{22}v_{21})B_{kl}
+&&(\because\ p, q, r, s, a, b\ \text{の置き方})\\
+&= \Bigl(\sum_{j=1}^{2} P_{1j}\,v_{j1}\Bigr)A_{kl} + \Bigl(\sum_{j=1}^{2} P_{2j}\,v_{j1}\Bigr)B_{kl}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の 2 つの式（}m = 1\text{）を 2 箇所へ適用})\\
+&= (Pv)_{11}\,A_{kl} + (Pv)_{21}\,B_{kl}
+&&(\because\ \blkref{mat_mult}\ \text{を 2 箇所へ適用})\\
+&= \bigl((Pv)_{11}A\bigr)_{kl} + \bigl((Pv)_{21}B\bigr)_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用})\\
+&= \bigl((Pv)_{11}A + (Pv)_{21}B\bigr)_{kl}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= \Bigl(\begin{pmatrix}A, & B\end{pmatrix}(Pv)\Bigr)_{kl}
+&&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers})
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "T_V_plus_check_Z_Y の証明の (z)・(y) の鎖が、T_{V_2}・T_{(V_1^{(+)})^{1/2}} の線型性を当てる前に、行列の組に 2×2 行列と数の列を続けて掛けた形を、行列の組に一つの数の列を掛けた形へ書き換える段を、鎖の後の段落「3 行目・5 行目の線型性は、B_2 や列ベクトルの成分がスカラーであり、… による。」だけで済ませていたので、その段を引けるように足した。",
+      ],
+    },
+  },
+  {
     id: "evensectorT_008_claim_product_action",
     kind: "claim",
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 10 },
@@ -7434,115 +7532,173 @@ P_{21}
         "以下 ",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
         " と略記し、",
+        math(String.raw`S := \left(V_1^{(+)}\right)^{1/2} \in R^\times`),
+        "（",
+        ref("def_V1_plus_square_root"),
+        "・",
+        ref("V1_plus_half_invertible"),
+        "。",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "）と置く。",
         ref("def_B1_theta_B2"),
         " の ",
-        math(String.raw`B_1(\tilde\theta), B_2`),
-        " を用いる。",
+        math(String.raw`B_1(\tilde\theta), B_2 \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を用い、",
+        math(String.raw`B_1(\tilde\theta)`),
+        " の第 1 列・第 2 列を ",
+        math(String.raw`\beta_1, \beta_2 \in \mathrm{Mat}(2,1,\mathbb{C})`),
+        "、",
+      ]),
+      displayMath(String.raw`\beta_1 := \begin{pmatrix}
+(\cosh K_1)_{\mathbb{C}} \\
+\bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}
+\end{pmatrix},
+\qquad
+\beta_2 := \begin{pmatrix}
+\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\
+(\cosh K_1)_{\mathbb{C}}
+\end{pmatrix}`),
+      paragraph([
+        "と置く。",
+        ref("def_B1_theta_B2"),
+        " の ",
+        math(String.raw`B_1(\theta)`),
+        " の成分の式で ",
+        math(String.raw`\theta`),
+        " を ",
+        math(String.raw`\tilde\theta`),
+        " に取ると、",
+        math(String.raw`l, j \in \{1, 2\}`),
+        " について ",
+        math(String.raw`(\beta_j)_{l1} = \bigl(B_1(\tilde\theta)\bigr)_{lj}`),
+        " である。行列の組と数の列の積 ",
+        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}w`),
+        "（",
+        math(String.raw`w \in \mathrm{Mat}(2,1,\mathbb{C})`),
+        "）は ",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " の数の列を ",
+        math(String.raw`w`),
+        " の成分 ",
+        math(String.raw`w_{11}, w_{21}`),
+        " に取ったもの、",
+        math(String.raw`B_2\beta_1`),
+        " などの ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の元と ",
+        math(String.raw`\mathrm{Mat}(2,1,\mathbb{C})`),
+        " の元の積は ",
+        ref("mat_mult"),
+        " の積である。",
       ]),
       paragraph([
         "(z) ",
         math(String.raw`T_{(V^{(+)})}(\check{Z}_\mu)`),
         " について、",
-        ref("def_T_V_plus"),
-        " の定義、",
-        ref("T_actions_on_check_Z_Y"),
-        "、",
-        ref("linearity_of_T_V2"),
-        "、",
-        ref("linearity_of_T_on_check_Z_Y"),
-        "、",
-        ref("calc_of_TxT_check_Z_Y"),
-        " を順に用いる。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(\check{Z}_\mu)
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)\right)\right)
-   \quad (\because \blkref{def_T_V_plus}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu\right)\right)
-   \quad (\because \blkref{T_actions_on_check_Z_Y}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
-   \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
-   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
-   \quad (\because \blkref{linearity_of_T_V2}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
-   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
-   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
-   \quad (\because \blkref{calc_of_TxT_check_Z_Y}) \\
-&= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
-   T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
-   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
-   \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   B_1(\tilde\theta)\, B_2
-   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
-   \quad (\because \blkref{calc_of_TxT_check_Z_Y})
+&= T_{S}\!\left(T_{V_2}\!\left(T_{S}(\check{Z}_\mu)\right)\right)
+   &&(\because\ \blkref{def_T_V_plus}) \\
+&= T_{S}\!\left(T_{V_2}\!\left(
+   (\cosh K_1)_{\mathbb{C}}\,\check{Z}_\mu
+   + \Bigl(\bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Y}_\mu\right)\right)
+   &&(\because\ \blkref{T_actions_on_check_Z_Y}\ \text{の}\ T_{S}(\check{Z}_\mu)\ \text{の式の左の等号}) \\
+&= T_{S}\!\left(T_{V_2}\!\left((\beta_1)_{11}\,\check{Z}_\mu + (\beta_1)_{21}\,\check{Y}_\mu\right)\right)
+   &&(\because\ \beta_1\ \text{の置き方}) \\
+&= T_{S}\!\left((\beta_1)_{11}\,T_{V_2}(\check{Z}_\mu) + (\beta_1)_{21}\,T_{V_2}(\check{Y}_\mu)\right)
+   &&\bigl(\because\ \blkref{linearity_of_T_V2}\ (a \to (\beta_1)_{11},\ b \to (\beta_1)_{21})\bigr) \\
+&= T_{S}\!\left(\begin{pmatrix}T_{V_2}(\check{Z}_\mu), & T_{V_2}(\check{Y}_\mu)\end{pmatrix}\beta_1\right)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= T_{S}\!\left(\bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}B_2\bigr)\beta_1\right)
+   &&(\because\ \blkref{calc_of_TxT_check_Z_Y}\ \text{の第 2 式}) \\
+&= T_{S}\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}(B_2\beta_1)\right)
+   &&(\because\ \blkref{pair_of_matrices_times_matrix_times_column_associative}) \\
+&= T_{S}\!\left((B_2\beta_1)_{11}\,\check{Z}_\mu + (B_2\beta_1)_{21}\,\check{Y}_\mu\right)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= (B_2\beta_1)_{11}\,T_{S}(\check{Z}_\mu) + (B_2\beta_1)_{21}\,T_{S}(\check{Y}_\mu)
+   &&\bigl(\because\ \blkref{linearity_of_T_on_check_Z_Y}\ (a \to (B_2\beta_1)_{11},\ b \to (B_2\beta_1)_{21})\bigr) \\
+&= \begin{pmatrix}T_{S}(\check{Z}_\mu), & T_{S}(\check{Y}_\mu)\end{pmatrix}(B_2\beta_1)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= \bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}B_1(\tilde\theta)\bigr)(B_2\beta_1)
+   &&(\because\ \blkref{calc_of_TxT_check_Z_Y}\ \text{の第 1 式}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(B_1(\tilde\theta)(B_2\beta_1)\bigr)
+   &&(\because\ \blkref{pair_of_matrices_times_matrix_times_column_associative})
 \end{aligned}`,
       ),
       paragraph([
-        "（3 行目・5 行目の線型性は、",
-        math(String.raw`B_2`),
-        " や列ベクトルの成分がスカラーであり、",
-        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        " 線型結合に ",
-        math(String.raw`T`),
-        " を掛ける形になっていることによる。）",
-      ]),
-      paragraph([
         "(y) ",
         math(String.raw`T_{(V^{(+)})}(\check{Y}_\mu)`),
-        " についても同様に、",
+        " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(\check{Y}_\mu)
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)\right)
-   \quad (\because \blkref{def_T_V_plus}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu\right)\right)
-   \quad (\because \blkref{T_actions_on_check_Z_Y}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
-   \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
-   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
-   \quad (\because \blkref{linearity_of_T_V2}) \\
-&= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
-   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
-   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
-   \quad (\because \blkref{calc_of_TxT_check_Z_Y}) \\
-&= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
-   T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
-   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
-   \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   B_1(\tilde\theta)\, B_2
-   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
-   \quad (\because \blkref{calc_of_TxT_check_Z_Y})
+&= T_{S}\!\left(T_{V_2}\!\left(T_{S}(\check{Y}_\mu)\right)\right)
+   &&(\because\ \blkref{def_T_V_plus}) \\
+&= T_{S}\!\left(T_{V_2}\!\left(
+   \Bigl(\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Z}_\mu
+   + (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu\right)\right)
+   &&(\because\ \blkref{T_actions_on_check_Z_Y}\ \text{の}\ T_{S}(\check{Y}_\mu)\ \text{の式の左の等号}) \\
+&= T_{S}\!\left(T_{V_2}\!\left((\beta_2)_{11}\,\check{Z}_\mu + (\beta_2)_{21}\,\check{Y}_\mu\right)\right)
+   &&(\because\ \beta_2\ \text{の置き方}) \\
+&= T_{S}\!\left((\beta_2)_{11}\,T_{V_2}(\check{Z}_\mu) + (\beta_2)_{21}\,T_{V_2}(\check{Y}_\mu)\right)
+   &&\bigl(\because\ \blkref{linearity_of_T_V2}\ (a \to (\beta_2)_{11},\ b \to (\beta_2)_{21})\bigr) \\
+&= T_{S}\!\left(\begin{pmatrix}T_{V_2}(\check{Z}_\mu), & T_{V_2}(\check{Y}_\mu)\end{pmatrix}\beta_2\right)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= T_{S}\!\left(\bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}B_2\bigr)\beta_2\right)
+   &&(\because\ \blkref{calc_of_TxT_check_Z_Y}\ \text{の第 2 式}) \\
+&= T_{S}\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}(B_2\beta_2)\right)
+   &&(\because\ \blkref{pair_of_matrices_times_matrix_times_column_associative}) \\
+&= T_{S}\!\left((B_2\beta_2)_{11}\,\check{Z}_\mu + (B_2\beta_2)_{21}\,\check{Y}_\mu\right)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= (B_2\beta_2)_{11}\,T_{S}(\check{Z}_\mu) + (B_2\beta_2)_{21}\,T_{S}(\check{Y}_\mu)
+   &&\bigl(\because\ \blkref{linearity_of_T_on_check_Z_Y}\ (a \to (B_2\beta_2)_{11},\ b \to (B_2\beta_2)_{21})\bigr) \\
+&= \begin{pmatrix}T_{S}(\check{Z}_\mu), & T_{S}(\check{Y}_\mu)\end{pmatrix}(B_2\beta_2)
+   &&(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}) \\
+&= \bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}B_1(\tilde\theta)\bigr)(B_2\beta_2)
+   &&(\because\ \blkref{calc_of_TxT_check_Z_Y}\ \text{の第 1 式}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(B_1(\tilde\theta)(B_2\beta_2)\bigr)
+   &&(\because\ \blkref{pair_of_matrices_times_matrix_times_column_associative})
 \end{aligned}`,
       ),
       paragraph([
-        "(z) と (y) で得た 2 つの列ベクトルは、",
-        ref("def_B1_theta_B2"),
-        " より ",
-        math(String.raw`B_1(\tilde\theta)`),
-        " の第 1 列・第 2 列そのものである。2 列を並べ、",
-        ref("factorization_of_A_theta_general"),
-        " を ",
-        math(String.raw`\theta = \tilde\theta_\mu \in \mathbb{R}`),
-        " として適用すると、主張の左辺から一続きに",
+        "(z)・(y) の鎖を並べ、主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right)
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   B_1(\tilde\theta)\, B_2\, B_1(\tilde\theta)
-   \quad (\because \text{(z), (y) の鎖と }\blkref{def_B1_theta_B2}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} A(\tilde\theta_\mu)
-   \quad (\because \blkref{factorization_of_A_theta_general})
+&\left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right) \\
+&= \Bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(B_1(\tilde\theta)(B_2\beta_1)\bigr),\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(B_1(\tilde\theta)(B_2\beta_2)\bigr)\Bigr)
+   &&(\because\ \text{(z)・(y) の鎖}) \\
+&= \Bigl(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_1\bigr),\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_2\bigr)\Bigr)
+   &&(\because\ \blkref{mat_mult_associative}\ \text{を 2 成分へ同時適用}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_1\bigr)_{11} \\ \bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_1\bigr)_{21}\end{pmatrix},\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_2\bigr)_{11} \\ \bigl(\bigl(B_1(\tilde\theta)B_2\bigr)\beta_2\bigr)_{21}\end{pmatrix}\right)
+   &&(\because\ \text{準備の}\ \begin{pmatrix}A, & B\end{pmatrix}w\ \text{の約束を 2 成分へ同時適用}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{1l}(\beta_1)_{l1} \\ \sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{2l}(\beta_1)_{l1}\end{pmatrix},\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{1l}(\beta_2)_{l1} \\ \sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{2l}(\beta_2)_{l1}\end{pmatrix}\right)
+   &&(\because\ \blkref{mat_mult}\ \text{を 4 成分へ同時適用}) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{1l}\bigl(B_1(\tilde\theta)\bigr)_{l1} \\ \sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{2l}\bigl(B_1(\tilde\theta)\bigr)_{l1}\end{pmatrix},\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{1l}\bigl(B_1(\tilde\theta)\bigr)_{l2} \\ \sum_{l=1}^{2} \bigl(B_1(\tilde\theta)B_2\bigr)_{2l}\bigl(B_1(\tilde\theta)\bigr)_{l2}\end{pmatrix}\right)
+   &&\bigl(\because\ (\beta_j)_{l1} = \bigl(B_1(\tilde\theta)\bigr)_{lj}\bigr) \\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)B_1(\tilde\theta)\bigr)_{11} \\ \bigl(\bigl(B_1(\tilde\theta)B_2\bigr)B_1(\tilde\theta)\bigr)_{21}\end{pmatrix},\
+   \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \begin{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)B_1(\tilde\theta)\bigr)_{12} \\ \bigl(\bigl(B_1(\tilde\theta)B_2\bigr)B_1(\tilde\theta)\bigr)_{22}\end{pmatrix}\right)
+   &&(\because\ \blkref{mat_mult}\ \text{を 4 成分へ同時適用}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\bigl(\bigl(B_1(\tilde\theta)B_2\bigr)B_1(\tilde\theta)\bigr)
+   &&(\because\ \blkref{def_pair_of_matrices_times_two_by_two_matrix}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}A(\tilde\theta_\mu)
+   &&\bigl(\because\ \blkref{factorization_of_A_theta_general}\ (\theta \to \tilde\theta_\mu \in \mathbb{R})\bigr)
 \end{aligned}`,
       ),
     ],
@@ -7553,6 +7709,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         "M=2,3,4,5、μ=1..M、5 組の (K1,K2)（臨界点上・臨界点近傍を含む）について、V^{(+)} を行列指数関数から直接構成して (T(checkZ), T(checkY)) = (checkZ, checkY) A(θ~_μ) を数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_04_T_V_plus_and_factorization.sage の (3)）。",
         "同じ検証で γ_2(θ~_μ) ≠ 0 が全 μ で成り立つことも数値で確認した（最小 |γ_2| は 0.56 以上）。これは章 C′ の残りの段（A(θ~) の対角化）で臨界点の例外処理が不要になることを示唆する事実であり、本章では使っていない。",
         "2026-08-19 の式変形統一で、(z), (y) の二本の鎖から得た二列を並べる等式と、B_1(θ~_μ) B_2 B_1(θ~_μ) = A(θ~_μ) の適用を、主張の左辺から始まる一続き二段の鎖と行末根拠へまとめた。内容・参照は変えていない。",
+        "2026-11-17（Lean の通しの証明）: (z)・(y) の鎖の後の段落「3 行目・5 行目の線型性は、B_2 や列ベクトルの成分がスカラーであり、… による。」を削った。線型性の 2 つの主張は aŽ_μ + bY̌_μ の形にしか当たらないので、B_1(θ̃) の第 1 列・第 2 列 β_1, β_2 を準備に置き、各鎖を、T_actions_on_check_Z_Y の左の等号 → β_j の置き方 → 線型性 → def_pair_of_matrices_times_column_of_numbers → calc_of_TxT_check_Z_Y → 新しい主張 pair_of_matrices_times_matrix_times_column_associative → def_pair_of_matrices_times_column_of_numbers → 線型性 → … の 1 行 1 根拠の 12 行にした。二列を並べる鎖も、mat_mult_associative・組と数の列の積の約束・mat_mult・β_j の成分・def_pair_of_matrices_times_two_by_two_matrix の行に割った（8 行）。鎖の両端と主張は不変。導入の文の参照の一覧は行の根拠と重なるので除いた。",
       ],
     },
   },

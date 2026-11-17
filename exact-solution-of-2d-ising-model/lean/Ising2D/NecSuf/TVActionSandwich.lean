@@ -26,11 +26,13 @@
 
 原文は `T_{(V^{(+)})}(check(Z)_μ)` を求めるのに
 
-  `def_T_V_plus` → `T_actions_on_check_Z_Y` → `linearity_of_T_V2`
-  → `calc_of_TxT_check_Z_Y` → `linearity_of_T_on_check_Z_Y`
-  → もう一度 `calc_of_TxT_check_Z_Y`
+  `def_T_V_plus` → `T_actions_on_check_Z_Y` → `β_1` の置き方 → `linearity_of_T_V2`
+  → `def_pair_of_matrices_times_column_of_numbers` → `calc_of_TxT_check_Z_Y`
+  → `pair_of_matrices_times_matrix_times_column_associative` → `def_pair_of_matrices_times_column_of_numbers`
+  → `linearity_of_T_on_check_Z_Y` → `def_pair_of_matrices_times_column_of_numbers`
+  → もう一度 `calc_of_TxT_check_Z_Y` → `pair_of_matrices_times_matrix_times_column_associative`
 
-という 6 行の鎖を書いている。この鎖に効いているのは
+という 12 行の鎖を書いている。この鎖に効いているのは
 
 * **`T` が ℂ 線型であること**、および
 * **`(T z, T y) = (z, y) B` という記法のもとで合成が行列の積になること**
@@ -45,14 +47,14 @@
 
 | 具体版の行（`TVPlus_apply_checkZ`・`_checkY`・`TVPlus_checkZ_checkY`） | 必要十分版（`NecSuf.actsBy_sandwich`） |
 | --- | --- |
-| 1 行目 `def_T_V_plus` | `TV` が `T_{g_1}∘T_{g_2}∘T_{g_1}` であること（`actsBy_TV_sandwich` が `actsBy_sandwich` へ渡す形） |
-| 2 行目 `T_actions_on_check_Z_Y` | 内側の `h₁`（`T_1` が `B_1` で作用すること） |
-| 3〜4 行目 `linearity_of_T_V2`・`calc_of_TxT_check_Z_Y`（`B_2`） | 1 回目の `ActsBy.comp`（`map_add`・`map_smul` が線型性、`hS` が `B_2`） |
-| 5〜6 行目 `linearity_of_T_on_check_Z_Y`・`calc_of_TxT_check_Z_Y`（`B_1(θ~)`） | 2 回目の `ActsBy.comp` |
-| 最後の鎖の 1 行目（列を並べて `B_1 B_2 B_1`） | `actsBy_sandwich` の `mul_assoc` |
-| 最後の鎖の 2 行目 `factorization_of_A_theta_general` | 導出 `TVPlus_checkZ_checkY_of_necSuf` の `factorization_of_A_thetaTilde` |
+| (z)・(y) の 1 行目 `def_T_V_plus` | `TV` が `T_{g_1}∘T_{g_2}∘T_{g_1}` であること（`actsBy_TV_sandwich` が `actsBy_sandwich` へ渡す形） |
+| (z)・(y) の 2〜3 行目 `T_actions_on_check_Z_Y`・`β_j` の置き方 | 内側の `h₁`（`T_1` が `B_1` で作用すること） |
+| (z)・(y) の 4〜7 行目 `linearity_of_T_V2`・`calc_of_TxT_check_Z_Y`（`B_2`）・組の積の結合律 | 1 回目の `ActsBy.comp`（`map_add`・`map_smul` が線型性、`hS` が `B_2`） |
+| (z)・(y) の 8〜12 行目 `linearity_of_T_on_check_Z_Y`・`calc_of_TxT_check_Z_Y`（`B_1(θ~)`）・組の積の結合律 | 2 回目の `ActsBy.comp` |
+| 2 列を並べる鎖の 1〜7 行目（列を並べて `(B_1 B_2) B_1`） | `actsBy_sandwich` の `mul_assoc` |
+| 2 列を並べる鎖の 8 行目 `factorization_of_A_theta_general` | 導出 `TVPlus_checkZ_checkY_of_necSuf` の `factorization_of_A_thetaTilde` |
 
-したがって原文の 6 行の鎖は「線型写像の合成 ↔ 行列の積」という 1 点に集約される。
+したがって原文の (z)・(y) の 12 行の鎖は「線型写像の合成 ↔ 行列の積」という 1 点に集約される。
 `B_1(θ) B_2 B_1(θ) = A(θ)` は別の（純粋に 2×2 行列の）計算であり、
 `Ising2D.factorization_of_A_theta_general`（`EigenvalueProblem/ReductionToATheta/ClaimFactorizationATheta.lean`）が担当する。
 

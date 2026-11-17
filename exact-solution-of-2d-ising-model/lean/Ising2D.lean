@@ -462,6 +462,8 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTActionsOnCheck
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTActionsOnCheckFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimFactorizationATheta
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimPairTimesMatrixTimesColumnAssociative
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimPairTimesMatrixTimesColumnAssociativeFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusActionFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusCheckZYViaB1B2B1
@@ -565,6 +567,7 @@ import Ising2D.NecSuf.MatMulDistribSum
 import Ising2D.NecSuf.MatrixConjugationSum
 import Ising2D.NecSuf.SmulMatrixSub
 import Ising2D.NecSuf.MatrixProductIdentityAndScalar
+import Ising2D.NecSuf.PairTimesMatrixTimesColumnAssociative
 import Ising2D.NecSuf.RowVectorRightInverse
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp

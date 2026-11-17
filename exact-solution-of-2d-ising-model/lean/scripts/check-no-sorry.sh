@@ -1664,11 +1664,8 @@ targets=(
   Ising2D.factorization_step5_P21_real
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
-  Ising2D.B1mat_col_zero
-  Ising2D.B1mat_col_one
   Ising2D.TVPlus_apply_checkZ
   Ising2D.TVPlus_apply_checkY
-  Ising2D.mulVec_mulVec_col
   Ising2D.TVPlus_checkZ_checkY
   Ising2D.TVPlus_checkZ_checkY_of_necSuf
   Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1
@@ -3588,6 +3585,11 @@ targets=(
   Ising2D.expPhase_nextSite
   Ising2D.H2_eq_check_sum
   Ising2D.H1Plus_eq_check_sum
+  Ising2D.rowMulCol
+  Ising2D.rowMulCol_rowMul_assoc
+  Ising2D.rowMulCol_rowMul_assoc_of_necSuf
+  Ising2D.NecSuf.rowMul2Col
+  Ising2D.NecSuf.rowMul2Col_rowMul2_assoc
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。
