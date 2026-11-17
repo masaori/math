@@ -23,7 +23,7 @@
 
 ## 人手の ℂ の公理と略記の読み方
 
-人手の `complex_numbers_form_a_field` の積の単位元（`multiplicative_group_of_cc` の「積の単位元」が `1_ℂ·z = z`・`z·1_ℂ = z` の
+人手の `complex_numbers_form_a_field` の積の単位元（`complex_one_is_multiplicative_identity` が `1_ℂ·z = z`・`z·1_ℂ = z` の
 両方を示す）は `one_mul`・`mul_one`、`inclusion_rr_to_cc` の略記 `1_ℂ = ι_{ℝ→ℂ}(1)` は `Complex.ofReal_one` で読む
 （`ClaimEpsilonRealPermutesEntriesBySpinFlip.lean` などと同じ既存の慣行。人手の ℂ の体の公理には Lean の具体版を置いていない）。
 Step 7 の `⟹` の 2 行目と `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行目はこの読み方で人手の行と 1 対 1 である。

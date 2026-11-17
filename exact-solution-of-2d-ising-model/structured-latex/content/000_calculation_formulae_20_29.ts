@@ -811,6 +811,146 @@ w\cdot z
     },
   },
   {
+    id: "calculation_formulae_claim_complex_multiplication_is_associative",
+    kind: "claim",
+    title: {
+      tex: "\\mathbb{C}\\text{の積の結合律}",
+    },
+    labels: ["complex_multiplication_is_associative"],
+    statement: [
+      paragraph([
+        ref("definition_of_cc"),
+        " の積について、任意の ",
+        math(String.raw`z,w,u\in\mathbb{C}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`(z\cdot w)\cdot u=z\cdot(w\cdot u)`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`z`),
+        "・",
+        math(String.raw`w`),
+        "・",
+        math(String.raw`u`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）でもよい）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z=(a,b),\ w=(c,d),\ u=(e,f)`),
+        " と書く（",
+        math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(z\cdot w)\cdot u
+&= \left((a,b)\cdot(c,d)\right)\cdot(e,f)
+&&(\because\ z=(a,b),\ w=(c,d),\ u=(e,f))\\
+&= (ac-bd,\ ad+bc)\cdot(e,f)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \left((ac-bd)e-(ad+bc)f,\ (ac-bd)f+(ad+bc)e\right)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \left(ace-bde-adf-bcf,\ acf-bdf+ade+bce\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
+&= \left(ace-adf-bcf-bde,\ acf+ade+bce-bdf\right)
+&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right)
+&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
+&= (a,b)\cdot(ce-df,\ cf+de)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
+&= (a,b)\cdot\left((c,d)\cdot(e,f)\right)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
+&= z\cdot(w\cdot u)
+&&(\because\ z=(a,b),\ w=(c,d),\ u=(e,f))
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℂ の全元についての積の結合律は multiplicative_group_of_cc の証明の中の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、complex_numbers_form_a_field の積のモノイド構造の段落が 0_ℂ を含む全ての元についての結合律を引ける主張が無かった。multiplicative_group_of_cc の証明の「積の結合律」の段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端を主張の両辺 (z·w)·u・z·(w·u) に揃え、z, w, u を成分に開く行と閉じる行を足し、「ℂ の積の定義」を definition_of_cc の参照にした。鎖の後に置いていた第 3・第 5 の等号の説明の段落（2 つの定理を同時に当てた断り）は、日本語を鎖の後に置かない規律に従って削った。2 つの定理を 1 行で当てている点は台帳の新しい件で扱う）。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、結合律は使う側が mul_assoc で閉じている）。数値検証: sagemath/check/complex_multiplication_is_associative/check_component_chain.sage。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_complex_one_is_multiplicative_identity",
+    kind: "claim",
+    title: {
+      tex: "1_{\\mathbb{C}}\\text{は}\\mathbb{C}\\text{の積の単位元}",
+    },
+    labels: ["complex_one_is_multiplicative_identity"],
+    statement: [
+      paragraph([
+        ref("definition_of_cc"),
+        " の積と ",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(1)`),
+        " について、任意の ",
+        math(String.raw`z\in\mathbb{C}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`z\cdot 1_{\mathbb{C}}=z,\qquad 1_{\mathbb{C}}\cdot z=z`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`z`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " でもよい）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z=(a,b)`),
+        " と書く（",
+        math(String.raw`a,b\in\mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+z\cdot 1_{\mathbb{C}}
+&= (a,b)\cdot 1_{\mathbb{C}}
+&&(\because\ z=(a,b))\\
+&= (a,b)\cdot(1,0)
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 1_{\mathbb{C}}=(1,0))\\
+&= (a\cdot 1-b\cdot 0,\ a\cdot 0+b\cdot 1)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= (a-b\cdot 0,\ a\cdot 0+b)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to a,\ x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= (a-0,\ 0+b)
+&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
+&= (a,\ 0+b)
+&&(\because\ \blkref{real_minus_zero_is_self}\ (a\to a))\\
+&= (a,b)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= z
+&&(\because\ z=(a,b))
+\end{aligned}`,
+      ),
+      paragraph(["であり、また"]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot z
+&= z\cdot 1_{\mathbb{C}}
+&&(\because\ \blkref{complex_multiplication_is_commutative}\ (w \to 1_{\mathbb{C}},\ z \to z))\\
+&= z
+&&(\because\ \text{上の鎖})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℂ の全元について 1_ℂ が積の単位元であることは multiplicative_group_of_cc の証明の中の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、complex_numbers_form_a_field の積のモノイド構造の段落が 0_ℂ を含む全ての元についての単位元を引ける主張が無かった。multiplicative_group_of_cc の証明の「積の単位元」の段の 2 本の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端を主張の両辺に揃え、z を成分に開く行と閉じる行を足し、1_ℂ = (1,0) の根拠を inclusion_rr_to_cc の参照にした）。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、単位元は使う側が mul_one・one_mul で閉じている）。数値検証: sagemath/check/complex_one_is_multiplicative_identity/check_component_chain.sage。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
     kind: "claim",
     origin: { path: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ", ordinal: 24 },
@@ -849,72 +989,17 @@ w\cdot z
       ]),
       paragraph([
         "証明は独立した中間目標へ分かれるので、以下ではそれぞれに名前を付けて示す。",
-        "以下、",
-        math(String.raw`(a,b),(c,d),(e,f)\in\mathbb{C}`),
-        " は任意に取ったものとする（したがって ",
-        math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
-        "）。",
       ]),
-      paragraph(["積の結合律。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left((a,b)\cdot(c,d)\right)\cdot(e,f)
-&= (ac-bd,\ ad+bc)\cdot(e,f)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
-&= \left((ac-bd)e-(ad+bc)f,\ (ac-bd)f+(ad+bc)e\right)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
-&= \left(ace-bde-adf-bcf,\ acf-bdf+ade+bce\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
-&= \left(ace-adf-bcf-bde,\ acf+ade+bce-bdf\right)
-&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
-&= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
-&= (a,b)\cdot(ce-df,\ cf+de)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
-&= (a,b)\cdot\left((c,d)\cdot(e,f)\right)
-&&(\because\ \mathbb{C}\ \text{の積の定義})
-\end{aligned}`,
-      ),
       paragraph([
-        "第 3 の等号と第 5 の等号では、",
-        math(String.raw`\mathbb{R}`),
-        " の分配律と積の結合律を同時に使っている（例えば ",
-        math(String.raw`(ac-bd)e=ace-bde`),
-        " は分配律で 2 項に分けたうえで、各項の積の順序を結合律で括り直したものである）。",
-        "同じ定理を複数箇所へ同時に適用しているので 1 行にまとめてある。",
-      ]),
-      paragraph(["積の単位元。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-(a,b)\cdot 1_{\mathbb{C}}
-&= (a,b)\cdot(1,0)
-&&(\because\ 1_{\mathbb{C}}=(1,0))\\
-&= (a\cdot 1-b\cdot 0,\ a\cdot 0+b\cdot 1)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
-&= (a-b\cdot 0,\ a\cdot 0+b)
-&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to a,\ x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
-&= (a-0,\ 0+b)
-&&(\because\ \blkref{real_times_zero_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
-&= (a,\ 0+b)
-&&(\because\ \blkref{real_minus_zero_is_self}\ (a\to a))\\
-&= (a,b)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
-\end{aligned}`,
-      ),
-      paragraph(["であり、また"]),
-      displayMath(
-        String.raw`\begin{aligned}
-1_{\mathbb{C}}\cdot(a,b)
-&= (a,b)\cdot 1_{\mathbb{C}}
-&&(\because\ \blkref{complex_multiplication_is_commutative}\ (w \to 1_{\mathbb{C}},\ z \to (a,b)))\\
-&= (a,b)
-&&(\because\ \text{上の計算})
-\end{aligned}`,
-      ),
-      paragraph([
-        "であるから ",
+        "積の結合律は ",
+        ref("complex_multiplication_is_associative"),
+        "、",
         math(String.raw`1_{\mathbb{C}}`),
-        " は積の単位元である。",
+        " が積の単位元であることは ",
+        ref("complex_one_is_multiplicative_identity"),
+        " である（どちらも ",
+        math(String.raw`\mathbb{C}`),
+        " の全元について成り立つ）。",
       ]),
       paragraph([
         "零でないことと平方和が正であることの同値。",
@@ -1164,9 +1249,13 @@ b
       paragraph([
         "結論と記法。上で示したところにより ",
         math(String.raw`\mathbb{C}^{\times}`),
-        " は積について閉じ、結合律を満たし、単位元 ",
+        " は積について閉じ、結合律（",
+        ref("complex_multiplication_is_associative"),
+        "）を満たし、単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
-        " を含み、各元が逆元をもつ。したがって ",
+        "（",
+        ref("complex_one_is_multiplicative_identity"),
+        "）を含み、各元が逆元をもつ。したがって ",
         math(String.raw`\mathbb{C}^{\times}`),
         " は群をなす（",
         ref("complex_multiplication_is_commutative"),
@@ -1187,7 +1276,7 @@ b
 &= 1_{\mathbb{C}}\cdot z^{-1}
 &&(\because\ \text{商の定め方})\\
 &= z^{-1}
-&&(\because\ \text{上で示した}\ 1_{\mathbb{C}}\ \text{が積の単位元であること})
+&&(\because\ \blkref{complex_one_is_multiplicative_identity}\ (z \to z^{-1}))
 \end{aligned}`,
       ),
       paragraph(["であり、両記法は一致する。"]),
@@ -1209,6 +1298,7 @@ b
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: この証明の 7 行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と、使った形（積の単位元の鎖の最後の行は左から足す 0 + x = x の x → b、平方和の非負の鎖・a = b = 0 の平方和の鎖は 0 + x = x の x → 0、a² = 0 の鎖は x + 0 = x の x → a² を右辺から左辺へと 0 + x = x の x → −b²、閉性の恒等式は x + 0 = x、1_C の平方和の鎖は x + 0 = x の x → 1）の行に替えた。鎖の両端と段の数は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_03_additive_identity_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の (a·1 − b·0, a·0 + b·1) を消す行と、1_C の平方和の鎖の 1·1 を消す行が「ℝ では 1 は積の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → a, x → b と x → 1）の行にした。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の可換律」の段の鎖は ℂ の全元についての主張で、この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_commutative（このブロックの直前）の証明へ移した。この証明の中で可換律を使う 2 行（1_C·(a,b) = (a,b)·1_C と w·z = z·w）と結論の「可換群である」は、その主張の参照に替えた。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の結合律」「積の単位元」の段の鎖は ℂ の全元についての主張で、その鎖のために置いていた (a,b),(c,d),(e,f) ∈ ℂ の前置きは使われなくなったので削った（残る段は z = (a,b) を段ごとに置き、閉性の恒等式の a,b,c,d ∈ ℝ は積の式の前置きにある）。この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_associative・complex_one_is_multiplicative_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。1/z = z^{-1} の鎖の「上で示した 1_C が積の単位元であること」と結論の結合律・単位元も、その主張の参照に替えた。",
       ],
     },
   },
@@ -1355,14 +1445,13 @@ b
       paragraph([
         "積のモノイド構造。積の可換律は ",
         ref("complex_multiplication_is_commutative"),
-        " である。積の結合律・単位元 ",
+        "、積の結合律は ",
+        ref("complex_multiplication_is_associative"),
+        "、",
         math(String.raw`1_{\mathbb{C}}`),
-        " の存在は ",
-        ref("multiplicative_group_of_cc"),
-        " の証明の「積の結合律」「積の単位元」で示した",
-        "（これらは ",
-        math(String.raw`\mathbb{C}`),
-        " の全元について成り立つ主張である）。",
+        " が積の単位元であることは ",
+        ref("complex_one_is_multiplicative_identity"),
+        " である。",
       ]),
       paragraph(["左からの分配律。"]),
       displayMath(
@@ -1451,6 +1540,7 @@ b
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 右からの分配律の鎖は multiplicative_group_of_cc の積の可換律を 0_ℂ になりうる元 (c,d)+(e,f) に当てていたが、その主張は「ℂ^× は群をなす」だけで、ℂ の全元についての可換律は証明の中の段にしか無かった。新しく足した主張 complex_multiplication_is_commutative の参照と代入の行に替え、積のモノイド構造の段落も可換律はその主張を引く形にした。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 加法の単位元の鎖の (a + 0, b + 0) を消す行と、−z と (−1_C)·z の一致の鎖の (−1)b + 0 を消す行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x + 0 = x の x → a, x → b と x → (−1)b）の行にした。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 積のモノイド構造の段落は、積の結合律と単位元を multiplicative_group_of_cc の証明の段から引き、0_ℂ を含む全ての元に使っていた。その段を独立した主張 complex_multiplication_is_associative・complex_one_is_multiplicative_identity にしたので、段落をその参照に替えた。",
       ],
     },
   },
