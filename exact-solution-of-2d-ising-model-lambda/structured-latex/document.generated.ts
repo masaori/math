@@ -25,6 +25,7 @@ import notes_formal_square_root_archive from './notes/formal-square-root-archive
 import notes_free_entropy from './notes/free-entropy.ts'
 import notes_kac_ward from './notes/kac-ward.ts'
 import notes_partition_polynomial from './notes/partition-polynomial.ts'
+import notes_qbar_action_iteration from './notes/qbar-action-iteration.ts'
 import notes_thermodynamic_limit from './notes/thermodynamic-limit.ts'
 
 
@@ -40,6 +41,7 @@ export type AllNotes = [
   ...typeof notes_free_entropy,
   ...typeof notes_kac_ward,
   ...typeof notes_partition_polynomial,
+  ...typeof notes_qbar_action_iteration,
   ...typeof notes_thermodynamic_limit,
 ]
 

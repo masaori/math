@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_qbar_action_pow`（structured-latex 側の安定識別子）
 
-- 本文: `structured-latex/content/main-text.ts` の章「固有値の代数性」の主張 1 件
+- 参照用ノート: `structured-latex/notes/qbar-action-iteration.ts`（本文から退避）
 - 併せて引く定義: `def_qbar_matrix_power`（代数的数を成分とする行列の冪）・
   `def_qbar_action_iterate`（作用の反復）・`def_qbar_matrix`・`def_qbar_vector`・
   `def_qbar_matrix_action`・`def_qbar_matrix_product`・`def_qbar_identity_matrix`
@@ -48,7 +48,7 @@ $L$ は添字集合の大きさを変えるだけである）。
 ## 実行
 
 ```sh
-sage sagemath/check/qbar-action-pow/check.sage
+sage sagemath/archive/qbar-action-pow/check.sage
 ```
 
 ## 結果
