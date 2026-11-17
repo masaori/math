@@ -4247,11 +4247,12 @@ z^{n}
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "であり、",
                       math(String.raw`u`),
-                      " は任意なので ",
-                      math(String.raw`1\odot w=w`),
-                      " である。第二に、任意の ",
+                      " は任意なので、写像の等号として",
+                    ]),
+                    displayMath(String.raw`1\odot w=w\qquad\bigl(\because\ \mathcal{J}\text{ の各元で値が等しい}\bigr)`),
+                    paragraph([
+                      "第二に、任意の ",
                       math(String.raw`y,z\in\overline{\mathbb{Q}}`),
                       " と任意の ",
                       math(String.raw`w\in V_{\mathcal{J}}`),
@@ -4271,12 +4272,10 @@ z^{n}
 &&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "であり、",
                       math(String.raw`u`),
-                      " は任意なので ",
-                      math(String.raw`(y\,z)\odot w=y\odot(z\odot w)`),
-                      " である。",
+                      " は任意なので、写像の等号として",
                     ]),
+                    displayMath(String.raw`(y\,z)\odot w=y\odot(z\odot w)\qquad\bigl(\because\ \mathcal{J}\text{ の各元で値が等しい}\bigr)`),
                     paragraph([
                       math(String.raw`A`),
                       " と ",
