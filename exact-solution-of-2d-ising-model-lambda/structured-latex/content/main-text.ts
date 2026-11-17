@@ -10558,25 +10558,25 @@ i&\in\operatorname{Orb}_p(\tau(m(i)))&&\bigl(\because\ i\in\mathcal B_{\tau,\ups
 j&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
 p(j)&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr),\\
 p(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の合併}\bigr),\\
-m(p(j))&=m(j)&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\text{ の証明の最小元の一致}\bigr).
+m(p(j))&=m(j)&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\text{ の証明の最小元の一致}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 p(j)\in C_{\tau,\upsilon}
 &\Longleftrightarrow p(j)\in\operatorname{Orb}_p(m(p(j)))&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr)\\
 &\Longleftrightarrow p(j)\in\operatorname{Orb}_p(m(j))&&\bigl(\because\ m(p(j))=m(j)\bigr)\\
 &\Longleftrightarrow j\in\operatorname{Orb}_p(m(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)\\
-&\Longleftrightarrow j\in C_{\tau,\upsilon}&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr).
+&\Longleftrightarrow j\in C_{\tau,\upsilon}&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr)
 \end{aligned}`),
                 paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。", math(String.raw`\tau(i)\in\mathcal J`), " は ", ref("def_matching_pair_step"), " の写像の値域による。"]),
                 displayMath(String.raw`\begin{aligned}
 p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
-&=\upsilon(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr).
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \upsilon(i)\in C_{\tau,\upsilon}
 &\Longleftrightarrow p(\tau(i))\in C_{\tau,\upsilon}&&\bigl(\because\ p(\tau(i))=\upsilon(i)\bigr)\\
 &\Longleftrightarrow \tau(i)\in C_{\tau,\upsilon}&&\bigl(\because\ \text{上で示した }p\text{ による色の不変性}\bigr)\\
-&\Longleftrightarrow i\notin C_{\tau,\upsilon}&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\bigr).
+&\Longleftrightarrow i\notin C_{\tau,\upsilon}&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\bigr)
 \end{aligned}`),
                 paragraph(["空集合には入力がなく、二つのマッチングが同じ対を含む場合にも同じ論法が通る。有限番号集合とその部分集合だけを使い、実数体への脱出はない。"]),
               ],
@@ -47654,6 +47654,72 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                     "任意の ", math(String.raw`z\in Q_s`), " について、",
                     "零・正・負のちょうど一つが成り立つ（", ref("claim_quadratic_positive_cone_ambient_trichotomy"), "）。",
                     "これらは部分体の正錐の四条件（", ref("def_subfield_positive_cone"), "）である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_increasing_subfield_union_is_subfield",
+              focus: {
+                id: "zero_pinching_claim_increasing_subfield_union_is_subfield",
+                kind: "claim",
+                title: { text: "増大列にある部分体の和集合は部分体である" },
+                labels: ["claim_increasing_subfield_union_is_subfield"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/increasing-subfield-union"],
+                lean: [
+                  "Ising2DLambda.FisherZero.increasingSubfieldUnion",
+                  "Ising2DLambda.NecSuf.FisherZero.increasingSubfieldUnion",
+                  "Ising2DLambda.FisherZero.increasingSubfieldUnion_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "各 ", math(String.raw`n\in\mathbb N`), " に対して ",
+                    math(String.raw`F_n\subseteq\overline{\mathbb Q}`), " を部分体（",
+                    ref("def_subfield_positive_cone"), " の前提にある部分体）とし、",
+                    math(String.raw`F_n\subseteq F_{n+1}`), " を仮定する。",
+                    math(String.raw`F_\infty:=\bigcup_{n\in\mathbb N}F_n`),
+                    " と置く。このとき ", math(String.raw`F_\infty`), " は ",
+                    math(String.raw`\overline{\mathbb Q}`), " の部分体である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "包含の推移律と自然数についての帰納法から、",
+                    math(String.raw`i\le k`), " なら ", math(String.raw`F_i\subseteq F_k`), " である。",
+                    "零元と単位元は ", math(String.raw`F_0`), " に属するため ",
+                    math(String.raw`F_\infty`), " に属する。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`x,y\in F_\infty`), " を取る。",
+                    "和集合の定義から ", math(String.raw`x\in F_i`), " と ",
+                    math(String.raw`y\in F_j`), " を満たす ",
+                    math(String.raw`i,j\in\mathbb N`), " がある。",
+                    math(String.raw`k:=\max\{i,j\}\in\mathbb N`), " と置く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+x&\in F_k&&\bigl(\because\ i\le k,\ F_i\subseteq F_k\bigr)\\
+y&\in F_k&&\bigl(\because\ j\le k,\ F_j\subseteq F_k\bigr)\\
+x+y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr)\\
+x\cdot y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`x+y,x\cdot y\in F_\infty`), " である。",
+                    "任意の ", math(String.raw`x\in F_\infty`), " には ",
+                    math(String.raw`x\in F_i`), " を満たす ", math(String.raw`i\in\mathbb N`), " がある。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+-x&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr)\\
+x^{-1}&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "ゆえに ", math(String.raw`-x,x^{-1}\in F_\infty`), " である。",
+                    "これで部分体の六つの閉性をすべて示した。議論は ",
+                    math(String.raw`\overline{\mathbb Q}`), " の中で閉じ、実数体・複素数体を使わない。",
                   ]),
                 ],
               },
