@@ -1,4 +1,7 @@
 import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationOrbitEnumeration
+import Ising2DLambda.AlgebraicEigenvalue.AlgebraicNumbersEnumeration
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.AlgebraicNumbersEnumeration
+import Ising2DLambda.AlgebraicEigenvalue.AlgebraicNumbersEnumerationFromNecSuf
 import Ising2DLambda.Tools.FiniteSimpleGraph
 import Ising2DLambda.Tools.ForestAddDisconnectedEdge
 import Ising2DLambda.NecSuf.Tools.ForestAddDisconnectedEdge

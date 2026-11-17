@@ -10,6 +10,7 @@ export const ALL_LABELS = [
   "claim_adjacent_cells_ray_crossing_difference",
   "claim_admissible_direction_permutation_signs",
   "claim_admissible_direction_permutations",
+  "claim_algebraic_numbers_enumeration",
   "claim_all_direction_seam_mode_phase",
   "claim_alternating_cycle_gauge_ratio",
   "claim_alternating_cycle_matching_sign",
