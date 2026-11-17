@@ -723,6 +723,9 @@ import Ising2DLambda.NecSuf.FisherZero.FisherZeroSetNonempty
 import Ising2DLambda.FisherZero.FisherZeroSetNonemptyFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.RealClosedSubfield
 import Ising2DLambda.FisherZero.RealClosedSubfieldFromNecSuf
+import Ising2DLambda.FisherZero.SubfieldPositiveCone
+import Ising2DLambda.NecSuf.FisherZero.SubfieldPositiveCone
+import Ising2DLambda.FisherZero.SubfieldPositiveConeFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.FisherZero.RealAlgebraicOrderFromNecSuf
