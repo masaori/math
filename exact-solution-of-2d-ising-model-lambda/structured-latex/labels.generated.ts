@@ -132,6 +132,7 @@ export const ALL_LABELS = [
   "claim_edge_set_vertical_seam_parity_equals_winding_parity",
   "claim_edge_simple_contact_split",
   "claim_empty_pfaffian_determinant",
+  "claim_enumerated_precone_chain_covers_signs",
   "claim_even_edge_chain_intersection",
   "claim_even_edge_chain_torus_normal_form",
   "claim_even_edge_leaf_choice",
