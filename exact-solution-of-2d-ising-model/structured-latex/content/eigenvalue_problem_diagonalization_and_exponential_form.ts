@@ -4324,7 +4324,6 @@ s_1c_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_1 = \mp r)
 \end{aligned}`,
       ),
-      paragraph([ref("def_gamma1_gamma2_of_theta"), "、", ref("relation_of_gamma_2_theta_tilde"), "、", ref("abs_basic_properties"), " が各行の根拠である。"]),
       paragraph(["第 2 成分は"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4343,7 +4342,6 @@ s_1c_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b)
 \end{aligned}`,
       ),
-      paragraph(["第 1 行の根拠は ", ref("def_gamma1_gamma2_of_theta"), " である。"]),
       paragraph([
         "よって ",
         math(String.raw`A(\theta)v_\pm = \lambda_{\pm,\mu}v_\pm`),
@@ -4434,6 +4432,7 @@ A(\theta)(cv)
           "multiply_by_minus_one・one_plus_one_is_two_in_cc・square_of_complex_number_is_product を 1 行に 1 つずつ当てる 26 行に割った（新しい主張は足していない）。" +
           "係数の 2_ℂ g_1 λ を準備の恒等式の (2_ℂ x)λ と同じく (2_ℂ g_1)λ と書き、1_ℂ の読みを鎖の前に書いた。式の両端と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 1 の det(A(θ) − λI) の鎖の「(g_1^2 + ab) = (g_1^2 − r^2)（∵ relation_of_gamma_2_theta_tilde (ab = −r^2)）」1 行が、(2) の代入・実数の符号反転の像への読み替え・差の定義を束ねていたので、relation_of_gamma_2_theta_tilde (2)（ab = (−|a|^2)_ℂ）、ℝ で (−1)x = −x、real_inclusion_preserves_product、inclusion_rr_to_cc の −1_ℂ = (−1)_ℂ、real_inclusion_preserves_power（m → 2）、multiply_by_minus_one、def_complex_difference を 1 行に 1 つずつ当てる 7 行に割った（新しい主張なし。式の両端と主張は不変）。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 固有ベクトルの第 1・第 2 成分の鎖の後に置いていた、引いたブロックを挙げる段落 2 個を削った。各行は既に \\blkref で根拠を引いており、段落は重複だった（docs/context/証明の書き方.md の「証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
       ],
     },
   },

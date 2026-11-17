@@ -284,15 +284,13 @@ export default defineBlocks([
 &\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
 &&\bigl(\because\ \text{Step 1}\bigr) \\
 &\le \|I\| + E(\|A\|)
-&&\bigl(\because\ \text{非負実数の指数級数の収束 } (2)\bigr) \\
+&&\bigl(\because\ \blkref{real_exp_series_converges}\ (2)\bigr) \\
 &= M_A
 &&\bigl(\because\ M_A \text{ の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "（第 3 行の不等号は ",
-        ref("real_exp_series_converges"),
-        " (2) による。）この実数級数は非負項なので部分和は単調非減少であり、いま ",
+        "この実数級数は非負項なので部分和は単調非減少であり、いま ",
         math(String.raw`M_A`),
         " で上に有界であるから収束する（",
         math(String.raw`\mathbb{R}`),
@@ -314,7 +312,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \|S_N(A)\|
 &\le \sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
-&&\bigl(\because\ \text{ノルムの三角不等式 } (3) \text{ を繰り返し用いる}\bigr) \\
+&&\bigl(\because\ \blkref{matrix_norm_triangle_inequality}\ (3)\ \text{を繰り返し用いる}\bigr) \\
 &\le M_A
 &&\bigl(\because\ \text{Step 2 の評価}\bigr)
 \end{aligned}`,
@@ -324,18 +322,12 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|
 &\le \sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|
-&&\bigl(\because\ \text{Mat}(n,K) \text{ の完備性と絶対収束判定 } (2) \text{ の後半}\bigr) \\
+&&\bigl(\because\ \blkref{matrix_completeness}\ (2)\ \text{の後半}\bigr) \\
 &\le M_A
 &&\bigl(\because\ \text{Step 2 の評価}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("matrix_norm_triangle_inequality"),
-        " と ",
-        ref("matrix_completeness"),
-        "）。",
-      ]),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -345,6 +337,7 @@ export default defineBlocks([
           "Mat(n,K) におけるノルム収束を必要とするため、独立した主張として切り出した。",
         "2026-09-01 の式変形統一で、四本の鎖に行中の \\quad (\\because …) で置かれていた根拠 12 行を、" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
       ],
     },
   },

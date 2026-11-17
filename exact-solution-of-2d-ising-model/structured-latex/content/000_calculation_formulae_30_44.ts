@@ -336,11 +336,11 @@ x^2+y^2
         String.raw`\begin{aligned}
 |z_1z_2|^2
 &= \left|(ac-bd,\ ad+bc)\right|^2
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= (ac-bd)^2+(ad+bc)^2
 &&(\because\ \text{上で示した絶対値の平方})\\
 &= (a^2+b^2)(c^2+d^2)
-&&(\because\ \text{複素数の乗法群の「積について閉じること」の恒等式})\\
+&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の「積について閉じること」の恒等式})\\
 &= |z_1|^2|z_2|^2
 &&(\because\ \text{上で示した絶対値の平方。2 箇所へ適用})\\
 &= \left(|z_1|\,|z_2|\right)^2
@@ -348,10 +348,6 @@ x^2+y^2
 \end{aligned}`,
       ),
       paragraph([
-        ref("definition_of_cc"),
-        "、",
-        ref("multiplicative_group_of_cc"),
-        "。",
         math(String.raw`|z_1z_2|\ge 0`),
         " かつ ",
         math(String.raw`|z_1|\,|z_2|\ge 0`),
@@ -420,7 +416,7 @@ x^2+y^2
         String.raw`\begin{aligned}
 |z_1+z_2|^2
 &= \left|(a+c,\ b+d)\right|^2
-&&(\because\ \mathbb{C}\ \text{の成分ごとの加法})\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
 &= (a+c)^2+(b+d)^2
 &&(\because\ \text{上で示した絶対値の平方})\\
 &= \left(a^2+b^2\right)+\left(c^2+d^2\right)+2(ac+bd)
@@ -434,8 +430,6 @@ x^2+y^2
 \end{aligned}`,
       ),
       paragraph([
-        ref("complex_numbers_form_a_field"),
-        "。",
         math(String.raw`|z_1+z_2|\ge 0`),
         " かつ ",
         math(String.raw`|z_1|+|z_2|\ge 0`),
@@ -450,7 +444,7 @@ x^2+y^2
         String.raw`\begin{aligned}
 \left|\iota_{\mathbb{R}\to\mathbb{C}}(x)\right|
 &= \left|(x,0)\right|
-&&(\because\ \mathbb{R}\ \text{から}\ \mathbb{C}\ \text{への包含写像の定め方})\\
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
 &= \sqrt{x^2+0^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{上で示した成分による表示})\\
 &= \sqrt{x^2+0\cdot 0}^{(\mathbb{R}_{\ge 0})}
@@ -462,8 +456,7 @@ x^2+y^2
 \end{aligned}`,
       ),
       paragraph([
-        ref("inclusion_rr_to_cc"),
-        "。あとは ",
+        "あとは ",
         math(String.raw`x`),
         " の符号で場合を分ける。(1) と同じく、",
         ref("definition_of_sqrt_r_positive"),
@@ -540,6 +533,7 @@ x^2+y^2
           "（「Step 2 より」等）も名前で指すようにした（リポジトリの規約「文書・定理を番号や記号で管理しない」）。" +
           "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
           "式の直後に ref で挙げている。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
       ],
     },
   },

@@ -1250,18 +1250,13 @@ b
         String.raw`\begin{aligned}
 (a,b)+0_{\mathbb{C}}
 &= (a,b)+(0,0)
-&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))\\
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=(0,0))\\
 &= (a+0,\ b+0)
 &&(\because\ \text{成分ごとの加法の定義})\\
 &= (a,b)
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元。2 箇所へ適用})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたブロックは ",
-        ref("inclusion_rr_to_cc"),
-        " である。",
-      ]),
       paragraph(["加法の逆元。"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1271,7 +1266,7 @@ b
 &= (0,0)
 &&(\because\ \mathbb{R}\ \text{の和の逆元を 2 箇所へ適用})\\
 &= 0_{\mathbb{C}}
-&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
 \end{aligned}`,
       ),
       paragraph([
@@ -1281,9 +1276,7 @@ b
         math(String.raw`(-a,-b)\in\mathbb{R}^2=\mathbb{C}`),
         " である。以上の 4 つより ",
         math(String.raw`(\mathbb{C},+)`),
-        " は可換群である。引いたブロックは ",
-        ref("inclusion_rr_to_cc"),
-        " である。",
+        " は可換群である。",
       ]),
       paragraph([
         "この加法逆元は ",
@@ -1296,9 +1289,9 @@ b
         String.raw`\begin{aligned}
 (-1_{\mathbb{C}})\cdot(a,b)
 &= (-1,0)\cdot(a,b)
-&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{より}\ -1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0))\\
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{より}\ -1_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(-1)=(-1,0))\\
 &= \bigl((-1)a-0\cdot b,\ (-1)b+0\cdot a\bigr)
-&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \bigl((-1)a-0,\ (-1)b+0\bigr)
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to b,\ x\to a)\ \text{を 2 箇所へ適用})\\
 &= \bigl((-1)a,\ (-1)b+0\bigr)
@@ -1309,13 +1302,6 @@ b
 &&(\because\ \blkref{real_minus_one_times_is_negation}\ (a\to a,\ a\to b)\ \text{を 2 箇所へ適用})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたブロックは ",
-        ref("inclusion_rr_to_cc"),
-        " と ",
-        ref("definition_of_cc"),
-        " である。",
-      ]),
       paragraph([
         "積のモノイド構造。積の結合律・可換律・単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
@@ -1333,7 +1319,7 @@ b
 &= (a,b)\cdot(c+e,\ d+f)
 &&(\because\ \text{成分ごとの加法の定義})\\
 &= \bigl(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\bigr)
-&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積})\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \bigl(ac+ae-(bd+bf),\ ad+af+(bc+be)\bigr)
 &&(\because\ \mathbb{R}\ \text{の分配律を 4 箇所へ適用})\\
 &= \bigl((ac-bd)+(ae-bf),\ (ad+bc)+(af+be)\bigr)
@@ -1341,13 +1327,11 @@ b
 &= (ac-bd,\ ad+bc)+(ae-bf,\ af+be)
 &&(\because\ \text{成分ごとの加法の定義})\\
 &= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
-&&(\because\ \mathbb{C}\ \text{の定義}\ \text{の積を 2 箇所へ適用})
+&&(\because\ \blkref{definition_of_cc}\ \text{の積を 2 箇所へ適用})
 \end{aligned}`,
       ),
       paragraph([
-        "引いたブロックは ",
-        ref("definition_of_cc"),
-        " である。第 4 の等号の「和の逆元の分配」とは ",
+        "第 4 の等号の「和の逆元の分配」とは ",
         math(String.raw`-(bd+bf)=(-bd)+(-bf)`),
         " のことである。",
       ]),
@@ -1356,35 +1340,25 @@ b
         String.raw`\begin{aligned}
 \bigl((c,d)+(e,f)\bigr)\cdot(a,b)
 &= (a,b)\cdot\bigl((c,d)+(e,f)\bigr)
-&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律})\\
+&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の積の可換律})\\
 &= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
 &&(\because\ \text{上で示した左からの分配律})\\
 &= (c,d)\cdot(a,b)+(e,f)\cdot(a,b)
-&&(\because\ \mathbb{C}\ \text{の乗法群}\ \text{の積の可換律を 2 箇所へ適用})
+&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の積の可換律を 2 箇所へ適用})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたブロックは ",
-        ref("multiplicative_group_of_cc"),
-        " である。",
-      ]),
       paragraph(["単位元と零元の相違。"]),
       displayMath(
         String.raw`\begin{aligned}
 1_{\mathbb{C}}
 &= (1,0)
-&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 1_{\mathbb{C}}=(1,0))\\
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 1_{\mathbb{C}}=(1,0))\\
 &\ne (0,0)
 &&(\because\ \mathbb{R}\ \text{において}\ 1\ne 0\ \text{であり、第 1 成分が異なる})\\
 &= 0_{\mathbb{C}}
-&&(\because\ \mathbb{R}\to\mathbb{C}\ \text{の包含写像}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}}=(0,0))
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたブロックは ",
-        ref("inclusion_rr_to_cc"),
-        " である。",
-      ]),
       paragraph([
         "逆元の存在。",
         ref("multiplicative_group_of_cc"),
@@ -1422,6 +1396,7 @@ b
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: -z と (-1_C)·z の一致の鎖の最後の行が「1 は積の単位元、0 を因子にもつ積は 0、0 は和の単位元」を 1 行で当てていたので、real_zero_times_is_zero（同じファイルの後ろのブロック）の参照の行・0 は和の単位元の行・1 は積の単位元の行の 3 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の ((−1)a − 0, (−1)b + 0) = ((−1)a, (−1)b) の行は、体の公理でない a − 0 = a と和の単位元 x + 0 = x を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → (−1)a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の最後の行 ((−1)a, (−1)b) = (−a, −b) は、−a が加法の逆元なのに「1 は積の単位元」だけで済ませていた（(−1)a = −(1·a) の段が無い）ので、real_minus_one_times_is_negation（a → a, a → b。同じファイルの後ろのブロック）の参照に替えた。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -4325,9 +4300,9 @@ z^2
         String.raw`\begin{aligned}
 \phi_{\mathrm{cartesian}}\bigl([(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}\bigr)
 &= \phi_{\mathrm{cartesian}}\bigl([(rr',\theta+\theta')]_{\sim}\bigr)
-&&(\because\ \text{極座標表現の演算})\\
+&&(\because\ \blkref{operations_on_polar_representation})\\
 &= \bigl(rr'\cos(\theta+\theta'),\ rr'\sin(\theta+\theta')\bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \blkref{def_phi_cartesian})\\
 &= \bigl(rr'(\cos\theta\cos\theta'-\sin\theta\sin\theta'),\ rr'(\cos\theta\sin\theta'+\sin\theta\cos\theta')\bigr)
 &&(\because\ \text{三角関数の加法定理})\\
 &= \bigl(rr'\cos\theta\cos\theta'-rr'\sin\theta\sin\theta',\ rr'\cos\theta\sin\theta'+rr'\sin\theta\cos\theta'\bigr)
@@ -4335,20 +4310,12 @@ z^2
 &= \bigl((r\cos\theta)(r'\cos\theta')-(r\sin\theta)(r'\sin\theta'),\ (r\cos\theta)(r'\sin\theta')+(r\sin\theta)(r'\cos\theta')\bigr)
 &&(\because\ \mathbb{R}\ \text{の積の可換律と結合律})\\
 &= (r\cos\theta,\ r\sin\theta)\cdot(r'\cos\theta',\ r'\sin\theta')
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \phi_{\mathrm{cartesian}}\bigl([(r,\theta)]_{\sim}\bigr)\cdot\phi_{\mathrm{cartesian}}\bigl([(r',\theta')]_{\sim}\bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})
+&&(\because\ \blkref{def_phi_cartesian})
 \end{aligned}`,
       ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("def_phi_cartesian"),
-        "、",
-        ref("definition_of_cc"),
-        "）。",
-      ]),
+      paragraph(["である。"]),
       paragraph([
         "全単射性。",
         ref("phi_cartesian_after_phi_polar_is_identity"),
@@ -4364,6 +4331,7 @@ z^2
       notes: [
         "原文の part 2 は phi_cartesian ∘ phi_polar = id_CC を示すところまでで、全単射（特に単射性）の明示的な導出は原文にない。ここでは原文の計算を全ステップ忠実に再現した。",
         "2026-11-01、合成が恒等写像であることの場合分けの計算を phi_cartesian_after_phi_polar_is_identity へ切り出し、全単射性の段落はそれを引く形にした。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
       ],
     },
   },
