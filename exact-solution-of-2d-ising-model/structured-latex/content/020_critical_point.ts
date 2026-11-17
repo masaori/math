@@ -1594,7 +1594,7 @@ t
       displayMath(String.raw`\begin{aligned}
 -\pi/2
 &= -\pi/2 + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (-\pi/2 + 0 = -\pi/2)\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &< -\pi/2 + \pi/2
 &&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to \pi/2,\ c \to -\pi/2\bigr)\\
 &= \pi/2 + (-\pi/2)
@@ -1622,6 +1622,7 @@ t
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の 1 行目 0 = 0/2 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）」を real_zero_divided_is_zero（x → 2）を右辺から左辺へ当てる参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の根拠「x < y, c > 0 ⇒ x/c < y/c」は順序体の公理ではなく導いた事実だったので、準備に 0 < 2^{-1}（正の数の逆数は正）を置き、鎖を 0 < π·2^{-1}（正の数どうしの積は正）= π/2（def_real_quotient を右辺から左辺へ）の 2 行に替えた（1 行目の 0 = 0/2 は要らなくなったので外した）。−π/2 < 0 の鎖の a + 0 = a・順序と加法の両立に set_and_algebra_notation の参照を付け、「−a + a = 0」の 1 行を加法の可換則と def_real_difference の加法の逆元の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の 2 ≠ 0・0 < 2 と「ℝ で正の数の逆数は正」の名前だけの根拠を、2 を def_real_two の 1 + 1 と明記したうえで real_two_is_nonzero・real_zero_less_than_two・新しく足した主張 real_inverse_of_positive_is_positive（a → 2）の参照に替えた。準備の結論 0 < 2^{-1} と鎖・主張は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: −π/2 < 0 の鎖の 1 行目で、ℝ の加法の単位元を set_and_algebra_notation で引く根拠が、使った式 −π/2 + 0 = −π/2 を参照の後ろに置き、形と代入を書いていなかったので、000_calculation_formulae_20_29.ts の同じ行と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした（x + 0 = x の x → −π/2 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
@@ -1750,7 +1751,7 @@ t
 &= \arcsin\!\left(\frac{0}{\sqrt{1+0}^{(\mathbb{R}_{\geq 0})}}\right)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \arcsin\!\left(\frac{0}{\sqrt{1}^{(\mathbb{R}_{\geq 0})}}\right)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\ (1 + 0 = 1)\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \arcsin\!\left(\frac{0}{1}\right)
 &&\bigl(\because\ \blkref{sqrt_of_real_one_is_one}\bigr)\\
 &= \arcsin(0)
@@ -1768,6 +1769,7 @@ t
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 3 行目 0·0 = 0 の名前だけの根拠「ℝ で 0·x = 0（ℝ は体）」を real_zero_times_is_zero（x → 0）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 6 行目 0/1 = 0 の名前だけの根拠「ℝ で 0/x = 0（x ≠ 0）（ℝ は体）」を real_zero_divided_is_zero（x → 1）の参照に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 4 行目の名前だけの根拠「ℝ で a + 0 = a」を set_and_algebra_notation の加法の単位元の参照に替え、6 行目の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。式は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 4 行目で、ℝ の加法の単位元を set_and_algebra_notation で引く根拠が、使った式 1 + 0 = 1 を参照の後ろに置き、形と代入を書いていなかったので、000_calculation_formulae_20_29.ts の同じ行と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした（x + 0 = x の x → 1）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
       ],
     },
   },
