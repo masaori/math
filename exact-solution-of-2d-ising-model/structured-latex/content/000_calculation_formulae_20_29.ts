@@ -750,6 +750,67 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_complex_multiplication_is_commutative",
+    kind: "claim",
+    title: {
+      tex: "\\mathbb{C}\\text{の積の可換律}",
+    },
+    labels: ["complex_multiplication_is_commutative"],
+    statement: [
+      paragraph([
+        ref("definition_of_cc"),
+        " の積について、任意の ",
+        math(String.raw`z,w\in\mathbb{C}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`w\cdot z=z\cdot w`),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`z`),
+        " と ",
+        math(String.raw`w`),
+        " は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）でもよい）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z=(a,b),\ w=(c,d)`),
+        " と書く（",
+        math(String.raw`a,b,c,d\in\mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+w\cdot z
+&= (c,d)\cdot(a,b)
+&&(\because\ w=(c,d),\ z=(a,b))\\
+&= (ca-db,\ cb+da)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= (ac-bd,\ cb+da)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換律}\ xy = yx\ (x \to c,\ y \to a\ \text{と}\ x \to d,\ y \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= (ac-bd,\ bc+ad)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換律}\ xy = yx\ (x \to c,\ y \to b\ \text{と}\ x \to d,\ y \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= (ac-bd,\ ad+bc)
+&&\bigl(\because\ \mathbb{R}\ \text{の和の可換律}\ x + y = y + x\ (x \to bc,\ y \to ad)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (a,b)\cdot(c,d)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
+&= z\cdot w
+&&(\because\ z=(a,b),\ w=(c,d))
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℂ の全元についての積の可換律は multiplicative_group_of_cc の証明の中の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、complex_numbers_form_a_field の右からの分配律の鎖が 0_ℂ になりうる元 (c,d)+(e,f) に可換律を当てるとき引ける主張が無かった。multiplicative_group_of_cc の証明の「積の可換律」の段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端を主張の両辺 w·z・z·w に揃え、z, w を成分に開く行と閉じる行を足した。ℝ の積と和の可換律の行は、同じファイルの ℝ の単位元の行と同じく set_and_algebra_notation の参照と使った形と代入の行にした）。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、可換律は使う側が mul_comm で閉じている）。数値検証: sagemath/check/complex_multiplication_is_commutative/check_component_chain.sage。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
     kind: "claim",
     origin: { path: "_old/typst/parts/000_計算公式/023_claim_CCの乗法群.typ", ordinal: 24 },
@@ -794,22 +855,6 @@ b
         math(String.raw`a,b,c,d,e,f\in\mathbb{R}`),
         "）。",
       ]),
-      paragraph(["積の可換律。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-(c,d)\cdot(a,b)
-&= (ca-db,\ cb+da)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
-&= (ac-bd,\ cb+da)
-&&(\because\ \mathbb{R}\ \text{の積の可換律を 2 箇所へ適用})\\
-&= (ac-bd,\ bc+ad)
-&&(\because\ \mathbb{R}\ \text{の積の可換律を 2 箇所へ適用})\\
-&= (ac-bd,\ ad+bc)
-&&(\because\ \mathbb{R}\ \text{の和の可換律})\\
-&= (a,b)\cdot(c,d)
-&&(\because\ \mathbb{C}\ \text{の積の定義})
-\end{aligned}`,
-      ),
       paragraph(["積の結合律。"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -861,7 +906,7 @@ b
         String.raw`\begin{aligned}
 1_{\mathbb{C}}\cdot(a,b)
 &= (a,b)\cdot 1_{\mathbb{C}}
-&&(\because\ \text{上で示した積の可換律})\\
+&&(\because\ \blkref{complex_multiplication_is_commutative}\ (w \to 1_{\mathbb{C}},\ z \to (a,b)))\\
 &= (a,b)
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -1052,7 +1097,7 @@ z\cdot w
         String.raw`\begin{aligned}
 w\cdot z
 &= z\cdot w
-&&(\because\ \text{上で示した積の可換律})\\
+&&(\because\ \blkref{complex_multiplication_is_commutative})\\
 &= 1_{\mathbb{C}}
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -1123,7 +1168,9 @@ b
         math(String.raw`1_{\mathbb{C}}`),
         " を含み、各元が逆元をもつ。したがって ",
         math(String.raw`\mathbb{C}^{\times}`),
-        " は群をなす（積の可換律も示したので可換群である）。",
+        " は群をなす（",
+        ref("complex_multiplication_is_commutative"),
+        " により可換群である）。",
       ]),
       paragraph([
         "主張の最後の等式 ",
@@ -1161,6 +1208,7 @@ b
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の最後の行 (a − 0, 0 + b) = (a, b) は、体の公理でない a − 0 = a と和の単位元 0 + b = b を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_02_zero_factor_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: この証明の 7 行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、ℝ が体であることを述べる set_and_algebra_notation の参照と、使った形（積の単位元の鎖の最後の行は左から足す 0 + x = x の x → b、平方和の非負の鎖・a = b = 0 の平方和の鎖は 0 + x = x の x → 0、a² = 0 の鎖は x + 0 = x の x → a² を右辺から左辺へと 0 + x = x の x → −b²、閉性の恒等式は x + 0 = x、1_C の平方和の鎖は x + 0 = x の x → 1）の行に替えた。鎖の両端と段の数は不変。Lean の具体版は無い。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_03_additive_identity_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 積の単位元の鎖の (a·1 − b·0, a·0 + b·1) を消す行と、1_C の平方和の鎖の 1·1 を消す行が「ℝ では 1 は積の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x·1 = x の x → a, x → b と x → 1）の行にした。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の可換律」の段の鎖は ℂ の全元についての主張で、この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_commutative（このブロックの直前）の証明へ移した。この証明の中で可換律を使う 2 行（1_C·(a,b) = (a,b)·1_C と w·z = z·w）と結論の「可換群である」は、その主張の参照に替えた。",
       ],
     },
   },
@@ -1305,11 +1353,13 @@ b
 \end{aligned}`,
       ),
       paragraph([
-        "積のモノイド構造。積の結合律・可換律・単位元 ",
+        "積のモノイド構造。積の可換律は ",
+        ref("complex_multiplication_is_commutative"),
+        " である。積の結合律・単位元 ",
         math(String.raw`1_{\mathbb{C}}`),
         " の存在は ",
         ref("multiplicative_group_of_cc"),
-        " の「積の可換律」「積の結合律」「積の単位元」で示した",
+        " の証明の「積の結合律」「積の単位元」で示した",
         "（これらは ",
         math(String.raw`\mathbb{C}`),
         " の全元について成り立つ主張である）。",
@@ -1342,11 +1392,11 @@ b
         String.raw`\begin{aligned}
 \bigl((c,d)+(e,f)\bigr)\cdot(a,b)
 &= (a,b)\cdot\bigl((c,d)+(e,f)\bigr)
-&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の積の可換律})\\
+&&\bigl(\because\ \blkref{complex_multiplication_is_commutative}\ (w \to (c,d)+(e,f),\ z \to (a,b))\bigr)\\
 &= (a,b)\cdot(c,d)+(a,b)\cdot(e,f)
 &&(\because\ \text{上で示した左からの分配律})\\
 &= (c,d)\cdot(a,b)+(e,f)\cdot(a,b)
-&&(\because\ \blkref{multiplicative_group_of_cc}\ \text{の積の可換律を 2 箇所へ適用})
+&&\bigl(\because\ \blkref{complex_multiplication_is_commutative}\ (w \to (a,b),\ z \to (c,d)\ \text{と}\ w \to (a,b),\ z \to (e,f))\ \text{を 2 箇所へ適用}\bigr)
 \end{aligned}`,
       ),
       paragraph(["単位元と零元の相違。"]),
@@ -1399,6 +1449,7 @@ b
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の ((−1)a − 0, (−1)b + 0) = ((−1)a, (−1)b) の行は、体の公理でない a − 0 = a と和の単位元 x + 0 = x を「0 は和の単位元。2 箇所へ適用」1 つで束ねていたので、real_minus_zero_is_self（a → (−1)a。同じファイルの後ろのブロック）の参照の行と 0 は和の単位元の行の 2 行に割った。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 同じ鎖の最後の行 ((−1)a, (−1)b) = (−a, −b) は、−a が加法の逆元なのに「1 は積の単位元」だけで済ませていた（(−1)a = −(1·a) の段が無い）ので、real_minus_one_times_is_negation（a → a, a → b。同じファイルの後ろのブロック）の参照に替えた。鎖の両端は不変。Lean の具体版は無い。数値検証: sagemath/check/114_complex_numbers_form_a_field/check_02_negation_rows.sage。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 右からの分配律の鎖は multiplicative_group_of_cc の積の可換律を 0_ℂ になりうる元 (c,d)+(e,f) に当てていたが、その主張は「ℂ^× は群をなす」だけで、ℂ の全元についての可換律は証明の中の段にしか無かった。新しく足した主張 complex_multiplication_is_commutative の参照と代入の行に替え、積のモノイド構造の段落も可換律はその主張を引く形にした。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 加法の単位元の鎖の (a + 0, b + 0) を消す行と、−z と (−1_C)·z の一致の鎖の (−1)b + 0 を消す行が「ℝ では 0 は和の単位元」を参照なしで根拠にしていたので、set_and_algebra_notation の参照と使った形（x + 0 = x の x → a, x → b と x → (−1)b）の行にした。式・鎖の両端・段数は不変。",
       ],
     },
