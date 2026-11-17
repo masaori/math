@@ -282,9 +282,9 @@ theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
       = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `def_imaginary_unit` の `i := (0,1)`
     _ = (⟨0, -1⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                   -- 2 行目: `def_complex_conjugate`
-    _ = (⟨0, (-1) * 1⟩ : ℂ) := by rw [mul_one]    -- 3 行目: `1` は `ℝ` の乗法の単位元を右辺から左辺へ
+    _ = (⟨0, (-1) * 1⟩ : ℂ) := by rw [mul_one]    -- 3 行目: `1` は `ℝ` の乗法の単位元 `x * 1 = x`（`x → -1`）を右辺から左辺へ
     _ = (⟨0, (-1) * 1 + 0⟩ : ℂ) := by rw [add_zero]
-                                                  -- 4 行目: `0` は `ℝ` の加法の単位元を右辺から左辺へ
+                                                  -- 4 行目: `0` は `ℝ` の加法の単位元 `x + 0 = x`（`x → (-1) * 1`）を右辺から左辺へ
     _ = (⟨0 - 0, (-1) * 1 + 0⟩ : ℂ) := by rw [real_minus_zero_is_self 0]
                                                   -- 5 行目: `real_minus_zero_is_self`（`a → 0`）を右辺から左辺へ
     _ = (⟨(-1) * 0 - 0, (-1) * 1 + 0 * 0⟩ : ℂ) := by

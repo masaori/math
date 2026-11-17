@@ -3452,7 +3452,7 @@ s_1c_2
 &= \bigl(0,\ (-1)\cdot 1\bigr)
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \bigl(0,\ (-1)\cdot 1 + 0\bigr)
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to (-1)\cdot 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \bigl(0 - 0,\ (-1)\cdot 1 + 0\bigr)
 &&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1)\cdot 0 - 0,\ (-1)\cdot 1 + 0\cdot 0\bigr)
@@ -3898,6 +3898,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の最後の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p22)）: (4) の主の鎖の 0/2 = 0 の行（real_zero_divided_is_zero、x → 2）の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式と主張は不変。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: (5) の主の鎖の根拠「準備の cos(π/2) = 0」「準備の sin(π/2) = 1」が証明の中の準備を指していたので、準備の第五の 2 本の鎖を主張 sine_of_half_pi_is_one・cosine_of_half_pi_is_zero（020_critical_point.ts）へ移し、2 行の根拠をその参照にした。準備の第五は 2 本の鎖だけだったので段落ごと外した。式の両端と主張は不変。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38i4)）: 「第二に」の \\bar i の鎖の 4 行目 (−1)·1 = (−1)·1 + 0 で、ℝ の加法の単位元を set_and_algebra_notation で引く根拠に使った形と代入が書かれていなかったので、009_eigenvalues_of_V.ts の同じ鎖と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした（x + 0 = x の x → (−1)·1 を右辺から左辺へ）。式・鎖の両端・段数は不変。",
       ],
     },
   },
