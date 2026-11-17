@@ -2621,6 +2621,70 @@ a^{-1} \neq 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_less_than_is_asymmetric",
+    kind: "claim",
+    title: { text: "実数の狭義の順序は非対称" },
+    labels: ["real_less_than_is_asymmetric"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " とする。順序 ",
+        math(String.raw`\leq`),
+        "・",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`x < y`),
+        " は ",
+        math(String.raw`x \leq y`),
+        " かつ ",
+        math(String.raw`x \neq y`),
+        " のこと）である。",
+        math(String.raw`a < b`),
+        " ならば、",
+        math(String.raw`b < a`),
+        " は成り立たない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`b < a`),
+        " と仮定する。",
+        math(String.raw`a < b`),
+        " の定義から ",
+        math(String.raw`a \leq b`),
+        " と ",
+        math(String.raw`a \neq b`),
+        "、",
+        math(String.raw`b < a`),
+        " の定義から ",
+        math(String.raw`b \leq a`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a
+&= b
+&&\bigl(\because\ a \leq b\ \text{と}\ b \leq a\ \text{に、}\mathbb{R}\ \text{の順序の反対称律（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）を当てる}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`a \neq b`),
+        " に反する。よって ",
+        math(String.raw`b < a`),
+        " は成り立たない。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。狭義の順序の非対称律は順序体の公理に含まれないのに、trace_of_epsilon_V_plus_via_check_eigenvalues の Step 7 の ȟ = −1 の背理が「r < 0 となり r > 0 に反する」を散文だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_less_than_is_asymmetric（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealLessThanIsAsymmetric.lean）、必要十分版は Ising2D.NecSuf.not_lt_of_lt_of_antisymm（NecSuf/NotLtOfLtOfAntisymm.lean）。数値検証: sagemath/check/real_less_than_is_asymmetric/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_complex_zero_times_is_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },

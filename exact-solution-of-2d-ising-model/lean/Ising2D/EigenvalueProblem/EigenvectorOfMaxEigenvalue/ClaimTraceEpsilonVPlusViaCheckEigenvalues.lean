@@ -31,7 +31,7 @@
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`w̌_μ^{(e)}` の `e` を ℝ の `1`・`0` へ付け替える運ぶ段が 1 つある。必要十分版は置かない） |
 | Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`（1〜6 行目。Step 7 の `⟸` が引く）・`VPlusData.trace_epsilon_mul_V_step5`（それに 7・8 行目を続けた全体。同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 6 の 5 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`sinh(γ(θ̃_μ)/2) > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.sinh_gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・3・5 本目は同じ行の calc（3 本目は 1 段）、2 本目は `cosh_sinh_basic_properties` (3) の適用 1 つ、4 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ（どちらも人手で 1 行）。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
-| Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 4 行の鎖 `(r,0) = r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ = (ȟϰ,0)` と成分の比較、`ȟ = −1` の背理の 4 行、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 3 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
+| Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 2 行の鎖 `r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、`ȟ = −1` の背理の 4 行（1 行目は `inclusion_rr_to_cc_is_injective`）と `real_less_than_is_asymmetric` による矛盾、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 2 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -48,6 +48,8 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealLessThanIsAsymmetric
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfPositiveIsNegative
@@ -685,44 +687,42 @@ theorem trace_pos_of_eta_univ_eq_one_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D
       _ = ((D.traceFactor : ℝ) : ℂ) := one_mul _⟩      -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
 
 /-- **原文 Step 7** の `⟸`: `tr(εV^{(+)}) = r_ℂ`（`r ∈ ℝ_{>0}`）なら
-`(r, 0) = r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ = (ȟϰ, 0)`、成分の比較で `r = ȟϰ`、
-`ȟ = −1` と仮定すると `r = ȟϰ = (−1)ϰ = −ϰ < 0` で `r > 0` に反するので `ȟ = 1`、
+`r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、
+`ȟ = −1` と仮定すると `r = ȟϰ = (−1)ϰ = −ϰ < 0`（1 行目は `inclusion_rr_to_cc_is_injective`）で、
+`r > 0` に `real_less_than_is_asymmetric` を当てた「`r < 0` ではない」に反するので `ȟ = 1`、
 `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ`（人手の `M_col` が Lean の `r + 1`、人手の `r` が Lean の `s`）。 -/
 theorem eta_univ_eq_one_of_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F)
     (htr : ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ)) :
     F.eta Finset.univ = 1 := by
   obtain ⟨s, hs, hst⟩ := htr
-  have hpair : (⟨s, 0⟩ : ℂ) = ⟨F.checkH * D.traceFactor, 0⟩ :=
-    calc (⟨s, 0⟩ : ℂ)
-        = (s : ℂ) := rfl                                -- `inclusion_rr_to_cc` の定義を右辺から左辺へ
-      _ = (epsilon (r + 1) * D.V).trace := hst.symm     -- `r` の取り方
+  have hinc : (s : ℂ) = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
+    calc (s : ℂ)
+        = (epsilon (r + 1) * D.V).trace := hst.symm     -- `r` の取り方
       _ = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
           D.trace_epsilon_mul_V_step5_rows_one_to_six   -- Step 5 の鎖の 1 行目から 6 行目
-      _ = ⟨F.checkH * D.traceFactor, 0⟩ := rfl          -- `inclusion_rr_to_cc` の定義
-  -- `definition_of_cc` の `ℂ = ℝ × ℝ` の元の等号は成分ごと
-  have hcomp : s = F.checkH * D.traceFactor := (Complex.ext_iff.mp hpair).1
   have hH : F.checkH = 1 := by
     rcases F.checkH_mem with h1 | hm1
     · exact h1
-    · -- `ȟ = −1` と仮定すると `r < 0` となり `r > 0` に反する
+    · -- `ȟ = −1` と仮定すると `r < 0` となり、`r > 0` に `real_less_than_is_asymmetric` を当てた「`r < 0` ではない」に反する
       exfalso
       have hneg : s < 0 :=
         calc s
-            = F.checkH * D.traceFactor := hcomp          -- 直前の成分の比較
+            = F.checkH * D.traceFactor := inclusion_rr_to_cc_is_injective hinc
+                                                        -- 直前の鎖に `inclusion_rr_to_cc_is_injective`（`a → r`, `b → ȟϰ`）を当てる
           _ = (-1) * D.traceFactor := by rw [hm1]        -- 仮定 `ȟ = −1`
           _ = -D.traceFactor := real_minus_one_times_is_negation _
                                                         -- `real_minus_one_times_is_negation`（`a → ϰ`）
           _ < 0 := real_negation_of_positive_is_negative _ D.traceFactor_pos_step6
                                                         -- `real_negation_of_positive_is_negative`（`a → ϰ`）に (2) の `ϰ > 0` を当てる
-      exact lt_asymm hs hneg
+      exact real_less_than_is_asymmetric 0 s hs hneg    -- `real_less_than_is_asymmetric`（`a → 0`, `b → r`）
   calc F.eta Finset.univ
       = ((F.checkH : ℝ) : ℂ) := F.checkH_ofReal.symm    -- `ȟ` の取り方
     _ = 1 := by rw [hH, Complex.ofReal_one]             -- `ȟ = 1` と `inclusion_rr_to_cc` の略記
 
 /-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (3)**: `η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`
 （人手の `M_col` が Lean の `r + 1`）。必要十分版は置かない。Step 7 の鎖が新しく効かせるのは、
-`inclusion_rr_to_cc` の定義、`ℂ = ℝ × ℝ` の元の等号が成分ごとであること、`ȟ ∈ {1,−1}`、ℝ の順序環としての規則
-（`(−1)a = −a`（`real_minus_one_times_is_negation`）、`a > 0` なら `−a < 0`（`real_negation_of_positive_is_negative`）、狭義順序の非対称律）だけで、ℝ の完備性は効かない。しかし引く (1)・(2) の主張が
+`inclusion_rr_to_cc` の定義とその単射性（`inclusion_rr_to_cc_is_injective`）、`ȟ ∈ {1,−1}`、ℝ の順序環としての規則
+（`(−1)a = −a`（`real_minus_one_times_is_negation`）、`a > 0` なら `−a < 0`（`real_negation_of_positive_is_negative`）、狭義順序の非対称律（`real_less_than_is_asymmetric`））だけで、ℝ の完備性は効かない。しかし引く (1)・(2) の主張が
 `ϰ ∈ ℝ` と `ℝ ⊂ ℂ` の包含に固定されていて、この鎖だけを順序環へ持ち上げても (1)・(2) を当てられないので、置かない。 -/
 theorem eta_univ_eq_one_iff_trace_pos_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     F.eta Finset.univ = 1 ↔ ∃ s : ℝ, 0 < s ∧ (epsilon (r + 1) * D.V).trace = (s : ℂ) :=

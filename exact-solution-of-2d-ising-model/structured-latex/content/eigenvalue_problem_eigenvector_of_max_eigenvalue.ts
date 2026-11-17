@@ -1916,24 +1916,15 @@ P_{k+1}\check{Q}_\epsilon
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(r, 0)
-&= r_{\mathbb{C}}
-&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の定義を右辺から左辺へ}\bigr)\\
+r_{\mathbb{C}}
 &= \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
 &&\bigl(\because\ r\ \text{の取り方}\bigr)\\
 &= \left(\check{h}\varkappa\right)_{\mathbb{C}}
-&&\bigl(\because\ \text{Step 5 の鎖の 1 行目から 6 行目}\bigr)\\
-&= \left(\check{h}\varkappa, 0\right)
-&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の定義}\bigr)
+&&\bigl(\because\ \text{Step 5 の鎖の 1 行目から 6 行目}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        ref("definition_of_cc"),
-        " の ",
-        math(String.raw`\mathbb{C} = \mathbb{R}\times\mathbb{R}`),
-        " の元の等号は成分ごとなので ",
-        math(String.raw`r = \check{h}\varkappa`),
-        " である。",
+        "である。",
         math(String.raw`\check{h} = -1`),
         " と仮定すると",
       ]),
@@ -1941,7 +1932,7 @@ P_{k+1}\check{Q}_\epsilon
         String.raw`\begin{aligned}
 r
 &= \check{h}\varkappa
-&&\bigl(\because\ \text{直前の成分の比較}\bigr)\\
+&&\bigl(\because\ \text{直前の鎖の}\ r_{\mathbb{C}} = \left(\check{h}\varkappa\right)_{\mathbb{C}}\ \text{に}\ \blkref{inclusion_rr_to_cc_is_injective}\ (a \to r,\ b \to \check{h}\varkappa)\ \text{を当てる}\bigr)\\
 &= (-1)\varkappa
 &&\bigl(\because\ \text{仮定}\ \check{h} = -1\bigr)\\
 &= -\varkappa
@@ -1951,9 +1942,15 @@ r
 \end{aligned}`,
       ),
       paragraph([
-        "となり ",
+        "となる。これは ",
         math(String.raw`r > 0`),
-        " に反する。",
+        " に ",
+        ref("real_less_than_is_asymmetric"),
+        "（",
+        math(String.raw`a \to 0,\ b \to r`),
+        "）を当てた「",
+        math(String.raw`r < 0`),
+        " は成り立たない」に反する。",
         math(String.raw`\check{h} \in \{1,-1\}`),
         " なので ",
         math(String.raw`\check{h} = 1`),
@@ -1982,6 +1979,7 @@ r
         "2026-11-16: Step 6 の 5 本目の鎖の 2 行目の名前だけの根拠「ℝ で a > 0, b > 0 なら ab > 0」を、1・3 本目の鎖と同じ「ℝ で正の数どうしの積は正（ℝ は順序体 set_and_algebra_notation）」の参照にした。当てる 2 つの事実（def_second_transfer_matrix_prefactor の (2sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} と直前の鎖）と、鎖の両端・主張は変えていない。",
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 3 行目の名前だけの根拠「ℝ で (−1)a = −a（a → ϰ）」を real_minus_one_times_is_negation（a → ϰ）の参照にした。式と主張は変えていない。",
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 4 行目の名前だけの根拠「ℝ で a > 0 なら −a < 0（a → ϰ）」を、新しく足した real_negation_of_positive_is_negative（a → ϰ）の参照にした。当てる (2) の ϰ > 0 と、式・主張は変えていない。",
+        "2026-11-17: Step 7 の ⟸ の散文の根拠 2 つを参照にした。「ℂ = ℝ×ℝ の元の等号は成分ごとなので r = ȟϰ」は、鎖を r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ の 2 行にし（両端の (r,0)・(ȟϰ,0) への書き換えの 2 行は要らなくなった）、背理の鎖の 1 行目の根拠を inclusion_rr_to_cc_is_injective（a → r, b → ȟϰ）にした。「r > 0 に反する」は、新しく足した real_less_than_is_asymmetric（a → 0, b → r）を当てた「r < 0 は成り立たない」に反する、とした。主張は変えていない。",
       ],
     },
   },

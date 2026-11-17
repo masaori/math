@@ -3,11 +3,11 @@
 #         2sinh(γ(θ̃_μ)/2) > 0（0 < 2 と直前の鎖に正の数どうしの積）、
 #         Π_μ 2sinh(γ(θ̃_μ)/2) > 0（finite_product_of_positive_reals_is_positive。有限積は左から畳み込み、各段が正）、
 #         ϰ = C Π_μ 2sinh(γ(θ̃_μ)/2) > 0（C ∈ ℝ_{>0} と、ℝ で正の数どうしの積は正（順序体））。
-# Step 7: η = +1 なら tr(εV) = 1_Cϰ_C = ϰ_C。逆に tr(εV) = r_C（r > 0）なら (r, 0) = r_C = (ȟϰ)_C = (ȟϰ, 0) から r = ȟϰ で、
-#         ȟ = −1 なら r = ȟϰ = (−1)ϰ = −ϰ < 0 の鎖となり矛盾、よって ȟ = 1、η = ȟ_C = 1_C。
+# Step 7: η = +1 なら tr(εV) = 1_Cϰ_C = ϰ_C。逆に tr(εV) = r_C（r > 0）なら r_C = tr(εV) = (ȟϰ)_C で、
+#         ȟ = −1 なら r = ȟϰ = (−1)ϰ = −ϰ < 0 の鎖（1 段目は inclusion_rr_to_cc_is_injective）となり、r > 0 に real_less_than_is_asymmetric（a → 0、b → r）を当てた「r < 0 ではない」と矛盾、よって ȟ = 1、η = ȟ_C = 1_C。
 # 球の部: γ(θ̃_μ)・sinh・C の値は ℝ への脱出なので RealBallField(512) の球で、不等号は球の全体が満たすこと、等号は重なりと半径で確かめる。
 #   結合定数は有理数の (K_1, K_2) の 4 組と (2 log y, log x) の 3 組、M_col = 2..6。
-# Step 7 の包含は ℂ = QQ(i) の厳密な部でも確かめる（r_C := r + 0i、(r, 0) = (s, 0) ⟺ r = s）。ȟ ∈ {1, −1} の両方で、
+# Step 7 の包含は ℂ = QQ(i) の厳密な部でも確かめる（r_C := r + 0i、r_C = s_C ⟹ r = s は第 1 成分で読む）。ȟ ∈ {1, −1} の両方で、
 #   r := ȟϰ（ϰ は Step 6 の球の中心に近い有理数で、正であることを確かめたもの）が正になるのは ȟ = 1 のときだけであることを見る。
 load("_prelude.sage")
 
@@ -57,12 +57,13 @@ for (K1, K2) in PARAMS:
             if h == 1:
                 assert Ci(1) * Ci(kq) == Ci(kq)
             else:
-                r = tr_val.list()[0]
+                r = tr_val.list()[0]                                    # r_C = (ȟϰ)_C の第 1 成分（inclusion_rr_to_cc_is_injective、a → r、b → ȟϰ）
                 lines7 = [r, h * kq, (-1) * kq, -kq]                    # r = ȟϰ = (−1)ϰ = −ϰ（3 段目は real_minus_one_times_is_negation、a → ϰ）
                 for x, y in zip(lines7, lines7[1:]):
                     assert x == y
                     count += 1
                 assert lines7[-1] < 0                                   # −ϰ < 0（real_negation_of_positive_is_negative、a → ϰ、に ϰ > 0 を当てる）
+                assert not (0 < r)                                      # r < 0 と r > 0 は両立しない（real_less_than_is_asymmetric、a → 0、b → r）
             count += 2
         # 否定コントロール: ϰ の sinh の引数に −γ を入れると M_col が奇数のとき負
         if M % 2 == 1:

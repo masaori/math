@@ -3009,6 +3009,9 @@ targets=(
   Ising2D.real_negation_of_positive_is_negative
   Ising2D.NecSuf.neg_lt_zero_of_zero_lt
   Ising2D.real_negation_of_positive_is_negative_of_necSuf
+  Ising2D.real_less_than_is_asymmetric
+  Ising2D.NecSuf.not_lt_of_lt_of_antisymm
+  Ising2D.real_less_than_is_asymmetric_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products
