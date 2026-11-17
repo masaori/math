@@ -47532,6 +47532,65 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_quadratic_field_subfield",
+              focus: {
+                id: "zero_pinching_claim_quadratic_field_set_is_subfield",
+                kind: "claim",
+                title: { text: "二次体の台集合は代数的数の部分体である" },
+                labels: ["claim_quadratic_field_set_is_subfield"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/quadratic-field-subfield"],
+                lean: [
+                  "Ising2DLambda.FisherZero.quadraticFieldSubfield",
+                  "Ising2DLambda.NecSuf.FisherZero.carrier_isSubfield_necSuf",
+                  "Ising2DLambda.FisherZero.quadraticFieldSubfield_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "有理数の包含を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                    " とする（", ref("def_algebraic_numbers"), "）。",
+                    math(String.raw`s\in\overline{\mathbb Q}`), " は ",
+                    math(String.raw`s\cdot s=\iota(2)`), " を満たすとする（",
+                    ref("claim_sqrt_two_exists"), "）。このとき ",
+                    math(String.raw`Q_s\subseteq\overline{\mathbb Q}`), "（",
+                    ref("def_quadratic_field_set"), "）は、",
+                    math(String.raw`\overline{\mathbb Q}`), " の零元と単位元を含み、",
+                    "加法・加法逆元・乗法・非零元の逆元で閉じる部分体である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph(["まず、単位元の所属を有理係数の表示で示す。"]),
+                  displayMath(String.raw`\begin{aligned}
+1_{\overline{\mathbb Q}}
+&=\iota(1_{\mathbb Q})
+&&\bigl(\because\ \iota\text{ は単位元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(1_{\mathbb Q})+0_{\overline{\mathbb Q}}
+&&\bigl(\because\ \text{加法の単位元}\bigr)\\
+&=\iota(1_{\mathbb Q})+0_{\overline{\mathbb Q}}s
+&&\bigl(\because\ \text{零元との積}\bigr)\\
+&=\iota(1_{\mathbb Q})+\iota(0_{\mathbb Q})s
+&&\bigl(\because\ \iota\text{ は零元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ (1_{\mathbb Q},0_{\mathbb Q})\in\mathbb Q\times\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "零元は ", ref("claim_quadratic_zero_mem"), "、加法逆元は ",
+                    ref("claim_quadratic_negation_mem"), "、加法は ",
+                    ref("claim_quadratic_addition_mem"), "、乗法は ",
+                    ref("claim_quadratic_multiplication_mem"), "、非零元の逆元は ",
+                    ref("claim_quadratic_inverse_mem"), " からそれぞれ閉じる。",
+                    "体 ", math(String.raw`\overline{\mathbb Q}`),
+                    " の四則を制限したものが部分体の演算である。",
+                    "実数体と複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

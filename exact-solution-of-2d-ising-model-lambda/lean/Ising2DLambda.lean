@@ -741,6 +741,9 @@ import Ising2DLambda.FisherZero.CoveringPreconePositiveConeFromNecSuf
 import Ising2DLambda.FisherZero.QuadraticInverse
 import Ising2DLambda.NecSuf.FisherZero.QuadraticInverse
 import Ising2DLambda.FisherZero.QuadraticInverseFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticFieldSubfield
+import Ising2DLambda.NecSuf.FisherZero.QuadraticFieldSubfield
+import Ising2DLambda.FisherZero.QuadraticFieldSubfieldFromNecSuf
 import Ising2DLambda.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrder
 import Ising2DLambda.FisherZero.RealAlgebraicOrderFromNecSuf
