@@ -39,10 +39,20 @@ theorem positiveWeightedSquareSums_isSubfieldPrecone (F E : Subfield Qbar) (CF :
     IsSubfieldPrecone F E CF (positiveWeightedSquareSums E CF) := by
   have h1 : (1 : Qbar) ∈ CF := one_mem_of_isSubfieldPositiveCone F CF hCF
   refine ⟨hFE, hCF, ?_, ?_, ?_, ?_, ?_⟩
-  · -- E への包含: 各項 c i * (y i * y i) が E の元
+  · -- E への包含: 各項 c i * (y i * y i) が E の元（本文の三行）で、
+    -- E は零元を含み和で閉じるので、添字の有限集合の元の個数についての帰納法で和も E の元
     rintro z ⟨ι, _, c, y, hc, hy, rfl⟩
-    exact sum_mem fun i _ =>
+    have hterm : ∀ i, c i * (y i * y i) ∈ E := fun i =>
       E.mul_mem (hFE _ (hCF.subset _ (hc i))) (E.mul_mem (hy i) (hy i))
+    have key : ∀ s : Finset ι, ∑ i ∈ s, c i * (y i * y i) ∈ E := by
+      intro s
+      classical
+      induction s using Finset.induction_on with
+      | empty => rw [Finset.sum_empty]; exact E.zero_mem
+      | insert a s ha ih =>
+        rw [Finset.sum_insert ha]
+        exact E.add_mem (hterm a) ih
+    exact key Finset.univ
   · -- 和で閉じること: 添字集合を互いに素な和 ι ⊕ κ に取る
     rintro z1 z2 ⟨ι, _, c, y, hc, hy, rfl⟩ ⟨κ, _, d, w, hd, hw, rfl⟩
     refine ⟨ι ⊕ κ, inferInstance, Sum.elim c d, Sum.elim y w, ?_, ?_, ?_⟩
