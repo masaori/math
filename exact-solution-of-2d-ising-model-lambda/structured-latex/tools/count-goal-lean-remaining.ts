@@ -9,6 +9,9 @@
  * - Lean の無いもの: 閉包の中で `lean` の対応先を持たない定義・主張・定理・注意。
  * - 必要十分版に頼る具体版: 閉包の中で、`lean` の対応先が例外の台帳
  *   `lean/concrete-necsuf-delegations.txt` に載っているブロック。
+ * - 存在の義務: 到達点の Lean 具体版が引数で受け取る構造（例: 実閉部分体のデータ）の存在を示す主張。
+ *   結論がその構造に依らない定理でも、構造が一つも作られていなければ条件付きの主張にとどまるので、
+ *   到達点と同じく閉包の起点にする。主張が本文に無ければ、Lean の無いもの 1 件として数える。
  * - 着手できるもの: Lean の無いもののうち、直接の依存に Lean の無いものが一つも無いもの。
  * - 最長の鎖: Lean の無いものだけを辿る依存の最長の列。積み上げを一本で進める限り、
  *   残りはこの長さの回数より早くは終わらない。
@@ -29,6 +32,15 @@ export const GOAL_TARGETS = [
   "claim_onsager_hyperbolic_integral_form",
   "claim_dispersion_minimum_self_dual_point",
   "claim_determinant_square_root_torus_formula",
+] as const;
+
+/**
+ * 到達点の Lean 具体版が引数で受け取り、本文が「既知」として存在を引くだけの構造の存在を示す主張。
+ * `periodicFreeEnergyDensity_eq_dispersionIntegral` ほか到達点の具体版は `RealClosedSubfieldData` を
+ * 引数に取るが、その値を作る主張は本文にも Lean にも無い（2026-11-17 の研究管理が確かめた）。
+ */
+export const EXISTENCE_OBLIGATIONS = [
+  { label: "claim_real_closed_subfield_exists", title: "実閉部分体と虚数単位の組は存在する" },
 ] as const;
 
 const COUNTED_KINDS = new Set(["definition", "claim", "theorem", "remark"]);
@@ -78,6 +90,16 @@ for (const target of GOAL_TARGETS) {
 }
 const closure = new Set<Block>();
 const queue = GOAL_TARGETS.map((target) => byLabel.get(target) as Block);
+for (const obligation of EXISTENCE_OBLIGATIONS) {
+  const block = byLabel.get(obligation.label);
+  if (block !== undefined) queue.push(block);
+  else {
+    // 本文にまだ無い主張は、依存の無い Lean の無いもの 1 件として閉包へ入れる。
+    const placeholder: Block = { id: obligation.label, kind: "claim", title: { text: `（本文に未作成）${obligation.title}` }, labels: [obligation.label] };
+    dependencies.set(placeholder, []);
+    queue.push(placeholder);
+  }
+}
 while (queue.length > 0) {
   const block = queue.pop() as Block;
   if (closure.has(block)) continue;
