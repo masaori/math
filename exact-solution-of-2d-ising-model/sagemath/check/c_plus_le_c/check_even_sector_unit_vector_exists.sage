@@ -152,15 +152,15 @@ for M in [1, 2, 3, 4, 5]:
         rpow(two, M) * (rpow(r, M) * rpow(r, M)),             # square_of_real_number_is_product（r → (1/√2)^M）
         rpow(two, M) * rpow(r * r, M),                        # product_of_real_powers_is_power_of_product
         rpow(two, M) * rpow((AA(1) * s2_inv) * (AA(1) * s2_inv), M),   # def_real_quotient（y → 1、z → √2 ≠ 0）を 2 つの因子へ
-        rpow(two, M) * rpow(s2_inv * s2_inv, M),              # 1 は ℝ の乗法の単位元の 1·x = x（x → √2^{-1}）を 2 つの因子へ
+        rpow(two, M) * rpow(s2_inv * s2_inv, M),              # 1 は ℝ の乗法の単位元 1·x = x（x → √2^{-1}）（set_and_algebra_notation）を 2 つの因子へ
         rpow(two, M) * rpow(s2s2_inv, M),                     # real_product_of_inverses_is_inverse_of_product（a, b → √2）
-        rpow(two, M) * rpow(AA(1) * s2s2_inv, M),             # 1·x = x（x → (√2√2)^{-1}）を右辺から左辺へ
+        rpow(two, M) * rpow(AA(1) * s2s2_inv, M),             # 1 は ℝ の乗法の単位元 1·x = x（x → (√2√2)^{-1}）（set_and_algebra_notation）を右辺から左辺へ
         rpow(two, M) * rpow(1 / (s2 * s2), M),                # def_real_quotient（y → 1、z → √2√2 ≠ 0）を右辺から左辺へ
         rpow(two, M) * rpow(1 / sq(s2), M),                   # square_of_real_number_is_product（r → √2）を右辺から左辺へ
         rpow(two, M) * rpow(1 / two, M),                      # definition_of_sqrt_r_positive の y^2 = x（x → 2）
         rpow(two * (1 / two), M),                             # product_of_real_powers_is_power_of_product
         rpow(two * (AA(1) * two_inv), M),                     # def_real_quotient（y → 1、z → 2_ℝ ≠ 0）
-        rpow(two * two_inv, M),                               # 1 は ℝ の乗法の単位元の 1·x = x（x → 2_ℝ^{-1}）
+        rpow(two * two_inv, M),                               # 1 は ℝ の乗法の単位元 1·x = x（x → 2_ℝ^{-1}）（set_and_algebra_notation）
         rpow(AA(1), M),                                       # def_real_quotient の乗法の逆元 z z^{-1} = 1_ℝ（z → 2_ℝ ≠ 0）
         AA(1),                                                # power_of_real_one_is_one
     ]
@@ -182,7 +182,7 @@ for M in [1, 2, 3, 4, 5]:
     assert AA(0) <= norm and AA(0) != norm and norm > 0   # x < y は x ≤ y かつ x ≠ y（x → 0、y → ‖x‖）で ‖x^{(+)}‖ ∈ ℝ_{>0}
     assert AA(0) < AA(1)                                  # real_zero_less_than_one より 1 ∈ ℝ_{>0}
     # ‖x^{(+)}‖^2 = 1 = 1·1 = 1^2 の 3 行の鎖と positive_real_square_injective（a → ‖x‖、b → 1）
-    rows1 = [sq(norm), AA(1), AA(1) * AA(1), sq(AA(1))]  # 2 つ目の等号は 1 は ℝ の乗法の単位元（set_and_algebra_notation）の 1·1 = 1 を右辺から左辺へ、
+    rows1 = [sq(norm), AA(1), AA(1) * AA(1), sq(AA(1))]  # 2 つ目の等号は 1 は ℝ の乗法の単位元 1·x = x（x → 1）（set_and_algebra_notation）を右辺から左辺へ、
                                                           # 最後の等号は square_of_real_number_is_product（r → 1）を右辺から左辺へ
     for u, w in zip(rows1, rows1[1:]):
         assert u == w

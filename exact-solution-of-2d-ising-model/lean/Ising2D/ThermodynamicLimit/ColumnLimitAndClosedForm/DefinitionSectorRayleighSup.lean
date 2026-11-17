@@ -237,13 +237,13 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
                           -- `def_real_quotient`（`y → 1`、`z → √2 ≠ 0`）を 2 つの因子へ同時に適用
     _ = (2 : ℝ) ^ (n + 1) * ((Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹) ^ (n + 1) := by
         rw [one_mul]
-                          -- `1` は ℝ の乗法の単位元の `1·x = x`（`x → √2^{-1}`）を 2 つの因子へ同時に適用
+                          -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → √2^{-1}`）（`set_and_algebra_notation`）を 2 つの因子へ同時に適用
     _ = (2 : ℝ) ^ (n + 1) * ((Real.sqrt 2 * Real.sqrt 2)⁻¹) ^ (n + 1) := by
         rw [real_product_of_inverses_is_inverse_of_product _ _ hs2ne hs2ne]
                           -- `real_product_of_inverses_is_inverse_of_product`（`a, b → √2`）
     _ = (2 : ℝ) ^ (n + 1) * (1 * (Real.sqrt 2 * Real.sqrt 2)⁻¹) ^ (n + 1) := by
         rw [one_mul]
-                          -- `1·x = x`（`x → (√2√2)^{-1}`）を右辺から左辺へ
+                          -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → (√2√2)^{-1}`）（`set_and_algebra_notation`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / (Real.sqrt 2 * Real.sqrt 2)) ^ (n + 1) := by
         rw [div_eq_mul_inv]
                           -- `def_real_quotient`（`y → 1`、`z → √2√2 ≠ 0`）を右辺から左辺へ
@@ -261,7 +261,7 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
                           -- `def_real_quotient`（`y → 1`、`z → 2_ℝ ≠ 0`）
     _ = (2 * 2⁻¹ : ℝ) ^ (n + 1) := by
         rw [one_mul]
-                          -- `1` は ℝ の乗法の単位元（`set_and_algebra_notation`）の `1·x = x`（`x → 2_ℝ^{-1}`）
+                          -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → 2_ℝ^{-1}`）（`set_and_algebra_notation`）
     _ = (1 : ℝ) ^ (n + 1) := by
         rw [mul_inv_cancel₀ h2ne]
                           -- `def_real_quotient` の乗法の逆元 `z z^{-1} = 1_ℝ`（`z → 2_ℝ ≠ 0`）
@@ -293,7 +293,7 @@ theorem vecNorm_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) = 1 := by
   have hsq : vecNorm (evenUnit (n + 1)) ^ 2 = (1 : ℝ) ^ 2 :=
     calc vecNorm (evenUnit (n + 1)) ^ 2
         = 1 := vecNorm_sq_evenUnit_succ n     -- 上のノルムの鎖
-      _ = 1 * 1 := (mul_one 1).symm           -- `1` は `ℝ` の乗法の単位元（`set_and_algebra_notation`）の `1 · 1 = 1` を右辺から左辺へ
+      _ = 1 * 1 := (one_mul 1).symm           -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → 1`）（`set_and_algebra_notation`）を右辺から左辺へ
       _ = (1 : ℝ) ^ 2 := (square_of_real_number_is_product 1).symm
                                               -- `square_of_real_number_is_product`（`r → 1`）を右辺から左辺へ
   exact (positive_real_square_injective hpos real_zero_less_than_one).mp hsq
