@@ -3888,7 +3888,9 @@ z^{n}
                           "この段が使っているのは、作用がスカラー倍を保つこと（",
                           ref("claim_qbar_action_smul"),
                           "）と、2 つのスカラー倍が交換できること（第 5 段から第 7 段の、結合則・可換性・結合則）の",
-                          "2 つだけである。前の主張（和で閉じること）が積の可換性を使わなかったのに対し、",
+                          "2 つだけである。固有空間が和で閉じる主張（",
+                          ref("claim_qbar_eigenspace_add"),
+                          "）が積の可換性を使わなかったのに対し、",
                           "この主張は ",
                           math(String.raw`c`),
                           " と ",
@@ -6514,7 +6516,18 @@ a+2b&=(a+b)+b
                 paragraph(["は全単射である。ここで右辺の積は有限集合を添字とする置換の組の集合であり、実数体・複素数体は使わない。"]),
               ],
               proof: [
-                paragraph(["任意の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`k\in\mathcal K`), " を取る。", math(String.raw`j\in\mathcal J_k`), " ならば ", math(String.raw`b(\sigma(j))=b(j)=k`), " なので制限 ", math(String.raw`\sigma_k:\mathcal J_k\to\mathcal J_k`), " が定まる。元の置換の単射性から制限も単射である。また ", math(String.raw`j\in\mathcal J_k`), " に対し ", math(String.raw`i:=\sigma^{-1}(j)`), " と置くと、", math(String.raw`b(i)=b(\sigma(i))=b(j)=k`), " だから制限は全射である。"]),
+                paragraph(["任意の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`k\in\mathcal K`), " を取る。", math(String.raw`j\in\mathcal J_k`), " ならば"]),
+                displayMath(String.raw`\begin{aligned}
+b(\sigma(j))&=b(j)&&\bigl(\because\ \sigma\in\operatorname{Perm}_b(\mathcal J)\bigr)\\
+&=k&&\bigl(\because\ j\in\mathcal J_k\bigr)
+\end{aligned}`),
+                paragraph(["なので制限 ", math(String.raw`\sigma_k:\mathcal J_k\to\mathcal J_k`), " が定まる。元の置換の単射性から制限も単射である。また ", math(String.raw`j\in\mathcal J_k`), " に対し ", math(String.raw`i:=\sigma^{-1}(j)`), " と置くと、"]),
+                displayMath(String.raw`\begin{aligned}
+b(i)&=b(\sigma(i))&&\bigl(\because\ \sigma\in\operatorname{Perm}_b(\mathcal J)\bigr)\\
+&=b(j)&&\bigl(\because\ i=\sigma^{-1}(j)\bigr)\\
+&=k&&\bigl(\because\ j\in\mathcal J_k\bigr)
+\end{aligned}`),
+                paragraph(["だから制限は全射である。"]),
                 paragraph(["任意の組 ", math(String.raw`(\tau_k)_{k\in\mathcal K}\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)`), " から、各 ", math(String.raw`j\in\mathcal J`), " に対して ", math(String.raw`\tau(j):=\tau_{b(j)}(j)`), " を定める。逆写像は ", math(String.raw`j\mapsto\tau_{b(j)}^{-1}(j)`), " である。各置換とその逆は同じファイバー上で作用するので、両合成は各 ", math(String.raw`j`), " を固定する。よって ", math(String.raw`\tau\in\operatorname{Perm}_b(\mathcal J)`), " である。"]),
                 paragraph(["この ", math(String.raw`\tau`), " を ", math(String.raw`\operatorname{Glue}((\tau_k)_k)`), " と書く。任意の ", math(String.raw`k\in\mathcal K`), " と ", math(String.raw`j\in\mathcal J_k`), " について"]),
                 displayMath(String.raw`\begin{aligned}
