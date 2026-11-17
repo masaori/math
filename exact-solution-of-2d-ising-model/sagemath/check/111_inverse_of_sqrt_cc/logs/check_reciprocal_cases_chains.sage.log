@@ -1,0 +1,3 @@
+=== inverse_of_sqrt_cc: 二つの場合の鎖と偏角の和の鎖 ===
+checks: 156, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS

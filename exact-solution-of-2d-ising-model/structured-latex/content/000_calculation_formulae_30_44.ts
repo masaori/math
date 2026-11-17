@@ -2713,7 +2713,7 @@ z
 &= 0+0
 &&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 1 の場合。}\blkref{range_of_args_of_reciprocal_of_complex_numbers})\\
 &= 0
-&&(\because\ \mathbb{R}\ \text{の和の計算})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "であり ",
@@ -2725,19 +2725,19 @@ z
       displayMath(String.raw`\begin{aligned}
 \sqrt{\frac{1}{z}}
 &= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
-&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ 1_{\mathbb{C}}\cdot w = w\ (w \to \sqrt{1/z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
-&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ w^{-1}w = 1_{\mathbb{C}}\ (w \to \sqrt{z}\text{。}\sqrt{z} \in \mathbb{C}^{\times}\ \text{は準備の第三}\text{、}1/\sqrt{z} = (\sqrt{z})^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
-&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律}\ (uv)w = u(vw)\ (u \to 1/\sqrt{z},\ v \to \sqrt{z},\ w \to \sqrt{1/z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\sqrt{z\cdot\frac{1}{z}}
-&&(\because\ \text{sqrt と積が可換になる条件の第 1 の場合})\\
+&&\bigl(\because\ \blkref{condition_of_commutativity_of_sqrt_and_product}\ \text{の第 1 の場合}\ (z_1 \to z,\ z_2 \to 1/z)\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\sqrt{1_{\mathbb{C}}}
-&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ ww^{-1} = 1_{\mathbb{C}}\ (w \to z\text{。}z \in \mathbb{C}^{\times}\ \text{は準備の第二}\text{、}1/z = z^{-1})\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}
 &&(\because\ \text{準備の第四})\\
 &= \frac{1}{\sqrt{z}}
-&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ w\cdot 1_{\mathbb{C}} = w\ (w \to 1/\sqrt{z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
@@ -2747,8 +2747,16 @@ z
 \arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
 &= \arg^{[0,2\pi)}(z)+\left(2\pi-\arg^{[0,2\pi)}(z)\right)
 &&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 2 の場合。}\blkref{range_of_args_of_reciprocal_of_complex_numbers})\\
+&= \arg^{[0,2\pi)}(z)+\left(2\pi+\left(-\arg^{[0,2\pi)}(z)\right)\right)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 2\pi,\ z \to \arg^{[0,2\pi)}(z))\bigr)\\
+&= \arg^{[0,2\pi)}(z)+\left(\left(-\arg^{[0,2\pi)}(z)\right)+2\pi\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to 2\pi,\ y \to -\arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(\arg^{[0,2\pi)}(z)+\left(-\arg^{[0,2\pi)}(z)\right)\right)+2\pi
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ x + (y + w) = (x + y) + w\ (x \to \arg^{[0,2\pi)}(z),\ y \to -\arg^{[0,2\pi)}(z),\ w \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0+2\pi
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2\pi
-&&(\because\ \mathbb{R}\ \text{の和の計算})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "であり ",
@@ -2760,23 +2768,23 @@ z
       displayMath(String.raw`\begin{aligned}
 \sqrt{\frac{1}{z}}
 &= 1_{\mathbb{C}}\cdot\sqrt{\frac{1}{z}}
-&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ 1_{\mathbb{C}}\cdot w = w\ (w \to \sqrt{1/z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(\frac{1}{\sqrt{z}}\cdot\sqrt{z}\right)\cdot\sqrt{\frac{1}{z}}
-&&(\because\ \text{準備の第三で取った}\ 1/\sqrt{z}\ \text{の定め方})\\
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ w^{-1}w = 1_{\mathbb{C}}\ (w \to \sqrt{z}\text{。}\sqrt{z} \in \mathbb{C}^{\times}\ \text{は準備の第三}\text{、}1/\sqrt{z} = (\sqrt{z})^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)
-&&(\because\ \mathbb{C}\ \text{の積の結合律})\\
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律}\ (uv)w = u(vw)\ (u \to 1/\sqrt{z},\ v \to \sqrt{z},\ w \to \sqrt{1/z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(-\left(-\left(\sqrt{z}\cdot\sqrt{\frac{1}{z}}\right)\right)\right)
-&&(\because\ -(-w)=w)\\
+&&\bigl(\because\ \blkref{double_negation_in_cc}\ (z \to \sqrt{z}\cdot\sqrt{1/z})\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{z\cdot\frac{1}{z}}\right)
-&&(\because\ \text{sqrt と積が可換になる条件の第 2 の場合})\\
+&&\bigl(\because\ \blkref{condition_of_commutativity_of_sqrt_and_product}\ \text{の第 2 の場合}\ (z_1 \to z,\ z_2 \to 1/z)\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(-\sqrt{1_{\mathbb{C}}}\right)
-&&(\because\ \text{準備の第二で取った}\ 1/z\ \text{の定め方})\\
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ ww^{-1} = 1_{\mathbb{C}}\ (w \to z\text{。}z \in \mathbb{C}^{\times}\ \text{は準備の第二}\text{、}1/z = z^{-1})\bigr)\\
 &= \frac{1}{\sqrt{z}}\cdot\left(-1_{\mathbb{C}}\right)
 &&(\because\ \text{準備の第四})\\
 &= -\left(\frac{1}{\sqrt{z}}\cdot 1_{\mathbb{C}}\right)
-&&(\because\ \mathbb{C}\ \text{の積と符号の関係}\ a\cdot(-b)=-(a\cdot b))\\
+&&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to 1/\sqrt{z},\ w \to 1_{\mathbb{C}})\bigr)\\
 &= -\frac{1}{\sqrt{z}}
-&&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ w\cdot 1_{\mathbb{C}} = w\ (w \to 1/\sqrt{z})\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -2808,6 +2816,7 @@ z
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: φ_polar(1_C) の鎖の名前だけの根拠「ℝ で a + 0 = a（a → 1）」を set_and_algebra_notation の加法の単位元の参照に替え、0/1 = 0 の行の 1 ≠ 0 に体の公理 0 ≠ 1（set_and_algebra_notation）の根拠を付けた。√(1_C) の鎖の「ℝ で 1·x = x を 2 箇所へ」を set_and_algebra_notation の乗法の単位元の参照に替えた。式は不変。0/2 = 0 の行の 2 ≠ 0 は ℝ の 2 を定めるブロックを決める件で扱う。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: √(1_C) の鎖の 0/2 = 0 の行の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
+        "2026-11-17（Lean の通しの証明のゴールラインの確認）: 二つの場合の鎖の名前だけの根拠を参照に替えた。「1_C は C の積の単位元」4 行と「C の積の結合律」2 行を complex_numbers_form_a_field の参照（使った形と代入つき）に、「準備の第三で取った 1/√z の定め方」「準備の第二で取った 1/z の定め方」各 2 行を multiplicative_group_of_cc の逆元（w^{-1}w = 1_C の w → √z、ww^{-1} = 1_C の w → z）に、「sqrt と積が可換になる条件の第 1・第 2 の場合」を condition_of_commutativity_of_sqrt_and_product（z_1 → z、z_2 → 1/z）を右辺から左辺へに、「-(-w)=w」を double_negation_in_cc に、「C の積と符号の関係」を complex_times_negation_is_negation_of_product_in_cc（z → 1/√z、w → 1_C）にした。偏角の和の「ℝ の和の計算」2 行のうち 0 + 0 = 0 を set_and_algebra_notation の加法の単位元（x → 0）に、arg z + (2π − arg z) = 2π を def_real_difference・加法の交換律・結合律・逆元・単位元の 5 行に割った（鎖の両端は不変。偏角の和の第 2 の場合の鎖は 2 段から 6 段）。主張は不変。SageMath の検算 check_reciprocal_cases_chains.sage を足した。",
       ],
     },
   },
