@@ -47907,6 +47907,71 @@ z&\in(\bigcup_{k\in\mathbb N}C_k)\cap F_n&&\bigl(\because\ \text{共通部分の
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_enumerated_ordered_subfield_step_choice",
+        labels: [],
+        title: { text: "列挙した元を取り込む一段の選択" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_enumerated_ordered_subfield_step_choice",
+              focus: {
+                id: "zero_pinching_claim_enumerated_ordered_subfield_step_choice",
+                kind: "claim",
+                title: { text: "延長可能な元を取り込み、延長不能なら同じ組を保てる" },
+                labels: ["claim_enumerated_ordered_subfield_step_choice"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/enumerated-ordered-subfield-step-choice"],
+                lean: [
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_stepChoice",
+                  "Ising2DLambda.NecSuf.FisherZero.enumeratedOrderedSubfield_stepChoice",
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_stepChoice_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                    math(String.raw`C\subseteq F`), " をその正錐（",
+                    ref("def_subfield_positive_cone"), "）とし、",
+                    math(String.raw`x\in\overline{\mathbb Q}`), " を任意に取る。",
+                    "このとき部分体 ", math(String.raw`E\subseteq\overline{\mathbb Q}`),
+                    " とその正錐 ", math(String.raw`D\subseteq E`), " を選べて、",
+                    math(String.raw`(E,D)`), " は ", math(String.raw`(F,C)`),
+                    " を延長する（", ref("def_positive_cone_extension"), "）。",
+                    "さらに ", math(String.raw`(F,C)`), " を延長する組 ",
+                    math(String.raw`(E',D')`), " で ", math(String.raw`x\in E'`),
+                    " となるものが一つでもあれば、選んだ ", math(String.raw`E`),
+                    " は ", math(String.raw`x\in E`), " を満たす。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "延長の存在を場合分けする。延長 ", math(String.raw`(E',D')`),
+                    " で ", math(String.raw`x\in E'`), " となるものが存在すれば、",
+                    "その証人を ", math(String.raw`(E,D)`), " に選ぶ。",
+                    "延長の条件と取込条件は、この選択でそのまま成り立つ（",
+                    ref("def_positive_cone_extension"), "）。",
+                  ]),
+                  paragraph([
+                    "そのような延長が存在しなければ、",
+                    math(String.raw`(E,D):=(F,C)`), " と選ぶ。",
+                    "正錐の定義（", ref("def_subfield_positive_cone"),
+                    "）と延長の定義（", ref("def_positive_cone_extension"),
+                    "）により、同じ組は自分自身を延長する。",
+                    "取込条件の前件は仮定に反して偽なので、含意は成り立つ。",
+                    "どちらの場合も実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_enumerated_ordered_subfield_maximality_criterion",
         labels: [],
         title: { text: "列挙段階の取込条件から従う順序付き部分体の極大性" },
