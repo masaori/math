@@ -47793,10 +47793,11 @@ x^{-1}&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr).
 x&\in C_k&&\bigl(\because\ i\le k,\ C_i\subseteq C_k\bigr)\\
 y&\in C_k&&\bigl(\because\ j\le k,\ C_j\subseteq C_k\bigr)\\
 x+y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の和の閉性}\bigr)\\
-x\cdot y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の閉性}\bigr).
+x+y&\in C_\infty&&\bigl(\because\ C_k\subseteq C_\infty\text{ は和集合の定義}\bigr)\\
+x\cdot y&\in C_k&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の閉性}\bigr)\\
+x\cdot y&\in C_\infty&&\bigl(\because\ C_k\subseteq C_\infty\text{ は和集合の定義}\bigr).
 \end{aligned}`),
                   paragraph([
-                    "従って ", math(String.raw`x+y,x\cdot y\in C_\infty`), " である。",
                     "任意の ", math(String.raw`z\in F_\infty`), " はある ",
                     math(String.raw`F_i`), " に属する。",
                     math(String.raw`F_i`), " の三分法により ",
