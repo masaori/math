@@ -48201,6 +48201,69 @@ C_R\cap F_n&=C_n&&\bigl(\because\ \blkref{claim_increasing_positive_cone_union_r
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_positive_cone_element_qbar_square_root",
+        labels: [],
+        title: { text: "正錐の元の代数的平方根" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_positive_cone_element_qbar_square_root",
+              focus: {
+                id: "zero_pinching_claim_positive_cone_element_qbar_square_root",
+                kind: "claim",
+                title: { text: "正錐の元には零でない代数的平方根がある" },
+                labels: ["claim_positive_cone_element_qbar_square_root"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/positive-cone-element-qbar-square-root"],
+                lean: [
+                  "Ising2DLambda.FisherZero.positiveConeElement_hasQbarSquareRoot",
+                  "Ising2DLambda.NecSuf.FisherZero.positiveConeElement_hasQbarSquareRoot",
+                  "Ising2DLambda.FisherZero.positiveConeElement_hasQbarSquareRoot_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                    math(String.raw`C\subseteq F`), " をその正錐（",
+                    ref("def_subfield_positive_cone"), "）とする。任意の ",
+                    math(String.raw`a\in C`), " に対し、零でない ",
+                    math(String.raw`b\in\overline{\mathbb Q}`), " が存在して ",
+                    math(String.raw`b^2=a`), " を満たす。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`a\in C`), " を固定する。正錐の三分法（",
+                    ref("def_subfield_positive_cone"), "）では零元と正錐への所属が排他的なので ",
+                    math(String.raw`a\ne0`), " である。",
+                    math(String.raw`p(X):=X^2-a\in\overline{\mathbb Q}[X]`),
+                    " と置く。これは次数二の多項式である。",
+                    ref("def_algebraic_numbers"), " の代数閉性により根 ",
+                    math(String.raw`b\in\overline{\mathbb Q}`), " が存在する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0&=p(b)&&\bigl(\because\ b\text{ は }p\text{ の根}\bigr)\\
+&=b^2-a&&\bigl(\because\ p\text{ の定義}\bigr),\\
+b^2&=a&&\bigl(\because\ \text{移項}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`b=0`), " なら ", math(String.raw`a=b^2=0`),
+                    " となり先ほどの ", math(String.raw`a\ne0`),
+                    " に反する。ゆえに ", math(String.raw`b\ne0`),
+                    " である。全て代数的数体の中で行い、実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },

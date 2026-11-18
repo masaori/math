@@ -433,6 +433,7 @@ export const ALL_LABELS = [
   "claim_polynomial_diagonal_gauge_inverse",
   "claim_polynomial_fourier_similarity",
   "claim_polynomial_product_of_sums",
+  "claim_positive_cone_element_qbar_square_root",
   "claim_positive_rational_in_positive_cone",
   "claim_positive_rational_mesh_width",
   "claim_positive_rational_not_fisher_zero",
