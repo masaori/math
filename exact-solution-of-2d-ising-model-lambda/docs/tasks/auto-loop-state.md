@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-18（主経路）、平方根の一次式の値の逆元が同じ一次式の値であることを四層で示した。** 非零ノルムから逆元の係数を作った。次は添加した部分体と値の全体の一致を示す。
 - **2026-11-18（並列）、表の先頭「零代入で消える対称多項式は全変数の積で割り切れる」の前段として、零代入で消える対称多項式の係数が全ての変数を含む指数にだけ残ることを四層で示した**（`claim_symmetric_vanishing_last_variable_coefficient_support`）。$a(k)=0$ なら互換 $(k\ n)$ で末尾の指数を零に移し、$\mathrm{mco}_a(P)=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)=\mathrm{mco}_b(\mathrm{lz}_n(P))=0$ である。並列の表の次は割り算の本体（係数をずらした多項式 $Q$ と係数の比較）。
 - **2026-11-18（並列）、表の先頭「零代入で消える対称多項式は全変数の積で割り切れる」の前段として、変数の置換と対称多項式を定義し、変数を置換した多項式の係数を四層で示した**（`claim_qbar_variable_permutation_coefficient`）。$\varrho\in\mathfrak P_n$ による置換 $\mathrm{vs}_\varrho$ について $\mathrm{mco}_a(\mathrm{vs}_\varrho(P))=\mathrm{mco}_{a\circ\varrho}(P)$ である。並列の表の次は割り算の本体。
 - **2026-11-18（並列）、表の先頭「零代入で消える対称多項式は全変数の積で割り切れる」の前段として、単項式を掛けたときの係数と末尾の変数への零代入の係数を四層で示した**（`claim_qbar_monomial_multiplication_coefficient`・`claim_last_variable_zero_coefficient`）。$\mathrm{mco}_c(\mathrm{mon}_n(a)\cdot Q)$ は $a\le c$ なら $\mathrm{mco}_{c-a}(Q)$、そうでなければ零であり、$\mathrm{mco}_b(\mathrm{lz}_n(P))=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)$ である。並列の表の次は割り算の本体。
 - **2026-11-18（主経路）、平方根の一次式の値の集合が和・符号反転・積で閉じることを四層で示した。** 次はこの閉性を使って、平方根を添加した部分体の全ての元を二次係数で表す。
-- **2026-11-18（並列）、表の先頭「対称式の基本定理」を四つの論法に割り、一つ目の「多変数多項式と基本対称式」を四層で示した**（`claim_last_variable_zero_elementary_symmetric`）。代数的数を係数とする有限個の変数の多項式・代入・基本対称式 $\mathrm{es}_{n,j}$・末尾の変数への零の代入 $\mathrm{lz}_n$ を定義し、$\mathrm{lz}_n(\mathrm{es}_{n+1,j})=\mathrm{es}_{n,j}$ を末尾を含む部分集合と含まない部分集合への分割で示した。並列の表の次は「零代入で消える対称多項式は全変数の積で割り切れる」。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -25,7 +25,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 零点の詰め寄り | 平方根を添加した部分体の二次係数表示 | 未着手 | 上の閉性と多項式の代入から $F(b)=S$ を示し、$b\notin F$ なら表示の一意性を示す。非零ノルムは済んだ `claim_quadratic_norm_nonzero` を引く。ラベルは `claim_square_root_adjoined_subfield_quadratic_representation`。 |
+| 零点の詰め寄り | 平方根を添加した部分体と一次式の値の全体の一致 | 未着手 | 逆元の閉性と多項式の代入から $F(b)=S$ を示す。ラベルは `claim_square_root_adjoined_subfield_equals_linear_values`。 |
+| 零点の詰め寄り | 平方根を添加した部分体の二次係数表示の一意性 | 未着手 | $b\notin F$ なら表示の一意性を示す。ラベルは `claim_square_root_adjoined_subfield_quadratic_representation`。 |
 | 零点の詰め寄り | 平方根を添加した部分体の正錐重み付き平方和は負の単位元を含まない | 未着手 | $a\in C_F$ と二次係数表示から、共役側との和で正錐の元の和へ帰着する。ラベルは `claim_square_root_adjoined_weighted_square_sum_excludes_minus_one`。 |
 | 零点の詰め寄り | 正の元の平方根を添加した部分体への正錐の延長 | 未着手 | 済んだ平方根・二次係数表示・負の単位元の不包含と前錐の増大列を引き、$F(b)$ に元の正錐を延長する。ラベルは `claim_square_root_adjoined_positive_cone_extension`。 |
 | 零点の詰め寄り | 極大性から正の元の平方根が部分体に属する | 未着手 | 上の延長と済んだ `claim_enumerated_ordered_subfield_is_maximal` を引く。`def_real_closed_subfield` の第二条件と第五条件へ接続する。ラベルは `claim_maximal_ordered_subfield_positive_is_square`。 |

@@ -48402,6 +48402,64 @@ yz&=(u+vb)(w+tb)&&\bigl(\because\ y,z\text{ の表示}\bigr)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_quadratic_linear_values_inverse_closed",
+        labels: [],
+        title: { text: "平方根の一次式の値の逆元" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_quadratic_linear_values_inverse_closed",
+            focus: {
+              id: "zero_pinching_claim_quadratic_linear_values_inverse_closed",
+              kind: "claim",
+              title: { text: "平方根の一次式の零でない値は逆元も一次式の値である" },
+              labels: ["claim_quadratic_linear_values_inverse_closed"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/quadratic-linear-values-inverse-closed"],
+              lean: [
+                "Ising2DLambda.FisherZero.quadraticLinearValues_inv_mem",
+                "Ising2DLambda.NecSuf.FisherZero.quadraticLinearValues_inv_mem_necSuf",
+                "Ising2DLambda.FisherZero.quadraticLinearValues_inv_mem_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`a\in F`), "、", math(String.raw`b\in\overline{\mathbb Q}`),
+                " とし、", math(String.raw`b^2=a`), "、", math(String.raw`b\notin F`),
+                " と仮定する。", math(String.raw`S:=\{u+vb\mid u,v\in F\}`),
+                " の任意の零でない元 ", math(String.raw`y`), " について ",
+                math(String.raw`y^{-1}\in S`), " である。",
+              ])],
+              proof: [
+                paragraph([
+                  math(String.raw`y=u+vb\ne0`), " となる ",
+                  math(String.raw`u,v\in F`), " を取る。",
+                  math(String.raw`n:=u^2-av^2\in F`), " と置く。",
+                  ref("claim_quadratic_norm_nonzero"), " より ", math(String.raw`n\ne0`),
+                  " である。部分体の除法の閉性より ",
+                  math(String.raw`u/n,-v/n\in F`), " である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+y\left(\frac{u}{n}-\frac{v}{n}b\right)
+&=(u+vb)\frac{u-vb}{n}&&\bigl(\because\ \text{分配律}\bigr)\\
+&=\frac{u^2-v^2b^2}{n}&&\bigl(\because\ \text{差の平方}\bigr)\\
+&=\frac{u^2-av^2}{n}&&\bigl(\because\ b^2=a\bigr)\\
+&=1&&\bigl(\because\ n=u^2-av^2,\ n\ne0\bigr).
+\end{aligned}`),
+                paragraph([
+                  "したがって ", math(String.raw`y^{-1}=u/n+(-v/n)b\in S`),
+                  " である。実数体・複素数体は使わない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },

@@ -77,9 +77,17 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_quadratic_positive_cone_is_subfield_positive_cone",
     ],
   },
+  claim_quadratic_linear_values_inverse_closed: {
+    title: "平方根の一次式の値の逆元",
+    dependsOn: ["claim_quadratic_norm_nonzero", "claim_quadratic_linear_values_closed"],
+  },
+  claim_square_root_adjoined_subfield_equals_linear_values: {
+    title: "平方根を添加した部分体と一次式の値の全体の一致",
+    dependsOn: ["claim_quadratic_linear_values_inverse_closed"],
+  },
   claim_square_root_adjoined_subfield_quadratic_representation: {
     title: "平方根を添加した部分体の二次係数表示",
-    dependsOn: [],
+    dependsOn: ["claim_square_root_adjoined_subfield_equals_linear_values"],
   },
   claim_square_root_adjoined_weighted_square_sum_excludes_minus_one: {
     title: "平方根を添加した部分体の正錐重み付き平方和は負の単位元を含まない",
