@@ -47887,12 +47887,15 @@ z&\in(\bigcup_{k\in\mathbb N}C_k)\cap F_n&&\bigl(\because\ \text{共通部分の
                   ]),
                   paragraph([
                     math(String.raw`n<k`), " なら、", math(String.raw`j=k,k-1,\ldots,n+1`),
-                    " の順に、", math(String.raw`z\in C_j`), " と ",
-                    math(String.raw`z\in F_{j-1}`), " から ",
-                    math(String.raw`z\in C_{j-1}`), " を得る。",
-                    "これは ", math(String.raw`C_j\cap F_{j-1}=C_{j-1}`),
-                    " による帰納法である。", math(String.raw`z\in F_n\subseteq F_{j-1}`),
-                    " は部分体の増大性から従う。最後に ",
+                    " の順に ", math(String.raw`z\in C_j`), " を帰納法の仮定として、次の三段を繰り返す。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+z&\in F_n\subseteq F_{j-1}&&\bigl(\because\ z\in F_n,\ n\le j-1,\ \text{部分体の増大性}\bigr)\\
+z&\in C_j\cap F_{j-1}&&\bigl(\because\ z\in C_j,\ \text{直前の行}\bigr)\\
+z&\in C_{j-1}&&\bigl(\because\ C_j\cap F_{j-1}=C_{j-1},\ \blkref{def_positive_cone_extension}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "各段の正錐の制限等号は延長の定義（", ref("def_positive_cone_extension"), "）による。最後に ",
                     math(String.raw`z\in C_n`), " を得る。従って両包含が成立する。",
                     "実数体・複素数体は使わない。",
                   ]),
