@@ -1,3 +1,4 @@
+2026-11-18（並列）: 変数の置換 $\mathrm{vs}_\varrho$ と対称多項式を定義し、$\mathrm{mco}_a(\mathrm{vs}_\varrho(P))=\mathrm{mco}_{a\circ\varrho}(P)$ を本文・SageMath・Lean 具体版・必要十分版・導出版で示した（割り算の本体の前段）。
 2026-11-18（主経路の書式統一）: 「平方根が部分体の外にあるとき非零表示のノルムは零でない」の零係数の場合を行末根拠付きの式鎖へ整えた。
 2026-11-18（並列）: 単項式を掛けたときの係数（$a\le c$ なら $\mathrm{mco}_{c-a}(Q)$、それ以外は零）と末尾の変数への零代入の係数（$\mathrm{mco}_b(\mathrm{lz}_n(P))=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)$）を、本文四ブロック・SageMath（PASS 30817）・Lean 具体版・必要十分版・導出版で示した。Lean は単項式を `∏ k, X k ^ a k`、末尾に零を足した指数を `Finsupp.embDomain Fin.castSuccEmb` で書く。
 2026-11-18（主経路）: 二次係数表示を一次式の値の閉性と全元の表示に分け、前者を本文・SageMath 有限標本・Lean 具体版・必要十分版・導出版で示した。必要十分版は可換環の演算と係数集合の閉性だけを使う。

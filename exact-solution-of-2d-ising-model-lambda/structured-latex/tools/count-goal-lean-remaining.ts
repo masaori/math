@@ -116,9 +116,16 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "零代入で消える対称多項式は全変数の積と指数を一つ下げた多項式の積である",
     dependsOn: ["claim_symmetric_vanishing_last_variable_coefficient_support"],
   },
+  claim_qbar_all_ones_shift_preserves_symmetry: {
+    title: "対称多項式の全ての指数を一つ下げた多項式は対称である",
+    dependsOn: [],
+  },
   claim_symmetric_vanishing_last_variable_divisible_by_product: {
     title: "零代入で消える対称多項式は全変数の積で割り切れる",
-    dependsOn: ["claim_symmetric_vanishing_last_variable_shifted_quotient_product"],
+    dependsOn: [
+      "claim_symmetric_vanishing_last_variable_shifted_quotient_product",
+      "claim_qbar_all_ones_shift_preserves_symmetry",
+    ],
   },
   claim_elementary_symmetric_substitution_degree_bound: {
     title: "基本対称式への代入は対称で部分体係数を保ち、次数は重み付き次数以下",

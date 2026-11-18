@@ -55177,6 +55177,115 @@ d&(e=a\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_all_ones_shift_symmetry",
+        labels: [],
+        title: { text: "指数を一つ下げた多項式の対称性" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_all_ones_shift_preserves_symmetry",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_all_ones_shift_preserves_symmetry",
+                  kind: "claim",
+                  title: { text: "対称多項式の全ての指数を一つ下げた多項式は対称である" },
+                  labels: ["claim_qbar_all_ones_shift_preserves_symmetry"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/all-ones-shift-symmetry"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.allOnesShift_isQbarSymmetric",
+                    "Ising2DLambda.FisherZero.exponentComp_add_allOnes",
+                    "Ising2DLambda.NecSuf.FisherZero.allOnesShift_equivInvariant_necSuf",
+                    "Ising2DLambda.FisherZero.allOnesShift_isQbarSymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と、対称な（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）任意の ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について、",
+                      math(String.raw`\mathrm{sd}_n(P)\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_all_ones_shift"),
+                      "）は対称である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      " と ",
+                      math(String.raw`d\in\mathrm{Ex}_n`),
+                      " を任意に取る（",
+                      ref("def_qbar_variable_permutation"),
+                      "、",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）。準備として、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl((d+\mathbf{1}_n)\circ\varrho\bigr)(k)
+&=(d+\mathbf{1}_n)\bigl(\varrho(k)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の指数の合成}\bigr)\\
+&=d\bigl(\varrho(k)\bigr)+\mathbf{1}_n\bigl(\varrho(k)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)\\
+&=d\bigl(\varrho(k)\bigr)+1
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_n\bigr)\\
+&=(d\circ\varrho)(k)+\mathbf{1}_n(k)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の指数の合成、}\blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_n\bigr)\\
+&=(d\circ\varrho+\mathbf{1}_n)(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、",
+                      math(String.raw`(d+\mathbf{1}_n)\circ\varrho=d\circ\varrho+\mathbf{1}_n`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_d\bigl(\mathrm{vs}_{\varrho}(\mathrm{sd}_n(P))\bigr)
+&=\mathrm{mco}_{d\circ\varrho}\bigl(\mathrm{sd}_n(P)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_variable_permutation_coefficient}\bigr)\\
+&=\mathrm{mco}_{d\circ\varrho+\mathbf{1}_n}(P)
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\bigr)\\
+&=\mathrm{mco}_{(d+\mathbf{1}_n)\circ\varrho}(P)
+&&\bigl(\because\ (d+\mathbf{1}_n)\circ\varrho=d\circ\varrho+\mathbf{1}_n\bigr)\\
+&=\mathrm{mco}_{d+\mathbf{1}_n}\bigl(\mathrm{vs}_{\varrho}(P)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_variable_permutation_coefficient}\bigr)\\
+&=\mathrm{mco}_{d+\mathbf{1}_n}(P)
+&&\bigl(\because\ P\text{ は対称なので }\mathrm{vs}_{\varrho}(P)=P\text{（}\blkref{def_qbar_symmetric_polynomial}\text{）}\bigr)\\
+&=\mathrm{mco}_d\bigl(\mathrm{sd}_n(P)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。係数がすべて等しい二つの元は等しいので（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）、",
+                      math(String.raw`\mathrm{vs}_{\varrho}(\mathrm{sd}_n(P))=\mathrm{sd}_n(P)`),
+                      " である。",
+                      math(String.raw`\varrho`),
+                      " は任意なので ",
+                      math(String.raw`\mathrm{sd}_n(P)`),
+                      " は対称である。",
+                      "全過程は有限集合の全単射、自然数の指数の和と ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の係数の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },

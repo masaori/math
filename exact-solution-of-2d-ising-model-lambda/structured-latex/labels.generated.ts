@@ -456,6 +456,7 @@ export const ALL_LABELS = [
   "claim_qbar_action_product",
   "claim_qbar_action_smul",
   "claim_qbar_action_sum",
+  "claim_qbar_all_ones_shift_preserves_symmetry",
   "claim_qbar_bezout_power_propagation",
   "claim_qbar_commuting_preserves_eigenspace",
   "claim_qbar_constant_embedding_pow",
