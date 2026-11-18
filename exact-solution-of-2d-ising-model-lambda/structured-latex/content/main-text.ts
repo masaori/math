@@ -50758,6 +50758,831 @@ y&=\mathrm{aev}_{\alpha}(f)&&\bigl(\because\ f\ \text{の取り方}\bigr)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_subfield_polynomial_values_subfield",
+        labels: [],
+        title: { text: "部分体に元を代入した値の全体は部分体である" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_poly_constant_term_shift_decomposition",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_poly_constant_term_shift_decomposition",
+                  kind: "claim",
+                  title: { text: "多項式は、定数項の定数多項式と、係数を一つずらした多項式に不定元を掛けたものとの和である" },
+                  labels: ["claim_qbar_poly_constant_term_shift_decomposition"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.indeterminateMulCoeff",
+                    "Ising2DLambda.FisherZero.qbarPolyConstantTermShift",
+                    "Ising2DLambda.NecSuf.FisherZero.constantTermShift_necSuf",
+                    "Ising2DLambda.FisherZero.qbarPolyConstantTermShift_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`p\in\overline{\mathbb{Q}}[t]`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）とする。",
+                      math(String.raw`p'\in\overline{\mathbb{Q}}[t]`),
+                      " で、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)`),
+                      " を満たし、かつ",
+                    ]),
+                    displayMath(String.raw`p=\widehat{\mathrm{ac}_0(p)}+t\cdot p'`),
+                    paragraph([
+                      "を満たすものが存在する（",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      "、和と積は ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " のもの）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`k\mapsto k+1`),
+                      " は単射なので、",
+                      math(String.raw`\mathrm{ac}_{k+1}(p)\ne0`),
+                      " となる ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " は、",
+                      math(String.raw`\mathrm{ac}_j(p)\ne0`),
+                      " となる ",
+                      math(String.raw`j`),
+                      " の有限集合（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）より多くはなく、有限個である。多項式は有限個を除いて零である係数の族なので（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)`),
+                      " となる ",
+                      math(String.raw`p'\in\overline{\mathbb{Q}}[t]`),
+                      " がある。",
+                      math(String.raw`t\cdot p'`),
+                      " の係数は、",
+                      math(String.raw`k=0`),
+                      " と ",
+                      math(String.raw`k\ge1`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(t\cdot p')
+&=\sum_{i=0}^{0}\mathrm{ac}_i(t)\cdot\mathrm{ac}_{0-i}(p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr)\\
+&=\mathrm{ac}_0(t)\cdot\mathrm{ac}_0(p')
+&&\bigl(\because\ \text{和の項は}\ i=0\ \text{の一つだけ}\bigr)\\
+&=0\cdot\mathrm{ac}_0(p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の}\ \mathrm{ac}_0(t)=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr),\\[4pt]
+\mathrm{ac}_k(t\cdot p')
+&=\sum_{i=0}^{k}\mathrm{ac}_i(t)\cdot\mathrm{ac}_{k-i}(p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr)\\
+&=\mathrm{ac}_1(t)\cdot\mathrm{ac}_{k-1}(p')
+&&\bigl(\because\ i\ne1\ \text{で}\ \mathrm{ac}_i(t)=0\ \text{（}\blkref{def_qbar_polynomial_ring}\text{）、}k\ge1\bigr)\\
+&=\mathrm{ac}_{k-1}(p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の}\ \mathrm{ac}_1(t)=1\bigr)\\
+&=\mathrm{ac}_{k}(p)
+&&\bigl(\because\ p'\ \text{の取り方と}\ (k-1)+1=k\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。したがって ",
+                      math(String.raw`k=0`),
+                      " と ",
+                      math(String.raw`k\ge1`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0\bigl(\widehat{\mathrm{ac}_0(p)}+t\cdot p'\bigr)
+&=\mathrm{ac}_0\bigl(\widehat{\mathrm{ac}_0(p)}\bigr)+\mathrm{ac}_0(t\cdot p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
+&=\mathrm{ac}_0(p)+0
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{と上の}\ k=0\ \text{の鎖}\bigr)\\
+&=\mathrm{ac}_0(p)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr),\\[4pt]
+\mathrm{ac}_k\bigl(\widehat{\mathrm{ac}_0(p)}+t\cdot p'\bigr)
+&=\mathrm{ac}_k\bigl(\widehat{\mathrm{ac}_0(p)}\bigr)+\mathrm{ac}_k(t\cdot p')
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
+&=0+\mathrm{ac}_k(p)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ k\ge1\ \text{の係数と上の}\ k\ge1\ \text{の鎖}\bigr)\\
+&=\mathrm{ac}_k(p)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、係数がすべて等しい二つの多項式は等しい（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）ので ",
+                      math(String.raw`p=\widehat{\mathrm{ac}_0(p)}+t\cdot p'`),
+                      " である。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の係数の有限の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_polynomials_ring_closed",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_polynomials_ring_closed",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の全体は、和・積・符号反転で閉じる" },
+                  labels: ["claim_subfield_coefficient_polynomials_ring_closed"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomials_add_mem",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomials_mul_mem",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomials_neg_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.coefficientPolynomials_add_mem_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.coefficientPolynomials_mul_mem_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.coefficientPolynomials_neg_mem_necSuf",
+                    "Ising2DLambda.FisherZero.subfieldCoefficientPolynomials_mul_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とする。任意の ",
+                      math(String.raw`f\in F[t]`),
+                      " と任意の ",
+                      math(String.raw`g\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）について、",
+                      math(String.raw`f+g\in F[t]`),
+                      "、",
+                      math(String.raw`f\cdot g\in F[t]`),
+                      "、",
+                      math(String.raw`-f\in F[t]`),
+                      " である（和・積・加法の逆元は ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " のもの）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`k\in\mathbb{N}`),
+                      " を任意に取る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(f+g)&=\mathrm{ac}_k(f)+\mathrm{ac}_k(g)&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr),\\
+\mathrm{ac}_k(f)+\mathrm{ac}_k(g)&\in F&&\bigl(\because\ \mathrm{ac}_k(f)\in F,\ \mathrm{ac}_k(g)\in F\ \text{と}\ F\ \text{は和で閉じる}\bigr),\\[4pt]
+\mathrm{ac}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr),\\
+\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&\in F\quad(0\le i\le k)&&\bigl(\because\ \mathrm{ac}_i(f)\in F,\ \mathrm{ac}_{k-i}(g)\in F\ \text{と}\ F\ \text{は積で閉じる}\bigr),\\
+\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&\in F&&\bigl(\because\ \text{項の個数についての帰納法。空の和}\ 0\in F\text{、一項足す段は}\ F\ \text{が和で閉じること}\bigr),\\[4pt]
+\mathrm{ac}_k(-f)&=\mathrm{ac}_k(-f)+\mathrm{ac}_k(f)-\mathrm{ac}_k(f)&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&=\mathrm{ac}_k\bigl((-f)+f\bigr)-\mathrm{ac}_k(f)&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
+&=\mathrm{ac}_k(0)-\mathrm{ac}_k(f)&&\bigl(\because\ (-f)+f=0\bigr)\\
+&=-\mathrm{ac}_k(f)&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の零元の係数は}\ 0\bigr),\\
+-\mathrm{ac}_k(f)&\in F&&\bigl(\because\ \mathrm{ac}_k(f)\in F\ \text{と}\ F\ \text{は符号反転で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`k`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_polynomials"),
+                      " により ",
+                      math(String.raw`f+g`),
+                      "、",
+                      math(String.raw`f\cdot g`),
+                      "、",
+                      math(String.raw`-f`),
+                      " は ",
+                      math(String.raw`F[t]`),
+                      " に属する。",
+                      math(String.raw`F`),
+                      " について使ったのは、零元を含み、和・積・符号反転で閉じることだけである。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の有限和と有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_polynomial_values_contains_subfield",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_polynomial_values_contains_subfield",
+                  kind: "claim",
+                  title: { text: "部分体は、その部分体に元を代入した値の全体に含まれる" },
+                  labels: ["claim_subfield_polynomial_values_contains_subfield"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfield_subset_subfieldPolynomialValues",
+                    "Ising2DLambda.NecSuf.FisherZero.subset_polynomialValues_necSuf",
+                    "Ising2DLambda.FisherZero.subfield_subset_subfieldPolynomialValues_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`\alpha\in\overline{\mathbb{Q}}`),
+                      " とする。任意の ",
+                      math(String.raw`c\in F`),
+                      " について ",
+                      math(String.raw`c\in\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_subfield_polynomial_values"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_qbar_constant_embedding"),
+                      " により ",
+                      math(String.raw`\mathrm{ac}_0(\widehat{c})=c\in F`),
+                      "、",
+                      math(String.raw`k\ge1`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(\widehat{c})=0\in F`),
+                      " なので、",
+                      math(String.raw`\widehat{c}\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）である。",
+                      ref("def_qbar_poly_evaluation"),
+                      " により ",
+                      math(String.raw`\mathrm{aev}_{\alpha}(\widehat{c})=c`),
+                      " なので、",
+                      ref("def_subfield_polynomial_values"),
+                      " により ",
+                      math(String.raw`c\in\mathrm{Val}_F(\alpha)`),
+                      " である。",
+                      math(String.raw`F`),
+                      " について使ったのは、零元を含むことだけである。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_polynomial_values_contains_element",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_polynomial_values_contains_element",
+                  kind: "claim",
+                  title: { text: "代入した元は、代入した値の全体に属する" },
+                  labels: ["claim_subfield_polynomial_values_contains_element"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.element_mem_subfieldPolynomialValues",
+                    "Ising2DLambda.NecSuf.FisherZero.element_mem_polynomialValues_necSuf",
+                    "Ising2DLambda.FisherZero.element_mem_subfieldPolynomialValues_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`\alpha\in\overline{\mathbb{Q}}`),
+                      " とする。",
+                      math(String.raw`\alpha\in\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_subfield_polynomial_values"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_qbar_polynomial_ring"),
+                      " により ",
+                      math(String.raw`\mathrm{ac}_1(t)=1\in F`),
+                      "、",
+                      math(String.raw`j\ne1`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_j(t)=0\in F`),
+                      " なので、",
+                      math(String.raw`t\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）である。",
+                      ref("def_qbar_poly_evaluation"),
+                      " により ",
+                      math(String.raw`\mathrm{aev}_{\alpha}(t)=\alpha`),
+                      " なので、",
+                      ref("def_subfield_polynomial_values"),
+                      " により ",
+                      math(String.raw`\alpha\in\mathrm{Val}_F(\alpha)`),
+                      " である。",
+                      math(String.raw`F`),
+                      " について使ったのは、零元と単位元を含むことだけである。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_polynomial_values_ring_closed",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_polynomial_values_ring_closed",
+                  kind: "claim",
+                  title: { text: "代入した値の全体は、和・積・符号反転で閉じる" },
+                  labels: ["claim_subfield_polynomial_values_ring_closed"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_add_mem",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_mul_mem",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_neg_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialValues_add_mem_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialValues_mul_mem_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialValues_neg_mem_necSuf",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_mul_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`\alpha\in\overline{\mathbb{Q}}`),
+                      " とする。任意の ",
+                      math(String.raw`y\in\mathrm{Val}_F(\alpha)`),
+                      " と任意の ",
+                      math(String.raw`z\in\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_subfield_polynomial_values"),
+                      "）について、",
+                      math(String.raw`y+z`),
+                      "、",
+                      math(String.raw`y\cdot z`),
+                      "、",
+                      math(String.raw`-y`),
+                      " は ",
+                      math(String.raw`\mathrm{Val}_F(\alpha)`),
+                      " に属する（演算は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のもの）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_subfield_polynomial_values"),
+                      " により、",
+                      math(String.raw`g\in F[t]`),
+                      " と ",
+                      math(String.raw`h\in F[t]`),
+                      " で ",
+                      math(String.raw`y=\mathrm{aev}_{\alpha}(g)`),
+                      "、",
+                      math(String.raw`z=\mathrm{aev}_{\alpha}(h)`),
+                      " を満たすものがある。",
+                      ref("claim_subfield_coefficient_polynomials_ring_closed"),
+                      " により ",
+                      math(String.raw`g+h`),
+                      "、",
+                      math(String.raw`g\cdot h`),
+                      "、",
+                      math(String.raw`-g`),
+                      " は ",
+                      math(String.raw`F[t]`),
+                      " に属し、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+y+z&=\mathrm{aev}_{\alpha}(g)+\mathrm{aev}_{\alpha}(h)&&\bigl(\because\ g,h\ \text{の取り方}\bigr)\\
+&=\mathrm{aev}_{\alpha}(g+h)&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の和の保存}\bigr),\\[4pt]
+y\cdot z&=\mathrm{aev}_{\alpha}(g)\cdot\mathrm{aev}_{\alpha}(h)&&\bigl(\because\ g,h\ \text{の取り方}\bigr)\\
+&=\mathrm{aev}_{\alpha}(g\cdot h)&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の積の保存}\bigr),\\[4pt]
+-y&=-\mathrm{aev}_{\alpha}(g)&&\bigl(\because\ g\ \text{の取り方}\bigr)\\
+&=\mathrm{aev}_{\alpha}(-g)&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の加法の逆元の保存}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、",
+                      ref("def_subfield_polynomial_values"),
+                      " により三つとも ",
+                      math(String.raw`\mathrm{Val}_F(\alpha)`),
+                      " に属する。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の有限の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_polynomial_values_evaluation_closed",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_polynomial_values_evaluation_closed",
+                  kind: "claim",
+                  title: { text: "代入した値の全体の元を部分体係数の多項式へ代入した値は、代入した値の全体に属する" },
+                  labels: ["claim_subfield_polynomial_values_evaluation_closed"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_eval_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialValues_eval_mem_necSuf",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_eval_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`\alpha\in\overline{\mathbb{Q}}`),
+                      " とする。任意の ",
+                      math(String.raw`y\in\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_subfield_polynomial_values"),
+                      "）と任意の ",
+                      math(String.raw`h\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）について、",
+                      math(String.raw`\mathrm{aev}_{y}(h)\in\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "冪。",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " についての帰納法で ",
+                      math(String.raw`y^{k}\in\mathrm{Val}_F(\alpha)`),
+                      " を示す（冪は ",
+                      ref("def_root_of_unity_set"),
+                      " の約束）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+y^{0}=1&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ 1\in F\ \text{と}\ \blkref{claim_subfield_polynomial_values_contains_subfield}\bigr),\\
+y^{k+1}=y^{k}\cdot y&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ y^{k}\in\mathrm{Val}_F(\alpha)\ \text{（帰納法の仮定）、}y\in\mathrm{Val}_F(\alpha)\ \text{と}\ \blkref{claim_subfield_polynomial_values_ring_closed}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "各項。",
+                      math(String.raw`\mathrm{ac}_k(h)\ne0`),
+                      " となる各 ",
+                      math(String.raw`k`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(h)&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ \mathrm{ac}_k(h)\in F\ \text{（}\blkref{def_subfield_coefficient_polynomials}\text{）と}\ \blkref{claim_subfield_polynomial_values_contains_subfield}\bigr),\\
+\mathrm{ac}_k(h)\cdot y^{k}&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ \text{冪の段と}\ \blkref{claim_subfield_polynomial_values_ring_closed}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "和。",
+                      math(String.raw`\mathrm{aev}_{y}(h)=\sum_{k:\ \mathrm{ac}_k(h)\ne0}\mathrm{ac}_k(h)\cdot y^{k}`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）は有限個の項の和である。項の個数についての帰納法で、和が ",
+                      math(String.raw`\mathrm{Val}_F(\alpha)`),
+                      " に属することを示す。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\text{空の和}=0&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ 0\in F\ \text{と}\ \blkref{claim_subfield_polynomial_values_contains_subfield}\bigr),\\
+s+\mathrm{ac}_k(h)\cdot y^{k}&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ s\in\mathrm{Val}_F(\alpha)\ \text{（帰納法の仮定）、各項の段と}\ \blkref{claim_subfield_polynomial_values_ring_closed}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "ここで ",
+                      math(String.raw`s\in\overline{\mathbb{Q}}`),
+                      " は、項を一つ減らした部分和である。よって ",
+                      math(String.raw`\mathrm{aev}_{y}(h)\in\mathrm{Val}_F(\alpha)`),
+                      " である。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の有限和と有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_minimal_vanishing_polynomial_constant_term_nonzero",
+              focus:
+                {
+                  id: "zero_pinching_claim_minimal_vanishing_polynomial_constant_term_nonzero",
+                  kind: "claim",
+                  title: { text: "零でない元の最小次数の零化多項式の定数項は零でない" },
+                  labels: ["claim_minimal_vanishing_polynomial_constant_term_nonzero"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.minimalVanishingPolynomial_constantTerm_ne_zero",
+                    "Ising2DLambda.NecSuf.FisherZero.minimalVanishingPolynomial_constantTerm_ne_zero_necSuf",
+                    "Ising2DLambda.FisherZero.minimalVanishingPolynomial_constantTerm_ne_zero_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`y\in\overline{\mathbb{Q}}`),
+                      " が ",
+                      math(String.raw`y\ne0`),
+                      " を満たすとし、",
+                      math(String.raw`m:=\deg_F(y)\in\mathbb{N}`),
+                      "（",
+                      ref("def_degree_over_subfield"),
+                      "）とする。",
+                      math(String.raw`p\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）が ",
+                      math(String.raw`p\ne0`),
+                      "、",
+                      math(String.raw`\mathrm{aev}_{y}(p)=0`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）、および任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について「",
+                      math(String.raw`k>m`),
+                      " ならば ",
+                      math(String.raw`\mathrm{ac}_k(p)=0`),
+                      "」を満たすならば、",
+                      math(String.raw`\mathrm{ac}_0(p)\ne0`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\mathrm{ac}_0(p)=0`),
+                      " と仮定して矛盾を導く。",
+                      ref("claim_qbar_poly_constant_term_shift_decomposition"),
+                      " により、",
+                      math(String.raw`p'\in\overline{\mathbb{Q}}[t]`),
+                      " で、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)`),
+                      " かつ ",
+                      math(String.raw`p=\widehat{\mathrm{ac}_0(p)}+t\cdot p'`),
+                      " を満たすものがある。",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)\in F`),
+                      " なので ",
+                      math(String.raw`p'\in F[t]`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+p&=\widehat{\mathrm{ac}_0(p)}+t\cdot p'&&\bigl(\because\ p'\ \text{の取り方}\bigr)\\
+&=\widehat{0}+t\cdot p'&&\bigl(\because\ \mathrm{ac}_0(p)=0\ \text{（仮定）}\bigr)\\
+&=0+t\cdot p'&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ \widehat{0}=0\bigr)\\
+&=t\cdot p'&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の零元との和}\bigr),\\[4pt]
+y\cdot\mathrm{aev}_{y}(p')&=\mathrm{aev}_{y}(t)\cdot\mathrm{aev}_{y}(p')&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{y}(t)=y\bigr)\\
+&=\mathrm{aev}_{y}(t\cdot p')&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の積の保存}\bigr)\\
+&=\mathrm{aev}_{y}(p)&&\bigl(\because\ p=t\cdot p'\bigr)\\
+&=0&&\bigl(\because\ \mathrm{aev}_{y}(p)=0\ \text{（仮定）}\bigr),\\[4pt]
+\mathrm{aev}_{y}(p')&=y^{-1}\cdot\bigl(y\cdot\mathrm{aev}_{y}(p')\bigr)&&\bigl(\because\ y\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&=y^{-1}\cdot0&&\bigl(\because\ \text{上の鎖}\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`k\ge m`),
+                      " のものについて、",
+                      math(String.raw`k+1>m`),
+                      " なので ",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)=0`),
+                      " である。",
+                      math(String.raw`p'\in F[t]`),
+                      "、",
+                      math(String.raw`\mathrm{aev}_{y}(p')=0`),
+                      " と合わせて、",
+                      ref("claim_vanishing_polynomial_below_degree_is_zero"),
+                      "（",
+                      math(String.raw`\alpha:=y`),
+                      "、",
+                      math(String.raw`q:=p'`),
+                      "）により ",
+                      math(String.raw`p'=0`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+p&=t\cdot p'&&\bigl(\because\ \text{上の鎖}\bigr)\\
+&=t\cdot0&&\bigl(\because\ p'=0\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の零元との積}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "となり、",
+                      math(String.raw`p\ne0`),
+                      " に反する。",
+                      math(String.raw`F`),
+                      " について使ったのは、",
+                      ref("claim_vanishing_polynomial_below_degree_is_zero"),
+                      " が使う性質だけである。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の有限の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_polynomial_values_is_subfield",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_polynomial_values_is_subfield",
+                  kind: "claim",
+                  title: { text: "部分体に元を代入した値の全体は部分体である" },
+                  labels: ["claim_subfield_polynomial_values_is_subfield"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/subfield-polynomial-values-subfield"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_inv_mem",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValuesSubfield",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValuesSubfield_coe",
+                    "Ising2DLambda.NecSuf.FisherZero.polynomialValues_inv_mem_necSuf",
+                    "Ising2DLambda.FisherZero.subfieldPolynomialValues_inv_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体とし、",
+                      math(String.raw`\alpha\in\overline{\mathbb{Q}}`),
+                      " とする。",
+                      math(String.raw`\mathrm{Val}_F(\alpha)`),
+                      "（",
+                      ref("def_subfield_polynomial_values"),
+                      "）は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体（",
+                      ref("def_subfield_positive_cone"),
+                      " の冒頭の意味）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "零元と単位元。",
+                      math(String.raw`0\in F`),
+                      " と ",
+                      math(String.raw`1\in F`),
+                      " なので、",
+                      ref("claim_subfield_polynomial_values_contains_subfield"),
+                      " により ",
+                      math(String.raw`0\in\mathrm{Val}_F(\alpha)`),
+                      "、",
+                      math(String.raw`1\in\mathrm{Val}_F(\alpha)`),
+                      " である。和・積・符号反転で閉じることは ",
+                      ref("claim_subfield_polynomial_values_ring_closed"),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "逆元。",
+                      math(String.raw`y\in\mathrm{Val}_F(\alpha)`),
+                      " が ",
+                      math(String.raw`y\ne0`),
+                      " を満たすとし、",
+                      math(String.raw`m:=\deg_F(y)`),
+                      "（",
+                      ref("def_degree_over_subfield"),
+                      "）と置く。",
+                      math(String.raw`m\in D_F(y)`),
+                      " なので、",
+                      math(String.raw`p\in F[t]`),
+                      " で ",
+                      math(String.raw`p\ne0`),
+                      "、",
+                      math(String.raw`\mathrm{aev}_{y}(p)=0`),
+                      "、",
+                      math(String.raw`k>m`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(p)=0`),
+                      " を満たすものがある。",
+                      math(String.raw`c:=\mathrm{ac}_0(p)`),
+                      " と置くと、",
+                      math(String.raw`c\in F`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）であり、",
+                      ref("claim_minimal_vanishing_polynomial_constant_term_nonzero"),
+                      " により ",
+                      math(String.raw`c\ne0`),
+                      " である。",
+                      ref("claim_qbar_poly_constant_term_shift_decomposition"),
+                      " により、",
+                      math(String.raw`p'\in\overline{\mathbb{Q}}[t]`),
+                      " で、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)`),
+                      " かつ ",
+                      math(String.raw`p=\widehat{c}+t\cdot p'`),
+                      " を満たすものがある。",
+                      math(String.raw`\mathrm{ac}_k(p')=\mathrm{ac}_{k+1}(p)\in F`),
+                      " なので ",
+                      math(String.raw`p'\in F[t]`),
+                      " である。",
+                      math(String.raw`z:=(-c^{-1})\cdot\mathrm{aev}_{y}(p')\in\overline{\mathbb{Q}}`),
+                      " と置く。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+0&=\mathrm{aev}_{y}(p)&&\bigl(\because\ p\ \text{の取り方}\bigr)\\
+&=\mathrm{aev}_{y}\bigl(\widehat{c}+t\cdot p'\bigr)&&\bigl(\because\ p=\widehat{c}+t\cdot p'\bigr)\\
+&=\mathrm{aev}_{y}(\widehat{c})+\mathrm{aev}_{y}(t)\cdot\mathrm{aev}_{y}(p')&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の和と積の保存}\bigr)\\
+&=c+y\cdot\mathrm{aev}_{y}(p')&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{y}(\widehat{c})=c,\ \mathrm{aev}_{y}(t)=y\bigr),\\[4pt]
+y\cdot z&=y\cdot\bigl((-c^{-1})\cdot\mathrm{aev}_{y}(p')\bigr)&&\bigl(\because\ z\ \text{の置き方}\bigr)\\
+&=(-c^{-1})\cdot\bigl(y\cdot\mathrm{aev}_{y}(p')\bigr)&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則と可換則}\bigr)\\
+&=(-c^{-1})\cdot(-c)&&\bigl(\because\ \text{上の鎖の}\ c+y\cdot\mathrm{aev}_{y}(p')=0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の移項}\bigr)\\
+&=c^{-1}\cdot c&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&=1&&\bigl(\because\ c\ne0\bigr),\\[4pt]
+y^{-1}&=y^{-1}\cdot(y\cdot z)&&\bigl(\because\ y\cdot z=1\bigr)\\
+&=(y^{-1}\cdot y)\cdot z&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=z&&\bigl(\because\ y\ne0\ \text{と}\ \overline{\mathbb{Q}}\ \text{の四則}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "所属は次のとおりである。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+-c^{-1}&\in F&&\bigl(\because\ c\in F,\ c\ne0\ \text{と}\ F\ \text{は逆元と符号反転で閉じる}\bigr),\\
+-c^{-1}&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ \blkref{claim_subfield_polynomial_values_contains_subfield}\bigr),\\
+\mathrm{aev}_{y}(p')&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ y\in\mathrm{Val}_F(\alpha),\ p'\in F[t]\ \text{と}\ \blkref{claim_subfield_polynomial_values_evaluation_closed}\bigr),\\
+y^{-1}=z&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ \text{上の二行と}\ \blkref{claim_subfield_polynomial_values_ring_closed}\ \text{の積}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      math(String.raw`\mathrm{Val}_F(\alpha)`),
+                      " は零元と単位元を含み、和・積・符号反転と、零元でない元の逆元を取る操作で閉じる。",
+                      "逆元は ",
+                      math(String.raw`y`),
+                      " の ",
+                      math(String.raw`F`),
+                      " 上の最小次数の零化多項式の係数と ",
+                      math(String.raw`y`),
+                      " の冪の有限和で書け、全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の有限の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
