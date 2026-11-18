@@ -54481,6 +54481,250 @@ d&(e=b\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_variable_permutation_symmetric",
+        labels: [],
+        title: { text: "変数の置換と対称多項式" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_variable_permutation",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_variable_permutation",
+                  kind: "definition",
+                  title: { text: "変数の置換と指数の合成" },
+                  labels: ["def_qbar_variable_permutation"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.variablePermutationValues",
+                    "Ising2DLambda.FisherZero.variablePermutation",
+                    "Ising2DLambda.FisherZero.exponentComp",
+                    "Ising2DLambda.FisherZero.exponentComp_apply",
+                  ],
+                  verification: ["sagemath/check/variable-permutation-coefficient"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " に対して、",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " から ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " への全単射の全体を ",
+                      math(String.raw`\mathfrak{P}_n`),
+                      " と書く。",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      " の逆写像を ",
+                      math(String.raw`\varrho^{-1}\in\mathfrak{P}_n`),
+                      " と書く。",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      " について、写像 ",
+                      math(String.raw`\mathrm{xv}_{n,\varrho}:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      " を ",
+                      math(String.raw`\mathrm{xv}_{n,\varrho}(k):=X^{(n)}_{\varrho(k)}`),
+                      " と定め（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）、",
+                    ]),
+                    displayMath(String.raw`\mathrm{vs}_{\varrho}:=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}:\overline{\mathbb{Q}}[X_{<n}]\to\overline{\mathbb{Q}}[X_{<n}]`),
+                    paragraph([
+                      "を ",
+                      math(String.raw`\varrho`),
+                      " による変数の置換と呼ぶ（",
+                      ref("def_qbar_multivariate_substitution"),
+                      "）。",
+                      ref("def_qbar_multivariate_substitution"),
+                      " により、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`\mathrm{vs}_{\varrho}(X^{(n)}_k)=X^{(n)}_{\varrho(k)}`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " と ",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      " について、写像の合成 ",
+                      math(String.raw`a\circ\varrho\in\mathrm{Ex}_n`),
+                      " は、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`(a\circ\varrho)(k)=a(\varrho(k))`),
+                      " となる指数である。",
+                      "現れるのは有限集合の全単射、自然数、代数的数と有限和・有限積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_symmetric_polynomial",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_symmetric_polynomial",
+                  kind: "definition",
+                  title: { text: "対称多項式" },
+                  labels: ["def_qbar_symmetric_polynomial"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.FisherZero.IsQbarSymmetric"],
+                  verification: ["sagemath/check/variable-permutation-coefficient"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について、任意の ",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      " で ",
+                      math(String.raw`\mathrm{vs}_{\varrho}(P)=P`),
+                      " となるとき、",
+                      math(String.raw`P`),
+                      " は対称であるという（",
+                      ref("def_qbar_variable_permutation"),
+                      "）。",
+                      "条件は有限集合 ",
+                      math(String.raw`\mathfrak{P}_n`),
+                      " の各元についての多項式の等号であり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_variable_permutation_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_variable_permutation_coefficient",
+                  kind: "claim",
+                  title: { text: "変数を置換した多項式の係数は指数を合成した係数である" },
+                  labels: ["claim_qbar_variable_permutation_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/variable-permutation-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.variablePermutation_coeff",
+                    "Ising2DLambda.FisherZero.variablePermutation_term",
+                    "Ising2DLambda.FisherZero.qbarConst_mul_monomial_coeff",
+                    "Ising2DLambda.NecSuf.FisherZero.equivVariable_coeff_necSuf",
+                    "Ising2DLambda.FisherZero.variablePermutation_coeff_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      "、",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "、",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "、",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_a\bigl(\mathrm{vs}_{\varrho}(P)\bigr)=\mathrm{mco}_{a\circ\varrho}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_variable_permutation"),
+                      "、",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、",
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " について、代入の各項の積を単項式（",
+                      ref("def_qbar_multivariate_monomial"),
+                      "）に書く。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\prod_{k\in\mathbb{N}_{<n}}\mathrm{xv}_{n,\varrho}(k)^{b(k)}
+&=\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n)}_{\varrho(k)}\bigr)^{b(k)}
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\bigr)\\
+&=\prod_{j\in\mathbb{N}_{<n}}\bigl(X^{(n)}_{j}\bigr)^{b(\varrho^{-1}(j))}
+&&\bigl(\because\ \text{有限積の添字を全単射 }j=\varrho(k)\text{ で付け替える}\bigr)\\
+&=\mathrm{mon}_n\bigl(b\circ\varrho^{-1}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_monomial}\text{、}\blkref{def_qbar_variable_permutation}\text{ の指数の合成}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "また ",
+                      math(String.raw`d\in\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`e\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{mk}_n(d)\cdot\mathrm{mon}_n(e)\bigr)
+&=\mathrm{mco}_a\bigl(\mathrm{mon}_n(e)\cdot\mathrm{mk}_n(d)\bigr)
+&&\bigl(\because\ \text{積の可換性}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{a-e}\bigl(\mathrm{mk}_n(d)\bigr)&(e\le a\text{ のとき})\\
+0&(e\le a\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \blkref{claim_qbar_monomial_multiplication_coefficient}\bigr)\\
+&=\begin{cases}
+d&(e=a\text{ のとき})\\
+0&(e\ne a\text{ のとき})
+\end{cases}
+&&\bigl(\because\ \mathrm{mk}_n(d)\text{ の係数は零写像で }d\text{、他で }0\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）、}e\le a\text{ のもとで }a-e=0\iff e=a\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。さらに ",
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " について、",
+                      math(String.raw`b\circ\varrho^{-1}=a`),
+                      " と ",
+                      math(String.raw`b=a\circ\varrho`),
+                      " は同値である（前者の両辺を各 ",
+                      math(String.raw`\varrho(k)`),
+                      " で、後者の両辺を各 ",
+                      math(String.raw`\varrho^{-1}(j)`),
+                      " で比べれば、",
+                      math(String.raw`\varrho^{-1}(\varrho(k))=k`),
+                      " と ",
+                      math(String.raw`\varrho(\varrho^{-1}(j))=j`),
+                      " から互いに従う）。",
+                      math(String.raw`A:=\{\,b\in\mathrm{Ex}_n\mid\mathrm{mco}_b(P)\ne0\,\}`),
+                      " は有限集合である。これらを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{vs}_{\varrho}(P)\bigr)
+&=\mathrm{mco}_a\Bigl(\sum_{b\in A}\mathrm{mk}_n\bigl(\mathrm{mco}_b(P)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{xv}_{n,\varrho}(k)^{b(k)}\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{、}\blkref{def_qbar_multivariate_substitution}\bigr)\\
+&=\mathrm{mco}_a\Bigl(\sum_{b\in A}\mathrm{mk}_n\bigl(\mathrm{mco}_b(P)\bigr)\cdot\mathrm{mon}_n\bigl(b\circ\varrho^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \text{上の一つ目の式}\bigr)\\
+&=\sum_{b\in A}\mathrm{mco}_a\Bigl(\mathrm{mk}_n\bigl(\mathrm{mco}_b(P)\bigr)\cdot\mathrm{mon}_n\bigl(b\circ\varrho^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数}\bigr)\\
+&=\sum_{b\in A:\ b\circ\varrho^{-1}=a}\mathrm{mco}_b(P)
+&&\bigl(\because\ \text{上の二つ目の式}\bigr)\\
+&=\sum_{b\in A:\ b=a\circ\varrho}\mathrm{mco}_b(P)
+&&\bigl(\because\ b\circ\varrho^{-1}=a\iff b=a\circ\varrho\bigr)\\
+&=\mathrm{mco}_{a\circ\varrho}(P)
+&&\bigl(\because\ a\circ\varrho\in A\text{ なら和はその一項、}a\circ\varrho\notin A\text{ なら和は空で }\mathrm{mco}_{a\circ\varrho}(P)=0\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は有限集合の全単射による添字の付け替えと ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
