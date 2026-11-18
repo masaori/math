@@ -111,26 +111,31 @@ theorem abs_mul' (a b : R) : |a * b| = |a| * |b| := by
       _ = |a| * b := by rw [abs_of_nonneg ha]
       _ = |a| * |b| := by rw [abs_of_nonneg hb]
   · have h0 : 0 ≤ a * (-b) := mul_nonneg ha (neg_pos.mpr hb).le
-    have hab : a * b ≤ 0 := by
-      have : a * b = -(a * (-b)) := by rw [mul_neg, neg_neg]
-      rw [this]; exact neg_nonpos.mpr h0
+    have hab : a * b ≤ 0 :=
+      calc a * b
+          = -(-(a * b)) := (neg_neg _).symm
+        _ = -(a * (-b)) := by rw [mul_neg]
+        _ ≤ 0 := neg_nonpos.mpr h0
     calc |a * b|
         = -(a * b) := abs_of_nonpos' hab
       _ = a * (-b) := (mul_neg a b).symm
       _ = |a| * (-b) := by rw [abs_of_nonneg ha]
       _ = |a| * |b| := by rw [abs_of_neg hb]
   · have h0 : 0 ≤ (-a) * b := mul_nonneg (neg_pos.mpr ha).le hb
-    have hab : a * b ≤ 0 := by
-      have : a * b = -((-a) * b) := by rw [neg_mul, neg_neg]
-      rw [this]; exact neg_nonpos.mpr h0
+    have hab : a * b ≤ 0 :=
+      calc a * b
+          = -(-(a * b)) := (neg_neg _).symm
+        _ = -((-a) * b) := by rw [neg_mul]
+        _ ≤ 0 := neg_nonpos.mpr h0
     calc |a * b|
         = -(a * b) := abs_of_nonpos' hab
       _ = (-a) * b := (neg_mul a b).symm
       _ = |a| * b := by rw [abs_of_neg ha]
       _ = |a| * |b| := by rw [abs_of_nonneg hb]
-  · have hab : 0 ≤ a * b := by
-      rw [← neg_mul_neg]
-      exact mul_nonneg (neg_pos.mpr ha).le (neg_pos.mpr hb).le
+  · have hab : 0 ≤ a * b :=
+      calc a * b
+          = (-a) * (-b) := (neg_mul_neg a b).symm
+        _ ≥ 0 := mul_nonneg (neg_pos.mpr ha).le (neg_pos.mpr hb).le
     calc |a * b|
         = a * b := abs_of_nonneg hab
       _ = (-a) * (-b) := (neg_mul_neg a b).symm

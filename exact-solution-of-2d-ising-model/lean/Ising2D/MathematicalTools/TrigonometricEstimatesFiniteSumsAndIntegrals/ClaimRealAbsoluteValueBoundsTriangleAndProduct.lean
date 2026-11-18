@@ -20,12 +20,14 @@
   `real_abs_of_product` は 3 行・4 行・4 行・4 行）。人手の鎖が等号で終わる場合（`q ≥ 0` の `q = |q|`、`q < 0` の `-|q| = q`）は、
   主張の `≤` へ移す `le_rfl` を 1 段足した。
 * 「非負の実数の積は非負」は `mul_nonneg`、「両辺の符号を反転する」は `neg_le_neg`・`neg_pos`・`neg_nonpos`、
-  「ℝ で `-(ab) = a(-b)`」などの符号の付け替えは `mul_neg`・`neg_mul`・`neg_mul_neg` の 1 段ずつである（`real_abs_of_product` の
-  `-(ab) = (-a)b` は人手の参照に合わせて `real_negation_times_is_negation_of_product` を、`-(ab) = a(-b)` は
-  `real_times_negation_is_negation_of_product` を、それぞれ右辺から左辺へ当てる）。
+  `real_abs_of_product` の符号の付け替えは人手の参照に合わせ、`-(ab) = (-a)b` は `real_negation_times_is_negation_of_product` を、
+  `-(ab) = a(-b)` は `real_times_negation_is_negation_of_product` を、`ab = (-a)(-b)` は `real_negation_times_negation_is_product` を、
+  前置きの `ab = -(-(ab))` は `real_double_negation` の文字を `p` に替えた `-(-p) = p` を、それぞれ右辺から左辺へ当てる。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesNegationIsProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
 import Mathlib.Algebra.Order.AbsoluteValue.Basic
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
@@ -108,9 +110,11 @@ theorem real_abs_of_product (a b : ℝ) : |a * b| = |a| * |b| := by
       _ = |a| * |b| := by rw [abs_of_nonneg hb]                               -- `def_real_absolute_value`（`b ≥ 0`）
   · -- `a ≥ 0` かつ `b < 0`
     have h0 : 0 ≤ a * (-b) := mul_nonneg ha (neg_pos.mpr hb).le              -- `-b > 0` なので非負の実数の積
-    have hab : a * b ≤ 0 := by
-      have : a * b = -(a * (-b)) := by rw [mul_neg, neg_neg]                  -- `ab = -(a(-b))`
-      rw [this]; exact neg_nonpos.mpr h0
+    have hab : a * b ≤ 0 :=
+      calc a * b
+          = -(-(a * b)) := (real_double_negation (a * b)).symm                -- `real_double_negation` の文字を `p` に替えた `-(-p) = p`（`p → ab`）を右辺から左辺へ
+        _ = -(a * (-b)) := by rw [real_times_negation_is_negation_of_product]   -- `real_times_negation_is_negation_of_product`（`x → a`、`t → b`）を右辺から左辺へ
+        _ ≤ 0 := neg_nonpos.mpr h0                                          -- `a(-b) ≥ 0` の両辺の符号を反転
     calc |a * b|
         = -(a * b) := real_absolute_value_of_nonpositive hab                  -- `real_absolute_value_of_nonpositive`（`q → ab`）
       _ = a * (-b) := (real_times_negation_is_negation_of_product a b).symm   -- `real_times_negation_is_negation_of_product`（`x → a`、`t → b`）を右辺から左辺へ
@@ -118,21 +122,24 @@ theorem real_abs_of_product (a b : ℝ) : |a * b| = |a| * |b| := by
       _ = |a| * |b| := by rw [abs_of_neg hb]                                  -- `def_real_absolute_value`（`b < 0`）
   · -- `a < 0` かつ `b ≥ 0`
     have h0 : 0 ≤ (-a) * b := mul_nonneg (neg_pos.mpr ha).le hb              -- `-a > 0` なので非負の実数の積
-    have hab : a * b ≤ 0 := by
-      have : a * b = -((-a) * b) := by rw [neg_mul, neg_neg]                  -- `ab = -((-a)b)`
-      rw [this]; exact neg_nonpos.mpr h0
+    have hab : a * b ≤ 0 :=
+      calc a * b
+          = -(-(a * b)) := (real_double_negation (a * b)).symm                -- `real_double_negation` の文字を `p` に替えた `-(-p) = p`（`p → ab`）を右辺から左辺へ
+        _ = -((-a) * b) := by rw [real_negation_times_is_negation_of_product]   -- `real_negation_times_is_negation_of_product`（`x → a`、`t → b`）を右辺から左辺へ
+        _ ≤ 0 := neg_nonpos.mpr h0                                          -- `(-a)b ≥ 0` の両辺の符号を反転
     calc |a * b|
         = -(a * b) := real_absolute_value_of_nonpositive hab                  -- `real_absolute_value_of_nonpositive`（`q → ab`）
       _ = (-a) * b := (real_negation_times_is_negation_of_product a b).symm   -- `real_negation_times_is_negation_of_product`（`x → a`、`t → b`）を右辺から左辺へ
       _ = |a| * b := by rw [abs_of_neg ha]                                    -- `def_real_absolute_value`（`a < 0`）
       _ = |a| * |b| := by rw [abs_of_nonneg hb]                               -- `def_real_absolute_value`（`b ≥ 0`）
   · -- `a < 0` かつ `b < 0`
-    have hab : 0 ≤ a * b := by
-      rw [← neg_mul_neg]                                                      -- `ab = (-a)(-b)`
-      exact mul_nonneg (neg_pos.mpr ha).le (neg_pos.mpr hb).le                -- `-a > 0`、`-b > 0` なので非負の実数の積
+    have hab : 0 ≤ a * b :=
+      calc a * b
+          = (-a) * (-b) := (real_negation_times_negation_is_product a b).symm -- `real_negation_times_negation_is_product`（`a → a`、`b → b`）を右辺から左辺へ
+        _ ≥ 0 := mul_nonneg (neg_pos.mpr ha).le (neg_pos.mpr hb).le          -- `-a > 0`、`-b > 0` なので非負の実数の積
     calc |a * b|
         = a * b := abs_of_nonneg hab                                          -- `def_real_absolute_value`（`ab ≥ 0`）
-      _ = (-a) * (-b) := (neg_mul_neg a b).symm                               -- ℝ で `ab = (-a)(-b)`
+      _ = (-a) * (-b) := (real_negation_times_negation_is_product a b).symm   -- `real_negation_times_negation_is_product`（`a → a`、`b → b`）を右辺から左辺へ
       _ = |a| * (-b) := by rw [abs_of_neg ha]                                 -- `def_real_absolute_value`（`a < 0`）
       _ = |a| * |b| := by rw [abs_of_neg hb]                                  -- `def_real_absolute_value`（`b < 0`）
 

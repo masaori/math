@@ -15,13 +15,17 @@ for a in PTS:
             assert a*b >= 0
             assert rabs(a*b) == a*b and a*b == rabs(a)*b and rabs(a)*b == rabs(a)*rabs(b); cnt[0] += 1
         elif a >= 0 and b < 0:
-            assert a*(-b) >= 0 and a*b == -(a*(-b)) and a*b <= 0
+            assert a*(-b) >= 0
+            assert a*b == -(-(a*b)) and -(-(a*b)) == -(a*(-b))      # 前置きの鎖: real_double_negation（-(-p) = p, p → ab）、real_times_negation_is_negation_of_product
+            assert a*b <= 0                                          # a(-b) >= 0 の両辺の符号を反転
             assert rabs(a*b) == -(a*b) and -(a*b) == a*(-b) and a*(-b) == rabs(a)*(-b) and rabs(a)*(-b) == rabs(a)*rabs(b); cnt[1] += 1
         elif a < 0 and b >= 0:
-            assert (-a)*b >= 0 and a*b == -((-a)*b) and a*b <= 0
+            assert (-a)*b >= 0
+            assert a*b == -(-(a*b)) and -(-(a*b)) == -((-a)*b)      # 前置きの鎖: real_double_negation（-(-p) = p, p → ab）、real_negation_times_is_negation_of_product
+            assert a*b <= 0                                          # (-a)b >= 0 の両辺の符号を反転
             assert rabs(a*b) == -(a*b) and -(a*b) == (-a)*b and (-a)*b == rabs(a)*b and rabs(a)*b == rabs(a)*rabs(b); cnt[2] += 1
         else:
-            assert a*b == (-a)*(-b) and a*b >= 0
+            assert (-a)*(-b) >= 0 and a*b == (-a)*(-b) and a*b >= 0  # real_negation_times_negation_is_product を右辺から左辺へ
             assert rabs(a*b) == a*b and a*b == (-a)*(-b) and (-a)*(-b) == rabs(a)*(-b) and rabs(a)*(-b) == rabs(a)*rabs(b); cnt[3] += 1
         assert rabs(a*b) == rabs(a)*rabs(b)                           # 主張
 assert all(c > 0 for c in cnt)

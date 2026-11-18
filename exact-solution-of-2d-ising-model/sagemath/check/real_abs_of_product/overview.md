@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 - ブロック: `calc_formulae_claim_real_abs_of_product`（|ab| = |a||b|）
-- 範囲: 4 つの場合（a, b の符号）の前置き（積の符号）と 3 行・4 行・4 行・4 行と主張
+- 範囲: 4 つの場合（a, b の符号）の前置き（積の符号。a ≥ 0 かつ b < 0、a < 0 かつ b ≥ 0 の `ab = −(−(ab)) = −(…) ≤ 0` の 3 行の鎖と、a < 0 かつ b < 0 の `ab = (−a)(−b) ≥ 0` の 2 行の鎖を含む）と 3 行・4 行・4 行・4 行と主張
 
 ## 証明の行との対応
 

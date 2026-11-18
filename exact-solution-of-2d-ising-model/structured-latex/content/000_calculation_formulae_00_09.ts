@@ -3721,9 +3721,19 @@ q
         math(String.raw`-b > 0`),
         " なので非負の実数の積として ",
         math(String.raw`a(-b) \geq 0`),
-        " であり、",
-        math(String.raw`ab = -(a(-b)) \leq 0`),
-        " である。よって",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+ab
+&= -(-(ab))
+&&\bigl(\because\ \blkref{real_double_negation}\ \text{の}\ -(-a) = a\ \text{の文字を}\ p\ \text{に替えた}\ -(-p) = p\ (p \to ab)\ \text{を右辺から左辺へ}\bigr)\\
+&= -(a(-b))
+&&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to a,\ t \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&\leq 0
+&&\bigl(\because\ a(-b) \geq 0\ \text{の両辺の符号を反転}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
 |ab|
@@ -3744,9 +3754,19 @@ q
         math(String.raw`-a > 0`),
         " なので非負の実数の積として ",
         math(String.raw`(-a)b \geq 0`),
-        " であり、",
-        math(String.raw`ab = -((-a)b) \leq 0`),
-        " である。よって",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+ab
+&= -(-(ab))
+&&\bigl(\because\ \blkref{real_double_negation}\ \text{の}\ -(-a) = a\ \text{の文字を}\ p\ \text{に替えた}\ -(-p) = p\ (p \to ab)\ \text{を右辺から左辺へ}\bigr)\\
+&= -((-a)b)
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to a,\ t \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&\leq 0
+&&\bigl(\because\ (-a)b \geq 0\ \text{の両辺の符号を反転}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
 |ab|
@@ -3767,16 +3787,24 @@ q
         math(String.raw`-a > 0`),
         "、",
         math(String.raw`-b > 0`),
-        " なので非負の実数の積として ",
-        math(String.raw`ab = (-a)(-b) \geq 0`),
-        " であり、",
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+ab
+&= (-a)(-b)
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to a,\ b \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&\geq 0
+&&\bigl(\because\ -a > 0,\ -b > 0\ \text{なので非負の実数の積}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。よって",
       ]),
       displayMath(String.raw`\begin{aligned}
 |ab|
 &= ab
 &&\bigl(\because\ \blkref{def_real_absolute_value}\ (ab \geq 0)\bigr)\\
 &= (-a)(-b)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ ab = (-a)(-b)\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to a,\ b \to b)\ \text{を右辺から左辺へ}\bigr)\\
 &= |a|\,(-b)
 &&\bigl(\because\ \blkref{def_real_absolute_value}\ (a < 0)\bigr)\\
 &= |a|\,|b|
@@ -3790,6 +3818,7 @@ q
         "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が「積の絶対値」を名前だけで使っていたので、引けるよう足した。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(ab) = (−a)b の行の根拠「ℝ で −(ab) = (−a)b」を、主張 real_negation_times_is_negation_of_product（x → a, t → b を右辺から左辺へ。文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: a ≥ 0 かつ b < 0 の鎖の −(ab) = a(−b) の行の根拠「ℝ で −(ab) = a(−b)」を、主張 real_times_negation_is_negation_of_product（x → a, t → b を右辺から左辺へ）の参照にした（文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: a ≥ 0 かつ b < 0、a < 0 かつ b ≥ 0 の前置きが ab = −(a(−b))・ab = −((−a)b) を根拠なしに書いていた（(−x)t = −(xt) または x(−t) = −(xt) と −(−y) = y を一度に使う）ので、それぞれ ab から始めて ≤ 0 に着く 3 行の鎖（real_double_negation の文字を p に替えた −(−p) = p を右辺から左辺へ、real_times_negation_is_negation_of_product または real_negation_times_is_negation_of_product を右辺から左辺へ、両辺の符号の反転）に割った。a < 0 かつ b < 0 の前置きを ab = (−a)(−b) ≥ 0 の 2 行の鎖にし、その 1 行目と |ab| の鎖の 2 行目の「ℝ で ab = (−a)(−b)」を real_negation_times_negation_is_product（右辺から左辺へ）の参照にした。いずれも文書の並びでは後ろのブロックで、依存先にこの主張は無く循環しない。主張・各場合の |ab| の鎖は不変。",
       ],
     },
   },
