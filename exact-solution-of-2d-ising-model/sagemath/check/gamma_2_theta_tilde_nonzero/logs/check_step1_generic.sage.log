@@ -3,7 +3,12 @@ PASS w の成分 第 1 行 → 第 2 行: 三か所の積 (c_1,0)(cos θ,0)・(0
 PASS w の成分 第 2 行 → 第 3 行: 二か所の積
 PASS w の成分 第 3 行 → 第 4 行: 和。鎖の両端 w(θ) = (c_1 cos θ - s_1c_2, -sin θ)
 PASS 同値の鎖: 第 1 式の両辺に s_1c_2 を加える
-PASS 同値の鎖: 第 2 式の両辺を -1 倍する
+PASS -sin θ = 0 ⇒ sin θ = 0 の鎖 第 1 行: real_double_negation (a → sin θ) を右辺から左辺へ
+PASS 同 第 2 行: 仮定 -sin θ = 0（法として一致し、法なしでは異なる）
+PASS 同 第 3 行: real_negation_of_zero_is_zero
+PASS sin θ = 0 ⇒ -sin θ = 0 の鎖 第 1 行: 仮定 sin θ = 0（法として一致し、法なしでは異なる）
+PASS 同 第 2 行: real_negation_of_zero_is_zero
+PASS 同値の鎖 最終行: 第 2 式 -sin θ = 0 が上の二つの鎖の左辺の仮定と同じ式
 PASS 同値の鎖: 0_C = (0,0)（成分ごとの相等で連立条件へ）
 PASS 逆元の鎖 第 1 行 = 第 2 行（結合律・可換律。多項式として一致）
 PASS 逆元の鎖 第 2 行 = 第 3 行（-i = (-1)i）
@@ -20,5 +25,5 @@ PASS 背理の鎖: 1 = a b、a = 0 なら 0·b = 0、1 ≠ 0
 PASS a w = 0 ⇒ w = 0 の鎖: w = 1 w = (b a) w = b (a w)（b a = 1 を法として）
 PASS 同 b 0 = 0 b = 0
 PASS w = 0 ⇒ a w = 0 の鎖: a 0 = 0 a = 0
--- Step 1（零点の必要条件）一般の θ: 21/21 PASS
+-- Step 1（零点の必要条件）一般の θ: 26/26 PASS
 RESULT: PASS

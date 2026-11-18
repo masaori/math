@@ -19,7 +19,7 @@
 #   組んだ前の行と独立に比べる。結合定数は有理数の (K_1, K_2) の 4 組と、本文の ψ̌ の検算と同じ (2 log y, log x) の 3 組、M_col = 2..6。
 # 厳密な部: 行の構造（有限積の分配、和の分配、展開）を γ によらず確かめるため、exp(γ_μ/2) を QQ 上のローラン多項式環の不定元 A_μ、
 #   C を不定元に置き（exp(γ(e − 1/2)) = A^{2e−1}）、第一の鎖の 3〜6 行と第二の鎖の 1〜4 行と最後の閉形式 C·Π(A − A^{-1}) を厳密に比べる。
-#   指数の引数の書き換え（1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)（real_times_negation_is_negation_of_product）、a·1/2 = a/2）は QQ[γ]、1·b = b・a + (−1)b = a − b は QQ[a, b]、
+#   指数の引数の書き換え（1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)（real_times_negation_is_negation_of_product）、a·1/2 = a/2）は QQ[γ]、1·b = b・(−1)b = −b（real_minus_one_times_is_negation）・a + (−b) = a − b（def_real_difference）は QQ[a, b]、
 #   b = 2·(b/2) は QQ(b) で恒等式として確かめる。
 load("_prelude.sage")
 
@@ -71,6 +71,7 @@ for (K1, K2) in PARAMS:
             fold_prod([RB(u_sign(1)) * e1(mu) + RB(u_sign(0)) * e0(mu) for mu in range(M)]) * C,
             fold_prod([1 * e1(mu) + (-1) * e0(mu) for mu in range(M)]) * C,
             fold_prod([e1(mu) + (-1) * e0(mu) for mu in range(M)]) * C,
+            fold_prod([e1(mu) + (-e0(mu)) for mu in range(M)]) * C,
             fold_prod([e1(mu) - e0(mu) for mu in range(M)]) * C,
             fold_prod([(gam[mu] * half).exp() - e0(mu) for mu in range(M)]) * C,
             fold_prod([(gam[mu] * half).exp() - (gam[mu] * (-half)).exp() for mu in range(M)]) * C,
@@ -85,8 +86,8 @@ for (K1, K2) in PARAMS:
             count += 1
         # 否定コントロール: ǔ^{(0)} を +1 にした和（Σ_ϵ Λ̌_ϵ）は ϰ と重ならない（cosh の積になる）
         assert not binary_word_sum(M, Lam).overlaps(S[-1])
-        # 否定コントロール: sinh の引数の 1/2 を落とすと 13 行目と重ならない
-        assert not (fold_prod([2 * gam[mu].sinh() for mu in range(M)]) * C).overlaps(S[12])
+        # 否定コントロール: sinh の引数の 1/2 を落とすと 14 行目と重ならない
+        assert not (fold_prod([2 * gam[mu].sinh() for mu in range(M)]) * C).overlaps(S[13])
         # 否定コントロール: C を落とすと重ならない
         assert not fold_prod([2 * (gam[mu] / 2).sinh() for mu in range(M)]).overlaps(S[-1])
         negatives += 3
@@ -129,8 +130,12 @@ for x, y in [(g * (1 - h), g * h), (g * (0 - h), g * (-h)), (g * (-h), -(g * h))
     exact += 1
 Pab = PolynomialRing(QQ, ['a', 'b'])
 a_, b_ = Pab.gens()
-assert 1 * b_ == b_ and a_ + (-1) * b_ == a_ - b_
-exact += 2
+assert 1 * b_ == b_
+assert (-1) * b_ == -b_                 # real_minus_one_times_is_negation（a → b）
+assert a_ + (-b_) == a_ - b_            # def_real_difference（y → a、z → b）を右辺から左辺へ
+assert a_ + (-1) * b_ != a_ + b_        # 否定コントロール: (−1)b を b に取り違えると一致しない
+exact += 3
+negatives += 1
 Fb = FractionField(PolynomialRing(QQ, 'b'))
 assert Fb.gen() == 2 * (Fb.gen() / 2)
 exact += 1

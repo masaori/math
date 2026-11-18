@@ -1,4 +1,5 @@
-# Step 1: w(θ) の成分の鎖、逆元の鎖（a(θ) b(θ) = 1）、a(θ) ≠ 0 の背理の鎖、a w = 0 ⟺ w = 0 の二つの鎖、同値の鎖。
+# Step 1: w(θ) の成分の鎖、逆元の鎖（a(θ) b(θ) = 1）、a(θ) ≠ 0 の背理の鎖、a w = 0 ⟺ w = 0 の二つの鎖、
+# -sin θ = 0 ⟺ sin θ = 0 の二つの鎖、同値の鎖。
 # (a) 成分: ℂ を definition_of_cc どおり実数の対で持ち、cos θ = co、sin θ = si などを QQ 上の不定元に置く。
 # (b) 逆元の鎖: 本文は exp(iθ) を Euler の公式で展開せず scalar_exp_product・scalar_exp_zero だけを使うので、
 #     exp(iθ)、exp(-iθ)、exp(iθ + (-iθ)) を独立な不定元 e, f, g に置き、各行の根拠が導入する関係
@@ -28,7 +29,15 @@ rep.check(cmul(real(c1), real(co)) == (c1*co, 0) and cmul(I2, real(si)) == (0, s
 rep.check(cmul(m1, (P(0), si)) == (0, -si) and cmul(m1, (s1*c2, P(0))) == (-s1*c2, 0), "w の成分 第 2 行 → 第 3 行: 二か所の積")
 rep.check(w_l1 == w_l2 == w_l3 and w_l3 == w_l4, "w の成分 第 3 行 → 第 4 行: 和。鎖の両端 w(θ) = (c_1 cos θ - s_1c_2, -sin θ)")
 rep.check(w_l4[0] + s1*c2 == c1*co, "同値の鎖: 第 1 式の両辺に s_1c_2 を加える")
-rep.check((-1)*w_l4[1] == si, "同値の鎖: 第 2 式の両辺を -1 倍する")
+# -sin θ = 0 と sin θ = 0 の同値を示す二つの鎖。仮定は、仮定の式が生成するイデアルを法として使う
+neg_hyp = P.ideal([-si])                        # 仮定 -sin θ = 0
+pos_hyp = P.ideal([si])                         # 仮定 sin θ = 0
+rep.check(si == -(-si), "-sin θ = 0 ⇒ sin θ = 0 の鎖 第 1 行: real_double_negation (a → sin θ) を右辺から左辺へ")
+rep.check((-(-si) - (-P(0))) in neg_hyp and -(-si) != -P(0), "同 第 2 行: 仮定 -sin θ = 0（法として一致し、法なしでは異なる）")
+rep.check(-P(0) == P(0), "同 第 3 行: real_negation_of_zero_is_zero")
+rep.check((-si - (-P(0))) in pos_hyp and -si != -P(0), "sin θ = 0 ⇒ -sin θ = 0 の鎖 第 1 行: 仮定 sin θ = 0（法として一致し、法なしでは異なる）")
+rep.check(-P(0) == P(0), "同 第 2 行: real_negation_of_zero_is_zero")
+rep.check(w_l4[1] == -si, "同値の鎖 最終行: 第 2 式 -sin θ = 0 が上の二つの鎖の左辺の仮定と同じ式")
 rep.check(real(0) == (0, 0), "同値の鎖: 0_C = (0,0)（成分ごとの相等で連立条件へ）")
 
 # (b) 逆元の鎖（13 行）

@@ -1767,8 +1767,10 @@ P_{k+1}\check{Q}_\epsilon
 &&\bigl(\because\ \check{u}^{(1)} := 1,\ \check{u}^{(0)} := -1\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot b = b\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + \left(-\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to \exp(\gamma(\tilde\theta_\mu)(0 - \tfrac12)))\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + (-1)b = a - b\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \exp(\gamma(\tilde\theta_\mu)(1 - \tfrac12)),\ z \to \exp(\gamma(\tilde\theta_\mu)(0 - \tfrac12)))\ \text{を右辺から左辺へ、各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
@@ -1981,6 +1983,7 @@ r
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 4 行目の名前だけの根拠「ℝ で a > 0 なら −a < 0（a → ϰ）」を、新しく足した real_negation_of_positive_is_negative（a → ϰ）の参照にした。当てる (2) の ϰ > 0 と、式・主張は変えていない。",
         "2026-11-17: Step 7 の ⟸ の散文の根拠 2 つを参照にした。「ℂ = ℝ×ℝ の元の等号は成分ごとなので r = ȟϰ」は、鎖を r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ の 2 行にし（両端の (r,0)・(ȟϰ,0) への書き換えの 2 行は要らなくなった）、背理の鎖の 1 行目の根拠を inclusion_rr_to_cc_is_injective（a → r, b → ȟϰ）にした。「r > 0 に反する」は、新しく足した real_less_than_is_asymmetric（a → 0, b → r）を当てた「r < 0 は成り立たない」に反する、とした。主張は変えていない。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: exp(γ(θ~_μ)(−½)) = exp(−(γ(θ~_μ)·½)) の行の根拠「ℝ で a(−b) = −(ab)」を、主張 real_times_negation_is_negation_of_product（x → γ(θ~_μ), t → ½ を各因子へ同時に）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の 2 本目の和の鎖の「ℝ で a + (−1)b = a − b を各因子へ同時に」の行を、real_minus_one_times_is_negation（a → exp(γ(θ̃_μ)(0 − ½))）を各因子へ当てる行と def_real_difference（y → exp(γ(θ̃_μ)(1 − ½))、z → exp(γ(θ̃_μ)(0 − ½))）を右辺から左辺へ各因子へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },

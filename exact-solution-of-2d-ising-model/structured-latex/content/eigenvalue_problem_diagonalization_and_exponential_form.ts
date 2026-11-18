@@ -3076,6 +3076,34 @@ a(\theta)\,w(\theta)
    \quad (\because \blkref{complex_zero_times_is_zero})
 \end{aligned}`,
       ),
+      paragraph([
+        "である。また、",
+        math(String.raw`-\sin\theta = 0`),
+        " と ",
+        math(String.raw`\sin\theta = 0`),
+        " は同値である。前者を仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sin\theta
+&= -(-\sin\theta)
+   \quad (\because \blkref{real_double_negation}\ (a \to \sin\theta)\ \text{を右辺から左辺へ}) \\
+&= -0
+   \quad (\because \text{仮定 } -\sin\theta = 0) \\
+&= 0
+   \quad (\because \blkref{real_negation_of_zero_is_zero})
+\end{aligned}`,
+      ),
+      paragraph(["であり、後者を仮定すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+-\sin\theta
+&= -0
+   \quad (\because \text{仮定 } \sin\theta = 0) \\
+&= 0
+   \quad (\because \blkref{real_negation_of_zero_is_zero})
+\end{aligned}`,
+      ),
       paragraph(["である。したがって"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3083,7 +3111,7 @@ a(\theta)\,w(\theta)
 &\iff a(\theta)\,w(\theta) = 0_{\mathbb{C}}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}\text{ の定義式を積の結合律で括り直す}) \\
 &\iff w(\theta) = 0_{\mathbb{C}}
-   \quad (\because \text{直前の二つの鎖}) \\
+   \quad (\because a(\theta)\,w(\theta) = 0_{\mathbb{C}} \text{ と } w(\theta) = 0_{\mathbb{C}} \text{ の同値を示した二つの鎖}) \\
 &\iff \bigl(c_1\cos\theta - s_1c_2,\ -\sin\theta\bigr) = (0, 0)
    \quad (\because \text{準備の } w(\theta) \text{ の成分の鎖と、}\blkref{inclusion_rr_to_cc}\text{ の } 0_{\mathbb{C}} = (0,0)) \\
 &\iff \begin{cases} c_1\cos\theta - s_1c_2 = 0 \\ -\sin\theta = 0 \end{cases}
@@ -3091,7 +3119,7 @@ a(\theta)\,w(\theta)
 &\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ -\sin\theta = 0 \end{cases}
    \quad (\because \text{第 1 式の両辺に } s_1c_2 \text{ を加える}) \\
 &\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ \sin\theta = 0 \end{cases}
-   \quad (\because \text{第 2 式の両辺を } -1 \text{ 倍する})
+   \quad (\because -\sin\theta = 0 \text{ と } \sin\theta = 0 \text{ の同値を示した二つの鎖を第 2 式に})
 \end{aligned}`,
       ),
       paragraph([
@@ -3215,6 +3243,7 @@ s_1c_2
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。" +
           "Step 0 の正値性は第一・第二の双対結合定数の定義と添字つき略記の正値性から直接導く形に改めた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の s_1c_2 の鎖の最後の行が根拠「ℝ の積の符号規則 a·(−1) = −a」を名前だけで引いていたので、ℝ の乗法の可換則（set_and_algebra_notation）の行と real_minus_one_times_is_negation（a → c_1）の行の 2 行に割った。鎖の両端と主張は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 1 の同値の鎖の最終行の名前だけの根拠「第 2 式の両辺を −1 倍する」を、−sin θ = 0 と sin θ = 0 の同値を示す二つの鎖（前者から後者は real_double_negation（a → sin θ）を右辺から左辺へ・仮定・real_negation_of_zero_is_zero、後者から前者は仮定・real_negation_of_zero_is_zero）の参照にした。二つの鎖を挟んだので、2 行目の根拠「直前の二つの鎖」を「a(θ)w(θ) = 0_ℂ と w(θ) = 0_ℂ の同値を示した二つの鎖」と内容で指す形にした。主張と同値の鎖の両端は不変。",
       ],
     },
   },

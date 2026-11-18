@@ -476,6 +476,7 @@ noncomputable def traceFactor {F : CheckFermi M} (D : VPlusData M F) : ℝ := D.
 = (Π_μ(ǔ^{(1)}exp(γ(θ̃_μ)(1−1/2)) + ǔ^{(0)}exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
 = (Π_μ(1·exp(γ(θ̃_μ)(1−1/2)) + (−1)exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
 = (Π_μ(exp(γ(θ̃_μ)(1−1/2)) + (−1)exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
+= (Π_μ(exp(γ(θ̃_μ)(1−1/2)) + (−exp(γ(θ̃_μ)(0−1/2)))))(2sinh 2K_2)^{M_col/2}
 = (Π_μ(exp(γ(θ̃_μ)(1−1/2)) − exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
 = (Π_μ(exp(γ(θ̃_μ)·1/2) − exp(γ(θ̃_μ)(0−1/2))))(2sinh 2K_2)^{M_col/2}
 = (Π_μ(exp(γ(θ̃_μ)·1/2) − exp(γ(θ̃_μ)(−1/2))))(2sinh 2K_2)^{M_col/2}
@@ -517,8 +518,17 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
           + (-1) * Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
         simp only [one_mul]                             -- ℝ で `1·b = b` を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
-          - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
-        simp only [neg_one_mul, ← sub_eq_add_neg]       -- ℝ で `a + (−1)b = a − b` を各因子へ同時に
+          + -Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [real_minus_one_times_is_negation (Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))]
+                                                        -- `real_minus_one_times_is_negation`（`a → exp(γ(θ̃_μ)(0−1/2))`）を各因子へ同時に
+    _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
+          - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C :=
+        congrArg (· * D.C) (Finset.prod_congr rfl fun μ _ =>
+          (sub_eq_add_neg (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2)))
+            (Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))).symm)
+                                                        -- `def_real_difference`（`y → exp(γ(θ̃_μ)(1−1/2))`、`z → exp(γ(θ̃_μ)(0−1/2))`）を
+                                                        -- 右辺から左辺へ、各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
           - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
         rw [sub_half (1 : ℝ)]                           -- ℝ で `1 − 1/2 = 1/2` を各因子へ同時に
