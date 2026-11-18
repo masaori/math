@@ -34,12 +34,12 @@
 
 ## 1. 形式化した定理の一覧
 
-### 1.1 `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`（ラベル `cosh_addition_and_half_angle`）
+### 1.1 `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`（旧ラベル `cosh_addition_and_half_angle`。人手証明の列の (2)〜(5) はその項の番号）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.cosh_add_formula` / `cosh_sub_formula` | `cosh` の加法定理 | (1) |
-| `Ising2D.sinh_add_formula` / `sinh_sub_formula` | `sinh` の加法定理 | (1) |
+| `Ising2D.cosh_add_formula` / `cosh_sub_formula` | `cosh` の加法定理（複号 `+` の 8 行・複号 `−` の 4 行と 1 対 1 の `calc`） | `cosh_addition_formula` |
+| `Ising2D.sinh_add_formula` / `sinh_sub_formula` | `sinh` の加法定理（複号 `+` の 8 行・複号 `−` の 4 行と 1 対 1 の `calc`） | `sinh_addition_formula` |
 | `Ising2D.cosh_eq_one_add_two_sinh_half_sq` | **`cosh x = 1 + 2 sinh²(x/2)`** | (2) |
 | `Ising2D.sinh_eq_two_sinh_half_mul_cosh_half` | **`sinh x = 2 sinh(x/2) cosh(x/2)`** | (2) |
 | `Ising2D.sinh_strictMono` / `sinh_injective_real` | `sinh` は狭義単調増加・単射 | (3) |
@@ -56,6 +56,12 @@
 | --- | --- | --- |
 | `Ising2D.cosh_is_even` | **`cosh(−x) = cosh x`**（人手の 4 行と 1 対 1） | 主張全体 |
 | `Ising2D.cosh_is_even_of_necSuf` | 同じ主張を `NecSuf.symmetrized_sum_is_even'` の特殊化として得る（`ClaimCoshIsEvenFromNecSuf.lean`） | 主張全体 |
+
+### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimSinhIsOdd.lean`（ラベル `sinh_is_odd`）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.sinh_is_odd` | **`sinh(−x) = −sinh x`**（人手の 5 行と 1 対 1） | 主張全体 |
 
 ### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAtLeastOne.lean`（ラベル `cosh_at_least_one`）
 

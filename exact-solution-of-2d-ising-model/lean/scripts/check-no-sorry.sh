@@ -2906,6 +2906,7 @@ targets=(
   Ising2D.cosh_is_even
   "Ising2D.NecSuf.symmetrized_sum_is_even'"
   Ising2D.cosh_is_even_of_necSuf
+  Ising2D.sinh_is_odd
   Ising2D.positive_real_square_injective
   Ising2D.factor_difference_of_squares_eq_zero
   "Ising2D.NecSuf.positive_square_injective'"

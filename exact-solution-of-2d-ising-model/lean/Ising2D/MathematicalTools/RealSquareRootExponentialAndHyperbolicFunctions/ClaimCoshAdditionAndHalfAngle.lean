@@ -2,11 +2,16 @@
 # `cosh, sinh` の加法定理・半角公式と `arcsinh`
 
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
-- `critical_001_claim_cosh_addition_and_half_angle`（ラベル `cosh_addition_and_half_angle`）
+- 下の (2)〜(5) は旧ラベル `cosh_addition_and_half_angle` の項の番号である。本文ではこのブロックは 1 ブロック 1 主張へ
+  分割されて無い（(2) は `cosh_half_angle_formula`・`sinh_double_angle_formula` など）。
+- (1) の加法定理は `critical_claim_cosh_addition_formula`（ラベル `cosh_addition_formula`）と
+  `critical_claim_sinh_addition_formula`（ラベル `sinh_addition_formula`）。`cosh_add_formula`・`cosh_sub_formula`・
+  `sinh_add_formula`・`sinh_sub_formula` の `calc` は、それぞれの複号の人手の鎖と 1 対 1 である。
 
 **具体版**（人手証明と同じ抽象度＝実数の `cosh, sinh, arsinh`）。
 必要十分版は `Ising2D/NecSuf/HyperbolicBounds.lean`
 （`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半は必要十分版の系として導出してある。
+(1) の加法定理 4 本の必要十分版は未判断（状態台帳の (d4c44p15f15p38w16)）。
 
 ## mathlib の状況（調査結果）
 
@@ -18,30 +23,104 @@
 mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは必要十分版で証明した。
 -/
 import Ising2D.NecSuf.HyperbolicBounds
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhIsOdd
 
 namespace Ising2D
 
 open Real
 
-/-- 人手証明 (1): `cosh` の加法定理（`+`）。mathlib の `Real.cosh_add` そのもの。 -/
+/-- **人手 `cosh_addition_formula` の複号 `+`**: 人手の 8 行の鎖と 1 対 1 の `calc`。
+人手の記号 `E_x, E_{−x}, E_y, E_{−y}` は `Real.exp x` などをそのまま書く。
+`def_cosh_sinh` は Lean で定義し直しておらず、`Real.cosh_eq`・`Real.sinh_eq` が人手の定義の式の役を担う。
+`scalar_exp_product` は `def_scalar_exp` の具体版が Lean に無いので mathlib の `Real.exp_add` で引く。
+mathlib の `Real.cosh_add` は使わない。 -/
 theorem cosh_add_formula (x y : ℝ) :
     Real.cosh (x + y) = Real.cosh x * Real.cosh y + Real.sinh x * Real.sinh y :=
-  Real.cosh_add x y
+  calc Real.cosh (x + y)
+      = (Real.exp (x + y) + Real.exp (-(x + y))) / 2 := Real.cosh_eq (x + y)
+          -- `cosh` の定義（`def_cosh_sinh`）
+    _ = (Real.exp (x + y) + Real.exp ((-x) + (-y))) / 2 := by
+          rw [real_negation_of_sum_is_sum_of_negations x y]
+          -- `real_negation_of_sum_is_sum_of_negations`
+    _ = (Real.exp x * Real.exp y + Real.exp (-x) * Real.exp (-y)) / 2 := by
+          rw [Real.exp_add x y, Real.exp_add (-x) (-y)]
+          -- `exp(s+t) = exp(s)exp(t)` を 2 箇所へ（`scalar_exp_product`）
+    _ = (2 * (Real.exp x * Real.exp y) + 2 * (Real.exp (-x) * Real.exp (-y))) / 4 := by ring
+          -- 分母と分子に `2` を掛ける
+    _ = ((Real.exp x * Real.exp y + Real.exp x * Real.exp (-y)
+            + Real.exp (-x) * Real.exp y + Real.exp (-x) * Real.exp (-y))
+          + (Real.exp x * Real.exp y - Real.exp x * Real.exp (-y)
+            - Real.exp (-x) * Real.exp y + Real.exp (-x) * Real.exp (-y))) / 4 := by ring
+          -- `E_x E_{−y}` と `E_{−x} E_y` を足して引く
+    _ = ((Real.exp x + Real.exp (-x)) * (Real.exp y + Real.exp (-y))
+          + (Real.exp x - Real.exp (-x)) * (Real.exp y - Real.exp (-y))) / 4 := by ring
+          -- 分配則
+    _ = (Real.exp x + Real.exp (-x)) / 2 * ((Real.exp y + Real.exp (-y)) / 2)
+          + (Real.exp x - Real.exp (-x)) / 2 * ((Real.exp y - Real.exp (-y)) / 2) := by ring
+          -- 分数の和と積
+    _ = Real.cosh x * Real.cosh y + Real.sinh x * Real.sinh y := by
+          rw [← Real.cosh_eq x, ← Real.cosh_eq y, ← Real.sinh_eq x, ← Real.sinh_eq y]
+          -- `cosh`, `sinh` の定義を 4 箇所へ（`def_cosh_sinh`）
 
-/-- 人手証明 (1): `cosh` の加法定理（`-`）。 -/
+/-- **人手 `cosh_addition_formula` の複号 `−`**: 人手の 4 行の鎖と 1 対 1 の `calc`。 -/
 theorem cosh_sub_formula (x y : ℝ) :
     Real.cosh (x - y) = Real.cosh x * Real.cosh y - Real.sinh x * Real.sinh y :=
-  Real.cosh_sub x y
+  calc Real.cosh (x - y)
+      = Real.cosh (x + (-y)) := by rw [sub_eq_add_neg]
+          -- `x − y = x + (−y)`
+    _ = Real.cosh x * Real.cosh (-y) + Real.sinh x * Real.sinh (-y) := cosh_add_formula x (-y)
+          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる
+    _ = Real.cosh x * Real.cosh y + Real.sinh x * (-Real.sinh y) := by
+          rw [cosh_is_even y, sinh_is_odd y]
+          -- `cosh_is_even`, `sinh_is_odd`
+    _ = Real.cosh x * Real.cosh y - Real.sinh x * Real.sinh y := by ring
+          -- ℝ の四則
 
-/-- 人手証明 (1): `sinh` の加法定理（`+`）。 -/
+/-- **人手 `sinh_addition_formula` の複号 `+`**: 人手の 8 行の鎖と 1 対 1 の `calc`。
+記号と根拠の読み方は `cosh_add_formula` と同じ。mathlib の `Real.sinh_add` は使わない。 -/
 theorem sinh_add_formula (x y : ℝ) :
     Real.sinh (x + y) = Real.sinh x * Real.cosh y + Real.cosh x * Real.sinh y :=
-  Real.sinh_add x y
+  calc Real.sinh (x + y)
+      = (Real.exp (x + y) - Real.exp (-(x + y))) / 2 := Real.sinh_eq (x + y)
+          -- `sinh` の定義（`def_cosh_sinh`）
+    _ = (Real.exp (x + y) - Real.exp ((-x) + (-y))) / 2 := by
+          rw [real_negation_of_sum_is_sum_of_negations x y]
+          -- `real_negation_of_sum_is_sum_of_negations`
+    _ = (Real.exp x * Real.exp y - Real.exp (-x) * Real.exp (-y)) / 2 := by
+          rw [Real.exp_add x y, Real.exp_add (-x) (-y)]
+          -- `exp(s+t) = exp(s)exp(t)` を 2 箇所へ（`scalar_exp_product`）
+    _ = (2 * (Real.exp x * Real.exp y) - 2 * (Real.exp (-x) * Real.exp (-y))) / 4 := by ring
+          -- 分母と分子に `2` を掛ける
+    _ = ((Real.exp x * Real.exp y + Real.exp x * Real.exp (-y)
+            - Real.exp (-x) * Real.exp y - Real.exp (-x) * Real.exp (-y))
+          + (Real.exp x * Real.exp y - Real.exp x * Real.exp (-y)
+            + Real.exp (-x) * Real.exp y - Real.exp (-x) * Real.exp (-y))) / 4 := by ring
+          -- `E_x E_{−y}` と `E_{−x} E_y` を足して引く
+    _ = ((Real.exp x - Real.exp (-x)) * (Real.exp y + Real.exp (-y))
+          + (Real.exp x + Real.exp (-x)) * (Real.exp y - Real.exp (-y))) / 4 := by ring
+          -- 分配則
+    _ = (Real.exp x - Real.exp (-x)) / 2 * ((Real.exp y + Real.exp (-y)) / 2)
+          + (Real.exp x + Real.exp (-x)) / 2 * ((Real.exp y - Real.exp (-y)) / 2) := by ring
+          -- 分数の和と積
+    _ = Real.sinh x * Real.cosh y + Real.cosh x * Real.sinh y := by
+          rw [← Real.cosh_eq x, ← Real.cosh_eq y, ← Real.sinh_eq x, ← Real.sinh_eq y]
+          -- `cosh`, `sinh` の定義を 4 箇所へ（`def_cosh_sinh`）
 
-/-- 人手証明 (1): `sinh` の加法定理（`-`）。 -/
+/-- **人手 `sinh_addition_formula` の複号 `−`**: 人手の 4 行の鎖と 1 対 1 の `calc`。 -/
 theorem sinh_sub_formula (x y : ℝ) :
     Real.sinh (x - y) = Real.sinh x * Real.cosh y - Real.cosh x * Real.sinh y :=
-  Real.sinh_sub x y
+  calc Real.sinh (x - y)
+      = Real.sinh (x + (-y)) := by rw [sub_eq_add_neg]
+          -- `x − y = x + (−y)`
+    _ = Real.sinh x * Real.cosh (-y) + Real.cosh x * Real.sinh (-y) := sinh_add_formula x (-y)
+          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる
+    _ = Real.sinh x * Real.cosh y + Real.cosh x * (-Real.sinh y) := by
+          rw [cosh_is_even y, sinh_is_odd y]
+          -- `cosh_is_even`, `sinh_is_odd`
+    _ = Real.sinh x * Real.cosh y - Real.cosh x * Real.sinh y := by ring
+          -- ℝ の四則
 
 /-- 人手証明 (2): `cosh x = 1 + 2 sinh²(x/2)`。 -/
 theorem cosh_eq_one_add_two_sinh_half_sq (x : ℝ) :
