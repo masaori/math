@@ -58,7 +58,7 @@ theorem open_chain_partition_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
         NecSuf.open_chain_weighted_sum_eq_sum_prod (fun t : SpinVal => Real.exp (K * (t : ℝ)))
                                                         -- 人手 2〜人手 5: 必要十分版の前半（`g(t) = exp(Kt)`）
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (K * (-1))) := by
-        rw [mul_one]                                    -- 人手 6: ℝ で `a·1 = a` を各因子へ
+        rw [mul_one]                                    -- 人手 6: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp ((-1) * K)) := by
         rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
@@ -88,9 +88,9 @@ theorem open_chain_endpoint_product_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
         NecSuf.open_chain_weighted_sum_eq_sum_prod (fun t : SpinVal => (t : ℝ) * Real.exp (K * (t : ℝ)))
                                                         -- 人手 2〜人手 5: 必要十分版の前半（`g(t) = t·exp(Kt)`）
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp (K * 1) + (-1) * Real.exp (K * (-1))) := by
-        rw [one_mul]                                    -- 人手 6: ℝ で `1·b = b` を各因子へ
+        rw [one_mul]                                    -- 人手 6: ℝ の乗法の単位元 `1·p = p`（`p → exp(K·1)`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (K * (-1))) := by
-        rw [mul_one]                                    -- 人手 7: ℝ で `a·1 = a` を各因子へ
+        rw [mul_one]                                    -- 人手 7: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp ((-1) * K)) := by
         rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (-K)) := by

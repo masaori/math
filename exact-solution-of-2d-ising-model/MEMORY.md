@@ -1,3 +1,5 @@
+2026-11-18: Lean の通しの証明のゴールラインの確認の六百十七個目として、状態台帳の (d4c44p15f15p38w13) を行って済んだ。人手 `open_chain_partition_sum`・`open_chain_endpoint_product_sum` の最後の鎖の「ℝ で a·1 = a」「1·b = b」と `periodicity_of_check_fermi` (3) の θ̃_ν の鎖の「ℝ の加法の交換律」「1_ℝ は積の単位元」を `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean の具体版・導出版・SageMath のコメントと overview を合わせた。範囲外を (w24)・(w25) にした。次は状態台帳の「次の一歩」の (w14) から（(w9) は (p63) の待ち）。
+
 2026-11-18: Lean の通しの証明のゴールラインの確認の六百十六個目として、状態台帳の (d4c44p15f15p38w12) を行って済んだ。人手 `open_chain_endpoint_product_sum` の Step 2 の名前だけの根拠「ℝ の乗法の可換性と結合性」「ℝ の乗法の可換性」を `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean・lean/docs・SageMath overview の記述を合わせた。範囲外を (w22)・(w23) にした。次は状態台帳の「次の一歩」の (w13) から。
 
 2026-11-18: Lean の通しの証明のゴールラインの確認の六百十五個目として、状態台帳の (d4c44p15f15p38w11) を行って済んだ。人手 `periodicity_of_check_fermi` (3) の θ̃_ν の鎖の「ℝ の差の定義」を `def_real_difference`（y → 2π, z → θ̃_μ）の参照にし、Lean の具体版 `thetaTilde_conj_eq_neg_add_two_pi` と SageMath のコメント・overview を合わせた（主張・鎖・段数は不変）。レビュー 1 回（任意 2 件を直した。範囲外を (w21) にした）。次は状態台帳の「次は」の先頭（(w9) は (p63) の待ちなので (w12)）。

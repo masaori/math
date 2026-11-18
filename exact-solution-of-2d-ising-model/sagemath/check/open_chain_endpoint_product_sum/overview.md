@@ -16,7 +16,7 @@
 - Step 2 の二つの鎖は ZZ で厳密に、M_col = 2..8 の全ての配置。M_col ≥ 3 の 2 行目は s(1)·Π_{m=2}^{M_col−1} s(m)s(m)·s(M_col) を、3 行目は 1 の有限積を、
   def_finite_product_of_real_numbers の畳み込みで組む（M_col = 2 では因子の無い積を呼ばない）。
 - exp(KE(s)) の鎖と被加数の鎖は球で M_col = 2..7、K ∈ K_SAMPLES（`open_chain_partition_sum` と同じ 8 点）。
-- ς で付け替えた和は {0,1}^{M_col−1} の上の和を def_sum_over_binary_words_of_real_numbers の順序で組む。組合せの層では「ς の値」「1·b = b」「a·1 = a」「ℝ の乗法の可換則 K(−1) = (−1)K」「real_minus_one_times_is_negation の (−1)K = −K」「real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)」「def_real_difference の x + (−y) = x − y」の七行が隣の行と同じ多項式になるので、実数の層だけで別に組んで確かめる。
+- ς で付け替えた和は {0,1}^{M_col−1} の上の和を def_sum_over_binary_words_of_real_numbers の順序で組む。組合せの層では「ς の値」「ℝ の乗法の単位元 1·exp(K·1) = exp(K·1)」「K·1 = K」「ℝ の乗法の可換則 K(−1) = (−1)K」「real_minus_one_times_is_negation の (−1)K = −K」「real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)」「def_real_difference の x + (−y) = x − y」の七行が隣の行と同じ多項式になるので、実数の層だけで別に組んで確かめる。
 - 主張の鎖は組合せの層で厳密に（被加数を s(M_col)s(1)·Π w(t_m(s)) で直接組んだ左辺とも一致させる）、実数の層で球で。
   K = 0 では値が 0 なので、各行が 0 を含み半径が 1e-40 未満であることを見る。
 - 主張は右辺を Sage の `sinh` でも確かめる。
@@ -31,7 +31,7 @@
 | exp(KE(s)) の鎖 3 行（def_open_chain_spin_energy、ℝ の分配則、real_exp_of_finite_sum） | 球 |
 | 被加数の鎖 1 行目（ℝ の乗法の可換則 s(M_col)s(1) = s(1)s(M_col)、set_and_algebra_notation）・2 行目（Step 2 の等式）・3 行目（exp(KE(s)) の鎖）・4 行目（finite_product_of_real_products） | 球 |
 | 主張の鎖 1〜4 行目（直前の等式・Φ による付け替え・ς による付け替え・expansion_of_finite_product_of_two_term_sums_of_real_numbers） | 厳密（QQ[x,y]）と球 |
-| 主張の鎖 5〜11 行目（ς の値・1·b = b・a·1 = a・ℝ の乗法の可換則 K(−1) = (−1)K・real_minus_one_times_is_negation の (−1)K = −K・real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)・def_real_difference） | 球。8・9 行目の根拠の等式は K ∈ K_SAMPLES で厳密（QQ）、10・11 行目の根拠の等式は QQ[x,y] で厳密 |
+| 主張の鎖 5〜11 行目（ς の値・ℝ の乗法の単位元 1·exp(K·1) = exp(K·1)・K·1 = K（set_and_algebra_notation の 1·p = p・p·1 = p）・ℝ の乗法の可換則 K(−1) = (−1)K・real_minus_one_times_is_negation の (−1)K = −K・real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)・def_real_difference） | 球。8・9 行目の根拠の等式は K ∈ K_SAMPLES で厳密（QQ）、10・11 行目の根拠の等式は QQ[x,y] で厳密 |
 | 主張の鎖 12〜14 行目（c + c = 2c・def_cosh_sinh・冪の定義） | 厳密と球 |
 | 主張 | 球。右辺は Sage の sinh |
 

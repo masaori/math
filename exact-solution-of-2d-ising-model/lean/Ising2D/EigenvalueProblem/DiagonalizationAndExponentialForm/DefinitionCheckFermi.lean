@@ -181,10 +181,10 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
                                                   -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
     _ = 2 * Real.pi + (-thetaTilde M μ) := sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)
                                                   -- 2 行目: `def_real_difference`（`y → 2π`, `z → θ̃_μ`）
-    _ = (-thetaTilde M μ) + 2 * Real.pi := add_comm _ _
-                                                  -- 3 行目: ℝ の加法の交換律
+    _ = (-thetaTilde M μ) + 2 * Real.pi := add_comm (2 * Real.pi) (-thetaTilde M μ)
+                                                  -- 3 行目: ℝ の加法の交換則 `p + q = q + p`（`p → 2π`, `q → -θ̃_μ`。`set_and_algebra_notation`）
     _ = (-thetaTilde M μ) + 2 * Real.pi * 1 := by
-        rw [mul_one]                              -- 4 行目: `1_ℝ` は積の単位元
+        rw [mul_one]                              -- 4 行目: ℝ の乗法の単位元 `p·1 = p`（`p → 2π`。`set_and_algebra_notation`）を右辺から左辺へ
     _ = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
         rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
 

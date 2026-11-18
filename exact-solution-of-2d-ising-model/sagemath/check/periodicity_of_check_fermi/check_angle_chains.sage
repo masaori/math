@@ -59,8 +59,8 @@ one = Fr(1)
 nu_chain = [
     2 * PI - tt(mu),                  # conjugate_index_of_check_Z_Y (1)
     2 * PI + (-tt(mu)),               # def_real_difference（y → 2π, z → θ~_μ）
-    (-tt(mu)) + 2 * PI,               # 加法の交換律
-    (-tt(mu)) + 2 * PI * one,         # 1_R は積の単位元
+    (-tt(mu)) + 2 * PI,               # 加法の交換則 p + q = q + p（p → 2π, q → -θ~_μ。set_and_algebra_notation）
+    (-tt(mu)) + 2 * PI * one,         # 乗法の単位元 p·1 = p（p → 2π。set_and_algebra_notation）を右辺から左辺へ
     (-tt(mu)) + 2 * PI * one,         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
 ]
 rep.check(tt(MM + 1 - mu) == nu_chain[0], "(3) conjugate_index_of_check_Z_Y (1): θ~_(M+1-μ) = 2π - θ~_μ")

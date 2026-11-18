@@ -7185,9 +7185,9 @@ g
 &= 2\pi + \left(-\tilde\theta_\mu\right)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 2\pi,\ z \to \tilde\theta_\mu)\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi
-&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to 2\pi,\ q \to -\tilde\theta_\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi\cdot1_{\mathbb R}
-&&(\because\ 1_{\mathbb R}\ \text{は積の単位元})\\
+&&\bigl(\because\ 1_{\mathbb R}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi\,(1)_{\mathbb R}
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は単位元を保つ})
 \end{aligned}`),
@@ -7339,6 +7339,7 @@ d_\nu
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (3) の −θ̃_ν の鎖の 3 行目が根拠「ℝ で −p = p(−1_ℝ)」を名前だけで引いていたので、real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ当てる行と ℝ の乗法の可換則（set_and_algebra_notation）の行の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w7)）: (3) の −θ̃_ν の鎖の 2 行目が根拠「ℝ で −(p−q) = q+(−p)」を名前だけで引いていたので、def_real_difference（y → 2π, z → θ̃_μ）・real_negation_of_sum_is_sum_of_negations（x → 2π, y → −θ̃_μ）・real_double_negation（a → θ̃_μ）・ℝ の加法の交換則（p → −(2π), q → θ̃_μ。set_and_algebra_notation）の 4 行に割った（鎖の両端と主張は不変。鎖は 6 行から 9 行になった）。Lean の Ising2D.neg_thetaTilde_conj_eq_add_two_pi_neg_one は同じ 9 段の calc。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w11)）: (3) の θ̃_ν の鎖の 2 行目の根拠「ℝ の差の定義」を def_real_difference（y → 2π, z → θ̃_μ）の参照にした（−θ̃_ν の鎖の 2 行目と同じ書き方）。主張と鎖は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)）: (3) の θ̃_ν の鎖の 3 行目・4 行目の名前だけの根拠「ℝ の加法の交換律」「1_ℝ は積の単位元」を、set_and_algebra_notation の加法の交換則 p + q = q + p（p → 2π、q → −θ̃_μ）と乗法の単位元 p·1 = p（p → 2π）を右辺から左辺への参照にした。主張・鎖・段数は不変。",
       ],
     },
   },
