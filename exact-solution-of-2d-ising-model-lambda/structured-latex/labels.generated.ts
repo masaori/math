@@ -718,6 +718,7 @@ export const ALL_LABELS = [
   "claim_subfield_polynomial_values_ring_closed",
   "claim_subfield_positive_cone_contains_nonzero_squares",
   "claim_successor_direction_selection",
+  "claim_symmetric_vanishing_last_variable_coefficient_support",
   "claim_tagged_complement_active_vertices",
   "claim_tagged_difference_active_mates",
   "claim_tagged_difference_alternating_cycle",

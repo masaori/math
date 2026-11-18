@@ -54725,6 +54725,150 @@ d&(e=a\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_symmetric_vanishing_coefficient_support",
+        labels: [],
+        title: { text: "零代入で消える対称多項式の係数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_symmetric_vanishing_last_variable_coefficient_support",
+              focus:
+                {
+                  id: "zero_pinching_claim_symmetric_vanishing_last_variable_coefficient_support",
+                  kind: "claim",
+                  title: { text: "零代入で消える対称多項式の係数は全ての変数を含む指数にだけ残る" },
+                  labels: ["claim_symmetric_vanishing_last_variable_coefficient_support"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-coefficient-support"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.symmetricVanishing_coeff_eq_zero",
+                    "Ising2DLambda.FisherZero.swapLast_exponentComp_eq_zeroExtension",
+                    "Ising2DLambda.NecSuf.FisherZero.swapInvariantVanishing_coeff_eq_zero_necSuf",
+                    "Ising2DLambda.FisherZero.symmetricVanishing_coeff_eq_zero_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      "、対称で（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）",
+                      math(String.raw`\mathrm{lz}_n(P)=0`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）を満たす ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "、",
+                      math(String.raw`a\in\mathrm{Ex}_{n+1}`),
+                      "、",
+                      math(String.raw`a(k)=0`),
+                      " となる ",
+                      math(String.raw`k\in\mathbb{N}_{<n+1}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_a(P)=0`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）。すなわち ",
+                      math(String.raw`\mathrm{mco}_a(P)\ne0`),
+                      " となる指数 ",
+                      math(String.raw`a`),
+                      " は、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`a(k)\ge1`),
+                      " を満たす。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、写像 ",
+                      math(String.raw`\tau:\mathbb{N}_{<n+1}\to\mathbb{N}_{<n+1}`),
+                      " を ",
+                      math(String.raw`\tau(k):=n`),
+                      "、",
+                      math(String.raw`\tau(n):=k`),
+                      "、",
+                      math(String.raw`k`),
+                      " とも ",
+                      math(String.raw`n`),
+                      " とも異なる ",
+                      math(String.raw`j\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`\tau(j):=j`),
+                      " と定める（",
+                      math(String.raw`k=n`),
+                      " なら ",
+                      math(String.raw`\tau`),
+                      " は恒等写像である）。",
+                      math(String.raw`\tau\circ\tau`),
+                      " は恒等写像なので ",
+                      math(String.raw`\tau`),
+                      " は全単射であり、",
+                      math(String.raw`\tau\in\mathfrak{P}_{n+1}`),
+                      " である（",
+                      ref("def_qbar_variable_permutation"),
+                      "）。",
+                      math(String.raw`b:=(a\circ\tau)|_{<n}\in\mathrm{Ex}_n`),
+                      " と置く（",
+                      ref("def_exponent_zero_extension"),
+                      "）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(a\circ\tau)(n)
+&=a\bigl(\tau(n)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の指数の合成}\bigr)\\
+&=a(k)
+&&\bigl(\because\ \tau(n)=k\bigr)\\
+&=0
+&&\bigl(\because\ \text{仮定 }a(k)=0\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "と ",
+                      math(String.raw`(a\circ\tau)|_{<n}=b`),
+                      " から、",
+                      ref("def_exponent_zero_extension"),
+                      " により ",
+                      math(String.raw`a\circ\tau=\mathrm{ez}_n(b)`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a(P)
+&=\mathrm{mco}_a\bigl(\mathrm{vs}_{\tau}(P)\bigr)
+&&\bigl(\because\ P\text{ は対称（}\blkref{def_qbar_symmetric_polynomial}\text{）、}\tau\in\mathfrak{P}_{n+1}\bigr)\\
+&=\mathrm{mco}_{a\circ\tau}(P)
+&&\bigl(\because\ \blkref{claim_qbar_variable_permutation_coefficient}\bigr)\\
+&=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)
+&&\bigl(\because\ a\circ\tau=\mathrm{ez}_n(b)\bigr)\\
+&=\mathrm{mco}_b\bigl(\mathrm{lz}_n(P)\bigr)
+&&\bigl(\because\ \blkref{claim_last_variable_zero_coefficient}\bigr)\\
+&=\mathrm{mco}_b(0)
+&&\bigl(\because\ \text{仮定 }\mathrm{lz}_n(P)=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元の係数は全て }0\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は有限集合の全単射と ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "・",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の係数の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },

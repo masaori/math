@@ -100,9 +100,13 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "奇数次の元を付け足しても正錐は延長できる",
     dependsOn: ["def_positive_cone_extension"],
   },
+  claim_symmetric_vanishing_last_variable_coefficient_support: {
+    title: "零代入で消える対称多項式の係数は全ての変数を含む指数にだけ残る",
+    dependsOn: [],
+  },
   claim_symmetric_vanishing_last_variable_divisible_by_product: {
     title: "零代入で消える対称多項式は全変数の積で割り切れる",
-    dependsOn: [],
+    dependsOn: ["claim_symmetric_vanishing_last_variable_coefficient_support"],
   },
   claim_elementary_symmetric_substitution_degree_bound: {
     title: "基本対称式への代入は対称で部分体係数を保ち、次数は重み付き次数以下",
