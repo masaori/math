@@ -210,6 +210,7 @@ export const ALL_LABELS = [
   "claim_horizontal_seam_parity_equals_column",
   "claim_horizontal_twisted_modes_coset",
   "claim_increasing_positive_cone_union_is_positive_cone",
+  "claim_increasing_positive_cone_union_restricts_to_stage",
   "claim_increasing_subfield_union_is_subfield",
   "claim_induced_tree_leaf_step",
   "claim_induced_tree_nonroot_leaf",

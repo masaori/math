@@ -47825,6 +47825,88 @@ x\cdot y&\in C_\infty&&\bigl(\because\ C_k\subseteq C_\infty\text{ は和集合�
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_increasing_positive_cone_union_restriction",
+        labels: [],
+        title: { text: "増大列の正錐を各段へ制限する" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_increasing_positive_cone_union_restricts_to_stage",
+              focus: {
+                id: "zero_pinching_claim_increasing_positive_cone_union_restricts_to_stage",
+                kind: "claim",
+                title: { text: "増大列の正錐の和集合を各段へ制限すると元の正錐に戻る" },
+                labels: ["claim_increasing_positive_cone_union_restricts_to_stage"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/increasing-positive-cone-union-restriction"],
+                lean: [
+                  "Ising2DLambda.FisherZero.increasingPositiveConeUnion_restrictsToStage",
+                  "Ising2DLambda.NecSuf.FisherZero.increasingPositiveConeUnion_restrictsToStage",
+                  "Ising2DLambda.FisherZero.increasingPositiveConeUnion_restrictsToStage_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "各 ", math(String.raw`n\in\mathbb N`), " に部分体 ",
+                    math(String.raw`F_n\subseteq\overline{\mathbb Q}`), " と正錐 ",
+                    math(String.raw`C_n\subseteq F_n`), " を与える。各 ",
+                    math(String.raw`n\in\mathbb N`), " で ",
+                    math(String.raw`(F_{n+1},C_{n+1})`), " が ",
+                    math(String.raw`(F_n,C_n)`), " の延長（",
+                    ref("def_positive_cone_extension"), "）なら、任意の ",
+                    math(String.raw`n\in\mathbb N`), " について ",
+                    math(String.raw`(\bigcup_{k\in\mathbb N}C_k)\cap F_n=C_n`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`n\in\mathbb N`), " を固定する。",
+                    "延長の定義（", ref("def_positive_cone_extension"), "）から、",
+                    math(String.raw`C_j\subseteq C_{j+1}`), " および ",
+                    math(String.raw`C_{j+1}\cap F_j=C_j`), " が任意の ",
+                    math(String.raw`j\in\mathbb N`), " で成り立つ。",
+                    "帰納法により ", math(String.raw`j\le k`), " なら ",
+                    math(String.raw`C_j\subseteq C_k`), " および ",
+                    math(String.raw`F_j\subseteq F_k`), " である。",
+                  ]),
+                  paragraph([
+                    "まず任意の ", math(String.raw`z\in C_n`), " を取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+z&\in\bigcup_{k\in\mathbb N}C_k&&\bigl(\because\ k=n\text{ を選ぶ}\bigr)\\
+z&\in F_n&&\bigl(\because\ \blkref{def_subfield_positive_cone}\bigr)\\
+z&\in(\bigcup_{k\in\mathbb N}C_k)\cap F_n&&\bigl(\because\ \text{共通部分の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "逆に任意の ", math(String.raw`z\in(\bigcup_{k\in\mathbb N}C_k)\cap F_n`),
+                    " を取る。", math(String.raw`z\in C_k`), " となる ",
+                    math(String.raw`k\in\mathbb N`), " がある。",
+                    math(String.raw`k\le n`), " なら、増大性から ",
+                    math(String.raw`z\in C_n`), " である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`n<k`), " なら、", math(String.raw`j=k,k-1,\ldots,n+1`),
+                    " の順に、", math(String.raw`z\in C_j`), " と ",
+                    math(String.raw`z\in F_{j-1}`), " から ",
+                    math(String.raw`z\in C_{j-1}`), " を得る。",
+                    "これは ", math(String.raw`C_j\cap F_{j-1}=C_{j-1}`),
+                    " による帰納法である。", math(String.raw`z\in F_n\subseteq F_{j-1}`),
+                    " は部分体の増大性から従う。最後に ",
+                    math(String.raw`z\in C_n`), " を得る。従って両包含が成立する。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_enumerated_ordered_subfield_maximality_criterion",
         labels: [],
         title: { text: "列挙段階の取込条件から従う順序付き部分体の極大性" },
