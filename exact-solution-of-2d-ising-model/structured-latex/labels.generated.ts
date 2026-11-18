@@ -598,6 +598,7 @@ export const ALL_LABELS = [
   "real_minus_zero_is_self",
   "real_multiple_of_hermitian_is_hermitian",
   "real_negation_of_positive_is_negative",
+  "real_negation_of_sum_is_sum_of_negations",
   "real_negation_of_zero_is_zero",
   "real_negation_times_is_negation_of_product",
   "real_negation_times_negation_is_product",

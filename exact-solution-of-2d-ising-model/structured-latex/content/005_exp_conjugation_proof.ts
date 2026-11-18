@@ -64,7 +64,7 @@ export default defineBlocks([
 &= \bigl(x+u,\ -(y+v)\bigr)
 &&(\because\ \blkref{def_complex_conjugate})\\
 &= \bigl(x+u,\ (-y)+(-v)\bigr)
-&&(\because\ \mathbb{R}\ \text{で}\ -(y+v) = (-y)+(-v))\\
+&&(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \text{を文字を}\ p, q\ \text{に替えた}\ -(p+q) = (-p)+(-q)\ (p \to y,\ q \to v))\\
 &= (x,-y) + (u,-v)
 &&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
 &= \overline{z} + \overline{w}
@@ -103,6 +103,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は和を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、有限和の形で独立の主張にした。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で −(y+v) = (−y)+(−v)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（文字を p, q に替え p → y, q → v）の参照にした（文書の並びでは前のファイルのブロック）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -145,7 +146,7 @@ export default defineBlocks([
 &= \bigl(xu - (-y)(-v),\ -(xv + yu)\bigr)
 &&(\because\ \mathbb{R}\ \text{で}\ (-y)(-v) = yv)\\
 &= \bigl(xu - (-y)(-v),\ (-(xv)) + (-(yu))\bigr)
-&&(\because\ \mathbb{R}\ \text{で}\ -(xv + yu) = (-(xv)) + (-(yu)))\\
+&&(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \text{を文字を}\ p, q\ \text{に替えた}\ -(p+q) = (-p)+(-q)\ (p \to xv,\ q \to yu))\\
 &= \bigl(xu - (-y)(-v),\ x(-v) + (-(yu))\bigr)
 &&(\because\ \blkref{real_times_negation_is_negation_of_product}\ \text{の}\ x(-t) = -(xt)\ \text{を文字を}\ p, q\ \text{に替えた}\ p(-q) = -(pq)\ (p \to x,\ q \to v)\ \text{を右辺から左辺へ})\\
 &= \bigl(xu - (-y)(-v),\ x(-v) + (-y)u\bigr)
@@ -162,6 +163,7 @@ export default defineBlocks([
         "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は積を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、独立の主張にした。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(yu) = (−y)u の行の根拠「ℝ で −(yu) = (−y)u」を、主張 real_negation_times_is_negation_of_product（証明の x と衝突しないよう文字を p, q に替え、p → y, q → u を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(xv) = x(−v) の行の根拠「ℝ で −(xv) = x(−v)」を、主張 real_times_negation_is_negation_of_product（証明の x と衝突しないよう文字を p, q に替え、p → x, q → v を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(xv + yu) = (−(xv)) + (−(yu)) の行の根拠「ℝ で …」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（文字を p, q に替え p → xv, q → yu）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

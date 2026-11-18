@@ -29,6 +29,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Mathlib.Algebra.Order.AbsoluteValue.Basic
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 
 namespace Ising2D
 
@@ -92,7 +93,7 @@ theorem real_abs_triangle_inequality (a b : ℝ) : |a + b| ≤ |a| + |b| := by
   · -- `a + b < 0` のとき
     calc |a + b|
         = -(a + b) := abs_of_neg hab                                          -- `def_real_absolute_value`（`a + b < 0`）
-      _ = (-a) + (-b) := neg_add a b                                          -- ℝ で `-(a + b) = (-a) + (-b)`
+      _ = (-a) + (-b) := real_negation_of_sum_is_sum_of_negations a b         -- `real_negation_of_sum_is_sum_of_negations`（`x → a, y → b`）
       _ ≤ |a| + (-b) := add_le_add hna le_rfl                                 -- `-a ≤ |a|` の両辺に `-b` を足す
       _ ≤ |a| + |b| := add_le_add le_rfl hnb                                  -- `-b ≤ |b|` の両辺に `|a|` を足す
 

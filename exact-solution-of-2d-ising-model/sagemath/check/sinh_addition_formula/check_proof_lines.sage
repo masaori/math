@@ -4,7 +4,7 @@
 # - exp の性質を使わない行（定義、分母と分子に 2 を掛ける、足して引く、分配則、分数の和と積、定義を 4 箇所へ）は、
 #   exp の値 exp(x), exp(-x), exp(y), exp(-y) を QQ 上の独立な不定元 Ex, Emx, Ey, Emy に置き、さらに
 #   exp(x+y), exp(-(x+y)) も独立な不定元 Exy, Emxy に置いて確かめる（代入は環準同型なので実数の値でも成り立つ）。
-# - 引数の等号（-(x+y) = (-x)+(-y)、x-y = x+(-y)）は QQ[x,y] の等号として。
+# - 引数の等号（-(x+y) = (-x)+(-y)（real_negation_of_sum_is_sum_of_negations）、x-y = x+(-y)）は QQ[x,y] の等号として。
 # - exp の積の法則の行（scalar_exp_product）と、複号 - の鎖の行（+ の場合を -y に当てはめる、偶奇性）は、
 #   QQ[x,y] の形式冪級数として全次数 14 以下で比べる。
 load("../../_shared/hyperbolic_by_definition.sage")

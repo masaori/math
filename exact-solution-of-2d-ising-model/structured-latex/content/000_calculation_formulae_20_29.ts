@@ -862,7 +862,7 @@ w\cdot z
 &= \left(\bigl((ac)e+(-((bd)e))\bigr)+\Bigl(-\bigl((ad)f+(bc)f\bigr)\Bigr),\ \bigl((ac)f+(-((bd)f))\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
 &&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to bd,\ t \to e\ \text{と}\ x \to bd,\ t \to f)\ \text{を 2 箇所へ適用}\bigr)\\
 &= \left(\bigl((ac)e+(-((bd)e))\bigr)+\bigl((-((ad)f))+(-((bc)f))\bigr),\ \bigl((ac)f+(-((bd)f))\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(x+y) = (-x)+(-y)\ \bigl(x \to (ad)f,\ y \to (bc)f\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \bigl(x \to (ad)f,\ y \to (bc)f\bigr)\bigr)\\
 &= \left(\bigl(a(ce)+(-(b(de)))\bigr)+\bigl((-(a(df)))+(-(b(cf)))\bigr),\ \bigl(a(cf)+(-(b(df)))\bigr)+\bigl(a(de)+b(ce)\bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ \bigl((x,y,t) \to (a,c,e),(b,d,e),(a,d,f),(b,c,f),(a,c,f),(b,d,f),(a,d,e),(b,c,e)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 8 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl((-(b(de)))+\bigl((-(a(df)))+(-(b(cf)))\bigr)\Bigr),\ a(cf)+\Bigl((-(b(df)))+\bigl(a(de)+b(ce)\bigr)\Bigr)\right)
@@ -874,7 +874,7 @@ w\cdot z
 &= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl((-(b(cf)))+(-(b(de)))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(a(df)),\ t \to (-(b(cf)))+(-(b(de)))\ \text{と}\ x \to a(cf),\ y \to a(de),\ t \to b(ce)+(-(b(df)))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(x+y) = (-x)+(-y)\ \bigl(x \to b(cf),\ y \to b(de)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \bigl(x \to b(cf),\ y \to b(de)\bigr)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(\bigl(a(ce)+a(-(df))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+b(-(df))\bigr)\right)
 &&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to a,\ t \to df\ \text{と}\ x \to b,\ t \to df)\ \text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(a\bigl(ce+(-(df))\bigr)+\bigl(-(b(cf+de))\bigr),\ a(cf+de)+b\bigl(ce+(-(df))\bigr)\right)
@@ -897,6 +897,7 @@ w\cdot z
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 鎖の第 4〜第 6 の等号（ℝ の分配律と積の結合律を 1 行で、和の可換律と結合律を 1 行で当てていた行）を、1 行に 1 つの等式だけを当てる 13 行に割った。差は def_real_difference で和と符号反転に開いてから並べ替え、最後に閉じた。各行に使った形と代入を書き、ℝ の法則には set_and_algebra_notation を参照した。符号反転の等式 (−x)t = −(xt)・x(−t) = −(xt)・−(x+y) = (−x)+(−y) は、000_calculation_formulae_00_09.ts の finite_sum_of_negated_real_numbers の (−a)+(−b) = −(a+b) と同じく、ℝ で成り立つ等式として 1 行に 1 つ当てた。積 ace のような括弧の無い書き方をやめ、(ac)e・a(ce) と括弧を書いた。鎖の両端と主張は不変。数値検証: 同じ check_component_chain.sage を 19 行に合わせた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−x)t = −(xt) を 2 箇所へ当てる行の根拠「ℝ で (−x)t = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_negation_times_is_negation_of_product（x → bd, t → e と x → bd, t → f）の参照にした（文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: x(−t) = −(xt) を 2 箇所へ右辺から左辺へ当てる行の根拠「ℝ で x(−t) = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_times_negation_is_negation_of_product（x → a, t → df と x → b, t → df）の参照にした（同じファイルの後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(x+y) = (−x)+(−y) を当てる 2 行の根拠「ℝ で −(x+y) = (−x)+(−y)（set_and_algebra_notation）」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（x → (ad)f, y → (bc)f と、x → b(cf), y → b(de) を右辺から左辺へ）の参照にした（同じファイルの後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2303,6 +2304,63 @@ x\cdot(-t)
       status: "added",
       notes: [
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。x(−t) = −(xt) は体の公理に含まれない（−t は加法の逆元として定めた）のに、complex_multiplication_is_associative・product_of_sums_of_two_squares_identity の鎖、real_abs_of_product・complex_conjugate_of_product・conjugate_index_of_check_Z_Y・anticommutator_of_check_Z_Y・periodicity_of_check_fermi・trace_of_check_Vprime・trace_of_epsilon_V_plus_via_check_eigenvalues の行が「ℝ で x(−t) = −(xt)」（または右辺から左辺へ）を名前だけで済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_times_negation_is_negation_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTimesNegationIsNegationOfProduct.lean）、必要十分版は Ising2D.NecSuf.mul_neg_of_comm_rightDistrib（NecSuf/MulNegOfCommRightDistrib.lean）。数値検証: sagemath/check/real_times_negation_is_negation_of_product/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_negation_of_sum_is_sum_of_negations",
+    kind: "claim",
+    title: { text: "実数の和の符号を反転すると、符号を反転した実数の和になる" },
+    labels: ["real_negation_of_sum_is_sum_of_negations"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`-(x+y)`),
+        "・",
+        math(String.raw`-x`),
+        "・",
+        math(String.raw`-y`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to x+y`),
+        "、",
+        math(String.raw`z \to x`),
+        "、",
+        math(String.raw`z \to y`),
+        "）、和・積・",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、証明で使う ",
+        math(String.raw`-1`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to 1`),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`-(x+y) = (-x)+(-y)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-(x+y)
+&= (-1)\cdot(x+y)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to x+y)\ \text{を右辺から左辺へ}\bigr)\\
+&= (-1)\cdot x+(-1)\cdot y
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ p(q+r) = pq+pr\ (p \to -1,\ q \to x,\ r \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-x)+(-y)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to x\ \text{と}\ a \to y)\ \text{を 2 箇所へ適用}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。−(x+y) = (−x)+(−y) は体の公理に含まれない（−z は加法の逆元として定めた）のに、complex_conjugate_of_sum・complex_conjugate_of_product・finite_sum_of_negated_real_numbers・real_abs_triangle_inequality・complex_multiplication_is_associative の 2 行・cosh_addition_formula・sinh_addition_formula・anticommutator_of_check_Z_Y・periodicity_of_check_fermi の行が「ℝ で −(x+y) = (−x)+(−y)」（または右辺から左辺へ）を名前だけで済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_of_sum_is_sum_of_negations（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfSumIsSumOfNegations.lean）、必要十分版は Ising2D.NecSuf.neg_add_of_distrib（NecSuf/NegAddOfDistrib.lean）。数値検証: sagemath/check/real_negation_of_sum_is_sum_of_negations/。",
       ],
     },
   },

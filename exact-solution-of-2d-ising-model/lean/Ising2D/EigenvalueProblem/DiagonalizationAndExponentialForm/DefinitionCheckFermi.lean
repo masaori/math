@@ -43,6 +43,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 
 namespace Ising2D
 
@@ -150,8 +151,9 @@ theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
   calc -thetaTilde M (μ + k * M)
       = -(thetaTilde M μ + 2 * Real.pi * (k : ℝ)) := by
         rw [thetaTilde_add_int_mul M hM]          -- 1 行目: 上の鎖（`thetaTilde_add_int_mul`）
-    _ = (-thetaTilde M μ) + (-(2 * Real.pi * (k : ℝ))) := neg_add _ _
-                                                  -- 2 行目: ℝ で `-(p+q) = (-p)+(-q)`（`p → θ̃_μ`, `q → 2πk_ℝ`）
+    _ = (-thetaTilde M μ) + (-(2 * Real.pi * (k : ℝ))) :=
+        real_negation_of_sum_is_sum_of_negations _ _
+                                                  -- 2 行目: `real_negation_of_sum_is_sum_of_negations`（`x → θ̃_μ`, `y → 2πk_ℝ`）
     _ = (-thetaTilde M μ) + 2 * Real.pi * (-(k : ℝ)) := by
         rw [real_times_negation_is_negation_of_product]
                                                   -- 3 行目: `real_times_negation_is_negation_of_product`（`x → 2π`, `t → k_ℝ`）を右辺から左辺へ

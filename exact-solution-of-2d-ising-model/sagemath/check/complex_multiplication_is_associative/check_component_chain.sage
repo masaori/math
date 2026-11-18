@@ -22,7 +22,7 @@ chain = [
     (((a*c)*e + neg((b*d)*e)) + neg((a*d)*f + (b*c)*f),
      ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # real_negation_times_is_negation_of_product (-x)t = -(xt) を 2 箇所
     (((a*c)*e + neg((b*d)*e)) + (neg((a*d)*f) + neg((b*c)*f)),
-     ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # -(x+y) = (-x)+(-y)
+     ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # real_negation_of_sum_is_sum_of_negations (x → (ad)f, y → (bc)f)
     ((a*(c*e) + neg(b*(d*e))) + (neg(a*(d*f)) + neg(b*(c*f))),
      (a*(c*f) + neg(b*(d*f))) + (a*(d*e) + b*(c*e))),                         # 積の結合則を 8 箇所
     (a*(c*e) + (neg(b*(d*e)) + (neg(a*(d*f)) + neg(b*(c*f)))),
@@ -34,7 +34,7 @@ chain = [
     ((a*(c*e) + neg(a*(d*f))) + (neg(b*(c*f)) + neg(b*(d*e))),
      (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # 加法の結合則を 2 箇所へ右辺から左辺へ
     ((a*(c*e) + neg(a*(d*f))) + neg(b*(c*f) + b*(d*e)),
-     (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # -(x+y) = (-x)+(-y) を右辺から左辺へ
+     (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # real_negation_of_sum_is_sum_of_negations (x → b(cf), y → b(de)) を右辺から左辺へ
     ((a*(c*e) + a*neg(d*f)) + neg(b*(c*f) + b*(d*e)),
      (a*(c*f) + a*(d*e)) + (b*(c*e) + b*neg(d*f))),                           # real_times_negation_is_negation_of_product を 2 箇所へ右辺から左辺へ
     (a*(c*e + neg(d*f)) + neg(b*(c*f + d*e)),

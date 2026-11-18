@@ -47,6 +47,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimCosSinAndITimesAtNegatedReal
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 
 namespace Ising2D
 
@@ -104,7 +105,7 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
           / ((M : ℤ) : ℝ)) := by
         rw [← add_assoc (μ : ℝ)]                                      -- ℝ の加法の結合律
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-(1 / 2 + 1 / 2))) / ((M : ℤ) : ℝ)) := by
-        rw [neg_add]                                                  -- `(-a)+(-b) = -(a+b)`
+        rw [real_negation_of_sum_is_sum_of_negations]                 -- `real_negation_of_sum_is_sum_of_negations`（`x → ½, y → ½`）を右辺から左辺へ
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-1)) / ((M : ℤ) : ℝ)) := by
         rw [add_halves]                                               -- `1/2 + 1/2 = 1_ℝ`
     _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (ν : ℝ) - 1) / ((M : ℤ) : ℝ)) := by

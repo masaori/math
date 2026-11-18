@@ -2988,6 +2988,9 @@ targets=(
   Ising2D.real_times_negation_is_negation_of_product
   Ising2D.NecSuf.mul_neg_of_comm_rightDistrib
   Ising2D.real_times_negation_is_negation_of_product_of_necSuf
+  Ising2D.real_negation_of_sum_is_sum_of_negations
+  Ising2D.NecSuf.neg_add_of_distrib
+  Ising2D.real_negation_of_sum_is_sum_of_negations_of_necSuf
   Ising2D.real_zero_divided_is_zero
   Ising2D.NecSuf.zero_div_of_zeroMul
   Ising2D.real_zero_divided_is_zero_of_necSuf

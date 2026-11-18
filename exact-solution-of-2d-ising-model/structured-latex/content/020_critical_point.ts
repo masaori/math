@@ -350,7 +350,7 @@ export default defineBlocks([
 &= \frac{\exp(x+y)+\exp(-(x+y))}{2}
 &&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(x+y)+\exp((-x)+(-y))}{2}
-&&(\because\ -(x+y) = (-x)+(-y))\\
+&&(\because\ \blkref{real_negation_of_sum_is_sum_of_negations})\\
 &= \frac{E_{x}E_{y}+E_{-x}E_{-y}}{2}
 &&(\because\ \exp(s+t) = \exp(s)\exp(t)\ \text{を 2 箇所へ。}\blkref{scalar_exp_product})\\
 &= \frac{2E_{x}E_{y}+2E_{-x}E_{-y}}{4}
@@ -388,6 +388,7 @@ export default defineBlocks([
         "2026-11-02: SageMath の検算を付けるにあたり、5 つの主張と arcsinh の定義を束ねていた cosh_addition_and_half_angle を 1 ブロック 1 主張に分け、" +
           "その cosh の加法定理をこのブロックにした。鎖を主張の左辺から始め、exp の積の法則・分配則・分数の和と積を一行ずつに分け、" +
           "複号が - の場合を cosh_is_even・sinh_is_odd を引く鎖で書いた。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 複号が + の場合の根拠「−(x+y) = (−x)+(−y)」（ℝ を書いていなかった）を、この回に足した主張 real_negation_of_sum_is_sum_of_negations の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -428,7 +429,7 @@ export default defineBlocks([
 &= \frac{\exp(x+y)-\exp(-(x+y))}{2}
 &&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(x+y)-\exp((-x)+(-y))}{2}
-&&(\because\ -(x+y) = (-x)+(-y))\\
+&&(\because\ \blkref{real_negation_of_sum_is_sum_of_negations})\\
 &= \frac{E_{x}E_{y}-E_{-x}E_{-y}}{2}
 &&(\because\ \exp(s+t) = \exp(s)\exp(t)\ \text{を 2 箇所へ。}\blkref{scalar_exp_product})\\
 &= \frac{2E_{x}E_{y}-2E_{-x}E_{-y}}{4}
@@ -462,6 +463,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (1) の sinh の加法定理を独立の主張にした。旧証明は「sinh についても同じ計算で従う」としか書いていなかったので、鎖を書いた。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 複号が + の場合の根拠「−(x+y) = (−x)+(−y)」（ℝ を書いていなかった）を、この回に足した主張 real_negation_of_sum_is_sum_of_negations の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

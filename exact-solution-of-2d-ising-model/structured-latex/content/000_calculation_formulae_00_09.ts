@@ -2374,7 +2374,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= \Bigl(-\sum_{j=1}^{m} x_j\Bigr) + (-x_{m+1})
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= -\Bigl(\Bigl(\sum_{j=1}^{m} x_j\Bigr) + x_{m+1}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a) + (-b) = -(a + b)\ \bigl(a \to \textstyle\sum_{j=1}^{m} x_j,\ b \to x_{m+1}\bigr)\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \text{を文字を}\ p, q\ \text{に替えた}\ -(p+q) = (-p)+(-q)\ \bigl(p \to \textstyle\sum_{j=1}^{m} x_j,\ q \to x_{m+1}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
 &= -\sum_{j=1}^{m+1} x_j
 &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2384,6 +2384,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 が −ǧ(ε) = −Σ_μ γ(θ̃_μ)(ε_μ − 1/2) の符号反転を有限和の各項へ入れるのに引くので足した（それまでは「Step 2 を γ → −γ として適用」と名前だけで根拠にしていた）。Lean は Ising2D.finite_sum_of_negated_real_numbers（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean）。数値検証: sagemath/check/finite_sum_of_negated_real_numbers/。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 帰納法の段の根拠「ℝ で (−a)+(−b) = −(a+b)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（文字を p, q に替え p → Σ_{j=1}^{m} x_j, q → x_{m+1}）を右辺から左辺へ当てる参照にした（文書の並びでは後ろのファイルのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3656,7 +3657,7 @@ q
 &= -(a + b)
 &&\bigl(\because\ \blkref{def_real_absolute_value}\ (a + b < 0)\bigr)\\
 &= (-a) + (-b)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(a + b) = (-a) + (-b)\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to a,\ y \to b)\bigr)\\
 &\leq |a| + (-b)
 &&\bigl(\because\ -a \leq |a|\ \text{の両辺に}\ -b\ \text{を足す}\bigr)\\
 &\leq |a| + |b|
@@ -3668,6 +3669,7 @@ q
       status: "added",
       notes: [
         "2026-11-06: 原文（Typst）に対応ブロックは無い。finite_sum_of_real_numbers_triangle_inequality の帰納法の段から引けるよう足した（def_rayleigh_sup の上に有界であることの鎖が「有限和の三角不等式」を名前だけで使っていた）。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: a + b < 0 の場合の根拠「ℝ で −(a+b) = (−a)+(−b)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（x → a, y → b）の参照にした（文書の並びでは後ろのファイルのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
       ],
     },
   },

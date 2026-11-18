@@ -13,7 +13,7 @@ lines = [
     cc_conj((x*u - y*v, x*v + y*u)),               # conj((xu - yv, xv + yu))   (definition_of_cc の積)
     (x*u - y*v, -(x*v + y*u)),                     # (xu - yv, -(xv + yu))     (def_complex_conjugate)
     (x*u - (-y)*(-v), -(x*v + y*u)),               # (-y)(-v) = yv
-    (x*u - (-y)*(-v), (-(x*v)) + (-(y*u))),        # -(xv + yu) = (-(xv)) + (-(yu))
+    (x*u - (-y)*(-v), (-(x*v)) + (-(y*u))),        # real_negation_of_sum_is_sum_of_negations（p → xv, q → yu）
     (x*u - (-y)*(-v), x*(-v) + (-(y*u))),          # real_times_negation_is_negation_of_product（p → x、q → v）を右辺から左辺へ
     (x*u - (-y)*(-v), x*(-v) + (-y)*u),            # -(yu) = (-y)u
     cc_mul((x, -y), (u, -v)),                      # (x,-y)(u,-v)               (definition_of_cc の積)

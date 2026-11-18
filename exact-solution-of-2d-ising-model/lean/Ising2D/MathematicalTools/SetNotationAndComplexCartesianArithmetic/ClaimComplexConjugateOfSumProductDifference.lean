@@ -25,8 +25,8 @@
 - 人手の `m ∈ ℤ_{≥1}` は Lean の `m + 1`、`z_1, …, z_m` は `z : Fin (m + 1) → ℂ` である。
   `def_finite_sum_of_complex_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の `real_inclusion_of_finite_sum_succ` と同じ読み替え）。
-- 人手の「ℝ で `-(y+v) = (-y)+(-v)`」「ℝ で `(-y)(-v) = yv`」「ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`」
-  は mathlib の `neg_add`・`neg_mul_neg`・`neg_add` で 1 段ずつ受ける。人手の `-(xv) = x(-v)`・`-(yu) = (-y)u` の行は、人手の参照に合わせて
+- 人手の `real_negation_of_sum_is_sum_of_negations` の 2 行（`-(y+v) = (-y)+(-v)`・`-(xv + yu) = (-(xv)) + (-(yu))`）は
+  同じ名前の具体版の定理で、「ℝ で `(-y)(-v) = yv`」は mathlib の `neg_mul_neg` で 1 段ずつ受ける。人手の `-(xv) = x(-v)`・`-(yu) = (-y)u` の行は、人手の参照に合わせて
   `real_times_negation_is_negation_of_product`・`real_negation_times_is_negation_of_product` を右辺から左辺へ当てる。
 - 人手の `\overline{-1_ℂ}` の鎖の 3 行目 `real_negation_of_zero_is_zero` は、同じ名前の具体版の定理で受ける。
 - 人手 `multiply_by_minus_one`（`-z := (-1_ℂ)z`）・`def_complex_difference`（`z - w := z + (-w)`）は具体版が Lean に無く、
@@ -50,6 +50,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Complex.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 
 namespace Ising2D
 
@@ -64,7 +65,8 @@ theorem complex_conjugate_of_add (z w : ℂ) :
         Complex.ext (Complex.conj_re _) (Complex.conj_im _)
                                                   -- 2 行目: `def_complex_conjugate`
     _ = (⟨z.re + w.re, (-z.im) + (-w.im)⟩ : ℂ) := by
-        rw [neg_add]                              -- 3 行目: ℝ で `-(y+v) = (-y)+(-v)`
+        rw [real_negation_of_sum_is_sum_of_negations]
+                                                  -- 3 行目: `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替え `p → y`、`q → v`）
     _ = (⟨z.re, -z.im⟩ : ℂ) + (⟨w.re, -w.im⟩ : ℂ) := rfl
                                                   -- 4 行目: `definition_of_cc` の和
     _ = (starRingEnd ℂ) z + (starRingEnd ℂ) w :=
@@ -119,7 +121,8 @@ theorem complex_conjugate_of_product_eq (z w : ℂ) :
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), -(z.re * w.im + z.im * w.re)⟩ : ℂ) := by
         rw [neg_mul_neg]                          -- 3 行目: ℝ で `(-y)(-v) = yv`
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), (-(z.re * w.im)) + (-(z.im * w.re))⟩ : ℂ) := by
-        rw [neg_add]                              -- 4 行目: ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`
+        rw [real_negation_of_sum_is_sum_of_negations]
+                                                  -- 4 行目: `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替え `p → xv`、`q → yu`）
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), z.re * (-w.im) + (-(z.im * w.re))⟩ : ℂ) := by
         rw [← real_times_negation_is_negation_of_product z.re w.im]
                                                   -- 5 行目: `real_times_negation_is_negation_of_product`（文字を `p, q` に替え `p → x`、`q → v`）を右辺から左辺へ
