@@ -29,7 +29,7 @@
 | Step 2（M_col = 2）の 3 行 | 厳密（ZZ） |
 | Step 2（M_col ≥ 3）の 4 行と 3 行目の根拠 s(m)s(m) = 1 | 厳密（ZZ）。M_col = 3..8 |
 | exp(KE(s)) の鎖 3 行（def_open_chain_spin_energy、ℝ の分配則、real_exp_of_finite_sum） | 球 |
-| 被加数の鎖 1 行目（ℝ の可換性）・2 行目（Step 2 の等式）・3 行目（exp(KE(s)) の鎖）・4 行目（finite_product_of_real_products） | 球 |
+| 被加数の鎖 1 行目（ℝ の乗法の可換則 s(M_col)s(1) = s(1)s(M_col)、set_and_algebra_notation）・2 行目（Step 2 の等式）・3 行目（exp(KE(s)) の鎖）・4 行目（finite_product_of_real_products） | 球 |
 | 主張の鎖 1〜4 行目（直前の等式・Φ による付け替え・ς による付け替え・expansion_of_finite_product_of_two_term_sums_of_real_numbers） | 厳密（QQ[x,y]）と球 |
 | 主張の鎖 5〜11 行目（ς の値・1·b = b・a·1 = a・ℝ の乗法の可換則 K(−1) = (−1)K・real_minus_one_times_is_negation の (−1)K = −K・real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)・def_real_difference） | 球。8・9 行目の根拠の等式は K ∈ K_SAMPLES で厳密（QQ）、10・11 行目の根拠の等式は QQ[x,y] で厳密 |
 | 主張の鎖 12〜14 行目（c + c = 2c・def_cosh_sinh・冪の定義） | 厳密と球 |

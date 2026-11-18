@@ -248,7 +248,7 @@
 | `Ising2D.varsigma` / `coe_varsigma_one` / `coe_varsigma_zero` / `varsigmaEquiv` / `varsigmaWordEquiv` | `ς(e) = 2e - 1` と、成分ごとの `ς` による `{0,1}^{M_col-1} → {-1,1}^{M_col-1}` の全単射 | `open_chain_partition_sum` の Step 1 |
 | `Ising2D.exp_openChainEnergy_eq_prod_bondSpin` | `exp(KE(s)) = Π_m exp(Kt_m(s))`（3 段） | `open_chain_partition_sum` の Step 2 の準備の鎖 |
 | `Ising2D.binaryWordRealSum_eq_sum_univ` / `openChainEnergy_eq_sum_fin` | 運ぶ段（人手の行は無い）: `{0,1}^r` の上の和を全体の上の和で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `open_chain_partition_sum` の Step 2 |
-| `Ising2D.prod_bondSpin_of_two` / `prod_bondSpin_of_ge_three` / `prod_bondSpin_rearrange` / `prod_bondSpin_eq_first_mul_last` | `Π_m t_m(s) = s(1)s(M_col)`（`M_col = 2` の 3 段と `M_col ≥ 3` の 4 段。可換性と結合性の段は `prod_bondSpin_rearrange`） | `open_chain_endpoint_product_sum` の Step 2 |
+| `Ising2D.prod_bondSpin_of_two` / `prod_bondSpin_of_ge_three` / `prod_bondSpin_rearrange` / `prod_bondSpin_eq_first_mul_last` | `Π_m t_m(s) = s(1)s(M_col)`（`M_col = 2` の 3 段と `M_col ≥ 3` の 4 段。可換則と結合則（`set_and_algebra_notation`）の段は `prod_bondSpin_rearrange`） | `open_chain_endpoint_product_sum` の Step 2 |
 | `Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod` | `s(M_col)s(1)exp(KE(s)) = Π_m(t_m(s)exp(Kt_m(s)))`（4 段） | `open_chain_endpoint_product_sum` の Step 2 |
 | **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 11 行の calc） | **主張本体** |
 | **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`**（左辺と 14 行の calc） | **主張本体** |
@@ -406,7 +406,7 @@
   `ς` が `{0,1}` と `{-1,1}` の全単射であること、
   `{-1,1}` の元の個数 `2` だけで、`ℝ` の加法・順序は効いていない。
   端点因子の書き替えでは、`x(m)x(m) = 1` は中間のサイトでしか効かず、`M_col = 2` の鎖では使わない。
-  人手の端点因子の書き替えの一段「`ℝ` の乗法の可換性と結合性」は、Lean では `∏_m s(m)` と `∏_m s(m+1)` への分解・
+  人手の端点因子の書き替えの一段「`ℝ` の乗法の可換則と結合則（`ℝ` は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ」は、Lean では `∏_m s(m)` と `∏_m s(m+1)` への分解・
   両端の括り出し・中間のサイトの書き方の揃え・結合性の段に割れる（`prod_bondSpin_rearrange`・`NecSuf.prod_mul_succ_rearrange`）。
 
 - **`γ(θ̃_μ) > 0`（半整数運動量に固有の性質）が効くのは 1 箇所だけである。**

@@ -17,7 +17,7 @@
 | （運ぶ段。人手の行は無い）`{0,1}^r` の上の和を全体の上の `∑` で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `binaryWordRealSum_eq_sum_univ`・`openChainEnergy_eq_sum_fin` |
 | `open_chain_endpoint_product_sum` の Step 1（`open_chain_partition_sum` の Step 1 の `Φ` と `ς` を使う） | `openChainPhiEquiv`・`varsigmaWordEquiv` |
 | 同 Step 2 の `M_col = 2` の鎖（3 行）`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)` | `prod_bondSpin_of_two`（同じ 3 段の calc） |
-| 同 Step 2 の `M_col ≥ 3` の鎖（4 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（同じ 4 段の calc。2 行目の「ℝ の乗法の可換性と結合性」は `prod_bondSpin_rearrange`）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
+| 同 Step 2 の `M_col ≥ 3` の鎖（4 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（同じ 4 段の calc。2 行目の「ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ」は `prod_bondSpin_rearrange`）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
 | 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
 | 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
 | 同 Step 2 の最後の鎖（左辺と 14 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 14` の calc） |
@@ -310,7 +310,7 @@ theorem prod_bondSpin_of_two (s : SpinConf 2) :
     _ = (s 0 : ℝ) * (s 1 : ℝ) := rfl                    -- `t_1(s) := s(1)s(2)`
     _ = (s 0 : ℝ) * (s (Fin.last 1) : ℝ) := rfl         -- `M_col = 2`（人手の `2` が Lean の `Fin.last 1`）
 
-/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖の 2 行目の根拠「ℝ の乗法の可換性と結合性」
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖の 2 行目の根拠「ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ」
 （人手の `M_col` は Lean の `k + 3`、中間の添字 `m = 2,…,M_col-1` は `j : Fin (k + 1)`（人手の `m` が Lean の `(j : ℕ) + 2`、
 サイトは `j.succ.castSucc`））: `Π_{m=1}^{M_col-1}s(m)s(m+1) = s(1)(Π_{m=2}^{M_col-1}s(m)s(m))s(M_col)`。
 人手の一段を、Lean では有限積の端の因子を外へ出す段（末尾の因子は `def_finite_product_of_real_numbers` の帰納の式
@@ -347,7 +347,7 @@ theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
                                                         -- `t_m(s) := s(m)s(m+1)`
     _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
           * (s (Fin.last (k + 2)) : ℝ) :=
-        prod_bondSpin_rearrange k s                     -- ℝ の乗法の可換性と結合性
+        prod_bondSpin_rearrange k s                     -- ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ
     _ = (s 0 : ℝ) * (∏ _j : Fin (k + 1), (1 : ℝ)) * (s (Fin.last (k + 2)) : ℝ) := by
         rw [Finset.prod_congr rfl fun j _ => spinVal_mul_self (s j.succ.castSucc)]
                                                         -- `s(m)s(m) = 1` を各 `m` へ同時適用
@@ -368,7 +368,7 @@ theorem endpoint_mul_exp_openChainEnergy_eq_prod (K : ℝ) (s : SpinConf (n + 2)
       = ∏ m : Fin (n + 1), (bondSpin s m : ℝ) * Real.exp (K * (bondSpin s m : ℝ)) :=
   calc (s (Fin.last (n + 1)) : ℝ) * (s 0 : ℝ) * Real.exp (K * openChainEnergy s)
       = (s 0 : ℝ) * (s (Fin.last (n + 1)) : ℝ) * Real.exp (K * openChainEnergy s) := by
-        rw [mul_comm (s (Fin.last (n + 1)) : ℝ)]        -- ℝ の乗法の可換性
+        rw [mul_comm (s (Fin.last (n + 1)) : ℝ)]        -- ℝ の乗法の可換則 `p·q = q·p`（`p → s(M_col)`, `q → s(1)`。`set_and_algebra_notation`）
     _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * Real.exp (K * openChainEnergy s) := by
         rw [prod_bondSpin_eq_first_mul_last]            -- 上の等式（`prod_bondSpin_eq_first_mul_last`）を右辺から左辺へ
     _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * ∏ m : Fin (n + 1), Real.exp (K * (bondSpin s m : ℝ)) := by

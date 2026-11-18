@@ -3021,7 +3021,7 @@ D_0G
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)
 &&\bigl(\because\ t_m(s):=s(m)s(m+1)\bigr)\\
 &= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}s(m)s(m)\right)s(M_{\mathrm{col}})
-&&\bigl(\because\ \mathbb R\text{ の乗法の可換性と結合性}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則と結合則（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）を有限積の因子の並べ替えへ}\bigr)\\
 &= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}1\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ s(m)s(m)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
 &= s(1)s(M_{\mathrm{col}})
@@ -3055,7 +3055,7 @@ D_0G
         String.raw`\begin{aligned}
 s(M_{\mathrm{col}})s(1)\exp(KE(s))
 &= s(1)s(M_{\mathrm{col}})\exp(KE(s))
-&&\bigl(\because\ \mathbb R\text{ の乗法の可換性}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to s(M_{\mathrm{col}}),\ q \to s(1))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\exp(KE(s))
 &&\bigl(\because\ \text{上の等式を右辺から左辺へ}\bigr)\\
 &= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
@@ -3107,6 +3107,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         "数値検証: sagemath/check/open_chain_endpoint_product_sum/（旧: sagemath/check/053_claim_even_sector_closing/check_03 の M=2,…,8 の全配置の直接列挙）。",
         "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを、open_chain_partition_sum の準備の等式（real_exp_of_finite_sum）に直した。Step 2 の Π_{m=2}^{M_col−1} は M_col = 2 で因子が無く def_finite_product_of_real_numbers が定めない積だったので、M_col = 2 を別の鎖にした。主張の左辺の因子 s(M_col)s(1) を Step 2 の s(1)s(M_col) へ移す可換性の行と、二つの有限積の因子を対にする行（finite_product_of_real_products）を、名前だけの「Step 1 の全単射と直前の等式」から分けた。別のブロックの証明の途中の等式を引かないよう、exp(KE(s)) の鎖をこの証明にも置いた。付け替えた後の和の添字を u・τ_m にし、積の展開を open_chain_partition_sum と同じく ς で expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にした。主張文に M_col ∈ ℤ_{≥2}・exp・sinh・冪の定義を書いた。主張は変えていない。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「ℝ で a·(−1) = −a を各因子へ」の行を、ℝ の乗法の可換則（set_and_algebra_notation）を各因子へ当てる行と real_minus_one_times_is_negation（a → K）を各因子へ当てる行の 2 行に割った。続く「ℝ で a + (−1)b = a − b を各因子へ」の行も、real_minus_one_times_is_negation（a → exp(−K)）を各因子へ当てる行と def_real_difference（y → exp(K)、z → exp(−K)）を右辺から左辺へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 2 の M_col ≥ 3 の鎖の 2 行目の名前だけの根拠「ℝ の乗法の可換性と結合性」と、被加数の鎖の 1 行目の「ℝ の乗法の可換性」を、set_and_algebra_notation（ℝ は順序体）の参照にした（1 行目は p → s(M_col)、q → s(1) の代入つき）。鎖と主張は不変。",
       ],
     },
   },
