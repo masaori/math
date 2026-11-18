@@ -48097,7 +48097,7 @@ F_n&\subseteq R&&\bigl(\because\ R\text{ は }F_n\text{ の和集合}\bigr)\\
 C_R\cap F_n&=C_n&&\bigl(\because\ \text{仮定}\bigr)\\
 D\cap F_n&=(D\cap R)\cap F_n&&\bigl(\because\ F_n\subseteq R\bigr)\\
 &=C_R\cap F_n&&\bigl(\because\ \blkref{def_positive_cone_extension}\text{ の }D\cap R=C_R\bigr)\\
-&=C_n&&\bigl(\because\ \text{上の等号}\bigr).
+&=C_n&&\bigl(\because\ \text{上の等号}\bigr)
 \end{aligned}`),
                   paragraph(["よって ", math(String.raw`(E,D)`), " は ", math(String.raw`(F_n,C_n)`),
                     " の延長である。取込条件をこの延長と ", math(String.raw`\xi(n)=z\in E`),
