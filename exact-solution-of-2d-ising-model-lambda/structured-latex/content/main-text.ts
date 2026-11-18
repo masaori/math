@@ -47495,7 +47495,7 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &=\iota(a^2-2b^2)
 &&\bigl(\because\ \iota\text{ は体の演算を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(d)
-&&\bigl(\because\ d\text{ の定義}\bigr).
+&&\bigl(\because\ d\text{ の定義}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`d=0`), " と仮定する。すると、",
@@ -47507,7 +47507,7 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &=\iota(0)
 &&\bigl(\because\ d=0\bigr)\\
 &=0
-&&\bigl(\because\ \iota\text{ は零元を保つ、}\blkref{def_algebraic_numbers}\bigr).
+&&\bigl(\because\ \iota\text{ は零元を保つ、}\blkref{def_algebraic_numbers}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`\xi\ne0`), " と体 ", math(String.raw`\overline{\mathbb Q}`),
@@ -47527,7 +47527,7 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &=\iota(0)+\iota(0)s
 &&\bigl(\because\ a=0,\ b=0\bigr)\\
 &=0
-&&\bigl(\because\ \iota\text{ は零元を保ち、零元との積は零元}\bigr).
+&&\bigl(\because\ \iota\text{ は零元を保ち、零元との積は零元}\bigr)
 \end{aligned}`),
                   paragraph([
                     "これは ", math(String.raw`\xi\ne0`), " に反する。ゆえに ",
@@ -47542,14 +47542,14 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
 &=\iota(d)^{-1}\iota(d)
 &&\bigl(\because\ \text{上の共役との積}\bigr)\\
 &=1
-&&\bigl(\because\ d\ne0,\ \iota\text{ の単射性}\bigr).
+&&\bigl(\because\ d\ne0,\ \iota\text{ の単射性}\bigr)
 \end{aligned}`),
                   displayMath(String.raw`\begin{aligned}
 \xi^{-1}
 &=\iota(a/d)+\iota(-b/d)s
 &&\bigl(\because\ \xi\text{ の逆元の一意性}\bigr)\\
 &\in Q_s
-&&\bigl(\because\ a/d,-b/d\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
+&&\bigl(\because\ a/d,-b/d\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                   paragraph(["有理数と代数的数の四則だけを使い、実数体と複素数体は現れない。"]),
                 ],
