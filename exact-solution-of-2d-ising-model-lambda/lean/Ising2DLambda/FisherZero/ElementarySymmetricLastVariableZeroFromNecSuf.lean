@@ -7,8 +7,8 @@ namespace Ising2DLambda.FisherZero
 open MvPolynomial
 
 /-- `claim_last_variable_zero_elementary_symmetric` を必要十分版から得る。
-`A = Qbar[X_{<n+1}]`、`R = Qbar[X_{<n}]`、`φ = π_n`、`X` は変数、`g = Fin.castSucc`、`t` は `I_n` の全体、
-`a` は末尾 `Fin.last n`、`y k = X^{(n)}_k`。`I_{n+1} = insert (last n) (castSucc の像)` は添字の書き換え。 -/
+`A = Qbar[X_{<n+1}]`、`R = Qbar[X_{<n}]`、`φ = lz_n`、`X` は変数、`g = Fin.castSucc`、`t` は `ℕ_{<n}` の全体、
+`a` は末尾 `Fin.last n`、`y k = X^{(n)}_k`。`ℕ_{<n+1} = insert (last n) (castSucc の像)` は添字の書き換え。 -/
 theorem lastVariableZero_elementarySymmetric_from_necSuf (n j : ℕ) :
     lastVariableZero n (qbarElementarySymmetric (n + 1) j) = qbarElementarySymmetric n j := by
   classical

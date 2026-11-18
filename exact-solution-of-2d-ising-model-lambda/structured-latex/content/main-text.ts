@@ -53985,6 +53985,431 @@ B_0&:=\bigl\{\,S\subseteq\mathbb{N}_{<n+1}\ \bigm|\ |S|=j\text{ かつ }n\notin 
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_monomial_and_last_variable_zero_coefficient",
+        labels: [],
+        title: { text: "単項式の係数と末尾の変数への零代入の係数" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_multivariate_monomial",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_multivariate_monomial",
+                  kind: "definition",
+                  title: { text: "単項式と指数の順序・差・総和" },
+                  labels: ["def_qbar_multivariate_monomial"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMonomial",
+                    "Ising2DLambda.FisherZero.exponentWeight",
+                  ],
+                  verification: ["sagemath/check/monomial-and-last-variable-zero-coefficient"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）に対して",
+                    ]),
+                    displayMath(String.raw`\mathrm{mon}_n(a):=\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n)}_k\bigr)^{a(k)}\ \in\ \overline{\mathbb{Q}}[X_{<n}]`),
+                    paragraph([
+                      "と定め、指数 ",
+                      math(String.raw`a`),
+                      " の単項式と呼ぶ（冪は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の積の繰り返しで、零乗は単位元）。",
+                      math(String.raw`\mathrm{ew}(a):=\sum_{k\in\mathbb{N}_{<n}}a(k)\in\mathbb{N}`),
+                      " を ",
+                      math(String.raw`a`),
+                      " の指数の総和と呼ぶ。",
+                    ]),
+                    paragraph([
+                      math(String.raw`a,c\in\mathrm{Ex}_n`),
+                      " について、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`a(k)\le c(k)`),
+                      " となることを ",
+                      math(String.raw`a\le c`),
+                      " と書く。",
+                      math(String.raw`a\le c`),
+                      " のとき、",
+                      math(String.raw`c-a\in\mathrm{Ex}_n`),
+                      " を ",
+                      math(String.raw`(c-a)(k):=c(k)-a(k)\in\mathbb{N}`),
+                      " で定める。",
+                      math(String.raw`a\le c`),
+                      " でないときは ",
+                      math(String.raw`c-a`),
+                      " を使わない。",
+                      math(String.raw`0\in\mathrm{Ex}_n`),
+                      " は零写像を表す。",
+                      "現れるのは自然数、代数的数、有限積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_exponent_zero_extension",
+              focus:
+                {
+                  id: "zero_pinching_def_exponent_zero_extension",
+                  kind: "definition",
+                  title: { text: "指数の末尾に零を足す写像" },
+                  labels: ["def_exponent_zero_extension"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentZeroExtension",
+                    "Ising2DLambda.FisherZero.exponentZeroExtension_castSucc",
+                    "Ising2DLambda.FisherZero.exponentZeroExtension_last",
+                  ],
+                  verification: ["sagemath/check/monomial-and-last-variable-zero-coefficient"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " に対して、写像 ",
+                      math(String.raw`\mathrm{ez}_n:\mathrm{Ex}_n\to\mathrm{Ex}_{n+1}`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）を、",
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " と ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`\mathrm{ez}_n(b)(k):=b(k)`),
+                      "、",
+                      math(String.raw`\mathrm{ez}_n(b)(n):=0`),
+                      " と定める。",
+                      math(String.raw`a\in\mathrm{Ex}_{n+1}`),
+                      " の ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " への制限を ",
+                      math(String.raw`a|_{<n}\in\mathrm{Ex}_n`),
+                      "（",
+                      math(String.raw`a|_{<n}(k):=a(k)`),
+                      "）と書く。",
+                      math(String.raw`a\in\mathrm{Ex}_{n+1}`),
+                      " と ",
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " について、",
+                      math(String.raw`a=\mathrm{ez}_n(b)`),
+                      " と「",
+                      math(String.raw`a(n)=0`),
+                      " かつ ",
+                      math(String.raw`a|_{<n}=b`),
+                      "」は、両辺の写像の値を ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の元と ",
+                      math(String.raw`n`),
+                      " で比べれば同値である。現れるのは自然数に値をとる有限個の点の写像だけである。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_monomial_multiplication_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_monomial_multiplication_coefficient",
+                  kind: "claim",
+                  title: { text: "単項式を掛けると係数は指数をずらしたものになる" },
+                  labels: ["claim_qbar_monomial_multiplication_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/monomial-and-last-variable-zero-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMonomial_mul_coeff",
+                    "Ising2DLambda.FisherZero.qbarX_mul_coeff",
+                    "Ising2DLambda.FisherZero.qbarMonomial_zero",
+                    "Ising2DLambda.FisherZero.qbarMonomial_single_add",
+                    "Ising2DLambda.NecSuf.FisherZero.monomialProd_mul_coeff_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMonomial_mul_coeff_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      "、",
+                      math(String.raw`a,c\in\mathrm{Ex}_n`),
+                      "、",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_c\bigl(\mathrm{mon}_n(a)\cdot Q\bigr)=
+\begin{cases}
+\mathrm{mco}_{c-a}(Q)&(a\le c\text{ のとき})\\
+0&(a\le c\text{ でないとき})
+\end{cases}`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "、",
+                      ref("def_qbar_multivariate_monomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      "、",
+                      math(String.raw`R\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "、",
+                      math(String.raw`c\in\mathrm{Ex}_n`),
+                      " について、変数を一つ掛けたときの係数を求める。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_c\bigl(X^{(n)}_k\cdot R\bigr)
+&=\sum_{(b,e)\in\mathrm{Ex}_n\times\mathrm{Ex}_n:\ b+e=c}\mathrm{mco}_b\bigl(X^{(n)}_k\bigr)\cdot\mathrm{mco}_e(R)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の積}\bigr)\\
+&=\sum_{e\in\mathrm{Ex}_n:\ \delta_k+e=c}\mathrm{mco}_e(R)
+&&\bigl(\because\ \mathrm{mco}_b(X^{(n)}_k)\text{ は }b=\delta_k\text{ で }1\text{、他で }0\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{c-\delta_k}(R)&(\delta_k\le c\text{ のとき})\\
+0&(\delta_k\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \delta_k+e=c\text{ を満たす }e\text{ は }\delta_k\le c\text{ のとき }c-\delta_k\text{ ただ一つ、そうでなければ無い}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "本題は ",
+                      math(String.raw`\mathrm{ew}(a)`),
+                      " についての帰納法で示す。",
+                      math(String.raw`\mathrm{ew}(a)=0`),
+                      " なら、自然数の和が ",
+                      math(String.raw`0`),
+                      " なので任意の ",
+                      math(String.raw`k`),
+                      " で ",
+                      math(String.raw`a(k)=0`),
+                      "、すなわち ",
+                      math(String.raw`a=0`),
+                      " であり、",
+                      math(String.raw`0\le c`),
+                      " は常に成り立つ。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_c\bigl(\mathrm{mon}_n(0)\cdot Q\bigr)
+&=\mathrm{mco}_c(1\cdot Q)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_monomial}\text{、零乗は単位元}\bigr)\\
+&=\mathrm{mco}_{c-0}(Q)
+&&\bigl(\because\ \text{単位元との積、}c-0=c\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`w\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ew}`),
+                      " が ",
+                      math(String.raw`w`),
+                      " の指数で主張が成り立つとし、",
+                      math(String.raw`\mathrm{ew}(a)=w+1`),
+                      " とする。和が正なので ",
+                      math(String.raw`a(k)\ge1`),
+                      " の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " がある。すると ",
+                      math(String.raw`\delta_k\le a`),
+                      " で、",
+                      math(String.raw`a':=a-\delta_k`),
+                      " は ",
+                      math(String.raw`a=\delta_k+a'`),
+                      "、",
+                      math(String.raw`\mathrm{ew}(a')=w`),
+                      " を満たす。",
+                      math(String.raw`(X^{(n)}_k)^{a(k)}=X^{(n)}_k\cdot(X^{(n)}_k)^{a'(k)}`),
+                      " で、",
+                      math(String.raw`j\ne k`),
+                      " の因子は変わらないので、積の可換性から ",
+                      math(String.raw`\mathrm{mon}_n(a)=X^{(n)}_k\cdot\mathrm{mon}_n(a')`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_c\bigl(\mathrm{mon}_n(a)\cdot Q\bigr)
+&=\mathrm{mco}_c\Bigl(X^{(n)}_k\cdot\bigl(\mathrm{mon}_n(a')\cdot Q\bigr)\Bigr)
+&&\bigl(\because\ \mathrm{mon}_n(a)=X^{(n)}_k\cdot\mathrm{mon}_n(a')\text{、積の結合則}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{c-\delta_k}\bigl(\mathrm{mon}_n(a')\cdot Q\bigr)&(\delta_k\le c\text{ のとき})\\
+0&(\delta_k\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{(c-\delta_k)-a'}(Q)&(\delta_k\le c\text{ かつ }a'\le c-\delta_k\text{ のとき})\\
+0&(\text{それ以外のとき})
+\end{cases}
+&&\bigl(\because\ \mathrm{ew}(a')=w\text{ での帰納法の仮定}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{c-a}(Q)&(a\le c\text{ のとき})\\
+0&(a\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \text{各点で }\delta_k\le c\text{ かつ }a'\le c-\delta_k\iff\delta_k+a'\le c\text{、}(c-\delta_k)-a'=c-(\delta_k+a')\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "最後の行の根拠は ",
+                      math(String.raw`\mathbb{N}`),
+                      " の各点での大小と差の計算である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の有限和・有限積と自然数の計算だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_coefficient",
+                  kind: "claim",
+                  title: { text: "末尾の変数に零を代入した多項式の係数は末尾の指数が零の係数である" },
+                  labels: ["claim_last_variable_zero_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/monomial-and-last-variable-zero-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastVariableZero_coeff",
+                    "Ising2DLambda.FisherZero.lastVariableZero_term_of_last_ne_zero",
+                    "Ising2DLambda.FisherZero.lastVariableZero_term_of_last_eq_zero",
+                    "Ising2DLambda.NecSuf.FisherZero.lastVariableZero_coeff_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_coeff_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      "、",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "、",
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_b\bigl(\mathrm{lz}_n(P)\bigr)=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_last_variable_zero_substitution"),
+                      "、",
+                      ref("def_exponent_zero_extension"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`z_n`),
+                      " は ",
+                      ref("def_last_variable_zero_substitution"),
+                      " の写像である。係数が零でない指数の集合を分ける。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+A_0&:=\bigl\{\,a\in\mathrm{Ex}_{n+1}\ \bigm|\ \mathrm{mco}_a(P)\ne0\text{ かつ }a(n)=0\,\bigr\},\\
+A_1&:=\bigl\{\,a\in\mathrm{Ex}_{n+1}\ \bigm|\ \mathrm{mco}_a(P)\ne0\text{ かつ }a(n)\ge1\,\bigr\}.
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`A_0`),
+                      " と ",
+                      math(String.raw`A_1`),
+                      " は交わらない有限集合で、合わせると係数が零でない指数の全体になる。",
+                      "任意の ",
+                      math(String.raw`a\in A_1`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\prod_{k\in\mathbb{N}_{<n+1}}z_n(k)^{a(k)}
+&=z_n(n)^{a(n)}\cdot\prod_{k\in\mathbb{N}_{<n}}z_n(k)^{a(k)}
+&&\bigl(\because\ \text{有限積の分離}\bigr)\\
+&=0^{a(n)}\cdot\prod_{k\in\mathbb{N}_{<n}}z_n(k)^{a(k)}
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\bigr)\\
+&=0
+&&\bigl(\because\ a(n)\ge1\text{、零元との積は零元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、任意の ",
+                      math(String.raw`a\in A_0`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\prod_{k\in\mathbb{N}_{<n+1}}z_n(k)^{a(k)}
+&=z_n(n)^{0}\cdot\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n)}_k\bigr)^{a(k)}
+&&\bigl(\because\ \text{有限積の分離、}a(n)=0\text{、}\blkref{def_last_variable_zero_substitution}\bigr)\\
+&=\mathrm{mon}_n\bigl(a|_{<n}\bigr)
+&&\bigl(\because\ \text{零乗は単位元、}\blkref{def_qbar_multivariate_monomial}\text{、}\blkref{def_exponent_zero_extension}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。また ",
+                      math(String.raw`d\in\overline{\mathbb{Q}}`),
+                      " と ",
+                      math(String.raw`e\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_b\bigl(\mathrm{mk}_n(d)\cdot\mathrm{mon}_n(e)\bigr)
+&=\mathrm{mco}_b\bigl(\mathrm{mon}_n(e)\cdot\mathrm{mk}_n(d)\bigr)
+&&\bigl(\because\ \text{積の可換性}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{b-e}\bigl(\mathrm{mk}_n(d)\bigr)&(e\le b\text{ のとき})\\
+0&(e\le b\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \blkref{claim_qbar_monomial_multiplication_coefficient}\bigr)\\
+&=\begin{cases}
+d&(e=b\text{ のとき})\\
+0&(e\ne b\text{ のとき})
+\end{cases}
+&&\bigl(\because\ \mathrm{mk}_n(d)\text{ の係数は零写像で }d\text{、他で }0\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）、}e\le b\text{ のもとで }b-e=0\iff e=b\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。これらを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_b\bigl(\mathrm{lz}_n(P)\bigr)
+&=\mathrm{mco}_b\Bigl(\sum_{a\in A_0\cup A_1}\mathrm{mk}_n\bigl(\mathrm{mco}_a(P)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n+1}}z_n(k)^{a(k)}\Bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{、}\blkref{def_qbar_multivariate_substitution}\bigr)\\
+&=\mathrm{mco}_b\Bigl(\sum_{a\in A_0}\mathrm{mk}_n\bigl(\mathrm{mco}_a(P)\bigr)\cdot\mathrm{mon}_n\bigl(a|_{<n}\bigr)\Bigr)
+&&\bigl(\because\ A_1\text{ と }A_0\text{ の元についての上の二つの式}\bigr)\\
+&=\sum_{a\in A_0}\mathrm{mco}_b\Bigl(\mathrm{mk}_n\bigl(\mathrm{mco}_a(P)\bigr)\cdot\mathrm{mon}_n\bigl(a|_{<n}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数}\bigr)\\
+&=\sum_{a\in A_0:\ a|_{<n}=b}\mathrm{mco}_a(P)
+&&\bigl(\because\ \text{上の三つ目の式}\bigr)\\
+&=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)
+&&\bigl(\because\ \blkref{def_exponent_zero_extension}\text{ により }a(n)=0\text{ かつ }a|_{<n}=b\iff a=\mathrm{ez}_n(b)\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。最後の等号では、",
+                      math(String.raw`\mathrm{ez}_n(b)\in A_0`),
+                      " なら和はその一項であり、",
+                      math(String.raw`\mathrm{ez}_n(b)\notin A_0`),
+                      " なら ",
+                      math(String.raw`\mathrm{ez}_n(b)(n)=0`),
+                      " なので ",
+                      math(String.raw`\mathrm{mco}_{\mathrm{ez}_n(b)}(P)=0`),
+                      " で、和は空なので ",
+                      math(String.raw`0`),
+                      " である。",
+                      "全過程は有限集合の分割と ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
