@@ -1577,7 +1577,7 @@ v_{k_0}
 &\geq u_{k_0} + 0
   &&\bigl(\because\ (\varepsilon_{\mathbb{R}}u)_{k_0} \geq 0\ \text{と}\ \mathbb{R}\ \text{の順序と加法の両立}\ (a \geq b \Rightarrow c + a \geq c + b)\bigr)\\
 &= u_{k_0}
-  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\bigr)\\
+  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to u_{k_0})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &> 0
   &&\bigl(\because\ u_{k_0} > 0\bigr)
 \end{aligned}`),
@@ -1601,6 +1601,7 @@ v_{k_0}
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は「v ≥ u ≥ 0 かつ u ≠ 0 より v ≠ 0」を散文で出し、実数のベクトル u に複素行列 ε を掛けていた。この同一視を def_epsilon_real の ε_ℝ で書き直すために、epsilon_real_preserves_nonnegative_vectors の帰結として足した。本文に実数のベクトルの順序と ℝ^d の元どうしの和を定めるブロックが無いので、v を成分の等式で与え、0 でない成分を一つ取って示す（epsilon_real_fixes_sum_of_vector_and_its_image と同じ v）。数値検証: sagemath/check/sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero/。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38r)）: 主張の鎖の v_{k_0} ≥ u_{k_0} + 0 = u_{k_0} の行の根拠「0 は ℝ の加法の単位元」に、形 x + 0 = x と代入 x → u_{k_0} と参照 set_and_algebra_notation を書いた。式と主張は不変。",
       ],
     },
   },
@@ -2987,13 +2988,13 @@ v^\top W_{\mathbb{R}}v
 &\geq \bigl(A + 0\bigr) + \bigl(0 + A\bigr)
   &&\bigl(\because\ \text{一つ目の準備の}\ \tilde{u}^\top W_{\mathbb{R}}u + A \geq 0 + A\ \text{と}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \geq y \Rightarrow c + x \geq c + y\bigr)\\
 &= A + \bigl(0 + A\bigr)
-  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の右単位元}\ A + 0 = A\bigr)\\
+  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= A + A
-  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の左単位元}\ 0 + A = A\bigr)\\
+  &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 1\,A + 1\,A
-  &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元。2 か所へ同時適用}\bigr)\\
+  &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\,x = x\ (x \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を 2 か所へ同時に右辺から左辺へ}\bigr)\\
 &= (1 + 1)\,A
-  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)\,c = a\,c + b\,c\ \text{を右辺から左辺へ}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)\,c = a\,c + b\,c\ (a, b \to 1,\ c \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}\bigr)\\
 &= 2\,A
   &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -3011,6 +3012,7 @@ v^\top W_{\mathbb{R}}v
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 は実数のベクトル u に複素行列 ε・W を掛け、v^⊤Wv = u^⊤Wu + 2u^⊤Wεu + (εu)^⊤W(εu) = … ≥ 2u^⊤Wu を「v = u + εu の展開と W^⊤ = W」「ε^⊤ = ε」「εW = Wε」「ε^2 = I」で出していた。この同一視を def_epsilon_real の ε_ℝ と def_W_real の W_ℝ で書き直すために足した。ℝ^d の元どうしの和は本文に定義が無いので、v を成分の等式で与え（epsilon_real_fixes_sum_of_vector_and_its_image と同じ v）、展開は双線型値の左右の加法性で行う。W^⊤ = W は使わない（交差項 u^⊤W_ℝũ・ũ^⊤W_ℝu はどちらも real_bilinear_value_with_nonnegative_entries_is_nonnegative で 0 以上なので、入れ替えて 2u^⊤Wεu にまとめる段が要らない）。(εu)^⊤W(εu) = u^⊤Wu の段は、元の u^⊤εWεu を経る書き方が双線型値と行列の積の結合を要するので、双線型値を Σ_k u_k(Pv)_k の形に開いて ε_ℝ を対称な行列として右の因子へ移す道にした（real_symmetric_matrix_moves_between_factors_of_sum_of_products）。数値検証: sagemath/check/W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice/。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 主張の鎖の最後の行 (1 + 1)A = 2A の根拠「ℝ の 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38r)）: 主の鎖の (A + 0) + (0 + A) = A + (0 + A) = A + A = 1A + 1A = (1 + 1)A の 4 行で、ℝ の加法の単位元・乗法の単位元・分配則を参照の無い名前だけで引いていたので、「0 は ℝ の加法の単位元 x + 0 = x（x → A）」「0 + x = x（x → A）」「1 は ℝ の乗法の単位元 1x = x（x → A）を 2 か所へ同時に右辺から左辺へ」「ℝ の分配則 (a + b)c = ac + bc（a, b → 1、c → A）を右辺から左辺へ」の形と代入と向きを書き、set_and_algebra_notation を参照した（式と主張は不変）。",
       ],
     },
   },

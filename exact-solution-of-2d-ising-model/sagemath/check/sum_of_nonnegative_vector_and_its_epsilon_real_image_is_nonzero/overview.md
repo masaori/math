@@ -13,6 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備と 4 行の鎖と結び | `check_proof_lines.sage` | `ε` を `σ_1^x⋯σ_{M_col}^x`（共通の準備 `_epsilon_exact.sage`）で作り `ε_ℝ := ϱ(ε)` とする。`M_col = 1, 2, 3, 4` で、成分が非負の有理数で 0 でないベクトル `u` を 8 本ずつ（0 でない成分が 1 個だけのものを各 `M_col` で `min(d, 4)` 本含む。計 32 本、種は固定）取り、`u_{k_0} ≠ 0` を満たすすべての `k_0` で、準備の 2 つの不等号、鎖の等号 2 行・不等号 2 行、`v_{k_0} ≠ 0`、主張 `v ≠ 0` を確かめる（532 段）。否定コントロール 1 件（仮定 `u_k ≥ 0` を外した `u = (1, -1)`（`M_col = 1`）では `v = 0`） | **PASS** | 成り立つ |
+| 主張の鎖の 3 行目 `u_{k_0} + 0 = u_{k_0}` の根拠（`set_and_algebra_notation`）: 0 は ℝ の加法の単位元 `x + 0 = x`（`x → u_{k_0}`） | `check_unit_row_cites_set_and_algebra_notation.sage` | `u_{k_0}` を不定元に置いた `QQ[t]` で、行に書いた形と代入から形の両辺を作り、前の行と次の行が同じ文脈の穴に形の左辺・右辺を入れたものであることを比べる（1 行）。対照 1 件（単位元でない元を足すと変わる）。形の左右と向きは多項式環の正規化で区別できないので、レビューの目視で確かめる | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲
 
@@ -25,4 +26,4 @@
 bash sagemath/tools/run-all-checks.sh sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero
 ```
 
-実行ログは `sagemath/check/sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero/logs/` に保存する（2026-11-07）。
+実行ログは `sagemath/check/sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero/logs/` に保存する（2026-11-07、2026-11-18）。
