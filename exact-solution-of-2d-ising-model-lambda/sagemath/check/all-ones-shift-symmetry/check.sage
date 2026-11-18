@@ -73,16 +73,17 @@ for m in range(1, 5):
             VQ = vs(R, rho, Q)
             VP = vs(R, rho, P)
             for d in exps:
-                # 準備の五つの等号（各成分で）
+                # 準備の六つの等号（各成分で）
                 dp1 = add(d, ones)
                 for k in range(m):
                     p0 = comp(dp1, rho)[k]
                     p1 = dp1[rho[k]]
                     p2 = d[rho[k]] + ones[rho[k]]
                     p3 = d[rho[k]] + 1
-                    p4 = comp(d, rho)[k] + ones[k]
-                    p5 = add(comp(d, rho), ones)[k]
-                    check(p0 == p1 == p2 == p3 == p4 == p5, "prep m=%d d=%s k=%d" % (m, d, k))
+                    p4 = comp(d, rho)[k] + 1
+                    p5 = comp(d, rho)[k] + ones[k]
+                    p6 = add(comp(d, rho), ones)[k]
+                    check(p0 == p1 == p2 == p3 == p4 == p5 == p6, "prep m=%d d=%s k=%d" % (m, d, k))
                 check(comp(dp1, rho) == add(comp(d, rho), ones), "prep total m=%d d=%s" % (m, d))
                 # 本文の六つの等号
                 v0 = mco(VQ, d)

@@ -13,7 +13,7 @@
 ## 何を確かめるか
 
 - 標本が対称であること、指数を一つ下げた多項式の定義 $\mathrm{mco}_d(\mathrm{sd}_n(P))=\mathrm{mco}_{d+\mathbf 1_n}(P)$。
-- 準備の五つの等号（各成分 $k$ で）と $(d+\mathbf 1_n)\circ\varrho=d\circ\varrho+\mathbf 1_n$。
+- 準備の六つの等号（各成分 $k$ で）と $(d+\mathbf 1_n)\circ\varrho=d\circ\varrho+\mathbf 1_n$。
 - 本文の式変形の六つの等号と主張 $\mathrm{vs}_\varrho(\mathrm{sd}_n(P))=\mathrm{sd}_n(P)$。
 - 対照: $n\ge2$ で、対称でない $\mathrm{mon}_n(\mathbf 1_n)\cdot(X_0^2X_1+X_0X_1^3)$ の $\mathrm{sd}_n$ は対称でないこと（仮定の対称性が効いていること）。
 

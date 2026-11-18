@@ -55302,8 +55302,10 @@ d&(e=a\text{ のとき})\\
 &&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)\\
 &=d\bigl(\varrho(k)\bigr)+1
 &&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_n\bigr)\\
+&=(d\circ\varrho)(k)+1
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の指数の合成}\bigr)\\
 &=(d\circ\varrho)(k)+\mathbf{1}_n(k)
-&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の指数の合成、}\blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_n\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_n\bigr)\\
 &=(d\circ\varrho+\mathbf{1}_n)(k)
 &&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)
 \end{aligned}`),
@@ -55340,6 +55342,476 @@ d&(e=a\text{ のとき})\\
                       "全過程は有限集合の全単射、自然数の指数の和と ",
                       math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
                       " の係数の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_symmetric_vanishing_divisible_by_product",
+        labels: [],
+        title: { text: "部分体を係数とする多変数多項式と全次数" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_subfield_coefficient_multivariate_polynomials",
+              focus:
+                {
+                  id: "zero_pinching_def_subfield_coefficient_multivariate_polynomials",
+                  kind: "definition",
+                  title: { text: "部分体を係数とする有限個の変数の多項式" },
+                  labels: ["def_subfield_coefficient_multivariate_polynomials"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.FisherZero.subfieldCoefficientMvPolys"],
+                  verification: ["sagemath/check/symmetric-vanishing-divisible-by-product"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体（",
+                      ref("def_subfield_positive_cone"),
+                      " の冒頭の意味）とし、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）の部分集合",
+                    ]),
+                    displayMath(String.raw`F[X_{<n}]:=\bigl\{\,P\in\overline{\mathbb{Q}}[X_{<n}]\ \bigm|\ \text{任意の }a\in\mathrm{Ex}_n\text{ について }\mathrm{mco}_a(P)\in F\,\bigr\}`),
+                    paragraph([
+                      "を、",
+                      math(String.raw`F`),
+                      " を係数とする ",
+                      math(String.raw`n`),
+                      " 変数の多項式の全体と呼ぶ。",
+                      math(String.raw`F[X_{<n}]`),
+                      " の元はあくまで ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の元であり、和・積・係数は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " のものを使う。記号 ",
+                      math(String.raw`F[X_{<n}]`),
+                      " はこの集合だけを表し、",
+                      ref("def_subfield_coefficient_polynomials"),
+                      " の一変数の ",
+                      math(String.raw`F[t]`),
+                      " とは別の集合である。",
+                      "定義は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合と係数の所属だけで述べられ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_multivariate_total_degree",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_multivariate_total_degree",
+                  kind: "definition",
+                  title: { text: "有限個の変数の多項式の全次数" },
+                  labels: ["def_qbar_multivariate_total_degree"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentTotal",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree",
+                  ],
+                  verification: ["sagemath/check/symmetric-vanishing-divisible-by-product"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）に対して、指数の総和を",
+                    ]),
+                    displayMath(String.raw`\mathrm{sz}_n(a):=\sum_{k\in\mathbb{N}_{<n}}a(k)\ \in\ \mathbb{N}`),
+                    paragraph([
+                      "と定める。",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " に対して、",
+                      math(String.raw`\mathrm{mco}_a(P)\ne0`),
+                      " となる ",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " の全体 ",
+                      math(String.raw`\mathrm{spt}_n(P)`),
+                      " は有限集合であり（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）、",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_n(P):=\max\Bigl(\{0\}\cup\bigl\{\,\mathrm{sz}_n(a)\ \bigm|\ a\in\mathrm{spt}_n(P)\,\bigr\}\Bigr)\ \in\ \mathbb{N}`),
+                    paragraph([
+                      "を ",
+                      math(String.raw`P`),
+                      " の全次数と呼ぶ（",
+                      math(String.raw`\mathbb{N}`),
+                      " の空でない有限部分集合の最大元である）。",
+                      math(String.raw`P=0`),
+                      " なら ",
+                      math(String.raw`\mathrm{spt}_n(P)`),
+                      " は空なので ",
+                      math(String.raw`\mathrm{tdeg}_n(0)=0`),
+                      " である。最大元の定義から、次の二つが成り立つ。任意の ",
+                      math(String.raw`a\in\mathrm{spt}_n(P)`),
+                      " について ",
+                      math(String.raw`\mathrm{sz}_n(a)\le\mathrm{tdeg}_n(P)`),
+                      "。",
+                      math(String.raw`m\in\mathbb{N}`),
+                      " が任意の ",
+                      math(String.raw`a\in\mathrm{spt}_n(P)`),
+                      " について ",
+                      math(String.raw`\mathrm{sz}_n(a)\le m`),
+                      " を満たすなら ",
+                      math(String.raw`\mathrm{tdeg}_n(P)\le m`),
+                      "。さらに ",
+                      math(String.raw`\mathrm{spt}_n(P)`),
+                      " が空でなければ、ある ",
+                      math(String.raw`a\in\mathrm{spt}_n(P)`),
+                      " で ",
+                      math(String.raw`\mathrm{tdeg}_n(P)=\mathrm{sz}_n(a)`),
+                      " である（",
+                      math(String.raw`\mathrm{sz}_n(a)\ge0`),
+                      " なので、",
+                      math(String.raw`\{0\}`),
+                      " を足しても最大元は変わらない）。",
+                      "現れるのは自然数と有限集合だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_all_ones_shift_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_all_ones_shift_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の全ての指数を一つ下げた多項式も同じ部分体を係数とする" },
+                  labels: ["claim_qbar_all_ones_shift_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-divisible-by-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.allOnesShift_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.allOnesShift_coeff_mem_necSuf",
+                    "Ising2DLambda.FisherZero.allOnesShift_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`P\in F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\mathrm{sd}_n(P)\in F[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_all_ones_shift"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`d\in\mathrm{Ex}_n`),
+                      " を任意に取る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_d\bigl(\mathrm{sd}_n(P)\bigr)
+&=\mathrm{mco}_{d+\mathbf{1}_n}(P)
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\bigr)\\
+&\in F
+&&\bigl(\because\ P\in F[X_{<n}]\text{（}\blkref{def_subfield_coefficient_multivariate_polynomials}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`d`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\mathrm{sd}_n(P)\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合への所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_symmetric_vanishing_last_variable_shift_total_degree",
+              focus:
+                {
+                  id: "zero_pinching_claim_symmetric_vanishing_last_variable_shift_total_degree",
+                  kind: "claim",
+                  title: { text: "零代入で消える対称多項式の指数を一つ下げると全次数は変数の個数だけ下がる" },
+                  labels: ["claim_symmetric_vanishing_last_variable_shift_total_degree"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-divisible-by-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentTotal_add_allOnes",
+                    "Ising2DLambda.FisherZero.symmetricVanishing_allOnesShift_totalDegree",
+                    "Ising2DLambda.NecSuf.FisherZero.allOnesShift_totalDegree_necSuf",
+                    "Ising2DLambda.FisherZero.symmetricVanishing_allOnesShift_totalDegree_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と、対称で（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）",
+                      math(String.raw`\mathrm{lz}_n(P)=0`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）を満たし ",
+                      math(String.raw`P\ne0`),
+                      " である任意の ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_{n+1}\bigl(\mathrm{sd}_{n+1}(P)\bigr)+(n+1)=\mathrm{tdeg}_{n+1}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "、",
+                      ref("def_qbar_all_ones_shift"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備を三つ置く。第一に、任意の ",
+                      math(String.raw`d\in\mathrm{Ex}_{n+1}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_{n+1}(d+\mathbf{1}_{n+1})
+&=\sum_{k\in\mathbb{N}_{<n+1}}(d+\mathbf{1}_{n+1})(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}\bigl(d(k)+\mathbf{1}_{n+1}(k)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}\bigl(d(k)+1\bigr)
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\text{ の }\mathbf{1}_{n+1}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}d(k)+\sum_{k\in\mathbb{N}_{<n+1}}1
+&&\bigl(\because\ \mathbb{N}\text{ の有限和は項ごとの和に分かれる}\bigr)\\
+&=\mathrm{sz}_{n+1}(d)+\sum_{k\in\mathbb{N}_{<n+1}}1
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}\bigr)\\
+&=\mathrm{sz}_{n+1}(d)+(n+1)
+&&\bigl(\because\ \mathbb{N}_{<n+1}\text{ の元は }n+1\text{ 個}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。第二に、",
+                      math(String.raw`c\in\mathrm{spt}_{n+1}(P)`),
+                      " なら ",
+                      math(String.raw`\mathbf{1}_{n+1}\le c`),
+                      "（",
+                      ref("def_qbar_multivariate_monomial"),
+                      "）である。実際、そうでなければある ",
+                      math(String.raw`k\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`c(k)=0`),
+                      " となり、",
+                      ref("claim_symmetric_vanishing_last_variable_coefficient_support"),
+                      " により ",
+                      math(String.raw`\mathrm{mco}_c(P)=0`),
+                      " となって ",
+                      math(String.raw`c\in\mathrm{spt}_{n+1}(P)`),
+                      " に反する。このとき各 ",
+                      math(String.raw`k`),
+                      " で ",
+                      math(String.raw`(c(k)-1)+1=c(k)`),
+                      " なので ",
+                      math(String.raw`(c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}=c`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_{c-\mathbf{1}_{n+1}}\bigl(\mathrm{sd}_{n+1}(P)\bigr)
+&=\mathrm{mco}_{(c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}}(P)
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\bigr)\\
+&=\mathrm{mco}_{c}(P)
+&&\bigl(\because\ (c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}=c\bigr)\\
+&\ne0
+&&\bigl(\because\ c\in\mathrm{spt}_{n+1}(P)\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ",
+                      math(String.raw`c-\mathbf{1}_{n+1}\in\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))`),
+                      " である。第三に、",
+                      math(String.raw`d\in\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))`),
+                      " なら、",
+                      ref("def_qbar_all_ones_shift"),
+                      " により ",
+                      math(String.raw`\mathrm{mco}_{d+\mathbf{1}_{n+1}}(P)=\mathrm{mco}_d(\mathrm{sd}_{n+1}(P))\ne0`),
+                      " なので ",
+                      math(String.raw`d+\mathbf{1}_{n+1}\in\mathrm{spt}_{n+1}(P)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "上からの評価。",
+                      math(String.raw`c\in\mathrm{spt}_{n+1}(P)`),
+                      " を任意に取ると",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_{n+1}(c)
+&=\mathrm{sz}_{n+1}\bigl((c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}\bigr)
+&&\bigl(\because\ \text{第二の準備の }(c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}=c\bigr)\\
+&=\mathrm{sz}_{n+1}(c-\mathbf{1}_{n+1})+(n+1)
+&&\bigl(\because\ \text{第一の準備}\bigr)\\
+&\le\mathrm{tdeg}_{n+1}\bigl(\mathrm{sd}_{n+1}(P)\bigr)+(n+1)
+&&\bigl(\because\ \text{第二の準備の }c-\mathbf{1}_{n+1}\in\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))\text{ と }\blkref{def_qbar_multivariate_total_degree}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " により ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(P)\le\mathrm{tdeg}_{n+1}(\mathrm{sd}_{n+1}(P))+(n+1)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "下からの評価。",
+                      math(String.raw`P\ne0`),
+                      " なので、係数がすべて零ではなく（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）、ある ",
+                      math(String.raw`c_0\in\mathrm{spt}_{n+1}(P)`),
+                      " がある。第二の準備により ",
+                      math(String.raw`c_0-\mathbf{1}_{n+1}\in\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))`),
+                      " なので ",
+                      math(String.raw`\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))`),
+                      " は空でなく、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " により、ある ",
+                      math(String.raw`d_*\in\mathrm{spt}_{n+1}(\mathrm{sd}_{n+1}(P))`),
+                      " で ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(\mathrm{sd}_{n+1}(P))=\mathrm{sz}_{n+1}(d_*)`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_{n+1}\bigl(\mathrm{sd}_{n+1}(P)\bigr)+(n+1)
+&=\mathrm{sz}_{n+1}(d_*)+(n+1)
+&&\bigl(\because\ d_*\text{ の取り方}\bigr)\\
+&=\mathrm{sz}_{n+1}(d_*+\mathbf{1}_{n+1})
+&&\bigl(\because\ \text{第一の準備}\bigr)\\
+&\le\mathrm{tdeg}_{n+1}(P)
+&&\bigl(\because\ \text{第三の準備の }d_*+\mathbf{1}_{n+1}\in\mathrm{spt}_{n+1}(P)\text{ と }\blkref{def_qbar_multivariate_total_degree}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "二つの評価と ",
+                      math(String.raw`\mathbb{N}`),
+                      " の順序の反対称性から主張の等号を得る。",
+                      "全過程は自然数の和と順序、有限集合の最大元と ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の係数の零・非零だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_symmetric_vanishing_last_variable_divisible_by_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_symmetric_vanishing_last_variable_divisible_by_product",
+                  kind: "claim",
+                  title: { text: "零代入で消える対称多項式は全変数の積で割り切れる" },
+                  labels: ["claim_symmetric_vanishing_last_variable_divisible_by_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-divisible-by-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.symmetricVanishing_divisible_by_elementarySymmetric",
+                    "Ising2DLambda.NecSuf.FisherZero.symmetricVanishing_divisible_by_product_necSuf",
+                    "Ising2DLambda.FisherZero.symmetricVanishing_divisible_by_elementarySymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。対称で（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）",
+                      math(String.raw`\mathrm{lz}_n(P)=0`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）を満たす任意の ",
+                      math(String.raw`P\in F[X_{<n+1}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について、次を満たす ",
+                      math(String.raw`Q\in F[X_{<n+1}]`),
+                      " がある。",
+                      math(String.raw`Q`),
+                      " は対称であり、",
+                      math(String.raw`P=\mathrm{es}_{n+1,n+1}\cdot Q`),
+                      "（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）であり、",
+                      math(String.raw`P\ne0`),
+                      " なら ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(Q)+(n+1)=\mathrm{tdeg}_{n+1}(P)`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`Q:=\mathrm{sd}_{n+1}(P)`),
+                      "（",
+                      ref("def_qbar_all_ones_shift"),
+                      "）と置く。",
+                      ref("claim_qbar_all_ones_shift_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`Q\in F[X_{<n+1}]`),
+                      "、",
+                      ref("claim_qbar_all_ones_shift_preserves_symmetry"),
+                      " により ",
+                      math(String.raw`Q`),
+                      " は対称、",
+                      ref("claim_symmetric_vanishing_last_variable_shifted_quotient_product"),
+                      " により ",
+                      math(String.raw`P=\mathrm{es}_{n+1,n+1}\cdot Q`),
+                      "、",
+                      math(String.raw`P\ne0`),
+                      " なら ",
+                      ref("claim_symmetric_vanishing_last_variable_shift_total_degree"),
+                      " により ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(Q)+(n+1)=\mathrm{tdeg}_{n+1}(P)`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " の元と自然数だけで閉じ、実数体も複素数体も現れない。",
                     ]),
                   ],
                 },

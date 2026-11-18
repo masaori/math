@@ -31,8 +31,8 @@ theorem exponentCompEquiv_add_allOnes (d : σ →₀ ℕ) (e : σ ≃ σ) :
       = (d + allOnesExponent σ) (e k) := exponentCompEquiv_apply _ e k
     _ = d (e k) + allOnesExponent σ (e k) := Finsupp.add_apply _ _ _
     _ = d (e k) + 1 := by rw [allOnesExponent_apply]
-    _ = exponentCompEquiv d e k + allOnesExponent σ k := by
-        rw [exponentCompEquiv_apply, allOnesExponent_apply]
+    _ = exponentCompEquiv d e k + 1 := by rw [exponentCompEquiv_apply]
+    _ = exponentCompEquiv d e k + allOnesExponent σ k := by rw [allOnesExponent_apply]
     _ = (exponentCompEquiv d e + allOnesExponent σ) k := (Finsupp.add_apply _ _ _).symm
 
 /-- `claim_qbar_all_ones_shift_preserves_symmetry` の必要十分版（具体版と同じ段）。
