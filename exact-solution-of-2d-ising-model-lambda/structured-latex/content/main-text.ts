@@ -48244,8 +48244,8 @@ C_R\cap F_n&=C_n&&\bigl(\because\ \blkref{claim_increasing_positive_cone_union_r
                   ]),
                   displayMath(String.raw`\begin{aligned}
 0&=p(b)&&\bigl(\because\ b\text{ は }p\text{ の根}\bigr)\\
-&=b^2-a&&\bigl(\because\ p\text{ の定義}\bigr),\\
-b^2&=a&&\bigl(\because\ \text{移項}\bigr).
+&=b^2-a&&\bigl(\because\ p\text{ の定義}\bigr)\\
+b^2&=a&&\bigl(\because\ \text{移項}\bigr)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`b=0`), " なら ", math(String.raw`a=b^2=0`),
@@ -48288,33 +48288,33 @@ b^2&=a&&\bigl(\because\ \text{移項}\bigr).
                 statement: [
                   paragraph([
                     math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
-                    math(String.raw`a,u,v\in F`), "、",
+                    math(String.raw`a,c_0,c_1\in F`), "、",
                     math(String.raw`b\in\overline{\mathbb Q}`), " とし、",
                     math(String.raw`b\notin F`), "、", math(String.raw`b^2=a`),
-                    " と仮定する。", math(String.raw`u+vb\ne0`), " ならば ",
-                    math(String.raw`u^2-av^2\ne0`), " である。",
+                    " と仮定する。", math(String.raw`c_0+c_1b\ne0`), " ならば ",
+                    math(String.raw`c_0^2-ac_1^2\ne0`), " である。",
                   ]),
                 ],
                 proof: [
                   paragraph([
-                    math(String.raw`u^2-av^2=0`), " と仮定する。",
-                    math(String.raw`v=0`), " なら ", math(String.raw`u^2=0`),
-                    " から ", math(String.raw`u=0`), " となり、",
-                    math(String.raw`u+vb\ne0`), " に反する。したがって ",
-                    math(String.raw`v\ne0`), " である。",
+                    math(String.raw`c_0^2-ac_1^2=0`), " と仮定する。",
+                    math(String.raw`c_1=0`), " なら ", math(String.raw`c_0^2=0`),
+                    " から ", math(String.raw`c_0=0`), " となり、",
+                    math(String.raw`c_0+c_1b\ne0`), " に反する。したがって ",
+                    math(String.raw`c_1\ne0`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-0&=u^2-av^2&&(\because\ \text{仮定})\\
-&=u^2-b^2v^2&&(\because\ b^2=a)\\
-&=(u+vb)(u-vb)&&(\because\ \text{差の平方})
+0&=c_0^2-ac_1^2&&(\because\ \text{仮定})\\
+&=c_0^2-b^2c_1^2&&(\because\ b^2=a)\\
+&=(c_0+c_1b)(c_0-c_1b)&&(\because\ \text{差の平方})
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`u+vb\ne0`), " と代数的数体に零因子がないことから ",
-                    math(String.raw`u-vb=0`), "。よって ",
+                    math(String.raw`c_0+c_1b\ne0`), " と代数的数体に零因子がないことから ",
+                    math(String.raw`c_0-c_1b=0`), "。よって ",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-b&=\frac{u}{v}&&(\because\ u-vb=0,\ v\ne0)\\
-&\in F&&(\because\ u,v\in F\ \text{と部分体の除法の閉性})
+b&=\frac{c_0}{c_1}&&(\because\ c_0-c_1b=0,\ c_1\ne0)\\
+&\in F&&(\because\ c_0,c_1\in F\ \text{と部分体の除法の閉性})
 \end{aligned}`),
                   paragraph([
                     "これは ", math(String.raw`b\notin F`), " に反する。",
