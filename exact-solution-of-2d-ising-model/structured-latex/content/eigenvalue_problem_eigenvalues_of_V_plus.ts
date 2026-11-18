@@ -6275,7 +6275,7 @@ V^{(+)}
 \exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right),
 \qquad
 \check\Lambda_{\min} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\exp\!\left(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right)`,
+\exp\!\left(-\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right)\right)`,
       ),
       paragraph([
         "したがって ",
@@ -6839,11 +6839,7 @@ x &= Ix
         math(String.raw`\tfrac12, -\tfrac12 \in \mathbb{R}`),
         "、",
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
-        " である（以下 ",
-        math(String.raw`-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)`),
-        " は ",
-        math(String.raw`-\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)`),
-        " と読む）。",
+        " である。",
         ref("eigenvalues_of_check_Vprime"),
         " の ",
         math(String.raw`\check{g}`),
@@ -6874,7 +6870,7 @@ x &= Ix
    \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
 &= \Bigl(-\frac{1}{2}\Bigr)\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to -\tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right) \\
-&= -\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
+&= -\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)
    \quad \left(\because \blkref{real_negation_times_is_negation_of_product}\ \bigl(x \to \tfrac12,\ t \to \textstyle \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\bigr)\right)
 \end{aligned}`,
       ),
@@ -6902,7 +6898,7 @@ x &= Ix
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (0,\dots,0))) \\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(0,\dots,0))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (0,\dots,0))\ \text{を右辺から左辺へ}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)
    &&(\because\ \text{上の}\ \check{g}(0,\dots,0)\ \text{の鎖})
 \end{aligned}`,
       ),
@@ -6925,7 +6921,7 @@ x &= Ix
 &= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)\check\Lambda_{\min}
    &&(\because\ \text{上の}\ \check\Lambda_{\max}\ \text{の鎖}) \\
 &= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)
-   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)\Bigr)\Bigr)
    &&(\because\ \text{上の}\ \check\Lambda_{\min}\ \text{の鎖}) \\
 &= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(b)\Bigr)\Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(-b)\Bigr)
    &&(\because\ b\ \text{の置き方を右辺から左辺へ、2 か所へ同時に}) \\
@@ -7012,6 +7008,7 @@ x &= Ix
         "2026-11-04: (2) の主張に、証明の中でだけ書いていた置き方 Λ̌_max := Λ̌_{(1,…,1)}、Λ̌_min := Λ̌_{(0,…,0)} を書き足した。V_plus_eigenvalues_with_c_value_and_strict_maximum (3) がこの置き方を引くため（内容は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (2) の積の鎖の 19 行目（√ の積を冪へ戻す行）の名前だけの根拠「ℝ の冪で y^2 = yy」を square_of_real_number_is_product を引く形にした（definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したことに合わせた）。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(0,…,0) の鎖の最後の行 (−½)Σγ = −(½Σγ) の根拠「ℝ で (−a)b = −(ab)」を、主張 real_negation_times_is_negation_of_product（x → ½, t → Σγ(θ~_μ)）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の Λ̌_min の式と、証明の ǧ(0,…,0) の鎖の最後の行・Λ̌_min の鎖の最後の行・積の鎖の 2 行目に出る −½Σγ(θ~_μ) を −(½Σγ(θ~_μ)) と括弧を付けて書いた。ǧ(0,…,0) の鎖の最後の行で引く real_negation_times_is_negation_of_product の右辺 −(x·t) と字面で一致させ、Lean の Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_min_eq の −((1/2)·Σ) と SageMath の check_part2_extreme_values_chains.sage の −(half·S) に揃えるためである。括弧を書いたので、証明の前置きにあった「−½Σγ は −(½Σγ) と読む」の断りを外した。値・鎖の段数・根拠は不変。",
       ],
     },
   },

@@ -353,7 +353,7 @@ theorem checkBigLambda_max_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (
                                                         -- 上の `ǧ(1,…,1)` の鎖
 
 open CheckFermiSetup in
-/-- **原文 `eigenvalues_of_V_plus` (2) の `Λ̌_min` の鎖**: `Λ̌_min := Λ̌_{(0,…,0)} = (2s_2)^{M_col/2} exp(−½ Σ γ(θ~_μ))`。人手の 4 行と 1 対 1 の calc
+/-- **原文 `eigenvalues_of_V_plus` (2) の `Λ̌_min` の鎖**: `Λ̌_min := Λ̌_{(0,…,0)} = (2s_2)^{M_col/2} exp(−(½ Σ γ(θ~_μ)))`。人手の 4 行と 1 対 1 の calc
 （段の割り当ては `checkBigLambda_max_eq` と同じ。`ε = (0,…,0)` は `T = ∅`）。 -/
 theorem checkBigLambda_min_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (s2 : ℝ) :
     checkBigLambda F g s2 (∅ : Finset (CheckIdx M))

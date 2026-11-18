@@ -1,6 +1,6 @@
 # 対象ラベル: eigenvalues_of_V_plus
 # eigenvalues_of_V_plus (2) の Λ̌_maxΛ̌_min の鎖を確かめる。
-#   積の鎖（20 行）: Λ̌_maxΛ̌_min = (A exp(½Σγ_μ))Λ̌_min = (A exp(½Σγ_μ))(A exp(−½Σγ_μ)) = (A e^b)(A e^{−b})
+#   積の鎖（20 行）: Λ̌_maxΛ̌_min = (A exp(½Σγ_μ))Λ̌_min = (A exp(½Σγ_μ))(A exp(−(½Σγ_μ))) = (A e^b)(A e^{−b})
 #     = ((2s_2)^{M/2}e^b)((2s_2)^{M/2}e^{−b}) = (a e^b)(a e^{−b}) = a(e^b(a e^{−b})) = a((e^b a)e^{−b}) = a((a e^b)e^{−b})
 #     = a(a(e^b e^{−b})) = (aa)(e^b e^{−b}) = (aa)exp(b + (−b)) = (aa)exp(0) = (aa)·1 = aa
 #     = (2s_2)^{M/2}(2s_2)^{M/2} = A·A = (√(2 sinh 2K_2))^M(√(2 sinh 2K_2))^M = (√·√)^M = ((√)^2)^M = (2 sinh 2K_2)^M
