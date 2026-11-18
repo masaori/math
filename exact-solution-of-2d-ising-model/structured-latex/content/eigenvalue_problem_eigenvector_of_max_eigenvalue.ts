@@ -1774,7 +1774,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(-b) = -(ab)\ (a \to \gamma(\tilde\theta_\mu),\ b \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a\cdot\tfrac12 = \tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\cdot\frac{\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)}{2}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
@@ -1980,6 +1980,7 @@ r
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 3 行目の名前だけの根拠「ℝ で (−1)a = −a（a → ϰ）」を real_minus_one_times_is_negation（a → ϰ）の参照にした。式と主張は変えていない。",
         "2026-11-17: Step 7 の ȟ = −1 の背理の鎖の 4 行目の名前だけの根拠「ℝ で a > 0 なら −a < 0（a → ϰ）」を、新しく足した real_negation_of_positive_is_negative（a → ϰ）の参照にした。当てる (2) の ϰ > 0 と、式・主張は変えていない。",
         "2026-11-17: Step 7 の ⟸ の散文の根拠 2 つを参照にした。「ℂ = ℝ×ℝ の元の等号は成分ごとなので r = ȟϰ」は、鎖を r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ の 2 行にし（両端の (r,0)・(ȟϰ,0) への書き換えの 2 行は要らなくなった）、背理の鎖の 1 行目の根拠を inclusion_rr_to_cc_is_injective（a → r, b → ȟϰ）にした。「r > 0 に反する」は、新しく足した real_less_than_is_asymmetric（a → 0, b → r）を当てた「r < 0 は成り立たない」に反する、とした。主張は変えていない。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: exp(γ(θ~_μ)(−½)) = exp(−(γ(θ~_μ)·½)) の行の根拠「ℝ で a(−b) = −(ab)」を、主張 real_times_negation_is_negation_of_product（x → γ(θ~_μ), t → ½ を各因子へ同時に）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

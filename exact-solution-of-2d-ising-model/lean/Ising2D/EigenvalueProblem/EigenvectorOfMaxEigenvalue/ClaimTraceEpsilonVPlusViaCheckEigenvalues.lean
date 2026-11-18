@@ -61,6 +61,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfPositiveIsNegative
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -527,7 +528,8 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
     _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
           - Real.exp (-(D.gam μ * (1 / 2))))) * D.C := by
         congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
-        rw [mul_neg (D.gam μ) (1 / 2)]                  -- ℝ で `a(−b) = −(ab)`（`a → γ(θ̃_μ)`、`b → 1/2`）を各因子へ同時に
+        rw [real_times_negation_is_negation_of_product (D.gam μ) (1 / 2)]
+                                                        -- `real_times_negation_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → 1/2`）を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ / 2) - Real.exp (-(D.gam μ / 2)))) * D.C := by
         congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
         rw [mul_one_div (D.gam μ) 2]                    -- ℝ で `a·(1/2) = a/2`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に

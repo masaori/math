@@ -46,6 +46,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimCosSinAndITimesAtNegatedReal
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -115,9 +116,9 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
     _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) :=
         (mul_div_assoc _ _ _).symm                                    -- `a(b/c) = (ab)/c`
     _ = (k : ℝ) * (-(2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
-        rw [mul_neg (2 * Real.pi)]                                    -- `a(-b) = -(ab)`
+        rw [real_times_negation_is_negation_of_product (2 * Real.pi)]  -- `real_times_negation_is_negation_of_product`（`x → 2π`、`t → κ_ℝ`）
     _ = (-((k : ℝ) * (2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ)))) / ((M : ℤ) : ℝ) := by
-        rw [mul_neg (k : ℝ)]                                          -- `a(-b) = -(ab)`
+        rw [real_times_negation_is_negation_of_product (k : ℝ)]       -- `real_times_negation_is_negation_of_product`（`x → j_ℝ`、`t → 2πκ_ℝ`）
     _ = (-((k : ℝ) * (2 * Real.pi) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [← mul_assoc (k : ℝ)]                                      -- ℝ の積の結合律
     _ = (-(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by

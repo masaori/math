@@ -4,7 +4,7 @@
 #   = Π_μ (exp((−γ_μ)(1 − 1/2)) + exp((−γ_μ)(0 − 1/2)))    (expansion_of_finite_product_of_two_term_sums_of_real_numbers を右辺から左辺へ)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(0 − 1/2)))         (ℝ で 1 − 1/2 = 1/2)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (ℝ で 0 − a = −a、a → 1/2)
-#   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (ℝ で a(−b) = −(ab)、a → −γ_μ、b → 1/2)
+#   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (real_times_negation_is_negation_of_product、x → −γ_μ、t → 1/2)
 #   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (ℝ で a·1/2 = a/2、a → −γ_μ、各因子の 2 箇所)
 #   = Π_μ 2·((exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))/2)         (ℝ で 2 ≠ 0 なので b = 2·(b/2))
 #   = Π_μ 2cosh((−γ_μ)/2)                                  (def_cosh_sinh の cosh、x → (−γ_μ)/2、右辺から左辺へ)
@@ -78,7 +78,7 @@ mg = -gam
 exact_steps = [
     (mg * (1 - h), mg * h),            # 1 − 1/2 = 1/2
     (mg * (0 - h), mg * (-h)),         # 0 − a = −a
-    (mg * (-h), -(mg * h)),            # a(−b) = −(ab)、a → −γ
+    (mg * (-h), -(mg * h)),            # real_times_negation_is_negation_of_product、x → −γ
     (mg * h, mg / 2),                  # a·1/2 = a/2（1 つ目の箇所）
     (-(mg * h), -(mg / 2)),            # a·1/2 = a/2（2 つ目の箇所）
     (mg / 2, -(gam / 2)),              # (−a)/2 = −(a/2)

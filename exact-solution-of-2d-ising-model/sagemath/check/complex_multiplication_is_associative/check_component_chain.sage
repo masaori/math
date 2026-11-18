@@ -36,7 +36,7 @@ chain = [
     ((a*(c*e) + neg(a*(d*f))) + neg(b*(c*f) + b*(d*e)),
      (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # -(x+y) = (-x)+(-y) を右辺から左辺へ
     ((a*(c*e) + a*neg(d*f)) + neg(b*(c*f) + b*(d*e)),
-     (a*(c*f) + a*(d*e)) + (b*(c*e) + b*neg(d*f))),                           # x(-t) = -(xt) を 2 箇所へ右辺から左辺へ
+     (a*(c*f) + a*(d*e)) + (b*(c*e) + b*neg(d*f))),                           # real_times_negation_is_negation_of_product を 2 箇所へ右辺から左辺へ
     (a*(c*e + neg(d*f)) + neg(b*(c*f + d*e)),
      a*(c*f + d*e) + b*(c*e + neg(d*f))),                                     # 分配則 x(y+t) を 4 箇所へ右辺から左辺へ
     (a*(c*e - d*f) - b*(c*f + d*e), a*(c*f + d*e) + b*(c*e - d*f)),           # 差の定義を 3 箇所へ右辺から左辺へ

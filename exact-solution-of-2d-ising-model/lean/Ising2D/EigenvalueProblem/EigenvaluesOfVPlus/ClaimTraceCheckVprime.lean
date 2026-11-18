@@ -70,6 +70,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -258,7 +259,8 @@ theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
             + Real.exp (-(g (checkIdxOfFin j) * (1 / 2)))) := by
         refine Finset.prod_congr rfl fun j _ => ?_
-        rw [mul_neg (g (checkIdxOfFin j)) (1 / 2)]      -- ℝ で `a(−b) = −(ab)`（`a → γ(θ̃_μ)`、`b → 1/2`）を各因子へ同時に
+        rw [real_times_negation_is_negation_of_product (g (checkIdxOfFin j)) (1 / 2)]
+                                                        -- `real_times_negation_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → 1/2`）を各因子へ同時に
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) := by
         refine Finset.prod_congr rfl fun j _ => ?_

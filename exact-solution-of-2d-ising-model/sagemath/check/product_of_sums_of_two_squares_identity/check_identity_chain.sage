@@ -60,7 +60,7 @@ forms = {
     "diff":    (lambda y, t: y - t,            lambda y, t: y + neg(t)),
     "distR":   (lambda x, y, t: (x + y)*t,     lambda x, y, t: x*t + y*t),
     "distL":   (lambda x, y, t: x*(y + t),     lambda x, y, t: x*y + x*t),
-    "negR":    (lambda x, t: x*neg(t),         lambda x, t: neg(x*t)),
+    "negR":    (lambda x, t: x*neg(t),         lambda x, t: neg(x*t)),  # real_times_negation_is_negation_of_product
     "negL":    (lambda x, t: neg(x)*t,         lambda x, t: neg(x*t)),  # real_negation_times_is_negation_of_product
     "negneg":  (lambda p, q: neg(p)*neg(q),    lambda p, q: p*q),   # real_negation_times_negation_is_product の (-a)(-b) = ab（文字 p, q）
     "mcomm":   (lambda x, y: x*y,              lambda x, y: y*x),

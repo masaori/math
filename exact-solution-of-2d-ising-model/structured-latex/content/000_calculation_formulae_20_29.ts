@@ -876,7 +876,7 @@ w\cdot z
 &= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ -(x+y) = (-x)+(-y)\ \bigl(x \to b(cf),\ y \to b(de)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \left(\bigl(a(ce)+a(-(df))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+b(-(df))\bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x(-t) = -(xt)\ (x \to a,\ t \to df\ \text{と}\ x \to b,\ t \to df)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to a,\ t \to df\ \text{と}\ x \to b,\ t \to df)\ \text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(a\bigl(ce+(-(df))\bigr)+\bigl(-(b(cf+de))\bigr),\ a(cf+de)+b\bigl(ce+(-(df))\bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ x(y+t) = xy+xt\ \bigl(x \to a,\ y \to ce,\ t \to -(df);\ x \to b,\ y \to cf,\ t \to de;\ x \to a,\ y \to cf,\ t \to de;\ x \to b,\ y \to ce,\ t \to -(df)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 4 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right)
@@ -896,6 +896,7 @@ w\cdot z
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℂ の全元についての積の結合律は multiplicative_group_of_cc の証明の中の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、complex_numbers_form_a_field の積のモノイド構造の段落が 0_ℂ を含む全ての元についての結合律を引ける主張が無かった。multiplicative_group_of_cc の証明の「積の結合律」の段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端を主張の両辺 (z·w)·u・z·(w·u) に揃え、z, w, u を成分に開く行と閉じる行を足し、「ℂ の積の定義」を definition_of_cc の参照にした。鎖の後に置いていた第 3・第 5 の等号の説明の段落（2 つの定理を同時に当てた断り）は、日本語を鎖の後に置かない規律に従って削った。2 つの定理を 1 行で当てている点は台帳の新しい件で扱う）。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、結合律は使う側が mul_assoc で閉じている）。数値検証: sagemath/check/complex_multiplication_is_associative/check_component_chain.sage。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 鎖の第 4〜第 6 の等号（ℝ の分配律と積の結合律を 1 行で、和の可換律と結合律を 1 行で当てていた行）を、1 行に 1 つの等式だけを当てる 13 行に割った。差は def_real_difference で和と符号反転に開いてから並べ替え、最後に閉じた。各行に使った形と代入を書き、ℝ の法則には set_and_algebra_notation を参照した。符号反転の等式 (−x)t = −(xt)・x(−t) = −(xt)・−(x+y) = (−x)+(−y) は、000_calculation_formulae_00_09.ts の finite_sum_of_negated_real_numbers の (−a)+(−b) = −(a+b) と同じく、ℝ で成り立つ等式として 1 行に 1 つ当てた。積 ace のような括弧の無い書き方をやめ、(ac)e・a(ce) と括弧を書いた。鎖の両端と主張は不変。数値検証: 同じ check_component_chain.sage を 19 行に合わせた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−x)t = −(xt) を 2 箇所へ当てる行の根拠「ℝ で (−x)t = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_negation_times_is_negation_of_product（x → bd, t → e と x → bd, t → f）の参照にした（文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: x(−t) = −(xt) を 2 箇所へ右辺から左辺へ当てる行の根拠「ℝ で x(−t) = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_times_negation_is_negation_of_product（x → a, t → df と x → b, t → df）の参照にした（同じファイルの後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -1017,7 +1018,7 @@ z\cdot 1_{\mathbb{C}}
 &= \biggl(\Bigl((ac)(ac)+(ac)\bigl(-(bd)\bigr)\Bigr)+\Bigl(\bigl(-(bd)\bigr)(ac)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\Bigr)\biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ x(y+t) = xy+xt\ \bigl(x \to ac,\ y \to ac,\ t \to -(bd);\ x \to -(bd),\ y \to ac,\ t \to -(bd);\ x \to ad,\ y \to ad,\ t \to bc;\ x \to bc,\ y \to ad,\ t \to bc\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 4 箇所へ適用}\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Bigl(\bigl(-(bd)\bigr)(ac)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\Bigr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x(-t) = -(xt)\ (x \to ac,\ t \to bd)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to ac,\ t \to bd)\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((bd)(ac)\bigr)\Bigr)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
 &&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to bd,\ t \to ac)\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((bd)(ac)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
@@ -1073,6 +1074,7 @@ z\cdot 1_{\mathbb{C}}
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。この恒等式は multiplicative_group_of_cc の証明の「積について閉じること」の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、abs_basic_properties の (4)（積の絶対値）の鎖が引ける主張が無かった。その段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端は主張の両辺のまま）。1 行で 2 つ以上の定理を当てている行（第 1・第 2・第 5 の等号）は台帳の件で扱う。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、この恒等式を述べる宣言は置いていない）。数値検証: sagemath/check/product_of_sums_of_two_squares_identity/check_identity_chain.sage。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 鎖の第 1・第 2・第 5 の等号（ℝ の分配律と積の結合律・可換律を 1 行で、和の可換律と結合律を 1 行で、分配律と積の可換律を 1 行で当てていた行）を、1 行に 1 つの等式だけを当てる 28 行に割った。二乗は square_of_real_number_is_product で積に開き、差は def_real_difference で和と符号反転に開いてから分配則で展開し、符号反転の等式 x(−t) = −(xt)・(−x)t = −(xt)、real_negation_times_negation_is_product の (−a)(−b) = ab（文字を p, q に替えて書いた。文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）と積の可換則で交差項を (ac)(bd) と (ad)(bc) にそろえた。(ad)(bc) = (ac)(bd) は積の結合則と可換則の 5 行の鎖として主の鎖の前に置き、主の鎖ではその参照で替えた。和の並べ替えは加法の結合則・可換則を 1 行に 1 つずつ当て、z + (−z) = 0（def_real_difference）と 0 の単位元で交差項を消し、square_of_real_number_is_product と product_of_real_powers_is_power_of_product（文字を証明の a, b と衝突しない p, q に替えて書いた）を右辺から左辺へ当てて a^2c^2 などに閉じ、分配則を右辺から左辺へ当てて (a^2+b^2)(c^2+d^2) にした。各行に形と代入を書き、ℝ の法則は set_and_algebra_notation を参照した。積と和の括弧はすべて書いた。鎖の両端と主張は不変。数値検証: 同じ check_identity_chain.sage を 2 本の鎖と根拠の等式の実例に合わせた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−(bd))(ac) = −((bd)(ac)) の行の根拠「ℝ で (−x)t = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_negation_times_is_negation_of_product（x → bd, t → ac）の参照にした（文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (ac)(−(bd)) = −((ac)(bd)) の行の根拠「ℝ で x(−t) = −(xt)（set_and_algebra_notation）」を、この回に足した主張 real_times_negation_is_negation_of_product（x → ac, t → bd）の参照にした（同じファイルの後ろのブロック。依存先にこの主張は無く循環しない）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2256,6 +2258,51 @@ a - 0
       status: "added",
       notes: [
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。(−x)t = −(xt) は体の公理に含まれない（−x は加法の逆元として定めた）のに、complex_multiplication_is_associative・product_of_sums_of_two_squares_identity の鎖、real_abs_of_product・complex_conjugate_of_product・conjugate_index_of_check_Z_Y・recover_Z_Y_from_check_Z_Y・trace_of_check_Vprime・eigenvalues_of_V_plus の行が「ℝ で (−x)t = −(xt)」（または右辺から左辺へ）を名前だけで済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_times_is_negation_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationTimesIsNegationOfProduct.lean）、必要十分版は Ising2D.NecSuf.neg_mul_of_rightDistrib（NecSuf/NegMulOfRightDistrib.lean）。数値検証: sagemath/check/real_negation_times_is_negation_of_product/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_times_negation_is_negation_of_product",
+    kind: "claim",
+    title: { text: "実数に右から符号を反転した実数を掛けると、積の符号が反転する" },
+    labels: ["real_times_negation_is_negation_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`x, t \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`-t`),
+        "・",
+        math(String.raw`-(x\cdot t)`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to t`),
+        "、",
+        math(String.raw`z \to x\cdot t`),
+        "）、積は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`x\cdot(-t) = -(x\cdot t)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+x\cdot(-t)
+&= (-t)\cdot x
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to x,\ q \to -t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -(t\cdot x)
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ \text{の}\ (-x)\cdot t = -(x\cdot t)\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)\cdot q = -(p\cdot q)\ (p \to t,\ q \to x)\bigr)\\
+&= -(x\cdot t)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to t,\ q \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。x(−t) = −(xt) は体の公理に含まれない（−t は加法の逆元として定めた）のに、complex_multiplication_is_associative・product_of_sums_of_two_squares_identity の鎖、real_abs_of_product・complex_conjugate_of_product・conjugate_index_of_check_Z_Y・anticommutator_of_check_Z_Y・periodicity_of_check_fermi・trace_of_check_Vprime・trace_of_epsilon_V_plus_via_check_eigenvalues の行が「ℝ で x(−t) = −(xt)」（または右辺から左辺へ）を名前だけで済ませていたので、示す主張として足した。Lean の具体版は Ising2D.real_times_negation_is_negation_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTimesNegationIsNegationOfProduct.lean）、必要十分版は Ising2D.NecSuf.mul_neg_of_comm_rightDistrib（NecSuf/MulNegOfCommRightDistrib.lean）。数値検証: sagemath/check/real_times_negation_is_negation_of_product/。",
       ],
     },
   },

@@ -26,7 +26,8 @@
   `def_finite_sum_of_complex_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の `real_inclusion_of_finite_sum_succ` と同じ読み替え）。
 - 人手の「ℝ で `-(y+v) = (-y)+(-v)`」「ℝ で `(-y)(-v) = yv`」「ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`」
-  「ℝ で `-(xv) = x(-v)`」「ℝ で `-(yu) = (-y)u`」は mathlib の `neg_add`・`neg_mul_neg`・`neg_add`・`mul_neg`・`neg_mul` で 1 段ずつ受ける。
+  は mathlib の `neg_add`・`neg_mul_neg`・`neg_add` で 1 段ずつ受ける。人手の `-(xv) = x(-v)`・`-(yu) = (-y)u` の行は、人手の参照に合わせて
+  `real_times_negation_is_negation_of_product`・`real_negation_times_is_negation_of_product` を右辺から左辺へ当てる。
 - 人手の `\overline{-1_ℂ}` の鎖の 3 行目 `real_negation_of_zero_is_zero` は、同じ名前の具体版の定理で受ける。
 - 人手 `multiply_by_minus_one`（`-z := (-1_ℂ)z`）・`def_complex_difference`（`z - w := z + (-w)`）は具体版が Lean に無く、
   mathlib の `neg_one_mul`・`sub_eq_add_neg` で受ける（ほかのファイルと同じ）。
@@ -48,6 +49,7 @@
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Complex.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -119,9 +121,11 @@ theorem complex_conjugate_of_product_eq (z w : ℂ) :
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), (-(z.re * w.im)) + (-(z.im * w.re))⟩ : ℂ) := by
         rw [neg_add]                              -- 4 行目: ℝ で `-(xv + yu) = (-(xv)) + (-(yu))`
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), z.re * (-w.im) + (-(z.im * w.re))⟩ : ℂ) := by
-        rw [← mul_neg z.re w.im]                  -- 5 行目: ℝ で `-(xv) = x(-v)`
+        rw [← real_times_negation_is_negation_of_product z.re w.im]
+                                                  -- 5 行目: `real_times_negation_is_negation_of_product`（文字を `p, q` に替え `p → x`、`q → v`）を右辺から左辺へ
     _ = (⟨z.re * w.re - (-z.im) * (-w.im), z.re * (-w.im) + (-z.im) * w.re⟩ : ℂ) := by
-        rw [← neg_mul z.im w.re]                  -- 6 行目: ℝ で `-(yu) = (-y)u`
+        rw [← real_negation_times_is_negation_of_product z.im w.re]
+                                                  -- 6 行目: `real_negation_times_is_negation_of_product`（文字を `p, q` に替え `p → y`、`q → u`）を右辺から左辺へ
     _ = (⟨z.re, -z.im⟩ : ℂ) * (⟨w.re, -w.im⟩ : ℂ) := rfl
                                                   -- 7 行目: `definition_of_cc` の積
     _ = (starRingEnd ℂ) z * (starRingEnd ℂ) w :=

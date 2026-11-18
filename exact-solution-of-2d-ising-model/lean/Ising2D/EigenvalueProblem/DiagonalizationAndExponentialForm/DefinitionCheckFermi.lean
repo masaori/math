@@ -42,6 +42,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -152,7 +153,8 @@ theorem neg_thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = (-thetaTilde M μ) + (-(2 * Real.pi * (k : ℝ))) := neg_add _ _
                                                   -- 2 行目: ℝ で `-(p+q) = (-p)+(-q)`（`p → θ̃_μ`, `q → 2πk_ℝ`）
     _ = (-thetaTilde M μ) + 2 * Real.pi * (-(k : ℝ)) := by
-        rw [neg_mul_eq_mul_neg]                   -- 3 行目: ℝ で `-(pq) = p(-q)`（`p → 2π`, `q → k_ℝ`）
+        rw [real_times_negation_is_negation_of_product]
+                                                  -- 3 行目: `real_times_negation_is_negation_of_product`（`x → 2π`, `t → k_ℝ`）を右辺から左辺へ
     _ = -thetaTilde M μ + 2 * Real.pi * ((-k : ℤ) : ℝ) := by
         rw [periodicity_prep_int_cast_neg]        -- 4 行目: 準備の第二
 

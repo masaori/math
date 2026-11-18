@@ -21,12 +21,14 @@
   主張の `≤` へ移す `le_rfl` を 1 段足した。
 * 「非負の実数の積は非負」は `mul_nonneg`、「両辺の符号を反転する」は `neg_le_neg`・`neg_pos`・`neg_nonpos`、
   「ℝ で `-(ab) = a(-b)`」などの符号の付け替えは `mul_neg`・`neg_mul`・`neg_mul_neg` の 1 段ずつである（`real_abs_of_product` の
-  `-(ab) = (-a)b` は人手の参照に合わせて `real_negation_times_is_negation_of_product` を右辺から左辺へ当てる）。
+  `-(ab) = (-a)b` は人手の参照に合わせて `real_negation_times_is_negation_of_product` を、`-(ab) = a(-b)` は
+  `real_times_negation_is_negation_of_product` を、それぞれ右辺から左辺へ当てる）。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Mathlib.Algebra.Order.AbsoluteValue.Basic
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 
 namespace Ising2D
 
@@ -110,7 +112,7 @@ theorem real_abs_of_product (a b : ℝ) : |a * b| = |a| * |b| := by
       rw [this]; exact neg_nonpos.mpr h0
     calc |a * b|
         = -(a * b) := real_absolute_value_of_nonpositive hab                  -- `real_absolute_value_of_nonpositive`（`q → ab`）
-      _ = a * (-b) := (mul_neg a b).symm                                      -- ℝ で `-(ab) = a(-b)`
+      _ = a * (-b) := (real_times_negation_is_negation_of_product a b).symm   -- `real_times_negation_is_negation_of_product`（`x → a`、`t → b`）を右辺から左辺へ
       _ = |a| * (-b) := by rw [abs_of_nonneg ha]                              -- `def_real_absolute_value`（`a ≥ 0`）
       _ = |a| * |b| := by rw [abs_of_neg hb]                                  -- `def_real_absolute_value`（`b < 0`）
   · -- `a < 0` かつ `b ≥ 0`
