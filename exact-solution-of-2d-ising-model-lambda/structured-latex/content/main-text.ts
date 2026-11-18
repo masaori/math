@@ -48298,8 +48298,14 @@ b^2&=a&&\bigl(\because\ \text{移項}\bigr)
                 proof: [
                   paragraph([
                     math(String.raw`c_0^2-ac_1^2=0`), " と仮定する。",
-                    math(String.raw`c_1=0`), " なら ", math(String.raw`c_0^2=0`),
-                    " から ", math(String.raw`c_0=0`), " となり、",
+                    math(String.raw`c_1=0`), " の場合、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+c_0^2&=c_0^2-ac_1^2&&(\because\ c_1=0)\\
+&=0&&(\because\ \text{背理法の仮定})
+\end{aligned}`),
+                  paragraph([
+                    "代数的数体に零因子がないので ", math(String.raw`c_0=0`), " となり、",
                     math(String.raw`c_0+c_1b\ne0`), " に反する。したがって ",
                     math(String.raw`c_1\ne0`), " である。",
                   ]),
