@@ -48444,7 +48444,7 @@ y\left(\frac{u}{n}-\frac{v}{n}b\right)
 &=(u+vb)\frac{u-vb}{n}&&\bigl(\because\ \text{分配律}\bigr)\\
 &=\frac{u^2-v^2b^2}{n}&&\bigl(\because\ \text{差の平方}\bigr)\\
 &=\frac{u^2-av^2}{n}&&\bigl(\because\ b^2=a\bigr)\\
-&=1&&\bigl(\because\ n=u^2-av^2,\ n\ne0\bigr).
+&=1&&\bigl(\because\ n=u^2-av^2,\ n\ne0\bigr)
 \end{aligned}`),
                 paragraph([
                   "したがって ", math(String.raw`y^{-1}=u/n+(-v/n)b\in S`),
