@@ -1254,27 +1254,27 @@ w\cdot z
         " をもつ結合的な二項演算をもつ集合 ",
         math(String.raw`S`),
         " において、",
-        math(String.raw`a\in S`),
+        math(String.raw`s\in S`),
         " に対し ",
-        math(String.raw`b,b'\in S`),
+        math(String.raw`t,t'\in S`),
         " がともに ",
-        math(String.raw`ab=ba=e`),
+        math(String.raw`st=ts=e`),
         "、",
-        math(String.raw`ab'=b'a=e`),
+        math(String.raw`st'=t's=e`),
         " を満たすとすると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-b
-&= b\,e
+t
+&= t\,e
 &&(\because\ e\ \text{は単位元})\\
-&= b\,(a b')
-&&(\because\ ab'=e)\\
-&= (b a)\,b'
+&= t\,(s t')
+&&(\because\ st'=e)\\
+&= (t s)\,t'
 &&(\because\ \text{結合律})\\
-&= e\,b'
-&&(\because\ ba=e)\\
-&= b'
+&= e\,t'
+&&(\because\ ts=e)\\
+&= t'
 &&(\because\ e\ \text{は単位元})
 \end{aligned}`,
       ),
@@ -1347,6 +1347,7 @@ b
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の結合律」「積の単位元」の段の鎖は ℂ の全元についての主張で、その鎖のために置いていた (a,b),(c,d),(e,f) ∈ ℂ の前置きは使われなくなったので削った（残る段は z = (a,b) を段ごとに置き、閉性の恒等式の a,b,c,d ∈ ℝ は積の式の前置きにある）。この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_associative・complex_one_is_multiplicative_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。1/z = z^{-1} の鎖の「上で示した 1_C が積の単位元であること」と結論の結合律・単位元も、その主張の参照に替えた。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積について閉じること」の段の恒等式 (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) は、abs_basic_properties の (4) の鎖が「multiplicative_group_of_cc の「積について閉じること」の恒等式」として証明の中の段を引いていた。この主張（ℂ^× は群をなす）からは引けないので、鎖の式を変えずに新しい主張 product_of_sums_of_two_squares_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 「逆元の存在」の鎖の 2 行が参照の無い根拠（「C の積の定義」「1_C = (1,0)」）だったので、definition_of_cc の積（a → a, b → b, c → a/(a²+b²), d → −b/(a²+b²)）と inclusion_rr_to_cc の 1_C = (1,0) を右辺から左辺へ、の参照に替えた。式・鎖の両端・段数は不変。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_inverse_chain_cited_rows.sage。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 「逆元の一意性」の段は S の元を a, b, b' と書いており、同じ証明の z=(a,b) の実数の成分 a, b と文字が衝突していたので、S の元を s, t, t' に替えた（a → s, b → t, b' → t'。単位元 e と鎖の形・段数は不変）。この証明の中で s, t は他に使っていない。",
       ],
     },
   },
