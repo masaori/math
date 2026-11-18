@@ -19,6 +19,7 @@
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
 import Ising2D.NecSuf.SimpleEigenvalue
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 
 namespace Ising2D
 
@@ -333,8 +334,8 @@ theorem gval_empty_eq_neg_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → �
         finite_sum_of_real_scalar_multiples M _ _
                                                         -- `finite_sum_of_real_scalar_multiples`（`m → M_col`、`c → −1/2`、`x_j → γ(θ~_j)`）
     _ = -((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)) :=
-        neg_mul _ _
-                                                        -- ℝ で `(−a)b = −(ab)`（`a → 1/2`、`b → Σγ(θ~_μ)`）
+        real_negation_times_is_negation_of_product _ _
+                                                        -- `real_negation_times_is_negation_of_product`（`x → 1/2`、`t → Σγ(θ~_μ)`）
 
 open CheckFermiSetup in
 /-- **原文 `eigenvalues_of_V_plus` (2) の `Λ̌_max` の鎖**: `Λ̌_max := Λ̌_{(1,…,1)} = (2s_2)^{M_col/2} exp(½ Σ γ(θ~_μ))`。人手の 4 行と 1 対 1 の calc。

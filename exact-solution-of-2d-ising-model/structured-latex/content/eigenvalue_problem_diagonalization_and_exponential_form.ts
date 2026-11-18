@@ -1560,7 +1560,7 @@ Q_{s+1}
 &= 2\pi+\Bigl(-\bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\bigr)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
    &&\bigl(\because\ \mathbb R\text{ で }a(-b)=-(ab)\bigr) \\
 &= 2\pi+\Bigl(-\Bigl(\bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}\Bigr)\Bigr)
-   &&\bigl(\because\ \mathbb R\text{ で }(-a)b=-(ab)\bigr) \\
+   &&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ \bigl(x \to 2\pi\left(\mu_{\mathbb R}-\tfrac12\right),\ t \to (M_{\mathrm{col}})_{\mathbb R}^{-1}\bigr)\bigr) \\
 &= 2\pi+\left(-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
    &&\bigl(\because\ \blkref{def_real_quotient}\text{ を右辺から左辺へ}\bigr) \\
 &= 2\pi+\left(-\tilde\theta_\mu\right)
@@ -1707,6 +1707,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
           "準備の文の「exp_of_negative_i_real_as_cos_minus_i_sin の -iθ_C も (-i)θ_C の意味」を直し、negative_i_times_complex_is_negation_of_i_times で -(i(2πj_R)_C) へ書き換える 1 行を足した（15 等号 → 16 等号）。主張 (2) の -i(·)_C が (-i)(·)_C の意味であることは証明の準備の文にしか無かったので、主張に書いた。ほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: (1) の鎖の、1 行に 2 つ以上の事実を当てていた行（「和と差を保つ」「ℝ の加法の結合律と交換律」「結合律（差は加法の逆元の和）」「½ - μ_R = -(μ_R - ½) と、差は加法の逆元の和」）を、差の定義（def_real_difference）・結合律・交換律を 1 行ずつ当てる形に割った（11 等号 → 20 等号）。主張の中身は不変。",
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (1) の鎖の末尾の、def_real_difference を右辺から左辺へ当てて (M_col)_ℝ - (μ_ℝ - ½) に戻す行・「ℝ の分配法則」（差に対する分配）・「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の差」「(M_col)_ℝ ≠ 0_ℝ による約分」・θ̃_μ の定義の 5 行を、def_real_quotient の商 y/z = y z^{-1} で開き、def_real_quotient・ℝ の分配法則（和に対する）・右からの分配律・乗法の結合律・乗法の逆元・乗法の単位元・a(-b) = -(ab)・(-a)b = -(ab)・def_real_quotient を右辺から左辺へ・θ̃_μ の定義・def_real_difference を右辺から左辺への 11 行にした（20 等号 → 26 等号）。主張は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−(2π(μ_ℝ−½)))(M_col)_ℝ^{-1} = −((2π(μ_ℝ−½))(M_col)_ℝ^{-1}) の行の根拠「ℝ で (−a)b=−(ab)」を、主張 real_negation_times_is_negation_of_product（x → 2π(μ_ℝ−½), t → (M_col)_ℝ^{-1}）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2264,7 +2265,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
         String.raw`\begin{aligned}
 j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)
 &= j_{\mathbb R}x + \left(-k_{\mathbb R}\right)x
-&&(\because\ \mathbb R\text{ で }-(ab)=(-a)b\ (a \to k_{\mathbb R},\ b \to x)) \\
+&&(\because\ \blkref{real_negation_times_is_negation_of_product}\ \text{の}\ (-x)t = -(xt)\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)q = -(pq)\ (p \to k_{\mathbb R},\ q \to x)\ \text{を右辺から左辺へ}) \\
 &= \left(j_{\mathbb R} + \left(-k_{\mathbb R}\right)\right)x
 &&(\because\ \mathbb R\text{ の分配法則}) \\
 &= \left(j_{\mathbb R} - k_{\mathbb R}\right)x
@@ -2417,6 +2418,7 @@ c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
         "2026-08-31 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 14 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・参照は変えていない。",
         "2026-11-03（全証明の SageMath 検算）: 主張に像の記号（j_Z・j_R・μ_Z）と (M_col)_C^{-1} の存在、exp・積・和の出所を書き、定義どおりスカラーを左に置いて主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を Z_Y_generate_algebra の (i)〜(iv) で述べ直した。証明は、行列の theorem_exp_product (n=1) を scalar_exp_product に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を finite_sum_of_scalar_multiples・新しい主張 finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term に付け替え、指数の和を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。",
         "2026-11-10（Lean の通しの証明）: 準備 2 の複素数の鎖が -i の積（multiply_by_minus_one・交換律・結合律）と (-1_R)_C = -1_C をその場で開いていた 4 行を、negative_i_times_complex_is_negation_of_i_times（z → (k_R x)_C）と i_times_negated_real_is_negation_of_i_times（θ → k_R x）の参照 2 行に替えた。二項の和の像は real_inclusion_preserves_finite_sum の m = 2 から real_inclusion_preserves_sum にした（8 等号から 5 等号）。実数の鎖は左辺を j_R x + (-(k_R x)) にし、(-1_R)(k_R x) を開く 2 行を ℝ の -(yx) = (-y)x の 1 行にした（5 等号から 4 等号）。両端と第 1・2 式は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(k_ℝx) = (−k_ℝ)x の行の根拠「ℝ で −(ab)=(−a)b」を、主張 real_negation_times_is_negation_of_product（証明の x と衝突しないよう文字を p, q に替え、p → k_ℝ, q → x を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

@@ -1,0 +1,5 @@
+QQ[x, t, nx, nxt] で恒等的な段 1 個と、主張を当てる段 2 個を確かめた（等号 3 個）
+符号反転を本来の値に置いて全ての行が -(xt) になった
+使う側の代入の実例 4 件で両辺が等しい
+negative controls (broken lines detected): 4
+RESULT: PASS

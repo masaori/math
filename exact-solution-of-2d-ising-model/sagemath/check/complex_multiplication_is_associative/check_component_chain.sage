@@ -20,7 +20,7 @@ chain = [
     (((a*c)*e + neg(b*d)*e) + neg((a*d)*f + (b*c)*f),
      ((a*c)*f + neg(b*d)*f) + ((a*d)*e + (b*c)*e)),                           # 分配則 (x+y)t を 4 箇所
     (((a*c)*e + neg((b*d)*e)) + neg((a*d)*f + (b*c)*f),
-     ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # (-x)t = -(xt) を 2 箇所
+     ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # real_negation_times_is_negation_of_product (-x)t = -(xt) を 2 箇所
     (((a*c)*e + neg((b*d)*e)) + (neg((a*d)*f) + neg((b*c)*f)),
      ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # -(x+y) = (-x)+(-y)
     ((a*(c*e) + neg(b*(d*e))) + (neg(a*(d*f)) + neg(b*(c*f))),

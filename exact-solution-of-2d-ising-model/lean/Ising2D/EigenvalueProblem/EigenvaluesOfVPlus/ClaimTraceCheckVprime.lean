@@ -29,7 +29,7 @@ Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `Ne
 Step 3 のトレースの 9 行の鎖は `trace_Vprime_inv_step3` の `calc` と 1 対 1 である（5 行目だけが `eigenvalues_of_inverse_of_check_Vprime`
 （`Vprime_inv_mul_Qproj`）を引き、ほかは Step 1 の鎖と Step 2 の 1 行目と同じ根拠）。人手の `(V̌')^{-1}` は `↑(F.VprimeUnits g)⁻¹` で、
 `trace_Vprime_inv` の左辺の `F.Vprime (fun i => -(g i))` へは `VprimeUnits_inv` で付け替える。
-Step 3 の冒頭の `exp(−ǧ(ε))` の 4 行の鎖は `exp_neg_gval_step3_product` の `calc` と 1 対 1 である（ℝ の `−(ab) = (−a)b` は `neg_mul` を右辺から左辺へ。
+Step 3 の冒頭の `exp(−ǧ(ε))` の 4 行の鎖は `exp_neg_gval_step3_product` の `calc` と 1 対 1 である（ℝ の `−(ab) = (−a)b` は `real_negation_times_is_negation_of_product` を右辺から左辺へ。
 `finite_sum_of_negated_real_numbers` は具体版 `finite_sum_of_negated_real_numbers_succ`）。トレースの鎖の 10・11 行目は `sum_exp_neg_gval_step3_expansion`
 （Step 2 の `sum_exp_gval_step2_expansion` と同じ並び）、続く 6 行は Step 2 の `prod_step2_cosh` を `γ → −γ`（`g → fun i => -(g i)`）で使う段で、
 人手もこの 6 行を Step 2 の 6 行に `γ(θ̃_μ) → −γ(θ̃_μ)` を代入した形で書いている。その先の 5 行（ℝ の `(−a)/2 = −(a/2)`、`cosh_is_even`
@@ -69,6 +69,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 
 namespace Ising2D
 
@@ -441,7 +442,8 @@ theorem exp_neg_gval_step3_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : 
                                                         -- `x_j → γ(θ̃_μ)(ε_μ − 1/2)`）を右辺から左辺へ
     _ = Real.exp (∑ j : Fin (r + 1), (-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2)) := by
         refine congrArg Real.exp (Finset.sum_congr rfl fun j _ => ?_)
-        exact (neg_mul _ _).symm                        -- ℝ で `−(ab) = (−a)b`（`a → γ(θ̃_μ)`、`b → ε_μ − 1/2`）を各項へ同時に
+        exact (real_negation_times_is_negation_of_product _ _).symm
+                                                        -- `real_negation_times_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → ε_μ − 1/2`）を右辺から左辺へ各項へ同時に
     _ = ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
         real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → (−γ(θ̃_μ))(ε_μ − 1/2)`）
 

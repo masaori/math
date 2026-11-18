@@ -3751,7 +3751,7 @@ q
 &= -(ab)
 &&\bigl(\because\ \blkref{real_absolute_value_of_nonpositive}\ (q \to ab)\bigr)\\
 &= (-a)\,b
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(ab) = (-a)b\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to a,\ t \to b)\ \text{を右辺から左辺へ}\bigr)\\
 &= |a|\,b
 &&\bigl(\because\ \blkref{def_real_absolute_value}\ (a < 0)\bigr)\\
 &= |a|\,|b|
@@ -3786,6 +3786,7 @@ q
       status: "added",
       notes: [
         "2026-11-06: 原文（Typst）に対応ブロックは無い。def_rayleigh_sup の上に有界であることの鎖が「積の絶対値」を名前だけで使っていたので、引けるよう足した。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(ab) = (−a)b の行の根拠「ℝ で −(ab) = (−a)b」を、主張 real_negation_times_is_negation_of_product（x → a, t → b を右辺から左辺へ。文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

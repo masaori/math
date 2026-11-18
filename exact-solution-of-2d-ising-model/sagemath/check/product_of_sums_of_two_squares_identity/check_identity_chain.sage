@@ -25,7 +25,7 @@ chain = [
     ((((a*c)*((a*c) + neg((b*d)))) + (neg((b*d))*((a*c) + neg((b*d))))) + (((a*d)*((a*d) + (b*c))) + ((b*c)*((a*d) + (b*c))))),  # distR を 2 箇所
     (((((a*c)*(a*c)) + ((a*c)*neg((b*d)))) + ((neg((b*d))*(a*c)) + (neg((b*d))*neg((b*d))))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((b*c)*(a*d)) + ((b*c)*(b*c))))),  # distL を 4 箇所
     (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + ((neg((b*d))*(a*c)) + (neg((b*d))*neg((b*d))))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((b*c)*(a*d)) + ((b*c)*(b*c))))),  # negR を 1 箇所
-    (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + (neg(((b*d)*(a*c))) + (neg((b*d))*neg((b*d))))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((b*c)*(a*d)) + ((b*c)*(b*c))))),  # negL を 1 箇所
+    (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + (neg(((b*d)*(a*c))) + (neg((b*d))*neg((b*d))))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((b*c)*(a*d)) + ((b*c)*(b*c))))),  # negL（real_negation_times_is_negation_of_product）を 1 箇所
     (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + (neg(((b*d)*(a*c))) + ((b*d)*(b*d)))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((b*c)*(a*d)) + ((b*c)*(b*c))))),  # real_negation_times_negation_is_product (-a)(-b) = ab を 1 箇所
     (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + (neg(((a*c)*(b*d))) + ((b*d)*(b*d)))) + ((((a*d)*(a*d)) + ((a*d)*(b*c))) + (((a*d)*(b*c)) + ((b*c)*(b*c))))),  # mcomm を 2 箇所
     (((((a*c)*(a*c)) + neg(((a*c)*(b*d)))) + (neg(((a*c)*(b*d))) + ((b*d)*(b*d)))) + ((((a*d)*(a*d)) + ((a*c)*(b*d))) + (((a*c)*(b*d)) + ((b*c)*(b*c))))),  # aux を 2 箇所
@@ -61,7 +61,7 @@ forms = {
     "distR":   (lambda x, y, t: (x + y)*t,     lambda x, y, t: x*t + y*t),
     "distL":   (lambda x, y, t: x*(y + t),     lambda x, y, t: x*y + x*t),
     "negR":    (lambda x, t: x*neg(t),         lambda x, t: neg(x*t)),
-    "negL":    (lambda x, t: neg(x)*t,         lambda x, t: neg(x*t)),
+    "negL":    (lambda x, t: neg(x)*t,         lambda x, t: neg(x*t)),  # real_negation_times_is_negation_of_product
     "negneg":  (lambda p, q: neg(p)*neg(q),    lambda p, q: p*q),   # real_negation_times_negation_is_product の (-a)(-b) = ab（文字 p, q）
     "mcomm":   (lambda x, y: x*y,              lambda x, y: y*x),
     "massoc":  (lambda x, y, t: (x*y)*t,       lambda x, y, t: x*(y*t)),

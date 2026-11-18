@@ -149,7 +149,7 @@ export default defineBlocks([
 &= \bigl(xu - (-y)(-v),\ x(-v) + (-(yu))\bigr)
 &&(\because\ \mathbb{R}\ \text{で}\ -(xv) = x(-v))\\
 &= \bigl(xu - (-y)(-v),\ x(-v) + (-y)u\bigr)
-&&(\because\ \mathbb{R}\ \text{で}\ -(yu) = (-y)u)\\
+&&(\because\ \blkref{real_negation_times_is_negation_of_product}\ \text{の}\ (-x)t = -(xt)\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)q = -(pq)\ (p \to y,\ q \to u)\ \text{を右辺から左辺へ})\\
 &= (x,-y)\,(u,-v)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \overline{z}\,\overline{w}
@@ -160,6 +160,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は積を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、独立の主張にした。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(yu) = (−y)u の行の根拠「ℝ で −(yu) = (−y)u」を、主張 real_negation_times_is_negation_of_product（証明の x と衝突しないよう文字を p, q に替え、p → y, q → u を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

@@ -4683,7 +4683,7 @@ E_K \check{Q}_\epsilon
 &= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)\right)
 &&\bigl(\because\ \blkref{finite_sum_of_negated_real_numbers}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\ \text{を右辺から左辺へ}\bigr)\\
 &= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(ab) = (-a)b\ (a \to \gamma(\tilde\theta_\mu),\ b \to \epsilon_\mu - \tfrac12)\ \text{を各項へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to \epsilon_\mu - \tfrac12)\ \text{を右辺から左辺へ各項へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
 \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
 &&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to (-\gamma(\tilde\theta_\mu))(\epsilon_\mu - \tfrac12))\bigr)
@@ -4825,6 +4825,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: Step 3 の最後の行 = tr(V̌') は「Step 1--2 の V̌' のトレース表示」と名前だけで根拠にしていた。Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2) の鎖を右辺から左辺へ当てる行、real_inclusion_preserves_sum_over_binary_words を右辺から左辺へ引く行、Step 1 の鎖を右辺から左辺へ当てる行の 3 行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_inv の M = r + 1 の最後の 5 段（ClaimTraceCheckVprime.lean。cosh_is_even は具体版 Ising2D.cosh_is_even）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_final_lines.sage。",
         "2026-11-04: Step 4 の最後の行 > 0 は「正数の有限積は正」と名前だけで根拠にしていた。新しく足した finite_product_of_positive_reals_is_positive（m → M_col、r_μ → 2cosh(γ(θ̃_μ)/2)）を引き、その仮定に各 μ の鎖を当てることを行末に書いた。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_pos の M = r + 1 の段（ClaimTraceCheckVprime.lean。Finset.prod_pos を外した）。数値検証: sagemath/check/finite_product_of_positive_reals_is_positive/。",
         "2026-11-04: 主張文・表題と Step 4 の最後の鎖は、ℂ の値 tr(V̌') と ℝ の値 Π_μ 2cosh(γ(θ̃_μ)/2) を包含 (·)_ℂ を書かずに等号で結び、ℂ の値に > 0 を書いていた（「Step 1--2」と名前だけの根拠）。主張文と表題を tr(V̌') = tr((V̌')^{-1}) = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ と Π_μ 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}（> 0）の二つにし、Step 4 の最後の鎖を ℝ の不等号 Π_μ 2cosh(γ(θ̃_μ)/2) > 0 だけにして、Step 5 に Step 1 の鎖・real_inclusion_preserves_sum_over_binary_words・Step 2 の鎖の 3 行の鎖 tr(V̌') = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ を置いた。値は変えていない（ℂ の > 0 を、ℝ の > 0 と包含に書き分けた）。下流の constant_c_value_even_sector は tr(V̌') = tr((V̌')^{-1}) > 0 と書いたまま引いている。Lean は Ising2D.CheckFermiSetup.trace_Vprime_pos（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step5_chain.sage。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Σ(−(γ(θ~_μ)(ε_μ−½))) = Σ(−γ(θ~_μ))(ε_μ−½) の行の根拠「ℝ で −(ab) = (−a)b」を、主張 real_negation_times_is_negation_of_product（x → γ(θ~_μ), t → ε_μ − ½ を右辺から左辺へ各項へ同時に）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -6873,7 +6874,7 @@ x &= Ix
 &= \Bigl(-\frac{1}{2}\Bigr)\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to -\tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right) \\
 &= -\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
-   \quad \left(\because \mathbb{R}\text{ で }(-a)b = -(ab)\ \bigl(a \to \tfrac12,\ b \to \textstyle \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\bigr)\right)
+   \quad \left(\because \blkref{real_negation_times_is_negation_of_product}\ \bigl(x \to \tfrac12,\ t \to \textstyle \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\bigr)\right)
 \end{aligned}`,
       ),
       paragraph(["である。したがって"]),
@@ -7009,6 +7010,7 @@ x &= Ix
         "2026-11-04: (2) の最後の「Λ̌_maxΛ̌_min = (2s_2)^{M_col}（指数部分が互いに打ち消し合う）= c^2（定数 c の決定）」は二つの等号を名前だけで済ませ、ℝ の元と ℂ の元 c^2 を等号で結んでいたので、b := ½Σγ(θ~_μ) の置き方と、Λ̌_max・Λ̌_min の鎖・b / s_2 / a の置き方・ℝ の乗法の結合律と交換律・scalar_exp_product（K → ℝ）・b + (−b) = 0・scalar_exp_zero・a の置き方・def_second_transfer_matrix_prefactor・ℝ の冪の (uv)^m = u^m v^m と y^2 = yy・definition_of_sqrt_r_positive の 20 行の鎖と、(Λ̌_maxΛ̌_min)_ℂ = c^2 の 8 行の鎖（real_inclusion_preserves_product・a の置き方・constant_c_value_even_sector・1_ℂz = z・def_power_of_complex_number）にした。主張文の括弧書きを「Λ̌_maxΛ̌_min = (2 sinh 2K_2)^{M_col}、(Λ̌_maxΛ̌_min)_ℂ = c^2」に直した（内容は不変）。Lean の Ising2D.checkBigLambda_max_mul_min・Ising2D.checkBigLambda_max_mul_min_eq_c_sq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_product_chains.sage。",
         "2026-11-04: (2) の主張に、証明の中でだけ書いていた置き方 Λ̌_max := Λ̌_{(1,…,1)}、Λ̌_min := Λ̌_{(0,…,0)} を書き足した。V_plus_eigenvalues_with_c_value_and_strict_maximum (3) がこの置き方を引くため（内容は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (2) の積の鎖の 19 行目（√ の積を冪へ戻す行）の名前だけの根拠「ℝ の冪で y^2 = yy」を square_of_real_number_is_product を引く形にした（definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したことに合わせた）。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(0,…,0) の鎖の最後の行 (−½)Σγ = −(½Σγ) の根拠「ℝ で (−a)b = −(ab)」を、主張 real_negation_times_is_negation_of_product（x → ½, t → Σγ(θ~_μ)）の参照にした。式・鎖の両端・段数は不変。",
       ],
     },
   },

@@ -25,6 +25,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 
 namespace Ising2D
 
@@ -91,7 +92,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [mul_neg (2 * Real.pi) ((μ : ℝ) - 1 / 2)]  -- 22 行目: ℝ で `a(-b) = -(ab)`
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹) := by
-        rw [neg_mul (2 * Real.pi * ((μ : ℝ) - 1 / 2))]  -- 23 行目: ℝ で `(-a)b = -(ab)`
+        rw [real_negation_times_is_negation_of_product (2 * Real.pi * ((μ : ℝ) - 1 / 2))]  -- 23 行目: `real_negation_times_is_negation_of_product`（`x → 2π(μ_ℝ−1/2)`、`t → (M_col)_ℝ^{-1}`）
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
         rw [← div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2))]
                                                   -- 24 行目: `def_real_quotient` を右辺から左辺へ

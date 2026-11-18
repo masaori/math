@@ -51,7 +51,7 @@ for M in range(2, 9):
         fsum([gam[mu] * (-half) for mu in range(M)]),             # 0 − 1/2 = −1/2 を各項へ
         fsum([(-half) * gam[mu] for mu in range(M)]),             # 積の交換法則を各項へ
         (-half) * S,                                              # finite_sum_of_real_scalar_multiples（c → −1/2）
-        -(half * S),                                              # (−a)b = −(ab)
+        -(half * S),                                              # real_negation_times_is_negation_of_product（x → 1/2, t → S）
     ]
     for x, y in zip(lines_min, lines_min[1:]):
         assert x == y, ("min", M)
