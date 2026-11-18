@@ -283,8 +283,12 @@ export default defineBlocks([
 &&\bigl(\because\ m=0 \text{ の項は } \|A^0\|=\|I\| \text{、他の項は上の等式}\bigr) \\
 &\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
 &&\bigl(\because\ \text{Step 1}\bigr) \\
+&= \|I\| + \bigl(E_N(\|A\|) - 1\bigr)
+&&\bigl(\because\ \blkref{real_exp_series_converges}\ \text{の}\ E_N(a)\ \text{の定義}\ (a \to \|A\| \in \mathbb{R}_{\ge 0},\ \blkref{def_matrix_norm})\ \text{で}\ m=0\ \text{の項は}\ \|A\|^0/0! = 1\text{。}N=0\ \text{では左の和は空の和}\ 0\ \text{で}\ E_0(\|A\|)-1=0\bigr) \\
+&\le \|I\| + E_N(\|A\|)
+&&\bigl(\because\ 1 \ge 0\ \text{より}\ E_N(\|A\|) - 1 \le E_N(\|A\|)\bigr) \\
 &\le \|I\| + E(\|A\|)
-&&\bigl(\because\ \blkref{real_exp_series_converges}\ (2)\bigr) \\
+&&\bigl(\because\ \blkref{real_exp_series_converges}\ (2)\ (a \to \|A\|)\bigr) \\
 &= M_A
 &&\bigl(\because\ M_A \text{ の定義}\bigr)
 \end{aligned}`,
@@ -338,6 +342,7 @@ export default defineBlocks([
         "2026-09-01 の式変形統一で、四本の鎖に行中の \\quad (\\because …) で置かれていた根拠 12 行を、" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 式変形の後に置いていた、引いたブロックを挙げる段落を削り、その行の (∵ …) で名前だけで書いていた根拠を \\blkref{<ラベル>} に替えた（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 2 の鎖の行 ‖I‖ + Σ_{m=1}^{N}‖A‖^m/m! ≤ ‖I‖ + E(‖A‖) は、real_exp_series_converges (2) が与える E_N(a) ≤ E(a) の左辺が m = 0 の項 1 を含むのに、その項を抜いた和を抑えるのに要る「1 ≥ 0 を落とす」段を書いていなかった。行を 3 段に割った。1 段目で Σ_{m=1}^{N}‖A‖^m/m! を E_N の定義（a → ‖A‖。‖A‖ ∈ ℝ_{≥0} は def_matrix_norm）で E_N(‖A‖) − 1 と書き（N = 0 では左の和は空の和 0 で E_0(‖A‖) − 1 = 0）、2 段目で 1 ≥ 0 より E_N(‖A‖) − 1 ≤ E_N(‖A‖)、3 段目で (2) により E_N(‖A‖) ≤ E(‖A‖) とした（鎖の両端は不変）。",
       ],
     },
   },

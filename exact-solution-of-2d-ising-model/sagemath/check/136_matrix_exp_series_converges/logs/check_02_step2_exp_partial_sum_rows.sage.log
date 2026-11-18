@@ -1,0 +1,4 @@
+=== matrix_exp_series_converges: Step 2 の E_N を経る 3 段 ===
+  確かめた行: 320
+checks: 1521, max relative error: 0.000e+00, tol: 1.0e-09
+RESULT: PASS
